@@ -198,7 +198,7 @@ package UsersGuide "User's Guide"
 <strong>Preamble.</strong> The goal of this license is that Modelica related model libraries, software, images, documents, data files etc. can be used freely in the original or a modified form, in open source and in commercial environments (as long as the license conditions below are fulfilled, in particular sections 2c) and 2d). The Original Work is provided free of charge and the use is completely at your own risk. Developers of free Modelica packages are encouraged to utilize this license for their work.
 </p>
 <p>
-The Modelica License applies to any Original Work that contains the following licensing notice adjacent to the copyright notice(s) for this Original Work: 
+The Modelica License applies to any original work that contains the following licensing notice adjacent to the copyright notice(s) for this Original Work: 
 </p>
 <p>
 This version of the license including exceptions has been inspired by the license of Buildings library published by The Regents of the University of California, through Lawrence Berkeley National Laboratory.
