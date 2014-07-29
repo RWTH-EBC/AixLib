@@ -1902,15 +1902,17 @@ package LowOrder "Low Order Building Models"
       model TestCase_1
         extends Modelica.Icons.Example;
 
-        Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemp(T=
-              295.15)
-          annotation (Placement(transformation(extent={{-34,10},{-54,30}})));
-        Modelica.Blocks.Sources.Constant const(k=22)
-          annotation (Placement(transformation(extent={{-54,-18},{-34,2}})));
-        Modelica.Blocks.Sources.Constant const1(k=0)
+        output Modelica.SIunits.Conversions.NonSIunits.Temperature_degC referenceTemp[1];
+        output Modelica.SIunits.Temp_K simulationTemp;
+
+        Modelica.Thermal.HeatTransfer.Sources.FixedTemperature outdoorTemp(T=295.15)
+          annotation (Placement(transformation(extent={{-56,8},{-36,28}})));
+        Modelica.Blocks.Sources.Constant infiltrationTemp(k=22)
+          annotation (Placement(transformation(extent={{-56,-22},{-36,-2}})));
+        Modelica.Blocks.Sources.Constant infiltrationRate(k=0)
           annotation (Placement(transformation(extent={{-14,-50},{6,-30}})));
-        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machines
-          annotation (Placement(transformation(extent={{22,-78},{42,-58}})));
+        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machinesConvective
+          annotation (Placement(transformation(extent={{-8,-86},{12,-66}})));
         Building.LowOrder.BaseClasses.ReducedOrderModel reducedModel(
           Ao=10.5,
           Aw=0.000000001,
@@ -1929,17 +1931,18 @@ package LowOrder "Low Order Building Models"
           R1o=0.004366222,
           C1o=1.60085e+006)
           annotation (Placement(transformation(extent={{0,0},{34,34}})));
-        Modelica.Blocks.Sources.CombiTimeTable table_machines(
+        Modelica.Blocks.Sources.CombiTimeTable tableMachines(
           extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
           tableName="UserProfilesOffice",
           fileName="./Tables/J1615/UserProfilesOffice.txt",
           tableOnFile=false,
-          table=[0,0; 3600,0; 7200,0; 10800,0; 14400,0; 18000,0; 21600,0; 21600,1000;
-              25200,1000; 28800,1000; 32400,1000; 36000,1000; 39600,1000; 43200,1000;
-              46800,1000; 50400,1000; 54000,1000; 57600,1000; 61200,1000; 64800,1000;
-              64800,0; 68400,0; 72000,0; 75600,0; 79200,0; 82800,0; 86400,0],
+          table=[0,0; 3600,0; 7200,0; 10800,0; 14400,0; 18000,0; 21600,0; 21600,
+              1000; 25200,1000; 28800,1000; 32400,1000; 36000,1000; 39600,1000;
+              43200,1000; 46800,1000; 50400,1000; 54000,1000; 57600,1000; 61200,
+              1000; 64800,1000; 64800,0; 68400,0; 72000,0; 75600,0; 79200,0;
+              82800,0; 86400,0],
           columns={2})
-          annotation (Placement(transformation(extent={{-8,-83},{6,-69}})));
+          annotation (Placement(transformation(extent={{-40,-83},{-26,-69}})));
         Modelica.Blocks.Sources.CombiTimeTable reference(
           tableName="UserProfilesOffice",
           fileName="./Tables/J1615/UserProfilesOffice.txt",
@@ -1962,30 +1965,37 @@ package LowOrder "Low Order Building Models"
           extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
           annotation (Placement(transformation(extent={{80,80},{100,99}})));
       equation
-        connect(table_machines.y[1],machines.Q_flow)  annotation (Line(
-            points={{6.7,-76},{14,-76},{14,-68},{22,-68}},
+
+        referenceTemp = reference.y;
+        simulationTemp = reducedModel.airload.port.T;
+
+        connect(tableMachines.y[1], machinesConvective.Q_flow) annotation (Line(
+            points={{-25.3,-76},{-8,-76}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(fixedTemp.port, reducedModel.equalAirTemp) annotation (Line(
-            points={{-54,20},{-14,20},{-14,17.68},{3.4,17.68}},
+        connect(outdoorTemp.port, reducedModel.equalAirTemp) annotation (Line(
+            points={{-36,18},{-14,18},{-14,17.68},{3.4,17.68}},
             color={191,0,0},
             smooth=Smooth.None));
-        connect(const.y, reducedModel.ventilationTemperature) annotation (Line(
-            points={{-33,-8},{-18,-8},{-18,8.84},{3.4,8.84}},
+        connect(infiltrationTemp.y, reducedModel.ventilationTemperature)
+          annotation (Line(
+            points={{-35,-12},{-18,-12},{-18,8.84},{3.4,8.84}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(const1.y, reducedModel.ventilationRate) annotation (Line(
+        connect(infiltrationRate.y, reducedModel.ventilationRate) annotation (
+            Line(
             points={{7,-40},{10.2,-40},{10.2,3.4}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(machines.port, reducedModel.internalGainsConv) annotation (Line(
-            points={{42,-68},{20.4,-68},{20.4,3.4}},
+        connect(machinesConvective.port, reducedModel.internalGainsConv)
+          annotation (Line(
+            points={{12,-76},{20.4,-76},{20.4,3.4}},
             color={191,0,0},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
                   -100,-100},{100,100}}),
                             graphics),
-          experiment(StopTime=3.1536e+007, Interval=3600),
+          experiment(StopTime=5.184e+006, Interval=3600),
           experimentSetupOutput(events=false), Documentation(revisions="<html>
 <p><ul>
 <li><i>March, 2012&nbsp;</i> by Moritz Lauster:<br/>Implemented</li>
@@ -2007,15 +2017,17 @@ package LowOrder "Low Order Building Models"
       model TestCase_2
         extends Modelica.Icons.Example;
 
-        Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemp(T=
-              295.15)
-          annotation (Placement(transformation(extent={{-24,20},{-44,40}})));
-        Modelica.Blocks.Sources.Constant const(k=22)
-          annotation (Placement(transformation(extent={{-44,-8},{-24,12}})));
-        Modelica.Blocks.Sources.Constant const1(k=0)
+         output Modelica.SIunits.Conversions.NonSIunits.Temperature_degC referenceTemp[1];
+        output Modelica.SIunits.Temp_K simulationTemp;
+
+        Modelica.Thermal.HeatTransfer.Sources.FixedTemperature outdoorTemp(T=295.15)
+          annotation (Placement(transformation(extent={{-44,20},{-24,40}})));
+        Modelica.Blocks.Sources.Constant infiltrationTemp(k=22)
+          annotation (Placement(transformation(extent={{-44,-10},{-24,10}})));
+        Modelica.Blocks.Sources.Constant infiltrationRate(k=0)
           annotation (Placement(transformation(extent={{-4,-40},{16,-20}})));
-        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machines
-          annotation (Placement(transformation(extent={{48,-68},{68,-48}})));
+        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machinesRadiative
+          annotation (Placement(transformation(extent={{38,-76},{58,-56}})));
         Building.LowOrder.BaseClasses.ReducedOrderModel reducedModel(
           Aw=0.000000001,
           Ai=75.5,
@@ -2034,19 +2046,23 @@ package LowOrder "Low Order Building Models"
           C1o=1.60085e+006,
           Ao=10.5)
           annotation (Placement(transformation(extent={{12,10},{46,44}})));
-        Modelica.Blocks.Sources.CombiTimeTable table_machines(
+        Modelica.Blocks.Sources.CombiTimeTable tableMachines(
           extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
           tableName="UserProfilesOffice",
           fileName="./Tables/J1615/UserProfilesOffice.txt",
           tableOnFile=false,
-          table=[0,0; 3600,0; 7200,0; 10800,0; 14400,0; 18000,0; 21600,0; 21600,1000;
-              25200,1000; 28800,1000; 32400,1000; 36000,1000; 39600,1000; 43200,1000;
-              46800,1000; 50400,1000; 54000,1000; 57600,1000; 61200,1000; 64800,1000;
-              64800,0; 68400,0; 72000,0; 75600,0; 79200,0; 82800,0; 86400,0],
+          table=[0,0; 3600,0; 7200,0; 10800,0; 14400,0; 18000,0; 21600,0; 21600,
+              1000; 25200,1000; 28800,1000; 32400,1000; 36000,1000; 39600,1000;
+              43200,1000; 46800,1000; 50400,1000; 54000,1000; 57600,1000; 61200,
+              1000; 64800,1000; 64800,0; 68400,0; 72000,0; 75600,0; 79200,0;
+              82800,0; 86400,0],
           columns={2})
           annotation (Placement(transformation(extent={{2,-73},{16,-59}})));
-        Utilities.HeatTransfer.HeatToStar twoStar_RadEx(A=2, eps=1)
-          annotation (Placement(transformation(extent={{40,-42},{60,-22}})));
+        Utilities.HeatTransfer.HeatToStar HeatToStar(A=2, eps=1) annotation (
+            Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=90,
+              origin={70,-38})));
         Modelica.Blocks.Sources.CombiTimeTable reference(
           tableName="UserProfilesOffice",
           fileName="./Tables/J1615/UserProfilesOffice.txt",
@@ -2069,34 +2085,40 @@ package LowOrder "Low Order Building Models"
           extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
           annotation (Placement(transformation(extent={{80,80},{100,99}})));
       equation
-        connect(machines.port, twoStar_RadEx.Therm) annotation (Line(
-            points={{68,-58},{40.8,-58},{40.8,-32}},
+       referenceTemp = reference.y;
+        simulationTemp = reducedModel.airload.port.T;
+
+        connect(machinesRadiative.port, HeatToStar.Therm) annotation (Line(
+            points={{58,-66},{70,-66},{70,-47.2}},
             color={191,0,0},
             smooth=Smooth.None));
-        connect(table_machines.y[1],machines.Q_flow)  annotation (Line(
-            points={{16.7,-66},{32,-66},{32,-58},{48,-58}},
+        connect(tableMachines.y[1], machinesRadiative.Q_flow) annotation (Line(
+            points={{16.7,-66},{38,-66}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(fixedTemp.port, reducedModel.equalAirTemp) annotation (Line(
-            points={{-44,30},{-6,30},{-6,27.68},{15.4,27.68}},
+        connect(outdoorTemp.port, reducedModel.equalAirTemp) annotation (Line(
+            points={{-24,30},{-6,30},{-6,27.68},{15.4,27.68}},
             color={191,0,0},
             smooth=Smooth.None));
-        connect(const.y, reducedModel.ventilationTemperature) annotation (Line(
-            points={{-23,2},{-4,2},{-4,18.84},{15.4,18.84}},
+        connect(infiltrationTemp.y, reducedModel.ventilationTemperature)
+          annotation (Line(
+            points={{-23,0},{-4,0},{-4,18.84},{15.4,18.84}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(const1.y, reducedModel.ventilationRate) annotation (Line(
+        connect(infiltrationRate.y, reducedModel.ventilationRate) annotation (
+            Line(
             points={{17,-30},{20,-30},{20,13.4},{22.2,13.4}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(twoStar_RadEx.Therm, reducedModel.internalGainsConv) annotation (
+        connect(HeatToStar.Star, reducedModel.internalGainsRad) annotation (
             Line(
-            points={{40.8,-32},{36,-32},{36,13.4},{32.4,13.4}},
-            color={191,0,0},
+            points={{70,-28.9},{70,-18},{42.09,-18},{42.09,13.4}},
+            color={95,95,95},
+            pattern=LinePattern.None,
             smooth=Smooth.None));
         annotation (
-          Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-                  {100,100}}),
+          Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),
                   graphics),
           experiment(StopTime=5.184e+006, Interval=3600),
           __Dymola_experimentSetupOutput(events=false),
@@ -2118,16 +2140,20 @@ package LowOrder "Low Order Building Models"
 
       model TestCase_3
         extends Modelica.Icons.Example;
+       output Modelica.SIunits.Conversions.NonSIunits.Temperature_degC referenceTemp[1];
+        output Modelica.SIunits.Temp_K simulationTemp;
 
-        Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemp(T=
-              295.15)
-          annotation (Placement(transformation(extent={{-24,20},{-44,40}})));
-        Modelica.Blocks.Sources.Constant const(k=22)
+        Modelica.Thermal.HeatTransfer.Sources.FixedTemperature outdoorTemp(T=295.15)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={-34,30})));
+        Modelica.Blocks.Sources.Constant infiltrationTemp(k=22)
           annotation (Placement(transformation(extent={{-44,-8},{-24,12}})));
-        Modelica.Blocks.Sources.Constant const1(k=0)
+        Modelica.Blocks.Sources.Constant infiltrationRate(k=0)
           annotation (Placement(transformation(extent={{-4,-40},{16,-20}})));
-        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machines
-          annotation (Placement(transformation(extent={{32,-68},{52,-48}})));
+        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machinesConvective
+          annotation (Placement(transformation(extent={{4,-68},{24,-48}})));
         Building.LowOrder.BaseClasses.ReducedOrderModel reducedModel(
           Ao=10.5,
           Aw=0.000000001,
@@ -2146,17 +2172,18 @@ package LowOrder "Low Order Building Models"
           RRest=0.043120170,
           R1o=0.004047899)
           annotation (Placement(transformation(extent={{12,10},{46,44}})));
-        Modelica.Blocks.Sources.CombiTimeTable table_machines(
+        Modelica.Blocks.Sources.CombiTimeTable tableMachines(
           extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
           tableName="UserProfilesOffice",
           fileName="./Tables/J1615/UserProfilesOffice.txt",
           tableOnFile=false,
-          table=[0,0; 3600,0; 7200,0; 10800,0; 14400,0; 18000,0; 21600,0; 21600,1000;
-              25200,1000; 28800,1000; 32400,1000; 36000,1000; 39600,1000; 43200,1000;
-              46800,1000; 50400,1000; 54000,1000; 57600,1000; 61200,1000; 64800,1000;
-              64800,0; 68400,0; 72000,0; 75600,0; 79200,0; 82800,0; 86400,0],
+          table=[0,0; 3600,0; 7200,0; 10800,0; 14400,0; 18000,0; 21600,0; 21600,
+              1000; 25200,1000; 28800,1000; 32400,1000; 36000,1000; 39600,1000;
+              43200,1000; 46800,1000; 50400,1000; 54000,1000; 57600,1000; 61200,
+              1000; 64800,1000; 64800,0; 68400,0; 72000,0; 75600,0; 79200,0;
+              82800,0; 86400,0],
           columns={2})
-          annotation (Placement(transformation(extent={{2,-73},{16,-59}})));
+          annotation (Placement(transformation(extent={{-32,-65},{-18,-51}})));
         Modelica.Blocks.Sources.CombiTimeTable reference(
           tableName="UserProfilesOffice",
           fileName="./Tables/J1615/UserProfilesOffice.txt",
@@ -2179,24 +2206,30 @@ package LowOrder "Low Order Building Models"
           extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
           annotation (Placement(transformation(extent={{62,76},{82,95}})));
       equation
-        connect(table_machines.y[1],machines.Q_flow)  annotation (Line(
-            points={{16.7,-66},{24,-66},{24,-58},{32,-58}},
+       referenceTemp = reference.y;
+        simulationTemp = reducedModel.airload.port.T;
+
+        connect(tableMachines.y[1], machinesConvective.Q_flow) annotation (Line(
+            points={{-17.3,-58},{4,-58}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(fixedTemp.port, reducedModel.equalAirTemp) annotation (Line(
-            points={{-44,30},{-4,30},{-4,27.68},{15.4,27.68}},
+        connect(outdoorTemp.port, reducedModel.equalAirTemp) annotation (Line(
+            points={{-24,30},{-4,30},{-4,27.68},{15.4,27.68}},
             color={191,0,0},
             smooth=Smooth.None));
-        connect(const.y, reducedModel.ventilationTemperature) annotation (Line(
+        connect(infiltrationTemp.y, reducedModel.ventilationTemperature)
+          annotation (Line(
             points={{-23,2},{-4,2},{-4,18.84},{15.4,18.84}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(const1.y, reducedModel.ventilationRate) annotation (Line(
-            points={{17,-30},{20,-30},{20,13.4},{22.2,13.4}},
+        connect(infiltrationRate.y, reducedModel.ventilationRate) annotation (
+            Line(
+            points={{17,-30},{22,-30},{22,13.4},{22.2,13.4}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(machines.port, reducedModel.internalGainsConv) annotation (Line(
-            points={{52,-58},{32.4,-58},{32.4,13.4}},
+        connect(machinesConvective.port, reducedModel.internalGainsConv)
+          annotation (Line(
+            points={{24,-58},{32.4,-58},{32.4,13.4}},
             color={191,0,0},
             smooth=Smooth.None));
         annotation (Documentation(revisions="<html>
@@ -2214,22 +2247,24 @@ package LowOrder "Low Order Building Models"
 </html>"),     Icon(graphics),
           experiment(StopTime=5.184e+006, Interval=3600),
           __Dymola_experimentSetupOutput(events=false),
-          Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-                  {100,100}}), graphics));
+          Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),
+                               graphics));
       end TestCase_3;
 
       model TestCase_4
         extends Modelica.Icons.Example;
+       output Modelica.SIunits.Conversions.NonSIunits.Temperature_degC referenceTemp[1];
+        output Modelica.SIunits.Temp_K simulationTemp;
 
-        Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemp(T=
-              295.15)
-          annotation (Placement(transformation(extent={{-26,20},{-46,40}})));
-        Modelica.Blocks.Sources.Constant const(k=22)
-          annotation (Placement(transformation(extent={{-46,-8},{-26,12}})));
-        Modelica.Blocks.Sources.Constant const1(k=0)
+        Modelica.Thermal.HeatTransfer.Sources.FixedTemperature outdoorTemp(T=295.15)
+          annotation (Placement(transformation(extent={{-46,20},{-26,40}})));
+        Modelica.Blocks.Sources.Constant infiltrationTemp(k=22)
+          annotation (Placement(transformation(extent={{-46,-10},{-26,10}})));
+        Modelica.Blocks.Sources.Constant infiltrationRate(k=0)
           annotation (Placement(transformation(extent={{-6,-40},{14,-20}})));
-        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machines
-          annotation (Placement(transformation(extent={{46,-68},{66,-48}})));
+        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machinesRadiative
+          annotation (Placement(transformation(extent={{10,-68},{30,-48}})));
         Building.LowOrder.BaseClasses.ReducedOrderModel reducedModel(
           Ao=10.5,
           Aw=0.000000001,
@@ -2248,19 +2283,20 @@ package LowOrder "Low Order Building Models"
           R1i=0.003237138,
           C1i=7.297100e+006)
           annotation (Placement(transformation(extent={{10,10},{44,44}})));
-        Modelica.Blocks.Sources.CombiTimeTable table_machines(
+        Modelica.Blocks.Sources.CombiTimeTable tableMachines(
           extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
           tableName="UserProfilesOffice",
           fileName="./Tables/J1615/UserProfilesOffice.txt",
           tableOnFile=false,
-          table=[0,0; 3600,0; 7200,0; 10800,0; 14400,0; 18000,0; 21600,0; 21600,1000;
-              25200,1000; 28800,1000; 32400,1000; 36000,1000; 39600,1000; 43200,1000;
-              46800,1000; 50400,1000; 54000,1000; 57600,1000; 61200,1000; 64800,1000;
-              64800,0; 68400,0; 72000,0; 75600,0; 79200,0; 82800,0; 86400,0],
+          table=[0,0; 3600,0; 7200,0; 10800,0; 14400,0; 18000,0; 21600,0; 21600,
+              1000; 25200,1000; 28800,1000; 32400,1000; 36000,1000; 39600,1000;
+              43200,1000; 46800,1000; 50400,1000; 54000,1000; 57600,1000; 61200,
+              1000; 64800,1000; 64800,0; 68400,0; 72000,0; 75600,0; 79200,0;
+              82800,0; 86400,0],
           columns={2})
-          annotation (Placement(transformation(extent={{0,-73},{14,-59}})));
-        Utilities.HeatTransfer.HeatToStar twoStar_RadEx(A=2, eps=1)
-          annotation (Placement(transformation(extent={{32,-44},{52,-24}})));
+          annotation (Placement(transformation(extent={{-22,-65},{-8,-51}})));
+        Utilities.HeatTransfer.HeatToStar HeatToStar(A=2, eps=1)
+          annotation (Placement(transformation(extent={{36,-68},{56,-48}})));
         Modelica.Blocks.Sources.CombiTimeTable reference(
           tableName="UserProfilesOffice",
           fileName="./Tables/J1615/UserProfilesOffice.txt",
@@ -2283,29 +2319,34 @@ package LowOrder "Low Order Building Models"
           extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
           annotation (Placement(transformation(extent={{78,78},{98,97}})));
       equation
-        connect(machines.port, twoStar_RadEx.Therm) annotation (Line(
-            points={{66,-58},{32.8,-58},{32.8,-34}},
+        referenceTemp = reference.y;
+        simulationTemp = reducedModel.airload.port.T;
+
+        connect(machinesRadiative.port, HeatToStar.Therm) annotation (Line(
+            points={{30,-58},{36.8,-58}},
             color={191,0,0},
             smooth=Smooth.None));
-        connect(table_machines.y[1],machines.Q_flow)  annotation (Line(
-            points={{14.7,-66},{30,-66},{30,-58},{46,-58}},
+        connect(tableMachines.y[1], machinesRadiative.Q_flow) annotation (Line(
+            points={{-7.3,-58},{10,-58}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(fixedTemp.port, reducedModel.equalAirTemp) annotation (Line(
-            points={{-46,30},{-8,30},{-8,27.68},{13.4,27.68}},
+        connect(outdoorTemp.port, reducedModel.equalAirTemp) annotation (Line(
+            points={{-26,30},{-8,30},{-8,27.68},{13.4,27.68}},
             color={191,0,0},
             smooth=Smooth.None));
-        connect(const.y, reducedModel.ventilationTemperature) annotation (Line(
-            points={{-25,2},{-8,2},{-8,18.84},{13.4,18.84}},
+        connect(infiltrationTemp.y, reducedModel.ventilationTemperature)
+          annotation (Line(
+            points={{-25,0},{-8,0},{-8,18.84},{13.4,18.84}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(const1.y, reducedModel.ventilationRate) annotation (Line(
+        connect(infiltrationRate.y, reducedModel.ventilationRate) annotation (
+            Line(
             points={{15,-30},{18,-30},{18,13.4},{20.2,13.4}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(twoStar_RadEx.Star, reducedModel.internalGainsRad) annotation (
+        connect(HeatToStar.Star, reducedModel.internalGainsRad) annotation (
             Line(
-            points={{51.1,-34},{58,-34},{58,-10},{40.09,-10},{40.09,13.4}},
+            points={{55.1,-58},{58,-58},{58,-10},{40.09,-10},{40.09,13.4}},
             color={95,95,95},
             pattern=LinePattern.None,
             smooth=Smooth.None));
@@ -2329,31 +2370,31 @@ package LowOrder "Low Order Building Models"
 
       model TestCase_5
         extends Modelica.Icons.Example;
-
-        Modelica.Blocks.Sources.Constant Infiltration(k=0)
+        output Modelica.SIunits.Conversions.NonSIunits.Temperature_degC referenceTemp[1];
+        output Modelica.SIunits.Temp_K simulationTemp;
+        Modelica.Blocks.Sources.Constant infiltrationRate(k=0)
           annotation (Placement(transformation(extent={{30,-4},{40,6}})));
-        Modelica.Blocks.Sources.Constant Temperatur_Infiltration(k=22)
+        Modelica.Blocks.Sources.Constant infiltrationTemp(k=22)
           annotation (Placement(transformation(extent={{6,-4},{16,6}})));
-        Utilities.HeatTransfer.HeatToStar Konvektiv_Strahlung(A=2)
+        Utilities.HeatTransfer.HeatToStar HeatToStar(A=2)
           annotation (Placement(transformation(extent={{42,-100},{62,-80}})));
-        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
-          Maschinen_Konvektion
-          annotation (Placement(transformation(extent={{40,-50},{60,-30}})));
-        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
-          Personen_Konvektion
+        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machinesConvective
+          annotation (Placement(transformation(extent={{10,-52},{30,-32}})));
+        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow personsConvective
           annotation (Placement(transformation(extent={{10,-72},{30,-52}})));
-        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
-          Personen_Strahlung
-          annotation (Placement(transformation(extent={{10,-98},{30,-78}})));
-        Modelica.Blocks.Sources.CombiTimeTable Innere_Lasten(
+        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow personsRadiative
+          annotation (Placement(transformation(extent={{10,-100},{30,-80}})));
+        Modelica.Blocks.Sources.CombiTimeTable innerLoads(
           extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
           tableOnFile=false,
-          table=[0,0,0; 3600,0,0; 7200,0,0; 10800,0,0; 14400,0,0; 18000,0,0; 21600,0,
-              0; 25200,0,0; 25200,160,200; 28800,160,200; 32400,160,200; 36000,160,
-              200; 39600,160,200; 43200,160,200; 46800,160,200; 50400,160,200; 54000,
-              160,200; 57600,160,200; 61200,160,200; 61200,0,0; 64800,0,0; 72000,0,0;
-              75600,0,0; 79200,0,0; 82800,0,0; 86400,0,0])
-          annotation (Placement(transformation(extent={{-58,-80},{-38,-60}})));
+          table=[0,0,0,0; 3600,0,0,0; 7200,0,0,0; 10800,0,0,0; 14400,0,0,0; 18000,0,0,
+              0; 21600,0,0,0; 25200,0,0,0; 25200,80,80,200; 28800,80,80,200; 32400,80,
+              80,200; 36000,80,80,200; 39600,80,80,200; 43200,80,80,200; 46800,80,80,200;
+              50400,80,80,200; 54000,80,80,200; 57600,80,80,200; 61200,80,80,200; 61200,
+              0,0,0; 64800,0,0,0; 72000,0,0,0; 75600,0,0,0; 79200,0,0,0; 82800,0,0,0;
+              86400,0,0,0],
+          columns={2,3,4})
+          annotation (Placement(transformation(extent={{-58,-72},{-38,-52}})));
         Building.LowOrder.BaseClasses.ReducedOrderModel reducedModel(
           C1i=1.48216e+007,
           C1o=1.60085e+006,
@@ -2372,44 +2413,46 @@ package LowOrder "Low Order Building Models"
           Ao=10.5)
           annotation (Placement(transformation(extent={{48,26},{82,66}})));
 
-        Modelica.Blocks.Sources.CombiTimeTable Temperaturverlauf(
+        Modelica.Blocks.Sources.CombiTimeTable outdoorTemp(
           extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
           columns={2,3,4},
-          table=[0,291.95,0,0; 3600,291.95,0,0; 3600,290.25,0,0; 7200,290.25,0,0;
-              7200,289.65,0,0; 10800,289.65,0,0; 10800,289.25,0,0; 14400,289.25,0,0;
-              14400,289.65,0,0; 18000,289.65,0,0; 18000,290.95,0,0; 21600,290.95,0,0;
-              21600,293.45,0,0; 25200,293.45,0,0; 25200,295.95,0,0; 28800,295.95,0,0;
-              28800,297.95,0,0; 32400,297.95,0,0; 32400,299.85,0,0; 36000,299.85,0,0;
-              36000,301.25,0,0; 39600,301.25,0,0; 39600,302.15,0,0; 43200,302.15,0,0;
-              43200,302.85,0,0; 46800,302.85,0,0; 46800,303.55,0,0; 50400,303.55,0,0;
-              50400,304.05,0,0; 54000,304.05,0,0; 54000,304.15,0,0; 57600,304.15,0,0;
-              57600,303.95,0,0; 61200,303.95,0,0; 61200,303.25,0,0; 64800,303.25,0,0;
-              64800,302.05,0,0; 68400,302.05,0,0; 68400,300.15,0,0; 72000,300.15,0,0;
-              72000,297.85,0,0; 75600,297.85,0,0; 75600,296.05,0,0; 79200,296.05,0,0;
-              79200,295.05,0,0; 82800,295.05,0,0; 82800,294.05,0,0; 86400,294.05,0,0])
-          annotation (Placement(transformation(extent={{-62,14},{-42,34}})));
-        Modelica.Blocks.Sources.CombiTimeTable Strahlung_Fenster(
+          table=[0,291.95,0,0; 3600,291.95,0,0; 3600,290.25,0,0; 7200,290.25,0,
+              0; 7200,289.65,0,0; 10800,289.65,0,0; 10800,289.25,0,0; 14400,
+              289.25,0,0; 14400,289.65,0,0; 18000,289.65,0,0; 18000,290.95,0,0;
+              21600,290.95,0,0; 21600,293.45,0,0; 25200,293.45,0,0; 25200,
+              295.95,0,0; 28800,295.95,0,0; 28800,297.95,0,0; 32400,297.95,0,0;
+              32400,299.85,0,0; 36000,299.85,0,0; 36000,301.25,0,0; 39600,
+              301.25,0,0; 39600,302.15,0,0; 43200,302.15,0,0; 43200,302.85,0,0;
+              46800,302.85,0,0; 46800,303.55,0,0; 50400,303.55,0,0; 50400,
+              304.05,0,0; 54000,304.05,0,0; 54000,304.15,0,0; 57600,304.15,0,0;
+              57600,303.95,0,0; 61200,303.95,0,0; 61200,303.25,0,0; 64800,
+              303.25,0,0; 64800,302.05,0,0; 68400,302.05,0,0; 68400,300.15,0,0;
+              72000,300.15,0,0; 72000,297.85,0,0; 75600,297.85,0,0; 75600,
+              296.05,0,0; 79200,296.05,0,0; 79200,295.05,0,0; 82800,295.05,0,0;
+              82800,294.05,0,0; 86400,294.05,0,0])
+          annotation (Placement(transformation(extent={{-62,22},{-42,42}})));
+        Modelica.Blocks.Sources.CombiTimeTable windowRad(
           extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-          table=[0,0,0,0,0,0.0; 3600,0,0,0,0,0.0; 10800,0,0,0,0,0.0; 14400,0,0,0,0,
-              0.0; 14400,0,0,17,0,0.0; 18000,0,0,17,0,0.0; 18000,0,0,38,0,0.0;
-              21600,0,0,38,0,0.0; 21600,0,0,59,0,0.0; 25200,0,0,59,0,0.0; 25200,0,0,
-              98,0,0.0; 28800,0,0,98,0,0.0; 28800,0,0,186,0,0.0; 32400,0,0,186,0,
-              0.0; 32400,0,0,287,0,0.0; 36000,0,0,287,0,0.0; 36000,0,0,359,0,0.0;
-              39600,0,0,359,0,0.0; 39600,0,0,385,0,0.0; 43200,0,0,385,0,0.0; 43200,
-              0,0,359,0,0.0; 46800,0,0,359,0,0.0; 46800,0,0,287,0,0.0; 50400,0,0,
-              287,0,0.0; 50400,0,0,186,0,0.0; 54000,0,0,186,0,0.0; 54000,0,0,98,0,
-              0.0; 57600,0,0,98,0,0.0; 57600,0,0,59,0,0.0; 61200,0,0,59,0,0.0;
-              61200,0,0,38,0,0.0; 64800,0,0,38,0,0.0; 64800,0,0,17,0,0.0; 68400,0,0,
-              17,0,0.0; 68400,0,0,0,0,0.0; 72000,0,0,0,0,0.0; 82800,0,0,0,0,0.0;
-              86400,0,0,0,0,0.0],
+          table=[0,0,0,0,0,0.0; 3600,0,0,0,0,0.0; 10800,0,0,0,0,0.0; 14400,0,0,
+              0,0,0.0; 14400,0,0,17,0,0.0; 18000,0,0,17,0,0.0; 18000,0,0,38,0,
+              0.0; 21600,0,0,38,0,0.0; 21600,0,0,59,0,0.0; 25200,0,0,59,0,0.0;
+              25200,0,0,98,0,0.0; 28800,0,0,98,0,0.0; 28800,0,0,186,0,0.0;
+              32400,0,0,186,0,0.0; 32400,0,0,287,0,0.0; 36000,0,0,287,0,0.0;
+              36000,0,0,359,0,0.0; 39600,0,0,359,0,0.0; 39600,0,0,385,0,0.0;
+              43200,0,0,385,0,0.0; 43200,0,0,359,0,0.0; 46800,0,0,359,0,0.0;
+              46800,0,0,287,0,0.0; 50400,0,0,287,0,0.0; 50400,0,0,186,0,0.0;
+              54000,0,0,186,0,0.0; 54000,0,0,98,0,0.0; 57600,0,0,98,0,0.0;
+              57600,0,0,59,0,0.0; 61200,0,0,59,0,0.0; 61200,0,0,38,0,0.0; 64800,
+              0,0,38,0,0.0; 64800,0,0,17,0,0.0; 68400,0,0,17,0,0.0; 68400,0,0,0,
+              0,0.0; 72000,0,0,0,0,0.0; 82800,0,0,0,0,0.0; 86400,0,0,0,0,0.0],
           columns={2,3,4,5,6})
           annotation (Placement(transformation(extent={{-96,68},{-76,88}})));
-        Utilities.Sources.PrescribedSolarRad Quelle_Fenster(n=5)
+        Utilities.Sources.PrescribedSolarRad PrescribedSolarRad(n=5)
           annotation (Placement(transformation(extent={{-60,68},{-40,88}})));
         Components.Weather.Sunblind sunblind(n=5, gsunblind={0,0,0.15,0,0})
           annotation (Placement(transformation(extent={{-30,67},{-10,87}})));
-        Building.LowOrder.BaseClasses.SolarRadWeightedSum rad_weighted_sum(
-            n=5, weightfactors={0,0,7,0,0})
+        Building.LowOrder.BaseClasses.SolarRadWeightedSum SolarRadWeightedSum(n=5,
+            weightfactors={0,0,7,0,0})
           annotation (Placement(transformation(extent={{-2,68},{18,88}})));
         Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTemp
           annotation (Placement(transformation(extent={{-8,22},{12,42}})));
@@ -2435,36 +2478,27 @@ package LowOrder "Low Order Building Models"
           extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
           annotation (Placement(transformation(extent={{78,80},{98,99}})));
       equation
-        connect(Personen_Strahlung.port, Konvektiv_Strahlung.Therm) annotation (
-           Line(
-            points={{30,-88},{36,-88},{36,-90},{42.8,-90}},
+        referenceTemp = reference.y;
+        simulationTemp = reducedModel.airload.port.T;
+
+        connect(personsRadiative.port, HeatToStar.Therm) annotation (Line(
+            points={{30,-90},{42.8,-90}},
             color={191,0,0},
             smooth=Smooth.None));
-        connect(Innere_Lasten.y[1],Personen_Konvektion.Q_flow)  annotation (Line(
-            points={{-37,-70},{-14,-70},{-14,-62},{10,-62}},
+        connect(outdoorTemp.y[1], varTemp.T) annotation (Line(
+            points={{-41,32},{-10,32}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(Innere_Lasten.y[1],Personen_Strahlung.Q_flow)  annotation (Line(
-            points={{-37,-70},{-14,-70},{-14,-88},{10,-88}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(Innere_Lasten.y[2],Maschinen_Konvektion.Q_flow)  annotation (Line(
-            points={{-37,-70},{-14,-70},{-14,-40},{40,-40}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(Temperaturverlauf.y[1], varTemp.T) annotation (Line(
-            points={{-41,24},{-26,24},{-26,32},{-10,32}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(Strahlung_Fenster.y, Quelle_Fenster.u) annotation (Line(
+        connect(windowRad.y, PrescribedSolarRad.u) annotation (Line(
             points={{-75,78},{-60,78}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(Quelle_Fenster.solarRad_out, sunblind.Rad_In) annotation (Line(
+        connect(PrescribedSolarRad.solarRad_out, sunblind.Rad_In) annotation (
+            Line(
             points={{-41,78},{-29,78}},
             color={255,128,0},
             smooth=Smooth.None));
-        connect(rad_weighted_sum.solarRad_out, reducedModel.solarRad_in)
+        connect(SolarRadWeightedSum.solarRad_out, reducedModel.solarRad_in)
           annotation (Line(
             points={{17,78},{34,78},{34,56.8},{51.23,56.8}},
             color={255,128,0},
@@ -2473,34 +2507,48 @@ package LowOrder "Low Order Building Models"
             points={{12,32},{22,32},{22,46.8},{51.4,46.8}},
             color={191,0,0},
             smooth=Smooth.None));
-        connect(Temperatur_Infiltration.y, reducedModel.ventilationTemperature)
+        connect(infiltrationTemp.y, reducedModel.ventilationTemperature)
           annotation (Line(
             points={{16.5,1},{16.5,18.5},{51.4,18.5},{51.4,36.4}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(Infiltration.y, reducedModel.ventilationRate) annotation (Line(
+        connect(infiltrationRate.y, reducedModel.ventilationRate) annotation (
+            Line(
             points={{40.5,1},{40.5,14.5},{58.2,14.5},{58.2,30}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(Personen_Konvektion.port, reducedModel.internalGainsConv)
+        connect(personsConvective.port, reducedModel.internalGainsConv)
           annotation (Line(
-            points={{30,-62},{10,-62},{10,-20},{68.4,-20},{68.4,30}},
+            points={{30,-62},{68.4,-62},{68.4,30}},
             color={191,0,0},
             smooth=Smooth.None));
-        connect(Maschinen_Konvektion.port, reducedModel.internalGainsConv)
+        connect(machinesConvective.port, reducedModel.internalGainsConv)
           annotation (Line(
-            points={{60,-40},{40,-40},{40,-20},{68.4,-20},{68.4,30}},
+            points={{30,-42},{68.4,-42},{68.4,30}},
             color={191,0,0},
             smooth=Smooth.None));
-        connect(Konvektiv_Strahlung.Star, reducedModel.internalGainsRad)
-          annotation (Line(
-            points={{61.1,-90},{70,-90},{70,30},{78.09,30}},
+        connect(HeatToStar.Star, reducedModel.internalGainsRad) annotation (
+            Line(
+            points={{61.1,-90},{78,-90},{78,30},{78.09,30}},
             color={95,95,95},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(sunblind.Rad_Out, rad_weighted_sum.solarRad_in) annotation (Line(
+        connect(sunblind.Rad_Out, SolarRadWeightedSum.solarRad_in) annotation (
+            Line(
             points={{-11,78},{-1,78}},
             color={255,128,0},
+            smooth=Smooth.None));
+        connect(innerLoads.y[3], machinesConvective.Q_flow) annotation (Line(
+            points={{-37,-62},{-18,-62},{-18,-42},{10,-42}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(innerLoads.y[2], personsConvective.Q_flow) annotation (Line(
+            points={{-37,-62},{10,-62}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(innerLoads.y[1], personsRadiative.Q_flow) annotation (Line(
+            points={{-37,-62},{-18,-62},{-18,-90},{10,-90}},
+            color={0,0,127},
             smooth=Smooth.None));
         annotation (                  Diagram(coordinateSystem(
                 preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
@@ -2529,27 +2577,28 @@ package LowOrder "Low Order Building Models"
       model TestCase_6
         extends Modelica.Icons.Example;
 
-        Modelica.Blocks.Sources.Constant Infiltration(k=0)
+        output Real referenceLoad[1];
+        output Real simulationLoad;
+
+        Modelica.Blocks.Sources.Constant infiltrationRate(k=0)
           annotation (Placement(transformation(extent={{30,-4},{40,6}})));
-        Modelica.Blocks.Sources.Constant Temperatur_Infiltration(k=22)
+        Modelica.Blocks.Sources.Constant infiltrationTemp(k=22)
           annotation (Placement(transformation(extent={{6,-4},{16,6}})));
-        Utilities.HeatTransfer.HeatToStar Konvektiv_Strahlung(A=2)
-          annotation (Placement(transformation(extent={{40,-102},{60,-82}})));
-        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
-          Maschinen_Strahlung
+        Utilities.HeatTransfer.HeatToStar HeatToStar(A=2)
+          annotation (Placement(transformation(extent={{40,-98},{60,-78}})));
+        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machinesRadiative
           annotation (Placement(transformation(extent={{-4,-100},{22,-78}})));
-        Modelica.Blocks.Sources.CombiTimeTable Innere_Lasten(
+        Modelica.Blocks.Sources.CombiTimeTable innerLoads(
           extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
           tableOnFile=false,
-          table=[0,0,0; 3600,0,0; 7200,0,0; 10800,0,0; 14400,0,0; 18000,0,0; 21600,
-              0,0; 25200,0,1000; 28800,0,1000; 32400,0,1000; 36000,0,1000; 39600,0,
-              1000; 43200,0,1000; 46800,0,1000; 50400,0,1000; 54000,0,1000; 57600,0,
-              1000; 61200,0,1000; 64800,0,1000; 68400,0,0; 72000,0,0; 75600,0,0;
-              79200,0,0; 82800,0,0; 86400,0,0])
-          annotation (Placement(transformation(extent={{-60,-100},{-40,-80}})));
-        Modelica.Thermal.HeatTransfer.Sources.FixedTemperature Aussentemperatur(
-            T=295.15)
-          annotation (Placement(transformation(extent={{-4,39},{-24,59}})));
+          table=[0,0,0; 3600,0,0; 7200,0,0; 10800,0,0; 14400,0,0; 18000,0,0;
+              21600,0,0; 25200,0,1000; 28800,0,1000; 32400,0,1000; 36000,0,1000;
+              39600,0,1000; 43200,0,1000; 46800,0,1000; 50400,0,1000; 54000,0,
+              1000; 57600,0,1000; 61200,0,1000; 64800,0,1000; 68400,0,0; 72000,
+              0,0; 75600,0,0; 79200,0,0; 82800,0,0; 86400,0,0])
+          annotation (Placement(transformation(extent={{-48,-98},{-28,-78}})));
+        Modelica.Thermal.HeatTransfer.Sources.FixedTemperature outdoorTemp(T=295.15)
+          annotation (Placement(transformation(extent={{-24,39},{-4,59}})));
         Building.LowOrder.BaseClasses.ReducedOrderModel reducedModel(
           C1i=1.48216e+007,
           Aw=7,
@@ -2566,15 +2615,14 @@ package LowOrder "Low Order Building Models"
           Ao=10.5,
           withWindows=false)
           annotation (Placement(transformation(extent={{54,26},{88,66}})));
-        Modelica.Blocks.Sources.CombiTimeTable Solltemperaturen(
+        Modelica.Blocks.Sources.CombiTimeTable setTemp(
           extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
           columns={2},
           table=[0,295.1; 3600,295.1; 7200,295.1; 10800,295.1; 14400,295.1;
-              18000,295.1; 21600,295.1; 25200,300.1; 28800,300.1; 32400,
-              300.1; 36000,300.1; 39600,300.1; 43200,300.1; 46800,300.1;
-              50400,300.1; 54000,300.1; 57600,300.1; 61200,300.1; 64800,
-              300.1; 68400,295.1; 72000,295.1; 75600,295.1; 79200,295.1;
-              82800,295.1; 86400,295.1])
+              18000,295.1; 21600,295.1; 25200,300.1; 28800,300.1; 32400,300.1;
+              36000,300.1; 39600,300.1; 43200,300.1; 46800,300.1; 50400,300.1;
+              54000,300.1; 57600,300.1; 61200,300.1; 64800,300.1; 68400,295.1;
+              72000,295.1; 75600,295.1; 79200,295.1; 82800,295.1; 86400,295.1])
           annotation (Placement(transformation(extent={{-62,-38},{-42,-18}})));
         Modelica.Blocks.Sources.CombiTimeTable reference(
           tableName="UserProfilesOffice",
@@ -2601,46 +2649,46 @@ package LowOrder "Low Order Building Models"
           annotation (Placement(transformation(extent={{80,78},{100,97}})));
         Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensor
           annotation (Placement(transformation(extent={{24,-38},{44,-18}})));
-        Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
-          prescribedTemperature annotation (Placement(transformation(extent=
-                 {{-6,-38},{14,-18}})));
+        Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTemp
+          annotation (Placement(transformation(extent={{-6,-38},{14,-18}})));
       equation
-        connect(Maschinen_Strahlung.port, Konvektiv_Strahlung.Therm)
-          annotation (Line(
-            points={{22,-89},{28,-89},{28,-92},{40.8,-92}},
+
+        referenceLoad[1]=-reference.y[2];
+        simulationLoad=heatFlowSensor.Q_flow;
+
+        connect(machinesRadiative.port, HeatToStar.Therm) annotation (Line(
+            points={{22,-89},{28,-89},{28,-88},{40.8,-88}},
             color={191,0,0},
             smooth=Smooth.None));
-        connect(Innere_Lasten.y[2],Maschinen_Strahlung.Q_flow)  annotation (Line(
-            points={{-39,-90},{-14,-90},{-14,-89},{-4,-89}},
+        connect(innerLoads.y[2], machinesRadiative.Q_flow) annotation (Line(
+            points={{-27,-88},{-16,-88},{-16,-89},{-4,-89}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(Temperatur_Infiltration.y, reducedModel.ventilationTemperature)
+        connect(infiltrationTemp.y, reducedModel.ventilationTemperature)
           annotation (Line(
             points={{16.5,1},{21.25,1},{21.25,36.4},{57.4,36.4}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(Infiltration.y, reducedModel.ventilationRate) annotation (Line(
+        connect(infiltrationRate.y, reducedModel.ventilationRate) annotation (
+            Line(
             points={{40.5,1},{40.5,13.5},{64.2,13.5},{64.2,30}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(Konvektiv_Strahlung.Star, reducedModel.internalGainsRad)
-          annotation (Line(
-            points={{59.1,-92},{84.09,-92},{84.09,30}},
+        connect(HeatToStar.Star, reducedModel.internalGainsRad) annotation (
+            Line(
+            points={{59.1,-88},{84.09,-88},{84.09,30}},
             color={95,95,95},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(Aussentemperatur.port, reducedModel.equalAirTemp) annotation (
-            Line(
-            points={{-24,49},{26.5,49},{26.5,46.8},{57.4,46.8}},
+        connect(outdoorTemp.port, reducedModel.equalAirTemp) annotation (Line(
+            points={{-4,49},{26.5,49},{26.5,46.8},{57.4,46.8}},
             color={191,0,0},
             smooth=Smooth.None));
-        connect(heatFlowSensor.port_a, prescribedTemperature.port)
-          annotation (Line(
+        connect(heatFlowSensor.port_a, varTemp.port) annotation (Line(
             points={{24,-28},{14,-28}},
             color={191,0,0},
             smooth=Smooth.None));
-        connect(Solltemperaturen.y[1], prescribedTemperature.T) annotation (
-           Line(
+        connect(setTemp.y[1], varTemp.T) annotation (Line(
             points={{-41,-28},{-8,-28}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -2673,28 +2721,27 @@ package LowOrder "Low Order Building Models"
 
       model TestCase_7
         extends Modelica.Icons.Example;
-
-        Modelica.Blocks.Sources.Constant Infiltration(k=0)
-          annotation (Placement(transformation(extent={{40,-16},{50,-6}})));
-        Modelica.Blocks.Sources.Constant Temperatur_Infiltration(k=22)
+        output Real referenceLoad[1];
+        output Real simulationLoad;
+        Modelica.Blocks.Sources.Constant infiltrationRate(k=0)
+          annotation (Placement(transformation(extent={{32,-15},{42,-5}})));
+        Modelica.Blocks.Sources.Constant infiltrationTemp(k=22)
           annotation (Placement(transformation(extent={{6,-4},{16,6}})));
-        Utilities.HeatTransfer.HeatToStar Konvektiv_Strahlung(A=2)
-          annotation (Placement(transformation(extent={{40,-102},{60,-82}})));
-        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
-          Maschinen_Strahlung
+        Utilities.HeatTransfer.HeatToStar HeatToStar(A=2)
+          annotation (Placement(transformation(extent={{40,-99},{60,-79}})));
+        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machinesRadiative
           annotation (Placement(transformation(extent={{-4,-100},{22,-78}})));
-        Modelica.Blocks.Sources.CombiTimeTable Innere_Lasten(
+        Modelica.Blocks.Sources.CombiTimeTable innerLoads(
           extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
           tableOnFile=false,
-          table=[0,0,0; 3600,0,0; 7200,0,0; 10800,0,0; 14400,0,0; 18000,0,0; 21600,
-              0,0; 25200,0,1000; 28800,0,1000; 32400,0,1000; 36000,0,1000; 39600,0,
-              1000; 43200,0,1000; 46800,0,1000; 50400,0,1000; 54000,0,1000; 57600,0,
-              1000; 61200,0,1000; 64800,0,1000; 68400,0,0; 72000,0,0; 75600,0,0;
-              79200,0,0; 82800,0,0; 86400,0,0])
-          annotation (Placement(transformation(extent={{-60,-100},{-40,-80}})));
-        Modelica.Thermal.HeatTransfer.Sources.FixedTemperature Aussentemperatur(
-            T=295.15)
-          annotation (Placement(transformation(extent={{-4,39},{-24,59}})));
+          table=[0,0,0; 3600,0,0; 7200,0,0; 10800,0,0; 14400,0,0; 18000,0,0;
+              21600,0,0; 25200,0,1000; 28800,0,1000; 32400,0,1000; 36000,0,1000;
+              39600,0,1000; 43200,0,1000; 46800,0,1000; 50400,0,1000; 54000,0,
+              1000; 57600,0,1000; 61200,0,1000; 64800,0,1000; 68400,0,0; 72000,
+              0,0; 75600,0,0; 79200,0,0; 82800,0,0; 86400,0,0])
+          annotation (Placement(transformation(extent={{-46,-99},{-26,-79}})));
+        Modelica.Thermal.HeatTransfer.Sources.FixedTemperature outdoorTemp(T=295.15)
+          annotation (Placement(transformation(extent={{-24,49},{-4,69}})));
         Building.LowOrder.BaseClasses.ReducedOrderModel reducedModel(
           C1i=1.48216e+007,
           Aw=7,
@@ -2725,16 +2772,17 @@ package LowOrder "Low Order Building Models"
               extent={{-10,-10},{10,10}},
               rotation=-90,
               origin={-26,-20})));
-        Modelica.Blocks.Sources.CombiTimeTable Solltemperaturen(
+        Modelica.Blocks.Sources.CombiTimeTable setTemp(
           extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
           columns={2,3},
-          table=[0,295.15,295.2; 3600,295.1,295.2; 7200,295.1,295.2; 10800,295.1,
-              295.2; 14400,295.1,295.2; 18000,295.1,295.2; 21600,295.1,295.2; 25200,
-              300.1,300.2; 28800,300.1,300.2; 32400,300.1,300.2; 36000,300.1,300.2;
-              39600,300.1,300.2; 43200,300.1,300.2; 46800,300.1,300.2; 50400,300.1,
-              300.2; 54000,300.1,300.2; 57600,300.1,300.2; 61200,300.1,300.2; 64800,
-              300.1,300.2; 68400,295.1,295.2; 72000,295.1,295.2; 75600,295.1,295.2;
-              79200,295.1,295.2; 82800,295.1,295.2; 86400,295.1,295.2])
+          table=[0,295.15,295.2; 3600,295.1,295.2; 7200,295.1,295.2; 10800,
+              295.1,295.2; 14400,295.1,295.2; 18000,295.1,295.2; 21600,295.1,
+              295.2; 25200,300.1,300.2; 28800,300.1,300.2; 32400,300.1,300.2;
+              36000,300.1,300.2; 39600,300.1,300.2; 43200,300.1,300.2; 46800,
+              300.1,300.2; 50400,300.1,300.2; 54000,300.1,300.2; 57600,300.1,
+              300.2; 61200,300.1,300.2; 64800,300.1,300.2; 68400,295.1,295.2;
+              72000,295.1,295.2; 75600,295.1,295.2; 79200,295.1,295.2; 82800,
+              295.1,295.2; 86400,295.1,295.2])
           annotation (Placement(transformation(extent={{-80,-30},{-60,-10}})));
         Modelica.Blocks.Sources.CombiTimeTable reference(
           tableName="UserProfilesOffice",
@@ -2761,32 +2809,33 @@ package LowOrder "Low Order Building Models"
           extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
           annotation (Placement(transformation(extent={{80,80},{100,99}})));
         Modelica.Blocks.Math.Add sumHeatLoad
-          annotation (Placement(transformation(extent={{-30,4},{-20,14}})));
+          annotation (Placement(transformation(extent={{-96,86},{-86,96}})));
       equation
-        connect(Maschinen_Strahlung.port, Konvektiv_Strahlung.Therm)
-          annotation (Line(
-            points={{22,-89},{28,-89},{28,-92},{40.8,-92}},
+        connect(machinesRadiative.port, HeatToStar.Therm) annotation (Line(
+            points={{22,-89},{40.8,-89}},
             color={191,0,0},
             smooth=Smooth.None));
-        connect(Innere_Lasten.y[2],Maschinen_Strahlung.Q_flow)  annotation (Line(
-            points={{-39,-90},{-14,-90},{-14,-89},{-4,-89}},
+        connect(innerLoads.y[2], machinesRadiative.Q_flow) annotation (Line(
+            points={{-25,-89},{-4,-89}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(Solltemperaturen.y[2], idealHeaterCoolerVar1_1.soll_cool)
-          annotation (Line(
+        connect(setTemp.y[2], idealHeaterCoolerVar1_1.soll_cool) annotation (
+            Line(
             points={{-59,-20},{-50,-20},{-50,-15.2},{-30.8,-15.2}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(Solltemperaturen.y[1], idealHeaterCoolerVar1_1.soll_heat)
-          annotation (Line(
+        connect(setTemp.y[1], idealHeaterCoolerVar1_1.soll_heat) annotation (
+            Line(
             points={{-59,-20},{-50,-20},{-50,-23},{-30.8,-23}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(sumHeatLoad.u1,idealHeaterCoolerVar1_1.heatMeter.p);
         connect(sumHeatLoad.u2,idealHeaterCoolerVar1_1.coolMeter.p);
-        connect(Aussentemperatur.port, reducedModel.equalAirTemp) annotation (
-            Line(
-            points={{-24,49},{26.5,49},{26.5,58.8},{47.4,58.8}},
+        referenceLoad[1]=-reference.y[2];
+        simulationLoad=sumHeatLoad.y;
+
+        connect(outdoorTemp.port, reducedModel.equalAirTemp) annotation (Line(
+            points={{-4,59},{26.5,59},{26.5,58.8},{47.4,58.8}},
             color={191,0,0},
             smooth=Smooth.None));
         connect(idealHeaterCoolerVar1_1.HeatCoolRoom, reducedModel.internalGainsConv)
@@ -2794,18 +2843,19 @@ package LowOrder "Low Order Building Models"
             points={{-26,-29},{30,-29},{30,-32},{64.4,-32},{64.4,42}},
             color={191,0,0},
             smooth=Smooth.None));
-        connect(Temperatur_Infiltration.y, reducedModel.ventilationTemperature)
+        connect(infiltrationTemp.y, reducedModel.ventilationTemperature)
           annotation (Line(
             points={{16.5,1},{35.25,1},{35.25,48.4},{47.4,48.4}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(Infiltration.y, reducedModel.ventilationRate) annotation (Line(
-            points={{50.5,-11},{50.5,14.5},{54.2,14.5},{54.2,42}},
+        connect(infiltrationRate.y, reducedModel.ventilationRate) annotation (
+            Line(
+            points={{42.5,-10},{54.2,-10},{54.2,42}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(Konvektiv_Strahlung.Star, reducedModel.internalGainsRad)
-          annotation (Line(
-            points={{59.1,-92},{72,-92},{72,42},{74.09,42}},
+        connect(HeatToStar.Star, reducedModel.internalGainsRad) annotation (
+            Line(
+            points={{59.1,-89},{72,-89},{72,42},{74.09,42}},
             color={95,95,95},
             pattern=LinePattern.None,
             smooth=Smooth.None));
@@ -2834,31 +2884,14 @@ package LowOrder "Low Order Building Models"
 
       model TestCase_8
         extends Modelica.Icons.Example;
-
-        Modelica.Blocks.Sources.Constant Infiltration(k=0)
-          annotation (Placement(transformation(extent={{30,-4},{40,6}})));
-        Modelica.Blocks.Sources.Constant Temperatur_Infiltration(k=22)
-          annotation (Placement(transformation(extent={{6,-4},{16,6}})));
-        Utilities.HeatTransfer.HeatToStar Konvektiv_Strahlung(A=2)
-          annotation (Placement(transformation(extent={{42,-100},{62,-80}})));
-        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
-          Maschinen_Konvektion
-          annotation (Placement(transformation(extent={{40,-50},{60,-30}})));
-        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
-          Personen_Konvektion
-          annotation (Placement(transformation(extent={{10,-72},{30,-52}})));
-        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
-          Personen_Strahlung
-          annotation (Placement(transformation(extent={{10,-98},{30,-78}})));
-        Modelica.Blocks.Sources.CombiTimeTable Innere_Lasten(
-          extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-          tableOnFile=false,
-          table=[0,0,0; 3600,0,0; 7200,0,0; 10800,0,0; 14400,0,0; 18000,0,0; 21600,0,
-              0; 25200,0,0; 25200,160,200; 28800,160,200; 32400,160,200; 36000,160,
-              200; 39600,160,200; 43200,160,200; 46800,160,200; 50400,160,200; 54000,
-              160,200; 57600,160,200; 61200,160,200; 61200,0,0; 64800,0,0; 72000,0,0;
-              75600,0,0; 79200,0,0; 82800,0,0; 86400,0,0])
-          annotation (Placement(transformation(extent={{-58,-80},{-38,-60}})));
+        output Modelica.SIunits.Conversions.NonSIunits.Temperature_degC referenceTemp[1];
+        output Modelica.SIunits.Temp_K simulationTemp;
+        Modelica.Blocks.Sources.Constant infiltrationRate(k=0)
+          annotation (Placement(transformation(extent={{38,-5},{48,5}})));
+        Modelica.Blocks.Sources.Constant infiltrationTemp(k=22)
+          annotation (Placement(transformation(extent={{16,14},{26,24}})));
+        Utilities.HeatTransfer.HeatToStar HeatTorStar(A=2)
+          annotation (Placement(transformation(extent={{42,-98},{62,-78}})));
         Building.LowOrder.BaseClasses.ReducedOrderModel reducedModel(
           epsi=1,
           epso=1,
@@ -2877,58 +2910,61 @@ package LowOrder "Low Order Building Models"
           RRest=0.020439688)
           annotation (Placement(transformation(extent={{48,26},{82,66}})));
 
-        Modelica.Blocks.Sources.CombiTimeTable Temperaturverlauf(
+        Modelica.Blocks.Sources.CombiTimeTable outdoorTemp(
           extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
           columns={2,3,4},
-          table=[0,291.95,0,0; 3600,291.95,0,0; 3600,290.25,0,0; 7200,290.25,0,0;
-              7200,289.65,0,0; 10800,289.65,0,0; 10800,289.25,0,0; 14400,289.25,0,0;
-              14400,289.65,0,0; 18000,289.65,0,0; 18000,290.95,0,0; 21600,290.95,0,
-              0; 21600,293.45,0,0; 25200,293.45,0,0; 25200,295.95,0,0; 28800,295.95,
-              0,0; 28800,297.95,0,0; 32400,297.95,0,0; 32400,299.85,0,0; 36000,
-              299.85,0,0; 36000,301.25,0,0; 39600,301.25,0,0; 39600,302.15,0,0;
-              43200,302.15,0,0; 43200,302.85,0,0; 46800,302.85,0,0; 46800,303.55,0,
-              0; 50400,303.55,0,0; 50400,304.05,0,0; 54000,304.05,0,0; 54000,304.15,
-              0,0; 57600,304.15,0,0; 57600,303.95,0,0; 61200,303.95,0,0; 61200,
-              303.25,0,0; 64800,303.25,0,0; 64800,302.05,0,0; 68400,302.05,0,0;
-              68400,300.15,0,0; 72000,300.15,0,0; 72000,297.85,0,0; 75600,297.85,0,
-              0; 75600,296.05,0,0; 79200,296.05,0,0; 79200,295.05,0,0; 82800,295.05,
-              0,0; 82800,294.05,0,0; 86400,294.05,0,0])
+          table=[0,291.95,0,0; 3600,291.95,0,0; 3600,290.25,0,0; 7200,290.25,0,
+              0; 7200,289.65,0,0; 10800,289.65,0,0; 10800,289.25,0,0; 14400,
+              289.25,0,0; 14400,289.65,0,0; 18000,289.65,0,0; 18000,290.95,0,0;
+              21600,290.95,0,0; 21600,293.45,0,0; 25200,293.45,0,0; 25200,
+              295.95,0,0; 28800,295.95,0,0; 28800,297.95,0,0; 32400,297.95,0,0;
+              32400,299.85,0,0; 36000,299.85,0,0; 36000,301.25,0,0; 39600,
+              301.25,0,0; 39600,302.15,0,0; 43200,302.15,0,0; 43200,302.85,0,0;
+              46800,302.85,0,0; 46800,303.55,0,0; 50400,303.55,0,0; 50400,
+              304.05,0,0; 54000,304.05,0,0; 54000,304.15,0,0; 57600,304.15,0,0;
+              57600,303.95,0,0; 61200,303.95,0,0; 61200,303.25,0,0; 64800,
+              303.25,0,0; 64800,302.05,0,0; 68400,302.05,0,0; 68400,300.15,0,0;
+              72000,300.15,0,0; 72000,297.85,0,0; 75600,297.85,0,0; 75600,
+              296.05,0,0; 79200,296.05,0,0; 79200,295.05,0,0; 82800,295.05,0,0;
+              82800,294.05,0,0; 86400,294.05,0,0])
           annotation (Placement(transformation(extent={{-88,8},{-68,28}})));
 
         Utilities.Sources.PrescribedSolarRad Quelle_Wand(n=5) annotation (
             Placement(transformation(extent={{-60,36},{-40,56}})));
-        Modelica.Blocks.Sources.CombiTimeTable Strahlung_Wand(
+        Modelica.Blocks.Sources.CombiTimeTable wallRad(
           extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-          table=[0,0,0,0,0,0.0; 3600,0,0,0,0,0.0; 10800,0,0,0,0,0.0; 14400,0,0,0,0,
-              0.0; 14400,0,0,24,23,0.0; 18000,0,0,24,23,0.0; 18000,0,0,58,53,0.0;
-              21600,0,0,58,53,0.0; 21600,0,0,91,77,0.0; 25200,0,0,91,77,0.0; 25200,
-              0,0,203,97,0.0; 28800,0,0,203,97,0.0; 28800,0,0,348,114,0.0; 32400,0,
-              0,348,114,0.0; 32400,0,0,472,131,0.0; 36000,0,0,472,131,0.0; 36000,0,
-              0,553,144,0.0; 39600,0,0,553,144,0.0; 39600,0,0,581,159,0.0; 43200,0,
-              0,581,159,0.0; 43200,0,0,553,372,0.0; 46800,0,0,553,372,0.0; 46800,0,
-              0,472,557,0.0; 50400,0,0,472,557,0.0; 50400,0,0,348,685,0.0; 54000,0,
-              0,348,685,0.0; 54000,0,0,203,733,0.0; 57600,0,0,203,733,0.0; 57600,0,
-              0,91,666,0.0; 61200,0,0,91,666,0.0; 61200,0,0,58,474,0.0; 64800,0,0,
-              58,474,0.0; 64800,0,0,24,177,0.0; 68400,0,0,24,177,0.0; 68400,0,0,0,0,
-              0.0; 72000,0,0,0,0,0.0; 82800,0,0,0,0,0.0; 86400,0,0,0,0,0.0],
+          table=[0,0,0,0,0,0.0; 3600,0,0,0,0,0.0; 10800,0,0,0,0,0.0; 14400,0,0,
+              0,0,0.0; 14400,0,0,24,23,0.0; 18000,0,0,24,23,0.0; 18000,0,0,58,
+              53,0.0; 21600,0,0,58,53,0.0; 21600,0,0,91,77,0.0; 25200,0,0,91,77,
+              0.0; 25200,0,0,203,97,0.0; 28800,0,0,203,97,0.0; 28800,0,0,348,
+              114,0.0; 32400,0,0,348,114,0.0; 32400,0,0,472,131,0.0; 36000,0,0,
+              472,131,0.0; 36000,0,0,553,144,0.0; 39600,0,0,553,144,0.0; 39600,
+              0,0,581,159,0.0; 43200,0,0,581,159,0.0; 43200,0,0,553,372,0.0;
+              46800,0,0,553,372,0.0; 46800,0,0,472,557,0.0; 50400,0,0,472,557,
+              0.0; 50400,0,0,348,685,0.0; 54000,0,0,348,685,0.0; 54000,0,0,203,
+              733,0.0; 57600,0,0,203,733,0.0; 57600,0,0,91,666,0.0; 61200,0,0,
+              91,666,0.0; 61200,0,0,58,474,0.0; 64800,0,0,58,474,0.0; 64800,0,0,
+              24,177,0.0; 68400,0,0,24,177,0.0; 68400,0,0,0,0,0.0; 72000,0,0,0,
+              0,0.0; 82800,0,0,0,0,0.0; 86400,0,0,0,0,0.0],
           columns={2,3,4,5,6})
           annotation (Placement(transformation(extent={{-88,36},{-68,56}})));
-        Modelica.Blocks.Sources.CombiTimeTable Strahlung_Fenster(
+        Modelica.Blocks.Sources.CombiTimeTable windowRad(
           extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-          table=[0,0,0,0,0,0.0; 3600,0,0,0,0,0.0; 10800,0,0,0,0,0.0; 14400,0,0,0,0,
-              0.0; 14400,0,0,17,17,0.0; 18000,0,0,17,17,0.0; 18000,0,0,38,36,0.0;
-              21600,0,0,38,36,0.0; 21600,0,0,59,51,0.0; 25200,0,0,59,51,0.0; 25200,
-              0,0,98,64,0.0; 28800,0,0,98,64,0.0; 28800,0,0,186,74,0.0; 32400,0,0,
-              186,74,0.0; 32400,0,0,287,84,0.0; 36000,0,0,287,84,0.0; 36000,0,0,359,
-              92,0.0; 39600,0,0,359,92,0.0; 39600,0,0,385,100,0.0; 43200,0,0,385,
-              100,0.0; 43200,0,0,359,180,0.0; 46800,0,0,359,180,0.0; 46800,0,0,287,
-              344,0.0; 50400,0,0,287,344,0.0; 50400,0,0,186,475,0.0; 54000,0,0,186,
-              475,0.0; 54000,0,0,98,528,0.0; 57600,0,0,98,528,0.0; 57600,0,0,59,492,
-              0.0; 61200,0,0,59,492,0.0; 61200,0,0,38,359,0.0; 64800,0,0,38,359,0.0;
-              64800,0,0,17,147,0.0; 68400,0,0,17,147,0.0; 68400,0,0,0,0,0.0; 72000,
-              0,0,0,0,0.0; 82800,0,0,0,0,0.0; 86400,0,0,0,0,0.0],
+          table=[0,0,0,0,0,0.0; 3600,0,0,0,0,0.0; 10800,0,0,0,0,0.0; 14400,0,0,
+              0,0,0.0; 14400,0,0,17,17,0.0; 18000,0,0,17,17,0.0; 18000,0,0,38,
+              36,0.0; 21600,0,0,38,36,0.0; 21600,0,0,59,51,0.0; 25200,0,0,59,51,
+              0.0; 25200,0,0,98,64,0.0; 28800,0,0,98,64,0.0; 28800,0,0,186,74,
+              0.0; 32400,0,0,186,74,0.0; 32400,0,0,287,84,0.0; 36000,0,0,287,84,
+              0.0; 36000,0,0,359,92,0.0; 39600,0,0,359,92,0.0; 39600,0,0,385,
+              100,0.0; 43200,0,0,385,100,0.0; 43200,0,0,359,180,0.0; 46800,0,0,
+              359,180,0.0; 46800,0,0,287,344,0.0; 50400,0,0,287,344,0.0; 50400,
+              0,0,186,475,0.0; 54000,0,0,186,475,0.0; 54000,0,0,98,528,0.0;
+              57600,0,0,98,528,0.0; 57600,0,0,59,492,0.0; 61200,0,0,59,492,0.0;
+              61200,0,0,38,359,0.0; 64800,0,0,38,359,0.0; 64800,0,0,17,147,0.0;
+              68400,0,0,17,147,0.0; 68400,0,0,0,0,0.0; 72000,0,0,0,0,0.0; 82800,
+              0,0,0,0,0.0; 86400,0,0,0,0,0.0],
           columns={2,3,4,5,6})
-          annotation (Placement(transformation(extent={{-92,68},{-72,88}})));
+          annotation (Placement(transformation(extent={{-88,68},{-68,88}})));
         Utilities.Sources.PrescribedSolarRad Quelle_Fenster(n=5)
           annotation (Placement(transformation(extent={{-60,68},{-40,88}})));
         Components.Weather.Sunblind sunblind(n=5, gsunblind={0,0,0.15,0.15,
@@ -2965,30 +3001,33 @@ package LowOrder "Low Order Building Models"
               5158800,44.1; 5162400,42.4; 5166000,42; 5169600,41.7; 5173200,41.6;
               5176800,41.4; 5180400,41.2; 5184000,41.1])
           annotation (Placement(transformation(extent={{80,80},{100,99}})));
+        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machinesConvective
+          annotation (Placement(transformation(extent={{6,-50},{26,-30}})));
+        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow personsConvective
+          annotation (Placement(transformation(extent={{6,-70},{26,-50}})));
+        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow personsRadiative
+          annotation (Placement(transformation(extent={{6,-98},{26,-78}})));
+        Modelica.Blocks.Sources.CombiTimeTable innerLoads(
+          extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+          tableOnFile=false,
+          table=[0,0,0,0; 3600,0,0,0; 7200,0,0,0; 10800,0,0,0; 14400,0,0,0; 18000,0,0,
+              0; 21600,0,0,0; 25200,0,0,0; 25200,80,80,200; 28800,80,80,200; 32400,80,
+              80,200; 36000,80,80,200; 39600,80,80,200; 43200,80,80,200; 46800,80,80,200;
+              50400,80,80,200; 54000,80,80,200; 57600,80,80,200; 61200,80,80,200; 61200,
+              0,0,0; 64800,0,0,0; 72000,0,0,0; 75600,0,0,0; 79200,0,0,0; 82800,0,0,0;
+              86400,0,0,0],
+          columns={2,3,4})
+          annotation (Placement(transformation(extent={{-62,-70},{-42,-50}})));
       equation
-        connect(Personen_Strahlung.port, Konvektiv_Strahlung.Therm) annotation (
-           Line(
-            points={{30,-88},{36,-88},{36,-90},{42.8,-90}},
-            color={191,0,0},
-            smooth=Smooth.None));
-        connect(Innere_Lasten.y[1],Personen_Konvektion.Q_flow)  annotation (Line(
-            points={{-37,-70},{-14,-70},{-14,-62},{10,-62}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(Innere_Lasten.y[1],Personen_Strahlung.Q_flow)  annotation (Line(
-            points={{-37,-70},{-14,-70},{-14,-88},{10,-88}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(Innere_Lasten.y[2],Maschinen_Konvektion.Q_flow)  annotation (Line(
-            points={{-37,-70},{-14,-70},{-14,-40},{40,-40}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(eqAirTemp.WeatherDataVector, Temperaturverlauf.y) annotation (Line(
+       referenceTemp = reference.y;
+        simulationTemp = reducedModel.airload.port.T;
+
+        connect(eqAirTemp.WeatherDataVector, outdoorTemp.y) annotation (Line(
             points={{-14,40},{-40,40},{-40,18},{-67,18}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(Strahlung_Fenster.y, Quelle_Fenster.u) annotation (Line(
-            points={{-71,78},{-60,78}},
+        connect(windowRad.y, Quelle_Fenster.u) annotation (Line(
+            points={{-67,78},{-60,78}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(Quelle_Fenster.solarRad_out, sunblind.Rad_In) annotation (Line(
@@ -2999,7 +3038,7 @@ package LowOrder "Low Order Building Models"
             points={{-41,46},{-27.75,46},{-27.75,45.6},{-14.5,45.6}},
             color={255,128,0},
             smooth=Smooth.None));
-        connect(Strahlung_Wand.y, Quelle_Wand.u) annotation (Line(
+        connect(wallRad.y, Quelle_Wand.u) annotation (Line(
             points={{-67,46},{-60,46}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -3021,30 +3060,47 @@ package LowOrder "Low Order Building Models"
             points={{-11,78},{-1,78}},
             color={255,128,0},
             smooth=Smooth.None));
-        connect(Temperatur_Infiltration.y, reducedModel.ventilationTemperature)
-          annotation (Line(
-            points={{16.5,1},{16.5,18.5},{51.4,18.5},{51.4,36.4}},
+        connect(infiltrationRate.y, reducedModel.ventilationRate) annotation (
+            Line(
+            points={{48.5,0},{58.2,0},{58.2,30}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(Infiltration.y, reducedModel.ventilationRate) annotation (Line(
-            points={{40.5,1},{40.5,13.5},{58.2,13.5},{58.2,30}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(Maschinen_Konvektion.port, reducedModel.internalGainsConv)
-          annotation (Line(
-            points={{60,-40},{36,-40},{36,-14},{68.4,-14},{68.4,30}},
-            color={191,0,0},
-            smooth=Smooth.None));
-        connect(Personen_Konvektion.port, reducedModel.internalGainsConv)
-          annotation (Line(
-            points={{30,-62},{12,-62},{12,-14},{68.4,-14},{68.4,30}},
-            color={191,0,0},
-            smooth=Smooth.None));
-        connect(Konvektiv_Strahlung.Star, reducedModel.internalGainsRad)
-          annotation (Line(
-            points={{61.1,-90},{70,-90},{70,30},{78.09,30}},
+        connect(HeatTorStar.Star, reducedModel.internalGainsRad) annotation (
+            Line(
+            points={{61.1,-88},{78,-88},{78,30},{78.09,30}},
             color={95,95,95},
             pattern=LinePattern.None,
+            smooth=Smooth.None));
+        connect(infiltrationTemp.y, reducedModel.ventilationTemperature)
+          annotation (Line(
+            points={{26.5,19},{34,19},{34,36.4},{51.4,36.4}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(personsConvective.port, reducedModel.internalGainsConv)
+          annotation (Line(
+            points={{26,-60},{68.4,-60},{68.4,30}},
+            color={191,0,0},
+            smooth=Smooth.None));
+        connect(machinesConvective.port, reducedModel.internalGainsConv)
+          annotation (Line(
+            points={{26,-40},{68.4,-40},{68.4,30}},
+            color={191,0,0},
+            smooth=Smooth.None));
+        connect(innerLoads.y[3], machinesConvective.Q_flow) annotation (Line(
+            points={{-41,-60},{-22,-60},{-22,-40},{6,-40}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(innerLoads.y[2], personsConvective.Q_flow) annotation (Line(
+            points={{-41,-60},{6,-60}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(innerLoads.y[1], personsRadiative.Q_flow) annotation (Line(
+            points={{-41,-60},{-22,-60},{-22,-88},{6,-88}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(personsRadiative.port, HeatTorStar.Therm) annotation (Line(
+            points={{26,-88},{42.8,-88}},
+            color={191,0,0},
             smooth=Smooth.None));
         annotation (                  Diagram(coordinateSystem(preserveAspectRatio=false,
                          extent={{-100,-100},{100,100}}),
@@ -3073,16 +3129,14 @@ package LowOrder "Low Order Building Models"
 
       model TestCase_9
         extends Modelica.Icons.Example;
-        Modelica.Blocks.Sources.Constant const(k=273.15 + 22)
+
+        output Modelica.SIunits.Conversions.NonSIunits.Temperature_degC referenceTemp[1];
+        output Modelica.SIunits.Temp_K simulationTemp;
+
+        Modelica.Blocks.Sources.Constant infiltrationTemp(k=273.15 + 22)
           annotation (Placement(transformation(extent={{12,9},{26,23}})));
-        Modelica.Blocks.Sources.Constant const1(k=0)
+        Modelica.Blocks.Sources.Constant infiltrationRate(k=0)
           annotation (Placement(transformation(extent={{28,-10},{40,2}})));
-        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow persons_conv
-          annotation (Placement(transformation(extent={{66,-32},{86,-12}})));
-        Utilities.HeatTransfer.HeatToStar twoStar_RadEx(eps=1, A=2)
-          annotation (Placement(transformation(extent={{60,-75},{80,-55}})));
-        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow persons_rad
-          annotation (Placement(transformation(extent={{38,-73},{58,-53}})));
         Building.LowOrder.BaseClasses.SolarRadWeightedSum
           window_shortwave_rad_sum(n=4, weightfactors={0,0,7,7})
           annotation (Placement(transformation(extent={{6,62},{28,84}})));
@@ -3092,8 +3146,6 @@ package LowOrder "Low Order Building Models"
           wf_win={0,0,0.4048,0.4048},
           alphaowo=25)
           annotation (Placement(transformation(extent={{-20,0},{0,20}})));
-        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machines
-          annotation (Placement(transformation(extent={{38,-44},{58,-24}})));
         Components.Weather.Sunblind sunblind(Imax=100, gsunblind={1,1,0.15,
               0.15})
           annotation (Placement(transformation(extent={{-20,62},{0,82}})));
@@ -3119,83 +3171,75 @@ package LowOrder "Low Order Building Models"
             Placement(transformation(extent={{-58,63},{-38,83}})));
         Utilities.Sources.PrescribedSolarRad varRad1(n=4) annotation (
             Placement(transformation(extent={{-44,23},{-24,43}})));
-        Modelica.Blocks.Sources.CombiTimeTable sunbeambehindwindow(
+        Modelica.Blocks.Sources.CombiTimeTable windowRad(
           extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
           tableName="UserProfilesOffice",
           fileName="./Tables/J1615/UserProfilesOffice.txt",
           tableOnFile=false,
-          table=[0,0,0,0,0; 3600,0,0,0,0; 10800,0,0,0,0; 14400,0,0,0,0; 14400,0,0,17,
-              17; 18000,0,0,17,17; 18000,0,0,38,36; 21600,0,0,38,36; 21600,0,0,59,51;
-              25200,0,0,59,51; 25200,0,0,98,64; 28800,0,0,98,64; 28800,0,0,186,74;
-              32400,0,0,186,74; 32400,0,0,287,84; 36000,0,0,287,84; 36000,0,0,359,92;
-              39600,0,0,359,92; 39600,0,0,385,100; 43200,0,0,385,100; 43200,0,0,359,
-              180; 46800,0,0,359,180; 46800,0,0,287,344; 50400,0,0,287,344; 50400,0,0,
-              186,475; 54000,0,0,186,475; 54000,0,0,98,528; 57600,0,0,98,528; 57600,0,
-              0,59,492; 61200,0,0,59,492; 61200,0,0,38,359; 64800,0,0,38,359; 64800,0,
-              0,17,147; 68400,0,0,17,147; 68400,0,0,0,0; 72000,0,0,0,0; 82800,0,0,0,0;
+          table=[0,0,0,0,0; 3600,0,0,0,0; 10800,0,0,0,0; 14400,0,0,0,0; 14400,0,
+              0,17,17; 18000,0,0,17,17; 18000,0,0,38,36; 21600,0,0,38,36; 21600,
+              0,0,59,51; 25200,0,0,59,51; 25200,0,0,98,64; 28800,0,0,98,64;
+              28800,0,0,186,74; 32400,0,0,186,74; 32400,0,0,287,84; 36000,0,0,
+              287,84; 36000,0,0,359,92; 39600,0,0,359,92; 39600,0,0,385,100;
+              43200,0,0,385,100; 43200,0,0,359,180; 46800,0,0,359,180; 46800,0,
+              0,287,344; 50400,0,0,287,344; 50400,0,0,186,475; 54000,0,0,186,
+              475; 54000,0,0,98,528; 57600,0,0,98,528; 57600,0,0,59,492; 61200,
+              0,0,59,492; 61200,0,0,38,359; 64800,0,0,38,359; 64800,0,0,17,147;
+              68400,0,0,17,147; 68400,0,0,0,0; 72000,0,0,0,0; 82800,0,0,0,0;
               86400,0,0,0,0],
           columns={2,3,4,5})
           annotation (Placement(transformation(extent={{-88,66},{-74,80}})));
-        Modelica.Blocks.Sources.CombiTimeTable sunbeam(
+        Modelica.Blocks.Sources.CombiTimeTable wallRad(
           extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
           tableName="UserProfilesOffice",
           fileName="./Tables/J1615/UserProfilesOffice.txt",
           tableOnFile=false,
           columns={2,3,4,5},
-          table=[0,0,0,0,0; 3600,0,0,0,0; 10800,0,0,0,0; 14400,0,0,0,0; 14400,0,0,24,
-              23; 18000,0,0,24,23; 18000,0,0,58,53; 21600,0,0,58,53; 21600,0,0,91,77;
-              25200,0,0,91,77; 25200,0,0,203,97; 28800,0,0,203,97; 28800,0,0,348,114;
-              32400,0,0,348,114; 32400,0,0,472,131; 36000,0,0,472,131; 36000,0,0,553,
-              144; 39600,0,0,553,144; 39600,0,0,581,159; 43200,0,0,581,159; 43200,0,0,
-              553,372; 46800,0,0,553,372; 46800,0,0,472,557; 50400,0,0,472,557; 50400,
-              0,0,348,685; 54000,0,0,348,685; 54000,0,0,203,733; 57600,0,0,203,733;
-              57600,0,0,91,666; 61200,0,0,91,666; 61200,0,0,58,474; 64800,0,0,58,474;
-              64800,0,0,24,177; 68400,0,0,24,177; 68400,0,0,0,0; 72000,0,0,0,0; 82800,
-              0,0,0,0; 86400,0,0,0,0])
+          table=[0,0,0,0,0; 3600,0,0,0,0; 10800,0,0,0,0; 14400,0,0,0,0; 14400,0,
+              0,24,23; 18000,0,0,24,23; 18000,0,0,58,53; 21600,0,0,58,53; 21600,
+              0,0,91,77; 25200,0,0,91,77; 25200,0,0,203,97; 28800,0,0,203,97;
+              28800,0,0,348,114; 32400,0,0,348,114; 32400,0,0,472,131; 36000,0,
+              0,472,131; 36000,0,0,553,144; 39600,0,0,553,144; 39600,0,0,581,
+              159; 43200,0,0,581,159; 43200,0,0,553,372; 46800,0,0,553,372;
+              46800,0,0,472,557; 50400,0,0,472,557; 50400,0,0,348,685; 54000,0,
+              0,348,685; 54000,0,0,203,733; 57600,0,0,203,733; 57600,0,0,91,666;
+              61200,0,0,91,666; 61200,0,0,58,474; 64800,0,0,58,474; 64800,0,0,
+              24,177; 68400,0,0,24,177; 68400,0,0,0,0; 72000,0,0,0,0; 82800,0,0,
+              0,0; 86400,0,0,0,0])
           annotation (Placement(transformation(extent={{-88,26},{-74,40}})));
-        Modelica.Blocks.Sources.CombiTimeTable weather(
+        Modelica.Blocks.Sources.CombiTimeTable outdoorTemp(
           extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
           tableName="UserProfilesOffice",
           fileName="./Tables/J1615/UserProfilesOffice.txt",
           tableOnFile=false,
-          table=[0,0,0,0,18.8,0,0,0,343,-382,0; 0.36,0,0,0,18.8,0,0,0,343,-382,0;
-              3600,0,0,0,17.1,0,0,0,344,-384,0; 7200,0,0,0,17.1,0,0,0,344,-384,0;
-              7200,0,0,0,16.5,0,0,0,345,-384,0; 10800,0,0,0,16.5,0,0,0,345,-384,0;
-              10800,0,0,0,16.1,0,0,0,347,-381,0; 14400,0,0,0,16.1,0,0,0,347,-381,0;
-              14400,0,0,0,16.5,0,0,0,355,-406,0; 18000,0,0,0,16.5,0,0,0,355,-406,0;
-              18000,0,0,0,17.8,0,0,0,359,-422,0; 21600,0,0,0,17.8,0,0,0,359,-422,0;
-              21600,0,0,0,20.3,0,0,0,353,-448,0; 25200,0,0,0,20.3,0,0,0,353,-448,0;
-              25200,0,0,0,22.8,0,0,0,356,-472,0; 28800,0,0,0,22.8,0,0,0,356,-472,0;
-              28800,0,0,0,24.8,0,0,0,356,-499,0; 32400,0,0,0,24.8,0,0,0,356,-499,0;
-              32400,0,0,0,26.7,0,0,0,359,-519,0; 36000,0,0,0,26.7,0,0,0,359,-519,0;
-              36000,0,0,0,28.1,0,0,0,360,-537,0; 39600,0,0,0,28.1,0,0,0,360,-537,0;
-              39600,0,0,0,29,0,0,0,361,-553,0; 43200,0,0,0,29,0,0,0,361,-553,0; 43200,
-              0,0,0,29.7,0,0,0,367,-552,0; 46800,0,0,0,29.7,0,0,0,367,-552,0; 46800,0,
-              0,0,30.4,0,0,0,370,-550,0; 50400,0,0,0,30.4,0,0,0,370,-550,0; 50400,0,0,
-              0,30.9,0,0,0,371,-544,0; 54000,0,0,0,30.9,0,0,0,371,-544,0; 54000,0,0,0,
-              31,0,0,0,372,-533,0; 57600,0,0,0,31,0,0,0,372,-533,0; 57600,0,0,0,30.8,
-              0,0,0,371,-519,0; 61200,0,0,0,30.8,0,0,0,371,-519,0; 61200,0,0,0,30.1,0,
-              0,0,382,-495,0; 64800,0,0,0,30.1,0,0,0,382,-495,0; 64800,0,0,0,28.9,0,0,
-              0,400,-474,0; 68400,0,0,0,28.9,0,0,0,400,-474,0; 68400,0,0,0,27,0,0,0,
-              395,-445,0; 72000,0,0,0,27,0,0,0,395,-445,0; 72000,0,0,0,24.7,0,0,0,389,
-              -436,0; 75600,0,0,0,24.7,0,0,0,389,-436,0; 75600,0,0,0,22.9,0,0,0,383,-427,
-              0; 79200,0,0,0,22.9,0,0,0,383,-427,0; 79200,0,0,0,21.9,0,0,0,377,-418,0;
-              82800,0,0,0,21.9,0,0,0,377,-418,0; 82800,0,0,0,20.9,0,0,0,372,-408,0;
-              86400,0,0,0,20.9,0,0,0,372,-408,0],
+          table=[0,0,0,0,18.8,0,0,0,343,-382,0; 0.36,0,0,0,18.8,0,0,0,343,-382,
+              0; 3600,0,0,0,17.1,0,0,0,344,-384,0; 7200,0,0,0,17.1,0,0,0,344,-384,
+              0; 7200,0,0,0,16.5,0,0,0,345,-384,0; 10800,0,0,0,16.5,0,0,0,345,-384,
+              0; 10800,0,0,0,16.1,0,0,0,347,-381,0; 14400,0,0,0,16.1,0,0,0,347,
+              -381,0; 14400,0,0,0,16.5,0,0,0,355,-406,0; 18000,0,0,0,16.5,0,0,0,
+              355,-406,0; 18000,0,0,0,17.8,0,0,0,359,-422,0; 21600,0,0,0,17.8,0,
+              0,0,359,-422,0; 21600,0,0,0,20.3,0,0,0,353,-448,0; 25200,0,0,0,
+              20.3,0,0,0,353,-448,0; 25200,0,0,0,22.8,0,0,0,356,-472,0; 28800,0,
+              0,0,22.8,0,0,0,356,-472,0; 28800,0,0,0,24.8,0,0,0,356,-499,0;
+              32400,0,0,0,24.8,0,0,0,356,-499,0; 32400,0,0,0,26.7,0,0,0,359,-519,
+              0; 36000,0,0,0,26.7,0,0,0,359,-519,0; 36000,0,0,0,28.1,0,0,0,360,
+              -537,0; 39600,0,0,0,28.1,0,0,0,360,-537,0; 39600,0,0,0,29,0,0,0,
+              361,-553,0; 43200,0,0,0,29,0,0,0,361,-553,0; 43200,0,0,0,29.7,0,0,
+              0,367,-552,0; 46800,0,0,0,29.7,0,0,0,367,-552,0; 46800,0,0,0,30.4,
+              0,0,0,370,-550,0; 50400,0,0,0,30.4,0,0,0,370,-550,0; 50400,0,0,0,
+              30.9,0,0,0,371,-544,0; 54000,0,0,0,30.9,0,0,0,371,-544,0; 54000,0,
+              0,0,31,0,0,0,372,-533,0; 57600,0,0,0,31,0,0,0,372,-533,0; 57600,0,
+              0,0,30.8,0,0,0,371,-519,0; 61200,0,0,0,30.8,0,0,0,371,-519,0;
+              61200,0,0,0,30.1,0,0,0,382,-495,0; 64800,0,0,0,30.1,0,0,0,382,-495,
+              0; 64800,0,0,0,28.9,0,0,0,400,-474,0; 68400,0,0,0,28.9,0,0,0,400,
+              -474,0; 68400,0,0,0,27,0,0,0,395,-445,0; 72000,0,0,0,27,0,0,0,395,
+              -445,0; 72000,0,0,0,24.7,0,0,0,389,-436,0; 75600,0,0,0,24.7,0,0,0,
+              389,-436,0; 75600,0,0,0,22.9,0,0,0,383,-427,0; 79200,0,0,0,22.9,0,
+              0,0,383,-427,0; 79200,0,0,0,21.9,0,0,0,377,-418,0; 82800,0,0,0,
+              21.9,0,0,0,377,-418,0; 82800,0,0,0,20.9,0,0,0,372,-408,0; 86400,0,
+              0,0,20.9,0,0,0,372,-408,0],
           columns={5,9,10})
           annotation (Placement(transformation(extent={{-88,3},{-74,17}})));
-        Modelica.Blocks.Sources.CombiTimeTable innerloads(
-          extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-          tableName="UserProfilesOffice",
-          fileName="./Tables/J1615/UserProfilesOffice.txt",
-          tableOnFile=false,
-          table=[0,0,0; 3600,0,0; 7200,0,0; 10800,0,0; 14400,0,0; 18000,0,0; 21600,0,
-              0; 25200,0,0; 25200,160,200; 28800,160,200; 32400,160,200; 36000,160,
-              200; 39600,160,200; 43200,160,200; 46800,160,200; 50400,160,200; 54000,
-              160,200; 57600,160,200; 61200,160,200; 61200,0,0; 64800,0,0; 68400,0,0;
-              72000,0,0; 75600,0,0; 79200,0,0; 82800,0,0; 86400,0,0],
-          columns={2,3})
-          annotation (Placement(transformation(extent={{-8,-59},{6,-45}})));
         Modelica.Blocks.Routing.DeMultiplex3 deMultiplex3_1
           annotation (Placement(transformation(extent={{-68,4},{-56,16}})));
         Modelica.Blocks.Math.UnitConversions.From_degC from_degC
@@ -3223,11 +3267,29 @@ package LowOrder "Low Order Building Models"
               5158800,44.1; 5162400,42.3; 5166000,42; 5169600,41.6; 5173200,41.5;
               5176800,41.3; 5180400,41.2; 5184000,41])
           annotation (Placement(transformation(extent={{80,80},{100,99}})));
+        Utilities.HeatTransfer.HeatToStar HeatTorStar(A=2)
+          annotation (Placement(transformation(extent={{38,-96},{58,-76}})));
+        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machinesConvective
+          annotation (Placement(transformation(extent={{2,-48},{22,-28}})));
+        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow personsConvective
+          annotation (Placement(transformation(extent={{2,-68},{22,-48}})));
+        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow personsRadiative
+          annotation (Placement(transformation(extent={{2,-96},{22,-76}})));
+        Modelica.Blocks.Sources.CombiTimeTable innerLoads(
+          extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+          tableOnFile=false,
+          table=[0,0,0,0; 3600,0,0,0; 7200,0,0,0; 10800,0,0,0; 14400,0,0,0; 18000,0,0,
+              0; 21600,0,0,0; 25200,0,0,0; 25200,80,80,200; 28800,80,80,200; 32400,80,
+              80,200; 36000,80,80,200; 39600,80,80,200; 43200,80,80,200; 46800,80,80,200;
+              50400,80,80,200; 54000,80,80,200; 57600,80,80,200; 61200,80,80,200; 61200,
+              0,0,0; 64800,0,0,0; 72000,0,0,0; 75600,0,0,0; 79200,0,0,0; 82800,0,0,0;
+              86400,0,0,0],
+          columns={2,3,4})
+          annotation (Placement(transformation(extent={{-66,-68},{-46,-48}})));
       equation
-        connect(persons_rad.port, twoStar_RadEx.Therm) annotation (Line(
-            points={{58,-63},{58,-66},{60.8,-66},{60.8,-65}},
-            color={191,0,0},
-            smooth=Smooth.None));
+       referenceTemp = reference.y;
+        simulationTemp = reducedModel.airload.port.T;
+
         connect(sunblind.sunblindonoff, eqAirTemp.sunblindsig)  annotation (Line(
             points={{-10,63},{-10,18}},
             color={0,0,127},
@@ -3237,27 +3299,15 @@ package LowOrder "Low Order Building Models"
             color={255,128,0},
             smooth=Smooth.None));
 
-        connect(sunbeambehindwindow.y, varRad3.u) annotation (Line(
+        connect(windowRad.y, varRad3.u) annotation (Line(
             points={{-73.3,73},{-58,73}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(sunbeam.y, varRad1.u) annotation (Line(
+        connect(wallRad.y, varRad1.u) annotation (Line(
             points={{-73.3,33},{-44,33}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(innerloads.y[2],machines.Q_flow)  annotation (Line(
-            points={{6.7,-52},{22,-52},{22,-34},{38,-34}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(innerloads.y[1],persons_rad.Q_flow)  annotation (Line(
-            points={{6.7,-52},{22,-52},{22,-63},{38,-63}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(innerloads.y[1],persons_conv.Q_flow)  annotation (Line(
-            points={{6.7,-52},{60,-52},{60,-22},{66,-22}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(weather.y, deMultiplex3_1.u) annotation (Line(
+        connect(outdoorTemp.y, deMultiplex3_1.u) annotation (Line(
             points={{-73.3,10},{-69.2,10}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -3287,33 +3337,19 @@ package LowOrder "Low Order Building Models"
             points={{-2,10},{8,10},{8,27.76},{42.2,27.76}},
             color={191,0,0},
             smooth=Smooth.None));
-        connect(const.y, reducedModel.ventilationTemperature) annotation (Line(
+        connect(infiltrationTemp.y, reducedModel.ventilationTemperature)
+          annotation (Line(
             points={{26.7,16},{32,16},{32,17.88},{42.2,17.88}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(const1.y, reducedModel.ventilationRate) annotation (Line(
+        connect(infiltrationRate.y, reducedModel.ventilationRate) annotation (
+            Line(
             points={{40.6,-4},{48,-4},{48,11.8},{50.6,11.8}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(persons_conv.port, reducedModel.internalGainsConv) annotation (
-            Line(
-            points={{86,-22},{64,-22},{64,11.8},{63.2,11.8}},
-            color={191,0,0},
-            smooth=Smooth.None));
-        connect(machines.port, reducedModel.internalGainsConv) annotation (Line(
-            points={{58,-34},{36,-34},{36,-34},{34,-34},{34,-14},{64,-14},{64,
-                11.8},{63.2,11.8}},
-            color={191,0,0},
-            smooth=Smooth.None));
-        connect(twoStar_RadEx.Star, reducedModel.internalGainsRad) annotation (
-            Line(
-            points={{79.1,-65},{102,-65},{102,-4},{75.17,-4},{75.17,11.8}},
-            color={95,95,95},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
         connect(sunblind.Rad_Out, window_shortwave_rad_sum.solarRad_in)
           annotation (Line(
-            points={{-1,73},{3.5,73},{3.5,73},{7.1,73}},
+            points={{-1,73},{7.1,73}},
             color={255,128,0},
             smooth=Smooth.None));
         connect(varRad1.solarRad_out, eqAirTemp.solarRad_in) annotation (Line(
@@ -3323,6 +3359,38 @@ package LowOrder "Low Order Building Models"
         connect(multiplex3_1.y, eqAirTemp.weatherData) annotation (Line(
             points={{-24.4,10},{-18,10}},
             color={0,0,127},
+            smooth=Smooth.None));
+        connect(HeatTorStar.Star, reducedModel.internalGainsRad) annotation (
+            Line(
+            points={{57.1,-86},{74,-86},{74,11.8},{75.17,11.8}},
+            color={95,95,95},
+            pattern=LinePattern.None,
+            smooth=Smooth.None));
+        connect(personsConvective.port, reducedModel.internalGainsConv)
+          annotation (Line(
+            points={{22,-58},{63.2,-58},{63.2,11.8}},
+            color={191,0,0},
+            smooth=Smooth.None));
+        connect(machinesConvective.port, reducedModel.internalGainsConv)
+          annotation (Line(
+            points={{22,-38},{63.2,-38},{63.2,11.8}},
+            color={191,0,0},
+            smooth=Smooth.None));
+        connect(innerLoads.y[3], machinesConvective.Q_flow) annotation (Line(
+            points={{-45,-58},{-26,-58},{-26,-38},{2,-38}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(innerLoads.y[2], personsConvective.Q_flow) annotation (Line(
+            points={{-45,-58},{2,-58}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(innerLoads.y[1], personsRadiative.Q_flow) annotation (Line(
+            points={{-45,-58},{-26,-58},{-26,-86},{2,-86}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(personsRadiative.port, HeatTorStar.Therm) annotation (Line(
+            points={{22,-86},{38.8,-86}},
+            color={191,0,0},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}),
@@ -3347,83 +3415,68 @@ package LowOrder "Low Order Building Models"
       model TestCase_10
         extends Modelica.Icons.Example;
 
-        Modelica.Blocks.Sources.Constant Infiltration(k=0)
-          annotation (Placement(transformation(extent={{40,6},{50,16}})));
-        Modelica.Blocks.Sources.Constant Temperatur_Infiltration(k=22)
-          annotation (Placement(transformation(extent={{16,6},{26,16}})));
-        Utilities.HeatTransfer.HeatToStar Konvektiv_Strahlung(A=2)
-          annotation (Placement(transformation(extent={{52,-90},{72,-70}})));
-        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
-          Maschinen_Konvektion
-          annotation (Placement(transformation(extent={{50,-40},{70,-20}})));
-        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
-          Personen_Konvektion
-          annotation (Placement(transformation(extent={{20,-62},{40,-42}})));
-        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
-          Personen_Strahlung
-          annotation (Placement(transformation(extent={{20,-88},{40,-68}})));
-        Modelica.Blocks.Sources.CombiTimeTable Innere_Lasten(
+        output Modelica.SIunits.Conversions.NonSIunits.Temperature_degC referenceTemp[1];
+        output Modelica.SIunits.Temp_K simulationTemp;
+
+        Modelica.Blocks.Sources.Constant infiltrationRate(k=0)
+          annotation (Placement(transformation(extent={{40,0},{50,10}})));
+        Modelica.Blocks.Sources.Constant infiltrationTemp(k=22)
+          annotation (Placement(transformation(extent={{16,0},{26,10}})));
+        Modelica.Blocks.Sources.CombiTimeTable windowRad(
           extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-          tableOnFile=false,
-          table=[0,0,0; 3600,0,0; 7200,0,0; 10800,0,0; 14400,0,0; 18000,0,0; 21600,0,
-              0; 25200,0,0; 25200,160,200; 28800,160,200; 32400,160,200; 36000,160,
-              200; 39600,160,200; 43200,160,200; 46800,160,200; 50400,160,200; 54000,
-              160,200; 57600,160,200; 61200,160,200; 61200,0,0; 64800,0,0; 72000,0,0;
-              75600,0,0; 79200,0,0; 82800,0,0; 86400,0,0])
-          annotation (Placement(transformation(extent={{-48,-70},{-28,-50}})));
-        Modelica.Blocks.Sources.CombiTimeTable Strahlung_Fenster(
-          extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-          table=[0,0,0,0,0,0.0; 3600,0,0,0,0,0.0; 10800,0,0,0,0,0.0; 14400,0,0,0,0,
-              0.0; 14400,0,0,17,0,0.0; 18000,0,0,17,0,0.0; 18000,0,0,38,0,0.0;
-              21600,0,0,38,0,0.0; 21600,0,0,59,0,0.0; 25200,0,0,59,0,0.0; 25200,0,0,
-              98,0,0.0; 28800,0,0,98,0,0.0; 28800,0,0,186,0,0.0; 32400,0,0,186,0,
-              0.0; 32400,0,0,287,0,0.0; 36000,0,0,287,0,0.0; 36000,0,0,359,0,0.0;
-              39600,0,0,359,0,0.0; 39600,0,0,385,0,0.0; 43200,0,0,385,0,0.0; 43200,
-              0,0,359,0,0.0; 46800,0,0,359,0,0.0; 46800,0,0,287,0,0.0; 50400,0,0,
-              287,0,0.0; 50400,0,0,186,0,0.0; 54000,0,0,186,0,0.0; 54000,0,0,98,0,
-              0.0; 57600,0,0,98,0,0.0; 57600,0,0,59,0,0.0; 61200,0,0,59,0,0.0;
-              61200,0,0,38,0,0.0; 64800,0,0,38,0,0.0; 64800,0,0,17,0,0.0; 68400,0,0,
-              17,0,0.0; 68400,0,0,0,0,0.0; 72000,0,0,0,0,0.0; 82800,0,0,0,0,0.0;
-              86400,0,0,0,0,0.0],
+          table=[0,0,0,0,0,0.0; 3600,0,0,0,0,0.0; 10800,0,0,0,0,0.0; 14400,0,0,
+              0,0,0.0; 14400,0,0,17,0,0.0; 18000,0,0,17,0,0.0; 18000,0,0,38,0,
+              0.0; 21600,0,0,38,0,0.0; 21600,0,0,59,0,0.0; 25200,0,0,59,0,0.0;
+              25200,0,0,98,0,0.0; 28800,0,0,98,0,0.0; 28800,0,0,186,0,0.0;
+              32400,0,0,186,0,0.0; 32400,0,0,287,0,0.0; 36000,0,0,287,0,0.0;
+              36000,0,0,359,0,0.0; 39600,0,0,359,0,0.0; 39600,0,0,385,0,0.0;
+              43200,0,0,385,0,0.0; 43200,0,0,359,0,0.0; 46800,0,0,359,0,0.0;
+              46800,0,0,287,0,0.0; 50400,0,0,287,0,0.0; 50400,0,0,186,0,0.0;
+              54000,0,0,186,0,0.0; 54000,0,0,98,0,0.0; 57600,0,0,98,0,0.0;
+              57600,0,0,59,0,0.0; 61200,0,0,59,0,0.0; 61200,0,0,38,0,0.0; 64800,
+              0,0,38,0,0.0; 64800,0,0,17,0,0.0; 68400,0,0,17,0,0.0; 68400,0,0,0,
+              0,0.0; 72000,0,0,0,0,0.0; 82800,0,0,0,0,0.0; 86400,0,0,0,0,0.0],
           columns={2,3,4,5,6})
-          annotation (Placement(transformation(extent={{-86,78},{-66,98}})));
+          annotation (Placement(transformation(extent={{-86,72},{-66,92}})));
         Utilities.Sources.PrescribedSolarRad Quelle_Fenster(n=5)
-          annotation (Placement(transformation(extent={{-50,78},{-30,98}})));
+          annotation (Placement(transformation(extent={{-50,72},{-30,92}})));
         Components.Weather.Sunblind sunblind(n=5, gsunblind={0,0,0.15,0,0})
-          annotation (Placement(transformation(extent={{-20,77},{0,97}})));
+          annotation (Placement(transformation(extent={{-20,71},{0,91}})));
         Building.LowOrder.BaseClasses.SolarRadWeightedSum rad_weighted_sum(
             n=5, weightfactors={0,0,7,0,0})
-          annotation (Placement(transformation(extent={{8,78},{28,98}})));
+          annotation (Placement(transformation(extent={{8,72},{28,92}})));
         BaseClasses.EqAirTemp eqAirTemp_TestCase_8_1(
           alphaowo=25,
           wf_ground=0.629038674,
           n=5,
           wf_wall={0.000000000,0.000000000,0.046454666,0.000000000,0.0},
           wf_win={0.000000000,0.000000000,0.324506660,0.000000000,0.0},
-          T_ground=288.15) annotation (Placement(transformation(extent={{-36,
-                  36},{-16,56}})));
+          T_ground=288.15) annotation (Placement(transformation(extent={{-36,30},
+                  {-16,50}})));
         Utilities.Sources.PrescribedSolarRad Quelle_Wand(n=5) annotation (
-            Placement(transformation(extent={{-80,50},{-60,70}})));
-        Modelica.Blocks.Sources.CombiTimeTable Temperaturverlauf(
+            Placement(transformation(extent={{-58,44},{-38,64}})));
+        Modelica.Blocks.Sources.CombiTimeTable outdoorTemp(
           extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
           columns={2,3,4},
-          table=[0,291.95,0,0; 3600,291.95,0,0; 3600,290.25,0,0; 7200,290.25,0,0;
-              7200,289.65,0,0; 10800,289.65,0,0; 10800,289.25,0,0; 14400,289.25,0,0;
-              14400,289.65,0,0; 18000,289.65,0,0; 18000,290.95,0,0; 21600,290.95,0,0;
-              21600,293.45,0,0; 25200,293.45,0,0; 25200,295.95,0,0; 28800,295.95,0,0;
-              28800,297.95,0,0; 32400,297.95,0,0; 32400,299.85,0,0; 36000,299.85,0,0;
-              36000,301.25,0,0; 39600,301.25,0,0; 39600,302.15,0,0; 43200,302.15,0,0;
-              43200,302.85,0,0; 46800,302.85,0,0; 46800,303.55,0,0; 50400,303.55,0,0;
-              50400,304.05,0,0; 54000,304.05,0,0; 54000,304.15,0,0; 57600,304.15,0,0;
-              57600,303.95,0,0; 61200,303.95,0,0; 61200,303.25,0,0; 64800,303.25,0,0;
-              64800,302.05,0,0; 68400,302.05,0,0; 68400,300.15,0,0; 72000,300.15,0,0;
-              72000,297.85,0,0; 75600,297.85,0,0; 75600,296.05,0,0; 79200,296.05,0,0;
-              79200,295.05,0,0; 82800,295.05,0,0; 82800,294.05,0,0; 86400,294.05,0,0])
-          annotation (Placement(transformation(extent={{-100,20},{-80,40}})));
-        Modelica.Blocks.Sources.Constant Strahlung_Wand(k=0)
-          annotation (Placement(transformation(extent={{-146,54},{-136,64}})));
+          table=[0,291.95,0,0; 3600,291.95,0,0; 3600,290.25,0,0; 7200,290.25,0,
+              0; 7200,289.65,0,0; 10800,289.65,0,0; 10800,289.25,0,0; 14400,
+              289.25,0,0; 14400,289.65,0,0; 18000,289.65,0,0; 18000,290.95,0,0;
+              21600,290.95,0,0; 21600,293.45,0,0; 25200,293.45,0,0; 25200,
+              295.95,0,0; 28800,295.95,0,0; 28800,297.95,0,0; 32400,297.95,0,0;
+              32400,299.85,0,0; 36000,299.85,0,0; 36000,301.25,0,0; 39600,
+              301.25,0,0; 39600,302.15,0,0; 43200,302.15,0,0; 43200,302.85,0,0;
+              46800,302.85,0,0; 46800,303.55,0,0; 50400,303.55,0,0; 50400,
+              304.05,0,0; 54000,304.05,0,0; 54000,304.15,0,0; 57600,304.15,0,0;
+              57600,303.95,0,0; 61200,303.95,0,0; 61200,303.25,0,0; 64800,
+              303.25,0,0; 64800,302.05,0,0; 68400,302.05,0,0; 68400,300.15,0,0;
+              72000,300.15,0,0; 72000,297.85,0,0; 75600,297.85,0,0; 75600,
+              296.05,0,0; 79200,296.05,0,0; 79200,295.05,0,0; 82800,295.05,0,0;
+              82800,294.05,0,0; 86400,294.05,0,0])
+          annotation (Placement(transformation(extent={{-100,12},{-80,32}})));
+        Modelica.Blocks.Sources.Constant wallRad(k=0)
+          annotation (Placement(transformation(extent={{-126,50},{-116,60}})));
         Modelica.Blocks.Routing.Multiplex5 multiplex5_1
-          annotation (Placement(transformation(extent={{-110,50},{-90,70}})));
+          annotation (Placement(transformation(extent={{-84,44},{-64,64}})));
         Building.LowOrder.BaseClasses.ReducedOrderModel reducedModel(
           R1i=0.000779672,
           C1i=1.23140e+07,
@@ -3441,7 +3494,7 @@ package LowOrder "Low Order Building Models"
           epso=1,
           g=1,
           T0all=290.75)
-          annotation (Placement(transformation(extent={{50,48},{98,98}})));
+          annotation (Placement(transformation(extent={{50,42},{98,92}})));
         Modelica.Blocks.Sources.CombiTimeTable reference(
           tableName="UserProfilesOffice",
           fileName="./Tables/J1615/UserProfilesOffice.txt",
@@ -3462,111 +3515,133 @@ package LowOrder "Low Order Building Models"
               5155200,28.1; 5158800,28; 5162400,26.3; 5166000,26.1; 5169600,26;
               5173200,25.9; 5176800,25.8; 5180400,25.7; 5184000,25.6],
           extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
-          annotation (Placement(transformation(extent={{-98,-20},{-78,-1}})));
+          annotation (Placement(transformation(extent={{-98,-26},{-78,-7}})));
+        Utilities.HeatTransfer.HeatToStar HeatTorStar(A=2)
+          annotation (Placement(transformation(extent={{56,-100},{76,-80}})));
+        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machinesConvective
+          annotation (Placement(transformation(extent={{20,-52},{40,-32}})));
+        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow personsConvective
+          annotation (Placement(transformation(extent={{20,-72},{40,-52}})));
+        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow personsRadiative
+          annotation (Placement(transformation(extent={{20,-100},{40,-80}})));
+        Modelica.Blocks.Sources.CombiTimeTable innerLoads(
+          extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+          tableOnFile=false,
+          table=[0,0,0,0; 3600,0,0,0; 7200,0,0,0; 10800,0,0,0; 14400,0,0,0; 18000,0,0,
+              0; 21600,0,0,0; 25200,0,0,0; 25200,80,80,200; 28800,80,80,200; 32400,80,
+              80,200; 36000,80,80,200; 39600,80,80,200; 43200,80,80,200; 46800,80,80,200;
+              50400,80,80,200; 54000,80,80,200; 57600,80,80,200; 61200,80,80,200; 61200,
+              0,0,0; 64800,0,0,0; 72000,0,0,0; 75600,0,0,0; 79200,0,0,0; 82800,0,0,0;
+              86400,0,0,0],
+          columns={2,3,4})
+          annotation (Placement(transformation(extent={{-48,-72},{-28,-52}})));
       equation
-        connect(Personen_Strahlung.port, Konvektiv_Strahlung.Therm) annotation (
-           Line(
-            points={{40,-78},{46,-78},{46,-80},{52.8,-80}},
-            color={191,0,0},
-            smooth=Smooth.None));
-        connect(Innere_Lasten.y[1],Personen_Konvektion.Q_flow)  annotation (Line(
-            points={{-27,-60},{-4,-60},{-4,-52},{20,-52}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(Innere_Lasten.y[1],Personen_Strahlung.Q_flow)  annotation (Line(
-            points={{-27,-60},{-4,-60},{-4,-78},{20,-78}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(Innere_Lasten.y[2],Maschinen_Konvektion.Q_flow)  annotation (Line(
-            points={{-27,-60},{-4,-60},{-4,-30},{50,-30}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(Strahlung_Fenster.y,Quelle_Fenster. u) annotation (Line(
-            points={{-65,88},{-50,88}},
+        referenceTemp = reference.y;
+        simulationTemp = reducedModel.airload.port.T;
+
+        connect(windowRad.y, Quelle_Fenster.u) annotation (Line(
+            points={{-65,82},{-50,82}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(Quelle_Fenster.solarRad_out,sunblind. Rad_In) annotation (Line(
-            points={{-31,88},{-19,88}},
+            points={{-31,82},{-19,82}},
             color={255,128,0},
             smooth=Smooth.None));
         connect(multiplex5_1.y, Quelle_Wand.u) annotation (Line(
-            points={{-89,60},{-80,60}},
+            points={{-63,54},{-58,54}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(Strahlung_Wand.y, multiplex5_1.u1[1]) annotation (Line(
-            points={{-135.5,59},{-124,59},{-124,70},{-112,70}},
+        connect(wallRad.y, multiplex5_1.u1[1]) annotation (Line(
+            points={{-115.5,55},{-104,55},{-104,64},{-86,64}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(Strahlung_Wand.y, multiplex5_1.u2[1]) annotation (Line(
-            points={{-135.5,59},{-124,59},{-124,65},{-112,65}},
+        connect(wallRad.y, multiplex5_1.u2[1]) annotation (Line(
+            points={{-115.5,55},{-104,55},{-104,59},{-86,59}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(Strahlung_Wand.y, multiplex5_1.u3[1]) annotation (Line(
-            points={{-135.5,59},{-124,59},{-124,60},{-112,60}},
+        connect(wallRad.y, multiplex5_1.u3[1]) annotation (Line(
+            points={{-115.5,55},{-104,55},{-104,54},{-86,54}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(Strahlung_Wand.y, multiplex5_1.u4[1]) annotation (Line(
-            points={{-135.5,59},{-124,59},{-124,55},{-112,55}},
+        connect(wallRad.y, multiplex5_1.u4[1]) annotation (Line(
+            points={{-115.5,55},{-104,55},{-104,49},{-86,49}},
             color={0,0,127},
             smooth=Smooth.None));
 
         connect(sunblind.sunblindonoff, eqAirTemp_TestCase_8_1.sunblindsig)
           annotation (Line(
-            points={{-10,78},{-10,66},{-26,66},{-26,54}},
+            points={{-10,72},{-10,60},{-26,60},{-26,48}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(Temperatur_Infiltration.y, reducedModel.ventilationTemperature)
+        connect(infiltrationTemp.y, reducedModel.ventilationTemperature)
           annotation (Line(
-            points={{26.5,11},{34,11},{34,61},{54.8,61}},
+            points={{26.5,5},{34,5},{34,55},{54.8,55}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(Infiltration.y, reducedModel.ventilationRate) annotation (Line(
-            points={{50.5,11},{64.4,11},{64.4,53}},
+        connect(infiltrationRate.y, reducedModel.ventilationRate) annotation (
+            Line(
+            points={{50.5,5},{64.4,5},{64.4,47}},
             color={0,0,127},
-            smooth=Smooth.None));
-        connect(Maschinen_Konvektion.port, reducedModel.internalGainsConv)
-          annotation (Line(
-            points={{70,-30},{40,-30},{40,-6},{78.8,-6},{78.8,53}},
-            color={191,0,0},
-            smooth=Smooth.None));
-        connect(Personen_Konvektion.port, reducedModel.internalGainsConv)
-          annotation (Line(
-            points={{40,-52},{8,-52},{8,-6},{78.8,-6},{78.8,53}},
-            color={191,0,0},
-            smooth=Smooth.None));
-        connect(Konvektiv_Strahlung.Star, reducedModel.internalGainsRad)
-          annotation (Line(
-            points={{71.1,-80},{92.48,-80},{92.48,53}},
-            color={95,95,95},
-            pattern=LinePattern.None,
             smooth=Smooth.None));
         connect(rad_weighted_sum.solarRad_out, reducedModel.solarRad_in)
           annotation (Line(
-            points={{27,88},{42,88},{42,86.5},{54.56,86.5}},
+            points={{27,82},{42,82},{42,80.5},{54.56,80.5}},
             color={255,128,0},
             smooth=Smooth.None));
         connect(sunblind.Rad_Out, rad_weighted_sum.solarRad_in) annotation (Line(
-            points={{-1,88},{9,88}},
+            points={{-1,82},{9,82}},
             color={255,128,0},
             smooth=Smooth.None));
         connect(eqAirTemp_TestCase_8_1.equalAirTemp, reducedModel.equalAirTemp)
           annotation (Line(
-            points={{-18,46},{-2,46},{-2,42},{18,42},{18,74},{54.8,74}},
+            points={{-18,40},{-2,40},{-2,36},{18,36},{18,68},{54.8,68}},
             color={191,0,0},
             smooth=Smooth.None));
-        connect(Temperaturverlauf.y, eqAirTemp_TestCase_8_1.weatherData)
-          annotation (Line(
-            points={{-79,30},{-34,30},{-34,46}},
+        connect(outdoorTemp.y, eqAirTemp_TestCase_8_1.weatherData) annotation (
+            Line(
+            points={{-79,22},{-34,22},{-34,40}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(Quelle_Wand.solarRad_out, eqAirTemp_TestCase_8_1.solarRad_in)
           annotation (Line(
-            points={{-61,60},{-48,60},{-48,51.6},{-34.5,51.6}},
+            points={{-39,54},{-38,54},{-38,45.6},{-34.5,45.6}},
             color={255,128,0},
             smooth=Smooth.None));
-        connect(Strahlung_Wand.y, multiplex5_1.u5[1]) annotation (Line(
-            points={{-135.5,59},{-124.75,59},{-124.75,50},{-112,50}},
+        connect(wallRad.y, multiplex5_1.u5[1]) annotation (Line(
+            points={{-115.5,55},{-104.75,55},{-104.75,44},{-86,44}},
             color={0,0,127},
+            smooth=Smooth.None));
+        connect(HeatTorStar.Star, reducedModel.internalGainsRad) annotation (
+            Line(
+            points={{75.1,-90},{92,-90},{92,47},{92.48,47}},
+            color={95,95,95},
+            pattern=LinePattern.None,
+            smooth=Smooth.None));
+        connect(personsConvective.port, reducedModel.internalGainsConv)
+          annotation (Line(
+            points={{40,-62},{78.8,-62},{78.8,47}},
+            color={191,0,0},
+            smooth=Smooth.None));
+        connect(machinesConvective.port, reducedModel.internalGainsConv)
+          annotation (Line(
+            points={{40,-42},{78.8,-42},{78.8,47}},
+            color={191,0,0},
+            smooth=Smooth.None));
+        connect(innerLoads.y[3], machinesConvective.Q_flow) annotation (Line(
+            points={{-27,-62},{-8,-62},{-8,-42},{20,-42}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(innerLoads.y[2], personsConvective.Q_flow) annotation (Line(
+            points={{-27,-62},{20,-62}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(innerLoads.y[1], personsRadiative.Q_flow) annotation (Line(
+            points={{-27,-62},{-8,-62},{-8,-90},{20,-90}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(personsRadiative.port, HeatTorStar.Therm) annotation (Line(
+            points={{40,-90},{56.8,-90}},
+            color={191,0,0},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}),
@@ -3590,18 +3665,19 @@ package LowOrder "Low Order Building Models"
       model TestCase_11
         extends Modelica.Icons.Example;
 
-        Modelica.Blocks.Sources.Constant Infiltration(k=0)
+        output Real referenceLoad[1];
+        output Real simulationLoad;
+
+        Modelica.Blocks.Sources.Constant infiltrationRate(k=0)
           annotation (Placement(transformation(extent={{40,6},{50,16}})));
-        Modelica.Blocks.Sources.Constant Temperatur_Infiltration(k=22)
-          annotation (Placement(transformation(extent={{16,6},{26,16}})));
+        Modelica.Blocks.Sources.Constant infiltrationTemp(k=22)
+          annotation (Placement(transformation(extent={{16,26},{26,36}})));
         Utilities.HeatTransfer.HeatToStar Konvektiv_Strahlung(A=2)
           annotation (Placement(transformation(extent={{50,-92},{70,-72}})));
-        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
-          Maschinen_Strahlung
-          annotation (Placement(transformation(extent={{6,-90},{32,-68}})));
-        Modelica.Thermal.HeatTransfer.Sources.FixedTemperature Aussentemperatur(
-            T=295.15)
-          annotation (Placement(transformation(extent={{6,49},{-14,69}})));
+        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machinesRadiative
+          annotation (Placement(transformation(extent={{4,-94},{30,-72}})));
+        Modelica.Thermal.HeatTransfer.Sources.FixedTemperature outdoorTemp(T=295.15)
+          annotation (Placement(transformation(extent={{-14,47},{6,67}})));
         VDIComponents.ReducedOrderModel_surfaceCooling reducedModel(
           C1i=1.48216e+007,
           Aw=7,
@@ -3619,8 +3695,7 @@ package LowOrder "Low Order Building Models"
           Ao=10.5,
           alphaiwi=3)
           annotation (Placement(transformation(extent={{64,36},{98,76}})));
-        Utilities.Sources.HeaterCooler.IdealHeaterCoolerVar1
-          idealHeaterCoolerVar1_1(
+        Utilities.Sources.HeaterCooler.IdealHeaterCoolerVar1 heater(
           Q_flow_heat=1,
           Q_flow_cooler=1,
           h_cooler=0,
@@ -3634,16 +3709,17 @@ package LowOrder "Low Order Building Models"
               extent={{-10,-10},{10,10}},
               rotation=-90,
               origin={-26,-20})));
-        Modelica.Blocks.Sources.CombiTimeTable Solltemperaturen(
+        Modelica.Blocks.Sources.CombiTimeTable setTemp(
           extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
           columns={2,3},
-          table=[0,295.15,295.2; 3600,295.1,295.2; 7200,295.1,295.2; 10800,295.1,
-              295.2; 14400,295.1,295.2; 18000,295.1,295.2; 21600,295.1,295.2; 25200,
-              300.1,300.2; 28800,300.1,300.2; 32400,300.1,300.2; 36000,300.1,300.2;
-              39600,300.1,300.2; 43200,300.1,300.2; 46800,300.1,300.2; 50400,300.1,
-              300.2; 54000,300.1,300.2; 57600,300.1,300.2; 61200,300.1,300.2; 64800,
-              300.1,300.2; 68400,295.1,295.2; 72000,295.1,295.2; 75600,295.1,295.2;
-              79200,295.1,295.2; 82800,295.1,295.2; 86400,295.1,295.2])
+          table=[0,295.15,295.2; 3600,295.1,295.2; 7200,295.1,295.2; 10800,
+              295.1,295.2; 14400,295.1,295.2; 18000,295.1,295.2; 21600,295.1,
+              295.2; 25200,300.1,300.2; 28800,300.1,300.2; 32400,300.1,300.2;
+              36000,300.1,300.2; 39600,300.1,300.2; 43200,300.1,300.2; 46800,
+              300.1,300.2; 50400,300.1,300.2; 54000,300.1,300.2; 57600,300.1,
+              300.2; 61200,300.1,300.2; 64800,300.1,300.2; 68400,295.1,295.2;
+              72000,295.1,295.2; 75600,295.1,295.2; 79200,295.1,295.2; 82800,
+              295.1,295.2; 86400,295.1,295.2])
           annotation (Placement(transformation(extent={{-80,-30},{-60,-10}})));
         Modelica.Blocks.Sources.CombiTimeTable reference(
           tableName="UserProfilesOffice",
@@ -3671,9 +3747,8 @@ package LowOrder "Low Order Building Models"
           extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
           annotation (Placement(transformation(extent={{-96,78},{-76,97}})));
         Modelica.Blocks.Math.Add sumHeatLoad
-          annotation (Placement(transformation(extent={{-30,4},{-20,14}})));
-        Utilities.Sources.HeaterCooler.IdealHeaterCoolerVar1
-          idealHeaterCoolerVar1_2(
+          annotation (Placement(transformation(extent={{86,86},{96,96}})));
+        Utilities.Sources.HeaterCooler.IdealHeaterCoolerVar1 cooler(
           Q_flow_heat=1,
           Q_flow_cooler=1,
           h_cooler=0,
@@ -3687,69 +3762,65 @@ package LowOrder "Low Order Building Models"
               extent={{-10,-10},{10,10}},
               rotation=-90,
               origin={-26,-48})));
-        Modelica.Blocks.Sources.CombiTimeTable table_machines(
+        Modelica.Blocks.Sources.CombiTimeTable innerLoads(
           extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
           tableName="UserProfilesOffice",
           fileName="./Tables/J1615/UserProfilesOffice.txt",
           tableOnFile=false,
           columns={2,3},
-          table=[0,0,0; 3600,0,0; 7200,0,0; 10800,0,0; 14400,0,0; 18000,0,0; 21600,
-              0,0; 21600,0,1000; 25200,0,1000; 28800,0,1000; 32400,0,1000; 36000,0,
-              1000; 39600,0,1000; 43200,0,1000; 46800,0,1000; 50400,0,1000; 54000,0,
-              1000; 57600,0,1000; 61200,0,1000; 64800,0,1000; 64800,0,0; 68400,0,0;
-              72000,0,0; 75600,0,0; 79200,0,0; 82800,0,0; 86400,0,0])
+          table=[0,0,0; 3600,0,0; 7200,0,0; 10800,0,0; 14400,0,0; 18000,0,0;
+              21600,0,0; 21600,0,1000; 25200,0,1000; 28800,0,1000; 32400,0,1000;
+              36000,0,1000; 39600,0,1000; 43200,0,1000; 46800,0,1000; 50400,0,
+              1000; 54000,0,1000; 57600,0,1000; 61200,0,1000; 64800,0,1000;
+              64800,0,0; 68400,0,0; 72000,0,0; 75600,0,0; 79200,0,0; 82800,0,0;
+              86400,0,0])
           annotation (Placement(transformation(extent={{-24,-93},{-10,-79}})));
       equation
-        connect(Maschinen_Strahlung.port, Konvektiv_Strahlung.Therm)
-          annotation (Line(
-            points={{32,-79},{38,-79},{38,-82},{50.8,-82}},
+        connect(machinesRadiative.port, Konvektiv_Strahlung.Therm) annotation (
+            Line(
+            points={{30,-83},{38,-83},{38,-82},{50.8,-82}},
             color={191,0,0},
             smooth=Smooth.None));
-        connect(Solltemperaturen.y[1], idealHeaterCoolerVar1_1.soll_heat)
-          annotation (Line(
+        connect(setTemp.y[1], heater.soll_heat) annotation (Line(
             points={{-59,-20},{-50,-20},{-50,-23},{-30.8,-23}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(sumHeatLoad.u1,idealHeaterCoolerVar1_1.heatMeter.p);
-        connect(sumHeatLoad.u2,idealHeaterCoolerVar1_2.coolMeter.p);
-        connect(Solltemperaturen.y[2], idealHeaterCoolerVar1_2.soll_cool) annotation (
-           Line(
+        connect(sumHeatLoad.u1, heater.heatMeter.p);
+        connect(sumHeatLoad.u2, cooler.coolMeter.p);
+       referenceLoad[1]=-reference.y[2];
+        simulationLoad=sumHeatLoad.y;
+
+        connect(setTemp.y[2], cooler.soll_cool) annotation (Line(
             points={{-59,-20},{-44,-20},{-44,-43.2},{-30.8,-43.2}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(table_machines.y[2],Maschinen_Strahlung.Q_flow)  annotation (Line(
-            points={{-9.3,-86},{-2,-86},{-2,-79},{6,-79}},
+        connect(innerLoads.y[2], machinesRadiative.Q_flow) annotation (Line(
+            points={{-9.3,-86},{-2,-86},{-2,-83},{4,-83}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(Aussentemperatur.port, reducedModel.equivalentoutdoortemp)
+        connect(outdoorTemp.port, reducedModel.equivalentoutdoortemp)
           annotation (Line(
-            points={{-14,59},{36.5,59},{36.5,56.8},{67.4,56.8}},
+            points={{6,57},{36.5,57},{36.5,56.8},{67.4,56.8}},
             color={191,0,0},
             smooth=Smooth.None));
-        connect(Temperatur_Infiltration.y, reducedModel.outdoorairtemp)
-          annotation (Line(
-            points={{26.5,11},{38,11},{38,46.4},{67.4,46.4}},
+        connect(infiltrationTemp.y, reducedModel.outdoorairtemp) annotation (
+            Line(
+            points={{26.5,31},{38,31},{38,46.4},{67.4,46.4}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(Infiltration.y, reducedModel.InfiltrationVentilationRate)
+        connect(infiltrationRate.y, reducedModel.InfiltrationVentilationRate)
           annotation (Line(
             points={{50.5,11},{72.5,11},{72.5,40}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(idealHeaterCoolerVar1_1.HeatCoolRoom, reducedModel.innerLoadskonv)
-          annotation (Line(
+        connect(heater.HeatCoolRoom, reducedModel.innerLoadskonv) annotation (
+            Line(
             points={{-26,-29},{28,-29},{28,-28},{79.64,-28},{79.64,40}},
             color={191,0,0},
             smooth=Smooth.None));
-        connect(idealHeaterCoolerVar1_2.HeatCoolRoom, reducedModel.surfaceCooling)
-          annotation (Line(
+        connect(cooler.HeatCoolRoom, reducedModel.surfaceCooling) annotation (
+            Line(
             points={{-26,-57},{38,-57},{38,-54},{87.12,-54},{87.12,40}},
-            color={191,0,0},
-            smooth=Smooth.None));
-        connect(Maschinen_Strahlung.port, reducedModel.innerLoadskonv)
-          annotation (Line(
-            points={{32,-79},{32,-28},{30,-28},{28,-28},{28,-28},{79.64,-28},{
-                79.64,40}},
             color={191,0,0},
             smooth=Smooth.None));
         connect(Konvektiv_Strahlung.Star, reducedModel.innerLoadsrad) annotation (
@@ -3778,26 +3849,8 @@ package LowOrder "Low Order Building Models"
       model TestCase_12
         extends Modelica.Icons.Example;
 
-        Utilities.HeatTransfer.HeatToStar Konvektiv_Strahlung(A=2)
-          annotation (Placement(transformation(extent={{48,-96},{68,-76}})));
-        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
-          Maschinen_Konvektion
-          annotation (Placement(transformation(extent={{46,-46},{66,-26}})));
-        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
-          Personen_Konvektion
-          annotation (Placement(transformation(extent={{16,-68},{36,-48}})));
-        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
-          Personen_Strahlung
-          annotation (Placement(transformation(extent={{16,-94},{36,-74}})));
-        Modelica.Blocks.Sources.CombiTimeTable Innere_Lasten(
-          extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-          tableOnFile=false,
-          table=[0,0,0; 3600,0,0; 7200,0,0; 10800,0,0; 14400,0,0; 18000,0,0; 21600,0,
-              0; 25200,0,0; 25200,160,200; 28800,160,200; 32400,160,200; 36000,160,
-              200; 39600,160,200; 43200,160,200; 46800,160,200; 50400,160,200; 54000,
-              160,200; 57600,160,200; 61200,160,200; 61200,0,0; 64800,0,0; 72000,0,0;
-              75600,0,0; 79200,0,0; 82800,0,0; 86400,0,0])
-          annotation (Placement(transformation(extent={{-60,-76},{-40,-56}})));
+        output Modelica.SIunits.Conversions.NonSIunits.Temperature_degC referenceTemp[1];
+        output Modelica.SIunits.Temp_K simulationTemp;
         Building.LowOrder.BaseClasses.ReducedOrderModel reducedModel(
           C1i=1.48216e+007,
           Aw=7,
@@ -3816,36 +3869,38 @@ package LowOrder "Low Order Building Models"
           airload(V=0.1),
           alphaiwi=2.2)
           annotation (Placement(transformation(extent={{54,30},{88,70}})));
-        Modelica.Blocks.Sources.CombiTimeTable Temperaturverlauf(
+        Modelica.Blocks.Sources.CombiTimeTable outdoorTemp(
           extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
           columns={2,3,4},
-          table=[0,291.95,0,0; 3600,291.95,0,0; 3600,290.25,0,0; 7200,290.25,0,0;
-              7200,289.65,0,0; 10800,289.65,0,0; 10800,289.25,0,0; 14400,289.25,0,0;
-              14400,289.65,0,0; 18000,289.65,0,0; 18000,290.95,0,0; 21600,290.95,0,0;
-              21600,293.45,0,0; 25200,293.45,0,0; 25200,295.95,0,0; 28800,295.95,0,0;
-              28800,297.95,0,0; 32400,297.95,0,0; 32400,299.85,0,0; 36000,299.85,0,0;
-              36000,301.25,0,0; 39600,301.25,0,0; 39600,302.15,0,0; 43200,302.15,0,0;
-              43200,302.85,0,0; 46800,302.85,0,0; 46800,303.55,0,0; 50400,303.55,0,0;
-              50400,304.05,0,0; 54000,304.05,0,0; 54000,304.15,0,0; 57600,304.15,0,0;
-              57600,303.95,0,0; 61200,303.95,0,0; 61200,303.25,0,0; 64800,303.25,0,0;
-              64800,302.05,0,0; 68400,302.05,0,0; 68400,300.15,0,0; 72000,300.15,0,0;
-              72000,297.85,0,0; 75600,297.85,0,0; 75600,296.05,0,0; 79200,296.05,0,0;
-              79200,295.05,0,0; 82800,295.05,0,0; 82800,294.05,0,0; 86400,294.05,0,0])
+          table=[0,291.95,0,0; 3600,291.95,0,0; 3600,290.25,0,0; 7200,290.25,0,
+              0; 7200,289.65,0,0; 10800,289.65,0,0; 10800,289.25,0,0; 14400,
+              289.25,0,0; 14400,289.65,0,0; 18000,289.65,0,0; 18000,290.95,0,0;
+              21600,290.95,0,0; 21600,293.45,0,0; 25200,293.45,0,0; 25200,
+              295.95,0,0; 28800,295.95,0,0; 28800,297.95,0,0; 32400,297.95,0,0;
+              32400,299.85,0,0; 36000,299.85,0,0; 36000,301.25,0,0; 39600,
+              301.25,0,0; 39600,302.15,0,0; 43200,302.15,0,0; 43200,302.85,0,0;
+              46800,302.85,0,0; 46800,303.55,0,0; 50400,303.55,0,0; 50400,
+              304.05,0,0; 54000,304.05,0,0; 54000,304.15,0,0; 57600,304.15,0,0;
+              57600,303.95,0,0; 61200,303.95,0,0; 61200,303.25,0,0; 64800,
+              303.25,0,0; 64800,302.05,0,0; 68400,302.05,0,0; 68400,300.15,0,0;
+              72000,300.15,0,0; 72000,297.85,0,0; 75600,297.85,0,0; 75600,
+              296.05,0,0; 79200,296.05,0,0; 79200,295.05,0,0; 82800,295.05,0,0;
+              82800,294.05,0,0; 86400,294.05,0,0])
           annotation (Placement(transformation(extent={{-60,18},{-40,38}})));
-        Modelica.Blocks.Sources.CombiTimeTable Strahlung_Fenster(
+        Modelica.Blocks.Sources.CombiTimeTable windowRad(
           extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-          table=[0,0,0,0,0,0.0; 3600,0,0,0,0,0.0; 10800,0,0,0,0,0.0; 14400,0,0,0,0,
-              0.0; 14400,0,0,17,0,0.0; 18000,0,0,17,0,0.0; 18000,0,0,38,0,0.0;
-              21600,0,0,38,0,0.0; 21600,0,0,59,0,0.0; 25200,0,0,59,0,0.0; 25200,0,0,
-              98,0,0.0; 28800,0,0,98,0,0.0; 28800,0,0,186,0,0.0; 32400,0,0,186,0,
-              0.0; 32400,0,0,287,0,0.0; 36000,0,0,287,0,0.0; 36000,0,0,359,0,0.0;
-              39600,0,0,359,0,0.0; 39600,0,0,385,0,0.0; 43200,0,0,385,0,0.0; 43200,
-              0,0,359,0,0.0; 46800,0,0,359,0,0.0; 46800,0,0,287,0,0.0; 50400,0,0,
-              287,0,0.0; 50400,0,0,186,0,0.0; 54000,0,0,186,0,0.0; 54000,0,0,98,0,
-              0.0; 57600,0,0,98,0,0.0; 57600,0,0,59,0,0.0; 61200,0,0,59,0,0.0;
-              61200,0,0,38,0,0.0; 64800,0,0,38,0,0.0; 64800,0,0,17,0,0.0; 68400,0,0,
-              17,0,0.0; 68400,0,0,0,0,0.0; 72000,0,0,0,0,0.0; 82800,0,0,0,0,0.0;
-              86400,0,0,0,0,0.0],
+          table=[0,0,0,0,0,0.0; 3600,0,0,0,0,0.0; 10800,0,0,0,0,0.0; 14400,0,0,
+              0,0,0.0; 14400,0,0,17,0,0.0; 18000,0,0,17,0,0.0; 18000,0,0,38,0,
+              0.0; 21600,0,0,38,0,0.0; 21600,0,0,59,0,0.0; 25200,0,0,59,0,0.0;
+              25200,0,0,98,0,0.0; 28800,0,0,98,0,0.0; 28800,0,0,186,0,0.0;
+              32400,0,0,186,0,0.0; 32400,0,0,287,0,0.0; 36000,0,0,287,0,0.0;
+              36000,0,0,359,0,0.0; 39600,0,0,359,0,0.0; 39600,0,0,385,0,0.0;
+              43200,0,0,385,0,0.0; 43200,0,0,359,0,0.0; 46800,0,0,359,0,0.0;
+              46800,0,0,287,0,0.0; 50400,0,0,287,0,0.0; 50400,0,0,186,0,0.0;
+              54000,0,0,186,0,0.0; 54000,0,0,98,0,0.0; 57600,0,0,98,0,0.0;
+              57600,0,0,59,0,0.0; 61200,0,0,59,0,0.0; 61200,0,0,38,0,0.0; 64800,
+              0,0,38,0,0.0; 64800,0,0,17,0,0.0; 68400,0,0,17,0,0.0; 68400,0,0,0,
+              0,0.0; 72000,0,0,0,0,0.0; 82800,0,0,0,0,0.0; 86400,0,0,0,0,0.0],
           columns={2,3,4,5,6})
           annotation (Placement(transformation(extent={{-82,72},{-62,92}})));
         Utilities.Sources.PrescribedSolarRad Quelle_Fenster(n=5)
@@ -3857,7 +3912,7 @@ package LowOrder "Low Order Building Models"
           annotation (Placement(transformation(extent={{4,72},{24,92}})));
         Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTemp
           annotation (Placement(transformation(extent={{-2,26},{18,46}})));
-        Modelica.Blocks.Sources.CombiTimeTable Ventilationsrate(
+        Modelica.Blocks.Sources.CombiTimeTable ventitaltionRate(
           table=[0,1.9048; 3600,1.9048; 7200,1.9048; 10800,1.9048; 14400,1.9048;
               18000,1.9048; 21600,1.9048; 25200,1.9048; 25200,0.95238; 28800,
               0.95238; 32400,0.95238; 36000,0.95238; 39600,0.95238; 43200,0.95238;
@@ -3866,7 +3921,7 @@ package LowOrder "Low Order Building Models"
               79200,1.9048; 82800,1.9048; 86400,1.9048],
           columns={2},
           extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic)
-          annotation (Placement(transformation(extent={{-60,-18},{-40,2}})));
+          annotation (Placement(transformation(extent={{-60,-16},{-40,4}})));
         Modelica.Blocks.Sources.CombiTimeTable reference(
           tableName="UserProfilesOffice",
           fileName="./Tables/J1615/UserProfilesOffice.txt",
@@ -3888,29 +3943,34 @@ package LowOrder "Low Order Building Models"
               5180400,31.2; 5184000,30.9],
           extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
           annotation (Placement(transformation(extent={{-96,-38},{-76,-19}})));
+        Utilities.HeatTransfer.HeatToStar HeatTorStar(A=2)
+          annotation (Placement(transformation(extent={{48,-104},{68,-84}})));
+        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machinesConvective
+          annotation (Placement(transformation(extent={{12,-56},{32,-36}})));
+        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow personsConvective
+          annotation (Placement(transformation(extent={{12,-76},{32,-56}})));
+        Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow personsRadiative
+          annotation (Placement(transformation(extent={{12,-104},{32,-84}})));
+        Modelica.Blocks.Sources.CombiTimeTable innerLoads(
+          extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+          tableOnFile=false,
+          table=[0,0,0,0; 3600,0,0,0; 7200,0,0,0; 10800,0,0,0; 14400,0,0,0; 18000,0,0,
+              0; 21600,0,0,0; 25200,0,0,0; 25200,80,80,200; 28800,80,80,200; 32400,80,
+              80,200; 36000,80,80,200; 39600,80,80,200; 43200,80,80,200; 46800,80,80,200;
+              50400,80,80,200; 54000,80,80,200; 57600,80,80,200; 61200,80,80,200; 61200,
+              0,0,0; 64800,0,0,0; 72000,0,0,0; 75600,0,0,0; 79200,0,0,0; 82800,0,0,0;
+              86400,0,0,0],
+          columns={2,3,4})
+          annotation (Placement(transformation(extent={{-56,-76},{-36,-56}})));
       equation
-        connect(Personen_Strahlung.port, Konvektiv_Strahlung.Therm) annotation (
-           Line(
-            points={{36,-84},{42,-84},{42,-86},{48.8,-86}},
-            color={191,0,0},
-            smooth=Smooth.None));
-        connect(Innere_Lasten.y[1],Personen_Konvektion.Q_flow)  annotation (Line(
-            points={{-39,-66},{-12,-66},{-12,-58},{16,-58}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(Innere_Lasten.y[1],Personen_Strahlung.Q_flow)  annotation (Line(
-            points={{-39,-66},{-8,-66},{-8,-84},{16,-84}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(Innere_Lasten.y[2],Maschinen_Konvektion.Q_flow)  annotation (Line(
-            points={{-39,-66},{-8,-66},{-8,-36},{46,-36}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(Temperaturverlauf.y[1], varTemp.T) annotation (Line(
+        referenceTemp = reference.y;
+        simulationTemp = reducedModel.airload.port.T;
+
+        connect(outdoorTemp.y[1], varTemp.T) annotation (Line(
             points={{-39,28},{-22,28},{-22,36},{-4,36}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(Strahlung_Fenster.y, Quelle_Fenster.u) annotation (Line(
+        connect(windowRad.y, Quelle_Fenster.u) annotation (Line(
             points={{-61,82},{-54,82}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -3919,7 +3979,7 @@ package LowOrder "Low Order Building Models"
             color={255,128,0},
             smooth=Smooth.None));
         connect(varTemp.port, reducedModel.equalAirTemp) annotation (Line(
-            points={{18,36},{-6,36},{-6,32},{-14,32},{-14,50.8},{57.4,50.8}},
+            points={{18,36},{28,36},{28,50.8},{57.4,50.8}},
             color={191,0,0},
             smooth=Smooth.None));
         connect(sunblind.Rad_Out, rad_weighted_sum.solarRad_in) annotation (Line(
@@ -3931,35 +3991,51 @@ package LowOrder "Low Order Building Models"
             points={{23,82},{32,82},{32,60.8},{57.23,60.8}},
             color={255,128,0},
             smooth=Smooth.None));
-        connect(Ventilationsrate.y[1], reducedModel.ventilationTemperature)
+        connect(ventitaltionRate.y[1], reducedModel.ventilationTemperature)
           annotation (Line(
-            points={{-39,-8},{-10,-8},{-10,-6},{44,-6},{44,40.4},{57.4,40.4}},
+            points={{-39,-6},{44,-6},{44,40.4},{57.4,40.4}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(Maschinen_Konvektion.port, reducedModel.internalGainsConv)
-          annotation (Line(
-            points={{66,-36},{36,-36},{36,-16},{74.4,-16},{74.4,34}},
-            color={191,0,0},
-            smooth=Smooth.None));
-        connect(Temperaturverlauf.y[1], reducedModel.ventilationRate) annotation (
-           Line(
-            points={{-39,28},{-20,28},{-20,10},{64.2,10},{64.2,34}},
+        connect(outdoorTemp.y[1], reducedModel.ventilationRate) annotation (
+            Line(
+            points={{-39,28},{-22,28},{-22,8},{64.2,8},{64.2,34}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(Personen_Konvektion.port, reducedModel.internalGainsConv)
-          annotation (Line(
-            points={{36,-58},{6,-58},{6,-16},{74.4,-16},{74.4,34}},
-            color={191,0,0},
-            smooth=Smooth.None));
-        connect(Konvektiv_Strahlung.Star, reducedModel.internalGainsRad)
-          annotation (Line(
-            points={{67.1,-86},{84.09,-86},{84.09,34}},
+        connect(HeatTorStar.Star, reducedModel.internalGainsRad) annotation (
+            Line(
+            points={{67.1,-94},{84,-94},{84,34},{84.09,34}},
             color={95,95,95},
             pattern=LinePattern.None,
             smooth=Smooth.None));
+        connect(personsConvective.port, reducedModel.internalGainsConv)
+          annotation (Line(
+            points={{32,-66},{74.4,-66},{74.4,34}},
+            color={191,0,0},
+            smooth=Smooth.None));
+        connect(machinesConvective.port, reducedModel.internalGainsConv)
+          annotation (Line(
+            points={{32,-46},{74.4,-46},{74.4,34}},
+            color={191,0,0},
+            smooth=Smooth.None));
+        connect(innerLoads.y[3], machinesConvective.Q_flow) annotation (Line(
+            points={{-35,-66},{-16,-66},{-16,-46},{12,-46}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(innerLoads.y[2], personsConvective.Q_flow) annotation (Line(
+            points={{-35,-66},{12,-66}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(innerLoads.y[1], personsRadiative.Q_flow) annotation (Line(
+            points={{-35,-66},{-16,-66},{-16,-94},{12,-94}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(personsRadiative.port, HeatTorStar.Therm) annotation (Line(
+            points={{32,-94},{48.8,-94}},
+            color={191,0,0},
+            smooth=Smooth.None));
         annotation (
-          Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-                  {100,100}}),
+          Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),
                   graphics),
           experiment(StopTime=5.184e+006, Interval=3600),
           __Dymola_experimentSetupOutput(events=false),
