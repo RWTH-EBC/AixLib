@@ -2003,13 +2003,15 @@ package LowOrder "Low Order Building Models"
 <p><br/><br/> </p>
 </html>",     info="<html>
 <p>Test Case 1 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to a convective heat source for Type room S</p>
-<p><ul>
+<ul>
 <li>constant outdoor temperature 22&deg;C</li>
 <li>no shortwave radiation on the outer wall</li>
 <li>no shortwave radiation through the window</li>
 <li>no longwave radiation exchange between outer wall, window and ambience</li>
-</ul></p>
-<p>All values are given in the VDI6007.</p>
+</ul>
+<p>Reference: Room air temperature</p>
+<p>Variable path: <code>reducedModel.airload.T</code></p>
+<p><br><br>All values are given in the VDI 6007-1.</p>
 <p>Same Test Case exists in VDI 6020.</p>
 </html>"));
       end TestCase_1;
@@ -2125,13 +2127,15 @@ package LowOrder "Low Order Building Models"
           Icon(graphics),
           Documentation(info="<html>
 <p>Test Case 2 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to a radiant heat source for Type room S</p>
-<p><ul>
+<ul>
 <li>constant outdoor temperature 22&deg;C</li>
 <li>no shortwave radiation on the outer wall</li>
 <li>no shortwave radiation through the window</li>
 <li>no longwave radiation exchange between outer wall, window and ambience</li>
-</ul></p>
-<p>All values are given in the VDI6007.</p>
+</ul>
+<p>Reference: Room air temperature</p>
+<p>Variable path: <code>reducedModel.airload.T</code></p>
+<p><br><br>All values are given in the VDI 6007-1.</p>
 <p>Same Test Case exists in VDI 6020.</p>
 </html>",     revisions="<html>
 <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
@@ -2236,13 +2240,15 @@ package LowOrder "Low Order Building Models"
 <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
 </html>",     info="<html>
 <p>Test Case 3 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to a convective heat source for Type room L</p>
-<p><ul>
+<ul>
 <li>constant outdoor temperature 22&deg;C</li>
 <li>no shortwave radiation on the outer wall</li>
 <li>no shortwave radiation through the window</li>
 <li>no longwave radiation exchange between outer wall, window and ambience</li>
-</ul></p>
-<p>All values are given in the VDI 6007.</p>
+</ul>
+<p>Reference: Room air temperature</p>
+<p>Variable path: <code>reducedModel.airload.T</code></p>
+<p><br><br>All values are given in the VDI 6007-1.</p>
 <p>Same Test Case exists in VDI 6020.</p>
 </html>"),     Icon(graphics),
           experiment(StopTime=5.184e+006, Interval=3600),
@@ -2354,13 +2360,16 @@ package LowOrder "Low Order Building Models"
 <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
 </html>",     info="<html>
 <p>Test Case 4 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to a radiant heat source for Type room L</p>
-<p><ul>
+<ul>
 <li>constant outdoor temperature</li>
 <li>no shortwave radiation on the outer wall</li>
 <li>no shortwave radiation through the window</li>
 <li>no longwave radiation exchange between outer wall, window and ambience</li>
-</ul></p>
-<p>All values are given in the VDI6007.</p>
+</ul>
+<p>Reference: Room air temperature</p>
+<p>Variable path: <code>reducedModel.airload.T</code></p>
+<p><br><br>All values are given in the VDI 6007-1.</p>
+<p>Same Test Case exists in VDI 6020.</p>
 </html>"),Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                   {100,100}}),graphics),
           Icon(graphics),
@@ -2563,14 +2572,17 @@ package LowOrder "Low Order Building Models"
 <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
 </html>",     info="<html>
 <p>Test Case 5 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to radiant and convective heat source for Type room S</p>
-<p><ul>
+<ul>
 <li>daily input for outdoor temperature </li>
 <li>no shortwave radiation on the outer wall</li>
 <li>shortwave radiation through the window</li>
 <li>sunblind is closed at &GT;100W/m&sup2;, behind the window</li>
 <li>no longwave radiation exchange between outer wall, window and ambience</li>
-</ul></p>
-<p>All values are given in the VDI6007.</p>
+</ul>
+<p>Reference: Room air temperature</p>
+<p>Variable path: <code>reducedModel.airload.T</code></p>
+<p><br><br>All values are given in the VDI 6007-1.</p>
+<p>Same Test Case exists in VDI 6020.</p>
 </html>"),Icon(graphics));
       end TestCase_5;
 
@@ -2709,13 +2721,16 @@ package LowOrder "Low Order Building Models"
 <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
 </html>",     info="<html>
 <p>Test Case 6 of the VDI6007: <a name=\"result_box\">L</a>oad calculation in compliance with the desired values of the indoor temperature and a setpoint for the type space S:</p>
-<p><ul>
+<ul>
 <li>constant outdoor temperature </li>
 <li>no shortwave radiation on the outer wall</li>
 <li>no shortwave radiation through the window</li>
 <li>no longwave radiation exchange between outer wall, window and ambience</li>
-</ul></p>
-<p>All values are given in the VDI6007.</p>
+</ul>
+<p><br>Reference: Heating/Cooling load</p>
+<p>Variable path: <code>heatFlowSensor.Q_flow</code></p>
+<p><br><br><br>All values are given in the VDI 6007-1.</p>
+<p>Same Test Case exists in VDI 6020.</p>
 </html>"),Icon(graphics));
       end TestCase_6;
 
@@ -2871,14 +2886,17 @@ package LowOrder "Low Order Building Models"
 <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
 </html>",     info="<html>
 <p>Test Case 7 of the VDI6007: <a name=\"result_box\">L</a>oad calculation in compliance with the desired values of the indoor temperature and a setpoint for the type space S:</p>
-<p><br/>This case is the same like case 6, but with a maximum heating/cooling power.</p>
-<p><ul>
+<p><br>This case is the same like case 6, but with a maximum heating/cooling power.</p>
+<ul>
 <li>constant outdoor temperature </li>
 <li>no shortwave radiation on the outer wall</li>
 <li>no shortwave radiation through the window</li>
 <li>no longwave radiation exchange between outer wall, window and ambience</li>
-</ul></p>
-<p>All values are given in the VDI6007.</p>
+</ul>
+<p>Reference: Heating/Cooling load</p>
+<p>Variable path: <code>sumHeatLoad.y</code></p>
+<p><br><br>All values are given in the VDI 6007-1.</p>
+<p>Same Test Case exists in VDI 6020.</p>
 </html>"),Icon(graphics));
       end TestCase_7;
 
@@ -3116,14 +3134,17 @@ package LowOrder "Low Order Building Models"
 </html>",     info="<html>
 <p>Test Case 8 of the VDI6007:: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to mixed inner and outer heat sources for Type Room S:</p>
 <p>Based on Test Case 5</p>
-<p><ul>
+<ul>
 <li>Second outer wall to the west</li>
 <li>shortwave radiation on the outer wall</li>
 <li>shortwave radiation through the windows</li>
 <li>Shutter cloeses &GT;100W/m&sup2;</li>
 <li>no longwave radiation heat exchange (special EqAirTemp see: EqAirTemp_TestCase_8)</li>
-</ul></p>
-<p><br/>All values are given in the VDI6007.</p>
+</ul>
+<p><br>Reference: Room air temperature</p>
+<p>Variable path: <code>reducedModel.airload.T</code></p>
+<p><br><br>All values are given in the VDI 6007-1.</p>
+<p>Same Test Case exists in VDI 6020.</p>
 </html>"));
       end TestCase_8;
 
@@ -3395,7 +3416,7 @@ package LowOrder "Low Order Building Models"
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}),
                             graphics), Icon(graphics),
-          experiment(StopTime=3.1536e+007, Interval=3600),
+          experiment(StopTime=5.184e+006, Interval=3600),
           experimentSetupOutput(events=false), Documentation(revisions="<html>
 <ul>
   <li><i>March, 2012&nbsp;</i>
@@ -3405,10 +3426,13 @@ package LowOrder "Low Order Building Models"
 </html>",     info="<html>
 <p>Test Case 9 of the VDI6007:: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to mixed inner and outer heat sources for Type Room S:</p>
 <p>Based on Test Case 8</p>
-<p><ul>
+<ul>
 <li>longwave radiation heat exchange is taken into account</li>
-</ul></p>
-<p><br/>All values are given in the VDI6007.</p>
+</ul>
+<p><br>Reference: Room air temperature</p>
+<p>Variable path: <code>reducedModel.airload.T</code></p>
+<p><br><br>All values are given in the VDI 6007-1.</p>
+<p>Same Test Case exists in VDI 6020.</p>
 </html>"));
       end TestCase_9;
 
@@ -3654,11 +3678,14 @@ package LowOrder "Low Order Building Models"
 </html>",     info="<html>
 <p>Test Case 10 of the VDI6007:: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to mixed inner and outer heat sources for Type Room S:</p>
 <p>Based on Test Case 5</p>
-<p><ul>
+<ul>
 <li>The floor is a non adiabatic wall, this changes the parameter calculation. The floor is considered to be anouter wall for RC-Calculation. In order to calculate the weightfactors for EqAirTemp correctly the orientation of this element is not &QUOT;floor&QUOT;. In the parameter calculation &QUOT;West&QUOT; is used. The weightfactor calculated for the west outer wall has to used as the weightfactor of the ground.</li>
 <li>changed initial temperature(!!)</li>
-</ul></p>
-<p><br/><br/>All values are given in the VDI6007.</p>
+</ul>
+<p><br><br>Reference: Room air temperature</p>
+<p>Variable path: <code>reducedModel.airload.T</code></p>
+<p><br><br>All values are given in the VDI 6007-1.</p>
+<p>Same Test Case exists in VDI 6020.</p>
 </html>"));
       end TestCase_10;
 
@@ -3842,7 +3869,9 @@ package LowOrder "Low Order Building Models"
 <ul>
 <li>implementation of a cooling ceeling (only cooling)</li>
 </ul>
-<p>All values are given 7in the VDI6007.</p>
+<p>Reference: Heating/Cooling load</p>
+<p>Variable path: <code>sumHeatLoad.y</code></p>
+<p><br><br>All values are given in the VDI 6007-1.</p>
 </html>"));
       end TestCase_11;
 
@@ -4045,10 +4074,13 @@ package LowOrder "Low Order Building Models"
 </html>",     info="<html>
 <p>Test Case 12 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to mixed inner and outer heat sources for Type Room S:</p>
 <p>Based on Test Case 5</p>
-<p><ul>
+<ul>
 <li>fixed ventialation day and night</li>
-</ul></p>
-<p>All values are given in the VDI6007.</p>
+</ul>
+<p>Reference: Room air temperature</p>
+<p>Variable path: <code>reducedModel.airload.T</code></p>
+<p><br><br>All values are given in the VDI 6007-1.</p>
+<p>Same Test Case exists in VDI 6020.</p>
 </html>"));
       end TestCase_12;
 
