@@ -12127,11 +12127,11 @@ package HighOrder "Standard house models"
               color={191,0,0},
               smooth=Smooth.None));
           connect(Livingroom.AirExchangePort, AirExchangePort[1]) annotation (Line(
-              points={{-64.9412,65.8667},{-80,65.8667},{-80,90},{-9,90},{-9,103}},
+              points={{-64.9412,65.8667},{-80,65.8667},{-80,90},{-9,90},{-9,127}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(Children.AirExchangePort, AirExchangePort[2]) annotation (Line(
-              points={{36,71.44},{20,71.44},{20,90},{-9,90},{-9,109}},
+              points={{36,71.44},{20,71.44},{20,90},{-9,90},{-9,121}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(Children.ThermRoom, ThermChildren) annotation (Line(
@@ -12149,12 +12149,12 @@ package HighOrder "Standard house models"
               color={0,0,127},
               smooth=Smooth.None));
           connect(Bathroom.AirExchangePort, AirExchangePort[4]) annotation (Line(
-              points={{-6.304,-40.08},{-18,-40.08},{-18,-80},{80,-80},{80,90},{-9,90},
-                  {-9,121}},
+              points={{-6.304,-40.08},{-18,-40.08},{-18,-80},{80,-80},{80,90},{
+                  -9,90},{-9,109}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(Bedroom.AirExchangePort, AirExchangePort[5]) annotation (Line(
-              points={{-64,-37.04},{-80,-37.04},{-80,90},{-9,90},{-9,127}},
+              points={{-64,-37.04},{-80,-37.04},{-80,90},{-9,90},{-9,103}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(Corridor.thermFloor, thermFloor_Corridor) annotation (Line(
@@ -13792,7 +13792,7 @@ package HighOrder "Standard house models"
         Wind_speed=true,
         Air_temp=true,
         fileName=
-            "D:/Git/AixLib/AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt")
+            "modelica://DataBase/additionalFiles/TRY2010_12_Jahr_Modelica-Library.txt")
         annotation (Placement(transformation(extent={{-199,69},{-151,101}})));
 
     public
