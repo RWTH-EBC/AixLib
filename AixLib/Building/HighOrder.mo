@@ -21,7 +21,7 @@ package HighOrder "Standard house models"
               "EnEV_2002",                                                                                                    choice = 3
               "WSchV_1995",  choice = 4 "WSchV_1984",                                                                          radioButtons = true));
 
-        parameter Boolean withFloorHeating = true
+        parameter Boolean withFloorHeating = false
           "If true, that floor has different connectors" annotation (Dialog(group = "Construction parameters"), choices(checkBox=true));
 
         //Initial temperatures
@@ -63,14 +63,10 @@ package HighOrder "Standard house models"
        parameter Modelica.SIunits.Area windowarea_OW2=0 "Window area" annotation (Dialog(group = "Windows and Doors", naturalWidth = 10, descriptionLabel = true, enable = withWindow2));
        parameter Boolean withDoor1 = true "Door 1" annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true), choices(checkBox=true));
        parameter Modelica.SIunits.Length door_width_OD1=0 "width " annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor1));
-       parameter Modelica.SIunits.Length door_height_OD1=0 "height " annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor1));
-       parameter Real U_door_OD1=0 "U-value" annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor1));
-       parameter Real eps_door_OD1=0 "eps" annotation (Dialog(group = "Windows and Doors", descriptionLabel = true, enable = withDoor1));
+       parameter Modelica.SIunits.Length door_height_OD1=0 "height " annotation (Dialog(group = "Windows and Doors", descriptionLabel = true, enable = withDoor1));
        parameter Boolean withDoor2 = true "Door 2" annotation (Dialog( group = "Windows and Doors", joinNext = true, descriptionLabel = true), choices(checkBox=true));
        parameter Modelica.SIunits.Length door_width_OD2=0 "width " annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor2));
-       parameter Modelica.SIunits.Length door_height_OD2=0 "height " annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor2));
-       parameter Real U_door_OD2=0 "U-value" annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor2));
-       parameter Real eps_door_OD2=0 "eps" annotation (Dialog(group = "Windows and Doors", descriptionLabel = true, enable = withDoor2));
+       parameter Modelica.SIunits.Length door_height_OD2=0 "height " annotation (Dialog(group = "Windows and Doors",descriptionLabel = true, enable = withDoor2));
 
        // Dynamic Ventilation
         parameter Boolean withDynamicVentilation = false "Dynamic ventilation" annotation (Dialog(group = "Dynamic ventilation", descriptionLabel = true), choices(checkBox=true));
@@ -82,8 +78,14 @@ package HighOrder "Standard house models"
         parameter Modelica.SIunits.Temperature Tset = 295.15 "Tset"
                  annotation (Dialog(group = "Dynamic ventilation", descriptionLabel = true,  enable = if withDynamicVentilation then true else false));
 
-       // Infiltration rate
+       //Door properties
       protected
+       parameter Real U_door_OD1=if TIR == 1 then 1.8 else  2.9 "U-value"  annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor1));
+       parameter Real eps_door_OD1=0.95 "eps" annotation (Dialog(group = "Windows and Doors", descriptionLabel = true, enable = withDoor1));
+       parameter Real U_door_OD2=if TIR == 1 then 1.8 else  2.9 "U-value" annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor2));
+       parameter Real eps_door_OD2=0.95 "eps" annotation (Dialog(group = "Windows and Doors", descriptionLabel = true, enable = withDoor2));
+
+        // Infiltration rate
         parameter Real n50(unit="h-1")=
         if (TIR == 1 or TIR ==2) then 3 else
         if TIR == 3 then 4 else 6
@@ -550,7 +552,7 @@ package HighOrder "Standard house models"
                 lineColor={0,0,0},
                 fillColor={170,213,255},
                 fillPattern=FillPattern.Solid,
-                visible=  withWindow2),
+                visible = withWindow2),
               Rectangle(
                 extent={{6,64},{-6,-64}},
                 lineColor={0,0,0},
@@ -614,7 +616,7 @@ package HighOrder "Standard house models"
                 lineColor={255,255,255},
                 fillColor={255,85,85},
                 fillPattern=FillPattern.Solid,
-                visible=  withWindow2,
+                visible = withWindow2,
                 textString="Win2",
                 lineThickness=0.5),
               Text(
@@ -624,14 +626,14 @@ package HighOrder "Standard house models"
                 fillPattern=FillPattern.Solid,
                 origin={-70,25},
                 rotation=90,
-                visible=  withWindow1,
+                visible = withWindow1,
                 textString="Win1"),
               Text(
                 extent={{20,74},{40,66}},
                 lineColor={255,255,255},
                 fillColor={255,170,170},
                 fillPattern=FillPattern.Solid,
-                visible=  withDoor2,
+                visible = withDoor2,
                 textString="D2"),
               Text(
                 extent={{-10,4},{10,-4}},
@@ -640,7 +642,7 @@ package HighOrder "Standard house models"
                 fillPattern=FillPattern.Solid,
                 origin={-70,-30},
                 rotation=90,
-                visible=  withDoor1,
+                visible = withDoor1,
                 textString="D1"),
               Line(
                 points={{-60,46},{-30,46}},
@@ -682,7 +684,7 @@ package HighOrder "Standard house models"
               "EnEV_2002",                                                                                                    choice = 3
               "WSchV_1995",  choice = 4 "WSchV_1984",                                                                          radioButtons = true));
 
-        parameter Boolean withFloorHeating = true
+        parameter Boolean withFloorHeating = false
           "If true, that floor has different connectors" annotation (Dialog(group = "Construction parameters"), choices(checkBox=true));
 
         parameter Modelica.SIunits.Temperature T0_air=295.15 "Air"
@@ -726,14 +728,10 @@ package HighOrder "Standard house models"
        parameter Modelica.SIunits.Area windowarea_OW2=0 "Window area" annotation (Dialog(group = "Windows and Doors", naturalWidth = 10, descriptionLabel = true, enable = withWindow2));
        parameter Boolean withDoor1 = true "Door 1" annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true), choices(checkBox=true));
        parameter Modelica.SIunits.Length door_width_OD1=0 "width " annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor1));
-       parameter Modelica.SIunits.Length door_height_OD1=0 "height " annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor1));
-       parameter Real U_door_OD1=0 "U-value" annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor1));
-       parameter Real eps_door_OD1=0 "eps" annotation (Dialog(group = "Windows and Doors", descriptionLabel = true, enable = withDoor1));
+       parameter Modelica.SIunits.Length door_height_OD1=0 "height " annotation (Dialog(group = "Windows and Doors", descriptionLabel = true, enable = withDoor1));
        parameter Boolean withDoor2 = true "Door 2" annotation (Dialog( group = "Windows and Doors", joinNext = true, descriptionLabel = true), choices(checkBox=true));
        parameter Modelica.SIunits.Length door_width_OD2=0 "width " annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor2));
-       parameter Modelica.SIunits.Length door_height_OD2=0 "height " annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor2));
-       parameter Real U_door_OD2=0 "U-value" annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor2));
-       parameter Real eps_door_OD2=0 "eps" annotation (Dialog(group = "Windows and Doors", descriptionLabel = true, enable = withDoor2));
+       parameter Modelica.SIunits.Length door_height_OD2=0 "height " annotation (Dialog(group = "Windows and Doors", descriptionLabel = true, enable = withDoor2));
 
       // Dynamic Ventilation
       parameter Boolean withDynamicVentilation = false "Dynamic ventilation" annotation (Dialog(group = "Dynamic ventilation", descriptionLabel = true), choices(checkBox=true));
@@ -746,8 +744,14 @@ package HighOrder "Standard house models"
       parameter Modelica.SIunits.Temperature Tset = 295.15 "Tset"
                  annotation (Dialog(group = "Dynamic ventilation", descriptionLabel = true,  enable = if withDynamicVentilation then true else false));
 
-       // Infiltration rate
+        //Door properties
       protected
+       parameter Real U_door_OD1=if TIR == 1 then 1.8 else  2.9 "U-value"  annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor1));
+       parameter Real eps_door_OD1=0.95 "eps" annotation (Dialog(group = "Windows and Doors", descriptionLabel = true, enable = withDoor1));
+       parameter Real U_door_OD2=if TIR == 1 then 1.8 else  2.9 "U-value" annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor2));
+       parameter Real eps_door_OD2=0.95 "eps" annotation (Dialog(group = "Windows and Doors", descriptionLabel = true, enable = withDoor2));
+
+        // Infiltration rate
         parameter Real n50(unit="h-1")=
         if (TIR == 1 or TIR ==2) then 3 else
         if TIR == 3 then 4 else 6
@@ -1328,7 +1332,7 @@ package HighOrder "Standard house models"
                 fillColor={255,170,170},
                 fillPattern=FillPattern.Solid,
                 textString="Win2",
-                visible=  withWindow2),
+                visible = withWindow2),
               Text(
                 extent={{50,-6},{0,6}},
                 lineColor={255,255,255},
@@ -1337,7 +1341,7 @@ package HighOrder "Standard house models"
                 textString="Win1",
                 origin={-70,0},
                 rotation=90,
-                visible=  withWindow1),
+                visible = withWindow1),
               Text(
                 extent={{2.85713,-4},{-17.1429,4}},
                 lineColor={255,255,255},
@@ -1346,7 +1350,7 @@ package HighOrder "Standard house models"
                 textString="D1",
                 origin={-70,-22.8571},
                 rotation=90,
-                visible=  withDoor1),
+                visible = withDoor1),
               Line(
                 points={{-46,60},{-46,30}},
                 color={255,255,255},
@@ -1399,7 +1403,7 @@ package HighOrder "Standard house models"
               "EnEV_2002",                                                                                                    choice = 3
               "WSchV_1995",  choice = 4 "WSchV_1984",                                                                          radioButtons = true));
 
-        parameter Boolean withFloorHeating = true
+        parameter Boolean withFloorHeating = false
           "If true, that floor has different connectors" annotation (Dialog(group = "Construction parameters"), choices(checkBox=true));
 
         parameter Modelica.SIunits.Temperature T0_air=295.15 "Air"
@@ -1441,9 +1445,7 @@ package HighOrder "Standard house models"
        parameter Modelica.SIunits.Area windowarea_OW1=0 "Window area " annotation (Dialog(group = "Windows and Doors", descriptionLabel = true, enable = withWindow1));
        parameter Boolean withDoor1 = true "Door 1" annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true), choices(checkBox=true));
        parameter Modelica.SIunits.Length door_width_OD1=0 "width " annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor1));
-       parameter Modelica.SIunits.Length door_height_OD1=0 "height " annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor1));
-       parameter Real U_door_OD1=0 "U-value" annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor1));
-       parameter Real eps_door_OD1=0 "eps" annotation (Dialog(group = "Windows and Doors", descriptionLabel = true, enable = withDoor1));
+       parameter Modelica.SIunits.Length door_height_OD1=0 "height " annotation (Dialog(group = "Windows and Doors", descriptionLabel = true, enable = withDoor1));
 
        // Dynamic Ventilation
       parameter Boolean withDynamicVentilation = false "Dynamic ventilation" annotation (Dialog(group = "Dynamic ventilation", descriptionLabel = true), choices(checkBox=true));
@@ -1456,8 +1458,12 @@ package HighOrder "Standard house models"
       parameter Modelica.SIunits.Temperature Tset = 295.15 "Tset"
                  annotation (Dialog(group = "Dynamic ventilation", descriptionLabel = true,  enable = if withDynamicVentilation then true else false));
 
-       // Infiltration rate
+       //Door properties
       protected
+       parameter Real U_door_OD1=if TIR == 1 then 1.8 else  2.9 "U-value"  annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor1));
+       parameter Real eps_door_OD1=0.95 "eps" annotation (Dialog(group = "Windows and Doors", descriptionLabel = true, enable = withDoor1));
+
+        // Infiltration rate
         parameter Real n50(unit="h-1")=
         if (TIR == 1 or TIR ==2) then 3 else
         if TIR == 3 then 4 else 6
@@ -1997,7 +2003,7 @@ package HighOrder "Standard house models"
                 textString="D1",
                 origin={-70,30},
                 rotation=90,
-                visible=  withDoor1),
+                visible = withDoor1),
               Text(
                 extent={{-25,6},{25,-6}},
                 lineColor={255,255,255},
@@ -2006,7 +2012,7 @@ package HighOrder "Standard house models"
                 origin={-70,-25},
                 rotation=90,
                 textString="Win1",
-                visible=  withWindow1),
+                visible = withWindow1),
               Line(
                 points={{58,26},{58,18}},
                 color={255,255,255},
@@ -2043,7 +2049,7 @@ package HighOrder "Standard house models"
               "EnEV_2002",                                                                                                    choice = 3
               "WSchV_1995",  choice = 4 "WSchV_1984",                                                                          radioButtons = true));
 
-        parameter Boolean withFloorHeating = true
+        parameter Boolean withFloorHeating = false
           "If true, that floor has different connectors" annotation (Dialog(group = "Construction parameters"), choices(checkBox=true));
 
         parameter Modelica.SIunits.Temperature T0_air=295.11 "Air"
@@ -2089,9 +2095,7 @@ package HighOrder "Standard house models"
        parameter Modelica.SIunits.Area windowarea_RO=0 "Window area" annotation (Dialog(group = "Windows and Doors", naturalWidth = 10, descriptionLabel = true, enable = withWindow3));
        parameter Boolean withDoor2 = true "Door 2" annotation (Dialog( group = "Windows and Doors", joinNext = true, descriptionLabel = true), choices(checkBox=true));
        parameter Modelica.SIunits.Length door_width_OD2=0 "width " annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor2));
-       parameter Modelica.SIunits.Length door_height_OD2=0 "height " annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor2));
-       parameter Real U_door_OD2=0 "U-value" annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor2));
-       parameter Real eps_door_OD2=0 "eps" annotation (Dialog(group = "Windows and Doors", descriptionLabel = true, enable = withDoor2));
+       parameter Modelica.SIunits.Length door_height_OD2=0 "height " annotation (Dialog(group = "Windows and Doors", descriptionLabel = true, enable = withDoor2));
 
       // Dynamic Ventilation
       parameter Boolean withDynamicVentilation = false "Dynamic ventilation" annotation (Dialog(group = "Dynamic ventilation", descriptionLabel = true), choices(checkBox=true));
@@ -2104,8 +2108,12 @@ package HighOrder "Standard house models"
       parameter Modelica.SIunits.Temperature Tset = 295.15 "Tset"
                  annotation (Dialog(group = "Dynamic ventilation", descriptionLabel = true,  enable = if withDynamicVentilation then true else false));
 
-       // Infiltration rate
+        //Door properties
       protected
+       parameter Real U_door_OD2=if TIR == 1 then 1.8 else  2.9 "U-value" annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor2));
+       parameter Real eps_door_OD2=0.95 "eps" annotation (Dialog(group = "Windows and Doors", descriptionLabel = true, enable = withDoor2));
+
+        // Infiltration rate
         parameter Real n50(unit="h-1")=
         if (TIR == 1 or TIR ==2) then 3 else
         if TIR == 3 then 4 else 6
@@ -2601,7 +2609,7 @@ package HighOrder "Standard house models"
                 lineColor={0,0,0},
                 fillColor={170,213,255},
                 fillPattern=FillPattern.Solid,
-                visible=  withWindow2),
+                visible = withWindow2),
               Rectangle(
                 extent={{6,64},{-6,-64}},
                 lineColor={0,0,0},
@@ -2636,14 +2644,14 @@ package HighOrder "Standard house models"
                 fillColor={255,170,170},
                 fillPattern=FillPattern.Solid,
                 textString="D2",
-                visible=  withDoor2),
+                visible = withDoor2),
               Text(
                 extent={{-50,76},{0,64}},
                 lineColor={255,255,255},
                 fillColor={255,170,170},
                 fillPattern=FillPattern.Solid,
                 textString="Win2",
-                visible=  withWindow2),
+                visible = withWindow2),
               Text(
                 extent={{-56,52},{64,40}},
                 lineColor={255,255,255},
@@ -2679,7 +2687,7 @@ package HighOrder "Standard house models"
                 lineColor={0,0,0},
                 fillColor={170,213,255},
                 fillPattern=FillPattern.Solid,
-                visible=  withWindow3),
+                visible = withWindow3),
               Text(
                 extent={{-25,6},{25,-6}},
                 lineColor={255,255,255},
@@ -2688,7 +2696,7 @@ package HighOrder "Standard house models"
                 textString="Win3",
                 origin={-70,5},
                 rotation=90,
-                visible=  withWindow3)}),
+                visible = withWindow3)}),
           Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
                   100}}),
                   graphics),
@@ -2721,7 +2729,7 @@ package HighOrder "Standard house models"
               "EnEV_2002",                                                                                                    choice = 3
               "WSchV_1995",  choice = 4 "WSchV_1984",                                                                          radioButtons = true));
 
-        parameter Boolean withFloorHeating = true
+        parameter Boolean withFloorHeating = false
           "If true, that floor has different connectors" annotation (Dialog(group = "Construction parameters"), choices(checkBox=true));
 
         parameter Modelica.SIunits.Temperature T0_air=295.11 "Air"
@@ -2770,9 +2778,7 @@ package HighOrder "Standard house models"
        parameter Modelica.SIunits.Area windowarea_RO=0 "Window area" annotation (Dialog(group = "Windows and Doors", naturalWidth = 10, descriptionLabel = true, enable = withWindow3));
        parameter Boolean withDoor2 = true "Door 2" annotation (Dialog( group = "Windows and Doors", joinNext = true, descriptionLabel = true), choices(checkBox=true));
        parameter Modelica.SIunits.Length door_width_OD2=0 "width " annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor2));
-       parameter Modelica.SIunits.Length door_height_OD2=0 "height " annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor2));
-       parameter Real U_door_OD2=0 "U-value" annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor2));
-       parameter Real eps_door_OD2=0 "eps" annotation (Dialog(group = "Windows and Doors", descriptionLabel = true, enable = withDoor2));
+       parameter Modelica.SIunits.Length door_height_OD2=0 "height " annotation (Dialog(group = "Windows and Doors", descriptionLabel = true, enable = withDoor2));
 
       // Dynamic Ventilation
       parameter Boolean withDynamicVentilation = false "Dynamic ventilation" annotation (Dialog(group = "Dynamic ventilation", descriptionLabel = true), choices(checkBox=true));
@@ -2785,8 +2791,12 @@ package HighOrder "Standard house models"
       parameter Modelica.SIunits.Temperature Tset = 295.15 "Tset"
                  annotation (Dialog(group = "Dynamic ventilation", descriptionLabel = true,  enable = if withDynamicVentilation then true else false));
 
-       // Infiltration rate
+        //Door properties
       protected
+       parameter Real U_door_OD2=if TIR == 1 then 1.8 else  2.9 "U-value" annotation (Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor2));
+       parameter Real eps_door_OD2=0.95 "eps" annotation (Dialog(group = "Windows and Doors", descriptionLabel = true, enable = withDoor2));
+
+        // Infiltration rate
         parameter Real n50(unit="h-1")=
         if (TIR == 1 or TIR ==2) then 3 else
         if TIR == 3 then 4 else 6
@@ -3366,14 +3376,14 @@ package HighOrder "Standard house models"
                 lineColor={0,0,0},
                 fillColor={127,127,0},
                 fillPattern=FillPattern.Solid,
-                visible=  withDoor2),
+                visible = withDoor2),
               Text(
                 extent={{-50,76},{0,64}},
                 lineColor={255,255,255},
                 fillColor={255,170,170},
                 fillPattern=FillPattern.Solid,
                 textString="Win2",
-                visible=  withWindow2),
+                visible = withWindow2),
               Text(
                 extent={{-25,6},{25,-6}},
                 lineColor={255,255,255},
@@ -3382,14 +3392,14 @@ package HighOrder "Standard house models"
                 textString="Win3",
                 origin={-70,5},
                 rotation=90,
-                visible=  withWindow3),
+                visible = withWindow3),
               Text(
                 extent={{20,74},{40,66}},
                 lineColor={255,255,255},
                 fillColor={255,170,170},
                 fillPattern=FillPattern.Solid,
                 textString="D2",
-                visible=  withDoor2),
+                visible = withDoor2),
               Line(
                 points={{68,8},{54,8}},
                 color={255,255,255},
@@ -3442,7 +3452,7 @@ package HighOrder "Standard house models"
               "EnEV_2002",                                                                                                    choice = 3
               "WSchV_1995",  choice = 4 "WSchV_1984",                                                                          radioButtons = true));
 
-        parameter Boolean withFloorHeating = true
+        parameter Boolean withFloorHeating = false
           "If true, that floor has different connectors" annotation (Dialog(group = "Construction parameters"), choices(checkBox=true));
 
         parameter Modelica.SIunits.Temperature T0_air=295.11 "Air"
@@ -4018,7 +4028,7 @@ package HighOrder "Standard house models"
                 lineColor={0,0,0},
                 fillColor={170,213,255},
                 fillPattern=FillPattern.Solid,
-                visible=  withWindow3),
+                visible = withWindow3),
               Rectangle(
                 extent={{80,68},{68,12}},
                 lineColor={0,0,0},
@@ -4032,7 +4042,7 @@ package HighOrder "Standard house models"
                 textString="Win3",
                 origin={-70,25},
                 rotation=90,
-                visible=  withWindow3),
+                visible = withWindow3),
               Line(
                 points={{38,54},{68,54}},
                 color={255,255,255},
@@ -4595,14 +4605,14 @@ package HighOrder "Standard house models"
                 smooth=Smooth.None,
                 fillColor={170,213,255},
                 fillPattern=FillPattern.Solid,
-                visible=  withWindow1),
+                visible = withWindow1),
               Text(
                 extent={{-36,10},{12,22}},
                 lineColor={0,0,0},
                 fillColor={170,213,255},
                 fillPattern=FillPattern.Solid,
                 textString="Win1",
-                visible=  withWindow1),
+                visible = withWindow1),
               Polygon(
                 points={{26,30},{56,0},{70,0},{40,30},{26,30}},
                 lineColor={0,0,0},
@@ -8772,16 +8782,16 @@ package HighOrder "Standard house models"
                 "EnEV_2002",                                                                                                    choice = 3
                 "WSchV_1995",  choice = 4 "WSchV_1984",                                                                          radioButtons = true));
 
-          parameter Boolean withFloorHeating = true
+          parameter Boolean withFloorHeating = false
             "If true, that floor has different connectors" annotation (Dialog(group = "Construction parameters"), choices(checkBox=true));
 
             //////////room geometry
-         parameter Modelica.SIunits.Length room_width=3.86 "width" annotation (Dialog(group = "Dimensions", descriptionLabel = true));
+         parameter Modelica.SIunits.Length room_width=if TIR == 1 then 3.86 else 3.97 "width" annotation (Dialog(group = "Dimensions", descriptionLabel = true));
          parameter Modelica.SIunits.Height room_height=2.60 "height" annotation (Dialog(group = "Dimensions", descriptionLabel = true));
-         parameter Modelica.SIunits.Length length1=3.23 "l1 " annotation (Dialog(group = "Dimensions", descriptionLabel = true));
+         parameter Modelica.SIunits.Length length1=if TIR == 1 then 3.23 else 3.34 "l1 " annotation (Dialog(group = "Dimensions", descriptionLabel = true));
          parameter Modelica.SIunits.Length length2=2.44 "l2 " annotation (Dialog(group = "Dimensions", descriptionLabel = true));
          parameter Modelica.SIunits.Length length3=1.33 "l3 " annotation (Dialog(group = "Dimensions", descriptionLabel = true));
-         parameter Modelica.SIunits.Length length4=3.23 "l4 " annotation (Dialog(group = "Dimensions", descriptionLabel = true));
+         parameter Modelica.SIunits.Length length4=if TIR == 1 then 3.23 else 3.34 "l4 " annotation (Dialog(group = "Dimensions", descriptionLabel = true));
          parameter Modelica.SIunits.Length thickness_IWsimple=0.145
             "thickness IWsimple "                                                         annotation (Dialog(group = "Dimensions", descriptionLabel = true));
 
@@ -9008,13 +9018,15 @@ package HighOrder "Standard house models"
         equation
           if withFloorHeating then
               connect(Livingroom.thermFloor, ThermFloor[1]) annotation (Line(
-              points={{-68.84,38.32},{-68.84,6},{-90,6},{-90,-92},{-44,-92},{2,-92},{2,-98.8}},
+              points={{-68.84,38.32},{-68.84,6},{-90,6},{-90,-92},{2,-92},{2,
+                    -98.8}},
               color={191,0,0},
               pattern=LinePattern.Dash,
               smooth=Smooth.None));
 
           connect(Hobby.thermFloor, ThermFloor[2]) annotation (Line(
-              points={{69.18,46.24},{69.18,22},{90,22},{90,-92},{8,-92},{8,-92},{2,-96.4}},
+              points={{69.18,46.24},{69.18,22},{90,22},{90,-92},{8,-92},{2,
+                    -96.4}},
               color={191,0,0},
               pattern=LinePattern.Dash,
               smooth=Smooth.None));
@@ -9031,7 +9043,7 @@ package HighOrder "Standard house models"
               pattern=LinePattern.Dash,
               smooth=Smooth.None));
           connect(Kitchen.thermFloor, ThermFloor[5]) annotation (Line(
-              points={{-68.4,-44.32},{-90,-44.32},{-90,-92},{-44,-92},{-4,-92},{2,-89.2}},
+              points={{-68.4,-44.32},{-90,-44.32},{-90,-92},{-4,-92},{2,-89.2}},
               color={191,0,0},
               pattern=LinePattern.Dash,
               smooth=Smooth.None));
@@ -9269,13 +9281,15 @@ package HighOrder "Standard house models"
               pattern=LinePattern.None,
               smooth=Smooth.None));
           connect(Livingroom.thermFloor, ThermFloor[1]) annotation (Line(
-              points={{-68.84,38.32},{-68.84,6},{-90,6},{-90,-92},{-44,-92},{2,-92},{2,-98.8}},
+              points={{-68.84,38.32},{-68.84,6},{-90,6},{-90,-92},{2,-92},{2,
+                  -98.8}},
               color={191,0,0},
               pattern=LinePattern.Dash,
               smooth=Smooth.None));
 
           connect(Hobby.thermFloor, ThermFloor[2]) annotation (Line(
-              points={{69.18,46.24},{69.18,22},{90,22},{90,-92},{8,-92},{8,-92},{2,-96.4}},
+              points={{69.18,46.24},{69.18,22},{90,22},{90,-92},{8,-92},{2,
+                  -96.4}},
               color={191,0,0},
               pattern=LinePattern.Dash,
               smooth=Smooth.None));
@@ -9292,7 +9306,7 @@ package HighOrder "Standard house models"
               pattern=LinePattern.Dash,
               smooth=Smooth.None));
           connect(Kitchen.thermFloor, ThermFloor[5]) annotation (Line(
-              points={{-68.4,-44.32},{-90,-44.32},{-90,-92},{-44,-92},{-4,-92},{2,-89.2}},
+              points={{-68.4,-44.32},{-90,-44.32},{-90,-92},{-4,-92},{2,-89.2}},
               color={191,0,0},
               pattern=LinePattern.Dash,
               smooth=Smooth.None));
@@ -9351,12 +9365,12 @@ package HighOrder "Standard house models"
                 "EnEV_2002",                                                                                                    choice = 3
                 "WSchV_1995",  choice = 4 "WSchV_1984",                                                                          radioButtons = true));
 
-          parameter Boolean withFloorHeating = true
+          parameter Boolean withFloorHeating = false
             "If true, that floor has different connectors" annotation (Dialog(group = "Construction parameters"), choices(checkBox=true));
 
             //////////room geometry
 
-         parameter Modelica.SIunits.Length room_width_long=3.84 "w1 " annotation (Dialog(group = "Dimensions", descriptionLabel = true));
+         parameter Modelica.SIunits.Length room_width_long=if TIR == 1 then 3.86 else 3.97 "w1 " annotation (Dialog(group = "Dimensions", descriptionLabel = true));
 
          parameter Modelica.SIunits.Length room_width_short=2.28 "w2 " annotation (Dialog(group = "Dimensions", descriptionLabel = true));
 
@@ -9366,13 +9380,13 @@ package HighOrder "Standard house models"
 
          parameter Modelica.SIunits.Length roof_width = 2.21 "wRO" annotation (Dialog(group = "Dimensions", descriptionLabel = true));
 
-         parameter Modelica.SIunits.Length length5=3.23 "l5 " annotation (Dialog(group = "Dimensions", descriptionLabel = true));
+         parameter Modelica.SIunits.Length length5=if TIR == 1 then 3.23 else 3.34 "l5 " annotation (Dialog(group = "Dimensions", descriptionLabel = true));
 
          parameter Modelica.SIunits.Length length6=2.44 "l6 " annotation (Dialog(group = "Dimensions", descriptionLabel = true));
 
          parameter Modelica.SIunits.Length length7=1.33 "l7 " annotation (Dialog(group = "Dimensions", descriptionLabel = true));
 
-         parameter Modelica.SIunits.Length length8=3.23 "l8 " annotation (Dialog(group = "Dimensions", descriptionLabel = true));
+         parameter Modelica.SIunits.Length length8=if TIR == 1 then 3.23 else 3.34 "l8 " annotation (Dialog(group = "Dimensions", descriptionLabel = true));
 
          parameter Modelica.SIunits.Length thickness_IWsimple=0.145
             "thickness IWsimple "                                                         annotation (Dialog(group = "Dimensions", descriptionLabel = true));
@@ -9682,7 +9696,7 @@ package HighOrder "Standard house models"
               pattern=LinePattern.Dash,
               smooth=Smooth.None));
           connect(Children2.thermRoom, ThermFloor[4]) annotation (Line(
-              points={{-68,-58.4},{-90,-58.4},{-90,-4},{-44,-4},{0,-4},{0,4.5}},
+              points={{-68,-58.4},{-90,-58.4},{-90,-4},{0,-4},{0,4.5}},
               color={191,0,0},
               pattern=LinePattern.Dash,
               smooth=Smooth.None));
@@ -10015,7 +10029,7 @@ package HighOrder "Standard house models"
               pattern=LinePattern.Dash,
               smooth=Smooth.None));
           connect(Children2.thermRoom, ThermFloor[4]) annotation (Line(
-              points={{-68,-58.4},{-90,-58.4},{-90,-4},{-44,-4},{0,-4},{0,4.5}},
+              points={{-68,-58.4},{-90,-58.4},{-90,-4},{0,-4},{0,4.5}},
               color={191,0,0},
               pattern=LinePattern.Dash,
               smooth=Smooth.None));
@@ -10080,6 +10094,9 @@ package HighOrder "Standard house models"
                          choice = 2 "TRY02", choice = 3 "TRY03",  choice = 4 "TRY04", choice = 5 "TRY05", choice = 6 "TRY06", choice = 7 "TRY07", choice = 8 "TRY08",
                 choice = 9 "TRY09", choice = 10 "TRY10", choice = 11 "TRY11", choice = 12 "TRY12", choice = 13 "TRY13", choice = 14 "TRY14", choice= 15 "TRY15",radioButtons = true));
 
+          parameter Boolean withFloorHeating = false
+            "If true, that floor has different connectors" annotation (Dialog(group = "Construction parameters"), choices(checkBox=true));
+
           replaceable package Medium =
               Modelica.Media.Water.ConstantPropertyLiquidWater
             "Medium in the system"
@@ -10104,7 +10121,8 @@ package HighOrder "Standard house models"
             withDynamicVentilation=withDynamicVentilation,
             HeatingLimit=HeatingLimit,
             Max_VR=Max_VR,
-            Diff_toTempset=Diff_toTempset)
+            Diff_toTempset=Diff_toTempset,
+            withFloorHeating=withFloorHeating)
             annotation (Placement(transformation(extent={{-26,-94},{22,-42}})));
           UpperloorBuildingEnvelope
             upperFloor_Building(
@@ -10113,7 +10131,8 @@ package HighOrder "Standard house models"
             HeatingLimit=HeatingLimit,
             Max_VR=Max_VR,
             Diff_toTempset=Diff_toTempset,
-            withDynamicVentilation=withDynamicVentilation)
+            withDynamicVentilation=withDynamicVentilation,
+            withFloorHeating=withFloorHeating)
             annotation (Placement(transformation(extent={{-26,-22},{20,30}})));
           Rooms.OFD.Attic_Ro2Lf5         attic_2Ro_5Rooms(
             length=10.64,
@@ -11233,7 +11252,8 @@ package HighOrder "Standard house models"
             withDynamicVentilation=withDynamicVentilation,
             HeatingLimit=HeatingLimit,
             Max_VR=Max_VR,
-            Diff_toTempset=Diff_toTempset)
+            Diff_toTempset=Diff_toTempset,
+            withFloorHeating=false)
             annotation (Placement(transformation(extent={{-26,-94},{22,-42}})));
           BuildingEnvelope.UpperloorBuildingEnvelope
             UF(
@@ -11242,8 +11262,9 @@ package HighOrder "Standard house models"
             withDynamicVentilation=withDynamicVentilation,
             HeatingLimit=HeatingLimit,
             Max_VR=Max_VR,
-            Diff_toTempset=Diff_toTempset)
-            annotation (Placement(transformation(extent={{-26,-26},{20,26}})));
+            Diff_toTempset=Diff_toTempset,
+            withFloorHeating=false)
+            annotation (Placement(transformation(extent={{-26,-24},{20,28}})));
           Rooms.OFD.Attic_Ro2Lf5                          Attic(
             length=10.64,
             room1_length=5.875,
@@ -11322,42 +11343,44 @@ package HighOrder "Standard house models"
 
           connect(GF.thermCeiling_Livingroom, UF.thermFloor_Bedroom)
             annotation (Line(
-              points={{-24.08,-39.66},{-24.08,-32.83},{-23.7,-32.83},{-23.7,-28.6}},
+              points={{-24.08,-39.66},{-24.08,-32.83},{-23.7,-32.83},{-23.7,
+                  -26.6}},
               color={191,0,0},
               smooth=Smooth.None));
           connect(GF.thermCeiling_Hobby, UF.thermFloor_Children1)
             annotation (Line(
-              points={{-13.76,-39.66},{-13.76,-32.83},{-14.5,-32.83},{-14.5,-28.6}},
+              points={{-13.76,-39.66},{-13.76,-32.83},{-14.5,-32.83},{-14.5,
+                  -26.6}},
               color={191,0,0},
               smooth=Smooth.None));
           connect(GF.thermCeiling_Kitchen, UF.thermFloor_Children2)
             annotation (Line(
-              points={{15.04,-39.66},{15.04,-32.83},{13.1,-32.83},{13.1,-28.6}},
+              points={{15.04,-39.66},{15.04,-32.83},{13.1,-32.83},{13.1,-26.6}},
               color={191,0,0},
               smooth=Smooth.None));
           connect(UF.thermCeiling_Bedroom, Attic.thermRoom1)
             annotation (Line(
-              points={{-23.7,28.34},{-23.7,48}},
+              points={{-23.7,30.34},{-23.7,48}},
               color={191,0,0},
               smooth=Smooth.None));
           connect(UF.thermCeiling_Children1, Attic.thermRoom2)
             annotation (Line(
-              points={{-14.27,28.34},{-14.27,40.17},{-14.5,40.17},{-14.5,48}},
+              points={{-14.27,30.34},{-14.27,40.17},{-14.5,40.17},{-14.5,48}},
               color={191,0,0},
               smooth=Smooth.None));
           connect(UF.thermCeiling_Corridor, Attic.thermRoom3)
             annotation (Line(
-              points={{-5.53,28.34},{-5.53,40.17},{-5.3,40.17},{-5.3,48}},
+              points={{-5.53,30.34},{-5.53,40.17},{-5.3,40.17},{-5.3,48}},
               color={191,0,0},
               smooth=Smooth.None));
           connect(UF.thermCeiling_Bath, Attic.thermRoom4)
             annotation (Line(
-              points={{3.67,28.34},{3.67,40.17},{3.9,40.17},{3.9,48}},
+              points={{3.67,30.34},{3.67,40.17},{3.9,40.17},{3.9,48}},
               color={191,0,0},
               smooth=Smooth.None));
           connect(UF.thermCeiling_Children2, Attic.thermRoom5)
             annotation (Line(
-              points={{12.87,28.34},{12.87,39.17},{13.1,39.17},{13.1,48}},
+              points={{12.87,30.34},{12.87,39.17},{13.1,39.17},{13.1,48}},
               color={191,0,0},
               smooth=Smooth.None));
           connect(Attic.WindSpeedPort, WindSpeedPort)            annotation (Line(
@@ -11365,7 +11388,7 @@ package HighOrder "Standard house models"
               color={0,0,127},
               smooth=Smooth.None));
           connect(UF.WindSpeedPort, WindSpeedPort)                  annotation (Line(
-              points={{-29.45,6.5},{-32,12},{-74,12},{-74,120}},
+              points={{-29.45,8.5},{-29.45,12},{-74,12},{-74,120}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(GF.WindSpeedPort, WindSpeedPort)                   annotation (Line(
@@ -11379,7 +11402,7 @@ package HighOrder "Standard house models"
               color={0,0,127},
               smooth=Smooth.None));
           connect(UF.thermCorridor,varAirExchange.port_a)  annotation (Line(
-              points={{22.3,-28.6},{34,-28.6},{34,-26},{34,-26}},
+              points={{22.3,-26.6},{34,-26.6},{34,-26}},
               color={191,0,0},
               smooth=Smooth.None));
           connect(GF.thermCorridor,varAirExchange.port_b)  annotation (Line(
@@ -11388,14 +11411,14 @@ package HighOrder "Standard house models"
               smooth=Smooth.None));
           connect(UF.StarBedroom, UF_Hydraulic.Rad_Bedroom)         annotation (
               Line(
-              points={{-7.6,10.4},{-2,10.4},{-2,4},{74,4},{74,22.3},{86.4769,
+              points={{-7.6,12.4},{-2,12.4},{-2,4},{74,4},{74,22.3},{86.4769,
                   22.3}},
               color={95,95,95},
               pattern=LinePattern.None,
               smooth=Smooth.None));
           connect(UF.StarChildren1, UF_Hydraulic.Rad_Children1)         annotation (
              Line(
-              points={{1.6,10.4},{-2,10.4},{-2,4},{74,4},{74,30},{146,30},{146,
+              points={{1.6,12.4},{-2,12.4},{-2,4},{74,4},{74,30},{146,30},{146,
                   20},{136,20},{136,19.41},{133.185,19.41}},
               color={95,95,95},
               pattern=LinePattern.None,
@@ -11436,29 +11459,29 @@ package HighOrder "Standard house models"
               smooth=Smooth.None));
           connect(UF.ThermBedroom, UF_Hydraulic.Con_Bedroom)         annotation (
               Line(
-              points={{-7.6,15.6},{-2,15.6},{-2,4},{74,4},{74,17.03},{86.3077,
+              points={{-7.6,17.6},{-2,17.6},{-2,4},{74,4},{74,17.03},{86.3077,
                   17.03}},
               color={191,0,0},
               smooth=Smooth.None));
           connect(UF.ThermChildren1, UF_Hydraulic.Con_Chidlren1)
             annotation (Line(
-              points={{1.6,15.6},{-2,15.6},{-2,4},{74,4},{74,30},{146,30},{146,
+              points={{1.6,17.6},{-2,17.6},{-2,4},{74,4},{74,30},{146,30},{146,
                   15.5},{133.523,15.5}},
               color={191,0,0},
               smooth=Smooth.None));
           connect(UF.ThermChildren2, UF_Hydraulic.Con_Children2)
             annotation (Line(
-              points={{-7.6,-10.4},{-2,-10.4},{-2,4},{74,4},{74,-1.67},{86.1385,
+              points={{-7.6,-8.4},{-2,-8.4},{-2,4},{74,4},{74,-1.67},{86.1385,
                   -1.67}},
               color={191,0,0},
               smooth=Smooth.None));
           connect(UF.ThermBath, UF_Hydraulic.Con_Bath)         annotation (Line(
-              points={{1.6,-10.4},{-2,-10.4},{-2,4},{74,4},{74,30},{146,30},{
-                  146,-4.56},{133.523,-4.56}},
+              points={{1.6,-8.4},{-2,-8.4},{-2,4},{74,4},{74,30},{146,30},{146,
+                  -4.56},{133.523,-4.56}},
               color={191,0,0},
               smooth=Smooth.None));
           connect(UF.StarBath, UF_Hydraulic.Rad_Bath)         annotation (Line(
-              points={{1.6,-15.6},{-2,-15.6},{-2,4},{74,4},{74,30},{146,30},{
+              points={{1.6,-13.6},{-2,-13.6},{-2,4},{74,4},{74,30},{146,30},{
                   146,0.2},{133.692,0.2}},
               color={95,95,95},
               pattern=LinePattern.None,
@@ -11493,17 +11516,17 @@ package HighOrder "Standard house models"
               smooth=Smooth.None));
           connect(UF_Hydraulic.Rad_Children2, UF.StarChildren2)         annotation (
              Line(
-              points={{86.4769,4.45},{74,4.45},{74,4},{-2,4},{-2,-15.6},{-7.6,
-                  -15.6}},
+              points={{86.4769,4.45},{74,4.45},{74,4},{-2,4},{-2,-13.6},{-7.6,
+                  -13.6}},
               color={95,95,95},
               pattern=LinePattern.None,
               smooth=Smooth.None));
           connect(GF.thermCeiling_Corridor, UF.thermFloor_Corridor) annotation (Line(
-              points={{-4.64,-39.66},{-4.64,-32.83},{-5.3,-32.83},{-5.3,-28.6}},
+              points={{-4.64,-39.66},{-4.64,-32.83},{-5.3,-32.83},{-5.3,-26.6}},
               color={191,0,0},
               smooth=Smooth.None));
           connect(GF.thermCeiling_WCStorage, UF.thermFloor_Bath) annotation (Line(
-              points={{4.96,-39.66},{4.96,-33.83},{3.9,-33.83},{3.9,-28.6}},
+              points={{4.96,-39.66},{4.96,-33.83},{3.9,-33.83},{3.9,-26.6}},
               color={191,0,0},
               smooth=Smooth.None));
 
@@ -11518,7 +11541,7 @@ package HighOrder "Standard house models"
               color={0,0,127},
               smooth=Smooth.None));
           connect(UF.AirExchangePort, NaturalVentilation_UF) annotation (Line(
-              points={{-29.45,-2.86},{-74,-2.86},{-74,58},{-102,58}},
+              points={{-29.45,-0.86},{-74,-0.86},{-74,58},{-102,58}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(GF.AirExchangePort, NaturalVentilation_GF) annotation (Line(
@@ -11531,53 +11554,56 @@ package HighOrder "Standard house models"
               color={0,0,127},
               smooth=Smooth.None));
           connect(UF.North, SolarRadiationPort[1]) annotation (Line(
-              points={{22.3,1.56},{36,1.56},{36,-22},{172,-22},{172,98.3333},{
-                  190,98.3333}},
+              points={{22.3,3.56},{36,3.56},{36,-22},{172,-22},{172,81.6667},{
+                  190,81.6667}},
               color={255,128,0},
               smooth=Smooth.None));
           connect(UF.RoofS, SolarRadiationPort[6]) annotation (Line(
-              points={{22.3,11.44},{36,11.44},{36,-22},{172,-22},{172,81.6667},
-                  {190,81.6667}},
+              points={{22.3,13.44},{36,13.44},{36,-22},{172,-22},{172,98.3333},
+                  {190,98.3333}},
               color={255,128,0},
               smooth=Smooth.None));
           connect(UF.RoofN, SolarRadiationPort[5]) annotation (Line(
-              points={{22.3,19.76},{36,19.76},{36,-22},{172,-22},{172,85},{190,85}},
+              points={{22.3,21.76},{36,21.76},{36,-22},{172,-22},{172,95},{190,
+                  95}},
               color={255,128,0},
               smooth=Smooth.None));
 
           connect(UF.East, SolarRadiationPort[2]) annotation (Line(
-              points={{22.3,-6.24},{36,-6.24},{36,-22},{172,-22},{172,95},{190,95}},
+              points={{22.3,-4.24},{36,-4.24},{36,-22},{172,-22},{172,85},{190,
+                  85}},
               color={255,128,0},
               smooth=Smooth.None));
 
           connect(UF.South, SolarRadiationPort[3]) annotation (Line(
-              points={{22.3,-14.04},{36,-14.04},{36,-22},{172,-22},{172,91.6667},
-                  {190,91.6667}},
-              color={255,128,0},
-              smooth=Smooth.None));
-          connect(UF.West, SolarRadiationPort[4]) annotation (Line(
-              points={{22.3,-21.84},{36,-21.84},{36,-22},{172,-22},{172,88.3333},
+              points={{22.3,-12.04},{36,-12.04},{36,-22},{172,-22},{172,88.3333},
                   {190,88.3333}},
               color={255,128,0},
               smooth=Smooth.None));
+          connect(UF.West, SolarRadiationPort[4]) annotation (Line(
+              points={{22.3,-19.84},{36,-19.84},{36,-22},{172,-22},{172,91.6667},
+                  {190,91.6667}},
+              color={255,128,0},
+              smooth=Smooth.None));
           connect(GF.North, SolarRadiationPort[1]) annotation (Line(
-              points={{24.4,-45.12},{46,-45.12},{46,-22},{172,-22},{172,98.3333},
-                  {190,98.3333}},
+              points={{24.4,-45.12},{46,-45.12},{46,-22},{172,-22},{172,81.6667},
+                  {190,81.6667}},
               color={255,128,0},
               smooth=Smooth.None));
           connect(GF.East, SolarRadiationPort[2]) annotation (Line(
-              points={{24.4,-52.4},{46,-52.4},{46,-22},{172,-22},{172,95},{190,95}},
+              points={{24.4,-52.4},{46,-52.4},{46,-22},{172,-22},{172,85},{190,
+                  85}},
               color={255,128,0},
               smooth=Smooth.None));
 
           connect(GF.South, SolarRadiationPort[3]) annotation (Line(
-              points={{24.4,-61.24},{46,-61.24},{46,-22},{172,-22},{172,91.6667},
-                  {190,91.6667}},
+              points={{24.4,-61.24},{46,-61.24},{46,-22},{172,-22},{172,88.3333},
+                  {190,88.3333}},
               color={255,128,0},
               smooth=Smooth.None));
           connect(GF.West, SolarRadiationPort[4]) annotation (Line(
-              points={{24.4,-72.16},{46,-72.16},{46,-22},{172,-22},{172,88.3333},
-                  {190,88.3333}},
+              points={{24.4,-72.16},{46,-72.16},{46,-22},{172,-22},{172,91.6667},
+                  {190,91.6667}},
               color={255,128,0},
               smooth=Smooth.None));
 
@@ -11590,7 +11616,8 @@ package HighOrder "Standard house models"
               color={0,0,127},
               smooth=Smooth.None));
           connect(UF.thermOutside, tempOutside.port) annotation (Line(
-              points={{-27.84,19.24},{-74,19.24},{-74,90},{98,90},{98,71},{158,71}},
+              points={{-27.84,21.24},{-74,21.24},{-74,90},{98,90},{98,71},{158,
+                  71}},
               color={191,0,0},
               smooth=Smooth.None));
           connect(Attic.thermOutside, tempOutside.port) annotation (Line(
@@ -11601,25 +11628,25 @@ package HighOrder "Standard house models"
           connect(Attic.SolarRadiationPort_RO1, SolarRadiationPort[6]) annotation (
               Line(
               points={{-14.5,84},{-16,84},{-16,90},{74,90},{74,-22},{172,-22},{
-                  172,81.6667},{190,81.6667}},
+                  172,98.3333},{190,98.3333}},
               color={255,128,0},
               smooth=Smooth.None));
           connect(Attic.SolarRadiationPort_RO2, SolarRadiationPort[5]) annotation (
               Line(
-              points={{8.5,84},{8,84},{8,90},{74,90},{74,-22},{172,-22},{172,85},{
-                  190,85}},
+              points={{8.5,84},{8,84},{8,90},{74,90},{74,-22},{172,-22},{172,95},
+                  {190,95}},
               color={255,128,0},
               smooth=Smooth.None));
           connect(Attic.SolarRadiationPort_OW1, SolarRadiationPort[4]) annotation (
               Line(
               points={{-27.38,62},{-44,62},{-44,90},{74,90},{74,-22},{172,-22},
-                  {172,88.3333},{190,88.3333}},
+                  {172,91.6667},{190,91.6667}},
               color={255,128,0},
               smooth=Smooth.None));
           connect(Attic.SolarRadiationPort_OW2, SolarRadiationPort[2]) annotation (
               Line(
-              points={{22.3,62.4},{36,62.4},{36,90},{74,90},{74,-20},{172,-20},{172,
-                  95},{190,95}},
+              points={{22.3,62.4},{36,62.4},{36,90},{74,90},{74,-20},{172,-20},
+                  {172,85},{190,85}},
               color={255,128,0},
               smooth=Smooth.None));
           annotation (__Dymola_Images(Parameters(source="AixLib/Images/House/Hydraulik.png")), Icon(
@@ -12100,11 +12127,11 @@ package HighOrder "Standard house models"
               color={191,0,0},
               smooth=Smooth.None));
           connect(Livingroom.AirExchangePort, AirExchangePort[1]) annotation (Line(
-              points={{-64.9412,65.8667},{-80,65.8667},{-80,90},{-9,90},{-9,103}},
+              points={{-64.9412,65.8667},{-80,65.8667},{-80,90},{-9,90},{-9,127}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(Children.AirExchangePort, AirExchangePort[2]) annotation (Line(
-              points={{36,71.44},{20,71.44},{20,90},{-9,90},{-9,109}},
+              points={{36,71.44},{20,71.44},{20,90},{-9,90},{-9,121}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(Children.ThermRoom, ThermChildren) annotation (Line(
@@ -12122,12 +12149,12 @@ package HighOrder "Standard house models"
               color={0,0,127},
               smooth=Smooth.None));
           connect(Bathroom.AirExchangePort, AirExchangePort[4]) annotation (Line(
-              points={{-6.304,-40.08},{-18,-40.08},{-18,-80},{80,-80},{80,90},{-9,90},
-                  {-9,121}},
+              points={{-6.304,-40.08},{-18,-40.08},{-18,-80},{80,-80},{80,90},{
+                  -9,90},{-9,109}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(Bedroom.AirExchangePort, AirExchangePort[5]) annotation (Line(
-              points={{-64,-37.04},{-80,-37.04},{-80,90},{-9,90},{-9,127}},
+              points={{-64,-37.04},{-80,-37.04},{-80,90},{-9,90},{-9,103}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(Corridor.thermFloor, thermFloor_Corridor) annotation (Line(
@@ -14089,19 +14116,8 @@ package HighOrder "Standard house models"
     from(version="1.3", script="Conversions/ConvertFromHouse_Models_1.3.mos"),
     from(version = "2.0", script="Conversions/ConvertFromHouse_Models_2.0_To_2.1"),
     from(version = "2.1", script="Conversions/ConvertFromHouse_Models_2.1_To_2.2")),
-  Documentation(revisions="<html>
-<p><b>2014-05-19: Version 1.0</b>: by Ana Constantin</p>
-<p><ul>
-<li>Added documentation for all models and examples</li>
-<li>Renaming according to the MSL naming conventions</li>
-<li>Uses new MSL comform models from Building</li>
-</ul></p>
-<p><b>2013-09-24: Version 0.9</b>: by Ana Constantin</p>
-<p><ul>
-<li>Extended hydraulics models to also include floor heating</li>
-<li>Extended room models for OFD, to automatically change the connection to the floor if using floor heating or radiators</li>
-</ul></p>
-</html>", info="<html>
+  Documentation(revisions="",
+          info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Package for standard house models, derived form the EBC-Library HouseModels.</p>
 <h4><span style=\"color:#008000\">Level of Development</span></h4>
