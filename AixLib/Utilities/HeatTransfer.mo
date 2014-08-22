@@ -160,7 +160,7 @@ package HeatTransfer "Models for different types of heat transfer"
 </html>"));
     end HeatConv;
 
-    class HeatConv_inside
+    model HeatConv_inside
     "Natural convection computation according to B. Glueck, choice between several types of surface orientation, or constant factor"
     /* calculation of natural convection in the inside of a building according to B.Glueck- Waermeuebertragung, 
    Waermeabgabe von Raumheizflaechen und Rohren
@@ -632,7 +632,7 @@ package HeatTransfer "Models for different types of heat transfer"
               graphics));
   end HeatConv_outside;
 
-  class SolarRadToHeat "Compute the heat flow caused by radiation on a surface"
+  model SolarRadToHeat "Compute the heat flow caused by radiation on a surface"
     parameter Real coeff=0.6 "Weight coefficient";
    // parameter Modelica.SIunits.Area A=6 "Area of surface";
     parameter Real A = 10 "Area of surface";

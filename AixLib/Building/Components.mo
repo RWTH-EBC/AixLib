@@ -1643,7 +1643,7 @@ package Components "collection of basic components"
     package BaseClasses
       extends Modelica.Icons.BasesPackage;
 
-      class SimpleNLayer "Wall consisting of n layers"
+      model SimpleNLayer "Wall consisting of n layers"
 
         parameter Modelica.SIunits.Height h=3 "Height"
           annotation (Dialog(group="Geometry"));
