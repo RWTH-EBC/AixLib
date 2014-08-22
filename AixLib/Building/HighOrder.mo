@@ -13792,7 +13792,7 @@ package HighOrder "Standard house models"
         Wind_speed=true,
         Air_temp=true,
         fileName=
-            "modelica://DataBase/additionalFiles/TRY2010_12_Jahr_Modelica-Library.txt")
+            "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt")
         annotation (Placement(transformation(extent={{-199,69},{-151,101}})));
 
     public
@@ -14116,19 +14116,8 @@ package HighOrder "Standard house models"
     from(version="1.3", script="Conversions/ConvertFromHouse_Models_1.3.mos"),
     from(version = "2.0", script="Conversions/ConvertFromHouse_Models_2.0_To_2.1"),
     from(version = "2.1", script="Conversions/ConvertFromHouse_Models_2.1_To_2.2")),
-  Documentation(revisions="<html>
-<p><b>2014-05-19: Version 1.0</b>: by Ana Constantin</p>
-<p><ul>
-<li>Added documentation for all models and examples</li>
-<li>Renaming according to the MSL naming conventions</li>
-<li>Uses new MSL comform models from Building</li>
-</ul></p>
-<p><b>2013-09-24: Version 0.9</b>: by Ana Constantin</p>
-<p><ul>
-<li>Extended hydraulics models to also include floor heating</li>
-<li>Extended room models for OFD, to automatically change the connection to the floor if using floor heating or radiators</li>
-</ul></p>
-</html>", info="<html>
+  Documentation(revisions="",
+          info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Package for standard house models, derived form the EBC-Library HouseModels.</p>
 <h4><span style=\"color:#008000\">Level of Development</span></h4>
