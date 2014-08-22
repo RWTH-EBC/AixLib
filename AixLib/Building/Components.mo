@@ -1317,11 +1317,12 @@ package Components "collection of basic components"
         Imax=Limit) if outside and withWindow and withSunblind
         annotation (Placement(transformation(extent={{-44,-22},{-21,4}})));
 
-      WindowsDoors.Door insideDoor(
+      WindowsDoors.Door Door(
         T0=T0,
         door_area=door_height*door_width,
-        U=U_door*2,
-        eps=eps_door) if not (outside) and withDoor
+        eps=eps_door,
+        U=if outside then U_door else U_door*2) if
+                         withDoor
         annotation (Placement(transformation(extent={{-21,-102},{11,-70}})));
       WindowsDoors.WindowSimple windowSimple(
         T0=T0,
@@ -1402,43 +1403,20 @@ package Components "collection of basic components"
     end if;
 
     //******************************************************************
-    // *******standard connections for inside wall with door************
+    // *******standard connections for wall with door************
     //******************************************************************
 
-    if not (outside) and withDoor then
+    if withDoor then
 
-        connect(insideDoor.port_a, port_outside) annotation (Line(
-            points={{-19.4,-86},{-56,-86},{-56,4},{-98,4}},
+        connect(Door.port_a, port_outside) annotation (Line(
+            points={{-19.4,-86},{-56,-86},{-56,24},{-24,24},{-24,4},{-98,4}},
             color={191,0,0},
             smooth=Smooth.None));
-
-        connect(insideDoor.port_b, heatStarToComb.therm) annotation (Line(
+        connect(Door.port_b, heatStarToComb.therm) annotation (Line(
             points={{9.4,-86},{48,-86},{48,-6.1},{58.9,-6.1}},
             color={191,0,0},
             smooth=Smooth.None));
-        connect(insideDoor.Star, heatStarToComb.star) annotation (Line(
-            points={{9.4,-76.4},{48,-76.4},{48,4.8},{58.6,4.8}},
-            color={95,95,95},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-
-    end if;
-
-    //******************************************************************
-    // *******standard connections for outside wall with door************
-    //******************************************************************
-
-    if (outside) and withDoor then
-
-        connect(insideDoor.port_a, heatTransfer_Outside.port_b) annotation (Line(
-            points={{-19.4,-86},{-56,-86},{-56,24},{-24,24},{-24,58},{-27,58}},
-            color={191,0,0},
-            smooth=Smooth.None));
-        connect(insideDoor.port_b, heatStarToComb.therm) annotation (Line(
-            points={{9.4,-86},{48,-86},{48,-6.1},{58.9,-6.1}},
-            color={191,0,0},
-            smooth=Smooth.None));
-        connect(insideDoor.Star, heatStarToComb.star) annotation (Line(
+        connect(Door.Star, heatStarToComb.star) annotation (Line(
             points={{9.4,-76.4},{48,-76.4},{48,4.8},{58.6,4.8}},
             color={95,95,95},
             pattern=LinePattern.None,
@@ -1631,7 +1609,7 @@ package Components "collection of basic components"
 </html>",
     revisions="<html>
 <p><ul>
-<li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
+<li><i>August 22, 2014&nbsp;</i> by Ana Constantin:<br/>Corrected implementation of door also for outside walls. This closes ticket <a href=\"https://github.com/RWTH-EBC/AixLib/issues/13\">issue 13</li>
 <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 22, 2012&nbsp;</i> by Lukas Mencher:<br/>Outside wall may have a door now, icon adjusted</li>
 <li><i>Mai 24, 2012&nbsp;</i> by Ana Constantin:<br/>Added inside surface orientation</li>
