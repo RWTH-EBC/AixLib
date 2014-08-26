@@ -4798,7 +4798,7 @@ package LowOrder "Low Order Building Models"
 <li><i>June 24, 2014  </i>by Moritz Lauster:<br>Implemented</li>
 </ul>
 </html>"),
-        experiment(StopTime=3.1536e+007),
+        experiment(StopTime=3.1536e+007, Interval=3600),
         __Dymola_experimentSetupOutput);
     end LowOrderExample;
   end Examples;
