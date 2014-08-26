@@ -4734,7 +4734,15 @@ package LowOrder "Low Order Building Models"
         fileName=
             "modelica://AixLib/Resources/LowOrder_ExampleData/UserProfilesHeatSimple.txt",
         columns={2,3},
-        tableOnFile=false)
+        tableOnFile=false,
+        table=[0,295.15,295.2; 3600,295.1,295.2; 7200,295.1,295.2; 10800,295.1,
+            295.2; 14400,295.1,295.2; 18000,295.1,295.2; 21600,295.1,295.2;
+            25200,300.1,300.2; 28800,300.1,300.2; 32400,300.1,300.2; 36000,
+            300.1,300.2; 39600,300.1,300.2; 43200,300.1,300.2; 46800,300.1,
+            300.2; 50400,300.1,300.2; 54000,300.1,300.2; 57600,300.1,300.2;
+            61200,300.1,300.2; 64800,300.1,300.2; 68400,295.1,295.2; 72000,
+            295.1,295.2; 75600,295.1,295.2; 79200,295.1,295.2; 82800,295.1,
+            295.2; 86400,295.1,295.2])
         annotation (Placement(transformation(extent={{-56,-75},{-42,-61}})));
 
     equation
@@ -4789,7 +4797,9 @@ package LowOrder "Low Order Building Models"
 <ul>
 <li><i>June 24, 2014  </i>by Moritz Lauster:<br>Implemented</li>
 </ul>
-</html>"));
+</html>"),
+        experiment(StopTime=3.1536e+007),
+        __Dymola_experimentSetupOutput);
     end LowOrderExample;
   end Examples;
   annotation (Documentation(info="<html>
