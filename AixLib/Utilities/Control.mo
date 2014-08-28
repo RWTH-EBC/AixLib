@@ -49,12 +49,11 @@ package Control "Controls that are not defined in MSL or Annex60-Library"
              0)));
     Modelica.Blocks.Continuous.LimPID PI(
       k=KR,
-      initType=Modelica.Blocks.Types.Init.NoInit,
       yMax=if RangeSwitch then -l else h,
       yMin=if RangeSwitch then -h else l,
       controllerType=Modelica.Blocks.Types.SimpleController.PI,
       Ti=TN,
-      Td=0.1)  annotation (Placement(transformation(extent={{-16,30},{4,50}},
+      Td=0.1)  annotation (Placement(transformation(extent={{-18,30},{2,50}},
             rotation=0)));
 
     Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
@@ -76,13 +75,13 @@ package Control "Controls that are not defined in MSL or Annex60-Library"
             {24,-50}}, color={0,0,127}));
     connect(product.y, switch2.u3) annotation (Line(points={{47,-44},{50,-44},{
             50,-16},{54,-16}}, color={0,0,127}));
-    connect(switch1.y, PI.u_m) annotation (Line(points={{-19,-4},{-6,-4},{-6,28}},
+    connect(switch1.y, PI.u_m) annotation (Line(points={{-19,-4},{-8,-4},{-8,28}},
           color={0,0,127}));
-    connect(PI.y, switch2.u1) annotation (Line(points={{5,40},{24,40},{24,0},{
+    connect(PI.y, switch2.u1) annotation (Line(points={{3,40},{24,40},{24,0},{
             54,0}}, color={0,0,127}));
-    connect(PI.y, product.u2) annotation (Line(points={{5,40},{14,40},{14,-38},
+    connect(PI.y, product.u2) annotation (Line(points={{3,40},{14,40},{14,-38},
             {24,-38}}, color={0,0,127}));
-    connect(soll, PI.u_s) annotation (Line(points={{-80,90},{-80,40},{-18,40}},
+    connect(soll, PI.u_s) annotation (Line(points={{-80,90},{-80,40},{-20,40}},
           color={0,0,127}));
     connect(soll, switch1.u3) annotation (Line(points={{-80,90},{-80,6},{-42,6},
             {-42,4}}, color={0,0,127}));
