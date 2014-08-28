@@ -4605,14 +4605,14 @@ package HighOrder "Standard house models"
                 smooth=Smooth.None,
                 fillColor={170,213,255},
                 fillPattern=FillPattern.Solid,
-                visible = withWindow1),
+                visible=  withWindow1),
               Text(
                 extent={{-36,10},{12,22}},
                 lineColor={0,0,0},
                 fillColor={170,213,255},
                 fillPattern=FillPattern.Solid,
                 textString="Win1",
-                visible = withWindow1),
+                visible=  withWindow1),
               Polygon(
                 points={{26,30},{56,0},{70,0},{40,30},{26,30}},
                 lineColor={0,0,0},
@@ -8828,6 +8828,17 @@ package HighOrder "Standard house models"
           parameter Real Max_VR = 200 "Maximal ventilation rate" annotation (Dialog(group = "Dynamic ventilation", descriptionLabel = true,  enable = if withDynamicVentilation then true else false));
           parameter Modelica.SIunits.TemperatureDifference Diff_toTempset = 3
             "Difference to set temperature" annotation (Dialog(group = "Dynamic ventilation", descriptionLabel = true,  enable = if withDynamicVentilation then true else false));
+          parameter Modelica.SIunits.Temperature Tset_Livingroom = 295.15
+            "Tset_livingroom"
+                   annotation (Dialog(group = "Dynamic ventilation", descriptionLabel = true,  joinNext = true, enable = if withDynamicVentilation then true else false));
+          parameter Modelica.SIunits.Temperature Tset_Hobby = 295.15
+            "Tset_hobby"
+                   annotation (Dialog(group = "Dynamic ventilation", descriptionLabel = true, enable = if withDynamicVentilation then true else false));
+          parameter Modelica.SIunits.Temperature Tset_WC = 291.15 "Tset_WC"
+                   annotation (Dialog(group = "Dynamic ventilation", descriptionLabel = true,  joinNext = true, enable = if withDynamicVentilation then true else false));
+           parameter Modelica.SIunits.Temperature Tset_Kitchen = 295.15
+            "Tset_kitchen"
+                   annotation (Dialog(group = "Dynamic ventilation", descriptionLabel = true, enable = if withDynamicVentilation then true else false));
 
           Modelica.Blocks.Sources.Constant AirExchangePort_doorSt(k=0)
             "Storage"                                               annotation (
@@ -8849,6 +8860,11 @@ package HighOrder "Standard house models"
             withWindow1=true,
             withWindow2=true,
             withFloorHeating=withFloorHeating,
+            withDynamicVentilation=withDynamicVentilation,
+            HeatingLimit=HeatingLimit,
+            Max_VR=Max_VR,
+            Diff_toTempset=Diff_toTempset,
+            Tset=Tset_Livingroom,
             T0_air=295.15,
             T0_OW1=295.15,
             T0_OW2=295.15,
@@ -8878,7 +8894,12 @@ package HighOrder "Standard house models"
             T0_IW1=295.15,
             T0_IW2=295.15,
             T0_CE=295.13,
-            T0_FL=295.13)
+            T0_FL=295.13,
+            withDynamicVentilation=withDynamicVentilation,
+            HeatingLimit=HeatingLimit,
+            Max_VR=Max_VR,
+            Diff_toTempset=Diff_toTempset,
+            Tset=Tset_Hobby)
             annotation (Placement(transformation(extent={{84,28},{46,76}})));
           Rooms.OFD.Ow2IwL1IwS1Gr1Uf1         WC_Storage(
             TMC=TMC,
@@ -8902,7 +8923,12 @@ package HighOrder "Standard house models"
             T0_IW1=291.15,
             T0_IW2=291.15,
             T0_CE=291.13,
-            T0_FL=291.13)
+            T0_FL=291.13,
+            withDynamicVentilation=withDynamicVentilation,
+            HeatingLimit=HeatingLimit,
+            Max_VR=Max_VR,
+            Diff_toTempset=Diff_toTempset,
+            Tset=Tset_WC)
             annotation (Placement(transformation(extent={{84,-36},{46,-84}})));
           Rooms.OFD.Ow2IwL2IwS1Gr1Uf1         Kitchen(
             TMC=TMC,
@@ -8927,7 +8953,12 @@ package HighOrder "Standard house models"
             T0_IW1b=295.15,
             T0_IW2=295.15,
             T0_CE=295.13,
-            T0_FL=295.13)                                                   annotation (Placement(
+            T0_FL=295.13,
+            withDynamicVentilation=withDynamicVentilation,
+            HeatingLimit=HeatingLimit,
+            Max_VR=Max_VR,
+            Diff_toTempset=Diff_toTempset,
+            Tset=Tset_Kitchen)                                              annotation (Placement(
                 transformation(extent={{-84,-20},{-44,-84}})));
           Rooms.OFD.Ow1IwL2IwS1Gr1Uf1         Corridor(
             TMC=TMC,
@@ -9352,7 +9383,7 @@ package HighOrder "Standard house models"
 </html>"));
         end GroundFloorBuildingEnvelope;
 
-        model UpperloorBuildingEnvelope
+        model UpperFloorBuildingEnvelope
 
             ///////// construction parameters
 
@@ -9430,6 +9461,17 @@ package HighOrder "Standard house models"
           parameter Real Max_VR = 200 "Maximal ventilation rate" annotation (Dialog(group = "Dynamic ventilation", descriptionLabel = true,  enable = if withDynamicVentilation then true else false));
           parameter Modelica.SIunits.TemperatureDifference Diff_toTempset = 3
             "Difference to set temperature" annotation (Dialog(group = "Dynamic ventilation", descriptionLabel = true,  enable = if withDynamicVentilation then true else false));
+          parameter Modelica.SIunits.Temperature Tset_Bedroom = 295.15
+            "Tset_bedroom"
+                   annotation (Dialog(group = "Dynamic ventilation", descriptionLabel = true,  joinNext = true, enable = if withDynamicVentilation then true else false));
+          parameter Modelica.SIunits.Temperature Tset_Children1 = 295.15
+            "Tset_children1"
+                   annotation (Dialog(group = "Dynamic ventilation", descriptionLabel = true, enable = if withDynamicVentilation then true else false));
+          parameter Modelica.SIunits.Temperature Tset_Bath = 297.15 "Tset_Bath"
+                   annotation (Dialog(group = "Dynamic ventilation", descriptionLabel = true,  joinNext = true, enable = if withDynamicVentilation then true else false));
+           parameter Modelica.SIunits.Temperature Tset_Children2 = 295.15
+            "Tset_children2"
+                   annotation (Dialog(group = "Dynamic ventilation", descriptionLabel = true, enable = if withDynamicVentilation then true else false));
 
           Utilities.Interfaces.SolarRad_in RoofS annotation (Placement(
                 transformation(
@@ -9484,7 +9526,12 @@ package HighOrder "Standard house models"
             T0_IW2=295.15,
             T0_CE=295.1,
             T0_RO=295.15,
-            T0_FL=295.12)
+            T0_FL=295.12,
+            withDynamicVentilation=withDynamicVentilation,
+            HeatingLimit=HeatingLimit,
+            Max_VR=Max_VR,
+            Diff_toTempset=Diff_toTempset,
+            Tset=Tset_Bedroom)
             annotation (Placement(transformation(extent={{-82,14},{-42,78}})));
 
           Rooms.OFD.Ow2IwL1IwS1Lf1At1Ro1         Children1(
@@ -9511,7 +9558,12 @@ package HighOrder "Standard house models"
             T0_IW2=295.15,
             T0_CE=295.1,
             T0_RO=295.15,
-            T0_FL=295.12)
+            T0_FL=295.12,
+            withDynamicVentilation=withDynamicVentilation,
+            HeatingLimit=HeatingLimit,
+            Max_VR=Max_VR,
+            Diff_toTempset=Diff_toTempset,
+            Tset=Tset_Children1)
             annotation (Placement(transformation(extent={{82,28},{44,76}})));
 
           Rooms.OFD.Ow2IwL1IwS1Lf1At1Ro1         Bath(
@@ -9539,7 +9591,12 @@ package HighOrder "Standard house models"
             T0_IW2=297.15,
             T0_CE=297.1,
             T0_RO=297.15,
-            T0_FL=297.12)
+            T0_FL=297.12,
+            withDynamicVentilation=withDynamicVentilation,
+            HeatingLimit=HeatingLimit,
+            Max_VR=Max_VR,
+            Diff_toTempset=Diff_toTempset,
+            Tset=Tset_Bath)
             annotation (Placement(transformation(extent={{84,-36},{46,-84}})));
 
           Rooms.OFD.Ow2IwL2IwS1Lf1At1Ro1         Children2(
@@ -9568,7 +9625,12 @@ package HighOrder "Standard house models"
             T0_IW2=295.15,
             T0_CE=295.1,
             T0_RO=295.15,
-            T0_FL=295.12)                                                   annotation (Placement(
+            T0_FL=295.12,
+            withDynamicVentilation=withDynamicVentilation,
+            HeatingLimit=HeatingLimit,
+            Max_VR=Max_VR,
+            Diff_toTempset=Diff_toTempset,
+            Tset=Tset_Children2)                                            annotation (Placement(
                 transformation(extent={{-84,-20},{-44,-84}})));
 
           Rooms.OFD.Ow1IwL2IwS1Lf1At1Ro1         Corridor(
@@ -10075,7 +10137,7 @@ package HighOrder "Standard house models"
 <h4><span style=\"color:#008000\">Level of Development</span></h4>
 <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
 </html>"));
-        end UpperloorBuildingEnvelope;
+        end UpperFloorBuildingEnvelope;
 
         model WholeHouseBuildingEnvelope
           import AixLib;
@@ -10124,7 +10186,7 @@ package HighOrder "Standard house models"
             Diff_toTempset=Diff_toTempset,
             withFloorHeating=withFloorHeating)
             annotation (Placement(transformation(extent={{-26,-94},{22,-42}})));
-          UpperloorBuildingEnvelope
+          AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.UpperFloorBuildingEnvelope
             upperFloor_Building(
             TMC=TMC,
             TIR=TIR,
@@ -11255,8 +11317,7 @@ package HighOrder "Standard house models"
             Diff_toTempset=Diff_toTempset,
             withFloorHeating=false)
             annotation (Placement(transformation(extent={{-26,-94},{22,-42}})));
-          BuildingEnvelope.UpperloorBuildingEnvelope
-            UF(
+          BuildingEnvelope.UpperFloorBuildingEnvelope UF(
             TMC=TMC,
             TIR=TIR,
             withDynamicVentilation=withDynamicVentilation,
