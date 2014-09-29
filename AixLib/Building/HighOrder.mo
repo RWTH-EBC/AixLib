@@ -1332,7 +1332,7 @@ package HighOrder "Standard house models"
                 fillColor={255,170,170},
                 fillPattern=FillPattern.Solid,
                 textString="Win2",
-                visible = withWindow2),
+                visible=  withWindow2),
               Text(
                 extent={{50,-6},{0,6}},
                 lineColor={255,255,255},
@@ -1341,7 +1341,7 @@ package HighOrder "Standard house models"
                 textString="Win1",
                 origin={-70,0},
                 rotation=90,
-                visible = withWindow1),
+                visible=  withWindow1),
               Text(
                 extent={{2.85713,-4},{-17.1429,4}},
                 lineColor={255,255,255},
@@ -1350,7 +1350,7 @@ package HighOrder "Standard house models"
                 textString="D1",
                 origin={-70,-22.8571},
                 rotation=90,
-                visible = withDoor1),
+                visible=  withDoor1),
               Line(
                 points={{-46,60},{-46,30}},
                 color={255,255,255},
@@ -2003,7 +2003,7 @@ package HighOrder "Standard house models"
                 textString="D1",
                 origin={-70,30},
                 rotation=90,
-                visible = withDoor1),
+                visible=  withDoor1),
               Text(
                 extent={{-25,6},{25,-6}},
                 lineColor={255,255,255},
@@ -2012,7 +2012,7 @@ package HighOrder "Standard house models"
                 origin={-70,-25},
                 rotation=90,
                 textString="Win1",
-                visible = withWindow1),
+                visible=  withWindow1),
               Line(
                 points={{58,26},{58,18}},
                 color={255,255,255},
@@ -2609,7 +2609,7 @@ package HighOrder "Standard house models"
                 lineColor={0,0,0},
                 fillColor={170,213,255},
                 fillPattern=FillPattern.Solid,
-                visible = withWindow2),
+                visible=  withWindow2),
               Rectangle(
                 extent={{6,64},{-6,-64}},
                 lineColor={0,0,0},
@@ -2644,14 +2644,14 @@ package HighOrder "Standard house models"
                 fillColor={255,170,170},
                 fillPattern=FillPattern.Solid,
                 textString="D2",
-                visible = withDoor2),
+                visible=  withDoor2),
               Text(
                 extent={{-50,76},{0,64}},
                 lineColor={255,255,255},
                 fillColor={255,170,170},
                 fillPattern=FillPattern.Solid,
                 textString="Win2",
-                visible = withWindow2),
+                visible=  withWindow2),
               Text(
                 extent={{-56,52},{64,40}},
                 lineColor={255,255,255},
@@ -2687,7 +2687,7 @@ package HighOrder "Standard house models"
                 lineColor={0,0,0},
                 fillColor={170,213,255},
                 fillPattern=FillPattern.Solid,
-                visible = withWindow3),
+                visible=  withWindow3),
               Text(
                 extent={{-25,6},{25,-6}},
                 lineColor={255,255,255},
@@ -2696,7 +2696,7 @@ package HighOrder "Standard house models"
                 textString="Win3",
                 origin={-70,5},
                 rotation=90,
-                visible = withWindow3)}),
+                visible=  withWindow3)}),
           Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
                   100}}),
                   graphics),
@@ -3376,14 +3376,14 @@ package HighOrder "Standard house models"
                 lineColor={0,0,0},
                 fillColor={127,127,0},
                 fillPattern=FillPattern.Solid,
-                visible = withDoor2),
+                visible=  withDoor2),
               Text(
                 extent={{-50,76},{0,64}},
                 lineColor={255,255,255},
                 fillColor={255,170,170},
                 fillPattern=FillPattern.Solid,
                 textString="Win2",
-                visible = withWindow2),
+                visible=  withWindow2),
               Text(
                 extent={{-25,6},{25,-6}},
                 lineColor={255,255,255},
@@ -3392,14 +3392,14 @@ package HighOrder "Standard house models"
                 textString="Win3",
                 origin={-70,5},
                 rotation=90,
-                visible = withWindow3),
+                visible=  withWindow3),
               Text(
                 extent={{20,74},{40,66}},
                 lineColor={255,255,255},
                 fillColor={255,170,170},
                 fillPattern=FillPattern.Solid,
                 textString="D2",
-                visible = withDoor2),
+                visible=  withDoor2),
               Line(
                 points={{68,8},{54,8}},
                 color={255,255,255},
@@ -4028,7 +4028,7 @@ package HighOrder "Standard house models"
                 lineColor={0,0,0},
                 fillColor={170,213,255},
                 fillPattern=FillPattern.Solid,
-                visible = withWindow3),
+                visible=  withWindow3),
               Rectangle(
                 extent={{80,68},{68,12}},
                 lineColor={0,0,0},
@@ -4042,7 +4042,7 @@ package HighOrder "Standard house models"
                 textString="Win3",
                 origin={-70,25},
                 rotation=90,
-                visible = withWindow3),
+                visible=  withWindow3),
               Line(
                 points={{38,54},{68,54}},
                 color={255,255,255},
@@ -12388,7 +12388,7 @@ package HighOrder "Standard house models"
             HVAC.Valves.ThermostaticValve valve_kitchen(
               Kvs=0.41,
               Kv_setT=0.262,
-              p(start=1000)) annotation (Placement(transformation(extent={{-67,
+              dp(start=1000)) annotation (Placement(transformation(extent={{-67,
                       -82.5},{-82,-66.5}})));
 
             HVAC.Radiators.Radiator radiator_livingroom(RadiatorType=
@@ -12400,20 +12400,20 @@ package HighOrder "Standard house models"
               annotation (Placement(transformation(extent={{86,33},{101,48}})));
 
             HVAC.Valves.ThermostaticValve valve_bath(Kvs=0.24, Kv_setT=0.162,
-              p(start=1000))
+              dp(start=1000))
               annotation (Placement(transformation(extent={{38,-47},{50,-31}})));
             HVAC.Valves.ThermostaticValve valve_livingroom(
               Kvs=1.43,
               Kv_setT=0.4,
-              p(start=1000)) annotation (Placement(transformation(extent={{-67,
+              dp(start=1000)) annotation (Placement(transformation(extent={{-67,
                       -4},{-79,12}})));
 
             HVAC.Valves.ThermostaticValve valve_children(Kvs=0.16, Kv_setT=0.088,
-              p(start=1000))
+              dp(start=1000))
               annotation (Placement(transformation(extent={{64,32},{76,48}})));
 
             HVAC.Valves.ThermostaticValve valve_bedroom(Kvs=0.24, Kv_setT=0.182,
-              p(start=1000))
+              dp(start=1000))
               annotation (Placement(transformation(extent={{49,74},{60,87}})));
             HVAC.Pipes.StaticPipe thStF(D=Diam_Main, l=Length_thSt)
               "through the storage room, flow stream"
@@ -13442,7 +13442,7 @@ package HighOrder "Standard house models"
       Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow thermInsideWall2(Q_flow=
            0) annotation (Placement(transformation(extent={{102,10},{82,30}})));
 
-      AixLib.HVAC.Valves.ThermostaticValve              heatValve_new(p(start=
+      AixLib.HVAC.Valves.ThermostaticValve              heatValve_new(dp(start=
               1000))
         annotation (Placement(transformation(extent={{22,-36},{42,-16}})));
 
@@ -13455,9 +13455,9 @@ package HighOrder "Standard house models"
 
       AixLib.Utilities.Sources.NightMode nightMode(dayEnd=22, dayStart=6)
         annotation (Placement(transformation(extent={{-104,0},{-84,20}})));
-      AixLib.HVAC.Pipes.StaticPipe pipe_flow(p(start=100))
+      AixLib.HVAC.Pipes.StaticPipe pipe_flow(dp(start=100))
         annotation (Placement(transformation(extent={{-6,-36},{14,-16}})));
-      AixLib.HVAC.Pipes.StaticPipe pipe_return(p(start=100))
+      AixLib.HVAC.Pipes.StaticPipe pipe_return(dp(start=100))
         annotation (Placement(transformation(extent={{28,-82},{8,-62}})));
       Modelica.Blocks.Sources.Constant Tset(k=273.15 + 20)
         annotation (Placement(transformation(extent={{-6,-4},{4,6}})));

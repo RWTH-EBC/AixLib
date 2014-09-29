@@ -21,7 +21,7 @@ package Valves "Models for valves"
 
     //m_flow = rho * 1/3600 * Kvs * opening * sqrt(p / 100000);    //This is educational purposes equatioan, can be used to show the functionality of a valve when the flow direction is correct
 
-      m_flow = rho * 1/3600 * Kvs * opening * Modelica.Fluid.Utilities.regRoot2(p,Modelica.Constants.small,1e-4, 1e-4);    //This equation is better suited for stable simulations as it works for both flow directions and is continuous at flow zero
+      m_flow = rho * 1/3600 * Kvs * opening * Modelica.Fluid.Utilities.regRoot2(dp,Modelica.Constants.small,1e-4, 1e-4);    //This equation is better suited for stable simulations as it works for both flow directions and is continuous at flow zero
 
     annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
               {100,100}}), graphics={Polygon(
@@ -81,10 +81,10 @@ package Valves "Models for valves"
     port_b.h_outflow = inStream(port_a.h_outflow);
 
     //Calculate the pressure drop
-    m_flow = rho * 1/3600 * Kvs * opening * Modelica.Fluid.Utilities.regRoot2(p,Modelica.Constants.small,1e-4, 1e-4);  //original equation valve
+    m_flow = rho * 1/3600 * Kvs * opening * Modelica.Fluid.Utilities.regRoot2(dp,Modelica.Constants.small,1e-4, 1e-4);  //original equation valve
 
     //calculate the influence of the pressure drop
-    Influence_PressureDrop_inK = Influence_PressureDrop*(p / 100000 - 0.1)/0.5;
+    Influence_PressureDrop_inK = Influence_PressureDrop*(dp / 100000 - 0.1)/0.5;
 
     //calculate the measured temperature difference
     TempDiff = T_room - T_setRoom - Influence_PressureDrop_inK;

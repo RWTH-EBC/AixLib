@@ -2441,47 +2441,47 @@ This package contains aggregated models for definition of walls.
                 textString="Weather"),
               Text(
                 extent={{12,122},{150,110}},
-                lineColor={0,0,255},     visible=  Cloud_cover,
+                lineColor={0,0,255},     visible = Cloud_cover,
               textString="Cloud cov.",
               horizontalAlignment=TextAlignment.Right),
               Text(
                 extent={{10,64},{150,52}},
-                lineColor={0,0,255},     visible=  Wind_speed,
+                lineColor={0,0,255},     visible = Wind_speed,
               textString="Wind speed",
               horizontalAlignment=TextAlignment.Right),
               Text(
                 extent={{10,94},{150,82}},
-                lineColor={0,0,255},         visible=  Wind_dir,
+                lineColor={0,0,255},         visible = Wind_dir,
               textString="Wind dir.",
               horizontalAlignment=TextAlignment.Right),
               Text(
                 extent={{10,34},{150,22}},
-                lineColor={0,0,255},          visible=  Air_temp,
+                lineColor={0,0,255},          visible = Air_temp,
               textString="Air temp.",
               horizontalAlignment=TextAlignment.Right),
               Text(
                 extent={{10,6},{150,-6}},
-                lineColor={0,0,255},       visible=  Air_press,
+                lineColor={0,0,255},       visible = Air_press,
               textString="Air pressure",
               horizontalAlignment=TextAlignment.Right),
               Text(
                 extent={{10,-26},{150,-38}},
-                lineColor={0,0,255},       visible=  Mass_frac,
+                lineColor={0,0,255},       visible = Mass_frac,
               textString="Water in air",
               horizontalAlignment=TextAlignment.Right),
               Text(
                 extent={{10,-54},{150,-66}},
-                lineColor={0,0,255},        visible=  Rel_hum,
+                lineColor={0,0,255},        visible = Rel_hum,
               textString="Rel. humidity",
               horizontalAlignment=TextAlignment.Right),
               Text(
                 extent={{10,-84},{150,-96}},
-                lineColor={0,0,255},        visible=  Sky_rad,
+                lineColor={0,0,255},        visible = Sky_rad,
               horizontalAlignment=TextAlignment.Right,
               textString="Sky rad."),
               Text(
                 extent={{10,-114},{150,-126}},
-                lineColor={0,0,255},                visible=  Ter_rad,
+                lineColor={0,0,255},                visible = Ter_rad,
               horizontalAlignment=TextAlignment.Right,
               textString="Terrest. rad.")}),
           Documentation(info="<html>

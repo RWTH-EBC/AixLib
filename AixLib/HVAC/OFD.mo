@@ -683,13 +683,13 @@ package OFD "One family dweling as example application"
                  Flow(
         D=0.016,
         l=2,
-        p(start=4000))
+        dp(start=4000))
         annotation (Placement(transformation(extent={{20,-18},{40,2}})));
       Pipes.StaticPipe
                  Return(
         D=0.016,
         l=2,
-        p(start=4000))
+        dp(start=4000))
         annotation (Placement(transformation(extent={{40,-36},{20,-16}})));
       Modelica.Blocks.Sources.BooleanConstant
                                            nightSignal(k=false)
@@ -708,26 +708,26 @@ package OFD "One family dweling as example application"
       Modelica.Blocks.Sources.Constant sourceSetTemp_Boiler(k=273.15 + 55)
         annotation (Placement(transformation(extent={{-16,14},{-36,34}})));
       Hydraulics.GroundFloor  groundFloor(
-        toWCF(p(start=100)),
-        toWCR(p(start=100)),
-        thCo2F(p(start=100)),
-        thCoR2(p(start=100)),
-        valveWC(p(start=1000)),
-        valveLiving(p(start=1000)),
-        valveHobby(p(start=1000)),
-        toHoF(p(start=100)),
-        toHoR(p(start=100)),
-        thCo1F(p(start=100)),
-        thCo1R(p(start=100)),
-        toCoR(p(start=100)),
-        toKiR(p(start=100)),
-        thWCF(p(start=100)),
-        thWCR(p(start=100)),
-        toLiF(p(start=100)),
-        toLiR(p(start=100)),
-        valveKitchen(p(start=1000)),
-        valveCorridor(p(start=1000)),
-        thStR(p(start=100)))
+        toWCF(dp(start=100)),
+        toWCR(dp(start=100)),
+        thCo2F(dp(start=100)),
+        thCoR2(dp(start=100)),
+        valveWC(dp(start=1000)),
+        valveLiving(dp(start=1000)),
+        valveHobby(dp(start=1000)),
+        toHoF(dp(start=100)),
+        toHoR(dp(start=100)),
+        thCo1F(dp(start=100)),
+        thCo1R(dp(start=100)),
+        toCoR(dp(start=100)),
+        toKiR(dp(start=100)),
+        thWCF(dp(start=100)),
+        thWCR(dp(start=100)),
+        toLiF(dp(start=100)),
+        toLiR(dp(start=100)),
+        valveKitchen(dp(start=1000)),
+        valveCorridor(dp(start=1000)),
+        thStR(dp(start=100)))
         annotation (Placement(transformation(extent={{94,10},{130,38}})));
       Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedHeatFlow_conv[5]
         annotation (Placement(transformation(extent={{109,66},{129,86}})));
@@ -930,12 +930,12 @@ Set initial temperature for system over room temperature, in order to calculate 
       Pipes.StaticPipe Flow(
         D=0.016,
         l=2,
-        p(start=4000))
+        dp(start=4000))
         annotation (Placement(transformation(extent={{20,-18},{40,2}})));
       Pipes.StaticPipe Return(
         D=0.016,
         l=2,
-        p(start=4000))
+        dp(start=4000))
         annotation (Placement(transformation(extent={{40,-36},{20,-16}})));
       Modelica.Blocks.Sources.BooleanConstant
                                            nightSignal(k=false)
@@ -953,26 +953,26 @@ Set initial temperature for system over room temperature, in order to calculate 
       Modelica.Blocks.Sources.Constant sourceSetTemp_HeatPump(k=273.15 + 55)
         annotation (Placement(transformation(extent={{-94,28},{-74,48}})));
       Hydraulics.GroundFloor groundFloor(
-        toWCF(p(start=100)),
-        toWCR(p(start=100)),
-        thCo2F(p(start=100)),
-        thCoR2(p(start=100)),
-        valveWC(p(start=1000)),
-        valveLiving(p(start=1000)),
-        valveHobby(p(start=1000)),
-        toHoF(p(start=100)),
-        toHoR(p(start=100)),
-        thCo1F(p(start=100)),
-        thCo1R(p(start=100)),
-        toCoR(p(start=100)),
-        toKiR(p(start=100)),
-        thWCF(p(start=100)),
-        thWCR(p(start=100)),
-        toLiF(p(start=100)),
-        toLiR(p(start=100)),
-        valveKitchen(p(start=1000)),
-        valveCorridor(p(start=1000)),
-        thStR(p(start=100)))
+        toWCF(dp(start=100)),
+        toWCR(dp(start=100)),
+        thCo2F(dp(start=100)),
+        thCoR2(dp(start=100)),
+        valveWC(dp(start=1000)),
+        valveLiving(dp(start=1000)),
+        valveHobby(dp(start=1000)),
+        toHoF(dp(start=100)),
+        toHoR(dp(start=100)),
+        thCo1F(dp(start=100)),
+        thCo1R(dp(start=100)),
+        toCoR(dp(start=100)),
+        toKiR(dp(start=100)),
+        thWCF(dp(start=100)),
+        thWCR(dp(start=100)),
+        toLiF(dp(start=100)),
+        toLiR(dp(start=100)),
+        valveKitchen(dp(start=1000)),
+        valveCorridor(dp(start=1000)),
+        thStR(dp(start=100)))
         annotation (Placement(transformation(extent={{94,10},{130,38}})));
       Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedHeatFlow_conv[5]
         annotation (Placement(transformation(extent={{109,66},{129,86}})));

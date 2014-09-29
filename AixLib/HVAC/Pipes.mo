@@ -17,9 +17,9 @@ package Pipes "Models of pipes"
     port_a.h_outflow = inStream(port_b.h_outflow);
     port_b.h_outflow = inStream(port_a.h_outflow);
 
-    lambda2 =  abs(p)*2*D^3*rho/(l*mu*mu);
+    lambda2 =  abs(dp)*2*D^3*rho/(l*mu*mu);
     Re = -2*sqrt(lambda2)*Math.log10(2.51/sqrt(lambda2+1e-10) + 0.27*(e/D));
-    m_flow =  sign(p)*Modelica.Constants.pi/4*D*mu*Re;
+    m_flow =  sign(dp)*Modelica.Constants.pi/4*D*mu*Re;
 
     annotation (Icon(graphics={                   Rectangle(
             extent={{-100,40},{100,-40}},
@@ -86,9 +86,9 @@ package Pipes "Models of pipes"
     der(U) = heatport.Q_flow + H_flow_a + H_flow_b;
     heatport.T = T;
 
-    lambda2 =  abs(p)*2*D^3*rho/(l*mu*mu);
+    lambda2 =  abs(dp)*2*D^3*rho/(l*mu*mu);
     Re = -2*sqrt(lambda2)*Math.log10(2.51/sqrt(lambda2+1e-10) + 0.27*(e/D));
-    m_flow =  sign(p)*Modelica.Constants.pi/4*D*mu*Re;
+    m_flow =  sign(dp)*Modelica.Constants.pi/4*D*mu*Re;
 
     annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
               {100,100}}),

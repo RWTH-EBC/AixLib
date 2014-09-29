@@ -56,7 +56,7 @@ package Pumps "Pump models"
 
     // Connect the pump variables with the variables of the two port model
     V_flow = m_flow / rho;
-    Head = - p / (rho * Modelica.Constants.g_n);
+    Head = - dp / (rho * Modelica.Constants.g_n);
     annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
               {100,100}}),
                      graphics={
