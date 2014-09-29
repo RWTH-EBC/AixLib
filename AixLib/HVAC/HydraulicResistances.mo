@@ -12,7 +12,7 @@ package HydraulicResistances "Models for hydraulic resistances"
   equation
     port_a.h_outflow = inStream(port_b.h_outflow);
     port_b.h_outflow = inStream(port_a.h_outflow);
-    p = 8 * zeta / (Modelica.Constants.pi^2 * D^4 * rho) * m_flow^2;
+    dp = 8 * zeta / (Modelica.Constants.pi^2 * D^4 * rho) * m_flow^2;
 
     annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
               -100},{100,100}}), graphics), Icon(graphics={Rectangle(

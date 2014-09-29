@@ -81,7 +81,7 @@ package Interfaces "Special interfaces for hyraulic applications"
 
   partial model TwoPort
     "Component with two hydraulic ports and mass flow rate from a to b"
-    Modelica.SIunits.Pressure p
+    Modelica.SIunits.PressureDifference dp
       "Pressure drop between the two ports (= port_a.p - port_b.p)";
     Modelica.SIunits.MassFlowRate m_flow "Mass flowing from port a to port b";
     outer BaseParameters baseParameters "System properties";
@@ -97,7 +97,7 @@ package Interfaces "Special interfaces for hyraulic applications"
     Port_a  port_a    annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
     Port_b  port_b    annotation (Placement(transformation(extent={{90,-10},{110,10}})));
   equation
-    p = port_a.p - port_b.p;
+    dp = port_a.p - port_b.p;
     0 = port_a.m_flow + port_b.m_flow;
     m_flow = port_a.m_flow;
     annotation (Icon(graphics), Diagram(coordinateSystem(preserveAspectRatio=false,
@@ -269,7 +269,7 @@ Three equations need to be added by an extending class using this component:
   end PortMoistAir_b;
 
   partial model TwoPortMoistAir "Component with two moist air ports"
-    Modelica.SIunits.Pressure dp
+    Modelica.SIunits.PressureDifference dp
       "Pressure drop between the two ports (= port_a.p - port_b.p)";
 
     PortMoistAir_a portMoistAir_a
@@ -522,7 +522,7 @@ Three equations need to be added by an extending class using this component:
   end TwoPortMoistAirTransportFluidprops;
 
   partial model FourPortMoistAir "Component with four moist air ports"
-    Modelica.SIunits.Pressure dp[2]
+    Modelica.SIunits.PressureDifference dp[2]
       "Pressure drop between the two ports (= port_a.p - port_b.p)";
 
     Interfaces.PortMoistAir_a port_1a

@@ -334,7 +334,7 @@ package Radiators "Contains a radiator model"
         Influence_PressureDrop=0.15,
         Kvs=0.4,
         Kv_setT=0.12,
-        p(start=20000),
+        dp(start=20000),
         leakageOpening=0)
         annotation (Placement(transformation(extent={{32,10},{52,30}})));
       Radiator radiator(RadiatorType=
