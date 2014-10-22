@@ -39,7 +39,7 @@ protected
 initial equation
   assert(n == size(wf_wall, 1), "weightfactorswall has to have n elements");
   assert(n == size(wf_win, 1), "weightfactorswall has to have n elements");
-  if sum(wf_wall) + sum(wf_win) + wf_ground <> 0.00001 == false then
+  if not sum(wf_wall) + sum(wf_win) + wf_ground <> 0.00001 then
     Modelica.Utilities.Streams.print("WARNING!:The sum of the weightfactors (walls,windows and ground) in eqairtemp is 0. This means, that eqairtemp is 0 �C. If there are no walls, windows and ground at all, this might be irrelevant.");
   end if;
   if abs(sum(wf_wall) + sum(wf_win) + wf_ground - 1) > 0.1 then
