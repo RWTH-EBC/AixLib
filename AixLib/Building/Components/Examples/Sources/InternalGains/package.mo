@@ -1,7 +1,5 @@
 within AixLib.Building.Components.Examples.Sources;
-package InternalGains 
+
+package InternalGains
   extends Modelica.Icons.ExamplesPackage;
-
-
-
 end InternalGains;

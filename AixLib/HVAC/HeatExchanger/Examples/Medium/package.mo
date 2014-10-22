@@ -1,7 +1,5 @@
 within AixLib.HVAC.HeatExchanger.Examples;
-package Medium 
+
+package Medium
   extends Modelica.Icons.ExamplesPackage;
-
-
-
 end Medium;

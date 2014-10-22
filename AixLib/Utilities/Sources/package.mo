@@ -1,8 +1,5 @@
 within AixLib.Utilities;
+
 package Sources "Sources"
-    extends Modelica.Icons.Package;
-
-
-
-
+  extends Modelica.Icons.Package;
 end Sources;
