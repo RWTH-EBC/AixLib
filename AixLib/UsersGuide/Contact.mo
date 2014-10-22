@@ -1,5 +1,4 @@
 within AixLib.UsersGuide;
-
 class Contact "Contact"
   extends Modelica.Icons.Contact;
   annotation(Documentation(info = "<html>
@@ -18,3 +17,4 @@ class Contact "Contact"
        </html>
        "));
 end Contact;
+

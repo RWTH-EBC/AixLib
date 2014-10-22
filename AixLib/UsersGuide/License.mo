@@ -1,5 +1,4 @@
 within AixLib.UsersGuide;
-
 class License "Modelica License 2"
   extends Modelica.Icons.Information;
   annotation(Documentation(info = "<html>
@@ -190,3 +189,4 @@ class License "Modelica License 2"
  </html>
  "));
 end License;
+
