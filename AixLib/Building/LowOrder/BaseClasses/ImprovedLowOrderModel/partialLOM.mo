@@ -129,22 +129,24 @@ public
   Utilities.HeatTransfer.SolarRadToHeat
                                       solarRadToHeatWindowRad(coeff=g, A=Aw) if
                                                                              withWindows and withOuterwalls
-    annotation (Placement(transformation(extent={{-46,74},{-26,94}}, rotation=0)));
+    annotation (Placement(transformation(extent={{-46,82},{-26,102}},rotation=0)));
   Utilities.Interfaces.SolarRad_in
                                  solarRad_in if   withWindows and withOuterwalls
-    annotation (Placement(transformation(extent={{-102,60},{-82,80}}, rotation=0),
-        iconTransformation(extent={{-102,34},{-60,74}})));
+    annotation (Placement(transformation(extent={{-102,68},{-82,88}}, rotation=0),
+        iconTransformation(extent={{-21,-20},{21,20}},
+        rotation=-90,
+        origin={-40,95})));
 
   SolarRadMultiplier solarRadMultiplierWindowRad(x=1 - splitfac) if
     withWindows and withOuterwalls
-    annotation (Placement(transformation(extent={{-72,72},{-52,92}})));
+    annotation (Placement(transformation(extent={{-72,80},{-52,100}})));
   SolarRadMultiplier solarRadMultiplierWindowConv(x=splitfac) if   withWindows
      and withOuterwalls
-    annotation (Placement(transformation(extent={{-72,48},{-52,68}})));
+    annotation (Placement(transformation(extent={{-72,56},{-52,76}})));
   Utilities.HeatTransfer.SolarRadToHeat
                                       solarRadToHeatWindowConv(A=Aw, coeff=g) if
                                                                               withWindows and withOuterwalls
-    annotation (Placement(transformation(extent={{-46,50},{-26,70}}, rotation=0)));
+    annotation (Placement(transformation(extent={{-46,58},{-26,78}}, rotation=0)));
 
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
     ventilationTemperatureConverter annotation (Placement(transformation(
@@ -165,21 +167,21 @@ initial equation
 equation
 if withWindows and withOuterwalls then
     connect(solarRad_in, solarRadMultiplierWindowRad.solarRad_in) annotation (Line(
-        points={{-92,70},{-75,70},{-75,82},{-71,82}},
+        points={{-92,78},{-75,78},{-75,90},{-71,90}},
         color={255,128,0},
         smooth=Smooth.None));
     connect(solarRad_in, solarRadMultiplierWindowConv.solarRad_in) annotation (Line(
-        points={{-92,70},{-75,70},{-75,58},{-71,58}},
+        points={{-92,78},{-75,78},{-75,66},{-71,66}},
         color={255,128,0},
         smooth=Smooth.None));
     connect(solarRadMultiplierWindowRad.solarRad_out, solarRadToHeatWindowRad.solarRad_in)
       annotation (Line(
-        points={{-53,82},{-46.1,82}},
+        points={{-53,90},{-46.1,90}},
         color={255,128,0},
         smooth=Smooth.None));
     connect(solarRadMultiplierWindowConv.solarRad_out, solarRadToHeatWindowConv.solarRad_in)
       annotation (Line(
-        points={{-53,58},{-46.1,58}},
+        points={{-53,66},{-46.1,66}},
         color={255,128,0},
         smooth=Smooth.None));
     if withOuterwalls then
@@ -230,7 +232,7 @@ if withWindows and withOuterwalls then
       color={191,0,0},
       smooth=Smooth.None));
   connect(solarRadToHeatWindowConv.heatPort, airload.port) annotation (Line(
-      points={{-27,58},{-16,58},{-16,0},{-7,0}},
+      points={{-27,66},{-16,66},{-16,0},{-7,0}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(ventilationRate, airExchange.InPort1) annotation (Line(
@@ -252,7 +254,9 @@ if withWindows and withOuterwalls then
                       graphics),
     experiment(StopTime=864000),
     experimentSetupOutput,
-    Icon(graphics={
+    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+            100}}),
+         graphics={
         Rectangle(
           extent={{-60,74},{100,-72}},
           lineColor={135,135,135},

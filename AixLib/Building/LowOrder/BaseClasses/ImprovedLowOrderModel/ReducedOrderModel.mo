@@ -1,14 +1,14 @@
 within AixLib.Building.LowOrder.BaseClasses.ImprovedLowOrderModel;
 model ReducedOrderModel
   extends partialLOM;
-  Utilities.HeatTransfer.HeatToStar heatToStarWindow(A=Aw, eps=epsw)
+  Utilities.HeatTransfer.HeatToStar heatToStarWindow(A=Aw, eps=epsw) if withWindows
     annotation (Placement(transformation(extent={{-16,72},{4,92}})));
-  Utilities.HeatTransfer.HeatToStar heatToStarOuterwall(A=Ao, eps=epso)
+  Utilities.HeatTransfer.HeatToStar heatToStarOuterwall(A=Ao, eps=epso) if withOuterwalls
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-46,28})));
-  Utilities.HeatTransfer.HeatToStar heatToStarInnerwall(A=Ai, eps=epsi)
+  Utilities.HeatTransfer.HeatToStar heatToStarInnerwall(A=Ai, eps=epsi) if withInnerwalls
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
@@ -17,7 +17,7 @@ equation
   if withWindows and withOuterwalls then
   connect(solarRadToHeatWindowRad.heatPort, heatToStarWindow.Therm) annotation (
      Line(
-      points={{-27,82},{-15.2,82}},
+      points={{-27,90},{-22,90},{-22,82},{-15.2,82}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(heatToStarWindow.Star, internalGainsRad) annotation (Line(
