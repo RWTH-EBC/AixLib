@@ -1,5 +1,4 @@
 within AixLib.Building.LowOrder.Validation.VDI6007;
-
 model TestCase_8
   extends Modelica.Icons.Example;
   output Modelica.SIunits.Conversions.NonSIunits.Temperature_degC referenceTemp[1];
@@ -60,3 +59,4 @@ equation
  <p>Same Test Case exists in VDI 6020.</p>
  </html>"));
 end TestCase_8;
+

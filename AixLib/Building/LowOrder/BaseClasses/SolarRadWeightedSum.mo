@@ -1,6 +1,4 @@
 within AixLib.Building.LowOrder.BaseClasses;
-
-
 model SolarRadWeightedSum
   "weights vec input and sums it up to one scalar output"
   parameter Integer n = 1 "number of inputs and weightfactors";
@@ -34,3 +32,4 @@ equation
  </ul></p>
  </html>"));
 end SolarRadWeightedSum;
+

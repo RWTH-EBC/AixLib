@@ -1,5 +1,4 @@
 within AixLib.Building.LowOrder.Validation.VDI6007;
-
 model TestCase_2
   extends Modelica.Icons.Example;
   output Modelica.SIunits.Conversions.NonSIunits.Temperature_degC referenceTemp[1];
@@ -37,3 +36,4 @@ equation
  <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
  </html>"));
 end TestCase_2;
+

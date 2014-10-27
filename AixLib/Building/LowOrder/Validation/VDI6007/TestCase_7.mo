@@ -1,5 +1,4 @@
 within AixLib.Building.LowOrder.Validation.VDI6007;
-
 model TestCase_7
   extends Modelica.Icons.Example;
   output Real referenceLoad[1];
@@ -46,3 +45,4 @@ equation
  <p>Same Test Case exists in VDI 6020.</p>
  </html>"), Icon(graphics));
 end TestCase_7;
+

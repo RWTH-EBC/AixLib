@@ -1,6 +1,4 @@
 within AixLib.Building.LowOrder.BaseClasses;
-
-
 model SimpleInnerWall "1 capacitance, 1 resistance"
   import SI = Modelica.SIunits;
   parameter SI.ThermalResistance R1 = 1 "Resistance 1";
@@ -65,3 +63,4 @@ equation
             lineThickness =                                                                                                    0.5, fillColor = {255, 255, 255},
             fillPattern =                                                                                                    FillPattern.Solid, pattern = LinePattern.None), Line(points = {{-19, -32}, {15, -32}}, pattern = LinePattern.None, thickness = 0.5, smooth = Smooth.None), Line(points = {{-19, -44}, {15, -44}}, pattern = LinePattern.None, thickness = 0.5, smooth = Smooth.None), Text(extent = {{-90, 142}, {90, 104}}, lineColor = {0, 0, 255}, textString = "%name")}));
 end SimpleInnerWall;
+

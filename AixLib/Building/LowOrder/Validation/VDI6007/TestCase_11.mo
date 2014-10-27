@@ -1,5 +1,6 @@
 within AixLib.Building.LowOrder.Validation.VDI6007;
 
+
 model TestCase_11
   extends Modelica.Icons.Example;
   output Real referenceLoad[1];

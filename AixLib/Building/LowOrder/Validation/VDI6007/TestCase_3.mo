@@ -1,5 +1,4 @@
 within AixLib.Building.LowOrder.Validation.VDI6007;
-
 model TestCase_3
   extends Modelica.Icons.Example;
   output Modelica.SIunits.Conversions.NonSIunits.Temperature_degC referenceTemp[1];
@@ -35,3 +34,4 @@ equation
  <p>Same Test Case exists in VDI 6020.</p>
  </html>"), Icon(graphics), experiment(StopTime = 5.184e+006, Interval = 3600), __Dymola_experimentSetupOutput(events = false), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
 end TestCase_3;
+

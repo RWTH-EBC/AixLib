@@ -1,6 +1,4 @@
 within AixLib.Building.LowOrder.BaseClasses;
-
-
 model ReducedOrderModel
   "Low Order building envelope model corresponding to VDI 6007"
   parameter Boolean withInnerwalls = true "If inner walls are existent" annotation(Dialog(tab = "Inner walls"));
@@ -85,21 +83,26 @@ equation
     end if;
   end if;
   if withOuterwalls then
-    connect(equalAirTemp, outerwall.port_a) annotation(Line(points = {{-90, 0}, {-80, 0}, {-80, -0.909091}, {-70, -0.909091}}, color = {191, 0, 0}, smooth = Smooth.None));
-    connect(outerwall.port_b, heatToStarOuterwall.Therm) annotation(Line(points = {{-50, -0.909091}, {-46, -0.909091}, {-46, 12.8}}, color = {191, 0, 0}, smooth = Smooth.None));
-    connect(outerwall.port_b, heatConvOuterwall.port_b) annotation(Line(points = {{-50, -0.909091}, {-46.5, -0.909091}, {-46.5, 0}, {-44, 0}}, color = {191, 0, 0}, smooth = Smooth.None));
+    connect(equalAirTemp, outerwall.port_a) annotation(Line(points={{-90,0},{
+            -80,0},{-80,-0.909091},{-70,-0.909091}},                                                                           color = {191, 0, 0}, smooth = Smooth.None));
+    connect(outerwall.port_b, heatToStarOuterwall.Therm) annotation(Line(points={{-50,
+            -0.909091},{-46,-0.909091},{-46,12.8}},                                                                                  color = {191, 0, 0}, smooth = Smooth.None));
+    connect(outerwall.port_b, heatConvOuterwall.port_b) annotation(Line(points={{-50,
+            -0.909091},{-46.5,-0.909091},{-46.5,0},{-44,0}},                                                                                   color = {191, 0, 0}, smooth = Smooth.None));
     connect(heatConvOuterwall.port_a, airload.port) annotation(Line(points = {{-24, 0}, {-7, 0}}, color = {191, 0, 0}, smooth = Smooth.None));
     if withInnerwalls then
     end if;
   end if;
   if withInnerwalls then
-    connect(innerwall.port_a, heatConvInnerwall.port_b) annotation(Line(points = {{56, -0.909091}, {51.5, -0.909091}, {51.5, 0}, {48, 0}}, color = {191, 0, 0}, smooth = Smooth.None));
+    connect(innerwall.port_a, heatConvInnerwall.port_b) annotation(Line(points={{56,
+            -0.909091},{51.5,-0.909091},{51.5,0},{48,0}},                                                                                  color = {191, 0, 0}, smooth = Smooth.None));
     connect(internalGainsRad, heatToStarInnerwall.Star) annotation(Line(points = {{80, -90}, {80, 54}, {10, 54}, {10, 40}, {52, 40}, {52, 31.1}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
   end if;
   connect(airExchange.port_b, airload.port) annotation(Line(points = {{-24, -30}, {-16, -30}, {-16, 0}, {-7, 0}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(internalGainsConv, airload.port) annotation(Line(points = {{20, -90}, {20, -30}, {-16, -30}, {-16, 0}, {-7, 0}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(airload.port, heatConvInnerwall.port_a) annotation(Line(points = {{-7, 0}, {-16, 0}, {-16, -30}, {20, -30}, {20, 0}, {28, 0}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(heatToStarInnerwall.Therm, innerwall.port_a) annotation(Line(points = {{52, 12.8}, {52, -0.909091}, {56, -0.909091}}, color = {191, 0, 0}, smooth = Smooth.None));
+  connect(heatToStarInnerwall.Therm, innerwall.port_a) annotation(Line(points={{52,12.8},
+          {52,-0.909091},{56,-0.909091}},                                                                                       color = {191, 0, 0}, smooth = Smooth.None));
   connect(heatToStarOuterwall.Star, internalGainsRad) annotation(Line(points = {{-46, 31.1}, {-46, 40}, {10, 40}, {10, 54}, {80, 54}, {80, -90}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
   connect(heatToStarWindow.Star, internalGainsRad) annotation(Line(points = {{-0.9, 82}, {10, 82}, {10, 54}, {80, 54}, {80, -90}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
   connect(solarRadToHeatWindowConv.heatPort, airload.port) annotation(Line(points = {{-27, 58}, {-16, 58}, {-16, 0}, {-7, 0}}, color = {191, 0, 0}, smooth = Smooth.None));
@@ -143,3 +146,4 @@ equation
  </ul></p>
  </html>"));
 end ReducedOrderModel;
+

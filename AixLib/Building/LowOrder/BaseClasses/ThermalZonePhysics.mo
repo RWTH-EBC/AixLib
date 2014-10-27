@@ -1,6 +1,4 @@
 within AixLib.Building.LowOrder.BaseClasses;
-
-
 model ThermalZonePhysics "All sub-models of VDI 6007 connected to one model"
   parameter Boolean withInnerwalls = true "If inner walls are existent" annotation(Dialog(tab = "Inner walls"));
   parameter Modelica.SIunits.ThermalResistance R1i = 0.000656956
@@ -125,3 +123,4 @@ equation
  </ul></p>
  </html>"));
 end ThermalZonePhysics;
+
