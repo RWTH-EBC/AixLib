@@ -27,5 +27,5 @@ equation
   T_eqWall[i]=(T_air+T_eqLW[i])+T_eqSW[i];
 
   end for;
-
+  equalAirTemp.T = T_eqWall*wf_wall + T_eqWin*wf_win + T_ground*wf_ground;
 end improvedEqAirTemp;

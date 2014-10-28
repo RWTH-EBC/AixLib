@@ -19,4 +19,5 @@ equation
   T_eqWin=(T_air*unitvec)+T_eqLW;
   T_eqWall=(T_air+T_eqLWs)*unitvec+T_eqSW;
 
+  equalAirTemp.T = T_eqWall*wf_wall + T_eqWin*wf_win + T_ground*wf_ground;
 end EqAirTemp;

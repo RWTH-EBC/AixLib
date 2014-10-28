@@ -74,7 +74,6 @@ equation
     alpharad=(E_sky+E_earth)/(T_sky-T_earth);
   end if;
 
-  equalAirTemp.T = T_eqWall*wf_wall + T_eqWin*wf_win + T_ground*wf_ground;
 annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),
                       graphics), Icon(coordinateSystem(
