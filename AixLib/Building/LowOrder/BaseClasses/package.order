@@ -1,8 +1,9 @@
 EqAirTemp
-improvedEqAirTemp
-WindowEqAirTemp
-ImprovedReducedOrderModel
+EqAirTempViewfactor
+EqAirTempResWin
 ReducedOrderModel
+ReducedOrderModelImproved
+ReducedOrderModelVDI
 SimpleInnerWall
 SimpleOuterWall
 SolarRadMultiplier
