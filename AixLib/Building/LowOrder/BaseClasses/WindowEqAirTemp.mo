@@ -1,4 +1,4 @@
-within AixLib.Building.LowOrder.BaseClasses.EqualAirTemp;
+within AixLib.Building.LowOrder.BaseClasses;
 model WindowEqAirTemp
   extends PartialClasses.partialEqAirTemp;
 parameter Real orientationswallshorizontal[n]={90,90,90,90}
@@ -42,4 +42,11 @@ equation
 
   equalAirTemp.T = T_eqWall*wf_wall + T_ground*wf_ground;
   equalAirTempWindow.T = T_eqWin*wf_win;
+  annotation (Documentation(revisions="<html>
+<p><ul>
+<li><i>October 2014,&nbsp;</i> by Peter Remmen:<br/>Implemented.</li>
+</ul></p>
+</html>", info="<html>
+<p>For use with ImprovedReducedOrderModel only</p>
+</html>"));
 end WindowEqAirTemp;

@@ -1,4 +1,4 @@
-within AixLib.Building.LowOrder.BaseClasses.EqualAirTemp;
+within AixLib.Building.LowOrder.BaseClasses;
 model improvedEqAirTemp
   extends PartialClasses.partialEqAirTemp;
 
@@ -28,4 +28,9 @@ equation
 
   end for;
   equalAirTemp.T = T_eqWall*wf_wall + T_eqWin*wf_win + T_ground*wf_ground;
+  annotation (Documentation(revisions="<html>
+<p><ul>
+<li><i>October 2014,&nbsp;</i> by Peter Remmen:<br/>Implemented.</li>
+</ul></p>
+</html>"));
 end improvedEqAirTemp;

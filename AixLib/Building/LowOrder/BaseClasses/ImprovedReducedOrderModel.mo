@@ -1,4 +1,4 @@
-within AixLib.Building.LowOrder.BaseClasses.ImprovedLowOrderModel;
+within AixLib.Building.LowOrder.BaseClasses;
 model ImprovedReducedOrderModel
   import AixLib;
   extends AixLib.Building.LowOrder.BaseClasses.PartialClasses.partialLOM;

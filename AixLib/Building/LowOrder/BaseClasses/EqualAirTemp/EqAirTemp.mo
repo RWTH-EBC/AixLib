@@ -1,6 +1,6 @@
 within AixLib.Building.LowOrder.BaseClasses.EqualAirTemp;
 model EqAirTemp
-  extends partialEqAirTemp;
+  extends PartialClasses.partialEqAirTemp;
 protected
   parameter Real phiprivate=0.5;
   parameter Real unitvec[n]=ones(n);

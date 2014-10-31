@@ -1,8 +1,8 @@
 within AixLib.DataBase.Weather;
-
 record WeatherBaseDataDefinition "TYPE: Table with outdoor air tmeperature"
   extends Modelica.Icons.Record;
-  parameter Real[:, 3] temperature "Time in s | Temperature in �C | Solar irradiation in W/m2";
+  parameter Real[:, 3] temperature
+    "Time in s | Temperature in �C | Solar irradiation in W/m2";
   annotation(Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Very simple source to output weather conditions in the form of outdoor air temperature and solar irraditation.</p>
@@ -23,3 +23,4 @@ record WeatherBaseDataDefinition "TYPE: Table with outdoor air tmeperature"
  </ul></p>
  </html>"));
 end WeatherBaseDataDefinition;
+

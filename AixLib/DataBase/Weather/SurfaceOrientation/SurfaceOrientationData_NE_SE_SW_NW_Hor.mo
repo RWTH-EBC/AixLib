@@ -1,6 +1,6 @@
 within AixLib.DataBase.Weather.SurfaceOrientation;
-
-record SurfaceOrientationData_NE_SE_SW_NW_Hor "Northeast, Southeast, Southwest, Northwest, Horizontal"
+record SurfaceOrientationData_NE_SE_SW_NW_Hor
+  "Northeast, Southeast, Southwest, Northwest, Horizontal"
   extends SurfaceOrientationBaseDataDefinition(nSurfaces = 5, name = {"NE", "SE", "SW", "NW", "Hor"}, Azimut = {-135, -45, 45, 135, 0}, Tilt = {90, 90, 90, 90, 0});
   annotation(Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
@@ -49,3 +49,4 @@ record SurfaceOrientationData_NE_SE_SW_NW_Hor "Northeast, Southeast, Southwest, 
  </html>
  "));
 end SurfaceOrientationData_NE_SE_SW_NW_Hor;
+

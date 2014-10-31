@@ -1,9 +1,12 @@
 EqAirTemp
+improvedEqAirTemp
+WindowEqAirTemp
+ImprovedReducedOrderModel
 ReducedOrderModel
 SimpleInnerWall
 SimpleOuterWall
 SolarRadMultiplier
 SolarRadWeightedSum
+SplitterThermPercentAir
 ThermalZonePhysics
-EqualAirTemp
-ImprovedLowOrderModel
+PartialClasses
