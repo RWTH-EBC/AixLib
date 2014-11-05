@@ -288,8 +288,7 @@ if withWindows and withOuterwalls then
           lineThickness=1)}),
     Documentation(info="<html>
 <p>ReducedOrderModel is a simple component to compute the air temperature, heating load, etc. for a thermal zone. The zone is simplified to one outer wall, one inner wall and one air node. It is build out of standard components and <a href=\"AixLib.Building.LowOrder.BaseClasses.SimpleOuterWall\">SimpleOuterWall</a> and <a href=\"AixLib.Building.LowOrder.BaseClasses.SimpleInnerWall\">SimpleInnerWall</a>. </p>
-<h4>Main equations</h4>
-<p>The concept is described in VDI 6007. All outer walls and inner walls (including the windows) are merged together to one wall respectively. The inner walls are used as heat storages only, there is no heat transfer out of the zone (adiabate). This assumption is valid as long as the walls are in the zone or touch zones with a similar temperature. All walls, which touch other thermal zones are put together in the outer walls, which have an heat transfer with <a href=\"AixLib.Building.LowOrder.BaseClasses.EqAirTemp\">EqAirTemp</a>.</p<
+
 <p>The partial class contains following components: </p>
 <ul>
 <li>inner and outer walls</li>
@@ -298,6 +297,10 @@ if withWindows and withOuterwalls then
 <li>influence of air temperature caused by infiltration</li>
 <li>connectors for internal gains (conv. and rad.)</li>
 </ul>
+
+<h4>Main equations</h4>
+<p>The concept is described in VDI 6007. All equations can be found in VDI 6007. All outer walls and inner walls (including the windows) are merged together to one wall respectively. The inner walls are used as heat storages only, there is no heat transfer out of the zone (adiabate). This assumption is valid as long as the walls are in the zone or touch zones with a similar temperature. All walls, which touch other thermal zones are put together in the outer walls, which have an heat transfer with <a href=\"AixLib.Building.LowOrder.BaseClasses.EqAirTemp\">EqAirTemp</a>.</p<
+
 <h4>Assumption and limitations</h4>
 <p>The simplifications are based on the VDI 6007, which describes the thermal behaviour of a thermal zone with the equations for an electric circuit, hence they are equal. The heat transfer is described with resistances and the heat storage with capacitances. </p>
 <h4>Typical use and important parameters</h4>
