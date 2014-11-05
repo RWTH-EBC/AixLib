@@ -3,7 +3,8 @@ model improvedLOMExample
   extends Modelica.Icons.Example;
   import AixLib;
   parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();
-  replaceable AixLib.Building.LowOrder.BaseClasses.ReducedOrderModelImproved
+  replaceable
+    AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel.ReducedOrderModelEBCMod
     reducedOrderModel(
     R1i=0.001236773,
     C1i=9.32664e+05,
@@ -18,10 +19,10 @@ model improvedLOMExample
     Ao=123.6,
     alphaiwi=3.16,
     epsi=0.9) constrainedby
-    AixLib.Building.LowOrder.BaseClasses.PartialClasses.partialLOM annotation (
-      Placement(transformation(extent={{44,18},{78,52}})), choicesAllMatching=
-        true);
-  replaceable AixLib.Building.LowOrder.BaseClasses.EqAirTempResWin
+    AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel.partialReducedOrderModel
+    annotation (Placement(transformation(extent={{44,18},{78,52}})),
+      choicesAllMatching=true);
+  replaceable AixLib.Building.LowOrder.BaseClasses.EqAirTemp.EqAirTempEBCMod
     partialEqAirTemp(
     alphaowo=25,
     aowo=0.6,
@@ -31,9 +32,8 @@ model improvedLOMExample
     wf_win={0.000000000,0.000000000,1,0.000000000,0.000000000},
     wf_ground=0,
     T_ground=284.15,
-    orientationswallshorizontal={90,90,90,90,0})
-            constrainedby
-    AixLib.Building.LowOrder.BaseClasses.PartialClasses.partialEqAirTemp
+    orientationswallshorizontal={90,90,90,90,0}) constrainedby
+    AixLib.Building.LowOrder.BaseClasses.EqAirTemp.partialEqAirTemp
     annotation (Placement(transformation(extent={{-56,16},{-36,36}})));
   Modelica.Blocks.Sources.Constant infiltrationRate(k=1)   annotation(Placement(transformation(extent={{14,-7},
             {24,3}})));
@@ -154,9 +154,9 @@ equation
   connect(partialEqAirTemp.equalAirTempWindow, reducedOrderModel.equalAirTempWindow)
     annotation (Line(
       points={{-38,28.6},{-34,28.6},{-34,28},{-28,28},{-28,44.18},{47.4,44.18}},
-
       color={191,0,0},
       smooth=Smooth.None));
+
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics),
     experiment(StopTime=86400, Interval=3600),

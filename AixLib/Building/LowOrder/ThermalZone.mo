@@ -29,9 +29,11 @@ equation
   connect(human_SensibleHeat_VDI2078.RadHeat, thermalZonePhysics.internalGainsRad) annotation(Line(points = {{59, 9}, {92, 9}, {92, -48}, {16, -48}, {16, 2}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
   connect(machines_SensibleHeat_DIN18599.RadHeat, thermalZonePhysics.internalGainsRad) annotation(Line(points = {{59, -16.01}, {92, -16.01}, {92, -48}, {16, -48}, {16, 2}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
   connect(lights.RadHeat, thermalZonePhysics.internalGainsRad) annotation(Line(points = {{59, -36.01}, {92, -36.01}, {92, -48}, {16, -48}, {16, 2}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
-  connect(human_SensibleHeat_VDI2078.Schedule, internalGains[1]) annotation(Line(points = {{40.9, 8.9}, {30, 8.9}, {30, -74}, {80, -74}, {80, -113.333}}, color = {0, 0, 127}, smooth = Smooth.None));
+  connect(human_SensibleHeat_VDI2078.Schedule, internalGains[1]) annotation(Line(points={{40.9,
+          8.9},{30,8.9},{30,-74},{80,-74},{80,-113.333}},                                                                                                 color = {0, 0, 127}, smooth = Smooth.None));
   connect(machines_SensibleHeat_DIN18599.Schedule, internalGains[2]) annotation(Line(points = {{41, -10.5}, {30, -10.5}, {30, -74}, {80, -74}, {80, -100}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(lights.Schedule, internalGains[3]) annotation(Line(points = {{41, -30.5}, {30, -30.5}, {30, -74}, {80, -74}, {80, -86.6667}}, color = {0, 0, 127}, smooth = Smooth.None));
+  connect(lights.Schedule, internalGains[3]) annotation(Line(points={{41,-30.5},
+          {30,-30.5},{30,-74},{80,-74},{80,-86.6667}},                                                                                  color = {0, 0, 127}, smooth = Smooth.None));
   connect(infiltrationTemperature, thermalZonePhysics.ventilationTemperature) annotation(Line(points = {{-80, -40}, {-60, -40}, {-60, 12}, {-15.2, 12}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(thermalZonePhysics.internalGainsConv, internalGainsConv) annotation(Line(points = {{8, 2}, {8, -52}, {0, -52}, {0, -90}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(thermalZonePhysics.internalGainsRad, internalGainsRad) annotation(Line(points = {{16, 2}, {16, -80}, {40, -80}, {40, -90}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
