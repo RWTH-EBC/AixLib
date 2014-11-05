@@ -1,9 +1,3 @@
-EqAirTemp
-EqAirTempViewfactor
-EqAirTempResWin
-ReducedOrderModel
-ReducedOrderModelImproved
-ReducedOrderModelVDI
 SimpleInnerWall
 SimpleOuterWall
 SolarRadMultiplier
@@ -11,3 +5,5 @@ SolarRadWeightedSum
 SplitterThermPercentAir
 ThermalZonePhysics
 PartialClasses
+ReducedOrderModel
+EqAirTemp

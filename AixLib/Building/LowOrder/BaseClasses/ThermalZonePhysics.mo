@@ -62,8 +62,39 @@ model ThermalZonePhysics "All sub-models of VDI 6007 connected to one model"
   Modelica.Blocks.Interfaces.RealInput ventilationRate annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 90, origin = {-28, -90}), iconTransformation(extent = {{-14, -14}, {14, 14}}, rotation = 90, origin = {-40, -86})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a internalGainsConv annotation(Placement(transformation(extent = {{30, -100}, {50, -80}}), iconTransformation(extent = {{30, -100}, {50, -80}})));
   Utilities.Interfaces.Star internalGainsRad annotation(Placement(transformation(extent = {{70, -100}, {90, -80}}), iconTransformation(extent = {{70, -100}, {90, -80}})));
-  EqAirTemp eqAirTemp(alphaowo = alphaowo, aowo = aowo, wf_wall = weightfactorswall, wf_win = weightfactorswindow, wf_ground = weightfactorground, T_ground = temperatureground, n = n) if withOuterwalls annotation(Placement(transformation(extent = {{-46, 0}, {-26, 20}})));
-  ReducedOrderModel reducedOrderModel(epsw = epsw, g = g, RRest = RRest, R1o = R1o, C1o = C1o, Ao = Ao, R1i = R1i, C1i = C1i, Ai = Ai, T0all = T0all, Vair = Vair, alphaiwi = alphaiwi, alphaowi = alphaowi, rhoair = rhoair, cair = cair, epsi = epsi, epso = epso, Aw = sum(Aw), withInnerwalls = withInnerwalls, withWindows = withWindows, withOuterwalls = withOuterwalls, splitfac = splitfac) annotation(Placement(transformation(extent = {{18, -10}, {76, 46}})));
+  EqAirTemp.EqAirTempSimple eqAirTemp(
+    alphaowo=alphaowo,
+    aowo=aowo,
+    wf_wall=weightfactorswall,
+    wf_win=weightfactorswindow,
+    wf_ground=weightfactorground,
+    T_ground=temperatureground,
+    n=n) if                                                                                                     withOuterwalls
+    annotation (Placement(transformation(extent={{-46,0},{-26,20}})));
+  ReducedOrderModel.ReducedOrderModelStar reducedOrderModel(
+    epsw=epsw,
+    g=g,
+    RRest=RRest,
+    R1o=R1o,
+    C1o=C1o,
+    Ao=Ao,
+    R1i=R1i,
+    C1i=C1i,
+    Ai=Ai,
+    T0all=T0all,
+    Vair=Vair,
+    alphaiwi=alphaiwi,
+    alphaowi=alphaowi,
+    rhoair=rhoair,
+    cair=cair,
+    epsi=epsi,
+    epso=epso,
+    Aw=sum(Aw),
+    withInnerwalls=withInnerwalls,
+    withWindows=withWindows,
+    withOuterwalls=withOuterwalls,
+    splitfac=splitfac)
+    annotation (Placement(transformation(extent={{18,-10},{76,46}})));
   Modelica.Blocks.Interfaces.RealInput ventilationTemperature annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 0, origin = {-100, -50}), iconTransformation(extent = {{-15, -15}, {15, 15}}, rotation = 0, origin = {-76, -40})));
 equation
   if withWindows and withOuterwalls then

@@ -1,6 +1,6 @@
-within AixLib.Building.LowOrder.BaseClasses;
-model ReducedOrderModel
-  extends PartialClasses.partialLOM;
+within AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel;
+model ReducedOrderModelStar
+  extends partialReducedOrderModel;
   Utilities.HeatTransfer.HeatToStar heatToStarWindow(A=Aw, eps=epsw) if withWindows
     annotation (Placement(transformation(extent={{-16,72},{4,92}})));
   Utilities.HeatTransfer.HeatToStar heatToStarOuterwall(A=Ao, eps=epso) if withOuterwalls
@@ -92,5 +92,4 @@ equation
 </ul></p>
 
 </html>"));
-end ReducedOrderModel;
-
+end ReducedOrderModelStar;

@@ -1,7 +1,8 @@
-within AixLib.Building.LowOrder.BaseClasses;
-model ImprovedReducedOrderModel
+within AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel;
+model ReducedOrderModelEBCMod
   import AixLib;
-  extends AixLib.Building.LowOrder.BaseClasses.PartialClasses.partialLOM;
+  extends
+    AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel.partialReducedOrderModel;
 
    parameter Modelica.SIunits.ThermalResistance RWin=0.017727777777
     "Resistor Window"
@@ -122,4 +123,4 @@ equation
 <li><i>October 2014,&nbsp;</i> by Peter Remmen:<br/>Implemented.</li>
 </ul></p>
 </html>"));
-end ImprovedReducedOrderModel;
+end ReducedOrderModelEBCMod;

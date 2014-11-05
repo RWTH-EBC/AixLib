@@ -1,8 +1,8 @@
-within AixLib.Building.LowOrder.BaseClasses;
-
-
-model EqAirTemp
-  extends PartialClasses.partialEqAirTemp;
+within AixLib.Building.LowOrder.BaseClasses.EqAirTemp;
+model EqAirTempSimple
+  extends EqAirTemp.partialEqAirTemp;
+parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaowo=20
+    "Outer wall's coefficient of heat transfer (outer side)";
 protected
   parameter Real phiprivate=0.5;
   parameter Real unitvec[n]=ones(n);
@@ -59,4 +59,4 @@ equation
  <h4><span style=\"color:#008000\">Example Results</span></h4>
  <p>See <a href=\"AixLib.Building.LowOrder.Validation\">Validation</a> for some results.</p>
  </html>"));
-end EqAirTemp;
+end EqAirTempSimple;

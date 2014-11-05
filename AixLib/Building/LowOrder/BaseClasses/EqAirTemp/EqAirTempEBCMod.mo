@@ -1,6 +1,6 @@
-within AixLib.Building.LowOrder.BaseClasses;
-model EqAirTempResWin
-  extends PartialClasses.partialEqAirTemp;
+within AixLib.Building.LowOrder.BaseClasses.EqAirTemp;
+model EqAirTempEBCMod
+  extends EqAirTemp.partialEqAirTemp;
 parameter Real orientationswallshorizontal[n]={90,90,90,90}
     "orientations of the walls against the vertical (wall,roof)";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaconv_wall=24.67
@@ -49,4 +49,4 @@ equation
 </html>", info="<html>
 <p>For use with ImprovedReducedOrderModel only</p>
 </html>"));
-end EqAirTempResWin;
+end EqAirTempEBCMod;
