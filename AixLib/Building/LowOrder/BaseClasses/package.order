@@ -4,6 +4,5 @@ SolarRadMultiplier
 SolarRadWeightedSum
 SplitterThermPercentAir
 ThermalZonePhysics
-PartialClasses
 ReducedOrderModel
 EqAirTemp
