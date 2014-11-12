@@ -24,7 +24,6 @@ model improvedLOMExample
       choicesAllMatching=true);
   replaceable AixLib.Building.LowOrder.BaseClasses.EqAirTemp.EqAirTempEBCMod
     partialEqAirTemp(
-    alphaowo=25,
     aowo=0.6,
     eowo=0.9,
     n=5,
