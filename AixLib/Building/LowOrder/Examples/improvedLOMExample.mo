@@ -41,9 +41,9 @@ model improvedLOMExample
   AixLib.Building.Components.Weather.Sunblind
                               sunblind(n = 5, gsunblind = {0, 0, 0.15, 0.15, 0}) annotation(Placement(transformation(extent={{-24,59},
             {-4,79}})));
-  AixLib.Building.LowOrder.BaseClasses.SolarRadWeightedSum
-                                                    rad_weighted_sum(weightfactors = {0, 0, 7, 7, 0}, n = 5) annotation(Placement(transformation(extent={{4,60},{
-            24,80}})));
+  AixLib.Building.LowOrder.BaseClasses.SolarRadWeightedSum solarRadWeightedSum(
+      weightfactors={0,0,7,7,0}, n=5)
+    annotation (Placement(transformation(extent={{4,60},{24,80}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machinesConvective annotation(Placement(transformation(extent={{16,-40},
             {36,-20}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow personsConvective annotation(Placement(transformation(extent={{16,-60},
@@ -66,8 +66,10 @@ model improvedLOMExample
   Modelica.Blocks.Math.Gain gain2(k=0.4)
     annotation (Placement(transformation(extent={{-20,-82},{-12,-74}})));
 equation
-  connect(sunblind.Rad_Out,rad_weighted_sum. solarRad_in) annotation(Line(points={{-5,70},
-          {5,70}},                                                                                        color = {255, 128, 0}, smooth = Smooth.None));
+  connect(sunblind.Rad_Out, solarRadWeightedSum.solarRad_in) annotation (Line(
+      points={{-5,70},{5,70}},
+      color={255,128,0},
+      smooth=Smooth.None));
   connect(personsRadiative.port,HeatTorStar. Therm) annotation(Line(points={{36,-78},
           {52.8,-78}},                                                                                 color = {191, 0, 0}, smooth = Smooth.None));
   connect(partialEqAirTemp.equalAirTemp, reducedOrderModel.equalAirTemp)
@@ -96,7 +98,7 @@ equation
       points={{24.5,-2},{54.2,-2},{54.2,21.4}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(rad_weighted_sum.solarRad_out, reducedOrderModel.solarRad_in)
+  connect(solarRadWeightedSum.solarRad_out, reducedOrderModel.solarRad_in)
     annotation (Line(
       points={{23,70},{54.2,70},{54.2,51.15}},
       color={255,128,0},
