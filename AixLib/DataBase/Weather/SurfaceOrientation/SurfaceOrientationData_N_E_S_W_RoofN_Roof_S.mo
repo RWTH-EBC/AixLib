@@ -1,6 +1,8 @@
 within AixLib.DataBase.Weather.SurfaceOrientation;
 
-record SurfaceOrientationData_N_E_S_W_RoofN_Roof_S "North, East, South, West, Roof_N, Roof_S suitable to Standard OFD"
+
+record SurfaceOrientationData_N_E_S_W_RoofN_Roof_S
+  "North, East, South, West, Roof_N, Roof_S suitable to Standard OFD"
   extends SurfaceOrientationBaseDataDefinition(nSurfaces = 6, name = {"N", "O", "S", "W", "Roof_N", "Roof_S"}, Azimut = {180, -90, 0, 90, 180, 0}, Tilt = {90, 90, 90, 90, 45, 45});
   annotation(Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>

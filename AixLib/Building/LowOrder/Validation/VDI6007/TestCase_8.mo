@@ -1,5 +1,4 @@
 within AixLib.Building.LowOrder.Validation.VDI6007;
-
 model TestCase_8
   extends Modelica.Icons.Example;
   output Modelica.SIunits.Conversions.NonSIunits.Temperature_degC referenceTemp[1];
@@ -7,7 +6,23 @@ model TestCase_8
   Modelica.Blocks.Sources.Constant infiltrationRate(k = 0) annotation(Placement(transformation(extent = {{38, -5}, {48, 5}})));
   Modelica.Blocks.Sources.Constant infiltrationTemp(k = 22) annotation(Placement(transformation(extent = {{16, 14}, {26, 24}})));
   Utilities.HeatTransfer.HeatToStar HeatTorStar(A = 2) annotation(Placement(transformation(extent = {{42, -98}, {62, -78}})));
-  Building.LowOrder.BaseClasses.ReducedOrderModel reducedModel(epsi = 1, epso = 1, T0all(displayUnit = "K") = 295.15, R1i = 0.000668639, C1i = 1.23849e+007, Ai = 60.5, splitfac = 0.09, Aw = 14, epsw = 1, g = 1, R1o = 0.001735719, C1o = 5.25993e+006, Ao = 25.5, alphaiwi = 2.1, RRest = 0.020439688) annotation(Placement(transformation(extent = {{48, 26}, {82, 66}})));
+  BaseClasses.ReducedOrderModel.ReducedOrderModelStar reducedModel(
+    epsi=1,
+    epso=1,
+    T0all(displayUnit="K") = 295.15,
+    R1i=0.000668639,
+    C1i=1.23849e+007,
+    Ai=60.5,
+    splitfac=0.09,
+    Aw=14,
+    epsw=1,
+    g=1,
+    R1o=0.001735719,
+    C1o=5.25993e+006,
+    Ao=25.5,
+    alphaiwi=2.1,
+    RRest=0.020439688)
+    annotation (Placement(transformation(extent={{48,26},{82,66}})));
   Modelica.Blocks.Sources.CombiTimeTable outdoorTemp(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, columns = {2, 3, 4}, table = [0, 291.95, 0, 0; 3600, 291.95, 0, 0; 3600, 290.25, 0, 0; 7200, 290.25, 0, 0; 7200, 289.65, 0, 0; 10800, 289.65, 0, 0; 10800, 289.25, 0, 0; 14400, 289.25, 0, 0; 14400, 289.65, 0, 0; 18000, 289.65, 0, 0; 18000, 290.95, 0, 0; 21600, 290.95, 0, 0; 21600, 293.45, 0, 0; 25200, 293.45, 0, 0; 25200, 295.95, 0, 0; 28800, 295.95, 0, 0; 28800, 297.95, 0, 0; 32400, 297.95, 0, 0; 32400, 299.85, 0, 0; 36000, 299.85, 0, 0; 36000, 301.25, 0, 0; 39600, 301.25, 0, 0; 39600, 302.15, 0, 0; 43200, 302.15, 0, 0; 43200, 302.85, 0, 0; 46800, 302.85, 0, 0; 46800, 303.55, 0, 0; 50400, 303.55, 0, 0; 50400, 304.05, 0, 0; 54000, 304.05, 0, 0; 54000, 304.15, 0, 0; 57600, 304.15, 0, 0; 57600, 303.95, 0, 0; 61200, 303.95, 0, 0; 61200, 303.25, 0, 0; 64800, 303.25, 0, 0; 64800, 302.05, 0, 0; 68400, 302.05, 0, 0; 68400, 300.15, 0, 0; 72000, 300.15, 0, 0; 72000, 297.85, 0, 0; 75600, 297.85, 0, 0; 75600, 296.05, 0, 0; 79200, 296.05, 0, 0; 79200, 295.05, 0, 0; 82800, 295.05, 0, 0; 82800, 294.05, 0, 0; 86400, 294.05, 0, 0]) annotation(Placement(transformation(extent = {{-88, 8}, {-68, 28}})));
   Utilities.Sources.PrescribedSolarRad Quelle_Wand(n = 5) annotation(Placement(transformation(extent = {{-60, 36}, {-40, 56}})));
   Modelica.Blocks.Sources.CombiTimeTable wallRad(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, table = [0, 0, 0, 0, 0, 0.0; 3600, 0, 0, 0, 0, 0.0; 10800, 0, 0, 0, 0, 0.0; 14400, 0, 0, 0, 0, 0.0; 14400, 0, 0, 24, 23, 0.0; 18000, 0, 0, 24, 23, 0.0; 18000, 0, 0, 58, 53, 0.0; 21600, 0, 0, 58, 53, 0.0; 21600, 0, 0, 91, 77, 0.0; 25200, 0, 0, 91, 77, 0.0; 25200, 0, 0, 203, 97, 0.0; 28800, 0, 0, 203, 97, 0.0; 28800, 0, 0, 348, 114, 0.0; 32400, 0, 0, 348, 114, 0.0; 32400, 0, 0, 472, 131, 0.0; 36000, 0, 0, 472, 131, 0.0; 36000, 0, 0, 553, 144, 0.0; 39600, 0, 0, 553, 144, 0.0; 39600, 0, 0, 581, 159, 0.0; 43200, 0, 0, 581, 159, 0.0; 43200, 0, 0, 553, 372, 0.0; 46800, 0, 0, 553, 372, 0.0; 46800, 0, 0, 472, 557, 0.0; 50400, 0, 0, 472, 557, 0.0; 50400, 0, 0, 348, 685, 0.0; 54000, 0, 0, 348, 685, 0.0; 54000, 0, 0, 203, 733, 0.0; 57600, 0, 0, 203, 733, 0.0; 57600, 0, 0, 91, 666, 0.0; 61200, 0, 0, 91, 666, 0.0; 61200, 0, 0, 58, 474, 0.0; 64800, 0, 0, 58, 474, 0.0; 64800, 0, 0, 24, 177, 0.0; 68400, 0, 0, 24, 177, 0.0; 68400, 0, 0, 0, 0, 0.0; 72000, 0, 0, 0, 0, 0.0; 82800, 0, 0, 0, 0, 0.0; 86400, 0, 0, 0, 0, 0.0], columns = {2, 3, 4, 5, 6}) annotation(Placement(transformation(extent = {{-88, 36}, {-68, 56}})));
@@ -60,3 +75,4 @@ equation
  <p>Same Test Case exists in VDI 6020.</p>
  </html>"));
 end TestCase_8;
+

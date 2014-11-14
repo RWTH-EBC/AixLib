@@ -1,7 +1,8 @@
-EqAirTemp
-ReducedOrderModel
 SimpleInnerWall
 SimpleOuterWall
 SolarRadMultiplier
 SolarRadWeightedSum
+SplitterThermPercentAir
 ThermalZonePhysics
+ReducedOrderModel
+EqAirTemp

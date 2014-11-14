@@ -1,6 +1,6 @@
 within AixLib.DataBase.Weather;
-
-record WinterDay "Outdoor conditions on a cold winter day from TRY 2010_01_Wint.dat 08.01.2010"
+record WinterDay
+  "Outdoor conditions on a cold winter day from TRY 2010_01_Wint.dat 08.01.2010"
   extends WeatherBaseDataDefinition(temperature = [0, -5.1, 0; 3600, -5, 0; 7200, -4.9, 0; 10800, -4.9, 0; 14400, -4.8, 0; 18000, -4.8, 0; 21600, -4.9, 0; 25200, -4.9, 0; 28800, -4.8, 0; 32400, -4.6, 19; 36000, -4.4, 39; 39600, -4.3, 51; 43200, -4, 51; 46800, -4.1, 40; 50400, -4.1, 21; 54000, -4.1, 1; 57600, -4.2, 0; 61200, -4.7, 0; 64800, -4.6, 0; 68400, -4.7, 0; 72000, -5.2, 0; 75600, -6.1, 0; 79200, -5.8, 0; 82800, -5.5, 0]);
   annotation(Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
@@ -24,3 +24,4 @@ record WinterDay "Outdoor conditions on a cold winter day from TRY 2010_01_Wint.
  </ul></p>
  </html>"));
 end WinterDay;
+
