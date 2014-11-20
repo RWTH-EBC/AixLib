@@ -9,7 +9,7 @@ model TestCase_10
   Utilities.Sources.PrescribedSolarRad Quelle_Fenster(n = 5) annotation(Placement(transformation(extent = {{-50, 72}, {-30, 92}})));
   Components.Weather.Sunblind sunblind(n = 5, gsunblind = {0, 0, 0.15, 0, 0}) annotation(Placement(transformation(extent = {{-20, 71}, {0, 91}})));
   Building.LowOrder.BaseClasses.SolarRadWeightedSum rad_weighted_sum(n = 5, weightfactors = {0, 0, 7, 0, 0}) annotation(Placement(transformation(extent = {{8, 72}, {28, 92}})));
-  BaseClasses.EqAirTemp.EqAirTempSimple eqAirTemp_TestCase_8_1(
+  VDIComponents.EqAirTemp_TestCase_8    eqAirTemp_TestCase_8_1(
     alphaowo=25,
     wf_ground=0.629038674,
     n=5,
@@ -75,18 +75,19 @@ equation
   connect(innerLoads.y[2], personsConvective.Q_flow) annotation(Line(points = {{-27, -62}, {20, -62}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(innerLoads.y[1], personsRadiative.Q_flow) annotation(Line(points = {{-27, -62}, {-8, -62}, {-8, -90}, {20, -90}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(personsRadiative.port, HeatTorStar.Therm) annotation(Line(points = {{40, -90}, {56.8, -90}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(outdoorTemp.y, eqAirTemp_TestCase_8_1.weatherData) annotation (Line(
-      points={{-79,22},{-58,22},{-58,20},{-34,20}},
+  connect(outdoorTemp.y, eqAirTemp_TestCase_8_1.WeatherDataVector) annotation (
+      Line(
+      points={{-79,22},{-56,22},{-56,20},{-34,20}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(Quelle_Wand.solarRad_out, eqAirTemp_TestCase_8_1.solarRad_in)
-    annotation (Line(
+  connect(Quelle_Wand.solarRad_out, eqAirTemp_TestCase_8_1.Rad_In) annotation (
+      Line(
       points={{-39,54},{-36,54},{-36,25.6},{-34.5,25.6}},
       color={255,128,0},
       smooth=Smooth.None));
-  connect(eqAirTemp_TestCase_8_1.equalAirTemp, reducedModel.equalAirTemp)
+  connect(eqAirTemp_TestCase_8_1.equalairtemp, reducedModel.equalAirTemp)
     annotation (Line(
-      points={{-18,14.4},{16,14.4},{16,68},{56.8,68}},
+      points={{-18,20},{20,20},{20,68},{56.8,68}},
       color={191,0,0},
       smooth=Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
