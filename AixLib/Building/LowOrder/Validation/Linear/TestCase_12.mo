@@ -1,11 +1,13 @@
-within AixLib.Building.LowOrder.Validation.VDI6007;
-
-
+within AixLib.Building.LowOrder.Validation.Linear;
 model TestCase_12
   extends Modelica.Icons.Example;
   output Modelica.SIunits.Conversions.NonSIunits.Temperature_degC referenceTemp[1];
   output Modelica.SIunits.Temp_K simulationTemp;
-  Building.LowOrder.BaseClasses.ReducedOrderModel reducedModel(C1i = 1.48216e+007, Aw = 7, C1o = 1.60085e+006, epsi = 1, epso = 1, T0all(displayUnit = "K") = 295.15, R1i = 0.000595515, Ai = 75.5, RRest = 0.042748777, R1o = 0.004366222, Ao = 10.5, splitfac = 0.09, epsw = 1, g = 1, airload(V = 0.1), alphaiwi = 2.2) annotation(Placement(transformation(extent = {{54, 30}, {88, 70}})));
+  BaseClasses.ReducedOrderModelVDI                reducedModel(                    Aw = 7,                     epsi = 1, epso = 1, T0all(displayUnit = "K") = 295.15, R1i = 0.000595515, Ai = 75.5,                                         Ao = 10.5, splitfac = 0.09, epsw = 1, g = 1, airload(V = 0.1), alphaiwi = 2.2,
+    C1i=1.48362e+007,
+    RRest=0.042768721,
+    R1o=0.004367913,
+    C1o=1.6008e+006)                                                                                                     annotation(Placement(transformation(extent = {{54, 30}, {88, 70}})));
   Modelica.Blocks.Sources.CombiTimeTable outdoorTemp(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, columns = {2, 3, 4}, table = [0, 291.95, 0, 0; 3600, 291.95, 0, 0; 3600, 290.25, 0, 0; 7200, 290.25, 0, 0; 7200, 289.65, 0, 0; 10800, 289.65, 0, 0; 10800, 289.25, 0, 0; 14400, 289.25, 0, 0; 14400, 289.65, 0, 0; 18000, 289.65, 0, 0; 18000, 290.95, 0, 0; 21600, 290.95, 0, 0; 21600, 293.45, 0, 0; 25200, 293.45, 0, 0; 25200, 295.95, 0, 0; 28800, 295.95, 0, 0; 28800, 297.95, 0, 0; 32400, 297.95, 0, 0; 32400, 299.85, 0, 0; 36000, 299.85, 0, 0; 36000, 301.25, 0, 0; 39600, 301.25, 0, 0; 39600, 302.15, 0, 0; 43200, 302.15, 0, 0; 43200, 302.85, 0, 0; 46800, 302.85, 0, 0; 46800, 303.55, 0, 0; 50400, 303.55, 0, 0; 50400, 304.05, 0, 0; 54000, 304.05, 0, 0; 54000, 304.15, 0, 0; 57600, 304.15, 0, 0; 57600, 303.95, 0, 0; 61200, 303.95, 0, 0; 61200, 303.25, 0, 0; 64800, 303.25, 0, 0; 64800, 302.05, 0, 0; 68400, 302.05, 0, 0; 68400, 300.15, 0, 0; 72000, 300.15, 0, 0; 72000, 297.85, 0, 0; 75600, 297.85, 0, 0; 75600, 296.05, 0, 0; 79200, 296.05, 0, 0; 79200, 295.05, 0, 0; 82800, 295.05, 0, 0; 82800, 294.05, 0, 0; 86400, 294.05, 0, 0]) annotation(Placement(transformation(extent = {{-60, 18}, {-40, 38}})));
   Modelica.Blocks.Sources.CombiTimeTable windowRad(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, table = [0, 0, 0, 0, 0, 0.0; 3600, 0, 0, 0, 0, 0.0; 10800, 0, 0, 0, 0, 0.0; 14400, 0, 0, 0, 0, 0.0; 14400, 0, 0, 17, 0, 0.0; 18000, 0, 0, 17, 0, 0.0; 18000, 0, 0, 38, 0, 0.0; 21600, 0, 0, 38, 0, 0.0; 21600, 0, 0, 59, 0, 0.0; 25200, 0, 0, 59, 0, 0.0; 25200, 0, 0, 98, 0, 0.0; 28800, 0, 0, 98, 0, 0.0; 28800, 0, 0, 186, 0, 0.0; 32400, 0, 0, 186, 0, 0.0; 32400, 0, 0, 287, 0, 0.0; 36000, 0, 0, 287, 0, 0.0; 36000, 0, 0, 359, 0, 0.0; 39600, 0, 0, 359, 0, 0.0; 39600, 0, 0, 385, 0, 0.0; 43200, 0, 0, 385, 0, 0.0; 43200, 0, 0, 359, 0, 0.0; 46800, 0, 0, 359, 0, 0.0; 46800, 0, 0, 287, 0, 0.0; 50400, 0, 0, 287, 0, 0.0; 50400, 0, 0, 186, 0, 0.0; 54000, 0, 0, 186, 0, 0.0; 54000, 0, 0, 98, 0, 0.0; 57600, 0, 0, 98, 0, 0.0; 57600, 0, 0, 59, 0, 0.0; 61200, 0, 0, 59, 0, 0.0; 61200, 0, 0, 38, 0, 0.0; 64800, 0, 0, 38, 0, 0.0; 64800, 0, 0, 17, 0, 0.0; 68400, 0, 0, 17, 0, 0.0; 68400, 0, 0, 0, 0, 0.0; 72000, 0, 0, 0, 0, 0.0; 82800, 0, 0, 0, 0, 0.0; 86400, 0, 0, 0, 0, 0.0], columns = {2, 3, 4, 5, 6}) annotation(Placement(transformation(extent = {{-82, 72}, {-62, 92}})));
   Utilities.Sources.PrescribedSolarRad Quelle_Fenster(n = 5) annotation(Placement(transformation(extent = {{-54, 72}, {-34, 92}})));
@@ -27,9 +29,8 @@ equation
   connect(Quelle_Fenster.solarRad_out, sunblind.Rad_In) annotation(Line(points = {{-35, 82}, {-23, 82}}, color = {255, 128, 0}, smooth = Smooth.None));
   connect(varTemp.port, reducedModel.equalAirTemp) annotation(Line(points = {{18, 36}, {28, 36}, {28, 50.8}, {57.4, 50.8}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(sunblind.Rad_Out, rad_weighted_sum.solarRad_in) annotation(Line(points = {{-5, 82}, {5, 82}}, color = {255, 128, 0}, smooth = Smooth.None));
-  connect(rad_weighted_sum.solarRad_out, reducedModel.solarRad_in) annotation(Line(points = {{23, 82}, {32, 82}, {32, 60.8}, {57.23, 60.8}}, color = {255, 128, 0}, smooth = Smooth.None));
-  connect(ventitaltionRate.y[1], reducedModel.ventilationTemperature) annotation(Line(points = {{-39, -6}, {44, -6}, {44, 40.4}, {57.4, 40.4}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(outdoorTemp.y[1], reducedModel.ventilationRate) annotation(Line(points = {{-39, 28}, {-22, 28}, {-22, 8}, {64.2, 8}, {64.2, 34}}, color = {0, 0, 127}, smooth = Smooth.None));
+  connect(rad_weighted_sum.solarRad_out, reducedModel.solarRad_in) annotation(Line(points={{23,82},
+          {32,82},{32,69},{64.2,69}},                                                                                                    color = {255, 128, 0}, smooth = Smooth.None));
   connect(HeatTorStar.Star, reducedModel.internalGainsRad) annotation(Line(points = {{67.1, -94}, {84, -94}, {84, 34}, {84.09, 34}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
   connect(personsConvective.port, reducedModel.internalGainsConv) annotation(Line(points = {{32, -66}, {74.4, -66}, {74.4, 34}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(machinesConvective.port, reducedModel.internalGainsConv) annotation(Line(points = {{32, -46}, {74.4, -46}, {74.4, 34}}, color = {191, 0, 0}, smooth = Smooth.None));
@@ -37,7 +38,18 @@ equation
   connect(innerLoads.y[2], personsConvective.Q_flow) annotation(Line(points = {{-35, -66}, {12, -66}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(innerLoads.y[1], personsRadiative.Q_flow) annotation(Line(points = {{-35, -66}, {-16, -66}, {-16, -94}, {12, -94}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(personsRadiative.port, HeatTorStar.Therm) annotation(Line(points = {{32, -94}, {48.8, -94}}, color = {191, 0, 0}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), experiment(StopTime = 5.184e+006, Interval = 3600), __Dymola_experimentSetupOutput(events = false), Icon(graphics), Documentation(revisions = "<html>
+  connect(ventitaltionRate.y[1], reducedModel.ventilationRate) annotation (
+      Line(
+      points={{-39,-6},{64.2,-6},{64.2,34}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(outdoorTemp.y[1], reducedModel.ventilationTemperature) annotation (
+      Line(
+      points={{-39,28},{-20,28},{-20,16},{44,16},{44,40.4},{57.4,40.4}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
+            -100},{100,100}}),                                                                           graphics), experiment(StopTime = 5.184e+006, Interval = 3600), __Dymola_experimentSetupOutput(events = false), Icon(graphics), Documentation(revisions = "<html>
  <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
  </html>", info = "<html>
  <p>Test Case 12 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to mixed inner and outer heat sources for Type Room S:</p>

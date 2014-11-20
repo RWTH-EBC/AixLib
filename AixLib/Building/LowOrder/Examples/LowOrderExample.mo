@@ -10,8 +10,8 @@ parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = 
   Components.Weather.Weather weather(                                                                                           Air_temp = true, Sky_rad = true, Ter_rad = true, Outopt = 1,
     fileName=
         "D:/GIT/AixLib/AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt",
-
     WeatherData(tableOnFile=false, table=weatherDataDay.weatherData))                                                                                                     annotation(Placement(transformation(extent = {{-60, 42}, {-30, 62}})));
+
   Utilities.Sources.HeaterCooler.IdealHeaterCoolerVar1 idealHeaterCoolerVar1_1 annotation(Placement(transformation(extent = {{-22, -52}, {-2, -32}})));
   Modelica.Blocks.Sources.Constant infiltrationRate(k = 1) annotation(Placement(transformation(extent = {{-88, -32}, {-74, -18}})));
   Modelica.Blocks.Sources.Constant infiltrationTemperature(k = 288.15) annotation(Placement(transformation(extent = {{-88, -10}, {-74, 4}})));

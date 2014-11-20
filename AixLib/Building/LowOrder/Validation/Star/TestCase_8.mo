@@ -1,4 +1,4 @@
-within AixLib.Building.LowOrder.Validation.VDI6007;
+within AixLib.Building.LowOrder.Validation.Star;
 model TestCase_8
   extends Modelica.Icons.Example;
   output Modelica.SIunits.Conversions.NonSIunits.Temperature_degC referenceTemp[1];
@@ -14,7 +14,9 @@ model TestCase_8
   Utilities.Sources.PrescribedSolarRad Quelle_Fenster(n = 5) annotation(Placement(transformation(extent = {{-60, 68}, {-40, 88}})));
   Components.Weather.Sunblind sunblind(n = 5, gsunblind = {0, 0, 0.15, 0.15, 0}) annotation(Placement(transformation(extent = {{-30, 67}, {-10, 87}})));
   Building.LowOrder.BaseClasses.SolarRadWeightedSum rad_weighted_sum(weightfactors = {0, 0, 7, 7, 0}, n = 5) annotation(Placement(transformation(extent = {{-2, 68}, {18, 88}})));
-  VDIComponents.EqAirTemp_TestCase_8 eqAirTemp(aowo = 0.7, n = 5, wf_wall = {0.000000000, 0.000000000, 0.057948807, 0.132454416, 0.000000000}, wf_win = {0.000000000, 0.000000000, 0.404798388, 0.404798388, 0.000000000}, alphaowo = 25) annotation(Placement(transformation(extent = {{-16, 30}, {4, 50}})));
+  VDIComponents.EqAirTemp_TestCase_8 eqAirTemp(aowo = 0.7, n = 5,                                                                                                    alphaowo = 25,
+    wf_wall={0.000000000,0.000000000,0.057968311,0.132498994,0.000000000},
+    wf_win={0.000000000,0.000000000,0.404766351,0.404766351,0.000000000})                                                                                                     annotation(Placement(transformation(extent = {{-16, 30}, {4, 50}})));
   Modelica.Blocks.Sources.CombiTimeTable reference(tableName = "UserProfilesOffice", fileName = "./Tables/J1615/UserProfilesOffice.txt", tableOnFile = false, columns = {2}, extrapolation = Modelica.Blocks.Types.Extrapolation.HoldLastPoint, table = [3600, 22; 7200, 21.9; 10800, 21.9; 14400, 21.8; 18000, 22; 21600, 22.3; 25200, 22.7; 28800, 24.8; 32400, 24.7; 36000, 25.2; 39600, 25.6; 43200, 26.1; 46800, 25.9; 50400, 26.3; 54000, 26.6; 57600, 27.5; 61200, 27.6; 64800, 26; 68400, 25.8; 72000, 25.6; 75600, 25.6; 79200, 25.5; 82800, 25.5; 86400, 25.5; 781200, 37.6; 784800, 37.5; 788400, 37.3; 792000, 37.1; 795600, 37.1; 799200, 37.3; 802800, 37.5; 806400, 39.6; 810000, 39.4; 813600, 39.7; 817200, 40; 820800, 40.3; 824400, 40; 828000, 40.3; 831600, 40.5; 835200, 41.3; 838800, 41.3; 842400, 39.6; 846000, 39.2; 849600, 38.9; 853200, 38.8; 856800, 38.7; 860400, 38.5; 864000, 38.4; 5101200, 40.9; 5104800, 40.7; 5108400, 40.5; 5112000, 40.2; 5115600, 40.3; 5119200, 40.4; 5122800, 40.6; 5126400, 42.6; 5130000, 42.4; 5133600, 42.7; 5137200, 43; 5140800, 43.3; 5144400, 43; 5148000, 43.2; 5151600, 43.4; 5155200, 44.2; 5158800, 44.1; 5162400, 42.4; 5166000, 42; 5169600, 41.7; 5173200, 41.6; 5176800, 41.4; 5180400, 41.2; 5184000, 41.1]) annotation(Placement(transformation(extent = {{80, 80}, {100, 99}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machinesConvective annotation(Placement(transformation(extent = {{6, -50}, {26, -30}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow personsConvective annotation(Placement(transformation(extent = {{6, -70}, {26, -50}})));
@@ -30,7 +32,8 @@ equation
   connect(wallRad.y, Quelle_Wand.u) annotation(Line(points = {{-67, 46}, {-60, 46}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(sunblind.sunblindonoff, eqAirTemp.sunblindsig) annotation(Line(points = {{-20, 68}, {-14, 68}, {-14, 48}, {-6, 48}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(eqAirTemp.equalairtemp, reducedModel.equalAirTemp) annotation(Line(points = {{2, 40}, {24, 40}, {24, 46.8}, {51.4, 46.8}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(rad_weighted_sum.solarRad_out, reducedModel.solarRad_in) annotation(Line(points = {{17, 78}, {34, 78}, {34, 56.8}, {51.23, 56.8}}, color = {255, 128, 0}, smooth = Smooth.None));
+  connect(rad_weighted_sum.solarRad_out, reducedModel.solarRad_in) annotation(Line(points={{17,78},
+          {34,78},{34,65},{58.2,65}},                                                                                                    color = {255, 128, 0}, smooth = Smooth.None));
   connect(sunblind.Rad_Out, rad_weighted_sum.solarRad_in) annotation(Line(points = {{-11, 78}, {-1, 78}}, color = {255, 128, 0}, smooth = Smooth.None));
   connect(infiltrationRate.y, reducedModel.ventilationRate) annotation(Line(points = {{48.5, 0}, {58.2, 0}, {58.2, 30}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(HeatTorStar.Star, reducedModel.internalGainsRad) annotation(Line(points = {{61.1, -88}, {78, -88}, {78, 30}, {78.09, 30}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
@@ -59,4 +62,3 @@ equation
  <p>Same Test Case exists in VDI 6020.</p>
  </html>"));
 end TestCase_8;
-

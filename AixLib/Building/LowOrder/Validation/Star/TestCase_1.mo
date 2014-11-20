@@ -1,6 +1,4 @@
-within AixLib.Building.LowOrder.Validation.VDI6007;
-
-
+within AixLib.Building.LowOrder.Validation.Star;
 model TestCase_1
   extends Modelica.Icons.Example;
   output Modelica.SIunits.Conversions.NonSIunits.Temperature_degC referenceTemp[1];

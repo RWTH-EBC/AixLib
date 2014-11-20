@@ -1,6 +1,4 @@
-within AixLib.Building.LowOrder.Validation.VDI6007;
-
-
+within AixLib.Building.LowOrder.Validation.Linear;
 model TestCase_10
   extends Modelica.Icons.Example;
   output Modelica.SIunits.Conversions.NonSIunits.Temperature_degC referenceTemp[1];
@@ -11,7 +9,8 @@ model TestCase_10
   Utilities.Sources.PrescribedSolarRad Quelle_Fenster(n = 5) annotation(Placement(transformation(extent = {{-50, 72}, {-30, 92}})));
   Components.Weather.Sunblind sunblind(n = 5, gsunblind = {0, 0, 0.15, 0, 0}) annotation(Placement(transformation(extent = {{-20, 71}, {0, 91}})));
   Building.LowOrder.BaseClasses.SolarRadWeightedSum rad_weighted_sum(n = 5, weightfactors = {0, 0, 7, 0, 0}) annotation(Placement(transformation(extent = {{8, 72}, {28, 92}})));
-  BaseClasses.EqAirTemp eqAirTemp_TestCase_8_1(alphaowo = 25, wf_ground = 0.629038674, n = 5, wf_wall = {0.000000000, 0.000000000, 0.046454666, 0.000000000, 0.0}, wf_win = {0.000000000, 0.000000000, 0.324506660, 0.000000000, 0.0}, T_ground = 288.15) annotation(Placement(transformation(extent = {{-36, 30}, {-16, 50}})));
+  VDIComponents.EqAirTemp_TestCase_8
+                        eqAirTemp_TestCase_8_1(alphaowo = 25, wf_ground = 0.629038674, n = 5, wf_wall = {0.000000000, 0.000000000, 0.046454666, 0.000000000, 0.0}, wf_win = {0.000000000, 0.000000000, 0.324506660, 0.000000000, 0.0}, T_ground = 288.15) annotation(Placement(transformation(extent = {{-36, 30}, {-16, 50}})));
   Utilities.Sources.PrescribedSolarRad Quelle_Wand(n = 5) annotation(Placement(transformation(extent = {{-58, 44}, {-38, 64}})));
   Modelica.Blocks.Sources.CombiTimeTable outdoorTemp(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, columns = {2, 3, 4}, table = [0, 291.95, 0, 0; 3600, 291.95, 0, 0; 3600, 290.25, 0, 0; 7200, 290.25, 0, 0; 7200, 289.65, 0, 0; 10800, 289.65, 0, 0; 10800, 289.25, 0, 0; 14400, 289.25, 0, 0; 14400, 289.65, 0, 0; 18000, 289.65, 0, 0; 18000, 290.95, 0, 0; 21600, 290.95, 0, 0; 21600, 293.45, 0, 0; 25200, 293.45, 0, 0; 25200, 295.95, 0, 0; 28800, 295.95, 0, 0; 28800, 297.95, 0, 0; 32400, 297.95, 0, 0; 32400, 299.85, 0, 0; 36000, 299.85, 0, 0; 36000, 301.25, 0, 0; 39600, 301.25, 0, 0; 39600, 302.15, 0, 0; 43200, 302.15, 0, 0; 43200, 302.85, 0, 0; 46800, 302.85, 0, 0; 46800, 303.55, 0, 0; 50400, 303.55, 0, 0; 50400, 304.05, 0, 0; 54000, 304.05, 0, 0; 54000, 304.15, 0, 0; 57600, 304.15, 0, 0; 57600, 303.95, 0, 0; 61200, 303.95, 0, 0; 61200, 303.25, 0, 0; 64800, 303.25, 0, 0; 64800, 302.05, 0, 0; 68400, 302.05, 0, 0; 68400, 300.15, 0, 0; 72000, 300.15, 0, 0; 72000, 297.85, 0, 0; 75600, 297.85, 0, 0; 75600, 296.05, 0, 0; 79200, 296.05, 0, 0; 79200, 295.05, 0, 0; 82800, 295.05, 0, 0; 82800, 294.05, 0, 0; 86400, 294.05, 0, 0]) annotation(Placement(transformation(extent = {{-100, 12}, {-80, 32}})));
   Modelica.Blocks.Sources.Constant wallRad(k = 0) annotation(Placement(transformation(extent = {{-126, 50}, {-116, 60}})));
@@ -36,11 +35,9 @@ equation
   connect(sunblind.sunblindonoff, eqAirTemp_TestCase_8_1.sunblindsig) annotation(Line(points = {{-10, 72}, {-10, 60}, {-26, 60}, {-26, 48}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(infiltrationTemp.y, reducedModel.ventilationTemperature) annotation(Line(points = {{26.5, 5}, {34, 5}, {34, 55}, {54.8, 55}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(infiltrationRate.y, reducedModel.ventilationRate) annotation(Line(points = {{50.5, 5}, {64.4, 5}, {64.4, 47}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(rad_weighted_sum.solarRad_out, reducedModel.solarRad_in) annotation(Line(points = {{27, 82}, {42, 82}, {42, 80.5}, {54.56, 80.5}}, color = {255, 128, 0}, smooth = Smooth.None));
+  connect(rad_weighted_sum.solarRad_out, reducedModel.solarRad_in) annotation(Line(points={{27,82},
+          {42,82},{42,90.75},{64.4,90.75}},                                                                                                  color = {255, 128, 0}, smooth = Smooth.None));
   connect(sunblind.Rad_Out, rad_weighted_sum.solarRad_in) annotation(Line(points = {{-1, 82}, {9, 82}}, color = {255, 128, 0}, smooth = Smooth.None));
-  connect(eqAirTemp_TestCase_8_1.equalAirTemp, reducedModel.equalAirTemp) annotation(Line(points = {{-18, 40}, {-2, 40}, {-2, 36}, {18, 36}, {18, 68}, {54.8, 68}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(outdoorTemp.y, eqAirTemp_TestCase_8_1.weatherData) annotation(Line(points = {{-79, 22}, {-34, 22}, {-34, 40}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(Quelle_Wand.solarRad_out, eqAirTemp_TestCase_8_1.solarRad_in) annotation(Line(points = {{-39, 54}, {-38, 54}, {-38, 45.6}, {-34.5, 45.6}}, color = {255, 128, 0}, smooth = Smooth.None));
   connect(wallRad.y, multiplex5_1.u5[1]) annotation(Line(points = {{-115.5, 55}, {-104.75, 55}, {-104.75, 44}, {-86, 44}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(HeatTorStar.Star, reducedModel.internalGainsRad) annotation(Line(points = {{75.1, -90}, {92, -90}, {92, 47}, {92.48, 47}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
   connect(personsConvective.port, reducedModel.internalGainsConv) annotation(Line(points = {{40, -62}, {78.8, -62}, {78.8, 47}}, color = {191, 0, 0}, smooth = Smooth.None));
@@ -49,7 +46,23 @@ equation
   connect(innerLoads.y[2], personsConvective.Q_flow) annotation(Line(points = {{-27, -62}, {20, -62}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(innerLoads.y[1], personsRadiative.Q_flow) annotation(Line(points = {{-27, -62}, {-8, -62}, {-8, -90}, {20, -90}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(personsRadiative.port, HeatTorStar.Therm) annotation(Line(points = {{40, -90}, {56.8, -90}}, color = {191, 0, 0}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), experiment(StopTime = 5.184e+006, Interval = 3600), __Dymola_experimentSetupOutput(events = false), Icon(graphics), Documentation(revisions = "<html>
+  connect(outdoorTemp.y, eqAirTemp_TestCase_8_1.WeatherDataVector)
+    annotation (Line(
+      points={{-79,22},{-58,22},{-58,40},{-34,40}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(Quelle_Wand.solarRad_out, eqAirTemp_TestCase_8_1.Rad_In)
+    annotation (Line(
+      points={{-39,54},{-36,54},{-36,45.6},{-34.5,45.6}},
+      color={255,128,0},
+      smooth=Smooth.None));
+  connect(eqAirTemp_TestCase_8_1.equalairtemp, reducedModel.equalAirTemp)
+    annotation (Line(
+      points={{-18,40},{18,40},{18,68},{54.8,68}},
+      color={191,0,0},
+      smooth=Smooth.None));
+  annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
+            -100},{100,100}}),                                                                           graphics), experiment(StopTime = 5.184e+006, Interval = 3600), __Dymola_experimentSetupOutput(events = false), Icon(graphics), Documentation(revisions = "<html>
  <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
  </html>", info = "<html>
  <p>Test Case 10 of the VDI6007:: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to mixed inner and outer heat sources for Type Room S:</p>

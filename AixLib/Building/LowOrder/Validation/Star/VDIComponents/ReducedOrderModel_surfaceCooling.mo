@@ -1,6 +1,4 @@
-within AixLib.Building.LowOrder.Validation.VDI6007.VDIComponents;
-
-
+within AixLib.Building.LowOrder.Validation.Star.VDIComponents;
 model ReducedOrderModel_surfaceCooling "Modell corresponding to VDI 6007"
   parameter Boolean withInnerwalls = true "If inner walls are existent" annotation(Dialog(tab = "Inner walls"));
   parameter Modelica.SIunits.ThermalResistance R1i = 0.0005955
@@ -108,7 +106,16 @@ equation
   connect(rad_split_conv.solarRad_in, Rad_In) annotation(Line(points = {{-71, 58}, {-78, 58}, {-78, 70}, {-92, 70}}, color = {255, 128, 0}, smooth = Smooth.None));
   connect(rad_split_conv.solarRad_out, conv_window_conv.solarRad_in) annotation(Line(points = {{-53, 58}, {-46.1, 58}}, color = {255, 128, 0}, smooth = Smooth.None));
   connect(rad_split_rad.solarRad_out, conv_window_rad.solarRad_in) annotation(Line(points = {{-53, 82}, {-46.1, 82}}, color = {255, 128, 0}, smooth = Smooth.None));
-  annotation(Line(points = {{50, -90}, {-4, -90}, {-4, -90}, {50, -90}}, color = {191, 0, 0}, smooth = Smooth.None), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), experiment(StopTime = 864000), experimentSetupOutput, Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent=  {{-60, 74}, {100, -72}}, lineColor=  {135, 135, 135}, fillColor=  {135, 135, 135}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{14, 38}, {46, 12}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 255}, fillPattern=  FillPattern.Solid, lineThickness=  1), Rectangle(extent=  {{14, 12}, {46, -14}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 255}, fillPattern=  FillPattern.Solid, lineThickness=  1), Rectangle(extent=  {{-18, 12}, {14, -14}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 255}, fillPattern=  FillPattern.Solid, lineThickness=  1), Rectangle(extent=  {{-18, 38}, {14, 12}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 255}, fillPattern=  FillPattern.Solid, lineThickness=  1)}), Documentation(info = "<html>
+  annotation(Line(points = {{50, -90}, {-4, -90}, {-4, -90}, {50, -90}}, color = {191, 0, 0}, smooth = Smooth.None), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), experiment(StopTime = 864000), experimentSetupOutput, Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent=  {{-60, 74}, {100, -72}}, lineColor=  {135, 135, 135}, fillColor=  {135, 135, 135},
+            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{14, 38}, {46, 12}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 255},
+            fillPattern=                                                                                                    FillPattern.Solid,
+            lineThickness=                                                                                                    1), Rectangle(extent=  {{14, 12}, {46, -14}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 255},
+            fillPattern=                                                                                                    FillPattern.Solid,
+            lineThickness=                                                                                                    1), Rectangle(extent=  {{-18, 12}, {14, -14}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 255},
+            fillPattern=                                                                                                    FillPattern.Solid,
+            lineThickness=                                                                                                    1), Rectangle(extent=  {{-18, 38}, {14, 12}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 255},
+            fillPattern=                                                                                                    FillPattern.Solid,
+            lineThickness=                                                                                                    1)}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <ul>
  <li>ReducedOrderModel is a simple component to compute the air temperature, heating load, etc. for a thermal zone. The zone is simplified to one outer wall, one inner wall and one air node. It is build out of standard components and <a href=\"AixLib.Building.LowOrder.BaseClasses.SimpleOuterWall\">SimpleOuterWall</a> and <a href=\"AixLib.Building.LowOrder.BaseClasses.SimpleInnerWall\">SimpleInnerWall</a>.</li>
