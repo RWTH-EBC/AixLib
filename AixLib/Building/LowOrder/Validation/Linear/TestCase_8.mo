@@ -6,7 +6,8 @@ model TestCase_8
   Modelica.Blocks.Sources.Constant infiltrationRate(k = 0) annotation(Placement(transformation(extent = {{38, -5}, {48, 5}})));
   Modelica.Blocks.Sources.Constant infiltrationTemp(k = 22) annotation(Placement(transformation(extent = {{16, 14}, {26, 24}})));
   Utilities.HeatTransfer.HeatToStar HeatTorStar(A = 2) annotation(Placement(transformation(extent = {{42, -98}, {62, -78}})));
-  BaseClasses.ReducedOrderModelVDI                reducedModel(epsi = 1, epso = 1, T0all(displayUnit = "K") = 295.15,                                        Ai = 60.5, splitfac = 0.09, Aw = 14, epsw = 1, g = 1,                                        Ao = 25.5, alphaiwi = 2.1,
+  BaseClasses.ReducedOrderModel.ReducedOrderModelVDI
+                                                  reducedModel(epsi = 1, epso = 1, T0all(displayUnit = "K") = 295.15,                                        Ai = 60.5, splitfac = 0.09, Aw = 14, epsw = 1, g = 1,                                        Ao = 25.5, alphaiwi = 2.1,
     R1i=0.000668640,
     C1i=1.23912e+007,
     RRest=0.020705927,

@@ -1,7 +1,8 @@
-within AixLib.Building.LowOrder.BaseClasses;
-model ImprovedReducedOrderModel
+within AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel;
+model ReducedOrderModelEBCMod
   import AixLib;
-  extends AixLib.Building.LowOrder.BaseClasses.PartialClasses.partialLOM;
+  extends
+    AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel.partialReducedOrderModel;
 
    parameter Modelica.SIunits.ThermalResistance RWin=0.017727777777
     "Resistor Window"
@@ -121,5 +122,33 @@ equation
 <p><ul>
 <li><i>October 2014,&nbsp;</i> by Peter Remmen:<br/>Implemented.</li>
 </ul></p>
+</html>", info="<html>
+<p>ReducedOrderModelEBCMod extends from partialReducedOrderModel. </p>
+<p>As windows have nearly no capacity an additional resistance for heat transfer calculation through the window is implemented. </p>
+<p>This class contains following additional components: </p>
+<ul>
+<li>additional Resistance for window, with additional equivalent air temperature for window</li>
+<li>distribution of radiative heat transfer</li>
+<li>longwave radiative heat transfer between inner and outer walls and windows</li>
+<li>convective heat transfer for windows</li>
+</ul>
+<h4>Main equations</h4>
+<p>The concept is described in VDI 6007. All equations can be found in VDI 6007 and \"Improving a Low Order Building Model for Urban Scale Applications\" </p>
+<h4>Assumption and limitations</h4>
+<p>This model will only work with <a href=\"AixLib.Building.LowOrder.BaseClasses.EqAirTemp.EqAirTempEBCMod\">EqAirTempEBCMod</a>The longwave radiative heat transfer between the building components is modeled according to Stefan-Boltzmann Law. </p>
+<h4>Typical use and important parameters</h4>
+<p>Resistance and coefficient of heat transfer for windows</p>
+<h4>Options</h4>
+<p>No additional options</p>
+<h4>Validation</h4>
+<p>The model is verified with the VDI 6007, see <a href=\"AixLib.Building.LowOrder.Validation.VDI6007\">Validation.VDI6007</a>. A validation with the use of the standard ASHRAE 140 is in progress </p>
+<h4>Implementation</h4>
+<p> </p>
+<h4>References</h4>
+<ul>
+<li>German Association of Engineers: Guideline VDI 6007-1, March 2012: Calculation of transient thermal response of rooms and buildings - Modelling of rooms.</li>
+<li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D. (2014): Low order thermal network models for dynamic simulations of buildings on city district scale. In: Building and Environment 73, p. 223&ndash;231. DOI: 10.1016/j.buildenv.2013.12.016.</li>
+<li>Lauster, Moritz; Bruentjen, Mark-Alexander; Leppmann, Henning; Fuchs, Marcus; Teichmann, Jens; Streblow, Rita; M&uuml;ller, Dirk (2014): Improving a Low Order Building Model for Urban Scale Applications. In: Fifth German-Austrian IBPSA Conference, September 2014, Aachen, Germany, page 511-518</li>
+</ul>
 </html>"));
-end ImprovedReducedOrderModel;
+end ReducedOrderModelEBCMod;

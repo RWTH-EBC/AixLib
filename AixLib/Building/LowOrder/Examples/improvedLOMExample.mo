@@ -3,7 +3,8 @@ model improvedLOMExample
   extends Modelica.Icons.Example;
   import AixLib;
   parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();
-  replaceable AixLib.Building.LowOrder.BaseClasses.ImprovedReducedOrderModel
+  replaceable
+    AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel.ReducedOrderModelEBCMod
     reducedOrderModel(
     R1i=0.001236773,
     C1i=9.32664e+05,
@@ -18,12 +19,11 @@ model improvedLOMExample
     Ao=123.6,
     alphaiwi=3.16,
     epsi=0.9) constrainedby
-    AixLib.Building.LowOrder.BaseClasses.PartialClasses.partialLOM annotation (
-      Placement(transformation(extent={{44,18},{78,52}})), choicesAllMatching=
-        true);
-  replaceable AixLib.Building.LowOrder.BaseClasses.WindowEqAirTemp
+    AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel.partialReducedOrderModel
+    annotation (Placement(transformation(extent={{44,18},{78,52}})),
+      choicesAllMatching=true);
+  replaceable AixLib.Building.LowOrder.BaseClasses.EqAirTemp.EqAirTempEBCMod
     partialEqAirTemp(
-    alphaowo=25,
     aowo=0.6,
     eowo=0.9,
     n=5,
@@ -31,11 +31,8 @@ model improvedLOMExample
     wf_win={0.000000000,0.000000000,1,0.000000000,0.000000000},
     wf_ground=0,
     T_ground=284.15,
-    orientationswallshorizontal={90,90,90,90,0},
-    alphaconv_wall=24,
-    alphaconv_win=16,
-    awin=0) constrainedby
-    AixLib.Building.LowOrder.BaseClasses.PartialClasses.partialEqAirTemp
+    orientationswallshorizontal={90,90,90,90,0}) constrainedby
+    AixLib.Building.LowOrder.BaseClasses.EqAirTemp.partialEqAirTemp
     annotation (Placement(transformation(extent={{-56,16},{-36,36}})));
   Modelica.Blocks.Sources.Constant infiltrationRate(k=1)   annotation(Placement(transformation(extent={{14,-7},
             {24,3}})));
@@ -44,9 +41,9 @@ model improvedLOMExample
   AixLib.Building.Components.Weather.Sunblind
                               sunblind(n = 5, gsunblind = {0, 0, 0.15, 0.15, 0}) annotation(Placement(transformation(extent={{-24,59},
             {-4,79}})));
-  AixLib.Building.LowOrder.BaseClasses.SolarRadWeightedSum
-                                                    rad_weighted_sum(weightfactors = {0, 0, 7, 7, 0}, n = 5) annotation(Placement(transformation(extent={{4,60},{
-            24,80}})));
+  AixLib.Building.LowOrder.BaseClasses.SolarRadWeightedSum solarRadWeightedSum(
+      weightfactors={0,0,7,7,0}, n=5)
+    annotation (Placement(transformation(extent={{4,60},{24,80}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machinesConvective annotation(Placement(transformation(extent={{16,-40},
             {36,-20}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow personsConvective annotation(Placement(transformation(extent={{16,-60},
@@ -69,8 +66,10 @@ model improvedLOMExample
   Modelica.Blocks.Math.Gain gain2(k=0.4)
     annotation (Placement(transformation(extent={{-20,-82},{-12,-74}})));
 equation
-  connect(sunblind.Rad_Out,rad_weighted_sum. solarRad_in) annotation(Line(points={{-5,70},
-          {5,70}},                                                                                        color = {255, 128, 0}, smooth = Smooth.None));
+  connect(sunblind.Rad_Out, solarRadWeightedSum.solarRad_in) annotation (Line(
+      points={{-5,70},{5,70}},
+      color={255,128,0},
+      smooth=Smooth.None));
   connect(personsRadiative.port,HeatTorStar. Therm) annotation(Line(points={{36,-78},
           {52.8,-78}},                                                                                 color = {191, 0, 0}, smooth = Smooth.None));
   connect(partialEqAirTemp.equalAirTemp, reducedOrderModel.equalAirTemp)
@@ -99,15 +98,10 @@ equation
       points={{24.5,-2},{54.2,-2},{54.2,21.4}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(rad_weighted_sum.solarRad_out, reducedOrderModel.solarRad_in)
+  connect(solarRadWeightedSum.solarRad_out, reducedOrderModel.solarRad_in)
     annotation (Line(
       points={{23,70},{54.2,70},{54.2,51.15}},
       color={255,128,0},
-      smooth=Smooth.None));
-  connect(partialEqAirTemp.equalAirTempWindow, reducedOrderModel.equalAirTempWindow)
-    annotation (Line(
-      points={{-38,28.6},{-22,28.6},{-22,44.18},{47.4,44.18}},
-      color={191,0,0},
       smooth=Smooth.None));
   connect(sunblind.sunblindonoff, partialEqAirTemp.sunblindsig) annotation (
       Line(
@@ -158,6 +152,12 @@ equation
       points={{-43,-48},{-36,-48},{-36,-78},{-20.8,-78}},
       color={0,0,127},
       smooth=Smooth.None));
+  connect(partialEqAirTemp.equalAirTempWindow, reducedOrderModel.equalAirTempWindow)
+    annotation (Line(
+      points={{-38,28.6},{-34,28.6},{-34,28},{-28,28},{-28,44.18},{47.4,44.18}},
+      color={191,0,0},
+      smooth=Smooth.None));
+
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics),
     experiment(StopTime=86400, Interval=3600),

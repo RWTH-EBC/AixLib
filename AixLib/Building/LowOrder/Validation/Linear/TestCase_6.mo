@@ -9,7 +9,8 @@ model TestCase_6
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machinesRadiative annotation(Placement(transformation(extent = {{-4, -100}, {22, -78}})));
   Modelica.Blocks.Sources.CombiTimeTable innerLoads(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableOnFile = false, table = [0, 0, 0; 3600, 0, 0; 7200, 0, 0; 10800, 0, 0; 14400, 0, 0; 18000, 0, 0; 21600, 0, 0; 25200, 0, 1000; 28800, 0, 1000; 32400, 0, 1000; 36000, 0, 1000; 39600, 0, 1000; 43200, 0, 1000; 46800, 0, 1000; 50400, 0, 1000; 54000, 0, 1000; 57600, 0, 1000; 61200, 0, 1000; 64800, 0, 1000; 68400, 0, 0; 72000, 0, 0; 75600, 0, 0; 79200, 0, 0; 82800, 0, 0; 86400, 0, 0]) annotation(Placement(transformation(extent = {{-48, -98}, {-28, -78}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature outdoorTemp(T = 295.15) annotation(Placement(transformation(extent = {{-24, 39}, {-4, 59}})));
-  BaseClasses.ReducedOrderModelVDI                reducedModel(                    Aw = 7, g = 0.15,                     alphaiwi = 2.2, epsi = 1, epso = 1, T0all(displayUnit = "K") = 295.15, R1i = 0.000595515, Ai = 75.5,                                         Ao = 10.5, withWindows = false,
+  BaseClasses.ReducedOrderModel.ReducedOrderModelVDI
+                                                  reducedModel(                    Aw = 7, g = 0.15,                     alphaiwi = 2.2, epsi = 1, epso = 1, T0all(displayUnit = "K") = 295.15, R1i = 0.000595515, Ai = 75.5,                                         Ao = 10.5, withWindows = false,
     C1i=1.48362e+007,
     RRest=0.042768721,
     R1o=0.004367913,

@@ -6,11 +6,13 @@ model TestCase_9
   Modelica.Blocks.Sources.Constant infiltrationTemp(k = 273.15 + 22) annotation(Placement(transformation(extent = {{12, 9}, {26, 23}})));
   Modelica.Blocks.Sources.Constant infiltrationRate(k = 0) annotation(Placement(transformation(extent = {{28, -10}, {40, 2}})));
   Building.LowOrder.BaseClasses.SolarRadWeightedSum window_shortwave_rad_sum(n = 4, weightfactors = {0, 0, 7, 7}) annotation(Placement(transformation(extent = {{6, 62}, {28, 84}})));
-  Building.LowOrder.BaseClasses.EqAirTemp eqAirTemp(aowo = 0.7,                                                                      alphaowo = 25,
+  BaseClasses.EqAirTemp.EqAirTempSimple   eqAirTemp(aowo = 0.7,                                                                      alphaowo = 25,
     wf_wall={0,0,0.057968311,0.132498994},
-    wf_win={0,0,0.404766351,0.404766351})                                                                                                     annotation(Placement(transformation(extent = {{-20, 0}, {0, 20}})));
+    wf_win={0,0,0.404766351,0.404766351})                                                                                                     annotation(Placement(transformation(extent={{-20,2},
+            {0,22}})));
   Components.Weather.Sunblind sunblind(Imax = 100, gsunblind = {1, 1, 0.15, 0.15}) annotation(Placement(transformation(extent = {{-20, 62}, {0, 82}})));
-  BaseClasses.ReducedOrderModelVDI                reducedModel(Ao = 25.5, Aw = 14, Ai = 60.5, epsi = 1, epso = 1, epsw = 1, g = 1, splitfac = 0.09, T0all(displayUnit = "degC"),                                                                               alphaiwi = 2.1, alphaowi = 2.7,
+  BaseClasses.ReducedOrderModel.ReducedOrderModelVDI
+                                                  reducedModel(Ao = 25.5, Aw = 14, Ai = 60.5, epsi = 1, epso = 1, epsw = 1, g = 1, splitfac = 0.09, T0all(displayUnit = "degC"),                                                                               alphaiwi = 2.1, alphaowi = 2.7,
     R1i=0.000668640,
     C1i=1.23912e+007,
     RRest=0.020705927,
@@ -33,7 +35,8 @@ model TestCase_9
 equation
   referenceTemp = reference.y;
   simulationTemp = reducedModel.airload.port.T;
-  connect(sunblind.sunblindonoff, eqAirTemp.sunblindsig) annotation(Line(points = {{-10, 63}, {-10, 18}}, color = {0, 0, 127}, smooth = Smooth.None));
+  connect(sunblind.sunblindonoff, eqAirTemp.sunblindsig) annotation(Line(points={{-10,63},
+          {-10,20}},                                                                                      color = {0, 0, 127}, smooth = Smooth.None));
   connect(varRad3.solarRad_out, sunblind.Rad_In) annotation(Line(points = {{-39, 73}, {-19, 73}}, color = {255, 128, 0}, smooth = Smooth.None));
   connect(windowRad.y, varRad3.u) annotation(Line(points = {{-73.3, 73}, {-58, 73}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(wallRad.y, varRad1.u) annotation(Line(points = {{-73.3, 33}, {-44, 33}}, color = {0, 0, 127}, smooth = Smooth.None));
@@ -44,13 +47,15 @@ equation
   connect(deMultiplex3_1.y3, multiplex3_1.u3) annotation(Line(points = {{-55.4, 5.8}, {-38.2, 5.8}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(window_shortwave_rad_sum.solarRad_out, reducedModel.solarRad_in) annotation(Line(points={{26.9,73},
           {26.9,54.5},{50.6,54.5},{50.6,45.05}},                                                                                                    color = {255, 128, 0}, smooth = Smooth.None));
-  connect(eqAirTemp.equalAirTemp, reducedModel.equalAirTemp) annotation(Line(points={{-2,4.4},
-          {8,4.4},{8,27.76},{42.2,27.76}},                                                                                            color = {191, 0, 0}, smooth = Smooth.None));
+  connect(eqAirTemp.equalAirTemp, reducedModel.equalAirTemp) annotation(Line(points={{-2,6.4},
+          {8,6.4},{8,27.76},{42.2,27.76}},                                                                                            color = {191, 0, 0}, smooth = Smooth.None));
   connect(infiltrationTemp.y, reducedModel.ventilationTemperature) annotation(Line(points = {{26.7, 16}, {32, 16}, {32, 17.88}, {42.2, 17.88}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(infiltrationRate.y, reducedModel.ventilationRate) annotation(Line(points = {{40.6, -4}, {48, -4}, {48, 11.8}, {50.6, 11.8}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(sunblind.Rad_Out, window_shortwave_rad_sum.solarRad_in) annotation(Line(points = {{-1, 73}, {7.1, 73}}, color = {255, 128, 0}, smooth = Smooth.None));
-  connect(varRad1.solarRad_out, eqAirTemp.solarRad_in) annotation(Line(points = {{-25, 33}, {-25, 24.5}, {-18.5, 24.5}, {-18.5, 15.6}}, color = {255, 128, 0}, smooth = Smooth.None));
-  connect(multiplex3_1.y, eqAirTemp.weatherData) annotation(Line(points = {{-24.4, 10}, {-18, 10}}, color = {0, 0, 127}, smooth = Smooth.None));
+  connect(varRad1.solarRad_out, eqAirTemp.solarRad_in) annotation(Line(points={{-25,33},
+          {-25,24.5},{-18.5,24.5},{-18.5,17.6}},                                                                                        color = {255, 128, 0}, smooth = Smooth.None));
+  connect(multiplex3_1.y, eqAirTemp.weatherData) annotation(Line(points={{-24.4,
+          10},{-22,10},{-22,12},{-18,12}},                                                          color = {0, 0, 127}, smooth = Smooth.None));
   connect(HeatTorStar.Star, reducedModel.internalGainsRad) annotation(Line(points = {{57.1, -86}, {74, -86}, {74, 11.8}, {75.17, 11.8}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
   connect(personsConvective.port, reducedModel.internalGainsConv) annotation(Line(points = {{22, -58}, {63.2, -58}, {63.2, 11.8}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(machinesConvective.port, reducedModel.internalGainsConv) annotation(Line(points = {{22, -38}, {63.2, -38}, {63.2, 11.8}}, color = {191, 0, 0}, smooth = Smooth.None));

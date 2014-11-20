@@ -62,18 +62,51 @@ model ThermalZonePhysics "All sub-models of VDI 6007 connected to one model"
   Modelica.Blocks.Interfaces.RealInput ventilationRate annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 90, origin = {-28, -90}), iconTransformation(extent = {{-14, -14}, {14, 14}}, rotation = 90, origin = {-40, -86})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a internalGainsConv annotation(Placement(transformation(extent = {{30, -100}, {50, -80}}), iconTransformation(extent = {{30, -100}, {50, -80}})));
   Utilities.Interfaces.Star internalGainsRad annotation(Placement(transformation(extent = {{70, -100}, {90, -80}}), iconTransformation(extent = {{70, -100}, {90, -80}})));
-  EqAirTemp eqAirTemp(alphaowo = alphaowo, aowo = aowo, wf_wall = weightfactorswall, wf_win = weightfactorswindow, wf_ground = weightfactorground, T_ground = temperatureground, n = n) if withOuterwalls annotation(Placement(transformation(extent = {{-46, 0}, {-26, 20}})));
-  ReducedOrderModel reducedOrderModel(epsw = epsw, g = g, RRest = RRest, R1o = R1o, C1o = C1o, Ao = Ao, R1i = R1i, C1i = C1i, Ai = Ai, T0all = T0all, Vair = Vair, alphaiwi = alphaiwi, alphaowi = alphaowi, rhoair = rhoair, cair = cair, epsi = epsi, epso = epso, Aw = sum(Aw), withInnerwalls = withInnerwalls, withWindows = withWindows, withOuterwalls = withOuterwalls, splitfac = splitfac) annotation(Placement(transformation(extent = {{18, -10}, {76, 46}})));
+  EqAirTemp.EqAirTempSimple eqAirTemp(
+    alphaowo=alphaowo,
+    aowo=aowo,
+    wf_wall=weightfactorswall,
+    wf_win=weightfactorswindow,
+    wf_ground=weightfactorground,
+    T_ground=temperatureground,
+    n=n) if                                                                                                     withOuterwalls
+    annotation (Placement(transformation(extent={{-46,0},{-26,20}})));
+  ReducedOrderModel.ReducedOrderModelStar reducedOrderModel(
+    epsw=epsw,
+    g=g,
+    RRest=RRest,
+    R1o=R1o,
+    C1o=C1o,
+    Ao=Ao,
+    R1i=R1i,
+    C1i=C1i,
+    Ai=Ai,
+    T0all=T0all,
+    Vair=Vair,
+    alphaiwi=alphaiwi,
+    alphaowi=alphaowi,
+    rhoair=rhoair,
+    cair=cair,
+    epsi=epsi,
+    epso=epso,
+    Aw=sum(Aw),
+    withInnerwalls=withInnerwalls,
+    withWindows=withWindows,
+    withOuterwalls=withOuterwalls,
+    splitfac=splitfac)
+    annotation (Placement(transformation(extent={{18,-10},{76,46}})));
   Modelica.Blocks.Interfaces.RealInput ventilationTemperature annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 0, origin = {-100, -50}), iconTransformation(extent = {{-15, -15}, {15, 15}}, rotation = 0, origin = {-76, -40})));
 equation
   if withWindows and withOuterwalls then
     connect(sunblind.sunblindonoff, eqAirTemp.sunblindsig) annotation(Line(points = {{-16, 63}, {-26, 63}, {-26, 18}, {-36, 18}}, color = {0, 0, 127}, smooth = Smooth.None));
-    connect(solRadWeightedSum.solarRad_out, reducedOrderModel.solarRad_in) annotation(Line(points = {{26.6, 71}, {26.6, 52.25}, {23.51, 52.25}, {23.51, 33.12}}, color = {255, 128, 0}, smooth = Smooth.None));
+    connect(solRadWeightedSum.solarRad_out, reducedOrderModel.solarRad_in) annotation(Line(points={{26.6,71},
+            {26.6,52.25},{35.4,52.25},{35.4,44.6}},                                                                                                    color = {255, 128, 0}, smooth = Smooth.None));
   end if;
   if withOuterwalls then
     connect(weather, eqAirTemp.weatherData) annotation(Line(points = {{-100, 10}, {-44, 10}}, color = {0, 0, 127}, smooth = Smooth.None));
     connect(solarRad_in, eqAirTemp.solarRad_in) annotation(Line(points = {{-90, 70}, {-68, 70}, {-68, 15.6}, {-44.5, 15.6}}, color = {255, 128, 0}, smooth = Smooth.None));
-    connect(eqAirTemp.equalAirTemp, reducedOrderModel.equalAirTemp) annotation(Line(points = {{-28, 10}, {-2, 10}, {-2, 19.12}, {23.8, 19.12}}, color = {191, 0, 0}, smooth = Smooth.None));
+    connect(eqAirTemp.equalAirTemp, reducedOrderModel.equalAirTemp) annotation(Line(points={{-28,4.4},
+            {-2,4.4},{-2,19.12},{23.8,19.12}},                                                                                                  color = {191, 0, 0}, smooth = Smooth.None));
   end if;
   connect(internalGainsConv, reducedOrderModel.internalGainsConv) annotation(Line(points = {{40, -90}, {40, -49}, {52.8, -49}, {52.8, -4.4}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(internalGainsRad, reducedOrderModel.internalGainsRad) annotation(Line(points = {{80, -90}, {80, -4.4}, {69.33, -4.4}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));

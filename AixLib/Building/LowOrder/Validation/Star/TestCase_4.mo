@@ -7,7 +7,24 @@ model TestCase_4
   Modelica.Blocks.Sources.Constant infiltrationTemp(k = 22) annotation(Placement(transformation(extent = {{-46, -10}, {-26, 10}})));
   Modelica.Blocks.Sources.Constant infiltrationRate(k = 0) annotation(Placement(transformation(extent = {{-6, -40}, {14, -20}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machinesRadiative annotation(Placement(transformation(extent = {{10, -68}, {30, -48}})));
-  Building.LowOrder.BaseClasses.ReducedOrderModel reducedModel(Ao = 10.5, Aw = 0.000000001, Ai = 75.5, epsi = 1, epso = 1, epsw = 1, g = 1, alphaiwi = 2.2, alphaowi = 2.7, splitfac = 0.09, withWindows = false, RRest = 0.043120170, R1o = 0.004047899, C1o = 4.78618e+004, R1i = 0.003237138, C1i = 7.297100e+006) annotation(Placement(transformation(extent = {{10, 10}, {44, 44}})));
+  BaseClasses.ReducedOrderModel.ReducedOrderModelStar reducedModel(
+    Ao=10.5,
+    Aw=0.000000001,
+    Ai=75.5,
+    epsi=1,
+    epso=1,
+    epsw=1,
+    g=1,
+    alphaiwi=2.2,
+    alphaowi=2.7,
+    splitfac=0.09,
+    withWindows=false,
+    RRest=0.043120170,
+    R1o=0.004047899,
+    C1o=4.78618e+004,
+    R1i=0.003237138,
+    C1i=7.297100e+006)
+    annotation (Placement(transformation(extent={{10,10},{44,44}})));
   Modelica.Blocks.Sources.CombiTimeTable tableMachines(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableName = "UserProfilesOffice", fileName = "./Tables/J1615/UserProfilesOffice.txt", tableOnFile = false, table = [0, 0; 3600, 0; 7200, 0; 10800, 0; 14400, 0; 18000, 0; 21600, 0; 21600, 1000; 25200, 1000; 28800, 1000; 32400, 1000; 36000, 1000; 39600, 1000; 43200, 1000; 46800, 1000; 50400, 1000; 54000, 1000; 57600, 1000; 61200, 1000; 64800, 1000; 64800, 0; 68400, 0; 72000, 0; 75600, 0; 79200, 0; 82800, 0; 86400, 0], columns = {2}) annotation(Placement(transformation(extent = {{-22, -65}, {-8, -51}})));
   Utilities.HeatTransfer.HeatToStar HeatToStar(A = 2, eps = 1) annotation(Placement(transformation(extent = {{36, -68}, {56, -48}})));
   Modelica.Blocks.Sources.CombiTimeTable reference(tableName = "UserProfilesOffice", fileName = "./Tables/J1615/UserProfilesOffice.txt", tableOnFile = false, columns = {2},                                                                                                    extrapolation = Modelica.Blocks.Types.Extrapolation.HoldLastPoint,

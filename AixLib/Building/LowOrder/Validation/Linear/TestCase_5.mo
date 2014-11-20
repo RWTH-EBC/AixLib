@@ -10,7 +10,8 @@ model TestCase_5
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow personsConvective annotation(Placement(transformation(extent = {{10, -72}, {30, -52}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow personsRadiative annotation(Placement(transformation(extent = {{10, -100}, {30, -80}})));
   Modelica.Blocks.Sources.CombiTimeTable innerLoads(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableOnFile = false, table = [0, 0, 0, 0; 3600, 0, 0, 0; 7200, 0, 0, 0; 10800, 0, 0, 0; 14400, 0, 0, 0; 18000, 0, 0, 0; 21600, 0, 0, 0; 25200, 0, 0, 0; 25200, 80, 80, 200; 28800, 80, 80, 200; 32400, 80, 80, 200; 36000, 80, 80, 200; 39600, 80, 80, 200; 43200, 80, 80, 200; 46800, 80, 80, 200; 50400, 80, 80, 200; 54000, 80, 80, 200; 57600, 80, 80, 200; 61200, 80, 80, 200; 61200, 0, 0, 0; 64800, 0, 0, 0; 72000, 0, 0, 0; 75600, 0, 0, 0; 79200, 0, 0, 0; 82800, 0, 0, 0; 86400, 0, 0, 0], columns = {2, 3, 4}) annotation(Placement(transformation(extent = {{-58, -72}, {-38, -52}})));
-  BaseClasses.ReducedOrderModelVDI                reducedModel(                                        alphaiwi = 2.2, epsi = 1, epso = 1, T0all(displayUnit = "K") = 295.15, Aw = 7, splitfac = 0.09, R1i = 0.000595515, Ai = 75.5, epsw = 1, g = 1,                                         Ao = 10.5,
+  BaseClasses.ReducedOrderModel.ReducedOrderModelVDI
+                                                  reducedModel(                                        alphaiwi = 2.2, epsi = 1, epso = 1, T0all(displayUnit = "K") = 295.15, Aw = 7, splitfac = 0.09, R1i = 0.000595515, Ai = 75.5, epsw = 1, g = 1,                                         Ao = 10.5,
     C1i=1.48362e+007,
     RRest=0.042768721,
     R1o=0.004367913,

@@ -7,7 +7,8 @@ model TestCase_1
   Modelica.Blocks.Sources.Constant infiltrationTemp(k = 22) annotation(Placement(transformation(extent = {{-56, -22}, {-36, -2}})));
   Modelica.Blocks.Sources.Constant infiltrationRate(k = 0) annotation(Placement(transformation(extent = {{-14, -50}, {6, -30}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machinesConvective annotation(Placement(transformation(extent = {{-8, -86}, {12, -66}})));
-  BaseClasses.ReducedOrderModelVDI                reducedModel(Ao = 10.5, Aw = 0.000000001, Ai = 75.5, epsi = 1, epso = 1, epsw = 1, g = 1,                                 splitfac = 0.09, R1i = 0.000595515,                     withWindows = false,
+  BaseClasses.ReducedOrderModel.ReducedOrderModelVDI
+                                                  reducedModel(Ao = 10.5, Aw = 0.000000001, Ai = 75.5, epsi = 1, epso = 1, epsw = 1, g = 1,                                 splitfac = 0.09, R1i = 0.000595515,                     withWindows = false,
     C1i=1.4836200e+007,
     RRest=0.042768721,
     R1o=0.004367913,
