@@ -1,19 +1,26 @@
 within AixLib.HVAC.Valves;
 
+
 model ThermostaticValve
-  extends AixLib.HVAC.Interfaces.TwoPort;
+  extends AixLib.Fluid.Interfaces.PartialTwoPortTransport;
   parameter Real Kvs = 1.4 "Kv value at full opening (=1)" annotation(Dialog(group = "Valve"));
-  parameter Real Kv_setT = 0.8 "Kv value when set temperature = measured temperature" annotation(Dialog(group = "Thermostatic head"));
+  parameter Real Kv_setT = 0.8
+    "Kv value when set temperature = measured temperature"                            annotation(Dialog(group = "Thermostatic head"));
   parameter Real P = 2 "Deviation of P-controller when valve is closed" annotation(Dialog(group = "Thermostatic head"));
-  parameter Real Influence_PressureDrop = 0.14 "influence of the pressure drop in K" annotation(Dialog(group = "Thermostatic head"));
-  parameter Real leakageOpening = 0.0001 "may be useful for simulation stability. Always check the influence it has on your results";
+  parameter Real Influence_PressureDrop = 0.14
+    "influence of the pressure drop in K"                                            annotation(Dialog(group = "Thermostatic head"));
+  parameter Real leakageOpening = 0.0001
+    "may be useful for simulation stability. Always check the influence it has on your results";
   //Variable
   Real opening "valve opening";
   Real TempDiff "Difference between measured temperature and set temperature";
   Real Influence_PressureDrop_inK "Influence of pressure drop in Kelvin.";
   Modelica.Blocks.Interfaces.RealInput T_room "temperature in room" annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 270, origin = {-64, 98})));
   Modelica.Blocks.Interfaces.RealInput T_setRoom "set temperature in room" annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 270, origin = {56, 98})));
+protected
+  Modelica.SIunits.Density rho "Density of the fluid";
 equation
+  rho = Medium.density(Medium.setState_phX(port_a.p, inStream(port_a.h_outflow), inStream(port_a.Xi_outflow)));
   // Enthalpie flow
   port_a.h_outflow = inStream(port_b.h_outflow);
   port_b.h_outflow = inStream(port_a.h_outflow);
@@ -30,7 +37,9 @@ equation
   else
     opening = min(1, (P - TempDiff) * (Kv_setT / Kvs) / P);
   end if;
-  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Polygon(points = {{-78, 50}, {-78, -60}, {82, 50}, {82, -62}, {-78, 50}}, lineThickness = 1, smooth = Smooth.None, fillColor = {0, 0, 255}, fillPattern = FillPattern.Solid, pattern = LinePattern.None, lineColor = {0, 0, 0})}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(revisions = "<html>
+  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points = {{-78, 50}, {-78, -60}, {82, 50}, {82, -62}, {-78, 50}},
+            lineThickness =                                                                                                    1, smooth = Smooth.None, fillColor = {0, 0, 255},
+            fillPattern =                                                                                                    FillPattern.Solid, pattern = LinePattern.None, lineColor = {0, 0, 0})}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(revisions = "<html>
  <p>13.11.2013, by <i>Ana Constantin</i>: implemented</p>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
