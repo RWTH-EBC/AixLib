@@ -1,4 +1,4 @@
-within AixLib.Building.LowOrder.Validation.VDI6007;
+within AixLib.Building.LowOrder.Validation.Star;
 model TestCase_5
   extends Modelica.Icons.Example;
   output Modelica.SIunits.Conversions.NonSIunits.Temperature_degC referenceTemp[1];
@@ -40,7 +40,8 @@ equation
   connect(outdoorTemp.y[1], varTemp.T) annotation(Line(points = {{-41, 32}, {-10, 32}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(windowRad.y, PrescribedSolarRad.u) annotation(Line(points = {{-75, 78}, {-60, 78}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(PrescribedSolarRad.solarRad_out, sunblind.Rad_In) annotation(Line(points = {{-41, 78}, {-29, 78}}, color = {255, 128, 0}, smooth = Smooth.None));
-  connect(SolarRadWeightedSum.solarRad_out, reducedModel.solarRad_in) annotation(Line(points = {{17, 78}, {34, 78}, {34, 56.8}, {51.23, 56.8}}, color = {255, 128, 0}, smooth = Smooth.None));
+  connect(SolarRadWeightedSum.solarRad_out, reducedModel.solarRad_in) annotation(Line(points={{17,78},
+          {34,78},{34,65},{58.2,65}},                                                                                                    color = {255, 128, 0}, smooth = Smooth.None));
   connect(varTemp.port, reducedModel.equalAirTemp) annotation(Line(points = {{12, 32}, {22, 32}, {22, 46.8}, {51.4, 46.8}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(infiltrationTemp.y, reducedModel.ventilationTemperature) annotation(Line(points = {{16.5, 1}, {16.5, 18.5}, {51.4, 18.5}, {51.4, 36.4}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(infiltrationRate.y, reducedModel.ventilationRate) annotation(Line(points = {{40.5, 1}, {40.5, 14.5}, {58.2, 14.5}, {58.2, 30}}, color = {0, 0, 127}, smooth = Smooth.None));
@@ -51,7 +52,11 @@ equation
   connect(innerLoads.y[3], machinesConvective.Q_flow) annotation(Line(points = {{-37, -62}, {-18, -62}, {-18, -42}, {10, -42}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(innerLoads.y[2], personsConvective.Q_flow) annotation(Line(points = {{-37, -62}, {10, -62}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(innerLoads.y[1], personsRadiative.Q_flow) annotation(Line(points = {{-37, -62}, {-18, -62}, {-18, -90}, {10, -90}}, color = {0, 0, 127}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), experiment(StartTime = 3600, StopTime = 5.184e+006, Interval = 3600, __Dymola_Algorithm = "Lsodar"), __Dymola_experimentSetupOutput(events = false), Documentation(revisions = "<html>
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), experiment(
+      StopTime=5.184e+006,
+      Interval=3600,
+      __Dymola_Algorithm="Lsodar"),                                                                                                    __Dymola_experimentSetupOutput(events=
+          false),                                                                                                    Documentation(revisions = "<html>
  <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
  </html>", info = "<html>
  <p>Test Case 5 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to radiant and convective heat source for Type room S</p>
@@ -68,4 +73,3 @@ equation
  <p>Same Test Case exists in VDI 6020.</p>
  </html>"), Icon(graphics));
 end TestCase_5;
-

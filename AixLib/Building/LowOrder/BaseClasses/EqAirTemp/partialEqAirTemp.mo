@@ -1,4 +1,4 @@
-﻿within AixLib.Building.LowOrder.BaseClasses.EqAirTemp;
+within AixLib.Building.LowOrder.BaseClasses.EqAirTemp;
 partial model partialEqAirTemp
 
 parameter Real aowo=0.6 "Coefficient of absorption of the outer walls";
@@ -9,6 +9,9 @@ parameter Real wf_win[n]={0,0,0,0} "Weight factors of the windows";
 parameter Real wf_ground=0 "Weight factor of the ground (0 if not considered)";
 parameter Modelica.SIunits.Temp_K T_ground=284.15
     "Temperature of the ground in contact with ground slab";
+parameter Boolean withSunblind=true "If sunblinds are considered" annotation(choices(checkBox = true));
+parameter Boolean withLongwave=true
+    "If longwave radiation exchange is considered"                                 annotation(choices(checkBox = true));
 
   Modelica.Blocks.Interfaces.RealInput weatherData[3]
     "[1]: Air temperature<br>[2]: Horizontal radiation of sky<br>[3]: Horizontal radiation of earth"
@@ -21,7 +24,7 @@ parameter Modelica.SIunits.Temp_K T_ground=284.15
       Placement(transformation(extent={{80,-56},{100,-36}}),
                                                            iconTransformation(
           extent={{60,-76},{100,-36}})));
-  Modelica.Blocks.Interfaces.RealInput sunblindsig[n]
+  Modelica.Blocks.Interfaces.RealInput sunblindsig[n] if withSunblind
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={-10,100}),
@@ -47,20 +50,11 @@ protected
 
   Modelica.SIunits.CoefficientOfHeatTransfer alpharad;
 
-initial equation
-  assert(n==size(wf_wall,1),"weightfactorswall has to have n elements");
-  assert(n==size(wf_win,1),"weightfactorswall has to have n elements");
- if not sum(wf_wall) + sum(wf_win) + wf_ground <> 0.00001 then
-    Modelica.Utilities.Streams.print("WARNING!:The sum of the weightfactors (walls,windows and ground) in eqairtemp is 0. This means, that eqairtemp is 0 �C. If there are no walls, windows and ground at all, this might be irrelevant.");
-  end if;
-  if abs(sum(wf_wall) + sum(wf_win) + wf_ground - 1) > 0.1 then
-    Modelica.Utilities.Streams.print("WARNING!:The sum of the weightfactors (walls,windows and ground) in eqairtemp is <0.9 or >1.1. Normally, the sum should be 1, as the influence of all weightfactors should the whole influence on the temperature.");
-  end if;
-equation
+  parameter Real unitvec[n]=ones(n);
 
-  if cardinality(sunblindsig)<1 then
-    sunblindsig=fill(0,n);
-  end if;
+initial equation
+  assert(noEvent(abs(sum(wf_wall) + sum(wf_win) + wf_ground) > 0.1), "The sum of the weightfactors (walls,windows and ground) in eqairtemp is close to 0. If there are no walls, windows and ground at all, this might be irrelevant.", level=AssertionLevel.warning);
+equation
 
   T_air=weatherData[1];
   E_sky=weatherData[2];
