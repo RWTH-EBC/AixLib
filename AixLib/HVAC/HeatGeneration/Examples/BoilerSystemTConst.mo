@@ -20,7 +20,6 @@ model BoilerSystemTConst
   Pipes.StaticPipe pipe1(l = 25, D = 0.01,
     redeclare package Medium = Medium,
     m_flow_small=0.001)                    annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {10, -50})));
-  inner BaseParameters baseParameters annotation(Placement(transformation(extent = {{80, 80}, {100, 100}})));
   Fluid.Sensors.MassFlowRate
                          massFlowSensor(redeclare package Medium = Medium)
                                         annotation(Placement(transformation(extent = {{-40, 60}, {-20, 80}})));

@@ -1,6 +1,5 @@
 within AixLib.HVAC.HeatGeneration.Utilities;
 model HeatDemand "Calculates heat demand to heat m_flow_in from T_in to T_set"
-  outer BaseParameters baseParameters "System properties";
   Modelica.Blocks.Interfaces.RealInput T_set annotation(Placement(transformation(extent = {{-120, -20}, {-80, 20}})));
   Modelica.Blocks.Interfaces.RealInput T_in annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 90, origin = {-60, -100})));
   Modelica.Blocks.Interfaces.RealInput m_flow_in annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 90, origin = {20, -100})));
