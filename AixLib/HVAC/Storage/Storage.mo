@@ -132,7 +132,11 @@ equation
  <p><br><b><font style=\"color: #008000; \">Example Results</font></b></p>
  <p><a href=\"AixLib.HVAC.Storage.Examples.StorageBoiler\">AixLib.HVAC.Storage.Examples.StorageBoiler</a></p>
  <p><a href=\"AixLib.HVAC.Storage.Examples.StorageSolarCollector\">AixLib.HVAC.Storage.Examples.StorageSolarCollector</a></p>
- </html>", revisions = "<html>
+ </html>", revisions="<html>
+ <p>November 2014, Marcus Fuchs</p>
+ <p><ul>
+ <li>Changed model to use Annex 60 base class</li>
+ </ul></p>
  <p>13.12.2013, by <i>Sebastian Stinner</i>: implemented</p>
  </html>"));
 end Storage;

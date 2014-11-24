@@ -45,7 +45,11 @@ equation
  </ul>
  <p><br><b><font style=\"color: #008000; \">Example Results</font></b></p>
  <p><a href=\"AixLib.HVAC.HeatGeneration.Examples.SolarThermalCollector\">AixLib.HVAC.HeatGeneration.Examples.SolarThermalCollector</a></p>
- </html>", revisions = "<html>
+ </html>", revisions="<html>
+ <p>November 2014, Marcus Fuchs</p>
+ <p><ul>
+ <li>Changed model to use Annex 60 base class</li>
+ </ul></p>
  <p>19.11.2013, Marcus Fuchs: implemented</p>
  </html>"), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 80}, {88, -80}}, lineColor = {255, 128, 0},
             fillPattern =                                                                                                    FillPattern.Solid, fillColor = {255, 128, 0}), Rectangle(extent = {{-70, 70}, {-64, -72}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},

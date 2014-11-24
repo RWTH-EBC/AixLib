@@ -26,7 +26,11 @@ equation
       color={0,127,255},
       smooth=Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-            -100},{100,100}}),                                                                           graphics), experiment(StopTime = 1000, Interval = 1), __Dymola_experimentSetupOutput(events = false), Documentation(revisions = "<html>
+            -100},{100,100}}),                                                                           graphics), experiment(StopTime = 1000, Interval = 1), __Dymola_experimentSetupOutput(events = false), Documentation(revisions="<html>
+ <p>November 2014, Marcus Fuchs</p>
+ <p><ul>
+ <li>Changed model to use Annex 60 base class</li>
+ </ul></p>
  <p>01.10.2013, by <i>Pooyan Jahangiri</i>: implemented</p>
  </html>", info = "<html>
  <p><h4><font color=\"#008000\">Overview</font></h4></p>

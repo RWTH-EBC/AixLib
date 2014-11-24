@@ -39,7 +39,11 @@ equation
             -100},{100,100}}),                                                                           graphics={  Text(extent = {{-124, 74}, {-62, 44}}, lineColor = {0, 0, 255}, textString = "Always have 
  a point of fixed pressure 
  before a pump
- when building a closed loop")}), experiment(StopTime = 86400, Interval = 60), __Dymola_experimentSetupOutput, Documentation(revisions = "<html>
+ when building a closed loop")}), experiment(StopTime = 86400, Interval = 60), __Dymola_experimentSetupOutput, Documentation(revisions="<html>
+ <p>November 2014, Marcus Fuchs</p>
+ <p><ul>
+ <li>Changed model to use Annex 60 base class</li>
+ </ul></p>
  <p>01.11.2013, by <i>Ana Constantin</i>: implemented</p>
  </html>", info = "<html>
  <p><h4><font color=\"#008000\">Overview</font></h4></p>

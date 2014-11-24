@@ -65,5 +65,10 @@ equation
  <p>The example ilustrates how the thermostatic valve reacts.</p>
  <p>The valve doesn&apos;t fully close, because as the radiator it is connected to fixed temperatures the temperature difference between flow and return become infinite at zero mass flow in order to satisfy the power equation. </p>
  <p>Make sure you initialise the temperatures correctly in order to have flow temperature &GT; return temperature &GT; room temperature in order for the equation for over temperature to be correctly calculated.</p>
- </html>"));
+ </html>", revisions="<html>
+ <p>November 2014, Marcus Fuchs</p>
+ <p><ul>
+ <li>Changed model to use Annex 60 base class</li>
+ </ul></p>
+</html>"));
 end PumpRadiatorThermostaticValve;

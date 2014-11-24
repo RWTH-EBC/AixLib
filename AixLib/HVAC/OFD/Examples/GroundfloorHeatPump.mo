@@ -128,7 +128,11 @@ equation
             fillPattern =                                                                                                    FillPattern.Solid, textString = "Hydraulics
  ", fontSize = 11), Text(extent = {{54, 96}, {84, 92}}, lineColor = {255, 0, 0}, fillColor = {0, 0, 255},
             fillPattern =                                                                                               FillPattern.Solid, fontSize = 11, textString = "Distribution and Consumption
- ")}), Icon(coordinateSystem(extent = {{-100, -100}, {160, 100}})), experiment(StopTime = 86400, Interval = 60, __Dymola_Algorithm = "Lsodar"), __Dymola_experimentSetupOutput(events = false), Documentation(revisions = "<html>
+ ")}), Icon(coordinateSystem(extent = {{-100, -100}, {160, 100}})), experiment(StopTime = 86400, Interval = 60, __Dymola_Algorithm = "Lsodar"), __Dymola_experimentSetupOutput(events = false), Documentation(revisions="<html>
+ <p>November 2014, Marcus Fuchs</p>
+ <p><ul>
+ <li>Changed model to use Annex 60 base class</li>
+ </ul></p>
  <p>04.11.2013, Moritz Lauster</p>
  <p><ul>
  <li>Implemented full example</li>

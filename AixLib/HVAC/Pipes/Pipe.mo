@@ -39,7 +39,11 @@ equation
   m_flow = sign(dp) * Modelica.Constants.pi / 4 * D * mu * Re;
   annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-100, 40}, {100, -40}}, lineColor = {0, 0, 0}, fillColor = {95, 95, 95},
             fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{-100, 30}, {100, -30}}, lineColor = {0, 0, 0}, fillColor = {0, 128, 255},
-            fillPattern =                                                                                                    FillPattern.HorizontalCylinder)}), Documentation(revisions = "<html>
+            fillPattern =                                                                                                    FillPattern.HorizontalCylinder)}), Documentation(revisions="<html>
+ <p>November 2014, Marcus Fuchs</p>
+ <p><ul>
+ <li>Changed model to use Annex 60 base class</li>
+ </ul></p>
  <p>01.10.2013, by <i>Pooyan Jahangiri</i>: implemented</p>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>

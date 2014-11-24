@@ -63,7 +63,11 @@ equation
  <p>80 | 335055</p>
  <p>90 | 377063</p>
  <p>(values are according to wolframalpha.com for water at p = 1 atm ) </p>
- </html>", revisions = "<html>
+ </html>", revisions="<html>
+ <p>November 2014, Marcus Fuchs</p>
+ <p><ul>
+ <li>Changed model to use Annex 60 base class</li>
+ </ul></p>
  <p>26.11.2013, Marcus Fuchs</p>
  <p><ul>
  <li>implemented</li>

@@ -119,7 +119,11 @@ equation
  <h4><span style=\"color:#008000\">Example Results</span></h4>
  <p><a href=\"AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem\">AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem</a></p>
  <p><a href=\"AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem2\">AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem2</a></p>
- </html>", revisions = "<html>
+ </html>", revisions="<html>
+ <p>November 2014, Marcus Fuchs</p>
+ <p><ul>
+ <li>Changed model to use Annex 60 base class</li>
+ </ul></p>
  <p>25.11.2013, Kristian Huchtemann</p>
  <p><ul>
  <li>implemented</li>

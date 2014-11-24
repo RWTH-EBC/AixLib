@@ -38,7 +38,11 @@ equation
  <p><h4><font color=\"#008000\">Overview</font></h4></p>
  <p><br/>This partial model is a base class for modelling all heat generation equipment. It includes the necessary fluid port and a fluid volume with a thermal connector for heating the fluid.</p>
  <p>This model is just a start and is likely to change in order to be suitable for all heat generation equipment within the lecture.</p>
- </html>", revisions = "<html>
+ </html>", revisions="<html>
+ <p>November 2014, Marcus Fuchs</p>
+ <p><ul>
+ <li>Changed model to use Annex 60 base class</li>
+ </ul></p>
  <p>27.11.2013, Marcus Fuchs</p>
  <p><ul>
  <li>removed input for T_set as this is not applicable with solar thermal collectors</li>

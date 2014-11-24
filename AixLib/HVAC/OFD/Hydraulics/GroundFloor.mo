@@ -253,7 +253,11 @@ equation
             lineThickness =                                                                                                    0.5, fillColor = {215, 215, 215},
             fillPattern =                                                                                                    FillPattern.Solid, textString = "Set"), Text(extent = {{-61, 118}, {-21, 110}}, lineColor = {0, 0, 0},
             lineThickness =                                                                                                    0.5, fillColor = {215, 215, 215},
-            fillPattern =                                                                                                    FillPattern.Solid, textString = "Is")}), Documentation(revisions = "<html>
+            fillPattern =                                                                                                    FillPattern.Solid, textString = "Is")}), Documentation(revisions="<html>
+ <p>November 2014, Marcus Fuchs</p>
+ <p><ul>
+ <li>Changed model to use Annex 60 base class</li>
+ </ul></p>
  <p><ul>
  <li><i>November 25, 2013</i> by Ana Constantin:<br/>Implemented</li>
  </ul></p>

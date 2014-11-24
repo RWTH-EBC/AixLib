@@ -44,7 +44,15 @@ equation
  <h4><span style=\"color:#008000\">Example Results</span></h4>
  <p><a href=\"AixLib.HVAC.HeatGeneration.Examples.BoilerSystemTConst\">AixLib.HVAC.HeatGeneration.Examples.BoilerSystemTConst</a></p>
  <p><a href=\"AixLib.HVAC.HeatGeneration.Examples.BoilerSystemTVar\">AixLib.HVAC.HeatGeneration.Examples.BoilerSystemTVar</a></p>
- </html>", revisions = "<html>
+ </html>", revisions="<html>
+ <p>November 2014, Marcus Fuchs</p>
+ <p><ul>
+ <li>Changed model to use Annex 60 base class</li>
+ </ul></p>
+ <p>November 2014, Peter Remmen</p>
+ <p><ul>
+ <li>Fixed to pass Q_flow_max as boiler parameter</li>
+ </ul></p>
  <p>09.10.2013, Marcus Fuchs</p>
  <p><ul>
  <li>included the unit&apos;s volume as a parameter</li>

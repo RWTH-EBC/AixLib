@@ -36,7 +36,11 @@ equation
   Head = -dp / (Medium.density(Medium.setState_phX(port_a.p, inStream(port_a.h_outflow), inStream(port_a.Xi_outflow))) * Modelica.Constants.g_n);
   annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Ellipse(extent = {{-100, 96}, {100, -104}}, lineColor = {0, 0, 0}, fillColor = {0, 127, 0},
             fillPattern =                                                                                                    FillPattern.Solid), Polygon(points = {{-42, 70}, {78, -4}, {-42, -78}, {-42, 70}}, lineColor = {0, 0, 0}, smooth = Smooth.None, fillColor = {175, 175, 175},
-            fillPattern =                                                                                                    FillPattern.Solid)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(revisions = "<html>
+            fillPattern =                                                                                                    FillPattern.Solid)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(revisions="<html>
+ <p>November 2014, Marcus Fuchs</p>
+ <p><ul>
+ <li>Changed model to use Annex 60 base class</li>
+ </ul></p>
  <p>01.11.2013, by <i>Ana Constantin</i>: implemented</p>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>

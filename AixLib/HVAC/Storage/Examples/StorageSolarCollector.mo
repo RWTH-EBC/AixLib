@@ -87,7 +87,11 @@ equation
             -100},{100,100}}),                                                                           graphics), experiment(StopTime = 172800, Interval = 60), __Dymola_experimentSetupOutput, Documentation(info = "<html>
  <p><h4><font color=\"#008000\">Overview</font></h4></p>
  <p>This is a simple example of a storage and a solar collector.</p>
- </html>", revisions = "<html>
+ </html>", revisions="<html>
+ <p>November 2014, Marcus Fuchs</p>
+ <p><ul>
+ <li>Changed model to use Annex 60 base class</li>
+ </ul></p>
  <p>13.12.2013, by <i>Sebastian Stinner</i>: implemented</p>
  </html>"));
 end StorageSolarCollector;

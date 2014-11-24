@@ -19,7 +19,11 @@ equation
   //This equation is better suited for stable simulations as it works for both flow directions and is continuous at flow zero
   annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points = {{-78, 50}, {-78, -60}, {82, 50}, {82, -62}, {-78, 50}},
             lineThickness =                                                                                                    1, smooth = Smooth.None, fillColor = {0, 0, 255},
-            fillPattern =                                                                                                    FillPattern.Solid, pattern = LinePattern.None, lineColor = {0, 0, 0})}), Diagram(graphics), Documentation(revisions = "<html>
+            fillPattern =                                                                                                    FillPattern.Solid, pattern = LinePattern.None, lineColor = {0, 0, 0})}), Diagram(graphics), Documentation(revisions="<html>
+ <p>November 2014, Marcus Fuchs</p>
+ <p><ul>
+ <li>Changed model to use Annex 60 base class</li>
+ </ul></p>
  <p>13.11.2013, by <i>Ana Constantin</i>: implemented</p>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>

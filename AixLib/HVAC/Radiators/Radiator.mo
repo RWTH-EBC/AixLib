@@ -81,7 +81,11 @@ equation
             fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{52, 56}, {60, -74}}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{-74, -60}, {62, -70}}, lineColor = {95, 95, 95}, fillColor = {230, 230, 230},
             fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{-72, 50}, {64, 40}}, lineColor = {95, 95, 95}, fillColor = {230, 230, 230},
-            fillPattern =                                                                                                    FillPattern.Solid)}), Documentation(revisions = "<html>
+            fillPattern =                                                                                                    FillPattern.Solid)}), Documentation(revisions="<html>
+ <p>November 2014, Marcus Fuchs</p>
+ <p><ul>
+ <li>Changed model to use Annex 60 base class</li>
+ </ul></p>
  <p>13.11.2013, by <i>Ana Constantin</i>: implemented</p>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
