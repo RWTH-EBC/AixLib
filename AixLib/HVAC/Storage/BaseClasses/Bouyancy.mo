@@ -2,7 +2,6 @@ within AixLib.HVAC.Storage.BaseClasses;
 
 
 model Bouyancy
-  outer BaseParameters baseParameters "System properties";
   parameter Modelica.SIunits.Area A = 1;
   parameter Modelica.SIunits.RelativePressureCoefficient beta = 350e-6;
   parameter Modelica.SIunits.Length dx = 0.2;
