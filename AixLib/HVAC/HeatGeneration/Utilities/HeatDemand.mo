@@ -1,15 +1,13 @@
 within AixLib.HVAC.HeatGeneration.Utilities;
-
 model HeatDemand "Calculates heat demand to heat m_flow_in from T_in to T_set"
   outer BaseParameters baseParameters "System properties";
   Modelica.Blocks.Interfaces.RealInput T_set annotation(Placement(transformation(extent = {{-120, -20}, {-80, 20}})));
   Modelica.Blocks.Interfaces.RealInput T_in annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 90, origin = {-60, -100})));
   Modelica.Blocks.Interfaces.RealInput m_flow_in annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 90, origin = {20, -100})));
   Modelica.Blocks.Interfaces.RealOutput Q_flow_out annotation(Placement(transformation(extent = {{96, -10}, {116, 10}})));
-protected
-  parameter Modelica.SIunits.SpecificHeatCapacity cp = baseParameters.cp_Water "Specific heat capacity";
+
 equation
-  Q_flow_out = m_flow_in * cp * (T_set - T_in);
+  Q_flow_out = m_flow_in * 4184 * (T_set - T_in);
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(info = "<html>
  <p><h4><font color=\"#008000\">Overview</font></h4></p>
  <p><br/>This control is very simple. Its inputs are a given set temperature T_set, the temperature of the fluid T_in and the mass flow rate of the fluid m_flow_in. The model then calculates which Q_flow would be necessary to heat the fluid to the set temperature by equation </p>
@@ -22,3 +20,4 @@ equation
  </ul></p>
  </html>"));
 end HeatDemand;
+

@@ -1,6 +1,8 @@
 within AixLib.HVAC.HeatGeneration.Examples;
 
-model SolarThermalCollector "Example to demonstrate the function of the solar thermal collector model"
+
+model SolarThermalCollector
+  "Example to demonstrate the function of the solar thermal collector model"
   import AixLib;
   extends Modelica.Icons.Example;
   inner BaseParameters baseParameters annotation(Placement(transformation(extent = {{-100, 80}, {-80, 100}})));

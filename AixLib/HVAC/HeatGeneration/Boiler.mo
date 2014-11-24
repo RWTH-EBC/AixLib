@@ -7,7 +7,10 @@ model Boiler "Model of a boiler for space heating"
     "Maximum heat output of boiler at full load";
   parameter Modelica.SIunits.Volume Volume = 0.01
     "Fluid volume inside the heat generation unit";
-  extends BaseClasses.PartialHeatGen(volume(V = Volume));
+  extends BaseClasses.PartialHeatGen(volume(V = Volume, redeclare package
+        Medium = Medium),
+    massFlowSensor(redeclare package Medium = Medium),
+    T_in(redeclare package Medium = Medium));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {0, 50})));
   Utilities.HeatDemand heatDemand annotation(Placement(transformation(extent = {{-64, 60}, {-44, 80}})));
   Utilities.FuelCounter fuelCounter annotation(Placement(transformation(extent = {{80, 60}, {100, 80}})));
@@ -15,15 +18,23 @@ model Boiler "Model of a boiler for space heating"
   Utilities.BoilerEfficiency boilerEfficiency(boilerEfficiencyBE = boilerEfficiencyB, Q_flow_max = Q_flow_max) annotation(Placement(transformation(extent = {{40, 60}, {60, 80}})));
   Modelica.Blocks.Interfaces.RealInput T_set annotation(Placement(transformation(extent = {{-128, 50}, {-88, 90}})));
 equation
-  connect(prescribedHeatFlow.port, volume.heatPort) annotation(Line(points = {{0, 40}, {0, 10}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(T_in.signal, heatDemand.T_in) annotation(Line(points = {{-70, 10}, {-70, 38}, {-60, 38}, {-60, 60}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(massFlowSensor.signal, heatDemand.m_flow_in) annotation(Line(points = {{-40, 10}, {-40, 30}, {-52, 30}, {-52, 60}}, color = {0, 0, 127}, smooth = Smooth.None));
+  connect(prescribedHeatFlow.port, volume.heatPort) annotation(Line(points={{0,40},{
+          0,30},{-20,30},{-20,10},{-10,10}},                                                     color = {191, 0, 0}, smooth = Smooth.None));
   connect(heatDemand.Q_flow_out, limiter.u) annotation(Line(points = {{-43.4, 70}, {-32, 70}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(limiter.y, prescribedHeatFlow.Q_flow) annotation(Line(points = {{-9, 70}, {0, 70}, {0, 60}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(limiter.y, boilerEfficiency.heatDemand) annotation(Line(points = {{-9, 70}, {40, 70}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(boilerEfficiency.fuelUse, fuelCounter.fuel_in) annotation(Line(points = {{60.6, 70}, {80, 70}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(heatDemand.T_set, T_set) annotation(Line(points = {{-64, 70}, {-108, 70}}, color = {0, 0, 127}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(info = "<html>
+  connect(T_in.T, heatDemand.T_in) annotation (Line(
+      points={{-70,11},{-70,30},{-60,30},{-60,60}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(massFlowSensor.m_flow, heatDemand.m_flow_in) annotation (Line(
+      points={{-40,11},{-40,30},{-52,30},{-52,60}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
+            -100},{100,100}}),                                                                           graphics), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p><br>This basic boiler model calculates the heat demand in order to reach the fluid set temperature. The heat input to the fluid is limited between 0 and the maximum heat output of the boiler. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>

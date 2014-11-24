@@ -1,18 +1,39 @@
 within AixLib.HVAC.HeatGeneration.BaseClasses;
 
-partial model PartialHeatGen "Base Class for modelling heat generation equipment of different types"
-  outer BaseParameters baseParameters "System properties";
-  parameter Modelica.SIunits.Temperature T_ref = baseParameters.T_ref;
-  Volume.Volume volume annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}})));
-  Interfaces.Port_a port_a annotation(Placement(transformation(extent = {{-110, -10}, {-90, 10}})));
-  Interfaces.Port_b port_b annotation(Placement(transformation(extent = {{90, -10}, {110, 10}})));
-  Sensors.TemperatureSensor T_in(T_ref = T_ref) annotation(Placement(transformation(extent = {{-80, -10}, {-60, 10}})));
-  Sensors.MassFlowSensor massFlowSensor annotation(Placement(transformation(extent = {{-50, -10}, {-30, 10}})));
+
+partial model PartialHeatGen
+  "Base Class for modelling heat generation equipment of different types"
+  extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
+
+  parameter Modelica.SIunits.Temperature T_ref = 293.15;
+  Fluid.MixingVolumes.MixingVolume
+                volume(
+    m_flow_nominal=0.01,
+    V=0.01,
+    nPorts=2)          annotation(Placement(transformation(extent={{-10,0},{10,20}})));
+
+  Fluid.Sensors.TemperatureTwoPort
+                            T_in(
+      m_flow_nominal=0.01)                      annotation(Placement(transformation(extent = {{-80, -10}, {-60, 10}})));
+  Fluid.Sensors.MassFlowRate
+                         massFlowSensor annotation(Placement(transformation(extent = {{-50, -10}, {-30, 10}})));
 equation
-  connect(volume.port_b, port_b) annotation(Line(points = {{10, 0}, {100, 0}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(port_a, T_in.port_a) annotation(Line(points = {{-100, 0}, {-80, 0}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(T_in.port_b, massFlowSensor.port_a) annotation(Line(points = {{-60, 0}, {-50, 0}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(massFlowSensor.port_b, volume.port_a) annotation(Line(points = {{-30, 0}, {-10, 0}}, color = {0, 127, 255}, smooth = Smooth.None));
+  connect(port_a, T_in.port_a) annotation (Line(
+      points={{-100,0},{-80,0}},
+      color={0,127,255},
+      smooth=Smooth.None));
+  connect(T_in.port_b, massFlowSensor.port_a) annotation (Line(
+      points={{-60,0},{-50,0}},
+      color={0,127,255},
+      smooth=Smooth.None));
+  connect(massFlowSensor.port_b, volume.ports[1]) annotation (Line(
+      points={{-30,0},{-2,0}},
+      color={0,127,255},
+      smooth=Smooth.None));
+  connect(volume.ports[2], port_b) annotation (Line(
+      points={{2,0},{100,0}},
+      color={0,127,255},
+      smooth=Smooth.None));
   annotation(Documentation(info = "<html>
  <p><h4><font color=\"#008000\">Overview</font></h4></p>
  <p><br/>This partial model is a base class for modelling all heat generation equipment. It includes the necessary fluid port and a fluid volume with a thermal connector for heating the fluid.</p>
@@ -26,5 +47,6 @@ equation
  <p><ul>
  <li>implemented</li>
  </ul></p>
- </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
+ </html>"), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
+            -100},{100,100}}),                                                                          graphics));
 end PartialHeatGen;
