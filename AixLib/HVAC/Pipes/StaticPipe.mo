@@ -1,6 +1,6 @@
 within AixLib.HVAC.Pipes;
 model StaticPipe
-  extends Annex60.Fluid.Interfaces.PartialTwoPortTransport;
+  extends AixLib.Fluid.Interfaces.PartialTwoPortTransport;
   import Modelica.Math;
   parameter Modelica.SIunits.Length D = 0.05 "Diameter";
   parameter Modelica.SIunits.Length l = 1 "Length";

@@ -1,7 +1,7 @@
 within AixLib.HVAC.Pumps;
 model Pump
   import AixLib;
-  extends Annex60.Fluid.Interfaces.PartialTwoPortTransport;
+  extends AixLib.Fluid.Interfaces.PartialTwoPortTransport;
   parameter AixLib.DataBase.Pumps.MinMaxCharacteristicsBaseDataDefinition MinMaxCharacteristics = AixLib.DataBase.Pumps.Pump1()
     "Head = f(V_flow) for minimal and maximal rotational speed"                                                                                                     annotation(choicesAllMatching = true);
   parameter Integer ControlStrategy = 1 "Control Strategy" annotation(Dialog(group = "Control strategy"), choices(choice = 1
