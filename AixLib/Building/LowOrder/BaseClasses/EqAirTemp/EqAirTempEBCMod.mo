@@ -18,6 +18,9 @@ protected
     Modelica.SIunits.TemperatureDifference T_eqSW_win[n]
     "equal short wave window";
   Real phiprivate[n];
+initial equation
+  assert(noEvent(abs(sum(wf_wall) + wf_ground - 1) < 0.1), "The sum of the weightfactors (walls and ground) in eqairtemp is <0.9 or >1.1. Normally, the sum should be 1.", level=AssertionLevel.warning);
+  assert(noEvent(abs(sum(wf_win) - 1) < 0.1), "The sum of the weightfactors (windows) in eqairtemp is <0.9 or >1.1. Normally, the sum should be 1.", level=AssertionLevel.warning);
 equation
 
   T_earth=((-E_earth/(0.93*5.67))^0.25)*100;//-273.15

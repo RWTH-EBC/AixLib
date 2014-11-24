@@ -54,7 +54,6 @@ protected
 
 initial equation
   assert(noEvent(abs(sum(wf_wall) + sum(wf_win) + wf_ground) > 0.1), "The sum of the weightfactors (walls,windows and ground) in eqairtemp is close to 0. If there are no walls, windows and ground at all, this might be irrelevant.", level=AssertionLevel.warning);
-  assert(noEvent(abs(sum(wf_wall) + sum(wf_win) + wf_ground - 1) < 0.1), "The sum of the weightfactors (walls,windows and ground) in eqairtemp is <0.9 or >1.1. Normally, the sum should be 1.", level=AssertionLevel.warning);
 equation
 
   T_air=weatherData[1];
