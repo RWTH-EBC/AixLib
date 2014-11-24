@@ -8,13 +8,13 @@ model TestCase_9
   Building.LowOrder.BaseClasses.SolarRadWeightedSum window_shortwave_rad_sum(n = 4, weightfactors = {0, 0, 7, 7}) annotation(Placement(transformation(extent = {{6, 62}, {28, 84}})));
   BaseClasses.EqAirTemp.EqAirTempSimple eqAirTemp(
     aowo=0.7,
-    wf_wall={0,0,0.05795,0.13245},
     wf_win={0,0,0.4048,0.4048},
-    alphaowo=25) annotation (Placement(transformation(extent={{-20,0},{0,20}})));
+    alphaowo=25,
+    wf_wall={0,0,0.05795,0.13245})
+                 annotation (Placement(transformation(extent={{-20,0},{0,20}})));
   Components.Weather.Sunblind sunblind(Imax = 100, gsunblind = {1, 1, 0.15, 0.15}) annotation(Placement(transformation(extent = {{-20, 62}, {0, 82}})));
   BaseClasses.ReducedOrderModel.ReducedOrderModelStar reducedModel(
     Ao=25.5,
-    Aw=14,
     Ai=60.5,
     epsi=1,
     epso=1,
@@ -28,7 +28,9 @@ model TestCase_9
     C1o=5.25993e+006,
     alphaiwi=2.1,
     alphaowi=2.7,
-    RRest=0.020439688)
+    RRest=0.020439688,
+    withWindows=true,
+    Aw=14)
     annotation (Placement(transformation(extent={{38,8},{80,46}})));
   Utilities.Sources.PrescribedSolarRad varRad3(n = 4) annotation(Placement(transformation(extent = {{-58, 63}, {-38, 83}})));
   Utilities.Sources.PrescribedSolarRad varRad1(n = 4) annotation(Placement(transformation(extent = {{-44, 23}, {-24, 43}})));
@@ -72,7 +74,8 @@ equation
   connect(innerLoads.y[2], personsConvective.Q_flow) annotation(Line(points = {{-45, -58}, {2, -58}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(innerLoads.y[1], personsRadiative.Q_flow) annotation(Line(points = {{-45, -58}, {-26, -58}, {-26, -86}, {2, -86}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(personsRadiative.port, HeatTorStar.Therm) annotation(Line(points = {{22, -86}, {38.8, -86}}, color = {191, 0, 0}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(graphics), experiment(StopTime = 5.184e+006, Interval = 3600), experimentSetupOutput(events = false), Documentation(revisions = "<html>
+  annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
+            -100},{100,100}}),                                                                           graphics), Icon(graphics), experiment(StopTime = 5.184e+006, Interval = 3600), experimentSetupOutput(events = false), Documentation(revisions = "<html>
  <ul>
    <li><i>March, 2012&nbsp;</i>
           by Moritz Lauster:<br>

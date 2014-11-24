@@ -5,7 +5,6 @@ parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaowo=20
     "Outer wall's coefficient of heat transfer (outer side)";
 protected
   parameter Real phiprivate=0.5;
-  parameter Real unitvec[n]=ones(n);
 public
   Modelica.SIunits.Temp_K T_eqLWs "equal long wave scalar";
 equation
@@ -13,13 +12,22 @@ equation
   T_earth=((-E_earth/(0.93*5.67))^0.25)*100;//-273.15
   T_sky=((E_sky/(0.93*5.67))^0.25)*100;//-273.15
 
-  T_eqLWs=((T_earth-(T_air))*(1-phiprivate)+(T_sky-(T_air))*phiprivate)*((eowo*alpharad)/(alphaowo*0.93));
-  T_eqLW=T_eqLWs*abs(sunblindsig-unitvec);
+  T_eqLWs=((T_earth-T_air)*(1-phiprivate)+(T_sky-T_air)*phiprivate)*(eowo*alpharad/(alphaowo*0.93));
+  if withSunblind then
+    T_eqLW=T_eqLWs*abs(sunblindsig-unitvec);
+  else
+    T_eqLW=T_eqLWs*unitvec;
+  end if;
 
   T_eqSW=solarRad_in.I*aowo/alphaowo;
 
-  T_eqWin=(T_air*unitvec)+T_eqLW;
-  T_eqWall=(T_air+T_eqLWs)*unitvec+T_eqSW;
+  if withLongwave then
+    T_eqWin=(T_air*unitvec)+T_eqLW;
+    T_eqWall=(T_air+T_eqLWs)*unitvec+T_eqSW;
+  else
+    T_eqWin=T_air*unitvec;
+    T_eqWall=T_air*unitvec+T_eqSW;
+  end if;
 
   equalAirTemp.T = T_eqWall*wf_wall + T_eqWin*wf_win + T_ground*wf_ground;
   annotation (Documentation(revisions="<html>

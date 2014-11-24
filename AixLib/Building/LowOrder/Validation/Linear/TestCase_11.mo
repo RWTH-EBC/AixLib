@@ -5,10 +5,12 @@ model TestCase_11
   output Real simulationLoad;
   Modelica.Blocks.Sources.Constant infiltrationRate(k = 0) annotation(Placement(transformation(extent = {{40, 6}, {50, 16}})));
   Modelica.Blocks.Sources.Constant infiltrationTemp(k = 22) annotation(Placement(transformation(extent = {{16, 26}, {26, 36}})));
-  Utilities.HeatTransfer.HeatToStar Konvektiv_Strahlung(A = 2) annotation(Placement(transformation(extent = {{50, -92}, {70, -72}})));
+  Utilities.HeatTransfer.HeatToStar heatToStar(A=2)
+    annotation (Placement(transformation(extent={{50,-92},{70,-72}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machinesRadiative annotation(Placement(transformation(extent = {{4, -94}, {30, -72}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature outdoorTemp(T = 295.15) annotation(Placement(transformation(extent = {{-14, 47}, {6, 67}})));
-  VDIComponents.ReducedOrderModel_surfaceCooling reducedModel(                    Aw = 7, g = 0.15,                     epsi = 1, epso = 1, T0all(displayUnit = "K") = 295.15, rad_split_conv(x = 0.09), withWindows = false, R1i = 0.000595515, Ai = 75.5,                                         Ao = 10.5, alphaiwi = 3,
+  BaseClasses.ReducedOrderModel.ReducedOrderModelVDI
+                                                 reducedModel(                    Aw = 7, g = 0.15,                     epsi = 1, epso = 1, T0all(displayUnit = "K") = 295.15,                           withWindows = false, R1i = 0.000595515, Ai = 75.5,                                         Ao = 10.5, alphaiwi = 3,
     C1i=1.48362e+007,
     RRest=0.042768721,
     R1o=0.004367913,
@@ -38,7 +40,10 @@ model TestCase_11
   Utilities.Sources.HeaterCooler.IdealHeaterCoolerVar1 cooler(Q_flow_heat = 1, Q_flow_cooler = 1, h_cooler = 0, KR_heater = 1000, KR_cooler = 1000, TN_heater = 1, TN_cooler = 1, h_heater = 500, l_cooler = -500, Heater_on = false) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin = {-26, -48})));
   Modelica.Blocks.Sources.CombiTimeTable innerLoads(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableName = "UserProfilesOffice", fileName = "./Tables/J1615/UserProfilesOffice.txt", tableOnFile = false, columns = {2, 3}, table = [0, 0, 0; 3600, 0, 0; 7200, 0, 0; 10800, 0, 0; 14400, 0, 0; 18000, 0, 0; 21600, 0, 0; 21600, 0, 1000; 25200, 0, 1000; 28800, 0, 1000; 32400, 0, 1000; 36000, 0, 1000; 39600, 0, 1000; 43200, 0, 1000; 46800, 0, 1000; 50400, 0, 1000; 54000, 0, 1000; 57600, 0, 1000; 61200, 0, 1000; 64800, 0, 1000; 64800, 0, 0; 68400, 0, 0; 72000, 0, 0; 75600, 0, 0; 79200, 0, 0; 82800, 0, 0; 86400, 0, 0]) annotation(Placement(transformation(extent = {{-24, -93}, {-10, -79}})));
 equation
-  connect(machinesRadiative.port, Konvektiv_Strahlung.Therm) annotation(Line(points = {{30, -83}, {38, -83}, {38, -82}, {50.8, -82}}, color = {191, 0, 0}, smooth = Smooth.None));
+  connect(machinesRadiative.port, heatToStar.Therm) annotation (Line(
+      points={{30,-83},{38,-83},{38,-82},{50.8,-82}},
+      color={191,0,0},
+      smooth=Smooth.None));
   connect(setTemp.y[1], heater.soll_heat) annotation(Line(points = {{-59, -20}, {-50, -20}, {-50, -23}, {-30.8, -23}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(sumHeatLoad.u1, heater.heatMeter.p);
   connect(sumHeatLoad.u2, cooler.coolMeter.p);
@@ -46,13 +51,31 @@ equation
   simulationLoad = sumHeatLoad.y;
   connect(setTemp.y[2], cooler.soll_cool) annotation(Line(points = {{-59, -20}, {-44, -20}, {-44, -43.2}, {-30.8, -43.2}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(innerLoads.y[2], machinesRadiative.Q_flow) annotation(Line(points = {{-9.3, -86}, {-2, -86}, {-2, -83}, {4, -83}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(outdoorTemp.port, reducedModel.equivalentoutdoortemp) annotation(Line(points = {{6, 57}, {36.5, 57}, {36.5, 56.8}, {67.4, 56.8}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(infiltrationTemp.y, reducedModel.outdoorairtemp) annotation(Line(points = {{26.5, 31}, {38, 31}, {38, 46.4}, {67.4, 46.4}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(infiltrationRate.y, reducedModel.InfiltrationVentilationRate) annotation(Line(points = {{50.5, 11}, {72.5, 11}, {72.5, 40}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(heater.HeatCoolRoom, reducedModel.innerLoadskonv) annotation(Line(points = {{-26, -29}, {28, -29}, {28, -28}, {79.64, -28}, {79.64, 40}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(cooler.HeatCoolRoom, reducedModel.surfaceCooling) annotation(Line(points = {{-26, -57}, {38, -57}, {38, -54}, {87.12, -54}, {87.12, 40}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Konvektiv_Strahlung.Star, reducedModel.innerLoadsrad) annotation(Line(points = {{69.1, -82}, {84, -82}, {84, -84}, {94.09, -84}, {94.09, 40}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
-  annotation(experiment(StopTime = 5.184e+006, Interval = 3600), __Dymola_experimentSetupOutput(events = false), Icon(graphics), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(revisions = "<html>
+  connect(heatToStar.Star, reducedModel.internalGainsRad) annotation (Line(
+      points={{69.1,-82},{94.09,-82},{94.09,40}},
+      color={95,95,95},
+      pattern=LinePattern.None,
+      smooth=Smooth.None));
+  connect(heater.heatCoolRoom, reducedModel.internalGainsConv) annotation (Line(
+      points={{-26,-29},{-26,-32},{84.4,-32},{84.4,40}},
+      color={191,0,0},
+      smooth=Smooth.None));
+  connect(infiltrationRate.y, reducedModel.ventilationRate) annotation (Line(
+      points={{50.5,11},{74,11},{74,40},{74.2,40}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(infiltrationTemp.y, reducedModel.ventilationTemperature) annotation (
+      Line(
+      points={{26.5,31},{48,31},{48,46.4},{67.4,46.4}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(outdoorTemp.port, reducedModel.equalAirTemp) annotation (Line(
+      points={{6,57},{38,57},{38,56.8},{67.4,56.8}},
+      color={191,0,0},
+      smooth=Smooth.None));
+  connect(cooler.heatCoolRoom, reducedModel.heatConvInnerwall.port_b);
+  annotation(experiment(StopTime = 5.184e+006, Interval = 3600), __Dymola_experimentSetupOutput(events = false), Icon(graphics), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
+            -100},{100,100}}),                                                                                                    graphics), Documentation(revisions = "<html>
  <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
  </html>", info = "<html>
  <p>Test Case 11 of the VDI6007: <a name=\"result_box\">L</a>oad calculation in compliance with the desired values of the indoor temperature and a setpoint for the type space S:</p>

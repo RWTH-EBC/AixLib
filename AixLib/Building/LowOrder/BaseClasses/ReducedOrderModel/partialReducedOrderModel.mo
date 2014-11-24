@@ -154,15 +154,9 @@ public
         rotation=90,
         origin={-68,-42})));
 initial equation
-  if abs(Aw) < 0.00001 and withWindows then
-    Modelica.Utilities.Streams.print("WARNING!:in ReducedModel, withWindows is true (windows existent), but the area of the windows Aw is zero (or nearly zero). This might cause an error.");
-  end if;
-  if abs(Ao) < 0.00001 and withOuterwalls then
-    Modelica.Utilities.Streams.print("WARNING!:in ReducedModel,withWindows is true (windows existent), but the area of the windows Aw is zero (or nearly zero). This might cause an error.");
-  end if;
-  if abs(Ai) < 0.00001 and withInnerwalls then
-    Modelica.Utilities.Streams.print("WARNING!:in ReducedModel,withWindows is true (windows existent), but the area of the windows Aw is zero (or nearly zero). This might cause an error.");
-  end if;
+  assert((abs(Aw) < 0.00001 and withWindows)==false,"In ReducedModel, withWindows is true (windows existent), but the area of the windows Aw is zero (or nearly zero). This might cause an error.", level=AssertionLevel.warning);
+  assert((abs(Ao) < 0.00001 and withOuterwalls)==false,"In ReducedModel, withOuterwalls is true (outer walls existent), but the area of the outer walls Ao is zero (or nearly zero). This might cause an error.", level=AssertionLevel.warning);
+  assert((abs(Ai) < 0.00001 and withInnerwalls)==false,"In ReducedModel, withInnerwalls is true (inner walls existent), but the area of the inner walls Ai is zero (or nearly zero). This might cause an error.", level=AssertionLevel.warning);
 
 equation
 if withWindows and withOuterwalls then
@@ -235,10 +229,6 @@ if withWindows and withOuterwalls then
       points={{-27,66},{-16,66},{-16,0},{-7,0}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(ventilationRate, airExchange.InPort1) annotation (Line(
-      points={{-40,-100},{-40,-60},{-50,-60},{-50,-36.4},{-43,-36.4}},
-      color={0,0,127},
-      smooth=Smooth.None));
   connect(ventilationTemperature, ventilationTemperatureConverter.T)
     annotation (Line(
       points={{-100,-62},{-68,-62},{-68,-51.6}},
@@ -248,6 +238,10 @@ if withWindows and withOuterwalls then
      Line(
       points={{-68,-34},{-68,-30},{-44,-30}},
       color={191,0,0},
+      smooth=Smooth.None));
+  connect(ventilationRate, airExchange.InPort1) annotation (Line(
+      points={{-40,-100},{-40,-50},{-50,-50},{-50,-36.4},{-43,-36.4}},
+      color={0,0,127},
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),

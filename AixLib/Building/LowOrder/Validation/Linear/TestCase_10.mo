@@ -9,19 +9,20 @@ model TestCase_10
   Utilities.Sources.PrescribedSolarRad Quelle_Fenster(n = 5) annotation(Placement(transformation(extent = {{-50, 72}, {-30, 92}})));
   Components.Weather.Sunblind sunblind(n = 5, gsunblind = {0, 0, 0.15, 0, 0}) annotation(Placement(transformation(extent = {{-20, 71}, {0, 91}})));
   Building.LowOrder.BaseClasses.SolarRadWeightedSum rad_weighted_sum(n = 5, weightfactors = {0, 0, 7, 0, 0}) annotation(Placement(transformation(extent = {{8, 72}, {28, 92}})));
-  VDIComponents.EqAirTemp_TestCase_8    eqAirTemp_TestCase_8_1(
+  BaseClasses.EqAirTemp.EqAirTempSimple eqAirTemp_TestCase_8_1(
     alphaowo=25,
     wf_ground=0.629038674,
     n=5,
     wf_wall={0.000000000,0.000000000,0.046454666,0.000000000,0.0},
     wf_win={0.000000000,0.000000000,0.324506660,0.000000000,0.0},
-    T_ground=288.15)
+    T_ground=288.15,
+    withLongwave=false)
     annotation (Placement(transformation(extent={{-36,10},{-16,30}})));
   Utilities.Sources.PrescribedSolarRad Quelle_Wand(n = 5) annotation(Placement(transformation(extent = {{-58, 44}, {-38, 64}})));
   Modelica.Blocks.Sources.CombiTimeTable outdoorTemp(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, columns = {2, 3, 4}, table = [0, 291.95, 0, 0; 3600, 291.95, 0, 0; 3600, 290.25, 0, 0; 7200, 290.25, 0, 0; 7200, 289.65, 0, 0; 10800, 289.65, 0, 0; 10800, 289.25, 0, 0; 14400, 289.25, 0, 0; 14400, 289.65, 0, 0; 18000, 289.65, 0, 0; 18000, 290.95, 0, 0; 21600, 290.95, 0, 0; 21600, 293.45, 0, 0; 25200, 293.45, 0, 0; 25200, 295.95, 0, 0; 28800, 295.95, 0, 0; 28800, 297.95, 0, 0; 32400, 297.95, 0, 0; 32400, 299.85, 0, 0; 36000, 299.85, 0, 0; 36000, 301.25, 0, 0; 39600, 301.25, 0, 0; 39600, 302.15, 0, 0; 43200, 302.15, 0, 0; 43200, 302.85, 0, 0; 46800, 302.85, 0, 0; 46800, 303.55, 0, 0; 50400, 303.55, 0, 0; 50400, 304.05, 0, 0; 54000, 304.05, 0, 0; 54000, 304.15, 0, 0; 57600, 304.15, 0, 0; 57600, 303.95, 0, 0; 61200, 303.95, 0, 0; 61200, 303.25, 0, 0; 64800, 303.25, 0, 0; 64800, 302.05, 0, 0; 68400, 302.05, 0, 0; 68400, 300.15, 0, 0; 72000, 300.15, 0, 0; 72000, 297.85, 0, 0; 75600, 297.85, 0, 0; 75600, 296.05, 0, 0; 79200, 296.05, 0, 0; 79200, 295.05, 0, 0; 82800, 295.05, 0, 0; 82800, 294.05, 0, 0; 86400, 294.05, 0, 0]) annotation(Placement(transformation(extent = {{-100, 12}, {-80, 32}})));
   Modelica.Blocks.Sources.Constant wallRad(k = 0) annotation(Placement(transformation(extent = {{-126, 50}, {-116, 60}})));
   Modelica.Blocks.Routing.Multiplex5 multiplex5_1 annotation(Placement(transformation(extent = {{-84, 44}, {-64, 64}})));
-  BaseClasses.ReducedOrderModel.ReducedOrderModelStar reducedModel(
+  BaseClasses.ReducedOrderModel.ReducedOrderModelVDI  reducedModel(
     R1i=0.000779672,
     C1i=1.23140e+07,
     Ai=58,
@@ -75,19 +76,18 @@ equation
   connect(innerLoads.y[2], personsConvective.Q_flow) annotation(Line(points = {{-27, -62}, {20, -62}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(innerLoads.y[1], personsRadiative.Q_flow) annotation(Line(points = {{-27, -62}, {-8, -62}, {-8, -90}, {20, -90}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(personsRadiative.port, HeatTorStar.Therm) annotation(Line(points = {{40, -90}, {56.8, -90}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(outdoorTemp.y, eqAirTemp_TestCase_8_1.WeatherDataVector) annotation (
-      Line(
-      points={{-79,22},{-56,22},{-56,20},{-34,20}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  connect(Quelle_Wand.solarRad_out, eqAirTemp_TestCase_8_1.Rad_In) annotation (
-      Line(
-      points={{-39,54},{-36,54},{-36,25.6},{-34.5,25.6}},
+  connect(Quelle_Wand.solarRad_out, eqAirTemp_TestCase_8_1.solarRad_in)
+    annotation (Line(
+      points={{-39,54},{-38,54},{-38,25.6},{-34.5,25.6}},
       color={255,128,0},
       smooth=Smooth.None));
-  connect(eqAirTemp_TestCase_8_1.equalairtemp, reducedModel.equalAirTemp)
+  connect(outdoorTemp.y, eqAirTemp_TestCase_8_1.weatherData) annotation (Line(
+      points={{-79,22},{-42,22},{-42,20},{-34,20}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(eqAirTemp_TestCase_8_1.equalAirTemp, reducedModel.equalAirTemp)
     annotation (Line(
-      points={{-18,20},{20,20},{20,68},{56.8,68}},
+      points={{-18,14.4},{-8,14.4},{-8,14},{8,14},{8,68},{56.8,68}},
       color={191,0,0},
       smooth=Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,

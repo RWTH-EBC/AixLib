@@ -8,7 +8,8 @@ model TestCase_9
   Building.LowOrder.BaseClasses.SolarRadWeightedSum window_shortwave_rad_sum(n = 4, weightfactors = {0, 0, 7, 7}) annotation(Placement(transformation(extent = {{6, 62}, {28, 84}})));
   BaseClasses.EqAirTemp.EqAirTempSimple   eqAirTemp(aowo = 0.7,                                                                      alphaowo = 25,
     wf_wall={0,0,0.057968311,0.132498994},
-    wf_win={0,0,0.404766351,0.404766351})                                                                                                     annotation(Placement(transformation(extent={{-20,2},
+    wf_win={0,0,0.404766351,0.404766351},
+    withSunblind=true)                                                                                                     annotation(Placement(transformation(extent={{-20,2},
             {0,22}})));
   Components.Weather.Sunblind sunblind(Imax = 100, gsunblind = {1, 1, 0.15, 0.15}) annotation(Placement(transformation(extent = {{-20, 62}, {0, 82}})));
   BaseClasses.ReducedOrderModel.ReducedOrderModelVDI
