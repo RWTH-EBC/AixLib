@@ -1,5 +1,6 @@
 within AixLib.HVAC.Storage.BaseClasses;
 
+
 model Bouyancy
   outer BaseParameters baseParameters "System properties";
   parameter Modelica.SIunits.Area A = 1;
@@ -9,9 +10,9 @@ model Bouyancy
   Modelica.SIunits.TemperatureDifference dT;
   Modelica.SIunits.ThermalConductivity lambda_eff;
   parameter Modelica.SIunits.Acceleration g = baseParameters.g;
-  parameter Modelica.SIunits.SpecificHeatCapacity cp = baseParameters.cp_Water;
-  parameter Modelica.SIunits.ThermalConductivity lambda = baseParameters.lambda_Water;
-  parameter Modelica.SIunits.Density rho = baseParameters.rho_Water;
+  Modelica.SIunits.SpecificHeatCapacity cp = baseParameters.cp_Water;
+  Modelica.SIunits.ThermalConductivity lambda = baseParameters.lambda_Water;
+  Modelica.SIunits.Density rho = baseParameters.rho_Water;
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a annotation(Placement(transformation(extent = {{-16, 86}, {4, 106}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b annotation(Placement(transformation(extent = {{-16, -104}, {4, -84}})));
 equation
