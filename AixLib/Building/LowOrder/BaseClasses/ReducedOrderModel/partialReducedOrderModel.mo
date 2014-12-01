@@ -154,9 +154,9 @@ public
         rotation=90,
         origin={-68,-42})));
 initial equation
-  assert((abs(Aw) < 0.00001 and withWindows)==false,"In ReducedModel, withWindows is true (windows existent), but the area of the windows Aw is zero (or nearly zero). This might cause an error.", level=AssertionLevel.warning);
-  assert((abs(Ao) < 0.00001 and withOuterwalls)==false,"In ReducedModel, withOuterwalls is true (outer walls existent), but the area of the outer walls Ao is zero (or nearly zero). This might cause an error.", level=AssertionLevel.warning);
-  assert((abs(Ai) < 0.00001 and withInnerwalls)==false,"In ReducedModel, withInnerwalls is true (inner walls existent), but the area of the inner walls Ai is zero (or nearly zero). This might cause an error.", level=AssertionLevel.warning);
+  assert(noEvent((abs(Aw) < 0.00001 and withWindows)==false),"In ReducedModel, withWindows is true (windows existent), but the area of the windows Aw is zero (or nearly zero). This might cause an error.", level=AssertionLevel.warning);
+  assert(noEvent((abs(Ao) < 0.00001 and withOuterwalls)==false),"In ReducedModel, withOuterwalls is true (outer walls existent), but the area of the outer walls Ao is zero (or nearly zero). This might cause an error.", level=AssertionLevel.warning);
+  assert(noEvent((abs(Ai) < 0.00001 and withInnerwalls)==false),"In ReducedModel, withInnerwalls is true (inner walls existent), but the area of the inner walls Ai is zero (or nearly zero). This might cause an error.", level=AssertionLevel.warning);
 
 equation
 if withWindows and withOuterwalls then
