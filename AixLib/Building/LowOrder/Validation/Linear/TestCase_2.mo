@@ -24,19 +24,19 @@ equation
   connect(infiltrationTemp.y, reducedModel.ventilationTemperature) annotation(Line(points = {{-23, 0}, {-4, 0}, {-4, 18.84}, {15.4, 18.84}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(infiltrationRate.y, reducedModel.ventilationRate) annotation(Line(points = {{17, -30}, {20, -30}, {20, 13.4}, {22.2, 13.4}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(HeatToStar.Star, reducedModel.internalGainsRad) annotation(Line(points = {{70, -28.9}, {70, -18}, {42.09, -18}, {42.09, 13.4}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), experiment(StopTime = 5.184e+006, Interval = 3600), __Dymola_experimentSetupOutput(events = false), Icon(graphics), Documentation(info = "<html>
- <p>Test Case 2 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to a radiant heat source for Type room S</p>
- <ul>
- <li>constant outdoor temperature 22&deg;C</li>
- <li>no shortwave radiation on the outer wall</li>
- <li>no shortwave radiation through the window</li>
- <li>no longwave radiation exchange between outer wall, window and ambience</li>
- </ul>
- <p>Reference: Room air temperature</p>
- <p>Variable path: <code>reducedModel.airload.T</code></p>
- <p><br><br>All values are given in the VDI 6007-1.</p>
- <p>Same Test Case exists in VDI 6020.</p>
- </html>", revisions = "<html>
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), experiment(StopTime = 5.184e+006, Interval = 3600), __Dymola_experimentSetupOutput(events = false), Icon(graphics), Documentation(info="<html>
+<p>Test Case 2 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to a radiant heat source for Type room S </p>
+<ul>
+<li>constant outdoor temperature 22 degC </li>
+<li>no shortwave radiation on the outer wall </li>
+<li>no shortwave radiation through the window </li>
+<li>no longwave radiation exchange between outer wall, window and ambience </li>
+</ul>
+<p>Reference: Room air temperature </p>
+<p>Variable path: <code>reducedModel.airload.T</code> </p>
+<p><br><br>All values are given in the VDI 6007-1. </p>
+<p>Same Test Case exists in VDI 6020. </p>
+</html>",  revisions = "<html>
  <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
  </html>"));
 end TestCase_2;

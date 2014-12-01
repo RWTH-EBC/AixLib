@@ -37,17 +37,17 @@ equation
   connect(machinesConvective.port, reducedModel.internalGainsConv) annotation(Line(points = {{24, -58}, {32.4, -58}, {32.4, 13.4}}, color = {191, 0, 0}, smooth = Smooth.None));
   annotation(Documentation(revisions = "<html>
  <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
- </html>", info = "<html>
- <p>Test Case 3 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to a convective heat source for Type room L</p>
- <ul>
- <li>constant outdoor temperature 22&deg;C</li>
- <li>no shortwave radiation on the outer wall</li>
- <li>no shortwave radiation through the window</li>
- <li>no longwave radiation exchange between outer wall, window and ambience</li>
- </ul>
- <p>Reference: Room air temperature</p>
- <p>Variable path: <code>reducedModel.airload.T</code></p>
- <p><br><br>All values are given in the VDI 6007-1.</p>
- <p>Same Test Case exists in VDI 6020.</p>
- </html>"), Icon(graphics), experiment(StopTime = 5.184e+006, Interval = 3600), __Dymola_experimentSetupOutput(events = false), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
+ </html>", info="<html>
+<p>Test Case 3 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to a convective heat source for Type room L </p>
+<ul>
+<li>constant outdoor temperature 22 degC </li>
+<li>no shortwave radiation on the outer wall </li>
+<li>no shortwave radiation through the window </li>
+<li>no longwave radiation exchange between outer wall, window and ambience </li>
+</ul>
+<p>Reference: Room air temperature </p>
+<p>Variable path: <code>reducedModel.airload.T</code> </p>
+<p><br><br>All values are given in the VDI 6007-1. </p>
+<p>Same Test Case exists in VDI 6020. </p>
+</html>"),  Icon(graphics), experiment(StopTime = 5.184e+006, Interval = 3600), __Dymola_experimentSetupOutput(events = false), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
 end TestCase_3;
