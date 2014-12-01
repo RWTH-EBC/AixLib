@@ -40,17 +40,17 @@ equation
  <li><i>March, 2012&nbsp;</i> by Moritz Lauster:<br/>Implemented</li>
  </ul></p>
  <p><br/><br/> </p>
- </html>", info = "<html>
- <p>Test Case 1 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to a convective heat source for Type room S</p>
- <ul>
- <li>constant outdoor temperature 22&deg;C</li>
- <li>no shortwave radiation on the outer wall</li>
- <li>no shortwave radiation through the window</li>
- <li>no longwave radiation exchange between outer wall, window and ambience</li>
- </ul>
- <p>Reference: Room air temperature</p>
- <p>Variable path: <code>reducedModel.airload.T</code></p>
- <p><br><br>All values are given in the VDI 6007-1.</p>
- <p>Same Test Case exists in VDI 6020.</p>
- </html>"));
+ </html>", info="<html>
+<p>Test Case 1 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to a convective heat source for Type room S </p>
+<ul>
+<li>constant outdoor temperature 22 degC </li>
+<li>no shortwave radiation on the outer wall </li>
+<li>no shortwave radiation through the window </li>
+<li>no longwave radiation exchange between outer wall, window and ambience </li>
+</ul>
+<p>Reference: Room air temperature </p>
+<p>Variable path: <code>reducedModel.airload.T</code> </p>
+<p><br><br>All values are given in the VDI 6007-1. </p>
+<p>Same Test Case exists in VDI 6020. </p>
+</html>"));
 end TestCase_1;
