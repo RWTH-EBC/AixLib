@@ -1,7 +1,7 @@
 within AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel;
 partial model partialReducedOrderModel
 
- parameter Boolean withInnerwalls=true "If inner walls are existent"   annotation(Dialog(tab="Inner walls"));
+ parameter Boolean withInnerwalls=true "If inner walls are existent"   annotation(Dialog(tab="Inner walls"),choices(checkBox = true));
   parameter Modelica.SIunits.ThermalResistance R1i=0.0005955
     "Resistor 1 inner wall"
     annotation(Dialog(tab="Inner walls",enable = if withInnerwalls then true else false));
@@ -11,7 +11,7 @@ partial model partialReducedOrderModel
     annotation(Dialog(tab="Inner walls",enable = if withInnerwalls then true else false));
   parameter Modelica.SIunits.Temp_K T0all=295.15
     "Initial temperature for all components";
-  parameter Boolean withWindows=true "If windows are existent"   annotation(Dialog(tab="Outer walls",group = "Windows",enable = if withOuterwalls then true else false));
+  parameter Boolean withWindows=true "If windows are existent"   annotation(Dialog(tab="Outer walls",group = "Windows",enable = if withOuterwalls then true else false),choices(checkBox = true));
   parameter Real splitfac=0.03 "Factor for conv. part of rad. through windows"
    annotation(Dialog(tab="Outer walls",group = "Windows",enable = if withWindows and withOuterwalls then true else false));
   parameter Modelica.SIunits.Area Aw=10.5 "Window area"
@@ -22,7 +22,7 @@ partial model partialReducedOrderModel
     "Total energy transmittance"
     annotation(Dialog(tab="Outer walls",group = "Windows",enable = if withWindows and withOuterwalls then true else false));
   parameter Boolean withOuterwalls=true
-    "If outer walls (including windows) are existent"  annotation(Dialog(tab="Outer walls"));
+    "If outer walls (including windows) are existent"  annotation(Dialog(tab="Outer walls"),choices(checkBox = true));
   parameter Modelica.SIunits.ThermalResistance RRest=0.0427487
     "Resistor Rest outer wall"
     annotation(Dialog(tab="Outer walls",enable = if withOuterwalls then true else false));
