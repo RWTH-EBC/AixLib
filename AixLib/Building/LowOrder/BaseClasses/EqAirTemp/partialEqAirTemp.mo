@@ -9,7 +9,6 @@ parameter Real wf_win[n]={0,0,0,0} "Weight factors of the windows";
 parameter Real wf_ground=0 "Weight factor of the ground (0 if not considered)";
 parameter Modelica.SIunits.Temp_K T_ground=284.15
     "Temperature of the ground in contact with ground slab";
-parameter Boolean withSunblind=true "If sunblinds are considered" annotation(choices(checkBox = true));
 parameter Boolean withLongwave=true
     "If longwave radiation exchange is considered"                                 annotation(choices(checkBox = true));
 
@@ -21,10 +20,10 @@ parameter Boolean withLongwave=true
         transformation(extent={{-100,56},{-80,76}}), iconTransformation(
           extent={{-99,42},{-71,70}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a equalAirTemp annotation (
-      Placement(transformation(extent={{80,-56},{100,-36}}),
+      Placement(transformation(extent={{98,-56},{118,-36}}),
                                                            iconTransformation(
-          extent={{60,-76},{100,-36}})));
-  Modelica.Blocks.Interfaces.RealInput sunblindsig[n] if withSunblind
+          extent={{78,-76},{118,-36}})));
+  Modelica.Blocks.Interfaces.RealInput sunblindsig[n]
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
         rotation=-90,
         origin={-10,100}),
@@ -72,77 +71,51 @@ annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
           preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
                                       graphics={
         Rectangle(
-          extent={{-70,-76},{78,76}},
-          lineColor={0,128,255},
+          extent={{-70,70},{78,-76}},
+          lineColor={170,213,255},
           lineThickness=1,
-          fillColor={0,128,255},
-          fillPattern=FillPattern.Solid),
+          fillPattern=FillPattern.HorizontalCylinder,
+          fillColor={170,213,255}),
         Rectangle(
-          extent={{20,46},{60,-76}},
+          extent={{-70,70},{78,0}},
+          lineColor={170,213,255},
+          lineThickness=1,
+          fillPattern=FillPattern.Solid,
+          fillColor={170,213,255}),
+        Rectangle(
+          extent={{38,46},{78,-76}},
           lineColor={0,0,0},
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid),
         Polygon(
-          points={{60,46},{2,46},{60,74},{60,70},{60,46}},
-          lineColor={0,0,0},
+          points={{79,46},{21,46},{79,70},{79,70},{79,46}},
           smooth=Smooth.None,
-          fillColor={255,85,85},
-          fillPattern=FillPattern.Solid),
+          fillColor={236,99,92},
+          fillPattern=FillPattern.Solid,
+          pattern=LinePattern.None,
+          lineColor={236,99,92}),
         Ellipse(
-          extent={{-60,72},{-28,40}},
-          lineColor={255,255,0},
-          fillColor={255,255,0},
+          extent={{-70,70},{-16,18}},
+          lineColor={255,221,0},
+          fillColor={255,225,0},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{-70,-76},{78,-90}},
           lineColor={0,127,0},
           fillColor={0,127,0},
+          fillPattern=FillPattern.HorizontalCylinder),
+        Rectangle(
+          extent={{-70,-82},{78,-90}},
+          lineColor={0,127,0},
+          fillColor={0,127,0},
           fillPattern=FillPattern.Forward),
-        Line(
-          points={{-54,-74},{-58,-66},{-50,-62},{-56,-54},{-52,-50},{-54,-44}},
-          color={0,0,0},
-          smooth=Smooth.Bezier,
-          thickness=1),
-        Line(
-          points={{-58,-48},{-54,-40},{-50,-46}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.Bezier),
-        Line(
-          points={{-40,-74},{-44,-66},{-36,-62},{-42,-54},{-38,-50},{-40,-44}},
-          color={0,0,0},
-          smooth=Smooth.Bezier,
-          thickness=1),
-        Line(
-          points={{-44,-48},{-40,-40},{-36,-46}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.Bezier),
-        Line(
-          points={{-50,34},{-50,10}},
-          color={255,255,0},
-          thickness=1,
-          smooth=Smooth.Bezier),
-        Line(
-          points={{-36,36},{-24,14}},
-          color={255,255,0},
-          thickness=1,
-          smooth=Smooth.Bezier),
-        Line(
-          points={{-24,46},{-6,32}},
-          color={255,255,0},
-          thickness=1,
-          smooth=Smooth.Bezier),
-        Line(
-          points={{12,-30},{12,-68},{6,-70},{4,-60},{4,-30},{10,-22},{12,-30}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.Bezier),
-        Line(
-          points={{10,-48},{12,-38},{14,-48}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.Bezier)}),
+        Text(
+          extent={{-70,-92},{76,-128}},
+          lineColor={0,0,255},
+          lineThickness=0.5,
+          fillColor={236,99,92},
+          fillPattern=FillPattern.Solid,
+          textString="%name")}),
     Documentation(info="<html>
 <p>EqAirTemp is a component to compute the so called &QUOT;equivalent outdoor air temperature&QUOT;. Basically, this includes a correction for the longwave radiation for windows and walls and absorption of shortwave radiation only for walls.</p>
 <p>To the air temperature is added (or substracted) a term for longwave radiation and one term for shortwave radiation. As the shortwave radiation is taken into account only for the walls and the windows can be equipped with a shading, the equal temperatures are computed separately for the windows and for the walls. Due to the different beams in different directions, the temperatures are also computed separately for each direction. You need one weightfactor per direction and wall or window, e.g. 4 directions means 8 weightfactors (4 windows, 4 walls). Additionally, one weightfactor for the ground (for the ground temperature) . </p>

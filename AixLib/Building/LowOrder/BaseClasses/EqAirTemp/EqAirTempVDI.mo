@@ -19,11 +19,8 @@ equation
   T_eqLW=((T_earth-T_air)*(unitvec-phiprivate)+(T_sky-T_air)*phiprivate)*(eowo*alpharad/alphaowo);
   T_eqSW=solarRad_in.I*aowo/(alphaowo);
 
-  if withSunblind and withLongwave then
+  if withLongwave then
     T_eqWin=T_air*unitvec+T_eqLW.*abs(sunblindsig-unitvec);
-    T_eqWall=T_air*unitvec+T_eqLW+T_eqSW;
-  elseif not withSunblind and withLongwave then
-    T_eqWin=T_air*unitvec+T_eqLW;
     T_eqWall=T_air*unitvec+T_eqLW+T_eqSW;
   else
     T_eqWin=T_air*unitvec;

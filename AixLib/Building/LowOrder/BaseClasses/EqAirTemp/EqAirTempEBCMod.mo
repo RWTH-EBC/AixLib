@@ -11,7 +11,7 @@ parameter Real awin=0.0 "Coefficient of absorption of the window";
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a equalAirTempWindow
     annotation (Placement(transformation(extent={{80,58},{100,78}}),
-        iconTransformation(extent={{60,6},{100,46}})));
+        iconTransformation(extent={{78,6},{118,46}})));
 
 protected
     Modelica.SIunits.TemperatureDifference T_eqLW_win[n] "equal long wave";
@@ -29,11 +29,7 @@ equation
   phiprivate = (unitvec+Modelica.Math.cos(orientationswallshorizontal*Modelica.Constants.pi/180))/2;
 
   T_eqLW=((T_earth-T_air)*(unitvec-phiprivate)+(T_sky-T_air)*phiprivate)*(eowo*alpharad/(alpharad+alphaconv_wall));
-  if withSunblind then
-    T_eqLW_win=((T_earth-T_air)*(unitvec-phiprivate)+(T_sky-T_air)*phiprivate)*(eowo*alpharad/(alpharad+alphaconv_win)).*abs(sunblindsig-unitvec);
-  else
-    T_eqLW_win=((T_earth-T_air)*(unitvec-phiprivate)+(T_sky-T_air)*phiprivate)*(eowo*alpharad/(alpharad+alphaconv_win));
-  end if;
+  T_eqLW_win=((T_earth-T_air)*(unitvec-phiprivate)+(T_sky-T_air)*phiprivate)*(eowo*alpharad/(alpharad+alphaconv_win)).*abs(sunblindsig-unitvec);
   T_eqSW=solarRad_in.I*aowo/(alpharad+alphaconv_wall);
   T_eqSW_win=solarRad_in.I*awin/(alpharad+alphaconv_win);
 
@@ -73,5 +69,6 @@ equation
 <li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D. (2014): Low order thermal network models for dynamic simulations of buildings on city district scale. In: Building and Environment 73, p. 223&ndash;231. DOI: 10.1016/j.buildenv.2013.12.016.</li>
 <li>Lauster, Moritz; Remmen, Peter; Fuchs, Marcus; Teichmann, Jens; Streblow, Rita; Mueller, Dirk (2014): Modelling long-wave radiation heat exchange for thermal network building simulations at urban scale using Modelica. In: the 10th International Modelica Conference, March 10-12, 2014, Lund, Sweden, March 10-12, 2014: Linkoeping University Electronic Press (Linkoeping Electronic Conference Proceedings), p. 125&ndash;133.</li>
 </ul>
-</html>"));
+</html>"), Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+            {100,100}}), graphics));
 end EqAirTempEBCMod;

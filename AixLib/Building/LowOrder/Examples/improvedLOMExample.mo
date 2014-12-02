@@ -74,7 +74,7 @@ equation
           {52.8,-78}},                                                                                 color = {191, 0, 0}, smooth = Smooth.None));
   connect(partialEqAirTemp.equalAirTemp, reducedOrderModel.equalAirTemp)
     annotation (Line(
-      points={{-38,20.4},{-18,20.4},{-18,35.68},{47.4,35.68}},
+      points={{-36.2,20.4},{-18,20.4},{-18,35.68},{47.4,35.68}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(HeatTorStar.Star, reducedOrderModel.internalGainsRad) annotation (
@@ -154,7 +154,7 @@ equation
       smooth=Smooth.None));
   connect(partialEqAirTemp.equalAirTempWindow, reducedOrderModel.equalAirTempWindow)
     annotation (Line(
-      points={{-38,28.6},{-34,28.6},{-34,28},{-28,28},{-28,44.18},{47.4,44.18}},
+      points={{-36.2,28.6},{-34,28.6},{-34,28},{-28,28},{-28,44.18},{47.4,44.18}},
       color={191,0,0},
       smooth=Smooth.None));
 
