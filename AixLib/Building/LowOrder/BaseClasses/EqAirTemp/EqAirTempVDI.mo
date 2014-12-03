@@ -8,22 +8,28 @@ model EqAirTempVDI
 
 protected
   Real phiprivate[n];
-
+initial equation
+  assert(noEvent(abs(sum(wf_wall) + sum(wf_win) + wf_ground - 1) < 0.1), "The sum of the weightfactors (walls,windows and ground) in eqairtemp is <0.9 or >1.1. Normally, the sum should be 1.", level=AssertionLevel.warning);
 equation
   T_earth=((-E_earth/(0.93*5.67))^0.25)*100;//-273.15
   T_sky=((E_sky/(0.93*5.67))^0.25)*100;//-273.15
 
-  for i in 1:n loop
+  phiprivate = (unitvec+Modelica.Math.cos(orientationswallshorizontal*Modelica.Constants.pi/180))/2;
 
-  phiprivate[i] = (1+Modelica.Math.cos((orientationswallshorizontal[i]*Modelica.Constants.pi/180)))/2;
+  T_eqLW=((T_earth-T_air)*(unitvec-phiprivate)+(T_sky-T_air)*phiprivate)*(eowo*alpharad/alphaowo);
+  T_eqSW=solarRad_in.I*aowo/(alphaowo);
 
-  T_eqLW[i]=(((T_earth-(T_air))*(1-phiprivate[i])+(T_sky-(T_air))*phiprivate[i])*((eowo*alpharad)/(alphaowo)))*abs(sunblindsig[i]-1);
-  T_eqSW[i]=solarRad_in[i].I*aowo/(alphaowo);
+  if withSunblind and withLongwave then
+    T_eqWin=T_air*unitvec+T_eqLW.*abs(sunblindsig-unitvec);
+    T_eqWall=T_air*unitvec+T_eqLW+T_eqSW;
+  elseif not withSunblind and withLongwave then
+    T_eqWin=T_air*unitvec+T_eqLW;
+    T_eqWall=T_air*unitvec+T_eqLW+T_eqSW;
+  else
+    T_eqWin=T_air*unitvec;
+    T_eqWall=T_air*unitvec+T_eqSW;
+  end if;
 
-  T_eqWin[i]=T_air+T_eqLW[i];
-  T_eqWall[i]=(T_air+T_eqLW[i])+T_eqSW[i];
-
-  end for;
   equalAirTemp.T = T_eqWall*wf_wall + T_eqWin*wf_win + T_ground*wf_ground;
   annotation (Documentation(revisions="<html>
 <p><ul>

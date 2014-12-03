@@ -1,11 +1,15 @@
 within AixLib.DataBase.WindowsDoors.Simple;
 
-record OWBaseDataDefinition_Simple "Outer window base definition for simple model"
+
+record OWBaseDataDefinition_Simple
+  "Outer window base definition for simple model"
   extends Modelica.Icons.Record;
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer Uw = 2.875 "Thermal transmission coefficient of whole window: glass + frame";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer Uw = 2.875
+    "Thermal transmission coefficient of whole window: glass + frame";
   parameter Real g = 0.8 "coefficient of solar energy transmission";
   parameter Modelica.SIunits.Emissivity Emissivity = 0.84 "Material emissivity";
-  parameter Real frameFraction = 0.2 "frame fraction from total fenestration area";
+  parameter Real frameFraction = 0.2
+    "frame fraction from total fenestration area";
   annotation(Documentation(info = "<html>
  <p><h4><font color=\"#008000\">Overview</font></h4></p>
  <p>Base data defintion for simple windows. </p>

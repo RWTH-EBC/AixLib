@@ -18,27 +18,32 @@ protected
     Modelica.SIunits.TemperatureDifference T_eqSW_win[n]
     "equal short wave window";
   Real phiprivate[n];
+initial equation
+  assert(noEvent(abs(sum(wf_wall) + wf_ground - 1) < 0.1), "The sum of the weightfactors (walls and ground) in eqairtemp is <0.9 or >1.1. Normally, the sum should be 1.", level=AssertionLevel.warning);
+  assert(noEvent(abs(sum(wf_win) - 1) < 0.1), "The sum of the weightfactors (windows) in eqairtemp is <0.9 or >1.1. Normally, the sum should be 1.", level=AssertionLevel.warning);
 equation
 
   T_earth=((-E_earth/(0.93*5.67))^0.25)*100;//-273.15
   T_sky=((E_sky/(5.67))^0.25)*100;//-273.15
 
-  for i in 1:n loop
+  phiprivate = (unitvec+Modelica.Math.cos(orientationswallshorizontal*Modelica.Constants.pi/180))/2;
 
-  phiprivate[i] = (1+Modelica.Math.cos((orientationswallshorizontal[i]*Modelica.Constants.pi/180)))/2;
+  T_eqLW=((T_earth-T_air)*(unitvec-phiprivate)+(T_sky-T_air)*phiprivate)*(eowo*alpharad/(alpharad+alphaconv_wall));
+  if withSunblind then
+    T_eqLW_win=((T_earth-T_air)*(unitvec-phiprivate)+(T_sky-T_air)*phiprivate)*(eowo*alpharad/(alpharad+alphaconv_win)).*abs(sunblindsig-unitvec);
+  else
+    T_eqLW_win=((T_earth-T_air)*(unitvec-phiprivate)+(T_sky-T_air)*phiprivate)*(eowo*alpharad/(alpharad+alphaconv_win));
+  end if;
+  T_eqSW=solarRad_in.I*aowo/(alpharad+alphaconv_wall);
+  T_eqSW_win=solarRad_in.I*awin/(alpharad+alphaconv_win);
 
-  T_eqLW[i]=(((T_earth-(T_air))*(1-phiprivate[i])+(T_sky-(T_air))*phiprivate[i])*((eowo*alpharad)/(alpharad+alphaconv_wall)))*abs(sunblindsig[i]-1);
-
-  T_eqLW_win[i]=(((T_earth-(T_air))*(1-phiprivate[i])+(T_sky-(T_air))*phiprivate[i])*((eowo*alpharad)/(alpharad+alphaconv_win)))*abs(sunblindsig[i]-1);
-
-  T_eqSW[i]=solarRad_in[i].I*aowo/(alpharad+alphaconv_wall);
-
-  T_eqSW_win[i]=solarRad_in[i].I*awin/(alpharad+alphaconv_win);
-
-  T_eqWin[i]=T_air+T_eqLW_win[i]+T_eqSW_win[i];
-  T_eqWall[i]=(T_air+T_eqLW[i])+T_eqSW[i];
-
-  end for;
+  if withLongwave then
+    T_eqWin=T_air*unitvec+T_eqLW_win+T_eqSW_win;
+    T_eqWall=T_air*unitvec+T_eqLW+T_eqSW;
+  else
+    T_eqWin=T_air*unitvec+T_eqSW_win;
+    T_eqWall=T_air*unitvec+T_eqSW;
+  end if;
 
   equalAirTemp.T = T_eqWall*wf_wall + T_ground*wf_ground;
   equalAirTempWindow.T = T_eqWin*wf_win;
@@ -66,7 +71,7 @@ equation
 <ul>
 <li>German Association of Engineers: Guideline VDI 6007-1, March 2012: Calculation of transient thermal response of rooms and buildings - Modelling of rooms.</li>
 <li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D. (2014): Low order thermal network models for dynamic simulations of buildings on city district scale. In: Building and Environment 73, p. 223&ndash;231. DOI: 10.1016/j.buildenv.2013.12.016.</li>
-<li>Lauster, Moritz; Remmen, Peter; Fuchs, Marcus; Teichmann, Jens; Streblow, Rita; M&uuml;ller, Dirk (2014): Modelling long-wave radiation heat exchange for thermal network building simulations at urban scale using Modelica. In: the 10th International Modelica Conference, March 10-12, 2014, Lund, Sweden, March 10-12, 2014: Link&ouml;ping University Electronic Press (Link&ouml;ping Electronic Conference Proceedings), p. 125&ndash;133.</li>
+<li>Lauster, Moritz; Remmen, Peter; Fuchs, Marcus; Teichmann, Jens; Streblow, Rita; Mueller, Dirk (2014): Modelling long-wave radiation heat exchange for thermal network building simulations at urban scale using Modelica. In: the 10th International Modelica Conference, March 10-12, 2014, Lund, Sweden, March 10-12, 2014: Linkoeping University Electronic Press (Linkoeping Electronic Conference Proceedings), p. 125&ndash;133.</li>
 </ul>
 </html>"));
 end EqAirTempEBCMod;

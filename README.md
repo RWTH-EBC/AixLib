@@ -11,6 +11,10 @@ As the library is developed at RWTH Aachen University, the library's name **AixL
 
 The model library **AixLib** is released by RWTH Aachen University's Institute for Energy Efficient Buildings and Indoor Climate (EBC) under the [Modelica License 2.0](https://www.modelica.org/licenses/ModelicaLicense2).
 
+### Acknowledgements
+
+Parts of **AixLib** have been developed within public projects and with financial support by BMWi (German Federal Ministry for Economic Affairs and Energy).
+
 ### Description
 
 **AixLib** contains simplified models of HVAC systems as well as low and higher order building models. 

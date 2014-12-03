@@ -1,4 +1,4 @@
-within AixLib.Building.LowOrder.Validation.VDI6007;
+within AixLib.Building.LowOrder.Validation.Star;
 model TestCase_7
   extends Modelica.Icons.Example;
   output Real referenceLoad[1];
@@ -38,7 +38,7 @@ equation
   referenceLoad[1] = -reference.y[2];
   simulationLoad = sumHeatLoad.y;
   connect(outdoorTemp.port, reducedModel.equalAirTemp) annotation(Line(points = {{-4, 59}, {26.5, 59}, {26.5, 58.8}, {47.4, 58.8}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(idealHeaterCoolerVar1_1.HeatCoolRoom, reducedModel.internalGainsConv) annotation(Line(points = {{-26, -29}, {30, -29}, {30, -32}, {64.4, -32}, {64.4, 42}}, color = {191, 0, 0}, smooth = Smooth.None));
+  connect(idealHeaterCoolerVar1_1.heatCoolRoom, reducedModel.internalGainsConv) annotation(Line(points = {{-26, -29}, {30, -29}, {30, -32}, {64.4, -32}, {64.4, 42}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(infiltrationTemp.y, reducedModel.ventilationTemperature) annotation(Line(points = {{16.5, 1}, {35.25, 1}, {35.25, 48.4}, {47.4, 48.4}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(infiltrationRate.y, reducedModel.ventilationRate) annotation(Line(points = {{42.5, -10}, {54.2, -10}, {54.2, 42}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(HeatToStar.Star, reducedModel.internalGainsRad) annotation(Line(points = {{59.1, -89}, {72, -89}, {72, 42}, {74.09, 42}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
@@ -59,4 +59,3 @@ equation
  <p>Same Test Case exists in VDI 6020.</p>
  </html>"), Icon(graphics));
 end TestCase_7;
-
