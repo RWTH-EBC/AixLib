@@ -1,7 +1,9 @@
 within AixLib.HVAC.Interfaces;
 
+
 partial model FourPortMoistAir "Component with four moist air ports"
-  Modelica.SIunits.PressureDifference dp[2] "Pressure drop between the two ports (= port_a.p - port_b.p)";
+  Modelica.SIunits.PressureDifference dp[2]
+    "Pressure drop between the two ports (= port_a.p - port_b.p)";
   Interfaces.PortMoistAir_a port_1a annotation(Placement(transformation(extent = {{-110, 50}, {-90, 70}})));
   Interfaces.PortMoistAir_b port_1b annotation(Placement(transformation(extent = {{-110, -70}, {-90, -50}})));
   Interfaces.PortMoistAir_a port_2a annotation(Placement(transformation(extent = {{90, -70}, {110, -50}}), iconTransformation(extent = {{90, -70}, {110, -50}})));

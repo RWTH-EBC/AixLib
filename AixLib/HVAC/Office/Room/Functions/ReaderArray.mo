@@ -1,8 +1,10 @@
 within AixLib.HVAC.Office.Room.Functions;
 
+
 function ReaderArray
   input Real H[:] "Integer array to be sent to external program";
-  output Real HBack[size(H, 1)] "Real array to be received from external program";
+  output Real HBack[size(H, 1)]
+    "Real array to be received from external program";
 
   external "C" readerArray(H, HBack, size(H, 1));
   annotation(Include = "#include <Header.h>", Library = "ExternalC", Documentation(revisions = "<html>

@@ -1,5 +1,6 @@
 within AixLib.HVAC.Storage.Examples;
 
+
 model StorageSolarCollector
   extends Modelica.Icons.Example;
   import AixLib;

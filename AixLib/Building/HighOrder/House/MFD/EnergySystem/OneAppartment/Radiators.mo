@@ -1,5 +1,6 @@
 within AixLib.Building.HighOrder.House.MFD.EnergySystem.OneAppartment;
 
+
 model Radiators
   //Pipe lengths
   parameter Modelica.SIunits.Length Length_thSt = 2.5 "L1" annotation(Dialog(group = "Pipe lengths", descriptionLabel = true, joinNext = true));
@@ -13,17 +14,22 @@ model Radiators
   parameter Modelica.SIunits.Length Length_toLi = 7 "l1  " annotation(Dialog(group = "Pipe lengths", descriptionLabel = true));
   //Pipe diameters
   parameter Modelica.SIunits.Diameter Diam_Main = 0.016 "Diameter main pipe" annotation(Dialog(group = "Pipe diameters", descriptionLabel = true));
-  parameter Modelica.SIunits.Diameter Diam_Sec = 0.013 "Diameter secondary pipe  " annotation(Dialog(group = "Pipe diameters", descriptionLabel = true));
+  parameter Modelica.SIunits.Diameter Diam_Sec = 0.013
+    "Diameter secondary pipe  "                                                    annotation(Dialog(group = "Pipe diameters", descriptionLabel = true));
   //Hydraulic resistance
   parameter Real zeta_lateral = 2.5 "zeta lateral" annotation(Dialog(group = "Hydraulic resistance", descriptionLabel = true, joinNext = true));
   parameter Real zeta_through = 0.6 "zeta through" annotation(Dialog(group = "Hydraulic resistance", descriptionLabel = true));
   parameter Real zeta_bend = 1.0 "zeta bend" annotation(Dialog(group = "Hydraulic resistance", descriptionLabel = true));
   //Radiators
-  parameter AixLib.DataBase.Radiators.RadiatiorBaseDataDefinition Type_Radiator_Livingroom = AixLib.DataBase.Radiators.StandardMFD_WSchV1984_OneAppartment.Livingroom() "Livingroom" annotation(Dialog(group = "Radiators", descriptionLabel = true));
-  parameter AixLib.DataBase.Radiators.RadiatiorBaseDataDefinition Type_Radiator_Bedroom = AixLib.DataBase.Radiators.StandardMFD_WSchV1984_OneAppartment.Bedroom() "Bedroom" annotation(Dialog(group = "Radiators", descriptionLabel = true));
-  parameter AixLib.DataBase.Radiators.RadiatiorBaseDataDefinition Type_Radiator_Children = AixLib.DataBase.Radiators.StandardMFD_WSchV1984_OneAppartment.Children() "Corridor" annotation(Dialog(group = "Radiators", descriptionLabel = true));
+  parameter AixLib.DataBase.Radiators.RadiatiorBaseDataDefinition Type_Radiator_Livingroom = AixLib.DataBase.Radiators.StandardMFD_WSchV1984_OneAppartment.Livingroom()
+    "Livingroom"                                                                                                     annotation(Dialog(group = "Radiators", descriptionLabel = true));
+  parameter AixLib.DataBase.Radiators.RadiatiorBaseDataDefinition Type_Radiator_Bedroom = AixLib.DataBase.Radiators.StandardMFD_WSchV1984_OneAppartment.Bedroom()
+    "Bedroom"                                                                                                     annotation(Dialog(group = "Radiators", descriptionLabel = true));
+  parameter AixLib.DataBase.Radiators.RadiatiorBaseDataDefinition Type_Radiator_Children = AixLib.DataBase.Radiators.StandardMFD_WSchV1984_OneAppartment.Children()
+    "Corridor"                                                                                                     annotation(Dialog(group = "Radiators", descriptionLabel = true));
   parameter AixLib.DataBase.Radiators.RadiatiorBaseDataDefinition Type_Radiator_Bath = AixLib.DataBase.Radiators.StandardMFD_WSchV1984_OneAppartment.Bathroom() "Bath" annotation(Dialog(group = "Radiators", descriptionLabel = true));
-  parameter AixLib.DataBase.Radiators.RadiatiorBaseDataDefinition Type_Radiator_Kitchen = AixLib.DataBase.Radiators.StandardMFD_WSchV1984_OneAppartment.Kitchen() "Kitchen" annotation(Dialog(group = "Radiators", descriptionLabel = true));
+  parameter AixLib.DataBase.Radiators.RadiatiorBaseDataDefinition Type_Radiator_Kitchen = AixLib.DataBase.Radiators.StandardMFD_WSchV1984_OneAppartment.Kitchen()
+    "Kitchen"                                                                                                     annotation(Dialog(group = "Radiators", descriptionLabel = true));
   HVAC.Radiators.Radiator radiatorKitchen(RadiatorType = Type_Radiator_Kitchen) annotation(Placement(transformation(extent = {{-89, -83}, {-106, -66}})));
   HVAC.Radiators.Radiator radiator_bath(RadiatorType = Type_Radiator_Bath) annotation(Placement(transformation(extent = {{83, -48}, {100, -31}})));
   HVAC.Valves.ThermostaticValve valve_kitchen(Kvs = 0.41, Kv_setT = 0.262, dp(start = 1000)) annotation(Placement(transformation(extent = {{-67, -82.5}, {-82, -66.5}})));
@@ -34,26 +40,48 @@ model Radiators
   HVAC.Valves.ThermostaticValve valve_livingroom(Kvs = 1.43, Kv_setT = 0.4, dp(start = 1000)) annotation(Placement(transformation(extent = {{-67, -4}, {-79, 12}})));
   HVAC.Valves.ThermostaticValve valve_children(Kvs = 0.16, Kv_setT = 0.088, dp(start = 1000)) annotation(Placement(transformation(extent = {{64, 32}, {76, 48}})));
   HVAC.Valves.ThermostaticValve valve_bedroom(Kvs = 0.24, Kv_setT = 0.182, dp(start = 1000)) annotation(Placement(transformation(extent = {{49, 74}, {60, 87}})));
-  HVAC.Pipes.StaticPipe thStF(D = Diam_Main, l = Length_thSt) "through the storage room, flow stream" annotation(Placement(transformation(extent = {{57, -85}, {40, -74}})));
-  HVAC.Pipes.StaticPipe toKiF(D = Diam_Sec, l = Length_toKi) "to kitchen, flow stream" annotation(Placement(transformation(extent = {{8, -5}, {-8, 5}}, rotation = 0, origin = {-49, -74.5})));
-  HVAC.Pipes.StaticPipe thStR(D = Diam_Main, l = Length_thSt) "through the storage room, return stream" annotation(Placement(transformation(extent = {{40, -102}, {58, -90}})));
-  HVAC.Pipes.StaticPipe toKiR(D = Diam_Sec, l = Length_toKi) "to kitchen, return stream" annotation(Placement(transformation(extent = {{-72, -102}, {-56, -90}})));
-  HVAC.Pipes.StaticPipe thBathF(D = Diam_Main, l = Length_thBath) "through Bath, flow stream" annotation(Placement(transformation(extent = {{8, 4.5}, {-8, -4.5}}, rotation = 270, origin = {-4.5, -62})));
-  HVAC.Pipes.StaticPipe thBathR(D = Diam_Main, l = Length_thBath) "through bath, return stream" annotation(Placement(transformation(extent = {{8.75, -4.25}, {-8.75, 4.25}}, rotation = 90, origin = {-18.25, -62.75})));
-  HVAC.Pipes.StaticPipe thChildren1R(D = Diam_Main, l = Length_thChildren1) "through chidlren room 1, return stream" annotation(Placement(transformation(extent = {{6.5, -5}, {-6.5, 5}}, rotation = 90, origin = {-18, -27.5})));
-  HVAC.Pipes.StaticPipe thChildren1F(D = Diam_Main, l = Length_thChildren1) "through chidlren room 1, flow stream" annotation(Placement(transformation(extent = {{6.5, 5}, {-6.5, -5}}, rotation = 270, origin = {-5, -26.5})));
-  HVAC.Pipes.StaticPipe toBathF(D = Diam_Sec, l = Length_toBath) "to Bath, flow stream" annotation(Placement(transformation(extent = {{-8.5, 4.5}, {8.5, -4.5}}, rotation = 0, origin = {18.5, -38.5})));
-  HVAC.Pipes.StaticPipe toBathR(D = Diam_Sec, l = Length_toBath) "to bath return stream" annotation(Placement(transformation(extent = {{8.5, 4.5}, {-8.5, -4.5}}, rotation = 0, origin = {18.5, -49.5})));
-  HVAC.Interfaces.Port_b RETURN "Fluid connector b (positive design flow direction is from port_a to port_b)" annotation(Placement(transformation(extent = {{66, -114}, {86, -94}})));
-  HVAC.Interfaces.Port_a FLOW "Fluid connector a (positive design flow direction is from port_a to port_b)" annotation(Placement(transformation(extent = {{92, -114}, {112, -94}})));
-  HVAC.Pipes.StaticPipe toChildrenF(D = Diam_Sec, l = Length_toChildren) "to Children, flow stream" annotation(Placement(transformation(extent = {{-8.5, 4.5}, {8.5, -4.5}}, rotation = 0, origin = {45.5, 40.5})));
-  HVAC.Pipes.StaticPipe toChildrenR(D = Diam_Sec, l = Length_toChildren) "to Children, return stream" annotation(Placement(transformation(extent = {{7.5, 4.5}, {-7.5, -4.5}}, rotation = 0, origin = {47.5, 27})));
-  HVAC.Pipes.StaticPipe thChildrenF2(D = Diam_Main, l = Length_thChildren2) "through chidlren room, flow stream" annotation(Placement(transformation(extent = {{7, 5}, {-7, -5}}, rotation = 270, origin = {-5, 13})));
-  HVAC.Pipes.StaticPipe thChildrenR2(D = Diam_Main, l = Length_thChildren2) "through chidlren room, return stream" annotation(Placement(transformation(extent = {{7.5, -5}, {-7.5, 5}}, rotation = 90, origin = {-19, 12.5})));
-  HVAC.Pipes.StaticPipe toBedroomF(D = Diam_Sec, l = Length_toBedroom) "to Bedroom , flow stream" annotation(Placement(transformation(extent = {{-6.5, 4.5}, {6.5, -4.5}}, rotation = 0, origin = {23.5, 80.5})));
-  HVAC.Pipes.StaticPipe toBedroomR(D = Diam_Sec, l = Length_toBedroom) "to Bedroom, return stream" annotation(Placement(transformation(extent = {{6.5, 4.5}, {-6.5, -4.5}}, rotation = 0, origin = {20.5, 66})));
-  HVAC.Pipes.StaticPipe toLiF(D = Diam_Sec, l = Length_toLi) "to livingroom, flow stream" annotation(Placement(transformation(extent = {{6, -4.5}, {-6, 4.5}}, rotation = 0, origin = {-47.5, 3})));
-  HVAC.Pipes.StaticPipe toLiR(D = Diam_Main, l = Length_toLi) "to livingroom, return stream" annotation(Placement(transformation(extent = {{6.5, -5}, {-6.5, 5}}, rotation = 180, origin = {-88.5, -16.5})));
+  HVAC.Pipes.StaticPipe thStF(D = Diam_Main, l = Length_thSt)
+    "through the storage room, flow stream"                                                           annotation(Placement(transformation(extent = {{57, -85}, {40, -74}})));
+  HVAC.Pipes.StaticPipe toKiF(D = Diam_Sec, l = Length_toKi)
+    "to kitchen, flow stream"                                                          annotation(Placement(transformation(extent = {{8, -5}, {-8, 5}}, rotation = 0, origin = {-49, -74.5})));
+  HVAC.Pipes.StaticPipe thStR(D = Diam_Main, l = Length_thSt)
+    "through the storage room, return stream"                                                           annotation(Placement(transformation(extent = {{40, -102}, {58, -90}})));
+  HVAC.Pipes.StaticPipe toKiR(D = Diam_Sec, l = Length_toKi)
+    "to kitchen, return stream"                                                          annotation(Placement(transformation(extent = {{-72, -102}, {-56, -90}})));
+  HVAC.Pipes.StaticPipe thBathF(D = Diam_Main, l = Length_thBath)
+    "through Bath, flow stream"                                                               annotation(Placement(transformation(extent = {{8, 4.5}, {-8, -4.5}}, rotation = 270, origin = {-4.5, -62})));
+  HVAC.Pipes.StaticPipe thBathR(D = Diam_Main, l = Length_thBath)
+    "through bath, return stream"                                                               annotation(Placement(transformation(extent = {{8.75, -4.25}, {-8.75, 4.25}}, rotation = 90, origin = {-18.25, -62.75})));
+  HVAC.Pipes.StaticPipe thChildren1R(D = Diam_Main, l = Length_thChildren1)
+    "through chidlren room 1, return stream"                                                                         annotation(Placement(transformation(extent = {{6.5, -5}, {-6.5, 5}}, rotation = 90, origin = {-18, -27.5})));
+  HVAC.Pipes.StaticPipe thChildren1F(D = Diam_Main, l = Length_thChildren1)
+    "through chidlren room 1, flow stream"                                                                         annotation(Placement(transformation(extent = {{6.5, 5}, {-6.5, -5}}, rotation = 270, origin = {-5, -26.5})));
+  HVAC.Pipes.StaticPipe toBathF(D = Diam_Sec, l = Length_toBath)
+    "to Bath, flow stream"                                                              annotation(Placement(transformation(extent = {{-8.5, 4.5}, {8.5, -4.5}}, rotation = 0, origin = {18.5, -38.5})));
+  HVAC.Pipes.StaticPipe toBathR(D = Diam_Sec, l = Length_toBath)
+    "to bath return stream"                                                              annotation(Placement(transformation(extent = {{8.5, 4.5}, {-8.5, -4.5}}, rotation = 0, origin = {18.5, -49.5})));
+  HVAC.Interfaces.Port_b RETURN
+    "Fluid connector b (positive design flow direction is from port_a to port_b)"
+                                                                                                        annotation(Placement(transformation(extent = {{66, -114}, {86, -94}})));
+  HVAC.Interfaces.Port_a FLOW
+    "Fluid connector a (positive design flow direction is from port_a to port_b)"
+                                                                                                        annotation(Placement(transformation(extent = {{92, -114}, {112, -94}})));
+  HVAC.Pipes.StaticPipe toChildrenF(D = Diam_Sec, l = Length_toChildren)
+    "to Children, flow stream"                                                                      annotation(Placement(transformation(extent = {{-8.5, 4.5}, {8.5, -4.5}}, rotation = 0, origin = {45.5, 40.5})));
+  HVAC.Pipes.StaticPipe toChildrenR(D = Diam_Sec, l = Length_toChildren)
+    "to Children, return stream"                                                                      annotation(Placement(transformation(extent = {{7.5, 4.5}, {-7.5, -4.5}}, rotation = 0, origin = {47.5, 27})));
+  HVAC.Pipes.StaticPipe thChildrenF2(D = Diam_Main, l = Length_thChildren2)
+    "through chidlren room, flow stream"                                                                         annotation(Placement(transformation(extent = {{7, 5}, {-7, -5}}, rotation = 270, origin = {-5, 13})));
+  HVAC.Pipes.StaticPipe thChildrenR2(D = Diam_Main, l = Length_thChildren2)
+    "through chidlren room, return stream"                                                                         annotation(Placement(transformation(extent = {{7.5, -5}, {-7.5, 5}}, rotation = 90, origin = {-19, 12.5})));
+  HVAC.Pipes.StaticPipe toBedroomF(D = Diam_Sec, l = Length_toBedroom)
+    "to Bedroom , flow stream"                                                                    annotation(Placement(transformation(extent = {{-6.5, 4.5}, {6.5, -4.5}}, rotation = 0, origin = {23.5, 80.5})));
+  HVAC.Pipes.StaticPipe toBedroomR(D = Diam_Sec, l = Length_toBedroom)
+    "to Bedroom, return stream"                                                                    annotation(Placement(transformation(extent = {{6.5, 4.5}, {-6.5, -4.5}}, rotation = 0, origin = {20.5, 66})));
+  HVAC.Pipes.StaticPipe toLiF(D = Diam_Sec, l = Length_toLi)
+    "to livingroom, flow stream"                                                          annotation(Placement(transformation(extent = {{6, -4.5}, {-6, 4.5}}, rotation = 0, origin = {-47.5, 3})));
+  HVAC.Pipes.StaticPipe toLiR(D = Diam_Main, l = Length_toLi)
+    "to livingroom, return stream"                                                           annotation(Placement(transformation(extent = {{6.5, -5}, {-6.5, 5}}, rotation = 180, origin = {-88.5, -16.5})));
   HVAC.Interfaces.RadPort Rad_Livingroom annotation(Placement(transformation(extent = {{-148, 38}, {-132, 55}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Con_Livingroom annotation(Placement(transformation(extent = {{-146, 25}, {-133, 38}})));
   HVAC.Interfaces.RadPort Rad_kitchen annotation(Placement(transformation(extent = {{-146, -50}, {-129, -34}})));
@@ -65,9 +93,11 @@ model Radiators
   HVAC.Interfaces.RadPort Rad_bath annotation(Placement(transformation(extent = {{128, -38}, {148, -18}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Con_bath annotation(Placement(transformation(extent = {{129, -59}, {148, -41}})));
   Modelica.Blocks.Interfaces.RealInput TSet[5] annotation(Placement(transformation(extent = {{-123, 78}, {-95, 108}}), iconTransformation(extent = {{-10.5, -12}, {10.5, 12}}, rotation = 270, origin = {-105.5, 96})));
-  HVAC.HydraulicResistances.HydraulicResistance HydRes_InFl(zeta = zeta_bend, D = Diam_Main) "hydraulic resistance in floor" annotation(Placement(transformation(extent = {{24, -84}, {10, -75}})));
+  HVAC.HydraulicResistances.HydraulicResistance HydRes_InFl(zeta = zeta_bend, D = Diam_Main)
+    "hydraulic resistance in floor"                                                                                          annotation(Placement(transformation(extent = {{24, -84}, {10, -75}})));
   HVAC.HydraulicResistances.HydraulicResistance HydRes_RadKi(zeta = 3 * zeta_bend, D = Diam_Sec) annotation(Placement(transformation(extent = {{-113, -100.5}, {-99, -91.5}})));
-  HVAC.HydraulicResistances.HydraulicResistance HydRes_BendRight(zeta = zeta_bend, D = Diam_Main) "hydraulic resistance bend right" annotation(Placement(transformation(extent = {{-3.25, -2.25}, {3.25, 2.25}}, rotation = 90, origin = {-3.75, -75.75})));
+  HVAC.HydraulicResistances.HydraulicResistance HydRes_BendRight(zeta = zeta_bend, D = Diam_Main)
+    "hydraulic resistance bend right"                                                                                               annotation(Placement(transformation(extent = {{-3.25, -2.25}, {3.25, 2.25}}, rotation = 90, origin = {-3.75, -75.75})));
   HVAC.HydraulicResistances.HydraulicResistance HydRes_RadWC(zeta = 2 * zeta_bend, D = Diam_Sec) annotation(Placement(transformation(extent = {{67, -53}, {57, -44}})));
   HVAC.HydraulicResistances.HydraulicResistance HydRes_RadLi(zeta = 3 * zeta_bend, D = Diam_Sec) annotation(Placement(transformation(extent = {{-116, -21}, {-102, -12}})));
   HVAC.HydraulicResistances.HydraulicResistance HydRes_RadChildren(zeta = 2 * zeta_bend, D = Diam_Sec) annotation(Placement(transformation(extent = {{84, 22.5}, {74, 31.5}})));
@@ -143,11 +173,11 @@ equation
   connect(tempSensor_bath.port, Con_bath) annotation(Line(points = {{66, -15}, {97, -15}, {97, -21}, {138.5, -21}, {138.5, -50}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(tempSensor_bath1.port, Con_kitchen) annotation(Line(points = {{-91, -51}, {-107, -51}, {-107, -50}, {-138, -50}, {-138, -58.5}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(tempSensor_bath1.T, valve_kitchen.T_room) annotation(Line(points = {{-79, -51}, {-69.7, -51}, {-69.7, -66.66}}, color = {0, 0, 127}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-150, -100}, {150, 110}}, grid = {1, 1}), graphics = {Rectangle(extent = {{1, 100}, {126, 63}}, pattern = LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid), Rectangle(extent = {{4, 58}, {127, 15}}, pattern = LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid), Rectangle(extent = {{4, -14}, {127, -67}}, pattern = LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid), Rectangle(extent = {{-129, 29}, {-22, -25}}, pattern = LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid), Rectangle(extent = {{-130, -49}, {-23, -103}}, pattern = LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid), Text(extent = {{-120, -81}, {-69, -96}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0}, fillPattern = FillPattern.Solid, textString = "Kitchen"), Text(extent = {{-156.5, 29}, {-49.5, 16}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0}, fillPattern = FillPattern.Solid, textString = "Livingroom"), Text(extent = {{31, -15}, {138, -28}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0}, fillPattern = FillPattern.Solid, textString = "Bath"), Text(extent = {{-27, 56}, {80, 43}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0}, fillPattern = FillPattern.Solid, textString = "Children"), Text(extent = {{-34, 100}, {73, 87}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0}, fillPattern = FillPattern.Solid, textString = "Bedroom"), Text(extent = {{-70, 103}, {-17, 71}}, lineColor = {0, 0, 0}, textString = "1 - Livingroom
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-150, -100}, {150, 110}}, grid = {1, 1}), graphics = {Rectangle(extent=  {{1, 100}, {126, 63}}, pattern=  LinePattern.None, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{4, 58}, {127, 15}}, pattern=  LinePattern.None, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{4, -14}, {127, -67}}, pattern=  LinePattern.None, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{-129, 29}, {-22, -25}}, pattern=  LinePattern.None, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{-130, -49}, {-23, -103}}, pattern=  LinePattern.None, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid), Text(extent=  {{-120, -81}, {-69, -96}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid, textString=  "Kitchen"), Text(extent=  {{-156.5, 29}, {-49.5, 16}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid, textString=  "Livingroom"), Text(extent=  {{31, -15}, {138, -28}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid, textString=  "Bath"), Text(extent=  {{-27, 56}, {80, 43}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid, textString=  "Children"), Text(extent=  {{-34, 100}, {73, 87}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid, textString=  "Bedroom"), Text(extent=  {{-70, 103}, {-17, 71}}, lineColor=  {0, 0, 0}, textString=  "1 - Livingroom
  2- Bedroom
  3 - Children
  4 - Bath
- 5 - Kitchen")}), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-150, -100}, {150, 110}}, grid = {1, 1}), graphics = {Rectangle(extent = {{-119, 92}, {123, -79}}, lineColor = {255, 0, 0}, fillColor = {135, 135, 135}, fillPattern = FillPattern.Solid), Line(points = {{-99, 22}, {104, 22}, {104, -6}}, color = {255, 0, 0}, smooth = Smooth.None, thickness = 1), Line(points = {{-98, 13}, {95, 13}, {95, -6}}, color = {0, 0, 255}, smooth = Smooth.None, thickness = 1), Line(points = {{-21, 13}, {-21, 35}}, color = {0, 0, 255}, thickness = 1, smooth = Smooth.None), Line(points = {{-14, 23}, {-14, 45}}, color = {255, 0, 0}, thickness = 1, smooth = Smooth.None), Text(extent = {{-124, 119}, {-84, 111}}, lineColor = {0, 0, 0}, lineThickness = 0.5, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, textString = "Set"), Text(extent = {{-70, 81}, {-17, 49}}, lineColor = {0, 0, 0}, textString = "1 - Livingroom
+ 5 - Kitchen")}), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-150, -100}, {150, 110}}, grid = {1, 1}), graphics = {Rectangle(extent=  {{-119, 92}, {123, -79}}, lineColor=  {255, 0, 0}, fillColor=  {135, 135, 135}, fillPattern=  FillPattern.Solid), Line(points=  {{-99, 22}, {104, 22}, {104, -6}}, color=  {255, 0, 0}, smooth=  Smooth.None, thickness=  1), Line(points=  {{-98, 13}, {95, 13}, {95, -6}}, color=  {0, 0, 255}, smooth=  Smooth.None, thickness=  1), Line(points=  {{-21, 13}, {-21, 35}}, color=  {0, 0, 255}, thickness=  1, smooth=  Smooth.None), Line(points=  {{-14, 23}, {-14, 45}}, color=  {255, 0, 0}, thickness=  1, smooth=  Smooth.None), Text(extent=  {{-124, 119}, {-84, 111}}, lineColor=  {0, 0, 0}, lineThickness=  0.5, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid, textString=  "Set"), Text(extent=  {{-70, 81}, {-17, 49}}, lineColor=  {0, 0, 0}, textString=  "1 - Livingroom
  2- Bedroom
  3 - Children
  4 - Bath

@@ -1,5 +1,4 @@
 within AixLib.HVAC.HeatGeneration.Utilities;
-
 model HeatDemand "Calculates heat demand to heat m_flow_in from T_in to T_set"
   outer BaseParameters baseParameters "System properties";
   Modelica.Blocks.Interfaces.RealInput T_set annotation(Placement(transformation(extent = {{-120, -20}, {-80, 20}})));
@@ -7,7 +6,8 @@ model HeatDemand "Calculates heat demand to heat m_flow_in from T_in to T_set"
   Modelica.Blocks.Interfaces.RealInput m_flow_in annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 90, origin = {20, -100})));
   Modelica.Blocks.Interfaces.RealOutput Q_flow_out annotation(Placement(transformation(extent = {{96, -10}, {116, 10}})));
 protected
-  parameter Modelica.SIunits.SpecificHeatCapacity cp = baseParameters.cp_Water "Specific heat capacity";
+  parameter Modelica.SIunits.SpecificHeatCapacity cp = baseParameters.cp_Water
+    "Specific heat capacity";
 equation
   Q_flow_out = m_flow_in * cp * (T_set - T_in);
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(info = "<html>
@@ -22,3 +22,4 @@ equation
  </ul></p>
  </html>"));
 end HeatDemand;
+

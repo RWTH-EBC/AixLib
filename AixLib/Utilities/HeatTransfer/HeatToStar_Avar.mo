@@ -1,6 +1,8 @@
 within AixLib.Utilities.HeatTransfer;
 
-model HeatToStar_Avar "Adaptor for approximative longwave radiation exchange with variable surface Area"
+
+model HeatToStar_Avar
+  "Adaptor for approximative longwave radiation exchange with variable surface Area"
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm annotation(Placement(transformation(extent = {{-102, -10}, {-82, 10}}, rotation = 0)));
   Modelica.Blocks.Interfaces.RealInput A "Area of radiation exchange" annotation(Placement(transformation(origin = {0, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 270)));
   parameter Modelica.SIunits.Emissivity eps = 0.95 "Emissivity";
@@ -8,7 +10,9 @@ model HeatToStar_Avar "Adaptor for approximative longwave radiation exchange wit
 equation
   Therm.Q_flow + Star.Q_flow = 0;
   Therm.Q_flow = Modelica.Constants.sigma * eps * A * (Therm.T * Therm.T * Therm.T * Therm.T - Star.T * Star.T * Star.T * Star.T);
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {135, 150, 177}, fillPattern = FillPattern.Solid), Text(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 0}, pattern = LinePattern.None, fillColor = {135, 150, 177}, fillPattern = FillPattern.Solid, textString = "2*")}), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {135, 150, 177}, fillPattern = FillPattern.Solid), Text(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 0}, pattern = LinePattern.None, fillColor = {135, 150, 177}, fillPattern = FillPattern.Solid, textString = "2*")}), Documentation(info = "<html>
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent=  {{-80, 80}, {80, -80}}, lineColor=  {0, 0, 255}, pattern=  LinePattern.None, fillColor=  {135, 150, 177}, fillPattern=  FillPattern.Solid), Text(extent=  {{-80, 80}, {80, -80}}, lineColor=  {0, 0, 0}, pattern=  LinePattern.None, fillColor=  {135, 150, 177}, fillPattern=  FillPattern.Solid, textString=  "2*")}), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {135, 150, 177},
+            fillPattern =                                                                                                    FillPattern.Solid), Text(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 0}, pattern = LinePattern.None, fillColor = {135, 150, 177},
+            fillPattern =                                                                                                    FillPattern.Solid, textString = "2*")}), Documentation(info = "<html>
  <p><h4><font color=\"#008000\">Overview</font></h4></p>
  <p>The <b>TwoStar_RadEx</b> model cobines the <b><a href=\"Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a\">HeatPort</a></b> and the <b><a href=\"Interfaces.Star\">Star</a></b> connector. To model longwave radiation exchange of surfaces, just connect the <b><a href=\"Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a\">HeatPort</a></b> connector to the outmost layer of the surface and connect the <b><a href=\"Interfaces.Star\">Star</a></b> connector to the <b><a href=\"Interfaces.Star\">Star</a></b> connectors of an unlimited number of corresponding surfaces. </p>
  <p><h4><font color=\"#008000\">Level of Development</font></h4></p>

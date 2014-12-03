@@ -1,7 +1,12 @@
 within AixLib.DataBase.Walls.EnEV2009.IW;
-
-record IWload_EnEV2009_M_half "Inner wall load-bearing after EnEV 2009, for building of type M (schwer), only half"
-  extends WallBaseDataDefinition(n(min = 1) = 2 "Number of wall layers", d = {0.0875, 0.015} "Thickness of wall layers", rho = {1000, 1200} "Density of wall layers", lambda = {0.315, 0.51} "Thermal conductivity of wall layers", c = {1000, 1000} "Specific heat capacity of wall layers", eps = 0.95 "Emissivity of inner wall surface");
+record IWload_EnEV2009_M_half
+  "Inner wall load-bearing after EnEV 2009, for building of type M (schwer), only half"
+  extends WallBaseDataDefinition(n(min = 1) = 2 "Number of wall layers", d = {0.0875, 0.015}
+      "Thickness of wall layers",                                                                                        rho = {1000, 1200}
+      "Density of wall layers",                                                                                                    lambda = {0.315, 0.51}
+      "Thermal conductivity of wall layers",                                                                                                    c = {1000, 1000}
+      "Specific heat capacity of wall layers",                                                                                                    eps = 0.95
+      "Emissivity of inner wall surface");
   annotation(Documentation(revisions = "<html>
  <p><ul>
  <li><i>September 5, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
@@ -22,3 +27,4 @@ record IWload_EnEV2009_M_half "Inner wall load-bearing after EnEV 2009, for buil
  </ul>
  </html>"));
 end IWload_EnEV2009_M_half;
+

@@ -1,6 +1,8 @@
 within AixLib.DataBase.Radiators.StandardOFD_EnEV2009;
 
-record Corridor "Standard OFD EnEV2009 Corridor = ThermX2, Profil V (Kermi) Power=318W, L=1000, H=300, Typ=11, {55,45,18}"
+
+record Corridor
+  "Standard OFD EnEV2009 Corridor = ThermX2, Profil V (Kermi) Power=318W, L=1000, H=300, Typ=11, {55,45,18}"
   extends RadiatiorBaseDataDefinition(NominalPower = 318, T_flow_nom = 55, T_return_nom = 45, T_room_nom = 18, Exponent = 1.2196, VolumeWater = 1.8, MassSteel = 9.87, RadPercent = 0.35, length = 1.0, height = 0.3);
   annotation(Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>

@@ -1,15 +1,19 @@
 within AixLib.HVAC.Pumps;
-
 model Pump
   import AixLib;
   extends Interfaces.TwoPort;
-  parameter AixLib.DataBase.Pumps.MinMaxCharacteristicsBaseDataDefinition MinMaxCharacteristics = AixLib.DataBase.Pumps.Pump1() "Head = f(V_flow) for minimal and maximal rotational speed" annotation(choicesAllMatching = true);
-  parameter Integer ControlStrategy = 1 "Control Strategy" annotation(Dialog(group = "Control strategy"), choices(choice = 1 "dp-const", choice = 2 "dp-var", radioButtons = true));
-  parameter Modelica.SIunits.Height Head_max = 3 "Set head for the control strategy" annotation(Dialog(group = "Control strategy"));
+  parameter AixLib.DataBase.Pumps.MinMaxCharacteristicsBaseDataDefinition MinMaxCharacteristics = AixLib.DataBase.Pumps.Pump1()
+    "Head = f(V_flow) for minimal and maximal rotational speed"                                                                                                     annotation(choicesAllMatching = true);
+  parameter Integer ControlStrategy = 1 "Control Strategy" annotation(Dialog(group = "Control strategy"), choices(choice = 1
+        "dp-const",                                                                                                    choice = 2 "dp-var", radioButtons = true));
+  parameter Modelica.SIunits.Height Head_max = 3
+    "Set head for the control strategy"                                              annotation(Dialog(group = "Control strategy"));
   parameter Real V_flow_max = 2 "Vmax in m3/h for the control strategy" annotation(Dialog(group = "Control strategy", enable = if ControlStrategy == 2 then true else false));
-  Modelica.SIunits.VolumeFlowRate V_flow(start = 0, min = 0) "Volume flow rate through the pump";
+  Modelica.SIunits.VolumeFlowRate V_flow(start = 0, min = 0)
+    "Volume flow rate through the pump";
   Modelica.SIunits.Height Head(start = 0, min = 0) "Pumping head";
-  Modelica.Blocks.Tables.CombiTable1Ds table_minMaxCharacteristics(tableOnFile = false, columns = {2, 3}, table = MinMaxCharacteristics.minMaxHead) "Table with Head = f(V_flow) min amd max characteristics for the pump" annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Tables.CombiTable1Ds table_minMaxCharacteristics(tableOnFile = false, columns = {2, 3}, table = MinMaxCharacteristics.minMaxHead)
+    "Table with Head = f(V_flow) min amd max characteristics for the pump"                                                                                                     annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.BooleanInput IsNight annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 270, origin = {-2, 100}), iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {0, 102})));
 equation
   // Enthalpie flow
@@ -33,7 +37,7 @@ equation
   // Connect the pump variables with the variables of the two port model
   V_flow = m_flow / rho;
   Head = -dp / (rho * Modelica.Constants.g_n);
-  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Ellipse(extent = {{-100, 96}, {100, -104}}, lineColor = {0, 0, 0}, fillColor = {0, 127, 0}, fillPattern = FillPattern.Solid), Polygon(points = {{-42, 70}, {78, -4}, {-42, -78}, {-42, 70}}, lineColor = {0, 0, 0}, smooth = Smooth.None, fillColor = {175, 175, 175}, fillPattern = FillPattern.Solid)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(revisions = "<html>
+  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Ellipse(extent=  {{-100, 96}, {100, -104}}, lineColor=  {0, 0, 0}, fillColor=  {0, 127, 0}, fillPattern=  FillPattern.Solid), Polygon(points=  {{-42, 70}, {78, -4}, {-42, -78}, {-42, 70}}, lineColor=  {0, 0, 0}, smooth=  Smooth.None, fillColor=  {175, 175, 175}, fillPattern=  FillPattern.Solid)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(revisions = "<html>
  <p>01.11.2013, by <i>Ana Constantin</i>: implemented</p>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
@@ -51,3 +55,4 @@ equation
  <p><a href=\"AixLib.HVAC.Pumps.Examples.PumpHydraulicResistance_closedLoop\">AixLib.HVAC.Pumps.Examples.PumpHydraulicResistance_closedLoop</a></p>
  </html>"));
 end Pump;
+

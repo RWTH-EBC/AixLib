@@ -1,5 +1,4 @@
 within AixLib.DataBase.Walls.EnEV2009;
-
-package OW
+package OW 
   extends Modelica.Icons.Package;
 end OW;

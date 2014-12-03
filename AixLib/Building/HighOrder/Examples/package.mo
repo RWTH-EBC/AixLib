@@ -1,7 +1,8 @@
 within AixLib.Building.HighOrder;
-
-package Examples
+package Examples 
   extends Modelica.Icons.ExamplesPackage;
+
+
   annotation(Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Package with exemplary simulation setups for a room, an apartment and a one family dwelling. </p>

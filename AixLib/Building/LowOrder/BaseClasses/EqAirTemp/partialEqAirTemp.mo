@@ -85,15 +85,14 @@ annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
         Rectangle(
           extent={{38,46},{78,-76}},
           lineColor={0,0,0},
-          fillColor={0,0,0},
-          fillPattern=FillPattern.Solid),
+          fillColor={215,215,215},
+          fillPattern=FillPattern.HorizontalCylinder),
         Polygon(
           points={{79,46},{21,46},{79,70},{79,70},{79,46}},
           smooth=Smooth.None,
           fillColor={236,99,92},
           fillPattern=FillPattern.Solid,
-          pattern=LinePattern.None,
-          lineColor={236,99,92}),
+          pattern=LinePattern.None),
         Ellipse(
           extent={{-70,70},{-16,18}},
           lineColor={255,221,0},
@@ -115,7 +114,31 @@ annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
           lineThickness=0.5,
           fillColor={236,99,92},
           fillPattern=FillPattern.Solid,
-          textString="%name")}),
+          textString="%name"),
+        Rectangle(
+          extent={{38,46},{78,-14}},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          pattern=LinePattern.None,
+          lineColor={0,0,0}),
+        Rectangle(
+          extent={{52,28},{80,-12}},
+          lineColor={0,0,0},
+          fillColor={230,230,230},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{78,32},{84,-18}},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid,
+          pattern=LinePattern.None),
+        Line(
+          points={{52,8},{68,8},{78,8}},
+          color={0,0,0},
+          smooth=Smooth.None),
+        Line(
+          points={{72,28},{72,-12}},
+          color={0,0,0},
+          smooth=Smooth.None)}),
     Documentation(info="<html>
 <p>EqAirTemp is a component to compute the so called &QUOT;equivalent outdoor air temperature&QUOT;. Basically, this includes a correction for the longwave radiation for windows and walls and absorption of shortwave radiation only for walls.</p>
 <p>To the air temperature is added (or substracted) a term for longwave radiation and one term for shortwave radiation. As the shortwave radiation is taken into account only for the walls and the windows can be equipped with a shading, the equal temperatures are computed separately for the windows and for the walls. Due to the different beams in different directions, the temperatures are also computed separately for each direction. You need one weightfactor per direction and wall or window, e.g. 4 directions means 8 weightfactors (4 windows, 4 walls). Additionally, one weightfactor for the ground (for the ground temperature) . </p>

@@ -1,7 +1,12 @@
 within AixLib.DataBase.Walls.WSchV1984.Ceiling;
-
-record CEpartition_WSchV1984_SM_loHalf "Ceiling partition after WSchV1984, for building of type S (schwer) and M (mittel), lower half"
-  extends WallBaseDataDefinition(n(min = 1) = 3 "Number of wall layers", d = {0.02, 0.16, 0.015} "Thickness of wall layers", rho = {120, 2300, 1200} "Density of wall layers", lambda = {0.055, 2.3, 0.51} "Thermal conductivity of wall layers", c = {1030, 1000, 1000} "Specific heat capacity of wall layers", eps = 0.95 "Emissivity of inner wall surface");
+record CEpartition_WSchV1984_SM_loHalf
+  "Ceiling partition after WSchV1984, for building of type S (schwer) and M (mittel), lower half"
+  extends WallBaseDataDefinition(n(min = 1) = 3 "Number of wall layers", d = {0.02, 0.16, 0.015}
+      "Thickness of wall layers",                                                                                            rho = {120, 2300, 1200}
+      "Density of wall layers",                                                                                                    lambda = {0.055, 2.3, 0.51}
+      "Thermal conductivity of wall layers",                                                                                                    c = {1030, 1000, 1000}
+      "Specific heat capacity of wall layers",                                                                                                    eps = 0.95
+      "Emissivity of inner wall surface");
   annotation(Documentation(revisions = "<html>
  <p><ul>
  <li><i>September 5, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
@@ -22,3 +27,4 @@ record CEpartition_WSchV1984_SM_loHalf "Ceiling partition after WSchV1984, for b
  </ul>
  </html>"));
 end CEpartition_WSchV1984_SM_loHalf;
+

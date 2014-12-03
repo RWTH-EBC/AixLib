@@ -1,6 +1,8 @@
 within AixLib.HVAC.HeatExchanger.Examples.Medium;
 
-model DoubleHX_mflow "Testing double HX configuration and changing the mass flow rate"
+
+model DoubleHX_mflow
+  "Testing double HX configuration and changing the mass flow rate"
   import Anlagensimulation_WS1314 = AixLib.HVAC;
   extends Modelica.Icons.Example;
   Sources.BoundaryMoistAir_phX Medium1out(use_p_in = false, X = 0, p = 101325, h = 25e3) annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation = 180, origin = {-60, -40})));

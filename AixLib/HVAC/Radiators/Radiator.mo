@@ -1,5 +1,4 @@
 within AixLib.HVAC.Radiators;
-
 model Radiator
   import AixLib;
   parameter AixLib.DataBase.Radiators.RadiatiorBaseDataDefinition RadiatorType = AixLib.DataBase.Radiators.ThermX2_ProfilV_979W() annotation(choicesAllMatching = true);
@@ -10,12 +9,14 @@ model Radiator
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convPort annotation(Placement(transformation(extent = {{-52, 66}, {-32, 86}})));
   // Variablen
   Modelica.SIunits.Power Power "current power of radiator";
-  Modelica.SIunits.TemperatureDifference OverTemperature "current over temperature";
+  Modelica.SIunits.TemperatureDifference OverTemperature
+    "current over temperature";
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow annotation(Placement(transformation(extent = {{-34, 2}, {-14, 22}})));
   Interfaces.Port_a port_a annotation(Placement(transformation(extent = {{-102, -10}, {-82, 10}})));
   Interfaces.Port_b port_b annotation(Placement(transformation(extent = {{82, -10}, {102, 10}})));
 protected
-  parameter Modelica.SIunits.TemperatureDifference OverTemperature_Norm = (RadiatorType.T_flow_nom - RadiatorType.T_return_nom) / Modelica.Math.log((RadiatorType.T_flow_nom - RadiatorType.T_room_nom) / (RadiatorType.T_return_nom - RadiatorType.T_room_nom)) "over temperature according to norm";
+  parameter Modelica.SIunits.TemperatureDifference OverTemperature_Norm = (RadiatorType.T_flow_nom - RadiatorType.T_return_nom) / Modelica.Math.log((RadiatorType.T_flow_nom - RadiatorType.T_room_nom) / (RadiatorType.T_return_nom - RadiatorType.T_room_nom))
+    "over temperature according to norm";
 equation
   // Calculate the current over temperature
   //This equation works well for educational purposes. The oevrtemperature calculation only works by correct initailization of the system tzemperatures.
@@ -42,7 +43,7 @@ equation
   connect(T_flow.port_b, volume.port_a) annotation(Line(points = {{-58, 0}, {-8, 0}}, color = {0, 127, 255}, smooth = Smooth.None));
   connect(volume.port_b, T_return.port_a) annotation(Line(points = {{12, 0}, {54, 0}}, color = {0, 127, 255}, smooth = Smooth.None));
   connect(T_return.port_b, port_b) annotation(Line(points = {{74, 0}, {92, 0}}, color = {0, 127, 255}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent = {{-80, -10}, {-54, -18}}, lineColor = {0, 0, 0}, lineThickness = 1, fillColor = {255, 0, 0}, fillPattern = FillPattern.Solid, textString = "T_flow"), Text(extent = {{54, -10}, {76, -18}}, lineColor = {0, 0, 0}, lineThickness = 1, fillColor = {255, 0, 0}, fillPattern = FillPattern.Solid, textString = "T_return"), Rectangle(extent = {{-40, 54}, {40, 26}}, lineColor = {255, 0, 0}, lineThickness = 1), Text(extent = {{-34, 52}, {36, 28}}, lineColor = {255, 0, 0}, lineThickness = 1, fillColor = {0, 0, 255}, fillPattern = FillPattern.Solid, textString = "Heat transfer equations"), Line(points = {{0, 16}, {0, 24}, {-2, 22}, {0, 24}, {2, 22}}, color = {255, 0, 0}, thickness = 1, smooth = Smooth.None), Line(points = {{28, 58}, {34, 68}, {30, 66}, {34, 68}, {34, 64}}, color = {255, 0, 0}, thickness = 1, smooth = Smooth.None), Line(points = {{-32, 60}, {-38, 68}, {-38, 64}, {-38, 68}, {-34, 66}}, color = {255, 0, 0}, thickness = 1, smooth = Smooth.None)}), Icon(graphics = {Rectangle(extent = {{-68, 56}, {-60, -74}}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid), Rectangle(extent = {{-48, 56}, {-40, -74}}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid), Rectangle(extent = {{-28, 56}, {-20, -74}}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid), Rectangle(extent = {{-8, 56}, {0, -74}}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid), Rectangle(extent = {{12, 56}, {20, -74}}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid), Rectangle(extent = {{32, 56}, {40, -74}}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid), Rectangle(extent = {{52, 56}, {60, -74}}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid), Rectangle(extent = {{-74, -60}, {62, -70}}, lineColor = {95, 95, 95}, fillColor = {230, 230, 230}, fillPattern = FillPattern.Solid), Rectangle(extent = {{-72, 50}, {64, 40}}, lineColor = {95, 95, 95}, fillColor = {230, 230, 230}, fillPattern = FillPattern.Solid)}), Documentation(revisions = "<html>
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent=  {{-80, -10}, {-54, -18}}, lineColor=  {0, 0, 0}, lineThickness=  1, fillColor=  {255, 0, 0}, fillPattern=  FillPattern.Solid, textString=  "T_flow"), Text(extent=  {{54, -10}, {76, -18}}, lineColor=  {0, 0, 0}, lineThickness=  1, fillColor=  {255, 0, 0}, fillPattern=  FillPattern.Solid, textString=  "T_return"), Rectangle(extent=  {{-40, 54}, {40, 26}}, lineColor=  {255, 0, 0}, lineThickness=  1), Text(extent=  {{-34, 52}, {36, 28}}, lineColor=  {255, 0, 0}, lineThickness=  1, fillColor=  {0, 0, 255}, fillPattern=  FillPattern.Solid, textString=  "Heat transfer equations"), Line(points=  {{0, 16}, {0, 24}, {-2, 22}, {0, 24}, {2, 22}}, color=  {255, 0, 0}, thickness=  1, smooth=  Smooth.None), Line(points=  {{28, 58}, {34, 68}, {30, 66}, {34, 68}, {34, 64}}, color=  {255, 0, 0}, thickness=  1, smooth=  Smooth.None), Line(points=  {{-32, 60}, {-38, 68}, {-38, 64}, {-38, 68}, {-34, 66}}, color=  {255, 0, 0}, thickness=  1, smooth=  Smooth.None)}), Icon(graphics = {Rectangle(extent=  {{-68, 56}, {-60, -74}}, lineColor=  {95, 95, 95}, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{-48, 56}, {-40, -74}}, lineColor=  {95, 95, 95}, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{-28, 56}, {-20, -74}}, lineColor=  {95, 95, 95}, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{-8, 56}, {0, -74}}, lineColor=  {95, 95, 95}, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{12, 56}, {20, -74}}, lineColor=  {95, 95, 95}, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{32, 56}, {40, -74}}, lineColor=  {95, 95, 95}, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{52, 56}, {60, -74}}, lineColor=  {95, 95, 95}, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{-74, -60}, {62, -70}}, lineColor=  {95, 95, 95}, fillColor=  {230, 230, 230}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{-72, 50}, {64, 40}}, lineColor=  {95, 95, 95}, fillColor=  {230, 230, 230}, fillPattern=  FillPattern.Solid)}), Documentation(revisions = "<html>
  <p>13.11.2013, by <i>Ana Constantin</i>: implemented</p>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
@@ -57,3 +58,4 @@ equation
  <p><a href=\"AixLib.HVAC.Radiators.Examples.PumpRadiatorThermostaticValve\">AixLib.HVAC.Radiators.Examples.PumpRadiatorThermostaticValve</a></p>
  </html>"));
 end Radiator;
+

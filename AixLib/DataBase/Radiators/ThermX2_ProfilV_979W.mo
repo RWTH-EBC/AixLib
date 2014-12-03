@@ -1,6 +1,6 @@
 within AixLib.DataBase.Radiators;
-
-record ThermX2_ProfilV_979W "ThermX2, Profil V (Kermi) Power=979W, L=1000, H=600, Typ=11, {75,65,20}"
+record ThermX2_ProfilV_979W
+  "ThermX2, Profil V (Kermi) Power=979W, L=1000, H=600, Typ=11, {75,65,20}"
   extends RadiatiorBaseDataDefinition(NominalPower = 979, T_flow_nom = 75, T_return_nom = 65, T_room_nom = 20, Exponent = 1.2721, VolumeWater = 3.15, MassSteel = 19.58, RadPercent = 0.35, length = 1.0, height = 0.6);
   annotation(Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
@@ -34,3 +34,4 @@ record ThermX2_ProfilV_979W "ThermX2, Profil V (Kermi) Power=979W, L=1000, H=600
  <p>13.11.2013, by <i>Ana Constantin</i>: implemented</p>
  </html>"));
 end ThermX2_ProfilV_979W;
+

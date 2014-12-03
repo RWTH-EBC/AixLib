@@ -1,5 +1,4 @@
 within AixLib.DataBase.SolarThermal;
-
 record VacuumCollector "Properties of a vacuum collector"
   extends SolarThermalBaseDataDefinition(eta_zero = 0.75, c1 = 2, c2 = 0.005);
   annotation(Documentation(info = "<html>
@@ -16,3 +15,4 @@ record VacuumCollector "Properties of a vacuum collector"
  </ul></p>
  </html>"));
 end VacuumCollector;
+

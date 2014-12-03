@@ -100,7 +100,7 @@ partial model partialReducedOrderModel
       nominal=273.15 + 22,
       min=273.15 - 30,
       max=273.15 + 60)) annotation (Placement(transformation(extent={{10,-100},{
-            30,-80}}), iconTransformation(extent={{0,-100},{40,-60}})));
+            30,-80}}), iconTransformation(extent={{0,-110},{40,-70}})));
   Building.Components.DryAir.VarAirExchange
                               airExchange(
     V=Vair,
@@ -114,7 +114,7 @@ partial model partialReducedOrderModel
         origin={-40,-100}), iconTransformation(
         extent={{20,-20},{-20,20}},
         rotation=270,
-        origin={-40,-80})));
+        origin={-38,-90})));
 public
   Modelica.Blocks.Interfaces.RealInput ventilationTemperature annotation (
       Placement(transformation(extent={{-120,-82},{-80,-42}}),
@@ -124,8 +124,8 @@ public
             20}}), iconTransformation(extent={{-100,-16},{-60,24}})));
   Utilities.Interfaces.Star
                           internalGainsRad annotation (Placement(transformation(
-          extent={{70,-100},{90,-80}}), iconTransformation(extent={{54,-102},{100,
-            -58}})));
+          extent={{70,-100},{90,-80}}), iconTransformation(extent={{52,-112},{
+            98,-68}})));
   Utilities.HeatTransfer.SolarRadToHeat
                                       solarRadToHeatWindowRad(coeff=g, A=Aw) if
                                                                              withWindows and withOuterwalls
@@ -252,34 +252,58 @@ if withWindows and withOuterwalls then
             100}}),
          graphics={
         Rectangle(
-          extent={{-60,74},{100,-72}},
-          lineColor={135,135,135},
-          fillColor={135,135,135},
+          extent={{-60,74},{100,-70}},
+          lineColor={0,0,0},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Forward),
+        Rectangle(
+          extent={{-44,60},{84,-56}},
+          lineColor={0,0,0},
+          fillColor={230,230,230},
+          fillPattern=FillPattern.Solid),
+        Line(
+          points={{-44,-56},{-12,-28},{-12,38},{-44,60}},
+          color={0,0,0},
+          smooth=Smooth.None),
+        Line(
+          points={{-12,38},{30,38},{58,38},{84,60}},
+          color={0,0,0},
+          smooth=Smooth.None),
+        Line(
+          points={{58,38},{58,-28},{84,-56}},
+          color={0,0,0},
+          smooth=Smooth.None),
+        Line(
+          points={{-12,-28},{58,-28}},
+          color={0,0,0},
+          smooth=Smooth.None),
+        Rectangle(
+          extent={{22,16},{38,4}},
+          lineColor={0,0,0},
+          fillColor={170,213,255},
           fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{14,38},{46,12}},
+          extent={{6,16},{22,4}},
           lineColor={0,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          lineThickness=1),
+          fillColor={170,213,255},
+          fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{14,12},{46,-14}},
+          extent={{22,4},{38,-8}},
           lineColor={0,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          lineThickness=1),
+          fillColor={170,213,255},
+          fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{-18,12},{14,-14}},
+          extent={{6,4},{22,-8}},
           lineColor={0,0,0},
-          fillColor={255,255,255},
+          fillColor={170,213,255},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{-24,110},{122,74}},
+          lineColor={0,0,255},
+          lineThickness=0.5,
+          fillColor={236,99,92},
           fillPattern=FillPattern.Solid,
-          lineThickness=1),
-        Rectangle(
-          extent={{-18,38},{14,12}},
-          lineColor={0,0,0},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid,
-          lineThickness=1)}),
+          textString="%name")}),
     Documentation(info="<html>
 <p>ReducedOrderModel is a simple component to compute the air temperature, heating load, etc. for a thermal zone. The zone is simplified to one outer wall, one inner wall and one air node. It is build out of standard components and <a href=\"AixLib.Building.LowOrder.BaseClasses.SimpleOuterWall\">SimpleOuterWall</a> and <a href=\"AixLib.Building.LowOrder.BaseClasses.SimpleInnerWall\">SimpleInnerWall</a>. </p>
 <p>The partial class contains following components: </p>

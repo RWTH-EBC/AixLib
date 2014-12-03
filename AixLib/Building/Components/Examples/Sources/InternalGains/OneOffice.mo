@@ -1,5 +1,4 @@
 within AixLib.Building.Components.Examples.Sources.InternalGains;
-
 model OneOffice
   extends Modelica.Icons.Example;
   Components.Sources.InternalGains.Humans.HumanSensibleHeat_VDI2078 human_SensibleHeat_VDI2078(NrPeople = 2) annotation(Placement(transformation(extent = {{-10, 40}, {12, 64}})));
@@ -31,3 +30,4 @@ equation
  </ul></p>
  </html>"));
 end OneOffice;
+

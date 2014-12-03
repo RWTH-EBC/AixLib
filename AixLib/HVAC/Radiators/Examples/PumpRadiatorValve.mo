@@ -1,5 +1,4 @@
 within AixLib.HVAC.Radiators.Examples;
-
 model PumpRadiatorValve
   import AixLib;
   extends Modelica.Icons.Example;
@@ -41,3 +40,4 @@ equation
  <p>Make sure you initialise the temperatures correctly in order to have flow temperature &GT; return temperature &GT; room temperature in order for the equation for over temperature to be correctly calculated.</p>
  </html>"));
 end PumpRadiatorValve;
+

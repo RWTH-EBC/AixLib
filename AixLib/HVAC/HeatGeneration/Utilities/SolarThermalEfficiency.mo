@@ -1,15 +1,20 @@
 within AixLib.HVAC.HeatGeneration.Utilities;
 
-model SolarThermalEfficiency "Calculates the efficiency of a solar thermal collector"
+
+model SolarThermalEfficiency
+  "Calculates the efficiency of a solar thermal collector"
   import AixLib;
-  parameter AixLib.DataBase.SolarThermal.SolarThermalBaseDataDefinition Collector = AixLib.DataBase.SolarThermal.SimpleAbsorber() "Properties of Solar Thermal Collector" annotation(choicesAllMatching = true);
+  parameter AixLib.DataBase.SolarThermal.SolarThermalBaseDataDefinition Collector = AixLib.DataBase.SolarThermal.SimpleAbsorber()
+    "Properties of Solar Thermal Collector"                                                                                                     annotation(choicesAllMatching = true);
   Modelica.Blocks.Interfaces.RealInput T_air "Air temperature in K" annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 270, origin = {-50, 106})));
   Modelica.Blocks.Interfaces.RealInput G "Solar irradiation in W/m2" annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 270, origin = {10, 106})));
   Modelica.Blocks.Interfaces.RealInput T_col "Collector temperature in K" annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 90, origin = {-50, -106})));
-  Modelica.Blocks.Interfaces.RealOutput Q_flow "Useful heat flow from solar collector in W/m2" annotation(Placement(transformation(extent = {{98, -10}, {118, 10}})));
+  Modelica.Blocks.Interfaces.RealOutput Q_flow
+    "Useful heat flow from solar collector in W/m2"                                            annotation(Placement(transformation(extent = {{98, -10}, {118, 10}})));
 protected
   Real eta "Efficiency of solar thermal collector";
-  Modelica.SIunits.TemperatureDifference dT "Temperature difference between collector and air in K";
+  Modelica.SIunits.TemperatureDifference dT
+    "Temperature difference between collector and air in K";
 equation
   dT = T_col - T_air;
   eta = Collector.eta_zero - Collector.c1 * dT / G - Collector.c2 * dT * dT / G;

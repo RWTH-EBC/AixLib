@@ -1,8 +1,13 @@
 within AixLib.DataBase.Walls.WSchV1995.IW;
-
-record IWsimple_WSchV1995_L_half "Inner wall simple after WSchV1995, for building of type L (leicht), only half"
+record IWsimple_WSchV1995_L_half
+  "Inner wall simple after WSchV1995, for building of type L (leicht), only half"
   // New Walls for Dymola 2012, the same number of layers as other mass clases
-  extends WallBaseDataDefinition(n(min = 1) = 2 "Number of wall layers", d = {0.05, 0.0275} "Thickness of wall layers", rho = {93, 1018.2} "Density of wall layers", lambda = {0.44, 0.346} "Thermal conductivity of wall layers", c = {1593, 1000} "Specific heat capacity of wall layers", eps = 0.95 "Emissivity of inner wall surface");
+  extends WallBaseDataDefinition(n(min = 1) = 2 "Number of wall layers", d = {0.05, 0.0275}
+      "Thickness of wall layers",                                                                                       rho = {93, 1018.2}
+      "Density of wall layers",                                                                                                    lambda = {0.44, 0.346}
+      "Thermal conductivity of wall layers",                                                                                                    c = {1593, 1000}
+      "Specific heat capacity of wall layers",                                                                                                    eps = 0.95
+      "Emissivity of inner wall surface");
   /*    n(min=1) = 3 "Number of wall layers",
       d={0.05,0.0125,0.015} "Thickness of wall layers",
       rho={93,800,1200} "Density of wall layers",
@@ -30,3 +35,4 @@ record IWsimple_WSchV1995_L_half "Inner wall simple after WSchV1995, for buildin
  </ul>
  </html>"));
 end IWsimple_WSchV1995_L_half;
+

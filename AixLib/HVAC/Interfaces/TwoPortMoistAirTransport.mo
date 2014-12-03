@@ -1,6 +1,6 @@
 within AixLib.HVAC.Interfaces;
-
-partial model TwoPortMoistAirTransport "Base class for moist air transport models without influence on fluid"
+partial model TwoPortMoistAirTransport
+  "Base class for moist air transport models without influence on fluid"
   extends TwoPortMoistAir;
 equation
   // Mass Equation
@@ -21,3 +21,4 @@ equation
  </ul></p>
  </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
 end TwoPortMoistAirTransport;
+

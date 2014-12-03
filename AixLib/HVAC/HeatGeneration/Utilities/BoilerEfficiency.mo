@@ -1,9 +1,13 @@
 within AixLib.HVAC.HeatGeneration.Utilities;
 
-model BoilerEfficiency "Boiler efficiency as a linear interpolation between table values for a basic boiler model"
+
+model BoilerEfficiency
+  "Boiler efficiency as a linear interpolation between table values for a basic boiler model"
   import AixLib;
-  parameter AixLib.DataBase.Boiler.BoilerEfficiencyBaseDataDefinition boilerEfficiencyBE = AixLib.DataBase.Boiler.BoilerConst() "boiler efficiency as a function of part-load factor" annotation(choicesAllMatching = true);
-  parameter Modelica.SIunits.Power Q_flow_max = 20000 "Maximum heat output of boiler at full load";
+  parameter AixLib.DataBase.Boiler.BoilerEfficiencyBaseDataDefinition boilerEfficiencyBE = AixLib.DataBase.Boiler.BoilerConst()
+    "boiler efficiency as a function of part-load factor"                                                                                                     annotation(choicesAllMatching = true);
+  parameter Modelica.SIunits.Power Q_flow_max = 20000
+    "Maximum heat output of boiler at full load";
   Modelica.Blocks.Interfaces.RealInput heatDemand annotation(Placement(transformation(extent = {{-120, -20}, {-80, 20}})));
   Modelica.Blocks.Interfaces.RealOutput fuelUse annotation(Placement(transformation(extent = {{96, -10}, {116, 10}})));
   Modelica.Blocks.Math.Division division annotation(Placement(transformation(extent = {{40, 30}, {60, 50}})));

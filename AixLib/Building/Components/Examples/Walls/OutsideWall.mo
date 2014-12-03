@@ -1,5 +1,6 @@
 within AixLib.Building.Components.Examples.Walls;
 
+
 model OutsideWall
   extends Modelica.Icons.Example;
   Components.Walls.Wall wall_simple(wall_length = 5, wall_height = 2, withWindow = true, WindowType = DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(), withSunblind = true, WallType = DataBase.Walls.WSchV1984.OW.OW_WSchV1984_S(), outside = true, Model = 3, T0 = 289.15) annotation(Placement(transformation(extent = {{-6, 57}, {6, -57}}, rotation = 180, origin = {-30, 25})));

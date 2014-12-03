@@ -1,6 +1,8 @@
 within AixLib.HVAC.HeatExchanger.Examples.NoMedium;
 
-model Test_RecuperatorNoMedium_counterflow_stopMassFlow "Switching is too complicated to take care of for now and practically not needed. So we use the case of stopping the mass flow."
+
+model Test_RecuperatorNoMedium_counterflow_stopMassFlow
+  "Switching is too complicated to take care of for now and practically not needed. So we use the case of stopping the mass flow."
   extends Modelica.Icons.Example;
   Modelica.Blocks.Sources.Ramp m2flow(duration = 1, startTime = 1.5, offset = recuperatorNoMedium3.m_flow20, height = -recuperatorNoMedium3.m_flow20) annotation(Placement(transformation(extent = {{-72, 0}, {-52, 20}})));
   Modelica.Blocks.Sources.Ramp m1flow(duration = 1, offset = recuperatorNoMedium3.m_flow10, startTime = 0, height = -recuperatorNoMedium3.m_flow10) annotation(Placement(transformation(extent = {{66, -20}, {46, 0}})));
@@ -26,9 +28,9 @@ equation
   connect(recuperatorNoMedium3.T2out, subtract2.u2) annotation(Line(points = {{-10, 8}, {-16, 8}, {-16, 44}, {-21, 44}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(T2out_ideal.y, division2.u2) annotation(Line(points = {{-11, 50}, {-16, 50}, {-16, 60}, {-36, 60}, {-36, 44}, {-41, 44}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(subtract2.y, division2.u1) annotation(Line(points = {{-32.5, 47}, {-38.25, 47}, {-38.25, 50}, {-41, 50}}, color = {0, 0, 127}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent = {{30, -74}, {98, -96}}, lineColor = {135, 135, 135}, textString = "1: counter-current flow
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent=  {{30, -74}, {98, -96}}, lineColor=  {135, 135, 135}, textString=  "1: counter-current flow
  2: co-current flow
- 3: cross flow", horizontalAlignment = TextAlignment.Left)}), experiment(StopTime = 3.5), __Dymola_experimentSetupOutput, Documentation(info = "<html>
+ 3: cross flow", horizontalAlignment=  TextAlignment.Left)}), experiment(StopTime = 3.5), __Dymola_experimentSetupOutput, Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Going to zero with mass flow will lead to singularities in several equations and therefore, the solver will fail at a specific point. To overcome this problem the equations must be switched to non-singular representations at a specific condition or formulated in a different way for the whole range. For the time being the valid variable range (for mass flow rate for example) can be limited to a lower value above zero. In a more advanced model the flow direction of both media streams should be taken care of automatically.</p>
  </html>"));

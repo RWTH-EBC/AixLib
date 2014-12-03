@@ -1,7 +1,8 @@
 within AixLib.Building.HighOrder.House;
-
 package OFD_MiddleInnerLoadWall "The one family dwelling model, with the inner load wall divides the house in two"
   extends Modelica.Icons.Package;
+
+
   annotation(Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Package with set-up models for a one family dwelling.</p>

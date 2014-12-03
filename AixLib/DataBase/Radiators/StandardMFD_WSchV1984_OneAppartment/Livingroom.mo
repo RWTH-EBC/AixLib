@@ -1,6 +1,6 @@
 within AixLib.DataBase.Radiators.StandardMFD_WSchV1984_OneAppartment;
-
-record Livingroom "ThermX2, Profil V (Kermi) Power=1267W, L=0.5, H=300, Typ=11, {75,65,20}"
+record Livingroom
+  "ThermX2, Profil V (Kermi) Power=1267W, L=0.5, H=300, Typ=11, {75,65,20}"
   extends RadiatiorBaseDataDefinition(NominalPower = 1276, T_flow_nom = 75, T_return_nom = 65, T_room_nom = 20, Exponent = 1.2196, VolumeWater = 1.80, MassSteel = 9.87, RadPercent = 0.3, length = 2.3, height = 0.3);
   annotation(Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
@@ -37,3 +37,4 @@ record Livingroom "ThermX2, Profil V (Kermi) Power=1267W, L=0.5, H=300, Typ=11, 
  </ul></p>
  </html>"));
 end Livingroom;
+

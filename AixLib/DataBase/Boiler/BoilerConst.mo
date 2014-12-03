@@ -1,6 +1,6 @@
 within AixLib.DataBase.Boiler;
-
-record BoilerConst "Boiler efficency for a simple boiler with fixed temperature"
+record BoilerConst
+  "Boiler efficency for a simple boiler with fixed temperature"
   extends BoilerEfficiencyBaseDataDefinition(boilerEfficiency = [0.0000, 0.78; 0.2000, 0.78; 0.4000, 0.82; 0.6000, 0.84; 0.8000, 0.86; 1.0000, 0.88]);
   annotation(Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
@@ -19,3 +19,4 @@ record BoilerConst "Boiler efficency for a simple boiler with fixed temperature"
  </ul></p>
  </html>"));
 end BoilerConst;
+

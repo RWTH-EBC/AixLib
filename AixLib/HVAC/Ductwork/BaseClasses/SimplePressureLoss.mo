@@ -1,5 +1,4 @@
 within AixLib.HVAC.Ductwork.BaseClasses;
-
 partial model SimplePressureLoss
   extends Interfaces.TwoPortMoistAirTransportFluidprops;
   parameter Modelica.SIunits.Length D = 0.3 "Diameter of component";
@@ -18,3 +17,4 @@ equation
  </ul></p>
  </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -40}, {100, 40}}), graphics));
 end SimplePressureLoss;
+
