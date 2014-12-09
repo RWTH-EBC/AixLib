@@ -1,5 +1,4 @@
 within AixLib.HVAC.HumidifierAndDehumidifier;
-
-package Examples
+package Examples 
   extends Modelica.Icons.ExamplesPackage;
 end Examples;

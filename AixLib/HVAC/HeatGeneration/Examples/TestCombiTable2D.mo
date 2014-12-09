@@ -1,5 +1,4 @@
 within AixLib.HVAC.HeatGeneration.Examples;
-
 model TestCombiTable2D "Test case for boiler model"
   extends Modelica.Icons.Example;
   Modelica.Blocks.Tables.CombiTable2D HeatFlowCondenserTable(table = [0.0, 273.15, 283.15; 308.15, 4800, 6300; 328.15, 4400, 5750]) annotation(Placement(transformation(extent = {{0, 40}, {20, 60}})));
@@ -22,3 +21,4 @@ equation
  </ul></p>
  </html>"), Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}})));
 end TestCombiTable2D;
+

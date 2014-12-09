@@ -1,5 +1,4 @@
 within AixLib.HVAC.Ductwork.Examples;
-
 model VolumeFlowController "Example for Volume Flow Controller"
   import Anlagensimulation_WS1314 = AixLib.HVAC;
   extends Modelica.Icons.Example;
@@ -28,3 +27,4 @@ equation
  </ul></p>
  </html>"));
 end VolumeFlowController;
+

@@ -1,7 +1,14 @@
 within AixLib.DataBase.Walls.EnEV2009.Ceiling;
 
-record ROsaddleAttic_EnEV2009_SML "Saddle roof in attic after EnEV 2009, for building of type S (schwer), M (mittel) and L (leicht)"
-  extends WallBaseDataDefinition(n(min = 1) = 1 "Number of wall layers", d = {0.22} "Thickness of wall layers", rho = {194} "Density of wall layers", lambda = {0.045} "Thermal conductivity of wall layers", c = {1301} "Specific heat capacity of wall layers", eps = 0.95 "Emissivity of inner wall surface");
+
+record ROsaddleAttic_EnEV2009_SML
+  "Saddle roof in attic after EnEV 2009, for building of type S (schwer), M (mittel) and L (leicht)"
+  extends WallBaseDataDefinition(n(min = 1) = 1 "Number of wall layers", d = {0.22}
+      "Thickness of wall layers",                                                                               rho = {194}
+      "Density of wall layers",                                                                                                    lambda = {0.045}
+      "Thermal conductivity of wall layers",                                                                                                    c = {1301}
+      "Specific heat capacity of wall layers",                                                                                                    eps = 0.95
+      "Emissivity of inner wall surface");
   annotation(Documentation(revisions = "<html>
  <p><ul>
  <li><i>September 5, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>

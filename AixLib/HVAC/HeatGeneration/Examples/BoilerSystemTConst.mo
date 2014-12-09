@@ -1,6 +1,8 @@
 within AixLib.HVAC.HeatGeneration.Examples;
 
-model BoilerSystemTConst "Test case for boiler model with constant supply temperature"
+
+model BoilerSystemTConst
+  "Test case for boiler model with constant supply temperature"
   extends Modelica.Icons.Example;
   Pumps.Pump pumpSimple(Head_max = 1) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {-50, 10})));
   Sources.Boundary_p staticPressure annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-90, -10})));

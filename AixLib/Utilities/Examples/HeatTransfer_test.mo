@@ -1,5 +1,6 @@
 within AixLib.Utilities.Examples;
 
+
 model HeatTransfer_test "Test routine for heat transfer models"
   extends Modelica.Icons.Example;
   HeatTransfer.HeatConv heatConv(alpha = 2, A = 16) annotation(Placement(transformation(extent = {{-10, 38}, {10, 58}})));
@@ -36,7 +37,7 @@ equation
   connect(heatTrans.port_b, TempInside.port) annotation(Line(points = {{10, -46}, {46, -46}, {46, 10}, {60, 10}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(heatTransfer_Outside.port_a, TempOutside.port) annotation(Line(points = {{-10, -28}, {-40, -28}, {-40, 10}, {-60, 10}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(heatTransfer_Outside.port_b, TempInside.port) annotation(Line(points = {{10, -28}, {46, -28}, {46, 10}, {60, 10}}, color = {191, 0, 0}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent = {{14, 46}, {26, 36}}, lineColor = {0, 0, 255}, textString = "1"), Text(extent = {{14, 30}, {26, 20}}, lineColor = {0, 0, 255}, textString = "2"), Text(extent = {{14, 10}, {26, 0}}, lineColor = {0, 0, 255}, textString = "3"), Text(extent = {{14, -10}, {26, -20}}, lineColor = {0, 0, 255}, textString = "4"), Text(extent = {{14, -30}, {26, -40}}, lineColor = {0, 0, 255}, textString = "5"), Text(extent = {{14, -48}, {26, -58}}, lineColor = {0, 0, 255}, textString = "6")}), Documentation(info = "<html>
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent=  {{14, 46}, {26, 36}}, lineColor=  {0, 0, 255}, textString=  "1"), Text(extent=  {{14, 30}, {26, 20}}, lineColor=  {0, 0, 255}, textString=  "2"), Text(extent=  {{14, 10}, {26, 0}}, lineColor=  {0, 0, 255}, textString=  "3"), Text(extent=  {{14, -10}, {26, -20}}, lineColor=  {0, 0, 255}, textString=  "4"), Text(extent=  {{14, -30}, {26, -40}}, lineColor=  {0, 0, 255}, textString=  "5"), Text(extent=  {{14, -48}, {26, -58}}, lineColor=  {0, 0, 255}, textString=  "6")}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Test routine to check simple heat transfer models with a maximum of 2 temperature connectors.</p>
  <h4><span style=\"color:#008000\">Concept</span></h4>

@@ -105,33 +105,100 @@ equation
   if withOuterwalls then
     connect(weather, eqAirTemp.weatherData) annotation(Line(points = {{-100, 10}, {-44, 10}}, color = {0, 0, 127}, smooth = Smooth.None));
     connect(solarRad_in, eqAirTemp.solarRad_in) annotation(Line(points = {{-90, 70}, {-68, 70}, {-68, 15.6}, {-44.5, 15.6}}, color = {255, 128, 0}, smooth = Smooth.None));
-    connect(eqAirTemp.equalAirTemp, reducedOrderModel.equalAirTemp) annotation(Line(points={{-28,4.4},
-            {-2,4.4},{-2,19.12},{23.8,19.12}},                                                                                                  color = {191, 0, 0}, smooth = Smooth.None));
+    connect(eqAirTemp.equalAirTemp, reducedOrderModel.equalAirTemp) annotation(Line(points={{-26.2,
+            4.4},{-2,4.4},{-2,19.12},{23.8,19.12}},                                                                                             color = {191, 0, 0}, smooth = Smooth.None));
   end if;
-  connect(internalGainsConv, reducedOrderModel.internalGainsConv) annotation(Line(points = {{40, -90}, {40, -49}, {52.8, -49}, {52.8, -4.4}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(internalGainsRad, reducedOrderModel.internalGainsRad) annotation(Line(points = {{80, -90}, {80, -4.4}, {69.33, -4.4}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
-  connect(ventilationRate, reducedOrderModel.ventilationRate) annotation(Line(points = {{-28, -90}, {4, -90}, {4, -4.4}, {35.4, -4.4}}, color = {0, 0, 127}, smooth = Smooth.None));
+  connect(internalGainsConv, reducedOrderModel.internalGainsConv) annotation(Line(points={{40,-90},
+          {40,-49},{52.8,-49},{52.8,-7.2}},                                                                                                   color = {191, 0, 0}, smooth = Smooth.None));
+  connect(internalGainsRad, reducedOrderModel.internalGainsRad) annotation(Line(points={{80,-90},
+          {80,-7.2},{68.75,-7.2}},                                                                                               color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+  connect(ventilationRate, reducedOrderModel.ventilationRate) annotation(Line(points={{-28,-90},
+          {4,-90},{4,-7.2},{35.98,-7.2}},                                                                                               color = {0, 0, 127}, smooth = Smooth.None));
   connect(ventilationTemperature, reducedOrderModel.ventilationTemperature) annotation(Line(points = {{-100, -50}, {-12, -50}, {-12, 4.56}, {23.8, 4.56}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(sunblind.Rad_Out, solRadWeightedSum.solarRad_in) annotation(Line(points = {{-7, 73}, {-2.5, 73}, {-2.5, 71}, {1.4, 71}}, color = {255, 128, 0}, smooth = Smooth.None));
   connect(solarRad_in, sunblind.Rad_In) annotation(Line(points = {{-90, 70}, {-58, 70}, {-58, 73}, {-25, 73}}, color = {255, 128, 0}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(graphics={  Rectangle(extent = {{-60, 80}, {100, -58}}, lineColor = {0, 128, 255},
-            lineThickness =                                                                                                    1, fillColor = {0, 128, 255},
-            fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{-60, -58}, {100, -70}}, lineColor = {0, 127, 0},
-            lineThickness =                                                                                                    1, fillColor = {0, 127, 0},
-            fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{14, 36}, {100, -58}}, lineColor = {135, 135, 135}, fillColor = {135, 135, 135},
-            fillPattern =                                                                                                    FillPattern.Solid), Polygon(points = {{100, 36}, {-2, 36}, {100, 60}, {100, 36}}, lineColor = {255, 85, 85},
-            lineThickness =                                                                                                    1, smooth = Smooth.None, fillColor = {255, 85, 85},
-            fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{64, 12}, {80, 0}}, lineColor = {0, 0, 0},
-            lineThickness =                                                                                                    1, fillColor = {255, 255, 255},
-            fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{64, 0}, {80, -12}}, lineColor = {0, 0, 0},
-            lineThickness =                                                                                                    1, fillColor = {255, 255, 255},
-            fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{48, 0}, {64, -12}}, lineColor = {0, 0, 0},
-            lineThickness =                                                                                                    1, fillColor = {255, 255, 255},
-            fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{48, 12}, {64, 0}}, lineColor = {0, 0, 0},
-            lineThickness =                                                                                                    1, fillColor = {255, 255, 255},
-            fillPattern =                                                                                                    FillPattern.Solid), Ellipse(extent = {{-50, 72}, {-22, 44}}, lineColor = {255, 255, 0},
-            lineThickness =                                                                                                    1, fillColor = {255, 255, 0},
-            fillPattern =                                                                                                    FillPattern.Solid), Line(points = {{-18, 54}, {-6, 44}}, color = {255, 255, 0}, thickness = 1, smooth = Smooth.None), Line(points = {{-26, 44}, {-18, 32}}, color = {255, 255, 0}, thickness = 1, smooth = Smooth.None), Line(points = {{-36, 40}, {-36, 26}}, color = {255, 255, 0}, thickness = 1, smooth = Smooth.None), Line(points = {{-48, -58}, {-50, -52}, {-46, -48}, {-48, -42}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier), Line(points = {{-40, -58}, {-42, -52}, {-38, -48}, {-40, -42}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier), Line(points = {{-32, -58}, {-34, -52}, {-30, -48}, {-32, -42}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier), Line(points = {{-50, -44}, {-48, -40}, {-46, -44}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier), Line(points = {{-42, -44}, {-40, -40}, {-38, -44}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier), Line(points = {{-34, -44}, {-32, -40}, {-30, -44}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier)}), experiment(StopTime = 864000, Interval = 3599), experimentSetupOutput, Documentation(info = "<html>
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(
+        coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+            100}}),                                                                                                    graphics={  Rectangle(extent={{
+              -60,64},{98,-58}},                                                                                                    lineColor=
+              {0,0,0},
+            lineThickness=1,                                                                                                    fillColor=
+              {170,213,255},
+            fillPattern=FillPattern.HorizontalCylinder),                                                                             Rectangle(extent={{
+              -60,80},{100,0}},
+            lineThickness=1,                                                                                                    fillColor=
+              {170,213,255},
+            fillPattern=FillPattern.Solid,
+          pattern=LinePattern.None),
+        Rectangle(
+          extent={{14,36},{100,-58}},
+          lineColor={0,0,0},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Forward),                                                                                                    Rectangle(extent = {{-60, -58}, {100, -70}}, lineColor=
+              {0,127,0},
+            lineThickness=1,                                                                                                    fillColor=
+              {0,127,0},
+            fillPattern=FillPattern.HorizontalCylinder),                                                                                         Rectangle(extent={{
+              24,26},{100,-48}},                                                                                                    lineColor=
+              {0,0,0},                                                                                                    fillColor=
+              {230,230,230},
+            fillPattern=FillPattern.Solid),                                                                                                    Polygon(points={{
+              100,36},{-2,36},{100,68},{100,36}},
+            lineThickness=1,                                                                                                    smooth=
+              Smooth.None,                                                                                                    fillColor=
+              {236,99,92},
+            fillPattern=FillPattern.Solid,
+          pattern=LinePattern.None),                                                                                                    Rectangle(extent={{
+              55,-2},{67,-10}},                                                                                                    lineColor=
+              {0,0,0},                                                                                                    fillColor=
+              {170,213,255},
+            fillPattern=FillPattern.Solid),                                                                                                    Ellipse(extent={{
+              -58,78},{-16,36}},
+            lineThickness=1,                                                                                                    fillColor=
+              {255,221,0},
+            fillPattern=FillPattern.Solid,
+          pattern=LinePattern.None),
+        Rectangle(
+          extent={{-60,-64},{100,-70}},
+          lineThickness=1,
+          fillPattern=FillPattern.Solid,
+          fillColor={0,127,0},
+          pattern=LinePattern.None),
+        Line(
+          points={{24,-48},{44,-32},{44,10},{24,26}},
+          color={0,0,0},
+          smooth=Smooth.None),
+        Line(
+          points={{44,10},{92,10},{100,18}},
+          color={0,0,0},
+          smooth=Smooth.None),
+        Line(
+          points={{44,-32},{92,-32},{100,-40}},
+          color={0,0,0},
+          smooth=Smooth.None),
+        Line(
+          points={{92,10},{92,-32}},
+          color={0,0,0},
+          smooth=Smooth.None),                                                                                                    Rectangle(extent={{
+              67,-2},{79,-10}},                                                                                                    lineColor=
+              {0,0,0},                                                                                                    fillColor=
+              {170,213,255},
+            fillPattern=FillPattern.Solid),                                                                                                    Rectangle(extent={{
+              67,-10},{79,-18}},                                                                                                    lineColor=
+              {0,0,0},                                                                                                    fillColor=
+              {170,213,255},
+            fillPattern=FillPattern.Solid),                                                                                                    Rectangle(extent={{
+              55,-10},{67,-18}},                                                                                                    lineColor=
+              {0,0,0},                                                                                                    fillColor=
+              {170,213,255},
+            fillPattern=FillPattern.Solid),
+        Text(
+          extent={{-52,112},{94,76}},
+          lineColor={0,0,255},
+          lineThickness=0.5,
+          fillColor={236,99,92},
+          fillPattern=FillPattern.Solid,
+          textString="%name")}),                                                                                                    experiment(StopTime = 864000, Interval = 3599), experimentSetupOutput, Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <ul>
  <li>This model connects <a href=\"AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel\">ReducedOrderModel</a> with <a href=\"AixLib.Building.Components.Weather.Sunblind\">Sunblind</a> and <a href=\"AixLib.Building.LowOrder.BaseClasses.EqAirTemp\">EqAirTemp</a>. All this models have been developed in the context of VDI 6007 to have the whole VDI 6007 model in Dymola. ThermalZonePhysics reflects all components described in the standard. </li>

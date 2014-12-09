@@ -1,5 +1,6 @@
 within AixLib.HVAC.OFD.Examples;
 
+
 model GroundfloorBoiler
   import AixLib;
   extends Modelica.Icons.Example;
@@ -42,13 +43,13 @@ equation
   connect(prescribedHeatFlow_conv[3].port, groundFloor.Con_Corridor) annotation(Line(points = {{129, 76}, {140, 76}, {140, 27.57}, {131.177, 27.57}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(prescribedHeatFlow_conv[4].port, groundFloor.Con_WC) annotation(Line(points = {{129, 76}, {140, 76}, {140, 17}, {131.177, 17}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(prescribedHeatFlow_conv[5].port, groundFloor.Con_Kitchen) annotation(Line(points = {{129, 76}, {140, 76}, {140, 52}, {64, 52}, {64, 15.81}, {92.8923, 15.81}}, color = {191, 0, 0}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(extent = {{-100, -100}, {160, 100}}, preserveAspectRatio = false), graphics = {Text(extent = {{-40, -42}, {98, -128}}, lineColor = {0, 0, 255}, textString = "Set initial values for iteration variables (list given by translate, usually pressure drops). Rule of thumb: valves 1000 Pa, pipes 100 Pa. Simulation may still work without some of them, but  it gives warning of division by zero at initialization.
+  annotation(Diagram(coordinateSystem(extent = {{-100, -100}, {160, 100}}, preserveAspectRatio = false), graphics = {Text(extent=  {{-40, -42}, {98, -128}}, lineColor=  {0, 0, 255}, textString=  "Set initial values for iteration variables (list given by translate, usually pressure drops). Rule of thumb: valves 1000 Pa, pipes 100 Pa. Simulation may still work without some of them, but  it gives warning of division by zero at initialization.
  In order for the over temperature calculation (if using logaritmic mean value) for the radiator to work we need: flow temperature > return temperature > room temperature.
  Initialize temperature of boiler water volume (e.g. 55 �C) and set the value as fixed -> flow temperature. Lower initialisation temperatures also work, as long as they are higher than the initialization for the return temperature.
  Set initial temperature for system over room temperature, in order to calculate a correct over temperature (e.g. baseParameters.T0  = 25�C) -> return temperature.
- "), Rectangle(extent = {{-58, 42}, {-8, -30}}, lineColor = {255, 0, 0}, fillColor = {255, 255, 85}, fillPattern = FillPattern.Solid), Text(extent = {{-48, 46}, {-18, 42}}, lineColor = {255, 0, 0}, fillColor = {0, 0, 255}, fillPattern = FillPattern.Solid, textString = "Heating System
- ", fontSize = 11), Rectangle(extent = {{-6, 4}, {132, -64}}, lineColor = {255, 0, 0}, fillColor = {170, 255, 170}, fillPattern = FillPattern.Solid), Rectangle(extent = {{-6, 92}, {150, 6}}, lineColor = {255, 0, 0}, fillColor = {170, 213, 255}, fillPattern = FillPattern.Solid), Text(extent = {{44, -70}, {74, -74}}, lineColor = {255, 0, 0}, fillColor = {0, 0, 255}, fillPattern = FillPattern.Solid, fontSize = 11, textString = "Supply
- "), Text(extent = {{54, 96}, {84, 92}}, lineColor = {255, 0, 0}, fillColor = {0, 0, 255}, fillPattern = FillPattern.Solid, fontSize = 11, textString = "Distribution and Consumption
+ "), Rectangle(extent=  {{-58, 42}, {-8, -30}}, lineColor=  {255, 0, 0}, fillColor=  {255, 255, 85}, fillPattern=  FillPattern.Solid), Text(extent=  {{-48, 46}, {-18, 42}}, lineColor=  {255, 0, 0}, fillColor=  {0, 0, 255}, fillPattern=  FillPattern.Solid, textString=  "Heating System
+ ", fontSize=  11), Rectangle(extent=  {{-6, 4}, {132, -64}}, lineColor=  {255, 0, 0}, fillColor=  {170, 255, 170}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{-6, 92}, {150, 6}}, lineColor=  {255, 0, 0}, fillColor=  {170, 213, 255}, fillPattern=  FillPattern.Solid), Text(extent=  {{44, -70}, {74, -74}}, lineColor=  {255, 0, 0}, fillColor=  {0, 0, 255}, fillPattern=  FillPattern.Solid, fontSize=  11, textString=  "Supply
+ "), Text(extent=  {{54, 96}, {84, 92}}, lineColor=  {255, 0, 0}, fillColor=  {0, 0, 255}, fillPattern=  FillPattern.Solid, fontSize=  11, textString=  "Distribution and Consumption
  ")}), Icon(coordinateSystem(extent = {{-100, -100}, {160, 100}})), experiment(StopTime = 86400, Interval = 60, __Dymola_Algorithm = "Lsodar"), __Dymola_experimentSetupOutput(events = false), Documentation(revisions = "<html>
  <p>04.11.2013, Moritz Lauster</p>
  <p><ul>

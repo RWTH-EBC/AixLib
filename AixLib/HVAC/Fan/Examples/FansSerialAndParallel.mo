@@ -1,5 +1,6 @@
 within AixLib.HVAC.Fan.Examples;
 
+
 model FansSerialAndParallel "Serial and Parallel Fan Example"
   extends Modelica.Icons.Example;
   inner BaseParameters baseParameters(T0 = 298.15) annotation(Placement(transformation(extent = {{80, 80}, {100, 100}})));

@@ -1,8 +1,13 @@
 within AixLib.DataBase.Walls.EnEV2009.Ceiling;
-
-record CEpartition_EnEV2009_L_loHalf "Ceiling partition after EnEV 2009, for building of type L (leicht), lower half"
+record CEpartition_EnEV2009_L_loHalf
+  "Ceiling partition after EnEV 2009, for building of type L (leicht), lower half"
   // New Walls for Dymola 2012, the same number of layers as other mass clases
-  extends WallBaseDataDefinition(n(min = 1) = 3 "Number of wall layers", d = {0.04, 0.16, 0.0275} "Thickness of wall layers", rho = {210, 93, 1018.2} "Density of wall layers", lambda = {0.062, 0.71, 0.346} "Thermal conductivity of wall layers", c = {1509, 1593, 1000} "Specific heat capacity of wall layers", eps = 0.95 "Emissivity of inner wall surface");
+  extends WallBaseDataDefinition(n(min = 1) = 3 "Number of wall layers", d = {0.04, 0.16, 0.0275}
+      "Thickness of wall layers",                                                                                             rho = {210, 93, 1018.2}
+      "Density of wall layers",                                                                                                    lambda = {0.062, 0.71, 0.346}
+      "Thermal conductivity of wall layers",                                                                                                    c = {1509, 1593, 1000}
+      "Specific heat capacity of wall layers",                                                                                                    eps = 0.95
+      "Emissivity of inner wall surface");
   //       n(min=1) = 5 "Number of wall layers",
   //      d={0.02,0.02,0.16,0.0125,0.015} "Thickness of wall layers",
   //      rho={120,300,93,800,1200} "Density of wall layers",
@@ -29,3 +34,4 @@ record CEpartition_EnEV2009_L_loHalf "Ceiling partition after EnEV 2009, for bui
  </ul>
  </html>"));
 end CEpartition_EnEV2009_L_loHalf;
+

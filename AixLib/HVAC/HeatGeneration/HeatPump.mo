@@ -1,5 +1,4 @@
 within AixLib.HVAC.HeatGeneration;
-
 model HeatPump
   Interfaces.Port_a port_a_source annotation(Placement(transformation(extent = {{-100, 60}, {-80, 80}})));
   Interfaces.Port_b port_b_source annotation(Placement(transformation(extent = {{-100, -80}, {-80, -60}})));
@@ -19,11 +18,14 @@ model HeatPump
   Modelica.Blocks.Logical.Switch SwitchPower annotation(Placement(transformation(extent = {{14, 12}, {34, 32}})));
   Modelica.Blocks.Sources.Constant constZero1(k = 0) annotation(Placement(transformation(extent = {{-26, 4}, {-6, 24}})));
   Modelica.Blocks.Math.Feedback feedbackHeatFlowEvaporator annotation(Placement(transformation(extent = {{10, -60}, {-10, -40}})));
-  Modelica.Blocks.Interfaces.RealOutput Power "Connector of Real output signal" annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {0, -90})));
+  Modelica.Blocks.Interfaces.RealOutput Power "Connector of Real output signal"
+                                                                                annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {0, -90})));
   parameter Modelica.SIunits.Volume VolumeEvaporator = 0.01 "Volume im m3";
   parameter Modelica.SIunits.Volume VolumeCondenser = 0.01 "Volume im m3";
-  parameter Real tablePower[:, :] = fill(0.0, 0, 2) "table matrix (grid u1 = first column, grid u2 = first row; e.g., table=[0,0;0,1])";
-  parameter Real tableHeatFlowCondenser[:, :] = fill(0.0, 0, 2) "table matrix (grid u1 = first column, grid u2 = first row; e.g., table=[0,0;0,1])";
+  parameter Real tablePower[:, :] = fill(0.0, 0, 2)
+    "table matrix (grid u1 = first column, grid u2 = first row; e.g., table=[0,0;0,1])";
+  parameter Real tableHeatFlowCondenser[:, :] = fill(0.0, 0, 2)
+    "table matrix (grid u1 = first column, grid u2 = first row; e.g., table=[0,0;0,1])";
   Modelica.Blocks.Math.Gain gain(k = -1) annotation(Placement(transformation(extent = {{-18, -60}, {-38, -40}})));
 equation
   connect(temperatureSourceIn.port_b, volumeEvaporator.port_a) annotation(Line(points = {{-80, 26}, {-80, -40}}, color = {0, 127, 255}, smooth = Smooth.None));
@@ -50,7 +52,7 @@ equation
   connect(temperatureSourceIn.signal, HeatFlowCondenserTable.u2) annotation(Line(points = {{-70, 36}, {-64, 36}, {-64, -8}, {-54, -8}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(temperatureSinkOut.signal, PowerTable.u1) annotation(Line(points = {{70, 50}, {-60, 50}, {-60, 36}, {-54, 36}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(temperatureSinkOut.signal, HeatFlowCondenserTable.u1) annotation(Line(points = {{70, 50}, {-60, 50}, {-60, 4}, {-54, 4}}, color = {0, 0, 127}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 255}, fillColor = {249, 249, 249}, fillPattern = FillPattern.Solid), Rectangle(extent = {{-80, 80}, {-60, -80}}, lineColor = {0, 0, 255}, fillColor = {170, 213, 255}, fillPattern = FillPattern.Solid), Rectangle(extent = {{60, 80}, {80, -80}}, lineColor = {0, 0, 255}, fillColor = {255, 170, 213}, fillPattern = FillPattern.Solid), Text(extent = {{-100, 20}, {100, -20}}, lineColor = {0, 0, 255}, textString = "%name")}), Documentation(info = "<html>
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent=  {{-80, 80}, {80, -80}}, lineColor=  {0, 0, 255}, fillColor=  {249, 249, 249}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{-80, 80}, {-60, -80}}, lineColor=  {0, 0, 255}, fillColor=  {170, 213, 255}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{60, 80}, {80, -80}}, lineColor=  {0, 0, 255}, fillColor=  {255, 170, 213}, fillPattern=  FillPattern.Solid), Text(extent=  {{-100, 20}, {100, -20}}, lineColor=  {0, 0, 255}, textString=  "%name")}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Simple model of an on/off-controlled heat pump. The refrigerant circuit is a black-box model represented by tables which calculate the electric power and heat flows of the condenser depending on the source and sink temperature. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
@@ -65,3 +67,4 @@ equation
  </ul></p>
  </html>"));
 end HeatPump;
+

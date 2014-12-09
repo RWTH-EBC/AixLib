@@ -1,7 +1,9 @@
 within AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall.EnergySystem.IdealHeaters;
 
+
 model UpperFloor
-  parameter Real ratioRadHeat = 0.3 "ratio of radiative heat from total heat generated";
+  parameter Real ratioRadHeat = 0.3
+    "ratio of radiative heat from total heat generated";
   Utilities.Interfaces.Star Rad_Bedroom annotation(Placement(transformation(extent = {{-149, 80}, {-129, 100}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Con_Bedroom annotation(Placement(transformation(extent = {{-150, 49}, {-130, 69}})));
   Utilities.Interfaces.Star Rad_Children2 annotation(Placement(transformation(extent = {{-149, -25}, {-129, -5}})));
@@ -15,26 +17,34 @@ model UpperFloor
   Modelica.Blocks.Continuous.LimPID PI_bedroom(controllerType = Modelica.Blocks.Types.SimpleController.PI, k = 0.3, Ti = 10, yMax = 2000, yMin = 0) annotation(Placement(transformation(extent = {{-99, -1}, {-79, 19}})));
   Modelica.Blocks.Math.Gain gainRad_bedroom(k = ratioRadHeat) annotation(Placement(transformation(extent = {{-67, -4}, {-58, 5}})));
   Modelica.Blocks.Math.Gain gainConv_bedroom(k = 1 - ratioRadHeat) annotation(Placement(transformation(extent = {{-68, 13}, {-59, 22}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceRad_bedroom "source radiative heat bedroom" annotation(Placement(transformation(extent = {{-52, -10}, {-32, 10}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceConv_bedroom "source convective heat bedroom" annotation(Placement(transformation(extent = {{-53, 8}, {-33, 28}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceRad_bedroom
+    "source radiative heat bedroom"                                                                          annotation(Placement(transformation(extent = {{-52, -10}, {-32, 10}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceConv_bedroom
+    "source convective heat bedroom"                                                                           annotation(Placement(transformation(extent = {{-53, 8}, {-33, 28}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor tempSensor_children1 annotation(Placement(transformation(extent = {{4, 36}, {16, 48}})));
   Modelica.Blocks.Continuous.LimPID PI_children1(controllerType = Modelica.Blocks.Types.SimpleController.PI, k = 0.3, Ti = 10, yMax = 2000, yMin = 0) annotation(Placement(transformation(extent = {{24, 46}, {44, 66}})));
   Modelica.Blocks.Math.Gain gainRad_children1(k = ratioRadHeat) annotation(Placement(transformation(extent = {{56, 43}, {65, 52}})));
   Modelica.Blocks.Math.Gain gainConv_children1(k = 1 - ratioRadHeat) annotation(Placement(transformation(extent = {{55, 60}, {64, 69}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceRad_children1 "source radiative heat children1" annotation(Placement(transformation(extent = {{71, 37}, {91, 57}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceConv_children1 "source convective heat children1" annotation(Placement(transformation(extent = {{70, 55}, {90, 75}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceRad_children1
+    "source radiative heat children1"                                                                            annotation(Placement(transformation(extent = {{71, 37}, {91, 57}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceConv_children1
+    "source convective heat children1"                                                                             annotation(Placement(transformation(extent = {{70, 55}, {90, 75}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor tempSensor_bath annotation(Placement(transformation(extent = {{17, -64}, {29, -52}})));
   Modelica.Blocks.Continuous.LimPID PI_bath(controllerType = Modelica.Blocks.Types.SimpleController.PI, k = 0.3, Ti = 10, yMax = 2000, yMin = 0) annotation(Placement(transformation(extent = {{37, -54}, {57, -34}})));
   Modelica.Blocks.Math.Gain gainRad_bath(k = ratioRadHeat) annotation(Placement(transformation(extent = {{69, -57}, {78, -48}})));
   Modelica.Blocks.Math.Gain gainConv_bath(k = 1 - ratioRadHeat) annotation(Placement(transformation(extent = {{68, -40}, {77, -31}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceRad_bath "source radiative heat bath" annotation(Placement(transformation(extent = {{84, -63}, {104, -43}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceConv_bath "source convective heat bath" annotation(Placement(transformation(extent = {{83, -45}, {103, -25}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceRad_bath
+    "source radiative heat bath"                                                                       annotation(Placement(transformation(extent = {{84, -63}, {104, -43}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceConv_bath
+    "source convective heat bath"                                                                        annotation(Placement(transformation(extent = {{83, -45}, {103, -25}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor tempSensor_children2 annotation(Placement(transformation(extent = {{-123, -69}, {-111, -57}})));
   Modelica.Blocks.Continuous.LimPID PI_children2(controllerType = Modelica.Blocks.Types.SimpleController.PI, k = 0.3, Ti = 10, yMax = 2000, yMin = 0) annotation(Placement(transformation(extent = {{-103, -59}, {-83, -39}})));
   Modelica.Blocks.Math.Gain gainRad_children2(k = ratioRadHeat) annotation(Placement(transformation(extent = {{-71, -62}, {-62, -53}})));
   Modelica.Blocks.Math.Gain gainConv_children2(k = 1 - ratioRadHeat) annotation(Placement(transformation(extent = {{-72, -45}, {-63, -36}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceRad_children2 "source radiative heat children2" annotation(Placement(transformation(extent = {{-56, -68}, {-36, -48}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceConv_children2 "source convective heat children2" annotation(Placement(transformation(extent = {{-57, -50}, {-37, -30}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceRad_children2
+    "source radiative heat children2"                                                                            annotation(Placement(transformation(extent = {{-56, -68}, {-36, -48}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceConv_children2
+    "source convective heat children2"                                                                             annotation(Placement(transformation(extent = {{-57, -50}, {-37, -30}})));
 equation
   connect(tempSensor_bedroom.T, PI_bedroom.u_m) annotation(Line(points = {{-107, -5}, {-89, -5}, {-89, -3}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(PI_bedroom.y, gainRad_bedroom.u) annotation(Line(points = {{-78, 9}, {-73, 9}, {-73, 0.5}, {-67.9, 0.5}}, color = {0, 0, 127}, smooth = Smooth.None));
@@ -72,10 +82,10 @@ equation
   connect(PI_children2.u_s, TSet_UF[4]) annotation(Line(points = {{-105, -49}, {-129, -49}, {-129, 108.25}, {-71, 108.25}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(SourceConv_bedroom.port, Con_Bedroom) annotation(Line(points = {{-33, 18}, {-22, 18}, {-22, 43}, {-140, 43}, {-140, 59}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(SourceRad_bedroom.port, Rad_Bedroom) annotation(Line(points = {{-32, 0}, {-22, 0}, {-22, 43}, {-139, 43}, {-139, 90}}, color = {191, 0, 0}, smooth = Smooth.None));
-  annotation(Dialog(group = "Radiators", descriptionLabel = true), Dialog(group = "Valves", descriptionLabel = true), __Dymola_Images(Parameters(source = "AixLib/Images/House/UpperFloor_Hydraulics.png")), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-130, -100}, {130, 100}}, grid = {1, 1}), graphics = {Rectangle(extent = {{0, 73}, {127, 30}}, pattern = LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid), Rectangle(extent = {{0, -14}, {129, -71}}, pattern = LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid), Rectangle(extent = {{-129, 43}, {-22, -11}}, pattern = LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid), Rectangle(extent = {{-130, -16}, {-23, -70}}, pattern = LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid), Text(extent = {{-129, -17}, {-78, -31}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0}, fillPattern = FillPattern.Solid, textString = "Children2"), Text(extent = {{-155, 38}, {-48, 25}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0}, fillPattern = FillPattern.Solid, textString = "Bedroom"), Text(extent = {{31, -15}, {138, -28}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0}, fillPattern = FillPattern.Solid, textString = "Bath"), Text(extent = {{52, 41}, {159, 28}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0}, fillPattern = FillPattern.Solid, textString = "Children1"), Text(extent = {{-53, 95}, {-11, 72}}, lineColor = {0, 0, 0}, textString = "1 - Bedroom
+  annotation(Dialog(group = "Radiators", descriptionLabel = true), Dialog(group = "Valves", descriptionLabel = true), __Dymola_Images(Parameters(source = "AixLib/Images/House/UpperFloor_Hydraulics.png")), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-130, -100}, {130, 100}}, grid = {1, 1}), graphics = {Rectangle(extent=  {{0, 73}, {127, 30}}, pattern=  LinePattern.None, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{0, -14}, {129, -71}}, pattern=  LinePattern.None, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{-129, 43}, {-22, -11}}, pattern=  LinePattern.None, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{-130, -16}, {-23, -70}}, pattern=  LinePattern.None, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid), Text(extent=  {{-129, -17}, {-78, -31}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid, textString=  "Children2"), Text(extent=  {{-155, 38}, {-48, 25}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid, textString=  "Bedroom"), Text(extent=  {{31, -15}, {138, -28}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid, textString=  "Bath"), Text(extent=  {{52, 41}, {159, 28}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid, textString=  "Children1"), Text(extent=  {{-53, 95}, {-11, 72}}, lineColor=  {0, 0, 0}, textString=  "1 - Bedroom
  2- Children1
  3 - Bath
- 4 - Children2")}), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-130, -100}, {130, 100}}, grid = {1, 1}), graphics = {Rectangle(extent = {{-122, 91}, {120, -80}}, lineColor = {255, 0, 0}, fillColor = {135, 135, 135}, fillPattern = FillPattern.Solid), Line(points = {{-17, 22}, {-17, 44}}, color = {255, 0, 0}, thickness = 1, smooth = Smooth.None), Line(points = {{-102, 21}, {101, 21}, {101, -7}}, color = {255, 0, 0}, smooth = Smooth.None, thickness = 1), Line(points = {{-101, 12}, {92, 12}, {92, -7}}, color = {0, 0, 255}, smooth = Smooth.None, thickness = 1), Line(points = {{-24, 12}, {-24, 34}}, color = {0, 0, 255}, thickness = 1, smooth = Smooth.None), Text(extent = {{-79, 66}, {-37, 43}}, lineColor = {0, 0, 0}, textString = "1 - Bedroom
+ 4 - Children2")}), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-130, -100}, {130, 100}}, grid = {1, 1}), graphics = {Rectangle(extent=  {{-122, 91}, {120, -80}}, lineColor=  {255, 0, 0}, fillColor=  {135, 135, 135}, fillPattern=  FillPattern.Solid), Line(points=  {{-17, 22}, {-17, 44}}, color=  {255, 0, 0}, thickness=  1, smooth=  Smooth.None), Line(points=  {{-102, 21}, {101, 21}, {101, -7}}, color=  {255, 0, 0}, smooth=  Smooth.None, thickness=  1), Line(points=  {{-101, 12}, {92, 12}, {92, -7}}, color=  {0, 0, 255}, smooth=  Smooth.None, thickness=  1), Line(points=  {{-24, 12}, {-24, 34}}, color=  {0, 0, 255}, thickness=  1, smooth=  Smooth.None), Text(extent=  {{-79, 66}, {-37, 43}}, lineColor=  {0, 0, 0}, textString=  "1 - Bedroom
  2- Children1
  3 - Bath
  4 - Children2")}), Documentation(revisions = "<html>

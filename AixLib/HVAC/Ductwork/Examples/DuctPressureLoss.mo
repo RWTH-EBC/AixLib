@@ -1,5 +1,4 @@
 within AixLib.HVAC.Ductwork.Examples;
-
 model DuctPressureLoss "Example for Duct"
   import Anlagensimulation_WS1314 = AixLib.HVAC;
   extends Modelica.Icons.Example;
@@ -26,3 +25,4 @@ equation
  </ul></p>
  </html>"));
 end DuctPressureLoss;
+

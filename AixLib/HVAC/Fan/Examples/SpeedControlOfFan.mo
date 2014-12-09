@@ -1,5 +1,4 @@
 within AixLib.HVAC.Fan.Examples;
-
 model SpeedControlOfFan "Fan Speed Control Example"
   extends Modelica.Icons.Example;
   inner BaseParameters baseParameters(T0 = 298.15) annotation(Placement(transformation(extent = {{80, 80}, {100, 100}})));
@@ -31,3 +30,4 @@ equation
  </ul></p>
  </html>"));
 end SpeedControlOfFan;
+

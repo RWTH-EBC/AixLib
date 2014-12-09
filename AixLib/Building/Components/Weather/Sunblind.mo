@@ -1,9 +1,10 @@
 within AixLib.Building.Components.Weather;
-
 model Sunblind "Reduces beam at Imax"
   parameter Integer n = 4 "Number of orientations";
-  parameter Modelica.SIunits.TransmissionCoefficient gsunblind[n] = {1, 1, 1, 1} "Total energy transmittances if sunblind is closed";
-  parameter Modelica.SIunits.RadiantEnergyFluenceRate Imax = 100 "Intensity at which the sunblind closes";
+  parameter Modelica.SIunits.TransmissionCoefficient gsunblind[n] = {1, 1, 1, 1}
+    "Total energy transmittances if sunblind is closed";
+  parameter Modelica.SIunits.RadiantEnergyFluenceRate Imax = 100
+    "Intensity at which the sunblind closes";
   Utilities.Interfaces.SolarRad_in Rad_In[n] annotation(Placement(transformation(extent = {{-100, 0}, {-80, 20}})));
   Utilities.Interfaces.SolarRad_out Rad_Out[n] annotation(Placement(transformation(extent = {{80, 0}, {100, 20}})));
   Modelica.Blocks.Interfaces.RealOutput sunblindonoff[n] annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin = {8, -100}), iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin = {0, -90})));
@@ -20,7 +21,49 @@ equation
       sunblindonoff[i] = 0;
     end if;
   end for;
-  annotation(Diagram(graphics), Icon(graphics = {Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 0}, fillColor = {87, 205, 255}, fillPattern = FillPattern.Solid), Rectangle(extent = {{-80, 80}, {80, 66}}, lineColor = {0, 0, 0}, fillColor = {135, 135, 135}, fillPattern = FillPattern.HorizontalCylinder), Ellipse(extent = {{-36, 44}, {36, -22}}, lineColor = {255, 255, 0}, fillColor = {255, 255, 0}, fillPattern = FillPattern.Solid), Rectangle(extent = {{-80, 16}, {80, 2}}, lineColor = {0, 0, 0}, fillColor = {135, 135, 135}, fillPattern = FillPattern.HorizontalCylinder), Rectangle(extent = {{-80, 32}, {80, 18}}, lineColor = {0, 0, 0}, fillColor = {135, 135, 135}, fillPattern = FillPattern.HorizontalCylinder), Rectangle(extent = {{-80, 48}, {80, 34}}, lineColor = {0, 0, 0}, fillColor = {135, 135, 135}, fillPattern = FillPattern.HorizontalCylinder), Rectangle(extent = {{-80, 64}, {80, 50}}, lineColor = {0, 0, 0}, fillColor = {135, 135, 135}, fillPattern = FillPattern.HorizontalCylinder), Rectangle(extent = {{-80, 80}, {-76, 2}}, lineColor = {0, 0, 0}, fillPattern = FillPattern.Solid, fillColor = {0, 0, 0}), Rectangle(extent = {{76, 80}, {80, 2}}, lineColor = {0, 0, 0}, fillPattern = FillPattern.Solid, fillColor = {0, 0, 0}), Rectangle(extent = {{-56, -14}, {-54, -44}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0}, fillPattern = FillPattern.Solid), Line(points = {{-59, -17}, {-55, -9}, {-51, -17}}, color = {0, 0, 0}, smooth = Smooth.None, thickness = 1), Line(points = {{-51, -41}, {-55, -49}, {-59, -41}}, color = {0, 0, 0}, smooth = Smooth.None, thickness = 1), Rectangle(extent = {{-76, -64}, {76, -76}}, lineColor = {0, 127, 0}, fillColor = {0, 127, 0}, fillPattern = FillPattern.Solid), Text(extent = {{-70, -56}, {-12, -70}}, lineColor = {0, 0, 0}, lineThickness = 1, fillColor = {0, 0, 0}, fillPattern = FillPattern.Solid, textString = "Imax"), Rectangle(extent = {{-2, 80}, {2, -80}}, lineColor = {0, 0, 0}, fillPattern = FillPattern.Solid, fillColor = {0, 0, 0}, origin = {0, -78}, rotation = -90), Rectangle(extent = {{-80, 2}, {-76, -76}}, lineColor = {0, 0, 0}, fillPattern = FillPattern.Solid, fillColor = {0, 0, 0}), Rectangle(extent = {{76, 2}, {80, -76}}, lineColor = {0, 0, 0}, fillPattern = FillPattern.Solid, fillColor = {0, 0, 0}), Rectangle(extent = {{-2, 80}, {2, -80}}, lineColor = {0, 0, 0}, fillPattern = FillPattern.Solid, fillColor = {0, 0, 0}, origin = {0, 78}, rotation = -90), Rectangle(extent = {{46, -52}, {52, -64}}, lineColor = {144, 72, 0}, fillColor = {144, 72, 0}, fillPattern = FillPattern.Solid), Ellipse(extent = {{42, -38}, {56, -54}}, lineColor = {0, 127, 0}, fillColor = {0, 127, 0}, fillPattern = FillPattern.Solid)}), Documentation(info = "<html>
+  annotation(Diagram(graphics), Icon(coordinateSystem(preserveAspectRatio=false,
+          extent={{-100,-100},{100,100}}),
+                                     graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor=
+              {0,0,0},                                                                                             fillColor=
+              {170,213,255},
+            fillPattern=FillPattern.HorizontalCylinder),                                                                                                    Rectangle(extent = {{-80, 80}, {80, 66}}, lineColor = {0, 0, 0}, fillColor = {135, 135, 135},
+            fillPattern =                                                                                                    FillPattern.HorizontalCylinder), Ellipse(extent = {{-36, 44}, {36, -22}}, lineColor=
+              {255,221,0},                                                                                                    fillColor=
+              {255,221,0},
+            fillPattern=FillPattern.Solid),                                                                                                    Rectangle(extent = {{-80, 16}, {80, 2}}, lineColor = {0, 0, 0}, fillColor = {135, 135, 135},
+            fillPattern =                                                                                                    FillPattern.HorizontalCylinder), Rectangle(extent = {{-80, 32}, {80, 18}}, lineColor = {0, 0, 0}, fillColor = {135, 135, 135},
+            fillPattern =                                                                                                    FillPattern.HorizontalCylinder), Rectangle(extent = {{-80, 48}, {80, 34}}, lineColor = {0, 0, 0}, fillColor = {135, 135, 135},
+            fillPattern =                                                                                                    FillPattern.HorizontalCylinder), Rectangle(extent = {{-80, 64}, {80, 50}}, lineColor = {0, 0, 0}, fillColor = {135, 135, 135},
+            fillPattern =                                                                                                    FillPattern.HorizontalCylinder), Rectangle(extent = {{-80, 80}, {-76, 2}}, lineColor = {0, 0, 0},
+            fillPattern =                                                                                                    FillPattern.Solid, fillColor = {0, 0, 0}), Rectangle(extent = {{76, 80}, {80, 2}}, lineColor = {0, 0, 0},
+            fillPattern =                                                                                                    FillPattern.Solid, fillColor = {0, 0, 0}),                                                                                                    Rectangle(extent = {{-76, -64}, {76, -76}}, lineColor=
+              {0,127,0},                                                                                                    fillColor=
+              {0,127,0},
+            fillPattern=FillPattern.HorizontalCylinder),                                                                                                    Rectangle(extent = {{-2, 80}, {2, -80}}, lineColor = {0, 0, 0},
+            fillPattern =                                                                                                    FillPattern.Solid, fillColor = {0, 0, 0}, origin = {0, 78}, rotation = -90), Rectangle(extent = {{46, -52}, {52, -64}}, lineColor=
+              {180,90,0},                                                                                                    fillColor=
+              {180,90,0},
+            fillPattern=FillPattern.VerticalCylinder),                                                                                                    Ellipse(extent={{
+              38,-32},{60,-54}},                                                                                                    lineColor=
+              {0,158,0},                                                                                                    fillColor=
+              {0,158,0},
+            fillPattern=FillPattern.Sphere),                                                                                                    Rectangle(extent={{
+              -76,-70},{76,-76}},                                                                                                    lineColor=
+              {0,127,0},                                                                                                    fillColor=
+              {0,127,0},
+            fillPattern=FillPattern.Solid),                                                                                                    Rectangle(extent = {{76, 2}, {80, -76}}, lineColor = {0, 0, 0},
+            fillPattern =                                                                                                    FillPattern.Solid, fillColor = {0, 0, 0}),
+                                                                                                    Rectangle(extent = {{-80, 2}, {-76, -76}}, lineColor = {0, 0, 0},
+            fillPattern =                                                                                                    FillPattern.Solid, fillColor = {0, 0, 0}),
+                                                                                                    Rectangle(extent = {{-2, 80}, {2, -80}}, lineColor = {0, 0, 0},
+            fillPattern =                                                                                                    FillPattern.Solid, fillColor = {0, 0, 0}, origin = {0, -78}, rotation = -90),
+        Text(
+          extent={{-72,112},{74,76}},
+          lineColor={0,0,255},
+          lineThickness=0.5,
+          fillColor={236,99,92},
+          fillPattern=FillPattern.Solid,
+          textString="%name")}),                                                                                                    Documentation(info = "<html>
  <p><h4><font color=\"#008000\">Overview</font></h4></p>
  <p>This model represents a sunblind to reduce the vectorial radiance on facades, windows. etc. </p>
  <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
@@ -43,3 +86,4 @@ equation
  </ul></p>
  </html>"));
 end Sunblind;
+

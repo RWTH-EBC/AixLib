@@ -1,5 +1,6 @@
 within AixLib.Building.Components.Examples.WindowsDoors;
 
+
 model DoorSimple
   extends Modelica.Icons.Example;
   Components.WindowsDoors.Door doorSimple(eps = 1, door_area = 10, T0 = 293.15) annotation(Placement(transformation(extent = {{-24, -4}, {12, 28}})));

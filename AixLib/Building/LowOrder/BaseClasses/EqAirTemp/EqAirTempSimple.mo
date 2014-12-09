@@ -15,11 +15,7 @@ equation
   T_sky=((E_sky/(0.93*5.67))^0.25)*100;//-273.15
 
   T_eqLWs=((T_earth-T_air)*(1-phiprivate)+(T_sky-T_air)*phiprivate)*(eowo*alpharad/(alphaowo*0.93));
-  if withSunblind then
-    T_eqLW=T_eqLWs*abs(sunblindsig-unitvec);
-  else
-    T_eqLW=T_eqLWs*unitvec;
-  end if;
+  T_eqLW=T_eqLWs*abs(sunblindsig-unitvec);
 
   T_eqSW=solarRad_in.I*aowo/alphaowo;
 

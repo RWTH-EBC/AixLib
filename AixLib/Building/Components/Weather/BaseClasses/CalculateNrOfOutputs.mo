@@ -1,5 +1,6 @@
 within AixLib.Building.Components.Weather.BaseClasses;
 
+
 function CalculateNrOfOutputs "Calculates number of outputs"
   input Boolean Cloud_cover "Cloud cover";
   input Boolean Wind_dir "Wind direction";
@@ -9,7 +10,8 @@ function CalculateNrOfOutputs "Calculates number of outputs"
   input Boolean Mass_frac "Mass fraction of water in dry air";
   input Boolean Rel_hum "Relative humidity";
   input Boolean Sky_rad "Long wave radiation of the sky on horizontal surface";
-  input Boolean Ter_rad "Long wave terrestrial radiation from horizontal surface";
+  input Boolean Ter_rad
+    "Long wave terrestrial radiation from horizontal surface";
   output Integer m "Number of Outputs";
 algorithm
   m := 0;

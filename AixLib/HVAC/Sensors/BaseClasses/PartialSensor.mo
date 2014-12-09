@@ -1,5 +1,6 @@
 within AixLib.HVAC.Sensors.BaseClasses;
 
+
 partial model PartialSensor "Base class for sensors"
   extends Interfaces.TwoPort;
   Modelica.Blocks.Interfaces.RealOutput signal "Output signal from sensor" annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {0, 100})));

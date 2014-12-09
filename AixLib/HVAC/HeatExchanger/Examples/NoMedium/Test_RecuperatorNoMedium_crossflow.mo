@@ -1,5 +1,4 @@
 within AixLib.HVAC.HeatExchanger.Examples.NoMedium;
-
 model Test_RecuperatorNoMedium_crossflow
   extends Modelica.Icons.Example;
   Modelica.Blocks.Sources.Ramp m2flow(duration = 1, startTime = 1.5, offset = recuperatorNoMedium3.m_flow20, height = 0.19306019 - 0.053254238) annotation(Placement(transformation(extent = {{-72, 0}, {-52, 20}})));
@@ -26,10 +25,11 @@ equation
   connect(recuperatorNoMedium3.T2out, subtract2.u2) annotation(Line(points = {{-10, 8}, {-16, 8}, {-16, 44}, {-21, 44}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(T2out_ideal.y, division2.u2) annotation(Line(points = {{-11, 50}, {-16, 50}, {-16, 60}, {-36, 60}, {-36, 44}, {-41, 44}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(subtract2.y, division2.u1) annotation(Line(points = {{-32.5, 47}, {-38.25, 47}, {-38.25, 50}, {-41, 50}}, color = {0, 0, 127}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent = {{30, -74}, {98, -96}}, lineColor = {135, 135, 135}, textString = "1: counter-current flow
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent=  {{30, -74}, {98, -96}}, lineColor=  {135, 135, 135}, textString=  "1: counter-current flow
  2: co-current flow
- 3: cross flow", horizontalAlignment = TextAlignment.Left)}), experiment(StopTime = 3), __Dymola_experimentSetupOutput, Documentation(info = "<html>
+ 3: cross flow", horizontalAlignment=  TextAlignment.Left)}), experiment(StopTime = 3), __Dymola_experimentSetupOutput, Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Testing cross flow charakteristic (no explicit formua available). Provide means to compare with manufacturer data. Manufacturer data is stored in files in the Examples package. You can also switch to co-current flow and observe the differences.</p>
  </html>"));
 end Test_RecuperatorNoMedium_crossflow;
+

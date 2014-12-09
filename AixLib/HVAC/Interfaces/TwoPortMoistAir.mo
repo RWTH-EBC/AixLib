@@ -1,7 +1,7 @@
 within AixLib.HVAC.Interfaces;
-
 partial model TwoPortMoistAir "Component with two moist air ports"
-  Modelica.SIunits.PressureDifference dp "Pressure drop between the two ports (= port_a.p - port_b.p)";
+  Modelica.SIunits.PressureDifference dp
+    "Pressure drop between the two ports (= port_a.p - port_b.p)";
   PortMoistAir_a portMoistAir_a annotation(Placement(transformation(extent = {{-110, -10}, {-90, 10}})));
   PortMoistAir_b portMoistAir_b annotation(Placement(transformation(extent = {{90, -10}, {110, 10}})));
 equation
@@ -16,3 +16,4 @@ equation
  </ul></p>
  </html>"));
 end TwoPortMoistAir;
+
