@@ -69,31 +69,41 @@ equation
             fillPattern =                                                                                                    FillPattern.Solid), Ellipse(extent = {{43, -29}, {41, -27}}, fillColor = {0, 0, 0},
             fillPattern =                                                                                                    FillPattern.Solid, pattern = LinePattern.None, lineColor = {0, 0, 0}), Ellipse(extent = {{45, -29}, {43, -27}}, fillColor = {0, 0, 0},
             fillPattern =                                                                                                    FillPattern.Solid, pattern = LinePattern.None, lineColor = {0, 0, 0}), Line(points = {{40, -29}, {40, -29}, {40, -29}, {42, -31}, {44, -31}, {46, -29}, {46, -29}, {46, -29}}, smooth = Smooth.None, color = {0, 0, 0}, thickness = 1), Rectangle(extent = {{39, -32}, {47, -44}}, fillColor = {255, 0, 0},
-            fillPattern =                                                                                                    FillPattern.Solid, pattern = LinePattern.None), Text(extent = {{-90, 134}, {98, 76}}, lineColor = {127, 0, 127}, textString = "%name")}), Documentation(info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <ul>
- <li>The ThermalZone reflects the VDI 6007 components (in ThermalZonePhysics) and adds some standards parts of the EBC library for easy simulation with persons, lights and maschines.</li>
- <li>Inputs: real weather vector, as defined in <a href=\"AixLib.Building.LowOrder.BaseClasses.EqAirTemp\">EqAirTemp</a>; vectorial solarRad_in, the solar radiation (diffuse and direct) for all n directions; real infiltration/ventilation as defined in <a href=\"AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel\">ReducedOrderModel</a> and real inner loads input for profiles. </li>
- <li>Parameters: All parameters are collected in a ZoneRecord (see <a href=\"AixLib.DataBase.Buildings.ZoneBaseRecord\">ZoneBaseRecord</a>). </li>
- </ul>
- <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars5.png\"/></p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>ThermalZone is thought for easy computations to get information about air temperatures and heating profiles. Therefore, some simplifications have been implemented (one air node, one inner wall, one outer wall). </p>
- <p>All theory is documented in VDI 6007. How to gather the physical parameters for the thermal zone is documented in this standard. It is possible to get this information out of the normal information of a building. Various data can be used, depending on the abilities of the preprocessing tools. </p>
- <p><br><b><font style=\"color: #008000; \">References</font></b></p>
- <ul>
- <li>German Association of Engineers: Guideline VDI 6007-1, March 2012: Calculation of transient thermal response of rooms and buildings - Modelling of rooms.</li>
- <li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D. (2014): Low order thermal network models for dynamic simulations of buildings on city district scale. In: Building and Environment 73, p. 223&ndash;231. DOI: <a href=\"http://dx.doi.org/10.1016/j.buildenv.2013.12.016\">10.1016/j.buildenv.2013.12.016</a></p>.</li>
- </ul>
- <h4><span style=\"color:#008000\">Example Results</span></h4>
- <p>See <a href=\"Examples\">Examples</a> for some results. </p>
- </html>", revisions = "<html>
+            fillPattern =                                                                                                    FillPattern.Solid, pattern = LinePattern.None), Text(extent = {{-90, 134}, {98, 76}}, lineColor = {127, 0, 127}, textString = "%name")}), Documentation(info="<html>
+<p>The ThermalZone reflects the VDI 6007 components (in ThermalZonePhysics) and adds some standards parts of the EBC library for easy simulation with persons, lights and maschines.</p>
+<p><br>The partial class contains following components: </p>
+<ul>
+<li>real weather vector, as defined in <a href=\"AixLib.Building.LowOrder.BaseClasses.EqAirTemp\">EqAirTemp</a></li>
+<li>vectorial solarRad_in, the solar radiation (diffuse and direct) for all n directions</li>
+<li>real infiltration/ventilation as defined in <a href=\"AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel\">ReducedOrderModel</a></li>
+<li>real inner loads input for profiles</li>
+<li>All parameters are collected in a ZoneRecord (see <a href=\"AixLib.DataBase.Buildings.ZoneBaseRecord\">ZoneBaseRecord</a>). </li>
+</ul>
+<h4>Main equations</h4>
+<p>The concept is described in VDI 6007. A reaction of the room due to internal heat sources and sinks is caused, in detail, by persons, lighting, machines and equipment, material transport and other heat sources and sinks</p>
+<h4>Assumption and limitations</h4>
+<p>ThermalZone is thought for easy computations to get information about air temperatures and heating profiles. Therefore, some simplifications have been implemented (one air node, one inner wall, one outer wall). </p>
+<h4>Typical use and important parameters</h4>
+<p>All theory is documented in VDI 6007. How to gather the physical parameters for the thermal zone is documented in this standard. It is possible to get this information out of the normal information of a building. Various data can be used, depending on the abilities of the preprocessing tools. </p>
+<h4>Validation</h4>
+<p><br>The model is verified with the VDI 6007</p>
+<h4>Implementation</h4>
+<p><br><b>References</b></p>
+<ul>
+<li>German Association of Engineers: Guideline VDI 6007-1, March 2012: Calculation of transient thermal response of rooms and buildings - Modelling of rooms. </li>
+<li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D. (2014): Low order thermal network models for dynamic simulations of buildings on city district scale. In: Building and Environment 73, p. 223&ndash;231. DOI: <a href=\"http://dx.doi.org/10.1016/j.buildenv.2013.12.016\">10.1016/j.buildenv.2013.12.016</a>. </li>
+</ul>
+<h4>Example Results</h4>
+<p>See <a href=\"Examples\">Examples</a> for some results. </p>
+</html>",  revisions="<html>
  <ul>
    <li><i>March, 2012&nbsp;</i>
           by Moritz Lauster:<br>
           Implemented</li>
  </ul>
+ <p><ul>
+ <li><i>December 2014,&nbsp;</i> by Steffen Riebling:<br/>Revised documentation.</li>
+ </ul></p>
  </html>"));
 end ThermalZone;
 

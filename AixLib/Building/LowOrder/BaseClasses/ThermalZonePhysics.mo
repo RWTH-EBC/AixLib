@@ -131,28 +131,44 @@ equation
             lineThickness =                                                                                                    1, fillColor = {255, 255, 255},
             fillPattern =                                                                                                    FillPattern.Solid), Ellipse(extent = {{-50, 72}, {-22, 44}}, lineColor = {255, 255, 0},
             lineThickness =                                                                                                    1, fillColor = {255, 255, 0},
-            fillPattern =                                                                                                    FillPattern.Solid), Line(points = {{-18, 54}, {-6, 44}}, color = {255, 255, 0}, thickness = 1, smooth = Smooth.None), Line(points = {{-26, 44}, {-18, 32}}, color = {255, 255, 0}, thickness = 1, smooth = Smooth.None), Line(points = {{-36, 40}, {-36, 26}}, color = {255, 255, 0}, thickness = 1, smooth = Smooth.None), Line(points = {{-48, -58}, {-50, -52}, {-46, -48}, {-48, -42}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier), Line(points = {{-40, -58}, {-42, -52}, {-38, -48}, {-40, -42}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier), Line(points = {{-32, -58}, {-34, -52}, {-30, -48}, {-32, -42}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier), Line(points = {{-50, -44}, {-48, -40}, {-46, -44}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier), Line(points = {{-42, -44}, {-40, -40}, {-38, -44}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier), Line(points = {{-34, -44}, {-32, -40}, {-30, -44}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier)}), experiment(StopTime = 864000, Interval = 3599), experimentSetupOutput, Documentation(info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <ul>
- <li>This model connects <a href=\"AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel\">ReducedOrderModel</a> with <a href=\"AixLib.Building.Components.Weather.Sunblind\">Sunblind</a> and <a href=\"AixLib.Building.LowOrder.BaseClasses.EqAirTemp\">EqAirTemp</a>. All this models have been developed in the context of VDI 6007 to have the whole VDI 6007 model in Dymola. ThermalZonePhysics reflects all components described in the standard. </li>
- <li>Additionally some other parts are used, like <a href=\"AixLib.Building.LowOrder.BaseClasses.SolarRadWeightedSum\">SolarRadWeightedSum</a>. They are necessary for an easy handling of the complex model. </li>
- <li>Inputs: real weather vector, as defined in <a href=\"AixLib.Building.LowOrder.BaseClasses.EqAirTemp\">EqAirTemp</a>; vectorial SolarRad_in, the solar radiation (diffuse and direct) for all n directions; real infiltration/ventilation as defined in <a href=\"AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel\">ReducedOrderModel</a>; one thermal and one star input for inner loads, heating, etc. . </li>
- <li>Parameters: Most of the parameters are geometric and building pyhsic parameters and are used in the ReducedOrderModel or in the eqAirTemp component. See the documentation of the submodels or VDI 6007 for more information.</li>
- </ul>
- <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars5.png\"/></p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>The concept is desrcibed in VDI 6007 and in the submodels. Basically, ThermalZonePhysics is thought for the easy computation of room temperatures and heat load profiles for thermal zones, e.g. buildings. To reduce computation time, number of parameters and work, some simplifications are implemented into the model (only one air node, ideal building technology, one outer wall, one inner wall). See VDI 6007 for more information.</p>
- <p><br><b><font style=\"color: #008000; \">References</font></b></p>
- <ul>
- <li>German Association of Engineers: Guideline VDI 6007-1, March 2012: Calculation of transient thermal response of rooms and buildings - Modelling of rooms.</li>
- <li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D. (2014): Low order thermal network models for dynamic simulations of buildings on city district scale. In: Building and Environment 73, p. 223&ndash;231. DOI: <a href=\"http://dx.doi.org/10.1016/j.buildenv.2013.12.016\">10.1016/j.buildenv.2013.12.016</a></p>.</li>
- </ul>
- <h4><span style=\"color:#008000\">Example Results</span></h4>
- <p>See <a href=\"AixLib.Building.LowOrder.Validation\">Validation</a> for some results.</p>
- </html>", revisions = "<html>
+            fillPattern =                                                                                                    FillPattern.Solid), Line(points = {{-18, 54}, {-6, 44}}, color = {255, 255, 0}, thickness = 1, smooth = Smooth.None), Line(points = {{-26, 44}, {-18, 32}}, color = {255, 255, 0}, thickness = 1, smooth = Smooth.None), Line(points = {{-36, 40}, {-36, 26}}, color = {255, 255, 0}, thickness = 1, smooth = Smooth.None), Line(points = {{-48, -58}, {-50, -52}, {-46, -48}, {-48, -42}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier), Line(points = {{-40, -58}, {-42, -52}, {-38, -48}, {-40, -42}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier), Line(points = {{-32, -58}, {-34, -52}, {-30, -48}, {-32, -42}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier), Line(points = {{-50, -44}, {-48, -40}, {-46, -44}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier), Line(points = {{-42, -44}, {-40, -40}, {-38, -44}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier), Line(points = {{-34, -44}, {-32, -40}, {-30, -44}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier)}), experiment(StopTime = 864000, Interval = 3599), experimentSetupOutput, Documentation(info="<html>
+<p>ThermalZonePhysics connects <a href=\"AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel\">ReducedOrderModel</a> with <a href=\"AixLib.Building.Components.Weather.Sunblind\">Sunblind</a> and <a href=\"AixLib.Building.LowOrder.BaseClasses.EqAirTemp\">EqAirTemp</a>.</p>
+<p>The partial class contains following components: </p>
+<ul>
+<li><a href=\"AixLib.Building.Components.Weather.Sunblind\">Sunblind</a></li>
+<li><a href=\"modelica://AixLib/Building/LowOrder/BaseClasses/SolarRadWeightedSum.mo\">SolarRadWeightedSum</a></li>
+<li>real weather vector, as defined in <a href=\"AixLib.Building.LowOrder.BaseClasses.EqAirTemp\">EqAirTemp</a></li>
+<li>vectorial SolarRad_in, the solar radiation (diffuse and direct) for all n directions</li>
+<li>real infiltration/ventilation as defined in <a href=\"AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel\">ReducedOrderModel</a></li>
+<li>one thermal and one star input for inner loads, heating, etc. . </li>
+</ul>
+<h4>Main equations</h4>
+<p><br>There are no equations.</p>
+<h4>Assumption and limitations</h4>
+<p><br>The concept is desrcibed in VDI 6007 and in the submodels. Basically, ThermalZonePhysics is thought for the easy computation of room temperatures and heat load profiles for thermal zones, e.g. buildings. To reduce computation time, number of parameters and work, some simplifications are implemented into the model (only one air node, ideal building technology, one outer wall, one inner wall). See VDI 6007 for more information. </p>
+<h4>Typical use and important parameters</h4>
+<p><br>Most of the parameters are geometric and building pyhsic parameters and are used in the ReducedOrderModel or in the eqAirTemp component. See the documentation of the submodels or VDI 6007 for more information. </p>
+<p><br><b>Options</b> </p>
+<ul>
+<li>Outer walls are considered</li>
+<li>Outer walls and windows are considered </li>
+</ul>
+<h4>Validation</h4>
+<p>All this models have been developed in the context of VDI 6007 to have the whole VDI 6007 model in Dymola. ThermalZonePhysics reflects all components described in the standard. </p>
+<h4>Implementation</h4>
+<h4>References</h4>
+<ul>
+<li>German Association of Engineers: Guideline VDI 6007-1, March 2012: Calculation of transient thermal response of rooms and buildings - Modelling of rooms. </li>
+<li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D. (2014): Low order thermal network models for dynamic simulations of buildings on city district scale. In: Building and Environment 73, p. 223&ndash;231. DOI: <a href=\"http://dx.doi.org/10.1016/j.buildenv.2013.12.016\">10.1016/j.buildenv.2013.12.016</a>. </li>
+</ul>
+<h4>Example Results</h4>
+<p>See <a href=\"AixLib.Building.LowOrder.Validation\">Validation</a> for some results. </p>
+</html>",  revisions="<html>
  <p><ul>
  <li><i>January 2012,&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
+ </ul></p>
+ <p><ul>
+ <li><i>December 2014,&nbsp;</i> by Steffen Riebling:<br/>Revised documentation.</li>
  </ul></p>
  </html>"));
 end ThermalZonePhysics;
