@@ -1,7 +1,14 @@
 within AixLib.DataBase.Walls.EnEV2009.Ceiling;
 
-record CEcellar_EnEV2009_SML_loHalf "Ceiling cellar after EnEV 2009, for building of type S (schwer), M (mittel) and L (leicht), lower half"
-  extends WallBaseDataDefinition(n(min = 1) = 3 "Number of wall layers", d = {0.02, 0.16, 0.06} "Thickness of wall layers", rho = {120, 2300, 120} "Density of wall layers", lambda = {0.045, 2.3, 0.04} "Thermal conductivity of wall layers", c = {1030, 1000, 1030} "Specific heat capacity of wall layers", eps = 0.95 "Emissivity of inner wall surface");
+
+record CEcellar_EnEV2009_SML_loHalf
+  "Ceiling cellar after EnEV 2009, for building of type S (schwer), M (mittel) and L (leicht), lower half"
+  extends WallBaseDataDefinition(n(min = 1) = 3 "Number of wall layers", d = {0.02, 0.16, 0.06}
+      "Thickness of wall layers",                                                                                           rho = {120, 2300, 120}
+      "Density of wall layers",                                                                                                    lambda = {0.045, 2.3, 0.04}
+      "Thermal conductivity of wall layers",                                                                                                    c = {1030, 1000, 1030}
+      "Specific heat capacity of wall layers",                                                                                                    eps = 0.95
+      "Emissivity of inner wall surface");
   annotation(Documentation(revisions = "<html>
  <p><ul>
  <li><i>September 5, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>

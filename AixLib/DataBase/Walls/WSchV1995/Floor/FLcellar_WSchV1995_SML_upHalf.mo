@@ -1,7 +1,14 @@
 within AixLib.DataBase.Walls.WSchV1995.Floor;
 
-record FLcellar_WSchV1995_SML_upHalf "Floor towards cellar after WSchV1995, for building of type S (schwer), M (mittel) and L (leicht), upper half."
-  extends WallBaseDataDefinition(n(min = 1) = 2 "Number of wall layers", d = {0.02, 0.06} "Thickness of wall layers", rho = {120, 2000} "Density of wall layers", lambda = {0.04, 1.4} "Thermal conductivity of wall layers", c = {1030, 1000} "Specific heat capacity of wall layers", eps = 0.95 "Emissivity of inner wall surface");
+
+record FLcellar_WSchV1995_SML_upHalf
+  "Floor towards cellar after WSchV1995, for building of type S (schwer), M (mittel) and L (leicht), upper half."
+  extends WallBaseDataDefinition(n(min = 1) = 2 "Number of wall layers", d = {0.02, 0.06}
+      "Thickness of wall layers",                                                                                     rho = {120, 2000}
+      "Density of wall layers",                                                                                                    lambda = {0.04, 1.4}
+      "Thermal conductivity of wall layers",                                                                                                    c = {1030, 1000}
+      "Specific heat capacity of wall layers",                                                                                                    eps = 0.95
+      "Emissivity of inner wall surface");
   annotation(Documentation(revisions = "<html>
  <p><ul>
  <li><i>September 5, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>

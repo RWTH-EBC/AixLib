@@ -1,4 +1,5 @@
 within AixLib;
+<<<<<<< HEAD
 package Utilities "Package with utility functions such as for I/O"
   extends Modelica.Icons.Package;
 
@@ -23,4 +24,15 @@ Icon(coordinateSystem(extent={{-100.0,-100.0},{100.0,100.0}}), graphics={
       fillColor={255,255,255},
       fillPattern=FillPattern.Solid,
       points={{-15.0,87.273},{15.0,87.273},{20.0,82.273},{20.0,27.273},{10.0,17.273},{10.0,7.273},{20.0,2.273},{20.0,-2.727},{5.0,-2.727},{5.0,-77.727},{10.0,-87.727},{5.0,-112.727},{-5.0,-112.727},{-10.0,-87.727},{-5.0,-77.727},{-5.0,-2.727},{-20.0,-2.727},{-20.0,2.273},{-10.0,7.273},{-10.0,17.273},{-20.0,27.273},{-20.0,82.273}})}));
+=======
+package Utilities "Package contains basic utility models used for simple heat transfer processes, sources and sensors related to the field of building and building systems performance simulation."
+  extends Modelica.Icons.Package;
+
+
+  annotation(preferedView = "diagram", conversion(from(version = "0.2", script = "modelica://BaseLib/Conversions/ConvertFromBaseLib_0.2_To_1.2.mos"), from(version = "1.1", script = "modelica://BaseLib/Conversions/ConvertFromBaseLib_1.1_To_1.2.mos"), noneFromVersion = "1.2.1", from(version = "2.0", script = "modelica://BaseLib/Conversions/ConvertFromBaseLib_2.0_To_2.1.mos"), from(version = "2.1", script = "modelica://BaseLib/Conversions/ConvertFromBaseLib_2.1_To_2.2.mos")), uses(Modelica(version = "3.2")), Icon, Diagram, Documentation(revisions = "<html>
+ </html>", info = "<html>
+ <h4><span style=\"color:#008000\">Overview</span></h4>
+ <p><br>This package contains basic utility models used for simple heat transfer processes, sources and sensors related to the field of building and building systems performance simulation.</p>
+ </html>"));
+>>>>>>> effab5abf9a02ebad902abf2f4de1d98ba2817ef
 end Utilities;

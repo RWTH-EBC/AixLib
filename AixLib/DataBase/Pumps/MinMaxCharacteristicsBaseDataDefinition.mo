@@ -1,6 +1,8 @@
 within AixLib.DataBase.Pumps;
 
-record MinMaxCharacteristicsBaseDataDefinition "TYPE: Table with Head = f(V_flow) min amd max characteristics for the pump"
+
+record MinMaxCharacteristicsBaseDataDefinition
+  "TYPE: Table with Head = f(V_flow) min amd max characteristics for the pump"
   extends Modelica.Icons.Record;
   parameter Real[:, :] minMaxHead "V_flow | min Head | max Head";
   annotation(Documentation(info = "<html>

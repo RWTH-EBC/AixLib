@@ -43,7 +43,7 @@ model improvedLOMExample
             {-4,79}})));
   AixLib.Building.LowOrder.BaseClasses.SolarRadWeightedSum solarRadWeightedSum(
       weightfactors={0,0,7,7,0}, n=5)
-    annotation (Placement(transformation(extent={{4,60},{24,80}})));
+    annotation (Placement(transformation(extent={{4,55},{38,85}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machinesConvective annotation(Placement(transformation(extent={{16,-40},
             {36,-20}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow personsConvective annotation(Placement(transformation(extent={{16,-60},
@@ -67,40 +67,40 @@ model improvedLOMExample
     annotation (Placement(transformation(extent={{-20,-82},{-12,-74}})));
 equation
   connect(sunblind.Rad_Out, solarRadWeightedSum.solarRad_in) annotation (Line(
-      points={{-5,70},{5,70}},
+      points={{-5,70},{5.7,70}},
       color={255,128,0},
       smooth=Smooth.None));
   connect(personsRadiative.port,HeatTorStar. Therm) annotation(Line(points={{36,-78},
           {52.8,-78}},                                                                                 color = {191, 0, 0}, smooth = Smooth.None));
   connect(partialEqAirTemp.equalAirTemp, reducedOrderModel.equalAirTemp)
     annotation (Line(
-      points={{-38,20.4},{-18,20.4},{-18,35.68},{47.4,35.68}},
+      points={{-36.2,20.4},{-18,20.4},{-18,35.68},{47.4,35.68}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(HeatTorStar.Star, reducedOrderModel.internalGainsRad) annotation (
       Line(
-      points={{71.1,-78},{86,-78},{86,-6},{74.09,-6},{74.09,21.4}},
+      points={{71.1,-78},{86,-78},{86,-6},{73.75,-6},{73.75,19.7}},
       color={95,95,95},
       pattern=LinePattern.None,
       smooth=Smooth.None));
   connect(machinesConvective.port, reducedOrderModel.internalGainsConv)
     annotation (Line(
-      points={{36,-30},{64.4,-30},{64.4,21.4}},
+      points={{36,-30},{64.4,-30},{64.4,19.7}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(personsConvective.port, reducedOrderModel.internalGainsConv)
     annotation (Line(
-      points={{36,-50},{56,-50},{56,-48},{64.4,-48},{64.4,21.4}},
+      points={{36,-50},{56,-50},{56,-48},{64.4,-48},{64.4,19.7}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(infiltrationRate.y, reducedOrderModel.ventilationRate) annotation (
       Line(
-      points={{24.5,-2},{54.2,-2},{54.2,21.4}},
+      points={{24.5,-2},{54.54,-2},{54.54,19.7}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(solarRadWeightedSum.solarRad_out, reducedOrderModel.solarRad_in)
     annotation (Line(
-      points={{23,70},{54.2,70},{54.2,51.15}},
+      points={{36.3,70},{54.2,70},{54.2,51.15}},
       color={255,128,0},
       smooth=Smooth.None));
   connect(sunblind.sunblindonoff, partialEqAirTemp.sunblindsig) annotation (
@@ -154,7 +154,7 @@ equation
       smooth=Smooth.None));
   connect(partialEqAirTemp.equalAirTempWindow, reducedOrderModel.equalAirTempWindow)
     annotation (Line(
-      points={{-38,28.6},{-34,28.6},{-34,28},{-28,28},{-28,44.18},{47.4,44.18}},
+      points={{-36.2,28.6},{-34,28.6},{-34,28},{-28,28},{-28,44.18},{47.4,44.18}},
       color={191,0,0},
       smooth=Smooth.None));
 

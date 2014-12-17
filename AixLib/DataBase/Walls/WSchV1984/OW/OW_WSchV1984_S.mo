@@ -1,7 +1,12 @@
 within AixLib.DataBase.Walls.WSchV1984.OW;
-
-record OW_WSchV1984_S "outer wall after WSchV1984, for building of type S (schwer)"
-  extends WallBaseDataDefinition(n(min = 1) = 4 "Number of wall layers", d = {0.05, 0.06, 0.175, 0.015} "Thickness of wall layers", rho = {1800, 120, 1600, 1200} "Density of wall layers", lambda = {1.0, 0.05, 0.79, 0.51} "Thermal conductivity of wall layers", c = {1000, 1030, 1000, 1000} "Specific heat capacity of wall layers", eps = 0.95 "Emissivity of inner wall surface");
+record OW_WSchV1984_S
+  "outer wall after WSchV1984, for building of type S (schwer)"
+  extends WallBaseDataDefinition(n(min = 1) = 4 "Number of wall layers", d = {0.05, 0.06, 0.175, 0.015}
+      "Thickness of wall layers",                                                                                                   rho = {1800, 120, 1600, 1200}
+      "Density of wall layers",                                                                                                    lambda = {1.0, 0.05, 0.79, 0.51}
+      "Thermal conductivity of wall layers",                                                                                                    c = {1000, 1030, 1000, 1000}
+      "Specific heat capacity of wall layers",                                                                                                    eps = 0.95
+      "Emissivity of inner wall surface");
   annotation(Documentation(revisions = "<html>
  <p><ul>
  <li><i>September 5, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
@@ -22,3 +27,4 @@ record OW_WSchV1984_S "outer wall after WSchV1984, for building of type S (schwe
  </ul>
  </html>"));
 end OW_WSchV1984_S;
+

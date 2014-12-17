@@ -1,10 +1,14 @@
 within AixLib.Building.Components.WindowsDoors;
 
+
 model Door "Simple door"
   parameter Modelica.SIunits.Area door_area = 2 "Total door area" annotation(Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer U = 1.8 "Thermal transmission coefficient" annotation(Dialog(group = "Properties"));
-  parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(20) "Initial temperature" annotation(Dialog(group = "Properties"));
-  parameter Modelica.SIunits.Emissivity eps = 0.9 "Emissivity of door material" annotation(Dialog(group = "Properties"));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer U = 1.8
+    "Thermal transmission coefficient"                                                            annotation(Dialog(group = "Properties"));
+  parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(20)
+    "Initial temperature"                                                                                      annotation(Dialog(group = "Properties"));
+  parameter Modelica.SIunits.Emissivity eps = 0.9 "Emissivity of door material"
+                                                                                annotation(Dialog(group = "Properties"));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a annotation(Placement(transformation(extent = {{-100, -10}, {-80, 10}}, rotation = 0)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b annotation(Placement(transformation(extent = {{80, -10}, {100, 10}}, rotation = 0)));
   Utilities.HeatTransfer.HeatToStar twoStar_RadEx(Therm(T(start = T0)), Star(T(start = T0)), A = door_area, eps = eps) annotation(Placement(transformation(extent = {{30, 50}, {50, 70}}, rotation = 0)));
@@ -19,7 +23,10 @@ equation
   connect(twoStar_RadEx.Therm, HeatTrans.port_b) annotation(Line(points = {{30.8, 60}, {20, 60}, {20, 2}, {10, 2}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(twoStar_RadEx1.Therm, HeatTrans.port_a) annotation(Line(points = {{-32.8, 60}, {-20, 60}, {-20, 2}, {-10, 2}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(twoStar_RadEx1.Star, Star1) annotation(Line(points = {{-51.1, 60}, {-90, 60}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
-  annotation(Dialog(group = "Air exchange"), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics = {Line(points = {{-40, 18}, {-36, 18}}, color = {255, 255, 0}, smooth = Smooth.None), Rectangle(extent = {{-52, 82}, {48, -78}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid), Rectangle(extent = {{-46, 76}, {40, -68}}, lineColor = {0, 0, 0}, fillPattern = FillPattern.Solid, fillColor = {127, 0, 0}), Rectangle(extent = {{28, 12}, {36, 0}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid)}), Window(x = 0.26, y = 0.21, width = 0.49, height = 0.55), Documentation(info = "<html>
+  annotation(Dialog(group = "Air exchange"), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics={  Line(points=  {{-40, 18}, {-36, 18}}, color=  {255, 255, 0}, smooth=  Smooth.None), Rectangle(extent=  {{-52, 82}, {48, -78}}, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215},
+            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-46, 76}, {40, -68}}, lineColor=  {0, 0, 0},
+            fillPattern=                                                                                                    FillPattern.Solid, fillColor=  {127, 0, 0}), Rectangle(extent=  {{28, 12}, {36, 0}}, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215},
+            fillPattern=                                                                                                    FillPattern.Solid)}), Window(x = 0.26, y = 0.21, width = 0.49, height = 0.55), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>The<b> Door</b> model models </p>
  <ul>
@@ -59,5 +66,5 @@ equation
           by Corinna Leonhardt and Ana Constantin:<br>
           Implemented.</li>
  </ul>
- </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics = {Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 0})}), DymolaStoredErrors);
+ </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics = {Rectangle(extent=  {{-80, 80}, {80, -80}}, lineColor=  {0, 0, 0})}), DymolaStoredErrors);
 end Door;

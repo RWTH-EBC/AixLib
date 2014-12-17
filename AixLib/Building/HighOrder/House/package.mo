@@ -1,7 +1,8 @@
 within AixLib.Building.HighOrder;
-
-package House
+package House 
   extends Modelica.Icons.Package;
+
+
   annotation(Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Package with complete standard house models</p>

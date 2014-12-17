@@ -1,8 +1,11 @@
 within AixLib.Building.HighOrder.House.MFD.BuildingAndEnergySystem;
 
-model OneAppartment_Radiators "just one appartment (same appartment as in MFD, but hydraulic network fit to this one appartment)"
+
+model OneAppartment_Radiators
+  "just one appartment (same appartment as in MFD, but hydraulic network fit to this one appartment)"
   import HouseModels = AixLib.Building.HighOrder;
-  replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater "Medium in the system" annotation(Dialog(group = "Medium"), choicesAllMatching = true);
+  replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater
+    "Medium in the system"                                                                             annotation(Dialog(group = "Medium"), choicesAllMatching = true);
   HouseModels.House.MFD.EnergySystem.OneAppartment.Radiators Hydraulic annotation(Placement(transformation(extent = {{-22, -72}, {38, -12}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedHeatFlow6(Q_flow = 0) annotation(Placement(transformation(extent = {{-62, 26}, {-50, 32}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedHeatFlow1(Q_flow = 0) annotation(Placement(transformation(extent = {{-78, 62}, {-66, 68}})));
@@ -20,8 +23,10 @@ model OneAppartment_Radiators "just one appartment (same appartment as in MFD, b
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedHeatFlow14(Q_flow = 0) annotation(Placement(transformation(extent = {{60, 28}, {48, 34}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedHeatFlow15(Q_flow = 0) annotation(Placement(transformation(extent = {{74, 28}, {62, 34}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedHeatFlow16(Q_flow = 0) annotation(Placement(transformation(extent = {{74, 50}, {62, 56}})));
-  HVAC.Interfaces.Port_a Inflow "Inflow to connect with external models (boiler, pump etc.)" annotation(Placement(transformation(extent = {{-26, -118}, {-6, -98}}), iconTransformation(extent = {{-26, -118}, {-6, -98}})));
-  HVAC.Interfaces.Port_b Returnflow "Returnflow to connect with external models (boiler, pump etc.)" annotation(Placement(transformation(extent = {{-2, -118}, {18, -98}}), iconTransformation(extent = {{-2, -118}, {18, -98}})));
+  HVAC.Interfaces.Port_a Inflow
+    "Inflow to connect with external models (boiler, pump etc.)"                             annotation(Placement(transformation(extent = {{-26, -118}, {-6, -98}}), iconTransformation(extent = {{-26, -118}, {-6, -98}})));
+  HVAC.Interfaces.Port_b Returnflow
+    "Returnflow to connect with external models (boiler, pump etc.)"                                 annotation(Placement(transformation(extent = {{-2, -118}, {18, -98}}), iconTransformation(extent = {{-2, -118}, {18, -98}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = -90, origin = {-32, 112}), iconTransformation(extent = {{-15, -15}, {15, 15}}, rotation = -90, origin = {-31, 105})));
   Modelica.Blocks.Interfaces.RealInput AirExchangePort_Window[5] annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = -90, origin = {20, 112}), iconTransformation(extent = {{-14, -14}, {14, 14}}, rotation = -90, origin = {26, 106})));
   Utilities.Interfaces.SolarRad_in SolarRadiation[2] "[SE, NW]" annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin = {58, 108})));
@@ -78,5 +83,5 @@ equation
  <p><ul>
  <li><i>June 19, 2014</i> by Ana Constantin:<br/>Implemented</li>
  </ul></p>
- </html>"), Icon(coordinateSystem(extent = {{-120, -120}, {100, 120}}, preserveAspectRatio = false), graphics = {Bitmap(extent = {{-86, 80}, {76, -84}}, fileName = "modelica://AixLib/Images/House/MFD_FloorPlan_En.PNG")}));
+ </html>"), Icon(coordinateSystem(extent = {{-120, -120}, {100, 120}}, preserveAspectRatio = false), graphics = {Bitmap(extent=  {{-86, 80}, {76, -84}}, fileName=  "modelica://AixLib/Images/House/MFD_FloorPlan_En.PNG")}));
 end OneAppartment_Radiators;

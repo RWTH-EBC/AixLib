@@ -1,5 +1,6 @@
 within AixLib.UsersGuide.Conventions;
 
+
 model ModelTemplateDocumentation "Template documentation for EBC's models"
   annotation(Documentation(info = "<html>
   <h4><span style=\"color:#008000\">Overview</span></h4>

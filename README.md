@@ -13,7 +13,7 @@ The model library **AixLib** is released by RWTH Aachen University's Institute f
 
 ### Acknowledgements
 
-Parts of **AixLib** have been developed within public projects and with financial support by BMWi (German Federal Ministry for Economic Affairs and Energy).
+Parts of **AixLib** have been developed within public funded projects and with financial support by BMWi (German Federal Ministry for Economic Affairs and Energy).
 
 ### Description
 

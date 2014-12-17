@@ -1,10 +1,16 @@
 within AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
 
+
 model GroundFloorBuildingEnvelope
   ///////// construction parameters
   parameter Integer TMC = 1 "Themal Mass Class" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1 "S", choice = 2 "M", choice = 3 "L", radioButtons = true));
-  parameter Integer TIR = 1 "Thermal Insulation Regulation" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1 "EnEV_2009", choice = 2 "EnEV_2002", choice = 3 "WSchV_1995", choice = 4 "WSchV_1984", radioButtons = true));
-  parameter Boolean withFloorHeating = false "If true, that floor has different connectors" annotation(Dialog(group = "Construction parameters"), choices(checkBox = true));
+  parameter Integer TIR = 1 "Thermal Insulation Regulation" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1
+        "EnEV_2009",                                                                                                    choice = 2
+        "EnEV_2002",                                                                                                    choice = 3
+        "WSchV_1995",                                                                                                    choice = 4
+        "WSchV_1984",                                                                                                    radioButtons = true));
+  parameter Boolean withFloorHeating = false
+    "If true, that floor has different connectors"                                          annotation(Dialog(group = "Construction parameters"), choices(checkBox = true));
   //////////room geometry
   parameter Modelica.SIunits.Length room_width = if TIR == 1 then 3.86 else 3.97 "width" annotation(Dialog(group = "Dimensions", descriptionLabel = true));
   parameter Modelica.SIunits.Height room_height = 2.60 "height" annotation(Dialog(group = "Dimensions", descriptionLabel = true));
@@ -12,10 +18,12 @@ model GroundFloorBuildingEnvelope
   parameter Modelica.SIunits.Length length2 = 2.44 "l2 " annotation(Dialog(group = "Dimensions", descriptionLabel = true));
   parameter Modelica.SIunits.Length length3 = 1.33 "l3 " annotation(Dialog(group = "Dimensions", descriptionLabel = true));
   parameter Modelica.SIunits.Length length4 = if TIR == 1 then 3.23 else 3.34 "l4 " annotation(Dialog(group = "Dimensions", descriptionLabel = true));
-  parameter Modelica.SIunits.Length thickness_IWsimple = 0.145 "thickness IWsimple " annotation(Dialog(group = "Dimensions", descriptionLabel = true));
+  parameter Modelica.SIunits.Length thickness_IWsimple = 0.145
+    "thickness IWsimple "                                                            annotation(Dialog(group = "Dimensions", descriptionLabel = true));
   // Outer walls properties
   parameter Real solar_absorptance_OW = 0.6 "Solar absoptance outer walls " annotation(Dialog(group = "Outer wall properties", descriptionLabel = true));
-  parameter Modelica.SIunits.Temperature T_Ground = 283.15 "Ground temperature" annotation(Dialog(group = "Outer wall properties", descriptionLabel = true));
+  parameter Modelica.SIunits.Temperature T_Ground = 283.15 "Ground temperature"
+                                                                                annotation(Dialog(group = "Outer wall properties", descriptionLabel = true));
   //Windows and Doors
   parameter Modelica.SIunits.Area windowarea_11 = 8.44 " Area Window11" annotation(Dialog(group = "Windows and Doors", descriptionLabel = true, joinNext = true));
   parameter Modelica.SIunits.Area windowarea_12 = 1.73 " Area Window12  " annotation(Dialog(group = "Windows and Doors", descriptionLabel = true));
@@ -30,10 +38,13 @@ model GroundFloorBuildingEnvelope
   parameter Real AirExchangeCorridor = 2 "Air exchange corridors in 1/h " annotation(Dialog(group = "Air Exchange Corridors", descriptionLabel = true));
   // Dynamic Ventilation
   parameter Boolean withDynamicVentilation = true "Dynamic ventilation" annotation(Dialog(group = "Dynamic ventilation", descriptionLabel = true), choices(checkBox = true));
-  parameter Modelica.SIunits.Temperature HeatingLimit = 253.15 "Outside temperature at which the heating activates" annotation(Dialog(group = "Dynamic ventilation", descriptionLabel = true, enable = if withDynamicVentilation then true else false));
+  parameter Modelica.SIunits.Temperature HeatingLimit = 253.15
+    "Outside temperature at which the heating activates"                                                            annotation(Dialog(group = "Dynamic ventilation", descriptionLabel = true, enable = if withDynamicVentilation then true else false));
   parameter Real Max_VR = 200 "Maximal ventilation rate" annotation(Dialog(group = "Dynamic ventilation", descriptionLabel = true, enable = if withDynamicVentilation then true else false));
-  parameter Modelica.SIunits.TemperatureDifference Diff_toTempset = 3 "Difference to set temperature" annotation(Dialog(group = "Dynamic ventilation", descriptionLabel = true, enable = if withDynamicVentilation then true else false));
-  parameter Modelica.SIunits.Temperature Tset_Livingroom = 295.15 "Tset_livingroom" annotation(Dialog(group = "Dynamic ventilation", descriptionLabel = true, joinNext = true, enable = if withDynamicVentilation then true else false));
+  parameter Modelica.SIunits.TemperatureDifference Diff_toTempset = 3
+    "Difference to set temperature"                                                                   annotation(Dialog(group = "Dynamic ventilation", descriptionLabel = true, enable = if withDynamicVentilation then true else false));
+  parameter Modelica.SIunits.Temperature Tset_Livingroom = 295.15
+    "Tset_livingroom"                                                               annotation(Dialog(group = "Dynamic ventilation", descriptionLabel = true, joinNext = true, enable = if withDynamicVentilation then true else false));
   parameter Modelica.SIunits.Temperature Tset_Hobby = 295.15 "Tset_hobby" annotation(Dialog(group = "Dynamic ventilation", descriptionLabel = true, enable = if withDynamicVentilation then true else false));
   parameter Modelica.SIunits.Temperature Tset_WC = 291.15 "Tset_WC" annotation(Dialog(group = "Dynamic ventilation", descriptionLabel = true, joinNext = true, enable = if withDynamicVentilation then true else false));
   parameter Modelica.SIunits.Temperature Tset_Kitchen = 295.15 "Tset_kitchen" annotation(Dialog(group = "Dynamic ventilation", descriptionLabel = true, enable = if withDynamicVentilation then true else false));
@@ -128,7 +139,7 @@ equation
   connect(Corridor.thermFloor, ThermFloor[3]) annotation(Line(points = {{66.4, -13.56}, {66.4, -32}, {90, -32}, {90, -92}, {4, -92}, {4, -94}, {2, -94}}, color = {191, 0, 0}, pattern = LinePattern.Dash, smooth = Smooth.None));
   connect(WC_Storage.thermFloor, ThermFloor[4]) annotation(Line(points = {{69.18, -54.24}, {90, -54.24}, {90, -91.6}, {2, -91.6}}, color = {191, 0, 0}, pattern = LinePattern.Dash, smooth = Smooth.None));
   connect(Kitchen.thermFloor, ThermFloor[5]) annotation(Line(points = {{-68.4, -44.32}, {-90, -44.32}, {-90, -92}, {-4, -92}, {2, -89.2}}, color = {191, 0, 0}, pattern = LinePattern.Dash, smooth = Smooth.None));
-  annotation(__Dymola_Images(Parameters(source = "AixLib/Images/House/Groundfloor_5Rooms.png")), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(extent = {{-96, 90}, {100, -106}}, fileName = "modelica://AixLib/Images/House/Groundfloor_icon.png"), Text(extent = {{-66, 66}, {10, 54}}, lineColor = {0, 0, 0}, textString = "Livingroom"), Text(extent = {{14, 76}, {64, 62}}, lineColor = {0, 0, 0}, textString = "Hobby"), Text(extent = {{22, 24}, {56, 14}}, lineColor = {0, 0, 0}, textString = "Corridor"), Text(extent = {{-2, -42}, {74, -52}}, lineColor = {0, 0, 0}, textString = "WC_Storage"), Text(extent = {{-50, -10}, {-6, -24}}, lineColor = {0, 0, 0}, textString = "Kitchen")}), Documentation(revisions = "<html>
+  annotation(__Dymola_Images(Parameters(source = "AixLib/Images/House/Groundfloor_5Rooms.png")), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(extent=  {{-96, 90}, {100, -106}}, fileName=  "modelica://AixLib/Images/House/Groundfloor_icon.png"), Text(extent=  {{-66, 66}, {10, 54}}, lineColor=  {0, 0, 0}, textString=  "Livingroom"), Text(extent=  {{14, 76}, {64, 62}}, lineColor=  {0, 0, 0}, textString=  "Hobby"), Text(extent=  {{22, 24}, {56, 14}}, lineColor=  {0, 0, 0}, textString=  "Corridor"), Text(extent=  {{-2, -42}, {74, -52}}, lineColor=  {0, 0, 0}, textString=  "WC_Storage"), Text(extent=  {{-50, -10}, {-6, -24}}, lineColor=  {0, 0, 0}, textString=  "Kitchen")}), Documentation(revisions = "<html>
  <p><ul>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
  <li><i>July 10, 2011</i> by Ana Constantin:<br/>Implemented</li>

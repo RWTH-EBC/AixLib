@@ -1,7 +1,9 @@
 within AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall.EnergySystem.IdealHeaters;
 
+
 model GroundFloor
-  parameter Real ratioRadHeat = 0.3 "ratio of radiative heat from total heat generated";
+  parameter Real ratioRadHeat = 0.3
+    "ratio of radiative heat from total heat generated";
   Utilities.Interfaces.Star Rad_Livingroom annotation(Placement(transformation(extent = {{-145, 84}, {-129, 101}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Con_Livingroom annotation(Placement(transformation(extent = {{-143, 64}, {-130, 77}})));
   Utilities.Interfaces.Star Rad_Kitchen annotation(Placement(transformation(extent = {{-146, -38}, {-129, -22}})));
@@ -16,33 +18,43 @@ model GroundFloor
   Modelica.Blocks.Continuous.LimPID PI_livingroom(controllerType = Modelica.Blocks.Types.SimpleController.PI, k = 0.3, Ti = 10, yMax = 2000, yMin = 0) annotation(Placement(transformation(extent = {{-106, -14}, {-86, 6}})));
   Modelica.Blocks.Math.Gain gainConv_livinrgoom(k = 1 - ratioRadHeat) annotation(Placement(transformation(extent = {{-75, 0}, {-66, 9}})));
   Modelica.Blocks.Math.Gain gainRad_livinrgoom(k = ratioRadHeat) annotation(Placement(transformation(extent = {{-74, -17}, {-65, -8}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceConv_livingroom "source convective heat livingroom" annotation(Placement(transformation(extent = {{-60, -5}, {-40, 15}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceRad_livingroom "source radiative heat livingroom" annotation(Placement(transformation(extent = {{-59, -23}, {-39, -3}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceConv_livingroom
+    "source convective heat livingroom"                                                                              annotation(Placement(transformation(extent = {{-60, -5}, {-40, 15}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceRad_livingroom
+    "source radiative heat livingroom"                                                                             annotation(Placement(transformation(extent = {{-59, -23}, {-39, -3}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor tempSensor_livingroom annotation(Placement(transformation(extent = {{-126, -24}, {-114, -12}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor tempSensor_hobby annotation(Placement(transformation(extent = {{5, 63}, {17, 75}})));
   Modelica.Blocks.Continuous.LimPID PI_hobby(controllerType = Modelica.Blocks.Types.SimpleController.PI, k = 0.3, Ti = 10, yMax = 2000, yMin = 0) annotation(Placement(transformation(extent = {{25, 73}, {45, 93}})));
   Modelica.Blocks.Math.Gain gainConv_hobby(k = 1 - ratioRadHeat) annotation(Placement(transformation(extent = {{56, 87}, {65, 96}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceRad_hobby "source radiative heat hobby" annotation(Placement(transformation(extent = {{72, 64}, {92, 84}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceRad_hobby
+    "source radiative heat hobby"                                                                        annotation(Placement(transformation(extent = {{72, 64}, {92, 84}})));
   Modelica.Blocks.Math.Gain gainRad_hobby(k = ratioRadHeat) annotation(Placement(transformation(extent = {{57, 70}, {66, 79}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceConv_hobby "source convective heat hobby" annotation(Placement(transformation(extent = {{71, 82}, {91, 102}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceConv_hobby
+    "source convective heat hobby"                                                                         annotation(Placement(transformation(extent = {{71, 82}, {91, 102}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor tempSensor_corridor annotation(Placement(transformation(extent = {{14, 15}, {26, 27}})));
   Modelica.Blocks.Continuous.LimPID PI_corridor(controllerType = Modelica.Blocks.Types.SimpleController.PI, k = 0.3, Ti = 10, yMax = 2000, yMin = 0) annotation(Placement(transformation(extent = {{34, 25}, {54, 45}})));
   Modelica.Blocks.Math.Gain gainConv_corridor(k = 1 - ratioRadHeat) annotation(Placement(transformation(extent = {{65, 39}, {74, 48}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceRad_corridor "source radiative heat corridor" annotation(Placement(transformation(extent = {{81, 16}, {101, 36}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceRad_corridor
+    "source radiative heat corridor"                                                                           annotation(Placement(transformation(extent = {{81, 16}, {101, 36}})));
   Modelica.Blocks.Math.Gain gainRad_corridor(k = ratioRadHeat) annotation(Placement(transformation(extent = {{66, 22}, {75, 31}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceConv_corridor "source convective heat corridor" annotation(Placement(transformation(extent = {{80, 34}, {100, 54}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceConv_corridor
+    "source convective heat corridor"                                                                            annotation(Placement(transformation(extent = {{80, 34}, {100, 54}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor tempSensor_WC annotation(Placement(transformation(extent = {{24, -66}, {36, -54}})));
   Modelica.Blocks.Continuous.LimPID PI_WC(controllerType = Modelica.Blocks.Types.SimpleController.PI, k = 0.3, Ti = 10, yMax = 2000, yMin = 0) annotation(Placement(transformation(extent = {{44, -56}, {64, -36}})));
   Modelica.Blocks.Math.Gain gainConv_WC(k = 1 - ratioRadHeat) annotation(Placement(transformation(extent = {{75, -42}, {84, -33}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceRad_WC "source radiative heat WC" annotation(Placement(transformation(extent = {{91, -65}, {111, -45}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceRad_WC
+    "source radiative heat WC"                                                                     annotation(Placement(transformation(extent = {{91, -65}, {111, -45}})));
   Modelica.Blocks.Math.Gain gainRad_WC(k = ratioRadHeat) annotation(Placement(transformation(extent = {{76, -59}, {85, -50}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceConv_WC "source convective heat WC" annotation(Placement(transformation(extent = {{90, -47}, {110, -27}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceConv_WC
+    "source convective heat WC"                                                                      annotation(Placement(transformation(extent = {{90, -47}, {110, -27}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor tempSensor_kitchen annotation(Placement(transformation(extent = {{-124, -92}, {-112, -80}})));
   Modelica.Blocks.Continuous.LimPID PI_kitchen(controllerType = Modelica.Blocks.Types.SimpleController.PI, k = 0.3, Ti = 10, yMax = 2000, yMin = 0) annotation(Placement(transformation(extent = {{-104, -82}, {-84, -62}})));
   Modelica.Blocks.Math.Gain gainConv_kitchen(k = 1 - ratioRadHeat) annotation(Placement(transformation(extent = {{-73, -68}, {-64, -59}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceRad_kitchen "source radiative heat kitchen" annotation(Placement(transformation(extent = {{-57, -91}, {-37, -71}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceRad_kitchen
+    "source radiative heat kitchen"                                                                          annotation(Placement(transformation(extent = {{-57, -91}, {-37, -71}})));
   Modelica.Blocks.Math.Gain gainRad_kitchen(k = ratioRadHeat) annotation(Placement(transformation(extent = {{-72, -85}, {-63, -76}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceConv_kitchen "source convective heat kitchen" annotation(Placement(transformation(extent = {{-58, -73}, {-38, -53}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow SourceConv_kitchen
+    "source convective heat kitchen"                                                                           annotation(Placement(transformation(extent = {{-58, -73}, {-38, -53}})));
 equation
   connect(PI_livingroom.y, gainConv_livinrgoom.u) annotation(Line(points = {{-85, -4}, {-80, -4}, {-80, 4.5}, {-75.9, 4.5}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(PI_livingroom.y, gainRad_livinrgoom.u) annotation(Line(points = {{-85, -4}, {-80, -4}, {-80, -12.5}, {-74.9, -12.5}}, color = {0, 0, 127}, smooth = Smooth.None));
@@ -89,11 +101,11 @@ equation
   connect(PI_corridor.u_s, TSet_GF[3]) annotation(Line(points = {{32, 35}, {1, 35}, {1, 100}, {-72, 100}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(PI_WC.u_s, TSet_GF[4]) annotation(Line(points = {{42, -46}, {24, -46}, {24, -46}, {1, -46}, {1, 106}, {-72, 106}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(PI_kitchen.u_s, TSet_GF[5]) annotation(Line(points = {{-106, -72}, {-130, -72}, {-130, 112}, {-72, 112}}, color = {0, 0, 127}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-130, -100}, {130, 100}}, grid = {1, 1}), graphics = {Rectangle(extent = {{1, 100}, {126, 63}}, pattern = LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid), Rectangle(extent = {{3, 58}, {126, 15}}, pattern = LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid), Rectangle(extent = {{1, -14}, {127, -67}}, pattern = LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid), Rectangle(extent = {{-129, 28}, {-22, -26}}, pattern = LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid), Rectangle(extent = {{-130, -49}, {-23, -103}}, pattern = LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid), Text(extent = {{-120, -88}, {-69, -103}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0}, fillPattern = FillPattern.Solid, textString = "Kitchen"), Text(extent = {{-155, 24}, {-48, 11}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0}, fillPattern = FillPattern.Solid, textString = "Livingroom"), Text(extent = {{31, -15}, {138, -28}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0}, fillPattern = FillPattern.Solid, textString = "WC/Storage"), Text(extent = {{49, 58}, {156, 45}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0}, fillPattern = FillPattern.Solid, textString = "Corridor"), Text(extent = {{51, 99}, {158, 86}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0}, fillPattern = FillPattern.Solid, textString = "Hobby"), Text(extent = {{-68, 87}, {-15, 55}}, lineColor = {0, 0, 0}, textString = "1 - Livingroom
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-130, -100}, {130, 100}}, grid = {1, 1}), graphics = {Rectangle(extent=  {{1, 100}, {126, 63}}, pattern=  LinePattern.None, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{3, 58}, {126, 15}}, pattern=  LinePattern.None, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{1, -14}, {127, -67}}, pattern=  LinePattern.None, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{-129, 28}, {-22, -26}}, pattern=  LinePattern.None, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{-130, -49}, {-23, -103}}, pattern=  LinePattern.None, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid), Text(extent=  {{-120, -88}, {-69, -103}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid, textString=  "Kitchen"), Text(extent=  {{-155, 24}, {-48, 11}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid, textString=  "Livingroom"), Text(extent=  {{31, -15}, {138, -28}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid, textString=  "WC/Storage"), Text(extent=  {{49, 58}, {156, 45}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid, textString=  "Corridor"), Text(extent=  {{51, 99}, {158, 86}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid, textString=  "Hobby"), Text(extent=  {{-68, 87}, {-15, 55}}, lineColor=  {0, 0, 0}, textString=  "1 - Livingroom
  2- Hobby
  3 - Corridor
  4 - WC/Storage
- 5 - Kitchen")}), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-130, -100}, {130, 100}}, grid = {1, 1}), graphics = {Rectangle(extent = {{-119, 92}, {123, -79}}, lineColor = {255, 0, 0}, fillColor = {135, 135, 135}, fillPattern = FillPattern.Solid), Line(points = {{-99, 22}, {104, 22}, {104, -6}}, color = {255, 0, 0}, smooth = Smooth.None, thickness = 1), Line(points = {{-98, 13}, {95, 13}, {95, -6}}, color = {0, 0, 255}, smooth = Smooth.None, thickness = 1), Line(points = {{-21, 13}, {-21, 35}}, color = {0, 0, 255}, thickness = 1, smooth = Smooth.None), Line(points = {{-14, 23}, {-14, 45}}, color = {255, 0, 0}, thickness = 1, smooth = Smooth.None), Text(extent = {{-87, 74}, {-34, 42}}, lineColor = {0, 0, 0}, textString = "1 - Livingroom
+ 5 - Kitchen")}), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-130, -100}, {130, 100}}, grid = {1, 1}), graphics = {Rectangle(extent=  {{-119, 92}, {123, -79}}, lineColor=  {255, 0, 0}, fillColor=  {135, 135, 135}, fillPattern=  FillPattern.Solid), Line(points=  {{-99, 22}, {104, 22}, {104, -6}}, color=  {255, 0, 0}, smooth=  Smooth.None, thickness=  1), Line(points=  {{-98, 13}, {95, 13}, {95, -6}}, color=  {0, 0, 255}, smooth=  Smooth.None, thickness=  1), Line(points=  {{-21, 13}, {-21, 35}}, color=  {0, 0, 255}, thickness=  1, smooth=  Smooth.None), Line(points=  {{-14, 23}, {-14, 45}}, color=  {255, 0, 0}, thickness=  1, smooth=  Smooth.None), Text(extent=  {{-87, 74}, {-34, 42}}, lineColor=  {0, 0, 0}, textString=  "1 - Livingroom
  2- Hobby
  3 - Corridor
  4 - WC/Storage

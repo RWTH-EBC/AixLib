@@ -1,5 +1,4 @@
 within AixLib.DataBase.Boiler;
-
 record BoilerLT "Boiler efficency for a low-temperature boiler"
   extends BoilerEfficiencyBaseDataDefinition(boilerEfficiency = [0.0000, 1.0; 0.2000, 1.0; 0.4000, 0.98; 0.6000, 0.96; 0.8000, 0.95; 1.0000, 0.94]);
   annotation(Documentation(info = "<html>
@@ -19,3 +18,4 @@ record BoilerLT "Boiler efficency for a low-temperature boiler"
  </ul></p>
  </html>"));
 end BoilerLT;
+

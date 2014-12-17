@@ -1,12 +1,17 @@
 within AixLib.Building.Components.Sources.InternalGains.BaseClasses;
 
-partial model PartialInternalGain "Partial model to build a heat source with convective and radiative component"
+
+partial model PartialInternalGain
+  "Partial model to build a heat source with convective and radiative component"
   parameter Real ratioConv = 0.6 "Ratio convective to total heat release" annotation(Dialog(descriptionLabel = true));
-  parameter Real emissivity = 0.95 "emissivity of radiative heat source surface";
-  parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(22) "Initial temperature";
+  parameter Real emissivity = 0.95
+    "emissivity of radiative heat source surface";
+  parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(22)
+    "Initial temperature";
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow ConvectiveHeat(T_ref = T0) annotation(Placement(transformation(extent = {{20, 20}, {40, 40}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow RadiativeHeat(T_ref = ratioConv) annotation(Placement(transformation(extent = {{20, -20}, {40, 0}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ConvHeat "convective heat connector" annotation(Placement(transformation(extent = {{80, 50}, {100, 70}}), iconTransformation(extent = {{80, 50}, {100, 70}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ConvHeat
+    "convective heat connector"                                                            annotation(Placement(transformation(extent = {{80, 50}, {100, 70}}), iconTransformation(extent = {{80, 50}, {100, 70}})));
   Utilities.Interfaces.Star RadHeat "radiative heat connector" annotation(Placement(transformation(extent = {{80, -70}, {100, -50}}), iconTransformation(extent = {{80, -68}, {100, -48}})));
   Modelica.Blocks.Interfaces.RealInput Schedule annotation(Placement(transformation(extent = {{-120, -20}, {-80, 20}}), iconTransformation(extent = {{-100, -10}, {-80, 10}})));
   Modelica.Blocks.Math.Gain gain(k = ratioConv) annotation(Placement(transformation(extent = {{4, 26}, {12, 34}})));

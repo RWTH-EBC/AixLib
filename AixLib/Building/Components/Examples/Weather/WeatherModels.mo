@@ -1,5 +1,6 @@
 within AixLib.Building.Components.Examples.Weather;
 
+
 model WeatherModels
   extends Modelica.Icons.Example;
   Components.Weather.Weather weather(Cloud_cover = true, Wind_dir = true, Wind_speed = true, Air_temp = true, Air_press = true, Mass_frac = true, Rel_hum = true, Sky_rad = true, Ter_rad = true, fileName = "D:/EBC_SVN/projects/EBC9999_Modelica-Library/branches/2014-31-01_V2_2/DataBase/additionalFiles/TRY2010_12_Jahr_Modelica-Library.txt") annotation(Placement(transformation(extent = {{-60, 16}, {6, 60}})));

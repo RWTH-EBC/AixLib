@@ -1,10 +1,14 @@
 within AixLib.Utilities.Logical;
 
+
 block SmoothSwitch "Smooth switch between two Real signals"
   extends Modelica.Blocks.Interfaces.partialBooleanBlockIcon;
-  Modelica.Blocks.Interfaces.RealInput u1 "Connector of first Real input signal" annotation(Placement(transformation(extent = {{-140, 60}, {-100, 100}}, rotation = 0)));
-  Modelica.Blocks.Interfaces.BooleanInput u2 "Connector of Boolean input signal" annotation(Placement(transformation(extent = {{-140, -20}, {-100, 20}}, rotation = 0)));
-  Modelica.Blocks.Interfaces.RealInput u3 "Connector of second Real input signal" annotation(Placement(transformation(extent = {{-140, -100}, {-100, -60}}, rotation = 0)));
+  Modelica.Blocks.Interfaces.RealInput u1
+    "Connector of first Real input signal"                                       annotation(Placement(transformation(extent = {{-140, 60}, {-100, 100}}, rotation = 0)));
+  Modelica.Blocks.Interfaces.BooleanInput u2
+    "Connector of Boolean input signal"                                          annotation(Placement(transformation(extent = {{-140, -20}, {-100, 20}}, rotation = 0)));
+  Modelica.Blocks.Interfaces.RealInput u3
+    "Connector of second Real input signal"                                       annotation(Placement(transformation(extent = {{-140, -100}, {-100, -60}}, rotation = 0)));
   Modelica.Blocks.Interfaces.RealOutput y "Connector of Real output signal" annotation(Placement(transformation(extent = {{100, -10}, {120, 10}}, rotation = 0)));
 equation
   y = smooth(1, if u2 then u1 else u3);
@@ -24,5 +28,5 @@ equation
           by Ana Constantin:<br>
           Implemented.</li>
  </ul>
- </html>"), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics = {Line(points = {{12, 0}, {100, 0}}, pattern = LinePattern.Solid, thickness = 0.25, arrow = {Arrow.None, Arrow.None}, color = {0, 0, 255}), Line(points = {{-100, 0}, {-40, 0}}, color = {255, 0, 127}, pattern = LinePattern.Solid, thickness = 0.25, arrow = {Arrow.None, Arrow.None}), Line(points = {{-100, -80}, {-40, -80}, {-40, -80}}, pattern = LinePattern.Solid, thickness = 0.25, arrow = {Arrow.None, Arrow.None}, color = {0, 0, 255}), Line(points = {{-40, 12}, {-40, -12}}, color = {255, 0, 127}), Line(points = {{-100, 80}, {-38, 80}}, color = {0, 0, 255}), Line(points = {{-38, 80}, {6, 2}}, thickness = 1, color = {0, 0, 255}), Ellipse(extent = {{2, 8}, {18, -6}}, fillColor = {0, 0, 0}, fillPattern = FillPattern.Solid, lineColor = {0, 0, 255})}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics));
+ </html>"), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics = {Line(points=  {{12, 0}, {100, 0}}, pattern=  LinePattern.Solid, thickness=  0.25, arrow=  {Arrow.None, Arrow.None}, color=  {0, 0, 255}), Line(points=  {{-100, 0}, {-40, 0}}, color=  {255, 0, 127}, pattern=  LinePattern.Solid, thickness=  0.25, arrow=  {Arrow.None, Arrow.None}), Line(points=  {{-100, -80}, {-40, -80}, {-40, -80}}, pattern=  LinePattern.Solid, thickness=  0.25, arrow=  {Arrow.None, Arrow.None}, color=  {0, 0, 255}), Line(points=  {{-40, 12}, {-40, -12}}, color=  {255, 0, 127}), Line(points=  {{-100, 80}, {-38, 80}}, color=  {0, 0, 255}), Line(points=  {{-38, 80}, {6, 2}}, thickness=  1, color=  {0, 0, 255}), Ellipse(extent=  {{2, 8}, {18, -6}}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid, lineColor=  {0, 0, 255})}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics));
 end SmoothSwitch;

@@ -1,6 +1,6 @@
 within AixLib.DataBase.Radiators.StandardOFD_EnEV2009;
-
-record Hobby "Standard OFD EnEV2009 Hobby = ThermX2, Profil V (Kermi) Power=644W, L=1300, H=300, Typ=22, {55,45,20}"
+record Hobby
+  "Standard OFD EnEV2009 Hobby = ThermX2, Profil V (Kermi) Power=644W, L=1300, H=300, Typ=22, {55,45,20}"
   extends RadiatiorBaseDataDefinition(NominalPower = 644, T_flow_nom = 55, T_return_nom = 45, T_room_nom = 20, Exponent = 1.2776, VolumeWater = 4.68, MassSteel = 22.11, RadPercent = 0.3, length = 1.3, height = 0.3);
   annotation(Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
@@ -34,3 +34,4 @@ record Hobby "Standard OFD EnEV2009 Hobby = ThermX2, Profil V (Kermi) Power=644W
  <p>13.11.2013, by <i>Ana Constantin</i>: implemented</p>
  </html>"));
 end Hobby;
+

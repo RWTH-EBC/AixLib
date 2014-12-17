@@ -1,5 +1,4 @@
 within AixLib.Building.Components.Examples;
-
-package Weather
+package Weather 
   extends Modelica.Icons.ExamplesPackage;
 end Weather;

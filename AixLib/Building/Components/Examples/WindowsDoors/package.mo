@@ -1,5 +1,4 @@
 within AixLib.Building.Components.Examples;
-
-package WindowsDoors
+package WindowsDoors 
   extends Modelica.Icons.ExamplesPackage;
 end WindowsDoors;

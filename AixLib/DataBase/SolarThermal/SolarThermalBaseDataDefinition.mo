@@ -1,6 +1,6 @@
 within AixLib.DataBase.SolarThermal;
-
-record SolarThermalBaseDataDefinition "Base Data Definition for Solar thermal collectors"
+record SolarThermalBaseDataDefinition
+  "Base Data Definition for Solar thermal collectors"
   extends Modelica.Icons.Record;
   parameter Real eta_zero "Conversion factor/Efficiency at Q = 0" annotation(Dialog(group = "Geometry"));
   parameter Real c1(unit = "W/(m.K)") "Loss coefficient c1";
@@ -21,3 +21,4 @@ record SolarThermalBaseDataDefinition "Base Data Definition for Solar thermal co
  <p>Base data definition for record to be used in model <a href=\"AixLib.HVAC.HeatGeneration.SolarThermal\">AixLib.HVAC.HeatGeneration.SolarThermal</a>.</p>
  </html>"));
 end SolarThermalBaseDataDefinition;
+
