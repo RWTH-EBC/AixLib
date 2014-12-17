@@ -19,15 +19,15 @@ partial model PowerInterface
       motorEfficiency(r_V={1}, eta={0.7})
     "Normalized volume flow rate vs. efficiency"
     annotation(Placement(transformation(extent={{60,-40},{80,-20}})),
-               Dialog(group="Characteristics"),
-               enable = not use_powerCharacteristic);
+               Dialog(group="Characteristics",
+               enable = not use_powerCharacteristic));
   parameter
     AixLib.Fluid.Movers.BaseClasses.Characteristics.efficiencyParameters
       hydraulicEfficiency(r_V={1}, eta={0.7})
     "Normalized volume flow rate vs. efficiency"
     annotation(Placement(transformation(extent={{60,-80},{80,-60}})),
-               Dialog(group="Characteristics"),
-               enable = not use_powerCharacteristic);
+               Dialog(group="Characteristics",
+               enable = not use_powerCharacteistic));
 
   parameter Modelica.SIunits.Density rho_default
     "Fluid density at medium default state";

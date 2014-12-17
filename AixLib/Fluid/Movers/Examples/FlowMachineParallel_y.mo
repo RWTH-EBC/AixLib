@@ -1,17 +1,14 @@
 within AixLib.Fluid.Movers.Examples;
 model FlowMachineParallel_y "Two flow machines in parallel"
   extends Modelica.Icons.Example;
-  // fixme. Revisit when Dymola 2015 is available.
-  // The medium has been changed from
-  // AixLib.Media.Water.Simple to
-  // AixLib.Experimental.Media.AirPTDecoupled because
-  // AixLib.Media.Water.Simple and AixLib.Media.Air cause in
-  // Dymola 2014 FD01 a division by zero. This is due to the
-  // bug https://github.com/iea-annex60/modelica-annex60/issues/53
-  package Medium = AixLib.Experimental.Media.AirPTDecoupled "Medium model";
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=
-     1 "Nominal mass flow rate";
+  package Medium = AixLib.Media.Water.Simple "Medium model";
+
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal=1
+    "Nominal mass flow rate";
+
+  parameter Modelica.SIunits.Density rho_nominal=1000
+    "Density, used to compute fluid mass";
 
   AixLib.Fluid.FixedResistances.FixedResistanceDpM dpIn1(
     redeclare package Medium = Medium,
@@ -48,9 +45,6 @@ model FlowMachineParallel_y "Two flow machines in parallel"
     annotation (Placement(transformation(extent={{100,50},{120,70}})));
   Modelica.Blocks.Sources.Constant const2(k=1) "Constant source"
     annotation (Placement(transformation(extent={{0,30},{20,50}})));
-
-  parameter Modelica.SIunits.Density rho_nominal=1.2
-    "Density, used to compute fluid mass";
 
   AixLib.Fluid.FixedResistances.FixedResistanceDpM dpIn2(
     redeclare package Medium = Medium,

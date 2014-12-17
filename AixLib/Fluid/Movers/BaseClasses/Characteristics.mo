@@ -129,8 +129,7 @@ First implementation.
     "Flow vs. head characteristics for fan or pump pressure raise"
     extends Modelica.Icons.Function;
     input
-      AixLib.Fluid.Movers.BaseClasses.Characteristics.flowParametersInternal
-                                                                                    data
+      AixLib.Fluid.Movers.BaseClasses.Characteristics.flowParametersInternal       data
       "Pressure performance data";
     input Modelica.SIunits.VolumeFlowRate V_flow "Volumetric flow rate";
     input Real r_N(unit="1") "Relative revolution, r_N=N/N_nominal";
@@ -258,7 +257,7 @@ August 25, 2011, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),     smoothOrder=1);
+</html>"));
   end pressure;
 
   function flowApproximationAtOrigin
@@ -358,13 +357,12 @@ September 28, 2011, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),     smoothOrder=1);
+</html>"));
   end power;
 
   function efficiency "Flow vs. efficiency characteristics for fan or pump"
     extends Modelica.Icons.Function;
-    input
-      AixLib.Fluid.Movers.BaseClasses.Characteristics.efficiencyParameters
+    input AixLib.Fluid.Movers.BaseClasses.Characteristics.efficiencyParameters
       data "Efficiency performance data";
     input Real r_V(unit="1")
       "Volumetric flow rate divided by nominal flow rate";
@@ -423,7 +421,7 @@ September 28, 2011, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),     smoothOrder=1);
+</html>"));
   end efficiency;
 
   annotation (Documentation(info="<html>
