@@ -14,9 +14,18 @@ model TestCase11
     C1i=1.48362e+007,
     RRest=0.042768721,
     R1o=0.004367913,
-    C1o=1.6008e+006)                                                                                                     annotation(Placement(transformation(extent = {{64, 36}, {98, 76}})));
+    C1o=1.6008e+006,
+    Vair=0.0001)                                                                                                     annotation(Placement(transformation(extent = {{64, 36}, {98, 76}})));
   Utilities.Sources.HeaterCooler.IdealHeaterCoolerVar1 heater(Q_flow_heat = 1, Q_flow_cooler = 1, h_cooler = 0, KR_heater = 1000, KR_cooler = 1000, TN_heater = 1, TN_cooler = 1, h_heater = 500, l_cooler = -500, Cooler_on = false) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin = {-26, -20})));
-  Modelica.Blocks.Sources.CombiTimeTable setTemp(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, columns = {2, 3}, table = [0, 295.15, 295.2; 3600, 295.1, 295.2; 7200, 295.1, 295.2; 10800, 295.1, 295.2; 14400, 295.1, 295.2; 18000, 295.1, 295.2; 21600, 295.1, 295.2; 25200, 300.1, 300.2; 28800, 300.1, 300.2; 32400, 300.1, 300.2; 36000, 300.1, 300.2; 39600, 300.1, 300.2; 43200, 300.1, 300.2; 46800, 300.1, 300.2; 50400, 300.1, 300.2; 54000, 300.1, 300.2; 57600, 300.1, 300.2; 61200, 300.1, 300.2; 64800, 300.1, 300.2; 68400, 295.1, 295.2; 72000, 295.1, 295.2; 75600, 295.1, 295.2; 79200, 295.1, 295.2; 82800, 295.1, 295.2; 86400, 295.1, 295.2]) annotation(Placement(transformation(extent = {{-80, -30}, {-60, -10}})));
+  Modelica.Blocks.Sources.CombiTimeTable setTemp(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, columns = {2, 3},
+    table=[0,295.15,295.15; 3600,295.15,295.15; 7200,295.15,295.15; 10800,
+        295.15,295.15; 14400,295.15,295.15; 18000,295.15,295.15; 21600,295.15,
+        295.15; 25200,300.15,300.15; 28800,300.15,300.15; 32400,300.15,300.15;
+        36000,300.15,300.15; 39600,300.15,300.15; 43200,300.15,300.15; 46800,
+        300.15,300.15; 50400,300.15,300.15; 54000,300.15,300.15; 57600,300.15,
+        300.15; 61200,300.15,300.15; 64800,300.15,300.15; 68400,295.15,295.15;
+        72000,295.15,295.15; 75600,295.15,295.15; 79200,295.15,295.15; 82800,
+        295.15,295.15; 86400,295.15,295.15])                                                                                                     annotation(Placement(transformation(extent = {{-80, -30}, {-60, -10}})));
   Modelica.Blocks.Sources.CombiTimeTable reference(tableName = "UserProfilesOffice", fileName = "./Tables/J1615/UserProfilesOffice.txt", tableOnFile = false, columns = {2, 3},                                                                                                    extrapolation = Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
     table=[3600,22,0; 7200,22,0; 10800,22,0; 14400,22,0; 18000,22,0; 21600,22,
         0; 25200,24.9,-500; 28800,25.2,-500; 32400,25.6,-500; 36000,25.9,-500;
