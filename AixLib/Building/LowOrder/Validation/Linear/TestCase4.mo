@@ -11,7 +11,6 @@ model TestCase4
     RRest=0.043140385,
     R1o=0.004049352,
     C1o=4.79e+004)                                                                                                     annotation(Placement(transformation(extent = {{10, 10}, {44, 44}})));
-  Modelica.Blocks.Sources.CombiTimeTable tableMachines(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableName = "UserProfilesOffice", fileName = "./Tables/J1615/UserProfilesOffice.txt", tableOnFile = false, table = [0, 0; 3600, 0; 7200, 0; 10800, 0; 14400, 0; 18000, 0; 21600, 0; 21600, 1000; 25200, 1000; 28800, 1000; 32400, 1000; 36000, 1000; 39600, 1000; 43200, 1000; 46800, 1000; 50400, 1000; 54000, 1000; 57600, 1000; 61200, 1000; 64800, 1000; 64800, 0; 68400, 0; 72000, 0; 75600, 0; 79200, 0; 82800, 0; 86400, 0], columns = {2}) annotation(Placement(transformation(extent = {{-22, -65}, {-8, -51}})));
   Utilities.HeatTransfer.HeatToStar HeatToStar(A = 2, eps = 1) annotation(Placement(transformation(extent = {{36, -68}, {56, -48}})));
   Modelica.Blocks.Sources.CombiTimeTable reference(tableName = "UserProfilesOffice", fileName = "./Tables/J1615/UserProfilesOffice.txt", tableOnFile = false, columns = {2},                                                                                                    extrapolation = Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
     table=[3600,22; 7200,22; 10800,22; 14400,22; 18000,22; 21600,22; 25200,
@@ -28,15 +27,32 @@ model TestCase4
         5140800,51.9; 5144400,52.1; 5148000,52.4; 5151600,52.6; 5155200,52.8;
         5158800,53; 5162400,53.2; 5166000,50.2; 5169600,49.9; 5173200,49.7;
         5176800,49.5; 5180400,49.2; 5184000,49])                                                                                                     annotation(Placement(transformation(extent = {{78, 78}, {98, 97}})));
+  Modelica.Blocks.Sources.CombiTimeTable tableMachines(
+    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+    tableName="UserProfilesOffice",
+    fileName="./Tables/J1615/UserProfilesOffice.txt",
+    tableOnFile=false,
+    columns={2},
+    table=[0,0; 3600,0; 3600,0; 7200,0; 7200,0; 10800,0; 10800,0; 14400,0;
+        14400,0; 18000,0; 18000,0; 21600,0; 21600,1000; 25200,1000; 25200,1000;
+        28800,1000; 28800,1000; 32400,1000; 32400,1000; 36000,1000; 36000,1000;
+        39600,1000; 39600,1000; 43200,1000; 43200,1000; 46800,1000; 46800,1000;
+        50400,1000; 50400,1000; 54000,1000; 54000,1000; 57600,1000; 57600,1000;
+        61200,1000; 61200,1000; 64800,1000; 64800,0; 68400,0; 68400,0; 72000,0;
+        72000,0; 75600,0; 75600,0; 79200,0; 79200,0; 82800,0; 82800,0; 86400,0])
+    annotation (Placement(transformation(extent={{-22,-65},{-8,-51}})));
 equation
   referenceTemp = reference.y;
   simulationTemp = reducedModel.airload.port.T;
   connect(machinesRadiative.port, HeatToStar.Therm) annotation(Line(points = {{30, -58}, {36.8, -58}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(tableMachines.y[1], machinesRadiative.Q_flow) annotation(Line(points = {{-7.3, -58}, {10, -58}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(outdoorTemp.port, reducedModel.equalAirTemp) annotation(Line(points = {{-26, 30}, {-8, 30}, {-8, 27.68}, {13.4, 27.68}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(infiltrationTemp.y, reducedModel.ventilationTemperature) annotation(Line(points = {{-25, 0}, {-8, 0}, {-8, 18.84}, {13.4, 18.84}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(infiltrationRate.y, reducedModel.ventilationRate) annotation(Line(points = {{15, -30}, {18, -30}, {18, 13.4}, {20.2, 13.4}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(HeatToStar.Star, reducedModel.internalGainsRad) annotation(Line(points = {{55.1, -58}, {58, -58}, {58, -10}, {40.09, -10}, {40.09, 13.4}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+  connect(tableMachines.y[1], machinesRadiative.Q_flow) annotation (Line(
+      points={{-7.3,-58},{10,-58}},
+      color={0,0,127},
+      smooth=Smooth.None));
   annotation(Documentation(revisions = "<html>
  <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
  </html>", info = "<html>
@@ -51,5 +67,6 @@ equation
  <p>Variable path: <code>reducedModel.airload.T</code></p>
  <p><br><br>All values are given in the VDI 6007-1.</p>
  <p>Same Test Case exists in VDI 6020.</p>
- </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(graphics), experiment(StopTime = 5.184e+006, Interval = 3600), __Dymola_experimentSetupOutput(events = false));
+ </html>"), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
+            -100},{100,100}}),                                                                          graphics), Icon(graphics), experiment(StopTime = 5.184e+006, Interval = 3600), __Dymola_experimentSetupOutput(events = false));
 end TestCase4;
