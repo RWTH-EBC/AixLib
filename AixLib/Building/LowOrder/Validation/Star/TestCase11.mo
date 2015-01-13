@@ -11,7 +11,7 @@ model TestCase11
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature outdoorTemp(T = 295.15) annotation(Placement(transformation(extent = {{-14, 47}, {6, 67}})));
   BaseClasses.ReducedOrderModel.ReducedOrderModelStar
                                                  reducedModel(C1i = 1.48216e+007, Aw = 7, g = 0.15, C1o = 1.60085e+006, epsi = 1, epso = 1, T0all(displayUnit = "K") = 295.15,                           withWindows = false, R1i = 0.000595515, Ai = 75.5, RRest = 0.042748777, R1o = 0.004366222, Ao = 10.5, alphaiwi = 3,
-    Vair=0.0001)                                                                                                     annotation(Placement(transformation(extent = {{64, 36}, {98, 76}})));
+    Vair=0.01)                                                                                                     annotation(Placement(transformation(extent = {{64, 36}, {98, 76}})));
   Utilities.Sources.HeaterCooler.IdealHeaterCoolerVar1 heater(Q_flow_heat = 1, Q_flow_cooler = 1, h_cooler = 0, KR_heater = 1000, KR_cooler = 1000, TN_heater = 1, TN_cooler = 1, h_heater = 500, l_cooler = -500, Cooler_on = false) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin = {-26, -20})));
   Modelica.Blocks.Sources.CombiTimeTable reference(tableName = "UserProfilesOffice", fileName = "./Tables/J1615/UserProfilesOffice.txt", tableOnFile = false, columns = {2, 3},                                                                                                    extrapolation = Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
     table=[3600,22,0; 7200,22,0; 10800,22,0; 14400,22,0; 18000,22,0; 21600,22,
