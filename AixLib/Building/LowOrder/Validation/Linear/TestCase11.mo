@@ -15,7 +15,7 @@ model TestCase11
     RRest=0.042768721,
     R1o=0.004367913,
     C1o=1.6008e+006,
-    Vair=0.0001)                                                                                                     annotation(Placement(transformation(extent = {{64, 36}, {98, 76}})));
+    Vair=0.01)                                                                                                     annotation(Placement(transformation(extent = {{64, 36}, {98, 76}})));
   Utilities.Sources.HeaterCooler.IdealHeaterCoolerVar1 heater(Q_flow_heat = 1, Q_flow_cooler = 1, h_cooler = 0, KR_heater = 1000, KR_cooler = 1000, TN_heater = 1, TN_cooler = 1, h_heater = 500, l_cooler = -500, Cooler_on = false) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin = {-26, -20})));
   Modelica.Blocks.Sources.CombiTimeTable setTemp(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, columns = {2, 3},
     table=[0,295.15,295.15; 3600,295.15,295.15; 7200,295.15,295.15; 10800,
