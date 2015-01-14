@@ -14,7 +14,7 @@ parameter Real splitFactor[dimension]= fill(1/dimension, dimension)
         iconTransformation(extent={{80,-20},{120,20}})));
 
 equation
-  signalOutput.Q_flow = splitFactor * signalInput.Q_flow
+  signalOutput.Q_flow = - splitFactor * signalInput.Q_flow
     "Connecting the output vector according to desired dimension";
 
   signalInput.T = signalOutput.T * splitFactor

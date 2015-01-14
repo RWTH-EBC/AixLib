@@ -30,11 +30,11 @@ public
     annotation (Placement(transformation(extent={{-48,16},{-36,28}})));
   Utilities.HeatTransfer.HeatToStar heatToStarInnerwall(A=Ai, eps=epsi) if withInnerwalls
     annotation (Placement(transformation(extent={{52,16},{40,28}})));
-  AixLib.Building.LowOrder.BaseClasses.ThermSplitter thermSplitterWin(dimension
-      =dimensionSplitter, splitFactor=vectorSplitterWin)
+  AixLib.Building.LowOrder.BaseClasses.ThermSplitter thermSplitterWin(dimension=
+       dimensionSplitter, splitFactor=vectorSplitterWin)
     annotation (Placement(transformation(extent={{-14,80},{6,100}})));
-  AixLib.Building.LowOrder.BaseClasses.ThermSplitter thermSplitterLoads(dimension
-      =dimensionSplitter, splitFactor=vectorSplitterLoads) annotation (
+  AixLib.Building.LowOrder.BaseClasses.ThermSplitter thermSplitterLoads(dimension=
+       dimensionSplitter, splitFactor=vectorSplitterLoads) annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
