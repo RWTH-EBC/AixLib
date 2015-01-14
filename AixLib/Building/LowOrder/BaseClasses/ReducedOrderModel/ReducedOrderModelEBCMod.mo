@@ -11,9 +11,9 @@ model ReducedOrderModelEBCMod
     "Coefficient of convective heat transfer (Window)"
    annotation(Dialog(tab="Outer walls",group = "Windows",enable = if withWindows then true else false));
 protected
-  parameter Integer dimension_help = if withInnerwalls then 2 else 1;
-  parameter Real vector_help1[dimension_help]= if withInnerwalls then {(Ao - Aw)/(Ao + Ai - Aw),(Ai)/(Ao + Ai - Aw)} else {(Ao - Aw)/(Ao + Ai - Aw)};
-  parameter Real vector_help2[dimension_help]= if withInnerwalls then {(Ao)/(Ao + Ai),(Ai)/(Ao + Ai)} else {(Ao)/(Ao + Ai)};
+  parameter Integer dimensionSplitter = if withInnerwalls then 2 else 1;
+  parameter Real vectorSplitterWin[dimensionSplitter]= if withInnerwalls then {(Ao - Aw)/(Ao + Ai - Aw),(Ai)/(Ao + Ai - Aw)} else {(Ao - Aw)/(Ao + Ai - Aw)};
+  parameter Real vectorSplitterLoads[dimensionSplitter]= if withInnerwalls then {(Ao)/(Ao + Ai),(Ai)/(Ao + Ai)} else {(Ao)/(Ao + Ai)};
 public
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a equalAirTempWindow if withWindows
     annotation (Placement(transformation(extent={{-108,19},{-72,55}}),
@@ -30,11 +30,13 @@ public
     annotation (Placement(transformation(extent={{-48,16},{-36,28}})));
   Utilities.HeatTransfer.HeatToStar heatToStarInnerwall(A=Ai, eps=epsi) if withInnerwalls
     annotation (Placement(transformation(extent={{52,16},{40,28}})));
-  AixLib.Building.LowOrder.BaseClasses.SplitterThermPercentAir
-    splitterThermPercentAir(ZoneFactor=vector_help1, dimension=dimension_help)
+  AixLib.Building.LowOrder.BaseClasses.ThermSplitter
+    splitterThermPercentAir(dimension=dimensionSplitter, splitFactor=
+        vectorSplitterWin)
     annotation (Placement(transformation(extent={{-14,80},{6,100}})));
-  AixLib.Building.LowOrder.BaseClasses.SplitterThermPercentAir
-    splitterThermPercentAir1(dimension=dimension_help, ZoneFactor=vector_help2)
+  AixLib.Building.LowOrder.BaseClasses.ThermSplitter
+    splitterThermPercentAir1(dimension=dimensionSplitter, splitFactor=
+        vectorSplitterLoads)
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,

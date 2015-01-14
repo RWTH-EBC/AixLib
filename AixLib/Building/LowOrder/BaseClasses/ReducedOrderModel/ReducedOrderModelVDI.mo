@@ -6,15 +6,17 @@ parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaRad=5
     "Radiative Coefficient of heat transfer between inner and outer walls"
 annotation(Dialog(tab="Inner walls",enable = if withInnerwalls then true else false));
 protected
-  parameter Integer dimension_help = if withInnerwalls then 2 else 1;
-  parameter Real vector_help1[dimension_help]= if withInnerwalls then {(Ao - Aw)/(Ao + Ai - Aw),(Ai)/(Ao + Ai - Aw)} else {(Ao - Aw)/(Ao + Ai - Aw)};
-  parameter Real vector_help2[dimension_help]= if withInnerwalls then {(Ao)/(Ao + Ai),(Ai)/(Ao + Ai)} else {(Ao)/(Ao + Ai)};
+  parameter Integer dimensionSplitter = if withInnerwalls then 2 else 1;
+  parameter Real vectorSplitterWin[dimensionSplitter]= if withInnerwalls then {(Ao - Aw)/(Ao + Ai - Aw),(Ai)/(Ao + Ai - Aw)} else {(Ao - Aw)/(Ao + Ai - Aw)};
+  parameter Real vectorSplitterLoads[dimensionSplitter]= if withInnerwalls then {(Ao)/(Ao + Ai),(Ai)/(Ao + Ai)} else {(Ao)/(Ao + Ai)};
 
-  SplitterThermPercentAir
-    splitterThermPercentAir(ZoneFactor=vector_help1, dimension=dimension_help)
+  ThermSplitter
+    splitterThermPercentAir(dimension=dimensionSplitter, splitFactor=
+        vectorSplitterWin)
     annotation (Placement(transformation(extent={{-12,80},{8,100}})));
-  SplitterThermPercentAir
-    splitterThermPercentAir1(dimension=dimension_help, ZoneFactor=vector_help2)
+  ThermSplitter
+    splitterThermPercentAir1(dimension=dimensionSplitter, splitFactor=
+        vectorSplitterLoads)
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
