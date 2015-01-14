@@ -13,14 +13,11 @@ parameter Real splitFactor[dimension]= fill(1/dimension, dimension)
     annotation (Placement(transformation(extent={{80,-20},{120,20}}),
         iconTransformation(extent={{80,-20},{120,20}})));
 
-protected
-  parameter Real unitvec[dimension]=ones(dimension);
-
 equation
-  signalOutput.Q_flow = splitFactor .* (signalInput.Q_flow * unitvec)
+  signalOutput.Q_flow = splitFactor * signalInput.Q_flow
     "Connecting the output vector according to desired dimension";
 
-  signalInput.T = sum(signalOutput.T * splitFactor)
+  signalInput.T = signalOutput.T * splitFactor
     "Equivalent building temperature rerouted to SignalInput";
 
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
