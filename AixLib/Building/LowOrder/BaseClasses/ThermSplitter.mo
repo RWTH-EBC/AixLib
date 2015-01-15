@@ -1,11 +1,11 @@
 within AixLib.Building.LowOrder.BaseClasses;
-model SplitterThermPercentAir
-  "A simple model which weights a given set of therm inputs to calculate an average temperature"
+model ThermSplitter
+  "A simple model which weights a given set of therm inputs to calculate an average temperature or heat flow and the other way around"
 
 parameter Integer dimension=6 "Dimension of the splitter";
 
-parameter Real ZoneFactor[dimension]= fill(1/dimension, dimension)
-    "weight factor for zones (between 0 and 1)";
+parameter Real splitFactor[dimension]= fill(1/dimension, dimension)
+    "split factor for outputs (between 0 and 1)";
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a signalInput
     annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
@@ -14,12 +14,10 @@ parameter Real ZoneFactor[dimension]= fill(1/dimension, dimension)
         iconTransformation(extent={{80,-20},{120,20}})));
 
 equation
-  for i in 1:dimension loop
-    signalOutput[i].Q_flow = - ZoneFactor[i] * signalInput.Q_flow
-      "Connecting the output vector according to desired dimension";
-  end for;
+  signalOutput.Q_flow = - splitFactor * signalInput.Q_flow
+    "Connecting the output vector according to desired dimension";
 
-  signalInput.T = sum(signalOutput.T * ZoneFactor)
+  signalInput.T = signalOutput.T * splitFactor
     "Equivalent building temperature rerouted to SignalInput";
 
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
@@ -57,5 +55,25 @@ equation
         Text(
           extent={{-48,-82},{52,-100}},
           lineColor={0,0,255},
-          textString="Percent")}));
-end SplitterThermPercentAir;
+          textString="ThermSplitter")}),
+    Documentation(info="<html>
+<p>ThermSplitter is a simple model which weights a given set of therm inputs to calculate an average temperature or heat flow and the other way around</p>
+<h4>Main equations</h4>
+<p><img src=\"modelica://AixLib/Images/equations/equation-ShHZPTo9.png\" alt=\"signalOutput.Q_flow = splitFactor .* (signalInput.Q_flow * unitvec) \"/></p>
+<p><img src=\"modelica://AixLib/Images/equations/equation-BtreVeqi.png\" alt=\"signalInput.T = sum(signalOutput.T * splitFactor) \"/></p>
+<h4>Assumptions and limitations</h4>
+<h4>Typical use and important parameters</h4>
+<p>This model is used to weight therm ports according to given split factors.</p>
+<p>The model needs the dimension of the splitted therm port and the split factors, which are between 0 and 1.</p>
+<h4>Options</h4>
+<h4>Validation</h4>
+<h4>Implementation</h4>
+<p>In ReducedOrderModelVDI and ReducedOrderModelEBCMod</p>
+<h4>References</h4>
+</html>", revisions="<html>
+<ul>
+<li><i>October 2014,&nbsp;</i> by Peter Remmen:<br>Implemented.</li>
+<li><i>January 2015,&nbsp;</i> by Peter Remmen:<br>changed name and vectorized equation, added documentation</li>
+</ul>
+</html>"));
+end ThermSplitter;

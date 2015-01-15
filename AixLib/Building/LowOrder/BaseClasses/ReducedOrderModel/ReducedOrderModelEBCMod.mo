@@ -11,9 +11,9 @@ model ReducedOrderModelEBCMod
     "Coefficient of convective heat transfer (Window)"
    annotation(Dialog(tab="Outer walls",group = "Windows",enable = if withWindows then true else false));
 protected
-  parameter Integer dimension_help = if withInnerwalls then 2 else 1;
-  parameter Real vector_help1[dimension_help]= if withInnerwalls then {(Ao - Aw)/(Ao + Ai - Aw),(Ai)/(Ao + Ai - Aw)} else {(Ao - Aw)/(Ao + Ai - Aw)};
-  parameter Real vector_help2[dimension_help]= if withInnerwalls then {(Ao)/(Ao + Ai),(Ai)/(Ao + Ai)} else {(Ao)/(Ao + Ai)};
+  parameter Integer dimensionSplitter = if withInnerwalls then 2 else 1;
+  parameter Real vectorSplitterWin[dimensionSplitter]= if withInnerwalls then {(Ao - Aw)/(Ao + Ai - Aw),(Ai)/(Ao + Ai - Aw)} else {(Ao - Aw)/(Ao + Ai - Aw)};
+  parameter Real vectorSplitterLoads[dimensionSplitter]= if withInnerwalls then {(Ao)/(Ao + Ai),(Ai)/(Ao + Ai)} else {(Ao)/(Ao + Ai)};
 public
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a equalAirTempWindow if withWindows
     annotation (Placement(transformation(extent={{-108,19},{-72,55}}),
@@ -30,12 +30,12 @@ public
     annotation (Placement(transformation(extent={{-48,16},{-36,28}})));
   Utilities.HeatTransfer.HeatToStar heatToStarInnerwall(A=Ai, eps=epsi) if withInnerwalls
     annotation (Placement(transformation(extent={{52,16},{40,28}})));
-  AixLib.Building.LowOrder.BaseClasses.SplitterThermPercentAir
-    splitterThermPercentAir(ZoneFactor=vector_help1, dimension=dimension_help)
+  AixLib.Building.LowOrder.BaseClasses.ThermSplitter thermSplitterWin(dimension=
+       dimensionSplitter, splitFactor=vectorSplitterWin)
     annotation (Placement(transformation(extent={{-14,80},{6,100}})));
-  AixLib.Building.LowOrder.BaseClasses.SplitterThermPercentAir
-    splitterThermPercentAir1(dimension=dimension_help, ZoneFactor=vector_help2)
-    annotation (Placement(transformation(
+  AixLib.Building.LowOrder.BaseClasses.ThermSplitter thermSplitterLoads(dimension=
+       dimensionSplitter, splitFactor=vectorSplitterLoads) annotation (
+      Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={94,0})));
@@ -58,11 +58,11 @@ equation
       points={{-38,37},{-7,37},{-7,0}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(solarRadToHeatWindowRad.heatPort, splitterThermPercentAir.signalInput)
-    annotation (Line(
-      points={{-27,90},{-14,90}},
-      color={191,0,0},
-      smooth=Smooth.None));
+    connect(solarRadToHeatWindowRad.heatPort, thermSplitterWin.signalInput)
+      annotation (Line(
+        points={{-27,90},{-14,90}},
+        color={191,0,0},
+        smooth=Smooth.None));
   end if;
 
   if withInnerwalls then
@@ -80,16 +80,16 @@ equation
       color={95,95,95},
       pattern=LinePattern.None,
       smooth=Smooth.None));
-  connect(splitterThermPercentAir1.signalOutput[2], innerwall.port_a)
-    annotation (Line(
-      points={{94,10},{94,16},{56,16},{56,-0.909091}},
-      color={191,0,0},
-      smooth=Smooth.None));
-  connect(splitterThermPercentAir.signalOutput[2], innerwall.port_a)
-    annotation (Line(
-      points={{6,90},{56,90},{56,-0.909091}},
-      color={191,0,0},
-      smooth=Smooth.None));
+    connect(thermSplitterLoads.signalOutput[2], innerwall.port_a) annotation (
+        Line(
+        points={{94,10},{94,16},{56,16},{56,-0.909091}},
+        color={191,0,0},
+        smooth=Smooth.None));
+    connect(thermSplitterWin.signalOutput[2], innerwall.port_a) annotation (
+        Line(
+        points={{6,90},{56,90},{56,-0.909091}},
+        color={191,0,0},
+        smooth=Smooth.None));
   end if;
 
   connect(heatToStarOuterwall.Therm, outerwall.port_b) annotation (Line(
@@ -97,21 +97,19 @@ equation
       color={191,0,0},
       smooth=Smooth.None));
 
-  connect(internalGainsRad, splitterThermPercentAir1.signalInput) annotation (
-      Line(
+  connect(internalGainsRad, thermSplitterLoads.signalInput) annotation (Line(
       points={{80,-90},{80,-26},{94,-26},{94,-10}},
       color={95,95,95},
       pattern=LinePattern.None,
       smooth=Smooth.None));
 
-  connect(splitterThermPercentAir1.signalOutput[1], outerwall.port_b)
-    annotation (Line(
+  connect(thermSplitterLoads.signalOutput[1], outerwall.port_b) annotation (
+      Line(
       points={{94,10},{94,30},{-50,30},{-50,-0.909091}},
       color={191,0,0},
       smooth=Smooth.None));
 
-  connect(splitterThermPercentAir.signalOutput[1], outerwall.port_b)
-    annotation (Line(
+  connect(thermSplitterWin.signalOutput[1], outerwall.port_b) annotation (Line(
       points={{6,90},{6,30},{-50,30},{-50,-0.909091}},
       color={191,0,0},
       smooth=Smooth.None));
