@@ -16,7 +16,9 @@ model TestCase11
     R1o=0.004367913,
     C1o=1.6008e+006,
     Vair=0.01)                                                                                                     annotation(Placement(transformation(extent = {{64, 36}, {98, 76}})));
-  Utilities.Sources.HeaterCooler.IdealHeaterCoolerVar1 heater(Q_flow_heat = 1, Q_flow_cooler = 1, h_cooler = 0, KR_heater = 1000, KR_cooler = 1000, TN_heater = 1, TN_cooler = 1, h_heater = 500, l_cooler = -500, Cooler_on = false) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin = {-26, -20})));
+  Utilities.Sources.HeaterCooler.IdealHeaterCoolerVar1 heater(Q_flow_heat = 1, Q_flow_cooler = 1, h_cooler = 0,                   KR_cooler = 1000,                TN_cooler = 1, h_heater = 500, l_cooler = -500, Cooler_on = false,
+    TN_heater=0.1,
+    KR_heater=10)                                                                                                     annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin = {-26, -20})));
   Modelica.Blocks.Sources.CombiTimeTable setTemp(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, columns = {2, 3},
     table=[0,295.15,295.15; 3600,295.15,295.15; 7200,295.15,295.15; 10800,
         295.15,295.15; 14400,295.15,295.15; 18000,295.15,295.15; 21600,295.15,
@@ -46,7 +48,9 @@ model TestCase11
         500; 5173200,26.7,500; 5176800,26.6,500; 5180400,26.5,500; 5184000,
         26.4,500])                                                                                                     annotation(Placement(transformation(extent = {{-96, 78}, {-76, 97}})));
   Modelica.Blocks.Math.Add sumHeatLoad annotation(Placement(transformation(extent = {{86, 86}, {96, 96}})));
-  Utilities.Sources.HeaterCooler.IdealHeaterCoolerVar1 cooler(Q_flow_heat = 1, Q_flow_cooler = 1, h_cooler = 0, KR_heater = 1000, KR_cooler = 1000, TN_heater = 1, TN_cooler = 1, h_heater = 500, l_cooler = -500, Heater_on = false) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin = {-26, -48})));
+  Utilities.Sources.HeaterCooler.IdealHeaterCoolerVar1 cooler(Q_flow_heat = 1, Q_flow_cooler = 1, h_cooler = 0,                   KR_cooler = 1000,                TN_cooler = 1, h_heater = 500, l_cooler = -500, Heater_on = false,
+    KR_heater=1000,
+    TN_heater=1)                                                                                                     annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin = {-26, -48})));
   Modelica.Blocks.Sources.CombiTimeTable innerLoads(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableName = "UserProfilesOffice", fileName = "./Tables/J1615/UserProfilesOffice.txt", tableOnFile = false, columns = {2, 3}, table = [0, 0, 0; 3600, 0, 0; 7200, 0, 0; 10800, 0, 0; 14400, 0, 0; 18000, 0, 0; 21600, 0, 0; 21600, 0, 1000; 25200, 0, 1000; 28800, 0, 1000; 32400, 0, 1000; 36000, 0, 1000; 39600, 0, 1000; 43200, 0, 1000; 46800, 0, 1000; 50400, 0, 1000; 54000, 0, 1000; 57600, 0, 1000; 61200, 0, 1000; 64800, 0, 1000; 64800, 0, 0; 68400, 0, 0; 72000, 0, 0; 75600, 0, 0; 79200, 0, 0; 82800, 0, 0; 86400, 0, 0]) annotation(Placement(transformation(extent = {{-24, -93}, {-10, -79}})));
 equation
   connect(machinesRadiative.port, heatToStar.Therm) annotation (Line(
