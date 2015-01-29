@@ -23,4 +23,5 @@ assert dest_dir != None, 'AixLib directory was not found in MODELICAPATH'
 assert annex60_dir != None, 'Annex60 directory was not found in MODELICAPATH'
 
 this_merge = m.Annex60(annex60_dir, dest_dir) 
+this_merge.set_excluded_packages(["Experimental", "Obsolete"])
 this_merge.merge()
