@@ -1,11 +1,12 @@
 within AixLib.HVAC.HeatExchanger;
-
 model Recuperator "recuperator model with selectable flow arrangement"
   extends Interfaces.FourPortMoistAir;
   outer BaseParameters baseParameters "System properties";
   // Pressure loss
-  parameter Modelica.SIunits.Area Aflow[2] = {0.193 * 0.300 / 2, 0.193 * 0.300 / 2} "flow area for media";
-  parameter Real zeta[2](each min = 0) = {2 * 130 / 1.225 / (400 / 3600 / Aflow[1]) ^ 2, 2 * 130 / 1.225 / (400 / 3600 / Aflow[2]) ^ 2} "pressure loss coefficients";
+  parameter Modelica.SIunits.Area Aflow[2] = {0.193 * 0.300 / 2, 0.193 * 0.300 / 2}
+    "flow area for media";
+  parameter Real zeta[2](each min = 0) = {2 * 130 / 1.225 / (400 / 3600 / Aflow[1]) ^ 2, 2 * 130 / 1.225 / (400 / 3600 / Aflow[2]) ^ 2}
+    "pressure loss coefficients";
   extends RecuperatorNoMediumVarcp;
   Volume.VolumeMoistAir volume1(useTstart = false, V = 1e-4) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-40, 0})));
   Sensors.PropertySensorMoistAir sensor1 annotation(Placement(transformation(extent = {{-84, 50}, {-64, 70}})));
@@ -35,7 +36,9 @@ equation
   connect(sensor3.portMoistAir_b, port_2b) annotation(Line(points = {{80, 60}, {100, 60}}, color = {0, 127, 255}, smooth = Smooth.None));
   connect(volume2.heatPort, simpleHeatTransfer.port_a) annotation(Line(points = {{30, 0}, {10, 0}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(simpleHeatTransfer.port_b, volume1.heatPort) annotation(Line(points = {{-10, 0}, {-30, 0}}, color = {191, 0, 0}, smooth = Smooth.None));
-  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Polygon(points = {{-80, 80}, {-80, -80}, {80, 80}, {-80, 80}}, lineColor = {175, 175, 175}, smooth = Smooth.None, fillColor = {85, 170, 255}, fillPattern = FillPattern.Solid), Polygon(points = {{-80, -80}, {80, -80}, {80, 80}, {-80, -80}}, lineColor = {175, 175, 175}, smooth = Smooth.None, fillColor = {255, 85, 85}, fillPattern = FillPattern.Solid)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(revisions = "<html>
+  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points = {{-80, 80}, {-80, -80}, {80, 80}, {-80, 80}}, lineColor = {175, 175, 175}, smooth = Smooth.None, fillColor = {85, 170, 255},
+            fillPattern =                                                                                                    FillPattern.Solid), Polygon(points = {{-80, -80}, {80, -80}, {80, 80}, {-80, -80}}, lineColor = {175, 175, 175}, smooth = Smooth.None, fillColor = {255, 85, 85},
+            fillPattern =                                                                                                    FillPattern.Solid)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(revisions = "<html>
  <p>12.01.2014, Peter Matthes</p>
  <p><ul>
  <li>implemented</li>
@@ -63,3 +66,4 @@ equation
  </table>
  </html>"));
 end Recuperator;
+

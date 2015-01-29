@@ -5,7 +5,7 @@ model StaticPipe_Validation
       Modelica.Media.Water.StandardWater
      constrainedby Modelica.Media.Interfaces.PartialMedium;
 
-  HVAC.Pipes.StaticPipe pipe(
+  StaticPipe pipe(
     l=10,
     D=0.02412,
     e=0.03135,

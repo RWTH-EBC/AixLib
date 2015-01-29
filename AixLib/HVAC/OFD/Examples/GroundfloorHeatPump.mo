@@ -9,13 +9,13 @@ model GroundfloorHeatPump
      Modelica.Media.Water.ConstantPropertyLiquidWater
      constrainedby Modelica.Media.Interfaces.PartialMedium;
 
-  Pumps.Pump pump(MinMaxCharacteristics = AixLib.DataBase.Pumps.Pump1(), V_flow_max = 2, ControlStrategy = 2, V_flow(fixed = false, start = 0.01), Head(fixed = false, start = 1),
+  Fluid.Movers.Pump pump(MinMaxCharacteristics = AixLib.DataBase.Pumps.Pump1(), V_flow_max = 2, ControlStrategy = 2, V_flow(fixed = false, start = 0.01), Head(fixed = false, start = 1),
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                                                                                                     annotation(Placement(transformation(extent = {{86, -16}, {66, -36}})));
-  Pipes.StaticPipe Flow(D = 0.016, l = 2, dp(start = 4000),
+  Fluid.FixedResistances.StaticPipe Flow(D = 0.016, l = 2, dp(start = 4000),
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                                      annotation(Placement(transformation(extent = {{20, -18}, {40, 2}})));
-  Pipes.StaticPipe Return(D = 0.016, l = 2, dp(start = 4000),
+  Fluid.FixedResistances.StaticPipe Return(D = 0.016, l = 2, dp(start = 4000),
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                                        annotation(Placement(transformation(extent = {{40, -36}, {20, -16}})));
   Modelica.Blocks.Sources.BooleanConstant nightSignal(k = false) annotation(Placement(transformation(extent = {{42, -58}, {62, -38}})));
@@ -30,22 +30,20 @@ model GroundfloorHeatPump
   Modelica.Blocks.Sources.CombiTimeTable roomTemperaturesConv(                                                              tableOnFile = true, tableName = "TemperaturesConv", columns = {2, 3, 4, 5, 6}, offset = {0},
     extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
     fileName=
-        "modelica://AixLib/Resources/HVAC_OFD_ExampleData/TemperaturesConv.mat")
-                                                                                                        annotation(Placement(transformation(extent = {{71, 66}, {91, 86}})));
+        "modelica://AixLib/Resources/HVAC_OFD_ExampleData/TemperaturesConv.mat")                        annotation(Placement(transformation(extent = {{71, 66}, {91, 86}})));
   Modelica.Blocks.Sources.CombiTimeTable roomTemperaturesRad(                                                              tableOnFile = true, tableName = "TemperaturesRad", columns = {2, 3, 4, 5, 6}, offset = {0},
     extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
     fileName=
-        "modelica://AixLib/Resources/HVAC_OFD_ExampleData/TemperaturesRad.mat")
-                                                                                                        annotation(Placement(transformation(extent = {{1, 66}, {21, 86}})));
+        "modelica://AixLib/Resources/HVAC_OFD_ExampleData/TemperaturesRad.mat")                         annotation(Placement(transformation(extent = {{1, 66}, {21, 86}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
                             temperatureSensor(redeclare package Medium = Medium,
       m_flow_nominal=0.01)                    annotation(Placement(transformation(extent = {{48, -18}, {68, 2}})));
-  HeatGeneration.HeatPump heatPump(volumeCondenser(T(start = 323.15, fixed = true)), tablePower = [0.0, 273.15, 283.15; 308.15, 1100, 1150; 328.15, 1600, 1750], tableHeatFlowCondenser = [0.0, 273.15, 283.15; 308.15, 4800, 6300; 328.15, 4400, 5750],
+  Fluid.HeatExchangers.HeatPump heatPump(volumeCondenser(T(start = 323.15, fixed = true)), tablePower = [0.0, 273.15, 283.15; 308.15, 1100, 1150; 328.15, 1600, 1750], tableHeatFlowCondenser = [0.0, 273.15, 283.15; 308.15, 4800, 6300; 328.15, 4400, 5750],
     redeclare package Medium = Medium)                                                                                                     annotation(Placement(transformation(extent = {{-38, -30}, {-14, -4}})));
-  HeatGeneration.Utilities.FuelCounter fuelCounter annotation(Placement(transformation(extent = {{-23, -46}, {-7, -34}})));
-  Pumps.Pump pump1(redeclare package Medium = Medium, m_flow_small=1e-4)
+  Fluid.HeatExchangers.Utilities.FuelCounter fuelCounter annotation(Placement(transformation(extent = {{-23, -46}, {-7, -34}})));
+  Fluid.Movers.Pump pump1(redeclare package Medium = Medium, m_flow_small=1e-4)
                    annotation(Placement(transformation(extent = {{-56, -1}, {-42, -15}})));
-  Pipes.StaticPipe pipe(D = 0.01, l = 2,
+  Fluid.FixedResistances.StaticPipe pipe(D = 0.01, l = 2,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                   annotation(Placement(transformation(extent = {{-80, -17}, {-62, 1}})));
   AixLib.Fluid.Sources.Boundary_ph

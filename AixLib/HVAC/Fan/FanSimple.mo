@@ -1,23 +1,28 @@
 within AixLib.HVAC.Fan;
-
 model FanSimple "Simple Fan Model"
   import AixLib;
   extends Interfaces.TwoPortMoistAirFluidprops;
   outer BaseParameters baseParameters "System properties";
-  parameter AixLib.DataBase.Fans.FanCharacteristicsBaseDataDefinition Characteristics = AixLib.DataBase.Fans.Fan1() "dp = f(V_flow)  characteristics for the Fan (n = const)" annotation(choicesAllMatching = true);
-  parameter Boolean UseRotationalSpeedInput = false "If true, rotational speed (n/n_0) can be varied by real input" annotation(Evaluate = true, HideResult = true, choices(__Dymola_checkBox = true));
+  parameter AixLib.DataBase.Fans.FanCharacteristicsBaseDataDefinition Characteristics = AixLib.DataBase.Fans.Fan1()
+    "dp = f(V_flow)  characteristics for the Fan (n = const)"                                                                                                     annotation(choicesAllMatching = true);
+  parameter Boolean UseRotationalSpeedInput = false
+    "If true, rotational speed (n/n_0) can be varied by real input"                                                 annotation(Evaluate = true, HideResult = true, choices(__Dymola_checkBox = true));
   Modelica.SIunits.VolumeFlowRate Volflow(min = 0) "Volume Flow before Fan";
-  Modelica.SIunits.Pressure PressureIncrease(min = 0) "Pressure Increase of Fan";
+  Modelica.SIunits.Pressure PressureIncrease(min = 0)
+    "Pressure Increase of Fan";
   Real eta "efficieny of Fan";
   Modelica.SIunits.EnthalpyFlowRate H_flow_a "Enthalpy at port a in W";
   Modelica.SIunits.EnthalpyFlowRate H_flow_b "Enthalpy at port b in W";
   Modelica.SIunits.Power P_t "Technical Work of Fan";
   Modelica.SIunits.Power P_t_rev "Reversible technical Work of Fan";
-  Modelica.Blocks.Tables.CombiTable1Ds table_Characteristics(tableOnFile = false, table = Characteristics.dp, smoothness = Modelica.Blocks.Types.Smoothness.LinearSegments, columns = {2, 3}) "Table with dp = f(V_flow) and eta = f(V_flow) characteristics for the Fan (n = const)" annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Tables.CombiTable1Ds table_Characteristics(tableOnFile = false, table = Characteristics.dp, smoothness = Modelica.Blocks.Types.Smoothness.LinearSegments, columns = {2, 3})
+    "Table with dp = f(V_flow) and eta = f(V_flow) characteristics for the Fan (n = const)"
+                                                                                                        annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealOutput Power annotation(Placement(transformation(extent = {{-12, -12}, {12, 12}}, rotation = 270, origin = {0, -104})));
   Modelica.Blocks.Interfaces.RealInput n_relative(min = 0, max = 1) if UseRotationalSpeedInput annotation(Placement(transformation(extent = {{-14, -16}, {14, 16}}, rotation = 270, origin = {0, 106})));
 protected
-  Modelica.Blocks.Interfaces.RealInput n_internal "Needed to connect to conditional connector";
+  Modelica.Blocks.Interfaces.RealInput n_internal
+    "Needed to connect to conditional connector";
 initial equation
 
 equation
@@ -46,7 +51,8 @@ equation
   PressureIncrease = n_internal * n_internal * table_Characteristics.y[1];
   Volflow = portMoistAir_a.m_flow / rho_MoistAir;
   Power = P_t;
-  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Ellipse(extent = {{-100, 100}, {100, -100}}, lineColor = {0, 0, 0}, fillPattern = FillPattern.Solid, fillColor = {170, 255, 255}), Line(points = {{-78, 60}, {92, 40}, {90, 40}}, color = {0, 0, 0}, smooth = Smooth.None), Line(points = {{-80, -60}, {92, -40}, {92, -40}}, color = {0, 0, 0}, smooth = Smooth.None)}), Documentation(info = "<html>
+  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Ellipse(extent = {{-100, 100}, {100, -100}}, lineColor = {0, 0, 0},
+            fillPattern =                                                                                                    FillPattern.Solid, fillColor = {170, 255, 255}), Line(points = {{-78, 60}, {92, 40}, {90, 40}}, color = {0, 0, 0}, smooth = Smooth.None), Line(points = {{-80, -60}, {92, -40}, {92, -40}}, color = {0, 0, 0}, smooth = Smooth.None)}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>A simple fan model with variation of rotational speed. The properties of the fan are table based.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
@@ -61,3 +67,4 @@ equation
  </ul></p>
  </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
 end FanSimple;
+

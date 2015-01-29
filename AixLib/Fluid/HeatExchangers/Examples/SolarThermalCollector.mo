@@ -21,19 +21,19 @@ model SolarThermalCollector
   AixLib.Fluid.Sensors.TemperatureTwoPort
                             T1(redeclare package Medium = Medium,
       m_flow_nominal=0.01)     annotation(Placement(transformation(extent = {{-28, -10}, {-8, 10}})));
-  AixLib.HVAC.HeatGeneration.SolarThermal solarThermal(
+  AixLib.Fluid.HeatExchangers.SolarThermal solarThermal(
     A=2,
     Collector=AixLib.DataBase.SolarThermal.VacuumCollector(),
     redeclare package Medium = Medium,
     m_flow_nominal=0.01)
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
-  AixLib.HVAC.Sources.TempAndRad tempAndRad(temperatureOT=
+  AixLib.Fluid.Sources.TempAndRad tempAndRad(temperatureOT=
         AixLib.DataBase.Weather.SummerDay()) annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={8,86})));
-  Pipes.StaticPipe pipe(l = 100,
+  Fluid.FixedResistances.StaticPipe pipe(l = 100,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)           annotation(Placement(transformation(extent = {{54, -10}, {74, 10}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort

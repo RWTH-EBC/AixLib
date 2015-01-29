@@ -1,10 +1,13 @@
 within AixLib.HVAC.HumidifierAndDehumidifier;
 
+
 model CoolerDehumidifier "Dehumidifier through cooling"
   extends Interfaces.TwoPortMoistAirFluidprops;
   outer BaseParameters baseParameters "System properties";
-  Modelica.SIunits.Pressure p_Saturation_CoolSurface "Saturation Pressure of Steam at Sensor";
-  Real X_Saturation_CoolSurface(min = 0) "saturation mass fractions of water to dry air m_w/m_a in Sensor";
+  Modelica.SIunits.Pressure p_Saturation_CoolSurface
+    "Saturation Pressure of Steam at Sensor";
+  Real X_Saturation_CoolSurface(min = 0)
+    "saturation mass fractions of water to dry air m_w/m_a in Sensor";
   Real Massflow_waterOut "dehumidified water flow";
   Modelica.SIunits.EnthalpyFlowRate H_flow_a "Enthalpy at port a in W";
   Modelica.SIunits.EnthalpyFlowRate H_flow_b "Enthalpy at port b in W";
@@ -28,7 +31,7 @@ equation
   //Calculate help variables
   H_flow_b = portMoistAir_b.m_flow * actualStream(portMoistAir_b.h_outflow);
   H_flow_a = portMoistAir_a.m_flow * actualStream(portMoistAir_a.h_outflow);
-  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent = {{-80, 80}, {80, -80}}, fillColor = {85, 170, 255}, fillPattern = FillPattern.HorizontalCylinder, pattern = LinePattern.None, lineColor = {0, 0, 0}), Line(points = {{-50, -56}, {-50, -34}}, color = {0, 0, 0}, pattern = LinePattern.Dash, smooth = Smooth.None), Line(points = {{-20, -56}, {-20, -34}}, color = {0, 0, 0}, pattern = LinePattern.Dash, smooth = Smooth.None), Line(points = {{12, -56}, {12, -34}}, color = {0, 0, 0}, pattern = LinePattern.Dash, smooth = Smooth.None), Line(points = {{46, -56}, {46, -34}}, color = {0, 0, 0}, pattern = LinePattern.Dash, smooth = Smooth.None)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(info = "<html>
+  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent=  {{-80, 80}, {80, -80}}, fillColor=  {85, 170, 255}, fillPattern=  FillPattern.HorizontalCylinder, pattern=  LinePattern.None, lineColor=  {0, 0, 0}), Line(points=  {{-50, -56}, {-50, -34}}, color=  {0, 0, 0}, pattern=  LinePattern.Dash, smooth=  Smooth.None), Line(points=  {{-20, -56}, {-20, -34}}, color=  {0, 0, 0}, pattern=  LinePattern.Dash, smooth=  Smooth.None), Line(points=  {{12, -56}, {12, -34}}, color=  {0, 0, 0}, pattern=  LinePattern.Dash, smooth=  Smooth.None), Line(points=  {{46, -56}, {46, -34}}, color=  {0, 0, 0}, pattern=  LinePattern.Dash, smooth=  Smooth.None)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for a cooling dehumidfier.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>

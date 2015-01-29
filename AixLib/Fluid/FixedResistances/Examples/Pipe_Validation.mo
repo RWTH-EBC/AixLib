@@ -6,7 +6,7 @@ model Pipe_Validation
      Modelica.Media.Water.ConstantPropertyLiquidWater
      constrainedby Modelica.Media.Interfaces.PartialMedium;
 
-  HVAC.Pipes.Pipe pipe(
+  Pipe pipe(
     l=10,
     D=0.02412,
     e=0.03135,

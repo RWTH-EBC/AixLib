@@ -1,7 +1,7 @@
 within AixLib.Fluid.HeatExchangers;
 model SolarThermal "Model of a solar thermal panel"
   import AixLib;
-  extends AixLib.HVAC.HeatGeneration.BaseClasses.PartialHeatGen(
+  extends AixLib.Fluid.HeatExchangers.BaseClasses.PartialHeatGen(
     volume(redeclare package Medium = Medium),
     massFlowSensor(redeclare package Medium = Medium),
     T_in(redeclare package Medium = Medium));
@@ -12,8 +12,8 @@ model SolarThermal "Model of a solar thermal panel"
   Modelica.Blocks.Interfaces.RealInput Irradiation
     "Solar irradiation on a horizontal plane in W/m2"                                                annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 270, origin = {10, 108})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {0, 34})));
-  AixLib.HVAC.HeatGeneration.Utilities.SolarThermalEfficiency solarThermalEfficiency(Collector
-      =Collector)
+  AixLib.Fluid.HeatExchangers.Utilities.SolarThermalEfficiency solarThermalEfficiency(Collector=
+       Collector)
     annotation (Placement(transformation(extent={{-76,48},{-56,68}})));
   Modelica.Blocks.Math.Max max1 annotation(Placement(transformation(extent = {{-46, 40}, {-26, 60}})));
   Modelica.Blocks.Sources.Constant const(k = 0) annotation(Placement(transformation(extent = {{-66, 30}, {-58, 38}})));

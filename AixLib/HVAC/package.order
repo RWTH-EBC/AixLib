@@ -2,17 +2,10 @@ BaseParameters
 Ductwork
 Fan
 HeatExchanger
-HeatGeneration
 HumidifierAndDehumidifier
-HydraulicResistances
 Interfaces
 OFD
 Office
-Pipes
-Pumps
-Radiators
 Sensors
 Sources
-Storage
-Valves
 Volume

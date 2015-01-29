@@ -1,17 +1,21 @@
 within AixLib.HVAC.Sources;
-
 model Boundary_ph
   outer BaseParameters baseParameters "System properties";
-  parameter Boolean use_p_in = false "Get the pressure from the input connector" annotation(Evaluate = true, HideResult = true, choices(__Dymola_checkBox = true));
-  parameter Boolean use_h_in = false "Get the specific enthalpy from the input connector" annotation(Evaluate = true, HideResult = true, choices(__Dymola_checkBox = true));
+  parameter Boolean use_p_in = false
+    "Get the pressure from the input connector"                                  annotation(Evaluate = true, HideResult = true, choices(__Dymola_checkBox = true));
+  parameter Boolean use_h_in = false
+    "Get the specific enthalpy from the input connector"                                  annotation(Evaluate = true, HideResult = true, choices(__Dymola_checkBox = true));
   parameter Modelica.SIunits.Pressure p = 1e5 "Fixed value of pressure" annotation(Evaluate = true, Dialog(enable = not use_p_in));
-  parameter Modelica.SIunits.SpecificEnthalpy h = 1e5 "Fixed value of specific enthalpy" annotation(Evaluate = true, Dialog(enable = not use_h_in));
+  parameter Modelica.SIunits.SpecificEnthalpy h = 1e5
+    "Fixed value of specific enthalpy"                                                   annotation(Evaluate = true, Dialog(enable = not use_h_in));
   Interfaces.Port_a port_a annotation(Placement(transformation(extent = {{90, -10}, {110, 10}})));
   Modelica.Blocks.Interfaces.RealInput p_in if use_p_in annotation(Placement(transformation(extent = {{-140, 40}, {-100, 80}})));
   Modelica.Blocks.Interfaces.RealInput h_in if use_h_in annotation(Placement(transformation(extent = {{-140, -60}, {-100, -20}})));
 protected
-  Modelica.Blocks.Interfaces.RealInput p_in_internal "Needed to connect to conditional connector";
-  Modelica.Blocks.Interfaces.RealInput h_in_internal "Needed to connect to conditional connector";
+  Modelica.Blocks.Interfaces.RealInput p_in_internal
+    "Needed to connect to conditional connector";
+  Modelica.Blocks.Interfaces.RealInput h_in_internal
+    "Needed to connect to conditional connector";
 equation
   connect(p_in, p_in_internal);
   connect(h_in, h_in_internal);
@@ -23,7 +27,8 @@ equation
   end if;
   port_a.p = p_in_internal;
   port_a.h_outflow = h_in_internal;
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(graphics = {Ellipse(extent = {{-100, 100}, {100, -100}}, lineColor = {0, 0, 255}, fillColor = {0, 0, 255}, fillPattern = FillPattern.Sphere)}), Documentation(revisions = "<html>
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(graphics={  Ellipse(extent = {{-100, 100}, {100, -100}}, lineColor = {0, 0, 255}, fillColor = {0, 0, 255},
+            fillPattern =                                                                                                    FillPattern.Sphere)}), Documentation(revisions = "<html>
  <p>01.10.2013, by <i>Pooyan Jahangiri</i>: implemented</p>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
@@ -40,3 +45,4 @@ equation
  <p><a href=\"AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem\">AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem</a></p>
  </html>"));
 end Boundary_ph;
+

@@ -1,15 +1,19 @@
 within AixLib.HVAC.Interfaces;
-
-partial model TwoPort "Component with two hydraulic ports and mass flow rate from a to b"
-  Modelica.SIunits.PressureDifference dp "Pressure drop between the two ports (= port_a.p - port_b.p)";
+partial model TwoPort
+  "Component with two hydraulic ports and mass flow rate from a to b"
+  Modelica.SIunits.PressureDifference dp
+    "Pressure drop between the two ports (= port_a.p - port_b.p)";
   Modelica.SIunits.MassFlowRate m_flow "Mass flowing from port a to port b";
   outer BaseParameters baseParameters "System properties";
   Port_a port_a annotation(Placement(transformation(extent = {{-110, -10}, {-90, 10}})));
   Port_b port_b annotation(Placement(transformation(extent = {{90, -10}, {110, 10}})));
 protected
-  parameter Modelica.SIunits.DynamicViscosity mu = baseParameters.mu_Water "Dynamic viscosity";
-  parameter Modelica.SIunits.Density rho = baseParameters.rho_Water "Density of the fluid";
-  parameter Modelica.SIunits.SpecificHeatCapacity cp = baseParameters.cp_Water "Specific heat capacity";
+  parameter Modelica.SIunits.DynamicViscosity mu = baseParameters.mu_Water
+    "Dynamic viscosity";
+  parameter Modelica.SIunits.Density rho = baseParameters.rho_Water
+    "Density of the fluid";
+  parameter Modelica.SIunits.SpecificHeatCapacity cp = baseParameters.cp_Water
+    "Specific heat capacity";
 equation
   dp = port_a.p - port_b.p;
   0 = port_a.m_flow + port_b.m_flow;
@@ -33,3 +37,4 @@ equation
  </ul>
  </html>"));
 end TwoPort;
+

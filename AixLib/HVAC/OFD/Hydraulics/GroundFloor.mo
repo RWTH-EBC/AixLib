@@ -36,64 +36,64 @@ model GroundFloor
   parameter AixLib.DataBase.Radiators.RadiatiorBaseDataDefinition Type_Radiator_WC = AixLib.DataBase.Radiators.StandardOFD_EnEV2009.WC() "WC" annotation(Dialog(group = "Radiators", descriptionLabel = true));
   parameter AixLib.DataBase.Radiators.RadiatiorBaseDataDefinition Type_Radiator_Kitchen = AixLib.DataBase.Radiators.StandardOFD_EnEV2009.Kitchen()
     "Kitchen"                                                                                                     annotation(Dialog(group = "Radiators", descriptionLabel = true));
-  Radiators.Radiator radiatorKitchen(RadiatorType = Type_Radiator_Kitchen,
+  Fluid.HeatExchangers.Radiators.Radiator radiatorKitchen(RadiatorType = Type_Radiator_Kitchen,
     redeclare package Medium = Medium,
     m_flow_nominal=0.01)                                                   annotation(Placement(transformation(extent = {{-89, -83}, {-106, -66}})));
-  Radiators.Radiator radiatorWC(RadiatorType = Type_Radiator_WC,
+  Fluid.HeatExchangers.Radiators.Radiator radiatorWC(RadiatorType = Type_Radiator_WC,
     redeclare package Medium = Medium,
     m_flow_nominal=0.01)                                         annotation(Placement(transformation(extent = {{83, -48}, {100, -31}})));
-  HVAC.Valves.ThermostaticValve valveKitchen(Kvs = 0.41, Kv_setT = 0.262,
+  Fluid.Actuators.Valves.ThermostaticValve valveKitchen(Kvs = 0.41, Kv_setT = 0.262,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                                                    annotation(Placement(transformation(extent = {{-67, -82.5}, {-82, -66.5}})));
-  Radiators.Radiator radiatorLiving(RadiatorType = Type_Radiator_Livingroom,
+  Fluid.HeatExchangers.Radiators.Radiator radiatorLiving(RadiatorType = Type_Radiator_Livingroom,
     redeclare package Medium = Medium,
     m_flow_nominal=0.01)                                                     annotation(Placement(transformation(extent = {{-95, -5}, {-113, 13}})));
-  Radiators.Radiator radiatorHobby(RadiatorType = Type_Radiator_Hobby,
+  Fluid.HeatExchangers.Radiators.Radiator radiatorHobby(RadiatorType = Type_Radiator_Hobby,
     redeclare package Medium = Medium,
     m_flow_nominal=0.01)                                               annotation(Placement(transformation(extent = {{78, 72}, {94, 88}})));
-  Radiators.Radiator radiatorCorridor(RadiatorType = Type_Radiator_Corridor,
+  Fluid.HeatExchangers.Radiators.Radiator radiatorCorridor(RadiatorType = Type_Radiator_Corridor,
     redeclare package Medium = Medium,
     m_flow_nominal=0.01)                                                     annotation(Placement(transformation(extent = {{86, 33}, {101, 48}})));
-  Valves.ThermostaticValve valveWC(Kvs = 0.24, Kv_setT = 0.162,
+  Fluid.Actuators.Valves.ThermostaticValve valveWC(Kvs = 0.24, Kv_setT = 0.162,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                                          annotation(Placement(transformation(extent = {{38, -47}, {50, -31}})));
-  Valves.ThermostaticValve valveLiving(Kvs = 1.43, Kv_setT = 0.4,
+  Fluid.Actuators.Valves.ThermostaticValve valveLiving(Kvs = 1.43, Kv_setT = 0.4,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                                            annotation(Placement(transformation(extent = {{-67, -4}, {-79, 12}})));
-  HVAC.Valves.ThermostaticValve valveCorridor(Kvs = 0.16, Kv_setT = 0.088,
+  Fluid.Actuators.Valves.ThermostaticValve valveCorridor(Kvs = 0.16, Kv_setT = 0.088,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                                                     annotation(Placement(transformation(extent = {{64, 32}, {76, 48}})));
-  HVAC.Valves.ThermostaticValve valveHobby(Kvs = 0.24, Kv_setT = 0.182,
+  Fluid.Actuators.Valves.ThermostaticValve valveHobby(Kvs = 0.24, Kv_setT = 0.182,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                                                  annotation(Placement(transformation(extent = {{49, 74}, {60, 87}})));
-  Pipes.StaticPipe thStF(D = Diam_Main, l = Length_thSt,
+  Fluid.FixedResistances.StaticPipe thStF(D = Diam_Main, l = Length_thSt,
     redeclare package Medium = Medium,
     m_flow_small=1e-4) "through the storage room, flow stream"                                   annotation(Placement(transformation(extent = {{57, -85}, {40, -74}})));
-  Pipes.StaticPipe toKiF(D = Diam_Sec, l = Length_toKi,
+  Fluid.FixedResistances.StaticPipe toKiF(D = Diam_Sec, l = Length_toKi,
     redeclare package Medium = Medium,
     m_flow_small=1e-4) "to kitchen, flow stream"                                  annotation(Placement(transformation(extent = {{8, -5}, {-8, 5}}, rotation = 0, origin = {-49, -74.5})));
-  Pipes.StaticPipe thStR(D = Diam_Main, l = Length_thSt,
+  Fluid.FixedResistances.StaticPipe thStR(D = Diam_Main, l = Length_thSt,
     redeclare package Medium = Medium,
     m_flow_small=1e-4) "through the storage room, return stream"                                   annotation(Placement(transformation(extent = {{40, -102}, {58, -90}})));
-  Pipes.StaticPipe toKiR(D = Diam_Sec, l = Length_toKi,
+  Fluid.FixedResistances.StaticPipe toKiR(D = Diam_Sec, l = Length_toKi,
     redeclare package Medium = Medium,
     m_flow_small=1e-4) "to kitchen, return stream"                                  annotation(Placement(transformation(extent = {{-72, -102}, {-56, -90}})));
-  Pipes.StaticPipe thWCF(D = Diam_Main, l = Length_thWC,
+  Fluid.FixedResistances.StaticPipe thWCF(D = Diam_Main, l = Length_thWC,
     redeclare package Medium = Medium,
     m_flow_small=1e-4) "through WC, flow stream"                                   annotation(Placement(transformation(extent = {{8, 4.5}, {-8, -4.5}}, rotation = 270, origin = {-4.5, -62})));
-  Pipes.StaticPipe thWCR(D = Diam_Main, l = Length_thWC,
+  Fluid.FixedResistances.StaticPipe thWCR(D = Diam_Main, l = Length_thWC,
     redeclare package Medium = Medium,
     m_flow_small=1e-4) "through WC, return stream"                                   annotation(Placement(transformation(extent = {{8.75, -4.25}, {-8.75, 4.25}}, rotation = 90, origin = {-18.25, -62.75})));
-  Pipes.StaticPipe thCo1R(D = Diam_Main, l = Length_thCo1,
+  Fluid.FixedResistances.StaticPipe thCo1R(D = Diam_Main, l = Length_thCo1,
     redeclare package Medium = Medium,
     m_flow_small=1e-4) "through corridor 1, return stream"                                     annotation(Placement(transformation(extent = {{6.5, -5}, {-6.5, 5}}, rotation = 90, origin = {-18, -27.5})));
-  Pipes.StaticPipe thCo1F(D = Diam_Main, l = Length_thCo1,
+  Fluid.FixedResistances.StaticPipe thCo1F(D = Diam_Main, l = Length_thCo1,
     redeclare package Medium = Medium,
     m_flow_small=1e-4) "through Corridor 1, flow stream"                                     annotation(Placement(transformation(extent = {{6.5, 5}, {-6.5, -5}}, rotation = 270, origin = {-5, -26.5})));
-  Pipes.StaticPipe toWCF(D = Diam_Sec, l = Length_toWC,
+  Fluid.FixedResistances.StaticPipe toWCF(D = Diam_Sec, l = Length_toWC,
     redeclare package Medium = Medium,
     m_flow_small=1e-4) "to WC, flow stream"                                  annotation(Placement(transformation(extent = {{-8.5, 4.5}, {8.5, -4.5}}, rotation = 0, origin = {18.5, -38.5})));
-  Pipes.StaticPipe toWCR(D = Diam_Sec, l = Length_toWC,
+  Fluid.FixedResistances.StaticPipe toWCR(D = Diam_Sec, l = Length_toWC,
     redeclare package Medium = Medium,
     m_flow_small=1e-4) "to WC, return stream"                                  annotation(Placement(transformation(extent = {{8.5, 4.5}, {-8.5, -4.5}}, rotation = 0, origin = {18.5, -48.5})));
   Modelica.Fluid.Interfaces.FluidPort_b
@@ -104,28 +104,28 @@ model GroundFloor
                     FLOW(redeclare package Medium = Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
                                                                                                        annotation(Placement(transformation(extent = {{92, -114}, {112, -94}})));
-  Pipes.StaticPipe toCoF(D = Diam_Sec, l = Length_toCo,
+  Fluid.FixedResistances.StaticPipe toCoF(D = Diam_Sec, l = Length_toCo,
     redeclare package Medium = Medium,
     m_flow_small=1e-4) "to corridor , flow stream"                                  annotation(Placement(transformation(extent = {{-8.5, 4.5}, {8.5, -4.5}}, rotation = 0, origin = {45.5, 40.5})));
-  Pipes.StaticPipe toCoR(D = Diam_Sec, l = Length_toCo,
+  Fluid.FixedResistances.StaticPipe toCoR(D = Diam_Sec, l = Length_toCo,
     redeclare package Medium = Medium,
     m_flow_small=1e-4) "to corridor, return stream"                                  annotation(Placement(transformation(extent = {{7.5, 4.5}, {-7.5, -4.5}}, rotation = 0, origin = {47.5, 27})));
-  Pipes.StaticPipe thCo2F(D = Diam_Main, l = Length_thCo2,
+  Fluid.FixedResistances.StaticPipe thCo2F(D = Diam_Main, l = Length_thCo2,
     redeclare package Medium = Medium,
     m_flow_small=1e-4) "through Corridor 2, flow stream"                                     annotation(Placement(transformation(extent = {{7, 5}, {-7, -5}}, rotation = 270, origin = {-5, 13})));
-  Pipes.StaticPipe thCoR2(D = Diam_Main, l = Length_thCo2,
+  Fluid.FixedResistances.StaticPipe thCoR2(D = Diam_Main, l = Length_thCo2,
     redeclare package Medium = Medium,
     m_flow_small=1e-4) "through corridor 2, return stream"                                     annotation(Placement(transformation(extent = {{7.5, -5}, {-7.5, 5}}, rotation = 90, origin = {-19, 12.5})));
-  Pipes.StaticPipe toHoF(D = Diam_Sec, l = Length_toHo,
+  Fluid.FixedResistances.StaticPipe toHoF(D = Diam_Sec, l = Length_toHo,
     redeclare package Medium = Medium,
     m_flow_small=1e-4) "to hobby , flow stream"                                  annotation(Placement(transformation(extent = {{-6.5, 4.5}, {6.5, -4.5}}, rotation = 0, origin = {23.5, 80.5})));
-  Pipes.StaticPipe toHoR(D = Diam_Sec, l = Length_toHo,
+  Fluid.FixedResistances.StaticPipe toHoR(D = Diam_Sec, l = Length_toHo,
     redeclare package Medium = Medium,
     m_flow_small=1e-4) "to hobby, return stream"                                  annotation(Placement(transformation(extent = {{6.5, 4.5}, {-6.5, -4.5}}, rotation = 0, origin = {20.5, 66})));
-  Pipes.StaticPipe toLiF(D = Diam_Sec, l = Length_toLi,
+  Fluid.FixedResistances.StaticPipe toLiF(D = Diam_Sec, l = Length_toLi,
     redeclare package Medium = Medium,
     m_flow_small=1e-4) "to livingroom, flow stream"                                  annotation(Placement(transformation(extent = {{6, -4.5}, {-6, 4.5}}, rotation = 0, origin = {-47.5, 3})));
-  Pipes.StaticPipe toLiR(D = Diam_Main, l = Length_toLi,
+  Fluid.FixedResistances.StaticPipe toLiR(D = Diam_Main, l = Length_toLi,
     redeclare package Medium = Medium,
     m_flow_small=1e-4) "to livingroom, return stream"                                   annotation(Placement(transformation(extent = {{6.5, -5}, {-6.5, 5}}, rotation = 180, origin = {-88.5, -16.5})));
   Interfaces.RadPort Rad_Livingroom annotation(Placement(transformation(extent = {{-148, 38}, {-132, 55}})));
@@ -139,25 +139,25 @@ model GroundFloor
   Interfaces.RadPort Rad_WC annotation(Placement(transformation(extent = {{128, -38}, {148, -18}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Con_WC annotation(Placement(transformation(extent = {{129, -59}, {148, -41}})));
   Modelica.Blocks.Interfaces.RealInput TSet_GF[5] annotation(Placement(transformation(extent = {{-123, 78}, {-95, 108}}), iconTransformation(extent = {{-10.5, -12}, {10.5, 12}}, rotation = 270, origin = {-105.5, 96})));
-  HydraulicResistances.HydraulicResistance HydRes_InFl(zeta = zeta_bend, D = Diam_Main,
+  Fluid.FixedResistances.HydraulicResistance HydRes_InFl(zeta = zeta_bend, D = Diam_Main,
     redeclare package Medium = Medium,
     m_flow_small=1e-4) "hydraulic resistance in floor"                                                                  annotation(Placement(transformation(extent = {{24, -84}, {10, -75}})));
-  HydraulicResistances.HydraulicResistance HydRes_RadKi(zeta = 3 * zeta_bend, D = Diam_Sec,
+  Fluid.FixedResistances.HydraulicResistance HydRes_RadKi(zeta = 3 * zeta_bend, D = Diam_Sec,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                                                                      annotation(Placement(transformation(extent = {{-113, -100.5}, {-99, -91.5}})));
-  HydraulicResistances.HydraulicResistance HydRes_BendRight(zeta = zeta_bend, D = Diam_Main,
+  Fluid.FixedResistances.HydraulicResistance HydRes_BendRight(zeta = zeta_bend, D = Diam_Main,
     redeclare package Medium = Medium,
     m_flow_small=1e-4) "hydraulic resistance bend right"                                                                       annotation(Placement(transformation(extent = {{-3.25, -2.25}, {3.25, 2.25}}, rotation = 90, origin = {-3.75, -75.75})));
-  HydraulicResistances.HydraulicResistance HydRes_RadWC(zeta = 2 * zeta_bend, D = Diam_Sec,
+  Fluid.FixedResistances.HydraulicResistance HydRes_RadWC(zeta = 2 * zeta_bend, D = Diam_Sec,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                                                                      annotation(Placement(transformation(extent = {{67, -53}, {57, -44}})));
-  HydraulicResistances.HydraulicResistance HydRes_RadLi(zeta = 3 * zeta_bend, D = Diam_Sec,
+  Fluid.FixedResistances.HydraulicResistance HydRes_RadLi(zeta = 3 * zeta_bend, D = Diam_Sec,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                                                                      annotation(Placement(transformation(extent = {{-116, -21}, {-102, -12}})));
-  HydraulicResistances.HydraulicResistance HydRes_RadCor(zeta = 2 * zeta_bend, D = Diam_Sec,
+  Fluid.FixedResistances.HydraulicResistance HydRes_RadCor(zeta = 2 * zeta_bend, D = Diam_Sec,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                                                                       annotation(Placement(transformation(extent = {{84, 22.5}, {74, 31.5}})));
-  HydraulicResistances.HydraulicResistance HydRes_RadHo(zeta = 3 * zeta_bend, D = Diam_Sec,
+  Fluid.FixedResistances.HydraulicResistance HydRes_RadHo(zeta = 3 * zeta_bend, D = Diam_Sec,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                                                                      annotation(Placement(transformation(extent = {{74, 61.5}, {60, 70.5}})));
   Modelica.Blocks.Interfaces.RealInput TIs_GF[5] annotation(Placement(transformation(extent = {{-29, 80}, {-58, 109}}), iconTransformation(extent = {{-10.5, -12}, {10.5, 12}}, rotation = 270, origin = {-41.5, 96})));

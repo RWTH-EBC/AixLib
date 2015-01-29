@@ -7,17 +7,17 @@ model Boiler "Model of a boiler for space heating"
     "Maximum heat output of boiler at full load";
   parameter Modelica.SIunits.Volume Volume = 0.01
     "Fluid volume inside the heat generation unit";
-  extends AixLib.HVAC.HeatGeneration.BaseClasses.PartialHeatGen(
+  extends AixLib.Fluid.HeatExchangers.BaseClasses.PartialHeatGen(
     volume(V=Volume, redeclare package Medium = Medium),
     massFlowSensor(redeclare package Medium = Medium),
     T_in(redeclare package Medium = Medium));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {0, 50})));
-  AixLib.HVAC.HeatGeneration.Utilities.HeatDemand heatDemand
+  AixLib.Fluid.HeatExchangers.Utilities.HeatDemand heatDemand
     annotation (Placement(transformation(extent={{-64,60},{-44,80}})));
-  AixLib.HVAC.HeatGeneration.Utilities.FuelCounter fuelCounter
+  AixLib.Fluid.HeatExchangers.Utilities.FuelCounter fuelCounter
     annotation (Placement(transformation(extent={{80,60},{100,80}})));
   Modelica.Blocks.Nonlinear.Limiter limiter(uMax = Q_flow_max, uMin = 0) annotation(Placement(transformation(extent = {{-30, 60}, {-10, 80}})));
-  AixLib.HVAC.HeatGeneration.Utilities.BoilerEfficiency boilerEfficiency(
+  AixLib.Fluid.HeatExchangers.Utilities.BoilerEfficiency boilerEfficiency(
       boilerEfficiencyBE=boilerEfficiencyB, Q_flow_max=Q_flow_max)
     annotation (Placement(transformation(extent={{40,60},{60,80}})));
   Modelica.Blocks.Interfaces.RealInput T_set annotation(Placement(transformation(extent = {{-128, 50}, {-88, 90}})));

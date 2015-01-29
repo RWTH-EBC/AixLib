@@ -1,5 +1,4 @@
 within AixLib.HVAC.HumidifierAndDehumidifier.Examples;
-
 model SteamHumidifier
   import Anlagensimulation_WS1314 = AixLib.HVAC;
   extends Modelica.Icons.Example;
@@ -24,3 +23,4 @@ equation
  <p>21.01.2014, by <i>Ana Constantin</i>: implemented</p>
  </html>"));
 end SteamHumidifier;
+

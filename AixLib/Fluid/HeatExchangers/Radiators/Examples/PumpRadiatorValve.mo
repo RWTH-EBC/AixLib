@@ -7,25 +7,28 @@ model PumpRadiatorValve
      Modelica.Media.Water.ConstantPropertyLiquidWater
      constrainedby Modelica.Media.Interfaces.PartialMedium;
 
-  Pumps.Pump pump(MinMaxCharacteristics = AixLib.DataBase.Pumps.Pump1(), V_flow_max = 2, ControlStrategy = 2, V_flow(fixed = false), Head_max = 2,
+  AixLib.Fluid.Movers.Pump
+             pump(MinMaxCharacteristics = AixLib.DataBase.Pumps.Pump1(), V_flow_max = 2, ControlStrategy = 2, V_flow(fixed = false), Head_max = 2,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                                                                                                     annotation(Placement(transformation(extent = {{-54, 10}, {-34, 30}})));
-  Pipes.StaticPipe pipe(l = 10, D = 0.01,
+  AixLib.Fluid.FixedResistances.StaticPipe
+                   pipe(l = 10, D = 0.01,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                    annotation(Placement(transformation(extent = {{4, 10}, {24, 30}})));
-  Pipes.StaticPipe pipe1(l = 10, D = 0.01,
+  AixLib.Fluid.FixedResistances.StaticPipe
+                   pipe1(l = 10, D = 0.01,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                     annotation(Placement(transformation(extent = {{-10, -30}, {-30, -10}})));
   Modelica.Blocks.Sources.BooleanConstant NightSignal(k = false) annotation(Placement(transformation(extent = {{-76, 50}, {-56, 70}})));
   AixLib.Fluid.Sources.FixedBoundary
                      PointFixedPressure(nPorts=1, redeclare package Medium =
         Medium)                                           annotation(Placement(transformation(extent = {{-98, 10}, {-78, 30}})));
-  AixLib.HVAC.Valves.SimpleValve simpleValve(
+  AixLib.Fluid.Actuators.Valves.SimpleValve simpleValve(
     Kvs=0.4,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)
     annotation (Placement(transformation(extent={{30,10},{50,30}})));
-  AixLib.HVAC.Radiators.Radiator radiator(
+  AixLib.Fluid.HeatExchangers.Radiators.Radiator radiator(
     RadiatorType=AixLib.DataBase.Radiators.ThermX2_ProfilV_979W(),
     redeclare package Medium = Medium,
     m_flow_nominal=0.01)
@@ -34,7 +37,8 @@ model PumpRadiatorValve
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature RadTemp annotation(Placement(transformation(extent = {{148, 58}, {136, 70}})));
   Modelica.Blocks.Sources.Constant Source_Temp(k = 273.15 + 20) annotation(Placement(transformation(extent = {{60, 80}, {80, 100}})));
   Modelica.Blocks.Sources.Sine Source_opening(freqHz = 1 / 86400, offset = 0.5, startTime = -21600, amplitude = 0.49) annotation(Placement(transformation(extent = {{10, 60}, {30, 80}})));
-  HeatGeneration.Boiler boiler(redeclare package Medium = Medium,
+  AixLib.Fluid.HeatExchangers.Boiler
+                        boiler(redeclare package Medium = Medium,
       m_flow_nominal=0.01)     annotation(Placement(transformation(extent = {{-26, 10}, {-6, 30}})));
   Modelica.Blocks.Sources.Constant Source_TempSet_Boiler(k = 273.15 + 75) annotation(Placement(transformation(extent = {{0, 60}, {-20, 80}})));
 equation

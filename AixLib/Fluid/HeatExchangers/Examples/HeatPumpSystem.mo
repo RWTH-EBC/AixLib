@@ -7,7 +7,7 @@ model HeatPumpSystem "Test case for boiler model"
      Modelica.Media.Water.ConstantPropertyLiquidWater
      constrainedby Modelica.Media.Interfaces.PartialMedium;
 
-  AixLib.HVAC.Pumps.Pump Pump2(
+  AixLib.Fluid.Movers.Pump Pump2(
     Head_max=1,
     redeclare package Medium = Medium,
     m_flow_small=1e-4) annotation (Placement(transformation(
@@ -17,10 +17,10 @@ model HeatPumpSystem "Test case for boiler model"
   AixLib.Fluid.Sources.FixedBoundary
                      staticPressure(nPorts=1, redeclare package Medium = Medium)
                                     annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-10, -10})));
-  Pipes.StaticPipe pipe(D = 0.01, l = 15,
+  Fluid.FixedResistances.StaticPipe pipe(D = 0.01, l = 15,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                    annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {90, 10})));
-  Pipes.StaticPipe pipe1(D = 0.01, l = 15,
+  Fluid.FixedResistances.StaticPipe pipe1(D = 0.01, l = 15,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                     annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {30, -50})));
   AixLib.Fluid.Sensors.MassFlowRate
@@ -36,15 +36,15 @@ model HeatPumpSystem "Test case for boiler model"
     redeclare package Medium = Medium,
     m_flow_nominal=0.01,
     V=0.1)             annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin={60,-60})));
-  AixLib.HVAC.HeatGeneration.HeatPump heatPump(
+  AixLib.Fluid.HeatExchangers.HeatPump heatPump(
     tablePower=[0.0,273.15,283.15; 308.15,1100,1150; 328.15,1600,1750],
-    tableHeatFlowCondenser=[0.0,273.15,283.15; 308.15,4800,6300; 328.15,4400,
-        5750],
+    tableHeatFlowCondenser=[0.0,273.15,283.15; 308.15,4800,6300; 328.15,4400,5750],
     redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{-18,40},{2,60}})));
+
   Modelica.Blocks.Logical.OnOffController onOffController(bandwidth = 5) annotation(Placement(transformation(extent = {{-36, 74}, {-16, 94}})));
   Modelica.Blocks.Sources.Constant const(k = 273.15 + 40) annotation(Placement(transformation(extent = {{-80, 80}, {-60, 100}})));
-  AixLib.HVAC.Pumps.Pump Pump1(
+  AixLib.Fluid.Movers.Pump Pump1(
     MinMaxCharacteristics=AixLib.DataBase.Pumps.Pump1(),
     ControlStrategy=1,
     redeclare package Medium = Medium,
@@ -55,14 +55,15 @@ model HeatPumpSystem "Test case for boiler model"
   AixLib.Fluid.Sources.Boundary_ph
                       boundary_ph(h = 4184 * 8, nPorts=1,
     redeclare package Medium = Medium)          annotation(Placement(transformation(extent = {{-100, 52}, {-80, 72}})));
-  Pipes.StaticPipe pipe2(D = 0.01, l = 2,
+  AixLib.Fluid.FixedResistances.StaticPipe
+                   pipe2(D = 0.01, l = 2,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                    annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 0, origin = {-64, 58})));
   AixLib.Fluid.Sources.Boundary_ph
                       boundary_ph1(nPorts=1, redeclare package Medium = Medium)
                                    annotation(Placement(transformation(extent = {{-100, 24}, {-80, 44}})));
   Modelica.Blocks.Sources.BooleanExpression Source_IsNight annotation(Placement(transformation(extent = {{-102, 4}, {-82, 24}})));
-  AixLib.HVAC.HeatGeneration.Utilities.FuelCounter electricityCounter
+  AixLib.Fluid.HeatExchangers.Utilities.FuelCounter electricityCounter
     annotation (Placement(transformation(extent={{-14,16},{6,36}})));
 equation
   connect(pipe1.port_b, Pump2.port_a) annotation(Line(points = {{20, -50}, {10, -50}, {10, 0}}, color = {0, 127, 255}, smooth = Smooth.None));

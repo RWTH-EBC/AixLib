@@ -9,14 +9,14 @@ model GroundfloorBoiler
      Modelica.Media.Water.ConstantPropertyLiquidWater
      constrainedby Modelica.Media.Interfaces.PartialMedium;
 
-  Pumps.Pump pump(MinMaxCharacteristics = AixLib.DataBase.Pumps.Pump1(), V_flow_max = 2, ControlStrategy = 2, V_flow(fixed = false, start = 0.01), Head(fixed = false, start = 1),
+  Fluid.Movers.Pump pump(MinMaxCharacteristics = AixLib.DataBase.Pumps.Pump1(), V_flow_max = 2, ControlStrategy = 2, V_flow(fixed = false, start = 0.01), Head(fixed = false, start = 1),
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                                                                                                     annotation(Placement(transformation(extent = {{86, -16}, {66, -36}})));
-  Pipes.StaticPipe Flow(D = 0.016, l = 2,
+  Fluid.FixedResistances.StaticPipe Flow(D = 0.016, l = 2,
     redeclare package Medium = Medium,
     m_flow_small=1e-4,
     dp(start=4000))                                         annotation(Placement(transformation(extent = {{20, -18}, {40, 2}})));
-  Pipes.StaticPipe Return(D = 0.016, l = 2,
+  Fluid.FixedResistances.StaticPipe Return(D = 0.016, l = 2,
     redeclare package Medium = Medium,
     m_flow_small=1e-4,
     dp(start=4000))                                           annotation(Placement(transformation(extent = {{40, -36}, {20, -16}})));
@@ -25,7 +25,7 @@ model GroundfloorBoiler
                      pointFixedPressure(nPorts=1, redeclare package Medium =
         Medium)                                           annotation(Placement(transformation(extent = {{-7, -7}, {7, 7}}, rotation = 90, origin = {112, -39})));
   Modelica.Blocks.Sources.Constant roomsSetTemp[5](k = {293.15, 293.15, 293.15, 291.15, 293.15}) annotation(Placement(transformation(extent = {{18, 28}, {38, 48}})));
-  HeatGeneration.Boiler boiler(volume(T(start = 328.15, fixed = true)),
+  Fluid.HeatExchangers.Boiler boiler(volume(T(start = 328.15, fixed = true)),
     redeclare package Medium = Medium,
     m_flow_nominal=0.01)                                                annotation(Placement(transformation(extent = {{-42, -18}, {-22, 2}})));
   Modelica.Blocks.Sources.Constant sourceSetTemp_Boiler(k = 273.15 + 55) annotation(Placement(transformation(extent = {{-16, 14}, {-36, 34}})));
@@ -36,13 +36,13 @@ model GroundfloorBoiler
   Modelica.Blocks.Sources.CombiTimeTable roomTemperaturesConv(                                                              tableOnFile = true, tableName = "TemperaturesConv", columns = {2, 3, 4, 5, 6}, offset = {0},
     fileName=
         "modelica://AixLib/Resources/HVAC_OFD_ExampleData/TemperaturesConv.mat",
-
     extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)                                                                                                     annotation(Placement(transformation(extent = {{71, 66}, {91, 86}})));
+
   Modelica.Blocks.Sources.CombiTimeTable roomTemperaturesRad(                                                              tableOnFile = true, tableName = "TemperaturesRad", columns = {2, 3, 4, 5, 6}, offset = {0},
     fileName=
         "modelica://AixLib/Resources/HVAC_OFD_ExampleData/TemperaturesRad.mat",
-
     extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint)                                                                                                     annotation(Placement(transformation(extent = {{1, 66}, {21, 86}})));
+
   AixLib.Fluid.Sensors.TemperatureTwoPort
                             temperatureSensor(redeclare package Medium = Medium,
       m_flow_nominal=0.01)                    annotation(Placement(transformation(extent = {{48, -18}, {68, 2}})));

@@ -6,7 +6,7 @@ model BoilerSystemTConst
   replaceable package Medium =
      Modelica.Media.Water.ConstantPropertyLiquidWater
      constrainedby Modelica.Media.Interfaces.PartialMedium;
-  HVAC.Pumps.Pump pumpSimple(
+  Movers.Pump pumpSimple(
     Head_max=1,
     redeclare package Medium = Medium,
     m_flow_small=0.001) annotation (Placement(transformation(
@@ -16,10 +16,12 @@ model BoilerSystemTConst
   Fluid.Sources.FixedBoundary
                      staticPressure(nPorts=1, redeclare package Medium = Medium)
                                     annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-90, -10})));
-  Pipes.StaticPipe pipe(l = 25, D = 0.01,
+  FixedResistances.StaticPipe
+                   pipe(l = 25, D = 0.01,
     redeclare package Medium = Medium,
     m_flow_small=0.001)                   annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {70, 10})));
-  Pipes.StaticPipe pipe1(l = 25, D = 0.01,
+  FixedResistances.StaticPipe
+                   pipe1(l = 25, D = 0.01,
     redeclare package Medium = Medium,
     m_flow_small=0.001)                    annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {10, -50})));
   Fluid.Sensors.MassFlowRate
@@ -28,8 +30,8 @@ model BoilerSystemTConst
   Fluid.Sensors.TemperatureTwoPort
                             temperatureSensor(redeclare package Medium = Medium,
       m_flow_nominal=0.01)                    annotation(Placement(transformation(extent = {{0, 60}, {20, 80}})));
-  HVAC.HeatGeneration.Boiler boiler(redeclare package Medium = Medium,
-      m_flow_nominal=0.01) annotation (Placement(transformation(
+  Boiler boiler(redeclare package Medium = Medium, m_flow_nominal=0.01)
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-50,50})));

@@ -7,7 +7,7 @@ model PumpHydraulicResistance_closedLoop
   replaceable package Medium =
      Modelica.Media.Water.StandardWater
      constrainedby Modelica.Media.Interfaces.PartialMedium;
-  AixLib.HVAC.Pumps.Pump pump(
+  AixLib.Fluid.Movers.Pump pump(
     V_flow(fixed=false),
     MinMaxCharacteristics=AixLib.DataBase.Pumps.Pump1(),
     V_flow_max=2,
@@ -15,13 +15,13 @@ model PumpHydraulicResistance_closedLoop
     redeclare package Medium = Medium,
     m_flow_small=1e-4)
     annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
-  HydraulicResistances.HydraulicResistance hydraulicResistance(zeta = 2,
+  Fluid.FixedResistances.HydraulicResistance hydraulicResistance(zeta = 2,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                                                   annotation(Placement(transformation(extent = {{26, 20}, {46, 40}})));
-  Pipes.StaticPipe pipe(l = 10, D = 0.01,
+  Fluid.FixedResistances.StaticPipe pipe(l = 10, D = 0.01,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                    annotation(Placement(transformation(extent = {{-4, 20}, {16, 40}})));
-  Pipes.StaticPipe pipe1(l = 10, D = 0.01,
+  Fluid.FixedResistances.StaticPipe pipe1(l = 10, D = 0.01,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                     annotation(Placement(transformation(extent = {{-12, -20}, {-32, 0}})));
   Modelica.Blocks.Sources.BooleanPulse NightSignal(period = 86400) annotation(Placement(transformation(extent = {{-60, 60}, {-40, 80}})));
