@@ -14,14 +14,14 @@ model ValveParameterization
          annotation (Placement(transformation(extent={{-10,30},{10,50}})));
     Modelica.Blocks.Sources.Constant y(k=1) "Control signal"
                  annotation (Placement(transformation(extent={{-60,60},{-40,80}})));
-  AixLib.Fluid.Sources.Boundary_pT sou(             redeclare package Medium
-      = Medium,
+  AixLib.Fluid.Sources.Boundary_pT sou(             redeclare package Medium =
+        Medium,
     use_p_in=true,
     nPorts=3,
     T=293.15)                                       annotation (Placement(
         transformation(extent={{-70,-10},{-50,10}})));
-  AixLib.Fluid.Sources.Boundary_pT sin(             redeclare package Medium
-      = Medium,
+  AixLib.Fluid.Sources.Boundary_pT sin(             redeclare package Medium =
+        Medium,
     nPorts=3,
     use_p_in=false,
     p=300000,
@@ -47,8 +47,8 @@ model ValveParameterization
     Cv=0.84,
     filteredOpening=false) "Valve model, linear opening characteristics"
          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-  AixLib.Fluid.Sensors.MassFlowRate senM_flowOpPoi(redeclare package Medium
-      = Medium) annotation (Placement(transformation(extent={{20,30},{40,50}})));
+  AixLib.Fluid.Sensors.MassFlowRate senM_flowOpPoi(redeclare package Medium =
+        Medium) annotation (Placement(transformation(extent={{20,30},{40,50}})));
   AixLib.Fluid.Sensors.MassFlowRate senM_flowKv(redeclare package Medium =
         Medium) annotation (Placement(transformation(extent={{20,-10},{40,10}})));
   AixLib.Fluid.Sensors.MassFlowRate senM_flowCv(redeclare package Medium =

@@ -1,6 +1,6 @@
 within AixLib.Fluid.Actuators.Valves.Examples;
 model TwoWayValvesMotor
-    "Two way valves with different opening characteristics and motor"
+  "Two way valves with different opening characteristics and motor"
   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Water.Simple;
 
@@ -11,14 +11,14 @@ model TwoWayValvesMotor
     filteredOpening=false,
     dpValve_nominal=6000) "Valve model, linear opening characteristics"
          annotation (Placement(transformation(extent={{0,20},{20,40}})));
-  AixLib.Fluid.Sources.Boundary_pT sou(             redeclare package Medium
-      = Medium,
+  AixLib.Fluid.Sources.Boundary_pT sou(             redeclare package Medium =
+        Medium,
     nPorts=3,
     use_p_in=true,
     T=293.15)                                       annotation (Placement(
         transformation(extent={{-60,-20},{-40,0}})));
-  AixLib.Fluid.Sources.Boundary_pT sin(             redeclare package Medium
-      = Medium,
+  AixLib.Fluid.Sources.Boundary_pT sin(             redeclare package Medium =
+        Medium,
     nPorts=3,
     use_p_in=true,
     T=293.15)                                       annotation (Placement(

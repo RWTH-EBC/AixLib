@@ -12,8 +12,7 @@ model TwoWayQuickOpening "Two way valve with linear flow characteristics"
   parameter Real alp = 2 "Parameter for valve characteristics, alp>0";
   parameter Real delta0 = 0.01 "Range of significant deviation from power law";
 protected
-   parameter Real alpInv = 1/alp
-     "Inverse of alpha";
+   parameter Real alpInv = 1/alp "Inverse of alpha";
 
 initial equation
   // Since the flow model AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow computes

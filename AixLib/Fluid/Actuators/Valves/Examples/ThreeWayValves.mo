@@ -2,8 +2,7 @@ within AixLib.Fluid.Actuators.Valves.Examples;
 model ThreeWayValves "Three way valves with different opening characteristics"
   extends Modelica.Icons.Example;
 
- package Medium = AixLib.Media.Water.Simple
-    "Medium in the component";
+ package Medium = AixLib.Media.Water.Simple "Medium in the component";
 
   AixLib.Fluid.Actuators.Valves.ThreeWayLinear valLin(
     redeclare package Medium = Medium,
@@ -19,14 +18,14 @@ model ThreeWayValves "Three way valves with different opening characteristics"
     duration=1,
     offset=0) "Control signal"
                  annotation (Placement(transformation(extent={{-40,30},{-20,50}})));
-  AixLib.Fluid.Sources.Boundary_pT sou(             redeclare package Medium
-      = Medium,
+  AixLib.Fluid.Sources.Boundary_pT sou(             redeclare package Medium =
+        Medium,
     nPorts=2,
     use_p_in=true,
     T=313.15)                                       annotation (Placement(
         transformation(extent={{-50,-10},{-30,10}})));
-  AixLib.Fluid.Sources.Boundary_pT sin(             redeclare package Medium
-      = Medium,
+  AixLib.Fluid.Sources.Boundary_pT sin(             redeclare package Medium =
+        Medium,
     nPorts=2,
     use_p_in=true,
     T=313.15)                                       annotation (Placement(

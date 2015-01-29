@@ -15,15 +15,15 @@ model TwoWayValves "Two way valves with different opening characteristics"
     duration=1,
     offset=0) "Control signal"
                  annotation (Placement(transformation(extent={{-60,60},{-40,80}})));
-  AixLib.Fluid.Sources.Boundary_pT sou(             redeclare package Medium
-      = Medium,
+  AixLib.Fluid.Sources.Boundary_pT sou(             redeclare package Medium =
+        Medium,
     nPorts=3,
     use_p_in=false,
     p(displayUnit="Pa") = 306000,
     T=293.15)                                       annotation (Placement(
         transformation(extent={{-70,-20},{-50,0}})));
-  AixLib.Fluid.Sources.Boundary_pT sin(             redeclare package Medium
-      = Medium,
+  AixLib.Fluid.Sources.Boundary_pT sin(             redeclare package Medium =
+        Medium,
     nPorts=3,
     p(displayUnit="Pa") = 3E5,
     T=293.15)                                       annotation (Placement(

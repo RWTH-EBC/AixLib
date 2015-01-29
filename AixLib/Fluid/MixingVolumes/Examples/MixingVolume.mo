@@ -10,13 +10,13 @@ model MixingVolume
     height=-10,
     offset=101330)
                  annotation (Placement(transformation(extent={{-100,60},{-80,80}})));
-  AixLib.Fluid.Sources.Boundary_pT sou(             redeclare package Medium
-      = Medium, T=293.15,
+  AixLib.Fluid.Sources.Boundary_pT sou(             redeclare package Medium =
+        Medium, T=293.15,
     use_p_in=true,
     nPorts=3)                                       annotation (Placement(
         transformation(extent={{-70,48},{-50,68}})));
-  AixLib.Fluid.Sources.Boundary_pT sin(             redeclare package Medium
-      = Medium,
+  AixLib.Fluid.Sources.Boundary_pT sin(             redeclare package Medium =
+        Medium,
     nPorts=3,
     use_p_in=false,
     p=101325,
