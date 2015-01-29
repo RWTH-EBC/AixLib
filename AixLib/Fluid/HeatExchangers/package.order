@@ -3,5 +3,9 @@ Validation
 ConstantEffectiveness
 HeaterCooler_T
 HeaterCooler_u
+Boiler
+HeatPump
+SolarThermal
 Examples
 BaseClasses
+Utilities
