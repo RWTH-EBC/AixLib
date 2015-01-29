@@ -1,7 +1,8 @@
 within AixLib.Fluid.Movers.BaseClasses;
 partial model PartialFlowMachine
   "Partial model to interface fan or pump models with the medium"
-  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
+  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(
+    final mSenFac=1);
   import Modelica.Constants;
 
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(show_T=false,

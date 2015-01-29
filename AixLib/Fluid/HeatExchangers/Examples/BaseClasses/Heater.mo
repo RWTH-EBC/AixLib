@@ -15,7 +15,7 @@ partial model Heater "Base class for example model for the heater and cooler"
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
-    mFactor=2,
+    mSenFac=2,
     nPorts=3)
          annotation (Placement(transformation(extent={{40,-10},{60,10}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor theCon(
