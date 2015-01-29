@@ -4,4 +4,6 @@ FixedBoundary
 MassFlowSource_T
 MassFlowSource_h
 TraceSubstancesFlowSource
+OutdoorTemp
+TempAndRad
 Examples
