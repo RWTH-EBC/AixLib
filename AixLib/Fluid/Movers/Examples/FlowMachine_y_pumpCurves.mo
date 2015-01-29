@@ -38,7 +38,6 @@ model FlowMachine_y_pumpCurves
     T=293.15,
     nPorts=4) annotation (Placement(transformation(extent={{-70,78},{-50,98}})));
 
-
   AixLib.Fluid.Sources.Boundary_pT sou1(
     redeclare package Medium = Medium,
     use_p_in=false,
