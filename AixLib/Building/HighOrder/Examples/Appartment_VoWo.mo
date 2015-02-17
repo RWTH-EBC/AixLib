@@ -4,6 +4,7 @@ within AixLib.Building.HighOrder.Examples;
 model Appartment_VoWo "Simulation of 1 apartment "
   import AixLib;
   extends Modelica.Icons.Example;
+  parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();
   replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater
     "Medium in the system"                                                                             annotation(Dialog(group = "Medium"), choicesAllMatching = true);
   AixLib.Building.HighOrder.House.MFD.BuildingAndEnergySystem.OneAppartment_Radiators
@@ -18,17 +19,18 @@ model Appartment_VoWo "Simulation of 1 apartment "
         Medium, m_flow_small=0.0001)            annotation(Placement(transformation(extent = {{-30, -48}, {-18, -36}})));
   AixLib.Fluid.FixedResistances.StaticPipe pipe2(redeclare package Medium =
         Medium, m_flow_small=0.0001)             annotation(Placement(transformation(extent = {{26, -50}, {38, -38}})));
-  AixLib.Building.Components.Weather.Weather combinedWeather(Latitude = 49.5, Longitude = 8.5, Wind_dir = false, Wind_speed = true, Air_temp = true, SOD = AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_NE_SE_SW_NW_Hor(), fileName = "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt") annotation(Placement(transformation(extent = {{-82, 74}, {-50, 96}}, rotation = 0)));
   Modelica.Blocks.Sources.Constant Source_TsetChildren(k = 273.15 + 22) annotation(Placement(transformation(extent = {{-100, 8}, {-86, 22}})));
   Modelica.Blocks.Sources.Constant Source_TsetLivingroom(k = 273.15 + 20) annotation(Placement(transformation(extent = {{-100, 52}, {-86, 66}})));
   Modelica.Blocks.Sources.Constant Source_TsetBedroom(k = 273.15 + 20) annotation(Placement(transformation(extent = {{-100, 30}, {-86, 44}})));
   Modelica.Blocks.Sources.Constant Source_TsetKitchen(k = 273.15 + 20) annotation(Placement(transformation(extent = {{-100, -36}, {-86, -22}})));
+  AixLib.Building.Components.Weather.Weather combinedWeather(Latitude = 49.5, Longitude = 8.5, Wind_dir = false, Wind_speed = true, Air_temp = true, SOD = AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_NE_SE_SW_NW_Hor(), fileName = "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt", WeatherData(tableOnFile=false, table=weatherDataDay.weatherData)) annotation(Placement(transformation(extent = {{-82, 74}, {-50, 96}}, rotation = 0)));
   Modelica.Blocks.Sources.Constant Source_TsetBath(k = 273.15 + 24) annotation(Placement(transformation(extent = {{-100, -16}, {-86, -2}})));
   Modelica.Blocks.Sources.Constant AirExWindow[5](k = 0.5) annotation(Placement(transformation(extent = {{-6, 74}, {0, 80}})));
   AixLib.Fluid.Sources.Boundary_ph
                                  tank(nPorts=2, redeclare package Medium =
         Medium)                       annotation(Placement(transformation(extent = {{-8, -8}, {8, 8}}, rotation = 270, origin = {28, -64})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression annotation(Placement(transformation(extent = {{-94, -56}, {-74, -36}})));
+  inner AixLib.HVAC.BaseParameters baseParameters annotation(Placement(transformation(extent = {{80, 80}, {100, 100}})));
   Modelica.Blocks.Sources.Constant Source_TseBoiler(k = 273.15 + 55) annotation(Placement(transformation(extent = {{-86, -96}, {-72, -82}})));
   output Real Ta = combinedWeather.AirTemp;
   // Livingroom
