@@ -158,7 +158,8 @@ First implementation.
       input Real d[dimD]
         "Coefficients for polynomial of pressure vs. flow rate";
       input
-        AixLib.Fluid.Movers.BaseClasses.Characteristics.flowParametersInternal        data
+        AixLib.Fluid.Movers.BaseClasses.Characteristics.flowParametersInternal
+                                                                                      data
         "Pressure performance data";
       input Integer dimD "Dimension of data vector";
 

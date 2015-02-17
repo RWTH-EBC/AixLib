@@ -3,10 +3,10 @@ InverseXRegularized
 IsMonotonic
 PolynomialDerivativeCheck
 PowerLinearized
-RegNonZeroPower
-RegNonZeroPowerDerivativeCheck
 RegNonZeroPowerDerivative_2_Check
+RegNonZeroPowerDerivativeCheck
+RegNonZeroPower
 SmoothExponentialDerivativeCheck
-SpliceFunction
 SpliceFunctionDerivativeCheck
+SpliceFunction
 TrapezoidalIntegration

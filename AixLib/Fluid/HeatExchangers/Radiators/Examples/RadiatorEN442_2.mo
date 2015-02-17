@@ -38,8 +38,9 @@ model RadiatorEN442_2 "Test model for radiator"
     T=T_b_nominal) "Sink"
     annotation (Placement(transformation(extent={{90,-68},{70,-48}})));
 
-  AixLib.Fluid.HeatExchangers.Radiators.RadiatorEN442_2 rad1(redeclare package
-      Medium = Medium,
+  AixLib.Fluid.HeatExchangers.Radiators.RadiatorEN442_2 rad1(redeclare
+      package Medium =
+               Medium,
     T_a_nominal=T_a_nominal,
     T_b_nominal=T_b_nominal,
     Q_flow_nominal=Q_flow_nominal,

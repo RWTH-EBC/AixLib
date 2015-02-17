@@ -3,6 +3,7 @@ Conversions
 Density
 DensityTwoPort
 EnthalpyFlowRate
+SensibleEnthalpyFlowRate
 LatentEnthalpyFlowRate
 MassFlowRate
 MassFraction
@@ -12,7 +13,6 @@ RelativeHumidity
 RelativeHumidityTwoPort
 RelativePressure
 RelativeTemperature
-SensibleEnthalpyFlowRate
 SpecificEnthalpy
 SpecificEnthalpyTwoPort
 SpecificEntropy

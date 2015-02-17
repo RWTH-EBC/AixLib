@@ -2,7 +2,7 @@ simulateModel("AixLib.Fluid.Actuators.Valves.Examples.TwoWayValvesMotor", startT
 createPlot(id = 3,
  position = {55, 50, 697, 502},
  x = "time",
- y = {"valLin.phi", "valQui.phi", "valEqu.phi"},
+ y = {"valLin.phi", "valQui.phi", "valEqu.phi",  "valInd.phi"},
  range = {0, 600, 1, 0},
  autoscale = true,
  autoerase = true,
