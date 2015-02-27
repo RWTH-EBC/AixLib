@@ -34,7 +34,7 @@ equation
 </ul></p>
 </html>", info="<html>
 <p>EqAirTempVDI extends from partianEqAirTemp</p>
-<p>The longwave radiation is considered for each direction seperately.</p>
+<p>The longwave radiation is considered for each direction separately.</p>
 <h4>Main equations</h4>
 <p>The concept is described in VDI 6007. All equations can be found in VDI 6007. </p>
 <h4>Assumption and limitations</h4>

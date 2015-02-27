@@ -1,7 +1,7 @@
 within AixLib.Utilities.Sources.HeaterCooler;
 
 
-partial model IdealHeaterCoolerBase_seperate_parameters
+partial model IdealHeaterCoolerBase_separate_parameters
   extends AixLib.Utilities.Sources.HeaterCooler.IdealHeaterCoolerBase;
   Sensors.TEnergyMeter coolMeter if Cooler_on "measures cooling energy" annotation(Placement(transformation(extent = {{40, -50}, {60, -30}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow Cooling if Cooler_on annotation(Placement(transformation(extent = {{6, -23}, {26, -2}})));
@@ -61,4 +61,4 @@ equation
  <li><i>June, 2014&nbsp;</i> by Moritz Lauster:<br/>Added some basic documentation</li>
  </ul></p>
  </html>"));
-end IdealHeaterCoolerBase_seperate_parameters;
+end IdealHeaterCoolerBase_separate_parameters;

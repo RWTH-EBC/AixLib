@@ -88,7 +88,7 @@ model Weather "Complex weather model"
   Modelica.Blocks.Math.UnitConversions.From_degC from_degC if Air_temp annotation(Placement(transformation(extent = {{26, -42}, {36, -32}})));
 protected
   parameter Integer m = BaseClasses.CalculateNrOfOutputs(Cloud_cover, Wind_dir, Wind_speed, Air_temp, Air_press, Mass_frac, Rel_hum, Sky_rad, Ter_rad)
-    "Number of choosen output variables";
+    "Number of chosen output variables";
   parameter Integer[9] PosWV = BaseClasses.DeterminePositionsInWeatherVector(Cloud_cover, Wind_dir, Wind_speed, Air_temp, Air_press, Mass_frac, Rel_hum, Sky_rad, Ter_rad)
     "Positions Weather Vector";
   parameter Integer columns[:] = {16, 15, 7, 8, 9, 10, 11, 12, 13, 18, 19};

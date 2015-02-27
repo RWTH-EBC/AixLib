@@ -55,7 +55,7 @@ equation
             fillPattern =                                                                                                    FillPattern.Solid, pattern = LinePattern.None, lineColor = {0, 0, 0}), Ellipse(extent = {{10, 80}, {20, 70}}, fillColor = {0, 0, 0},
             fillPattern =                                                                                                    FillPattern.Solid, pattern = LinePattern.None, lineColor = {0, 0, 0}), Line(points = {{-18, 54}, {-16, 48}, {-10, 44}, {-4, 42}, {2, 42}, {10, 44}, {16, 48}, {18, 54}}, smooth = Smooth.None, color = {0, 0, 0}, thickness = 1)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Model for heat ouput of a human according to VDI 2078 (Table A.1). The model only considers the dry heat emission and divides it into convective and radiative heat transmission. </p>
+ <p>Model for heat output of a human according to VDI 2078 (Table A.1). The model only considers the dry heat emission and divides it into convective and radiative heat transmission. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
  <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>

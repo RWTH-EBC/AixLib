@@ -69,7 +69,7 @@ algorithm
  <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
  <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
  <p><h4><font color=\"#008000\">Concept</font></h4></p>
- <p>The model needs information on the difference between the local time zone (corresponding to the time basis of the simulation) and UTC (universal time coordinated) in hours. The ouput data of the <b>Sun</b> model is yet not very useful itself, but it is most commonly used as input data for e.g. <b><a href=\"RadOnTiltedSurf\">RadOnTiltedSurf</a></b> models to compute the solar radiance according to the azimut of a surface. </p>
+ <p>The model needs information on the difference between the local time zone (corresponding to the time basis of the simulation) and UTC (universal time coordinated) in hours. The output data of the <b>Sun</b> model is yet not very useful itself, but it is most commonly used as input data for e.g. <b><a href=\"RadOnTiltedSurf\">RadOnTiltedSurf</a></b> models to compute the solar radiance according to the azimut of a surface. </p>
  <p><h4><font color=\"#008000\">Example Results</font></h4></p>
  <p>The model is checked within the <a href=\"AixLib.Building.Components.Examples.Weather.WeatherModels\">weather</a> example as part of the <a href=\"AixLib.Building.Components.Weather.Weather\">weather</a> model. </p>
  </html>", revisions = "<html>

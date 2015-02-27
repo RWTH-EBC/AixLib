@@ -50,7 +50,7 @@ equation
 </html>", info="<html>
 <p>EqAirTempEBCMod extends from partianEqAirTemp</p>
 <p>An output equal air temperature is calculated for the window.</p>
-<p>The longwave radiation is considered for each direction seperately. The sky temperature is adjusted. The combined heat transfer coefficient is replaced by a heat transfer coefficient for convection and radiation, respectively.</p>
+<p>The longwave radiation is considered for each direction separately. The sky temperature is adjusted. The combined heat transfer coefficient is replaced by a heat transfer coefficient for convection and radiation, respectively.</p>
 <h4>Main equations</h4>
 <p>The concept is described in VDI 6007. All equations can be found in VDI 6007 and &QUOT;Modelling long-wave radiation heat exchange for thermal network building simulations at urban scale using Modelica.&QUOT;</p>
 <h4>Assumption and limitations</h4>
