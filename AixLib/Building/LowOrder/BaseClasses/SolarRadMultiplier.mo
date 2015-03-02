@@ -5,6 +5,13 @@ model SolarRadMultiplier "scalar radiant input * factor x"
   Utilities.Interfaces.SolarRad_out solarRad_out annotation(Placement(transformation(extent = {{80, -10}, {100, 10}})));
 equation
   solarRad_out.I = solarRad_in.I * x;
+
+  // other dummy equations
+  solarRad_out.I_dir = solarRad_in.I_dir * x;
+  solarRad_out.I_diff = solarRad_in.I_diff * x;
+  solarRad_out.I_gr = solarRad_in.I_gr * x;
+  solarRad_out.AOI = solarRad_in.AOI;
+
   annotation(Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <ul>
@@ -17,7 +24,7 @@ equation
  <p><ul>
  <li><i>January 2012,&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
  </ul></p>
- </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent=  {{-80, 40}, {80, -40}}, lineColor=  {215, 215, 215}, fillColor=  {239, 239, 159},
-            fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-80, 20}, {-40, -20}}, lineColor=  {0, 0, 0}, textString=  "I", fontName=  "Times New Roman"), Text(extent=  {{-60, 12}, {-20, -28}}, lineColor=  {0, 0, 0}, fontName=  "Times New Roman", textString=  "in"), Text(extent=  {{-50, 20}, {62, -20}}, lineColor=  {0, 0, 0}, fontName=  "Times New Roman", textString=  " * fac"), Line(points=  {{54, 0}, {72, 0}, {62, 6}}, color=  {0, 0, 255}, smooth=  Smooth.None), Line(points=  {{72, 0}, {62, -6}}, color=  {0, 0, 255}, smooth=  Smooth.None)}));
+ </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 40}, {80, -40}}, lineColor = {215, 215, 215}, fillColor = {239, 239, 159},
+            fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-80, 20}, {-40, -20}}, lineColor = {0, 0, 0}, textString = "I", fontName = "Times New Roman"), Text(extent = {{-60, 12}, {-20, -28}}, lineColor = {0, 0, 0}, fontName = "Times New Roman", textString = "in"), Text(extent = {{-50, 20}, {62, -20}}, lineColor = {0, 0, 0}, fontName = "Times New Roman", textString = " * fac"), Line(points = {{54, 0}, {72, 0}, {62, 6}}, color = {0, 0, 255}, smooth = Smooth.None), Line(points = {{72, 0}, {62, -6}}, color = {0, 0, 255}, smooth = Smooth.None)}));
 end SolarRadMultiplier;
 

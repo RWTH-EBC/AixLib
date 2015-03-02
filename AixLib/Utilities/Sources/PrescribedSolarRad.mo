@@ -4,21 +4,21 @@ model PrescribedSolarRad "variable radiation condition"
   AixLib.Utilities.Interfaces.SolarRad_out solarRad_out[n] annotation (Placement(
         transformation(extent={{80,-10},{100,10}}, rotation=0)));
   Modelica.Blocks.Interfaces.RealInput I[n] "radiation on surface (W/m2)"
-    annotation (Placement(transformation(extent={{-120,64},{-80,104}},
-         rotation=0)));
+    annotation (Placement(transformation(extent={{-120,62},{-80,102}},
+         rotation=0), iconTransformation(extent={{-100,78},{-78,100}})));
 
   Modelica.Blocks.Interfaces.RealInput I_dir[n] "radiation on surface (W/m2)"
     annotation (Placement(transformation(extent={{-120,30},{-80,70}}, rotation=
-            0)));
+            0), iconTransformation(extent={{-100,40},{-80,60}})));
   Modelica.Blocks.Interfaces.RealInput I_diff[n] "radiation on surface (W/m2)"
-    annotation (Placement(transformation(extent={{-120,-2},{-80,38}}, rotation=
-            0)));
+    annotation (Placement(transformation(extent={{-120,-4},{-80,36}}, rotation=
+            0), iconTransformation(extent={{-100,0},{-80,20}})));
   Modelica.Blocks.Interfaces.RealInput I_gr[n] "radiation on surface (W/m2)"
     annotation (Placement(transformation(extent={{-120,-38},{-80,2}}, rotation=
-            0)));
+            0), iconTransformation(extent={{-100,-42},{-78,-20}})));
   Modelica.Blocks.Interfaces.RealInput AOI[n] "radiation on surface (W/m2)"
     annotation (Placement(transformation(extent={{-120,-76},{-80,-36}},
-          rotation=0)));
+          rotation=0), iconTransformation(extent={{-100,-80},{-80,-60}})));
 equation
   solarRad_out[:].I = I[:] "Radiant energy fluence rate";
   solarRad_out[:].I_dir = I_dir[:] "Radiant energy fluence rate";
@@ -27,7 +27,7 @@ equation
   solarRad_out[:].AOI = AOI[:] "Radiant energy fluence rate";
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-           -100},{100,100}}), graphics={
+            -100},{100,100}}),graphics={
        Line(
          points={{0,80},{0,-80}},
          color={255,170,85},

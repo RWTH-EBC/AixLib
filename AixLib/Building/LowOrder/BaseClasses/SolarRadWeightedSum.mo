@@ -13,6 +13,12 @@ initial equation
   assert(noEvent(sum(weightfactors)>0.0001),"The sum of the weightfactors (likely the window areas) in SolarRadWeightedSum is 0. In case of no radiation (e.g. no windows) this might be correct.");
 equation
   solarRad_out.I = solarRad_in.I * weightfactors / sumWeightfactors;
+
+  //Nothing happens to other components
+  solarRad_out.I_dir = sum(solarRad_in.I_dir);
+  solarRad_out.I_diff = sum(solarRad_in.I_diff);
+  solarRad_out.I_gr = sum(solarRad_in.I_gr);
+  solarRad_out.AOI = sum(solarRad_in.AOI);
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}}),                                                                                                    graphics={                                                                                                    Line(points={{
