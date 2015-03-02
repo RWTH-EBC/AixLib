@@ -9,9 +9,9 @@ model HeatToStar "Adaptor for approximative longwave radiation exchange"
 equation
   Therm.Q_flow + Star.Q_flow = 0;
   Therm.Q_flow = Modelica.Constants.sigma * eps * A * (Therm.T * Therm.T * Therm.T * Therm.T - Star.T * Star.T * Star.T * Star.T);
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {135, 150, 177},
-            fillPattern =                                                                                                    FillPattern.Solid), Text(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 0}, pattern = LinePattern.None, fillColor = {135, 150, 177},
-            fillPattern =                                                                                                    FillPattern.Solid, textString = "2*")}), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {135, 150, 177},
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent=  {{-80, 80}, {80, -80}}, lineColor=  {0, 0, 255}, pattern=  LinePattern.None, fillColor=  {135, 150, 177},
+            fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-80, 80}, {80, -80}}, lineColor=  {0, 0, 0}, pattern=  LinePattern.None, fillColor=  {135, 150, 177},
+            fillPattern=                                                                                                    FillPattern.Solid, textString=  "2*")}), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {135, 150, 177},
             fillPattern =                                                                                                    FillPattern.Solid), Text(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 0}, pattern = LinePattern.None, fillColor = {135, 150, 177},
             fillPattern =                                                                                                    FillPattern.Solid, textString = "2*")}), Documentation(info = "<html>
  <p><h4><font color=\"#008000\">Overview</font></h4></p>
