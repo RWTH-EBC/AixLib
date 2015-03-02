@@ -22,14 +22,14 @@ model Case600_pre
     tableName="Table",
     columns={2,3},
     fileName=
-        "D:/SVN/EBC9999_Modelica-Library/branches/2014-09-30_V2_3/DataBase/additionalFiles/Weatherdata_ASHARE140.mat")
+        "D:/Git/AixLib/AixLib/Resources/WeatherData/Weatherdata_ASHARE140.mat")
     annotation (Placement(transformation(extent={{-100,0},{-80,20}})));
   Modelica.Blocks.Sources.CombiTimeTable Source_Weather(
     tableOnFile=true,
+    columns={2,3,4},
+    tableName="Table",
     fileName=
-        "U:/Angis_Assis/Mitarbeiter/Moritz_Lauster/BESTEST Paper/ASHRAE140_Results/ParameterizationLowOrder/DataBase/Input_Temp.mat",
-    tableName="Input_Temp",
-    columns={2,3,4})
+        "D:/Git/AixLib/AixLib/Resources/WeatherData/WeatherData_Ashrae140_LOM.mat")
     annotation (Placement(transformation(extent={{-100,30},{-80,50}})));
 
 //    Utilities.Sources.HourOfDay hourOfDay
@@ -66,8 +66,6 @@ model Case600_pre
   Modelica.Blocks.Sources.Constant Source_TsetH(k=273.15 + 20)
     annotation (Placement(transformation(extent={{40,-50},{27,-37}})));
   AixLib.HVAC.HeatGeneration.IdealHeaterCooler            idealHeaterCooler(
-    Q_flow_heat=1,
-    Q_flow_cooler=1,
     TN_heater=1,
     TN_cooler=1,
     h_heater=1e6,

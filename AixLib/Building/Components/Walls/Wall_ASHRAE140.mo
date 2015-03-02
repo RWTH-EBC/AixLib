@@ -185,6 +185,8 @@ public
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-20,88})));
+  Modelica.Blocks.Sources.RealExpression SolarRadTotal(y=SolarRadiationPort.I) if outside
+    annotation (Placement(transformation(extent={{-80,86},{-60,106}})));
 equation
 
 //******************************************************************
@@ -217,7 +219,7 @@ end if;
 
 if (outside) then
   //absorbtion of solar radition in wall
-  connect(SolarRadiationPort.I, AbscoeffA.u);
+  connect(SolarRadTotal.y, AbscoeffA.u);
   connect(AbscoeffA.y, absSolarRadWall.Q_flow) annotation (Line(
       points={{-36.4,88},{-30,88}},
       color={0,0,127},
@@ -326,7 +328,7 @@ end if;
 //******************************************************************
 // **** connections for absorbed solar radiation inside wall****
 //******************************************************************
-
+  connect(absSolarRadWin.port, Wall.HeatConv1.port_b);
   connect(heatStarToComb.thermStarComb, thermStarComb_inside) annotation (
       Line(
       points={{78.4,-1.1},{78.4,-1.05},{102,-1.05},{102,0}},

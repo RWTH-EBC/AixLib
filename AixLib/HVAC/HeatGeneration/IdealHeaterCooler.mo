@@ -4,16 +4,7 @@ model IdealHeaterCooler "heater and cooler with variable setpoints"
 
   parameter Modelica.SIunits.Temp_K T0all=295.15
     "Initial temperature for all components";
-  parameter Modelica.SIunits.HeatFlowRate Q_flow_heat=1
-    "Heat flow rate of the heater"
-    annotation(Dialog(tab="Heater"));
-  parameter Real weightfactor_heater=1 "weightfactor of the heater"
-    annotation(Dialog(tab="Heater"));
-  parameter Modelica.SIunits.HeatFlowRate Q_flow_cooler=1
-    "Heat flow rate of the cooler"
-    annotation(Dialog(tab="Cooler"));
-  parameter Real weightfactor_cooler=1 "weightfactor of the cooler"
-    annotation(Dialog(tab="Cooler"));
+
   parameter Real h_heater=100000 "upper limit controller output of the heater"
     annotation(Dialog(tab="Heater",group = "Controller"));
   parameter Real l_heater=0 "lower limit controller output of the heater"
@@ -80,10 +71,6 @@ model IdealHeaterCooler "heater and cooler with variable setpoints"
     KR=KR_heater,
     TN=TN_heater) if Heater_on
     annotation (Placement(transformation(extent={{-14,20},{6,40}})));
-  Modelica.Blocks.Math.Gain gain(k=Q_flow_heat*weightfactor_heater) if Heater_on
-    annotation (Placement(transformation(extent={{10,24},{22,36}})));
-  Modelica.Blocks.Math.Gain gain1(k=Q_flow_cooler*weightfactor_cooler) if  Cooler_on
-    annotation (Placement(transformation(extent={{10,-16},{22,-4}})));
 equation
   connect(booleanExpression.y, pITemp1.onOff) annotation (Line(
       points={{-32.05,22},{-24,22},{-24,25},{-13,25}},
@@ -113,32 +100,24 @@ equation
       points={{44,22},{54,22},{54,12},{94,12}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(Heating.Q_flow, gain.y) annotation (Line(
-      points={{24,22},{22,22},{22,30},{22.6,30}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  connect(pITemp1.y, gain.u) annotation (Line(
-      points={{5,30},{8.8,30}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  connect(gain1.u, pITemp2.y) annotation (Line(
-      points={{8.8,-10},{5,-10}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  connect(gain1.y, coolMeter.p) annotation (Line(
-      points={{22.6,-10},{26,-10},{26,-30},{47.4,-30}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  connect(gain.y, heatMeter.p) annotation (Line(
-      points={{22.6,30},{22,30},{22,50},{47.4,50}},
-      color={0,0,127},
-      smooth=Smooth.None));
   connect(Cooling.port, HeatCoolRoom) annotation (Line(
       points={{46,-2.5},{50,-2.5},{50,-2},{54,-2},{54,12},{94,12}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(gain1.y, Cooling.Q_flow) annotation (Line(
-      points={{22.6,-10},{26,-10},{26,-2.5}},
+  connect(pITemp2.y, Cooling.Q_flow) annotation (Line(
+      points={{5,-10},{14,-10},{14,-2.5},{26,-2.5}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(pITemp2.y, coolMeter.p) annotation (Line(
+      points={{5,-10},{14,-10},{14,-30},{47.4,-30}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(pITemp1.y, Heating.Q_flow) annotation (Line(
+      points={{5,30},{12,30},{12,22},{24,22}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(pITemp1.y, heatMeter.p) annotation (Line(
+      points={{5,30},{12,30},{12,50},{47.4,50}},
       color={0,0,127},
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,

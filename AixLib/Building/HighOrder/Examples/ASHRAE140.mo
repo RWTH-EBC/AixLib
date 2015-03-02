@@ -71,8 +71,6 @@ package ASHRAE140
     Modelica.Blocks.Sources.Constant Source_TsetH(k=273.15 + 20)
       annotation (Placement(transformation(extent={{40,-50},{27,-37}})));
     HVAC.HeatGeneration.IdealHeaterCooler                   idealHeaterCooler(
-      Q_flow_heat=1,
-      Q_flow_cooler=1,
       TN_heater=1,
       TN_cooler=1,
       h_heater=1e6,
