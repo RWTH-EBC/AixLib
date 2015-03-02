@@ -1,5 +1,5 @@
 within AixLib.Building.LowOrder.Examples.Validation;
-model Case600_Ana
+model Case600_pre
   import AixLib;
   extends Modelica.Icons.Example;
   Components.Weather.BaseClasses.Sun_new sun(
@@ -32,29 +32,29 @@ model Case600_Ana
     columns={2,3,4})
     annotation (Placement(transformation(extent={{-100,30},{-80,50}})));
 
-   Utilities.Sources.HourOfDay hourOfDay
-     annotation (Placement(transformation(extent={{80,69},{100,89}})));
-   Modelica.Blocks.Interfaces.RealOutput AnnualHeatingLoad "in kWh"
-     annotation (Placement(transformation(extent={{90,40},{110,60}})));
-   Modelica.Blocks.Interfaces.RealOutput AnnualCoolingLoad "in kWh"
-     annotation (Placement(transformation(extent={{90,22},{110,42}})));
-   Modelica.Blocks.Interfaces.RealOutput PowerLoad "in kW"
-     annotation (Placement(transformation(extent={{90,6},{110,26}})));
-   Utilities.Sensors.EEnergyMeter SolarMeter[6]
-    annotation (Placement(transformation(extent={{86,-86},{106,-66}})));
-   Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationN "in kWh/m2"
-     annotation (Placement(transformation(extent={{73,-14},{93,6}})));
-   Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationE "in kWh/m2"
-     annotation (Placement(transformation(extent={{95,-18},{115,2}})));
-   Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationW "in kWh/m2"
-     annotation (Placement(transformation(extent={{72,-31},{92,-11}})));
-   Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationS "in kWh/m2"
-     annotation (Placement(transformation(extent={{95,-34},{115,-14}})));
-   Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationHor "in kWh/m2"
-     annotation (Placement(transformation(extent={{73,-56},{93,-36}})));
-   Modelica.Blocks.Interfaces.RealOutput TransmittedSolarRadiation_room
-    "in kWh/m2"
-     annotation (Placement(transformation(extent={{73,-72},{99,-52}})));
+//    Utilities.Sources.HourOfDay hourOfDay
+//      annotation (Placement(transformation(extent={{80,69},{100,89}})));
+//    Modelica.Blocks.Interfaces.RealOutput AnnualHeatingLoad "in kWh"
+//      annotation (Placement(transformation(extent={{90,40},{110,60}})));
+//    Modelica.Blocks.Interfaces.RealOutput AnnualCoolingLoad "in kWh"
+//      annotation (Placement(transformation(extent={{90,22},{110,42}})));
+//    Modelica.Blocks.Interfaces.RealOutput PowerLoad "in kW"
+//      annotation (Placement(transformation(extent={{90,6},{110,26}})));
+//    Utilities.Sensors.EEnergyMeter SolarMeter[6]
+//     annotation (Placement(transformation(extent={{86,-86},{106,-66}})));
+//    Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationN "in kWh/m2"
+//      annotation (Placement(transformation(extent={{73,-14},{93,6}})));
+//    Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationE "in kWh/m2"
+//      annotation (Placement(transformation(extent={{95,-18},{115,2}})));
+//    Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationW "in kWh/m2"
+//      annotation (Placement(transformation(extent={{72,-31},{92,-11}})));
+//    Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationS "in kWh/m2"
+//      annotation (Placement(transformation(extent={{95,-34},{115,-14}})));
+//    Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationHor "in kWh/m2"
+//      annotation (Placement(transformation(extent={{73,-56},{93,-36}})));
+//    Modelica.Blocks.Interfaces.RealOutput TransmittedSolarRadiation_room
+//     "in kWh/m2"
+//      annotation (Placement(transformation(extent={{73,-72},{99,-52}})));
   Modelica.Blocks.Sources.Constant AirExchangeRate(k=0.41)
     annotation (Placement(transformation(extent={{-40,-50},{-27,-37}})));
   Modelica.Blocks.Sources.Constant Source_InternalGains_convective(k=0.4*200)
@@ -81,11 +81,12 @@ model Case600_Ana
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
     InternalGains_radiative
     annotation (Placement(transformation(extent={{-92,-62},{-72,-42}})));
-  AixLib.Building.LowOrder.BaseClasses.SolarRadWeightedSum
+  AixLib.Building.LowOrder.BaseClasses.SolarRadWeightedSumReal
                                   SolarRadWeightedSum(n=5, weightfactors={0.00,0.00,
         12.00,0.00,0.00})
-    annotation (Placement(transformation(extent={{9,54},{29,74}})));
-  BaseClasses.EqAirTemp.EqAirTempEBCMod eqAirTemp(
+    annotation (Placement(transformation(extent={{-2,54},{18,74}})));
+  AixLib.Building.LowOrder.BaseClasses.EqAirTemp.EqAirTempEBCModReal
+                                        eqAirTemp(
     n=5,
     orientationswallshorizontal={90,90,90,90,0},
     wf_ground=0,
@@ -93,7 +94,8 @@ model Case600_Ana
     wf_wall={0.232639073,0.174479305,0.103395145,0.174479305,0.315007171},
     T_ground=283.15)
     annotation (Placement(transformation(extent={{-27,24.5},{-5,46.5}})));
-  BaseClasses.ReducedOrderModel.ReducedOrderModelEBCMod reducedOrderModel(
+  AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel.ReducedOrderModelEBCModReal
+                                                        reducedOrderModel(
     withWindows=true,
     Aw=12,
     Vair=129.60,
@@ -120,12 +122,11 @@ model Case600_Ana
     annotation (Placement(transformation(extent={{13,10.5},{45,46.5}})));
   AixLib.Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_VDI6007
     corG_VDI6007_1( Uw=3.33, n=5)
-    annotation (Placement(transformation(extent={{-57,52},{-37,72}})));
-  AixLib.Utilities.Sources.PrescribedSolarRad
-                                     prescribedSolarRad(n=5)
-    annotation (Placement(transformation(extent={{-16,54},{4,74}})));
+    annotation (Placement(transformation(extent={{-48,52},{-28,72}})));
   Modelica.Blocks.Sources.Constant DummyZero[5](k=0)
     annotation (Placement(transformation(extent={{-42,76},{-29,89}})));
+  AixLib.Building.LowOrder.BaseClasses.SolarRadAdapter solarRadAdapter[5]
+    annotation (Placement(transformation(extent={{-54,36},{-34,56}})));
 equation
 
     //Connections for input solar model
@@ -137,27 +138,27 @@ equation
     connect(Solar_Radiation.y[2], radOnTiltedSurf_Perez[i].solarInput2);
   end for;
 
-   //Connections for output solar model to meters
-   for i in 1:5 loop
-       SolarMeter[i].p = radOnTiltedSurf_Perez[i].OutTotalRadTilted.I;
-   end for;
-   //Transmitted radiation through window
-   SolarMeter[6].p = reducedOrderModel.solarRadToHeatWindowRad.heatPort.Q_flow;
-
-   // Set outputs
-   AnnualHeatingLoad = idealHeaterCooler.heatMeter.q_kwh/1000; //in MWh
-   AnnualCoolingLoad = idealHeaterCooler.coolMeter.q_kwh/1000;  // in MWh
-
-   //solar radiation
-   IncidentSolarRadiationN = SolarMeter[1].q_kwh;
-   IncidentSolarRadiationE = SolarMeter[2].q_kwh;
-   IncidentSolarRadiationS = SolarMeter[3].q_kwh;
-   IncidentSolarRadiationW = SolarMeter[4].q_kwh;
-   IncidentSolarRadiationHor = SolarMeter[5].q_kwh;
-
-   TransmittedSolarRadiation_room = SolarMeter[6].q_kwh / reducedOrderModel.Aw;
-
-   PowerLoad = idealHeaterCooler.heatMeter.p + idealHeaterCooler.coolMeter.p;
+//    //Connections for output solar model to meters
+//    for i in 1:5 loop
+//        SolarMeter[i].p = radOnTiltedSurf_Perez[i].OutTotalRadTilted.I;
+//    end for;
+//    //Transmitted radiation through window
+//    SolarMeter[6].p = reducedOrderModel.solarRadToHeatWindowRad.heatPort.Q_flow;
+//
+//    // Set outputs
+//    AnnualHeatingLoad = idealHeaterCooler.heatMeter.q_kwh/1000; //in MWh
+//    AnnualCoolingLoad = idealHeaterCooler.coolMeter.q_kwh/1000;  // in MWh
+//
+//    //solar radiation
+//    IncidentSolarRadiationN = SolarMeter[1].q_kwh;
+//    IncidentSolarRadiationE = SolarMeter[2].q_kwh;
+//    IncidentSolarRadiationS = SolarMeter[3].q_kwh;
+//    IncidentSolarRadiationW = SolarMeter[4].q_kwh;
+//    IncidentSolarRadiationHor = SolarMeter[5].q_kwh;
+//
+//    TransmittedSolarRadiation_room = SolarMeter[6].q_kwh / reducedOrderModel.Aw;
+//
+//    PowerLoad = idealHeaterCooler.heatMeter.p + idealHeaterCooler.coolMeter.p;
 
   connect(Source_TsetC.y,idealHeaterCooler. soll_cool)       annotation (Line(
       points={{3.65,-43.5},{11.2,-43.5},{11.2,-28.8}},
@@ -178,16 +179,6 @@ equation
       points={{-99.4,-52},{-92,-52}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(SolarRadWeightedSum.solarRad_out, reducedOrderModel.solarRad_in)
-    annotation (Line(
-      points={{28,64},{22,64},{22,45.6},{22.6,45.6}},
-      color={255,128,0},
-      smooth=Smooth.None));
-  connect(radOnTiltedSurf_Perez.OutTotalRadTilted,eqAirTemp. solarRad_in)
-    annotation (Line(
-      points={{-78.8,77},{-53.3,77},{-53.3,41.66},{-25.35,41.66}},
-      color={255,128,0},
-      smooth=Smooth.None));
   connect(eqAirTemp.equalAirTempWindow, reducedOrderModel.equalAirTempWindow)
     annotation (Line(
       points={{-5.22,38.36},{3.9,38.36},{3.9,38.22},{16.2,38.22}},
@@ -199,12 +190,12 @@ equation
       color={191,0,0},
       smooth=Smooth.None));
   connect(Source_Weather.y, eqAirTemp.weatherData) annotation (Line(
-      points={{-79,40},{-34,40},{-34,35.5},{-24.8,35.5}},
+      points={{-79,40},{-57,40},{-57,35.5},{-24.8,35.5}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(Source_Weather.y[1], reducedOrderModel.ventilationTemperature)
     annotation (Line(
-      points={{-79,40},{-33,40},{-33,19.86},{16.2,19.86}},
+      points={{-79,40},{-57,40},{-57,19.86},{16.2,19.86}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(InternalGains_convective.port, reducedOrderModel.internalGainsConv)
@@ -229,39 +220,32 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
 
-  connect(prescribedSolarRad.solarRad_out, SolarRadWeightedSum.solarRad_in)
-    annotation (Line(
-      points={{3,64},{10,64}},
-      color={255,128,0},
-      smooth=Smooth.None));
   connect(radOnTiltedSurf_Perez.OutTotalRadTilted, corG_VDI6007_1.SR_input)
     annotation (Line(
-      points={{-78.8,77},{-53,77},{-53,61.9},{-56.8,61.9}},
+      points={{-78.8,77},{-53,77},{-53,61.9},{-47.8,61.9}},
       color={255,128,0},
-      smooth=Smooth.None));
-  connect(prescribedSolarRad.I, corG_VDI6007_1.solarRadWinTrans) annotation (
-      Line(
-      points={{-14.9,72.9},{-14.9,72.7},{-38,72.7},{-38,62}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  connect(DummyZero.y, prescribedSolarRad.AOI) annotation (Line(
-      points={{-28.35,82.5},{-27,82.5},{-27,57},{-15,57}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  connect(DummyZero.y, prescribedSolarRad.I_gr) annotation (Line(
-      points={{-28.35,82.5},{-27,82.5},{-27,60.9},{-14.9,60.9}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  connect(DummyZero.y, prescribedSolarRad.I_diff) annotation (Line(
-      points={{-28.35,82.5},{-27,82.5},{-27,65},{-15,65}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  connect(prescribedSolarRad.I_dir, DummyZero.y) annotation (Line(
-      points={{-15,69},{-27,69},{-27,82.5},{-28.35,82.5}},
-      color={0,0,127},
       smooth=Smooth.None));
   connect(DummyZero.y, eqAirTemp.sunblindsig) annotation (Line(
       points={{-28.35,82.5},{-27,82.5},{-27,50},{-16,50},{-16,44.3}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(solarRadAdapter.solarRad_out, eqAirTemp.solarRad_in) annotation (Line(
+      points={{-34,46},{-31,46},{-31,41.66},{-25.35,41.66}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(solarRadAdapter.solarRad_in, radOnTiltedSurf_Perez.OutTotalRadTilted)
+    annotation (Line(
+      points={{-53,46},{-66,46},{-66,77},{-78.8,77}},
+      color={255,128,0},
+      smooth=Smooth.None));
+  connect(corG_VDI6007_1.solarRadWinTrans, SolarRadWeightedSum.solarRad_in)
+    annotation (Line(
+      points={{-29,62},{-14,62},{-14,64},{-1,64}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(SolarRadWeightedSum.solarRad_out, reducedOrderModel.u1) annotation (
+      Line(
+      points={{17,64},{21,64},{21,45.42},{21.64,45.42}},
       color={0,0,127},
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(
@@ -343,4 +327,4 @@ equation
       Interval=3600,
       Tolerance=1e-006),
     __Dymola_experimentSetupOutput);
-end Case600_Ana;
+end Case600_pre;

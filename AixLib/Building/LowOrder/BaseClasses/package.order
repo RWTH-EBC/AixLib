@@ -6,3 +6,5 @@ ThermSplitter
 ThermalZonePhysics
 ReducedOrderModel
 EqAirTemp
+SolarRadAdapter
+SolarRadWeightedSumReal

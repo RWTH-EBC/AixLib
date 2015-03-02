@@ -134,7 +134,7 @@ equation
           extent={{14,36},{100,-58}},
           lineColor={0,0,0},
           fillColor={215,215,215},
-          fillPattern=FillPattern.Forward),                                                                                                    Rectangle(extent=  {{-60, -58}, {100, -70}}, lineColor=
+          fillPattern=FillPattern.Forward),                                                                                                    Rectangle(extent = {{-60, -58}, {100, -70}}, lineColor=
               {0,127,0},
             lineThickness=1,                                                                                                    fillColor=
               {0,127,0},
