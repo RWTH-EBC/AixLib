@@ -72,7 +72,7 @@ equation
 <h4>Validation</h4>
 <p>The model is verified with the VDI 6007, see <a href=\"AixLib.Building.LowOrder.Validation.VDI6007\">Validation.VDI6007</a>. A validation with the use of the standard ASHRAE 140 is in progress </p>
 <h4>Implementation</h4>
-<p> </p>
+<p><br/></p>
 <h4>References</h4>
 <ul>
 <li>German Association of Engineers: Guideline VDI 6007-1, March 2012: Calculation of transient thermal response of rooms and buildings - Modelling of rooms.</li>

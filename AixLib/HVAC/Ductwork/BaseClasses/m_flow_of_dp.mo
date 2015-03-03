@@ -37,7 +37,7 @@ algorithm
  <p><br/>For turbulent regime (if Re &gt; 2300): </p>
  <pre>
  1/sqrt(lambda) = -2 log(2.51 / (Re *sqrt(lambda)) + epsilon / (3.71 * d)</pre>
- <p> </p>
+ <p><br/></p>
  </html>", revisions = "<html>
  <p>30.12.2013, Mark Wesseling</p>
  <ul>
