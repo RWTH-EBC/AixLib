@@ -64,7 +64,7 @@ equation
  <li>daily input for outdoor temperature </li>
  <li>no shortwave radiation on the outer wall</li>
  <li>shortwave radiation through the window</li>
- <li>sunblind is closed at &GT;100W/m&sup2;, behind the window</li>
+ <li>sunblind is closed at &gt;100W/m&sup2;, behind the window</li>
  <li>no longwave radiation exchange between outer wall, window and ambience</li>
  </ul>
  <p>Reference: Room air temperature</p>

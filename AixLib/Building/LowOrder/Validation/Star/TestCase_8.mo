@@ -81,7 +81,7 @@ equation
  <li>Second outer wall to the west</li>
  <li>shortwave radiation on the outer wall</li>
  <li>shortwave radiation through the windows</li>
- <li>Shutter cloeses &GT;100W/m&sup2;</li>
+ <li>Shutter cloeses &gt;100W/m&sup2;</li>
  <li>no longwave radiation heat exchange (special EqAirTemp see: EqAirTemp_TestCase_8)</li>
  </ul>
  <p><br/>Reference: Room air temperature</p>

@@ -34,13 +34,13 @@ equation
  <td><p>one-family dwelling</p></td>
  <td><p>&lt; 4</p></td>
  <td><p>4 - 10</p></td>
- <td><p>&GT; 10</p></td>
+ <td><p>&gt; 10</p></td>
  </tr>
  <tr>
  <td><p>multi-family dwelling/other</p></td>
  <td><p>&lt; 2</p></td>
  <td><p>2 - 5</p></td>
- <td><p>&GT; 5</p></td>
+ <td><p>&gt; 5</p></td>
  </tr>
  </table>
  <p>Reference values for air shielding value e: </p>
@@ -83,7 +83,7 @@ equation
  <td><p>1.2</p></td>
  </tr>
  <tr>
- <td><p>&GT; 30 m</p></td>
+ <td><p>&gt; 30 m</p></td>
  <td><p>1.5</p></td>
  </tr>
  </table>
