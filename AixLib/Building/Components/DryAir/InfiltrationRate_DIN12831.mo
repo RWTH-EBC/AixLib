@@ -32,13 +32,13 @@ equation
  </tr>
  <tr>
  <td><p>one-family dwelling</p></td>
- <td><p>&LT; 4</p></td>
+ <td><p>&lt; 4</p></td>
  <td><p>4 - 10</p></td>
  <td><p>&GT; 10</p></td>
  </tr>
  <tr>
  <td><p>multi-family dwelling/other</p></td>
- <td><p>&LT; 2</p></td>
+ <td><p>&lt; 2</p></td>
  <td><p>2 - 5</p></td>
  <td><p>&GT; 5</p></td>
  </tr>
