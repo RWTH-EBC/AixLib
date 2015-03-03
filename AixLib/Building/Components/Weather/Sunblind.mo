@@ -64,20 +64,20 @@ equation
           fillColor={236,99,92},
           fillPattern=FillPattern.Solid,
           textString="%name")}),                                                                                                    Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>This model represents a sunblind to reduce the vectorial radiance on facades, windows. etc. </p>
- <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
+ <h4><font color=\"#008000\">Level of Development</font></h4>
  <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
- <p><h4><font color=\"#008000\">Concept</font></h4></p>
+ <h4><font color=\"#008000\">Concept</font></h4>
  <p><ul>
  <li>You can define the amount of radiance hitting the facade with gsunblind, which states how much radiance goes through the closed sunblind</li>
  <li>At which amount of radiance the sunblind will be closed is defined by Imax. Each directon is independent from all other directions and closes/opens seperately due to the radiance hitting the direction.</li>
  <li>The output sunblindonoff can be used to transfer the state of the shading to another model component. It contains 1-gsunblind, which is the amount of radiances, detained by the shading.</li>
  </ul></p>
- <p><h4><font color=\"#008000\">Assumptions</font></h4></p>
+ <h4><font color=\"#008000\">Assumptions</font></h4>
  <p>Each direction closes seperatly, which means that in reality each direction has to have his own sensor. It seems, that if a building uses automatic shading, the sensor is on the roof and computes the radiance on each facade. This is quite similar to the concept of different sensors for different directions, as both systems close the sunblinds seperately for each direction.</p>
  <p>There is no possibilty to disable the sunblind in a specific direction. This isn&apos;t necessary, as you can set gsunblind in this direction to 1, which means, that the whole radiance is passing through the closed sunblind.</p>
- <p><h4><font color=\"#008000\">Example Results</font></h4></p>
+ <h4><font color=\"#008000\">Example Results</font></h4>
  <p>This model is part of <a href=\"AixLib.Building.Components.Walls.Wall\">Wall</a> and checked in the Examples <a href=\"AixLib.Building.Components.Examples.Walls.InsideWall\">InsideWall</a> and <a href=\"AixLib.Building.Components.Examples.Walls.OutsideWall\">OutsideWall</a>. </p>
  </html>", revisions = "<html>
  <p><ul>

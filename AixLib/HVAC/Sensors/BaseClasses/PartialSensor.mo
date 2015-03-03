@@ -9,7 +9,7 @@ equation
   inStream(port_a.h_outflow) = port_b.h_outflow;
   inStream(port_b.h_outflow) = port_a.h_outflow;
   annotation(Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p><br/>This sensor base class defines a fluid model which does not affect the fluid properties. The signal output can be used to generate a signal of the measured value.</p>
  </html>", revisions = "<html>
  <p>10.12.2013, Mark Wesseling</p>

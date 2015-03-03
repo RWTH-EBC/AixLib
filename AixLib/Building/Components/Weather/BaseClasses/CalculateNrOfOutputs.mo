@@ -43,9 +43,9 @@ algorithm
     m := m + 1;
   end if;
   annotation(Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>Calculates the number of outputs based on the given inputs. </p>
- <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
+ <h4><font color=\"#008000\">Level of Development</font></h4>
  <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
  </html>", revisions = "<html>
  <p><ul>

@@ -14,11 +14,11 @@ equation
             fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{24, 80}, {44, -80}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {182, 182, 182},
             fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{4, 80}, {24, -80}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {156, 156, 156},
             fillPattern =                                                                                                    FillPattern.Solid)}), Window(x = 0.25, y = 0.38, width = 0.6, height = 0.6), Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>The <b>HeatConv</b> model represents the phenomenon of heat convection. No heat is stored.</p>
- <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
+ <h4><font color=\"#008000\">Level of Development</font></h4>
  <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
- <p><h4><font color=\"#008000\">Example Results</font></h4></p>
+ <h4><font color=\"#008000\">Example Results</font></h4>
  <p><a href=\"AixLib.Utilities.Examples.HeatTransfer_test\">AixLib.Utilities.HeatTransfer_test </a></p>
  </html>", revisions = "<html>
  <ul>

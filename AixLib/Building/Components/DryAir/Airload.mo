@@ -22,11 +22,11 @@ equation
  <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
  </ul></p>
  </html>", info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>The <b>Airload</b> model represents a heat capacity consisting of air. It is described by its volume, density and specific heat capacity. </p>
- <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
+ <h4><font color=\"#008000\">Level of Development</font></h4>
  <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
- <p><h4><font color=\"#008000\">Example Results</font></h4></p>
+ <h4><font color=\"#008000\">Example Results</font></h4>
  <p><a href=\"AixLib.Building.Components.Examples.DryAir.DryAir_test\">AixLib.Building.Components.Examples.DryAir.DryAir_test</a> </p>
  </html>"));
 end Airload;

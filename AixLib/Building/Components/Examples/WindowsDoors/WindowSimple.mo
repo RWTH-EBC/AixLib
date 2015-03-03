@@ -15,9 +15,9 @@ equation
   connect(varRad.solarRad_out[1], windowSimple.solarRad_in) annotation(Line(points = {{-47, 50}, {-32, 50}, {-32, 21.6}, {-22.2, 21.6}}, color = {255, 128, 0}, smooth = Smooth.None));
   connect(SolarRadiation.y, varRad.u[1]) annotation(Line(points = {{-79, 50}, {-66, 50}}, color = {0, 0, 127}, smooth = Smooth.None));
   annotation(Diagram(graphics), experiment(StopTime = 3600, Interval = 60, Algorithm = "Lsodar"), experimentSetupOutput, Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>Simulation to test the <a href=\"AixLib.Building.Components.WindowsDoors.WindowSimple\">WindowSimple</a> model.</p>
- <p><h4><font color=\"#008000\">Concept</font></h4></p>
+ <h4><font color=\"#008000\">Concept</font></h4>
  <p>Test case for calculation of U-value</p>
  <p><ul>
  <li>Area of component: 10 m2</li>

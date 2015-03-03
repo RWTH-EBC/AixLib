@@ -18,17 +18,17 @@ equation
             fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-30, -12}, {30, -78}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 255},
             fillPattern=                                                                                                    FillPattern.Solid, textString=  "Air"), Text(extent=  {{-76, 26}, {78, -8}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 0},
             fillPattern=                                                                                                    FillPattern.Solid, textString=  "DIN 12381")}), Window(x = 0.4, y = 0.4, width = 0.6, height = 0.6), Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>The<b> InfiltrationRate</b> model describes heat and mass transport by infiltration. </p>
- <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
+ <h4><font color=\"#008000\">Level of Development</font></h4>
  <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
- <p><h4><font color=\"#008000\">Concept</font></h4></p>
+ <h4><font color=\"#008000\">Concept</font></h4>
  <p>Air exchange coefficients at 50 Pa pressure difference between ambience and room air: </p>
  <table cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
- <td><p align=\"center\"><h4>Dwelling type</h4></p></td>
- <td><p align=\"center\"><h4>highly air tight</h4></p></td>
- <td><p align=\"center\"><h4>medium air tight</h4></p></td>
- <td><p align=\"center\"><h4>low air tight</h4></p></td>
+ <td><h4 align=\"center\">Dwelling type</h4></td>
+ <td><h4 align=\"center\">highly air tight</h4></td>
+ <td><h4 align=\"center\">medium air tight</h4></td>
+ <td><h4 align=\"center\">low air tight</h4></td>
  </tr>
  <tr>
  <td><p>one-family dwelling</p></td>
@@ -46,9 +46,9 @@ equation
  <p>Reference values for air shielding value e: </p>
  <table cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
  <td></td>
- <td><p align=\"center\"><h4>heated room without </h4></p><p align=\"center\">facade with openings</p><p align=\"center\">exposed to wind</p></td>
- <td><p align=\"center\"><h4>heated room with</h4></p><p align=\"center\">one facade with openings</p><p align=\"center\">exposed to wind</p></td>
- <td><p align=\"center\"><h4>heated room with more than</h4></p><p align=\"center\">one facade with openings</p><p align=\"center\">exposed to wind</p></td>
+ <td><h4 align=\"center\">heated room without </h4><p align=\"center\">facade with openings</p><p align=\"center\">exposed to wind</p></td>
+ <td><h4 align=\"center\">heated room with</h4><p align=\"center\">one facade with openings</p><p align=\"center\">exposed to wind</p></td>
+ <td><h4 align=\"center\">heated room with more than</h4><p align=\"center\">one facade with openings</p><p align=\"center\">exposed to wind</p></td>
  </tr>
  <tr>
  <td><p>no shielding</p></td>
@@ -71,7 +71,7 @@ equation
  </table>
  <p>Reference values for height correction value &epsilon;: </p>
  <table cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
- <td><p><h4>Height of room</h4></p></td>
+ <td><h4>Height of room</h4></td>
  <td><p align=\"center\"><br/><b>&epsilon;</b></p></td>
  </tr>
  <tr>
@@ -87,9 +87,9 @@ equation
  <td><p>1.5</p></td>
  </tr>
  </table>
- <p><h4><font color=\"#008000\">References</font></h4></p>
+ <h4><font color=\"#008000\">References</font></h4>
  <p>DIN EN 12831</p>
- <p><h4><font color=\"#008000\">Example Results</font></h4></p>
+ <h4><font color=\"#008000\">Example Results</font></h4>
  <p><a href=\"AixLib.Building.Components.Examples.DryAir.DryAir_test\">AixLib.Building.Components.Examples.DryAir.DryAir_test</a> </p>
  </html>", revisions = "<html>
  <ul>

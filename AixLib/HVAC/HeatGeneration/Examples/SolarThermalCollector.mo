@@ -24,7 +24,7 @@ equation
   connect(tempAndRad.Rad, solarThermal.Irradiation) annotation(Line(points = {{12, 75.4}, {12, 10.8}, {11, 10.8}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(tempAndRad.T_out, solarThermal.T_air) annotation(Line(points = {{4, 75.4}, {4, 75.4}, {4, 10.8}}, color = {0, 0, 127}, smooth = Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), experiment(StopTime = 82600, Interval = 3600), __Dymola_experimentSetupOutput(events = false), Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p><br/>This test demonstrates the solar thermal collector model. Different types of collectors can be tested at fixed boundary conditions. To test the collectors at different fluid temperatures, adjust h at left boundary accordung to this table:</p>
  <p>T in &deg;C | h in J/kg</p>
  <p>20 | 84007</p>

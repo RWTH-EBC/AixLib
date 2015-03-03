@@ -31,7 +31,7 @@ equation
   connect(prescribedHeatFlow.port, volume.heatPort) annotation(Line(points = {{32, -80}, {50, -80}, {50, -60}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(Source_IsNight.y, pumpSimple.IsNight) annotation(Line(points = {{-75, 10}, {-60.2, 10}}, color = {255, 0, 255}, smooth = Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), experiment(StopTime = 82800, Interval = 60), __Dymola_experimentSetupOutput(events = false), Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p><br/>This example models a simple fluid circuit in order to test the boiler model for plausibility</p>
  </html>", revisions = "<html>
  <p>07.10.2013, Marcus Fuchs</p>

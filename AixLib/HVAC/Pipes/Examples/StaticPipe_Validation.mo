@@ -13,7 +13,7 @@ equation
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), experiment(StopTime = 1000, Interval = 1), __Dymola_experimentSetupOutput(events = false), Documentation(revisions = "<html>
  <p>01.10.2013, by <i>Pooyan Jahangiri</i>: implemented</p>
  </html>", info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>Simple example of the static pipe connected to two boundaries.</p>
  <p><br/><b><font style=\"color: #008000; \">Concept</font></b></p>
  <p>The first boundary has a changing pressure and the second boundary has a fixed pressure. This results in changing of the mass flow and pressure drop in the pipe which can be observed in the results.</p>

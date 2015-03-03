@@ -111,15 +111,15 @@ record ZoneBaseRecord "the used record standard"
  <p>The factor f_RH in W/m2 can be chosen form the following table:</p>
  <table cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
  <td></td>
- <td><p align=\"center\"><h4>1 K</h4></p></td>
- <td><p align=\"center\"><h4>2 K</h4></p></td>
- <td><p align=\"center\"><h4>3 K</h4></p></td>
+ <td><h4 align=\"center\">1 K</h4></td>
+ <td><h4 align=\"center\">2 K</h4></td>
+ <td><h4 align=\"center\">3 K</h4></td>
  </tr>
  <tr>
- <td><p align=\"center\"><h4>re-heat time</h4></p></td>
- <td><p align=\"center\"><h4>light</h4></p></td>
- <td><p align=\"center\"><h4>medium</h4></p></td>
- <td><p align=\"center\"><h4>heavy</h4></p></td>
+ <td><h4 align=\"center\">re-heat time</h4></td>
+ <td><h4 align=\"center\">light</h4></td>
+ <td><h4 align=\"center\">medium</h4></td>
+ <td><h4 align=\"center\">heavy</h4></td>
  </tr>
  <tr>
  <td><p>1 h</p></td>
@@ -163,4 +163,3 @@ record ZoneBaseRecord "the used record standard"
  </ul>
  </html>"));
 end ZoneBaseRecord;
-

@@ -24,14 +24,14 @@ equation
  <li><i>May 07, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
  </ul></p>
  </html>", info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>Light heat source model. Maximum lighting can be given as input and be adjusted by a schedule input.</p>
- <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
+ <h4><font color=\"#008000\">Level of Development</font></h4>
  <p><img src=\"modelica://AixLib/Images/stars2.png\"/></p>
- <p><h4><font color=\"#008000\">Known limitation</font></h4></p>
+ <h4><font color=\"#008000\">Known limitation</font></h4>
  <p>The parameter <b>A</b> cannot be set by default since other models must be able to implement their own equations for <b>A</b>.</p>
  <p>The input signal can take values from 0 to 1, and is then multiplied with the maximum lighting power per square meter and the room area. </p>
- <p><h4><font color=\"#008000\">Example Results</font></h4></p>
+ <h4><font color=\"#008000\">Example Results</font></h4>
  <p><a href=\"AixLib.Building.Components.Examples.Sources.InternalGains.Lights\">AixLib.Building.Components.Examples.Sources.InternalGains.Lights</a> </p>
  <p><a href=\"AixLib.Building.Components.Examples.Sources.InternalGains.OneOffice\">AixLib.Building.Components.Examples.Sources.InternalGains.OneOffice</a></p>
  </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));

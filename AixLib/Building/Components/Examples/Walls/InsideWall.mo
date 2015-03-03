@@ -21,9 +21,9 @@ equation
   connect(Tinside1.port, thermStar_Demux1.star) annotation(Line(points = {{72, 60}, {56, 60}, {56, -22}, {88, -22}, {88, -41.65}, {70.28, -41.65}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(Tinside.port, thermStar_Demux1.therm) annotation(Line(points = {{72, 20}, {60, 20}, {60, -18}, {94, -18}, {94, -50}, {82, -50}, {82, -49.825}, {70.07, -49.825}}, color = {191, 0, 0}, smooth = Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), experiment(StopTime = 90000, Interval = 60, __Dymola_Algorithm = "Lsodar"), experimentSetupOutput, Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>Simulation to test the <a href=\"AixLib.Building.Components.Walls.Wall\">Wall</a> model in case of an <b>inside wall</b> application.</p>
- <p><h4><font color=\"#008000\">Concept</font></h4></p>
+ <h4><font color=\"#008000\">Concept</font></h4>
  <p>Test case for calculation of U-value</p>
  <p><ul>
  <li>Area of Wall: 10 m&sup2;</li>

@@ -16,7 +16,7 @@ equation
   connect(T_in.port_b, massFlowSensor.port_a) annotation(Line(points = {{-60, 0}, {-50, 0}}, color = {0, 127, 255}, smooth = Smooth.None));
   connect(massFlowSensor.port_b, volume.port_a) annotation(Line(points = {{-30, 0}, {-10, 0}}, color = {0, 127, 255}, smooth = Smooth.None));
   annotation(Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p><br/>This partial model is a base class for modelling all heat generation equipment. It includes the necessary fluid port and a fluid volume with a thermal connector for heating the fluid.</p>
  <p>This model is just a start and is likely to change in order to be suitable for all heat generation equipment within the lecture.</p>
  </html>", revisions = "<html>

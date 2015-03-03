@@ -5,11 +5,11 @@ connector HeatStarComb "Combines therm connector and star connector."
   annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent=  {{-100, 102}, {102, -100}}, lineColor=  {191, 0, 0}, fillColor=  {191, 0, 0},
             fillPattern=                                                                                                    FillPattern.Solid), Polygon(points=  {{-9, 86}, {17, 86}, {17, 12}, {81, 34}, {89, 6}, {26, -14}, {66, -72}, {41, -88}, {4, -28}, {-31, -88}, {-56, -72}, {-18, -14}, {-81, 6}, {-73, 34}, {-9, 12}, {-9, 86}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0},
             fillPattern=                                                                                                    FillPattern.Solid)}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>
  This connector makes a single connection for a combination of Radiation and Convection possible.
  </p>
- <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
+ <h4><font color=\"#008000\">Level of Development</font></h4>
  <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
  </html>
  ", revisions = "<html>

@@ -31,7 +31,7 @@ equation
  <li>implemented</li>
  </ul></p>
  </html>", info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p><br/>This boiler efficiency specifies a table for eta at different part load conditions. The values are somewhat similar to the lowest curve in Recknagel, Sprenger 2009 DVD p. 822. This describes a simple boiler (no low temperature operation, no flue gas condensation)</p>
  </html>"));
 end BoilerEfficiency;

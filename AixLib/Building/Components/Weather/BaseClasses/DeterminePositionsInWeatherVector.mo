@@ -60,9 +60,9 @@ algorithm
  <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately, added variable descriptions</li>
  </ul></p>
  </html>", info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>Determines the position of the given input(s) in the weather vector of the <a href=\"Building.Components.Weather.Weather\">weather</a> model. </p>
- <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
+ <h4><font color=\"#008000\">Level of Development</font></h4>
  <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
  </html>"));
 end DeterminePositionsInWeatherVector;

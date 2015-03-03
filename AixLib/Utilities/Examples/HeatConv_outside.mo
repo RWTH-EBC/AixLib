@@ -23,7 +23,7 @@ equation
           Implemented.</li>
  </ul>
  </html>", info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>Plot HeatFlow for the different ways of calcutating the heat transfer to see the difference. </p>
  </html>"), experiment(StopTime = 3600, Interval = 60, Algorithm = "Lsodar"), experimentSetupOutput);
 end HeatConv_outside;

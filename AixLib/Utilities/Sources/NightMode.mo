@@ -20,13 +20,13 @@ equation
   connect(greaterThreshold.y, IsNight.u1) annotation(Line(points = {{3.725, 15}, {9, 15}, {9, 3}, {16.5, 3}}, color = {255, 0, 255}, smooth = Smooth.None));
   connect(IsNight.y, SwitchToNightMode) annotation(Line(points = {{33.75, 3}, {88.5, 3}}, color = {255, 0, 255}, smooth = Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {1.5, 1.5}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {1.5, 1.5}), graphics = {Ellipse(extent=  {{-70.5, 73.5}, {78, -76.5}}, lineColor=  {0, 0, 255}), Line(points=  {{3, 73.5}, {3, 57}, {3, 58.5}}, color=  {0, 0, 255}, smooth=  Smooth.None), Line(points=  {{3, -60}, {3, -76.5}, {3, -75}}, color=  {0, 0, 255}, smooth=  Smooth.None), Line(points=  {{-54, 0}, {-70.5, 0}, {-70.5, 1.5}}, color=  {0, 0, 255}, smooth=  Smooth.None), Line(points=  {{78, 0}, {61.5, 0}, {61.5, 1.5}}, color=  {0, 0, 255}, smooth=  Smooth.None), Line(points=  {{-51, 49.5}, {-42, 37.5}, {-51, 49.5}}, color=  {0, 0, 255}, smooth=  Smooth.None), Line(points=  {{46.5, -42}, {55.5, -54}, {46.5, -42}}, color=  {0, 0, 255}, smooth=  Smooth.None), Line(points=  {{-39, -40.5}, {-51, -52.5}, {-39, -40.5}}, color=  {0, 0, 255}, smooth=  Smooth.None), Line(points=  {{60, 48}, {48, 36}, {60, 48}}, color=  {0, 0, 255}, smooth=  Smooth.None), Ellipse(extent=  {{-70.5, 73.5}, {78, -76.5}}, lineColor=  {0, 255, 255}, lineThickness=  1, fillColor=  {0, 255, 255}, fillPattern=  FillPattern.Solid), Ellipse(extent=  {{-40.5, 18}, {-15, -9}}, lineColor=  {255, 255, 0}, fillColor=  {255, 255, 0}, fillPattern=  FillPattern.Solid), Line(points=  {{-27, 18}, {-27, 30}, {-28.5, -18}, {-27, 4.5}, {-49.5, 4.5}, {-4.5, 4.5}, {-30, 4.5}, {-12, 21}, {-45, -12}, {-27, 6}, {-43.5, 21}, {-12, -10.5}, {-28.5, 6}}, color=  {255, 255, 0}, smooth=  Smooth.None, thickness=  0.5), Polygon(points=  {{4.5, 73.5}, {4.5, -78}, {19.5, -75}, {31.5, -72}, {43.5, -66}, {54, -58.5}, {63, -49.5}, {72, -34.5}, {78, -21}, {79.5, -4.5}, {79.5, 13.5}, {72, 31.5}, {64.5, 45}, {49.5, 60}, {24, 72}, {22.5, 72}, {4.5, 73.5}}, lineColor=  {0, 0, 255}, lineThickness=  0.5, smooth=  Smooth.None, fillColor=  {0, 0, 255}, fillPattern=  FillPattern.Solid), Ellipse(extent=  {{16.5, 22.5}, {49.5, -12}}, lineColor=  {255, 255, 0}, fillColor=  {255, 255, 0}, fillPattern=  FillPattern.Solid), Ellipse(extent=  {{28.5, 22.5}, {63, -10.5}}, lineColor=  {0, 0, 255}, fillColor=  {0, 0, 255}, fillPattern=  FillPattern.Solid, lineThickness=  1)}), Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>
  Model for the switching between night and day operation modes based on the simulation time.
  </p>
- <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
+ <h4><font color=\"#008000\">Level of Development</font></h4>
  <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
- <p><h4><font color=\"#008000\">Example Results</font></h4></p>
+ <h4><font color=\"#008000\">Example Results</font></h4>
  <p><a href=\"AixLib.Utilities.Examples.TimeUtilities_test\">AixLib.Utilities.Examples.TimeUtilities_test</a> </p>
  </html>", revisions = "<html>
  <p><ul>
