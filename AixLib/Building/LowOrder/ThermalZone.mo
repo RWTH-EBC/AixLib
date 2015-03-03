@@ -174,7 +174,7 @@ equation
  <p><br/><b><font style=\"color: #008000; \">References</font></b></p>
  <ul>
  <li>German Association of Engineers: Guideline VDI 6007-1, March 2012: Calculation of transient thermal response of rooms and buildings - Modelling of rooms.</li>
- <li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D. (2014): Low order thermal network models for dynamic simulations of buildings on city district scale. In: Building and Environment 73, p. 223&ndash;231. DOI: <a href=\"http://dx.doi.org/10.1016/j.buildenv.2013.12.016\">10.1016/j.buildenv.2013.12.016</a></p>.</li>
+ <li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D. (2014): Low order thermal network models for dynamic simulations of buildings on city district scale. In: Building and Environment 73, p. 223&ndash;231. DOI: <a href=\"http://dx.doi.org/10.1016/j.buildenv.2013.12.016\">10.1016/j.buildenv.2013.12.016</a>.</li>
  </ul>
  <h4><span style=\"color:#008000\">Example Results</span></h4>
  <p>See <a href=\"Examples\">Examples</a> for some results. </p>
@@ -186,4 +186,3 @@ equation
  </ul>
  </html>"));
 end ThermalZone;
-
