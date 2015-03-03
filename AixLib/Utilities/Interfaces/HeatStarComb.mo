@@ -21,4 +21,3 @@ connector HeatStarComb "Combines therm connector and star connector."
  </ul>
  </html>"));
 end HeatStarComb;
-

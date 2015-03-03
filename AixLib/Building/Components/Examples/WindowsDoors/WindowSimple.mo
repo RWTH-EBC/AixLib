@@ -32,4 +32,3 @@ equation
  </ul>
  </html>"));
 end WindowSimple;
-

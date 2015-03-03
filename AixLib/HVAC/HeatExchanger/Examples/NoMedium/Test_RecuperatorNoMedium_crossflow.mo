@@ -32,4 +32,3 @@ equation
  <p>Testing cross flow charakteristic (no explicit formua available). Provide means to compare with manufacturer data. Manufacturer data is stored in files in the Examples package. You can also switch to co-current flow and observe the differences.</p>
  </html>"));
 end Test_RecuperatorNoMedium_crossflow;
-

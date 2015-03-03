@@ -37,4 +37,3 @@ record Livingroom
  </ul>
  </html>"));
 end Livingroom;
-

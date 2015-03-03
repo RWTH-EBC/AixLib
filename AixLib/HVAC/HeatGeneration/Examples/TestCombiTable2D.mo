@@ -21,4 +21,3 @@ equation
  </ul>
  </html>"), Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}})));
 end TestCombiTable2D;
-

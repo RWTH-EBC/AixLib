@@ -68,4 +68,3 @@ equation
  </ul>
  </html>"));
 end SolarRadWeightedSum;
-

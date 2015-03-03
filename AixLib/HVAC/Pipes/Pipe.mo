@@ -43,4 +43,3 @@ equation
  <p><a href=\"AixLib.HVAC.Pipes.Examples.Pipe_Validation\">AixLib.HVAC.Pipes.Examples.Pipe_Validation</a></p>
  </html>"));
 end Pipe;
-

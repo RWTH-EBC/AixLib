@@ -14,4 +14,3 @@ record FanCharacteristicsBaseDataDefinition
  <p>30.12.2013, by <i>Mark Wesseling</i>: implemented</p>
  </html>"));
 end FanCharacteristicsBaseDataDefinition;
-

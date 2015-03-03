@@ -75,4 +75,3 @@ equation
  <p>The model can extended, if one wants to consider each of the floors belongig to the upper rooms individually.</p>
  </html>"));
 end Cellar;
-

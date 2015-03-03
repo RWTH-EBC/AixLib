@@ -180,4 +180,3 @@ equation
  <p><img src=\"modelica://AixLib/Images/House/2OW_2IWl_1IWs_1Gr_Pa.png\"/></p>
  </html>"));
 end Ow2IwL2IwS1Gr1Uf1;
-

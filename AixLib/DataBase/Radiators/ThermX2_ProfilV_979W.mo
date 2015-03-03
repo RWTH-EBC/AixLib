@@ -34,4 +34,3 @@ record ThermX2_ProfilV_979W
  <p>13.11.2013, by <i>Ana Constantin</i>: implemented</p>
  </html>"));
 end ThermX2_ProfilV_979W;
-

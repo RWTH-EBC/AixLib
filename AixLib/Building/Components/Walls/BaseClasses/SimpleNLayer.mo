@@ -57,4 +57,3 @@ equation
  </ul>
  </html>"));
 end SimpleNLayer;
-

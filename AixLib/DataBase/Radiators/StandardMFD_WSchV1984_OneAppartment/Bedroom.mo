@@ -37,4 +37,3 @@ record Bedroom
  </ul>
  </html>"));
 end Bedroom;
-

@@ -67,4 +67,3 @@ equation
  </ul>
  </html>"));
 end RoomGFOw2_DayNightMode;
-

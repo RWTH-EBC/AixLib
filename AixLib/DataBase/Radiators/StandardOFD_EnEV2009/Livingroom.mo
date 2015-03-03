@@ -34,4 +34,3 @@ record Livingroom
  <p>13.11.2013, by <i>Ana Constantin</i>: implemented</p>
  </html>"));
 end Livingroom;
-

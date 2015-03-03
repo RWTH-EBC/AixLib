@@ -11,7 +11,7 @@ package WindowsDoors "Windows and doors definition package"
      RWTH Aachen University<br/>
      E.ON Energy Research Center<br/>
      EBC | Institute for Energy Efficient Buildings and Indoor Climate<br/>
-     Mathieustra&szlig;e 6<br/> 
+     Mathieustra&szlig;e 6<br/>
      52074 Aachen<br/>
      e-mail: <a href=\"mailto:pmatthes@eonerc.rwth-aachen.de\">pmatthes@eonerc.rwth-aachen.de</a><br/>
  </dl>

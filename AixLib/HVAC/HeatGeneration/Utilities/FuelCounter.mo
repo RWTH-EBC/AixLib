@@ -19,4 +19,3 @@ equation
  </ul>
  </html>"));
 end FuelCounter;
-

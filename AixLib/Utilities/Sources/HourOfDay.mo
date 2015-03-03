@@ -34,4 +34,3 @@ equation
  </ul>
  </html>"));
 end HourOfDay;
-

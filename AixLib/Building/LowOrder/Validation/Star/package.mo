@@ -1,5 +1,5 @@
 within AixLib.Building.LowOrder.Validation;
-package Star 
+package Star
   extends Modelica.Icons.ExamplesPackage;
 
 

@@ -20,8 +20,7 @@ connector Star "Connector for twostar (approximated) radiation exchange"
    <li><i>June 16, 2006&nbsp;</i>
           by Timo Haase:<br/>
           Implemented.</li>
-   
+
  </ul>
  </html>"));
 end Star;
-

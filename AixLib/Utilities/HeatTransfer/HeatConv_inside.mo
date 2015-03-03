@@ -3,7 +3,7 @@ within AixLib.Utilities.HeatTransfer;
 
 model HeatConv_inside
   "Natural convection computation according to B. Glueck, choice between several types of surface orientation, or constant factor"
-  /* calculation of natural convection in the inside of a building according to B.Glueck- Waermeuebertragung, 
+  /* calculation of natural convection in the inside of a building according to B.Glueck- Waermeuebertragung,
      Waermeabgabe von Raumheizflaechen und Rohren
   */
   extends Modelica.Thermal.HeatTransfer.Interfaces.Element1D;
@@ -55,9 +55,9 @@ equation
              at interior wall according to B. Glueck.
              Also check to prevent small fluctuations which often lead to illeagal functions calls as
              (small negative value)^exponent
-       
-              at interior wall according to B. Glueck: Waermeuebertragung - 
-              Waermeabgabe von Raumheizflaechen und Rohren. 
+
+              at interior wall according to B. Glueck: Waermeuebertragung -
+              Waermeabgabe von Raumheizflaechen und Rohren.
           */
       alpha = if noEvent(posDiff <= 5e-12) then 0 else 1.6 * noEvent(posDiff ^ 0.3);
     end if;

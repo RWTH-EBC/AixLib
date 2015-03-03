@@ -19,4 +19,3 @@ record WindowSimple_WSchV1995 "Window according to WSchV1995"
 </ul>
 </html>"));
 end WindowSimple_WSchV1995;
-

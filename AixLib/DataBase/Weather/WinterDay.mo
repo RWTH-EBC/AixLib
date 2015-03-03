@@ -24,4 +24,3 @@ record WinterDay
  </ul>
  </html>"));
 end WinterDay;
-

@@ -11,4 +11,3 @@ connector RadPort "Port for radiative heat transfer 1-dim"
  <p>Is used for components with radiative heat transfer (NOT air).</p>
  </html>"));
 end RadPort;
-

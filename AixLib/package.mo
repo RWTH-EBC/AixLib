@@ -1,5 +1,5 @@
 within ;
-package AixLib 
+package AixLib
   annotation(uses(Modelica(version = "3.2.1"), HVAC(version="2.2")),
                                                 version = "0.1.0", Documentation(info = "<html>
  <p>The free open-source <code>AixLib</code> library is being developed for research and teaching purposes. It aims at dynamic simulations of thermal and hydraulic systems to develop control strategies for HVAC systems and analyse interactions in complex systems. It is used for simulations on component, building and city district level. As this library is developed mainly for academic purposes, user-friendliness and model robustness is not a main task. This research focus thus influences the layout and philosophy of the library. </p>

@@ -84,4 +84,3 @@ equation
  <p>13.12.2013, by <i>Sebastian Stinner</i>: implemented</p>
  </html>"));
 end Storage;
-

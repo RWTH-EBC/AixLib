@@ -19,4 +19,3 @@ equation
  <p>The first boundary has a changing pressure and the second boundary has a fixed pressure. This results in changing of the mass flow and pressure drop in the pipe which can be observed in the results.</p>
  </html>"));
 end StaticPipe_Validation;
-

@@ -106,4 +106,3 @@ equation
  <p><img src=\"modelica://AixLib/Images/House/VoWo_Livingroom.png\"/></p>
  </html>"));
 end Livingroom_VoWo;
-

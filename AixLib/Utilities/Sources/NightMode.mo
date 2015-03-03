@@ -35,4 +35,3 @@ equation
  </ul>
  </html>"));
 end NightMode;
-

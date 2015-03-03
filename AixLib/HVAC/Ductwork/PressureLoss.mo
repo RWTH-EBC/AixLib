@@ -20,4 +20,3 @@ equation
  </ul>
  </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -40}, {100, 40}}), graphics));
 end PressureLoss;
-

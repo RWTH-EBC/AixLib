@@ -18,4 +18,3 @@ equation
  </ul>
  </html>"));
 end Machines;
-

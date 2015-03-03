@@ -18,4 +18,3 @@ record BoilerLT "Boiler efficency for a low-temperature boiler"
  </ul>
  </html>"));
 end BoilerLT;
-

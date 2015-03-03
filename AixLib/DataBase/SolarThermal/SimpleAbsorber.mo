@@ -15,4 +15,3 @@ record SimpleAbsorber "Properties of a simple absorber"
  </ul>
  </html>"));
 end SimpleAbsorber;
-

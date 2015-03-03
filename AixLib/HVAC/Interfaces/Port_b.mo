@@ -12,4 +12,3 @@ connector Port_b
  <p>Pressure, mass flow and enthalpy flow are transported in this interface.</p>
  </html>"));
 end Port_b;
-

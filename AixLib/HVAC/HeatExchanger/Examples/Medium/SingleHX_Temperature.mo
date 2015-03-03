@@ -26,4 +26,3 @@ equation
  </ul>
  </html>"), experiment(StopTime = 3), __Dymola_experimentSetupOutput);
 end SingleHX_Temperature;
-

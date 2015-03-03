@@ -9,7 +9,7 @@ class Contact "Contact"
            RWTH Aachen University<br/>
            E.ON Energy Research Center<br/>
            Institute for Energy Efficient Buildings and Indoor Climate<br/>
-           Mathieustrasse 10<br/> 
+           Mathieustrasse 10<br/>
            D-52074 Aachen<br/>
            Germany<br/>
            email: <A HREF=\"mailto:aixlib@eonerc.rwth-aachen.de\">aixlib@eonerc.rwth-aachen.de</A><br/>
@@ -17,4 +17,3 @@ class Contact "Contact"
        </html>
        "));
 end Contact;
-

@@ -27,4 +27,3 @@ equation
  <p>If nothing is specified through the input port solar radiation of 0 W/m2 is assumed by default. </p>
  </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
 end PrescribedSolarRad;
-

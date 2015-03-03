@@ -20,4 +20,3 @@ record WindowSimple_EnEV2009 "Window according to EnEV 2009"
 </ul>
 </html>"));
 end WindowSimple_EnEV2009;
-

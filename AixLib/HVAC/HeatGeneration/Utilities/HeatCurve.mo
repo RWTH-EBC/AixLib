@@ -24,4 +24,3 @@ equation
  </ul>
  </html>"));
 end HeatCurve;
-

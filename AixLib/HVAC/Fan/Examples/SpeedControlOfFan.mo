@@ -30,4 +30,3 @@ equation
  </ul>
  </html>"));
 end SpeedControlOfFan;
-

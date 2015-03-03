@@ -32,4 +32,3 @@ equation
  </ol>
  </html>"));
 end Test_RecuperatorNoMedium_temperatureSwitch;
-

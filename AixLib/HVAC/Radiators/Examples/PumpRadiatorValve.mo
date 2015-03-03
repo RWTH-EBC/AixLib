@@ -40,4 +40,3 @@ equation
  <p>Make sure you initialise the temperatures correctly in order to have flow temperature &gt; return temperature &gt; room temperature in order for the equation for over temperature to be correctly calculated.</p>
  </html>"));
 end PumpRadiatorValve;
-

@@ -93,7 +93,7 @@ equation
    <li><i>Aug. 08, 2006&nbsp;</i>
           by Peter Matthes:<br/>
           Fixed wrong connection with heatConv-Module and added connection graphics.</li>
-  
+
    <li><i>June 19, 2006&nbsp;</i>
           by Timo Haase:<br/>
           Implemented.</li>

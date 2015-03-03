@@ -28,4 +28,3 @@ equation
  <p><a href=\"AixLib.HVAC.Pipes.Examples.StaticPipe_Validation\">AixLib.HVAC.Pipes.Examples.StaticPipe_Validation</a></p>
  </html>"));
 end StaticPipe;
-

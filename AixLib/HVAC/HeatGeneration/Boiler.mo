@@ -48,4 +48,3 @@ equation
             fillPattern=                                                                                                    FillPattern.HorizontalCylinder, fillColor=  {192, 192, 192}), Polygon(points=  {{-10.5, -17.5}, {-0.5, 2.5}, {25.5, -17.5}, {-0.5, -17.5}, {-10.5, -17.5}}, lineColor=  {255, 255, 170}, fillColor=  {255, 255, 170},
             fillPattern=                                                                                                    FillPattern.Solid)}));
 end Boiler;
-

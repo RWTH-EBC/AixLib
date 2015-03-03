@@ -101,4 +101,3 @@ equation
  <p><img src=\"modelica://AixLib/Images/House/VoWo_Corridor.png\"/></p>
  </html>"));
 end Corridor_VoWo;
-

@@ -23,4 +23,3 @@ record WeatherBaseDataDefinition "TYPE: Table with outdoor air tmeperature"
  </ul>
  </html>"));
 end WeatherBaseDataDefinition;
-

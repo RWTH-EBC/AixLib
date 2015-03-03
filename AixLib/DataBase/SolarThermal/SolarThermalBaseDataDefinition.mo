@@ -21,4 +21,3 @@ record SolarThermalBaseDataDefinition
  <p>Base data definition for record to be used in model <a href=\"AixLib.HVAC.HeatGeneration.SolarThermal\">AixLib.HVAC.HeatGeneration.SolarThermal</a>.</p>
  </html>"));
 end SolarThermalBaseDataDefinition;
-

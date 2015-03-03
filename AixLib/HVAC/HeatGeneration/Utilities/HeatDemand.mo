@@ -22,4 +22,3 @@ equation
  </ul>
  </html>"));
 end HeatDemand;
-

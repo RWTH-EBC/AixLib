@@ -13,7 +13,7 @@ record IWsimple_WSchV1995_L_half
       rho={93,800,1200} "Density of wall layers",
       lambda={0.44,0.25,0.51} "Thermal conductivity of wall layers",
       c={1593,1000,1000} "Specific heat capacity of wall layers",
-      eps=0.95 "Emissivity of inner wall surface"); 
+      eps=0.95 "Emissivity of inner wall surface");
   */
   annotation(Documentation(revisions = "<html>
  <ul>
@@ -35,4 +35,3 @@ record IWsimple_WSchV1995_L_half
  </ul>
  </html>"));
 end IWsimple_WSchV1995_L_half;
-

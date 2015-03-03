@@ -15,4 +15,3 @@ record VacuumCollector "Properties of a vacuum collector"
  </ul>
  </html>"));
 end VacuumCollector;
-

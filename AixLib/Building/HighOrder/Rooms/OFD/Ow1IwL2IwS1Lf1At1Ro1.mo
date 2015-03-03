@@ -166,4 +166,3 @@ equation
  <p><img src=\"modelica://AixLib/Images/House/OW1_2IWl_2IWs_1Pa_1At1Ro.png\"/></p>
  </html>"));
 end Ow1IwL2IwS1Lf1At1Ro1;
-

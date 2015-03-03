@@ -16,4 +16,3 @@ function Writer_NoChange
  <p>Function for wirting a value.</p>
  </html>"));
 end Writer_NoChange;
-

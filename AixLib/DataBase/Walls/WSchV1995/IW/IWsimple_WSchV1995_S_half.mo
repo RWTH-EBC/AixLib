@@ -27,4 +27,3 @@ record IWsimple_WSchV1995_S_half
  </ul>
  </html>"));
 end IWsimple_WSchV1995_S_half;
-

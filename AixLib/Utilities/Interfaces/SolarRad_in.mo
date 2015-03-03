@@ -18,4 +18,3 @@ connector SolarRad_in "Scalar total radiation connector (input)"
  </ul>
  </html>"));
 end SolarRad_in;
-
