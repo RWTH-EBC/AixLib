@@ -10,7 +10,7 @@ model RecordTemplateDocumentation
   <li>What does it describe?</li>
   </ul>
   <h4><font color=\"#008000\">Level of Development</font></h4>
-  <p><img src=\"modelica://AixLib/Images/stars0.png\"/></p>
+  <p><img src=\"modelica://AixLib/Images/stars0.png\" alt=\"stars: 0 out of 5\"/></p>
   <p><br/>Reward yourself for your data inputing efforts by adjusting the star rating of your record to its actual level of development. This helps others to get an idea of how complete the record is. </p>
   <p>If no description or reference is available, the rating is 0 stars. </p>
   <ul>

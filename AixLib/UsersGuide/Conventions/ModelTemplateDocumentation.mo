@@ -10,7 +10,7 @@ model ModelTemplateDocumentation "Template documentation for EBC's models"
   <li>How is it used normally? </li>
   </ul>
   <h4><span style=\"color:#008000\">Level of Development</span></h4>
-  <p><img src=\"modelica://AixLib/Images/stars0.png\"/></p>
+  <p><img src=\"modelica://AixLib/Images/stars0.png\" alt=\"stars: 0 out of 5\"/></p>
   <p><br/>Reward yourself for your modeling efforts by adjusting the star rating of your model to its actual level of development. This helps others to get an idea of how far the model is developed at a quick glimpse. </p>
   <p>During model design, the rating is 0 stars. </p>
   <ul>

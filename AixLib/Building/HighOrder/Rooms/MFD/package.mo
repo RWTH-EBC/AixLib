@@ -9,7 +9,7 @@ package MFD "Multiple Family Dweling"
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The multi-family dwelling is based on an existing building consisting of several identical apartments which is part of a larger national research project [1].</p>
  <p>The dimensions and layout of the rooms are fixed, with an apartment having a living area of 70 m2 and consisting of a living room, two bedrooms, a kitchen and a bathroom.</p>
- <p><img src=\"modelica://AixLib/Images/House/MFD_FloorPlan_En.PNG\"/></p>
+ <p><img src=\"modelica://AixLib/Images/House/MFD_FloorPlan_En.PNG\" alt=\"MFD_FloorPlan_En\"/></p>
  <p><br/><br/><b><font style=\"color: #008000; \">References</font></b></p>
  <p>[1] Cali, D., Streblow, R., M&uuml;ller, D., Osterhage, T. Holistic Renovation and Monitoring of Residential Buildings in <i>Proceedings of Rethink, renew, restart: ECEE 2013 summer study</i>, 2013.</p>
  </html>"));
