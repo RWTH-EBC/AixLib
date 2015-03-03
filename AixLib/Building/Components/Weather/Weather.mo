@@ -227,7 +227,7 @@ equation
  <p>Input: a TRY data set in an accepted Modelica format (.mat, .txt, with header). The structure should be exactly the one of a TRY, status: TRY 2011.</p>
  <p>Output: </p>
  <ul>
- <li>Total radiation on &QUOT;n&QUOT; oriented surfaces</li>
+ <li>Total radiation on &quot;n&quot; oriented surfaces</li>
  <li>Cloud cover</li>
  <li>Wind direction</li>
  <li>Wind speed</li>

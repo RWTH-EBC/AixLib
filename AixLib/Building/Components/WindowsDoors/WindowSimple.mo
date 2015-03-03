@@ -48,7 +48,7 @@ equation
  <p><h4><font color=\"#008000\">References</font></h4></p>
  <p>Exemplary U-Values for windows from insulation standards</p>
  <p><ul>
- <li>WschV 1984: specified &QUOT;two panes&QUOT; assumed 2,5 W/m2K</li>
+ <li>WschV 1984: specified &quot;two panes&quot; assumed 2,5 W/m2K</li>
  <li>WschV 1995: 1,8 W/m2K</li>
  <li>EnEV 2002: 1,7 W/m2K</li>
  <li>EnEV 2009: 1,3 W/m2K</li>

@@ -36,7 +36,7 @@ equation
   annotation(Diagram(graphics), Documentation(info = "<html>
  <p><h4><font color=\"#008000\">Overview</font></h4></p>
  <p>
- Based on a model by Alexander Hoh with some modifications and the Modelica-Standard PI controller. If set to &QUOT;on&QUOT; it will controll the thermal port temperature to the target value (soll). If set to &QUOT;off&QUOT; the controller error will become zero and therefore the current output level of the PI controller will remain constant. When this switching occurs the TriggeredTrapezoid will level the current controller output down to zero in a selectable period of time. 
+ Based on a model by Alexander Hoh with some modifications and the Modelica-Standard PI controller. If set to &quot;on&quot; it will controll the thermal port temperature to the target value (soll). If set to &quot;off&quot; the controller error will become zero and therefore the current output level of the PI controller will remain constant. When this switching occurs the TriggeredTrapezoid will level the current controller output down to zero in a selectable period of time. 
  </p>
  <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
  <p><img src=\"modelica://AixLib/Images/stars2.png\"/></p>
