@@ -34,7 +34,7 @@ equation
    <li><i>May 14, 2013&nbsp;</i> by Ole Odendahl:<br/>Implemented remaining DryAir models, adjusted existing model, documentated</li>
    <li><i>May 07, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
    <li><i>October 16, 2011&nbsp;</i>
-          by Ana Constantin:</br>implemented DynamicVentilation</li>
+          by Ana Constantin:<br/>implemented DynamicVentilation</li>
  </ul>
  </html>", info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
