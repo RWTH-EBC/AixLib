@@ -14,8 +14,7 @@ record PolynomialCoefficients_ASHRAEHandbook
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>alpha = D + E*V + R*V^2</p>
  <h4><span style=\"color:#008000\">References</span></h4>
- <p>Base data definition for record to be used in model <a href=\"AixLib.Utilities.HeatTransfer.HeatConv_outside
- \">AixLib.Utilities.HeatTransfer.HeatConv_outside</a></p>
+ <p>Base data definition for record to be used in model <a href=\"AixLib.Utilities.HeatTransfer.HeatConv_outside\">AixLib.Utilities.HeatTransfer.HeatConv_outside</a></p>
  <p>Source</p>
  <ul>
  <li>ASHRAE Handbook of Fundamentals. ASHRAE, 1989</li>
@@ -28,4 +27,3 @@ record PolynomialCoefficients_ASHRAEHandbook
  </ul>
  </html>"));
 end PolynomialCoefficients_ASHRAEHandbook;
-

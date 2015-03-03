@@ -9,8 +9,7 @@ record Brick_RoughPlaster
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
  <p><img src=\"modelica://AixLib/Images/stars5.png\"/></p>
  <h4><span style=\"color:#008000\">References</span></h4>
- <p>Record is used in model <a href=\"AixLib.Utilities.HeatTransfer.HeatConv_outside
- \">AixLib.Utilities.HeatTransfer.HeatConv_outside</a></p>
+ <p>Record is used in model <a href=\"AixLib.Utilities.HeatTransfer.HeatConv_outside\">AixLib.Utilities.HeatTransfer.HeatConv_outside</a></p>
  <p>Source</p>
  <ul>
  <li>ASHRAE Handbook of Fundamentals. ASHRAE, 1989</li>
