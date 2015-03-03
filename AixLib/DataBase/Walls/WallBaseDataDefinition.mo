@@ -21,9 +21,9 @@ record WallBaseDataDefinition "Wall base data definition"
  <h4><font color=\"#008000\">References</font></h4>
  <p>Base data definition for record to be used in model <a href=\"Building.Components.Walls.BaseClasses.ConvNLayerClearanceStar\">Building.Components.Walls.BaseClasses.ConvNLayerClearanceStar</a></p>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>September 3, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
- </ul></p>
+ </ul>
  </html>"));
 end WallBaseDataDefinition;
 

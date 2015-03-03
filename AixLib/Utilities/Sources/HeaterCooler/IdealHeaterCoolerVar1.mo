@@ -17,8 +17,8 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This is just as simple heater and/or cooler with a PI-controller. It can be used as an quasi-ideal source for heating and cooling applications. </p>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>June, 2014&nbsp;</i> by Moritz Lauster:<br/>Added some basic documentation</li>
- </ul></p>
+ </ul>
  </html>"));
 end IdealHeaterCoolerVar1;

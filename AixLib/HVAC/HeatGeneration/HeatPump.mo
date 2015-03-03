@@ -62,9 +62,9 @@ equation
  <p><a href=\"AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem2\">AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem2</a></p>
  </html>", revisions = "<html>
  <p>25.11.2013, Kristian Huchtemann</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"));
 end HeatPump;
 

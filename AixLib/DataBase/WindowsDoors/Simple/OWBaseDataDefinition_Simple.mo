@@ -18,8 +18,8 @@ record OWBaseDataDefinition_Simple
  <h4><font color=\"#008000\">References</font></h4>
  <p>Base data definition for record to be used in model <a href=\"Building.Components.WindowsDoors.WindowSimple\">Building.Components.WindowsDoors.WindowSimple</a></p>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>September 11, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
- </ul></p>
+ </ul>
  </html>"));
 end OWBaseDataDefinition_Simple;

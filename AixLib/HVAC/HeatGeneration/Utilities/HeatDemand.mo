@@ -17,9 +17,9 @@ equation
  <p>Should T_in &gt; T_set, this would result in a negative Q_flow_out (i.e. a cooling load). A limiter after this model can be used to ensure Q_flow is always &gt;= 0. </p>
  </html>", revisions = "<html>
  <p>07.10.2013, Marcus Fuchs</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"));
 end HeatDemand;
 

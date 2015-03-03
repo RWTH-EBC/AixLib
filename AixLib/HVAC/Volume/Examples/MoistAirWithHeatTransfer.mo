@@ -35,8 +35,8 @@ equation
  <p>Example to show mixing of fluid flows and heat transfer for moist air model</p>
  </html>", revisions = "<html>
  <p>10.12.2013, Mark Wesseling</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"), Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}})));
 end MoistAirWithHeatTransfer;

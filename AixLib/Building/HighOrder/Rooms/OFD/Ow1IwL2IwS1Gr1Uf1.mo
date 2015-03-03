@@ -151,10 +151,10 @@ equation
             fillPattern=                                                                                                    FillPattern.Solid, visible=  withDoor1), Text(extent=  {{-10, 4}, {10, -4}}, lineColor=  {255, 255, 255}, fillColor=  {255, 170, 170},
             fillPattern=                                                                                                    FillPattern.Solid, textString=  "D1", origin=  {-70, 30}, rotation=  90, visible=  withDoor1), Text(extent=  {{-25, 6}, {25, -6}}, lineColor=  {255, 255, 255}, fillColor=  {255, 170, 170},
             fillPattern=                                                                                                    FillPattern.Solid, origin=  {-70, -25}, rotation=  90, textString=  "Win1", visible=  withWindow1), Line(points=  {{58, 26}, {58, 18}}, color=  {255, 255, 255}, smooth=  Smooth.None)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
  <li><i>July 7, 2011</i> by Ana Constantin:<br/>Implemented</li>
- </ul></p>
+ </ul>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for a room with 1&nbsp;outer&nbsp;wall,&nbsp;2&nbsp;inner&nbsp;walls&nbsp;load,&nbsp;1&nbsp;inner&nbsp;wall&nbsp;simple,&nbsp;1&nbsp;floor&nbsp;towards&nbsp;ground,&nbsp;1&nbsp;ceiling&nbsp;towards&nbsp;upper&nbsp;floor.</p>

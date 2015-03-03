@@ -105,12 +105,12 @@ equation
 <p><b><font style=\"color: #008000; \">Example Results</font></b> </p>
 <p><a href=\"AixLib.Utilities.Examples.HeatTransfer_test\">AixLib.Utilities.Examples.HeatTransfer_test </a></p>
 </html>",  revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>April 1, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
- </ul></p>
- <p><ul>
+ </ul>
+ <ul>
  <li><i>April 10, 2013&nbsp;</i> by Ole Odendahl<br/>Formatted documentation according to standards</li>
  <li><i>December 15, 2005&nbsp;</i> by Peter Matthes:<br/>Implemented.</li>
- </ul></p>
+ </ul>
  </html>"), DymolaStoredErrors);
 end HeatConv_inside;

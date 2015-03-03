@@ -101,8 +101,8 @@ equation
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
  <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>June 19, 2014</i> by Ana Constantin:<br/>Implemented</li>
- </ul></p>
+ </ul>
  </html>"));
 end OFD_IdealHeaters;

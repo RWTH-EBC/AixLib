@@ -25,13 +25,13 @@ package LowOrder "Low Order Building Models"
  </ul>
  </html>", revisions = "<html>
  <p><b>2014-06-24: Version 1.0</b>: by Moritz Lauster</p>
- <p><ul>
+ <ul>
  <li>Added documentation for all models and examples</li>
  <li>Renaming according to the MSL naming conventions</li>
  <li>Uses new MSL comform models from Building</li>
- </ul></p>
+ </ul>
  <p><b>2014-05-19: Version 0.9</b>: by Moritz Lauster</p>
- <p><ul>
+ <ul>
  <li>Collected existing models and libraries and created LowOrder-library</li>
  <li>Inserted Vadliation package</li>
  </html>"));

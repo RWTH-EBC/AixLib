@@ -19,9 +19,9 @@ equation
  <p>The heating curve is defined so that a given maximum forward temperature of the heating system is reached at a given lowest design reference temperature. At a reference temperature of 20 &deg;C, the heating curve also reaches 20 &deg;C for the set-point temperature.</p>
  </html>", revisions = "<html>
  <p>09.10.2013, Marcus Fuchs</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"));
 end HeatCurve;
 

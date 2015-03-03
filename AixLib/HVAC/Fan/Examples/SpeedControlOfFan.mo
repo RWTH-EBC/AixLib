@@ -25,9 +25,9 @@ equation
  <p>A simple Simulation Model which shows the effect of rotational Speed control of a Fan</p>
  </html>", revisions = "<html>
  <p>10.12.2013, Mark Wesseling</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"));
 end SpeedControlOfFan;
 

@@ -172,8 +172,8 @@ annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
 </ul>
 </html>",
         revisions="<html>
-<p><ul>
+<ul>
 <li><i>October 2014,&nbsp;</i> by Peter Remmen:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>"));
 end partialEqAirTemp;

@@ -11,9 +11,9 @@ package OFD "One Family Dwelling"
  <p><br/>The room model is realized by aggregating together all the components in a model, parameterizing on a room level and referencing the parameter on the component level. In this way the number of parameters is reduced, e.g. for a simple rectangular room only three parameters are needed for the dimensions of all the walls: height, length, width.</p>
  <p>The set of room types developed for the one family dwelling can, if necessary, be parameterized differently than the standard model or extended in order to build up specific house models. New sets of wall, window and door types can be developed, e.g. for older, not renovated buildings, and incorporated in the existing structure.</p>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>April 14, 2014</i> by Ana Constantin:<br/>Added documentation</li>
  <li><i>July 7, 2011</i> by Ana Constantin:<br/>Implemented</li>
- </ul></p>
+ </ul>
  </html>"));
 end OFD;

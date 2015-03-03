@@ -26,9 +26,9 @@ equation
   connect(infiltrationRate.y, reducedModel.ventilationRate) annotation(Line(points = {{7, -40}, {10.2, -40}, {10.2, 3.4}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(machinesConvective.port, reducedModel.internalGainsConv) annotation(Line(points = {{12, -76}, {20.4, -76}, {20.4, 3.4}}, color = {191, 0, 0}, smooth = Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), experiment(StopTime = 5.184e+006, Interval = 3600), experimentSetupOutput(events = false), Documentation(revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>March, 2012&nbsp;</i> by Moritz Lauster:<br/>Implemented</li>
- </ul></p>
+ </ul>
  <p><br/><br/> </p>
  </html>", info="<html>
 <p>Test Case 1 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to a convective heat source for Type room S </p>

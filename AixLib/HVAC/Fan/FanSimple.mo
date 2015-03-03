@@ -61,9 +61,9 @@ equation
  <p><a href=\"AixLib.HVAC.Fan.Examples.FansSerialAndParallel\">AixLib.HVAC.Fan.Examples.FansSerialAndParallel</a> </p>
  </html>", revisions = "<html>
  <p>30.12.2013, Mark Wesseling</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
 end FanSimple;
 

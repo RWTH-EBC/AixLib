@@ -62,9 +62,9 @@ equation
  <p>Two Port Model for Moist Air with fluid propoerties at port a</p>
  </html>", revisions = "<html>
  <p>10.12.2013, Mark Wesseling</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
 end TwoPortMoistAirFluidprops;
 

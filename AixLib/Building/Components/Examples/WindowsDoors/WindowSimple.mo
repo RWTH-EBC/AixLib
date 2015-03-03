@@ -19,11 +19,11 @@ equation
  <p>Simulation to test the <a href=\"AixLib.Building.Components.WindowsDoors.WindowSimple\">WindowSimple</a> model.</p>
  <h4><font color=\"#008000\">Concept</font></h4>
  <p>Test case for calculation of U-value</p>
- <p><ul>
+ <ul>
  <li>Area of component: 10 m2</li>
  <li>Temperature difference: 20 K</li>
  <li>Test time: 1 h</li>
- </ul></p>
+ </ul>
  </html>", revisions = "<html>
  <ul>
    <li><i>April 1, 2012&nbsp;</i>

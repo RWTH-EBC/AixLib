@@ -22,12 +22,12 @@ equation
  <p>Simulation to test the <a href=\"AixLib.Building.Components.Walls.Wall\">Wall</a> model in case of an outside wall application.</p>
  <h4><font color=\"#008000\">Concept</font></h4>
  <p>Test case for calculation of U-value</p>
- <p><ul>
+ <ul>
  <li>Area of Wall: 10 m2</li>
  <li>Area of Window: 2 m2</li>
  <li>Temperature difference: 10 K</li>
  <li>Test time: 10 h</li>
- </ul></p>
+ </ul>
  </html>", revisions = "<html>
  <ul>
    <li><i>April, 2012&nbsp;</i>

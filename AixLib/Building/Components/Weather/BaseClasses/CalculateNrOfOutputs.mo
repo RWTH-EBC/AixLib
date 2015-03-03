@@ -48,8 +48,8 @@ algorithm
  <h4><font color=\"#008000\">Level of Development</font></h4>
  <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately, added descriptions for variables</li>
- </ul></p>
+ </ul>
  </html>"));
 end CalculateNrOfOutputs;

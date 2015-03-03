@@ -17,9 +17,9 @@ record Brick_RoughPlaster
  <li>As cited inEnergyPlus Engineering Reference. : EnergyPlus Engineering Reference, 2011 p.56</li>
  </ul>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>August 30, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
  <li><i>March 21, 2012&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
- </ul></p>
+ </ul>
  </html>"));
 end Brick_RoughPlaster;

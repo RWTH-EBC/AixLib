@@ -10,13 +10,13 @@ equation
  <p><br/>This fuel counter integrates the actual fuel use to arrive at the overall fuel consumption. </p>
  </html>", revisions = "<html>
  <p>09.10.2013, Marcus Fuchs</p>
- <p><ul>
+ <ul>
  <li>corrected error in equation</li>
- </ul></p>
+ </ul>
  <p>07.10.2013, Marcus Fuchs</p>
- <p><ul>
+ <ul>
  <li>implemented (similar to HVAC.Meter.EEnergyMeter)</li>
- </ul></p>
+ </ul>
  </html>"));
 end FuelCounter;
 

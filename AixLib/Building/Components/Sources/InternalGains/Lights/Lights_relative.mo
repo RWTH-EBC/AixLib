@@ -19,10 +19,10 @@ equation
   connect(productHeatOutput.y, gain1.u) annotation(Line(points = {{-18.3, 0}, {-8, 0}, {-8, -10}, {3.2, -10}}, color = {0, 0, 127}, smooth = Smooth.None));
   annotation(Icon(graphics={  Ellipse(extent = {{-52, 72}, {50, -40}}, lineColor = {255, 255, 0}, fillColor = {255, 255, 0},
             fillPattern =                                                                                                    FillPattern.Solid), Line(points = {{-26, -48}, {22, -48}}, color = {0, 0, 0}, smooth = Smooth.None, thickness = 1), Line(points = {{-24, -56}, {22, -56}}, color = {0, 0, 0}, smooth = Smooth.None, thickness = 1), Line(points = {{-24, -64}, {22, -64}}, color = {0, 0, 0}, smooth = Smooth.None, thickness = 1), Line(points = {{-24, -72}, {22, -72}}, color = {0, 0, 0}, smooth = Smooth.None, thickness = 1), Line(points = {{-28, -42}, {-28, -80}, {26, -80}, {26, -42}}, color = {0, 0, 0}, smooth = Smooth.None, thickness = 1)}), Documentation(revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
  <li><i>May 07, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
- </ul></p>
+ </ul>
  </html>", info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>Light heat source model. Maximum lighting can be given as input and be adjusted by a schedule input.</p>

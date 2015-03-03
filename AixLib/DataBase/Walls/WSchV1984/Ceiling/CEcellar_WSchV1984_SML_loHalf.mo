@@ -10,10 +10,10 @@ record CEcellar_WSchV1984_SML_loHalf
       "Specific heat capacity of wall layers",                                                                                                    eps = 0.95
       "Emissivity of inner wall surface");
   annotation(Documentation(revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>September 5, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
  <li><i>August 15, 2011</i> by Ana Constantin:<br/>implemented</li>
- </ul></p>
+ </ul>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Wall definition according to WSchV 1984. For detailed wall type see above. </p>

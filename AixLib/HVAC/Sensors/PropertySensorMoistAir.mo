@@ -24,9 +24,9 @@ equation
  <p>This component monitors some properties of the mass flow flowing from port_a to port_b. The sensor is ideal, i.e., it does not influence the fluid.</p>
  </html>", revisions = "<html>
  <p>10.12.2013, Mark Wesseling</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
 end PropertySensorMoistAir;
 

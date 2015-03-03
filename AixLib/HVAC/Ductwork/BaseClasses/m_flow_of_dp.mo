@@ -40,8 +40,8 @@ algorithm
  <p> </p>
  </html>", revisions = "<html>
  <p>30.12.2013, Mark Wesseling</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"));
 end m_flow_of_dp;

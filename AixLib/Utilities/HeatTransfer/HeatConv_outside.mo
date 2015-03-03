@@ -66,9 +66,9 @@ equation
  <p><a href=\"AixLib.Utilities.Examples.HeatTransfer_test\">AixLib.Utilities.Examples.HeatTransfer_test</a></p>
  <p><a href=\"AixLib.Utilities.Examples.HeatConv_outside\">AixLib.Utilities.Examples.HeatConv_outside</a></p>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>April 1, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
- </ul></p>
+ </ul>
  <ul>
    <li><i>March 30, 2012&nbsp;</i>
           by Ana Constantin:<br/>

@@ -20,9 +20,9 @@ equation
  <p>A small example which shows the use of the duct model</p>
  </html>", revisions = "<html>
  <p>10.12.2013, Mark Wesseling</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"));
 end DuctPressureLoss;
 

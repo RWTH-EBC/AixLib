@@ -13,9 +13,9 @@ equation
  <p>This simulation is to check the functionality of the machine models described by the internal gains. </p>
  <p><b><font style=\"color: #008000; \">Concept</font></b></p><p>Heat flow values can be displayed via the provided output. </p>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>May 31, 2013&nbsp;</i> by Ole Odendahl:<br/>Implemented, added documentation and formatted appropriately</li>
- </ul></p>
+ </ul>
  </html>"));
 end Machines;
 

@@ -22,10 +22,10 @@ record PolynomialCoefficients_ASHRAEHandbook
  <li>As cited in EnergyPlus Engineering Reference. : EnergyPlus Engineering Reference, 2011 p.56</li>
  </ul>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>August 30, 2013&nbsp;</i> by Ole Odendahl:<br/>Awarded stars</li>
  <li><i>March 21, 2012&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
- </ul></p>
+ </ul>
  </html>"));
 end PolynomialCoefficients_ASHRAEHandbook;
 

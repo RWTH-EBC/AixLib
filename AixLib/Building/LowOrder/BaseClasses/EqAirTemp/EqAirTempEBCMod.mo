@@ -44,9 +44,9 @@ equation
   equalAirTemp.T = T_eqWall*wf_wall + T_ground*wf_ground;
   equalAirTempWindow.T = T_eqWin*wf_win;
   annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>October 2014,&nbsp;</i> by Peter Remmen:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>", info="<html>
 <p>EqAirTempEBCMod extends from partianEqAirTemp</p>
 <p>An output equal air temperature is calculated for the window.</p>

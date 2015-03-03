@@ -84,11 +84,11 @@ equation
  <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
  </html>", revisions = "<html>
 
- <p><ul>
+ <ul>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
  <li><i>July 10, 2011</i> by Ana Constantin:<br/>Implemented</li>
 
- </ul></p>
+ </ul>
 
  </html>"));
 end WholeHouseBuildingEnvelope;

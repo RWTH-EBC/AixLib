@@ -38,8 +38,8 @@ equation
  <p>(values are according to wolframalpha.com for water at p = 1 atm ) </p>
  </html>", revisions = "<html>
  <p>26.11.2013, Marcus Fuchs</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"));
 end SolarThermalCollector;

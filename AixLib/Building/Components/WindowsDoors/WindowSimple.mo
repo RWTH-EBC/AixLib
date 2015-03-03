@@ -41,25 +41,25 @@ equation
  <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
  <h4><font color=\"#008000\">Concept</font></h4>
  <p>Phenomena being simulated: </p>
- <p><ul>
+ <ul>
  <li>Solar energy transmission through the glass</li>
  <li>Heat transmission through the whole window</li>
- </ul></p>
+ </ul>
  <h4><font color=\"#008000\">References</font></h4>
  <p>Exemplary U-Values for windows from insulation standards</p>
- <p><ul>
+ <ul>
  <li>WschV 1984: specified &quot;two panes&quot; assumed 2,5 W/m2K</li>
  <li>WschV 1995: 1,8 W/m2K</li>
  <li>EnEV 2002: 1,7 W/m2K</li>
  <li>EnEV 2009: 1,3 W/m2K</li>
- </ul></p>
+ </ul>
  <h4><font color=\"#008000\">Example Results</font></h4>
  <p><a href=\"AixLib.Building.Components.Examples.WindowsDoors.WindowSimple\">AixLib.Building.Components.Examples.WindowsDoors.WindowSimple</a></p>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
  <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
  <li><i>March 30, 2012&nbsp;</i> by Ana Constantin and Corinna Leonhardt:<br/>Implemented.</li>
- </ul></p>
+ </ul>
  </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics = {Rectangle(extent=  {{-80, 80}, {80, -80}}, lineColor=  {0, 0, 0})}), DymolaStoredErrors);
 end WindowSimple;

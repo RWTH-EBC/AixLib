@@ -93,9 +93,9 @@ equation
  <p><a href=\"AixLib.Building.Components.Examples.Sources.InternalGains.Machines\">AixLib.Building.Components.Examples.Sources.InternalGains.Machines </a></p>
  <p><a href=\"AixLib.Building.Components.Examples.Sources.InternalGains.OneOffice\">AixLib.Building.Components.Examples.Sources.InternalGains.OneOffice</a></p>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
  <li><i>May 07, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
- </ul></p>
+ </ul>
  </html>"));
 end Machines_DIN18599;

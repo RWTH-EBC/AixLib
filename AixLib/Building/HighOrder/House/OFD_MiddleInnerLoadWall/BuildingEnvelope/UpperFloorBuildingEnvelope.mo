@@ -151,11 +151,11 @@ equation
   connect(Children2.thermRoom, ThermFloor[4]) annotation(Line(points = {{-68, -58.4}, {-90, -58.4}, {-90, -4}, {0, -4}, {0, 4.5}}, color = {191, 0, 0}, pattern = LinePattern.Dash, smooth = Smooth.None));
   annotation(__Dymola_Images(Parameters(source = "AixLib/Images/House/Upperfloor_5Rooms.png")), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Bitmap(extent=  {{-96, 90}, {100, -106}}, fileName=  "modelica://AixLib/Images/House/Upperfloor_icon.png"), Text(extent=  {{-56, 74}, {-4, 60}}, lineColor=  {0, 0, 0}, textString=  "Bedroom"), Text(extent=  {{16, 76}, {62, 66}}, lineColor=  {0, 0, 0}, textString=  "Children1"), Text(extent=  {{22, 28}, {64, 14}}, lineColor=  {0, 0, 0}, textString=  "Corridor"), Text(extent=  {{22, -42}, {58, -56}}, lineColor=  {0, 0, 0}, textString=  "Bath"), Text(extent=  {{-62, -2}, {-6, -16}}, lineColor=  {0, 0, 0}, textString=  "Children2")}), Documentation(revisions = "<html>
 
- <p><ul>
+ <ul>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
  <li><i>July 10, 2011</i> by Ana Constantin:<br/>Implemented</li>
 
- </ul></p>
+ </ul>
 
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>

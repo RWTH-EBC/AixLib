@@ -10,9 +10,9 @@ equation
   port_b.Q_flow = -Q;
   annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Line(points=  {{0, -60}, {0, 60}}, color=  {0, 0, 255}, smooth=  Smooth.None), Line(points=  {{-20, 40}, {0, 60}, {20, 40}}, color=  {0, 0, 255}, smooth=  Smooth.None)}), Documentation(revisions = "<html>
  <p>12.01.2014, Peter Matthes</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model transfers a given power from one thermal port to a second.</p>

@@ -13,8 +13,8 @@ equation
  <p><br/>This sensor base class defines a fluid model which does not affect the fluid properties. The signal output can be used to generate a signal of the measured value.</p>
  </html>", revisions = "<html>
  <p>10.12.2013, Mark Wesseling</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
 end PartialSensor;

@@ -89,9 +89,9 @@ equation
  2- Children1
  3 - Bath
  4 - Children2")}), Documentation(revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>June 19, 2014</i> by Ana Constantin:<br/>Implemented</li>
- </ul></p>
+ </ul>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for the upper floor.</p>

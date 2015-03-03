@@ -14,9 +14,9 @@ record BoilerConst
  <p>Record is used in model <a href=\"AixLib.HVAC.HeatGeneration.Boiler\">AixLib.HVAC.HeatGeneration.Boiler</a></p>
  </html>", revisions = "<html>
  <p>October 2013, Marcus Fuchs</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"));
 end BoilerConst;
 

@@ -182,9 +182,9 @@ equation
  3 - Children
  4 - Bath
  5 - Kitchen")}), Documentation(revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>June 19, 2014</i> by Ana Constantin:<br/>Implemented</li>
- </ul></p>
+ </ul>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>The model is exemplarly build with components found in the HVAC package.</p>

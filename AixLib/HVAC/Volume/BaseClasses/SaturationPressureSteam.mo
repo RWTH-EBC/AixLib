@@ -12,9 +12,9 @@ algorithm
  <pre>   p_saturation = 611.657*e^(17.2799 - 4102.99/(T + 237.431));</pre>
  </html>", revisions = "<html>
  <p>10.12.2013, Mark Wesseling</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"));
 end SaturationPressureSteam;
 

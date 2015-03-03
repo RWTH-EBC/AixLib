@@ -37,8 +37,8 @@ equation
  <p><br/>This example models a simple fluid circuit in order to test the boiler model for plausibility</p>
  </html>", revisions = "<html>
  <p>07.10.2013, Marcus Fuchs</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"), Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}})));
 end BoilerSystemTVar;

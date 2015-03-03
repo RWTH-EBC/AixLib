@@ -21,12 +21,12 @@ equation
  <p>This model is just a start and is likely to change in order to be suitable for all heat generation equipment within the lecture.</p>
  </html>", revisions = "<html>
  <p>27.11.2013, Marcus Fuchs</p>
- <p><ul>
+ <ul>
  <li>removed input for T_set as this is not applicable with solar thermal collectors</li>
- </ul></p>
+ </ul>
  <p>02.10.2013, Marcus Fuchs</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
 end PartialHeatGen;

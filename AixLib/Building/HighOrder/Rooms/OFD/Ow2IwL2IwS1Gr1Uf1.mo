@@ -166,10 +166,10 @@ equation
             fillPattern=                                                                                                    FillPattern.Solid, textString=  "Win2", visible=  withWindow2), Text(extent=  {{50, -6}, {0, 6}}, lineColor=  {255, 255, 255}, fillColor=  {255, 170, 170},
             fillPattern=                                                                                                    FillPattern.Solid, textString=  "Win1", origin=  {-70, 0}, rotation=  90, visible=  withWindow1), Text(extent=  {{2.85713, -4}, {-17.1429, 4}}, lineColor=  {255, 255, 255}, fillColor=  {255, 170, 170},
             fillPattern=                                                                                                    FillPattern.Solid, textString=  "D1", origin=  {-70, -22.8571}, rotation=  90, visible=  withDoor1), Line(points=  {{-46, 60}, {-46, 30}}, color=  {255, 255, 255}, smooth=  Smooth.None), Line(points=  {{-60, 46}, {-30, 46}}, color=  {255, 255, 255}, smooth=  Smooth.None), Line(points=  {{38, 46}, {68, 46}}, color=  {255, 255, 255}, smooth=  Smooth.None), Line(points=  {{60, 24}, {60, 16}}, color=  {255, 255, 255}, smooth=  Smooth.None), Line(points=  {{60, -64}, {60, -68}}, color=  {255, 255, 255}, smooth=  Smooth.None)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
  <li><i>July 7, 2011</i> by Ana Constantin:<br/>Implemented</li>
- </ul></p>
+ </ul>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for a room with 2&nbsp;outer&nbsp;walls,&nbsp;2&nbsp;inner&nbsp;walls&nbsp;load towards two different rooms but with the same orientation,&nbsp;1&nbsp;inner&nbsp;wall&nbsp;simple,&nbsp;1&nbsp;floor&nbsp;towards&nbsp;ground,&nbsp;1&nbsp;ceiling&nbsp;towards&nbsp;upper&nbsp;floor.</p>

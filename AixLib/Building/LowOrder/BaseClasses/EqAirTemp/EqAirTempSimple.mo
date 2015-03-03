@@ -29,12 +29,12 @@ equation
 
   equalAirTemp.T = T_eqWall*wf_wall + T_eqWin*wf_win + T_ground*wf_ground;
   annotation (Documentation(revisions="<html>
- <p><ul>
+ <ul>
  <li><i>October 2014,&nbsp;</i> by Peter Remmen:<br/>extending Model</li>
- </ul></p>
- <p><ul>
+ </ul>
+ <ul>
  <li><i>January 2012,&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
- </ul></p>
+ </ul>
  </html>", info="<html>
 <p>EqAirTempSimple extends from partianEqAirTemp</p>
 <h4>Main equations</h4>

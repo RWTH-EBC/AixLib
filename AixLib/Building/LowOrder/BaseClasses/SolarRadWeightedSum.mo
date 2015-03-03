@@ -63,9 +63,9 @@ equation
  <h4><span style=\"color:#008000\">Known Limitations</span></h4>
  <p>If the weightfactors are all zero, Dymola tries to divide through zero. You will get a warning and the output is set to zero.</p>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>January 2012,&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
- </ul></p>
+ </ul>
  </html>"));
 end SolarRadWeightedSum;
 

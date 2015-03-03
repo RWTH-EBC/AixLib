@@ -18,13 +18,13 @@ equation
  Alternatively the PATH and INCLUDE variables can be adjusted according to the specified location.
  ")}), Icon(coordinateSystem(extent = {{-120, -100}, {100, 100}})), experiment(StopTime = 100, Interval = 0.1, __Dymola_Algorithm = "Lsodar"), __Dymola_experimentSetupOutput(events = false), Documentation(revisions = "<html>
  <p>24.01.14, Bjoern Flieger</p>
- <p><ul>
+ <ul>
  <li>Implemented full example</li>
- </ul></p>
+ </ul>
  <p>23.01.14, Bjoern Flieger</p>
- <p><ul>
+ <ul>
  <li>Implemented first draft</li>
- </ul></p>
+ </ul>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This example illustrates the usage of external C functions.</p>

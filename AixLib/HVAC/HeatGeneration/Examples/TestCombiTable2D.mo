@@ -16,9 +16,9 @@ equation
  <p>Example to test the tables used within the HeatPump model</p>
  </html>", revisions = "<html>
  <p>25.11.2013, Kristian Huchtemann</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"), Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}})));
 end TestCombiTable2D;
 

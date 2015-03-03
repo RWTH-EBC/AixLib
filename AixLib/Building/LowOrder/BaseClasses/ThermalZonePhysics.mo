@@ -218,9 +218,9 @@ equation
  <h4><span style=\"color:#008000\">Example Results</span></h4>
  <p>See <a href=\"AixLib.Building.LowOrder.Validation\">Validation</a> for some results.</p>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>January 2012,&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
- </ul></p>
+ </ul>
  </html>"));
 end ThermalZonePhysics;
 

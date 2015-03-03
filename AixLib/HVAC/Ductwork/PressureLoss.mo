@@ -15,9 +15,9 @@ equation
  <p><a href=\"AixLib.HVAC.Ductwork.Examples.DuctPressureLoss\">AixLib.HVAC.Ductwork.Examples.DuctPressureLoss</a> </p>
  </html>", revisions = "<html>
  <p>30.12.2013, Mark Wesseling</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -40}, {100, 40}}), graphics));
 end PressureLoss;
 

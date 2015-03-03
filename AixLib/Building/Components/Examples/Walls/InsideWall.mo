@@ -25,12 +25,12 @@ equation
  <p>Simulation to test the <a href=\"AixLib.Building.Components.Walls.Wall\">Wall</a> model in case of an <b>inside wall</b> application.</p>
  <h4><font color=\"#008000\">Concept</font></h4>
  <p>Test case for calculation of U-value</p>
- <p><ul>
+ <ul>
  <li>Area of Wall: 10 m&sup2;</li>
  <li>Area of Door: 2 m&sup2;</li>
  <li>Temperature difference: 10 K</li>
  <li>Test time: 25 h</li>
- </ul></p>
+ </ul>
  <p>The u-values are calculated via calculation moduls and may be displayed easily. </p>
  </html>", revisions = "<html>
  <ul>

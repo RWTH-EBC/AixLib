@@ -12,9 +12,9 @@ equation
  <p>Simple partial pressure loss model based on zeta value, which in this case given as a variable.</p>
  </html>", revisions = "<html>
  <p>30.12.2013, Mark Wesseling</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -40}, {100, 40}}), graphics));
 end SimplePressureLoss;
 

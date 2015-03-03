@@ -33,9 +33,9 @@ record Kitchen
  <li>Booklet: Flachheizkoerper, I/2010, Pages 44-52.</li>
  </ul>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>August 13, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
  <li><i>November 15, 2011</i> by Ana Constantin:<br/>implemented</li>
- </ul></p>
+ </ul>
  </html>"));
 end Kitchen;
