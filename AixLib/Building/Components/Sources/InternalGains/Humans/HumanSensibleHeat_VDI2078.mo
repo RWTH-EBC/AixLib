@@ -72,9 +72,9 @@ equation
  </html>", revisions = "<html>
  <ul>
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
- <li><i>April 10, 2014&nbsp;</i> by Ana Constantin:<br>Added a lower positive limit to the surface area, so it won&apos;t lead to a division by zero</li>
- <li><i>May 07, 2013&nbsp;</i> by Ole Odendahl:<br>Formatted documentation appropriately</li>
- <li><i>August 10, 2011</i> by Ana Constantin:<br>implemented</li>
+ <li><i>April 10, 2014&nbsp;</i> by Ana Constantin:<br/>Added a lower positive limit to the surface area, so it won&apos;t lead to a division by zero</li>
+ <li><i>May 07, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
+ <li><i>August 10, 2011</i> by Ana Constantin:<br/>implemented</li>
  </ul>
  </html>"));
 end HumanSensibleHeat_VDI2078;

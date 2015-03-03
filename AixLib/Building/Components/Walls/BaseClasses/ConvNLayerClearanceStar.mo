@@ -91,11 +91,11 @@ equation
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
    <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
    <li><i>Aug. 08, 2006&nbsp;</i>
-          by Peter Matthes:<br>
+          by Peter Matthes:<br/>
           Fixed wrong connection with heatConv-Module and added connection graphics.</li>
   
    <li><i>June 19, 2006&nbsp;</i>
-          by Timo Haase:<br>
+          by Timo Haase:<br/>
           Implemented.</li>
  </ul>
  </html>"));

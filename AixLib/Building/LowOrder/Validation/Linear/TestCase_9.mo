@@ -66,7 +66,7 @@ equation
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(graphics), experiment(StopTime = 5.184e+006, Interval = 3600), experimentSetupOutput(events = false), Documentation(revisions = "<html>
  <ul>
    <li><i>March, 2012&nbsp;</i>
-          by Moritz Lauster:<br>
+          by Moritz Lauster:<br/>
           Implemented</li>
  </ul>
  </html>", info = "<html>
@@ -75,9 +75,9 @@ equation
  <ul>
  <li>longwave radiation heat exchange is taken into account</li>
  </ul>
- <p><br>Reference: Room air temperature</p>
+ <p><br/>Reference: Room air temperature</p>
  <p>Variable path: <code>reducedModel.airload.T</code></p>
- <p><br><br>All values are given in the VDI 6007-1.</p>
+ <p><br/><br/>All values are given in the VDI 6007-1.</p>
  <p>Same Test Case exists in VDI 6020.</p>
  </html>"));
 end TestCase_9;

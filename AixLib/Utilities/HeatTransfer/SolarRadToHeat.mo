@@ -20,8 +20,8 @@ equation
  ", revisions = "<html>
  <ul>
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
- <li><i>April 01, 2014 </i> by Moritz Lauster:<br>Moved and Renamed</li>
- <li><i>April 10, 2013&nbsp;</i> by Ole Odendahl:<br>Formatted documentation appropriately </li>
+ <li><i>April 01, 2014 </i> by Moritz Lauster:<br/>Moved and Renamed</li>
+ <li><i>April 10, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately </li>
  </ul>
  </html>"));
 end SolarRadToHeat;

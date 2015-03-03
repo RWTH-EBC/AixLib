@@ -27,7 +27,7 @@ equation
  </html>", revisions = "<html>
  <ul>
    <li><i>April 1, 2012&nbsp;</i>
-          by Ana Constantin and Corinna Leonhard:<br>
+          by Ana Constantin and Corinna Leonhard:<br/>
           Implemented.</li>
  </ul>
  </html>"));

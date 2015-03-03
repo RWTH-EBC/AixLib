@@ -19,7 +19,7 @@ package HighOrder "Standard house models"
  <li>have an easy to use graphical interface</li>
  <li>ensure a degree of flexibility for expanding or building new models</li>
  </ul>
- <p><br>We call these house models standard for the following reasons:</p>
+ <p><br/>We call these house models standard for the following reasons:</p>
  <ul>
  <li>the floor layouts were made based on existing buildings, by analyzing data provided by the German Federal Statistical Office and by consulting with experts</li>
  <li>for modeling realistical wall structures building catalogues as well as experts were consulted</li>

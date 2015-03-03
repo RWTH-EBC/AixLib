@@ -19,7 +19,7 @@ equation
  <ul>
    <li><i>April 11, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
    <li><i>October 14, 2012&nbsp;</i>
-          by Ana Constantin:<br>
+          by Ana Constantin:<br/>
           Implemented.</li>
  </ul>
  </html>", info = "<html>

@@ -24,7 +24,7 @@ equation
   connect(gain.y, prescribedHeatFlow.Q_flow) annotation(Line(points = {{-3.4, 50}, {0, 50}, {0, 44}}, color = {0, 0, 127}, smooth = Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
- <p><br>Model of a solar thermal collector. Inputs are outdoor air temperature and solar irradiation. Based on these values and the collector properties from database, this model creates a heat flow to the fluid circuit.</p>
+ <p><br/>Model of a solar thermal collector. Inputs are outdoor air temperature and solar irradiation. Based on these values and the collector properties from database, this model creates a heat flow to the fluid circuit.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
  <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
@@ -35,7 +35,7 @@ equation
  <li>Connected directly with Sources.TempAndRad, this model only represents a horizontal collector. There is no calculation for radiation on tilted surfaces. </li>
  <li>With the standard BaseParameters, this model uses water as working fluid</li>
  </ul>
- <p><br><b><font style=\"color: #008000; \">Example Results</font></b></p>
+ <p><br/><b><font style=\"color: #008000; \">Example Results</font></b></p>
  <p><a href=\"AixLib.HVAC.HeatGeneration.Examples.SolarThermalCollector\">AixLib.HVAC.HeatGeneration.Examples.SolarThermalCollector</a></p>
  </html>", revisions = "<html>
  <p>19.11.2013, Marcus Fuchs: implemented</p>

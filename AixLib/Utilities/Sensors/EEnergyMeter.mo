@@ -21,7 +21,7 @@ equation
  <ul>
  <li><i>October 15, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
    <li>
-          by Alexander Hoh:<br>
+          by Alexander Hoh:<br/>
           implemented</li>
  <ul>
  </html>"));

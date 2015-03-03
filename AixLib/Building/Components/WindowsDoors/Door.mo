@@ -63,7 +63,7 @@ equation
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
    <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
    <li><i>March 30, 2012&nbsp;</i>
-          by Corinna Leonhardt and Ana Constantin:<br>
+          by Corinna Leonhardt and Ana Constantin:<br/>
           Implemented.</li>
  </ul>
  </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics = {Rectangle(extent=  {{-80, 80}, {80, -80}}, lineColor=  {0, 0, 0})}), DymolaStoredErrors);

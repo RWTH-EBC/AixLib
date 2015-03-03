@@ -29,7 +29,7 @@ equation
  <ul>
    <li><i>April 11, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
    <li>
-          by Peter Matthes:<br>
+          by Peter Matthes:<br/>
           Implemented.</li>
  </ul>
  </html>"));

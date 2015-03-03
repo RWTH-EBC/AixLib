@@ -40,7 +40,7 @@ record SurfaceOrientationData_NE_SE_SW_NW_Hor
  <td><p>0</p></td>
  </tr>
  </table>
- <p><br><br><br><h4><span style=\"color:#008000\">References</span></h4></p>
+ <p><br/><br/><br/><h4><span style=\"color:#008000\">References</span></h4></p>
  <p>Record is used in model <a href=\"AixLib.HVAC.Weather.Weather\">AixLib.HVAC.Weather.Weather</a></p>
  </html>", revisions = "<html>
  <p><ul>

@@ -13,8 +13,8 @@ connector SolarRad_out "Scalar total radiation connector (output)"
  </html>", revisions = "<html>
  <ul>
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
- <li><i>April 01, 2014 </i> by Moritz Lauster:<br>Renamed</li>
- <li><i>April 10, 2013&nbsp;</i> by Ole Odendahl:<br>Formatted documentation appropriately</li>
+ <li><i>April 01, 2014 </i> by Moritz Lauster:<br/>Renamed</li>
+ <li><i>April 10, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
  </ul>
  </html>"));
 end SolarRad_out;

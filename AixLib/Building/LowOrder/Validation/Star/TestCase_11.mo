@@ -81,6 +81,6 @@ equation
  </ul>
  <p>Reference: Heating/Cooling load</p>
  <p>Variable path: <code>sumHeatLoad.y</code></p>
- <p><br><br>All values are given in the VDI 6007-1.</p>
+ <p><br/><br/>All values are given in the VDI 6007-1.</p>
  </html>"));
 end TestCase_11;

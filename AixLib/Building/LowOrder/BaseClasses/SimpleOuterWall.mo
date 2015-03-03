@@ -32,7 +32,7 @@ equation
  <p>There are no known limitaions.</p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The model works like an electric circuit as the equations of heat transfer are similar to them. All elements used in the model are taken from the EBC standard library.</p>
- <p><br><b><font style=\"color: #008000; \">References</font></b></p>
+ <p><br/><b><font style=\"color: #008000; \">References</font></b></p>
  <ul>
  <li>German Association of Engineers: Guideline VDI 6007-1, March 2012: Calculation of transient thermal response of rooms and buildings - Modelling of rooms.</li>
  </ul>

@@ -52,7 +52,7 @@ equation
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
    <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
    <li><i>March 14, 2005&nbsp;</i>
-          by Timo Haase:<br>
+          by Timo Haase:<br/>
           Implemented.</li>
  </ul>
  </html>"));

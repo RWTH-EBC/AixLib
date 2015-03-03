@@ -5,7 +5,7 @@ package IdealHeaters
 
   annotation(Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
- <p><br>Package for models with ideal heaters</p>
+ <p><br/>Package for models with ideal heaters</p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The model is only an example on how an energy system is built and what connectors it need to connect to the building&apos;s envelope. </p>
  </html>"));

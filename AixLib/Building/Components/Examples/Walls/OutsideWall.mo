@@ -31,7 +31,7 @@ equation
  </html>", revisions = "<html>
  <ul>
    <li><i>April, 2012&nbsp;</i>
-          by Mark Wesseling:<br>
+          by Mark Wesseling:<br/>
           Implemented.</li>
  </ul>
  </html>"));

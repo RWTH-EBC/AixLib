@@ -74,9 +74,9 @@ equation
  <li>Shutter cloeses &GT;100W/m&sup2;</li>
  <li>no longwave radiation heat exchange (special EqAirTemp see: EqAirTemp_TestCase_8)</li>
  </ul>
- <p><br>Reference: Room air temperature</p>
+ <p><br/>Reference: Room air temperature</p>
  <p>Variable path: <code>reducedModel.airload.T</code></p>
- <p><br><br>All values are given in the VDI 6007-1.</p>
+ <p><br/><br/>All values are given in the VDI 6007-1.</p>
  <p>Same Test Case exists in VDI 6020.</p>
  </html>"));
 end TestCase_8;

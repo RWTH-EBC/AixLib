@@ -81,10 +81,10 @@ equation
  <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>Note that the initial values (index 0) will determin the characteristic of the heat exchanger. Think of the initial values as the design point (working point) of the heat exchanger. Changes from this working point will result in a change of heat exchanger efficiency (it&apos;s characteristic). Therefore, you need no geometrical data for this heat exchanger model, just give the condions in a working point you know - all other operating points can be calculated from there. </p>
- <p><br>The (U*A)_avg value will be output. It is an assumption that the (UA)_wall value is much smaller than the coefficient of heat transfer on either side of the heat exchanger wall. Therefore, (UA)_wall will not be used in the calaculation of (UA)_avg. Also, heat storage inside the heat exchanger is not considered in this model.</p>
+ <p><br/>The (U*A)_avg value will be output. It is an assumption that the (UA)_wall value is much smaller than the coefficient of heat transfer on either side of the heat exchanger wall. Therefore, (UA)_wall will not be used in the calaculation of (UA)_avg. Also, heat storage inside the heat exchanger is not considered in this model.</p>
  <h4><span style=\"color:#008000\">Example Results</span></h4>
  <a href=\"modelica://AixLib.HVAC.HeatExchanger.Examples.NoMedium\">AixLib.HVAC.HeatExchanger.Examples.NoMedium</a>
- <p><br><b><font style=\"color: #008000; \">References</font></b> </p>
+ <p><br/><b><font style=\"color: #008000; \">References</font></b> </p>
  <table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
  <td><p>[Wetter1999]</p></td>
  <td><p>Wetter, M.: Simulation Model -- Air-to-Air Plate Heat Exchanger, Techreport, <i>Ernest Orlando Lawrence Berkeley National Laboratory, Berkeley, CA (US), </i><b>1999</b>, URL: <a href=\"http://simulationresearch.lbl.gov/dirpubs/42354.pdf\">http://simulationresearch.lbl.gov/dirpubs/42354.pdf</a></p></td>

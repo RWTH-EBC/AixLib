@@ -13,7 +13,7 @@ parameter Boolean withLongwave=true
     "If longwave radiation exchange is considered"                                 annotation(choices(checkBox = true));
 
   Modelica.Blocks.Interfaces.RealInput weatherData[3]
-    "[1]: Air temperature<br>[2]: Horizontal radiation of sky<br>[3]: Horizontal radiation of earth"
+    "[1]: Air temperature<br/>[2]: Horizontal radiation of sky<br/>[3]: Horizontal radiation of earth"
     annotation (Placement(transformation(extent={{-120,-20},{-80,20}}),
         iconTransformation(extent={{-100,-20},{-60,20}})));
   Utilities.Interfaces.SolarRad_in solarRad_in[n] annotation (Placement(

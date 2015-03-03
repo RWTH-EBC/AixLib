@@ -96,7 +96,7 @@ equation
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
    <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
    <li><i>August 2, 2011&nbsp;</i>
-          by Ana Constantin:<br>
+          by Ana Constantin:<br/>
           Implemented after a model from Time Haase.</li>
  </ul>
  </html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics = {Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}), Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}), Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}), Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}, fillColor=  {211, 243, 255}, fillPattern=  FillPattern.Solid), Text(extent=  {{-30, 16}, {30, -50}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 255}, fillPattern=  FillPattern.Solid, textString=  "Air")}), DymolaStoredErrors);

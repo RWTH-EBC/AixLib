@@ -73,9 +73,9 @@ equation
  <li>The floor is a non adiabatic wall, this changes the parameter calculation. The floor is considered to be anouter wall for RC-Calculation. In order to calculate the weightfactors for EqAirTemp correctly the orientation of this element is not &QUOT;floor&QUOT;. In the parameter calculation &QUOT;West&QUOT; is used. The weightfactor calculated for the west outer wall has to used as the weightfactor of the ground.</li>
  <li>changed initial temperature(!!)</li>
  </ul>
- <p><br><br>Reference: Room air temperature</p>
+ <p><br/><br/>Reference: Room air temperature</p>
  <p>Variable path: <code>reducedModel.airload.T</code></p>
- <p><br><br>All values are given in the VDI 6007-1.</p>
+ <p><br/><br/>All values are given in the VDI 6007-1.</p>
  <p>Same Test Case exists in VDI 6020.</p>
  </html>"));
 end TestCase_10;

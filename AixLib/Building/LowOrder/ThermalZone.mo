@@ -7,7 +7,7 @@ model ThermalZone "Ready-to-use Low Order building model"
   Components.Sources.InternalGains.Lights.Lights_relative lights(RoomArea = zoneParam.RoomArea, LightingPower = zoneParam.LightingPower, ratioConv = zoneParam.RatioConvectiveHeatLighting, T0 = zoneParam.T0all) annotation(Placement(transformation(extent = {{40, -40}, {60, -21}})));
   Modelica.Blocks.Interfaces.RealInput infiltrationRate annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 90, origin = {-40, -100}), iconTransformation(extent = {{-12, -12}, {12, 12}}, rotation = 90, origin = {-40, -88})));
   Modelica.Blocks.Interfaces.RealInput weather[3] if zoneParam.withOuterwalls
-    "[1]: Air temperature<br>[2]: Horizontal radiation of sky<br>[3]: Horizontal radiation of earth"
+    "[1]: Air temperature<br/>[2]: Horizontal radiation of sky<br/>[3]: Horizontal radiation of earth"
                                                                                                         annotation(Placement(transformation(extent = {{-120, 0}, {-80, 40}}), iconTransformation(extent = {{-86, -12}, {-62, 12}})));
   Utilities.Interfaces.SolarRad_in solarRad_in[zoneParam.n] if zoneParam.withOuterwalls annotation(Placement(transformation(extent = {{-100, 70}, {-80, 90}}), iconTransformation(extent = {{-100, 40}, {-60, 80}})));
   Modelica.Blocks.Interfaces.RealInput internalGains[3]
@@ -171,7 +171,7 @@ equation
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>ThermalZone is thought for easy computations to get information about air temperatures and heating profiles. Therefore, some simplifications have been implemented (one air node, one inner wall, one outer wall). </p>
  <p>All theory is documented in VDI 6007. How to gather the physical parameters for the thermal zone is documented in this standard. It is possible to get this information out of the normal information of a building. Various data can be used, depending on the abilities of the preprocessing tools. </p>
- <p><br><b><font style=\"color: #008000; \">References</font></b></p>
+ <p><br/><b><font style=\"color: #008000; \">References</font></b></p>
  <ul>
  <li>German Association of Engineers: Guideline VDI 6007-1, March 2012: Calculation of transient thermal response of rooms and buildings - Modelling of rooms.</li>
  <li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D. (2014): Low order thermal network models for dynamic simulations of buildings on city district scale. In: Building and Environment 73, p. 223&ndash;231. DOI: <a href=\"http://dx.doi.org/10.1016/j.buildenv.2013.12.016\">10.1016/j.buildenv.2013.12.016</a></p>.</li>
@@ -181,7 +181,7 @@ equation
  </html>", revisions = "<html>
  <ul>
    <li><i>March, 2012&nbsp;</i>
-          by Moritz Lauster:<br>
+          by Moritz Lauster:<br/>
           Implemented</li>
  </ul>
  </html>"));

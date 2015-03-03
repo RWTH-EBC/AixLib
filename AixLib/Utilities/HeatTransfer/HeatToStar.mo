@@ -23,9 +23,9 @@ equation
  </html>", revisions = "<html>
  <ul>
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
- <li><i>April 01, 2014 </i> by Moritz Lauster:<br>Moved and Renamed</li>
- <li><i>April 10, 2013&nbsp;</i> by Ole Odendahl:<br>Formatted documentation appropriately </li>
- <li><i>June 16, 2006&nbsp;</i> by Timo Haase:<br>Implemented.</li>
+ <li><i>April 01, 2014 </i> by Moritz Lauster:<br/>Moved and Renamed</li>
+ <li><i>April 10, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately </li>
+ <li><i>June 16, 2006&nbsp;</i> by Timo Haase:<br/>Implemented.</li>
  </ul>
  </html>"));
 end HeatToStar;

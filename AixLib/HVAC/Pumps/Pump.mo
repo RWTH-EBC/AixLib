@@ -51,7 +51,7 @@ equation
  <li>Choice between two control strategies: 1. dp-const; 2. dp-var</li>
  <li>Input for switching to night mode. During night mode, the pump follows the minimal characteristic </li>
  </ul>
- <p><br><b><font style=\"color: #008000; \">Example Results</font></b></p>
+ <p><br/><b><font style=\"color: #008000; \">Example Results</font></b></p>
  <p><a href=\"AixLib.HVAC.Pumps.Examples.PumpHydraulicResistance_closedLoop\">AixLib.HVAC.Pumps.Examples.PumpHydraulicResistance_closedLoop</a></p>
  </html>"));
 end Pump;

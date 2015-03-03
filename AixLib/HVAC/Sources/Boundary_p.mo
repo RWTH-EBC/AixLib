@@ -21,7 +21,7 @@ equation
  <p>01.11.2013, by <i>Ana Constantin</i>: implemented</p>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
- <p><br>Boundary of fixed pressure. To be used in a loop before a pump.</p>
+ <p><br/>Boundary of fixed pressure. To be used in a loop before a pump.</p>
  <h4><span style=\"color:#008000\">Example Results</span></h4>
  <p><a href=\"AixLib.HVAC.Pumps.Examples.PumpHydraulicResistance_closedLoop\">AixLib.HVAC.Pumps.Examples.PumpHydraulicResistance_closedLoop</a></p>
  </html>"));

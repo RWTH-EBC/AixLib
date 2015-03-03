@@ -249,10 +249,10 @@ equation
  <ul>
    <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately, Rewarded 5*****!</li>
    <li><i>Mai 1, 2012&nbsp;</i>
-          by Moritz Lauster and Ana Constantin:<br>
+          by Moritz Lauster and Ana Constantin:<br/>
           Improved beyond belief.</li>
    <li><i>September 12, 2006&nbsp;</i>
-          by Timo Haase:<br>
+          by Timo Haase:<br/>
           Implemented.</li>
  </ul>
  </html>"), DymolaStoredErrors);

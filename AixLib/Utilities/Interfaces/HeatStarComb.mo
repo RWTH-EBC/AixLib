@@ -15,9 +15,9 @@ connector HeatStarComb "Combines therm connector and star connector."
  ", revisions = "<html>
  <ul>
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
- <li><i>April 01, 2014 </i> by Moritz Lauster:<br>Renamed</li>
- <li><i>April 10, 2013&nbsp;</i> by Ole Odendahl:<br>Formatted documentation appropriately </li>
- <li>by Mark Wesseling:<br>Implemented.</li>
+ <li><i>April 01, 2014 </i> by Moritz Lauster:<br/>Renamed</li>
+ <li><i>April 10, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately </li>
+ <li>by Mark Wesseling:<br/>Implemented.</li>
  </ul>
  </html>"));
 end HeatStarComb;

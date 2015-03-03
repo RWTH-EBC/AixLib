@@ -76,10 +76,10 @@ algorithm
  <ul>
    <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
    <li><i>September 29, 2006&nbsp;</i>
-          by Peter Matthes:<br>
+          by Peter Matthes:<br/>
           Included ArgACOS variable to protect acos function from arguments &gt; 1. Added protection for some variables.</li>
    <li><i>March 14, 2005&nbsp;</i>
-          by Timo Haase:<br>
+          by Timo Haase:<br/>
           Implemented.</li>
  </ul>
  </html>"));

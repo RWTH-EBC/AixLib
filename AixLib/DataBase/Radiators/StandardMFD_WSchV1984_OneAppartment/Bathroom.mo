@@ -23,7 +23,7 @@ record Bathroom
  <li>Length of radiator in m</li>
  <li>Height of radiator in m</li>
  </ul>
- <p><br>Not all this information is used in the model, just the power, the temperatures, the exponent, the percentage and the volume.</p>
+ <p><br/>Not all this information is used in the model, just the power, the temperatures, the exponent, the percentage and the volume.</p>
  <h4><span style=\"color:#008000\">References</span></h4>
  <p>Record is used in model <a href=\"AixLib.HVAC.Radiators.Radiator\">AixLib.HVAC.Radiators.Radiator</a></p>
  <p>Source:</p>

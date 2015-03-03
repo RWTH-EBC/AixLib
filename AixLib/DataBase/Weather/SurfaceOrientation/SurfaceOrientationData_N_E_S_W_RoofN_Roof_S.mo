@@ -47,7 +47,7 @@ record SurfaceOrientationData_N_E_S_W_RoofN_Roof_S
  <td><p>45</p></td>
  </tr>
  </table>
- <p><br><br><h4><span style=\"color:#008000\">References</span></h4></p>
+ <p><br/><br/><h4><span style=\"color:#008000\">References</span></h4></p>
  <p>Record is used in model <a href=\"AixLib.HVAC.Weather.Weather\">AixLib.HVAC.Weather.Weather</a></p>
  </html>", revisions = "<html>
  <p><ul>

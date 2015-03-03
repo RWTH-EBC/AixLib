@@ -44,7 +44,7 @@ equation
  <ul>
  <li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
    <li>
-          by Peter Matthes:<br>
+          by Peter Matthes:<br/>
           implemented</li>
  </ul>
  </html> "), Icon(graphics={  Rectangle(extent=  {{-80, 80}, {80, -80}}, lineColor=  {135, 135, 135}, fillColor=  {255, 255, 170},

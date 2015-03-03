@@ -71,7 +71,7 @@ equation
  </ul></p>
  <ul>
    <li><i>March 30, 2012&nbsp;</i>
-          by Ana Constantin:<br>
+          by Ana Constantin:<br/>
           Implemented.</li>
  </ul>
  </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));

@@ -31,10 +31,10 @@ algorithm
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Calculation of pressureloss according to the following equation:</p>
  <pre>dp = lambda * l / d * rho / 2 * u^2</pre>
- <p><br>For laminar regime (if Re &le; 2300): </p>
+ <p><br/>For laminar regime (if Re &le; 2300): </p>
  <pre>
  lambda = 64 / Re </pre>
- <p><br>For turbulent regime (if Re &GT; 2300): </p>
+ <p><br/>For turbulent regime (if Re &GT; 2300): </p>
  <pre>
  1/sqrt(lambda) = -2 log(2.51 / (Re *sqrt(lambda)) + epsilon / (3.71 * d)</pre>
  <p> </p>

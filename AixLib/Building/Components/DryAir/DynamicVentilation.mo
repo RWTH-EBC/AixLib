@@ -44,7 +44,7 @@ equation
  <ul>
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
    <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
-   <li><i>October 16, 2011&nbsp;</i> by Ana Constantin:<br/>implemented<br></li>
+   <li><i>October 16, 2011&nbsp;</i> by Ana Constantin:<br/>implemented<br/></li>
  </ul>
  </html>", info = "<html>
  <p><h4><font color=\"#008000\">Overview</font></h4></p>

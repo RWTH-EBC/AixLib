@@ -25,7 +25,7 @@ equation
   connect(heatDemand.T_set, T_set) annotation(Line(points = {{-64, 70}, {-108, 70}}, color = {0, 0, 127}, smooth = Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
- <p><br>This basic boiler model calculates the heat demand in order to reach the fluid set temperature. The heat input to the fluid is limited between 0 and the maximum heat output of the boiler. </p>
+ <p><br/>This basic boiler model calculates the heat demand in order to reach the fluid set temperature. The heat input to the fluid is limited between 0 and the maximum heat output of the boiler. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
  <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>

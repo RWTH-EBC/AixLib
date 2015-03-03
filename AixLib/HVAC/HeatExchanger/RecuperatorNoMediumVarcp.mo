@@ -84,7 +84,7 @@ equation
  <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The design point has been increased to a larger mass flow rate.</p>
- <p><br><b><font style=\"color: #008000; \">References</font></b> </p>
+ <p><br/><b><font style=\"color: #008000; \">References</font></b> </p>
  <table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
  <td><p>[Wetter1999]</p></td>
  <td><p>Wetter, M.: Simulation Model -- Air-to-Air Plate Heat Exchanger, Techreport, <i>Ernest Orlando Lawrence Berkeley National Laboratory, Berkeley, CA (US), </i><b>1999</b>, URL: <a href=\"http://simulationresearch.lbl.gov/dirpubs/42354.pdf\">http://simulationresearch.lbl.gov/dirpubs/42354.pdf</a></p></td>
