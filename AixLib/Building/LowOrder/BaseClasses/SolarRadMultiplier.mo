@@ -12,7 +12,7 @@ equation
  <li>This component can be used to in- or decrease a scalar radiance, e.g. if you would like to split the radiance, use two blocks, one with x, one with 1-x.</li>
  </ul>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  </html>", revisions = "<html>
  <ul>
  <li><i>January 2012,&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>

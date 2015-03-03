@@ -8,7 +8,7 @@ record PolynomialCoefficients_ASHRAEHandbook
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Calculate the heat transfer coeficient alpha at outside surfaces depending on wind speed and surface type </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars5.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars5.png\" alt=\"stars: 5 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Assumptions</span></h4>
  <p>Wind direction has no influence </p>
  <h4><span style=\"color:#008000\">Concept</span></h4>

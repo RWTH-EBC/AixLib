@@ -17,7 +17,7 @@ equation
  <p>Adapted from <a href=\"modelica://Modelica.Blocks.Logical.Switch\">Modelica.Blocks.Logical.Switch</a>.</p>
  <p>The SmoothSwitch switches, depending on the logical connector u2 (the middle connector) between the two possible input signals u1 (upper connector) and u3 (lower connector). </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The switch is smooth.</p>
  <p>If u2 is <b>true</b>, the output signal y is set equal to u1, else it is set equal to u3. </p>

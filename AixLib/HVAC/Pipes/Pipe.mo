@@ -35,7 +35,7 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model of a straight pipe with mass, energy and momentum balances. It provides the complete balance equations for one-dimensional fluid flow.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The model uses a modified friction factor to estimate the Reynolds number. Using Hagen&ndash;Poiseuille equation, the pressure drop and mass flow rate are calculated using the Reynolds number. The model is only valid for turbulent flow.</p>
  <p>For the energy balance, a differential equation is implemented for the whole pipe volume. Temperature of the volume is equal to the temperature at the heat port.</p>

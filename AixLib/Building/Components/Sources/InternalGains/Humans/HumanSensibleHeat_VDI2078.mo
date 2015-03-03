@@ -57,7 +57,7 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for heat ouput of a human according to VDI 2078 (Table A.1). The model only considers the dry heat emission and divides it into convective and radiative heat transmission. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>It is possible to choose between several types of physical activity.</p>
  <p>The heat output depends on the air temperature in the room where the activity takes place.</p>

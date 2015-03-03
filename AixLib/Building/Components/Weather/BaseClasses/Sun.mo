@@ -67,7 +67,7 @@ algorithm
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>The <b>Sun</b> model computes the hour angle, the declination and the azimut of the sun for a given set of geographic position and local time. </p>
  <h4><font color=\"#008000\">Level of Development</font></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><font color=\"#008000\">Concept</font></h4>
  <p>The model needs information on the difference between the local time zone (corresponding to the time basis of the simulation) and UTC (universal time coordinated) in hours. The ouput data of the <b>Sun</b> model is yet not very useful itself, but it is most commonly used as input data for e.g. <b><a href=\"RadOnTiltedSurf\">RadOnTiltedSurf</a></b> models to compute the solar radiance according to the azimut of a surface. </p>
  <h4><font color=\"#008000\">Example Results</font></h4>

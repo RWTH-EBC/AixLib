@@ -25,7 +25,7 @@ equation
  <li>Normally, it should be used together with the other parts of the VDI 6007 model library. It represents all walls with a heat transfer. Make sure, you got the right R&apos;s and C&apos;s (e.g. like they are computed in VDI 6007).</li>
  </ul>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars4.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars4.png\" alt=\"stars: 4 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Assumptions</span></h4>
  <p>The model underlies all assumptions which are made in VDI 6007, especially that all heat transfer parts are combined in one part. It can be used in combination with various other models.</p>
  <h4><span style=\"color:#008000\">Known Limitations</span></h4>

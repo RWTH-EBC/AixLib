@@ -10,7 +10,7 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Simple pressure loss model based on a constant zeta value.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Example Results</span></h4>
  <p><a href=\"AixLib.HVAC.Ductwork.Examples.DuctPressureLoss\">AixLib.HVAC.Ductwork.Examples.DuctPressureLoss</a> </p>
  </html>", revisions = "<html>

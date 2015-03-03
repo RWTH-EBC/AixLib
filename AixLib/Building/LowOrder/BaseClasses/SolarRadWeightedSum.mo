@@ -59,7 +59,7 @@ equation
  <li>You can use this component to weight a radiant input and sum it up to one scalar output, e.g. weight the radiance of the sun of n directions with the areas of windows in n directions and sum it up to one scalar radiance on a non-directional window</li>
  </ul>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Known Limitations</span></h4>
  <p>If the weightfactors are all zero, Dymola tries to divide through zero. You will get a warning and the output is set to zero.</p>
  </html>", revisions = "<html>

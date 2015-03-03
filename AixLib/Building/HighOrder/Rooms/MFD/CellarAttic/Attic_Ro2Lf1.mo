@@ -87,7 +87,7 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for an attic for the whole building.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The model can extended, if one wants to consider each of the ceilings belongig to the lower rooms individually.</p>
  </html>"));

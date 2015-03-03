@@ -22,7 +22,7 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>The VarRad Model is a source model to represent a varying radiation source.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Assumption</span></h4>
  <p>If nothing is specified through the input port solar radiation of 0 W/m2 is assumed by default. </p>
  </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));

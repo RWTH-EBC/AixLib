@@ -7,7 +7,7 @@ record OPH_1_Meeting
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Zone &quot;Meeting&quot; of an example building according to an office building with passive house standard. The building is divided in six zones, this is a typical zoning for an office building.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars5.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars5.png\" alt=\"stars: 5 out of 5\"/></p>
  <h4><span style=\"color:#008000\">References</span></h4>
  <p>Record is used in model <a href=\"Cities.BuildingPhysics.ThermalZone\">Cities.BuildingPhysics.ThermalZone</a> and <a href=\"Cities.Cities_DataBase.Buildings.OfficePassiveHouse\">Cities.Cities_DataBase.Buildings.OfficePassiveHouse</a></p>
  </html>"));

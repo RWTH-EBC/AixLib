@@ -16,7 +16,7 @@ equation
  <p>Volume Flow Controler which is based on a PI controller</p>
  <p>The Controller Influences the zeta-value of the component.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Example Results</span></h4>
  <p><a href=\"AixLib.HVAC.Ductwork.Examples.VolumeFlowController\">AixLib.HVAC.Ductwork.Examples.VolumeFlowController</a> </p>
  </html>", revisions = "<html>

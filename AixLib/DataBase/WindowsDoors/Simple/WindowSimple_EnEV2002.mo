@@ -12,7 +12,7 @@ record WindowSimple_EnEV2002 "Window according to EnEv 2002"
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Window definition according to EnEV 2002 for a simple window. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars5.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars5.png\" alt=\"stars: 5 out of 5\"/></p>
  <h4><span style=\"color:#008000\">References</span></h4>
  <p>Record is used in model <a href=\"Building.Components.WindowsDoors.WindowSimple\">Building.Components.WindowsDoors.WindowSimple</a></p>
  <p>Source:</p>

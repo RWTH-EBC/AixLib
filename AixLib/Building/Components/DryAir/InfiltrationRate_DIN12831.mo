@@ -21,7 +21,7 @@ equation
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>The<b> InfiltrationRate</b> model describes heat and mass transport by infiltration. </p>
  <h4><font color=\"#008000\">Level of Development</font></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><font color=\"#008000\">Concept</font></h4>
  <p>Air exchange coefficients at 50 Pa pressure difference between ambience and room air: </p>
  <table cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
@@ -101,4 +101,3 @@ equation
  </ul>
  </html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics = {Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}), Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}), Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}), Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}, fillColor=  {211, 243, 255}, fillPattern=  FillPattern.Solid), Text(extent=  {{-30, 16}, {30, -50}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 255}, fillPattern=  FillPattern.Solid, textString=  "Air")}), DymolaStoredErrors);
 end InfiltrationRate_DIN12831;
-

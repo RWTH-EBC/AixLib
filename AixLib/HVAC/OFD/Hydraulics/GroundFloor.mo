@@ -171,7 +171,7 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This model reflects the heat distribution and transfer of a full floor for a one-family-dwelling. It focuses on thermohydraulics, building physics can be connected via heat ports.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The model is based on a specific one-family-dwelling and thus only reflects the thermohydraulic behavior of this specific building. The building hydraulics are thought as a reference example for model and technology comparisons.</p>
  <h4><span style=\"color:#008000\">Example Results</span></h4>

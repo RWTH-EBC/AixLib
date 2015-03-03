@@ -27,7 +27,7 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p><br/>This basic boiler model calculates the heat demand in order to reach the fluid set temperature. The heat input to the fluid is limited between 0 and the maximum heat output of the boiler. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The idea is to have a very simple heating mechanism, which heats the fluid to a given set temperature using any amount of heat flow between 0 and the boiler&apos;s maximum heat output. As the model should be able to answer interesting questions for the students, one important value is fuel consumption. Therefore the model calculates fuel consumption as the integral of heat intput to the fluid divided by the boiler efficiency. This efficiency part is replaceable and can be either a fixed value or a table with part load efficiencies.</p>
  <h4><span style=\"color:#008000\">Example Results</span></h4>

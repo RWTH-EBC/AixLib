@@ -16,7 +16,7 @@ equation
  Model of an electric meter (integration over time of the electric power).
  </p>
  <h4><font color=\"#008000\">Level of Development</font></h4>
- <p><img src=\"modelica://AixLib/Images/stars2.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars2.png\" alt=\"stars: 2 out of 5\"/></p>
  </html>", revisions = "<html>
  <ul>
  <li><i>October 15, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>

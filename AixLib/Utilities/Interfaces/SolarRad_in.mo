@@ -9,7 +9,7 @@ connector SolarRad_in "Scalar total radiation connector (input)"
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>The <b>SolarRad_in</b> connector is used for total radiation input. Is explicitly defined as an input.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/> </p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/> </p>
  </html>", revisions = "<html>
  <ul>
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>

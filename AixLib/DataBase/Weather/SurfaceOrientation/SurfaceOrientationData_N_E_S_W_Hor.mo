@@ -8,7 +8,7 @@ record SurfaceOrientationData_N_E_S_W_Hor
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Surface Orientation Data for N,E,S and W </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>Data in this set: </p>
  <table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>

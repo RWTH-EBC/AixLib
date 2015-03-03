@@ -50,7 +50,7 @@ equation
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>This model ventilates the solar gains away. </p>
  <h4><font color=\"#008000\">Level of Development</font></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><font color=\"#008000\">Concept</font></h4>
  <p>The model is used for simulations of heating periods. The outside temperature can be so high, that the heating system shuts down and the temperature in the room rises too high.</p>
  <p>When the outside temperature rises above the heating limit, the model is activated and tries to lower the temperature under the set temperature of the room plus 2K.</p>

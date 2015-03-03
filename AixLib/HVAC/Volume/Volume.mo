@@ -40,7 +40,7 @@ equation
  <p>This model represents a simple fluid volume with two fluid ports and one heat port. It has no pressure difference between the two fluid ports. </p>
  <p>The model uses the same energy balance as the pipe model.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Example Results</span></h4>
  <p><a href=\"AixLib.HVAC.HeatGeneration.Examples.BoilerSystemTConst\">AixLib.HVAC.HeatGeneration.Examples.BoilerSystemTConst</a></p>
  </html>", revisions = "<html>
