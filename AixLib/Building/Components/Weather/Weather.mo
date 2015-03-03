@@ -21,30 +21,6 @@ model Weather "Complex weather model"
   parameter
     DataBase.Weather.SurfaceOrientation.SurfaceOrientationBaseDataDefinition         SOD = DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor()
     "Surface orientation data"                                                                                                     annotation(Dialog(group = "Solar radiation on oriented surfaces", descriptionLabel = true), choicesAllMatching = true);
-  //   parameter Integer wdv_choice[:]={7,8,9,10,11,12,13,18,19} "<html><font size=2><table border=0 cellspacing=2>
-  //         <tr width=100%>
-  //             <td width=35%><b> 7 </b>- Cloud cover, 0..8; 9 </td>
-  //             <td width=65%><b>12 </b>- Mass fraction of water in dry air, kg/kg </td>
-  //         </tr><tr>
-  //             <td><b> 8 </b>- Wind direction,  </td>
-  //             <td><b>13 </b>- Relative humidity of air, 0..1 </td>
-  //         </tr><tr>
-  //             <td><b> 9 </b>- Wind speed, m/s </td>
-  //             <td><b>18 </b>- Longwave sky radiation on horizontal </td>
-  //         </tr><tr>
-  //             <td></td><td> surface, W/m </td>
-  //         </tr><tr>
-  //             <td><b>10 </b>- Air temperature, C </td>
-  //             <td><b>19 </b>- Longwave terrestric radiation from horizontal </td>
-  //         </tr><tr>
-  //             <td></td><td> surface, W/m </td>
-  //         </tr><tr>
-  //             <td><b>11 </b>- Air pressure, Pa </td>
-  //         </tr><tr>
-  //         </tr>
-  //     </table></font></html>"
-  //                       annotation (Dialog(group=
-  //          "Weather Data Vector  -  choose output vector elements"));
   Utilities.Interfaces.SolarRad_out SolarRadiation_OrientedSurfaces[size(RadOnTiltedSurf, 1)] annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {50, 98}), iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-78, -110})));
   parameter Integer Outopt = 2 "Output options" annotation(Dialog(tab = "Optional output vector", compact = true, descriptionLabel = true), choices(choice = 1
         "one vector",                                                                                                    choice = 2
@@ -257,4 +233,3 @@ equation
  </ul>
  </html>"), DymolaStoredErrors);
 end Weather;
-
