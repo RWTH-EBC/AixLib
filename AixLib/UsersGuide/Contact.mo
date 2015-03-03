@@ -2,7 +2,7 @@ within AixLib.UsersGuide;
 class Contact "Contact"
   extends Modelica.Icons.Contact;
   annotation(Documentation(info="<html>
-       <h4><font color=\"#008000\" size=5>Contact</font></h4>
+       <h4><font color=\"#008000\" size=\"5\">Contact</font></h4>
        <p>
        The development of the AixLib library is organized by<br/>
            Modelica Group<br/>

@@ -2,7 +2,7 @@ within AixLib.UsersGuide;
 class License "Modelica License 2"
   extends Modelica.Icons.Information;
   annotation(Documentation(info = "<html>
- <h4><font color=\"#008000\" size=5>The Modelica License 2</font></h4>
+ <h4><font color=\"#008000\" size=\"5\">The Modelica License 2</font></h4>
  <p>
  <strong>Preamble.</strong> The goal of this license is that Modelica related model libraries, software, images, documents, data files etc. can be used freely in the original or a modified form, in open source and in commercial environments (as long as the license conditions below are fulfilled, in particular sections 2c) and 2d). The Original Work is provided free of charge and the use is completely at your own risk. Developers of free Modelica packages are encouraged to utilize this license for their work.
  </p>
