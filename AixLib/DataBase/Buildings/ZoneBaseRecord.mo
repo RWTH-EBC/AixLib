@@ -109,7 +109,7 @@ record ZoneBaseRecord "the used record standard"
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>Remark: The design heating power Q_N of the building is the sum of net design power according to transmission and ventilation losses at a given outdoor temperature and an additional re-heating power for early morning heat up after night set-back. Net design power can be simulated with constant boundary conditions (e. g.: no internal or external gains, Touside=-12 degC, ACH=0.5). The additional re-heating power is computed by a factor [f_RH]=W/m2 and the heated zone floor area.</p>
  <p>The factor f_RH in W/m2 can be chosen form the following table:</p>
- <table cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
+ <table summary=\"factor f_RH\" cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
  <td></td>
  <td><h4 align=\"center\">1 K</h4></td>
  <td><h4 align=\"center\">2 K</h4></td>

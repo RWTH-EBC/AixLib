@@ -85,7 +85,7 @@ equation
  <h4><span style=\"color:#008000\">Example Results</span></h4>
  <a href=\"modelica://AixLib.HVAC.HeatExchanger.Examples.NoMedium\">AixLib.HVAC.HeatExchanger.Examples.NoMedium</a>
  <p><br/><b><font style=\"color: #008000; \">References</font></b> </p>
- <table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
+ <table summary=\"References\" cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
  <td><p>[Wetter1999]</p></td>
  <td><p>Wetter, M.: Simulation Model -- Air-to-Air Plate Heat Exchanger, Techreport, <i>Ernest Orlando Lawrence Berkeley National Laboratory, Berkeley, CA (US), </i><b>1999</b>, URL: <a href=\"http://simulationresearch.lbl.gov/dirpubs/42354.pdf\">http://simulationresearch.lbl.gov/dirpubs/42354.pdf</a></p></td>
  </tr>
@@ -105,4 +105,3 @@ equation
  </ul>
  </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
 end RecuperatorNoMedium;
-

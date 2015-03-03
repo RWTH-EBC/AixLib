@@ -24,7 +24,7 @@ equation
  <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><font color=\"#008000\">Concept</font></h4>
  <p>Air exchange coefficients at 50 Pa pressure difference between ambience and room air: </p>
- <table cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
+ <table summary=\"Air exchange coefficients\" cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
  <td><h4 align=\"center\">Dwelling type</h4></td>
  <td><h4 align=\"center\">highly air tight</h4></td>
  <td><h4 align=\"center\">medium air tight</h4></td>
@@ -44,7 +44,7 @@ equation
  </tr>
  </table>
  <p>Reference values for air shielding value e: </p>
- <table cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
+ <table summary=\"Reference values\" cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
  <td></td>
  <td><h4 align=\"center\">heated room without </h4><p align=\"center\">facade with openings</p><p align=\"center\">exposed to wind</p></td>
  <td><h4 align=\"center\">heated room with</h4><p align=\"center\">one facade with openings</p><p align=\"center\">exposed to wind</p></td>
@@ -70,7 +70,7 @@ equation
  </tr>
  </table>
  <p>Reference values for height correction value &epsilon;: </p>
- <table cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
+ <table summary=\"Reference values\" cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
  <td><h4>Height of room</h4></td>
  <td><p align=\"center\"><br/><b>&epsilon;</b></p></td>
  </tr>
