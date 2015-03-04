@@ -33,14 +33,14 @@ model GroundFloor
     "Kitchen"                                                                                                     annotation(Dialog(group = "Radiators", descriptionLabel = true));
   Radiators.Radiator radiatorKitchen(RadiatorType = Type_Radiator_Kitchen) annotation(Placement(transformation(extent = {{-89, -83}, {-106, -66}})));
   Radiators.Radiator radiatorWC(RadiatorType = Type_Radiator_WC) annotation(Placement(transformation(extent = {{83, -48}, {100, -31}})));
-  HVAC.Valves.ThermostaticValve valveKitchen(Kvs = 0.41, Kv_setT = 0.262) annotation(Placement(transformation(extent = {{-67, -82.5}, {-82, -66.5}})));
+  AixLib.HVAC.Valves.ThermostaticValve valveKitchen(Kvs = 0.41, Kv_setT = 0.262) annotation(Placement(transformation(extent = {{-67, -82.5}, {-82, -66.5}})));
   Radiators.Radiator radiatorLiving(RadiatorType = Type_Radiator_Livingroom) annotation(Placement(transformation(extent = {{-95, -5}, {-113, 13}})));
   Radiators.Radiator radiatorHobby(RadiatorType = Type_Radiator_Hobby) annotation(Placement(transformation(extent = {{78, 72}, {94, 88}})));
   Radiators.Radiator radiatorCorridor(RadiatorType = Type_Radiator_Corridor) annotation(Placement(transformation(extent = {{86, 33}, {101, 48}})));
   Valves.ThermostaticValve valveWC(Kvs = 0.24, Kv_setT = 0.162) annotation(Placement(transformation(extent = {{38, -47}, {50, -31}})));
   Valves.ThermostaticValve valveLiving(Kvs = 1.43, Kv_setT = 0.4) annotation(Placement(transformation(extent = {{-67, -4}, {-79, 12}})));
-  HVAC.Valves.ThermostaticValve valveCorridor(Kvs = 0.16, Kv_setT = 0.088) annotation(Placement(transformation(extent = {{64, 32}, {76, 48}})));
-  HVAC.Valves.ThermostaticValve valveHobby(Kvs = 0.24, Kv_setT = 0.182) annotation(Placement(transformation(extent = {{49, 74}, {60, 87}})));
+  AixLib.HVAC.Valves.ThermostaticValve valveCorridor(Kvs = 0.16, Kv_setT = 0.088) annotation(Placement(transformation(extent = {{64, 32}, {76, 48}})));
+  AixLib.HVAC.Valves.ThermostaticValve valveHobby(Kvs = 0.24, Kv_setT = 0.182) annotation(Placement(transformation(extent = {{49, 74}, {60, 87}})));
   Pipes.StaticPipe thStF(D = Diam_Main, l = Length_thSt)
     "through the storage room, flow stream"                                                      annotation(Placement(transformation(extent = {{57, -85}, {40, -74}})));
   Pipes.StaticPipe toKiF(D = Diam_Sec, l = Length_toKi)

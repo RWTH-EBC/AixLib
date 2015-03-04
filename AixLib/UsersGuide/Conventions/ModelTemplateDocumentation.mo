@@ -20,7 +20,7 @@ model ModelTemplateDocumentation "Template documentation for EBC's models"
   <li>4 stars: the model comes with examples for validation for this specific model (EBC); a comparison with measurement data includes an error analysis</li>
   <li>5 stars: the model documentation includes a link to publications which show model validation for this specific model(EBC) and can be cited by others</li>
   </ul>
-  <p><br>The folder HVAC.images contains images star0.png - star5.png. Replace the image above as appropriate.</p>
+  <p><br>The folder AixLib.HVAC.images contains images star0.png - star5.png. Replace the image above as appropriate.</p>
   <h4><span style=\"color:#008000\">Assumptions</span></h4>
   <p>Note assumptions such as a specific definition ranges for the model, possible medium models, allowed combinations with other models etc.</p>
   <h4><span style=\"color:#008000\">Known Limitations</span></h4>

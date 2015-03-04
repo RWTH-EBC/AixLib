@@ -18,7 +18,7 @@ model RecordTemplateDocumentation
   <li>4 stars: references exist for certain parameters in the record, but not all of them</li>
   <li>5 stars: references exist for all parameters in the record</li>
   </ul></p>
-  <p><br/>The folder HVAC.images contains images star0.png - star5.png. Replace the image above as appropriate.</p>
+  <p><br/>The folder AixLib.HVAC.images contains images star0.png - star5.png. Replace the image above as appropriate.</p>
   <p><h4><font color=\"#008000\">Assumptions</font></h4></p>
   <p>Note assumptions for certain parameter values (3 or 4 stars).</p>
   <p><h4><font color=\"#008000\">Concept</font></h4></p>

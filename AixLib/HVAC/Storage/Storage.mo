@@ -19,12 +19,12 @@ model Storage
   parameter Real kappa = 0.4 annotation(Dialog(group = "Bouyancy"));
   Interfaces.Port_a port_a_consumer annotation(Placement(transformation(extent = {{-10, -108}, {10, -88}}), iconTransformation(extent = {{-10, -110}, {10, -90}})));
   Interfaces.Port_b port_b_consumer annotation(Placement(transformation(extent = {{-10, 82}, {10, 102}}), iconTransformation(extent = {{-10, 90}, {10, 110}})));
-  HVAC.Volume.Volume layer[n](each V = V / n) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {0, 0})));
+  AixLib.HVAC.Volume.Volume layer[n](each V = V / n) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {0, 0})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort
     "connect to ambient temperature around the storage"                                                            annotation(Placement(transformation(extent = {{-116, -10}, {-96, 10}}), iconTransformation(extent = {{-90, -10}, {-70, 10}})));
   Interfaces.Port_b port_b_heatGenerator annotation(Placement(transformation(extent = {{74, -98}, {94, -78}}), iconTransformation(extent = {{74, -90}, {94, -70}})));
   Interfaces.Port_a port_a_heatGenerator annotation(Placement(transformation(extent = {{74, 78}, {94, 98}}), iconTransformation(extent = {{74, 78}, {94, 98}})));
-  HVAC.Volume.Volume layer_HE[n](each V = V_HE / n) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {84, 0})));
+  AixLib.HVAC.Volume.Volume layer_HE[n](each V = V_HE / n) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {84, 0})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor heatTransfer_HE[n](each G = k_HE * A_HE / n) annotation(Placement(transformation(extent = {{32, -10}, {52, 10}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor heatTransfer[n](G = cat(1, {G_top_bottom}, array(G_middle for k in 2:n - 1), {G_top_bottom})) annotation(Placement(transformation(extent = {{-80, -10}, {-60, 10}})));
   BaseClasses.Bouyancy bouyancy[n - 1](each rho = baseParameters.rho_Water, each lambda = baseParameters.lambda_Water, each g = baseParameters.g, each cp = baseParameters.cp_Water, each A = A, each beta = beta, each dx = dx, each kappa = kappa) annotation(Placement(transformation(extent = {{-38, -10}, {-18, 10}})));

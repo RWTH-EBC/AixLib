@@ -46,7 +46,7 @@ equation
   p = p_Steam + p_Air;
   p_Steam = R / M_Steam * rho_Steam * T;
   p_Air = R / M_Air * rho_Air * T;
-  p_Saturation = HVAC.Volume.BaseClasses.SaturationPressureSteam(T);
+  p_Saturation = AixLib.HVAC.Volume.BaseClasses.SaturationPressureSteam(T);
   rho_MoistAir = rho_Air * (1 + X_Steam + X_Water);
   // X
   X_Steam = rho_Steam / rho_Air;
@@ -56,7 +56,7 @@ equation
   // ENTHALPY
   actualStream(portMoistAir_a.h_outflow) = cp_Air * (T - T_ref) + X_Steam * (r_Steam + cp_Steam * (T - T_ref)) + X_Water * cp_Water * (T - T_ref);
   X = actualStream(portMoistAir_a.X_outflow);
-  dynamicViscosity = HVAC.Volume.BaseClasses.DynamicViscosityMoistAir(T, X_Steam);
+  dynamicViscosity = AixLib.HVAC.Volume.BaseClasses.DynamicViscosityMoistAir(T, X_Steam);
   annotation(Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Two Port Model for Moist Air with fluid propoerties at port a</p>

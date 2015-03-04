@@ -23,9 +23,9 @@ model OneAppartment_Radiators
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedHeatFlow14(Q_flow = 0) annotation(Placement(transformation(extent = {{60, 28}, {48, 34}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedHeatFlow15(Q_flow = 0) annotation(Placement(transformation(extent = {{74, 28}, {62, 34}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedHeatFlow16(Q_flow = 0) annotation(Placement(transformation(extent = {{74, 50}, {62, 56}})));
-  HVAC.Interfaces.Port_a Inflow
+  AixLib.HVAC.Interfaces.Port_a Inflow
     "Inflow to connect with external models (boiler, pump etc.)"                             annotation(Placement(transformation(extent = {{-26, -118}, {-6, -98}}), iconTransformation(extent = {{-26, -118}, {-6, -98}})));
-  HVAC.Interfaces.Port_b Returnflow
+  AixLib.HVAC.Interfaces.Port_b Returnflow
     "Returnflow to connect with external models (boiler, pump etc.)"                                 annotation(Placement(transformation(extent = {{-2, -118}, {18, -98}}), iconTransformation(extent = {{-2, -118}, {18, -98}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = -90, origin = {-32, 112}), iconTransformation(extent = {{-15, -15}, {15, 15}}, rotation = -90, origin = {-31, 105})));
   Modelica.Blocks.Interfaces.RealInput AirExchangePort_Window[5] annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = -90, origin = {20, 112}), iconTransformation(extent = {{-14, -14}, {14, 14}}, rotation = -90, origin = {26, 106})));

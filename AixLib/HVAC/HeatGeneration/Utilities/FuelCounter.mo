@@ -15,7 +15,7 @@ equation
  </ul></p>
  <p>07.10.2013, Marcus Fuchs</p>
  <p><ul>
- <li>implemented (similar to HVAC.Meter.EEnergyMeter)</li>
+ <li>implemented (similar to AixLib.HVAC.Meter.EEnergyMeter)</li>
  </ul></p>
  </html>"));
 end FuelCounter;
