@@ -51,19 +51,23 @@ equation
       color={191,0,0},
       smooth=Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-            -100},{100,100}}),                                                                           graphics), experiment(StopTime = 5.184e+006, Interval = 3600, __Dymola_Algorithm = "Lsodar"), __Dymola_experimentSetupOutput(events = false), Documentation(revisions = "<html>
- <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
- </html>", info = "<html>
- <p>Test Case 6 of the VDI6007: <a name=\"result_box\">L</a>oad calculation in compliance with the desired values of the indoor temperature and a setpoint for the type space S:</p>
- <ul>
- <li>constant outdoor temperature </li>
- <li>no shortwave radiation on the outer wall</li>
- <li>no shortwave radiation through the window</li>
- <li>no longwave radiation exchange between outer wall, window and ambience</li>
- </ul>
- <p><br>Reference: Heating/Cooling load</p>
- <p>Variable path: <code>heatFlowSensor.Q_flow</code></p>
- <p><br><br><br>All values are given in the VDI 6007-1.</p>
- <p>Same Test Case exists in VDI 6020.</p>
- </html>"), Icon(graphics));
+            -100},{100,100}}),                                                                           graphics), experiment(StopTime = 5.184e+006, Interval = 3600, __Dymola_Algorithm = "Lsodar"), __Dymola_experimentSetupOutput(events = false), Documentation(revisions="<html>
+<ul>
+<li><i>February, 2014&nbsp;</i> by Peter Remmen:<br>Implemented </li>
+<li><i>March 2015,&nbsp;</i> by Steffen Riebling:<br>Revised documentation. </li>
+</ul>
+</html>",  info="<html>
+<p>Test Case 6 of the VDI6007: <a name=\"result_box\">L</a>oad calculation in compliance with the desired values of the indoor temperature and a setpoint for the type space S </p>
+<ul>
+<li>constant outdoor temperature 22 degC </li>
+<li>no shortwave radiation on the outer wall </li>
+<li>no shortwave radiation through the window </li>
+<li>no longwave radiation exchange between outer wall, window and ambience </li>
+</ul>
+<p><br>Reference: Heating/Cooling load </p>
+<p>Variable path: <code>heatFlowSensor.Q_flow</code> </p>
+<p><br>Maximum deviation: 30.65 W</p>
+<p><br>All values are given in the VDI 6007-1. </p>
+<p>Same Test Case exists in VDI 6020. </p>
+</html>"),  Icon(graphics));
 end TestCase6;

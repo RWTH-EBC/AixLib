@@ -64,21 +64,21 @@ equation
   connect(innerLoads.y[2], personsConvective.Q_flow) annotation(Line(points = {{-45, -58}, {2, -58}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(innerLoads.y[1], personsRadiative.Q_flow) annotation(Line(points = {{-45, -58}, {-26, -58}, {-26, -86}, {2, -86}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(personsRadiative.port, HeatTorStar.Therm) annotation(Line(points = {{22, -86}, {38.8, -86}}, color = {191, 0, 0}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(graphics), experiment(StopTime = 5.184e+006, Interval = 3600), experimentSetupOutput(events = false), Documentation(revisions = "<html>
- <ul>
-   <li><i>March, 2012&nbsp;</i>
-          by Moritz Lauster:<br>
-          Implemented</li>
- </ul>
- </html>", info = "<html>
- <p>Test Case 9 of the VDI6007:: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to mixed inner and outer heat sources for Type Room S:</p>
- <p>Based on Test Case 8</p>
- <ul>
- <li>longwave radiation heat exchange is taken into account</li>
- </ul>
- <p><br>Reference: Room air temperature</p>
- <p>Variable path: <code>reducedModel.airload.T</code></p>
- <p><br><br>All values are given in the VDI 6007-1.</p>
- <p>Same Test Case exists in VDI 6020.</p>
- </html>"));
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(graphics), experiment(StopTime = 5.184e+006, Interval = 3600), experimentSetupOutput(events = false), Documentation(revisions="<html>
+<ul>
+<li><i>March, 2012&nbsp;</i> by Moritz Lauster:<br>Implemented </li>
+<li><i>March 2015,&nbsp;</i> by Steffen Riebling:<br>Revised documentation. </li>
+</ul>
+</html>",  info="<html>
+<p>Test Case 9 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to mixed inner and outer heat sources for Type Room S </p>
+<p>Based on Test Case 8 </p>
+<ul>
+<li>longwave radiation heat exchange is taken into account </li>
+</ul>
+<p><br>Reference: Room air temperature </p>
+<p>Variable path: <code>reducedModel.airload.T</code> </p>
+<p><br>Maximum deviation: 0.2 K</p>
+<p><br>All values are given in the VDI 6007-1. </p>
+<p>Same Test Case exists in VDI 6020. </p>
+</html>"));
 end TestCase9;

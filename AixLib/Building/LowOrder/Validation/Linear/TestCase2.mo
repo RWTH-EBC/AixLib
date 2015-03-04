@@ -34,9 +34,12 @@ equation
 </ul>
 <p>Reference: Room air temperature </p>
 <p>Variable path: <code>reducedModel.airload.T</code> </p>
-<p><br><br>All values are given in the VDI 6007-1. </p>
+<p><br>Maximum deviation: 0.1 K</p><p><br>All values are given in the VDI 6007-1. </p>
 <p>Same Test Case exists in VDI 6020. </p>
-</html>",  revisions = "<html>
- <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
- </html>"));
+</html>",  revisions="<html>
+<ul>
+<li><i>February, 2014&nbsp;</i> by Peter Remmen:<br>Implemented </li>
+<li><i>March 2015,&nbsp;</i> by Steffen Riebling:<br>Revised documentation. </li>
+</ul>
+</html>"));
 end TestCase2;

@@ -53,20 +53,24 @@ equation
       points={{-7.3,-58},{10,-58}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation(Documentation(revisions = "<html>
- <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
- </html>", info = "<html>
- <p>Test Case 4 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to a radiant heat source for Type room L</p>
- <ul>
- <li>constant outdoor temperature</li>
- <li>no shortwave radiation on the outer wall</li>
- <li>no shortwave radiation through the window</li>
- <li>no longwave radiation exchange between outer wall, window and ambience</li>
- </ul>
- <p>Reference: Room air temperature</p>
- <p>Variable path: <code>reducedModel.airload.T</code></p>
- <p><br><br>All values are given in the VDI 6007-1.</p>
- <p>Same Test Case exists in VDI 6020.</p>
- </html>"), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
+  annotation(Documentation(revisions="<html>
+<ul>
+<li><i>February, 2014&nbsp;</i> by Peter Remmen:<br>Implemented </li>
+<li><i>March 2015,&nbsp;</i> by Steffen Riebling:<br>Revised documentation. </li>
+</ul>
+</html>",  info="<html>
+<p>Test Case 4 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to a radiant heat source for Type room L </p>
+<ul>
+<li>constant outdoor temperature 22 degC </li>
+<li>no shortwave radiation on the outer wall </li>
+<li>no shortwave radiation through the window </li>
+<li>no longwave radiation exchange between outer wall, window and ambience </li>
+</ul>
+<p>Reference: Room air temperature </p>
+<p>Variable path: <code>reducedModel.airload.T</code> </p>
+<p><br>Maximum deviation: 0.3 K</p>
+<p><br>All values are given in the VDI 6007-1. </p>
+<p>Same Test Case exists in VDI 6020. </p>
+</html>"),  Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
             -100},{100,100}}),                                                                          graphics), Icon(graphics), experiment(StopTime = 5.184e+006, Interval = 3600), __Dymola_experimentSetupOutput(events = false));
 end TestCase4;

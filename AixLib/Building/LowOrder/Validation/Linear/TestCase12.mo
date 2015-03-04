@@ -17,7 +17,16 @@ model TestCase12
   Building.LowOrder.BaseClasses.SolarRadWeightedSum rad_weighted_sum(n = 5, weightfactors = {0, 0, 7, 0, 0}) annotation(Placement(transformation(extent = {{4, 72}, {24, 92}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTemp annotation(Placement(transformation(extent={{0,28},{
             20,48}})));
-  Modelica.Blocks.Sources.CombiTimeTable ventitaltionRate(table = [0, 1.9048; 3600, 1.9048; 7200, 1.9048; 10800, 1.9048; 14400, 1.9048; 18000, 1.9048; 21600, 1.9048; 25200, 1.9048; 25200, 0.95238; 28800, 0.95238; 32400, 0.95238; 36000, 0.95238; 39600, 0.95238; 43200, 0.95238; 46800, 0.95238; 50400, 0.95238; 54000, 0.95238; 57600, 0.95238; 61200, 0.95238; 61200, 1.9048; 64800, 1.9048; 72000, 1.9048; 75600, 1.9048; 79200, 1.9048; 82800, 1.9048; 86400, 1.9048], columns = {2}, extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic) annotation(Placement(transformation(extent = {{-60, -16}, {-40, 4}})));
+  Modelica.Blocks.Sources.CombiTimeTable ventilationRate(
+    table=[0,1.9048; 3600,1.9048; 7200,1.9048; 10800,1.9048; 14400,1.9048;
+        18000,1.9048; 21600,1.9048; 25200,1.9048; 25200,0.95238; 28800,0.95238;
+        32400,0.95238; 36000,0.95238; 39600,0.95238; 43200,0.95238; 46800,
+        0.95238; 50400,0.95238; 54000,0.95238; 57600,0.95238; 61200,0.95238;
+        61200,1.9048; 64800,1.9048; 72000,1.9048; 75600,1.9048; 79200,1.9048;
+        82800,1.9048; 86400,1.9048],
+    columns={2},
+    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic)
+    annotation (Placement(transformation(extent={{-60,-16},{-40,4}})));
   Modelica.Blocks.Sources.CombiTimeTable reference(tableName = "UserProfilesOffice", fileName = "./Tables/J1615/UserProfilesOffice.txt", tableOnFile = false, columns = {2}, table = [3600, 21.5; 7200, 21.2; 10800, 21; 14400, 20.9; 18000, 21; 21600, 21.3; 25200, 21.9; 28800, 24.1; 32400, 24; 36000, 24.4; 39600, 24.8; 43200, 25.1; 46800, 25.4; 50400, 25.5; 54000, 25.7; 57600, 26.3; 61200, 26.3; 64800, 25.2; 68400, 25; 72000, 24.7; 75600, 24.3; 79200, 24; 82800, 23.8; 86400, 23.6; 781200, 29.1; 784800, 28.7; 788400, 28.5; 792000, 28.3; 795600, 28.3; 799200, 28.6; 802800, 29.1; 806400, 31.8; 810000, 31.7; 813600, 32; 817200, 32.3; 820800, 32.6; 824400, 32.8; 828000, 32.9; 831600, 33; 835200, 33.6; 838800, 33.5; 842400, 31.8; 846000, 31.5; 849600, 31.1; 853200, 30.7; 856800, 30.3; 860400, 30.1; 864000, 29.8; 5101200, 30.5; 5104800, 30; 5108400, 29.8; 5112000, 29.6; 5115600, 29.6; 5119200, 29.8; 5122800, 30.3; 5126400, 33.1; 5130000, 33; 5133600, 33.3; 5137200, 33.7; 5140800, 33.9; 5144400, 34.1; 5148000, 34.2; 5151600, 34.3; 5155200, 34.9; 5158800, 34.8; 5162400, 33; 5166000, 32.7; 5169600, 32.2; 5173200, 31.8; 5176800, 31.4; 5180400, 31.2; 5184000, 30.9], extrapolation = Modelica.Blocks.Types.Extrapolation.HoldLastPoint) annotation(Placement(transformation(extent = {{-96, -38}, {-76, -19}})));
   Utilities.HeatTransfer.HeatToStar HeatTorStar(A = 2) annotation(Placement(transformation(extent = {{48, -104}, {68, -84}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machinesConvective annotation(Placement(transformation(extent = {{12, -56}, {32, -36}})));
@@ -46,8 +55,7 @@ equation
   connect(innerLoads.y[2], personsConvective.Q_flow) annotation(Line(points = {{-35, -66}, {12, -66}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(innerLoads.y[1], personsRadiative.Q_flow) annotation(Line(points = {{-35, -66}, {-16, -66}, {-16, -94}, {12, -94}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(personsRadiative.port, HeatTorStar.Therm) annotation(Line(points = {{32, -94}, {48.8, -94}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(ventitaltionRate.y[1], reducedModel.ventilationRate) annotation (
-      Line(
+  connect(ventilationRate.y[1], reducedModel.ventilationRate) annotation (Line(
       points={{-39,-6},{64.2,-6},{64.2,34}},
       color={0,0,127},
       smooth=Smooth.None));
@@ -57,17 +65,21 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-            -100},{100,100}}),                                                                           graphics), experiment(StopTime = 5.184e+006, Interval = 3600), __Dymola_experimentSetupOutput(events = false), Icon(graphics), Documentation(revisions = "<html>
- <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
- </html>", info = "<html>
- <p>Test Case 12 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to mixed inner and outer heat sources for Type Room S:</p>
- <p>Based on Test Case 5</p>
- <ul>
- <li>fixed ventialation day and night</li>
- </ul>
- <p>Reference: Room air temperature</p>
- <p>Variable path: <code>reducedModel.airload.T</code></p>
- <p><br><br>All values are given in the VDI 6007-1.</p>
- <p>Same Test Case exists in VDI 6020.</p>
- </html>"));
+            -100},{100,100}}),                                                                           graphics), experiment(StopTime = 5.184e+006, Interval = 3600), __Dymola_experimentSetupOutput(events = false), Icon(graphics), Documentation(revisions="<html>
+<ul>
+<li><i>February, 2014&nbsp;</i> by Peter Remmen:<br>Implemented </li>
+<li><i>March 2015,&nbsp;</i> by Steffen Riebling:<br>Revised documentation. </li>
+</ul>
+</html>",  info="<html>
+<p>Test Case 12 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to mixed inner and outer heat sources for Type Room S</p>
+<p>Based on Test Case 5 </p>
+<ul>
+<li>fixed ventialation day and night </li>
+</ul>
+<p>Reference: Room air temperature </p>
+<p>Variable path: <code>reducedModel.airload.T</code> </p>
+<p><br>Maximum deviation: 0.2 K</p>
+<p><br>All values are given in the VDI 6007-1. </p>
+<p>Same Test Case exists in VDI 6020. </p>
+</html>"));
 end TestCase12;

@@ -50,20 +50,24 @@ equation
           -10},{56.2,-10},{56.2,40}},                                                                                        color = {0, 0, 127}, smooth = Smooth.None));
   connect(heatToStar.Star, reducedModel.internalGainsRad) annotation(Line(points={{59.1,
           -89},{72,-89},{72,40},{76.09,40}},                                                                                        color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), experiment(StopTime = 5.184e+006, Interval = 3600, Algorithm = "Lsodar"), __Dymola_experimentSetupOutput(events = false), Documentation(revisions = "<html>
- <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
- </html>", info = "<html>
- <p>Test Case 7 of the VDI6007: <a name=\"result_box\">L</a>oad calculation in compliance with the desired values of the indoor temperature and a setpoint for the type space S:</p>
- <p><br>This case is the same like case 6, but with a maximum heating/cooling power.</p>
- <ul>
- <li>constant outdoor temperature </li>
- <li>no shortwave radiation on the outer wall</li>
- <li>no shortwave radiation through the window</li>
- <li>no longwave radiation exchange between outer wall, window and ambience</li>
- </ul>
- <p>Reference: Heating/Cooling load</p>
- <p>Variable path: <code>sumHeatLoad.y</code></p>
- <p><br><br>All values are given in the VDI 6007-1.</p>
- <p>Same Test Case exists in VDI 6020.</p>
- </html>"), Icon(graphics));
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), experiment(StopTime = 5.184e+006, Interval = 3600, Algorithm = "Lsodar"), __Dymola_experimentSetupOutput(events = false), Documentation(revisions="<html>
+<ul>
+<li><i>February, 2014&nbsp;</i> by Peter Remmen:<br>Implemented </li>
+<li><i>March 2015,&nbsp;</i> by Steffen Riebling:<br>Revised documentation. </li>
+</ul>
+</html>",  info="<html>
+<p>Test Case 7 of the VDI6007: <a name=\"result_box\">L</a>oad calculation in compliance with the desired values of the indoor temperature and a setpoint for the type space S</p>
+<p><br>This case is the same like case 6, but with a maximum heating/cooling power. </p>
+<ul>
+<li>constant outdoor temperature 22 degC</li>
+<li>no shortwave radiation on the outer wall </li>
+<li>no shortwave radiation through the window </li>
+<li>no longwave radiation exchange between outer wall, window and ambience </li>
+</ul>
+<p>Reference: Heating/Cooling load </p>
+<p>Variable path: <code>sumHeatLoad.y</code> </p>
+<p><br>Maximum deviation: 12.05 W</p>
+<p><br>All values are given in the VDI 6007-1. </p>
+<p>Same Test Case exists in VDI 6020. </p>
+</html>"),  Icon(graphics));
 end TestCase7;

@@ -88,16 +88,20 @@ equation
       smooth=Smooth.None));
   connect(cooler.heatCoolRoom, reducedModel.heatConvInnerwall.port_b);
   annotation(experiment(StopTime = 5.184e+006, Interval = 3600), __Dymola_experimentSetupOutput(events = false), Icon(graphics), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-            -100},{100,100}}),                                                                                                    graphics), Documentation(revisions = "<html>
- <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
- </html>", info = "<html>
- <p>Test Case 11 of the VDI6007: <a name=\"result_box\">L</a>oad calculation in compliance with the desired values of the indoor temperature and a setpoint for the type space S:</p>
- <p>Based on Test Case 7</p>
- <ul>
- <li>implementation of a cooling ceeling (only cooling)</li>
- </ul>
- <p>Reference: Heating/Cooling load</p>
- <p>Variable path: <code>sumHeatLoad.y</code></p>
- <p><br><br>All values are given in the VDI 6007-1.</p>
- </html>"));
+            -100},{100,100}}),                                                                                                    graphics), Documentation(revisions="<html>
+<ul>
+<li><i>February, 2014&nbsp;</i> by Peter Remmen:<br>Implemented </li>
+<li><i>March 2015,&nbsp;</i> by Steffen Riebling:<br>Revised documentation. </li>
+</ul>
+</html>",  info="<html>
+<p>Test Case 11 of the VDI6007: <a name=\"result_box\">L</a>oad calculation in compliance with the desired values of the indoor temperature and a setpoint for the type space S </p>
+<p>Based on Test Case 7 </p>
+<ul>
+<li>implementation of a cooling ceeling (only cooling) </li>
+</ul>
+<p>Reference: Heating/Cooling load </p>
+<p>Variable path: <code>sumHeatLoad.y</code> </p>
+<p><br>Maximum deviation: 55.85 W</p>
+<p><br>All values are given in the VDI 6007-1. </p>
+</html>"));
 end TestCase11;

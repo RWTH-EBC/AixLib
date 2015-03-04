@@ -25,12 +25,12 @@ equation
   connect(infiltrationTemp.y, reducedModel.ventilationTemperature) annotation(Line(points = {{-35, -12}, {-18, -12}, {-18, 8.84}, {3.4, 8.84}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(infiltrationRate.y, reducedModel.ventilationRate) annotation(Line(points = {{7, -40}, {10.2, -40}, {10.2, 3.4}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(machinesConvective.port, reducedModel.internalGainsConv) annotation(Line(points = {{12, -76}, {20.4, -76}, {20.4, 3.4}}, color = {191, 0, 0}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), experiment(StopTime = 5.184e+006, Interval = 3600), experimentSetupOutput(events = false), Documentation(revisions = "<html>
- <p><ul>
- <li><i>March, 2012&nbsp;</i> by Moritz Lauster:<br/>Implemented</li>
- </ul></p>
- <p><br/><br/> </p>
- </html>", info="<html>
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), experiment(StopTime = 5.184e+006, Interval = 3600), experimentSetupOutput(events = false), Documentation(revisions="<html>
+<ul>
+<li><i>March, 2012&nbsp;</i> by Moritz Lauster:<br>Implemented </li>
+<li><i>March 2015,&nbsp;</i> by Steffen Riebling:<br>Revised documentation. </li>
+</ul>
+</html>",  info="<html>
 <p>Test Case 1 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to a convective heat source for Type room S </p>
 <ul>
 <li>constant outdoor temperature 22 degC </li>
@@ -40,7 +40,7 @@ equation
 </ul>
 <p>Reference: Room air temperature </p>
 <p>Variable path: <code>reducedModel.airload.T</code> </p>
-<p><br><br>All values are given in the VDI 6007-1. </p>
+<p><br>Maximum deviation: 0.1 K</p><p><br>All values are given in the VDI 6007-1. </p>
 <p>Same Test Case exists in VDI 6020. </p>
 </html>"));
 end TestCase1;
