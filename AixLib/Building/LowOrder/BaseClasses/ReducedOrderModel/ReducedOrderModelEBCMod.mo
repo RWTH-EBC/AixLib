@@ -2,7 +2,8 @@ within AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel;
 model ReducedOrderModelEBCMod
   import AixLib;
   extends
-    AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel.partialReducedOrderModel;
+    AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel.partialReducedOrderModel(
+      heatConvOuterwall(A=Ao - Aw));
 
    parameter Modelica.SIunits.ThermalResistance RWin=0.017727777777
     "Resistor Window"
@@ -27,7 +28,7 @@ public
                                                         withWindows
     annotation (Placement(transformation(extent={{-48,46},{-38,56}})));
   Utilities.HeatTransfer.HeatToStar heatToStarOuterwall(A=Ao - Aw, eps=epso) if withOuterwalls
-    annotation (Placement(transformation(extent={{-48,16},{-36,28}})));
+    annotation (Placement(transformation(extent={{-38,16},{-26,28}})));
   Utilities.HeatTransfer.HeatToStar heatToStarInnerwall(A=Ai, eps=epsi) if withInnerwalls
     annotation (Placement(transformation(extent={{52,16},{40,28}})));
   AixLib.Building.LowOrder.BaseClasses.ThermSplitter thermSplitterWin(dimension=
@@ -58,11 +59,6 @@ equation
       points={{-38,37},{-7,37},{-7,0}},
       color={191,0,0},
       smooth=Smooth.None));
-    connect(solarRadToHeatWindowRad.heatPort, thermSplitterWin.signalInput)
-      annotation (Line(
-        points={{-27,90},{-14,90}},
-        color={191,0,0},
-        smooth=Smooth.None));
   end if;
 
   if withInnerwalls then
@@ -76,7 +72,7 @@ equation
       pattern=LinePattern.None,
       smooth=Smooth.None));
   connect(heatToStarOuterwall.Star, heatToStarInnerwall.Star) annotation (Line(
-      points={{-36.54,22},{40.54,22}},
+      points={{-26.54,22},{40.54,22}},
       color={95,95,95},
       pattern=LinePattern.None,
       smooth=Smooth.None));
@@ -93,7 +89,7 @@ equation
   end if;
 
   connect(heatToStarOuterwall.Therm, outerwall.port_b) annotation (Line(
-      points={{-47.52,22},{-50,22},{-50,-0.909091}},
+      points={{-37.52,22},{-50,22},{-50,-0.909091}},
       color={191,0,0},
       smooth=Smooth.None));
 
@@ -111,6 +107,11 @@ equation
 
   connect(thermSplitterWin.signalOutput[1], outerwall.port_b) annotation (Line(
       points={{6,90},{6,30},{-50,30},{-50,-0.909091}},
+      color={191,0,0},
+      smooth=Smooth.None));
+  connect(solarRadToHeatRad.port, thermSplitterWin.signalInput) annotation (
+      Line(
+      points={{-26,90},{-14,90}},
       color={191,0,0},
       smooth=Smooth.None));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},

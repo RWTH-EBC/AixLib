@@ -40,21 +40,21 @@ model Case620
       annotation (Placement(transformation(extent={{90,22},{110,42}})));
     Modelica.Blocks.Interfaces.RealOutput PowerLoad "in kW"
       annotation (Placement(transformation(extent={{90,6},{110,26}})));
-    Utilities.Sensors.EEnergyMeter SolarMeter[6]
-     annotation (Placement(transformation(extent={{86,-86},{106,-66}})));
-    Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationN "in kWh/m2"
-      annotation (Placement(transformation(extent={{73,-14},{93,6}})));
-    Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationE "in kWh/m2"
-      annotation (Placement(transformation(extent={{95,-18},{115,2}})));
-    Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationW "in kWh/m2"
-      annotation (Placement(transformation(extent={{72,-31},{92,-11}})));
-    Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationS "in kWh/m2"
-      annotation (Placement(transformation(extent={{95,-34},{115,-14}})));
-    Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationHor "in kWh/m2"
-      annotation (Placement(transformation(extent={{73,-56},{93,-36}})));
-    Modelica.Blocks.Interfaces.RealOutput TransmittedSolarRadiation_room
-    "in kWh/m2"
-      annotation (Placement(transformation(extent={{73,-72},{99,-52}})));
+//     Utilities.Sensors.EEnergyMeter SolarMeter[6]
+//      annotation (Placement(transformation(extent={{86,-86},{106,-66}})));
+//     Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationN "in kWh/m2"
+//       annotation (Placement(transformation(extent={{73,-14},{93,6}})));
+//     Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationE "in kWh/m2"
+//       annotation (Placement(transformation(extent={{95,-18},{115,2}})));
+//     Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationW "in kWh/m2"
+//       annotation (Placement(transformation(extent={{72,-31},{92,-11}})));
+//     Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationS "in kWh/m2"
+//       annotation (Placement(transformation(extent={{95,-34},{115,-14}})));
+//     Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationHor "in kWh/m2"
+//       annotation (Placement(transformation(extent={{73,-56},{93,-36}})));
+//     Modelica.Blocks.Interfaces.RealOutput TransmittedSolarRadiation_room
+//     "in kWh/m2"
+//       annotation (Placement(transformation(extent={{73,-72},{99,-52}})));
   Modelica.Blocks.Sources.Constant AirExchangeRate(k=0.41)
     annotation (Placement(transformation(extent={{-40,-50},{-27,-37}})));
   Modelica.Blocks.Sources.Constant Source_InternalGains_convective(k=0.4*200)
@@ -80,19 +80,19 @@ model Case620
     InternalGains_radiative
     annotation (Placement(transformation(extent={{-92,-62},{-72,-42}})));
   AixLib.Building.LowOrder.BaseClasses.SolarRadWeightedSumReal
-                                  SolarRadWeightedSum(n=5, weightfactors={0.00,0.00,
-        12.00,0.00,0.00})
+                                  SolarRadWeightedSum(n=5, weightfactors={0.00,6.00,
+        0.00,6.00,0.00})
     annotation (Placement(transformation(extent={{-2,54},{18,74}})));
-  AixLib.Building.LowOrder.BaseClasses.EqAirTemp.EqAirTempEBCModReal
+  AixLib.Building.LowOrder.BaseClasses.EqAirTemp.EqAirTempEBCMod
                                         eqAirTemp(
     n=5,
     orientationswallshorizontal={90,90,90,90,0},
     wf_ground=0,
-    wf_win={0.000000000,0.000000000,1,0.000000000,0.000000000},
     wf_wall={0.232639073,0.174479305,0.103395145,0.174479305,0.315007171},
+    wf_win={0.000000000,0.5,0.000000000,0.5,0.000000000},
     T_ground=283.15)
     annotation (Placement(transformation(extent={{-19,24.5},{3,46.5}})));
-  AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel.ReducedOrderModelEBCModReal
+  AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel.ReducedOrderModelEBCMod
                                                         reducedOrderModel(
     withWindows=true,
     Aw=12,
@@ -115,8 +115,8 @@ model Case620
     alphaowi=2.23,
     alphaWin=3.16,
     RRest=0.019486743,
-    T0all=293.15,
-    rhoair=1.19)
+    rhoair=1.19,
+    T0all=293.15)
     annotation (Placement(transformation(extent={{13,10.5},{45,46.5}})));
   AixLib.Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_VDI6007
     corG_VDI6007_1(          n=5, Uw=3.0)
@@ -136,25 +136,25 @@ equation
     connect(Solar_Radiation.y[2], radOnTiltedSurf_Perez[i].solarInput2);
   end for;
 
-    //Connections for output solar model to meters
-    for i in 1:5 loop
-        SolarMeter[i].p = radOnTiltedSurf_Perez[i].OutTotalRadTilted.I;
-    end for;
-    //Transmitted radiation through window
-    SolarMeter[6].p = reducedOrderModel.solarRadToHeatRad.port.Q_flow;
+//     //Connections for output solar model to meters
+//     for i in 1:5 loop
+//         SolarMeter[i].p = radOnTiltedSurf_Perez[i].OutTotalRadTilted.I;
+//     end for;
+//     //Transmitted radiation through window
+//     SolarMeter[6].p = reducedOrderModel.solarRadToHeatRad.port.Q_flow;
 
     // Set outputs
     AnnualHeatingLoad = idealHeaterCooler.heatMeter.q_kwh/1000; //in MWh
     AnnualCoolingLoad = idealHeaterCooler.coolMeter.q_kwh/1000;  // in MWh
 
-    //solar radiation
-    IncidentSolarRadiationN = SolarMeter[1].q_kwh;
-    IncidentSolarRadiationE = SolarMeter[2].q_kwh;
-    IncidentSolarRadiationS = SolarMeter[3].q_kwh;
-    IncidentSolarRadiationW = SolarMeter[4].q_kwh;
-    IncidentSolarRadiationHor = SolarMeter[5].q_kwh;
-
-    TransmittedSolarRadiation_room = SolarMeter[6].q_kwh / reducedOrderModel.Aw;
+//     //solar radiation
+//     IncidentSolarRadiationN = SolarMeter[1].q_kwh;
+//     IncidentSolarRadiationE = SolarMeter[2].q_kwh;
+//     IncidentSolarRadiationS = SolarMeter[3].q_kwh;
+//     IncidentSolarRadiationW = SolarMeter[4].q_kwh;
+//     IncidentSolarRadiationHor = SolarMeter[5].q_kwh;
+//
+//     TransmittedSolarRadiation_room = SolarMeter[6].q_kwh / reducedOrderModel.Aw;
 
     PowerLoad = idealHeaterCooler.heatMeter.p + idealHeaterCooler.coolMeter.p;
 

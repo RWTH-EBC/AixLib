@@ -1,5 +1,5 @@
 within AixLib.Building.LowOrder.Examples.Validation.ASHRAE140;
-model Case600
+model Case640
   import AixLib;
   extends Modelica.Icons.Example;
   Components.Weather.BaseClasses.Sun_new sun(
@@ -39,22 +39,22 @@ model Case600
     Modelica.Blocks.Interfaces.RealOutput AnnualCoolingLoad "in kWh"
       annotation (Placement(transformation(extent={{90,22},{110,42}})));
     Modelica.Blocks.Interfaces.RealOutput PowerLoad "in kW"
-      annotation (Placement(transformation(extent={{90,6},{110,26}})));
-    Utilities.Sensors.EEnergyMeter SolarMeter[6]
-     annotation (Placement(transformation(extent={{86,-86},{106,-66}})));
-    Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationN "in kWh/m2"
-      annotation (Placement(transformation(extent={{73,-14},{93,6}})));
-    Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationE "in kWh/m2"
-      annotation (Placement(transformation(extent={{95,-18},{115,2}})));
-    Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationW "in kWh/m2"
-      annotation (Placement(transformation(extent={{72,-31},{92,-11}})));
-    Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationS "in kWh/m2"
-      annotation (Placement(transformation(extent={{95,-34},{115,-14}})));
-    Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationHor "in kWh/m2"
-      annotation (Placement(transformation(extent={{73,-56},{93,-36}})));
-    Modelica.Blocks.Interfaces.RealOutput TransmittedSolarRadiation_room
-    "in kWh/m2"
-      annotation (Placement(transformation(extent={{73,-72},{99,-52}})));
+       annotation (Placement(transformation(extent={{90,6},{110,26}})));
+//     Utilities.Sensors.EEnergyMeter SolarMeter[6]
+//      annotation (Placement(transformation(extent={{86,-86},{106,-66}})));
+//     Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationN "in kWh/m2"
+//       annotation (Placement(transformation(extent={{73,-14},{93,6}})));
+//     Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationE "in kWh/m2"
+//       annotation (Placement(transformation(extent={{95,-18},{115,2}})));
+//     Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationW "in kWh/m2"
+//       annotation (Placement(transformation(extent={{72,-31},{92,-11}})));
+//     Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationS "in kWh/m2"
+//       annotation (Placement(transformation(extent={{95,-34},{115,-14}})));
+//     Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationHor "in kWh/m2"
+//       annotation (Placement(transformation(extent={{73,-56},{93,-36}})));
+//     Modelica.Blocks.Interfaces.RealOutput TransmittedSolarRadiation_room
+//     "in kWh/m2"
+//       annotation (Placement(transformation(extent={{73,-72},{99,-52}})));
   Modelica.Blocks.Sources.Constant AirExchangeRate(k=0.41)
     annotation (Placement(transformation(extent={{-40,-50},{-27,-37}})));
   Modelica.Blocks.Sources.Constant Source_InternalGains_convective(k=0.4*200)
@@ -63,8 +63,6 @@ model Case600
     annotation (Placement(transformation(extent={{-112,-58},{-100,-46}})));
   Modelica.Blocks.Sources.Constant Source_TsetC(k=273.15 + 27)
     annotation (Placement(transformation(extent={{-10,-50},{3,-37}})));
-  Modelica.Blocks.Sources.Constant Source_TsetH(k=273.15 + 20)
-    annotation (Placement(transformation(extent={{40,-50},{27,-37}})));
   AixLib.HVAC.HeatGeneration.IdealHeaterCooler            idealHeaterCooler(
     TN_heater=1,
     TN_cooler=1,
@@ -125,8 +123,14 @@ model Case600
     annotation (Placement(transformation(extent={{-24,69},{-11,82}})));
   AixLib.Building.LowOrder.BaseClasses.SolarRadAdapter solarRadAdapter[5]
     annotation (Placement(transformation(extent={{-45,31.5},{-25,51.5}})));
-equation
+  Modelica.Blocks.Sources.CombiTimeTable Source_TsetHeat(
+    tableOnFile=true,
+    fileName="D:/GIT/AixLib/AixLib/Resources/LowOrder_ExampleData/HeatSetpointASHRAE_LOM.mat",
+    tableName="heat_setpoint",
+    columns={2})
+    annotation (Placement(transformation(extent={{39,-50},{26,-37}})));
 
+equation
     //Connections for input solar model
   for i in 1:5 loop
     connect(sun.OutDayAngleSun, radOnTiltedSurf_Perez[i].InDayAngleSun);
@@ -136,34 +140,30 @@ equation
     connect(Solar_Radiation.y[2], radOnTiltedSurf_Perez[i].solarInput2);
   end for;
 
-    //Connections for output solar model to meters
-    for i in 1:5 loop
-        SolarMeter[i].p = radOnTiltedSurf_Perez[i].OutTotalRadTilted.I;
-    end for;
-    //Transmitted radiation through window
-    SolarMeter[6].p = reducedOrderModel.solarRadToHeatRad.port.Q_flow;
-
-    // Set outputs
-    AnnualHeatingLoad = idealHeaterCooler.heatMeter.q_kwh/1000; //in MWh
-    AnnualCoolingLoad = idealHeaterCooler.coolMeter.q_kwh/1000;  // in MWh
-
-    //solar radiation
-    IncidentSolarRadiationN = SolarMeter[1].q_kwh;
-    IncidentSolarRadiationE = SolarMeter[2].q_kwh;
-    IncidentSolarRadiationS = SolarMeter[3].q_kwh;
-    IncidentSolarRadiationW = SolarMeter[4].q_kwh;
-    IncidentSolarRadiationHor = SolarMeter[5].q_kwh;
-
-    TransmittedSolarRadiation_room = SolarMeter[6].q_kwh / reducedOrderModel.Aw;
+//     //Connections for output solar model to meters
+//     for i in 1:5 loop
+//         SolarMeter[i].p = radOnTiltedSurf_Perez[i].OutTotalRadTilted.I;
+//     end for;
+//     //Transmitted radiation through window
+//     SolarMeter[6].p = reducedOrderModel.solarRadToHeatRad.port.Q_flow;
+//
+     // Set outputs
+     AnnualHeatingLoad = idealHeaterCooler.heatMeter.q_kwh/1000; //in MWh
+     AnnualCoolingLoad = idealHeaterCooler.coolMeter.q_kwh/1000;  // in MWh
+//
+//     //solar radiation
+//     IncidentSolarRadiationN = SolarMeter[1].q_kwh;
+//     IncidentSolarRadiationE = SolarMeter[2].q_kwh;
+//     IncidentSolarRadiationS = SolarMeter[3].q_kwh;
+//     IncidentSolarRadiationW = SolarMeter[4].q_kwh;
+//     IncidentSolarRadiationHor = SolarMeter[5].q_kwh;
+//
+//     TransmittedSolarRadiation_room = SolarMeter[6].q_kwh / reducedOrderModel.Aw;
 
     PowerLoad = idealHeaterCooler.heatMeter.p + idealHeaterCooler.coolMeter.p;
 
   connect(Source_TsetC.y,idealHeaterCooler. soll_cool)       annotation (Line(
       points={{3.65,-43.5},{11.2,-43.5},{11.2,-28.8}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  connect(Source_TsetH.y,idealHeaterCooler. soll_heat)       annotation (Line(
-      points={{26.35,-43.5},{19,-43.5},{19,-28.8}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(Source_InternalGains_convective.y, InternalGains_convective.Q_flow)
@@ -246,6 +246,10 @@ equation
       points={{17,64},{21,64},{21,45.42},{21.64,45.42}},
       color={0,0,127},
       smooth=Smooth.None));
+  connect(Source_TsetHeat.y[1], idealHeaterCooler.soll_heat) annotation (Line(
+      points={{25.35,-43.5},{19,-43.5},{19,-28.8}},
+      color={0,0,127},
+      smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(
         extent={{-150,-100},{120,90}},
         preserveAspectRatio=false,
@@ -322,4 +326,4 @@ equation
         grid={1,1})),
     experiment(StopTime=3.1536e+007, Interval=3600),
     __Dymola_experimentSetupOutput);
-end Case600;
+end Case640;

@@ -5,16 +5,16 @@ model SolarRadAdapter "scalar radiant input * factor x"
   Modelica.Blocks.Interfaces.RealOutput
                                     solarRad_out annotation(Placement(transformation(extent={{90,-10},
             {110,10}})));
-  Real dummy[4];
+  //Real dummy[4];
 equation
   solarRad_out = solarRad_in.I * x;
 
   //Nothing happens to other components
 
-  dummy[1] = sum(solarRad_in.I_dir);
-  dummy[2] = sum(solarRad_in.I_diff);
-  dummy[3] = sum(solarRad_in.I_gr);
-  dummy[4] = sum(solarRad_in.AOI);
+//   dummy[1] = sum(solarRad_in.I_dir);
+//   dummy[2] = sum(solarRad_in.I_diff);
+//   dummy[3] = sum(solarRad_in.I_gr);
+//   dummy[4] = sum(solarRad_in.AOI);
 
   annotation(Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
