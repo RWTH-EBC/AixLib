@@ -53,8 +53,11 @@ model ThermalZonePhysics "All sub-models of VDI 6007 connected to one model"
   parameter Modelica.SIunits.Density rhoair = 1.19 "Density of the air" annotation(Dialog(tab = "Room air"));
   parameter Modelica.SIunits.SpecificHeatCapacity cair = 1007
     "Heat capacity of the air"                                                           annotation(Dialog(tab = "Room air"));
-  SolarRadWeightedSum solRadWeightedSum(n = n, weightfactors = Aw) if withWindows and withOuterwalls annotation(Placement(transformation(extent = {{0, 56}, {28, 86}})));
-  Components.Weather.Sunblind sunblind(Imax = Imax, n = n, gsunblind = gsunblind) if withWindows and withOuterwalls annotation(Placement(transformation(extent = {{-26, 62}, {-6, 82}})));
+  SolarRadWeightedSumReal
+                      solRadWeightedSum(n = n, weightfactors = Aw) if withWindows and withOuterwalls annotation(Placement(transformation(extent={{4,56},{
+            32,86}})));
+  Components.Weather.Sunblind sunblind(Imax = Imax, n = n, gsunblind = gsunblind) if withWindows and withOuterwalls annotation(Placement(transformation(extent={{-50,59},
+            {-30,79}})));
   Utilities.Interfaces.SolarRad_in solarRad_in[n] if withOuterwalls annotation(Placement(transformation(extent = {{-100, 60}, {-80, 80}}), iconTransformation(extent = {{-94, 50}, {-60, 80}})));
   Modelica.Blocks.Interfaces.RealInput weather[3] if withOuterwalls
     "[1]: Air temperature<br>[2]: Horizontal radiation of sky<br>[3]: Horizontal radiation of earth"
@@ -96,15 +99,20 @@ model ThermalZonePhysics "All sub-models of VDI 6007 connected to one model"
     splitfac=splitfac)
     annotation (Placement(transformation(extent={{18,-10},{76,46}})));
   Modelica.Blocks.Interfaces.RealInput ventilationTemperature annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 0, origin = {-100, -50}), iconTransformation(extent = {{-15, -15}, {15, 15}}, rotation = 0, origin = {-76, -40})));
+  SolarRadAdapter solarRadAdapter[n]
+    annotation (Placement(transformation(extent={{-74,28},{-54,48}})));
+
+  replaceable Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG
+    partialCorG(n=n) constrainedby
+    Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
+    annotation (Placement(transformation(extent={{-24,60},{-4,80}})));
 equation
   if withWindows and withOuterwalls then
-    connect(sunblind.sunblindonoff, eqAirTemp.sunblindsig) annotation(Line(points = {{-16, 63}, {-26, 63}, {-26, 18}, {-36, 18}}, color = {0, 0, 127}, smooth = Smooth.None));
-    connect(solRadWeightedSum.solarRad_out, reducedOrderModel.solarRad_in) annotation(Line(points={{26.6,71},
-            {26.6,52.25},{35.4,52.25},{35.4,44.6}},                                                                                                    color = {255, 128, 0}, smooth = Smooth.None));
+    connect(sunblind.sunblindonoff, eqAirTemp.sunblindsig) annotation(Line(points={{-40,60},
+            {-36,60},{-36,18}},                                                                                                   color = {0, 0, 127}, smooth = Smooth.None));
   end if;
   if withOuterwalls then
     connect(weather, eqAirTemp.weatherData) annotation(Line(points = {{-100, 10}, {-44, 10}}, color = {0, 0, 127}, smooth = Smooth.None));
-    connect(solarRad_in, eqAirTemp.solarRad_in) annotation(Line(points = {{-90, 70}, {-68, 70}, {-68, 15.6}, {-44.5, 15.6}}, color = {255, 128, 0}, smooth = Smooth.None));
     connect(eqAirTemp.equalAirTemp, reducedOrderModel.equalAirTemp) annotation(Line(points={{-26.2,
             4.4},{-2,4.4},{-2,19.12},{23.8,19.12}},                                                                                             color = {191, 0, 0}, smooth = Smooth.None));
   end if;
@@ -115,9 +123,31 @@ equation
   connect(ventilationRate, reducedOrderModel.ventilationRate) annotation(Line(points={{-28,-90},
           {4,-90},{4,-7.2},{35.98,-7.2}},                                                                                               color = {0, 0, 127}, smooth = Smooth.None));
   connect(ventilationTemperature, reducedOrderModel.ventilationTemperature) annotation(Line(points = {{-100, -50}, {-12, -50}, {-12, 4.56}, {23.8, 4.56}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(sunblind.Rad_Out, solRadWeightedSum.solarRad_in) annotation(Line(points = {{-7, 73}, {-2.5, 73}, {-2.5, 71}, {1.4, 71}}, color = {255, 128, 0}, smooth = Smooth.None));
-  connect(solarRad_in, sunblind.Rad_In) annotation(Line(points = {{-90, 70}, {-58, 70}, {-58, 73}, {-25, 73}}, color = {255, 128, 0}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(
+  connect(solarRad_in, sunblind.Rad_In) annotation(Line(points={{-90,70},{-49,70}},                            color = {255, 128, 0}, smooth = Smooth.None));
+  connect(solRadWeightedSum.solarRad_out, reducedOrderModel.u1) annotation (
+      Line(
+      points={{30.6,71},{33.66,71},{33.66,44.32}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(solarRadAdapter.solarRad_in, solarRad_in) annotation (Line(
+      points={{-73,38},{-76,38},{-76,70},{-90,70}},
+      color={255,128,0},
+      smooth=Smooth.None));
+  connect(solarRadAdapter.solarRad_out, eqAirTemp.solarRad_in) annotation (Line(
+      points={{-54,38},{-50,38},{-50,15.6},{-44.5,15.6}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(sunblind.Rad_Out, partialCorG.SR_input) annotation (Line(
+      points={{-31,70},{-28,70},{-28,69.9},{-23.8,69.9}},
+      color={255,128,0},
+      smooth=Smooth.None));
+  connect(partialCorG.solarRadWinTrans, solRadWeightedSum.solarRad_in)
+    annotation (Line(
+      points={{-5,70},{0,70},{0,71},{5.4,71}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
+            -100},{100,100}}),                                                                           graphics), Icon(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}}),                                                                                                    graphics={  Rectangle(extent={{
               -60,64},{98,-58}},                                                                                                    lineColor=

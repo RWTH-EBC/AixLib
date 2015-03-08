@@ -20,7 +20,13 @@ equation
       Rad_Out[i].I = Rad_In[i].I;
       sunblindonoff[i] = 0;
     end if;
+    //Dummy equation
+    Rad_Out[i].I_dir = sum(Rad_In.I_dir);
+    Rad_Out[i].I_diff = sum(Rad_In.I_diff);
+    Rad_Out[i].I_gr = sum(Rad_In.I_gr);
+    Rad_Out[i].AOI = sum(Rad_In.AOI);
   end for;
+
   annotation(Diagram(graphics), Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}}),
                                      graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor=
