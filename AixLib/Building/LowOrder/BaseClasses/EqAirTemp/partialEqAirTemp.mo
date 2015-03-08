@@ -63,7 +63,7 @@ equation
   if (abs(E_sky+E_earth)<0.1) then
     alpharad=5.0;
   else
-    alpharad=(E_sky+E_earth)/(T_sky-T_earth);
+    alpharad=(E_sky+(E_earth/0.93))/(T_sky-T_earth);
   end if;
 
 annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
