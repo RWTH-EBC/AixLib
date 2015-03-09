@@ -7,10 +7,11 @@ model TestCase3
   Modelica.Blocks.Sources.Constant infiltrationTemp(k = 22) annotation(Placement(transformation(extent = {{-44, -8}, {-24, 12}})));
   Modelica.Blocks.Sources.Constant infiltrationRate(k = 0) annotation(Placement(transformation(extent = {{-4, -40}, {16, -20}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machinesConvective annotation(Placement(transformation(extent = {{4, -68}, {24, -48}})));
-  BaseClasses.ReducedOrderModel.ReducedOrderModelVDI                reducedModel(Ao = 10.5, Aw = 0.000000001, Ai = 75.5, epsi = 1, epso = 1, epsw = 1, g = 1, alphaiwi = 2.2, alphaowi = 2.7, splitfac = 0.09, withWindows = false,                     R1i = 0.003237138, C1i = 7.297100e+006,
+  BaseClasses.ReducedOrderModel.ReducedOrderModelVDI                reducedModel(Ao = 10.5, Aw = 0.000000001, Ai = 75.5, epsi = 1, epso = 1, epsw = 1, g = 1,                 alphaowi = 2.7, splitfac = 0.09, withWindows = false,                     R1i = 0.003237138, C1i = 7.297100e+006,
     RRest=0.043140385,
     R1o=0.004049352,
-    C1o=4.79e+004)                                                                                                     annotation(Placement(transformation(extent = {{12, 10}, {46, 44}})));
+    C1o=4.79e+004,
+    alphaiwi=2.23642384)                                                                                               annotation(Placement(transformation(extent = {{12, 10}, {46, 44}})));
   Modelica.Blocks.Sources.CombiTimeTable tableMachines(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableName = "UserProfilesOffice", fileName = "./Tables/J1615/UserProfilesOffice.txt", tableOnFile = false,                                                                                                    columns = {2},
     table=[0,0; 3600,0; 3600,0; 7200,0; 7200,0; 10800,0; 10800,0; 14400,0;
         14400,0; 18000,0; 18000,0; 21600,0; 21600,1000; 25200,1000; 25200,1000;
@@ -30,8 +31,8 @@ equation
   connect(machinesConvective.port, reducedModel.internalGainsConv) annotation(Line(points = {{24, -58}, {32.4, -58}, {32.4, 13.4}}, color = {191, 0, 0}, smooth = Smooth.None));
   annotation(Documentation(revisions="<html>
 <ul>
-<li><i>February, 2014&nbsp;</i> by Peter Remmen:<br>Implemented </li>
 <li><i>March 2015,&nbsp;</i> by Steffen Riebling:<br>Revised documentation. </li>
+<li><i>February, 2014&nbsp;</i> by Peter Remmen:<br>Implemented </li>
 </ul>
 </html>",  info="<html>
 <p>Test Case 3 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to a convective heat source for Type room L </p>

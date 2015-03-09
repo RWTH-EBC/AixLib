@@ -26,12 +26,10 @@ equation
 <h4>Typical use and important parameters</h4>
 <p>You can use this component to weight a radiant input and sum it up to one scalar output, e.g. weight the radiance of the sun of n directions with the areas of windows in n directions and sum it up to one scalar radiance on a non-directional window </p>
 </html>",  revisions="<html>
- <p><ul>
- <li><i>January 2012,&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
- </ul></p>
- <p><ul>
- <li><i>December 2014,&nbsp;</i> by Steffen Riebling:<br/>Revised documentation.</li>
- </ul></p>
- </html>"));
+<ul>
+<li><i>December 2014,&nbsp;</i> by Steffen Riebling:<br>Revised documentation. </li>
+<li><i>January 2012,&nbsp;</i> by Moritz Lauster:<br>Implemented. </li>
+</ul>
+</html>"));
 end SolarRadWeightedSum;
 

@@ -164,12 +164,10 @@ equation
 <h4>Example Results</h4>
 <p>See <a href=\"AixLib.Building.LowOrder.Validation\">Validation</a> for some results. </p>
 </html>",  revisions="<html>
- <p><ul>
- <li><i>January 2012,&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
- </ul></p>
- <p><ul>
- <li><i>December 2014,&nbsp;</i> by Steffen Riebling:<br/>Revised documentation.</li>
- </ul></p>
- </html>"));
+<ul>
+<li><i>December 2014,&nbsp;</i> by Steffen Riebling:<br>Revised documentation. </li>
+<li><i>January 2012,&nbsp;</i> by Moritz Lauster:<br>Implemented. </li>
+</ul>
+</html>"));
 end ThermalZonePhysics;
 

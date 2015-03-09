@@ -10,12 +10,13 @@ model TestCase7
   Modelica.Blocks.Sources.CombiTimeTable innerLoads(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableOnFile = false, table = [0, 0, 0; 3600, 0, 0; 7200, 0, 0; 10800, 0, 0; 14400, 0, 0; 18000, 0, 0; 21600, 0, 0; 25200, 0, 1000; 28800, 0, 1000; 32400, 0, 1000; 36000, 0, 1000; 39600, 0, 1000; 43200, 0, 1000; 46800, 0, 1000; 50400, 0, 1000; 54000, 0, 1000; 57600, 0, 1000; 61200, 0, 1000; 64800, 0, 1000; 68400, 0, 0; 72000, 0, 0; 75600, 0, 0; 79200, 0, 0; 82800, 0, 0; 86400, 0, 0]) annotation(Placement(transformation(extent = {{-46, -99}, {-26, -79}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature outdoorTemp(T = 295.15) annotation(Placement(transformation(extent = {{-24, 49}, {-4, 69}})));
   BaseClasses.ReducedOrderModel.ReducedOrderModelVDI
-                                                  reducedModel(                    Aw = 7, g = 0.15,                     alphaiwi = 2.2, epsi = 1, epso = 1, T0all(displayUnit = "K") = 295.15, withWindows = false, R1i = 0.000595515, Ai = 75.5,                                         Ao = 10.5,
+                                                  reducedModel(                    Aw = 7, g = 0.15,                                     epsi = 1, epso = 1, T0all(displayUnit = "K") = 295.15, withWindows = false, R1i = 0.000595515, Ai = 75.5,                                         Ao = 10.5,
     C1i=1.48362e+007,
     RRest=0.042768721,
     R1o=0.004367913,
     C1o=1.6008e+006,
-    Vair=0.01)                                                                                                     annotation(Placement(transformation(extent={{46,36},
+    Vair=0.01,
+    alphaiwi=2.23642384)                                                                                           annotation(Placement(transformation(extent={{46,36},
             {80,76}})));
   Utilities.Sources.HeaterCooler.IdealHeaterCoolerVar1 idealHeaterCoolerVar1_1(Q_flow_heat = 1, Q_flow_cooler = 1, h_cooler = 0,                TN_cooler = 1, h_heater = 500, l_cooler = -500,                   KR_cooler = 1000,
     TN_heater=0.1,
@@ -52,8 +53,8 @@ equation
           -89},{72,-89},{72,40},{76.09,40}},                                                                                        color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), experiment(StopTime = 5.184e+006, Interval = 3600, Algorithm = "Lsodar"), __Dymola_experimentSetupOutput(events = false), Documentation(revisions="<html>
 <ul>
-<li><i>February, 2014&nbsp;</i> by Peter Remmen:<br>Implemented </li>
 <li><i>March 2015,&nbsp;</i> by Steffen Riebling:<br>Revised documentation. </li>
+<li><i>February, 2014&nbsp;</i> by Peter Remmen:<br>Implemented </li>
 </ul>
 </html>",  info="<html>
 <p>Test Case 7 of the VDI6007: <a name=\"result_box\">L</a>oad calculation in compliance with the desired values of the indoor temperature and a setpoint for the type space S</p>

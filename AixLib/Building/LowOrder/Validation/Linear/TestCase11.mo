@@ -10,12 +10,13 @@ model TestCase11
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machinesRadiative annotation(Placement(transformation(extent = {{4, -94}, {30, -72}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature outdoorTemp(T = 295.15) annotation(Placement(transformation(extent = {{-14, 47}, {6, 67}})));
   BaseClasses.ReducedOrderModel.ReducedOrderModelVDI
-                                                 reducedModel(                    Aw = 7, g = 0.15,                     epsi = 1, epso = 1, T0all(displayUnit = "K") = 295.15,                           withWindows = false, R1i = 0.000595515, Ai = 75.5,                                         Ao = 10.5, alphaiwi = 3,
+                                                 reducedModel(                    Aw = 7, g = 0.15,                     epsi = 1, epso = 1, T0all(displayUnit = "K") = 295.15,                           withWindows = false, R1i = 0.000595515, Ai = 75.5,                                         Ao = 10.5,
     C1i=1.48362e+007,
     RRest=0.042768721,
     R1o=0.004367913,
     C1o=1.6008e+006,
-    Vair=0.01)                                                                                                     annotation(Placement(transformation(extent = {{64, 36}, {98, 76}})));
+    Vair=0.01,
+    alphaiwi=3.0013245)                                                                                            annotation(Placement(transformation(extent = {{64, 36}, {98, 76}})));
   Utilities.Sources.HeaterCooler.IdealHeaterCoolerVar1 heater(Q_flow_heat = 1, Q_flow_cooler = 1, h_cooler = 0,                   KR_cooler = 1000,                TN_cooler = 1, h_heater = 500, l_cooler = -500, Cooler_on = false,
     TN_heater=0.1,
     KR_heater=10)                                                                                                     annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin = {-26, -20})));
@@ -90,8 +91,8 @@ equation
   annotation(experiment(StopTime = 5.184e+006, Interval = 3600), __Dymola_experimentSetupOutput(events = false), Icon(graphics), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
             -100},{100,100}}),                                                                                                    graphics), Documentation(revisions="<html>
 <ul>
-<li><i>February, 2014&nbsp;</i> by Peter Remmen:<br>Implemented </li>
 <li><i>March 2015,&nbsp;</i> by Steffen Riebling:<br>Revised documentation. </li>
+<li><i>February, 2014&nbsp;</i> by Peter Remmen:<br>Implemented </li>
 </ul>
 </html>",  info="<html>
 <p>Test Case 11 of the VDI6007: <a name=\"result_box\">L</a>oad calculation in compliance with the desired values of the indoor temperature and a setpoint for the type space S </p>

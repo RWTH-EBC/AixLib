@@ -96,14 +96,10 @@ equation
 <h4>Example Results</h4>
 <p>See <a href=\"Examples\">Examples</a> for some results. </p>
 </html>",  revisions="<html>
- <ul>
-   <li><i>March, 2012&nbsp;</i>
-          by Moritz Lauster:<br>
-          Implemented</li>
- </ul>
- <p><ul>
- <li><i>December 2014,&nbsp;</i> by Steffen Riebling:<br/>Revised documentation.</li>
- </ul></p>
- </html>"));
+<ul>
+<li><i>December 2014,&nbsp;</i> by Steffen Riebling:<br>Revised documentation. </li>
+<li><i>March, 2012&nbsp;</i> by Moritz Lauster:<br>Implemented </li>
+</ul>
+</html>"));
 end ThermalZone;
 

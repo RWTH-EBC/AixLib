@@ -33,12 +33,12 @@ model TestCase10
     R1o=0.001719315,
     C1o=4.33875e+06,
     Ao=28,
-    alphaiwi=2.4,
-    alphaowi=2.1,
     epsi=1,
     epso=1,
     g=1,
-    T0all=290.75)
+    T0all=290.75,
+    alphaiwi=2.39827586,
+    alphaowi=2.075)
     annotation (Placement(transformation(extent={{52,42},{100,92}})));
   Modelica.Blocks.Sources.CombiTimeTable reference(tableName = "UserProfilesOffice", fileName = "./Tables/J1615/UserProfilesOffice.txt", tableOnFile = false, columns = {2}, table = [3600, 17.6; 7200, 17.6; 10800, 17.5; 14400, 17.5; 18000, 17.6; 21600, 17.8; 25200, 18; 28800, 20; 32400, 19.7; 36000, 20; 39600, 20.3; 43200, 20.5; 46800, 20.6; 50400, 20.7; 54000, 20.8; 57600, 21.5; 61200, 21.4; 64800, 19.8; 68400, 19.7; 72000, 19.6; 75600, 19.6; 79200, 19.5; 82800, 19.5; 86400, 19.5; 781200, 24.7; 784800, 24.6; 788400, 24.5; 792000, 24.4; 795600, 24.4; 799200, 24.5; 802800, 24.6; 806400, 26.6; 810000, 26.2; 813600, 26.4; 817200, 26.6; 820800, 26.8; 824400, 26.9; 828000, 26.9; 831600, 26.9; 835200, 27.5; 838800, 27.4; 842400, 25.7; 846000, 25.5; 849600, 25.3; 853200, 25.3; 856800, 25.2; 860400, 25.1; 864000, 25; 5101200, 25.5; 5104800, 25.3; 5108400, 25.2; 5112000, 25.1; 5115600, 25.1; 5119200, 25.2; 5122800, 25.3; 5126400, 27.3; 5130000, 26.9; 5133600, 27.1; 5137200, 27.3; 5140800, 27.4; 5144400, 27.5; 5148000, 27.5; 5151600, 27.5; 5155200, 28.1; 5158800, 28; 5162400, 26.3; 5166000, 26.1; 5169600, 26; 5173200, 25.9; 5176800, 25.8; 5180400, 25.7; 5184000, 25.6], extrapolation = Modelica.Blocks.Types.Extrapolation.HoldLastPoint) annotation(Placement(transformation(extent = {{-98, -26}, {-78, -7}})));
   Utilities.HeatTransfer.HeatToStar HeatTorStar(A = 2) annotation(Placement(transformation(extent = {{56, -100}, {76, -80}})));
@@ -93,8 +93,8 @@ equation
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
             -100},{100,100}}),                                                                           graphics), experiment(StopTime = 5.184e+006, Interval = 3600), __Dymola_experimentSetupOutput(events = false), Icon(graphics), Documentation(revisions="<html>
 <ul>
-<li><i>February, 2014&nbsp;</i> by Peter Remmen:<br>Implemented </li>
 <li><i>March 2015,&nbsp;</i> by Steffen Riebling:<br>Revised documentation. </li>
+<li><i>February, 2014&nbsp;</i> by Peter Remmen:<br>Implemented </li>
 </ul>
 </html>",  info="<html>
 <p>Test Case 10 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to mixed inner and outer heat sources for Type Room S</p>

@@ -7,10 +7,11 @@ model TestCase4
   Modelica.Blocks.Sources.Constant infiltrationTemp(k = 22) annotation(Placement(transformation(extent = {{-46, -10}, {-26, 10}})));
   Modelica.Blocks.Sources.Constant infiltrationRate(k = 0) annotation(Placement(transformation(extent = {{-6, -40}, {14, -20}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machinesRadiative annotation(Placement(transformation(extent = {{10, -68}, {30, -48}})));
-  BaseClasses.ReducedOrderModel.ReducedOrderModelVDI                reducedModel(Ao = 10.5, Aw = 0.000000001, Ai = 75.5, epsi = 1, epso = 1, epsw = 1, g = 1, alphaiwi = 2.2, alphaowi = 2.7, splitfac = 0.09, withWindows = false,                                                             R1i = 0.003237138, C1i = 7.297100e+006,
+  BaseClasses.ReducedOrderModel.ReducedOrderModelVDI                reducedModel(Ao = 10.5, Aw = 0.000000001, Ai = 75.5, epsi = 1, epso = 1, epsw = 1, g = 1,                 alphaowi = 2.7, splitfac = 0.09, withWindows = false,                                                             R1i = 0.003237138, C1i = 7.297100e+006,
     RRest=0.043140385,
     R1o=0.004049352,
-    C1o=4.79e+004)                                                                                                     annotation(Placement(transformation(extent = {{10, 10}, {44, 44}})));
+    C1o=4.79e+004,
+    alphaiwi=2.23642384)                                                                                               annotation(Placement(transformation(extent = {{10, 10}, {44, 44}})));
   Utilities.HeatTransfer.HeatToStar HeatToStar(A = 2, eps = 1) annotation(Placement(transformation(extent = {{36, -68}, {56, -48}})));
   Modelica.Blocks.Sources.CombiTimeTable reference(tableName = "UserProfilesOffice", fileName = "./Tables/J1615/UserProfilesOffice.txt", tableOnFile = false, columns = {2},                                                                                                    extrapolation = Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
     table=[3600,22; 7200,22; 10800,22; 14400,22; 18000,22; 21600,22; 25200,
@@ -55,8 +56,8 @@ equation
       smooth=Smooth.None));
   annotation(Documentation(revisions="<html>
 <ul>
-<li><i>February, 2014&nbsp;</i> by Peter Remmen:<br>Implemented </li>
 <li><i>March 2015,&nbsp;</i> by Steffen Riebling:<br>Revised documentation. </li>
+<li><i>February, 2014&nbsp;</i> by Peter Remmen:<br>Implemented </li>
 </ul>
 </html>",  info="<html>
 <p>Test Case 4 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to a radiant heat source for Type room L </p>

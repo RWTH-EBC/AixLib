@@ -42,13 +42,11 @@ equation
 <p><b>Example Results</b> </p>
 <p>The wall model is tested and validated in the context of the <a href=\"AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel\">ReducedOrderModel</a>. See <a href=\"AixLib.Building.LowOrder.Validation\">Validation</a> for some results. </p>
 </html>",  revisions="<html>
- <p><ul>
- <li><i>January 2012,&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
- </ul></p>
- <p><ul>
- <li><i>December 2014,&nbsp;</i> by Steffen Riebling:<br/>Revised documentation.</li>
- </ul></p>
- </html>"), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 120}}), graphics={  Rectangle(extent = {{-86, 60}, {-34, 26}}, fillColor = {255, 213, 170},
+<ul>
+<li><i>December 2014,&nbsp;</i> by Steffen Riebling:<br>Revised documentation. </li>
+<li><i>January 2012,&nbsp;</i> by Moritz Lauster:<br>Implemented. </li>
+</ul>
+</html>"),  Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 120}}), graphics={  Rectangle(extent = {{-86, 60}, {-34, 26}}, fillColor = {255, 213, 170},
             fillPattern =                                                                                                    FillPattern.Solid, lineColor = {175, 175, 175}), Rectangle(extent = {{-28, 60}, {26, 26}}, fillColor = {255, 213, 170},
             fillPattern =                                                                                                    FillPattern.Solid, lineColor = {175, 175, 175}), Rectangle(extent = {{32, 60}, {86, 26}}, fillColor = {255, 213, 170},
             fillPattern =                                                                                                    FillPattern.Solid, lineColor = {175, 175, 175}), Rectangle(extent = {{0, 20}, {54, -14}}, fillColor = {255, 213, 170},

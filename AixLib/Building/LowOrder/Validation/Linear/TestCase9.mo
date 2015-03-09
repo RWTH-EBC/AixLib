@@ -13,12 +13,13 @@ model TestCase9
             {0,22}})));
   Components.Weather.Sunblind sunblind(Imax = 100, gsunblind = {1, 1, 0.15, 0.15}) annotation(Placement(transformation(extent = {{-20, 62}, {0, 82}})));
   BaseClasses.ReducedOrderModel.ReducedOrderModelVDI
-                                                  reducedModel(Ao = 25.5, Aw = 14, Ai = 60.5, epsi = 1, epso = 1, epsw = 1, g = 1, splitfac = 0.09, T0all(displayUnit = "degC"),                                                                               alphaiwi = 2.1, alphaowi = 2.7,
+                                                  reducedModel(Ao = 25.5, Aw = 14, Ai = 60.5, epsi = 1, epso = 1, epsw = 1, g = 1, splitfac = 0.09, T0all(displayUnit = "degC"),
     R1i=0.000668640,
     C1i=1.23912e+007,
     RRest=0.020705927,
     R1o=0.001736253,
-    C1o=5.2599e+006)                                                                                                     annotation(Placement(transformation(extent = {{38, 8}, {80, 46}})));
+    C1o=5.2599e+006,
+    alphaiwi=2.1214876)                                                                                                  annotation(Placement(transformation(extent = {{38, 8}, {80, 46}})));
   Utilities.Sources.PrescribedSolarRad varRad3(n = 4) annotation(Placement(transformation(extent = {{-58, 63}, {-38, 83}})));
   Utilities.Sources.PrescribedSolarRad varRad1(n = 4) annotation(Placement(transformation(extent = {{-44, 23}, {-24, 43}})));
   Modelica.Blocks.Sources.CombiTimeTable windowRad(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableName = "UserProfilesOffice", fileName = "./Tables/J1615/UserProfilesOffice.txt", tableOnFile = false, table = [0, 0, 0, 0, 0; 3600, 0, 0, 0, 0; 10800, 0, 0, 0, 0; 14400, 0, 0, 0, 0; 14400, 0, 0, 17, 17; 18000, 0, 0, 17, 17; 18000, 0, 0, 38, 36; 21600, 0, 0, 38, 36; 21600, 0, 0, 59, 51; 25200, 0, 0, 59, 51; 25200, 0, 0, 98, 64; 28800, 0, 0, 98, 64; 28800, 0, 0, 186, 74; 32400, 0, 0, 186, 74; 32400, 0, 0, 287, 84; 36000, 0, 0, 287, 84; 36000, 0, 0, 359, 92; 39600, 0, 0, 359, 92; 39600, 0, 0, 385, 100; 43200, 0, 0, 385, 100; 43200, 0, 0, 359, 180; 46800, 0, 0, 359, 180; 46800, 0, 0, 287, 344; 50400, 0, 0, 287, 344; 50400, 0, 0, 186, 475; 54000, 0, 0, 186, 475; 54000, 0, 0, 98, 528; 57600, 0, 0, 98, 528; 57600, 0, 0, 59, 492; 61200, 0, 0, 59, 492; 61200, 0, 0, 38, 359; 64800, 0, 0, 38, 359; 64800, 0, 0, 17, 147; 68400, 0, 0, 17, 147; 68400, 0, 0, 0, 0; 72000, 0, 0, 0, 0; 82800, 0, 0, 0, 0; 86400, 0, 0, 0, 0], columns = {2, 3, 4, 5}) annotation(Placement(transformation(extent = {{-88, 66}, {-74, 80}})));
@@ -66,8 +67,8 @@ equation
   connect(personsRadiative.port, HeatTorStar.Therm) annotation(Line(points = {{22, -86}, {38.8, -86}}, color = {191, 0, 0}, smooth = Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(graphics), experiment(StopTime = 5.184e+006, Interval = 3600), experimentSetupOutput(events = false), Documentation(revisions="<html>
 <ul>
-<li><i>March, 2012&nbsp;</i> by Moritz Lauster:<br>Implemented </li>
 <li><i>March 2015,&nbsp;</i> by Steffen Riebling:<br>Revised documentation. </li>
+<li><i>March, 2012&nbsp;</i> by Moritz Lauster:<br>Implemented </li>
 </ul>
 </html>",  info="<html>
 <p>Test Case 9 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to mixed inner and outer heat sources for Type Room S </p>
