@@ -56,7 +56,8 @@ model ThermalZonePhysics "All sub-models of VDI 6007 connected to one model"
   SolarRadWeightedSumReal
                       solRadWeightedSum(n = n, weightfactors = Aw) if withWindows and withOuterwalls annotation(Placement(transformation(extent={{4,56},{
             32,86}})));
-  Components.Weather.Sunblind sunblind(Imax = Imax, n = n, gsunblind = gsunblind) if withWindows and withOuterwalls annotation(Placement(transformation(extent={{-50,59},
+  Components.Weather.Sublinds.Sunblind
+                              sunblind(Imax = Imax, n = n, gsunblind = gsunblind) if withWindows and withOuterwalls annotation(Placement(transformation(extent={{-50,59},
             {-30,79}})));
   Utilities.Interfaces.SolarRad_in solarRad_in[n] if withOuterwalls annotation(Placement(transformation(extent = {{-100, 60}, {-80, 80}}), iconTransformation(extent = {{-94, 50}, {-60, 80}})));
   Modelica.Blocks.Interfaces.RealInput weather[3] if withOuterwalls
