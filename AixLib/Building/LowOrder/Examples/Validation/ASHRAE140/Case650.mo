@@ -120,7 +120,7 @@ model Case650
     annotation (Placement(transformation(extent={{-24,69},{-11,82}})));
   AixLib.Building.LowOrder.BaseClasses.SolarRadAdapter solarRadAdapter[5]
     annotation (Placement(transformation(extent={{-45,31.5},{-25,51.5}})));
-  Modelica.Blocks.Sources.CombiTimeTable Source_TsetHeat(
+  Modelica.Blocks.Sources.CombiTimeTable Source_TsetCool(
     tableOnFile=true,
     columns={2},
     tableName="cool_setpoint",
@@ -244,7 +244,7 @@ equation
       points={{-26.35,-43.5},{-24,-43.5},{-24,-11},{22.92,-11},{22.92,12.3}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(Source_TsetHeat.y[1], idealHeaterCooler.soll_cool) annotation (Line(
+  connect(Source_TsetCool.y[1], idealHeaterCooler.soll_cool) annotation (Line(
       points={{3.65,-43.5},{11.2,-43.5},{11.2,-28.8}},
       color={0,0,127},
       smooth=Smooth.None));
