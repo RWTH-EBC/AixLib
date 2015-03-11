@@ -71,12 +71,14 @@ model Case950
   Modelica.Blocks.Sources.CombiTimeTable Source_TsetCool(
     columns={2},
     tableOnFile=false,
-    table=SetTempProfile.Profile)
+    table=SetTempProfile.Profile,
+    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic)
     annotation (Placement(transformation(extent={{-8,-49},{5,-36}})));
   Modelica.Blocks.Sources.CombiTimeTable AirExchangeRate(
     columns={2},
     tableOnFile=false,
-    table=AERProfile.Profile)
+    table=AERProfile.Profile,
+    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic)
     annotation (Placement(transformation(extent={{-39,-48},{-26,-35}})));
 equation
     //Connections for input solar model
@@ -89,6 +91,7 @@ equation
   end for;
 
   // Set outputs
+  AnnualHeatingLoad = 0; //no heating
   AnnualCoolingLoad = idealHeaterCooler.coolMeter.q_kwh/1000;  // in MWh
 
   PowerLoad = idealHeaterCooler.coolMeter.p;
@@ -224,7 +227,7 @@ equation
         preserveAspectRatio=false,
         grid={1,1})),
     experiment(StopTime=3.1536e+007, Interval=3600),
-    __Dymola_experimentSetupOutput,
+    __Dymola_experimentSetupOutput(events=false),
     Documentation(revisions="<html>
  <p><ul>
  <li><i>March 9, 2015</i> by Ana Constantin:<br/>Implemented</li>

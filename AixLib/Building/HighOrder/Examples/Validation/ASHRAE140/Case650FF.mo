@@ -55,7 +55,8 @@ model Case650FF
   Modelica.Blocks.Sources.CombiTimeTable AirExchangeRate(
     columns={2},
     tableOnFile=false,
-    table=AERProfile.Profile)
+    table=AERProfile.Profile,
+    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic)
     annotation (Placement(transformation(extent={{-39,-48},{-26,-35}})));
   Modelica.Blocks.Interfaces.RealOutput FreeFloatTemperature(unit="degC")
     "in degC" annotation (Placement(transformation(extent={{88,44},{108,64}})));
@@ -195,7 +196,7 @@ equation
         preserveAspectRatio=false,
         grid={1,1})),
     experiment(StopTime=3.1536e+007, Interval=3600),
-    __Dymola_experimentSetupOutput,
+    __Dymola_experimentSetupOutput(events=false),
     Documentation(revisions="<html>
  <p><ul>
  <li><i>March 9, 2015</i> by Ana Constantin:<br/>Implemented</li>

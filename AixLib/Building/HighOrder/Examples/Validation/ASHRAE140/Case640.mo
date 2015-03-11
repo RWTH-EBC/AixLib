@@ -73,7 +73,8 @@ model Case640
   Modelica.Blocks.Sources.CombiTimeTable Source_TsetHeat(
     columns={2},
     tableOnFile=false,
-    table=SetTempProfile.Profile)
+    table=SetTempProfile.Profile,
+    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic)
     annotation (Placement(transformation(extent={{39,-50},{26,-37}})));
 equation
     //Connections for input solar model
@@ -226,7 +227,7 @@ equation
         preserveAspectRatio=false,
         grid={1,1})),
     experiment(StopTime=3.1536e+007, Interval=3600),
-    __Dymola_experimentSetupOutput,
+    __Dymola_experimentSetupOutput(events=false),
     Documentation(revisions="<html>
  <p><ul>
  <li><i>March 9, 2015</i> by Ana Constantin:<br/>Implemented</li>

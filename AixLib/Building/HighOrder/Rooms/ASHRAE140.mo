@@ -542,7 +542,7 @@ package ASHRAE140
     Modelica.Blocks.Interfaces.RealInput AER "Air exchange rate "
       annotation (Placement(transformation(extent={{-122,-62},{-100,-40}}),
           iconTransformation(extent={{-120,-60},{-100,-40}})));
-    Modelica.Blocks.Math.MultiSum multiSum(nu=3, k={2}) annotation (Placement(
+    Modelica.Blocks.Math.MultiSum multiSum(nu=2)        annotation (Placement(
           transformation(
           extent={{-6,-6},{6,6}},
           rotation=180,
@@ -638,10 +638,6 @@ package ASHRAE140
         color={0,0,127},
         smooth=Smooth.None));
 
-
-
-
-
     connect(SolarRadiationPort[3], outerWall_South.SolarRadiationPort)
       annotation (Line(
         points={{-110,60},{-86,60},{-86,40.6667},{-78.1,40.6667}},
@@ -685,14 +681,6 @@ package ASHRAE140
         points={{-62,-56},{4,-56},{4,-10.8},{10.9,-10.8}},
         color={191,0,0},
         smooth=Smooth.None));
-    connect(outerWall_East.solarRadWinTrans, multiSum.u[1]) annotation (Line(
-        points={{38.4,-63},{38.4,-56},{46,-56},{46,23.2},{40,23.2}},
-        color={0,0,127},
-        smooth=Smooth.None));
-    connect(outerWall_West.solarRadWinTrans, multiSum.u[2]) annotation (Line(
-        points={{13.6,73},{13.6,60},{46,60},{46,26},{40,26}},
-        color={0,0,127},
-        smooth=Smooth.None));
     connect(multiSum.y, outerWall_West.solarRadWin) annotation (Line(
         points={{26.98,26},{28,26},{28,60},{43.6,60},{43.6,73.6}},
         color={0,0,127},
@@ -718,7 +706,16 @@ package ASHRAE140
         smooth=Smooth.None));
     connect(multiSum.y, outerWall_North.solarRadWin) annotation (Line(
         points={{26.98,26},{28,26},{28,60},{46,60},{46,33.3333},{59.3,33.3333}},
+        color={0,0,127},
+        smooth=Smooth.None));
 
+    connect(outerWall_West.solarRadWinTrans, multiSum.u[1]) annotation (Line(
+        points={{13.6,73},{13.6,60},{46,60},{46,23.9},{40,23.9}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    connect(outerWall_East.solarRadWinTrans, multiSum.u[2]) annotation (Line(
+        points={{38.4,-63},{38.4,-56},{46,-56},{46,30},{38,30},{38,28.1},{40,
+            28.1}},
         color={0,0,127},
         smooth=Smooth.None));
     annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
