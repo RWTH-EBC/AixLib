@@ -32,7 +32,7 @@ equation
   H_flow_a = portMoistAir_a.m_flow * actualStream(portMoistAir_a.h_outflow);
   H_flow_b = portMoistAir_b.m_flow * actualStream(portMoistAir_b.h_outflow);
   //Saturation pressure and humidity
-  p_Saturation_portb = HVAC.Volume.BaseClasses.SaturationPressureSteam(T);
+  p_Saturation_portb = AixLib.HVAC.Volume.BaseClasses.SaturationPressureSteam(T);
   // because almost isothermal
   X_Saturation_portb = M_Steam / M_Air * p_Saturation / (portMoistAir_b.p - p_Saturation_portb);
   Dummy_portb_Xout = inStream(portMoistAir_a.X_outflow) + Massflow_steamIn / portMoistAir_a.m_flow;

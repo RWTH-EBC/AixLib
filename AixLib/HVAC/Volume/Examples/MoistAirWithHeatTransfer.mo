@@ -5,17 +5,17 @@ model MoistAirWithHeatTransfer
   extends Modelica.Icons.Example;
   Sources.BoundaryMoistAir_phX boundaryMoistAir_phX1(X = 0.001, p = 100000) annotation(Placement(transformation(extent = {{-100, -97}, {-70, -67}})));
   Sources.MassflowsourceMoistAir_mhX massflowsourceMoistAir_mhX_1(h = 7e3, X = 2e-3, m = 0.1) annotation(Placement(transformation(extent = {{-100, 40}, {-70, 71}})));
-  HVAC.Volume.VolumeMoistAir volumeMoistAir_1(V = 1) annotation(Placement(transformation(extent = {{44, 36}, {84, 76}})));
+  AixLib.HVAC.Volume.VolumeMoistAir volumeMoistAir_1(V = 1) annotation(Placement(transformation(extent = {{44, 36}, {84, 76}})));
   inner BaseParameters baseParameters(T0 = 298.15) annotation(Placement(transformation(extent = {{78, 74}, {98, 94}})));
-  HVAC.Volume.VolumeMoistAir volumeMoistAir_M(V = 1) annotation(Placement(transformation(extent = {{-20, 20}, {20, -20}}, rotation = 180, origin = {66, -82})));
-  HVAC.Volume.VolumeMoistAir volumeMoistAir_2(V = 2) annotation(Placement(transformation(extent = {{40, -20}, {80, 20}})));
+  AixLib.HVAC.Volume.VolumeMoistAir volumeMoistAir_M(V = 1) annotation(Placement(transformation(extent = {{-20, 20}, {20, -20}}, rotation = 180, origin = {66, -82})));
+  AixLib.HVAC.Volume.VolumeMoistAir volumeMoistAir_2(V = 2) annotation(Placement(transformation(extent = {{40, -20}, {80, 20}})));
   Sensors.RelativeHumiditySensor humiditySensor_1 annotation(Placement(transformation(extent = {{-56, 46}, {-36, 66}})));
   Sensors.RelativeHumiditySensor humiditySensor_2 annotation(Placement(transformation(extent = {{-52, -10}, {-32, 10}})));
   Sensors.RelativeHumiditySensor humiditySensor_M annotation(Placement(transformation(extent = {{-10, 10}, {10, -10}}, rotation = 180, origin = {26, -82})));
   Sources.MassflowsourceMoistAir_mhX massflowsourceMoistAir_mhX_2(h = 39e3, X = 7.5e-3, m = 0.2) annotation(Placement(transformation(extent = {{-103, -15}, {-73, 16}})));
   Sensors.RelativeHumiditySensor humiditySensor_C annotation(Placement(transformation(extent = {{-10, 10}, {10, -10}}, rotation = 180, origin = {-50, -82})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow annotation(Placement(transformation(extent = {{-40, -52}, {-20, -32}})));
-  HVAC.Volume.VolumeMoistAir volumeMoistAir_M1(V = 1) annotation(Placement(transformation(extent = {{-20, 20}, {20, -20}}, rotation = 180, origin = {-12, -82})));
+  AixLib.HVAC.Volume.VolumeMoistAir volumeMoistAir_M1(V = 1) annotation(Placement(transformation(extent = {{-20, 20}, {20, -20}}, rotation = 180, origin = {-12, -82})));
   Modelica.Blocks.Sources.Ramp ramp(startTime = 100, duration = 100, height = -2000) annotation(Placement(transformation(extent = {{-80, -52}, {-60, -32}})));
 equation
   connect(massflowsourceMoistAir_mhX_1.portMoistAir_a, humiditySensor_1.portMoistAir_a) annotation(Line(points = {{-70, 55.5}, {-63, 55.5}, {-63, 56}, {-56, 56}}, color = {0, 127, 255}, smooth = Smooth.None));
