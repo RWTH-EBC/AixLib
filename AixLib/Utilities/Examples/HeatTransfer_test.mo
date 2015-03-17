@@ -44,9 +44,9 @@ equation
  <p>Simple test to calculate the heat flux through the different conduction and convection models.</p>
  <p>Boundary conditions can be given by 2 different temperatur values on each side of the model. Models with additional inputs (e.g. variable thermal conductivity, wind speed, ...) will be given preferably alternating input values, for example customized sine values.</p>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>April 16, 2013&nbsp;</i> by Ole Odendahl:<br/>Implemented, added documentation and formatted appropriately</li>
- </ul></p>
+ </ul>
  </html>
  "), experiment(StopTime = 100, __Dymola_Algorithm = "Dassl"), __Dymola_experimentSetupOutput);
 end HeatTransfer_test;

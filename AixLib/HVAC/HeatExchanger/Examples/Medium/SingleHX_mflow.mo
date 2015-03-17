@@ -21,9 +21,8 @@ equation
  <p>A small example of an heat exchanger with varying mass flow rate of both media.</p>
  </html>", revisions = "<html>
  <p>12.01.2014, Peter Matthes</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"), experiment(StopTime = 3), __Dymola_experimentSetupOutput);
 end SingleHX_mflow;
-

@@ -13,13 +13,13 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This adaptor makes it possible to connect HeatStarComb with either Star or Heat connector or both. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/> </p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/> </p>
  </html>", revisions = "<html>
  <ul>
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
- <li><i>April 01, 2014 </i> by Moritz Lauster:<br>Renamed</li>
- <li><i>April 10, 2013&nbsp;</i> by Ole Odendahl:<br>Formatted documentation appropriately </li>
- <li>by Mark Wesseling:<br>Implemented.</li>
+ <li><i>April 01, 2014 </i> by Moritz Lauster:<br/>Renamed</li>
+ <li><i>April 10, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately </li>
+ <li>by Mark Wesseling:<br/>Implemented.</li>
  </ul>
  </html>"));
 end HeatStarToComb;

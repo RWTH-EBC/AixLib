@@ -56,15 +56,14 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Simple model of an on/off-controlled heat pump. The refrigerant circuit is a black-box model represented by tables which calculate the electric power and heat flows of the condenser depending on the source and sink temperature. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Example Results</span></h4>
  <p><a href=\"AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem\">AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem</a></p>
  <p><a href=\"AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem2\">AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem2</a></p>
  </html>", revisions = "<html>
  <p>25.11.2013, Kristian Huchtemann</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"));
 end HeatPump;
-

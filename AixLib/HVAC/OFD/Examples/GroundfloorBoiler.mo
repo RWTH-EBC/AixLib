@@ -52,13 +52,13 @@ equation
  "), Text(extent=  {{54, 96}, {84, 92}}, lineColor=  {255, 0, 0}, fillColor=  {0, 0, 255}, fillPattern=  FillPattern.Solid, fontSize=  11, textString=  "Distribution and Consumption
  ")}), Icon(coordinateSystem(extent = {{-100, -100}, {160, 100}})), experiment(StopTime = 86400, Interval = 60, __Dymola_Algorithm = "Lsodar"), __Dymola_experimentSetupOutput(events = false), Documentation(revisions = "<html>
  <p>04.11.2013, Moritz Lauster</p>
- <p><ul>
+ <ul>
  <li>Implemented full example</li>
- </ul></p>
+ </ul>
  <p>26.11.2013, Ana Constantin</p>
- <p><ul>
+ <ul>
  <li>Implemented first draft</li>
- </ul></p>
+ </ul>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This example illustrates the usage of the OFD-hydraulics model in combination with heating systems, e.g. a boiler.</p>

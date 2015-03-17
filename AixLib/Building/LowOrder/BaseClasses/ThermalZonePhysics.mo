@@ -57,7 +57,7 @@ model ThermalZonePhysics "All sub-models of VDI 6007 connected to one model"
   Components.Weather.Sunblind sunblind(Imax = Imax, n = n, gsunblind = gsunblind) if withWindows and withOuterwalls annotation(Placement(transformation(extent = {{-26, 62}, {-6, 82}})));
   Utilities.Interfaces.SolarRad_in solarRad_in[n] if withOuterwalls annotation(Placement(transformation(extent = {{-100, 60}, {-80, 80}}), iconTransformation(extent = {{-94, 50}, {-60, 80}})));
   Modelica.Blocks.Interfaces.RealInput weather[3] if withOuterwalls
-    "[1]: Air temperature<br>[2]: Horizontal radiation of sky<br>[3]: Horizontal radiation of earth"
+    "[1]: Air temperature<br/>[2]: Horizontal radiation of sky<br/>[3]: Horizontal radiation of earth"
                                                                                                         annotation(Placement(transformation(extent = {{-120, -10}, {-80, 30}}), iconTransformation(extent = {{-90, 4}, {-60, 34}})));
   Modelica.Blocks.Interfaces.RealInput ventilationRate annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 90, origin = {-28, -90}), iconTransformation(extent = {{-14, -14}, {14, 14}}, rotation = 90, origin = {-40, -86})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a internalGainsConv annotation(Placement(transformation(extent = {{30, -100}, {50, -80}}), iconTransformation(extent = {{30, -100}, {50, -80}})));
@@ -207,20 +207,19 @@ equation
  <li>Parameters: Most of the parameters are geometric and building pyhsic parameters and are used in the ReducedOrderModel or in the eqAirTemp component. See the documentation of the submodels or VDI 6007 for more information.</li>
  </ul>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars5.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars5.png\" alt=\"stars: 5 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The concept is desrcibed in VDI 6007 and in the submodels. Basically, ThermalZonePhysics is thought for the easy computation of room temperatures and heat load profiles for thermal zones, e.g. buildings. To reduce computation time, number of parameters and work, some simplifications are implemented into the model (only one air node, ideal building technology, one outer wall, one inner wall). See VDI 6007 for more information.</p>
- <p><br><b><font style=\"color: #008000; \">References</font></b></p>
+ <p><br/><b><font style=\"color: #008000; \">References</font></b></p>
  <ul>
  <li>German Association of Engineers: Guideline VDI 6007-1, March 2012: Calculation of transient thermal response of rooms and buildings - Modelling of rooms.</li>
- <li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D. (2014): Low order thermal network models for dynamic simulations of buildings on city district scale. In: Building and Environment 73, p. 223&ndash;231. DOI: <a href=\"http://dx.doi.org/10.1016/j.buildenv.2013.12.016\">10.1016/j.buildenv.2013.12.016</a></p>.</li>
+ <li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D. (2014): Low order thermal network models for dynamic simulations of buildings on city district scale. In: Building and Environment 73, p. 223&ndash;231. DOI: <a href=\"http://dx.doi.org/10.1016/j.buildenv.2013.12.016\">10.1016/j.buildenv.2013.12.016</a>.</li>
  </ul>
  <h4><span style=\"color:#008000\">Example Results</span></h4>
  <p>See <a href=\"AixLib.Building.LowOrder.Validation\">Validation</a> for some results.</p>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>January 2012,&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
- </ul></p>
+ </ul>
  </html>"));
 end ThermalZonePhysics;
-

@@ -1,5 +1,5 @@
 within AixLib.Building.HighOrder;
-package Examples 
+package Examples
   extends Modelica.Icons.ExamplesPackage;
 
 

@@ -72,19 +72,19 @@ equation
 <h4>Validation</h4>
 <p>The model is verified with the VDI 6007, see <a href=\"AixLib.Building.LowOrder.Validation.VDI6007\">Validation.VDI6007</a>. A validation with the use of the standard ASHRAE 140 is in progress </p>
 <h4>Implementation</h4>
-<p> </p>
+<p><br/></p>
 <h4>References</h4>
 <ul>
 <li>German Association of Engineers: Guideline VDI 6007-1, March 2012: Calculation of transient thermal response of rooms and buildings - Modelling of rooms.</li>
 <li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D. (2014): Low order thermal network models for dynamic simulations of buildings on city district scale. In: Building and Environment 73, p. 223&ndash;231. DOI: 10.1016/j.buildenv.2013.12.016.</li>
 </ul>
 </html>", revisions="<html>
-<p><ul>
+<ul>
 <li><i>October 2014,&nbsp;</i> by Peter Remmen:<br/>extended from partial Model</li>
-</ul></p>
-<p><ul>
+</ul>
+<ul>
 <li><i>January 2012,&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
-</ul></p>
+</ul>
 
 </html>"));
 end ReducedOrderModelStar;

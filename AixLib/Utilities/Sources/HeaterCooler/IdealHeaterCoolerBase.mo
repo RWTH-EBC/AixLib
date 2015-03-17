@@ -20,8 +20,8 @@ partial model IdealHeaterCoolerBase
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This is the base class of an ideal heater and/or cooler. It is used in full ideal heater/cooler models as an extension.</p>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>June, 2014&nbsp;</i> by Moritz Lauster:<br/>Added some basic documentation</li>
- </ul></p>
+ </ul>
  </html>"));
 end IdealHeaterCoolerBase;

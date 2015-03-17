@@ -15,8 +15,8 @@ algorithm
 <p><code>  DynamicViscosityMoistAir =  X_Steam / (1 + X_Steam) * DynamicViscositySteam + 1 / (1 + X_Steam) * DynamicViscosityAir</code> </p>
 </html>",  revisions = "<html>
  <p>10.12.2013, Mark Wesseling</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"));
 end DynamicViscosityMoistAir;

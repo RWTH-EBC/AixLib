@@ -15,19 +15,19 @@ equation
   connect(doorSimple.Star, Tinside1.port) annotation(Line(points = {{10.2, 21.6}, {20, 21.6}, {20, 42}, {38, 42}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
   connect(Toutside1.port, doorSimple.Star1) annotation(Line(points = {{-42, 36}, {-34, 36}, {-34, 21.6}, {-22.2, 21.6}}, color = {191, 0, 0}, smooth = Smooth.None));
   annotation(Diagram(graphics), experiment(StopTime = 3600, Interval = 60, Algorithm = "Lsodar"), experimentSetupOutput, Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>Simulation to test the <a href=\"AixLib.Building.Components.WindowsDoors.Door\">Door</a> model.</p>
- <p><h4><font color=\"#008000\">Concept</font></h4></p>
+ <h4><font color=\"#008000\">Concept</font></h4>
  <p>Test case for calculation of U-value</p>
- <p><ul>
+ <ul>
  <li>Area of component: 10 m2</li>
  <li>Temperature difference: 20 K</li>
  <li>Test time: 1 h</li>
- </ul></p>
+ </ul>
  </html>", revisions = "<html>
  <ul>
    <li><i>April 1, 2012&nbsp;</i>
-          by Ana Constantin and Corinna Leonhard:<br>
+          by Ana Constantin and Corinna Leonhard:<br/>
           Implemented.</li>
  </ul>
  </html>"));

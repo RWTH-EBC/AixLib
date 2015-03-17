@@ -22,9 +22,8 @@ equation
  <p>A small example which shows how the volume flow controller works</p>
  </html>", revisions = "<html>
  <p>10.12.2013, Mark Wesseling</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"));
 end VolumeFlowController;
-

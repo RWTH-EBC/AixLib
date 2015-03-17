@@ -49,7 +49,7 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>The <b>HeatTrasfer_Outside </b>is a model for the convective heat transfer at outside walls</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>It allows the choice between three different models:</p>
  <ul>
@@ -66,12 +66,12 @@ equation
  <p><a href=\"AixLib.Utilities.Examples.HeatTransfer_test\">AixLib.Utilities.Examples.HeatTransfer_test</a></p>
  <p><a href=\"AixLib.Utilities.Examples.HeatConv_outside\">AixLib.Utilities.Examples.HeatConv_outside</a></p>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>April 1, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
- </ul></p>
+ </ul>
  <ul>
    <li><i>March 30, 2012&nbsp;</i>
-          by Ana Constantin:<br>
+          by Ana Constantin:<br/>
           Implemented.</li>
  </ul>
  </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));

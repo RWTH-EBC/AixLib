@@ -32,8 +32,8 @@ equation
  <p>A simple Simulation Model which compares a single fan to two fans in serial and parallel</p>
  </html>", revisions = "<html>
  <p>10.12.2013, Mark Wesseling</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"));
 end FansSerialAndParallel;

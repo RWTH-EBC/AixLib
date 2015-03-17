@@ -21,30 +21,6 @@ model Weather "Complex weather model"
   parameter
     DataBase.Weather.SurfaceOrientation.SurfaceOrientationBaseDataDefinition         SOD = DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor()
     "Surface orientation data"                                                                                                     annotation(Dialog(group = "Solar radiation on oriented surfaces", descriptionLabel = true), choicesAllMatching = true);
-  //   parameter Integer wdv_choice[:]={7,8,9,10,11,12,13,18,19} "<html><font size=2><table border=0 cellspacing=2>
-  //         <tr width=100%>
-  //             <td width=35%><b> 7 </b>- Cloud cover, 0..8; 9 </td>
-  //             <td width=65%><b>12 </b>- Mass fraction of water in dry air, kg/kg </td>
-  //         </tr><tr>
-  //             <td><b> 8 </b>- Wind direction,  </td>
-  //             <td><b>13 </b>- Relative humidity of air, 0..1 </td>
-  //         </tr><tr>
-  //             <td><b> 9 </b>- Wind speed, m/s </td>
-  //             <td><b>18 </b>- Longwave sky radiation on horizontal </td>
-  //         </tr><tr>
-  //             <td></td><td> surface, W/m </td>
-  //         </tr><tr>
-  //             <td><b>10 </b>- Air temperature, C </td>
-  //             <td><b>19 </b>- Longwave terrestric radiation from horizontal </td>
-  //         </tr><tr>
-  //             <td></td><td> surface, W/m </td>
-  //         </tr><tr>
-  //             <td><b>11 </b>- Air pressure, Pa </td>
-  //         </tr><tr>
-  //         </tr>
-  //     </table></font></html>"
-  //                       annotation (Dialog(group=
-  //          "Weather Data Vector  -  choose output vector elements"));
   Utilities.Interfaces.SolarRad_out SolarRadiation_OrientedSurfaces[size(RadOnTiltedSurf, 1)] annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {50, 98}), iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-78, -110})));
   parameter Integer Outopt = 2 "Output options" annotation(Dialog(tab = "Optional output vector", compact = true, descriptionLabel = true), choices(choice = 1
         "one vector",                                                                                                    choice = 2
@@ -222,12 +198,12 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Supplies weather data using a TRY - data set. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>Input: a TRY data set in an accepted Modelica format (.mat, .txt, with header). The structure should be exactly the one of a TRY, status: TRY 2011.</p>
  <p>Output: </p>
  <ul>
- <li>Total radiation on &QUOT;n&QUOT; oriented surfaces</li>
+ <li>Total radiation on &quot;n&quot; oriented surfaces</li>
  <li>Cloud cover</li>
  <li>Wind direction</li>
  <li>Wind speed</li>
@@ -249,12 +225,11 @@ equation
  <ul>
    <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately, Rewarded 5*****!</li>
    <li><i>Mai 1, 2012&nbsp;</i>
-          by Moritz Lauster and Ana Constantin:<br>
+          by Moritz Lauster and Ana Constantin:<br/>
           Improved beyond belief.</li>
    <li><i>September 12, 2006&nbsp;</i>
-          by Timo Haase:<br>
+          by Timo Haase:<br/>
           Implemented.</li>
  </ul>
  </html>"), DymolaStoredErrors);
 end Weather;
-

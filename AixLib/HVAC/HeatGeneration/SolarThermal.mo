@@ -24,9 +24,9 @@ equation
   connect(gain.y, prescribedHeatFlow.Q_flow) annotation(Line(points = {{-3.4, 50}, {0, 50}, {0, 44}}, color = {0, 0, 127}, smooth = Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
- <p><br>Model of a solar thermal collector. Inputs are outdoor air temperature and solar irradiation. Based on these values and the collector properties from database, this model creates a heat flow to the fluid circuit.</p>
+ <p><br/>Model of a solar thermal collector. Inputs are outdoor air temperature and solar irradiation. Based on these values and the collector properties from database, this model creates a heat flow to the fluid circuit.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The model maps solar collector efficiency based on the equation</p>
  <p><img src=\"modelica://AixLib/Images/equations/equation-vRK5Io7E.png\" alt=\"eta = eta_o - c_1 * deltaT / G - c_2 * deltaT^2/ G\"/></p>
@@ -35,10 +35,9 @@ equation
  <li>Connected directly with Sources.TempAndRad, this model only represents a horizontal collector. There is no calculation for radiation on tilted surfaces. </li>
  <li>With the standard BaseParameters, this model uses water as working fluid</li>
  </ul>
- <p><br><b><font style=\"color: #008000; \">Example Results</font></b></p>
+ <p><br/><b><font style=\"color: #008000; \">Example Results</font></b></p>
  <p><a href=\"AixLib.HVAC.HeatGeneration.Examples.SolarThermalCollector\">AixLib.HVAC.HeatGeneration.Examples.SolarThermalCollector</a></p>
  </html>", revisions = "<html>
  <p>19.11.2013, Marcus Fuchs: implemented</p>
  </html>"), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent=  {{-80, 80}, {88, -80}}, lineColor=  {255, 128, 0}, fillPattern=  FillPattern.Solid, fillColor=  {255, 128, 0}), Rectangle(extent=  {{-70, 70}, {-64, -72}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{-70, 70}, {-40, 64}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{-40, 70}, {-46, -72}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{-44, -72}, {-22, -66}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{-4, -72}, {22, -66}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{2, 70}, {-4, -72}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{-24, 70}, {2, 64}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{-24, 70}, {-18, -72}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{40, -72}, {62, -66}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{44, 70}, {38, -72}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{18, 70}, {44, 64}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{18, 70}, {24, -72}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{76, -72}, {96, -66}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{82, 70}, {76, -72}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{56, 70}, {82, 64}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{56, 70}, {62, -72}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{-88, -72}, {-64, -66}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid)}));
 end SolarThermal;
-

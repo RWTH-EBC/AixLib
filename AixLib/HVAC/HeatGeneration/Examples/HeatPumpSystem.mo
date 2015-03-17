@@ -49,8 +49,8 @@ equation
  <p>This example models a simple fluid circuit in order to test the heat pump model for plausibility</p>
  </html>", revisions = "<html>
  <p>25.11.2013, Kristian Huchtemann</p>
- <p><ul>
+ <ul>
  <li>changed BoilerSystem to HeatPumpSystem</li>
- </ul></p>
+ </ul>
  </html>"), Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}})));
 end HeatPumpSystem;

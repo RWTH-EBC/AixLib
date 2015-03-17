@@ -8,7 +8,7 @@ record Corridor
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Kermi radiator: Flachheizkoerper ThermX2, Profil V</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The record contains information about the:</p>
  <ul>
@@ -23,7 +23,7 @@ record Corridor
  <li>Length of radiator in m</li>
  <li>Height of radiator in m</li>
  </ul>
- <p><br>Not all this information is used in the model, just the power, the temperatures, the exponent, the percentage and the volume.</p>
+ <p><br/>Not all this information is used in the model, just the power, the temperatures, the exponent, the percentage and the volume.</p>
  <h4><span style=\"color:#008000\">References</span></h4>
  <p>Record is used in model <a href=\"AixLib.HVAC.Radiators.Radiator\">AixLib.HVAC.Radiators.Radiator</a></p>
  <p>Source:</p>

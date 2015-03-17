@@ -132,8 +132,7 @@ equation
 <ul>
 <li>October 2014 by Peter Remmen:</li>
 <p>added record for one winter day, now it&apos;s a ready to run example</p>
-<li><i>June 24, 2014 </i>by Moritz Lauster:<br>Implemented </li>
+<li><i>June 24, 2014 </i>by Moritz Lauster:<br/>Implemented </li>
 </ul>
 </html>"),  experiment(StopTime=86400, Interval=3600),           __Dymola_experimentSetupOutput);
 end LowOrderExample;
-

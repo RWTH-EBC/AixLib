@@ -48,25 +48,24 @@ equation
             fillPattern=                                                                                                    FillPattern.Solid), Polygon(points=  {{-60, -64}, {-22, -76}, {-22, -32}, {-60, -24}, {-60, -64}}, lineColor=  {0, 0, 0},
             fillPattern=                                                                                                    FillPattern.VerticalCylinder, fillColor=  {226, 226, 226}), Polygon(points=  {{-60, -64}, {-80, -72}, {-80, -100}, {-60, -100}, {-22, -76}, {-60, -64}}, lineColor=  {0, 0, 0}, pattern=  LinePattern.None,
             fillPattern=                                                                                                    FillPattern.VerticalCylinder, fillColor=  {0, 77, 0}), Text(extent=  {{-100, 100}, {100, 60}}, lineColor=  {0, 0, 255}, textString=  "%name")}), DymolaStoredErrors, Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 255}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}, pattern=  LinePattern.None, fillPattern=  FillPattern.HorizontalCylinder, fillColor=  {170, 213, 255}), Ellipse(extent=  {{14, 36}, {66, -16}}, lineColor=  {0, 0, 255}, pattern=  LinePattern.None, fillColor=  {255, 225, 0}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{-80, -40}, {80, -100}}, lineColor=  {0, 0, 0}, pattern=  LinePattern.None, fillPattern=  FillPattern.HorizontalCylinder, fillColor=  {0, 127, 0}), Rectangle(extent=  {{-80, -72}, {80, -100}}, lineColor=  {0, 0, 255}, pattern=  LinePattern.None, fillColor=  {0, 127, 0}, fillPattern=  FillPattern.Solid), Polygon(points=  {{-60, -64}, {-22, -76}, {-22, -32}, {-60, -24}, {-60, -64}}, lineColor=  {0, 0, 0}, fillPattern=  FillPattern.VerticalCylinder, fillColor=  {226, 226, 226}), Polygon(points=  {{-60, -64}, {-80, -72}, {-80, -100}, {-60, -100}, {-22, -76}, {-60, -64}}, lineColor=  {0, 0, 0}, pattern=  LinePattern.None, fillPattern=  FillPattern.VerticalCylinder, fillColor=  {0, 77, 0})}), Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>
  The <b>RadOnTiltedSurf</b> model calculates the total radiance on a tilted surface.
  </p>
- <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
- <p><h4><font color=\"#008000\">Concept</font></h4></p>
+ <h4><font color=\"#008000\">Level of Development</font></h4>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+ <h4><font color=\"#008000\">Concept</font></h4>
  <p>
  The <b>RadOnTiltedSurf</b> model uses output data of the <a href=\"Sun\"><b>Sun</b></a> model and weather data (beam and diffuse radiance on a horizontal surface) to compute total radiance on a tilted surface. It needs information on the tilt angle and the azimut angle of the surface, the latitude of the location and the ground reflection coefficient.
  </p>
- <p><h4><font color=\"#008000\">Example Results</font></h4></p>
+ <h4><font color=\"#008000\">Example Results</font></h4>
  <p>The model is checked within the <a href=\"AixLib.Building.Components.Examples.Weather.WeatherModels\">weather</a> example as part of the <a href=\"AixLib.Building.Components.Weather.Weather\">weather</a> model. </p>
  </html>", revisions = "<html>
  <ul>
    <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
    <li><i>March 14, 2005&nbsp;</i>
-          by Timo Haase:<br>
+          by Timo Haase:<br/>
           Implemented.</li>
  </ul>
  </html>"));
 end RadOnTiltedSurf;
-

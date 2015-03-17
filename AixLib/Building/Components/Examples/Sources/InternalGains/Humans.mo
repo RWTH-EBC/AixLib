@@ -18,12 +18,12 @@ equation
   connect(human_SensibleHeat_VDI2078_1.RadHeat, fixedTemp.port) annotation(Line(points = {{19.7, 3.4}, {39.85, 3.4}, {39.85, 14}, {58, 14}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
   connect(combiTimeTable.y[1], human_SensibleHeat_VDI2078_1.Schedule) annotation(Line(points = {{-61, -16}, {-42, -16}, {-42, 3.14}, {-21.93, 3.14}}, color = {0, 0, 127}, smooth = Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), experiment(StopTime = 86400), __Dymola_experimentSetupOutput, Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>Simulation to check the functionality of the human heat sources. It only consists of one human (VDI 2078). </p>
  <p>The timetable represents typical working hours with one hour lunch time. The room temperature follows a sine input varying between 18 and 22 degrees over a 24 hour time period.</p>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>May 31, 2013&nbsp;</i> by Ole Odendahl:<br/>Implemented, added documentation and formatted appropriately</li>
- </ul></p>
+ </ul>
  </html>"));
 end Humans;

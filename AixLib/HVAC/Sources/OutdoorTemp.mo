@@ -17,4 +17,3 @@ equation
  <p>04.11.2013, Marcus Fuchs: implemented</p>
  </html>"), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Ellipse(extent=  {{-54, 50}, {54, -56}}, lineColor=  {0, 0, 255}, fillPattern=  FillPattern.Solid, fillColor=  {213, 255, 170}), Text(extent=  {{-38, 44}, {38, -46}}, lineColor=  {0, 0, 255}, fillColor=  {213, 255, 170}, fillPattern=  FillPattern.Solid, textString=  "T_out")}));
 end OutdoorTemp;
-

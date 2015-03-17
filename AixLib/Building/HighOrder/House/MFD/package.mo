@@ -8,7 +8,7 @@ package MFD "Multiple Family Dwelling"
  <p>Package with rooms aggregated to an appartment and appartments aggregated to a complete building.</p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>Multiple rooms are connected together and they form an apartment. </p>
- <p><img src=\"modelica://AixLib/Images/House/MFD_FloorPlan_En.PNG\"/></p>
+ <p><img src=\"modelica://AixLib/Images/House/MFD_FloorPlan_En.PNG\" alt=\"MFD_FloorPlan_En\"/></p>
  <p>It is possible to model several storeys with apartments on top of each other, as well as several wings with apartments next to each other. Storeys are connected together to form a whole house.</p>
  <p>The example here has three wings and three storeys.</p>
  </html>"));

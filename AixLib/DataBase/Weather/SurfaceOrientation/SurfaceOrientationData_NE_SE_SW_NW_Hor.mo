@@ -6,10 +6,10 @@ record SurfaceOrientationData_NE_SE_SW_NW_Hor
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Surface Orientation Data for NE,SE,SW and NW </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>Data in this set: </p>
- <table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
+ <table summary=\"Data\" cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
  <td style=\"background-color: #dcdcdc\"><p>Orientation</p></td>
  <td style=\"background-color: #dcdcdc\"><p>Azimuth</p></td>
  <td style=\"background-color: #dcdcdc\"><p>Tilt</p></td>
@@ -40,13 +40,12 @@ record SurfaceOrientationData_NE_SE_SW_NW_Hor
  <td><p>0</p></td>
  </tr>
  </table>
- <p><br><br><br><h4><span style=\"color:#008000\">References</span></h4></p>
+ <p><br/><br/><br/><h4><span style=\"color:#008000\">References</span></h4>
  <p>Record is used in model <a href=\"AixLib.HVAC.Weather.Weather\">AixLib.HVAC.Weather.Weather</a></p>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>May 07, 2013&nbsp;</i> by Ole Odendahl:<br/>Added basic documentation</li>
- </ul></p>
+ </ul>
  </html>
  "));
 end SurfaceOrientationData_NE_SE_SW_NW_Hor;
-

@@ -1,4 +1,4 @@
 within AixLib.HVAC.Radiators;
-package Examples 
+package Examples
   extends Modelica.Icons.ExamplesPackage;
 end Examples;

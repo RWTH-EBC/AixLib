@@ -23,4 +23,3 @@ equation
  <p>21.01.2014, by <i>Ana Constantin</i>: implemented</p>
  </html>"));
 end SteamHumidifier;
-

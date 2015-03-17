@@ -1,5 +1,5 @@
 within AixLib.Building.LowOrder.Validation;
-package Linear 
+package Linear
   extends Modelica.Icons.ExamplesPackage;
 
 

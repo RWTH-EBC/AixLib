@@ -50,7 +50,7 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Supplies access to external C functions. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars5.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars5.png\" alt=\"stars: 5 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>Input: Arbitrary real array.</p>
  <p>Output: Input value with no change according to sampling rate Rate</p>

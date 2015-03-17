@@ -32,4 +32,3 @@ equation
  <p>Test the model with the extreme case of temperature difference between the media becomes zero. This kind of test is important for dynamic simulations to understand how the model can be used or improved. No temeprature difference seems to be no problem for the model (in contrast to the case where the mass flow rate will go to zero).</p>
  </html>"));
 end Test_RecuperatorNoMedium_counterflow_switchTemperature;
-

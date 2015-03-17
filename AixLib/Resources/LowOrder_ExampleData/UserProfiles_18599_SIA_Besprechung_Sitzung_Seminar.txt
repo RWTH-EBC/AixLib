@@ -1,5 +1,5 @@
-#1				
-double UserProfiles(336, 5)				
+#1
+double UserProfiles(336, 5)
 0	0	0.1	0	0
 3540	0	0.1	0	0
 3600	0	0.1	0	0

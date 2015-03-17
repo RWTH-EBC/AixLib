@@ -5,7 +5,7 @@ record FanCharacteristicsBaseDataDefinition
   parameter Real[:, :] dp "V_flow | dp | eta ";
   annotation(Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
- <p><br>1. Column: Volume Flow in m^3 / h</p>
+ <p><br/>1. Column: Volume Flow in m^3 / h</p>
  <p>2. Column: Pressure Increase in Pa</p>
  <p>3. Column: efficiency of Fan</p>
  <h4><span style=\"color:#008000\">References</span></h4>
@@ -14,4 +14,3 @@ record FanCharacteristicsBaseDataDefinition
  <p>30.12.2013, by <i>Mark Wesseling</i>: implemented</p>
  </html>"));
 end FanCharacteristicsBaseDataDefinition;
-

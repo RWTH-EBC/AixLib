@@ -46,7 +46,7 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for a steam humidifier.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>Model functions in both directions as a humidifier.</p>
  <p>Model inputs: Massflow and temperature for steam.</p>
@@ -57,4 +57,3 @@ equation
  <p>21.01.2014, by <i>Ana Constantin</i>: implemented</p>
  </html>"));
 end SteamHumidifier;
-

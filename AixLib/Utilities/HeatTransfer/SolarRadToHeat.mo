@@ -10,19 +10,18 @@ equation
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics = {Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid), Text(extent=  {{-48, 2}, {-4, -42}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid, textString=  "I"), Text(extent=  {{4, 0}, {56, -44}}, lineColor=  {0, 0, 0}, textString=  "J"), Polygon(points=  {{-12, -24}, {-12, -16}, {10, -16}, {10, -10}, {22, -20}, {10, -30}, {10, -24}, {-12, -24}}, lineColor=  {0, 0, 0}, smooth=  Smooth.None)}), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics={  Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                    FillPattern.Solid), Text(extent = {{-58, 0}, {-14, -44}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
             fillPattern =                                                                                                    FillPattern.Solid, textString = "I"), Text(extent = {{0, -2}, {52, -46}}, lineColor = {0, 0, 0}, textString = "J"), Polygon(points = {{-22, -24}, {-22, -16}, {0, -16}, {0, -10}, {12, -20}, {0, -30}, {0, -24}, {-22, -24}}, lineColor = {0, 0, 0}, smooth = Smooth.None), Text(extent = {{-100, 100}, {100, 60}}, lineColor = {0, 0, 255}, textString = "%name")}), Window(x = 0.29, y = 0.14, width = 0.6, height = 0.6), Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>
  The <b>RadCondAdapt</b> model computes a heat flow rate caused by the absorbance of radiation. The amount of radiation being transformed into a heat flow is controlled by a given coefficient.
  </p>
- <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <h4><font color=\"#008000\">Level of Development</font></h4>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  </html>
  ", revisions = "<html>
  <ul>
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
- <li><i>April 01, 2014 </i> by Moritz Lauster:<br>Moved and Renamed</li>
- <li><i>April 10, 2013&nbsp;</i> by Ole Odendahl:<br>Formatted documentation appropriately </li>
+ <li><i>April 01, 2014 </i> by Moritz Lauster:<br/>Moved and Renamed</li>
+ <li><i>April 10, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately </li>
  </ul>
  </html>"));
 end SolarRadToHeat;
-

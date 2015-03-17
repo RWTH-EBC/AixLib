@@ -38,18 +38,18 @@ equation
   connect(simpleHeatTransfer.port_b, volume1.heatPort) annotation(Line(points = {{-10, 0}, {-30, 0}}, color = {191, 0, 0}, smooth = Smooth.None));
   annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Polygon(points=  {{-80, 80}, {-80, -80}, {80, 80}, {-80, 80}}, lineColor=  {175, 175, 175}, smooth=  Smooth.None, fillColor=  {85, 170, 255}, fillPattern=  FillPattern.Solid), Polygon(points=  {{-80, -80}, {80, -80}, {80, 80}, {-80, -80}}, lineColor=  {175, 175, 175}, smooth=  Smooth.None, fillColor=  {255, 85, 85}, fillPattern=  FillPattern.Solid)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(revisions = "<html>
  <p>12.01.2014, Peter Matthes</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This model extends <a href=\"AixLib.HVAC.HeatExchanger.RecuperatorNoMediumVarcp\">RecuperatorNoMediumVarcp</a> as computational core (heat exchange model). </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The hydraulic components are taken from other packages to facilitate heat exchange (<a href=\"Volume.VolumeMoistAir\">Volume.VolumeMoistAir</a>), sensors for medium temperature (<a href=\"Sensors.PropertySensorMoistAir\">Sensors.PropertySensorMoistAir</a>) and pressure loss (<a href=\"Ductwork.PressureLoss\">Ductwork.PressureLoss</a>). The necessary inputs for the heat exchange model will be taken from the medium components. The heat transfer from one medium to the other will be calculated by the heat exchange model. The heat flow occurs through the <a href=\"HeatExchanger.BaseClasses.SimpleHeatTransfer\">HeatExchanger.BaseClasses.SimpleHeatTransfer</a> model.</p>
  <p><b><font style=\"color: #008000; \">References</font></b> </p>
- <table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
+ <table summary=\"References\" cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
  <td><p>[Wetter1999]</p></td>
  <td><p>Wetter, M.: Simulation Model -- Air-to-Air Plate Heat Exchanger, Techreport, <i>Ernest Orlando Lawrence Berkeley National Laboratory, Berkeley, CA (US), </i><b>1999</b>, URL: <a href=\"http://simulationresearch.lbl.gov/dirpubs/42354.pdf\">http://simulationresearch.lbl.gov/dirpubs/42354.pdf</a></p></td>
  </tr>
@@ -64,4 +64,3 @@ equation
  </table>
  </html>"));
 end Recuperator;
-

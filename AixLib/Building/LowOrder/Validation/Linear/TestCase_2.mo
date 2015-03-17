@@ -34,7 +34,7 @@ equation
 </ul>
 <p>Reference: Room air temperature </p>
 <p>Variable path: <code>reducedModel.airload.T</code> </p>
-<p><br><br>All values are given in the VDI 6007-1. </p>
+<p><br/><br/>All values are given in the VDI 6007-1. </p>
 <p>Same Test Case exists in VDI 6020. </p>
 </html>",  revisions = "<html>
  <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>

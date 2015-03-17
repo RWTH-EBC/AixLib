@@ -33,12 +33,12 @@ equation
   connect(heatCurve.T_set, boiler.T_set) annotation(Line(points = {{-69.2, 36}, {-64, 36}, {-64, 39.2}, {-57, 39.2}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(outdoorTemp.T_out, heatCurve.T_ref) annotation(Line(points = {{-80, 71.4}, {-80, 60}, {-96, 60}, {-96, 36}, {-90, 36}}, color = {0, 0, 127}, smooth = Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), experiment(StopTime = 82800, Interval = 60), __Dymola_experimentSetupOutput(events = false), Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p><br/>This example models a simple fluid circuit in order to test the boiler model for plausibility</p>
  </html>", revisions = "<html>
  <p>07.10.2013, Marcus Fuchs</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"), Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}})));
 end BoilerSystemTVar;

@@ -47,7 +47,7 @@ equation
   connect(const1.y, add.u1) annotation(Line(points = {{88.3, 25}, {92.15, 25}, {92.15, 25.2}, {95.6, 25.2}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(boundary_ph1.port_a, pipe1.port_a) annotation(Line(points = {{-92, -10}, {-68, -10}}, color = {0, 127, 255}, smooth = Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), experiment(StopTime = 172800, Interval = 60), __Dymola_experimentSetupOutput, Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>This is a simple example of a storage and a solar collector.</p>
  </html>", revisions = "<html>
  <p>13.12.2013, by <i>Sebastian Stinner</i>: implemented</p>

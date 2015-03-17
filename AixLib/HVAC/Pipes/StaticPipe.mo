@@ -19,7 +19,7 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model of a straight pipe with constant cross section and with steady-state mass, momentum and energy balances, i.e., the model does not store mass or energy. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The model uses a modified friction factor to estimate the Reynolds number. Using Hagen&ndash;Poiseuille equation, the pressure drop and mass flow rate are calculated using the Reynolds number. The model is only valid for turbulent flow. </p>
  <h4><span style=\"color:#008000\">Numerical Issues</span></h4>
@@ -28,4 +28,3 @@ equation
  <p><a href=\"AixLib.HVAC.Pipes.Examples.StaticPipe_Validation\">AixLib.HVAC.Pipes.Examples.StaticPipe_Validation</a></p>
  </html>"));
 end StaticPipe;
-

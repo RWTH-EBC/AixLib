@@ -13,18 +13,18 @@ equation
   connect(sine.y, externalC.u[1]) annotation(Line(points = {{-59, 40}, {-30, 40}, {-30, 2.66667}, {0, 2.66667}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(ramp.y, externalC.u[2]) annotation(Line(points = {{-59, 0}, {-30.5, 0}, {-30.5, -2.22045e-016}, {0, -2.22045e-016}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(step.y, externalC.u[3]) annotation(Line(points = {{-59, -40}, {-30, -40}, {-30, -2}, {0, -2}, {0, -2.66667}}, color = {0, 0, 127}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(extent = {{-120, -100}, {100, 100}}, preserveAspectRatio = false), graphics = {Text(extent=  {{-38, -36}, {76, -66}}, lineColor=  {0, 0, 255}, textString=  "Send 3 different signals to external function/program"), Text(extent=  {{-120, -68}, {100, -108}}, lineColor=  {0, 0, 255}, textString=  "Header.h and ExternalC.lib from library directory Office\\Libs\\ 
+  annotation(Diagram(coordinateSystem(extent = {{-120, -100}, {100, 100}}, preserveAspectRatio = false), graphics = {Text(extent=  {{-38, -36}, {76, -66}}, lineColor=  {0, 0, 255}, textString=  "Send 3 different signals to external function/program"), Text(extent=  {{-120, -68}, {100, -108}}, lineColor=  {0, 0, 255}, textString=  "Header.h and ExternalC.lib from library directory Office\\Libs\\
  must be present in the current working directory!
  Alternatively the PATH and INCLUDE variables can be adjusted according to the specified location.
  ")}), Icon(coordinateSystem(extent = {{-120, -100}, {100, 100}})), experiment(StopTime = 100, Interval = 0.1, __Dymola_Algorithm = "Lsodar"), __Dymola_experimentSetupOutput(events = false), Documentation(revisions = "<html>
  <p>24.01.14, Bjoern Flieger</p>
- <p><ul>
+ <ul>
  <li>Implemented full example</li>
- </ul></p>
+ </ul>
  <p>23.01.14, Bjoern Flieger</p>
- <p><ul>
+ <ul>
  <li>Implemented first draft</li>
- </ul></p>
+ </ul>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This example illustrates the usage of external C functions.</p>

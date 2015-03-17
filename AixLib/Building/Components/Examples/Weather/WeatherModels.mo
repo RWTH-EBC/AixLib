@@ -10,9 +10,9 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>A test to see if the <a href=\"AixLib.Building.Components.Weather.Weather\">weather</a> model is functioning correctly. A input file containing weather data (TRY standard) has to be provided and linked to. Check out the default path in order to set the path correctly considering the current directory.</p>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>May 28, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately, Added SkyTemp model to simulation.</li>
  <li><i>December 13, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
- </ul></p>
+ </ul>
  </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
 end WeatherModels;

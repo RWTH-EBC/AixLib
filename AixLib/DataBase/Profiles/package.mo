@@ -6,9 +6,9 @@ package Profiles "Profiles for ventilation, set temperatures, internal gains"
   annotation(Documentation(info = "<html>
  <p>Profiles are to be understood as use profiles.</p>
  <p>For example:</p>
- <p><ul>
+ <ul>
  <li>Ventilation schedules</li>
  <li>Schedules for set room temperature</li>
- </ul></p>
+ </ul>
  </html>"));
 end Profiles;

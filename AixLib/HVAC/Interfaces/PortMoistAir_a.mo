@@ -12,9 +12,8 @@ connector PortMoistAir_a
  <p>Port Model for Moist Air</p>
  </html>", revisions = "<html>
  <p>10.12.2013, Mark Wesseling</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"));
 end PortMoistAir_a;
-

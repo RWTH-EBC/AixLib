@@ -44,19 +44,19 @@ equation
  <ul>
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
    <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
-   <li><i>October 16, 2011&nbsp;</i> by Ana Constantin:<br/>implemented<br></li>
+   <li><i>October 16, 2011&nbsp;</i> by Ana Constantin:<br/>implemented<br/></li>
  </ul>
  </html>", info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>This model ventilates the solar gains away. </p>
- <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
- <p><h4><font color=\"#008000\">Concept</font></h4></p>
+ <h4><font color=\"#008000\">Level of Development</font></h4>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+ <h4><font color=\"#008000\">Concept</font></h4>
  <p>The model is used for simulations of heating periods. The outside temperature can be so high, that the heating system shuts down and the temperature in the room rises too high.</p>
  <p>When the outside temperature rises above the heating limit, the model is activated and tries to lower the temperature under the set temperature of the room plus 2K.</p>
  <p>Furthermore the model is only activated when the outdside temperature lower is than the inside temeperature. </p>
  <p>The maximum ventilation rate can be adjusted according to the type of building. You can try to set it really high, e.g. 200 1/h, in order to exhaust the potential of this type of ventilation for cooling the rooms. </p>
- <p><h4><font color=\"#008000\">Example Results</font></h4></p>
+ <h4><font color=\"#008000\">Example Results</font></h4>
  <p><a href=\"AixLib.Building.Components.Examples.DryAir.DryAir_test\">AixLib.Building.Components.Examples.DryAir.DryAir_test</a> </p>
  </html>"));
 end DynamicVentilation;

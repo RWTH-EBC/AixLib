@@ -57,13 +57,13 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for heat output of a human according to VDI 2078 (Table A.1). The model only considers the dry heat emission and divides it into convective and radiative heat transmission. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>It is possible to choose between several types of physical activity.</p>
  <p>The heat output depends on the air temperature in the room where the activity takes place.</p>
  <p>A schedule of the activity is also required as constant presence of people in a room is not realistic. The schedule describes the presence of only one person, and can take values from 0 to 1. </p>
  <h4><span style=\"color:#008000\">Assumptions</span></h4>
- <p>The surface for radiation exchange is computed from the number of persons in the room, which leads to a surface area of zero, when no one is present. In particular cases this might lead to an error as depending of the rest of the system a division by this surface will be introduced in the system of equations -&GT; division by zero. For this reson a limitiation for the surface has been intoduced: a minimum of 1e-4 m2 and a maximum of 1e+23 m2 (only needed for a complete parametrization of the model). </p>
+ <p>The surface for radiation exchange is computed from the number of persons in the room, which leads to a surface area of zero, when no one is present. In particular cases this might lead to an error as depending of the rest of the system a division by this surface will be introduced in the system of equations -&gt; division by zero. For this reson a limitiation for the surface has been intoduced: a minimum of 1e-4 m2 and a maximum of 1e+23 m2 (only needed for a complete parametrization of the model). </p>
  <h4><span style=\"color:#008000\">References</span></h4>
  <p>VDI 2078: Calculation of cooling load and room temperatures of rooms and buildings (VDI Cooling Load Code of Practice) - March 2012</p>
  <h4><span style=\"color:#008000\">Example Results</span></h4>
@@ -72,9 +72,9 @@ equation
  </html>", revisions = "<html>
  <ul>
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
- <li><i>April 10, 2014&nbsp;</i> by Ana Constantin:<br>Added a lower positive limit to the surface area, so it won&apos;t lead to a division by zero</li>
- <li><i>May 07, 2013&nbsp;</i> by Ole Odendahl:<br>Formatted documentation appropriately</li>
- <li><i>August 10, 2011</i> by Ana Constantin:<br>implemented</li>
+ <li><i>April 10, 2014&nbsp;</i> by Ana Constantin:<br/>Added a lower positive limit to the surface area, so it won&apos;t lead to a division by zero</li>
+ <li><i>May 07, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
+ <li><i>August 10, 2011</i> by Ana Constantin:<br/>implemented</li>
  </ul>
  </html>"));
 end HumanSensibleHeat_VDI2078;

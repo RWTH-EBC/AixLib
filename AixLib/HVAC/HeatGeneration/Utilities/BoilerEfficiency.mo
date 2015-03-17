@@ -23,15 +23,15 @@ equation
   connect(tableBoilerEff.y[1], division.u2) annotation(Line(points = {{21, 20}, {28, 20}, {28, 34}, {38, 34}}, color = {0, 0, 127}, smooth = Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(revisions = "<html>
  <p>09.10.2013, Marcus Fuchs</p>
- <p><ul>
+ <ul>
  <li>Changed table values to be calculated according to a given value of eta at full load operation</li>
- </ul></p>
+ </ul>
  <p>07.10.2013, Marcus Fuchs</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>", info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p><br/>This boiler efficiency specifies a table for eta at different part load conditions. The values are somewhat similar to the lowest curve in Recknagel, Sprenger 2009 DVD p. 822. This describes a simple boiler (no low temperature operation, no flue gas condensation)</p>
  </html>"));
 end BoilerEfficiency;

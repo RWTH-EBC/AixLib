@@ -89,13 +89,13 @@ equation
  2- Children1
  3 - Bath
  4 - Children2")}), Documentation(revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>June 19, 2014</i> by Ana Constantin:<br/>Implemented</li>
- </ul></p>
+ </ul>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for the upper floor.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  </html>"));
 end UpperFloor;

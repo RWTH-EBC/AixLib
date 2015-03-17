@@ -35,31 +35,31 @@ equation
             fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{10, 36}, {72, -72}}, lineColor=  {0, 0, 0}, fillColor=  {211, 243, 255},
             fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-72, 36}, {-8, -72}}, lineColor=  {0, 0, 0}, fillColor=  {211, 243, 255},
             fillPattern=                                                                                                    FillPattern.Solid), Line(points=  {{-8, 36}, {-8, -72}, {-72, -72}, {-72, 36}, {-8, 36}}, color=  {0, 0, 0}, smooth=  Smooth.None), Line(points=  {{72, 36}, {72, -72}, {10, -72}, {10, 36}, {72, 36}}, color=  {0, 0, 0}, smooth=  Smooth.None), Rectangle(extent=  {{-80, 80}, {80, -80}}, lineColor=  {0, 0, 0})}), Window(x = 0.26, y = 0.21, width = 0.49, height = 0.55), Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>The <b>WindowSimple</b> model represents a window described by the thermal transmission coefficient and the coefficient of solar energy transmission. </p>
- <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
- <p><h4><font color=\"#008000\">Concept</font></h4></p>
+ <h4><font color=\"#008000\">Level of Development</font></h4>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+ <h4><font color=\"#008000\">Concept</font></h4>
  <p>Phenomena being simulated: </p>
- <p><ul>
+ <ul>
  <li>Solar energy transmission through the glass</li>
  <li>Heat transmission through the whole window</li>
- </ul></p>
- <p><h4><font color=\"#008000\">References</font></h4></p>
+ </ul>
+ <h4><font color=\"#008000\">References</font></h4>
  <p>Exemplary U-Values for windows from insulation standards</p>
- <p><ul>
- <li>WschV 1984: specified &QUOT;two panes&QUOT; assumed 2,5 W/m2K</li>
+ <ul>
+ <li>WschV 1984: specified &quot;two panes&quot; assumed 2,5 W/m2K</li>
  <li>WschV 1995: 1,8 W/m2K</li>
  <li>EnEV 2002: 1,7 W/m2K</li>
  <li>EnEV 2009: 1,3 W/m2K</li>
- </ul></p>
- <p><h4><font color=\"#008000\">Example Results</font></h4></p>
+ </ul>
+ <h4><font color=\"#008000\">Example Results</font></h4>
  <p><a href=\"AixLib.Building.Components.Examples.WindowsDoors.WindowSimple\">AixLib.Building.Components.Examples.WindowsDoors.WindowSimple</a></p>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
  <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
  <li><i>March 30, 2012&nbsp;</i> by Ana Constantin and Corinna Leonhardt:<br/>Implemented.</li>
- </ul></p>
+ </ul>
  </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics = {Rectangle(extent=  {{-80, 80}, {80, -80}}, lineColor=  {0, 0, 0})}), DymolaStoredErrors);
 end WindowSimple;

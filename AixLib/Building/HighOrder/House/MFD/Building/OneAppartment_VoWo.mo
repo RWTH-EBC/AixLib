@@ -109,11 +109,11 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Complete model appartment</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
  <li><i>August 16, 2011</i> by Ana Constantin:<br/>Implemented</li>
- </ul></p>
+ </ul>
  </html>"));
 end OneAppartment_VoWo;

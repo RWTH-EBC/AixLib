@@ -14,17 +14,17 @@ equation
             fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{24, 80}, {44, -80}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {182, 182, 182},
             fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{4, 80}, {24, -80}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {156, 156, 156},
             fillPattern =                                                                                                    FillPattern.Solid)}), Window(x = 0.25, y = 0.38, width = 0.6, height = 0.6), Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>The <b>HeatConv</b> model represents the phenomenon of heat convection. No heat is stored.</p>
- <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
- <p><h4><font color=\"#008000\">Example Results</font></h4></p>
+ <h4><font color=\"#008000\">Level of Development</font></h4>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+ <h4><font color=\"#008000\">Example Results</font></h4>
  <p><a href=\"AixLib.Utilities.Examples.HeatTransfer_test\">AixLib.Utilities.HeatTransfer_test </a></p>
  </html>", revisions = "<html>
  <ul>
- <li><i>April 1, 2014&nbsp;</i> by Ana Constantin:<br>Uses components from MSL and respects the naming conventions</li>
- <li><i>April 10, 2013&nbsp;</i> by Ole Odendahl:<br>Added basic documentation and formatted appropriately</li>
- <li><i>October 22, 2014&nbsp;</i> by Marcus Fuchs:<br>Changed graphics section to be compliant with Modelica Specification</li>
+ <li><i>April 1, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
+ <li><i>April 10, 2013&nbsp;</i> by Ole Odendahl:<br/>Added basic documentation and formatted appropriately</li>
+ <li><i>October 22, 2014&nbsp;</i> by Marcus Fuchs:<br/>Changed graphics section to be compliant with Modelica Specification</li>
  </ul>
  </html>"));
 end HeatConv;

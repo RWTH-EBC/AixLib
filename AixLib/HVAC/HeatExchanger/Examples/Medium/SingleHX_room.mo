@@ -25,8 +25,8 @@ equation
  <p>A small example of an heat exchanger in combination with a room model with a heat load (ventilation system with heat recovery). The outdoor air temperature will be varied.</p>
  </html>", revisions = "<html>
  <p>03.02.2014, Peter Matthes</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"), experiment(StopTime = 3), __Dymola_experimentSetupOutput);
 end SingleHX_room;

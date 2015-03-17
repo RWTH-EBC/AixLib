@@ -152,18 +152,17 @@ equation
             fillPattern=                                                                                                    FillPattern.Solid, textString=  "width"), Line(points=  {{-46, 68}, {-46, 38}}, color=  {255, 255, 255}, smooth=  Smooth.None), Line(points=  {{-60, 54}, {-30, 54}}, color=  {255, 255, 255}, smooth=  Smooth.None), Text(extent=  {{-126, 6}, {0, -6}}, lineColor=  {255, 255, 255}, fillColor=  {255, 170, 170},
             fillPattern=                                                                                                    FillPattern.Solid, origin=  {-46, 64}, rotation=  90, textString=  "length"), Line(points=  {{-46, -42}, {-46, -68}}, color=  {255, 255, 255}, smooth=  Smooth.None), Line(points=  {{68, 12}, {54, 12}}, color=  {255, 255, 255}, smooth=  Smooth.None), Text(extent=  {{53, 6}, {-53, -6}}, lineColor=  {255, 255, 255}, fillColor=  {255, 170, 170},
             fillPattern=                                                                                                    FillPattern.Solid, origin=  {58, -27}, rotation=  90, textString=  "length_b"), Line(points=  {{58, -58}, {58, -68}}, color=  {255, 255, 255}, smooth=  Smooth.None), Line(points=  {{58, 12}, {58, 2}}, color=  {255, 255, 255}, smooth=  Smooth.None)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
  <li><i>July 8, 2011</i> by Ana Constantin:<br/>Implemented</li>
- </ul></p>
+ </ul>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for a room with 1&nbsp;outer&nbsp;wall,&nbsp;2&nbsp;inner&nbsp;walls&nbsp;load,&nbsp;2&nbsp;inner&nbsp;walls&nbsp;simple,&nbsp;1&nbsp;floor&nbsp;towards&nbsp;lower&nbsp;floor,&nbsp;1&nbsp;ceiling&nbsp;towards&nbsp;attic,&nbsp;1&nbsp;roof&nbsp;towards&nbsp;outside.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The following figure presents the room&apos;s layout:</p>
  <p><img src=\"modelica://AixLib/Images/House/OW1_2IWl_2IWs_1Pa_1At1Ro.png\"/></p>
  </html>"));
 end Ow1IwL2IwS1Lf1At1Ro1;
-
