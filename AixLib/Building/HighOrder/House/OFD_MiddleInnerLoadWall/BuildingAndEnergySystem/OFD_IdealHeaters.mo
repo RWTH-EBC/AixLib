@@ -99,10 +99,10 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for a complete model with building envelope and an energy system based on ideal heaters.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>June 19, 2014</i> by Ana Constantin:<br/>Implemented</li>
- </ul></p>
+ </ul>
  </html>"));
 end OFD_IdealHeaters;

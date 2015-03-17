@@ -21,16 +21,16 @@ equation
   connect(gain.y, ConvectiveHeat.Q_flow) annotation(Line(points = {{12.4, 30}, {20, 30}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(gain1.y, RadiativeHeat.Q_flow) annotation(Line(points = {{12.4, -10}, {20, -10}}, color = {0, 0, 127}, smooth = Smooth.None));
   annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
  <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
  <li><i>April 30, 2012</i> by Peter Matthes:<br/>implemented partial model for heat sources to work with Ana's models.</li>
  <li><i>August 10, 2011</i> by Ana Constantin:<br/>implemented</li>
- </ul></p>
+ </ul>
  </html>", info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>Partial model to build a heat source with convective and radiative components. The parameter <code>ratioConv</code> determines the percentage of convective heat.</p>
- <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <h4><font color=\"#008000\">Level of Development</font></h4>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  </html>"));
 end PartialInternalGain;

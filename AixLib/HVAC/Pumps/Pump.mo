@@ -46,7 +46,7 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Simple table based pump model.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>Simple table based pump model with the following features:</p>
  <ul>
@@ -54,8 +54,7 @@ equation
  <li>Choice between two control strategies: 1. dp-const; 2. dp-var</li>
  <li>Input for switching to night mode. During night mode, the pump follows the minimal characteristic </li>
  </ul>
- <p><br><b><font style=\"color: #008000; \">Example Results</font></b></p>
+ <p><br/><b><font style=\"color: #008000; \">Example Results</font></b></p>
  <p><a href=\"AixLib.HVAC.Pumps.Examples.PumpHydraulicResistance_closedLoop\">AixLib.HVAC.Pumps.Examples.PumpHydraulicResistance_closedLoop</a></p>
  </html>"));
 end Pump;
-

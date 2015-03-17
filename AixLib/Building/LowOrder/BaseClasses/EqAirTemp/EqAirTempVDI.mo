@@ -29,12 +29,12 @@ equation
 
   equalAirTemp.T = T_eqWall*wf_wall + T_eqWin*wf_win + T_ground*wf_ground;
   annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>October 2014,&nbsp;</i> by Peter Remmen:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>", info="<html>
 <p>EqAirTempVDI extends from partianEqAirTemp</p>
-<p>The longwave radiation is considered for each direction seperately.</p>
+<p>The longwave radiation is considered for each direction separately.</p>
 <h4>Main equations</h4>
 <p>The concept is described in VDI 6007. All equations can be found in VDI 6007. </p>
 <h4>Assumption and limitations</h4>

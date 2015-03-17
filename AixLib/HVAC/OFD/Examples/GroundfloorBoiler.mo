@@ -106,13 +106,13 @@ equation
  <li>Changed model to use Annex 60 base class</li>
  </ul></p>
  <p>04.11.2013, Moritz Lauster</p>
- <p><ul>
+ <ul>
  <li>Implemented full example</li>
- </ul></p>
+ </ul>
  <p>26.11.2013, Ana Constantin</p>
- <p><ul>
+ <ul>
  <li>Implemented first draft</li>
- </ul></p>
+ </ul>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This example illustrates the usage of the OFD-hydraulics model in combination with heating systems, e.g. a boiler.</p>

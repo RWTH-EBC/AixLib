@@ -165,18 +165,17 @@ equation
             fillPattern=                                                                                                    FillPattern.Solid, textString=  "Win3", origin=  {-70, 5}, rotation=  90, visible=  withWindow3), Text(extent=  {{20, 74}, {40, 66}}, lineColor=  {255, 255, 255}, fillColor=  {255, 170, 170},
             fillPattern=                                                                                                    FillPattern.Solid, textString=  "D2", visible=  withDoor2), Line(points=  {{68, 8}, {54, 8}}, color=  {255, 255, 255}, smooth=  Smooth.None), Line(points=  {{58, 8}, {58, 0}}, color=  {255, 255, 255}, smooth=  Smooth.None), Text(extent=  {{50, 6}, {-50, -6}}, lineColor=  {255, 255, 255}, fillColor=  {255, 170, 170},
             fillPattern=                                                                                                    FillPattern.Solid, origin=  {58, -30}, rotation=  90, textString=  "length_b"), Line(points=  {{58, -62}, {58, -68}}, color=  {255, 255, 255}, smooth=  Smooth.None)}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
  <li><i>July 8, 2011</i> by Ana Constantin:<br/>Implemented</li>
- </ul></p>
+ </ul>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for a room with 2&nbsp;outer&nbsp;walls,&nbsp;2&nbsp;inner&nbsp;walls&nbsp;load towards two different rooms but with the same orientation,&nbsp;1&nbsp;inner&nbsp;wall&nbsp;simple,&nbsp;1&nbsp;floor&nbsp;towards&nbsp;lower&nbsp;floor,&nbsp;1&nbsp;ceiling&nbsp;towards&nbsp;attic,&nbsp;1&nbsp;roof&nbsp;towards&nbsp;outside.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The following figure presents the room&apos;s layout:</p>
  <p><img src=\"modelica://AixLib/Images/House/OW2_2IWl_1IWs_1Pa_1At1Ro.png\"/></p>
  </html>"));
 end Ow2IwL2IwS1Lf1At1Ro1;
-

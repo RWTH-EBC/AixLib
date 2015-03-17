@@ -7,7 +7,7 @@ package LowOrder "Low Order Building Models"
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Package of Low Order Models for thermal building simulations.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars4.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars4.png\" alt=\"stars: 4 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The Low Order library provides low order models for thermal building simulation using a bundle of simplifications. One major question is the number of capacitances used to discretize thermal masses and to describe heat storage and transfer effects. This number defines the order of the model. Further simplifications are made for the consideration of long-wave radiation exchange, outdoor as well as indoor radiation exchange.</p>
  <p>Most of the models in this package base on the German Guideline VDI 6007, though some changes have been applied, especially regarding long-wave radiation exchange. All models have been validated using test cases given in VDI 6007 (see <a href=\"Validation\">Validation</a>) and ASHRAE 140.</p>
@@ -25,13 +25,13 @@ package LowOrder "Low Order Building Models"
  </ul>
  </html>", revisions = "<html>
  <p><b>2014-06-24: Version 1.0</b>: by Moritz Lauster</p>
- <p><ul>
+ <ul>
  <li>Added documentation for all models and examples</li>
  <li>Renaming according to the MSL naming conventions</li>
  <li>Uses new MSL comform models from Building</li>
- </ul></p>
+ </ul>
  <p><b>2014-05-19: Version 0.9</b>: by Moritz Lauster</p>
- <p><ul>
+ <ul>
  <li>Collected existing models and libraries and created LowOrder-library</li>
  <li>Inserted Vadliation package</li>
  </html>"));

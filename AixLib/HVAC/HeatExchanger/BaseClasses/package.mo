@@ -1,4 +1,4 @@
 within AixLib.HVAC.HeatExchanger;
-package BaseClasses 
+package BaseClasses
   extends Modelica.Icons.BasesPackage;
 end BaseClasses;

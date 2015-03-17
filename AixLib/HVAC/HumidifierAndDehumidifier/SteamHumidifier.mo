@@ -32,7 +32,7 @@ equation
   H_flow_a = portMoistAir_a.m_flow * actualStream(portMoistAir_a.h_outflow);
   H_flow_b = portMoistAir_b.m_flow * actualStream(portMoistAir_b.h_outflow);
   //Saturation pressure and humidity
-  p_Saturation_portb = HVAC.Volume.BaseClasses.SaturationPressureSteam(T);
+  p_Saturation_portb = AixLib.HVAC.Volume.BaseClasses.SaturationPressureSteam(T);
   // because almost isothermal
   X_Saturation_portb = M_Steam / M_Air * p_Saturation / (portMoistAir_b.p - p_Saturation_portb);
   Dummy_portb_Xout = inStream(portMoistAir_a.X_outflow) + Massflow_steamIn / portMoistAir_a.m_flow;
@@ -46,7 +46,7 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for a steam humidifier.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>Model functions in both directions as a humidifier.</p>
  <p>Model inputs: Massflow and temperature for steam.</p>
@@ -57,4 +57,3 @@ equation
  <p>21.01.2014, by <i>Ana Constantin</i>: implemented</p>
  </html>"));
 end SteamHumidifier;
-

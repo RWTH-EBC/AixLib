@@ -10,9 +10,8 @@ connector Port_a
             fillPattern =                                                                                                    FillPattern.Solid)}), Documentation(revisions = "<html>
  <p>01.10.2013, by <i>Pooyan Jahangiri</i>: implemented</p>
  </html>", info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>Interface for quasi one-dimensional fluid flow in a hydraulic component. Only for fluid with constant properties.</p>
  <p>Pressure, mass flow and enthalpy flow are transported in this interface.</p>
  </html>"));
 end Port_a;
-

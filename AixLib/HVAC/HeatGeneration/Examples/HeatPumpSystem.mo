@@ -102,8 +102,8 @@ equation
  <li>Changed model to use Annex 60 base class</li>
  </ul></p>
  <p>25.11.2013, Kristian Huchtemann</p>
- <p><ul>
+ <ul>
  <li>changed BoilerSystem to HeatPumpSystem</li>
- </ul></p>
+ </ul>
  </html>"), Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}})));
 end HeatPumpSystem;

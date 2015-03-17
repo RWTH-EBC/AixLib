@@ -87,18 +87,17 @@ equation
   connect(Wall_Ceiling.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{117, 78}, {117, 64}, {94, 64}, {94, -44}, {45.9, -44}, {45.9, -35.4}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(airload.port, thermStar_Demux.therm) annotation(Line(points = {{-13, -4}, {40.9, -4}, {40.9, -15.9}}, color = {191, 0, 0}, smooth = Smooth.None));
   annotation(__Dymola_Images(Parameters(source = "AixLib/Images/House/VoWo_Corridor.png")), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}, initialScale = 0.1), graphics = {Polygon(points=  {{-60, 60}, {120, 60}, {120, -60}, {20, -60}, {20, -100}, {-60, -100}, {-60, -18}, {-60, 60}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 255}, fillPattern=  FillPattern.Forward), Text(extent=  {{-26, 6}, {82, -26}}, lineColor=  {0, 0, 0}, fillColor=  {255, 0, 0}, fillPattern=  FillPattern.Forward, textString=  "Corridor"), Rectangle(extent=  {{-110, -120}, {-90, -140}}, lineColor=  {0, 0, 0}, lineThickness=  0.5), Rectangle(extent=  {{-110, -90}, {-90, -110}}, lineColor=  {0, 0, 0}, lineThickness=  0.5), Rectangle(extent=  {{-110, -60}, {-90, -80}}, lineColor=  {0, 0, 0}, lineThickness=  0.5), Rectangle(extent=  {{-110, -30}, {-90, -50}}, lineColor=  {0, 0, 0}, lineThickness=  0.5), Rectangle(extent=  {{-112, 60}, {-92, 40}}, lineColor=  {0, 0, 0}, lineThickness=  0.5), Rectangle(extent=  {{-112, 90}, {-92, 70}}, lineColor=  {0, 0, 0}, lineThickness=  0.5), Rectangle(extent=  {{108, 12}, {128, -18}}, lineColor=  {0, 0, 0}, lineThickness=  1, fillColor=  {127, 0, 0}, fillPattern=  FillPattern.Forward), Ellipse(extent=  {{110, 0}, {112, -2}}, lineColor=  {0, 0, 0}, pattern=  LinePattern.None, lineThickness=  1, fillPattern=  FillPattern.Sphere, fillColor=  {255, 255, 0}), Text(extent=  {{78, 38}, {164, 18}}, lineColor=  {0, 0, 255}, textString=  "Staircase"), Rectangle(extent=  {{-112, 0}, {-92, -20}}, lineColor=  {0, 0, 0}, lineThickness=  0.5), Rectangle(extent=  {{-112, 30}, {-92, 10}}, lineColor=  {0, 0, 0}, lineThickness=  0.5)}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}, initialScale = 0.1), graphics), Documentation(revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
  <li><i>August 16, 2011</i> by Ana Constantin:<br/>Implemented</li>
- </ul></p>
+ </ul>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for the corridor.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The following figure presents the room&apos;s layout:</p>
  <p><img src=\"modelica://AixLib/Images/House/VoWo_Corridor.png\"/></p>
  </html>"));
 end Corridor_VoWo;
-

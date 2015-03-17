@@ -1,4 +1,4 @@
 within AixLib.HVAC.OFD;
-package Hydraulics 
+package Hydraulics
   extends Modelica.Icons.Package;
 end Hydraulics;

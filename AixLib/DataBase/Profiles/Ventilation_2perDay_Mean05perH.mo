@@ -9,7 +9,7 @@ record Ventilation_2perDay_Mean05perH
  <p>Model can be used for OFD and MFD. On each floor there is a delay in ventilation between rooms of 30 Min. </p>
  <p>One day is represented. Make sure you set the startTime - parameter when using in a table as the beginning of the day, regardless of the fact that the simulation starts at that moment.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <h4>Table for Natural Ventilation:</h4>
  <p>Column 1: Time</p>
@@ -21,10 +21,9 @@ record Ventilation_2perDay_Mean05perH
  <h4><span style=\"color:#008000\">References</span></h4>
  <p>Record is used in model <a href=\"Modelica.Blocks.Sources.CombiTimeTable\">Modelica.Blocks.Sources.CombiTimeTable</a></p>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>August 30, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
  <li><i>July 3, 2012&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
- </ul></p>
+ </ul>
  </html>"));
 end Ventilation_2perDay_Mean05perH;
-

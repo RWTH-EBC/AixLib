@@ -19,11 +19,11 @@ equation
  <ul>
    <li><i>April 11, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
    <li><i>October 14, 2012&nbsp;</i>
-          by Ana Constantin:<br>
+          by Ana Constantin:<br/>
           Implemented.</li>
  </ul>
  </html>", info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>Plot HeatFlow for the different ways of calcutating the heat transfer to see the difference. </p>
  </html>"), experiment(StopTime = 3600, Interval = 60, Algorithm = "Lsodar"), experimentSetupOutput);
 end HeatConv_outside;

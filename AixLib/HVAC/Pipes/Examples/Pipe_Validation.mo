@@ -57,7 +57,7 @@ equation
  </ul></p>
  <p>01.10.2013, by <i>Pooyan Jahangiri</i>: implemented</p>
  </html>", info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>Simple example of the pipe connected to two boundaries and a heat source.</p>
  <p><br/><b><font style=\"color: #008000; \">Concept</font></b></p>
  <p>The boundaries have different pressures resulting in a mass flow in the pipe. The pipe is connected to a heat source with variable heat flow. The change in internal energy and the temperature of the pipe can be observed.</p>

@@ -33,7 +33,7 @@ partial model RecuperatorNoMediumVarcp
   Real epsilon(nominal = epsilon0, start = epsilon0)
     "Heat exchanger characteristic";
   Real Z "Ratio of heat capacity flow rates";
-  Modelica.SIunits.Power Q "transfered thermal power";
+  Modelica.SIunits.Power Q "transferred thermal power";
   Modelica.SIunits.ThermalConductance UA "U * A value";
   Modelica.SIunits.ThermalConductance C1 "Heat capacity flow rate of medium 1";
   Modelica.SIunits.ThermalConductance C2 "Heat capacity flow rate of medium 2";
@@ -83,11 +83,11 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This model will be used as computational core of the heat exchanger model with a medium model. The difference to <a href=\"modelica://AixLib.HVAC.HeatExchanger.RecuperatorNoMedium\">RecuperatorNoMedium</a> is that the specific heat capacities are variable here and the input and output connectors have been replaced by normal variables with the correct unit.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The design point has been increased to a larger mass flow rate.</p>
- <p><br><b><font style=\"color: #008000; \">References</font></b> </p>
- <table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
+ <p><br/><b><font style=\"color: #008000; \">References</font></b> </p>
+ <table summary=\"References\" cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
  <td><p>[Wetter1999]</p></td>
  <td><p>Wetter, M.: Simulation Model -- Air-to-Air Plate Heat Exchanger, Techreport, <i>Ernest Orlando Lawrence Berkeley National Laboratory, Berkeley, CA (US), </i><b>1999</b>, URL: <a href=\"http://simulationresearch.lbl.gov/dirpubs/42354.pdf\">http://simulationresearch.lbl.gov/dirpubs/42354.pdf</a></p></td>
  </tr>
@@ -102,9 +102,8 @@ equation
  </table>
  </html>", revisions = "<html>
  <p>10.01.2014, Peter Matthes</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
 end RecuperatorNoMediumVarcp;
-

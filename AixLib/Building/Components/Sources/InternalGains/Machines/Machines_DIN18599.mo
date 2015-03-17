@@ -62,15 +62,15 @@ equation
             fillPattern =                                                                                                    FillPattern.Solid, pattern = LinePattern.None), Rectangle(extent = {{-56, 56}, {56, -34}}, pattern = LinePattern.None, fillColor = {0, 0, 0},
             fillPattern =                                                                                                    FillPattern.Solid, lineColor = {0, 0, 0}), Text(extent = {{-54, 30}, {58, -8}}, lineColor = {255, 0, 0}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                    FillPattern.Solid, textString = "ERC")}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>Heat cource with convective and radiative component. The load is determined by a schedule and the type of activity. </p>
- <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
- <p><img src=\"modelica:/AixLib/Images/stars2.png\"/></p>
- <p><h4><font color=\"#008000\">Concept</font></h4></p>
+ <h4><font color=\"#008000\">Level of Development</font></h4>
+ <p><img src=\"modelica://AixLib/Images/stars2.png\" alt=\"stars: 2 out of 5\"/></p>
+ <h4><font color=\"#008000\">Concept</font></h4>
  <p>The schedule sets the usage of the room by people. To set a higher number of people, a multiplier is given.</p>
  <p>The schedule describes the presence of only one person, and can take values from 0 to 1. </p>
  <p>The type of activity determines the load by a person in the room according to DIN 18599. The following values are provided:</p>
- <table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
+ <table summary=\"heat load per person\" cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
  <td bgcolor=\"#dcdcdc\"><p>Activity Type</p></td>
  <td bgcolor=\"#dcdcdc\"><p>Heat Load [W]</p></td>
  </tr>
@@ -87,15 +87,15 @@ equation
  <td><p>150</p></td>
  </tr>
  </table>
- <p><h4><font color=\"#008000\">References</font></h4></p>
+ <h4><font color=\"#008000\">References</font></h4>
  <p>DIN 18599 </p>
- <p><h4><font color=\"#008000\">Example Results</font></h4></p>
+ <h4><font color=\"#008000\">Example Results</font></h4>
  <p><a href=\"AixLib.Building.Components.Examples.Sources.InternalGains.Machines\">AixLib.Building.Components.Examples.Sources.InternalGains.Machines </a></p>
  <p><a href=\"AixLib.Building.Components.Examples.Sources.InternalGains.OneOffice\">AixLib.Building.Components.Examples.Sources.InternalGains.OneOffice</a></p>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
  <li><i>May 07, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
- </ul></p>
+ </ul>
  </html>"));
 end Machines_DIN18599;

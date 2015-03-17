@@ -72,8 +72,8 @@ equation
 <h4>References</h4>
 </html>", revisions="<html>
 <ul>
-<li><i>October 2014,&nbsp;</i> by Peter Remmen:<br>Implemented.</li>
-<li><i>January 2015,&nbsp;</i> by Peter Remmen:<br>changed name and vectorized equation, added documentation</li>
+<li><i>October 2014,&nbsp;</i> by Peter Remmen:<br/>Implemented.</li>
+<li><i>January 2015,&nbsp;</i> by Peter Remmen:<br/>changed name and vectorized equation, added documentation</li>
 </ul>
 </html>"));
 end ThermSplitter;

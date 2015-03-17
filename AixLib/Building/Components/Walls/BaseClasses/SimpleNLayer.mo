@@ -39,11 +39,11 @@ equation
             fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{32, 60}, {48, -100}}, lineColor=  {0, 0, 255}, pattern=  LinePattern.None, fillColor=  {208, 208, 208},
             fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{48, 60}, {64, -100}}, lineColor=  {0, 0, 255}, pattern=  LinePattern.None, fillColor=  {190, 190, 190},
             fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{10, -36}, {106, -110}}, lineColor=  {0, 0, 0}, textString=  "n")}), Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>The <b>SimpleNLayer</b> model represents a simple wall, consisting of n different layers. </p>
- <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
- <p><h4><font color=\"#008000\">Concept</font></h4></p>
+ <h4><font color=\"#008000\">Level of Development</font></h4>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+ <h4><font color=\"#008000\">Concept</font></h4>
  <p>There is one inner and one outer <b><a href=\"Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a\">HeatPort</a></b>-connector to simulate one-dimensional heat transfer through the wall and heat storage within the wall.</p>
  <p><b><font style=\"color: #ff0000; \">Attention:</font></b> The first element in each vector represents the layer connected to <code>HeatPort_a</code>, the last element represents the layer connected to <code>HeatPort_b</code>. </p>
  </html>
@@ -52,9 +52,8 @@ equation
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
    <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
    <li><i>March 14, 2005&nbsp;</i>
-          by Timo Haase:<br>
+          by Timo Haase:<br/>
           Implemented.</li>
  </ul>
  </html>"));
 end SimpleNLayer;
-

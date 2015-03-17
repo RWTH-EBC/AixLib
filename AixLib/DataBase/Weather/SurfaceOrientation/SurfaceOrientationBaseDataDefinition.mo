@@ -11,13 +11,13 @@ record SurfaceOrientationBaseDataDefinition
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Base data definition for the surface orientation</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">References</span></h4>
  <p>Base data definition for record to be used in model <a href=\"AixLib.HVAC.Weather.Weather\">AixLib.HVAC.Weather.Weather</a></p>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>May 07, 2013&nbsp;</i> by Ole Odendahl:<br/>Added basic documentation</li>
- </ul></p>
+ </ul>
  </html>
  "));
 end SurfaceOrientationBaseDataDefinition;

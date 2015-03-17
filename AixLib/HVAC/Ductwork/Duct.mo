@@ -20,14 +20,13 @@ equation
  <p>Simple Duct Model with pressure loss and storage of mass and energy</p>
  <p>It consists of one pressure loss model and one Volume model.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Example Results</span></h4>
  <p><a href=\"AixLib.HVAC.Ductwork.Examples.DuctNetwork\">AixLib.HVAC.Ductwork.Examples.DuctNetwork</a> </p>
  </html>", revisions = "<html>
  <p>30.12.2013, Mark Wesseling</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -40}, {100, 40}}), graphics));
 end Duct;
-

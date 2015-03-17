@@ -18,20 +18,20 @@ equation
   connect(Tinside2.port, heatStarToComb.therm) annotation(Line(points = {{-80, 10}, {-74, 10}, {-74, 31.1}, {-68.1, 31.1}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(Tinside1.port, heatStarToComb.star) annotation(Line(points = {{-80, 44}, {-74, 44}, {-74, 20.2}, {-68.4, 20.2}}, color = {191, 0, 0}, smooth = Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), experiment(StopTime = 36000, Interval = 60, Algorithm = "Lsodar"), experimentSetupOutput, Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>Simulation to test the <a href=\"AixLib.Building.Components.Walls.Wall\">Wall</a> model in case of an outside wall application.</p>
- <p><h4><font color=\"#008000\">Concept</font></h4></p>
+ <h4><font color=\"#008000\">Concept</font></h4>
  <p>Test case for calculation of U-value</p>
- <p><ul>
+ <ul>
  <li>Area of Wall: 10 m2</li>
  <li>Area of Window: 2 m2</li>
  <li>Temperature difference: 10 K</li>
  <li>Test time: 10 h</li>
- </ul></p>
+ </ul>
  </html>", revisions = "<html>
  <ul>
    <li><i>April, 2012&nbsp;</i>
-          by Mark Wesseling:<br>
+          by Mark Wesseling:<br/>
           Implemented.</li>
  </ul>
  </html>"));

@@ -120,7 +120,7 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Simple model for a buffer storage.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The water volume can be discretised in several layers.</p>
  <p>The following physical processes are modelled</p>
@@ -129,7 +129,7 @@ equation
  <li>heat exchange over the heat exchanger</li>
  <li>a bouyancy model for the heat transfer between the layers</li>
  </ul>
- <p><br><b><font style=\"color: #008000; \">Example Results</font></b></p>
+ <p><br/><b><font style=\"color: #008000; \">Example Results</font></b></p>
  <p><a href=\"AixLib.HVAC.Storage.Examples.StorageBoiler\">AixLib.HVAC.Storage.Examples.StorageBoiler</a></p>
  <p><a href=\"AixLib.HVAC.Storage.Examples.StorageSolarCollector\">AixLib.HVAC.Storage.Examples.StorageSolarCollector</a></p>
  </html>", revisions="<html>
@@ -140,4 +140,3 @@ equation
  <p>13.12.2013, by <i>Sebastian Stinner</i>: implemented</p>
  </html>"));
 end Storage;
-

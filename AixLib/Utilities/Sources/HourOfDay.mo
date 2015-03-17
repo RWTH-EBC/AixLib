@@ -17,21 +17,20 @@ equation
   HOD = SOD / 3600;
   connect(clock.y, SOY) annotation(Line(points = {{1, 30}, {20, 30}, {20, 80}, {100, 80}}, color = {0, 0, 127}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent=  {{34, 96}, {88, 62}}, lineColor=  {0, 0, 255}, textString=  "SoY"), Text(extent=  {{-6, -62}, {100, -90}}, lineColor=  {0, 0, 255}, textString=  "SoD"), Text(extent=  {{-92, -62}, {28, -92}}, lineColor=  {0, 0, 255}, textString=  "HoD"), Line(points=  {{-38, 70}, {-28, 51}}, color=  {160, 160, 164}), Line(points=  {{-71, 37}, {-54, 28}}, color=  {160, 160, 164}), Line(points=  {{-80, 0}, {-60, 0}}, color=  {160, 160, 164}), Line(points=  {{-71, -37}, {-50, -26}}, color=  {160, 160, 164}), Line(points=  {{-39, -70}, {-29, -52}}, color=  {160, 160, 164}), Line(points=  {{0, -80}, {0, -60}}, color=  {160, 160, 164}), Line(points=  {{39, -70}, {29, -51}}, color=  {160, 160, 164}), Line(points=  {{71, -37}, {52, -27}}, color=  {160, 160, 164}), Line(points=  {{80, 0}, {60, 0}}, color=  {160, 160, 164}), Line(points=  {{70, 38}, {49, 26}}, color=  {160, 160, 164}), Line(points=  {{37, 70}, {26, 50}}, color=  {160, 160, 164}), Line(points=  {{0, 80}, {0, 60}}, color=  {160, 160, 164}), Ellipse(extent=  {{-80, 80}, {80, -80}}, lineColor=  {160, 160, 164}), Line(points=  {{0, 0}, {-50, 50}}, color=  {0, 0, 0}, thickness=  0.5), Line(points=  {{0, 0}, {40, 0}}, color=  {0, 0, 0}, thickness=  0.5)}), Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>
  Additional to passed simulation seconds (SOY), hours (HOY) and days (DOY) this model provides the passed seconds of a day and the passed hours of a day. That can be used for a controller that will act depending on the time of the day for example.
  </p>
- <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
- <p><h4><font color=\"#008000\">Example Results</font></h4></p>
+ <h4><font color=\"#008000\">Level of Development</font></h4>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+ <h4><font color=\"#008000\">Example Results</font></h4>
  <p><a href=\"AixLib.Utilities.Examples.TimeUtilities_test\">AixLib.Utilities.Examples.TimeUtilities_test</a> </p>
  </html>", revisions = "<html>
  <ul>
    <li><i>April 11, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
    <li>
-          by Peter Matthes:<br>
+          by Peter Matthes:<br/>
           Implemented.</li>
  </ul>
  </html>"));
 end HourOfDay;
-

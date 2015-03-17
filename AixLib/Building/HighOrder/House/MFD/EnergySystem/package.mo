@@ -1,5 +1,5 @@
 within AixLib.Building.HighOrder.House.MFD;
-package EnergySystem 
+package EnergySystem
   extends Modelica.Icons.Package;
 
 

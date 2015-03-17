@@ -34,17 +34,17 @@ equation
   connect(temperatureSensor.port, Therm1) annotation(Line(points = {{-60, -80}, {-60, -90}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(temperatureSensor.T, switch1.u1) annotation(Line(points = {{-60, -60}, {-60, -12}, {-42, -12}}, color = {0, 0, 127}, smooth = Smooth.None));
   annotation(Diagram(graphics), Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>
- Based on a model by Alexander Hoh with some modifications and the Modelica-Standard PI controller. If set to &QUOT;on&QUOT; it will controll the thermal port temperature to the target value (soll). If set to &QUOT;off&QUOT; the controller error will become zero and therefore the current output level of the PI controller will remain constant. When this switching occurs the TriggeredTrapezoid will level the current controller output down to zero in a selectable period of time. 
+ Based on a model by Alexander Hoh with some modifications and the Modelica-Standard PI controller. If set to &quot;on&quot; it will controll the thermal port temperature to the target value (soll). If set to &quot;off&quot; the controller error will become zero and therefore the current output level of the PI controller will remain constant. When this switching occurs the TriggeredTrapezoid will level the current controller output down to zero in a selectable period of time.
  </p>
- <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
- <p><img src=\"modelica://AixLib/Images/stars2.png\"/></p>
+ <h4><font color=\"#008000\">Level of Development</font></h4>
+ <p><img src=\"modelica://AixLib/Images/stars2.png\" alt=\"stars: 2 out of 5\"/></p>
  </html>", revisions = "<html>
  <ul>
  <li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
    <li>
-          by Peter Matthes:<br>
+          by Peter Matthes:<br/>
           implemented</li>
  </ul>
  </html> "), Icon(graphics={  Rectangle(extent=  {{-80, 80}, {80, -80}}, lineColor=  {135, 135, 135}, fillColor=  {255, 255, 170},

@@ -59,12 +59,12 @@ equation
       color={0,127,255},
       smooth=Smooth.None));
   annotation(Diagram(coordinateSystem(extent={{-100,-100},{160,100}},      preserveAspectRatio=false),   graphics), Icon(coordinateSystem(extent = {{-100, -100}, {160, 100}})), experiment(StopTime = 86400, Interval = 60, __Dymola_Algorithm = "Lsodar"), __Dymola_experimentSetupOutput(events = false), Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>Pump, boiler, thernostatic valve and radiator in a closed loop.</p>
- <p><h4><font color=\"#008000\">Concept</font></h4></p>
+ <h4><font color=\"#008000\">Concept</font></h4>
  <p>The example ilustrates how the thermostatic valve reacts.</p>
  <p>The valve doesn&apos;t fully close, because as the radiator it is connected to fixed temperatures the temperature difference between flow and return become infinite at zero mass flow in order to satisfy the power equation. </p>
- <p>Make sure you initialise the temperatures correctly in order to have flow temperature &GT; return temperature &GT; room temperature in order for the equation for over temperature to be correctly calculated.</p>
+ <p>Make sure you initialise the temperatures correctly in order to have flow temperature &gt; return temperature &gt; room temperature in order for the equation for over temperature to be correctly calculated.</p>
  </html>", revisions="<html>
  <p>November 2014, Marcus Fuchs</p>
  <p><ul>

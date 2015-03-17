@@ -16,9 +16,9 @@ record Profile_BaseDataDefinition "Ventilation profiles"
  <h4><span style=\"color:#008000\">References</span></h4>
  <p>Base data definition for record to be used in model <a href=\"Modelica.Blocks.Sources.CombiTimeTable\">Modelica.Blocks.Sources.CombiTimeTable</a></p>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>August 30, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
  <li><i>July 3, 2012&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
- </ul></p>
+ </ul>
  </html>"));
 end Profile_BaseDataDefinition;

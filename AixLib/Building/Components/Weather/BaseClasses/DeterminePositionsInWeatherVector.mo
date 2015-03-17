@@ -56,13 +56,13 @@ algorithm
     m := m + 1;
   end if;
   annotation(Documentation(revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately, added variable descriptions</li>
- </ul></p>
+ </ul>
  </html>", info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>Determines the position of the given input(s) in the weather vector of the <a href=\"Building.Components.Weather.Weather\">weather</a> model. </p>
- <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <h4><font color=\"#008000\">Level of Development</font></h4>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  </html>"));
 end DeterminePositionsInWeatherVector;

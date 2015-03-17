@@ -63,7 +63,7 @@ equation
       smooth=Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
             -100},{100,100}}),                                                                           graphics), experiment(StopTime = 82800, Interval = 60), __Dymola_experimentSetupOutput(events = false), Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p><br/>This example models a simple fluid circuit in order to test the boiler model for plausibility</p>
  </html>", revisions="<html>
  <p>November 2014, Marcus Fuchs</p>
@@ -71,8 +71,8 @@ equation
  <li>Changed model to use Annex 60 base class</li>
  </ul></p>
  <p>07.10.2013, Marcus Fuchs</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"));
 end BoilerSystemTConst;

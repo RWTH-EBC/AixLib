@@ -17,7 +17,7 @@ equation
   // No pressure loss
   dp = 0;
   // Calculate saturation mass fraction at cooling temperature
-  p_Saturation_CoolSurface = HVAC.Volume.BaseClasses.SaturationPressureSteam(CoolSurfaceTemperature);
+  p_Saturation_CoolSurface = AixLib.HVAC.Volume.BaseClasses.SaturationPressureSteam(CoolSurfaceTemperature);
   X_Saturation_CoolSurface = M_Steam / M_Air * p_Saturation_CoolSurface / (portMoistAir_a.p - p_Saturation_CoolSurface);
   // Mass balance air
   0 = portMoistAir_a.m_flow + portMoistAir_b.m_flow;
@@ -35,7 +35,7 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for a cooling dehumidfier.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>Model inputs: temperature of cooling temperature and bypass factor.</p>
  <p>Model functions in both directions as a dehumidifier.</p>

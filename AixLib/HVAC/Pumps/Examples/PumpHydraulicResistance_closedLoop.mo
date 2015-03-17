@@ -46,7 +46,7 @@ equation
  </ul></p>
  <p>01.11.2013, by <i>Ana Constantin</i>: implemented</p>
  </html>", info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>Simple example with a pump, a hydraulic resistance, two pipes in a loop.</p>
  <p><br/><b><font style=\"color: #008000; \">Concept</font></b></p>
  <p>Always have a point of fixed pressure before the pump in order to be able to solve the equation for the closed loop.</p>

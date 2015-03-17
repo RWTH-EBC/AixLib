@@ -24,10 +24,9 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Simulation to test the functionalty of the internal gains in a modelled room. </p>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>May 07, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
  <li><i>August 12, 2011</i> by Ana Constantin:<br/>implemented</li>
- </ul></p>
+ </ul>
  </html>"));
 end OneOffice;
-

@@ -56,12 +56,12 @@ equation
  <li>daily input for outdoor temperature </li>
  <li>no shortwave radiation on the outer wall</li>
  <li>shortwave radiation through the window</li>
- <li>sunblind is closed at &GT;100W/m&sup2;, behind the window</li>
+ <li>sunblind is closed at &gt;100W/m&sup2;, behind the window</li>
  <li>no longwave radiation exchange between outer wall, window and ambience</li>
  </ul>
  <p>Reference: Room air temperature</p>
  <p>Variable path: <code>reducedModel.airload.T</code></p>
- <p><br><br>All values are given in the VDI 6007-1.</p>
+ <p><br/><br/>All values are given in the VDI 6007-1.</p>
  <p>Same Test Case exists in VDI 6020.</p>
  </html>"), Icon(graphics));
 end TestCase_5;

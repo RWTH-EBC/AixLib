@@ -157,18 +157,17 @@ equation
             fillPattern=                                                                                                    FillPattern.Solid, origin=  {-46, 56}, rotation=  90, textString=  "length"), Line(points=  {{-46, 60}, {-46, 30}}, color=  {255, 255, 255}, smooth=  Smooth.None), Line(points=  {{-46, -42}, {-46, -68}}, color=  {255, 255, 255}, smooth=  Smooth.None), Rectangle(extent=  {{-80, 30}, {-60, -20}}, lineColor=  {0, 0, 0}, fillColor=  {170, 213, 255},
             fillPattern=                                                                                                    FillPattern.Solid, visible=  withWindow3), Text(extent=  {{-25, 6}, {25, -6}}, lineColor=  {255, 255, 255}, fillColor=  {255, 170, 170},
             fillPattern=                                                                                                    FillPattern.Solid, textString=  "Win3", origin=  {-70, 5}, rotation=  90, visible=  withWindow3)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
  <li><i>July 8, 2011</i> by Ana Constantin:<br/>Implemented</li>
- </ul></p>
+ </ul>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for a room with 2&nbsp;outer&nbsp;walls,&nbsp;1&nbsp;inner&nbsp;wall&nbsp;load,&nbsp;1&nbsp;inner&nbsp;wall&nbsp;simple,&nbsp;1&nbsp;floor&nbsp;towards&nbsp;lower&nbsp;floor,&nbsp;1&nbsp;ceiling&nbsp;towards&nbsp;attic,&nbsp;1&nbsp;roof&nbsp;towards&nbsp;outside.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The following figure presents the room&apos;s layout:</p>
  <p><img src=\"modelica://AixLib/Images/House/OW2_1IWl_1IWs_1Pa_1At1Ro.png\"/></p>
  </html>"));
 end Ow2IwL1IwS1Lf1At1Ro1;
-

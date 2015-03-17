@@ -12,18 +12,17 @@ record WallBaseDataDefinition "Wall base data definition"
   parameter Modelica.SIunits.Emissivity eps = 0.95
     "Emissivity of inner wall surface"                                                annotation(Dialog(tab = "Wall 1", group = "Wall 1 parameters"));
   annotation(Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>Wall BaseDataDefinition actually doesn&apos;t need predefined values and that is desirable to get errors thrown when using an unparameterised wall in a model. </p>
- <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
- <p><h4><font color=\"#008000\">Concept</font></h4></p>
+ <h4><font color=\"#008000\">Level of Development</font></h4>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+ <h4><font color=\"#008000\">Concept</font></h4>
  <p><b><font style=\"color: #ff0000; \">Attention:</font></b> The first element in each vector represents the layer connected to <code>port_a</code>(outside), the last element represents the layer connected to <code>port_b</code>(surface facing the room). </p>
- <p><h4><font color=\"#008000\">References</font></h4></p>
+ <h4><font color=\"#008000\">References</font></h4>
  <p>Base data definition for record to be used in model <a href=\"Building.Components.Walls.BaseClasses.ConvNLayerClearanceStar\">Building.Components.Walls.BaseClasses.ConvNLayerClearanceStar</a></p>
  </html>", revisions = "<html>
- <p><ul>
+ <ul>
  <li><i>September 3, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
- </ul></p>
+ </ul>
  </html>"));
 end WallBaseDataDefinition;
-

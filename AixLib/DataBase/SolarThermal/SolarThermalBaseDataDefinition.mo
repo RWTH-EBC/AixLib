@@ -7,13 +7,13 @@ record SolarThermalBaseDataDefinition
   parameter Real c2(unit = "W/(m.m.K)") "Loss coefficient c2";
   annotation(Documentation(revisions = "<html>
  <p>October 2013, Marcus Fuchs</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  <p>April 2014, Mark Wesseling</p>
- <p><ul>
+ <ul>
  <li>corrected Units</li>
- </ul></p>
+ </ul>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This base record defines the values conversion factor and loss coefficients for solar thermal collectors.</p>
@@ -21,4 +21,3 @@ record SolarThermalBaseDataDefinition
  <p>Base data definition for record to be used in model <a href=\"AixLib.HVAC.HeatGeneration.SolarThermal\">AixLib.HVAC.HeatGeneration.SolarThermal</a>.</p>
  </html>"));
 end SolarThermalBaseDataDefinition;
-

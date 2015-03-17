@@ -30,8 +30,8 @@ equation
  <p>A small example which shows how to build a network of ducts</p>
  </html>", revisions = "<html>
  <p>10.12.2013, Mark Wesseling</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"));
 end DuctNetwork;

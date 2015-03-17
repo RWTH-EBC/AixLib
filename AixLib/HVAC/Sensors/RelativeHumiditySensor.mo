@@ -12,14 +12,13 @@ equation
             fillPattern =                                                                                                    FillPattern.Solid)}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This component monitors the relative Humidity of the mass flow flowing from port_a to port_b. The sensor is ideal, i.e., it does not influence the fluid. </p>
- <p><br>If there is liquid water in the air, the relative humidity is limited to 1.</p>
+ <p><br/>If there is liquid water in the air, the relative humidity is limited to 1.</p>
  <h4><span style=\"color:#008000\">Example Results</span></h4>
  <p><a href=\"AixLib.HVAC.Volume.Examples.MoistAirWithHeatTransfer\">AixLib.HVAC.Volume.Examples.MoistAirWithHeatTransfer</a></p>
  </html>", revisions = "<html>
  <p>10.12.2013, Mark Wesseling</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
 end RelativeHumiditySensor;
-

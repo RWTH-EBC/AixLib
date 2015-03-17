@@ -13,9 +13,8 @@ algorithm
 <p><code>   DynamicViscosity =  9.1435e-6 + 2.81979e-8 * T + 4.486993e-11 * T^2 - 4.928814e-14 * T^3;</code> </p>
 </html>",  revisions = "<html>
  <p>10.12.2013, Mark Wesseling</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"));
 end DynamicViscositySteam;
-

@@ -36,9 +36,9 @@ equation
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
             -100},{100,100}}),                                                                           graphics), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
- <p><br>This basic boiler model calculates the heat demand in order to reach the fluid set temperature. The heat input to the fluid is limited between 0 and the maximum heat output of the boiler. </p>
+ <p><br/>This basic boiler model calculates the heat demand in order to reach the fluid set temperature. The heat input to the fluid is limited between 0 and the maximum heat output of the boiler. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The idea is to have a very simple heating mechanism, which heats the fluid to a given set temperature using any amount of heat flow between 0 and the boiler&apos;s maximum heat output. As the model should be able to answer interesting questions for the students, one important value is fuel consumption. Therefore the model calculates fuel consumption as the integral of heat intput to the fluid divided by the boiler efficiency. This efficiency part is replaceable and can be either a fixed value or a table with part load efficiencies.</p>
  <h4><span style=\"color:#008000\">Example Results</span></h4>
@@ -54,17 +54,16 @@ equation
  <li>Fixed to pass Q_flow_max as boiler parameter</li>
  </ul></p>
  <p>09.10.2013, Marcus Fuchs</p>
- <p><ul>
+ <ul>
  <li>included the unit&apos;s volume as a parameter</li>
- </ul></p>
+ </ul>
  <p>07.10.2013, Marcus Fuchs</p>
- <p><ul>
+ <ul>
  <li>implemented</li>
- </ul></p>
+ </ul>
  </html>"), Icon(graphics={  Rectangle(extent = {{-40.5, 74.5}, {53.5, -57.5}}, lineColor = {0, 0, 0},
             fillPattern =                                                                                            FillPattern.VerticalCylinder, fillColor = {170, 170, 255}), Polygon(points = {{-12.5, -19.5}, {-20.5, -3.5}, {1.5, 40.5}, {9.5, 14.5}, {31.5, 18.5}, {21.5, -23.5}, {3.5, -19.5}, {-2.5, -19.5}, {-12.5, -19.5}}, lineColor = {0, 0, 0},
             fillPattern =                                                                                                    FillPattern.Sphere, fillColor = {255, 127, 0}), Rectangle(extent = {{-20.5, -17.5}, {33.5, -25.5}}, lineColor = {0, 0, 0},
             fillPattern =                                                                                                    FillPattern.HorizontalCylinder, fillColor = {192, 192, 192}), Polygon(points = {{-10.5, -17.5}, {-0.5, 2.5}, {25.5, -17.5}, {-0.5, -17.5}, {-10.5, -17.5}}, lineColor = {255, 255, 170}, fillColor = {255, 255, 170},
             fillPattern =                                                                                                    FillPattern.Solid)}));
 end Boiler;
-

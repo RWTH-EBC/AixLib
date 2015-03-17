@@ -1,5 +1,5 @@
-#1		
-double UserProfilesHeat(336, 3)		
+#1
+double UserProfilesHeat(336, 3)
 0	294.15	299.2
 3540	294.15	299.2
 3600	294.15	299.2
