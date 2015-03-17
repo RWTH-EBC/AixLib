@@ -1,7 +1,7 @@
 within AixLib.Fluid.Interfaces.Examples;
 model ConservationEquation "Model that tests the conservation equation"
 extends Modelica.Icons.Example;
- package Medium = AixLib.Media.Water.Simple "Medium model";
+ package Medium = AixLib.Media.Water "Medium model";
   AixLib.Fluid.Interfaces.ConservationEquation dyn(redeclare package Medium =
         Medium, energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     nPorts=2,

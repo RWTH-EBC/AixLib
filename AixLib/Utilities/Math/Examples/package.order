@@ -8,8 +8,9 @@ Polynominal
 PowerLinearized
 QuadraticLinear
 RegNonZeroPower
-SmoothExponential
 SmoothBlocks
+SmoothExponential
 SmoothLimit
+SmoothMin
 Splice
 VectorFunctions

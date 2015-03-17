@@ -1,7 +1,7 @@
 within AixLib.Fluid.Actuators.Valves.Examples;
 model TwoWayValves "Two way valves with different opening characteristics"
   extends Modelica.Icons.Example;
-  package Medium = AixLib.Media.Water.Simple;
+  package Medium = AixLib.Media.Water;
 
   AixLib.Fluid.Actuators.Valves.TwoWayLinear valLin(
     redeclare package Medium = Medium,

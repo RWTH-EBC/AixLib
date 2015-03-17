@@ -166,7 +166,11 @@ initial equation
 
 equation
   // Total quantities
-  m = fluidVolume*medium.d;
+  if massDynamics == Modelica.Fluid.Types.Dynamics.SteadyState then
+    m = fluidVolume*rho_nominal;
+  else
+    m = fluidVolume*medium.d;
+  end if;
   mXi = m*medium.Xi;
   if computeCSen then
     U = m*medium.u + CSen*(medium.T-Medium.reference_T);
@@ -270,6 +274,11 @@ AixLib.Fluid.MixingVolumes.MixingVolume</a>.
 </p>
 </html>", revisions="<html>
 <ul>
+<li>
+February 16, 2015, by Filip Jorissen:<br/>
+Fixed SteadyState massDynamics implementation for compressible media. 
+Mass <code>m</code> is now constant.
+</li>
 <li>
 February 5, 2015, by Michael Wetter:<br/>
 Changed <code>initalize_p</code> from a <code>parameter</code> to a

@@ -2,7 +2,7 @@ within AixLib.Utilities.Psychrometrics.Examples;
 model WetBul_pTX "Model to test the wet bulb temperature computation"
   extends Modelica.Icons.Example;
 
- package Medium = AixLib.Media.Air "Medium model"
+ package Medium = AixLib.Media.PerfectGases.MoistAirUnsaturated
            annotation (choicesAllMatching = true);
 
   Modelica.Blocks.Sources.Constant p(k=101325) "Pressure"

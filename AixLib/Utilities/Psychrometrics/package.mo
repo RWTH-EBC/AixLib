@@ -9,6 +9,6 @@ This package contains blocks and functions for psychrometric calculations.
 
 The nomenclature used in this package is described at
 <a href=\"modelica://AixLib.UsersGuide.Conventions\">
-Buildings.UsersGuide.Conventions</a>.
+AixLib.UsersGuide.Conventions</a>.
 </html>"));
 end Psychrometrics;

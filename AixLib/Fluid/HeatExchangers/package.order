@@ -1,7 +1,11 @@
+Boiler
 ConstantEffectiveness
-HeaterCooler_u
+HeatPump
 HeaterCooler_T
+HeaterCooler_u
+SolarThermal
 Radiators
+Utilities
 Examples
 Validation
 BaseClasses

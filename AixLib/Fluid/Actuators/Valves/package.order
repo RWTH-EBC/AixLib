@@ -1,9 +1,11 @@
+SimpleValve
+ThermostaticValve
 ThreeWayEqualPercentageLinear
 ThreeWayLinear
 TwoWayEqualPercentage
 TwoWayLinear
+TwoWayPressureIndependent
 TwoWayQuickOpening
 TwoWayTable
-TwoWayPressureIndependent
 Data
 Examples

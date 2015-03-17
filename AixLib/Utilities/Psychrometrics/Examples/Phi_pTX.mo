@@ -1,7 +1,6 @@
 within AixLib.Utilities.Psychrometrics.Examples;
 model Phi_pTX "Model to test the relative humidity computation"
-  import AixLib;
-  extends Modelica.Icons.Example;
+ extends Modelica.Icons.Example;
 
  package Medium = AixLib.Media.Air "Medium model"
            annotation (choicesAllMatching = true);

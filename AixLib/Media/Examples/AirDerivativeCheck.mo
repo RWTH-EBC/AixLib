@@ -63,10 +63,6 @@ is not correct, the model will stop with an assert statement.
 </html>",   revisions="<html>
 <ul>
 <li>
-December 18, 2013, by Michael Wetter:<br/>
-Added check of <code>enthalpyOfNonCondensingGas</code>.
-</li>
-<li>
 November 20, 2013, by Michael Wetter:<br/>
 Removed check of <code>enthalpyOfDryAir</code> as this function
 is protected and should therefore not be accessed from outside the class.

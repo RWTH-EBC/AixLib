@@ -3,7 +3,7 @@ model ValveParameterization
   "Model to test and illustrate different parameterization for valves"
   extends Modelica.Icons.Example;
 
- package Medium = AixLib.Media.Water.Simple;
+ package Medium = AixLib.Media.Water;
 
   AixLib.Fluid.Actuators.Valves.TwoWayLinear valOPPoi(
     redeclare package Medium = Medium,

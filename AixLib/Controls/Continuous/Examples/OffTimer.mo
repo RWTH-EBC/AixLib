@@ -36,6 +36,7 @@ AixLib.Controls.Continuous.OffTimer</a>.
 The input to the two timers are alternating boolean values.
 Whenever the input becomes <code>false(=0)</code>, the timer is reset.
 The figures below show the input and output of the blocks.
+</p>
 <p align=\"center\">
 <img src=\"modelica://AixLib/Resources/Images/Controls/Continuous/Examples/OffTimer1.png\" border=\"1\" alt=\"Input and output of the OffTimer offTim1.\"/><br/>
 <img src=\"modelica://AixLib/Resources/Images/Controls/Continuous/Examples/OffTimer2.png\" border=\"1\" alt=\"Input and output of the OffTimer offTim1.\"/>

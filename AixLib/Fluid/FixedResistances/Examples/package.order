@@ -1,3 +1,5 @@
-FixedResistancesSeries
-FixedResistancesParallel
 FixedResistancesExplicit
+FixedResistancesParallel
+FixedResistancesSeries
+Pipe_Validation
+StaticPipe_Validation
