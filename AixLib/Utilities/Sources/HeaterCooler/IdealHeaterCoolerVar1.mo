@@ -3,7 +3,7 @@ within AixLib.Utilities.Sources.HeaterCooler;
 
 model IdealHeaterCoolerVar1 "heater and cooler with variable setpoints"
   extends
-    AixLib.Utilities.Sources.HeaterCooler.IdealHeaterCoolerBase_seperate_parameters;
+    AixLib.Utilities.Sources.HeaterCooler.IdealHeaterCoolerBase_separate_parameters;
   Modelica.Blocks.Interfaces.RealInput soll_cool if Cooler_on annotation(Placement(transformation(extent = {{-120, -60}, {-80, -20}}), iconTransformation(extent = {{-20, -20}, {20, 20}}, rotation = 90, origin = {-48, -48})));
   Modelica.Blocks.Interfaces.RealInput soll_heat if Heater_on annotation(Placement(transformation(extent = {{-120, 20}, {-80, 60}}), iconTransformation(extent = {{-20, -20}, {20, 20}}, rotation = 90, origin = {30, -48})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression(y = Heater_on) if Heater_on annotation(Placement(transformation(extent = {{-52, 14}, {-33, 30}})));

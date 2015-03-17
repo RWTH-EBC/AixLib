@@ -32,7 +32,7 @@ model RecuperatorNoMedium "recuperator model with selectable flow arrangement"
   Real epsilon(nominal = epsilon0, start = epsilon0)
     "Heat exchanger characteristic";
   Real Z "Ratio of heat capacity flow rates";
-  Modelica.SIunits.Power Q "transfered thermal power";
+  Modelica.SIunits.Power Q "transferred thermal power";
   Modelica.SIunits.ThermalConductance UA "U * A value";
   Modelica.SIunits.ThermalConductance C1 "Heat capacity flow rate of medium 1";
   Modelica.SIunits.ThermalConductance C2 "Heat capacity flow rate of medium 2";
