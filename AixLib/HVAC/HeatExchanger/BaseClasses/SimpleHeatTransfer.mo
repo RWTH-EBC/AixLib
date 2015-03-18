@@ -8,7 +8,7 @@ model SimpleHeatTransfer "Just passing heat flow through"
 equation
   port_a.Q_flow = Q;
   port_b.Q_flow = -Q;
-  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Line(points = {{0, -60}, {0, 60}}, color = {0, 0, 255}, smooth = Smooth.None), Line(points = {{-20, 40}, {0, 60}, {20, 40}}, color = {0, 0, 255}, smooth = Smooth.None)}), Documentation(revisions = "<html>
+  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Line(points=  {{0, -60}, {0, 60}}, color=  {0, 0, 255}, smooth=  Smooth.None), Line(points=  {{-20, 40}, {0, 60}, {20, 40}}, color=  {0, 0, 255}, smooth=  Smooth.None)}), Documentation(revisions = "<html>
  <p>12.01.2014, Peter Matthes</p>
  <ul>
  <li>implemented</li>

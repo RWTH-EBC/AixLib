@@ -74,9 +74,9 @@ equation
   T1out = T1in + epsilon * min(C1, C2) / C1 * (T2in - T1in);
   Q = C1 * (T1out - T1in);
   T2out = T2in - Q / C2;
-  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points = {{-80, 80}, {-80, -80}, {80, 80}, {-80, 80}}, lineColor = {175, 175, 175}, smooth = Smooth.None, fillColor = {255, 85, 85},
-            fillPattern =                                                                                                    FillPattern.Solid), Polygon(points = {{-80, -80}, {80, -80}, {80, 80}, {-80, -80}}, lineColor = {175, 175, 175}, smooth = Smooth.None, fillColor = {85, 170, 255},
-            fillPattern =                                                                                                    FillPattern.Solid), Text(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 0}, textString = "%flowType%")}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(info = "<html>
+  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points=  {{-80, 80}, {-80, -80}, {80, 80}, {-80, 80}}, lineColor=  {175, 175, 175}, smooth=  Smooth.None, fillColor=  {255, 85, 85},
+            fillPattern=                                                                                                    FillPattern.Solid), Polygon(points=  {{-80, -80}, {80, -80}, {80, 80}, {-80, -80}}, lineColor=  {175, 175, 175}, smooth=  Smooth.None, fillColor=  {85, 170, 255},
+            fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-80, 80}, {80, -80}}, lineColor=  {0, 0, 0}, textString=  "%flowType%")}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Simple heat exchanger modell based on calculation of the characteristic value for counter current flow, co current flow and cross flow arrangement (Wetter1999).</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>

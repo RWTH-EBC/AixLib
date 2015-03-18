@@ -1,6 +1,4 @@
 within AixLib.HVAC.Sources;
-
-
 model BoundaryMoistAir_phX
   "boundary for Moist Air, pressure, enthalpy, water fraction"
   outer BaseParameters baseParameters "System properties";
@@ -55,3 +53,4 @@ equation
  </ul>
  </html>"));
 end BoundaryMoistAir_phX;
+
