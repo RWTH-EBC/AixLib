@@ -1,5 +1,4 @@
 within AixLib.Building.Components.Weather;
-
-package BaseClasses
+package BaseClasses 
   extends Modelica.Icons.BasesPackage;
 end BaseClasses;

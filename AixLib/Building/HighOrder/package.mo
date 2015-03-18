@@ -1,7 +1,7 @@
 within AixLib.Building;
-
 package HighOrder "Standard house models"
   extends Modelica.Icons.Package;
+
   annotation(conversion(noneFromVersion = "", noneFromVersion = "1.0", noneFromVersion = "1.1", noneFromVersion = "1.2", from(version = "1.3", script = "Conversions/ConvertFromHouse_Models_1.3.mos"), from(version = "2.0", script = "Conversions/ConvertFromHouse_Models_2.0_To_2.1"), from(version = "2.1", script = "Conversions/ConvertFromHouse_Models_2.1_To_2.2")), Documentation(revisions = "", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Package for standard house models, derived form the EBC-Library HouseModels.</p>

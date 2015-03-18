@@ -1,5 +1,4 @@
 within AixLib.DataBase.WindowsDoors.Simple;
-
 record WindowSimple_EnEV2009 "Window according to EnEV 2009"
   extends OWBaseDataDefinition_Simple(Uw = 1.3, g = 0.6, Emissivity = 0.9, frameFraction = 0.2);
   annotation(Documentation(revisions = "<html>
@@ -21,3 +20,4 @@ record WindowSimple_EnEV2009 "Window according to EnEV 2009"
  </ul>
  </html>"));
 end WindowSimple_EnEV2009;
+

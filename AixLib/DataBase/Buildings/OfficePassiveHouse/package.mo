@@ -1,5 +1,4 @@
 within AixLib.DataBase.Buildings;
-
-package OfficePassiveHouse
+package OfficePassiveHouse 
   extends Modelica.Icons.Package;
 end OfficePassiveHouse;

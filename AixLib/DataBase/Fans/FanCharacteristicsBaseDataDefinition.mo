@@ -1,6 +1,6 @@
 within AixLib.DataBase.Fans;
-
-record FanCharacteristicsBaseDataDefinition "Characteristics for simple fan model"
+record FanCharacteristicsBaseDataDefinition
+  "Characteristics for simple fan model"
   extends Modelica.Icons.Record;
   parameter Real[:, :] dp "V_flow | dp | eta ";
   annotation(Documentation(info = "<html>
@@ -14,3 +14,4 @@ record FanCharacteristicsBaseDataDefinition "Characteristics for simple fan mode
  <p>30.12.2013, by <i>Mark Wesseling</i>: implemented</p>
  </html>"));
 end FanCharacteristicsBaseDataDefinition;
+

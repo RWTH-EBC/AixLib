@@ -1,11 +1,15 @@
 within AixLib.HVAC.Office.Room;
 
-model ExternalCInterfaceModelica_NoChange "Reads and writes Data from/to external C routine"
+
+model ExternalCInterfaceModelica_NoChange
+  "Reads and writes Data from/to external C routine"
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////
   parameter Real Rate = 20.0 "Sampling rate" annotation(Dialog(descriptionLabel = true, group = "Connection"));
-  parameter Integer LENGTH = 1 "Number of Variables to Send to External C Routine" annotation(Dialog(descriptionLabel = true, group = "Connection"));
-  parameter String Stringer = "Connected to External C Code!" "String to be sent to External C Code" annotation(Dialog(descriptionLabel = true, group = "Connection"));
+  parameter Integer LENGTH = 1
+    "Number of Variables to Send to External C Routine"                            annotation(Dialog(descriptionLabel = true, group = "Connection"));
+  parameter String Stringer = "Connected to External C Code!"
+    "String to be sent to External C Code"                                                           annotation(Dialog(descriptionLabel = true, group = "Connection"));
   parameter Modelica.SIunits.Time T_C = 0.01 annotation(Dialog(descriptionLabel = true, group = "Relaxation"));
   parameter Real[LENGTH] Initials "Initial values of output";
   Modelica.Blocks.Interfaces.RealInput[LENGTH] u annotation(Placement(transformation(extent = {{-120, -20}, {-80, 20}}, rotation = 0), iconTransformation(extent = {{-120, 20}, {-80, -20}})));
@@ -14,7 +18,8 @@ model ExternalCInterfaceModelica_NoChange "Reads and writes Data from/to externa
   Modelica.Blocks.Interfaces.RealOutput[LENGTH] yArray annotation(Placement(transformation(extent = {{80, -80}, {120, -40}}, rotation = 0), iconTransformation(extent = {{80, 40}, {120, 80}})));
 protected
   Boolean Trigger "Boolean Trigger acivating external function call";
-  Real[LENGTH] PTYArray_raw "Real value array received by external function or program";
+  Real[LENGTH] PTYArray_raw
+    "Real value array received by external function or program";
   Real PTY_raw "Real value received by external function or program";
   //////////////////////////////////////////////////////////
   Modelica.Blocks.Continuous.FirstOrder[LENGTH] PTYArray(each T = T_C, each initType = Modelica.Blocks.Types.Init.InitialOutput, y_start = Initials) annotation(Placement(transformation(extent = {{40, -70}, {60, -50}})));
@@ -41,7 +46,7 @@ equation
   PTY.u = PTY_raw;
   connect(PTYArray.y, yArray) annotation(Line(points = {{61, -60}, {100, -60}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(PTY.y, y) annotation(Line(points = {{61, 60}, {100, 60}}, color = {0, 0, 127}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent = {{-100, 100}, {100, -100}}, lineColor = {0, 0, 255}, fillColor = {175, 175, 175}, fillPattern = FillPattern.Solid), Text(extent = {{-74, 66}, {70, -74}}, lineColor = {0, 0, 0}, fillColor = {175, 175, 175}, fillPattern = FillPattern.Solid, textString = "C")}), conversion(noneFromVersion = ""), Documentation(info = "<html>
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent=  {{-100, 100}, {100, -100}}, lineColor=  {0, 0, 255}, fillColor=  {175, 175, 175}, fillPattern=  FillPattern.Solid), Text(extent=  {{-74, 66}, {70, -74}}, lineColor=  {0, 0, 0}, fillColor=  {175, 175, 175}, fillPattern=  FillPattern.Solid, textString=  "C")}), conversion(noneFromVersion = ""), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Supplies access to external C functions. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>

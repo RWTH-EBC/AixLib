@@ -1,7 +1,7 @@
 within AixLib.DataBase;
-
 package WindowsDoors "Windows and doors definition package"
   extends Modelica.Icons.Package;
+
   annotation(Documentation(info = "<html>
  Window types as well as shading types.
  <dl>

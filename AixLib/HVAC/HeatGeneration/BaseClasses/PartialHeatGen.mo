@@ -1,6 +1,8 @@
 within AixLib.HVAC.HeatGeneration.BaseClasses;
 
-partial model PartialHeatGen "Base Class for modelling heat generation equipment of different types"
+
+partial model PartialHeatGen
+  "Base Class for modelling heat generation equipment of different types"
   outer BaseParameters baseParameters "System properties";
   parameter Modelica.SIunits.Temperature T_ref = baseParameters.T_ref;
   Volume.Volume volume annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}})));

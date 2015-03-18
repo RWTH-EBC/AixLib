@@ -1,11 +1,16 @@
 within AixLib.Building.HighOrder.Rooms.OFD;
-
-model Ow2IwL1IwS1Lf1At1Ro1 "2 outer walls, 1 inner wall load, 1 inner wall simple, 1 floor towards lower floor, 1 ceiling towards attic, 1 roof towards outside"
+model Ow2IwL1IwS1Lf1At1Ro1
+  "2 outer walls, 1 inner wall load, 1 inner wall simple, 1 floor towards lower floor, 1 ceiling towards attic, 1 roof towards outside"
   import AixLib;
   ///////// construction parameters
   parameter Integer TMC = 1 "Themal Mass Class" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1 "S", choice = 2 "M", choice = 3 "L", radioButtons = true));
-  parameter Integer TIR = 1 "Thermal Insulation Regulation" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1 "EnEV_2009", choice = 2 "EnEV_2002", choice = 3 "WSchV_1995", choice = 4 "WSchV_1984", radioButtons = true));
-  parameter Boolean withFloorHeating = false "If true, that floor has different connectors" annotation(Dialog(group = "Construction parameters"), choices(checkBox = true));
+  parameter Integer TIR = 1 "Thermal Insulation Regulation" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1
+        "EnEV_2009",                                                                                                    choice = 2
+        "EnEV_2002",                                                                                                    choice = 3
+        "WSchV_1995",                                                                                                    choice = 4
+        "WSchV_1984",                                                                                                    radioButtons = true));
+  parameter Boolean withFloorHeating = false
+    "If true, that floor has different connectors"                                          annotation(Dialog(group = "Construction parameters"), choices(checkBox = true));
   parameter Modelica.SIunits.Temperature T0_air = 295.11 "Air" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
   parameter Modelica.SIunits.Temperature T0_OW1 = 295.15 "OW1" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
   parameter Modelica.SIunits.Temperature T0_OW2 = 295.15 "OW2" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
@@ -24,7 +29,10 @@ model Ow2IwL1IwS1Lf1At1Ro1 "2 outer walls, 1 inner wall load, 1 inner wall simpl
   // Outer walls properties
   parameter Real solar_absorptance_OW = 0.25 "Solar absoptance outer walls " annotation(Dialog(group = "Outer wall properties", descriptionLabel = true));
   parameter Real solar_absorptance_RO = 0.25 "Solar absoptance roof " annotation(Dialog(group = "Outer wall properties", descriptionLabel = true));
-  parameter Integer ModelConvOW = 1 "Heat Convection Model" annotation(Dialog(group = "Outer wall properties", compact = true, descriptionLabel = true), choices(choice = 1 "DIN 6946", choice = 2 "ASHRAE Fundamentals", choice = 3 "Custom alpha", radioButtons = true));
+  parameter Integer ModelConvOW = 1 "Heat Convection Model" annotation(Dialog(group = "Outer wall properties", compact = true, descriptionLabel = true), choices(choice = 1
+        "DIN 6946",                                                                                                    choice = 2
+        "ASHRAE Fundamentals",                                                                                                    choice = 3
+        "Custom alpha",                                                                                                    radioButtons = true));
   // Windows and Doors
   parameter Boolean withWindow2 = true "Window 2" annotation(Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true), choices(checkBox = true));
   parameter Modelica.SIunits.Area windowarea_OW2 = 0 "Window area " annotation(Dialog(group = "Windows and Doors", descriptionLabel = true, enable = withWindow2));
@@ -35,9 +43,11 @@ model Ow2IwL1IwS1Lf1At1Ro1 "2 outer walls, 1 inner wall load, 1 inner wall simpl
   parameter Modelica.SIunits.Length door_height_OD2 = 0 "height " annotation(Dialog(group = "Windows and Doors", descriptionLabel = true, enable = withDoor2));
   // Dynamic Ventilation
   parameter Boolean withDynamicVentilation = false "Dynamic ventilation" annotation(Dialog(group = "Dynamic ventilation", descriptionLabel = true), choices(checkBox = true));
-  parameter Modelica.SIunits.Temperature HeatingLimit = 288.15 "Outside temperature at which the heating activates" annotation(Dialog(group = "Dynamic ventilation", descriptionLabel = true, enable = if withDynamicVentilation then true else false));
+  parameter Modelica.SIunits.Temperature HeatingLimit = 288.15
+    "Outside temperature at which the heating activates"                                                            annotation(Dialog(group = "Dynamic ventilation", descriptionLabel = true, enable = if withDynamicVentilation then true else false));
   parameter Real Max_VR = 10 "Maximal ventilation rate" annotation(Dialog(group = "Dynamic ventilation", descriptionLabel = true, enable = if withDynamicVentilation then true else false));
-  parameter Modelica.SIunits.TemperatureDifference Diff_toTempset = 2 "Difference to set temperature" annotation(Dialog(group = "Dynamic ventilation", descriptionLabel = true, enable = if withDynamicVentilation then true else false));
+  parameter Modelica.SIunits.TemperatureDifference Diff_toTempset = 2
+    "Difference to set temperature"                                                                   annotation(Dialog(group = "Dynamic ventilation", descriptionLabel = true, enable = if withDynamicVentilation then true else false));
   parameter Modelica.SIunits.Temperature Tset = 295.15 "Tset" annotation(Dialog(group = "Dynamic ventilation", descriptionLabel = true, enable = if withDynamicVentilation then true else false));
   //Door properties
   AixLib.Building.Components.Walls.Wall outside_wall1(solar_absorptance = solar_absorptance_OW, T0 = T0_OW1, wall_length = room_length, wall_height = room_height_short, withWindow = false, windowarea = 0, withDoor = false, door_height = 0, door_width = 0, WallType = Type_OW) annotation(Placement(transformation(extent = {{-64, -26}, {-54, 32}}, rotation = 0)));
@@ -65,13 +75,16 @@ model Ow2IwL1IwS1Lf1At1Ro1 "2 outer walls, 1 inner wall load, 1 inner wall simpl
   AixLib.Building.Components.DryAir.DynamicVentilation dynamicVentilation(HeatingLimit = HeatingLimit, Max_VR = Max_VR, Diff_toTempset = Diff_toTempset, Tset = Tset) if withDynamicVentilation annotation(Placement(transformation(extent = {{-70, -68}, {-46, -56}})));
   Utilities.Interfaces.Adaptors.HeatStarToComb thermStar_Demux annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 90, origin = {-20, -26})));
   AixLib.Building.Components.DryAir.VarAirExchange NaturalVentilation(V = room_V) annotation(Placement(transformation(extent = {{-68, -50}, {-48, -30}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor1 if withFloorHeating "thermal connector for floor heating" annotation(Placement(transformation(extent = {{-8, -58}, {2, -48}}), iconTransformation(extent = {{-32, -34}, {-12, -14}})));
-  AixLib.Building.Components.Walls.BaseClasses.SimpleNLayer floor_FH(l = room_length, n = Type_FL.n, d = Type_FL.d, rho = Type_FL.rho, lambda = Type_FL.lambda, c = Type_FL.c, T0 = T0_FL, h = room_width_long) if withFloorHeating "floor component if using Floor heating" annotation(Placement(transformation(origin = {-6, -67}, extent = {{-3.00007, 16}, {3, -16}}, rotation = 90)));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor1 if withFloorHeating
+    "thermal connector for floor heating"                                                                                   annotation(Placement(transformation(extent = {{-8, -58}, {2, -48}}), iconTransformation(extent = {{-32, -34}, {-12, -14}})));
+  AixLib.Building.Components.Walls.BaseClasses.SimpleNLayer floor_FH(l = room_length, n = Type_FL.n, d = Type_FL.d, rho = Type_FL.rho, lambda = Type_FL.lambda, c = Type_FL.c, T0 = T0_FL, h = room_width_long) if withFloorHeating
+    "floor component if using Floor heating"                                                                                                     annotation(Placement(transformation(origin = {-6, -67}, extent = {{-3.00007, 16}, {3, -16}}, rotation = 90)));
 protected
   parameter Real U_door_OD2 = if TIR == 1 then 1.8 else 2.9 "U-value" annotation(Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor2));
   parameter Real eps_door_OD2 = 0.95 "eps" annotation(Dialog(group = "Windows and Doors", descriptionLabel = true, enable = withDoor2));
   // Infiltration rate
-  parameter Real n50(unit = "h-1") = if TIR == 1 or TIR == 2 then 3 else if TIR == 3 then 4 else 6 "Air exchange rate at 50 Pa pressure difference" annotation(Dialog(tab = "Infiltration"));
+  parameter Real n50(unit = "h-1") = if TIR == 1 or TIR == 2 then 3 else if TIR == 3 then 4 else 6
+    "Air exchange rate at 50 Pa pressure difference"                                                                                                annotation(Dialog(tab = "Infiltration"));
   parameter Real e = 0.03 "Coefficient of windshield" annotation(Dialog(tab = "Infiltration"));
   parameter Real eps = 1.0 "Coefficient of height" annotation(Dialog(tab = "Infiltration"));
   // Outer wall type
@@ -130,7 +143,7 @@ equation
   connect(roof.WindSpeedPort, WindSpeedPort) annotation(Line(points = {{67.4667, 62.1499}, {67.4667, 70}, {-80, 70}, {-80, -40}, {-99.5, -40}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(floor_FH.port_b, thermFloor1) annotation(Line(points = {{-7.6, -64.3}, {-7.6, -53}, {-3, -53}}, color = {191, 0, 0}, smooth = Smooth.None, pattern = LinePattern.Dash));
   connect(floor_FH.port_a, thermFloor) annotation(Line(points = {{-7.6, -69.7001}, {-7.6, -90}, {-30, -90}}, color = {191, 0, 0}, pattern = LinePattern.Dash, smooth = Smooth.None));
-  annotation(__Dymola_Images(Parameters(source = "AixLib/Images/House/OW2_1IWl_1IWs_1Pa_1At1Ro.png", Width = 5, Length = 5)), Icon(graphics = {Rectangle(extent = {{-80, 80}, {80, 60}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid), Rectangle(extent = {{0, 80}, {-50, 60}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255}, fillPattern = FillPattern.Solid, visible = withWindow2), Rectangle(extent = {{6, 64}, {-6, -64}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, origin = {74, -4}, rotation = 0), Rectangle(extent = {{-60, 60}, {68, -68}}, lineColor = {0, 0, 0}, fillColor = {47, 102, 173}, fillPattern = FillPattern.Solid), Rectangle(extent = {{-80, 60}, {-60, -80}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid), Rectangle(extent = {{-60, -68}, {80, -80}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid), Rectangle(extent = {{20, 80}, {40, 60}}, lineColor = {0, 0, 0}, fillColor = {127, 127, 0}, fillPattern = FillPattern.Solid, visible = withDoor2), Text(extent = {{20, 74}, {40, 66}}, lineColor = {255, 255, 255}, fillColor = {255, 170, 170}, fillPattern = FillPattern.Solid, textString = "D2", visible = withDoor2), Text(extent = {{-50, 76}, {0, 64}}, lineColor = {255, 255, 255}, fillColor = {255, 170, 170}, fillPattern = FillPattern.Solid, textString = "Win2", visible = withWindow2), Text(extent = {{-56, 52}, {64, 40}}, lineColor = {255, 255, 255}, fillColor = {255, 170, 170}, fillPattern = FillPattern.Solid, textString = "width"), Line(points = {{38, 46}, {68, 46}}, color = {255, 255, 255}, smooth = Smooth.None), Line(points = {{-60, 46}, {-30, 46}}, color = {255, 255, 255}, smooth = Smooth.None), Text(extent = {{-120, 6}, {0, -6}}, lineColor = {255, 255, 255}, fillColor = {255, 170, 170}, fillPattern = FillPattern.Solid, origin = {-46, 56}, rotation = 90, textString = "length"), Line(points = {{-46, 60}, {-46, 30}}, color = {255, 255, 255}, smooth = Smooth.None), Line(points = {{-46, -42}, {-46, -68}}, color = {255, 255, 255}, smooth = Smooth.None), Rectangle(extent = {{-80, 30}, {-60, -20}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255}, fillPattern = FillPattern.Solid, visible = withWindow3), Text(extent = {{-25, 6}, {25, -6}}, lineColor = {255, 255, 255}, fillColor = {255, 170, 170}, fillPattern = FillPattern.Solid, textString = "Win3", origin = {-70, 5}, rotation = 90, visible = withWindow3)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(revisions = "<html>
+  annotation(__Dymola_Images(Parameters(source = "AixLib/Images/House/OW2_1IWl_1IWs_1Pa_1At1Ro.png", Width = 5, Length = 5)), Icon(graphics = {Rectangle(extent=  {{-80, 80}, {80, 60}}, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{0, 80}, {-50, 60}}, lineColor=  {0, 0, 0}, fillColor=  {170, 213, 255}, fillPattern=  FillPattern.Solid, visible=  withWindow2), Rectangle(extent=  {{6, 64}, {-6, -64}}, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid, origin=  {74, -4}, rotation=  0), Rectangle(extent=  {{-60, 60}, {68, -68}}, lineColor=  {0, 0, 0}, fillColor=  {47, 102, 173}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{-80, 60}, {-60, -80}}, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{-60, -68}, {80, -80}}, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{20, 80}, {40, 60}}, lineColor=  {0, 0, 0}, fillColor=  {127, 127, 0}, fillPattern=  FillPattern.Solid, visible=  withDoor2), Text(extent=  {{20, 74}, {40, 66}}, lineColor=  {255, 255, 255}, fillColor=  {255, 170, 170}, fillPattern=  FillPattern.Solid, textString=  "D2", visible=  withDoor2), Text(extent=  {{-50, 76}, {0, 64}}, lineColor=  {255, 255, 255}, fillColor=  {255, 170, 170}, fillPattern=  FillPattern.Solid, textString=  "Win2", visible=  withWindow2), Text(extent=  {{-56, 52}, {64, 40}}, lineColor=  {255, 255, 255}, fillColor=  {255, 170, 170}, fillPattern=  FillPattern.Solid, textString=  "width"), Line(points=  {{38, 46}, {68, 46}}, color=  {255, 255, 255}, smooth=  Smooth.None), Line(points=  {{-60, 46}, {-30, 46}}, color=  {255, 255, 255}, smooth=  Smooth.None), Text(extent=  {{-120, 6}, {0, -6}}, lineColor=  {255, 255, 255}, fillColor=  {255, 170, 170}, fillPattern=  FillPattern.Solid, origin=  {-46, 56}, rotation=  90, textString=  "length"), Line(points=  {{-46, 60}, {-46, 30}}, color=  {255, 255, 255}, smooth=  Smooth.None), Line(points=  {{-46, -42}, {-46, -68}}, color=  {255, 255, 255}, smooth=  Smooth.None), Rectangle(extent=  {{-80, 30}, {-60, -20}}, lineColor=  {0, 0, 0}, fillColor=  {170, 213, 255}, fillPattern=  FillPattern.Solid, visible=  withWindow3), Text(extent=  {{-25, 6}, {25, -6}}, lineColor=  {255, 255, 255}, fillColor=  {255, 170, 170}, fillPattern=  FillPattern.Solid, textString=  "Win3", origin=  {-70, 5}, rotation=  90, visible=  withWindow3)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(revisions = "<html>
  <p><ul>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
  <li><i>July 8, 2011</i> by Ana Constantin:<br/>Implemented</li>
@@ -145,3 +158,4 @@ equation
  <p><img src=\"modelica://AixLib/Images/House/OW2_1IWl_1IWs_1Pa_1At1Ro.png\"/></p>
  </html>"));
 end Ow2IwL1IwS1Lf1At1Ro1;
+

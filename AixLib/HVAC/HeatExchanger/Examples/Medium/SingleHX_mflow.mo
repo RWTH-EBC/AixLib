@@ -1,5 +1,4 @@
 within AixLib.HVAC.HeatExchanger.Examples.Medium;
-
 model SingleHX_mflow "Testing single HX model changing the mass flow rate"
   import Anlagensimulation_WS1314 = AixLib.HVAC;
   extends Modelica.Icons.Example;
@@ -27,3 +26,4 @@ equation
  </ul></p>
  </html>"), experiment(StopTime = 3), __Dymola_experimentSetupOutput);
 end SingleHX_mflow;
+

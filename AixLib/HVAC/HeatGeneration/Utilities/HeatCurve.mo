@@ -1,12 +1,15 @@
 within AixLib.HVAC.HeatGeneration.Utilities;
-
-model HeatCurve "Given a reference temperature, this heat curve calculates a set-point temperature"
-  parameter Modelica.SIunits.Temp_C T_fwd_max = 80 "Maximum forward temperature of the heating system at lowest reference temperature, both in Celcius";
-  parameter Modelica.SIunits.Temp_C T_ref_min = -12 "Lowest reference temperature in Celcius";
+model HeatCurve
+  "Given a reference temperature, this heat curve calculates a set-point temperature"
+  parameter Modelica.SIunits.Temp_C T_fwd_max = 80
+    "Maximum forward temperature of the heating system at lowest reference temperature, both in Celcius";
+  parameter Modelica.SIunits.Temp_C T_ref_min = -12
+    "Lowest reference temperature in Celcius";
   Modelica.Blocks.Interfaces.RealInput T_ref annotation(Placement(transformation(extent = {{-120, -20}, {-80, 20}})));
   Modelica.Blocks.Interfaces.RealOutput T_set annotation(Placement(transformation(extent = {{98, -10}, {118, 10}})));
 protected
-  Modelica.SIunits.Temp_C TAtZero "T_set of the heat curve at 0 degrees Celcius";
+  Modelica.SIunits.Temp_C TAtZero
+    "T_set of the heat curve at 0 degrees Celcius";
 equation
   TAtZero = (T_fwd_max - 20) * 20 / (20 - T_ref_min);
   T_set = 20 + TAtZero - (T_ref - 273.15) / 20 * TAtZero + 273.15;
@@ -21,3 +24,4 @@ equation
  </ul></p>
  </html>"));
 end HeatCurve;
+

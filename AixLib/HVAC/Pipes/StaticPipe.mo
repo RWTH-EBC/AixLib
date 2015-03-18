@@ -1,5 +1,4 @@
 within AixLib.HVAC.Pipes;
-
 model StaticPipe
   extends Interfaces.TwoPort;
   import Modelica.Math;
@@ -14,7 +13,9 @@ equation
   lambda2 = abs(dp) * 2 * D ^ 3 * rho / (l * mu * mu);
   Re = -2 * sqrt(lambda2) * Math.log10(2.51 / sqrt(lambda2 + 1e-10) + 0.27 * (e / D));
   m_flow = sign(dp) * Modelica.Constants.pi / 4 * D * mu * Re;
-  annotation(Icon(graphics = {Rectangle(extent = {{-100, 40}, {100, -40}}, lineColor = {0, 0, 0}, fillColor = {95, 95, 95}, fillPattern = FillPattern.Solid), Rectangle(extent = {{-100, 30}, {100, -30}}, lineColor = {0, 0, 0}, fillColor = {0, 128, 255}, fillPattern = FillPattern.HorizontalCylinder)}), Documentation(revisions = "<html>
+  annotation(Icon(graphics={  Rectangle(extent = {{-100, 40}, {100, -40}}, lineColor = {0, 0, 0}, fillColor = {95, 95, 95},
+            fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{-100, 30}, {100, -30}}, lineColor = {0, 0, 0}, fillColor = {0, 128, 255},
+            fillPattern =                                                                                                    FillPattern.HorizontalCylinder)}), Documentation(revisions = "<html>
  <p>01.10.2013, by <i>Pooyan Jahangiri</i>: implemented</p>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
@@ -29,3 +30,4 @@ equation
  <p><a href=\"AixLib.HVAC.Pipes.Examples.StaticPipe_Validation\">AixLib.HVAC.Pipes.Examples.StaticPipe_Validation</a></p>
  </html>"));
 end StaticPipe;
+

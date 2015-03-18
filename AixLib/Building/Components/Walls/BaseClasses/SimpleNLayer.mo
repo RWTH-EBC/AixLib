@@ -1,14 +1,16 @@
 within AixLib.Building.Components.Walls.BaseClasses;
-
 model SimpleNLayer "Wall consisting of n layers"
   parameter Modelica.SIunits.Height h = 3 "Height" annotation(Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Length l = 4 "Length" annotation(Dialog(group = "Geometry"));
   parameter Integer n(min = 1) = 8 "Number of layers" annotation(Dialog(group = "Structure of wall layers"));
   parameter Modelica.SIunits.Thickness d[n] = fill(0.1, n) "Thickness" annotation(Dialog(group = "Structure of wall layers"));
   parameter Modelica.SIunits.Density rho[n] = fill(1600, n) "Density" annotation(Dialog(group = "Structure of wall layers"));
-  parameter Modelica.SIunits.ThermalConductivity lambda[n] = fill(2.4, n) "Thermal conductivity" annotation(Dialog(group = "Structure of wall layers"));
-  parameter Modelica.SIunits.SpecificHeatCapacity c[n] = fill(1000, n) "Specific heat capacity" annotation(Dialog(group = "Structure of wall layers"));
-  parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(16) "Initial temperature" annotation(Dialog(group = "Thermal"));
+  parameter Modelica.SIunits.ThermalConductivity lambda[n] = fill(2.4, n)
+    "Thermal conductivity"                                                                       annotation(Dialog(group = "Structure of wall layers"));
+  parameter Modelica.SIunits.SpecificHeatCapacity c[n] = fill(1000, n)
+    "Specific heat capacity"                                                                    annotation(Dialog(group = "Structure of wall layers"));
+  parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(16)
+    "Initial temperature"                                                                                      annotation(Dialog(group = "Thermal"));
   // 2n HeatConds
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatCondb[n](G = h .* l .* lambda ./ (d / 2)) annotation(Placement(transformation(extent = {{30, -28}, {50, -8}}, rotation = 0)));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatConda[n](G = h .* l .* lambda ./ (d / 2)) annotation(Placement(transformation(extent = {{-52, -28}, {-32, -8}}, rotation = 0)));
@@ -29,7 +31,7 @@ equation
   // connecting outmost elements to connectors: port_a--HeatCondb[1]...HeatConda[n]--port_b
   connect(HeatConda[1].port_a, port_a);
   connect(HeatCondb[n].port_b, port_b);
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0})}), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-32, 60}, {32, -100}}, lineColor = {166, 166, 166}, pattern = LinePattern.None, fillColor = {190, 190, 190}, fillPattern = FillPattern.Solid), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {135, 135, 135}), Rectangle(extent = {{-48, 60}, {-32, -100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {208, 208, 208}, fillPattern = FillPattern.Solid), Rectangle(extent = {{-64, 60}, {-48, -100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {190, 190, 190}, fillPattern = FillPattern.Solid), Rectangle(extent = {{-80, 60}, {-64, -100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {156, 156, 156}, fillPattern = FillPattern.Solid), Rectangle(extent = {{64, 60}, {80, -100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {156, 156, 156}, fillPattern = FillPattern.Solid), Rectangle(extent = {{32, 60}, {48, -100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {208, 208, 208}, fillPattern = FillPattern.Solid), Rectangle(extent = {{48, 60}, {64, -100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {190, 190, 190}, fillPattern = FillPattern.Solid), Text(extent = {{10, -36}, {106, -110}}, lineColor = {0, 0, 0}, textString = "n")}), Documentation(info = "<html>
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0})}), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}), Rectangle(extent=  {{-32, 60}, {32, -100}}, lineColor=  {166, 166, 166}, pattern=  LinePattern.None, fillColor=  {190, 190, 190}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {135, 135, 135}), Rectangle(extent=  {{-48, 60}, {-32, -100}}, lineColor=  {0, 0, 255}, pattern=  LinePattern.None, fillColor=  {208, 208, 208}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{-64, 60}, {-48, -100}}, lineColor=  {0, 0, 255}, pattern=  LinePattern.None, fillColor=  {190, 190, 190}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{-80, 60}, {-64, -100}}, lineColor=  {0, 0, 255}, pattern=  LinePattern.None, fillColor=  {156, 156, 156}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{64, 60}, {80, -100}}, lineColor=  {0, 0, 255}, pattern=  LinePattern.None, fillColor=  {156, 156, 156}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{32, 60}, {48, -100}}, lineColor=  {0, 0, 255}, pattern=  LinePattern.None, fillColor=  {208, 208, 208}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{48, 60}, {64, -100}}, lineColor=  {0, 0, 255}, pattern=  LinePattern.None, fillColor=  {190, 190, 190}, fillPattern=  FillPattern.Solid), Text(extent=  {{10, -36}, {106, -110}}, lineColor=  {0, 0, 0}, textString=  "n")}), Documentation(info = "<html>
  <p><h4><font color=\"#008000\">Overview</font></h4></p>
  <p>The <b>SimpleNLayer</b> model represents a simple wall, consisting of n different layers. </p>
  <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
@@ -48,3 +50,4 @@ equation
  </ul>
  </html>"));
 end SimpleNLayer;
+

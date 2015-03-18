@@ -1,7 +1,12 @@
 within AixLib.DataBase.Walls.WSchV1984.IW;
-
-record IWneighbour_WSchV1984_S_half "Inner wall towards neighbour after WSchV1984, for building of type S (schwer), only half"
-  extends WallBaseDataDefinition(n(min = 1) = 3 "Number of wall layers", d = {0.02, 0.175, 0.015} "Thickness of wall layers", rho = {1.23, 1600, 1200} "Density of wall layers", lambda = {0.22, 0.79, 0.51} "Thermal conductivity of wall layers", c = {1008, 1000, 1000} "Specific heat capacity of wall layers", eps = 0.95 "Emissivity of inner wall surface");
+record IWneighbour_WSchV1984_S_half
+  "Inner wall towards neighbour after WSchV1984, for building of type S (schwer), only half"
+  extends WallBaseDataDefinition(n(min = 1) = 3 "Number of wall layers", d = {0.02, 0.175, 0.015}
+      "Thickness of wall layers",                                                                                             rho = {1.23, 1600, 1200}
+      "Density of wall layers",                                                                                                    lambda = {0.22, 0.79, 0.51}
+      "Thermal conductivity of wall layers",                                                                                                    c = {1008, 1000, 1000}
+      "Specific heat capacity of wall layers",                                                                                                    eps = 0.95
+      "Emissivity of inner wall surface");
   annotation(Documentation(revisions = "<html>
  <p><ul>
  <li><i>September 5, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
@@ -22,3 +27,4 @@ record IWneighbour_WSchV1984_S_half "Inner wall towards neighbour after WSchV198
  </ul>
  </html>"));
 end IWneighbour_WSchV1984_S_half;
+

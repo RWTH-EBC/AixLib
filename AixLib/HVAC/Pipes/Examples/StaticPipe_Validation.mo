@@ -1,5 +1,4 @@
 within AixLib.HVAC.Pipes.Examples;
-
 model StaticPipe_Validation
   extends Modelica.Icons.Example;
   StaticPipe pipe(l = 10, D = 0.02412, e = 0.03135) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}})));
@@ -20,3 +19,4 @@ equation
  <p>The first boundary has a changing pressure and the second boundary has a fixed pressure. This results in changing of the mass flow and pressure drop in the pipe which can be observed in the results.</p>
  </html>"));
 end StaticPipe_Validation;
+

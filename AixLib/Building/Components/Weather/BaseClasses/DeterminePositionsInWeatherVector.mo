@@ -1,6 +1,8 @@
 within AixLib.Building.Components.Weather.BaseClasses;
 
-function DeterminePositionsInWeatherVector "Determines position in weather vector"
+
+function DeterminePositionsInWeatherVector
+  "Determines position in weather vector"
   input Boolean Cloud_cover "Cloud cover";
   input Boolean Wind_dir "Wind direction";
   input Boolean Wind_speed "Wind speed";
@@ -9,8 +11,10 @@ function DeterminePositionsInWeatherVector "Determines position in weather vecto
   input Boolean Mass_frac "Mass fraction of water in dry air";
   input Boolean Rel_hum "Relative humidity";
   input Boolean Sky_rad "Long wave sky radiation on horizontal surface";
-  input Boolean Ter_rad "Long Wave terrestrial radiation from horizontal surface";
-  output Integer[9] PosWV = fill(0, 9) "Determined postition in weather data vector";
+  input Boolean Ter_rad
+    "Long Wave terrestrial radiation from horizontal surface";
+  output Integer[9] PosWV = fill(0, 9)
+    "Determined postition in weather data vector";
 protected
   Integer m;
 algorithm

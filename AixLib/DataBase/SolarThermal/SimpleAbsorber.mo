@@ -1,5 +1,4 @@
 within AixLib.DataBase.SolarThermal;
-
 record SimpleAbsorber "Properties of a simple absorber"
   extends SolarThermalBaseDataDefinition(eta_zero = 0.94, c1 = 23, c2 = 0);
   annotation(Documentation(info = "<html>
@@ -16,3 +15,4 @@ record SimpleAbsorber "Properties of a simple absorber"
  </ul></p>
  </html>"));
 end SimpleAbsorber;
+

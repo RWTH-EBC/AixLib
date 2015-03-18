@@ -1,5 +1,4 @@
 within AixLib.Building.Components.Sources.InternalGains;
-
-package Machines
+package Machines 
   extends Modelica.Icons.Package;
 end Machines;

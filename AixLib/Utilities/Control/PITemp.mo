@@ -1,5 +1,6 @@
 within AixLib.Utilities.Control;
 
+
 model PITemp "PI Controler that can switch the output range of the controler"
   Modelica.Blocks.Interfaces.RealInput soll annotation(Placement(transformation(origin = {-80, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 270)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm1 annotation(Placement(transformation(extent = {{-70, -100}, {-50, -80}}, rotation = 0), iconTransformation(extent = {{-70, -100}, {-50, -80}})));
@@ -8,8 +9,10 @@ model PITemp "PI Controler that can switch the output range of the controler"
   parameter Real KR = 1 "Gain" annotation(Dialog(group = "Control"));
   parameter Modelica.SIunits.Time TN = 1 "Time Constant (T>0 required)" annotation(Dialog(group = "Control"));
   Modelica.Blocks.Interfaces.RealOutput y annotation(Placement(transformation(extent = {{80, -10}, {100, 10}}, rotation = 0), iconTransformation(extent = {{80, -10}, {100, 10}})));
-  parameter Modelica.Blocks.Interfaces.BooleanInput RangeSwitch = false "Switch controler output range" annotation(Placement(transformation(origin = {80, 100}, extent = {{-10, -10}, {10, 10}}, rotation = 270), iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {80, 90})));
-  Modelica.Blocks.Interfaces.BooleanInput onOff "Switches Controler on and off" annotation(Placement(transformation(extent = {{-120, -80}, {-80, -40}}, rotation = 0), iconTransformation(extent = {{-100, -60}, {-80, -40}})));
+  parameter Modelica.Blocks.Interfaces.BooleanInput RangeSwitch = false
+    "Switch controler output range"                                                                     annotation(Placement(transformation(origin = {80, 100}, extent = {{-10, -10}, {10, 10}}, rotation = 270), iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {80, 90})));
+  Modelica.Blocks.Interfaces.BooleanInput onOff "Switches Controler on and off"
+                                                                                annotation(Placement(transformation(extent = {{-120, -80}, {-80, -40}}, rotation = 0), iconTransformation(extent = {{-100, -60}, {-80, -40}})));
   Modelica.Blocks.Logical.Switch switch1 annotation(Placement(transformation(extent = {{-40, 6}, {-20, -14}}, rotation = 0)));
   Modelica.Blocks.Logical.Switch switch2 annotation(Placement(transformation(extent = {{56, -18}, {76, 2}}, rotation = 0)));
   Modelica.Blocks.Logical.TriggeredTrapezoid triggeredTrapezoid(rising = 0, falling = 60) annotation(Placement(transformation(extent = {{-40, -60}, {-20, -40}}, rotation = 0)));
@@ -44,5 +47,5 @@ equation
           by Peter Matthes:<br>
           implemented</li>
  </ul>
- </html> "), Icon(graphics = {Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {135, 135, 135}, fillColor = {255, 255, 170}, fillPattern = FillPattern.Solid), Text(extent = {{-58, 32}, {62, -20}}, lineColor = {175, 175, 175}, textString = "%name")}));
+ </html> "), Icon(graphics = {Rectangle(extent=  {{-80, 80}, {80, -80}}, lineColor=  {135, 135, 135}, fillColor=  {255, 255, 170}, fillPattern=  FillPattern.Solid), Text(extent=  {{-58, 32}, {62, -20}}, lineColor=  {175, 175, 175}, textString=  "%name")}));
 end PITemp;

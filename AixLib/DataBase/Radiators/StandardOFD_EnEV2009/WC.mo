@@ -1,6 +1,6 @@
 within AixLib.DataBase.Radiators.StandardOFD_EnEV2009;
-
-record WC "Standard OFD EnEV2009 WC = ThermX2, Profil V (Kermi) Power=593W, L=1100, H=300, Typ=22, {55,45,18}"
+record WC
+  "Standard OFD EnEV2009 WC = ThermX2, Profil V (Kermi) Power=593W, L=1100, H=300, Typ=22, {55,45,18}"
   extends RadiatiorBaseDataDefinition(NominalPower = 593, T_flow_nom = 55, T_return_nom = 45, T_room_nom = 18, Exponent = 1.2776, VolumeWater = 3.96, MassSteel = 18.71, RadPercent = 0.3, length = 1.1, height = 0.3);
   annotation(Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
@@ -34,3 +34,4 @@ record WC "Standard OFD EnEV2009 WC = ThermX2, Profil V (Kermi) Power=593W, L=11
  <p>13.11.2013, by <i>Ana Constantin</i>: implemented</p>
  </html>"));
 end WC;
+

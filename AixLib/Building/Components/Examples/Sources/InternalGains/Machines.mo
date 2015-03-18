@@ -1,5 +1,4 @@
 within AixLib.Building.Components.Examples.Sources.InternalGains;
-
 model Machines "Simulation to check the machine models"
   extends Modelica.Icons.Example;
   Components.Sources.InternalGains.Machines.Machines_DIN18599 machines_sensibleHeat_DIN18599 annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}})));
@@ -19,3 +18,4 @@ equation
  </ul></p>
  </html>"));
 end Machines;
+

@@ -1,6 +1,8 @@
 within AixLib.UsersGuide.Conventions;
 
-model RecordTemplateDocumentation "Template documentation for EBC's DataBase records"
+
+model RecordTemplateDocumentation
+  "Template documentation for EBC's DataBase records"
   annotation(Documentation(info = "<html>
   <p><h4><font color=\"#008000\">Overview</font></h4></p>
   <p><ul>

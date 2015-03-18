@@ -1,6 +1,6 @@
 within AixLib.DataBase.Profiles;
-
-record Ventilation_2perDay_Mean05perH "Ventilation two times a day, with a mean value of 0.5 1/h per day. For five rooms. "
+record Ventilation_2perDay_Mean05perH
+  "Ventilation two times a day, with a mean value of 0.5 1/h per day. For five rooms. "
   extends Profile_BaseDataDefinition(Profile = [0, 0, 0, 0, 0, 0; 3600, 0, 0, 0, 0, 0; 7200, 0, 0, 0, 0, 0; 10800, 0, 0, 0, 0, 0; 14400, 0, 0, 0, 0, 0; 18000, 0, 0, 0, 0, 0; 21600, 0, 0, 0, 0, 0; 25200, 0, 0, 0, 0, 0; 26940, 0, 0, 0, 0, 0; 27000, 0, 0, 0, 0, 0; 28740, 0, 0, 0, 0, 0; 28800, 0, 0, 12, 0, 0; 30540, 0, 0, 12, 0, 0; 30600, 12, 0, 0, 0, 0; 32340, 12, 0, 0, 0, 0; 32400, 0, 12, 0, 0, 0; 34140, 0, 12, 0, 0, 0; 34200, 0, 0, 0, 12, 0; 35940, 0, 0, 0, 12, 0; 36000, 0, 0, 0, 0, 12; 37740, 0, 0, 0, 0, 12; 37800, 0, 0, 0, 0, 0; 39540, 0, 0, 0, 0, 0; 39600, 0, 0, 0, 0, 0; 64740, 0, 0, 0, 0, 0; 64800, 0, 0, 12, 0, 0; 66540, 0, 0, 12, 0, 0; 66600, 12, 0, 0, 0, 0; 68340, 12, 0, 0, 0, 0; 68400, 0, 12, 0, 0, 0; 70140, 0, 12, 0, 0, 0; 70200, 0, 0, 0, 12, 0; 71940, 0, 0, 0, 12, 0; 72000, 0, 0, 0, 0, 12; 73740, 0, 0, 0, 0, 12; 73800, 0, 0, 0, 0, 0; 75540, 0, 0, 0, 0, 0; 82800, 0, 0, 0, 0, 0; 86400, 0, 0, 0, 0, 0]);
   annotation(Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
@@ -27,3 +27,4 @@ record Ventilation_2perDay_Mean05perH "Ventilation two times a day, with a mean 
  </ul></p>
  </html>"));
 end Ventilation_2perDay_Mean05perH;
+

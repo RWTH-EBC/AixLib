@@ -1,5 +1,6 @@
 within AixLib.Utilities.Sensors;
 
+
 model TEnergyMeter "measures thermal power (heat flow)"
   extends EEnergyMeter;
   annotation(Diagram(graphics), Documentation(info = "<html>

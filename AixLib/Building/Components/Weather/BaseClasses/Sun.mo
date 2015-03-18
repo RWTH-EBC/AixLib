@@ -1,11 +1,13 @@
 within AixLib.Building.Components.Weather.BaseClasses;
-
 model Sun "Solar radiation model"
   import Modelica.SIunits.Conversions.from_deg;
   import Modelica.SIunits.Conversions.to_deg;
-  parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg Latitude "latitude of location";
-  parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg Longitude "longitude of location in";
-  parameter Modelica.SIunits.Conversions.NonSIunits.Time_hour DiffWeatherDataTime "difference between local time and UTC, e.g. +1 for MET";
+  parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg Latitude
+    "latitude of location";
+  parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg Longitude
+    "longitude of location in";
+  parameter Modelica.SIunits.Conversions.NonSIunits.Time_hour DiffWeatherDataTime
+    "difference between local time and UTC, e.g. +1 for MET";
   Real NumberOfDay;
   Real AzimutSun;
   Real ElevationSun;
@@ -17,7 +19,8 @@ protected
   Real HourAngleSun;
   Real TimeEquation;
   Real DayAngleSun;
-  Real ArgACOS(min = -1, max = 1) "helper variable to protect 'acos' from Arguments > 1";
+  Real ArgACOS(min = -1, max = 1)
+    "helper variable to protect 'acos' from Arguments > 1";
 equation
   // number of day: 1 = Jan 1st
   NumberOfDay = time / 86400 + 1;
@@ -57,7 +60,7 @@ algorithm
   // while (OutAzimutSun < 0) loop
   //   OutAzimutSun := OutAzimutSun + 180;
   // end while;
-  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}, pattern = LinePattern.None, fillPattern = FillPattern.HorizontalCylinder, fillColor = {170, 213, 255}), Ellipse(extent = {{-50, 30}, {50, -70}}, lineColor = {255, 255, 0}, lineThickness = 0.5, fillColor = {255, 255, 0}, fillPattern = FillPattern.Solid), Text(extent = {{-100, 100}, {100, 60}}, lineColor = {0, 0, 255}, textString = "%name")}), DymolaStoredErrors, Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}, pattern = LinePattern.None, fillPattern = FillPattern.HorizontalCylinder, fillColor = {170, 213, 255}), Ellipse(extent = {{-50, 30}, {50, -70}}, lineColor = {255, 255, 0}, lineThickness = 0.5, fillColor = {255, 255, 0}, fillPattern = FillPattern.Solid)}), Documentation(info = "<html>
+  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}, pattern=  LinePattern.None, fillPattern=  FillPattern.HorizontalCylinder, fillColor=  {170, 213, 255}), Ellipse(extent=  {{-50, 30}, {50, -70}}, lineColor=  {255, 255, 0}, lineThickness=  0.5, fillColor=  {255, 255, 0}, fillPattern=  FillPattern.Solid), Text(extent=  {{-100, 100}, {100, 60}}, lineColor=  {0, 0, 255}, textString=  "%name")}), DymolaStoredErrors, Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}, pattern=  LinePattern.None, fillPattern=  FillPattern.HorizontalCylinder, fillColor=  {170, 213, 255}), Ellipse(extent=  {{-50, 30}, {50, -70}}, lineColor=  {255, 255, 0}, lineThickness=  0.5, fillColor=  {255, 255, 0}, fillPattern=  FillPattern.Solid)}), Documentation(info = "<html>
  <p><h4><font color=\"#008000\">Overview</font></h4></p>
  <p>The <b>Sun</b> model computes the hour angle, the declination and the azimut of the sun for a given set of geographic position and local time. </p>
  <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
@@ -78,3 +81,4 @@ algorithm
  </ul>
  </html>"));
 end Sun;
+

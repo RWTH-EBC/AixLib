@@ -1,7 +1,12 @@
 within AixLib.DataBase.Walls.EnEV2009.Floor;
-
-record FLground_EnEV2009_SML "Floor towards ground after EnEV 2009, for building of type S (schwer), M (mittel) and L (leicht)"
-  extends WallBaseDataDefinition(n(min = 1) = 4 "Number of wall layers", d = {0.06, 0.25, 0.04, 0.06} "Thickness of wall layers", rho = {140, 2300, 120, 2000} "Density of wall layers", lambda = {0.040, 2.3, 0.035, 1.4} "Thermal conductivity of wall layers", c = {1000, 1000, 1030, 1000} "Specific heat capacity of wall layers", eps = 0.95 "Emissivity of inner wall surface");
+record FLground_EnEV2009_SML
+  "Floor towards ground after EnEV 2009, for building of type S (schwer), M (mittel) and L (leicht)"
+  extends WallBaseDataDefinition(n(min = 1) = 4 "Number of wall layers", d = {0.06, 0.25, 0.04, 0.06}
+      "Thickness of wall layers",                                                                                                 rho = {140, 2300, 120, 2000}
+      "Density of wall layers",                                                                                                    lambda = {0.040, 2.3, 0.035, 1.4}
+      "Thermal conductivity of wall layers",                                                                                                    c = {1000, 1000, 1030, 1000}
+      "Specific heat capacity of wall layers",                                                                                                    eps = 0.95
+      "Emissivity of inner wall surface");
   annotation(Documentation(revisions = "<html>
  <p><ul>
  <li><i>September 5, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
@@ -22,3 +27,4 @@ record FLground_EnEV2009_SML "Floor towards ground after EnEV 2009, for building
  </ul>
  </html>"));
 end FLground_EnEV2009_SML;
+

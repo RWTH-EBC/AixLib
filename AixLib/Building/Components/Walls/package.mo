@@ -1,7 +1,7 @@
 within AixLib.Building.Components;
-
 package Walls "Wall models"
   extends Modelica.Icons.Package;
+
   annotation(Documentation(info = "<html>
  <p>
  This package contains aggregated models for definition of walls.

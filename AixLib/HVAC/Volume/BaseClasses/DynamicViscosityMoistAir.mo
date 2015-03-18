@@ -1,9 +1,11 @@
 within AixLib.HVAC.Volume.BaseClasses;
 
+
 function DynamicViscosityMoistAir
   input Modelica.SIunits.Temperature T "Temperature of Steam";
   input Real X_Steam "mass fractions of steam to dry air m_s/m_a";
-  output Modelica.SIunits.DynamicViscosity DynamicViscosity "Saturation Pressure of Steam";
+  output Modelica.SIunits.DynamicViscosity DynamicViscosity
+    "Saturation Pressure of Steam";
 algorithm
   DynamicViscosity := X_Steam / (1 + X_Steam) * DynamicViscositySteam(T) + 1 / (1 + X_Steam) * DynamicViscosityAir(T);
   annotation(Documentation(info = "<html>

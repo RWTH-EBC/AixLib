@@ -1,5 +1,4 @@
 within AixLib.Building.Components.Examples.WindowsDoors;
-
 model WindowSimple
   extends Modelica.Icons.Example;
   Components.WindowsDoors.WindowSimple windowSimple(windowarea = 10) annotation(Placement(transformation(extent = {{-24, -4}, {12, 28}})));
@@ -33,3 +32,4 @@ equation
  </ul>
  </html>"));
 end WindowSimple;
+

@@ -42,10 +42,10 @@ equation
  <p><ul>
  <li>implemented</li>
  </ul></p>
- </html>"), Icon(graphics={  Rectangle(extent = {{-40.5, 74.5}, {53.5, -57.5}}, lineColor = {0, 0, 0},
-            fillPattern =                                                                                            FillPattern.VerticalCylinder, fillColor = {170, 170, 255}), Polygon(points = {{-12.5, -19.5}, {-20.5, -3.5}, {1.5, 40.5}, {9.5, 14.5}, {31.5, 18.5}, {21.5, -23.5}, {3.5, -19.5}, {-2.5, -19.5}, {-12.5, -19.5}}, lineColor = {0, 0, 0},
-            fillPattern =                                                                                                    FillPattern.Sphere, fillColor = {255, 127, 0}), Rectangle(extent = {{-20.5, -17.5}, {33.5, -25.5}}, lineColor = {0, 0, 0},
-            fillPattern =                                                                                                    FillPattern.HorizontalCylinder, fillColor = {192, 192, 192}), Polygon(points = {{-10.5, -17.5}, {-0.5, 2.5}, {25.5, -17.5}, {-0.5, -17.5}, {-10.5, -17.5}}, lineColor = {255, 255, 170}, fillColor = {255, 255, 170},
-            fillPattern =                                                                                                    FillPattern.Solid)}));
+ </html>"), Icon(graphics={  Rectangle(extent=  {{-40.5, 74.5}, {53.5, -57.5}}, lineColor=  {0, 0, 0},
+            fillPattern=                                                                                             FillPattern.VerticalCylinder, fillColor=  {170, 170, 255}), Polygon(points=  {{-12.5, -19.5}, {-20.5, -3.5}, {1.5, 40.5}, {9.5, 14.5}, {31.5, 18.5}, {21.5, -23.5}, {3.5, -19.5}, {-2.5, -19.5}, {-12.5, -19.5}}, lineColor=  {0, 0, 0},
+            fillPattern=                                                                                                    FillPattern.Sphere, fillColor=  {255, 127, 0}), Rectangle(extent=  {{-20.5, -17.5}, {33.5, -25.5}}, lineColor=  {0, 0, 0},
+            fillPattern=                                                                                                    FillPattern.HorizontalCylinder, fillColor=  {192, 192, 192}), Polygon(points=  {{-10.5, -17.5}, {-0.5, 2.5}, {25.5, -17.5}, {-0.5, -17.5}, {-10.5, -17.5}}, lineColor=  {255, 255, 170}, fillColor=  {255, 255, 170},
+            fillPattern=                                                                                                    FillPattern.Solid)}));
 end Boiler;
 

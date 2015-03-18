@@ -1,7 +1,7 @@
 within AixLib.Building.HighOrder.House.MFD;
-
-package EnergySystem
+package EnergySystem 
   extends Modelica.Icons.Package;
+
   annotation(Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Package for energy systems for the multi family dwelling.</p>

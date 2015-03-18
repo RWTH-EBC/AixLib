@@ -1,6 +1,8 @@
 within AixLib.HVAC.Pumps.Examples;
 
-model PumpHydraulicResistance_closedLoop "Example with pump, hydraulic resistance and pipes in a closed loop"
+
+model PumpHydraulicResistance_closedLoop
+  "Example with pump, hydraulic resistance and pipes in a closed loop"
   import AixLib;
   extends Modelica.Icons.Example;
   Pump pump(V_flow(fixed = false), MinMaxCharacteristics = AixLib.DataBase.Pumps.Pump1(), V_flow_max = 2, ControlStrategy = 2) annotation(Placement(transformation(extent = {{-40, 20}, {-20, 40}})));
@@ -17,7 +19,7 @@ equation
   connect(pipe1.port_b, pump.port_a) annotation(Line(points = {{-32, -10}, {-62, -10}, {-62, 30}, {-40, 30}}, color = {0, 127, 255}, smooth = Smooth.None));
   connect(NightSignal.y, pump.IsNight) annotation(Line(points = {{-39, 70}, {-30, 70}, {-30, 40.2}}, color = {255, 0, 255}, smooth = Smooth.None));
   connect(PointFixedPressure.port_a, pump.port_a) annotation(Line(points = {{-80, 30}, {-40, 30}}, color = {0, 127, 255}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent = {{-124, 74}, {-62, 44}}, lineColor = {0, 0, 255}, textString = "Always have 
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent=  {{-124, 74}, {-62, 44}}, lineColor=  {0, 0, 255}, textString=  "Always have 
  a point of fixed pressure 
  before a pump
  when building a closed loop")}), experiment(StopTime = 86400, Interval = 60), __Dymola_experimentSetupOutput, Documentation(revisions = "<html>

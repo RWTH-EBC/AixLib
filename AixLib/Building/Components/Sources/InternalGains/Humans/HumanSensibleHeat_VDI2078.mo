@@ -1,21 +1,27 @@
 within AixLib.Building.Components.Sources.InternalGains.Humans;
 
-model HumanSensibleHeat_VDI2078 "Model for sensible heat output after VDI 2078 "
+
+model HumanSensibleHeat_VDI2078
+  "Model for sensible heat output after VDI 2078 "
   // Number of Persons
-  parameter Integer ActivityType = 2 "Physical activity" annotation(Dialog(compact = true, descriptionLabel = true), choices(choice = 2 "light", choice = 3 "moderate", choice = 4 "heavy ", radioButtons = true));
+  parameter Integer ActivityType = 2 "Physical activity" annotation(Dialog(compact = true, descriptionLabel = true), choices(choice = 2 "light", choice = 3
+        "moderate",                                                                                                    choice = 4 "heavy ", radioButtons = true));
   parameter Real NrPeople = 1.0 "Number of people in the room" annotation(Dialog(descriptionLabel = true));
-  parameter Real RatioConvectiveHeat = 0.5 "Ratio of convective heat from overall heat output" annotation(Dialog(descriptionLabel = true));
+  parameter Real RatioConvectiveHeat = 0.5
+    "Ratio of convective heat from overall heat output"                                        annotation(Dialog(descriptionLabel = true));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ConvHeat annotation(Placement(transformation(extent = {{80, 40}, {100, 60}})));
   Utilities.HeatTransfer.HeatToStar_Avar RadiationConvertor(eps = Emissivity_Human) annotation(Placement(transformation(extent = {{48, -22}, {72, 2}})));
   Utilities.Interfaces.Star RadHeat annotation(Placement(transformation(extent = {{80, -20}, {100, 0}})));
   Modelica.Blocks.Math.MultiProduct productHeatOutput(nu = 2) annotation(Placement(transformation(extent = {{-24, 10}, {-4, 30}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a TRoom "Air temperature in room" annotation(Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a TRoom
+    "Air temperature in room"                                                         annotation(Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-90, 64})));
   Modelica.Blocks.Math.UnitConversions.To_degC to_degC annotation(Placement(transformation(extent = {{-82, 46}, {-72, 56}})));
   Modelica.Blocks.Interfaces.RealInput Schedule annotation(Placement(transformation(extent = {{-120, -40}, {-80, 0}}), iconTransformation(extent = {{-102, -22}, {-80, 0}})));
   Modelica.Blocks.Math.Gain Nr_People(k = NrPeople) annotation(Placement(transformation(extent = {{-66, -26}, {-54, -14}})));
   Modelica.Blocks.Math.Gain SurfaceArea_People(k = SurfaceArea_Human) annotation(Placement(transformation(extent = {{-16, -56}, {-4, -44}})));
-  parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(22) "Initial temperature";
+  parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(22)
+    "Initial temperature";
   Modelica.Blocks.Nonlinear.Limiter limiter(uMax = 1e+23, uMin = 1e-4) annotation(Placement(transformation(extent = {{8, -60}, {28, -40}})));
   Modelica.Blocks.Math.Gain gain(k = RatioConvectiveHeat) annotation(Placement(transformation(extent = {{6, 28}, {14, 36}})));
   Modelica.Blocks.Math.Gain gain1(k = 1 - RatioConvectiveHeat) annotation(Placement(transformation(extent = {{6, -12}, {14, -4}})));
@@ -42,7 +48,7 @@ equation
   connect(gain1.y, RadiativeHeat.Q_flow) annotation(Line(points = {{14.4, -8}, {18, -8}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(productHeatOutput.y, gain.u) annotation(Line(points = {{-2.3, 20}, {2, 20}, {2, 32}, {5.2, 32}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(productHeatOutput.y, gain1.u) annotation(Line(points = {{-2.3, 20}, {2, 20}, {2, -8}, {5.2, -8}}, color = {0, 0, 127}, smooth = Smooth.None));
-  annotation(Icon(graphics = {Ellipse(extent = {{-36, 98}, {36, 26}}, lineColor = {255, 213, 170}, fillColor = {255, 213, 170}, fillPattern = FillPattern.Solid), Rectangle(extent = {{-48, 20}, {54, -94}}, fillColor = {255, 0, 0}, fillPattern = FillPattern.Solid, pattern = LinePattern.None), Text(extent = {{-40, -2}, {44, -44}}, lineColor = {255, 255, 255}, fillColor = {255, 0, 0}, fillPattern = FillPattern.Solid, textString = "ERC"), Ellipse(extent = {{-24, 80}, {-14, 70}}, fillColor = {0, 0, 0}, fillPattern = FillPattern.Solid, pattern = LinePattern.None, lineColor = {0, 0, 0}), Ellipse(extent = {{10, 80}, {20, 70}}, fillColor = {0, 0, 0}, fillPattern = FillPattern.Solid, pattern = LinePattern.None, lineColor = {0, 0, 0}), Line(points = {{-18, 54}, {-16, 48}, {-10, 44}, {-4, 42}, {2, 42}, {10, 44}, {16, 48}, {18, 54}}, smooth = Smooth.None, color = {0, 0, 0}, thickness = 1)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(info = "<html>
+  annotation(Icon(graphics = {Ellipse(extent=  {{-36, 98}, {36, 26}}, lineColor=  {255, 213, 170}, fillColor=  {255, 213, 170}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{-48, 20}, {54, -94}}, fillColor=  {255, 0, 0}, fillPattern=  FillPattern.Solid, pattern=  LinePattern.None), Text(extent=  {{-40, -2}, {44, -44}}, lineColor=  {255, 255, 255}, fillColor=  {255, 0, 0}, fillPattern=  FillPattern.Solid, textString=  "ERC"), Ellipse(extent=  {{-24, 80}, {-14, 70}}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid, pattern=  LinePattern.None, lineColor=  {0, 0, 0}), Ellipse(extent=  {{10, 80}, {20, 70}}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid, pattern=  LinePattern.None, lineColor=  {0, 0, 0}), Line(points=  {{-18, 54}, {-16, 48}, {-10, 44}, {-4, 42}, {2, 42}, {10, 44}, {16, 48}, {18, 54}}, smooth=  Smooth.None, color=  {0, 0, 0}, thickness=  1)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for heat ouput of a human according to VDI 2078 (Table A.1). The model only considers the dry heat emission and divides it into convective and radiative heat transmission. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>

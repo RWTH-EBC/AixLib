@@ -1,10 +1,14 @@
 within AixLib.Building.HighOrder.Examples;
 
+
 model Appartment_VoWo "Simulation of 1 apartment "
   import AixLib;
   extends Modelica.Icons.Example;
-  replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater "Medium in the system" annotation(Dialog(group = "Medium"), choicesAllMatching = true);
-  AixLib.Building.HighOrder.House.MFD.BuildingAndEnergySystem.OneAppartment_Radiators VoWoWSchV1984(redeclare package Medium = Medium, fixedHeatFlow3(T_ref = 288.15), fixedHeatFlow5(T_ref = 283.15), fixedHeatFlow16(T_ref = 288.15)) annotation(Placement(transformation(extent = {{-42, -4}, {36, 46}})));
+  replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater
+    "Medium in the system"                                                                             annotation(Dialog(group = "Medium"), choicesAllMatching = true);
+  AixLib.Building.HighOrder.House.MFD.BuildingAndEnergySystem.OneAppartment_Radiators
+                                                                                      VoWoWSchV1984(redeclare
+      package Medium =                                                                                                     Medium, fixedHeatFlow3(T_ref = 288.15), fixedHeatFlow5(T_ref = 283.15), fixedHeatFlow16(T_ref = 288.15)) annotation(Placement(transformation(extent = {{-42, -4}, {36, 46}})));
   AixLib.HVAC.HeatGeneration.Boiler boilerTable(boilerEfficiencyB = AixLib.DataBase.Boiler.BoilerConst()) annotation(Placement(transformation(extent = {{-44, -86}, {-64, -66}}, rotation = 0)));
   AixLib.HVAC.Pumps.Pump Pumpe annotation(Placement(transformation(extent = {{4, -82}, {-16, -62}})));
   AixLib.HVAC.Pipes.StaticPipe pipe annotation(Placement(transformation(extent = {{-30, -48}, {-18, -36}})));
@@ -57,7 +61,6 @@ equation
   connect(pipe.port_b, VoWoWSchV1984.Inflow) annotation(Line(points = {{-18, -42}, {-5.12727, -42}, {-5.12727, -1.5}}, color = {0, 127, 255}, smooth = Smooth.None));
   connect(VoWoWSchV1984.Returnflow, pipe2.port_a) annotation(Line(points = {{3.38182, -1.5}, {3.38182, -44}, {26, -44}}, color = {0, 127, 255}, smooth = Smooth.None));
   // Here the relevant Variables for the simulation are set as output to limit the dimension of the result file
-equation
   connect(combinedWeather.WindSpeed, VoWoWSchV1984.WindSpeedPort) annotation(Line(points = {{-48.9333, 91.6}, {-10.4455, 91.6}, {-10.4455, 42.875}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(AirExWindow.y, VoWoWSchV1984.AirExchangePort_Window) annotation(Line(points = {{0.3, 77}, {6, 77}, {6, 43.0833}, {9.76364, 43.0833}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(combinedWeather.SolarRadiation_OrientedSurfaces[2], VoWoWSchV1984.SolarRadiation[1]) annotation(Line(points = {{-74.32, 72.9}, {-74.32, 60}, {21.1091, 60}, {21.1091, 42.4583}}, color = {255, 128, 0}, smooth = Smooth.None));
@@ -72,7 +75,7 @@ equation
   connect(Source_TsetBath.y, VoWoWSchV1984.TSet[4]) annotation(Line(points = {{-85.3, -9}, {-60, -9}, {-60, 22.4583}, {-36.6818, 22.4583}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(Source_TsetKitchen.y, VoWoWSchV1984.TSet[5]) annotation(Line(points = {{-85.3, -29}, {-60, -29}, {-60, 23.7083}, {-36.6818, 23.7083}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(Source_TseBoiler.y, boilerTable.T_set) annotation(Line(points = {{-71.3, -89}, {-36, -89}, {-36, -69}, {-43.2, -69}}, color = {0, 0, 127}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -140}, {100, 100}}), graphics = {Text(extent = {{-48, -82}, {90, -168}}, lineColor = {0, 0, 255}, textString = "Set initial values for iteration variables (list given by translate, usually pressure drops). Rule of thumb: valves 1000 Pa, pipes 100 Pa. Simulation may still work without some of them, but  it gives warning of division by zero at initialization.
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -140}, {100, 100}}), graphics = {Text(extent=  {{-48, -82}, {90, -168}}, lineColor=  {0, 0, 255}, textString=  "Set initial values for iteration variables (list given by translate, usually pressure drops). Rule of thumb: valves 1000 Pa, pipes 100 Pa. Simulation may still work without some of them, but  it gives warning of division by zero at initialization.
  ")}), experiment(StopTime = 86400, Interval = 60, __Dymola_Algorithm = "Lsodar"), experimentSetupOutput(states = false, derivatives = false, auxiliaries = false, events = false), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Example for setting up a simulation for an appartment.</p>

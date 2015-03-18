@@ -1,14 +1,16 @@
 within AixLib.DataBase.Walls;
-
 record WallBaseDataDefinition "Wall base data definition"
   extends Modelica.Icons.Record;
   // pma 2010-04-28: REMOVED THE BASE DEFINITIONS to get errors thrown when using unparameterised wall models
   parameter Integer n(min = 1) = 3 "Number of wall layers" annotation(Dialog(tab = "Wall 1", group = "Wall 1 parameters"));
   parameter Modelica.SIunits.Length d[n] "Thickness of wall layers" annotation(Dialog(tab = "Wall 1", group = "Layer 1 parameters"));
   parameter Modelica.SIunits.Density rho[n] "Density of wall layers" annotation(Dialog(tab = "Wall 1", group = "Layer 1 parameters"));
-  parameter Modelica.SIunits.ThermalConductivity lambda[n] "Thermal conductivity of wall layers" annotation(Dialog(tab = "Wall 1", group = "Wall 1 parameters"));
-  parameter Modelica.SIunits.SpecificHeatCapacity c[n] "Specific heat capacity of wall layers" annotation(Dialog(tab = "Wall 1", group = "Wall 1 parameters"));
-  parameter Modelica.SIunits.Emissivity eps = 0.95 "Emissivity of inner wall surface" annotation(Dialog(tab = "Wall 1", group = "Wall 1 parameters"));
+  parameter Modelica.SIunits.ThermalConductivity lambda[n]
+    "Thermal conductivity of wall layers"                                                        annotation(Dialog(tab = "Wall 1", group = "Wall 1 parameters"));
+  parameter Modelica.SIunits.SpecificHeatCapacity c[n]
+    "Specific heat capacity of wall layers"                                                    annotation(Dialog(tab = "Wall 1", group = "Wall 1 parameters"));
+  parameter Modelica.SIunits.Emissivity eps = 0.95
+    "Emissivity of inner wall surface"                                                annotation(Dialog(tab = "Wall 1", group = "Wall 1 parameters"));
   annotation(Documentation(info = "<html>
  <p><h4><font color=\"#008000\">Overview</font></h4></p>
  <p>Wall BaseDataDefinition actually doesn&apos;t need predefined values and that is desirable to get errors thrown when using an unparameterised wall in a model. </p>
@@ -24,3 +26,4 @@ record WallBaseDataDefinition "Wall base data definition"
  </ul></p>
  </html>"));
 end WallBaseDataDefinition;
+

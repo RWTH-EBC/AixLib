@@ -1,5 +1,4 @@
 within AixLib.DataBase.Walls.EnEV2009;
-
-package Ceiling
+package Ceiling 
   extends Modelica.Icons.Package;
 end Ceiling;

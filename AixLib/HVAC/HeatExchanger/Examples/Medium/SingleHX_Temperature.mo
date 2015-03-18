@@ -1,5 +1,4 @@
 within AixLib.HVAC.HeatExchanger.Examples.Medium;
-
 model SingleHX_Temperature "Changing outdoor air temperature"
   import Anlagensimulation_WS1314 = AixLib.HVAC;
   extends Modelica.Icons.Example;
@@ -9,7 +8,8 @@ model SingleHX_Temperature "Changing outdoor air temperature"
   Anlagensimulation_WS1314.HeatExchanger.Recuperator HX(flowType = 1) annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}})));
   Anlagensimulation_WS1314.Sources.MassflowsourceMoistAir_mhX Medium2in(X = 0, h = 26.13e3, use_m_in = false, m = 0.07987) annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation = 0, origin = {62, -20})));
   Sources.BoundaryMoistAir_phX Medium2out(use_p_in = false, X = 0, p = 101325) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {60, 20})));
-  Modelica.Blocks.Sources.Ramp Toda(duration = 1, startTime = 1, height = 20e3, offset = 5.03e3) "outdoor air temperature" annotation(Placement(transformation(extent = {{-100, 40}, {-80, 60}})));
+  Modelica.Blocks.Sources.Ramp Toda(duration = 1, startTime = 1, height = 20e3, offset = 5.03e3)
+    "outdoor air temperature"                                                                                              annotation(Placement(transformation(extent = {{-100, 40}, {-80, 60}})));
 equation
   connect(Medium2in.portMoistAir_a, HX.port_2a) annotation(Line(points = {{52, -20}, {36, -20}, {36, -12}, {20, -12}}, color = {0, 127, 255}, smooth = Smooth.None));
   connect(HX.port_2b, Medium2out.portMoistAir_a) annotation(Line(points = {{20, 12}, {36, 12}, {36, 20}, {50, 20}}, color = {0, 127, 255}, smooth = Smooth.None));
@@ -26,3 +26,4 @@ equation
  </ul></p>
  </html>"), experiment(StopTime = 3), __Dymola_experimentSetupOutput);
 end SingleHX_Temperature;
+

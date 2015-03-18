@@ -1,5 +1,4 @@
 within AixLib.DataBase.SolarThermal;
-
 record FlatCollector "Properties of a flat collector"
   extends SolarThermalBaseDataDefinition(eta_zero = 0.8, c1 = 5, c2 = 0.01);
   annotation(Documentation(info = "<html>
@@ -16,3 +15,4 @@ record FlatCollector "Properties of a flat collector"
  </ul></p>
  </html>"));
 end FlatCollector;
+

@@ -1,9 +1,13 @@
 within AixLib.Building.Components.DryAir;
 
-model DynamicVentilation "Dynamic ventilation to ventilate away the solar gains"
-  parameter Modelica.SIunits.Temperature HeatingLimit = 285.15 "Outside temperature at which the heating activates";
+
+model DynamicVentilation
+  "Dynamic ventilation to ventilate away the solar gains"
+  parameter Modelica.SIunits.Temperature HeatingLimit = 285.15
+    "Outside temperature at which the heating activates";
   parameter Real Max_VR = 200 "Maximal ventilation rate";
-  parameter Modelica.SIunits.TemperatureDifference Diff_toTempset = 2 "Difference to set temperature";
+  parameter Modelica.SIunits.TemperatureDifference Diff_toTempset = 2
+    "Difference to set temperature";
   parameter Modelica.SIunits.Temperature Tset = 295.15 "set temperature";
   VarAirExchange varAirExchange annotation(Placement(transformation(extent = {{36, -20}, {62, 4}})));
   Utilities.Control.PITemp pITemp(h = 0, l = -Max_VR, PI(controllerType = Modelica.Blocks.Types.SimpleController.PI)) annotation(Placement(transformation(extent = {{-22, 26}, {-2, 46}})));
@@ -35,7 +39,7 @@ equation
   connect(less.y, Colder_and_HeatingLimit.u2) annotation(Line(points = {{-59, -50}, {-52, -50}, {-52, 29.4}, {-47.4, 29.4}}, color = {255, 0, 255}, smooth = Smooth.None));
   connect(port_outside, varAirExchange.port_a) annotation(Line(points = {{-96, -10}, {-96, -8}, {36, -8}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(varAirExchange.port_b, port_inside) annotation(Line(points = {{62, -8}, {94, -8}, {94, -10}}, color = {191, 0, 0}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(graphics = {Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 0}, fillColor = {211, 243, 255}, fillPattern = FillPattern.Solid)}), Documentation(revisions = "<html>
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(graphics = {Rectangle(extent=  {{-80, 80}, {80, -80}}, lineColor=  {0, 0, 0}, fillColor=  {211, 243, 255}, fillPattern=  FillPattern.Solid)}), Documentation(revisions = "<html>
  <ul>
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
    <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>

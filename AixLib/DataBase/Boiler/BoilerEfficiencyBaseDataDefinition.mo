@@ -1,6 +1,6 @@
 within AixLib.DataBase.Boiler;
-
-record BoilerEfficiencyBaseDataDefinition "TYPE: Table with boiler efficiency depending on part-load factor"
+record BoilerEfficiencyBaseDataDefinition
+  "TYPE: Table with boiler efficiency depending on part-load factor"
   extends Modelica.Icons.Record;
   parameter Real[:, 2] boilerEfficiency "part-load factor | boiler efficiency";
   annotation(Documentation(info = "<html>
@@ -18,3 +18,4 @@ record BoilerEfficiencyBaseDataDefinition "TYPE: Table with boiler efficiency de
  </ul></p>
  </html>"));
 end BoilerEfficiencyBaseDataDefinition;
+

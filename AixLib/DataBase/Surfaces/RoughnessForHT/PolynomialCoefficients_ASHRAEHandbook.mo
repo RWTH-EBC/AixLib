@@ -1,5 +1,4 @@
 within AixLib.DataBase.Surfaces.RoughnessForHT;
-
 record PolynomialCoefficients_ASHRAEHandbook
   extends Modelica.Icons.Record;
   parameter Real D = 11.58;
@@ -29,3 +28,4 @@ record PolynomialCoefficients_ASHRAEHandbook
  </ul></p>
  </html>"));
 end PolynomialCoefficients_ASHRAEHandbook;
+

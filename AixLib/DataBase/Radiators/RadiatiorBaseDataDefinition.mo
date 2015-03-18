@@ -1,11 +1,16 @@
 within AixLib.DataBase.Radiators;
 
+
 record RadiatiorBaseDataDefinition "Base Data Definition for Radiators"
   extends Modelica.Icons.Record;
-  parameter Real NominalPower "Nominal power of radiator at nominal temperatures in W ";
-  parameter Modelica.SIunits.Temperature T_flow_nom(displayUnit = "degC") "Nominal temperatures T_flow according to DIN-EN 442. in degC";
-  parameter Modelica.SIunits.Temperature T_return_nom(displayUnit = "degC") "Nominal temperatures T_return according to DIN-EN 442.in deg C";
-  parameter Modelica.SIunits.Temperature T_room_nom(displayUnit = "degC") "Nominal temperatures T_room according to DIN-EN 442. in deg C";
+  parameter Real NominalPower
+    "Nominal power of radiator at nominal temperatures in W ";
+  parameter Modelica.SIunits.Temperature T_flow_nom(displayUnit = "degC")
+    "Nominal temperatures T_flow according to DIN-EN 442. in degC";
+  parameter Modelica.SIunits.Temperature T_return_nom(displayUnit = "degC")
+    "Nominal temperatures T_return according to DIN-EN 442.in deg C";
+  parameter Modelica.SIunits.Temperature T_room_nom(displayUnit = "degC")
+    "Nominal temperatures T_room according to DIN-EN 442. in deg C";
   parameter Real Exponent = 1.29 annotation(Dialog(group = "Geometry"));
   parameter Real VolumeWater(unit = "l") "Water volume inside radiator in l";
   parameter Real MassSteel(unit = "kg") "Material mass of radiator in kg";
