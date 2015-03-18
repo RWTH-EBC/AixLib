@@ -36,9 +36,9 @@ equation
   connect(sensor3.portMoistAir_b, port_2b) annotation(Line(points = {{80, 60}, {100, 60}}, color = {0, 127, 255}, smooth = Smooth.None));
   connect(volume2.heatPort, simpleHeatTransfer.port_a) annotation(Line(points = {{30, 0}, {10, 0}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(simpleHeatTransfer.port_b, volume1.heatPort) annotation(Line(points = {{-10, 0}, {-30, 0}}, color = {191, 0, 0}, smooth = Smooth.None));
-  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points=  {{-80, 80}, {-80, -80}, {80, 80}, {-80, 80}}, lineColor=  {175, 175, 175}, smooth=  Smooth.None, fillColor=  {85, 170, 255},
-            fillPattern=                                                                                                    FillPattern.Solid), Polygon(points=  {{-80, -80}, {80, -80}, {80, 80}, {-80, -80}}, lineColor=  {175, 175, 175}, smooth=  Smooth.None, fillColor=  {255, 85, 85},
-            fillPattern=                                                                                                    FillPattern.Solid)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(revisions = "<html>
+  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points = {{-80, 80}, {-80, -80}, {80, 80}, {-80, 80}}, lineColor = {175, 175, 175}, smooth = Smooth.None, fillColor = {85, 170, 255},
+            fillPattern =                                                                                                    FillPattern.Solid), Polygon(points = {{-80, -80}, {80, -80}, {80, 80}, {-80, -80}}, lineColor = {175, 175, 175}, smooth = Smooth.None, fillColor = {255, 85, 85},
+            fillPattern =                                                                                                    FillPattern.Solid)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(revisions = "<html>
  <p>12.01.2014, Peter Matthes</p>
  <ul>
  <li>implemented</li>
