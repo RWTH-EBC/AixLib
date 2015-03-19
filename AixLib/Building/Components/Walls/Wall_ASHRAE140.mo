@@ -205,8 +205,6 @@ equation
 // **********************standard connection for inside wall********
 //******************************************************************
 if not (outside) then
-    //absorbtion of solar radition in wall
-  connect(AbscoeffA.u, SolarRadiationPort.I);
     connect(Wall.port_a, port_outside) annotation (Line(
         points={{-18.9,23},{-56.45,23},{-56.45,4},{-98,4}},
         color={191,0,0},
