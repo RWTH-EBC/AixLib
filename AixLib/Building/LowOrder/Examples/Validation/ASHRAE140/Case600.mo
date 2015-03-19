@@ -79,9 +79,8 @@ model Case600
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
     InternalGains_radiative
     annotation (Placement(transformation(extent={{-92,-62},{-72,-42}})));
-  AixLib.Building.LowOrder.BaseClasses.SolarRadWeightedSumReal
-                                  SolarRadWeightedSum(n=5, weightfactors={0.00,0.00,
-        12.00,0.00,0.00})
+  AixLib.Building.LowOrder.BaseClasses.SolarRadWeightedSum SolarRadWeightedSum(
+      n=5, weightfactors={0.00,0.00,12.00,0.00,0.00})
     annotation (Placement(transformation(extent={{-2,54},{18,74}})));
   AixLib.Building.LowOrder.BaseClasses.EqAirTemp.EqAirTempEBCMod
                                         eqAirTemp(

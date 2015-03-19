@@ -1,10 +1,8 @@
 SimpleInnerWall
 SimpleOuterWall
-SolarRadMultiplier
+SolarRadAdapter
 SolarRadWeightedSum
 ThermSplitter
 ThermalZonePhysics
 ReducedOrderModel
 EqAirTemp
-SolarRadAdapter
-SolarRadWeightedSumReal

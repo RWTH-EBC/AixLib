@@ -53,9 +53,8 @@ model ThermalZonePhysics "All sub-models of VDI 6007 connected to one model"
   parameter Modelica.SIunits.Density rhoair = 1.19 "Density of the air" annotation(Dialog(tab = "Room air"));
   parameter Modelica.SIunits.SpecificHeatCapacity cair = 1007
     "Heat capacity of the air"                                                           annotation(Dialog(tab = "Room air"));
-  SolarRadWeightedSumReal
-                      solRadWeightedSum(n = n, weightfactors = Aw) if withWindows and withOuterwalls annotation(Placement(transformation(extent={{4,56},{
-            32,86}})));
+  SolarRadWeightedSum solRadWeightedSum(n=n, weightfactors=Aw) if     withWindows and withOuterwalls
+    annotation (Placement(transformation(extent={{4,56},{32,86}})));
   Components.Weather.Sublinds.Sunblind
                               sunblind(Imax = Imax, n = n, gsunblind = gsunblind) if withWindows and withOuterwalls annotation(Placement(transformation(extent={{-50,59},
             {-30,79}})));
