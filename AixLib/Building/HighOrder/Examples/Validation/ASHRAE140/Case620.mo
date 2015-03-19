@@ -175,7 +175,7 @@ equation
           fillPattern=FillPattern.Solid),Text(
           extent={{-150,20},{-122,4}},
           lineColor={0,0,255},
-          textString="1 - beam radiance in W/m2
+          textString="1 - Direct normal irradiance in W/m2
 2 - global horizontal 
      radiance in W/m2
 "),     Text(

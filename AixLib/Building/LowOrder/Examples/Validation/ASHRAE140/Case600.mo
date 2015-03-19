@@ -34,9 +34,9 @@ model Case600
 
     Utilities.Sources.HourOfDay hourOfDay
       annotation (Placement(transformation(extent={{80,69},{100,89}})));
-    Modelica.Blocks.Interfaces.RealOutput AnnualHeatingLoad "in kWh"
+    Modelica.Blocks.Interfaces.RealOutput AnnualHeatingLoad "in MWh"
       annotation (Placement(transformation(extent={{90,40},{110,60}})));
-    Modelica.Blocks.Interfaces.RealOutput AnnualCoolingLoad "in kWh"
+    Modelica.Blocks.Interfaces.RealOutput AnnualCoolingLoad "in MWh"
       annotation (Placement(transformation(extent={{90,22},{110,42}})));
     Modelica.Blocks.Interfaces.RealOutput PowerLoad "in kW"
       annotation (Placement(transformation(extent={{90,6},{110,26}})));
@@ -267,7 +267,7 @@ equation
           fillPattern=FillPattern.Solid),Text(
           extent={{-139,16},{-111,0}},
           lineColor={0,0,255},
-          textString="1 - beam radiance in W/m2
+          textString="1 - Direct normal irradiance in W/m2
 2 - global horizontal 
      radiance in W/m2
 "),     Text(
@@ -321,5 +321,12 @@ equation
         preserveAspectRatio=false,
         grid={1,1})),
     experiment(StopTime=3.1536e+007, Interval=3600),
-    __Dymola_experimentSetupOutput);
+    __Dymola_experimentSetupOutput(events=false),
+    Documentation(info="<html>
+<p>As described in ASHRAE Standard 140.</p>
+</html>", revisions="<html>
+ <p><ul>
+ <li><i>March 19, 2015</i> by Peter Remmen:<br/>Implemented</li>
+ </ul></p>
+ </html>"));
 end Case600;
