@@ -1,6 +1,3 @@
-TemperatureSensor
-MassFlowSensor
 ComfortSensor
-RelativeHumiditySensor
 PropertySensorMoistAir
-BaseClasses
+RelativeHumiditySensor

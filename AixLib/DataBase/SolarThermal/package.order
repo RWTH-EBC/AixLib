@@ -1,6 +1,6 @@
-SolarThermalBaseDataDefinition
-SimpleAbsorber
 AirCollector
-FlatCollector
-VacuumCollector
 ConcentratingCollector
+FlatCollector
+SimpleAbsorber
+SolarThermalBaseDataDefinition
+VacuumCollector

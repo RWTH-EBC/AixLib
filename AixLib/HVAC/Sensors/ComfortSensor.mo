@@ -9,7 +9,9 @@ equation
   radPort.Q_flow = 0;
   // Calculate the output
   OperativeTemperature = (convPort.T + radPort.T) * 0.5;
-  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Ellipse(extent=  {{-60, 66}, {66, -58}}, lineThickness=  1, fillColor=  {170, 255, 255}, fillPattern=  FillPattern.Solid, pattern=  LinePattern.None, lineColor=  {0, 0, 0})}), Documentation(info = "<html>
+  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Ellipse(extent = {{-60, 66}, {66, -58}},
+            lineThickness =                                                                                                    1, fillColor = {170, 255, 255},
+            fillPattern =                                                                                                    FillPattern.Solid, pattern = LinePattern.None, lineColor = {0, 0, 0})}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Simple model for a comfort sensor, by computing the operative temperature. </p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
