@@ -46,7 +46,7 @@ model Storage
     each m_flow_nominal=0.01)                            annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {84, 0})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor heatTransfer_HE[n](each G = k_HE * A_HE / n) annotation(Placement(transformation(extent = {{32, -10}, {52, 10}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor heatTransfer[n](G = cat(1, {G_top_bottom}, array(G_middle for k in 2:n - 1), {G_top_bottom})) annotation(Placement(transformation(extent = {{-80, -10}, {-60, 10}})));
-  HVAC.Storage.BaseClasses.Bouyancy bouyancy[n - 1](
+  BaseClasses.Bouyancy              bouyancy[n - 1](
     each rho=Medium.density(Medium.setState_phX(
         port_a_consumer.p,
         inStream(port_a_consumer.h_outflow),
@@ -64,7 +64,9 @@ model Storage
     each beta=beta,
     each dx=dx,
     each kappa=kappa)
-    annotation (Placement(transformation(extent={{-38,-10},{-18,10}})));
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-28,0})));
 protected
   parameter Modelica.SIunits.Volume V = A * h;
   parameter Modelica.SIunits.Area A = Modelica.Constants.pi * d ^ 2 / 4;
