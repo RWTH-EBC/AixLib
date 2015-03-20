@@ -126,33 +126,34 @@ public
                           internalGainsRad annotation (Placement(transformation(
           extent={{70,-100},{90,-80}}), iconTransformation(extent={{52,-112},{
             98,-68}})));
-  Utilities.HeatTransfer.SolarRadToHeat
-                                      solarRadToHeatWindowRad(coeff=g, A=Aw) if
-                                                                             withWindows and withOuterwalls
-    annotation (Placement(transformation(extent={{-46,82},{-26,102}},rotation=0)));
-  Utilities.Interfaces.SolarRad_in
-                                 solarRad_in if   withWindows and withOuterwalls
-    annotation (Placement(transformation(extent={{-102,68},{-82,88}}, rotation=0),
-        iconTransformation(extent={{-21,-20},{21,20}},
-        rotation=-90,
-        origin={-40,95})));
-
-  SolarRadMultiplier solarRadMultiplierWindowRad(x=1 - splitfac) if
-    withWindows and withOuterwalls
-    annotation (Placement(transformation(extent={{-72,80},{-52,100}})));
-  SolarRadMultiplier solarRadMultiplierWindowConv(x=splitfac) if   withWindows
-     and withOuterwalls
-    annotation (Placement(transformation(extent={{-72,56},{-52,76}})));
-  Utilities.HeatTransfer.SolarRadToHeat
-                                      solarRadToHeatWindowConv(A=Aw, coeff=g) if
-                                                                              withWindows and withOuterwalls
-    annotation (Placement(transformation(extent={{-46,58},{-26,78}}, rotation=0)));
 
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
     ventilationTemperatureConverter annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=90,
         origin={-68,-42})));
+  Modelica.Blocks.Math.Gain AbscoeffA(k=(1 - splitfac)*g*Aw)
+    "multiplication withabsorbtioncoefficient and area"
+    annotation (Placement(transformation(extent={{-69,84},{-57,96}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow solarRadToHeatRad
+    "absorbed solar radiation on wall" annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-36,90})));
+  Modelica.Blocks.Math.Gain AbscoeffA1(k=splitfac*g*Aw)
+    "multiplication withabsorbtioncoefficient and area"
+    annotation (Placement(transformation(extent={{-69,58},{-57,70}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow solarRadToHeatConv
+    "absorbed solar radiation on wall" annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-36,64})));
+  Modelica.Blocks.Interfaces.RealInput u1 "Input signal connector"
+    annotation (Placement(transformation(extent={{-134,56},{-94,96}}),
+        iconTransformation(
+        extent={{-20,-20},{20,20}},
+        rotation=-90,
+        origin={-46,94})));
 initial equation
   assert(noEvent((abs(Aw) < 0.00001 and withWindows)==false),"In ReducedModel, withWindows is true (windows existent), but the area of the windows Aw is zero (or nearly zero). This might cause an error.", level=AssertionLevel.warning);
   assert(noEvent((abs(Ao) < 0.00001 and withOuterwalls)==false),"In ReducedModel, withOuterwalls is true (outer walls existent), but the area of the outer walls Ao is zero (or nearly zero). This might cause an error.", level=AssertionLevel.warning);
@@ -160,24 +161,6 @@ initial equation
 
 equation
 if withWindows and withOuterwalls then
-    connect(solarRad_in, solarRadMultiplierWindowRad.solarRad_in) annotation (Line(
-        points={{-92,78},{-75,78},{-75,90},{-71,90}},
-        color={255,128,0},
-        smooth=Smooth.None));
-    connect(solarRad_in, solarRadMultiplierWindowConv.solarRad_in) annotation (Line(
-        points={{-92,78},{-75,78},{-75,66},{-71,66}},
-        color={255,128,0},
-        smooth=Smooth.None));
-    connect(solarRadMultiplierWindowRad.solarRad_out, solarRadToHeatWindowRad.solarRad_in)
-      annotation (Line(
-        points={{-53,90},{-46.1,90}},
-        color={255,128,0},
-        smooth=Smooth.None));
-    connect(solarRadMultiplierWindowConv.solarRad_out, solarRadToHeatWindowConv.solarRad_in)
-      annotation (Line(
-        points={{-53,66},{-46.1,66}},
-        color={255,128,0},
-        smooth=Smooth.None));
     if withOuterwalls then
     else
       assert(withOuterwalls,"There must be outer walls, windows have to be counted too!");
@@ -225,10 +208,6 @@ if withWindows and withOuterwalls then
       points={{-7,0},{-16,0},{-16,-30},{20,-30},{20,0},{28,0}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(solarRadToHeatWindowConv.heatPort, airload.port) annotation (Line(
-      points={{-27,66},{-16,66},{-16,0},{-7,0}},
-      color={191,0,0},
-      smooth=Smooth.None));
   connect(ventilationTemperature, ventilationTemperatureConverter.T)
     annotation (Line(
       points={{-100,-62},{-68,-62},{-68,-51.6}},
@@ -241,6 +220,26 @@ if withWindows and withOuterwalls then
       smooth=Smooth.None));
   connect(ventilationRate, airExchange.InPort1) annotation (Line(
       points={{-40,-100},{-40,-50},{-50,-50},{-50,-36.4},{-43,-36.4}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(AbscoeffA.y, solarRadToHeatRad.Q_flow) annotation (Line(
+      points={{-56.4,90},{-46,90}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(AbscoeffA1.y, solarRadToHeatConv.Q_flow) annotation (Line(
+      points={{-56.4,64},{-46,64}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(solarRadToHeatConv.port, airload.port) annotation (Line(
+      points={{-26,64},{-16,64},{-16,0},{-7,0}},
+      color={191,0,0},
+      smooth=Smooth.None));
+  connect(AbscoeffA1.u, u1) annotation (Line(
+      points={{-70.2,64},{-86,64},{-86,76},{-114,76}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(AbscoeffA.u, u1) annotation (Line(
+      points={{-70.2,90},{-86,90},{-86,76},{-114,76}},
       color={0,0,127},
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,

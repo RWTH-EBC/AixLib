@@ -1,4 +1,4 @@
-within AixLib.Building.LowOrder;
+within AixLib.Building.LowOrder.Examples;
 package Validation "Contains Test Cases from VDI 6007 Validation"
 
 

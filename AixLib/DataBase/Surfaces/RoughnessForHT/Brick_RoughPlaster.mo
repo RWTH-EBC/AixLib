@@ -1,4 +1,10 @@
 within AixLib.DataBase.Surfaces.RoughnessForHT;
+record Brick_RoughPlaster
+  extends
+    DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook(
+    D=12.49,
+    E=4.065,
+    F=0.028);
 
 
 record Brick_RoughPlaster

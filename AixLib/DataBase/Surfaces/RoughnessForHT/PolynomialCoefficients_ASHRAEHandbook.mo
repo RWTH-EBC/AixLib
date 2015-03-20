@@ -1,6 +1,6 @@
 within AixLib.DataBase.Surfaces.RoughnessForHT;
 record PolynomialCoefficients_ASHRAEHandbook
-  extends Modelica.Icons.Record;
+    extends Modelica.Icons.Record;
   parameter Real D = 11.58;
   parameter Real E = 5.894;
   parameter Real F = 0.0;

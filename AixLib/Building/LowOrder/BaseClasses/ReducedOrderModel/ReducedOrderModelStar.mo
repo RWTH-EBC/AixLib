@@ -2,7 +2,7 @@ within AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel;
 model ReducedOrderModelStar
   extends partialReducedOrderModel;
   Utilities.HeatTransfer.HeatToStar heatToStarWindow(A=Aw, eps=epsw) if withWindows
-    annotation (Placement(transformation(extent={{-16,72},{4,92}})));
+    annotation (Placement(transformation(extent={{-16,80},{4,100}})));
   Utilities.HeatTransfer.HeatToStar heatToStarOuterwall(A=Ao, eps=epso) if withOuterwalls
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -15,13 +15,8 @@ model ReducedOrderModelStar
         origin={50,28})));
 equation
   if withWindows and withOuterwalls then
-  connect(solarRadToHeatWindowRad.heatPort, heatToStarWindow.Therm) annotation (
-     Line(
-      points={{-27,90},{-22,90},{-22,82},{-15.2,82}},
-      color={191,0,0},
-      smooth=Smooth.None));
   connect(heatToStarWindow.Star, internalGainsRad) annotation (Line(
-      points={{3.1,82},{12,82},{12,45},{80,45},{80,-90}},
+      points={{3.1,90},{12,90},{12,45},{80,45},{80,-90}},
       color={95,95,95},
       pattern=LinePattern.None,
       smooth=Smooth.None));
@@ -53,6 +48,10 @@ equation
       smooth=Smooth.None));
   end if;
 
+  connect(solarRadToHeatRad.port, heatToStarWindow.Therm) annotation (Line(
+      points={{-26,90},{-15.2,90}},
+      color={191,0,0},
+      smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics), Documentation(info="<html>
 <p>ReducedOrderModelStar extends from partialReducedOrderModel. </p>

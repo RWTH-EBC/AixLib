@@ -30,8 +30,8 @@ equation
 
   T_eqLW=((T_earth-T_air)*(unitvec-phiprivate)+(T_sky-T_air)*phiprivate)*(eowo*alpharad/(alpharad+alphaconv_wall));
   T_eqLW_win=((T_earth-T_air)*(unitvec-phiprivate)+(T_sky-T_air)*phiprivate)*(eowo*alpharad/(alpharad+alphaconv_win)).*abs(sunblindsig-unitvec);
-  T_eqSW=solarRad_in.I*aowo/(alpharad+alphaconv_wall);
-  T_eqSW_win=solarRad_in.I*awin/(alpharad+alphaconv_win);
+  T_eqSW=solarRad_in*aowo/(alpharad+alphaconv_wall);
+  T_eqSW_win=solarRad_in*awin/(alpharad+alphaconv_win);
 
   if withLongwave then
     T_eqWin=T_air*unitvec+T_eqLW_win+T_eqSW_win;
