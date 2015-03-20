@@ -7,3 +7,6 @@ Heater_u
 SolarThermalCollector
 TestCombiTable2D
 BaseClasses
+PumpRadiatorThermostaticValve
+PumpRadiatorValve
+RadiatorEN442_2
