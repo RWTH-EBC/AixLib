@@ -24,11 +24,6 @@ equation
 
 if withWindows and withOuterwalls then
 
-    connect(solarRadToHeatWindowRad.heatPort, thermSplitterWin.signalInput)
-      annotation (Line(
-        points={{-27,90},{-12,90}},
-        color={191,0,0},
-        smooth=Smooth.None));
 end if;
 
 if withInnerwalls then
@@ -65,6 +60,11 @@ end if;
       color={191,0,0},
       smooth=Smooth.None));
 
+  connect(solarRadToHeatRad.port, thermSplitterWin.signalInput) annotation (
+      Line(
+      points={{-26,90},{-12,90}},
+      color={191,0,0},
+      smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics), Documentation(info="<html>
 <p>ReducedOrderModelVDI extends from partialReducedOrderModel. </p>

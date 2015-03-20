@@ -20,27 +20,33 @@ equation
       Rad_Out[i].I = Rad_In[i].I;
       sunblindonoff[i] = 0;
     end if;
+    //Dummy equation
+    Rad_Out[i].I_dir = sum(Rad_In.I_dir);
+    Rad_Out[i].I_diff = sum(Rad_In.I_diff);
+    Rad_Out[i].I_gr = sum(Rad_In.I_gr);
+    Rad_Out[i].AOI = sum(Rad_In.AOI);
   end for;
+
   annotation(Diagram(graphics), Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}}),
                                      graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor=
               {0,0,0},                                                                                             fillColor=
               {170,213,255},
             fillPattern=FillPattern.HorizontalCylinder),                                                                                                    Rectangle(extent = {{-80, 80}, {80, 66}}, lineColor = {0, 0, 0}, fillColor = {135, 135, 135},
-            fillPattern =                                                                                                    FillPattern.HorizontalCylinder), Ellipse(extent = {{-36, 44}, {36, -22}}, lineColor=
+            fillPattern =                                                                                                   FillPattern.HorizontalCylinder), Ellipse(extent = {{-36, 44}, {36, -22}}, lineColor=
               {255,221,0},                                                                                                    fillColor=
               {255,221,0},
             fillPattern=FillPattern.Solid),                                                                                                    Rectangle(extent = {{-80, 16}, {80, 2}}, lineColor = {0, 0, 0}, fillColor = {135, 135, 135},
-            fillPattern =                                                                                                    FillPattern.HorizontalCylinder), Rectangle(extent = {{-80, 32}, {80, 18}}, lineColor = {0, 0, 0}, fillColor = {135, 135, 135},
-            fillPattern =                                                                                                    FillPattern.HorizontalCylinder), Rectangle(extent = {{-80, 48}, {80, 34}}, lineColor = {0, 0, 0}, fillColor = {135, 135, 135},
-            fillPattern =                                                                                                    FillPattern.HorizontalCylinder), Rectangle(extent = {{-80, 64}, {80, 50}}, lineColor = {0, 0, 0}, fillColor = {135, 135, 135},
-            fillPattern =                                                                                                    FillPattern.HorizontalCylinder), Rectangle(extent = {{-80, 80}, {-76, 2}}, lineColor = {0, 0, 0},
-            fillPattern =                                                                                                    FillPattern.Solid, fillColor = {0, 0, 0}), Rectangle(extent = {{76, 80}, {80, 2}}, lineColor = {0, 0, 0},
-            fillPattern =                                                                                                    FillPattern.Solid, fillColor = {0, 0, 0}),                                                                                                    Rectangle(extent = {{-76, -64}, {76, -76}}, lineColor=
+            fillPattern =                                                                                                   FillPattern.HorizontalCylinder), Rectangle(extent = {{-80, 32}, {80, 18}}, lineColor = {0, 0, 0}, fillColor = {135, 135, 135},
+            fillPattern =                                                                                                   FillPattern.HorizontalCylinder), Rectangle(extent = {{-80, 48}, {80, 34}}, lineColor = {0, 0, 0}, fillColor = {135, 135, 135},
+            fillPattern =                                                                                                   FillPattern.HorizontalCylinder), Rectangle(extent = {{-80, 64}, {80, 50}}, lineColor = {0, 0, 0}, fillColor = {135, 135, 135},
+            fillPattern =                                                                                                   FillPattern.HorizontalCylinder), Rectangle(extent = {{-80, 80}, {-76, 2}}, lineColor = {0, 0, 0},
+            fillPattern =                                                                                                   FillPattern.Solid, fillColor = {0, 0, 0}), Rectangle(extent = {{76, 80}, {80, 2}}, lineColor = {0, 0, 0},
+            fillPattern =                                                                                                   FillPattern.Solid, fillColor = {0, 0, 0}),                                                                                                    Rectangle(extent = {{-76, -64}, {76, -76}}, lineColor=
               {0,127,0},                                                                                                    fillColor=
               {0,127,0},
             fillPattern=FillPattern.HorizontalCylinder),                                                                                                    Rectangle(extent = {{-2, 80}, {2, -80}}, lineColor = {0, 0, 0},
-            fillPattern =                                                                                                    FillPattern.Solid, fillColor = {0, 0, 0}, origin = {0, 78}, rotation = -90), Rectangle(extent = {{46, -52}, {52, -64}}, lineColor=
+            fillPattern =                                                                                                   FillPattern.Solid, fillColor = {0, 0, 0}, origin = {0, 78}, rotation = -90), Rectangle(extent = {{46, -52}, {52, -64}}, lineColor=
               {180,90,0},                                                                                                    fillColor=
               {180,90,0},
             fillPattern=FillPattern.VerticalCylinder),                                                                                                    Ellipse(extent={{
@@ -52,11 +58,11 @@ equation
               {0,127,0},                                                                                                    fillColor=
               {0,127,0},
             fillPattern=FillPattern.Solid),                                                                                                    Rectangle(extent = {{76, 2}, {80, -76}}, lineColor = {0, 0, 0},
-            fillPattern =                                                                                                    FillPattern.Solid, fillColor = {0, 0, 0}),
+            fillPattern =                                                                                                   FillPattern.Solid, fillColor = {0, 0, 0}),
                                                                                                     Rectangle(extent = {{-80, 2}, {-76, -76}}, lineColor = {0, 0, 0},
-            fillPattern =                                                                                                    FillPattern.Solid, fillColor = {0, 0, 0}),
+            fillPattern =                                                                                                   FillPattern.Solid, fillColor = {0, 0, 0}),
                                                                                                     Rectangle(extent = {{-2, 80}, {2, -80}}, lineColor = {0, 0, 0},
-            fillPattern =                                                                                                    FillPattern.Solid, fillColor = {0, 0, 0}, origin = {0, -78}, rotation = -90),
+            fillPattern =                                                                                                   FillPattern.Solid, fillColor = {0, 0, 0}, origin = {0, -78}, rotation = -90),
         Text(
           extent={{-72,112},{74,76}},
           lineColor={0,0,255},

@@ -1,6 +1,6 @@
 SimpleInnerWall
 SimpleOuterWall
-SolarRadMultiplier
+SolarRadAdapter
 SolarRadWeightedSum
 ThermSplitter
 ThermalZonePhysics

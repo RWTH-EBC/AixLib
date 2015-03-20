@@ -16,7 +16,8 @@ parameter Boolean withLongwave=true
     "[1]: Air temperature<br/>[2]: Horizontal radiation of sky<br/>[3]: Horizontal radiation of earth"
     annotation (Placement(transformation(extent={{-120,-20},{-80,20}}),
         iconTransformation(extent={{-100,-20},{-60,20}})));
-  Utilities.Interfaces.SolarRad_in solarRad_in[n] annotation (Placement(
+  Modelica.Blocks.Interfaces.RealInput
+                                   solarRad_in[n] annotation (Placement(
         transformation(extent={{-100,56},{-80,76}}), iconTransformation(
           extent={{-99,42},{-71,70}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a equalAirTemp annotation (
@@ -62,7 +63,7 @@ equation
   if (abs(E_sky+E_earth)<0.1) then
     alpharad=5.0;
   else
-    alpharad=(E_sky+E_earth)/(T_sky-T_earth);
+    alpharad=(E_sky+(E_earth/0.93))/(T_sky-T_earth);
   end if;
 
 annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
