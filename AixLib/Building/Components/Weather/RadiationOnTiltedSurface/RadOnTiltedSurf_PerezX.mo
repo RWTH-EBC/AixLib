@@ -1,6 +1,7 @@
-within AixLib.Building.Components.Weather.BaseClasses;
-model RadOnTiltedSurf_Perez
-  "Converts the WeatherData to the irradiation on tilted surfaces to be used with TMY input"
+within AixLib.Building.Components.Weather.RadiationOnTiltedSurface;
+model RadOnTiltedSurf_PerezX
+  "Calculates solar radiation on tilted surfaces according to Perez"
+  extends BaseClasses.PartialRadOnTiltedSurf;
 
   import Modelica.SIunits.Conversions.to_deg;
   import Modelica.SIunits.Conversions.from_deg;
@@ -85,60 +86,15 @@ protected
     Real f23;
 
   //input
-public
-    Modelica.Blocks.Interfaces.RealInput InDayAngleSun
-    annotation (Placement(transformation(
-          extent={{-16,-16},{16,16}},
-          rotation=0,
-          origin={-86,6}),
-          iconTransformation(
-          extent={{9,-9},{-9,9}},
-          rotation=180,
-          origin={-79,-21})));
-    Modelica.Blocks.Interfaces.RealInput InHourAngleSun
-    annotation (Placement(transformation(
-          extent={{-16,-16},{16,16}},
-          rotation=0,
-          origin={-86,-16}),
-          iconTransformation(
-          extent={{9,-9},{-9,9}},
-          rotation=180,
-          origin={-79,-41})));
-    Modelica.Blocks.Interfaces.RealInput InDeclinationSun
-    annotation (Placement(transformation(
-          extent={{-16,-16},{16,16}},
-          rotation=0,
-          origin={-86,-40}),
-          iconTransformation(
-          extent={{9,-9},{-9,9}},
-          rotation=180,
-          origin={-79,-61})));
-  Modelica.Blocks.Interfaces.RealInput solarInput1
-    "beam horizontal for TRY; beam for TMY" annotation (Placement(
-        transformation(
-        origin={-42,80},
-        extent={{-10,-10},{10,10}},
-        rotation=270), iconTransformation(
-        extent={{-7,-7},{7,7}},
-        rotation=270,
-        origin={-61,73})));
-  Modelica.Blocks.Interfaces.RealInput solarInput2
-    "diffuse horizontal for TRY; ground horizontal for TMY" annotation (
-      Placement(transformation(
-        origin={40,80},
-        extent={{-10,-10},{10,10}},
-        rotation=270), iconTransformation(
-        extent={{-7,-7},{7,7}},
-        rotation=270,
-        origin={37,73})));
 
   //output
 
+public
     Modelica.Blocks.Interfaces.RealOutput rho_out "groundreflection"
       annotation (Placement(
           transformation(extent={{-10,-10},{10,10}},
           rotation=270,
-          origin={-18,-88}),
+          origin={-16,-88}),
           iconTransformation(
           extent={{-6,-6},{6,6}},
           rotation=270,
@@ -148,7 +104,7 @@ public
     annotation (Placement(transformation(
           extent={{-10,-10},{10,10}},
           rotation=270,
-          origin={28,-88}),
+          origin={30,-88}),
           iconTransformation(
           extent={{-6,-6},{6,6}},
           rotation=270,
@@ -158,36 +114,34 @@ public
       annotation (Placement(
           transformation(extent={{-10,-10},{10,10}},
           rotation=270,
-          origin={4,-88}),
+          origin={6,-88}),
           iconTransformation(
           extent={{-6,-6},{6,6}},
           rotation=270,
           origin={10,-84})));
     Modelica.Blocks.Interfaces.RealOutput BeamRadTiltOut
     "[W/m²] Beam irradiance on a tilted surface"
-      annotation (Placement(transformation(extent={{70,-22},{90,-2}}), iconTransformation(extent={{70,-10},{82,2}})));
+      annotation (Placement(transformation(extent={{72,-22},{92,-2}}), iconTransformation(extent={{70,-10},{82,2}})));
     Modelica.Blocks.Interfaces.RealOutput DiffRadTiltCSOut
     "[W/m²] circumsolar diffuse irradiance"
-      annotation (Placement(transformation(extent={{70,-62},{90,-42}}),iconTransformation(extent={{70,-52},{82,-40}})));
+      annotation (Placement(transformation(extent={{72,-62},{92,-42}}),iconTransformation(extent={{70,-52},{82,-40}})));
     Modelica.Blocks.Interfaces.RealOutput DiffRadTiltHZOut
     "[W/m²] Diffuse irradiance on a tilted surface"
-      annotation (Placement(transformation(extent={{70,-80},{90,-60}}),iconTransformation(extent={{70,-72},{82,-60}})));
+      annotation (Placement(transformation(extent={{72,-80},{92,-60}}),iconTransformation(extent={{70,-72},{82,-60}})));
     Modelica.Blocks.Interfaces.RealOutput DiffRadTiltDOMOut
     "[W/m²] Diffuse irradiance on a tilted surface"
-      annotation (Placement(transformation(extent={{70,-42},{90,-22}}),iconTransformation(extent={{70,-30},{82,-18}})));
+      annotation (Placement(transformation(extent={{72,-42},{92,-22}}),iconTransformation(extent={{70,-30},{82,-18}})));
     Modelica.Blocks.Interfaces.RealOutput brightness_out
     "dimensionless factor, which says how cloudy the sky is (see: delta)"
       annotation (Placement(
           transformation(extent={{-10,-10},{10,10}},
           rotation=270,
-          origin={50,-88}),
+          origin={52,-88}),
           iconTransformation(
           extent={{-6,-6},{6,6}},
           rotation=270,
           origin={54,-84})));
 
-  Utilities.Interfaces.SolarRad_out   OutTotalRadTilted
-    annotation (Placement(transformation(extent={{70,40},{90,60}})));
   Modelica.Blocks.Tables.CombiTable1Ds FijFactors(
     smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments,
     tableOnFile=false,
@@ -463,16 +417,17 @@ equation
           origin={0,-6},
           rotation=360)}),
     Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
-<p>The <b>RadOnTiltedSurf</b> model uses output data of the <b><a href=\"SunAltitude\">SunAltitude</a></b> model and weather data (beam and diffuse radiance on a horizontal surface) to compute total and beam radiance on a tilted surface.</p>
+<h4><span style=\"color:#008000\">Overview</span></h4>
+<p>The <b>RadOnTiltedSurf</b> model uses output data of the <b><a href=\"AixLib.Building.Components.Weather.BaseClasses.Sun\">Sun</a></b> model and weather data weather data (beam and diffuse radiance on a horizontal surface for TRY format, or beam normal and global horizontal for TMY format) to compute total and beam radiance on a tilted surface.</p>
 <p>Input: It needs information on the height, the tilt angle and the azimut angle of the surface, the latitude of the location and the ground reflection coefficient. </p>
 <p>Output: In addition to the calculation of the irradiance on tilted surfaces the model has some output variables that are needed from other in the SunIrradiation model embedded models. </p>
-<p><h4><font color=\"#008000\">Known Limitations</font></h4></p>
+<h4><span style=\"color:#008000\">Known Limitations</span></h4>
 <p>Be aware that the calculation of the total solar radiation may cause problems at simulation times close to sunset and sunrise, because at this simulation times are probably the maxima of the difference between the calculated incedent-angle and the real angle of incedence at the real irradiation-time.</p>
 <p>Another limitation is the equation of the groundreflection approximation. It is only estmated on basis of the <b><a href=\"http://www.nrel.gov/midc/srrl_bms/\">NREL</a> </b>(US National Renewable Energy Laboratory; http://www.nrel.gov/midc/srrl_bms) data for the albedo of the year 2011 and should be revised.</p>
 </html>",
     revisions="<html>
 <p><ul>
+<li><i>March 23, 2015&nbsp;</i> by Ana Constantin:<br/>Adapted solar inputs so it cand work with both TRY and TMY weather format</li>
 <li><i>April 15, 2012&nbsp;</i> by Jerome Feldhaus:<br/>Implemented new diffuse irradiation modell from Perez Irradiation on tilted Surfaces. </li>
 <li><i>March 14, 2005&nbsp;</i> by Timo Haase:<br/>Implemented. </li>
 </ul></p>
@@ -481,4 +436,4 @@ equation
 
 
 </html>"));
-end RadOnTiltedSurf_Perez;
+end RadOnTiltedSurf_PerezX;
