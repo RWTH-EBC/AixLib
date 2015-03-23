@@ -1,4 +1,4 @@
 within AixLib.Building.Components.Sources.InternalGains;
-package BaseClasses
+package BaseClasses 
   extends Modelica.Icons.BasesPackage;
 end BaseClasses;

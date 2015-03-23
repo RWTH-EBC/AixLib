@@ -14,10 +14,10 @@ protected
   parameter Real InfiltrationRate = 2 * n50 * e * eps;
 equation
   port_a.Q_flow = InfiltrationRate * room_V * c * rho * (port_a.T - port_b.T) / 3600;
-  annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics={  Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}, fillColor = {211, 243, 255},
-            fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-30, -12}, {30, -78}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
-            fillPattern =                                                                                                   FillPattern.Solid, textString = "Air"), Text(extent = {{-76, 26}, {78, -8}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 0},
-            fillPattern =                                                                                                   FillPattern.Solid, textString = "DIN 12381")}), Window(x = 0.4, y = 0.4, width = 0.6, height = 0.6), Documentation(info = "<html>
+  annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics={  Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}), Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}), Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}, fillColor=  {211, 243, 255},
+            fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-30, -12}, {30, -78}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 255},
+            fillPattern=                                                                                                    FillPattern.Solid, textString=  "Air"), Text(extent=  {{-76, 26}, {78, -8}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 0},
+            fillPattern=                                                                                                    FillPattern.Solid, textString=  "DIN 12381")}), Window(x = 0.4, y = 0.4, width = 0.6, height = 0.6), Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>The<b> InfiltrationRate</b> model describes heat and mass transport by infiltration. </p>
  <h4><font color=\"#008000\">Level of Development</font></h4>
