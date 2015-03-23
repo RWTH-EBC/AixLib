@@ -4,7 +4,7 @@ record PolynomialCoefficients_ASHRAEHandbook
   parameter Real D = 11.58;
   parameter Real E = 5.894;
   parameter Real F = 0.0;
-  annotation(Documentation(info = "<html>
+  annotation(Documentation(info="<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Calculate the heat transfer coeficient alpha at outside surfaces depending on wind speed and surface type </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
@@ -18,9 +18,9 @@ record PolynomialCoefficients_ASHRAEHandbook
  <p>Source</p>
  <ul>
  <li>ASHRAE Handbook of Fundamentals. ASHRAE, 1989</li>
- <li>As cited in EnergyPlus Engineering Reference. : EnergyPlus Engineering Reference, 2011 p.56</li>
+ <li>As cited inEnergyPlus Engineering Reference. : EnergyPlus Engineering Reference, 2011 p.56</li>
  </ul>
- </html>", revisions = "<html>
+</html>",  revisions = "<html>
  <ul>
  <li><i>August 30, 2013&nbsp;</i> by Ole Odendahl:<br/>Awarded stars</li>
  <li><i>March 21, 2012&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
