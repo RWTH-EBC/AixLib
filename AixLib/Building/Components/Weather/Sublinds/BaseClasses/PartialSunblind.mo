@@ -1,5 +1,5 @@
 within AixLib.Building.Components.Weather.Sublinds.BaseClasses;
-model PartialSunblind "A Base Class for Sunblindes"
+partial model PartialSunblind "A Base Class for Sunblindes"
 
     parameter Integer n=4 "Size of solar vector (orientations)";
     parameter Modelica.SIunits.TransmissionCoefficient gsunblind[n]={1,1,1,1}

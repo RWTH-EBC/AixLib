@@ -1,5 +1,5 @@
 within AixLib.Building.Components.Weather.RadiationOnTiltedSurface;
-model RadOnTiltedSurf_PerezX
+model RadOnTiltedSurf_Perez
   "Calculates solar radiation on tilted surfaces according to Perez"
   extends BaseClasses.PartialRadOnTiltedSurf;
 
@@ -10,18 +10,9 @@ model RadOnTiltedSurf_PerezX
   import Modelica.Math.cos;
 
 //parameter
-  parameter Integer WeatherFormat = 1 "Format weather file" annotation (Dialog(group=
-        "Weather file",                                                                              compact = true, descriptionLabel = true), choices(choice = 1 "TRY", choice= 2 "TMY", radioButtons = true));
-  parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg Latitude
-    "latitude of location";
-  parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg Azimut
-    "azimut of tilted surface, e.g. 0=south, 90=west, 180=north, -90=east";
-  parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg Tilt
-    "tilt of surface, e.g. 0=horizontal surface, 90=vertical surface";
+
   parameter Boolean GroundReflexApprox =  false
     "Shall the GroundReflection be approximated?" annotation (Dialog(group=
-        "Ground reflection"));
-  parameter Real GroundReflection "ground reflection coefficient" annotation (Dialog(group=
         "Ground reflection"));
   parameter Modelica.SIunits.Height h=0
     "height of the tilted surfaces centre in metre. if unknown it is 0";
@@ -436,4 +427,4 @@ equation
 
 
 </html>"));
-end RadOnTiltedSurf_PerezX;
+end RadOnTiltedSurf_Perez;

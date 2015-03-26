@@ -135,7 +135,7 @@ equation
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>This model represents a sunblind to reduce the vectorial radiance on facades, windows. etc. </p>
 <h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars3.png\"/></p>
+<p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <ul>
 <li>You can define the amount of radiance hitting the facade with gsunblind, which states how much radiance goes through the closed sunblind</li>
@@ -147,7 +147,7 @@ equation
 <p>All three components of the solar radiation of the tilted surface (direct, diffuse and reflected from ground) are reduced by the same factor.</p>
 <p>There is no possibilty to disable the sunblind in a specific direction. This isn&apos;t necessary, as you can set gsunblind in this direction to 1, which means, that the whole radiance is passing through the closed sunblind.</p>
 <h4><span style=\"color:#008000\">Example Results</span></h4>
-<p>This model is part of <a href=\"Building.Components.Walls.Wall\">Wall</a> and checked in the Examples <a href=\"Building.Examples.Walls.InsideWall\">InsideWall</a> and <a href=\"Building.Examples.Walls.OutsideWall\">OutsideWall</a>. </p>
+<p>This model is part of <a href=\"AixLib.Building.Components.Walls.Wall\">Wall</a> and checked in the Examples <a href=\"AixLib.Building.Examples.Walls.InsideWall\">InsideWall</a> and <a href=\"AixLib.Building.Examples.Walls.OutsideWall\">OutsideWall</a>. </p>
 </html>",
         revisions="<html>
 <p><ul>

@@ -4,15 +4,6 @@ model RadOnTiltedSurf_Liu
   extends BaseClasses.PartialRadOnTiltedSurf;
 
 import Modelica.SIunits.Conversions.from_deg;
-  parameter Integer WeatherFormat = 1 "Format weather file" annotation (Dialog(group=
-        "Weather file",                                                                              compact = true, descriptionLabel = true), choices(choice = 1 "TRY", choice= 2 "TMY", radioButtons = true));
-  parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg Latitude = 52.517
-    "latitude of location";
-  parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg Azimut = 13.400
-    "azimut of tilted surface, e.g. 0=south, 90=west, 180=north, -90=east";
-  parameter Modelica.SIunits.Conversions.NonSIunits.Angle_deg Tilt = 90
-    "tilt of surface, e.g. 0=horizontal surface, 90=vertical surface";
-  parameter Real GroundReflection=0.2 "ground reflection coefficient";
 
   Real InBeamRadHor "beam irradiance on the horizontal surface";
   Real InDiffRadHor "diffuse irradiance on the horizontal surface";
