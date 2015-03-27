@@ -1,6 +1,4 @@
 within AixLib.DataBase.WindowsDoors.Simple;
-
-
 record WindowSimple_WSchV1984 "Window according to WSchV1984"
   extends OWBaseDataDefinition_Simple(Uw = 2.5, g = 0.8, Emissivity = 0.9, frameFraction = 0.2);
   annotation(Documentation(revisions = "<html>

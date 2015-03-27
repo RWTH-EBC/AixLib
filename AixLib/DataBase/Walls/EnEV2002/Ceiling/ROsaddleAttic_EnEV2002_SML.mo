@@ -1,6 +1,4 @@
 within AixLib.DataBase.Walls.EnEV2002.Ceiling;
-
-
 record ROsaddleAttic_EnEV2002_SML
   "Saddle roof in attic after EnEV 2002, for building of type S (schwer), M (mittel) and L (leicht)"
   extends WallBaseDataDefinition(n(min = 1) = 1 "Number of wall layers", d = {0.18}
@@ -29,3 +27,4 @@ record ROsaddleAttic_EnEV2002_SML
  </ul>
  </html>"));
 end ROsaddleAttic_EnEV2002_SML;
+

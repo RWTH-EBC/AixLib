@@ -12,5 +12,7 @@ record SetTemp_caseX40 "Max. and Min. set room temperatures for heating"
 <p><h4>Table for Natural Ventilation:</h4></p>
 <p>Column 1: Time</p>
 <p>Column 2: Set temperature for Heater</p>
+</html>", revisions="<html>
+ <li><i>March 26, 2015&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
 </html>"));
 end SetTemp_caseX40;

@@ -12,5 +12,7 @@ record Ventilation_caseX50 "infiltration with/without the ventilation fan "
 <p><h4>Table for Natural Ventilation:</h4></p>
 <p>Column 1: Time</p>
 <p>Column 2: air exchange rate</p>
+</html>", revisions="<html>
+ <li><i>March 26, 2015&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
 </html>"));
 end Ventilation_caseX50;

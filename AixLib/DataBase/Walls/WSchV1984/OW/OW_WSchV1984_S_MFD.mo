@@ -1,12 +1,12 @@
-within AixLib.DataBase.Walls.WSchV1984.Ceiling;
-record ROsaddleAttic_WSchV1984_SML
-  "Saddle roof in attic after WSchV1984, for building of type S (schwer), M (mittel) and L (leicht)"
-  extends WallBaseDataDefinition(n(min = 1) = 1 "Number of wall layers", d = {0.18}
-      "Thickness of wall layers",                                                                               rho = {160}
-      "Density of wall layers",                                                                                                    lambda = {0.084}
-      "Thermal conductivity of wall layers",                                                                                                    c = {1358}
-      "Specific heat capacity of wall layers",                                                                                                    eps = 0.95
-      "Emissivity of inner wall surface");
+within AixLib.DataBase.Walls.WSchV1984.OW;
+record OW_WSchV1984_S_MFD
+  "outer wall after WSchV1984, for building of type S (schwer), for MFD"
+  extends WallBaseDataDefinition(    n(min=1) = 4 "Number of wall layers",
+    d={0.05,0.06,0.365,0.015} "Thickness of wall layers",
+    rho={1800,120,1600,1200} "Density of wall layers",
+    lambda={1.0,0.05,0.79,0.51} "Thermal conductivity of wall layers",
+    c={1000,1030,1000,1000} "Specific heat capacity of wall layers",
+    eps=0.95 "Emissivity of inner wall surface");
   annotation(Documentation(revisions = "<html>
  <ul>
  <li><i>September 5, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
@@ -26,5 +26,4 @@ record ROsaddleAttic_WSchV1984_SML
  <li>W&auml;rmeschutzverordnung 1984. 1984</li>
  </ul>
  </html>"));
-end ROsaddleAttic_WSchV1984_SML;
-
+end OW_WSchV1984_S_MFD;

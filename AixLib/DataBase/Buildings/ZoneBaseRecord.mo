@@ -101,9 +101,9 @@ record ZoneBaseRecord "the used record standard"
     "additional ACH value when overheating appears, transition range in K"                                                annotation(Dialog(tab = "Room air", group = "ACH", descriptionLabel = false));
   parameter Real maxSummerACH[3] = {1.0, 273.15 + 10, 273.15 + 17}
     "additional ACH in summer, Tmin, Tmax"                                                                annotation(Dialog(tab = "Room air", group = "ACH", descriptionLabel = false));
-  annotation(Documentation(info = "<html>
+  annotation(Documentation(info="<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>This is the base definition is zone records used in <a href=\"Cities.BuildingPhysics.ThermalZone\">Cities.BuildingPhysics.ThermalZone</a>. All necessary parameters are defined here. Most values should be overwritten for a specific building, some are default values that might be appropriate in most cases. However, fell free to overwrite them in your own records.</p>
+ <p>This is the base definition is zone records used in <a href=\"AixLib.Building.LowOrder.ThermalZone\">AixLib.Building.LowOrder.ThermalZone</a>. All necessary parameters are defined here. Most values should be overwritten for a specific building, some are default values that might be appropriate in most cases. However, fell free to overwrite them in your own records.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
  <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
@@ -147,7 +147,7 @@ record ZoneBaseRecord "the used record standard"
  </tr>
  </table>
  <h4><span style=\"color:#008000\">References</span></h4>
- <p>Base data definition for record to be used in model <a href=\"Cities.BuildingPhysics.ThermalZone\">Cities.BuildingPhysics.ThermalZone</a></p>
+ <p>Base data definition for record to be used in model <a href=\"AixLib.Building.LowOrder.ThermalZone\">AixLib.Building.LowOrder.ThermalZone</a></p>
  </html>", revisions = "<html>
  <ul>
    <li><i>February 4, 2014&nbsp;</i>by Ole Odendahl:<br/>

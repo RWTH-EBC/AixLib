@@ -1,12 +1,12 @@
-within AixLib.DataBase.Walls.WSchV1995.Ceiling;
-record ROsaddleRoom_WSchV1995_SML
-  "Saddle roof in room after WSchV1995, for building of type S (schwer), M (mittel) and L (leicht)"
-  extends WallBaseDataDefinition(n(min = 1) = 3 "Number of wall layers", d = {0.18, 0.0125, 0.015}
-      "Thickness of wall layers",                                                                                              rho = {194, 800, 1200}
-      "Density of wall layers",                                                                                                    lambda = {0.058, 0.25, 0.51}
-      "Thermal conductivity of wall layers",                                                                                                    c = {1301, 1000, 1000}
-      "Specific heat capacity of wall layers",                                                                                                    eps = 0.95
-      "Emissivity of inner wall surface");
+within AixLib.DataBase.Walls.WSchV1995.OW;
+record OW_WSchV1995_M_MFD
+  "outer wall after WSchV1995, for building of type M (mittel), for MFD"
+  extends WallBaseDataDefinition(n(min=1) = 4 "Number of wall layers",
+    d={0.05,0.02,0.3,0.015} "Thickness of wall layers",
+    rho={1800,120,700,1200} "Density of wall layers",
+    lambda={1,0.045,0.21,0.51} "Thermal conductivity of wall layers",
+    c={1000,1030,1000,1000} "Specific heat capacity of wall layers",
+    eps=0.95 "Emissivity of inner wall surface");
   annotation(Documentation(revisions = "<html>
  <ul>
  <li><i>September 5, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
@@ -26,5 +26,4 @@ record ROsaddleRoom_WSchV1995_SML
  <li>W&auml;rmeschutzverordnung 1995. 1995</li>
  </ul>
  </html>"));
-end ROsaddleRoom_WSchV1995_SML;
-
+end OW_WSchV1995_M_MFD;

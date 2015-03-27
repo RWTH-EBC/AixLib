@@ -1,6 +1,4 @@
 within AixLib.DataBase.Walls.EnEV2002.IW;
-
-
 record IWneighbour_EnEV2002_L_half
   "Inner wall towards neighbour after EnEV 2002, for building of type L (leicht), only half"
   // New Walls for Dymola 2012, the same number of layers as other mass clases
@@ -37,3 +35,4 @@ record IWneighbour_EnEV2002_L_half
  </ul>
  </html>"));
 end IWneighbour_EnEV2002_L_half;
+
