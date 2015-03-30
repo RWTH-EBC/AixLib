@@ -12,7 +12,7 @@ extends Modelica.Icons.Package;
     parameter Modelica.SIunits.VolumeFlowRate pumpMaxVolumeFlow=0.003
       "Maximum VolumeFlowRate of either primary or secondary Pump";
     parameter Modelica.SIunits.Velocity vmaxExchange=0.2
-      "Maximum velocity of the exchange-flow between top and bottom of the Hydraulische Weiche";
+      "Maximum velocity of the exchange-flow between top and bottom of the Hydraulic Separator";
     parameter Modelica.SIunits.Diameter DFlange "Diameter of the flanges";
     parameter Modelica.SIunits.Diameter D = sqrt(pumpMaxVolumeFlow*4/(Modelica.Constants.pi*vmaxExchange))
       "Diameter of the main-body";
