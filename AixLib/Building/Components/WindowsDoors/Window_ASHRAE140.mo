@@ -26,8 +26,9 @@ model Window_ASHRAE140
     "surface tilted angle in [degree]"                                                           annotation(Dialog(group = "Outside surface", enable = outside));
 
   BaseClasses.CorrectionSolarGain.CorG_VDI6007
-    RadCondAdapt(Uw=Uw) annotation (Placement(transformation(extent={{-52,46},{-30,
-            70}}, rotation=0)));
+    RadCondAdapt(Uw=Uw) annotation (Placement(transformation(extent={{-52,48},{
+            -30,72}},
+                  rotation=0)));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor
                               AirGap(G=windowarea*6.297)    annotation (
       Placement(transformation(extent={{-10,-20},{10,0}}, rotation=0)));
@@ -75,7 +76,7 @@ l=sqrt(windowarea))
 annotation (Placement(transformation(extent={{18,-18},{38,2}})));
   Modelica.Blocks.Math.Gain Ag(k=(1 - frameFraction)*windowarea*WindowType.g)
     "multiplication with area and solar gain factor"
-    annotation (Placement(transformation(extent={{-4,52},{8,64}})));
+    annotation (Placement(transformation(extent={{-4,54},{8,66}})));
   Modelica.Blocks.Interfaces.RealOutput solarRadWinTrans
     "Output signal connector"
     annotation (Placement(transformation(extent={{82,70},{102,90}})));
@@ -97,11 +98,11 @@ equation
   color={191,0,0},
   smooth=Smooth.None));
   connect(Ag.y, solarRadWinTrans) annotation (Line(
-      points={{8.6,58},{50,58},{50,80},{92,80}},
+      points={{8.6,60},{50,60},{50,80},{92,80}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(RadCondAdapt.solarRadWinTrans[1], Ag.u) annotation (Line(
-      points={{-31.1,58},{-5.2,58}},
+      points={{-31.1,60},{-5.2,60}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(pane1.port_b, AirGap.port_a) annotation (Line(
@@ -126,7 +127,7 @@ equation
       pattern=LinePattern.None,
       smooth=Smooth.None));
   connect(solarRad_in, RadCondAdapt.SR_input[1]) annotation (Line(
-      points={{-90,60},{-72,60},{-72,57.88},{-51.78,57.88}},
+      points={{-90,60},{-72,60},{-72,59.88},{-51.78,59.88}},
       color={255,128,0},
       smooth=Smooth.None));
   annotation (
@@ -211,7 +212,7 @@ equation
 <p><h4><font color=\"#008000\">Overview</font></h4></p>
 <p>The <b>WindowSimple</b> model represents a window described by the thermal transmission coefficient and the coefficient of solar energy transmission( with correction factors). </p>
 <p><br/><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
+<p><img src=\"modelica://AixLib/Images/stars5.png\"/></p>
 <p><h4><font color=\"#008000\">Concept</font></h4></p>
 <p>Phenomena being simulated: </p>
 <p><ul>
@@ -228,7 +229,8 @@ equation
 </ul></p>
 </html>",
  revisions="<html>
-<p><i>February 24, 2014</i> by Reza Tavakoli:</p>
+ <li><i>March 30, 2015&nbsp;</i> by Ana Constantin:Imrpoved implementation of transmitted solar radiation<br/></li>
+ <li><i>February 24, 2014&nbsp;</i> by Reza Tavakoli:<br/>First implementation</li>
 <p>implemented </p>
 </html>"),
     Diagram(coordinateSystem(

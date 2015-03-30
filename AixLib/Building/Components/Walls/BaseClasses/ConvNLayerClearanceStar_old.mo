@@ -1,7 +1,5 @@
 within AixLib.Building.Components.Walls.BaseClasses;
-
-
-model ConvNLayerClearanceStar
+model ConvNLayerClearanceStar_old
   "Wall consisting of n layers, with convection on one surface and (window) clearance"
   parameter Modelica.SIunits.Height h = 3 "Height" annotation(Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Length l = 4 "Length" annotation(Dialog(group = "Geometry"));
@@ -36,7 +34,8 @@ model ConvNLayerClearanceStar
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatConda[n](port_b(each T(start = T0)), port_a(each T(start = T0)), G = A .* lambda ./ (d / 2)) annotation(Placement(transformation(extent = {{-50, -8}, {-30, 12}}, rotation = 0)));
   // n Loads
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor Load[n](T(start = fill(T0, n)), C = c .* rho .* A .* d) annotation(Placement(transformation(extent = {{-8, -62}, {12, -42}}, rotation = 0)));
-  Utilities.HeatTransfer.HeatConv_inside HeatConv1(port_b(T(start = T0)), alpha_custom = alpha_custom, A = A, surfaceOrientation = surfaceOrientation) annotation(Placement(transformation(origin={62,2},     extent = {{-10, -10}, {10, 10}}, rotation = 180)));
+  Utilities.HeatTransfer.HeatConv_inside_old
+                                         HeatConv1(port_b(T(start = T0)), alpha_custom = alpha_custom, A = A, surfaceOrientation = surfaceOrientation) annotation(Placement(transformation(origin={64,2},     extent = {{-10, -10}, {10, 10}}, rotation = 180)));
   Utilities.Interfaces.Star Star annotation(Placement(transformation(extent = {{80, 50}, {100, 70}}, rotation = 0)));
   Utilities.HeatTransfer.HeatToStar twoStar_RadEx(A = A, eps = eps, Therm(T(start = T0)), Star(T(start = T0))) annotation(Placement(transformation(extent = {{54, 30}, {74, 50}}, rotation = 0)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a annotation(Placement(transformation(extent = {{-104, -8}, {-84, 12}}), iconTransformation(extent = {{-100, -20}, {-80, 0}})));
@@ -59,13 +58,14 @@ equation
   end for;
   // connecting outmost elements to connectors: port_a--HeatCondb[1]...HeatConda[n]--HeatConv1--port_b
   connect(HeatConda[1].port_a, port_a) annotation(Line(points = {{-50, 2}, {-94, 2}}, color = {200, 100, 0}));
-  connect(HeatConv1.port_a, port_b) annotation(Line(points={{72,2},{72,2},{86,2}},                       color = {200, 100, 0}));
+  connect(HeatConv1.port_a, port_b) annotation(Line(points={{74,2},{84.5,2},{86,
+          2}},                                                                                           color = {200, 100, 0}));
   connect(HeatCondb[n].port_b, HeatConv1.port_b) annotation(Line(points={{28,2},{
-          52,2}},                                                                                                 color = {200, 100, 0}));
-  connect(HeatConv1.port_b, twoStar_RadEx.Therm) annotation(Line(points={{52,2},{
+          52,2},{54,2}},                                                                                          color = {200, 100, 0}));
+  connect(HeatConv1.port_b, twoStar_RadEx.Therm) annotation(Line(points={{54,2},{
           50,2},{50,40},{54.8,40}},                                                                                   color = {200, 100, 0}));
   connect(twoStar_RadEx.Star, Star) annotation(Line(points = {{73.1, 40}, {90, 40}, {90, 60}}, color = {95, 95, 95}, pattern = LinePattern.None));
-  connect(HeatConv1.port_b, dummyTherm) annotation(Line(points={{52,2},{51.5,2},
+  connect(HeatConv1.port_b, dummyTherm) annotation(Line(points={{54,2},{51.5,2},
           {51.5,-38.5}},                                                                                color = {200, 100, 0}));
   // computing approximated longwave radiation exchange
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0})}), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{24, 100}, {80, -100}}, lineColor = {0, 0, 0}, fillColor = {211, 243, 255},
@@ -89,8 +89,9 @@ equation
  <p><b><font style=\"color: #ff0000; \">Attention:</font></b> The first element in each vector represents the layer connected to <code>HeatPort_a</code>, the last element represents the layer connected to <code>HeatPort_b</code>. </p>
  <h4><font color=\"#008000\">Example Results</font></h4>
  <p>This model is part of <a href=\"AixLib.Building.Components.Walls.Wall\">Wall</a>  therefore also part of the corresponding examples <a href=\"AixLib.Building.Components.Examples.Walls.InsideWall\">InsideWall</a> and <a href=\"AixLib.Building.Components.Examples.Walls.OutsideWall\">OutsideWall</a>. </p>
- </html>", revisions = "<html>
+ </html>", revisions="<html>
  <ul>
+ <li><i>March 30, 2015&nbsp;</i> by Ana Constantin:<br/>Renamed to old and kept on as temporary component, for results of ASHRAE 140 validation</li>
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
    <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
    <li><i>Aug. 08, 2006&nbsp;</i>
@@ -102,4 +103,4 @@ equation
           Implemented.</li>
  </ul>
  </html>"));
-end ConvNLayerClearanceStar;
+end ConvNLayerClearanceStar_old;

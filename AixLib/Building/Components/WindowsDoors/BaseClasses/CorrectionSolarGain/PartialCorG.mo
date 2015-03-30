@@ -25,5 +25,11 @@ public
           fillPattern=FillPattern.Solid), Text(
           extent={{-52,24},{62,-16}},
           lineColor={0,0,0},
-          textString="%name")}));
+          textString="%name")}),
+    Documentation(info="<html>
+<h4><span style=\"color:#008000\">Overview</span></h4>
+<p>Partial model for correction cofficient for transmitted solar radiation through a window.</p>
+<h4><span style=\"color:#008000\">Level of Development</span></h4>
+<p><img src=\"modelica://AixLib/Images/stars3.png\"/> </p>
+</html>"));
 end PartialCorG;

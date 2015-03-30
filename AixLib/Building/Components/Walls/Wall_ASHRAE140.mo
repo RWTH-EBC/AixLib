@@ -90,7 +90,7 @@ model Wall_ASHRAE140
 // COMPONENT PART
 
 public
-  BaseClasses.ConvNLayerClearanceStar                           Wall(
+  BaseClasses.ConvNLayerClearanceStar_old                       Wall(
     h=wall_height,
     l=wall_length,
     T0=T0,
@@ -326,7 +326,6 @@ end if;
 //******************************************************************
 // **** connections for absorbed solar radiation inside wall****
 //******************************************************************
-  connect(absSolarRadWin.port, Wall.HeatConv1.port_b);
   connect(heatStarToComb.thermStarComb, thermStarComb_inside) annotation (
       Line(
       points={{78.4,-1.1},{78.4,-1.05},{102,-1.05},{102,0}},

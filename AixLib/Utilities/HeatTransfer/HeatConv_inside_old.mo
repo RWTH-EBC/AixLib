@@ -104,9 +104,8 @@ equation
 <p><a href=\"AixLib.Utilities.Examples.HeatTransfer_test\">AixLib.Utilities.Examples.HeatTransfer_test </a></p>
 </html>",  revisions="<html>
  <ul>
+ <li><i>March 30, 2015&nbsp;</i> by Ana Constantin:<br/>Renamed to old and kept on as temporary component, for results of ASHRAE 140 validation</li>
  <li><i>April 1, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
- </ul>
- <ul>
  <li><i>April 10, 2013&nbsp;</i> by Ole Odendahl<br/>Formatted documentation according to standards</li>
  <li><i>December 15, 2005&nbsp;</i> by Peter Matthes:<br/>Implemented.</li>
  </ul>
