@@ -3,14 +3,15 @@ model Case640
   extends Modelica.Icons.Example;
 
   parameter AixLib.DataBase.Profiles.Profile_BaseDataDefinition SetTempProfile = AixLib.DataBase.Profiles.ASHRAE140.SetTemp_caseX40();
-  Components.Weather.BaseClasses.Sun_new sun(
+  Components.Weather.BaseClasses.Sun sun(
     TimeCorrection=0,
     Latitude=39.76,
     Longitude=-104.9,
     DiffWeatherDataTime=-7,
     Diff_localStandardTime_WeatherDataTime=0.5)
     annotation (Placement(transformation(extent={{-142,61},{-118,85}})));
-  Components.Weather.BaseClasses.RadOnTiltedSurf_Perez radOnTiltedSurf_Perez[5](
+  Components.Weather.RadiationOnTiltedSurface.RadOnTiltedSurf_Perez
+    radOnTiltedSurf_Perez[5](
     WeatherFormat=2,
     Latitude=fill(39.76, 5),
     Azimut={180,-90,0,90,0},

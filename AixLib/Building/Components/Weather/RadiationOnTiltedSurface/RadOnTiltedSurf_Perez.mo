@@ -1,7 +1,7 @@
 within AixLib.Building.Components.Weather.RadiationOnTiltedSurface;
 model RadOnTiltedSurf_Perez
   "Calculates solar radiation on tilted surfaces according to Perez"
-  extends BaseClasses.PartialRadOnTiltedSurf;
+  extends RadiationOnTiltedSurface.BaseClasses.PartialRadOnTiltedSurf;
 
   import Modelica.SIunits.Conversions.to_deg;
   import Modelica.SIunits.Conversions.from_deg;

@@ -3,14 +3,15 @@ model Case650FF
   import AixLib;
   extends Modelica.Icons.Example;
   parameter AixLib.DataBase.Profiles.Profile_BaseDataDefinition AERProfile = AixLib.DataBase.Profiles.ASHRAE140.Ventilation_caseX50();
-  Components.Weather.BaseClasses.Sun_new sun(
+  AixLib.Building.Components.Weather.BaseClasses.Sun sun(
     TimeCorrection=0,
     Longitude=-104.9,
     DiffWeatherDataTime=-7,
     Diff_localStandardTime_WeatherDataTime=0.5,
     Latitude=39.76)
     annotation (Placement(transformation(extent={{-142,61},{-118,85}})));
-  Components.Weather.BaseClasses.RadOnTiltedSurf_Perez              radOnTiltedSurf_Perez[5](
+  AixLib.Building.Components.Weather.RadiationOnTiltedSurface.RadOnTiltedSurf_Perez
+    radOnTiltedSurf_Perez[5](
     WeatherFormat=2,
     Azimut={180,-90,0,90,0},
     Tilt={90,90,90,90,0},

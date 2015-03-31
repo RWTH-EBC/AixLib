@@ -1,14 +1,15 @@
 within AixLib.Building.HighOrder.Examples.Validation.ASHRAE140;
 model Case600
   extends Modelica.Icons.Example;
-  Components.Weather.BaseClasses.Sun_new sun(
+  Components.Weather.BaseClasses.Sun sun(
     TimeCorrection=0,
     Latitude=39.76,
     Longitude=-104.9,
     DiffWeatherDataTime=-7,
     Diff_localStandardTime_WeatherDataTime=0.5)
     annotation (Placement(transformation(extent={{-142,61},{-118,85}})));
-  Components.Weather.BaseClasses.RadOnTiltedSurf_Perez radOnTiltedSurf_Perez[5](
+  Components.Weather.RadiationOnTiltedSurface.RadOnTiltedSurf_Perez
+    radOnTiltedSurf_Perez[5](
     WeatherFormat=2,
     Latitude=fill(39.76, 5),
     Azimut={180,-90,0,90,0},
@@ -121,7 +122,7 @@ equation
       smooth=Smooth.None));
   connect(radOnTiltedSurf_Perez.OutTotalRadTilted, Room.SolarRadiationPort)
     annotation (Line(
-      points={{-76.8,77},{-50,77},{-50,49.8},{-11.1,49.8}},
+      points={{-75.4,75.6},{-50,75.6},{-50,49.8},{-11.1,49.8}},
       color={255,128,0},
       smooth=Smooth.None));
   connect(outsideTemp.port, Room.Therm_outside) annotation (Line(
