@@ -37,14 +37,14 @@ equation
     "NumberOfDay is calculated as float because then the variables that use NumberoOfDay in their calculation don't have to be interpolated between the time-steps. To get the integer value it has to be calculated with: NumberOfDay =floor(time/86400) + 1";
 
       // day angle of sun
-      DayAngleSun = 360/365*(NumberOfDay - 1)
+      DayAngleSun = 360/365.26*(NumberOfDay - 1)
     "360 is an angle in degree and 365 is the number of days in one year. The earth rotation in one year is 360 degrees";
 
       OutDayAngleSun = DayAngleSun;
 
       // equation of time in hours - used to convert local time in solar time
       TimeEquation = 229.2*(0.000075+0.001868*cos(from_deg(DayAngleSun))-0.032077*sin(from_deg(DayAngleSun))-0.014615*cos(2*from_deg(DayAngleSun))-0.04089*sin(2*from_deg(DayAngleSun)))/60;
-      StandardTime=mod(time/3600, 24);
+      StandardTime = mod(time/3600, 24);
       SolarTime =  StandardTime - TimeCorrection - (DiffWeatherDataTime + Diff_localStandardTime_WeatherDataTime) + 4 * (Longitude)/60 + TimeEquation
     "the difference between the UTC and the time standard is given by DiffWeatherDataTime and Diff_lokalStandardTime Longitude";
 
