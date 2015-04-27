@@ -44,7 +44,7 @@ equation
 </ul>
 <p>Reference: Room air temperature </p>
 <p>Variable path: <code>reducedModel.airload.T</code> </p>
-<p><br>Maximum deviation: 0.3 K</p>
+<p><br>Maximum deviation: 0.2 K</p>
 <p><br>All values are given in the VDI 6007-1. </p>
 <p>Same Test Case exists in VDI 6020. </p>
 </html>"),  Icon(graphics), experiment(StopTime = 5.184e+006, Interval = 3600), __Dymola_experimentSetupOutput(events = false), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));

@@ -102,7 +102,7 @@ equation
 </ul>
 <p>Reference: Heating/Cooling load </p>
 <p>Variable path: <code>sumHeatLoad.y</code> </p>
-<p><br>Maximum deviation: 55.85 W</p>
+<p><br>Maximum deviation: 55.95 W</p>
 <p><br>All values are given in the VDI 6007-1. </p>
 </html>"));
 end TestCase11;

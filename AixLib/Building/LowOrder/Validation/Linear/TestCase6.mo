@@ -67,7 +67,7 @@ equation
 </ul>
 <p><br>Reference: Heating/Cooling load </p>
 <p>Variable path: <code>heatFlowSensor.Q_flow</code> </p>
-<p><br>Maximum deviation: 30.65 W</p>
+<p><br>Maximum deviation: 9.25 W</p>
 <p><br>All values are given in the VDI 6007-1. </p>
 <p>Same Test Case exists in VDI 6020. </p>
 </html>"),  Icon(graphics));
