@@ -37,6 +37,15 @@ equation
 <p>Variable path: <code>reducedModel.airload.T</code> </p>
 <p><br>Maximum deviation: 0.1 K</p><p><br>All values are given in the VDI 6007-1. </p>
 <p>Same Test Case exists in VDI 6020. </p>
+<p>
+<img src=\"N:\\Forschung\\EBC0049_PTJ_Campus_mla\\Students\\mla-sri\\AixLib_Workspace\\VDI TestCases 09.03.15\\Diagramme\\VDI_Case_2_Day1.png\" width=\"533,333\" height=\"400\">
+</p>
+<p>
+<img src=\"N:\\Forschung\\EBC0049_PTJ_Campus_mla\\Students\\mla-sri\\AixLib_Workspace\\VDI TestCases 09.03.15\\Diagramme\\VDI_Case_2_Day10.png\" width=\"533,333\" height=\"400\">
+</p>
+<p>
+<img src=\"N:\\Forschung\\EBC0049_PTJ_Campus_mla\\Students\\mla-sri\\AixLib_Workspace\\VDI TestCases 09.03.15\\Diagramme\\VDI_Case_2_Day60.png\" width=\"533,333\" height=\"400\">
+</p>
 </html>",  revisions="<html>
 <ul>
 <li><i>March 2015,&nbsp;</i> by Steffen Riebling:<br>Revised documentation. </li>

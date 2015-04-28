@@ -72,6 +72,15 @@ equation
 <p><br>Maximum deviation: 0.3 K</p>
 <p><br>All values are given in the VDI 6007-1. </p>
 <p>Same Test Case exists in VDI 6020. </p>
+<p>
+<img src=\"N:\\Forschung\\EBC0049_PTJ_Campus_mla\\Students\\mla-sri\\AixLib_Workspace\\VDI TestCases 09.03.15\\Diagramme\\VDI_Case_4_Day1.png\" width=\"533,333\" height=\"400\">
+</p>
+<p>
+<img src=\"N:\\Forschung\\EBC0049_PTJ_Campus_mla\\Students\\mla-sri\\AixLib_Workspace\\VDI TestCases 09.03.15\\Diagramme\\VDI_Case_4_Day10.png\" width=\"533,333\" height=\"400\">
+</p>
+<p>
+<img src=\"N:\\Forschung\\EBC0049_PTJ_Campus_mla\\Students\\mla-sri\\AixLib_Workspace\\VDI TestCases 09.03.15\\Diagramme\\VDI_Case_4_Day60.png\" width=\"533,333\" height=\"400\">
+</p>
 </html>"),  Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
             -100},{100,100}}),                                                                          graphics), Icon(graphics), experiment(StopTime = 5.184e+006, Interval = 3600), __Dymola_experimentSetupOutput(events = false));
 end TestCase4;

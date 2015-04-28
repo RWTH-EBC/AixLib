@@ -82,5 +82,14 @@ equation
 <p><br>Maximum deviation: 0.2 K</p>
 <p><br>All values are given in the VDI 6007-1. </p>
 <p>Same Test Case exists in VDI 6020. </p>
+<p>
+<img src=\"N:\\Forschung\\EBC0049_PTJ_Campus_mla\\Students\\mla-sri\\AixLib_Workspace\\VDI TestCases 09.03.15\\Diagramme\\VDI_Case_12_Day1.png\" width=\"533,333\" height=\"400\">
+</p>
+<p>
+<img src=\"N:\\Forschung\\EBC0049_PTJ_Campus_mla\\Students\\mla-sri\\AixLib_Workspace\\VDI TestCases 09.03.15\\Diagramme\\VDI_Case_12_Day10.png\" width=\"533,333\" height=\"400\">
+</p>
+<p>
+<img src=\"N:\\Forschung\\EBC0049_PTJ_Campus_mla\\Students\\mla-sri\\AixLib_Workspace\\VDI TestCases 09.03.15\\Diagramme\\VDI_Case_12_Day60.png\" width=\"533,333\" height=\"400\">
+</p>
 </html>"));
 end TestCase12;

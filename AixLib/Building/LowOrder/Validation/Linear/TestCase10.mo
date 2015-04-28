@@ -109,5 +109,14 @@ equation
 <p>Due to the complexity of this model with a non adiabatic interior surface, the deviation of 0.1 K cannot be met. </p>
 <p><br>All values are given in the VDI 6007-1. </p>
 <p>Same Test Case exists in VDI 6020. </p>
+<p>
+<img src=\"N:\\Forschung\\EBC0049_PTJ_Campus_mla\\Students\\mla-sri\\AixLib_Workspace\\VDI TestCases 09.03.15\\Diagramme\\VDI_Case_10_Day1.png\" width=\"533,333\" height=\"400\">
+</p>
+<p>
+<img src=\"N:\\Forschung\\EBC0049_PTJ_Campus_mla\\Students\\mla-sri\\AixLib_Workspace\\VDI TestCases 09.03.15\\Diagramme\\VDI_Case_10_Day10.png\" width=\"533,333\" height=\"400\">
+</p>
+<p>
+<img src=\"N:\\Forschung\\EBC0049_PTJ_Campus_mla\\Students\\mla-sri\\AixLib_Workspace\\VDI TestCases 09.03.15\\Diagramme\\VDI_Case_10_Day60.png\" width=\"533,333\" height=\"400\">
+</p>
 </html>"));
 end TestCase10;

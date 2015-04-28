@@ -104,5 +104,14 @@ equation
 <p>Variable path: <code>sumHeatLoad.y</code> </p>
 <p><br>Maximum deviation: 55.95 W</p>
 <p><br>All values are given in the VDI 6007-1. </p>
+<p>
+<img src=\"N:\\Forschung\\EBC0049_PTJ_Campus_mla\\Students\\mla-sri\\AixLib_Workspace\\VDI TestCases 09.03.15\\Diagramme\\VDI_Case_11_Day1.png\" width=\"533,333\" height=\"400\">
+</p>
+<p>
+<img src=\"N:\\Forschung\\EBC0049_PTJ_Campus_mla\\Students\\mla-sri\\AixLib_Workspace\\VDI TestCases 09.03.15\\Diagramme\\VDI_Case_11_Day10.png\" width=\"533,333\" height=\"400\">
+</p>
+<p>
+<img src=\"N:\\Forschung\\EBC0049_PTJ_Campus_mla\\Students\\mla-sri\\AixLib_Workspace\\VDI TestCases 09.03.15\\Diagramme\\VDI_Case_11_Day60.png\" width=\"533,333\" height=\"400\">
+</p>
 </html>"));
 end TestCase11;
