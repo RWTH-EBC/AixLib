@@ -19,18 +19,18 @@ model Radiator
   AixLib.HVAC.Interfaces.RadPort radPort
     annotation (Placement(transformation(extent={{30,68},{50,88}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convPort annotation(Placement(transformation(extent = {{-52, 66}, {-32, 86}})));
-  // Variablen
+  // Variables
   Modelica.SIunits.Power Power "current power of radiator";
   Modelica.SIunits.TemperatureDifference OverTemperature
-    "current over temperature";
+    "current overtemperature";
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow annotation(Placement(transformation(extent={{-46,2},
             {-26,22}})));
 protected
   parameter Modelica.SIunits.TemperatureDifference OverTemperature_Norm = (RadiatorType.T_flow_nom - RadiatorType.T_return_nom) / Modelica.Math.log((RadiatorType.T_flow_nom - RadiatorType.T_room_nom) / (RadiatorType.T_return_nom - RadiatorType.T_room_nom))
-    "over temperature according to norm";
+    "overtemperature according to norm";
 equation
-  // Calculate the current over temperature
-  //This equation works well for educational purposes. The oevrtemperature calculation only works by correct initailization of the system tzemperatures.
+  // Calculate the current overtemperature
+  //This equation works well for educational purposes. The overtemperature calculation only works by correct initailization of the system temperatures.
   //     if (T_flow.signal - convPort.T) > 1e-5 or (T_return.signal - convPort.T) > 1e-5 then
   //       OverTemperature = (T_flow.signal - T_return.signal)
   //       /  Modelica.Math.log((T_flow.signal - convPort.T)/(T_return.signal - convPort.T));
@@ -39,7 +39,7 @@ equation
   //     end if;
   // This equation works better for stable equations, because the overtemperature can actually be directly calculated
   OverTemperature = max(volume.heatPort.T - convPort.T, 0.0);
-  //the average radiator temperature is assumed to be the temperature of the volume, this avoids any division by zero and improves stability
+  //The average radiator temperature is assumed to be the temperature of the volume, this avoids any division by zero and improves stability
   //Calculate the current power
   Power = RadiatorType.NominalPower * (OverTemperature / OverTemperature_Norm) ^ RadiatorType.Exponent;
   // Distribute the power to the convective and radiative ports
@@ -69,25 +69,32 @@ equation
       smooth=Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
             -100},{100,100}}),                                                                           graphics={                                                       Rectangle(extent={{
-              -40,56},{40,28}},                                                                                                    lineColor=  {255, 0, 0},
-            lineThickness=                                                                                                    1), Text(extent=  {{-34, 52}, {36, 28}}, lineColor=  {255, 0, 0},
-            lineThickness=                                                                                                    1, fillColor=  {0, 0, 255},
-            fillPattern=                                                                                                    FillPattern.Solid, textString=  "Heat transfer equations"), Line(points={{0,
-              24},{0,32},{-2,30},{0,32},{2,30}},                                                                                                    color=  {255, 0, 0}, thickness=  1, smooth=  Smooth.None), Line(points=  {{28, 58}, {34, 68}, {30, 66}, {34, 68}, {34, 64}}, color=  {255, 0, 0}, thickness=  1, smooth=  Smooth.None), Line(points=  {{-32, 60}, {-38, 68}, {-38, 64}, {-38, 68}, {-34, 66}}, color=  {255, 0, 0}, thickness=  1, smooth=  Smooth.None)}), Icon(graphics={  Rectangle(extent = {{-68, 56}, {-60, -74}}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
-            fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{-48, 56}, {-40, -74}}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
-            fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{-28, 56}, {-20, -74}}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
-            fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{-8, 56}, {0, -74}}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
-            fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{12, 56}, {20, -74}}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
-            fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{32, 56}, {40, -74}}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
-            fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{52, 56}, {60, -74}}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
-            fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{-74, -60}, {62, -70}}, lineColor = {95, 95, 95}, fillColor = {230, 230, 230},
-            fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{-72, 50}, {64, 40}}, lineColor = {95, 95, 95}, fillColor = {230, 230, 230},
-            fillPattern =                                                                                                    FillPattern.Solid)}), Documentation(revisions="<html>
+              -40,56},{40,28}},                                                                                                    lineColor = {255, 0, 0},
+            lineThickness =                                                                                                   1), Text(extent = {{-34, 52}, {36, 28}}, lineColor = {255, 0, 0},
+            lineThickness =                                                                                                   1, fillColor = {0, 0, 255},
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "Heat transfer equations"), Line(points={{0,
+              24},{0,32},{-2,30},{0,32},{2,30}},                                                                                                    color = {255, 0, 0}, thickness = 1, smooth = Smooth.None), Line(points = {{28, 58}, {34, 68}, {30, 66}, {34, 68}, {34, 64}}, color = {255, 0, 0}, thickness = 1, smooth = Smooth.None), Line(points = {{-32, 60}, {-38, 68}, {-38, 64}, {-38, 68}, {-34, 66}}, color = {255, 0, 0}, thickness = 1, smooth = Smooth.None)}), Icon(graphics={  Rectangle(extent = {{-68, 56}, {-60, -74}}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-48, 56}, {-40, -74}}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-28, 56}, {-20, -74}}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-8, 56}, {0, -74}}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{12, 56}, {20, -74}}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{32, 56}, {40, -74}}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{52, 56}, {60, -74}}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-74, -60}, {62, -70}}, lineColor = {95, 95, 95}, fillColor = {230, 230, 230},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-72, 50}, {64, 40}}, lineColor = {95, 95, 95}, fillColor = {230, 230, 230},
+            fillPattern =                                                                                                   FillPattern.Solid)}), Documentation(revisions="<html>
+ <p>April 30 2015, Marcus Fuchs</p>
+ <p><ul>
+ <li>Correct a few typos in code comments</li>
+ </ul></p>
  <p>November 2014, Marcus Fuchs</p>
  <p><ul>
  <li>Changed model to use Annex 60 base class</li>
  </ul></p>
- <p>13.11.2013, by <i>Ana Constantin</i>: implemented</p>
+ <p>November 13 2013, Ana Constantin</p>
+ <p><ul>
+ <li>Implemented</li>
+ </ul></p>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Simple model for a radiator with one water volume. </p>
