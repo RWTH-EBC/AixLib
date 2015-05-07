@@ -24,7 +24,8 @@ model WholeHouseBuildingEnvelope
   parameter Real Max_VR = 200 "Maximal ventilation rate" annotation(Dialog(group = "Dynamic ventilation", descriptionLabel = true, enable = if withDynamicVentilation then true else false));
   parameter Modelica.SIunits.TemperatureDifference Diff_toTempset = 3
     "Difference to set temperature"                                                                   annotation(Dialog(group = "Dynamic ventilation", descriptionLabel = true, enable = if withDynamicVentilation then true else false));
-  GroundFloorBuildingEnvelope groundFloor_Building(TMC = TMC, TIR = TIR, withDynamicVentilation = withDynamicVentilation, HeatingLimit = HeatingLimit, Max_VR = Max_VR, Diff_toTempset = Diff_toTempset, withFloorHeating = withFloorHeating) annotation(Placement(transformation(extent = {{-26, -94}, {22, -42}})));
+  GroundFloorBuildingEnvelope groundFloor_Building(TMC = TMC, TIR = TIR, withDynamicVentilation = withDynamicVentilation, HeatingLimit = HeatingLimit, Max_VR = Max_VR, Diff_toTempset = Diff_toTempset, withFloorHeating = withFloorHeating,
+    TRY=TRY)                                                                                                     annotation(Placement(transformation(extent = {{-26, -94}, {22, -42}})));
   AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.UpperFloorBuildingEnvelope
                                                                                                       upperFloor_Building(TMC = TMC, TIR = TIR, HeatingLimit = HeatingLimit, Max_VR = Max_VR, Diff_toTempset = Diff_toTempset, withDynamicVentilation = withDynamicVentilation, withFloorHeating = withFloorHeating) annotation(Placement(transformation(extent = {{-26, -22}, {20, 30}})));
   Rooms.OFD.Attic_Ro2Lf5 attic_2Ro_5Rooms(length = 10.64, room1_length = 5.875, room2_length = 3.215, room3_length = 3.92, room4_length = 3.215, room5_length = 4.62, room1_width = 3.84, room2_width = 3.84, room3_width = 3.84, room4_width = 3.84, room5_width = 3.84, roof_width1 = 3.36, roof_width2 = 3.36, solar_absorptance_RO = 0.1, width = 4.75, TMC = TMC, TIR = TIR, alfa = 1.5707963267949) annotation(Placement(transformation(extent = {{-26, 46}, {20, 86}})));
@@ -83,7 +84,7 @@ equation
       points={{-27.38,62},{-74,62},{-74,90},{60,90},{60,-18},{90,-18}},
       color={255,128,0},
       smooth=Smooth.None));
-  annotation(__Dymola_Images(Parameters(source = "AixLib/Images/House/Grundriss.png")), Icon(graphics={  Bitmap(extent=  {{-78, 74}, {72, -68}}, fileName=  "modelica://AixLib/Images/House/Grundriss.PNG")}), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
+  annotation(__Dymola_Images(Parameters(source = "AixLib/Images/House/Grundriss.png")), Icon(graphics={  Bitmap(extent = {{-78, 74}, {72, -68}}, fileName = "modelica://AixLib/Images/House/Grundriss.PNG")}), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
             -100},{100,100}}),                                                                                                    graphics), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for the envelope of the whole one family dwelling.</p>

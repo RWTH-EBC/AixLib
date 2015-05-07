@@ -105,7 +105,8 @@ equation
  2- Hobby
  3 - Corridor
  4 - WC/Storage
- 5 - Kitchen")}), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-130, -100}, {130, 100}}, grid = {1, 1}), graphics = {Rectangle(extent=  {{-119, 92}, {123, -79}}, lineColor=  {255, 0, 0}, fillColor=  {135, 135, 135}, fillPattern=  FillPattern.Solid), Line(points=  {{-99, 22}, {104, 22}, {104, -6}}, color=  {255, 0, 0}, smooth=  Smooth.None, thickness=  1), Line(points=  {{-98, 13}, {95, 13}, {95, -6}}, color=  {0, 0, 255}, smooth=  Smooth.None, thickness=  1), Line(points=  {{-21, 13}, {-21, 35}}, color=  {0, 0, 255}, thickness=  1, smooth=  Smooth.None), Line(points=  {{-14, 23}, {-14, 45}}, color=  {255, 0, 0}, thickness=  1, smooth=  Smooth.None), Text(extent=  {{-87, 74}, {-34, 42}}, lineColor=  {0, 0, 0}, textString=  "1 - Livingroom
+ 5 - Kitchen")}), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-130, -100}, {130, 100}}, grid = {1, 1}), graphics={  Rectangle(extent = {{-119, 92}, {123, -79}}, lineColor = {255, 0, 0}, fillColor = {135, 135, 135},
+            fillPattern =                                                                                                    FillPattern.Solid), Line(points = {{-99, 22}, {104, 22}, {104, -6}}, color = {255, 0, 0}, smooth = Smooth.None, thickness = 1), Line(points = {{-98, 13}, {95, 13}, {95, -6}}, color = {0, 0, 255}, smooth = Smooth.None, thickness = 1), Line(points = {{-21, 13}, {-21, 35}}, color = {0, 0, 255}, thickness = 1, smooth = Smooth.None), Line(points = {{-14, 23}, {-14, 45}}, color = {255, 0, 0}, thickness = 1, smooth = Smooth.None), Text(extent = {{-87, 74}, {-34, 42}}, lineColor = {0, 0, 0}, textString = "1 - Livingroom
  2- Hobby
  3 - Corridor
  4 - WC/Storage
