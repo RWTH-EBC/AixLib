@@ -1,6 +1,6 @@
 within AixLib.Building.Components.DryAir;
-model InfiltrationRate_DIN12381
-  "Heat flow caused by infiltration after european standard DIN EN 12381"
+model InfiltrationRate_DIN12831
+  "Heat flow caused by infiltration after european standard DIN EN 12831"
   extends Modelica.Thermal.HeatTransfer.Interfaces.Element1D;
   parameter Modelica.SIunits.Volume room_V = 50 "Volume of the room";
   parameter Real n50(unit = "h-1") = 4
@@ -14,10 +14,10 @@ protected
   parameter Real InfiltrationRate = 2 * n50 * e * eps;
 equation
   port_a.Q_flow = InfiltrationRate * room_V * c * rho * (port_a.T - port_b.T) / 3600;
-  annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics={  Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}), Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}), Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}, fillColor=  {211, 243, 255},
-            fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-30, -12}, {30, -78}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 255},
-            fillPattern=                                                                                                    FillPattern.Solid, textString=  "Air"), Text(extent=  {{-76, 26}, {78, -8}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 0},
-            fillPattern=                                                                                                    FillPattern.Solid, textString=  "DIN 12381")}), Window(x = 0.4, y = 0.4, width = 0.6, height = 0.6), Documentation(info="<html>
+  annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics={  Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}, fillColor = {211, 243, 255},
+            fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-30, -12}, {30, -78}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "Air"), Text(extent = {{-76, 26}, {78, -8}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 0},
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "DIN 12381")}), Window(x = 0.4, y = 0.4, width = 0.6, height = 0.6), Documentation(info="<html>
 <p><b><font style=\"color: #008000; \">Overview</font></b> </p>
 <p>The<b> InfiltrationRate</b> model describes heat and mass transport by infiltration. </p>
 <p><b><font style=\"color: #008000; \">Level of Development</font></b> </p>
@@ -43,10 +43,10 @@ equation
 <td><p>&GT; 5</p></td>
 </tr>
 </table>
-<p><br>Reference values for air shielding value e: </p>
+<p><br><br>Reference values for air shielding value e: </p>
 <table cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
 <td></td>
-<td><p align=\"center\"><br><h4>heated room without </h4></p><p align=\"center\">facade with openings</p><p align=\"center\">exposed to wind</p></td>
+<td><p align=\"center\"><h4>heated room without </h4></p><p align=\"center\">facade with openings</p><p align=\"center\">exposed to wind</p></td>
 <td><p align=\"center\"><h4>heated room with</h4></p><p align=\"center\">one facade with openings</p><p align=\"center\">exposed to wind</p></td>
 <td><p align=\"center\"><h4>heated room with more than</h4></p><p align=\"center\">one facade with openings</p><p align=\"center\">exposed to wind</p></td>
 </tr>
@@ -69,7 +69,7 @@ equation
 <td><p>0.02</p></td>
 </tr>
 </table>
-<p><br>Reference values for height correction value &epsilon;: </p>
+<p><br><br>Reference values for height correction value &epsilon;: </p>
 <table cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
 <td><h4>Height of room</h4></td>
 <td><p align=\"center\"><br><b>&epsilon;</b></p></td>
@@ -87,8 +87,8 @@ equation
 <td><p>1.5</p></td>
 </tr>
 </table>
-<p><br><b><font style=\"color: #008000; \">References</font></b> </p>
-<p>DIN EN 12381 </p>
+<p><br><br><b><font style=\"color: #008000; \">References</font></b> </p>
+<p>DIN EN 12831 </p>
 <p><b><font style=\"color: #008000; \">Example Results</font></b> </p>
 <p><a href=\"AixLib.Building.Components.Examples.DryAir.DryAir_test\">AixLib.Building.Components.Examples.DryAir.DryAir_test</a> </p>
 </html>",  revisions = "<html>
@@ -99,7 +99,7 @@ equation
           by Ana Constantin:<br/>
           Implemented after a model from Time Haase.</li>
  </ul>
- </html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics={  Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}), Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}), Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}), Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}, fillColor=  {211, 243, 255},
-            fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-30, 16}, {30, -50}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 255},
-            fillPattern=                                                                                                    FillPattern.Solid, textString=  "Air")}), DymolaStoredErrors);
-end InfiltrationRate_DIN12381;
+ </html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics={  Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}, fillColor = {211, 243, 255},
+            fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-30, 16}, {30, -50}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "Air")}), DymolaStoredErrors);
+end InfiltrationRate_DIN12831;

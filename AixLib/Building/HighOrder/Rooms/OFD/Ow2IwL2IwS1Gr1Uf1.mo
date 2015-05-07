@@ -73,7 +73,7 @@ model Ow2IwL2IwS1Gr1Uf1
   AixLib.Building.Components.Walls.Wall inside_wall1b(T0 = T0_IW1b, outside = false, WallType = Type_IWload, wall_length = room_lengthb, wall_height = room_height, withWindow = false, withDoor = false) annotation(Placement(transformation(origin = {61, -15}, extent = {{-3, -15}, {3, 15}}, rotation = 180)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermInsideWall1b annotation(Placement(transformation(extent = {{80, -20}, {100, 0}}, rotation = 0)));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor Tair annotation(Placement(transformation(extent = {{24, -20}, {38, -6}})));
-  AixLib.Building.Components.DryAir.InfiltrationRate_DIN12381 infiltrationRate(room_V = room_V, n50 = n50, e = e, eps = eps) annotation(Placement(transformation(extent = {{-68, 44}, {-50, 52}})));
+  AixLib.Building.Components.DryAir.InfiltrationRate_DIN12831 infiltrationRate(room_V = room_V, n50 = n50, e = e, eps = eps) annotation(Placement(transformation(extent = {{-68, 44}, {-50, 52}})));
   AixLib.Building.Components.DryAir.DynamicVentilation dynamicVentilation(HeatingLimit = HeatingLimit, Max_VR = Max_VR, Diff_toTempset = Diff_toTempset, Tset = Tset) if withDynamicVentilation annotation(Placement(transformation(extent = {{-70, -66}, {-46, -54}})));
   Utilities.Interfaces.Adaptors.HeatStarToComb thermStar_Demux annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 90, origin = {-20, -26})));
   AixLib.Building.Components.DryAir.VarAirExchange NaturalVentilation(V = room_V) annotation(Placement(transformation(extent = {{-68, -50}, {-48, -30}})));

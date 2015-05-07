@@ -69,7 +69,7 @@ model Attic_Ro2Lf5
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermRoom4 annotation(Placement(transformation(extent = {{20, -100}, {40, -80}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermRoom5 annotation(Placement(transformation(extent = {{60, -100}, {80, -80}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor Tair annotation(Placement(transformation(extent = {{24, -20}, {38, -6}})));
-  AixLib.Building.Components.DryAir.InfiltrationRate_DIN12381 infiltrationRate(room_V = room_V, n50 = n50, e = e, eps = eps) annotation(Placement(transformation(extent = {{-62, 0}, {-46, 16}})));
+  AixLib.Building.Components.DryAir.InfiltrationRate_DIN12831 infiltrationRate(room_V = room_V, n50 = n50, e = e, eps = eps) annotation(Placement(transformation(extent = {{-62, 0}, {-46, 16}})));
   Utilities.Interfaces.Adaptors.HeatStarToComb thermStar_Demux annotation(Placement(transformation(extent = {{-10, -8}, {10, 8}}, rotation = 90, origin = {-30, -10})));
   AixLib.Building.Components.DryAir.VarAirExchange NaturalVentilation(V = room_V) annotation(Placement(transformation(extent = {{-64, 16}, {-44, 36}})));
   AixLib.Building.Components.Walls.Wall OW1(withDoor = false, door_height = 0, door_width = 0, windowarea = windowarea_RO1, WindowType = Type_Win, ISOrientation = 1, WallType = Type_OW, wall_length = sqrt(VerticalWall_Area), wall_height = sqrt(VerticalWall_Area), solar_absorptance = solar_absorptance_OW, withWindow = false, T0 = T0_OW1) annotation(Placement(transformation(extent = {{-4, -21}, {4, 21}}, rotation = 0, origin = {-75, -22})));

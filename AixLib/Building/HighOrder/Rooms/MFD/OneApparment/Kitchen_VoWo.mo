@@ -42,7 +42,7 @@ model Kitchen_VoWo "Kitchen from the VoWo appartment"
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermBath annotation(Placement(transformation(extent = {{-110, -100}, {-90, -80}}), iconTransformation(extent = {{-110, -100}, {-90, -80}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermCeiling annotation(Placement(transformation(extent = {{-110, -140}, {-90, -120}}), iconTransformation(extent = {{-110, -140}, {-90, -120}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor annotation(Placement(transformation(extent = {{-70, -160}, {-50, -140}}), iconTransformation(extent = {{-70, -160}, {-50, -140}})));
-  AixLib.Building.Components.DryAir.InfiltrationRate_DIN12381 infiltrationRate(room_V = room_V, n50 = n50, e = e, eps = eps) annotation(Placement(transformation(extent = {{-42, 72}, {-18, 96}})));
+  AixLib.Building.Components.DryAir.InfiltrationRate_DIN12831 infiltrationRate(room_V = room_V, n50 = n50, e = e, eps = eps) annotation(Placement(transformation(extent = {{-42, 72}, {-18, 96}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermRoom annotation(Placement(transformation(extent = {{-2, -18}, {18, 2}})));
   Utilities.Interfaces.Star StarRoom annotation(Placement(transformation(extent = {{-4, -48}, {16, -28}})));
   Utilities.Interfaces.Adaptors.HeatStarToComb thermStar_Demux annotation(Placement(transformation(extent = {{10, -8}, {-10, 8}}, rotation = 180, origin = {-30, -40})));

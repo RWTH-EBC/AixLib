@@ -71,7 +71,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
   AixLib.Building.Components.Walls.Wall roof(T0 = T0_RO, solar_absorptance = solar_absorptance_RO, wall_length = room_length, withDoor = false, door_height = 0, door_width = 0, wall_height = roof_width, withWindow = withWindow3, windowarea = windowarea_RO, WallType = Type_RO, WindowType = Type_Win) annotation(Placement(transformation(origin = {55, 59}, extent = {{-2.99995, -17}, {2.99997, 17}}, rotation = 270)));
   Utilities.Interfaces.SolarRad_in SolarRadiationPort_Roof annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {74, 100})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor Tair annotation(Placement(transformation(extent = {{24, -20}, {38, -6}})));
-  AixLib.Building.Components.DryAir.InfiltrationRate_DIN12381 infiltrationRate(room_V = room_V, n50 = n50, e = e, eps = eps) annotation(Placement(transformation(extent = {{-72, 36}, {-54, 44}})));
+  AixLib.Building.Components.DryAir.InfiltrationRate_DIN12831 infiltrationRate(room_V = room_V, n50 = n50, e = e, eps = eps) annotation(Placement(transformation(extent = {{-72, 36}, {-54, 44}})));
   AixLib.Building.Components.DryAir.DynamicVentilation dynamicVentilation(HeatingLimit = HeatingLimit, Max_VR = Max_VR, Diff_toTempset = Diff_toTempset, Tset = Tset) if withDynamicVentilation annotation(Placement(transformation(extent = {{-70, -68}, {-46, -56}})));
   Utilities.Interfaces.Adaptors.HeatStarToComb thermStar_Demux annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 90, origin = {-20, -26})));
   AixLib.Building.Components.DryAir.VarAirExchange NaturalVentilation(V = room_V) annotation(Placement(transformation(extent = {{-68, -50}, {-48, -30}})));

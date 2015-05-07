@@ -45,7 +45,7 @@ model Livingroom_VoWo "Livingroom from the VoWo appartment"
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermCorridor annotation(Placement(transformation(extent = {{-160, -60}, {-140, -40}}), iconTransformation(extent = {{-160, -60}, {-140, -40}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermBedroom annotation(Placement(transformation(extent = {{-160, -30}, {-140, -10}}), iconTransformation(extent = {{-160, -30}, {-140, -10}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermNeighbour annotation(Placement(transformation(extent = {{-160, 0}, {-140, 20}}), iconTransformation(extent = {{-160, 0}, {-140, 20}})));
-  AixLib.Building.Components.DryAir.InfiltrationRate_DIN12381 infiltrationRate(room_V = room_V, n50 = n50, e = e, eps = eps) annotation(Placement(transformation(extent = {{-72, -84}, {-46, -58}})));
+  AixLib.Building.Components.DryAir.InfiltrationRate_DIN12831 infiltrationRate(room_V = room_V, n50 = n50, e = e, eps = eps) annotation(Placement(transformation(extent = {{-72, -84}, {-46, -58}})));
   Utilities.Interfaces.Adaptors.HeatStarToComb thermStar_Demux annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 180, origin = {24, -14})));
   AixLib.Building.Components.DryAir.VarAirExchange NaturalVentilation(V = room_V) annotation(Placement(transformation(extent = {{-72, -112}, {-46, -86}})));
 protected
