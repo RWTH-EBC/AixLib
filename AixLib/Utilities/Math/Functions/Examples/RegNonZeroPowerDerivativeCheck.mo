@@ -15,7 +15,8 @@ equation
   assert(abs(x-y) < 1E-2, "Model has an error");
 
  annotation(experiment(StartTime=-1, StopTime=1.0),
-__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Math/Functions/Examples/RegNonZeroPowerDerivativeCheck.mos" "Simulate and plot"),
+__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Math/Functions/Examples/RegNonZeroPowerDerivativeCheck.mos"
+        "Simulate and plot"),
     Documentation(info="<html>
 <p>
 This example checks whether the function derivative

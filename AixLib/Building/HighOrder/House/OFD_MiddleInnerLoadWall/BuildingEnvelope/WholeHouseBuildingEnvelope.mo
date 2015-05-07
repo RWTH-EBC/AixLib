@@ -75,16 +75,24 @@ equation
   connect(AirExchangeAttic_Source.y, attic_2Ro_5Rooms.AirExchangePort) annotation(Line(points = {{-51.6, 74}, {-26, 74}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(attic_2Ro_5Rooms.SolarRadiationPort_RO1, SolarRadiationPort_RoofS) annotation(Line(points = {{-14.5, 84}, {-14, 88}, {-14, 90}, {60, 90}, {60, 58}, {90, 58}}, color = {255, 128, 0}, smooth = Smooth.None));
   connect(attic_2Ro_5Rooms.SolarRadiationPort_RO2, SolarRadiationPort_RoofN) annotation(Line(points = {{8.5, 84}, {10, 84}, {10, 90}, {90, 90}}, color = {255, 128, 0}, smooth = Smooth.None));
-  connect(attic_2Ro_5Rooms.SolarRadiationPort_OW1, SolarRadiationPort_RoofS) annotation(Line(points = {{-27.38, 62}, {-74, 62}, {-74, 90}, {60, 90}, {60, 58}, {90, 58}}, color = {255, 128, 0}, smooth = Smooth.None));
-  connect(attic_2Ro_5Rooms.SolarRadiationPort_OW2, SolarRadiationPort_RoofN) annotation(Line(points = {{22.3, 62.4}, {60, 62.4}, {60, 90}, {90, 90}}, color = {255, 128, 0}, smooth = Smooth.None));
-  annotation(__Dymola_Images(Parameters(source = "AixLib/Images/House/Grundriss.png")), Icon(graphics = {Bitmap(extent=  {{-78, 74}, {72, -68}}, fileName=  "modelica://AixLib/Images/House/Grundriss.PNG")}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(info = "<html>
+  connect(attic_2Ro_5Rooms.SolarRadiationPort_OW2, West) annotation (Line(
+      points={{22.3,62.4},{60,62.4},{60,-90},{90,-90}},
+      color={255,128,0},
+      smooth=Smooth.None));
+  connect(attic_2Ro_5Rooms.SolarRadiationPort_OW1, East) annotation (Line(
+      points={{-27.38,62},{-74,62},{-74,90},{60,90},{60,-18},{90,-18}},
+      color={255,128,0},
+      smooth=Smooth.None));
+  annotation(__Dymola_Images(Parameters(source = "AixLib/Images/House/Grundriss.png")), Icon(graphics={  Bitmap(extent = {{-78, 74}, {72, -68}}, fileName = "modelica://AixLib/Images/House/Grundriss.PNG")}), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
+            -100},{100,100}}),                                                                                                    graphics), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for the envelope of the whole one family dwelling.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
  <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
- </html>", revisions = "<html>
+ </html>", revisions="<html>
 
  <ul>
+ <li><i>Mai 7, 2015</i> by Ana Constantin:<br/>Corrected connection of gabled vertical walls with solar radiation (E and W)</li>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
  <li><i>July 10, 2011</i> by Ana Constantin:<br/>Implemented</li>
 

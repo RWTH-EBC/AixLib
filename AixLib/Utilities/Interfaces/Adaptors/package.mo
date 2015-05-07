@@ -1,4 +1,4 @@
 within AixLib.Utilities.Interfaces;
-package Adaptors
+package Adaptors 
   extends Modelica.Icons.Package;
 end Adaptors;

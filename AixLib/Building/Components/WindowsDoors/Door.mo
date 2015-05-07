@@ -21,10 +21,10 @@ equation
   connect(twoStar_RadEx.Therm, HeatTrans.port_b) annotation(Line(points = {{30.8, 60}, {20, 60}, {20, 2}, {10, 2}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(twoStar_RadEx1.Therm, HeatTrans.port_a) annotation(Line(points = {{-32.8, 60}, {-20, 60}, {-20, 2}, {-10, 2}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(twoStar_RadEx1.Star, Star1) annotation(Line(points = {{-51.1, 60}, {-90, 60}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
-  annotation(Dialog(group = "Air exchange"), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics={  Line(points=  {{-40, 18}, {-36, 18}}, color=  {255, 255, 0}, smooth=  Smooth.None), Rectangle(extent=  {{-52, 82}, {48, -78}}, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-46, 76}, {40, -68}}, lineColor=  {0, 0, 0},
-            fillPattern=                                                                                                    FillPattern.Solid, fillColor=  {127, 0, 0}), Rectangle(extent=  {{28, 12}, {36, 0}}, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Solid)}), Window(x = 0.26, y = 0.21, width = 0.49, height = 0.55), Documentation(info = "<html>
+  annotation(Dialog(group = "Air exchange"), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics={  Line(points = {{-40, 18}, {-36, 18}}, color = {255, 255, 0}, smooth = Smooth.None), Rectangle(extent = {{-52, 82}, {48, -78}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-46, 76}, {40, -68}}, lineColor = {0, 0, 0},
+            fillPattern =                                                                                                   FillPattern.Solid, fillColor = {127, 0, 0}), Rectangle(extent = {{28, 12}, {36, 0}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid)}), Window(x = 0.26, y = 0.21, width = 0.49, height = 0.55), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>The<b> Door</b> model models </p>
  <ul>

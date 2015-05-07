@@ -15,9 +15,9 @@ equation
   //m_flow = rho * 1/3600 * Kvs * opening * sqrt(p / 100000);    //This is an educational purposes equation, can be used to show the functionality of a valve when the flow direction is correct
   m_flow = rho * 1 / 3600 * Kvs * opening * Modelica.Fluid.Utilities.regRoot2(dp, Modelica.Constants.small, 1e-4, 1e-4);
   //This equation is better suited for stable simulations as it works for both flow directions and is continuous at flow zero
-  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points = {{-78, 50}, {-78, -60}, {82, 50}, {82, -62}, {-78, 50}},
-            lineThickness =                                                                                                    1, smooth = Smooth.None, fillColor = {0, 0, 255},
-            fillPattern =                                                                                                    FillPattern.Solid, pattern = LinePattern.None, lineColor = {0, 0, 0})}), Diagram(graphics), Documentation(revisions="<html>
+  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points=  {{-78, 50}, {-78, -60}, {82, 50}, {82, -62}, {-78, 50}},
+            lineThickness=                                                                                                    1, smooth=  Smooth.None, fillColor=  {0, 0, 255},
+            fillPattern=                                                                                                    FillPattern.Solid, pattern=  LinePattern.None, lineColor=  {0, 0, 0})}), Diagram(graphics), Documentation(revisions="<html>
  <p>November 2014, Marcus Fuchs</p>
  <p><ul>
  <li>Changed model to use Annex 60 base class</li>

@@ -32,7 +32,49 @@ model OneAppartment_Radiators
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = -90, origin = {-32, 112}), iconTransformation(extent = {{-15, -15}, {15, 15}}, rotation = -90, origin = {-31, 105})));
   Modelica.Blocks.Interfaces.RealInput AirExchangePort_Window[5] annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = -90, origin = {20, 112}), iconTransformation(extent = {{-14, -14}, {14, 14}}, rotation = -90, origin = {26, 106})));
   Utilities.Interfaces.SolarRad_in SolarRadiation[2] "[SE, NW]" annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin = {58, 108})));
-  HouseModels.House.MFD.Building.OneAppartment_VoWo Appartment(Floor = 2, Livingroom(T0_air = 293.15, T0_OW = 293.15, T0_IWChild = 293.15, T0_IWBedroom = 293.15, T0_IWNeighbour = 293.15, T0_CE = 293.35, T0_FL = 292.95), Children(T0_air = 293.15, T0_OW = 293.15, T0_IWLivingroom = 293.15, T0_IWNeighbour = 293.15, T0_CE = 293.35, T0_FL = 292.95), Bedroom(T0_air = 293.15, T0_OW = 293.15, T0_IWLivingroom = 293.15, T0_IWNeighbour = 293.15, T0_CE = 293.35, T0_FL = 292.95), Bathroom(T0_IWKitchen = 293.15, T0_IWBedroom = 293.15, T0_OW = 293.15, T0_CE = 297.35, T0_FL = 296.95), Kitchen(T0_air = 293.15, T0_OW = 293.15, T0_CE = 293.35, T0_FL = 292.95), Corridor(T0_IWKitchen = 293.15, T0_IWBedroom = 293.15, T0_IWLivingroom = 293.15, T0_IWChild = 293.15, T0_CE = 293.35, T0_FL = 292.95)) annotation(Placement(transformation(extent = {{-30, 8}, {32, 70}})));
+  HouseModels.House.MFD.BuildingEnvelope.OneAppartment_VoWo Appartment(
+    Floor=2,
+    Livingroom(
+      T0_air=293.15,
+      T0_OW=293.15,
+      T0_IWChild=293.15,
+      T0_IWBedroom=293.15,
+      T0_IWNeighbour=293.15,
+      T0_CE=293.35,
+      T0_FL=292.95),
+    Children(
+      T0_air=293.15,
+      T0_OW=293.15,
+      T0_IWLivingroom=293.15,
+      T0_IWNeighbour=293.15,
+      T0_CE=293.35,
+      T0_FL=292.95),
+    Bedroom(
+      T0_air=293.15,
+      T0_OW=293.15,
+      T0_IWLivingroom=293.15,
+      T0_IWNeighbour=293.15,
+      T0_CE=293.35,
+      T0_FL=292.95),
+    Bathroom(
+      T0_IWKitchen=293.15,
+      T0_IWBedroom=293.15,
+      T0_OW=293.15,
+      T0_CE=297.35,
+      T0_FL=296.95),
+    Kitchen(
+      T0_air=293.15,
+      T0_OW=293.15,
+      T0_CE=293.35,
+      T0_FL=292.95),
+    Corridor(
+      T0_IWKitchen=293.15,
+      T0_IWBedroom=293.15,
+      T0_IWLivingroom=293.15,
+      T0_IWChild=293.15,
+      T0_CE=293.35,
+      T0_FL=292.95))
+    annotation (Placement(transformation(extent={{-30,8},{32,70}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature tempOutside3 annotation(Placement(transformation(extent = {{-48, 78}, {-67.5, 96}})));
   Modelica.Blocks.Interfaces.RealInput air_temp annotation(Placement(transformation(extent = {{20, -20}, {-20, 20}}, rotation = 90, origin = {-80, 112}), iconTransformation(extent = {{14, -14}, {-14, 14}}, rotation = 90, origin = {-86, 106})));
   Modelica.Blocks.Interfaces.RealInput TSet[5] "1 - Livingroom
@@ -121,5 +163,5 @@ equation
  <ul>
  <li><i>June 19, 2014</i> by Ana Constantin:<br/>Implemented</li>
  </ul>
- </html>"), Icon(coordinateSystem(extent = {{-120, -120}, {100, 120}}, preserveAspectRatio = false), graphics={  Bitmap(extent=  {{-86, 80}, {76, -84}}, fileName=  "modelica://AixLib/Images/House/MFD_FloorPlan_En.PNG")}));
+ </html>"), Icon(coordinateSystem(extent = {{-120, -120}, {100, 120}}, preserveAspectRatio = false), graphics={  Bitmap(extent = {{-86, 80}, {76, -84}}, fileName = "modelica://AixLib/Images/House/MFD_FloorPlan_En.PNG")}));
 end OneAppartment_Radiators;

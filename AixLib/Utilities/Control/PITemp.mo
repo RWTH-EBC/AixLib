@@ -47,6 +47,6 @@ equation
           by Peter Matthes:<br/>
           implemented</li>
  </ul>
- </html> "), Icon(graphics={  Rectangle(extent=  {{-80, 80}, {80, -80}}, lineColor=  {135, 135, 135}, fillColor=  {255, 255, 170},
-            fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-58, 32}, {62, -20}}, lineColor=  {175, 175, 175}, textString=  "%name")}));
+ </html> "), Icon(graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {135, 135, 135}, fillColor = {255, 255, 170},
+            fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-58, 32}, {62, -20}}, lineColor = {175, 175, 175}, textString = "%name")}));
 end PITemp;

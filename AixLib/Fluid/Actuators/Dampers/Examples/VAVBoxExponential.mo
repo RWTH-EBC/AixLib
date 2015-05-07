@@ -19,13 +19,13 @@ model VAVBoxExponential
     offset=101330,
     startTime=0,
     duration=60) annotation (Placement(transformation(extent={{-100,40},{-80,60}})));
-  AixLib.Fluid.Sources.Boundary_pT sou(             redeclare package Medium
-      =        Medium, T=273.15 + 20,
+  AixLib.Fluid.Sources.Boundary_pT sou(             redeclare package Medium =
+               Medium, T=273.15 + 20,
     nPorts=2,
     use_p_in=true)                      annotation (Placement(transformation(
           extent={{-70,-20},{-50,0}})));
-  AixLib.Fluid.Sources.Boundary_pT sin(             redeclare package Medium
-      =        Medium, T=273.15 + 20,
+  AixLib.Fluid.Sources.Boundary_pT sin(             redeclare package Medium =
+               Medium, T=273.15 + 20,
     nPorts=2,
     use_p_in=true)                      annotation (Placement(transformation(
           extent={{72,-20},{52,0}})));

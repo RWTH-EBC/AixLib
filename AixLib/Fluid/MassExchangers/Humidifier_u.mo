@@ -2,7 +2,8 @@ within AixLib.Fluid.MassExchangers;
 model Humidifier_u
   "Ideal humidifier or dehumidifier with prescribed water mass flow rate addition or subtraction"
   extends AixLib.Fluid.Interfaces.TwoPortHeatMassExchanger(
-    redeclare replaceable package Medium = Modelica.Media.Interfaces.PartialCondensingGases,
+    redeclare replaceable package Medium =
+        Modelica.Media.Interfaces.PartialCondensingGases,
     redeclare final AixLib.Fluid.MixingVolumes.MixingVolumeMoistAir vol);
 
   parameter Boolean use_T_in= false

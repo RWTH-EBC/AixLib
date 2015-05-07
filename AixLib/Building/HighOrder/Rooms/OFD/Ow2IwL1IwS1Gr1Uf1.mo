@@ -25,8 +25,6 @@ model Ow2IwL1IwS1Gr1Uf1
   parameter Modelica.SIunits.Height room_height = 2 "height" annotation(Dialog(group = "Dimensions", descriptionLabel = true));
   // Outer wall properties
   parameter Real solar_absorptance_OW = 0.25 "Solar absoptance outer walls " annotation(Dialog(group = "Outer wall properties", descriptionLabel = true));
-  parameter Modelica.SIunits.Temperature T_Ground = 278.15 "Ground temperature"
-                                                                                annotation(Dialog(group = "Outer wall properties", descriptionLabel = true));
   parameter Integer ModelConvOW = 1 "Heat Convection Model" annotation(Dialog(group = "Outer wall properties", compact = true, descriptionLabel = true), choices(choice = 1
         "DIN 6946",                                                                                                    choice = 2
         "ASHRAE Fundamentals",                                                                                                    choice = 3
@@ -50,7 +48,7 @@ model Ow2IwL1IwS1Gr1Uf1
   parameter Modelica.SIunits.TemperatureDifference Diff_toTempset = 2
     "Difference to set temperature"                                                                   annotation(Dialog(group = "Dynamic ventilation", descriptionLabel = true, enable = if withDynamicVentilation then true else false));
   parameter Modelica.SIunits.Temperature Tset = 295.15 "Tset" annotation(Dialog(group = "Dynamic ventilation", descriptionLabel = true, enable = if withDynamicVentilation then true else false));
-  //Door properties
+
   AixLib.Building.Components.Walls.Wall outside_wall1(solar_absorptance = solar_absorptance_OW, windowarea = windowarea_OW1, T0 = T0_OW1, door_height = door_height_OD1, door_width = door_width_OD1, wall_length = room_length, wall_height = room_height, withWindow = withWindow1, withDoor = withDoor1, WallType = Type_OW, Model = ModelConvOW, WindowType = Type_Win, withSunblind = false, U_door = U_door_OD1, eps_door = eps_door_OD1) annotation(Placement(transformation(extent = {{-64, -28}, {-54, 36}}, rotation = 0)));
   AixLib.Building.Components.Walls.Wall outside_wall2(solar_absorptance = solar_absorptance_OW, windowarea = windowarea_OW2, T0 = T0_OW2, door_height = door_height_OD2, door_width = door_width_OD2, wall_length = room_width, wall_height = room_height, withWindow = withWindow2, withDoor = withDoor2, WallType = Type_OW, Model = ModelConvOW, WindowType = Type_Win, U_door = U_door_OD2, eps_door = eps_door_OD2) annotation(Placement(transformation(origin = {19, 57}, extent = {{-5.00018, -29}, {5.00003, 29}}, rotation = 270)));
   AixLib.Building.Components.Walls.Wall inside_wall1(T0 = T0_IW1, outside = false, wall_length = room_length, wall_height = room_height, withWindow = false, withDoor = false, WallType = Type_IWload) annotation(Placement(transformation(origin = {58, 5}, extent = {{-6, -35}, {6, 35}}, rotation = 180)));
@@ -70,7 +68,7 @@ model Ow2IwL1IwS1Gr1Uf1
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature Ground annotation(Placement(transformation(extent = {{0, -100}, {-20, -80}})));
   Modelica.Blocks.Sources.Constant GroundTemperature(k = T_Ground) annotation(Placement(transformation(extent = {{-62, -100}, {-42, -80}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor Tair annotation(Placement(transformation(extent = {{24, -20}, {38, -6}})));
-  AixLib.Building.Components.DryAir.InfiltrationRate_DIN12831 infiltrationRate(room_V = room_V, n50 = n50, e = e, eps = eps) annotation(Placement(transformation(extent = {{-68, 44}, {-50, 52}})));
+  AixLib.Building.Components.DryAir.InfiltrationRate_DIN12381 infiltrationRate(room_V = room_V, n50 = n50, e = e, eps = eps) annotation(Placement(transformation(extent = {{-68, 44}, {-50, 52}})));
   AixLib.Building.Components.DryAir.DynamicVentilation dynamicVentilation(HeatingLimit = HeatingLimit, Max_VR = Max_VR, Diff_toTempset = Diff_toTempset, Tset = Tset) if withDynamicVentilation annotation(Placement(transformation(extent = {{-68, -66}, {-46, -54}})));
   Utilities.Interfaces.Adaptors.HeatStarToComb thermStar_Demux annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 90, origin = {-20, -26})));
   Utilities.Interfaces.Star starRoom annotation(Placement(transformation(extent = {{10, 10}, {30, 30}}), iconTransformation(extent = {{10, 10}, {30, 30}})));
@@ -80,6 +78,13 @@ model Ow2IwL1IwS1Gr1Uf1
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor if withFloorHeating
     "thermal connector for floor heating"                                                                                  annotation(Placement(transformation(extent = {{-24, -68}, {-14, -58}}), iconTransformation(extent = {{-32, -34}, {-12, -14}})));
 protected
+      parameter Modelica.SIunits.Temperature T_Ground=if TRY == 1 then 282.15 else if TRY == 2 then 281.55 else if TRY == 3 then 281.65 else if TRY == 4 then 282.65
+ else
+     if TRY == 5 then 281.25 else if TRY ==6 then 279.95 else if TRY == 7 then 281.95 else if TRY == 8 then 279.95 else if TRY == 9 then 281.05 else if TRY == 10 then 276.15
+ else
+     if TRY == 11 then 279.45 else if TRY == 12 then 283.35 else if TRY == 13 then 281.05 else if TRY == 14 then 281.05 else 279.95
+    "Ground temperature"                                   annotation(Dialog(group="Outer wall properties", descriptionLabel = true));
+  //Door properties
   parameter Real U_door_OD1 = if TIR == 1 then 1.8 else 2.9 "U-value" annotation(Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor1));
   parameter Real eps_door_OD1 = 0.95 "eps" annotation(Dialog(group = "Windows and Doors", descriptionLabel = true, enable = withDoor1));
   parameter Real U_door_OD2 = if TIR == 1 then 1.8 else 2.9 "U-value" annotation(Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor2));
@@ -158,22 +163,23 @@ equation
           {-25.6,-90},{-20,-90}},                                                                               color = {191, 0, 0}, smooth = Smooth.None, pattern = LinePattern.Dash));
   connect(floor_FH.port_b, thermFloor) annotation(Line(points={{-25.6,-72.3},{
           -25.6,-63},{-19,-63}},                                                                            color = {191, 0, 0}, smooth = Smooth.None, pattern = LinePattern.Dash));
-  annotation(__Dymola_Images(Parameters(source = "AixLib/Images/House/2OW_1IWl_1IWs_1Gr_Pa.png")), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent=  {{-80, 80}, {80, 60}}, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{0, 80}, {-50, 60}}, lineColor=  {0, 0, 0}, fillColor=  {170, 213, 255},
-            fillPattern=                                                                                                    FillPattern.Solid, visible=  withWindow2), Rectangle(extent=  {{6, 64}, {-6, -64}}, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Solid, origin=  {74, -4}, rotation=  360), Rectangle(extent=  {{-60, -68}, {80, -80}}, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-80, 60}, {-60, -80}}, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-80, 50}, {-60, 0}}, lineColor=  {0, 0, 0}, fillColor=  {170, 213, 255},
-            fillPattern=                                                                                                    FillPattern.Solid, visible=  withWindow1), Rectangle(extent=  {{-60, 60}, {68, -68}}, lineColor=  {0, 0, 0}, fillColor=  {47, 102, 173},
-            fillPattern=                                                                                                    FillPattern.Solid), Line(points=  {{38, 46}, {68, 46}}, color=  {255, 255, 255}, smooth=  Smooth.None), Text(extent=  {{64, 52}, {-56, 40}}, lineColor=  {255, 255, 255}, textString=  "width"), Line(points=  {{-46, -38}, {-46, -68}}, color=  {255, 255, 255}, smooth=  Smooth.None), Text(extent=  {{3, -6}, {-117, 6}}, lineColor=  {255, 255, 255}, origin=  {-46, 53}, rotation=  90, textString=  "length"), Rectangle(extent=  {{-80, -20}, {-60, -40}}, fillColor=  {127, 127, 0},
-            fillPattern=                                                                                                    FillPattern.Solid, lineColor=  {0, 0, 0}, visible=  withDoor1), Rectangle(extent=  {{20, 80}, {40, 60}}, lineColor=  {0, 0, 0}, fillColor=  {127, 127, 0},
-            fillPattern=                                                                                                    FillPattern.Solid, visible=  withDoor2), Text(extent=  {{-50, 76}, {0, 64}}, lineColor=  {255, 255, 255}, fillColor=  {255, 85, 85},
-            fillPattern=                                                                                                    FillPattern.Solid, visible=  withWindow2, textString=  "Win2",
-            lineThickness=                                                                                                    0.5), Text(extent=  {{-25, 6}, {25, -6}}, lineColor=  {255, 255, 255}, fillColor=  {255, 85, 85},
-            fillPattern=                                                                                                    FillPattern.Solid, origin=  {-70, 25}, rotation=  90, visible=  withWindow1, textString=  "Win1"), Text(extent=  {{20, 74}, {40, 66}}, lineColor=  {255, 255, 255}, fillColor=  {255, 170, 170},
-            fillPattern=                                                                                                    FillPattern.Solid, visible=  withDoor2, textString=  "D2"), Text(extent=  {{-10, 4}, {10, -4}}, lineColor=  {255, 255, 255}, fillColor=  {255, 85, 85},
-            fillPattern=                                                                                                    FillPattern.Solid, origin=  {-70, -30}, rotation=  90, visible=  withDoor1, textString=  "D1"), Line(points=  {{-60, 46}, {-30, 46}}, color=  {255, 255, 255}, smooth=  Smooth.None), Line(points=  {{-46, 60}, {-46, 30}}, color=  {255, 255, 255}, smooth=  Smooth.None)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(revisions = "<html>
+  annotation(__Dymola_Images(Parameters(source = "AixLib/Images/House/2OW_1IWl_1IWs_1Gr_Pa.png")), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 80}, {80, 60}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{0, 80}, {-50, 60}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255},
+            fillPattern =                                                                                                   FillPattern.Solid, visible = withWindow2), Rectangle(extent = {{6, 64}, {-6, -64}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid, origin = {74, -4}, rotation = 360), Rectangle(extent = {{-60, -68}, {80, -80}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-80, 60}, {-60, -80}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-80, 50}, {-60, 0}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255},
+            fillPattern =                                                                                                   FillPattern.Solid, visible = withWindow1), Rectangle(extent = {{-60, 60}, {68, -68}}, lineColor = {0, 0, 0}, fillColor = {47, 102, 173},
+            fillPattern =                                                                                                   FillPattern.Solid), Line(points = {{38, 46}, {68, 46}}, color = {255, 255, 255}, smooth = Smooth.None), Text(extent = {{64, 52}, {-56, 40}}, lineColor = {255, 255, 255}, textString = "width"), Line(points = {{-46, -38}, {-46, -68}}, color = {255, 255, 255}, smooth = Smooth.None), Text(extent = {{3, -6}, {-117, 6}}, lineColor = {255, 255, 255}, origin = {-46, 53}, rotation = 90, textString = "length"), Rectangle(extent = {{-80, -20}, {-60, -40}}, fillColor = {127, 127, 0},
+            fillPattern =                                                                                                   FillPattern.Solid, lineColor = {0, 0, 0}, visible = withDoor1), Rectangle(extent = {{20, 80}, {40, 60}}, lineColor = {0, 0, 0}, fillColor = {127, 127, 0},
+            fillPattern =                                                                                                   FillPattern.Solid, visible = withDoor2), Text(extent = {{-50, 76}, {0, 64}}, lineColor = {255, 255, 255}, fillColor = {255, 85, 85},
+            fillPattern =                                                                                                   FillPattern.Solid, visible = withWindow2, textString = "Win2",
+            lineThickness =                                                                                                   0.5), Text(extent = {{-25, 6}, {25, -6}}, lineColor = {255, 255, 255}, fillColor = {255, 85, 85},
+            fillPattern =                                                                                                   FillPattern.Solid, origin = {-70, 25}, rotation = 90, visible = withWindow1, textString = "Win1"), Text(extent = {{20, 74}, {40, 66}}, lineColor = {255, 255, 255}, fillColor = {255, 170, 170},
+            fillPattern =                                                                                                   FillPattern.Solid, visible = withDoor2, textString = "D2"), Text(extent = {{-10, 4}, {10, -4}}, lineColor = {255, 255, 255}, fillColor = {255, 85, 85},
+            fillPattern =                                                                                                   FillPattern.Solid, origin = {-70, -30}, rotation = 90, visible = withDoor1, textString = "D1"), Line(points = {{-60, 46}, {-30, 46}}, color = {255, 255, 255}, smooth = Smooth.None), Line(points = {{-46, 60}, {-46, 30}}, color = {255, 255, 255}, smooth = Smooth.None)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(revisions="<html>
  <ul>
+ <li><i>Mai 7, 2015</i> by Ana Constantin:<br/>Grount temperature depends on TRY</li>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
  <li><i>July 7, 2011</i> by Ana Constantin:<br/>Implemented</li>
  </ul>

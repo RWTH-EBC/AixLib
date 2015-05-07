@@ -1,8 +1,6 @@
 within AixLib.Fluid.Interfaces;
 model FourPort "Partial model with four ports"
 
-
-
   replaceable package Medium1 =
       Modelica.Media.Interfaces.PartialMedium "Medium 1 in the component"
       annotation (choicesAllMatching = true);

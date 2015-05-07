@@ -37,7 +37,7 @@ equation
     "NumberOfDay is calculated as float because then the variables that use NumberoOfDay in their calculation don't have to be interpolated between the time-steps. To get the integer value it has to be calculated with: NumberOfDay =floor(time/86400) + 1";
 
       // day angle of sun
-      DayAngleSun = 360/365*(NumberOfDay - 1)
+      DayAngleSun = 360/365.25*(NumberOfDay - 1)
     "360 is an angle in degree and 365 is the number of days in one year. The earth rotation in one year is 360 degrees";
 
       OutDayAngleSun = DayAngleSun;
