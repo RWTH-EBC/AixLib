@@ -83,7 +83,7 @@ equation
       points={{-27.38,62},{-74,62},{-74,90},{60,90},{60,-18},{90,-18}},
       color={255,128,0},
       smooth=Smooth.None));
-  annotation(__Dymola_Images(Parameters(source = "AixLib/Images/House/Grundriss.png")), Icon(graphics={  Bitmap(extent = {{-78, 74}, {72, -68}}, fileName = "modelica://AixLib/Images/House/Grundriss.PNG")}), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
+  annotation(__Dymola_Images(Parameters(source = "AixLib/Images/House/Grundriss.png")), Icon(graphics={  Bitmap(extent=  {{-78, 74}, {72, -68}}, fileName=  "modelica://AixLib/Images/House/Grundriss.PNG")}), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
             -100},{100,100}}),                                                                                                    graphics), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for the envelope of the whole one family dwelling.</p>

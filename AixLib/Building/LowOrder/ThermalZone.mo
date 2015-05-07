@@ -49,15 +49,15 @@ equation
             lineThickness=1,                                                                                                    fillColor=
               {170,213,255},
             fillPattern=FillPattern.Solid,
-          pattern=LinePattern.None),                                                                                                    Rectangle(extent = {{-60, -58}, {100, -70}},
+          pattern=LinePattern.None),                                                                                                    Rectangle(extent=  {{-60, -58}, {100, -70}},
             lineThickness=1,                                                                                                    fillColor=
               {0,127,0},
             fillPattern=FillPattern.HorizontalCylinder,
           pattern=LinePattern.None,
-          lineColor={0,0,0}),                                                                                                    Rectangle(extent = {{14, 36}, {100, -58}}, lineColor=
+          lineColor={0,0,0}),                                                                                                    Rectangle(extent=  {{14, 36}, {100, -58}}, lineColor=
               {0,0,0},                                                                                                    fillColor=
               {215,215,215},
-            fillPattern=FillPattern.Forward),                                                                                                    Polygon(points = {{100, 36}, {-2, 36}, {100, 60}, {100, 36}}, lineColor=
+            fillPattern=FillPattern.Forward),                                                                                                    Polygon(points=  {{100, 36}, {-2, 36}, {100, 60}, {100, 36}}, lineColor=
               {236,99,92},
             lineThickness=1,                                                                                                    smooth=
               Smooth.None,                                                                                                    fillColor=
@@ -71,10 +71,10 @@ equation
               {0,0,0},                                                                                                    fillColor=
               {170,213,255},
             fillPattern=FillPattern.Solid),                                                                                                    Polygon(points={{
-              64,-40},{68,-36},{78,-36},{82,-40},{64,-40}},                                                                                                    pattern = LinePattern.None, smooth = Smooth.None, fillColor = {0, 0, 0},
-            fillPattern =                                                                                                   FillPattern.Solid), Polygon(points={{
-              68,-39},{70,-37},{76,-37},{78,-39},{68,-39}},                                                                                                    pattern = LinePattern.None, smooth = Smooth.None, fillColor = {95, 95, 95},
-            fillPattern =                                                                                                   FillPattern.Solid, lineColor = {0, 0, 0}),      Text(extent = {{-90, 134}, {98, 76}}, lineColor=
+              64,-40},{68,-36},{78,-36},{82,-40},{64,-40}},                                                                                                    pattern=  LinePattern.None, smooth=  Smooth.None, fillColor=  {0, 0, 0},
+            fillPattern=                                                                                                    FillPattern.Solid), Polygon(points={{
+              68,-39},{70,-37},{76,-37},{78,-39},{68,-39}},                                                                                                    pattern=  LinePattern.None, smooth=  Smooth.None, fillColor=  {95, 95, 95},
+            fillPattern=                                                                                                    FillPattern.Solid, lineColor=  {0, 0, 0}),      Text(extent=  {{-90, 134}, {98, 76}}, lineColor=
               {0,0,255},
           textString="%name"),                                                                      Ellipse(extent={{
               -58,78},{-16,36}},
@@ -103,14 +103,14 @@ equation
         Line(
           points={{42,14},{86,14}},
           color={0,0,0},
-          smooth=Smooth.None),                                                                                                    Ellipse(extent = {{4, -4}, {-4, 4}},                            fillColor=
+          smooth=Smooth.None),                                                                                                    Ellipse(extent=  {{4, -4}, {-4, 4}},                            fillColor=
               {255,221,0},
             fillPattern=FillPattern.Solid,                                                                                                    origin={65,
-              14},                                                                                                    rotation = 180,
+              14},                                                                                                    rotation=  180,
           pattern=LinePattern.None),                                                                                                    Rectangle(extent={{
-              62,22},{68,18}},                                                                                                    pattern = LinePattern.None,
-            lineThickness =                                                                                                   1, fillColor = {0, 0, 0},
-            fillPattern =                                                                                                   FillPattern.Solid, lineColor = {0, 0, 0}),
+              62,22},{68,18}},                                                                                                    pattern=  LinePattern.None,
+            lineThickness=                                                                                                    1, fillColor=  {0, 0, 0},
+            fillPattern=                                                                                                    FillPattern.Solid, lineColor=  {0, 0, 0}),
                                                                                                     Rectangle(extent={{
               54,0},{64,-6}},                                                                                                    lineColor=
               {0,0,0},                                                                                                    fillColor=
@@ -153,12 +153,12 @@ equation
           color={0,0,0},
           thickness=0.5,
           smooth=Smooth.None),                                                                                                    Rectangle(extent={{
-              65,-24},{81,-34}},                                                                                                    pattern = LinePattern.None,
-            lineThickness =                                                                                                   1, fillColor = {95, 95, 95},
-            fillPattern =                                                                                                   FillPattern.Solid, lineColor = {0, 0, 0}), Rectangle(extent={{
-              67,-26},{79,-32}},                                                                                                    pattern = LinePattern.None,
-            lineThickness =                                                                                                   1, fillColor = {0, 0, 0},
-            fillPattern =                                                                                                   FillPattern.Solid, lineColor = {0, 0, 0})}),
+              65,-24},{81,-34}},                                                                                                    pattern=  LinePattern.None,
+            lineThickness=                                                                                                    1, fillColor=  {95, 95, 95},
+            fillPattern=                                                                                                    FillPattern.Solid, lineColor=  {0, 0, 0}), Rectangle(extent={{
+              67,-26},{79,-32}},                                                                                                    pattern=  LinePattern.None,
+            lineThickness=                                                                                                    1, fillColor=  {0, 0, 0},
+            fillPattern=                                                                                                    FillPattern.Solid, lineColor=  {0, 0, 0})}),
                                                                                                     Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <ul>
