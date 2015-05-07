@@ -14,9 +14,8 @@ model WindowSimple "Window with radiation and U-Value"
     "Coefficient of solar energy transmission"                                                            annotation(Dialog(group = "Window type", enable = not selectable));
 
   replaceable model correctionSolarGain =
-      Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG
-  constrainedby
-    Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
+      BaseClasses.CorrectionSolarGain.NoCorG
+  constrainedby BaseClasses.CorrectionSolarGain.PartialCorG
     "Model for correction of solar gain factor" annotation (Dialog(descriptionLabel = true),choicesAllMatching=true);
   Utilities.Interfaces.SolarRad_in solarRad_in annotation(Placement(transformation(extent={{-100,50},
             {-80,70}},                                                                                               rotation = 0)));
@@ -86,6 +85,6 @@ equation
  <li><i>March 30, 2012&nbsp;</i> by Ana Constantin and Corinna Leonhardt:<br/>Implemented.</li>
  </ul>
  </html>"), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-            -100},{100,100}},                                                                          grid = {2, 2}), graphics={  Rectangle(extent=  {{-80, 80}, {80, -80}}, lineColor=  {0, 0, 0})}), DymolaStoredErrors);
+            -100},{100,100}},                                                                          grid = {2, 2}), graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 0})}), DymolaStoredErrors);
 end WindowSimple;
 
