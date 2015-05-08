@@ -27,4 +27,4 @@ The current version 0.1.0 is a pre-release to manage the transition from Subvers
 
 You are invited to contribute to the development of **AixLib**. 
 Issues can be reported using this site's [Issues section](https://github.com/RWTH-EBC/AixLib/issues).
-Furthermore, you are welcome to contribute via [Pull Requests](https://github.com/RWTH-EBC/AixLib/pulls). A style guide for these contributions will be added to the [Wiki](https://github.com/RWTH-EBC/AixLib/wiki) in the near future.
+Furthermore, you are welcome to contribute via [Pull Requests](https://github.com/RWTH-EBC/AixLib/pulls). The workflow for changes is described in our [Wiki](https://github.com/RWTH-EBC/AixLib/wiki).

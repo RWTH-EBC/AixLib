@@ -211,8 +211,8 @@ equation
       //getting brightness coefficients from brightness coefficient vector;
 
     //Calculation of the extraterrestrial Radiation on a horizontal Surface [Duffie/Beckman 2006, p.9];
-      ExtraterRadHor = SolarConstant * (1.0001110 + 0.034221 * cos(from_deg(InDayAngleSun))
-                      + 0.001280 * sin(from_deg(InDayAngleSun)) + 0.000179 * cos(2*from_deg(InDayAngleSun))
+      ExtraterRadHor = SolarConstant * (1.000110 + 0.034221 * cos(from_deg(InDayAngleSun))
+                      + 0.001280 * sin(from_deg(InDayAngleSun)) + 0.000719 * cos(2*from_deg(InDayAngleSun))
                       + 0.000077 * sin(2*from_deg(InDayAngleSun)));
 
     //Calculation of the Airmass [Duffie/Beckman 2006, p.10];
