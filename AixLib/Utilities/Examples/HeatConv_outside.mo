@@ -15,7 +15,12 @@ equation
   connect(const1.y, Tinside.T) annotation(Line(points = {{59, 30}, {42, 30}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(heatTransfer_Outside.port_a, Toutside.port) annotation(Line(points = {{-24, 11}, {-34, 11}, {-34, 30}, {-40, 30}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(heatTransfer_Outside.port_b, Tinside.port) annotation(Line(points = {{2, 11}, {10, 11}, {10, 30}, {20, 30}}, color = {191, 0, 0}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(revisions = "<html>
+  connect(Windspeed.y, heatTransfer_Outside.WindSpeedPort) annotation (Line(
+      points={{-39,-16},{-36,-16},{-36,1.64},{-22.96,1.64}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
+            -100},{100,100}}),                                                                           graphics), Documentation(revisions = "<html>
  <ul>
    <li><i>April 11, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
    <li><i>October 14, 2012&nbsp;</i>

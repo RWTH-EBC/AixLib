@@ -2,7 +2,8 @@ within AixLib.Building.Components.Sources.InternalGains.Machines;
 model Machines_simple
   "Heat source with convective and radiative component and connector for power input signal."
   extends
-    Building.Components.Sources.InternalGains.BaseClasses.PartialInternalGain;
+    Building.Components.Sources.InternalGains.BaseClasses.PartialInternalGain(
+      RadiativeHeat(T_ref=T0));
   parameter Modelica.SIunits.Area SurfaceArea_Machines=2
     "surface area of radiative heat source";
   parameter Real Emissivity_Machines = 0.98;

@@ -1,7 +1,8 @@
 within AixLib.Building.Components.Sources.InternalGains.Machines;
 model Machines_DIN18599
   extends
-    Building.Components.Sources.InternalGains.BaseClasses.PartialInternalGain;
+    Building.Components.Sources.InternalGains.BaseClasses.PartialInternalGain(
+      RadiativeHeat(T_ref=T0));
 
   parameter Integer ActivityType=2 "Machine activity"
     annotation(Dialog( compact = true, descriptionLabel = true), choices(choice=1 "low", choice = 2 "middle",  choice = 3 "high", radioButtons = true));

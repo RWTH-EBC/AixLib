@@ -1,7 +1,8 @@
 within AixLib.Building.Components.Sources.InternalGains.Lights;
 model Lights_simple "simple light heat source model"
   extends
-    Building.Components.Sources.InternalGains.BaseClasses.PartialInternalGain;
+    Building.Components.Sources.InternalGains.BaseClasses.PartialInternalGain(
+      RadiativeHeat(T_ref=T0));
   parameter Modelica.SIunits.Area SurfaceArea_Lighting=1;
   parameter Real Emissivity_Lighting = 0.98;
 
@@ -58,8 +59,8 @@ equation
           points={{-28,-42},{-28,-80},{26,-80},{26,-42}},
           color={0,0,0},
           smooth=Smooth.None,
-          thickness=1)}), Diagram(coordinateSystem(preserveAspectRatio=
-            false, extent={{-100,-100},{100,100}}),
+          thickness=1)}), Diagram(coordinateSystem(preserveAspectRatio=false,
+                   extent={{-100,-100},{100,100}}),
                                   graphics),
     Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>

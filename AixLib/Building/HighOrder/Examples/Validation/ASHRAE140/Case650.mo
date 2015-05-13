@@ -101,7 +101,7 @@ equation
       smooth=Smooth.None));
   connect(radOnTiltedSurf_Perez.OutTotalRadTilted, Room.SolarRadiationPort)
     annotation (Line(
-      points={{-76.8,77},{-50,77},{-50,49.8},{-11.1,49.8}},
+      points={{-75.4,75.6},{-50,75.6},{-50,49.8},{-11.1,49.8}},
       color={255,128,0},
       smooth=Smooth.None));
   connect(outsideTemp.port, Room.Therm_outside) annotation (Line(

@@ -2,7 +2,7 @@ within AixLib.Building.Components.Sources.InternalGains.Lights;
 model Lights_relative "light heat source model"
   extends
     Building.Components.Sources.InternalGains.BaseClasses.PartialInternalGain(
-      ratioConv=0.5);
+      ratioConv=0.5, RadiativeHeat(T_ref=T0));
   parameter Modelica.SIunits.Area RoomArea=20 "Area of room"    annotation(Dialog( descriptionLabel = true));
   parameter Real LightingPower = 10 "Heating power of lighting in W/m2" annotation(Dialog( descriptionLabel = true));
   parameter Modelica.SIunits.Area SurfaceArea_Lighting=1;

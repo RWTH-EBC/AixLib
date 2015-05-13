@@ -38,7 +38,7 @@ model improvedLOMExample
             {24,3}})));
   Utilities.HeatTransfer.HeatToStar HeatTorStar(A = 2) annotation(Placement(transformation(extent={{52,-88},
             {72,-68}})));
-  AixLib.Building.Components.Weather.Sunblind
+  AixLib.Building.Components.Weather.Sublinds.Sunblind
                               sunblind(n = 5, gsunblind = {0, 0, 0.15, 0.15, 0}) annotation(Placement(transformation(extent={{-24,59},
             {-4,79}})));
   AixLib.Building.LowOrder.BaseClasses.SolarRadWeightedSum solarRadWeightedSum(
