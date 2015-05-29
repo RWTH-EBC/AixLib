@@ -42,6 +42,8 @@ model TestCase_4
         5140800,51.9; 5144400,52.1; 5148000,52.4; 5151600,52.6; 5155200,52.8;
         5158800,53; 5162400,53.2; 5166000,50.2; 5169600,49.9; 5173200,49.7;
         5176800,49.5; 5180400,49.2; 5184000,49])                                                                                                     annotation(Placement(transformation(extent = {{78, 78}, {98, 97}})));
+  Modelica.Blocks.Sources.Constant solarRadiation(k=0)
+    annotation (Placement(transformation(extent={{-46,62},{-26,82}})));
 equation
   referenceTemp = reference.y;
   simulationTemp = reducedModel.airload.port.T;
@@ -49,8 +51,14 @@ equation
   connect(tableMachines.y[1], machinesRadiative.Q_flow) annotation(Line(points = {{-7.3, -58}, {10, -58}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(outdoorTemp.port, reducedModel.equalAirTemp) annotation(Line(points = {{-26, 30}, {-8, 30}, {-8, 27.68}, {13.4, 27.68}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(infiltrationTemp.y, reducedModel.ventilationTemperature) annotation(Line(points = {{-25, 0}, {-8, 0}, {-8, 18.84}, {13.4, 18.84}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(infiltrationRate.y, reducedModel.ventilationRate) annotation(Line(points = {{15, -30}, {18, -30}, {18, 13.4}, {20.2, 13.4}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(HeatToStar.Star, reducedModel.internalGainsRad) annotation(Line(points = {{55.1, -58}, {58, -58}, {58, -10}, {40.09, -10}, {40.09, 13.4}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+  connect(infiltrationRate.y, reducedModel.ventilationRate) annotation(Line(points={{15,-30},
+          {18,-30},{18,11.7},{20.54,11.7}},                                                                                            color = {0, 0, 127}, smooth = Smooth.None));
+  connect(HeatToStar.Star, reducedModel.internalGainsRad) annotation(Line(points={{55.1,
+          -58},{58,-58},{58,-10},{39.75,-10},{39.75,11.7}},                                                                                          color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+  connect(solarRadiation.y, reducedModel.u1) annotation (Line(
+      points={{-25,72},{19.18,72},{19.18,42.98}},
+      color={0,0,127},
+      smooth=Smooth.None));
   annotation(Documentation(revisions = "<html>
  <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
  </html>", info = "<html>
