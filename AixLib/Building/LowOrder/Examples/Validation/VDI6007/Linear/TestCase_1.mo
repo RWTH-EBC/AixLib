@@ -34,7 +34,17 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-            -100},{100,100}}),                                                                           graphics), experiment(StopTime = 5.184e+006, Interval = 3600), experimentSetupOutput(events = false), Documentation(revisions = "<html>
+            -100},{100,100}}),
+             graphics),
+             experiment(StopTime = 5.184e+006, Interval = 3600),
+             __Dymola_Commands(file=
+                               "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Linear/TestCase_1.mos"
+        "Simulate and plot"),
+             experimentSetupOutput(events = false),
+             Documentation(revisions="<html>
+<p><ul>
+ <li><i>May 28, 2015 </i> by Marcus Fuchs:<br/>Added unit testing command to annotations</li>
+ </ul></p>
  <p><ul>
  <li><i>March, 2012&nbsp;</i> by Moritz Lauster:<br/>Implemented</li>
  </ul></p>

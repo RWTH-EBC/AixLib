@@ -45,7 +45,18 @@ equation
       points={{-27,86},{55.18,86},{55.18,74.8}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), experiment(StopTime = 5.184e+006, Interval = 3600, Algorithm = "Lsodar"), __Dymola_experimentSetupOutput(events = false), Documentation(revisions = "<html>
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false,
+                     extent = {{-100, -100}, {100, 100}}),
+                     graphics),
+             experiment(StopTime = 5.184e+006, Interval = 3600, Algorithm = "Lsodar"),
+             __Dymola_Commands(file=
+                               "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Linear/TestCase_7.mos"
+        "Simulate and plot"),
+             __Dymola_experimentSetupOutput(events = false),
+             Documentation(revisions="<html>
+<p><ul>
+ <li><i>May 28, 2015 </i> by Marcus Fuchs:<br/>Added unit testing command to annotations</li>
+ </ul></p>
  <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
  </html>", info = "<html>
  <p>Test Case 7 of the VDI6007: <a name=\"result_box\">L</a>oad calculation in compliance with the desired values of the indoor temperature and a setpoint for the type space S:</p>
