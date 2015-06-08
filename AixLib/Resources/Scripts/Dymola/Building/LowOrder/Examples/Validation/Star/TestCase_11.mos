@@ -1,4 +1,4 @@
-simulateModel("AixLib.Building.LowOrder.Examples.Validation.VDI6007.Star.TestCase_11", stopTime=5.184e+006, numberOfIntervals=0, outputInterval=3600, method="dassl", resultFile="TestCase_11");
+simulateModel("AixLib.Building.LowOrder.Examples.Validation.VDI6007.Star.TestCase_11", stopTime=5.184e+006, numberOfIntervals=0, outputInterval=3600, method="dassl", resultFile="Star_TestCase_11");
 createPlot(id = 1,
  position = {55, 50, 697, 502},
  x = "time",
