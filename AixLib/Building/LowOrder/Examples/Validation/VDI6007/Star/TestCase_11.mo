@@ -35,6 +35,8 @@ model TestCase_11
   Modelica.Blocks.Math.Add sumHeatLoad annotation(Placement(transformation(extent = {{86, 86}, {96, 96}})));
   Utilities.Sources.HeaterCooler.IdealHeaterCoolerVar1 cooler(Q_flow_heat = 1, Q_flow_cooler = 1, h_cooler = 0, KR_heater = 1000, KR_cooler = 1000, TN_heater = 1, TN_cooler = 1, h_heater = 500, l_cooler = -500, Heater_on = false) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin = {-26, -48})));
   Modelica.Blocks.Sources.CombiTimeTable innerLoads(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableName = "UserProfilesOffice", fileName = "./Tables/J1615/UserProfilesOffice.txt", tableOnFile = false, columns = {2, 3}, table = [0, 0, 0; 3600, 0, 0; 7200, 0, 0; 10800, 0, 0; 14400, 0, 0; 18000, 0, 0; 21600, 0, 0; 21600, 0, 1000; 25200, 0, 1000; 28800, 0, 1000; 32400, 0, 1000; 36000, 0, 1000; 39600, 0, 1000; 43200, 0, 1000; 46800, 0, 1000; 50400, 0, 1000; 54000, 0, 1000; 57600, 0, 1000; 61200, 0, 1000; 64800, 0, 1000; 64800, 0, 0; 68400, 0, 0; 72000, 0, 0; 75600, 0, 0; 79200, 0, 0; 82800, 0, 0; 86400, 0, 0]) annotation(Placement(transformation(extent = {{-24, -93}, {-10, -79}})));
+  Modelica.Blocks.Sources.Constant solarRadiation(k=0)
+    annotation (Placement(transformation(extent={{-46,62},{-26,82}})));
 equation
   connect(machinesRadiative.port, heatToStar.Therm) annotation (Line(
       points={{30,-83},{38,-83},{38,-82},{50.8,-82}},
@@ -57,21 +59,36 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(infiltrationRate.y, reducedModel.ventilationRate) annotation (Line(
-      points={{50.5,11},{74.2,11},{74.2,40}},
+      points={{50.5,11},{74.54,11},{74.54,38}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(heater.heatCoolRoom, reducedModel.internalGainsConv) annotation (Line(
-      points={{-26,-29},{-26,-34},{84.4,-34},{84.4,40}},
+      points={{-26,-29},{-26,-34},{84.4,-34},{84.4,38}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(heatToStar.Star, reducedModel.internalGainsRad) annotation (Line(
-      points={{69.1,-82},{94.09,-82},{94.09,40}},
+      points={{69.1,-82},{93.75,-82},{93.75,38}},
       color={95,95,95},
       pattern=LinePattern.None,
       smooth=Smooth.None));
   connect(cooler.heatCoolRoom, reducedModel.heatConvInnerwall.port_b);
-  annotation(experiment(StopTime = 5.184e+006, Interval = 3600), __Dymola_experimentSetupOutput(events = false), Icon(graphics), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-            -100},{100,100}}),                                                                                                    graphics), Documentation(revisions = "<html>
+  connect(solarRadiation.y, reducedModel.u1) annotation (Line(
+      points={{-25,72},{73.18,72},{73.18,74.8}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  annotation(experiment(StopTime = 5.184e+006, Interval = 3600),
+             __Dymola_Commands(file=
+                               "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Star/TestCase_11.mos"
+        "Simulate and plot"),
+             __Dymola_experimentSetupOutput(events = false),
+             Icon(graphics),
+             Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
+            -100},{100,100}}),
+             graphics),
+             Documentation(revisions="<html>
+<p><ul>
+ <li><i>June 8, 2015 </i> by Marcus Fuchs:<br/>Added unit testing command to annotations</li>
+ </ul></p>
  <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
  </html>", info = "<html>
  <p>Test Case 11 of the VDI6007: <a name=\"result_box\">L</a>oad calculation in compliance with the desired values of the indoor temperature and a setpoint for the type space S:</p>
