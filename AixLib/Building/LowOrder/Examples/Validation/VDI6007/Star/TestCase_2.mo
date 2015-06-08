@@ -44,7 +44,15 @@ equation
       points={{-25,72},{21.18,72},{21.18,42.98}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), experiment(StopTime = 5.184e+006, Interval = 3600), __Dymola_experimentSetupOutput(events = false), Icon(graphics), Documentation(info="<html>
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false,
+             extent = {{-100, -100}, {100, 100}}), graphics),
+             experiment(StopTime = 5.184e+006, Interval = 3600),
+             __Dymola_Commands(file=
+                               "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Star/TestCase_2.mos"
+        "Simulate and plot"),
+             __Dymola_experimentSetupOutput(events = false),
+             Icon(graphics),
+             Documentation(info="<html>
 <p>Test Case 2 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to a radiant heat source for Type room S </p>
 <ul>
 <li>constant outdoor temperature 22 degC </li>
@@ -56,7 +64,11 @@ equation
 <p>Variable path: <code>reducedModel.airload.T</code> </p>
 <p><br><br>All values are given in the VDI 6007-1. </p>
 <p>Same Test Case exists in VDI 6020. </p>
-</html>",  revisions = "<html>
- <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
- </html>"));
+</html>",  revisions="<html>
+<ul>
+<li><i>June 8, 2015 </i> by Marcus Fuchs:<br>Added unit testing command to annotations </li>
+</ul>
+<p><i>February 2014</i>, by Peter Remmen:</p>
+<p>Implemented </p>
+</html>"));
 end TestCase_2;

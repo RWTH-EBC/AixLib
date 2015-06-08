@@ -105,11 +105,17 @@ equation
       points={{-1,88},{3,88}},
       color={255,128,0},
       smooth=Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), experiment(
-      StopTime=5.184e+006,
-      Interval=3600,
-      __Dymola_Algorithm="Lsodar"),                                                                                                    __Dymola_experimentSetupOutput(events=
-          false),                                                                                                    Documentation(revisions = "<html>
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false,
+             extent = {{-100, -100}, {100, 100}}), graphics),
+             experiment(StopTime=5.184e+006, Interval=3600, __Dymola_Algorithm="Lsodar"),
+             __Dymola_Commands(file=
+                               "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Star/TestCase_5.mos"
+        "Simulate and plot"),
+             __Dymola_experimentSetupOutput(events=false),
+             Documentation(revisions="<html>
+<p><ul>
+ <li><i>June 8, 2015 </i> by Marcus Fuchs:<br/>Added unit testing command to annotations</li>
+ </ul></p>
  <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
  </html>", info = "<html>
  <p>Test Case 5 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to radiant and convective heat source for Type room S</p>

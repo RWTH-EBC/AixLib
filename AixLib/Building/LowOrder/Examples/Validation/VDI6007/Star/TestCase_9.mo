@@ -162,8 +162,18 @@ equation
       points={{-59.4,5.8},{-50.7,5.8},{-50.7,5.8},{-42.2,5.8}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-            -100},{100,100}}),                                                                           graphics), Icon(graphics), experiment(StopTime = 5.184e+006, Interval = 3600), experimentSetupOutput(events = false), Documentation(revisions = "<html>
+  annotation(Diagram(coordinateSystem(preserveAspectRatio=false,
+              extent={{-100,-100},{100,100}}),
+              graphics), Icon(graphics),
+             experiment(StopTime = 5.184e+006, Interval = 3600),
+             __Dymola_Commands(file=
+                               "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Star/TestCase_9.mos"
+        "Simulate and plot"),
+             experimentSetupOutput(events = false),
+             Documentation(revisions="<html>
+<p><ul>
+ <li><i>June 8, 2015 </i> by Marcus Fuchs:<br/>Added unit testing command to annotations</li>
+ </ul></p>
  <ul>
    <li><i>March, 2012&nbsp;</i>
           by Moritz Lauster:<br>
