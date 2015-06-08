@@ -132,18 +132,18 @@ public
         extent={{-8,-8},{8,8}},
         rotation=90,
         origin={-68,-42})));
-  Modelica.Blocks.Math.Gain AbscoeffA(k=(1 - splitfac)*g*Aw)
+  Modelica.Blocks.Math.Gain AbscoeffA(k=(1 - splitfac)*g*Aw) if withWindows
     "multiplication withabsorbtioncoefficient and area"
     annotation (Placement(transformation(extent={{-69,84},{-57,96}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow solarRadToHeatRad
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow solarRadToHeatRad if withWindows
     "absorbed solar radiation on wall" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-36,90})));
-  Modelica.Blocks.Math.Gain AbscoeffA1(k=splitfac*g*Aw)
+  Modelica.Blocks.Math.Gain AbscoeffA1(k=splitfac*g*Aw) if withWindows
     "multiplication withabsorbtioncoefficient and area"
     annotation (Placement(transformation(extent={{-69,58},{-57,70}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow solarRadToHeatConv
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow solarRadToHeatConv if withWindows
     "absorbed solar radiation on wall" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
