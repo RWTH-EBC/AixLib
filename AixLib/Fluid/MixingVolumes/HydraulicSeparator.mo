@@ -20,11 +20,15 @@ model HydraulicSeparator
     ///////////////////////////////////////////////////////////////////////////
     //Pipes including main body and flanges                                  //
     ///////////////////////////////////////////////////////////////////////////
-  AixLib.Fluid.FixedResistances.StaticPipe staticPipe(redeclare package Medium
-      =                                                                          Medium,D=DFlange, l=0.05,
+  AixLib.Fluid.FixedResistances.StaticPipe staticPipe_primary_return(
+    redeclare package Medium = Medium,
+    D=DFlange,
+    l=0.05,
     m_flow_small=1e-4)
     annotation (Placement(transformation(extent={{-28,-70},{-48,-50}})));
-  AixLib.Fluid.FixedResistances.StaticPipe staticPipe2(D=DFlange, l=0.05,
+  AixLib.Fluid.FixedResistances.StaticPipe staticPipe_primary_flow(
+    D=DFlange,
+    l=0.05,
     m_flow_small=1e-4,
     redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{-54,50},{-34,70}})));
@@ -43,11 +47,15 @@ model HydraulicSeparator
         rotation=90,
         origin={0,-26})));
 
-  AixLib.Fluid.FixedResistances.Pipe pipe(D=DFlange, l=0.05,
+  AixLib.Fluid.FixedResistances.Pipe pipe_secondary_flow(
+    D=DFlange,
+    l=0.05,
     m_flow_small=1e-4,
     redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{48,-70},{28,-50}})));
-  AixLib.Fluid.FixedResistances.Pipe pipe1(D=DFlange, l=0.05,
+  AixLib.Fluid.FixedResistances.Pipe pipe_secondary_return(
+    D=DFlange,
+    l=0.05,
     m_flow_small=1e-4,
     redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{28,70},{48,50}})));
@@ -106,43 +114,47 @@ equation
       points={{-11,0},{-16,0},{-16,84},{0,84},{0,90}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(thermalConductor.port_b, pipe1.heatport) annotation (Line(
+  connect(thermalConductor.port_b, pipe_secondary_return.heatport) annotation (
+      Line(
       points={{38,12},{38,55}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(thermalConductor.port_a, pipe.heatport) annotation (Line(
+  connect(thermalConductor.port_a, pipe_secondary_flow.heatport) annotation (
+      Line(
       points={{38,-8},{38,-55}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(staticPipe4.port_b, pipe1.port_a) annotation (Line(
+  connect(staticPipe4.port_b, pipe_secondary_return.port_a) annotation (Line(
       points={{0,36},{0,60},{28,60}},
       color={0,127,255},
       smooth=Smooth.None));
-  connect(staticPipe5.port_a, pipe.port_b) annotation (Line(
+  connect(staticPipe5.port_a, pipe_secondary_flow.port_b) annotation (Line(
       points={{0,-36},{0,-60},{28,-60}},
       color={0,127,255},
       smooth=Smooth.None));
-  connect(staticPipe2.port_b, pipe1.port_a) annotation (Line(
+  connect(staticPipe_primary_flow.port_b, pipe_secondary_return.port_a)
+    annotation (Line(
       points={{-34,60},{28,60}},
       color={0,127,255},
       smooth=Smooth.None));
-  connect(staticPipe.port_a, pipe.port_b) annotation (Line(
+  connect(staticPipe_primary_return.port_a, pipe_secondary_flow.port_b)
+    annotation (Line(
       points={{-28,-60},{28,-60}},
       color={0,127,255},
       smooth=Smooth.None));
-  connect(port_a_primary, staticPipe2.port_a) annotation (Line(
+  connect(port_a_primary, staticPipe_primary_flow.port_a) annotation (Line(
       points={{-104,60},{-54,60}},
       color={0,127,255},
       smooth=Smooth.None));
-  connect(pipe1.port_b, port_b_secondary) annotation (Line(
+  connect(pipe_secondary_return.port_b, port_b_secondary) annotation (Line(
       points={{48,60},{104,60}},
       color={0,127,255},
       smooth=Smooth.None));
-  connect(port_a_secondary, pipe.port_a) annotation (Line(
+  connect(port_a_secondary, pipe_secondary_flow.port_a) annotation (Line(
       points={{104,-60},{48,-60}},
       color={0,127,255},
       smooth=Smooth.None));
-  connect(staticPipe.port_b, port_b_primary) annotation (Line(
+  connect(staticPipe_primary_return.port_b, port_b_primary) annotation (Line(
       points={{-48,-60},{-104,-60}},
       color={0,127,255},
       smooth=Smooth.None));
@@ -195,10 +207,9 @@ equation
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <p>A Hydraulic Separator should have a diameter that allows a maximum velocity of 0.2 m/s (vmaxExchange) for the water exchanged between the top and bottom layer in order to prevent turbulences. The diameter of the main body is therefore calculated with the help of the maximum VolumeFlowRate in either primary or secondary circuit. This is done by the model itself. The height of the Hydraulic Separator is calculated according to VDMA 24770 also depending on the maximum VolumeFlowRate. The model therefore simulates a Hydraulic Separator which is suitable for the circuit used. The size of the flanges has to be set by the user. </p>
 <p><br><b><font style=\"color: #008000; \">References</font></b></p>
-<p><a href=\"http://www.google.de/url?sa=t&rct=j&q=&esrc=s&source=web&cd=2&cad=rja&uact=8&ved=0CCkQFjAB&url=http</p>A</p>F</p>Fwww.vaillant.pl</p>Fstepone</p>Fdata</p>Fdownloads</p>Fb6</p>F34</p>F00</p>FSprzeglo_hydr_wg_VDMA.pdf&ei=R9lHVJraO4eNywO9yoBo&usg=AFQjCNFSBhKLlP0X4q2TfQZtRlXd_a4F6A&bvm=bv.77880786,d.bGQ\">VDMA Richtlinie 24770</a>&percnt;3 </p>
 <p><a href=\"http://www.sinusverteiler.com/files/ausgleich_von_last_und_leistung_01.pdf\">Catalogue Sinusverteiler (Explanation of design and function)</a> </p>
-<h4><span style=\"color:#008000\">Example Results</span></h4>
-<p><a href=\"AixLib.HVAC.HydraulicSeparator.Examples.HydraulicSeparator\">ExampleHydraulicSeparator</a> </p>
+<p><b><font style=\"color: #008000; \">Example Results</font></b> </p>
+<p><a href=\"AixLib.Fluid.MixingVolumes.Examples.HydraulicSeparator\">AixLib.Fluid.MixingVolumes.Examples.HydraulicSeparator</a></p>
 </html>",
         revisions="<html>
 <p>26.11.2014, by <i>Roozbeh Sangi</i>: implemented </p>

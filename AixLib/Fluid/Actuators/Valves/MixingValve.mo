@@ -17,12 +17,14 @@ model MixingValve
     ///////////////////////////////////////////////////////////////////////////
     //Valves                                                                 //
     ///////////////////////////////////////////////////////////////////////////
-  AixLib.Fluid.Actuators.Valves.SimpleValve
-                                 simpleValve1(Kvs=Kvs, m_flow_small=1e-4,
+  AixLib.Fluid.Actuators.Valves.SimpleValve Valve(
+    Kvs=Kvs,
+    m_flow_small=1e-4,
     redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
-  AixLib.Fluid.Actuators.Valves.SimpleValve
-                                 simpleValve2(Kvs=Kvs, m_flow_small=1e-4,
+  AixLib.Fluid.Actuators.Valves.SimpleValve Valve2(
+    Kvs=Kvs,
+    m_flow_small=1e-4,
     redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{-44,-84},{-24,-64}})));
 
@@ -38,7 +40,7 @@ model MixingValve
         extent={{-20,-20},{20,20}},
         rotation=0,
         origin={-80,-70})));
-  Modelica.Blocks.Sources.Constant Constant1(k=1)
+  Modelica.Blocks.Sources.Constant Constant(k=1)
     "To compute opening of second valve"
     annotation (Placement(transformation(extent={{16,-38},{-4,-18}})));
   Modelica.Blocks.Math.Add add(k1=-1) annotation (Placement(transformation(
@@ -142,26 +144,26 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(minLimiter.y, filter.u) annotation (Line(
-      points={{32.7,51},{36.35,51},{36.35,51},{38.6,51}},
+      points={{32.7,51},{38.6,51}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(opening, minLimiter.u) annotation (Line(
       points={{12,88},{14,88},{14,51},{16.6,51}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(simpleValve1.opening, opening_actual) annotation (Line(
+  connect(Valve.opening, opening_actual) annotation (Line(
       points={{-60,8},{-60,22},{82,22}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(port_3, simpleValve1.port_a) annotation (Line(
+  connect(port_3, Valve.port_a) annotation (Line(
       points={{0,100},{0,58},{-76,58},{-76,0},{-70,0}},
       color={0,127,255},
       smooth=Smooth.None));
-  connect(simpleValve2.port_a, port_1) annotation (Line(
+  connect(Valve2.port_a, port_1) annotation (Line(
       points={{-44,-74},{-100,-74},{-100,0}},
       color={0,127,255},
       smooth=Smooth.None));
-  connect(add.y, simpleValve2.opening) annotation (Line(
+  connect(add.y, Valve2.opening) annotation (Line(
       points={{-34,-51},{-34,-66}},
       color={0,0,127},
       smooth=Smooth.None));
@@ -169,15 +171,15 @@ equation
       points={{-40,-28},{-40,22},{82,22}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(add.u2, Constant1.y) annotation (Line(
+  connect(add.u2, Constant.y) annotation (Line(
       points={{-28,-28},{-5,-28}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(simpleValve1.port_b, port_2) annotation (Line(
+  connect(Valve.port_b, port_2) annotation (Line(
       points={{-50,0},{100,0}},
       color={0,127,255},
       smooth=Smooth.None));
-  connect(simpleValve2.port_b, port_2) annotation (Line(
+  connect(Valve2.port_b, port_2) annotation (Line(
       points={{-24,-74},{58,-74},{58,0},{100,0}},
       color={0,127,255},
       smooth=Smooth.None));
