@@ -54,9 +54,14 @@ record ZoneBaseRecord "the used record standard"
     "Outer wall's coefficient of heat transfer (inner side)"                                                                   annotation(Dialog(tab = "Outer walls", descriptionLabel = false, enable = withOuterwalls));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaowo = 20
     "Outer wall's coefficient of heat transfer (outer side)"                                                                  annotation(Dialog(tab = "Outer walls", descriptionLabel = false, enable = withOuterwalls));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaConvWinInner=3.16
+    "Coefficient of convective heat transfer of the window (inner side)" annotation(Dialog(tab="Windows", enable = withWindows));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaConvWinOuter=16.37
+    "Coefficient of convective heat transfer of the window (outer side)" annotation(Dialog(tab="Windows", enable = withWindows));
   parameter Modelica.SIunits.Emissivity epso = 0.9 "Emissivity" annotation(Dialog(tab = "Outer walls", descriptionLabel = false, enable = withOuterwalls));
   parameter Real aowo = 0.7
     "Outer wall's coefficient of absorption (outer side)"                         annotation(Dialog(tab = "Outer walls", descriptionLabel = false, enable = withOuterwalls));
+  parameter Real awin=0.0 "Coefficient of absorption of the window" annotation(Dialog(tab="Windows", enable = withWindows));
   parameter Integer n = 4 "Number of orientations (without ground)" annotation(Dialog(tab = "Outer walls", enable = withOuterwalls));
   parameter Real weightfactorswall[n] = {0.5, 0.2, 0.2, 0.1}
     "Weightfactors of the walls (Aj/Atot)"                                                          annotation(Dialog(tab = "Outer walls", enable = withOuterwalls));
@@ -101,6 +106,10 @@ record ZoneBaseRecord "the used record standard"
     "additional ACH value when overheating appears, transition range in K"                                                annotation(Dialog(tab = "Room air", group = "ACH", descriptionLabel = false));
   parameter Real maxSummerACH[3] = {1.0, 273.15 + 10, 273.15 + 17}
     "additional ACH in summer, Tmin, Tmax"                                                                annotation(Dialog(tab = "Room air", group = "ACH", descriptionLabel = false));
+  parameter Real winterReduction[3]={0.2,273.15,273.15 + 10}
+    "reduction factor of userACH for cold weather." annotation (Dialog(tab="Room air", group="ACH", descriptionLabel = false));
+  parameter Modelica.SIunits.ThermalResistance RWin=0.017727777777
+    "Resistor Window" annotation(Dialog(tab="Windows", enable = withWindows));
   annotation(Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This is the base definition is zone records used in <a href=\"Cities.BuildingPhysics.ThermalZone\">Cities.BuildingPhysics.ThermalZone</a>. All necessary parameters are defined here. Most values should be overwritten for a specific building, some are default values that might be appropriate in most cases. However, fell free to overwrite them in your own records.</p>
