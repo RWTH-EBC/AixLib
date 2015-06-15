@@ -1,5 +1,5 @@
 within AixLib.Building.LowOrder.Examples.Validation.VDI6007.Linear;
-model TestCase_5
+model TestCase5
   extends Modelica.Icons.Example;
   output Modelica.SIunits.Conversions.NonSIunits.Temperature_degC referenceTemp[1];
   output Modelica.SIunits.Temp_K simulationTemp;
@@ -11,13 +11,14 @@ model TestCase_5
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow personsRadiative annotation(Placement(transformation(extent = {{10, -100}, {30, -80}})));
   Modelica.Blocks.Sources.CombiTimeTable innerLoads(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableOnFile = false, table = [0, 0, 0, 0; 3600, 0, 0, 0; 7200, 0, 0, 0; 10800, 0, 0, 0; 14400, 0, 0, 0; 18000, 0, 0, 0; 21600, 0, 0, 0; 25200, 0, 0, 0; 25200, 80, 80, 200; 28800, 80, 80, 200; 32400, 80, 80, 200; 36000, 80, 80, 200; 39600, 80, 80, 200; 43200, 80, 80, 200; 46800, 80, 80, 200; 50400, 80, 80, 200; 54000, 80, 80, 200; 57600, 80, 80, 200; 61200, 80, 80, 200; 61200, 0, 0, 0; 64800, 0, 0, 0; 72000, 0, 0, 0; 75600, 0, 0, 0; 79200, 0, 0, 0; 82800, 0, 0, 0; 86400, 0, 0, 0], columns = {2, 3, 4}) annotation(Placement(transformation(extent = {{-58, -72}, {-38, -52}})));
   BaseClasses.ReducedOrderModel.ReducedOrderModelVDI
-                                                  reducedModel(                                        alphaiwi = 2.2, epsi = 1, epso = 1, T0all(displayUnit = "K") = 295.15,         splitfac = 0.09, R1i = 0.000595515, Ai = 75.5, epsw = 1, g = 1,                                         Ao = 10.5,
+                                                  reducedModel(                                                        epsi = 1, epso = 1, T0all(displayUnit = "K") = 295.15,         splitfac = 0.09, R1i = 0.000595515, Ai = 75.5, epsw = 1, g = 1,                                         Ao = 10.5,
     C1i=1.48362e+007,
     RRest=0.042768721,
     R1o=0.004367913,
     C1o=1.6008e+006,
     withWindows=true,
-    Aw=7)                                                                                                     annotation(Placement(transformation(extent = {{48, 26}, {82, 66}})));
+    Aw=7,
+    alphaiwi=2.23642384)                                                                                                     annotation(Placement(transformation(extent = {{48, 26}, {82, 66}})));
   Modelica.Blocks.Sources.CombiTimeTable outdoorTemp(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, columns = {2, 3, 4}, table = [0, 291.95, 0, 0; 3600, 291.95, 0, 0; 3600, 290.25, 0, 0; 7200, 290.25, 0, 0; 7200, 289.65, 0, 0; 10800, 289.65, 0, 0; 10800, 289.25, 0, 0; 14400, 289.25, 0, 0; 14400, 289.65, 0, 0; 18000, 289.65, 0, 0; 18000, 290.95, 0, 0; 21600, 290.95, 0, 0; 21600, 293.45, 0, 0; 25200, 293.45, 0, 0; 25200, 295.95, 0, 0; 28800, 295.95, 0, 0; 28800, 297.95, 0, 0; 32400, 297.95, 0, 0; 32400, 299.85, 0, 0; 36000, 299.85, 0, 0; 36000, 301.25, 0, 0; 39600, 301.25, 0, 0; 39600, 302.15, 0, 0; 43200, 302.15, 0, 0; 43200, 302.85, 0, 0; 46800, 302.85, 0, 0; 46800, 303.55, 0, 0; 50400, 303.55, 0, 0; 50400, 304.05, 0, 0; 54000, 304.05, 0, 0; 54000, 304.15, 0, 0; 57600, 304.15, 0, 0; 57600, 303.95, 0, 0; 61200, 303.95, 0, 0; 61200, 303.25, 0, 0; 64800, 303.25, 0, 0; 64800, 302.05, 0, 0; 68400, 302.05, 0, 0; 68400, 300.15, 0, 0; 72000, 300.15, 0, 0; 72000, 297.85, 0, 0; 75600, 297.85, 0, 0; 75600, 296.05, 0, 0; 79200, 296.05, 0, 0; 79200, 295.05, 0, 0; 82800, 295.05, 0, 0; 82800, 294.05, 0, 0; 86400, 294.05, 0, 0]) annotation(Placement(transformation(extent = {{-62, 22}, {-42, 42}})));
   Modelica.Blocks.Sources.CombiTimeTable windowRad(
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
@@ -107,18 +108,19 @@ equation
  <li><i>May 28, 2015 </i> by Marcus Fuchs:<br/>Added unit testing command to annotations</li>
  </ul></p>
  <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
- </html>", info = "<html>
- <p>Test Case 5 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to radiant and convective heat source for Type room S</p>
- <ul>
- <li>daily input for outdoor temperature </li>
- <li>no shortwave radiation on the outer wall</li>
- <li>shortwave radiation through the window</li>
- <li>sunblind is closed at &GT;100W/m&sup2;, behind the window</li>
- <li>no longwave radiation exchange between outer wall, window and ambience</li>
- </ul>
- <p>Reference: Room air temperature</p>
- <p>Variable path: <code>reducedModel.airload.T</code></p>
- <p><br><br>All values are given in the VDI 6007-1.</p>
- <p>Same Test Case exists in VDI 6020.</p>
- </html>"), Icon(graphics));
-end TestCase_5;
+ </html>", info="<html>
+<p>Test Case 5 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to radiant and convective heat source for Type room S </p>
+<ul>
+<li>daily input for outdoor temperature </li>
+<li>no shortwave radiation on the outer wall </li>
+<li>shortwave radiation through the window </li>
+<li>sunblind is closed at &GT;100W/m&sup2;, behind the window </li>
+<li>no longwave radiation exchange between outer wall, window and ambience </li>
+</ul>
+<p>Reference: Room air temperature </p>
+<p>Variable path: <code>reducedModel.airload.T</code></p>
+<p>Maximum deviation: 0.2 K</p>
+<p>All values are given in the VDI 6007-1. </p>
+<p>Same Test Case exists in VDI 6020. </p>
+</html>"),  Icon(graphics));
+end TestCase5;

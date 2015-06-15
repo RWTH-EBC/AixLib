@@ -1,5 +1,5 @@
 within AixLib.Building.LowOrder.Examples.Validation.VDI6007.Star;
-model TestCase_3
+model TestCase3
   extends Modelica.Icons.Example;
   output Modelica.SIunits.Conversions.NonSIunits.Temperature_degC referenceTemp[1];
   output Modelica.SIunits.Temp_K simulationTemp;
@@ -68,4 +68,4 @@ equation
             __Dymola_experimentSetupOutput(events = false),
             Diagram(coordinateSystem(preserveAspectRatio = false,
             extent = {{-100, -100}, {100, 100}}), graphics));
-end TestCase_3;
+end TestCase3;

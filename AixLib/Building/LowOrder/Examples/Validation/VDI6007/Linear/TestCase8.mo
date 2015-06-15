@@ -1,5 +1,5 @@
 within AixLib.Building.LowOrder.Examples.Validation.VDI6007.Linear;
-model TestCase_8
+model TestCase8
   extends Modelica.Icons.Example;
   output Modelica.SIunits.Conversions.NonSIunits.Temperature_degC referenceTemp[1];
   output Modelica.SIunits.Temp_K simulationTemp;
@@ -7,12 +7,13 @@ model TestCase_8
   Modelica.Blocks.Sources.Constant infiltrationTemp(k = 22) annotation(Placement(transformation(extent = {{16, 14}, {26, 24}})));
   Utilities.HeatTransfer.HeatToStar HeatTorStar(A = 2) annotation(Placement(transformation(extent = {{42, -98}, {62, -78}})));
   BaseClasses.ReducedOrderModel.ReducedOrderModelVDI
-                                                  reducedModel(epsi = 1, epso = 1, T0all(displayUnit = "K") = 295.15,                                        Ai = 60.5, splitfac = 0.09, Aw = 14, epsw = 1, g = 1,                                        Ao = 25.5, alphaiwi = 2.1,
+                                                  reducedModel(epsi = 1, epso = 1, T0all(displayUnit = "K") = 295.15,                                        Ai = 60.5, splitfac = 0.09, Aw = 14, epsw = 1, g = 1,                                        Ao = 25.5,
     R1i=0.000668640,
     C1i=1.23912e+007,
     RRest=0.020705927,
     R1o=0.001736253,
-    C1o=5.2599e+006)                                                                                                     annotation(Placement(transformation(extent = {{48, 26}, {82, 66}})));
+    C1o=5.2599e+006,
+    alphaiwi=2.1214876)                                                                                                     annotation(Placement(transformation(extent = {{48, 26}, {82, 66}})));
   Modelica.Blocks.Sources.CombiTimeTable outdoorTemp(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, columns = {2, 3, 4}, table = [0, 291.95, 0, 0; 3600, 291.95, 0, 0; 3600, 290.25, 0, 0; 7200, 290.25, 0, 0; 7200, 289.65, 0, 0; 10800, 289.65, 0, 0; 10800, 289.25, 0, 0; 14400, 289.25, 0, 0; 14400, 289.65, 0, 0; 18000, 289.65, 0, 0; 18000, 290.95, 0, 0; 21600, 290.95, 0, 0; 21600, 293.45, 0, 0; 25200, 293.45, 0, 0; 25200, 295.95, 0, 0; 28800, 295.95, 0, 0; 28800, 297.95, 0, 0; 32400, 297.95, 0, 0; 32400, 299.85, 0, 0; 36000, 299.85, 0, 0; 36000, 301.25, 0, 0; 39600, 301.25, 0, 0; 39600, 302.15, 0, 0; 43200, 302.15, 0, 0; 43200, 302.85, 0, 0; 46800, 302.85, 0, 0; 46800, 303.55, 0, 0; 50400, 303.55, 0, 0; 50400, 304.05, 0, 0; 54000, 304.05, 0, 0; 54000, 304.15, 0, 0; 57600, 304.15, 0, 0; 57600, 303.95, 0, 0; 61200, 303.95, 0, 0; 61200, 303.25, 0, 0; 64800, 303.25, 0, 0; 64800, 302.05, 0, 0; 68400, 302.05, 0, 0; 68400, 300.15, 0, 0; 72000, 300.15, 0, 0; 72000, 297.85, 0, 0; 75600, 297.85, 0, 0; 75600, 296.05, 0, 0; 79200, 296.05, 0, 0; 79200, 295.05, 0, 0; 82800, 295.05, 0, 0; 82800, 294.05, 0, 0; 86400, 294.05, 0, 0]) annotation(Placement(transformation(extent={{-88,6},
             {-68,26}})));
   Utilities.Sources.PrescribedSolarRad Quelle_Wand(n = 5) annotation(Placement(transformation(extent = {{-60, 36}, {-40, 56}})));
@@ -139,19 +140,20 @@ equation
  <li><i>May 28, 2015 </i> by Marcus Fuchs:<br/>Added unit testing command to annotations</li>
  </ul></p>
  <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
- </html>", info = "<html>
- <p>Test Case 8 of the VDI6007:: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to mixed inner and outer heat sources for Type Room S:</p>
- <p>Based on Test Case 5</p>
- <ul>
- <li>Second outer wall to the west</li>
- <li>shortwave radiation on the outer wall</li>
- <li>shortwave radiation through the windows</li>
- <li>Shutter cloeses &GT;100W/m&sup2;</li>
- <li>no longwave radiation heat exchange (special EqAirTemp see: EqAirTemp_TestCase_8)</li>
- </ul>
- <p><br>Reference: Room air temperature</p>
- <p>Variable path: <code>reducedModel.airload.T</code></p>
- <p><br><br>All values are given in the VDI 6007-1.</p>
- <p>Same Test Case exists in VDI 6020.</p>
- </html>"));
-end TestCase_8;
+ </html>", info="<html>
+<p>Test Case 8 of the VDI6007:: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to mixed inner and outer heat sources for Type Room S: </p>
+<p>Based on Test Case 5 </p>
+<ul>
+<li>Second outer wall to the west </li>
+<li>shortwave radiation on the outer wall </li>
+<li>shortwave radiation through the windows </li>
+<li>Shutter cloeses &GT;100W/m&sup2; </li>
+<li>no longwave radiation heat exchange (special EqAirTemp see: EqAirTemp_TestCase_8) </li>
+</ul>
+<p><br>Reference: Room air temperature </p>
+<p>Variable path: <code>reducedModel.airload.T</code></p>
+<p>Maximum deviation: 0.2 K</p>
+<p>All values are given in the VDI 6007-1. </p>
+<p>Same Test Case exists in VDI 6020. </p>
+</html>"));
+end TestCase8;

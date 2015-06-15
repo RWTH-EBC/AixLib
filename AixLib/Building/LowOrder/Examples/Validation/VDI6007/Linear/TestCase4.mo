@@ -1,5 +1,5 @@
-within AixLib.Building.LowOrder.Examples.Validation.VDI6007.Star;
-model TestCase_4
+within AixLib.Building.LowOrder.Examples.Validation.VDI6007.Linear;
+model TestCase4
   extends Modelica.Icons.Example;
   output Modelica.SIunits.Conversions.NonSIunits.Temperature_degC referenceTemp[1];
   output Modelica.SIunits.Temp_K simulationTemp;
@@ -7,25 +7,19 @@ model TestCase_4
   Modelica.Blocks.Sources.Constant infiltrationTemp(k = 22) annotation(Placement(transformation(extent = {{-46, -10}, {-26, 10}})));
   Modelica.Blocks.Sources.Constant infiltrationRate(k = 0) annotation(Placement(transformation(extent = {{-6, -40}, {14, -20}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machinesRadiative annotation(Placement(transformation(extent = {{10, -68}, {30, -48}})));
-  BaseClasses.ReducedOrderModel.ReducedOrderModelStar reducedModel(
-    Ao=10.5,
-    Aw=0.000000001,
-    Ai=75.5,
-    epsi=1,
-    epso=1,
-    epsw=1,
-    g=1,
-    alphaiwi=2.2,
-    alphaowi=2.7,
-    splitfac=0.09,
-    withWindows=false,
-    RRest=0.043120170,
-    R1o=0.004047899,
-    C1o=4.78618e+004,
-    R1i=0.003237138,
-    C1i=7.297100e+006)
-    annotation (Placement(transformation(extent={{10,10},{44,44}})));
-  Modelica.Blocks.Sources.CombiTimeTable tableMachines(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableName = "UserProfilesOffice", fileName = "./Tables/J1615/UserProfilesOffice.txt", tableOnFile = false, table = [0, 0; 3600, 0; 7200, 0; 10800, 0; 14400, 0; 18000, 0; 21600, 0; 21600, 1000; 25200, 1000; 28800, 1000; 32400, 1000; 36000, 1000; 39600, 1000; 43200, 1000; 46800, 1000; 50400, 1000; 54000, 1000; 57600, 1000; 61200, 1000; 64800, 1000; 64800, 0; 68400, 0; 72000, 0; 75600, 0; 79200, 0; 82800, 0; 86400, 0], columns = {2}) annotation(Placement(transformation(extent = {{-22, -65}, {-8, -51}})));
+  BaseClasses.ReducedOrderModel.ReducedOrderModelVDI                reducedModel(Ao = 10.5, Aw = 0.000000001, Ai = 75.5, epsi = 1, epso = 1, epsw = 1, g = 1,                 alphaowi = 2.7, splitfac = 0.09, withWindows = false,                                                             R1i = 0.003237138, C1i = 7.297100e+006,
+    RRest=0.043140385,
+    R1o=0.004049352,
+    C1o=4.79e+004,
+    alphaiwi=2.23642384)                                                                                                     annotation(Placement(transformation(extent = {{10, 10}, {44, 44}})));
+  Modelica.Blocks.Sources.CombiTimeTable tableMachines(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableName = "UserProfilesOffice", fileName = "./Tables/J1615/UserProfilesOffice.txt", tableOnFile = false,                                                                                                    columns = {2},
+    table=[0,0; 3600,0; 3600,0; 7200,0; 7200,0; 10800,0; 10800,0; 14400,0; 14400,
+        0; 18000,0; 18000,0; 21600,0; 21600,1000; 25200,1000; 25200,1000; 28800,
+        1000; 28800,1000; 32400,1000; 32400,1000; 36000,1000; 36000,1000; 39600,
+        1000; 39600,1000; 43200,1000; 43200,1000; 46800,1000; 46800,1000; 50400,
+        1000; 50400,1000; 54000,1000; 54000,1000; 57600,1000; 57600,1000; 61200,
+        1000; 61200,1000; 64800,1000; 64800,0; 68400,0; 68400,0; 72000,0; 72000,
+        0; 75600,0; 75600,0; 79200,0; 79200,0; 82800,0; 82800,0; 86400,0])                                                                                                     annotation(Placement(transformation(extent = {{-22, -65}, {-8, -51}})));
   Utilities.HeatTransfer.HeatToStar HeatToStar(A = 2, eps = 1) annotation(Placement(transformation(extent = {{36, -68}, {56, -48}})));
   Modelica.Blocks.Sources.CombiTimeTable reference(tableName = "UserProfilesOffice", fileName = "./Tables/J1615/UserProfilesOffice.txt", tableOnFile = false, columns = {2},                                                                                                    extrapolation = Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
     table=[3600,22; 7200,22; 10800,22; 14400,22; 18000,22; 21600,22; 25200,
@@ -61,27 +55,28 @@ equation
       smooth=Smooth.None));
   annotation(Documentation(revisions="<html>
 <p><ul>
- <li><i>June 8, 2015 </i> by Marcus Fuchs:<br/>Added unit testing command to annotations</li>
+ <li><i>May 28, 2015 </i> by Marcus Fuchs:<br/>Added unit testing command to annotations</li>
  </ul></p>
  <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
- </html>", info = "<html>
- <p>Test Case 4 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to a radiant heat source for Type room L</p>
- <ul>
- <li>constant outdoor temperature</li>
- <li>no shortwave radiation on the outer wall</li>
- <li>no shortwave radiation through the window</li>
- <li>no longwave radiation exchange between outer wall, window and ambience</li>
- </ul>
- <p>Reference: Room air temperature</p>
- <p>Variable path: <code>reducedModel.airload.T</code></p>
- <p><br><br>All values are given in the VDI 6007-1.</p>
- <p>Same Test Case exists in VDI 6020.</p>
- </html>"), Diagram(coordinateSystem(preserveAspectRatio = false,
+ </html>", info="<html>
+<p>Test Case 4 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to a radiant heat source for Type room L </p>
+<ul>
+<li>constant outdoor temperature </li>
+<li>no shortwave radiation on the outer wall </li>
+<li>no shortwave radiation through the window </li>
+<li>no longwave radiation exchange between outer wall, window and ambience </li>
+</ul>
+<p>Reference: Room air temperature </p>
+<p>Variable path: <code>reducedModel.airload.T</code></p>
+<p>Maximum deviation: 0.3 K</p>
+<p>All values are given in the VDI 6007-1. </p>
+<p>Same Test Case exists in VDI 6020. </p>
+</html>"),   Diagram(coordinateSystem(preserveAspectRatio = false,
              extent = {{-100, -100}, {100, 100}}), graphics),
              Icon(graphics),
              experiment(StopTime = 5.184e+006, Interval = 3600),
              __Dymola_Commands(file=
-                               "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Star/TestCase_4.mos"
+                               "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Linear/TestCase_4.mos"
         "Simulate and plot"),
              __Dymola_experimentSetupOutput(events = false));
-end TestCase_4;
+end TestCase4;

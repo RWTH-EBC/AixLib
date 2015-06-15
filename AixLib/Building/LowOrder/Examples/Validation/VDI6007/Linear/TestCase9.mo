@@ -1,5 +1,5 @@
 within AixLib.Building.LowOrder.Examples.Validation.VDI6007.Linear;
-model TestCase_9
+model TestCase9
   extends Modelica.Icons.Example;
   output Modelica.SIunits.Conversions.NonSIunits.Temperature_degC referenceTemp[1];
   output Modelica.SIunits.Temp_K simulationTemp;
@@ -13,12 +13,13 @@ model TestCase_9
             {0,22}})));
   Components.Weather.Sunblind sunblind(Imax = 100, gsunblind = {1, 1, 0.15, 0.15}) annotation(Placement(transformation(extent = {{-20, 62}, {0, 82}})));
   BaseClasses.ReducedOrderModel.ReducedOrderModelVDI
-                                                  reducedModel(Ao = 25.5, Aw = 14, Ai = 60.5, epsi = 1, epso = 1, epsw = 1, g = 1, splitfac = 0.09, T0all(displayUnit = "degC"),                                                                               alphaiwi = 2.1, alphaowi = 2.7,
+                                                  reducedModel(Ao = 25.5, Aw = 14, Ai = 60.5, epsi = 1, epso = 1, epsw = 1, g = 1, splitfac = 0.09, T0all(displayUnit = "degC"),
     R1i=0.000668640,
     C1i=1.23912e+007,
     RRest=0.020705927,
     R1o=0.001736253,
-    C1o=5.2599e+006)                                                                                                     annotation(Placement(transformation(extent = {{38, 8}, {80, 46}})));
+    C1o=5.2599e+006,
+    alphaiwi=2.1214876)                                                                                                   annotation(Placement(transformation(extent = {{38, 8}, {80, 46}})));
   Utilities.Sources.PrescribedSolarRad varRad3(n = 4) annotation(Placement(transformation(extent = {{-58, 63}, {-38, 83}})));
   Utilities.Sources.PrescribedSolarRad varRad1(n = 4) annotation(Placement(transformation(extent={{-64,23},
             {-44,43}})));
@@ -148,15 +149,16 @@ equation
           by Moritz Lauster:<br>
           Implemented</li>
  </ul>
- </html>", info = "<html>
- <p>Test Case 9 of the VDI6007:: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to mixed inner and outer heat sources for Type Room S:</p>
- <p>Based on Test Case 8</p>
- <ul>
- <li>longwave radiation heat exchange is taken into account</li>
- </ul>
- <p><br>Reference: Room air temperature</p>
- <p>Variable path: <code>reducedModel.airload.T</code></p>
- <p><br><br>All values are given in the VDI 6007-1.</p>
- <p>Same Test Case exists in VDI 6020.</p>
- </html>"));
-end TestCase_9;
+ </html>", info="<html>
+<p>Test Case 9 of the VDI6007:: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to mixed inner and outer heat sources for Type Room S: </p>
+<p>Based on Test Case 8 </p>
+<ul>
+<li>longwave radiation heat exchange is taken into account </li>
+</ul>
+<p><br>Reference: Room air temperature </p>
+<p>Variable path: <code>reducedModel.airload.T</code></p>
+<p>Maximum deviation: 0.2 K</p>
+<p>All values are given in the VDI 6007-1.</p>
+<p>Same Test Case exists in VDI 6020. </p>
+</html>"));
+end TestCase9;

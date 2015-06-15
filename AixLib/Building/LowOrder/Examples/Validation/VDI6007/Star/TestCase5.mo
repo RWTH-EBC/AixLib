@@ -1,5 +1,5 @@
 within AixLib.Building.LowOrder.Examples.Validation.VDI6007.Star;
-model TestCase_5
+model TestCase5
   extends Modelica.Icons.Example;
   output Modelica.SIunits.Conversions.NonSIunits.Temperature_degC referenceTemp[1];
   output Modelica.SIunits.Temp_K simulationTemp;
@@ -131,4 +131,4 @@ equation
  <p><br><br>All values are given in the VDI 6007-1.</p>
  <p>Same Test Case exists in VDI 6020.</p>
  </html>"), Icon(graphics));
-end TestCase_5;
+end TestCase5;

@@ -1,5 +1,5 @@
 within AixLib.Building.LowOrder.Examples.Validation.VDI6007.Star;
-model TestCase_11
+model TestCase11
   extends Modelica.Icons.Example;
   output Real referenceLoad[1];
   output Real simulationLoad;
@@ -100,4 +100,4 @@ equation
  <p>Variable path: <code>sumHeatLoad.y</code></p>
  <p><br><br>All values are given in the VDI 6007-1.</p>
  </html>"));
-end TestCase_11;
+end TestCase11;

@@ -1,5 +1,5 @@
 within AixLib.Building.LowOrder.Examples.Validation.VDI6007.Star;
-model TestCase_7
+model TestCase7
   extends Modelica.Icons.Example;
   output Real referenceLoad[1];
   output Real simulationLoad;
@@ -23,7 +23,8 @@ model TestCase_7
     Ai=75.5,
     RRest=0.042748777,
     R1o=0.004366222,
-    Ao=10.5) annotation (Placement(transformation(extent={{44,38},{78,78}})));
+    Ao=10.5,
+    Vair=0.01) annotation (Placement(transformation(extent={{44,38},{78,78}})));
   Utilities.Sources.HeaterCooler.IdealHeaterCoolerVar1 idealHeaterCoolerVar1_1(Q_flow_heat = 1, Q_flow_cooler = 1, h_cooler = 0, TN_heater = 1, TN_cooler = 1, h_heater = 500, l_cooler = -500, KR_heater = 1000, KR_cooler = 1000) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin = {-26, -20})));
   Modelica.Blocks.Sources.CombiTimeTable setTemp(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, columns = {2, 3}, table = [0, 295.15, 295.2; 3600, 295.1, 295.2; 7200, 295.1, 295.2; 10800, 295.1, 295.2; 14400, 295.1, 295.2; 18000, 295.1, 295.2; 21600, 295.1, 295.2; 25200, 300.1, 300.2; 28800, 300.1, 300.2; 32400, 300.1, 300.2; 36000, 300.1, 300.2; 39600, 300.1, 300.2; 43200, 300.1, 300.2; 46800, 300.1, 300.2; 50400, 300.1, 300.2; 54000, 300.1, 300.2; 57600, 300.1, 300.2; 61200, 300.1, 300.2; 64800, 300.1, 300.2; 68400, 295.1, 295.2; 72000, 295.1, 295.2; 75600, 295.1, 295.2; 79200, 295.1, 295.2; 82800, 295.1, 295.2; 86400, 295.1, 295.2]) annotation(Placement(transformation(extent = {{-80, -30}, {-60, -10}})));
   Modelica.Blocks.Sources.CombiTimeTable reference(tableName = "UserProfilesOffice", fileName = "./Tables/J1615/UserProfilesOffice.txt", tableOnFile = false, columns = {2, 3}, table = [3600, 22, 0; 7200, 22, 0; 10800, 22, 0; 14400, 22, 0; 18000, 22, 0; 21600, 22, 0; 25200, 25.5, -500; 28800, 25.8, -500; 32400, 26.1, -500; 36000, 26.5, -500; 39600, 26.8, -500; 43200, 27, -481; 46800, 27, -426; 50400, 27, -374; 54000, 27, -324; 57600, 27, -276; 61200, 27, -230; 64800, 27, -186; 68400, 22.7, 500; 72000, 22.6, 500; 75600, 22.4, 500; 79200, 22.3, 500; 82800, 22.2, 500; 86400, 22, 500; 781200, 25.1, 500; 784800, 25, 500; 788400, 24.8, 500; 792000, 24.7, 500; 795600, 24.6, 500; 799200, 24.4, 500; 802800, 27, 142; 806400, 27, 172; 810000, 27, 201; 813600, 27, 228; 817200, 27, 254; 820800, 27, 278; 824400, 27, 302; 828000, 27, 324; 831600, 27, 345; 835200, 27, 366; 838800, 27, 385; 842400, 27, 404; 846000, 25.9, 500; 849600, 25.8, 500; 853200, 25.6, 500; 856800, 25.5, 500; 860400, 25.4, 500; 864000, 25.2, 500; 5101200, 25.1, 500; 5104800, 25, 500; 5108400, 24.9, 500; 5112000, 24.7, 500; 5115600, 24.6, 500; 5119200, 24.5, 500; 5122800, 27, 149; 5126400, 27, 179; 5130000, 27, 207; 5133600, 27, 234; 5137200, 27, 259; 5140800, 27, 284; 5144400, 27, 307; 5148000, 27, 329; 5151600, 27, 350; 5155200, 27, 371; 5158800, 27, 390; 5162400, 27, 409; 5166000, 25.9, 500; 5169600, 25.8, 500; 5173200, 25.7, 500; 5176800, 25.5, 500; 5180400, 25.4, 500; 5184000, 25.3, 500], extrapolation = Modelica.Blocks.Types.Extrapolation.HoldLastPoint) annotation(Placement(transformation(extent = {{80, 80}, {100, 99}})));
@@ -77,4 +78,4 @@ equation
  <p><br><br>All values are given in the VDI 6007-1.</p>
  <p>Same Test Case exists in VDI 6020.</p>
  </html>"), Icon(graphics));
-end TestCase_7;
+end TestCase7;
