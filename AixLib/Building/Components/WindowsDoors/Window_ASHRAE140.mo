@@ -39,7 +39,7 @@ Model=2,
 annotation (Placement(transformation(extent={{-66,-20},{-46,0}})));
   Utilities.HeatTransfer.HeatConv_inside
                                        heatConv_inside(
-IsAlphaConstant=false,
+calcMethod=2,
 alpha_custom=2,
 A=windowarea)
 annotation (Placement(transformation(extent={{68,-20},{48,2}})));
