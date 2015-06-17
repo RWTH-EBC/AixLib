@@ -1,8 +1,7 @@
 within AixLib.Utilities.HeatTransfer;
 model HeatConv_inside
   "Natural convection computation according to B. Glueck or EN ISO 6946, with choice between several types of surface orientation, or a constant convective heat transfer coefficient"
-  /* calculation of natural convection in the inside of a building according to B.Glueck- Waermeuebertragung,
-  Waermeabgabe von Raumheizflaechen und Rohren, EN ISO 6946 or using a constant convective heat transfer coefficient alpha_custom
+  /* calculation of natural convection in the inside of a building according to B.Glueck, EN ISO 6946 or using a constant convective heat transfer coefficient alpha_custom
   */
   extends Modelica.Thermal.HeatTransfer.Interfaces.Element1D;
 
@@ -59,37 +58,26 @@ equation
       alpha = 2.5;
     end if;
   // ++++++++++++++++Bernd Glueck++++++++++++++++
-  /*
-        at interior wall according to B. Glueck.
-        Also check to prevent small fluctuations which often lead to illeagal functions calls as
-        (small negative value)^exponent
-        at interior wall according to B. Glueck: Waermeuebertragung -
-        Waermeabgabe von Raumheizflaechen und Rohren.
-  */
   elseif calcMethod == 2 then
-    if surfaceOrientation == 2 then
-      // upward heat flow
-      if noEvent(port_b.T > port_a.T) then
-        //
-        alpha = 2*posDiff^0.31;
-      else
-        // downward heat flow with function switch
-        alpha = if noEvent(posDiff <= 0.0050474370) then 2*posDiff^0.31 else 1.08
-          *posDiff^0.31;
-      end if;
-    elseif surfaceOrientation == 3 then
-      if noEvent(port_b.T > port_a.T) then
-        // downward heat flow
-        alpha = if noEvent(posDiff <= 0.0050474370) then 2*posDiff^0.31 else 1.08
-          *posDiff^0.31;
-      else
-        // upward heat flow
-        alpha = 2*posDiff^0.31;
-      end if;
-      // vertical plate / horizontal heat flow
+
+    // top side of horizontal plate
+// ------------------------------------------------------
+  if surfaceOrientation == 2 then
+      alpha = 2*(posDiff^0.31);  // equation 1.27, page 26 (Bernd Glück: Heizen und Kühlen mit Niedrigexergie - Innovative Wärmeübertragung und Wärmespeicherung (LowEx) 2008)
+
+// down side of horizontal plate
+// ------------------------------------------------------
+
+  else
+    if surfaceOrientation == 3 then
+       alpha = 0.54*(posDiff^0.31);  //equation 1.28, page 26 (Bernd Glück: Heizen und Kühlen mit Niedrigexergie - Innovative Wärmeübertragung und Wärmespeicherung (LowEx) 2008)
+
+// vertical plate
+//-------------------------------------------------
     else
-      alpha = if noEvent(posDiff <= 5e-12) then 0 else 1.6*noEvent(posDiff^0.3);
+      alpha = 1.6*(posDiff^0.3);  // equation 1.26 page 26 (Bernd Glück: Heizen und Kühlen mit Niedrigexergie - Innovative Wärmeübertragung und Wärmespeicherung (LowEx) 2008)
     end if;
+  end if;
   // ++++++++++++++++alpha_custom++++++++++++++++
   else
     // if calcMethod == 3 then
@@ -302,24 +290,22 @@ equation
 <p><b><font style=\"color: #008000; \">Level of Development</font></b> </p>
 <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/> </p>
 <p><b><font style=\"color: #008000; \">Concept</font></b> </p>
-<p>In this model the orientation of the surface can be chosen from a menu for an easier adoption to new situations. This allows calculating <code>alpha</code> depending on orientation and respective direction of heat flow. The equations for <code>alpha</code> are taken from EN ISO 6946 (appendix A) and B. Glueck. </p>
+<p>In this model the orientation of the surface can be chosen from a menu for an easier adoption to new situations. This allows calculating <code>alpha</code> depending on orientation and respective direction of heat flow. The equations for <code>alpha</code> are taken from EN ISO 6946 (appendix A.1) and B. Glueck. </p>
 <p>The model can in this way be used on inside surfaces. There is also the possibility of setting a constant alpha value.</p>
 <p><b><font style=\"color: #008000; \">References</font></b> </p>
 <ul>
 <li>EN ISO 6946:2008-04, appendix A. Building components and building elements - Thermal resistance and thermal transmittance.</li>
-<li>Bernd Glueck:<i> Thermische Bauteilaktivierung - Nutzen von Umweltenergie und Kapillarrohren. 1. Aufl., C.F. Mueller-Verlag 1999.</i> </li>
+<li>Bernd Glueck:<i> Heizen und K&uuml;hlen mit Niedrigexergie - Innovative W&auml;rme&uuml;bertragung und W&auml;rmespeicherung (LowEx) 2008.</i> </li>
 </ul>
 <p><b><font style=\"color: #008000; \">Example Results</font></b> </p>
 <p><a href=\"AixLib.Utilities.Examples.HeatTransfer_test\">AixLib.Utilities.Examples.HeatTransfer_test </a></p>
-</html>", revisions="<html>
- <ul>
- <li><i>April 1, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
- </ul>
- <ul>
- <li><i>April 10, 2013&nbsp;</i> by Ole Odendahl<br/>Formatted documentation according to standards</li>
- <li><i>December 15, 2005&nbsp;</i> by Peter Matthes:<br/>Implemented.</li>
- </ul>
- </html>"),
-    DymolaStoredErrors,
-    uses(Modelica(version="3.2.1")));
+</html>",  revisions="<html>
+<ul>
+<li><i>June 17, 2015&nbsp;</i> by Philipp Mehrfeld:<br>Added EN ISO 6946 equations and corrected usage of constant alpha_custom </li>
+<li><i>March 26, 2015&nbsp;</i> by Ana Constantin:<br>Changed equations for differnet surface orientations according to newer work from Gl&uuml;ck </li>
+<li><i>April 1, 2014&nbsp;</i> by Ana Constantin:<br>Uses components from MSL and respects the naming conventions </li>
+<li><i>April 10, 2013&nbsp;</i> by Ole Odendahl<br>Formatted documentation according to standards </li>
+<li><i>December 15, 2005&nbsp;</i> by Peter Matthes:<br>Implemented. </li>
+</ul>
+</html>"),  DymolaStoredErrors);
 end HeatConv_inside;
