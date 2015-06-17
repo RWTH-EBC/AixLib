@@ -26,7 +26,7 @@ model WindowSimple "Window with radiation and U-Value"
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_outside annotation(Placement(transformation(extent = {{-100, -20}, {-80, 0}}, rotation = 0)));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatTrans(G = windowarea * Uw) annotation(Placement(transformation(extent = {{-10, -20}, {10, 0}}, rotation = 0)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_inside annotation(Placement(transformation(extent = {{80, -20}, {100, 0}}, rotation = 0)));
-  Modelica.Blocks.Math.Gain Ag(k=(1 - frameFraction)*windowarea*WindowType.g)
+  Modelica.Blocks.Math.Gain Ag(k=(1 - frameFraction)*windowarea*g)
     annotation (Placement(transformation(extent={{-16,54},{-4,66}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
     annotation (Placement(transformation(extent={{2,50},{22,70}})));
