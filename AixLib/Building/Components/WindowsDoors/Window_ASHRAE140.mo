@@ -39,7 +39,7 @@ Model=2,
 annotation (Placement(transformation(extent={{-66,-20},{-46,0}})));
   Utilities.HeatTransfer.HeatConv_inside
                                        heatConv_inside(
-IsAlphaConstant=false,
+calcMethod=2,
 alpha_custom=2,
 A=windowarea)
 annotation (Placement(transformation(extent={{68,-20},{48,2}})));
@@ -73,7 +73,7 @@ T0=T0,
 h=sqrt(windowarea),
 l=sqrt(windowarea))
 annotation (Placement(transformation(extent={{18,-18},{38,2}})));
-  Modelica.Blocks.Math.Gain Ag(k=(1 - frameFraction)*windowarea*WindowType.g)
+  Modelica.Blocks.Math.Gain Ag(k=(1 - frameFraction)*windowarea*g)
     "multiplication with area and solar gain factor"
     annotation (Placement(transformation(extent={{-4,52},{8,64}})));
   Modelica.Blocks.Interfaces.RealOutput solarRadWinTrans
