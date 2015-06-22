@@ -182,6 +182,9 @@ equation
     __Dymola_experimentSetupOutput,
     Documentation(revisions="<html>
 <ul>
+<li><i>June 2015,&nbsp;</i> by Moritz Lauster:<br>Debugged due to name changes in partialReducedOrderModel</li>
+</ul>
+<ul>
 <li>October 2014, Peter Remmen:</li>
 </ul>
 <p>implemented</p>

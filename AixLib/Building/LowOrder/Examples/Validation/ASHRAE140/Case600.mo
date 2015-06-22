@@ -325,8 +325,8 @@ equation
     Documentation(info="<html>
 <p>As described in ASHRAE Standard 140.</p>
 </html>", revisions="<html>
- <p><ul>
- <li><i>March 19, 2015</i> by Peter Remmen:<br/>Implemented</li>
- </ul></p>
- </html>"));
+<ul>
+<li><i>March 19, 2015</i> by Peter Remmen:<br>Implemented </li>
+</ul>
+</html>"));
 end Case600;
