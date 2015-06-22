@@ -34,4 +34,9 @@ record OPH_4_Restroom
     R1o = 0.00017702091729,
     RRest = 0.00476430963748,
     C1o = 39369992.1342);
+  annotation (Documentation(revisions="<html>
+ <ul>
+ <li><i>June, 2015&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
+ </ul>
+ </html>"));
 end OPH_4_Restroom;

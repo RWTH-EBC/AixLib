@@ -10,5 +10,9 @@ record OPH_1_Meeting
  <p><img src=\"modelica://AixLib/Images/stars5.png\" alt=\"stars: 5 out of 5\"/></p>
  <h4><span style=\"color:#008000\">References</span></h4>
  <p>Record is used in model <a href=\"Cities.BuildingPhysics.ThermalZone\">Cities.BuildingPhysics.ThermalZone</a> and <a href=\"Cities.Cities_DataBase.Buildings.OfficePassiveHouse\">Cities.Cities_DataBase.Buildings.OfficePassiveHouse</a></p>
+ </html>", revisions="<html>
+ <ul>
+ <li><i>June, 2015&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
+ </ul>
  </html>"));
 end OPH_1_Meeting;

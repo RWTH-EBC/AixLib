@@ -34,4 +34,9 @@ record OPH_6_Floor
     R1o = 2.83025896746e-05,
     RRest = 0.000762070069282,
     C1o = 246320566.661);
+  annotation (Documentation(revisions="<html>
+ <ul>
+ <li><i>June, 2015&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
+ </ul>
+ </html>"));
 end OPH_6_Floor;

@@ -34,4 +34,9 @@ record OPH_5_ICT
     R1o = 0.000353062716991,
     RRest = 0.00950991783473,
     C1o = 19748404.1293);
+  annotation (Documentation(revisions="<html>
+ <ul>
+ <li><i>June, 2015&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
+ </ul>
+ </html>"));
 end OPH_5_ICT;

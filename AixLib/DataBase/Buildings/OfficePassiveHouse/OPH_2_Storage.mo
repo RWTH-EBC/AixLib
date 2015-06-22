@@ -34,4 +34,9 @@ record OPH_2_Storage
     R1o = 4.72002418185e-05,
     RRest = 0.00127087222011,
     C1o = 147705362.151);
+  annotation (Documentation(revisions="<html>
+ <ul>
+ <li><i>June, 2015&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
+ </ul>
+ </html>"));
 end OPH_2_Storage;
