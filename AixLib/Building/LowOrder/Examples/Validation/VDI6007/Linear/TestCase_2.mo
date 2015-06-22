@@ -28,11 +28,12 @@ equation
           {20,-30},{20,11.7},{22.54,11.7}},                                                                                            color = {0, 0, 127}, smooth = Smooth.None));
   connect(HeatToStar.Star, reducedModel.internalGainsRad) annotation(Line(points={{70,
           -28.9},{70,-18},{41.75,-18},{41.75,11.7}},                                                                                      color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
-  connect(solarRadiation.y, reducedModel.u1) annotation (Line(
+  connect(solarRadiation.y, reducedModel.solarRad_in) annotation (Line(
       points={{-25,72},{21.18,72},{21.18,42.98}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics),
+  annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
+            -100},{100,100}}),                                                                           graphics),
              experiment(StopTime = 5.184e+006, Interval = 3600),
              __Dymola_Commands(file=
                                "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Linear/TestCase_2.mos"

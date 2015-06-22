@@ -47,12 +47,12 @@ equation
           -10},{54.54,-10},{54.54,40}},                                                                                      color = {0, 0, 127}, smooth = Smooth.None));
   connect(HeatToStar.Star, reducedModel.internalGainsRad) annotation(Line(points={{59.1,
           -89},{72,-89},{72,40},{73.75,40}},                                                                                        color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
-  connect(solarRadiation.y, reducedModel.u1) annotation (Line(
-      points={{-25,72},{53.18,72},{53.18,76.8}},
+  connect(solarRadiation.y, reducedModel.solarRad_in) annotation (Line(
+      points={{-25,72},{38,72},{38,86},{53.18,86},{53.18,76.8}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false,
-             extent = {{-100, -100}, {100, 100}}), graphics),
+  annotation(Diagram(coordinateSystem(preserveAspectRatio=false,
+             extent={{-100,-100},{100,100}}),      graphics),
              experiment(StopTime = 5.184e+006, Interval = 3600, Algorithm = "Lsodar"),
              __Dymola_Commands(file=
                                "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Star/TestCase_7.mos"

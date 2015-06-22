@@ -36,12 +36,12 @@ equation
   connect(setTemp.y[1], varTemp.T) annotation(Line(points = {{-41, -28}, {-8, -28}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(heatFlowSensor.port_b, reducedModel.internalGainsConv) annotation(Line(points={{44,-28},
           {74.4,-28},{74.4,28}},                                                                                                color = {191, 0, 0}, smooth = Smooth.None));
-  connect(solarRadiation.y, reducedModel.u1) annotation (Line(
+  connect(solarRadiation.y, reducedModel.solarRad_in) annotation (Line(
       points={{-15,82},{63.18,82},{63.18,64.8}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false,
-             extent = {{-100, -100}, {100, 100}}),
+  annotation(Diagram(coordinateSystem(preserveAspectRatio=false,
+             extent={{-100,-100},{100,100}}),
              graphics),
              experiment(StopTime = 5.184e+006,
              Interval = 3600, __Dymola_Algorithm = "Lsodar"),

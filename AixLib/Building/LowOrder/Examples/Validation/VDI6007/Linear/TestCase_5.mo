@@ -35,7 +35,8 @@ model TestCase_5
     columns={2,3,4,5,6})
     annotation (Placement(transformation(extent={{-94,68},{-74,88}})));
   Utilities.Sources.PrescribedSolarRad PrescribedSolarRad(n = 5) annotation(Placement(transformation(extent = {{-60, 68}, {-40, 88}})));
-  Components.Weather.Sunblind sunblind(n = 5, gsunblind = {0, 0, 0.15, 0, 0}) annotation(Placement(transformation(extent = {{-30, 67}, {-10, 87}})));
+  Components.Weather.Sunblind sunblind(n = 5, gsunblind = {0, 0, 0.15, 0, 0}) annotation(Placement(transformation(extent={{-36,67},
+            {-16,87}})));
   Building.LowOrder.BaseClasses.SolarRadWeightedSum SolarRadWeightedSum(n = 5, weightfactors = {0, 0, 7, 0, 0}) annotation(Placement(transformation(extent={{18,68},
             {38,88}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTemp annotation(Placement(transformation(extent = {{-8, 22}, {12, 42}})));
@@ -47,7 +48,6 @@ equation
   simulationTemp = reducedModel.airload.port.T;
   connect(personsRadiative.port, HeatToStar.Therm) annotation(Line(points = {{30, -90}, {42.8, -90}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(outdoorTemp.y[1], varTemp.T) annotation(Line(points = {{-41, 32}, {-10, 32}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(PrescribedSolarRad.solarRad_out, sunblind.Rad_In) annotation(Line(points = {{-41, 78}, {-29, 78}}, color = {255, 128, 0}, smooth = Smooth.None));
   connect(varTemp.port, reducedModel.equalAirTemp) annotation(Line(points = {{12, 32}, {22, 32}, {22, 46.8}, {51.4, 46.8}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(infiltrationTemp.y, reducedModel.ventilationTemperature) annotation(Line(points = {{16.5, 1}, {16.5, 18.5}, {51.4, 18.5}, {51.4, 36.4}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(infiltrationRate.y, reducedModel.ventilationRate) annotation(Line(points={{40.5,1},
@@ -61,10 +61,6 @@ equation
   connect(innerLoads.y[3], machinesConvective.Q_flow) annotation(Line(points = {{-37, -62}, {-18, -62}, {-18, -42}, {10, -42}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(innerLoads.y[2], personsConvective.Q_flow) annotation(Line(points = {{-37, -62}, {10, -62}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(innerLoads.y[1], personsRadiative.Q_flow) annotation(Line(points = {{-37, -62}, {-18, -62}, {-18, -90}, {10, -90}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(SolarRadWeightedSum.solarRad_out, reducedModel.u1) annotation (Line(
-      points={{37,78},{57.18,78},{57.18,64.8}},
-      color={0,0,127},
-      smooth=Smooth.None));
   connect(windowRad.y, PrescribedSolarRad.I) annotation (Line(
       points={{-73,78},{-66,78},{-66,86.9},{-58.9,86.9}},
       color={0,0,127},
@@ -90,8 +86,17 @@ equation
       points={{12,78},{19,78}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(sunblind.Rad_Out, solarRadAdapter.solarRad_in) annotation (Line(
-      points={{-11,78},{-7,78}},
+  connect(SolarRadWeightedSum.solarRad_out, reducedModel.solarRad_in)
+    annotation (Line(
+      points={{37,78},{57.18,78},{57.18,64.8}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(PrescribedSolarRad.solarRad_out, sunblind.Rad_in) annotation (Line(
+      points={{-41,78},{-35,78}},
+      color={255,128,0},
+      smooth=Smooth.None));
+  connect(sunblind.Rad_out, solarRadAdapter.solarRad_in) annotation (Line(
+      points={{-17,78},{-7,78}},
       color={255,128,0},
       smooth=Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
