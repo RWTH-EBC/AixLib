@@ -4,165 +4,164 @@ package HeatPump
 
   model HeatPump
     import SI = Modelica.SIunits;
-    parameter Boolean HP_ctrl_type =  true "Capacity control type"
+    parameter Boolean HPctrlType =  true "Capacity control type"
       annotation(Dialog(group = "Heat Pump cycle", compact = true, descriptionLabel = true), choices(choice=true
           "On/off heat pump",choice = false "Speed controlled heat pump",
                                 radioButtons = true));
-    parameter Integer Cap_calc_type = 1 "Type of capacity calculation"
-      annotation(Dialog(group = "Heat Pump cycle", compact = true, descriptionLabel = true, enable=HP_ctrl_type), choices(choice=1
+    parameter Integer capCalcType = 1 "Type of capacity calculation"
+      annotation(Dialog(group = "Heat Pump cycle", compact = true, descriptionLabel = true, enable=HPctrlType), choices(choice=1
           "Polynomial", choice = 2 "Table (only on/off heat pump)",   radioButtons = true));
-    replaceable package Medium_Co =
+    replaceable package Medium_con =
         Modelica.Media.Interfaces.PartialMedium
       "Medium outside the refrigerant cycle (Condenser)"
                               annotation (Evaluate=true, Dialog(tab="Evaporator, Condenser",group="Condenser"),choicesAllMatching=true);
-      parameter Real quaPresLoss_Co=0
+      parameter Real quaPresLoss_con=0
       "Pressure loss: Coefficient for quadratic term"   annotation ( Dialog(tab="Evaporator, Condenser",group="Condenser"));
-    parameter Real linPresLoss_Co=0
-      "Pressure loss: Coefficient for linear term"                               annotation ( Dialog(tab="Evaporator, Condenser",group="Condenser"));
+    parameter Real linPresLoss_con=0
+      "Pressure loss: Coefficient for linear term"                                annotation ( Dialog(tab="Evaporator, Condenser",group="Condenser"));
 
-    replaceable package Medium_Ev =
+    replaceable package Medium_eva =
         Modelica.Media.Interfaces.PartialMedium
       "Medium outside the refrigerant cycle (Evaporator)"
                               annotation (Evaluate=true, Dialog(tab="Evaporator, Condenser",group="Evaporator"),choicesAllMatching=true);
 
-    parameter Real quaPresLoss_Ev=0
+    parameter Real quaPresLoss_eva=0
       "Pressure loss: Coefficient for quadratic term" annotation ( Dialog(tab="Evaporator, Condenser",group="Evaporator"));
-    parameter Real linPresLoss_Ev=0
-      "Pressure loss: Coefficient for linear term"                               annotation ( Dialog(tab="Evaporator, Condenser",group="Evaporator"));
+    parameter Real linPresLoss_eva=0
+      "Pressure loss: Coefficient for linear term"                                annotation ( Dialog(tab="Evaporator, Condenser",group="Evaporator"));
 
-    parameter SI.Volume volume_Ev=0.004
+    parameter SI.Volume volume_eva=0.004
       "External medium volume in heat exchanger"                                   annotation ( Dialog(tab="Evaporator, Condenser",group="Evaporator"));
-   parameter SI.Volume volume_Co=0.004
+   parameter SI.Volume volume_con=0.004
       "External medium volume in heat exchanger"                                  annotation ( Dialog(tab="Evaporator, Condenser",group="Condenser"));
-    parameter AixLib.DataBase.HeatPump.HeatPumpBaseDataDefinition data_table=
+    parameter AixLib.DataBase.HeatPump.HeatPumpBaseDataDefinition dataTable=
         AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113()
       "Look-up table data for on/off heat pump according to EN255 or EN14511" annotation (
-        choicesAllMatching=true, Dialog(enable=HP_ctrl_type and (Cap_calc_type ==
+        choicesAllMatching=true, Dialog(enable=HPctrlType and (capCalcType ==
             2), group="Capacity data"));
 
-  protected
-    final parameter Real table_Qdot_Co[:,:]=data_table.table_Qdot_Co;
-    final parameter Real table_Pel[:,:]= data_table.table_Pel;
   public
     replaceable function data_poly =
-    AixLib.HVAC.HeatGeneration.HeatPump.Characteristics.Ochsner_GMLW_19plus
+    AixLib.HVAC.HeatGeneration.HeatPump.Characteristics.constantQualityGrade
       constrainedby AixLib.HVAC.HeatGeneration.HeatPump.Characteristics.baseFct
       "Polynomial heat pump characteristics for inverter heat pump"
-     annotation(choicesAllMatching = true,Dialog(enable=(Cap_calc_type==1),group="Capacity data"));
+     annotation(choicesAllMatching = true,Dialog(enable=(capCalcType==1),group="Capacity data"));
 
-    parameter SI.Temperature T_start_Ev=273.15 "initial evaporator temperature"
+    parameter SI.Temperature T_startEva=273.15 "initial evaporator temperature"
      annotation (Evaluate=true, Dialog(tab="Evaporator, Condenser", group="Initialization", enable=initEvaporatorVol));
-    parameter SI.Temperature T_start_Co=308.15 "initial condenser temperature"
+    parameter SI.Temperature T_startCon=308.15 "initial condenser temperature"
     annotation (Evaluate=true, Dialog(tab="Evaporator, Condenser", group="Initialization", enable=initCondenserVol));
     replaceable function Corr_icing =
     AixLib.HVAC.HeatGeneration.HeatPump.DefrostCorrection.noModel
       constrainedby
       AixLib.HVAC.HeatGeneration.HeatPump.DefrostCorrection.baseFct
       "Frost/Defrost model (only air-to-water heat pumps)"
-     annotation(choicesAllMatching = true,Dialog(enable=(Cap_calc_type==1),group="Defrosting/Icing correction",tab="Advanced"));
+     annotation(choicesAllMatching = true,Dialog(enable=(capCalcType==1),group="Defrosting/Icing correction",tab="Advanced"));
 
     parameter Real N_max=4200 "Maximum speed of compressor in 1/min"  annotation(Dialog(enable=not
-                                                                                                (HP_ctrl_type),group="Capacity data"));
+                                                                                                (HPctrlType),group="Capacity data"));
     parameter Real N_min=1500 "Minimum speed of compressor in 1/min"  annotation(Dialog(enable=not
-                                                                                                (HP_ctrl_type),group="Capacity data"));
-    parameter Real N_nom=3600 "Nominal speed of compressor in 1/min"  annotation(Dialog(enable=HP_ctrl_type and (Cap_calc_type == 1),group="Capacity data"));
-    parameter Boolean Pel_ouput=false "Electric power consumption"
+                                                                                                (HPctrlType),group="Capacity data"));
+    parameter Real N_nom=3600 "Nominal speed of compressor in 1/min"  annotation(Dialog(enable=HPctrlType and (capCalcType == 1),group="Capacity data"));
+    parameter Boolean P_eleOutput=false "Electric power consumption"
     annotation (Dialog(group="Optional outputs",tab="Advanced", descriptionLabel = true), choices(checkBox=true));
     parameter Boolean CoP_output=false "CoP"
     annotation (Dialog(group="Optional outputs",tab="Advanced", descriptionLabel = true), choices(checkBox=true));
     parameter Boolean PT1_cycle=false "First Order model for capacity" annotation(Dialog(group = "Start/stop behavior",tab="Advanced"), choices(checkBox=true));
-    parameter SI.Time T_hp_cycle=1 "Time constant for first order model" annotation(Dialog(group = "Start/stop behavior",tab="Advanced", enable=PT1_cycle));
+    parameter SI.Time timeConstantCycle=1 "Time constant for first order model"
+                                                                                annotation(Dialog(group = "Start/stop behavior",tab="Advanced", enable=PT1_cycle));
 
-    parameter Real eta_el=1
+    parameter Real eta_ele=1
       "assumption of P_tech/P_el (for calculation of Evaporator load)"                         annotation(Dialog(group="Assumptions",tab="Advanced"));
-    parameter Real factor_scale=1
+    parameter Real factorScale=1
       "scaling factor (Attention: not physically correct)"
        annotation(Dialog(group="Assumptions",tab="Advanced"));
-    parameter SI.Power Pel_add=0
+    parameter SI.Power P_eleAdd=0
       "additional electric power when heat pump is on (not influenced through scaling factor)"
        annotation(Dialog(group="Assumptions",tab="Advanced"));
 
     parameter Boolean CorrFlowCo=false
       "Correction of mass flow different from nominal flow in condenser"
       annotation(Dialog(group="Mass flow correction",tab="Advanced"), choices(checkBox=true));
-    parameter SI.MassFlowRate mFlow_Co_nominal=0.5
+    parameter SI.MassFlowRate mFlow_conNominal=0.5
       "Nominal mass flow rate in condenser, only for polynomials, as already included in data tables"
-                                                                                                      annotation(Dialog(group="Mass flow correction",tab="Advanced",enable=(CorrFlowCo and Cap_calc_type==1)));
+                                                                                                      annotation(Dialog(group="Mass flow correction",tab="Advanced",enable=(CorrFlowCo and capCalcType==1)));
 
     parameter Boolean CorrFlowEv=false
       "Correction of mass flow different from nominal flow in evaporator"
       annotation(Dialog(group="Mass flow correction",tab="Advanced"), choices(checkBox=true));
-    parameter SI.MassFlowRate mFlow_Ev_nominal=0.5
+    parameter SI.MassFlowRate mFlow_evaNominal=0.5
       "Nominal mass flow rate in evaporator, only for polynomials, as already included in data tables"
-                                                                                                       annotation(Dialog(group="Mass flow correction",tab="Advanced",enable=(CorrFlowEv and Cap_calc_type==1)));
+                                                                                                       annotation(Dialog(group="Mass flow correction",tab="Advanced",enable=(CorrFlowEv and capCalcType==1)));
 
-    Partial.HeatExchangerHP  Condenser(  redeclare package Medium =
-          Medium_Co,
-      a=quaPresLoss_Co,
-      b=linPresLoss_Ev,
-      volume=volume_Co,
-      T_start=T_start_Co)      annotation (Placement(
+    Partial.HeatExchangerHP  condenser(  redeclare package Medium =
+          Medium_con,
+      a=quaPresLoss_con,
+      b=linPresLoss_con,
+      volume=volume_con,
+      T_start=T_startCon)      annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=90,
           origin={130,0})));
-    Partial.HeatExchangerHP  Evaporator( redeclare package Medium =
-          Medium_Ev,
-      b=linPresLoss_Ev,
-      volume=volume_Ev,
-      a=quaPresLoss_Ev,
-      T_start=T_start_Ev)  annotation (Placement(
+    Partial.HeatExchangerHP  evaporator( redeclare package Medium =
+          Medium_eva,
+      b=linPresLoss_eva,
+      volume=volume_eva,
+      a=quaPresLoss_eva,
+      T_start=T_startEva)  annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=270,
           origin={-130,0})));
-    Modelica.Fluid.Interfaces.FluidPort_b port_Ev_out(redeclare package Medium
-        = Medium_Ev) "Evaporator fluid output port"
+    Modelica.Fluid.Interfaces.FluidPort_b port_evaOut(redeclare package Medium
+        = Medium_eva) "Evaporator fluid output port"
       annotation (Placement(transformation(extent={{-140,-80},{-120,-60}},
             rotation=0)));
-    Modelica.Fluid.Interfaces.FluidPort_a port_Ev_in(redeclare package Medium
-        = Medium_Ev) "Evaporator fluid input port"
+    Modelica.Fluid.Interfaces.FluidPort_a port_evaIn(redeclare package Medium
+        = Medium_eva) "Evaporator fluid input port"
       annotation (Placement(transformation(extent={{-140,60},{-120,80}},
             rotation=0)));
-    Modelica.Fluid.Sensors.TemperatureTwoPort T_Ev_in(
+    Modelica.Fluid.Sensors.TemperatureTwoPort T_evaIn(
                                                 redeclare package Medium =
-          Medium_Ev) annotation (Placement(transformation(
+          Medium_eva) annotation (Placement(transformation(
           origin={-130,26},
           extent={{-10,-10},{10,10}},
           rotation=270)));
-    Modelica.Fluid.Sensors.TemperatureTwoPort T_Co_in(
+    Modelica.Fluid.Sensors.TemperatureTwoPort T_conIn(
                                                redeclare package Medium =
-          Medium_Co) annotation (Placement(transformation(
+          Medium_con) annotation (Placement(transformation(
           origin={130,-26},
           extent={{-10,-10},{10,10}},
           rotation=90)));
-    Modelica.Fluid.Interfaces.FluidPort_a port_Co_in(redeclare package Medium
-        = Medium_Co) "Condenser fluid input port"
+    Modelica.Fluid.Interfaces.FluidPort_a port_conIn(redeclare package Medium
+        = Medium_con) "Condenser fluid input port"
       annotation (Placement(transformation(extent={{120,-80},{140,-60}},
             rotation=0)));
-    Modelica.Fluid.Interfaces.FluidPort_b port_Co_out(redeclare package Medium
-        = Medium_Co) "Condenser fluid ouput port"
+    Modelica.Fluid.Interfaces.FluidPort_b port_conOut(redeclare package Medium
+        = Medium_con) "Condenser fluid ouput port"
       annotation (Placement(transformation(extent={{120,60},{140,80}},
             rotation=0)));
-    Modelica.Fluid.Sensors.TemperatureTwoPort T_Co_out(
+    Modelica.Fluid.Sensors.TemperatureTwoPort T_conOut(
                                                redeclare package Medium =
-          Medium_Co) annotation (Placement(transformation(
+          Medium_con) annotation (Placement(transformation(
           origin={130,30},
           extent={{-10,-10},{10,10}},
           rotation=90)));
-    Modelica.Fluid.Sensors.TemperatureTwoPort T_Ev_out(
+    Modelica.Fluid.Sensors.TemperatureTwoPort T_evaOut(
                                                 redeclare package Medium =
-          Medium_Ev) annotation (Placement(transformation(
+          Medium_eva) annotation (Placement(transformation(
           origin={-130,-30},
           extent={{-10,-10},{10,10}},
           rotation=270)));
-    Modelica.Fluid.Sensors.MassFlowRate m_flow_Co(redeclare package Medium =
-          Medium_Co) annotation (Placement(transformation(
+    Modelica.Fluid.Sensors.MassFlowRate mFlow_con(redeclare package Medium =
+          Medium_con) annotation (Placement(transformation(
           origin={130,-50},
           extent={{-10,-10},{10,10}},
           rotation=90)));
-    Modelica.Blocks.Interfaces.RealOutput Pel_out if Pel_ouput annotation (Placement(
-          transformation(
+    Modelica.Blocks.Interfaces.RealOutput P_eleOut if
+                                                     P_eleOutput annotation (
+        Placement(transformation(
           extent={{-10,-10},{10,10}},
           rotation=270,
           origin={-50,-90})));
@@ -172,216 +171,211 @@ package HeatPump
           rotation=270,
           origin={-10,-90})));
 
-    Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow HeatFlow_Qdot_Co
+    Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heatFlowRate_con
       annotation (Placement(transformation(
           origin={95,1},
           extent={{9,-9},{-9,9}},
           rotation=180)));
 
   public
-    Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow HeatFlow_Qdot_Ev
+    Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heatFlowRate_eva
       annotation (Placement(transformation(extent={{-10,-10},{10,10}},
             rotation=180,
           origin={-100,2})));
 
     parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments
       "smoothness of table interpolation" annotation(Dialog(group = "Assumptions",tab="Advanced", enable=not
-                                                                                                (Cap_calc_type==1)));
+                                                                                                (capCalcType==1)));
 
-    Modelica.Fluid.Sensors.MassFlowRate massFlowRate_Ev(redeclare package
-        Medium =
-          Medium_Ev) annotation (Placement(transformation(
+    Modelica.Fluid.Sensors.MassFlowRate mFlow_eva(redeclare package Medium =
+          Medium_eva) annotation (Placement(transformation(
           origin={-130,52},
           extent={{-10,-10},{10,10}},
           rotation=270)));
-    Partial.Cycle cycle(HP_ctrl_type=HP_ctrl_type,Cap_calc_type=Cap_calc_type,
-      data_table=data_table,
+    Partial.Cycle cycle(HPctrlType=HPctrlType,capCalcType=capCalcType,
+      dataTable=dataTable,
       redeclare function data_poly=data_poly,
       N_max=N_max,
       N_min=N_min,
       N_nom=N_nom,
       Corr_icing=Corr_icing,
-      eta_el=eta_el,
-      factor_scale=factor_scale,
-      Pel_add=Pel_add,
+      eta_ele=eta_ele,
+      factorScale=factorScale,
+      P_eleAdd=P_eleAdd,
       CorrFlowCo=CorrFlowCo,
       CorrFlowEv=CorrFlowEv,
-      T_hp_cycle=T_hp_cycle,
+      timeConstantCycle=timeConstantCycle,
       smoothness=smoothness,
       PT1_cycle=true,
-      mFlow_Co_nominal=mFlow_Co_nominal,
-      mFlow_Ev_nominal=mFlow_Ev_nominal,
-      T_Co_max=T_Co_max)
-      annotation (Placement(transformation(extent={{-48,-20},{42,40}})));
-    Modelica.Blocks.Interfaces.BooleanInput OnOff_in annotation (Placement(
+      mFlow_conNominal=mFlow_conNominal,
+      mFlow_evaNominal=mFlow_evaNominal,
+      T_conMax=T_conMax)
+      annotation (Placement(transformation(extent={{-50,-20},{40,40}})));
+    Modelica.Blocks.Interfaces.BooleanInput onOff_in annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=270,
           origin={-50,90})));
-    Modelica.Blocks.Interfaces.RealInput N_in if not HP_ctrl_type annotation (Placement(
+    Modelica.Blocks.Interfaces.RealInput N_in if not HPctrlType annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=270,
           origin={-10,90})));
 
-  parameter Boolean HeatLossesCo=false
+  parameter Boolean heatLosses_con=false
       "Consider heat losses of condenser to ambient"  annotation(Dialog(group="Heat losses of condenser",tab="Advanced"), choices(checkBox=true));
   parameter SI.ThermalConductance R_loss=1
-      "Thermal conductance of heat loss to ambient"                                      annotation(Dialog(group = "Heat losses of condenser",tab="Advanced", enable=HeatLossesCo));
+      "Thermal conductance of heat loss to ambient"                                      annotation(Dialog(group = "Heat losses of condenser",tab="Advanced", enable=heatLosses_con));
   protected
-    Modelica.Blocks.Interfaces.RealInput N_in_internal
+    Modelica.Blocks.Interfaces.RealInput N_inInternal
       "Needed to connect to conditional connector";
-    Modelica.Blocks.Interfaces.RealInput T_amb_internal
+    Modelica.Blocks.Interfaces.RealInput T_ambInternal
       "Needed to connect to conditional connector";
   public
-    Modelica.Blocks.Sources.RealExpression dummy_zero(y=0)            annotation (Placement(transformation(extent={{0,60},{
-              20,80}},
-            rotation=0)));
+    Modelica.Blocks.Sources.RealExpression dummyZero(y=0)
+      annotation (Placement(transformation(extent={{0,60},{20,80}}, rotation=0)));
     Modelica.Thermal.HeatTransfer.Components.ThermalConductor
                                   heatConv(G=R_loss)
       annotation (Placement(transformation(extent={{80,40},{100,60}})));
     Modelica.Blocks.Interfaces.RealInput T_amb if
-                                                 HeatLossesCo annotation (Placement(
+                                                 heatLosses_con annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=270,
           origin={50,90})));
     Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTemp
       annotation (Placement(transformation(extent={{80,76},{100,96}})));
-    parameter SI.Temperature T_Co_max=338.15
+    parameter SI.Temperature T_conMax=338.15
       "Maximum condenser outlet temperature" annotation(Dialog(group = "Capacity data"));
-    Modelica.Blocks.Math.Gain negative(k=-1) annotation (Placement(
+    Modelica.Blocks.Math.Gain gainMinusOne(k=-1) annotation (Placement(
           transformation(
           extent={{-5,-5},{5,5}},
           rotation=180,
           origin={-73,5})));
   equation
 
-    if HP_ctrl_type then
-      connect(N_in_internal,dummy_zero.y);
+    if HPctrlType then
+      connect(N_inInternal, dummyZero.y);
     else
-      connect(N_in,N_in_internal);
+      connect(N_in,N_inInternal);
     end if;
-    connect(N_in_internal,cycle.N_in);
+    connect(N_inInternal,cycle.N_in);
 
-    if HeatLossesCo then
-      connect(T_amb_internal, T_amb);
-      connect(Condenser.thermalPort, heatConv.port_b);
+    if heatLosses_con then
+      connect(T_ambInternal, T_amb);
+      connect(condenser.thermalPort, heatConv.port_b);
     else
-      connect(varTemp.T, dummy_zero.y);
+      connect(varTemp.T, dummyZero.y);
     end if;
-    connect(varTemp.T, T_amb_internal);
+    connect(varTemp.T, T_ambInternal);
     connect(varTemp.port, heatConv.port_a);
 
     //fluid connections evaporator
-    connect(Evaporator.port_a1, T_Ev_in.port_b) annotation (Line(
+    connect(evaporator.port_a1,T_evaIn. port_b) annotation (Line(
         points={{-130,10},{-130,16}},
         color={0,127,255},
         smooth=Smooth.None));
-    connect(Evaporator.port_b1, T_Ev_out.port_a) annotation (Line(
+    connect(evaporator.port_b1,T_evaOut. port_a) annotation (Line(
         points={{-130,-10},{-130,-20}},
         color={0,127,255},
         smooth=Smooth.None));
-    connect(T_Ev_out.port_b, port_Ev_out) annotation (Line(
+    connect(T_evaOut.port_b,port_evaOut)  annotation (Line(
         points={{-130,-40},{-130,-70}},
         color={0,127,255},
         smooth=Smooth.None));
-    connect(port_Ev_in, massFlowRate_Ev.port_a) annotation (Line(
+    connect(port_evaIn, mFlow_eva.port_a) annotation (Line(
         points={{-130,70},{-130,62}},
         color={0,127,255},
         smooth=Smooth.None));
-    connect(massFlowRate_Ev.port_b, T_Ev_in.port_a) annotation (Line(
+    connect(mFlow_eva.port_b, T_evaIn.port_a) annotation (Line(
         points={{-130,42},{-130,36}},
         color={0,127,255},
         smooth=Smooth.None));
 
     //fluid connections condenser
-    connect(m_flow_Co.port_a, port_Co_in)
-                                         annotation (Line(
+    connect(mFlow_con.port_a, port_conIn) annotation (Line(
         points={{130,-60},{130,-70}},
         color={0,127,255},
         smooth=Smooth.None));
-    connect(m_flow_Co.port_b, T_Co_in.port_a)
-                                             annotation (Line(
+    connect(mFlow_con.port_b, T_conIn.port_a) annotation (Line(
         points={{130,-40},{130,-36}},
         color={0,127,255},
         smooth=Smooth.None));
-    connect(T_Co_in.port_b, Condenser.port_a1) annotation (Line(
+    connect(T_conIn.port_b,condenser. port_a1) annotation (Line(
         points={{130,-16},{130,-10}},
         color={0,127,255},
         smooth=Smooth.None));
-    connect(Condenser.port_b1, T_Co_out.port_a) annotation (Line(
+    connect(condenser.port_b1,T_conOut. port_a) annotation (Line(
         points={{130,10},{130,20}},
         color={0,127,255},
         smooth=Smooth.None));
-    connect(T_Co_out.port_b, port_Co_out)
+    connect(T_conOut.port_b,port_conOut)
      annotation (Line(
         points={{130,40},{130,70}},
         color={0,127,255},
         smooth=Smooth.None));
     // other connections
-    connect(HeatFlow_Qdot_Co.port, Condenser.thermalPort) annotation (Line(
+    connect(heatFlowRate_con.port,condenser. thermalPort) annotation (Line(
         points={{104,1},{104,0},{124,0},{124,3.67394e-016}},
         color={191,0,0},
         smooth=Smooth.None));
-    connect(HeatFlow_Qdot_Ev.port, Evaporator.thermalPort) annotation (Line(
+    connect(heatFlowRate_eva.port,evaporator. thermalPort) annotation (Line(
         points={{-110,2},{-116.5,2},{-116.5,-1.10218e-015},{-124,
             -1.10218e-015}},
         color={191,0,0},
         smooth=Smooth.None));
 
-    connect(OnOff_in, cycle.OnOff_in) annotation (Line(
-        points={{-50,90},{-50,56},{-18,56},{-18,37}},
-        color={255,0,255},
-        smooth=Smooth.None));
-    connect(cycle.Qdot_Co_out,HeatFlow_Qdot_Co.Q_flow)  annotation (Line(
-        points={{36,13},{84,13},{84,1},{86,1}},
-        color={0,0,127},
-        smooth=Smooth.None));
-    connect(T_Co_out.T, cycle.T_Co_out) annotation (Line(
-        points={{119,30},{52,30},{52,25},{36,25}},
-        color={0,0,127},
-        smooth=Smooth.None));
-    connect(T_Co_in.T, cycle.T_Co_in) annotation (Line(
-        points={{119,-26},{56,-26},{56,1},{36,1}},
-        color={0,0,127},
-        smooth=Smooth.None));
-    connect(m_flow_Co.m_flow, cycle.m_flow_Co) annotation (Line(
-        points={{119,-50},{108,-50},{108,-48},{50,-48},{50,7},{36,7}},
-        color={0,0,127},
-        smooth=Smooth.None));
-    connect(massFlowRate_Ev.m_flow, cycle.m_flow_Ev) annotation (Line(
-        points={{-119,52},{-76,52},{-76,19},{-42,19}},
-        color={0,0,127},
-        smooth=Smooth.None));
     connect(cycle.CoP_out, CoP_out) annotation (Line(
-        points={{-6,-17},{-6,-64},{-10,-64},{-10,-90}},
-        color={0,0,127},
-        smooth=Smooth.None));
-    connect(cycle.Pel_out, Pel_out) annotation (Line(
-        points={{-18,-17},{-18,-58},{-50,-58},{-50,-90}},
+        points={{-8,-17},{-8,-64},{-10,-64},{-10,-90}},
         color={0,0,127},
         smooth=Smooth.None));
 
-    connect(T_Ev_in.T, cycle.T_Ev_in) annotation (Line(
-        points={{-119,26},{-80,26},{-80,1},{-42,1}},
-        color={0,0,127},
-        smooth=Smooth.None));
-    connect(T_Ev_out.T, cycle.T_Ev_out) annotation (Line(
-        points={{-119,-30},{-62,-30},{-62,25},{-42,25}},
-        color={0,0,127},
-        smooth=Smooth.None));
-    connect(HeatFlow_Qdot_Ev.Q_flow, negative.y) annotation (Line(
+    connect(heatFlowRate_eva.Q_flow, gainMinusOne.y) annotation (Line(
         points={{-90,2},{-80,2},{-80,5},{-78.5,5}},
         color={0,0,127},
         smooth=Smooth.None));
-    connect(negative.u, cycle.Qdot_Ev_out) annotation (Line(
-        points={{-67,5},{-64,5},{-64,6},{-62,6},{-62,13},{-42,13}},
+    connect(T_conOut.T, cycle.T_conOut) annotation (Line(
+        points={{119,30},{60,30},{60,25},{34,25}},
         color={0,0,127},
         smooth=Smooth.None));
-    annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-150,
-              -100},{150,100}}),
-                           graphics), Icon(coordinateSystem(preserveAspectRatio=true,
+    connect(cycle.Qdot_conOut,heatFlowRate_con. Q_flow) annotation (Line(
+        points={{34,13},{70,13},{70,1},{86,1}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    connect(cycle.T_conIn,T_conIn. T) annotation (Line(
+        points={{34,1},{62,1},{62,-26},{119,-26}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    connect(cycle.mFlow_con, mFlow_con.m_flow) annotation (Line(
+        points={{34,7},{54,7},{54,-50},{119,-50}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    connect(cycle.T_evaOut,T_evaOut. T) annotation (Line(
+        points={{-44,25},{-48,25},{-48,24},{-58,24},{-58,-30},{-119,-30}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    connect(cycle.mFlow_eva, mFlow_eva.m_flow) annotation (Line(
+        points={{-44,19},{-72,19},{-72,52},{-119,52}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    connect(gainMinusOne.u, cycle.Qdot_evaOut) annotation (Line(
+        points={{-67,5},{-62,5},{-62,13},{-44,13}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    connect(T_evaIn.T, cycle.T_evaIn) annotation (Line(
+        points={{-119,26},{-86,26},{-86,-8},{-50,-8},{-50,1},{-44,1}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    connect(cycle.P_eleOut, P_eleOut) annotation (Line(
+        points={{-20,-17},{-18,-17},{-18,-56},{-50,-56},{-50,-90}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    connect(cycle.onOff_in, onOff_in) annotation (Line(
+        points={{-20,37},{-22,37},{-22,60},{-50,60},{-50,90}},
+        color={255,0,255},
+        smooth=Smooth.None));
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-150,-100},
+              {150,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio=true,
             extent={{-150,-100},{150,100}}), graphics={
           Rectangle(
             extent={{-130,90},{130,-90}},
@@ -462,6 +456,7 @@ package HeatPump
 <li><i>March 27, 2013</i> by Kristian Huchtemann:<br/>Corrected connection of evaporator inlet and outlet temperature connectors. Added maximum condenser temperature implementation.</li>
 <li><i>December 10, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately </li>
 <li><i>April 23, 2013&nbsp;</i> by Kristian Huchtemann:<br/>implemented</li>
+<li><i>June 23, 2015&nbsp;</i> by Kristian Huchtemann:<br/>formatted for use in AixLib</li>
 </ul></p>
 </html>"));
   end HeatPump;
@@ -525,7 +520,7 @@ package HeatPump
           =                                                                     Medium)
         "Fluid inlet port" annotation (extent=[-110,-10; -90,10]);
 
-      Modelica.Fluid.Vessels.ClosedVolume volume1(
+      Modelica.Fluid.Vessels.ClosedVolume fluidVolume(
         redeclare package Medium = Medium,
         T_start(displayUnit="K") = T_start,
         nPorts=2,
@@ -538,15 +533,16 @@ package HeatPump
           points={{46,0},{100,0}},
           color={0,127,255},
           smooth=Smooth.None));
-      connect(volume1.ports[1], simpleGenericOrifice.port_a) annotation (Line(
+      connect(fluidVolume.ports[1], simpleGenericOrifice.port_a) annotation (
+          Line(
           points={{-17.1,-1},{-17.1,-2},{4,-2},{4,0},{26,0}},
           color={0,127,255},
           smooth=Smooth.None));
-      connect(port_a1, volume1.ports[2]) annotation (Line(
+      connect(port_a1, fluidVolume.ports[2]) annotation (Line(
           points={{-100,0},{-48,0},{-48,-1},{-12.9,-1}},
           color={0,127,255},
           smooth=Smooth.None));
-      connect(volume1.heatPort, thermalPort) annotation (Line(
+      connect(fluidVolume.heatPort, thermalPort) annotation (Line(
           points={{-25.5,9.5},{-36,9.5},{-36,34},{0,34},{0,60}},
           color={191,0,0},
           smooth=Smooth.None));
@@ -593,91 +589,91 @@ Models external fluid volumes and pressure drop in a heat pump. Used as condense
 
     model Cycle
       import SI = Modelica.SIunits;
-      parameter Boolean HP_ctrl_type =  true "Capacity control type"
+      parameter Boolean HPctrlType =  true "Capacity control type"
         annotation(Dialog(group = "Heat Pump cycle", compact = true, descriptionLabel = true), choices(choice=true
             "On/off heat pump",choice = false "Speed controlled heat pump",
                                   radioButtons = true));
-      parameter Integer Cap_calc_type = 1 "Type of capacity calculation"
-        annotation(Dialog(group = "Heat Pump cycle", compact = true, descriptionLabel = true, enable=HP_ctrl_type), choices(choice=1
+      parameter Integer capCalcType = 1 "Type of capacity calculation"
+        annotation(Dialog(group = "Heat Pump cycle", compact = true, descriptionLabel = true, enable=HPctrlType), choices(choice=1
             "Polynomial", choice = 2 "Table (only on/off heat pump)",   radioButtons = true));
 
-      parameter DataBase.HeatPump.HeatPumpBaseDataDefinition data_table=
+      parameter DataBase.HeatPump.HeatPumpBaseDataDefinition dataTable=
           AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113()
         "Look-up table data for on/off heat pump according to EN255/EN14511"
-        annotation (choicesAllMatching=true, Dialog(enable=HP_ctrl_type and (
-              Cap_calc_type == 2), group="Capacity data"));
+        annotation (choicesAllMatching=true, Dialog(enable=HPctrlType and (
+              capCalcType == 2), group="Capacity data"));
     protected
-      final parameter Real table_Qdot_Co[:,:]=data_table.table_Qdot_Co;
-      final parameter Real table_Pel[:,:]= data_table.table_Pel;
+      final parameter Real tableQdot_con[:,:]=dataTable.tableQdot_con;
+      final parameter Real tableP_ele[:,:]= dataTable.tableP_ele;
     public
       replaceable function data_poly =
-      AixLib.HVAC.HeatGeneration.HeatPump.Characteristics.Ochsner_GMLW_19plus
+      AixLib.HVAC.HeatGeneration.HeatPump.Characteristics.constantQualityGrade
         constrainedby
         AixLib.HVAC.HeatGeneration.HeatPump.Characteristics.baseFct
         "Polynomial heat pump characteristics"
-       annotation(choicesAllMatching = true,Dialog(enable=(Cap_calc_type==1),group="Capacity data"));
+       annotation(choicesAllMatching = true,Dialog(enable=(capCalcType==1),group="Capacity data"));
 
       replaceable function Corr_icing =
       AixLib.HVAC.HeatGeneration.HeatPump.DefrostCorrection.noModel
         constrainedby
         AixLib.HVAC.HeatGeneration.HeatPump.DefrostCorrection.baseFct
         "Frost/Defrost model (only air-to-water heat pumps)"
-       annotation(choicesAllMatching = true,Dialog(enable=(Cap_calc_type==1),group="Defrosting/Icing correction",tab="Advanced"));
-    parameter SI.Temperature T_Co_max=338.15
+       annotation(choicesAllMatching = true,Dialog(enable=(capCalcType==1),group="Defrosting/Icing correction",tab="Advanced"));
+    parameter SI.Temperature T_conMax=338.15
         "Maximum condenser outlet temperature"                                        annotation(Dialog(group="Heat Pump cycle"));
       parameter Real N_max=4200 "Maximum speed of compressor in 1/min"  annotation(Dialog(enable=not
-                                                                                                (HP_ctrl_type),group="Capacity data"));
+                                                                                                (HPctrlType),group="Capacity data"));
       parameter Real N_min=1500 "Minimum speed of compressor in 1/min"  annotation(Dialog(enable=not
-                                                                                                (HP_ctrl_type),group="Capacity data"));
-      parameter Real N_nom=3600 "Nominal speed of compressor in 1/min"  annotation(Dialog(enable=HP_ctrl_type and (Cap_calc_type == 1),group="Capacity data"));
+                                                                                                (HPctrlType),group="Capacity data"));
+      parameter Real N_nom=3600 "Nominal speed of compressor in 1/min"  annotation(Dialog(enable=HPctrlType and (capCalcType == 1),group="Capacity data"));
       parameter Boolean PT1_cycle=false "First Order model for capacity" annotation(Dialog(group = "Start/stop behavior",tab="Advanced"), choices(checkBox=true));
-      parameter SI.Time T_hp_cycle=1 "Time constant for first order model" annotation(Dialog(group = "Start/stop behavior",tab="Advanced", enable=PT1_cycle));
-      parameter Real eta_el=1
+      parameter SI.Time timeConstantCycle=1
+        "Time constant for first order model"                                     annotation(Dialog(group = "Start/stop behavior",tab="Advanced", enable=PT1_cycle));
+      parameter Real eta_ele=1
         "assumption of P_tech/P_el (for calculation of Evaporator load)"                         annotation(Dialog(group="Assumptions",tab="Advanced"));
-      parameter Real factor_scale=1
+      parameter Real factorScale=1
         "scaling factor (Attention: not physically correct)"
          annotation(Dialog(group="Assumptions",tab="Advanced"));
-      parameter SI.Power Pel_add=0
+      parameter SI.Power P_eleAdd=0
         "additional electric power when heat pump is on (not influenced through scaling factor)"
-         annotation(Dialog(group="Assumptions",tab="Advanced"));
+        annotation(Dialog(group="Assumptions",tab="Advanced"));
 
       parameter Boolean CorrFlowCo=false
         "Correction of mass flow different from nominal flow in condenser (use only if not included in polynom)"
         annotation(Dialog(group="Mass flow correction",tab="Advanced"), choices(checkBox=true));
 
-      parameter SI.MassFlowRate mFlow_Co_nominal=0.5
+      parameter SI.MassFlowRate mFlow_conNominal=0.5
         "Nominal mass flow rate in condenser"
-      annotation(Dialog(group="Mass flow correction",tab="Advanced", enable=(CorrFlowCo and Cap_calc_type==1)));
+      annotation(Dialog(group="Mass flow correction",tab="Advanced", enable=(CorrFlowCo and capCalcType==1)));
 
       parameter Boolean CorrFlowEv=false
         "Correction of mass flow different from nominal flow in evaporator  (use only if not included in polynom)"
         annotation(Dialog(group="Mass flow correction",tab="Advanced"), choices(checkBox=true));
 
-      parameter SI.MassFlowRate mFlow_Ev_nominal=0.5
+      parameter SI.MassFlowRate mFlow_evaNominal=0.5
         "Nominal mass flow rate in evaporator"
-      annotation(Dialog(group="Mass flow correction",tab="Advanced",enable=(CorrFlowEv and Cap_calc_type==1)));
+      annotation(Dialog(group="Mass flow correction",tab="Advanced",enable=(CorrFlowEv and capCalcType==1)));
 
-      SI.Power Pel;
-      SI.Power Pel_char;
-      SI.HeatFlowRate Qdot_Ev;
-      SI.HeatFlowRate Qdot_Co;
-      SI.HeatFlowRate Qdot_Co_char;
+      SI.Power P_ele;
+      SI.Power P_eleChar;
+      SI.HeatFlowRate Qdot_eva;
+      SI.HeatFlowRate Qdot_con;
+      SI.HeatFlowRate Qdot_conChar;
       Real CoP;
       Real CoP_corr;
       Real CoP_char;
       Real N;
-      Real f_cop_icing;
-      //Real f_cop_spread;
+      Real factorCoP_icing;
       Real Char[2];
-      Real T_Co_out_corr;
-      Real T_Ev_in_corr;
+      Real T_conOutCorr;
+      Real T_evaInCorr;
 
-      Modelica.Blocks.Interfaces.RealOutput Pel_out annotation (Placement(
+      Modelica.Blocks.Interfaces.RealOutput P_eleOut annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-50,-90})));
-      Modelica.Blocks.Interfaces.BooleanInput OnOff_in annotation (Placement(
+      Modelica.Blocks.Interfaces.BooleanInput onOff_in annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
@@ -694,70 +690,62 @@ Models external fluid volumes and pressure drop in a heat pump. Used as condense
             origin={-10,90})));
 
     protected
-      Modelica.Blocks.Interfaces.RealInput firstOrder_out_internal
+      Modelica.Blocks.Interfaces.RealInput firstOrder_outInternal
         "Needed to connect to conditional model";
-      Modelica.Blocks.Interfaces.RealOutput firstOrder_in_internal
+      Modelica.Blocks.Interfaces.RealOutput firstOrder_inInternal
         "Needed to connect to conditional model";
-      Modelica.Blocks.Interfaces.RealInput Qdot_Co_table_internal
+      Modelica.Blocks.Interfaces.RealInput Qdot_conTableInternal
         "Needed to connect to conditional model";
-      Modelica.Blocks.Interfaces.RealInput Pel_table_internal
+      Modelica.Blocks.Interfaces.RealInput P_eleTableInternal
         "Needed to connect to conditional model";
-      /*Modelica.Blocks.Interfaces.RealInput Pel_trapezoid_internal 
-    "Needed to connect to conditional model";*/
-      SI.MassFlowRate mFlCo_nom;
-      SI.MassFlowRate mFlEv_nom;
+      SI.MassFlowRate mFlow_conNom;
+      SI.MassFlowRate mFlow_evaNom;
 
     public
-      Modelica.Blocks.Sources.RealExpression real_Qdot_Co(y=Qdot_Co)
+      Modelica.Blocks.Sources.RealExpression realQdot_con(y=Qdot_con)
         annotation (Placement(transformation(extent={{40,24},{60,44}},
               rotation=0)));
     public
-      Modelica.Blocks.Sources.RealExpression real_Qdot_Ev(y=Qdot_Ev)
+      Modelica.Blocks.Sources.RealExpression realQdot_eva(y=Qdot_eva)
         annotation (Placement(transformation(extent={{-10,-10},{10,10}},
               rotation=180,
             origin={-110,-10})));
     public
-      Modelica.Blocks.Sources.RealExpression real_Pel(y=Pel)
-        annotation (Placement(transformation(extent={{-92,-40},{-72,-20}},
-              rotation=0)));
+      Modelica.Blocks.Sources.RealExpression realPel(y=P_ele) annotation (Placement(
+            transformation(extent={{-92,-40},{-72,-20}}, rotation=0)));
     public
-      Modelica.Blocks.Sources.RealExpression real_CoP(y=CoP)
-        annotation (Placement(transformation(extent={{-32,-66},{-12,-46}},
-              rotation=0)));
+      Modelica.Blocks.Sources.RealExpression realCoP(y=CoP) annotation (Placement(
+            transformation(extent={{-32,-66},{-12,-46}}, rotation=0)));
 
-      Modelica.Blocks.Tables.CombiTable2D Qdot_Co_Table(
+      Modelica.Blocks.Tables.CombiTable2D Qdot_ConTable(
         tableName="NoName",
         fileName="NoName",
-        table=table_Qdot_Co,
+        table=tableQdot_con,
         smoothness=smoothness) if
-                                not (Cap_calc_type == 1)
+                                not (capCalcType == 1)
         annotation (extent=[-60,40; -40,60], Placement(transformation(extent={{-40,20},
                 {-20,40}})));
 
-      Modelica.Blocks.Tables.CombiTable2D Pel_Table(
+      Modelica.Blocks.Tables.CombiTable2D P_eleTable(
         tableName="NoName",
         fileName="NoName",
-        table=table_Pel,
+        table=tableP_ele,
         smoothness=smoothness) if
-                            not (Cap_calc_type == 1) "Electrical power table"
-                                 annotation (extent=[-60,-20;
-            -40,0], Placement(transformation(extent={{-40,-10},{-20,10}})));
+                            not (capCalcType == 1) "Electrical power table"
+        annotation (extent=[-60,-20; -40,0], Placement(transformation(extent={{-40,-10},
+                {-20,10}})));
     public
-      Modelica.Blocks.Sources.RealExpression real_T_Ev_in(y=T_Ev_in_corr)
-                                                                        annotation (Placement(transformation(extent={{-94,26},
-                {-74,46}},
-              rotation=0)));
+      Modelica.Blocks.Sources.RealExpression realT_evaIn(y=T_evaInCorr)
+        annotation (Placement(transformation(extent={{-94,26},{-74,46}}, rotation=0)));
     public
-      Modelica.Blocks.Sources.RealExpression real_T_Co_out(y=T_Co_out_corr)
-                                                                           annotation (Placement(transformation(extent={{-94,6},
-                {-74,26}},
-              rotation=0)));
-      Modelica.Blocks.Continuous.FirstOrder firstOrder(T=T_hp_cycle) if PT1_cycle
+      Modelica.Blocks.Sources.RealExpression realT_conOut(y=T_conOutCorr)
+        annotation (Placement(transformation(extent={{-94,6},{-74,26}}, rotation=0)));
+      Modelica.Blocks.Continuous.FirstOrder firstOrder(T=timeConstantCycle) if
+                                                                        PT1_cycle
         annotation (Placement(transformation(extent={{42,-6},{62,14}})));
     public
-      Modelica.Blocks.Math.Product product_Pel_CoP
-        annotation (Placement(transformation(extent={{8,-46},{28,-26}},
-              rotation=0)));
+      Modelica.Blocks.Math.Product productPelCoP1 annotation (Placement(
+            transformation(extent={{8,-46},{28,-26}}, rotation=0)));
       Modelica.Blocks.Math.UnitConversions.To_degC t_Ev_in
         annotation (extent=[-88,38; -76,50], Placement(transformation(extent={{-68,30},
                 {-56,42}})));
@@ -765,118 +753,111 @@ Models external fluid volumes and pressure drop in a heat pump. Used as condense
         annotation (extent=[-88,38; -76,50], Placement(transformation(extent={{-68,10},
                 {-56,22}})));
     public
-      Modelica.Blocks.Sources.RealExpression dummy_zero(y=0)            annotation (Placement(transformation(extent={{40,-86},
-                {60,-66}},
-              rotation=0)));
+      Modelica.Blocks.Sources.RealExpression dummyZero(y=0) annotation (Placement(
+            transformation(extent={{40,-86},{60,-66}}, rotation=0)));
     public
-      Modelica.Blocks.Sources.RealExpression real_CoP_corr(y=CoP_corr)
-        annotation (Placement(transformation(extent={{-32,-50},{-12,-30}},
-              rotation=0)));
+      Modelica.Blocks.Sources.RealExpression realCoP_corr(y=CoP_corr) annotation (
+          Placement(transformation(extent={{-32,-50},{-12,-30}}, rotation=0)));
       parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments
         "smoothness of table interpolation" annotation(Dialog(group = "Assumptions",tab="Advanced", enable=not
-                                                                                                (Cap_calc_type==1)));
+                                                                                                (capCalcType==1)));
     public
-      Modelica.Blocks.Logical.TriggeredTrapezoid real_Pel_add(amplitude=Pel_add)
+      Modelica.Blocks.Logical.TriggeredTrapezoid realP_eleAdd(amplitude=P_eleAdd)
         annotation (Placement(transformation(extent={{-72,-54},{-64,-46}},
               rotation=0)));
     public
-      Modelica.Blocks.Logical.GreaterThreshold real_Pel_add1
-        annotation (Placement(transformation(extent={{-88,-54},{-80,-46}},
-              rotation=0)));
+      Modelica.Blocks.Logical.GreaterThreshold greaterZero annotation (Placement(
+            transformation(extent={{-88,-54},{-80,-46}}, rotation=0)));
       Modelica.Blocks.Math.Add add
         annotation (Placement(transformation(extent={{-56,-52},{-46,-42}})));
 
     public
-      Modelica.Blocks.Sources.RealExpression dummy_one(y=1)             annotation (Placement(transformation(extent={{40,-70},
-                {60,-50}},
-              rotation=0)));
+      Modelica.Blocks.Sources.RealExpression dummyOne(y=1) annotation (Placement(
+            transformation(extent={{40,-70},{60,-50}}, rotation=0)));
 
     public
-      Modelica.Blocks.Interfaces.RealOutput Qdot_Co_out "Value of Real output"
+      Modelica.Blocks.Interfaces.RealOutput Qdot_conOut "Value of Real output"
         annotation (Placement(transformation(extent={{120,0},{140,20}})));
-      Modelica.Blocks.Math.UnitConversions.To_degC t_Co_in
+      Modelica.Blocks.Math.UnitConversions.To_degC t_conIn
         annotation (extent=[-88,38; -76,50], Placement(transformation(extent={{116,-36},
                 {104,-24}})));
-      Modelica.Blocks.Interfaces.RealInput T_Co_in
+      Modelica.Blocks.Interfaces.RealInput T_conIn
         "Connector of Real input signal to be converted" annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={130,-30})));
-      Modelica.Blocks.Interfaces.RealInput T_Ev_in
+      Modelica.Blocks.Interfaces.RealInput T_evaIn
         "Connector of Real input signal to be converted" annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={-130,-30})));
-      Modelica.Blocks.Interfaces.RealOutput Qdot_Ev_out "Value of Real output"
+      Modelica.Blocks.Interfaces.RealOutput Qdot_evaOut "Value of Real output"
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={-130,10})));
-      Modelica.Blocks.Interfaces.RealInput T_Co_out
+      Modelica.Blocks.Interfaces.RealInput T_conOut
         "Connector of Real input signal to be converted" annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={130,50})));
-      Modelica.Blocks.Interfaces.RealInput T_Ev_out
+      Modelica.Blocks.Interfaces.RealInput T_evaOut
         "Connector of Real input signal to be converted" annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={-130,50})));
-      Modelica.Blocks.Interfaces.RealInput m_flow_Ev
+      Modelica.Blocks.Interfaces.RealInput mFlow_eva
         "Connector of Real input signal to be converted" annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={-130,30})));
-      Modelica.Blocks.Interfaces.RealInput m_flow_Co
+      Modelica.Blocks.Interfaces.RealInput mFlow_con
         "Connector of Real input signal to be converted" annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={130,-10})));
     public
-      Modelica.Blocks.Sources.RealExpression max_temp_co(y=T_Co_max)    annotation (Placement(transformation(extent={{14,52},
-                {34,72}},
-              rotation=0)));
+      Modelica.Blocks.Sources.RealExpression maxTempCon(y=T_conMax) annotation (
+          Placement(transformation(extent={{14,52},{34,72}}, rotation=0)));
     public
-      Modelica.Blocks.Math.Product product_Pel_CoP1
-        annotation (Placement(transformation(extent={{80,30},{100,50}},
-              rotation=0)));
-      Modelica.Blocks.Continuous.LimPID PID_max_Qdot_Co(
+      Modelica.Blocks.Math.Product productPelCoP2 annotation (Placement(
+            transformation(extent={{80,30},{100,50}}, rotation=0)));
+      Modelica.Blocks.Continuous.LimPID PIDmaxHeatFlowCon(
         controllerType=Modelica.Blocks.Types.SimpleController.PI,
         Ti=1,
         yMax=1,
         yMin=0,
-        y_start=1)
-        annotation (Placement(transformation(extent={{46,52},{66,72}})));
+        y_start=1) annotation (Placement(transformation(extent={{46,52},{66,72}})));
     equation
       // correction of temperatures used in the table/polynomial
-      if Cap_calc_type==1 then
-        mFlCo_nom= mFlow_Co_nominal;
-        mFlEv_nom= mFlow_Ev_nominal;
+      if capCalcType==1 then
+        mFlow_conNom= mFlow_conNominal;
+        mFlow_evaNom= mFlow_evaNominal;
       else
-        mFlCo_nom=data_table.mFlow_Co_nom;
-        mFlEv_nom=data_table.mFlow_Ev_nom;
+        mFlow_conNom=dataTable.mFlow_conNom;
+        mFlow_evaNom=dataTable.mFlow_evaNom;
       end if;
 
       if CorrFlowCo then
-        T_Co_out_corr=1/2*(m_flow_Co/mFlCo_nom*(T_Co_out-T_Co_in)+T_Co_in+T_Co_out);
+        T_conOutCorr=1/2*(mFlow_con/mFlow_conNom*(T_conOut-T_conIn)+T_conIn+T_conOut);
       else
-        T_Co_out_corr=T_Co_out;
+        T_conOutCorr=T_conOut;
       end if;
 
       if CorrFlowEv then
-        T_Ev_in_corr=1/2*(m_flow_Ev/mFlEv_nom*(T_Ev_in-T_Ev_out)+(T_Ev_in+T_Ev_out));
+        T_evaInCorr=1/2*(mFlow_eva/mFlow_evaNom*(T_evaIn-T_evaOut)+(T_evaIn+T_evaOut));
       else
-        T_Ev_in_corr=T_Ev_in;
+        T_evaInCorr=T_evaIn;
       end if;
 
       // determination of speed N
-    if HP_ctrl_type then
+    if HPctrlType then
         N=N_nom;
     else
       if N_in > N_max then
@@ -889,155 +870,153 @@ Models external fluid volumes and pressure drop in a heat pump. Used as condense
         end if;
       end if;
     end if;
-      // determination of basic heat pump characteristics Qdot_Co_char and Pel_char and CoP_char
-      if Cap_calc_type==1 then //polynom
-        Char=data_poly(N,T_Co_out_corr, T_Ev_in_corr,m_flow_Co,m_flow_Ev);
+      // determination of basic heat pump characteristics Qdot_conChar and P_eleChar and CoP_char
+      if capCalcType==1 then //polynom
+        Char=data_poly(N,T_conOutCorr, T_evaInCorr,mFlow_con,mFlow_eva);
       else //table
-        Char={Pel_table_internal,Qdot_Co_table_internal};
+        Char={P_eleTableInternal,Qdot_conTableInternal};
       end if;
 
-      if OnOff_in then
-        Qdot_Co_char=Char[2];
-        Pel_char=Char[1];
-        CoP_char=Qdot_Co_char/Pel_char;
+      if onOff_in then
+        Qdot_conChar=Char[2];
+        P_eleChar=Char[1];
+        CoP_char=Qdot_conChar/P_eleChar;
       else
-        Qdot_Co_char=0;
-        Pel_char=0;
+        Qdot_conChar=0;
+        P_eleChar=0;
         CoP_char=0;
       end if;
 
       // determination of CoP-corrections
-      if Cap_calc_type==1 then
-        f_cop_icing=Corr_icing( T_Ev_in_corr-273.15);
+      if capCalcType==1 then
+        factorCoP_icing=Corr_icing( T_evaInCorr-273.15);
       else
-        f_cop_icing=1;
+        factorCoP_icing=1;
       end if;
 
-      CoP_corr=CoP_char*f_cop_icing;//*f_cop_spread;
+      CoP_corr=CoP_char*factorCoP_icing;//*f_cop_spread;
 
-        Pel=Pel_char*factor_scale;
-      Qdot_Co=firstOrder_out_internal;
-      if OnOff_in then
-        if Qdot_Co-Pel*eta_el>0 then
-          Qdot_Ev=Qdot_Co-Pel*eta_el;
+        P_ele=P_eleChar*factorScale;
+      Qdot_con=firstOrder_outInternal;
+      if onOff_in then
+        if Qdot_con-P_ele*eta_ele>0 then
+          Qdot_eva=Qdot_con-P_ele*eta_ele;
         else
-          Qdot_Ev=0;
+          Qdot_eva=0;
         end if;
-        CoP=Qdot_Co/(Pel+real_Pel_add.y);
+        CoP=Qdot_con/add.y;
       else
-        Qdot_Ev=0;
+        Qdot_eva=0;
         CoP=0;
       end if;
       //internal connections for conditional models
 
-      connect(product_Pel_CoP.y,firstOrder_in_internal);
+      connect(productPelCoP1.y, firstOrder_inInternal);
       if PT1_cycle then
-        connect(firstOrder_in_internal,firstOrder.u);
-        connect(firstOrder.y,firstOrder_out_internal);
+        connect(firstOrder_inInternal,firstOrder.u);
+        connect(firstOrder.y,firstOrder_outInternal);
       else
-         connect(firstOrder_in_internal,firstOrder_out_internal);
+         connect(firstOrder_inInternal,firstOrder_outInternal);
       end if;
 
-       if Cap_calc_type==1 then //polynom
-         connect(Qdot_Co_table_internal,dummy_zero.y);
-         connect(Pel_table_internal,dummy_zero.y);
+       if capCalcType==1 then //polynom
+        connect(Qdot_conTableInternal, dummyZero.y);
+        connect(P_eleTableInternal, dummyZero.y);
        else
-         connect(Qdot_Co_table_internal,Qdot_Co_Table.y);
-         connect(Pel_table_internal,Pel_Table.y);
+         connect(Qdot_conTableInternal,Qdot_ConTable.y);
+        connect(P_eleTableInternal, P_eleTable.y);
        end if;
 
-      connect(real_Pel.y, product_Pel_CoP.u1) annotation (Line(
+      connect(realPel.y, productPelCoP1.u1) annotation (Line(
           points={{-71,-30},{6,-30}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(real_CoP.y, CoP_out) annotation (Line(
+      connect(realCoP.y, CoP_out) annotation (Line(
           points={{-11,-56},{-10,-56},{-10,-90}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(real_T_Ev_in.y, t_Ev_in.u)
-                                       annotation (Line(
+      connect(realT_evaIn.y, t_Ev_in.u) annotation (Line(
           points={{-73,36},{-69.2,36}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(real_T_Co_out.y,t_Co_out. u)
-                                        annotation (Line(
+      connect(realT_conOut.y, t_Co_out.u) annotation (Line(
           points={{-73,16},{-69.2,16}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(real_CoP_corr.y, product_Pel_CoP.u2) annotation (Line(
+      connect(realCoP_corr.y, productPelCoP1.u2) annotation (Line(
           points={{-11,-40},{-2,-40},{-2,-42},{6,-42}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(t_Ev_in.y, Qdot_Co_Table.u2) annotation (Line(
+      connect(t_Ev_in.y,Qdot_ConTable. u2) annotation (Line(
           points={{-55.4,36},{-50,36},{-50,24},{-42,24}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(t_Ev_in.y, Pel_Table.u2) annotation (Line(
+      connect(t_Ev_in.y, P_eleTable.u2) annotation (Line(
           points={{-55.4,36},{-50,36},{-50,-6},{-42,-6}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(t_Co_out.y, Qdot_Co_Table.u1) annotation (Line(
+      connect(t_Co_out.y,Qdot_ConTable. u1) annotation (Line(
           points={{-55.4,16},{-48,16},{-48,36},{-42,36}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(t_Co_out.y, Pel_Table.u1) annotation (Line(
+      connect(t_Co_out.y, P_eleTable.u1) annotation (Line(
           points={{-55.4,16},{-48,16},{-48,6},{-42,6}},
           color={0,0,127},
           smooth=Smooth.None));
 
-      connect(real_Pel_add1.y, real_Pel_add.u) annotation (Line(
+      connect(greaterZero.y, realP_eleAdd.u) annotation (Line(
           points={{-79.6,-50},{-78,-50},{-78,-48},{-76,-48},{-76,-50},{-72.8,-50}},
           color={255,0,255},
           smooth=Smooth.None));
-      connect(real_Pel.y, real_Pel_add1.u) annotation (Line(
+
+      connect(realPel.y, greaterZero.u) annotation (Line(
           points={{-71,-30},{-66,-30},{-66,-40},{-92,-40},{-92,-50},{-88.8,-50}},
           color={0,0,127},
           smooth=Smooth.None));
 
-      connect(real_Pel_add.y, add.u2) annotation (Line(
+      connect(realP_eleAdd.y, add.u2) annotation (Line(
           points={{-63.6,-50},{-57,-50}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(real_Pel.y, add.u1) annotation (Line(
+      connect(realPel.y, add.u1) annotation (Line(
           points={{-71,-30},{-66,-30},{-66,-40},{-62,-40},{-62,-44},{-57,-44}},
           color={0,0,127},
           smooth=Smooth.None));
 
-      connect(t_Co_in.u, T_Co_in) annotation (Line(
+      connect(t_conIn.u,T_conIn)  annotation (Line(
           points={{117.2,-30},{130,-30}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(real_Qdot_Ev.y, Qdot_Ev_out) annotation (Line(
+      connect(realQdot_eva.y,Qdot_evaOut)  annotation (Line(
           points={{-121,-10},{-130,-10},{-130,10}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(add.y, Pel_out) annotation (Line(
-          points={{-45.5,-47},{-40,-47},{-40,-66},{-50,-66},{-50,-90},{-50,-90}},
+      connect(add.y, P_eleOut) annotation (Line(
+          points={{-45.5,-47},{-40,-47},{-40,-66},{-50,-66},{-50,-90}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(product_Pel_CoP1.y, Qdot_Co_out) annotation (Line(
+      connect(productPelCoP2.y, Qdot_conOut) annotation (Line(
           points={{101,40},{112,40},{112,10},{130,10}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(real_Qdot_Co.y, product_Pel_CoP1.u2) annotation (Line(
+      connect(realQdot_con.y, productPelCoP2.u2) annotation (Line(
           points={{61,34},{78,34}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(PID_max_Qdot_Co.u_s, max_temp_co.y) annotation (Line(
+      connect(PIDmaxHeatFlowCon.u_s, maxTempCon.y) annotation (Line(
           points={{44,62},{35,62}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(PID_max_Qdot_Co.u_m, T_Co_out) annotation (Line(
+      connect(PIDmaxHeatFlowCon.u_m, T_conOut) annotation (Line(
           points={{56,50},{4,50},{4,80},{114,80},{114,50},{130,50}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(PID_max_Qdot_Co.y, product_Pel_CoP1.u1) annotation (Line(
+      connect(PIDmaxHeatFlowCon.y, productPelCoP2.u1) annotation (Line(
           points={{67,62},{70,62},{70,46},{78,46}},
           color={0,0,127},
           smooth=Smooth.None));
-      annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-150,
-                -100},{150,100}}),
-                             graphics), Icon(coordinateSystem(preserveAspectRatio=true,
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-150,-100},
+                {150,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio=true,
               extent={{-150,-100},{150,100}}), graphics={
             Rectangle(
               extent={{-130,90},{130,-90}},
@@ -1108,10 +1087,10 @@ Models external fluid volumes and pressure drop in a heat pump. Used as condense
     partial function baseFct "Base class for Cycle Characteristic"
       extends Modelica.Icons.Function;
       input Real N;
-      input Real T_co;
-      input Real T_ev;
-      input Real m_flow_Ev;
-      input Real m_flow_Co;
+      input Real T_con;
+      input Real T_eva;
+      input Real mFlow_eva;
+      input Real mFlow_con;
       output Real Char[2];
 
       annotation (Documentation(info="<html>
@@ -1130,61 +1109,23 @@ Base funtion used in HeatPump model. It defines the inputs speed N (1/min), cond
 "));
     end baseFct;
 
-    function Ochsner_GMLW_19plus
-      "Ochsner GMLW 19plus, defrost included, no dependency on speed"
-      extends AixLib.HVAC.HeatGeneration.HeatPump.Characteristics.baseFct(
-        N,
-        T_co,
-        T_ev,
-        m_flow_Ev,
-        m_flow_Co);
-        parameter Real c_Pcomp[7]={0.8818,0.00941,0.09351,0.001514,0.0004721,-2.576e-6,-1.234e-5};
-        parameter Real c_QdotH[15]={18.1,0.2165,-0.05897, 0.01198,
-        0.009865,6.728e-5,0.0002854,3.097e-5,-0.000109,-2.341e-5,
-        -2.207e-5,-1.343e-6,6.815e-7,3.929e-8,2.388e-7};
-
-    algorithm
-    Char:= 1000*{
-     c_Pcomp[1]+c_Pcomp[2]*(T_ev-273.15)+c_Pcomp[3]*(T_co-273.15)+c_Pcomp[4]*(T_ev-273.15)^2+
-     c_Pcomp[5]*(T_ev-273.15)*(T_co-273.15)+c_Pcomp[6]*(T_ev-273.15)^3+c_Pcomp[7]*(T_ev-273.15)^2*(T_co-273.15),
-    c_QdotH[1] +c_QdotH[2]*(T_ev-273.15) +c_QdotH[3]*(T_co-273.15) + c_QdotH[4]*(T_ev-273.15)^2 +
-    c_QdotH[5]*(T_co-273.15)*(T_ev-273.15) +c_QdotH[6]*(T_co-273.15)^2 +c_QdotH[7]*(T_ev-273.15)^3+
-    c_QdotH[8]*(T_ev-273.15)^2*(T_co-273.15)+ c_QdotH[9]*(T_ev-273.15)*(T_co-273.15)^2+ c_QdotH[10]*(T_ev-273.15)^4 +
-    c_QdotH[11]*(T_ev-273.15)^3*(T_co-273.15) +c_QdotH[12]*(T_ev-273.15)^2*(T_co-273.15)^2+
-    c_QdotH[13]*(T_ev-273.15)^5 +c_QdotH[14]*(T_ev-273.15)^4*(T_co-273.15) + c_QdotH[15]*(T_ev-273.15)^3*(T_co-273.15)^2};
-
-      annotation (Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
-<p>According to data from Ochsner data sheets (see references) and fitting in Matlab. The polynomials don&apos;t have any dependency on the speed N or on the mass flow rate.
-It is not clear from the data according to which standard the data is measured. </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
-<p><a href=\"http://www.tauschek.net/uploads/tx_sbdownloader/BA_GMLW_HEP_OTE__DE_20090218_Vers1.pdf\">http://www.tauschek.net/uploads/tx_sbdownloader/BA_GMLW_HEP_OTE__DE_20090218_Vers1.pdf</a> </p>
-</html>",
-        revisions="<html>
-<p><ul>
-<li><i>December 10, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
-</ul></p>
-</html>
-"));
-    end Ochsner_GMLW_19plus;
 
     function constantQualityGrade
       "Carnot CoP multiplied with constant quality grade and constant electric power"
       extends AixLib.HVAC.HeatGeneration.HeatPump.Characteristics.baseFct(
         N,
-        T_co,
-        T_ev,
-        m_flow_Ev,
-        m_flow_Co);
+        T_con,
+        T_eva,
+        mFlow_eva,
+        mFlow_con);
         parameter Real qualityGrade=0.3 "Constant quality grade";
-        parameter Modelica.SIunits.Power powerCompressor=2000
+        parameter Modelica.SIunits.Power P_com=2000
         "Constant electric power input for compressor";
-        Real CoP_C;
+    protected
+        Real CoP_C "Carnot CoP";
     algorithm
-      CoP_C:=T_Co/(T_Co - T_Ev);
-      Char:= {powerCompressor,powerCompressor*CoP_C*qualityGrade};
+      CoP_C:=T_con/(T_con - T_eva);
+      Char:= {P_com,P_com*CoP_C*qualityGrade};
 
       annotation (Documentation(info="<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>
@@ -1204,10 +1145,10 @@ It is not clear from the data according to which standard the data is measured. 
     function constantCoP "Constant CoP and constant electric power"
       extends AixLib.HVAC.HeatGeneration.HeatPump.Characteristics.baseFct(
         N,
-        T_co,
-        T_ev,
-        m_flow_Ev,
-        m_flow_Co);
+        T_con,
+        T_eva,
+        mFlow_eva,
+        mFlow_con);
         parameter Modelica.SIunits.Power powerCompressor=2000
         "Constant electric power input for compressor";
         parameter Real CoP "Constant CoP";
@@ -1236,8 +1177,8 @@ It is not clear from the data according to which standard the data is measured. 
     partial function baseFct
       "Base class for correction model, icing and defrosting of evaporator"
       extends Modelica.Icons.Function;
-      input Real T_ev;
-      output Real f_cop_icing;
+      input Real T_eva;
+      output Real f_CoPicing;
       annotation (Documentation(info="<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>
 <p>
@@ -1254,12 +1195,11 @@ Base funtion used in HeatPump model. Input is the evaporator inlet temperature, 
     end baseFct;
 
     function noModel "No model"
-      import HVAC;
       extends AixLib.HVAC.HeatGeneration.HeatPump.DefrostCorrection.baseFct(
-          T_ev);
+          T_eva);
 
     algorithm
-    f_cop_icing:=1;
+    f_CoPicing:=1;
 
       annotation (Documentation(info="<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>
@@ -1279,7 +1219,7 @@ No correction factor for icing/defrosting: f_cop_icing=1.
     function WetterAfjei1996
       "Correction of CoP (Icing, Defrost) according to Wetter,Afjei 1996"
       extends AixLib.HVAC.HeatGeneration.HeatPump.DefrostCorrection.baseFct(
-          T_ev);
+          T_eva);
 
     parameter Real A=0.03;
     parameter Real B=-0.004;
@@ -1291,14 +1231,14 @@ No correction factor for icing/defrosting: f_cop_icing=1.
     Real linear_term;
     Real gauss_curve;
     algorithm
-    linear_term:=A + B*T_ev;
-    gauss_curve:=C*Modelica.Math.exp(-(T_ev - D)*(T_ev - D)/E);
+    linear_term:=A + B*T_eva;
+    gauss_curve:=C*Modelica.Math.exp(-(T_eva - D)*(T_eva - D)/E);
     if linear_term>0 then
       factor:=linear_term + gauss_curve;
     else
       factor:=gauss_curve;
     end if;
-    f_cop_icing:=1-factor;
+    f_CoPicing:=1-factor;
       annotation (Documentation(info="<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>
 <p>

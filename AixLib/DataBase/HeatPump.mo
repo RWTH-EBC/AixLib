@@ -6,11 +6,11 @@ package HeatPump "Collection of HeatPump Database Records"
       extends Modelica.Icons.Record;
     import SI = Modelica.SIunits;
     import SIconv = Modelica.SIunits.Conversions.NonSIunits;
-    parameter Real table_Qdot_Co[:,:] "Heating power lookup table";
-    parameter Real table_Pel[:,:] "Electrical power lookup table";
-    parameter SI.MassFlowRate mFlow_Co_nom
+    parameter Real tableQdot_con[:,:] "Heating power lookup table";
+    parameter Real tableP_ele[:,:] "Electrical power lookup table";
+    parameter SI.MassFlowRate mFlow_conNom
       "nominal mass flow rate in condenser";
-    parameter SI.MassFlowRate mFlow_Ev_nom
+    parameter SI.MassFlowRate mFlow_evaNom
       "nominal mass flow rate in evaporator";
 
     annotation (Documentation(info="<html>
@@ -32,12 +32,12 @@ Base data definition used in the HeatPump model. It defines the table table_Qdot
 
     record StiebelEltron_WPL18 "Stiebel Eltron WPL 18"
       extends HeatPumpBaseDataDefinition(
-        table_Pel=[0,-7,2,7,10,20; 35,3300,3400,3500,3700,3800; 50,4500,4400,4600,5000,
+        tableP_ele=[0,-7,2,7,10,20; 35,3300,3400,3500,3700,3800; 50,4500,4400,4600,5000,
             5100],
-        table_Qdot_Co=[0,-7,2,7,10,20; 35,9700,11600,13000,14800,16300; 50,10000,11200,
+        tableQdot_con=[0,-7,2,7,10,20; 35,9700,11600,13000,14800,16300; 50,10000,11200,
             12900,16700,17500],
-        mFlow_Co_nom=13000/4180/5,
-        mFlow_Ev_nom=1);
+        mFlow_conNom=13000/4180/5,
+        mFlow_evaNom=1);
 
       annotation(preferedView="text", DymolaStoredErrors,
         Icon,
@@ -66,13 +66,13 @@ EN14511
 
     record Vitocal350BWH113 "Vitocal 350 BWH 113"
       extends HeatPumpBaseDataDefinition(
-        table_Pel=[0,-5.0,0.0,5.0,10.0,15.0; 35,3750,3750,3750,3750,3833; 45,4833,4917,
+        tableP_ele=[0,-5.0,0.0,5.0,10.0,15.0; 35,3750,3750,3750,3750,3833; 45,4833,4917,
             4958,5042,5125; 55,5583,5667,5750,5833,5958; 65,7000,7125,7250,7417,7583],
-        table_Qdot_Co=[0,-5.0,0.0,5.0,10.0,15.0; 35,14500,16292,18042,19750,21583; 45,
+        tableQdot_con=[0,-5.0,0.0,5.0,10.0,15.0; 35,14500,16292,18042,19750,21583; 45,
             15708,17167,18583,20083,21583; 55,15708,17167,18583,20083,21583; 65,15708,
             17167,18583,20083,21583],
-        mFlow_Co_nom=16292/4180/10,
-        mFlow_Ev_nom=12300/3600/3);
+        mFlow_conNom=16292/4180/10,
+        mFlow_evaNom=12300/3600/3);
 
       annotation(preferedView="text", DymolaStoredErrors,
         Icon,
