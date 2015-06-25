@@ -29,9 +29,10 @@ model HeatPumpSystem2 "Test case for boiler model"
   AixLib.Fluid.Sensors.TemperatureTwoPort
                             temperatureSensor(redeclare package Medium = Medium,
       m_flow_nominal=0.01)                    annotation(Placement(transformation(extent = {{60, 60}, {80, 80}})));
-  AixLib.Fluid.HeatExchangers.HeatPump heatPump(
+  AixLib.Fluid.HeatExchangers.HeatPump.SimpleHeatPump heatPump(
     tablePower=[0.0,273.15,283.15; 308.15,1100,1150; 328.15,1600,1750],
-    tableHeatFlowCondenser=[0.0,273.15,283.15; 308.15,4800,6300; 328.15,4400,5750],
+    tableHeatFlowCondenser=[0.0,273.15,283.15; 308.15,4800,6300; 328.15,4400,
+        5750],
     redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{-18,40},{2,60}})));
 

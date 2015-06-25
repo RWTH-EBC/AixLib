@@ -1,5 +1,5 @@
-within AixLib.Fluid.HeatExchangers;
-model HeatPump
+within AixLib.Fluid.HeatExchangers.HeatPump;
+model SimpleHeatPump
 
   replaceable package Medium =
      Modelica.Media.Water.ConstantPropertyLiquidWater
@@ -109,9 +109,9 @@ equation
       smooth=Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
             -100},{100,100}}),                                                                           graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 255}, fillColor = {249, 249, 249},
-            fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{-80, 80}, {-60, -80}}, lineColor = {0, 0, 255}, fillColor = {170, 213, 255},
-            fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{60, 80}, {80, -80}}, lineColor = {0, 0, 255}, fillColor = {255, 170, 213},
-            fillPattern =                                                                                                    FillPattern.Solid), Text(extent = {{-100, 20}, {100, -20}}, lineColor = {0, 0, 255}, textString = "%name")}), Documentation(info = "<html>
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-80, 80}, {-60, -80}}, lineColor = {0, 0, 255}, fillColor = {170, 213, 255},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{60, 80}, {80, -80}}, lineColor = {0, 0, 255}, fillColor = {255, 170, 213},
+            fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-100, 20}, {100, -20}}, lineColor = {0, 0, 255}, textString = "%name")}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Simple model of an on/off-controlled heat pump. The refrigerant circuit is a black-box model represented by tables which calculate the electric power and heat flows of the condenser depending on the source and sink temperature. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
@@ -129,4 +129,4 @@ equation
  <li>implemented</li>
  </ul></p>
  </html>"));
-end HeatPump;
+end SimpleHeatPump;
