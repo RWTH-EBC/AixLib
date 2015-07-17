@@ -7,6 +7,8 @@ This site will be used to further develop the library and make it available unde
 
 As the library is developed at RWTH Aachen University, the library's name **AixLib** is derived from the the city's french name Aix-la-Chapelle, which the people of Aachen are very fond of and use a lot. With the name **AixLib** we follow this local tradition.
 
+If you have any questions regarding **AixLib**, feel free to contact us at aixlib@eonerc.rwth-aachen.de.
+
 ### License
 
 The model library **AixLib** is released by RWTH Aachen University's Institute for Energy Efficient Buildings and Indoor Climate (EBC) under the [Modelica License 2.0](https://www.modelica.org/licenses/ModelicaLicense2).
