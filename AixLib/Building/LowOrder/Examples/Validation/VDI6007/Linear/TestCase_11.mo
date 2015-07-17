@@ -76,7 +76,7 @@ equation
       color={191,0,0},
       smooth=Smooth.None));
   connect(cooler.heatCoolRoom, reducedModel.heatConvInnerwall.port_b);
-  connect(solarRadiation.y, reducedModel.u1) annotation (Line(
+  connect(solarRadiation.y, reducedModel.solarRad_in) annotation (Line(
       points={{-15,82},{73.18,82},{73.18,74.8}},
       color={0,0,127},
       smooth=Smooth.None));
@@ -86,8 +86,7 @@ equation
         "Simulate and plot"),
              __Dymola_experimentSetupOutput(events = false), Icon(graphics),
              Diagram(coordinateSystem(preserveAspectRatio=false,
-             extent={{-100,
-                      -100},{100,100}}),
+             extent={{-100,-100},{100,100}}),
                       graphics),
             Documentation(revisions="<html>
 <p><ul>

@@ -39,7 +39,6 @@ model TestCase_8
 equation
   referenceTemp = reference.y;
   simulationTemp = reducedModel.airload.port.T;
-  connect(Quelle_Fenster.solarRad_out, sunblind.Rad_In) annotation(Line(points = {{-41, 78}, {-29, 78}}, color = {255, 128, 0}, smooth = Smooth.None));
   connect(sunblind.sunblindonoff, eqAirTemp.sunblindsig) annotation(Line(points = {{-20, 68}, {-14, 68}, {-14, 48}, {-6, 48}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(infiltrationRate.y, reducedModel.ventilationRate) annotation(Line(points={{48.5,0},
           {58.54,0},{58.54,28}},                                                                                         color = {0, 0, 127}, smooth = Smooth.None));
@@ -61,14 +60,6 @@ equation
   connect(eqAirTemp.equalAirTemp, reducedModel.equalAirTemp) annotation (Line(
       points={{3.8,34.4},{14,34.4},{14,34},{26,34},{26,46.8},{51.4,46.8}},
       color={191,0,0},
-      smooth=Smooth.None));
-  connect(rad_weighted_sum.solarRad_out, reducedModel.u1) annotation (Line(
-      points={{39,78},{57.18,78},{57.18,64.8}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  connect(sunblind.Rad_Out, solarRadAdapter.solarRad_in) annotation (Line(
-      points={{-11,78},{-1,78}},
-      color={255,128,0},
       smooth=Smooth.None));
   connect(rad_weighted_sum.solarRad_in, solarRadAdapter.solarRad_out)
     annotation (Line(
@@ -123,6 +114,19 @@ equation
   connect(eqAirTemp.solarRad_in, solarRadAdapter1.solarRad_out) annotation (
       Line(
       points={{-14.5,45.6},{-16,45.6},{-16,46},{-18,46}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(Quelle_Fenster.solarRad_out, sunblind.Rad_in) annotation (Line(
+      points={{-41,78},{-29,78}},
+      color={255,128,0},
+      smooth=Smooth.None));
+  connect(sunblind.Rad_out, solarRadAdapter.solarRad_in) annotation (Line(
+      points={{-11,78},{-1,78}},
+      color={255,128,0},
+      smooth=Smooth.None));
+  connect(rad_weighted_sum.solarRad_out, reducedModel.solarRad_in) annotation (
+      Line(
+      points={{39,78},{57.18,78},{57.18,64.8}},
       color={0,0,127},
       smooth=Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,

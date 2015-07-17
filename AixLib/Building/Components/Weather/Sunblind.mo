@@ -5,29 +5,31 @@ model Sunblind "Reduces beam at Imax"
     "Total energy transmittances if sunblind is closed";
   parameter Modelica.SIunits.RadiantEnergyFluenceRate Imax = 100
     "Intensity at which the sunblind closes";
-  Utilities.Interfaces.SolarRad_in Rad_In[n] annotation(Placement(transformation(extent = {{-100, 0}, {-80, 20}})));
-  Utilities.Interfaces.SolarRad_out Rad_Out[n] annotation(Placement(transformation(extent = {{80, 0}, {100, 20}})));
+  Utilities.Interfaces.SolarRad_in Rad_in[n] annotation(Placement(transformation(extent = {{-100, 0}, {-80, 20}})));
+  Utilities.Interfaces.SolarRad_out Rad_out[n] annotation(Placement(transformation(extent = {{80, 0}, {100, 20}})));
   Modelica.Blocks.Interfaces.RealOutput sunblindonoff[n] annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin = {8, -100}), iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin = {0, -90})));
   /*if OutputSunblind*/
 initial equation
   assert(n == size(gsunblind, 1), "gsunblind has to have n elements");
 equation
   for i in 1:n loop
-    if Rad_In[i].I > Imax then
-      Rad_Out[i].I = Rad_In[i].I * gsunblind[i];
+    if Rad_in[i].I > Imax then
+      Rad_out[i].I = Rad_in[i].I * gsunblind[i];
       sunblindonoff[i] = 1 - gsunblind[i];
     else
-      Rad_Out[i].I = Rad_In[i].I;
+      Rad_out[i].I = Rad_in[i].I;
       sunblindonoff[i] = 0;
     end if;
     //Dummy equation
-    Rad_Out[i].I_dir = sum(Rad_In.I_dir);
-    Rad_Out[i].I_diff = sum(Rad_In.I_diff);
-    Rad_Out[i].I_gr = sum(Rad_In.I_gr);
-    Rad_Out[i].AOI = sum(Rad_In.AOI);
+    Rad_out[i].I_dir = sum(Rad_in.I_dir);
+    Rad_out[i].I_diff = sum(Rad_in.I_diff);
+    Rad_out[i].I_gr = sum(Rad_in.I_gr);
+    Rad_out[i].AOI = sum(Rad_in.AOI);
   end for;
 
-  annotation(Diagram(graphics), Icon(coordinateSystem(preserveAspectRatio=false,
+  annotation(Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+            {100,100}}),
+                     graphics), Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}}),
                                      graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor=
               {0,0,0},                                                                                             fillColor=

@@ -41,12 +41,12 @@ equation
           -10},{56.54,-10},{56.54,38}},                                                                                      color = {0, 0, 127}, smooth = Smooth.None));
   connect(heatToStar.Star, reducedModel.internalGainsRad) annotation(Line(points={{59.1,
           -89},{72,-89},{72,38},{75.75,38}},                                                                                        color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
-  connect(solarRadiation.y, reducedModel.u1) annotation (Line(
+  connect(solarRadiation.y, reducedModel.solarRad_in) annotation (Line(
       points={{-27,86},{55.18,86},{55.18,74.8}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false,
-                     extent = {{-100, -100}, {100, 100}}),
+  annotation(Diagram(coordinateSystem(preserveAspectRatio=false,
+                     extent={{-100,-100},{100,100}}),
                      graphics),
              experiment(StopTime = 5.184e+006, Interval = 3600, Algorithm = "Lsodar"),
              __Dymola_Commands(file=

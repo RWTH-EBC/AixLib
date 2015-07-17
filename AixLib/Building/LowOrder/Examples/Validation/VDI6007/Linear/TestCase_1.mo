@@ -29,7 +29,7 @@ equation
           {10.54,-40},{10.54,1.7}},                                                                                        color = {0, 0, 127}, smooth = Smooth.None));
   connect(machinesConvective.port, reducedModel.internalGainsConv) annotation(Line(points={{12,-76},
           {20.4,-76},{20.4,1.7}},                                                                                                  color = {191, 0, 0}, smooth = Smooth.None));
-  connect(solarRadiation.y, reducedModel.u1) annotation (Line(
+  connect(solarRadiation.y, reducedModel.solarRad_in) annotation (Line(
       points={{-35,62},{9.18,62},{9.18,32.98}},
       color={0,0,127},
       smooth=Smooth.None));

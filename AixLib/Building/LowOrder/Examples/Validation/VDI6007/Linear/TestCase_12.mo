@@ -32,7 +32,6 @@ equation
   simulationTemp = reducedModel.airload.port.T;
   connect(outdoorTemp.y[1], varTemp.T) annotation(Line(points={{-39,28},{-22,28},
           {-22,38},{-2,38}},                                                                                 color = {0, 0, 127}, smooth = Smooth.None));
-  connect(Quelle_Fenster.solarRad_out, sunblind.Rad_In) annotation(Line(points = {{-35, 82}, {-23, 82}}, color = {255, 128, 0}, smooth = Smooth.None));
   connect(varTemp.port, reducedModel.equalAirTemp) annotation(Line(points={{20,38},
           {28,38},{28,50.8},{57.4,50.8}},                                                                                   color = {191, 0, 0}, smooth = Smooth.None));
   connect(HeatTorStar.Star, reducedModel.internalGainsRad) annotation(Line(points={{67.1,
@@ -75,18 +74,23 @@ equation
       points={{-61,82},{-58,82},{-58,75},{-53,75}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(rad_weighted_sum.solarRad_out, reducedModel.u1) annotation (Line(
-      points={{49,82},{56,82},{56,80},{63.18,80},{63.18,68.8}},
-      color={0,0,127},
-      smooth=Smooth.None));
   connect(solarRadAdapter2.solarRad_out, rad_weighted_sum.solarRad_in)
     annotation (Line(
       points={{24,82},{31,82}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(solarRadAdapter2.solarRad_in, sunblind.Rad_Out) annotation (Line(
-      points={{5,82},{-5,82}},
+  connect(Quelle_Fenster.solarRad_out, sunblind.Rad_in) annotation (Line(
+      points={{-35,82},{-23,82}},
       color={255,128,0},
+      smooth=Smooth.None));
+  connect(sunblind.Rad_out, solarRadAdapter2.solarRad_in) annotation (Line(
+      points={{-5,82},{5,82}},
+      color={255,128,0},
+      smooth=Smooth.None));
+  connect(rad_weighted_sum.solarRad_out, reducedModel.solarRad_in) annotation (
+      Line(
+      points={{49,82},{63.18,82},{63.18,68.8}},
+      color={0,0,127},
       smooth=Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
             -100},{100,100}}),

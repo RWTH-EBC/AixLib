@@ -39,7 +39,7 @@ equation
           {22,-30},{22,11.7},{22.54,11.7}},                                                                                            color = {0, 0, 127}, smooth = Smooth.None));
   connect(machinesConvective.port, reducedModel.internalGainsConv) annotation(Line(points={{24,-58},
           {32.4,-58},{32.4,11.7}},                                                                                                  color = {191, 0, 0}, smooth = Smooth.None));
-  connect(solarRadiation.y, reducedModel.u1) annotation (Line(
+  connect(solarRadiation.y, reducedModel.solarRad_in) annotation (Line(
       points={{-25,72},{21.18,72},{21.18,42.98}},
       color={0,0,127},
       smooth=Smooth.None));
@@ -66,6 +66,6 @@ equation
                                "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Star/TestCase_3.mos"
         "Simulate and plot"),
             __Dymola_experimentSetupOutput(events = false),
-            Diagram(coordinateSystem(preserveAspectRatio = false,
-            extent = {{-100, -100}, {100, 100}}), graphics));
+            Diagram(coordinateSystem(preserveAspectRatio=false,
+            extent={{-100,-100},{100,100}}),      graphics));
 end TestCase_3;

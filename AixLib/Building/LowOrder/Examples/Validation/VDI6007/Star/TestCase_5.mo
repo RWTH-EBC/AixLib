@@ -46,8 +46,8 @@ model TestCase_5
     annotation (Placement(transformation(extent={{-84,78},{-64,98}})));
   Utilities.Sources.PrescribedSolarRad PrescribedSolarRad(n = 5) annotation(Placement(transformation(extent={{-50,78},
             {-30,98}})));
-  Components.Weather.Sunblind sunblind(n = 5, gsunblind = {0, 0, 0.15, 0, 0}) annotation(Placement(transformation(extent={{-20,77},
-            {0,97}})));
+  Components.Weather.Sunblind sunblind(n = 5, gsunblind = {0, 0, 0.15, 0, 0}) annotation(Placement(transformation(extent={{-24,77},
+            {-4,97}})));
   BaseClasses.SolarRadWeightedSum                   SolarRadWeightedSum(n = 5, weightfactors = {0, 0, 7, 0, 0}) annotation(Placement(transformation(extent={{28,78},
             {48,98}})));
   BaseClasses.SolarRadAdapter solarRadAdapter[5]
@@ -70,12 +70,6 @@ equation
   connect(innerLoads.y[3], machinesConvective.Q_flow) annotation(Line(points = {{-37, -62}, {-18, -62}, {-18, -42}, {10, -42}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(innerLoads.y[2], personsConvective.Q_flow) annotation(Line(points = {{-37, -62}, {10, -62}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(innerLoads.y[1], personsRadiative.Q_flow) annotation(Line(points = {{-37, -62}, {-18, -62}, {-18, -90}, {10, -90}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(PrescribedSolarRad.solarRad_out,sunblind. Rad_In) annotation(Line(points={{-31,88},
-          {-19,88}},                                                                                         color = {255, 128, 0}, smooth = Smooth.None));
-  connect(SolarRadWeightedSum.solarRad_out, reducedModel.u1) annotation (Line(
-      points={{47,88},{57.18,88},{57.18,64.8}},
-      color={0,0,127},
-      smooth=Smooth.None));
   connect(windowRad.y, PrescribedSolarRad.I) annotation (Line(
       points={{-63,88},{-56,88},{-56,96.9},{-48.9,96.9}},
       color={0,0,127},
@@ -101,12 +95,21 @@ equation
       points={{22,88},{29,88}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(sunblind.Rad_Out, solarRadAdapter.solarRad_in) annotation (Line(
-      points={{-1,88},{3,88}},
+  connect(PrescribedSolarRad.solarRad_out, sunblind.Rad_in) annotation (Line(
+      points={{-31,88},{-23,88}},
       color={255,128,0},
       smooth=Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false,
-             extent = {{-100, -100}, {100, 100}}), graphics),
+  connect(sunblind.Rad_out, solarRadAdapter.solarRad_in) annotation (Line(
+      points={{-5,88},{3,88}},
+      color={255,128,0},
+      smooth=Smooth.None));
+  connect(SolarRadWeightedSum.solarRad_out, reducedModel.solarRad_in)
+    annotation (Line(
+      points={{47,88},{57.18,88},{57.18,64.8}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  annotation(Diagram(coordinateSystem(preserveAspectRatio=false,
+             extent={{-100,-100},{100,100}}),      graphics),
              experiment(StopTime=5.184e+006, Interval=3600, __Dymola_Algorithm="Lsodar"),
              __Dymola_Commands(file=
                                "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Star/TestCase_5.mos"
