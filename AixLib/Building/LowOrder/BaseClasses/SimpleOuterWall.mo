@@ -17,28 +17,31 @@ equation
   connect(ResRest.port_b, load1.port) annotation(Line(points = {{-28, 30}, {-2, 30}, {-2, 2}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(load1.port, Res1.port_a) annotation(Line(points = {{-2, 2}, {-2, 30}, {38, 30}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(Res1.port_b, port_b) annotation(Line(points = {{58, 30}, {80, 30}, {80, 0}, {100, 0}}, color = {191, 0, 0}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 120}}), graphics), Documentation(info = "<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <ul>
- <li>This thermal model represents the one dimensional heat transfer of a simple wall with dynamic characteristics (heat storage, 1 capacitance)</li>
- <li>It is based on the VDI 6007, in which the heat transfer through outer walls is described by a comparison with an electric circuit.</li>
- <li>Normally, it should be used together with the other parts of the VDI 6007 model library. It represents all walls with a heat transfer. Make sure, you got the right R&apos;s and C&apos;s (e.g. like they are computed in VDI 6007).</li>
- </ul>
- <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars4.png\" alt=\"stars: 4 out of 5\"/></p>
- <h4><span style=\"color:#008000\">Assumptions</span></h4>
- <p>The model underlies all assumptions which are made in VDI 6007, especially that all heat transfer parts are combined in one part. It can be used in combination with various other models.</p>
- <h4><span style=\"color:#008000\">Known Limitations</span></h4>
- <p>There are no known limitaions.</p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>The model works like an electric circuit as the equations of heat transfer are similar to them. All elements used in the model are taken from the EBC standard library.</p>
- <p><br/><b><font style=\"color: #008000; \">References</font></b></p>
- <ul>
- <li>German Association of Engineers: Guideline VDI 6007-1, March 2012: Calculation of transient thermal response of rooms and buildings - Modelling of rooms.</li>
- </ul>
- <h4><span style=\"color:#008000\">Example Results</span></h4>
- <p>The wall model is tested and validated in the context of the <a href=\"AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel\">ReducedOrderModel</a>. See <a href=\"AixLib.Building.LowOrder.Validation\">Validation</a> for some results.</p>
- </html>", revisions = "<html>
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 120}}), graphics), Documentation(info="<html>
+<p>The model works like an electric circuit as the equations of heat transfer are similar to them.</p>
+<p>The class contains following components: </p>
+<ul>
+<li>connectors for heat transfer</li>
+<li>2 heat storages as thermal resistances</li>
+<li>heat load as a heat capacitor</li>
+</ul>
+<h4>Main equations</h4>
+<p>There are no equations.</p>
+<h4>Assumption and limitations</h4>
+<p>The model underlies all assumptions which are made in VDI 6007, especially that all heat transfer parts are combined in one part. It can be used in combination with various other models. There are no known limitaions. </p>
+<h4>Typical use and important parameters</h4>
+<p>Normally, it should be used together with the other parts of the VDI 6007 model library. It represents all walls with a heat transfer. Make sure, you got the right R&apos;s and C&apos;s (e.g. like they are computed in VDI 6007). </p>
+<p>This thermal model represents the one dimensional heat transfer of a simple wall with dynamic characteristics (heat storage, 1 capacitance) </p>
+<h4>Validation</h4>
+<p>It is based on the VDI 6007, in which the heat transfer through outer walls is described by a comparison with an electric circuit. </p>
+<h4>Implementation</h4>
+<h4>References</h4>
+<ul>
+<li>German Association of Engineers: Guideline VDI 6007-1, March 2012: Calculation of transient thermal response of rooms and buildings - Modelling of rooms. </li>
+</ul>
+<p><b>Example Results</b> </p>
+<p>The wall model is tested and validated in the context of the <a href=\"AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel\">ReducedOrderModel</a>. See <a href=\"AixLib.Building.LowOrder.Examples.Validation\">Validation</a> for some results. </p>
+</html>",  revisions = "<html>
  <ul>
  <li><i>January 2012,&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
  </ul>
