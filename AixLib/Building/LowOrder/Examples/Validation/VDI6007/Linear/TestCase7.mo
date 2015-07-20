@@ -18,7 +18,7 @@ model TestCase7
     Vair=0.01,
     alphaiwi=2.23642384)                                                                                         annotation(Placement(transformation(extent={{46,36},
             {80,76}})));
-  Utilities.Sources.HeaterCooler.IdealHeaterCoolerVar1 idealHeaterCoolerVar1_1(Q_flow_heat = 1, Q_flow_cooler = 1, h_cooler = 0,                TN_cooler = 1, h_heater = 500, l_cooler = -500,                   KR_cooler = 1000,
+  HVAC.HeatGeneration.IdealHeaterCooler                idealHeaterCoolerVar1_1(                                    h_cooler = 0,                TN_cooler = 1, h_heater = 500, l_cooler = -500,                   KR_cooler = 1000,
     KR_heater=10,
     TN_heater=0.1)                                                                                                     annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin = {-26, -20})));
   Modelica.Blocks.Sources.CombiTimeTable setTemp(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, columns = {2, 3},

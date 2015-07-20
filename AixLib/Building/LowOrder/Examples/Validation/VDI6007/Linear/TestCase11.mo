@@ -17,7 +17,7 @@ model TestCase11
     C1o=1.6008e+006,
     Vair=0.01,
     alphaiwi=3.0013245)                                                                                                     annotation(Placement(transformation(extent = {{64, 36}, {98, 76}})));
-  Utilities.Sources.HeaterCooler.IdealHeaterCoolerVar1 heater(Q_flow_heat = 1, Q_flow_cooler = 1, h_cooler = 0,                   KR_cooler = 1000,                TN_cooler = 1, h_heater = 500, l_cooler = -500, Cooler_on = false,
+  HVAC.HeatGeneration.IdealHeaterCooler                heater(                                    h_cooler = 0,                   KR_cooler = 1000,                TN_cooler = 1, h_heater = 500, l_cooler = -500, Cooler_on = false,
     KR_heater=10,
     TN_heater=0.1)                                                                                                     annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin = {-26, -20})));
   Modelica.Blocks.Sources.CombiTimeTable setTemp(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, columns = {2, 3},
@@ -58,9 +58,9 @@ equation
       color={191,0,0},
       smooth=Smooth.None));
   connect(setTemp.y[1], heater.soll_heat) annotation(Line(points = {{-59, -20}, {-50, -20}, {-50, -23}, {-30.8, -23}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(sumHeatLoad.u1, heater.heatMeter.p);
   connect(sumHeatLoad.u2, cooler.coolMeter.p);
   connect(cooler.HeatCoolRoom, reducedModel.heatConvInnerwall.port_b);
+  connect(sumHeatLoad.u1, heater.heatMeter.p);
   referenceLoad[1] = -reference.y[2];
   simulationLoad = sumHeatLoad.y;
   connect(setTemp.y[2], cooler.soll_cool) annotation(Line(points = {{-59, -20}, {-44, -20}, {-44, -43.2}, {-30.8, -43.2}}, color = {0, 0, 127}, smooth = Smooth.None));
