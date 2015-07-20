@@ -113,7 +113,7 @@ public
     annotation (Placement(transformation(extent={{-113,54},{-93,74}},
           rotation=0), iconTransformation(extent={{-31,78},{-11,98}})));
 
-  Weather.Sublinds.Sunblind            Sunblind(
+  Weather.Sunblinds.Sunblind Sunblind(
     n=1,
     gsunblind={Blinding},
     Imax=Limit) if outside and withWindow and withSunblind
