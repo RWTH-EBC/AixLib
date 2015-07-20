@@ -105,13 +105,12 @@ record ZoneBaseRecord "the used record standard"
   parameter Real maxOverheatingACH[2] = {3.0, 2.0}
     "additional ACH value when overheating appears, transition range in K"                                                annotation(Dialog(tab = "Room air", group = "ACH", descriptionLabel = false));
   parameter Real maxSummerACH[3] = {1.0, 273.15 + 10, 273.15 + 17}
-    "additional ACH in summer, Tmin, Tmax"                      annotation(Dialog(tab = "Room air", group = "ACH", descriptionLabel = false));
-
+    "additional ACH in summer, Tmin, Tmax"                                                                annotation(Dialog(tab = "Room air", group = "ACH", descriptionLabel = false));
   parameter Real winterReduction[3]={0.2,273.15,273.15 + 10}
     "reduction factor of userACH for cold weather." annotation (Dialog(tab="Room air", group="ACH", descriptionLabel = false));
   parameter Modelica.SIunits.ThermalResistance RWin=0.017727777777
     "Resistor Window" annotation(Dialog(tab="Windows", enable = withWindows));
-  annotation(Documentation(info="<html>
+  annotation(Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This is the base definition is zone records used in <a href=\"AixLib.Building.LowOrder.ThermalZone\">AixLib.Building.LowOrder.ThermalZone</a>. All necessary parameters are defined here. Most values should be overwritten for a specific building, some are default values that might be appropriate in most cases. However, fell free to overwrite them in your own records.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
@@ -158,18 +157,14 @@ record ZoneBaseRecord "the used record standard"
  </table>
  <h4><span style=\"color:#008000\">References</span></h4>
  <p>Base data definition for record to be used in model <a href=\"AixLib.Building.LowOrder.ThermalZone\">AixLib.Building.LowOrder.ThermalZone</a></p>
- </html>", revisions = "<html>
- <ul>
-   <li><i>February 4, 2014&nbsp;</i>by Ole Odendahl:<br/>
-          Added new parameters for the setup of the ACH. It is now possible to assign different values to the ACH for each zone based on this record.</li>
-   <li><i>January 27, 2014&nbsp;</i>by Ole Odendahl:<br/>
-          Added new parameter withAHU to choose whether the zone is connected to a central air handling unit. Default false</li>
-   <li><i>March, 2012&nbsp;</i>
-          by Peter Matthes:<br/>
-          Implemented</li>
-    <li><i>November, 2012&nbsp;</i>
-          by Moritz Lauster:<br/>
-          Restored links</li>
- </ul>
- </html>"));
+ </html>", revisions="<html>
+<ul>
+<li><i>June, 2015 </i>by Moitz Lauster:
+<br>Added new parameters to use further calculation cores.</li>
+<li><i>February 4, 2014&nbsp;</i>by Ole Odendahl:<br>Added new parameters for the setup of the ACH. It is now possible to assign different values to the ACH for each zone based on this record. </li>
+<li><i>January 27, 2014&nbsp;</i>by Ole Odendahl:<br>Added new parameter withAHU to choose whether the zone is connected to a central air handling unit. Default false </li>
+<li><i>March, 2012&nbsp;</i> by Peter Matthes:<br>Implemented </li>
+<li><i>November, 2012&nbsp;</i> by Moritz Lauster:<br>Restored links </li>
+</ul>
+</html>"));
 end ZoneBaseRecord;
