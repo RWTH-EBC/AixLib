@@ -38,9 +38,9 @@ model improvedLOMExample
             {24,3}})));
   Utilities.HeatTransfer.HeatToStar HeatTorStar(A = 2) annotation(Placement(transformation(extent={{52,-88},
             {72,-68}})));
-  AixLib.Building.Components.Weather.Sublinds.Sunblind
-                              sunblind(n = 5, gsunblind = {0, 0, 0.15, 0.15, 0}) annotation(Placement(transformation(extent={{-42,59},
-            {-22,79}})));
+  AixLib.Building.Components.Weather.Sunblinds.Sunblind sunblind(n=5, gsunblind
+      ={0,0,0.15,0.15,0})
+    annotation (Placement(transformation(extent={{-42,59},{-22,79}})));
   AixLib.Building.LowOrder.BaseClasses.SolarRadWeightedSum solarRadWeightedSum(
       weightfactors={0,0,7,7,0}, n=5)
     annotation (Placement(transformation(extent={{4,55},{38,85}})));
@@ -117,11 +117,6 @@ equation
       points={{-75.1,67},{-75.1,26},{-54,26}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(weather.SolarRadiation_OrientedSurfaces, sunblind.Rad_in) annotation (
-     Line(
-      points={{-82.8,67},{-82.8,58},{-46,58},{-46,70},{-41,70}},
-      color={255,128,0},
-      smooth=Smooth.None));
   connect(weather.WeatherDataVector[1], reducedOrderModel.ventilationTemperature)
     annotation (Line(
       points={{-75.1,67},{-75.1,0},{0,0},{0,26.84},{47.4,26.84}},
@@ -157,10 +152,6 @@ equation
       color={191,0,0},
       smooth=Smooth.None));
 
-  connect(sunblind.Rad_out, partialCorG.SR_input) annotation (Line(
-      points={{-23,70},{-18,70},{-18,69.93},{-13.86,69.93}},
-      color={255,128,0},
-      smooth=Smooth.None));
   connect(partialCorG.solarRadWinTrans, solarRadWeightedSum.solarRad_in)
     annotation (Line(
       points={{-0.7,70},{5.7,70}},
@@ -175,6 +166,15 @@ equation
     annotation (Line(
       points={{-78,32},{-80,32},{-80,31.6},{-54.5,31.6}},
       color={0,0,127},
+      smooth=Smooth.None));
+  connect(weather.SolarRadiation_OrientedSurfaces, sunblind.Rad_In) annotation
+    (Line(
+      points={{-82.8,67},{-82.8,60},{-46,60},{-46,70},{-41,70}},
+      color={255,128,0},
+      smooth=Smooth.None));
+  connect(sunblind.Rad_Out, partialCorG.SR_input) annotation (Line(
+      points={{-23,70},{-18,70},{-18,69.93},{-13.86,69.93}},
+      color={255,128,0},
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics),

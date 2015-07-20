@@ -1,4 +1,4 @@
-within AixLib.Building.Components.Weather.Sublinds;
+within AixLib.Building.Components.Weather.Sunblinds;
 model Sunblind "Reduces beam at Imax"
   extends BaseClasses.PartialSunblind;
 

@@ -35,7 +35,7 @@ model TestCase_5
     columns={2,3,4,5,6})
     annotation (Placement(transformation(extent={{-94,68},{-74,88}})));
   Utilities.Sources.PrescribedSolarRad PrescribedSolarRad(n = 5) annotation(Placement(transformation(extent = {{-60, 68}, {-40, 88}})));
-  Components.Weather.Sunblind sunblind(n = 5, gsunblind = {0, 0, 0.15, 0, 0}) annotation(Placement(transformation(extent={{-36,67},
+  Components.Weather.Sunblinds.Sunblind sunblind(n = 5, gsunblind = {0, 0, 0.15, 0, 0}) annotation(Placement(transformation(extent={{-36,67},
             {-16,87}})));
   Building.LowOrder.BaseClasses.SolarRadWeightedSum SolarRadWeightedSum(n = 5, weightfactors = {0, 0, 7, 0, 0}) annotation(Placement(transformation(extent={{18,68},
             {38,88}})));
@@ -91,11 +91,11 @@ equation
       points={{37,78},{57.18,78},{57.18,64.8}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(PrescribedSolarRad.solarRad_out, sunblind.Rad_in) annotation (Line(
+  connect(PrescribedSolarRad.solarRad_out, sunblind.Rad_In) annotation (Line(
       points={{-41,78},{-35,78}},
       color={255,128,0},
       smooth=Smooth.None));
-  connect(sunblind.Rad_out, solarRadAdapter.solarRad_in) annotation (Line(
+  connect(sunblind.Rad_Out, solarRadAdapter.solarRad_in) annotation (Line(
       points={{-17,78},{-7,78}},
       color={255,128,0},
       smooth=Smooth.None));

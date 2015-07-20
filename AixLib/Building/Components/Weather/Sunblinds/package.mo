@@ -1,5 +1,5 @@
 within AixLib.Building.Components.Weather;
-package Sublinds 
+package Sunblinds 
   extends Modelica.Icons.Package;
 
-end Sublinds;
+end Sunblinds;

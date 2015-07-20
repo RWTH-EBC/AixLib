@@ -1,4 +1,4 @@
-within AixLib.Building.Components.Weather.Sublinds.BaseClasses;
+within AixLib.Building.Components.Weather.Sunblinds.BaseClasses;
 partial model PartialSunblind "A Base Class for Sunblindes"
 
     parameter Integer n=4 "Size of solar vector (orientations)";

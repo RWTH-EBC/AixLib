@@ -11,7 +11,7 @@ model TestCase_11
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature outdoorTemp(T = 295.15) annotation(Placement(transformation(extent = {{-14, 47}, {6, 67}})));
   BaseClasses.ReducedOrderModel.ReducedOrderModelStar
                                                  reducedModel(C1i = 1.48216e+007, Aw = 7, g = 0.15, C1o = 1.60085e+006, epsi = 1, epso = 1, T0all(displayUnit = "K") = 295.15,                           withWindows = false, R1i = 0.000595515, Ai = 75.5, RRest = 0.042748777, R1o = 0.004366222, Ao = 10.5, alphaiwi = 3) annotation(Placement(transformation(extent = {{64, 36}, {98, 76}})));
-  Utilities.Sources.HeaterCooler.IdealHeaterCoolerVar1 heater(Q_flow_heat = 1, Q_flow_cooler = 1, h_cooler = 0, KR_heater = 1000, KR_cooler = 1000, TN_heater = 1, TN_cooler = 1, h_heater = 500, l_cooler = -500, Cooler_on = false) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin = {-26, -20})));
+  HVAC.HeatGeneration.IdealHeaterCooler                heater(                                    h_cooler = 0, KR_heater = 1000, KR_cooler = 1000, TN_heater = 1, TN_cooler = 1, h_heater = 500, l_cooler = -500, Cooler_on = false) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin = {-26, -20})));
   Modelica.Blocks.Sources.CombiTimeTable setTemp(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, columns = {2, 3}, table = [0, 295.15, 295.2; 3600, 295.1, 295.2; 7200, 295.1, 295.2; 10800, 295.1, 295.2; 14400, 295.1, 295.2; 18000, 295.1, 295.2; 21600, 295.1, 295.2; 25200, 300.1, 300.2; 28800, 300.1, 300.2; 32400, 300.1, 300.2; 36000, 300.1, 300.2; 39600, 300.1, 300.2; 43200, 300.1, 300.2; 46800, 300.1, 300.2; 50400, 300.1, 300.2; 54000, 300.1, 300.2; 57600, 300.1, 300.2; 61200, 300.1, 300.2; 64800, 300.1, 300.2; 68400, 295.1, 295.2; 72000, 295.1, 295.2; 75600, 295.1, 295.2; 79200, 295.1, 295.2; 82800, 295.1, 295.2; 86400, 295.1, 295.2]) annotation(Placement(transformation(extent = {{-80, -30}, {-60, -10}})));
   Modelica.Blocks.Sources.CombiTimeTable reference(tableName = "UserProfilesOffice", fileName = "./Tables/J1615/UserProfilesOffice.txt", tableOnFile = false, columns = {2, 3},                                                                                                    extrapolation = Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
     table=[3600,22,0; 7200,22,0; 10800,22,0; 14400,22,0; 18000,22,0; 21600,22,
@@ -33,7 +33,7 @@ model TestCase_11
         500; 5173200,26.7,500; 5176800,26.6,500; 5180400,26.5,500; 5184000,
         26.4,500])                                                                                                     annotation(Placement(transformation(extent = {{-96, 78}, {-76, 97}})));
   Modelica.Blocks.Math.Add sumHeatLoad annotation(Placement(transformation(extent = {{86, 86}, {96, 96}})));
-  Utilities.Sources.HeaterCooler.IdealHeaterCoolerVar1 cooler(Q_flow_heat = 1, Q_flow_cooler = 1, h_cooler = 0, KR_heater = 1000, KR_cooler = 1000, TN_heater = 1, TN_cooler = 1, h_heater = 500, l_cooler = -500, Heater_on = false) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin = {-26, -48})));
+  HVAC.HeatGeneration.IdealHeaterCooler                cooler(                                    h_cooler = 0, KR_heater = 1000, KR_cooler = 1000, TN_heater = 1, TN_cooler = 1, h_heater = 500, l_cooler = -500, Heater_on = false) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin = {-26, -48})));
   Modelica.Blocks.Sources.CombiTimeTable innerLoads(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableName = "UserProfilesOffice", fileName = "./Tables/J1615/UserProfilesOffice.txt", tableOnFile = false, columns = {2, 3}, table = [0, 0, 0; 3600, 0, 0; 7200, 0, 0; 10800, 0, 0; 14400, 0, 0; 18000, 0, 0; 21600, 0, 0; 21600, 0, 1000; 25200, 0, 1000; 28800, 0, 1000; 32400, 0, 1000; 36000, 0, 1000; 39600, 0, 1000; 43200, 0, 1000; 46800, 0, 1000; 50400, 0, 1000; 54000, 0, 1000; 57600, 0, 1000; 61200, 0, 1000; 64800, 0, 1000; 64800, 0, 0; 68400, 0, 0; 72000, 0, 0; 75600, 0, 0; 79200, 0, 0; 82800, 0, 0; 86400, 0, 0]) annotation(Placement(transformation(extent = {{-24, -93}, {-10, -79}})));
   Modelica.Blocks.Sources.Constant solarRadiation(k=0)
     annotation (Placement(transformation(extent={{-46,62},{-26,82}})));
@@ -43,8 +43,9 @@ equation
       color={191,0,0},
       smooth=Smooth.None));
   connect(setTemp.y[1], heater.soll_heat) annotation(Line(points = {{-59, -20}, {-50, -20}, {-50, -23}, {-30.8, -23}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(sumHeatLoad.u1, heater.heatMeter.p);
+    connect(sumHeatLoad.u1, heater.heatMeter.p);
   connect(sumHeatLoad.u2, cooler.coolMeter.p);
+  connect(cooler.HeatCoolRoom, reducedModel.heatConvInnerwall.port_b);
   referenceLoad[1] = -reference.y[2];
   simulationLoad = sumHeatLoad.y;
   connect(setTemp.y[2], cooler.soll_cool) annotation(Line(points = {{-59, -20}, {-44, -20}, {-44, -43.2}, {-30.8, -43.2}}, color = {0, 0, 127}, smooth = Smooth.None));
@@ -62,19 +63,18 @@ equation
       points={{50.5,11},{74.54,11},{74.54,38}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(heater.heatCoolRoom, reducedModel.internalGainsConv) annotation (Line(
-      points={{-26,-29},{-26,-34},{84.4,-34},{84.4,38}},
-      color={191,0,0},
-      smooth=Smooth.None));
   connect(heatToStar.Star, reducedModel.internalGainsRad) annotation (Line(
       points={{69.1,-82},{93.75,-82},{93.75,38}},
       color={95,95,95},
       pattern=LinePattern.None,
       smooth=Smooth.None));
-  connect(cooler.heatCoolRoom, reducedModel.heatConvInnerwall.port_b);
   connect(solarRadiation.y, reducedModel.solarRad_in) annotation (Line(
       points={{-25,72},{62,72},{62,84},{73.18,84},{73.18,74.8}},
       color={0,0,127},
+      smooth=Smooth.None));
+  connect(heater.HeatCoolRoom, reducedModel.internalGainsConv) annotation (Line(
+      points={{-24.8,-29.4},{-24.8,-36},{84.4,-36},{84.4,38}},
+      color={191,0,0},
       smooth=Smooth.None));
   annotation(experiment(StopTime = 5.184e+006, Interval = 3600),
              __Dymola_Commands(file=

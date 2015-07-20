@@ -11,7 +11,7 @@ model TestCase_9
     wf_wall={0,0,0.057968311,0.132498994},
     wf_win={0,0,0.404766351,0.404766351})                                                                                                     annotation(Placement(transformation(extent={{-20,2},
             {0,22}})));
-  Components.Weather.Sunblind sunblind(Imax = 100, gsunblind = {1, 1, 0.15, 0.15}) annotation(Placement(transformation(extent = {{-20, 62}, {0, 82}})));
+  Components.Weather.Sunblinds.Sunblind sunblind(Imax = 100, gsunblind = {1, 1, 0.15, 0.15}) annotation(Placement(transformation(extent = {{-20, 62}, {0, 82}})));
   BaseClasses.ReducedOrderModel.ReducedOrderModelVDI
                                                   reducedModel(Ao = 25.5, Aw = 14, Ai = 60.5, epsi = 1, epso = 1, epsw = 1, g = 1, splitfac = 0.09, T0all(displayUnit = "degC"),                                                                               alphaiwi = 2.1, alphaowi = 2.7,
     R1i=0.000668640,
@@ -120,18 +120,18 @@ equation
       points={{-24,34},{-24,17.6},{-18.5,17.6}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(varRad3.solarRad_out, sunblind.Rad_in) annotation (Line(
-      points={{-39,73},{-28.5,73},{-28.5,73},{-19,73}},
-      color={255,128,0},
-      smooth=Smooth.None));
-  connect(sunblind.Rad_out, solarRadAdapter.solarRad_in) annotation (Line(
-      points={{-1,73},{3.5,73},{3.5,72},{9,72}},
-      color={255,128,0},
-      smooth=Smooth.None));
   connect(window_shortwave_rad_sum.solarRad_out, reducedModel.solarRad_in)
     annotation (Line(
       points={{52.9,73},{56,73},{56,58},{49.34,58},{49.34,44.86}},
       color={0,0,127},
+      smooth=Smooth.None));
+  connect(varRad3.solarRad_out, sunblind.Rad_In) annotation (Line(
+      points={{-39,73},{-28.5,73},{-28.5,73},{-19,73}},
+      color={255,128,0},
+      smooth=Smooth.None));
+  connect(sunblind.Rad_Out, solarRadAdapter.solarRad_in) annotation (Line(
+      points={{-1,73},{4.5,73},{4.5,72},{9,72}},
+      color={255,128,0},
       smooth=Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
             -100},{100,100}}),

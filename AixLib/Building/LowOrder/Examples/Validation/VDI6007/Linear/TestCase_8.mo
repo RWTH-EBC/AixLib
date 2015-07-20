@@ -19,7 +19,7 @@ model TestCase_8
   Modelica.Blocks.Sources.CombiTimeTable wallRad(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, table = [0, 0, 0, 0, 0, 0.0; 3600, 0, 0, 0, 0, 0.0; 10800, 0, 0, 0, 0, 0.0; 14400, 0, 0, 0, 0, 0.0; 14400, 0, 0, 24, 23, 0.0; 18000, 0, 0, 24, 23, 0.0; 18000, 0, 0, 58, 53, 0.0; 21600, 0, 0, 58, 53, 0.0; 21600, 0, 0, 91, 77, 0.0; 25200, 0, 0, 91, 77, 0.0; 25200, 0, 0, 203, 97, 0.0; 28800, 0, 0, 203, 97, 0.0; 28800, 0, 0, 348, 114, 0.0; 32400, 0, 0, 348, 114, 0.0; 32400, 0, 0, 472, 131, 0.0; 36000, 0, 0, 472, 131, 0.0; 36000, 0, 0, 553, 144, 0.0; 39600, 0, 0, 553, 144, 0.0; 39600, 0, 0, 581, 159, 0.0; 43200, 0, 0, 581, 159, 0.0; 43200, 0, 0, 553, 372, 0.0; 46800, 0, 0, 553, 372, 0.0; 46800, 0, 0, 472, 557, 0.0; 50400, 0, 0, 472, 557, 0.0; 50400, 0, 0, 348, 685, 0.0; 54000, 0, 0, 348, 685, 0.0; 54000, 0, 0, 203, 733, 0.0; 57600, 0, 0, 203, 733, 0.0; 57600, 0, 0, 91, 666, 0.0; 61200, 0, 0, 91, 666, 0.0; 61200, 0, 0, 58, 474, 0.0; 64800, 0, 0, 58, 474, 0.0; 64800, 0, 0, 24, 177, 0.0; 68400, 0, 0, 24, 177, 0.0; 68400, 0, 0, 0, 0, 0.0; 72000, 0, 0, 0, 0, 0.0; 82800, 0, 0, 0, 0, 0.0; 86400, 0, 0, 0, 0, 0.0], columns = {2, 3, 4, 5, 6}) annotation(Placement(transformation(extent = {{-88, 36}, {-68, 56}})));
   Modelica.Blocks.Sources.CombiTimeTable windowRad(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, table = [0, 0, 0, 0, 0, 0.0; 3600, 0, 0, 0, 0, 0.0; 10800, 0, 0, 0, 0, 0.0; 14400, 0, 0, 0, 0, 0.0; 14400, 0, 0, 17, 17, 0.0; 18000, 0, 0, 17, 17, 0.0; 18000, 0, 0, 38, 36, 0.0; 21600, 0, 0, 38, 36, 0.0; 21600, 0, 0, 59, 51, 0.0; 25200, 0, 0, 59, 51, 0.0; 25200, 0, 0, 98, 64, 0.0; 28800, 0, 0, 98, 64, 0.0; 28800, 0, 0, 186, 74, 0.0; 32400, 0, 0, 186, 74, 0.0; 32400, 0, 0, 287, 84, 0.0; 36000, 0, 0, 287, 84, 0.0; 36000, 0, 0, 359, 92, 0.0; 39600, 0, 0, 359, 92, 0.0; 39600, 0, 0, 385, 100, 0.0; 43200, 0, 0, 385, 100, 0.0; 43200, 0, 0, 359, 180, 0.0; 46800, 0, 0, 359, 180, 0.0; 46800, 0, 0, 287, 344, 0.0; 50400, 0, 0, 287, 344, 0.0; 50400, 0, 0, 186, 475, 0.0; 54000, 0, 0, 186, 475, 0.0; 54000, 0, 0, 98, 528, 0.0; 57600, 0, 0, 98, 528, 0.0; 57600, 0, 0, 59, 492, 0.0; 61200, 0, 0, 59, 492, 0.0; 61200, 0, 0, 38, 359, 0.0; 64800, 0, 0, 38, 359, 0.0; 64800, 0, 0, 17, 147, 0.0; 68400, 0, 0, 17, 147, 0.0; 68400, 0, 0, 0, 0, 0.0; 72000, 0, 0, 0, 0, 0.0; 82800, 0, 0, 0, 0, 0.0; 86400, 0, 0, 0, 0, 0.0], columns = {2, 3, 4, 5, 6}) annotation(Placement(transformation(extent = {{-88, 68}, {-68, 88}})));
   Utilities.Sources.PrescribedSolarRad Quelle_Fenster(n = 5) annotation(Placement(transformation(extent = {{-60, 68}, {-40, 88}})));
-  Components.Weather.Sunblind sunblind(n = 5, gsunblind = {0, 0, 0.15, 0.15, 0}) annotation(Placement(transformation(extent = {{-30, 67}, {-10, 87}})));
+  Components.Weather.Sunblinds.Sunblind sunblind(n = 5, gsunblind = {0, 0, 0.15, 0.15, 0}) annotation(Placement(transformation(extent = {{-30, 67}, {-10, 87}})));
   Building.LowOrder.BaseClasses.SolarRadWeightedSum rad_weighted_sum(weightfactors = {0, 0, 7, 7, 0}, n = 5) annotation(Placement(transformation(extent={{20,68},
             {40,88}})));
   BaseClasses.EqAirTemp.EqAirTempSimple
@@ -116,18 +116,18 @@ equation
       points={{-14.5,45.6},{-16,45.6},{-16,46},{-18,46}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(Quelle_Fenster.solarRad_out, sunblind.Rad_in) annotation (Line(
-      points={{-41,78},{-29,78}},
-      color={255,128,0},
-      smooth=Smooth.None));
-  connect(sunblind.Rad_out, solarRadAdapter.solarRad_in) annotation (Line(
-      points={{-11,78},{-1,78}},
-      color={255,128,0},
-      smooth=Smooth.None));
   connect(rad_weighted_sum.solarRad_out, reducedModel.solarRad_in) annotation (
       Line(
       points={{39,78},{57.18,78},{57.18,64.8}},
       color={0,0,127},
+      smooth=Smooth.None));
+  connect(Quelle_Fenster.solarRad_out, sunblind.Rad_In) annotation (Line(
+      points={{-41,78},{-29,78}},
+      color={255,128,0},
+      smooth=Smooth.None));
+  connect(sunblind.Rad_Out, solarRadAdapter.solarRad_in) annotation (Line(
+      points={{-11,78},{-1,78}},
+      color={255,128,0},
       smooth=Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
             -100},{100,100}}),

@@ -35,7 +35,7 @@ model TestCase_9
     wf_wall={0,0,0.057968311,0.132498994},
     wf_win={0,0,0.404766351,0.404766351})                                                                                                     annotation(Placement(transformation(extent={{-22,4},
             {-2,24}})));
-  Components.Weather.Sunblind sunblind(Imax = 100, gsunblind = {1, 1, 0.15, 0.15}) annotation(Placement(transformation(extent={{-24,62},
+  Components.Weather.Sunblinds.Sunblind sunblind(Imax = 100, gsunblind = {1, 1, 0.15, 0.15}) annotation(Placement(transformation(extent={{-24,62},
             {-4,82}})));
   Utilities.Sources.PrescribedSolarRad varRad3(n = 4) annotation(Placement(transformation(extent={{-62,63},
             {-42,83}})));
@@ -151,18 +151,18 @@ equation
       points={{-59.4,5.8},{-50.7,5.8},{-50.7,5.8},{-42.2,5.8}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(varRad3.solarRad_out, sunblind.Rad_in) annotation (Line(
-      points={{-43,73},{-32.5,73},{-32.5,73},{-23,73}},
-      color={255,128,0},
-      smooth=Smooth.None));
-  connect(sunblind.Rad_out, solarRadAdapter.solarRad_in) annotation (Line(
-      points={{-5,73},{-0.5,73},{-0.5,72},{5,72}},
-      color={255,128,0},
-      smooth=Smooth.None));
   connect(window_shortwave_rad_sum.solarRad_out, reducedModel.solarRad_in)
     annotation (Line(
       points={{48.9,71},{52,71},{52,58},{49.34,58},{49.34,44.86}},
       color={0,0,127},
+      smooth=Smooth.None));
+  connect(varRad3.solarRad_out, sunblind.Rad_In) annotation (Line(
+      points={{-43,73},{-32.5,73},{-32.5,73},{-23,73}},
+      color={255,128,0},
+      smooth=Smooth.None));
+  connect(sunblind.Rad_Out, solarRadAdapter.solarRad_in) annotation (Line(
+      points={{-5,73},{-0.5,73},{-0.5,72},{5,72}},
+      color={255,128,0},
       smooth=Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,
               extent={{-100,-100},{100,100}}),

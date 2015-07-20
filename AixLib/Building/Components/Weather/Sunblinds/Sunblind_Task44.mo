@@ -1,6 +1,6 @@
-within AixLib.Building.Components.Weather.Sublinds;
+within AixLib.Building.Components.Weather.Sunblinds;
 model Sunblind_Task44 "sunblinds modell after suggestions by IEA Task 44"
-  extends Building.Components.Weather.Sublinds.BaseClasses.PartialSunblind(
+  extends BaseClasses.PartialSunblind(
     n=5,
     Imax=300,
     gsunblind={0.25,0.25,0.25,0.25,0.25});
