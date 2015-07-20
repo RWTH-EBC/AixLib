@@ -72,8 +72,8 @@ equation
       pattern=LinePattern.None,
       smooth=Smooth.None));
   connect(cooler.heatCoolRoom, reducedModel.heatConvInnerwall.port_b);
-  connect(solarRadiation.y, reducedModel.u1) annotation (Line(
-      points={{-25,72},{73.18,72},{73.18,74.8}},
+  connect(solarRadiation.y, reducedModel.solarRad_in) annotation (Line(
+      points={{-25,72},{62,72},{62,84},{73.18,84},{73.18,74.8}},
       color={0,0,127},
       smooth=Smooth.None));
   annotation(experiment(StopTime = 5.184e+006, Interval = 3600),

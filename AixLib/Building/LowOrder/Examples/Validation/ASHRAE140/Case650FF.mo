@@ -180,14 +180,14 @@ FreeFloatTemperature = reducedOrderModel.airload.T;
       points={{-29,64},{-1,64}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(SolarRadWeightedSum.solarRad_out, reducedOrderModel.u1) annotation (
-      Line(
-      points={{17,64},{21,64},{21,45.42},{21.64,45.42}},
-      color={0,0,127},
-      smooth=Smooth.None));
   connect(AirExchangeRate.y[1], reducedOrderModel.ventilationRate) annotation (
       Line(
       points={{-26.35,-43.5},{-24,-43.5},{-24,-11},{22.92,-11},{22.92,12.3}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(SolarRadWeightedSum.solarRad_out, reducedOrderModel.solarRad_in)
+    annotation (Line(
+      points={{17,64},{21.64,64},{21.64,45.42}},
       color={0,0,127},
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(

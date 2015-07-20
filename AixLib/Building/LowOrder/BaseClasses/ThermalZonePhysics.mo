@@ -124,11 +124,6 @@ equation
           {4,-90},{4,-7.2},{35.98,-7.2}},                                                                                               color = {0, 0, 127}, smooth = Smooth.None));
   connect(ventilationTemperature, reducedOrderModel.ventilationTemperature) annotation(Line(points = {{-100, -50}, {-12, -50}, {-12, 4.56}, {23.8, 4.56}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(solarRad_in, sunblind.Rad_In) annotation(Line(points={{-90,70},{-49,70}},                            color = {255, 128, 0}, smooth = Smooth.None));
-  connect(solRadWeightedSum.solarRad_out, reducedOrderModel.u1) annotation (
-      Line(
-      points={{30.6,71},{33.66,71},{33.66,44.32}},
-      color={0,0,127},
-      smooth=Smooth.None));
   connect(solarRadAdapter.solarRad_in, solarRad_in) annotation (Line(
       points={{-73,38},{-76,38},{-76,70},{-90,70}},
       color={255,128,0},
@@ -144,6 +139,11 @@ equation
   connect(partialCorG.solarRadWinTrans, solRadWeightedSum.solarRad_in)
     annotation (Line(
       points={{-5,70},{0,70},{0,71},{5.4,71}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(solRadWeightedSum.solarRad_out, reducedOrderModel.solarRad_in)
+    annotation (Line(
+      points={{30.6,71},{33.66,71},{33.66,44.32}},
       color={0,0,127},
       smooth=Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,

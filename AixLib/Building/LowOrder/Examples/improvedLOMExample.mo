@@ -39,8 +39,8 @@ model improvedLOMExample
   Utilities.HeatTransfer.HeatToStar HeatTorStar(A = 2) annotation(Placement(transformation(extent={{52,-88},
             {72,-68}})));
   AixLib.Building.Components.Weather.Sublinds.Sunblind
-                              sunblind(n = 5, gsunblind = {0, 0, 0.15, 0.15, 0}) annotation(Placement(transformation(extent={{-24,59},
-            {-4,79}})));
+                              sunblind(n = 5, gsunblind = {0, 0, 0.15, 0.15, 0}) annotation(Placement(transformation(extent={{-42,59},
+            {-22,79}})));
   AixLib.Building.LowOrder.BaseClasses.SolarRadWeightedSum solarRadWeightedSum(
       weightfactors={0,0,7,7,0}, n=5)
     annotation (Placement(transformation(extent={{4,55},{38,85}})));
@@ -65,11 +65,15 @@ model improvedLOMExample
     annotation (Placement(transformation(extent={{-20,-54},{-10,-44}})));
   Modelica.Blocks.Math.Gain gain2(k=0.4)
     annotation (Placement(transformation(extent={{-20,-82},{-12,-74}})));
+  replaceable
+    AixLib.Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG
+    partialCorG(n=5) constrainedby
+    Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
+    annotation (Placement(transformation(extent={{-14,63},{0,77}})));
+  AixLib.Building.LowOrder.BaseClasses.SolarRadAdapter
+                  solarRadAdapter[5]
+    annotation (Placement(transformation(extent={{-98,22},{-78,42}})));
 equation
-  connect(sunblind.Rad_Out, solarRadWeightedSum.solarRad_in) annotation (Line(
-      points={{-5,70},{5.7,70}},
-      color={255,128,0},
-      smooth=Smooth.None));
   connect(personsRadiative.port,HeatTorStar. Therm) annotation(Line(points={{36,-78},
           {52.8,-78}},                                                                                 color = {191, 0, 0}, smooth = Smooth.None));
   connect(partialEqAirTemp.equalAirTemp, reducedOrderModel.equalAirTemp)
@@ -100,12 +104,12 @@ equation
       smooth=Smooth.None));
   connect(solarRadWeightedSum.solarRad_out, reducedOrderModel.solarRad_in)
     annotation (Line(
-      points={{36.3,70},{54.2,70},{54.2,51.15}},
+      points={{36.3,70},{53.18,70},{53.18,50.98}},
       color={255,128,0},
       smooth=Smooth.None));
   connect(sunblind.sunblindonoff, partialEqAirTemp.sunblindsig) annotation (
       Line(
-      points={{-14,60},{-14,52},{-46,52},{-46,34}},
+      points={{-32,60},{-32,52},{-46,52},{-46,34}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(weather.WeatherDataVector, partialEqAirTemp.weatherData) annotation (
@@ -113,14 +117,9 @@ equation
       points={{-75.1,67},{-75.1,26},{-54,26}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(weather.SolarRadiation_OrientedSurfaces, partialEqAirTemp.solarRad_in)
-    annotation (Line(
-      points={{-82.8,67},{-82.8,31.6},{-54.5,31.6}},
-      color={255,128,0},
-      smooth=Smooth.None));
-  connect(weather.SolarRadiation_OrientedSurfaces, sunblind.Rad_In) annotation (
+  connect(weather.SolarRadiation_OrientedSurfaces, sunblind.Rad_in) annotation (
      Line(
-      points={{-82.8,67},{-82.8,58},{-46,58},{-46,70},{-23,70}},
+      points={{-82.8,67},{-82.8,58},{-46,58},{-46,70},{-41,70}},
       color={255,128,0},
       smooth=Smooth.None));
   connect(weather.WeatherDataVector[1], reducedOrderModel.ventilationTemperature)
@@ -158,11 +157,33 @@ equation
       color={191,0,0},
       smooth=Smooth.None));
 
+  connect(sunblind.Rad_out, partialCorG.SR_input) annotation (Line(
+      points={{-23,70},{-18,70},{-18,69.93},{-13.86,69.93}},
+      color={255,128,0},
+      smooth=Smooth.None));
+  connect(partialCorG.solarRadWinTrans, solarRadWeightedSum.solarRad_in)
+    annotation (Line(
+      points={{-0.7,70},{5.7,70}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(weather.SolarRadiation_OrientedSurfaces, solarRadAdapter.solarRad_in)
+    annotation (Line(
+      points={{-82.8,67},{-82.8,50.5},{-97,50.5},{-97,32}},
+      color={255,128,0},
+      smooth=Smooth.None));
+  connect(solarRadAdapter.solarRad_out, partialEqAirTemp.solarRad_in)
+    annotation (Line(
+      points={{-78,32},{-80,32},{-80,31.6},{-54.5,31.6}},
+      color={0,0,127},
+      smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics),
     experiment(StopTime=86400, Interval=3600),
     __Dymola_experimentSetupOutput,
     Documentation(revisions="<html>
+<ul>
+<li><i>June 2015,&nbsp;</i> by Moritz Lauster:<br>Debugged due to name changes in partialReducedOrderModel</li>
+</ul>
 <ul>
 <li>October 2014, Peter Remmen:</li>
 </ul>

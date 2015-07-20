@@ -57,8 +57,6 @@ equation
   connect(innerLoads.y[2], personsConvective.Q_flow) annotation(Line(points = {{-27, -62}, {20, -62}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(innerLoads.y[1], personsRadiative.Q_flow) annotation(Line(points = {{-27, -62}, {-8, -62}, {-8, -90}, {20, -90}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(personsRadiative.port, HeatTorStar.Therm) annotation(Line(points = {{40, -90}, {56.8, -90}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Quelle_Fenster.solarRad_out,sunblind. Rad_In) annotation(Line(points={{-31,82},
-          {-19,82}},                                                                                     color = {255, 128, 0}, smooth = Smooth.None));
   connect(wallRad.y,multiplex5_1. u1[1]) annotation(Line(points={{-115.5,55},{
           -104,55},{-104,64},{-86,64}},                                                                              color = {0, 0, 127}, smooth = Smooth.None));
   connect(wallRad.y,multiplex5_1. u2[1]) annotation(Line(points={{-115.5,55},{
@@ -124,10 +122,6 @@ equation
       points={{-65,82},{-58,82},{-58,75},{-49,75}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(rad_weighted_sum.solarRad_out, reducedModel.u1) annotation (Line(
-      points={{47,82},{46,82},{46,98},{62.96,98},{62.96,90.5}},
-      color={0,0,127},
-      smooth=Smooth.None));
   connect(Quelle_Wand.solarRad_out, solarRadAdapter1.solarRad_in) annotation (
       Line(
       points={{-39,54},{-39,54}},
@@ -138,13 +132,22 @@ equation
       points={{-20,54},{-20,25.6},{-18.5,25.6}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(sunblind.Rad_Out, solarRadAdapter2.solarRad_in) annotation (Line(
-      points={{-1,82},{3,82}},
-      color={255,128,0},
-      smooth=Smooth.None));
   connect(solarRadAdapter2.solarRad_out, rad_weighted_sum.solarRad_in)
     annotation (Line(
       points={{22,82},{29,82}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(Quelle_Fenster.solarRad_out, sunblind.Rad_in) annotation (Line(
+      points={{-31,82},{-19,82}},
+      color={255,128,0},
+      smooth=Smooth.None));
+  connect(sunblind.Rad_out, solarRadAdapter2.solarRad_in) annotation (Line(
+      points={{-1,82},{3,82}},
+      color={255,128,0},
+      smooth=Smooth.None));
+  connect(rad_weighted_sum.solarRad_out, reducedModel.solarRad_in) annotation (
+      Line(
+      points={{47,82},{52,82},{52,98},{62.96,98},{62.96,90.5}},
       color={0,0,127},
       smooth=Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,
