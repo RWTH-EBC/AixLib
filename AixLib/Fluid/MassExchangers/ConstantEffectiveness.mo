@@ -2,8 +2,10 @@ within AixLib.Fluid.MassExchangers;
 model ConstantEffectiveness
   "Heat and moisture exchanger with constant effectiveness"
   extends AixLib.Fluid.HeatExchangers.BaseClasses.PartialEffectiveness(
-  redeclare replaceable package Medium1 = Modelica.Media.Interfaces.PartialCondensingGases,
-  redeclare replaceable package Medium2 = Modelica.Media.Interfaces.PartialCondensingGases,
+  redeclare replaceable package Medium1 =
+        Modelica.Media.Interfaces.PartialCondensingGases,
+  redeclare replaceable package Medium2 =
+        Modelica.Media.Interfaces.PartialCondensingGases,
   sensibleOnly1=false,
   sensibleOnly2=false,
   Q1_flow = epsS * QMax_flow,

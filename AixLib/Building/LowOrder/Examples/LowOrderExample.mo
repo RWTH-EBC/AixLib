@@ -12,7 +12,7 @@ parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = 
         "D:/GIT/AixLib/AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt",
     WeatherData(tableOnFile=false, table=weatherDataDay.weatherData))                                                                                                     annotation(Placement(transformation(extent = {{-60, 42}, {-30, 62}})));
 
-  Utilities.Sources.HeaterCooler.IdealHeaterCoolerVar1 idealHeaterCooler
+  AixLib.HVAC.HeatGeneration.IdealHeaterCooler         idealHeaterCooler
     annotation (Placement(transformation(extent={{-22,-52},{-2,-32}})));
   Modelica.Blocks.Sources.Constant infiltrationRate(k = 1) annotation(Placement(transformation(extent = {{-88, -32}, {-74, -18}})));
   Modelica.Blocks.Sources.Constant infiltrationTemperature(k = 288.15) annotation(Placement(transformation(extent = {{-88, -10}, {-74, 4}})));
@@ -106,11 +106,6 @@ equation
   heatDemand = idealHeaterCooler.heatMeter.q_kwh;
   coolDemand = idealHeaterCooler.coolMeter.q_kwh;
   connect(weather.SolarRadiation_OrientedSurfaces, thermalZone.solarRad_in) annotation(Line(points = {{-52.8, 41}, {-52.8, 8.8}, {-7.4, 8.8}}, color = {255, 128, 0}, smooth = Smooth.None));
-  connect(idealHeaterCooler.heatCoolRoom, thermalZone.internalGainsConv)
-    annotation (Line(
-      points={{-3,-42},{3,-42},{3,-10.7}},
-      color={191,0,0},
-      smooth=Smooth.None));
   connect(infiltrationRate.y, thermalZone.infiltrationRate) annotation(Line(points = {{-73.3, -25}, {-2.2, -25}, {-2.2, -10.44}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(infiltrationTemperature.y, thermalZone.infiltrationTemperature) annotation(Line(points = {{-73.3, -3}, {-40.65, -3}, {-40.65, -4.07}, {-6.75, -4.07}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(weather.WeatherDataVector, thermalZone.weather) annotation(Line(points = {{-45.1, 41}, {-45.1, 1}, {-6.62, 1}}, color = {0, 0, 127}, smooth = Smooth.None));
@@ -131,8 +126,10 @@ equation
  </html>", revisions="<html>
 <ul>
 <li>October 2014 by Peter Remmen:</li>
+</ul>
 <p>added record for one winter day, now it&apos;s a ready to run example</p>
-<li><i>June 24, 2014 </i>by Moritz Lauster:<br/>Implemented </li>
+<ul>
+<li><i>June 24, 2014 </i>by Moritz Lauster:<br>Implemented </li>
 </ul>
 </html>"),  experiment(StopTime=86400, Interval=3600),           __Dymola_experimentSetupOutput);
 end LowOrderExample;

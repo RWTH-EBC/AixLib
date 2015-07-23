@@ -55,9 +55,11 @@ model ThermalZonePhysics "All sub-models of VDI 6007 connected to one model"
     "Heat capacity of the air"                                                           annotation(Dialog(tab = "Room air"));
   SolarRadWeightedSum solRadWeightedSum(n=n, weightfactors=Aw) if     withWindows and withOuterwalls
     annotation (Placement(transformation(extent={{4,56},{32,86}})));
-  Components.Weather.Sublinds.Sunblind
-                              sunblind(Imax = Imax, n = n, gsunblind = gsunblind) if withWindows and withOuterwalls annotation(Placement(transformation(extent={{-50,59},
-            {-30,79}})));
+  Components.Weather.Sunblinds.Sunblind sunblind(
+    Imax=Imax,
+    n=n,
+    gsunblind=gsunblind) if                                                          withWindows and withOuterwalls
+    annotation (Placement(transformation(extent={{-50,59},{-30,79}})));
   Utilities.Interfaces.SolarRad_in solarRad_in[n] if withOuterwalls annotation(Placement(transformation(extent = {{-100, 60}, {-80, 80}}), iconTransformation(extent = {{-94, 50}, {-60, 80}})));
   Modelica.Blocks.Interfaces.RealInput weather[3] if withOuterwalls
     "[1]: Air temperature<br/>[2]: Horizontal radiation of sky<br/>[3]: Horizontal radiation of earth"
@@ -124,11 +126,6 @@ equation
           {4,-90},{4,-7.2},{35.98,-7.2}},                                                                                               color = {0, 0, 127}, smooth = Smooth.None));
   connect(ventilationTemperature, reducedOrderModel.ventilationTemperature) annotation(Line(points = {{-100, -50}, {-12, -50}, {-12, 4.56}, {23.8, 4.56}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(solarRad_in, sunblind.Rad_In) annotation(Line(points={{-90,70},{-49,70}},                            color = {255, 128, 0}, smooth = Smooth.None));
-  connect(solRadWeightedSum.solarRad_out, reducedOrderModel.u1) annotation (
-      Line(
-      points={{30.6,71},{33.66,71},{33.66,44.32}},
-      color={0,0,127},
-      smooth=Smooth.None));
   connect(solarRadAdapter.solarRad_in, solarRad_in) annotation (Line(
       points={{-73,38},{-76,38},{-76,70},{-90,70}},
       color={255,128,0},
@@ -144,6 +141,11 @@ equation
   connect(partialCorG.solarRadWinTrans, solRadWeightedSum.solarRad_in)
     annotation (Line(
       points={{-5,70},{0,70},{0,71},{5.4,71}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(solRadWeightedSum.solarRad_out, reducedOrderModel.solarRad_in)
+    annotation (Line(
+      points={{30.6,71},{33.66,71},{33.66,44.32}},
       color={0,0,127},
       smooth=Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
@@ -164,7 +166,7 @@ equation
           extent={{14,36},{100,-58}},
           lineColor={0,0,0},
           fillColor={215,215,215},
-          fillPattern=FillPattern.Forward),                                                                                                    Rectangle(extent = {{-60, -58}, {100, -70}}, lineColor=
+          fillPattern=FillPattern.Forward),                                                                                                    Rectangle(extent=  {{-60, -58}, {100, -70}}, lineColor=
               {0,127,0},
             lineThickness=1,                                                                                                    fillColor=
               {0,127,0},

@@ -39,7 +39,7 @@ equation
       color={0,127,255},
       smooth=Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-            -100},{100,100}}),                                                                           graphics={  Text(extent = {{-124, 74}, {-62, 44}}, lineColor = {0, 0, 255}, textString = "Always have 
+            -100},{100,100}}),                                                                           graphics={  Text(extent=  {{-124, 74}, {-62, 44}}, lineColor=  {0, 0, 255}, textString=  "Always have 
  a point of fixed pressure 
  before a pump
  when building a closed loop")}), experiment(StopTime = 86400, Interval = 60), __Dymola_experimentSetupOutput, Documentation(revisions="<html>

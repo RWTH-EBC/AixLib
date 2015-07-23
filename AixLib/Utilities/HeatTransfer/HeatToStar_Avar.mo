@@ -1,6 +1,4 @@
 within AixLib.Utilities.HeatTransfer;
-
-
 model HeatToStar_Avar
   "Adaptor for approximative longwave radiation exchange with variable surface Area"
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm annotation(Placement(transformation(extent = {{-102, -10}, {-82, 10}}, rotation = 0)));
@@ -30,3 +28,4 @@ equation
  </ul>
  </html>"));
 end HeatToStar_Avar;
+

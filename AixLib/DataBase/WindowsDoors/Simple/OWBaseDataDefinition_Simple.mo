@@ -1,6 +1,4 @@
 within AixLib.DataBase.WindowsDoors.Simple;
-
-
 record OWBaseDataDefinition_Simple
   "Outer window base definition for simple model"
   extends Modelica.Icons.Record;

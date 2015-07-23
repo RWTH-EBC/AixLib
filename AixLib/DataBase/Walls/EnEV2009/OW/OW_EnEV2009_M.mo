@@ -1,7 +1,7 @@
 within AixLib.DataBase.Walls.EnEV2009.OW;
 record OW_EnEV2009_M
   "outer wall after EnEV 2009, for building of type M (mittel)"
-  extends WallBaseDataDefinition(n(min = 1) = 4 "Number of wall layers", d = {0.05, 0.6, 0.175, 0.015}
+  extends WallBaseDataDefinition(n(min = 1) = 4 "Number of wall layers", d = {0.05, 0.06, 0.175, 0.015}
       "Thickness of wall layers",                                                                                                  rho = {1800, 120, 350, 1200}
       "Density of wall layers",                                                                                                    lambda = {1, 0.035, 0.11, 0.51}
       "Thermal conductivity of wall layers",                                                                                                    c = {1000, 1030, 1000, 1000}

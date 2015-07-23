@@ -2,14 +2,15 @@ within AixLib.Building.LowOrder.Examples.Validation.ASHRAE140;
 model Case900
   import AixLib;
   extends Modelica.Icons.Example;
-  Components.Weather.BaseClasses.Sun_new sun(
+  AixLib.Building.Components.Weather.BaseClasses.Sun sun(
     TimeCorrection=0,
     Longitude=-104.9,
     DiffWeatherDataTime=-7,
     Diff_localStandardTime_WeatherDataTime=0.5,
     Latitude=39.76)
     annotation (Placement(transformation(extent={{-142,61},{-118,85}})));
-  Components.Weather.BaseClasses.RadOnTiltedSurf_Perez              radOnTiltedSurf_Perez[5](
+  AixLib.Building.Components.Weather.RadiationOnTiltedSurface.RadOnTiltedSurf_Perez
+    radOnTiltedSurf_Perez[5](
     WeatherFormat=2,
     Azimut={180,-90,0,90,0},
     Tilt={90,90,90,90,0},
@@ -211,9 +212,9 @@ equation
       points={{-29,64},{-1,64}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(SolarRadWeightedSum.solarRad_out, reducedOrderModel.u1) annotation (
-      Line(
-      points={{17,64},{21,64},{21,45.42},{21.64,45.42}},
+  connect(SolarRadWeightedSum.solarRad_out, reducedOrderModel.solarRad_in)
+    annotation (Line(
+      points={{17,64},{21.64,64},{21.64,45.42}},
       color={0,0,127},
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(

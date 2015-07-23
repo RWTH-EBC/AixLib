@@ -1,1 +1,3 @@
 *.bak-mo
+*.pyc
+*.log

@@ -16,6 +16,7 @@ model HeatConv_inside
     "Constant heat transfer coefficient" annotation (Dialog(descriptionLabel=true,
         enable=if calcMethod == 3 then true else false));
 
+
   // which orientation of surface?
   parameter Integer surfaceOrientation=1 "Surface orientation" annotation (
       Dialog(descriptionLabel=true, enable=if calcMethod == 3 then false else true),
@@ -27,10 +28,12 @@ model HeatConv_inside
   parameter Modelica.SIunits.Area A=16 "Area of surface";
   Modelica.SIunits.CoefficientOfHeatTransfer alpha
     "variable heat transfer coefficient";
+
 protected
   Modelica.SIunits.Temp_C posDiff=noEvent(abs(port_b.T - port_a.T))
     "Positive temperature difference";
 equation
+
   /*
         port_b -> wall
         port_a -> air

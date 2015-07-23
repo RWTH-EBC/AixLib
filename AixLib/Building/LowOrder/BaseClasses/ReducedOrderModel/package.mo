@@ -1,4 +1,4 @@
 within AixLib.Building.LowOrder.BaseClasses;
-package ReducedOrderModel
+package ReducedOrderModel 
 extends Modelica.Icons.VariantsPackage;
 end ReducedOrderModel;

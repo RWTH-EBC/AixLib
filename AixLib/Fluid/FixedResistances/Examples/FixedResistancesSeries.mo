@@ -13,13 +13,13 @@ model FixedResistancesSeries "Test of multiple resistances in series"
     height=2*dp_nominal*nRes,
     offset=101325 - dp_nominal*nRes)
                  annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
-  AixLib.Fluid.Sources.Boundary_pT sou(             redeclare package Medium
-      =        Medium, T=273.15 + 20,
+  AixLib.Fluid.Sources.Boundary_pT sou(             redeclare package Medium =
+               Medium, T=273.15 + 20,
     use_p_in=true,
     nPorts=1)                         annotation (Placement(transformation(
           extent={{-40,20},{-20,40}})));
-  AixLib.Fluid.Sources.Boundary_pT sin(             redeclare package Medium
-      =        Medium, T=273.15 + 10,
+  AixLib.Fluid.Sources.Boundary_pT sin(             redeclare package Medium =
+               Medium, T=273.15 + 10,
     use_p_in=true,
     nPorts=1)                         annotation (Placement(transformation(
           extent={{56,20},{36,40}})));

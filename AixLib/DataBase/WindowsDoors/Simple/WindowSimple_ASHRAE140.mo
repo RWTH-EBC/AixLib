@@ -16,7 +16,7 @@ extends AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple(
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Window definition according to standard ASHARE 140 for a simple window. </p>
 <h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
+<p><img src=\"modelica://AixLib/Images/stars5.png\"/></p>
 <h4><span style=\"color:#008000\">References</span></h4>
 <p>Record is used in model <a href=\"Building.Components.WindowsDoors.WindowSimple\">Building.Components.WindowsDoors.WindowSimple</a></p>
 <p>Source:</p>

@@ -2,8 +2,7 @@ within AixLib.Fluid.Sensors.Examples;
 model VolumeFlowRate "Test model for the volume flow rate sensor"
   extends Modelica.Icons.Example;
 
-  package Medium = AixLib.Media.Air
-    "Medium model";
+  package Medium = AixLib.Media.Air "Medium model";
 
   AixLib.Fluid.Sources.Boundary_pT sin(
     redeclare package Medium = Medium,

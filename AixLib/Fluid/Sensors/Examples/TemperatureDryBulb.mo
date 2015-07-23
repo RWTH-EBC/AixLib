@@ -2,8 +2,7 @@ within AixLib.Fluid.Sensors.Examples;
 model TemperatureDryBulb "Test model for the dry bulb temperature sensor"
   extends Modelica.Icons.Example;
 
- package Medium = AixLib.Media.Air
-    "Medium model";
+ package Medium = AixLib.Media.Air "Medium model";
   AixLib.Fluid.Sources.Boundary_pT amb(
     redeclare package Medium = Medium,
     T=298.15,

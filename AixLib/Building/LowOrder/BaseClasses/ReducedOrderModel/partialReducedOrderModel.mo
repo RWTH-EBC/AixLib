@@ -148,7 +148,7 @@ public
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-36,64})));
-  Modelica.Blocks.Interfaces.RealInput u1 "Input signal connector"
+  Modelica.Blocks.Interfaces.RealInput solarRad_in "solar radiation input"
     annotation (Placement(transformation(extent={{-134,56},{-94,96}}),
         iconTransformation(
         extent={{-20,-20},{20,20}},
@@ -234,11 +234,11 @@ if withWindows and withOuterwalls then
       points={{-26,64},{-16,64},{-16,0},{-7,0}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(AbscoeffA1.u, u1) annotation (Line(
+  connect(AbscoeffA1.u, solarRad_in) annotation (Line(
       points={{-70.2,64},{-86,64},{-86,76},{-114,76}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(AbscoeffA.u, u1) annotation (Line(
+  connect(AbscoeffA.u, solarRad_in) annotation (Line(
       points={{-70.2,90},{-86,90},{-86,76},{-114,76}},
       color={0,0,127},
       smooth=Smooth.None));
@@ -337,7 +337,10 @@ if withWindows and withOuterwalls then
 </ul>
 </html>", revisions="<html>
 <ul>
-<li><i>October 2014,&nbsp;</i> by Peter Remmen:<br/>Implemented.</li>
+<li><i>June 2015,&nbsp;</i> by Moritz Lauster:<br>Changed name solar radiation input from u1 to solRad_in.</li>
+</ul>
+<ul>
+<li><i>October 2014,&nbsp;</i> by Peter Remmen:<br>Implemented.</li>
 </ul>
 </html>"));
 end partialReducedOrderModel;

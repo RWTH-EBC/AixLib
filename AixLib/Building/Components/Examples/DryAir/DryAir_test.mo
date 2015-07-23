@@ -2,12 +2,15 @@ within AixLib.Building.Components.Examples.DryAir;
 
 
 model DryAir_test "Simulation to test the dry air models"
+  import AixLib;
   extends Modelica.Icons.Example;
   Components.DryAir.DynamicVentilation dynamicVentilation(pITemp(triggeredTrapezoid(falling = 1), TN = 60), HeatingLimit = 288.15, Max_VR = 0.15, Tset = 295.15) annotation(Placement(transformation(extent = {{-12, -14}, {8, 6}})));
   Components.DryAir.Airload airload(V = 100, T(start = 303.15)) annotation(Placement(transformation(extent = {{30, -12}, {50, 8}})));
   Components.DryAir.Airload airload1(T(start = 289.15)) annotation(Placement(transformation(extent = {{-12, 70}, {8, 90}})));
   Components.DryAir.VarAirExchange varAirExchange annotation(Placement(transformation(extent = {{-12, 38}, {8, 58}})));
-  Components.DryAir.InfiltrationRate_DIN12831 infiltrationRate_DIN12831 annotation(Placement(transformation(extent = {{-12, 12}, {8, 32}})));
+  AixLib.Building.Components.DryAir.InfiltrationRate_DIN12831
+    infiltrationRate_DIN12831
+    annotation (Placement(transformation(extent={{-12,12},{8,32}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedHeatFlow(Q_flow = 150) annotation(Placement(transformation(extent = {{-90, 72}, {-70, 92}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature TempOutsideDaycurve annotation(Placement(transformation(extent = {{-90, 40}, {-70, 60}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature TempInside(T = 293.15) annotation(Placement(transformation(extent = {{90, 40}, {70, 60}})));

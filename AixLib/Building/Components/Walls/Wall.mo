@@ -30,6 +30,12 @@ model Wall
   // window parameters
   parameter Boolean withWindow = false
     "Choose if the wall has got a window (only outside walls)"                                    annotation(Dialog(tab = "Window", enable = outside));
+  replaceable model Window =
+      AixLib.Building.Components.WindowsDoors.WindowSimple
+  constrainedby
+    AixLib.Building.Components.WindowsDoors.BaseClasses.PartialWindow
+    "Model for window"
+                     annotation(Dialog( tab="Window",  enable = withWindow and outside), choicesAllMatching=true);
   parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType = DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009()
     "Choose a window type from the database"                                                                                                     annotation(Dialog(tab = "Window", enable = withWindow and outside), choicesAllMatching = true);
   parameter Modelica.SIunits.Area windowarea = 2 "Area of window" annotation(Dialog(tab = "Window", enable = withWindow and outside));
@@ -55,12 +61,16 @@ model Wall
   // COMPONENT PART
   BaseClasses.ConvNLayerClearanceStar Wall(h = wall_height, l = wall_length, T0 = T0, clearance = clearance, selectable = true, eps = WallType.eps, wallType = WallType, surfaceOrientation = ISOrientation) "Wall" annotation(Placement(transformation(extent = {{-20, 14}, {2, 34}}, rotation = 0)));
   Utilities.HeatTransfer.SolarRadToHeat SolarAbsorption(coeff = solar_absorptance, A = wall_height * wall_length - clearance) if outside annotation(Placement(transformation(origin = {-39, 89}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Utilities.Interfaces.SolarRad_in SolarRadiationPort if outside annotation(Placement(transformation(extent = {{-116, 79}, {-96, 99}}, rotation = 0), iconTransformation(extent = {{-36, 100}, {-16, 120}})));
+  BaseLib.Interfaces.SolarRad_in   SolarRadiationPort if outside annotation(Placement(transformation(extent = {{-116, 79}, {-96, 99}}, rotation = 0), iconTransformation(extent = {{-36, 100}, {-16, 120}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_outside annotation(Placement(transformation(extent = {{-108, -6}, {-88, 14}}, rotation = 0), iconTransformation(extent = {{-31, -10}, {-11, 10}})));
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if outside and (Model == 1 or Model == 2) annotation(Placement(transformation(extent = {{-113, 54}, {-93, 74}}, rotation = 0), iconTransformation(extent = {{-31, 78}, {-11, 98}})));
-  Weather.Sunblind Sunblind(n = 1, gsunblind = {Blinding}, Imax = Limit) if outside and withWindow and withSunblind annotation(Placement(transformation(extent = {{-44, -22}, {-21, 4}})));
+  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if outside and (Model ==1 or Model == 2)  annotation(Placement(transformation(extent = {{-113, 54}, {-93, 74}}, rotation = 0), iconTransformation(extent = {{-31, 78}, {-11, 98}})));
+  Weather.Sunblinds.Sunblind Sunblind(
+    n=1,
+    gsunblind={Blinding},
+    Imax=Limit) if                                                          outside and withWindow and withSunblind
+    annotation (Placement(transformation(extent={{-44,-21},{-21,5}})));
   WindowsDoors.Door Door(T0 = T0, door_area = door_height * door_width, eps = eps_door, U = if outside then U_door else U_door * 2) if withDoor annotation(Placement(transformation(extent = {{-21, -102}, {11, -70}})));
-  WindowsDoors.WindowSimple windowSimple(T0 = T0, windowarea = windowarea, WindowType = WindowType) if outside and withWindow annotation(Placement(transformation(extent = {{-15, -48}, {11, -22}})));
+  Window windowSimple(T0 = T0, windowarea = windowarea, WindowType = WindowType) if outside and withWindow annotation(Placement(transformation(extent = {{-15, -48}, {11, -22}})));
   Utilities.HeatTransfer.HeatConv_outside heatTransfer_Outside(A = wall_length * wall_height - clearance, Model = Model, surfaceType = surfaceType, alpha_custom = alpha_custom) if outside annotation(Placement(transformation(extent = {{-47, 48}, {-27, 68}})));
   Utilities.Interfaces.Adaptors.HeatStarToComb heatStarToComb annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 180, origin = {69, -1})));
   Utilities.Interfaces.HeatStarComb thermStarComb_inside annotation(Placement(transformation(extent = {{92, -10}, {112, 10}}), iconTransformation(extent = {{10, -10}, {30, 10}})));
@@ -117,17 +127,20 @@ equation
   // **** connections for outside wall with window and sunblind****
   //******************************************************************
   if outside and withWindow and withSunblind then
-    connect(Sunblind.Rad_Out[1], windowSimple.solarRad_in) annotation(Line(points = {{-22.15, -7.7}, {-18, -7.7}, {-18, -27.2}, {-13.7, -27.2}}, color = {255, 128, 0}, smooth = Smooth.None));
-    connect(Sunblind.Rad_In[1], SolarRadiationPort) annotation(Line(points = {{-42.85, -7.7}, {-81, -7.7}, {-81, 89}, {-106, 89}}, color = {255, 128, 0}, smooth = Smooth.None));
+    connect(Sunblind.Rad_Out[1], windowSimple.solarRad_in) annotation(Line(points={{-22.15,
+            -6.7},{-18,-6.7},{-18,-27.2},{-13.7,-27.2}},                                                                                         color = {255, 128, 0}, smooth = Smooth.None));
+    connect(Sunblind.Rad_In[1], SolarRadiationPort) annotation(Line(points={{-42.85,
+            -6.7},{-81,-6.7},{-81,89},{-106,89}},                                                                                  color = {255, 128, 0}, smooth = Smooth.None));
   end if;
   connect(heatStarToComb.thermStarComb, thermStarComb_inside) annotation(Line(points = {{78.4, -1.1}, {78.4, -1.05}, {102, -1.05}, {102, 0}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(port_outside, port_outside) annotation(Line(points = {{-98, 4}, {-98, 4}}, color = {191, 0, 0}, pattern = LinePattern.None, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}, grid = {1, 1}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-20, -120}, {20, 120}}, grid = {1, 1}), graphics={  Rectangle(extent = {{-16, 120}, {15, -60}}, fillColor = {215, 215, 215},
-            fillPattern =                                                                                                   FillPattern.Backward, pattern = LinePattern.None, lineColor = {0, 0, 0}), Rectangle(extent = {{-16, -90}, {15, -120}}, pattern = LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
-            fillPattern =                                                                                                   FillPattern.Backward), Rectangle(extent = {{-16, -51}, {15, -92}}, lineColor = {0, 0, 0}, pattern = LinePattern.None, fillColor = {215, 215, 215},
-            fillPattern =                                                                                                   FillPattern.Backward, visible = not withDoor), Rectangle(extent = {{-16, 80}, {15, 20}}, fillColor = {255, 255, 255},
-            fillPattern =                                                                                                   FillPattern.Solid, visible = outside and withWindow, lineColor = {255, 255, 255}), Line(points = {{-2, 80}, {-2, 20}}, color = {0, 0, 0}, smooth = Smooth.None, visible = outside and withWindow), Line(points = {{1, 80}, {1, 20}}, color = {0, 0, 0}, smooth = Smooth.None, visible = outside and withWindow), Line(points = {{1, 77}, {-2, 77}}, color = {0, 0, 0}, smooth = Smooth.None, visible = outside and withWindow), Line(points = {{1, 23}, {-2, 23}}, color = {0, 0, 0}, smooth = Smooth.None, visible = outside and withWindow), Ellipse(extent = {{-16, -60}, {44, -120}}, lineColor = {0, 0, 0}, startAngle = 359, endAngle = 450, visible = withDoor), Rectangle(extent = {{-16, -60}, {15, -90}}, visible = withDoor, lineColor = {255, 255, 255}, fillColor = {255, 255, 255},
-            fillPattern =                                                                                                   FillPattern.Solid), Line(points = {{1, 50}, {-2, 50}}, color = {0, 0, 0}, smooth = Smooth.None, visible = outside and withWindow), Line(points = {{15, 80}, {15, 20}}, color = {0, 0, 0}, smooth = Smooth.None, visible = outside and withWindow), Line(points = {{-16, 80}, {-16, 20}}, color = {0, 0, 0}, smooth = Smooth.None, visible = outside and withWindow), Line(points = {{-16, -60}, {-16, -90}}, color = {0, 0, 0}, smooth = Smooth.None, visible = withDoor), Line(points = {{15, -60}, {15, -90}}, color = {0, 0, 0}, smooth = Smooth.None, visible = withDoor), Line(points = {{-16, -90}, {15, -60}}, color = {0, 0, 0}, smooth = Smooth.None, visible = withDoor), Line(points = {{-16, -60}, {15, -90}}, color = {0, 0, 0}, smooth = Smooth.None, visible = withDoor)}), Documentation(info = "<html>
+  annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
+            -100},{100,100}},                                                                           grid = {1, 1}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-20, -120}, {20, 120}}, grid = {1, 1}), graphics={  Rectangle(extent=  {{-16, 120}, {15, -60}}, fillColor=  {215, 215, 215},
+            fillPattern=                                                                                                    FillPattern.Backward, pattern=  LinePattern.None, lineColor=  {0, 0, 0}), Rectangle(extent=  {{-16, -90}, {15, -120}}, pattern=  LinePattern.None, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215},
+            fillPattern=                                                                                                    FillPattern.Backward), Rectangle(extent=  {{-16, -51}, {15, -92}}, lineColor=  {0, 0, 0}, pattern=  LinePattern.None, fillColor=  {215, 215, 215},
+            fillPattern=                                                                                                    FillPattern.Backward, visible=  not withDoor), Rectangle(extent=  {{-16, 80}, {15, 20}}, fillColor=  {255, 255, 255},
+            fillPattern=                                                                                                    FillPattern.Solid, visible=  outside and withWindow, lineColor=  {255, 255, 255}), Line(points=  {{-2, 80}, {-2, 20}}, color=  {0, 0, 0}, smooth=  Smooth.None, visible=  outside and withWindow), Line(points=  {{1, 80}, {1, 20}}, color=  {0, 0, 0}, smooth=  Smooth.None, visible=  outside and withWindow), Line(points=  {{1, 77}, {-2, 77}}, color=  {0, 0, 0}, smooth=  Smooth.None, visible=  outside and withWindow), Line(points=  {{1, 23}, {-2, 23}}, color=  {0, 0, 0}, smooth=  Smooth.None, visible=  outside and withWindow), Ellipse(extent=  {{-16, -60}, {44, -120}}, lineColor=  {0, 0, 0}, startAngle=  359, endAngle=  450, visible=  withDoor), Rectangle(extent=  {{-16, -60}, {15, -90}}, visible=  withDoor, lineColor=  {255, 255, 255}, fillColor=  {255, 255, 255},
+            fillPattern=                                                                                                    FillPattern.Solid), Line(points=  {{1, 50}, {-2, 50}}, color=  {0, 0, 0}, smooth=  Smooth.None, visible=  outside and withWindow), Line(points=  {{15, 80}, {15, 20}}, color=  {0, 0, 0}, smooth=  Smooth.None, visible=  outside and withWindow), Line(points=  {{-16, 80}, {-16, 20}}, color=  {0, 0, 0}, smooth=  Smooth.None, visible=  outside and withWindow), Line(points=  {{-16, -60}, {-16, -90}}, color=  {0, 0, 0}, smooth=  Smooth.None, visible=  withDoor), Line(points=  {{15, -60}, {15, -90}}, color=  {0, 0, 0}, smooth=  Smooth.None, visible=  withDoor), Line(points=  {{-16, -90}, {15, -60}}, color=  {0, 0, 0}, smooth=  Smooth.None, visible=  withDoor), Line(points=  {{-16, -60}, {15, -90}}, color=  {0, 0, 0}, smooth=  Smooth.None, visible=  withDoor)}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Flexible Model for Inside Walls and Outside Walls. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>

@@ -6,6 +6,7 @@ IntegerReplicator
 InverseXRegularized
 Max
 Min
+MovingAverage
 Polynominal
 PowerLinearized
 QuadraticLinear

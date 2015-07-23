@@ -4,14 +4,15 @@ model Case640
   extends Modelica.Icons.Example;
   parameter AixLib.DataBase.Profiles.Profile_BaseDataDefinition SetTempProfile = AixLib.DataBase.Profiles.ASHRAE140.SetTemp_caseX40();
 
-  Components.Weather.BaseClasses.Sun_new sun(
+  AixLib.Building.Components.Weather.BaseClasses.Sun sun(
     TimeCorrection=0,
     Longitude=-104.9,
     DiffWeatherDataTime=-7,
     Diff_localStandardTime_WeatherDataTime=0.5,
     Latitude=39.76)
     annotation (Placement(transformation(extent={{-142,61},{-118,85}})));
-  Components.Weather.BaseClasses.RadOnTiltedSurf_Perez              radOnTiltedSurf_Perez[5](
+  AixLib.Building.Components.Weather.RadiationOnTiltedSurface.RadOnTiltedSurf_Perez
+    radOnTiltedSurf_Perez[5](
     WeatherFormat=2,
     Azimut={180,-90,0,90,0},
     Tilt={90,90,90,90,0},
@@ -216,13 +217,13 @@ equation
       points={{-29,64},{-1,64}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(SolarRadWeightedSum.solarRad_out, reducedOrderModel.u1) annotation (
-      Line(
-      points={{17,64},{21,64},{21,45.42},{21.64,45.42}},
-      color={0,0,127},
-      smooth=Smooth.None));
   connect(Source_TsetHeat.y[1], idealHeaterCooler.soll_heat) annotation (Line(
       points={{25.35,-43.5},{19,-43.5},{19,-28.8}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(SolarRadWeightedSum.solarRad_out, reducedOrderModel.solarRad_in)
+    annotation (Line(
+      points={{17,64},{21.64,64},{21.64,45.42}},
       color={0,0,127},
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(

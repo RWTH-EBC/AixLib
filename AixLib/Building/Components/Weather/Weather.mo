@@ -18,6 +18,13 @@ model Weather "Complex weather model"
     "Extrapolation of data outside the definition range"                                                                                                     annotation(Dialog(group = "Properties of Weather Data"));
   parameter Real startTime[1] = {0}
     "output = offset for time < startTime (same value for all columns)"                                 annotation(Dialog(group = "Properties of Weather Data"));
+
+  replaceable model RadOnTiltedSurface =
+      AixLib.Building.Components.Weather.RadiationOnTiltedSurface.RadOnTiltedSurf_Liu
+  constrainedby
+    AixLib.Building.Components.Weather.RadiationOnTiltedSurface.BaseClasses
+    "Model for calculating radiation on tilted surfaces"                                                                            annotation(Dialog(group="Solar radiation on oriented surfaces", descriptionLabel = true), choicesAllMatching= true);
+
   parameter
     DataBase.Weather.SurfaceOrientation.SurfaceOrientationBaseDataDefinition         SOD = DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor()
     "Surface orientation data"                                                                                                     annotation(Dialog(group = "Solar radiation on oriented surfaces", descriptionLabel = true), choicesAllMatching = true);
@@ -38,8 +45,12 @@ model Weather "Complex weather model"
     "Longwave sky radiation on horizontal [W/m2] (TRY col 18)"                                 annotation(Dialog(tab = "Optional output vector", descriptionLabel = true), choices(checkBox = true));
   parameter Boolean Ter_rad = false
     "Longwave terrestric radiation from horizontal [W/m2] (TRY col 19)"                                 annotation(Dialog(tab = "Optional output vector", descriptionLabel = true), choices(checkBox = true));
-  BaseClasses.Sun Sun(Longitude = Longitude, Latitude = Latitude, DiffWeatherDataTime = DiffWeatherDataTime) annotation(Placement(transformation(extent = {{-62, 18}, {-38, 42}}, rotation = 0)));
-  BaseClasses.RadOnTiltedSurf RadOnTiltedSurf[SOD.nSurfaces](each Latitude = Latitude, each GroundReflection = GroundReflection, Azimut = SOD.Azimut, Tilt = SOD.Tilt) annotation(Placement(transformation(extent = {{-2, 18}, {22, 42}}, rotation = 0)));
+  BaseClasses.Sun Sun(
+    Longitude=Longitude,
+    Latitude=Latitude,
+    DiffWeatherDataTime=DiffWeatherDataTime) annotation (Placement(
+        transformation(extent={{-62,18},{-38,42}}, rotation=0)));
+  RadOnTiltedSurface RadOnTiltedSurf[SOD.nSurfaces](each Latitude = Latitude, each GroundReflection = GroundReflection, Azimut = SOD.Azimut, Tilt = SOD.Tilt, WeatherFormat=1) annotation(Placement(transformation(extent = {{-2, 18}, {22, 42}}, rotation = 0)));
   Modelica.Blocks.Sources.CombiTimeTable WeatherData(fileName = fileName, columns = columns, offset = offset, table = [0, 0; 1, 1], startTime = scalar(startTime), tableName = tableName, tableOnFile = tableName <> "NoName", smoothness = smoothness, extrapolation = extrapolation) annotation(Placement(transformation(extent = {{-60, -70}, {-40, -50}}, rotation = 0)));
   Modelica.Blocks.Routing.DeMultiplex3 deMultiplex(n3 = 9) annotation(Placement(transformation(extent = {{-26, -70}, {-6, -50}}, rotation = 0)));
   Modelica.Blocks.Interfaces.RealOutput WeatherDataVector[m] if Outopt == 1 and (Cloud_cover or Wind_dir or Wind_speed or Air_temp or Air_press or Mass_frac or Rel_hum or Sky_rad or Ter_rad) annotation(Placement(transformation(origin = {-1, -110}, extent = {{-10, -10}, {10, 10}}, rotation = 270)));
@@ -154,18 +165,19 @@ equation
     end if;
   end if;
   connect(WeatherData.y, deMultiplex.u) annotation(Line(points = {{-39, -60}, {-28, -60}}, color = {0, 0, 127}));
-  // Connecting n RadOnTiltedSurf
+ // Connecting n RadOnTiltedSurf
   for i in 1:SOD.nSurfaces loop
+    connect(Sun.OutDayAngleSun, RadOnTiltedSurf[i].InDayAngleSun);
     connect(Sun.OutHourAngleSun, RadOnTiltedSurf[i].InHourAngleSun);
     connect(Sun.OutDeclinationSun, RadOnTiltedSurf[i].InDeclinationSun);
-    connect(Sun.OutAzimutSun, RadOnTiltedSurf[i].InAzimutSun);
-    connect(deMultiplex.y1[1], RadOnTiltedSurf[i].InDiffRadHor);
-    connect(deMultiplex.y2[1], RadOnTiltedSurf[i].InBeamRadHor);
+    connect(deMultiplex.y1[1], RadOnTiltedSurf[i].solarInput2);
+    connect(deMultiplex.y2[1], RadOnTiltedSurf[i].solarInput1);
   end for;
+
   connect(RadOnTiltedSurf.OutTotalRadTilted, SolarRadiation_OrientedSurfaces) annotation(Line(points={{20.8,
-          27.6},{50.4,27.6},{50.4,96},{50,96}},                                                                                                    color = {255, 128, 0}, smooth = Smooth.None));
+          34.8},{50.4,34.8},{50.4,96},{50,96}},                                                                                                    color = {255, 128, 0}, smooth = Smooth.None));
   annotation(Dialog(group = "Solar radiation on oriented surfaces"), Dialog(tab = "Optional output vector", descriptionLabel = true), Diagram(coordinateSystem(preserveAspectRatio=false,  extent={{-150,
-            -100},{150,100}}),                                                                                                    graphics={  Line(points = {{-36, 32}, {-4, 32}}, color = {0, 0, 255}), Line(points = {{-36, 28}, {-4, 28}}, color = {0, 0, 255}), Line(points = {{-36, 24}, {-4, 24}}, color = {0, 0, 255}), Line(points = {{5, 13}, {5, -53}, {-3, -53}}, color = {0, 0, 255}), Line(points = {{15, 14}, {15, -60}, {-3, -60}}, color = {0, 0, 255})}), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-150, -100}, {150, 100}}), graphics={  Rectangle(extent = {{-150, 78}, {10, -82}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
+            -100},{150,100}}),                                                                                                    graphics={  Line(points=  {{-36, 32}, {-4, 32}}, color=  {0, 0, 255}), Line(points=  {{-36, 28}, {-4, 28}}, color=  {0, 0, 255}), Line(points=  {{-36, 24}, {-4, 24}}, color=  {0, 0, 255}), Line(points=  {{5, 13}, {5, -53}, {-3, -53}}, color=  {0, 0, 255}), Line(points=  {{15, 14}, {15, -60}, {-3, -60}}, color=  {0, 0, 255})}), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-150, -100}, {150, 100}}), graphics={  Rectangle(extent = {{-150, 78}, {10, -82}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(
           extent={{-150,78},{10,-72}},
           lineColor={0,0,0},

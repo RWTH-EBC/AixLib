@@ -1,6 +1,4 @@
 within AixLib.DataBase.Walls.WSchV1984.IW;
-
-
 record IWneighbour_WSchV1984_L_half
   "Inner wall towards neighbour after WSchV1984, for building of type L (leicht), only half"
   // New Walls for Dymola 2012, the same number of layers as other mass clases
@@ -36,3 +34,4 @@ record IWneighbour_WSchV1984_L_half
  </ul>
  </html>"));
 end IWneighbour_WSchV1984_L_half;
+

@@ -48,20 +48,26 @@ protected
 equation
   connect(infiltrationRate.port_a, thermOutside) annotation(Line(points = {{-44, -87}, {-42, -87}, {-42, -90}, {-90, -90}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(infiltrationRate.port_b, airload.port) annotation(Line(points = {{-18, -87}, {-2, -87}, {-2, -64}, {-54, -64}, {-54, -24}, {-12, -24}, {-12, 4}, {-19, 4}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Wall_Ceiling.port_outside, thermCellar) annotation(Line(points = {{110, 64.1}, {110, 90}}, color = {191, 0, 0}, smooth = Smooth.None));
+  connect(Wall_Ceiling.port_outside, thermCellar) annotation(Line(points={{110,
+          64.1},{110,90}},                                                                           color = {191, 0, 0}, smooth = Smooth.None));
   connect(TGround.port, Wall3.port_outside) annotation(Line(points = {{138, -70}, {2, -70}, {2, -54.45}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(Wall2.port_outside, TGround.port) annotation(Line(points = {{77.45, 13}, {100, 13}, {100, -70}, {138, -70}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Wall_Floor.port_outside, TGround.port) annotation(Line(points = {{110, 29.9}, {110, 8}, {100, 8}, {100, -70}, {138, -70}}, color = {191, 0, 0}, smooth = Smooth.None));
+  connect(Wall_Floor.port_outside, TGround.port) annotation(Line(points={{110,
+          29.9},{110,8},{100,8},{100,-70},{138,-70}},                                                                                color = {191, 0, 0}, smooth = Smooth.None));
   connect(Wall1.port_outside, TGround.port) annotation(Line(points = {{2, 74.45}, {2, 88}, {100, 88}, {100, -70}, {138, -70}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(Wall4.port_outside, TGround.port) annotation(Line(points = {{-79.45, 13}, {-86, 13}, {-86, -64}, {-2, -64}, {-2, -70}, {138, -70}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(Wall2.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{59, 13}, {46, 13}, {46, -24}, {3.9, -24}, {3.9, -15.4}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(Wall3.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{2, -36}, {2, -25.1125}, {3.9, -25.1125}, {3.9, -15.4}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(Wall1.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{2, 56}, {2, 44}, {46, 44}, {46, -24}, {3.9, -24}, {3.9, -15.4}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(Wall4.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{-61, 13}, {-48, 13}, {-48, -24}, {3.9, -24}, {3.9, -15.4}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Wall_Floor.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{110, 34}, {110, 34}, {110, 44}, {46, 44}, {46, -24}, {3.9, -24}, {3.9, -15.4}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Wall_Ceiling.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{110, 60}, {110, 44}, {46, 44}, {46, -24}, {3.9, -24}, {3.9, -15.4}}, color = {191, 0, 0}, smooth = Smooth.None));
+  connect(Wall_Floor.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{110,34},
+          {110,34},{110,44},{46,44},{46,-24},{3.9,-24},{3.9,-15.4}},                                                                                                    color = {191, 0, 0}, smooth = Smooth.None));
+  connect(Wall_Ceiling.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{110,60},
+          {110,44},{46,44},{46,-24},{3.9,-24},{3.9,-15.4}},                                                                                                    color = {191, 0, 0}, smooth = Smooth.None));
   connect(thermStar_Demux.therm, airload.port) annotation(Line(points = {{-1.1, 4.1}, {-1.1, 12}, {-12, 12}, {-12, 4}, {-19, 4}}, color = {191, 0, 0}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -150}, {150, 100}}, initialScale = 0.1), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}, initialScale = 0.1), graphics = {Rectangle(extent=  {{-68, 74}, {134, -128}}, lineColor=  {0, 0, 255}, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid), Text(extent=  {{-66, 10}, {126, -48}}, lineColor=  {0, 0, 255}, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid, textString=  "Cellar")}), Documentation(revisions = "<html>
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -150}, {150, 100}}, initialScale = 0.1), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}, initialScale = 0.1), graphics={  Rectangle(extent=  {{-68, 74}, {134, -128}}, lineColor=  {0, 0, 255}, fillColor=  {215, 215, 215},
+            fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-66, 10}, {126, -48}}, lineColor=  {0, 0, 255}, fillColor=  {215, 215, 215},
+            fillPattern=                                                                                                    FillPattern.Solid, textString=  "Cellar")}), Documentation(revisions = "<html>
  <ul>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
  <li><i>August 17, 2011</i> by Ana Constantin:<br/>Implemented</li>

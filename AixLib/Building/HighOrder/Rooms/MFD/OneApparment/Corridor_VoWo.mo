@@ -66,27 +66,54 @@ protected
   parameter Modelica.SIunits.Volume room_V = 5.73 * 2.46;
 equation
   connect(infiltrationRate.port_b, airload.port) annotation(Line(points = {{-18, 73}, {0, 73}, {0, -4}, {-13, -4}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Wall_Staircase.port_outside, thermStaircase) annotation(Line(points = {{112.2, -32}, {140, -32}, {140, -130}, {-80, -130}, {-80, 80}, {-102, 80}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Wall_Kitchen2.port_outside, thermKitchen) annotation(Line(points = {{52, -68.25}, {52, -130}, {-80, -130}, {-80, 50}, {-102, 50}}, color = {191, 0, 0}, smooth = Smooth.None));
+  connect(Wall_Staircase.port_outside, thermStaircase) annotation(Line(points={{112.2,
+          -32},{140,-32},{140,-130},{-80,-130},{-80,80},{-102,80}},                                                                                          color = {191, 0, 0}, smooth = Smooth.None));
+  connect(Wall_Kitchen2.port_outside, thermKitchen) annotation(Line(points={{52,
+          -68.25},{52,-130},{-80,-130},{-80,50},{-102,50}},                                                                                  color = {191, 0, 0}, smooth = Smooth.None));
   connect(infiltrationRate.port_a, thermStaircase) annotation(Line(points = {{-44, 73}, {-80, 73}, {-80, 80}, {-102, 80}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(Wall_Kitchen1.port_outside, thermKitchen) annotation(Line(points = {{0.1, -74}, {20, -74}, {20, -130}, {-80, -130}, {-80, 50}, {-102, 50}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Wall_Bath.port_outside, thermBath) annotation(Line(points = {{-20, -102.15}, {-20, -130}, {-80, -130}, {-80, -40}, {-100, -40}}, color = {191, 0, 0}, smooth = Smooth.None));
+  connect(Wall_Bath.port_outside, thermBath) annotation(Line(points={{-20,
+          -102.15},{-20,-130},{-80,-130},{-80,-40},{-100,-40}},                                                                            color = {191, 0, 0}, smooth = Smooth.None));
   connect(Wall_Bedroom.port_outside, thermBedroom) annotation(Line(points = {{-66.3, -34}, {-80, -34}, {-80, -70}, {-100, -70}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(Wall_Ceiling.port_outside, thermCeiling) annotation(Line(points = {{117, 82.1}, {117, 96}, {140, 96}, {140, -130}, {-80, -130}, {-80, -100}, {-100, -100}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Wall_Floor.port_outside, thermFloor) annotation(Line(points = {{118, 51.85}, {118, 36}, {140, 36}, {140, -130}, {-100, -130}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Wall_Livingroom.port_outside, thermLivingroom) annotation(Line(points = {{-28, 28.2}, {-28, 52}, {-80, 52}, {-80, 20}, {-102, 20}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Wall_Children.port_outside, thermChild) annotation(Line(points = {{46, 28.2}, {46, 52}, {-80, 52}, {-80, -10}, {-102, -10}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Wall_Kitchen2.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{52, -58}, {52, -44.0875}, {45.9, -44.0875}, {45.9, -35.4}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Wall_Staircase.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{104, -32}, {94, -32}, {94, -44}, {45.9, -44}, {45.9, -35.4}}, color = {191, 0, 0}, smooth = Smooth.None));
+  connect(Wall_Floor.port_outside, thermFloor) annotation(Line(points={{118,
+          51.85},{118,36},{140,36},{140,-130},{-100,-130}},                                                                              color = {191, 0, 0}, smooth = Smooth.None));
+  connect(Wall_Livingroom.port_outside, thermLivingroom) annotation(Line(points={{-28,
+          28.2},{-28,52},{-80,52},{-80,20},{-102,20}},                                                                                        color = {191, 0, 0}, smooth = Smooth.None));
+  connect(Wall_Children.port_outside, thermChild) annotation(Line(points={{46,28.2},
+          {46,52},{-80,52},{-80,-10},{-102,-10}},                                                                                      color = {191, 0, 0}, smooth = Smooth.None));
+  connect(Wall_Kitchen2.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{52,-58},
+          {52,-44.0875},{45.9,-44.0875},{45.9,-35.4}},                                                                                                    color = {191, 0, 0}, smooth = Smooth.None));
+  connect(Wall_Staircase.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{104,-32},
+          {94,-32},{94,-44},{45.9,-44},{45.9,-35.4}},                                                                                                    color = {191, 0, 0}, smooth = Smooth.None));
   connect(Wall_Kitchen1.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{-4, -74}, {-14, -74}, {-14, -44}, {45.9, -44}, {45.9, -35.4}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Wall_Bath.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{-20, -96}, {-20, -80}, {-14, -80}, {-14, -44}, {45.9, -44}, {45.9, -35.4}}, color = {191, 0, 0}, smooth = Smooth.None));
+  connect(Wall_Bath.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{-20,-96},
+          {-20,-80},{-14,-80},{-14,-44},{45.9,-44},{45.9,-35.4}},                                                                                                    color = {191, 0, 0}, smooth = Smooth.None));
   connect(Wall_Bedroom.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{-54, -34}, {-40, -34}, {-40, -80}, {-14, -80}, {-14, -44}, {45.9, -44}, {45.9, -35.4}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Wall_Livingroom.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{-28, 20}, {-28, 12}, {-40, 12}, {-40, -80}, {-14, -80}, {-14, -44}, {45.9, -44}, {45.9, -35.4}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Wall_Children.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{46, 20}, {46, 10}, {94, 10}, {94, -44}, {45.9, -44}, {45.9, -35.4}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Wall_Floor.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{118, 58}, {118, 64}, {94, 64}, {94, -44}, {45.9, -44}, {45.9, -35.4}}, color = {191, 0, 0}, smooth = Smooth.None));
+  connect(Wall_Livingroom.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{-28,20},
+          {-28,12},{-40,12},{-40,-80},{-14,-80},{-14,-44},{45.9,-44},{45.9,
+          -35.4}},                                                                                                    color = {191, 0, 0}, smooth = Smooth.None));
+  connect(Wall_Children.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{46,20},
+          {46,10},{94,10},{94,-44},{45.9,-44},{45.9,-35.4}},                                                                                                    color = {191, 0, 0}, smooth = Smooth.None));
+  connect(Wall_Floor.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{118,58},
+          {118,64},{94,64},{94,-44},{45.9,-44},{45.9,-35.4}},                                                                                                    color = {191, 0, 0}, smooth = Smooth.None));
   connect(Wall_Ceiling.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{117, 78}, {117, 64}, {94, 64}, {94, -44}, {45.9, -44}, {45.9, -35.4}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(airload.port, thermStar_Demux.therm) annotation(Line(points = {{-13, -4}, {40.9, -4}, {40.9, -15.9}}, color = {191, 0, 0}, smooth = Smooth.None));
-  annotation(__Dymola_Images(Parameters(source = "AixLib/Images/House/VoWo_Corridor.png")), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}, initialScale = 0.1), graphics = {Polygon(points=  {{-60, 60}, {120, 60}, {120, -60}, {20, -60}, {20, -100}, {-60, -100}, {-60, -18}, {-60, 60}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 255}, fillPattern=  FillPattern.Forward), Text(extent=  {{-26, 6}, {82, -26}}, lineColor=  {0, 0, 0}, fillColor=  {255, 0, 0}, fillPattern=  FillPattern.Forward, textString=  "Corridor"), Rectangle(extent=  {{-110, -120}, {-90, -140}}, lineColor=  {0, 0, 0}, lineThickness=  0.5), Rectangle(extent=  {{-110, -90}, {-90, -110}}, lineColor=  {0, 0, 0}, lineThickness=  0.5), Rectangle(extent=  {{-110, -60}, {-90, -80}}, lineColor=  {0, 0, 0}, lineThickness=  0.5), Rectangle(extent=  {{-110, -30}, {-90, -50}}, lineColor=  {0, 0, 0}, lineThickness=  0.5), Rectangle(extent=  {{-112, 60}, {-92, 40}}, lineColor=  {0, 0, 0}, lineThickness=  0.5), Rectangle(extent=  {{-112, 90}, {-92, 70}}, lineColor=  {0, 0, 0}, lineThickness=  0.5), Rectangle(extent=  {{108, 12}, {128, -18}}, lineColor=  {0, 0, 0}, lineThickness=  1, fillColor=  {127, 0, 0}, fillPattern=  FillPattern.Forward), Ellipse(extent=  {{110, 0}, {112, -2}}, lineColor=  {0, 0, 0}, pattern=  LinePattern.None, lineThickness=  1, fillPattern=  FillPattern.Sphere, fillColor=  {255, 255, 0}), Text(extent=  {{78, 38}, {164, 18}}, lineColor=  {0, 0, 255}, textString=  "Staircase"), Rectangle(extent=  {{-112, 0}, {-92, -20}}, lineColor=  {0, 0, 0}, lineThickness=  0.5), Rectangle(extent=  {{-112, 30}, {-92, 10}}, lineColor=  {0, 0, 0}, lineThickness=  0.5)}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}, initialScale = 0.1), graphics), Documentation(revisions = "<html>
+  annotation(__Dymola_Images(Parameters(source = "AixLib/Images/House/VoWo_Corridor.png")), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}, initialScale = 0.1), graphics={  Polygon(points=  {{-60, 60}, {120, 60}, {120, -60}, {20, -60}, {20, -100}, {-60, -100}, {-60, -18}, {-60, 60}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 255},
+            fillPattern=                                                                                                    FillPattern.Forward), Text(extent=  {{-26, 6}, {82, -26}}, lineColor=  {0, 0, 0}, fillColor=  {255, 0, 0},
+            fillPattern=                                                                                                    FillPattern.Forward, textString=  "Corridor"), Rectangle(extent=  {{-110, -120}, {-90, -140}}, lineColor=  {0, 0, 0},
+            lineThickness=                                                                                                    0.5), Rectangle(extent=  {{-110, -90}, {-90, -110}}, lineColor=  {0, 0, 0},
+            lineThickness=                                                                                                    0.5), Rectangle(extent=  {{-110, -60}, {-90, -80}}, lineColor=  {0, 0, 0},
+            lineThickness=                                                                                                    0.5), Rectangle(extent=  {{-110, -30}, {-90, -50}}, lineColor=  {0, 0, 0},
+            lineThickness=                                                                                                    0.5), Rectangle(extent=  {{-112, 60}, {-92, 40}}, lineColor=  {0, 0, 0},
+            lineThickness=                                                                                                    0.5), Rectangle(extent=  {{-112, 90}, {-92, 70}}, lineColor=  {0, 0, 0},
+            lineThickness=                                                                                                    0.5), Rectangle(extent=  {{108, 12}, {128, -18}}, lineColor=  {0, 0, 0},
+            lineThickness=                                                                                                    1, fillColor=  {127, 0, 0},
+            fillPattern=                                                                                                    FillPattern.Forward), Ellipse(extent=  {{110, 0}, {112, -2}}, lineColor=  {0, 0, 0}, pattern=  LinePattern.None,
+            lineThickness=                                                                                                    1,
+            fillPattern=                                                                                                    FillPattern.Sphere, fillColor=  {255, 255, 0}), Text(extent=  {{78, 38}, {164, 18}}, lineColor=  {0, 0, 255}, textString=  "Staircase"), Rectangle(extent=  {{-112, 0}, {-92, -20}}, lineColor=  {0, 0, 0},
+            lineThickness=                                                                                                    0.5), Rectangle(extent=  {{-112, 30}, {-92, 10}}, lineColor=  {0, 0, 0},
+            lineThickness=                                                                                                    0.5)}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}, initialScale = 0.1), graphics), Documentation(revisions = "<html>
  <ul>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
  <li><i>August 16, 2011</i> by Ana Constantin:<br/>Implemented</li>

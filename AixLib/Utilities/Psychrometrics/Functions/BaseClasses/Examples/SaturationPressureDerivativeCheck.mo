@@ -16,7 +16,7 @@ equation
     pSat=AixLib.Utilities.Psychrometrics.Functions.saturationPressure(T);
     der(pSat)=der(pSatDer);
     assert(abs(pSat-pSatDer) < 1E-2, "Model has an error");
-   annotation(                       __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Psychrometrics/Functions/BaseClasses/Examples/SaturationPressureDerivativeCheck.mos"
+   annotation (                      __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Psychrometrics/Functions/BaseClasses/Examples/SaturationPressureDerivativeCheck.mos"
         "Simulate and plot"),
       experiment(
         StartTime=0,

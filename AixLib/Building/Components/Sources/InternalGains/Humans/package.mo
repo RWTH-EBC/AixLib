@@ -1,4 +1,4 @@
 within AixLib.Building.Components.Sources.InternalGains;
-package Humans
+package Humans 
   extends Modelica.Icons.Package;
 end Humans;

@@ -24,7 +24,8 @@ model WholeHouseBuildingEnvelope
   parameter Real Max_VR = 200 "Maximal ventilation rate" annotation(Dialog(group = "Dynamic ventilation", descriptionLabel = true, enable = if withDynamicVentilation then true else false));
   parameter Modelica.SIunits.TemperatureDifference Diff_toTempset = 3
     "Difference to set temperature"                                                                   annotation(Dialog(group = "Dynamic ventilation", descriptionLabel = true, enable = if withDynamicVentilation then true else false));
-  GroundFloorBuildingEnvelope groundFloor_Building(TMC = TMC, TIR = TIR, withDynamicVentilation = withDynamicVentilation, HeatingLimit = HeatingLimit, Max_VR = Max_VR, Diff_toTempset = Diff_toTempset, withFloorHeating = withFloorHeating) annotation(Placement(transformation(extent = {{-26, -94}, {22, -42}})));
+  GroundFloorBuildingEnvelope groundFloor_Building(TMC = TMC, TIR = TIR, withDynamicVentilation = withDynamicVentilation, HeatingLimit = HeatingLimit, Max_VR = Max_VR, Diff_toTempset = Diff_toTempset, withFloorHeating = withFloorHeating,
+    TRY=TRY)                                                                                                     annotation(Placement(transformation(extent = {{-26, -94}, {22, -42}})));
   AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.UpperFloorBuildingEnvelope
                                                                                                       upperFloor_Building(TMC = TMC, TIR = TIR, HeatingLimit = HeatingLimit, Max_VR = Max_VR, Diff_toTempset = Diff_toTempset, withDynamicVentilation = withDynamicVentilation, withFloorHeating = withFloorHeating) annotation(Placement(transformation(extent = {{-26, -22}, {20, 30}})));
   Rooms.OFD.Attic_Ro2Lf5 attic_2Ro_5Rooms(length = 10.64, room1_length = 5.875, room2_length = 3.215, room3_length = 3.92, room4_length = 3.215, room5_length = 4.62, room1_width = 3.84, room2_width = 3.84, room3_width = 3.84, room4_width = 3.84, room5_width = 3.84, roof_width1 = 3.36, roof_width2 = 3.36, solar_absorptance_RO = 0.1, width = 4.75, TMC = TMC, TIR = TIR, alfa = 1.5707963267949) annotation(Placement(transformation(extent = {{-26, 46}, {20, 86}})));
@@ -75,16 +76,24 @@ equation
   connect(AirExchangeAttic_Source.y, attic_2Ro_5Rooms.AirExchangePort) annotation(Line(points = {{-51.6, 74}, {-26, 74}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(attic_2Ro_5Rooms.SolarRadiationPort_RO1, SolarRadiationPort_RoofS) annotation(Line(points = {{-14.5, 84}, {-14, 88}, {-14, 90}, {60, 90}, {60, 58}, {90, 58}}, color = {255, 128, 0}, smooth = Smooth.None));
   connect(attic_2Ro_5Rooms.SolarRadiationPort_RO2, SolarRadiationPort_RoofN) annotation(Line(points = {{8.5, 84}, {10, 84}, {10, 90}, {90, 90}}, color = {255, 128, 0}, smooth = Smooth.None));
-  connect(attic_2Ro_5Rooms.SolarRadiationPort_OW1, SolarRadiationPort_RoofS) annotation(Line(points = {{-27.38, 62}, {-74, 62}, {-74, 90}, {60, 90}, {60, 58}, {90, 58}}, color = {255, 128, 0}, smooth = Smooth.None));
-  connect(attic_2Ro_5Rooms.SolarRadiationPort_OW2, SolarRadiationPort_RoofN) annotation(Line(points = {{22.3, 62.4}, {60, 62.4}, {60, 90}, {90, 90}}, color = {255, 128, 0}, smooth = Smooth.None));
-  annotation(__Dymola_Images(Parameters(source = "AixLib/Images/House/Grundriss.png")), Icon(graphics = {Bitmap(extent=  {{-78, 74}, {72, -68}}, fileName=  "modelica://AixLib/Images/House/Grundriss.PNG")}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(info = "<html>
+  connect(attic_2Ro_5Rooms.SolarRadiationPort_OW2, West) annotation (Line(
+      points={{22.3,62.4},{60,62.4},{60,-90},{90,-90}},
+      color={255,128,0},
+      smooth=Smooth.None));
+  connect(attic_2Ro_5Rooms.SolarRadiationPort_OW1, East) annotation (Line(
+      points={{-27.38,62},{-74,62},{-74,90},{60,90},{60,-18},{90,-18}},
+      color={255,128,0},
+      smooth=Smooth.None));
+  annotation(__Dymola_Images(Parameters(source = "AixLib/Images/House/Grundriss.png")), Icon(graphics={  Bitmap(extent=  {{-78, 74}, {72, -68}}, fileName=  "modelica://AixLib/Images/House/Grundriss.PNG")}), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
+            -100},{100,100}}),                                                                                                    graphics), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for the envelope of the whole one family dwelling.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
  <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
- </html>", revisions = "<html>
+ </html>", revisions="<html>
 
  <ul>
+ <li><i>Mai 7, 2015</i> by Ana Constantin:<br/>Corrected connection of gabled vertical walls with solar radiation (E and W)</li>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
  <li><i>July 10, 2011</i> by Ana Constantin:<br/>Implemented</li>
 

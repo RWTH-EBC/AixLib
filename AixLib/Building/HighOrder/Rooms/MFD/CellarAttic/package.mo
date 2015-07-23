@@ -1,5 +1,5 @@
 within AixLib.Building.HighOrder.Rooms.MFD;
-package CellarAttic
+package CellarAttic 
   extends Modelica.Icons.Package;
 
 
