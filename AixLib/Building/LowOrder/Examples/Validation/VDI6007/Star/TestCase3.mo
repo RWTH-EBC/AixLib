@@ -60,10 +60,11 @@ equation
 <p>Variable path: <code>reducedModel.airload.T</code> </p>
 <p><br><br>All values are given in the VDI 6007-1. </p>
 <p>Same Test Case exists in VDI 6020. </p>
+<p>A script to run this test case can be found in AixLib\\Resources\\Scripts\\Dymola\\Building\\LowOrder\\Examples\\Validation\\Star.</p>
 </html>"),  Icon(graphics),
             experiment(StopTime = 5.184e+006, Interval = 3600),
             __Dymola_Commands(file=
-                               "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Star/TestCase_3.mos"
+                               "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Star/TestCase3.mos"
         "Simulate and plot"),
             __Dymola_experimentSetupOutput(events = false),
             Diagram(coordinateSystem(preserveAspectRatio=false,

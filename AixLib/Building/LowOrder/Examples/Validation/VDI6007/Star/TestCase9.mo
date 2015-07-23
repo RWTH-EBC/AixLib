@@ -169,7 +169,7 @@ equation
               graphics), Icon(graphics),
              experiment(StopTime = 5.184e+006, Interval = 3600),
              __Dymola_Commands(file=
-                               "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Star/TestCase_9.mos"
+                               "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Star/TestCase9.mos"
         "Simulate and plot"),
              experimentSetupOutput(events = false),
              Documentation(revisions="<html>
@@ -181,15 +181,16 @@ equation
           by Moritz Lauster:<br>
           Implemented</li>
  </ul>
- </html>", info = "<html>
- <p>Test Case 9 of the VDI6007:: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to mixed inner and outer heat sources for Type Room S:</p>
- <p>Based on Test Case 8</p>
- <ul>
- <li>longwave radiation heat exchange is taken into account</li>
- </ul>
- <p><br>Reference: Room air temperature</p>
- <p>Variable path: <code>reducedModel.airload.T</code></p>
- <p><br><br>All values are given in the VDI 6007-1.</p>
- <p>Same Test Case exists in VDI 6020.</p>
- </html>"));
+ </html>", info="<html>
+<p>Test Case 9 of the VDI6007:: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to mixed inner and outer heat sources for Type Room S: </p>
+<p>Based on Test Case 8 </p>
+<ul>
+<li>longwave radiation heat exchange is taken into account </li>
+</ul>
+<p><br>Reference: Room air temperature </p>
+<p>Variable path: <code>reducedModel.airload.T</code> </p>
+<p><br><br>All values are given in the VDI 6007-1. </p>
+<p>Same Test Case exists in VDI 6020. </p>
+<p>A script to run this test case can be found in AixLib\\Resources\\Scripts\\Dymola\\Building\\LowOrder\\Examples\\Validation\\Star.</p>
+</html>"));
 end TestCase9;

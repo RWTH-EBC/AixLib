@@ -105,7 +105,7 @@ equation
             graphics),
             experiment(StopTime=5.184e+006,Interval=3600, __Dymola_Algorithm="Lsodar"),
             __Dymola_Commands(file=
-                               "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Linear/TestCase_5.mos"
+                               "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Linear/TestCase5.mos"
         "Simulate and plot"),
             __Dymola_experimentSetupOutput(events=false),
             Documentation(revisions="<html>
@@ -127,5 +127,6 @@ equation
 <p>Maximum deviation: 0.2 K</p>
 <p>All values are given in the VDI 6007-1. </p>
 <p>Same Test Case exists in VDI 6020. </p>
+<p>A script to run this test case can be found in AixLib\\Resources\\Scripts\\Dymola\\Building\\LowOrder\\Examples\\Validation\\Linear.</p>
 </html>"),  Icon(graphics));
 end TestCase5;

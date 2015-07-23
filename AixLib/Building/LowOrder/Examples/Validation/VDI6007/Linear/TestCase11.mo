@@ -93,7 +93,7 @@ equation
       smooth=Smooth.None));
   annotation(experiment(StopTime = 5.184e+006, Interval = 3600),
              __Dymola_Commands(file=
-                               "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Linear/TestCase_11.mos"
+                               "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Linear/TestCase11.mos"
         "Simulate and plot"),
              __Dymola_experimentSetupOutput(events = false), Icon(graphics),
              Diagram(coordinateSystem(preserveAspectRatio=false,
@@ -114,5 +114,6 @@ equation
 <p>Variable path: <code>sumHeatLoad.y</code> </p>
 <p>Maximum deviation: 55.95 W </p>
 <p>All values are given in the VDI 6007-1. </p>
+<p>A script to run this test case can be found in AixLib\\Resources\\Scripts\\Dymola\\Building\\LowOrder\\Examples\\Validation\\Linear.</p>
 </html>"));
 end TestCase11;

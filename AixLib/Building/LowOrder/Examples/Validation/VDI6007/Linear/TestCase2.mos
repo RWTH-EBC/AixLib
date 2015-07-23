@@ -1,3 +1,0 @@
-﻿translateModel("AixLib.Building.LowOrder.Validation.Examples.Linear.TestCase2");
-simulateModel("AixLib.Building.LowOrder.Validation.Linear.Examples.TestCase2", stopTime=5.184e+006, numberOfIntervals=0, outputInterval=3600, method="dassl", resultFile="TestCase2");
-plot({"referenceTemp[1]","simulationTemp"}, colors={{0,0,255},{255,0,0}});

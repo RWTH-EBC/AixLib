@@ -78,7 +78,7 @@ equation
       smooth=Smooth.None));
   annotation(experiment(StopTime = 5.184e+006, Interval = 3600),
              __Dymola_Commands(file=
-                               "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Star/TestCase_11.mos"
+                               "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Star/TestCase11.mos"
         "Simulate and plot"),
              __Dymola_experimentSetupOutput(events = false),
              Icon(graphics),
@@ -90,14 +90,15 @@ equation
  <li><i>June 8, 2015 </i> by Marcus Fuchs:<br/>Added unit testing command to annotations</li>
  </ul></p>
  <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
- </html>", info = "<html>
- <p>Test Case 11 of the VDI6007: <a name=\"result_box\">L</a>oad calculation in compliance with the desired values of the indoor temperature and a setpoint for the type space S:</p>
- <p>Based on Test Case 7</p>
- <ul>
- <li>implementation of a cooling ceeling (only cooling)</li>
- </ul>
- <p>Reference: Heating/Cooling load</p>
- <p>Variable path: <code>sumHeatLoad.y</code></p>
- <p><br><br>All values are given in the VDI 6007-1.</p>
- </html>"));
+ </html>", info="<html>
+<p>Test Case 11 of the VDI6007: <a name=\"result_box\">L</a>oad calculation in compliance with the desired values of the indoor temperature and a setpoint for the type space S: </p>
+<p>Based on Test Case 7 </p>
+<ul>
+<li>implementation of a cooling ceeling (only cooling) </li>
+</ul>
+<p>Reference: Heating/Cooling load </p>
+<p>Variable path: <code>sumHeatLoad.y</code> </p>
+<p><br><br>All values are given in the VDI 6007-1. </p>
+<p>A script to run this test case can be found in AixLib\\Resources\\Scripts\\Dymola\\Building\\LowOrder\\Examples\\Validation\\Star.</p>
+</html>"));
 end TestCase11;

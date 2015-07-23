@@ -48,7 +48,7 @@ equation
              experiment(StopTime = 5.184e+006,
              Interval = 3600, __Dymola_Algorithm = "Lsodar"),
              __Dymola_Commands(file=
-                               "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Linear/TestCase_6.mos"
+                               "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Linear/TestCase6.mos"
         "Simulate and plot"),
              __Dymola_experimentSetupOutput(events = false),
              Documentation(revisions="<html>
@@ -66,7 +66,9 @@ equation
 </ul>
 <p><br>Reference: Heating/Cooling load </p>
 <p>Variable path: <code>heatFlowSensor.Q_flow</code> </p>
-<p><br>Maximum deviation: 9.25 W</p><p><br>All values are given in the VDI 6007-1. </p>
+<p><br>Maximum deviation: 9.25 W</p>
+<p><br>All values are given in the VDI 6007-1. </p>
 <p>Same Test Case exists in VDI 6020. </p>
+<p>A script to run this test case can be found in AixLib\\Resources\\Scripts\\Dymola\\Building\\LowOrder\\Examples\\Validation\\Linear.</p>
 </html>"),  Icon(graphics));
 end TestCase6;
