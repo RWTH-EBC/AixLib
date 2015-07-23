@@ -10,14 +10,14 @@ model TwoWayValvePressureIndependent
     offset=0) "Control signal"
                  annotation (Placement(transformation(extent={{-60,70},{-40,90}})));
 
-  AixLib.Fluid.Sources.Boundary_pT sou(             redeclare package Medium =
-        Medium,
+  AixLib.Fluid.Sources.Boundary_pT sou(             redeclare package Medium
+      = Medium,
     use_p_in=true,
     T=293.15,
     nPorts=3) "Boundary condition for flow source"  annotation (Placement(
         transformation(extent={{-70,-10},{-50,10}})));
-  AixLib.Fluid.Sources.Boundary_pT sin(             redeclare package Medium =
-        Medium,
+  AixLib.Fluid.Sources.Boundary_pT sin(             redeclare package Medium
+      = Medium,
     p(displayUnit="Pa") = 3E5,
     T=293.15,
     nPorts=3) "Boundary condition for flow sink"    annotation (Placement(
@@ -117,6 +117,5 @@ January 29, 2015 by Filip Jorissen:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}})));
+</html>"));
 end TwoWayValvePressureIndependent;

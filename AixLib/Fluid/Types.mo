@@ -1,5 +1,6 @@
 within AixLib.Fluid;
 package Types "Package with type definitions"
+  extends Modelica.Icons.TypesPackage;
 
   type EfficiencyCurves = enumeration(
       Constant "constant",
@@ -78,10 +79,10 @@ The following heat exchanger configurations are available in this enumeration:
 Note that for a given heat exchanger, the
  <code>HeatExchangerConfiguration</code> is fixed. However, if the capacity
  flow rates change, then the
- <a href=\"modelica://Buildings.Fluid.Types.HeatExchangerFlowRegime\">
+ <a href=\"modelica://AixLib.Fluid.Types.HeatExchangerFlowRegime\">
  HeatExchangerFlowRegime</a> may change. For example,
  a counter flow heat exchanger has <code>HeatExchangerConfiguration=CounterFlow</code>,
- but the <a href=\"modelica://Buildings.Fluid.Types.HeatExchangerFlowRegime\">
+ but the <a href=\"modelica://AixLib.Fluid.Types.HeatExchangerFlowRegime\">
  HeatExchangerFlowRegime</a> can change to parallel flow if one of the two capacity flow rates reverts
  its direction.
  </p>

@@ -1,4 +1,4 @@
-simulateModel("AixLib.Fluid.MixingVolumes.Examples.MixingVolumePrescribedHeatFlowRate", method="dassl", resultFile="MixingVolumePrescribedHeatFlowRate");
+simulateModel("AixLib.Fluid.MixingVolumes.Examples.MixingVolumePrescribedHeatFlowRate", tolerance=1E-6, method="dassl", resultFile="MixingVolumePrescribedHeatFlowRate");
 removePlots();
 createPlot(id = 5,
  position = {27, 22, 400, 440},

@@ -216,6 +216,19 @@ see the <i>info</i> section of the class.
 end UsersGuide;
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 annotation (preferredView="info", Documentation(info="<html>
 <p>
 This package contains basic classes that are used to build

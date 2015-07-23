@@ -4,7 +4,8 @@ model Humidifier_u
   extends AixLib.Fluid.Interfaces.TwoPortHeatMassExchanger(
     redeclare replaceable package Medium =
         Modelica.Media.Interfaces.PartialCondensingGases,
-    redeclare final AixLib.Fluid.MixingVolumes.MixingVolumeMoistAir vol);
+    redeclare final AixLib.Fluid.MixingVolumes.MixingVolumeMoistAir vol(
+      prescribedHeatFlowRate=true));
 
   parameter Boolean use_T_in= false
     "Get the temperature from the input connector"
@@ -121,6 +122,13 @@ in the species vector.
 </html>",
 revisions="<html>
 <ul>
+<li>
+May 6, 2015, by Michael Wetter:<br/>
+Set <code>prescribedHeatFlowRate=true</code>.
+This is for issue
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/412\">
+#412</a>.
+</li>
 <li>
 May 29, 2014, by Michael Wetter:<br/>
 Removed undesirable annotation <code>Evaluate=true</code>.
