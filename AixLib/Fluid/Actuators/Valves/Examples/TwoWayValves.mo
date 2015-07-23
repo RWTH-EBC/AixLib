@@ -15,15 +15,15 @@ model TwoWayValves "Two way valves with different opening characteristics"
     duration=1,
     offset=0) "Control signal"
                  annotation (Placement(transformation(extent={{-60,70},{-40,90}})));
-  AixLib.Fluid.Sources.Boundary_pT sou(             redeclare package Medium =
-        Medium,
+  AixLib.Fluid.Sources.Boundary_pT sou(             redeclare package Medium
+      = Medium,
     nPorts=4,
     use_p_in=false,
     p(displayUnit="Pa") = 306000,
     T=293.15) "Boundary condition for flow source"  annotation (Placement(
         transformation(extent={{-70,-10},{-50,10}})));
-  AixLib.Fluid.Sources.Boundary_pT sin(             redeclare package Medium =
-        Medium,
+  AixLib.Fluid.Sources.Boundary_pT sin(             redeclare package Medium
+      = Medium,
     nPorts=4,
     p(displayUnit="Pa") = 3E5,
     T=293.15) "Boundary condition for flow sink"    annotation (Placement(
@@ -57,16 +57,13 @@ model TwoWayValves "Two way valves with different opening characteristics"
 equation
   connect(y.y, valLin.y) annotation (Line(
       points={{-39,80},{-12,80},{10,80},{10,72}},
-      color={0,0,127},
-      pattern=LinePattern.None));
+      color={0,0,127}));
   connect(y.y, valQui.y) annotation (Line(
       points={{-39,80},{-12,80},{-12,40},{10,40},{10,32}},
-      color={0,0,127},
-      pattern=LinePattern.None));
+      color={0,0,127}));
   connect(y.y, valEqu.y) annotation (Line(
       points={{-39,80},{-12,80},{-12,0},{10,0},{10,-8}},
-      color={0,0,127},
-      pattern=LinePattern.None));
+      color={0,0,127}));
   connect(sou.ports[1], valLin.port_a) annotation (Line(
       points={{-50,3},{-27,3},{-27,60},{0,60}},
       color={0,127,255},
@@ -134,7 +131,5 @@ June 16, 2008 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-            100,100}}), graphics));
+</html>"));
 end TwoWayValves;

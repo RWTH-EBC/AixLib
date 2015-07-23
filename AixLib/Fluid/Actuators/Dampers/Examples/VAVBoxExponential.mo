@@ -19,13 +19,13 @@ model VAVBoxExponential
     offset=101330,
     startTime=0,
     duration=60) annotation (Placement(transformation(extent={{-100,40},{-80,60}})));
-  AixLib.Fluid.Sources.Boundary_pT sou(             redeclare package Medium =
-               Medium, T=273.15 + 20,
+  AixLib.Fluid.Sources.Boundary_pT sou(             redeclare package Medium
+      =        Medium, T=273.15 + 20,
     nPorts=2,
     use_p_in=true)                      annotation (Placement(transformation(
           extent={{-70,-20},{-50,0}})));
-  AixLib.Fluid.Sources.Boundary_pT sin(             redeclare package Medium =
-               Medium, T=273.15 + 20,
+  AixLib.Fluid.Sources.Boundary_pT sin(             redeclare package Medium
+      =        Medium, T=273.15 + 20,
     nPorts=2,
     use_p_in=true)                      annotation (Placement(transformation(
           extent={{72,-20},{52,0}})));
@@ -47,16 +47,14 @@ model VAVBoxExponential
 equation
   connect(yDam.y,dam. y) annotation (Line(
       points={{-39,70},{-12,70},{-12,40},{30,40},{30,32}},
-      color={0,0,127},
-      pattern=LinePattern.None));
+      color={0,0,127}));
   connect(P.y, sou.p_in) annotation (Line(points={{-79,50},{-78,50},{-78,-2},{
           -72,-2}}, color={0,0,127}));
   connect(PAtm.y, sin.p_in) annotation (Line(points={{81,70},{92,70},{92,-2},{
           74,-2}}, color={0,0,127}));
   connect(yDam.y, vav.y) annotation (Line(
       points={{-39,70},{-12,70},{-12,-20},{8,-20},{8,-28}},
-      color={0,0,127},
-      pattern=LinePattern.None));
+      color={0,0,127}));
   connect(res.port_b, dam.port_a)
     annotation (Line(points={{-16,20},{20,20}}, color={0,127,255}));
   connect(sou.ports[1], res.port_a) annotation (Line(
