@@ -14,8 +14,7 @@ equation
   assert(abs(x-y) < 1E-2, "Model has an error");
   ex=exp(-abs(time-2));
  annotation(experiment(StopTime=4),
-__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Math/Functions/Examples/SmoothExponentialDerivativeCheck.mos"
-        "Simulate and plot"),
+__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Math/Functions/Examples/SmoothExponentialDerivativeCheck.mos" "Simulate and plot"),
     Documentation(info="<html>
 <p>
 This example checks whether the function derivative

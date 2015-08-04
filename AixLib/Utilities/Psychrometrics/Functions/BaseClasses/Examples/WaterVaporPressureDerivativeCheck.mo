@@ -12,7 +12,7 @@ equation
     x=AixLib.Utilities.Psychrometrics.Functions.pW_X(X_w=time*uniCon,p=101525);
     der(y)=der(x);
     assert(abs(x-y) < 1E-2, "Model has an error");
-   annotation (                      __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Psychrometrics/Functions/BaseClasses/Examples/WaterVaporPressureDerivativeCheck.mos"
+   annotation(                       __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Psychrometrics/Functions/BaseClasses/Examples/WaterVaporPressureDerivativeCheck.mos"
         "Simulate and plot"),
       experiment(
         StartTime=0,

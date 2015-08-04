@@ -1,4 +1,6 @@
 UsersGuide
+Airflow
+BoundaryConditions
 Building
 Controls
 DataBase
@@ -6,3 +8,4 @@ Fluid
 HVAC
 Media
 Utilities
+Types
