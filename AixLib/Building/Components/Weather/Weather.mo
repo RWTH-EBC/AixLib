@@ -22,7 +22,7 @@ model Weather "Complex weather model"
   replaceable model RadOnTiltedSurface =
       AixLib.Building.Components.Weather.RadiationOnTiltedSurface.RadOnTiltedSurf_Liu
   constrainedby
-    AixLib.Building.Components.Weather.RadiationOnTiltedSurface.BaseClasses
+    AixLib.Building.Components.Weather.RadiationOnTiltedSurface.BaseClasses.PartialRadOnTiltedSurf
     "Model for calculating radiation on tilted surfaces"                                                                            annotation(Dialog(group="Solar radiation on oriented surfaces", descriptionLabel = true), choicesAllMatching= true);
 
   parameter
@@ -177,7 +177,7 @@ equation
   connect(RadOnTiltedSurf.OutTotalRadTilted, SolarRadiation_OrientedSurfaces) annotation(Line(points={{20.8,
           34.8},{50.4,34.8},{50.4,96},{50,96}},                                                                                                    color = {255, 128, 0}, smooth = Smooth.None));
   annotation(Dialog(group = "Solar radiation on oriented surfaces"), Dialog(tab = "Optional output vector", descriptionLabel = true), Diagram(coordinateSystem(preserveAspectRatio=false,  extent={{-150,
-            -100},{150,100}}),                                                                                                    graphics={  Line(points=  {{-36, 32}, {-4, 32}}, color=  {0, 0, 255}), Line(points=  {{-36, 28}, {-4, 28}}, color=  {0, 0, 255}), Line(points=  {{-36, 24}, {-4, 24}}, color=  {0, 0, 255}), Line(points=  {{5, 13}, {5, -53}, {-3, -53}}, color=  {0, 0, 255}), Line(points=  {{15, 14}, {15, -60}, {-3, -60}}, color=  {0, 0, 255})}), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-150, -100}, {150, 100}}), graphics={  Rectangle(extent = {{-150, 78}, {10, -82}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
+            -100},{150,100}}),                                                                                                    graphics={  Line(points = {{-36, 32}, {-4, 32}}, color = {0, 0, 255}), Line(points = {{-36, 28}, {-4, 28}}, color = {0, 0, 255}), Line(points = {{-36, 24}, {-4, 24}}, color = {0, 0, 255}), Line(points = {{5, 13}, {5, -53}, {-3, -53}}, color = {0, 0, 255}), Line(points = {{15, 14}, {15, -60}, {-3, -60}}, color = {0, 0, 255})}), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-150, -100}, {150, 100}}), graphics={  Rectangle(extent = {{-150, 78}, {10, -82}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(
           extent={{-150,78},{10,-72}},
           lineColor={0,0,0},
