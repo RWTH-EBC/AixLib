@@ -170,19 +170,19 @@ First implementation.
         Rectangle(
           extent={{-70,80},{70,-80}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillColor={95,95,95},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{-100,65},{101,55}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{-100,-55},{101,-65}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid)}));
 end StaticFourPortHeatMassExchanger;

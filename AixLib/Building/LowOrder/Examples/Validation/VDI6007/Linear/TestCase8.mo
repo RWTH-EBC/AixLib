@@ -44,7 +44,7 @@ equation
   connect(infiltrationRate.y, reducedModel.ventilationRate) annotation(Line(points={{48.5,0},
           {58.54,0},{58.54,28}},                                                                                         color = {0, 0, 127}, smooth = Smooth.None));
   connect(HeatTorStar.Star, reducedModel.internalGainsRad) annotation(Line(points={{61.1,
-          -88},{78,-88},{78,28},{77.75,28}},                                                                                         color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+          -88},{78,-88},{78,28},{77.75,28}},                                                                                         color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
   connect(infiltrationTemp.y, reducedModel.ventilationTemperature) annotation(Line(points = {{26.5, 19}, {34, 19}, {34, 36.4}, {51.4, 36.4}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(personsConvective.port, reducedModel.internalGainsConv) annotation(Line(points={{26,-60},
           {68.4,-60},{68.4,28}},                                                                                                 color = {191, 0, 0}, smooth = Smooth.None));

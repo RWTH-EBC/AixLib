@@ -45,7 +45,7 @@ equation
     annotation (Line(
       points={{9,-5.8},{34.5,-5.8},{34.5,2},{60,2}},
       color={95,95,95},
-      pattern=LinePattern.None,
+      pattern=LinePattern.Solid,
       smooth=Smooth.None));
   connect(machines_sensibleHeat_Avar.ConvHeat, fixedTemp.port) annotation (
       Line(
@@ -56,13 +56,13 @@ equation
       Line(
       points={{9,-47.8},{34.5,-47.8},{34.5,2},{60,2}},
       color={95,95,95},
-      pattern=LinePattern.None,
+      pattern=LinePattern.Solid,
       smooth=Smooth.None));
   connect(machines_sensibleHeat_simple.RadHeat, fixedTemp.port) annotation (
      Line(
       points={{9,36.2},{34.5,36.2},{34.5,2},{60,2}},
       color={95,95,95},
-      pattern=LinePattern.None,
+      pattern=LinePattern.Solid,
       smooth=Smooth.None));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{

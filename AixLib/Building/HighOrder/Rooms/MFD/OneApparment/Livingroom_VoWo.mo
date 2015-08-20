@@ -81,7 +81,7 @@ equation
   connect(Wall_Neighbour.port_outside, thermNeighbour) annotation(Line(points = {{-80.3, 15}, {-86, 15}, {-86, 10}, {-150, 10}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(infiltrationRate.port_a, thermOutside) annotation(Line(points = {{-72, -71}, {-86, -71}, {-86, 130}, {-150, 130}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(ThermRoom, ThermRoom) annotation(Line(points = {{-2, 14}, {-7, 14}, {-7, 14}, {-2, 14}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(thermStar_Demux.star, StarInside1) annotation(Line(points = {{13.6, -8.2}, {13.6, 3.2}, {26, 3.2}, {26, 14}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+  connect(thermStar_Demux.star, StarInside1) annotation(Line(points = {{13.6, -8.2}, {13.6, 3.2}, {26, 3.2}, {26, 14}}, color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
   connect(Wall_Children.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{68,14},
           {54,14},{54,-32},{33.4,-32},{33.4,-14.1}},                                                                                                    color = {191, 0, 0}, smooth = Smooth.None));
   connect(Wall_Corridor.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{19,-38},
@@ -109,11 +109,11 @@ equation
             lineThickness=                                                                                                    1, fillColor=  {255, 255, 255},
             fillPattern=                                                                                                    FillPattern.Solid, textString=  "Corridor"), Rectangle(extent=  {{92, -88}, {112, -118}}, lineColor=  {0, 0, 0},
             lineThickness=                                                                                                    1, fillColor=  {127, 0, 0},
-            fillPattern=                                                                                                    FillPattern.Forward), Ellipse(extent=  {{94, -100}, {96, -102}}, lineColor=  {0, 0, 0}, pattern=  LinePattern.None,
+            fillPattern=                                                                                                    FillPattern.Forward), Ellipse(extent=  {{94, -100}, {96, -102}}, lineColor=  {0, 0, 0}, pattern=  LinePattern.Solid,
             lineThickness=                                                                                                    1,
             fillPattern=                                                                                                    FillPattern.Sphere, fillColor=  {255, 255, 0}), Rectangle(extent=  {{-62, 84}, {-42, 54}}, lineColor=  {0, 0, 0},
             lineThickness=                                                                                                    1, fillColor=  {127, 0, 0},
-            fillPattern=                                                                                                    FillPattern.Forward), Ellipse(extent=  {{-44, 68}, {-46, 66}}, lineColor=  {0, 0, 0}, pattern=  LinePattern.None,
+            fillPattern=                                                                                                    FillPattern.Forward), Ellipse(extent=  {{-44, 68}, {-46, 66}}, lineColor=  {0, 0, 0}, pattern=  LinePattern.Solid,
             lineThickness=                                                                                                    1,
             fillPattern=                                                                                                    FillPattern.Sphere, fillColor=  {255, 255, 0}), Rectangle(extent=  {{-160, -130}, {-140, -150}}, lineColor=  {0, 0, 0},
             lineThickness=                                                                                                    0.5), Rectangle(extent=  {{-160, -100}, {-140, -120}}, lineColor=  {0, 0, 0},

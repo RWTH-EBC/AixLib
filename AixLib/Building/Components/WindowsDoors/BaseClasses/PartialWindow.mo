@@ -34,19 +34,19 @@ annotation (Placement(transformation(extent={{-100,-20},{-80,0}},
       Rectangle(
         extent={{-80,80},{80,-80}},
         lineColor={0,0,255},
-        pattern=LinePattern.None,
+        pattern=LinePattern.Solid,
         fillColor={215,215,215},
         fillPattern=FillPattern.Solid),
       Rectangle(
         extent={{-4,42},{10,-76}},
         lineColor={0,0,255},
-        pattern=LinePattern.None,
+        pattern=LinePattern.Solid,
         fillColor={215,215,215},
         fillPattern=FillPattern.Solid),
       Rectangle(
         extent={{-76,46},{74,38}},
         lineColor={0,0,255},
-        pattern=LinePattern.None,
+        pattern=LinePattern.Solid,
         fillColor={215,215,215},
         fillPattern=FillPattern.Solid),
       Line(

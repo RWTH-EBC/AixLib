@@ -66,7 +66,7 @@ equation
   connect(machinesConvective.port, reducedModel.internalGainsConv) annotation(Line(points={{30,-42},
           {68.4,-42},{68.4,28}},                                                                                                  color = {191, 0, 0}, smooth = Smooth.None));
   connect(HeatToStar.Star, reducedModel.internalGainsRad) annotation(Line(points={{61.1,
-          -90},{78,-90},{78,28},{77.75,28}},                                                                                        color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+          -90},{78,-90},{78,28},{77.75,28}},                                                                                        color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
   connect(innerLoads.y[3], machinesConvective.Q_flow) annotation(Line(points = {{-37, -62}, {-18, -62}, {-18, -42}, {10, -42}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(innerLoads.y[2], personsConvective.Q_flow) annotation(Line(points = {{-37, -62}, {10, -62}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(innerLoads.y[1], personsRadiative.Q_flow) annotation(Line(points = {{-37, -62}, {-18, -62}, {-18, -90}, {10, -90}}, color = {0, 0, 127}, smooth = Smooth.None));

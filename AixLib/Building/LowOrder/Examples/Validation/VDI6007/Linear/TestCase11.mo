@@ -68,7 +68,7 @@ equation
   connect(heatToStar.Star, reducedModel.internalGainsRad) annotation (Line(
       points={{69.1,-82},{93.75,-82},{93.75,38}},
       color={95,95,95},
-      pattern=LinePattern.None,
+      pattern=LinePattern.Solid,
       smooth=Smooth.None));
   connect(infiltrationRate.y, reducedModel.ventilationRate) annotation (Line(
       points={{50.5,11},{74,11},{74,38},{74.54,38}},

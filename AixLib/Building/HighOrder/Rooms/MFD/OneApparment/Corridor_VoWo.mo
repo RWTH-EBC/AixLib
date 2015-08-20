@@ -109,7 +109,7 @@ equation
             lineThickness=                                                                                                    0.5), Rectangle(extent=  {{-112, 90}, {-92, 70}}, lineColor=  {0, 0, 0},
             lineThickness=                                                                                                    0.5), Rectangle(extent=  {{108, 12}, {128, -18}}, lineColor=  {0, 0, 0},
             lineThickness=                                                                                                    1, fillColor=  {127, 0, 0},
-            fillPattern=                                                                                                    FillPattern.Forward), Ellipse(extent=  {{110, 0}, {112, -2}}, lineColor=  {0, 0, 0}, pattern=  LinePattern.None,
+            fillPattern=                                                                                                    FillPattern.Forward), Ellipse(extent=  {{110, 0}, {112, -2}}, lineColor=  {0, 0, 0}, pattern=  LinePattern.Solid,
             lineThickness=                                                                                                    1,
             fillPattern=                                                                                                    FillPattern.Sphere, fillColor=  {255, 255, 0}), Text(extent=  {{78, 38}, {164, 18}}, lineColor=  {0, 0, 255}, textString=  "Staircase"), Rectangle(extent=  {{-112, 0}, {-92, -20}}, lineColor=  {0, 0, 0},
             lineThickness=                                                                                                    0.5), Rectangle(extent=  {{-112, 30}, {-92, 10}}, lineColor=  {0, 0, 0},

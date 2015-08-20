@@ -66,7 +66,7 @@ equation
   connect(heatToStar.Star, reducedModel.internalGainsRad) annotation (Line(
       points={{69.1,-82},{93.75,-82},{93.75,38}},
       color={95,95,95},
-      pattern=LinePattern.None,
+      pattern=LinePattern.Solid,
       smooth=Smooth.None));
   connect(solarRadiation.y, reducedModel.solarRad_in) annotation (Line(
       points={{-25,72},{62,72},{62,84},{73.18,84},{73.18,74.8}},

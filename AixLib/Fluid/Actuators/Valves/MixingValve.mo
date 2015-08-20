@@ -226,7 +226,7 @@ equation
           smooth=Smooth.None,
           fillColor={0,0,127},
           fillPattern=FillPattern.Solid,
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           lineColor={0,0,0}),
         Line(
           points={{-84,-70},{0,-70},{0,-60}},
