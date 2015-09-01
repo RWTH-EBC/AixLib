@@ -3,7 +3,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
   "2 outer walls, 1 inner wall load, 1 inner wall simple, 1 floor towards lower floor, 1 ceiling towards attic, 1 roof towards outside"
   import AixLib;
   ///////// construction parameters
-  parameter Integer TMC = 1 "Themal Mass Class" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1 "S", choice = 2 "M", choice = 3 "L", radioButtons = true));
+  parameter Integer TMC = 1 "Themal Mass Class" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1 "Heavy", choice = 2 "Medium", choice = 3 "Light", radioButtons = true));
   parameter Integer TIR = 1 "Thermal Insulation Regulation" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1
         "EnEV_2009",                                                                                                    choice = 2
         "EnEV_2002",                                                                                                    choice = 3

@@ -258,10 +258,10 @@ equation
  2- Bedroom
  3 - Children
  4 - Bath
- 5 - Kitchen")}), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-150, -100}, {150, 110}}, grid = {1, 1}), graphics={  Rectangle(extent=  {{-119, 92}, {123, -79}}, lineColor=  {255, 0, 0}, fillColor=  {135, 135, 135},
-            fillPattern=                                                                                                    FillPattern.Solid), Line(points=  {{-99, 22}, {104, 22}, {104, -6}}, color=  {255, 0, 0}, smooth=  Smooth.None, thickness=  1), Line(points=  {{-98, 13}, {95, 13}, {95, -6}}, color=  {0, 0, 255}, smooth=  Smooth.None, thickness=  1), Line(points=  {{-21, 13}, {-21, 35}}, color=  {0, 0, 255}, thickness=  1, smooth=  Smooth.None), Line(points=  {{-14, 23}, {-14, 45}}, color=  {255, 0, 0}, thickness=  1, smooth=  Smooth.None), Text(extent=  {{-124, 119}, {-84, 111}}, lineColor=  {0, 0, 0},
-            lineThickness=                                                                                                    0.5, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Solid, textString=  "Set"), Text(extent=  {{-70, 81}, {-17, 49}}, lineColor=  {0, 0, 0}, textString=  "1 - Livingroom
+ 5 - Kitchen")}), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-150, -100}, {150, 110}}, grid = {1, 1}), graphics={  Rectangle(extent = {{-119, 92}, {123, -79}}, lineColor = {255, 0, 0}, fillColor = {135, 135, 135},
+            fillPattern =                                                                                                   FillPattern.Solid), Line(points = {{-99, 22}, {104, 22}, {104, -6}}, color = {255, 0, 0}, smooth = Smooth.None, thickness = 1), Line(points = {{-98, 13}, {95, 13}, {95, -6}}, color = {0, 0, 255}, smooth = Smooth.None, thickness = 1), Line(points = {{-21, 13}, {-21, 35}}, color = {0, 0, 255}, thickness = 1, smooth = Smooth.None), Line(points = {{-14, 23}, {-14, 45}}, color = {255, 0, 0}, thickness = 1, smooth = Smooth.None), Text(extent = {{-124, 119}, {-84, 111}}, lineColor = {0, 0, 0},
+            lineThickness =                                                                                                   0.5, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "Set"), Text(extent = {{-70, 81}, {-17, 49}}, lineColor = {0, 0, 0}, textString = "1 - Livingroom
  2- Bedroom
  3 - Children
  4 - Bath
