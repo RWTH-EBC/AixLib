@@ -69,12 +69,12 @@ equation
   connect(heatToStarWinRes.Star, heatToStarInnerwall.Star) annotation (Line(
       points={{-38.45,51},{2,51},{2,22},{40.54,22}},
       color={95,95,95},
-      pattern=LinePattern.None,
+      pattern=LinePattern.Solid,
       smooth=Smooth.None));
   connect(heatToStarOuterwall.Star, heatToStarInnerwall.Star) annotation (Line(
       points={{-26.54,22},{40.54,22}},
       color={95,95,95},
-      pattern=LinePattern.None,
+      pattern=LinePattern.Solid,
       smooth=Smooth.None));
     connect(thermSplitterLoads.signalOutput[2], innerwall.port_a) annotation (
         Line(
@@ -96,7 +96,7 @@ equation
   connect(internalGainsRad, thermSplitterLoads.signalInput) annotation (Line(
       points={{80,-90},{80,-26},{94,-26},{94,-10}},
       color={95,95,95},
-      pattern=LinePattern.None,
+      pattern=LinePattern.Solid,
       smooth=Smooth.None));
 
   connect(thermSplitterLoads.signalOutput[1], outerwall.port_b) annotation (

@@ -288,7 +288,7 @@ First implementation.
           extent={{-100,100},{100,-100}},
           fillColor={135,135,135},
           fillPattern=FillPattern.Solid,
-          pattern=LinePattern.None),
+          pattern=LinePattern.Solid),
         Text(
           extent={{-93,72},{-58,89}},
           lineColor={0,0,127},

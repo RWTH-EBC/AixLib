@@ -130,27 +130,27 @@ equation
           {20,-73.1429},{28.4,-73.1429}},                                                                               color = {0, 127, 255}, smooth = Smooth.None));
   connect(Returnflow, Hydraulic.RETURN) annotation(Line(points={{8,-108},{8,-74},
           {23.2,-74},{23.2,-73.1429}},                                                                                 color = {0, 127, 255}, smooth = Smooth.None));
-  connect(Hydraulic.Rad_Livingroom, Appartment.StarLivingroom) annotation(Line(points={{-20,
+  connect(Hydraulic.radLi, Appartment.StarLivingroom) annotation(Line(points={{-20,
           -30.1429},{-26,-30.1429},{-26,-30},{-34,-30},{-34,0},{-5.61333,0},{
           -5.61333,40.4467}},                                                                                                    color = {0, 0, 0}, smooth = Smooth.None));
-  connect(Hydraulic.Con_Livingroom, Appartment.thermLivingroom) annotation(Line(points={{-19.9,
+  connect(Hydraulic.convLi, Appartment.thermLivingroom) annotation(Line(points={{-19.9,
           -34.4286},{-34,-34.4286},{-34,0},{-6,0},{-6,43.34},{-9.33333,43.34}},                                                                                                   color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Hydraulic.Rad_bedroom, Appartment.StarBedroom) annotation(Line(points={{35.4,
+  connect(Hydraulic.radBe, Appartment.StarBedroom) annotation(Line(points={{35.4,
           -15.7143},{54,-15.7143},{54,0},{-5.61333,0},{-5.61333,36.7267}},                                                                                         color = {0, 0, 0}, smooth = Smooth.None));
-  connect(Hydraulic.Con_bedroom, Appartment.ThermBedroom) annotation(Line(points={{35.6,
+  connect(Hydraulic.convBe, Appartment.ThermBedroom) annotation(Line(points={{35.6,
           -22.5714},{54,-22.5714},{54,0},{-9.74667,0},{-9.74667,36.52}},                                                                                          color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Hydraulic.Rad_children, Appartment.StarChildren) annotation(Line(points={{36,
+  connect(Hydraulic.radCh, Appartment.StarChildren) annotation(Line(points={{36,
           -29.4286},{54,-29.4286},{54,0},{14.64,0},{14.64,45.6133}},                                                                                         color = {0, 0, 0}, smooth = Smooth.None));
-  connect(Hydraulic.Con_children, Appartment.ThermChildren) annotation(Line(points={{35.7,
+  connect(Hydraulic.convCh, Appartment.ThermChildren) annotation(Line(points={{35.7,
           -36.1429},{54,-36.1429},{54,0},{12,0},{12,22},{10.92,22},{10.92,
           45.6133}},                                                                                                    color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Hydraulic.Rad_bath, Appartment.StarBath) annotation(Line(points={{35.6,
+  connect(Hydraulic.radBa, Appartment.StarBath) annotation(Line(points={{35.6,
           -51.4286},{54,-51.4286},{54,0},{2.44667,0},{2.44667,34.8667}},                                                                                   color = {0, 0, 0}, smooth = Smooth.None));
-  connect(Hydraulic.Con_bath, Appartment.ThermBath) annotation(Line(points={{35.7,
+  connect(Hydraulic.convBa, Appartment.ThermBath) annotation(Line(points={{35.7,
           -57.7143},{54,-57.7143},{54,0},{-1.48,0},{-1.48,34.8667}},                                                                                    color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Hydraulic.Rad_kitchen, Appartment.StarKitchen) annotation(Line(points={{-19.5,
+  connect(Hydraulic.radKi, Appartment.StarKitchen) annotation(Line(points={{-19.5,
           -55.4286},{-34,-55.4286},{-34,0},{9.88667,0},{9.88667,31.7667}},                                                                                          color = {0, 0, 0}, smooth = Smooth.None));
-  connect(Hydraulic.Con_kitchen, Appartment.ThermKitchen) annotation(Line(points={{-19.6,
+  connect(Hydraulic.convKi, Appartment.ThermKitchen) annotation(Line(points={{-19.6,
           -60.1429},{-34,-60.1429},{-34,0},{10.92,0},{10.92,36.52}},                                                                                           color = {191, 0, 0}, smooth = Smooth.None));
   connect(Hydraulic.TSet, TSet) annotation(Line(points = {{-13.1, -16}, {-14, -16}, {-14, 0}, {-120, 0}}, color = {0, 0, 127}, smooth = Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-120,
@@ -163,5 +163,5 @@ equation
  <ul>
  <li><i>June 19, 2014</i> by Ana Constantin:<br/>Implemented</li>
  </ul>
- </html>"), Icon(coordinateSystem(extent = {{-120, -120}, {100, 120}}, preserveAspectRatio = false), graphics={  Bitmap(extent=  {{-86, 80}, {76, -84}}, fileName=  "modelica://AixLib/Images/House/MFD_FloorPlan_En.PNG")}));
+ </html>"), Icon(coordinateSystem(extent = {{-120, -120}, {100, 120}}, preserveAspectRatio = false), graphics={  Bitmap(extent = {{-86, 80}, {76, -84}}, fileName = "modelica://AixLib/Images/House/MFD_FloorPlan_En.PNG")}));
 end OneAppartment_Radiators;

@@ -124,7 +124,7 @@ equation
   connect(twoStar_RadEx.Star, Star) annotation (Line(
       points={{55.1,32},{80,32},{80,60},{90,60}},
       color={95,95,95},
-      pattern=LinePattern.None,
+      pattern=LinePattern.Solid,
       smooth=Smooth.None));
   connect(solarRad_in, RadCondAdapt.SR_input[1]) annotation (Line(
       points={{-90,60},{-72,60},{-72,59.88},{-51.78,59.88}},
@@ -143,19 +143,19 @@ equation
       Rectangle(
         extent={{-80,80},{80,-80}},
         lineColor={0,0,255},
-        pattern=LinePattern.None,
+        pattern=LinePattern.Solid,
         fillColor={215,215,215},
         fillPattern=FillPattern.Solid),
       Rectangle(
         extent={{-4,42},{10,-76}},
         lineColor={0,0,255},
-        pattern=LinePattern.None,
+        pattern=LinePattern.Solid,
         fillColor={215,215,215},
         fillPattern=FillPattern.Solid),
       Rectangle(
         extent={{-76,46},{74,38}},
         lineColor={0,0,255},
-        pattern=LinePattern.None,
+        pattern=LinePattern.Solid,
         fillColor={215,215,215},
         fillPattern=FillPattern.Solid),
       Line(

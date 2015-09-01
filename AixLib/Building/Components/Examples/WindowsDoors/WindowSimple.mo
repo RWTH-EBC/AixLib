@@ -11,7 +11,7 @@ model WindowSimple
 equation
   connect(Toutside.port, windowSimple.port_outside) annotation(Line(points = {{-42, 10}, {-34, 10}, {-34, 10.4}, {-22.2, 10.4}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(windowSimple.port_inside, Tinside.port) annotation(Line(points = {{10.2, 10.4}, {24, 10.4}, {24, 10}, {38, 10}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(windowSimple.Star, Tinside1.port) annotation(Line(points = {{10.2, 21.6}, {20, 21.6}, {20, 42}, {38, 42}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+  connect(windowSimple.Star, Tinside1.port) annotation(Line(points = {{10.2, 21.6}, {20, 21.6}, {20, 42}, {38, 42}}, color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
   connect(varRad.solarRad_out[1], windowSimple.solarRad_in) annotation(Line(points = {{-47, 50}, {-32, 50}, {-32, 21.6}, {-22.2, 21.6}}, color = {255, 128, 0}, smooth = Smooth.None));
   connect(SolarRadiation.y, varRad.I[1]) annotation (Line(
       points={{-79,50},{-74,50},{-74,58.9},{-64.9,58.9}},

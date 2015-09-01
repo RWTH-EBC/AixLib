@@ -26,9 +26,9 @@ equation
   connect(human_SensibleHeat_VDI2078.ConvHeat, thermalZonePhysics.internalGainsConv) annotation(Line(points = {{59, 15}, {96, 15}, {96, -52}, {8, -52}, {8, 2}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(machines_SensibleHeat_DIN18599.ConvHeat, thermalZonePhysics.internalGainsConv) annotation(Line(points = {{59, -4.8}, {96, -4.8}, {96, -52}, {8, -52}, {8, 2}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(lights.ConvHeat, thermalZonePhysics.internalGainsConv) annotation(Line(points = {{59, -24.8}, {96, -24.8}, {96, -52}, {8, -52}, {8, 2}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(human_SensibleHeat_VDI2078.RadHeat, thermalZonePhysics.internalGainsRad) annotation(Line(points = {{59, 9}, {92, 9}, {92, -48}, {16, -48}, {16, 2}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
-  connect(machines_SensibleHeat_DIN18599.RadHeat, thermalZonePhysics.internalGainsRad) annotation(Line(points = {{59, -16.01}, {92, -16.01}, {92, -48}, {16, -48}, {16, 2}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
-  connect(lights.RadHeat, thermalZonePhysics.internalGainsRad) annotation(Line(points = {{59, -36.01}, {92, -36.01}, {92, -48}, {16, -48}, {16, 2}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+  connect(human_SensibleHeat_VDI2078.RadHeat, thermalZonePhysics.internalGainsRad) annotation(Line(points = {{59, 9}, {92, 9}, {92, -48}, {16, -48}, {16, 2}}, color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
+  connect(machines_SensibleHeat_DIN18599.RadHeat, thermalZonePhysics.internalGainsRad) annotation(Line(points = {{59, -16.01}, {92, -16.01}, {92, -48}, {16, -48}, {16, 2}}, color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
+  connect(lights.RadHeat, thermalZonePhysics.internalGainsRad) annotation(Line(points = {{59, -36.01}, {92, -36.01}, {92, -48}, {16, -48}, {16, 2}}, color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
   connect(human_SensibleHeat_VDI2078.Schedule, internalGains[1]) annotation(Line(points={{40.9,
           8.9},{30,8.9},{30,-74},{80,-74},{80,-113.333}},                                                                                                 color = {0, 0, 127}, smooth = Smooth.None));
   connect(machines_SensibleHeat_DIN18599.Schedule, internalGains[2]) annotation(Line(points = {{41, -10.5}, {30, -10.5}, {30, -74}, {80, -74}, {80, -100}}, color = {0, 0, 127}, smooth = Smooth.None));
@@ -36,24 +36,24 @@ equation
           {30,-30.5},{30,-74},{80,-74},{80,-86.6667}},                                                                                  color = {0, 0, 127}, smooth = Smooth.None));
   connect(infiltrationTemperature, thermalZonePhysics.ventilationTemperature) annotation(Line(points = {{-80, -40}, {-60, -40}, {-60, 12}, {-15.2, 12}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(thermalZonePhysics.internalGainsConv, internalGainsConv) annotation(Line(points = {{8, 2}, {8, -52}, {0, -52}, {0, -90}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(thermalZonePhysics.internalGainsRad, internalGainsRad) annotation(Line(points = {{16, 2}, {16, -80}, {40, -80}, {40, -90}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+  connect(thermalZonePhysics.internalGainsRad, internalGainsRad) annotation(Line(points = {{16, 2}, {16, -80}, {40, -80}, {40, -90}}, color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
   annotation(Dialog(tab = "Windows", group = "Shading", descriptionLabel = false), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio=false,  extent={{-100,
             -100},{100,100}}),                                                                                                    graphics={  Rectangle(extent={{
               -60,62},{100,-58}},
             lineThickness=1,                                                                                                    fillColor=
               {170,213,255},
             fillPattern=FillPattern.HorizontalCylinder,
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           lineColor={0,0,0}),                                                                                                    Rectangle(extent={{
               -60,80},{100,6}},
             lineThickness=1,                                                                                                    fillColor=
               {170,213,255},
             fillPattern=FillPattern.Solid,
-          pattern=LinePattern.None),                                                                                                    Rectangle(extent = {{-60, -58}, {100, -70}},
+          pattern=LinePattern.Solid),                                                                                                    Rectangle(extent = {{-60, -58}, {100, -70}},
             lineThickness=1,                                                                                                    fillColor=
               {0,127,0},
             fillPattern=FillPattern.HorizontalCylinder,
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           lineColor={0,0,0}),                                                                                                    Rectangle(extent = {{14, 36}, {100, -58}}, lineColor=
               {0,0,0},                                                                                                    fillColor=
               {215,215,215},
@@ -71,9 +71,9 @@ equation
               {0,0,0},                                                                                                    fillColor=
               {170,213,255},
             fillPattern=FillPattern.Solid),                                                                                                    Polygon(points={{
-              64,-40},{68,-36},{78,-36},{82,-40},{64,-40}},                                                                                                    pattern = LinePattern.None, smooth = Smooth.None, fillColor = {0, 0, 0},
+              64,-40},{68,-36},{78,-36},{82,-40},{64,-40}},                                                                                                    pattern = LinePattern.Solid, smooth = Smooth.None, fillColor = {0, 0, 0},
             fillPattern =                                                                                                   FillPattern.Solid), Polygon(points={{
-              68,-39},{70,-37},{76,-37},{78,-39},{68,-39}},                                                                                                    pattern = LinePattern.None, smooth = Smooth.None, fillColor = {95, 95, 95},
+              68,-39},{70,-37},{76,-37},{78,-39},{68,-39}},                                                                                                    pattern = LinePattern.Solid, smooth = Smooth.None, fillColor = {95, 95, 95},
             fillPattern =                                                                                                   FillPattern.Solid, lineColor = {0, 0, 0}),      Text(extent = {{-90, 134}, {98, 76}}, lineColor=
               {0,0,255},
           textString="%name"),                                                                      Ellipse(extent={{
@@ -81,12 +81,12 @@ equation
             lineThickness=1,                                                                                                    fillColor=
               {255,221,0},
             fillPattern=FillPattern.Solid,
-          pattern=LinePattern.None),                                                                                                    Rectangle(extent={{
+          pattern=LinePattern.Solid),                                                                                                    Rectangle(extent={{
               -60,-64},{100,-70}},
             lineThickness=1,                                                                                                    fillColor=
               {0,127,0},
             fillPattern=FillPattern.Solid,
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           lineColor={0,0,0}),
         Line(
           points={{22,-50},{42,-28},{42,14},{22,28}},
@@ -107,8 +107,8 @@ equation
               {255,221,0},
             fillPattern=FillPattern.Solid,                                                                                                    origin={65,
               14},                                                                                                    rotation = 180,
-          pattern=LinePattern.None),                                                                                                    Rectangle(extent={{
-              62,22},{68,18}},                                                                                                    pattern = LinePattern.None,
+          pattern=LinePattern.Solid),                                                                                                    Rectangle(extent={{
+              62,22},{68,18}},                                                                                                    pattern = LinePattern.Solid,
             lineThickness =                                                                                                   1, fillColor = {0, 0, 0},
             fillPattern =                                                                                                   FillPattern.Solid, lineColor = {0, 0, 0}),
                                                                                                     Rectangle(extent={{
@@ -153,10 +153,10 @@ equation
           color={0,0,0},
           thickness=0.5,
           smooth=Smooth.None),                                                                                                    Rectangle(extent={{
-              65,-24},{81,-34}},                                                                                                    pattern = LinePattern.None,
+              65,-24},{81,-34}},                                                                                                    pattern = LinePattern.Solid,
             lineThickness =                                                                                                   1, fillColor = {95, 95, 95},
             fillPattern =                                                                                                   FillPattern.Solid, lineColor = {0, 0, 0}), Rectangle(extent={{
-              67,-26},{79,-32}},                                                                                                    pattern = LinePattern.None,
+              67,-26},{79,-32}},                                                                                                    pattern = LinePattern.Solid,
             lineThickness =                                                                                                   1, fillColor = {0, 0, 0},
             fillPattern =                                                                                                   FillPattern.Solid, lineColor = {0, 0, 0})}),
                                                                                                     Documentation(info = "<html>

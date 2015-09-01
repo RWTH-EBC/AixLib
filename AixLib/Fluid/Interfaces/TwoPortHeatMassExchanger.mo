@@ -236,19 +236,19 @@ First implementation.
         Rectangle(
           extent={{-70,60},{70,-60}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillColor={95,95,95},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{-101,6},{100,-4}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillColor={0,0,255},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{0,-4},{100,6}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillColor={255,0,0},
           fillPattern=FillPattern.Solid)}));
 end TwoPortHeatMassExchanger;

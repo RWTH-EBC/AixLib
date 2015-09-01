@@ -17,7 +17,7 @@ partial model PartialInternalGain
   Modelica.Blocks.Math.Gain gain(k = ratioConv) annotation(Placement(transformation(extent = {{4, 26}, {12, 34}})));
   Modelica.Blocks.Math.Gain gain1(k = 1 - ratioConv) annotation(Placement(transformation(extent = {{4, -14}, {12, -6}})));
 equation
-  connect(ConvectiveHeat.port, ConvHeat) annotation(Line(points = {{40, 30}, {46, 30}, {46, 60}, {90, 60}}, color = {191, 0, 0}, pattern = LinePattern.None, smooth = Smooth.None));
+  connect(ConvectiveHeat.port, ConvHeat) annotation(Line(points = {{40, 30}, {46, 30}, {46, 60}, {90, 60}}, color = {191, 0, 0}, pattern = LinePattern.Solid, smooth = Smooth.None));
   connect(gain.y, ConvectiveHeat.Q_flow) annotation(Line(points = {{12.4, 30}, {20, 30}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(gain1.y, RadiativeHeat.Q_flow) annotation(Line(points = {{12.4, -10}, {20, -10}}, color = {0, 0, 127}, smooth = Smooth.None));
   annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(revisions = "<html>

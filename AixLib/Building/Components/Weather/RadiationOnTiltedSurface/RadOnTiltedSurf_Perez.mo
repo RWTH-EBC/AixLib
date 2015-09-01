@@ -20,7 +20,7 @@ model RadOnTiltedSurf_Perez
 //constants
 protected
   constant Real a_rho=0.45
-    "estimated on measured Albedo from NREL USA (Latitude=39.742°)";
+    "estimated on measured Albedo from NREL USA (Latitude=39.742ï¿½)";
   constant Real b_rho=0.013 "estimated on measured Albedo from NREL USA";
   constant Real c_rho=0.2 "estimated on measured Albedo from NREL USA";
   constant Real rho_avg=1/0.27055
@@ -111,16 +111,16 @@ public
           rotation=270,
           origin={10,-84})));
     Modelica.Blocks.Interfaces.RealOutput BeamRadTiltOut
-    "[W/m²] Beam irradiance on a tilted surface"
+    "[W/m2] Beam irradiance on a tilted surface"
       annotation (Placement(transformation(extent={{72,-22},{92,-2}}), iconTransformation(extent={{70,-10},{82,2}})));
     Modelica.Blocks.Interfaces.RealOutput DiffRadTiltCSOut
-    "[W/m²] circumsolar diffuse irradiance"
+    "[W/m2] circumsolar diffuse irradiance"
       annotation (Placement(transformation(extent={{72,-62},{92,-42}}),iconTransformation(extent={{70,-52},{82,-40}})));
     Modelica.Blocks.Interfaces.RealOutput DiffRadTiltHZOut
-    "[W/m²] Diffuse irradiance on a tilted surface"
+    "[W/m2] Diffuse irradiance on a tilted surface"
       annotation (Placement(transformation(extent={{72,-80},{92,-60}}),iconTransformation(extent={{70,-72},{82,-60}})));
     Modelica.Blocks.Interfaces.RealOutput DiffRadTiltDOMOut
-    "[W/m²] Diffuse irradiance on a tilted surface"
+    "[W/m2] Diffuse irradiance on a tilted surface"
       annotation (Placement(transformation(extent={{72,-42},{92,-22}}),iconTransformation(extent={{70,-30},{82,-18}})));
     Modelica.Blocks.Interfaces.RealOutput brightness_out
     "dimensionless factor, which says how cloudy the sky is (see: delta)"
@@ -176,7 +176,7 @@ equation
     cos_theta = (cos_theta_help + abs(cos_theta_help))/2;
     theta_out = to_deg(acos(cos_theta));
 
-    // calculation of R factor [Duffie/Beckman, p.25], but in order not to divide by zero it is determined like a/b in the Model of Perez [Duffie/Beckman, p.94] where the minimum b is set to cos(85°);
+    // calculation of R factor [Duffie/Beckman, p.25], but in order not to divide by zero it is determined like a/b in the Model of Perez [Duffie/Beckman, p.94] where the minimum b is set to cos(85ï¿½);
             // R is manually set to 0 for theta_z_pos >= 80 degrees (-> 90 degrees means sunset)__old solution for the numerical problems of dividing by zero;
             //if noEvent(cos_theta_z <= 0.08715574274) then
             //  R_help = cos_theta_z*cos_theta;
@@ -218,11 +218,11 @@ equation
     //Calculation of the Airmass [Duffie/Beckman 2006, p.10];
       Airmass = exp(-0.0001184*h) / (cos_theta_z + 0.5057 * (96.080 - theta_z_pos)^(-1.634));
 
-/*    //Calculation of epsilon like in the Perez model [Duffie/Beckman 2006, p.94]. In order not to divide by zero, the minimum of c(the diffuse irradiation on a horizontal surface) is set 0.1 W/m²;
+/*    //Calculation of epsilon like in the Perez model [Duffie/Beckman 2006, p.94]. In order not to divide by zero, the minimum of c(the diffuse irradiation on a horizontal surface) is set 0.1 W/m2;
       c = max(0.1, InDiffRadHor);
       epsilon = (((InBeamRadHor/b + c) / c) + 5.535E-6 * theta_z_pos^3) / (1 + 5.535E-6 * theta_z_pos^3);
       */
-      //Calculation of epsilon like in the EngineeringReference(EnergyPlus) page 143 In order not to divide by zero, the minimum of c(the diffuse irradiation on a horizontal surface) is set 0.1 W/m²;
+      //Calculation of epsilon like in the EngineeringReference(EnergyPlus) page 143 In order not to divide by zero, the minimum of c(the diffuse irradiation on a horizontal surface) is set 0.1 W/m2;
       c = max(0.1, InDiffRadHor);
       epsilon = (((InBeamRadHor/b + c) / c) + 1.041 * (from_deg(theta_z_out))^3) / (1 + 1.041 * (from_deg(theta_z_out))^3);
 
@@ -291,7 +291,7 @@ equation
         Ellipse(
           extent={{22,48},{18,34}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillColor={255,225,0},
           fillPattern=FillPattern.Solid),
         Polygon(
@@ -325,18 +325,18 @@ equation
           points={{-34,-6},{-48,-12},{-46,-18},{-32,-20},{-10,-18},{-34,-6}},
           fillPattern=FillPattern.VerticalCylinder,
           fillColor={0,90,0},
-          pattern=LinePattern.None),
+          pattern=LinePattern.Solid),
         Polygon(
           points={{-36,-6},{-70,-20},{-64,-26},{-54,-30},{-10,-18},{-32,-20},
               {-46,-18},{-48,-12},{-34,-6},{-36,-6}},
           smooth=Smooth.None,
           fillColor={0,98,0},
           fillPattern=FillPattern.Solid,
-          pattern=LinePattern.None),
+          pattern=LinePattern.Solid),
         Ellipse(extent={{-69,-26},{69,8}}, lineColor={0,0,0}),
         Rectangle(
           extent={{-70,72},{70,-72}},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           lineColor={0,0,0},
           origin={0,-6},
           rotation=360)}),
@@ -358,7 +358,7 @@ equation
       Ellipse(
         extent={{22,48},{18,34}},
         lineColor={0,0,255},
-        pattern=LinePattern.None,
+        pattern=LinePattern.Solid,
         fillColor={255,225,0},
         fillPattern=FillPattern.Solid),
         Polygon(
@@ -392,18 +392,18 @@ equation
           points={{-34,-6},{-48,-12},{-46,-18},{-32,-20},{-10,-18},{-34,-6}},
           fillPattern=FillPattern.VerticalCylinder,
           fillColor={0,90,0},
-          pattern=LinePattern.None),
+          pattern=LinePattern.Solid),
         Polygon(
           points={{-36,-6},{-70,-20},{-64,-26},{-54,-30},{-10,-18},{-32,-20},{-46,
               -18},{-48,-12},{-34,-6},{-36,-6}},
           smooth=Smooth.None,
           fillColor={0,98,0},
           fillPattern=FillPattern.Solid,
-          pattern=LinePattern.None),
+          pattern=LinePattern.Solid),
         Ellipse(extent={{-69,-26},{69,8}}, lineColor={0,0,0}),
         Rectangle(
           extent={{-70,72},{70,-72}},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           lineColor={0,0,0},
           origin={0,-6},
           rotation=360)}),

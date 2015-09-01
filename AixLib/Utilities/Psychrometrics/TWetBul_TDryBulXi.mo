@@ -92,7 +92,7 @@ annotation (
         Rectangle(
           extent={{-14,44},{10,-64}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillColor={0,0,127},
           fillPattern=FillPattern.Solid),
         Polygon(

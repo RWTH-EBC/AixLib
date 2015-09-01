@@ -114,7 +114,7 @@ equation
         Polygon(
           points={{0,50},{0,-56},{54,2},{0,50}},
           lineColor={0,0,0},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={255,255,255}),
         Ellipse(

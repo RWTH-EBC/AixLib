@@ -121,7 +121,7 @@ equation
   connect(internalGainsConv, reducedOrderModel.internalGainsConv) annotation(Line(points={{40,-90},
           {40,-49},{52.8,-49},{52.8,-7.2}},                                                                                                   color = {191, 0, 0}, smooth = Smooth.None));
   connect(internalGainsRad, reducedOrderModel.internalGainsRad) annotation(Line(points={{80,-90},
-          {80,-7.2},{68.75,-7.2}},                                                                                               color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+          {80,-7.2},{68.75,-7.2}},                                                                                               color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
   connect(ventilationRate, reducedOrderModel.ventilationRate) annotation(Line(points={{-28,-90},
           {4,-90},{4,-7.2},{35.98,-7.2}},                                                                                               color = {0, 0, 127}, smooth = Smooth.None));
   connect(ventilationTemperature, reducedOrderModel.ventilationTemperature) annotation(Line(points = {{-100, -50}, {-12, -50}, {-12, 4.56}, {23.8, 4.56}}, color = {0, 0, 127}, smooth = Smooth.None));
@@ -161,7 +161,7 @@ equation
             lineThickness=1,                                                                                                    fillColor=
               {170,213,255},
             fillPattern=FillPattern.Solid,
-          pattern=LinePattern.None),
+          pattern=LinePattern.Solid),
         Rectangle(
           extent={{14,36},{100,-58}},
           lineColor={0,0,0},
@@ -180,7 +180,7 @@ equation
               Smooth.None,                                                                                                    fillColor=
               {236,99,92},
             fillPattern=FillPattern.Solid,
-          pattern=LinePattern.None),                                                                                                    Rectangle(extent={{
+          pattern=LinePattern.Solid),                                                                                                    Rectangle(extent={{
               55,-2},{67,-10}},                                                                                                    lineColor=
               {0,0,0},                                                                                                    fillColor=
               {170,213,255},
@@ -189,13 +189,13 @@ equation
             lineThickness=1,                                                                                                    fillColor=
               {255,221,0},
             fillPattern=FillPattern.Solid,
-          pattern=LinePattern.None),
+          pattern=LinePattern.Solid),
         Rectangle(
           extent={{-60,-64},{100,-70}},
           lineThickness=1,
           fillPattern=FillPattern.Solid,
           fillColor={0,127,0},
-          pattern=LinePattern.None),
+          pattern=LinePattern.Solid),
         Line(
           points={{24,-48},{44,-32},{44,10},{24,26}},
           color={0,0,0},

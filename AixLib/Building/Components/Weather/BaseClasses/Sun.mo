@@ -49,7 +49,7 @@ equation
     "the difference between the UTC and the time standard is given by DiffWeatherDataTime and Diff_lokalStandardTime Longitude";
 
 // hour angle of sun, first term calculates local time of day from continuous time signal
-      HourAngleSun = (SolarTime-12) * 360/24 "HourAngleSun=0° means sun peak";
+      HourAngleSun = (SolarTime-12) * 360/24 "HourAngleSun=0ï¿½ means sun peak";
       if (HourAngleSun > 180) then
         OutHourAngleSun = HourAngleSun - 360;
       elseif (HourAngleSun < -180) then
@@ -68,7 +68,7 @@ equation
         Rectangle(
           extent={{-80,60},{80,-100}},
           lineColor={0,0,0},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={170,213,255}),
         Ellipse(
@@ -86,7 +86,7 @@ equation
             100}}),            graphics={Rectangle(
           extent={{-80,60},{80,-100}},
           lineColor={0,0,0},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={170,213,255}), Ellipse(
           extent={{-50,30},{50,-70}},

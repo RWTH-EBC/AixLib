@@ -81,7 +81,7 @@ equation
   //******************************************************************
   // **********************standard connection************************
   //******************************************************************
-  connect(Wall.Star, heatStarToComb.star) annotation(Line(points = {{0.9, 30}, {48, 30}, {48, 4.8}, {58.6, 4.8}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+  connect(Wall.Star, heatStarToComb.star) annotation(Line(points = {{0.9, 30}, {48, 30}, {48, 4.8}, {58.6, 4.8}}, color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
   connect(Wall.port_b, heatStarToComb.therm) annotation(Line(points = {{0.9, 23}, {48, 23}, {48, -6.1}, {58.9, -6.1}}, color = {191, 0, 0}, smooth = Smooth.None));
   //******************************************************************
   // **********************standard connection for inside wall********
@@ -107,13 +107,13 @@ equation
   if withDoor then
     connect(Door.port_a, port_outside) annotation(Line(points = {{-19.4, -86}, {-56, -86}, {-56, 24}, {-24, 24}, {-24, 4}, {-98, 4}}, color = {191, 0, 0}, smooth = Smooth.None));
     connect(Door.port_b, heatStarToComb.therm) annotation(Line(points = {{9.4, -86}, {48, -86}, {48, -6.1}, {58.9, -6.1}}, color = {191, 0, 0}, smooth = Smooth.None));
-    connect(Door.Star, heatStarToComb.star) annotation(Line(points = {{9.4, -76.4}, {48, -76.4}, {48, 4.8}, {58.6, 4.8}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+    connect(Door.Star, heatStarToComb.star) annotation(Line(points = {{9.4, -76.4}, {48, -76.4}, {48, 4.8}, {58.6, 4.8}}, color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
   end if;
   //******************************************************************
   // ****standard connections for outside wall with window***********
   //******************************************************************
   if outside and withWindow then
-    connect(windowSimple.Star, heatStarToComb.star) annotation(Line(points = {{9.7, -27.2}, {48, -27.2}, {48, 4.8}, {58.6, 4.8}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+    connect(windowSimple.Star, heatStarToComb.star) annotation(Line(points = {{9.7, -27.2}, {48, -27.2}, {48, 4.8}, {58.6, 4.8}}, color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
     connect(windowSimple.port_inside, heatStarToComb.therm) annotation(Line(points = {{9.7, -36.3}, {48, -36.3}, {48, -6.1}, {58.9, -6.1}}, color = {191, 0, 0}, smooth = Smooth.None));
     connect(windowSimple.port_outside, port_outside) annotation(Line(points = {{-13.7, -36.3}, {-56, -36.3}, {-56, 4}, {-98, 4}}, color = {191, 0, 0}, smooth = Smooth.None));
   end if;
@@ -133,11 +133,11 @@ equation
             -6.7},{-81,-6.7},{-81,89},{-106,89}},                                                                                  color = {255, 128, 0}, smooth = Smooth.None));
   end if;
   connect(heatStarToComb.thermStarComb, thermStarComb_inside) annotation(Line(points = {{78.4, -1.1}, {78.4, -1.05}, {102, -1.05}, {102, 0}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(port_outside, port_outside) annotation(Line(points = {{-98, 4}, {-98, 4}}, color = {191, 0, 0}, pattern = LinePattern.None, smooth = Smooth.None));
+  connect(port_outside, port_outside) annotation(Line(points = {{-98, 4}, {-98, 4}}, color = {191, 0, 0}, pattern = LinePattern.Solid, smooth = Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
             -100},{100,100}},                                                                           grid = {1, 1}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-20, -120}, {20, 120}}, grid = {1, 1}), graphics={  Rectangle(extent=  {{-16, 120}, {15, -60}}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Backward, pattern=  LinePattern.None, lineColor=  {0, 0, 0}), Rectangle(extent=  {{-16, -90}, {15, -120}}, pattern=  LinePattern.None, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Backward), Rectangle(extent=  {{-16, -51}, {15, -92}}, lineColor=  {0, 0, 0}, pattern=  LinePattern.None, fillColor=  {215, 215, 215},
+            fillPattern=                                                                                                    FillPattern.Backward, pattern=  LinePattern.Solid, lineColor=  {0, 0, 0}), Rectangle(extent=  {{-16, -90}, {15, -120}}, pattern=  LinePattern.Solid, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215},
+            fillPattern=                                                                                                    FillPattern.Backward), Rectangle(extent=  {{-16, -51}, {15, -92}}, lineColor=  {0, 0, 0}, pattern=  LinePattern.Solid, fillColor=  {215, 215, 215},
             fillPattern=                                                                                                    FillPattern.Backward, visible=  not withDoor), Rectangle(extent=  {{-16, 80}, {15, 20}}, fillColor=  {255, 255, 255},
             fillPattern=                                                                                                    FillPattern.Solid, visible=  outside and withWindow, lineColor=  {255, 255, 255}), Line(points=  {{-2, 80}, {-2, 20}}, color=  {0, 0, 0}, smooth=  Smooth.None, visible=  outside and withWindow), Line(points=  {{1, 80}, {1, 20}}, color=  {0, 0, 0}, smooth=  Smooth.None, visible=  outside and withWindow), Line(points=  {{1, 77}, {-2, 77}}, color=  {0, 0, 0}, smooth=  Smooth.None, visible=  outside and withWindow), Line(points=  {{1, 23}, {-2, 23}}, color=  {0, 0, 0}, smooth=  Smooth.None, visible=  outside and withWindow), Ellipse(extent=  {{-16, -60}, {44, -120}}, lineColor=  {0, 0, 0}, startAngle=  359, endAngle=  450, visible=  withDoor), Rectangle(extent=  {{-16, -60}, {15, -90}}, visible=  withDoor, lineColor=  {255, 255, 255}, fillColor=  {255, 255, 255},
             fillPattern=                                                                                                    FillPattern.Solid), Line(points=  {{1, 50}, {-2, 50}}, color=  {0, 0, 0}, smooth=  Smooth.None, visible=  outside and withWindow), Line(points=  {{15, 80}, {15, 20}}, color=  {0, 0, 0}, smooth=  Smooth.None, visible=  outside and withWindow), Line(points=  {{-16, 80}, {-16, 20}}, color=  {0, 0, 0}, smooth=  Smooth.None, visible=  outside and withWindow), Line(points=  {{-16, -60}, {-16, -90}}, color=  {0, 0, 0}, smooth=  Smooth.None, visible=  withDoor), Line(points=  {{15, -60}, {15, -90}}, color=  {0, 0, 0}, smooth=  Smooth.None, visible=  withDoor), Line(points=  {{-16, -90}, {15, -60}}, color=  {0, 0, 0}, smooth=  Smooth.None, visible=  withDoor), Line(points=  {{-16, -60}, {15, -90}}, color=  {0, 0, 0}, smooth=  Smooth.None, visible=  withDoor)}), Documentation(info = "<html>

@@ -161,7 +161,7 @@ package ASHRAE140
     connect(thermStar_Demux.star, starRoom) annotation (Line(
         points={{-26.2,-21.6},{-26.2,0.2},{9,0.2},{9,26}},
         color={95,95,95},
-        pattern=LinePattern.None,
+        pattern=LinePattern.Solid,
         smooth=Smooth.None));
     connect(thermStar_Demux.therm, thermRoom) annotation (Line(
         points={{-37.1,-21.9},{-37.1,-0.95},{-29,-0.95},{-29,23}},
@@ -551,7 +551,7 @@ package ASHRAE140
     connect(thermStar_Demux.star, starRoom) annotation (Line(
         points={{-26.2,-21.6},{-26.2,0.2},{9,0.2},{9,26}},
         color={95,95,95},
-        pattern=LinePattern.None,
+        pattern=LinePattern.Solid,
         smooth=Smooth.None));
     connect(thermStar_Demux.therm, thermRoom) annotation (Line(
         points={{-37.1,-21.9},{-37.1,-0.95},{-29,-0.95},{-29,23}},
