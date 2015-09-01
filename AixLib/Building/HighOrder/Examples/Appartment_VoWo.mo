@@ -34,35 +34,35 @@ model Appartment_VoWo "Simulation of 1 apartment "
   Modelica.Blocks.Sources.Constant Source_TseBoiler(k = 273.15 + 55) annotation(Placement(transformation(extent = {{-86, -96}, {-72, -82}})));
   output Real Ta = combinedWeather.AirTemp;
   // Livingroom
-  output Real airTLiving = VoWoWSchV1984.Appartment.Livingroom.airload.T;
-  output Real radPowerLiConv = -VoWoWSchV1984.Hydraulic.Con_Livingroom.Q_flow;
-  output Real radPowerLiRad = -VoWoWSchV1984.Hydraulic.Rad_Livingroom.Q_flow;
-  output Real travelHVLi = VoWoWSchV1984.Hydraulic.valve_livingroom.opening;
-  output Real massFlowLi = VoWoWSchV1984.Hydraulic.valve_livingroom.port_a.m_flow;
+  output Real airTLi = VoWoWSchV1984.Appartment.Livingroom.airload.T;
+  output Real radPowerLiConv = -VoWoWSchV1984.Hydraulic.convLi.Q_flow;
+  output Real radPowerLiRad = -VoWoWSchV1984.Hydraulic.radLi.Q_flow;
+  output Real travelHVLi = VoWoWSchV1984.Hydraulic.valveLi.opening;
+  output Real massFlowLi = VoWoWSchV1984.Hydraulic.valveLi.port_a.m_flow;
   // Bath
-  output Real airTBath = VoWoWSchV1984.Appartment.Bathroom.airload.T;
-  output Real radPowerBConv = -VoWoWSchV1984.Hydraulic.Con_bath.Q_flow;
-  output Real radPowerBRad = -VoWoWSchV1984.Hydraulic.Rad_bath.Q_flow;
-  output Real travelHVB = VoWoWSchV1984.Hydraulic.valve_bath.opening;
-  output Real massFlowB = VoWoWSchV1984.Hydraulic.valve_bath.port_a.m_flow;
+  output Real airTBa = VoWoWSchV1984.Appartment.Bathroom.airload.T;
+  output Real radPowerBaConv = -VoWoWSchV1984.Hydraulic.convBa.Q_flow;
+  output Real radPowerBaRad = -VoWoWSchV1984.Hydraulic.radBa.Q_flow;
+  output Real travelHVBa = VoWoWSchV1984.Hydraulic.valveBa.opening;
+  output Real massFlowBa = VoWoWSchV1984.Hydraulic.valveBa.port_a.m_flow;
   // Bedroom
-  output Real airTBedromm = VoWoWSchV1984.Appartment.Bedroom.airload.T;
-  output Real radPowerBrConv = -VoWoWSchV1984.Hydraulic.Con_bedroom.Q_flow;
-  output Real radPowerBrRad = -VoWoWSchV1984.Hydraulic.Rad_bedroom.Q_flow;
-  output Real travelHVBr = VoWoWSchV1984.Hydraulic.valve_bedroom.opening;
-  output Real massFlowBr = VoWoWSchV1984.Hydraulic.valve_bedroom.port_a.m_flow;
+  output Real airTBe = VoWoWSchV1984.Appartment.Bedroom.airload.T;
+  output Real radPowerBeConv = -VoWoWSchV1984.Hydraulic.convBe.Q_flow;
+  output Real radPowerBeRad = -VoWoWSchV1984.Hydraulic.radBe.Q_flow;
+  output Real travelHVBe = VoWoWSchV1984.Hydraulic.valveBe.opening;
+  output Real massFlowBe = VoWoWSchV1984.Hydraulic.valveBe.port_a.m_flow;
   // Children
-  output Real airTChildren = VoWoWSchV1984.Appartment.Children.airload.T;
-  output Real radPowerChConv = -VoWoWSchV1984.Hydraulic.Con_children.Q_flow;
-  output Real radPowerChRad = -VoWoWSchV1984.Hydraulic.Rad_children.Q_flow;
-  output Real travelHVCh = VoWoWSchV1984.Hydraulic.valve_children.opening;
-  output Real massFlowCh = VoWoWSchV1984.Hydraulic.valve_children.port_a.m_flow;
+  output Real airTCh = VoWoWSchV1984.Appartment.Children.airload.T;
+  output Real radPowerChConv = -VoWoWSchV1984.Hydraulic.convCh.Q_flow;
+  output Real radPowerChRad = -VoWoWSchV1984.Hydraulic.radCh.Q_flow;
+  output Real travelHVCh = VoWoWSchV1984.Hydraulic.valveCh.opening;
+  output Real massFlowCh = VoWoWSchV1984.Hydraulic.valveCh.port_a.m_flow;
   // Kitchen
-  output Real airTKitchen = VoWoWSchV1984.Appartment.Kitchen.airload.T;
-  output Real radPowerKitConv = -VoWoWSchV1984.Hydraulic.Con_kitchen.Q_flow;
-  output Real radPowerKitRad = -VoWoWSchV1984.Hydraulic.Rad_kitchen.Q_flow;
-  output Real travelHVKit = VoWoWSchV1984.Hydraulic.valve_kitchen.opening;
-  output Real massFlowKit = VoWoWSchV1984.Hydraulic.valve_kitchen.port_a.m_flow;
+  output Real airTKi = VoWoWSchV1984.Appartment.Kitchen.airload.T;
+  output Real radPowerKiConv = -VoWoWSchV1984.Hydraulic.convKi.Q_flow;
+  output Real radPowerKiRad = -VoWoWSchV1984.Hydraulic.radKi.Q_flow;
+  output Real travelHVKi = VoWoWSchV1984.Hydraulic.valveKi.opening;
+  output Real massFlowKi = VoWoWSchV1984.Hydraulic.valveKi.port_a.m_flow;
 equation
   connect(Pumpe.port_b, boilerTable.port_a) annotation(Line(points = {{-16, -72}, {-38, -72}, {-38, -76}, {-44, -76}}, color = {0, 127, 255}, smooth = Smooth.None));
   connect(boilerTable.port_b, pipe.port_a) annotation(Line(points = {{-64, -76}, {-74, -76}, {-74, -42}, {-30, -42}}, color = {0, 127, 255}, smooth = Smooth.None));
@@ -102,7 +102,7 @@ equation
       color={0,127,255},
       smooth=Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-            -140},{100,100}}),                                                                           graphics={  Text(extent=  {{-48, -82}, {90, -168}}, lineColor=  {0, 0, 255}, textString=  "Set initial values for iteration variables (list given by translate, usually pressure drops). Rule of thumb: valves 1000 Pa, pipes 100 Pa. Simulation may still work without some of them, but  it gives warning of division by zero at initialization.
+            -140},{100,100}}),                                                                           graphics={  Text(extent = {{-48, -82}, {90, -168}}, lineColor = {0, 0, 255}, textString = "Set initial values for iteration variables (list given by translate, usually pressure drops). Rule of thumb: valves 1000 Pa, pipes 100 Pa. Simulation may still work without some of them, but  it gives warning of division by zero at initialization.
  ")}), experiment(StopTime = 86400, Interval = 60, __Dymola_Algorithm = "Lsodar"), experimentSetupOutput(states = false, derivatives = false, auxiliaries = false, events = false), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Example for setting up a simulation for an appartment.</p>
