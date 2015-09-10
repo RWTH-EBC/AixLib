@@ -31,7 +31,7 @@ model WindowSimple "Window with radiation and U-Value"
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
     annotation (Placement(transformation(extent={{2,50},{22,70}})));
 equation
-  connect(twoStar_RadEx.Star, Star) annotation(Line(points = {{49.1, 60}, {90, 60}}, pattern = LinePattern.None));
+  connect(twoStar_RadEx.Star, Star) annotation(Line(points = {{49.1, 60}, {90, 60}}, pattern = LinePattern.Solid));
   connect(port_outside, HeatTrans.port_a) annotation(Line(points = {{-90, -10}, {-49.5, -10}, {-10, -10}}));
   connect(HeatTrans.port_b, port_inside) annotation(Line(points = {{10, -10}, {10, -10}, {90, -10}}));
   connect(corG.SR_input[1], solarRad_in) annotation (Line(
@@ -50,9 +50,9 @@ equation
       points={{22,60},{30.8,60}},
       color={191,0,0},
       smooth=Smooth.None));
-  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics={  Line(points = {{-66, 18}, {-62, 18}}, color = {255, 255, 0}, smooth = Smooth.None), Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {215, 215, 215},
-            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-4, 42}, {10, -76}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {215, 215, 215},
-            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-76, 46}, {74, 38}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {215, 215, 215},
+  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics={  Line(points = {{-66, 18}, {-62, 18}}, color = {255, 255, 0}, smooth = Smooth.None), Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 255}, pattern = LinePattern.Solid, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-4, 42}, {10, -76}}, lineColor = {0, 0, 255}, pattern = LinePattern.Solid, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-76, 46}, {74, 38}}, lineColor = {0, 0, 255}, pattern = LinePattern.Solid, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid), Line(points = {{2, 40}, {2, -76}, {76, -76}, {76, 40}, {2, 40}}, color = {0, 0, 0}, smooth = Smooth.None), Line(points = {{-76, 40}, {-76, -76}, {-2, -76}, {-2, 40}, {-76, 40}}, color = {0, 0, 0}, smooth = Smooth.None), Line(points = {{-76, 76}, {-76, 44}, {76, 44}, {76, 76}, {-76, 76}}, color = {0, 0, 0}, smooth = Smooth.None), Rectangle(extent = {{4, -8}, {6, -20}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid), Line(points = {{-72, 72}, {-72, 48}, {72, 48}, {72, 72}, {-72, 72}}, color = {0, 0, 0}, smooth = Smooth.None), Rectangle(extent = {{-72, 72}, {72, 48}}, lineColor = {0, 0, 0}, fillColor = {211, 243, 255},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{10, 36}, {72, -72}}, lineColor = {0, 0, 0}, fillColor = {211, 243, 255},

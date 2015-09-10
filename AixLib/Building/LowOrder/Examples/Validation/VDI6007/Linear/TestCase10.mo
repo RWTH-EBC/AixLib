@@ -68,7 +68,7 @@ equation
           {66.88,5},{66.88,44.5}},                                                                                       color = {0, 0, 127}, smooth = Smooth.None));
   connect(wallRad.y, multiplex5_1.u5[1]) annotation(Line(points = {{-115.5, 55}, {-104.75, 55}, {-104.75, 44}, {-86, 44}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(HeatTorStar.Star, reducedModel.internalGainsRad) annotation(Line(points={{75.1,
-          -90},{92,-90},{92,44.5},{94,44.5}},                                                                                        color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+          -90},{92,-90},{92,44.5},{94,44.5}},                                                                                        color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
   connect(personsConvective.port, reducedModel.internalGainsConv) annotation(Line(points={{40,-62},
           {80.8,-62},{80.8,44.5}},                                                                                               color = {191, 0, 0}, smooth = Smooth.None));
   connect(machinesConvective.port, reducedModel.internalGainsConv) annotation(Line(points={{40,-42},

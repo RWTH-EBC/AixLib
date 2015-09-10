@@ -481,7 +481,7 @@ Implemented first version in <code>AixLib</code> library, based on model from
           extent={{-100,100},{100,-100}},
           fillColor={135,135,135},
           fillPattern=FillPattern.Solid,
-          pattern=LinePattern.None),
+          pattern=LinePattern.Solid),
         Text(
           extent={{-89,17},{-54,34}},
           lineColor={0,0,127},

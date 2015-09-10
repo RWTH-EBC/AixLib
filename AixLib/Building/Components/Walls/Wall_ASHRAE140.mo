@@ -195,7 +195,7 @@ equation
   connect(Wall.Star, heatStarToComb.star) annotation (Line(
       points={{0.9,30},{48,30},{48,4.8},{58.6,4.8}},
       color={95,95,95},
-      pattern=LinePattern.None,
+      pattern=LinePattern.Solid,
       smooth=Smooth.None));
   connect(Wall.port_b, heatStarToComb.therm) annotation (Line(
       points={{0.9,23},{48,23},{48,-6.1},{58.9,-6.1}},
@@ -262,7 +262,7 @@ if withDoor then
     connect(Door.Star, heatStarToComb.star) annotation (Line(
         points={{9.4,-76.4},{48,-76.4},{48,4.8},{58.6,4.8}},
         color={95,95,95},
-        pattern=LinePattern.None,
+        pattern=LinePattern.Solid,
         smooth=Smooth.None));
 
 end if;
@@ -279,7 +279,7 @@ if outside and withWindow then
     connect(windowSimple.Star, heatStarToComb.star) annotation (Line(
       points={{9.7,-27.2},{48,-27.2},{48,4.8},{58.6,4.8}},
       color={95,95,95},
-      pattern=LinePattern.None,
+      pattern=LinePattern.Solid,
       smooth=Smooth.None));
     connect(windowSimple.port_outside, port_outside) annotation (Line(
         points={{-13.7,-36.3},{-56,-36.3},{-56,4},{-98,4}},
@@ -356,18 +356,18 @@ end if;
           extent={{-16,120},{15,-60}},
           fillColor={215,215,215},
           fillPattern=FillPattern.Backward,
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           lineColor={0,0,0}),
       Rectangle(
           extent={{-16,-90},{15,-120}},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           lineColor={0,0,0},
           fillColor={215,215,215},
           fillPattern=FillPattern.Backward),
       Rectangle(
           extent={{-16,-51},{15,-92}},
           lineColor={0,0,0},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillColor={215,215,215},
           fillPattern=FillPattern.Backward,
           visible=not ((withDoor))),

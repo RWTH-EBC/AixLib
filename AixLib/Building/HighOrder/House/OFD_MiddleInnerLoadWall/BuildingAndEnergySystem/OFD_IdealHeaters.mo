@@ -53,23 +53,23 @@ equation
   connect(UF.thermCorridor, varAirExchange.port_a) annotation(Line(points = {{22.3, -26.6}, {34, -26.6}, {34, -26}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(GF.thermCorridor, varAirExchange.port_b) annotation(Line(points = {{24.4, -39.4}, {34, -39.4}, {34, -38}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(UF.StarBedroom, UF_Hydraulic.Rad_Bedroom) annotation(Line(points={{-7.6,
-          12.4},{-2,12.4},{-2,4},{74,4},{74,22.3},{86.4769,22.3}},                                                                                      color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+          12.4},{-2,12.4},{-2,4},{74,4},{74,22.3},{86.4769,22.3}},                                                                                      color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
   connect(UF.StarChildren1, UF_Hydraulic.Rad_Children1) annotation(Line(points={{1.6,
           12.4},{-2,12.4},{-2,4},{74,4},{74,30},{146,30},{146,20},{136,20},{136,
-          19.41},{133.185,19.41}},                                                                                                    color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+          19.41},{133.185,19.41}},                                                                                                    color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
   connect(GF.StarLivingroom, GF_Hydraulic.Rad_Livingroom) annotation(Line(points={{-6.8,
-          -57.6},{-6.8,-68},{76,-68},{76,-53.2},{84.8692,-53.2}},                                                                                          color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+          -57.6},{-6.8,-68},{76,-68},{76,-53.2},{84.8692,-53.2}},                                                                                          color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
   connect(GF.StarHobby, GF_Hydraulic.Rad_Hobby) annotation(Line(points={{2.8,
           -57.6},{2.8,-62},{0,-62},{0,-68},{76,-68},{76,-46},{140,-46},{140,
-          -52.16},{129.131,-52.16}},                                                                                                    color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+          -52.16},{129.131,-52.16}},                                                                                                    color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
   connect(GF.StarCorridor, GF_Hydraulic.Rad_Corridor) annotation(Line(points={{-2,
           -73.2},{0,-73.2},{0,-68},{76,-68},{76,-46},{140,-46},{140,-60.96},{
-          129.292,-60.96}},                                                                                                    color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+          129.292,-60.96}},                                                                                                    color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
   connect(GF.StarWC_Storage, GF_Hydraulic.Rad_WC) annotation(Line(points={{2.8,
           -83.6},{0,-83.6},{0,-68},{76,-68},{76,-46},{140,-46},{140,-70.56},{
-          129.454,-70.56}},                                                                                                    color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+          129.454,-70.56}},                                                                                                    color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
   connect(GF.StarKitchen, GF_Hydraulic.Rad_Kitchen) annotation(Line(points={{-6.8,
-          -83.6},{0,-83.6},{0,-68},{76,-68},{76,-72.8},{84.7885,-72.8}},                                                                                      color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+          -83.6},{0,-83.6},{0,-68},{76,-68},{76,-72.8},{84.7885,-72.8}},                                                                                      color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
   connect(UF.ThermBedroom, UF_Hydraulic.Con_Bedroom) annotation(Line(points={{-7.6,
           17.6},{-2,17.6},{-2,4},{74,4},{74,17.03},{86.3077,17.03}},                                                                                       color = {191, 0, 0}, smooth = Smooth.None));
   connect(UF.ThermChildren1, UF_Hydraulic.Con_Chidlren1) annotation(Line(points={{1.6,
@@ -82,7 +82,7 @@ equation
           -4.56}},                                                                                                    color = {191, 0, 0}, smooth = Smooth.None));
   connect(UF.StarBath, UF_Hydraulic.Rad_Bath) annotation(Line(points={{1.6,
           -13.6},{-2,-13.6},{-2,4},{74,4},{74,30},{146,30},{146,0.2},{133.692,
-          0.2}},                                                                                                    color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+          0.2}},                                                                                                    color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
   connect(GF.ThermLivingroom, GF_Hydraulic.Con_Livingroom) annotation(Line(points = {{-7.04, -52.14}, {-7.04, -68}, {76, -68}, {76, -56.72}, {84.95, -56.72}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(GF.ThermHobby, GF_Hydraulic.Con_Hobby) annotation(Line(points={{2.8,
           -52.4},{2.8,-58},{0,-58},{0,-68},{76,-68},{76,-46},{140,-46},{140,
@@ -96,7 +96,7 @@ equation
           -78.4},{0,-78.4},{0,-68},{76,-68},{76,-46},{140,-46},{140,-74.72},{
           129.696,-74.72}},                                                                                                    color = {191, 0, 0}, smooth = Smooth.None));
   connect(UF_Hydraulic.Rad_Children2, UF.StarChildren2) annotation(Line(points={{86.4769,
-          4.45},{74,4.45},{74,4},{-2,4},{-2,-13.6},{-7.6,-13.6}},                                                                                             color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+          4.45},{74,4.45},{74,4},{-2,4},{-2,-13.6},{-7.6,-13.6}},                                                                                             color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
   connect(GF.thermCeiling_Corridor, UF.thermFloor_Corridor) annotation(Line(points = {{-4.64, -39.66}, {-4.64, -32.83}, {-5.3, -32.83}, {-5.3, -26.6}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(GF.thermCeiling_WCStorage, UF.thermFloor_Bath) annotation(Line(points = {{4.96, -39.66}, {4.96, -33.83}, {3.9, -33.83}, {3.9, -26.6}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(TSet_UF, UF_Hydraulic.TSet_UF) annotation(Line(points={{-101,-35},{

@@ -85,7 +85,7 @@ equation
       Line(
       points={{71.1,-78},{86,-78},{86,-6},{73.75,-6},{73.75,19.7}},
       color={95,95,95},
-      pattern=LinePattern.None,
+      pattern=LinePattern.Solid,
       smooth=Smooth.None));
   connect(machinesConvective.port, reducedOrderModel.internalGainsConv)
     annotation (Line(

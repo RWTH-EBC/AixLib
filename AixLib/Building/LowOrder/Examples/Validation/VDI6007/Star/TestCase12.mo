@@ -46,7 +46,7 @@ equation
   connect(outdoorTemp.y[1], varTemp.T) annotation(Line(points = {{-39, 28}, {-22, 28}, {-22, 36}, {-4, 36}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(varTemp.port, reducedModel.equalAirTemp) annotation(Line(points = {{18, 36}, {28, 36}, {28, 50.8}, {57.4, 50.8}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(HeatTorStar.Star, reducedModel.internalGainsRad) annotation(Line(points={{67.1,
-          -94},{84,-94},{84,32},{83.75,32}},                                                                                         color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+          -94},{84,-94},{84,32},{83.75,32}},                                                                                         color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
   connect(personsConvective.port, reducedModel.internalGainsConv) annotation(Line(points={{32,-66},
           {74.4,-66},{74.4,32}},                                                                                                 color = {191, 0, 0}, smooth = Smooth.None));
   connect(machinesConvective.port, reducedModel.internalGainsConv) annotation(Line(points={{32,-46},

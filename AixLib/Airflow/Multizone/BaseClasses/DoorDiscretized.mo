@@ -66,7 +66,7 @@ equation
         Rectangle(
           extent={{-60,80},{60,-84}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillColor={85,75,55},
           fillPattern=FillPattern.Solid),
         Rectangle(
@@ -82,7 +82,7 @@ equation
         Polygon(
           points={{-30,-10},{-16,-8},{-16,-14},{-30,-16},{-30,-10}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid)}),
     Documentation(info="<html>

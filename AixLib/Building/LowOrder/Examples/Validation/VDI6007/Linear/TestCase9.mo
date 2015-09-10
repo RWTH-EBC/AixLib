@@ -58,7 +58,7 @@ equation
   connect(multiplex3_1.y, eqAirTemp.weatherData) annotation(Line(points={{-24.4,
           10},{-22,10},{-22,12},{-18,12}},                                                          color = {0, 0, 127}, smooth = Smooth.None));
   connect(HeatTorStar.Star, reducedModel.internalGainsRad) annotation(Line(points={{57.1,
-          -86},{74,-86},{74,9.9},{74.75,9.9}},                                                                                           color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+          -86},{74,-86},{74,9.9},{74.75,9.9}},                                                                                           color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
   connect(personsConvective.port, reducedModel.internalGainsConv) annotation(Line(points={{22,-58},
           {63.2,-58},{63.2,9.9}},                                                                                                  color = {191, 0, 0}, smooth = Smooth.None));
   connect(machinesConvective.port, reducedModel.internalGainsConv) annotation(Line(points={{22,-38},
