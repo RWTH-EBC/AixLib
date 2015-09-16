@@ -111,16 +111,16 @@ public
           rotation=270,
           origin={10,-84})));
     Modelica.Blocks.Interfaces.RealOutput BeamRadTiltOut
-    "[W/m�] Beam irradiance on a tilted surface"
+    "[W/m2] Beam irradiance on a tilted surface"
       annotation (Placement(transformation(extent={{72,-22},{92,-2}}), iconTransformation(extent={{70,-10},{82,2}})));
     Modelica.Blocks.Interfaces.RealOutput DiffRadTiltCSOut
-    "[W/m�] circumsolar diffuse irradiance"
+    "[W/m2] circumsolar diffuse irradiance"
       annotation (Placement(transformation(extent={{72,-62},{92,-42}}),iconTransformation(extent={{70,-52},{82,-40}})));
     Modelica.Blocks.Interfaces.RealOutput DiffRadTiltHZOut
-    "[W/m�] Diffuse irradiance on a tilted surface"
+    "[W/m2] Diffuse irradiance on a tilted surface"
       annotation (Placement(transformation(extent={{72,-80},{92,-60}}),iconTransformation(extent={{70,-72},{82,-60}})));
     Modelica.Blocks.Interfaces.RealOutput DiffRadTiltDOMOut
-    "[W/m�] Diffuse irradiance on a tilted surface"
+    "[W/m2] Diffuse irradiance on a tilted surface"
       annotation (Placement(transformation(extent={{72,-42},{92,-22}}),iconTransformation(extent={{70,-30},{82,-18}})));
     Modelica.Blocks.Interfaces.RealOutput brightness_out
     "dimensionless factor, which says how cloudy the sky is (see: delta)"
@@ -218,11 +218,11 @@ equation
     //Calculation of the Airmass [Duffie/Beckman 2006, p.10];
       Airmass = exp(-0.0001184*h) / (cos_theta_z + 0.5057 * (96.080 - theta_z_pos)^(-1.634));
 
-/*    //Calculation of epsilon like in the Perez model [Duffie/Beckman 2006, p.94]. In order not to divide by zero, the minimum of c(the diffuse irradiation on a horizontal surface) is set 0.1 W/m�;
+/*    //Calculation of epsilon like in the Perez model [Duffie/Beckman 2006, p.94]. In order not to divide by zero, the minimum of c(the diffuse irradiation on a horizontal surface) is set 0.1 W/m2;
       c = max(0.1, InDiffRadHor);
       epsilon = (((InBeamRadHor/b + c) / c) + 5.535E-6 * theta_z_pos^3) / (1 + 5.535E-6 * theta_z_pos^3);
       */
-      //Calculation of epsilon like in the EngineeringReference(EnergyPlus) page 143 In order not to divide by zero, the minimum of c(the diffuse irradiation on a horizontal surface) is set 0.1 W/m�;
+      //Calculation of epsilon like in the EngineeringReference(EnergyPlus) page 143 In order not to divide by zero, the minimum of c(the diffuse irradiation on a horizontal surface) is set 0.1 W/m2;
       c = max(0.1, InDiffRadHor);
       epsilon = (((InBeamRadHor/b + c) / c) + 1.041 * (from_deg(theta_z_out))^3) / (1 + 1.041 * (from_deg(theta_z_out))^3);
 

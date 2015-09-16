@@ -240,7 +240,7 @@ equation
           extent={{-139,16},{-111,0}},
           lineColor={0,0,255},
           textString="1 - Direct normal irradiance in W/m2
-2 - global horizontal 
+2 - global horizontal
      radiance in W/m2
 "),     Text(
           extent={{-147,-2},{-79,-10}},
@@ -252,8 +252,8 @@ equation
           extent={{-141,48},{-109,30}},
           lineColor={0,0,255},
           textString="1 - Air Temperature in K
-2 - extraterrestrial longwave radiation in W/m²
-3 - terrestrial longwave radiation in W/m²"),
+2 - extraterrestrial longwave radiation in W/m2
+3 - terrestrial longwave radiation in W/m2"),
         Text(
           extent={{35,-91},{96,-99}},
           lineColor={0,0,255},
