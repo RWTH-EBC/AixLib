@@ -10,7 +10,7 @@ model Weather "Complex weather model"
   parameter String tableName = "wetter"
     "table name on file or in function usertab"                                     annotation(Dialog(group = "Properties of Weather Data"));
   parameter String fileName = "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt"
-    "file where matrix is stored"                                                                                                     annotation(Dialog(group = "Properties of Weather Data", __Dymola_loadSelector(filter = "Text files (*.txt);;Matlab files (*.mat)", caption = "Open file in which table is present")));
+    "file where matrix is stored"                                                                                                     annotation(Dialog(group = "Properties of Weather Data", loadSelector(filter = "Text files (*.txt);;Matlab files (*.mat)", caption = "Open file in which table is present")));
   parameter Real offset[:] = {0} "offsets of output signals" annotation(Dialog(group = "Properties of Weather Data"));
   parameter Modelica.Blocks.Types.Smoothness smoothness = Modelica.Blocks.Types.Smoothness.LinearSegments
     "Smoothness of table interpolation"                                                                                                     annotation(Dialog(group = "Properties of Weather Data"));
