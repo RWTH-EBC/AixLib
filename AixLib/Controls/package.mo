@@ -22,7 +22,7 @@ Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100.0,-100.0},{100.0,1
         points={{21.25,-35.0},{-13.75,-35.0},{-13.75,35.0},{6.25,35.0}}),
       Polygon(
         origin={-40.0,35.0},
-        pattern=LinePattern.None,
+        pattern=LinePattern.Solid,
         fillPattern=FillPattern.Solid,
         points={{10.0,0.0},{-5.0,5.0},{-5.0,-5.0}}),
       Line(
@@ -30,7 +30,7 @@ Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100.0,-100.0},{100.0,1
         points={{-21.25,35.0},{13.75,35.0},{13.75,-35.0},{-6.25,-35.0}}),
       Polygon(
         origin={40.0,-35.0},
-        pattern=LinePattern.None,
+        pattern=LinePattern.Solid,
         fillPattern=FillPattern.Solid,
         points={{-10.0,0.0},{5.0,5.0},{5.0,-5.0}})}));
 end Controls;

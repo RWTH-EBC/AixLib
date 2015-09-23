@@ -32,7 +32,7 @@ equation
   connect(infiltrationRate.y, reducedModel.ventilationRate) annotation(Line(points={{40.5,1},
           {40.5,13.5},{64.54,13.5},{64.54,28}},                                                                                           color = {0, 0, 127}, smooth = Smooth.None));
   connect(HeatToStar.Star, reducedModel.internalGainsRad) annotation(Line(points={{59.1,
-          -88},{83.75,-88},{83.75,28}},                                                                                      color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+          -88},{83.75,-88},{83.75,28}},                                                                                      color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
   connect(outdoorTemp.port, reducedModel.equalAirTemp) annotation(Line(points = {{-4, 49}, {26.5, 49}, {26.5, 46.8}, {57.4, 46.8}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(heatFlowSensor.port_a, varTemp.port) annotation(Line(points = {{24, -28}, {14, -28}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(setTemp.y[1], varTemp.T) annotation(Line(points = {{-41, -28}, {-8, -28}}, color = {0, 0, 127}, smooth = Smooth.None));

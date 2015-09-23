@@ -148,7 +148,7 @@ equation
   connect(infiltrationRate.port_b, airload.port) annotation(Line(points = {{-54, 56}, {-40, 56}, {-40, -40}, {-6, -40}, {-6, -12}, {1, -12}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(outside_wall1.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{-54, 5}, {-40, 5}, {-40, -40}, {-20.1, -40}, {-20.1, -35.4}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(inside_wall3.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{20, -56}, {20, -40}, {-20.1, -40}, {-20.1, -35.4}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(starRoom, thermStar_Demux.star) annotation(Line(points = {{20, 20}, {20, 4}, {-14.2, 4}, {-14.2, -15.6}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+  connect(starRoom, thermStar_Demux.star) annotation(Line(points = {{20, 20}, {20, 4}, {-14.2, 4}, {-14.2, -15.6}}, color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
   connect(thermRoom, thermStar_Demux.therm) annotation(Line(points = {{-20, 20}, {-20, 3}, {-25.1, 3}, {-25.1, -15.9}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(thermStar_Demux.therm, airload.port) annotation(Line(points = {{-25.1, -15.9}, {-25.1, -12}, {1, -12}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(NaturalVentilation.InPort1, AirExchangePort) annotation(Line(points = {{-67, -46.4}, {-80, -46.4}, {-80, -9}, {-100, -9}}, color = {0, 0, 127}, smooth = Smooth.None));

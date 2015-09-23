@@ -15,19 +15,19 @@ model EffectiveAirLeakageArea "Effective air leakage area"
         Rectangle(
           extent={{-50,48},{50,-42}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{-74,12},{-38,-14}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
         Text(
           extent={{-104,92},{-20,54}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           textString=
@@ -35,7 +35,7 @@ model EffectiveAirLeakageArea "Effective air leakage area"
         Text(
           extent={{22,94},{98,56}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           textString=
@@ -43,25 +43,25 @@ model EffectiveAirLeakageArea "Effective air leakage area"
         Rectangle(
           extent={{-100,6},{-64,-6}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillColor={0,127,0},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{22,6},{100,-6}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillColor={0,127,0},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{-70,4},{-52,-4}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillColor={0,127,0},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{-86,2},{-38,-2}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillColor={0,127,0},
           fillPattern=FillPattern.Solid)}),
 defaultComponentName="lea",

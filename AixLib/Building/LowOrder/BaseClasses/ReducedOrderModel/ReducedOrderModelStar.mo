@@ -18,7 +18,7 @@ equation
   connect(heatToStarWindow.Star, internalGainsRad) annotation (Line(
       points={{3.1,90},{12,90},{12,45},{80,45},{80,-90}},
       color={95,95,95},
-      pattern=LinePattern.None,
+      pattern=LinePattern.Solid,
       smooth=Smooth.None));
   end if;
 
@@ -31,7 +31,7 @@ equation
   connect(heatToStarOuterwall.Star, internalGainsRad) annotation (Line(
       points={{-46,37.1},{-14,37.1},{-14,37},{12,37},{12,45},{80,45},{80,-90}},
       color={95,95,95},
-      pattern=LinePattern.None,
+      pattern=LinePattern.Solid,
       smooth=Smooth.None));
 
   end if;
@@ -40,7 +40,7 @@ equation
       connect(heatToStarInnerwall.Star, internalGainsRad) annotation (Line(
       points={{50,37.1},{12,37.1},{12,45},{80,45},{80,-90}},
       color={95,95,95},
-      pattern=LinePattern.None,
+      pattern=LinePattern.Solid,
       smooth=Smooth.None));
   connect(heatToStarInnerwall.Therm, innerwall.port_a) annotation (Line(
       points={{50,18.8},{54,18.8},{54,-0.909091},{56,-0.909091}},

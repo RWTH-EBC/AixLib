@@ -14,7 +14,7 @@ equation
   connect(RadiationConvertor.Star, RadHeat) annotation (Line(
       points={{69.1,-60},{90,-60}},
       color={95,95,95},
-      pattern=LinePattern.None,
+      pattern=LinePattern.Solid,
       smooth=Smooth.None));
   connect(RadiativeHeat.port, RadiationConvertor.Therm) annotation (Line(
       points={{40,-10},{48,-10},{48,-60},{50.8,-60}},

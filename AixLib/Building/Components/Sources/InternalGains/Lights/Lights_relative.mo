@@ -33,7 +33,7 @@ equation
   connect(RadiationConvertor.Star, RadHeat) annotation (Line(
       points={{69.1,-60},{90,-60}},
       color={95,95,95},
-      pattern=LinePattern.None,
+      pattern=LinePattern.Solid,
       smooth=Smooth.None));
   connect(productHeatOutput.y, gain.u) annotation (Line(
       points={{-18.3,0},{-8,0},{-8,30},{3.2,30}},

@@ -144,19 +144,19 @@ equation
         Rectangle(
           extent={{-68,70},{74,-70}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillColor={95,95,95},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{-99,6},{102,-4}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillColor={0,0,255},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{2,-4},{102,6}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillColor={255,0,0},
           fillPattern=FillPattern.Solid),
         Text(

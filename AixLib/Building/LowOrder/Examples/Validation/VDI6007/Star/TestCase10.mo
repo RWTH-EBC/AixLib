@@ -48,7 +48,7 @@ equation
   referenceTemp = reference.y;
   simulationTemp = reducedModel.airload.port.T;
   connect(HeatTorStar.Star, reducedModel.internalGainsRad) annotation(Line(points={{75.1,
-          -90},{92,-90},{92,44.5},{92,44.5}},                                                                                        color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+          -90},{92,-90},{92,44.5},{92,44.5}},                                                                                        color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
   connect(personsConvective.port, reducedModel.internalGainsConv) annotation(Line(points={{40,-62},
           {78.8,-62},{78.8,44.5}},                                                                                               color = {191, 0, 0}, smooth = Smooth.None));
   connect(machinesConvective.port, reducedModel.internalGainsConv) annotation(Line(points={{40,-42},

@@ -15,7 +15,7 @@ equation
   connect(varTempRoom.port, human_SensibleHeat_VDI2078_1.TRoom) annotation(Line(points = {{-84, 52}, {-44, 52}, {-44, 29.4}, {-21.7, 29.4}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(sine.y, varTempRoom.T) annotation(Line(points = {{-69.4, 24}, {-54, 24}, {-54, 52}, {-62, 52}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(human_SensibleHeat_VDI2078_1.ConvHeat, fixedTemp.port) annotation(Line(points = {{19.7, 19}, {38.85, 19}, {38.85, 14}, {58, 14}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(human_SensibleHeat_VDI2078_1.RadHeat, fixedTemp.port) annotation(Line(points = {{19.7, 3.4}, {39.85, 3.4}, {39.85, 14}, {58, 14}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+  connect(human_SensibleHeat_VDI2078_1.RadHeat, fixedTemp.port) annotation(Line(points = {{19.7, 3.4}, {39.85, 3.4}, {39.85, 14}, {58, 14}}, color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
   connect(combiTimeTable.y[1], human_SensibleHeat_VDI2078_1.Schedule) annotation(Line(points = {{-61, -16}, {-42, -16}, {-42, 3.14}, {-21.93, 3.14}}, color = {0, 0, 127}, smooth = Smooth.None));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), experiment(StopTime = 86400), __Dymola_experimentSetupOutput, Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>

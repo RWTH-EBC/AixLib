@@ -19,7 +19,7 @@ equation
   connect(RadiationConvertor.Star, RadHeat) annotation (Line(
       points={{69.1,-60},{90,-60}},
       color={95,95,95},
-      pattern=LinePattern.None,
+      pattern=LinePattern.Solid,
       smooth=Smooth.None));
   connect(Schedule, gain.u) annotation (Line(
       points={{-100,0},{-20,0},{-20,30},{3.2,30}},

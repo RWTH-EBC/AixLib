@@ -151,7 +151,7 @@ equation
           64.25},{23,74},{-80,74},{-80,82},{-90,82},{-90,90}},                                                                                    color = {191, 0, 0}, smooth = Smooth.None));
   connect(Ceiling.port_outside, thermCeiling) annotation(Line(points={{-30,
           64.15},{-30,64.15},{-30,74},{84,74},{84,70},{90,70}},                                                                               color = {191, 0, 0}, smooth = Smooth.None));
-  connect(starRoom, thermStar_Demux.star) annotation(Line(points = {{20, 20}, {20, 4}, {-14.2, 4}, {-14.2, -15.6}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+  connect(starRoom, thermStar_Demux.star) annotation(Line(points = {{20, 20}, {20, 4}, {-14.2, 4}, {-14.2, -15.6}}, color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
   connect(outside_wall2.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{23,54},
           {23,54},{23,40},{-40,40},{-40,-40},{-20.1,-40},{-20.1,-35.4}},                                                                                                    color = {191, 0, 0}, smooth = Smooth.None));
   connect(inside_wall2.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{22,-56},

@@ -68,7 +68,7 @@ equation
         Rectangle(
           extent={{-80,60},{80,-100}},
           lineColor={0,0,0},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={170,213,255}),
         Ellipse(
@@ -86,7 +86,7 @@ equation
             100}}),            graphics={Rectangle(
           extent={{-80,60},{80,-100}},
           lineColor={0,0,0},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={170,213,255}), Ellipse(
           extent={{-50,30},{50,-70}},

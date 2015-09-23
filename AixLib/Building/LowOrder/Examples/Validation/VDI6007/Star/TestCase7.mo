@@ -45,7 +45,7 @@ equation
   connect(infiltrationRate.y, reducedModel.ventilationRate) annotation(Line(points={{42.5,
           -10},{54.54,-10},{54.54,40}},                                                                                      color = {0, 0, 127}, smooth = Smooth.None));
   connect(HeatToStar.Star, reducedModel.internalGainsRad) annotation(Line(points={{59.1,
-          -89},{72,-89},{72,40},{73.75,40}},                                                                                        color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+          -89},{72,-89},{72,40},{73.75,40}},                                                                                        color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
   connect(solarRadiation.y, reducedModel.solarRad_in) annotation (Line(
       points={{-25,72},{38,72},{38,86},{53.18,86},{53.18,76.8}},
       color={0,0,127},

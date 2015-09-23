@@ -16,7 +16,6 @@ model HeatConv_inside
     "Constant heat transfer coefficient" annotation (Dialog(descriptionLabel=true,
         enable=if calcMethod == 3 then true else false));
 
-
   // which orientation of surface?
   parameter Integer surfaceOrientation=1 "Surface orientation" annotation (
       Dialog(descriptionLabel=true, enable=if calcMethod == 3 then false else true),
@@ -66,19 +65,19 @@ equation
     // top side of horizontal plate
 // ------------------------------------------------------
   if surfaceOrientation == 2 then
-      alpha = 2*(posDiff^0.31);  // equation 1.27, page 26 (Bernd Glück: Heizen und Kühlen mit Niedrigexergie - Innovative Wärmeübertragung und Wärmespeicherung (LowEx) 2008)
+      alpha = 2*(posDiff^0.31);  // equation 1.27, page 26 (Bernd Glueck: Heizen und Kuehlen mit Niedrigexergie - Innovative Waermeuebertragung und Waermespeicherung (LowEx) 2008)
 
 // down side of horizontal plate
 // ------------------------------------------------------
 
   else
     if surfaceOrientation == 3 then
-       alpha = 0.54*(posDiff^0.31);  //equation 1.28, page 26 (Bernd Glück: Heizen und Kühlen mit Niedrigexergie - Innovative Wärmeübertragung und Wärmespeicherung (LowEx) 2008)
+       alpha = 0.54*(posDiff^0.31);  //equation 1.28, page 26 (Bernd Glueck: Heizen und Kuehlen mit Niedrigexergie - Innovative Waermeuebertragung und Waermespeicherung (LowEx) 2008)
 
 // vertical plate
 //-------------------------------------------------
     else
-      alpha = 1.6*(posDiff^0.3);  // equation 1.26 page 26 (Bernd Glück: Heizen und Kühlen mit Niedrigexergie - Innovative Wärmeübertragung und Wärmespeicherung (LowEx) 2008)
+      alpha = 1.6*(posDiff^0.3);  // equation 1.26 page 26 (Bernd Glueck: Heizen und Kuehlen mit Niedrigexergie - Innovative Waermeuebertragung und Waermespeicherung (LowEx) 2008)
     end if;
   end if;
   // ++++++++++++++++alpha_custom++++++++++++++++
@@ -103,31 +102,31 @@ equation
         Rectangle(
           extent={{60,60},{80,-100}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillColor={244,244,244},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{40,60},{60,-100}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillColor={207,207,207},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{20,60},{40,-100}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillColor={182,182,182},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{0,60},{20,-100}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillColor={156,156,156},
           fillPattern=FillPattern.Solid),
         Polygon(
           points={{80,60},{80,60},{60,20},{60,60},{80,60}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           lineThickness=0.5,
           smooth=Smooth.None,
           fillColor={157,166,208},
@@ -135,7 +134,7 @@ equation
         Polygon(
           points={{60,60},{60,20},{40,-20},{40,60},{60,60}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           lineThickness=0.5,
           smooth=Smooth.None,
           fillColor={102,110,139},
@@ -143,7 +142,7 @@ equation
         Polygon(
           points={{40,60},{40,-20},{20,-60},{20,60},{40,60}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           lineThickness=0.5,
           smooth=Smooth.None,
           fillColor={75,82,103},
@@ -151,7 +150,7 @@ equation
         Polygon(
           points={{20,60},{20,-60},{0,-100},{0,60},{20,60}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           lineThickness=0.5,
           smooth=Smooth.None,
           fillColor={51,56,70},
@@ -193,25 +192,25 @@ equation
         Rectangle(
           extent={{0,60},{20,-100}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillColor={156,156,156},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{20,60},{40,-100}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillColor={182,182,182},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{40,60},{60,-100}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillColor={207,207,207},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{60,60},{80,-100}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           fillColor={244,244,244},
           fillPattern=FillPattern.Solid),
         Rectangle(
@@ -223,7 +222,7 @@ equation
         Polygon(
           points={{80,60},{80,60},{60,20},{60,60},{80,60}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           lineThickness=0.5,
           smooth=Smooth.None,
           fillColor={157,166,208},
@@ -231,7 +230,7 @@ equation
         Polygon(
           points={{60,60},{60,20},{40,-20},{40,60},{60,60}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           lineThickness=0.5,
           smooth=Smooth.None,
           fillColor={102,110,139},
@@ -239,7 +238,7 @@ equation
         Polygon(
           points={{40,60},{40,-20},{20,-60},{20,60},{40,60}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           lineThickness=0.5,
           smooth=Smooth.None,
           fillColor={75,82,103},
@@ -247,7 +246,7 @@ equation
         Polygon(
           points={{20,60},{20,-60},{0,-100},{0,60},{20,60}},
           lineColor={0,0,255},
-          pattern=LinePattern.None,
+          pattern=LinePattern.Solid,
           lineThickness=0.5,
           smooth=Smooth.None,
           fillColor={51,56,70},

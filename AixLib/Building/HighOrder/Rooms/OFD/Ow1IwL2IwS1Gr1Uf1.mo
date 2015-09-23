@@ -128,7 +128,7 @@ equation
   connect(thermInsideWall3, thermInsideWall3) annotation(Line(points = {{30, -90}, {30, -90}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(GroundTemperature.y, Ground.T) annotation(Line(points = {{-39, -90}, {-30, -90}, {-30, -90}, {-24, -90}}, color = {0, 0, 127}, smooth = Smooth.None));
   connect(Tair.port, airload.port) annotation(Line(points = {{24, -13}, {24, -40}, {-6, -40}, {-6, -12}, {1, -12}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(starRoom, thermStar_Demux.star) annotation(Line(points = {{20, 20}, {20, 4}, {-14.2, 4}, {-14.2, -15.6}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+  connect(starRoom, thermStar_Demux.star) annotation(Line(points = {{20, 20}, {20, 4}, {-14.2, 4}, {-14.2, -15.6}}, color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
   connect(inside_wall2b.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{58, -17}, {40, -17}, {40, -40}, {-20.1, -40}, {-20.1, -35.4}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(inside_wall2a.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{58, 23}, {40, 23}, {40, -40}, {-20.1, -40}, {-20.1, -35.4}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(inside_wall1.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{23,54},

@@ -49,18 +49,18 @@ equation
       Line(
       points={{9,-57.8},{46,-57.8},{46,2},{58,2}},
       color={95,95,95},
-      pattern=LinePattern.None,
+      pattern=LinePattern.Solid,
       smooth=Smooth.None));
   connect(lights_sensibleHeat_simple.RadHeat, fixedTemp.port) annotation (
       Line(
       points={{9,52.2},{46,52.2},{46,2},{58,2}},
       color={95,95,95},
-      pattern=LinePattern.None,
+      pattern=LinePattern.Solid,
       smooth=Smooth.None));
   connect(lights.RadHeat, fixedTemp.port) annotation (Line(
       points={{9,-5.8},{46,-5.8},{46,2},{58,2}},
       color={95,95,95},
-      pattern=LinePattern.None,
+      pattern=LinePattern.Solid,
       smooth=Smooth.None));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{

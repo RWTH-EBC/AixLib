@@ -133,7 +133,7 @@ equation
   connect(inside_wall1a.port_outside, thermInsideWall1a) annotation(Line(points = {{62.1, 19}, {84, 19}, {84, 20}, {90, 20}, {90, 10}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(airload.port, Tair.port) annotation(Line(points = {{1, -12}, {-6, -12}, {-6, -40}, {22, -40}, {22, -13}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(thermRoom, thermStar_Demux.therm) annotation(Line(points = {{-20, 20}, {-20, 6}, {-25.1, 6}, {-25.1, -15.9}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(starRoom, thermStar_Demux.star) annotation(Line(points = {{20, 20}, {20, 4}, {-14.2, 4}, {-14.2, -15.6}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
+  connect(starRoom, thermStar_Demux.star) annotation(Line(points = {{20, 20}, {20, 4}, {-14.2, 4}, {-14.2, -15.6}}, color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
   connect(infiltrationRate.port_a, thermOutside) annotation(Line(points = {{-72, 46}, {-80, 46}, {-80, 82}, {-90, 82}, {-90, 90}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(outside_wall1.port_outside, thermOutside) annotation(Line(points = {{-64.25, 4}, {-80, 4}, {-80, 82}, {-90, 82}, {-90, 90}}, color = {191, 0, 0}, smooth = Smooth.None));
   connect(outside_wall2.port_outside, thermOutside) annotation(Line(points = {{-25, 64.3}, {-25, 74}, {-80, 74}, {-80, 82}, {-90, 82}, {-90, 90}}, color = {191, 0, 0}, smooth = Smooth.None));
