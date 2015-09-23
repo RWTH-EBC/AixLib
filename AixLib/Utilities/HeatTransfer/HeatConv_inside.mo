@@ -16,7 +16,6 @@ model HeatConv_inside
     "Constant heat transfer coefficient" annotation (Dialog(descriptionLabel=true,
         enable=if calcMethod == 3 then true else false));
 
-
   // which orientation of surface?
   parameter Integer surfaceOrientation=1 "Surface orientation" annotation (
       Dialog(descriptionLabel=true, enable=if calcMethod == 3 then false else true),
@@ -66,19 +65,19 @@ equation
     // top side of horizontal plate
 // ------------------------------------------------------
   if surfaceOrientation == 2 then
-      alpha = 2*(posDiff^0.31);  // equation 1.27, page 26 (Bernd Gl�ck: Heizen und K�hlen mit Niedrigexergie - Innovative W�rme�bertragung und W�rmespeicherung (LowEx) 2008)
+      alpha = 2*(posDiff^0.31);  // equation 1.27, page 26 (Bernd Glueck: Heizen und Kuehlen mit Niedrigexergie - Innovative Waermeuebertragung und Waermespeicherung (LowEx) 2008)
 
 // down side of horizontal plate
 // ------------------------------------------------------
 
   else
     if surfaceOrientation == 3 then
-       alpha = 0.54*(posDiff^0.31);  //equation 1.28, page 26 (Bernd Gl�ck: Heizen und K�hlen mit Niedrigexergie - Innovative W�rme�bertragung und W�rmespeicherung (LowEx) 2008)
+       alpha = 0.54*(posDiff^0.31);  //equation 1.28, page 26 (Bernd Glueck: Heizen und Kuehlen mit Niedrigexergie - Innovative Waermeuebertragung und Waermespeicherung (LowEx) 2008)
 
 // vertical plate
 //-------------------------------------------------
     else
-      alpha = 1.6*(posDiff^0.3);  // equation 1.26 page 26 (Bernd Gl�ck: Heizen und K�hlen mit Niedrigexergie - Innovative W�rme�bertragung und W�rmespeicherung (LowEx) 2008)
+      alpha = 1.6*(posDiff^0.3);  // equation 1.26 page 26 (Bernd Glueck: Heizen und Kuehlen mit Niedrigexergie - Innovative Waermeuebertragung und Waermespeicherung (LowEx) 2008)
     end if;
   end if;
   // ++++++++++++++++alpha_custom++++++++++++++++

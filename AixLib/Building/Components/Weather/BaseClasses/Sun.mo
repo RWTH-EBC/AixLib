@@ -49,7 +49,7 @@ equation
     "the difference between the UTC and the time standard is given by DiffWeatherDataTime and Diff_lokalStandardTime Longitude";
 
 // hour angle of sun, first term calculates local time of day from continuous time signal
-      HourAngleSun = (SolarTime-12) * 360/24 "HourAngleSun=0ï¿½ means sun peak";
+      HourAngleSun = (SolarTime-12) * 360/24 "HourAngleSun=0° means sun peak";
       if (HourAngleSun > 180) then
         OutHourAngleSun = HourAngleSun - 360;
       elseif (HourAngleSun < -180) then

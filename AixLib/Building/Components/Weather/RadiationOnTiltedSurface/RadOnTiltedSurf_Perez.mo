@@ -20,7 +20,7 @@ model RadOnTiltedSurf_Perez
 //constants
 protected
   constant Real a_rho=0.45
-    "estimated on measured Albedo from NREL USA (Latitude=39.742ï¿½)";
+    "estimated on measured Albedo from NREL USA (Latitude=39.742°)";
   constant Real b_rho=0.013 "estimated on measured Albedo from NREL USA";
   constant Real c_rho=0.2 "estimated on measured Albedo from NREL USA";
   constant Real rho_avg=1/0.27055
@@ -176,7 +176,7 @@ equation
     cos_theta = (cos_theta_help + abs(cos_theta_help))/2;
     theta_out = to_deg(acos(cos_theta));
 
-    // calculation of R factor [Duffie/Beckman, p.25], but in order not to divide by zero it is determined like a/b in the Model of Perez [Duffie/Beckman, p.94] where the minimum b is set to cos(85ï¿½);
+    // calculation of R factor [Duffie/Beckman, p.25], but in order not to divide by zero it is determined like a/b in the Model of Perez [Duffie/Beckman, p.94] where the minimum b is set to cos(85°);
             // R is manually set to 0 for theta_z_pos >= 80 degrees (-> 90 degrees means sunset)__old solution for the numerical problems of dividing by zero;
             //if noEvent(cos_theta_z <= 0.08715574274) then
             //  R_help = cos_theta_z*cos_theta;
