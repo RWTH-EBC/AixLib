@@ -65,9 +65,9 @@ equation
   connect(Wall_Ceiling.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{110,60},
           {110,44},{46,44},{46,-24},{3.9,-24},{3.9,-15.4}},                                                                                                    color = {191, 0, 0}, smooth = Smooth.None));
   connect(thermStar_Demux.therm, airload.port) annotation(Line(points = {{-1.1, 4.1}, {-1.1, 12}, {-12, 12}, {-12, 4}, {-19, 4}}, color = {191, 0, 0}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -150}, {150, 100}}, initialScale = 0.1), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}, initialScale = 0.1), graphics={  Rectangle(extent=  {{-68, 74}, {134, -128}}, lineColor=  {0, 0, 255}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-66, 10}, {126, -48}}, lineColor=  {0, 0, 255}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Solid, textString=  "Cellar")}), Documentation(revisions = "<html>
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -150}, {150, 100}}, initialScale = 0.1), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}, initialScale = 0.1), graphics={  Rectangle(extent = {{-68, 74}, {134, -128}}, lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-66, 10}, {126, -48}}, lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "Cellar")}), Documentation(revisions = "<html>
  <ul>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
  <li><i>August 17, 2011</i> by Ana Constantin:<br/>Implemented</li>

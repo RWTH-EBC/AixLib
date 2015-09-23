@@ -3,7 +3,7 @@ package BuildingEnvelope
   extends Modelica.Icons.Package;
 
   model OneAppartment_VoWo
-    parameter Integer TMC = 1 "Themal Mass Class" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1 "S", choice = 2 "M", choice = 3 "L", radioButtons = true));
+    parameter Integer TMC = 1 "Themal Mass Class" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1 "Heavy", choice = 2 "Medium", choice = 3 "Light", radioButtons = true));
     parameter Integer TIR = 4 "Thermal Insulation Regulation" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1
           "EnEV_2009",                                                                                                    choice = 2
           "EnEV_2002",                                                                                                    choice = 3
@@ -73,7 +73,7 @@ package BuildingEnvelope
             -64.9412,48.5333},{-80,48.5333},{-80,-47.6},{-64,-47.6}},                                                                                     color = {191, 0, 0}, smooth = Smooth.None));
     connect(Corridor.thermLivingroom, Livingroom.thermCorridor) annotation(Line(points={{21.696,
             13.84},{18,13.84},{18,-20},{36,-20},{36,-80},{-80,-80},{-80,43.3333},
-            {-64.9412,43.3333}},                                                                                                    color = {191, 0, 0}, smooth = Smooth.None));
+            {-64.9412,43.3333}},                                                                                                   color = {191, 0, 0}, smooth = Smooth.None));
     connect(Livingroom.thermChildren, Children.thermLivingroom) annotation(Line(points={{
             -64.9412,38.1333},{-80,38.1333},{-80,90},{20,90},{20,48.64},{36,
             48.64}},                                                                                                    color = {191, 0, 0}, smooth = Smooth.None));
