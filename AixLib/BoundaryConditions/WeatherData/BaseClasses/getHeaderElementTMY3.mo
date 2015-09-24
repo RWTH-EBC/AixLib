@@ -3,7 +3,7 @@ function getHeaderElementTMY3
   "Gets an element from the header of a TMY3 weather data file"
  input String filNam "Name of weather data file"
  annotation (Dialog(
-        __Dymola_loadSelector(filter="Weather files (*.mos)", caption=
+        loadSelector(filter="Weather files (*.mos)", caption=
             "Select weather file")));
  input String start "Start of the string that contains the elements";
  input String name "Name of data element, used in error reporting";

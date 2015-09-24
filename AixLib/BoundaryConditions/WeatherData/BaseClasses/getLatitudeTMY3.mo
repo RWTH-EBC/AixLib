@@ -2,7 +2,7 @@ within AixLib.BoundaryConditions.WeatherData.BaseClasses;
 function getLatitudeTMY3 "Gets the latitude from a TMY3 weather data file"
  input String filNam "Name of weather data file"
  annotation (Dialog(
-        __Dymola_loadSelector(filter="Weather files (*.mos)", caption=
+        loadSelector(filter="Weather files (*.mos)", caption=
             "Select weather file")));
  output Modelica.SIunits.Angle lat "Latitude from the weather file";
 protected
