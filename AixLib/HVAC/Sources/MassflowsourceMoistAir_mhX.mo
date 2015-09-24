@@ -5,11 +5,11 @@ model MassflowsourceMoistAir_mhX
   "boundary for Moist Air, massflow, enthalpy, water fraction"
   outer BaseParameters baseParameters "System properties";
   parameter Boolean use_m_in = false
-    "Get the massflow of dry air from the input connector"                                  annotation(Evaluate = true, HideResult = true, choices(__Dymola_checkBox = true));
+    "Get the massflow of dry air from the input connector"                                  annotation(Evaluate = true, HideResult = true, choices(checkBox = true));
   parameter Boolean use_h_in = false
-    "Get the specific enthalpy per mass dry air from the input connector"                                  annotation(Evaluate = true, HideResult = true, choices(__Dymola_checkBox = true));
+    "Get the specific enthalpy per mass dry air from the input connector"                                  annotation(Evaluate = true, HideResult = true, choices(checkBox = true));
   parameter Boolean use_X_in = false
-    "Get the water mass fraction per mass dry air from the input connector"                                  annotation(Evaluate = true, HideResult = true, choices(__Dymola_checkBox = true));
+    "Get the water mass fraction per mass dry air from the input connector"                                  annotation(Evaluate = true, HideResult = true, choices(checkBox = true));
   parameter Modelica.SIunits.MassFlowRate m = 0.01
     "Fixed value of mass flow of dry air "                                                annotation(Evaluate = true, Dialog(enable = not use_p_in));
   parameter Modelica.SIunits.SpecificEnthalpy h = 1e4

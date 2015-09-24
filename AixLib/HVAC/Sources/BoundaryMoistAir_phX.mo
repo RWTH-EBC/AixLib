@@ -3,11 +3,11 @@ model BoundaryMoistAir_phX
   "boundary for Moist Air, pressure, enthalpy, water fraction"
   outer BaseParameters baseParameters "System properties";
   parameter Boolean use_p_in = false
-    "Get the pressure from the input connector"                                  annotation(Evaluate = true, HideResult = true, choices(__Dymola_checkBox = true));
+    "Get the pressure from the input connector"                                  annotation(Evaluate = true, HideResult = true, choices(checkBox = true));
   parameter Boolean use_h_in = false
-    "Get the specific enthalpy from the input connector"                                  annotation(Evaluate = true, HideResult = true, choices(__Dymola_checkBox = true));
+    "Get the specific enthalpy from the input connector"                                  annotation(Evaluate = true, HideResult = true, choices(checkBox = true));
   parameter Boolean use_X_in = false
-    "Get the water mass fraction per mass dry air from the input connector"                                  annotation(Evaluate = true, HideResult = true, choices(__Dymola_checkBox = true));
+    "Get the water mass fraction per mass dry air from the input connector"                                  annotation(Evaluate = true, HideResult = true, choices(checkBox = true));
   parameter Modelica.SIunits.Pressure p = 1e5 "Fixed value of pressure" annotation(Evaluate = true, Dialog(enable = not use_p_in));
   parameter Modelica.SIunits.SpecificEnthalpy h = 1e4
     "Fixed value of specific enthalpy as energy per mass dry air"                                                   annotation(Evaluate = true, Dialog(enable = not use_h_in));
