@@ -28,7 +28,7 @@ model Weather "Complex weather model"
   parameter
     DataBase.Weather.SurfaceOrientation.SurfaceOrientationBaseDataDefinition         SOD = DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor()
     "Surface orientation data"                                                                                                     annotation(Dialog(group = "Solar radiation on oriented surfaces", descriptionLabel = true), choicesAllMatching = true);
-  Utilities.Interfaces.SolarRad_out SolarRadiation_OrientedSurfaces[size(RadOnTiltedSurf, 1)] annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin={50,96}),    iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-78, -110})));
+  Utilities.Interfaces.SolarRad_out SolarRadiation_OrientedSurfaces[SOD.nSurfaces] annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin={50,96}),    iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-78, -110})));
   parameter Integer Outopt = 2 "Output options" annotation(Dialog(tab = "Optional output vector", compact = true, descriptionLabel = true), choices(choice = 1
         "one vector",                                                                                                    choice = 2
         "individual vectors",                                                                                                    radioButtons = true));
