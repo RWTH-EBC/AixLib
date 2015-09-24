@@ -29,7 +29,7 @@ model TestCase7
         300.15; 54000,300.15,300.15; 57600,300.15,300.15; 61200,300.15,300.15; 64800,
         300.15,300.15; 68400,295.15,295.15; 72000,295.15,295.15; 75600,295.15,295.15;
         79200,295.15,295.15; 82800,295.15,295.15; 86400,295.15,295.15])                                                                                                     annotation(Placement(transformation(extent = {{-80, -30}, {-60, -10}})));
-  Modelica.Blocks.Sources.CombiTimeTable reference(tableName = "NoName", fileName = "NoName", tableOnFile = false, columns = {2, 3},                                                                                                    extrapolation = Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
+  Modelica.Blocks.Sources.CombiTimeTable reference( tableOnFile = false, columns = {2, 3},                                                                                                    extrapolation = Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
     table=[3600,22,0; 7200,22,0; 10800,22,0; 14400,22,0; 18000,22,0; 21600,22,0;
         25200,25.5,-500; 28800,25.8,-500; 32400,26.1,-500; 36000,26.5,-500; 39600,
         26.8,-500; 43200,27,-481; 46800,27,-426; 50400,27,-374; 54000,27,-324; 57600,
