@@ -9,14 +9,14 @@ parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = 
   ThermalZone thermalZone(zoneParam = AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_1_Meeting()) annotation(Placement(transformation(extent = {{-10, -12}, {16, 14}})));
   Components.Weather.Weather weather(                                                                                           Air_temp = true, Sky_rad = true, Ter_rad = true, Outopt = 1,
     fileName=
-        "D:/GIT/AixLib/AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt",
+        "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt",
     WeatherData(tableOnFile=false, table=weatherDataDay.weatherData))                                                                                                     annotation(Placement(transformation(extent = {{-60, 42}, {-30, 62}})));
 
   AixLib.HVAC.HeatGeneration.IdealHeaterCooler         idealHeaterCooler
     annotation (Placement(transformation(extent={{-22,-52},{-2,-32}})));
   Modelica.Blocks.Sources.Constant infiltrationRate(k = 1) annotation(Placement(transformation(extent = {{-88, -32}, {-74, -18}})));
   Modelica.Blocks.Sources.Constant infiltrationTemperature(k = 288.15) annotation(Placement(transformation(extent = {{-88, -10}, {-74, 4}})));
-  Modelica.Blocks.Sources.CombiTimeTable internalGains(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic,                     tableName = "UserProfiles", fileName = "modelica://AixLib/Resources/LowOrder_ExampleData/UserProfiles_18599_SIA_Besprechung_Sitzung_Seminar.txt", columns = {2, 3, 4},
+  Modelica.Blocks.Sources.CombiTimeTable internalGains(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableName = "UserProfiles", fileName = Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/UserProfiles_18599_SIA_Besprechung_Sitzung_Seminar.txt"), columns = {2, 3, 4},
     tableOnFile=false,
     table=[0,0,0.1,0,0; 3540,0,0.1,0,0; 3600,0,0.1,0,0; 7140,0,0.1,0,0; 7200,0,
         0.1,0,0; 10740,0,0.1,0,0; 10800,0,0.1,0,0; 14340,0,0.1,0,0; 14400,0,0.1,
@@ -100,7 +100,7 @@ parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = 
         0,0,0,0; 583200,0,0,0,0; 586740,0,0,0,0; 586800,0,0,0,0; 590340,0,0,0,0;
         590400,0,0,0,0; 593940,0,0,0,0; 594000,0,0,0,0; 597540,0,0,0,0; 597600,
         0,0,0,0; 601140,0,0,0,0; 601200,0,0,0,0; 604740,0,0,0,0])                                                                                                     annotation(Placement(transformation(extent = {{14, -71}, {28, -57}})));
-  Modelica.Blocks.Sources.CombiTimeTable heatingCooling(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableName = "UserProfilesHeat", fileName = "modelica://AixLib/Resources/LowOrder_ExampleData/UserProfilesHeatSimple.txt", columns = {2, 3}, tableOnFile = false, table = [0, 295.15, 295.2; 3600, 295.1, 295.2; 7200, 295.1, 295.2; 10800, 295.1, 295.2; 14400, 295.1, 295.2; 18000, 295.1, 295.2; 21600, 295.1, 295.2; 25200, 300.1, 300.2; 28800, 300.1, 300.2; 32400, 300.1, 300.2; 36000, 300.1, 300.2; 39600, 300.1, 300.2; 43200, 300.1, 300.2; 46800, 300.1, 300.2; 50400, 300.1, 300.2; 54000, 300.1, 300.2; 57600, 300.1, 300.2; 61200, 300.1, 300.2; 64800, 300.1, 300.2; 68400, 295.1, 295.2; 72000, 295.1, 295.2; 75600, 295.1, 295.2; 79200, 295.1, 295.2; 82800, 295.1, 295.2; 86400, 295.1, 295.2]) annotation(Placement(transformation(extent = {{-56, -75}, {-42, -61}})));
+  Modelica.Blocks.Sources.CombiTimeTable heatingCooling(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableName = "UserProfilesHeat", fileName = Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/UserProfilesHeatSimple.txt"), columns = {2, 3}, tableOnFile = false, table = [0, 295.15, 295.2; 3600, 295.1, 295.2; 7200, 295.1, 295.2; 10800, 295.1, 295.2; 14400, 295.1, 295.2; 18000, 295.1, 295.2; 21600, 295.1, 295.2; 25200, 300.1, 300.2; 28800, 300.1, 300.2; 32400, 300.1, 300.2; 36000, 300.1, 300.2; 39600, 300.1, 300.2; 43200, 300.1, 300.2; 46800, 300.1, 300.2; 50400, 300.1, 300.2; 54000, 300.1, 300.2; 57600, 300.1, 300.2; 61200, 300.1, 300.2; 64800, 300.1, 300.2; 68400, 295.1, 295.2; 72000, 295.1, 295.2; 75600, 295.1, 295.2; 79200, 295.1, 295.2; 82800, 295.1, 295.2; 86400, 295.1, 295.2]) annotation(Placement(transformation(extent = {{-56, -75}, {-42, -61}})));
 equation
   TRoom = thermalZone.thermalZonePhysics.reducedOrderModel.airload.T;
   heatDemand = idealHeaterCooler.heatMeter.q_kwh;
