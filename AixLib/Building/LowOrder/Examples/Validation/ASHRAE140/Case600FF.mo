@@ -24,14 +24,14 @@ model Case600FF
     tableName="Table",
     columns={2,3},
     fileName=
-        "D:/Git/AixLib/AixLib/Resources/WeatherData/Weatherdata_ASHARE140.mat")
+        Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/WeatherData/Weatherdata_ASHARE140.mat"))
     annotation (Placement(transformation(extent={{-100,0},{-80,20}})));
   Modelica.Blocks.Sources.CombiTimeTable Source_Weather(
     tableOnFile=true,
     columns={2,3,4},
     tableName="Table",
     fileName=
-        "D:/Git/AixLib/AixLib/Resources/WeatherData/WeatherData_Ashrae140_LOM.mat")
+        Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/WeatherData/WeatherData_Ashrae140_LOM.mat"))
     annotation (Placement(transformation(extent={{-100,30},{-80,50}})));
 
     Utilities.Sources.HourOfDay hourOfDay
