@@ -12,7 +12,7 @@ model TestCase4
     R1o=0.004049352,
     C1o=4.79e+004,
     alphaiwi=2.23642384)                                                                                                     annotation(Placement(transformation(extent = {{10, 10}, {44, 44}})));
-  Modelica.Blocks.Sources.CombiTimeTable tableMachines(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableName = "UserProfilesOffice", fileName = "./Tables/J1615/UserProfilesOffice.txt", tableOnFile = false,                                                                                                    columns = {2},
+  Modelica.Blocks.Sources.CombiTimeTable tableMachines(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic,  tableOnFile = false,                                                                                                    columns = {2},
     table=[0,0; 3600,0; 3600,0; 7200,0; 7200,0; 10800,0; 10800,0; 14400,0; 14400,
         0; 18000,0; 18000,0; 21600,0; 21600,1000; 25200,1000; 25200,1000; 28800,
         1000; 28800,1000; 32400,1000; 32400,1000; 36000,1000; 36000,1000; 39600,
@@ -21,7 +21,7 @@ model TestCase4
         1000; 61200,1000; 64800,1000; 64800,0; 68400,0; 68400,0; 72000,0; 72000,
         0; 75600,0; 75600,0; 79200,0; 79200,0; 82800,0; 82800,0; 86400,0])                                                                                                     annotation(Placement(transformation(extent = {{-22, -65}, {-8, -51}})));
   Utilities.HeatTransfer.HeatToStar HeatToStar(A = 2, eps = 1) annotation(Placement(transformation(extent = {{36, -68}, {56, -48}})));
-  Modelica.Blocks.Sources.CombiTimeTable reference(tableName = "UserProfilesOffice", fileName = "./Tables/J1615/UserProfilesOffice.txt", tableOnFile = false, columns = {2},                                                                                                    extrapolation = Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
+  Modelica.Blocks.Sources.CombiTimeTable reference( tableOnFile = false, columns = {2},                                                                                                    extrapolation = Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
     table=[3600,22; 7200,22; 10800,22; 14400,22; 18000,22; 21600,22; 25200,
         25.1; 28800,25.7; 32400,26.1; 36000,26.5; 39600,26.9; 43200,27.3;
         46800,27.7; 50400,28.1; 54000,28.5; 57600,28.9; 61200,29.3; 64800,
