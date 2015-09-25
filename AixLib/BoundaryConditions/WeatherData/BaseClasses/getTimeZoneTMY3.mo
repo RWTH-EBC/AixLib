@@ -2,7 +2,7 @@ within AixLib.BoundaryConditions.WeatherData.BaseClasses;
 function getTimeZoneTMY3 "Gets the time zone from a TMY3 weather data file"
  input String filNam "Name of weather data file"
  annotation (Dialog(
-        __Dymola_loadSelector(filter="Weather files (*.mos)", caption=
+        loadSelector(filter="Weather files (*.mos)", caption=
             "Select weather file")));
  output Modelica.SIunits.Time timZon "Time zone from the weather file";
 protected

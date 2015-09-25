@@ -24,7 +24,7 @@ equation
   Q_flow[1] = heatConv.port_b.Q_flow;
   Q_flow[2] = load.port.Q_flow;
   Q_flow[3] = heatCond.port_b.Q_flow;
-  Q_flow[4] = heatConv_universal.port_b.Q_flow;
+  Q_flow[4] = heatConv_inside.port_b.Q_flow;
   Q_flow[5] = heatTransfer_Outside.port_b.Q_flow;
   Q_flow[6] = heatTrans.port_b.Q_flow;
   connect(TempOutside.port, load.port) annotation(Line(points = {{-60, 10}, {-40, 10}, {-40, 20}, {0, 20}}, color = {191, 0, 0}, smooth = Smooth.None));
@@ -53,10 +53,17 @@ equation
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>Simple test to calculate the heat flux through the different conduction and convection models.</p>
  <p>Boundary conditions can be given by 2 different temperatur values on each side of the model. Models with additional inputs (e.g. variable thermal conductivity, wind speed, ...) will be given preferably alternating input values, for example customized sine values.</p>
- </html>", revisions = "<html>
- <ul>
- <li><i>April 16, 2013&nbsp;</i> by Ole Odendahl:<br/>Implemented, added documentation and formatted appropriately</li>
- </ul>
- </html>
+ </html>", revisions="<html>
+<ul>
+<li>
+September 25, 2015 by Marcus Fuchs:<br/>
+Fixed unknown variable problem for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/115\">#115</a>
+</li>
+<li>
+April 16, 2013, by Ole Odendahl:<br/>
+Implemented, added documentation and formatted appropriately
+</li>
+</ul>
+</html>
  "), experiment(StopTime = 100, __Dymola_Algorithm = "Dassl"), __Dymola_experimentSetupOutput);
 end HeatTransfer_test;
