@@ -6,7 +6,7 @@ model FanSimple "Simple Fan Model"
   parameter AixLib.DataBase.Fans.FanCharacteristicsBaseDataDefinition Characteristics = AixLib.DataBase.Fans.Fan1()
     "dp = f(V_flow)  characteristics for the Fan (n = const)"                                                                                                     annotation(choicesAllMatching = true);
   parameter Boolean UseRotationalSpeedInput = false
-    "If true, rotational speed (n/n_0) can be varied by real input"                                                 annotation(Evaluate = true, HideResult = true, choices(__Dymola_checkBox = true));
+    "If true, rotational speed (n/n_0) can be varied by real input"                                                 annotation(Evaluate = true, HideResult = true, choices(checkBox = true));
   Modelica.SIunits.VolumeFlowRate Volflow(min = 0) "Volume Flow before Fan";
   Modelica.SIunits.Pressure PressureIncrease(min = 0)
     "Pressure Increase of Fan";
