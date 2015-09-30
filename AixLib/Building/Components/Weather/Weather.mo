@@ -50,7 +50,7 @@ model Weather "Complex weather model"
     Latitude=Latitude,
     DiffWeatherDataTime=DiffWeatherDataTime) annotation (Placement(
         transformation(extent={{-62,18},{-38,42}}, rotation=0)));
-  RadOnTiltedSurface RadOnTiltedSurf[SOD.nSurfaces](each Latitude = Latitude, each GroundReflection = GroundReflection, Azimut = SOD.Azimut, Tilt = SOD.Tilt, WeatherFormat=1) annotation(Placement(transformation(extent = {{-2, 18}, {22, 42}}, rotation = 0)));
+  RadOnTiltedSurface RadOnTiltedSurf[SOD.nSurfaces](each Latitude = Latitude, each GroundReflection = GroundReflection, Azimut = SOD.Azimut, Tilt = SOD.Tilt, each WeatherFormat=1) annotation(Placement(transformation(extent = {{-2, 18}, {22, 42}}, rotation = 0)));
   Modelica.Blocks.Sources.CombiTimeTable WeatherData(fileName = Modelica.Utilities.Files.loadResource(fileName), columns = columns, offset = offset, table = [0, 0; 1, 1], startTime = scalar(startTime), tableName = tableName, tableOnFile = tableName <> "NoName", smoothness = smoothness, extrapolation = extrapolation) annotation(Placement(transformation(extent = {{-60, -70}, {-40, -50}}, rotation = 0)));
   Modelica.Blocks.Routing.DeMultiplex3 deMultiplex(n3 = 9) annotation(Placement(transformation(extent = {{-26, -70}, {-6, -50}}, rotation = 0)));
   Modelica.Blocks.Interfaces.RealOutput WeatherDataVector[m] if Outopt == 1 and (Cloud_cover or Wind_dir or Wind_speed or Air_temp or Air_press or Mass_frac or Rel_hum or Sky_rad or Ter_rad) annotation(Placement(transformation(origin = {-1, -110}, extent = {{-10, -10}, {10, 10}}, rotation = 270)));
