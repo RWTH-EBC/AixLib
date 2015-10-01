@@ -6,7 +6,7 @@ partial model PartialCorG
 
 public
   Utilities.Interfaces.SolarRad_in SR_input[n] annotation (Placement(
-        transformation(extent={{-122,-20},{-80,20}},rotation=0),
+        transformation(extent={{-122,-20},{-80,20}}),
         iconTransformation(
         extent={{18,-19},{-18,19}},
         rotation=180,
@@ -15,8 +15,7 @@ public
     "transmitted solar radiation through window"
     annotation (Placement(transformation(extent={{80,-10},{100,10}}),
         iconTransformation(extent={{80,-10},{100,10}})));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}), graphics), Icon(coordinateSystem(
+  annotation ( Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={
         Rectangle(
           extent={{-80,80},{80,-80}},

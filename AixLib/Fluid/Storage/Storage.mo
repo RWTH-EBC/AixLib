@@ -65,7 +65,6 @@ model Storage
     each dx=dx,
     each kappa=kappa)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=0,
         origin={-28,0})));
 protected
   parameter Modelica.SIunits.Volume V = A * h;
@@ -77,12 +76,10 @@ equation
   //Connect layers to the upper and lower ports
   connect(port_a_consumer, layer[1].ports[1]) annotation (Line(
       points={{0,-98},{0,-34},{20,-34},{20,-2},{10,-2}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(layer[n].ports[2], port_b_consumer) annotation (Line(
       points={{10,2},{16,2},{20,2},{20,40},{0,40},{0,92}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
 
   //Connect layers
   for k in 1:n - 1 loop
@@ -96,12 +93,10 @@ equation
   //Connect layers of Heat Exchanger
   connect(port_a_heatGenerator, layer_HE[n].ports[2]) annotation (Line(
       points={{84,88},{84,36},{96,22},{94,2}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(port_b_heatGenerator, layer_HE[1].ports[1]) annotation (Line(
       points={{84,-88},{84,-26},{96,-16},{94,-2}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   for k in 1:n - 1 loop
     connect(layer_HE[k].ports[2], layer_HE[k + 1].ports[1]);
   end for;
@@ -115,15 +110,14 @@ equation
     connect(bouyancy[k].port_a, layer[k + 1].heatPort);
     connect(bouyancy[k].port_b, layer[k].heatPort);
   end for;
-  connect(heatPort, heatPort) annotation(Line(points = {{-106, 0}, {-106, 0}}, color = {191, 0, 0}, smooth = Smooth.None));
+  connect(heatPort, heatPort) annotation(Line(points = {{-106, 0}, {-106, 0}}, color = {191, 0, 0}));
 
-  annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-            -100},{100,100}}),                                                                           graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points=  {{-154, 3}, {-136, -7}, {-110, -3}, {-84, -7}, {-48, -5}, {-18, -9}, {6, -3}, {6, -41}, {-154, -41}, {-154, 3}}, lineColor=  {0, 0, 255}, pattern=  LinePattern.Solid, smooth=  Smooth.None, fillColor=  {0, 0, 255},
-            fillPattern=                                                                                                    FillPattern.Solid, origin=  {78, -59}, rotation=  360), Polygon(points=  {{-154, 3}, {-134, -3}, {-110, 1}, {-84, -1}, {-56, -5}, {-30, -11}, {6, -3}, {6, -41}, {-154, -41}, {-154, 3}}, lineColor=  {0, 0, 255}, pattern=  LinePattern.Solid, smooth=  Smooth.None, fillColor=  {14, 110, 255},
+  annotation( Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points=  {{-154, 3}, {-136, -7}, {-110, -3}, {-84, -7}, {-48, -5}, {-18, -9}, {6, -3}, {6, -41}, {-154, -41}, {-154, 3}}, lineColor=  {0, 0, 255}, pattern=  LinePattern.Solid, fillColor=  {0, 0, 255},
+            fillPattern=                                                                                                    FillPattern.Solid, origin=  {78, -59}, rotation=  360), Polygon(points=  {{-154, 3}, {-134, -3}, {-110, 1}, {-84, -1}, {-56, -5}, {-30, -11}, {6, -3}, {6, -41}, {-154, -41}, {-154, 3}}, lineColor=  {0, 0, 255}, pattern=  LinePattern.Solid, fillColor=  {14, 110, 255},
             fillPattern=                                                                                                    FillPattern.Solid, origin=  {78, -27}, rotation=  360), Rectangle(extent=  {{-80, -71}, {80, 71}}, lineColor=  {0, 0, 255}, pattern=  LinePattern.Solid, fillColor=  {85, 170, 255},
-            fillPattern=                                                                                                    FillPattern.Solid, origin=  {4, 1}, rotation=  360), Polygon(points=  {{-24, -67}, {-16, -67}, {-8, -67}, {4, -67}, {12, -67}, {36, -67}, {76, -67}, {110, -67}, {136, -67}, {136, 39}, {-24, 35}, {-24, -67}}, lineColor=  {0, 0, 255}, pattern=  LinePattern.Solid, smooth=  Smooth.None, fillColor=  {170, 213, 255},
-            fillPattern=                                                                                                    FillPattern.Solid, origin=  {-52, 33}, rotation=  360), Polygon(points=  {{-39, -30}, {-31, -30}, {-11, -30}, {23, -30}, {67, -30}, {93, -30}, {121, -30}, {121, 24}, {-39, 26}, {-39, -30}}, lineColor=  {0, 0, 255}, pattern=  LinePattern.Solid, smooth=  Smooth.None, fillColor=  {255, 170, 170},
-            fillPattern=                                                                                                    FillPattern.Solid, origin=  {-37, 38}, rotation=  360), Polygon(points=  {{-80, 100}, {-80, 54}, {-62, 54}, {-30, 54}, {32, 54}, {80, 54}, {80, 82}, {80, 100}, {-80, 100}}, lineColor=  {0, 0, 255}, pattern=  LinePattern.Solid, smooth=  Smooth.None, fillColor=  {255, 62, 62},
+            fillPattern=                                                                                                    FillPattern.Solid, origin=  {4, 1}, rotation=  360), Polygon(points=  {{-24, -67}, {-16, -67}, {-8, -67}, {4, -67}, {12, -67}, {36, -67}, {76, -67}, {110, -67}, {136, -67}, {136, 39}, {-24, 35}, {-24, -67}}, lineColor=  {0, 0, 255}, pattern=  LinePattern.Solid, fillColor=  {170, 213, 255},
+            fillPattern=                                                                                                    FillPattern.Solid, origin=  {-52, 33}, rotation=  360), Polygon(points=  {{-39, -30}, {-31, -30}, {-11, -30}, {23, -30}, {67, -30}, {93, -30}, {121, -30}, {121, 24}, {-39, 26}, {-39, -30}}, lineColor=  {0, 0, 255}, pattern=  LinePattern.Solid, fillColor=  {255, 170, 170},
+            fillPattern=                                                                                                    FillPattern.Solid, origin=  {-37, 38}, rotation=  360), Polygon(points=  {{-80, 100}, {-80, 54}, {-62, 54}, {-30, 54}, {32, 54}, {80, 54}, {80, 82}, {80, 100}, {-80, 100}}, lineColor=  {0, 0, 255}, pattern=  LinePattern.Solid, fillColor=  {255, 62, 62},
             fillPattern=                                                                                                    FillPattern.Solid, origin=  {4, 0}, rotation=  360), Rectangle(extent=  {{-76, 100}, {84, -100}}, lineColor=  {0, 0, 0},
             lineThickness=                                                                                                    1), Line(points=  {{-21, 94}, {-21, 132}}, color=  {0, 0, 0}, smooth=  Smooth.Bezier, thickness=  1, arrow=  {Arrow.Filled, Arrow.None}, origin=  {-56, 67}, rotation=  270, visible=  use_heatingCoil1), Line(points=  {{-54, 88}, {68, 56}}, color=  {0, 0, 0}, thickness=  1, smooth=  Smooth.Bezier, visible=  use_heatingCoil1), Line(points=  {{68, 56}, {-48, 44}}, color=  {0, 0, 0}, thickness=  1, smooth=  Smooth.Bezier, visible=  use_heatingCoil1), Line(points=  {{-48, 44}, {62, 6}}, color=  {0, 0, 0}, thickness=  1, smooth=  Smooth.Bezier, visible=  use_heatingCoil1), Line(points=  {{62, 6}, {-44, -16}}, color=  {0, 0, 0}, thickness=  1, smooth=  Smooth.Bezier, visible=  use_heatingCoil1), Line(points=  {{76, -81}, {-26, -81}}, color=  {0, 0, 0}, thickness=  1, smooth=  Smooth.Bezier, visible=  use_heatingCoil1), Line(points=  {{0, -9}, {0, 9}}, color=  {0, 0, 0}, smooth=  Smooth.Bezier, thickness=  1, arrow=  {Arrow.Filled, Arrow.None}, origin=  {-34, -81}, rotation=  90, visible=  use_heatingCoil1), Line(points=  {{62, -42}, {-44, -16}}, color=  {0, 0, 0}, thickness=  1, smooth=  Smooth.Bezier, visible=  use_heatingCoil1), Line(points=  {{62, -42}, {-42, -80}}, color=  {0, 0, 0}, thickness=  1, smooth=  Smooth.Bezier, visible=  use_heatingCoil1), Line(points=  {{48, 88}, {-54, 88}}, color=  {0, 0, 0}, thickness=  1, smooth=  Smooth.Bezier, visible=  use_heatingCoil1)}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>

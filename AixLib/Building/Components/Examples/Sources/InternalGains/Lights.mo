@@ -19,58 +19,46 @@ model Lights "Simulation to check the light models"
 equation
   connect(combiTimeTable.y[1], lights.Schedule) annotation (Line(
       points={{-55,0},{-9,0}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(combiTimeTable.y[1], lights_sensibleHeat_simple.Schedule)
     annotation (Line(
       points={{-55,0},{-32,0},{-32,58},{-9,58}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(combiTimeTable.y[1], lights_sensibleHeat_Avar.Schedule) annotation (
      Line(
       points={{-55,0},{-32,0},{-32,-52},{-9,-52}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(lights.ConvHeat, fixedTemp.port) annotation (Line(
       points={{9,6},{34,6},{34,2},{58,2}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(lights_sensibleHeat_simple.ConvHeat, fixedTemp.port) annotation (
       Line(
       points={{9,64},{34,64},{34,2},{58,2}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(lights_sensibleHeat_Avar.ConvHeat, fixedTemp.port) annotation (
       Line(
       points={{9,-46},{34,-46},{34,2},{58,2}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(lights_sensibleHeat_Avar.RadHeat, fixedTemp.port) annotation (
       Line(
       points={{9,-57.8},{46,-57.8},{46,2},{58,2}},
       color={95,95,95},
-      pattern=LinePattern.Solid,
-      smooth=Smooth.None));
+      pattern=LinePattern.Solid));
   connect(lights_sensibleHeat_simple.RadHeat, fixedTemp.port) annotation (
       Line(
       points={{9,52.2},{46,52.2},{46,2},{58,2}},
       color={95,95,95},
-      pattern=LinePattern.Solid,
-      smooth=Smooth.None));
+      pattern=LinePattern.Solid));
   connect(lights.RadHeat, fixedTemp.port) annotation (Line(
       points={{9,-5.8},{46,-5.8},{46,2},{58,2}},
       color={95,95,95},
-      pattern=LinePattern.Solid,
-      smooth=Smooth.None));
+      pattern=LinePattern.Solid));
   annotation (
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-            100,100}}), graphics),
     experiment(
       StopTime=86400,
       Interval=60,
       __Dymola_Algorithm="Lsodar"),
-    __Dymola_experimentSetupOutput,
-    Documentation(info="<html>
+Documentation(info="<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>
 <p>This simulation is to check the functionality of the light models described by the internal gains. </p>
 <p><h4><font color=\"#008000\">Concept</font></h4></p>

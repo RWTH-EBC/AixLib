@@ -66,9 +66,7 @@ equation
     alpharad=(E_sky+(E_earth/0.93))/(T_sky-T_earth);
   end if;
 
-annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}),
-                      graphics), Icon(coordinateSystem(
+annotation ( Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
                                       graphics={
         Rectangle(
@@ -90,7 +88,6 @@ annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
           fillPattern=FillPattern.HorizontalCylinder),
         Polygon(
           points={{79,46},{21,46},{79,70},{79,70},{79,46}},
-          smooth=Smooth.None,
           fillColor={236,99,92},
           fillPattern=FillPattern.Solid,
           pattern=LinePattern.Solid),
@@ -133,13 +130,9 @@ annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
           fillPattern=FillPattern.Solid,
           pattern=LinePattern.Solid),
         Line(
-          points={{52,8},{68,8},{78,8}},
-          color={0,0,0},
-          smooth=Smooth.None),
+          points={{52,8},{68,8},{78,8}}),
         Line(
-          points={{72,28},{72,-12}},
-          color={0,0,0},
-          smooth=Smooth.None)}),
+          points={{72,28},{72,-12}})}),
     Documentation(info="<html>
 <p>EqAirTemp is a component to compute the so called &quot;equivalent outdoor air temperature&quot;. Basically, this includes a correction for the longwave radiation for windows and walls and absorption of shortwave radiation only for walls.</p>
 <p>To the air temperature is added (or substracted) a term for longwave radiation and one term for shortwave radiation. As the shortwave radiation is taken into account only for the walls and the windows can be equipped with a shading, the equal temperatures are computed separately for the windows and for the walls. Due to the different beams in different directions, the temperatures are also computed separately for each direction. You need one weightfactor per direction and wall or window, e.g. 4 directions means 8 weightfactors (4 windows, 4 walls). Additionally, one weightfactor for the ground (for the ground temperature) . </p>

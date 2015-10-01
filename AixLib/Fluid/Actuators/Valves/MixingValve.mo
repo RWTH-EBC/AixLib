@@ -38,7 +38,6 @@ model MixingValve
         extent={{-20,-20},{20,20}},
         rotation=270), iconTransformation(
         extent={{-20,-20},{20,20}},
-        rotation=0,
         origin={-80,-70})));
   Modelica.Blocks.Sources.Constant Constant(k=1)
     "To compute opening of second valve"
@@ -92,7 +91,7 @@ y=uMin is passed as output.
       lineColor={192,192,192},
       fillColor={192,192,192},
       fillPattern=FillPattern.Solid),
-    Line(points={{-80,-70},{-50,-70},{50,70},{64,90}}, color={0,0,0}),
+    Line(points={{-80,-70},{-50,-70},{50,70},{64,90}}),
     Text(
       extent={{-150,-150},{150,-110}},
       lineColor={0,0,0},
@@ -116,7 +115,7 @@ y=uMin is passed as output.
       lineColor={192,192,192},
       fillColor={192,192,192},
       fillPattern=FillPattern.Solid),
-    Line(points={{-50,-40},{-30,-40},{30,40},{50,40}}, color={0,0,0}),
+    Line(points={{-50,-40},{-30,-40},{30,40},{50,40}}),
     Text(
       extent={{46,-6},{68,-18}},
       lineColor={128,128,128},
@@ -141,48 +140,37 @@ end MinLimiter;
 equation
   connect(filter.y, opening_filtered) annotation (Line(
       points={{54.7,51},{64.35,51},{64.35,50},{82,50}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(minLimiter.y, filter.u) annotation (Line(
       points={{32.7,51},{38.6,51}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(opening, minLimiter.u) annotation (Line(
       points={{12,88},{14,88},{14,51},{16.6,51}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(Valve.opening, opening_actual) annotation (Line(
       points={{-60,8},{-60,22},{82,22}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(port_3, Valve.port_a) annotation (Line(
       points={{0,100},{0,58},{-76,58},{-76,0},{-70,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(Valve2.port_a, port_1) annotation (Line(
       points={{-44,-74},{-100,-74},{-100,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(add.y, Valve2.opening) annotation (Line(
       points={{-34,-51},{-34,-66}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(add.u1, opening_actual) annotation (Line(
       points={{-40,-28},{-40,22},{82,22}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(add.u2, Constant.y) annotation (Line(
       points={{-28,-28},{-5,-28}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(Valve.port_b, port_2) annotation (Line(
       points={{-50,0},{100,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(Valve2.port_b, port_2) annotation (Line(
       points={{-24,-74},{58,-74},{58,0},{100,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
 
   //Connection of Filter if used
   if filteredOpening then
@@ -190,20 +178,16 @@ equation
   else
      connect(opening, opening_actual);
   end if;
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}), graphics),
-            Icon(coordinateSystem(
+  annotation (            Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={
         Polygon(
           points={{-40,20},{40,-20},{40,20},{-40,-20},{-40,20}},
-          smooth=Smooth.None,
           fillColor={175,175,175},
           fillPattern=FillPattern.Solid,
           lineColor={0,0,0}),
         Polygon(
           points={{0,0},{-20,40},{20,40},{0,0}},
           lineColor={0,0,0},
-          smooth=Smooth.None,
           fillColor={175,175,175},
           fillPattern=FillPattern.Solid),
         Ellipse(
@@ -218,76 +202,63 @@ equation
           fillPattern=FillPattern.Solid,
           textString="M"),
         Line(
-          points={{0,0},{0,-10}},
-          color={0,0,0},
-          smooth=Smooth.None),
+          points={{0,0},{0,-10}}),
         Polygon(
           points={{0,-50},{-6,-60},{6,-60},{0,-50}},
-          smooth=Smooth.None,
           fillColor={0,0,127},
           fillPattern=FillPattern.Solid,
           pattern=LinePattern.Solid,
           lineColor={0,0,0}),
         Line(
           points={{-84,-70},{0,-70},{0,-60}},
-          color={0,0,127},
-          smooth=Smooth.None),
+          color={0,0,127}),
         Polygon(
           points={{-90,2},{-40,2},{-40,-2},{-92,-2},{-90,2}},
-          smooth=Smooth.None,
           fillColor={0,128,255},
           fillPattern=FillPattern.Solid,
           lineColor={0,0,0}),
         Line(
-          points={{-78,0},{-52,0},{-54,2},{-52,0},{-54,-2}},
-          color={0,0,0},
-          smooth=Smooth.None),
+          points={{-78,0},{-52,0},{-54,2},{-52,0},{-54,-2}}),
         Polygon(
           points={{40,2},{92,2},{92,-2},{40,-2},{40,2}},
-          smooth=Smooth.None,
           fillColor={231,231,231},
           fillPattern=FillPattern.Solid,
           lineColor={0,0,0}),
         Polygon(
           points={{-26,2},{26,2},{26,-2},{-26,-2},{-26,2}},
-          smooth=Smooth.None,
           fillColor={0,128,255},
           fillPattern=FillPattern.Solid,
           lineColor={0,0,0},
           origin={0,66},
           rotation=90),
         Line(
-          points={{52,0},{78,0},{76,2},{78,0},{76,-2}},
-          color={0,0,0},
-          smooth=Smooth.None),
+          points={{52,0},{78,0},{76,2},{78,0},{76,-2}}),
         Line(
           points={{0,11},{0,-11},{0,11},{-2,9},{0,11},{2,9}},
-          color={0,0,0},
-          smooth=Smooth.None,
           origin={0,65},
           rotation=180)}),
           Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 
-<p>This model is a model of a three-way mixing-valve. It mixes two incoming 
+<p>This model is a model of a three-way mixing-valve. It mixes two incoming
 fluid-streams into one resulting fluid-stream.
 It is based on two seperate SimpleValve from the AixLib Library.
-The Model features a RealInput which controls the mixture of the streams in a 
+The Model features a RealInput which controls the mixture of the streams in a
 range between 0 and 1. A filtered option is available.</p>
 </ul>
 <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
 <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
 </ul>
 <h4><span style=\"color:#008000\">Assumptions</span></h4>
-<p>The model assumes that pressure loss and friction phenomena of a 
-mixing-valve correspond to the phenomena of a normal valve. The mixing of both 
+<p>The model assumes that pressure loss and friction phenomena of a
+mixing-valve correspond to the phenomena of a normal valve. The mixing of both
 streams is assumed ideal.</p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
-<p>The MixingValve is put together from two single SimpleValves. It is 
-controlled by a RealInput in the range between 0 and 1. Value 0 opens port_1 
-completely and closes port_3, value 1 closes port_1 completely and opens port_3. 
-The function between those values is linear. The model features a filter which 
-simulates the delay when opening a valve manually. For this see 
+<p>The MixingValve is put together from two single SimpleValves. It is
+controlled by a RealInput in the range between 0 and 1. Value 0 opens port_1
+completely and closes port_3, value 1 closes port_1 completely and opens port_3.
+The function between those values is linear. The model features a filter which
+simulates the delay when opening a valve manually. For this see
 <a href=\"modelica://Modelica.Fluid.Valves.BaseClasses.PartialValve\">PartialValve</a>.</p>
 <p><br><b><font style=\"color: #008000; \">References</font></b></p>
 <p>

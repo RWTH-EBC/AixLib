@@ -29,44 +29,35 @@ end if;
 if withInnerwalls then
     connect(outerwall.port_b, radHeatTrans.port_a) annotation (Line(
       points={{-50,-0.909091},{-50,20},{0,20}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(radHeatTrans.port_b, innerwall.port_a) annotation (Line(
       points={{20,20},{56,20},{56,-0.909091}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
 end if;
 
   connect(thermSplitterLoads.signalInput, internalGainsRad) annotation (Line(
       points={{92,-6},{94,-6},{94,-66},{80,-66},{80,-90}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(thermSplitterLoads.signalOutput[2], innerwall.port_a) annotation (
       Line(
       points={{92,14},{92,16},{56,16},{56,-0.909091}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(thermSplitterLoads.signalOutput[1], outerwall.port_b) annotation (
       Line(
       points={{92,14},{92,32},{-50,32},{-50,-0.909091}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(thermSplitterWin.signalOutput[1], outerwall.port_b) annotation (Line(
       points={{8,90},{12,90},{12,32},{-50,32},{-50,-0.909091}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(thermSplitterWin.signalOutput[2], innerwall.port_a) annotation (Line(
       points={{8,90},{56,90},{56,-0.909091}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
 
   connect(solarRadToHeatRad.port, thermSplitterWin.signalInput) annotation (
       Line(
       points={{-26,90},{-12,90}},
-      color={191,0,0},
-      smooth=Smooth.None));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}), graphics), Documentation(info="<html>
+      color={191,0,0}));
+  annotation ( Documentation(info="<html>
 <p>ReducedOrderModelVDI extends from partialReducedOrderModel. </p>
 <p>This class contains following additional components: </p>
 <ul>

@@ -41,18 +41,17 @@ model TestCase4
 equation
   referenceTemp = reference.y;
   simulationTemp = reducedModel.airload.port.T;
-  connect(machinesRadiative.port, HeatToStar.Therm) annotation(Line(points = {{30, -58}, {36.8, -58}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(tableMachines.y[1], machinesRadiative.Q_flow) annotation(Line(points = {{-7.3, -58}, {10, -58}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(outdoorTemp.port, reducedModel.equalAirTemp) annotation(Line(points = {{-26, 30}, {-8, 30}, {-8, 27.68}, {13.4, 27.68}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(infiltrationTemp.y, reducedModel.ventilationTemperature) annotation(Line(points = {{-25, 0}, {-8, 0}, {-8, 18.84}, {13.4, 18.84}}, color = {0, 0, 127}, smooth = Smooth.None));
+  connect(machinesRadiative.port, HeatToStar.Therm) annotation(Line(points = {{30, -58}, {36.8, -58}}, color = {191, 0, 0}));
+  connect(tableMachines.y[1], machinesRadiative.Q_flow) annotation(Line(points = {{-7.3, -58}, {10, -58}}, color = {0, 0, 127}));
+  connect(outdoorTemp.port, reducedModel.equalAirTemp) annotation(Line(points = {{-26, 30}, {-8, 30}, {-8, 27.68}, {13.4, 27.68}}, color = {191, 0, 0}));
+  connect(infiltrationTemp.y, reducedModel.ventilationTemperature) annotation(Line(points = {{-25, 0}, {-8, 0}, {-8, 18.84}, {13.4, 18.84}}, color = {0, 0, 127}));
   connect(infiltrationRate.y, reducedModel.ventilationRate) annotation(Line(points={{15,-30},
-          {18,-30},{18,11.7},{20.54,11.7}},                                                                                            color = {0, 0, 127}, smooth = Smooth.None));
+          {18,-30},{18,11.7},{20.54,11.7}},                                                                                            color = {0, 0, 127}));
   connect(HeatToStar.Star, reducedModel.internalGainsRad) annotation(Line(points={{55.1,
-          -58},{58,-58},{58,-10},{39.75,-10},{39.75,11.7}},                                                                                          color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
+          -58},{58,-58},{58,-10},{39.75,-10},{39.75,11.7}},                                                                                          color = {95, 95, 95}, pattern = LinePattern.Solid));
   connect(solarRadiation.y, reducedModel.solarRad_in) annotation (Line(
       points={{-25,72},{19.18,72},{19.18,42.98}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   annotation(Documentation(revisions="<html>
 <p><ul>
  <li><i>May 28, 2015 </i> by Marcus Fuchs:<br/>Added unit testing command to annotations</li>
@@ -72,10 +71,7 @@ equation
 <p>All values are given in the VDI 6007-1. </p>
 <p>Same Test Case exists in VDI 6020. </p>
 <p>A script to run this test case can be found in AixLib\\Resources\\Scripts\\Dymola\\Building\\LowOrder\\Examples\\Validation\\Linear.</p>
-</html>"),   Diagram(coordinateSystem(preserveAspectRatio = false,
-             extent = {{-100, -100}, {100, 100}}), graphics),
-             Icon(graphics),
-             experiment(StopTime = 5.184e+006, Interval = 3600),
+</html>"),             experiment(StopTime = 5.184e+006, Interval = 3600),
              __Dymola_Commands(file=
                                "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Linear/TestCase4.mos"
         "Simulate and plot"),

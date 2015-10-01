@@ -1,10 +1,10 @@
 within AixLib.Utilities.HeatTransfer;
 model HeatToStar_Avar
   "Adaptor for approximative longwave radiation exchange with variable surface Area"
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm annotation(Placement(transformation(extent = {{-102, -10}, {-82, 10}}, rotation = 0)));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm annotation(Placement(transformation(extent = {{-102, -10}, {-82, 10}})));
   Modelica.Blocks.Interfaces.RealInput A "Area of radiation exchange" annotation(Placement(transformation(origin = {0, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 270)));
   parameter Modelica.SIunits.Emissivity eps = 0.95 "Emissivity";
-  AixLib.Utilities.Interfaces.Star Star annotation(Placement(transformation(extent = {{81, -10}, {101, 10}}, rotation = 0)));
+  AixLib.Utilities.Interfaces.Star Star annotation(Placement(transformation(extent = {{81, -10}, {101, 10}})));
 equation
   Therm.Q_flow + Star.Q_flow = 0;
   Therm.Q_flow = Modelica.Constants.sigma * eps * A * (Therm.T * Therm.T * Therm.T * Therm.T - Star.T * Star.T * Star.T * Star.T);

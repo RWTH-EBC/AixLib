@@ -14,23 +14,17 @@ equation
   connect(RadiationConvertor.Star, RadHeat) annotation (Line(
       points={{69.1,-60},{90,-60}},
       color={95,95,95},
-      pattern=LinePattern.Solid,
-      smooth=Smooth.None));
+      pattern=LinePattern.Solid));
   connect(RadiativeHeat.port, RadiationConvertor.Therm) annotation (Line(
       points={{40,-10},{48,-10},{48,-60},{50.8,-60}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(Schedule, gain.u) annotation (Line(
       points={{-100,0},{-20,0},{-20,30},{3.2,30}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(Schedule, gain1.u) annotation (Line(
       points={{-100,0},{-20,0},{-20,-10},{3.2,-10}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
-            {{-100,-100},{100,100}}),
-                      graphics), Icon(graphics={
+      color={0,0,127}));
+  annotation ( Icon(graphics={
         Ellipse(
           extent={{-52,72},{50,-40}},
           lineColor={255,255,0},
@@ -38,28 +32,18 @@ equation
           fillPattern=FillPattern.Solid),
         Line(
           points={{-26,-48},{22,-48}},
-          color={0,0,0},
-          smooth=Smooth.None,
           thickness=1),
         Line(
           points={{-24,-56},{22,-56}},
-          color={0,0,0},
-          smooth=Smooth.None,
           thickness=1),
         Line(
           points={{-24,-64},{22,-64}},
-          color={0,0,0},
-          smooth=Smooth.None,
           thickness=1),
         Line(
           points={{-24,-72},{22,-72}},
-          color={0,0,0},
-          smooth=Smooth.None,
           thickness=1),
         Line(
           points={{-28,-42},{-28,-80},{26,-80},{26,-42}},
-          color={0,0,0},
-          smooth=Smooth.None,
           thickness=1)}),
     Documentation(revisions="<html>
 <p><ul>

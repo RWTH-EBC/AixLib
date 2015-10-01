@@ -45,79 +45,62 @@ equation
   if withWindows and withOuterwalls then
   connect(equalAirTempWindow, thermalResWindow.port_a) annotation (Line(
       points={{-90,37},{-78,37},{-78,47},{-66,47}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(thermalResWindow.port_b, heatToStarWinRes.Therm) annotation (Line(
       points={{-56,47},{-52,47},{-52,51},{-47.6,51}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(thermalResWindow.port_b, heatConvWinRes.port_a) annotation (Line(
       points={{-56,47},{-52,47},{-52,37},{-48,37}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(heatConvWinRes.port_b, airload.port) annotation (Line(
       points={{-38,37},{-7,37},{-7,0}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   end if;
 
   if withInnerwalls then
     connect(heatToStarInnerwall.Therm, innerwall.port_a) annotation (Line(
       points={{51.52,22},{56,22},{56,-0.909091}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(heatToStarWinRes.Star, heatToStarInnerwall.Star) annotation (Line(
       points={{-38.45,51},{2,51},{2,22},{40.54,22}},
       color={95,95,95},
-      pattern=LinePattern.Solid,
-      smooth=Smooth.None));
+      pattern=LinePattern.Solid));
   connect(heatToStarOuterwall.Star, heatToStarInnerwall.Star) annotation (Line(
       points={{-26.54,22},{40.54,22}},
       color={95,95,95},
-      pattern=LinePattern.Solid,
-      smooth=Smooth.None));
+      pattern=LinePattern.Solid));
     connect(thermSplitterLoads.signalOutput[2], innerwall.port_a) annotation (
         Line(
         points={{94,10},{94,16},{56,16},{56,-0.909091}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(thermSplitterWin.signalOutput[2], innerwall.port_a) annotation (
         Line(
         points={{6,90},{56,90},{56,-0.909091}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
   end if;
 
   connect(heatToStarOuterwall.Therm, outerwall.port_b) annotation (Line(
       points={{-37.52,22},{-50,22},{-50,-0.909091}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
 
   connect(internalGainsRad, thermSplitterLoads.signalInput) annotation (Line(
       points={{80,-90},{80,-26},{94,-26},{94,-10}},
       color={95,95,95},
-      pattern=LinePattern.Solid,
-      smooth=Smooth.None));
+      pattern=LinePattern.Solid));
 
   connect(thermSplitterLoads.signalOutput[1], outerwall.port_b) annotation (
       Line(
       points={{94,10},{94,30},{-50,30},{-50,-0.909091}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
 
   connect(thermSplitterWin.signalOutput[1], outerwall.port_b) annotation (Line(
       points={{6,90},{6,30},{-50,30},{-50,-0.909091}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(solarRadToHeatRad.port, thermSplitterWin.signalInput) annotation (
       Line(
       points={{-26,90},{-14,90}},
-      color={191,0,0},
-      smooth=Smooth.None));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-            {100,100}}), graphics), Diagram(coordinateSystem(
-          preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics),
-    Documentation(revisions="<html>
+      color={191,0,0}));
+  annotation (    Documentation(revisions="<html>
 <ul>
 <li><i>October 2014,&nbsp;</i> by Peter Remmen:<br/>Implemented.</li>
 </ul>

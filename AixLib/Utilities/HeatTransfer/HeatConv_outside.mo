@@ -14,7 +14,7 @@ model HeatConv_outside
     "Surface type"                                                                                                     annotation(Dialog(group = "Surface properties", descriptionLabel = true, enable = Model == 2), choicesAllMatching = true);
   // Variables
   Modelica.SIunits.CoefficientOfHeatTransfer alpha;
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort                             annotation(Placement(transformation(extent = {{-102, -82}, {-82, -62}}, rotation = 0), iconTransformation(extent = {{-102, -82}, {-82, -62}})));
+  Modelica.Blocks.Interfaces.RealInput WindSpeedPort                             annotation(Placement(transformation(extent = {{-102, -82}, {-82, -62}}), iconTransformation(extent = {{-102, -82}, {-82, -62}})));
 equation
   // Main equation of heat transfer
   port_a.Q_flow = alpha*A*(port_a.T - port_b.T);
@@ -33,14 +33,14 @@ equation
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{60, 70}, {80, -90}}, lineColor = {0, 0, 255}, pattern = LinePattern.Solid, fillColor = {244, 244, 244},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-80, 70}, {0, -90}}, lineColor = {255, 255, 255}, fillColor = {85, 85, 255},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-80, 70}, {80, -90}}, lineColor = {0, 0, 0}), Polygon(points = {{80, 70}, {80, 70}, {60, 30}, {60, 70}, {80, 70}}, lineColor = {0, 0, 255}, pattern = LinePattern.Solid,
-            lineThickness =                                                                                                   0.5, smooth = Smooth.None, fillColor = {157, 166, 208},
+            lineThickness =                                                                                                   0.5, fillColor = {157, 166, 208},
             fillPattern =                                                                                                   FillPattern.Solid), Polygon(points = {{60, 70}, {60, 30}, {40, -10}, {40, 70}, {60, 70}}, lineColor = {0, 0, 255}, pattern = LinePattern.Solid,
-            lineThickness =                                                                                                   0.5, smooth = Smooth.None, fillColor = {102, 110, 139},
+            lineThickness =                                                                                                   0.5, fillColor = {102, 110, 139},
             fillPattern =                                                                                                   FillPattern.Solid), Polygon(points = {{40, 70}, {40, -10}, {20, -50}, {20, 70}, {40, 70}}, lineColor = {0, 0, 255}, pattern = LinePattern.Solid,
-            lineThickness =                                                                                                   0.5, smooth = Smooth.None, fillColor = {75, 82, 103},
+            lineThickness =                                                                                                   0.5, fillColor = {75, 82, 103},
             fillPattern =                                                                                                   FillPattern.Solid), Polygon(points = {{20, 70}, {20, -50}, {0, -90}, {0, 70}, {20, 70}}, lineColor = {0, 0, 255}, pattern = LinePattern.Solid,
-            lineThickness =                                                                                                   0.5, smooth = Smooth.None, fillColor = {51, 56, 70},
-            fillPattern =                                                                                                   FillPattern.Solid), Line(points = {{-20, 26}, {-20, -54}}, color = {255, 255, 255}, thickness = 0.5, smooth = Smooth.None), Line(points = {{-20, 26}, {-30, 14}}, color = {255, 255, 255}, thickness = 0.5, smooth = Smooth.None), Line(points = {{-38, 26}, {-48, 14}}, color = {255, 255, 255}, thickness = 0.5, smooth = Smooth.None), Line(points = {{-54, 26}, {-64, 14}}, color = {255, 255, 255}, thickness = 0.5, smooth = Smooth.None), Line(points = {{-38, 26}, {-38, -54}}, color = {255, 255, 255}, thickness = 0.5, smooth = Smooth.None), Line(points = {{-54, 26}, {-54, -54}}, color = {255, 255, 255}, thickness = 0.5, smooth = Smooth.None)}), Documentation(info="<html>
+            lineThickness =                                                                                                   0.5, fillColor = {51, 56, 70},
+            fillPattern =                                                                                                   FillPattern.Solid), Line(points = {{-20, 26}, {-20, -54}}, color = {255, 255, 255}, thickness = 0.5), Line(points = {{-20, 26}, {-30, 14}}, color = {255, 255, 255}, thickness = 0.5), Line(points = {{-38, 26}, {-48, 14}}, color = {255, 255, 255}, thickness = 0.5), Line(points = {{-54, 26}, {-64, 14}}, color = {255, 255, 255}, thickness = 0.5), Line(points = {{-38, 26}, {-38, -54}}, color = {255, 255, 255}, thickness = 0.5), Line(points = {{-54, 26}, {-54, -54}}, color = {255, 255, 255}, thickness = 0.5)}), Documentation(info="<html>
 <p><b><font style=\"color: #008000; \">Overview</font></b> </p>
 <p>The <b>HeatTrasfer_Outside </b>is a model for the convective heat transfer at outside walls </p>
 <p><b><font style=\"color: #008000; \">Level of Development</font></b> </p>
@@ -71,6 +71,6 @@ equation
           by Ana Constantin:<br/>
           Implemented.</li>
  </ul>
- </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
+ </html>"));
 end HeatConv_outside;
 

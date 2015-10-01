@@ -73,19 +73,6 @@ equation
   end for;
 
 annotation (
-    Diagram(coordinateSystem(
-        preserveAspectRatio=false,
-        extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics),
-    Icon(coordinateSystem(
-        preserveAspectRatio=false,
-        extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics),
-    Window(
-      x=0.29,
-      y=0.14,
-      width=0.6,
-      height=0.6),
     Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>This model computes the transmission correction factors for solar radiation through a double pane window depoending on the incidence angle, based on the VDI 6007_Part 3.</p>

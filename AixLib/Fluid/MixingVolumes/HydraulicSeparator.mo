@@ -67,8 +67,7 @@ model HydraulicSeparator
         Medium)                                    annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={0,0})));
+        rotation=90)));
 
   Modelica.Blocks.Interfaces.RealOutput waterExchange annotation (Placement(
         transformation(
@@ -104,62 +103,48 @@ model HydraulicSeparator
 equation
   connect(staticPipe4.port_a, massFlowSensor.port_b) annotation (Line(
       points={{-5.55112e-016,16},{0,16},{0,10},{5.55112e-016,10}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(massFlowSensor.port_a, staticPipe5.port_b) annotation (Line(
       points={{0,-10},{0,-16}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(massFlowSensor.m_flow, waterExchange) annotation (Line(
       points={{-11,0},{-16,0},{-16,84},{0,84},{0,90}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(thermalConductor.port_b, pipe_secondary_return.heatport) annotation (
       Line(
       points={{38,12},{38,55}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(thermalConductor.port_a, pipe_secondary_flow.heatport) annotation (
       Line(
       points={{38,-8},{38,-55}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(staticPipe4.port_b, pipe_secondary_return.port_a) annotation (Line(
       points={{0,36},{0,60},{28,60}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(staticPipe5.port_a, pipe_secondary_flow.port_b) annotation (Line(
       points={{0,-36},{0,-60},{28,-60}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(staticPipe_primary_flow.port_b, pipe_secondary_return.port_a)
     annotation (Line(
       points={{-34,60},{28,60}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(staticPipe_primary_return.port_a, pipe_secondary_flow.port_b)
     annotation (Line(
       points={{-28,-60},{28,-60}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(port_a_primary, staticPipe_primary_flow.port_a) annotation (Line(
       points={{-104,60},{-54,60}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(pipe_secondary_return.port_b, port_b_secondary) annotation (Line(
       points={{48,60},{104,60}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(port_a_secondary, pipe_secondary_flow.port_a) annotation (Line(
       points={{104,-60},{48,-60}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(staticPipe_primary_return.port_b, port_b_primary) annotation (Line(
       points={{-48,-60},{-104,-60}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}),      graphics), Icon(coordinateSystem(
+      color={0,127,255}));
+  annotation ( Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={
         Rectangle(
           extent={{-34,70},{34,-80}},
@@ -169,7 +154,6 @@ equation
         Polygon(
           points={{-34,70},{-34,-40},{34,20},{34,70},{-34,70}},
           lineColor={255,0,0},
-          smooth=Smooth.None,
           fillColor={255,0,0},
           fillPattern=FillPattern.Solid),
         Rectangle(
@@ -196,8 +180,7 @@ equation
           points={{-60,60},{-34,60},{-34,70},{34,70},{34,60},{60,60},{60,40},{34,
               40},{34,-40},{60,-40},{60,-60},{34,-60},{34,-80},{-34,-80},{-34,-60},
               {-60,-60},{-60,-40},{-34,-40},{-34,40},{-60,40},{-60,60}},
-          lineColor={0,0,0},
-          smooth=Smooth.None)}),Documentation(info="<html>
+          lineColor={0,0,0})}),Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>The component Hydraulic Separator is used to hydraulically decouple the heating circuit from the consumer circuit. It is basically a big cylinder with four flanges to mount the primary and secondary circuit. </p>
 <h4><span style=\"color:#008000\">Level of Development</span></h4>

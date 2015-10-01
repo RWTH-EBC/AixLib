@@ -128,7 +128,6 @@ equation
           lineColor={0,0,255},
           pattern=LinePattern.Solid,
           lineThickness=0.5,
-          smooth=Smooth.None,
           fillColor={157,166,208},
           fillPattern=FillPattern.Solid),
         Polygon(
@@ -136,7 +135,6 @@ equation
           lineColor={0,0,255},
           pattern=LinePattern.Solid,
           lineThickness=0.5,
-          smooth=Smooth.None,
           fillColor={102,110,139},
           fillPattern=FillPattern.Solid),
         Polygon(
@@ -144,7 +142,6 @@ equation
           lineColor={0,0,255},
           pattern=LinePattern.Solid,
           lineThickness=0.5,
-          smooth=Smooth.None,
           fillColor={75,82,103},
           fillPattern=FillPattern.Solid),
         Polygon(
@@ -152,39 +149,32 @@ equation
           lineColor={0,0,255},
           pattern=LinePattern.Solid,
           lineThickness=0.5,
-          smooth=Smooth.None,
           fillColor={51,56,70},
           fillPattern=FillPattern.Solid),
         Line(
           points={{-58,20},{-68,8}},
           color={0,0,255},
-          thickness=0.5,
-          smooth=Smooth.None),
+          thickness=0.5),
         Line(
           points={{-58,20},{-58,-60}},
           color={0,0,255},
-          thickness=0.5,
-          smooth=Smooth.None),
+          thickness=0.5),
         Line(
           points={{-40,20},{-50,8}},
           color={0,0,255},
-          thickness=0.5,
-          smooth=Smooth.None),
+          thickness=0.5),
         Line(
           points={{-40,20},{-40,-60}},
           color={0,0,255},
-          thickness=0.5,
-          smooth=Smooth.None),
+          thickness=0.5),
         Line(
           points={{-22,20},{-32,8}},
           color={0,0,255},
-          thickness=0.5,
-          smooth=Smooth.None),
+          thickness=0.5),
         Line(
           points={{-22,20},{-22,-60}},
           color={0,0,255},
-          thickness=0.5,
-          smooth=Smooth.None)}),
+          thickness=0.5)}),
     Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
@@ -224,7 +214,6 @@ equation
           lineColor={0,0,255},
           pattern=LinePattern.Solid,
           lineThickness=0.5,
-          smooth=Smooth.None,
           fillColor={157,166,208},
           fillPattern=FillPattern.Solid),
         Polygon(
@@ -232,7 +221,6 @@ equation
           lineColor={0,0,255},
           pattern=LinePattern.Solid,
           lineThickness=0.5,
-          smooth=Smooth.None,
           fillColor={102,110,139},
           fillPattern=FillPattern.Solid),
         Polygon(
@@ -240,7 +228,6 @@ equation
           lineColor={0,0,255},
           pattern=LinePattern.Solid,
           lineThickness=0.5,
-          smooth=Smooth.None,
           fillColor={75,82,103},
           fillPattern=FillPattern.Solid),
         Polygon(
@@ -248,44 +235,32 @@ equation
           lineColor={0,0,255},
           pattern=LinePattern.Solid,
           lineThickness=0.5,
-          smooth=Smooth.None,
           fillColor={51,56,70},
           fillPattern=FillPattern.Solid),
         Line(
           points={{-20,16},{-20,-64}},
           color={0,0,255},
-          thickness=0.5,
-          smooth=Smooth.None),
+          thickness=0.5),
         Line(
           points={{-20,16},{-30,4}},
           color={0,0,255},
-          thickness=0.5,
-          smooth=Smooth.None),
+          thickness=0.5),
         Line(
           points={{-38,16},{-48,4}},
           color={0,0,255},
-          thickness=0.5,
-          smooth=Smooth.None),
+          thickness=0.5),
         Line(
           points={{-54,16},{-64,4}},
           color={0,0,255},
-          thickness=0.5,
-          smooth=Smooth.None),
+          thickness=0.5),
         Line(
           points={{-38,16},{-38,-64}},
           color={0,0,255},
-          thickness=0.5,
-          smooth=Smooth.None),
+          thickness=0.5),
         Line(
           points={{-54,16},{-54,-64}},
           color={0,0,255},
-          thickness=0.5,
-          smooth=Smooth.None)}),
-    Window(
-      x=0.25,
-      y=0.38,
-      width=0.6,
-      height=0.6),
+          thickness=0.5)}),
     Documentation(info="<html>
 <p><b><font style=\"color: #008000; \">Overview</font></b> </p>
 <p>The <b>HeatConv_inside</b> model represents the phenomenon of heat convection at inside surfaces, with different choice for surface orientation. </p>
@@ -309,5 +284,5 @@ equation
 <li><i>April 10, 2013&nbsp;</i> by Ole Odendahl<br>Formatted documentation according to standards </li>
 <li><i>December 15, 2005&nbsp;</i> by Peter Matthes:<br>Implemented. </li>
 </ul>
-</html>"),  DymolaStoredErrors);
+</html>"));
 end HeatConv_inside;

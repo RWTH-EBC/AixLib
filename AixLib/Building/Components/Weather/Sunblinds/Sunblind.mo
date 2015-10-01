@@ -20,9 +20,7 @@ equation
        sunblindonoff[i]=0;
      end if;
      end for;
-            annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}}),
-                                graphics), Icon(coordinateSystem(
+            annotation ( Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
                                                 graphics={
         Rectangle(
@@ -77,13 +75,9 @@ equation
           fillPattern=FillPattern.Solid),
         Line(
           points={{-59,-17},{-55,-9},{-51,-17}},
-          color={0,0,0},
-          smooth=Smooth.None,
           thickness=1),
         Line(
           points={{-51,-41},{-55,-49},{-59,-41}},
-          color={0,0,0},
-          smooth=Smooth.None,
           thickness=1),
         Rectangle(
           extent={{-76,-64},{76,-76}},

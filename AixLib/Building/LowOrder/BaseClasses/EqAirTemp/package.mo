@@ -1,4 +1,4 @@
 within AixLib.Building.LowOrder.BaseClasses;
-package EqAirTemp 
+package EqAirTemp
 extends Modelica.Icons.VariantsPackage;
 end EqAirTemp;

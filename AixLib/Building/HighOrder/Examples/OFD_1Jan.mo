@@ -50,37 +50,37 @@ equation
   SolarRadiation[5] = Weather.SolarRadiation_OrientedSurfaces[5].I;
   SolarRadiation[6] = Weather.SolarRadiation_OrientedSurfaces[6].I;
   connect(NaturalVentilation.y[1], OFD.NaturalVentilation_UF[1]) annotation(Line(points={{39,35},
-          {59,35},{59,8.47},{93.6067,8.47}},                                                                                                 color = {0, 0, 127}, smooth = Smooth.None));
-  connect(NaturalVentilation.y[1], OFD.NaturalVentilation_GF[1]) annotation(Line(points = {{39, 35}, {59, 35}, {59, -0.11}, {94, -0.11}}, color = {0, 0, 127}, smooth = Smooth.None));
+          {59,35},{59,8.47},{93.6067,8.47}},                                                                                                 color = {0, 0, 127}));
+  connect(NaturalVentilation.y[1], OFD.NaturalVentilation_GF[1]) annotation(Line(points = {{39, 35}, {59, 35}, {59, -0.11}, {94, -0.11}}, color = {0, 0, 127}));
   connect(NaturalVentilation.y[2], OFD.NaturalVentilation_UF[2]) annotation(Line(points={{39,35},
-          {59,35},{59,10.03},{93.6067,10.03}},                                                                                                 color = {0, 0, 127}, smooth = Smooth.None));
-  connect(NaturalVentilation.y[2], OFD.NaturalVentilation_GF[2]) annotation(Line(points = {{39, 35}, {59, 35}, {59, 1.45}, {94, 1.45}}, color = {0, 0, 127}, smooth = Smooth.None));
+          {59,35},{59,10.03},{93.6067,10.03}},                                                                                                 color = {0, 0, 127}));
+  connect(NaturalVentilation.y[2], OFD.NaturalVentilation_GF[2]) annotation(Line(points = {{39, 35}, {59, 35}, {59, 1.45}, {94, 1.45}}, color = {0, 0, 127}));
   connect(TSet.y[1], OFD.TSet_UF[1]) annotation(Line(points={{41,-13},{59,-13},
-          {59,-9.81125},{93.8033,-9.81125}},                                                                               color = {0, 0, 127}, smooth = Smooth.None));
-  connect(TSet.y[1], OFD.TSet_GF[1]) annotation(Line(points = {{41, -13}, {59, -13}, {59, -19.298}, {94, -19.298}}, color = {0, 0, 127}, smooth = Smooth.None));
+          {59,-9.81125},{93.8033,-9.81125}},                                                                               color = {0, 0, 127}));
+  connect(TSet.y[1], OFD.TSet_GF[1]) annotation(Line(points = {{41, -13}, {59, -13}, {59, -19.298}, {94, -19.298}}, color = {0, 0, 127}));
   connect(TSet.y[2], OFD.TSet_UF[2]) annotation(Line(points={{41,-13},{59,-13},
-          {59,-8.15375},{93.8033,-8.15375}},                                                                               color = {0, 0, 127}, smooth = Smooth.None));
-  connect(TSet.y[2], OFD.TSet_GF[2]) annotation(Line(points = {{41, -13}, {59, -13}, {59, -17.894}, {94, -17.894}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(TSet.y[6], OFD.TSet_GF[3]) annotation(Line(points = {{41, -13}, {60, -13}, {60, -16.49}, {94, -16.49}}, color = {0, 0, 127}, smooth = Smooth.None));
+          {59,-8.15375},{93.8033,-8.15375}},                                                                               color = {0, 0, 127}));
+  connect(TSet.y[2], OFD.TSet_GF[2]) annotation(Line(points = {{41, -13}, {59, -13}, {59, -17.894}, {94, -17.894}}, color = {0, 0, 127}));
+  connect(TSet.y[6], OFD.TSet_GF[3]) annotation(Line(points = {{41, -13}, {60, -13}, {60, -16.49}, {94, -16.49}}, color = {0, 0, 127}));
   connect(TSet.y[4], OFD.TSet_UF[3]) annotation(Line(points={{41,-13},{60,-13},
-          {60,-6.49625},{93.8033,-6.49625}},                                                                               color = {0, 0, 127}, smooth = Smooth.None));
-  connect(TSet.y[5], OFD.TSet_GF[4]) annotation(Line(points = {{41, -13}, {59, -13}, {59, -15.086}, {94, -15.086}}, color = {0, 0, 127}, smooth = Smooth.None));
+          {60,-6.49625},{93.8033,-6.49625}},                                                                               color = {0, 0, 127}));
+  connect(TSet.y[5], OFD.TSet_GF[4]) annotation(Line(points = {{41, -13}, {59, -13}, {59, -15.086}, {94, -15.086}}, color = {0, 0, 127}));
   connect(TSet.y[3], OFD.TSet_UF[4]) annotation(Line(points={{41,-13},{60,-13},
-          {60,-4.83875},{93.8033,-4.83875}},                                                                               color = {0, 0, 127}, smooth = Smooth.None));
-  connect(TSet.y[3], OFD.TSet_GF[5]) annotation(Line(points = {{41, -13}, {60, -13}, {60, -27}, {94, -27}, {94, -13.682}}, color = {0, 0, 127}, smooth = Smooth.None));
+          {60,-4.83875},{93.8033,-4.83875}},                                                                               color = {0, 0, 127}));
+  connect(TSet.y[3], OFD.TSet_GF[5]) annotation(Line(points = {{41, -13}, {60, -13}, {60, -27}, {94, -27}, {94, -13.682}}, color = {0, 0, 127}));
   connect(NaturalVentilation.y[3], OFD.NaturalVentilation_UF[4]) annotation(Line(points={{39,35},
-          {60,35},{60,13.15},{93.6067,13.15}},                                                                                                 color = {0, 0, 127}, smooth = Smooth.None));
-  connect(NaturalVentilation.y[3], OFD.NaturalVentilation_GF[4]) annotation(Line(points = {{39, 35}, {59, 35}, {59, 4.57}, {94, 4.57}}, color = {0, 0, 127}, smooth = Smooth.None));
+          {60,35},{60,13.15},{93.6067,13.15}},                                                                                                 color = {0, 0, 127}));
+  connect(NaturalVentilation.y[3], OFD.NaturalVentilation_GF[4]) annotation(Line(points = {{39, 35}, {59, 35}, {59, 4.57}, {94, 4.57}}, color = {0, 0, 127}));
   connect(NaturalVentilation.y[4], OFD.NaturalVentilation_UF[3]) annotation(Line(points={{39,35},
-          {60,35},{60,11.59},{93.6067,11.59}},                                                                                                 color = {0, 0, 127}, smooth = Smooth.None));
-  connect(NaturalVentilation.y[4], OFD.NaturalVentilation_GF[3]) annotation(Line(points = {{39, 35}, {59, 35}, {59, 3.01}, {94, 3.01}}, color = {0, 0, 127}, smooth = Smooth.None));
+          {60,35},{60,11.59},{93.6067,11.59}},                                                                                                 color = {0, 0, 127}));
+  connect(NaturalVentilation.y[4], OFD.NaturalVentilation_GF[3]) annotation(Line(points = {{39, 35}, {59, 35}, {59, 3.01}, {94, 3.01}}, color = {0, 0, 127}));
   connect(Weather.WindSpeed, OFD.WindSpeedPort) annotation(Line(points={{-149.4,
-          94.6},{-126,94.6},{-126,70},{100.293,70},{100.293,21.73}},                                                                                  color = {0, 0, 127}, smooth = Smooth.None));
+          94.6},{-126,94.6},{-126,70},{100.293,70},{100.293,21.73}},                                                                                  color = {0, 0, 127}));
   connect(Weather.SolarRadiation_OrientedSurfaces, OFD.SolarRadiationPort) annotation(Line(points={{-187.48,
           67.4},{-187.48,52},{-169,52},{-169,70},{147,70},{147,17.05},{151.033,
-          17.05}},                                                                                                    color = {255, 128, 0}, smooth = Smooth.None));
+          17.05}},                                                                                                    color = {255, 128, 0}));
   connect(OFD.Air_Temp, Weather.AirTemp) annotation(Line(points={{137.267,21.73},
-          {137.267,70},{-126,70},{-126,90},{-149.4,90},{-149.4,89.8}},                                                                                     color = {0, 0, 127}, smooth = Smooth.None));
+          {137.267,70},{-126,70},{-126,90},{-149.4,90},{-149.4,89.8}},                                                                                     color = {0, 0, 127}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-200, -100}, {200, 100}}, grid = {1, 1}), graphics={  Rectangle(extent=  {{-63, 15}, {-28, -13}}, lineColor=  {0, 0, 255}, fillColor=  {215, 215, 215},
             fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-23, 50}, {12, 22}}, lineColor=  {0, 0, 255}, fillColor=  {215, 215, 215},
             fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-35, 45}, {15, 43}}, lineColor=  {0, 0, 255}, textString=  "1-Bedroom"), Text(extent=  {{-35, 39}, {15, 37}}, lineColor=  {0, 0, 255}, textString=  "2-Children1"), Text(extent=  {{-35, 33}, {15, 31}}, lineColor=  {0, 0, 255}, textString=  "3-Bath"), Text(extent=  {{-35, 27}, {15, 25}}, lineColor=  {0, 0, 255}, textString=  "4-Children2"), Text(extent=  {{-76, 13}, {-26, 11}}, lineColor=  {0, 0, 255}, textString=  "1-Livingroom"), Text(extent=  {{-76, 7}, {-26, 5}}, lineColor=  {0, 0, 255}, textString=  "2-Hobby"), Text(extent=  {{-76, 1}, {-26, -1}}, lineColor=  {0, 0, 255}, textString=  "3-Corridor"), Text(extent=  {{-76, -5}, {-26, -7}}, lineColor=  {0, 0, 255}, textString=  "4-WC"), Text(extent=  {{-76, -11}, {-26, -13}}, lineColor=  {0, 0, 255}, textString=  "5-Kitchen"), Text(extent=  {{-3, 38}, {13, 49}}, lineColor=  {0, 0, 255}, fillColor=  {215, 215, 215},

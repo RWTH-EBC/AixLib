@@ -16,21 +16,17 @@ model Machines_simple
 equation
   connect(RadiativeHeat.port, RadiationConvertor.Therm) annotation (Line(
       points={{40,-10},{40,-60},{52.8,-60}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(RadiationConvertor.Star, RadHeat) annotation (Line(
       points={{71.1,-60},{90,-60}},
       color={95,95,95},
-      pattern=LinePattern.Solid,
-      smooth=Smooth.None));
+      pattern=LinePattern.Solid));
   connect(Schedule, gain.u) annotation (Line(
       points={{-100,0},{-60,0},{-60,30},{3.2,30}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(Schedule, gain1.u) annotation (Line(
       points={{-100,0},{-60,0},{-60,-10},{3.2,-10}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   annotation (Icon(graphics={
         Rectangle(
           extent={{-60,60},{60,-38}},
@@ -46,7 +42,6 @@ equation
         Polygon(
           points={{-90,-86},{-58,-42},{60,-42},{98,-86},{-90,-86}},
           pattern=LinePattern.Solid,
-          smooth=Smooth.None,
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid),
         Rectangle(
@@ -252,10 +247,7 @@ equation
           lineColor={255,0,0},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
-          textString="simple")}), Diagram(coordinateSystem(
-          preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
-                                          graphics),
-    Documentation(info="<html>
+          textString="simple")}),    Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Heat source with convective and radiative component. The load is determined by a power input signal. </p>
 <h4><span style=\"color:#008000\">Level of Development</span></h4>

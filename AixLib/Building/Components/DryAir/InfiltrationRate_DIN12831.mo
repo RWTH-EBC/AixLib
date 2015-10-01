@@ -17,7 +17,7 @@ equation
   annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics={  Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}), Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}), Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}, fillColor=  {211, 243, 255},
             fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-30, -12}, {30, -78}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 255},
             fillPattern=                                                                                                    FillPattern.Solid, textString=  "Air"), Text(extent=  {{-76, 26}, {78, -8}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 0},
-            fillPattern=                                                                                                    FillPattern.Solid, textString=  "DIN 12381")}), Window(x = 0.4, y = 0.4, width = 0.6, height = 0.6), Documentation(info="<html>
+            fillPattern=                                                                                                    FillPattern.Solid, textString=  "DIN 12381")}), Documentation(info="<html>
 <p><b><font style=\"color: #008000; \">Overview</font></b> </p>
 <p>The<b> InfiltrationRate</b> model describes heat and mass transport by infiltration. </p>
 <p><b><font style=\"color: #008000; \">Level of Development</font></b> </p>
@@ -101,5 +101,5 @@ equation
  </ul>
  </html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {2, 2}), graphics={  Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}), Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}), Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}), Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}, fillColor=  {211, 243, 255},
             fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-30, 16}, {30, -50}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 255},
-            fillPattern=                                                                                                    FillPattern.Solid, textString=  "Air")}), DymolaStoredErrors);
+            fillPattern=                                                                                                    FillPattern.Solid, textString=  "Air")}));
 end InfiltrationRate_DIN12831;

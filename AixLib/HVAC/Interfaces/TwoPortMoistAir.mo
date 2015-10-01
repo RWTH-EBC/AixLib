@@ -6,7 +6,7 @@ partial model TwoPortMoistAir "Component with two moist air ports"
   PortMoistAir_b portMoistAir_b annotation(Placement(transformation(extent = {{90, -10}, {110, 10}})));
 equation
   dp = portMoistAir_a.p - portMoistAir_b.p;
-  annotation(Icon(graphics), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(info = "<html>
+  annotation( Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Two Port Model for Moist Air</p>
  </html>", revisions = "<html>

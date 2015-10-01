@@ -25,6 +25,4 @@ partial model PartialSunblind "A Base Class for Sunblindes"
 initial equation
   assert(n==size(gsunblind,1),"gsunblind has to have n elements");
 
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}), graphics));
 end PartialSunblind;

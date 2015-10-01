@@ -20,8 +20,7 @@ equation
   signalInput.T = signalOutput.T * splitFactor
     "Equivalent building temperature rerouted to SignalInput";
 
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}), graphics), Icon(coordinateSystem(
+  annotation ( Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={
         Text(
           extent={{-2,4},{26,-30}},
@@ -30,28 +29,22 @@ equation
           textStyle={TextStyle.Bold}),
         Line(
           points={{-80,0},{14,80},{14,80}},
-          color={0,0,255},
-          smooth=Smooth.None),
+          color={0,0,255}),
         Line(
           points={{-80,0},{18,48},{18,48}},
-          color={0,0,255},
-          smooth=Smooth.None),
+          color={0,0,255}),
         Line(
           points={{-80,0},{16,18},{16,18}},
-          color={0,0,255},
-          smooth=Smooth.None),
+          color={0,0,255}),
         Line(
           points={{-80,0},{12,-78},{12,-78}},
-          color={0,0,255},
-          smooth=Smooth.None),
+          color={0,0,255}),
         Line(
           points={{-80,0},{12,-46},{12,-46}},
-          color={0,0,255},
-          smooth=Smooth.None),
+          color={0,0,255}),
         Line(
           points={{-80,0},{12,-18},{12,-18}},
-          color={0,0,255},
-          smooth=Smooth.None),
+          color={0,0,255}),
         Text(
           extent={{-48,-82},{52,-100}},
           lineColor={0,0,255},

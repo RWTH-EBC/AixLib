@@ -18,26 +18,26 @@ model ThermalZone "Ready-to-use Low Order building model"
   Utilities.Interfaces.Star internalGainsRad annotation(Placement(transformation(extent = {{30, -100}, {50, -80}})));
 equation
   if zoneParam.withOuterwalls then
-    connect(weather, thermalZonePhysics.weather) annotation(Line(points = {{-100, 20}, {-64, 20}, {-64, 23.8}, {-15, 23.8}}, color = {0, 0, 127}, smooth = Smooth.None));
-    connect(solarRad_in, thermalZonePhysics.solarRad_in) annotation(Line(points = {{-90, 80}, {-60, 80}, {-60, 33}, {-15.4, 33}}, color = {255, 128, 0}, smooth = Smooth.None));
+    connect(weather, thermalZonePhysics.weather) annotation(Line(points = {{-100, 20}, {-64, 20}, {-64, 23.8}, {-15, 23.8}}, color = {0, 0, 127}));
+    connect(solarRad_in, thermalZonePhysics.solarRad_in) annotation(Line(points = {{-90, 80}, {-60, 80}, {-60, 33}, {-15.4, 33}}, color = {255, 128, 0}));
   end if;
-  connect(infiltrationRate, thermalZonePhysics.ventilationRate) annotation(Line(points = {{-40, -100}, {-40, -40}, {-8, -40}, {-8, 2.8}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(human_SensibleHeat_VDI2078.TRoom, thermalZonePhysics.internalGainsConv) annotation(Line(points = {{41, 19}, {46, 19}, {46, 32}, {96, 32}, {96, -52}, {8, -52}, {8, 2}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(human_SensibleHeat_VDI2078.ConvHeat, thermalZonePhysics.internalGainsConv) annotation(Line(points = {{59, 15}, {96, 15}, {96, -52}, {8, -52}, {8, 2}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(machines_SensibleHeat_DIN18599.ConvHeat, thermalZonePhysics.internalGainsConv) annotation(Line(points = {{59, -4.8}, {96, -4.8}, {96, -52}, {8, -52}, {8, 2}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(lights.ConvHeat, thermalZonePhysics.internalGainsConv) annotation(Line(points = {{59, -24.8}, {96, -24.8}, {96, -52}, {8, -52}, {8, 2}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(human_SensibleHeat_VDI2078.RadHeat, thermalZonePhysics.internalGainsRad) annotation(Line(points = {{59, 9}, {92, 9}, {92, -48}, {16, -48}, {16, 2}}, color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
-  connect(machines_SensibleHeat_DIN18599.RadHeat, thermalZonePhysics.internalGainsRad) annotation(Line(points = {{59, -16.01}, {92, -16.01}, {92, -48}, {16, -48}, {16, 2}}, color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
-  connect(lights.RadHeat, thermalZonePhysics.internalGainsRad) annotation(Line(points = {{59, -36.01}, {92, -36.01}, {92, -48}, {16, -48}, {16, 2}}, color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
+  connect(infiltrationRate, thermalZonePhysics.ventilationRate) annotation(Line(points = {{-40, -100}, {-40, -40}, {-8, -40}, {-8, 2.8}}, color = {0, 0, 127}));
+  connect(human_SensibleHeat_VDI2078.TRoom, thermalZonePhysics.internalGainsConv) annotation(Line(points = {{41, 19}, {46, 19}, {46, 32}, {96, 32}, {96, -52}, {8, -52}, {8, 2}}, color = {191, 0, 0}));
+  connect(human_SensibleHeat_VDI2078.ConvHeat, thermalZonePhysics.internalGainsConv) annotation(Line(points = {{59, 15}, {96, 15}, {96, -52}, {8, -52}, {8, 2}}, color = {191, 0, 0}));
+  connect(machines_SensibleHeat_DIN18599.ConvHeat, thermalZonePhysics.internalGainsConv) annotation(Line(points = {{59, -4.8}, {96, -4.8}, {96, -52}, {8, -52}, {8, 2}}, color = {191, 0, 0}));
+  connect(lights.ConvHeat, thermalZonePhysics.internalGainsConv) annotation(Line(points = {{59, -24.8}, {96, -24.8}, {96, -52}, {8, -52}, {8, 2}}, color = {191, 0, 0}));
+  connect(human_SensibleHeat_VDI2078.RadHeat, thermalZonePhysics.internalGainsRad) annotation(Line(points = {{59, 9}, {92, 9}, {92, -48}, {16, -48}, {16, 2}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
+  connect(machines_SensibleHeat_DIN18599.RadHeat, thermalZonePhysics.internalGainsRad) annotation(Line(points = {{59, -16.01}, {92, -16.01}, {92, -48}, {16, -48}, {16, 2}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
+  connect(lights.RadHeat, thermalZonePhysics.internalGainsRad) annotation(Line(points = {{59, -36.01}, {92, -36.01}, {92, -48}, {16, -48}, {16, 2}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
   connect(human_SensibleHeat_VDI2078.Schedule, internalGains[1]) annotation(Line(points={{40.9,
-          8.9},{30,8.9},{30,-74},{80,-74},{80,-113.333}},                                                                                                 color = {0, 0, 127}, smooth = Smooth.None));
-  connect(machines_SensibleHeat_DIN18599.Schedule, internalGains[2]) annotation(Line(points = {{41, -10.5}, {30, -10.5}, {30, -74}, {80, -74}, {80, -100}}, color = {0, 0, 127}, smooth = Smooth.None));
+          8.9},{30,8.9},{30,-74},{80,-74},{80,-113.333}},                                                                                                 color = {0, 0, 127}));
+  connect(machines_SensibleHeat_DIN18599.Schedule, internalGains[2]) annotation(Line(points = {{41, -10.5}, {30, -10.5}, {30, -74}, {80, -74}, {80, -100}}, color = {0, 0, 127}));
   connect(lights.Schedule, internalGains[3]) annotation(Line(points={{41,-30.5},
-          {30,-30.5},{30,-74},{80,-74},{80,-86.6667}},                                                                                  color = {0, 0, 127}, smooth = Smooth.None));
-  connect(infiltrationTemperature, thermalZonePhysics.ventilationTemperature) annotation(Line(points = {{-80, -40}, {-60, -40}, {-60, 12}, {-15.2, 12}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(thermalZonePhysics.internalGainsConv, internalGainsConv) annotation(Line(points = {{8, 2}, {8, -52}, {0, -52}, {0, -90}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(thermalZonePhysics.internalGainsRad, internalGainsRad) annotation(Line(points = {{16, 2}, {16, -80}, {40, -80}, {40, -90}}, color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
-  annotation(Dialog(tab = "Windows", group = "Shading", descriptionLabel = false), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio=false,  extent={{-100,
+          {30,-30.5},{30,-74},{80,-74},{80,-86.6667}},                                                                                  color = {0, 0, 127}));
+  connect(infiltrationTemperature, thermalZonePhysics.ventilationTemperature) annotation(Line(points = {{-80, -40}, {-60, -40}, {-60, 12}, {-15.2, 12}}, color = {0, 0, 127}));
+  connect(thermalZonePhysics.internalGainsConv, internalGainsConv) annotation(Line(points = {{8, 2}, {8, -52}, {0, -52}, {0, -90}}, color = {191, 0, 0}));
+  connect(thermalZonePhysics.internalGainsRad, internalGainsRad) annotation(Line(points = {{16, 2}, {16, -80}, {40, -80}, {40, -90}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
+  annotation(Dialog(tab = "Windows", group = "Shading", descriptionLabel = false), Icon(coordinateSystem(preserveAspectRatio=false,  extent={{-100,
             -100},{100,100}}),                                                                                                    graphics={  Rectangle(extent={{
               -60,62},{100,-58}},
             lineThickness=1,                                                                                                    fillColor=
@@ -59,8 +59,7 @@ equation
               {215,215,215},
             fillPattern=FillPattern.Forward),                                                                                                    Polygon(points = {{100, 36}, {-2, 36}, {100, 60}, {100, 36}}, lineColor=
               {236,99,92},
-            lineThickness=1,                                                                                                    smooth=
-              Smooth.None,                                                                                                    fillColor=
+            lineThickness=1,                                                                                                    fillColor=
               {236,99,92},
             fillPattern=FillPattern.Solid),                                                                                                    Rectangle(extent={{
               22,28},{100,-50}},                                                                                                    fillColor=
@@ -71,9 +70,9 @@ equation
               {0,0,0},                                                                                                    fillColor=
               {170,213,255},
             fillPattern=FillPattern.Solid),                                                                                                    Polygon(points={{
-              64,-40},{68,-36},{78,-36},{82,-40},{64,-40}},                                                                                                    pattern = LinePattern.Solid, smooth = Smooth.None, fillColor = {0, 0, 0},
+              64,-40},{68,-36},{78,-36},{82,-40},{64,-40}},                                                                                                    pattern = LinePattern.Solid, fillColor = {0, 0, 0},
             fillPattern =                                                                                                   FillPattern.Solid), Polygon(points={{
-              68,-39},{70,-37},{76,-37},{78,-39},{68,-39}},                                                                                                    pattern = LinePattern.Solid, smooth = Smooth.None, fillColor = {95, 95, 95},
+              68,-39},{70,-37},{76,-37},{78,-39},{68,-39}},                                                                                                    pattern = LinePattern.Solid, fillColor = {95, 95, 95},
             fillPattern =                                                                                                   FillPattern.Solid, lineColor = {0, 0, 0}),      Text(extent = {{-90, 134}, {98, 76}}, lineColor=
               {0,0,255},
           textString="%name"),                                                                      Ellipse(extent={{
@@ -89,21 +88,13 @@ equation
           pattern=LinePattern.Solid,
           lineColor={0,0,0}),
         Line(
-          points={{22,-50},{42,-28},{42,14},{22,28}},
-          color={0,0,0},
-          smooth=Smooth.None),
+          points={{22,-50},{42,-28},{42,14},{22,28}}),
         Line(
-          points={{42,-28},{86,-28},{100,-42}},
-          color={0,0,0},
-          smooth=Smooth.None),
+          points={{42,-28},{86,-28},{100,-42}}),
         Line(
-          points={{86,-28},{86,14},{100,24}},
-          color={0,0,0},
-          smooth=Smooth.None),
+          points={{86,-28},{86,14},{100,24}}),
         Line(
-          points={{42,14},{86,14}},
-          color={0,0,0},
-          smooth=Smooth.None),                                                                                                    Ellipse(extent = {{4, -4}, {-4, 4}},                            fillColor=
+          points={{42,14},{86,14}}),                                                                                                    Ellipse(extent = {{4, -4}, {-4, 4}},                            fillColor=
               {255,221,0},
             fillPattern=FillPattern.Solid,                                                                                                    origin={65,
               14},                                                                                                    rotation = 180,
@@ -130,29 +121,19 @@ equation
             fillPattern=FillPattern.Solid),
         Line(
           points={{51,-30},{51,-38}},
-          color={0,0,0},
-          smooth=Smooth.None,
           thickness=0.5),
         Line(
           points={{51,-38},{47,-42}},
-          color={0,0,0},
-          thickness=0.5,
-          smooth=Smooth.None),
+          thickness=0.5),
         Line(
           points={{51,-32},{47,-36}},
-          color={0,0,0},
-          thickness=0.5,
-          smooth=Smooth.None),
+          thickness=0.5),
         Line(
           points={{51,-32},{55,-36}},
-          color={0,0,0},
-          thickness=0.5,
-          smooth=Smooth.None),
+          thickness=0.5),
         Line(
           points={{51,-38},{55,-42}},
-          color={0,0,0},
-          thickness=0.5,
-          smooth=Smooth.None),                                                                                                    Rectangle(extent={{
+          thickness=0.5),                                                                                                    Rectangle(extent={{
               65,-24},{81,-34}},                                                                                                    pattern = LinePattern.Solid,
             lineThickness =                                                                                                   1, fillColor = {95, 95, 95},
             fillPattern =                                                                                                   FillPattern.Solid, lineColor = {0, 0, 0}), Rectangle(extent={{

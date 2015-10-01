@@ -15,31 +15,31 @@ model DynamicVentilation
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_outside annotation(Placement(transformation(extent = {{-106, -20}, {-86, 0}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor Sensor_Toutside annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {-90, 12})));
   Modelica.Blocks.Logical.GreaterThreshold Higher_HeatingLimit(threshold = HeatingLimit) annotation(Placement(transformation(extent = {{-80, 20}, {-60, 40}})));
-  Modelica.Blocks.Sources.Constant Input_Tset(k = Tset) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 0, origin = {-70, 90}), iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-60, 90})));
+  Modelica.Blocks.Sources.Constant Input_Tset(k = Tset) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin = {-70, 90}), iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-60, 90})));
   Modelica.Blocks.Math.MultiSum multiSum(nu = 2) annotation(Placement(transformation(extent = {{-40, 68}, {-28, 80}})));
   Modelica.Blocks.Sources.Constant Source_Tdiff(k = Diff_toTempset) annotation(Placement(transformation(extent = {{-80, 46}, {-60, 66}})));
   Modelica.Blocks.Math.Gain Inverter(k = -1) annotation(Placement(transformation(extent = {{8, 30}, {20, 42}})));
-  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor Sensor_Tinside annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation = 0, origin = {14, -80})));
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor Sensor_Tinside annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, origin = {14, -80})));
   Modelica.Blocks.Logical.And Colder_and_HeatingLimit annotation(Placement(transformation(extent = {{-46, 28}, {-32, 42}})));
   Modelica.Blocks.Logical.Less less annotation(Placement(transformation(extent = {{-80, -60}, {-60, -40}})));
 equation
-  connect(port_outside, Sensor_Toutside.port) annotation(Line(points = {{-96, -10}, {-96, -4}, {-90, -4}, {-90, 2}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(port_inside, pITemp.Therm1) annotation(Line(points = {{94, -10}, {94, 27}, {-18, 27}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Sensor_Toutside.T, Higher_HeatingLimit.u) annotation(Line(points = {{-90, 22}, {-90, 30}, {-82, 30}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(multiSum.y, pITemp.soll) annotation(Line(points = {{-26.98, 74}, {-22, 74}, {-22, 45}, {-20, 45}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(Source_Tdiff.y, multiSum.u[1]) annotation(Line(points = {{-59, 56}, {-50, 56}, {-50, 76.1}, {-40, 76.1}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(pITemp.y, Inverter.u) annotation(Line(points = {{-3, 36}, {6.8, 36}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(Inverter.y, varAirExchange.InPort1) annotation(Line(points = {{20.6, 36}, {24, 36}, {24, -15.68}, {37.3, -15.68}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(Input_Tset.y, multiSum.u[2]) annotation(Line(points = {{-59, 90}, {-54, 90}, {-54, 88}, {-50, 88}, {-50, 71.9}, {-40, 71.9}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(Sensor_Tinside.port, port_inside) annotation(Line(points = {{24, -80}, {94, -80}, {94, -10}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Higher_HeatingLimit.y, Colder_and_HeatingLimit.u1) annotation(Line(points = {{-59, 30}, {-52, 30}, {-52, 35}, {-47.4, 35}}, color = {255, 0, 255}, smooth = Smooth.None));
-  connect(Colder_and_HeatingLimit.y, pITemp.onOff) annotation(Line(points = {{-31.3, 35}, {-24, 35}, {-24, 31}, {-21, 31}}, color = {255, 0, 255}, smooth = Smooth.None));
-  connect(less.u2, Sensor_Tinside.T) annotation(Line(points = {{-82, -58}, {-100, -58}, {-100, -80}, {4, -80}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(Sensor_Toutside.T, less.u1) annotation(Line(points = {{-90, 22}, {-100, 22}, {-100, -50}, {-82, -50}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(less.y, Colder_and_HeatingLimit.u2) annotation(Line(points = {{-59, -50}, {-52, -50}, {-52, 29.4}, {-47.4, 29.4}}, color = {255, 0, 255}, smooth = Smooth.None));
-  connect(port_outside, varAirExchange.port_a) annotation(Line(points = {{-96, -10}, {-96, -8}, {36, -8}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(varAirExchange.port_b, port_inside) annotation(Line(points = {{62, -8}, {94, -8}, {94, -10}}, color = {191, 0, 0}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(graphics={  Rectangle(extent=  {{-80, 80}, {80, -80}}, lineColor=  {0, 0, 0}, fillColor=  {211, 243, 255},
+  connect(port_outside, Sensor_Toutside.port) annotation(Line(points = {{-96, -10}, {-96, -4}, {-90, -4}, {-90, 2}}, color = {191, 0, 0}));
+  connect(port_inside, pITemp.Therm1) annotation(Line(points = {{94, -10}, {94, 27}, {-18, 27}}, color = {191, 0, 0}));
+  connect(Sensor_Toutside.T, Higher_HeatingLimit.u) annotation(Line(points = {{-90, 22}, {-90, 30}, {-82, 30}}, color = {0, 0, 127}));
+  connect(multiSum.y, pITemp.soll) annotation(Line(points = {{-26.98, 74}, {-22, 74}, {-22, 45}, {-20, 45}}, color = {0, 0, 127}));
+  connect(Source_Tdiff.y, multiSum.u[1]) annotation(Line(points = {{-59, 56}, {-50, 56}, {-50, 76.1}, {-40, 76.1}}, color = {0, 0, 127}));
+  connect(pITemp.y, Inverter.u) annotation(Line(points = {{-3, 36}, {6.8, 36}}, color = {0, 0, 127}));
+  connect(Inverter.y, varAirExchange.InPort1) annotation(Line(points = {{20.6, 36}, {24, 36}, {24, -15.68}, {37.3, -15.68}}, color = {0, 0, 127}));
+  connect(Input_Tset.y, multiSum.u[2]) annotation(Line(points = {{-59, 90}, {-54, 90}, {-54, 88}, {-50, 88}, {-50, 71.9}, {-40, 71.9}}, color = {0, 0, 127}));
+  connect(Sensor_Tinside.port, port_inside) annotation(Line(points = {{24, -80}, {94, -80}, {94, -10}}, color = {191, 0, 0}));
+  connect(Higher_HeatingLimit.y, Colder_and_HeatingLimit.u1) annotation(Line(points = {{-59, 30}, {-52, 30}, {-52, 35}, {-47.4, 35}}, color = {255, 0, 255}));
+  connect(Colder_and_HeatingLimit.y, pITemp.onOff) annotation(Line(points = {{-31.3, 35}, {-24, 35}, {-24, 31}, {-21, 31}}, color = {255, 0, 255}));
+  connect(less.u2, Sensor_Tinside.T) annotation(Line(points = {{-82, -58}, {-100, -58}, {-100, -80}, {4, -80}}, color = {0, 0, 127}));
+  connect(Sensor_Toutside.T, less.u1) annotation(Line(points = {{-90, 22}, {-100, 22}, {-100, -50}, {-82, -50}}, color = {0, 0, 127}));
+  connect(less.y, Colder_and_HeatingLimit.u2) annotation(Line(points = {{-59, -50}, {-52, -50}, {-52, 29.4}, {-47.4, 29.4}}, color = {255, 0, 255}));
+  connect(port_outside, varAirExchange.port_a) annotation(Line(points = {{-96, -10}, {-96, -8}, {36, -8}}, color = {191, 0, 0}));
+  connect(varAirExchange.port_b, port_inside) annotation(Line(points = {{62, -8}, {94, -8}, {94, -10}}, color = {191, 0, 0}));
+  annotation( Icon(graphics={  Rectangle(extent=  {{-80, 80}, {80, -80}}, lineColor=  {0, 0, 0}, fillColor=  {211, 243, 255},
             fillPattern=                                                                                                    FillPattern.Solid)}), Documentation(revisions = "<html>
  <ul>
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>

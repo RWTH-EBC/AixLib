@@ -12,10 +12,10 @@ model SimpleNLayer "Wall consisting of n layers"
   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(16)
     "Initial temperature"                                                                                      annotation(Dialog(group = "Thermal"));
   // 2n HeatConds
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatCondb[n](G = h .* l .* lambda ./ (d / 2)) annotation(Placement(transformation(extent = {{30, -28}, {50, -8}}, rotation = 0)));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatConda[n](G = h .* l .* lambda ./ (d / 2)) annotation(Placement(transformation(extent = {{-52, -28}, {-32, -8}}, rotation = 0)));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatCondb[n](G = h .* l .* lambda ./ (d / 2)) annotation(Placement(transformation(extent = {{30, -28}, {50, -8}})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatConda[n](G = h .* l .* lambda ./ (d / 2)) annotation(Placement(transformation(extent = {{-52, -28}, {-32, -8}})));
   // n Loads
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor Load[n](T(start = fill(T0, n)), C = c .* rho .* h .* l .* d) annotation(Placement(transformation(extent = {{-10, -60}, {10, -40}}, rotation = 0)));
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor Load[n](T(start = fill(T0, n)), C = c .* rho .* h .* l .* d) annotation(Placement(transformation(extent = {{-10, -60}, {10, -40}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a annotation(Placement(transformation(extent = {{-100, -20}, {-80, 0}}), iconTransformation(extent = {{-100, -20}, {-80, 0}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b annotation(Placement(transformation(extent = {{80, -20}, {100, 0}}), iconTransformation(extent = {{80, -20}, {100, 0}})));
 equation

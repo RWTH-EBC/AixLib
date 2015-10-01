@@ -8,10 +8,10 @@ model TempAndRad "Outdoor Temperature and solar irradiation"
   Modelica.Blocks.Interfaces.RealOutput Rad "Solar Irradiation in W/m2" annotation(Placement(transformation(extent = {{96, 30}, {116, 50}})));
   Modelica.Blocks.Math.UnitConversions.From_degC from_degC annotation(Placement(transformation(extent = {{66, -50}, {86, -30}})));
 equation
-  connect(OutdoorConditions.y[2], Rad) annotation(Line(points = {{11, 0}, {54, 0}, {54, 40}, {106, 40}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(OutdoorConditions.y[1], from_degC.u) annotation(Line(points = {{11, 0}, {54, 0}, {54, -40}, {64, -40}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(from_degC.y, T_out) annotation(Line(points = {{87, -40}, {106, -40}}, color = {0, 0, 127}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(info = "<html>
+  connect(OutdoorConditions.y[2], Rad) annotation(Line(points = {{11, 0}, {54, 0}, {54, 40}, {106, 40}}, color = {0, 0, 127}));
+  connect(OutdoorConditions.y[1], from_degC.u) annotation(Line(points = {{11, 0}, {54, 0}, {54, -40}, {64, -40}}, color = {0, 0, 127}));
+  connect(from_degC.y, T_out) annotation(Line(points = {{87, -40}, {106, -40}}, color = {0, 0, 127}));
+  annotation( Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This source outputs the outdoor air temperature in K from a table given in database.</p>
  <h4><span style=\"color:#008000\">Example Results</span></h4>

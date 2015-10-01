@@ -31,37 +31,29 @@ public
 equation
   connect(HeatOutput.y[1], productHeatOutput.u[1]) annotation (Line(
       points={{-39,50},{-32,50},{-32,3.5},{-24,3.5}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(Nr_People.y, productHeatOutput.u[2]) annotation (Line(
       points={{-47.4,-40},{-32,-40},{-32,-3.5},{-24,-3.5}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(Schedule, Nr_People.u) annotation (Line(
       points={{-100,0},{-85.6,0},{-85.6,-40},{-61.2,-40}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(Activity.y, HeatOutput.u[1]) annotation (Line(
       points={{-69,50},{-62,50}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(RadiationConvertor.Star, RadHeat) annotation (Line(
       points={{67.1,-60},{90,-60}},
       color={95,95,95},
-      pattern=LinePattern.Solid,
-      smooth=Smooth.None));
+      pattern=LinePattern.Solid));
   connect(RadiativeHeat.port, RadiationConvertor.Therm) annotation (Line(
       points={{40,-10},{48,-10},{48,-60},{48.8,-60}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(productHeatOutput.y, gain.u) annotation (Line(
       points={{-2.3,0},{0,0},{0,30},{3.2,30}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(productHeatOutput.y, gain1.u) annotation (Line(
       points={{-2.3,0},{0,0},{0,-10},{3.2,-10}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   annotation (Icon(graphics={
         Text(
           extent={{-40,-20},{44,-62}},
@@ -72,7 +64,6 @@ equation
         Polygon(
           points={{-90,-86},{-58,-42},{60,-42},{98,-86},{-90,-86}},
           pattern=LinePattern.Solid,
-          smooth=Smooth.None,
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid),
         Rectangle(
@@ -289,10 +280,7 @@ equation
           lineColor={255,0,0},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
-          textString="ERC")}), Diagram(coordinateSystem(
-          preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
-                                       graphics),
-    Documentation(info="<html>
+          textString="ERC")}),    Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Heat cource with convective and radiative component. The load is determined by a schedule and the type of activity. </p>
 <h4><span style=\"color:#008000\">Level of Development</span></h4>
