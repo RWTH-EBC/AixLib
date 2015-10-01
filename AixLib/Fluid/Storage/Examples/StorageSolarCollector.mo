@@ -71,40 +71,35 @@ model StorageSolarCollector
   Modelica.SIunits.Conversions.NonSIunits.Energy_kWh Q_ges;
 equation
   der(Q_ges) = (solarThermal.volume.heatPort.Q_flow - fixedTemperature.port.Q_flow) / 3.6e6;
-  connect(fixedTemperature.port, storage.heatPort) annotation(Line(points = {{-74, 24}, {-54, 24}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(booleanExpression.y, pump.IsNight) annotation(Line(points = {{-21, 64}, {-27.8, 64}}, color = {255, 0, 255}, smooth = Smooth.None));
-  connect(pump.port_b, storage.port_a_heatGenerator) annotation(Line(points = {{-38, 54}, {-38, 32.8}, {-37.6, 32.8}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(pipe.port_a, storage.port_b_heatGenerator) annotation(Line(points = {{-34, 0}, {-38, 0}, {-38, 16}, {-37.6, 16}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(pipe1.port_b, storage.port_a_consumer) annotation(Line(points = {{-48, -10}, {-46, -10}, {-46, 14}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(tempAndRad.Rad, solarThermal.Irradiation) annotation(Line(points = {{36, 23.4}, {36, 10.8}, {35, 10.8}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(tempAndRad.T_out, solarThermal.T_air) annotation(Line(points = {{28, 23.4}, {28, 10.8}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(pulse.y, boundary_ph1.p_in) annotation(Line(points={{-121,-4},{-114,-2}},      color = {0, 0, 127}, smooth = Smooth.None));
-  connect(simpleValve.port_b, pump.port_a) annotation(Line(points = {{79, 52}, {78, 52}, {78, 74}, {-38, 74}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(solarThermal.port_b, temperatureSensor.port_a) annotation(Line(points = {{44, 0}, {58, 0}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(solarThermal.port_a, pipe.port_b) annotation(Line(points = {{24, 0}, {-14, 0}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(temperatureSensor.port_b, simpleValve.port_a) annotation(Line(points = {{78, 0}, {78, 32}, {79, 32}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(const.y, PI.u_s) annotation(Line(points = {{90.3, -7}, {100, -7}, {100, 4.8}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(PI.y, add.u2) annotation(Line(points = {{100, 18.6}, {100, 25.2}, {100.4, 25.2}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(add.y, simpleValve.opening) annotation(Line(points = {{98, 34.4}, {98, 42}, {86.2, 42}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(const1.y, add.u1) annotation(Line(points = {{88.3, 25}, {92.15, 25}, {92.15, 25.2}, {95.6, 25.2}}, color = {0, 0, 127}, smooth = Smooth.None));
+  connect(fixedTemperature.port, storage.heatPort) annotation(Line(points = {{-74, 24}, {-54, 24}}, color = {191, 0, 0}));
+  connect(booleanExpression.y, pump.IsNight) annotation(Line(points = {{-21, 64}, {-27.8, 64}}, color = {255, 0, 255}));
+  connect(pump.port_b, storage.port_a_heatGenerator) annotation(Line(points = {{-38, 54}, {-38, 32.8}, {-37.6, 32.8}}, color = {0, 127, 255}));
+  connect(pipe.port_a, storage.port_b_heatGenerator) annotation(Line(points = {{-34, 0}, {-38, 0}, {-38, 16}, {-37.6, 16}}, color = {0, 127, 255}));
+  connect(pipe1.port_b, storage.port_a_consumer) annotation(Line(points = {{-48, -10}, {-46, -10}, {-46, 14}}, color = {0, 127, 255}));
+  connect(tempAndRad.Rad, solarThermal.Irradiation) annotation(Line(points = {{36, 23.4}, {36, 10.8}, {35, 10.8}}, color = {0, 0, 127}));
+  connect(tempAndRad.T_out, solarThermal.T_air) annotation(Line(points = {{28, 23.4}, {28, 10.8}}, color = {0, 0, 127}));
+  connect(pulse.y, boundary_ph1.p_in) annotation(Line(points={{-121,-4},{-114,-2}},      color = {0, 0, 127}));
+  connect(simpleValve.port_b, pump.port_a) annotation(Line(points = {{79, 52}, {78, 52}, {78, 74}, {-38, 74}}, color = {0, 127, 255}));
+  connect(solarThermal.port_b, temperatureSensor.port_a) annotation(Line(points = {{44, 0}, {58, 0}}, color = {0, 127, 255}));
+  connect(solarThermal.port_a, pipe.port_b) annotation(Line(points = {{24, 0}, {-14, 0}}, color = {0, 127, 255}));
+  connect(temperatureSensor.port_b, simpleValve.port_a) annotation(Line(points = {{78, 0}, {78, 32}, {79, 32}}, color = {0, 127, 255}));
+  connect(const.y, PI.u_s) annotation(Line(points = {{90.3, -7}, {100, -7}, {100, 4.8}}, color = {0, 0, 127}));
+  connect(PI.y, add.u2) annotation(Line(points = {{100, 18.6}, {100, 25.2}, {100.4, 25.2}}, color = {0, 0, 127}));
+  connect(add.y, simpleValve.opening) annotation(Line(points = {{98, 34.4}, {98, 42}, {86.2, 42}}, color = {0, 0, 127}));
+  connect(const1.y, add.u1) annotation(Line(points = {{88.3, 25}, {92.15, 25}, {92.15, 25.2}, {95.6, 25.2}}, color = {0, 0, 127}));
   connect(boundary_ph1.ports[1], pipe1.port_a) annotation (Line(
       points={{-92,-10},{-68,-10}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(boundary_ph2.ports[1], storage.port_b_consumer) annotation (Line(
       points={{-62,46},{-48,46},{-46,34}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(boundary_p.ports[1], pump.port_a) annotation (Line(
       points={{-66,80},{-38,80},{-38,74}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(temperatureSensor.T, PI.u_m) annotation (Line(
       points={{68,11},{68,18},{92.8,12}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-            -100},{100,100}}),                                                                           graphics), experiment(StopTime = 172800, Interval = 60), __Dymola_experimentSetupOutput, Documentation(info = "<html>
+      color={0,0,127}));
+  annotation( experiment(StopTime = 172800, Interval = 60),Documentation(info = "<html>
  <p><h4><font color=\"#008000\">Overview</font></h4></p>
  <p>This is a simple example of a storage and a solar collector.</p>
  </html>", revisions="<html>

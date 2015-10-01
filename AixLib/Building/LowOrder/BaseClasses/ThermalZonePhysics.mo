@@ -100,7 +100,7 @@ model ThermalZonePhysics "All sub-models of VDI 6007 connected to one model"
     withOuterwalls=withOuterwalls,
     splitfac=splitfac)
     annotation (Placement(transformation(extent={{18,-10},{76,46}})));
-  Modelica.Blocks.Interfaces.RealInput ventilationTemperature annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 0, origin = {-100, -50}), iconTransformation(extent = {{-15, -15}, {15, 15}}, rotation = 0, origin = {-76, -40})));
+  Modelica.Blocks.Interfaces.RealInput ventilationTemperature annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, origin = {-100, -50}), iconTransformation(extent = {{-15, -15}, {15, 15}}, origin = {-76, -40})));
   SolarRadAdapter solarRadAdapter[n]
     annotation (Placement(transformation(extent={{-74,28},{-54,48}})));
 
@@ -111,45 +111,39 @@ model ThermalZonePhysics "All sub-models of VDI 6007 connected to one model"
 equation
   if withWindows and withOuterwalls then
     connect(sunblind.sunblindonoff, eqAirTemp.sunblindsig) annotation(Line(points={{-40,60},
-            {-36,60},{-36,18}},                                                                                                   color = {0, 0, 127}, smooth = Smooth.None));
+            {-36,60},{-36,18}},                                                                                                   color = {0, 0, 127}));
   end if;
   if withOuterwalls then
-    connect(weather, eqAirTemp.weatherData) annotation(Line(points = {{-100, 10}, {-44, 10}}, color = {0, 0, 127}, smooth = Smooth.None));
+    connect(weather, eqAirTemp.weatherData) annotation(Line(points = {{-100, 10}, {-44, 10}}, color = {0, 0, 127}));
     connect(eqAirTemp.equalAirTemp, reducedOrderModel.equalAirTemp) annotation(Line(points={{-26.2,
-            4.4},{-2,4.4},{-2,19.12},{23.8,19.12}},                                                                                             color = {191, 0, 0}, smooth = Smooth.None));
+            4.4},{-2,4.4},{-2,19.12},{23.8,19.12}},                                                                                             color = {191, 0, 0}));
   end if;
   connect(internalGainsConv, reducedOrderModel.internalGainsConv) annotation(Line(points={{40,-90},
-          {40,-49},{52.8,-49},{52.8,-7.2}},                                                                                                   color = {191, 0, 0}, smooth = Smooth.None));
+          {40,-49},{52.8,-49},{52.8,-7.2}},                                                                                                   color = {191, 0, 0}));
   connect(internalGainsRad, reducedOrderModel.internalGainsRad) annotation(Line(points={{80,-90},
-          {80,-7.2},{68.75,-7.2}},                                                                                               color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
+          {80,-7.2},{68.75,-7.2}},                                                                                               color = {95, 95, 95}, pattern = LinePattern.Solid));
   connect(ventilationRate, reducedOrderModel.ventilationRate) annotation(Line(points={{-28,-90},
-          {4,-90},{4,-7.2},{35.98,-7.2}},                                                                                               color = {0, 0, 127}, smooth = Smooth.None));
-  connect(ventilationTemperature, reducedOrderModel.ventilationTemperature) annotation(Line(points = {{-100, -50}, {-12, -50}, {-12, 4.56}, {23.8, 4.56}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(solarRad_in, sunblind.Rad_In) annotation(Line(points={{-90,70},{-49,70}},                            color = {255, 128, 0}, smooth = Smooth.None));
+          {4,-90},{4,-7.2},{35.98,-7.2}},                                                                                               color = {0, 0, 127}));
+  connect(ventilationTemperature, reducedOrderModel.ventilationTemperature) annotation(Line(points = {{-100, -50}, {-12, -50}, {-12, 4.56}, {23.8, 4.56}}, color = {0, 0, 127}));
+  connect(solarRad_in, sunblind.Rad_In) annotation(Line(points={{-90,70},{-49,70}},                            color = {255, 128, 0}));
   connect(solarRadAdapter.solarRad_in, solarRad_in) annotation (Line(
       points={{-73,38},{-76,38},{-76,70},{-90,70}},
-      color={255,128,0},
-      smooth=Smooth.None));
+      color={255,128,0}));
   connect(solarRadAdapter.solarRad_out, eqAirTemp.solarRad_in) annotation (Line(
       points={{-54,38},{-50,38},{-50,15.6},{-44.5,15.6}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(sunblind.Rad_Out, partialCorG.SR_input) annotation (Line(
       points={{-31,70},{-28,70},{-28,69.9},{-23.8,69.9}},
-      color={255,128,0},
-      smooth=Smooth.None));
+      color={255,128,0}));
   connect(partialCorG.solarRadWinTrans, solRadWeightedSum.solarRad_in)
     annotation (Line(
       points={{-5,70},{0,70},{0,71},{5.4,71}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(solRadWeightedSum.solarRad_out, reducedOrderModel.solarRad_in)
     annotation (Line(
       points={{30.6,71},{33.66,71},{33.66,44.32}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-            -100},{100,100}}),                                                                           graphics), Icon(
+      color={0,0,127}));
+  annotation( Icon(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}}),                                                                                                    graphics={  Rectangle(extent={{
               -60,64},{98,-58}},                                                                                                    lineColor=
@@ -176,8 +170,7 @@ equation
               {230,230,230},
             fillPattern=FillPattern.Solid),                                                                                                    Polygon(points={{
               100,36},{-2,36},{100,68},{100,36}},
-            lineThickness=1,                                                                                                    smooth=
-              Smooth.None,                                                                                                    fillColor=
+            lineThickness=1,                                                                                                    fillColor=
               {236,99,92},
             fillPattern=FillPattern.Solid,
           pattern=LinePattern.Solid),                                                                                                    Rectangle(extent={{
@@ -197,21 +190,13 @@ equation
           fillColor={0,127,0},
           pattern=LinePattern.Solid),
         Line(
-          points={{24,-48},{44,-32},{44,10},{24,26}},
-          color={0,0,0},
-          smooth=Smooth.None),
+          points={{24,-48},{44,-32},{44,10},{24,26}}),
         Line(
-          points={{44,10},{92,10},{100,18}},
-          color={0,0,0},
-          smooth=Smooth.None),
+          points={{44,10},{92,10},{100,18}}),
         Line(
-          points={{44,-32},{92,-32},{100,-40}},
-          color={0,0,0},
-          smooth=Smooth.None),
+          points={{44,-32},{92,-32},{100,-40}}),
         Line(
-          points={{92,10},{92,-32}},
-          color={0,0,0},
-          smooth=Smooth.None),                                                                                                    Rectangle(extent={{
+          points={{92,10},{92,-32}}),                                                                                                    Rectangle(extent={{
               67,-2},{79,-10}},                                                                                                    lineColor=
               {0,0,0},                                                                                                    fillColor=
               {170,213,255},
@@ -230,7 +215,7 @@ equation
           lineThickness=0.5,
           fillColor={236,99,92},
           fillPattern=FillPattern.Solid,
-          textString="%name")}),                                                                                                    experiment(StopTime = 864000, Interval = 3599), experimentSetupOutput, Documentation(info = "<html>
+          textString="%name")}),                                                                                                    experiment(StopTime = 864000, Interval = 3599),Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <ul>
  <li>This model connects <a href=\"AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel\">ReducedOrderModel</a> with <a href=\"AixLib.Building.Components.Weather.Sunblind\">Sunblind</a> and <a href=\"AixLib.Building.LowOrder.BaseClasses.EqAirTemp\">EqAirTemp</a>. All this models have been developed in the context of VDI 6007 to have the whole VDI 6007 model in Dymola. ThermalZonePhysics reflects all components described in the standard. </li>

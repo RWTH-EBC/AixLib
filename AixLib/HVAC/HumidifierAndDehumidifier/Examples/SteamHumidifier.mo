@@ -10,12 +10,12 @@ model SteamHumidifier
   Modelica.Blocks.Sources.Constant temperature_steamIn(k = 273.15 + 100) annotation(Placement(transformation(extent = {{40, 40}, {20, 60}})));
   Anlagensimulation_WS1314.Ductwork.Duct duct(l = 10) annotation(Placement(transformation(extent = {{30, 4}, {52, 18}})));
 equation
-  connect(massFlow_steamIn.y, steamHumidifier.Massflow_steamIn) annotation(Line(points = {{-39, 50}, {-22.8, 50}, {-22.8, 19.34}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(temperature_steamIn.y, steamHumidifier.Temperature_steamIn) annotation(Line(points = {{19, 50}, {-13.2, 50}, {-13.2, 19.34}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(duct.portMoistAir_b, sink.portMoistAir_a) annotation(Line(points = {{52, 11}, {80, 11}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(source.portMoistAir_a, steamHumidifier.portMoistAir_a) annotation(Line(points = {{-82, 10}, {-58, 10}, {-58, 9}, {-30, 9}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(steamHumidifier.portMoistAir_b, duct.portMoistAir_a) annotation(Line(points = {{-6, 9}, {14, 9}, {14, 11}, {30, 11}}, color = {0, 127, 255}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), experiment(StopTime = 1000, Interval = 1, __Dymola_Algorithm = "Lsodar"), __Dymola_experimentSetupOutput, Documentation(info = "<html>
+  connect(massFlow_steamIn.y, steamHumidifier.Massflow_steamIn) annotation(Line(points = {{-39, 50}, {-22.8, 50}, {-22.8, 19.34}}, color = {0, 0, 127}));
+  connect(temperature_steamIn.y, steamHumidifier.Temperature_steamIn) annotation(Line(points = {{19, 50}, {-13.2, 50}, {-13.2, 19.34}}, color = {0, 0, 127}));
+  connect(duct.portMoistAir_b, sink.portMoistAir_a) annotation(Line(points = {{52, 11}, {80, 11}}, color = {0, 127, 255}));
+  connect(source.portMoistAir_a, steamHumidifier.portMoistAir_a) annotation(Line(points = {{-82, 10}, {-58, 10}, {-58, 9}, {-30, 9}}, color = {0, 127, 255}));
+  connect(steamHumidifier.portMoistAir_b, duct.portMoistAir_a) annotation(Line(points = {{-6, 9}, {14, 9}, {14, 11}, {30, 11}}, color = {0, 127, 255}));
+  annotation( experiment(StopTime = 1000, Interval = 1, __Dymola_Algorithm = "Lsodar"),Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Example shows how the steam humidifier works.</p>
  <p>In this particular set-up not all of the steam is absorbed because it would lead to over saturation.</p>

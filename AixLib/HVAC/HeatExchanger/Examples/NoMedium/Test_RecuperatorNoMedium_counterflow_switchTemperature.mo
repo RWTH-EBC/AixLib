@@ -13,21 +13,21 @@ model Test_RecuperatorNoMedium_counterflow_switchTemperature
   Modelica.Blocks.Math.Add subtract2(k1 = -1) annotation(Placement(transformation(extent = {{-22, 42}, {-32, 52}})));
   Modelica.Blocks.Math.Division division2 annotation(Placement(transformation(extent = {{-42, 42}, {-52, 52}})));
 equation
-  connect(m1flow.y, recuperatorNoMedium3.m1in) annotation(Line(points = {{45, -10}, {26, -10}, {26, 4}, {10, 4}}, color = {128, 0, 255}, smooth = Smooth.None));
-  connect(T1in.y, recuperatorNoMedium3.T1in) annotation(Line(points = {{45, 20}, {28, 20}, {28, 8}, {10, 8}}, color = {0, 127, 0}, smooth = Smooth.None));
-  connect(T2in.y, recuperatorNoMedium3.T2in) annotation(Line(points = {{-51, -20}, {-30, -20}, {-30, -8}, {-10, -8}}, color = {255, 85, 85}, smooth = Smooth.None));
-  connect(m2flow.y, recuperatorNoMedium3.m2in) annotation(Line(points = {{-51, 10}, {-32, 10}, {-32, -4}, {-10, -4}}, color = {0, 128, 255}, smooth = Smooth.None));
-  connect(recuperatorNoMedium3.T1out, subtract.u1) annotation(Line(points = {{10, -6}, {16, -6}, {16, -42}, {21, -42}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(T1out_ideal.y, subtract.u2) annotation(Line(points = {{11, -48}, {21, -48}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(subtract.y, division.u1) annotation(Line(points = {{32.5, -45}, {37.25, -45}, {37.25, -42}, {43, -42}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(T1out_ideal.y, division.u2) annotation(Line(points = {{11, -48}, {16, -48}, {16, -56}, {38, -56}, {38, -48}, {43, -48}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(T2out_ideal.y, subtract2.u1) annotation(Line(points = {{-11, 50}, {-21, 50}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(recuperatorNoMedium3.T2out, subtract2.u2) annotation(Line(points = {{-10, 8}, {-16, 8}, {-16, 44}, {-21, 44}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(T2out_ideal.y, division2.u2) annotation(Line(points = {{-11, 50}, {-16, 50}, {-16, 60}, {-36, 60}, {-36, 44}, {-41, 44}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(subtract2.y, division2.u1) annotation(Line(points = {{-32.5, 47}, {-38.25, 47}, {-38.25, 50}, {-41, 50}}, color = {0, 0, 127}, smooth = Smooth.None));
+  connect(m1flow.y, recuperatorNoMedium3.m1in) annotation(Line(points = {{45, -10}, {26, -10}, {26, 4}, {10, 4}}, color = {128, 0, 255}));
+  connect(T1in.y, recuperatorNoMedium3.T1in) annotation(Line(points = {{45, 20}, {28, 20}, {28, 8}, {10, 8}}, color = {0, 127, 0}));
+  connect(T2in.y, recuperatorNoMedium3.T2in) annotation(Line(points = {{-51, -20}, {-30, -20}, {-30, -8}, {-10, -8}}, color = {255, 85, 85}));
+  connect(m2flow.y, recuperatorNoMedium3.m2in) annotation(Line(points = {{-51, 10}, {-32, 10}, {-32, -4}, {-10, -4}}, color = {0, 128, 255}));
+  connect(recuperatorNoMedium3.T1out, subtract.u1) annotation(Line(points = {{10, -6}, {16, -6}, {16, -42}, {21, -42}}, color = {0, 0, 127}));
+  connect(T1out_ideal.y, subtract.u2) annotation(Line(points = {{11, -48}, {21, -48}}, color = {0, 0, 127}));
+  connect(subtract.y, division.u1) annotation(Line(points = {{32.5, -45}, {37.25, -45}, {37.25, -42}, {43, -42}}, color = {0, 0, 127}));
+  connect(T1out_ideal.y, division.u2) annotation(Line(points = {{11, -48}, {16, -48}, {16, -56}, {38, -56}, {38, -48}, {43, -48}}, color = {0, 0, 127}));
+  connect(T2out_ideal.y, subtract2.u1) annotation(Line(points = {{-11, 50}, {-21, 50}}, color = {0, 0, 127}));
+  connect(recuperatorNoMedium3.T2out, subtract2.u2) annotation(Line(points = {{-10, 8}, {-16, 8}, {-16, 44}, {-21, 44}}, color = {0, 0, 127}));
+  connect(T2out_ideal.y, division2.u2) annotation(Line(points = {{-11, 50}, {-16, 50}, {-16, 60}, {-36, 60}, {-36, 44}, {-41, 44}}, color = {0, 0, 127}));
+  connect(subtract2.y, division2.u1) annotation(Line(points = {{-32.5, 47}, {-38.25, 47}, {-38.25, 50}, {-41, 50}}, color = {0, 0, 127}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent=  {{30, -74}, {98, -96}}, lineColor=  {135, 135, 135}, textString=  "1: counter-current flow
  2: co-current flow
- 3: cross flow", horizontalAlignment=  TextAlignment.Left)}), experiment(StopTime = 3.5), __Dymola_experimentSetupOutput, Documentation(info = "<html>
+ 3: cross flow", horizontalAlignment=  TextAlignment.Left)}), experiment(StopTime = 3.5),Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Test the model with the extreme case of temperature difference between the media becomes zero. This kind of test is important for dynamic simulations to understand how the model can be used or improved. No temeprature difference seems to be no problem for the model (in contrast to the case where the mass flow rate will go to zero).</p>
  </html>"));

@@ -161,92 +161,74 @@ equation
 
   connect(Source_TsetC.y,idealHeaterCooler. soll_cool)       annotation (Line(
       points={{3.65,-43.5},{11.2,-43.5},{11.2,-28.8}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(Source_TsetH.y,idealHeaterCooler. soll_heat)       annotation (Line(
       points={{26.35,-43.5},{19,-43.5},{19,-28.8}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(Source_InternalGains_convective.y, InternalGains_convective.Q_flow)
     annotation (Line(
       points={{-98.35,-24.5},{-93,-24.5},{-93,-23},{-92,-23},{-92,-24},{-91,-24}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
 
   connect(Source_InternalGains_radiative.y, InternalGains_radiative.Q_flow)
     annotation (Line(
       points={{-99.4,-52},{-92,-52}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(eqAirTemp.equalAirTempWindow, reducedOrderModel.equalAirTempWindow)
     annotation (Line(
       points={{2.78,38.36},{3.9,38.36},{3.9,38.22},{16.2,38.22}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(eqAirTemp.equalAirTemp, reducedOrderModel.equalAirTemp) annotation (
       Line(
       points={{2.78,29.34},{4.4,29.34},{4.4,29.22},{16.2,29.22}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(Source_Weather.y, eqAirTemp.weatherData) annotation (Line(
       points={{-79,40},{-57,40},{-57,35.5},{-16.8,35.5}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(Source_Weather.y[1], reducedOrderModel.ventilationTemperature)
     annotation (Line(
       points={{-79,40},{-57,40},{-57,19.86},{16.2,19.86}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(InternalGains_convective.port, reducedOrderModel.internalGainsConv)
     annotation (Line(
       points={{-71,-24},{-11,-24},{-11,-12},{32.2,-12},{32.2,12.3}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(InternalGains_radiative.port, reducedOrderModel.internalGainsRad)
     annotation (Line(
       points={{-72,-52},{-52,-52},{-52,-31},{-7,-31},{-7,-13},{41,-13},{41,12.3}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(idealHeaterCooler.HeatCoolRoom, reducedOrderModel.internalGainsConv)
     annotation (Line(
       points={{25.4,-22.8},{32,-22.8},{32,12.3},{32.2,12.3}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(AirExchangeRate.y, reducedOrderModel.ventilationRate) annotation (
       Line(
       points={{-26.35,-43.5},{-19,-43.5},{-19,-11},{24,-11},{24,12.3},{22.92,
           12.3}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
 
   connect(radOnTiltedSurf_Perez.OutTotalRadTilted, corG_VDI6007_1.SR_input)
     annotation (Line(
       points={{-78.8,77},{-53,77},{-53,63.9},{-47.8,63.9}},
-      color={255,128,0},
-      smooth=Smooth.None));
+      color={255,128,0}));
   connect(sunblind.y, eqAirTemp.sunblindsig) annotation (Line(
       points={{-10.35,75.5},{-8,75.5},{-8,44.3}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(solarRadAdapter.solarRad_out, eqAirTemp.solarRad_in) annotation (Line(
       points={{-25,41.5},{-25,41.66},{-17.35,41.66}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(solarRadAdapter.solarRad_in, radOnTiltedSurf_Perez.OutTotalRadTilted)
     annotation (Line(
       points={{-44,41.5},{-66,41.5},{-66,77},{-78.8,77}},
-      color={255,128,0},
-      smooth=Smooth.None));
+      color={255,128,0}));
   connect(corG_VDI6007_1.solarRadWinTrans, SolarRadWeightedSum.solarRad_in)
     annotation (Line(
       points={{-29,64},{-1,64}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(SolarRadWeightedSum.solarRad_out, reducedOrderModel.solarRad_in)
     annotation (Line(
       points={{17,64},{21.64,64},{21.64,45.42}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   annotation (Diagram(coordinateSystem(
         extent={{-150,-100},{120,90}},
         preserveAspectRatio=false,
@@ -273,7 +255,7 @@ Rectangle(extent={{-150,91},{-50,-9}},
           extent={{-139,16},{-111,0}},
           lineColor={0,0,255},
           textString="1 - Direct normal irradiance in W/m2
-2 - global horizontal 
+2 - global horizontal
      radiance in W/m2
 "),     Text(
           extent={{-147,-2},{-79,-10}},

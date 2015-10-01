@@ -1,5 +1,5 @@
 within AixLib.DataBase.Radiators;
-package StandardMFD_WSchV1984_OneAppartment 
+package StandardMFD_WSchV1984_OneAppartment
   extends Modelica.Icons.Package;
 
 

@@ -9,33 +9,26 @@ model WindowSimple
   Modelica.Blocks.Sources.Constant SolarRadiation(k = 100) annotation(Placement(transformation(extent = {{-100, 40}, {-80, 60}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature Tinside1(T = 293.15) annotation(Placement(transformation(extent = {{58, 32}, {38, 52}})));
 equation
-  connect(Toutside.port, windowSimple.port_outside) annotation(Line(points = {{-42, 10}, {-34, 10}, {-34, 10.4}, {-22.2, 10.4}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(windowSimple.port_inside, Tinside.port) annotation(Line(points = {{10.2, 10.4}, {24, 10.4}, {24, 10}, {38, 10}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(windowSimple.Star, Tinside1.port) annotation(Line(points = {{10.2, 21.6}, {20, 21.6}, {20, 42}, {38, 42}}, color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
-  connect(varRad.solarRad_out[1], windowSimple.solarRad_in) annotation(Line(points = {{-47, 50}, {-32, 50}, {-32, 21.6}, {-22.2, 21.6}}, color = {255, 128, 0}, smooth = Smooth.None));
+  connect(Toutside.port, windowSimple.port_outside) annotation(Line(points = {{-42, 10}, {-34, 10}, {-34, 10.4}, {-22.2, 10.4}}, color = {191, 0, 0}));
+  connect(windowSimple.port_inside, Tinside.port) annotation(Line(points = {{10.2, 10.4}, {24, 10.4}, {24, 10}, {38, 10}}, color = {191, 0, 0}));
+  connect(windowSimple.Star, Tinside1.port) annotation(Line(points = {{10.2, 21.6}, {20, 21.6}, {20, 42}, {38, 42}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
+  connect(varRad.solarRad_out[1], windowSimple.solarRad_in) annotation(Line(points = {{-47, 50}, {-32, 50}, {-32, 21.6}, {-22.2, 21.6}}, color = {255, 128, 0}));
   connect(SolarRadiation.y, varRad.I[1]) annotation (Line(
       points={{-79,50},{-74,50},{-74,58.9},{-64.9,58.9}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(SolarRadiation.y, varRad.I_dir[1]) annotation (Line(
       points={{-79,50},{-74,50},{-74,55},{-65,55}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(SolarRadiation.y, varRad.I_diff[1]) annotation (Line(
       points={{-79,50},{-76,50},{-76,48},{-74,48},{-74,51},{-65,51}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(SolarRadiation.y, varRad.I_gr[1]) annotation (Line(
       points={{-79,50},{-74,50},{-74,46.9},{-64.9,46.9}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(SolarRadiation.y, varRad.AOI[1]) annotation (Line(
       points={{-79,50},{-74,50},{-74,43},{-65,43}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}),
-                     graphics), experiment(StopTime = 3600, Interval = 60, Algorithm = "Lsodar"), experimentSetupOutput, Documentation(info = "<html>
+      color={0,0,127}));
+  annotation( experiment(StopTime = 3600, Interval = 60, Algorithm = "Lsodar"),Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>Simulation to test the <a href=\"AixLib.Building.Components.WindowsDoors.WindowSimple\">WindowSimple</a> model.</p>
  <h4><font color=\"#008000\">Concept</font></h4>

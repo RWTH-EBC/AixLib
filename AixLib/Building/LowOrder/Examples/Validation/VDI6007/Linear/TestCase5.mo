@@ -47,63 +47,51 @@ model TestCase5
 equation
   referenceTemp = reference.y;
   simulationTemp = reducedModel.airload.port.T;
-  connect(personsRadiative.port, HeatToStar.Therm) annotation(Line(points = {{30, -90}, {42.8, -90}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(outdoorTemp.y[1], varTemp.T) annotation(Line(points = {{-41, 32}, {-10, 32}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(varTemp.port, reducedModel.equalAirTemp) annotation(Line(points = {{12, 32}, {22, 32}, {22, 46.8}, {51.4, 46.8}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(infiltrationTemp.y, reducedModel.ventilationTemperature) annotation(Line(points = {{16.5, 1}, {16.5, 18.5}, {51.4, 18.5}, {51.4, 36.4}}, color = {0, 0, 127}, smooth = Smooth.None));
+  connect(personsRadiative.port, HeatToStar.Therm) annotation(Line(points = {{30, -90}, {42.8, -90}}, color = {191, 0, 0}));
+  connect(outdoorTemp.y[1], varTemp.T) annotation(Line(points = {{-41, 32}, {-10, 32}}, color = {0, 0, 127}));
+  connect(varTemp.port, reducedModel.equalAirTemp) annotation(Line(points = {{12, 32}, {22, 32}, {22, 46.8}, {51.4, 46.8}}, color = {191, 0, 0}));
+  connect(infiltrationTemp.y, reducedModel.ventilationTemperature) annotation(Line(points = {{16.5, 1}, {16.5, 18.5}, {51.4, 18.5}, {51.4, 36.4}}, color = {0, 0, 127}));
   connect(infiltrationRate.y, reducedModel.ventilationRate) annotation(Line(points={{40.5,1},
-          {40.5,14.5},{58.54,14.5},{58.54,28}},                                                                                           color = {0, 0, 127}, smooth = Smooth.None));
+          {40.5,14.5},{58.54,14.5},{58.54,28}},                                                                                           color = {0, 0, 127}));
   connect(personsConvective.port, reducedModel.internalGainsConv) annotation(Line(points={{30,-62},
-          {68.4,-62},{68.4,28}},                                                                                                 color = {191, 0, 0}, smooth = Smooth.None));
+          {68.4,-62},{68.4,28}},                                                                                                 color = {191, 0, 0}));
   connect(machinesConvective.port, reducedModel.internalGainsConv) annotation(Line(points={{30,-42},
-          {68.4,-42},{68.4,28}},                                                                                                  color = {191, 0, 0}, smooth = Smooth.None));
+          {68.4,-42},{68.4,28}},                                                                                                  color = {191, 0, 0}));
   connect(HeatToStar.Star, reducedModel.internalGainsRad) annotation(Line(points={{61.1,
-          -90},{78,-90},{78,28},{77.75,28}},                                                                                        color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
-  connect(innerLoads.y[3], machinesConvective.Q_flow) annotation(Line(points = {{-37, -62}, {-18, -62}, {-18, -42}, {10, -42}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(innerLoads.y[2], personsConvective.Q_flow) annotation(Line(points = {{-37, -62}, {10, -62}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(innerLoads.y[1], personsRadiative.Q_flow) annotation(Line(points = {{-37, -62}, {-18, -62}, {-18, -90}, {10, -90}}, color = {0, 0, 127}, smooth = Smooth.None));
+          -90},{78,-90},{78,28},{77.75,28}},                                                                                        color = {95, 95, 95}, pattern = LinePattern.Solid));
+  connect(innerLoads.y[3], machinesConvective.Q_flow) annotation(Line(points = {{-37, -62}, {-18, -62}, {-18, -42}, {10, -42}}, color = {0, 0, 127}));
+  connect(innerLoads.y[2], personsConvective.Q_flow) annotation(Line(points = {{-37, -62}, {10, -62}}, color = {0, 0, 127}));
+  connect(innerLoads.y[1], personsRadiative.Q_flow) annotation(Line(points = {{-37, -62}, {-18, -62}, {-18, -90}, {10, -90}}, color = {0, 0, 127}));
   connect(windowRad.y, PrescribedSolarRad.I) annotation (Line(
       points={{-73,78},{-66,78},{-66,86.9},{-58.9,86.9}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(windowRad.y, PrescribedSolarRad.I_dir) annotation (Line(
       points={{-73,78},{-66,78},{-66,83},{-59,83}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(windowRad.y, PrescribedSolarRad.I_diff) annotation (Line(
       points={{-73,78},{-66,78},{-66,79},{-59,79}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(windowRad.y, PrescribedSolarRad.I_gr) annotation (Line(
       points={{-73,78},{-66,78},{-66,74.9},{-58.9,74.9}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(windowRad.y, PrescribedSolarRad.AOI) annotation (Line(
       points={{-73,78},{-66,78},{-66,71},{-59,71}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(solarRadAdapter.solarRad_out, SolarRadWeightedSum.solarRad_in)
     annotation (Line(
       points={{12,78},{19,78}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(SolarRadWeightedSum.solarRad_out, reducedModel.solarRad_in)
     annotation (Line(
       points={{37,78},{57.18,78},{57.18,64.8}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(PrescribedSolarRad.solarRad_out, sunblind.Rad_In) annotation (Line(
       points={{-41,78},{-35,78}},
-      color={255,128,0},
-      smooth=Smooth.None));
+      color={255,128,0}));
   connect(sunblind.Rad_Out, solarRadAdapter.solarRad_in) annotation (Line(
       points={{-17,78},{-7,78}},
-      color={255,128,0},
-      smooth=Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-            -100},{100,100}}),
-            graphics),
-            experiment(StopTime=5.184e+006,Interval=3600, __Dymola_Algorithm="Lsodar"),
+      color={255,128,0}));
+  annotation(            experiment(StopTime=5.184e+006,Interval=3600, __Dymola_Algorithm="Lsodar"),
             __Dymola_Commands(file=
                                "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Linear/TestCase5.mos"
         "Simulate and plot"),
@@ -128,5 +116,5 @@ equation
 <p>All values are given in the VDI 6007-1. </p>
 <p>Same Test Case exists in VDI 6020. </p>
 <p>A script to run this test case can be found in AixLib\\Resources\\Scripts\\Dymola\\Building\\LowOrder\\Examples\\Validation\\Linear.</p>
-</html>"),  Icon(graphics));
+</html>"));
 end TestCase5;

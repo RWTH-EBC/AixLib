@@ -6,12 +6,12 @@ model SimpleInnerWall "1 capacitance, 1 resistance"
   parameter Modelica.SIunits.Temp_K T0 = 295.15
     "Initial temperature for all components";
   //parameter SI.Area A=16 "Wall Area";
-  Modelica.Thermal.HeatTransfer.Components.ThermalResistor Res1(R = R1) annotation(Placement(transformation(extent = {{-18, 18}, {2, 38}}, rotation = 0)));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a annotation(Placement(transformation(extent = {{-110, -10}, {-90, 10}}, rotation = 0), iconTransformation(extent = {{-110, -10}, {-90, 10}})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalResistor Res1(R = R1) annotation(Placement(transformation(extent = {{-18, 18}, {2, 38}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a annotation(Placement(transformation(extent = {{-110, -10}, {-90, 10}}), iconTransformation(extent = {{-110, -10}, {-90, 10}})));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor load1(C = C1, T(start = T0)) annotation(Placement(transformation(extent = {{32, 4}, {52, 24}})));
 equation
-  connect(port_a, Res1.port_a) annotation(Line(points = {{-100, 0}, {-60, 0}, {-60, 28}, {-18, 28}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Res1.port_b, load1.port) annotation(Line(points = {{2, 28}, {20, 28}, {20, 0}, {42, 0}, {42, 4}}, color = {191, 0, 0}, smooth = Smooth.None));
+  connect(port_a, Res1.port_a) annotation(Line(points = {{-100, 0}, {-60, 0}, {-60, 28}, {-18, 28}}, color = {191, 0, 0}));
+  connect(Res1.port_b, load1.port) annotation(Line(points = {{2, 28}, {20, 28}, {20, 0}, {42, 0}, {42, 4}}, color = {191, 0, 0}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 120}}), graphics), Documentation(info="<html>
 <p>The model works like an electric circuit as the equations of heat transfer are similar to them.</p>
 <p>The class contains following components: </p>
@@ -58,9 +58,9 @@ equation
             fillPattern=                                                                                                    FillPattern.Solid, lineColor=  {175, 175, 175}), Rectangle(extent=  {{-120, 100}, {-66, 66}}, fillColor=  {255, 213, 170},
             fillPattern=                                                                                                    FillPattern.Solid, lineColor=  {175, 175, 175}), Rectangle(extent=  {{-88, 120}, {-120, -100}}, fillColor=  {255, 255, 255},
             fillPattern=                                                                                                    FillPattern.Solid, pattern=  LinePattern.Solid), Rectangle(extent=  {{120, 120}, {89, -100}}, fillColor=  {255, 255, 255},
-            fillPattern=                                                                                                    FillPattern.Solid, pattern=  LinePattern.Solid), Line(points=  {{-90, 0}, {-2, 0}}, color=  {0, 0, 0}, thickness=  0.5, smooth=  Smooth.None), Rectangle(extent=  {{-74, 12}, {-26, -10}}, lineColor=  {0, 0, 0},
+            fillPattern=                                                                                                    FillPattern.Solid, pattern=  LinePattern.Solid), Line(points=  {{-90, 0}, {-2, 0}}, color=  {0, 0, 0}, thickness=  0.5), Rectangle(extent=  {{-74, 12}, {-26, -10}}, lineColor=  {0, 0, 0},
             lineThickness=                                                                                                    0.5, fillColor=  {255, 255, 255},
-            fillPattern=                                                                                                    FillPattern.Solid), Line(points=  {{-2, 0}, {-2, -32}}, color=  {0, 0, 0}, thickness=  0.5, smooth=  Smooth.None), Rectangle(extent=  {{15, -32}, {-19, -44}},
+            fillPattern=                                                                                                    FillPattern.Solid), Line(points=  {{-2, 0}, {-2, -32}}, color=  {0, 0, 0}, thickness=  0.5), Rectangle(extent=  {{15, -32}, {-19, -44}},
             lineThickness=                                                                                                    0.5, fillColor=  {255, 255, 255},
-            fillPattern=                                                                                                    FillPattern.Solid, pattern=  LinePattern.Solid), Line(points=  {{-19, -32}, {15, -32}}, pattern=  LinePattern.Solid, thickness=  0.5, smooth=  Smooth.None), Line(points=  {{-19, -44}, {15, -44}}, pattern=  LinePattern.Solid, thickness=  0.5, smooth=  Smooth.None), Text(extent=  {{-90, 142}, {90, 104}}, lineColor=  {0, 0, 255}, textString=  "%name")}));
+            fillPattern=                                                                                                    FillPattern.Solid, pattern=  LinePattern.Solid), Line(points=  {{-19, -32}, {15, -32}}, pattern=  LinePattern.Solid, thickness=  0.5), Line(points=  {{-19, -44}, {15, -44}}, pattern=  LinePattern.Solid, thickness=  0.5), Text(extent=  {{-90, 142}, {90, 104}}, lineColor=  {0, 0, 255}, textString=  "%name")}));
 end SimpleInnerWall;

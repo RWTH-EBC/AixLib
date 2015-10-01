@@ -19,30 +19,23 @@ model Lights_relative "light heat source model"
 equation
   connect(MaxLighting.y,productHeatOutput. u[2])
                                           annotation (Line(
-      points={{-69,50},{-48,50},{-48,-3.5},{-40,-3.5}},
-      color={0,0,0},
-      smooth=Smooth.None));
+      points={{-69,50},{-48,50},{-48,-3.5},{-40,-3.5}}));
   connect(Schedule,productHeatOutput. u[1]) annotation (Line(
       points={{-100,0},{-76,0},{-76,-20},{-48,-20},{-48,-4},{-40,-4},{-40,3.5}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(RadiativeHeat.port, RadiationConvertor.Therm) annotation (Line(
       points={{40,-10},{46,-10},{46,-60},{50.8,-60}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(RadiationConvertor.Star, RadHeat) annotation (Line(
       points={{69.1,-60},{90,-60}},
       color={95,95,95},
-      pattern=LinePattern.Solid,
-      smooth=Smooth.None));
+      pattern=LinePattern.Solid));
   connect(productHeatOutput.y, gain.u) annotation (Line(
       points={{-18.3,0},{-8,0},{-8,30},{3.2,30}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(productHeatOutput.y, gain1.u) annotation (Line(
       points={{-18.3,0},{-8,0},{-8,-10},{3.2,-10}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   annotation (Icon(graphics={
         Ellipse(
           extent={{-52,72},{50,-40}},
@@ -51,28 +44,18 @@ equation
           fillPattern=FillPattern.Solid),
         Line(
           points={{-26,-48},{22,-48}},
-          color={0,0,0},
-          smooth=Smooth.None,
           thickness=1),
         Line(
           points={{-24,-56},{22,-56}},
-          color={0,0,0},
-          smooth=Smooth.None,
           thickness=1),
         Line(
           points={{-24,-64},{22,-64}},
-          color={0,0,0},
-          smooth=Smooth.None,
           thickness=1),
         Line(
           points={{-24,-72},{22,-72}},
-          color={0,0,0},
-          smooth=Smooth.None,
           thickness=1),
         Line(
           points={{-28,-42},{-28,-80},{26,-80},{26,-42}},
-          color={0,0,0},
-          smooth=Smooth.None,
           thickness=1)}), Documentation(revisions="<html>
 <p><ul>
 <li><i>October 21, 2014&nbsp;</i> by Ana Constantin:<br>Added a lower positive limit to the surface area, so it will not lead to a division by zero</li>
@@ -93,7 +76,5 @@ equation
 <h4><span style=\"color:#008000\">Example Results</span></h4>
 <p><a href=\"AixLib.Building.Examples.Sources.InternalGains.Lights\">AixLib.Building.Examples.Sources.InternalGains.Lights</a> </p>
 <p><a href=\"AixLib.Building.Examples.Sources.InternalGains.OneOffice\">AixLib.Building.Examples.Sources.InternalGains.OneOffice</a></p>
-</html>"),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}), graphics));
+</html>"));
 end Lights_relative;

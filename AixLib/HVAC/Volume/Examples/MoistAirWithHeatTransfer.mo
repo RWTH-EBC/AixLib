@@ -18,19 +18,19 @@ model MoistAirWithHeatTransfer
   AixLib.HVAC.Volume.VolumeMoistAir volumeMoistAir_M1(V = 1) annotation(Placement(transformation(extent = {{-20, 20}, {20, -20}}, rotation = 180, origin = {-12, -82})));
   Modelica.Blocks.Sources.Ramp ramp(startTime = 100, duration = 100, height = -2000) annotation(Placement(transformation(extent = {{-80, -52}, {-60, -32}})));
 equation
-  connect(massflowsourceMoistAir_mhX_1.portMoistAir_a, humiditySensor_1.portMoistAir_a) annotation(Line(points = {{-70, 55.5}, {-63, 55.5}, {-63, 56}, {-56, 56}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(humiditySensor_1.portMoistAir_b, volumeMoistAir_1.portMoistAir_a) annotation(Line(points = {{-36, 56}, {44, 56}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(humiditySensor_2.portMoistAir_b, volumeMoistAir_2.portMoistAir_a) annotation(Line(points = {{-32, 0}, {40, 0}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(humiditySensor_2.portMoistAir_a, massflowsourceMoistAir_mhX_2.portMoistAir_a) annotation(Line(points = {{-52, 0}, {-66, 0}, {-66, 0.5}, {-73, 0.5}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(humiditySensor_C.portMoistAir_b, boundaryMoistAir_phX1.portMoistAir_a) annotation(Line(points = {{-60, -82}, {-70, -82}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(volumeMoistAir_2.portMoistAir_b, volumeMoistAir_M.portMoistAir_a) annotation(Line(points = {{80, 0}, {98, 0}, {98, -82}, {86, -82}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(volumeMoistAir_1.portMoistAir_b, volumeMoistAir_M.portMoistAir_a) annotation(Line(points = {{84, 56}, {98, 56}, {98, -82}, {86, -82}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(humiditySensor_M.portMoistAir_b, volumeMoistAir_M1.portMoistAir_a) annotation(Line(points = {{16, -82}, {8, -82}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(volumeMoistAir_M1.portMoistAir_b, humiditySensor_C.portMoistAir_a) annotation(Line(points = {{-32, -82}, {-40, -82}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(volumeMoistAir_M.portMoistAir_b, humiditySensor_M.portMoistAir_a) annotation(Line(points = {{46, -82}, {36, -82}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(prescribedHeatFlow.port, volumeMoistAir_M1.heatPort) annotation(Line(points = {{-20, -42}, {-12, -42}, {-12, -62}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(ramp.y, prescribedHeatFlow.Q_flow) annotation(Line(points = {{-59, -42}, {-40, -42}}, color = {0, 0, 127}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), experiment(StopTime = 1000, Interval = 1), __Dymola_experimentSetupOutput, Documentation(info = "<html>
+  connect(massflowsourceMoistAir_mhX_1.portMoistAir_a, humiditySensor_1.portMoistAir_a) annotation(Line(points = {{-70, 55.5}, {-63, 55.5}, {-63, 56}, {-56, 56}}, color = {0, 127, 255}));
+  connect(humiditySensor_1.portMoistAir_b, volumeMoistAir_1.portMoistAir_a) annotation(Line(points = {{-36, 56}, {44, 56}}, color = {0, 127, 255}));
+  connect(humiditySensor_2.portMoistAir_b, volumeMoistAir_2.portMoistAir_a) annotation(Line(points = {{-32, 0}, {40, 0}}, color = {0, 127, 255}));
+  connect(humiditySensor_2.portMoistAir_a, massflowsourceMoistAir_mhX_2.portMoistAir_a) annotation(Line(points = {{-52, 0}, {-66, 0}, {-66, 0.5}, {-73, 0.5}}, color = {0, 127, 255}));
+  connect(humiditySensor_C.portMoistAir_b, boundaryMoistAir_phX1.portMoistAir_a) annotation(Line(points = {{-60, -82}, {-70, -82}}, color = {0, 127, 255}));
+  connect(volumeMoistAir_2.portMoistAir_b, volumeMoistAir_M.portMoistAir_a) annotation(Line(points = {{80, 0}, {98, 0}, {98, -82}, {86, -82}}, color = {0, 127, 255}));
+  connect(volumeMoistAir_1.portMoistAir_b, volumeMoistAir_M.portMoistAir_a) annotation(Line(points = {{84, 56}, {98, 56}, {98, -82}, {86, -82}}, color = {0, 127, 255}));
+  connect(humiditySensor_M.portMoistAir_b, volumeMoistAir_M1.portMoistAir_a) annotation(Line(points = {{16, -82}, {8, -82}}, color = {0, 127, 255}));
+  connect(volumeMoistAir_M1.portMoistAir_b, humiditySensor_C.portMoistAir_a) annotation(Line(points = {{-32, -82}, {-40, -82}}, color = {0, 127, 255}));
+  connect(volumeMoistAir_M.portMoistAir_b, humiditySensor_M.portMoistAir_a) annotation(Line(points = {{46, -82}, {36, -82}}, color = {0, 127, 255}));
+  connect(prescribedHeatFlow.port, volumeMoistAir_M1.heatPort) annotation(Line(points = {{-20, -42}, {-12, -42}, {-12, -62}}, color = {191, 0, 0}));
+  connect(ramp.y, prescribedHeatFlow.Q_flow) annotation(Line(points = {{-59, -42}, {-40, -42}}, color = {0, 0, 127}));
+  annotation( experiment(StopTime = 1000, Interval = 1),Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Example to show mixing of fluid flows and heat transfer for moist air model</p>
  </html>", revisions = "<html>
@@ -38,5 +38,5 @@ equation
  <ul>
  <li>implemented</li>
  </ul>
- </html>"), Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}})));
+ </html>"));
 end MoistAirWithHeatTransfer;

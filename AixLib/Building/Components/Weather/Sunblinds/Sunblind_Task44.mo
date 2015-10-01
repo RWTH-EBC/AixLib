@@ -49,35 +49,26 @@ equation
    Rad_horizontal = Rad_In[5].I; /// !!!!!!!!!!!!!!!!
   connect(realExpression1.y, movingAverage.u) annotation (Line(
       points={{-79,70},{-62,70}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(movingAverage.y, greaterThreshold.u) annotation (Line(
       points={{-39,70},{-12,70}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(realExpression.y, hysteresis1.u) annotation (Line(
       points={{-79,36},{-68,36}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(greaterThreshold.y, and1.u1) annotation (Line(
       points={{11,70},{14,70},{14,42},{18,42}},
-      color={255,0,255},
-      smooth=Smooth.None));
+      color={255,0,255}));
   connect(hysteresis.y, and1.u2) annotation (Line(
       points={{19,70},{12,70},{12,34},{18,34}},
-      color={255,0,255},
-      smooth=Smooth.None));
+      color={255,0,255}));
   connect(temperatureSensor1.T, hysteresis.u) annotation (Line(
       points={{48,70},{42,70}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(temperatureSensor1.port, RoomTempSensor) annotation (Line(
       points={{68,70},{90,70}},
-      color={191,0,0},
-      smooth=Smooth.None));
-            annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}}),
-                                graphics), Icon(coordinateSystem(
+      color={191,0,0}));
+            annotation ( Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
                                                 graphics={
         Rectangle(
@@ -132,13 +123,9 @@ equation
           fillPattern=FillPattern.Solid),
         Line(
           points={{-59,-17},{-55,-9},{-51,-17}},
-          color={0,0,0},
-          smooth=Smooth.None,
           thickness=1),
         Line(
           points={{-51,-41},{-55,-49},{-59,-41}},
-          color={0,0,0},
-          smooth=Smooth.None,
           thickness=1),
         Rectangle(
           extent={{-76,-64},{76,-76}},

@@ -50,30 +50,26 @@ equation
   //Set the radiative power
   radPort.Q_flow = -Power * RadiatorType.RadPercent;
   connect(prescribedHeatFlow.port, volume.heatPort) annotation(Line(points={{-26,12},
-          {-10,12}},                                                                                        color = {191, 0, 0}, smooth = Smooth.None));
+          {-10,12}},                                                                                        color = {191, 0, 0}));
   connect(port_a, T_flow.port_a) annotation (Line(
       points={{-100,0},{-78,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(T_flow.port_b, volume.ports[1]) annotation (Line(
       points={{-58,0},{-2,0},{-2,2}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(volume.ports[2], T_return.port_a) annotation (Line(
       points={{2,2},{4,0},{54,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(T_return.port_b, port_b) annotation (Line(
       points={{74,0},{100,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
             -100},{100,100}}),                                                                           graphics={                                                       Rectangle(extent={{
               -40,56},{40,28}},                                                                                                    lineColor=  {255, 0, 0},
             lineThickness=                                                                                                    1), Text(extent=  {{-34, 52}, {36, 28}}, lineColor=  {255, 0, 0},
             lineThickness=                                                                                                    1, fillColor=  {0, 0, 255},
             fillPattern=                                                                                                    FillPattern.Solid, textString=  "Heat transfer equations"), Line(points={{0,
-              24},{0,32},{-2,30},{0,32},{2,30}},                                                                                                    color=  {255, 0, 0}, thickness=  1, smooth=  Smooth.None), Line(points=  {{28, 58}, {34, 68}, {30, 66}, {34, 68}, {34, 64}}, color=  {255, 0, 0}, thickness=  1, smooth=  Smooth.None), Line(points=  {{-32, 60}, {-38, 68}, {-38, 64}, {-38, 68}, {-34, 66}}, color=  {255, 0, 0}, thickness=  1, smooth=  Smooth.None)}), Icon(graphics={  Rectangle(extent=  {{-68, 56}, {-60, -74}}, lineColor=  {95, 95, 95}, fillColor=  {215, 215, 215},
+              24},{0,32},{-2,30},{0,32},{2,30}},                                                                                                    color=  {255, 0, 0}, thickness=  1), Line(points=  {{28, 58}, {34, 68}, {30, 66}, {34, 68}, {34, 64}}, color=  {255, 0, 0}, thickness=  1), Line(points=  {{-32, 60}, {-38, 68}, {-38, 64}, {-38, 68}, {-34, 66}}, color=  {255, 0, 0}, thickness=  1)}), Icon(graphics={  Rectangle(extent=  {{-68, 56}, {-60, -74}}, lineColor=  {95, 95, 95}, fillColor=  {215, 215, 215},
             fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-48, 56}, {-40, -74}}, lineColor=  {95, 95, 95}, fillColor=  {215, 215, 215},
             fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-28, 56}, {-20, -74}}, lineColor=  {95, 95, 95}, fillColor=  {215, 215, 215},
             fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-8, 56}, {0, -74}}, lineColor=  {95, 95, 95}, fillColor=  {215, 215, 215},

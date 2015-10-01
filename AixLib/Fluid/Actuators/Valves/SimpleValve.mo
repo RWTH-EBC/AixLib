@@ -16,8 +16,8 @@ equation
   m_flow = rho * 1 / 3600 * Kvs * opening * Modelica.Fluid.Utilities.regRoot2(dp, Modelica.Constants.small, 1e-4, 1e-4);
   //This equation is better suited for stable simulations as it works for both flow directions and is continuous at flow zero
   annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points=  {{-78, 50}, {-78, -60}, {82, 50}, {82, -62}, {-78, 50}},
-            lineThickness=                                                                                                    1, smooth=  Smooth.None, fillColor=  {0, 0, 255},
-            fillPattern=                                                                                                    FillPattern.Solid, pattern=  LinePattern.Solid, lineColor=  {0, 0, 0})}), Diagram(graphics), Documentation(revisions="<html>
+            lineThickness=                                                                                                    1, fillColor=  {0, 0, 255},
+            fillPattern=                                                                                                    FillPattern.Solid, pattern=  LinePattern.Solid, lineColor=  {0, 0, 0})}), Documentation(revisions="<html>
  <p>November 2014, Marcus Fuchs</p>
  <p><ul>
  <li>Changed model to use Annex 60 base class</li>

@@ -17,13 +17,9 @@ import Modelica.SIunits.Conversions.to_deg;
   Real NumberOfDay;
   Real SolarTime;
   Real TimeEquation;
-  Modelica.Blocks.Interfaces.RealOutput OutHourAngleSun  annotation (Placement(transformation(extent={{80,-36},{100,-16}},
-                                                                    rotation=
-            0)));
-  Modelica.Blocks.Interfaces.RealOutput OutDeclinationSun  annotation (Placement(transformation(extent={{80,-66},{100,-46}},
-          rotation=0)));
-  Modelica.Blocks.Interfaces.RealOutput OutDayAngleSun  annotation (Placement(transformation(extent={{80,-4},{100,16}},
-          rotation=0)));
+  Modelica.Blocks.Interfaces.RealOutput OutHourAngleSun  annotation (Placement(transformation(extent={{80,-36},{100,-16}})));
+  Modelica.Blocks.Interfaces.RealOutput OutDeclinationSun  annotation (Placement(transformation(extent={{80,-66},{100,-46}})));
+  Modelica.Blocks.Interfaces.RealOutput OutDayAngleSun  annotation (Placement(transformation(extent={{80,-4},{100,16}})));
 
   Real DeclinationSun;
   Real HourAngleSun;
@@ -81,8 +77,7 @@ equation
           extent={{-100,100},{100,60}},
           lineColor={0,0,255},
           textString="%name")}),
-    DymolaStoredErrors,
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}}),            graphics={Rectangle(
           extent={{-80,60},{80,-100}},
           lineColor={0,0,0},

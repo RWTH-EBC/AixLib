@@ -34,44 +34,38 @@ protected
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow RadiativeHeat(T_ref = T0) annotation(Placement(transformation(extent = {{18, -20}, {42, 4}})));
   Modelica.Blocks.Tables.CombiTable1D HeatOutput(table = [10, 100, 125, 155; 18, 100, 125, 155; 20, 95, 115, 140; 22, 90, 105, 120; 23, 85, 100, 115; 24, 75, 95, 110; 25, 75, 85, 105; 26, 70, 85, 95; 35, 70, 85, 95], smoothness = Modelica.Blocks.Types.Smoothness.LinearSegments, tableOnFile = false, columns = {ActivityType}) annotation(Placement(transformation(extent = {{-60, 40}, {-40, 60}})));
 equation
-  connect(ConvectiveHeat.port, ConvHeat) annotation(Line(points = {{42, 32}, {42, 50}, {90, 50}}, color = {191, 0, 0}, pattern = LinePattern.Solid, smooth = Smooth.None));
-  connect(RadiativeHeat.port, RadiationConvertor.Therm) annotation(Line(points = {{42, -8}, {44, -8}, {44, -12}, {48, -12}, {48, -10}, {48.96, -10}}, color = {191, 0, 0}, pattern = LinePattern.Solid, smooth = Smooth.None));
-  connect(RadiationConvertor.Star, RadHeat) annotation(Line(points = {{70.92, -10}, {90, -10}}, color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
-  connect(TRoom, temperatureSensor.port) annotation(Line(points = {{-90, 90}, {-90, 74}}, color = {191, 0, 0}, pattern = LinePattern.Solid, smooth = Smooth.None));
-  connect(temperatureSensor.T, to_degC.u) annotation(Line(points = {{-90, 54}, {-84, 54}, {-84, 52}, {-83, 51}}, color = {0, 0, 127}, pattern = LinePattern.Solid, smooth = Smooth.None));
-  connect(to_degC.y, HeatOutput.u[1]) annotation(Line(points = {{-71.5, 51}, {-67.75, 51}, {-67.75, 50}, {-62, 50}}, color = {0, 0, 127}, pattern = LinePattern.Solid, smooth = Smooth.None));
-  connect(Schedule, Nr_People.u) annotation(Line(points = {{-100, -20}, {-67.2, -20}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(gain.y, ConvectiveHeat.Q_flow) annotation(Line(points = {{14.4, 32}, {18, 32}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(gain1.y, RadiativeHeat.Q_flow) annotation(Line(points = {{14.4, -8}, {18, -8}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(productHeatOutput.y, gain.u) annotation(Line(points = {{-2.3, 20}, {2, 20}, {2, 32}, {5.2, 32}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(productHeatOutput.y, gain1.u) annotation(Line(points = {{-2.3, 20}, {2, 20}, {2, -8}, {5.2, -8}}, color = {0, 0, 127}, smooth = Smooth.None));
+  connect(ConvectiveHeat.port, ConvHeat) annotation(Line(points = {{42, 32}, {42, 50}, {90, 50}}, color = {191, 0, 0}, pattern = LinePattern.Solid));
+  connect(RadiativeHeat.port, RadiationConvertor.Therm) annotation(Line(points = {{42, -8}, {44, -8}, {44, -12}, {48, -12}, {48, -10}, {48.96, -10}}, color = {191, 0, 0}, pattern = LinePattern.Solid));
+  connect(RadiationConvertor.Star, RadHeat) annotation(Line(points = {{70.92, -10}, {90, -10}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
+  connect(TRoom, temperatureSensor.port) annotation(Line(points = {{-90, 90}, {-90, 74}}, color = {191, 0, 0}, pattern = LinePattern.Solid));
+  connect(temperatureSensor.T, to_degC.u) annotation(Line(points = {{-90, 54}, {-84, 54}, {-84, 52}, {-83, 51}}, color = {0, 0, 127}, pattern = LinePattern.Solid));
+  connect(to_degC.y, HeatOutput.u[1]) annotation(Line(points = {{-71.5, 51}, {-67.75, 51}, {-67.75, 50}, {-62, 50}}, color = {0, 0, 127}, pattern = LinePattern.Solid));
+  connect(Schedule, Nr_People.u) annotation(Line(points = {{-100, -20}, {-67.2, -20}}, color = {0, 0, 127}));
+  connect(gain.y, ConvectiveHeat.Q_flow) annotation(Line(points = {{14.4, 32}, {18, 32}}, color = {0, 0, 127}));
+  connect(gain1.y, RadiativeHeat.Q_flow) annotation(Line(points = {{14.4, -8}, {18, -8}}, color = {0, 0, 127}));
+  connect(productHeatOutput.y, gain.u) annotation(Line(points = {{-2.3, 20}, {2, 20}, {2, 32}, {5.2, 32}}, color = {0, 0, 127}));
+  connect(productHeatOutput.y, gain1.u) annotation(Line(points = {{-2.3, 20}, {2, 20}, {2, -8}, {5.2, -8}}, color = {0, 0, 127}));
   connect(Nr_People.y, limiter.u) annotation (Line(
       points={{-53.4,-20},{-30,-20},{-30,-48},{-20,-48}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(limiter.y, SurfaceArea_People.u) annotation (Line(
       points={{3,-48},{14.8,-48}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(SurfaceArea_People.y, RadiationConvertor.A) annotation (Line(
       points={{28.6,-48},{40,-48},{40,20},{60,20},{60,0.8}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(HeatOutput.y, productHeatOutput.u[1:1]) annotation (Line(
       points={{-39,50},{-34,50},{-34,23.5},{-24,23.5}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(Nr_People.y, productHeatOutput.u[2]) annotation (Line(
       points={{-53.4,-20},{-36,-20},{-36,16.5},{-24,16.5}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   annotation(Icon(graphics={  Ellipse(extent = {{-36, 98}, {36, 26}}, lineColor = {255, 213, 170}, fillColor = {255, 213, 170},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-48, 20}, {54, -94}}, fillColor = {255, 0, 0},
             fillPattern =                                                                                                   FillPattern.Solid, pattern = LinePattern.Solid), Text(extent = {{-40, -2}, {44, -44}}, lineColor = {255, 255, 255}, fillColor = {255, 0, 0},
             fillPattern =                                                                                                   FillPattern.Solid, textString = "ERC"), Ellipse(extent = {{-24, 80}, {-14, 70}}, fillColor = {0, 0, 0},
             fillPattern =                                                                                                   FillPattern.Solid, pattern = LinePattern.Solid, lineColor = {0, 0, 0}), Ellipse(extent = {{10, 80}, {20, 70}}, fillColor = {0, 0, 0},
-            fillPattern =                                                                                                   FillPattern.Solid, pattern = LinePattern.Solid, lineColor = {0, 0, 0}), Line(points = {{-18, 54}, {-16, 48}, {-10, 44}, {-4, 42}, {2, 42}, {10, 44}, {16, 48}, {18, 54}}, smooth = Smooth.None, color = {0, 0, 0}, thickness = 1)}), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-            -100},{100,100}}),                                                                                                    graphics), Documentation(info="<html>
+            fillPattern =                                                                                                   FillPattern.Solid, pattern = LinePattern.Solid, lineColor = {0, 0, 0}), Line(points = {{-18, 54}, {-16, 48}, {-10, 44}, {-4, 42}, {2, 42}, {10, 44}, {16, 48}, {18, 54}}, color = {0, 0, 0}, thickness = 1)}), Documentation(info="<html>
 <p><b><font style=\"color: #008000; \">Overview</font></b> </p>
 <p>Model for heat output of a human according to VDI 2078 (Table A.1). The model only considers the dry heat emission and divides it into convective and radiative heat transmission. </p>
 <p><b><font style=\"color: #008000; \">Level of Development</font></b> </p>

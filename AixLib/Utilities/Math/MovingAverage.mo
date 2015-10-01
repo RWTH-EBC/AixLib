@@ -2,11 +2,9 @@ within AixLib.Utilities.Math;
 model MovingAverage
   parameter Real T=24*3600 "time span for average";
   Modelica.Blocks.Interfaces.RealInput u "Continuous input signal"
-    annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-          rotation=0)));
+    annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
   Modelica.Blocks.Interfaces.RealOutput y "Continuous output signal"
-    annotation (Placement(transformation(extent={{100,-10},{120,10}},
-          rotation=0)));
+    annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 
 initial equation
 y = u;
@@ -14,8 +12,7 @@ y = u;
 equation
 
   der(y)*T = u - delay(u,T);
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}), graphics), Icon(coordinateSystem(
+  annotation ( Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={
           Rectangle(
           extent={{-100,100},{100,-100}},

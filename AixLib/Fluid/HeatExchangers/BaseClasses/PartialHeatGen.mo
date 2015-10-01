@@ -18,20 +18,16 @@ partial model PartialHeatGen
 equation
   connect(port_a, T_in.port_a) annotation (Line(
       points={{-100,0},{-80,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(T_in.port_b, massFlowSensor.port_a) annotation (Line(
       points={{-60,0},{-50,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(massFlowSensor.port_b, volume.ports[1]) annotation (Line(
       points={{-30,0},{-2,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(volume.ports[2], port_b) annotation (Line(
       points={{2,0},{100,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   annotation(Documentation(info = "<html>
  <p><h4><font color=\"#008000\">Overview</font></h4></p>
  <p><br/>This partial model is a base class for modelling all heat generation equipment. It includes the necessary fluid port and a fluid volume with a thermal connector for heating the fluid.</p>
@@ -49,6 +45,5 @@ equation
  <p><ul>
  <li>implemented</li>
  </ul></p>
- </html>"), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-            -100},{100,100}}),                                                                          graphics));
+ </html>"));
 end PartialHeatGen;

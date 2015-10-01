@@ -50,7 +50,6 @@ model HeatPumpSystem "Test case for boiler model"
     redeclare package Medium = Medium,
     m_flow_small=1e-4) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
-        rotation=0,
         origin={-38,58})));
   AixLib.Fluid.Sources.Boundary_ph
                       boundary_ph(h = 4184 * 8, nPorts=1,
@@ -58,7 +57,7 @@ model HeatPumpSystem "Test case for boiler model"
   AixLib.Fluid.FixedResistances.StaticPipe
                    pipe2(D = 0.01, l = 2,
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)                    annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 0, origin = {-64, 58})));
+    m_flow_small=1e-4)                    annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin = {-64, 58})));
   AixLib.Fluid.Sources.Boundary_ph
                       boundary_ph1(nPorts=1, redeclare package Medium = Medium)
                                    annotation(Placement(transformation(extent = {{-100, 24}, {-80, 44}})));
@@ -66,47 +65,40 @@ model HeatPumpSystem "Test case for boiler model"
   AixLib.Fluid.HeatExchangers.Utilities.FuelCounter electricityCounter
     annotation (Placement(transformation(extent={{-14,16},{6,36}})));
 equation
-  connect(pipe1.port_b, Pump2.port_a) annotation(Line(points = {{20, -50}, {10, -50}, {10, 0}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(massFlowSensor.port_b, temperatureSensor.port_a) annotation(Line(points = {{40, 70}, {60, 70}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(temperatureSensor.port_b, pipe.port_a) annotation(Line(points = {{80, 70}, {90, 70}, {90, 20}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(sine.y, prescribedHeatFlow.Q_flow) annotation(Line(points = {{21, -80}, {32, -80}}, color = {0, 0, 127}, smooth = Smooth.None));
+  connect(pipe1.port_b, Pump2.port_a) annotation(Line(points = {{20, -50}, {10, -50}, {10, 0}}, color = {0, 127, 255}));
+  connect(massFlowSensor.port_b, temperatureSensor.port_a) annotation(Line(points = {{40, 70}, {60, 70}}, color = {0, 127, 255}));
+  connect(temperatureSensor.port_b, pipe.port_a) annotation(Line(points = {{80, 70}, {90, 70}, {90, 20}}, color = {0, 127, 255}));
+  connect(sine.y, prescribedHeatFlow.Q_flow) annotation(Line(points = {{21, -80}, {32, -80}}, color = {0, 0, 127}));
   connect(prescribedHeatFlow.port, volume.heatPort) annotation(Line(points={{52,-80},
-          {70,-80},{70,-60}},                                                                                   color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Pump2.port_b, heatPump.port_a_sink) annotation(Line(points = {{10, 20}, {10, 43}, {1, 43}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(heatPump.port_b_sink, massFlowSensor.port_a) annotation(Line(points = {{1, 57}, {6, 57}, {6, 56}, {10, 56}, {10, 70}, {20, 70}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(onOffController.y, heatPump.OnOff) annotation(Line(points = {{-15, 84}, {-8, 84}, {-8, 58}}, color = {255, 0, 255}, smooth = Smooth.None));
-  connect(const.y, onOffController.reference) annotation(Line(points = {{-59, 90}, {-38, 90}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(pipe2.port_b, Pump1.port_a) annotation(Line(points = {{-54, 58}, {-48, 58}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(Pump1.port_b, heatPump.port_a_source) annotation(Line(points = {{-28, 58}, {-20, 58}, {-20, 57}, {-17, 57}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(Source_IsNight.y, Pump2.IsNight) annotation(Line(points = {{-81, 14}, {-40, 14}, {-40, 10}, {-0.2, 10}}, color = {255, 0, 255}, smooth = Smooth.None));
-  connect(Source_IsNight.y, Pump1.IsNight) annotation(Line(points = {{-81, 14}, {-68, 14}, {-68, 68.2}, {-38, 68.2}}, color = {255, 0, 255}, smooth = Smooth.None));
-  connect(electricityCounter.fuel_in, heatPump.Power) annotation(Line(points = {{-14, 26}, {-22, 26}, {-22, 36}, {-8, 36}, {-8, 41}}, color = {0, 0, 127}, smooth = Smooth.None));
+          {70,-80},{70,-60}},                                                                                   color = {191, 0, 0}));
+  connect(Pump2.port_b, heatPump.port_a_sink) annotation(Line(points = {{10, 20}, {10, 43}, {1, 43}}, color = {0, 127, 255}));
+  connect(heatPump.port_b_sink, massFlowSensor.port_a) annotation(Line(points = {{1, 57}, {6, 57}, {6, 56}, {10, 56}, {10, 70}, {20, 70}}, color = {0, 127, 255}));
+  connect(onOffController.y, heatPump.OnOff) annotation(Line(points = {{-15, 84}, {-8, 84}, {-8, 58}}, color = {255, 0, 255}));
+  connect(const.y, onOffController.reference) annotation(Line(points = {{-59, 90}, {-38, 90}}, color = {0, 0, 127}));
+  connect(pipe2.port_b, Pump1.port_a) annotation(Line(points = {{-54, 58}, {-48, 58}}, color = {0, 127, 255}));
+  connect(Pump1.port_b, heatPump.port_a_source) annotation(Line(points = {{-28, 58}, {-20, 58}, {-20, 57}, {-17, 57}}, color = {0, 127, 255}));
+  connect(Source_IsNight.y, Pump2.IsNight) annotation(Line(points = {{-81, 14}, {-40, 14}, {-40, 10}, {-0.2, 10}}, color = {255, 0, 255}));
+  connect(Source_IsNight.y, Pump1.IsNight) annotation(Line(points = {{-81, 14}, {-68, 14}, {-68, 68.2}, {-38, 68.2}}, color = {255, 0, 255}));
+  connect(electricityCounter.fuel_in, heatPump.Power) annotation(Line(points = {{-14, 26}, {-22, 26}, {-22, 36}, {-8, 36}, {-8, 41}}, color = {0, 0, 127}));
   connect(onOffController.u, temperatureSensor.T) annotation (Line(
       points={{-38,78},{-48,78},{-48,100},{70,100},{70,81}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(pipe1.port_a, volume.ports[1]) annotation (Line(
       points={{40,-50},{62,-50}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(volume.ports[2], pipe.port_b) annotation (Line(
       points={{58,-50},{90,-50},{90,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(staticPressure.ports[1], Pump2.port_a) annotation (Line(
       points={{-10,-20},{-10,-28},{10,-28},{10,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(boundary_ph.ports[1], pipe2.port_a) annotation (Line(
       points={{-80,62},{-74,58}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(boundary_ph1.ports[1], heatPump.port_b_source) annotation (Line(
       points={{-80,34},{-26,34},{-26,42},{-17,43}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-            -100},{100,100}}),                                                                           graphics), experiment(StopTime = 10800, Interval = 1), __Dymola_experimentSetupOutput(events = false), Documentation(info = "<html>
+      color={0,127,255}));
+  annotation( experiment(StopTime = 10800, Interval = 1), __Dymola_experimentSetupOutput(events = false), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This example models a simple fluid circuit in order to test the heat pump model for plausibility</p>
  </html>", revisions="<html>
@@ -118,5 +110,5 @@ equation
  <p><ul>
  <li>changed BoilerSystem to HeatPumpSystem</li>
  </ul></p>
- </html>"), Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}})));
+ </html>"));
 end HeatPumpSystem;

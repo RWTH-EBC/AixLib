@@ -1,5 +1,5 @@
 within AixLib.Building.LowOrder.Examples.Validation.VDI6007;
-package Linear 
+package Linear
   extends Modelica.Icons.ExamplesPackage;
 
 

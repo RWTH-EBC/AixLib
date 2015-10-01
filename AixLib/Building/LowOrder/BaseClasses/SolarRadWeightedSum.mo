@@ -21,22 +21,17 @@ equation
 //   solarRad_out.I_diff = sum(solarRad_in.I_diff);
 //   solarRad_out.I_gr = sum(solarRad_in.I_gr);
 //   solarRad_out.AOI = sum(solarRad_in.AOI);
-  annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-            -100},{100,100}}),                                                                           graphics), Icon(
+  annotation( Icon(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}}),                                                                                                    graphics={                                                                                                    Line(points={{
               -74,-20},{60,-20}},                                                                                                    color={255,
-              128,0},                                                                                                    smooth=
-              Smooth.None),                                                                                                    Line(points={{
+              128,0}),                                                                                                    Line(points={{
               -74,20},{60,20}},                                                                                                    color={255,
-              128,0},                                                                                                    smooth=
-              Smooth.None),                                                                                                    Line(points={{
+              128,0}),                                                                                                    Line(points={{
               60,20},{80,0}},                                                                                                    color={255,
-              128,0},                                                                                                    smooth=
-              Smooth.None),                                                                                                    Line(points={{
+              128,0}),                                                                                                    Line(points={{
               60,-20},{80,0}},                                                                                                    color={255,
-              128,0},                                                                                                    smooth=
-              Smooth.None),
+              128,0}),
         Rectangle(
           extent={{-80,24},{-74,-24}},
           lineColor={255,128,0},
@@ -45,7 +40,6 @@ equation
         Polygon(
           points={{0,30},{0,10},{20,20},{0,30}},
           lineColor={255,128,0},
-          smooth=Smooth.None,
           fillColor={255,128,0},
           fillPattern=FillPattern.Solid),
         Text(
@@ -58,7 +52,6 @@ equation
         Polygon(
           points={{0,-10},{0,-30},{20,-20},{0,-10}},
           lineColor={255,128,0},
-          smooth=Smooth.None,
           fillColor={255,128,0},
           fillPattern=FillPattern.Solid)}),                                                                                                    Documentation(info="<html>
 <p>This component weights the n-vectorial radiant input with n weightfactors and has a scalar output.</p>

@@ -55,51 +55,40 @@ model TestCase11
 equation
   connect(machinesRadiative.port, heatToStar.Therm) annotation (Line(
       points={{30,-83},{38,-83},{38,-82},{50.8,-82}},
-      color={191,0,0},
-      smooth=Smooth.None));
-  connect(setTemp.y[1], heater.soll_heat) annotation(Line(points = {{-59, -20}, {-50, -20}, {-50, -23}, {-30.8, -23}}, color = {0, 0, 127}, smooth = Smooth.None));
+      color={191,0,0}));
+  connect(setTemp.y[1], heater.soll_heat) annotation(Line(points = {{-59, -20}, {-50, -20}, {-50, -23}, {-30.8, -23}}, color = {0, 0, 127}));
   connect(sumHeatLoad.u2, cooler.coolMeter.p);
   connect(cooler.HeatCoolRoom, reducedModel.heatConvInnerwall.port_b);
   connect(sumHeatLoad.u1, heater.heatMeter.p);
   referenceLoad[1] = -reference.y[2];
   simulationLoad = sumHeatLoad.y;
-  connect(setTemp.y[2], cooler.soll_cool) annotation(Line(points = {{-59, -20}, {-44, -20}, {-44, -43.2}, {-30.8, -43.2}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(innerLoads.y[2], machinesRadiative.Q_flow) annotation(Line(points = {{-9.3, -86}, {-2, -86}, {-2, -83}, {4, -83}}, color = {0, 0, 127}, smooth = Smooth.None));
+  connect(setTemp.y[2], cooler.soll_cool) annotation(Line(points = {{-59, -20}, {-44, -20}, {-44, -43.2}, {-30.8, -43.2}}, color = {0, 0, 127}));
+  connect(innerLoads.y[2], machinesRadiative.Q_flow) annotation(Line(points = {{-9.3, -86}, {-2, -86}, {-2, -83}, {4, -83}}, color = {0, 0, 127}));
   connect(heatToStar.Star, reducedModel.internalGainsRad) annotation (Line(
       points={{69.1,-82},{93.75,-82},{93.75,38}},
       color={95,95,95},
-      pattern=LinePattern.Solid,
-      smooth=Smooth.None));
+      pattern=LinePattern.Solid));
   connect(infiltrationRate.y, reducedModel.ventilationRate) annotation (Line(
       points={{50.5,11},{74,11},{74,38},{74.54,38}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(infiltrationTemp.y, reducedModel.ventilationTemperature) annotation (
       Line(
       points={{26.5,31},{48,31},{48,46.4},{67.4,46.4}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(outdoorTemp.port, reducedModel.equalAirTemp) annotation (Line(
       points={{6,57},{38,57},{38,56.8},{67.4,56.8}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(solarRadiation.y, reducedModel.solarRad_in) annotation (Line(
       points={{-15,82},{73.18,82},{73.18,74.8}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(heater.HeatCoolRoom, reducedModel.internalGainsConv) annotation (Line(
       points={{-24.8,-29.4},{84.4,-29.4},{84.4,38}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   annotation(experiment(StopTime = 5.184e+006, Interval = 3600),
              __Dymola_Commands(file=
                                "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Linear/TestCase11.mos"
         "Simulate and plot"),
-             __Dymola_experimentSetupOutput(events = false), Icon(graphics),
-             Diagram(coordinateSystem(preserveAspectRatio=false,
-             extent={{-100,-100},{100,100}}),
-                      graphics),
-            Documentation(revisions="<html>
+             __Dymola_experimentSetupOutput(events = false),            Documentation(revisions="<html>
 <p><ul>
  <li><i>May 28, 2015 </i> by Marcus Fuchs:<br/>Added unit testing command to annotations</li>
  </ul></p>

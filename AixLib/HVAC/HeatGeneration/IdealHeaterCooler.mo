@@ -74,55 +74,41 @@ model IdealHeaterCooler "heater and cooler with variable setpoints"
 equation
   connect(booleanExpression.y, pITemp1.onOff) annotation (Line(
       points={{-32.05,22},{-24,22},{-24,25},{-13,25}},
-      color={255,0,255},
-      smooth=Smooth.None));
+      color={255,0,255}));
   connect(booleanExpression1.y, pITemp2.onOff) annotation (Line(
       points={{-31,-22},{-24,-22},{-24,-5},{-13,-5}},
-      color={255,0,255},
-      smooth=Smooth.None));
+      color={255,0,255}));
   connect(soll_heat, pITemp1.soll) annotation (Line(
       points={{-100,40},{-18,40},{-18,39},{-12,39}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(soll_cool, pITemp2.soll) annotation (Line(
       points={{-100,-40},{-12,-40},{-12,-19}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(pITemp2.Therm1, HeatCoolRoom) annotation (Line(
       points={{-10,-1},{-10,12},{94,12}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(pITemp1.Therm1, HeatCoolRoom) annotation (Line(
       points={{-10,21},{-10,12},{94,12}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(Heating.port, HeatCoolRoom) annotation (Line(
       points={{44,22},{54,22},{54,12},{94,12}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(Cooling.port, HeatCoolRoom) annotation (Line(
       points={{46,-2.5},{50,-2.5},{50,-2},{54,-2},{54,12},{94,12}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(pITemp2.y, Cooling.Q_flow) annotation (Line(
       points={{5,-10},{14,-10},{14,-2.5},{26,-2.5}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(pITemp2.y, coolMeter.p) annotation (Line(
       points={{5,-10},{14,-10},{14,-30},{47.4,-30}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(pITemp1.y, Heating.Q_flow) annotation (Line(
       points={{5,30},{12,30},{12,22},{24,22}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(pITemp1.y, heatMeter.p) annotation (Line(
       points={{5,30},{12,30},{12,50},{47.4,50}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}),
-                      graphics), Icon(graphics={
+      color={0,0,127}));
+  annotation ( Icon(graphics={
         Rectangle(
           extent={{-90,22},{84,-12}},
           lineColor={135,135,135},
@@ -132,28 +118,24 @@ equation
           points={{-78,22},{-78,56},{-44,22},{-78,22}},
           lineColor={135,135,135},
           lineThickness=1,
-          smooth=Smooth.None,
           fillColor={135,135,135},
           fillPattern=FillPattern.Solid),
         Polygon(
           points={{-42,22},{-4,22},{-4,56},{-42,22}},
           lineColor={135,135,135},
           lineThickness=1,
-          smooth=Smooth.None,
           fillColor={135,135,135},
           fillPattern=FillPattern.Solid),
         Polygon(
           points={{34,22},{-4,22},{-4,56},{34,22}},
           lineColor={135,135,135},
           lineThickness=1,
-          smooth=Smooth.None,
           fillColor={135,135,135},
           fillPattern=FillPattern.Solid),
         Polygon(
           points={{68,22},{68,56},{34,22},{68,22}},
           lineColor={135,135,135},
           lineThickness=1,
-          smooth=Smooth.None,
           fillColor={135,135,135},
           fillPattern=FillPattern.Solid),
         Text(
@@ -166,61 +148,49 @@ equation
         Line(
           points={{-58,40},{-58,66}},
           color={0,128,255},
-          thickness=1,
-          smooth=Smooth.None),
+          thickness=1),
         Line(
           points={{-42,26},{-42,66}},
           color={0,128,255},
-          thickness=1,
-          smooth=Smooth.None),
+          thickness=1),
         Line(
           points={{-26,40},{-26,66}},
           color={0,128,255},
-          thickness=1,
-          smooth=Smooth.None),
+          thickness=1),
         Line(
           points={{-62,64},{-58,70},{-54,64}},
           color={0,128,255},
-          thickness=1,
-          smooth=Smooth.None),
+          thickness=1),
         Line(
           points={{-46,64},{-42,70},{-38,64}},
           color={0,128,255},
-          thickness=1,
-          smooth=Smooth.None),
+          thickness=1),
         Line(
           points={{-30,64},{-26,70},{-22,64}},
           color={0,128,255},
-          thickness=1,
-          smooth=Smooth.None),
+          thickness=1),
         Line(
           points={{20,40},{20,66}},
           color={255,0,0},
-          thickness=1,
-          smooth=Smooth.None),
+          thickness=1),
         Line(
           points={{16,64},{20,70},{24,64}},
           color={255,0,0},
-          thickness=1,
-          smooth=Smooth.None),
+          thickness=1),
         Line(
           points={{48,40},{48,66}},
           color={255,0,0},
-          thickness=1,
-          smooth=Smooth.None),
+          thickness=1),
         Line(
           points={{44,64},{48,70},{52,64}},
           color={255,0,0},
-          thickness=1,
-          smooth=Smooth.None),
+          thickness=1),
         Line(
           points={{34,26},{34,66}},
           color={255,0,0},
-          thickness=1,
-          smooth=Smooth.None),
+          thickness=1),
         Line(
           points={{30,64},{34,70},{38,64}},
           color={255,0,0},
-          thickness=1,
-          smooth=Smooth.None)}));
+          thickness=1)}));
 end IdealHeaterCooler;
