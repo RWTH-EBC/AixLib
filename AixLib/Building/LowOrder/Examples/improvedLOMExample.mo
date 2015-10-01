@@ -18,7 +18,11 @@ model improvedLOMExample
     C1o=1.00258e+06,
     Ao=123.6,
     alphaiwi=3.16,
-    epsi=0.9) constrainedby
+    epsi=0.9,
+    outerwall(load1(der_T(fixed=true))),
+    innerwall(load1(der_T(fixed=true))),
+    airload(T(fixed=true)))
+              constrainedby
     AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel.partialReducedOrderModel
     annotation (Placement(transformation(extent={{44,18},{78,52}})),
       choicesAllMatching=true);
@@ -38,8 +42,8 @@ model improvedLOMExample
             {24,3}})));
   Utilities.HeatTransfer.HeatToStar HeatTorStar(A = 2) annotation(Placement(transformation(extent={{52,-88},
             {72,-68}})));
-  AixLib.Building.Components.Weather.Sunblinds.Sunblind sunblind(n=5, gsunblind
-      ={0,0,0.15,0.15,0})
+  AixLib.Building.Components.Weather.Sunblinds.Sunblind sunblind(n=5, gsunblind=
+       {0,0,0.15,0.15,0})
     annotation (Placement(transformation(extent={{-42,59},{-22,79}})));
   AixLib.Building.LowOrder.BaseClasses.SolarRadWeightedSum solarRadWeightedSum(
       weightfactors={0,0,7,7,0}, n=5)
@@ -167,8 +171,8 @@ equation
       points={{-78,32},{-80,32},{-80,31.6},{-54.5,31.6}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(weather.SolarRadiation_OrientedSurfaces, sunblind.Rad_In) annotation
-    (Line(
+  connect(weather.SolarRadiation_OrientedSurfaces, sunblind.Rad_In) annotation (
+     Line(
       points={{-82.8,67},{-82.8,60},{-46,60},{-46,70},{-41,70}},
       color={255,128,0},
       smooth=Smooth.None));
@@ -177,7 +181,7 @@ equation
       color={255,128,0},
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}), graphics),
+            -100},{100,100}})),
     experiment(StopTime=86400, Interval=3600),
     __Dymola_experimentSetupOutput,
     Documentation(revisions="<html>
