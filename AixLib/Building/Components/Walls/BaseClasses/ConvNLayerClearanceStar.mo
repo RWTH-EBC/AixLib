@@ -32,13 +32,13 @@ model ConvNLayerClearanceStar
   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(16)
     "Initial temperature"                                                                                      annotation(Dialog(group = "Thermal"));
   // 2n HeatConds
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatCondb[n](port_b(each T(start = T0)), port_a(each T(start = T0)), G = A * lambda ./ (d / 2)) annotation(Placement(transformation(extent = {{8, -8}, {28, 12}}, rotation = 0)));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatConda[n](port_b(each T(start = T0)), port_a(each T(start = T0)), G = A .* lambda ./ (d / 2)) annotation(Placement(transformation(extent = {{-50, -8}, {-30, 12}}, rotation = 0)));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatCondb[n](port_b(each T(start = T0)), port_a(each T(start = T0)), G = A * lambda ./ (d / 2)) annotation(Placement(transformation(extent = {{8, -8}, {28, 12}})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatConda[n](port_b(each T(start = T0)), port_a(each T(start = T0)), G = A .* lambda ./ (d / 2)) annotation(Placement(transformation(extent = {{-50, -8}, {-30, 12}})));
   // n Loads
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor Load[n](T(start = fill(T0, n)), C = c .* rho .* A .* d) annotation(Placement(transformation(extent = {{-8, -62}, {12, -42}}, rotation = 0)));
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor Load[n](T(start = fill(T0, n)), C = c .* rho .* A .* d) annotation(Placement(transformation(extent = {{-8, -62}, {12, -42}})));
   Utilities.HeatTransfer.HeatConv_inside HeatConv1(port_b(T(start = T0)), alpha_custom = alpha_custom, A = A, surfaceOrientation = surfaceOrientation) annotation(Placement(transformation(origin={62,2},     extent = {{-10, -10}, {10, 10}}, rotation = 180)));
-  Utilities.Interfaces.Star Star annotation(Placement(transformation(extent = {{80, 50}, {100, 70}}, rotation = 0)));
-  Utilities.HeatTransfer.HeatToStar twoStar_RadEx(A = A, eps = eps, Therm(T(start = T0)), Star(T(start = T0))) annotation(Placement(transformation(extent = {{54, 30}, {74, 50}}, rotation = 0)));
+  Utilities.Interfaces.Star Star annotation(Placement(transformation(extent = {{80, 50}, {100, 70}})));
+  Utilities.HeatTransfer.HeatToStar twoStar_RadEx(A = A, eps = eps, Therm(T(start = T0)), Star(T(start = T0))) annotation(Placement(transformation(extent = {{54, 30}, {74, 50}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a annotation(Placement(transformation(extent = {{-104, -8}, {-84, 12}}), iconTransformation(extent = {{-100, -20}, {-80, 0}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b annotation(Placement(transformation(extent = {{76, -8}, {96, 12}}), iconTransformation(extent = {{80, -20}, {100, 0}})));
 protected
@@ -46,7 +46,7 @@ protected
 protected
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a dummyTherm
     "This really helps to solve initialisation problems in huge equation systems ..."
-                                                                                                        annotation(Placement(transformation(extent = {{49, -41}, {54, -36}}, rotation = 0)));
+                                                                                                        annotation(Placement(transformation(extent = {{49, -41}, {54, -36}})));
 equation
   // connecting inner elements HeatCondb[i]--Load[i]--HeatConda[i] to n groups
   for i in 1:n loop

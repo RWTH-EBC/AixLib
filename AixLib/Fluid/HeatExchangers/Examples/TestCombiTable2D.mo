@@ -7,11 +7,11 @@ model TestCombiTable2D "Test case for boiler model"
   Modelica.Blocks.Math.UnitConversions.From_degC from_degC annotation(Placement(transformation(extent = {{-40, 20}, {-20, 40}})));
   Modelica.Blocks.Math.UnitConversions.From_degC from_degC1 annotation(Placement(transformation(extent = {{-40, 60}, {-20, 80}})));
 equation
-  connect(from_degC.u, rampSourceTemp.y) annotation(Line(points = {{-42, 30}, {-59, 30}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(constSinkTemp.y, from_degC1.u) annotation(Line(points = {{-59, 70}, {-42, 70}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(from_degC.y, HeatFlowCondenserTable.u2) annotation(Line(points = {{-19, 30}, {-14, 30}, {-14, 44}, {-2, 44}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(from_degC1.y, HeatFlowCondenserTable.u1) annotation(Line(points = {{-19, 70}, {-14, 70}, {-14, 56}, {-2, 56}}, color = {0, 0, 127}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), experiment(StopTime = 1000, Interval = 1), __Dymola_experimentSetupOutput(events = false), Documentation(info = "<html>
+  connect(from_degC.u, rampSourceTemp.y) annotation(Line(points = {{-42, 30}, {-59, 30}}, color = {0, 0, 127}));
+  connect(constSinkTemp.y, from_degC1.u) annotation(Line(points = {{-59, 70}, {-42, 70}}, color = {0, 0, 127}));
+  connect(from_degC.y, HeatFlowCondenserTable.u2) annotation(Line(points = {{-19, 30}, {-14, 30}, {-14, 44}, {-2, 44}}, color = {0, 0, 127}));
+  connect(from_degC1.y, HeatFlowCondenserTable.u1) annotation(Line(points = {{-19, 70}, {-14, 70}, {-14, 56}, {-2, 56}}, color = {0, 0, 127}));
+  annotation( experiment(StopTime = 1000, Interval = 1), __Dymola_experimentSetupOutput(events = false), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Example to test the tables used within the HeatPump model</p>
  </html>", revisions = "<html>
@@ -19,5 +19,5 @@ equation
  <p><ul>
  <li>implemented</li>
  </ul></p>
- </html>"), Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}})));
+ </html>"));
 end TestCombiTable2D;

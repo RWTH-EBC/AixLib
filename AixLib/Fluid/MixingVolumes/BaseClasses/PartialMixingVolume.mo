@@ -118,13 +118,11 @@ equation
   if useSteadyStateTwoPort then
   connect(steBal.port_a, ports[1]) annotation (Line(
       points={{-20,10},{-22,10},{-22,-60},{0,-60},{0,-100}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
 
   connect(steBal.port_b, ports[2]) annotation (Line(
       points={{5.55112e-16,10},{8,10},{8,-88},{0,-88},{0,-100}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
 
     connect(hOut_internal,  steBal.hOut);
     connect(XiOut_internal, steBal.XiOut);
@@ -132,8 +130,7 @@ equation
   else
       connect(dynBal.ports, ports) annotation (Line(
       points={{50,-5.55112e-16},{50,-34},{2.22045e-15,-34},{2.22045e-15,-100}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
 
     connect(hOut_internal,  dynBal.hOut);
     connect(XiOut_internal, dynBal.XiOut);

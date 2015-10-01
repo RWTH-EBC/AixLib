@@ -15,19 +15,19 @@ model FansSerialAndParallel "Serial and Parallel Fan Example"
   Ductwork.PressureLoss pressureLoss_single(D = 0.1, zeta = 5) annotation(Placement(transformation(extent = {{24, -56}, {44, -36}})));
   FanSimple fanSimple_single(UseRotationalSpeedInput = false) annotation(Placement(transformation(extent = {{-54, -56}, {-34, -36}})));
 equation
-  connect(fanSimple_parallel1.portMoistAir_b, pressureLoss_parallel.portMoistAir_a) annotation(Line(points = {{-34, 62}, {-12, 62}, {-12, 48}, {24, 48}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(fanSimple_parallel2.portMoistAir_b, pressureLoss_parallel.portMoistAir_a) annotation(Line(points = {{-34, 34}, {-12, 34}, {-12, 48}, {24, 48}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(fanSimple_serial1.portMoistAir_b, fanSimple_serial2.portMoistAir_a) annotation(Line(points = {{-34, 0}, {-16, 0}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(fanSimple_serial2.portMoistAir_b, pressureLoss_serial.portMoistAir_a) annotation(Line(points = {{4, 0}, {24, 0}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(pressureLoss_serial.portMoistAir_b, boundaryMoistAir_phX2_out.portMoistAir_a) annotation(Line(points = {{44, 0}, {58, 0}, {58, 20}, {72, 20}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(pressureLoss_parallel.portMoistAir_b, boundaryMoistAir_phX2_out.portMoistAir_a) annotation(Line(points = {{44, 48}, {58, 48}, {58, 20}, {72, 20}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(boundaryMoistAir_phX1_in.portMoistAir_a, fanSimple_parallel1.portMoistAir_a) annotation(Line(points = {{-82, 20}, {-68, 20}, {-68, 62}, {-54, 62}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(boundaryMoistAir_phX1_in.portMoistAir_a, fanSimple_parallel2.portMoistAir_a) annotation(Line(points = {{-82, 20}, {-68, 20}, {-68, 34}, {-54, 34}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(boundaryMoistAir_phX1_in.portMoistAir_a, fanSimple_serial1.portMoistAir_a) annotation(Line(points = {{-82, 20}, {-68, 20}, {-68, 0}, {-54, 0}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(fanSimple_single.portMoistAir_b, pressureLoss_single.portMoistAir_a) annotation(Line(points = {{-34, -46}, {24, -46}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(boundaryMoistAir_phX1_in.portMoistAir_a, fanSimple_single.portMoistAir_a) annotation(Line(points = {{-82, 20}, {-68, 20}, {-68, -46}, {-54, -46}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(pressureLoss_single.portMoistAir_b, boundaryMoistAir_phX2_out.portMoistAir_a) annotation(Line(points = {{44, -46}, {58, -46}, {58, 20}, {72, 20}}, color = {0, 127, 255}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(info = "<html>
+  connect(fanSimple_parallel1.portMoistAir_b, pressureLoss_parallel.portMoistAir_a) annotation(Line(points = {{-34, 62}, {-12, 62}, {-12, 48}, {24, 48}}, color = {0, 127, 255}));
+  connect(fanSimple_parallel2.portMoistAir_b, pressureLoss_parallel.portMoistAir_a) annotation(Line(points = {{-34, 34}, {-12, 34}, {-12, 48}, {24, 48}}, color = {0, 127, 255}));
+  connect(fanSimple_serial1.portMoistAir_b, fanSimple_serial2.portMoistAir_a) annotation(Line(points = {{-34, 0}, {-16, 0}}, color = {0, 127, 255}));
+  connect(fanSimple_serial2.portMoistAir_b, pressureLoss_serial.portMoistAir_a) annotation(Line(points = {{4, 0}, {24, 0}}, color = {0, 127, 255}));
+  connect(pressureLoss_serial.portMoistAir_b, boundaryMoistAir_phX2_out.portMoistAir_a) annotation(Line(points = {{44, 0}, {58, 0}, {58, 20}, {72, 20}}, color = {0, 127, 255}));
+  connect(pressureLoss_parallel.portMoistAir_b, boundaryMoistAir_phX2_out.portMoistAir_a) annotation(Line(points = {{44, 48}, {58, 48}, {58, 20}, {72, 20}}, color = {0, 127, 255}));
+  connect(boundaryMoistAir_phX1_in.portMoistAir_a, fanSimple_parallel1.portMoistAir_a) annotation(Line(points = {{-82, 20}, {-68, 20}, {-68, 62}, {-54, 62}}, color = {0, 127, 255}));
+  connect(boundaryMoistAir_phX1_in.portMoistAir_a, fanSimple_parallel2.portMoistAir_a) annotation(Line(points = {{-82, 20}, {-68, 20}, {-68, 34}, {-54, 34}}, color = {0, 127, 255}));
+  connect(boundaryMoistAir_phX1_in.portMoistAir_a, fanSimple_serial1.portMoistAir_a) annotation(Line(points = {{-82, 20}, {-68, 20}, {-68, 0}, {-54, 0}}, color = {0, 127, 255}));
+  connect(fanSimple_single.portMoistAir_b, pressureLoss_single.portMoistAir_a) annotation(Line(points = {{-34, -46}, {24, -46}}, color = {0, 127, 255}));
+  connect(boundaryMoistAir_phX1_in.portMoistAir_a, fanSimple_single.portMoistAir_a) annotation(Line(points = {{-82, 20}, {-68, 20}, {-68, -46}, {-54, -46}}, color = {0, 127, 255}));
+  connect(pressureLoss_single.portMoistAir_b, boundaryMoistAir_phX2_out.portMoistAir_a) annotation(Line(points = {{44, -46}, {58, -46}, {58, 20}, {72, 20}}, color = {0, 127, 255}));
+  annotation( Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>A simple Simulation Model which compares a single fan to two fans in serial and parallel</p>
  </html>", revisions = "<html>

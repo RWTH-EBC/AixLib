@@ -22,21 +22,17 @@ model TestCase1
 equation
   referenceTemp = reference.y;
   simulationTemp = reducedModel.airload.port.T;
-  connect(tableMachines.y[1], machinesConvective.Q_flow) annotation(Line(points = {{-25.3, -76}, {-8, -76}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(outdoorTemp.port, reducedModel.equalAirTemp) annotation(Line(points = {{-36, 18}, {-14, 18}, {-14, 17.68}, {3.4, 17.68}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(infiltrationTemp.y, reducedModel.ventilationTemperature) annotation(Line(points = {{-35, -12}, {-18, -12}, {-18, 8.84}, {3.4, 8.84}}, color = {0, 0, 127}, smooth = Smooth.None));
+  connect(tableMachines.y[1], machinesConvective.Q_flow) annotation(Line(points = {{-25.3, -76}, {-8, -76}}, color = {0, 0, 127}));
+  connect(outdoorTemp.port, reducedModel.equalAirTemp) annotation(Line(points = {{-36, 18}, {-14, 18}, {-14, 17.68}, {3.4, 17.68}}, color = {191, 0, 0}));
+  connect(infiltrationTemp.y, reducedModel.ventilationTemperature) annotation(Line(points = {{-35, -12}, {-18, -12}, {-18, 8.84}, {3.4, 8.84}}, color = {0, 0, 127}));
   connect(infiltrationRate.y, reducedModel.ventilationRate) annotation(Line(points={{7,-40},
-          {10.54,-40},{10.54,1.7}},                                                                                        color = {0, 0, 127}, smooth = Smooth.None));
+          {10.54,-40},{10.54,1.7}},                                                                                        color = {0, 0, 127}));
   connect(machinesConvective.port, reducedModel.internalGainsConv) annotation(Line(points={{12,-76},
-          {20.4,-76},{20.4,1.7}},                                                                                                  color = {191, 0, 0}, smooth = Smooth.None));
+          {20.4,-76},{20.4,1.7}},                                                                                                  color = {191, 0, 0}));
   connect(solarRadiation.y, reducedModel.solarRad_in) annotation (Line(
       points={{-35,62},{9.18,62},{9.18,32.98}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-            -100},{100,100}}),
-             graphics),
-             experiment(StopTime = 5.184e+006, Interval = 3600),
+      color={0,0,127}));
+  annotation(             experiment(StopTime = 5.184e+006, Interval = 3600),
              __Dymola_Commands(file=
                                "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Linear/TestCase1.mos"
         "Simulate and plot"),

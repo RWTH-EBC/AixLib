@@ -1,5 +1,5 @@
 within AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall;
-package BuildingAndEnergySystem 
+package BuildingAndEnergySystem
   extends Modelica.Icons.Package;
 
 

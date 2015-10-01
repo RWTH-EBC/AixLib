@@ -19,20 +19,18 @@ model SolarThermal "Model of a solar thermal panel"
   Modelica.Blocks.Sources.Constant const(k = 0) annotation(Placement(transformation(extent = {{-66, 30}, {-58, 38}})));
   Modelica.Blocks.Math.Gain gain(k = A) annotation(Placement(transformation(extent = {{-16, 44}, {-4, 56}})));
 equation
-  connect(T_air, solarThermalEfficiency.T_air) annotation(Line(points = {{-60, 108}, {-60, 78}, {-71, 78}, {-71, 68.6}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(solarThermalEfficiency.G, Irradiation) annotation(Line(points = {{-65, 68.6}, {-65, 74}, {10, 74}, {10, 108}}, color = {0, 0, 127}, smooth = Smooth.None));
+  connect(T_air, solarThermalEfficiency.T_air) annotation(Line(points = {{-60, 108}, {-60, 78}, {-71, 78}, {-71, 68.6}}, color = {0, 0, 127}));
+  connect(solarThermalEfficiency.G, Irradiation) annotation(Line(points = {{-65, 68.6}, {-65, 74}, {10, 74}, {10, 108}}, color = {0, 0, 127}));
   connect(prescribedHeatFlow.port, volume.heatPort) annotation(Line(points={{0,24},{
-          -10,10}},                                                                              color = {191, 0, 0}, smooth = Smooth.None));
-  connect(solarThermalEfficiency.Q_flow, max1.u1) annotation(Line(points = {{-55.2, 58}, {-52, 58}, {-52, 56}, {-48, 56}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(const.y, max1.u2) annotation(Line(points = {{-57.6, 34}, {-54, 34}, {-54, 44}, {-48, 44}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(max1.y, gain.u) annotation(Line(points = {{-25, 50}, {-17.2, 50}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(gain.y, prescribedHeatFlow.Q_flow) annotation(Line(points = {{-3.4, 50}, {0, 50}, {0, 44}}, color = {0, 0, 127}, smooth = Smooth.None));
+          -10,10}},                                                                              color = {191, 0, 0}));
+  connect(solarThermalEfficiency.Q_flow, max1.u1) annotation(Line(points = {{-55.2, 58}, {-52, 58}, {-52, 56}, {-48, 56}}, color = {0, 0, 127}));
+  connect(const.y, max1.u2) annotation(Line(points = {{-57.6, 34}, {-54, 34}, {-54, 44}, {-48, 44}}, color = {0, 0, 127}));
+  connect(max1.y, gain.u) annotation(Line(points = {{-25, 50}, {-17.2, 50}}, color = {0, 0, 127}));
+  connect(gain.y, prescribedHeatFlow.Q_flow) annotation(Line(points = {{-3.4, 50}, {0, 50}, {0, 44}}, color = {0, 0, 127}));
   connect(T_in.T, solarThermalEfficiency.T_col) annotation (Line(
       points={{-70,11},{-71,47.4}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-            -100},{100,100}}),                                                                           graphics), Documentation(info = "<html>
+      color={0,0,127}));
+  annotation( Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p><br>Model of a solar thermal collector. Inputs are outdoor air temperature and solar irradiation. Based on these values and the collector properties from database, this model creates a heat flow to the fluid circuit.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>

@@ -2,23 +2,18 @@ within AixLib.Utilities.Sources;
 model PrescribedSolarRad "variable radiation condition"
   parameter Integer n=1 "number of output vector length";
   AixLib.Utilities.Interfaces.SolarRad_out solarRad_out[n] annotation (Placement(
-        transformation(extent={{80,-10},{100,10}}, rotation=0)));
+        transformation(extent={{80,-10},{100,10}})));
   Modelica.Blocks.Interfaces.RealInput I[n] "radiation on surface (W/m2)"
-    annotation (Placement(transformation(extent={{-120,62},{-80,102}},
-         rotation=0), iconTransformation(extent={{-100,78},{-78,100}})));
+    annotation (Placement(transformation(extent={{-120,62},{-80,102}}), iconTransformation(extent={{-100,78},{-78,100}})));
 
   Modelica.Blocks.Interfaces.RealInput I_dir[n] "radiation on surface (W/m2)"
-    annotation (Placement(transformation(extent={{-120,30},{-80,70}}, rotation=
-            0), iconTransformation(extent={{-100,40},{-80,60}})));
+    annotation (Placement(transformation(extent={{-120,30},{-80,70}}), iconTransformation(extent={{-100,40},{-80,60}})));
   Modelica.Blocks.Interfaces.RealInput I_diff[n] "radiation on surface (W/m2)"
-    annotation (Placement(transformation(extent={{-120,-4},{-80,36}}, rotation=
-            0), iconTransformation(extent={{-100,0},{-80,20}})));
+    annotation (Placement(transformation(extent={{-120,-4},{-80,36}}), iconTransformation(extent={{-100,0},{-80,20}})));
   Modelica.Blocks.Interfaces.RealInput I_gr[n] "radiation on surface (W/m2)"
-    annotation (Placement(transformation(extent={{-120,-38},{-80,2}}, rotation=
-            0), iconTransformation(extent={{-100,-42},{-78,-20}})));
+    annotation (Placement(transformation(extent={{-120,-38},{-80,2}}), iconTransformation(extent={{-100,-42},{-78,-20}})));
   Modelica.Blocks.Interfaces.RealInput AOI[n] "radiation on surface (W/m2)"
-    annotation (Placement(transformation(extent={{-120,-76},{-80,-36}},
-          rotation=0), iconTransformation(extent={{-100,-80},{-80,-60}})));
+    annotation (Placement(transformation(extent={{-120,-76},{-80,-36}}), iconTransformation(extent={{-100,-80},{-80,-60}})));
 equation
   solarRad_out[:].I = I[:] "Radiant energy fluence rate";
   solarRad_out[:].I_dir = I_dir[:] "Radiant energy fluence rate";
@@ -81,8 +76,5 @@ equation
 <p>If nothing is specified through the input port solar radiation of 0 W/m2 is assumed by default. </p>
 <h4><span style=\"color:#008000\">Example Results</span></h4>
 
-</html>"),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-            100,100}}),
-                    graphics));
+</html>"));
 end PrescribedSolarRad;

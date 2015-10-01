@@ -16,7 +16,6 @@ partial model PartialRadOnTiltedSurf
     Modelica.Blocks.Interfaces.RealInput InHourAngleSun
     annotation (Placement(transformation(
           extent={{-16,-16},{16,16}},
-          rotation=0,
           origin={-98,0}),
           iconTransformation(
           extent={{9,-9},{-9,9}},
@@ -25,7 +24,6 @@ partial model PartialRadOnTiltedSurf
     Modelica.Blocks.Interfaces.RealInput InDeclinationSun
     annotation (Placement(transformation(
           extent={{-16,-16},{16,16}},
-          rotation=0,
           origin={-98,-40}),
           iconTransformation(
           extent={{9,-9},{-9,9}},
@@ -55,14 +53,12 @@ public
     Modelica.Blocks.Interfaces.RealInput InDayAngleSun
     annotation (Placement(transformation(
           extent={{-16,-16},{16,16}},
-          rotation=0,
           origin={-98,34}),
           iconTransformation(
           extent={{9,-9},{-9,9}},
           rotation=180,
           origin={-79,-21})));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}), graphics), Documentation(info="<html>
+  annotation ( Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Partial model for <b>RadOnTiltedSurf</b> modely, which calculate the total solar radiance on a tilted surface. </p>
 <h4><span style=\"color:#008000\">Level of Development</span></h4>

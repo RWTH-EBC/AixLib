@@ -161,175 +161,138 @@ package ASHRAE140
     connect(thermStar_Demux.star, starRoom) annotation (Line(
         points={{-26.2,-21.6},{-26.2,0.2},{9,0.2},{9,26}},
         color={95,95,95},
-        pattern=LinePattern.Solid,
-        smooth=Smooth.None));
+        pattern=LinePattern.Solid));
     connect(thermStar_Demux.therm, thermRoom) annotation (Line(
         points={{-37.1,-21.9},{-37.1,-0.95},{-29,-0.95},{-29,23}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(varAirExchange.InPort1, AER) annotation (Line(
         points={{-81,-62.4},{-111,-62.4},{-111,-51}},
-        color={0,0,127},
-        smooth=Smooth.None));
+        color={0,0,127}));
     connect(outerWall_South.port_outside, Therm_outside) annotation (Line(
         points={{-76.35,4},{-86,4},{-86,97},{-105,97}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(floor.port_outside, Therm_ground) annotation (Line(
         points={{-32,-66.1003},{-32,-96}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(outerWall_East.port_outside, Therm_outside) annotation (Line(
         points={{26,-68.2},{26,-80},{-86,-80},{-86,97},{-105,97}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(outerWall_North.port_outside, Therm_outside) annotation (Line(
         points={{74.35,4},{82,4},{82,-80},{-86,-80},{-86,97},{-105,97}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(outerWall_West.port_outside, Therm_outside) annotation (Line(
         points={{26,82.2},{26,88},{-86,88},{-86,97},{-105,97}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(outerWall_South.WindSpeedPort, WindSpeedPort) annotation (Line(
         points={{-76.35,33.3333},{-86,33.3333},{-86,28},{-112,28}},
-        color={0,0,127},
-        smooth=Smooth.None));
+        color={0,0,127}));
     connect(outerWall_South.thermStarComb_inside, thermStar_Demux.thermStarComb)
       annotation (Line(
         points={{-62,4},{-54,4},{-54,-56},{-32.1,-56},{-32.1,-41.4}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(floor.thermStarComb_inside, thermStar_Demux.thermStarComb)
       annotation (Line(
         points={{-32,-62},{-32,-41.4},{-32.1,-41.4}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(outerWall_East.thermStarComb_inside, thermStar_Demux.thermStarComb)
       annotation (Line(
         points={{26,-60},{28,-60},{28,-56},{-32.1,-56},{-32.1,-41.4}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(outerWall_North.thermStarComb_inside, thermStar_Demux.thermStarComb)
       annotation (Line(
         points={{60,4},{46,4},{46,-56},{-32.1,-56},{-32.1,-41.4}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(outerWall_West.thermStarComb_inside, thermStar_Demux.thermStarComb)
       annotation (Line(
         points={{26,74},{26,60},{46,60},{46,-56},{-32.1,-56},{-32.1,-41.4}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(ceiling.thermStarComb_inside, thermStar_Demux.thermStarComb)
       annotation (Line(
         points={{-32,76},{-32,60},{46,60},{46,-56},{-32.1,-56},{-32.1,-41.4}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(ceiling.port_outside, Therm_outside) annotation (Line(
         points={{-32,80.1},{-32,88},{-86,88},{-86,97},{-105,97}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(outerWall_East.WindSpeedPort, WindSpeedPort) annotation (Line(
         points={{8.4,-68.2},{8.4,-80},{-86,-80},{-86,28},{-112,28}},
-        color={0,0,127},
-        smooth=Smooth.None));
+        color={0,0,127}));
     connect(ceiling.WindSpeedPort, WindSpeedPort) annotation (Line(
         points={{-23.2,80.1},{-23.2,88},{-86,88},{-86,28},{-112,28}},
-        color={0,0,127},
-        smooth=Smooth.None));
+        color={0,0,127}));
     connect(outerWall_North.WindSpeedPort, WindSpeedPort) annotation (Line(
         points={{74.35,33.3333},{82,33.3333},{82,-80},{-86,-80},{-86,28},{-112,
             28}},
-        color={0,0,127},
-        smooth=Smooth.None));
+        color={0,0,127}));
 
     connect(outerWall_West.WindSpeedPort, WindSpeedPort) annotation (Line(
         points={{43.6,82.2},{43.6,88},{-86,88},{-86,28},{-112,28}},
-        color={0,0,127},
-        smooth=Smooth.None));
+        color={0,0,127}));
 
     connect(outerWall_South.solarRadWinTrans, floor.solarRadWin) annotation (Line(
         points={{-60.25,-16.6667},{-54,-16.6667},{-54,-56},{-40.8,-56},{-40.8,
             -61.8}},
-        color={0,0,127},
-        smooth=Smooth.None));
+        color={0,0,127}));
 
     connect(outerWall_South.solarRadWinTrans, outerWall_East.solarRadWin)
       annotation (Line(
         points={{-60.25,-16.6667},{-54,-16.6667},{-54,-56},{8.4,-56},{8.4,-59.6}},
-        color={0,0,127},
-        smooth=Smooth.None));
+        color={0,0,127}));
 
     connect(outerWall_South.solarRadWinTrans, outerWall_South.solarRadWin)
       annotation (Line(
         points={{-60.25,-16.6667},{-54,-16.6667},{-54,33.3333},{-61.3,33.3333}},
-        color={0,0,127},
-        smooth=Smooth.None));
+        color={0,0,127}));
 
     connect(outerWall_South.solarRadWinTrans, ceiling.solarRadWin) annotation (
         Line(
         points={{-60.25,-16.6667},{-54,-16.6667},{-54,60},{-23.2,60},{-23.2,
             75.8}},
-        color={0,0,127},
-        smooth=Smooth.None));
+        color={0,0,127}));
 
     connect(outerWall_North.solarRadWin, outerWall_South.solarRadWinTrans)
       annotation (Line(
         points={{59.3,33.3333},{46,33.3333},{46,60},{-54,60},{-54,-16.6667},{
             -60.25,-16.6667}},
-        color={0,0,127},
-        smooth=Smooth.None));
+        color={0,0,127}));
     connect(SolarRadiationPort[3], outerWall_South.SolarRadiationPort)
       annotation (Line(
         points={{-110,60},{-86,60},{-86,40.6667},{-78.1,40.6667}},
-        color={255,128,0},
-        smooth=Smooth.None));
+        color={255,128,0}));
     connect(ceiling.SolarRadiationPort, SolarRadiationPort[5]) annotation (
         Line(
         points={{-21,80.6},{-21,88},{-86,88},{-86,68},{-110,68}},
-        color={255,128,0},
-        smooth=Smooth.None));
+        color={255,128,0}));
     connect(outerWall_West.SolarRadiationPort, SolarRadiationPort[4]) annotation (
        Line(
         points={{48,83.2},{48,88},{-86,88},{-86,64},{-110,64}},
-        color={255,128,0},
-        smooth=Smooth.None));
+        color={255,128,0}));
     connect(outerWall_North.SolarRadiationPort, SolarRadiationPort[1])
       annotation (Line(
         points={{76.1,40.6667},{82,40.6667},{82,-80},{-86,-80},{-86,52},{-110,
             52}},
-        color={255,128,0},
-        smooth=Smooth.None));
+        color={255,128,0}));
 
     connect(outerWall_East.SolarRadiationPort, SolarRadiationPort[2]) annotation (
        Line(
         points={{4,-69.2},{4,-80},{-86,-80},{-86,56},{-110,56}},
-        color={255,128,0},
-        smooth=Smooth.None));
+        color={255,128,0}));
     connect(outerWall_South.solarRadWinTrans, outerWall_West.solarRadWin)
       annotation (Line(
         points={{-60.25,-16.6667},{-54,-16.6667},{-54,60},{43.6,60},{43.6,73.6}},
-        color={0,0,127},
-        smooth=Smooth.None));
+        color={0,0,127}));
     connect(varAirExchange.port_a, Therm_outside) annotation (Line(
         points={{-82,-56},{-86,-56},{-86,97},{-105,97}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(thermStar_Demux.therm, airload.port) annotation (Line(
         points={{-37.1,-21.9},{-37.1,-10.8},{10.9,-10.8}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(airload.port, temperatureSensor.port) annotation (Line(
         points={{10.9,-10.8},{4,-10.8},{4,-29},{32,-29}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(varAirExchange.port_b, airload.port) annotation (Line(
         points={{-62,-56},{4,-56},{4,-10.8},{10.9,-10.8}},
-        color={191,0,0},
-        smooth=Smooth.None));
-    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-              -100},{100,100}}),
-                        graphics), Icon(coordinateSystem(extent={{-100,-100},
+        color={191,0,0}));
+    annotation ( Icon(coordinateSystem(extent={{-100,-100},
               {100,100}}, preserveAspectRatio=false),
                                         graphics={
           Rectangle(
@@ -551,176 +514,137 @@ package ASHRAE140
     connect(thermStar_Demux.star, starRoom) annotation (Line(
         points={{-26.2,-21.6},{-26.2,0.2},{9,0.2},{9,26}},
         color={95,95,95},
-        pattern=LinePattern.Solid,
-        smooth=Smooth.None));
+        pattern=LinePattern.Solid));
     connect(thermStar_Demux.therm, thermRoom) annotation (Line(
         points={{-37.1,-21.9},{-37.1,-0.95},{-29,-0.95},{-29,23}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(varAirExchange.InPort1, AER) annotation (Line(
         points={{-81,-62.4},{-111,-62.4},{-111,-51}},
-        color={0,0,127},
-        smooth=Smooth.None));
+        color={0,0,127}));
     connect(outerWall_South.port_outside, Therm_outside) annotation (Line(
         points={{-76.35,4},{-86,4},{-86,97},{-105,97}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(floor.port_outside, Therm_ground) annotation (Line(
         points={{-32,-66.1003},{-32,-96}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(outerWall_East.port_outside, Therm_outside) annotation (Line(
         points={{26,-72.2},{26,-80},{-86,-80},{-86,97},{-105,97}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(outerWall_North.port_outside, Therm_outside) annotation (Line(
         points={{74.35,4},{82,4},{82,-80},{-86,-80},{-86,97},{-105,97}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(outerWall_West.port_outside, Therm_outside) annotation (Line(
         points={{26,82.2},{26,88},{-86,88},{-86,97},{-105,97}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(outerWall_South.WindSpeedPort, WindSpeedPort) annotation (Line(
         points={{-76.35,33.3333},{-86,33.3333},{-86,28},{-112,28}},
-        color={0,0,127},
-        smooth=Smooth.None));
+        color={0,0,127}));
     connect(outerWall_South.thermStarComb_inside, thermStar_Demux.thermStarComb)
       annotation (Line(
         points={{-62,4},{-54,4},{-54,-56},{-32.1,-56},{-32.1,-41.4}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(floor.thermStarComb_inside, thermStar_Demux.thermStarComb)
       annotation (Line(
         points={{-32,-62},{-32,-41.4},{-32.1,-41.4}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(outerWall_East.thermStarComb_inside, thermStar_Demux.thermStarComb)
       annotation (Line(
         points={{26,-64},{28,-64},{28,-56},{-32.1,-56},{-32.1,-41.4}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(outerWall_North.thermStarComb_inside, thermStar_Demux.thermStarComb)
       annotation (Line(
         points={{60,4},{46,4},{46,-56},{-32.1,-56},{-32.1,-41.4}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(outerWall_West.thermStarComb_inside, thermStar_Demux.thermStarComb)
       annotation (Line(
         points={{26,74},{26,60},{46,60},{46,-56},{-32.1,-56},{-32.1,-41.4}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(ceiling.thermStarComb_inside, thermStar_Demux.thermStarComb)
       annotation (Line(
         points={{-32,76},{-32,60},{46,60},{46,-56},{-32.1,-56},{-32.1,-41.4}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(ceiling.port_outside, Therm_outside) annotation (Line(
         points={{-32,80.1},{-32,88},{-86,88},{-86,97},{-105,97}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(outerWall_East.WindSpeedPort, WindSpeedPort) annotation (Line(
         points={{8.4,-72.2},{8.4,-80},{-86,-80},{-86,28},{-112,28}},
-        color={0,0,127},
-        smooth=Smooth.None));
+        color={0,0,127}));
     connect(ceiling.WindSpeedPort, WindSpeedPort) annotation (Line(
         points={{-23.2,80.1},{-23.2,88},{-86,88},{-86,28},{-112,28}},
-        color={0,0,127},
-        smooth=Smooth.None));
+        color={0,0,127}));
     connect(outerWall_North.WindSpeedPort, WindSpeedPort) annotation (Line(
         points={{74.35,33.3333},{82,33.3333},{82,-80},{-86,-80},{-86,28},{-112,
             28}},
-        color={0,0,127},
-        smooth=Smooth.None));
+        color={0,0,127}));
 
     connect(outerWall_West.WindSpeedPort, WindSpeedPort) annotation (Line(
         points={{43.6,82.2},{43.6,88},{-86,88},{-86,28},{-112,28}},
-        color={0,0,127},
-        smooth=Smooth.None));
+        color={0,0,127}));
 
     connect(SolarRadiationPort[3], outerWall_South.SolarRadiationPort)
       annotation (Line(
         points={{-110,60},{-86,60},{-86,40.6667},{-78.1,40.6667}},
-        color={255,128,0},
-        smooth=Smooth.None));
+        color={255,128,0}));
     connect(ceiling.SolarRadiationPort, SolarRadiationPort[5]) annotation (
         Line(
         points={{-21,80.6},{-21,88},{-86,88},{-86,68},{-110,68}},
-        color={255,128,0},
-        smooth=Smooth.None));
+        color={255,128,0}));
     connect(outerWall_West.SolarRadiationPort, SolarRadiationPort[4]) annotation (
        Line(
         points={{48,83.2},{48,88},{-86,88},{-86,64},{-110,64}},
-        color={255,128,0},
-        smooth=Smooth.None));
+        color={255,128,0}));
     connect(outerWall_North.SolarRadiationPort, SolarRadiationPort[1])
       annotation (Line(
         points={{76.1,40.6667},{82,40.6667},{82,-80},{-86,-80},{-86,52},{-110,
             52}},
-        color={255,128,0},
-        smooth=Smooth.None));
+        color={255,128,0}));
 
     connect(outerWall_East.SolarRadiationPort, SolarRadiationPort[2]) annotation (
        Line(
         points={{4,-73.2},{4,-80},{-86,-80},{-86,56},{-110,56}},
-        color={255,128,0},
-        smooth=Smooth.None));
+        color={255,128,0}));
     connect(varAirExchange.port_a, Therm_outside) annotation (Line(
         points={{-82,-56},{-86,-56},{-86,97},{-105,97}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(thermStar_Demux.therm, airload.port) annotation (Line(
         points={{-37.1,-21.9},{-37.1,-10.8},{10.9,-10.8}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(airload.port, temperatureSensor.port) annotation (Line(
         points={{10.9,-10.8},{4,-10.8},{4,-29},{32,-29}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(varAirExchange.port_b, airload.port) annotation (Line(
         points={{-62,-56},{4,-56},{4,-10.8},{10.9,-10.8}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(multiSum.y, outerWall_West.solarRadWin) annotation (Line(
         points={{26.98,26},{28,26},{28,60},{43.6,60},{43.6,73.6}},
-        color={0,0,127},
-        smooth=Smooth.None));
+        color={0,0,127}));
     connect(multiSum.y, ceiling.solarRadWin) annotation (Line(
         points={{26.98,26},{28,26},{28,60},{-22,60},{-22,75.8},{-23.2,75.8}},
-        color={0,0,127},
-        smooth=Smooth.None));
+        color={0,0,127}));
     connect(multiSum.y, outerWall_South.solarRadWin) annotation (Line(
         points={{26.98,26},{28,26},{28,60},{-54,60},{-54,33.3333},{-61.3,
             33.3333}},
-        color={0,0,127},
-        smooth=Smooth.None));
+        color={0,0,127}));
     connect(multiSum.y, floor.solarRadWin) annotation (Line(
         points={{26.98,26},{28,26},{28,60},{-54,60},{-54,-56},{-40.8,-56},{
             -40.8,-61.8}},
-        color={0,0,127},
-        smooth=Smooth.None));
+        color={0,0,127}));
     connect(multiSum.y, outerWall_East.solarRadWin) annotation (Line(
         points={{26.98,26},{28,26},{28,60},{46,60},{46,-56},{8,-56},{8,-58},{
             8.4,-58},{8.4,-63.6}},
-        color={0,0,127},
-        smooth=Smooth.None));
+        color={0,0,127}));
     connect(multiSum.y, outerWall_North.solarRadWin) annotation (Line(
         points={{26.98,26},{28,26},{28,60},{46,60},{46,33.3333},{59.3,33.3333}},
-        color={0,0,127},
-        smooth=Smooth.None));
+        color={0,0,127}));
 
     connect(outerWall_West.solarRadWinTrans, multiSum.u[1]) annotation (Line(
         points={{13.6,73},{13.6,60},{46,60},{46,23.9},{40,23.9}},
-        color={0,0,127},
-        smooth=Smooth.None));
+        color={0,0,127}));
     connect(outerWall_East.solarRadWinTrans, multiSum.u[2]) annotation (Line(
         points={{38.4,-63},{38.4,-56},{46,-56},{46,30},{38,30},{38,28.1},{40,
             28.1}},
-        color={0,0,127},
-        smooth=Smooth.None));
-    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-              -100},{100,100}}),
-                        graphics), Icon(coordinateSystem(extent={{-100,-100},
+        color={0,0,127}));
+    annotation ( Icon(coordinateSystem(extent={{-100,-100},
               {100,100}}, preserveAspectRatio=false),
                                         graphics={
           Rectangle(

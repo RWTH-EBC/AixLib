@@ -1,5 +1,5 @@
 within AixLib.Building.HighOrder.Rooms.MFD;
-package OneApparment 
+package OneApparment
   extends Modelica.Icons.Package;
 
 

@@ -49,47 +49,37 @@ equation
   connect(temperatureSensorMixed.port_b, massFlowSensorMixed.port_a)
     annotation (Line(
       points={{-56,0},{-52,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(massFlowSensorMixed.port_b, mixingValveFiltered.port_2) annotation (
       Line(
       points={{-32,0},{-26,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(temperatureSensor1.port_b, massFlowSensor1.port_a) annotation (Line(
       points={{12,30},{40,30}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(temperatureSensor2.port_b, massFlowSensor2.port_a) annotation (Line(
       points={{24,-28},{40,-28}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(mixingValveFiltered.port_3, temperatureSensor1.port_a) annotation (
       Line(
       points={{-16,10},{-16,30},{-8,30}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(mixingValveFiltered.port_1, temperatureSensor2.port_a) annotation (
       Line(
       points={{-6,0},{0,0},{0,-28},{4,-28}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(mixingValveFiltered.opening, step.y) annotation (Line(
       points={{-8,-7},{4,-7},{4,4},{21,4}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(massFlowSensor1.port_b, boundary_ph1.ports[1]) annotation (Line(
       points={{60,30},{70,30}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(massFlowSensor2.port_b, boundary_ph2.ports[1]) annotation (Line(
       points={{60,-28},{72,-28}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(temperatureSensorMixed.port_a, boundary_ph.ports[1]) annotation (Line(
       points={{-76,0},{-86,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   annotation (Documentation(info="<html>
 <p>
 This model shows the usage of a MixingValve against its design-direction. The results
@@ -98,8 +88,5 @@ then split the incoming flow into two fractions according to the opening of the 
 </p>
 </html>", revisions="<html>
 <p>26.11.2014, by <i>Roozbeh Sangi</i>: implemented </p>
-</html>"),Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-            {100,100}}),       graphics),
-    experiment(StopTime=1000),
-    __Dymola_experimentSetupOutput);
+</html>"),    experiment(StopTime=1000));
 end MixingValveBackwardDirection;

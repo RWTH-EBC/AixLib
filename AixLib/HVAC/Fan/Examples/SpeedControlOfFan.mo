@@ -11,16 +11,16 @@ model SpeedControlOfFan "Fan Speed Control Example"
   FanSimple fanSimple1(UseRotationalSpeedInput = false) annotation(Placement(transformation(extent = {{-30, -30}, {-10, -10}})));
   Ductwork.VolumeFlowController volumeFlowController1(D = 0.3) annotation(Placement(transformation(extent = {{6, -25}, {26, -15}})));
 equation
-  connect(V_dot_set.y, volumeFlowController.VolumeFlowSet) annotation(Line(points = {{5, 1.33227e-015}, {2, 1.33227e-015}, {2, 17.9}, {5.2, 17.9}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(fanSimple.portMoistAir_b, volumeFlowController.portMoistAir_a) annotation(Line(points = {{-10, 20}, {6, 20}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(volumeFlowController.portMoistAir_b, boundaryMoistAir_phX2.portMoistAir_a) annotation(Line(points = {{26, 20}, {32, 20}, {32, 1.33227e-015}, {40, 1.33227e-015}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(n_relative.y, fanSimple.n_relative) annotation(Line(points = {{-31, 36}, {-20, 36}, {-20, 30.6}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(boundaryMoistAir_phX1.portMoistAir_a, fanSimple1.portMoistAir_a) annotation(Line(points = {{-52, -2}, {-40, -2}, {-40, -20}, {-30, -20}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(fanSimple1.portMoistAir_b, volumeFlowController1.portMoistAir_a) annotation(Line(points = {{-10, -20}, {6, -20}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(boundaryMoistAir_phX1.portMoistAir_a, fanSimple.portMoistAir_a) annotation(Line(points = {{-52, -2}, {-40, -2}, {-40, 20}, {-30, 20}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(volumeFlowController1.portMoistAir_b, boundaryMoistAir_phX2.portMoistAir_a) annotation(Line(points = {{26, -20}, {32, -20}, {32, 1.33227e-015}, {40, 1.33227e-015}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(V_dot_set.y, volumeFlowController1.VolumeFlowSet) annotation(Line(points = {{5, 1.33227e-015}, {2, 1.33227e-015}, {2, -17.9}, {5.2, -17.9}}, color = {0, 0, 127}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(info = "<html>
+  connect(V_dot_set.y, volumeFlowController.VolumeFlowSet) annotation(Line(points = {{5, 1.33227e-015}, {2, 1.33227e-015}, {2, 17.9}, {5.2, 17.9}}, color = {0, 0, 127}));
+  connect(fanSimple.portMoistAir_b, volumeFlowController.portMoistAir_a) annotation(Line(points = {{-10, 20}, {6, 20}}, color = {0, 127, 255}));
+  connect(volumeFlowController.portMoistAir_b, boundaryMoistAir_phX2.portMoistAir_a) annotation(Line(points = {{26, 20}, {32, 20}, {32, 1.33227e-015}, {40, 1.33227e-015}}, color = {0, 127, 255}));
+  connect(n_relative.y, fanSimple.n_relative) annotation(Line(points = {{-31, 36}, {-20, 36}, {-20, 30.6}}, color = {0, 0, 127}));
+  connect(boundaryMoistAir_phX1.portMoistAir_a, fanSimple1.portMoistAir_a) annotation(Line(points = {{-52, -2}, {-40, -2}, {-40, -20}, {-30, -20}}, color = {0, 127, 255}));
+  connect(fanSimple1.portMoistAir_b, volumeFlowController1.portMoistAir_a) annotation(Line(points = {{-10, -20}, {6, -20}}, color = {0, 127, 255}));
+  connect(boundaryMoistAir_phX1.portMoistAir_a, fanSimple.portMoistAir_a) annotation(Line(points = {{-52, -2}, {-40, -2}, {-40, 20}, {-30, 20}}, color = {0, 127, 255}));
+  connect(volumeFlowController1.portMoistAir_b, boundaryMoistAir_phX2.portMoistAir_a) annotation(Line(points = {{26, -20}, {32, -20}, {32, 1.33227e-015}, {40, 1.33227e-015}}, color = {0, 127, 255}));
+  connect(V_dot_set.y, volumeFlowController1.VolumeFlowSet) annotation(Line(points = {{5, 1.33227e-015}, {2, 1.33227e-015}, {2, -17.9}, {5.2, -17.9}}, color = {0, 0, 127}));
+  annotation( Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>A simple Simulation Model which shows the effect of rotational Speed control of a Fan</p>
  </html>", revisions = "<html>

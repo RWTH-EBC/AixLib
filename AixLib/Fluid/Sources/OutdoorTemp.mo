@@ -7,8 +7,8 @@ model OutdoorTemp "Outdoor Temperature"
   Modelica.Blocks.Interfaces.RealOutput T_out
     "Connector of Real output signals"                                           annotation(Placement(transformation(extent = {{96, -10}, {116, 10}})));
 equation
-  connect(temperature.y[1], T_out) annotation(Line(points = {{11, 0}, {106, 0}}, color = {0, 0, 127}, smooth = Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(info = "<html>
+  connect(temperature.y[1], T_out) annotation(Line(points = {{11, 0}, {106, 0}}, color = {0, 0, 127}));
+  annotation( Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This source outputs the outdoor air temperature in K from a table given in database.</p>
  <h4><span style=\"color:#008000\">Example Results</span></h4>

@@ -52,7 +52,7 @@ equation
   Volflow = portMoistAir_a.m_flow / rho_MoistAir;
   Power = P_t;
   annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Ellipse(extent=  {{-100, 100}, {100, -100}}, lineColor=  {0, 0, 0},
-            fillPattern=                                                                                                    FillPattern.Solid, fillColor=  {170, 255, 255}), Line(points=  {{-78, 60}, {92, 40}, {90, 40}}, color=  {0, 0, 0}, smooth=  Smooth.None), Line(points=  {{-80, -60}, {92, -40}, {92, -40}}, color=  {0, 0, 0}, smooth=  Smooth.None)}), Documentation(info = "<html>
+            fillPattern=                                                                                                    FillPattern.Solid, fillColor=  {170, 255, 255}), Line(points=  {{-78, 60}, {92, 40}, {90, 40}}, color=  {0, 0, 0}), Line(points=  {{-80, -60}, {92, -40}, {92, -40}}, color=  {0, 0, 0})}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>A simple fan model with variation of rotational speed. The properties of the fan are table based.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
@@ -65,5 +65,5 @@ equation
  <ul>
  <li>implemented</li>
  </ul>
- </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
+ </html>"));
 end FanSimple;

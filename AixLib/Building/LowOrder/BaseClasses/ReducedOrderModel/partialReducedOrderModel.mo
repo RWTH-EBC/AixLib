@@ -63,7 +63,6 @@ partial model partialReducedOrderModel
       max=323.15))
             annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
-        rotation=0,
         origin={2,2})));
   Utilities.HeatTransfer.HeatConv
                              heatConvInnerwall(A=Ai, alpha=alphaiwi) if withInnerwalls
@@ -138,7 +137,6 @@ public
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow solarRadToHeatRad if withWindows
     "absorbed solar radiation on wall" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
-        rotation=0,
         origin={-36,90})));
   Modelica.Blocks.Math.Gain AbscoeffA1(k=splitfac*g*Aw) if withWindows
     "multiplication withabsorbtioncoefficient and area"
@@ -146,7 +144,6 @@ public
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow solarRadToHeatConv if withWindows
     "absorbed solar radiation on wall" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
-        rotation=0,
         origin={-36,64})));
   Modelica.Blocks.Interfaces.RealInput solarRad_in "solar radiation input"
     annotation (Placement(transformation(extent={{-134,56},{-94,96}}),
@@ -172,16 +169,13 @@ if withWindows and withOuterwalls then
   if withOuterwalls then
     connect(equalAirTemp, outerwall.port_a) annotation (Line(
         points={{-90,0},{-80,0},{-80,-0.909091},{-70,-0.909091}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(outerwall.port_b, heatConvOuterwall.port_b) annotation (Line(
         points={{-50,-0.909091},{-46.5,-0.909091},{-46.5,0},{-42,0}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     connect(heatConvOuterwall.port_a, airload.port) annotation (Line(
         points={{-22,0},{-7,0}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
     if withInnerwalls then
     else
     end if;
@@ -190,64 +184,48 @@ if withWindows and withOuterwalls then
   if withInnerwalls then
     connect(innerwall.port_a, heatConvInnerwall.port_b) annotation (Line(
         points={{56,-0.909091},{51.5,-0.909091},{51.5,0},{48,0}},
-        color={191,0,0},
-        smooth=Smooth.None));
+        color={191,0,0}));
   end if;
 
   connect(airExchange.port_b, airload.port)                  annotation (
       Line(
       points={{-24,-30},{-16,-30},{-16,0},{-7,0}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
 
   connect(internalGainsConv, airload.port) annotation (Line(
       points={{20,-90},{20,-30},{-16,-30},{-16,0},{-7,0}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(airload.port, heatConvInnerwall.port_a) annotation (Line(
       points={{-7,0},{-16,0},{-16,-30},{20,-30},{20,0},{28,0}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(ventilationTemperature, ventilationTemperatureConverter.T)
     annotation (Line(
       points={{-100,-62},{-68,-62},{-68,-51.6}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(ventilationTemperatureConverter.port, airExchange.port_a) annotation (
      Line(
       points={{-68,-34},{-68,-30},{-44,-30}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(ventilationRate, airExchange.InPort1) annotation (Line(
       points={{-40,-100},{-40,-50},{-50,-50},{-50,-36.4},{-43,-36.4}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(AbscoeffA.y, solarRadToHeatRad.Q_flow) annotation (Line(
       points={{-56.4,90},{-46,90}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(AbscoeffA1.y, solarRadToHeatConv.Q_flow) annotation (Line(
       points={{-56.4,64},{-46,64}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(solarRadToHeatConv.port, airload.port) annotation (Line(
       points={{-26,64},{-16,64},{-16,0},{-7,0}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(AbscoeffA1.u, solarRad_in) annotation (Line(
       points={{-70.2,64},{-86,64},{-86,76},{-114,76}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(AbscoeffA.u, solarRad_in) annotation (Line(
       points={{-70.2,90},{-86,90},{-86,76},{-114,76}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}),
-                      graphics),
-    experiment(StopTime=864000),
-    experimentSetupOutput,
-    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+      color={0,0,127}));
+  annotation (    experiment(StopTime=864000),
+Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}}),
          graphics={
         Rectangle(
@@ -261,21 +239,13 @@ if withWindows and withOuterwalls then
           fillColor={230,230,230},
           fillPattern=FillPattern.Solid),
         Line(
-          points={{-44,-56},{-12,-28},{-12,38},{-44,60}},
-          color={0,0,0},
-          smooth=Smooth.None),
+          points={{-44,-56},{-12,-28},{-12,38},{-44,60}}),
         Line(
-          points={{-12,38},{30,38},{58,38},{84,60}},
-          color={0,0,0},
-          smooth=Smooth.None),
+          points={{-12,38},{30,38},{58,38},{84,60}}),
         Line(
-          points={{58,38},{58,-28},{84,-56}},
-          color={0,0,0},
-          smooth=Smooth.None),
+          points={{58,38},{58,-28},{84,-56}}),
         Line(
-          points={{-12,-28},{58,-28}},
-          color={0,0,0},
-          smooth=Smooth.None),
+          points={{-12,-28},{58,-28}}),
         Rectangle(
           extent={{22,16},{38,4}},
           lineColor={0,0,0},

@@ -40,7 +40,7 @@ equation
   portMoistAir_a.p = p_in_internal;
   portMoistAir_a.h_outflow = h_in_internal;
   portMoistAir_a.X_outflow = X_in_internal;
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Ellipse(extent=  {{-100, 100}, {100, -100}}, lineColor=  {170, 255, 255},
+  annotation( Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Ellipse(extent=  {{-100, 100}, {100, -100}}, lineColor=  {170, 255, 255},
             fillPattern=                                                                                                    FillPattern.Sphere, fillColor=  {170, 213, 255}), Text(extent=  {{-66, 14}, {76, -10}}, lineColor=  {0, 0, 255}, textString=  "p boundary")}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Boundary Model for Moist Air. Defines absolute pressure, specific enthalpy per mass dry air and water fraction per mass dry air.</p>

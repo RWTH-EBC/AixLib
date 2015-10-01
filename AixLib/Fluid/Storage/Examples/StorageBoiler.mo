@@ -52,30 +52,26 @@ model StorageBoiler
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                    annotation(Placement(transformation(extent = {{-66, -20}, {-46, 0}})));
 equation
-  connect(fixedTemperature.port, storage.heatPort) annotation(Line(points = {{-74, 24}, {-54, 24}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(pump.port_a, boiler.port_b) annotation(Line(points = {{-32, 72}, {-32, 76}, {-26, 76}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(booleanExpression.y, pump.IsNight) annotation(Line(points = {{-5, 60}, {-14, 60}, {-14, 62}, {-21.8, 62}}, color = {255, 0, 255}, smooth = Smooth.None));
-  connect(const.y, boiler.T_set) annotation(Line(points = {{9.7, 69}, {-5.2, 69}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(pipe.port_b, hydraulicResistance.port_a) annotation(Line(points = {{-6, 0}, {8, 0}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(hydraulicResistance.port_b, boiler.port_a) annotation(Line(points = {{28, 0}, {52, 0}, {52, 76}, {-6, 76}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(pump.port_b, storage.port_a_heatGenerator) annotation(Line(points = {{-32, 52}, {-32, 32.8}, {-37.6, 32.8}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(pipe.port_a, storage.port_b_heatGenerator) annotation(Line(points = {{-26, 0}, {-32, 0}, {-32, 16}, {-37.6, 16}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(ramp.y, boundary_ph1.p_in) annotation(Line(points={{-115,-4},{-106,-2}},      color = {0, 0, 127}, smooth = Smooth.None));
-  connect(pipe1.port_b, storage.port_a_consumer) annotation(Line(points = {{-46, -10}, {-46, 14}}, color = {0, 127, 255}, smooth = Smooth.None));
+  connect(fixedTemperature.port, storage.heatPort) annotation(Line(points = {{-74, 24}, {-54, 24}}, color = {191, 0, 0}));
+  connect(pump.port_a, boiler.port_b) annotation(Line(points = {{-32, 72}, {-32, 76}, {-26, 76}}, color = {0, 127, 255}));
+  connect(booleanExpression.y, pump.IsNight) annotation(Line(points = {{-5, 60}, {-14, 60}, {-14, 62}, {-21.8, 62}}, color = {255, 0, 255}));
+  connect(const.y, boiler.T_set) annotation(Line(points = {{9.7, 69}, {-5.2, 69}}, color = {0, 0, 127}));
+  connect(pipe.port_b, hydraulicResistance.port_a) annotation(Line(points = {{-6, 0}, {8, 0}}, color = {0, 127, 255}));
+  connect(hydraulicResistance.port_b, boiler.port_a) annotation(Line(points = {{28, 0}, {52, 0}, {52, 76}, {-6, 76}}, color = {0, 127, 255}));
+  connect(pump.port_b, storage.port_a_heatGenerator) annotation(Line(points = {{-32, 52}, {-32, 32.8}, {-37.6, 32.8}}, color = {0, 127, 255}));
+  connect(pipe.port_a, storage.port_b_heatGenerator) annotation(Line(points = {{-26, 0}, {-32, 0}, {-32, 16}, {-37.6, 16}}, color = {0, 127, 255}));
+  connect(ramp.y, boundary_ph1.p_in) annotation(Line(points={{-115,-4},{-106,-2}},      color = {0, 0, 127}));
+  connect(pipe1.port_b, storage.port_a_consumer) annotation(Line(points = {{-46, -10}, {-46, 14}}, color = {0, 127, 255}));
   connect(boundary_ph1.ports[1], pipe1.port_a) annotation (Line(
       points={{-84,-10},{-66,-10}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(storage.port_b_consumer, boundary_ph2.ports[1]) annotation (Line(
       points={{-46,34},{-46,46},{-62,46}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(boundary_p.ports[1], pump.port_a) annotation (Line(
       points={{-66,80},{-32,80},{-32,72}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-            -100},{100,100}}),                                                                           graphics), experiment(StopTime = 86400, Interval = 60), __Dymola_experimentSetupOutput, Documentation(info = "<html>
+      color={0,127,255}));
+  annotation( experiment(StopTime = 86400, Interval = 60),Documentation(info = "<html>
  <p><h4><font color=\"#008000\">Overview</font></h4></p>
  <p>This is a simple example of a storage and a boiler.</p>
  </html>", revisions="<html>

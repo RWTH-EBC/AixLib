@@ -297,30 +297,19 @@ equation
         Polygon(
           points={{-40,4},{-34,-6},{-10,-18},{-20,-6},{-40,4}},
           lineColor={0,127,0},
-          smooth=Smooth.None,
           fillColor={175,175,175},
           fillPattern=FillPattern.Solid),
         Line(
           points={{18,40},{-30,-2}},
-          color={0,0,0},
-          smooth=Smooth.None,
           thickness=0.5),
         Line(
-          points={{10,42},{-30,-2}},
-          color={0,0,0},
-          smooth=Smooth.None),
+          points={{10,42},{-30,-2}}),
         Line(
-          points={{22,34},{-30,-2}},
-          color={0,0,0},
-          smooth=Smooth.None),
+          points={{22,34},{-30,-2}}),
         Line(
-          points={{-30,-2},{52,2}},
-          color={0,0,0},
-          smooth=Smooth.None),
+          points={{-30,-2},{52,2}}),
         Line(
-          points={{-30,-2},{56,-8}},
-          color={0,0,0},
-          smooth=Smooth.None),
+          points={{-30,-2},{56,-8}}),
         Polygon(
           points={{-34,-6},{-48,-12},{-46,-18},{-32,-20},{-10,-18},{-34,-6}},
           fillPattern=FillPattern.VerticalCylinder,
@@ -329,7 +318,6 @@ equation
         Polygon(
           points={{-36,-6},{-70,-20},{-64,-26},{-54,-30},{-10,-18},{-32,-20},
               {-46,-18},{-48,-12},{-34,-6},{-36,-6}},
-          smooth=Smooth.None,
           fillColor={0,98,0},
           fillPattern=FillPattern.Solid,
           pattern=LinePattern.Solid),
@@ -340,8 +328,7 @@ equation
           lineColor={0,0,0},
           origin={0,-6},
           rotation=360)}),
-    DymolaStoredErrors,
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
+Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}),graphics={
         Ellipse(
           extent={{-70,55},{70,-95}},
@@ -364,30 +351,19 @@ equation
         Polygon(
           points={{-40,4},{-34,-6},{-10,-18},{-20,-6},{-40,4}},
           lineColor={0,127,0},
-          smooth=Smooth.None,
           fillColor={175,175,175},
           fillPattern=FillPattern.Solid),
         Line(
           points={{18,40},{-30,-2}},
-          color={0,0,0},
-          smooth=Smooth.None,
           thickness=0.5),
         Line(
-          points={{10,42},{-30,-2}},
-          color={0,0,0},
-          smooth=Smooth.None),
+          points={{10,42},{-30,-2}}),
         Line(
-          points={{22,34},{-30,-2}},
-          color={0,0,0},
-          smooth=Smooth.None),
+          points={{22,34},{-30,-2}}),
         Line(
-          points={{-30,-2},{52,2}},
-          color={0,0,0},
-          smooth=Smooth.None),
+          points={{-30,-2},{52,2}}),
         Line(
-          points={{-30,-2},{56,-8}},
-          color={0,0,0},
-          smooth=Smooth.None),
+          points={{-30,-2},{56,-8}}),
         Polygon(
           points={{-34,-6},{-48,-12},{-46,-18},{-32,-20},{-10,-18},{-34,-6}},
           fillPattern=FillPattern.VerticalCylinder,
@@ -396,7 +372,6 @@ equation
         Polygon(
           points={{-36,-6},{-70,-20},{-64,-26},{-54,-30},{-10,-18},{-32,-20},{-46,
               -18},{-48,-12},{-34,-6},{-36,-6}},
-          smooth=Smooth.None,
           fillColor={0,98,0},
           fillPattern=FillPattern.Solid,
           pattern=LinePattern.Solid),

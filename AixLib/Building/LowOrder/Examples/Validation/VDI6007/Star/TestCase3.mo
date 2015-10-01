@@ -3,7 +3,7 @@ model TestCase3
   extends Modelica.Icons.Example;
   output Modelica.SIunits.Conversions.NonSIunits.Temperature_degC referenceTemp[1];
   output Modelica.SIunits.Temp_K simulationTemp;
-  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature outdoorTemp(T = 295.15) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 0, origin = {-34, 30})));
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature outdoorTemp(T = 295.15) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin = {-34, 30})));
   Modelica.Blocks.Sources.Constant infiltrationTemp(k = 22) annotation(Placement(transformation(extent = {{-44, -8}, {-24, 12}})));
   Modelica.Blocks.Sources.Constant infiltrationRate(k = 0) annotation(Placement(transformation(extent = {{-4, -40}, {16, -20}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machinesConvective annotation(Placement(transformation(extent = {{4, -68}, {24, -48}})));
@@ -32,17 +32,16 @@ model TestCase3
 equation
   referenceTemp = reference.y;
   simulationTemp = reducedModel.airload.port.T;
-  connect(tableMachines.y[1], machinesConvective.Q_flow) annotation(Line(points = {{-17.3, -58}, {4, -58}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(outdoorTemp.port, reducedModel.equalAirTemp) annotation(Line(points = {{-24, 30}, {-4, 30}, {-4, 27.68}, {15.4, 27.68}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(infiltrationTemp.y, reducedModel.ventilationTemperature) annotation(Line(points = {{-23, 2}, {-4, 2}, {-4, 18.84}, {15.4, 18.84}}, color = {0, 0, 127}, smooth = Smooth.None));
+  connect(tableMachines.y[1], machinesConvective.Q_flow) annotation(Line(points = {{-17.3, -58}, {4, -58}}, color = {0, 0, 127}));
+  connect(outdoorTemp.port, reducedModel.equalAirTemp) annotation(Line(points = {{-24, 30}, {-4, 30}, {-4, 27.68}, {15.4, 27.68}}, color = {191, 0, 0}));
+  connect(infiltrationTemp.y, reducedModel.ventilationTemperature) annotation(Line(points = {{-23, 2}, {-4, 2}, {-4, 18.84}, {15.4, 18.84}}, color = {0, 0, 127}));
   connect(infiltrationRate.y, reducedModel.ventilationRate) annotation(Line(points={{17,-30},
-          {22,-30},{22,11.7},{22.54,11.7}},                                                                                            color = {0, 0, 127}, smooth = Smooth.None));
+          {22,-30},{22,11.7},{22.54,11.7}},                                                                                            color = {0, 0, 127}));
   connect(machinesConvective.port, reducedModel.internalGainsConv) annotation(Line(points={{24,-58},
-          {32.4,-58},{32.4,11.7}},                                                                                                  color = {191, 0, 0}, smooth = Smooth.None));
+          {32.4,-58},{32.4,11.7}},                                                                                                  color = {191, 0, 0}));
   connect(solarRadiation.y, reducedModel.solarRad_in) annotation (Line(
       points={{-25,72},{21.18,72},{21.18,42.98}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   annotation(Documentation(revisions="<html>
 <p><ul>
  <li><i>June 8, 2015 </i> by Marcus Fuchs:<br/>Added unit testing command to annotations</li>
@@ -61,12 +60,9 @@ equation
 <p><br><br>All values are given in the VDI 6007-1. </p>
 <p>Same Test Case exists in VDI 6020. </p>
 <p>A script to run this test case can be found in AixLib\\Resources\\Scripts\\Dymola\\Building\\LowOrder\\Examples\\Validation\\Star.</p>
-</html>"),  Icon(graphics),
-            experiment(StopTime = 5.184e+006, Interval = 3600),
+</html>"),            experiment(StopTime = 5.184e+006, Interval = 3600),
             __Dymola_Commands(file=
                                "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Star/TestCase3.mos"
         "Simulate and plot"),
-            __Dymola_experimentSetupOutput(events = false),
-            Diagram(coordinateSystem(preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}}),      graphics));
+            __Dymola_experimentSetupOutput(events = false));
 end TestCase3;

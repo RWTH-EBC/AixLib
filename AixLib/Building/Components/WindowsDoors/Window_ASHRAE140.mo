@@ -27,11 +27,10 @@ model Window_ASHRAE140
 
   BaseClasses.CorrectionSolarGain.CorG_VDI6007
     RadCondAdapt(Uw=Uw) annotation (Placement(transformation(extent={{-52,48},{
-            -30,72}},
-                  rotation=0)));
+            -30,72}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor
                               AirGap(G=windowarea*6.297)    annotation (
-      Placement(transformation(extent={{-10,-20},{10,0}}, rotation=0)));
+      Placement(transformation(extent={{-10,-20},{10,0}})));
   Utilities.HeatTransfer.HeatConv_outside
                                         heatConv_outside(
 A=windowarea,
@@ -63,7 +62,7 @@ Therm(T(start=T0)),
 Star(T(start=T0)),
 eps=WindowType.Emissivity,
 A=windowarea)              annotation (Placement(transformation(extent={{36,22},
-        {56,42}},        rotation=0)));
+        {56,42}})));
   Building.Components.Walls.BaseClasses.SimpleNLayer pane2(
 n=1,
 lambda={1.06},
@@ -83,53 +82,41 @@ annotation (Placement(transformation(extent={{18,-18},{38,2}})));
 equation
   connect(heatConv_outside.WindSpeedPort, WindSpeedPort) annotation (Line(
   points={{-65.2,-17.2},{-80,-17.2},{-80,-59},{-99,-59}},
-  color={0,0,127},
-  smooth=Smooth.None));
+  color={0,0,127}));
   connect(heatConv_outside.port_b, pane1.port_a) annotation (Line(
   points={{-46,-10},{-46,-9},{-37,-9}},
-  color={191,0,0},
-  smooth=Smooth.None));
+  color={191,0,0}));
   connect(pane2.port_b, heatConv_inside.port_b) annotation (Line(
   points={{37,-9},{48,-9}},
-  color={191,0,0},
-  smooth=Smooth.None));
+  color={191,0,0}));
   connect(twoStar_RadEx.Therm, pane2.port_b) annotation (Line(
   points={{36.8,32},{36,32},{36,-9},{37,-9}},
-  color={191,0,0},
-  smooth=Smooth.None));
+  color={191,0,0}));
   connect(Ag.y, solarRadWinTrans) annotation (Line(
       points={{8.6,60},{50,60},{50,80},{92,80}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(RadCondAdapt.solarRadWinTrans[1], Ag.u) annotation (Line(
       points={{-31.1,60},{-5.2,60}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(pane1.port_b, AirGap.port_a) annotation (Line(
       points={{-19,-9},{-15.5,-9},{-15.5,-10},{-10,-10}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(AirGap.port_b, pane2.port_a) annotation (Line(
       points={{10,-10},{14,-10},{14,-9},{19,-9}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(port_outside, heatConv_outside.port_a) annotation (Line(
       points={{-90,-10},{-66,-10}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(heatConv_inside.port_a, port_inside) annotation (Line(
       points={{68,-9},{78,-9},{78,-10},{90,-10}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(twoStar_RadEx.Star, Star) annotation (Line(
       points={{55.1,32},{80,32},{80,60},{90,60}},
       color={95,95,95},
-      pattern=LinePattern.Solid,
-      smooth=Smooth.None));
+      pattern=LinePattern.Solid));
   connect(solarRad_in, RadCondAdapt.SR_input[1]) annotation (Line(
       points={{-90,60},{-72,60},{-72,59.88},{-51.78,59.88}},
-      color={255,128,0},
-      smooth=Smooth.None));
+      color={255,128,0}));
   annotation (
     Icon(coordinateSystem(
         preserveAspectRatio=false,
@@ -137,8 +124,7 @@ equation
         grid={2,2}), graphics={
       Line(
         points={{-66,18},{-62,18}},
-        color={255,255,0},
-        smooth=Smooth.None),
+        color={255,255,0}),
       Rectangle(extent={{-80,80},{80,-80}}, lineColor={0,0,0}),
       Rectangle(
         extent={{-80,80},{80,-80}},
@@ -159,26 +145,18 @@ equation
         fillColor={215,215,215},
         fillPattern=FillPattern.Solid),
       Line(
-        points={{2,40},{2,-76},{76,-76},{76,40},{2,40}},
-        color={0,0,0},
-        smooth=Smooth.None),
+        points={{2,40},{2,-76},{76,-76},{76,40},{2,40}}),
       Line(
-        points={{-76,40},{-76,-76},{-2,-76},{-2,40},{-76,40}},
-        color={0,0,0},
-        smooth=Smooth.None),
+        points={{-76,40},{-76,-76},{-2,-76},{-2,40},{-76,40}}),
       Line(
-        points={{-76,76},{-76,44},{76,44},{76,76},{-76,76}},
-        color={0,0,0},
-        smooth=Smooth.None),
+        points={{-76,76},{-76,44},{76,44},{76,76},{-76,76}}),
       Rectangle(
         extent={{4,-8},{6,-20}},
         lineColor={0,0,0},
         fillColor={215,215,215},
         fillPattern=FillPattern.Solid),
       Line(
-        points={{-72,72},{-72,48},{72,48},{72,72},{-72,72}},
-        color={0,0,0},
-        smooth=Smooth.None),
+        points={{-72,72},{-72,48},{72,48},{72,72},{-72,72}}),
       Rectangle(
         extent={{-72,72},{72,48}},
         lineColor={0,0,0},
@@ -195,19 +173,10 @@ equation
         fillColor={211,243,255},
         fillPattern=FillPattern.Solid),
       Line(
-        points={{-8,36},{-8,-72},{-72,-72},{-72,36},{-8,36}},
-        color={0,0,0},
-        smooth=Smooth.None),
+        points={{-8,36},{-8,-72},{-72,-72},{-72,36},{-8,36}}),
       Line(
-        points={{72,36},{72,-72},{10,-72},{10,36},{72,36}},
-        color={0,0,0},
-        smooth=Smooth.None),
+        points={{72,36},{72,-72},{10,-72},{10,36},{72,36}}),
       Rectangle(extent={{-80,80},{80,-80}}, lineColor={0,0,0})}),
-    Window(
-      x=0.26,
-      y=0.21,
-      width=0.49,
-      height=0.55),
     Documentation(info="<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>
 <p>The <b>WindowSimple</b> model represents a window described by the thermal transmission coefficient and the coefficient of solar energy transmission( with correction factors). </p>
@@ -237,6 +206,5 @@ equation
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={Rectangle(extent={{-80,80},{80,-80}},
-            lineColor={0,0,0})}),
-    DymolaStoredErrors);
+            lineColor={0,0,0})}));
 end Window_ASHRAE140;

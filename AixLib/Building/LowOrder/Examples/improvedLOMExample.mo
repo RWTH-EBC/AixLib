@@ -75,112 +75,88 @@ model improvedLOMExample
     annotation (Placement(transformation(extent={{-98,22},{-78,42}})));
 equation
   connect(personsRadiative.port,HeatTorStar. Therm) annotation(Line(points={{36,-78},
-          {52.8,-78}},                                                                                 color = {191, 0, 0}, smooth = Smooth.None));
+          {52.8,-78}},                                                                                 color = {191, 0, 0}));
   connect(partialEqAirTemp.equalAirTemp, reducedOrderModel.equalAirTemp)
     annotation (Line(
       points={{-36.2,20.4},{-18,20.4},{-18,35.68},{47.4,35.68}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(HeatTorStar.Star, reducedOrderModel.internalGainsRad) annotation (
       Line(
       points={{71.1,-78},{86,-78},{86,-6},{73.75,-6},{73.75,19.7}},
       color={95,95,95},
-      pattern=LinePattern.Solid,
-      smooth=Smooth.None));
+      pattern=LinePattern.Solid));
   connect(machinesConvective.port, reducedOrderModel.internalGainsConv)
     annotation (Line(
       points={{36,-30},{64.4,-30},{64.4,19.7}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(personsConvective.port, reducedOrderModel.internalGainsConv)
     annotation (Line(
       points={{36,-50},{56,-50},{56,-48},{64.4,-48},{64.4,19.7}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(infiltrationRate.y, reducedOrderModel.ventilationRate) annotation (
       Line(
       points={{24.5,-2},{54.54,-2},{54.54,19.7}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(solarRadWeightedSum.solarRad_out, reducedOrderModel.solarRad_in)
     annotation (Line(
       points={{36.3,70},{53.18,70},{53.18,50.98}},
-      color={255,128,0},
-      smooth=Smooth.None));
+      color={255,128,0}));
   connect(sunblind.sunblindonoff, partialEqAirTemp.sunblindsig) annotation (
       Line(
       points={{-32,60},{-32,52},{-46,52},{-46,34}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(weather.WeatherDataVector, partialEqAirTemp.weatherData) annotation (
       Line(
       points={{-75.1,67},{-75.1,26},{-54,26}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(weather.WeatherDataVector[1], reducedOrderModel.ventilationTemperature)
     annotation (Line(
       points={{-75.1,67},{-75.1,0},{0,0},{0,26.84},{47.4,26.84}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(machinesConvective.Q_flow, gain.y) annotation (Line(
       points={{16,-30},{4,-30},{4,-29},{-11.5,-29}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(gain2.y, personsRadiative.Q_flow) annotation (Line(
       points={{-11.6,-78},{16,-78}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(gain1.y, personsConvective.Q_flow) annotation (Line(
       points={{-9.5,-49},{6,-49},{6,-50},{16,-50}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(const.y, gain.u) annotation (Line(
       points={{-43,-48},{-32,-48},{-32,-29},{-23,-29}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(const.y, gain1.u) annotation (Line(
       points={{-43,-48},{-36,-48},{-36,-49},{-21,-49}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(const.y, gain2.u) annotation (Line(
       points={{-43,-48},{-36,-48},{-36,-78},{-20.8,-78}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(partialEqAirTemp.equalAirTempWindow, reducedOrderModel.equalAirTempWindow)
     annotation (Line(
       points={{-36.2,28.6},{-34,28.6},{-34,28},{-28,28},{-28,44.18},{47.4,44.18}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
 
   connect(partialCorG.solarRadWinTrans, solarRadWeightedSum.solarRad_in)
     annotation (Line(
       points={{-0.7,70},{5.7,70}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(weather.SolarRadiation_OrientedSurfaces, solarRadAdapter.solarRad_in)
     annotation (Line(
       points={{-82.8,67},{-82.8,50.5},{-97,50.5},{-97,32}},
-      color={255,128,0},
-      smooth=Smooth.None));
+      color={255,128,0}));
   connect(solarRadAdapter.solarRad_out, partialEqAirTemp.solarRad_in)
     annotation (Line(
       points={{-78,32},{-80,32},{-80,31.6},{-54.5,31.6}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(weather.SolarRadiation_OrientedSurfaces, sunblind.Rad_In) annotation
     (Line(
       points={{-82.8,67},{-82.8,60},{-46,60},{-46,70},{-41,70}},
-      color={255,128,0},
-      smooth=Smooth.None));
+      color={255,128,0}));
   connect(sunblind.Rad_Out, partialCorG.SR_input) annotation (Line(
       points={{-23,70},{-18,70},{-18,69.93},{-13.86,69.93}},
-      color={255,128,0},
-      smooth=Smooth.None));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}), graphics),
-    experiment(StopTime=86400, Interval=3600),
-    __Dymola_experimentSetupOutput,
-    Documentation(revisions="<html>
+      color={255,128,0}));
+  annotation (    experiment(StopTime=86400, Interval=3600),
+Documentation(revisions="<html>
 <ul>
 <li><i>June 2015,&nbsp;</i> by Moritz Lauster:<br>Debugged due to name changes in partialReducedOrderModel</li>
 </ul>

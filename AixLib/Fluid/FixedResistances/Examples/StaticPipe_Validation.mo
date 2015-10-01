@@ -20,17 +20,14 @@ model StaticPipe_Validation
     redeclare package Medium = Medium)               annotation(Placement(transformation(extent = {{60, -10}, {40, 10}})));
   Modelica.Blocks.Sources.Ramp ramp(duration = 1000, offset = 1.2e5, height = 6e6) annotation(Placement(transformation(extent = {{-100, -4}, {-80, 16}})));
 equation
-  connect(ramp.y, boundary_ph.p_in) annotation(Line(points={{-79,6},{-62,8}},      color = {0, 0, 127}, smooth = Smooth.None));
+  connect(ramp.y, boundary_ph.p_in) annotation(Line(points={{-79,6},{-62,8}},      color = {0, 0, 127}));
   connect(boundary_ph.ports[1], pipe.port_a) annotation (Line(
       points={{-40,0},{-10,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(pipe.port_b, boundary_ph1.ports[1]) annotation (Line(
       points={{10,0},{40,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-            -100},{100,100}}),                                                                           graphics), experiment(StopTime = 1000, Interval = 1), __Dymola_experimentSetupOutput(events = false), Documentation(revisions="<html>
+      color={0,127,255}));
+  annotation( experiment(StopTime = 1000, Interval = 1), __Dymola_experimentSetupOutput(events = false), Documentation(revisions="<html>
  <p>November 2014, Marcus Fuchs</p>
  <p><ul>
  <li>Changed model to use Annex 60 base class</li>

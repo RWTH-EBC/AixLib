@@ -51,46 +51,36 @@ model MixingValveForwardDirection
 equation
   connect(temperatureSensor2.port_b, massFlowSensor2.port_a) annotation (Line(
       points={{-34,-70},{-20,-70}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(temperatureSensor1.port_b, massFlowSensor1.port_a) annotation (Line(
       points={{-34,70},{-20,70}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(massFlowSensor1.port_b, mixingValveFiltered.port_3) annotation (Line(
       points={{0,70},{0,38},{-24,38},{-24,10}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(massFlowSensor2.port_b, mixingValveFiltered.port_1) annotation (Line(
       points={{0,-70},{0,-54},{-68,-54},{-68,0},{-34,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(step.y, mixingValveFiltered.opening) annotation (Line(
       points={{17,-44},{-44,-44},{-44,-7},{-32,-7}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(mixingValveFiltered.port_2, temperatureSensorMixed.port_a)
     annotation (Line(
       points={{-14,0},{-2,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(temperatureSensorMixed.port_b, massFlowSensorMixed.port_a)
     annotation (Line(
       points={{18,0},{34,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(temperatureSensor1.port_a, boundary_ph.ports[1]) annotation (Line(
       points={{-54,70},{-80,70}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(massFlowSensorMixed.port_b, boundary_ph1.ports[1]) annotation (Line(
       points={{54,0},{64,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(temperatureSensor2.port_a, boundary_ph2.ports[1]) annotation (Line(
       points={{-54,-70},{-80,-70}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   annotation (Documentation(info="<html>
 <p>
 This model shows the usage of a MixingValve in its design-direction. The results
@@ -101,8 +91,5 @@ between the two inflowing streams.
 </html>",
         revisions="<html>
 <p>26.11.2014, by <i>Roozbeh Sangi</i>: implemented </p>
-</html>"),Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-            {100,100}}),       graphics),
-    experiment(StopTime=1000),
-    __Dymola_experimentSetupOutput);
+</html>"),    experiment(StopTime=1000));
 end MixingValveForwardDirection;

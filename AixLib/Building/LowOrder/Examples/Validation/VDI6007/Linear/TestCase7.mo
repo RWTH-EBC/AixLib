@@ -50,35 +50,30 @@ model TestCase7
   Modelica.Blocks.Sources.Constant solarRadiation(k=0)
     annotation (Placement(transformation(extent={{-48,76},{-28,96}})));
 equation
-  connect(machinesRadiative.port,heatToStar. Therm) annotation(Line(points = {{22, -89}, {40.8, -89}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(innerLoads.y[2], machinesRadiative.Q_flow) annotation(Line(points = {{-25, -89}, {-4, -89}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(setTemp.y[2], idealHeaterCoolerVar1_1.soll_cool) annotation(Line(points = {{-59, -20}, {-50, -20}, {-50, -15.2}, {-30.8, -15.2}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(setTemp.y[1], idealHeaterCoolerVar1_1.soll_heat) annotation(Line(points = {{-59, -20}, {-50, -20}, {-50, -23}, {-30.8, -23}}, color = {0, 0, 127}, smooth = Smooth.None));
+  connect(machinesRadiative.port,heatToStar. Therm) annotation(Line(points = {{22, -89}, {40.8, -89}}, color = {191, 0, 0}));
+  connect(innerLoads.y[2], machinesRadiative.Q_flow) annotation(Line(points = {{-25, -89}, {-4, -89}}, color = {0, 0, 127}));
+  connect(setTemp.y[2], idealHeaterCoolerVar1_1.soll_cool) annotation(Line(points = {{-59, -20}, {-50, -20}, {-50, -15.2}, {-30.8, -15.2}}, color = {0, 0, 127}));
+  connect(setTemp.y[1], idealHeaterCoolerVar1_1.soll_heat) annotation(Line(points = {{-59, -20}, {-50, -20}, {-50, -23}, {-30.8, -23}}, color = {0, 0, 127}));
   connect(sumHeatLoad.u1, idealHeaterCoolerVar1_1.heatMeter.p);
   connect(sumHeatLoad.u2, idealHeaterCoolerVar1_1.coolMeter.p);
   referenceLoad[1] = -reference.y[2];
   simulationLoad = sumHeatLoad.y;
   connect(outdoorTemp.port, reducedModel.equalAirTemp) annotation(Line(points={{-4,59},
-          {26.5,59},{26.5,56.8},{49.4,56.8}},                                                                                       color = {191, 0, 0}, smooth = Smooth.None));
+          {26.5,59},{26.5,56.8},{49.4,56.8}},                                                                                       color = {191, 0, 0}));
   connect(infiltrationTemp.y, reducedModel.ventilationTemperature) annotation(Line(points={{16.5,1},
-          {35.25,1},{35.25,46.4},{49.4,46.4}},                                                                                                    color = {0, 0, 127}, smooth = Smooth.None));
+          {35.25,1},{35.25,46.4},{49.4,46.4}},                                                                                                    color = {0, 0, 127}));
   connect(infiltrationRate.y, reducedModel.ventilationRate) annotation(Line(points={{42.5,
-          -10},{56.54,-10},{56.54,38}},                                                                                      color = {0, 0, 127}, smooth = Smooth.None));
+          -10},{56.54,-10},{56.54,38}},                                                                                      color = {0, 0, 127}));
   connect(heatToStar.Star, reducedModel.internalGainsRad) annotation(Line(points={{59.1,
-          -89},{72,-89},{72,38},{75.75,38}},                                                                                        color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
+          -89},{72,-89},{72,38},{75.75,38}},                                                                                        color = {95, 95, 95}, pattern = LinePattern.Solid));
   connect(solarRadiation.y, reducedModel.solarRad_in) annotation (Line(
       points={{-27,86},{55.18,86},{55.18,74.8}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(idealHeaterCoolerVar1_1.HeatCoolRoom, reducedModel.internalGainsConv)
     annotation (Line(
       points={{-24.8,-29.4},{-24.8,-48},{66.4,-48},{66.4,38}},
-      color={191,0,0},
-      smooth=Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio=false,
-                     extent={{-100,-100},{100,100}}),
-                     graphics),
-             experiment(StopTime = 5.184e+006, Interval = 3600, Algorithm = "Lsodar"),
+      color={191,0,0}));
+  annotation(             experiment(StopTime = 5.184e+006, Interval = 3600, Algorithm = "Lsodar"),
              __Dymola_Commands(file=
                                "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Linear/TestCase7.mos"
         "Simulate and plot"),
@@ -103,5 +98,5 @@ equation
 <p>All values are given in the VDI 6007-1. </p>
 <p>Same Test Case exists in VDI 6020. </p>
 <p>A script to run this test case can be found in AixLib\\Resources\\Scripts\\Dymola\\Building\\LowOrder\\Examples\\Validation\\Linear.</p>
-</html>"),  Icon(graphics));
+</html>"));
 end TestCase7;

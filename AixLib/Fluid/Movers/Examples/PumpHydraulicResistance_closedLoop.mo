@@ -29,20 +29,19 @@ model PumpHydraulicResistance_closedLoop
                      PointFixedPressure(nPorts=1, redeclare package Medium =
         Medium)                                           annotation(Placement(transformation(extent = {{-100, 20}, {-80, 40}})));
 equation
-  connect(pump.port_b, pipe.port_a) annotation(Line(points = {{-20, 30}, {-4, 30}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(pipe.port_b, hydraulicResistance.port_a) annotation(Line(points = {{16, 30}, {26, 30}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(hydraulicResistance.port_b, pipe1.port_a) annotation(Line(points = {{46, 30}, {66, 30}, {66, -10}, {-12, -10}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(pipe1.port_b, pump.port_a) annotation(Line(points = {{-32, -10}, {-62, -10}, {-62, 30}, {-40, 30}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(NightSignal.y, pump.IsNight) annotation(Line(points = {{-39, 70}, {-30, 70}, {-30, 40.2}}, color = {255, 0, 255}, smooth = Smooth.None));
+  connect(pump.port_b, pipe.port_a) annotation(Line(points = {{-20, 30}, {-4, 30}}, color = {0, 127, 255}));
+  connect(pipe.port_b, hydraulicResistance.port_a) annotation(Line(points = {{16, 30}, {26, 30}}, color = {0, 127, 255}));
+  connect(hydraulicResistance.port_b, pipe1.port_a) annotation(Line(points = {{46, 30}, {66, 30}, {66, -10}, {-12, -10}}, color = {0, 127, 255}));
+  connect(pipe1.port_b, pump.port_a) annotation(Line(points = {{-32, -10}, {-62, -10}, {-62, 30}, {-40, 30}}, color = {0, 127, 255}));
+  connect(NightSignal.y, pump.IsNight) annotation(Line(points = {{-39, 70}, {-30, 70}, {-30, 40.2}}, color = {255, 0, 255}));
   connect(PointFixedPressure.ports[1], pump.port_a) annotation (Line(
       points={{-80,30},{-40,30}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-            -100},{100,100}}),                                                                           graphics={  Text(extent=  {{-124, 74}, {-62, 44}}, lineColor=  {0, 0, 255}, textString=  "Always have 
- a point of fixed pressure 
+            -100},{100,100}}),                                                                           graphics={  Text(extent=  {{-124, 74}, {-62, 44}}, lineColor=  {0, 0, 255}, textString=  "Always have
+ a point of fixed pressure
  before a pump
- when building a closed loop")}), experiment(StopTime = 86400, Interval = 60), __Dymola_experimentSetupOutput, Documentation(revisions="<html>
+ when building a closed loop")}), experiment(StopTime = 86400, Interval = 60),Documentation(revisions="<html>
  <p>November 2014, Marcus Fuchs</p>
  <p><ul>
  <li>Changed model to use Annex 60 base class</li>

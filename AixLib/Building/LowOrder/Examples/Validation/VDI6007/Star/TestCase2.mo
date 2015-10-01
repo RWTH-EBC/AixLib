@@ -32,26 +32,22 @@ model TestCase2
 equation
   referenceTemp = reference.y;
   simulationTemp = reducedModel.airload.port.T;
-  connect(machinesRadiative.port, HeatToStar.Therm) annotation(Line(points = {{58, -66}, {70, -66}, {70, -47.2}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(tableMachines.y[1], machinesRadiative.Q_flow) annotation(Line(points = {{16.7, -66}, {38, -66}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(outdoorTemp.port, reducedModel.equalAirTemp) annotation(Line(points = {{-24, 30}, {-6, 30}, {-6, 27.68}, {15.4, 27.68}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(infiltrationTemp.y, reducedModel.ventilationTemperature) annotation(Line(points = {{-23, 0}, {-4, 0}, {-4, 18.84}, {15.4, 18.84}}, color = {0, 0, 127}, smooth = Smooth.None));
+  connect(machinesRadiative.port, HeatToStar.Therm) annotation(Line(points = {{58, -66}, {70, -66}, {70, -47.2}}, color = {191, 0, 0}));
+  connect(tableMachines.y[1], machinesRadiative.Q_flow) annotation(Line(points = {{16.7, -66}, {38, -66}}, color = {0, 0, 127}));
+  connect(outdoorTemp.port, reducedModel.equalAirTemp) annotation(Line(points = {{-24, 30}, {-6, 30}, {-6, 27.68}, {15.4, 27.68}}, color = {191, 0, 0}));
+  connect(infiltrationTemp.y, reducedModel.ventilationTemperature) annotation(Line(points = {{-23, 0}, {-4, 0}, {-4, 18.84}, {15.4, 18.84}}, color = {0, 0, 127}));
   connect(infiltrationRate.y, reducedModel.ventilationRate) annotation(Line(points={{17,-30},
-          {20,-30},{20,11.7},{22.54,11.7}},                                                                                            color = {0, 0, 127}, smooth = Smooth.None));
+          {20,-30},{20,11.7},{22.54,11.7}},                                                                                            color = {0, 0, 127}));
   connect(HeatToStar.Star, reducedModel.internalGainsRad) annotation(Line(points={{70,
-          -28.9},{70,-18},{41.75,-18},{41.75,11.7}},                                                                                      color = {95, 95, 95}, pattern = LinePattern.Solid, smooth = Smooth.None));
+          -28.9},{70,-18},{41.75,-18},{41.75,11.7}},                                                                                      color = {95, 95, 95}, pattern = LinePattern.Solid));
   connect(solarRadiation.y, reducedModel.solarRad_in) annotation (Line(
       points={{-25,72},{21.18,72},{21.18,42.98}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio=false,
-             extent={{-100,-100},{100,100}}),      graphics),
-             experiment(StopTime = 5.184e+006, Interval = 3600),
+      color={0,0,127}));
+  annotation(             experiment(StopTime = 5.184e+006, Interval = 3600),
              __Dymola_Commands(file=
                                "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Star/TestCase2.mos"
         "Simulate and plot"),
              __Dymola_experimentSetupOutput(events = false),
-             Icon(graphics),
              Documentation(info="<html>
 <p>Test Case 2 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to a radiant heat source for Type room S </p>
 <ul>
