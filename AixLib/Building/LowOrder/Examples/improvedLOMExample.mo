@@ -19,9 +19,9 @@ model improvedLOMExample
     Ao=123.6,
     alphaiwi=3.16,
     epsi=0.9,
-    outerwall(load1(der_T(fixed=true))),
-    innerwall(load1(der_T(fixed=true))),
-    airload(T(fixed=true)))
+    airload(T(fixed=true)),
+    outerwall(load1(T(fixed=true))),
+    innerwall(load1(T(fixed=true))))
               constrainedby
     AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel.partialReducedOrderModel
     annotation (Placement(transformation(extent={{44,18},{78,52}})),
