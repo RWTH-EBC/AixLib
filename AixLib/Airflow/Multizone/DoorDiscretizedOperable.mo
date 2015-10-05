@@ -59,19 +59,19 @@ equation
         Rectangle(
           extent={{-100,2},{-46,-2}},
           lineColor={0,0,255},
-          pattern=LinePattern.Solid,
+          pattern=LinePattern.None,
           fillColor={255,128,0},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{-46,-16},{-20,-20}},
           lineColor={0,0,255},
-          pattern=LinePattern.Solid,
+          pattern=LinePattern.None,
           fillColor={255,128,0},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{-46,2},{-40,-16}},
           lineColor={0,0,255},
-          pattern=LinePattern.Solid,
+          pattern=LinePattern.None,
           fillColor={255,128,0},
           fillPattern=FillPattern.Solid)}),
 defaultComponentName="doo",

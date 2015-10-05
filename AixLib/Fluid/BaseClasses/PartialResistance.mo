@@ -63,7 +63,7 @@ equation
           extent={{-100,22},{100,-24}},
           fillPattern=FillPattern.Backward,
           fillColor={0,128,255},
-          pattern=LinePattern.Solid,
+          pattern = LinePattern.None,
           lineColor={255,255,255})}),
           defaultComponentName="res",
 Documentation(info="<html>

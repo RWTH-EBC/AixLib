@@ -9,19 +9,19 @@ model Orifice "Orifice"
         Rectangle(
           extent={{-100,8},{100,-8}},
           lineColor={0,0,255},
-          pattern=LinePattern.Solid,
+          pattern=LinePattern.None,
           fillColor={0,127,0},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{-20,100},{20,20}},
           lineColor={0,0,255},
-          pattern=LinePattern.Solid,
+          pattern=LinePattern.None,
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{-20,-20},{20,-100}},
           lineColor={0,0,255},
-          pattern=LinePattern.Solid,
+          pattern=LinePattern.None,
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid),
         Text(

@@ -90,7 +90,7 @@ annotation ( Icon(coordinateSystem(
           points={{79,46},{21,46},{79,70},{79,70},{79,46}},
           fillColor={236,99,92},
           fillPattern=FillPattern.Solid,
-          pattern=LinePattern.Solid),
+          pattern=LinePattern.None),
         Ellipse(
           extent={{-70,70},{-16,18}},
           lineColor={255,221,0},
@@ -117,7 +117,7 @@ annotation ( Icon(coordinateSystem(
           extent={{38,46},{78,-14}},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
-          pattern=LinePattern.Solid,
+          pattern=LinePattern.None,
           lineColor={0,0,0}),
         Rectangle(
           extent={{52,28},{80,-12}},
@@ -128,7 +128,7 @@ annotation ( Icon(coordinateSystem(
           extent={{78,32},{84,-18}},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
-          pattern=LinePattern.Solid),
+          pattern=LinePattern.None),
         Line(
           points={{52,8},{68,8},{78,8}}),
         Line(

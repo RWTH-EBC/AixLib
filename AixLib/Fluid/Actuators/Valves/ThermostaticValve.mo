@@ -37,7 +37,7 @@ equation
   end if;
   annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points=  {{-78, 50}, {-78, -60}, {82, 50}, {82, -62}, {-78, 50}},
             lineThickness=                                                                                                    1, fillColor=  {0, 0, 255},
-            fillPattern=                                                                                                    FillPattern.Solid, pattern=  LinePattern.Solid, lineColor=  {0, 0, 0})}), Documentation(revisions="<html>
+            fillPattern=                                                                                                    FillPattern.Solid, pattern = LinePattern.None, lineColor=  {0, 0, 0})}), Documentation(revisions="<html>
  <p>November 2014, Marcus Fuchs</p>
  <p><ul>
  <li>Changed model to use Annex 60 base class</li>

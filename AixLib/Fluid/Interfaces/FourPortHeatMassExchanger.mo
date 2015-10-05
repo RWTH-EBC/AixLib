@@ -333,19 +333,19 @@ First implementation.
         Rectangle(
           extent={{-70,80},{70,-80}},
           lineColor={0,0,255},
-          pattern=LinePattern.Solid,
+          pattern = LinePattern.None,
           fillColor={95,95,95},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{-99,64},{102,54}},
           lineColor={0,0,255},
-          pattern=LinePattern.Solid,
+          pattern = LinePattern.None,
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{-99,-56},{102,-66}},
           lineColor={0,0,255},
-          pattern=LinePattern.Solid,
+          pattern = LinePattern.None,
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid)}));
 end FourPortHeatMassExchanger;

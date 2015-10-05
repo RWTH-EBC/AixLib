@@ -53,13 +53,13 @@ equation
         Rectangle(
           extent={{-70,80},{70,-80}},
           lineColor={0,0,255},
-          pattern=LinePattern.Solid,
+          pattern = LinePattern.None,
           fillColor={85,170,255},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{-102,5},{99,-5}},
           lineColor={0,0,255},
-          pattern=LinePattern.Solid,
+          pattern = LinePattern.None,
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid),
         Text(
@@ -69,7 +69,7 @@ equation
         Rectangle(
           extent={{-100,61},{-70,58}},
           lineColor={0,0,255},
-          pattern=LinePattern.Solid,
+          pattern = LinePattern.None,
           fillColor={0,0,127},
           fillPattern=FillPattern.Solid),
         Text(
@@ -85,7 +85,7 @@ equation
           visible=use_T_in,
           extent={{-100,-59},{-70,-62}},
           lineColor={0,0,255},
-          pattern=LinePattern.Solid,
+          pattern = LinePattern.None,
           fillColor={255,0,0},
           fillPattern=FillPattern.Solid)}),
 defaultComponentName="hum",

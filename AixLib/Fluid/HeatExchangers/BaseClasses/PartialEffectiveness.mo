@@ -93,7 +93,7 @@ equation
             100}}), graphics={Rectangle(
           extent={{-70,78},{70,-82}},
           lineColor={0,0,255},
-          pattern=LinePattern.Solid,
+          pattern = LinePattern.None,
           fillColor={95,95,95},
           fillPattern=FillPattern.Solid)}),
     Documentation(info="<html>

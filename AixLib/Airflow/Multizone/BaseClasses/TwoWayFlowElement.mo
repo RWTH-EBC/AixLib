@@ -113,7 +113,7 @@ equation
           extent={{-100,100},{100,-100}},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
-          pattern=LinePattern.Solid)}),
+          pattern=LinePattern.None)}),
     Documentation(info="<html>
 <p>
 This is a partial model for models that describe the bi-directional

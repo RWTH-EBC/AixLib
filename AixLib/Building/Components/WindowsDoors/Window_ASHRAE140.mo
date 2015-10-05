@@ -129,19 +129,19 @@ equation
       Rectangle(
         extent={{-80,80},{80,-80}},
         lineColor={0,0,255},
-        pattern=LinePattern.Solid,
+         pattern=LinePattern.None,
         fillColor={215,215,215},
         fillPattern=FillPattern.Solid),
       Rectangle(
         extent={{-4,42},{10,-76}},
         lineColor={0,0,255},
-        pattern=LinePattern.Solid,
+         pattern=LinePattern.None,
         fillColor={215,215,215},
         fillPattern=FillPattern.Solid),
       Rectangle(
         extent={{-76,46},{74,38}},
         lineColor={0,0,255},
-        pattern=LinePattern.Solid,
+         pattern=LinePattern.None,
         fillColor={215,215,215},
         fillPattern=FillPattern.Solid),
       Line(

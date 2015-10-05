@@ -80,25 +80,25 @@ equation
       Rectangle(
         extent={{-80,60},{80,-100}},
         lineColor={0,0,0},
-        pattern=LinePattern.Solid,
+         pattern=LinePattern.None,
         fillPattern=FillPattern.HorizontalCylinder,
         fillColor={170,213,255}),
       Ellipse(
         extent={{14,36},{66,-16}},
         lineColor={0,0,255},
-        pattern=LinePattern.Solid,
+         pattern=LinePattern.None,
         fillColor={255,225,0},
         fillPattern=FillPattern.Solid),
       Rectangle(
         extent={{-80,-40},{80,-100}},
         lineColor={0,0,0},
-        pattern=LinePattern.Solid,
+         pattern=LinePattern.None,
         fillPattern=FillPattern.HorizontalCylinder,
         fillColor={0,127,0}),
       Rectangle(
         extent={{-80,-72},{80,-100}},
         lineColor={0,0,255},
-        pattern=LinePattern.Solid,
+         pattern=LinePattern.None,
         fillColor={0,127,0},
         fillPattern=FillPattern.Solid),
       Polygon(
@@ -110,7 +110,7 @@ equation
         points={{-60,-64},{-80,-72},{-80,-100},{-60,-100},{-22,-76},{-60,
             -64}},
         lineColor={0,0,0},
-        pattern=LinePattern.Solid,
+         pattern=LinePattern.None,
         fillPattern=FillPattern.VerticalCylinder,
         fillColor={0,77,0}),
       Text(
@@ -127,25 +127,25 @@ Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
         Rectangle(
           extent={{-80,60},{80,-100}},
           lineColor={0,0,0},
-          pattern=LinePattern.Solid,
+           pattern=LinePattern.None,
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={170,213,255}),
         Ellipse(
           extent={{14,36},{66,-16}},
           lineColor={0,0,255},
-          pattern=LinePattern.Solid,
+           pattern=LinePattern.None,
           fillColor={255,225,0},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{-80,-40},{80,-100}},
           lineColor={0,0,0},
-          pattern=LinePattern.Solid,
+           pattern=LinePattern.None,
           fillPattern=FillPattern.HorizontalCylinder,
           fillColor={0,127,0}),
         Rectangle(
           extent={{-80,-72},{80,-100}},
           lineColor={0,0,255},
-          pattern=LinePattern.Solid,
+           pattern=LinePattern.None,
           fillColor={0,127,0},
           fillPattern=FillPattern.Solid),
         Polygon(
@@ -157,7 +157,7 @@ Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
           points={{-60,-64},{-80,-72},{-80,-100},{-60,-100},{-22,-76},{-60,
               -64}},
           lineColor={0,0,0},
-          pattern=LinePattern.Solid,
+           pattern=LinePattern.None,
           fillPattern=FillPattern.VerticalCylinder,
           fillColor={0,77,0})}),
     Documentation(info="<html>

@@ -120,7 +120,7 @@ equation
           extent={{-16,78},{16,-2}},
           fillColor={85,170,255},
           fillPattern=FillPattern.Solid,
-          pattern=LinePattern.Solid,
+          pattern=LinePattern.None,
           lineColor={0,0,0}),
         Text(
           extent={{-50.5,20.5},{50.5,-20.5}},
@@ -133,21 +133,21 @@ equation
           extent={{-16,80},{16,54}},
           fillColor={85,170,255},
           fillPattern=FillPattern.Solid,
-          pattern=LinePattern.Solid,
+          pattern=LinePattern.None,
           lineColor={0,0,0}),
         Rectangle(
           visible=densitySelection == AixLib.Airflow.Multizone.Types.densitySelection.fromBottom,
           extent={{-16,0},{16,-82}},
           fillColor={85,170,255},
           fillPattern=FillPattern.Solid,
-          pattern=LinePattern.Solid,
+          pattern=LinePattern.None,
           lineColor={0,0,0}),
         Rectangle(
           visible=densitySelection == AixLib.Airflow.Multizone.Types.densitySelection.actual,
           extent={{-16,-55},{16,-80}},
           fillColor={85,170,255},
           fillPattern=FillPattern.Solid,
-          pattern=LinePattern.Solid,
+          pattern=LinePattern.None,
           lineColor={0,0,0}),
         Ellipse(
           extent={{-40,40},{40,-40}},

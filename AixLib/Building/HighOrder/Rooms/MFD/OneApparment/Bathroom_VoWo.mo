@@ -103,7 +103,7 @@ equation
             lineThickness=                                                                                                    1, fillColor=  {255, 255, 255},
             fillPattern=                                                                                                    FillPattern.Solid, textString=  "OW"), Rectangle(extent=  {{20, 92}, {40, 62}}, lineColor=  {0, 0, 0},
             lineThickness=                                                                                                    1, fillColor=  {127, 0, 0},
-            fillPattern=                                                                                                    FillPattern.Forward), Ellipse(extent=  {{22, 80}, {24, 78}}, lineColor=  {0, 0, 0}, pattern=  LinePattern.Solid,
+            fillPattern=                                                                                                    FillPattern.Forward), Ellipse(extent=  {{22, 80}, {24, 78}}, lineColor=  {0, 0, 0}, pattern=LinePattern.None,
             lineThickness=                                                                                                    1,
             fillPattern=                                                                                                    FillPattern.Sphere, fillColor=  {255, 255, 0}), Text(extent=  {{36, 84}, {86, 68}}, lineColor=  {0, 0, 0},
             lineThickness=                                                                                                    1, fillColor=  {255, 255, 255},
