@@ -207,7 +207,7 @@ equation
           points={{0,-50},{-6,-60},{6,-60},{0,-50}},
           fillColor={0,0,127},
           fillPattern=FillPattern.Solid,
-          pattern=LinePattern.Solid,
+          pattern = LinePattern.None,
           lineColor={0,0,0}),
         Line(
           points={{-84,-70},{0,-70},{0,-60}},

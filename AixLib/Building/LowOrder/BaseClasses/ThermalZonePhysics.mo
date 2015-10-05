@@ -155,7 +155,7 @@ equation
             lineThickness=1,                                                                                                    fillColor=
               {170,213,255},
             fillPattern=FillPattern.Solid,
-          pattern=LinePattern.Solid),
+          pattern=LinePattern.None),
         Rectangle(
           extent={{14,36},{100,-58}},
           lineColor={0,0,0},
@@ -173,7 +173,7 @@ equation
             lineThickness=1,                                                                                                    fillColor=
               {236,99,92},
             fillPattern=FillPattern.Solid,
-          pattern=LinePattern.Solid),                                                                                                    Rectangle(extent={{
+          pattern=LinePattern.None),                                                                                                    Rectangle(extent={{
               55,-2},{67,-10}},                                                                                                    lineColor=
               {0,0,0},                                                                                                    fillColor=
               {170,213,255},
@@ -182,13 +182,13 @@ equation
             lineThickness=1,                                                                                                    fillColor=
               {255,221,0},
             fillPattern=FillPattern.Solid,
-          pattern=LinePattern.Solid),
+          pattern=LinePattern.None),
         Rectangle(
           extent={{-60,-64},{100,-70}},
           lineThickness=1,
           fillPattern=FillPattern.Solid,
           fillColor={0,127,0},
-          pattern=LinePattern.Solid),
+          pattern=LinePattern.None),
         Line(
           points={{24,-48},{44,-32},{44,10},{24,26}}),
         Line(

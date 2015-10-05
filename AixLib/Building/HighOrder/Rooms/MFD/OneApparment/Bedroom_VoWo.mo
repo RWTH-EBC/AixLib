@@ -112,7 +112,7 @@ equation
             lineThickness=                                                                                                    1, fillColor=  {255, 255, 255},
             fillPattern=                                                                                                    FillPattern.Solid, textString=  "Corridor"), Rectangle(extent=  {{-54, 94}, {-34, 64}}, lineColor=  {0, 0, 0},
             lineThickness=                                                                                                    1, fillColor=  {127, 0, 0},
-            fillPattern=                                                                                                    FillPattern.Forward), Ellipse(extent=  {{-52, 82}, {-50, 80}}, lineColor=  {0, 0, 0}, pattern=  LinePattern.Solid,
+            fillPattern=                                                                                                    FillPattern.Forward), Ellipse(extent=  {{-52, 82}, {-50, 80}}, lineColor=  {0, 0, 0}, pattern=LinePattern.None,
             lineThickness=                                                                                                    1,
             fillPattern=                                                                                                    FillPattern.Sphere, fillColor=  {255, 255, 0}), Text(extent=  {{-72, -16}, {-76, -18}}, lineColor=  {0, 0, 0},
             lineThickness=                                                                                                    0.5, textString=  "Edit Here"), Rectangle(extent=  {{-110, -110}, {-90, -130}}, lineColor=  {0, 0, 0},

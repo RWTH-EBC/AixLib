@@ -55,7 +55,7 @@ First implementation.
         Rectangle(
           extent={{-96,96},{96,-96}},
           fillPattern=FillPattern.Sphere,
-          pattern=LinePattern.Solid,
+          pattern = LinePattern.None,
           lineColor={255,255,255},
           fillColor={170,213,255}),
         Text(

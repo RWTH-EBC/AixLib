@@ -56,7 +56,7 @@ equation
        Ellipse(
          extent={{-60,60},{60,-60}},
          lineColor={0,0,0},
-         pattern=LinePattern.Solid,
+         pattern = LinePattern.None,
          fillPattern=FillPattern.Sphere,
          fillColor={255,255,0})}),     Documentation(revisions="<html>
 <ul>

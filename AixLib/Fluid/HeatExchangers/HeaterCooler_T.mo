@@ -66,19 +66,19 @@ equation
         Rectangle(
           extent={{-70,60},{60,-60}},
           lineColor={0,0,255},
-          pattern=LinePattern.Solid,
+          pattern = LinePattern.None,
           fillColor={95,95,95},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{-102,5},{99,-5}},
           lineColor={0,0,255},
-          pattern=LinePattern.Solid,
+          pattern = LinePattern.None,
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{-100,60},{-70,58}},
           lineColor={0,0,255},
-          pattern=LinePattern.Solid,
+          pattern = LinePattern.None,
           fillColor={0,0,127},
           fillPattern=FillPattern.Solid),
         Text(
@@ -88,7 +88,7 @@ equation
         Rectangle(
           extent={{60,60},{100,58}},
           lineColor={0,0,255},
-          pattern=LinePattern.Solid,
+          pattern = LinePattern.None,
           fillColor={0,0,127},
           fillPattern=FillPattern.Solid),
         Text(

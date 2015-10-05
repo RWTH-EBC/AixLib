@@ -43,17 +43,17 @@ equation
             lineThickness=1,                                                                                                    fillColor=
               {170,213,255},
             fillPattern=FillPattern.HorizontalCylinder,
-          pattern=LinePattern.Solid,
+           pattern = LinePattern.None,
           lineColor={0,0,0}),                                                                                                    Rectangle(extent={{
               -60,80},{100,6}},
             lineThickness=1,                                                                                                    fillColor=
               {170,213,255},
             fillPattern=FillPattern.Solid,
-          pattern=LinePattern.Solid),                                                                                                    Rectangle(extent = {{-60, -58}, {100, -70}},
+           pattern = LinePattern.None),                                                                                                    Rectangle(extent = {{-60, -58}, {100, -70}},
             lineThickness=1,                                                                                                    fillColor=
               {0,127,0},
             fillPattern=FillPattern.HorizontalCylinder,
-          pattern=LinePattern.Solid,
+           pattern = LinePattern.None,
           lineColor={0,0,0}),                                                                                                    Rectangle(extent = {{14, 36}, {100, -58}}, lineColor=
               {0,0,0},                                                                                                    fillColor=
               {215,215,215},
@@ -80,12 +80,12 @@ equation
             lineThickness=1,                                                                                                    fillColor=
               {255,221,0},
             fillPattern=FillPattern.Solid,
-          pattern=LinePattern.Solid),                                                                                                    Rectangle(extent={{
+           pattern = LinePattern.None),                                                                                                    Rectangle(extent={{
               -60,-64},{100,-70}},
             lineThickness=1,                                                                                                    fillColor=
               {0,127,0},
             fillPattern=FillPattern.Solid,
-          pattern=LinePattern.Solid,
+           pattern = LinePattern.None,
           lineColor={0,0,0}),
         Line(
           points={{22,-50},{42,-28},{42,14},{22,28}}),
@@ -98,7 +98,7 @@ equation
               {255,221,0},
             fillPattern=FillPattern.Solid,                                                                                                    origin={65,
               14},                                                                                                    rotation = 180,
-          pattern=LinePattern.Solid),                                                                                                    Rectangle(extent={{
+           pattern = LinePattern.None),                                                                                                    Rectangle(extent={{
               62,22},{68,18}},                                                                                                    pattern = LinePattern.Solid,
             lineThickness =                                                                                                   1, fillColor = {0, 0, 0},
             fillPattern =                                                                                                   FillPattern.Solid, lineColor = {0, 0, 0}),

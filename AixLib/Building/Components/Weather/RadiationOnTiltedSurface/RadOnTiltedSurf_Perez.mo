@@ -291,7 +291,7 @@ equation
         Ellipse(
           extent={{22,48},{18,34}},
           lineColor={0,0,255},
-          pattern=LinePattern.Solid,
+           pattern=LinePattern.None,
           fillColor={255,225,0},
           fillPattern=FillPattern.Solid),
         Polygon(
@@ -314,17 +314,17 @@ equation
           points={{-34,-6},{-48,-12},{-46,-18},{-32,-20},{-10,-18},{-34,-6}},
           fillPattern=FillPattern.VerticalCylinder,
           fillColor={0,90,0},
-          pattern=LinePattern.Solid),
+           pattern=LinePattern.None),
         Polygon(
           points={{-36,-6},{-70,-20},{-64,-26},{-54,-30},{-10,-18},{-32,-20},
               {-46,-18},{-48,-12},{-34,-6},{-36,-6}},
           fillColor={0,98,0},
           fillPattern=FillPattern.Solid,
-          pattern=LinePattern.Solid),
+           pattern=LinePattern.None),
         Ellipse(extent={{-69,-26},{69,8}}, lineColor={0,0,0}),
         Rectangle(
           extent={{-70,72},{70,-72}},
-          pattern=LinePattern.Solid,
+           pattern=LinePattern.None,
           lineColor={0,0,0},
           origin={0,-6},
           rotation=360)}),
@@ -345,7 +345,7 @@ Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
       Ellipse(
         extent={{22,48},{18,34}},
         lineColor={0,0,255},
-        pattern=LinePattern.Solid,
+         pattern=LinePattern.None,
         fillColor={255,225,0},
         fillPattern=FillPattern.Solid),
         Polygon(
@@ -368,17 +368,17 @@ Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
           points={{-34,-6},{-48,-12},{-46,-18},{-32,-20},{-10,-18},{-34,-6}},
           fillPattern=FillPattern.VerticalCylinder,
           fillColor={0,90,0},
-          pattern=LinePattern.Solid),
+           pattern=LinePattern.None),
         Polygon(
           points={{-36,-6},{-70,-20},{-64,-26},{-54,-30},{-10,-18},{-32,-20},{-46,
               -18},{-48,-12},{-34,-6},{-36,-6}},
           fillColor={0,98,0},
           fillPattern=FillPattern.Solid,
-          pattern=LinePattern.Solid),
+           pattern=LinePattern.None),
         Ellipse(extent={{-69,-26},{69,8}}, lineColor={0,0,0}),
         Rectangle(
           extent={{-70,72},{70,-72}},
-          pattern=LinePattern.Solid,
+           pattern=LinePattern.None,
           lineColor={0,0,0},
           origin={0,-6},
           rotation=360)}),
