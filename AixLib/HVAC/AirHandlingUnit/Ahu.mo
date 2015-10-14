@@ -51,7 +51,7 @@ model Ahu
     annotation (Dialog(group="Settings AHU Value", enable=HRS));
 
   parameter Real clockPeriodGeneric(min=0) = 1800
-    "time period in s for sampling (= converting time-continous into time-discrete) input variables. Recommendation: half of simulation period"
+    "time period in s for sampling (= converting time-continous into time-discrete) input variables. Recommendation: half of the duration of one simulation interval"
     annotation (Dialog(group="Settings for State Machines"));
 
   // assumed increase in ventilator pressure
@@ -178,12 +178,13 @@ model Ahu
         rotation=180,
         origin={84,38})));
 
-  Modelica.Blocks.Interfaces.RealInput Vflow_in annotation (Placement(
+  Modelica.Blocks.Interfaces.RealInput Vflow_in "m3/s"
+                                                annotation (Placement(
         transformation(extent={{-112,78},{-84,106}}), iconTransformation(extent=
            {{-100,8},{-92,16}})));
 
   Modelica.Blocks.Interfaces.RealOutput QflowH(min=0, start=0.01)
-    "The absorbed heating power supplied from a cooling circuit [W]"
+    "The absorbed heating power supplied from a heating circuit [W]"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
@@ -193,7 +194,7 @@ model Ahu
         origin={41,-13})));
 
   Modelica.Blocks.Interfaces.RealOutput QflowC(min=0, start=0.01)
-    "The absorbed cooling power supplied from a heating circuit [W]"
+    "The absorbed cooling power supplied from a cooling circuit [W]"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
@@ -202,7 +203,7 @@ model Ahu
         rotation=-90,
         origin={-3,-13})));
   Modelica.Blocks.Interfaces.RealOutput Pel(min=0, start=1e-3)
-    "The absorbed electrical power supplied from the mains [W]" annotation (
+    "The consumed electrical power supplied from the mains [W]" annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
@@ -225,7 +226,7 @@ model Ahu
   //
   //Start State
 
-  model StartState
+  block StartState
 
     outer input Real phi_t_withoutHRS;
     outer output Real phi_t(start=0.5);
@@ -261,7 +262,7 @@ model Ahu
   //
   // Dehumidification
 
-  model DeHuHRS_true
+  block DeHuHRS_true
     outer output Modelica.SIunits.HeatFlowRate Q_dot_C(start=1);
     outer output Modelica.SIunits.HeatFlowRate Q_dot_H(start=1);
     outer input Modelica.SIunits.Temp_K T_oda(start=290);
@@ -341,7 +342,7 @@ p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
   //
   //
 
-  model DeHuHRS_false
+  block DeHuHRS_false
     outer output Modelica.SIunits.HeatFlowRate Q_dot_C(start=1);
     outer output Modelica.SIunits.HeatFlowRate Q_dot_H(start=1);
     outer input Modelica.SIunits.Temp_K T_oda(start=290);
@@ -422,7 +423,7 @@ p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
   //
   // Humidification
 
-  model HuPreHHRS_true
+  block HuPreHHRS_true
     outer output Modelica.SIunits.HeatFlowRate Q_dot_C;
     outer output Modelica.SIunits.HeatFlowRate Q_dot_H;
     outer input Modelica.SIunits.Temp_K T_oda;
@@ -468,7 +469,7 @@ p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
   //
   //
 
-  model HuPreHHRS_false
+  block HuPreHHRS_false
     outer output Modelica.SIunits.HeatFlowRate Q_dot_C;
     outer output Modelica.SIunits.HeatFlowRate Q_dot_H;
     outer input Modelica.SIunits.Temp_K T_oda;
@@ -514,7 +515,7 @@ p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
   //
   //
 
-  model HuCHRS_true
+  block HuCHRS_true
     outer output Modelica.SIunits.HeatFlowRate Q_dot_C;
     outer output Modelica.SIunits.HeatFlowRate Q_dot_H;
     outer input Modelica.SIunits.Temp_K T_oda;
@@ -566,7 +567,7 @@ p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
   //
   //
 
-  model HuCHRS_false
+  block HuCHRS_false
     outer output Modelica.SIunits.HeatFlowRate Q_dot_C;
     outer output Modelica.SIunits.HeatFlowRate Q_dot_H;
     outer input Modelica.SIunits.Temp_K T_oda;
@@ -618,7 +619,7 @@ p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
   //
   // Only Heating
 
-  model OnlyHeatingHRS_true
+  block OnlyHeatingHRS_true
     outer output Modelica.SIunits.HeatFlowRate Q_dot_C(start=2);
     outer output Modelica.SIunits.HeatFlowRate Q_dot_H(start=2);
     outer input Modelica.SIunits.Temp_K T_oda;
@@ -667,7 +668,7 @@ p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
   //
   //
 
-  model OnlyHeatingHRS_false
+  block OnlyHeatingHRS_false
     outer output Modelica.SIunits.HeatFlowRate Q_dot_C;
     outer output Modelica.SIunits.HeatFlowRate Q_dot_H;
     outer input Modelica.SIunits.Temp_K T_oda;
@@ -716,7 +717,7 @@ p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
   //
   // Only Cooling
 
-  model OnlyCoolingHRS_true
+  block OnlyCoolingHRS_true
     outer output Modelica.SIunits.HeatFlowRate Q_dot_C;
     outer output Modelica.SIunits.HeatFlowRate Q_dot_H;
     outer input Modelica.SIunits.Temp_K T_oda;
@@ -765,7 +766,7 @@ p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
   //
   //
 
-  model OnlyCoolingHRS_false
+  block OnlyCoolingHRS_false
     outer output Modelica.SIunits.HeatFlowRate Q_dot_C;
     outer output Modelica.SIunits.HeatFlowRate Q_dot_H;
     outer input Modelica.SIunits.Temp_K T_oda;
@@ -1374,22 +1375,22 @@ equation
           fileName="//eonakku/home/ebc/pme/Desktop/RLTnachDIN_Symbol.jpg")}),
     __Dymola_experimentSetupOutput,
     Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>The AHU model primarily calculates the thermal energy consumption of an air handling unit (AHU) but also the electric power. The model is mainly based on thermodynamic equations.</p>
+<h4><span style=\"color: #008000\">Overview</span></h4>
+<p>This is an ideal model of an air handling unit (AHU), primarily to calculate the thermal energy consumption of an air handling unit (AHU) but also the electric power. The model is mainly based on thermodynamic equations.</p>
 <p>It is based on incoming and outgoing enthalpy flows of moist air (thermodynamic principle).</p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars4.png\"/></p>
+<h4><span style=\"color: #008000\">Level of Development</span></h4>
+<p><img src=\"modelica://AixLib/Images/stars4.png\"/></p>
 <p>4 stars because the model was validated with an AHU test bench at E.ON ERC EBC, RWTH Aachen University. Additionally, simulations of an urban quarter were made and compared to measurement data. Examples and descriptions are recorded in [1]. </p>
-<h4><span style=\"color:#008000\">Assumptions</span></h4>
+<h4><span style=\"color: #008000\">Assumptions</span></h4>
 <p>For further explanation for each parameter see noted sources and [1]! Please note that the assumptions are made regarding AHUs which are implemented in laboratories.</p>
 <ul>
-<li>BPF_DeHu: by-pass factor of cooling coil during dehumidification; Expression for the amount of air that by-passes unaffectedly over a coil while the remaining fluid comes in direct contact with the coil. (source: [2], p. 500); BPF_DeHu between 10 &percnt; and 35 &percnt; acc. to [3]</li>
+<li>BPF_DeHu: by-pass factor of cooling coil during dehumidification; Expression for the amount of air that by-passes unaffectedly over a coil while the remaining fluid comes in direct contact with the coil. [2, p. 500]; BPF_DeHu between 10 &percnt; and 35 &percnt; acc. to [3]</li>
 <li>efficiencyHRS_enabled: temperature differential; efficiency of heat recovery system (HRS) when it is enabled (for HRSs without sorptive technology efficiencyHRS_enabled = 0.6 ... 0.8 [4])</li>
 <li>efficiencyHRS_disabled: temperature differential; efficiency of heat recovery system (HRS) when it is disabled (proposal for parameter efficiencyHRS_disabled = 0.2 ... 0.4 [1])</li>
 <li>dp_sup, dp_eta: pressure drop over ventilator; recommendation dp = 800 Pa [7]</li>
 <li>eta_sup, eta_eta: efficiency of supply/extract air fan. Assumed as constant in this model.</li>
 </ul>
-<h4><span style=\"color:#008000\">Known Limitations</span></h4>
+<h4><span style=\"color: #008000\">Known Limitations</span></h4>
 <ul>
 <li>static model, not dynamic</li>
 <li>no technical restrictions (demanded goal/value will always be reached)</li>
@@ -1397,16 +1398,17 @@ equation
 <li>only adiabatic humidification</li>
 <li>no moisture transfer in HRS</li>
 <li>the pinch temperature HRS component is 0 K</li>
+<li>if absolute humidity of outside air (input connector &QUOT;X_outdoorAir) exceeds X_saturated(T_oda) calculated with phi=1, X_oda is set to X_saturated</li>
 </ul>
-<h4><span style=\"color:#008000\">Concept</span></h4>
+<h4><span style=\"color: #008000\">Concept</span></h4>
 <ul>
 <li>Producing output data (thermal and electric power and outgoing air flow rate) by using some input data (black-box-principle). The inner components of an AHU are considered within this model.</li>
-<li>Based on sketch/schema of AHU shown in figure 1 [5, appendix D]</li>
+<li>Based on sketch/schema of AHU shown in figure 1 [5, appendix D].</li>
 <li>This model of an AHU is able to represent 5 cases: only heating, only cooling, dehumidification, humidification plus heating, humidification plus cooling.</li>
 </ul>
 <p><br>Figure 1 [5, appendix D] </p>
-<p><img src=\"modelica://Cities/Images/AHUaccToDINV18599-3.jpg\"/> </p>
-<p><br><b><font style=\"color: #008000; \">References</font></b></p>
+<p><img src=\"modelica://AixLib/Images/AHU/AHUaccToDINV18599-3.jpg\"/> </p>
+<p><br><b><span style=\"color: #008000;\">References</span></b></p>
 <ul>
 <li>[1] Mehrfeld, P. (2014): Experimentelle Untersuchung von L&uuml;ftungstechnik in Laboren (master thesis). RWTH Aachen University, Aachen. E.ON Energy Research Center, Institute for Energy Efficient Buildings and Indoor Climate; supervised by: Lauster, M.; M&uuml;ller, D.</li>
 <li>[2] Khurmi, R. S.; Gupta, J. K. (2009): Textbook of Refrigeration and Air Conditioning. 4th ed. New Delhi: Eurasia. (682 pages). ISBN 9788121927819.</li>
@@ -1416,7 +1418,7 @@ equation
 <li>[6] Schweizerischer Ingenieur- und Architektenverein (2006): SIA 2024: Standard- Nutzungsbedingungen f&uuml;r die Energie- und Geb&auml;udetechnik. Merkblatt.</li>
 <li>[7] Gilroy, E.: Designing - Building Services: fan power, it will blow you away! PM Group. Online available at http://www.pmgroup-global.com/pmgroup/media/News-Attachments/ Fan-Power,-it-will-blow-you-away!pdf, last accessed on 23 September 2014.</li>
 </ul>
-<h4><span style=\"color:#008000\">Example Results</span></h4>
+<h4><span style=\"color: #008000\">Example Results</span></h4>
 <p>20 validation experiments are documented in [1, chapter 4 and 5]. </p>
 </html>", revisions="<html>
 <ul>
