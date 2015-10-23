@@ -1,5 +1,5 @@
 within AixLib.HVAC.AirHandlingUnit;
-model Ahu
+model AHU
   "Air Handling Unit with Heat Recovery System, Cooling, Heating, Humidification (adiabatic), Dehumidification"
  /*
  indices and abbreviations:
@@ -1380,7 +1380,7 @@ equation
 <p>It is based on incoming and outgoing enthalpy flows of moist air (thermodynamic principle).</p>
 <h4><span style=\"color: #008000\">Level of Development</span></h4>
 <p><img src=\"modelica://AixLib/Images/stars4.png\"/></p>
-<p>4 stars because the model was validated with an AHU test bench at E.ON ERC EBC, RWTH Aachen University. Additionally, simulations of an urban quarter were made and compared to measurement data. Examples and descriptions are recorded in [1]. </p>
+<p>4 stars because the model was validated with an AHU test bench at E.ON ERC EBC, RWTH Aachen University. Additionally, simulations of a city district were made and compared to measurement data. Examples and descriptions are recorded in [1]. </p>
 <h4><span style=\"color: #008000\">Assumptions</span></h4>
 <p>For further explanation for each parameter see noted sources and [1]! Please note that the assumptions are made regarding AHUs which are implemented in laboratories.</p>
 <ul>
@@ -1428,4 +1428,4 @@ equation
          Model implemented</li>
 </ul>
 </html>"));
-end Ahu;
+end AHU;

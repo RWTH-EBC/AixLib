@@ -1,5 +1,5 @@
 within AixLib.HVAC.AirHandlingUnit.Examples;
-model TestAhu
+model TestAHU
   "Example to test all states of the AHU model - Play with the possible modes (boolean parameters for: heating, cooling, de-/humidification"
     extends Modelica.Icons.Example;
 
@@ -13,7 +13,7 @@ model TestAhu
     annotation (Placement(transformation(extent={{-100,24},{-80,44}})));
   Modelica.Blocks.Sources.Constant desiredT_sup(k=293)
     annotation (Placement(transformation(extent={{62,-26},{42,-6}})));
-  Ahu ahu(HRS=true, clockPeriodGeneric=30)
+  AHU ahu(HRS=true, clockPeriodGeneric=30)
     annotation (Placement(transformation(extent={{-72,-62},{30,48}})));
   Modelica.Blocks.Sources.Constant phi_roomMin(k=0.45)
     annotation (Placement(transformation(extent={{68,-56},{48,-36}})));
@@ -85,4 +85,4 @@ equation
 <p>Occupation and Schedule is a percentage value between 0 and 1.</p>
 <p>The zone parameter is needed to automatically calculate the air flow rate based on the occupation and room area.</p>
 </html>"));
-end TestAhu;
+end TestAHU;
