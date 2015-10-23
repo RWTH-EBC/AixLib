@@ -1,5 +1,5 @@
 within AixLib.Building.LowOrder.BaseClasses.ThermalZonePhysics;
-model ThermalZonePhysicsRWin
+model ThermalZonePhysicsEBCMod
   "All sub-models of VDI 6007 connected to one model"
   extends partialThermalZonePhysics;
   parameter Boolean withInnerwalls = true "If inner walls are existent" annotation(Dialog(tab = "Inner walls"));
@@ -239,4 +239,4 @@ equation
 <li><i>June 2015,&nbsp;</i> by Moritz Lauster:<br>Implemented. </li>
 </ul>
 </html>"));
-end ThermalZonePhysicsRWin;
+end ThermalZonePhysicsEBCMod;
