@@ -1,5 +1,6 @@
-within AixLib.Building.LowOrder.BaseClasses;
+within AixLib.Building.LowOrder.BaseClasses.ThermalZonePhysics;
 model ThermalZonePhysics "All sub-models of VDI 6007 connected to one model"
+  extends partialThermalZonePhysics;
   parameter Boolean withInnerwalls = true "If inner walls are existent" annotation(Dialog(tab = "Inner walls"));
   parameter Modelica.SIunits.ThermalResistance R1i = 0.000656956
     "Resistor 1 inner wall"                                                              annotation(Dialog(tab = "Inner walls", enable = if withInnerwalls then true else false));
@@ -30,12 +31,6 @@ model ThermalZonePhysics "All sub-models of VDI 6007 connected to one model"
   parameter Real aowo = 0.7 "Coefficient of absorption of the outer walls" annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
   parameter Boolean withWindows = true "If windows are existent" annotation(Dialog(tab = "Windows", enable = if withOuterwalls then true else false));
   parameter Real splitfac = 0 "Factor for conv. part of rad. through windows" annotation(Dialog(tab = "Windows", enable = if withOuterwalls then true else false));
-  parameter Modelica.SIunits.Area Aw[n] = {1, 1, 1, 1} "Area of the windows" annotation(Dialog(tab = "Windows", enable = if withWindows and withOuterwalls then true else false));
-  parameter Modelica.SIunits.TransmissionCoefficient gsunblind[n] = {1, 1, 1, 1}
-    "Total energy transmittances if sunblind is closed"                                                                              annotation(Dialog(tab = "Windows", group = "Shading", enable = if withWindows and withOuterwalls then true else false));
-  parameter Modelica.SIunits.RadiantEnergyFluenceRate Imax = 100
-    "Intensity at which the sunblind closes"                                                              annotation(Dialog(tab = "Windows", group = "Shading", enable = if withWindows and withOuterwalls then true else false));
-  parameter Integer n = 4 "Number of orientations (without ground)" annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
   parameter Real weightfactorswall[n] = {0.5, 0.2, 0.2, 0.1}
     "Weight factors of the walls"                                                          annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
   parameter Real weightfactorswindow[n] = {0, 0, 0, 0}
@@ -53,20 +48,6 @@ model ThermalZonePhysics "All sub-models of VDI 6007 connected to one model"
   parameter Modelica.SIunits.Density rhoair = 1.19 "Density of the air" annotation(Dialog(tab = "Room air"));
   parameter Modelica.SIunits.SpecificHeatCapacity cair = 1007
     "Heat capacity of the air"                                                           annotation(Dialog(tab = "Room air"));
-  SolarRadWeightedSum solRadWeightedSum(n=n, weightfactors=Aw) if     withWindows and withOuterwalls
-    annotation (Placement(transformation(extent={{4,56},{32,86}})));
-  Components.Weather.Sunblinds.Sunblind sunblind(
-    Imax=Imax,
-    n=n,
-    gsunblind=gsunblind) if                                                          withWindows and withOuterwalls
-    annotation (Placement(transformation(extent={{-50,59},{-30,79}})));
-  Utilities.Interfaces.SolarRad_in solarRad_in[n] if withOuterwalls annotation(Placement(transformation(extent = {{-100, 60}, {-80, 80}}), iconTransformation(extent = {{-94, 50}, {-60, 80}})));
-  Modelica.Blocks.Interfaces.RealInput weather[3] if withOuterwalls
-    "[1]: Air temperature<br/>[2]: Horizontal radiation of sky<br/>[3]: Horizontal radiation of earth"
-                                                                                                        annotation(Placement(transformation(extent = {{-120, -10}, {-80, 30}}), iconTransformation(extent = {{-90, 4}, {-60, 34}})));
-  Modelica.Blocks.Interfaces.RealInput ventilationRate annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 90, origin = {-28, -90}), iconTransformation(extent = {{-14, -14}, {14, 14}}, rotation = 90, origin = {-40, -86})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a internalGainsConv annotation(Placement(transformation(extent = {{30, -100}, {50, -80}}), iconTransformation(extent = {{30, -100}, {50, -80}})));
-  Utilities.Interfaces.Star internalGainsRad annotation(Placement(transformation(extent = {{70, -100}, {90, -80}}), iconTransformation(extent = {{70, -100}, {90, -80}})));
   EqAirTemp.EqAirTempSimple eqAirTemp(
     alphaowo=alphaowo,
     aowo=aowo,
@@ -100,50 +81,36 @@ model ThermalZonePhysics "All sub-models of VDI 6007 connected to one model"
     withOuterwalls=withOuterwalls,
     splitfac=splitfac)
     annotation (Placement(transformation(extent={{18,-10},{76,46}})));
-  Modelica.Blocks.Interfaces.RealInput ventilationTemperature annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, origin = {-100, -50}), iconTransformation(extent = {{-15, -15}, {15, 15}}, origin = {-76, -40})));
-  SolarRadAdapter solarRadAdapter[n]
-    annotation (Placement(transformation(extent={{-74,28},{-54,48}})));
 
-  replaceable Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG
-    partialCorG(n=n) constrainedby
-    Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
-    annotation (Placement(transformation(extent={{-24,60},{-4,80}})));
 equation
   if withWindows and withOuterwalls then
-    connect(sunblind.sunblindonoff, eqAirTemp.sunblindsig) annotation(Line(points={{-40,60},
-            {-36,60},{-36,18}},                                                                                                   color = {0, 0, 127}));
   end if;
   if withOuterwalls then
-    connect(weather, eqAirTemp.weatherData) annotation(Line(points = {{-100, 10}, {-44, 10}}, color = {0, 0, 127}));
     connect(eqAirTemp.equalAirTemp, reducedOrderModel.equalAirTemp) annotation(Line(points={{-26.2,
             4.4},{-2,4.4},{-2,19.12},{23.8,19.12}},                                                                                             color = {191, 0, 0}));
   end if;
-  connect(internalGainsConv, reducedOrderModel.internalGainsConv) annotation(Line(points={{40,-90},
-          {40,-49},{52.8,-49},{52.8,-7.2}},                                                                                                   color = {191, 0, 0}));
-  connect(internalGainsRad, reducedOrderModel.internalGainsRad) annotation(Line(points={{80,-90},
-          {80,-7.2},{68.75,-7.2}},                                                                                               color = {95, 95, 95}, pattern = LinePattern.Solid));
-  connect(ventilationRate, reducedOrderModel.ventilationRate) annotation(Line(points={{-28,-90},
-          {4,-90},{4,-7.2},{35.98,-7.2}},                                                                                               color = {0, 0, 127}));
-  connect(ventilationTemperature, reducedOrderModel.ventilationTemperature) annotation(Line(points = {{-100, -50}, {-12, -50}, {-12, 4.56}, {23.8, 4.56}}, color = {0, 0, 127}));
-  connect(solarRad_in, sunblind.Rad_In) annotation(Line(points={{-90,70},{-49,70}},                            color = {255, 128, 0}));
-  connect(solarRadAdapter.solarRad_in, solarRad_in) annotation (Line(
-      points={{-73,38},{-76,38},{-76,70},{-90,70}},
-      color={255,128,0}));
   connect(solarRadAdapter.solarRad_out, eqAirTemp.solarRad_in) annotation (Line(
-      points={{-54,38},{-50,38},{-50,15.6},{-44.5,15.6}},
-      color={0,0,127}));
-  connect(sunblind.Rad_Out, partialCorG.SR_input) annotation (Line(
-      points={{-31,70},{-28,70},{-28,69.9},{-23.8,69.9}},
-      color={255,128,0}));
-  connect(partialCorG.solarRadWinTrans, solRadWeightedSum.solarRad_in)
-    annotation (Line(
-      points={{-5,70},{0,70},{0,71},{5.4,71}},
-      color={0,0,127}));
+        points={{-54,38},{-52,38},{-52,36},{-52,15.6},{-44.5,15.6}}, color={0,0,
+          127}));
+  connect(sunblind.sunblindonoff, eqAirTemp.sunblindsig) annotation (Line(
+        points={{-40,60},{-40,60},{-40,26},{-36,26},{-36,18}}, color={0,0,127}));
+  connect(weather, eqAirTemp.weatherData)
+    annotation (Line(points={{-100,10},{-44,10},{-44,10}}, color={0,0,127}));
+  connect(ventilationTemperature, reducedOrderModel.ventilationTemperature)
+    annotation (Line(points={{-100,-50},{-46,-50},{8,-50},{8,4.56},{23.8,4.56}},
+        color={0,0,127}));
+  connect(ventilationRate, reducedOrderModel.ventilationRate) annotation (Line(
+        points={{-28,-90},{-28,-90},{-28,-64},{35.98,-64},{35.98,-7.2}}, color={
+          0,0,127}));
+  connect(internalGainsConv, reducedOrderModel.internalGainsConv) annotation (
+      Line(points={{40,-90},{46,-90},{46,-70},{52.8,-70},{52.8,-7.2}}, color={191,
+          0,0}));
+  connect(internalGainsRad, reducedOrderModel.internalGainsRad) annotation (
+      Line(points={{80,-90},{82,-90},{82,-40},{82,-36},{68.75,-36},{68.75,-7.2}},
+        color={95,95,95}));
   connect(solRadWeightedSum.solarRad_out, reducedOrderModel.solarRad_in)
-    annotation (Line(
-      points={{30.6,71},{33.66,71},{33.66,44.32}},
-      color={0,0,127}));
-  annotation( Icon(
+    annotation (Line(points={{30.6,71},{33.66,71},{33.66,44.32}}, color={0,0,127}));
+  annotation (Icon(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}}),                                                                                                    graphics={  Rectangle(extent={{
               -60,64},{98,-58}},                                                                                                    lineColor=
@@ -160,7 +127,7 @@ equation
           extent={{14,36},{100,-58}},
           lineColor={0,0,0},
           fillColor={215,215,215},
-          fillPattern=FillPattern.Forward),                                                                                                    Rectangle(extent=  {{-60, -58}, {100, -70}}, lineColor=
+          fillPattern=FillPattern.Forward),                                                                                                    Rectangle(extent = {{-60, -58}, {100, -70}}, lineColor=
               {0,127,0},
             lineThickness=1,                                                                                                    fillColor=
               {0,127,0},
@@ -238,5 +205,7 @@ equation
  <ul>
  <li><i>January 2012,&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
  </ul>
- </html>"));
+ </html>"),
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+            100}})));
 end ThermalZonePhysics;
