@@ -229,9 +229,9 @@ model AHU
   block StartState
 
     outer input Real phi_t_withoutHRS;
-    outer output Real phi_t(start=0.5);
-    outer output Modelica.SIunits.HeatFlowRate Q_dot_C(start=1);
-    outer output Modelica.SIunits.HeatFlowRate Q_dot_H(start=1);
+    outer output Real phi_t;
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_C;
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_H;
 
   equation
     phi_t = phi_t_withoutHRS;
@@ -263,21 +263,21 @@ model AHU
   // Dehumidification
 
   block DeHuHRS_true
-    outer output Modelica.SIunits.HeatFlowRate Q_dot_C(start=1);
-    outer output Modelica.SIunits.HeatFlowRate Q_dot_H(start=1);
-    outer input Modelica.SIunits.Temp_K T_oda(start=290);
-    outer input Modelica.SIunits.Temp_K T_1(start=282);
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_C;
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_H;
+    outer input Modelica.SIunits.Temp_K T_oda;
+    outer input Modelica.SIunits.Temp_K T_1;
     Modelica.SIunits.Temp_K T_2(start=290);
     Modelica.SIunits.Temp_K T_3(start=282);
     Modelica.SIunits.Temp_K T_4(start=282);
-    outer input Modelica.SIunits.Temp_K T_5(start=279);
-    outer input Modelica.SIunits.Temp_K T_6(start=280);
-    outer input Modelica.SIunits.MassFraction X_oda(start=0.007);
-    outer input Modelica.SIunits.MassFraction X_supMax(start=0.008);
-    outer output Modelica.SIunits.MassFraction X_sup(start=0.008);
-    outer input Modelica.SIunits.VolumeFlowRate V_dot_sup(start=1);
-    outer output Real phi_t(start=0.8);
-    outer input Real phi_t_withHRS(start=0.8);
+    outer input Modelica.SIunits.Temp_K T_5;
+    outer input Modelica.SIunits.Temp_K T_6;
+    outer input Modelica.SIunits.MassFraction X_oda;
+    outer input Modelica.SIunits.MassFraction X_supMax;
+    outer output Modelica.SIunits.MassFraction X_sup;
+    outer input Modelica.SIunits.VolumeFlowRate V_dot_sup;
+    outer output Real phi_t;
+    outer input Real phi_t_withHRS;
     outer parameter Real BPF_DeHu;
     Modelica.SIunits.SpecificEnthalpy h_2(start=0.003) "h_in of cooler";
     Modelica.SIunits.SpecificEnthalpy h_surface(start=0.002)
@@ -343,21 +343,21 @@ p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
   //
 
   block DeHuHRS_false
-    outer output Modelica.SIunits.HeatFlowRate Q_dot_C(start=1);
-    outer output Modelica.SIunits.HeatFlowRate Q_dot_H(start=1);
-    outer input Modelica.SIunits.Temp_K T_oda(start=290);
-    outer input Modelica.SIunits.Temp_K T_1(start=282);
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_C;
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_H;
+    outer input Modelica.SIunits.Temp_K T_oda;
+    outer input Modelica.SIunits.Temp_K T_1;
     Modelica.SIunits.Temp_K T_2(start=290);
     Modelica.SIunits.Temp_K T_3(start=282);
     Modelica.SIunits.Temp_K T_4(start=282);
-    outer input Modelica.SIunits.Temp_K T_5(start=279);
-    outer input Modelica.SIunits.Temp_K T_6(start=280);
-    outer input Modelica.SIunits.MassFraction X_oda(start=0.007);
-    outer input Modelica.SIunits.MassFraction X_supMax(start=0.008);
-    outer output Modelica.SIunits.MassFraction X_sup(start=0.008);
-    outer input Modelica.SIunits.VolumeFlowRate V_dot_sup(start=1);
-    outer output Real phi_t(start=0.8);
-    outer input Real phi_t_withoutHRS(start=0.8);
+    outer input Modelica.SIunits.Temp_K T_5;
+    outer input Modelica.SIunits.Temp_K T_6;
+    outer input Modelica.SIunits.MassFraction X_oda;
+    outer input Modelica.SIunits.MassFraction X_supMax;
+    outer output Modelica.SIunits.MassFraction X_sup;
+    outer input Modelica.SIunits.VolumeFlowRate V_dot_sup;
+    outer output Real phi_t;
+    outer input Real phi_t_withoutHRS;
     outer parameter Real BPF_DeHu;
     Modelica.SIunits.SpecificEnthalpy h_2(start=0.003) "h_in of cooler";
     Modelica.SIunits.SpecificEnthalpy h_surface(start=0.002)
@@ -434,7 +434,7 @@ p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
     outer input Modelica.SIunits.MassFraction X_supMin;
     outer output Modelica.SIunits.MassFraction X_sup;
     outer input Modelica.SIunits.VolumeFlowRate V_dot_sup;
-    outer output Real phi_t(start=0.5);
+    outer output Real phi_t;
     outer input Real phi_t_withHRS;
 
   equation
@@ -480,7 +480,7 @@ p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
     outer input Modelica.SIunits.MassFraction X_supMin;
     outer output Modelica.SIunits.MassFraction X_sup;
     outer input Modelica.SIunits.VolumeFlowRate V_dot_sup;
-    outer output Real phi_t(start=0.5);
+    outer output Real phi_t;
     outer input Real phi_t_withoutHRS;
 
   equation
@@ -529,7 +529,7 @@ p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
     outer input Modelica.SIunits.MassFraction X_supMin;
     outer output Modelica.SIunits.MassFraction X_sup;
     outer input Modelica.SIunits.VolumeFlowRate V_dot_sup;
-    outer output Real phi_t(start=0.5);
+    outer output Real phi_t;
     outer input Real phi_t_withHRS;
 
   equation
@@ -581,7 +581,7 @@ p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
     outer input Modelica.SIunits.MassFraction X_supMin;
     outer output Modelica.SIunits.MassFraction X_sup;
     outer input Modelica.SIunits.VolumeFlowRate V_dot_sup;
-    outer output Real phi_t(start=0.5);
+    outer output Real phi_t;
     outer input Real phi_t_withoutHRS;
 
   equation
@@ -620,8 +620,8 @@ p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
   // Only Heating
 
   block OnlyHeatingHRS_true
-    outer output Modelica.SIunits.HeatFlowRate Q_dot_C(start=2);
-    outer output Modelica.SIunits.HeatFlowRate Q_dot_H(start=2);
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_C;
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_H;
     outer input Modelica.SIunits.Temp_K T_oda;
     outer input Modelica.SIunits.Temp_K T_1;
     Modelica.SIunits.Temp_K T_2;
@@ -632,7 +632,7 @@ p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
     outer input Modelica.SIunits.MassFraction X_oda;
     outer output Modelica.SIunits.MassFraction X_sup;
     outer input Modelica.SIunits.VolumeFlowRate V_dot_sup;
-    outer output Real phi_t(start=0.5);
+    outer output Real phi_t;
     outer input Real phi_t_withHRS;
 
   equation
@@ -681,7 +681,7 @@ p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
     outer input Modelica.SIunits.MassFraction X_oda;
     outer output Modelica.SIunits.MassFraction X_sup;
     outer input Modelica.SIunits.VolumeFlowRate V_dot_sup;
-    outer output Real phi_t(start=0.5);
+    outer output Real phi_t;
     outer input Real phi_t_withoutHRS;
 
   equation
@@ -730,7 +730,7 @@ p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
     outer input Modelica.SIunits.MassFraction X_oda;
     outer output Modelica.SIunits.MassFraction X_sup;
     outer input Modelica.SIunits.VolumeFlowRate V_dot_sup;
-    outer output Real phi_t(start=0.5);
+    outer output Real phi_t;
     outer input Real phi_t_withHRS;
 
   equation
@@ -779,7 +779,7 @@ p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
     outer input Modelica.SIunits.MassFraction X_oda;
     outer output Modelica.SIunits.MassFraction X_sup;
     outer input Modelica.SIunits.VolumeFlowRate V_dot_sup;
-    outer output Real phi_t(start=0.5);
+    outer output Real phi_t;
     outer input Real phi_t_withoutHRS;
 
   equation
