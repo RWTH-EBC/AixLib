@@ -4,19 +4,9 @@ model ThermalZone "Ready-to-use Low Order building model"
   Components.Sources.InternalGains.Humans.HumanSensibleHeat_VDI2078 human_SensibleHeat_VDI2078(ActivityType = zoneParam.ActivityTypePeople, NrPeople = zoneParam.NrPeople, RatioConvectiveHeat = zoneParam.RatioConvectiveHeatPeople, T0 = zoneParam.T0all) annotation(choicesAllMatching = true, Placement(transformation(extent = {{40, 0}, {60, 20}})));
   Components.Sources.InternalGains.Machines.Machines_DIN18599 machines_SensibleHeat_DIN18599(ActivityType = zoneParam.ActivityTypeMachines, NrPeople = zoneParam.NrPeopleMachines, ratioConv = zoneParam.RatioConvectiveHeatMachines, T0 = zoneParam.T0all) annotation(Placement(transformation(extent = {{40, -20}, {60, -1}})));
   Components.Sources.InternalGains.Lights.Lights_relative lights(RoomArea = zoneParam.RoomArea, LightingPower = zoneParam.LightingPower, ratioConv = zoneParam.RatioConvectiveHeatLighting, T0 = zoneParam.T0all) annotation(Placement(transformation(extent = {{40, -40}, {60, -21}})));
-  replaceable BaseClasses.ThermalZonePhysics.ThermalZonePhysicsEBCMod thermalZonePhysics(RRest = zoneParam.RRest, R1o = zoneParam.R1o, C1o = zoneParam.C1o, Ao = zoneParam.Ao, T0all = zoneParam.T0all, alphaowi = zoneParam.alphaowi, alphaowo = zoneParam.alphaowo, epso = zoneParam.epso, R1i = zoneParam.R1i, C1i = zoneParam.C1i, Ai = zoneParam.Ai, Vair = zoneParam.Vair, alphaiwi = zoneParam.alphaiwi, rhoair = zoneParam.rhoair, cair = zoneParam.cair, epsi = zoneParam.epsi, aowo = zoneParam.aowo, epsw = zoneParam.epsw, g = zoneParam.g, Imax = zoneParam.Imax, n = zoneParam.n, weightfactorswall = zoneParam.weightfactorswall, weightfactorswindow = zoneParam.weightfactorswindow, weightfactorground = zoneParam.weightfactorground, temperatureground = zoneParam.temperatureground, Aw = zoneParam.Aw, gsunblind = zoneParam.gsunblind, withInnerwalls = zoneParam.withInnerwalls, withWindows = zoneParam.withWindows, withOuterwalls = zoneParam.withOuterwalls, splitfac = zoneParam.splitfac) constrainedby
-    AixLib.Building.LowOrder.BaseClasses.ThermalZonePhysics.partialThermalZonePhysics
-                                                                                      annotation(Placement(transformation(extent = {{-20, 0}, {20, 40}})),choicesAllMatching=true);
 equation
   if zoneParam.withOuterwalls then
   end if;
-  connect(human_SensibleHeat_VDI2078.TRoom, thermalZonePhysics.internalGainsConv) annotation(Line(points = {{41, 19}, {46, 19}, {46, 32}, {96, 32}, {96, -52}, {8, -52}, {8, 2}}, color = {191, 0, 0}));
-  connect(human_SensibleHeat_VDI2078.ConvHeat, thermalZonePhysics.internalGainsConv) annotation(Line(points = {{59, 15}, {96, 15}, {96, -52}, {8, -52}, {8, 2}}, color = {191, 0, 0}));
-  connect(machines_SensibleHeat_DIN18599.ConvHeat, thermalZonePhysics.internalGainsConv) annotation(Line(points = {{59, -4.8}, {96, -4.8}, {96, -52}, {8, -52}, {8, 2}}, color = {191, 0, 0}));
-  connect(lights.ConvHeat, thermalZonePhysics.internalGainsConv) annotation(Line(points = {{59, -24.8}, {96, -24.8}, {96, -52}, {8, -52}, {8, 2}}, color = {191, 0, 0}));
-  connect(human_SensibleHeat_VDI2078.RadHeat, thermalZonePhysics.internalGainsRad) annotation(Line(points = {{59, 9}, {92, 9}, {92, -48}, {16, -48}, {16, 2}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
-  connect(machines_SensibleHeat_DIN18599.RadHeat, thermalZonePhysics.internalGainsRad) annotation(Line(points = {{59, -16.01}, {92, -16.01}, {92, -48}, {16, -48}, {16, 2}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
-  connect(lights.RadHeat, thermalZonePhysics.internalGainsRad) annotation(Line(points = {{59, -36.01}, {92, -36.01}, {92, -48}, {16, -48}, {16, 2}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
   connect(internalGains[1], human_SensibleHeat_VDI2078.Schedule) annotation (
       Line(points={{80,-113.333},{80,-60},{32,-60},{32,8.9},{40.9,8.9}}, color={
           0,0,127}));
@@ -26,20 +16,41 @@ equation
   connect(internalGains[3], lights.Schedule) annotation (Line(points={{80,
           -86.6667},{80,-60},{32,-60},{32,-30.5},{41,-30.5}},
                                                     color={0,0,127}));
-  connect(internalGainsConv, thermalZonePhysics.internalGainsConv)
-    annotation (Line(points={{0,-90},{0,-52},{8,-52},{8,2}}, color={191,0,0}));
-  connect(solarRad_in, thermalZonePhysics.solarRad_in) annotation (Line(points={
-          {-90,80},{-70,80},{-48,80},{-48,33},{-15.4,33}}, color={255,128,0}));
-  connect(weather, thermalZonePhysics.weather) annotation (Line(points={{-100,20},
-          {-58,20},{-58,23.8},{-15,23.8}}, color={0,0,127}));
-  connect(infiltrationTemperature, thermalZonePhysics.ventilationTemperature)
-    annotation (Line(points={{-80,-40},{-60,-40},{-40,-40},{-40,12},{-15.2,12}},
-        color={0,0,127}));
-  connect(infiltrationRate, thermalZonePhysics.ventilationRate) annotation (
-      Line(points={{-40,-100},{-40,-100},{-40,-52},{-8,-52},{-8,2.8}}, color={0,
-          0,127}));
+  connect(lights.ConvHeat, thermalZonePhysics.internalGainsConv) annotation (
+      Line(points={{59,-24.8},{80,-24.8},{80,-52},{8,-52},{8,2}}, color={191,0,
+          0}));
+  connect(machines_SensibleHeat_DIN18599.ConvHeat, thermalZonePhysics.internalGainsConv)
+    annotation (Line(points={{59,-4.8},{80,-4.8},{80,-52},{8,-52},{8,2}}, color
+        ={191,0,0}));
+  connect(human_SensibleHeat_VDI2078.ConvHeat, thermalZonePhysics.internalGainsConv)
+    annotation (Line(points={{59,15},{80,15},{80,-52},{8,-52},{8,2}}, color={
+          191,0,0}));
+  connect(human_SensibleHeat_VDI2078.TRoom, thermalZonePhysics.internalGainsConv)
+    annotation (Line(points={{41,19},{41,26},{80,26},{80,-52},{8,-52},{8,2}},
+        color={191,0,0}));
   connect(internalGainsRad, thermalZonePhysics.internalGainsRad) annotation (
-      Line(points={{40,-90},{40,-70},{16,-70},{16,2}}, color={95,95,95}));
+      Line(points={{40,-90},{40,-90},{40,-70},{40,-66},{16,-66},{16,2}}, color=
+          {95,95,95}));
+  connect(internalGainsConv, thermalZonePhysics.internalGainsConv) annotation (
+      Line(points={{0,-90},{2,-90},{2,-52},{8,-52},{8,2}}, color={191,0,0}));
+  connect(lights.RadHeat, thermalZonePhysics.internalGainsRad) annotation (Line(
+        points={{59,-36.01},{68,-36.01},{68,-46},{16,-46},{16,2}}, color={95,95,
+          95}));
+  connect(machines_SensibleHeat_DIN18599.RadHeat, thermalZonePhysics.internalGainsRad)
+    annotation (Line(points={{59,-16.01},{68,-16.01},{68,-46},{16,-46},{16,2}},
+        color={95,95,95}));
+  connect(human_SensibleHeat_VDI2078.RadHeat, thermalZonePhysics.internalGainsRad)
+    annotation (Line(points={{59,9},{68,9},{68,-46},{16,-46},{16,2}}, color={95,
+          95,95}));
+  connect(infiltrationTemperature, thermalZonePhysics.ventilationTemperature)
+    annotation (Line(points={{-80,-40},{-42,-40},{-42,12},{-15.2,12}}, color={0,
+          0,127}));
+  connect(weather, thermalZonePhysics.weather) annotation (Line(points={{-100,
+          20},{-58,20},{-58,23.8},{-15,23.8}}, color={0,0,127}));
+  connect(infiltrationRate, thermalZonePhysics.ventilationRate) annotation (
+      Line(points={{-40,-100},{-40,-16},{-8,-16},{-8,2.8}}, color={0,0,127}));
+  connect(solarRad_in, thermalZonePhysics.solarRad_in) annotation (Line(points=
+          {{-90,80},{-72,80},{-52,80},{-52,33},{-15.4,33}}, color={255,128,0}));
   annotation(Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <ul>
@@ -66,6 +77,6 @@ equation
           Implemented</li>
  </ul>
  </html>"),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}})));
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
+            100,100}})));
 end ThermalZone;
