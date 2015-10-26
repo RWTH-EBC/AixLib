@@ -1330,15 +1330,6 @@ equation
   //stateToHuCHRS_false==false,
 
   annotation (
-    Placement(transformation(extent={{112,12},{84,40}}), iconTransformation(
-          extent={{80,-4},{88,4}})),
-    Placement(transformation(
-        extent={{14,-14},{-14,14}},
-        rotation=0,
-        origin={98,74}), iconTransformation(
-        extent={{-4,-4},{4,4}},
-        rotation=180,
-        origin={84,38})),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-80},{100,
             100}}), graphics={
         Bitmap(
