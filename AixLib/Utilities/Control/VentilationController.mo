@@ -40,10 +40,12 @@ model VentilationController
   Modelica.Blocks.Interfaces.RealInput Tzone "zone temperature"
     annotation (Placement(transformation(extent={{-120,40},{-80,80}}),
         iconTransformation(extent={{-120,40},{-80,80}})));
-  OptimalTempDeCarli_humidity optimalTemp(cat=2)
+  BaseClasses.OptimalTempDeCarliHumidity
+                              optimalTemp(cat=2)
     "optimal temperature according to investigations from deCarli"
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
-  DEMA dEMA(ystart=Tmean_start)
+  BaseClasses.DEMA
+       dEMA(ystart=Tmean_start)
     "gliding exponential average of outdoor temperature"
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
   Modelica.Blocks.Interfaces.RealOutput Tamb_mean "mean outdoor temperature"
@@ -103,7 +105,9 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   annotation (
-    Diagram(graphics={Text(
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
+            100,100}}),
+            graphics={Text(
           extent={{-62,-12},{-20,-16}},
           lineColor={0,0,255},
           textString="using non-sampled average")}),
@@ -147,6 +151,12 @@ equation
 <li>Inside temperature: the higher the inside temperature, the more ventilation will occure (people preventing overheating).</li>
 <li>Leakage: due to leakage through cracks or openings there will be a constant air exchange.</li>
 </ol></p>
+</html>", revisions="<html>
+<ul>
+  <li><i>May, 2008&nbsp;</i>
+         by Peter Matthes:<br>
+         Implemented</li>
+</ul>
 </html>"),
     Documentation(info="<html>
 <p>Ventilation is determined from 4 effects:</p>
