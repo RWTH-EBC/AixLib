@@ -1,11 +1,12 @@
 within AixLib.Building.LowOrder.BaseClasses.ThermalZonePhysics;
 partial model partialThermalZonePhysics
-  parameter Modelica.SIunits.Area Aw[n] = {1, 1, 1, 1} "Area of the windows" annotation(Dialog(tab = "Windows", enable = if withWindows and withOuterwalls then true else false));
-  parameter Modelica.SIunits.TransmissionCoefficient gsunblind[n] = {1, 1, 1, 1}
+  parameter Modelica.SIunits.Area Aw[n] = {1, 1, 1, 1, 1} "Area of the windows"
+                                                                                annotation(Dialog(tab = "Windows", enable = if withWindows and withOuterwalls then true else false));
+  parameter Modelica.SIunits.TransmissionCoefficient gsunblind[n] = {1, 1, 1, 1, 1}
     "Total energy transmittances if sunblind is closed"                                                                              annotation(Dialog(tab = "Windows", group = "Shading", enable = if withWindows and withOuterwalls then true else false));
   parameter Modelica.SIunits.RadiantEnergyFluenceRate Imax = 100
     "Intensity at which the sunblind closes"                                                              annotation(Dialog(tab = "Windows", group = "Shading", enable = if withWindows and withOuterwalls then true else false));
-  parameter Integer n = 4 "Number of orientations (without ground)" annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
+  parameter Integer n = 5 "Number of orientations (without ground)" annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
   SolarRadWeightedSum solRadWeightedSum(n=n, weightfactors=Aw) annotation (Placement(transformation(extent={{4,56},{32,86}})));
   Components.Weather.Sunblinds.Sunblind sunblind(
     Imax=Imax,

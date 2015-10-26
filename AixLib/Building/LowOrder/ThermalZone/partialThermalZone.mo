@@ -1,10 +1,8 @@
-within AixLib.Building.LowOrder;
-model ThermalZone "Ready-to-use Low Order building model"
+within AixLib.Building.LowOrder.ThermalZone;
+partial model partialThermalZone
+  "partial for ready-to-use Low Order building model"
   parameter DataBase.Buildings.ZoneBaseRecord zoneParam = DataBase.Buildings.OfficePassiveHouse.OPH_1_Meeting()
     "choose setup for this zone"                                                                                                     annotation(choicesAllMatching = true);
-  Components.Sources.InternalGains.Humans.HumanSensibleHeat_VDI2078 human_SensibleHeat_VDI2078(ActivityType = zoneParam.ActivityTypePeople, NrPeople = zoneParam.NrPeople, RatioConvectiveHeat = zoneParam.RatioConvectiveHeatPeople, T0 = zoneParam.T0all) annotation(choicesAllMatching = true, Placement(transformation(extent = {{40, 0}, {60, 20}})));
-  Components.Sources.InternalGains.Machines.Machines_DIN18599 machines_SensibleHeat_DIN18599(ActivityType = zoneParam.ActivityTypeMachines, NrPeople = zoneParam.NrPeopleMachines, ratioConv = zoneParam.RatioConvectiveHeatMachines, T0 = zoneParam.T0all) annotation(Placement(transformation(extent = {{40, -20}, {60, -1}})));
-  Components.Sources.InternalGains.Lights.Lights_relative lights(RoomArea = zoneParam.RoomArea, LightingPower = zoneParam.LightingPower, ratioConv = zoneParam.RatioConvectiveHeatLighting, T0 = zoneParam.T0all) annotation(Placement(transformation(extent = {{40, -40}, {60, -21}})));
   Modelica.Blocks.Interfaces.RealInput infiltrationRate annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 90, origin = {-40, -100}), iconTransformation(extent = {{-12, -12}, {12, 12}}, rotation = 90, origin = {-40, -88})));
   Modelica.Blocks.Interfaces.RealInput weather[3] if zoneParam.withOuterwalls
     "[1]: Air temperature<br/>[2]: Horizontal radiation of sky<br/>[3]: Horizontal radiation of earth"
@@ -12,31 +10,15 @@ model ThermalZone "Ready-to-use Low Order building model"
   Utilities.Interfaces.SolarRad_in solarRad_in[zoneParam.n] if zoneParam.withOuterwalls annotation(Placement(transformation(extent = {{-100, 70}, {-80, 90}}), iconTransformation(extent = {{-100, 40}, {-60, 80}})));
   Modelica.Blocks.Interfaces.RealInput internalGains[3]
     "persons, machines, lighting"                                                     annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 90, origin = {80, -100}), iconTransformation(extent = {{-12, -12}, {12, 12}}, rotation = 90, origin = {80, -88})));
-  BaseClasses.ThermalZonePhysics thermalZonePhysics(RRest = zoneParam.RRest, R1o = zoneParam.R1o, C1o = zoneParam.C1o, Ao = zoneParam.Ao, T0all = zoneParam.T0all, alphaowi = zoneParam.alphaowi, alphaowo = zoneParam.alphaowo, epso = zoneParam.epso, R1i = zoneParam.R1i, C1i = zoneParam.C1i, Ai = zoneParam.Ai, Vair = zoneParam.Vair, alphaiwi = zoneParam.alphaiwi, rhoair = zoneParam.rhoair, cair = zoneParam.cair, epsi = zoneParam.epsi, aowo = zoneParam.aowo, epsw = zoneParam.epsw, g = zoneParam.g, Imax = zoneParam.Imax, n = zoneParam.n, weightfactorswall = zoneParam.weightfactorswall, weightfactorswindow = zoneParam.weightfactorswindow, weightfactorground = zoneParam.weightfactorground, temperatureground = zoneParam.temperatureground, Aw = zoneParam.Aw, gsunblind = zoneParam.gsunblind, withInnerwalls = zoneParam.withInnerwalls, withWindows = zoneParam.withWindows, withOuterwalls = zoneParam.withOuterwalls, splitfac = zoneParam.splitfac) annotation(Placement(transformation(extent = {{-20, 0}, {20, 40}})));
+  replaceable BaseClasses.ThermalZonePhysics.ThermalZonePhysicsEBCMod thermalZonePhysics(RRest = zoneParam.RRest, R1o = zoneParam.R1o, C1o = zoneParam.C1o, Ao = zoneParam.Ao, T0all = zoneParam.T0all, alphaowi = zoneParam.alphaowi, alphaowo = zoneParam.alphaowo, epso = zoneParam.epso, R1i = zoneParam.R1i, C1i = zoneParam.C1i, Ai = zoneParam.Ai, Vair = zoneParam.Vair, alphaiwi = zoneParam.alphaiwi, rhoair = zoneParam.rhoair, cair = zoneParam.cair, epsi = zoneParam.epsi, aowo = zoneParam.aowo, epsw = zoneParam.epsw, g = zoneParam.g, Imax = zoneParam.Imax, n = zoneParam.n, weightfactorswall = zoneParam.weightfactorswall, weightfactorswindow = zoneParam.weightfactorswindow, weightfactorground = zoneParam.weightfactorground, temperatureground = zoneParam.temperatureground, Aw = zoneParam.Aw, gsunblind = zoneParam.gsunblind, withInnerwalls = zoneParam.withInnerwalls, withWindows = zoneParam.withWindows, withOuterwalls = zoneParam.withOuterwalls, splitfac = zoneParam.splitfac) constrainedby
+    AixLib.Building.LowOrder.BaseClasses.ThermalZonePhysics.partialThermalZonePhysics
+                                                                                      annotation(Placement(transformation(extent = {{-20, 0}, {20, 40}})),choicesAllMatching=true);
   Modelica.Blocks.Interfaces.RealInput infiltrationTemperature annotation(Placement(transformation(extent = {{-100, -60}, {-60, -20}}), iconTransformation(extent = {{-88, -52}, {-62, -26}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a internalGainsConv annotation(Placement(transformation(extent = {{-10, -100}, {10, -80}}), iconTransformation(extent = {{-10, -100}, {10, -80}})));
   Utilities.Interfaces.Star internalGainsRad annotation(Placement(transformation(extent = {{30, -100}, {50, -80}})));
 equation
   if zoneParam.withOuterwalls then
-    connect(weather, thermalZonePhysics.weather) annotation(Line(points = {{-100, 20}, {-64, 20}, {-64, 23.8}, {-15, 23.8}}, color = {0, 0, 127}));
-    connect(solarRad_in, thermalZonePhysics.solarRad_in) annotation(Line(points = {{-90, 80}, {-60, 80}, {-60, 33}, {-15.4, 33}}, color = {255, 128, 0}));
   end if;
-  connect(infiltrationRate, thermalZonePhysics.ventilationRate) annotation(Line(points = {{-40, -100}, {-40, -40}, {-8, -40}, {-8, 2.8}}, color = {0, 0, 127}));
-  connect(human_SensibleHeat_VDI2078.TRoom, thermalZonePhysics.internalGainsConv) annotation(Line(points = {{41, 19}, {46, 19}, {46, 32}, {96, 32}, {96, -52}, {8, -52}, {8, 2}}, color = {191, 0, 0}));
-  connect(human_SensibleHeat_VDI2078.ConvHeat, thermalZonePhysics.internalGainsConv) annotation(Line(points = {{59, 15}, {96, 15}, {96, -52}, {8, -52}, {8, 2}}, color = {191, 0, 0}));
-  connect(machines_SensibleHeat_DIN18599.ConvHeat, thermalZonePhysics.internalGainsConv) annotation(Line(points = {{59, -4.8}, {96, -4.8}, {96, -52}, {8, -52}, {8, 2}}, color = {191, 0, 0}));
-  connect(lights.ConvHeat, thermalZonePhysics.internalGainsConv) annotation(Line(points = {{59, -24.8}, {96, -24.8}, {96, -52}, {8, -52}, {8, 2}}, color = {191, 0, 0}));
-  connect(human_SensibleHeat_VDI2078.RadHeat, thermalZonePhysics.internalGainsRad) annotation(Line(points = {{59, 9}, {92, 9}, {92, -48}, {16, -48}, {16, 2}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
-  connect(machines_SensibleHeat_DIN18599.RadHeat, thermalZonePhysics.internalGainsRad) annotation(Line(points = {{59, -16.01}, {92, -16.01}, {92, -48}, {16, -48}, {16, 2}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
-  connect(lights.RadHeat, thermalZonePhysics.internalGainsRad) annotation(Line(points = {{59, -36.01}, {92, -36.01}, {92, -48}, {16, -48}, {16, 2}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
-  connect(human_SensibleHeat_VDI2078.Schedule, internalGains[1]) annotation(Line(points={{40.9,
-          8.9},{30,8.9},{30,-74},{80,-74},{80,-113.333}},                                                                                                 color = {0, 0, 127}));
-  connect(machines_SensibleHeat_DIN18599.Schedule, internalGains[2]) annotation(Line(points = {{41, -10.5}, {30, -10.5}, {30, -74}, {80, -74}, {80, -100}}, color = {0, 0, 127}));
-  connect(lights.Schedule, internalGains[3]) annotation(Line(points={{41,-30.5},
-          {30,-30.5},{30,-74},{80,-74},{80,-86.6667}},                                                                                  color = {0, 0, 127}));
-  connect(infiltrationTemperature, thermalZonePhysics.ventilationTemperature) annotation(Line(points = {{-80, -40}, {-60, -40}, {-60, 12}, {-15.2, 12}}, color = {0, 0, 127}));
-  connect(thermalZonePhysics.internalGainsConv, internalGainsConv) annotation(Line(points = {{8, 2}, {8, -52}, {0, -52}, {0, -90}}, color = {191, 0, 0}));
-  connect(thermalZonePhysics.internalGainsRad, internalGainsRad) annotation(Line(points = {{16, 2}, {16, -80}, {40, -80}, {40, -90}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
   annotation(Dialog(tab = "Windows", group = "Shading", descriptionLabel = false), Icon(coordinateSystem(preserveAspectRatio=false,  extent={{-100,
             -100},{100,100}}),                                                                                                    graphics={  Rectangle(extent={{
               -60,62},{100,-58}},
@@ -102,7 +84,7 @@ equation
               62,22},{68,18}},                                                                                                    pattern = LinePattern.Solid,
             lineThickness =                                                                                                   1, fillColor = {0, 0, 0},
             fillPattern =                                                                                                   FillPattern.Solid, lineColor = {0, 0, 0}),
-                                                                                                    Rectangle(extent={{
+                                                                                                  Rectangle(extent={{
               54,0},{64,-6}},                                                                                                    lineColor=
               {0,0,0},                                                                                                    fillColor=
               {170,213,255},
@@ -140,7 +122,7 @@ equation
               67,-26},{79,-32}},                                                                                                    pattern = LinePattern.Solid,
             lineThickness =                                                                                                   1, fillColor = {0, 0, 0},
             fillPattern =                                                                                                   FillPattern.Solid, lineColor = {0, 0, 0})}),
-                                                                                                    Documentation(info = "<html>
+                                                                                                  Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <ul>
  <li>The ThermalZone reflects the VDI 6007 components (in ThermalZonePhysics) and adds some standards parts of the EBC library for easy simulation with persons, lights and maschines.</li>
@@ -166,4 +148,4 @@ equation
           Implemented</li>
  </ul>
  </html>"));
-end ThermalZone;
+end partialThermalZone;

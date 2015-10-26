@@ -1,5 +1,5 @@
 within AixLib.Building.LowOrder.BaseClasses.ThermalZonePhysics;
-model ThermalZonePhysics "All sub-models of VDI 6007 connected to one model"
+model ThermalZonePhysics "Thermal Zone according to VDI 6007-1"
   extends partialThermalZonePhysics;
   parameter Boolean withInnerwalls = true "If inner walls are existent" annotation(Dialog(tab = "Inner walls"));
   parameter Modelica.SIunits.ThermalResistance R1i = 0.000656956
@@ -31,9 +31,9 @@ model ThermalZonePhysics "All sub-models of VDI 6007 connected to one model"
   parameter Real aowo = 0.7 "Coefficient of absorption of the outer walls" annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
   parameter Boolean withWindows = true "If windows are existent" annotation(Dialog(tab = "Windows", enable = if withOuterwalls then true else false));
   parameter Real splitfac = 0 "Factor for conv. part of rad. through windows" annotation(Dialog(tab = "Windows", enable = if withOuterwalls then true else false));
-  parameter Real weightfactorswall[n] = {0.5, 0.2, 0.2, 0.1}
+  parameter Real weightfactorswall[n] = {0.5, 0.2, 0.1, 0.1, 0.1}
     "Weight factors of the walls"                                                          annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
-  parameter Real weightfactorswindow[n] = {0, 0, 0, 0}
+  parameter Real weightfactorswindow[n] = {0, 0, 0, 0, 0}
     "Weight factors of the windows"                                                    annotation(Dialog(tab = "Windows", enable = if withWindows and withOuterwalls then true else false));
   parameter Real weightfactorground = 0
     "Weight factor of the earth (0 if not considered)"                                     annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
