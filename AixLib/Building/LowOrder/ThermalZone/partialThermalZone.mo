@@ -19,7 +19,7 @@ partial model partialThermalZone
 equation
   if zoneParam.withOuterwalls then
   end if;
-  annotation(Dialog(tab = "Windows", group = "Shading", descriptionLabel = false), Icon(coordinateSystem(preserveAspectRatio=false,  extent={{-100,
+  annotation(Icon(coordinateSystem(preserveAspectRatio=false,  extent={{-100,
             -100},{100,100}}),                                                                                                    graphics={  Rectangle(extent={{
               -60,62},{100,-58}},
             lineThickness=1,                                                                                                    fillColor=
