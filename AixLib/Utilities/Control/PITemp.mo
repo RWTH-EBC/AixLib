@@ -2,6 +2,7 @@ within AixLib.Utilities.Control;
 
 
 model PITemp "PI Controler that can switch the output range of the controler"
+
   Modelica.Blocks.Interfaces.RealInput soll annotation(Placement(transformation(origin = {-80, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 270)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm1 annotation(Placement(transformation(extent = {{-70, -100}, {-50, -80}}), iconTransformation(extent = {{-70, -100}, {-50, -80}})));
   parameter Real h = 1 "upper limit controler output" annotation(Dialog(group = "Control"));
@@ -9,8 +10,7 @@ model PITemp "PI Controler that can switch the output range of the controler"
   parameter Real KR = 1 "Gain" annotation(Dialog(group = "Control"));
   parameter Modelica.SIunits.Time TN = 1 "Time Constant (T>0 required)" annotation(Dialog(group = "Control"));
   Modelica.Blocks.Interfaces.RealOutput y annotation(Placement(transformation(extent = {{80, -10}, {100, 10}}), iconTransformation(extent = {{80, -10}, {100, 10}})));
-  parameter Modelica.Blocks.Interfaces.BooleanInput RangeSwitch = false
-    "Switch controler output range"                                                                     annotation(Placement(transformation(origin = {80, 100}, extent = {{-10, -10}, {10, 10}}, rotation = 270), iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {80, 90})));
+  parameter Boolean RangeSwitch = false "Switch controler output range"                                 annotation(Placement(transformation(origin = {80, 100}, extent = {{-10, -10}, {10, 10}}, rotation = 270), iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {80, 90})));
   Modelica.Blocks.Interfaces.BooleanInput onOff "Switches Controler on and off"
                                                                                 annotation(Placement(transformation(extent = {{-120, -80}, {-80, -40}}), iconTransformation(extent = {{-100, -60}, {-80, -40}})));
   Modelica.Blocks.Logical.Switch switch1 annotation(Placement(transformation(extent = {{-40, 6}, {-20, -14}})));
@@ -33,7 +33,7 @@ equation
   connect(soll, switch1.u3) annotation(Line(points = {{-80, 90}, {-80, 6}, {-42, 6}, {-42, 4}}, color = {0, 0, 127}));
   connect(temperatureSensor.port, Therm1) annotation(Line(points = {{-60, -80}, {-60, -90}}, color = {191, 0, 0}));
   connect(temperatureSensor.T, switch1.u1) annotation(Line(points = {{-60, -60}, {-60, -12}, {-42, -12}}, color = {0, 0, 127}));
-  annotation( Documentation(info = "<html>
+  annotation (Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>
  Based on a model by Alexander Hoh with some modifications and the Modelica-Standard PI controller. If set to &quot;on&quot; it will controll the thermal port temperature to the target value (soll). If set to &quot;off&quot; the controller error will become zero and therefore the current output level of the PI controller will remain constant. When this switching occurs the TriggeredTrapezoid will level the current controller output down to zero in a selectable period of time.
@@ -47,6 +47,6 @@ equation
           by Peter Matthes:<br/>
           implemented</li>
  </ul>
- </html> "), Icon(graphics={  Rectangle(extent=  {{-80, 80}, {80, -80}}, lineColor=  {135, 135, 135}, fillColor=  {255, 255, 170},
-            fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-58, 32}, {62, -20}}, lineColor=  {175, 175, 175}, textString=  "%name")}));
+ </html> "), Icon(graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {135, 135, 135}, fillColor = {255, 255, 170},
+            fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-58, 32}, {62, -20}}, lineColor = {175, 175, 175}, textString = "%name")}));
 end PITemp;
