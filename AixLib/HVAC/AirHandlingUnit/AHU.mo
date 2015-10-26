@@ -898,16 +898,20 @@ equation
     V_dot_sup*rho*(X_sup - X_oda)*r_0) < abs(V_dot_sup*rho*(c_pL_iG + X_oda*
     c_pW_iG)*(T_1 - T_5))) and (T_oda <= T_6) and humidification then true
      else false;
-  stateToOnlyHeatingHRS_true = if (T_5 >= T_oda + phi_t_withHRS*(T_6 - T_oda))
+  stateToOnlyHeatingHRS_true = if (X_oda < X_supMax and X_oda > X_supMin) and
+    (T_5 >= T_oda + phi_t_withHRS*(T_6 - T_oda))
      and (T_oda <= T_6) and heating and HRS then true else false;
-  stateToOnlyHeatingHRS_false = if (((T_5 >= T_oda + phi_t_withoutHRS*(T_6 -
+  stateToOnlyHeatingHRS_false = if (X_oda < X_supMax and X_oda > X_supMin) and
+    (((T_5 >= T_oda + phi_t_withoutHRS*(T_6 -
     T_oda)) and (T_oda > T_6)) or (T_oda + phi_t_withHRS*(T_6 - T_oda) > T_5
      and T_5 >= T_oda + phi_t_withoutHRS*(T_6 - T_oda) and (T_oda <= T_6) and
     HRS == true) or (T_oda < T_6 and (T_5 >= T_oda) and HRS == false)) and
     heating then true else false;
-  stateToOnlyCoolingHRS_true = if (T_5 < T_oda + phi_t_withHRS*(T_6 - T_oda))
+  stateToOnlyCoolingHRS_true = if (X_oda < X_supMax and X_oda > X_supMin) and
+    (T_5 < T_oda + phi_t_withHRS*(T_6 - T_oda))
      and (T_oda > T_6) and cooling and HRS then true else false;
-  stateToOnlyCoolingHRS_false = if (((T_5 < T_oda + phi_t_withoutHRS*(T_6 -
+  stateToOnlyCoolingHRS_false = if (X_oda < X_supMax and X_oda > X_supMin) and
+    (((T_5 < T_oda + phi_t_withoutHRS*(T_6 -
     T_oda)) and (T_oda <= T_6)) or (T_oda + phi_t_withoutHRS*(T_6 - T_oda) >
     T_5 and T_5 >= T_oda + phi_t_withHRS*(T_6 - T_oda) and (T_oda > T_6) and
     HRS == true) or (T_oda > T_5 and T_oda >= T_6 and HRS == false)) and
