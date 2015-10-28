@@ -126,6 +126,9 @@ equation
 <p>Furthermore is the total air volume of the room needed as an input parameter to calculate the infiltration volume flow depending of the size of the room.</p>
 </html>", revisions="<html>
 <p><ul>
+<li><i>October 28, 20145nbsp;</i> by Moritz Lauster:<br/>Moved to AixLib</li>
+</ul></p>
+<p><ul>
 <li><i>February 6, 2014&nbsp;</i> by Ole Odendahl:<br/>Model created and tested</li>
 </ul></p>
 </html>"));

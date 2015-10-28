@@ -13,7 +13,9 @@ partial model partialThermalZone
   replaceable BaseClasses.ThermalZonePhysics.ThermalZonePhysicsEBCMod thermalZonePhysics(RRest = zoneParam.RRest, R1o = zoneParam.R1o, C1o = zoneParam.C1o, Ao = zoneParam.Ao, T0all = zoneParam.T0all, alphaowi = zoneParam.alphaowi, alphaowo = zoneParam.alphaowo, epso = zoneParam.epso, R1i = zoneParam.R1i, C1i = zoneParam.C1i, Ai = zoneParam.Ai, Vair = zoneParam.Vair, alphaiwi = zoneParam.alphaiwi, rhoair = zoneParam.rhoair, cair = zoneParam.cair, epsi = zoneParam.epsi, aowo = zoneParam.aowo, epsw = zoneParam.epsw, g = zoneParam.g, Imax = zoneParam.Imax, n = zoneParam.n, weightfactorswall = zoneParam.weightfactorswall, weightfactorswindow = zoneParam.weightfactorswindow, weightfactorground = zoneParam.weightfactorground, temperatureground = zoneParam.temperatureground, Aw = zoneParam.Aw, gsunblind = zoneParam.gsunblind, withInnerwalls = zoneParam.withInnerwalls, withWindows = zoneParam.withWindows, withOuterwalls = zoneParam.withOuterwalls, splitfac = zoneParam.splitfac) constrainedby
     AixLib.Building.LowOrder.BaseClasses.ThermalZonePhysics.partialThermalZonePhysics
                                                                                       annotation(Placement(transformation(extent = {{-20, 0}, {20, 40}})),choicesAllMatching=true);
-  Modelica.Blocks.Interfaces.RealInput infiltrationTemperature annotation(Placement(transformation(extent = {{-100, -60}, {-60, -20}}), iconTransformation(extent = {{-88, -52}, {-62, -26}})));
+  Modelica.Blocks.Interfaces.RealInput infiltrationTemperature[2] annotation (
+      Placement(transformation(extent={{-120,-60},{-80,-20}}),
+        iconTransformation(extent={{-88,-52},{-62,-26}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a internalGainsConv annotation(Placement(transformation(extent = {{-10, -100}, {10, -80}}), iconTransformation(extent = {{-10, -100}, {10, -80}})));
   Utilities.Interfaces.Star internalGainsRad annotation(Placement(transformation(extent = {{30, -100}, {50, -80}})));
 equation
@@ -147,5 +149,7 @@ equation
           by Moritz Lauster:<br/>
           Implemented</li>
  </ul>
- </html>"));
+ </html>"),
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
+            100,100}})));
 end partialThermalZone;

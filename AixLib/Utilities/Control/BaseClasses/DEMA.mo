@@ -53,5 +53,11 @@ equation
     annotation (Line(points={{19,0},{58,0}}, color={0,0,127}));
   connect(DEMAcont.y, y[2]) annotation (Line(points={{19,0},{32,0},{32,
           -18},{110,-18},{110,5}}, color={0,0,127}));
-  annotation (Diagram(graphics));
+  annotation (Diagram(graphics), Documentation(revisions="<html>
+<ul>
+  <li><i>October, 2015&nbsp;</i>
+         by Moritz Lauster:<br>
+         Adapted and moved to AixLib</li>
+</ul>
+</html>"));
 end DEMA;

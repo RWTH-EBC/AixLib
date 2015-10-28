@@ -153,6 +153,11 @@ equation
 </ol></p>
 </html>", revisions="<html>
 <ul>
+  <li><i>October, 2015&nbsp;</i>
+         by Moritz Lauster:<br>
+         Adapted and moved to AixLib</li>
+</ul>
+<ul>
   <li><i>May, 2008&nbsp;</i>
          by Peter Matthes:<br>
          Implemented</li>

@@ -18,16 +18,16 @@ protected
 
 equation
   if u[1] <= Tclomax then
-    Topt =from_degC(BaseLib.Utilities.polynomialEvaluator(
-      Cities.Utilities.coefficients(u[2]), to_degC(Tclomax)))
+    Topt =from_degC(AixLib.Utilities.Math.Functions.polynomial(
+      to_degC(Tclomax), AixLib.Utilities.Control.BaseClasses.coefficients(u[2])))
       "minimum optimal temperature";
   elseif u[1] >= Tclomin then
-    Topt =from_degC(BaseLib.Utilities.polynomialEvaluator(
-      Cities.Utilities.coefficients(u[2]), to_degC(Tclomin)))
+    Topt =from_degC(AixLib.Utilities.Math.Functions.polynomial(
+      to_degC(Tclomin), AixLib.Utilities.Control.BaseClasses.coefficients(u[2])))
       "const. Temp. above 0.5 clo limit";
   else
-    Topt =from_degC(BaseLib.Utilities.polynomialEvaluator(
-      Cities.Utilities.coefficients(u[2]), to_degC(u[1])));
+    Topt =from_degC(AixLib.Utilities.Math.Functions.polynomial(
+      to_degC(u[1]), AixLib.Utilities.Control.BaseClasses.coefficients(u[2])));
   end if;
   y = {Topt - cat,Topt + cat,Topt} "min, max, opt";
 
@@ -44,6 +44,11 @@ equation
 <li>Topt </li>
 </ol>
 </html>", revisions="<html>
+<ul>
+  <li><i>October, 2015&nbsp;</i>
+         by Moritz Lauster:<br>
+         Adapted and moved to AixLib</li>
+</ul>
 <ul>
   <li><i>May, 2008&nbsp;</i>
          by Peter Matthes:<br>

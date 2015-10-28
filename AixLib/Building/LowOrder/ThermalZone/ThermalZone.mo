@@ -20,8 +20,8 @@ equation
       Line(points={{59,-24.8},{80,-24.8},{80,-52},{8,-52},{8,2}}, color={191,0,
           0}));
   connect(machines_SensibleHeat_DIN18599.ConvHeat, thermalZonePhysics.internalGainsConv)
-    annotation (Line(points={{59,-4.8},{80,-4.8},{80,-52},{8,-52},{8,2}}, color
-        ={191,0,0}));
+    annotation (Line(points={{59,-4.8},{80,-4.8},{80,-52},{8,-52},{8,2}}, color=
+         {191,0,0}));
   connect(human_SensibleHeat_VDI2078.ConvHeat, thermalZonePhysics.internalGainsConv)
     annotation (Line(points={{59,15},{80,15},{80,-52},{8,-52},{8,2}}, color={
           191,0,0}));
@@ -42,15 +42,15 @@ equation
   connect(human_SensibleHeat_VDI2078.RadHeat, thermalZonePhysics.internalGainsRad)
     annotation (Line(points={{59,9},{68,9},{68,-46},{16,-46},{16,2}}, color={95,
           95,95}));
-  connect(infiltrationTemperature, thermalZonePhysics.ventilationTemperature)
-    annotation (Line(points={{-80,-40},{-42,-40},{-42,12},{-15.2,12}}, color={0,
-          0,127}));
   connect(weather, thermalZonePhysics.weather) annotation (Line(points={{-100,
           20},{-58,20},{-58,23.8},{-15,23.8}}, color={0,0,127}));
   connect(infiltrationRate, thermalZonePhysics.ventilationRate) annotation (
       Line(points={{-40,-100},{-40,-16},{-8,-16},{-8,2.8}}, color={0,0,127}));
   connect(solarRad_in, thermalZonePhysics.solarRad_in) annotation (Line(points=
           {{-90,80},{-72,80},{-52,80},{-52,33},{-15.4,33}}, color={255,128,0}));
+  connect(infiltrationTemperature[1], thermalZonePhysics.ventilationTemperature)
+    annotation (Line(points={{-100,-50},{-60,-50},{-60,12},{-15.2,12}}, color={
+          0,0,127}));
   annotation(Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <ul>
