@@ -17,9 +17,10 @@ protected
     "choose setup for zones"
     annotation (choicesAllMatching=false, tab="Building Physics");
 public
-  replaceable AixLib.Building.LowOrder.ThermalZone.ThermalZoneEquipped zone[dimension] constrainedby
+  replaceable AixLib.Building.LowOrder.ThermalZone.ThermalZoneEquipped zone[dimension](
+      zoneParam=zoneParam)                                                             constrainedby
     AixLib.Building.LowOrder.ThermalZone.partialThermalZone                                                                                                  annotation (Placement(transformation(extent={{38,35},
-            {78,75}})));
+            {78,75}})),choicesAllMatching=true);
   AixLib.Utilities.Interfaces.SolarRad_in radIn[max(orientations)] annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -78,12 +79,13 @@ public
         extent={{-7,-8},{7,8}},
         rotation=90,
         origin={28,31})));
-  Supply.HeaterCooler.IdealHeaterCoolerVar1_record idealHeaterCooler[dimension](
-     zoneParam=zoneParam, each withMeter=false)
+  Utilities.Sources.HeaterCooler.HeaterCoolerPI    idealHeaterCooler[dimension](
+     zoneParam=zoneParam, each withMeter=false,
+    recOrSep=true,
+    staOrDyn=true)
     annotation (Placement(transformation(extent={{-32,-54},{-6,-28}})));
-  Modelica.Blocks.Interfaces.RealInput tSet[dimension]
-    "Input for set room temperature. Used for heat supply." annotation (
-      Placement(transformation(
+  Modelica.Blocks.Interfaces.RealInput TSetHeater[dimension]
+    "Set point for heater" annotation (Placement(transformation(
         extent={{20,-20},{-20,20}},
         rotation=270,
         origin={-20,-100}), iconTransformation(
@@ -105,6 +107,14 @@ public
     withSchedule=withSchedule,
     dimension=dimension)
     annotation (Placement(transformation(extent={{-72,6},{-60,22}})));
+  Modelica.Blocks.Interfaces.RealInput TSetCooler[dimension]
+    "Set point for cooler" annotation (Placement(transformation(
+        extent={{20,-20},{-20,20}},
+        rotation=270,
+        origin={-48,-100}), iconTransformation(
+        extent={{6,-6},{-6,6}},
+        rotation=180,
+        origin={-94,-22})));
 equation
   for i in 1:dimension loop
     connect(internalGains[(i*3)-2], zone[i].internalGains[1]) annotation (Line(
@@ -162,11 +172,6 @@ equation
       points={{28,38},{28,48.5},{43,48.5}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(idealHeaterCooler.HeatCoolRoom, zone.internalGainsConv) annotation (
-      Line(
-      points={{-7.3,-41},{58,-41},{58,37}},
-      color={191,0,0},
-      smooth=Smooth.None));
   connect(splitterThermPercentAir.signalOutput, zone.internalGainsConv) annotation (Line(
       points={{30,-16},{58,-16},{58,37}},
       color={191,0,0},
@@ -175,14 +180,6 @@ equation
       Line(
       points={{16,-16},{22,-16}},
       color={191,0,0},
-      smooth=Smooth.None));
-  connect(tSet, idealHeaterCooler.soll_heat) annotation (Line(
-      points={{-20,-100},{-20,-56},{-15.1,-56},{-15.1,-47.24}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  connect(tSet, idealHeaterCooler.soll_cool) annotation (Line(
-      points={{-20,-100},{-20,-56},{-25.24,-56},{-25.24,-47.24}},
-      color={0,0,127},
       smooth=Smooth.None));
   connect(aHUFull.Vflow_out, splitterVentilationV.signalInput) annotation (Line(
       points={{-52.48,21.8889},{46,21.8889},{46,18}},
@@ -228,6 +225,13 @@ equation
       points={{46,30},{46,37.4},{50,37.4}},
       color={0,0,127},
       smooth=Smooth.None));
+  connect(TSetCooler, idealHeaterCooler.setPointCool) annotation (Line(points={
+          {-48,-100},{-48,-66},{-25.24,-66},{-25.24,-47.24}}, color={0,0,127}));
+  connect(TSetHeater, idealHeaterCooler.setPointHeat) annotation (Line(points={
+          {-20,-100},{-22,-100},{-22,-66},{-15.1,-66},{-15.1,-47.24}}, color={0,
+          0,127}));
+  connect(idealHeaterCooler.heatCoolRoom, zone.internalGainsConv)
+    annotation (Line(points={{-7.3,-41},{58,-41},{58,37}}, color={191,0,0}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}),

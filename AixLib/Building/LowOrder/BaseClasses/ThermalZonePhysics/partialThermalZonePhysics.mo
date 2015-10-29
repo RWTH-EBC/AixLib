@@ -26,7 +26,7 @@ partial model partialThermalZonePhysics
   replaceable Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG
     partialCorG(n=n) constrainedby
     Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
-    annotation (Placement(transformation(extent={{-24,60},{-4,80}})));
+    annotation (Placement(transformation(extent={{-24,60},{-4,80}})),choicesAllMatching=true);
 equation
   connect(solarRad_in, sunblind.Rad_In) annotation(Line(points={{-90,70},{-49,70}},                            color = {255, 128, 0}));
   connect(solarRadAdapter.solarRad_in, solarRad_in) annotation (Line(

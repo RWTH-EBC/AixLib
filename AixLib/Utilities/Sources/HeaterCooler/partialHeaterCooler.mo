@@ -1,5 +1,5 @@
 within AixLib.Utilities.Sources.HeaterCooler;
-partial model partialIdealHeaterCooler
+partial model partialHeaterCooler
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCoolRoom annotation(Placement(transformation(extent = {{80, -10}, {100, 10}})));
   annotation (Icon(graphics={  Rectangle(extent = {{-94, 6}, {80, -28}}, lineColor = {135, 135, 135}, fillColor = {135, 135, 135},
             fillPattern =                                                                                                   FillPattern.Solid), Polygon(points = {{-82, 6}, {-82, 40}, {-48, 6}, {-82, 6}}, lineColor = {135, 135, 135},
@@ -20,4 +20,4 @@ partial model partialIdealHeaterCooler
  <li><i>June, 2014&nbsp;</i> by Moritz Lauster:<br/>Added some basic documentation</li>
  </ul>
  </html>"));
-end partialIdealHeaterCooler;
+end partialHeaterCooler;
