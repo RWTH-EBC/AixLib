@@ -3,8 +3,7 @@ model LowOrderExample
   extends Modelica.Icons.Example;
   import AixLib;
   output Real TRoom;
-  output Real heatDemand;
-  output Real coolDemand;
+
 parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();
   ThermalZone thermalZone(zoneParam = AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_1_Meeting()) annotation(Placement(transformation(extent = {{-10, -12}, {16, 14}})));
   Components.Weather.Weather weather(                                                                                           Air_temp = true, Sky_rad = true, Ter_rad = true, Outopt = 1,
@@ -101,6 +100,9 @@ parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = 
         590400,0,0,0,0; 593940,0,0,0,0; 594000,0,0,0,0; 597540,0,0,0,0; 597600,
         0,0,0,0; 601140,0,0,0,0; 601200,0,0,0,0; 604740,0,0,0,0])                                                                                                     annotation(Placement(transformation(extent = {{14, -71}, {28, -57}})));
   Modelica.Blocks.Sources.CombiTimeTable heatingCooling(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableName = "UserProfilesHeat", fileName = Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/UserProfilesHeatSimple.txt"), columns = {2, 3}, tableOnFile = false, table = [0, 295.15, 295.2; 3600, 295.1, 295.2; 7200, 295.1, 295.2; 10800, 295.1, 295.2; 14400, 295.1, 295.2; 18000, 295.1, 295.2; 21600, 295.1, 295.2; 25200, 300.1, 300.2; 28800, 300.1, 300.2; 32400, 300.1, 300.2; 36000, 300.1, 300.2; 39600, 300.1, 300.2; 43200, 300.1, 300.2; 46800, 300.1, 300.2; 50400, 300.1, 300.2; 54000, 300.1, 300.2; 57600, 300.1, 300.2; 61200, 300.1, 300.2; 64800, 300.1, 300.2; 68400, 295.1, 295.2; 72000, 295.1, 295.2; 75600, 295.1, 295.2; 79200, 295.1, 295.2; 82800, 295.1, 295.2; 86400, 295.1, 295.2]) annotation(Placement(transformation(extent = {{-56, -75}, {-42, -61}})));
+  Modelica.Blocks.Interfaces.RealOutput heatDemand;
+  Modelica.Blocks.Interfaces.RealOutput coolDemand;
+
 equation
   TRoom = thermalZone.thermalZonePhysics.reducedOrderModel.airload.T;
   heatDemand = idealHeaterCooler.heatMeter.q_kwh;
@@ -116,7 +118,7 @@ equation
   connect(heatingCooling.y[2], idealHeaterCooler.soll_cool) annotation (Line(
       points={{-41.3,-68},{-16.8,-68},{-16.8,-46.8}},
       color={0,0,127}));
-  annotation( Documentation(info = "<html>
+  annotation (Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Example for setting up a simulation for a thermal zone.</p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
