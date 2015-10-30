@@ -2,7 +2,7 @@ within AixLib.Building.LowOrder.BaseClasses;
 model ThermSplitter
   "A simple model which weights a given set of therm inputs to calculate an average temperature or heat flow and the other way around"
 
-parameter Integer dimension=6 "Dimension of the splitter";
+parameter Integer dimension "Dimension of the splitter";
 
 parameter Real splitFactor[dimension]= fill(1/dimension, dimension)
     "split factor for outputs (between 0 and 1)";

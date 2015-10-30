@@ -1,15 +1,17 @@
 within AixLib.Utilities.Sources.HeaterCooler;
 partial model partialHeaterCoolerPI
   extends AixLib.Utilities.Sources.HeaterCooler.partialHeaterCooler;
-  parameter Real h_heater "upper limit controller output of the heater" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
-  parameter Real l_heater "lower limit controller output of the heater" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
-  parameter Real KR_heater "Gain of the heating controller" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
-  parameter Modelica.SIunits.Time TN_heater
+  parameter Real h_heater = 0 "upper limit controller output of the heater" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
+  parameter Real l_heater = 0 "lower limit controller output of the heater" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
+  parameter Real KR_heater = 1000 "Gain of the heating controller" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
+  parameter Modelica.SIunits.Time TN_heater = 1
     "Time constant of the heating controller" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
-  parameter Real h_cooler "upper limit controller output of the cooler" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
-  parameter Real l_cooler "lower limit controller output of the cooler"           annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
-  parameter Real KR_cooler "Gain of the cooling controller" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
-  parameter Modelica.SIunits.Time TN_cooler
+  parameter Real h_cooler = 0 "upper limit controller output of the cooler"
+                                                                           annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
+  parameter Real l_cooler = 0 "lower limit controller output of the cooler"          annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
+  parameter Real KR_cooler = 1000 "Gain of the cooling controller"
+                                                                  annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
+  parameter Modelica.SIunits.Time TN_cooler = 1
     "Time constant of the cooling controller" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
   parameter Boolean Heater_on "Activates the heater"                                           annotation(Dialog(tab = "Heater",enable=not recOrSep));
   parameter Boolean Cooler_on "Activates the cooler" annotation(Dialog(tab = "Cooler",enable=not recOrSep));

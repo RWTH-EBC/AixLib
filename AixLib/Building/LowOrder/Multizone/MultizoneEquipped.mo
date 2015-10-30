@@ -3,24 +3,18 @@ model MultizoneEquipped
   "house with basic heat supply system, air handling unit, an arbitrary number of thermal zones (vectorized), and ventilation"
   parameter Integer dimension = 6 "Dimension of the zone vector";
   parameter Boolean withSchedule = false "Air flow calculated by schedule";
-protected
-  parameter Integer orientations[:]=zoneParam.n "number cardinal directions";
-  //inner parameter Real AirFactor = 3;
-public
-  parameter DataBase.Buildings.BuildingBaseRecord buildingParam=
-      DataBase.Buildings.BuildingBaseRecord() "choose setup for the building"
-                                    annotation (choicesAllMatching = false);
-  parameter String filename="./Pictures/LCS/LCS_55.JPG"
-    "Path to image file of the building";
+  parameter AixLib.DataBase.Buildings.BuildingBaseRecord buildingParam
+    "Choose setup for the building" annotation (choicesAllMatching = false);
+  parameter String filename = "" "Path to image file of the building";
 protected
   parameter AixLib.DataBase.Buildings.ZoneBaseRecord zoneParam[:]=buildingParam.zoneSetup
-    "choose setup for zones"
-    annotation (choicesAllMatching=false, tab="Building Physics");
+    "Choose setup for zones" annotation (choicesAllMatching=false);
+  parameter Integer orientations[:]=zoneParam.n "Number cardinal directions";
 public
   replaceable AixLib.Building.LowOrder.ThermalZone.ThermalZoneEquipped zone[dimension](
       zoneParam=zoneParam)                                                             constrainedby
-    AixLib.Building.LowOrder.ThermalZone.partialThermalZone                                                                                                  annotation (Placement(transformation(extent={{38,35},
-            {78,75}})),choicesAllMatching=true);
+    AixLib.Building.LowOrder.ThermalZone.partialThermalZone                                                                                                  annotation (Placement(transformation(extent={{40,35},
+            {80,75}})),choicesAllMatching=true);
   AixLib.Utilities.Interfaces.SolarRad_in radIn[max(orientations)] annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -32,7 +26,7 @@ public
 
   Modelica.Blocks.Interfaces.RealInput internalGains[3*dimension]
     "Connect the input table for internal gains<br>Persons, machines, light"
-    annotation (Placement(transformation(extent={{120,-62},{80,-22}}),
+    annotation (Placement(transformation(extent={{122,-62},{82,-22}}),
         iconTransformation(extent={{-7,-7},{7,7}},
         rotation=180,
         origin={93,65})));
@@ -48,17 +42,18 @@ public
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor tAirAHUavg
     "Averaged air temperature of the zones which are supplied by the AHU"
     annotation (Placement(transformation(extent={{16,-20},{8,-12}})));
-  Utilities.SplitterThermPercentAir splitterThermPercentAir(dimension=dimension,
-      ZoneFactor=Utilities.ZoneFactorsZero(dimension, zoneParam)) annotation (
+  BaseClasses.ThermSplitter splitterThermPercentAir(dimension=dimension,
+      splitFactor=AixLib.Building.LowOrder.BaseClasses.ZoneFactorsZero(dimension, zoneParam)) annotation (
       Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=0,
         origin={26,-16})));
-  Utilities.SplitterRealPercent splitterInfiltrationT(dimension=dimension,
-      ZoneFactor=fill(1, dimension)) annotation (Placement(transformation(
+  BaseClasses.SplitterRealPercent
+                                splitterInfiltrationT(dimension=dimension,
+      splitFactor=fill(1, dimension)) annotation (Placement(transformation(
         extent={{-7,-6},{7,6}},
         rotation=0,
-        origin={-17,52})));
+        origin={-17,60})));
   Modelica.Blocks.Interfaces.RealInput AHU[4]
     "Input for AHU Conditions<br>[1]: Desired Air Temperature in K<br>[2]: Desired minimal relative humidity<br>[3]: Desired maximal relative humidity<br>[4]: Desired Ventilation Flow in m3/s"
     annotation (Placement(transformation(
@@ -68,21 +63,23 @@ public
         extent={{7,-7},{-7,7}},
         rotation=0,
         origin={93,-53})));
-  Utilities.SplitterRealPercent splitterVentilationV(dimension=dimension,
-      ZoneFactor=Utilities.ZoneFactorsZero(dimension, zoneParam)) annotation (
+  BaseClasses.SplitterRealPercent
+                                splitterVentilationV(dimension=dimension,
+      splitFactor=AixLib.Building.LowOrder.BaseClasses.ZoneFactorsZero(dimension, zoneParam)) annotation (
       Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=90,
-        origin={46,24})));
-  Utilities.SplitterRealPercent splitterVentilationT(dimension=dimension,
-      ZoneFactor=fill(1, dimension)) annotation (Placement(transformation(
+        origin={48,24})));
+  BaseClasses.SplitterRealPercent
+                                splitterVentilationT(dimension=dimension,
+      splitFactor=fill(1, dimension)) annotation (Placement(transformation(
         extent={{-7,-8},{7,8}},
         rotation=90,
-        origin={28,31})));
+        origin={24,39})));
   Utilities.Sources.HeaterCooler.HeaterCoolerPI    idealHeaterCooler[dimension](
      zoneParam=zoneParam, each withMeter=false,
-    recOrSep=true,
-    staOrDyn=true)
+    each recOrSep=true,
+    each staOrDyn=true)
     annotation (Placement(transformation(extent={{-32,-54},{-6,-28}})));
   Modelica.Blocks.Interfaces.RealInput TSetHeater[dimension]
     "Set point for heater" annotation (Placement(transformation(
@@ -102,7 +99,7 @@ public
     efficiencyHRS_enabled=buildingParam.efficiencyHRS_enabled,
     efficiencyHRS_disabled=buildingParam.efficiencyHRS_disabled)
     annotation (Placement(transformation(extent={{-54,-24},{22,46}})));
-  Utilities.AirFlowRate        airFlowRate(
+  BaseClasses.AirFlowRate      airFlowRate(
     zoneParam=zoneParam,
     withSchedule=withSchedule,
     dimension=dimension)
@@ -116,64 +113,64 @@ public
         rotation=180,
         origin={-94,-22})));
 equation
+  aHUFull.phi_extractAir = hold(aHUFull.phi_sup);
   for i in 1:dimension loop
     connect(internalGains[(i*3)-2], zone[i].internalGains[1]) annotation (Line(
-      points={{100,-42},{74,-42},{74,35.8}},
+      points={{102,-42},{76,-42},{76,35.8}},
       color={0,0,127},
       smooth=Smooth.None));
     connect(internalGains[(i*3)-1], zone[i].internalGains[2]) annotation (Line(
-      points={{100,-42},{74,-42},{74,37.4}},
+      points={{102,-42},{76,-42},{76,37.4}},
       color={0,0,127},
       smooth=Smooth.None));
     connect(internalGains[(i*3)], zone[i].internalGains[3]) annotation (Line(
-      points={{100,-42},{74,-42},{74,39}},
+      points={{102,-42},{76,-42},{76,39}},
       color={0,0,127},
       smooth=Smooth.None));
     connect(internalGains[(i*3)-2], airFlowRate.relOccupation[i]) annotation (Line(
-      points={{100,-42},{76,-42},{76,-20},{-80,-20},{-80,10.8},{-72,10.8}},
+      points={{102,-42},{76,-42},{76,-22},{-76,-22},{-76,10.8},{-72,10.8}},
       color={0,0,127},
       smooth=Smooth.None));
     if zone[i].zoneParam.withOuterwalls then
       //Connect Outside Temperature
       connect(weather[1], zone[i].weather[1]) annotation (Line(
-          points={{-56,115},{-56,53.4},{43.2,53.4}},
+          points={{-56,115},{-56,66},{40,66},{40,53.4},{45.2,53.4}},
           color={0,0,127},
           smooth=Smooth.None));
       for j in 3:4 loop
         //Connect Radiation Vectors. Index has shifted because the absolute humidity has been added at vector position 2.
         connect(weather[j], zone[i].weather[j - 1]) annotation (Line(
-            points={{-56,100},{-56,55},{43.2,55}},
+            points={{-56,100},{-56,66},{40,66},{40,55},{45.2,55}},
             color={0,0,127},
             smooth=Smooth.None));
       end for;
       for k in 1:orientations[i] loop
         //Connect the radiation Input according to the required orientations for the individual zone
         connect(radIn[k], zone[i].solarRad_in[k]) annotation (Line(
-            points={{-20,92},{-20,67},{42,67}},
+            points={{-20,92},{-20,72},{40,72},{40,67},{44,67}},
             color={255,128,0},
             smooth=Smooth.None));
       end for;
     end if;
   end for;
-
   connect(weather[1], splitterInfiltrationT.signalInput) annotation (Line(
-      points={{-56,115},{-56,52},{-24,52}},
+      points={{-56,115},{-56,60},{-24,60}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(AHU[1], splitterVentilationT.signalInput) annotation (Line(
-      points={{-100,-1},{-100,-22},{28,-22},{28,24}},
+      points={{-100,-1},{-100,-8},{24,-8},{24,32}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(splitterInfiltrationT.signalOutput, zone.infiltrationTemperature[1]) annotation (Line(
-      points={{-10,52},{0,52},{0,45.9},{43,45.9}},
+      points={{-10,60},{38,60},{38,45.9},{45,45.9}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(splitterVentilationT.signalOutput, zone.infiltrationTemperature[2]) annotation (Line(
-      points={{28,38},{28,48.5},{43,48.5}},
+      points={{24,46},{24,48.5},{45,48.5}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(splitterThermPercentAir.signalOutput, zone.internalGainsConv) annotation (Line(
-      points={{30,-16},{58,-16},{58,37}},
+      points={{30,-16},{60,-16},{60,37}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(tAirAHUavg.port, splitterThermPercentAir.signalInput) annotation (
@@ -182,7 +179,8 @@ equation
       color={191,0,0},
       smooth=Smooth.None));
   connect(aHUFull.Vflow_out, splitterVentilationV.signalInput) annotation (Line(
-      points={{-52.48,21.8889},{46,21.8889},{46,18}},
+      points={{-52.48,21.8889},{-56,21.8889},{-56,22},{-60,22},{-60,28},{38,28},
+          {38,14},{48,14},{48,18}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(aHUFull.T_outdoorAir, weather[1]) annotation (Line(
@@ -194,11 +192,11 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(tAirAHUavg.T, aHUFull.T_extractAir) annotation (Line(
-      points={{8,-16},{4,-16},{4,-6},{22,-6},{22,25.7778},{15.92,25.7778}},
+      points={{8,-16},{4,-16},{4,-4},{22,-4},{22,25.7778},{15.92,25.7778}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(AHU[1], aHUFull.T_supplyAir) annotation (Line(
-      points={{-100,-1},{-78,-1},{-78,-4},{20,-4},{20,11},{15.92,11}},
+      points={{-100,-1},{-100,-2},{20,-2},{20,11},{15.92,11}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(airFlowRate.airFlowRateOutput, aHUFull.Vflow_in) annotation (Line(
@@ -206,38 +204,37 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(AHU[4], airFlowRate.schedule) annotation (Line(
-      points={{-100,-31},{-100,0},{-72,0},{-72,17.2}},
+      points={{-100,-31},{-100,18},{-72,18},{-72,17.2}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(AHU[2], aHUFull.phi_supplyAir[1]) annotation (Line(
-      points={{-100,-11},{-42,-11},{-42,7.88889},{15.92,7.88889}},
+      points={{-100,-11},{-100,-2},{18,-2},{18,6},{15.92,6},{15.92,7.88889}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(AHU[3], aHUFull.phi_supplyAir[2]) annotation (Line(
-      points={{-100,-21},{-42,-21},{-42,6.33333},{15.92,6.33333}},
+      points={{-100,-21},{-100,-2},{-42,-2},{-42,-2},{18,-2},{18,6},{15.92,6},{
+          15.92,6.33333}},
       color={0,0,127},
       smooth=Smooth.None));
-
-  aHUFull.phi_extractAir = hold(aHUFull.phi_sup);
-
   connect(splitterVentilationV.signalOutput, zone.infiltrationRate) annotation (
      Line(
-      points={{46,30},{46,37.4},{50,37.4}},
+      points={{48,30},{48,37.4},{52,37.4}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(TSetCooler, idealHeaterCooler.setPointCool) annotation (Line(points={
-          {-48,-100},{-48,-66},{-25.24,-66},{-25.24,-47.24}}, color={0,0,127}));
-  connect(TSetHeater, idealHeaterCooler.setPointHeat) annotation (Line(points={
-          {-20,-100},{-22,-100},{-22,-66},{-15.1,-66},{-15.1,-47.24}}, color={0,
+  connect(TSetCooler, idealHeaterCooler.setPointCool) annotation (Line(points={{-48,
+          -100},{-48,-66},{-22.12,-66},{-22.12,-50.36}},      color={0,0,127}));
+  connect(TSetHeater, idealHeaterCooler.setPointHeat) annotation (Line(points={{-20,
+          -100},{-22,-100},{-22,-66},{-16.14,-66},{-16.14,-50.36}},    color={0,
           0,127}));
   connect(idealHeaterCooler.heatCoolRoom, zone.internalGainsConv)
-    annotation (Line(points={{-7.3,-41},{58,-41},{58,37}}, color={191,0,0}));
+    annotation (Line(points={{-7.3,-46.2},{60,-46.2},{60,37}},
+                                                           color={191,0,0}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}),
             graphics={
         Rectangle(
-          extent={{34,78},{82,-70}},
+          extent={{34,78},{86,-70}},
           lineColor={0,0,255},
           fillPattern=FillPattern.Solid,
           fillColor={213,255,170}),
@@ -247,18 +244,18 @@ equation
           fillColor={255,170,170},
           fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{-66,42},{32,-24}},
+          extent={{-66,50},{32,-24}},
           lineColor={0,0,255},
           fillPattern=FillPattern.Solid,
           fillColor={212,221,253}),
         Text(
-          extent={{-38,44},{4,30}},
+          extent={{-38,48},{4,34}},
           lineColor={0,0,255},
           fillColor={212,221,253},
           fillPattern=FillPattern.Solid,
           textString="Air Conditioning"),
         Rectangle(
-          extent={{32,78},{-66,44}},
+          extent={{32,78},{-66,52}},
           lineColor={0,0,255},
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid),
@@ -281,11 +278,6 @@ Cooling"),
           fillColor={213,255,170},
           fillPattern=FillPattern.Solid,
           textString="Building")}),
-    experiment(
-      StopTime=3.1536e+007,
-      Interval=3600,
-      Algorithm="Lsodar"),
-    __Dymola_experimentSetupOutput(doublePrecision=true, events=false),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}}),
          graphics={                                                       Text(
@@ -327,8 +319,7 @@ Cooling"),
           extent={{6,20},{44,24}},
           lineColor={95,95,95},
           fillColor={95,95,95},
-          fillPattern=FillPattern.Solid),
-                   Bitmap(extent={{-80,80},{80,-80}}, fileName=filename)}),
+          fillPattern=FillPattern.Solid)}),
     Documentation(revisions="<html>
 <ul>
 <li><i>June 22, 2015&nbsp;</i> by Moritz Lauster:<br>Changed Building Physics to AixLib</li>
