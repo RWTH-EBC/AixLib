@@ -1,50 +1,49 @@
 within AixLib.Utilities.Sources.HeaterCooler;
 model HeaterCoolerPI "heater and cooler with variable setpoints"
   extends AixLib.Utilities.Sources.HeaterCooler.partialHeaterCoolerPI;
+  parameter Boolean Heater_on = true "Activates the heater" annotation(Dialog(tab = "Heater",enable=not recOrSep));
+  parameter Boolean Cooler_on = true "Activates the cooler" annotation(Dialog(tab = "Cooler",enable=not recOrSep));
   parameter Boolean staOrDyn = true "Static or dynamic activation of heater" annotation(choices(choice = true "Static", choice =  false "Dynamic",
                   radioButtons = true));
-  Modelica.Blocks.Interfaces.RealInput setPointCool if not recOrSep and Cooler_on or recOrSep and zoneParam.Cooler_on annotation (
+  Modelica.Blocks.Interfaces.RealInput setPointCool annotation (
       Placement(transformation(extent={{-120,-60},{-80,-20}}),
         iconTransformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={-24,-72})));
-  Modelica.Blocks.Interfaces.RealInput setPointHeat if not recOrSep and Heater_on or recOrSep and zoneParam.Heater_on annotation (
+  Modelica.Blocks.Interfaces.RealInput setPointHeat annotation (
       Placement(transformation(extent={{-120,20},{-80,60}}), iconTransformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={22,-72})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpressionHeater(y=if not
-        recOrSep then Heater_on else zoneParam.Heater_on) if (not recOrSep and Heater_on or recOrSep and zoneParam.Heater_on) and staOrDyn annotation (Placement(transformation(extent={{-52,14},{-33,30}})));
+        recOrSep then Heater_on else zoneParam.Heater_on) if staOrDyn annotation (Placement(transformation(extent={{-52,14},{-33,30}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpressionCooler(y=if not
-        recOrSep then Cooler_on else zoneParam.Cooler_on) if (not recOrSep and Cooler_on or recOrSep and zoneParam.Cooler_on) and staOrDyn annotation (Placement(transformation(extent={{-52,-30},{-32,-14}})));
-  Modelica.Blocks.Interfaces.BooleanInput heaterActive if (not recOrSep and Heater_on or recOrSep and zoneParam.Heater_on) and not staOrDyn
+        recOrSep then Cooler_on else zoneParam.Cooler_on) if staOrDyn annotation (Placement(transformation(extent={{-52,-30},{-32,-14}})));
+  Modelica.Blocks.Interfaces.BooleanInput heaterActive if not staOrDyn
     "Switches Controler on and off" annotation (Placement(transformation(extent=
            {{-120,-6},{-80,34}}), iconTransformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={68,-72})));
-  Modelica.Blocks.Interfaces.BooleanInput coolerActive if (not recOrSep and Cooler_on or recOrSep and zoneParam.Cooler_on) and not staOrDyn
+  Modelica.Blocks.Interfaces.BooleanInput coolerActive if not staOrDyn
     "Switches Controler on and off" annotation (Placement(transformation(extent=
            {{-120,-34},{-80,6}}), iconTransformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={-70,-72})));
 equation
-  if staOrDyn and (not recOrSep and Heater_on or recOrSep and zoneParam.Heater_on) then
+  if staOrDyn then
     connect(booleanExpressionHeater.y, pITempHeat.onOff) annotation (Line(points={{-32.05,
           22},{-24,22},{-24,15},{-19,15}}, color={255,0,255},
         pattern=LinePattern.Dash));
-  elseif not staOrDyn and (not recOrSep and Heater_on or recOrSep and zoneParam.Heater_on) then
-    connect(heaterActive, pITempHeat.onOff) annotation (Line(points={{-100,14},{-60,
-           14},{-60,15},{-19,15}}, color={255,0,255},
-        pattern=LinePattern.Dash));
-  end if;
-  if staOrDyn and (not recOrSep and Cooler_on or recOrSep and zoneParam.Cooler_on) then
     connect(booleanExpressionCooler.y, pITempCool.onOff) annotation (Line(points={{-31,
           -22},{-24,-22},{-24,-15},{-19,-15}}, color={255,0,255},
         pattern=LinePattern.Dash));
-  elseif not staOrDyn and (not recOrSep and Cooler_on or recOrSep and zoneParam.Cooler_on) then
+  else
+    connect(heaterActive, pITempHeat.onOff) annotation (Line(points={{-100,14},{-60,
+           14},{-60,15},{-19,15}}, color={255,0,255},
+        pattern=LinePattern.Dash));
     connect(pITempCool.onOff, coolerActive) annotation (Line(points={{-19,-15},{-24,
           -15},{-24,-14},{-100,-14}}, color={255,0,255},
         pattern=LinePattern.Dash));

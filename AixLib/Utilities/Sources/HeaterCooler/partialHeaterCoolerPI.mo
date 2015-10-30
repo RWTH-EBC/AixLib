@@ -13,36 +13,34 @@ partial model partialHeaterCoolerPI
                                                                   annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
   parameter Modelica.SIunits.Time TN_cooler = 1
     "Time constant of the cooling controller" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
-  parameter Boolean Heater_on "Activates the heater"                                           annotation(Dialog(tab = "Heater",enable=not recOrSep));
-  parameter Boolean Cooler_on "Activates the cooler" annotation(Dialog(tab = "Cooler",enable=not recOrSep));
-  parameter Boolean withMeter = true
-    "Select whether a heat meter is required. Saves significant integration time";
   parameter Boolean recOrSep = false "Use record or seperate parameters" annotation(choices(choice =  false
         "Seperate",choice = true "Record",radioButtons = true));
   parameter AixLib.DataBase.Buildings.ZoneBaseRecord zoneParam annotation(choicesAllMatching=true,Dialog(enable=recOrSep));
-  Sensors.TEnergyMeter coolMeter if (not recOrSep and Cooler_on or recOrSep and zoneParam.Cooler_on) and withMeter
-    "measures cooling energy"                                                     annotation(Placement(transformation(extent = {{40, -50}, {60, -30}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow Cooling if not recOrSep and Cooler_on or recOrSep and zoneParam.Cooler_on annotation(Placement(transformation(extent={{26,-23},
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow Cooling annotation(Placement(transformation(extent={{26,-23},
             {6,-2}})));
   Control.PITemp pITempCool(
     RangeSwitch=false,
     h=if not recOrSep then h_cooler else zoneParam.h_cooler,
     l=if not recOrSep then l_cooler else zoneParam.l_cooler,
     KR=if not recOrSep then KR_cooler else zoneParam.KR_cooler,
-    TN=if not recOrSep then TN_cooler else zoneParam.TN_cooler) if not recOrSep and Cooler_on or recOrSep and zoneParam.Cooler_on
+    TN=if not recOrSep then TN_cooler else zoneParam.TN_cooler)
     "PI control for cooler"
     annotation (Placement(transformation(extent={{-20,-10},{0,-30}})));
-  Sensors.TEnergyMeter heatMeter if (not recOrSep and Heater_on or recOrSep and zoneParam.Heater_on) and withMeter
-    "measures heating energy"                                                     annotation(Placement(transformation(extent = {{40, 30}, {60, 50}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow Heating if not recOrSep and Heater_on or recOrSep and zoneParam.Heater_on annotation(Placement(transformation(extent={{26,22},
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow Heating annotation(Placement(transformation(extent={{26,22},
             {6,2}})));
   Control.PITemp pITempHeat(
     RangeSwitch=false,
     h=if not recOrSep then h_heater else zoneParam.h_heater,
     l=if not recOrSep then l_heater else zoneParam.l_heater,
     KR=if not recOrSep then KR_heater else zoneParam.KR_heater,
-    TN=if not recOrSep then TN_heater else zoneParam.TN_heater) if not recOrSep and Heater_on or recOrSep and zoneParam.Heater_on
-    "PI control for heater"                                                                                                     annotation (Placement(transformation(extent={{-20,10},{0,30}})));
+    TN=if not recOrSep then TN_heater else zoneParam.TN_heater)
+    "PI control for heater" annotation (Placement(transformation(extent={{-20,10},{0,30}})));
+  Modelica.Blocks.Interfaces.RealOutput HeatingPower "Power for heating"
+    annotation (Placement(transformation(extent={{80,20},{120,60}}),
+        iconTransformation(extent={{80,20},{120,60}})));
+  Modelica.Blocks.Interfaces.RealOutput CoolingPower "Power for cooling"
+    annotation (Placement(transformation(extent={{80,-26},{120,14}}),
+        iconTransformation(extent={{80,-26},{120,14}})));
 equation
   connect(Heating.port, heatCoolRoom) annotation (Line(
         points={{6,12},{2,12},{2,-40},{90,-40}},
@@ -51,10 +49,6 @@ equation
   connect(pITempHeat.Therm1, heatCoolRoom) annotation (Line(
         points={{-16,11},{-16,-40},{90,-40}},
         color={191,0,0},
-        smooth=Smooth.None));
-  connect(Heating.Q_flow, heatMeter.p)     annotation (Line(
-        points={{26,12},{26,40},{41.4,40}},
-        color={0,0,127},
         smooth=Smooth.None));
   connect(pITempCool.y, Cooling.Q_flow) annotation (Line(
         points={{-1,-20},{26,-20},{26,-12.5}},
@@ -68,11 +62,11 @@ equation
         points={{-16,-11},{-16,-40},{90,-40}},
         color={191,0,0},
         smooth=Smooth.None));
-  connect(Cooling.Q_flow, coolMeter.p)     annotation (Line(
-        points={{26,-12.5},{26,-40},{41.4,-40}},
-        color={0,0,127},
-        smooth=Smooth.None));
   connect(Heating.Q_flow, pITempHeat.y) annotation (Line(points={{26,12},{26,20},{-1,20}}, color={0,0,127}));
+  connect(Heating.Q_flow, HeatingPower)
+    annotation (Line(points={{26,12},{26,40},{100,40}}, color={0,0,127}));
+  connect(Cooling.Q_flow, CoolingPower) annotation (Line(points={{26,-12.5},{56,
+          -12.5},{56,-6},{100,-6}}, color={0,0,127}));
   annotation (Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This is the base class of an ideal heater and/or cooler. It is used in full ideal heater/cooler models as an extension. It extends another base class and adds some basic elements.</p>
@@ -83,5 +77,8 @@ equation
  <ul>
  <li><i>June, 2014&nbsp;</i> by Moritz Lauster:<br/>Added some basic documentation</li>
  </ul>
- </html>"));
+ </html>"),
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+            100}})),
+    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}})));
 end partialHeaterCoolerPI;

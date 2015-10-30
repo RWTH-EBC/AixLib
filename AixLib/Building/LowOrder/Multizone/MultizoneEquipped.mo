@@ -26,7 +26,9 @@ public
 
   Modelica.Blocks.Interfaces.RealInput internalGains[3*dimension]
     "Connect the input table for internal gains<br>Persons, machines, light"
-    annotation (Placement(transformation(extent={{122,-62},{82,-22}}),
+    annotation (Placement(transformation(extent={{20,-20},{-20,20}},
+        rotation=-90,
+        origin={76,-100}),
         iconTransformation(extent={{-7,-7},{7,7}},
         rotation=180,
         origin={93,65})));
@@ -61,8 +63,8 @@ public
         rotation=180,
         origin={-100,-16}), iconTransformation(
         extent={{7,-7},{-7,7}},
-        rotation=0,
-        origin={93,-53})));
+        rotation=-90,
+        origin={43,-93})));
   BaseClasses.SplitterRealPercent
                                 splitterVentilationV(dimension=dimension,
       splitFactor=AixLib.Building.LowOrder.BaseClasses.ZoneFactorsZero(dimension, zoneParam)) annotation (
@@ -77,7 +79,7 @@ public
         rotation=90,
         origin={24,39})));
   Utilities.Sources.HeaterCooler.HeaterCoolerPI    idealHeaterCooler[dimension](
-     zoneParam=zoneParam, each withMeter=false,
+     zoneParam=zoneParam,
     each recOrSep=true,
     each staOrDyn=true)
     annotation (Placement(transformation(extent={{-32,-54},{-6,-28}})));
@@ -112,23 +114,43 @@ public
         extent={{6,-6},{-6,6}},
         rotation=180,
         origin={-94,-22})));
+  Modelica.Blocks.Interfaces.RealOutput Pel
+    "The consumed electrical power supplied from the mains [W]" annotation (
+      Placement(transformation(extent={{90,6},{110,26}}), iconTransformation(
+          extent={{96,12},{110,26}})));
+  Modelica.Blocks.Interfaces.RealOutput HeatingPowerAHU
+    "The absorbed heating power supplied from a heating circuit [W]"
+    annotation (Placement(transformation(extent={{90,-14},{110,6}}),
+        iconTransformation(extent={{96,-8},{110,6}})));
+  Modelica.Blocks.Interfaces.RealOutput CoolingPowerAHU
+    "The absorbed cooling power supplied from a cooling circuit [W]"
+    annotation (Placement(transformation(extent={{90,-32},{110,-12}}),
+        iconTransformation(extent={{96,-26},{110,-12}})));
+  Modelica.Blocks.Interfaces.RealOutput HeatingPowerHeater[size(
+    idealHeaterCooler, 1)] "Power for heating" annotation (Placement(
+        transformation(extent={{90,-52},{110,-32}}), iconTransformation(extent=
+            {{96,-52},{110,-38}})));
+  Modelica.Blocks.Interfaces.RealOutput CoolingPowerCooler[size(
+    idealHeaterCooler, 1)] "Power for cooling" annotation (Placement(
+        transformation(extent={{90,-76},{110,-56}}), iconTransformation(extent=
+            {{96,-70},{110,-56}})));
 equation
   aHUFull.phi_extractAir = hold(aHUFull.phi_sup);
   for i in 1:dimension loop
     connect(internalGains[(i*3)-2], zone[i].internalGains[1]) annotation (Line(
-      points={{102,-42},{76,-42},{76,35.8}},
+      points={{76,-100},{76,35.8}},
       color={0,0,127},
       smooth=Smooth.None));
     connect(internalGains[(i*3)-1], zone[i].internalGains[2]) annotation (Line(
-      points={{102,-42},{76,-42},{76,37.4}},
+      points={{76,-100},{76,37.4}},
       color={0,0,127},
       smooth=Smooth.None));
     connect(internalGains[(i*3)], zone[i].internalGains[3]) annotation (Line(
-      points={{102,-42},{76,-42},{76,39}},
+      points={{76,-100},{76,39}},
       color={0,0,127},
       smooth=Smooth.None));
     connect(internalGains[(i*3)-2], airFlowRate.relOccupation[i]) annotation (Line(
-      points={{102,-42},{76,-42},{76,-22},{-76,-22},{-76,10.8},{-72,10.8}},
+      points={{76,-100},{74,-100},{74,-22},{-76,-22},{-76,10.8},{-72,10.8}},
       color={0,0,127},
       smooth=Smooth.None));
     if zone[i].zoneParam.withOuterwalls then
@@ -229,6 +251,20 @@ equation
   connect(idealHeaterCooler.heatCoolRoom, zone.internalGainsConv)
     annotation (Line(points={{-7.3,-46.2},{60,-46.2},{60,37}},
                                                            color={191,0,0}));
+  connect(aHUFull.Pel, Pel) annotation (Line(points={{7.94,2.05556},{7.94,16},{
+          100,16}},
+                color={0,0,127}));
+  connect(aHUFull.QflowH, HeatingPowerAHU) annotation (Line(points={{-0.42,
+          2.05556},{-0.42,-6},{80,-6},{80,-4},{100,-4}},
+                                                 color={0,0,127}));
+  connect(aHUFull.QflowC, CoolingPowerAHU) annotation (Line(points={{-17.14,
+          2.05556},{-17.14,-20},{80,-20},{80,-22},{100,-22}},
+                                                    color={0,0,127}));
+  connect(idealHeaterCooler.HeatingPower, HeatingPowerHeater) annotation (Line(
+        points={{-6,-35.8},{38,-35.8},{38,-42},{100,-42}}, color={0,0,127}));
+  connect(idealHeaterCooler.CoolingPower, CoolingPowerCooler) annotation (Line(
+        points={{-6,-41.78},{12,-41.78},{12,-42},{36,-42},{36,-66},{100,-66}},
+        color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}),
@@ -273,7 +309,7 @@ Cooling"),
           fillPattern=FillPattern.Solid,
           textString="Weather"),
         Text(
-          extent={{42,-48},{70,-62}},
+          extent={{42,-58},{70,-72}},
           lineColor={0,0,255},
           fillColor={213,255,170},
           fillPattern=FillPattern.Solid,
