@@ -1,7 +1,6 @@
 within AixLib.Building.LowOrder.Examples;
 model improvedLOMExample
   extends Modelica.Icons.Example;
-  import AixLib;
   parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();
   replaceable
     AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel.ReducedOrderModelEBCMod

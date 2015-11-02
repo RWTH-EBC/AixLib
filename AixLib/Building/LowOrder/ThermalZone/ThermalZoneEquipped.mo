@@ -1,6 +1,6 @@
 within AixLib.Building.LowOrder.ThermalZone;
 model ThermalZoneEquipped
-  "Ready-to-use Low Order building model with AHU and heating"
+  "Ready-to-use Low Order building model with ventilation, infiltration and heating"
   extends AixLib.Building.LowOrder.ThermalZone.partialThermalZone;
   AixLib.Building.Components.Sources.InternalGains.Humans.HumanSensibleHeat_VDI2078
     human_SensibleHeat_VDI2078(

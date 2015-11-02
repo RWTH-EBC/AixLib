@@ -23,8 +23,9 @@ partial model partialThermalZonePhysics
   SolarRadAdapter solarRadAdapter[n]
     annotation (Placement(transformation(extent={{-74,28},{-54,48}})));
 
-  replaceable Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG
-    partialCorG(n=n) constrainedby
+  replaceable
+    AixLib.Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_VDI6007
+    corG(n=n) constrainedby
     Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
     annotation (Placement(transformation(extent={{-24,60},{-4,80}})),choicesAllMatching=true);
 equation
@@ -32,10 +33,10 @@ equation
   connect(solarRadAdapter.solarRad_in, solarRad_in) annotation (Line(
       points={{-73,38},{-76,38},{-76,70},{-90,70}},
       color={255,128,0}));
-  connect(sunblind.Rad_Out, partialCorG.SR_input) annotation (Line(
+  connect(sunblind.Rad_Out, corG.SR_input) annotation (Line(
       points={{-31,70},{-28,70},{-28,69.9},{-23.8,69.9}},
       color={255,128,0}));
-  connect(partialCorG.solarRadWinTrans, solRadWeightedSum.solarRad_in)
+  connect(corG.solarRadWinTrans, solRadWeightedSum.solarRad_in)
     annotation (Line(
       points={{-5,70},{0,70},{0,71},{5.4,71}},
       color={0,0,127}));

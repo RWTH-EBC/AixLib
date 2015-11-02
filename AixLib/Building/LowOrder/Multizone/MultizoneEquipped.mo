@@ -2,11 +2,10 @@ within AixLib.Building.LowOrder.Multizone;
 model MultizoneEquipped
   "Multizone with basic heat supply system, air handling unit, an arbitrary number of thermal zones (vectorized), and ventilation"
   extends AixLib.Building.LowOrder.Multizone.partialMultizone;
-  parameter Boolean withSchedule = false "Air flow calculated by schedule";
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor TAirAHUAvg
     "Averaged air temperature of the zones which are supplied by the AHU" annotation (Placement(transformation(extent={{16,-20},{8,-12}})));
-  BaseClasses.ThermSplitter splitterThermPercentAir(dimension=dimension,
-      splitFactor=AixLib.Building.LowOrder.BaseClasses.ZoneFactorsZero(dimension, zoneParam)) annotation (
+  BaseClasses.ThermSplitter splitterThermPercentAir(dimension=buildingParam.numZones,
+      splitFactor=AixLib.Building.LowOrder.BaseClasses.ZoneFactorsZero(buildingParam.numZones, zoneParam)) annotation (
       Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=0,
@@ -20,11 +19,11 @@ model MultizoneEquipped
         extent={{7,-7},{-7,7}},
         rotation=-90,
         origin={43,-93})));
-  Utilities.Sources.HeaterCooler.HeaterCoolerPI idealHeaterCooler[dimension](
+  Utilities.Sources.HeaterCooler.HeaterCoolerPI idealHeaterCooler[buildingParam.numZones](
      zoneParam=zoneParam,
     each recOrSep=true,
     each staOrDyn=true) annotation (Placement(transformation(extent={{-32,-54},{-6,-28}})));
-  Modelica.Blocks.Interfaces.RealInput TSetHeater[dimension]
+  Modelica.Blocks.Interfaces.RealInput TSetHeater[buildingParam.numZones]
     "Set point for heater" annotation (Placement(transformation(
         extent={{20,-20},{-20,20}},
         rotation=270,
@@ -43,9 +42,9 @@ model MultizoneEquipped
     efficiencyHRS_disabled=buildingParam.efficiencyHRS_disabled) annotation (Placement(transformation(extent={{-54,-24},{22,46}})));
   BaseClasses.AirFlowRate airFlowRate(
     zoneParam=zoneParam,
-    withSchedule=withSchedule,
-    dimension=dimension) annotation (Placement(transformation(extent={{-72,6},{-60,22}})));
-  Modelica.Blocks.Interfaces.RealInput TSetCooler[dimension]
+    dimension=buildingParam.numZones,
+    withSchedule=true)                annotation (Placement(transformation(extent={{-72,6},{-60,22}})));
+  Modelica.Blocks.Interfaces.RealInput TSetCooler[buildingParam.numZones]
     "Set point for cooler" annotation (Placement(transformation(
         extent={{20,-20},{-20,20}},
         rotation=270,
@@ -71,20 +70,20 @@ model MultizoneEquipped
     idealHeaterCooler, 1)] "Power for cooling" annotation (Placement(
         transformation(extent={{94,-76},{114,-56}}), iconTransformation(extent={{100,-70},
             {114,-56}})));
-  BaseClasses.Split splitterVentilationV(nout=dimension, coefficients=
-        AixLib.Building.LowOrder.BaseClasses.ZoneFactorsZero(dimension,
+  BaseClasses.Split splitterVentilationV(nout=buildingParam.numZones, coefficients=
+        AixLib.Building.LowOrder.BaseClasses.ZoneFactorsZero(buildingParam.numZones,
         zoneParam)) annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=90,
         origin={48,24})));
-  BaseClasses.Split splitterVentilationT(nout=dimension, coefficients=fill(1,
-        dimension)) annotation (Placement(transformation(
+  BaseClasses.Split splitterVentilationT(nout=buildingParam.numZones, coefficients=fill(1,
+        buildingParam.numZones)) annotation (Placement(transformation(
         extent={{-5,-5},{5,5}},
         rotation=90,
         origin={23,39})));
 equation
   aHUFull.phi_extractAir = hold(aHUFull.phi_sup);
-  for i in 1:dimension loop
+  for i in 1:buildingParam.numZones loop
     connect(internalGains[(i*3)-2], airFlowRate.relOccupation[i]) annotation (Line(
       points={{76,-100},{74,-100},{74,-22},{-76,-22},{-76,10.8},{-72,10.8}},
       color={0,0,127},

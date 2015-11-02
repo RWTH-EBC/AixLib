@@ -1,6 +1,5 @@
 within AixLib.Building.LowOrder.Multizone;
 partial model partialMultizone "partial class for multizone models"
-  parameter Integer dimension = 6 "Dimension of the zone vector";
   parameter AixLib.DataBase.Buildings.BuildingBaseRecord buildingParam
     "Choose setup for the building" annotation (choicesAllMatching = false);
 protected
@@ -8,9 +7,9 @@ protected
     "Choose setup for zones" annotation (choicesAllMatching=false);
   parameter Integer orientations[:]=zoneParam.n "Number cardinal directions";
 public
-  replaceable AixLib.Building.LowOrder.ThermalZone.ThermalZoneEquipped zone[dimension](
-      zoneParam=zoneParam)                                                             constrainedby
-    AixLib.Building.LowOrder.ThermalZone.partialThermalZone                                                                                                  annotation (Placement(transformation(extent={{40,35},
+  replaceable AixLib.Building.LowOrder.ThermalZone.ThermalZoneEquipped zone[buildingParam.numZones](
+      zoneParam=zoneParam) constrainedby
+    AixLib.Building.LowOrder.ThermalZone.partialThermalZone annotation (Placement(transformation(extent={{40,35},
             {80,75}})),choicesAllMatching=true);
   AixLib.Utilities.Interfaces.SolarRad_in radIn[max(orientations)] annotation (
       Placement(transformation(
@@ -21,7 +20,7 @@ public
         rotation=270,
         origin={-62,90})));
 
-  Modelica.Blocks.Interfaces.RealInput internalGains[3*dimension]
+  Modelica.Blocks.Interfaces.RealInput internalGains[3*buildingParam.numZones]
     "Connect the input table for internal gains<br>Persons, machines, light"
     annotation (Placement(transformation(extent={{20,-20},{-20,20}},
         rotation=-90,
@@ -40,7 +39,7 @@ public
         origin={-16,94})));
 
 equation
-  for i in 1:dimension loop
+  for i in 1:buildingParam.numZones loop
     connect(internalGains[(i*3)-2], zone[i].internalGains[1]) annotation (Line(
       points={{76,-100},{76,35.8}},
       color={0,0,127},

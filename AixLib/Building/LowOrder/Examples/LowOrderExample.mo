@@ -1,7 +1,6 @@
 within AixLib.Building.LowOrder.Examples;
 model LowOrderExample
   extends Modelica.Icons.Example;
-  import AixLib;
   output Real TRoom;
 
 parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();
