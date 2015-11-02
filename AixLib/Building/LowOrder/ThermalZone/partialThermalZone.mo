@@ -3,7 +3,14 @@ partial model partialThermalZone
   "partial for ready-to-use Low Order building model"
   parameter DataBase.Buildings.ZoneBaseRecord zoneParam = DataBase.Buildings.OfficePassiveHouse.OPH_1_Meeting()
     "choose setup for this zone"                                                                                                     annotation(choicesAllMatching = true);
-  Modelica.Blocks.Interfaces.RealInput infiltrationRate annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 90, origin = {-40, -100}), iconTransformation(extent = {{-12, -12}, {12, 12}}, rotation = 90, origin = {-40, -88})));
+  Modelica.Blocks.Interfaces.RealInput ventilationRate annotation (Placement(
+        transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=90,
+        origin={-40,-100}), iconTransformation(
+        extent={{-12,-12},{12,12}},
+        rotation=90,
+        origin={-40,-88})));
   Modelica.Blocks.Interfaces.RealInput weather[3] if zoneParam.withOuterwalls
     "[1]: Air temperature<br/>[2]: Horizontal radiation of sky<br/>[3]: Horizontal radiation of earth"
                                                                                                         annotation(Placement(transformation(extent = {{-120, 0}, {-80, 40}}), iconTransformation(extent = {{-86, -12}, {-62, 12}})));
@@ -13,7 +20,7 @@ partial model partialThermalZone
   replaceable BaseClasses.ThermalZonePhysics.ThermalZonePhysicsEBCMod thermalZonePhysics(RRest = zoneParam.RRest, R1o = zoneParam.R1o, C1o = zoneParam.C1o, Ao = zoneParam.Ao, T0all = zoneParam.T0all, alphaowi = zoneParam.alphaowi, alphaowo = zoneParam.alphaowo, epso = zoneParam.epso, R1i = zoneParam.R1i, C1i = zoneParam.C1i, Ai = zoneParam.Ai, Vair = zoneParam.Vair, alphaiwi = zoneParam.alphaiwi, rhoair = zoneParam.rhoair, cair = zoneParam.cair, epsi = zoneParam.epsi, aowo = zoneParam.aowo, epsw = zoneParam.epsw, g = zoneParam.g, Imax = zoneParam.Imax, n = zoneParam.n, weightfactorswall = zoneParam.weightfactorswall, weightfactorswindow = zoneParam.weightfactorswindow, weightfactorground = zoneParam.weightfactorground, temperatureground = zoneParam.temperatureground, Aw = zoneParam.Aw, gsunblind = zoneParam.gsunblind, withInnerwalls = zoneParam.withInnerwalls, withWindows = zoneParam.withWindows, withOuterwalls = zoneParam.withOuterwalls, splitfac = zoneParam.splitfac) constrainedby
     AixLib.Building.LowOrder.BaseClasses.ThermalZonePhysics.partialThermalZonePhysics
                                                                                       annotation(Placement(transformation(extent = {{-20, 0}, {20, 40}})),choicesAllMatching=true);
-  Modelica.Blocks.Interfaces.RealInput infiltrationTemperature[2] annotation (
+  Modelica.Blocks.Interfaces.RealInput ventilationTemperature annotation (
       Placement(transformation(extent={{-120,-60},{-80,-20}}),
         iconTransformation(extent={{-88,-52},{-62,-26}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a internalGainsConv annotation(Placement(transformation(extent = {{-10, -100}, {10, -80}}), iconTransformation(extent = {{-10, -100}, {10, -80}})));

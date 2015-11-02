@@ -17,7 +17,7 @@ model TestCase11
     C1o=1.6008e+006,
     Vair=0.01,
     alphaiwi=3.0013245)                                                                                                     annotation(Placement(transformation(extent = {{64, 36}, {98, 76}})));
-  HVAC.HeatGeneration.IdealHeaterCooler                heater(                                    h_cooler = 0,                   KR_cooler = 1000,                TN_cooler = 1, h_heater = 500, l_cooler = -500, Cooler_on = false,
+  Utilities.Sources.HeaterCooler.HeaterCoolerPI        heater(                                    h_cooler = 0,                   KR_cooler = 1000,                TN_cooler = 1, h_heater = 500, l_cooler = -500, Cooler_on = false,
     KR_heater=10,
     TN_heater=0.1)                                                                                                     annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin = {-26, -20})));
   Modelica.Blocks.Sources.CombiTimeTable setTemp(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, columns = {2, 3},
@@ -47,22 +47,26 @@ model TestCase11
         500; 5158800,27.5,500; 5162400,27.6,500; 5166000,27,500; 5169600,26.9,
         500; 5173200,26.7,500; 5176800,26.6,500; 5180400,26.5,500; 5184000,
         26.4,500])                                                                                                     annotation(Placement(transformation(extent = {{-96, 78}, {-76, 97}})));
-  Modelica.Blocks.Math.Add sumHeatLoad annotation(Placement(transformation(extent = {{86, 86}, {96, 96}})));
-  HVAC.HeatGeneration.IdealHeaterCooler                cooler(                                    h_cooler = 0, KR_heater = 1000, KR_cooler = 1000, TN_heater = 1, TN_cooler = 1, h_heater = 500, l_cooler = -500, Heater_on = false) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin = {-26, -48})));
+  Modelica.Blocks.Math.Add sumHeatLoad annotation(Placement(transformation(extent={{24,-26},
+            {34,-16}})));
+            Utilities.Sources.HeaterCooler.HeaterCoolerPI                cooler(                                    h_cooler = 0, KR_heater = 1000, KR_cooler = 1000, TN_heater = 1, TN_cooler = 1, h_heater = 500, l_cooler = -500, Heater_on = false) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin = {-26, -48})));
   Modelica.Blocks.Sources.CombiTimeTable innerLoads(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic,  tableOnFile = false, columns = {2, 3}, table = [0, 0, 0; 3600, 0, 0; 7200, 0, 0; 10800, 0, 0; 14400, 0, 0; 18000, 0, 0; 21600, 0, 0; 21600, 0, 1000; 25200, 0, 1000; 28800, 0, 1000; 32400, 0, 1000; 36000, 0, 1000; 39600, 0, 1000; 43200, 0, 1000; 46800, 0, 1000; 50400, 0, 1000; 54000, 0, 1000; 57600, 0, 1000; 61200, 0, 1000; 64800, 0, 1000; 64800, 0, 0; 68400, 0, 0; 72000, 0, 0; 75600, 0, 0; 79200, 0, 0; 82800, 0, 0; 86400, 0, 0]) annotation(Placement(transformation(extent = {{-24, -93}, {-10, -79}})));
   Modelica.Blocks.Sources.Constant solarRadiation(k=0)
     annotation (Placement(transformation(extent={{-36,72},{-16,92}})));
+  Modelica.Blocks.Sources.Constant const(k=0)
+    annotation (Placement(transformation(extent={{-82,4},{-62,24}})));
+  Modelica.Blocks.Sources.Constant const1(
+                                         k=0)
+    annotation (Placement(transformation(extent={{-78,-80},{-58,-60}})));
 equation
   connect(machinesRadiative.port, heatToStar.Therm) annotation (Line(
       points={{30,-83},{38,-83},{38,-82},{50.8,-82}},
       color={191,0,0}));
-  connect(setTemp.y[1], heater.soll_heat) annotation(Line(points = {{-59, -20}, {-50, -20}, {-50, -23}, {-30.8, -23}}, color = {0, 0, 127}));
-  connect(sumHeatLoad.u2, cooler.coolMeter.p);
-  connect(cooler.HeatCoolRoom, reducedModel.heatConvInnerwall.port_b);
-  connect(sumHeatLoad.u1, heater.heatMeter.p);
+  connect(cooler.heatCoolRoom, reducedModel.heatConvInnerwall.port_b);
   referenceLoad[1] = -reference.y[2];
   simulationLoad = sumHeatLoad.y;
-  connect(setTemp.y[2], cooler.soll_cool) annotation(Line(points = {{-59, -20}, {-44, -20}, {-44, -43.2}, {-30.8, -43.2}}, color = {0, 0, 127}));
+  connect(setTemp.y[2], cooler.setPointCool) annotation(Line(points={{-59,-20},
+          {-44,-20},{-44,-45.6},{-33.2,-45.6}},                                                                               color = {0, 0, 127}));
   connect(innerLoads.y[2], machinesRadiative.Q_flow) annotation(Line(points = {{-9.3, -86}, {-2, -86}, {-2, -83}, {4, -83}}, color = {0, 0, 127}));
   connect(heatToStar.Star, reducedModel.internalGainsRad) annotation (Line(
       points={{69.1,-82},{93.75,-82},{93.75,38}},
@@ -81,9 +85,19 @@ equation
   connect(solarRadiation.y, reducedModel.solarRad_in) annotation (Line(
       points={{-15,82},{73.18,82},{73.18,74.8}},
       color={0,0,127}));
-  connect(heater.HeatCoolRoom, reducedModel.internalGainsConv) annotation (Line(
-      points={{-24.8,-29.4},{84.4,-29.4},{84.4,38}},
-      color={191,0,0}));
+  connect(setTemp.y[1], heater.setPointHeat) annotation (Line(points={{-59,-20},
+          {-38,-20},{-38,-22.2},{-33.2,-22.2}}, color={0,0,127}));
+  connect(heater.heatCoolRoom, reducedModel.internalGainsConv) annotation (
+      Line(points={{-30,-29},{-30,-34},{84.4,-34},{84.4,38}}, color={191,0,0}));
+  connect(heater.HeatingPower, sumHeatLoad.u1) annotation (Line(points={{-22,-30},
+          {-22,-32},{18,-32},{18,-18},{23,-18}}, color={0,0,127}));
+  connect(const.y, heater.setPointCool) annotation (Line(points={{-61,14},{-54,
+          14},{-54,12},{-54,-17.6},{-33.2,-17.6}}, color={0,0,127}));
+  connect(cooler.CoolingPower, sumHeatLoad.u2) annotation (Line(points={{-26.6,
+          -58},{-26,-58},{-26,-70},{10,-70},{10,-24},{23,-24}}, color={0,0,127}));
+  connect(const1.y, cooler.setPointHeat) annotation (Line(points={{-57,-70},{-42,
+          -70},{-42,-50.2},{-33.2,-50.2}}, color={0,0,127}));
+
   annotation(experiment(StopTime = 5.184e+006, Interval = 3600),
              __Dymola_Commands(file=
                                "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Linear/TestCase11.mos"
@@ -104,5 +118,7 @@ equation
 <p>Maximum deviation: 55.95 W </p>
 <p>All values are given in the VDI 6007-1. </p>
 <p>A script to run this test case can be found in AixLib\\Resources\\Scripts\\Dymola\\Building\\LowOrder\\Examples\\Validation\\Linear.</p>
-</html>"));
+</html>"),
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+            100}})));
 end TestCase11;

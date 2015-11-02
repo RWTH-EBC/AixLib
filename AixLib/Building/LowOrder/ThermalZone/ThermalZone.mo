@@ -44,12 +44,12 @@ equation
           95,95}));
   connect(weather, thermalZonePhysics.weather) annotation (Line(points={{-100,
           20},{-58,20},{-58,23.8},{-15,23.8}}, color={0,0,127}));
-  connect(infiltrationRate, thermalZonePhysics.ventilationRate) annotation (
+  connect(ventilationRate, thermalZonePhysics.ventilationRate) annotation (
       Line(points={{-40,-100},{-40,-16},{-8,-16},{-8,2.8}}, color={0,0,127}));
   connect(solarRad_in, thermalZonePhysics.solarRad_in) annotation (Line(points=
           {{-90,80},{-72,80},{-52,80},{-52,33},{-15.4,33}}, color={255,128,0}));
-  connect(infiltrationTemperature[1], thermalZonePhysics.ventilationTemperature)
-    annotation (Line(points={{-100,-50},{-60,-50},{-60,12},{-15.2,12}}, color={
+  connect(ventilationTemperature, thermalZonePhysics.ventilationTemperature)
+    annotation (Line(points={{-100,-40},{-60,-40},{-60,12},{-15.2,12}}, color={
           0,0,127}));
   annotation(Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
@@ -77,6 +77,6 @@ equation
           Implemented</li>
  </ul>
  </html>"),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-            100,100}})));
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+            100}})));
 end ThermalZone;

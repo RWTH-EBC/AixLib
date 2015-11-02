@@ -5,7 +5,8 @@ model LowOrderExample
   output Real TRoom;
 
 parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();
-  ThermalZone thermalZone(zoneParam = AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_1_Meeting()) annotation(Placement(transformation(extent = {{-10, -12}, {16, 14}})));
+  AixLib.Building.LowOrder.ThermalZone.ThermalZone
+              thermalZone(zoneParam = AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_1_Meeting()) annotation(Placement(transformation(extent = {{-10, -12}, {16, 14}})));
   Components.Weather.Weather weather(                                                                                           Air_temp = true, Sky_rad = true, Ter_rad = true, Outopt = 1,
     fileName=
         "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt",
@@ -108,8 +109,7 @@ equation
   heatDemand = idealHeaterCooler.heatMeter.q_kwh;
   coolDemand = idealHeaterCooler.coolMeter.q_kwh;
   connect(weather.SolarRadiation_OrientedSurfaces, thermalZone.solarRad_in) annotation(Line(points = {{-52.8, 41}, {-52.8, 8.8}, {-7.4, 8.8}}, color = {255, 128, 0}));
-  connect(infiltrationRate.y, thermalZone.infiltrationRate) annotation(Line(points = {{-73.3, -25}, {-2.2, -25}, {-2.2, -10.44}}, color = {0, 0, 127}));
-  connect(infiltrationTemperature.y, thermalZone.infiltrationTemperature) annotation(Line(points = {{-73.3, -3}, {-40.65, -3}, {-40.65, -4.07}, {-6.75, -4.07}}, color = {0, 0, 127}));
+  connect(infiltrationRate.y, thermalZone.ventilationRate) annotation(Line(points = {{-73.3, -25}, {-2.2, -25}, {-2.2, -10.44}}, color = {0, 0, 127}));
   connect(weather.WeatherDataVector, thermalZone.weather) annotation(Line(points = {{-45.1, 41}, {-45.1, 1}, {-6.62, 1}}, color = {0, 0, 127}));
   connect(internalGains.y, thermalZone.internalGains) annotation(Line(points = {{28.7, -64}, {34, -64}, {34, -34}, {13.4, -34}, {13.4, -10.44}}, color = {0, 0, 127}));
   connect(heatingCooling.y[1], idealHeaterCooler.soll_heat) annotation (Line(
@@ -118,6 +118,11 @@ equation
   connect(heatingCooling.y[2], idealHeaterCooler.soll_cool) annotation (Line(
       points={{-41.3,-68},{-16.8,-68},{-16.8,-46.8}},
       color={0,0,127}));
+  connect(idealHeaterCooler.HeatCoolRoom, thermalZone.internalGainsConv)
+    annotation (Line(points={{-2.6,-40.8},{3,-40.8},{3,-10.7}}, color={191,0,0}));
+  connect(infiltrationTemperature.y, thermalZone.ventilationTemperature)
+    annotation (Line(points={{-73.3,-3},{-39.65,-3},{-39.65,-4.07},{-6.75,-4.07}},
+        color={0,0,127}));
   annotation (Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Example for setting up a simulation for a thermal zone.</p>
@@ -131,5 +136,7 @@ equation
 <ul>
 <li><i>June 24, 2014 </i>by Moritz Lauster:<br>Implemented </li>
 </ul>
-</html>"),  experiment(StopTime=86400, Interval=3600));
+</html>"),  experiment(StopTime=86400, Interval=3600),
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+            100}})));
 end LowOrderExample;
