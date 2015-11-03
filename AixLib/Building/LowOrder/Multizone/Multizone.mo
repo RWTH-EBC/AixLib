@@ -1,9 +1,7 @@
 within AixLib.Building.LowOrder.Multizone;
 model Multizone
   "Multizone with an arbitrary number of thermal zones (vectorized)"
-  extends AixLib.Building.LowOrder.Multizone.partialMultizone(redeclare
-      ThermalZone.ThermalZone zone);
-
+  extends AixLib.Building.LowOrder.Multizone.partialMultizone;
   Utilities.Interfaces.Star internalGainsRad[buildingParam.numZones]
     annotation (Placement(transformation(extent={{40,-100},{60,-80}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a internalGainsConv[
