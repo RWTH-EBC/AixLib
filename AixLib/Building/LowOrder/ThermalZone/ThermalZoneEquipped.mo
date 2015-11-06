@@ -30,22 +30,16 @@ model ThermalZoneEquipped
     annotation (Placement(transformation(extent={{-64,-72},{-44,-52}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor tZone
     annotation (Placement(transformation(extent={{-24,-48},{-32,-40}})));
-  Modelica.Blocks.Math.Add addInfiltrationVentilation(k1=+1, k2=1/zoneParam.Vair)
+  Modelica.Blocks.Math.Add addInfiltrationVentilation
     annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=90,
         origin={-8,-26})));
-  Utilities.Psychrometrics.MixedTemperature
-                             mixedTemperature(vAir=zoneParam.Vair)
+  Utilities.Psychrometrics.MixedTemperature mixedTemperature
     annotation (Placement(transformation(extent={{-64,-24},{-44,-4}})));
 equation
   if zoneParam.withOuterwalls then
   end if;
-  connect(ventilationController.y, mixedTemperature.infiltrationFlowIn)
-    annotation (Line(
-      points={{-45,-62},{-40,-62},{-40,-36},{-72,-36},{-72,-21},{-63.6,-21}},
-      color={0,0,127},
-      smooth=Smooth.None));
   connect(ventilationController.y, addInfiltrationVentilation.u1) annotation (
       Line(
       points={{-45,-62},{-11.6,-62},{-11.6,-33.2}},
@@ -100,22 +94,24 @@ equation
     annotation (Line(points={{-44,-14},{-30,-14},{-30,12},{-15.2,12}}, color={0,
           0,127}));
   connect(addInfiltrationVentilation.y, thermalZonePhysics.ventilationRate)
-    annotation (Line(points={{-8,-19.4},{-8,2.8},{-8,2.8}}, color={0,0,127}));
+    annotation (Line(points={{-8,-19.4},{-8,2.8}},          color={0,0,127}));
   connect(weather, thermalZonePhysics.weather) annotation (Line(points={{-100,
           20},{-58,20},{-58,23.8},{-15,23.8}}, color={0,0,127}));
   connect(solarRad_in, thermalZonePhysics.solarRad_in) annotation (Line(points=
           {{-90,80},{-66,80},{-40,80},{-40,33},{-15.4,33}}, color={255,128,0}));
-  connect(ventilationTemperature, mixedTemperature.ventilationTemperatureIn)
-    annotation (Line(points={{-100,-40},{-88,-40},{-78,-40},{-78,-6.2},{-63.6,-6.2}},
-                  color={0,0,127}));
-  connect(ventilationRate, mixedTemperature.ventilationFlowIn) annotation (
-      Line(points={{-40,-100},{-40,-78},{-76,-78},{-76,-11},{-63.6,-11}}, color=
-         {0,0,127}));
   connect(ventilationController.Tambient, weather[1]) annotation (Line(points={{-64,-62},
           {-80,-62},{-80,20},{-100,20},{-100,6.66667}},           color={0,0,127}));
-  connect(weather[1], mixedTemperature.infiltrationTemperatureIn) annotation (
-      Line(points={{-100,6.66667},{-86,6.66667},{-70,6.66667},{-70,-16},{-63.6,
-          -16}}, color={0,0,127}));
+  connect(weather[1], mixedTemperature.temperature_flow2) annotation (Line(
+        points={{-100,6.66667},{-100,-16},{-63.6,-16}}, color={0,0,127}));
+  connect(ventilationController.y, mixedTemperature.flowRate_flow2) annotation
+    (Line(points={{-45,-62},{-40,-62},{-40,-30},{-70,-30},{-70,-21},{-63.6,-21}},
+        color={0,0,127}));
+  connect(ventilationRate, mixedTemperature.flowRate_flow1) annotation (Line(
+        points={{-40,-100},{-40,-76},{-74,-76},{-74,-11},{-63.6,-11}}, color={0,
+          0,127}));
+  connect(ventilationTemperature, mixedTemperature.temperature_flow1)
+    annotation (Line(points={{-100,-40},{-76,-40},{-76,-6.2},{-63.6,-6.2}},
+        color={0,0,127}));
   annotation(Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <ul>
@@ -139,6 +135,6 @@ equation
 <ul>
 <li><i>June, 2015&nbsp;</i> by Moritz Lauster:<br>Implemented </li>
 </ul>
-</html>"), Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-            {100,100}})));
+</html>"), Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+            -100},{100,100}})));
 end ThermalZoneEquipped;

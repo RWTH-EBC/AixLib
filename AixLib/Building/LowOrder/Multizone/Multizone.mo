@@ -3,17 +3,24 @@ model Multizone
   "Multizone with an arbitrary number of thermal zones (vectorized)"
   extends AixLib.Building.LowOrder.Multizone.partialMultizone;
   Utilities.Interfaces.Star internalGainsRad[buildingParam.numZones]
+    "Radiative Internal Gains"
     annotation (Placement(transformation(extent={{40,-100},{60,-80}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a internalGainsConv[
-    buildingParam.numZones] annotation (Placement(transformation(extent={{6,-100},{26,-80}}),
+    buildingParam.numZones] "Convective Internal Gains" annotation (Placement(transformation(extent={{6,-100},{26,-80}}),
         iconTransformation(extent={{6,-100},{26,-80}})));
-  Modelica.Blocks.Interfaces.RealInput ventilationTemperature[buildingParam.numZones]
+  Modelica.Blocks.Interfaces.RealInput ventilationTemperature[buildingParam.numZones](
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC",
+    min=0) "Ventilation and infiltration temperature"
     annotation (Placement(transformation(extent={{-128,-8},{-88,32}}),
         iconTransformation(
         extent={{-6,-6},{6,6}},
         rotation=0,
         origin={-94,16})));
-  Modelica.Blocks.Interfaces.RealInput ventilationRate[buildingParam.numZones] annotation (
+  Modelica.Blocks.Interfaces.RealInput ventilationRate[buildingParam.numZones](
+  final quantity="VolumeFlowRate",
+  final unit="1/h") "Ventilation and infiltration rate" annotation (
       Placement(transformation(extent={{-128,-48},{-88,-8}}),
         iconTransformation(extent={{-100,-20},{-88,-8}})));
 equation

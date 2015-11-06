@@ -5,13 +5,19 @@ model HeaterCoolerPI "heater and cooler with variable setpoints"
   parameter Boolean Cooler_on = true "Activates the cooler" annotation(Dialog(tab = "Cooler",enable=not recOrSep));
   parameter Boolean staOrDyn = true "Static or dynamic activation of heater" annotation(choices(choice = true "Static", choice =  false "Dynamic",
                   radioButtons = true));
-  Modelica.Blocks.Interfaces.RealInput setPointCool annotation (
+  Modelica.Blocks.Interfaces.RealInput setPointCool(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC") annotation (
       Placement(transformation(extent={{-120,-60},{-80,-20}}),
         iconTransformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={-24,-72})));
-  Modelica.Blocks.Interfaces.RealInput setPointHeat annotation (
+  Modelica.Blocks.Interfaces.RealInput setPointHeat(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC") annotation (
       Placement(transformation(extent={{-120,20},{-80,60}}), iconTransformation(
         extent={{-20,-20},{20,20}},
         rotation=90,

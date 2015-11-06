@@ -1,6 +1,8 @@
 within AixLib.Utilities.Sources.HeaterCooler;
 partial model partialHeaterCooler
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCoolRoom annotation(Placement(transformation(extent={{80,-50},
+
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCoolRoom
+    "Heat port to thermal zone"                                                                annotation(Placement(transformation(extent={{80,-50},
             {100,-30}}), iconTransformation(extent={{80,-50},{100,-30}})));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),

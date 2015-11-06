@@ -1,21 +1,22 @@
 within AixLib.Utilities.Sources.HeaterCooler;
 partial model partialHeaterCoolerPI
   extends AixLib.Utilities.Sources.HeaterCooler.partialHeaterCooler;
-  parameter Real h_heater = 0 "upper limit controller output of the heater" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
-  parameter Real l_heater = 0 "lower limit controller output of the heater" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
+  parameter Real h_heater = 0 "Upper limit controller output of the heater" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
+  parameter Real l_heater = 0 "Lower limit controller output of the heater" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
   parameter Real KR_heater = 1000 "Gain of the heating controller" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
   parameter Modelica.SIunits.Time TN_heater = 1
     "Time constant of the heating controller" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
-  parameter Real h_cooler = 0 "upper limit controller output of the cooler"
+  parameter Real h_cooler = 0 "Upper limit controller output of the cooler"
                                                                            annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
-  parameter Real l_cooler = 0 "lower limit controller output of the cooler"          annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
+  parameter Real l_cooler = 0 "Lower limit controller output of the cooler"          annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
   parameter Real KR_cooler = 1000 "Gain of the cooling controller"
                                                                   annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
   parameter Modelica.SIunits.Time TN_cooler = 1
     "Time constant of the cooling controller" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
   parameter Boolean recOrSep = false "Use record or seperate parameters" annotation(choices(choice =  false
         "Seperate",choice = true "Record",radioButtons = true));
-  parameter AixLib.DataBase.Buildings.ZoneBaseRecord zoneParam annotation(choicesAllMatching=true,Dialog(enable=recOrSep));
+  parameter AixLib.DataBase.Buildings.ZoneBaseRecord zoneParam
+    "Zone definition"                                                            annotation(choicesAllMatching=true,Dialog(enable=recOrSep));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow Cooling annotation(Placement(transformation(extent={{26,-23},
             {6,-2}})));
   Control.PITemp pITempCool(
@@ -35,10 +36,14 @@ partial model partialHeaterCoolerPI
     KR=if not recOrSep then KR_heater else zoneParam.KR_heater,
     TN=if not recOrSep then TN_heater else zoneParam.TN_heater)
     "PI control for heater" annotation (Placement(transformation(extent={{-20,10},{0,30}})));
-  Modelica.Blocks.Interfaces.RealOutput HeatingPower "Power for heating"
+  Modelica.Blocks.Interfaces.RealOutput HeatingPower(
+   final quantity="HeatFlowRate",
+   final unit="W") "Power for heating"
     annotation (Placement(transformation(extent={{80,20},{120,60}}),
         iconTransformation(extent={{80,20},{120,60}})));
-  Modelica.Blocks.Interfaces.RealOutput CoolingPower "Power for cooling"
+  Modelica.Blocks.Interfaces.RealOutput CoolingPower(
+   final quantity="HeatFlowRate",
+   final unit="W") "Power for cooling"
     annotation (Placement(transformation(extent={{80,-26},{120,14}}),
         iconTransformation(extent={{80,-26},{120,14}})));
 equation

@@ -1,35 +1,32 @@
 within AixLib.Building.LowOrder.BaseClasses;
 function SumCondition "Sums up the entries of a vector if a condition is true"
 
-  input Real vector[:];
+  input Real vector[:] "Input vector";
 
-  input Boolean condition[:];
+  input Boolean condition[:] "Vector of conditions";
 
-  input Integer Dimension "Number of Zones";
+  input Integer dimension "Number of Zones";
 
-  output Real vectorSum = 0;
+  output Real vectorSum = 0 "Sum of vector elements where condition is true";
 
 algorithm
-  for i in 1:Dimension loop
+  for i in 1:dimension loop
     if condition[i] then
       vectorSum :=vectorSum + vector[i];
     end if;
   end for;
 
   annotation (Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Inputs: </p>
 <ol>
 <li>Vector</li>
-<li>Condition (Vector with boolean values)</li>
-<li>Dimension (Dimension of vectors)</li>
+<li>Condition (vector with boolean values)</li>
+<li>Dimension (dimension of vectors)</li>
 </ol>
 <p>Output:</p>
 <ol>
-<li>Sum of Vector entries where condition is true</li>
+<li>Sum of vector elements where condition is true</li>
 </ol>
-<p><h4><span style=\"color:#008000\">Level of Development</span></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars2.png\"/></p>
 </html>", revisions="<html>
 <p><ul>
 <li><i>October 30, 2015&nbsp;</i> by Moritz Lauster:<br/>Moved and adapted to AixLib</li>

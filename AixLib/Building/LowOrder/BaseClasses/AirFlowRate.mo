@@ -3,38 +3,41 @@ model AirFlowRate
   "Calculates the air flow rate for an Air Handling Unit either based on a given profile or based on occupation"
 
   parameter Integer dimension "Number of Zones";
-  parameter AixLib.DataBase.Buildings.ZoneBaseRecord zoneParam[dimension]
-    "Zone Setup";
-  parameter Boolean withSchedule = false
-    "Choose whether the air flow rate should be calculated using the schedule";
-  Real AirFlowVector[dimension]
+  parameter DataBase.Buildings.ZoneBaseRecord zoneParam[dimension] "Zone Setup";
+  parameter Boolean withProfile = false
+    "Choose which input should be considered" annotation(choices(choice =  false
+        "Relative Occupation",choice = true "Profile",radioButtons = true));
+  Real airFlowVector[dimension]
     "Temp Variable to sum up the air flow in the zones";
-  Modelica.Blocks.Interfaces.RealInput schedule "Input for AHU schedule"
+  Modelica.Blocks.Interfaces.RealInput profile
+    "Input profile for AHU operation"
     annotation (Placement(transformation(extent={{-120,20},{-80,60}})));
-  Modelica.Blocks.Interfaces.RealOutput airFlowRateOutput
-    "Output for calculated air flow rate"
+  Modelica.Blocks.Interfaces.RealOutput airFlowRateOutput(
+  final quantity="VolumeFlowRate",
+  final unit="m3/s") "Output for calculated air flow rate"
     annotation (Placement(transformation(extent={{80,-20},{120,20}})));
-  Modelica.Blocks.Interfaces.RealInput relOccupation[dimension] annotation (
+  Modelica.Blocks.Interfaces.RealInput relOccupation[dimension]
+    "Input for relative occupation"                             annotation (
       Placement(transformation(extent={{-120,-60},{-80,-20}}),
         iconTransformation(extent={{-120,-60},{-80,-20}})));
 
 equation
-  if withSchedule then
-    AirFlowVector * 3600 = ((zoneParam.minAHU + (zoneParam.maxAHU - zoneParam.minAHU) * schedule) .* zoneParam.RoomArea);
+  if withProfile then
+    airFlowVector * 3600 = ((zoneParam.minAHU + (zoneParam.maxAHU - zoneParam.minAHU) * profile) .* zoneParam.RoomArea);
     airFlowRateOutput =SumCondition(
-      AirFlowVector,
+      airFlowVector,
       zoneParam.withAHU,
       dimension);
   else
-    AirFlowVector * 3600 = ((zoneParam.minAHU + (zoneParam.maxAHU - zoneParam.minAHU) .* relOccupation) .* zoneParam.RoomArea);
+    airFlowVector * 3600 = ((zoneParam.minAHU + (zoneParam.maxAHU - zoneParam.minAHU) .* relOccupation) .* zoneParam.RoomArea);
     airFlowRateOutput =SumCondition(
-      AirFlowVector,
+      airFlowVector,
       zoneParam.withAHU,
       dimension);
   end if;
 
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}), graphics), Icon(coordinateSystem(
+            -100},{100,100}})),           Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={
         Ellipse(
           extent={{16,62},{-64,-6}},
@@ -90,15 +93,17 @@ equation
           textString="Schedule",
           lineColor={0,0,0})}),
     Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
-<p>
-Vdot_air = [minAHU + deltaAHU * (Schedule OR relative Occupation)] * Azone * 3600^-1
-</p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars2.png\"/></p>
+<p>This model calculates the volume flow (e.g. for an Air Handling Unit) dependent on:</p>
+<ul>
+<li>A minimal volume flow (minAHU) in m3/(m2*h)</li>
+<li>A maxmial volume flow (maxAHU = deltaAHU + minAHU) <span style=\"font-family: MS Shell Dlg 2;\">in m3/(m2*h)</span></li>
+<li>A given profile or relative occupation</li>
+</ul>
+<p><br>As AHUs typically work with m3/s, the model calculates the output air flow rate Vdot_air in m3/s.</p>
+<p><br>airFlowRateOutput = [minAHU + deltaAHU * (profile OR relative Occupation)] * Azone * 3600^-1 </p>
 </html>", revisions="<html>
 <p><ul>
-<li><i>October 30, 2015&nbsp;</i> by Moritz Lauster:<br/>Moved and adapted to AixLib</li>
+<li><i>October 30, 2015&nbsp;</i> by Moritz Lauster:<br/>Moved and adapted to AixLib. Some renaming and adding units</li>
 </ul></p>
 <p><ul>
 <li><i>March 3, 2014&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>

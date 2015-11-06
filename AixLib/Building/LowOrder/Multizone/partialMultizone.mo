@@ -9,9 +9,11 @@ protected
 public
   replaceable AixLib.Building.LowOrder.ThermalZone.ThermalZoneEquipped zone[buildingParam.numZones](
       zoneParam=zoneParam) constrainedby
-    AixLib.Building.LowOrder.ThermalZone.partialThermalZone annotation (Placement(transformation(extent={{40,35},
+    AixLib.Building.LowOrder.ThermalZone.partialThermalZone
+    "Choose thermal zone model"                                                         annotation (Placement(transformation(extent={{40,35},
             {80,75}})),choicesAllMatching=true);
-  AixLib.Utilities.Interfaces.SolarRad_in radIn[max(orientations)] annotation (
+  AixLib.Utilities.Interfaces.SolarRad_in radIn[max(orientations)]
+    "Solar Radiation"                                                                annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
@@ -21,7 +23,7 @@ public
         origin={-62,90})));
 
   Modelica.Blocks.Interfaces.RealInput internalGains[3*buildingParam.numZones]
-    "Connect the input table for internal gains<br>Persons, machines, light"
+    "Input profiles for internal gains persons, machines, light"
     annotation (Placement(transformation(extent={{20,-20},{-20,20}},
         rotation=-90,
         origin={76,-100}),
@@ -29,7 +31,7 @@ public
         rotation=180,
         origin={93,65})));
   Modelica.Blocks.Interfaces.RealInput weather[4]
-    "Weather Input Vector<br>[1]: Air Temperature<br>[2]: Water mass fraction<br>[3]: Sky Radiation<br>[4]: Terrestrial Radiation"
+    "Weather Input Vector [1]: Air Temperature [2]: Water mass fraction [3]: Sky Radiation [4]: Terrestrial Radiation"
     annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=270,
