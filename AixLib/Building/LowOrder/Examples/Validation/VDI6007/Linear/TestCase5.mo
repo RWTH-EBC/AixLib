@@ -91,7 +91,7 @@ equation
   connect(sunblind.Rad_Out, solarRadAdapter.solarRad_in) annotation (Line(
       points={{-17,78},{-7,78}},
       color={255,128,0}));
-  annotation(            experiment(StopTime=5.184e+006,Interval=3600, __Dymola_Algorithm="Lsodar"),
+  annotation (           experiment(StopTime=5.184e+006,Interval=3600, __Dymola_Algorithm="Lsodar"),
             __Dymola_Commands(file=
                                "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Linear/TestCase5.mos"
         "Simulate and plot"),

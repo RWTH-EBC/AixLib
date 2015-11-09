@@ -124,7 +124,7 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(splitterThermPercentAir.signalOutput, zone.internalGainsConv) annotation (Line(
-      points={{30,-16},{60,-16},{60,37}},
+      points={{30,-16},{60,-16},{60,43.4}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(TAirAHUAvg.port, splitterThermPercentAir.signalInput) annotation (
@@ -170,7 +170,8 @@ equation
   connect(TSetHeater, heaterCooler.setPointHeat) annotation (Line(points={{-20,-100},
           {-22,-100},{-22,-68},{-16.14,-68},{-16.14,-50.36}}, color={0,0,127}));
   connect(heaterCooler.heatCoolRoom, zone.internalGainsConv) annotation (Line(
-        points={{-7.3,-46.2},{60,-46.2},{60,37}}, color={191,0,0}));
+        points={{-7.3,-46.2},{60,-46.2},{60,43.4}},
+                                                  color={191,0,0}));
   connect(AirHandlingUnit.Pel, Pel) annotation (Line(points={{7.94,2.05556},{8,
           2.05556},{8,2},{56,2},{80,2},{80,16},{104,16}},
                                                  color={0,0,127}));
@@ -185,7 +186,7 @@ equation
         color={0,0,127}));
   connect(splitterVolumeFlowVentilation.y, zone.ventilationRate) annotation (
       Line(
-      points={{48,30.6},{48,37.4},{52,37.4}},
+      points={{48,30.6},{48,43},{52,43}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(replicatorTemperatureVentilation.y, zone.ventilationTemperature)
@@ -224,15 +225,10 @@ equation
 Cooling")}),
     Documentation(revisions="<html>
 <ul>
-<li><i>June 22, 2015&nbsp;</i> by Moritz Lauster:<br>Changed Building Physics to AixLib</li>
+<li><i>June 22, 2015&nbsp;</i> by Moritz Lauster:<br>Changed building physics to AixLib</li>
 <li><i>April 25, 2014&nbsp;</i> by Ole Odendahl:<br>Implemented</li>
 </ul>
 </html>", info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>House&nbsp;with&nbsp;basic&nbsp;heat&nbsp;supply&nbsp;system,&nbsp;air&nbsp;handling&nbsp;unit,&nbsp;an&nbsp;arbitrary&nbsp;number&nbsp;of&nbsp;thermal&nbsp;zones&nbsp;(vectorized),&nbsp;and&nbsp;ventilation </p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars2.png\"/></p>
-<h4><span style=\"color:#008000\">Concept</span></h4>
-<p>. </p>
+<p><span style=\"font-family: MS Shell Dlg 2;\">This is a multizone model with a variable number of thermal zones. It adds heater/cooler devices and an air handling unit. Outputs are the thermal demands of the zone heating as well as thermal and electrical demand of the air handling unit. This model is pre-configured and ready-to-use. The<a href=\"AixLib.Building.LowOrder.Multizone.partialMultizone\"> partial class</a> has a replaceable<a href=\"AixLib.Building.LowOrder.ThermalZone\"> thermal zone</a> model, due to the functionalities, <a href=\"AixLib.Building.LowOrder.ThermalZone.ThermalZoneEquipped\">ThermalZoneEquipped</a> is the most suitable recommendation.</span></p>
 </html>"));
 end MultizoneEquipped;

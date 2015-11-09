@@ -1,4 +1,6 @@
 within AixLib.Building.LowOrder.BaseClasses;
-package ThermalZonePhysics 
+package BuildingPhysics 
   extends Modelica.Icons.VariantsPackage;
-end ThermalZonePhysics;
+
+
+end BuildingPhysics;

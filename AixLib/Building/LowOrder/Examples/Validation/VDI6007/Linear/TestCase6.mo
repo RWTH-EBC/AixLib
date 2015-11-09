@@ -41,7 +41,7 @@ equation
   connect(solarRadiation.y, reducedModel.solarRad_in) annotation (Line(
       points={{-15,82},{63.18,82},{63.18,64.8}},
       color={0,0,127}));
-  annotation(             experiment(StopTime = 5.184e+006,
+  annotation (            experiment(StopTime = 5.184e+006,
              Interval = 3600, __Dymola_Algorithm = "Lsodar"),
              __Dymola_Commands(file=
                                "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Linear/TestCase6.mos"

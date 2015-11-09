@@ -13,7 +13,7 @@ public
     "Choose thermal zone model"                                                         annotation (Placement(transformation(extent={{40,35},
             {80,75}})),choicesAllMatching=true);
   AixLib.Utilities.Interfaces.SolarRad_in radIn[max(orientations)]
-    "Solar Radiation"                                                                annotation (
+    "Solar radiation"                                                                annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
@@ -43,38 +43,36 @@ public
 equation
   for i in 1:buildingParam.numZones loop
     connect(internalGains[(i*3)-2], zone[i].internalGains[1]) annotation (Line(
-      points={{76,-100},{76,35.8}},
+      points={{76,-100},{76,41.4}},
       color={0,0,127},
       smooth=Smooth.None));
     connect(internalGains[(i*3)-1], zone[i].internalGains[2]) annotation (Line(
-      points={{76,-100},{76,37.4}},
+      points={{76,-100},{76,43}},
       color={0,0,127},
       smooth=Smooth.None));
     connect(internalGains[(i*3)], zone[i].internalGains[3]) annotation (Line(
-      points={{76,-100},{76,39}},
+      points={{76,-100},{76,44.6}},
       color={0,0,127},
       smooth=Smooth.None));
-    if zone[i].zoneParam.withOuterwalls then
-      //Connect Outside Temperature
-      connect(weather[1], zone[i].weather[1]) annotation (Line(
+    //Connect Outside Temperature
+    connect(weather[1], zone[i].weather[1]) annotation (Line(
           points={{-56,115},{-56,68},{40,68},{40,53.4},{45.2,53.4}},
           color={0,0,127},
           smooth=Smooth.None));
-      for j in 3:4 loop
-        //Connect Radiation Vectors. Index has shifted because the absolute humidity has been added at vector position 2.
-        connect(weather[j], zone[i].weather[j - 1]) annotation (Line(
+    for j in 3:4 loop
+      //Connect Radiation Vectors. Index has shifted because the absolute humidity has been added at vector position 2.
+      connect(weather[j], zone[i].weather[j - 1]) annotation (Line(
             points={{-56,100},{-56,68},{40,68},{40,55},{45.2,55}},
             color={0,0,127},
             smooth=Smooth.None));
-      end for;
-      for k in 1:orientations[i] loop
-        //Connect the radiation Input according to the required orientations for the individual zone
-        connect(radIn[k], zone[i].solarRad_in[k]) annotation (Line(
-            points={{-20,92},{-20,72},{40,72},{40,67},{44,67}},
+    end for;
+    for k in 1:orientations[i] loop
+      //Connect the radiation Input according to the required orientations for the individual zone
+      connect(radIn[k], zone[i].solarRad_in[k]) annotation (Line(
+            points={{-20,92},{-20,72},{40,72},{40,64.2},{44,64.2}},
             color={255,128,0},
             smooth=Smooth.None));
-      end for;
-    end if;
+    end for;
   end for;
 
   annotation (
@@ -146,15 +144,10 @@ equation
           fillPattern=FillPattern.Solid)}),
     Documentation(revisions="<html>
 <ul>
-<li><i>June 22, 2015&nbsp;</i> by Moritz Lauster:<br>Changed Building Physics to AixLib</li>
+<li><i>June 22, 2015&nbsp;</i> by Moritz Lauster:<br>Changed building physics to AixLib</li>
 <li><i>April 25, 2014&nbsp;</i> by Ole Odendahl:<br>Implemented</li>
 </ul>
 </html>", info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>House&nbsp;with&nbsp;basic&nbsp;heat&nbsp;supply&nbsp;system,&nbsp;air&nbsp;handling&nbsp;unit,&nbsp;an&nbsp;arbitrary&nbsp;number&nbsp;of&nbsp;thermal&nbsp;zones&nbsp;(vectorized),&nbsp;and&nbsp;ventilation </p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars2.png\"/></p>
-<h4><span style=\"color:#008000\">Concept</span></h4>
-<p>. </p>
+<p>This is a partial model for multi-zone models. It defines connectors and a replaceable thermal zone model.</p>
 </html>"));
 end partialMultizone;

@@ -1,5 +1,5 @@
 within AixLib.Building.LowOrder.Examples;
-model MultizoneOffice "This is an example for a multizone office building"
+model MultizoneExample "This is an example for a multizone office building"
   extends Modelica.Icons.Example;
 
   Multizone.MultizoneEquipped multizoneEquipped(buildingParam=
@@ -58,4 +58,4 @@ equation
          {0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})), experiment(StopTime=3.1536e+007, Interval=3600));
-end MultizoneOffice;
+end MultizoneExample;

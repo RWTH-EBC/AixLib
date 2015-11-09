@@ -40,5 +40,8 @@ equation
 <p><ul>
 <li><i>October 30, 2015&nbsp;</i> by Moritz Lauster:<br/>Moved and adapted to AixLib</li>
 </ul></p>
+</html>",
+        info="<html>
+<p>Works similar to <a href=\"Modelica.Blocks.Math.Sum\">Sum</a>, but extends SIMO, so splits one signal into nout-signals.</p>
 </html>"));
 end Split;

@@ -21,7 +21,7 @@ equation
 //   solarRad_out.I_diff = sum(solarRad_in.I_diff);
 //   solarRad_out.I_gr = sum(solarRad_in.I_gr);
 //   solarRad_out.AOI = sum(solarRad_in.AOI);
-  annotation( Icon(
+  annotation (Icon(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}}),                                                                                                    graphics={                                                                                                    Line(points={{
               -74,-20},{60,-20}},                                                                                                    color={255,

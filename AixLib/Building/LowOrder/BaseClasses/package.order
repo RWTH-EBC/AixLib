@@ -9,4 +9,4 @@ ThermSplitter
 ZoneFactorsZero
 EqAirTemp
 ReducedOrderModel
-ThermalZonePhysics
+BuildingPhysics

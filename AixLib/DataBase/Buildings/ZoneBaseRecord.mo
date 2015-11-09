@@ -110,6 +110,8 @@ record ZoneBaseRecord "the used record standard"
     "reduction factor of userACH for cold weather." annotation (Dialog(tab="Room air", group="ACH", descriptionLabel = false));
   parameter Modelica.SIunits.ThermalResistance RWin=0.017727777777
     "Resistor Window" annotation(Dialog(tab="Windows", enable = withWindows));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer UWin=3
+    "Thermal transmission coefficient of windows"   annotation(Dialog(tab = "Windows", enable = if withWindows and withOuterwalls then true else false));
   annotation(Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This is the base definition is zone records used in <a href=\"AixLib.Building.LowOrder.ThermalZone\">AixLib.Building.LowOrder.ThermalZone</a>. All necessary parameters are defined here. Most values should be overwritten for a specific building, some are default values that might be appropriate in most cases. However, fell free to overwrite them in your own records.</p>
