@@ -3,7 +3,20 @@ model MultizoneExample "This is an example for a multizone office building"
   extends Modelica.Icons.Example;
 
   Multizone.MultizoneEquipped multizoneEquipped(buildingParam=
-        AixLib.DataBase.Buildings.OfficePassiveHouse.OfficePassiveHouse())
+        AixLib.DataBase.Buildings.OfficePassiveHouse.OfficePassiveHouse(),
+      redeclare AixLib.Building.LowOrder.ThermalZone.ThermalZone zone(
+        redeclare
+        AixLib.Building.LowOrder.BaseClasses.BuildingPhysics.BuildingPhysicsVDI
+        buildingPhysics(zoneParam={
+            DataBase.Buildings.OfficePassiveHouse.OPH_1_Meeting(),
+            DataBase.Buildings.OfficePassiveHouse.OPH_1_Meeting(),
+            DataBase.Buildings.OfficePassiveHouse.OPH_1_Meeting(),
+            DataBase.Buildings.OfficePassiveHouse.OPH_1_Meeting(),
+            DataBase.Buildings.OfficePassiveHouse.OPH_1_Meeting(),
+            DataBase.Buildings.OfficePassiveHouse.OPH_1_Meeting()}, redeclare
+          AixLib.Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_VDI6007
+          corG(n={5,5,5,5,5,5}, Uw={3,3,3,3,3,3})), zoneParam=
+          DataBase.Buildings.OfficePassiveHouse.OPH_1_Meeting()))
     annotation (Placement(transformation(extent={{-26,-14},{28,36}})));
   Components.Weather.Weather weather(
     Outopt=1,

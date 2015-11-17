@@ -21,6 +21,7 @@ partial model partialThermalZone
             {-60,66}})));
   Modelica.Blocks.Interfaces.RealInput internalGains[3]
     "Input profiles for internal gains persons, machines, light" annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 90, origin = {80, -100}), iconTransformation(extent = {{-12, -12}, {12, 12}}, rotation = 90, origin={80,-60})));
+protected
   replaceable BaseClasses.BuildingPhysics.BuildingPhysics buildingPhysics(
     RRest=zoneParam.RRest,
     R1o=zoneParam.R1o,
@@ -61,6 +62,7 @@ partial model partialThermalZone
     AixLib.Building.LowOrder.BaseClasses.BuildingPhysics.partialBuildingPhysics
     "Building physics" annotation (Placement(transformation(extent={{-20,0},{20,40}})),
       choicesAllMatching=true);
+public
   Modelica.Blocks.Interfaces.RealInput ventilationTemperature(
     final quantity="ThermodynamicTemperature",
     final unit="K",
