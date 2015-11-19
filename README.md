@@ -23,7 +23,7 @@ Parts of **AixLib** have been developed within public funded projects and with f
 
 ### Version
 
-The current version 0.1.0 is a pre-release to manage the transition from Subversion to Git
+The current version 0.2.0 is a pre-release.
 
 ### How to contribute to the development of AixLib
 
