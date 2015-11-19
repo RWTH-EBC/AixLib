@@ -7,6 +7,6 @@ Split
 SumCondition
 ThermSplitter
 ZoneFactorsZero
+BuildingPhysics
 EqAirTemp
 ReducedOrderModel
-BuildingPhysics

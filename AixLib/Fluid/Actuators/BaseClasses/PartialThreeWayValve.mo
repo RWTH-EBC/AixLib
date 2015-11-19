@@ -92,13 +92,13 @@ equation
         Polygon(
           points={{-68,56},{0,2},{56,44},{76,60},{-68,56}},
           lineColor={0,0,255},
-          pattern = LinePattern.None,
+          pattern=LinePattern.None,
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
         Polygon(
           points={{-56,-40},{0,2},{56,44},{60,-40},{-56,-40}},
           lineColor={0,0,255},
-          pattern = LinePattern.None,
+          pattern=LinePattern.None,
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
         Polygon(

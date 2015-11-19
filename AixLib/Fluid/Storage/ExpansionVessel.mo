@@ -76,7 +76,7 @@ equation
         Rectangle(
           extent={{2,-80},{-2,-90}},
           lineColor={0,0,255},
-          pattern = LinePattern.None,
+          pattern=LinePattern.None,
           fillColor={0,0,127},
           fillPattern=FillPattern.Solid)}),
 defaultComponentName="exp",

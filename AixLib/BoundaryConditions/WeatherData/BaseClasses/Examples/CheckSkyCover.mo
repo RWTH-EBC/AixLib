@@ -1,7 +1,6 @@
 within AixLib.BoundaryConditions.WeatherData.BaseClasses.Examples;
 model CheckSkyCover "Test model for checking sky cover"
   extends Modelica.Icons.Example;
-public
   AixLib.BoundaryConditions.WeatherData.BaseClasses.CheckSkyCover
     cheTotSkyCov "Check total sky cover"
     annotation (Placement(transformation(extent={{60,20},{80,40}})));

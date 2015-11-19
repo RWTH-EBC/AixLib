@@ -1,7 +1,7 @@
 within AixLib.Fluid.Interfaces;
 partial model PartialFourPortInterface
   "Partial model transporting fluid between two ports without storing mass or energy"
-  extends AixLib.Fluid.Interfaces.FourPort;
+  extends AixLib.Fluid.Interfaces.PartialFourPort;
   parameter Modelica.SIunits.MassFlowRate m1_flow_nominal(min=0)
     "Nominal mass flow rate"
     annotation(Dialog(group = "Nominal condition"));

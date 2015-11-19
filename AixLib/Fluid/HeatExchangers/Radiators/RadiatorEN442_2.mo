@@ -234,24 +234,24 @@ equation
           extent={{-20,22},{20,-20}},
           fillColor={127,0,0},
           fillPattern=FillPattern.Solid,
-          pattern = LinePattern.None),
+          pattern=LinePattern.None),
         Rectangle(
           extent={{-95,6},{106,-4}},
           lineColor={0,0,255},
-          pattern = LinePattern.None,
+          pattern=LinePattern.None,
           fillColor={0,0,255},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{-102,-4},{-2,6}},
           lineColor={0,0,255},
-          pattern = LinePattern.None,
+          pattern=LinePattern.None,
           fillColor={255,0,0},
           fillPattern=FillPattern.Solid),
         Ellipse(
           extent={{-20,22},{20,-20}},
           fillColor={127,0,0},
           fillPattern=FillPattern.Solid,
-          pattern = LinePattern.None),
+          pattern=LinePattern.None),
         Rectangle(
           extent={{-80,60},{80,-60}},
           lineColor={0,0,0},
