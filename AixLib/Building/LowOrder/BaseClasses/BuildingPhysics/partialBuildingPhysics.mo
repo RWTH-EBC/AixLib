@@ -9,6 +9,53 @@ partial model partialBuildingPhysics
   parameter Integer n = 5 "Number of orientations (without ground)" annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer UWin
     "Thermal transmission coefficient of windows" annotation(Dialog(tab = "Windows", enable = if withWindows and withOuterwalls then true else false));
+  parameter Boolean withInnerwalls = true "If inner walls are existent" annotation(Dialog(tab = "Inner walls"));
+  parameter Modelica.SIunits.ThermalResistance R1i "Resistor 1 inner wall" annotation(Dialog(tab = "Inner walls", enable = if withInnerwalls then true else false));
+  parameter Modelica.SIunits.HeatCapacity C1i "Capacity 1 inner wall" annotation(Dialog(tab = "Inner walls", enable = if withInnerwalls then true else false));
+  parameter Modelica.SIunits.Area Ai "Inner wall area" annotation(Dialog(tab = "Inner walls", enable = if withInnerwalls then true else false));
+  parameter Modelica.SIunits.Temp_K T0all = 295.15
+    "Initial temperature for all components";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaiwi
+    "Coefficient of heat transfer for inner walls" annotation(Dialog(tab = "Inner walls", enable = if withInnerwalls then true else false));
+  parameter Boolean withOuterwalls = true
+    "If outer walls (including windows) are existent" annotation(Dialog(tab = "Outer walls"));
+  parameter Modelica.SIunits.ThermalResistance RRest "Resistor Rest outer wall"
+                               annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
+  parameter Modelica.SIunits.ThermalResistance R1o "Resistor 1 outer wall" annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
+  parameter Modelica.SIunits.HeatCapacity C1o "Capacity 1 outer wall" annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
+  parameter Modelica.SIunits.Area Ao "Outer wall area" annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaowi
+    "Outer wall's coefficient of heat transfer (inner side)" annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaowo
+    "Outer wall's coefficient of heat transfer (outer side)" annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
+  parameter Modelica.SIunits.Emissivity epsi "Emissivity of the inner walls" annotation(Dialog(tab = "Inner walls", enable = if withInnerwalls then true else false));
+  parameter Modelica.SIunits.Emissivity epso "Emissivity of the outer walls" annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
+  parameter Modelica.SIunits.Emissivity aowo
+    "Coefficient of absorption of the outer walls" annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
+  parameter Boolean withWindows = true "If windows are existent" annotation(Dialog(tab = "Windows", enable = if withOuterwalls then true else false));
+  parameter Real splitfac "Factor for conv. part of rad. through windows" annotation(Dialog(tab = "Windows", enable = if withOuterwalls then true else false));
+  parameter Real weightfactorswall[n] "Weight factors of the walls" annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
+  parameter Real weightfactorswindow[n] "Weight factors of the windows"
+                                                                       annotation(Dialog(tab = "Windows", enable = if withWindows and withOuterwalls then true else false));
+  parameter Real weightfactorground
+    "Weight factor of the earth (0 if not considered)" annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
+  parameter Modelica.SIunits.Temp_K temperatureground
+    "Temperature of the earth" annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
+  parameter Modelica.SIunits.Emissivity epsw "Emissivity of the windows" annotation(Dialog(tab = "Windows", enable = if withWindows and withOuterwalls then true else false));
+  parameter Modelica.SIunits.TransmissionCoefficient g
+    "Total energy transmittance" annotation(Dialog(tab = "Windows", enable = if withWindows and withOuterwalls then true else false));
+  parameter Modelica.SIunits.Volume Vair "Volume of the air in the zone"
+                                    annotation(Dialog(tab = "Room air"));
+  parameter Modelica.SIunits.Density rhoair "Density of the air" annotation(Dialog(tab = "Room air"));
+  parameter Modelica.SIunits.SpecificHeatCapacity cair
+    "Heat capacity of the air" annotation(Dialog(tab = "Room air"));
+  parameter Modelica.SIunits.ThermalResistance RWin "Resistor Window" annotation(Dialog(tab="Windows",enable = if withWindows then true else false));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaConvWinInner
+    "Coefficient of convective heat transfer of the window (inner side)" annotation(Dialog(tab="Windows",enable = if withWindows then true else false));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaConvWinOuter
+    "Coefficient of convective heat transfer of the window (outer side)" annotation(Dialog(tab="Windows",enable = if withWindows then true else false));
+  parameter Modelica.SIunits.Emissivity awin
+    "Coefficient of absorption of the window" annotation(Dialog(tab="Windows",enable = if withWindows then true else false));
   SolarRadWeightedSum solRadWeightedSum(n=n, weightfactors=AWin)
     "Aggregates solar radiation through windows" annotation (Placement(transformation(extent={{6,56},{
             34,86}})));
@@ -37,8 +84,8 @@ partial model partialBuildingPhysics
   SolarRadAdapter solarRadAdapter[n] "Converts solar radiation in real"  annotation (Placement(transformation(extent={{-74,28},{-54,48}})));
   replaceable
     AixLib.Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_VDI6007
-    corG(n=n, Uw=UWin) constrainedby
-    Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
+    corG   constrainedby
+    Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG(n=n, Uw=UWin)
     "G-value dependent on angles"
     annotation (Placement(transformation(extent={{-24,60},{-4,80}})),choicesAllMatching=true);
 equation

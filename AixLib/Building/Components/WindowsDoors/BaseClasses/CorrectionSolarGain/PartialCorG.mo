@@ -3,6 +3,8 @@ partial model PartialCorG
   "partial model for correction of the solar gain factor"
 
    parameter Integer n = 1 "vector size for input and output";
+   parameter Modelica.SIunits.CoefficientOfHeatTransfer Uw = 3
+    "Thermal transmission coefficient of whole window";
 
 public
   Utilities.Interfaces.SolarRad_in SR_input[n] annotation (Placement(

@@ -2,53 +2,6 @@ within AixLib.Building.LowOrder.BaseClasses.BuildingPhysics;
 model BuildingPhysics
   "Building physics based on VDI 6007 with improved handling of windows"
   extends partialBuildingPhysics;
-  parameter Boolean withInnerwalls = true "If inner walls are existent" annotation(Dialog(tab = "Inner walls"));
-  parameter Modelica.SIunits.ThermalResistance R1i "Resistor 1 inner wall" annotation(Dialog(tab = "Inner walls", enable = if withInnerwalls then true else false));
-  parameter Modelica.SIunits.HeatCapacity C1i "Capacity 1 inner wall" annotation(Dialog(tab = "Inner walls", enable = if withInnerwalls then true else false));
-  parameter Modelica.SIunits.Area Ai "Inner wall area" annotation(Dialog(tab = "Inner walls", enable = if withInnerwalls then true else false));
-  parameter Modelica.SIunits.Temp_K T0all = 295.15
-    "Initial temperature for all components";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaiwi
-    "Coefficient of heat transfer for inner walls" annotation(Dialog(tab = "Inner walls", enable = if withInnerwalls then true else false));
-  parameter Boolean withOuterwalls = true
-    "If outer walls (including windows) are existent" annotation(Dialog(tab = "Outer walls"));
-  parameter Modelica.SIunits.ThermalResistance RRest "Resistor Rest outer wall"
-                               annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
-  parameter Modelica.SIunits.ThermalResistance R1o "Resistor 1 outer wall" annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
-  parameter Modelica.SIunits.HeatCapacity C1o "Capacity 1 outer wall" annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
-  parameter Modelica.SIunits.Area Ao "Outer wall area" annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaowi
-    "Outer wall's coefficient of heat transfer (inner side)" annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaowo
-    "Outer wall's coefficient of heat transfer (outer side)" annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
-  parameter Modelica.SIunits.Emissivity epsi "Emissivity of the inner walls" annotation(Dialog(tab = "Inner walls", enable = if withInnerwalls then true else false));
-  parameter Modelica.SIunits.Emissivity epso "Emissivity of the outer walls" annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
-  parameter Modelica.SIunits.Emissivity aowo
-    "Coefficient of absorption of the outer walls" annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
-  parameter Boolean withWindows = true "If windows are existent" annotation(Dialog(tab = "Windows", enable = if withOuterwalls then true else false));
-  parameter Real splitfac "Factor for conv. part of rad. through windows" annotation(Dialog(tab = "Windows", enable = if withOuterwalls then true else false));
-  parameter Real weightfactorswall[n] "Weight factors of the walls" annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
-  parameter Real weightfactorswindow[n] "Weight factors of the windows"
-                                                                       annotation(Dialog(tab = "Windows", enable = if withWindows and withOuterwalls then true else false));
-  parameter Real weightfactorground
-    "Weight factor of the earth (0 if not considered)" annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
-  parameter Modelica.SIunits.Temp_K temperatureground
-    "Temperature of the earth" annotation(Dialog(tab = "Outer walls", enable = if withOuterwalls then true else false));
-  parameter Modelica.SIunits.Emissivity epsw "Emissivity of the windows" annotation(Dialog(tab = "Windows", enable = if withWindows and withOuterwalls then true else false));
-  parameter Modelica.SIunits.TransmissionCoefficient g
-    "Total energy transmittance" annotation(Dialog(tab = "Windows", enable = if withWindows and withOuterwalls then true else false));
-  parameter Modelica.SIunits.Volume Vair "Volume of the air in the zone"
-                                    annotation(Dialog(tab = "Room air"));
-  parameter Modelica.SIunits.Density rhoair "Density of the air" annotation(Dialog(tab = "Room air"));
-  parameter Modelica.SIunits.SpecificHeatCapacity cair
-    "Heat capacity of the air" annotation(Dialog(tab = "Room air"));
-  parameter Modelica.SIunits.ThermalResistance RWin "Resistor Window" annotation(Dialog(tab="Windows",enable = if withWindows then true else false));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaConvWinInner
-    "Coefficient of convective heat transfer of the window (inner side)" annotation(Dialog(tab="Windows",enable = if withWindows then true else false));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaConvWinOuter
-    "Coefficient of convective heat transfer of the window (outer side)" annotation(Dialog(tab="Windows",enable = if withWindows then true else false));
-  parameter Modelica.SIunits.Emissivity awin
-    "Coefficient of absorption of the window" annotation(Dialog(tab="Windows",enable = if withWindows then true else false));
   AixLib.Building.LowOrder.BaseClasses.EqAirTemp.EqAirTempEBCMod eqAirTemp(
     aowo=aowo,
     wf_wall=weightfactorswall,
@@ -89,7 +42,6 @@ model BuildingPhysics
     alphaWin=alphaConvWinInner,
     Aw=sum(AWin)) "ROM"
     annotation (Placement(transformation(extent={{18,-10},{76,46}})));
-
 equation
   if withOuterwalls then
     connect(eqAirTemp.equalAirTemp, reducedOrderModel.equalAirTemp) annotation(Line(points={{-26.2,
