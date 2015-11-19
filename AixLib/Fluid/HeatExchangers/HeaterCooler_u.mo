@@ -2,7 +2,7 @@ within AixLib.Fluid.HeatExchangers;
 model HeaterCooler_u "Heater or cooler with prescribed heat flow rate"
   extends AixLib.Fluid.Interfaces.TwoPortHeatMassExchanger(
     redeclare final AixLib.Fluid.MixingVolumes.MixingVolume vol(
-      prescribedHeatFlowRate=true),
+    final prescribedHeatFlowRate=true),
     final showDesignFlowDirection=false);
 
   parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal
@@ -37,7 +37,7 @@ equation
         Rectangle(
           extent={{70,60},{100,58}},
           lineColor={0,0,255},
-          pattern = LinePattern.None,
+          pattern=LinePattern.None,
           fillColor={0,0,127},
           fillPattern=FillPattern.Solid),
         Text(
@@ -47,7 +47,7 @@ equation
         Rectangle(
           extent={{-100,60},{-70,58}},
           lineColor={0,0,255},
-          pattern = LinePattern.None,
+          pattern=LinePattern.None,
           fillColor={0,0,127},
           fillPattern=FillPattern.Solid),
         Text(
@@ -61,7 +61,7 @@ equation
         Rectangle(
           extent={{-100,8},{101,-5}},
           lineColor={0,0,255},
-          pattern = LinePattern.None,
+          pattern=LinePattern.None,
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid)}),
 defaultComponentName="hea",

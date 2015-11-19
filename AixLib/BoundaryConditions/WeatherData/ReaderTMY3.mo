@@ -1159,6 +1159,12 @@ Technical Report, NREL/TP-581-43156, revised May 2008.
 </html>", revisions="<html>
 <ul>
 <li>
+September 24, 2015, by Marcus Fuchs:<br/>
+Replace annotation <code>__Dymola_loadSelector</code> by <code>loadSelector</code>
+for MSL compliancy as reported by @tbeu at
+<a href=\"https://github.com/RWTH-EBC/AixLib/pull/107\">RWTH-EBC/AixLib#107</a>
+</li>
+<li>
 June 6, 2015, by Michael Wetter:<br/>
 Removed redundant but consistent
 <code>connect(TBlaSkyCom.TBlaSky, weaBus.TBlaSky)</code>

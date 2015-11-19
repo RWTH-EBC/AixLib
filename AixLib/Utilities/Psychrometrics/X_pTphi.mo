@@ -5,8 +5,6 @@ block X_pTphi
     AixLib.Utilities.Psychrometrics.BaseClasses.HumidityRatioVaporPressure;
 
   package Medium = AixLib.Media.Air "Medium model";
-
-public
   Modelica.Blocks.Interfaces.RealInput T(final unit="K",
                                            displayUnit="degC",
                                            min = 0) "Temperature"

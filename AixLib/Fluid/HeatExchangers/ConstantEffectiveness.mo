@@ -3,6 +3,8 @@ model ConstantEffectiveness "Heat exchanger with constant effectiveness"
   extends AixLib.Fluid.HeatExchangers.BaseClasses.PartialEffectiveness(
     sensibleOnly1 = true,
     sensibleOnly2 = true,
+    final prescribedHeatFlowRate1=true,
+    final prescribedHeatFlowRate2=true,
     Q1_flow = eps * QMax_flow,
     Q2_flow = -Q1_flow,
     mWat1_flow = 0,
@@ -16,7 +18,7 @@ equation
             -100},{100,100}}), graphics={Rectangle(
           extent={{-70,78},{70,-82}},
           lineColor={0,0,255},
-          pattern = LinePattern.None,
+          pattern=LinePattern.None,
           fillColor={95,95,95},
           fillPattern=FillPattern.Solid), Text(
           extent={{-56,-12},{54,-72}},

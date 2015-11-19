@@ -1,7 +1,6 @@
 within AixLib.BoundaryConditions.SolarGeometry.BaseClasses;
 block SolarAzimuth "Solar azimuth"
   extends Modelica.Blocks.Icons.Block;
-public
   parameter Modelica.SIunits.Angle lat "Latitude";
   Modelica.Blocks.Interfaces.RealInput zen(quantity="Angle", unit="rad")
     "Zenith angle"
@@ -15,7 +14,7 @@ public
     displayUnit="deg") "Solar Azimuth"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Interfaces.RealInput decAng(quantity="Angle", unit="rad")
-    "Decline angle"
+    "Declination angle"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
 
 protected

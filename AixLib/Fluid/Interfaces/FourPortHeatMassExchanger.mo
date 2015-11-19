@@ -2,10 +2,10 @@ within AixLib.Fluid.Interfaces;
 model FourPortHeatMassExchanger
   "Model transporting two fluid streams between four ports with storing mass or energy"
   extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
-    final h_outflow_a1_start = h1_outflow_start,
-    final h_outflow_b1_start = h1_outflow_start,
-    final h_outflow_a2_start = h2_outflow_start,
-    final h_outflow_b2_start = h2_outflow_start);
+    port_a1(h_outflow(start=h1_outflow_start)),
+    port_b1(h_outflow(start=h1_outflow_start)),
+    port_a2(h_outflow(start=h2_outflow_start)),
+    port_b2(h_outflow(start=h2_outflow_start)));
   extends AixLib.Fluid.Interfaces.FourPortFlowResistanceParameters(
      final computeFlowResistance1=true, final computeFlowResistance2=true);
 
@@ -233,6 +233,12 @@ Modelica.Fluid.HeatExchangers.BasicHX</a>.
 </html>", revisions="<html>
 <ul>
 <li>
+November 13, 2015, by Michael Wetter:<br/>
+Changed assignments of start values in <code>extends</code> statement.
+This is for issue
+<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/299\">#299</a>.
+</li>
+<li>
 June 2, 2015, by Filip Jorissen:<br/>
 Removed final modifier from <code>mSenFac</code> in
 <code>vol1</code> and <code>vol2</code>.
@@ -333,19 +339,19 @@ First implementation.
         Rectangle(
           extent={{-70,80},{70,-80}},
           lineColor={0,0,255},
-          pattern = LinePattern.None,
+          pattern=LinePattern.None,
           fillColor={95,95,95},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{-99,64},{102,54}},
           lineColor={0,0,255},
-          pattern = LinePattern.None,
+          pattern=LinePattern.None,
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid),
         Rectangle(
           extent={{-99,-56},{102,-66}},
           lineColor={0,0,255},
-          pattern = LinePattern.None,
+          pattern=LinePattern.None,
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid)}));
 end FourPortHeatMassExchanger;
