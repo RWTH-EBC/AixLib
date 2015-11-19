@@ -7,8 +7,6 @@ model CorG_VDI6007 "correction of the solar gain factor according to VDI6007"
 //  parameter Real coeff=0.6 "Weight coefficient";
  // parameter Modelica.SIunits.Area A=6 "Area of surface";
 //  parameter Real A = 10 "Area of surface";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer Uw = 3
-    "Thermal transmission coefficient of whole window";
 
 // parameters for calculating the transmission correction factor based on VDI_6007 Part-3
   // A0 to A6 are experimental constants VDI 6007 Part-3 page 20

@@ -224,7 +224,7 @@ if withWindows and withOuterwalls then
   connect(AbscoeffA.u, solarRad_in) annotation (Line(
       points={{-70.2,90},{-86,90},{-86,76},{-114,76}},
       color={0,0,127}));
-  annotation (    experiment(StopTime=864000),
+  annotation (
 Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}}),
          graphics={

@@ -73,7 +73,7 @@ equation
     annotation (Line(
       points={{-24.8,-29.4},{-24.8,-48},{66.4,-48},{66.4,38}},
       color={191,0,0}));
-  annotation(             experiment(StopTime = 5.184e+006, Interval = 3600, Algorithm = "Lsodar"),
+  annotation (            experiment(StopTime = 5.184e+006, Interval = 3600, Algorithm = "Lsodar"),
              __Dymola_Commands(file=
                                "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Linear/TestCase7.mos"
         "Simulate and plot"),

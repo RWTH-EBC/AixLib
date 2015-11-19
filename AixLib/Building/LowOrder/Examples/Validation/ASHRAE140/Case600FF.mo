@@ -11,12 +11,12 @@ model Case600FF
     annotation (Placement(transformation(extent={{-142,61},{-118,85}})));
   AixLib.Building.Components.Weather.RadiationOnTiltedSurface.RadOnTiltedSurf_Perez
     radOnTiltedSurf_Perez[5](
-    WeatherFormat=2,
+    each WeatherFormat=2,
     Azimut={180,-90,0,90,0},
     Tilt={90,90,90,90,0},
     GroundReflection=fill(0.2, 5),
     Latitude=fill(39.76, 5),
-    h=1609) "N,E,S,W, Horz"
+    each h=1609) "N,E,S,W, Horz"
     annotation (Placement(transformation(extent={{-104,56},{-76,84}})));
 
   Modelica.Blocks.Sources.CombiTimeTable Solar_Radiation(
@@ -93,7 +93,7 @@ model Case600FF
   AixLib.Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_VDI6007
     corG_VDI6007_1(          n=5, Uw=3.0)
     annotation (Placement(transformation(extent={{-48,54},{-28,74}})));
-  Modelica.Blocks.Sources.Constant sunblind[5](k=0)
+  Modelica.Blocks.Sources.Constant sunblind[5](each k=0)
     annotation (Placement(transformation(extent={{-24,69},{-11,82}})));
   AixLib.Building.LowOrder.BaseClasses.SolarRadAdapter solarRadAdapter[5]
     annotation (Placement(transformation(extent={{-45,31.5},{-25,51.5}})));
@@ -150,7 +150,7 @@ equation
 
   connect(radOnTiltedSurf_Perez.OutTotalRadTilted, corG_VDI6007_1.SR_input)
     annotation (Line(
-      points={{-78.8,77},{-53,77},{-53,63.9},{-47.8,63.9}},
+      points={{-77.4,75.6},{-53,75.6},{-53,63.9},{-47.8,63.9}},
       color={255,128,0}));
   connect(sunblind.y, eqAirTemp.sunblindsig) annotation (Line(
       points={{-10.35,75.5},{-8,75.5},{-8,44.3}},
@@ -160,7 +160,7 @@ equation
       color={0,0,127}));
   connect(solarRadAdapter.solarRad_in, radOnTiltedSurf_Perez.OutTotalRadTilted)
     annotation (Line(
-      points={{-44,41.5},{-66,41.5},{-66,77},{-78.8,77}},
+      points={{-44,41.5},{-66,41.5},{-66,75.6},{-77.4,75.6}},
       color={255,128,0}));
   connect(corG_VDI6007_1.solarRadWinTrans, SolarRadWeightedSum.solarRad_in)
     annotation (Line(

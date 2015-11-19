@@ -11,7 +11,7 @@ model TestCase11
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature outdoorTemp(T = 295.15) annotation(Placement(transformation(extent = {{-14, 47}, {6, 67}})));
   BaseClasses.ReducedOrderModel.ReducedOrderModelStar
                                                  reducedModel(C1i = 1.48216e+007, Aw = 7, g = 0.15, C1o = 1.60085e+006, epsi = 1, epso = 1, T0all(displayUnit = "K") = 295.15,                           withWindows = false, R1i = 0.000595515, Ai = 75.5, RRest = 0.042748777, R1o = 0.004366222, Ao = 10.5, alphaiwi = 3) annotation(Placement(transformation(extent = {{64, 36}, {98, 76}})));
-  HVAC.HeatGeneration.IdealHeaterCooler                heater(                                    h_cooler = 0, KR_heater = 1000, KR_cooler = 1000, TN_heater = 1, TN_cooler = 1, h_heater = 500, l_cooler = -500, Cooler_on = false) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin = {-26, -20})));
+  Utilities.Sources.HeaterCooler.HeaterCoolerPI                heater(                                    h_cooler = 0, KR_heater = 1000, KR_cooler = 1000, TN_heater = 1, TN_cooler = 1, h_heater = 500, l_cooler = -500, Cooler_on = false) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin={-22,-20})));
   Modelica.Blocks.Sources.CombiTimeTable setTemp(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, columns = {2, 3}, table = [0, 295.15, 295.2; 3600, 295.1, 295.2; 7200, 295.1, 295.2; 10800, 295.1, 295.2; 14400, 295.1, 295.2; 18000, 295.1, 295.2; 21600, 295.1, 295.2; 25200, 300.1, 300.2; 28800, 300.1, 300.2; 32400, 300.1, 300.2; 36000, 300.1, 300.2; 39600, 300.1, 300.2; 43200, 300.1, 300.2; 46800, 300.1, 300.2; 50400, 300.1, 300.2; 54000, 300.1, 300.2; 57600, 300.1, 300.2; 61200, 300.1, 300.2; 64800, 300.1, 300.2; 68400, 295.1, 295.2; 72000, 295.1, 295.2; 75600, 295.1, 295.2; 79200, 295.1, 295.2; 82800, 295.1, 295.2; 86400, 295.1, 295.2]) annotation(Placement(transformation(extent = {{-80, -30}, {-60, -10}})));
   Modelica.Blocks.Sources.CombiTimeTable reference( tableOnFile = false, columns = {2, 3},                                                                                                    extrapolation = Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
     table=[3600,22,0; 7200,22,0; 10800,22,0; 14400,22,0; 18000,22,0; 21600,22,
@@ -32,22 +32,28 @@ model TestCase11
         500; 5158800,27.5,500; 5162400,27.6,500; 5166000,27,500; 5169600,26.9,
         500; 5173200,26.7,500; 5176800,26.6,500; 5180400,26.5,500; 5184000,
         26.4,500])                                                                                                     annotation(Placement(transformation(extent = {{-96, 78}, {-76, 97}})));
-  Modelica.Blocks.Math.Add sumHeatLoad annotation(Placement(transformation(extent = {{86, 86}, {96, 96}})));
-  HVAC.HeatGeneration.IdealHeaterCooler                cooler(                                    h_cooler = 0, KR_heater = 1000, KR_cooler = 1000, TN_heater = 1, TN_cooler = 1, h_heater = 500, l_cooler = -500, Heater_on = false) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin = {-26, -48})));
+  Modelica.Blocks.Math.Add sumHeatLoad annotation(Placement(transformation(extent={{18,-28},
+            {28,-18}})));
+  Utilities.Sources.HeaterCooler.HeaterCoolerPI                cooler(                                    h_cooler = 0, KR_heater = 1000, KR_cooler = 1000, TN_heater = 1, TN_cooler = 1, h_heater = 500, l_cooler = -500, Heater_on = false) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = -90, origin = {-26, -48})));
   Modelica.Blocks.Sources.CombiTimeTable innerLoads(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic,  tableOnFile = false, columns = {2, 3}, table = [0, 0, 0; 3600, 0, 0; 7200, 0, 0; 10800, 0, 0; 14400, 0, 0; 18000, 0, 0; 21600, 0, 0; 21600, 0, 1000; 25200, 0, 1000; 28800, 0, 1000; 32400, 0, 1000; 36000, 0, 1000; 39600, 0, 1000; 43200, 0, 1000; 46800, 0, 1000; 50400, 0, 1000; 54000, 0, 1000; 57600, 0, 1000; 61200, 0, 1000; 64800, 0, 1000; 64800, 0, 0; 68400, 0, 0; 72000, 0, 0; 75600, 0, 0; 79200, 0, 0; 82800, 0, 0; 86400, 0, 0]) annotation(Placement(transformation(extent = {{-24, -93}, {-10, -79}})));
   Modelica.Blocks.Sources.Constant solarRadiation(k=0)
     annotation (Placement(transformation(extent={{-46,62},{-26,82}})));
+  Modelica.Blocks.Sources.Constant const(k=0)
+    annotation (Placement(transformation(extent={{-80,0},{-60,20}})));
+  Modelica.Blocks.Sources.Constant const1(
+                                         k=0)
+    annotation (Placement(transformation(extent={{-78,-80},{-58,-60}})));
 equation
   connect(machinesRadiative.port, heatToStar.Therm) annotation (Line(
       points={{30,-83},{38,-83},{38,-82},{50.8,-82}},
       color={191,0,0}));
-  connect(setTemp.y[1], heater.soll_heat) annotation(Line(points = {{-59, -20}, {-50, -20}, {-50, -23}, {-30.8, -23}}, color = {0, 0, 127}));
-    connect(sumHeatLoad.u1, heater.heatMeter.p);
-  connect(sumHeatLoad.u2, cooler.coolMeter.p);
-  connect(cooler.HeatCoolRoom, reducedModel.heatConvInnerwall.port_b);
+  connect(setTemp.y[1], heater.setPointHeat) annotation(Line(points={{-59,-20},
+          {-50,-20},{-50,-22.2},{-29.2,-22.2}},                                                                           color = {0, 0, 127}));
+  connect(cooler.heatCoolRoom, reducedModel.heatConvInnerwall.port_b);
   referenceLoad[1] = -reference.y[2];
   simulationLoad = sumHeatLoad.y;
-  connect(setTemp.y[2], cooler.soll_cool) annotation(Line(points = {{-59, -20}, {-44, -20}, {-44, -43.2}, {-30.8, -43.2}}, color = {0, 0, 127}));
+  connect(setTemp.y[2], cooler.setPointCool) annotation(Line(points={{-59,-20},
+          {-44,-20},{-44,-45.6},{-33.2,-45.6}},                                                                               color = {0, 0, 127}));
   connect(innerLoads.y[2], machinesRadiative.Q_flow) annotation(Line(points = {{-9.3, -86}, {-2, -86}, {-2, -83}, {4, -83}}, color = {0, 0, 127}));
   connect(outdoorTemp.port, reducedModel.equalAirTemp) annotation (Line(
       points={{6,57},{38,57},{38,56.8},{67.4,56.8}},
@@ -66,9 +72,17 @@ equation
   connect(solarRadiation.y, reducedModel.solarRad_in) annotation (Line(
       points={{-25,72},{62,72},{62,84},{73.18,84},{73.18,74.8}},
       color={0,0,127}));
-  connect(heater.HeatCoolRoom, reducedModel.internalGainsConv) annotation (Line(
-      points={{-24.8,-29.4},{-24.8,-36},{84.4,-36},{84.4,38}},
+  connect(heater.heatCoolRoom, reducedModel.internalGainsConv) annotation (Line(
+      points={{-26,-29},{-26,-36},{84.4,-36},{84.4,38}},
       color={191,0,0}));
+  connect(heater.HeatingPower, sumHeatLoad.u1) annotation (Line(points={{-18,-30},
+          {-18,-32},{0,-32},{0,-20},{17,-20}}, color={0,0,127}));
+  connect(const.y, heater.setPointCool) annotation (Line(points={{-59,10},{-44,
+          10},{-44,-17.6},{-29.2,-17.6}}, color={0,0,127}));
+  connect(cooler.CoolingPower, sumHeatLoad.u2) annotation (Line(points={{-26.6,
+          -58},{-26,-58},{-26,-70},{10,-70},{10,-26},{17,-26}}, color={0,0,127}));
+  connect(const1.y, cooler.setPointHeat) annotation (Line(points={{-57,-70},{
+          -42,-70},{-42,-50.2},{-33.2,-50.2}}, color={0,0,127}));
   annotation(experiment(StopTime = 5.184e+006, Interval = 3600),
              __Dymola_Commands(file=
                                "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Star/TestCase11.mos"
@@ -89,5 +103,7 @@ equation
 <p>Variable path: <code>sumHeatLoad.y</code> </p>
 <p><br><br>All values are given in the VDI 6007-1. </p>
 <p>A script to run this test case can be found in AixLib\\Resources\\Scripts\\Dymola\\Building\\LowOrder\\Examples\\Validation\\Star.</p>
-</html>"));
+</html>"),
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
+            100,100}})));
 end TestCase11;
