@@ -27,7 +27,9 @@ model ThermalZoneEquipped
     baseACH=zoneParam.baseACH,
     maxUserACH=zoneParam.maxUserACH,
     maxOverheatingACH=zoneParam.maxOverheatingACH,
-    maxSummerACH=zoneParam.maxSummerACH)
+    maxSummerACH=zoneParam.maxSummerACH,
+    winterReduction=zoneParam.winterReduction,
+    Tmean_start=zoneParam.T0all)
     "Calculates natural venitlation and infiltration"
     annotation (Placement(transformation(extent={{-64,-72},{-44,-52}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor tZone
@@ -85,12 +87,12 @@ equation
   connect(internalGains[2], machines_SensibleHeat_DIN18599.Schedule)
     annotation (Line(points={{80,-100},{80,-100},{80,-70},{80,-68},{30,-68},{30,
           -10.5},{41,-10.5}}, color={0,0,127}));
-  connect(internalGains[3], lights.Schedule) annotation (Line(points={{80,-86.6667},
-          {80,-86.6667},{80,-68},{30,-68},{30,-30.5},{41,-30.5}},
+  connect(internalGains[3], lights.Schedule) annotation (Line(points={{80,
+          -86.6667},{80,-86.6667},{80,-68},{30,-68},{30,-30.5},{41,-30.5}},
         color={0,0,127}));
   connect(internalGains[1], ventilationController.relOccupation) annotation (
-      Line(points={{80,-113.333},{80,-113.333},{80,-68},{-34,-68},{-34,-74},{-72,
-          -74},{-72,-68},{-64,-68}},     color={0,0,127}));
+      Line(points={{80,-113.333},{80,-113.333},{80,-68},{-34,-68},{-34,-74},{
+          -72,-74},{-72,-68},{-64,-68}}, color={0,0,127}));
   connect(ventilationRate, addInfiltrationVentilation.u2) annotation (Line(
         points={{-40,-100},{-40,-66},{-4.4,-66},{-4.4,-33.2}}, color={0,0,127}));
   connect(mixedTemperature.mixedTemperatureOut, buildingPhysics.ventilationTemperature)
