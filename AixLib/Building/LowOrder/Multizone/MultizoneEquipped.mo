@@ -2,15 +2,16 @@ within AixLib.Building.LowOrder.Multizone;
 model MultizoneEquipped
   "Multizone with basic heat supply system, air handling unit, an arbitrary number of thermal zones (vectorized), and ventilation"
   extends AixLib.Building.LowOrder.Multizone.partialMultizone;
-  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor TAirAHUAvg
+  parameter Boolean AHUPresent=AixLib.Building.LowOrder.BaseClasses.AHUStatus(buildingParam.heatingAHU,buildingParam.coolingAHU,buildingParam.humidificationAHU,buildingParam.dehumidificationAHU,buildingParam.numZones,buildingParam.zoneSetup.withAHU);
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor TAirAHUAvg if AHUPresent
     "Averaged air temperature of the zones which are supplied by the AHU" annotation (Placement(transformation(extent={{16,-20},{8,-12}})));
   BaseClasses.ThermSplitter splitterThermPercentAir(dimension=buildingParam.numZones,
-      splitFactor=AixLib.Building.LowOrder.BaseClasses.ZoneFactorsZero(buildingParam.numZones, zoneParam)) annotation (
+      splitFactor=AixLib.Building.LowOrder.BaseClasses.ZoneFactorsZero(buildingParam.numZones, zoneParam)) if AHUPresent annotation (
       Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=0,
         origin={26,-16})));
-  Modelica.Blocks.Interfaces.RealInput AHU[4]
+  Modelica.Blocks.Interfaces.RealInput AHU[4] if AHUPresent
     "Input for AHU Conditions [1]: Desired Air Temperature in K [2]: Desired minimal relative humidity [3]: Desired maximal relative humidity [4]: Schedule Desired Ventilation Flow"
     annotation (Placement(transformation(
         extent={{20,-20},{-20,20}},
@@ -37,20 +38,20 @@ model MultizoneEquipped
         rotation=180,
         origin={-94,6})));
   HVAC.AirHandlingUnit.AHU AirHandlingUnit(
-    heating=buildingParam.heating,
-    cooling=buildingParam.cooling,
-    dehumidification=buildingParam.dehumidification,
-    humidification=buildingParam.humidification,
     BPF_DeHu=buildingParam.BPF_DeHu,
     HRS=buildingParam.HRS,
     efficiencyHRS_enabled=buildingParam.efficiencyHRS_enabled,
-    efficiencyHRS_disabled=buildingParam.efficiencyHRS_disabled)
+    efficiencyHRS_disabled=buildingParam.efficiencyHRS_disabled,
+    heating=buildingParam.heatingAHU,
+    cooling=buildingParam.coolingAHU,
+    dehumidification=buildingParam.dehumidificationAHU,
+    humidification=buildingParam.humidificationAHU) if              AHUPresent
     "Air Handling Unit"
     annotation (Placement(transformation(extent={{-54,-24},{22,46}})));
   BaseClasses.AirFlowRate airFlowRate(
     zoneParam=zoneParam,
     dimension=buildingParam.numZones,
-    withProfile=true)                annotation (Placement(transformation(extent={{-72,6},{-60,22}})));
+    withProfile=true) if AHUPresent               annotation (Placement(transformation(extent={{-72,6},{-60,22}})));
   Modelica.Blocks.Interfaces.RealInput TSetCooler[buildingParam.numZones](
     final quantity="ThermodynamicTemperature",
     final unit="K",
@@ -65,19 +66,19 @@ model MultizoneEquipped
         origin={-94,-22})));
   Modelica.Blocks.Interfaces.RealOutput Pel(
    final quantity="Power",
-   final unit="W") "The consumed electrical power supplied from the mains"
-                                                            annotation (
+   final unit="W") if AHUPresent
+    "The consumed electrical power supplied from the mains" annotation (
       Placement(transformation(extent={{94,6},{114,26}}), iconTransformation(
           extent={{100,12},{114,26}})));
   Modelica.Blocks.Interfaces.RealOutput HeatingPowerAHU(
    final quantity="HeatFlowRate",
-   final unit="W") "The absorbed heating power supplied from a heating circuit"
-                                                                 annotation (Placement(transformation(extent={{94,-14},{114,6}}),
+   final unit="W") if AHUPresent
+    "The absorbed heating power supplied from a heating circuit" annotation (Placement(transformation(extent={{94,-14},{114,6}}),
         iconTransformation(extent={{100,-8},{114,6}})));
   Modelica.Blocks.Interfaces.RealOutput CoolingPowerAHU(
    final quantity="HeatFlowRate",
-   final unit="W") "The absorbed cooling power supplied from a cooling circuit"
-                                                                 annotation (Placement(transformation(extent={{94,-32},{114,-12}}),
+   final unit="W") if AHUPresent
+    "The absorbed cooling power supplied from a cooling circuit" annotation (Placement(transformation(extent={{94,-32},{114,-12}}),
         iconTransformation(extent={{100,-26},{114,-12}})));
   Modelica.Blocks.Interfaces.RealOutput HeatingPowerHeater[size(
     heaterCooler, 1)](
@@ -93,26 +94,25 @@ model MultizoneEquipped
             {114,-56}})));
   BaseClasses.Split splitterVolumeFlowVentilation(nout=buildingParam.numZones,
       coefficients=AixLib.Building.LowOrder.BaseClasses.ZoneFactorsZero(
-        buildingParam.numZones, zoneParam))
+        buildingParam.numZones, zoneParam)) if AHUPresent
     "splits the volume flow rate from the AHU into parts for each zone (weighted with VAir/VAirTot)"
     annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=90,
         origin={48,24})));
   Modelica.Blocks.Routing.Replicator replicatorTemperatureVentilation(nout=
-        buildingParam.numZones)
+        buildingParam.numZones) if AHUPresent
     "replicates scalar temperature of AHU into a vector[numZones] of identical temperatures"
     annotation (Placement(transformation(
         extent={{-5,-5},{5,5}},
         rotation=90,
         origin={23,39})));
-  Modelica.Blocks.Math.Gain conversion(k=3600/buildingParam.Vair)
+  Modelica.Blocks.Math.Gain conversion(k=3600/buildingParam.Vair) if AHUPresent
     "converts m3/s into 1/h" annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=90,
         origin={48,10})));
 equation
-  AirHandlingUnit.phi_extractAir = hold(AirHandlingUnit.phi_sup);
   for i in 1:buildingParam.numZones loop
     connect(internalGains[(i*3)-2], airFlowRate.relOccupation[i]) annotation (Line(
       points={{76,-100},{74,-100},{74,-22},{-76,-22},{-76,10.8},{-72,10.8}},
@@ -195,6 +195,10 @@ equation
     annotation (Line(points={{48,14.4},{48,14.4},{48,16.8}}, color={0,0,127}));
   connect(conversion.u, AirHandlingUnit.Vflow_out) annotation (Line(points={{48,5.2},
           {48,4},{28,4},{28,28},{-60,28},{-60,21.8889},{-52.48,21.8889}},
+        color={0,0,127}));
+  connect(AirHandlingUnit.phi_supply, AirHandlingUnit.phi_extractAir)
+    annotation (Line(points={{15.92,16.4444},{20,16.4444},{20,21.8889},{15.92,
+          21.8889}},
         color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,

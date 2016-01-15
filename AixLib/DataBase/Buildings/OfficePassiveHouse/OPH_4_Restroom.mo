@@ -34,7 +34,7 @@ record OPH_4_Restroom
     R1o = 0.00017702091729,
     RRest = 0.00476430963748,
     C1o = 39369992.1342,
-    withAHU=true,
+    withAHU=false,
     minAHU=0,
     maxAHU=8);
   annotation (Documentation(revisions="<html>

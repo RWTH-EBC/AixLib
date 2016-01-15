@@ -13,12 +13,12 @@ record BuildingBaseRecord "Base record definition for building records"
   parameter Modelica.SIunits.Volume Vair=4850.5 "Volume of building";
   parameter Modelica.SIunits.Area BuildingArea =  2000 "Area of building";
   // AHU Modes
-  parameter Boolean heating=true "Heating Function of AHU" annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"));
-  parameter Boolean cooling=true "Cooling Function of AHU" annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"));
-  parameter Boolean dehumidification=if heating and cooling then true else false
+  parameter Boolean heatingAHU=true "Heating Function of AHU" annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"));
+  parameter Boolean coolingAHU=true "Cooling Function of AHU" annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"));
+  parameter Boolean dehumidificationAHU=if heatingAHU and coolingAHU then true else false
     "Dehumidification Function of AHU (Cooling and Heating must be enabled)"
     annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"));
-  parameter Boolean humidification=if heating and cooling then true else false
+  parameter Boolean humidificationAHU=if heatingAHU and coolingAHU then true else false
     "Humidification Function of AHU (Cooling and Heating must be enabled)"
     annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"));
   // AHU Values

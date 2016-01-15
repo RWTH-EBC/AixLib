@@ -228,15 +228,15 @@ model AHU
 
   block StartState
 
-    outer input Real phi_t_withoutHRS;
-    outer output Real phi_t;
-    outer output Modelica.SIunits.HeatFlowRate Q_dot_C;
-    outer output Modelica.SIunits.HeatFlowRate Q_dot_H;
+    //     outer input Real phi_t_withoutHRS;
+    //     outer output Real phi_t;
+    //     outer output Modelica.SIunits.HeatFlowRate Q_dot_C;
+    //     outer output Modelica.SIunits.HeatFlowRate Q_dot_H;
 
   equation
-    phi_t = phi_t_withoutHRS;
-    Q_dot_C = previous(Q_dot_C);
-    Q_dot_H = previous(Q_dot_H);
+    //     phi_t = phi_t_withoutHRS;
+    //     Q_dot_C = previous(Q_dot_C);
+    //     Q_dot_H = previous(Q_dot_H);
 
     annotation (
       Icon(graphics={Text(
@@ -290,19 +290,19 @@ model AHU
 
   equation
     phi_t = phi_t_withHRS "heat recovery system is enabled";
-    X_sup = X_supMax;
+    X_sup = previous(X_supMax);
     T_1 = T_2;
     T_3 = T_CoilOut;
     T_4 = T_3;
 
     BPF_DeHu = (h_CoilOut - h_surface)/max(h_2 - h_surface, 0.01);
-    h_2 = c_pL_iG*(T_2 - T_0) + X_oda*(c_pW_iG*(T_2 - T_0) + dhV);
+    h_2 = c_pL_iG*(previous(T_2) - T_0) + previous(X_oda)*(c_pW_iG*(previous(T_2) - T_0) + dhV);
     h_surface = c_pL_iG*(T_surface - T_0) + X_surface*(c_pW_iG*(T_surface - T_0) + dhV);
     h_CoilOut = c_pL_iG*(T_CoilOut - T_0) + X_sup*(c_pW_iG*(T_CoilOut - T_0) + dhV);
-    (T_2 - T_surface)/max(X_oda - X_surface, 0.00009) = (T_CoilOut - T_surface)/max(X_supMax -
+    (previous(T_2) - T_surface)/max(previous(X_oda) - X_surface, 0.00009) = (T_CoilOut - T_surface)/max(previous(X_supMax) -
       X_surface, 0.00001);
 
-    p_sat_surface = 611.2*exp(17.62*(T_surface - T_0)/(243.12 + T_surface - T_0));
+  //  p_sat_surface = 611.2*exp(17.62*(T_surface - T_0)/(243.12 + T_surface - T_0));
     //Magnus formula over water, improved by Sonntag (1990), Range: -45 °C to +60 °C
     /*
 2 Alternatives for calculation of water vapor pressure, which are not so stable during simulation:
@@ -311,13 +311,14 @@ p_sat_surface = 10^(-7.90298*(373.15/T_surface - 1)
           -1.3816*10^(-7)*(10^(11.344*(1 - T_surface/373.15))-1)
           +8.1328*10^(-3)*(10^(-3.49149*(373.15/T_surface - 1))-1)
           +log10(1013.246))*100; //The Goff Gratch equation for the vapor pressure over liquid water covers a region of -50 °C to +102 °C. 
-p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
-*/
+          */
+    p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
+
     X_surface = molarMassRatio*p_sat_surface/(p_0 - p_sat_surface);
 
-    Q_dot_C = V_dot_sup*rho*((c_pL_iG + X_oda*c_pW_iG)*(T_2 - T_CoilOut) + (X_oda -
+    Q_dot_C = previous(V_dot_sup)*rho*((c_pL_iG + previous(X_oda)*c_pW_iG)*(previous(T_2) - T_CoilOut) + (previous(X_oda) -
       X_sup)*r_0);
-    Q_dot_H = V_dot_sup*rho*(c_pL_iG + X_sup*c_pW_iG)*(T_5 - T_CoilOut);
+    Q_dot_H = previous(V_dot_sup)*rho*(c_pL_iG + X_sup*c_pW_iG)*(previous(T_5) - T_CoilOut);
 
     annotation (
       Icon(graphics={Text(
@@ -369,35 +370,36 @@ p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
     Modelica.SIunits.Temp_K T_CoilOut(start=278);
 
   equation
-    phi_t = phi_t_withoutHRS "heat recovery system is disabled";
-    X_sup = X_supMax;
-    T_1 = T_2;
-    T_3 = T_CoilOut;
-    T_4 = T_3;
+  phi_t = phi_t_withoutHRS "heat recovery system is disabled";
+  X_sup = previous(X_supMax);
+  T_1 = T_2;
+  T_3 = T_CoilOut;
+  T_4 = T_3;
 
-    BPF_DeHu = (h_CoilOut - h_surface)/max(h_2 - h_surface, 0.01);
-    h_2 = c_pL_iG*(T_2 - T_0) + X_oda*(c_pW_iG*(T_2 - T_0) + dhV);
-    h_surface = c_pL_iG*(T_surface - T_0) + X_surface*(c_pW_iG*(T_surface - T_0) + dhV);
-    h_CoilOut = c_pL_iG*(T_CoilOut - T_0) + X_sup*(c_pW_iG*(T_CoilOut - T_0) + dhV);
-    (T_2 - T_surface)/max(X_oda - X_surface, 0.00009) = (T_CoilOut - T_surface)/max(X_supMax -
-      X_surface, 0.00001);
+  BPF_DeHu = (h_CoilOut - h_surface)/max(h_2 - h_surface, 0.01);
+  h_2 = c_pL_iG*(previous(T_2) - T_0) + previous(X_oda)*(c_pW_iG*(previous(T_2) - T_0) + dhV);
+  h_surface = c_pL_iG*(T_surface - T_0) + X_surface*(c_pW_iG*(T_surface - T_0) + dhV);
+  h_CoilOut = c_pL_iG*(T_CoilOut - T_0) + X_sup*(c_pW_iG*(T_CoilOut - T_0) + dhV);
+  (previous(T_2) - T_surface)/max(previous(X_oda) - X_surface, 0.00009) = (T_CoilOut - T_surface)/max(previous(X_supMax) -
+    X_surface, 0.00001);
 
-    p_sat_surface = 611.2*exp(17.62*(T_surface - T_0)/(243.12 + T_surface - T_0));
-    //Magnus formula over water, improved by Sonntag (1990), Range: -45 °C to +60 °C
-    /*
+  //p_sat_surface = 611.2*exp(17.62*(T_surface - T_0)/(243.12 + T_surface - T_0));
+  //Magnus formula over water, improved by Sonntag (1990), Range: -45 °C to +60 °C
+  /*
 2 Alternatives for calculation of water vapor pressure, which are not so stable during simulation:
 p_sat_surface = 10^(-7.90298*(373.15/T_surface - 1)
           +5.02808*log10(373.15/T_surface)
           -1.3816*10^(-7)*(10^(11.344*(1 - T_surface/373.15))-1)
           +8.1328*10^(-3)*(10^(-3.49149*(373.15/T_surface - 1))-1)
           +log10(1013.246))*100; //The Goff Gratch equation for the vapor pressure over liquid water covers a region of -50 °C to +102 °C.
-p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
 */
-    X_surface = molarMassRatio*p_sat_surface/(p_0 - p_sat_surface);
+    p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
 
-    Q_dot_C = V_dot_sup*rho*((c_pL_iG + X_oda*c_pW_iG)*(T_2 - T_CoilOut) + (X_oda -
-      X_sup)*r_0);
-    Q_dot_H = V_dot_sup*rho*(c_pL_iG + X_sup*c_pW_iG)*(T_5 - T_CoilOut);
+  X_surface = molarMassRatio*p_sat_surface/(p_0 - p_sat_surface);
+
+  Q_dot_C = previous(V_dot_sup)*rho*((c_pL_iG + previous(X_oda)*c_pW_iG)*(previous(T_2) - T_CoilOut) + (previous(X_oda) -
+    X_sup)*r_0);
+  Q_dot_H = previous(V_dot_sup)*rho*(c_pL_iG + X_sup*c_pW_iG)*(previous(T_5) - T_CoilOut);
 
     annotation (
       Icon(graphics={Text(
@@ -439,11 +441,11 @@ p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
 
   equation
     phi_t = phi_t_withHRS;
-    X_sup = X_supMin;
+    X_sup = previous(X_supMin);
 
     Q_dot_C = 0;
-    Q_dot_H = V_dot_sup*rho*(c_pL_iG + X_oda*c_pW_iG)*(T_5 - T_1) + V_dot_sup*
-      rho*(X_supMin - X_oda)*r_0
+    Q_dot_H = previous(V_dot_sup)*rho*(c_pL_iG + previous(X_oda)*c_pW_iG)*(previous(T_5) - previous(T_1)) + previous(V_dot_sup)*
+      rho*(previous(X_supMin) - previous(X_oda))*r_0
       "Thermal Power consumption for Humidification due to Eurovent 6/8 eq. (7.3) or (7.8)";
 
     annotation (
@@ -485,11 +487,11 @@ p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
 
   equation
     phi_t = phi_t_withoutHRS;
-    X_sup = X_supMin;
+    X_sup = previous(X_supMin);
 
     Q_dot_C = 0;
-    Q_dot_H = V_dot_sup*rho*(c_pL_iG + X_oda*c_pW_iG)*(T_5 - T_1) + V_dot_sup*
-      rho*(X_supMin - X_oda)*r_0
+    Q_dot_H = previous(V_dot_sup)*rho*(c_pL_iG + previous(X_oda)*c_pW_iG)*(previous(T_5) - previous(T_1)) + previous(V_dot_sup)*
+      rho*(previous(X_supMin) - previous(X_oda))*r_0
       "Thermal Power consumption for Humidification due to Eurovent 6/8 eq. (7.3) or (7.8)";
 
     annotation (
@@ -534,13 +536,13 @@ p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
 
   equation
     phi_t = phi_t_withHRS;
-    X_sup = X_supMin;
+    X_sup = previous(X_supMin);
     T_1 = T_2;
     T_3 = T_4;
     T_4 = T_5;
 
-    Q_dot_C = V_dot_sup*rho*(c_pL_iG + X_oda*c_pW_iG)*(T_2 - T_3) - V_dot_sup*
-      rho*(X_supMin - X_oda)*r_0
+    Q_dot_C = previous(V_dot_sup)*rho*(c_pL_iG + previous(X_oda)*c_pW_iG)*(previous(T_2) - previous(T_3)) - previous(V_dot_sup)*
+      rho*(previous(X_supMin) - previous(X_oda))*r_0
       "Thermal Power consumption for Humidification due to Eurovent 6/8 eq. (7.3) or (7.8)";
     Q_dot_H = 0;
 
@@ -586,13 +588,13 @@ p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
 
   equation
     phi_t = phi_t_withoutHRS;
-    X_sup = X_supMin;
+    X_sup = previous(X_supMin);
     T_1 = T_2;
     T_3 = T_4;
     T_4 = T_5;
 
-    Q_dot_C = V_dot_sup*rho*(c_pL_iG + X_oda*c_pW_iG)*(T_2 - T_3) - V_dot_sup*
-      rho*(X_supMin - X_oda)*r_0
+    Q_dot_C = previous(V_dot_sup)*rho*(c_pL_iG + previous(X_oda)*c_pW_iG)*(previous(T_2) - previous(T_3)) - previous(V_dot_sup)*
+      rho*(previous(X_supMin) - previous(X_oda))*r_0
       "Thermal Power consumption for Humidification due to Eurovent 6/8 eq. (7.3) or (7.8)";
     Q_dot_H = 0;
 
@@ -640,10 +642,10 @@ p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
     T_1 = T_2;
     T_2 = T_3;
     T_3 = T_4;
-    X_sup = X_oda;
+    X_sup = previous(X_oda);
 
     Q_dot_C = 0;
-    Q_dot_H = V_dot_sup*rho*(c_pL_iG + X_oda*c_pW_iG)*(T_5 - T_4);
+    Q_dot_H = previous(V_dot_sup)*rho*(c_pL_iG + previous(X_oda)*c_pW_iG)*(previous(T_5) - previous(T_4));
 
     annotation (
       Icon(graphics={Text(
@@ -689,10 +691,10 @@ p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
     T_1 = T_2;
     T_2 = T_3;
     T_3 = T_4;
-    X_sup = X_oda;
+    X_sup = previous(X_oda);
 
     Q_dot_C = 0;
-    Q_dot_H = V_dot_sup*rho*(c_pL_iG + X_oda*c_pW_iG)*(T_5 - T_4);
+    Q_dot_H = previous(V_dot_sup)*rho*(c_pL_iG + previous(X_oda)*c_pW_iG)*(previous(T_5) - previous(T_4));
 
     annotation (
       Icon(graphics={Text(
@@ -738,9 +740,9 @@ p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
     T_1 = T_2;
     T_3 = T_4;
     T_4 = T_5;
-    X_sup = X_oda;
+    X_sup = previous(X_oda);
 
-    Q_dot_C = V_dot_sup*rho*(c_pL_iG + X_oda*c_pW_iG)*(T_2 - T_3);
+    Q_dot_C = previous(V_dot_sup)*rho*(c_pL_iG + previous(X_oda)*c_pW_iG)*(previous(T_2) - previous(T_3));
     Q_dot_H = 0;
 
     annotation (
@@ -787,9 +789,9 @@ p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
     T_1 = T_2;
     T_3 = T_4;
     T_4 = T_5;
-    X_sup = X_oda;
+    X_sup = previous(X_oda);
 
-    Q_dot_C = V_dot_sup*rho*(c_pL_iG + X_oda*c_pW_iG)*(T_2 - T_3);
+    Q_dot_C = previous(V_dot_sup)*rho*(c_pL_iG + previous(X_oda)*c_pW_iG)*(previous(T_2) - previous(T_3));
     Q_dot_H = 0;
 
     annotation (
@@ -820,6 +822,16 @@ p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
   //
   //
 
+  Modelica.Blocks.Interfaces.RealOutput phi_supply(start=0.8)
+    "relativ Humidity [Range: 0...1]" annotation (Placement(transformation(
+        extent={{-7,-7},{7,7}},
+        rotation=0,
+        origin={97,59}), iconTransformation(
+        extent={{4,-4},{-4,4}},
+        rotation=180,
+        origin={84,24})));
+  Modelica.Blocks.Sources.RealExpression hold_phi_sup(y=hold(phi_sup))
+    annotation (Placement(transformation(extent={{50,49},{70,69}})));
 equation
   // variables that will be set with parameteres of HRS efficiency
   phi_t_withHRS = if HRS then efficiencyHRS_enabled else 0;
@@ -879,42 +891,42 @@ equation
   phi_t = (T_1 - T_oda)/(T_6 - T_oda + 1e-3);
 
   // conditions for transitions to State Machines
-  stateToDeHuHRS_true = if X_oda > X_supMax and T_6 < T_oda and
+  stateToDeHuHRS_true = if previous(X_oda) > previous(X_supMax) and previous(T_6) < previous(T_oda) and
     dehumidification and HRS then true else false;
-  stateToDeHuHRS_false = if X_oda > X_supMax and T_6 >= T_oda and
+  stateToDeHuHRS_false = if previous(X_oda) > previous(X_supMax) and previous(T_6) >= previous(T_oda) and
     dehumidification then true else false;
-  stateToHuPreHHRS_true = if (X_oda < X_supMin) and ((T_5 >= T_1) or ((T_5 <
-    T_1) and (abs(V_dot_sup*rho*(X_sup - X_oda)*r_0) >= abs(V_dot_sup*rho*(
-    c_pL_iG + X_oda*c_pW_iG)*(T_1 - T_5))))) and (T_oda < T_6) and
+  stateToHuPreHHRS_true = if (previous(X_oda) < previous(X_supMin)) and ((previous(T_5) >= previous(T_1)) or ((previous(T_5) <
+    previous(T_1)) and (abs(previous(V_dot_sup)*rho*(previous(X_sup) - previous(X_oda))*r_0) >= abs(previous(V_dot_sup)*rho*(
+    c_pL_iG + previous(X_oda)*c_pW_iG)*(previous(T_1) - previous(T_5)))))) and (previous(T_oda) < previous(T_6)) and
     humidification and HRS then true else false;
-  stateToHuPreHHRS_false = if (X_oda < X_supMin) and ((T_5 >= T_1) or ((T_5 <
-    T_1) and (abs(V_dot_sup*rho*(X_sup - X_oda)*r_0) >= abs(V_dot_sup*rho*(
-    c_pL_iG + X_oda*c_pW_iG)*(T_1 - T_5))))) and (T_oda >= T_6) and
+  stateToHuPreHHRS_false = if (previous(X_oda) < previous(X_supMin)) and ((previous(T_5) >= previous(T_1)) or ((previous(T_5) <
+    previous(T_1)) and (abs(previous(V_dot_sup)*rho*(previous(X_sup) - previous(X_oda))*r_0) >= abs(previous(V_dot_sup)*rho*(
+    c_pL_iG + previous(X_oda)*c_pW_iG)*(previous(T_1) - previous(T_5)))))) and (previous(T_oda) >= previous(T_6)) and
     humidification then true else false;
-  stateToHuCHRS_true = if (X_oda < X_supMin) and (T_5 < T_1) and (abs(V_dot_sup*
-    rho*(X_sup - X_oda)*r_0) < abs(V_dot_sup*rho*(c_pL_iG + X_oda*c_pW_iG)*(T_1 -
-    T_5))) and (T_oda > T_6) and humidification and HRS then true else false;
-  stateToHuCHRS_false = if (X_oda < X_supMin) and (T_5 < T_1) and (abs(
-    V_dot_sup*rho*(X_sup - X_oda)*r_0) < abs(V_dot_sup*rho*(c_pL_iG + X_oda*
-    c_pW_iG)*(T_1 - T_5))) and (T_oda <= T_6) and humidification then true
+  stateToHuCHRS_true = if (previous(X_oda) < previous(X_supMin)) and (previous(T_5) < previous(T_1)) and (abs(previous(V_dot_sup)*
+    rho*(previous(X_sup) - previous(X_oda))*r_0) < abs(previous(V_dot_sup)*rho*(c_pL_iG + previous(X_oda)*c_pW_iG)*(previous(T_1) -
+    previous(T_5)))) and (previous(T_oda) > previous(T_6)) and humidification and HRS then true else false;
+  stateToHuCHRS_false = if (previous(X_oda) < previous(X_supMin)) and (previous(T_5) < previous(T_1)) and (abs(
+    previous(V_dot_sup)*rho*(previous(X_sup) - previous(X_oda))*r_0) < abs(previous(V_dot_sup)*rho*(c_pL_iG + previous(X_oda)*
+    c_pW_iG)*(previous(T_1) - previous(T_5)))) and (previous(T_oda) <= previous(T_6)) and humidification then true
      else false;
-  stateToOnlyHeatingHRS_true = if (X_oda < X_supMax and X_oda > X_supMin) and
-    (T_5 >= T_oda + phi_t_withHRS*(T_6 - T_oda))
-     and (T_oda <= T_6) and heating and HRS then true else false;
-  stateToOnlyHeatingHRS_false = if (X_oda < X_supMax and X_oda > X_supMin) and
-    (((T_5 >= T_oda + phi_t_withoutHRS*(T_6 -
-    T_oda)) and (T_oda > T_6)) or (T_oda + phi_t_withHRS*(T_6 - T_oda) > T_5
-     and T_5 >= T_oda + phi_t_withoutHRS*(T_6 - T_oda) and (T_oda <= T_6) and
-    HRS == true) or (T_oda < T_6 and (T_5 >= T_oda) and HRS == false)) and
+  stateToOnlyHeatingHRS_true = if (previous(X_oda) < previous(X_supMax) and previous(X_oda) > previous(X_supMin)) and
+    (previous(T_5) >= previous(T_oda) + phi_t_withHRS*(previous(T_6) - previous(T_oda)))
+     and (previous(T_oda) <= previous(T_6)) and heating and HRS then true else false;
+  stateToOnlyHeatingHRS_false = if (previous(X_oda) < previous(X_supMax) and previous(X_oda) > previous(X_supMin)) and
+    (((previous(T_5) >= previous(T_oda) + phi_t_withoutHRS*(previous(T_6) -
+    previous(T_oda))) and (previous(T_oda) > previous(T_6))) or (previous(T_oda) + phi_t_withHRS*(previous(T_6) - previous(T_oda)) > previous(T_5)
+     and previous(T_5) >= previous(T_oda) + phi_t_withoutHRS*(previous(T_6) - previous(T_oda)) and (previous(T_oda) <= previous(T_6)) and
+    HRS == true) or (previous(T_oda) < previous(T_6) and (previous(T_5) >= previous(T_oda)) and HRS == false)) and
     heating then true else false;
-  stateToOnlyCoolingHRS_true = if (X_oda < X_supMax and X_oda > X_supMin) and
-    (T_5 < T_oda + phi_t_withHRS*(T_6 - T_oda))
-     and (T_oda > T_6) and cooling and HRS then true else false;
-  stateToOnlyCoolingHRS_false = if (X_oda < X_supMax and X_oda > X_supMin) and
-    (((T_5 < T_oda + phi_t_withoutHRS*(T_6 -
-    T_oda)) and (T_oda <= T_6)) or (T_oda + phi_t_withoutHRS*(T_6 - T_oda) >
-    T_5 and T_5 >= T_oda + phi_t_withHRS*(T_6 - T_oda) and (T_oda > T_6) and
-    HRS == true) or (T_oda > T_5 and T_oda >= T_6 and HRS == false)) and
+  stateToOnlyCoolingHRS_true = if (previous(X_oda) < previous(X_supMax) and previous(X_oda) > previous(X_supMin)) and
+    (previous(T_5) < previous(T_oda) + phi_t_withHRS*(previous(T_6) - previous(T_oda)))
+     and (previous(T_oda) > previous(T_6)) and cooling and HRS then true else false;
+  stateToOnlyCoolingHRS_false = if (previous(X_oda) < previous(X_supMax) and previous(X_oda) > previous(X_supMin)) and
+    (((previous(T_5) < previous(T_oda) + phi_t_withoutHRS*(previous(T_6) -
+    previous(T_oda))) and (previous(T_oda) <= previous(T_6))) or (previous(T_oda) + phi_t_withoutHRS*(previous(T_6) - previous(T_oda)) >
+    previous(T_5) and previous(T_5) >= previous(T_oda) + phi_t_withHRS*(previous(T_6) - previous(T_oda)) and (previous(T_oda) > previous(T_6)) and
+    HRS == true) or (previous(T_oda) > previous(T_5) and previous(T_oda) >= previous(T_6) and HRS == false)) and
     cooling then true else false;
 
   X_supplyMin = (molarMassRatio*phi_supplyAir[1]*
@@ -964,10 +976,9 @@ equation
       arrow={Arrow.Filled,Arrow.None}));
   transition(
     startState,
-    deHuHRS_true,
-    stateToDeHuHRS_true,
+    deHuHRS_true,stateToDeHuHRS_true,
     priority=1,
-    immediate=false,
+    immediate=true,
     reset=false,
     synchronize=false) annotation (Line(
       points={{-66,10},{-80,-38}},
@@ -982,10 +993,9 @@ equation
       horizontalAlignment=TextAlignment.Right));
   transition(
     deHuHRS_true,
-    startState,
-    2 > 1,
+    startState,2 > 1,
     priority=11,
-    immediate=false,
+    immediate=true,
     reset=false,
     synchronize=false) annotation (Line(
       points={{-74,-54},{-68,-14}},
@@ -993,7 +1003,7 @@ equation
       thickness=0.25,
       smooth=Smooth.Bezier), Text(
       string="%condition",
-      extent={{2,4},{2,10}},
+      extent={{4,-4},{4,-10}},
       lineColor={95,95,95},
       fontSize=2,
       textStyle={TextStyle.Bold},
@@ -1001,10 +1011,9 @@ equation
   //stateToDeHuHRS_true==false,
   transition(
     startState,
-    deHuHRS_false,
-    stateToDeHuHRS_false,
+    deHuHRS_false,stateToDeHuHRS_false,
     priority=2,
-    immediate=false,
+    immediate=true,
     reset=false,
     synchronize=false) annotation (Line(
       points={{-59,9},{-54,-38}},
@@ -1012,17 +1021,16 @@ equation
       thickness=0.25,
       smooth=Smooth.Bezier), Text(
       string="%condition",
-      extent={{10,-48},{10,-42}},
+      extent={{-4,4},{-4,10}},
       lineColor={95,95,95},
       fontSize=2,
       textStyle={TextStyle.Bold},
       horizontalAlignment=TextAlignment.Right));
   transition(
     deHuHRS_false,
-    startState,
-    2 > 1,
+    startState,2 > 1,
     priority=11,
-    immediate=false,
+    immediate=true,
     reset=false,
     synchronize=false) annotation (Line(
       points={{-52,-54},{-68,-14}},
@@ -1030,7 +1038,7 @@ equation
       thickness=0.25,
       smooth=Smooth.Bezier), Text(
       string="%condition",
-      extent={{-2,4},{-2,10}},
+      extent={{4,-4},{4,-10}},
       lineColor={95,95,95},
       fontSize=2,
       textStyle={TextStyle.Bold},
@@ -1041,7 +1049,7 @@ equation
     onlyHeatingHRS_true,
     stateToOnlyHeatingHRS_true,
     priority=7,
-    immediate=false,
+    immediate=true,
     reset=false,
     synchronize=false) annotation (Line(
       points={{-78,10},{-20,-50}},
@@ -1059,7 +1067,7 @@ equation
     onlyHeatingHRS_false,
     stateToOnlyHeatingHRS_false,
     priority=8,
-    immediate=false,
+    immediate=true,
     reset=false,
     synchronize=false) annotation (Line(
       points={{-74,10},{20,-50}},
@@ -1077,7 +1085,7 @@ equation
     onlyCoolingHRS_true,
     stateToOnlyCoolingHRS_true,
     priority=9,
-    immediate=false,
+    immediate=true,
     reset=false,
     synchronize=false) annotation (Line(
       points={{-70,10},{48,-42}},
@@ -1095,7 +1103,7 @@ equation
     onlyCoolingHRS_false,
     stateToOnlyCoolingHRS_false,
     priority=10,
-    immediate=false,
+    immediate=true,
     reset=false,
     synchronize=false) annotation (Line(
       points={{-64,10},{77,-43}},
@@ -1112,7 +1120,7 @@ equation
     onlyHeatingHRS_true,
     startState,
     2 > 1,
-    immediate=false,
+    immediate=true,
     reset=false,
     synchronize=false,
     priority=11) annotation (Line(
@@ -1131,7 +1139,7 @@ equation
     onlyHeatingHRS_false,
     startState,
     2 > 1,
-    immediate=false,
+    immediate=true,
     reset=false,
     synchronize=false,
     priority=11) annotation (Line(
@@ -1150,7 +1158,7 @@ equation
     onlyCoolingHRS_true,
     startState,
     2 > 1,
-    immediate=false,
+    immediate=true,
     reset=false,
     synchronize=false,
     priority=11) annotation (Line(
@@ -1169,7 +1177,7 @@ equation
     onlyCoolingHRS_false,
     startState,
     2 > 1,
-    immediate=false,
+    immediate=true,
     reset=false,
     synchronize=false,
     priority=11) annotation (Line(
@@ -1189,7 +1197,7 @@ equation
     huPreHHRS_true,
     stateToHuPreHHRS_true,
     priority=5,
-    immediate=false,
+    immediate=true,
     reset=false,
     synchronize=false) annotation (Line(
       points={{-58,2},{-8,2}},
@@ -1206,7 +1214,7 @@ equation
     huPreHHRS_true,
     startState,
     2 > 1,
-    immediate=false,
+    immediate=true,
     reset=false,
     synchronize=false,
     priority=11) annotation (Line(
@@ -1226,7 +1234,7 @@ equation
     huPreHHRS_false,
     stateToHuPreHHRS_false,
     priority=6,
-    immediate=false,
+    immediate=true,
     reset=false,
     synchronize=false) annotation (Line(
       points={{-58,2},{18,2}},
@@ -1244,7 +1252,7 @@ equation
     startState,
     2 > 1,
     priority=11,
-    immediate=false,
+    immediate=true,
     reset=false,
     synchronize=false) annotation (Line(
       points={{18,-14},{-74,-14}},
@@ -1263,7 +1271,7 @@ equation
     huCHRS_true,
     stateToHuCHRS_true,
     priority=3,
-    immediate=false,
+    immediate=true,
     reset=false,
     synchronize=false) annotation (Line(
       points={{-58,2},{56,2}},
@@ -1281,7 +1289,7 @@ equation
     startState,
     2 > 1,
     priority=11,
-    immediate=false,
+    immediate=true,
     reset=false,
     synchronize=false) annotation (Line(
       points={{58,-14},{-72,-14}},
@@ -1300,7 +1308,7 @@ equation
     huCHRS_false,
     stateToHuCHRS_false,
     priority=4,
-    immediate=false,
+    immediate=true,
     reset=false,
     synchronize=false) annotation (Line(
       points={{-58,2},{86,2}},
@@ -1318,7 +1326,7 @@ equation
     startState,
     2 > 1,
     priority=11,
-    immediate=false,
+    immediate=true,
     reset=false,
     synchronize=false) annotation (Line(
       points={{86,-14},{-72,-14}},
@@ -1333,6 +1341,8 @@ equation
       horizontalAlignment=TextAlignment.Left));
   //stateToHuCHRS_false==false,
 
+  connect(hold_phi_sup.y, phi_supply)
+    annotation (Line(points={{71,59},{71,59},{97,59}}, color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-80},{100,
             100}}), graphics={

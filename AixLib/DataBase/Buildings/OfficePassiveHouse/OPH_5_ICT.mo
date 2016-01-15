@@ -34,7 +34,7 @@ record OPH_5_ICT
     R1o = 0.000353062716991,
     RRest = 0.00950991783473,
     C1o = 19748404.1293,
-    withAHU=true,
+    withAHU=false,
     minAHU=0,
     maxAHU=130);
   annotation (Documentation(revisions="<html>
