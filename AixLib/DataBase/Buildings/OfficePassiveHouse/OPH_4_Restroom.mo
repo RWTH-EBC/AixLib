@@ -8,7 +8,7 @@ record OPH_4_Restroom
     l_cooler = 0,
     RatioConvectiveHeatLighting = 0.5,
     zoneID = "OPH_4_Restroom",
-    usage = "WC und Sanitaerraeume in Nichtwohngebaeuden",
+    usage = "Restroom",
     RoomArea = 134.0,
     Vair = 536.0,
     alphaiwi = 2.38965517241,
@@ -33,10 +33,15 @@ record OPH_4_Restroom
     withOuterwalls = true,
     R1o = 0.00017702091729,
     RRest = 0.00476430963748,
-    C1o = 39369992.1342);
+    C1o = 39369992.1342,
+    withAHU=true,
+    minAHU=0,
+    maxAHU=8);
   annotation (Documentation(revisions="<html>
  <ul>
  <li><i>June, 2015&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
  </ul>
- </html>"));
+ </html>", info="<html>
+<p><span style=\"font-family: MS Shell Dlg 2;\">Zone &QUOT;Restroom&QUOT; of an example building according to an office building with passive house standard. The building is divided in six zones, this is a typical zoning for an office building. </span></p>
+</html>"));
 end OPH_4_Restroom;
