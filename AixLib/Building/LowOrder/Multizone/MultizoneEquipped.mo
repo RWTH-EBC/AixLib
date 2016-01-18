@@ -3,14 +3,14 @@ model MultizoneEquipped
   "Multizone with basic heat supply system, air handling unit, an arbitrary number of thermal zones (vectorized), and ventilation"
   extends AixLib.Building.LowOrder.Multizone.partialMultizone;
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor TAirAHUAvg
-    "Averaged air temperature of the zones which are supplied by the AHU" annotation (Placement(transformation(extent={{16,-28},
-            {8,-20}})));
+    "Averaged air temperature of the zones which are supplied by the AHU" annotation (Placement(transformation(extent={{16,-26},
+            {8,-18}})));
   BaseClasses.ThermSplitter splitterThermPercentAir(dimension=buildingParam.numZones,
       splitFactor=AixLib.Building.LowOrder.BaseClasses.ZoneFactorsZero(buildingParam.numZones, zoneParam)) annotation (
       Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=0,
-        origin={26,-24})));
+        origin={26,-22})));
   Modelica.Blocks.Interfaces.RealInput AHU[4]
     "Input for AHU Conditions [1]: Desired Air Temperature in K [2]: Desired minimal relative humidity [3]: Desired maximal relative humidity [4]: Schedule Desired Ventilation Flow"
     annotation (Placement(transformation(
@@ -24,7 +24,7 @@ model MultizoneEquipped
     zoneParam=zoneParam,
     each recOrSep=true,
     each staOrDyn=true) "Heater Cooler with PI control"
-    annotation (Placement(transformation(extent={{-32,-64},{-6,-38}})));
+    annotation (Placement(transformation(extent={{-32,-66},{-6,-40}})));
   Modelica.Blocks.Interfaces.RealInput TSetHeater[buildingParam.numZones](
     final quantity="ThermodynamicTemperature",
     final unit="K",
@@ -111,12 +111,12 @@ model MultizoneEquipped
         extent={{-4,-4},{4,4}},
         rotation=90,
         origin={48,10})));
-  Modelica.Blocks.Nonlinear.Limiter limiter(uMin=1, uMax=1000)
-    annotation (Placement(transformation(extent={{0,-28},{-8,-20}})));
+  Modelica.Blocks.Nonlinear.Limiter minTemp(uMax=1000, uMin=1)
+    annotation (Placement(transformation(extent={{0,-27},{-10,-17}})));
 equation
   for i in 1:buildingParam.numZones loop
     connect(internalGains[(i*3)-2], airFlowRate.relOccupation[i]) annotation (Line(
-      points={{76,-100},{74,-100},{74,-34},{-76,-34},{-76,10.8},{-72,10.8}},
+      points={{76,-100},{74,-100},{74,-36},{-76,-36},{-76,10.8},{-72,10.8}},
       color={0,0,127},
       smooth=Smooth.None));
   end for;
@@ -125,12 +125,12 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(splitterThermPercentAir.signalOutput, zone.internalGainsConv) annotation (Line(
-      points={{30,-24},{60,-24},{60,43.4}},
+      points={{30,-22},{60,-22},{60,43.4}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(TAirAHUAvg.port, splitterThermPercentAir.signalInput) annotation (
       Line(
-      points={{16,-24},{22,-24}},
+      points={{16,-22},{22,-22}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(AirHandlingUnit.T_outdoorAir, weather[1]) annotation (Line(
@@ -162,12 +162,14 @@ equation
       points={{-100,-21},{-100,-2},{18,-2},{18,6},{15.92,6},{15.92,6.33333}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(TSetCooler, heaterCooler.setPointCool) annotation (Line(points={{-48,-100},
-          {-48,-66},{-22.12,-66},{-22.12,-60.36}}, color={0,0,127}));
-  connect(TSetHeater, heaterCooler.setPointHeat) annotation (Line(points={{-20,-100},
-          {-22,-100},{-22,-68},{-16.14,-68},{-16.14,-60.36}}, color={0,0,127}));
+  connect(TSetCooler, heaterCooler.setPointCool) annotation (Line(points={{-48,
+          -100},{-48,-66},{-22.12,-66},{-22.12,-62.36}},
+                                                   color={0,0,127}));
+  connect(TSetHeater, heaterCooler.setPointHeat) annotation (Line(points={{-20,
+          -100},{-22,-100},{-22,-68},{-16.14,-68},{-16.14,-62.36}},
+                                                              color={0,0,127}));
   connect(heaterCooler.heatCoolRoom, zone.internalGainsConv) annotation (Line(
-        points={{-7.3,-56.2},{26,-56.2},{26,-48},{60,-48},{60,43.4}},
+        points={{-7.3,-58.2},{26,-58.2},{26,-52},{60,-52},{60,43.4}},
                                                   color={191,0,0}));
   connect(AirHandlingUnit.Pel, Pel) annotation (Line(points={{7.94,2.05556},{8,
           2.05556},{8,2},{56,2},{80,2},{80,16},{104,16}},
@@ -175,12 +177,12 @@ equation
   connect(AirHandlingUnit.QflowH, HeatingPowerAHU) annotation (Line(points={{-0.42,
           2.05556},{-0.42,-6},{80,-6},{80,-4},{104,-4}}, color={0,0,127}));
   connect(AirHandlingUnit.QflowC, CoolingPowerAHU) annotation (Line(points={{-17.14,
-          2.05556},{-17.14,-32},{90,-32},{90,-32},{90,-22},{104,-22}},
+          2.05556},{-17.14,-14},{-17,-14},{-17,-32},{83,-32},{83,-22},{104,-22}},
                                                               color={0,0,127}));
   connect(heaterCooler.HeatingPower, HeatingPowerHeater) annotation (Line(
-        points={{-6,-45.8},{38,-45.8},{38,-44},{100,-44}}, color={0,0,127}));
+        points={{-6,-47.8},{38,-47.8},{38,-42},{100,-42}}, color={0,0,127}));
   connect(heaterCooler.CoolingPower, CoolingPowerCooler) annotation (Line(
-        points={{-6,-51.78},{12,-51.78},{12,-52},{36,-52},{36,-66},{104,-66}},
+        points={{-6,-53.78},{12,-53.78},{12,-54},{36,-54},{36,-66},{104,-66}},
         color={0,0,127}));
   connect(splitterVolumeFlowVentilation.y, zone.ventilationRate) annotation (
       Line(
@@ -198,22 +200,22 @@ equation
     annotation (Line(points={{15.92,16.4444},{20,16.4444},{20,21.8889},{15.92,
           21.8889}},
         color={0,0,127}));
-  connect(TAirAHUAvg.T, limiter.u)
-    annotation (Line(points={{8,-24},{4,-24},{0.8,-24}}, color={0,0,127}));
-  connect(limiter.y, AirHandlingUnit.T_extractAir) annotation (Line(points={{-8.4,
-          -24},{-12,-24},{-12,-14},{26,-14},{26,25.7778},{15.92,25.7778}},
+  connect(TAirAHUAvg.T, minTemp.u)
+    annotation (Line(points={{8,-22},{1,-22}}, color={0,0,127}));
+  connect(minTemp.y, AirHandlingUnit.T_extractAir) annotation (Line(points={{
+          -10.5,-22},{-14,-22},{-14,-12},{26,-12},{26,25.7778},{15.92,25.7778}},
         color={0,0,127}));
   annotation (
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}}),
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
+            100,100}}),
             graphics={
         Rectangle(
-          extent={{-66,30},{32,-36}},
+          extent={{-66,30},{32,-40}},
           lineColor={0,0,255},
           fillPattern=FillPattern.Solid,
           fillColor={212,221,253}),
         Rectangle(
-          extent={{-66,-38},{32,-70}},
+          extent={{-66,-42},{32,-70}},
           lineColor={0,0,255},
           fillColor={255,170,170},
           fillPattern=FillPattern.Solid),
