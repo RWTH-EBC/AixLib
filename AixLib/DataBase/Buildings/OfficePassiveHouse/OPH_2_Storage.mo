@@ -8,7 +8,7 @@ record OPH_2_Storage
     l_cooler = 0,
     RatioConvectiveHeatLighting = 0.5,
     zoneID = "OPH_2_Storage",
-    usage = "Lager, Technik, Archiv",
+    usage = "Storage",
     RoomArea = 502.0,
     Vair = 2008.0,
     alphaiwi = 2.27142857143,
@@ -38,5 +38,7 @@ record OPH_2_Storage
  <ul>
  <li><i>June, 2015&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
  </ul>
- </html>"));
+ </html>", info="<html>
+<p><span style=\"font-family: MS Shell Dlg 2;\">Zone &QUOT;Storage&QUOT; of an example building according to an office building with passive house standard. The building is divided in six zones, this is a typical zoning for an office building. </span></p>
+</html>"));
 end OPH_2_Storage;

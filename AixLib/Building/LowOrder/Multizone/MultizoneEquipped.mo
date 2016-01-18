@@ -38,20 +38,19 @@ model MultizoneEquipped
         rotation=180,
         origin={-94,6})));
   HVAC.AirHandlingUnit.AHU AirHandlingUnit(
-    heating=buildingParam.heating,
-    cooling=buildingParam.cooling,
-    dehumidification=buildingParam.dehumidification,
-    humidification=buildingParam.humidification,
     BPF_DeHu=buildingParam.BPF_DeHu,
     HRS=buildingParam.HRS,
     efficiencyHRS_enabled=buildingParam.efficiencyHRS_enabled,
-    efficiencyHRS_disabled=buildingParam.efficiencyHRS_disabled)
-    "Air Handling Unit"
+    efficiencyHRS_disabled=buildingParam.efficiencyHRS_disabled,
+    heating=buildingParam.heatingAHU,
+    cooling=buildingParam.coolingAHU,
+    dehumidification=buildingParam.dehumidificationAHU,
+    humidification=buildingParam.humidificationAHU) "Air Handling Unit"
     annotation (Placement(transformation(extent={{-54,-24},{22,46}})));
   BaseClasses.AirFlowRate airFlowRate(
     zoneParam=zoneParam,
     dimension=buildingParam.numZones,
-    withProfile=true)                annotation (Placement(transformation(extent={{-72,6},{-60,22}})));
+    withProfile=true) annotation (Placement(transformation(extent={{-72,6},{-60,22}})));
   Modelica.Blocks.Interfaces.RealInput TSetCooler[buildingParam.numZones](
     final quantity="ThermodynamicTemperature",
     final unit="K",
@@ -84,7 +83,7 @@ model MultizoneEquipped
     heaterCooler, 1)](
    final quantity="HeatFlowRate",
    final unit="W") "Power for heating" annotation (Placement(
-        transformation(extent={{90,-52},{110,-32}}), iconTransformation(extent={{100,-52},
+        transformation(extent={{90,-54},{110,-34}}), iconTransformation(extent={{100,-52},
             {114,-38}})));
   Modelica.Blocks.Interfaces.RealOutput CoolingPowerCooler[size(
     heaterCooler, 1)](
@@ -115,7 +114,6 @@ model MultizoneEquipped
   Modelica.Blocks.Nonlinear.Limiter minTemp(uMax=1000, uMin=1)
     annotation (Placement(transformation(extent={{0,-27},{-10,-17}})));
 equation
-  AirHandlingUnit.phi_extractAir = hold(AirHandlingUnit.phi_sup);
   for i in 1:buildingParam.numZones loop
     connect(internalGains[(i*3)-2], airFlowRate.relOccupation[i]) annotation (Line(
       points={{76,-100},{74,-100},{74,-36},{-76,-36},{-76,10.8},{-72,10.8}},
@@ -198,6 +196,10 @@ equation
   connect(conversion.u, AirHandlingUnit.Vflow_out) annotation (Line(points={{48,5.2},
           {48,4},{28,4},{28,28},{-60,28},{-60,21.8889},{-52.48,21.8889}},
         color={0,0,127}));
+  connect(AirHandlingUnit.phi_supply, AirHandlingUnit.phi_extractAir)
+    annotation (Line(points={{15.92,16.4444},{20,16.4444},{20,21.8889},{15.92,
+          21.8889}},
+        color={0,0,127}));
   connect(TAirAHUAvg.T, minTemp.u)
     annotation (Line(points={{8,-22},{1,-22}}, color={0,0,127}));
   connect(minTemp.y, AirHandlingUnit.T_extractAir) annotation (Line(points={{
@@ -224,7 +226,7 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Air Conditioning"),
         Text(
-          extent={{-60,-50},{-32,-60}},
+          extent={{-64,-48},{-36,-58}},
           lineColor={0,0,255},
           fillColor={212,221,253},
           fillPattern=FillPattern.Solid,

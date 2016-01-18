@@ -8,7 +8,7 @@ record OPH_6_Floor
     l_cooler = 0,
     RatioConvectiveHeatLighting = 0.5,
     zoneID = "OPH_6_Floor",
-    usage = "Verkehrsflaechen",
+    usage = "Floor",
     RoomArea = 837.0,
     Vair = 3348.0,
     alphaiwi = 2.44285714286,
@@ -38,5 +38,7 @@ record OPH_6_Floor
  <ul>
  <li><i>June, 2015&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
  </ul>
- </html>"));
+ </html>", info="<html>
+<p><span style=\"font-family: MS Shell Dlg 2;\">Zone &QUOT;Floor&QUOT; of an example building according to an office building with passive house standard. The building is divided in six zones, this is a typical zoning for an office building. </span></p>
+</html>"));
 end OPH_6_Floor;
