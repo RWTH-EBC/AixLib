@@ -37,7 +37,6 @@ typedef unsigned char* tByte; // Array of Byte to be received
  
 // Global data needed in process
     WSADATA gWsaData; 
-    SOCKET gConnectSocket = INVALID_SOCKET; // Socket deklaration
     struct addrinfo *gpResult = NULL,
                     *gPtr = NULL,
                     gHints; // 3 times struct addrinfo
@@ -64,15 +63,16 @@ int SocketInit(void) // Initialize a Socket, incorporated in TCPConstructor()
 	return ans;
 }
 
-int SocketDestruct(void) // Destruct socket and clean up
+int SocketDestruct(int socketHandle) // Destruct socket and clean up
 {
     // cleanup
-    closesocket(gConnectSocket);
+    closesocket(socketHandle);
     WSACleanup();
 	return 0;
 }
 
-int SocketConnect(tIpAddr ip, tPort port) // Connect to server on ip and port
+// socketHandle is output
+int SocketConnect(tIpAddr ip, tPort port, int* socketHandle) // Connect to server on ip and port
 {
 	int iResult;
     // Resolve the server address and port
@@ -87,19 +87,19 @@ int SocketConnect(tIpAddr ip, tPort port) // Connect to server on ip and port
     for(gPtr=gpResult; gPtr != NULL ;gPtr=gPtr->ai_next) {
 
         // Create a SOCKET for connecting to server
-        gConnectSocket = socket(gPtr->ai_family, gPtr->ai_socktype, 
+        *socketHandle = socket(gPtr->ai_family, gPtr->ai_socktype, 
             gPtr->ai_protocol);
-        if (gConnectSocket == INVALID_SOCKET) {
+        if (*socketHandle == INVALID_SOCKET) {
 			ModelicaFormatMessage("SocketConnect(): Socket failed with error: %ld\n", WSAGetLastError());
 			WSACleanup();
             return 1;
         }
 
         // Connect to server.
-        iResult = connect( gConnectSocket, gPtr->ai_addr, (int)gPtr->ai_addrlen);
+        iResult = connect( *socketHandle, gPtr->ai_addr, (int)gPtr->ai_addrlen);
         if (iResult == SOCKET_ERROR) {
-            closesocket(gConnectSocket);
-            gConnectSocket = INVALID_SOCKET;
+            closesocket(*socketHandle);
+            *socketHandle = INVALID_SOCKET;
             continue;
         }
         break;
@@ -107,7 +107,7 @@ int SocketConnect(tIpAddr ip, tPort port) // Connect to server on ip and port
 
     freeaddrinfo(gpResult);
 
-    if (gConnectSocket == INVALID_SOCKET) {
+    if (*socketHandle == INVALID_SOCKET) {
 		ModelicaFormatMessage("SocketConnect(): Unable to connect to server!\n");     
 		WSACleanup();
         return 1;
@@ -115,45 +115,45 @@ int SocketConnect(tIpAddr ip, tPort port) // Connect to server on ip and port
 	return 0;
 }
 
-int SocketDisconnect(void) // End communcation
+int SocketDisconnect(int socketHandle)) // End communcation
 {
  	int iResult;
    // shutdown the connection since no more data will be sent
-    iResult = shutdown(gConnectSocket, SD_SEND);
+    iResult = shutdown(socketHandle, SD_SEND);
     if (iResult == SOCKET_ERROR) {
         ModelicaFormatMessage("SocketDisconnect(): Shutdown failed with error: %d\n", WSAGetLastError());
-        closesocket(gConnectSocket);
+        closesocket(socketHandle);
         WSACleanup();
         return 1;
     }
 	return 0;
 }
 
-int SocketSend(tData sendbuf, int len) // Send data via socket
+int SocketSend(tData sendbuf, int len, int socketHandle)) // Send data via socket
 {
 	int iResult;
     // Send an initial buffer
-    iResult = send( gConnectSocket, sendbuf, len, 0 );
+    iResult = send(socketHandle), sendbuf, len, 0 );
     if (iResult == SOCKET_ERROR) {
         ModelicaFormatMessage("SocketSend(): Send failed with error: %d\n", WSAGetLastError());
-        closesocket(gConnectSocket);
+        closesocket(socketHandle));
         WSACleanup();
         return 1;
     }
 	return iResult;
 }
 
-int SocketReceive(char **buffer, int maxLen) // Receive data on socket
+int SocketReceive(char **buffer, int maxLen, int socketHandle) // Receive data on socket
 {
 	int iResult;
 	char *answerBuffer;
 	answerBuffer = ModelicaAllocateString(maxLen);
-	iResult = recv(gConnectSocket, answerBuffer, maxLen, 0);
+	iResult = recv(socketHandle, answerBuffer, maxLen, 0);
 	*buffer = answerBuffer;
 	return iResult;
 }
 
-int TCPConstructor(tIpAddr ip, tPort port) // Initialize socket and connect to server
+int TCPConstructor(tIpAddr ip, tPort port, int* socketHandle) // Initialize socket and connect to server
 {
 	// Intialize socket
     if (0 != SocketInit())
@@ -163,7 +163,7 @@ int TCPConstructor(tIpAddr ip, tPort port) // Initialize socket and connect to s
     }
 			
 	// Connect to Server with ip on port
-	if (0 != SocketConnect(ip, port)) {
+	if (0 != SocketConnect(ip, port, socketHandle)) {
 	ModelicaFormatMessage("SocketConnect(): Unable to connect to server!\n");  
 		return 2;
 	}

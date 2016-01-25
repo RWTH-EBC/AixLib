@@ -1269,6 +1269,8 @@ http://msdn.microsoft.com/de-de/library/windows/desktop/ms737591%28v=vs.85%29.as
         parameter String  IP_Address="127.0.0.1" "IP address or name of Server";
         parameter String  port="27015" "Port on server";
 
+          /**************** socket handle ***********************/
+         Integer socketHandle(start = 0) "socket handle";
       /**************** Error handling of functions ***********************/
          Integer state
           "dummy variable to check state of C-function, 0 accords OK, 1 failure";
@@ -1276,8 +1278,9 @@ http://msdn.microsoft.com/de-de/library/windows/desktop/ms737591%28v=vs.85%29.as
       initial algorithm
         /**************** initialize TCP socket and connect to server**************/
       // At start of simulation socket is created and connection to server is established
+      socketHandle :=0;
 
-      state :=Functions.TCP.TCPConstructor(IP_Address, port);
+      (socketHandle,state) :=Functions.TCP.TCPConstructor(IP_Address, port);
 
       equation
 
@@ -1301,7 +1304,7 @@ http://msdn.microsoft.com/de-de/library/windows/desktop/ms737591%28v=vs.85%29.as
 
        when terminal() then
       /**************** Terminate connection to server at end of simulation  **************/
-          state :=Functions.TCP.SocketDestruct();
+          state :=Functions.TCP.SocketDestruct(socketHandle);
         end when;
 
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
@@ -1349,10 +1352,11 @@ Higher Level protocols (>OSI-Level 5) need to be added depending on the specific
         "External C function to construct a socket for TCP communication"
       input String IP "IP of PC to connect to";
       input String port "Port number where to connect to";
+      output Integer socketHandle "SocketHandle";
       output Integer ans
           "dummy answer 0 = OK!, 1 == Intialization failed, 2 == Connect failed";
 
-      external "C" ans = TCPConstructor(IP,port) annotation (
+      external "C" ans = TCPConstructor(IP,port,socketHandle) annotation (
       Include="#include \"TCP_Lib.h\"",
        IncludeDirectory="modelica://ConnectivityTCP/Resources/Include");
 
@@ -1421,9 +1425,10 @@ int TCP_Constructor(tIpAddr ip, tPort port)
 
       input String sendbuffer "Data to be send as a string";
       input Integer length "Length of string to be send";
+      input Integer socketHandle "SocketHandle";
       output Integer ans "dummy variable answer, 0 = OK!, 1 == error";
 
-      external "C" ans = SocketSend(sendbuffer,length) annotation (
+      external "C" ans = SocketSend(sendbuffer,length,socketHandle) annotation (
       Include="#include \"TCP_Lib.h\"",
        IncludeDirectory="modelica://ConnectivityTCP/Resources/Include");
 
@@ -1497,11 +1502,12 @@ int SocketSend(tData sendbuf, int len)
 
       output String buffer "buffer where incoming message is saved";
       input Integer length "Maximum length of incoming message";
+      input Integer socketHandle "SocketHandle";
       output Integer state
           "State of Function, No. of bytes received if fine, -1 if failed";
 
       external "C" state =
-                         SocketReceive(buffer,length) annotation (
+                         SocketReceive(buffer,length,socketHandle) annotation (
       Include="#include \"TCP_Lib.h\"",
        IncludeDirectory="modelica://ConnectivityTCP/Resources/Include");
 
@@ -1571,9 +1577,10 @@ int SocketReceive(char **buffer, int maxLen)
 
       function SocketDestruct
         "External C function to close socket and free memory"
+      input Integer socketHandle "SocketHandle";
       output Integer ans "dummy variable answer, 0 = OK!, 1 == error";
 
-      external "C" ans = SocketDestruct() annotation (
+      external "C" ans = SocketDestruct(socketHandle) annotation (
       Include="#include \"TCP_Lib.h\"",
        IncludeDirectory="modelica://ConnectivityTCP/Resources/Include");
 
@@ -1729,10 +1736,11 @@ int SocketInit(void) // Initialize a Socket, Incorporated in TCP_Constructor()
           "External C function to connect to server with <IP> on <port>"
         input String ip "IP address of server";
         input String port "Port at server to connect to";
+        output Integer socketHandle "SocketHandle";
         output Integer ans
             "dummy answer 0 == OK, 1 == error, error Message is printed";
 
-        external "C" ans = SocketConnect(ip,port) annotation (
+        external "C" ans = SocketConnect(ip,port,socketHandle) annotation (
         Include="#include \"TCP_Lib.h\"",
          IncludeDirectory="modelica://ConnectivityTCP/Resources/Include");
 
@@ -1835,9 +1843,10 @@ int SocketConnect(tIpAddr ip, tPort port)
         function SocketDisconnect
           "External C function which disconnects connection on current port"
 
+        input Integer socketHandle "SocketHandle";
         output Integer ans "dummy variable answer, 0 = OK!, 1 == error";
 
-        external "C" ans = SocketDisconnect() annotation (
+        external "C" ans = SocketDisconnect(socketHandle) annotation (
         Include="#include \"TCP_Lib.h\"",
          IncludeDirectory="modelica://ConnectivityTCP/Resources/Include");
 
