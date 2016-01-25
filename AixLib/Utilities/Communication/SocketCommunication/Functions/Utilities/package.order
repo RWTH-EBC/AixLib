@@ -1,0 +1,6 @@
+convertStrtoDbl
+convertStrtoInt
+convertBytetoHex
+convertHextoByte
+convertBytetoSgl
+convertDbltoHex
