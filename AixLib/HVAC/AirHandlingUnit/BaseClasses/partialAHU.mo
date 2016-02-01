@@ -1,5 +1,5 @@
 within AixLib.HVAC.AirHandlingUnit.BaseClasses;
-partial model PartialAHU "Defines necessary parameters and connectors"
+partial model partialAHU "Defines necessary parameters and connectors"
 
     // Booleans for possible AHU modes
   inner parameter Boolean heating=true "Heating Function of AHU"
@@ -121,4 +121,4 @@ partial model PartialAHU "Defines necessary parameters and connectors"
           fillColor={0,0,255},
           fillPattern=FillPattern.Solid,
           textString=" ")}));
-end PartialAHU;
+end partialAHU;

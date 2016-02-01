@@ -1,7 +1,7 @@
 within AixLib.HVAC.AirHandlingUnit;
 model AHU
   "Air Handling Unit with Heat Recovery System, Cooling, Heating, Humidification (adiabatic), Dehumidification"
-   extends AixLib.HVAC.AirHandlingUnit.BaseClasses.PartialAHU;
+   extends AixLib.HVAC.AirHandlingUnit.BaseClasses.partialAHU;
  /*
  indices and abbreviations:
  HRS = heat recovery system

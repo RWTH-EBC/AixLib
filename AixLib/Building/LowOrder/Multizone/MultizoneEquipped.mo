@@ -37,8 +37,8 @@ model MultizoneEquipped
         extent={{6,-6},{-6,6}},
         rotation=180,
         origin={-94,6})));
-  replaceable HVAC.AirHandlingUnit.AHU
-                           AirHandlingUnit(
+  replaceable HVAC.AirHandlingUnit.AHU AirHandlingUnit constrainedby
+    HVAC.AirHandlingUnit.BaseClasses.partialAHU(
     BPF_DeHu=buildingParam.BPF_DeHu,
     HRS=buildingParam.HRS,
     efficiencyHRS_enabled=buildingParam.efficiencyHRS_enabled,
@@ -46,8 +46,7 @@ model MultizoneEquipped
     heating=buildingParam.heatingAHU,
     cooling=buildingParam.coolingAHU,
     dehumidification=buildingParam.dehumidificationAHU,
-    humidification=buildingParam.humidificationAHU) constrainedby
-    HVAC.AirHandlingUnit.BaseClasses.PartialAHU "Air Handling Unit"
+    humidification=buildingParam.humidificationAHU) "Air Handling Unit"
     annotation (Placement(transformation(extent={{-50,-2},{20,24}})), choicesAllMatching=true);
   BaseClasses.AirFlowRate airFlowRate(
     zoneParam=zoneParam,
