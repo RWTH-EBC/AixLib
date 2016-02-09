@@ -45,7 +45,8 @@ model IdealHeaterCooler "heater and cooler with variable setpoints"
     annotation (Placement(transformation(extent={{-52,-30},{-32,-14}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatCoolRoom
     annotation (Placement(transformation(extent={{84,2},{104,22}})));
-  Meter.TEnergyMeter                 coolMeter "measures cooling energy"
+  Meter.TEnergyMeter                 coolMeter if Cooler_on
+    "measures cooling energy"
     annotation (Placement(transformation(extent={{46,-40},{66,-20}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
                                 Cooling if  Cooler_on
@@ -57,7 +58,8 @@ model IdealHeaterCooler "heater and cooler with variable setpoints"
     KR=KR_cooler,
     TN=TN_cooler) if Cooler_on
     annotation (Placement(transformation(extent={{-14,0},{6,-20}})));
-  Meter.TEnergyMeter                 heatMeter "measures heating energy"
+  Meter.TEnergyMeter                 heatMeter if Heater_on
+    "measures heating energy"
     annotation (Placement(transformation(extent={{46,40},{66,60}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
                                 Heating if    Heater_on
