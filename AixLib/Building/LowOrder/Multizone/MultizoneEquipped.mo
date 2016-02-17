@@ -30,15 +30,15 @@ model MultizoneEquipped
     final unit="K",
     displayUnit="degC",
     min=0) "Set point for heater"
-                           annotation (Placement(transformation(
+    annotation (Placement(transformation(
         extent={{20,-20},{-20,20}},
         rotation=270,
         origin={-20,-100}), iconTransformation(
         extent={{6,-6},{-6,6}},
         rotation=180,
         origin={-94,6})));
-  replaceable HVAC.AirHandlingUnit.AHU AirHandlingUnit constrainedby
-    HVAC.AirHandlingUnit.BaseClasses.partialAHU(
+  replaceable AixLib.HVAC.AirHandlingUnit.AHU AirHandlingUnit constrainedby
+    AixLib.HVAC.AirHandlingUnit.BaseClasses.partialAHU(
     BPF_DeHu=buildingParam.BPF_DeHu,
     HRS=buildingParam.HRS,
     efficiencyHRS_enabled=buildingParam.efficiencyHRS_enabled,
@@ -46,8 +46,19 @@ model MultizoneEquipped
     heating=buildingParam.heatingAHU,
     cooling=buildingParam.coolingAHU,
     dehumidification=buildingParam.dehumidificationAHU,
-    humidification=buildingParam.humidificationAHU) "Air Handling Unit"
-    annotation (Placement(transformation(extent={{-50,-2},{20,24}})), choicesAllMatching=true);
+    humidification=buildingParam.humidificationAHU,
+    clockPeriodGeneric=buildingParam.sampleRateAHU,
+    dp_sup=buildingParam.dpAHU_sup,
+    dp_eta=buildingParam.dpAHU_eta,
+    eta_sup=buildingParam.effFanAHU_sup,
+    eta_eta=buildingParam.effFanAHU_eta) "Choose Air Handling Unit"
+    annotation (Placement(transformation(extent={{-50,-2},{20,24}})),
+    choices(
+    choice(redeclare AixLib.HVAC.AirHandlingUnit.AHU AirHandlingUnit "with AHU"),
+    choice(redeclare AixLib.HVAC.AirHandlingUnit.NoAHU AirHandlingUnit
+          "AHU does not exist")),
+          editButton=false);
+
   BaseClasses.AirFlowRate airFlowRate(
     zoneParam=zoneParam,
     dimension=buildingParam.numZones,

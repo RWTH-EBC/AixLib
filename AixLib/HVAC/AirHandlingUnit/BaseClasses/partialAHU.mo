@@ -34,6 +34,23 @@ partial model partialAHU "Defines necessary parameters and connectors"
     "taking a little heat transfer into account although HRS is disabled (in case that a HRS is physically installed in the AHU)"
     annotation (Dialog(group="Settings AHU Value", enable=HRS));
 
+  parameter Real clockPeriodGeneric(min=0) = 1800
+    "time period in s for sampling (= converting time-continous into time-discrete) input variables. Recommendation: half of the duration of one simulation interval"
+    annotation (Dialog(group="Settings for State Machines"));
+
+  // assumed increase in ventilator pressure
+  parameter Modelica.SIunits.Pressure dp_sup=800
+    "pressure difference over supply fan"
+    annotation (Dialog(tab="Fans", group="Constant Assumptions"));
+  parameter Modelica.SIunits.Pressure dp_eta=800
+    "pressure difference over extract fan"
+    annotation (Dialog(tab="Fans", group="Constant Assumptions"));
+  // assumed efficiencies of the ventilators
+  parameter Modelica.SIunits.Efficiency eta_sup=0.7 "efficiency of supply fan"
+    annotation (Dialog(tab="Fans", group="Constant Assumptions"));
+  parameter Modelica.SIunits.Efficiency eta_eta=0.7 "efficiency of extract fan"
+    annotation (Dialog(tab="Fans", group="Constant Assumptions"));
+
   Modelica.Blocks.Interfaces.RealInput Vflow_in(unit="m3/s") "m3/s"
                                                 annotation (Placement(
         transformation(extent={{-112,68},{-84,96}}),  iconTransformation(extent=
