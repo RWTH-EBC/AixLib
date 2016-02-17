@@ -26,5 +26,12 @@ equation
           textString="no AHU"), Text(
           extent={{-36,18},{32,0}},
           lineColor={28,108,200},
-          textString="(All outputs = 0)")}));
+          textString="(All outputs = 0)")}),
+    Documentation(revisions="<html>
+<ul>
+<li><i><span style=\"font-family: MS Shell Dlg 2;\">February, 2016&nbsp;</i> by Philipp Mehrfeld:<br>Model implemented</span></li>
+</ul>
+</html>", info="<html>
+<p><span style=\"font-family: MS Shell Dlg 2;\">This model can be seen as a dummy. Connectors exist due to partialAHU but outputs are zero and inputs do not have any effect. As a conclusion it is easier to choose whether an AHU exist in a building or not. For an example see </span><code>AixLib.Building.LowOrder.Examples.MultizoneExample</code><span style=\"font-family: MS Shell Dlg 2;\">.</span></p>
+</html>"));
 end NoAHU;

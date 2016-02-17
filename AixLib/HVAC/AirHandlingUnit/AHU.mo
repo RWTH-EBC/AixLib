@@ -1241,6 +1241,7 @@ equation
 <h4><span style=\"color: #008000\">Overview</span></h4>
 <p>This is an ideal model of an air handling unit (AHU), primarily to calculate the thermal energy consumption of an air handling unit (AHU) but also the electric power. The model is mainly based on thermodynamic equations.</p>
 <p>It is based on incoming and outgoing enthalpy flows of moist air (thermodynamic principle).</p>
+<p>If simulation runs instable, reduce clockPeriodGeneric and/or use one of the alternative equations for the calculation of <code>p_sat_surface</code> in both dehumidification state machines (see source code of these state machines).</p>
 <h4><span style=\"color: #008000\">Level of Development</span></h4>
 <p><img src=\"modelica://AixLib/Images/stars4.png\"/></p>
 <p>4 stars because the model was validated with an AHU test bench at E.ON ERC EBC, RWTH Aachen University. Additionally, simulations of a city district were made and compared to measurement data. Examples and descriptions are recorded in [1]. </p>
@@ -1285,10 +1286,9 @@ equation
 <p>20 validation experiments are documented in [1, chapter 4 and 5]. </p>
 </html>", revisions="<html>
 <ul>
-  <li><i>June 17, 2015&nbsp;</i> by Philipp Mehrfeld:<br/>Changes in Inputs, transition conditions, BPF_DeHu, etc. Added functionality for mode selection.</li>
-<li><i>Septmeber, 2014&nbsp;</i>
-         by Philipp Mehrfeld:<br>
-         Model implemented</li>
+<li><i><span style=\"font-family: MS Shell Dlg 2;\">February, 2016&nbsp;</i> by Philipp Mehrfeld:<br>Added previous() functions in source code as decisions for state machines and calculations in state machines did not use values of the same time step.</span></li>
+<li><i>June 17, 2015&nbsp;</i> by Philipp Mehrfeld:<br>Changes in Inputs, transition conditions, BPF_DeHu, etc. Added functionality for mode selection.</li>
+<li><i>Septmeber, 2014&nbsp;</i> by Philipp Mehrfeld:<br>Model implemented</li>
 </ul>
 </html>"));
 end AHU;
