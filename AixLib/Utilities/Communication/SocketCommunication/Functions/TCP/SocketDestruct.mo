@@ -4,8 +4,8 @@ input Integer socketHandle "SocketHandle";
 output Integer ans "dummy variable answer, 0 = OK!, 1 == error";
 
 external "C" ans = SocketDestruct(socketHandle) annotation (
-Include="#include \"TCP_Lib.h\"",
- IncludeDirectory="modelica://ConnectivityTCP/Resources/Include");
+    Include="#include \"AixLibSocketCommunication.h\"",
+    IncludeDirectory="modelica://AixLib/Resources/Include");
 
 annotation (Documentation(info="<html>
 

@@ -5,8 +5,8 @@ input String str "String with floating point number to be converted";
 output Real data "Converted number from string";
 
 external "C" convertStrtoDbl(str,data) annotation (
- Include="#include \"TCP_Lib.h\"",
- IncludeDirectory="modelica://ConnectivityTCP/Resources/Include");
+    Include="#include \"AixLibSocketCommunication.h\"",
+    IncludeDirectory="modelica://AixLib/Resources/Include");
 
 annotation (Documentation(info="<html>
 

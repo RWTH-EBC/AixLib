@@ -8,8 +8,8 @@ output Integer ans
     "dummy answer 0 = OK!, 1 == Intialization failed, 2 == Connect failed";
 
 external "C" ans = TCPConstructor(IP,port,socketHandle) annotation (
-Include="#include \"TCP_Lib.h\"",
- IncludeDirectory="modelica://ConnectivityTCP/Resources/Include");
+Include="#include \"AixLibSocketCommunication.h\"",
+ IncludeDirectory="modelica://AixLib/Resources/Include");
 
 annotation (Documentation(info="<html>
 

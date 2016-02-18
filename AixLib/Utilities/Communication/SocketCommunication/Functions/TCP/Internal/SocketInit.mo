@@ -3,8 +3,8 @@ function SocketInit "External C function to initialize a TCP Socket"
 output Integer ans "dummy variable answer, 0 = OK!, 1 == error";
 
 external "C" ans = SocketInit() annotation (
-Include="#include \"TCP_Lib.h\"",
- IncludeDirectory="modelica://ConnectivityTCP/Resources/Include");
+    Include="#include \"AixLibSocketCommunication.h\"",
+    IncludeDirectory="modelica://AixLib/Resources/Include");
 
 annotation (Documentation(revisions="<HTML>
 <ul>

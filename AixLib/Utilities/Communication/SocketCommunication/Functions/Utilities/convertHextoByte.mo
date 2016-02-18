@@ -5,8 +5,8 @@ input String str "String that contains hex string to be converted";
 output String ans "String that contains converted byte array";
 
 external "C" ans = convertHextoByte(str);
-annotation (Include="#include \"TCP_Lib.h\"",
- IncludeDirectory="modelica://ConnectivityTCP/Resources/Include",
+annotation (    Include="#include \"AixLibSocketCommunication.h\"",
+    IncludeDirectory="modelica://AixLib/Resources/Include",
             Documentation(
             info="<HTML>
             Function that converts a hex string into a byte array.

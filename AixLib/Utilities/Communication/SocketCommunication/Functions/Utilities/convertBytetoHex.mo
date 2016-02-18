@@ -6,8 +6,9 @@ output String ans "String with converted byte array as a hex string";
 
 external "C" ans = convertBytetoHex(str);
 
-annotation (Include="#include \"TCP_Lib.h\"",
-            IncludeDirectory="modelica://ConnectivityTCP/Resources/Include",
+annotation (
+    Include="#include \"AixLibSocketCommunication.h\"",
+    IncludeDirectory="modelica://AixLib/Resources/Include",
             Documentation(
             info="<HTML>
             Function that converts a byte array into a hex string.

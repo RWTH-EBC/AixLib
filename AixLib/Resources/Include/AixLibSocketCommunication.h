@@ -8,8 +8,8 @@
  */
 
   
-#ifndef TCP_LIB_H_
-#define TCP_LIB_H_
+#ifndef AIXLIBSOCKETCOMMUNICATION_H_
+#define AIXLIBSOCKETCOMMUNICATION_H_
 
 #include "ModelicaUtilities.h"
 
@@ -42,6 +42,12 @@ typedef unsigned char* tByte; // Array of Byte to be received
                     gHints; // 3 times struct addrinfo
 
 
+// For troubleshooting
+
+int add2(int a, int b){
+	return(a+b);
+}
+					
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 // Functions to handle TCP communication
 
@@ -293,4 +299,4 @@ void convertStrtoInt(char* string, int * data) // convert a string into a intege
  
 #endif /* defined(_MSC_VER) */
 
-#endif /* TCP_LIB_H_ */
+#endif /* AIXLIBSOCKETCOMMUNICATION_H_ */

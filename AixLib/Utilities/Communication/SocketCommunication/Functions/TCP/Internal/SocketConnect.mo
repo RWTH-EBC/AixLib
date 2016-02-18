@@ -7,8 +7,8 @@ output Integer socketHandle "SocketHandle";
 output Integer ans "dummy answer 0 == OK, 1 == error, error Message is printed";
 
 external "C" ans = SocketConnect(ip,port,socketHandle) annotation (
-Include="#include \"TCP_Lib.h\"",
- IncludeDirectory="modelica://ConnectivityTCP/Resources/Include");
+    Include="#include \"AixLibSocketCommunication.h\"",
+    IncludeDirectory="modelica://AixLib/Resources/Include");
 
 annotation (Documentation(revisions="<HTML>
 <ul>

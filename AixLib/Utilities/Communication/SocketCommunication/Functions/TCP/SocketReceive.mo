@@ -8,8 +8,8 @@ output Integer state
     "State of Function, No. of bytes received if fine, -1 if failed";
 
 external "C" state=SocketReceive(buffer,length,socketHandle) annotation (
-Include="#include \"TCP_Lib.h\"",
- IncludeDirectory="modelica://ConnectivityTCP/Resources/Include");
+    Include="#include \"AixLibSocketCommunication.h\"",
+    IncludeDirectory="modelica://AixLib/Resources/Include");
 
 annotation (Documentation(info="<html>
 
