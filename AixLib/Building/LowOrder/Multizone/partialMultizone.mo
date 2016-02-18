@@ -7,13 +7,12 @@ protected
     "Choose setup for zones" annotation (choicesAllMatching=false);
   parameter Integer orientations[:]=zoneParam.n "Number cardinal directions";
 public
-  replaceable AixLib.Building.LowOrder.ThermalZone.ThermalZoneEquipped zone[buildingParam.numZones](
-      zoneParam=zoneParam) constrainedby
-    AixLib.Building.LowOrder.ThermalZone.partialThermalZone
-    "Choose thermal zone model"                                                         annotation (Placement(transformation(extent={{40,35},
+  replaceable AixLib.Building.LowOrder.ThermalZone.ThermalZoneEquipped zone[buildingParam.numZones] constrainedby
+    AixLib.Building.LowOrder.ThermalZone.partialThermalZone(zoneParam=zoneParam)
+    "Choose thermal zone model" annotation (Placement(transformation(extent={{40,35},
             {80,75}})),choicesAllMatching=true);
   AixLib.Utilities.Interfaces.SolarRad_in radIn[max(orientations)]
-    "Solar radiation"                                                                annotation (
+    "Solar radiation" annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
@@ -21,7 +20,6 @@ public
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-62,90})));
-
   Modelica.Blocks.Interfaces.RealInput internalGains[3*buildingParam.numZones]
     "Input profiles for internal gains persons, machines, light"
     annotation (Placement(transformation(extent={{20,-20},{-20,20}},
