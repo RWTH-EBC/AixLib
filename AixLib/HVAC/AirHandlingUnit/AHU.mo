@@ -68,7 +68,7 @@ model AHU
   constant Modelica.SIunits.SpecificHeatCapacityAtConstantPressure c_pL_iG=1E3;
   constant Modelica.SIunits.SpecificHeatCapacityAtConstantPressure c_pW_iG=1.86E3;
   constant Modelica.SIunits.SpecificEnthalpy r_0=2465E3
-    "enthalpy of vaporization at temperature between T_dew(X_sup=0.008)=11 °C and T_sup = 22 °C";
+    "enthalpy of vaporization at temperature between T_dew(X_sup=0.008)=11 degC and T_sup = 22 degC";
   constant Modelica.SIunits.Density rho=1.2;
   constant Modelica.SIunits.Pressure p_0=101325;
   constant Modelica.SIunits.SpecificEnthalpy dhV=2501.3E3;
@@ -177,14 +177,14 @@ model AHU
       X_surface, 0.00001);
 
   //  p_sat_surface = 611.2*exp(17.62*(T_surface - T_0)/(243.12 + T_surface - T_0));
-    //Magnus formula over water, improved by Sonntag (1990), Range: -45 °C to +60 °C
+    //Magnus formula over water, improved by Sonntag (1990), Range: -45 degC to +60 degC
     /*
 2 Alternatives for calculation of water vapor pressure, which are not so stable during simulation:
 p_sat_surface = 10^(-7.90298*(373.15/T_surface - 1)
           +5.02808*log10(373.15/T_surface)
           -1.3816*10^(-7)*(10^(11.344*(1 - T_surface/373.15))-1)
           +8.1328*10^(-3)*(10^(-3.49149*(373.15/T_surface - 1))-1)
-          +log10(1013.246))*100; //The Goff Gratch equation for the vapor pressure over liquid water covers a region of -50 °C to +102 °C. 
+          +log10(1013.246))*100; //The Goff Gratch equation for the vapor pressure over liquid water covers a region of -50 degC to +102 degC. 
           */
     p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
 
@@ -258,14 +258,14 @@ p_sat_surface = 10^(-7.90298*(373.15/T_surface - 1)
     X_surface, 0.00001);
 
   //p_sat_surface = 611.2*exp(17.62*(T_surface - T_0)/(243.12 + T_surface - T_0));
-  //Magnus formula over water, improved by Sonntag (1990), Range: -45 °C to +60 °C
+  //Magnus formula over water, improved by Sonntag (1990), Range: -45 degC to +60 degC
   /*
 2 Alternatives for calculation of water vapor pressure, which are not so stable during simulation:
 p_sat_surface = 10^(-7.90298*(373.15/T_surface - 1)
           +5.02808*log10(373.15/T_surface)
           -1.3816*10^(-7)*(10^(11.344*(1 - T_surface/373.15))-1)
           +8.1328*10^(-3)*(10^(-3.49149*(373.15/T_surface - 1))-1)
-          +log10(1013.246))*100; //The Goff Gratch equation for the vapor pressure over liquid water covers a region of -50 °C to +102 °C.
+          +log10(1013.246))*100; //The Goff Gratch equation for the vapor pressure over liquid water covers a region of -50 degC to +102 degC.
 */
     p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
 
