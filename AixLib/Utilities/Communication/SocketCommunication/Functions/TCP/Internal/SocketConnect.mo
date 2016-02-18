@@ -4,7 +4,8 @@ function SocketConnect
 input String ip "IP address of server";
 input String port "Port at server to connect to";
 output Integer socketHandle "SocketHandle";
-output Integer ans "dummy answer 0 == OK, 1 == error, error Message is printed";
+output Integer ans
+    "External C-Function returns error handling and prints in case of failure a message. 0 = OK!, 1 == failed";
 
 external "C" ans = SocketConnect(ip,port,socketHandle) annotation (
     Include="#include \"AixLibSocketCommunication.h\"",

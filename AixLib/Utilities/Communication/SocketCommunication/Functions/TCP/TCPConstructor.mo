@@ -5,7 +5,7 @@ input String IP "IP of PC to connect to";
 input String port "Port number where to connect to";
 output Integer socketHandle "SocketHandle";
 output Integer ans
-    "dummy answer 0 = OK!, 1 == Intialization failed, 2 == Connect failed";
+    "External C-Function returns error handling and prints in case of failure a message. 0 = OK!, 1 == Intialization failed, 2 == Connect failed";
 
 external "C" ans = TCPConstructor(IP,port,socketHandle) annotation (
 Include="#include \"AixLibSocketCommunication.h\"",

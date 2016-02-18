@@ -34,20 +34,20 @@ algorithm
 
      intLength := Modelica.Utilities.Strings.length(String(u[1]));// Evaluate length of input u[1]
      message := String(u[1]);// Insert String of u[1]
-     stateExample :=Functions.TCP.SocketSend(message, intLength);    // send message
+     stateExample :=Functions.TCP.SocketSend(message, intLength,socketHandle);    // send message
 
 /************************* In between for expalanation ******************************/
-  Modelica.Utilities.Streams.print("MySocketSend(): Send message");
+  Modelica.Utilities.Streams.print("SocketSend(): Send message");
   Modelica.Utilities.Streams.print("The message send is:");
   Modelica.Utilities.Streams.print(String(u[1]));
 /************************* In between for expalanation ******************************/
 
-   (messageRecv, stateExample) :=Functions.TCP.SocketReceive(maxLen);   // receive message, server directly responses
+   (messageRecv, stateExample) :=Functions.TCP.SocketReceive(maxLen,socketHandle);   // receive message
 
     y[1] :=Functions.Utilities.convertStrtoDbl(messageRecv);
 
 /************************* In between for expalanation ******************************/
-  Modelica.Utilities.Streams.print("MySocketReceive(): Message received");
+  Modelica.Utilities.Streams.print("SocketReceive(): Message received");
   Modelica.Utilities.Streams.print("messageRecv is:");
   Modelica.Utilities.Streams.print(messageRecv);
 /************************* In between for expalanation ******************************/
