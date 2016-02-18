@@ -33,7 +33,8 @@ record OPH_5_ICT
     withOuterwalls = true,
     R1o = 0.000353062716991,
     RRest = 0.00950991783473,
-    C1o = 19748404.1293);
+    C1o = 19748404.1293,
+    orientationswallshorizontal = {90,90,90,90,0});
   annotation (Documentation(revisions="<html>
  <ul>
  <li><i>June, 2015&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>

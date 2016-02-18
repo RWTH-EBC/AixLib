@@ -2,9 +2,6 @@ within AixLib.Building.LowOrder.BaseClasses.BuildingPhysics;
 model BuildingPhysics
   "Building physics based on VDI 6007 with improved handling of windows"
   extends partialBuildingPhysics;
-  parameter Real orientationswallshorizontal[n]
-    "orientations of the walls against the vertical (wall,roof)"
-                                                                annotation(Dialog(tab = "Outer walls"));
   AixLib.Building.LowOrder.BaseClasses.EqAirTemp.EqAirTempEBCMod eqAirTemp(
     aowo=aowo,
     wf_wall=weightfactorswall,
@@ -19,7 +16,7 @@ model BuildingPhysics
             withOuterwalls "Equivalent air temperature"
     annotation (Placement(transformation(extent={{-46,0},{-26,20}})));
   AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel.ReducedOrderModelEBCMod
-                                                                               reducedOrderModel(
+    reducedOrderModel(
     epsw=epsw,
     g=g,
     RRest=RRest,

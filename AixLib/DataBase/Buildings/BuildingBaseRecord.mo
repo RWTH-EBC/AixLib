@@ -5,12 +5,9 @@ record BuildingBaseRecord
 
   parameter String usage = "Office Building" "typical usage of the building";
 
-  parameter Integer numZones=6 "Number of Zones in the building";
+  parameter Integer numZones=1 "Number of Zones in the building";
 
-  parameter AixLib.DataBase.Buildings.ZoneBaseRecord zoneSetup[:]={
-      AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_1_Meeting(),AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_2_Storage(),
-      AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_3_Office(),AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_4_Restroom(),
-      AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_5_ICT(),AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_6_Floor()}
+  parameter AixLib.DataBase.Buildings.ZoneBaseRecord zoneSetup[:]={AixLib.DataBase.Buildings.ZoneBaseRecord()}
     "Provide zone setup as vector entries to zone parameter definitions";
 
   parameter Modelica.SIunits.Temp_K T0all=273.15+20.1
