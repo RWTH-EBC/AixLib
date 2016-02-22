@@ -1,4 +1,4 @@
-within AixLib.HVAC.AirHandlingUnit;
+﻿within AixLib.HVAC.AirHandlingUnit;
 model AHU
   "Air Handling Unit with Heat Recovery System, Cooling, Heating, Humidification (adiabatic), Dehumidification"
    extends AixLib.HVAC.AirHandlingUnit.BaseClasses.partialAHU;
@@ -176,7 +176,7 @@ model AHU
     (previous(T_2) - T_surface)/max(previous(X_oda) - X_surface, 0.00009) = (T_CoilOut - T_surface)/max(previous(X_supMax) -
       X_surface, 0.00001);
 
-  //  p_sat_surface = 611.2*exp(17.62*(T_surface - T_0)/(243.12 + T_surface - T_0));
+    p_sat_surface = 611.2*exp(17.62*(T_surface - T_0)/(243.12 + T_surface - T_0));
     //Magnus formula over water, improved by Sonntag (1990), Range: -45 degC to +60 degC
     /*
 2 Alternatives for calculation of water vapor pressure, which are not so stable during simulation:
@@ -185,9 +185,8 @@ p_sat_surface = 10^(-7.90298*(373.15/T_surface - 1)
           -1.3816*10^(-7)*(10^(11.344*(1 - T_surface/373.15))-1)
           +8.1328*10^(-3)*(10^(-3.49149*(373.15/T_surface - 1))-1)
           +log10(1013.246))*100; //The Goff Gratch equation for the vapor pressure over liquid water covers a region of -50 degC to +102 degC. 
-          */
-    p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
-
+p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
+*/
     X_surface = molarMassRatio*p_sat_surface/(p_0 - p_sat_surface);
 
     Q_dot_C = previous(V_dot_sup)*rho*((c_pL_iG + previous(X_oda)*c_pW_iG)*(previous(T_2) - T_CoilOut) + (previous(X_oda) -
@@ -257,15 +256,16 @@ p_sat_surface = 10^(-7.90298*(373.15/T_surface - 1)
   (previous(T_2) - T_surface)/max(previous(X_oda) - X_surface, 0.00009) = (T_CoilOut - T_surface)/max(previous(X_supMax) -
     X_surface, 0.00001);
 
-  //p_sat_surface = 611.2*exp(17.62*(T_surface - T_0)/(243.12 + T_surface - T_0));
-  //Magnus formula over water, improved by Sonntag (1990), Range: -45 degC to +60 degC
-  /*
+    p_sat_surface = 611.2*exp(17.62*(T_surface - T_0)/(243.12 + T_surface - T_0));
+    //Magnus formula over water, improved by Sonntag (1990), Range: -45 degC to +60 degC
+    /*
 2 Alternatives for calculation of water vapor pressure, which are not so stable during simulation:
 p_sat_surface = 10^(-7.90298*(373.15/T_surface - 1)
           +5.02808*log10(373.15/T_surface)
           -1.3816*10^(-7)*(10^(11.344*(1 - T_surface/373.15))-1)
           +8.1328*10^(-3)*(10^(-3.49149*(373.15/T_surface - 1))-1)
           +log10(1013.246))*100; //The Goff Gratch equation for the vapor pressure over liquid water covers a region of -50 degC to +102 degC.
+p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
 */
     p_sat_surface = Modelica.Media.Air.MoistAir.saturationPressure(T_surface);
 
