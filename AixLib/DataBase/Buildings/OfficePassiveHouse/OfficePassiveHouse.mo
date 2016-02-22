@@ -13,13 +13,18 @@ record OfficePassiveHouse
       AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_6_Floor()},
     Vair=13396,
     BuildingArea=3349,
-    heating=true,
-    cooling=true,
-    dehumidification=true,
-    humidification=true,
+    heatingAHU=true,
+    coolingAHU=true,
+    dehumidificationAHU=true,
+    humidificationAHU=true,
     BPF_DeHu=0.2,
-    HRS=true,
+    HRS=false,
     efficiencyHRS_enabled=0.8,
-    efficiencyHRS_disabled=0.2);
+    efficiencyHRS_disabled=0.2,
+    sampleRateAHU=1800,
+    dpAHU_sup=800,
+    dpAHU_eta=800,
+    effFanAHU_sup=0.7,
+    effFanAHU_eta=0.7);
 
 end OfficePassiveHouse;
