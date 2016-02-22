@@ -14,7 +14,7 @@ model TestAHU
   Modelica.Blocks.Sources.Constant desiredT_sup(k=293)
     annotation (Placement(transformation(extent={{62,-26},{42,-6}})));
   AHU ahu(HRS=true, clockPeriodGeneric=30)
-    annotation (Placement(transformation(extent={{-72,-62},{30,48}})));
+    annotation (Placement(transformation(extent={{-68,-18},{26,18}})));
   Modelica.Blocks.Sources.Constant phi_roomMin(k=0.45)
     annotation (Placement(transformation(extent={{68,-56},{48,-36}})));
   Modelica.Blocks.Sources.Constant phi_roomMax(k=0.55)
@@ -35,48 +35,72 @@ model TestAHU
     offset=2) annotation (Placement(transformation(extent={{98,20},{78,40}})));
   Modelica.Blocks.Math.Add addToExtractTemp
     annotation (Placement(transformation(extent={{46,12},{34,24}})));
+  Modelica.Blocks.Interfaces.RealOutput QFlowCool(
+   final quantity="Power",
+   final unit="W") annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=-90,
+        origin={-26,-86})));
+  Modelica.Blocks.Interfaces.RealOutput QFlowHeat(
+   final quantity="Power",
+   final unit="W") annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=-90,
+        origin={0,-86})));
+  Modelica.Blocks.Interfaces.RealOutput PEl(
+   final quantity="Power",
+   final unit="W") annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=-90,
+        origin={26,-86})));
 equation
 
   connect(desiredT_sup.y, ahu.T_supplyAir) annotation (Line(
-      points={{41,-16},{34,-16},{34,-7},{21.84,-7}},
+      points={{41,-16},{34,-16},{34,-4.5},{18.48,-4.5}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(tempOutside.y, ahu.T_outdoorAir) annotation (Line(
-      points={{-79,-6},{-74,-6},{-74,-9.44444},{-65.88,-9.44444}},
+      points={{-79,-6},{-74,-6},{-74,-6.3},{-62.36,-6.3}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(Vflow_in.y, ahu.Vflow_in) annotation (Line(
-      points={{-79,34},{-76,34},{-76,-5.77778},{-69.96,-5.77778}},
+      points={{-79,34},{-76,34},{-76,-3.6},{-66.12,-3.6}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(phi_roomMin.y, ahu.phi_supplyAir[1]) annotation (Line(
-      points={{47,-46},{32,-46},{32,-11.8889},{21.84,-11.8889}},
+      points={{47,-46},{32,-46},{32,-8.1},{18.48,-8.1}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(waterLoadOutside.y, ahu.X_outdoorAir) annotation (Line(
-      points={{-79,-40},{-70,-40},{-70,-15.5556},{-65.88,-15.5556}},
+      points={{-79,-40},{-72,-40},{-72,-10.8},{-62.36,-10.8}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(phi_RoomExtractAir.y, ahu.phi_extractAir) annotation (Line(
-      points={{77,-14},{66,-14},{66,0},{30,0},{30,10.1111},{21.84,10.1111}},
+      points={{77,-14},{66,-14},{66,0},{30,0},{30,8.1},{18.48,8.1}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(phi_roomMax.y, ahu.phi_supplyAir[2]) annotation (Line(points={{77,-46},
-          {72,-46},{72,-66},{28,-66},{28,-14.3333},{21.84,-14.3333}}, color={0,0,
+          {72,-46},{72,-66},{28,-66},{28,-9.9},{18.48,-9.9}},         color={0,0,
           127}));
-  connect(ahu.T_extractAir, addToExtractTemp.y) annotation (Line(points={{21.84,
-          16.2222},{27.92,16.2222},{27.92,18},{33.4,18}}, color={0,0,127}));
+  connect(ahu.T_extractAir, addToExtractTemp.y) annotation (Line(points={{18.48,
+          12.6},{27.92,12.6},{27.92,18},{33.4,18}},       color={0,0,127}));
   connect(tempAddInRoom.y, addToExtractTemp.u1) annotation (Line(points={{77,30},
           {66,30},{56,30},{56,21.6},{47.2,21.6}}, color={0,0,127}));
   connect(desiredT_sup.y, addToExtractTemp.u2) annotation (Line(points={{41,-16},
           {38,-16},{38,6},{56,6},{56,14.4},{47.2,14.4}}, color={0,0,127}));
+  connect(ahu.QflowC, QFlowCool) annotation (Line(points={{-22.41,-14.85},{
+          -22.41,-46.425},{-26,-46.425},{-26,-86}}, color={0,0,127}));
+  connect(ahu.QflowH, QFlowHeat) annotation (Line(points={{-1.73,-14.85},{-1.73,
+          -47.425},{0,-47.425},{0,-86}}, color={0,0,127}));
+  connect(ahu.Pel, PEl) annotation (Line(points={{8.61,-14.85},{8.61,-47.425},{
+          26,-47.425},{26,-86}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
     experiment(
       StopTime=86400,
       Interval=60,
       __Dymola_Algorithm="Lsodar"),
-    __Dymola_experimentSetupOutput,
+    __Dymola_experimentSetupOutput(events=false),
     Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Simulation to check the behaviour of the simple Air Handling Unit models. Various possibilities for inputs are provided. </p>

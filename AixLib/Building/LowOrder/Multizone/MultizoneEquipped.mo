@@ -30,28 +30,38 @@ model MultizoneEquipped
     final unit="K",
     displayUnit="degC",
     min=0) "Set point for heater"
-                           annotation (Placement(transformation(
+    annotation (Placement(transformation(
         extent={{20,-20},{-20,20}},
         rotation=270,
         origin={-20,-100}), iconTransformation(
         extent={{6,-6},{-6,6}},
         rotation=180,
         origin={-94,6})));
-  HVAC.AirHandlingUnit.AHU AirHandlingUnit(
-    heating=buildingParam.heating,
-    cooling=buildingParam.cooling,
-    dehumidification=buildingParam.dehumidification,
-    humidification=buildingParam.humidification,
+  replaceable AixLib.HVAC.AirHandlingUnit.AHU AirHandlingUnit constrainedby
+    AixLib.HVAC.AirHandlingUnit.BaseClasses.partialAHU(
     BPF_DeHu=buildingParam.BPF_DeHu,
     HRS=buildingParam.HRS,
     efficiencyHRS_enabled=buildingParam.efficiencyHRS_enabled,
-    efficiencyHRS_disabled=buildingParam.efficiencyHRS_disabled)
-    "Air Handling Unit"
-    annotation (Placement(transformation(extent={{-54,-24},{22,46}})));
+    efficiencyHRS_disabled=buildingParam.efficiencyHRS_disabled,
+    heating=buildingParam.heatingAHU,
+    cooling=buildingParam.coolingAHU,
+    dehumidification=buildingParam.dehumidificationAHU,
+    humidification=buildingParam.humidificationAHU,
+    clockPeriodGeneric=buildingParam.sampleRateAHU,
+    dp_sup=buildingParam.dpAHU_sup,
+    dp_eta=buildingParam.dpAHU_eta,
+    eta_sup=buildingParam.effFanAHU_sup,
+    eta_eta=buildingParam.effFanAHU_eta) "Choose Air Handling Unit"
+    annotation (Placement(transformation(extent={{-50,-2},{20,24}})),
+    choices(
+    choice(redeclare AixLib.HVAC.AirHandlingUnit.AHU AirHandlingUnit "with AHU"),
+    choice(redeclare AixLib.HVAC.AirHandlingUnit.NoAHU AirHandlingUnit
+          "AHU does not exist")));
+
   BaseClasses.AirFlowRate airFlowRate(
     zoneParam=zoneParam,
     dimension=buildingParam.numZones,
-    withProfile=true)                annotation (Placement(transformation(extent={{-72,6},{-60,22}})));
+    withProfile=true) annotation (Placement(transformation(extent={{-72,6},{-60,22}})));
   Modelica.Blocks.Interfaces.RealInput TSetCooler[buildingParam.numZones](
     final quantity="ThermodynamicTemperature",
     final unit="K",
@@ -84,7 +94,7 @@ model MultizoneEquipped
     heaterCooler, 1)](
    final quantity="HeatFlowRate",
    final unit="W") "Power for heating" annotation (Placement(
-        transformation(extent={{90,-52},{110,-32}}), iconTransformation(extent={{100,-52},
+        transformation(extent={{90,-54},{110,-34}}), iconTransformation(extent={{100,-52},
             {114,-38}})));
   Modelica.Blocks.Interfaces.RealOutput CoolingPowerCooler[size(
     heaterCooler, 1)](
@@ -115,7 +125,6 @@ model MultizoneEquipped
   Modelica.Blocks.Nonlinear.Limiter minTemp(uMax=1000, uMin=1)
     annotation (Placement(transformation(extent={{0,-27},{-10,-17}})));
 equation
-  AirHandlingUnit.phi_extractAir = hold(AirHandlingUnit.phi_sup);
   for i in 1:buildingParam.numZones loop
     connect(internalGains[(i*3)-2], airFlowRate.relOccupation[i]) annotation (Line(
       points={{76,-100},{74,-100},{74,-36},{-76,-36},{-76,10.8},{-72,10.8}},
@@ -136,20 +145,20 @@ equation
       color={191,0,0},
       smooth=Smooth.None));
   connect(AirHandlingUnit.T_outdoorAir, weather[1]) annotation (Line(
-      points={{-49.44,9.44444},{-56,9.44444},{-56,115}},
+      points={{-45.8,6.45},{-56,6.45},{-56,115}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(weather[2], AirHandlingUnit.X_outdoorAir) annotation (Line(
-      points={{-56,105},{-56,5.55556},{-49.44,5.55556}},
+      points={{-56,105},{-56,3.2},{-45.8,3.2}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(AHU[1], AirHandlingUnit.T_supplyAir) annotation (Line(
-      points={{-100,-1},{-100,-2},{20,-2},{20,11},{15.92,11}},
+      points={{-100,-1},{-100,-2},{20,-2},{20,7.75},{14.4,7.75}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(airFlowRate.airFlowRateOutput, AirHandlingUnit.Vflow_in) annotation (
       Line(
-      points={{-60,14},{-58,14},{-58,11.7778},{-52.48,11.7778}},
+      points={{-60,14},{-58,14},{-58,8.4},{-48.6,8.4}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(AHU[4], airFlowRate.profile) annotation (Line(
@@ -157,11 +166,11 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(AHU[2], AirHandlingUnit.phi_supplyAir[1]) annotation (Line(
-      points={{-100,-11},{-100,-2},{18,-2},{18,6},{15.92,6},{15.92,7.88889}},
+      points={{-100,-11},{-100,-2},{18,-2},{18,6},{14.4,6},{14.4,5.15}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(AHU[3], AirHandlingUnit.phi_supplyAir[2]) annotation (Line(
-      points={{-100,-21},{-100,-2},{18,-2},{18,6},{15.92,6},{15.92,6.33333}},
+      points={{-100,-21},{-100,-2},{18,-2},{18,6},{14.4,6},{14.4,3.85}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(TSetCooler, heaterCooler.setPointCool) annotation (Line(points={{-48,
@@ -173,16 +182,16 @@ equation
   connect(heaterCooler.heatCoolRoom, zone.internalGainsConv) annotation (Line(
         points={{-7.3,-58.2},{26,-58.2},{26,-52},{60,-52},{60,43.4}},
                                                   color={191,0,0}));
-  connect(AirHandlingUnit.Pel, Pel) annotation (Line(points={{7.94,2.05556},{8,
-          2.05556},{8,2},{56,2},{80,2},{80,16},{104,16}},
+  connect(AirHandlingUnit.Pel, Pel) annotation (Line(points={{7.05,0.275},{8,
+          0.275},{8,2},{56,2},{80,2},{80,16},{104,16}},
                                                  color={0,0,127}));
-  connect(AirHandlingUnit.QflowH, HeatingPowerAHU) annotation (Line(points={{-0.42,
-          2.05556},{-0.42,-6},{80,-6},{80,-4},{104,-4}}, color={0,0,127}));
-  connect(AirHandlingUnit.QflowC, CoolingPowerAHU) annotation (Line(points={{-17.14,
-          2.05556},{-17.14,-14},{-17,-14},{-17,-32},{83,-32},{83,-22},{104,-22}},
+  connect(AirHandlingUnit.QflowH, HeatingPowerAHU) annotation (Line(points={{-0.65,
+          0.275},{-0.65,-6},{80,-6},{80,-4},{104,-4}},   color={0,0,127}));
+  connect(AirHandlingUnit.QflowC, CoolingPowerAHU) annotation (Line(points={{-16.05,
+          0.275},{-16.05,-14},{-17,-14},{-17,-32},{83,-32},{83,-22},{104,-22}},
                                                               color={0,0,127}));
   connect(heaterCooler.HeatingPower, HeatingPowerHeater) annotation (Line(
-        points={{-6,-47.8},{38,-47.8},{38,-42},{100,-42}}, color={0,0,127}));
+        points={{-6,-47.8},{38,-47.8},{38,-44},{100,-44}}, color={0,0,127}));
   connect(heaterCooler.CoolingPower, CoolingPowerCooler) annotation (Line(
         points={{-6,-53.78},{12,-53.78},{12,-54},{36,-54},{36,-66},{104,-66}},
         color={0,0,127}));
@@ -196,12 +205,15 @@ equation
   connect(conversion.y, splitterVolumeFlowVentilation.u)
     annotation (Line(points={{48,14.4},{48,14.4},{48,16.8}}, color={0,0,127}));
   connect(conversion.u, AirHandlingUnit.Vflow_out) annotation (Line(points={{48,5.2},
-          {48,4},{28,4},{28,28},{-60,28},{-60,21.8889},{-52.48,21.8889}},
+          {48,4},{28,4},{28,28},{-60,28},{-60,16.85},{-48.6,16.85}},
+        color={0,0,127}));
+  connect(AirHandlingUnit.phi_supply, AirHandlingUnit.phi_extractAir)
+    annotation (Line(points={{14.4,12.3},{20,12.3},{20,16.85},{14.4,16.85}},
         color={0,0,127}));
   connect(TAirAHUAvg.T, minTemp.u)
     annotation (Line(points={{8,-22},{1,-22}}, color={0,0,127}));
-  connect(minTemp.y, AirHandlingUnit.T_extractAir) annotation (Line(points={{
-          -10.5,-22},{-14,-22},{-14,-12},{26,-12},{26,25.7778},{15.92,25.7778}},
+  connect(minTemp.y, AirHandlingUnit.T_extractAir) annotation (Line(points={{-10.5,
+          -22},{-14,-22},{-14,-12},{26,-12},{26,20.1},{14.4,20.1}},
         color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
@@ -224,7 +236,7 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Air Conditioning"),
         Text(
-          extent={{-60,-50},{-32,-60}},
+          extent={{-64,-48},{-36,-58}},
           lineColor={0,0,255},
           fillColor={212,221,253},
           fillPattern=FillPattern.Solid,
