@@ -56,8 +56,7 @@ model MultizoneEquipped
     choices(
     choice(redeclare AixLib.HVAC.AirHandlingUnit.AHU AirHandlingUnit "with AHU"),
     choice(redeclare AixLib.HVAC.AirHandlingUnit.NoAHU AirHandlingUnit
-          "AHU does not exist")),
-          editButton=false);
+          "AHU does not exist")));
 
   BaseClasses.AirFlowRate airFlowRate(
     zoneParam=zoneParam,
