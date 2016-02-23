@@ -13,16 +13,15 @@ extends Modelica.Blocks.Interfaces.DiscreteMIMO;
  Integer socketHandle(start = 0) "socket handle";
 
 /**************** Error handling of functions ***********************/
-   Integer state
+   Integer state(start = 0)
     "Variable to check state of external C-function, 0 accords OK, 1 failure. Error messages are reported.";
 
 initial algorithm
   /**************** initialize TCP socket and connect to server**************/
   // At start of simulation socket is created and connection to server is established
   // socketHandle is variable to have multiple sockets
-socketHandle :=0;
 
-(socketHandle,state) :=Functions.TCP.TCPConstructor(IP_Address, port);
+(socketHandle,state) := Functions.TCP.TCPConstructor(IP_Address, port);
 
 equation
 
@@ -46,7 +45,8 @@ algorithm
 
  when terminal() then
 /**************** Terminate connection to server at end of simulation  **************/
-    state :=Functions.TCP.SocketDestruct(socketHandle);
+    state := Functions.TCP.SocketDestruct(socketHandle);
+    socketHandle := 0;
   end when;
 
 annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,

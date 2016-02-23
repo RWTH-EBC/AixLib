@@ -1,13 +1,14 @@
 within AixLib.Utilities.Communication.SocketCommunication.Functions.TCP;
 function TCPConstructor
   "External C function to construct a socket for TCP communication"
-input String IP "IP of PC to connect to";
-input String port "Port number where to connect to";
-output Integer socketHandle "SocketHandle";
-output Integer ans
+
+  output Integer socketHandle "SocketHandle";
+  input String IP "IP of PC to connect to";
+  input String port "Port number where to connect to";
+  output Integer ans
     "External C-Function returns error handling and prints in case of failure a message. 0 = OK!, 1 == Intialization failed, 2 == Connect failed";
 
-external "C" ans = TCPConstructor(IP,port,socketHandle) annotation (
+external "C" ans = TCPConstructor(socketHandle,IP,port) annotation (
 Include="#include \"AixLibSocketCommunication.h\"",
  IncludeDirectory="modelica://AixLib/Resources/Include");
 

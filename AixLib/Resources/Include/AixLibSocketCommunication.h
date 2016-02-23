@@ -159,7 +159,7 @@ int SocketReceive(char **buffer, int maxLen, int socketHandle) // Receive data o
 	return iResult;
 }
 
-int TCPConstructor(tIpAddr ip, tPort port, int* socketHandle) // Initialize socket and connect to server
+int TCPConstructor(int* socketHandle, tIpAddr ip, tPort port) // Initialize socket and connect to server
 {
 	// Intialize socket
     if (0 != SocketInit())
