@@ -33,7 +33,8 @@ record OPH_3_Office
     withOuterwalls = true,
     R1o = 1.4142107968e-05,
     RRest = 0.000380773816236,
-    C1o = 492976267.489);
+    C1o = 492976267.489,
+    orientationswallshorizontal = {90,90,90,90,0});
   annotation (Documentation(revisions="<html>
  <ul>
  <li><i>June, 2015&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>

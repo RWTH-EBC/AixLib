@@ -12,11 +12,11 @@ model BuildingPhysics
     alphaconv_wall=alphaowo,
     alphaconv_win=alphaConvWinOuter,
     awin=awin,
-    orientationswallshorizontal={90,90,90,90,0}) if
+    orientationswallshorizontal=orientationswallshorizontal) if
             withOuterwalls "Equivalent air temperature"
     annotation (Placement(transformation(extent={{-46,0},{-26,20}})));
   AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel.ReducedOrderModelEBCMod
-                                                                               reducedOrderModel(
+    reducedOrderModel(
     epsw=epsw,
     g=g,
     RRest=RRest,

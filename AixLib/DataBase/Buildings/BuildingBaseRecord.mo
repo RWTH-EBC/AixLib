@@ -4,14 +4,8 @@ record BuildingBaseRecord "Base record definition for building records"
   // General
   parameter String buildingID="M4120" "unique identifier of the building";
   parameter String usage="Office Building" "typical usage of the building";
-  parameter Integer numZones=6 "Number of Zones in the building";
-  parameter AixLib.DataBase.Buildings.ZoneBaseRecord zoneSetup[:]={
-      AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_1_Meeting(),
-      AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_2_Storage(),
-      AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_3_Office(),
-      AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_4_Restroom(),
-      AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_5_ICT(),
-      AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_6_Floor()}
+  parameter Integer numZones=1 "Number of Zones in the building";
+  parameter AixLib.DataBase.Buildings.ZoneBaseRecord zoneSetup[:]={AixLib.DataBase.Buildings.ZoneBaseRecord()}
     "Provide zone setup as vector entries to zone parameter definitions";
   parameter Modelica.SIunits.Volume Vair=4850.5 "Volume of building";
   parameter Modelica.SIunits.Area BuildingArea=2000 "Area of building";

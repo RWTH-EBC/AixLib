@@ -36,7 +36,8 @@ record OPH_4_Restroom
     C1o = 39369992.1342,
     withAHU=true,
     minAHU=0,
-    maxAHU=8);
+    maxAHU=8,
+    orientationswallshorizontal = {90,90,90,90,0});
   annotation (Documentation(revisions="<html>
  <ul>
  <li><i>June, 2015&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>

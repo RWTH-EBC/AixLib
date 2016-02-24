@@ -36,7 +36,8 @@ record OPH_5_ICT
     C1o = 19748404.1293,
     withAHU=true,
     minAHU=0,
-    maxAHU=130);
+    maxAHU=130,
+    orientationswallshorizontal = {90,90,90,90,0});
   annotation (Documentation(revisions="<html>
  <ul>
  <li><i>June, 2015&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>

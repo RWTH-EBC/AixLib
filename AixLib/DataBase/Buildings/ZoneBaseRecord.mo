@@ -68,6 +68,8 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Resistor Window" annotation(Dialog(tab="Windows"));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer UWin=3
     "Thermal transmission coefficient of windows"   annotation(Dialog(tab = "Windows"));
+  parameter Real orientationswallshorizontal[n]={90,90,90,90}
+    "orientations of the walls against the vertical (wall,roof)" annotation(Dialog(tab = "Outer walls"));
   parameter Modelica.SIunits.Area Aw[n] = {1, 1, 1, 1} "Area of the windows" annotation(Dialog(tab = "Windows"));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaConvWinInner=3.16
     "Coefficient of convective heat transfer of the window (inner side)" annotation(Dialog(tab="Windows"));
