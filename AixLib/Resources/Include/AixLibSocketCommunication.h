@@ -8,8 +8,8 @@
  */
 
   
-#ifndef TCP_LIB_H_
-#define TCP_LIB_H_
+#ifndef AIXLIBSOCKETCOMMUNICATION_H_
+#define AIXLIBSOCKETCOMMUNICATION_H_
 
 #include "ModelicaUtilities.h"
 
@@ -21,7 +21,7 @@
 //#include <stdio.h> //Excluded to avoid clashing with dymosim and DDE compilation
 #include <string.h>
 
-#define MAX_SIZE	256
+#define MAX_SIZE	256 // Defines maximum number of characters in one message
 
 // Need to link with Ws2_32.lib, Mswsock.lib, and Advapi32.lib
 #pragma comment (lib, "Ws2_32.lib")
@@ -42,6 +42,12 @@ typedef unsigned char* tByte; // Array of Byte to be received
                     gHints; // 3 times struct addrinfo
 
 
+// For troubleshooting
+
+int add2(int a, int b){
+	return(a+b);
+}
+					
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 // Functions to handle TCP communication
 
@@ -115,7 +121,7 @@ int SocketConnect(tIpAddr ip, tPort port, int* socketHandle) // Connect to serve
 	return 0;
 }
 
-int SocketDisconnect(int socketHandle)) // End communcation
+int SocketDisconnect(int socketHandle) // End communcation
 {
  	int iResult;
    // shutdown the connection since no more data will be sent
@@ -129,14 +135,14 @@ int SocketDisconnect(int socketHandle)) // End communcation
 	return 0;
 }
 
-int SocketSend(tData sendbuf, int len, int socketHandle)) // Send data via socket
+int SocketSend(tData sendbuf, int len, int socketHandle) // Send data via socket
 {
 	int iResult;
     // Send an initial buffer
-    iResult = send(socketHandle), sendbuf, len, 0 );
+    iResult = send(socketHandle, sendbuf, len, 0 );
     if (iResult == SOCKET_ERROR) {
         ModelicaFormatMessage("SocketSend(): Send failed with error: %d\n", WSAGetLastError());
-        closesocket(socketHandle));
+        closesocket(socketHandle);
         WSACleanup();
         return 1;
     }
@@ -153,7 +159,7 @@ int SocketReceive(char **buffer, int maxLen, int socketHandle) // Receive data o
 	return iResult;
 }
 
-int TCPConstructor(tIpAddr ip, tPort port, int* socketHandle) // Initialize socket and connect to server
+int TCPConstructor(int* socketHandle, tIpAddr ip, tPort port) // Initialize socket and connect to server
 {
 	// Intialize socket
     if (0 != SocketInit())
@@ -293,4 +299,4 @@ void convertStrtoInt(char* string, int * data) // convert a string into a intege
  
 #endif /* defined(_MSC_VER) */
 
-#endif /* TCP_LIB_H_ */
+#endif /* AIXLIBSOCKETCOMMUNICATION_H_ */

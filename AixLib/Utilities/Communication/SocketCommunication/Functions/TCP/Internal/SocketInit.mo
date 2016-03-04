@@ -1,10 +1,11 @@
 within AixLib.Utilities.Communication.SocketCommunication.Functions.TCP.Internal;
 function SocketInit "External C function to initialize a TCP Socket"
-output Integer ans "dummy variable answer, 0 = OK!, 1 == error";
+  output Integer ans
+    "External C-Function returns error handling and prints in case of failure a message. 0 = OK!, 1 == failed";
 
 external "C" ans = SocketInit() annotation (
-Include="#include \"TCP_Lib.h\"",
- IncludeDirectory="modelica://ConnectivityTCP/Resources/Include");
+    Include="#include \"AixLibSocketCommunication.h\"",
+    IncludeDirectory="modelica://AixLib/Resources/Include");
 
 annotation (Documentation(revisions="<HTML>
 <ul>

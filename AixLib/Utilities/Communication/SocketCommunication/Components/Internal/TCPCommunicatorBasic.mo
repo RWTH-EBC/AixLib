@@ -2,24 +2,26 @@ within AixLib.Utilities.Communication.SocketCommunication.Components.Internal;
 partial model TCPCommunicatorBasic
   "Partial Model of TCP-Interface, minimum code needs additional information"
 
-extends Modelica.Blocks.Interfaces.DiscreteMIMO; // Base Class Discrete MIMO for discrete events (sampleTrigger)
+ // Base Class Discrete MIMO from MSL for discrete events via sampleTrigger
+extends Modelica.Blocks.Interfaces.DiscreteMIMO;
 
 /**************** necessary Input ****************************/
   parameter String  IP_Address="127.0.0.1" "IP address or name of Server";
   parameter String  port="27015" "Port on server";
 
-    /**************** socket handle ***********************/
-   Integer socketHandle(start = 0) "socket handle";
+ /**************** socket handle ***********************/
+ Integer socketHandle(start = 0) "socket handle";
+
 /**************** Error handling of functions ***********************/
-   Integer state
-    "dummy variable to check state of C-function, 0 accords OK, 1 failure";
+   Integer state(start = 0)
+    "Variable to check state of external C-function, 0 accords OK, 1 failure. Error messages are reported.";
 
 initial algorithm
   /**************** initialize TCP socket and connect to server**************/
-// At start of simulation socket is created and connection to server is established
-socketHandle :=0;
+  // At start of simulation socket is created and connection to server is established
+  // socketHandle is variable to have multiple sockets
 
-(socketHandle,state) :=Functions.TCP.TCPConstructor(IP_Address, port);
+(socketHandle,state) := Functions.TCP.TCPConstructor(IP_Address, port);
 
 equation
 
@@ -32,10 +34,10 @@ algorithm
 /*   when {sampleTrigger} then 
    for j in 1:numberWR loop
         //send message
-          state := Functions.TCP.MySocketSend(message, intLength);
+        state := Functions.TCP.SocketSend(message, intLength, socketHandle);
         
          //receive
-         (messageRecv, state) := Functions.TCP.MySocketReceive(maxLen);
+         (messageRecv, state) := Functions.TCP.SocketReceive(maxLen, socketHandle);
       
       end for;
    end when;
@@ -43,7 +45,8 @@ algorithm
 
  when terminal() then
 /**************** Terminate connection to server at end of simulation  **************/
-    state :=Functions.TCP.SocketDestruct(socketHandle);
+    state := Functions.TCP.SocketDestruct(socketHandle);
+    socketHandle := 0;
   end when;
 
 annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,

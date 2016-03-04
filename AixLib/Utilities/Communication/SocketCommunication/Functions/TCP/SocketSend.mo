@@ -4,11 +4,11 @@ function SocketSend "External C function to send data via current socket"
 input String sendbuffer "Data to be send as a string";
 input Integer length "Length of string to be send";
 input Integer socketHandle "SocketHandle";
-output Integer ans "dummy variable answer, 0 = OK!, 1 == error";
-
+output Integer ans
+    "External C-Function returns error handling and prints in case of failure a message. 0 = OK!, 1 == failed";
 external "C" ans = SocketSend(sendbuffer,length,socketHandle) annotation (
-Include="#include \"TCP_Lib.h\"",
- IncludeDirectory="modelica://ConnectivityTCP/Resources/Include");
+    Include="#include \"AixLibSocketCommunication.h\"",
+    IncludeDirectory="modelica://AixLib/Resources/Include");
 
 annotation (Documentation(info="<html>
 

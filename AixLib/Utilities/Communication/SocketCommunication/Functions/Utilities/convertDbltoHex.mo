@@ -5,9 +5,8 @@ input Real num "Number to be converted into byte array";
 output String ans "String that contains converted number";
 
 external "C" ans = convertDbltoHex(num);
-annotation (Include="#include \"TCP_Lib.h\"",
- IncludeDirectory="modelica://ConnectivityTCP/Resources/Include",
-                                                              Documentation(
+annotation (    Include="#include \"AixLibSocketCommunication.h\"",
+    IncludeDirectory="modelica://AixLib/Resources/Include",   Documentation(
             info="<HTML>
             Function that converts a double number into a byte array.
             <h4>C Source Code of convertDbltoHex()</h4>

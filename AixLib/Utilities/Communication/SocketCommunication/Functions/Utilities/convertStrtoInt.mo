@@ -5,8 +5,8 @@ input String str "String with integer number to be converted";
 output Integer data "Converted number from string";
 
 external "C" convertStrtoInt(str,data) annotation (
-Include="#include \"TCP_Lib.h\"",
- IncludeDirectory="modelica://ConnectivityTCP/Resources/Include");
+    Include="#include \"AixLibSocketCommunication.h\"",
+    IncludeDirectory="modelica://AixLib/Resources/Include");
 
  annotation (Documentation(info="<HTML>
 

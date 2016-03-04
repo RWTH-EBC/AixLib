@@ -32,9 +32,9 @@ extends Modelica.Icons.Example;
         rotation=180,
         origin={50,-10})));
   Components.TCPCommunicatorExample tCPCommunicatorExample(portExample="27015",
-      IP_AddressExample="10.39.190.48")
+      IP_AddressExample="10.39.190.46")
     "TCP block which sends values and receives values, has no impact on signal"
-    annotation (Placement(transformation(extent={{-66,30},{-46,50}})));
+    annotation (Placement(transformation(extent={{-66,32},{-46,52}})));
 equation
 
   connect(system.y, feedback.u2)  annotation (Line(
@@ -54,11 +54,11 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(tCPCommunicatorExample.y[1], system.u) annotation (Line(
-      points={{-45,40},{-38,40},{-38,38},{-28,38}},
+      points={{-45,42},{-38,42},{-38,38},{-28,38}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(tCPCommunicatorExample.u[1], limiter.y) annotation (Line(
-      points={{-68,40},{-86,40},{-86,-10},{-75,-10}},
+      points={{-68,42},{-86,42},{-86,-10},{-75,-10}},
       color={0,0,127},
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,

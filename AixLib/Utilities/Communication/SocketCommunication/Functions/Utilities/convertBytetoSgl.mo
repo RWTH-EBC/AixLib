@@ -5,9 +5,8 @@ input String str "String that contains the byte array to be converted";
 output Real ans "Real number that contains converted number";
 
 external "C" ans = convertBytetoSgl(str);
-annotation (Include="#include \"TCP_Lib.h\"",
- IncludeDirectory="modelica://ConnectivityTCP/Resources/Include",
-                                                              Documentation(
+annotation (    Include="#include \"AixLibSocketCommunication.h\"",
+    IncludeDirectory="modelica://AixLib/Resources/Include",   Documentation(
             info="<HTML>
             Function that converts a byte array into a number.
             <h4>C Source Code of convertBytetoSgl()</h4>
