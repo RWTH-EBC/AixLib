@@ -812,7 +812,7 @@ equation
     hold(stateToHuPreHHRS_true) or hold(stateToHuCHRS_true) or hold(
     stateToHuCHRS_false) or hold(stateToOnlyHeatingHRS_true) or hold(
     stateToOnlyHeatingHRS_false) or hold(stateToOnlyCoolingHRS_true) or hold(
-    stateToOnlyCoolingHRS_false) then hold(V_dot_eta) else 0;
+    stateToOnlyCoolingHRS_false) then hold(V_dot_eta) else hold(V_dot_eta);
   Pel = if Vflow_out > 0 then hold(P_el_eta) + hold(P_el_sup) else 0;
   QflowH = if hold(Q_dot_H) > 0 and Vflow_out > 0 then hold(Q_dot_H) else 0;
   QflowC = if hold(Q_dot_C) > 0 and Vflow_out > 0 then hold(Q_dot_C) else 0;
