@@ -31,6 +31,8 @@ model AHU
   inner Boolean stateToOnlyCoolingHRS_true;
   inner Boolean stateToOnlyCoolingHRS_false;
 
+  Boolean tooHighX(start=false);
+  Boolean tooLowX(start=false);
   Boolean choiceX(start=true);
   Boolean allCond(start=true);
 
@@ -751,25 +753,27 @@ equation
   phi_t = (T_1 - T_oda)/(T_6 - T_oda + 1e-3);
 
   // conditions for transitions to State Machines
+  tooHighX = if previous(X_oda) > previous(X_supMax) then true else false;
+  tooLowX = if previous(X_oda) < previous(X_supMin) then true else false;
   choiceX = if
-     ((previous(X_oda) > previous(X_supMax) and not dehumidification)
+     (tooHighX and not dehumidification)
      or
-     (previous(X_oda) < previous(X_supMin) and not humidification)
+     (tooLowX and not humidification)
      or
-     (previous(X_oda) <= previous(X_supMax) and previous(X_oda) >= previous(X_supMin)))
+     (previous(X_oda) <= previous(X_supMax) and previous(X_oda) >= previous(X_supMin))
      then true else false;
 
   // now really the conditions for the transitions
   stateToDeHuHRS_true = if
-    previous(X_oda) > previous(X_supMax)
-    and dehumidification and HRS then true else false;
+     tooHighX
+     and dehumidification and HRS then true else false;
 
   stateToDeHuHRS_false = if
-    previous(X_oda) > previous(X_supMax)
+    tooHighX
     and dehumidification and not HRS then true else false;
 
   stateToHuPreHHRS_true = if
-    (previous(X_oda) < previous(X_supMin))
+    tooLowX
     and
     ((previous(T_5) >= previous(T_1))
     or
@@ -781,7 +785,7 @@ equation
     and humidification and HRS then true else false;
 
   stateToHuPreHHRS_false = if
-    (previous(X_oda) < previous(X_supMin))
+    tooLowX
     and
     ((previous(T_5) >= previous(T_1))
     or
@@ -793,7 +797,7 @@ equation
     and humidification and not HRS then true else false;
 
   stateToHuCHRS_true = if
-    (previous(X_oda) < previous(X_supMin))
+    tooLowX
     and
     (previous(T_5) < previous(T_1))
     and
@@ -803,7 +807,7 @@ equation
     and humidification and HRS then true else false;
 
   stateToHuCHRS_false = if
-    (previous(X_oda) < previous(X_supMin))
+    tooLowX
     and
     (previous(T_5) < previous(T_1))
     and
