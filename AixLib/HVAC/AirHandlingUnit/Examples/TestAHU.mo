@@ -13,7 +13,10 @@ model TestAHU
     annotation (Placement(transformation(extent={{-100,24},{-80,44}})));
   Modelica.Blocks.Sources.Constant desiredT_sup(k=293)
     annotation (Placement(transformation(extent={{62,-26},{42,-6}})));
-  AHU ahu(HRS=true, clockPeriodGeneric=30)
+  AHU ahu(          clockPeriodGeneric=30,
+    HRS=true,
+    dehumidification=true,
+    humidification=true)
     annotation (Placement(transformation(extent={{-68,-18},{26,18}})));
   Modelica.Blocks.Sources.Constant phi_roomMin(k=0.45)
     annotation (Placement(transformation(extent={{68,-56},{48,-36}})));

@@ -780,8 +780,6 @@ equation
     ((previous(T_5) < previous(T_1))
     and
     (abs(previous(V_dot_sup)*rho*(previous(X_sup) - previous(X_oda))*r_0) >= abs(previous(V_dot_sup)*rho*(c_pL_iG + previous(X_oda)*c_pW_iG)*(previous(T_1) - previous(T_5))))))
-    and
-    (previous(T_oda) < previous(T_6))
     and humidification and HRS then true else false;
 
   stateToHuPreHHRS_false = if
@@ -792,8 +790,6 @@ equation
     ((previous(T_5) < previous(T_1))
     and
     (abs(previous(V_dot_sup)*rho*(previous(X_sup) - previous(X_oda))*r_0) >= abs(previous(V_dot_sup)*rho*(c_pL_iG + previous(X_oda)*c_pW_iG)*(previous(T_1) - previous(T_5))))))
-    and
-    (previous(T_oda) >= previous(T_6))
     and humidification and not HRS then true else false;
 
   stateToHuCHRS_true = if
@@ -802,8 +798,6 @@ equation
     (previous(T_5) < previous(T_1))
     and
     (abs(previous(V_dot_sup)*rho*(previous(X_sup) - previous(X_oda))*r_0) < abs(previous(V_dot_sup)*rho*(c_pL_iG + previous(X_oda)*c_pW_iG)*(previous(T_1) - previous(T_5))))
-    and
-    (previous(T_oda) > previous(T_6))
     and humidification and HRS then true else false;
 
   stateToHuCHRS_false = if
@@ -812,8 +806,6 @@ equation
     (previous(T_5) < previous(T_1))
     and
     (abs(previous(V_dot_sup)*rho*(previous(X_sup) - previous(X_oda))*r_0) < abs(previous(V_dot_sup)*rho*(c_pL_iG + previous(X_oda)*c_pW_iG)*(previous(T_1) - previous(T_5))))
-    and
-    (previous(T_oda) <= previous(T_6))
     and humidification and not HRS then true else false;
 
   stateToOnlyHeatingHRS_true = if
