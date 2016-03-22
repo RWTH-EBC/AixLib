@@ -102,16 +102,6 @@ model AHU
 
   block StartState
 
-    //     outer input Real phi_t_withoutHRS;
-    //     outer output Real phi_t;
-    //     outer output Modelica.SIunits.HeatFlowRate Q_dot_C;
-    //     outer output Modelica.SIunits.HeatFlowRate Q_dot_H;
-
-  equation
-    //     phi_t = phi_t_withoutHRS;
-    //     Q_dot_C = previous(Q_dot_C);
-    //     Q_dot_H = previous(Q_dot_H);
-
     annotation (
       Icon(graphics={Text(
             extent={{-100,100},{100,-100}},
@@ -843,21 +833,21 @@ equation
       horizontalAlignment=TextAlignment.Right));
   transition(
     deHuHRS_true,
-    startState,2 > 1,
+    startState,true,
     priority=11,
-    immediate=true,
+    immediate=false,
     reset=false,
-    synchronize=false) annotation (Line(
+    synchronize=true)  annotation (Line(
       points={{-74,-66},{-68,-26}},
       color={175,175,175},
       thickness=0.25,
       smooth=Smooth.Bezier), Text(
       string="%condition",
-      extent={{4,-4},{4,-10}},
+      extent={{-4,4},{-4,10}},
       lineColor={95,95,95},
       fontSize=2,
       textStyle={TextStyle.Bold},
-      horizontalAlignment=TextAlignment.Left));
+      horizontalAlignment=TextAlignment.Right));
   //stateToDeHuHRS_true==false,
   transition(
     startState,
@@ -878,21 +868,21 @@ equation
       horizontalAlignment=TextAlignment.Right));
   transition(
     deHuHRS_false,
-    startState,2 > 1,
+    startState,true,
     priority=11,
-    immediate=true,
+    immediate=false,
     reset=false,
-    synchronize=false) annotation (Line(
+    synchronize=true)  annotation (Line(
       points={{-52,-66},{-68,-26}},
       color={175,175,175},
       thickness=0.25,
       smooth=Smooth.Bezier), Text(
       string="%condition",
-      extent={{4,-4},{4,-10}},
+      extent={{-4,4},{-4,10}},
       lineColor={95,95,95},
       fontSize=2,
       textStyle={TextStyle.Bold},
-      horizontalAlignment=TextAlignment.Left));
+      horizontalAlignment=TextAlignment.Right));
   //stateToDeHuHRS_false==false,
   transition(
     startState,
@@ -968,11 +958,10 @@ equation
       horizontalAlignment=TextAlignment.Left));
   transition(
     onlyHeatingHRS_true,
-    startState,
-    2 > 1,
-    immediate=true,
+    startState,true,
+    immediate=false,
     reset=false,
-    synchronize=false,
+    synchronize=true,
     priority=11) annotation (Line(
       points={{-18,-78},{-68,-26}},
       color={175,175,175},
@@ -983,22 +972,21 @@ equation
       lineColor={95,95,95},
       fontSize=2,
       textStyle={TextStyle.Bold},
-      horizontalAlignment=TextAlignment.Left));
+      horizontalAlignment=TextAlignment.Right));
   //stateToOnlyHeatingHRS_true==false,
   transition(
     onlyHeatingHRS_false,
-    startState,
-    2 > 1,
-    immediate=true,
+    startState,true,
+    immediate=false,
     reset=false,
-    synchronize=false,
+    synchronize=true,
     priority=11) annotation (Line(
       points={{20,-78},{-68,-26}},
       color={175,175,175},
       thickness=0.25,
       smooth=Smooth.Bezier), Text(
       string="%condition",
-      extent={{-6,2},{-6,8}},
+      extent={{4,4},{4,10}},
       lineColor={95,95,95},
       fontSize=2,
       textStyle={TextStyle.Bold},
@@ -1006,18 +994,17 @@ equation
   //stateToOnlyHeatingHRS_false==false,
   transition(
     onlyCoolingHRS_true,
-    startState,
-    2 > 1,
-    immediate=true,
+    startState,true,
+    immediate=false,
     reset=false,
-    synchronize=false,
+    synchronize=true,
     priority=11) annotation (Line(
       points={{50,-70},{-68,-26}},
       color={175,175,175},
       thickness=0.25,
       smooth=Smooth.Bezier), Text(
       string="%condition",
-      extent={{-6,2},{-6,8}},
+      extent={{4,4},{4,10}},
       lineColor={95,95,95},
       fontSize=2,
       textStyle={TextStyle.Bold},
@@ -1025,18 +1012,17 @@ equation
   //stateToOnlyCoolingHRS_true==false,
   transition(
     onlyCoolingHRS_false,
-    startState,
-    2 > 1,
-    immediate=true,
+    startState,true,
+    immediate=false,
     reset=false,
-    synchronize=false,
+    synchronize=true,
     priority=11) annotation (Line(
       points={{86,-70},{-66,-26}},
       color={175,175,175},
       thickness=0.25,
       smooth=Smooth.Bezier), Text(
       string="%condition",
-      extent={{-6,2},{-6,8}},
+      extent={{4,4},{4,10}},
       lineColor={95,95,95},
       fontSize=2,
       textStyle={TextStyle.Bold},
@@ -1062,18 +1048,17 @@ equation
       horizontalAlignment=TextAlignment.Left));
   transition(
     huPreHHRS_true,
-    startState,
-    2 > 1,
-    immediate=true,
+    startState,true,
+    immediate=false,
     reset=false,
-    synchronize=false,
+    synchronize=true,
     priority=11) annotation (Line(
       points={{-10,-26},{-74,-26}},
       color={175,175,175},
       thickness=0.25,
       smooth=Smooth.Bezier), Text(
       string="%condition",
-      extent={{-6,0},{-6,6}},
+      extent={{4,4},{4,10}},
       lineColor={95,95,95},
       fontSize=2,
       textStyle={TextStyle.Bold},
@@ -1099,18 +1084,17 @@ equation
       horizontalAlignment=TextAlignment.Left));
   transition(
     huPreHHRS_false,
-    startState,
-    2 > 1,
+    startState,true,
     priority=11,
-    immediate=true,
+    immediate=false,
     reset=false,
-    synchronize=false) annotation (Line(
-      points={{18,-26},{-74,-26}},
+    synchronize=true)  annotation (Line(
+      points={{18,-26},{10,-28},{-74,-26}},
       color={175,175,175},
       thickness=0.25,
       smooth=Smooth.Bezier), Text(
       string="%condition",
-      extent={{-6,0},{-6,6}},
+      extent={{4,4},{4,10}},
       lineColor={95,95,95},
       fontSize=2,
       textStyle={TextStyle.Bold},
@@ -1136,18 +1120,17 @@ equation
       horizontalAlignment=TextAlignment.Left));
   transition(
     huCHRS_true,
-    startState,
-    2 > 1,
+    startState,true,
     priority=11,
-    immediate=true,
+    immediate=false,
     reset=false,
-    synchronize=false) annotation (Line(
-      points={{58,-26},{-72,-26}},
+    synchronize=true)  annotation (Line(
+      points={{58,-26},{42,-30},{-72,-26}},
       color={175,175,175},
       thickness=0.25,
       smooth=Smooth.Bezier), Text(
       string="%condition",
-      extent={{-6,0},{-6,6}},
+      extent={{4,4},{4,10}},
       lineColor={95,95,95},
       fontSize=2,
       textStyle={TextStyle.Bold},
@@ -1173,18 +1156,17 @@ equation
       horizontalAlignment=TextAlignment.Right));
   transition(
     huCHRS_false,
-    startState,
-    2 > 1,
+    startState,true,
     priority=11,
-    immediate=true,
+    immediate=false,
     reset=false,
-    synchronize=false) annotation (Line(
-      points={{86,-26},{-72,-26}},
+    synchronize=true)  annotation (Line(
+      points={{86,-26},{54,-34},{-72,-26}},
       color={175,175,175},
       thickness=0.25,
       smooth=Smooth.Bezier), Text(
       string="%condition",
-      extent={{-6,0},{-6,6}},
+      extent={{4,4},{4,10}},
       lineColor={95,95,95},
       fontSize=2,
       textStyle={TextStyle.Bold},
