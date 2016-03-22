@@ -15,9 +15,10 @@ model TestAHU
     annotation (Placement(transformation(extent={{62,-26},{42,-6}})));
   AHU ahu(          clockPeriodGeneric=30,
     HRS=true,
-    dehumidification=false,
-    humidification=false,
-    cooling=true)
+    cooling=true,
+    heating=true,
+    dehumidification=true,
+    humidification=true)
     annotation (Placement(transformation(extent={{-68,-18},{26,18}})));
   Modelica.Blocks.Sources.Constant phi_roomMin(k=0.47)
     annotation (Placement(transformation(extent={{68,-56},{48,-36}})));
@@ -143,7 +144,7 @@ createPlot(id=4, position={77, 62, 1429, 635}, y={\"ahu.QflowC\", \"ahu.QflowH\"
 
 createPlot(id=5, position={50, 59, 1411, 632}, y={\"ahu.X_oda\", \"ahu.X_supMin\", \"ahu.X_supMax\"}, range={0.0, 88000.0, 0.0058000000000000005, 0.0102}, grid=true, filename=\"TestAHU.mat\", colors={{28,108,200}, {238,46,47}, {0,140,72}}, markers={MarkerStyle.SmallSquare, MarkerStyle.SmallSquare, MarkerStyle.SmallSquare});
 
-createPlot(id=6, position={47, 28, 1416, 654}, y={\"ahu.T_6\", \"ahu.T_oda\"}, range={0.0, 88000.0, 9.0, 31.0}, grid=true, filename=\"TestAHU.mat\", colors={{28,108,200}, {238,46,47}}, markers={MarkerStyle.SmallSquare, MarkerStyle.SmallSquare});"),
+createPlot(id=6, position={31, 19, 1416, 654}, y={\"ahu.T_6\", \"ahu.T_oda\", \"ahu.T_supplyAirOut\"}, range={0.0, 88000.0, 8.0, 30.0}, grid=true, filename=\"TestAHU.mat\", colors={{28,108,200}, {238,46,47}, {28,108,200}}, markers={MarkerStyle.SmallSquare, MarkerStyle.SmallSquare, MarkerStyle.None});"),
 
         Text(
           extent={{-20,102},{64,82}},

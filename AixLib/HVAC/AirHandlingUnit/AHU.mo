@@ -881,10 +881,10 @@ equation
   // The following part decides whether T_supplyAir input connector is passed through or outdoor air temp (+ slight changes) is used. Only necessery if either only heating or cooling is activated.
   if
     heating and not cooling and not dehumidification and not humidification then
-    TsupplyAirOut = if QflowH > 0 then T_supplyAir else hold(T_oda) + hold(phi_t_withoutHRS)*(hold(T_6) - hold(T_oda)) + hold(dTFan);
+    TsupplyAirOut = if hold(stateToOnlyHeatingHRS_true) or hold(stateToOnlyHeatingHRS_false) then T_supplyAir else hold(T_oda) + hold(phi_t_withoutHRS)*(hold(T_6) - hold(T_oda)) + hold(dTFan);
   elseif
     cooling and not heating and not dehumidification and not humidification then
-    TsupplyAirOut = if QflowC > 0 then T_supplyAir else hold(T_oda) + hold(phi_t_withoutHRS)*(hold(T_6) - hold(T_oda)) + hold(dTFan);
+    TsupplyAirOut = if hold(stateToOnlyCoolingHRS_true) or hold(stateToOnlyCoolingHRS_false) then T_supplyAir else hold(T_oda) + hold(phi_t_withoutHRS)*(hold(T_6) - hold(T_oda)) + hold(dTFan);
   else
     TsupplyAirOut = T_supplyAir;
   end if;
