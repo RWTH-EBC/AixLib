@@ -84,7 +84,7 @@ partial model partialAHU "Defines necessary parameters and connectors"
         origin={99,9}),  iconTransformation(
         extent={{4,-4},{-4,4}},
         rotation=180,
-        origin={84,24})));
+        origin={84,-10})));
   Modelica.Blocks.Interfaces.RealInput T_supplyAir(unit="K", start=295.15)
     "K (use as PortIn)"
     annotation (Placement(transformation(extent={{112,28},{84,56}}),
@@ -138,7 +138,7 @@ partial model partialAHU "Defines necessary parameters and connectors"
         origin={99,57}), iconTransformation(
         extent={{4,-4},{-4,4}},
         rotation=180,
-        origin={84,24})));
+        origin={84,20})));
   annotation (Diagram(coordinateSystem(extent={{-100,-20},{100,60}},
           preserveAspectRatio=false)), Icon(coordinateSystem(extent={{-100,-20},
             {100,60}}, preserveAspectRatio=false), graphics={Text(

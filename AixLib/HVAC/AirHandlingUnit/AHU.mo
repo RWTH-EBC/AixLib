@@ -81,6 +81,10 @@ model AHU
   constant Real molarMassRatio=Modelica.Media.IdealGases.Common.SingleGasesData.H2O.MM
       /Modelica.Media.Air.SimpleAir.MM_const;
 
+  // auxiliary variable
+  Modelica.SIunits.TemperatureDifference dTFan;
+  Modelica.SIunits.Temp_K TsupplyAirOut(start=295.15);
+
   // Sampler (time-continous to time-discrete variables)
 
   Modelica_Synchronous.RealSignals.Sampler.SampleVectorizedAndClocked sample(n=8)
@@ -714,6 +718,8 @@ model AHU
 
   Modelica.Blocks.Sources.RealExpression hold_phi_sup(y=hold(phi_sup))
     annotation (Placement(transformation(extent={{58,-1},{78,19}})));
+  Modelica.Blocks.Sources.RealExpression TsupAirOut(y=TsupplyAirOut)
+    "see if else decision in source code"                                                                  annotation (Placement(transformation(extent={{58,47},{78,67}})));
 equation
   // variables that will be set with parameteres of HRS efficiency
   phi_t_withHRS = if HRS then efficiencyHRS_enabled else 0;
@@ -871,6 +877,19 @@ equation
   Pel = if Vflow_out > 0 then hold(P_el_eta) + hold(P_el_sup) else 0;
   QflowH = if hold(Q_dot_H) > 0 and hold(allCond) then hold(Q_dot_H) else 0;
   QflowC = if hold(Q_dot_C) > 0 and hold(allCond) then hold(Q_dot_C) else 0;
+
+  // The following part decides whether T_supplyAir input connector is passed through or outdoor air temp (+ slight changes) is used. Only necessery if either only heating or cooling is activated.
+  if
+    heating and not cooling and not dehumidification and not humidification then
+    TsupplyAirOut = if QflowH > 0 then T_supplyAir else hold(T_oda) + hold(phi_t_withoutHRS)*(hold(T_6) - hold(T_oda)) + hold(dTFan);
+  elseif
+    cooling and not heating and not dehumidification and not humidification then
+    TsupplyAirOut = if QflowC > 0 then T_supplyAir else hold(T_oda) + hold(phi_t_withoutHRS)*(hold(T_6) - hold(T_oda)) + hold(dTFan);
+  else
+    TsupplyAirOut = T_supplyAir;
+  end if;
+  // with:
+  dTFan = P_el_sup/(V_dot_sup*rho * (c_pL_iG + X_oda * c_pW_iG));
 
   // transitions and conditions between state machines.
   initialState(startState) annotation (Line(
@@ -1250,20 +1269,19 @@ equation
       horizontalAlignment=TextAlignment.Left));
   //stateToHuCHRS_false==false,
 
-  connect(T_outdoorAir, sample.u[1]) annotation (Line(points={{-98,56},{-82,56},
-          {-67.75,56},{-67.75,26}}, color={0,0,127}));
-  connect(X_outdoorAir, sample.u[2]) annotation (Line(points={{-98,36},{-82,36},
-          {-67.25,36},{-67.25,26}}, color={0,0,127}));
-  connect(T_supplyAir, sample.u[3]) annotation (Line(points={{98,42},{18,42},{
-          -66.75,42},{-66.75,26}},
+  connect(T_outdoorAir, sample.u[1]) annotation (Line(points={{-98,56},{-82,56},{-67.75,56},{-67.75,26}},
+                                    color={0,0,127}));
+  connect(X_outdoorAir, sample.u[2]) annotation (Line(points={{-98,36},{-82,36},{-67.25,36},{-67.25,26}},
+                                    color={0,0,127}));
+  connect(T_supplyAir, sample.u[3]) annotation (Line(points={{98,42},{18,42},{-66.75,42},{-66.75,26}},
                             color={0,0,127}));
-  connect(T_extractAir, sample.u[4]) annotation (Line(points={{98,90},{-60,90},
-          {-60,60},{-66.25,60},{-66.25,26}},
+  connect(T_extractAir, sample.u[4]) annotation (Line(points={{98,90},{-60,90},{-60,60},{-66.25,60},{-66.25,26}},
                             color={0,0,127}));
-  connect(Vflow_in, sample.u[8]) annotation (Line(points={{-98,82},{-64.25,82},
-          {-64.25,26}},color={0,0,127}));
-  connect(hold_phi_sup.y, phi_supply) annotation (Line(points={{79,9},{84.5,9},
-          {99,9}},            color={0,0,127}));
+  connect(Vflow_in, sample.u[8]) annotation (Line(points={{-98,82},{-64.25,82},{-64.25,26}},
+                       color={0,0,127}));
+  connect(hold_phi_sup.y, phi_supply) annotation (Line(points={{79,9},{84.5,9},{99,9}},
+                              color={0,0,127}));
+  connect(TsupAirOut.y, T_supplyAirOut) annotation (Line(points={{79,57},{83.5,57},{99,57}}, color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-20},{100,
             60}}), graphics={
