@@ -31,6 +31,8 @@ model AHU
   inner Boolean stateToOnlyCoolingHRS_true;
   inner Boolean stateToOnlyCoolingHRS_false;
 
+  Boolean allCond(start = true);
+
   // Variables that will be set with parameteres of HRS efficiency
   inner Real phi_t_withHRS(start=efficiencyHRS_enabled)
     "efficiency of HRS in the AHU modes when HRS is enabled";
@@ -798,14 +800,22 @@ equation
     Modelica.Media.Air.MoistAir.saturationPressure(T_sup));
 
   // converts time-discrete outputs of state machines into time-continous variables and limitation of thermal energies so that they cannot be negative
-  Vflow_out = if hold(stateToDeHuHRS_true) or hold(stateToDeHuHRS_false) or
-    hold(stateToHuPreHHRS_true) or hold(stateToHuCHRS_true) or hold(
-    stateToHuCHRS_false) or hold(stateToOnlyHeatingHRS_true) or hold(
-    stateToOnlyHeatingHRS_false) or hold(stateToOnlyCoolingHRS_true) or hold(
-    stateToOnlyCoolingHRS_false) then hold(V_dot_eta) else hold(V_dot_eta);
+ allCond = if
+ stateToDeHuHRS_true or
+ stateToDeHuHRS_false or
+ stateToHuPreHHRS_true or
+ stateToHuPreHHRS_false or
+ stateToHuCHRS_true or
+ stateToHuCHRS_false or
+ stateToOnlyHeatingHRS_true or
+ stateToOnlyHeatingHRS_false or
+ stateToOnlyCoolingHRS_true or
+ stateToOnlyCoolingHRS_false then true else false;
+
+  Vflow_out = hold(V_dot_eta);
   Pel = if Vflow_out > 0 then hold(P_el_eta) + hold(P_el_sup) else 0;
-  QflowH = if hold(Q_dot_H) > 0 and Vflow_out > 0 then hold(Q_dot_H) else 0;
-  QflowC = if hold(Q_dot_C) > 0 and Vflow_out > 0 then hold(Q_dot_C) else 0;
+  QflowH = if hold(Q_dot_H) > 0 and hold(allCond) then hold(Q_dot_H) else 0;
+  QflowC = if hold(Q_dot_C) > 0 and hold(allCond) then hold(Q_dot_C) else 0;
 
   // transitions and conditions between state machines.
   initialState(startState) annotation (Line(
