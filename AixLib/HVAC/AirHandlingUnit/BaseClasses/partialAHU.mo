@@ -65,7 +65,7 @@ partial model partialAHU "Defines necessary parameters and connectors"
     annotation (Placement(transformation(
         extent={{14,-14},{-14,14}},
         rotation=0,
-        origin={98,82}), iconTransformation(
+        origin={98,90}), iconTransformation(
         extent={{-4,-4},{4,4}},
         rotation=180,
         origin={84,48})));
@@ -73,27 +73,28 @@ partial model partialAHU "Defines necessary parameters and connectors"
     "relativ Humidity [Range: 0...1]" annotation (Placement(transformation(
         extent={{14,-14},{-14,14}},
         rotation=0,
-        origin={98,64}), iconTransformation(
+        origin={98,72}), iconTransformation(
         extent={{-4,-4},{4,4}},
         rotation=180,
         origin={84,38})));
   Modelica.Blocks.Interfaces.RealOutput phi_supply(start=0.8)
     "relativ Humidity [Range: 0...1]" annotation (Placement(transformation(
-        extent={{-7,-7},{7,7}},
+        extent={{-9,-9},{9,9}},
         rotation=0,
-        origin={97,49}), iconTransformation(
+        origin={99,9}),  iconTransformation(
         extent={{4,-4},{-4,4}},
         rotation=180,
         origin={84,24})));
-  Modelica.Blocks.Interfaces.RealInput T_supplyAir(unit="K", start=295.15) "K"
-    annotation (Placement(transformation(extent={{112,20},{84,48}}),
+  Modelica.Blocks.Interfaces.RealInput T_supplyAir(unit="K", start=295.15)
+    "K (use as PortIn)"
+    annotation (Placement(transformation(extent={{112,28},{84,56}}),
         iconTransformation(extent={{80,6},{88,14}})));
   Modelica.Blocks.Interfaces.RealInput phi_supplyAir[2](start={0.4,0.6})
     "relativ Humidity [Range: 0...1] (Vector: [1] min, [2] max)" annotation (
       Placement(transformation(
         extent={{14,-14},{-14,14}},
         rotation=0,
-        origin={98,16}), iconTransformation(
+        origin={98,24}), iconTransformation(
         extent={{4,-4},{-4,4}},
         rotation=180,
         origin={84,0})));
@@ -130,6 +131,14 @@ partial model partialAHU "Defines necessary parameters and connectors"
         rotation=-90,
         origin={54,-100}),iconTransformation(extent={{4,-4},{-4,4}}, origin={-96,
             38})));
+  Modelica.Blocks.Interfaces.RealOutput T_supplyAirOut(unit="K", start=295.15)
+    "K (use as PortOut)"                                                                            annotation (Placement(transformation(
+        extent={{-9,-9},{9,9}},
+        rotation=0,
+        origin={99,57}), iconTransformation(
+        extent={{4,-4},{-4,4}},
+        rotation=180,
+        origin={84,24})));
   annotation (Diagram(coordinateSystem(extent={{-100,-20},{100,60}},
           preserveAspectRatio=false)), Icon(coordinateSystem(extent={{-100,-20},
             {100,60}}, preserveAspectRatio=false), graphics={Text(
