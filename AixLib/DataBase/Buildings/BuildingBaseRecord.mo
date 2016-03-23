@@ -19,11 +19,11 @@ record BuildingBaseRecord "Base record definition for building records"
   parameter Boolean dehumidificationAHU=if heatingAHU and coolingAHU then true
        else false
     "Dehumidification Function of AHU (Cooling and Heating must be enabled)"
-    annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"));
+    annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"), enable=(heating and cooling));
   parameter Boolean humidificationAHU=if heatingAHU and coolingAHU then true
        else false
     "Humidification Function of AHU (Cooling and Heating must be enabled)"
-    annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"));
+    annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"), enable=(heating and cooling));
   // AHU Values
   parameter Real BPF_DeHu(
     min=0,

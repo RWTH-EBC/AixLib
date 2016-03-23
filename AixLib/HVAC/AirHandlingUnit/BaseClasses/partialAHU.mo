@@ -140,6 +140,10 @@ partial model partialAHU "Defines necessary parameters and connectors"
         extent={{4,-4},{-4,4}},
         rotation=180,
         origin={84,20})));
+equation
+  dehumidification = if dehumidificationSet and heating and cooling then dehumidificationSet else false;
+  humidification = if dehumidificationSet and heating and cooling then humidificationSet else false;
+
   annotation (Diagram(coordinateSystem(extent={{-100,-20},{100,60}},
           preserveAspectRatio=false)), Icon(coordinateSystem(extent={{-100,-20},
             {100,60}}, preserveAspectRatio=false), graphics={Text(
@@ -155,8 +159,4 @@ partial model partialAHU "Defines necessary parameters and connectors"
 </html>", info="<html>
 <p><span style=\"font-family: MS Shell Dlg 2;\">Base class to provide connectors. Thus, it is possible to declare parameters in a general way in superior building model and give the opportunity whether an AHU (</span><code>AixLib.HVAC.AirHandlingUnit.AHU</code><span style=\"font-family: MS Shell Dlg 2;\">) exist or not (</span><code>AixLib.HVAC.AirHandlingUnit.NoAHU</code><span style=\"font-family: MS Shell Dlg 2;\">).</span></p>
 </html>"));
-equation
-  dehumidification = if dehumidificationSet and heating and cooling then dehumidificationSet else false;
-  humidification = if dehumidificationSet and heating and cooling then humidificationSet else false;
-
 end partialAHU;

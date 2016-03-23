@@ -713,10 +713,12 @@ model AHU
   //
   //
 
-  Modelica.Blocks.Sources.RealExpression hold_phi_sup(y=hold(phi_sup))
+  Modelica.Blocks.Sources.RealExpression hold_phi_sup(y=hold(previous(phi_sup)))
     annotation (Placement(transformation(extent={{58,-1},{78,19}})));
   Modelica.Blocks.Sources.RealExpression TsupAirOut(y=hold(TsupplyAirOut))
     "see if else decision in source code"                                                           annotation (Placement(transformation(extent={{58,47},{78,67}})));
+  StateExtra stateExtra
+    annotation (Placement(transformation(extent={{-130,-44},{-110,-24}})));
 equation
   // variables that will be set with parameteres of HRS efficiency
   phi_t_withHRS = if HRS then efficiencyHRS_enabled else 0;
@@ -1028,10 +1030,9 @@ equation
       horizontalAlignment=TextAlignment.Left));
   transition(
     startState,
-    onlyCoolingHRS_false,
-    stateToOnlyCoolingHRS_false,
+    onlyCoolingHRS_false,stateToOnlyCoolingHRS_false,
     priority=10,
-    immediate=true,
+    immediate=false,
     reset=false,
     synchronize=false) annotation (Line(
       points={{-66,-2},{77,-59}},
@@ -1039,18 +1040,17 @@ equation
       thickness=0.25,
       smooth=Smooth.Bezier), Text(
       string="%condition",
-      extent={{114,-46},{114,-40}},
+      extent={{4,4},{4,10}},
       lineColor={95,95,95},
       fontSize=2,
       textStyle={TextStyle.Bold},
       horizontalAlignment=TextAlignment.Left));
   transition(
     onlyHeatingHRS_true,
-    startState,
-    true,
+    startState,true,
     immediate=false,
     reset=false,
-    synchronize=true,
+    synchronize=false,
     priority=11) annotation (Line(
       points={{-18,-82},{-70,-26}},
       color={175,175,175},
@@ -1283,6 +1283,57 @@ equation
   connect(hold_phi_sup.y, phi_supply) annotation (Line(points={{79,9},{84.5,9},{99,9}},
                               color={0,0,127}));
   connect(TsupAirOut.y, T_supplyAirOut) annotation (Line(points={{79,57},{83.5,57},{99,57}}, color={0,0,127}));
+public
+  block StateExtra
+
+    annotation (
+      Icon(graphics={Text(
+            extent={{-100,100},{100,-100}},
+            lineColor={0,0,0},
+            textString="%name")}),
+      Diagram(graphics={Text(
+            extent={{-100,100},{100,-100}},
+            lineColor={0,0,0},
+            textString="%stateName",
+            fontSize=10)}),
+      __Dymola_state=true,
+      showDiagram=true,
+      singleInstance=true);
+  end StateExtra;
+equation
+  transition(
+    startState,
+    stateExtra,
+    Q_dot_C > 0 and Q_dot_H > 0,
+    immediate=false,
+    reset=false,
+    priority=11) annotation (Line(
+      points={{-83,-25},{-108,-38}},
+      color={175,175,175},
+      thickness=0.25,
+      smooth=Smooth.Bezier), Text(
+      string="%condition",
+      extent={{-4,4},{-4,10}},
+      lineColor={95,95,95},
+      fontSize=10,
+      textStyle={TextStyle.Bold},
+      horizontalAlignment=TextAlignment.Right));
+  transition(
+    stateExtra,
+    startState,
+    true,
+    immediate=false,
+    reset=false) annotation (Line(
+      points={{-124,-22},{-124,-10},{-84,-10}},
+      color={175,175,175},
+      thickness=0.25,
+      smooth=Smooth.Bezier), Text(
+      string="%condition",
+      extent={{4,4},{4,10}},
+      lineColor={95,95,95},
+      fontSize=10,
+      textStyle={TextStyle.Bold},
+      horizontalAlignment=TextAlignment.Left));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-20},{100,
             60}}), graphics={

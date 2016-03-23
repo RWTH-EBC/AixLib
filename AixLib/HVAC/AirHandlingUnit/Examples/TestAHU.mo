@@ -14,11 +14,9 @@ model TestAHU
   Modelica.Blocks.Sources.Constant desiredT_sup(k=293)
     annotation (Placement(transformation(extent={{62,-26},{42,-6}})));
   AHU ahu(          clockPeriodGeneric=30,
-    HRS=true,
-    dehumidificationSet=true,
-    humidificationSet=true,
     heating=true,
-    cooling=true)
+    cooling=true,
+    HRS=true)
     annotation (Placement(transformation(extent={{-68,-18},{26,18}})));
   Modelica.Blocks.Sources.Constant phi_roomMin(k=0.47)
     annotation (Placement(transformation(extent={{68,-56},{48,-36}})));
@@ -103,23 +101,25 @@ equation
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={
         Text(
-          extent={{-84,88},{-54,58}},
+          extent={{-88,84},{-50,58}},
           lineColor={28,108,200},
           fontSize=6,
-          textString="Heat        Cool        Dehu        Hu        HRS
-1        1        1        1        1
-1        1        1        0        1
-1        1        0        1        1
-1        1        0        0        1
-1        0        0        0        1
-0        1        0        0        1
-1        1        1        1        0
-1        1        1        0        0
-1        1        0        1        0
-1        1        0        0        0
-1        0        0        0        0
-0        1        0        0        0"),
-        Text(
+          textString="Heat	Cool	Dehu	Hu	HRS
+1	1	1	1	1
+1	1	1	0	1
+1	1	0	1	1
+1	1	0	0	1
+1	0	0	0	1
+0	1	0	0	1
+0	0	0	0	1
+1	1	1	1	0
+1	1	1	0	0
+1	1	0	1	0
+1	1	0	0	0
+1	0	0	0	0
+0	1	0	0	0
+0	0	0	0	0
+"),     Text(
           extent={{-88,100},{-44,90}},
           lineColor={28,108,200},
           textString="Use the following Table for investigation of all possible modes.
