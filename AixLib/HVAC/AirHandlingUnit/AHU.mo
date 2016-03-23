@@ -34,7 +34,7 @@ model AHU
   Boolean tooHighX(start=false);
   Boolean tooLowX(start=false);
   Boolean choiceX(start=true);
-  Boolean allCond(start=true);
+  Boolean allCond(start=false);
 
   // Variables that will be set with parameteres of HRS efficiency
   inner Real phi_t_withHRS(start=efficiencyHRS_enabled)
@@ -43,12 +43,12 @@ model AHU
     "efficiency of HRS in the AHU modes when HRS is disabled";
   inner Real phi_t(start=0.5);
 
-  inner Modelica.SIunits.Temp_K T_oda(start=288.15);
+  inner Modelica.SIunits.Temp_K T_oda;//(start=288.15);
   inner Modelica.SIunits.Temp_K T_1(start=290.15);
   inner Modelica.SIunits.Temp_K T_5(start=293.15);
   inner Modelica.SIunits.Temp_K T_sup(start=295.15);
   inner Modelica.SIunits.Temp_K T_eta(start=296.15);
-  inner Modelica.SIunits.Temp_K T_6(start=296.15);
+  inner Modelica.SIunits.Temp_K T_6;//(start=296.15);
 
   inner Modelica.SIunits.MassFraction X_oda(start=0.007);
   Modelica.SIunits.MassFraction X_odaSat(start=0.007);
@@ -99,9 +99,6 @@ model AHU
     period=clockPeriodGeneric)
     annotation (Placement(transformation(extent={{-94,8},{-82,20}})));
 
-  // In- and Output Connectors
-
-  //
   //
   ////////////////////////////
   //State Machines////////////
@@ -110,8 +107,9 @@ model AHU
   //Start State
 
   block StartState
-    outer output Modelica.SIunits.HeatFlowRate Q_dot_C;
-    outer output Modelica.SIunits.HeatFlowRate Q_dot_H;
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_C(start=1e-3);
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_H(start=1e-3);
+
   equation
     Q_dot_C = previous(Q_dot_C);
     Q_dot_H = previous(Q_dot_H);
@@ -718,8 +716,9 @@ model AHU
 
   Modelica.Blocks.Sources.RealExpression hold_phi_sup(y=hold(phi_sup))
     annotation (Placement(transformation(extent={{58,-1},{78,19}})));
-  Modelica.Blocks.Sources.RealExpression TsupAirOut(y=TsupplyAirOut)
-    "see if else decision in source code"                                                                  annotation (Placement(transformation(extent={{58,47},{78,67}})));
+  Modelica.Blocks.Sources.RealExpression TsupAirOut(y=hold(TsupplyAirOut))
+    "see if else decision in source code"                                                           annotation (Placement(transformation(extent={{58,47},{78,67}})));
+
 equation
   // variables that will be set with parameteres of HRS efficiency
   phi_t_withHRS = if HRS then efficiencyHRS_enabled else 0;
@@ -875,18 +874,18 @@ equation
 
   Vflow_out = hold(V_dot_eta);
   Pel = if Vflow_out > 0 then hold(P_el_eta) + hold(P_el_sup) else 0;
-  QflowH = if hold(Q_dot_H) > 0 and hold(allCond) then hold(Q_dot_H) else 0;
-  QflowC = if hold(Q_dot_C) > 0 and hold(allCond) then hold(Q_dot_C) else 0;
+  QflowH = if hold(Q_dot_H) > 0 then hold(Q_dot_H) else 0;
+  QflowC = if hold(Q_dot_C) > 0 then hold(Q_dot_C) else 0;
 
   // The following part decides whether T_supplyAir input connector is passed through or outdoor air temp (+ slight changes) is used. Only necessery if either only heating or cooling is activated.
   if
     heating and not cooling and not dehumidification and not humidification then
-    TsupplyAirOut = if hold(stateToOnlyHeatingHRS_true) or hold(stateToOnlyHeatingHRS_false) then T_supplyAir else hold(T_oda) + hold(phi_t_withoutHRS)*(hold(T_6) - hold(T_oda)) + hold(dTFan);
+    TsupplyAirOut = if stateToOnlyHeatingHRS_true or stateToOnlyHeatingHRS_false then T_sup else T_oda + phi_t_withoutHRS*(T_6 - T_oda) + dTFan;
   elseif
     cooling and not heating and not dehumidification and not humidification then
-    TsupplyAirOut = if hold(stateToOnlyCoolingHRS_true) or hold(stateToOnlyCoolingHRS_false) then T_supplyAir else hold(T_oda) + hold(phi_t_withoutHRS)*(hold(T_6) - hold(T_oda)) + hold(dTFan);
+    TsupplyAirOut = if stateToOnlyCoolingHRS_true or stateToOnlyCoolingHRS_false then T_sup else T_oda + phi_t_withoutHRS*(T_6 - T_oda) + dTFan;
   else
-    TsupplyAirOut = T_supplyAir;
+    TsupplyAirOut = T_sup;
   end if;
   // with:
   dTFan = P_el_sup/(V_dot_sup*rho * (c_pL_iG + X_oda * c_pW_iG));
