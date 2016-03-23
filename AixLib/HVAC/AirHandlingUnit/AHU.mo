@@ -113,7 +113,6 @@ model AHU
   equation
     Q_dot_C = previous(Q_dot_C);
     Q_dot_H = previous(Q_dot_H);
-
     annotation (
       Icon(graphics={Text(
             extent={{-100,100},{100,-100}},
@@ -141,13 +140,13 @@ model AHU
   block DeHuHRS_true
     outer output Modelica.SIunits.HeatFlowRate Q_dot_C;
     outer output Modelica.SIunits.HeatFlowRate Q_dot_H;
-    outer input Modelica.SIunits.Temp_K T_oda;
+    outer input Modelica.SIunits.Temp_K T_oda(start=273.15);
     outer input Modelica.SIunits.Temp_K T_1;
     Modelica.SIunits.Temp_K T_2(start=290);
     Modelica.SIunits.Temp_K T_3(start=282);
     Modelica.SIunits.Temp_K T_4(start=282);
     outer input Modelica.SIunits.Temp_K T_5;
-    outer input Modelica.SIunits.Temp_K T_6;
+    outer input Modelica.SIunits.Temp_K T_6(start=294.15);
     outer input Modelica.SIunits.MassFraction X_oda;
     outer input Modelica.SIunits.MassFraction X_supMax;
     outer output Modelica.SIunits.MassFraction X_sup;
@@ -718,7 +717,6 @@ model AHU
     annotation (Placement(transformation(extent={{58,-1},{78,19}})));
   Modelica.Blocks.Sources.RealExpression TsupAirOut(y=hold(TsupplyAirOut))
     "see if else decision in source code"                                                           annotation (Placement(transformation(extent={{58,47},{78,67}})));
-
 equation
   // variables that will be set with parameteres of HRS efficiency
   phi_t_withHRS = if HRS then efficiencyHRS_enabled else 0;
@@ -816,25 +814,25 @@ equation
   stateToOnlyHeatingHRS_true = if
      choiceX
      and
-     (previous(T_5) >= previous(T_oda) + phi_t_withoutHRS*(previous(T_6) - previous(T_oda)))
+     (previous(T_5) >= pre(T_oda) + phi_t_withoutHRS*(pre(T_6) - pre(T_oda)))
      and heating and HRS then true else false;
 
   stateToOnlyHeatingHRS_false = if
      choiceX
      and
-     (previous(T_5) >= previous(T_oda) + phi_t_withoutHRS*(previous(T_6) - previous(T_oda)))
+     (previous(T_5) >= pre(T_oda) + phi_t_withoutHRS*(pre(T_6) - pre(T_oda)))
      and heating and not HRS then true else false;
 
   stateToOnlyCoolingHRS_true = if
      choiceX
      and
-     (previous(T_5) < previous(T_oda) + phi_t_withoutHRS*(previous(T_6) - previous(T_oda)))
+     (previous(T_5) < pre(T_oda) + phi_t_withoutHRS*(pre(T_6) - pre(T_oda)))
      and cooling and HRS then true else false;
 
   stateToOnlyCoolingHRS_false = if
      choiceX
      and
-     (previous(T_5) < previous(T_oda) + phi_t_withoutHRS*(previous(T_6) - previous(T_oda)))
+     (previous(T_5) < pre(T_oda) + phi_t_withoutHRS*(pre(T_6) - pre(T_oda)))
      and cooling and not HRS then true else false;
 
   X_supplyMin = (molarMassRatio*phi_supplyAir[1]*
@@ -884,6 +882,9 @@ equation
   elseif
     cooling and not heating and not dehumidification and not humidification then
     TsupplyAirOut = if stateToOnlyCoolingHRS_true or stateToOnlyCoolingHRS_false then T_sup else T_oda + phi_t_withoutHRS*(T_6 - T_oda) + dTFan;
+  elseif
+    not heating and not cooling and not dehumidification and not humidification then
+    TsupplyAirOut = T_oda + phi_t_withoutHRS*(T_6 - T_oda) + dTFan;
   else
     TsupplyAirOut = T_sup;
   end if;
@@ -1268,16 +1269,17 @@ equation
       horizontalAlignment=TextAlignment.Left));
   //stateToHuCHRS_false==false,
 
-  connect(T_outdoorAir, sample.u[1]) annotation (Line(points={{-98,56},{-82,56},{-67.75,56},{-67.75,26}},
-                                    color={0,0,127}));
-  connect(X_outdoorAir, sample.u[2]) annotation (Line(points={{-98,36},{-82,36},{-67.25,36},{-67.25,26}},
-                                    color={0,0,127}));
-  connect(T_supplyAir, sample.u[3]) annotation (Line(points={{98,42},{18,42},{-66.75,42},{-66.75,26}},
+  connect(T_outdoorAir, sample.u[1]) annotation (Line(points={{-98,56},{-82,56},
+          {-67.75,56},{-67.75,26}}, color={0,0,127}));
+  connect(X_outdoorAir, sample.u[2]) annotation (Line(points={{-98,36},{-82,36},
+          {-67.25,36},{-67.25,26}}, color={0,0,127}));
+  connect(T_supplyAir, sample.u[3]) annotation (Line(points={{98,42},{18,42},{-66.75,
+          42},{-66.75,26}}, color={0,0,127}));
+  connect(T_extractAir, sample.u[4]) annotation (Line(points={{98,90},{-60,90},{
+          -60,60},{-66.25,60},{-66.25,26}},
                             color={0,0,127}));
-  connect(T_extractAir, sample.u[4]) annotation (Line(points={{98,90},{-60,90},{-60,60},{-66.25,60},{-66.25,26}},
-                            color={0,0,127}));
-  connect(Vflow_in, sample.u[8]) annotation (Line(points={{-98,82},{-64.25,82},{-64.25,26}},
-                       color={0,0,127}));
+  connect(Vflow_in, sample.u[8]) annotation (Line(points={{-98,82},{-64.25,82},{
+          -64.25,26}}, color={0,0,127}));
   connect(hold_phi_sup.y, phi_supply) annotation (Line(points={{79,9},{84.5,9},{99,9}},
                               color={0,0,127}));
   connect(TsupAirOut.y, T_supplyAirOut) annotation (Line(points={{79,57},{83.5,57},{99,57}}, color={0,0,127}));
@@ -1373,5 +1375,4 @@ equation
 <li><i>Septmeber, 2014&nbsp;</i> by Philipp Mehrfeld:<br>Model implemented</li>
 </ul>
 </html>"));
-
 end AHU;
