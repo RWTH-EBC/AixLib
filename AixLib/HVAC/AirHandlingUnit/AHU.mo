@@ -107,8 +107,8 @@ model AHU
   //Start State
 
   block StartState
-    outer output Modelica.SIunits.HeatFlowRate Q_dot_C(start=1e-3);
-    outer output Modelica.SIunits.HeatFlowRate Q_dot_H(start=1e-3);
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_C;
+    outer output Modelica.SIunits.HeatFlowRate Q_dot_H;
 
   equation
     Q_dot_C = previous(Q_dot_C);
@@ -140,13 +140,13 @@ model AHU
   block DeHuHRS_true
     outer output Modelica.SIunits.HeatFlowRate Q_dot_C;
     outer output Modelica.SIunits.HeatFlowRate Q_dot_H;
-    outer input Modelica.SIunits.Temp_K T_oda(start=273.15);
+    outer input Modelica.SIunits.Temp_K T_oda;
     outer input Modelica.SIunits.Temp_K T_1;
     Modelica.SIunits.Temp_K T_2(start=290);
     Modelica.SIunits.Temp_K T_3(start=282);
     Modelica.SIunits.Temp_K T_4(start=282);
     outer input Modelica.SIunits.Temp_K T_5;
-    outer input Modelica.SIunits.Temp_K T_6(start=294.15);
+    outer input Modelica.SIunits.Temp_K T_6;
     outer input Modelica.SIunits.MassFraction X_oda;
     outer input Modelica.SIunits.MassFraction X_supMax;
     outer output Modelica.SIunits.MassFraction X_sup;
