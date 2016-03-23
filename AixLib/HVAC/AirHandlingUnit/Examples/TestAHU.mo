@@ -15,10 +15,10 @@ model TestAHU
     annotation (Placement(transformation(extent={{62,-26},{42,-6}})));
   AHU ahu(          clockPeriodGeneric=30,
     HRS=true,
-    cooling=true,
+    dehumidificationSet=true,
+    humidificationSet=true,
     heating=true,
-    dehumidification=true,
-    humidification=true)
+    cooling=true)
     annotation (Placement(transformation(extent={{-68,-18},{26,18}})));
   Modelica.Blocks.Sources.Constant phi_roomMin(k=0.47)
     annotation (Placement(transformation(extent={{68,-56},{48,-36}})));
@@ -106,19 +106,19 @@ equation
           extent={{-84,88},{-54,58}},
           lineColor={28,108,200},
           fontSize=6,
-          textString="Heat	Cool	Dehu	Hu	HRS
-1	1	1	1	1
-1	1	1	0	1
-1	1	0	1	1
-1	1	0	0	1
-1	0	0	0	1
-0	1	0	0	1
-1	1	1	1	0
-1	1	1	0	0
-1	1	0	1	0
-1	1	0	0	0
-1	0	0	0	0
-0	1	0	0	0"),
+          textString="Heat        Cool        Dehu        Hu        HRS
+1        1        1        1        1
+1        1        1        0        1
+1        1        0        1        1
+1        1        0        0        1
+1        0        0        0        1
+0        1        0        0        1
+1        1        1        1        0
+1        1        1        0        0
+1        1        0        1        0
+1        1        0        0        0
+1        0        0        0        0
+0        1        0        0        0"),
         Text(
           extent={{-88,100},{-44,90}},
           lineColor={28,108,200},

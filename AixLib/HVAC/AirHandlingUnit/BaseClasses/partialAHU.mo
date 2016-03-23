@@ -6,14 +6,15 @@ partial model partialAHU "Defines necessary parameters and connectors"
     annotation (Dialog(group="AHU Modes"));
   inner parameter Boolean cooling=true "Cooling Function of AHU"
     annotation (Dialog(group="AHU Modes"));
-  inner parameter Boolean dehumidification=if heating and cooling then true
+  inner parameter Boolean dehumidificationSet=if heating and cooling then true
        else false
     "Dehumidification Function of AHU (Cooling and Heating must be enabled)"
     annotation (Dialog(group="AHU Modes", enable=(heating and cooling)));
-  inner parameter Boolean humidification=if heating and cooling then true else false
+  inner parameter Boolean humidificationSet=if heating and cooling then true else false
     "Humidification Function of AHU (Cooling and Heating must be enabled)"
     annotation (Dialog(group="AHU Modes", enable=(heating and cooling)));
-
+  inner Boolean dehumidification;
+  inner Boolean humidification;
   inner parameter Real BPF_DeHu(
     min=0,
     max=1) = 0.2
@@ -154,4 +155,8 @@ partial model partialAHU "Defines necessary parameters and connectors"
 </html>", info="<html>
 <p><span style=\"font-family: MS Shell Dlg 2;\">Base class to provide connectors. Thus, it is possible to declare parameters in a general way in superior building model and give the opportunity whether an AHU (</span><code>AixLib.HVAC.AirHandlingUnit.AHU</code><span style=\"font-family: MS Shell Dlg 2;\">) exist or not (</span><code>AixLib.HVAC.AirHandlingUnit.NoAHU</code><span style=\"font-family: MS Shell Dlg 2;\">).</span></p>
 </html>"));
+equation
+  dehumidification = if dehumidificationSet and heating and cooling then dehumidificationSet else false;
+  humidification = if dehumidificationSet and heating and cooling then humidificationSet else false;
+
 end partialAHU;
