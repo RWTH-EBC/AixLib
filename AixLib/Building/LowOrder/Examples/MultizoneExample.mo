@@ -1,7 +1,6 @@
 within AixLib.Building.LowOrder.Examples;
 model MultizoneExample "This is an example for a multizone office building"
   import AixLib;
-  import AixLib;
   extends Modelica.Icons.Example;
 
   Multizone.MultizoneEquipped multizoneEquipped(
