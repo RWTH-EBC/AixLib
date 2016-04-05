@@ -45,8 +45,8 @@ model MultizoneEquipped
     efficiencyHRS_disabled=buildingParam.efficiencyHRS_disabled,
     heating=buildingParam.heatingAHU,
     cooling=buildingParam.coolingAHU,
-    dehumidification=buildingParam.dehumidificationAHU,
-    humidification=buildingParam.humidificationAHU,
+    dehumidificationSet=buildingParam.dehumidificationAHU,
+    humidificationSet=buildingParam.humidificationAHU,
     clockPeriodGeneric=buildingParam.sampleRateAHU,
     dp_sup=buildingParam.dpAHU_sup,
     dp_eta=buildingParam.dpAHU_eta,
@@ -192,15 +192,13 @@ equation
   connect(replicatorTemperatureVentilation.y, zone.ventilationTemperature)
     annotation (Line(points={{23,44.5},{23,47.2},{45,47.2}}, color={0,0,127}));
   connect(AirHandlingUnit.phi_supply, AirHandlingUnit.phi_extractAir)
-    annotation (Line(points={{14.4,12.3},{20,12.3},{20,16.85},{14.4,16.85}},
+    annotation (Line(points={{14.4,1.25},{20,1.25},{20,16.85},{14.4,16.85}},
         color={0,0,127}));
   connect(TAirAHUAvg.T, minTemp.u)
     annotation (Line(points={{8,-22},{1,-22}}, color={0,0,127}));
   connect(minTemp.y, AirHandlingUnit.T_extractAir) annotation (Line(points={{-10.5,
           -22},{-14,-22},{-14,-12},{26,-12},{26,20.1},{14.4,20.1}},
         color={0,0,127}));
-  connect(AirHandlingUnit.T_supplyAir, replicatorTemperatureVentilation.u)
-    annotation (Line(points={{14.4,7.75},{23,7.75},{23,33}}, color={0,0,127}));
   connect(zone.ventilationRate, airFlowRateSplit.airFlowSplit) annotation (Line(
         points={{52,43},{52,43},{52,28},{44.36,28},{44.36,21}}, color={0,0,127}));
   connect(AHU[4], airFlowRateSplit.profile) annotation (Line(points={{-100,-31},
@@ -209,6 +207,8 @@ equation
   connect(AirHandlingUnit.Vflow_out, airFlowRateSplit.airFlow) annotation (Line(
         points={{-48.6,16.85},{-60,16.85},{-60,28},{36,28},{36,2},{45,2},{45,7}},
         color={0,0,127}));
+  connect(AirHandlingUnit.T_supplyAirOut, replicatorTemperatureVentilation.u)
+    annotation (Line(points={{14.4,11},{23,11},{23,33}}, color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}),

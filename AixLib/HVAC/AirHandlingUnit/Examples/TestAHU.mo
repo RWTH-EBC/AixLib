@@ -6,16 +6,19 @@ model TestAHU
   Modelica.Blocks.Sources.Sine     tempOutside(
     amplitude=10,
     freqHz=1/86400,
-    offset=293,
-    phase=-3.1415/2)
+    phase=-3.1415/2,
+    offset=292)
     annotation (Placement(transformation(extent={{-100,-16},{-80,4}})));
   Modelica.Blocks.Sources.Constant Vflow_in(k=100)
     annotation (Placement(transformation(extent={{-100,24},{-80,44}})));
   Modelica.Blocks.Sources.Constant desiredT_sup(k=293)
     annotation (Placement(transformation(extent={{62,-26},{42,-6}})));
-  AHU ahu(HRS=true, clockPeriodGeneric=30)
+  AHU ahu(          clockPeriodGeneric=30,
+    heating=true,
+    cooling=true,
+    HRS=true)
     annotation (Placement(transformation(extent={{-68,-18},{26,18}})));
-  Modelica.Blocks.Sources.Constant phi_roomMin(k=0.45)
+  Modelica.Blocks.Sources.Constant phi_roomMin(k=0.47)
     annotation (Placement(transformation(extent={{68,-56},{48,-36}})));
   Modelica.Blocks.Sources.Constant phi_roomMax(k=0.55)
     annotation (Placement(transformation(extent={{98,-56},{78,-36}})));
@@ -32,7 +35,8 @@ model TestAHU
     freqHz=1/86400,
     amplitude=2,
     phase=-3.1415/4,
-    offset=2) annotation (Placement(transformation(extent={{98,20},{78,40}})));
+    offset=1.7)
+              annotation (Placement(transformation(extent={{98,20},{78,40}})));
   Modelica.Blocks.Math.Add addToExtractTemp
     annotation (Placement(transformation(extent={{46,12},{34,24}})));
   Modelica.Blocks.Interfaces.RealOutput QFlowCool(
@@ -95,7 +99,59 @@ equation
   connect(ahu.Pel, PEl) annotation (Line(points={{8.61,-14.85},{8.61,-47.425},{
           26,-47.425},{26,-86}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}})),
+            -100},{100,100}}), graphics={
+        Text(
+          extent={{-88,84},{-50,58}},
+          lineColor={28,108,200},
+          fontSize=6,
+          textString="Heat	Cool	Dehu	Hu	HRS
+1	1	1	1	1
+1	1	1	0	1
+1	1	0	1	1
+1	1	0	0	1
+1	0	0	0	1
+0	1	0	0	1
+0	0	0	0	1
+1	1	1	1	0
+1	1	1	0	0
+1	1	0	1	0
+1	1	0	0	0
+1	0	0	0	0
+0	1	0	0	0
+0	0	0	0	0
+"),     Text(
+          extent={{-88,100},{-44,90}},
+          lineColor={28,108,200},
+          textString="Use the following Table for investigation of all possible modes.
+Check whether variable allCond is always 1."),
+        Text(
+          extent={{-20,76},{36,62}},
+          lineColor={28,108,200},
+          fontSize=4,
+          horizontalAlignment=TextAlignment.Left,
+          textString="createPlot(id=1, position={917, 10, 693, 691}, y={\"ahu.allCond\"}, range={0.0, 90000.0, 0.89, 1.11}, grid=true, filename=\"TestAHU.mat\", colors={{28,108,200}}, markers={MarkerStyle.SmallSquare});
+
+createPlot(id=2, position={60, 18, 727, 669}, y={\"ahu.startState.active\", \"ahu.deHuHRS_true.active\", \"ahu.deHuHRS_false.active\",
+ \"ahu.onlyHeatingHRS_true.active\", \"ahu.onlyHeatingHRS_false.active\"}, range={0.0, 90000.0, -0.05, 1.05}, grid=true, filename=\"TestAHU.mat\", colors={{28,108,200}, {238,46,47}, {0,140,72}, {217,67,180}, {0,0,0}}, markers={MarkerStyle.SmallSquare, MarkerStyle.SmallSquare, MarkerStyle.SmallSquare, 
+MarkerStyle.SmallSquare, MarkerStyle.SmallSquare});
+
+createPlot(id=3, position={821, 15, 744, 666}, y={\"ahu.onlyCoolingHRS_true.active\", \"ahu.onlyCoolingHRS_false.active\", 
+\"ahu.huPreHHRS_true.active\", \"ahu.huPreHHRS_false.active\", \"ahu.huCHRS_true.active\",
+ \"ahu.huCHRS_false.active\"}, range={0.0, 90000.0, -0.05, 1.05}, grid=true, filename=\"TestAHU.mat\", colors={{28,108,200}, {238,46,47}, {0,140,72}, {217,67,180}, {0,0,0}, {162,29,33}}, markers={MarkerStyle.SmallSquare, MarkerStyle.SmallSquare, MarkerStyle.SmallSquare, 
+MarkerStyle.SmallSquare, MarkerStyle.SmallSquare, MarkerStyle.SmallSquare});
+
+createPlot(id=4, position={77, 62, 1429, 635}, y={\"ahu.QflowC\", \"ahu.QflowH\"}, range={0.0, 88000.0, -100000.0, 2100000.0}, grid=true, filename=\"TestAHU.mat\", colors={{28,108,200}, {238,46,47}});
+
+createPlot(id=5, position={50, 59, 1411, 632}, y={\"ahu.X_oda\", \"ahu.X_supMin\", \"ahu.X_supMax\"}, range={0.0, 88000.0, 0.0058000000000000005, 0.0102}, grid=true, filename=\"TestAHU.mat\", colors={{28,108,200}, {238,46,47}, {0,140,72}}, markers={MarkerStyle.SmallSquare, MarkerStyle.SmallSquare, MarkerStyle.SmallSquare});
+
+createPlot(id=6, position={31, 19, 1416, 654}, y={\"ahu.T_6\", \"ahu.T_oda\", \"ahu.T_supplyAirOut\"}, range={0.0, 88000.0, 8.0, 30.0}, grid=true, filename=\"TestAHU.mat\", colors={{28,108,200}, {238,46,47}, {28,108,200}}, markers={MarkerStyle.SmallSquare, MarkerStyle.SmallSquare, MarkerStyle.None});"),
+        Text(
+          extent={{-20,102},{64,82}},
+          lineColor={28,108,200},
+          textString="Double Click the text below, copy everything and
+paste it after the simulation in the command line
+to display most interesting plots.",
+          horizontalAlignment=TextAlignment.Left)}),
     experiment(
       StopTime=86400,
       Interval=60,
