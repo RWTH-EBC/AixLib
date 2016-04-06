@@ -8,7 +8,7 @@ record OPH_3_Office
     l_cooler = 0,
     RatioConvectiveHeatLighting = 0.5,
     zoneID = "OPH_3_Office",
-    usage = "Gruppenbuero (zwei bis sechs Arbeitsplaetze)",
+    usage = "Group Office",
     RoomArea = 1675.0,
     Vair = 6700.0,
     alphaiwi = 2.27142857143,
@@ -33,10 +33,13 @@ record OPH_3_Office
     withOuterwalls = true,
     R1o = 1.4142107968e-05,
     RRest = 0.000380773816236,
-    C1o = 492976267.489);
+    C1o = 492976267.489,
+    orientationswallshorizontal = {90,90,90,90,0});
   annotation (Documentation(revisions="<html>
  <ul>
  <li><i>June, 2015&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
  </ul>
- </html>"));
+ </html>", info="<html>
+<p><span style=\"font-family: MS Shell Dlg 2;\">Zone &QUOT;Office&QUOT; of an example building according to an office building with passive house standard. The building is divided in six zones, this is a typical zoning for an office building. </span></p>
+</html>"));
 end OPH_3_Office;

@@ -5,34 +5,26 @@ record OfficePassiveHouse
     usage = "Office Building",
     numZones=6,
     zoneSetup={
-      AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_1_Meeting(
-        withAHU=true,
-        minAHU=0,
-        maxAHU=12),
+      AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_1_Meeting(),
       AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_2_Storage(),
       AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_3_Office(),
-      AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_4_Restroom(
-        withAHU=true,
-        minAHU=0,
-        maxAHU=8),
-      AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_5_ICT(
-        withAHU=true,
-        minAHU=0,
-        maxAHU=130),
+      AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_4_Restroom(),
+      AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_5_ICT(),
       AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_6_Floor()},
     Vair=13396,
     BuildingArea=3349,
-    h_heater=334900,
-    Heater_on=true,
-    l_cooler=0,
-    Cooler_on=false,
-    heating=true,
-    cooling=true,
-    dehumidification=true,
-    humidification=true,
+    heatingAHU=true,
+    coolingAHU=true,
+    dehumidificationAHU=true,
+    humidificationAHU=true,
     BPF_DeHu=0.2,
-    HRS=true,
+    HRS=false,
     efficiencyHRS_enabled=0.8,
-    efficiencyHRS_disabled=0.2);
+    efficiencyHRS_disabled=0.2,
+    sampleRateAHU=1800,
+    dpAHU_sup=800,
+    dpAHU_eta=800,
+    effFanAHU_sup=0.7,
+    effFanAHU_eta=0.7);
 
 end OfficePassiveHouse;

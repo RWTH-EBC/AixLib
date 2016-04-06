@@ -1,4 +1,5 @@
-AirFlowRate
+AirFlowRateSplit
+AirFlowRateSum
 SimpleInnerWall
 SimpleOuterWall
 SolarRadAdapter
