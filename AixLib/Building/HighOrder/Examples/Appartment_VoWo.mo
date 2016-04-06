@@ -25,7 +25,7 @@ model Appartment_VoWo "Simulation of 1 apartment "
   Modelica.Blocks.Sources.Constant Source_TsetKitchen(k = 273.15 + 20) annotation(Placement(transformation(extent = {{-100, -36}, {-86, -22}})));
   AixLib.Building.Components.Weather.Weather combinedWeather(Latitude = 49.5, Longitude = 8.5, Wind_dir = false, Wind_speed = true, Air_temp = true, SOD = AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_NE_SE_SW_NW_Hor(), fileName = "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt", WeatherData(tableOnFile=false, table=weatherDataDay.weatherData)) annotation(Placement(transformation(extent = {{-82, 74}, {-50, 96}})));
   Modelica.Blocks.Sources.Constant Source_TsetBath(k = 273.15 + 24) annotation(Placement(transformation(extent = {{-100, -16}, {-86, -2}})));
-  Modelica.Blocks.Sources.Constant AirExWindow[5](each k=0.5)   annotation(Placement(transformation(extent = {{-6, 74}, {0, 80}})));
+  Modelica.Blocks.Sources.Constant AirExWindow[5](each k = 0.5) annotation(Placement(transformation(extent = {{-6, 74}, {0, 80}})));
   AixLib.Fluid.Sources.Boundary_ph
                                  tank(nPorts=2, redeclare package Medium =
         Medium)                       annotation(Placement(transformation(extent = {{-8, -8}, {8, 8}}, rotation = 270, origin = {28, -64})));
@@ -73,6 +73,8 @@ equation
   // Here the relevant Variables for the simulation are set as output to limit the dimension of the result file
   connect(combinedWeather.WindSpeed, VoWoWSchV1984.WindSpeedPort) annotation(Line(points={{
           -48.9333,91.6},{-10.4455,91.6},{-10.4455,42.875}},                                                                                         color = {0, 0, 127}));
+  connect(AirExWindow.y, VoWoWSchV1984.AirExchangePort_Window) annotation(Line(points={{0.3,77},
+          {6,77},{6,43.0833},{9.76364,43.0833}},                                                                                                color = {0, 0, 127}));
   connect(combinedWeather.SolarRadiation_OrientedSurfaces[2], VoWoWSchV1984.SolarRadiation[1]) annotation(Line(points={{-74.32,
           72.9},{-74.32,60},{21.1091,60},{21.1091,44.5417}},                                                                                                    color = {255, 128, 0}));
   connect(combinedWeather.SolarRadiation_OrientedSurfaces[4], VoWoWSchV1984.SolarRadiation[2]) annotation(Line(points={{-74.32,
@@ -97,8 +99,6 @@ equation
   connect(Pumpe.port_a, tank.ports[2]) annotation (Line(
       points={{4,-72},{14,-72},{14,-84},{26.4,-84},{26.4,-72}},
       color={0,127,255}));
-  connect(AirExWindow.y, VoWoWSchV1984.AirExchangePort_Window) annotation (Line(
-        points={{0.3,77},{9.76364,77},{9.76364,43.0833}}, color={0,0,127}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
             -140},{100,100}}),                                                                           graphics={  Text(extent = {{-48, -82}, {90, -168}}, lineColor = {0, 0, 255}, textString = "Set initial values for iteration variables (list given by translate, usually pressure drops). Rule of thumb: valves 1000 Pa, pipes 100 Pa. Simulation may still work without some of them, but  it gives warning of division by zero at initialization.
  ")}), experiment(StopTime = 86400, Interval = 60, __Dymola_Algorithm = "Lsodar"), experimentSetupOutput(states = false, derivatives = false, auxiliaries = false, events = false), Documentation(info = "<html>
