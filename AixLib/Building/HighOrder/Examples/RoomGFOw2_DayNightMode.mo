@@ -6,7 +6,7 @@ model RoomGFOw2_DayNightMode
   parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();
   replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater
     "Medium in the system"                                                                             annotation(choicesAllMatching = true);
-  Rooms.OFD.Ow2IwL1IwS1Gr1Uf1 room_GF_2OW(withDoor1 = false, withDoor2 = false, withWindow1 = true, solar_absorptance_OW = 0.6, room_length = 5.87, room_width = 3.84, room_height = 2.6, windowarea_OW1 = 8.4, withWindow2 = true, windowarea_OW2 = 1.73, withFloorHeating = false, TIR = 1, T0_air = 294.15, T0_IW1 = 291.15, T0_IW2 = 291.15, T0_FL = 289.15, T_Ground = 279.15) annotation(Placement(transformation(extent = {{16, 8}, {52, 44}})));
+  Rooms.OFD.Ow2IwL1IwS1Gr1Uf1 room_GF_2OW(withDoor1 = false, withDoor2 = false, withWindow1 = true, solar_absorptance_OW = 0.6, room_length = 5.87, room_width = 3.84, room_height = 2.6, windowarea_OW1 = 8.4, withWindow2 = true, windowarea_OW2 = 1.73, withFloorHeating = false, TIR = 1, T0_air = 294.15, T0_IW1 = 291.15, T0_IW2 = 291.15, T0_FL = 289.15) annotation(Placement(transformation(extent = {{16, 8}, {52, 44}})));
   AixLib.Building.Components.Weather.Weather combinedWeather(Latitude = 49.5, Longitude = 8.5, Cloud_cover = false, Wind_speed = true, Air_temp = true, fileName = "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt", WeatherData(tableOnFile=false, table=weatherDataDay.weatherData)) annotation(Placement(transformation(extent = {{-100, 78}, {-62, 104}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTemp annotation(Placement(transformation(extent = {{-58, 38}, {-38, 58}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow thermCeiling(Q_flow = 0) annotation(Placement(transformation(extent = {{102, 58}, {82, 78}})));
@@ -73,7 +73,7 @@ equation
       points={{-106,-25},{-100,-25},{-100,-26},{-92,-26}},
       color={0,127,255}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-            -100},{100,100}}),                                                                           graphics={  Text(extent=  {{-56, -44}, {82, -130}}, lineColor=  {0, 0, 255}, textString=  "Set initial values for iteration variables (list given by translate, usually pressure drops). Rule of thumb: valves 1000 Pa, pipes 100 Pa. Simulation may still work without some of them, but  it gives warning of division by zero at initialization.
+            -100},{100,100}}),                                                                           graphics={  Text(extent = {{-56, -44}, {82, -130}}, lineColor = {0, 0, 255}, textString = "Set initial values for iteration variables (list given by translate, usually pressure drops). Rule of thumb: valves 1000 Pa, pipes 100 Pa. Simulation may still work without some of them, but  it gives warning of division by zero at initialization.
  ")}), experiment(StopTime = 86400, Interval = 60, __Dymola_Algorithm = "Lsodar"), experimentSetupOutput(events = false), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Example for setting up a simulation for a room.</p>

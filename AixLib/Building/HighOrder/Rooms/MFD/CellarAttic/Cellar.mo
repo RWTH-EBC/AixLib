@@ -2,7 +2,6 @@ within AixLib.Building.HighOrder.Rooms.MFD.CellarAttic;
 model Cellar "Cellar completly under ground"
   import AixLib;
   ///////// construction parameters
-  parameter Integer TMC = 1 "Themal Mass Class" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1 "Heavy", choice = 2 "Medium", choice = 3 "Light", radioButtons = true));
   parameter Integer TIR = 4 "Thermal Insulation Regulation" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1
         "EnEV_2009",                                                                                                    choice = 2
         "EnEV_2002",                                                                                                    choice = 3
@@ -65,9 +64,9 @@ equation
   connect(Wall_Ceiling.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{110,60},
           {110,44},{46,44},{46,-24},{3.9,-24},{3.9,-15.4}},                                                                                                    color = {191, 0, 0}));
   connect(thermStar_Demux.therm, airload.port) annotation(Line(points = {{-1.1, 4.1}, {-1.1, 12}, {-12, 12}, {-12, 4}, {-19, 4}}, color = {191, 0, 0}));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -150}, {150, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Rectangle(extent=  {{-68, 74}, {134, -128}}, lineColor=  {0, 0, 255}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-66, 10}, {126, -48}}, lineColor=  {0, 0, 255}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Solid, textString=  "Cellar")}), Documentation(revisions = "<html>
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -150}, {150, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Rectangle(extent = {{-68, 74}, {134, -128}}, lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-66, 10}, {126, -48}}, lineColor = {0, 0, 255}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "Cellar")}), Documentation(revisions = "<html>
  <ul>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
  <li><i>August 17, 2011</i> by Ana Constantin:<br/>Implemented</li>
