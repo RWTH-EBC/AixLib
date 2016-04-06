@@ -1,15 +1,18 @@
 within AixLib.Building.LowOrder.Examples;
 model MultizoneExample "This is an example for a multizone office building"
+  import AixLib;
   extends Modelica.Icons.Example;
 
-  Multizone.MultizoneEquipped multizoneEquipped(buildingParam=
-        AixLib.DataBase.Buildings.OfficePassiveHouse.OfficePassiveHouse(),
+  Multizone.MultizoneEquipped multizoneEquipped(
       redeclare AixLib.Building.LowOrder.ThermalZone.ThermalZone zone(
         redeclare
         AixLib.Building.LowOrder.BaseClasses.BuildingPhysics.BuildingPhysicsVDI
         buildingPhysics(redeclare
           AixLib.Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG
-          corG)))
+          corG)),
+    redeclare AixLib.HVAC.AirHandlingUnit.AHU AirHandlingUnit "with AHU",
+    buildingParam=
+        AixLib.DataBase.Buildings.OfficePassiveHouse.OfficePassiveHouse())
     annotation (Placement(transformation(extent={{-26,-14},{28,36}})));
   Components.Weather.Weather weather(
     Outopt=1,

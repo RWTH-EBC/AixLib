@@ -8,7 +8,7 @@ record OPH_5_ICT
     l_cooler = 0,
     RatioConvectiveHeatLighting = 0.5,
     zoneID = "OPH_5_ICT",
-    usage = "Rechenzentrum",
+    usage = "ICT",
     RoomArea = 67.0,
     Vair = 268.0,
     alphaiwi = 2.27142857143,
@@ -33,10 +33,16 @@ record OPH_5_ICT
     withOuterwalls = true,
     R1o = 0.000353062716991,
     RRest = 0.00950991783473,
-    C1o = 19748404.1293);
+    C1o = 19748404.1293,
+    withAHU=true,
+    minAHU=0,
+    maxAHU=130,
+    orientationswallshorizontal = {90,90,90,90,0});
   annotation (Documentation(revisions="<html>
  <ul>
  <li><i>June, 2015&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
  </ul>
- </html>"));
+ </html>", info="<html>
+<p><span style=\"font-family: MS Shell Dlg 2;\">Zone &QUOT;Information and Communication Technologies&QUOT; of an example building according to an office building with passive house standard. The building is divided in six zones, this is a typical zoning for an office building. </span></p>
+</html>"));
 end OPH_5_ICT;

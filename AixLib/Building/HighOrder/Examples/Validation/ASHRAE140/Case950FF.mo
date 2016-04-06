@@ -12,12 +12,12 @@ model Case950FF
     annotation (Placement(transformation(extent={{-142,61},{-118,85}})));
   Components.Weather.RadiationOnTiltedSurface.RadOnTiltedSurf_Perez
     radOnTiltedSurf_Perez[5](
-    WeatherFormat=2,
     Azimut={180,-90,0,90,0},
     Tilt={90,90,90,90,0},
-    GroundReflection=fill(0.2, 5),
-    Latitude=fill(39.76, 5),
-    h=1609) "N,E,S,W, Horz"
+    each GroundReflection= 0.2,
+    each Latitude= 39.76,
+    each h= 1609,
+    each WeatherFormat=2) "N,E,S,W, Horz"
     annotation (Placement(transformation(extent={{-102,56},{-74,84}})));
 
   Modelica.Blocks.Sources.CombiTimeTable Solar_Radiation(
