@@ -10,12 +10,12 @@ model Case900FF
     annotation (Placement(transformation(extent={{-142,61},{-118,85}})));
   Components.Weather.RadiationOnTiltedSurface.RadOnTiltedSurf_Perez
     radOnTiltedSurf_Perez[5](
-    WeatherFormat=2,
     Azimut={180,-90,0,90,0},
     Tilt={90,90,90,90,0},
-    GroundReflection=fill(0.2, 5),
-    Latitude=fill(39.76, 5),
-    h=1609) "N,E,S,W, Horz"
+    each GroundReflection= 0.2,
+    each Latitude= 39.76,
+    each h= 1609,
+    each WeatherFormat=2) "N,E,S,W, Horz"
     annotation (Placement(transformation(extent={{-102,56},{-74,84}})));
 
   Modelica.Blocks.Sources.CombiTimeTable Solar_Radiation(
@@ -76,7 +76,7 @@ equation
       color={0,0,127}));
   connect(radOnTiltedSurf_Perez.OutTotalRadTilted, Room.SolarRadiationPort)
     annotation (Line(
-      points={{-76.8,77},{-50,77},{-50,49.8},{-11.1,49.8}},
+      points={{-75.4,75.6},{-50,75.6},{-50,49.8},{-11.1,49.8}},
       color={255,128,0}));
   connect(outsideTemp.port, Room.Therm_outside) annotation (Line(
       points={{-59,46.5},{-55,46.5},{-55,47},{-50,47},{-50,57.385},{-10.05,
