@@ -194,6 +194,7 @@ equation
  <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The following figure presents the room&apos;s layout:</p>
- <p><img src=\"modelica://AixLib/Images/House/2OW_1IWl_1IWs_1Gr_Pa.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/House/2OW_1IWl_1IWs_1Gr_Pa.png\"
+    alt=\"Room layout\"/></p>
  </html>"));
 end Ow2IwL1IwS1Gr1Uf1;

@@ -160,7 +160,8 @@ equation
  <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The following figure presents the room&apos;s layout:</p>
- <p><img src=\"modelica://AixLib/Images/House/Attic_2Ro_5Rooms.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/House/Attic_2Ro_5Rooms.png\"
+    alt=\"Room layout\"/></p>
  <p>We also tested a model where the attic has just one floor, over the whole building and each room connects to this component through the ceiling. However the model didn&apos;t lead to the expected lower simulation times, on the contrary. This model is also more correct, as it is not realistic to think that every layer of the attic&apos;s floor has a single temperature.</p>
  </html>"));
 end Attic_Ro2Lf5;
