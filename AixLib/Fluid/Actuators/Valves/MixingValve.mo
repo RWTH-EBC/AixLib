@@ -245,10 +245,9 @@ fluid-streams into one resulting fluid-stream.
 It is based on two seperate SimpleValve from the AixLib Library.
 The Model features a RealInput which controls the mixture of the streams in a
 range between 0 and 1. A filtered option is available.</p>
-</ul>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
-</ul>
+<h4><font color=\"#008000\">Level of Development</font></h4>
+<p><img src=\"modelica://AixLib/Images/stars3.png\"
+    alt=\"stars: 3 out of 5\"/></p>
 <h4><span style=\"color:#008000\">Assumptions</span></h4>
 <p>The model assumes that pressure loss and friction phenomena of a
 mixing-valve correspond to the phenomena of a normal valve. The mixing of both
@@ -260,18 +259,23 @@ completely and closes port_3, value 1 closes port_1 completely and opens port_3.
 The function between those values is linear. The model features a filter which
 simulates the delay when opening a valve manually. For this see
 <a href=\"modelica://Modelica.Fluid.Valves.BaseClasses.PartialValve\">PartialValve</a>.</p>
-<p><br><b><font style=\"color: #008000; \">References</font></b></p>
-<p>
-The following sheets can be used for finding apropriate values for Kv: </p>
-<a href=\"http://www.armstronginternational.com/files/products/lynnwood/pdf/installation/IOM-442_CPAC0012.pdf\">http://www.armstronginternational.com/files/products/lynnwood/pdf/installation/IOM-442_CPAC0012.pdf</a><br/>
-<a href=\"http://www.herzvalves.com/www/downloads/DS_4037_Three_Way_Valve.pdf\">http://www.herzvalves.com/www/downloads/DS_4037_Three_Way_Valve.pdf</a><br/></p>
-</ul>
+<p><br/><b><font style=\"color: #008000; \">References</font></b></p>
+<p>The following sheets can be used for finding apropriate values for Kv: </p>
+<p><a href=\"http://www.armstronginternational.com/files/products/lynnwood/pdf/installation/IOM-442_CPAC0012.pdf\">
+  http://www.armstronginternational.com/files/products/lynnwood/pdf/installation/IOM-442_CPAC0012.pdf</a><br/>
+<a href=\"http://www.herzvalves.com/www/downloads/DS_4037_Three_Way_Valve.pdf\">
+  http://www.herzvalves.com/www/downloads/DS_4037_Three_Way_Valve.pdf</a></p>
 <h4><span style=\"color:#008000\">Example Results</span></h4>
 <p> Verification: </p>
-<p> <a href=\"MixingValves.AixLib.Examples.MixingValveForwardDirection\">MixingValves.AixLib.Examples.MixingValveForwardDirection</a><br/>
-<a href=\"MixingValves.AixLib.Examples.MixingValveBackwardDirection\">MixingValves.AixLib.Examples.MixingValveBackwardDirection</a>
-</p>
+<p> <a href=\"MixingValves.AixLib.Examples.MixingValveForwardDirection\">
+    MixingValves.AixLib.Examples.MixingValveForwardDirection</a><br/>
+<a href=\"MixingValves.AixLib.Examples.MixingValveBackwardDirection\">
+    MixingValves.AixLib.Examples.MixingValveBackwardDirection</a></p>
 </html>", revisions="<html>
-<p>26.11.2014, by <i>Roozbeh Sangi</i>: implemented </p>
+<ul>
+<li><i>November 26, 2014&nbsp;</i>
+   by Roozbeh Sangi:<br/>
+   Implemented</li>
+</ul>
 </html>"));
 end MixingValve;
