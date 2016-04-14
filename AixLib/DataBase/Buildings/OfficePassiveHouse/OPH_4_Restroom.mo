@@ -43,6 +43,6 @@ record OPH_4_Restroom
  <li><i>June, 2015&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
  </ul>
  </html>", info="<html>
-<p><span style=\"font-family: MS Shell Dlg 2;\">Zone &QUOT;Restroom&QUOT; of an example building according to an office building with passive house standard. The building is divided in six zones, this is a typical zoning for an office building. </span></p>
+<p><span style=\"font-family: MS Shell Dlg 2;\">Zone &quot;Restroom&quot; of an example building according to an office building with passive house standard. The building is divided in six zones, this is a typical zoning for an office building. </span></p>
 </html>"));
 end OPH_4_Restroom;
