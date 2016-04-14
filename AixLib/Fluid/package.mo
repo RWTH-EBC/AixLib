@@ -377,9 +377,6 @@ parameters in various model to help the user understand how they are used.
       For most components, engineering experience can be used to estimate a reasonable
       value for <code>tau</code>, and where generally applicable values can be used,
       components already set a default value for <code>tau</code>.
-      See for example
-      <a href=\"modelica://AixLib.Fluid.HeatExchangers.WetCoilDiscretized\">
-      AixLib.Fluid.HeatExchangers.WetCoilDiscretized</a>.
   </td>
 </tr>
 </table>
