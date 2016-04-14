@@ -282,8 +282,8 @@ equation
 <li>high mass exterior vertical walls and floor  </li>
 </ul>
 </html>", revisions="<html>
- <p><ul>
+ <ul>
  <li><i>March 19, 2015</i> by Peter Remmen:<br/>Implemented</li>
- </ul></p>
+ </ul>
  </html>"));
 end Case900;

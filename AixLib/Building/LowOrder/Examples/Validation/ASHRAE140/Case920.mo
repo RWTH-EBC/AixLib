@@ -283,8 +283,8 @@ equation
 <li>no windows on south side. two windows, one facing east, one facing west, each with a surface of 6m2.</li>
 </ul>
 </html>", revisions="<html>
- <p><ul>
+ <ul>
  <li><i>March 19, 2015</i> by Peter Remmen:<br/>Implemented</li>
- </ul></p>
+ </ul>
  </html>"));
 end Case920;
