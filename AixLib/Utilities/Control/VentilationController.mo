@@ -162,5 +162,5 @@ equation
          by Peter Matthes:<br/>
          Implemented</li>
 </ul>
-</html>");
+</html>"));
 end VentilationController;
