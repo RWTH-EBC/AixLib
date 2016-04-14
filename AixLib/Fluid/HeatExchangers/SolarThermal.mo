@@ -32,25 +32,33 @@ equation
       color={0,0,127}));
   annotation( Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
- <p><br>Model of a solar thermal collector. Inputs are outdoor air temperature and solar irradiation. Based on these values and the collector properties from database, this model creates a heat flow to the fluid circuit.</p>
+ <p><br/>Model of a solar thermal collector. Inputs are outdoor air temperature and solar irradiation. Based on these values and the collector properties from database, this model creates a heat flow to the fluid circuit.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\"
+    alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The model maps solar collector efficiency based on the equation</p>
- <p><img src=\"modelica://AixLib/Images/equations/equation-vRK5Io7E.png\" alt=\"eta = eta_o - c_1 * deltaT / G - c_2 * deltaT^2/ G\"/></p>
+ <p><img src=\"modelica://AixLib/Images/equations/equation-vRK5Io7E.png\"
+    alt=\"eta = eta_o - c_1 * deltaT / G - c_2 * deltaT^2/ G\"/></p>
  <h4><span style=\"color:#008000\">Known Limitations</span></h4>
  <ul>
- <li>Connected directly with Sources.TempAndRad, this model only represents a horizontal collector. There is no calculation for radiation on tilted surfaces. </li>
- <li>With the standard BaseParameters, this model uses water as working fluid</li>
+ <li>Connected directly with Sources.TempAndRad, this model only represents a
+    horizontal collector. There is no calculation for radiation on tilted
+    surfaces. </li>
+ <li>With the standard BaseParameters, this model uses water as working
+    fluid</li>
  </ul>
- <p><br><b><font style=\"color: #008000; \">Example Results</font></b></p>
+ <p><b><font style=\"color: #008000; \">Example Results</font></b></p>
  <p><a href=\"AixLib.HVAC.HeatGeneration.Examples.SolarThermalCollector\">AixLib.HVAC.HeatGeneration.Examples.SolarThermalCollector</a></p>
  </html>", revisions="<html>
- <p>November 2014, Marcus Fuchs</p>
- <p><ul>
- <li>Changed model to use Annex 60 base class</li>
- </ul></p>
- <p>19.11.2013, Marcus Fuchs: implemented</p>
+ <ul>
+ <li><i>November 2014&nbsp;</i>
+    by Marcus Fuchs:<br/>
+    Changed model to use Annex 60 base class</li>
+ <li><i>November 19, 2013&nbsp;</i>
+    by Marcus Fuchs:<br/>
+    Implemented</li>
+ </ul>
  </html>"), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent=  {{-80, 80}, {88, -80}}, lineColor=  {255, 128, 0},
             fillPattern=                                                                                                    FillPattern.Solid, fillColor=  {255, 128, 0}), Rectangle(extent=  {{-70, 70}, {-64, -72}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0},
             fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-70, 70}, {-40, 64}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0},
