@@ -56,7 +56,7 @@ equation
   annotation (Diagram(graphics), Documentation(revisions="<html>
 <ul>
   <li><i>October, 2015&nbsp;</i>
-         by Moritz Lauster:<br>
+         by Moritz Lauster:<br/>
          Adapted and moved to AixLib</li>
 </ul>
 </html>"));
