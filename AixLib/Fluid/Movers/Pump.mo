@@ -34,19 +34,28 @@ equation
   end if;
   // Connect the pump variables with the variables of the two port model
   Head = -dp / (Medium.density(Medium.setState_phX(port_a.p, inStream(port_a.h_outflow), inStream(port_a.Xi_outflow))) * Modelica.Constants.g_n);
-  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Ellipse(extent=  {{-100, 96}, {100, -104}}, lineColor=  {0, 0, 0}, fillColor=  {0, 127, 0},
-            fillPattern=                                                                                                    FillPattern.Solid), Polygon(points=  {{-42, 70}, {78, -4}, {-42, -78}, {-42, 70}}, lineColor=  {0, 0, 0}, fillColor=  {175, 175, 175},
-            fillPattern=                                                                                                    FillPattern.Solid)}), Documentation(revisions="<html>
- <p>November 2014, Marcus Fuchs</p>
- <p><ul>
- <li>Changed model to use Annex 60 base class</li>
- </ul></p>
- <p>01.11.2013, by <i>Ana Constantin</i>: implemented</p>
+  annotation(Icon(coordinateSystem(preserveAspectRatio = false,
+  extent = {{-100, -100}, {100, 100}}),
+  graphics={  Ellipse(extent=  {{-100, 96}, {100, -104}},
+  lineColor=  {0, 0, 0}, fillColor=  {0, 127, 0},
+            fillPattern=FillPattern.Solid),
+            Polygon(points=  {{-42, 70}, {78, -4}, {-42, -78}, {-42, 70}},
+            lineColor=  {0, 0, 0}, fillColor=  {175, 175, 175},
+            fillPattern=FillPattern.Solid)}), Documentation(revisions="<html>
+ <ul>
+ <li><i>November 2014&nbsp;</i>
+    by Marcus Fuchs:<br/>
+    Changed model to use Annex 60 base class</li>
+ <li><i>01.11.2013&nbsp;</i>
+    by Ana Constantin:<br/>
+    implemented</li>
+ </ul>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Simple table based pump model.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/stars3.png\"
+    alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>Simple table based pump model with the following features:</p>
  <ul>
@@ -54,7 +63,7 @@ equation
  <li>Choice between two control strategies: 1. dp-const; 2. dp-var</li>
  <li>Input for switching to night mode. During night mode, the pump follows the minimal characteristic </li>
  </ul>
- <p><br><b><font style=\"color: #008000; \">Example Results</font></b></p>
+ <p><br/><b><font style=\"color: #008000; \">Example Results</font></b></p>
  <p><a href=\"AixLib.HVAC.Pumps.Examples.PumpHydraulicResistance_closedLoop\">AixLib.HVAC.Pumps.Examples.PumpHydraulicResistance_closedLoop</a></p>
  </html>"));
 end Pump;
