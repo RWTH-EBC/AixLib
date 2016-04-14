@@ -152,10 +152,8 @@ equation
         "Simulate and plot"),
              experimentSetupOutput(events = false),
              Documentation(revisions="<html>
-<p><ul>
+<ul>
  <li><i>June 8, 2015 </i> by Marcus Fuchs:<br/>Added unit testing command to annotations</li>
- </ul></p>
- <ul>
    <li><i>March, 2012&nbsp;</i>
           by Moritz Lauster:<br/>
           Implemented</li>

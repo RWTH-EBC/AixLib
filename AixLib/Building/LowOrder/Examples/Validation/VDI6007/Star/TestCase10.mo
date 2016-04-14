@@ -137,15 +137,15 @@ equation
                                "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Star/TestCase10.mos"
         "Simulate and plot"),
              __Dymola_experimentSetupOutput(events = false),             Documentation(revisions="<html>
-<p><ul>
+<ul>
  <li><i>June 8, 2015 </i> by Marcus Fuchs:<br/>Added unit testing command to annotations</li>
- </ul></p>
+ </ul>
  <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
  </html>", info="<html>
 <p>Test Case 10 of the VDI6007:: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to mixed inner and outer heat sources for Type Room S: </p>
 <p>Based on Test Case 5 </p>
 <ul>
-<li>The floor is a non adiabatic wall, this changes the parameter calculation. The floor is considered to be anouter wall for RC-Calculation. In order to calculate the weightfactors for EqAirTemp correctly the orientation of this element is not &QUOT;floor&QUOT;. In the parameter calculation &QUOT;West&QUOT; is used. The weightfactor calculated for the west outer wall has to used as the weightfactor of the ground. </li>
+<li>The floor is a non adiabatic wall, this changes the parameter calculation. The floor is considered to be anouter wall for RC-Calculation. In order to calculate the weightfactors for EqAirTemp correctly the orientation of this element is not &quot;floor&quot;. In the parameter calculation &quot;West&quot; is used. The weightfactor calculated for the west outer wall has to used as the weightfactor of the ground. </li>
 </ul>
 <p><br/><br/>Reference: Room air temperature </p>
 <p>Variable path: <code>reducedModel.airload.T</code> </p>
