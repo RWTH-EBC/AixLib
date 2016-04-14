@@ -41,14 +41,18 @@ equation
             -100},{100,100}}),                                                                           graphics={  Text(extent=  {{-124, 74}, {-62, 44}}, lineColor=  {0, 0, 255}, textString=  "Always have
  a point of fixed pressure
  before a pump
- when building a closed loop")}), experiment(StopTime = 86400, Interval = 60),Documentation(revisions="<html>
- <p>November 2014, Marcus Fuchs</p>
- <p><ul>
- <li>Changed model to use Annex 60 base class</li>
- </ul></p>
- <p>01.11.2013, by <i>Ana Constantin</i>: implemented</p>
+ when building a closed loop")}), experiment(StopTime = 86400, Interval = 60),
+ Documentation(revisions="<html>
+ <ul>
+ <li><i>November 2014&nbsp;</i>
+    by Marcus Fuchs:<br/>
+    Changed model to use Annex 60 base class</li>
+ <li><i>01.11.2013&nbsp;</i>
+       by Ana Constantin:<br/>
+      implemented</li>
+ </ul>
  </html>", info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>Simple example with a pump, a hydraulic resistance, two pipes in a loop.</p>
  <p><br/><b><font style=\"color: #008000; \">Concept</font></b></p>
  <p>Always have a point of fixed pressure before the pump in order to be able to solve the equation for the closed loop.</p>
