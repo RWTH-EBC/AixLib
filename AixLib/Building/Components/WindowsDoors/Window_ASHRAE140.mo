@@ -184,18 +184,18 @@ equation
 <p><img src=\"modelica://AixLib/Images/stars5.png\"/></p>
 <p><h4><font color=\"#008000\">Concept</font></h4></p>
 <p>Phenomena being simulated: </p>
-<p><ul>
+<ul>
 <li>Solar energy transmission through the glass</li>
 <li>Heat transmission through the whole window</li>
-</ul></p>
+</ul>
 <p><h4><font color=\"#008000\">References</font></h4></p>
 <p>Exemplary U-Values for windows from insulation standards</p>
-<p><ul>
+<ul>
 <li>WschV 1984: specified &QUOT;two panes&QUOT; assumed 2,5 W/m2K</li>
 <li>WschV 1995: 1,8 W/m2K</li>
 <li>EnEV 2002: 1,7 W/m2K</li>
 <li>EnEV 2009: 1,3 W/m2K</li>
-</ul></p>
+</ul>
 </html>",
  revisions="<html>
  <li><i>March 30, 2015&nbsp;</i> by Ana Constantin:Imrpoved implementation of transmitted solar radiation<br/></li>

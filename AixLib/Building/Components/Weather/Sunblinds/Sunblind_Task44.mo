@@ -203,10 +203,10 @@ equation
 </ul>
 </html>",
         revisions="<html>
-<p><ul>
+<ul>
 <li>Implemented: Kristian Huchtemann</li>
 <li><i>2013-11-03:</i> Michael Adolph<br/>Adapted to work with Walls.Wall model of EBC Building Library</li>
-</ul></p>
+</ul>
 <p>Generalisation of concept</p>
 </html>"));
 end Sunblind_Task44;

@@ -46,11 +46,11 @@ equation
           points={{-28,-42},{-28,-80},{26,-80},{26,-42}},
           thickness=1)}),
     Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>October 21, 2014&nbsp;</i> by Ana Constantin:<br/>Added a lower positive limit to the surface area, so it will not lead to a division by zero</li>
 <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
 <li><i>May 07, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
-</ul></p>
+</ul>
 </html>",
     info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>

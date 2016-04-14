@@ -421,13 +421,13 @@ end if;
 <h4><span style=\"color:#008000\">Example Results</span></h4>
 </html>",
 revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 25, 2014&nbsp;</i> by Ana Constantin:<br/>Corrected activation of door for an outside wall</li>
 <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
 <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 22, 2012&nbsp;</i> by Lukas Mencher:<br/>Outside wall may have a door now, icon adjusted</li>
 <li><i>Mai 24, 2012&nbsp;</i> by Ana Constantin:<br/>Added inside surface orientation</li>
 <li><i>April, 2012&nbsp;</i> by Mark Wesseling:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>"));
 end Wall_ASHRAE140;

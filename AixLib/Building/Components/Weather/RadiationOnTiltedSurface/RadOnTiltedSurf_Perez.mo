@@ -392,11 +392,11 @@ Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
 <p>Another limitation is the equation of the groundreflection approximation. It is only estmated on basis of the <b><a href=\"http://www.nrel.gov/midc/srrl_bms/\">NREL</a> </b>(US National Renewable Energy Laboratory; http://www.nrel.gov/midc/srrl_bms) data for the albedo of the year 2011 and should be revised.</p>
 </html>",
     revisions="<html>
-<p><ul>
+<ul>
 <li><i>March 23, 2015&nbsp;</i> by Ana Constantin:<br/>Adapted solar inputs so it cand work with both TRY and TMY weather format</li>
 <li><i>April 15, 2012&nbsp;</i> by Jerome Feldhaus:<br/>Implemented new diffuse irradiation modell from Perez Irradiation on tilted Surfaces. </li>
 <li><i>March 14, 2005&nbsp;</i> by Timo Haase:<br/>Implemented. </li>
-</ul></p>
+</ul>
 </html>",
     revisions="<html>
 

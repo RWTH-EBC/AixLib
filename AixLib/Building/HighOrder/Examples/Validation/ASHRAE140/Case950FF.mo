@@ -192,9 +192,9 @@ equation
     experiment(StopTime=3.1536e+007, Interval=3600),
     __Dymola_experimentSetupOutput(events=false),
     Documentation(revisions="<html>
- <p><ul>
+ <ul>
  <li><i>March 9, 2015</i> by Ana Constantin:<br/>Implemented</li>
- </ul></p>
+ </ul>
  </html>",
          info="<html>
 <p>As described in ASHRAE Standard 140.</p>

@@ -83,8 +83,8 @@ Documentation(info="<html>
 <p>Heat flow values can be displayed via the provided output. </p>
 </html>",
         revisions="<html>
-<p><ul>
+<ul>
 <li><i>May 31, 2013&nbsp;</i> by Ole Odendahl:<br/>Implemented, added documentation and formatted appropriately</li>
-</ul></p>
+</ul>
 </html>"));
 end Lights;

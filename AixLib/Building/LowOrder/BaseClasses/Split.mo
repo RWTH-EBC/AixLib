@@ -37,9 +37,9 @@ equation
           color={0,0,255},
           smooth=Smooth.None)}),
     Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>October 30, 2015&nbsp;</i> by Moritz Lauster:<br/>Moved and adapted to AixLib</li>
-</ul></p>
+</ul>
 </html>",
         info="<html>
 <p>Works similar to <a href=\"Modelica.Blocks.Math.Sum\">Sum</a>, but extends SIMO, so splits one signal into nout-signals.</p>

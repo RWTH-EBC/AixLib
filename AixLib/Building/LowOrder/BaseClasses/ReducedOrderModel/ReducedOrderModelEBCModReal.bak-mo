@@ -119,9 +119,9 @@ equation
                          graphics), Diagram(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics),
     Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>October 2014,&nbsp;</i> by Peter Remmen:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>", info="<html>
 <p>ReducedOrderModelEBCMod extends from partialReducedOrderModel. </p>
 <p>As windows have nearly no capacity an additional resistance for heat transfer calculation through the window is implemented. </p>

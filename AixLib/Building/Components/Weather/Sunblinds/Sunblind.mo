@@ -144,10 +144,10 @@ equation
 <p>This model is part of <a href=\"AixLib.Building.Components.Walls.Wall\">Wall</a> and checked in the Examples <a href=\"AixLib.Building.Examples.Walls.InsideWall\">InsideWall</a> and <a href=\"AixLib.Building.Examples.Walls.OutsideWall\">OutsideWall</a>. </p>
 </html>",
         revisions="<html>
-<p><ul>
+<ul>
 <li><i>January 16, 2015&nbsp;</i> by Ana Constantin:<br/>Implemented as extending from PartialSunblind and using the new solar radiation connectors</li>
 <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>January 2012,&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>"));
 end Sunblind;

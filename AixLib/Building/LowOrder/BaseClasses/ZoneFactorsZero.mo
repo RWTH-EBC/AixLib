@@ -23,9 +23,9 @@ algorithm
     end if;
   end for;
   annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>October 30, 2015&nbsp;</i> by Moritz Lauster:<br/>Moved and adapted to AixLib</li>
-</ul></p>
+</ul>
 </html>",
         info="<html>
 <p>The function calculates the ratio of air volume of a zone from a given vector of zones. If withAHU for this zone is false, its share is set to zero.</p>
