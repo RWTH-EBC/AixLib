@@ -288,8 +288,9 @@ equation
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <p>The schedule sets the usage of the room by people. To set a higher number of people, a multiplier is given.</p>
 <p>The schedule describes the presence of only one person, and can take values from 0 to 1. </p>
-<p>The type of activity determines the load by a person in the room according to DIN 18599. The following values are provided:</p>
-<table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
+<p>The type of activity determines the load by a person in the room according
+to DIN 18599. The following values are provided:</p>
+<table summary=\"Schedule table\" cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
 <td style=\"background-color: #dcdcdc\"><p>Activity Type</p></td>
 <td style=\"background-color: #dcdcdc\"><p>Heat Load [W]</p></td>
 </tr>
