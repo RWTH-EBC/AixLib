@@ -278,11 +278,11 @@ equation
 <p><a href=\"AixLib.Utilities.Examples.HeatTransfer_test\">AixLib.Utilities.Examples.HeatTransfer_test </a></p>
 </html>",  revisions="<html>
 <ul>
-<li><i>June 17, 2015&nbsp;</i> by Philipp Mehrfeld:<br>Added EN ISO 6946 equations and corrected usage of constant alpha_custom </li>
-<li><i>March 26, 2015&nbsp;</i> by Ana Constantin:<br>Changed equations for differnet surface orientations according to newer work from Gl&uuml;ck </li>
-<li><i>April 1, 2014&nbsp;</i> by Ana Constantin:<br>Uses components from MSL and respects the naming conventions </li>
-<li><i>April 10, 2013&nbsp;</i> by Ole Odendahl<br>Formatted documentation according to standards </li>
-<li><i>December 15, 2005&nbsp;</i> by Peter Matthes:<br>Implemented. </li>
+<li><i>June 17, 2015&nbsp;</i> by Philipp Mehrfeld:<br/>Added EN ISO 6946 equations and corrected usage of constant alpha_custom </li>
+<li><i>March 26, 2015&nbsp;</i> by Ana Constantin:<br/>Changed equations for differnet surface orientations according to newer work from Gl&uuml;ck </li>
+<li><i>April 1, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions </li>
+<li><i>April 10, 2013&nbsp;</i> by Ole Odendahl<br/>Formatted documentation according to standards </li>
+<li><i>December 15, 2005&nbsp;</i> by Peter Matthes:<br/>Implemented. </li>
 </ul>
 </html>"));
 end HeatConv_inside;
