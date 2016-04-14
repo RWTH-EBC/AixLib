@@ -192,12 +192,12 @@ equation
 <li>Indoor temperature is &GT; 23,8 &deg;C</li>
 <li>running average over last 24 hours of ambient temperature is &GT; 12 &deg;C</li>
 </ul>
-<p><br>Return to open windows if:</p>
+<p><br/>Return to open windows if:</p>
 <ul>
 <li>global horizontal radiation is less than 200 W/m&sup2;</li>
 <li>Indoor temperature is &GT; 22,8 &deg;C</li>
 </ul>
-<p><br><b><font style=\"color: #008000; \">References</font></b></p>
+<p><br/><b><font style=\"color: #008000; \">References</font></b></p>
 <ul>
 <li>IEA Task 44 (http://task44.iea-shc.org/publications)</li>
 </ul>

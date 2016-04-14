@@ -306,7 +306,7 @@ equation
 <td><p>150</p></td>
 </tr>
 </table>
-<p><br><br><br><b><font style=\"color: #008000; \">Assumptions</font></b></p>
+<p><br/><br/><br/><b><font style=\"color: #008000; \">Assumptions</font></b></p>
 <p>The surface for radiation exchange is computed from the number of persons in the room, which leads to a surface area of zero, when no one is present. In particular cases this might lead to an error as depending of the rest of the system a division by this surface will be introduced in the system of equations -&GT; division by zero. For this reason a lower limitation of 1e-4 m2 has been introduced.</p>
 <h4><span style=\"color:#008000\">References</span></h4>
 <p>DIN 18599 </p>
@@ -316,7 +316,7 @@ equation
 </html>",
     revisions="<html>
 <p><ul>
-<li><i>October 21, 2014&nbsp;</i> by Ana Constantin:<br>Added a lower positive limit to the surface area, so it will not lead to a division by zero</li>
+<li><i>October 21, 2014&nbsp;</i> by Ana Constantin:<br/>Added a lower positive limit to the surface area, so it will not lead to a division by zero</li>
 <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
 <li><i>May 07, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
 </ul></p>

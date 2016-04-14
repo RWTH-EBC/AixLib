@@ -81,7 +81,7 @@ equation
 </ul>
 </html>",  revisions="<html>
 <ul>
-<li><i>June 2015,&nbsp;</i> by Moritz Lauster:<br>Implemented. </li>
+<li><i>June 2015,&nbsp;</i> by Moritz Lauster:<br/>Implemented. </li>
 </ul>
 </html>"));
 end BuildingPhysics;

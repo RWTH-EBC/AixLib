@@ -68,9 +68,9 @@ equation
 <li>no shortwave radiation through the window </li>
 <li>no longwave radiation exchange between outer wall, window and ambience </li>
 </ul>
-<p><br>Reference: Heating/Cooling load </p>
+<p><br/>Reference: Heating/Cooling load </p>
 <p>Variable path: <code>heatFlowSensor.Q_flow</code> </p>
-<p><br><br><br>All values are given in the VDI 6007-1. </p>
+<p><br/><br/><br/>All values are given in the VDI 6007-1. </p>
 <p>Same Test Case exists in VDI 6020. </p>
 <p>A script to run this test case can be found in AixLib\\Resources\\Scripts\\Dymola\\Building\\LowOrder\\Examples\\Validation\\Star.</p>
 </html>"));

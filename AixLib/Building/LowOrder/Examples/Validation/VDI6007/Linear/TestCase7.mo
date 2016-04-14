@@ -85,7 +85,7 @@ equation
  <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
  </html>", info="<html>
 <p>Test Case 7 of the VDI6007: <a name=\"result_box\">L</a>oad calculation in compliance with the desired values of the indoor temperature and a setpoint for the type space S: </p>
-<p><br>This case is the same like case 6, but with a maximum heating/cooling power. </p>
+<p><br/>This case is the same like case 6, but with a maximum heating/cooling power. </p>
 <ul>
 <li>constant outdoor temperature </li>
 <li>no shortwave radiation on the outer wall </li>

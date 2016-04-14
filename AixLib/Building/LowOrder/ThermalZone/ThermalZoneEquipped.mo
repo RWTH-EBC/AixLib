@@ -118,17 +118,27 @@ equation
     annotation (Line(points={{-100,-40},{-76,-40},{-76,-6.2},{-63.6,-6.2}},
         color={0,0,127}));
   annotation(Documentation(info="<html>
-<p><span style=\"font-family: MS Shell Dlg 2;\">This model combines building physics, models for internal gains and the calculation of natural ventilation (window opening) and infiltration. It is thought as a ready-to-use thermal zone model. For convenience, all parameters are collected in a record (see<a href=\"AixLib.DataBase.Buildings.ZoneBaseRecord\"> ZoneBaseRecord</a>). </span></p>
-<p><span style=\"font-family: MS Shell Dlg 2;\"></p><p><b>References</b> </span></p>
+<p>This model combines building physics, models for internal gains and the
+calculation of natural ventilation (window opening) and infiltration. It is
+thought as a ready-to-use thermal zone model. For convenience, all parameters
+are collected in a record (see
+<a href=\"AixLib.DataBase.Buildings.ZoneBaseRecord\"> ZoneBaseRecord</a>). </p>
+<p><b>References</b></p>
 <ul>
-<li><span style=\"font-family: MS Shell Dlg 2;\">German Association of Engineers: Guideline VDI 6007-1, March 2012: Calculation of transient thermal response of rooms and buildings - Modelling of rooms. </span></li>
-<li><span style=\"font-family: MS Shell Dlg 2;\">Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D. (2014): Low order thermal network models for dynamic simulations of buildings on city district scale. In: Building and Environment 73, p. 223&ndash;231. DOI: <a href=\"http://dx.doi.org/10.1016/j.buildenv.2013.12.016\">10.1016/j.buildenv.2013.12.016</a>. </span></li>
+<li>German Association of Engineers: Guideline VDI 6007-1, March 2012:
+Calculation of transient thermal response of rooms and buildings -
+Modelling of rooms.</li>
+<li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D. (2014):
+Low order thermal network models for dynamic simulations of buildings on city
+district scale. In: Building and Environment 73, p. 223&ndash;231. DOI:
+<a href=\"http://dx.doi.org/10.1016/j.buildenv.2013.12.016\">
+10.1016/j.buildenv.2013.12.016</a>.</li>
 </ul>
-<p><b><span style=\"font-family: MS Shell Dlg 2;\">Example Results</b> </span></p>
-<p><span style=\"font-family: MS Shell Dlg 2;\">See <a href=\"Examples\">Examples</a>.</span></p>
+<p><b>Example Results</b></p>
+<p>See <a href=\"Examples\">Examples</a>.</p>
 </html>",  revisions="<html>
 <ul>
-<li><i>June, 2015&nbsp;</i> by Moritz Lauster:<br>Implemented </li>
+<li><i>June, 2015&nbsp;</i> by Moritz Lauster:<br/>Implemented </li>
 </ul>
 </html>"), Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})));

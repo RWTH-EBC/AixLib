@@ -176,7 +176,7 @@ Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
   <li><i>March 23, 2015&nbsp;</i> by Ana Constantin:<br/>Adapted solar inputs so it cand work with both TRY and TMY weather format</li>
   <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
   <li><i>March 14, 2005&nbsp;</i>
-         by Timo Haase:<br>
+         by Timo Haase:<br/>
          Implemented.</li>
 </ul>
 </html>"));

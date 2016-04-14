@@ -43,7 +43,7 @@ equation
 <td><p>&GT; 5</p></td>
 </tr>
 </table>
-<p><br><br>Reference values for air shielding value e: </p>
+<p><br/><br/>Reference values for air shielding value e: </p>
 <table cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
 <td></td>
 <td><p align=\"center\"><h4>heated room without </h4></p><p align=\"center\">facade with openings</p><p align=\"center\">exposed to wind</p></td>
@@ -69,10 +69,10 @@ equation
 <td><p>0.02</p></td>
 </tr>
 </table>
-<p><br><br>Reference values for height correction value &epsilon;: </p>
+<p><br/><br/>Reference values for height correction value &epsilon;: </p>
 <table cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
 <td><h4>Height of room</h4></td>
-<td><p align=\"center\"><br><b>&epsilon;</b></p></td>
+<td><p align=\"center\"><br/><b>&epsilon;</b></p></td>
 </tr>
 <tr>
 <td><p>0 - 10 m</p></td>
@@ -87,7 +87,7 @@ equation
 <td><p>1.5</p></td>
 </tr>
 </table>
-<p><br><br><b><font style=\"color: #008000; \">References</font></b> </p>
+<p><br/><br/><b><font style=\"color: #008000; \">References</font></b> </p>
 <p>DIN EN 12831 </p>
 <p><b><font style=\"color: #008000; \">Example Results</font></b> </p>
 <p><a href=\"AixLib.Building.Components.Examples.DryAir.DryAir_test\">AixLib.Building.Components.Examples.DryAir.DryAir_test</a> </p>

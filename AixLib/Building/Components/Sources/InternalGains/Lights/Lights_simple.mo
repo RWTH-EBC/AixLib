@@ -60,7 +60,7 @@ equation
 </html>",
     revisions="<html>
 <p><ul>
-<li><i>October 21, 2014&nbsp;</i> by Ana Constantin:<br>Added a lower positive limit to the surface area, so it will not lead to a division by zero</li>
+<li><i>October 21, 2014&nbsp;</i> by Ana Constantin:<br/>Added a lower positive limit to the surface area, so it will not lead to a division by zero</li>
 <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
 <li><i>May 07, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
 </ul></p>

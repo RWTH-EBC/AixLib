@@ -157,7 +157,7 @@ equation
  </ul></p>
  <ul>
    <li><i>March, 2012&nbsp;</i>
-          by Moritz Lauster:<br>
+          by Moritz Lauster:<br/>
           Implemented</li>
  </ul>
  </html>", info="<html>
@@ -166,9 +166,9 @@ equation
 <ul>
 <li>longwave radiation heat exchange is taken into account </li>
 </ul>
-<p><br>Reference: Room air temperature </p>
+<p><br/>Reference: Room air temperature </p>
 <p>Variable path: <code>reducedModel.airload.T</code> </p>
-<p><br><br>All values are given in the VDI 6007-1. </p>
+<p><br/><br/>All values are given in the VDI 6007-1. </p>
 <p>Same Test Case exists in VDI 6020. </p>
 <p>A script to run this test case can be found in AixLib\\Resources\\Scripts\\Dymola\\Building\\LowOrder\\Examples\\Validation\\Star.</p>
 </html>"));

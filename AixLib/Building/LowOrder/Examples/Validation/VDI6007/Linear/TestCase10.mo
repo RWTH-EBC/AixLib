@@ -150,7 +150,7 @@ equation
 <p>Test Case 10 of the VDI6007:: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to mixed inner and outer heat sources for Type Room S: </p>
 <p>Based on Test Case 5 </p>
 <ul>
-<li>The floor is a non adiabatic wall.<br></li>
+<li>The floor is a non adiabatic wall.<br/></li>
 </ul>
 <p>Reference: Room air temperature </p>
 <p>Variable path: <code>reducedModel.airload.T</code></p>

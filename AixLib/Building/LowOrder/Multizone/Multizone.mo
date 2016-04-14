@@ -37,7 +37,7 @@ equation
           extent={{-100,-100},{100,100}})),
     Documentation(revisions="<html>
 <ul>
-<li><i>June 22, 2015&nbsp;</i> by Moritz Lauster:<br>Implemented</li>
+<li><i>June 22, 2015&nbsp;</i> by Moritz Lauster:<br/>Implemented</li>
 </ul>
 </html>",
         info="<html>

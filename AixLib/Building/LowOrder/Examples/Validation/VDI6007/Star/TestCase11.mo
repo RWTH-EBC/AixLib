@@ -101,7 +101,7 @@ equation
 </ul>
 <p>Reference: Heating/Cooling load </p>
 <p>Variable path: <code>sumHeatLoad.y</code> </p>
-<p><br><br>All values are given in the VDI 6007-1. </p>
+<p><br/><br/>All values are given in the VDI 6007-1. </p>
 <p>A script to run this test case can be found in AixLib\\Resources\\Scripts\\Dymola\\Building\\LowOrder\\Examples\\Validation\\Star.</p>
 </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{

@@ -238,9 +238,9 @@ equation
 Cooling")}),
     Documentation(revisions="<html>
 <ul>
-<li><i>February 26, 2016&nbsp;</i> by Moritz Lauster:<br>Fixed bug in share of AHU volume flow</li>
-<li><i>June 22, 2015&nbsp;</i> by Moritz Lauster:<br>Changed building physics to AixLib</li>
-<li><i>April 25, 2014&nbsp;</i> by Ole Odendahl:<br>Implemented</li>
+<li><i>February 26, 2016&nbsp;</i> by Moritz Lauster:<br/>Fixed bug in share of AHU volume flow</li>
+<li><i>June 22, 2015&nbsp;</i> by Moritz Lauster:<br/>Changed building physics to AixLib</li>
+<li><i>April 25, 2014&nbsp;</i> by Ole Odendahl:<br/>Implemented</li>
 </ul>
 </html>", info="<html>
 <p><span style=\"font-family: MS Shell Dlg 2;\">This is a multizone model with a variable number of thermal zones. It adds heater/cooler devices and an air handling unit. Outputs are the thermal demands of the zone heating as well as thermal and electrical demand of the air handling unit. This model is pre-configured and ready-to-use. The<a href=\"AixLib.Building.LowOrder.Multizone.partialMultizone\"> partial class</a> has a replaceable<a href=\"AixLib.Building.LowOrder.ThermalZone\"> thermal zone</a> model, due to the functionalities, <a href=\"AixLib.Building.LowOrder.ThermalZone.ThermalZoneEquipped\">ThermalZoneEquipped</a> is the most suitable recommendation.</span></p>

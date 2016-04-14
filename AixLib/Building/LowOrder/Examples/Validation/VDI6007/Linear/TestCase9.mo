@@ -129,7 +129,7 @@ equation
  </ul></p>
  <ul>
    <li><i>March, 2012&nbsp;</i>
-          by Moritz Lauster:<br>
+          by Moritz Lauster:<br/>
           Implemented</li>
  </ul>
  </html>", info="<html>
@@ -138,7 +138,7 @@ equation
 <ul>
 <li>longwave radiation heat exchange is taken into account </li>
 </ul>
-<p><br>Reference: Room air temperature </p>
+<p><br/>Reference: Room air temperature </p>
 <p>Variable path: <code>reducedModel.airload.T</code></p>
 <p>Maximum deviation: 0.2 K</p>
 <p>All values are given in the VDI 6007-1.</p>

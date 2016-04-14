@@ -96,7 +96,7 @@ equation
 <li>A given profile or relative occupation</li>
 </ul>
 <p>ZoneBaseRecord is necessary to evaluate which zones are supplied by an AHU and should be incorporated into calculation.
-<br>The model gives in addition the share of ingoing volume flows at the outgoing volume flow.</p><p>As AHUs typically work with m3/s, the model calculates the output air flow rate Vdot_air in m3/s.</p>
+<br/>The model gives in addition the share of ingoing volume flows at the outgoing volume flow.</p><p>As AHUs typically work with m3/s, the model calculates the output air flow rate Vdot_air in m3/s.</p>
 <p>airFlowRateOutput = [minAHU + deltaAHU * (profile OR relative Occupation)] * Azone * 3600^-1 </p>
 </html>", revisions="<html>
 <p><ul>
