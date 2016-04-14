@@ -181,12 +181,12 @@ equation
 </ul>
 <p>Requires a variable Tamb to be able to calculate the running mean of ambient temperature. Should be supplied by inner Modelica.SIunits.Temperature Tamb, see Examples.Weather.sunblind_T44_test for an example how to implement inner data</p>
 <h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+<p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
 <h4><span style=\"color:#008000\">Assumptions</span></h4>
 <h4><span style=\"color:#008000\">Known Limitations</span></h4>
 <p>According to IEA Task 44 sunblindes are lowerd partially based on horizontal global radiation, thus there is no dependance on the buildings orientation, sunblinds are lowered the same for every side of the building</p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
-<p>Lower the sunblinds to 75 &percnt; if</p>
+<p>Lower the sunblinds to 75 &#37;; if</p>
 <ul>
 <li>global horizontal radiation exceeds 300 W/m&sup2;</li>
 <li>Indoor temperature is &gt; 23,8 &deg;C</li>

@@ -58,9 +58,9 @@ equation
   annotation (
     experiment(StopTime=86400, Interval=60),
 Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>This simulation is to check the functionality of the machine models described by the internal gains. </p>
-<p><h4><font color=\"#008000\">Concept</font></h4></p>
+<h4><font color=\"#008000\">Concept</font></h4>
 <p>The simulation consists of the following models:</p>
 <table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
 <td bgcolor=\"#dcdcdc\"><p>index</p></td>

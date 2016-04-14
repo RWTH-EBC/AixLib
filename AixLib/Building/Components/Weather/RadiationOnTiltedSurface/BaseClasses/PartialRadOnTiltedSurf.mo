@@ -62,8 +62,10 @@ public
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Partial model for <b>RadOnTiltedSurf</b> modely, which calculate the total solar radiance on a tilted surface. </p>
 <h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+<p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
 </html>", revisions="<html>
+<ul>
 <li><i>March 23, 2015&nbsp;</i> by Ana Constantin:<br/>Implemented. </li>
+</ul>
 </html>"));
 end PartialRadOnTiltedSurf;

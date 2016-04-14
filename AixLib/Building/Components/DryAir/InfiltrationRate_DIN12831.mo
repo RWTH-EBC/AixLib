@@ -25,10 +25,10 @@ equation
 <p><b><font style=\"color: #008000; \">Concept</font></b> </p>
 <p>Air exchange coefficients at 50 Pa pressure difference between ambience and room air: </p>
 <table cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
-<td><p align=\"center\"><h4>Dwelling type</h4></p></td>
-<td><p align=\"center\"><h4>highly air tight</h4></p></td>
-<td><p align=\"center\"><h4>medium air tight</h4></p></td>
-<td><p align=\"center\"><h4>low air tight</h4></p></td>
+<td><p align=\"center\"><h4>Dwelling type</h4></td>
+<td><p align=\"center\"><h4>highly air tight</h4></td>
+<td><p align=\"center\"><h4>medium air tight</h4></td>
+<td><p align=\"center\"><h4>low air tight</h4></td>
 </tr>
 <tr>
 <td><p>one-family dwelling</p></td>
@@ -46,9 +46,9 @@ equation
 <p><br/><br/>Reference values for air shielding value e: </p>
 <table cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
 <td></td>
-<td><p align=\"center\"><h4>heated room without </h4></p><p align=\"center\">facade with openings</p><p align=\"center\">exposed to wind</p></td>
-<td><p align=\"center\"><h4>heated room with</h4></p><p align=\"center\">one facade with openings</p><p align=\"center\">exposed to wind</p></td>
-<td><p align=\"center\"><h4>heated room with more than</h4></p><p align=\"center\">one facade with openings</p><p align=\"center\">exposed to wind</p></td>
+<td><p align=\"center\"><h4>heated room without </h4><p align=\"center\">facade with openings</p><p align=\"center\">exposed to wind</p></td>
+<td><p align=\"center\"><h4>heated room with</h4><p align=\"center\">one facade with openings</p><p align=\"center\">exposed to wind</p></td>
+<td><p align=\"center\"><h4>heated room with more than</h4><p align=\"center\">one facade with openings</p><p align=\"center\">exposed to wind</p></td>
 </tr>
 <tr>
 <td><p>no shielding</p></td>
