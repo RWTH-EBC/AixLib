@@ -8,14 +8,20 @@ model HeatDemand "Calculates heat demand to heat m_flow_in from T_in to T_set"
 equation
   Q_flow_out = m_flow_in * 4184 * (T_set - T_in);
   annotation( Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
- <p><br/>This control is very simple. Its inputs are a given set temperature T_set, the temperature of the fluid T_in and the mass flow rate of the fluid m_flow_in. The model then calculates which Q_flow would be necessary to heat the fluid to the set temperature by equation </p>
+ <h4><font color=\"#008000\">Overview</font></h4>
+ <p>This control is very simple. Its inputs are a given set temperature T_set,
+ the temperature of the fluid T_in and the mass flow rate of the fluid
+ m_flow_in. The model then calculates which Q_flow would be necessary to heat
+ the fluid to the set temperature by equation </p>
  <pre>Q_flow_out&nbsp;=&nbsp;m_flow_in&nbsp;*&nbsp;cp&nbsp;*&nbsp;(T_set&nbsp;-&nbsp;T_in)</pre>
- <p>Should T_in &GT; T_set, this would result in a negative Q_flow_out (i.e. a cooling load). A limiter after this model can be used to ensure Q_flow is always &GT;= 0. </p>
+ <p>Should T_in &gt; T_set, this would result in a negative Q_flow_out
+ (i.e. a cooling load). A limiter after this model can be used to ensure Q_flow
+ is always &gt;= 0. </p>
  </html>", revisions = "<html>
- <p>07.10.2013, Marcus Fuchs</p>
- <p><ul>
- <li>implemented</li>
- </ul></p>
+ <ul>
+ <li><i>07.10.2013&nbsp;</i>
+    by Marcus Fuchs:<br/>
+    implemented</li>
+ </ul>
  </html>"));
 end HeatDemand;
