@@ -61,7 +61,7 @@ equation
 <p>The area is variable and can be set via a special input in the radiative converter.</p>
 <p>The input signal can take values from 0 to an arbitrary maximum value. </p>
 <h4><span style=\"color:#008000\">Assumptions</span></h4>
-<p>The surface for radiation exchange is computed from the schedule, which leads to a surface area of zero, when no activity takes place. In particular cases this might lead to an error as depending of the rest of the system a division by this surface will be introduced in the system of equations -&GT; division by zero. For this reason a lower limitation of 1e-4 m2 has been introduced.</p>
+<p>The surface for radiation exchange is computed from the schedule, which leads to a surface area of zero, when no activity takes place. In particular cases this might lead to an error as depending of the rest of the system a division by this surface will be introduced in the system of equations -&gt; division by zero. For this reason a lower limitation of 1e-4 m2 has been introduced.</p>
 <h4><span style=\"color:#008000\">Example Results</span></h4>
 <p><a href=\"AixLib.Building.Examples.Sources.InternalGains.Lights\">AixLib.Building.Examples.Sources.InternalGains.Lights</a> </p>
 </html>"));

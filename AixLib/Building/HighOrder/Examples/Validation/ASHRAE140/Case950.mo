@@ -230,7 +230,7 @@ equation
 <li>From 0700 hours to 1800 hours, vent fan = OFF</li>
 <li>Heating = always OFF</li>
 <li>From 1800 hours to 0700 hours, cool = OFF</li>
-<li>From 0700 hours to 1800 hours, cool = ON if temperature &GT; 27 degC; otherwise, cool = OFF</li>
+<li>From 0700 hours to 1800 hours, cool = ON if temperature &gt; 27 degC; otherwise, cool = OFF</li>
 </ul>
 </html>"));
 end Case950;

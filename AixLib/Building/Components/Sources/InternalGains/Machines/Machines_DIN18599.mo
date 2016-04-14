@@ -307,7 +307,7 @@ equation
 </tr>
 </table>
 <p><br/><br/><br/><b><font style=\"color: #008000; \">Assumptions</font></b></p>
-<p>The surface for radiation exchange is computed from the number of persons in the room, which leads to a surface area of zero, when no one is present. In particular cases this might lead to an error as depending of the rest of the system a division by this surface will be introduced in the system of equations -&GT; division by zero. For this reason a lower limitation of 1e-4 m2 has been introduced.</p>
+<p>The surface for radiation exchange is computed from the number of persons in the room, which leads to a surface area of zero, when no one is present. In particular cases this might lead to an error as depending of the rest of the system a division by this surface will be introduced in the system of equations -&gt; division by zero. For this reason a lower limitation of 1e-4 m2 has been introduced.</p>
 <h4><span style=\"color:#008000\">References</span></h4>
 <p>DIN 18599 </p>
 <h4><span style=\"color:#008000\">Example Results</span></h4>
