@@ -73,6 +73,9 @@ equation
  <p>(values are according to wolframalpha.com for water at p = 1 atm ) </p>
  </html>", revisions="<html>
  <ul>
+ <li><i>April 2016&nbsp;</i>
+    by Peter Remmen:<br/>
+    Replace TempAndRad model</li>
  <li><i>November 2014&nbsp;</i>
     by Marcus Fuchs:<br/>
     Changed model to use Annex 60 base class</li>
