@@ -36,7 +36,7 @@ equation
   cos_theta = (cos_theta_help + abs(cos_theta_help))/2;
 
   // calculation of R factor [Duffie/Beckman, p.25], due to numerical problems (cos_theta_z in denominator)
-  // R is manually set to 0 for theta_z >= 80° (-> 90° means sunset)
+  // R is manually set to 0 for theta_z >= 80 deg (-> 90 deg means sunset)
   if noEvent(cos_theta_z <= 0.17365) then
     R_help = cos_theta_z*cos_theta;
 
