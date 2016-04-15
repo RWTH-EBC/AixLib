@@ -1,10 +1,9 @@
 within AixLib.Fluid.HeatExchangers.Radiators.BaseClasses;
 model ML_thermal_delta "multi layers of heat exchanger"
-  import BaseLib;
+
+  import AixLib;
   import calcT =
     AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.Calc_Excess_Temp;
-  import AixLib;
-
   extends Modelica.Fluid.Interfaces.PartialTwoPort(
   final port_a_exposesState = true,
   final port_b_exposesState = true);
@@ -59,7 +58,7 @@ annotation (Dialog(tab="Geometry and Material", group="Geometry"));
   // Real dT_R1;
   // Real dT_R2;
 
-  AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.TwoStar_RadEx twoStar_RadEx(
+  AixLib.Utilities.HeatTransfer.HeatToStar                        twoStar_RadEx(
       A=(s_eff*Q_dot_nom_i)/((delta_nom)*Modelica.Constants.sigma*eps), eps=1)
     annotation (Placement(transformation(
         origin={41,51},
