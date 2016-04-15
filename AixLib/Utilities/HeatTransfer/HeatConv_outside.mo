@@ -41,29 +41,36 @@ equation
             fillPattern =                                                                                                   FillPattern.Solid), Polygon(points = {{20, 70}, {20, -50}, {0, -90}, {0, 70}, {20, 70}}, lineColor = {0, 0, 255},  pattern = LinePattern.None,
             lineThickness =                                                                                                   0.5, fillColor = {51, 56, 70},
             fillPattern =                                                                                                   FillPattern.Solid), Line(points = {{-20, 26}, {-20, -54}}, color = {255, 255, 255}, thickness = 0.5), Line(points = {{-20, 26}, {-30, 14}}, color = {255, 255, 255}, thickness = 0.5), Line(points = {{-38, 26}, {-48, 14}}, color = {255, 255, 255}, thickness = 0.5), Line(points = {{-54, 26}, {-64, 14}}, color = {255, 255, 255}, thickness = 0.5), Line(points = {{-38, 26}, {-38, -54}}, color = {255, 255, 255}, thickness = 0.5), Line(points = {{-54, 26}, {-54, -54}}, color = {255, 255, 255}, thickness = 0.5)}), Documentation(info="<html>
-<p><b><font style=\"color: #008000; \">Overview</font></b> </p>
-<p>The <b>HeatTrasfer_Outside </b>is a model for the convective heat transfer at outside walls </p>
-<p><b><font style=\"color: #008000; \">Level of Development</font></b> </p>
+<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
+<p>The <b>HeatTransfer_outside </b>is a model for the convective heat transfer at outside walls </p>
+<p><b><span style=\"color: #008000;\">Level of Development</span></b> </p>
 <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/> </p>
-<p><b><font style=\"color: #008000; \">Concept</font></b> </p>
+<p><b><span style=\"color: #008000;\">Concept</span></b> </p>
 <p>It allows the choice between three different models: </p>
 <ul>
-<li>after DIN 6946: <img src=\"modelica://AixLib/Images/Equations/equation-235E6PDM.png\" alt=\"alfa = 4 + 4*v\"/> , where <b>alfa</b> is the heat transfer coefficent and <b>v</b> is the wind speed </li>
-<li>after the ASHRAE Fundamentals Handbook from 1989, the way it is presented in
-  EnergyPlus Engineering reference from 2011:
-  <img src=\"modelica://AixLib/Images/Equations/equation-zygE8L9u.png\"
-  alt=\"alfa = D + E*v + F*v^2\"/>, where<b> alfa</b> and <b>v</b> are as above
-  and the coefficients <b>D, E, F</b> depend on the surface of the outer wall.<br/>
-  <b><font style=\"color: #ff0000; \">Attention:</font></b> This is a combined
-  coefficient for convective and radiative heat exchange.</li>
-<li>with a custom constant <b>alfa</b> value </li>
+<li>after DIN 6946: <img src=\"modelica://AixLib/Images/equations/equation-vd3eY3hw.png\"
+    alt=\"alpha = 4 + 4*v\"/> , where
+    <img src=\"modelica://AixLib/Images/equations/equation-MU6LPHRs.png\"
+    alt=\"alpha\"/> (<b>alpha)</b> is the heat transfer coefficent and
+    <b>v</b> is the wind speed </li>
+<li>after the ASHRAE Fundamentals Handbook from 1989, the way it is presented
+in EnergyPlus Engineering reference from 2011:
+<img src=\"modelica://AixLib/Images/equations/equation-A5RXdOdd.png\"
+alt=\"alpha  = D + E*v + F*v^2\"/>, where
+<img src=\"modelica://AixLib/Images/equations/equation-LDgZSLyY.png\" alt=\"alpha\"/>
+(<b>alpha</b>) and <b>v</b> are as above and the coefficients <b>D, E, F</b>
+depend on the surface of the outer wall.<br/><b>
+<span style=\"color: #ff0000;\">Attention:</span></b>
+This is a combined coefficient for convective and radiative heat exchange.</li>
+<li>with a custom constant <img src=\"modelica://AixLib/Images/equations/equation-BjHulWj5.png\"
+alt=\"alpha \"/> (<b>alpha)</b> value </li>
 </ul>
-<p><b><font style=\"color: #008000; \">References</font></b> </p>
+<p><b><span style=\"color: #008000;\">References</span></b> </p>
 <ul>
 <li>DIN 6946 p.20 </li>
 <li>ASHRAEHandbook1989, as cited in EnergyPlus Engineering Reference. : EnergyPlus Engineering Reference, 2011 p.56 </li>
 </ul>
-<p><b><font style=\"color: #008000; \">Example Results</font></b> </p>
+<p><b><span style=\"color: #008000;\">Example Results</span></b> </p>
 <p><a href=\"AixLib.Utilities.Examples.HeatTransfer_test\">AixLib.Utilities.Examples.HeatTransfer_test</a> </p>
 <p><a href=\"AixLib.Utilities.Examples.HeatConv_outside\">AixLib.Utilities.Examples.HeatConv_outside</a> </p>
 </html>",  revisions = "<html>
