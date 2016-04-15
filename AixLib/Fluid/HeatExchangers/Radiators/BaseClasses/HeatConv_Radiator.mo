@@ -1,6 +1,5 @@
 within AixLib.Fluid.HeatExchangers.Radiators.BaseClasses;
 model HeatConv_Radiator
-  import BaseLib;
 
   parameter Real n=1.3 "Radiator exponent";
   parameter Real NominalPower=2000 "nominal power of radiator";
