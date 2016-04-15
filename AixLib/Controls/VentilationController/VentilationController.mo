@@ -1,4 +1,4 @@
-within AixLib.Utilities.Control;
+within AixLib.Controls.VentilationController;
 model VentilationController
   "transforms occupation and temperature into air exchange rate"
   parameter Boolean useConstantOutput=false
@@ -40,12 +40,10 @@ model VentilationController
   Modelica.Blocks.Interfaces.RealInput Tzone "zone temperature"
     annotation (Placement(transformation(extent={{-120,40},{-80,80}}),
         iconTransformation(extent={{-120,40},{-80,80}})));
-  BaseClasses.OptimalTempDeCarliHumidity
-                              optimalTemp(cat=2)
+  BaseClasses.OptimalTempDeCarliHumidity optimalTemp(cat=2)
     "optimal temperature according to investigations from deCarli"
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
-  BaseClasses.DEMA
-       dEMA(ystart=Tmean_start)
+  BaseClasses.DEMA dEMA(ystart=Tmean_start)
     "gliding exponential average of outdoor temperature"
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
   Modelica.Blocks.Interfaces.RealOutput Tamb_mean "mean outdoor temperature"
@@ -152,6 +150,11 @@ equation
 <li>Leakage: due to leakage through cracks or openings there will be a constant air exchange.</li>
 </ol>
 </html>", revisions="<html>
+<ul>
+  <li><i>April, 2016&nbsp;</i>
+         by Peter Remmen:<br/>
+         Moved from Utilities to Controls</li>
+</ul>
 <ul>
   <li><i>October, 2015&nbsp;</i>
          by Moritz Lauster:<br/>

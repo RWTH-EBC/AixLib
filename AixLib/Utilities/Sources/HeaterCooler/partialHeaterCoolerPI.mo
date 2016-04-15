@@ -19,7 +19,8 @@ partial model partialHeaterCoolerPI
     "Zone definition"                                                            annotation(choicesAllMatching=true,Dialog(enable=recOrSep));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow Cooling annotation(Placement(transformation(extent={{26,-23},
             {6,-2}})));
-  Control.PITemp pITempCool(
+  Controls.Continuous.PITemp
+                 pITempCool(
     RangeSwitch=false,
     h=if not recOrSep then h_cooler else zoneParam.h_cooler,
     l=if not recOrSep then l_cooler else zoneParam.l_cooler,
@@ -29,7 +30,8 @@ partial model partialHeaterCoolerPI
     annotation (Placement(transformation(extent={{-20,-10},{0,-30}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow Heating annotation(Placement(transformation(extent={{26,22},
             {6,2}})));
-  Control.PITemp pITempHeat(
+  Controls.Continuous.PITemp
+                 pITempHeat(
     RangeSwitch=false,
     h=if not recOrSep then h_heater else zoneParam.h_heater,
     l=if not recOrSep then l_heater else zoneParam.l_heater,

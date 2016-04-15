@@ -51,7 +51,7 @@ model IdealHeaterCooler "heater and cooler with variable setpoints"
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
                                 Cooling if  Cooler_on
     annotation (Placement(transformation(extent={{26,-13},{46,8}})));
-  AixLib.Utilities.Control.PITemp   pITemp2(
+  AixLib.Controls.Continuous.PITemp   pITemp2(
     RangeSwitch=false,
     h=h_cooler,
     l=l_cooler,
@@ -64,7 +64,7 @@ model IdealHeaterCooler "heater and cooler with variable setpoints"
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
                                 Heating if    Heater_on
     annotation (Placement(transformation(extent={{24,32},{44,12}})));
-  AixLib.Utilities.Control.PITemp   pITemp1(
+  AixLib.Controls.Continuous.PITemp   pITemp1(
     RangeSwitch=false,
     h=h_heater,
     l=l_heater,

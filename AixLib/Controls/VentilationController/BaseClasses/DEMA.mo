@@ -1,4 +1,4 @@
-within AixLib.Utilities.Control.BaseClasses;
+within AixLib.Controls.VentilationController.BaseClasses;
 block DEMA "double exponential moving average"
   extends Modelica.Blocks.Interfaces.SIMO(nout=2);
 
@@ -54,6 +54,11 @@ equation
   connect(DEMAcont.y, y[2]) annotation (Line(points={{19,0},{32,0},{32,
           -18},{110,-18},{110,5}}, color={0,0,127}));
   annotation (Diagram(graphics), Documentation(revisions="<html>
+  <ul>
+    <li><i>April, 2016&nbsp;</i>
+           by Peter Remmen:<br/>
+           Moved from Utilities to Controls</li>
+  </ul>
 <ul>
   <li><i>October, 2015&nbsp;</i>
          by Moritz Lauster:<br/>

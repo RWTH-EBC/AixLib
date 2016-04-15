@@ -1,4 +1,4 @@
-within AixLib.Utilities.Control.BaseClasses;
+within AixLib.Controls.VentilationController.BaseClasses;
 model OptimalTempDeCarliHumidity
   "optimal operative Temperature according to Fanger and deCarli model including humidity evaluation"
 
@@ -18,16 +18,16 @@ protected
 
 equation
   if u[1] <= Tclomax then
-    Topt =from_degC(AixLib.Utilities.Math.Functions.polynomial(
-      to_degC(Tclomax), AixLib.Utilities.Control.BaseClasses.coefficients(u[2])))
+    Topt =from_degC(AixLib.Utilities.Math.Functions.polynomial(to_degC(Tclomax),
+      AixLib.Controls.VentilationController.BaseClasses.coefficients(u[2])))
       "minimum optimal temperature";
   elseif u[1] >= Tclomin then
-    Topt =from_degC(AixLib.Utilities.Math.Functions.polynomial(
-      to_degC(Tclomin), AixLib.Utilities.Control.BaseClasses.coefficients(u[2])))
+    Topt =from_degC(AixLib.Utilities.Math.Functions.polynomial(to_degC(Tclomin),
+      AixLib.Controls.VentilationController.BaseClasses.coefficients(u[2])))
       "const. Temp. above 0.5 clo limit";
   else
-    Topt =from_degC(AixLib.Utilities.Math.Functions.polynomial(
-      to_degC(u[1]), AixLib.Utilities.Control.BaseClasses.coefficients(u[2])));
+    Topt =from_degC(AixLib.Utilities.Math.Functions.polynomial(to_degC(u[1]),
+      AixLib.Controls.VentilationController.BaseClasses.coefficients(u[2])));
   end if;
   y = {Topt - cat,Topt + cat,Topt} "min, max, opt";
 
@@ -44,6 +44,11 @@ equation
 <li>Topt </li>
 </ol>
 </html>", revisions="<html>
+<ul>
+  <li><i>April, 2016&nbsp;</i>
+         by Peter Remmen:<br/>
+         Moved from Utilities to Controls</li>
+</ul>
 <ul>
   <li><i>October, 2015&nbsp;</i>
          by Moritz Lauster:<br/>
