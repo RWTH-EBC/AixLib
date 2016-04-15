@@ -90,7 +90,7 @@ model Wall_ASHRAE140
 // COMPONENT PART
 
 public
-  BaseClasses.ConvNLayerClearanceStar_old                       Wall(
+  BaseClasses.ConvNLayerClearanceStar                           Wall(
     h=wall_height,
     l=wall_length,
     T0=T0,
@@ -98,7 +98,8 @@ public
     selectable=true,
     eps=WallType.eps,
     wallType=WallType,
-    surfaceOrientation=ISOrientation) "Wall" annotation (Placement(
+    surfaceOrientation=ISOrientation,
+    HeatConv1(calcMethod=2)) "Wall"          annotation (Placement(
         transformation(extent={{-20,14},{2,34}})));
 
   Utilities.Interfaces.SolarRad_in
@@ -401,7 +402,7 @@ end if;
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Flexible Model for Inside Walls and Outside Walls. </p>
 <h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <p>The<b> Wall</b> model models </p>
 <ul>

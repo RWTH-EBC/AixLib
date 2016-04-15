@@ -1,7 +1,7 @@
 within AixLib.Building.LowOrder.ThermalZone;
 model ThermalZoneEquipped
   "Ready-to-use reduced order building model with ventilation, infiltration and internal gains"
-  extends AixLib.Building.LowOrder.ThermalZone.partialThermalZone;
+  extends AixLib.Building.LowOrder.ThermalZone.PartialThermalZone;
   AixLib.Building.Components.Sources.InternalGains.Humans.HumanSensibleHeat_VDI2078
     human_SensibleHeat_VDI2078(
     ActivityType=zoneParam.ActivityTypePeople,
@@ -22,7 +22,8 @@ model ThermalZoneEquipped
     ratioConv=zoneParam.RatioConvectiveHeatLighting,
     T0=zoneParam.T0all) "Internal gains from light"
     annotation (Placement(transformation(extent={{40,-40},{60,-21}})));
-  Utilities.Control.VentilationController ventilationController(
+  Controls.VentilationController.VentilationController
+                                          ventilationController(
     useConstantOutput=zoneParam.useConstantACHrate,
     baseACH=zoneParam.baseACH,
     maxUserACH=zoneParam.maxUserACH,

@@ -1,6 +1,6 @@
 within AixLib.Building.LowOrder.BaseClasses.BuildingPhysics;
 model BuildingPhysicsVDI "Building physics according to VDI 6007"
-  extends partialBuildingPhysics;
+  extends PartialBuildingPhysics;
   EqAirTemp.EqAirTempSimple eqAirTemp(
     alphaowo=alphaowo,
     aowo=aowo,

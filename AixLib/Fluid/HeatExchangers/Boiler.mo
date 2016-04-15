@@ -41,7 +41,7 @@ equation
   fluid set temperature. The heat input to the fluid is limited between 0 and
   the maximum heat output of the boiler. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\"
     alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The idea is to have a very simple heating mechanism, which heats the fluid

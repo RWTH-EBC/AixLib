@@ -184,7 +184,7 @@ equation
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>The component Hydraulic Separator is used to hydraulically decouple the heating circuit from the consumer circuit. It is basically a big cylinder with four flanges to mount the primary and secondary circuit. </p>
 <h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://AixLib/Images/stars3.png\"
+<p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\"
     alt=\"stars: 3 out of 5\"/></p>
 <h4><span style=\"color:#008000\">Assumptions</span></h4>
 <p>There is no pressure-drop inside the water volume because of the weight of the water.</p>

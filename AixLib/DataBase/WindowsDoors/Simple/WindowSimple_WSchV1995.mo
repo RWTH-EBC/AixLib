@@ -10,7 +10,7 @@ record WindowSimple_WSchV1995 "Window according to WSchV1995"
 <p><b><font style=\"color: #008000; \">Overview</font></b> </p>
 <p>Window definition according to WSchV 1995 for a simple window. </p>
 <p><b><font style=\"color: #008000; \">Level of Development</font></b> </p>
-<p><img src=\"modelica://AixLib/Images/stars5.png\" alt=\"stars: 5 out of 5\"/> </p>
+<p><img src=\"modelica://AixLib/Resources/Images/Stars/stars5.png\" alt=\"stars: 5 out of 5\"/> </p>
 <p><b><font style=\"color: #008000; \">References</font></b> </p>
 <p>Record is used in model <a href=\"Building.Components.WindowsDoors.WindowSimple\">Building.Components.WindowsDoors.WindowSimple</a> </p>
 <p>Source: </p>

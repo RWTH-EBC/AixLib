@@ -83,7 +83,7 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This model will be used as computational core of the heat exchanger model with a medium model. The difference to <a href=\"modelica://AixLib.HVAC.HeatExchanger.RecuperatorNoMedium\">RecuperatorNoMedium</a> is that the specific heat capacities are variable here and the input and output connectors have been replaced by normal variables with the correct unit.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The design point has been increased to a larger mass flow rate.</p>
  <p><br/><b><font style=\"color: #008000; \">References</font></b> </p>

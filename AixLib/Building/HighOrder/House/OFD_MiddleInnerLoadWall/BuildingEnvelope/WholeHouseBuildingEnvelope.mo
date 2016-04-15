@@ -82,11 +82,11 @@ equation
   connect(attic_2Ro_5Rooms.SolarRadiationPort_OW1, East) annotation (Line(
       points={{-27.38,62},{-74,62},{-74,90},{60,90},{60,-18},{90,-18}},
       color={255,128,0}));
-  annotation(__Dymola_Images(Parameters(source = "AixLib/Images/House/Grundriss.png")), Icon(graphics={  Bitmap(extent = {{-78, 74}, {72, -68}}, fileName = "modelica://AixLib/Images/House/Grundriss.PNG")}), Documentation(info = "<html>
+  annotation(__Dymola_Images(Parameters(source = "AixLib/Resources/Images/Building/HighOrder/Grundriss.png")), Icon(graphics={  Bitmap(extent = {{-78, 74}, {72, -68}}, fileName = "modelica://AixLib/Resources/Images/Building/HighOrder/Grundriss.PNG")}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for the envelope of the whole one family dwelling.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  </html>", revisions="<html>
 
  <ul>

@@ -1,6 +1,6 @@
 within AixLib.Building.LowOrder.ThermalZone;
-partial model partialThermalZone
-  "partial for ready-to-use reduced order building model"
+partial model PartialThermalZone
+  "Partial for ready-to-use reduced order building model"
   parameter DataBase.Buildings.ZoneBaseRecord zoneParam
     "choose setup for this zone" annotation(choicesAllMatching = true);
   Modelica.Blocks.Interfaces.RealInput ventilationRate(
@@ -22,7 +22,7 @@ partial model partialThermalZone
   Modelica.Blocks.Interfaces.RealInput internalGains[3]
     "Input profiles for internal gains persons, machines, light" annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 90, origin = {80, -100}), iconTransformation(extent = {{-12, -12}, {12, 12}}, rotation = 90, origin={80,-60})));
   replaceable BaseClasses.BuildingPhysics.BuildingPhysics buildingPhysics constrainedby
-    AixLib.Building.LowOrder.BaseClasses.BuildingPhysics.partialBuildingPhysics(
+    AixLib.Building.LowOrder.BaseClasses.BuildingPhysics.PartialBuildingPhysics(
     RRest=zoneParam.RRest,
     R1o=zoneParam.R1o,
     C1o=zoneParam.C1o,
@@ -117,4 +117,4 @@ public
  </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})));
-end partialThermalZone;
+end PartialThermalZone;

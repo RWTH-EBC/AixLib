@@ -101,7 +101,7 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Volume Model for Moist Air without any pressure difference. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>Includes storage of mass and energy. c_p is constant for every substance. Volume is also Constant. </p>
  <p>The Volume of liquid Water does not influence the pressure calculation, because it is assumed to be very small.</p>
