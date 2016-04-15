@@ -36,7 +36,6 @@ equation
              __Dymola_Commands(file=
                                "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Linear/TestCase1.mos"
         "Simulate and plot"),
-             experimentSetupOutput(events = false),
              Documentation(revisions="<html>
 <ul>
  <li><i>May 28, 2015 </i> by Marcus Fuchs:<br/>Added unit testing command to annotations</li>

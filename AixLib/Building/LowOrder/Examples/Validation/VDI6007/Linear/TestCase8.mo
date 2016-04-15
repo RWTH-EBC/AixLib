@@ -112,11 +112,10 @@ equation
   connect(sunblind.Rad_Out, solarRadAdapter.solarRad_in) annotation (Line(
       points={{-11,78},{-1,78}},
       color={255,128,0}));
-  annotation (           experiment(StopTime = 5.184e+006, Interval = 3600, Algorithm = "Lsodar"),
+  annotation (
             __Dymola_Commands(file=
                                "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Linear/TestCase8.mos"
         "Simulate and plot"),
-            __Dymola_experimentSetupOutput(events = false),
             Documentation(revisions="<html>
 <ul>
  <li><i>May 28, 2015 </i> by Marcus Fuchs:<br/>Added unit testing command to annotations</li>
