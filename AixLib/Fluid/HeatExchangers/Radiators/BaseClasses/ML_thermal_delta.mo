@@ -4,9 +4,8 @@ model ML_thermal_delta "multi layers of heat exchanger"
   import AixLib;
   import calcT =
     AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.Calc_Excess_Temp;
-  extends Modelica.Fluid.Interfaces.PartialTwoPort(
-  final port_a_exposesState = true,
-  final port_b_exposesState = true);
+  extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
+  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
   parameter Modelica.SIunits.Mass M_Radiator=20;
   parameter calcT.Temp calc_dT
@@ -83,33 +82,19 @@ annotation (Dialog(tab="Geometry and Material", group="Geometry"));
         origin={-11,20},
         extent={{-8,-31},{8,31}},
         rotation=90)));
-  Modelica.Fluid.Vessels.ClosedVolume Volume(
+  AixLib.Fluid.MixingVolumes.MixingVolume
+                                      Volume(
     redeclare package Medium = Medium,
-    energyDynamics=system.energyDynamics,
-    use_HeatTransfer=true,
     T_start=T0,
     V=Vol_Water,
-    redeclare model HeatTransfer =
-        Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.IdealHeatTransfer,
-    portsData={Modelica.Fluid.Vessels.BaseClasses.VesselPortsData(
-                    diameter=0.015,
-                    height=0,
-                    zeta_out=0,
-                    zeta_in=0),
-        Modelica.Fluid.Vessels.BaseClasses.VesselPortsData(
-                    diameter=0.015,
-                    height=0,
-                    zeta_out=0,
-                    zeta_in=0)},
-    nPorts=2,
-    use_portsData=false)
+    nPorts=2)
     annotation (Placement(transformation(extent={{-16,-28},{6,-6}})));
 
-  Modelica.Fluid.Sensors.TemperatureTwoPort temperatureIn(redeclare package
-      Medium = Medium)
+  AixLib.Fluid.Sensors.TemperatureTwoPort   temperatureIn(redeclare package
+      Medium = Medium, m_flow_nominal=1)
     annotation (Placement(transformation(extent={{-70,-38},{-50,-18}})));
-  Modelica.Fluid.Sensors.TemperatureTwoPort temperatureOut(redeclare package
-      Medium = Medium)
+  AixLib.Fluid.Sensors.TemperatureTwoPort   temperatureOut(redeclare package
+      Medium = Medium, m_flow_nominal=1)
     annotation (Placement(transformation(extent={{50,-38},{70,-18}})));
 equation
  // Calculation of excess temperature
