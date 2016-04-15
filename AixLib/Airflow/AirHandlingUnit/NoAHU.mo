@@ -19,7 +19,7 @@ equation
   connect(zeroVFlowOut.y, Vflow_out)
     annotation (Line(points={{63,-66},{54,-66},{54,-100}}, color={0,0,127}));
   connect(dummyT_supplyAirOut.y, T_supplyAirOut)
-    annotation (Line(points={{56.9,57},{74.45,57},{99,57}}, color={0,0,127}));
+    annotation (Line(points={{56.9,57},{99,57},{99,57}},    color={0,0,127}));
   connect(zeroPowerElAndHeat1.y[1], QflowC) annotation (Line(points={{-73,-66},
           {-66,-66},{-62,-66},{-62,-100}}, color={0,0,127}));
   connect(zeroPowerElAndHeat1.y[1], QflowH) annotation (Line(points={{-73,-66},
@@ -27,12 +27,13 @@ equation
   connect(zeroPowerElAndHeat1.y[1], Pel) annotation (Line(points={{-73,-66},{
           -28,-66},{18,-66},{18,-100}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -20},{100,60}})), Icon(coordinateSystem(preserveAspectRatio=false,
-          extent={{-100,-20},{100,60}}), graphics={Text(
-          extent={{-48,50},{48,20}},
+            -100},{100,100}})),
+                              Icon(coordinateSystem(preserveAspectRatio=false,
+          extent={{-100,-40},{100,40}}), graphics={Text(
+          extent={{-48,44},{48,14}},
           lineColor={28,108,200},
           textString="no AHU"), Text(
-          extent={{-36,18},{32,0}},
+          extent={{-36,12},{32,-6}},
           lineColor={28,108,200},
           textString="(All outputs = 0)")}),
     Documentation(revisions="<html>
