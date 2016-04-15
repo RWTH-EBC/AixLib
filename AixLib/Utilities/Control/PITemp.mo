@@ -1,6 +1,4 @@
 within AixLib.Utilities.Control;
-
-
 model PITemp "PI Controler that can switch the output range of the controler"
 
   Modelica.Blocks.Interfaces.RealInput soll annotation(Placement(transformation(origin = {-80, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 270)));
@@ -50,3 +48,4 @@ equation
  </html> "), Icon(graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {135, 135, 135}, fillColor = {255, 255, 170},
             fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-58, 32}, {62, -20}}, lineColor = {175, 175, 175}, textString = "%name")}));
 end PITemp;
+

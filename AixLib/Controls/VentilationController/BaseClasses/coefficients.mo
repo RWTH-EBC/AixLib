@@ -1,4 +1,4 @@
-within AixLib.Utilities.Control.BaseClasses;
+within AixLib.Controls.VentilationController.BaseClasses;
 function coefficients
   "coeffictients a and b = f(phi) for function Top=a*T_amb + b"
   input Real phi(min=0, max=1) "relative humidity of air";
@@ -8,6 +8,11 @@ algorithm
   c := {(21.0 - 22.1)/(0.7 - 0.3)*phi + (21.525 + 0.0275*50),
         (0.116 - 0.112)/(0.7 - 0.3)*phi + (0.112 - 1e-4*30)};
   annotation (Documentation(revisions="<html>
+<ul>
+    <li><i>April, 2016&nbsp;</i>
+           by Peter Remmen:<br/>
+           Moved from Utilities to Controls</li>
+</ul>
 <ul>
   <li><i>October, 2015&nbsp;</i>
          by Moritz Lauster:<br/>
