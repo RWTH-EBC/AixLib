@@ -48,21 +48,21 @@ equation
 <p><b><span style=\"color: #008000;\">Concept</span></b> </p>
 <p>It allows the choice between three different models: </p>
 <ul>
-<li>after DIN 6946: <img src=\"modelica://AixLib/Images/equations/equation-vd3eY3hw.png\"
+<li>after DIN 6946: <img src=\"modelica://AixLib/Resources/Images/Utilities/HeatTransfer/HeatConv_outside/equation-vd3eY3hw.png\"
     alt=\"alpha = 4 + 4*v\"/> , where
-    <img src=\"modelica://AixLib/Images/equations/equation-MU6LPHRs.png\"
+    <img src=\"modelica://AixLib/Resources/Images/Utilities/HeatTransfer/HeatConv_outside/equation-MU6LPHRs.png\"
     alt=\"alpha\"/> (<b>alpha)</b> is the heat transfer coefficent and
     <b>v</b> is the wind speed </li>
 <li>after the ASHRAE Fundamentals Handbook from 1989, the way it is presented
 in EnergyPlus Engineering reference from 2011:
-<img src=\"modelica://AixLib/Images/equations/equation-A5RXdOdd.png\"
+<img src=\"modelica://AixLib/Resources/Images/Utilities/HeatTransfer/HeatConv_outside/equation-A5RXdOdd.png\"
 alt=\"alpha  = D + E*v + F*v^2\"/>, where
-<img src=\"modelica://AixLib/Images/equations/equation-LDgZSLyY.png\" alt=\"alpha\"/>
+<img src=\"modelica://AixLib/Resources/Images/Utilities/HeatTransfer/HeatConv_outside/equation-LDgZSLyY.png\" alt=\"alpha\"/>
 (<b>alpha</b>) and <b>v</b> are as above and the coefficients <b>D, E, F</b>
 depend on the surface of the outer wall.<br/><b>
 <span style=\"color: #ff0000;\">Attention:</span></b>
 This is a combined coefficient for convective and radiative heat exchange.</li>
-<li>with a custom constant <img src=\"modelica://AixLib/Images/equations/equation-BjHulWj5.png\"
+<li>with a custom constant <img src=\"modelica://AixLib/Resources/Images/Utilities/HeatTransfer/HeatConv_outside/equation-BjHulWj5.png\"
 alt=\"alpha \"/> (<b>alpha)</b> value </li>
 </ul>
 <p><b><span style=\"color: #008000;\">References</span></b> </p>
