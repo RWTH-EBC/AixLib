@@ -1,6 +1,6 @@
 within AixLib.Building.LowOrder.BaseClasses.BuildingPhysics;
-partial model partialBuildingPhysics
-  "partial model for building physics (windows and walls)"
+partial model PartialBuildingPhysics
+  "Partial model for building physics (windows and walls)"
   parameter Modelica.SIunits.Area AWin[n] "Area of the windows" annotation(Dialog(tab = "Windows", enable = if withWindows and withOuterwalls then true else false));
   parameter Modelica.SIunits.TransmissionCoefficient gsunblind[n]
     "Total energy transmittances if sunblind is closed" annotation(Dialog(tab = "Windows", group = "Shading", enable = if withWindows and withOuterwalls then true else false));
@@ -151,4 +151,4 @@ equation
  <li><i>January 2012,&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
  </ul>
  </html>"));
-end partialBuildingPhysics;
+end PartialBuildingPhysics;

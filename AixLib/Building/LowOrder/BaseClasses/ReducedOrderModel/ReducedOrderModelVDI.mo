@@ -1,6 +1,6 @@
 within AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel;
 model ReducedOrderModelVDI
-  extends ReducedOrderModel.partialReducedOrderModel;
+  extends PartialReducedOrderModel;
 
 parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaRad=5
     "Radiative Coefficient of heat transfer between inner and outer walls"

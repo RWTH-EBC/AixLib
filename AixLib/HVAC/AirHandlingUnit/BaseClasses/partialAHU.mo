@@ -1,5 +1,5 @@
 within AixLib.HVAC.AirHandlingUnit.BaseClasses;
-partial model partialAHU "Defines necessary parameters and connectors"
+partial model PartialAHU "Defines necessary parameters and connectors"
 
     // Booleans for possible AHU modes
   inner parameter Boolean heating=true "Heating Function of AHU"
@@ -159,4 +159,4 @@ equation
 </html>", info="<html>
 <p><span style=\"font-family: MS Shell Dlg 2;\">Base class to provide connectors. Thus, it is possible to declare parameters in a general way in superior building model and give the opportunity whether an AHU (</span><code>AixLib.HVAC.AirHandlingUnit.AHU</code><span style=\"font-family: MS Shell Dlg 2;\">) exist or not (</span><code>AixLib.HVAC.AirHandlingUnit.NoAHU</code><span style=\"font-family: MS Shell Dlg 2;\">).</span></p>
 </html>"));
-end partialAHU;
+end PartialAHU;

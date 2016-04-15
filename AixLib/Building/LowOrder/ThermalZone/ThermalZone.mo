@@ -1,7 +1,7 @@
 within AixLib.Building.LowOrder.ThermalZone;
 model ThermalZone
   "Ready-to-use reduced order building model with internal gains"
-  extends AixLib.Building.LowOrder.ThermalZone.partialThermalZone;
+  extends AixLib.Building.LowOrder.ThermalZone.PartialThermalZone;
   Components.Sources.InternalGains.Humans.HumanSensibleHeat_VDI2078 human_SensibleHeat_VDI2078(ActivityType = zoneParam.ActivityTypePeople, NrPeople = zoneParam.NrPeople, RatioConvectiveHeat = zoneParam.RatioConvectiveHeatPeople, T0 = zoneParam.T0all)
     "Internal gains from persons"                                                                                                     annotation(choicesAllMatching = true, Placement(transformation(extent = {{40, 0}, {60, 20}})));
   Components.Sources.InternalGains.Machines.Machines_DIN18599 machines_SensibleHeat_DIN18599(ActivityType = zoneParam.ActivityTypeMachines, NrPeople = zoneParam.NrPeopleMachines, ratioConv = zoneParam.RatioConvectiveHeatMachines, T0 = zoneParam.T0all)
