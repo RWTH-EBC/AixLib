@@ -9,11 +9,6 @@ algorithm
         (0.116 - 0.112)/(0.7 - 0.3)*phi + (0.112 - 1e-4*30)};
   annotation (Documentation(revisions="<html>
 <ul>
-    <li><i>April, 2016&nbsp;</i>
-           by Peter Remmen:<br/>
-           Moved from Utilities to Controls</li>
-</ul>
-<ul>
   <li><i>October, 2015&nbsp;</i>
          by Moritz Lauster:<br/>
          Adapted and moved to AixLib</li>

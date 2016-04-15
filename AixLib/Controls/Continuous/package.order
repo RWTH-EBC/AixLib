@@ -3,5 +3,6 @@ NumberOfRequests
 OffTimer
 PIDHysteresis
 PIDHysteresisTimer
+PITemp
 SignalRanker
 Examples
