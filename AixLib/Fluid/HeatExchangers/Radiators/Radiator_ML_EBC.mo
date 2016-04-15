@@ -94,6 +94,7 @@ protected
 
 protected
   BaseClasses.ML_thermal_delta multiLayer_HE[N](
+    redeclare each package Medium = Medium,
     M_Radiator=fill((length*MassSteel)/N, N),
     calc_dT=fill(calc_dT, N),
     Type=fill(Type, N),
@@ -110,13 +111,12 @@ protected
     LambdaSteel=fill(LambdaSteel, N),
     eps=fill(eps, N),
     A=fill(A/N, N),
-    d=fill(d, N),
-    redeclare package Medium = Medium)
+    d=fill(d, N))
     annotation (Placement(transformation(extent={{-28,-18},{8,18}})));
 
 public
   BaseClasses.PressureDropRadiator pressureDropRadiator(redeclare package
-      Medium = Medium, PD=PD)
+      Medium =                                                                     Medium, PD=PD)
     annotation (Placement(transformation(extent={{26,-10},{46,10}})));
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ConvectiveHeat
@@ -128,11 +128,11 @@ public
 
   AixLib.Utilities.Sensors.EEnergyMeter eEnergyMeter
     annotation (Placement(transformation(extent={{74,-62},{94,-42}})));
-  Modelica.Fluid.Sensors.TemperatureTwoPort FlowTemperature(redeclare package
-      Medium = Medium)
+  Sensors.TemperatureTwoPort                FlowTemperature(redeclare package
+      Medium =                                                                     Medium)
     annotation (Placement(transformation(extent={{-78,-10},{-58,10}})));
-  Modelica.Fluid.Sensors.TemperatureTwoPort ReturnTemperature(redeclare package
-      Medium = Medium)
+  Sensors.TemperatureTwoPort                ReturnTemperature(redeclare package
+      Medium =                                                                     Medium)
     annotation (Placement(transformation(extent={{62,-10},{82,10}})));
   Modelica.Blocks.Interfaces.RealOutput T_source
     "The logarithmic mean temperature is calculated from the temperatures at in- and outlet of the radiator"
