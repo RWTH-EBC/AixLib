@@ -161,9 +161,9 @@ equation
 
     TransmittedSolarRadiation_room = SolarMeter[6].q_kwh / reducedOrderModel.Aw;
 
-    PowerLoad = idealHeaterCooler.CoolingPower + idealHeaterCooler.HeatingPower;
-    integrator1.u = idealHeaterCooler.HeatingPower/(1000*1000); //in MWh
-    integrator.u = idealHeaterCooler.CoolingPower/(1000*1000); //in MWh
+    PowerLoad =idealHeaterCooler.coolingPower  +idealHeaterCooler.heatingPower;
+    integrator1.u =idealHeaterCooler.heatingPower /(1000*1000); //in MWh
+    integrator.u =idealHeaterCooler.coolingPower /(1000*1000); //in MWh
     //Transmitted radiation through window
     reducedOrderModel.solarRad_in = AbscoeffA.u;
     AbscoeffA.y = SolarMeter[6].p;

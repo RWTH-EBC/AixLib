@@ -115,9 +115,9 @@ equation
 
   TransmittedSolarRadiation_room = SolarMeter[6].q_kwh / Room.Win_Area;
 
-  PowerLoad = idealHeaterCooler.CoolingPower + idealHeaterCooler.HeatingPower;
-  integrator1.u = idealHeaterCooler.HeatingPower/(1000*1000); //in MWh
-  integrator.u = idealHeaterCooler.CoolingPower/(1000*1000); //in MWh
+  PowerLoad =idealHeaterCooler.coolingPower  +idealHeaterCooler.heatingPower;
+  integrator1.u =idealHeaterCooler.heatingPower /(1000*1000); //in MWh
+  integrator.u =idealHeaterCooler.coolingPower /(1000*1000); //in MWh
 
   connect(Source_Weather.y[1], outsideTemp.T) annotation (Line(
       points={{-93,40},{-80,40},{-80,46.5},{-71.1,46.5}},

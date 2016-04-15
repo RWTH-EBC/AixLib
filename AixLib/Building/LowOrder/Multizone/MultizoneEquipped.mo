@@ -185,9 +185,9 @@ equation
   connect(AirHandlingUnit.QflowC, CoolingPowerAHU) annotation (Line(points={{-20.85,
           -4.125},{-20.85,-14},{-17,-14},{-17,-32},{83,-32},{83,-22},{104,-22}},
                                                               color={0,0,127}));
-  connect(heaterCooler.HeatingPower, HeatingPowerHeater) annotation (Line(
+  connect(heaterCooler.heatingPower, HeatingPowerHeater) annotation (Line(
         points={{-6,-47.8},{38,-47.8},{38,-44},{100,-44}}, color={0,0,127}));
-  connect(heaterCooler.CoolingPower, CoolingPowerCooler) annotation (Line(
+  connect(heaterCooler.coolingPower, CoolingPowerCooler) annotation (Line(
         points={{-6,-53.78},{12,-53.78},{12,-54},{36,-54},{36,-66},{104,-66}},
         color={0,0,127}));
   connect(replicatorTemperatureVentilation.y, zone.ventilationTemperature)

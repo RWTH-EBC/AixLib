@@ -128,9 +128,9 @@ equation
         points={{-41.3,-68},{-14.4,-68},{-14.4,-49.2}}, color={0,0,127}));
   connect(idealHeaterCooler.heatCoolRoom, thermalZone.internalGainsConv)
     annotation (Line(points={{-3,-46},{3,-46},{3,-6.54}}, color={191,0,0}));
-  connect(idealHeaterCooler.HeatingPower, heatMeter.p)
+  connect(idealHeaterCooler.heatingPower, heatMeter.p)
     annotation (Line(points={{-2,-38},{38,-38},{53.4,-38}}, color={0,0,127}));
-  connect(idealHeaterCooler.CoolingPower, coolMeter.p) annotation (Line(points=
+  connect(idealHeaterCooler.coolingPower, coolMeter.p) annotation (Line(points=
           {{-2,-42.6},{44,-42.6},{44,-56},{53.4,-56}}, color={0,0,127}));
   annotation (Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
