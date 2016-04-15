@@ -25,8 +25,8 @@ parameter Modelica.SIunits.Density DensitySteel=7900
     "Thermal conductivity of steel, in W/mK"
     annotation (Dialog(group="Material"));
   parameter
-    HVAC.Components.HeatExchanger.BaseClasses.RadiatorTypes.RadiatorType
-                                                                     Type=HVAC.Components.HeatExchanger.BaseClasses.RadiatorTypes.PanelRadiator10
+    AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.RadiatorTypes.RadiatorType
+                                                                     Type=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.RadiatorTypes.PanelRadiator10
     "Type of radiator"
     annotation (Dialog(group="Geometry"));
   parameter Modelica.SIunits.Length length=1 "length of radiator";

@@ -1,15 +1,9 @@
 within AixLib.Fluid.HeatExchangers.Radiators;
 model Radiator_ML_EBC "radiator multilayer model"
-  import HVAC;
-
   import Modelica.SIunits;
   import calcT =
     AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.Calc_Excess_Temp;
-
-  replaceable package Medium =
-      Modelica.Media.Water.ConstantPropertyLiquidWater                           constrainedby
-    Modelica.Media.Interfaces.PartialMedium "Medium in the component"
-      annotation (choicesAllMatching = true);
+  extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
 
   // parameter Real kv=.1;
  parameter Boolean selectable=false "Radiator record" annotation(Dialog(group="Radiator Data"));
@@ -140,14 +134,7 @@ public
   Modelica.Blocks.Interfaces.RealOutput T_source
     "The logarithmic mean temperature is calculated from the temperatures at in- and outlet of the radiator"
     annotation (Placement(transformation(extent={{-80,-60},{-100,-40}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
-        Medium)
-    "Fluid connector b (positive design flow direction is from port_a to port_b)"
-    annotation (Placement(transformation(extent={{88,-10},{108,10}})));
-  Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
-        Medium)
-    "Fluid connector a (positive design flow direction is from port_a to port_b)"
-    annotation (Placement(transformation(extent={{-108,-10},{-88,10}})));
+
 equation
   TV_1=multiLayer_HE[1].Tin;
   TR_N=multiLayer_HE[N].Tout;
@@ -176,16 +163,15 @@ equation
   //The logarithmic mean temperature is calculated from the temperatures at in- and outlet of the radiator.
 
   connect(ReturnTemperature.port_b, port_b) annotation (Line(
-      points={{82,0},{98,0}},
+      points={{82,0},{100,0}},
       color={0,127,255},
       smooth=Smooth.None));
   connect(FlowTemperature.port_a, port_a) annotation (Line(
-      points={{-78,0},{-98,0}},
+      points={{-78,0},{-100,0}},
       color={0,127,255},
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}),
-                      graphics), Icon(graphics={
+            -100},{100,100}})),  Icon(graphics={
         Rectangle(
           extent={{-58,62},{-50,-68}},
           lineColor={95,95,95},
