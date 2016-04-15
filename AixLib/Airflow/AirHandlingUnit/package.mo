@@ -1,3 +1,3 @@
-within AixLib.HVAC;
+within AixLib.Airflow;
 package AirHandlingUnit 
 end AirHandlingUnit;
