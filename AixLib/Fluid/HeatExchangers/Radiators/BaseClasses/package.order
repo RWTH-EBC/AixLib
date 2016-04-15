@@ -1,1 +1,9 @@
-
+calcHeaterExcessTemp
+calcHeatingApplianceExponent
+Calc_Excess_Temp
+HeatConv_Radiator
+TwoStar_RadEx
+Radiator_wall
+ML_thermal_delta
+PressureDropRadiator
+RadiatorTypes
