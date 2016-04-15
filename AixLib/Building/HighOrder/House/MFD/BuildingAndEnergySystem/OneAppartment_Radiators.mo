@@ -163,5 +163,5 @@ equation
  <ul>
  <li><i>June 19, 2014</i> by Ana Constantin:<br/>Implemented</li>
  </ul>
- </html>"), Icon(coordinateSystem(extent = {{-120, -120}, {100, 120}}, preserveAspectRatio = false), graphics={  Bitmap(extent = {{-86, 80}, {76, -84}}, fileName = "modelica://AixLib/Resources/Images/House/MFD_FloorPlan_En.PNG")}));
+ </html>"), Icon(coordinateSystem(extent = {{-120, -120}, {100, 120}}, preserveAspectRatio = false), graphics={  Bitmap(extent = {{-86, 80}, {76, -84}}, fileName = "modelica://AixLib/Resources/Images/Building/HighOrder/MFD_FloorPlan_En.PNG")}));
 end OneAppartment_Radiators;
