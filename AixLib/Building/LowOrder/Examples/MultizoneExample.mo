@@ -10,7 +10,7 @@ model MultizoneExample "This is an example for a multizone office building"
         buildingPhysics(redeclare
           AixLib.Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG
           corG)),
-    redeclare AixLib.HVAC.AirHandlingUnit.AHU AirHandlingUnit "with AHU",
+    redeclare AixLib.Airflow.AirHandlingUnit.AHU AirHandlingUnit "with AHU",
     buildingParam=
         AixLib.DataBase.Buildings.OfficePassiveHouse.OfficePassiveHouse())
     annotation (Placement(transformation(extent={{-26,-14},{28,36}})));

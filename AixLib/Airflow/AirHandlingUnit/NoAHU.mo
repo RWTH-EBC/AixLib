@@ -1,4 +1,4 @@
-within AixLib.HVAC.AirHandlingUnit;
+within AixLib.Airflow.AirHandlingUnit;
 model NoAHU "If no AHU should exist at all"
   extends BaseClasses.partialAHU;
   Modelica.Blocks.Sources.Constant dummyPhi_supply(k=0.5)
