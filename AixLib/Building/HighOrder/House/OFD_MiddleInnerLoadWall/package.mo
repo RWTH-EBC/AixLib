@@ -10,7 +10,7 @@ package OFD_MiddleInnerLoadWall "The one family dwelling model, with the inner l
  <p>The room models are connected together. The name OFD_MiddleInnerLoadWall denotes the fact that the standard house has a middle load bearing wall. Other positions of the load bearing inner wall are possible, but not included in the library. Walls are connected together and they form a room. Multiple rooms are connected together and they form a storey for the one family dwelling.</p>
  <p>The living area over both storeys is 150 m2.</p>
  <p>The following figure shows the floor layout for the ground and upper floor. For simplification the toilet and the storage room are aggregated to one room. The side view shows the saddle roof.</p>
- <p><img src=\"modelica://AixLib/Images/House/OFD_FloorPlan_En.PNG\" alt=\"OFD_FloorPlan_En\"/></p>
- <p><img src=\"modelica://AixLib/Images/House/OFD_SideView_En.PNG\" alt=\"OFD_SideView_En\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/House/OFD_FloorPlan_En.PNG\" alt=\"OFD_FloorPlan_En\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/House/OFD_SideView_En.PNG\" alt=\"OFD_SideView_En\"/></p>
  </html>"));
 end OFD_MiddleInnerLoadWall;

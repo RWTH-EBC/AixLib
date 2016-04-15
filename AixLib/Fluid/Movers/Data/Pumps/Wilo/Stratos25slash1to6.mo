@@ -41,7 +41,7 @@ The pump curve may be altered slightly to guarantee that <i>dp/dm&lt;0</i>
 The figure below illustrates a digitized pump curve.
 </p>
 <p align=\"center\">
-<img alt=\"Pump curve\" src=\"modelica://AixLib/Resources/Images/Fluid/Movers/Data/stratoscurve.png\"/></p>
+<img alt=\"Pump curve\" src=\"modelica://AixLib/Resources/Resources/Images/Fluid/Movers/Data/stratoscurve.png\"/></p>
 </html>", revisions="<html>
 <ul>
 <li>

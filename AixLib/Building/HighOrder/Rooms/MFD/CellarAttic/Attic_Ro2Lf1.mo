@@ -87,7 +87,7 @@ equation
   connect(NaturalVentilation.port_a, thermOutside) annotation(Line(points = {{-70, -46}, {-80, -46}, {-80, 90}, {-90, 90}}, color = {191, 0, 0}));
   connect(NaturalVentilation.port_b, airload.port) annotation(Line(points = {{-50, -46}, {-28, -46}, {-28, -28}, {-10, -28}, {-10, -12}, {1, -12}}, color = {191, 0, 0}));
   connect(NaturalVentilation.InPort1, AirExchangePort) annotation(Line(points = {{-69, -52.4}, {-80, -52.4}, {-80, 25}, {-100, 25}}, color = {0, 0, 127}));
-  annotation(__Dymola_Images(Parameters(source = "AixLib/Images/House/MFD_Attic.png", Width = 5, Length = 5)), Icon(graphics={  Polygon(points = {{-58, -20}, {16, 54}, {90, -20}, {76, -20}, {16, 40}, {-44, -20}, {-58, -20}}, lineColor = {0, 0, 0},
+  annotation(__Dymola_Resources/Images(Parameters(source = "AixLib/Resources/Images/House/MFD_Attic.png", Width = 5, Length = 5)), Icon(graphics={  Polygon(points = {{-58, -20}, {16, 54}, {90, -20}, {76, -20}, {16, 40}, {-44, -20}, {-58, -20}}, lineColor = {0, 0, 0},
             fillPattern =                                                                                                    FillPattern.Solid, fillColor = {175, 175, 175}), Polygon(points = {{-24, 0}, {6, 30}, {-8, 30}, {-38, 0}, {-24, 0}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255},
             fillPattern =                                                                                                   FillPattern.Solid, visible = withWindow1), Text(extent = {{-36, 10}, {12, 22}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255},
             fillPattern =                                                                                                   FillPattern.Solid, textString = "Win1", visible = withWindow1), Polygon(points = {{26, 30}, {56, 0}, {70, 0}, {40, 30}, {26, 30}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255},
@@ -102,7 +102,7 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for an attic for the whole building.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The model can extended, if one wants to consider each of the ceilings belongig to the lower rooms individually.</p>
  </html>"));

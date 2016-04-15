@@ -44,14 +44,14 @@ equation
 <p><b><font style=\"color: #008000; \">Overview</font></b> </p>
 <p>The <b>HeatTrasfer_Outside </b>is a model for the convective heat transfer at outside walls </p>
 <p><b><font style=\"color: #008000; \">Level of Development</font></b> </p>
-<p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/> </p>
+<p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/> </p>
 <p><b><font style=\"color: #008000; \">Concept</font></b> </p>
 <p>It allows the choice between three different models: </p>
 <ul>
-<li>after DIN 6946: <img src=\"modelica://AixLib/Images/Equations/equation-235E6PDM.png\" alt=\"alfa = 4 + 4*v\"/> , where <b>alfa</b> is the heat transfer coefficent and <b>v</b> is the wind speed </li>
+<li>after DIN 6946: <img src=\"modelica://AixLib/Resources/Images/Equations/equation-235E6PDM.png\" alt=\"alfa = 4 + 4*v\"/> , where <b>alfa</b> is the heat transfer coefficent and <b>v</b> is the wind speed </li>
 <li>after the ASHRAE Fundamentals Handbook from 1989, the way it is presented in
   EnergyPlus Engineering reference from 2011:
-  <img src=\"modelica://AixLib/Images/Equations/equation-zygE8L9u.png\"
+  <img src=\"modelica://AixLib/Resources/Images/Equations/equation-zygE8L9u.png\"
   alt=\"alfa = D + E*v + F*v^2\"/>, where<b> alfa</b> and <b>v</b> are as above
   and the coefficients <b>D, E, F</b> depend on the surface of the outer wall.<br/>
   <b><font style=\"color: #ff0000; \">Attention:</font></b> This is a combined

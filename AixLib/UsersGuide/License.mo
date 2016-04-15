@@ -4,7 +4,7 @@ class License "Modelica License 2"
   annotation(Documentation(info = "<html>
  <h4><font color=\"#008000\" size=\"5\">The Modelica License 2</font></h4>
  <p>
- <strong>Preamble.</strong> The goal of this license is that Modelica related model libraries, software, images, documents, data files etc. can be used freely in the original or a modified form, in open source and in commercial environments (as long as the license conditions below are fulfilled, in particular sections 2c) and 2d). The Original Work is provided free of charge and the use is completely at your own risk. Developers of free Modelica packages are encouraged to utilize this license for their work.
+ <strong>Preamble.</strong> The goal of this license is that Modelica related model libraries, software, Resources/Images, documents, data files etc. can be used freely in the original or a modified form, in open source and in commercial environments (as long as the license conditions below are fulfilled, in particular sections 2c) and 2d). The Original Work is provided free of charge and the use is completely at your own risk. Developers of free Modelica packages are encouraged to utilize this license for their work.
  </p>
  <p>
  The Modelica License applies to any original work that contains the following licensing notice adjacent to the copyright notice(s) for this Original Work:
@@ -23,7 +23,7 @@ class License "Modelica License 2"
  <ol type=\"a\"><li>
  \"License\" is this Modelica License.
  </li><li>
- \"Original Work\" is any work of authorship, including software, images, documents, data files, that contains the above licensing notice or that is packed together with a licensing notice referencing it.
+ \"Original Work\" is any work of authorship, including software, Resources/Images, documents, data files, that contains the above licensing notice or that is packed together with a licensing notice referencing it.
  </li><li>
  \"Licensor\" is the provider of the Original Work who has placed this licensing notice adjacent to the copyright notice(s) for the Original Work. The Original Work is either directly provided by the owner of the Original Work, or by a licensee of the owner.
  </li><li>
@@ -178,7 +178,7 @@ class License "Modelica License 2"
 
  <p>For C-source code and documents, add similar notices in the corresponding file.</p>
  <p>
- For images, add a \"readme.txt\" file to the directories where the images are stored and include a similar notice in this file.
+ For Resources/Images, add a \"readme.txt\" file to the directories where the Resources/Images are stored and include a similar notice in this file.
  </p>
 
  <p>

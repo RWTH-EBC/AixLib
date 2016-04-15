@@ -265,7 +265,7 @@ equation
 <p><b><font style=\"color: #008000; \">Overview</font></b> </p>
 <p>The <b>HeatConv_inside</b> model represents the phenomenon of heat convection at inside surfaces, with different choice for surface orientation. </p>
 <p><b><font style=\"color: #008000; \">Level of Development</font></b> </p>
-<p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/> </p>
+<p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/> </p>
 <p><b><font style=\"color: #008000; \">Concept</font></b> </p>
 <p>In this model the orientation of the surface can be chosen from a menu for an easier adoption to new situations. This allows calculating <code>alpha</code> depending on orientation and respective direction of heat flow. The equations for <code>alpha</code> are taken from EN ISO 6946 (appendix A.1) and B. Glueck. </p>
 <p>The model can in this way be used on inside surfaces. There is also the possibility of setting a constant alpha value.</p>

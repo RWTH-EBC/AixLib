@@ -163,7 +163,7 @@ equation
   connect(NaturalVentilation.port_b, airload.port) annotation(Line(points = {{-48, -40}, {-6, -40}, {-6, -12}, {1, -12}}, color = {191, 0, 0}));
   connect(roof.WindSpeedPort, WindSpeedPort) annotation(Line(points={{71.4667,
           62.15},{71.4667,74},{-80,74},{-80,-50},{-99.5,-50}},                                                                                color = {0, 0, 127}));
-  annotation(__Dymola_Images(Parameters(source = "AixLib/Images/House/OW2_2IWl_1IWs_1Pa_1At1Ro.png", Width = 5, Length = 5)), Icon(graphics={  Rectangle(extent = {{-80, 80}, {80, 60}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
+  annotation(__Dymola_Resources/Images(Parameters(source = "AixLib/Resources/Images/House/OW2_2IWl_1IWs_1Pa_1At1Ro.png", Width = 5, Length = 5)), Icon(graphics={  Rectangle(extent = {{-80, 80}, {80, 60}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{0, 80}, {-50, 60}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255},
             fillPattern =                                                                                                   FillPattern.Solid, visible = withWindow2), Rectangle(extent = {{80, 60}, {68, -68}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-80, 60}, {-60, -80}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
@@ -187,10 +187,10 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for a room with 2&nbsp;outer&nbsp;walls,&nbsp;2&nbsp;inner&nbsp;walls&nbsp;load towards two different rooms but with the same orientation,&nbsp;1&nbsp;inner&nbsp;wall&nbsp;simple,&nbsp;1&nbsp;floor&nbsp;towards&nbsp;lower&nbsp;floor,&nbsp;1&nbsp;ceiling&nbsp;towards&nbsp;attic,&nbsp;1&nbsp;roof&nbsp;towards&nbsp;outside.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The following figure presents the room&apos;s layout:</p>
- <p><img src=\"modelica://AixLib/Images/House/OW2_2IWl_1IWs_1Pa_1At1Ro.png\"
+ <p><img src=\"modelica://AixLib/Resources/Images/House/OW2_2IWl_1IWs_1Pa_1At1Ro.png\"
     alt=\"Room layout\"/></p>
  </html>"));
 end Ow2IwL2IwS1Lf1At1Ro1;

@@ -50,7 +50,7 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for a simple thermostatic valve.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\"
     alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>Development of SimpleValve by incorporating the behaviour of a thermostatic head as a P controller with a maximum deviation of <i>P</i> and an influence of the pressure drop on the sensed temperature.</p>

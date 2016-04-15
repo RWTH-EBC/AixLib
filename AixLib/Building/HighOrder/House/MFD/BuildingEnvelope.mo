@@ -120,7 +120,7 @@ package BuildingEnvelope
     connect(Children.Strahlung_SE, SolarRadiation_SE) annotation(Line(points = {{46.64, 77.52}, {46.64, 90}, {28, 90}, {28, 110}}, color = {255, 128, 0}));
     connect(Livingroom.SolarRadiation_SE, SolarRadiation_SE) annotation(Line(points={{
             -52.0941,75.2267},{-52.0941,90},{28,90},{28,110}},                                                                                    color = {255, 128, 0}));
-    annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-150, -150}, {150, 150}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-150, -150}, {150, 150}}), graphics={  Bitmap(extent=  {{-86, 94}, {88, -96}}, fileName=  "modelica://AixLib/Images/House/MFD_FloorPlan_En.PNG"), Rectangle(extent=  {{-52, 56}, {-4, 36}}, fillColor=  {255, 255, 255},
+    annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-150, -150}, {150, 150}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-150, -150}, {150, 150}}), graphics={  Bitmap(extent=  {{-86, 94}, {88, -96}}, fileName=  "modelica://AixLib/Resources/Images/House/MFD_FloorPlan_En.PNG"), Rectangle(extent=  {{-52, 56}, {-4, 36}}, fillColor=  {255, 255, 255},
               fillPattern=                                                                                                    FillPattern.Solid,  pattern=LinePattern.None), Text(extent=  {{-72, 58}, {16, 44}}, lineColor=  {0, 0, 0}, textString=  "Livingroom"), Rectangle(extent=  {{28, 56}, {70, 18}}, fillColor=  {255, 255, 255},
               fillPattern=                                                                                                    FillPattern.Solid,  pattern=LinePattern.None), Text(extent=  {{8, 58}, {82, 46}}, lineColor=  {0, 0, 0}, textString=  "Children"), Rectangle(extent=  {{-8, 6}, {52, -14}}, fillColor=  {170, 255, 255},
               fillPattern=                                                                                                    FillPattern.Solid,  pattern=LinePattern.None, lineColor=  {170, 255, 255}), Text(extent=  {{-16, 4}, {58, -8}}, lineColor=  {0, 0, 0}, textString=  "Corridor"), Rectangle(extent=  {{-62, -28}, {-20, -78}}, fillColor=  {255, 255, 255},
@@ -130,7 +130,7 @@ package BuildingEnvelope
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Complete model appartment</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  </html>",   revisions = "<html>
  <ul>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>

@@ -38,7 +38,7 @@ equation
 <li>Used to implement automatic user control decisions. E.g. a sun blind is closed when moving average of ambient temperature is above a certain level.</li>
 </ul>
 <h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://AixLib/Images/stars0.png\" alt=\"stars: 0 out of 5\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/Stars/stars0.png\" alt=\"stars: 0 out of 5\"/></p>
 
 </html>"));
 end MovingAverage;

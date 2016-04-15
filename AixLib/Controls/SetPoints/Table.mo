@@ -57,7 +57,7 @@ AixLib.Controls.SetPoints.Table tabConExt(constantExtrapolation=true,
 will cause the following output:
 </p>
 <p>
-<img src=\"modelica://AixLib/Resources/Images/Controls/SetPoints/Table.png\" border=\"1\" alt=\"Table output.\"/>
+<img src=\"modelica://AixLib/Resources/Resources/Images/Controls/SetPoints/Table.png\" border=\"1\" alt=\"Table output.\"/>
 </p>
 <p>
 For the default setting <code>constantExtrapolation=true</code>, the

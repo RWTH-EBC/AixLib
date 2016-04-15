@@ -82,7 +82,7 @@ algorithm
                                            x_small=delta/4);
   end if;
   // linear equation for being able to handle r_N=0, see
-  // AixLib/Resources/Images/Fluid/Movers/UsersGuide/2013-IBPSA-Wetter.pdf
+  // AixLib/Resources/Resources/Images/Fluid/Movers/UsersGuide/2013-IBPSA-Wetter.pdf
   dp := dp - V_flow*kRes;
   annotation(smoothOrder=1,
               Documentation(info="<html>

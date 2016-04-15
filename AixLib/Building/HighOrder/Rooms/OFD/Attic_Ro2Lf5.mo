@@ -143,7 +143,7 @@ equation
   connect(OW2.WindSpeedPort, WindSpeedPort) annotation(Line(points = {{89.2, -0.6}, {100, -0.6}, {100, -28}, {-86, -28}, {-86, 0}, {-99.5, 0}}, color = {0, 0, 127}));
   connect(OW2.SolarRadiationPort, SolarRadiationPort_OW2) annotation(Line(points = {{90.2, 3.25}, {100, 3.25}, {100, -18}, {110, -18}}, color = {255, 128, 0}));
   connect(airload.port, ThermAttic) annotation(Line(points = {{1, -12}, {-4, -12}, {-4, -10}, {18, -10}, {18, 18}}, color = {191, 0, 0}));
-  annotation(__Dymola_Images(Parameters(source = "AixLib/Images/House/Attic_2Ro_5Rooms.png", Width = 5, Length = 5)), Icon(graphics={  Polygon(points = {{-58, -20}, {16, 54}, {90, -20}, {76, -20}, {16, 40}, {-44, -20}, {-58, -20}}, lineColor = {0, 0, 0}, fillPattern =                                                                                                   FillPattern.Solid, fillColor = {175, 175, 175}), Polygon(points = {{-24, 0}, {6, 30}, {-8, 30}, {-38, 0}, {-24, 0}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255},
+  annotation(__Dymola_Resources/Images(Parameters(source = "AixLib/Resources/Images/House/Attic_2Ro_5Rooms.png", Width = 5, Length = 5)), Icon(graphics={  Polygon(points = {{-58, -20}, {16, 54}, {90, -20}, {76, -20}, {16, 40}, {-44, -20}, {-58, -20}}, lineColor = {0, 0, 0}, fillPattern =                                                                                                   FillPattern.Solid, fillColor = {175, 175, 175}), Polygon(points = {{-24, 0}, {6, 30}, {-8, 30}, {-38, 0}, {-24, 0}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255},
             fillPattern =                                                                                                   FillPattern.Solid, visible = withWindow1), Text(extent = {{-36, 10}, {12, 22}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255},
             fillPattern =                                                                                                   FillPattern.Solid, textString = "Win1", visible = withWindow1), Polygon(points = {{26, 30}, {56, 0}, {70, 0}, {40, 30}, {26, 30}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255},
             fillPattern =                                                                                                   FillPattern.Solid, visible = withWindow2), Text(extent = {{22, 10}, {70, 22}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255},
@@ -157,10 +157,10 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for an attic&nbsp;with&nbsp;2&nbsp;saddle&nbsp;roofs&nbsp;and&nbsp;a&nbsp;floor&nbsp;toward&nbsp;5&nbsp;rooms&nbsp;on&nbsp;the&nbsp;lower&nbsp;floor,&nbsp;with&nbsp;all&nbsp;other&nbsp;walls&nbsp;towards&nbsp;the&nbsp;outside.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The following figure presents the room&apos;s layout:</p>
- <p><img src=\"modelica://AixLib/Images/House/Attic_2Ro_5Rooms.png\"
+ <p><img src=\"modelica://AixLib/Resources/Images/House/Attic_2Ro_5Rooms.png\"
     alt=\"Room layout\"/></p>
  <p>We also tested a model where the attic has just one floor, over the whole building and each room connects to this component through the ceiling. However the model didn&apos;t lead to the expected lower simulation times, on the contrary. This model is also more correct, as it is not realistic to think that every layer of the attic&apos;s floor has a single temperature.</p>
  </html>"));
