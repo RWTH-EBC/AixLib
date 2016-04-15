@@ -12,7 +12,9 @@ model Radiator_ML_EBC "radiator multilayer model"
       AixLib.DataBase.Radiators.RadiatorMLBaseDataDefinition()
     "choose a radiator"
                     annotation(Dialog(group="Radiator Data", enable=selectable), choicesAllMatching=true);
-  parameter BaseClasses.RadiatorTypes.RadiatorType Type=(if selectable then
+  parameter
+    AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.RadiatorTypes.RadiatorType
+                                                                                         Type=(if selectable then
       radiatorType.Type else BaseClasses.RadiatorTypes.PanelRadiator10)
     "Type of radiator" annotation (choicesAllMatching=true, Dialog(
       tab="Geometry and Material",
@@ -60,7 +62,8 @@ annotation (Dialog(tab="Geometry and Material", group="Geometry", enable=not sel
     "Pressure drop coefficient, delta_p[Pa] = PD*m_flow[kg/s]^2"                                        annotation (Dialog(group="Miscellaneous", enable=not selectable));
   parameter Integer N=16 "number of discretisation layers";
 
-  parameter BaseClasses.BaseClasses.Calc_Excess_Temp.Temp calc_dT=calcT.exp
+  parameter
+    AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.Calc_Excess_Temp.Temp         calc_dT=calcT.exp
     "select calculation method";
   SIunits.Power Power;
   SIunits.Temperature TV_1;
