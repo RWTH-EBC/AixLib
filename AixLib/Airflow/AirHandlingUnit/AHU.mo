@@ -1384,7 +1384,7 @@ equation
 <h4><span style=\"color: #008000\">Assumptions</span></h4>
 <p>For further explanation for each parameter see noted sources and [1]! Please note that the assumptions are made regarding AHUs which are implemented in laboratories.</p>
 <ul>
-<li>BPF_DeHu: by-pass factor of cooling coil during dehumidification; Expression for the amount of air that by-passes unaffectedly over a coil while the remaining fluid comes in direct contact with the coil. [2, p. 500]; BPF_DeHu between 10 &percnt; and 35 &percnt; acc. to [3]</li>
+<li>BPF_DeHu: by-pass factor of cooling coil during dehumidification; Expression for the amount of air that by-passes unaffectedly over a coil while the remaining fluid comes in direct contact with the coil. [2, p. 500]; BPF_DeHu between 10 &#37; and 35 &#37; acc. to [3]</li>
 <li>efficiencyHRS_enabled: temperature differential; efficiency of heat recovery system (HRS) when it is enabled (for HRSs without sorptive technology efficiencyHRS_enabled = 0.6 ... 0.8 [4])</li>
 <li>efficiencyHRS_disabled: temperature differential; efficiency of heat recovery system (HRS) when it is disabled (proposal for parameter efficiencyHRS_disabled = 0.2 ... 0.4 [1])</li>
 <li>dp_sup, dp_eta: pressure drop over ventilator; recommendation dp = 800 Pa [7]</li>
@@ -1398,7 +1398,7 @@ equation
 <li>only adiabatic humidification</li>
 <li>no moisture transfer in HRS</li>
 <li>the pinch temperature HRS component is 0 K</li>
-<li>if absolute humidity of outside air (input connector &QUOT;X_outdoorAir) exceeds X_saturated(T_oda) calculated with phi=1, X_oda is set to X_saturated</li>
+<li>if absolute humidity of outside air (input connector &quot;X_outdoorAir) exceeds X_saturated(T_oda) calculated with phi=1, X_oda is set to X_saturated</li>
 </ul>
 <h4><span style=\"color: #008000\">Concept</span></h4>
 <ul>
@@ -1406,9 +1406,10 @@ equation
 <li>Based on sketch/schema of AHU shown in figure 1 [5, appendix D].</li>
 <li>This model of an AHU is able to represent 5 cases: only heating, only cooling, dehumidification, humidification plus heating, humidification plus cooling.</li>
 </ul>
-<p><br>Figure 1 [5, appendix D] </p>
-<p><img src=\"modelica://AixLib/Images/AHU/AHUaccToDINV18599-3.jpg\"/> </p>
-<p><br><b><span style=\"color: #008000;\">References</span></b></p>
+<p><br/>Figure 1 [5, appendix D] </p>
+<p><img src=\"modelica://AixLib/Images/AHU/AHUaccToDINV18599-3.jpg\"
+    alt=\"schema of AHU\"/> </p>
+<p><br/><b><span style=\"color: #008000;\">References</span></b></p>
 <ul>
 <li>[1] Mehrfeld, P. (2014): Experimentelle Untersuchung von L&uuml;ftungstechnik in Laboren (master thesis). RWTH Aachen University, Aachen. E.ON Energy Research Center, Institute for Energy Efficient Buildings and Indoor Climate; supervised by: Lauster, M.; M&uuml;ller, D.</li>
 <li>[2] Khurmi, R. S.; Gupta, J. K. (2009): Textbook of Refrigeration and Air Conditioning. 4th ed. New Delhi: Eurasia. (682 pages). ISBN 9788121927819.</li>
