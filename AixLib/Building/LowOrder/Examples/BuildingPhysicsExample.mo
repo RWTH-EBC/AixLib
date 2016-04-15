@@ -161,7 +161,7 @@ equation
   annotation (    experiment(StopTime=86400, Interval=3600),
 Documentation(revisions="<html>
 <ul>
-<li><i>June 2015,&nbsp;</i> by Moritz Lauster:<br>Debugged due to name changes in partialReducedOrderModel</li>
+<li><i>June 2015,&nbsp;</i> by Moritz Lauster:<br/>Debugged due to name changes in partialReducedOrderModel</li>
 </ul>
 <ul>
 <li>October 2014, Peter Remmen:</li>

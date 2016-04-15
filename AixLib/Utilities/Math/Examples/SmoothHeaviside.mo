@@ -1,6 +1,5 @@
 within AixLib.Utilities.Math.Examples;
 model SmoothHeaviside "Test model for smoothHeavisidefunction "
-  import AixLib;
   extends Modelica.Icons.Example;
   Modelica.Blocks.Sources.Ramp x1(duration=1,
     height=2,

@@ -145,32 +145,22 @@ equation
           textString="Top")}),
     Documentation(info="<html>
 <p>Ventilation is determined from 4 effects:</p>
-<p><ol>
+<ol>
 <li>People acitivity: according to the occupancy profile more ventilation will happen, when more people are at home (active).</li>
 <li>Outside temperature: less ventilation at low temperatures and vice versa (people leave windows open in summer).</li>
 <li>Inside temperature: the higher the inside temperature, the more ventilation will occure (people preventing overheating).</li>
 <li>Leakage: due to leakage through cracks or openings there will be a constant air exchange.</li>
-</ol></p>
+</ol>
 </html>", revisions="<html>
 <ul>
   <li><i>October, 2015&nbsp;</i>
-         by Moritz Lauster:<br>
+         by Moritz Lauster:<br/>
          Adapted and moved to AixLib</li>
 </ul>
 <ul>
   <li><i>May, 2008&nbsp;</i>
-         by Peter Matthes:<br>
+         by Peter Matthes:<br/>
          Implemented</li>
 </ul>
-</html>"),
-    Documentation(info="<html>
-<p>Ventilation is determined from 4 effects:</p>
-<p><ol>
-<li>People acitivity: according to the occupancy profile more ventilation will happen, when more people are at home (active).</li>
-<li>Outside temperature: less ventilation at low temperatures and vice versa.</li>
-<li>Inside temperature: the higher the inside temperature, the more ventilation will occure (people preventing overheating).</li>
-<li>Leakage: due to leakage through cracks or openings there will be a constant air exchange.</li>
-</ol></p>
-<p><br/>The model sums partial ACH values. No calculation based on temperature differences and flow coefficients will be done here. That would require to estimate realistic flow coefficients for the facades, which can be done in a more complex model.</p>
 </html>"));
 end VentilationController;

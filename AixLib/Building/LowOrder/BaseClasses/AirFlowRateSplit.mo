@@ -107,14 +107,14 @@ equation
 <li>A maxmial volume flow (maxAHU = deltaAHU + minAHU) <span style=\"font-family: MS Shell Dlg 2;\">in m3/(m2*h)</span></li>
 <li>A given profile or relative occupation</li>
 </ul>
-<p><br>As AHUs typically work with m3/s, the model calculates the output air flow rate Vdot_air in m3/s.</p>
-<p><br>airFlowRateOutput = [minAHU + deltaAHU * (profile OR relative Occupation)] * Azone * 3600^-1 </p>
+<p><br/>As AHUs typically work with m3/s, the model calculates the output air flow rate Vdot_air in m3/s.</p>
+<p><br/>airFlowRateOutput = [minAHU + deltaAHU * (profile OR relative Occupation)] * Azone * 3600^-1 </p>
 </html>", revisions="<html>
-<p><ul>
+<ul>
 <li><i>October 30, 2015&nbsp;</i> by Moritz Lauster:<br/>Moved and adapted to AixLib. Some renaming and adding units</li>
-</ul></p>
-<p><ul>
+</ul>
+<ul>
 <li><i>March 3, 2014&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
-</ul></p>
+</ul>
 </html>"));
 end AirFlowRateSplit;

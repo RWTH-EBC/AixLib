@@ -20,7 +20,7 @@ connector SolarRad_out
 <p><b><font style=\"color: #008000; \">Overview</font></b> </p>
 <p>The <b>SolarRad_out</b> connector is used for the total radiation output and its main components. Is explicitly defined as an output. </p>
 <h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://AixLib/Images/stars3.png\"/> </p>
+<p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/> </p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <p>It contains information on:</p>
 <ul>
@@ -30,7 +30,7 @@ connector SolarRad_out
 <li>radiation reflected from the ground (as part of the total radiation)</li>
 <li>angle of incidence on the surface</li>
 </ul>
-<p><br>which can be needed by certain models, but is not neccesarry for all models. As this connector replaces the old connector, please make sure to write the appropriate equations for all the connector&apos;s components.</p>
+<p><br/>which can be needed by certain models, but is not neccesarry for all models. As this connector replaces the old connector, please make sure to write the appropriate equations for all the connector&apos;s components.</p>
 </html>",  revisions = "<html>
  <ul>
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>

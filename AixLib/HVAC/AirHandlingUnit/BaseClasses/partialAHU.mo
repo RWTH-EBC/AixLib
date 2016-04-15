@@ -154,7 +154,7 @@ equation
           textString=" ")}),
     Documentation(revisions="<html>
 <ul>
-<li><i><span style=\"font-family: MS Shell Dlg 2;\">February, 2016&nbsp;</span></i> by Philipp Mehrfeld:<br>Model implemented</li>
+<li><i><span style=\"font-family: MS Shell Dlg 2;\">February, 2016&nbsp;</span></i> by Philipp Mehrfeld:<br/>Model implemented</li>
 </ul>
 </html>", info="<html>
 <p><span style=\"font-family: MS Shell Dlg 2;\">Base class to provide connectors. Thus, it is possible to declare parameters in a general way in superior building model and give the opportunity whether an AHU (</span><code>AixLib.HVAC.AirHandlingUnit.AHU</code><span style=\"font-family: MS Shell Dlg 2;\">) exist or not (</span><code>AixLib.HVAC.AirHandlingUnit.NoAHU</code><span style=\"font-family: MS Shell Dlg 2;\">).</span></p>

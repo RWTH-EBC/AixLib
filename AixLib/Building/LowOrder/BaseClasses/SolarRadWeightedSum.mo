@@ -55,7 +55,7 @@ equation
           fillColor={255,128,0},
           fillPattern=FillPattern.Solid)}),                                                                                                    Documentation(info="<html>
 <p>This component weights the n-vectorial radiant input with n weightfactors and has a scalar output.</p>
-<p><br>The partial class contains following components:</p>
+<p><br/>The partial class contains following components:</p>
 <ul>
 <li>2 solar radiation ports</li>
 </ul>

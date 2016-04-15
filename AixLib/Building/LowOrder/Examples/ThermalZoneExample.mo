@@ -141,7 +141,7 @@ equation
 </ul>
 <p>added record for one winter day, now it&apos;s a ready to run example</p>
 <ul>
-<li><i>June 24, 2014 </i>by Moritz Lauster:<br>Implemented </li>
+<li><i>June 24, 2014 </i>by Moritz Lauster:<br/>Implemented </li>
 </ul>
 </html>"),  experiment(StopTime=86400, Interval=3600),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{

@@ -136,9 +136,9 @@ equation
         "Simulate and plot"),
               __Dymola_experimentSetupOutput(events = false),
               Documentation(revisions="<html>
-<p><ul>
+<ul>
  <li><i>June 8, 2015 </i> by Marcus Fuchs:<br/>Added unit testing command to annotations</li>
- </ul></p>
+ </ul>
  <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
  </html>", info="<html>
 <p>Test Case 8 of the VDI6007:: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to mixed inner and outer heat sources for Type Room S: </p>
@@ -147,12 +147,12 @@ equation
 <li>Second outer wall to the west </li>
 <li>shortwave radiation on the outer wall </li>
 <li>shortwave radiation through the windows </li>
-<li>Shutter cloeses &GT;100W/m&sup2; </li>
+<li>Shutter cloeses &gt;100W/m&sup2; </li>
 <li>no longwave radiation heat exchange (special EqAirTemp see: EqAirTemp_TestCase_8) </li>
 </ul>
-<p><br>Reference: Room air temperature </p>
+<p><br/>Reference: Room air temperature </p>
 <p>Variable path: <code>reducedModel.airload.T</code> </p>
-<p><br><br>All values are given in the VDI 6007-1. </p>
+<p><br/><br/>All values are given in the VDI 6007-1. </p>
 <p>Same Test Case exists in VDI 6020. </p>
 <p>A script to run this test case can be found in AixLib\\Resources\\Scripts\\Dymola\\Building\\LowOrder\\Examples\\Validation\\Star.</p>
 </html>"));

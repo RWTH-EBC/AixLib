@@ -25,25 +25,20 @@ equation
           fillPattern=FillPattern.Solid,
           textString="%name")}),
     Documentation(revisions="<html>
-<p>02.06.2014, Kristian Huchtemann</p>
 <ul>
-<li>implemented</li>
+<li><i>02.06.2014 </i>, by Kristian Huchtemann:<br/>
+  implemented</li>
 </ul>
 </html>",
       info="<html>
 <h4>Moving Average</h4>
-<p><b><font style=\"font-size: 10pt; \">Information</b></p>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <ul>
 <li>Calculates a moving average between a past time instant and the actual simulation time.</li>
 <li>Used to implement automatic user control decisions. E.g. a sun blind is closed when moving average of ambient temperature is above a certain level.</li>
 </ul>
 <h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://AixLib/Images/stars0.png\"/></p>
-<p><br><b></font><font style=\"color: #008000; \">Assumptions</font></b></p>
-<h4><span style=\"color:#008000\">Known Limitations</span></h4>
-<h4><span style=\"color:#008000\">Concept</span></h4>
-<h4><span style=\"color:#008000\">References</span></h4>
-<h4><span style=\"color:#008000\">Example Results</span></h4>
+<p><img src=\"modelica://AixLib/Images/stars0.png\" alt=\"stars: 0 out of 5\"/></p>
+
 </html>"));
 end MovingAverage;

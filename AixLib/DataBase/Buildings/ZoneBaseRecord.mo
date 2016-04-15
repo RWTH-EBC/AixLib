@@ -115,13 +115,13 @@ record ZoneBaseRecord "Base record definition for zone records"
 </html>",  revisions="<html>
 <ul>
 <li><i>January 4, 2016 </i>by Moritz Lauster:
-<br>Clean up.</li>
+<br/>Clean up.</li>
 <li><i>June, 2015 </i>by Moritz Lauster:
-<br>Added new parameters to use further calculation cores.</li>
-<li><i>February 4, 2014&nbsp;</i>by Ole Odendahl:<br>Added new parameters for the setup of the ACH. It is now possible to assign different values to the ACH for each zone based on this record. </li>
-<li><i>January 27, 2014&nbsp;</i>by Ole Odendahl:<br>Added new parameter withAHU to choose whether the zone is connected to a central air handling unit. Default false </li>
-<li><i>March, 2012&nbsp;</i> by Peter Matthes:<br>Implemented </li>
-<li><i>November, 2012&nbsp;</i> by Moritz Lauster:<br>Restored links </li>
+<br/>Added new parameters to use further calculation cores.</li>
+<li><i>February 4, 2014&nbsp;</i>by Ole Odendahl:<br/>Added new parameters for the setup of the ACH. It is now possible to assign different values to the ACH for each zone based on this record. </li>
+<li><i>January 27, 2014&nbsp;</i>by Ole Odendahl:<br/>Added new parameter withAHU to choose whether the zone is connected to a central air handling unit. Default false </li>
+<li><i>March, 2012&nbsp;</i> by Peter Matthes:<br/>Implemented </li>
+<li><i>November, 2012&nbsp;</i> by Moritz Lauster:<br/>Restored links </li>
 </ul>
 </html>"));
 end ZoneBaseRecord;

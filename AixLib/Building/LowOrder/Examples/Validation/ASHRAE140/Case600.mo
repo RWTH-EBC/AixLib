@@ -309,7 +309,7 @@ equation
 <p>As described in ASHRAE Standard 140.</p>
 </html>", revisions="<html>
 <ul>
-<li><i>March 19, 2015</i> by Peter Remmen:<br>Implemented </li>
+<li><i>March 19, 2015</i> by Peter Remmen:<br/>Implemented </li>
 </ul>
 </html>"));
 end Case600;

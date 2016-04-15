@@ -103,9 +103,9 @@ equation
                                "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Linear/TestCase11.mos"
         "Simulate and plot"),
              __Dymola_experimentSetupOutput(events = false),            Documentation(revisions="<html>
-<p><ul>
+<ul>
  <li><i>May 28, 2015 </i> by Marcus Fuchs:<br/>Added unit testing command to annotations</li>
- </ul></p>
+ </ul>
  <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
  </html>", info="<html>
 <p>Test Case 11 of the VDI6007: <a name=\"result_box\">L</a>oad calculation in compliance with the desired values of the indoor temperature and a setpoint for the type space S: </p>

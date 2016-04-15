@@ -9,10 +9,12 @@ record SetTemp_caseX40 "Max. and Min. set room temperatures for heating"
      86400, 273.15+10]);
     annotation (Documentation(info="<html>
 <p>Heating load for Test Case 640</p>
-<p><h4>Table for Natural Ventilation:</h4></p>
+<h4>Table for Natural Ventilation:</h4>
 <p>Column 1: Time</p>
 <p>Column 2: Set temperature for Heater</p>
 </html>", revisions="<html>
+<ul>
  <li><i>March 26, 2015&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
+</ul>
 </html>"));
 end SetTemp_caseX40;

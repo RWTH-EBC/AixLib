@@ -8,7 +8,7 @@ record RO_Case600 "Roof for Case 600"
     c={900,840,840} "Specific heat capacity of wall layers",
     eps=0.9 "Emissivity of inner wall surface");
   annotation (Documentation(info="<html>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+<h4><font color=\"#008000\">References</font></h4>
 <p>For ASHRAE 140 see Bibtexkey: ASHRAE-140-2007</p>
 </html>"));
 end RO_Case600;

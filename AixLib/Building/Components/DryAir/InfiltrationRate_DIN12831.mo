@@ -24,31 +24,31 @@ equation
 <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/> </p>
 <p><b><font style=\"color: #008000; \">Concept</font></b> </p>
 <p>Air exchange coefficients at 50 Pa pressure difference between ambience and room air: </p>
-<table cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
-<td><p align=\"center\"><h4>Dwelling type</h4></p></td>
-<td><p align=\"center\"><h4>highly air tight</h4></p></td>
-<td><p align=\"center\"><h4>medium air tight</h4></p></td>
-<td><p align=\"center\"><h4>low air tight</h4></p></td>
+<table summary=\"coefficients\" cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
+<td><p align=\"center\"><h4>Dwelling type</h4></td>
+<td><p align=\"center\"><h4>highly air tight</h4></td>
+<td><p align=\"center\"><h4>medium air tight</h4></td>
+<td><p align=\"center\"><h4>low air tight</h4></td>
 </tr>
 <tr>
 <td><p>one-family dwelling</p></td>
-<td><p>&LT; 4</p></td>
+<td><p>&lt; 4</p></td>
 <td><p>4 - 10</p></td>
-<td><p>&GT; 10</p></td>
+<td><p>&gt; 10</p></td>
 </tr>
 <tr>
 <td><p>multi-family dwelling/other</p></td>
-<td><p>&LT; 2</p></td>
+<td><p>&lt; 2</p></td>
 <td><p>2 - 5</p></td>
-<td><p>&GT; 5</p></td>
+<td><p>&gt; 5</p></td>
 </tr>
 </table>
-<p><br><br>Reference values for air shielding value e: </p>
-<table cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
+<p><br/><br/>Reference values for air shielding value e: </p>
+<table summary=\"Reference\" cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
 <td></td>
-<td><p align=\"center\"><h4>heated room without </h4></p><p align=\"center\">facade with openings</p><p align=\"center\">exposed to wind</p></td>
-<td><p align=\"center\"><h4>heated room with</h4></p><p align=\"center\">one facade with openings</p><p align=\"center\">exposed to wind</p></td>
-<td><p align=\"center\"><h4>heated room with more than</h4></p><p align=\"center\">one facade with openings</p><p align=\"center\">exposed to wind</p></td>
+<td><p align=\"center\"><h4>heated room without </h4><p align=\"center\">facade with openings</p><p align=\"center\">exposed to wind</p></td>
+<td><p align=\"center\"><h4>heated room with</h4><p align=\"center\">one facade with openings</p><p align=\"center\">exposed to wind</p></td>
+<td><p align=\"center\"><h4>heated room with more than</h4><p align=\"center\">one facade with openings</p><p align=\"center\">exposed to wind</p></td>
 </tr>
 <tr>
 <td><p>no shielding</p></td>
@@ -69,10 +69,10 @@ equation
 <td><p>0.02</p></td>
 </tr>
 </table>
-<p><br><br>Reference values for height correction value &epsilon;: </p>
-<table cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
+<p><br/><br/>Reference values for height correction value &epsilon;: </p>
+<table summary=\"Reference\" cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
 <td><h4>Height of room</h4></td>
-<td><p align=\"center\"><br><b>&epsilon;</b></p></td>
+<td><p align=\"center\"><br/><b>&epsilon;</b></p></td>
 </tr>
 <tr>
 <td><p>0 - 10 m</p></td>
@@ -83,11 +83,11 @@ equation
 <td><p>1.2</p></td>
 </tr>
 <tr>
-<td><p>&GT; 30 m</p></td>
+<td><p>&gt; 30 m</p></td>
 <td><p>1.5</p></td>
 </tr>
 </table>
-<p><br><br><b><font style=\"color: #008000; \">References</font></b> </p>
+<p><br/><br/><b><font style=\"color: #008000; \">References</font></b> </p>
 <p>DIN EN 12831 </p>
 <p><b><font style=\"color: #008000; \">Example Results</font></b> </p>
 <p><a href=\"AixLib.Building.Components.Examples.DryAir.DryAir_test\">AixLib.Building.Components.Examples.DryAir.DryAir_test</a> </p>

@@ -102,13 +102,13 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This example models a simple fluid circuit in order to test the heat pump model for plausibility</p>
  </html>", revisions="<html>
- <p>November 2014, Marcus Fuchs</p>
- <p><ul>
- <li>Changed model to use Annex 60 base class</li>
- </ul></p>
- <p>25.11.2013, Kristian Huchtemann</p>
- <p><ul>
- <li>changed BoilerSystem to HeatPumpSystem</li>
- </ul></p>
+ <ul>
+ <li><i>November 2014&nbsp;</i>
+    by Marcus Fuchs:<br/>
+    Changed model to use Annex 60 base class</li>
+ <li><i>November 25, 2013&nbsp;</i>
+    by Kristian Huchtemann:<br/>
+    Changed BoilerSystem to HeatPumpSystem</li>
+ </ul>
  </html>"));
 end HeatPumpSystem;

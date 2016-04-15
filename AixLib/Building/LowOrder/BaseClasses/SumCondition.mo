@@ -40,14 +40,14 @@ algorithm
 <li>Share of vector elements where condition is true</li>
 </ol>
 </html>", revisions="<html>
-<p><ul>
+<ul>
 <li><i>February 26, 2016&nbsp;</i> by Moritz Lauster:<br/>Added share of volume for each zone as output.</li>
-</ul></p>
-<p><ul>
+</ul>
+<ul>
 <li><i>October 30, 2015&nbsp;</i> by Moritz Lauster:<br/>Moved and adapted to AixLib</li>
-</ul></p>
-<p><ul>
+</ul>
+<ul>
 <li><i>March 7, 2014&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
-</ul></p>
+</ul>
 </html>"));
 end SumCondition;

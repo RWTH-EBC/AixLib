@@ -58,12 +58,12 @@ equation
 </ul>
 <p>Reference: Room air temperature </p>
 <p>Variable path: <code>reducedModel.airload.T</code> </p>
-<p><br><br>All values are given in the VDI 6007-1. </p>
+<p><br/><br/>All values are given in the VDI 6007-1. </p>
 <p>Same Test Case exists in VDI 6020. </p>
 <p>A script to run this test case can be found in AixLib\\Resources\\Scripts\\Dymola\\Building\\LowOrder\\Examples\\Validation\\Star.</p>
 </html>",  revisions="<html>
 <ul>
-<li><i>June 8, 2015 </i> by Marcus Fuchs:<br>Added unit testing command to annotations </li>
+<li><i>June 8, 2015 </i> by Marcus Fuchs:<br/>Added unit testing command to annotations </li>
 </ul>
 <p><i>February 2014</i>, by Peter Remmen:</p>
 <p>Implemented </p>

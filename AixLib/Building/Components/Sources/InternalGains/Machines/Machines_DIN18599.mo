@@ -284,12 +284,13 @@ equation
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Heat cource with convective and radiative component. The load is determined by a schedule and the type of activity. </p>
 <h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://AixLib/Images/stars2.png\"/></p>
+<p><img src=\"modelica://AixLib/Images/stars2.png\" alt=\"stars: 2 out of 5\"/></p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <p>The schedule sets the usage of the room by people. To set a higher number of people, a multiplier is given.</p>
 <p>The schedule describes the presence of only one person, and can take values from 0 to 1. </p>
-<p>The type of activity determines the load by a person in the room according to DIN 18599. The following values are provided:</p>
-<table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
+<p>The type of activity determines the load by a person in the room according
+to DIN 18599. The following values are provided:</p>
+<table summary=\"Schedule table\" cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
 <td style=\"background-color: #dcdcdc\"><p>Activity Type</p></td>
 <td style=\"background-color: #dcdcdc\"><p>Heat Load [W]</p></td>
 </tr>
@@ -306,8 +307,8 @@ equation
 <td><p>150</p></td>
 </tr>
 </table>
-<p><br><br><br><b><font style=\"color: #008000; \">Assumptions</font></b></p>
-<p>The surface for radiation exchange is computed from the number of persons in the room, which leads to a surface area of zero, when no one is present. In particular cases this might lead to an error as depending of the rest of the system a division by this surface will be introduced in the system of equations -&GT; division by zero. For this reason a lower limitation of 1e-4 m2 has been introduced.</p>
+<p><br/><br/><br/><b><font style=\"color: #008000; \">Assumptions</font></b></p>
+<p>The surface for radiation exchange is computed from the number of persons in the room, which leads to a surface area of zero, when no one is present. In particular cases this might lead to an error as depending of the rest of the system a division by this surface will be introduced in the system of equations -&gt; division by zero. For this reason a lower limitation of 1e-4 m2 has been introduced.</p>
 <h4><span style=\"color:#008000\">References</span></h4>
 <p>DIN 18599 </p>
 <h4><span style=\"color:#008000\">Example Results</span></h4>
@@ -315,10 +316,10 @@ equation
 <p><a href=\"AixLib.Building.Examples.Sources.InternalGains.OneOffice\">AixLib.Building.Examples.Sources.InternalGains.OneOffice</a></p>
 </html>",
     revisions="<html>
-<p><ul>
-<li><i>October 21, 2014&nbsp;</i> by Ana Constantin:<br>Added a lower positive limit to the surface area, so it will not lead to a division by zero</li>
+<ul>
+<li><i>October 21, 2014&nbsp;</i> by Ana Constantin:<br/>Added a lower positive limit to the surface area, so it will not lead to a division by zero</li>
 <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
 <li><i>May 07, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
-</ul></p>
+</ul>
 </html>"));
 end Machines_DIN18599;

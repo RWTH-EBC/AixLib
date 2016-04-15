@@ -137,6 +137,7 @@ equation
  <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The following figure presents the room&apos;s layout:</p>
- <p><img src=\"modelica://AixLib/Images/House/VoWo_Livingroom.png\"/></p>
+ <p><img src=\"modelica://AixLib/Images/House/VoWo_Livingroom.png\"
+    alt=\"Room layout\"/></p>
  </html>"));
 end Livingroom_VoWo;

@@ -40,6 +40,6 @@ record OPH_2_Storage
  <li><i>June, 2015&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
  </ul>
  </html>", info="<html>
-<p><span style=\"font-family: MS Shell Dlg 2;\">Zone &QUOT;Storage&QUOT; of an example building according to an office building with passive house standard. The building is divided in six zones, this is a typical zoning for an office building. </span></p>
+<p><span style=\"font-family: MS Shell Dlg 2;\">Zone &quot;Storage&quot; of an example building according to an office building with passive house standard. The building is divided in six zones, this is a typical zoning for an office building. </span></p>
 </html>"));
 end OPH_2_Storage;
