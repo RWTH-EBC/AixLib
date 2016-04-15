@@ -22,7 +22,8 @@ model ThermalZoneEquipped
     ratioConv=zoneParam.RatioConvectiveHeatLighting,
     T0=zoneParam.T0all) "Internal gains from light"
     annotation (Placement(transformation(extent={{40,-40},{60,-21}})));
-  Utilities.Control.VentilationController ventilationController(
+  Controls.VentilationController.VentilationController
+                                          ventilationController(
     useConstantOutput=zoneParam.useConstantACHrate,
     baseACH=zoneParam.baseACH,
     maxUserACH=zoneParam.maxUserACH,
