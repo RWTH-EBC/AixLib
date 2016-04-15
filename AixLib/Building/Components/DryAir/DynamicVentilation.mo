@@ -10,7 +10,7 @@ model DynamicVentilation
     "Difference to set temperature";
   parameter Modelica.SIunits.Temperature Tset = 295.15 "set temperature";
   VarAirExchange varAirExchange annotation(Placement(transformation(extent = {{36, -20}, {62, 4}})));
-  Utilities.Control.PITemp pITemp(h = 0, l = -Max_VR, PI(controllerType = Modelica.Blocks.Types.SimpleController.PI)) annotation(Placement(transformation(extent = {{-22, 26}, {-2, 46}})));
+  Controls.Continuous.PITemp pITemp(h = 0, l = -Max_VR, PI(controllerType = Modelica.Blocks.Types.SimpleController.PI)) annotation(Placement(transformation(extent = {{-22, 26}, {-2, 46}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_inside annotation(Placement(transformation(extent = {{84, -20}, {104, 0}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_outside annotation(Placement(transformation(extent = {{-106, -20}, {-86, 0}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor Sensor_Toutside annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {-90, 12})));
