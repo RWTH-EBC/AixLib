@@ -1,4 +1,4 @@
-AixLib.DataBase.Radiators;
+within AixLib.DataBase.Radiators;
 record RadiatorMLBaseDataDefinition "Base Data Definition for Radiators"
     extends Modelica.Icons.Record;
   parameter Real NominalPower=1000
