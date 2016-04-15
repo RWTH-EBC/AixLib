@@ -1,5 +1,5 @@
 within AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel;
-partial model partialReducedOrderModel
+partial model PartialReducedOrderModel
 
  parameter Boolean withInnerwalls=true "If inner walls are existent"   annotation(Dialog(tab="Inner walls"),choices(checkBox = true));
   parameter Modelica.SIunits.ThermalResistance R1i=0.0005955
@@ -313,4 +313,4 @@ Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
 <li><i>October 2014,&nbsp;</i> by Peter Remmen:<br/>Implemented.</li>
 </ul>
 </html>"));
-end partialReducedOrderModel;
+end PartialReducedOrderModel;
