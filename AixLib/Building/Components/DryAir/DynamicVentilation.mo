@@ -26,7 +26,8 @@ equation
   connect(port_outside, Sensor_Toutside.port) annotation(Line(points = {{-96, -10}, {-96, -4}, {-90, -4}, {-90, 2}}, color = {191, 0, 0}));
   connect(port_inside, pITemp.Therm1) annotation(Line(points = {{94, -10}, {94, 27}, {-18, 27}}, color = {191, 0, 0}));
   connect(Sensor_Toutside.T, Higher_HeatingLimit.u) annotation(Line(points = {{-90, 22}, {-90, 30}, {-82, 30}}, color = {0, 0, 127}));
-  connect(multiSum.y, pITemp.soll) annotation(Line(points = {{-26.98, 74}, {-22, 74}, {-22, 45}, {-20, 45}}, color = {0, 0, 127}));
+  connect(multiSum.y, pITemp.setPoint) annotation (Line(points={{-26.98,74},{-22,
+          74},{-22,45},{-20,45}}, color={0,0,127}));
   connect(Source_Tdiff.y, multiSum.u[1]) annotation(Line(points = {{-59, 56}, {-50, 56}, {-50, 76.1}, {-40, 76.1}}, color = {0, 0, 127}));
   connect(pITemp.y, Inverter.u) annotation(Line(points = {{-3, 36}, {6.8, 36}}, color = {0, 0, 127}));
   connect(Inverter.y, varAirExchange.InPort1) annotation(Line(points = {{20.6, 36}, {24, 36}, {24, -15.68}, {37.3, -15.68}}, color = {0, 0, 127}));
@@ -39,7 +40,7 @@ equation
   connect(less.y, Colder_and_HeatingLimit.u2) annotation(Line(points = {{-59, -50}, {-52, -50}, {-52, 29.4}, {-47.4, 29.4}}, color = {255, 0, 255}));
   connect(port_outside, varAirExchange.port_a) annotation(Line(points = {{-96, -10}, {-96, -8}, {36, -8}}, color = {191, 0, 0}));
   connect(varAirExchange.port_b, port_inside) annotation(Line(points = {{62, -8}, {94, -8}, {94, -10}}, color = {191, 0, 0}));
-  annotation( Icon(graphics={  Rectangle(extent=  {{-80, 80}, {80, -80}}, lineColor=  {0, 0, 0}, fillColor=  {211, 243, 255},
+  annotation (Icon(graphics={  Rectangle(extent=  {{-80, 80}, {80, -80}}, lineColor=  {0, 0, 0}, fillColor=  {211, 243, 255},
             fillPattern=                                                                                                    FillPattern.Solid)}), Documentation(revisions = "<html>
  <ul>
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>

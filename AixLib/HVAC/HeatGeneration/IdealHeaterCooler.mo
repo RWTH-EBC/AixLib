@@ -78,12 +78,10 @@ equation
   connect(booleanExpression1.y, pITemp2.onOff) annotation (Line(
       points={{-31,-22},{-24,-22},{-24,-5},{-13,-5}},
       color={255,0,255}));
-  connect(soll_heat, pITemp1.soll) annotation (Line(
-      points={{-100,40},{-18,40},{-18,39},{-12,39}},
-      color={0,0,127}));
-  connect(soll_cool, pITemp2.soll) annotation (Line(
-      points={{-100,-40},{-12,-40},{-12,-19}},
-      color={0,0,127}));
+  connect(soll_heat, pITemp1.setPoint) annotation (Line(points={{-100,40},{-18,
+          40},{-18,39},{-12,39}}, color={0,0,127}));
+  connect(soll_cool, pITemp2.setPoint) annotation (Line(points={{-100,-40},{-12,
+          -40},{-12,-19}}, color={0,0,127}));
   connect(pITemp2.Therm1, HeatCoolRoom) annotation (Line(
       points={{-10,-1},{-10,12},{94,12}},
       color={191,0,0}));

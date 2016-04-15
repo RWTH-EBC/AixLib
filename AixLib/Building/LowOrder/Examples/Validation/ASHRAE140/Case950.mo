@@ -124,7 +124,8 @@ model Case950
     fileName="NoName",
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic)
     annotation (Placement(transformation(extent={{-8,-50},{5,-37}})));
-  AixLib.HVAC.Meter.TEnergyMeter coolMeter
+  AixLib.Utilities.Sensors.TEnergyMeter
+                                 coolMeter
     annotation (Placement(transformation(extent={{85,-15},{105,5}})));
   Modelica.Blocks.Sources.Constant const(k=0)
     annotation (Placement(transformation(extent={{12,-61},{24,-49}})));
