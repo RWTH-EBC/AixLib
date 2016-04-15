@@ -1,7 +1,7 @@
 within AixLib.Building.LowOrder.Multizone;
 model MultizoneEquipped
   "Multizone with basic heat supply system, air handling unit, an arbitrary number of thermal zones (vectorized), and ventilation"
-  extends AixLib.Building.LowOrder.Multizone.partialMultizone;
+  extends AixLib.Building.LowOrder.Multizone.PartialMultizone;
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor TAirAHUAvg
     "Averaged air temperature of the zones which are supplied by the AHU" annotation (Placement(transformation(extent={{16,-26},
             {8,-18}})));
@@ -38,7 +38,7 @@ model MultizoneEquipped
         rotation=180,
         origin={-94,6})));
   replaceable AixLib.HVAC.AirHandlingUnit.AHU AirHandlingUnit constrainedby
-    AixLib.HVAC.AirHandlingUnit.BaseClasses.partialAHU(
+    AixLib.HVAC.AirHandlingUnit.BaseClasses.PartialAHU(
     BPF_DeHu=buildingParam.BPF_DeHu,
     HRS=buildingParam.HRS,
     efficiencyHRS_enabled=buildingParam.efficiencyHRS_enabled,

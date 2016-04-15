@@ -1,6 +1,6 @@
 within AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel;
 model ReducedOrderModelStar
-  extends partialReducedOrderModel;
+  extends PartialReducedOrderModel;
   Utilities.HeatTransfer.HeatToStar heatToStarWindow(A=Aw, eps=epsw) if withWindows
     annotation (Placement(transformation(extent={{-16,80},{4,100}})));
   Utilities.HeatTransfer.HeatToStar heatToStarOuterwall(A=Ao, eps=epso) if withOuterwalls

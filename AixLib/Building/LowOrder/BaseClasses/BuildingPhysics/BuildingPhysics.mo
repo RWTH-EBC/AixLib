@@ -1,7 +1,7 @@
 within AixLib.Building.LowOrder.BaseClasses.BuildingPhysics;
 model BuildingPhysics
   "Building physics based on VDI 6007 with improved handling of windows"
-  extends partialBuildingPhysics;
+  extends PartialBuildingPhysics;
   AixLib.Building.LowOrder.BaseClasses.EqAirTemp.EqAirTempEBCMod eqAirTemp(
     aowo=aowo,
     wf_wall=weightfactorswall,

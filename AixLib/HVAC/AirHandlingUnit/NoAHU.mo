@@ -1,6 +1,6 @@
 within AixLib.HVAC.AirHandlingUnit;
 model NoAHU "If no AHU should exist at all"
-  extends BaseClasses.partialAHU;
+  extends BaseClasses.PartialAHU;
   Modelica.Blocks.Sources.Constant dummyPhi_supply(k=0.5)
     annotation (Placement(transformation(extent={{38,0},{56,18}})));
   Modelica.Blocks.Sources.Constant zeroVFlowOut(k(unit="m3/s") = 0)
