@@ -46,7 +46,6 @@ model TestCase7
         5151600,27,350; 5155200,27,371; 5158800,27,390; 5162400,27,409; 5166000,
         25.9,500; 5169600,25.8,500; 5173200,25.7,500; 5176800,25.5,500; 5180400,
         25.4,500; 5184000,25.3,500])                                                                                                     annotation(Placement(transformation(extent = {{80, 80}, {100, 99}})));
-  Modelica.Blocks.Math.Add sumHeatLoad annotation(Placement(transformation(extent = {{-96, 86}, {-86, 96}})));
   Modelica.Blocks.Sources.Constant solarRadiation(k=0)
     annotation (Placement(transformation(extent={{-48,76},{-28,96}})));
 equation
@@ -54,10 +53,8 @@ equation
   connect(innerLoads.y[2], machinesRadiative.Q_flow) annotation(Line(points = {{-25, -89}, {-4, -89}}, color = {0, 0, 127}));
   connect(setTemp.y[2], idealHeaterCoolerVar1_1.soll_cool) annotation(Line(points = {{-59, -20}, {-50, -20}, {-50, -15.2}, {-30.8, -15.2}}, color = {0, 0, 127}));
   connect(setTemp.y[1], idealHeaterCoolerVar1_1.soll_heat) annotation(Line(points = {{-59, -20}, {-50, -20}, {-50, -23}, {-30.8, -23}}, color = {0, 0, 127}));
-  connect(sumHeatLoad.u1, idealHeaterCoolerVar1_1.heatMeter.p);
-  connect(sumHeatLoad.u2, idealHeaterCoolerVar1_1.coolMeter.p);
   referenceLoad[1] = -reference.y[2];
-  simulationLoad = sumHeatLoad.y;
+  simulationLoad = idealHeaterCoolerVar1_1.HeatCoolRoom.Q_flow;
   connect(outdoorTemp.port, reducedModel.equalAirTemp) annotation(Line(points={{-4,59},
           {26.5,59},{26.5,56.8},{49.4,56.8}},                                                                                       color = {191, 0, 0}));
   connect(infiltrationTemp.y, reducedModel.ventilationTemperature) annotation(Line(points={{16.5,1},
@@ -70,14 +67,11 @@ equation
       points={{-27,86},{55.18,86},{55.18,74.8}},
       color={0,0,127}));
   connect(idealHeaterCoolerVar1_1.HeatCoolRoom, reducedModel.internalGainsConv)
-    annotation (Line(
-      points={{-24.8,-29.4},{-24.8,-48},{66.4,-48},{66.4,38}},
-      color={191,0,0}));
-  annotation (            experiment(StopTime = 5.184e+006, Interval = 3600, Algorithm = "Lsodar"),
-             __Dymola_Commands(file=
+    annotation (Line(points={{-24.8,-29.4},{-24.8,-58},{66.4,-58},{66.4,38}},
+        color={191,0,0}));
+  annotation(__Dymola_Commands(file=
                                "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Linear/TestCase7.mos"
         "Simulate and plot"),
-             __Dymola_experimentSetupOutput(events = false),
              Documentation(revisions="<html>
 <ul>
  <li><i>May 28, 2015 </i> by Marcus Fuchs:<br/>Added unit testing command to annotations</li>
