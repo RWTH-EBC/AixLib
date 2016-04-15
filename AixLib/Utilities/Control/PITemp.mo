@@ -43,7 +43,7 @@ equation
  Based on a model by Alexander Hoh with some modifications and the Modelica-Standard PI controller. If set to &quot;on&quot; it will controll the thermal port temperature to the target value (soll). If set to &quot;off&quot; the controller error will become zero and therefore the current output level of the PI controller will remain constant. When this switching occurs the TriggeredTrapezoid will level the current controller output down to zero in a selectable period of time.
  </p>
  <h4><font color=\"#008000\">Level of Development</font></h4>
- <p><img src=\"modelica://AixLib/Images/stars2.png\" alt=\"stars: 2 out of 5\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars2.png\" alt=\"stars: 2 out of 5\"/></p>
  </html>", revisions = "<html>
  <ul>
  <li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>

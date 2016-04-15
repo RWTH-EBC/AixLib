@@ -397,7 +397,7 @@ flow resistance.
 The class inheritance is as follows:
 </p>
 <p align=\"center\">
-<img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/UsersGuide/a60.png\"/>
+<img alt=\"image\" src=\"modelica://AixLib/Resources/Resources/Images/Fluid/UsersGuide/a60.png\"/>
 </p>
 
 </html>"));

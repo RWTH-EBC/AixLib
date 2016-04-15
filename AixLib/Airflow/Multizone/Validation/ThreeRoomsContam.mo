@@ -239,7 +239,7 @@ This is a model of three rooms that exchange air among each based
 on density difference between the air in the rooms and the outside.
 The model implements the configuration shown below.</p>
 <p align=\"center\">
-<img src=\"modelica://AixLib/Resources/Images/Airflow/Multizone/Examples/3roomValidation.png\" border=\"1\" alt=\"Configuration of the three rooms.\"/>
+<img src=\"modelica://AixLib/Resources/Resources/Images/Airflow/Multizone/Examples/3roomValidation.png\" border=\"1\" alt=\"Configuration of the three rooms.\"/>
 </p>
 <p>
 This model has been used for a comparative model validation between CONTAM and
@@ -249,7 +249,7 @@ See Wetter (2006) for details of the validation.
 <h4>References</h4>
 <p>
 Michael Wetter.
-<a href=\"modelica://AixLib/Resources/Images/Airflow/Multizone/Wetter-airflow-2006.pdf\">
+<a href=\"modelica://AixLib/Resources/Resources/Images/Airflow/Multizone/Wetter-airflow-2006.pdf\">
 Multizone Airflow Model in Modelica.</a>
 Proc. of the 5th International Modelica Conference, p. 431-440. Vienna, Austria, September 2006.
 </p>

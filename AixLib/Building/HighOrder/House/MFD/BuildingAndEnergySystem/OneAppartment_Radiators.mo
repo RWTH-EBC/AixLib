@@ -158,10 +158,10 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for an appartment, considered as a single unit with an energy system based on radiators.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  </html>", revisions = "<html>
  <ul>
  <li><i>June 19, 2014</i> by Ana Constantin:<br/>Implemented</li>
  </ul>
- </html>"), Icon(coordinateSystem(extent = {{-120, -120}, {100, 120}}, preserveAspectRatio = false), graphics={  Bitmap(extent = {{-86, 80}, {76, -84}}, fileName = "modelica://AixLib/Images/House/MFD_FloorPlan_En.PNG")}));
+ </html>"), Icon(coordinateSystem(extent = {{-120, -120}, {100, 120}}, preserveAspectRatio = false), graphics={  Bitmap(extent = {{-86, 80}, {76, -84}}, fileName = "modelica://AixLib/Resources/Images/Building/HighOrder/MFD_FloorPlan_En.PNG")}));
 end OneAppartment_Radiators;

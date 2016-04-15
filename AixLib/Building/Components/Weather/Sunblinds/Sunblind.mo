@@ -129,7 +129,7 @@ equation
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>This model represents a sunblind to reduce the vectorial radiance on facades, windows. etc. </p>
 <h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <ul>
 <li>You can define the amount of radiance hitting the facade with gsunblind, which states how much radiance goes through the closed sunblind</li>

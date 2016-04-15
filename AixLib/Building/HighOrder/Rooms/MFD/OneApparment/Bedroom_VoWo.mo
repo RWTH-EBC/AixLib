@@ -102,7 +102,7 @@ equation
   connect(NaturalVentilation.port_a, thermOutside) annotation(Line(points = {{66, 85}, {44, 85}, {44, 90}, {-100, 90}}, color = {191, 0, 0}));
   connect(airload.port, NaturalVentilation.port_b) annotation(Line(points = {{29, 6}, {44, 6}, {44, 66}, {100, 66}, {100, 85}, {94, 85}}, color = {191, 0, 0}));
   connect(outsideWall.port_outside, thermOutside) annotation(Line(points = {{-4, -102.5}, {-4, -130}, {-80, -130}, {-80, 90}, {-100, 90}}, color = {191, 0, 0}));
-  annotation(__Dymola_Images(Parameters(source = "AixLib/Images/House/VoWo_Bedroom.png")), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Rectangle(extent=  {{-54, 68}, {98, -112}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 255},
+  annotation(__Dymola_Images(Parameters(source = "AixLib/Resources/Images/Building/HighOrder/VoWo_Bedroom.png")), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Rectangle(extent=  {{-54, 68}, {98, -112}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 255},
             fillPattern=                                                                                                    FillPattern.Forward), Text(extent=  {{-40, 2}, {84, -26}}, lineColor=  {0, 0, 0}, fillColor=  {255, 0, 0},
             fillPattern=                                                                                                    FillPattern.Forward, textString=  "Bedroom"), Rectangle(extent=  {{-42, -104}, {-20, -124}}, lineColor=  {0, 0, 0}, fillColor=  {85, 255, 255},
             fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-40, -106}, {-22, -122}}, lineColor=  {0, 0, 0}, fillColor=  {170, 213, 255},
@@ -132,10 +132,10 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for the bedroom.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The following figure presents the room&apos;s layout:</p>
- <p><img src=\"modelica://AixLib/Images/House/VoWo_Bedroom.png\"
+ <p><img src=\"modelica://AixLib/Resources/Images/Building/HighOrder/VoWo_Bedroom.png\"
     alt=\"Room layout\"/></p>
  </html>"));
 end Bedroom_VoWo;

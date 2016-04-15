@@ -804,7 +804,7 @@ AixLib.Media.Water</a>
 for typical building energy simulations.
 </p>
 <p align=\"center\">
-<img src=\"modelica://AixLib/Resources/Images/Media/Water/plotRho.png\" border=\"1\"
+<img src=\"modelica://AixLib/Resources/Resources/Images/Media/Water/plotRho.png\" border=\"1\"
 alt=\"Mass density as a function of temperature\"/>
 </p>
 <p>
@@ -818,7 +818,7 @@ temperature from enthalpy without having to solve an implicit equation,
 and therefore leads to faster simulation.
 </p>
 <p align=\"center\">
-<img src=\"modelica://AixLib/Resources/Images/Media/Water/plotCp.png\" border=\"1\"
+<img src=\"modelica://AixLib/Resources/Resources/Images/Media/Water/plotCp.png\" border=\"1\"
 alt=\"Relative variation of specific heat capacity with temperature\"/>
 </p>
 <p>

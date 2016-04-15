@@ -61,9 +61,9 @@ with your model.
 </ol>
 <h4>Conventions for surface azimuth and tilt</h4>
 <p>To compute the solar irradiation, parameters such as the surface azimuth and the surface tilt are defined as shown in the following three figures. </p>
-<p align=\"center\"><img alt=\"image\" src=\"modelica://AixLib/Resources/Images/BoundaryConditions/ear_ray.png\"/> </p>
-<p align=\"center\"><img alt=\"image\" src=\"modelica://AixLib/Resources/Images/BoundaryConditions/zen_sun.png\"/> </p>
-<p align=\"center\"><img alt=\"image\" src=\"modelica://AixLib/Resources/Images/BoundaryConditions/zen_pla.png\"/> </p>
+<p align=\"center\"><img alt=\"image\" src=\"modelica://AixLib/Resources/Resources/Images/BoundaryConditions/ear_ray.png\"/> </p>
+<p align=\"center\"><img alt=\"image\" src=\"modelica://AixLib/Resources/Resources/Images/BoundaryConditions/zen_sun.png\"/> </p>
+<p align=\"center\"><img alt=\"image\" src=\"modelica://AixLib/Resources/Resources/Images/BoundaryConditions/zen_pla.png\"/> </p>
 <p>
 For the surface azimuth and tilt, the enumerations
 <a href=\"modelica://AixLib.Types.Azimuth\">

@@ -20,7 +20,7 @@ connector SolarRad_out
 <p><b><font style=\"color: #008000; \">Overview</font></b> </p>
 <p>The <b>SolarRad_out</b> connector is used for the total radiation output and its main components. Is explicitly defined as an output. </p>
 <h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/> </p>
+<p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/> </p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <p>It contains information on:</p>
 <ul>
