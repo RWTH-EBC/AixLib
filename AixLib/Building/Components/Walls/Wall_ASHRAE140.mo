@@ -90,7 +90,7 @@ model Wall_ASHRAE140
 // COMPONENT PART
 
 public
-  BaseClasses.ConvNLayerClearanceStar_old                       Wall(
+  BaseClasses.ConvNLayerClearanceStar                           Wall(
     h=wall_height,
     l=wall_length,
     T0=T0,
@@ -98,7 +98,8 @@ public
     selectable=true,
     eps=WallType.eps,
     wallType=WallType,
-    surfaceOrientation=ISOrientation) "Wall" annotation (Placement(
+    surfaceOrientation=ISOrientation,
+    HeatConv1(calcMethod=2)) "Wall"          annotation (Placement(
         transformation(extent={{-20,14},{2,34}})));
 
   Utilities.Interfaces.SolarRad_in
