@@ -33,12 +33,13 @@ record OPH_2_Storage
     withOuterwalls = true,
     R1o = 4.72002418185e-05,
     RRest = 0.00127087222011,
-    C1o = 147705362.151);
+    C1o = 147705362.151,
+    orientationswallshorizontal = {90,90,90,90,0});
   annotation (Documentation(revisions="<html>
  <ul>
  <li><i>June, 2015&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
  </ul>
  </html>", info="<html>
-<p><span style=\"font-family: MS Shell Dlg 2;\">Zone &QUOT;Storage&QUOT; of an example building according to an office building with passive house standard. The building is divided in six zones, this is a typical zoning for an office building. </span></p>
+<p><span style=\"font-family: MS Shell Dlg 2;\">Zone &quot;Storage&quot; of an example building according to an office building with passive house standard. The building is divided in six zones, this is a typical zoning for an office building. </span></p>
 </html>"));
 end OPH_2_Storage;

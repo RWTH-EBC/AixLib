@@ -17,17 +17,24 @@ equation
   //This equation is better suited for stable simulations as it works for both flow directions and is continuous at flow zero
   annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points=  {{-78, 50}, {-78, -60}, {82, 50}, {82, -62}, {-78, 50}},
             lineThickness=                                                                                                    1, fillColor=  {0, 0, 255},
-            fillPattern=                                                                                                    FillPattern.Solid, pattern = LinePattern.None, lineColor=  {0, 0, 0})}), Documentation(revisions="<html>
- <p>November 2014, Marcus Fuchs</p>
- <p><ul>
- <li>Changed model to use Annex 60 base class</li>
- </ul></p>
- <p>13.11.2013, by <i>Ana Constantin</i>: implemented</p>
+            fillPattern=FillPattern.Solid,
+            pattern = LinePattern.None,
+            lineColor=  {0, 0, 0})}),
+Documentation(revisions="<html>
+<ul>
+<li><i>November 2014&nbsp;</i>
+    by Marcus Fuchs:<br/>
+    Changed model to use Annex 60 base class</li>
+ <li><i>November 13, 2013&nbsp;</i>
+    by Ana Constantin:<br/>
+    Implemented</li>
+ </ul>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for a simple valve. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\"
+    alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>Simple valve model which describes the relationship between mass flow and pressure drop acoordinh to the Kvs Value.</p>
  <h4><span style=\"color:#008000\">Example Results</span></h4>

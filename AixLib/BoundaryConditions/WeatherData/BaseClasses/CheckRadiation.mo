@@ -21,12 +21,16 @@ equation
     defaultComponentName="cheRad",
     Documentation(info="<html>
 <p>
-This component ensures that the radiation is not smaller than 0.
-Modelica Table will interpolate data when it reads the data from a file.
-Thus, it is possible to generate negative value due to the interpolation.
+This block ensures that the radiation is not smaller than <i>0</i>.
+The Modelica data reader will interpolate data when it reads the data from a file.
+Thus, it is possible to generate negative values due to the interpolation.
 </p>
 </html>", revisions="<html>
 <ul>
+<li>
+January 7, 2016, by Michael Wetter:<br/>
+Updated comment.
+</li>
 <li>
 October 27, 2011, by Wangda Zuo:<br/>
 First implementation.

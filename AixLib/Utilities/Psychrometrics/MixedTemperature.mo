@@ -116,13 +116,14 @@ equation
           fillPattern=FillPattern.Solid,
           textString="V")}),
     Documentation(info="<html>
-<p>This model calculates the mixed temperature of two different air flows by weighting with the volume flows.</p>
+<p>This model calculates the mixed temperature of two different air flows by weighting
+with the volume flows.</p>
 </html>", revisions="<html>
-<p><ul>
-<li><i>October 28, 2015&nbsp;</i> by Moritz Lauster:<br/>Moved to AixLib and renaming. Changed equations and simplified model. All unit conversions now need to be handled beforehand</li>
-</ul></p>
-<p><ul>
+<ul>
+<li><i>October 28, 2015&nbsp;</i> by Moritz Lauster:<br/>Moved to AixLib and renaming.
+  Changed equations and simplified model.
+  All unit conversions now need to be handled beforehand</li>
 <li><i>February 6, 2014&nbsp;</i> by Ole Odendahl:<br/>Model created and tested</li>
-</ul></p>
+</ul>
 </html>"));
 end MixedTemperature;

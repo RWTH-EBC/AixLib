@@ -1,15 +1,18 @@
 within AixLib.Building.LowOrder.Examples;
 model MultizoneExample "This is an example for a multizone office building"
+  import AixLib;
   extends Modelica.Icons.Example;
 
-  Multizone.MultizoneEquipped multizoneEquipped(buildingParam=
-        AixLib.DataBase.Buildings.OfficePassiveHouse.OfficePassiveHouse(),
+  Multizone.MultizoneEquipped multizoneEquipped(
       redeclare AixLib.Building.LowOrder.ThermalZone.ThermalZone zone(
         redeclare
         AixLib.Building.LowOrder.BaseClasses.BuildingPhysics.BuildingPhysicsVDI
         buildingPhysics(redeclare
           AixLib.Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG
-          corG)))
+          corG)),
+    redeclare AixLib.Airflow.AirHandlingUnit.AHU AirHandlingUnit "with AHU",
+    buildingParam=
+        AixLib.DataBase.Buildings.OfficePassiveHouse.OfficePassiveHouse())
     annotation (Placement(transformation(extent={{-26,-14},{28,36}})));
   Components.Weather.Weather weather(
     Outopt=1,
@@ -24,9 +27,9 @@ model MultizoneExample "This is an example for a multizone office building"
     tableOnFile=true,
     tableName="Tset",
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    columns=2:7,
     fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://AixLib/Resources/LowOrder_ExampleData/Tset_6Zone.txt"))
+        "modelica://AixLib/Resources/LowOrder_ExampleData/Tset_6Zone.txt"),
+    columns=2:6)
     annotation (Placement(transformation(extent={{-92,8},{-72,28}})));
   Modelica.Blocks.Sources.CombiTimeTable tableAHU(
     tableOnFile=true,
@@ -40,11 +43,11 @@ model MultizoneExample "This is an example for a multizone office building"
     tableOnFile=true,
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     tableName="Internals",
-    columns=2:19,
     fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://AixLib/Resources/LowOrder_ExampleData/Internals_Input_6Zone_SIA.txt"))
+        "modelica://AixLib/Resources/LowOrder_ExampleData/Internals_Input_6Zone_SIA.txt"),
+    columns=2:16)
     annotation (Placement(transformation(extent={{84,18},{64,38}})));
-  Modelica.Blocks.Sources.Constant const[6](each k=0)
+  Modelica.Blocks.Sources.Constant const[5](each k=0)
     annotation (Placement(transformation(extent={{-92,-22},{-72,-2}})));
 equation
   connect(weather.SolarRadiation_OrientedSurfaces, multizoneEquipped.radIn)

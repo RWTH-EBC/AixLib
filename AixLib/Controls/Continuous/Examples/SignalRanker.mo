@@ -5,8 +5,7 @@ model SignalRanker "Example model for signal ranker"
     annotation (Placement(transformation(extent={{-60,-20},{-40,0}})));
   Modelica.Blocks.Sources.Pulse pulse(period=0.25)
     annotation (Placement(transformation(extent={{-60,20},{-40,40}})));
-  AixLib.Controls.Continuous.SignalRanker sigRan(
-                                                  nin=3)
+  AixLib.Controls.Continuous.SignalRanker sigRan( nin=3)
     annotation (Placement(transformation(extent={{-20,20},{0,40}})));
   Modelica.Blocks.Sources.ExpSine expSine(freqHz=10, damping=1)
     annotation (Placement(transformation(extent={{-60,60},{-40,80}})));
@@ -29,8 +28,8 @@ Note that
 <code>sigRan.y[1] &ge; sigRan.y[2] &ge; sigRan.y[3]</code>.
 </p>
 <p align=\"center\">
-<img src=\"modelica://AixLib/Resources/Images/Controls/Continuous/Examples/SignalRankerU.png\" border=\"1\" alt=\"Input to signal ranker.\"/><br/>
-<img src=\"modelica://AixLib/Resources/Images/Controls/Continuous/Examples/SignalRankerY.png\" border=\"1\" alt=\"Output of signal ranker.\"/>
+<img src=\"modelica://AixLib/Resources/Resources/Images/Controls/Continuous/Examples/SignalRankerU.png\" border=\"1\" alt=\"Input to signal ranker.\"/><br/>
+<img src=\"modelica://AixLib/Resources/Resources/Images/Controls/Continuous/Examples/SignalRankerY.png\" border=\"1\" alt=\"Output of signal ranker.\"/>
 </p>
 </html>", revisions="<html>
 <ul>

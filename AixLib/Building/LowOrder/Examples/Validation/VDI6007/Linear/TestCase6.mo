@@ -48,9 +48,9 @@ equation
         "Simulate and plot"),
              __Dymola_experimentSetupOutput(events = false),
              Documentation(revisions="<html>
-<p><ul>
+<ul>
  <li><i>May 28, 2015 </i> by Marcus Fuchs:<br/>Added unit testing command to annotations</li>
- </ul></p>
+ </ul>
  <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
  </html>", info="<html>
 <p>Test Case 6 of the VDI6007: <a name=\"result_box\">L</a>oad calculation in compliance with the desired values of the indoor temperature and a setpoint for the type space S: </p>
@@ -60,10 +60,10 @@ equation
 <li>no shortwave radiation through the window </li>
 <li>no longwave radiation exchange between outer wall, window and ambience </li>
 </ul>
-<p><br>Reference: Heating/Cooling load </p>
+<p><br/>Reference: Heating/Cooling load </p>
 <p>Variable path: <code>heatFlowSensor.Q_flow</code> </p>
-<p><br>Maximum deviation: 9.25 W</p>
-<p><br>All values are given in the VDI 6007-1. </p>
+<p><br/>Maximum deviation: 9.25 W</p>
+<p><br/>All values are given in the VDI 6007-1. </p>
 <p>Same Test Case exists in VDI 6020. </p>
 <p>A script to run this test case can be found in AixLib\\Resources\\Scripts\\Dymola\\Building\\LowOrder\\Examples\\Validation\\Linear.</p>
 </html>"));

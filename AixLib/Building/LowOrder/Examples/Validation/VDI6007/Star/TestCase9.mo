@@ -146,18 +146,14 @@ equation
   connect(sunblind.Rad_Out, solarRadAdapter.solarRad_in) annotation (Line(
       points={{-5,73},{-0.5,73},{-0.5,72},{5,72}},
       color={255,128,0}));
-  annotation (            experiment(StopTime = 5.184e+006, Interval = 3600),
-             __Dymola_Commands(file=
+  annotation(__Dymola_Commands(file=
                                "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Star/TestCase9.mos"
         "Simulate and plot"),
-             experimentSetupOutput(events = false),
              Documentation(revisions="<html>
-<p><ul>
+<ul>
  <li><i>June 8, 2015 </i> by Marcus Fuchs:<br/>Added unit testing command to annotations</li>
- </ul></p>
- <ul>
    <li><i>March, 2012&nbsp;</i>
-          by Moritz Lauster:<br>
+          by Moritz Lauster:<br/>
           Implemented</li>
  </ul>
  </html>", info="<html>
@@ -166,9 +162,9 @@ equation
 <ul>
 <li>longwave radiation heat exchange is taken into account </li>
 </ul>
-<p><br>Reference: Room air temperature </p>
+<p><br/>Reference: Room air temperature </p>
 <p>Variable path: <code>reducedModel.airload.T</code> </p>
-<p><br><br>All values are given in the VDI 6007-1. </p>
+<p><br/><br/>All values are given in the VDI 6007-1. </p>
 <p>Same Test Case exists in VDI 6020. </p>
 <p>A script to run this test case can be found in AixLib\\Resources\\Scripts\\Dymola\\Building\\LowOrder\\Examples\\Validation\\Star.</p>
 </html>"));

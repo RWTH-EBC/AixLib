@@ -19,7 +19,8 @@ partial model partialHeaterCoolerPI
     "Zone definition"                                                            annotation(choicesAllMatching=true,Dialog(enable=recOrSep));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow Cooling annotation(Placement(transformation(extent={{26,-23},
             {6,-2}})));
-  Control.PITemp pITempCool(
+  Controls.Continuous.PITemp
+                 pITempCool(
     RangeSwitch=false,
     h=if not recOrSep then h_cooler else zoneParam.h_cooler,
     l=if not recOrSep then l_cooler else zoneParam.l_cooler,
@@ -29,19 +30,20 @@ partial model partialHeaterCoolerPI
     annotation (Placement(transformation(extent={{-20,-10},{0,-30}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow Heating annotation(Placement(transformation(extent={{26,22},
             {6,2}})));
-  Control.PITemp pITempHeat(
+  Controls.Continuous.PITemp
+                 pITempHeat(
     RangeSwitch=false,
     h=if not recOrSep then h_heater else zoneParam.h_heater,
     l=if not recOrSep then l_heater else zoneParam.l_heater,
     KR=if not recOrSep then KR_heater else zoneParam.KR_heater,
     TN=if not recOrSep then TN_heater else zoneParam.TN_heater)
     "PI control for heater" annotation (Placement(transformation(extent={{-20,10},{0,30}})));
-  Modelica.Blocks.Interfaces.RealOutput HeatingPower(
+  Modelica.Blocks.Interfaces.RealOutput heatingPower(
    final quantity="HeatFlowRate",
    final unit="W") "Power for heating"
     annotation (Placement(transformation(extent={{80,20},{120,60}}),
         iconTransformation(extent={{80,20},{120,60}})));
-  Modelica.Blocks.Interfaces.RealOutput CoolingPower(
+  Modelica.Blocks.Interfaces.RealOutput coolingPower(
    final quantity="HeatFlowRate",
    final unit="W") "Power for cooling"
     annotation (Placement(transformation(extent={{80,-26},{120,14}}),
@@ -68,9 +70,9 @@ equation
         color={191,0,0},
         smooth=Smooth.None));
   connect(Heating.Q_flow, pITempHeat.y) annotation (Line(points={{26,12},{26,20},{-1,20}}, color={0,0,127}));
-  connect(Heating.Q_flow, HeatingPower)
+  connect(Heating.Q_flow,heatingPower)
     annotation (Line(points={{26,12},{26,40},{100,40}}, color={0,0,127}));
-  connect(Cooling.Q_flow, CoolingPower) annotation (Line(points={{26,-12.5},{56,
+  connect(Cooling.Q_flow,coolingPower)  annotation (Line(points={{26,-12.5},{56,
           -12.5},{56,-6},{100,-6}}, color={0,0,127}));
   annotation (Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>

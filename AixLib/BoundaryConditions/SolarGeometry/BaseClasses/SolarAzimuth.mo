@@ -61,7 +61,7 @@ Changed model to avoid an event at solar noon.
 </li>
 <li>
 February 28, 2012, by Wangda Zuo:<br/>
-Add solar time convertion since it is removed from <code>solTim</code>.
+Add solar time conversion since it is removed from <code>solTim</code>.
 </li>
 <li>
 May 18, 2010, by Wangda Zuo:<br/>
@@ -87,5 +87,5 @@ First implementation.
           lineColor={0,0,127},
           textString="decAng"),
         Bitmap(extent={{-90,90},{90,-92}}, fileName=
-              "modelica://AixLib/Resources/Images/BoundaryConditions/SolarGeometry/BaseClasses/SolarAzimuth.png")}));
+              "modelica://AixLib/Resources/Resources/Images/BoundaryConditions/SolarGeometry/BaseClasses/SolarAzimuth.png")}));
 end SolarAzimuth;

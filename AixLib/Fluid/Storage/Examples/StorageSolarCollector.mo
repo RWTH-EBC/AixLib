@@ -43,12 +43,6 @@ model StorageSolarCollector
   Pipes.StaticPipe pipe1(D = 0.05, l = 5,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                    annotation(Placement(transformation(extent = {{-68, -20}, {-48, 0}})));
-  AixLib.HVAC.Sources.TempAndRad tempAndRad(temperatureOT=
-        AixLib.DataBase.Weather.SummerDay()) annotation (Placement(
-        transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
-        origin={32,34})));
   HeatGeneration.SolarThermal solarThermal(Collector = AixLib.DataBase.SolarThermal.FlatCollector(), A = 20,
     redeclare package Medium = Medium,
     m_flow_nominal=0.01)                                                                                     annotation(Placement(transformation(extent = {{24, -10}, {44, 10}})));
@@ -69,6 +63,15 @@ model StorageSolarCollector
   Modelica.Blocks.Math.Add add(k2 = -1) annotation(Placement(transformation(extent = {{-4, -4}, {4, 4}}, rotation = 90, origin = {98, 30})));
   Modelica.Blocks.Sources.Constant const1(k = 1) annotation(Placement(transformation(extent = {{82, 22}, {88, 28}})));
   Modelica.SIunits.Conversions.NonSIunits.Energy_kWh Q_ges;
+  Modelica.Blocks.Sources.CombiTimeTable hotSummerDay(
+    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+    table=[0,21,0; 3600,20.6,0; 7200,20.5,0; 10800,20.4,0; 14400,20,6; 18000,20.5,
+        106; 21600,22.4,251; 25200,24.1,402; 28800,26.3,540; 32400,28.4,657; 36000,
+        30,739; 39600,31.5,777; 43200,31.5,778; 46800,32.5,737; 50400,32.5,657;
+        54000,32.5,544; 57600,32.5,407; 61200,32.5,257; 64800,31.6,60; 68400,30.8,
+        5; 72000,22.9,0; 75600,21.2,0; 79200,20.6,0; 82800,20.3,0],
+    offset={273.15,0.01})
+    annotation (Placement(transformation(extent={{10,32},{30,52}})));
 equation
   der(Q_ges) = (solarThermal.volume.heatPort.Q_flow - fixedTemperature.port.Q_flow) / 3.6e6;
   connect(fixedTemperature.port, storage.heatPort) annotation(Line(points = {{-74, 24}, {-54, 24}}, color = {191, 0, 0}));
@@ -76,8 +79,10 @@ equation
   connect(pump.port_b, storage.port_a_heatGenerator) annotation(Line(points = {{-38, 54}, {-38, 32.8}, {-37.6, 32.8}}, color = {0, 127, 255}));
   connect(pipe.port_a, storage.port_b_heatGenerator) annotation(Line(points = {{-34, 0}, {-38, 0}, {-38, 16}, {-37.6, 16}}, color = {0, 127, 255}));
   connect(pipe1.port_b, storage.port_a_consumer) annotation(Line(points = {{-48, -10}, {-46, -10}, {-46, 14}}, color = {0, 127, 255}));
-  connect(tempAndRad.Rad, solarThermal.Irradiation) annotation(Line(points = {{36, 23.4}, {36, 10.8}, {35, 10.8}}, color = {0, 0, 127}));
-  connect(tempAndRad.T_out, solarThermal.T_air) annotation(Line(points = {{28, 23.4}, {28, 10.8}}, color = {0, 0, 127}));
+  connect(hotSummerDay.y[2], solarThermal.Irradiation) annotation(Line(points={{31,42},
+          {31,10.8},{35,10.8}},                                                                                       color = {0, 0, 127}));
+  connect(hotSummerDay.y[1], solarThermal.T_air) annotation(Line(points={{31,42},
+          {31,22},{28,22},{28,10.8}},                                                               color = {0, 0, 127}));
   connect(pulse.y, boundary_ph1.p_in) annotation(Line(points={{-121,-4},{-114,-2}},      color = {0, 0, 127}));
   connect(simpleValve.port_b, pump.port_a) annotation(Line(points = {{79, 52}, {78, 52}, {78, 74}, {-38, 74}}, color = {0, 127, 255}));
   connect(solarThermal.port_b, temperatureSensor.port_a) annotation(Line(points = {{44, 0}, {58, 0}}, color = {0, 127, 255}));
@@ -99,14 +104,20 @@ equation
   connect(temperatureSensor.T, PI.u_m) annotation (Line(
       points={{68,11},{68,18},{92.8,12}},
       color={0,0,127}));
-  annotation( experiment(StopTime = 172800, Interval = 60),Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+  annotation (experiment(StopTime = 172800, Interval = 60),Documentation(info = "<html>
+ <h4><font color=\"#008000\">Overview</font></h4>
  <p>This is a simple example of a storage and a solar collector.</p>
  </html>", revisions="<html>
- <p>November 2014, Marcus Fuchs</p>
- <p><ul>
- <li>Changed model to use Annex 60 base class</li>
- </ul></p>
- <p>13.12.2013, by <i>Sebastian Stinner</i>: implemented</p>
+ <ul>
+ <li><i>April 2016&nbsp;</i>
+    by Peter Remmen:<br/>
+    Replace TempAndRad model</li>
+ <li><i>November 2014&nbsp;</i>
+    by Marcus Fuchs:<br/>
+    Changed model to use Annex 60 base class</li>
+ <li><i>13.12.2013</i>
+       by Sebastian Stinner:<br/>
+      implemented</li>
+ </ul>
  </html>"));
 end StorageSolarCollector;

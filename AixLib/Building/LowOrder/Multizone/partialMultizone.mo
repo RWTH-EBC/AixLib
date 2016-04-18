@@ -1,5 +1,5 @@
 within AixLib.Building.LowOrder.Multizone;
-partial model partialMultizone "partial class for multizone models"
+partial model PartialMultizone "Partial class for multizone models"
   parameter AixLib.DataBase.Buildings.BuildingBaseRecord buildingParam
     "Choose setup for the building" annotation (choicesAllMatching = false);
 protected
@@ -7,13 +7,12 @@ protected
     "Choose setup for zones" annotation (choicesAllMatching=false);
   parameter Integer orientations[:]=zoneParam.n "Number cardinal directions";
 public
-  replaceable AixLib.Building.LowOrder.ThermalZone.ThermalZoneEquipped zone[buildingParam.numZones](
-      zoneParam=zoneParam) constrainedby
-    AixLib.Building.LowOrder.ThermalZone.partialThermalZone
-    "Choose thermal zone model"                                                         annotation (Placement(transformation(extent={{40,35},
+  replaceable AixLib.Building.LowOrder.ThermalZone.ThermalZoneEquipped zone[buildingParam.numZones] constrainedby
+    AixLib.Building.LowOrder.ThermalZone.PartialThermalZone(zoneParam=zoneParam)
+    "Choose thermal zone model" annotation (Placement(transformation(extent={{40,35},
             {80,75}})),choicesAllMatching=true);
   AixLib.Utilities.Interfaces.SolarRad_in radIn[max(orientations)]
-    "Solar radiation"                                                                annotation (
+    "Solar radiation" annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
@@ -21,7 +20,6 @@ public
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-62,90})));
-
   Modelica.Blocks.Interfaces.RealInput internalGains[3*buildingParam.numZones]
     "Input profiles for internal gains persons, machines, light"
     annotation (Placement(transformation(extent={{20,-20},{-20,20}},
@@ -144,10 +142,10 @@ equation
           fillPattern=FillPattern.Solid)}),
     Documentation(revisions="<html>
 <ul>
-<li><i>June 22, 2015&nbsp;</i> by Moritz Lauster:<br>Changed building physics to AixLib</li>
-<li><i>April 25, 2014&nbsp;</i> by Ole Odendahl:<br>Implemented</li>
+<li><i>June 22, 2015&nbsp;</i> by Moritz Lauster:<br/>Changed building physics to AixLib</li>
+<li><i>April 25, 2014&nbsp;</i> by Ole Odendahl:<br/>Implemented</li>
 </ul>
 </html>", info="<html>
 <p>This is a partial model for multi-zone models. It defines connectors and a replaceable thermal zone model.</p>
 </html>"));
-end partialMultizone;
+end PartialMultizone;

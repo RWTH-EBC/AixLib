@@ -46,11 +46,10 @@ equation
              __Dymola_Commands(file=
                                "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Star/TestCase1.mos"
         "Simulate and plot"),
-             experimentSetupOutput(events = false),
              Documentation(revisions="<html>
 <ul>
-<li><i>June 8, 2015 </i> by Marcus Fuchs:<br>Added unit testing command to annotations </li>
-<li><i>March, 2012&nbsp;</i> by Moritz Lauster:<br>Implemented </li>
+<li><i>June 8, 2015 </i> by Marcus Fuchs:<br/>Added unit testing command to annotations </li>
+<li><i>March, 2012&nbsp;</i> by Moritz Lauster:<br/>Implemented </li>
 </ul>
 </html>",  info="<html>
 <p>Test Case 1 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to a convective heat source for Type room S </p>
@@ -62,7 +61,7 @@ equation
 </ul>
 <p>Reference: Room air temperature </p>
 <p>Variable path: <code>reducedModel.airload.T</code> </p>
-<p><br><br>All values are given in the VDI 6007-1. </p>
+<p><br/><br/>All values are given in the VDI 6007-1. </p>
 <p>Same Test Case exists in VDI 6020. </p>
 <p>A script to run this test case can be found in AixLib\\Resources\\Scripts\\Dymola\\Building\\LowOrder\\Examples\\Validation\\Star.</p>
 </html>"));

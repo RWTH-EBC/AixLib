@@ -10,7 +10,7 @@ model ModelTemplateDocumentation "Template documentation for EBC's models"
   <li>How is it used normally? </li>
   </ul>
   <h4><span style=\"color:#008000\">Level of Development</span></h4>
-  <p><img src=\"modelica://AixLib/Images/stars0.png\" alt=\"stars: 0 out of 5\"/></p>
+  <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars0.png\" alt=\"stars: 0 out of 5\"/></p>
   <p><br/>Reward yourself for your modeling efforts by adjusting the star rating of your model to its actual level of development. This helps others to get an idea of how far the model is developed at a quick glimpse. </p>
   <p>During model design, the rating is 0 stars. </p>
   <ul>
@@ -20,7 +20,7 @@ model ModelTemplateDocumentation "Template documentation for EBC's models"
   <li>4 stars: the model comes with examples for validation for this specific model (EBC); a comparison with measurement data includes an error analysis</li>
   <li>5 stars: the model documentation includes a link to publications which show model validation for this specific model(EBC) and can be cited by others</li>
   </ul>
-  <p><br/>The folder AixLib.HVAC.images contains images star0.png - star5.png. Replace the image above as appropriate.</p>
+  <p><br/>The folder AixLib.HVAC.Resources/Images contains Resources/Images star0.png - star5.png. Replace the image above as appropriate.</p>
   <h4><span style=\"color:#008000\">Assumptions</span></h4>
   <p>Note assumptions such as a specific definition ranges for the model, possible medium models, allowed combinations with other models etc.</p>
   <h4><span style=\"color:#008000\">Known Limitations</span></h4>

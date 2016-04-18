@@ -11,7 +11,11 @@ parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = 
         "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt",
     WeatherData(tableOnFile=false, table=weatherDataDay.weatherData))                                                                                                     annotation(Placement(transformation(extent = {{-60, 42}, {-30, 62}})));
 
-  AixLib.HVAC.HeatGeneration.IdealHeaterCooler         idealHeaterCooler
+  Utilities.Sources.HeaterCooler.HeaterCoolerPI        idealHeaterCooler(
+    h_heater=100000,
+    KR_heater=10000,
+    l_cooler=-100000,
+    KR_cooler=10000)
     annotation (Placement(transformation(extent={{-22,-52},{-2,-32}})));
   Modelica.Blocks.Sources.Constant infiltrationRate(k = 1) annotation(Placement(transformation(extent = {{-88, -32}, {-74, -18}})));
   Modelica.Blocks.Sources.Constant infiltrationTemperature(k = 288.15) annotation(Placement(transformation(extent = {{-88, -10}, {-74, 4}})));
@@ -100,13 +104,14 @@ parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = 
         590400,0,0,0,0; 593940,0,0,0,0; 594000,0,0,0,0; 597540,0,0,0,0; 597600,
         0,0,0,0; 601140,0,0,0,0; 601200,0,0,0,0; 604740,0,0,0,0])                                                                                                     annotation(Placement(transformation(extent = {{14, -71}, {28, -57}})));
   Modelica.Blocks.Sources.CombiTimeTable heatingCooling(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableName = "UserProfilesHeat", fileName = Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/UserProfilesHeatSimple.txt"), columns = {2, 3}, tableOnFile = false, table = [0, 295.15, 295.2; 3600, 295.1, 295.2; 7200, 295.1, 295.2; 10800, 295.1, 295.2; 14400, 295.1, 295.2; 18000, 295.1, 295.2; 21600, 295.1, 295.2; 25200, 300.1, 300.2; 28800, 300.1, 300.2; 32400, 300.1, 300.2; 36000, 300.1, 300.2; 39600, 300.1, 300.2; 43200, 300.1, 300.2; 46800, 300.1, 300.2; 50400, 300.1, 300.2; 54000, 300.1, 300.2; 57600, 300.1, 300.2; 61200, 300.1, 300.2; 64800, 300.1, 300.2; 68400, 295.1, 295.2; 72000, 295.1, 295.2; 75600, 295.1, 295.2; 79200, 295.1, 295.2; 82800, 295.1, 295.2; 86400, 295.1, 295.2]) annotation(Placement(transformation(extent = {{-56, -75}, {-42, -61}})));
-  Modelica.Blocks.Interfaces.RealOutput heatDemand;
-  Modelica.Blocks.Interfaces.RealOutput coolDemand;
-
+  Utilities.Sensors.TEnergyMeter
+                          coolMeter "measures cooling energy" annotation (Placement(transformation(extent={{52,-66},
+            {72,-46}})));
+  Utilities.Sensors.TEnergyMeter
+                          heatMeter "measures heating energy" annotation (Placement(transformation(extent={{52,-48},
+            {72,-28}})));
 equation
   TRoom = thermalZone.buildingPhysics.reducedOrderModel.airload.T;
-  heatDemand = idealHeaterCooler.heatMeter.q_kwh;
-  coolDemand = idealHeaterCooler.coolMeter.q_kwh;
   connect(weather.SolarRadiation_OrientedSurfaces, thermalZone.solarRad_in) annotation(Line(points={{-52.8,
           41},{-52.8,6.98},{-7.4,6.98}},                                                                                                    color = {255, 128, 0}));
   connect(infiltrationRate.y, thermalZone.ventilationRate) annotation(Line(points={{-73.3,
@@ -114,17 +119,19 @@ equation
   connect(weather.WeatherDataVector, thermalZone.weather) annotation(Line(points = {{-45.1, 41}, {-45.1, 1}, {-6.62, 1}}, color = {0, 0, 127}));
   connect(internalGains.y, thermalZone.internalGains) annotation(Line(points={{28.7,
           -64},{34,-64},{34,-34},{13.4,-34},{13.4,-6.8}},                                                                                        color = {0, 0, 127}));
-  connect(heatingCooling.y[1], idealHeaterCooler.soll_heat) annotation (Line(
-      points={{-41.3,-68},{-9,-68},{-9,-46.8}},
-      color={0,0,127}));
-  connect(heatingCooling.y[2], idealHeaterCooler.soll_cool) annotation (Line(
-      points={{-41.3,-68},{-16.8,-68},{-16.8,-46.8}},
-      color={0,0,127}));
-  connect(idealHeaterCooler.HeatCoolRoom, thermalZone.internalGainsConv)
-    annotation (Line(points={{-2.6,-40.8},{3,-40.8},{3,-6.54}}, color={191,0,0}));
   connect(infiltrationTemperature.y, thermalZone.ventilationTemperature)
     annotation (Line(points={{-73.3,-3},{-39.65,-3},{-39.65,-4.07},{-6.75,-4.07}},
         color={0,0,127}));
+  connect(heatingCooling.y[1], idealHeaterCooler.setPointHeat) annotation (Line(
+        points={{-41.3,-68},{-24,-68},{-9.8,-68},{-9.8,-49.2}}, color={0,0,127}));
+  connect(heatingCooling.y[2], idealHeaterCooler.setPointCool) annotation (Line(
+        points={{-41.3,-68},{-14.4,-68},{-14.4,-49.2}}, color={0,0,127}));
+  connect(idealHeaterCooler.heatCoolRoom, thermalZone.internalGainsConv)
+    annotation (Line(points={{-3,-46},{3,-46},{3,-6.54}}, color={191,0,0}));
+  connect(idealHeaterCooler.heatingPower, heatMeter.p)
+    annotation (Line(points={{-2,-38},{38,-38},{53.4,-38}}, color={0,0,127}));
+  connect(idealHeaterCooler.coolingPower, coolMeter.p) annotation (Line(points=
+          {{-2,-42.6},{44,-42.6},{44,-56},{53.4,-56}}, color={0,0,127}));
   annotation (Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Example for setting up a simulation for a thermal zone.</p>
@@ -136,9 +143,9 @@ equation
 </ul>
 <p>added record for one winter day, now it&apos;s a ready to run example</p>
 <ul>
-<li><i>June 24, 2014 </i>by Moritz Lauster:<br>Implemented </li>
+<li><i>June 24, 2014 </i>by Moritz Lauster:<br/>Implemented </li>
 </ul>
 </html>"),  experiment(StopTime=86400, Interval=3600),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}})));
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
+            100,100}})));
 end ThermalZoneExample;

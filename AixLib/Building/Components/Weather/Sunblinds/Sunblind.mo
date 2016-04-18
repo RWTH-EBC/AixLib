@@ -129,7 +129,7 @@ equation
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>This model represents a sunblind to reduce the vectorial radiance on facades, windows. etc. </p>
 <h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <ul>
 <li>You can define the amount of radiance hitting the facade with gsunblind, which states how much radiance goes through the closed sunblind</li>
@@ -144,10 +144,10 @@ equation
 <p>This model is part of <a href=\"AixLib.Building.Components.Walls.Wall\">Wall</a> and checked in the Examples <a href=\"AixLib.Building.Examples.Walls.InsideWall\">InsideWall</a> and <a href=\"AixLib.Building.Examples.Walls.OutsideWall\">OutsideWall</a>. </p>
 </html>",
         revisions="<html>
-<p><ul>
+<ul>
 <li><i>January 16, 2015&nbsp;</i> by Ana Constantin:<br/>Implemented as extending from PartialSunblind and using the new solar radiation connectors</li>
 <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>January 2012,&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>"));
 end Sunblind;

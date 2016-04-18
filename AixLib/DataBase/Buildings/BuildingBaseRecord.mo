@@ -2,25 +2,28 @@ within AixLib.DataBase.Buildings;
 record BuildingBaseRecord "Base record definition for building records"
   extends Modelica.Icons.Record;
   // General
-  parameter String buildingID = "M4120" "unique identifier of the building";
-  parameter String usage = "Office Building" "typical usage of the building";
-  parameter Integer numZones=6 "Number of Zones in the building";
-  parameter AixLib.DataBase.Buildings.ZoneBaseRecord zoneSetup[:]={
-      AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_1_Meeting(),AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_2_Storage(),
-      AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_3_Office(),AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_4_Restroom(),
-      AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_5_ICT(),AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_6_Floor()}
+  parameter String buildingID="M4120" "unique identifier of the building";
+  parameter String usage="Office Building" "typical usage of the building";
+  parameter Integer numZones=1 "Number of Zones in the building";
+  parameter AixLib.DataBase.Buildings.ZoneBaseRecord zoneSetup[:]={AixLib.DataBase.Buildings.ZoneBaseRecord()}
     "Provide zone setup as vector entries to zone parameter definitions";
   parameter Modelica.SIunits.Volume Vair=4850.5 "Volume of building";
-  parameter Modelica.SIunits.Area BuildingArea =  2000 "Area of building";
+  parameter Modelica.SIunits.Area BuildingArea=2000 "Area of building";
+
+  ///************ Air Handling Unit ************///
   // AHU Modes
-  parameter Boolean heating=true "Heating Function of AHU" annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"));
-  parameter Boolean cooling=true "Cooling Function of AHU" annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"));
-  parameter Boolean dehumidification=if heating and cooling then true else false
+  parameter Boolean heatingAHU=true "Heating Function of AHU"
+    annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"));
+  parameter Boolean coolingAHU=true "Cooling Function of AHU"
+    annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"));
+  parameter Boolean dehumidificationAHU=if heatingAHU and coolingAHU then true
+       else false
     "Dehumidification Function of AHU (Cooling and Heating must be enabled)"
-    annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"));
-  parameter Boolean humidification=if heating and cooling then true else false
+    annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"), enable=(heating and cooling));
+  parameter Boolean humidificationAHU=if heatingAHU and coolingAHU then true
+       else false
     "Humidification Function of AHU (Cooling and Heating must be enabled)"
-    annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"));
+    annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"), enable=(heating and cooling));
   // AHU Values
   parameter Real BPF_DeHu(
     min=0,
@@ -28,16 +31,40 @@ record BuildingBaseRecord "Base record definition for building records"
     "By-pass factor of cooling coil during dehumidification. Necessary to calculate the real outgoing enthalpy flow of heat exchanger in dehumidification mode taking the surface enthalpy of the cooling coil into account"
     annotation (Dialog(tab="AirHandlingUnit", group="Settings AHU Value"));
   parameter Boolean HRS=true
-    "Is a HeatRecoverySystem physically integrated in the AHU?"                                annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"), choices(checkBox=true));
+    "Is a HeatRecoverySystem physically integrated in the AHU?" annotation (
+      Dialog(tab="AirHandlingUnit", group="AHU Modes"), choices(checkBox=true));
   // Efficiency of HRS (both parameters = 0, if HRS is not physically integrated in the AHU at all)
   parameter Real efficiencyHRS_enabled(
     min=0,
-    max=1) = 0.8 "efficiency of HRS in the AHU modes when HRS is enabled" annotation (Dialog(tab="AirHandlingUnit", group="Settings AHU Value", enable=HRS));
+    max=1) = 0.8 "efficiency of HRS in the AHU modes when HRS is enabled"
+    annotation (Dialog(
+      tab="AirHandlingUnit",
+      group="Settings AHU Value",
+      enable=HRS));
   parameter Real efficiencyHRS_disabled(
     min=0,
     max=1) = 0.2
     "taking a little heat transfer into account although HRS is disabled (in the case that a HRS is physically installed in the AHU)"
     annotation (Dialog(tab="AirHandlingUnit", group="Settings AHU Value"));
+  parameter Real sampleRateAHU(min=0) = 1800
+    "time period in s for sampling (= converting time-continous into time-discrete) input variables. Recommendation: half of the duration of the simulation interval"
+    annotation (Dialog(tab="AirHandlingUnit", group="Settings for State Machines"));
+  // assumed increase in ventilator pressure
+  parameter Modelica.SIunits.Pressure dpAHU_sup=800
+    "pressure difference over supply fan"
+    annotation (Dialog(tab="AirHandlingUnit", group="Fans"));
+  parameter Modelica.SIunits.Pressure dpAHU_eta=800
+    "pressure difference over extract fan"
+    annotation (Dialog(tab="AirHandlingUnit", group="Fans"));
+  // assumed efficiencies of the ventilators
+  parameter Modelica.SIunits.Efficiency effFanAHU_sup=0.7
+    "efficiency of supply fan"
+    annotation (Dialog(tab="AirHandlingUnit", group="Fans"));
+  parameter Modelica.SIunits.Efficiency effFanAHU_eta=0.7
+    "efficiency of extract fan"
+    annotation (Dialog(tab="AirHandlingUnit", group="Fans"));
+  ///*******************************************///
+
   annotation (Documentation(revisions="<html>
 <ul>
   <li><i>January 4, 2016&nbsp;</i> by Moritz Lauster:<br/>Clean up of record</li>

@@ -253,8 +253,8 @@ equation
 <li>no cooling or heating equipment</li>
 </ul>
 </html>", revisions="<html>
- <p><ul>
+ <ul>
  <li><i>March 19, 2015</i> by Peter Remmen:<br/>Implemented</li>
- </ul></p>
+ </ul>
  </html>"));
 end Case600FF;

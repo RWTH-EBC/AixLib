@@ -334,9 +334,9 @@ package ASHRAE140
             origin={65,0},
             rotation=90)}),
       Documentation(revisions="<html>
- <p><ul>
+ <ul>
  <li><i>March 9, 2015</i> by Ana Constantin:<br/>Implemented</li>
- </ul></p>
+ </ul>
  </html>",  info="<html>
 </html>"));
   end SouthFacingWindows;
@@ -686,9 +686,9 @@ package ASHRAE140
             origin={65,0},
             rotation=90)}),
       Documentation(revisions="<html>
- <p><ul>
+ <ul>
  <li><i>March 9, 2015</i> by Ana Constantin:<br/>Implemented</li>
- </ul></p>
+ </ul>
  </html>",  info="<html>
 </html>"));
   end EastWestFacingWindows;

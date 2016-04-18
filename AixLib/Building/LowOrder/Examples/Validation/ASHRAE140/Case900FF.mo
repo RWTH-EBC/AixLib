@@ -50,7 +50,7 @@ model Case900FF
     annotation (Placement(transformation(extent={{-10,-50},{3,-37}})));
   Modelica.Blocks.Sources.Constant Source_TsetH(k=273.15 + 20)
     annotation (Placement(transformation(extent={{40,-50},{27,-37}})));
-  AixLib.HVAC.HeatGeneration.IdealHeaterCooler            idealHeaterCooler(
+  AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPI idealHeaterCooler(
     TN_heater=1,
     TN_cooler=1,
     h_heater=1e6,
@@ -122,12 +122,10 @@ equation
 
   FreeFloatTemperature = reducedOrderModel.airload.T;
 
-  connect(Source_TsetC.y,idealHeaterCooler. soll_cool)       annotation (Line(
-      points={{3.65,-43.5},{11.2,-43.5},{11.2,-28.8}},
-      color={0,0,127}));
-  connect(Source_TsetH.y,idealHeaterCooler. soll_heat)       annotation (Line(
-      points={{26.35,-43.5},{19,-43.5},{19,-28.8}},
-      color={0,0,127}));
+  connect(Source_TsetC.y, idealHeaterCooler.setPointCool) annotation (Line(
+        points={{3.65,-43.5},{13.6,-43.5},{13.6,-31.2}}, color={0,0,127}));
+  connect(Source_TsetH.y, idealHeaterCooler.setPointHeat) annotation (Line(
+        points={{26.35,-43.5},{18.2,-43.5},{18.2,-31.2}}, color={0,0,127}));
   connect(Source_InternalGains_convective.y, InternalGains_convective.Q_flow)
     annotation (Line(
       points={{-98.35,-24.5},{-93,-24.5},{-93,-23},{-92,-23},{-92,-24},{-91,-24}},
@@ -160,9 +158,9 @@ equation
     annotation (Line(
       points={{-72,-52},{-52,-52},{-52,-31},{-7,-31},{-7,-13},{41,-13},{41,12.3}},
       color={191,0,0}));
-  connect(idealHeaterCooler.HeatCoolRoom, reducedOrderModel.internalGainsConv)
+  connect(idealHeaterCooler.heatCoolRoom, reducedOrderModel.internalGainsConv)
     annotation (Line(
-      points={{25.4,-22.8},{32,-22.8},{32,12.3},{32.2,12.3}},
+      points={{25,-28},{32,-28},{32,12.3},{32.2,12.3}},
       color={191,0,0}));
   connect(AirExchangeRate.y, reducedOrderModel.ventilationRate) annotation (
       Line(
@@ -274,8 +272,8 @@ Documentation(info="<html>
 <li>no cooling or heating equipment</li>
 </ul>
 </html>", revisions="<html>
- <p><ul>
+ <ul>
  <li><i>March 19, 2015</i> by Peter Remmen:<br/>Implemented</li>
- </ul></p>
+ </ul>
  </html>"));
 end Case900FF;

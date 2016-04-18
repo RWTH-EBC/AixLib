@@ -209,7 +209,7 @@ equation
         color={191,0,0}));
   connect(Source_TsetCool.y[1], idealHeaterCooler.setPointCool) annotation (
       Line(points={{3.65,-43.5},{13.6,-43.5},{13.6,-31.2}}, color={0,0,127}));
-  connect(idealHeaterCooler.CoolingPower, coolMeter.p) annotation (Line(points=
+  connect(idealHeaterCooler.coolingPower, coolMeter.p) annotation (Line(points=
          {{26,-24.6},{79,-24.6},{79,-1},{86.4,-1}}, color={0,0,127}));
   connect(const.y, idealHeaterCooler.setPointHeat) annotation (Line(points={{19.5,
           -54},{23,-54},{23,-42},{18.2,-42},{18.2,-31.2}}, color={0,0,127}));
@@ -297,11 +297,11 @@ equation
 <li>From 0700 hours to 1800 hours, vent fan = OFF</li>
 <li>Heating = always OFF</li>
 <li>From 1800 hours to 0700 hours, cool = OFF</li>
-<li>From 0700 hours to 1800 hours, cool = ON if temperature &GT; 27 degC; otherwise, cool = OFF</li>
+<li>From 0700 hours to 1800 hours, cool = ON if temperature &gt; 27 degC; otherwise, cool = OFF</li>
 </ul>
 </html>", revisions="<html>
- <p><ul>
+ <ul>
  <li><i>March 19, 2015</i> by Peter Remmen:<br/>Implemented</li>
- </ul></p>
+ </ul>
  </html>"));
 end Case650;

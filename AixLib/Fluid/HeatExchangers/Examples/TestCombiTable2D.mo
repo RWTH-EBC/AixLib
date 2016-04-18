@@ -15,9 +15,13 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Example to test the tables used within the HeatPump model</p>
  </html>", revisions = "<html>
- <p>25.11.2013, Kristian Huchtemann</p>
- <p><ul>
- <li>implemented</li>
- </ul></p>
+ <ul>
+ <li><i>09.10.2013&nbsp;</i>
+    by Marcus Fuchs:<br/>
+    corrected error in equation</li>
+ <li><i>November 25, 2013&nbsp;</i>
+    by Kristian Huchtemann:<br/>
+    implemented</li>
+ </ul>
  </html>"));
 end TestCombiTable2D;

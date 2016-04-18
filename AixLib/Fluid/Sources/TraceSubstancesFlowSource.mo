@@ -11,16 +11,16 @@ model TraceSubstancesFlowSource
   parameter Modelica.SIunits.MassFlowRate m_flow = 0
     "Fixed mass flow rate going out of the fluid port"
     annotation (Dialog(enable = not use_m_flow_in));
-  Modelica.Blocks.Interfaces.RealInput m_flow_in if
-       use_m_flow_in "Prescribed mass flow rate for extra property"
+  Modelica.Blocks.Interfaces.RealInput m_flow_in(final unit="kg/s")
+    if use_m_flow_in "Prescribed mass flow rate for extra property"
     annotation (Placement(transformation(extent={{-141,-20},{-101,20}})));
 
 protected
-  Modelica.Blocks.Interfaces.RealInput m_flow_in_internal
+  Modelica.Blocks.Interfaces.RealInput m_flow_in_internal(final unit="kg/s")
     "Needed to connect to conditional connector";
   parameter Medium.ExtraProperty C_in_internal[Medium.nC](
-       each fixed=false,
-       quantity=Medium.extraPropertiesNames) "Boundary trace substances"
+    each fixed=false,
+    final quantity=Medium.extraPropertiesNames) "Boundary trace substances"
     annotation (Dialog(enable = Medium.nC > 0));
 initial algorithm
   for i in 1:Medium.nC loop
@@ -49,18 +49,41 @@ equation
   annotation (
 defaultComponentName="souTraSub",
 Documentation(info="<html>
+<p>
 This model can be used to inject trace substances into a system.
 The model adds a mass flow rate to its port with a
 trace substance concentration of <i>1</i>.
+</p>
+<h4>Typical use and important parameters</h4>
 <p>
 A typical use of this model is to add carbon dioxide to room air, since the
 carbon dioxide concentration is typically so small that it need not be
 added to the room mass balance, and since the mass flow rate can be
 made small compared to the room volume if the medium that leaves this
 component has a carbon dioxide concentration of <i>1</i>.
+The parameter <code>substanceName</code> must be set to the name of the substance
+that is injected into the fluid.
+</p>
+<p>
+Note however that mixing volumes from the package
+<a href=\"modelica://AixLib.Fluid.MixingVolumes\">AixLib.Fluid.MixingVolumes</a>
+allow to directly add a trace substance mass flow rate,
+which is more efficient than using this model.
 </p>
 </html>", revisions="<html>
 <ul>
+<li>
+January 26, 2016, by Michael Wetter:<br/>
+Added <code>unit</code> and <code>quantity</code> attributes.
+</li>
+<li>
+January 19, 2016, by Michael Wetter:<br/>
+Updated documentation due to the addition of an input for trace substance
+in the mixing volume.
+This is for
+<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/372\">
+issue 372</a>.
+</li>
 <li>
 October 30, 2015, by Matthis Thorade:<br/>
 Removed <code>nPorts=1</code> in extension of the base class

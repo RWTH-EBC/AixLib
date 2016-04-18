@@ -25,8 +25,7 @@ model GroundFloorBuildingEnvelope
     "thickness IWsimple "                                                            annotation(Dialog(group = "Dimensions", descriptionLabel = true));
   // Outer walls properties
   parameter Real solar_absorptance_OW = 0.6 "Solar absoptance outer walls " annotation(Dialog(group = "Outer wall properties", descriptionLabel = true));
-  parameter Modelica.SIunits.Temperature T_Ground = 283.15 "Ground temperature"
-                                                                                annotation(Dialog(group = "Outer wall properties", descriptionLabel = true));
+
   //Windows and Doors
   parameter Modelica.SIunits.Area windowarea_11 = 8.44 " Area Window11" annotation(Dialog(group = "Windows and Doors", descriptionLabel = true, joinNext = true));
   parameter Modelica.SIunits.Area windowarea_12 = 1.73 " Area Window12  " annotation(Dialog(group = "Windows and Doors", descriptionLabel = true));
@@ -52,7 +51,7 @@ model GroundFloorBuildingEnvelope
   parameter Modelica.SIunits.Temperature Tset_WC = 291.15 "Tset_WC" annotation(Dialog(group = "Dynamic ventilation", descriptionLabel = true, joinNext = true, enable = if withDynamicVentilation then true else false));
   parameter Modelica.SIunits.Temperature Tset_Kitchen = 295.15 "Tset_kitchen" annotation(Dialog(group = "Dynamic ventilation", descriptionLabel = true, enable = if withDynamicVentilation then true else false));
   Modelica.Blocks.Sources.Constant AirExchangePort_doorSt(k = 0) "Storage" annotation(Placement(transformation(extent = {{-116, -68}, {-100, -52}})));
-  Rooms.OFD.Ow2IwL2IwS1Gr1Uf1 Livingroom(TMC = TMC, TIR = TIR, room_lengthb = length2, room_width = room_width, room_height = room_height, room_length = length1 + length2 + thickness_IWsimple, solar_absorptance_OW = solar_absorptance_OW, T_Ground = T_Ground, windowarea_OW1 = windowarea_11, windowarea_OW2 = windowarea_12, withDoor1 = false, withDoor2 = false, withWindow1 = true, withWindow2 = true, withFloorHeating = withFloorHeating, withDynamicVentilation = withDynamicVentilation, HeatingLimit = HeatingLimit, Max_VR = Max_VR, Diff_toTempset = Diff_toTempset, Tset = Tset_Livingroom,
+  Rooms.OFD.Ow2IwL2IwS1Gr1Uf1 Livingroom(TMC = TMC, TIR = TIR, room_lengthb = length2, room_width = room_width, room_height = room_height, room_length = length1 + length2 + thickness_IWsimple, solar_absorptance_OW = solar_absorptance_OW, windowarea_OW1 = windowarea_11, windowarea_OW2 = windowarea_12, withDoor1 = false, withDoor2 = false, withWindow1 = true, withWindow2 = true, withFloorHeating = withFloorHeating, withDynamicVentilation = withDynamicVentilation, HeatingLimit = HeatingLimit, Max_VR = Max_VR, Diff_toTempset = Diff_toTempset, Tset = Tset_Livingroom,
     TRY=TRY,
     T0_air=295.15,
     T0_OW1=295.15,
@@ -62,7 +61,7 @@ model GroundFloorBuildingEnvelope
     T0_IW2=295.15,
     T0_CE=295.13,
     T0_FL=295.13)                                                                                                     annotation(Placement(transformation(extent = {{-86, 14}, {-42, 78}})));
-  Rooms.OFD.Ow2IwL1IwS1Gr1Uf1 Hobby(TMC = TMC, TIR = TIR, room_length = length1, room_width = room_width, room_height = room_height, solar_absorptance_OW = solar_absorptance_OW, T_Ground = T_Ground, windowarea_OW2 = windowarea_22, withDoor1 = false, withDoor2 = false, withWindow1 = false, withWindow2 = true, withFloorHeating = withFloorHeating,                                                                                                    withDynamicVentilation = withDynamicVentilation, HeatingLimit = HeatingLimit, Max_VR = Max_VR, Diff_toTempset = Diff_toTempset, Tset = Tset_Hobby,
+  Rooms.OFD.Ow2IwL1IwS1Gr1Uf1 Hobby(TMC = TMC, TIR = TIR, room_length = length1, room_width = room_width, room_height = room_height, solar_absorptance_OW = solar_absorptance_OW, windowarea_OW2 = windowarea_22, withDoor1 = false, withDoor2 = false, withWindow1 = false, withWindow2 = true, withFloorHeating = withFloorHeating,                                                                                                    withDynamicVentilation = withDynamicVentilation, HeatingLimit = HeatingLimit, Max_VR = Max_VR, Diff_toTempset = Diff_toTempset, Tset = Tset_Hobby,
     TRY=TRY,
     T0_air=295.15,
     T0_OW1=295.15,
@@ -71,7 +70,7 @@ model GroundFloorBuildingEnvelope
     T0_IW2=295.15,
     T0_CE=295.13,
     T0_FL=295.13)                                                                                                     annotation(Placement(transformation(extent = {{84, 28}, {46, 76}})));
-  Rooms.OFD.Ow2IwL1IwS1Gr1Uf1 WC_Storage(TMC = TMC, TIR = TIR, room_length = length4, room_width = room_width, room_height = room_height, solar_absorptance_OW = solar_absorptance_OW, T_Ground = T_Ground, withWindow1 = true, windowarea_OW1 = windowarea_41, withDoor2 = true, door_width_OD2 = door_width_42, door_height_OD2 = door_height_42, withWindow2 = false, withDoor1 = false, withFloorHeating = withFloorHeating,                                                                                                    withDynamicVentilation = withDynamicVentilation, HeatingLimit = HeatingLimit, Max_VR = Max_VR, Diff_toTempset = Diff_toTempset, Tset = Tset_WC,
+  Rooms.OFD.Ow2IwL1IwS1Gr1Uf1 WC_Storage(TMC = TMC, TIR = TIR, room_length = length4, room_width = room_width, room_height = room_height, solar_absorptance_OW = solar_absorptance_OW, withWindow1 = true, windowarea_OW1 = windowarea_41, withDoor2 = true, door_width_OD2 = door_width_42, door_height_OD2 = door_height_42, withWindow2 = false, withDoor1 = false, withFloorHeating = withFloorHeating,                                                                                                    withDynamicVentilation = withDynamicVentilation, HeatingLimit = HeatingLimit, Max_VR = Max_VR, Diff_toTempset = Diff_toTempset, Tset = Tset_WC,
     TRY=TRY,
     T0_air=291.15,
     T0_OW1=291.15,
@@ -80,7 +79,7 @@ model GroundFloorBuildingEnvelope
     T0_IW2=291.15,
     T0_CE=291.13,
     T0_FL=291.13)                                                                                                     annotation(Placement(transformation(extent = {{84, -36}, {46, -84}})));
-  Rooms.OFD.Ow2IwL2IwS1Gr1Uf1 Kitchen(TMC = TMC, TIR = TIR, room_length = length3 + length4 + thickness_IWsimple, room_width = room_width, room_height = room_height, solar_absorptance_OW = solar_absorptance_OW, T_Ground = T_Ground, withWindow1 = true, windowarea_OW1 = windowarea_51, withWindow2 = true, windowarea_OW2 = windowarea_52, room_lengthb = length3, withDoor1 = false, withDoor2 = false, withFloorHeating = withFloorHeating,                                                                                                    withDynamicVentilation = withDynamicVentilation, HeatingLimit = HeatingLimit, Max_VR = Max_VR, Diff_toTempset = Diff_toTempset, Tset = Tset_Kitchen,
+  Rooms.OFD.Ow2IwL2IwS1Gr1Uf1 Kitchen(TMC = TMC, TIR = TIR, room_length = length3 + length4 + thickness_IWsimple, room_width = room_width, room_height = room_height, solar_absorptance_OW = solar_absorptance_OW, withWindow1 = true, windowarea_OW1 = windowarea_51, withWindow2 = true, windowarea_OW2 = windowarea_52, room_lengthb = length3, withDoor1 = false, withDoor2 = false, withFloorHeating = withFloorHeating,                                                                                                    withDynamicVentilation = withDynamicVentilation, HeatingLimit = HeatingLimit, Max_VR = Max_VR, Diff_toTempset = Diff_toTempset, Tset = Tset_Kitchen,
     TRY=TRY,
     T0_air=295.15,
     T0_OW1=295.15,
@@ -90,7 +89,7 @@ model GroundFloorBuildingEnvelope
     T0_IW2=295.15,
     T0_CE=295.13,
     T0_FL=295.13)                                                                                                     annotation(Placement(transformation(extent = {{-84, -20}, {-44, -84}})));
-  Rooms.OFD.Ow1IwL2IwS1Gr1Uf1 Corridor(TMC = TMC, TIR = TIR, room_length = length2 + length3 + thickness_IWsimple, room_width = room_width, room_height = room_height, solar_absorptance_OW = solar_absorptance_OW, T_Ground = T_Ground, withDoor1 = true, door_width_OD1 = door_width_31, door_height_OD1 = door_height_31, room_lengthb = length3, withWindow1 = false, withFloorHeating = withFloorHeating,
+  Rooms.OFD.Ow1IwL2IwS1Gr1Uf1 Corridor(TMC = TMC, TIR = TIR, room_length = length2 + length3 + thickness_IWsimple, room_width = room_width, room_height = room_height, solar_absorptance_OW = solar_absorptance_OW, withDoor1 = true, door_width_OD1 = door_width_31, door_height_OD1 = door_height_31, room_lengthb = length3, withWindow1 = false, withFloorHeating = withFloorHeating,
     TRY=TRY,
     T0_air=291.15,
     T0_OW1=291.15,
@@ -185,7 +184,7 @@ equation
   connect(Corridor.thermFloor, ThermFloor[3]) annotation(Line(points = {{66.4, -13.56}, {66.4, -32}, {90, -32}, {90, -92}, {4, -92}, {4, -94}, {2, -94}}, color = {191, 0, 0}, pattern = LinePattern.Dash));
   connect(WC_Storage.thermFloor, ThermFloor[4]) annotation(Line(points = {{69.18, -54.24}, {90, -54.24}, {90, -91.6}, {2, -91.6}}, color = {191, 0, 0}, pattern = LinePattern.Dash));
   connect(Kitchen.thermFloor, ThermFloor[5]) annotation(Line(points = {{-68.4, -44.32}, {-90, -44.32}, {-90, -92}, {-4, -92}, {2, -89.2}}, color = {191, 0, 0}, pattern = LinePattern.Dash));
-  annotation(__Dymola_Images(Parameters(source = "AixLib/Images/House/Groundfloor_5Rooms.png")), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Bitmap(extent = {{-96, 90}, {100, -106}}, fileName = "modelica://AixLib/Images/House/Groundfloor_icon.png"), Text(extent = {{-66, 66}, {10, 54}}, lineColor = {0, 0, 0}, textString = "Livingroom"), Text(extent = {{14, 76}, {64, 62}}, lineColor = {0, 0, 0}, textString = "Hobby"), Text(extent = {{22, 24}, {56, 14}}, lineColor = {0, 0, 0}, textString = "Corridor"), Text(extent = {{-2, -42}, {74, -52}}, lineColor = {0, 0, 0}, textString = "WC_Storage"), Text(extent = {{-50, -10}, {-6, -24}}, lineColor = {0, 0, 0}, textString = "Kitchen")}), Documentation(revisions = "<html>
+  annotation(__Dymola_Images(Parameters(source = "AixLib/Resources/Images/Building/HighOrder/Groundfloor_5Rooms.png")), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Bitmap(extent = {{-96, 90}, {100, -106}}, fileName = "modelica://AixLib/Resources/Images/Building/HighOrder/Groundfloor_icon.png"), Text(extent = {{-66, 66}, {10, 54}}, lineColor = {0, 0, 0}, textString = "Livingroom"), Text(extent = {{14, 76}, {64, 62}}, lineColor = {0, 0, 0}, textString = "Hobby"), Text(extent = {{22, 24}, {56, 14}}, lineColor = {0, 0, 0}, textString = "Corridor"), Text(extent = {{-2, -42}, {74, -52}}, lineColor = {0, 0, 0}, textString = "WC_Storage"), Text(extent = {{-50, -10}, {-6, -24}}, lineColor = {0, 0, 0}, textString = "Kitchen")}), Documentation(revisions = "<html>
  <ul>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
  <li><i>July 10, 2011</i> by Ana Constantin:<br/>Implemented</li>
@@ -194,6 +193,6 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for the envelope of the ground floor.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  </html>"));
 end GroundFloorBuildingEnvelope;

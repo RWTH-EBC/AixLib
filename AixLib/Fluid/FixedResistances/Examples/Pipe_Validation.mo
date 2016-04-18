@@ -48,15 +48,6 @@ equation
       points={{46,0},{60,0}},
       color={0,127,255}));
   annotation( experiment(StopTime = 1500, Interval = 1), __Dymola_experimentSetupOutput(events = false), Documentation(revisions="<html>
- <p>November 2014, Marcus Fuchs</p>
- <p><ul>
- <li>Changed model to use Annex 60 base class</li>
- </ul></p>
- <p>01.10.2013, by <i>Pooyan Jahangiri</i>: implemented</p>
- </html>", info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
- <p>Simple example of the pipe connected to two boundaries and a heat source.</p>
- <p><br/><b><font style=\"color: #008000; \">Concept</font></b></p>
- <p>The boundaries have different pressures resulting in a mass flow in the pipe. The pipe is connected to a heat source with variable heat flow. The change in internal energy and the temperature of the pipe can be observed.</p>
+ Will be removed
  </html>"));
 end Pipe_Validation;

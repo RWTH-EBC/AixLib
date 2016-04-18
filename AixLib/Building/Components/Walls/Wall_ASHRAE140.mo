@@ -90,7 +90,7 @@ model Wall_ASHRAE140
 // COMPONENT PART
 
 public
-  BaseClasses.ConvNLayerClearanceStar_old                       Wall(
+  BaseClasses.ConvNLayerClearanceStar                           Wall(
     h=wall_height,
     l=wall_length,
     T0=T0,
@@ -98,7 +98,8 @@ public
     selectable=true,
     eps=WallType.eps,
     wallType=WallType,
-    surfaceOrientation=ISOrientation) "Wall" annotation (Placement(
+    surfaceOrientation=ISOrientation,
+    HeatConv1(calcMethod=2)) "Wall"          annotation (Placement(
         transformation(extent={{-20,14},{2,34}})));
 
   Utilities.Interfaces.SolarRad_in
@@ -304,6 +305,7 @@ end if;
 //******************************************************************
 // **** connections for absorbed solar radiation inside wall****
 //******************************************************************
+ connect(absSolarRadWin.port, Wall.HeatConv1.port_b);
   connect(heatStarToComb.thermStarComb, thermStarComb_inside) annotation (
       Line(
       points={{78.4,-1.1},{78.4,-1.05},{102,-1.05},{102,0}},
@@ -400,7 +402,7 @@ end if;
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Flexible Model for Inside Walls and Outside Walls. </p>
 <h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <p>The<b> Wall</b> model models </p>
 <ul>
@@ -420,13 +422,13 @@ end if;
 <h4><span style=\"color:#008000\">Example Results</span></h4>
 </html>",
 revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 25, 2014&nbsp;</i> by Ana Constantin:<br/>Corrected activation of door for an outside wall</li>
 <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
 <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 22, 2012&nbsp;</i> by Lukas Mencher:<br/>Outside wall may have a door now, icon adjusted</li>
 <li><i>Mai 24, 2012&nbsp;</i> by Ana Constantin:<br/>Added inside surface orientation</li>
 <li><i>April, 2012&nbsp;</i> by Mark Wesseling:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>"));
 end Wall_ASHRAE140;

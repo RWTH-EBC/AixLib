@@ -78,29 +78,33 @@ equation
             fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{52, 56}, {60, -74}}, lineColor=  {95, 95, 95}, fillColor=  {215, 215, 215},
             fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-74, -60}, {62, -70}}, lineColor=  {95, 95, 95}, fillColor=  {230, 230, 230},
             fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-72, 50}, {64, 40}}, lineColor=  {95, 95, 95}, fillColor=  {230, 230, 230},
-            fillPattern=                                                                                                    FillPattern.Solid)}), Documentation(revisions="<html>
- <p>April 30 2015, Marcus Fuchs</p>
- <p><ul>
- <li>Correct a few typos in code comments</li>
- </ul></p>
- <p>November 2014, Marcus Fuchs</p>
- <p><ul>
- <li>Changed model to use Annex 60 base class</li>
- </ul></p>
- <p>November 13 2013, Ana Constantin</p>
- <p><ul>
- <li>Implemented</li>
- </ul></p>
+            fillPattern=FillPattern.Solid)}),
+Documentation(revisions="<html>
+  <ul>
+  <li><i>April 30, 2015&nbsp;</i>
+     by Marcus Fuchs:<br/>
+     Correct a few typos in code comments</li>
+  <li><i>November 2014&nbsp;</i>
+     by Marcus Fuchs:<br/>
+     Changed model to use Annex 60 base class</li>
+  <li><i>November 2013&nbsp;</i>
+     by Ana Constantin:<br/>
+     Implemented</li>
+  </ul>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Simple model for a radiator with one water volume. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\"
+    alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>The power is calculated according to the flow and return temperatures, the power and temperatures in the design case and the radiator exponent.</p>
+ <p>The power is calculated according to the flow and return temperatures, the
+ power and temperatures in the design case and the radiator exponent.</p>
  <p>The power is split between convective and radiative heat transfer. </p>
  <h4><span style=\"color:#008000\">Example Results</span></h4>
- <p><a href=\"AixLib.HVAC.Radiators.Examples.PumpRadiatorValve\">AixLib.HVAC.Radiators.Examples.PumpRadiatorValve</a></p>
- <p><a href=\"AixLib.HVAC.Radiators.Examples.PumpRadiatorThermostaticValve\">AixLib.HVAC.Radiators.Examples.PumpRadiatorThermostaticValve</a></p>
+ <p><a href=\"AixLib.HVAC.Radiators.Examples.PumpRadiatorValve\">
+    AixLib.HVAC.Radiators.Examples.PumpRadiatorValve</a></p>
+ <p><a href=\"AixLib.HVAC.Radiators.Examples.PumpRadiatorThermostaticValve\">
+    AixLib.HVAC.Radiators.Examples.PumpRadiatorThermostaticValve</a></p>
  </html>"));
 end Radiator;

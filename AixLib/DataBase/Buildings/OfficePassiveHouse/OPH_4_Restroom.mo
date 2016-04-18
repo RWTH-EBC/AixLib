@@ -36,12 +36,13 @@ record OPH_4_Restroom
     C1o = 39369992.1342,
     withAHU=true,
     minAHU=0,
-    maxAHU=8);
+    maxAHU=8,
+    orientationswallshorizontal = {90,90,90,90,0});
   annotation (Documentation(revisions="<html>
  <ul>
  <li><i>June, 2015&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
  </ul>
  </html>", info="<html>
-<p><span style=\"font-family: MS Shell Dlg 2;\">Zone &QUOT;Restroom&QUOT; of an example building according to an office building with passive house standard. The building is divided in six zones, this is a typical zoning for an office building. </span></p>
+<p><span style=\"font-family: MS Shell Dlg 2;\">Zone &quot;Restroom&quot; of an example building according to an office building with passive house standard. The building is divided in six zones, this is a typical zoning for an office building. </span></p>
 </html>"));
 end OPH_4_Restroom;

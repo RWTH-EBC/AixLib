@@ -58,11 +58,11 @@ equation
   annotation (
     experiment(StopTime=86400, Interval=60),
 Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>This simulation is to check the functionality of the machine models described by the internal gains. </p>
-<p><h4><font color=\"#008000\">Concept</font></h4></p>
+<h4><font color=\"#008000\">Concept</font></h4>
 <p>The simulation consists of the following models:</p>
-<table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
+<table summary=\"Models\" cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
 <td bgcolor=\"#dcdcdc\"><p>index</p></td>
 <td bgcolor=\"#dcdcdc\"><p>model</p></td>
 </tr>
@@ -82,8 +82,8 @@ Documentation(info="<html>
 <p><br/>Heat flow values can be displayed via the provided output. </p>
 </html>",
         revisions="<html>
-<p><ul>
+<ul>
 <li><i>May 31, 2013&nbsp;</i> by Ole Odendahl:<br/>Implemented, added documentation and formatted appropriately</li>
-</ul></p>
+</ul>
 </html>"));
 end Machines;

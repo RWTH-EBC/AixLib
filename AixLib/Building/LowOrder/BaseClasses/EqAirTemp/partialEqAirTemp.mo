@@ -1,5 +1,5 @@
 within AixLib.Building.LowOrder.BaseClasses.EqAirTemp;
-partial model partialEqAirTemp
+partial model PartialEqAirTemp
 
 parameter Real aowo=0.6 "Coefficient of absorption of the outer walls";
 parameter Real eowo=0.9 "Coefficient of emission of the outer walls";
@@ -170,4 +170,4 @@ annotation ( Icon(coordinateSystem(
 <li><i>October 2014,&nbsp;</i> by Peter Remmen:<br/>Implemented.</li>
 </ul>
 </html>"));
-end partialEqAirTemp;
+end PartialEqAirTemp;

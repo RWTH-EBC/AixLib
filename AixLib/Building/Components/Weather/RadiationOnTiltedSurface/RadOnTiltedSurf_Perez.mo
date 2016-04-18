@@ -1,4 +1,4 @@
-within AixLib.Building.Components.Weather.RadiationOnTiltedSurface;
+ï»¿within AixLib.Building.Components.Weather.RadiationOnTiltedSurface;
 model RadOnTiltedSurf_Perez
   "Calculates solar radiation on tilted surfaces according to Perez"
   extends RadiationOnTiltedSurface.BaseClasses.PartialRadOnTiltedSurf;
@@ -20,7 +20,7 @@ model RadOnTiltedSurf_Perez
 //constants
 protected
   constant Real a_rho=0.45
-    "estimated on measured Albedo from NREL USA (Latitude=39.742°)";
+    "estimated on measured Albedo from NREL USA (Latitude=39.74 deg)";
   constant Real b_rho=0.013 "estimated on measured Albedo from NREL USA";
   constant Real c_rho=0.2 "estimated on measured Albedo from NREL USA";
   constant Real rho_avg=1/0.27055
@@ -176,7 +176,7 @@ equation
     cos_theta = (cos_theta_help + abs(cos_theta_help))/2;
     theta_out = to_deg(acos(cos_theta));
 
-    // calculation of R factor [Duffie/Beckman, p.25], but in order not to divide by zero it is determined like a/b in the Model of Perez [Duffie/Beckman, p.94] where the minimum b is set to cos(85°);
+    // calculation of R factor [Duffie/Beckman, p.25], but in order not to divide by zero it is determined like a/b in the Model of Perez [Duffie/Beckman, p.94] where the minimum b is set to cos(85 deg);
             // R is manually set to 0 for theta_z_pos >= 80 degrees (-> 90 degrees means sunset)__old solution for the numerical problems of dividing by zero;
             //if noEvent(cos_theta_z <= 0.08715574274) then
             //  R_help = cos_theta_z*cos_theta;
@@ -392,11 +392,11 @@ Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
 <p>Another limitation is the equation of the groundreflection approximation. It is only estmated on basis of the <b><a href=\"http://www.nrel.gov/midc/srrl_bms/\">NREL</a> </b>(US National Renewable Energy Laboratory; http://www.nrel.gov/midc/srrl_bms) data for the albedo of the year 2011 and should be revised.</p>
 </html>",
     revisions="<html>
-<p><ul>
+<ul>
 <li><i>March 23, 2015&nbsp;</i> by Ana Constantin:<br/>Adapted solar inputs so it cand work with both TRY and TMY weather format</li>
 <li><i>April 15, 2012&nbsp;</i> by Jerome Feldhaus:<br/>Implemented new diffuse irradiation modell from Perez Irradiation on tilted Surfaces. </li>
 <li><i>March 14, 2005&nbsp;</i> by Timo Haase:<br/>Implemented. </li>
-</ul></p>
+</ul>
 </html>",
     revisions="<html>
 

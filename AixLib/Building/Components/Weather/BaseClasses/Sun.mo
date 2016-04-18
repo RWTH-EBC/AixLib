@@ -1,4 +1,4 @@
-within AixLib.Building.Components.Weather.BaseClasses;
+ï»¿within AixLib.Building.Components.Weather.BaseClasses;
 model Sun "Computes the sun's altitude of the current site"
 
 import Modelica.SIunits.Conversions.from_deg;
@@ -45,7 +45,7 @@ equation
     "the difference between the UTC and the time standard is given by DiffWeatherDataTime and Diff_lokalStandardTime Longitude";
 
 // hour angle of sun, first term calculates local time of day from continuous time signal
-      HourAngleSun = (SolarTime-12) * 360/24 "HourAngleSun=0° means sun peak";
+      HourAngleSun = (SolarTime-12) * 360/24 "HourAngleSun=0 deg means sun peak";
       if (HourAngleSun > 180) then
         OutHourAngleSun = HourAngleSun - 360;
       elseif (HourAngleSun < -180) then
@@ -100,13 +100,13 @@ Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
     revisions="<html>
 <ul>
   <li><i>December 20, 2012&nbsp;</i>
-         by Jerome Feldhaus:<br>
+         by Jerome Feldhaus:<br/>
          new Output variable OutHourAngleSun and renaming from Sun to SunAltitude.</li>
   <li><i>September 29, 2006&nbsp;</i>
-         by Peter Matthes:<br>
+         by Peter Matthes:<br/>
          Included ArgACOS variable to protect acos function from arguments &gt; 1. Added protection for some variables.</li>
   <li><i>March 14, 2005&nbsp;</i>
-         by Timo Haase:<br>
+         by Timo Haase:<br/>
          Implemented.</li>
 </ul>
 </html>"));

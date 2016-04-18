@@ -265,7 +265,7 @@ equation
 <p><b><font style=\"color: #008000; \">Overview</font></b> </p>
 <p>The <b>HeatConv_inside</b> model represents the phenomenon of heat convection at inside surfaces, with different choice for surface orientation. </p>
 <p><b><font style=\"color: #008000; \">Level of Development</font></b> </p>
-<p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/> </p>
+<p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/> </p>
 <p><b><font style=\"color: #008000; \">Concept</font></b> </p>
 <p>In this model the orientation of the surface can be chosen from a menu for an easier adoption to new situations. This allows calculating <code>alpha</code> depending on orientation and respective direction of heat flow. The equations for <code>alpha</code> are taken from EN ISO 6946 (appendix A.1) and B. Glueck. </p>
 <p>The model can in this way be used on inside surfaces. There is also the possibility of setting a constant alpha value.</p>
@@ -278,11 +278,11 @@ equation
 <p><a href=\"AixLib.Utilities.Examples.HeatTransfer_test\">AixLib.Utilities.Examples.HeatTransfer_test </a></p>
 </html>",  revisions="<html>
 <ul>
-<li><i>June 17, 2015&nbsp;</i> by Philipp Mehrfeld:<br>Added EN ISO 6946 equations and corrected usage of constant alpha_custom </li>
-<li><i>March 26, 2015&nbsp;</i> by Ana Constantin:<br>Changed equations for differnet surface orientations according to newer work from Gl&uuml;ck </li>
-<li><i>April 1, 2014&nbsp;</i> by Ana Constantin:<br>Uses components from MSL and respects the naming conventions </li>
-<li><i>April 10, 2013&nbsp;</i> by Ole Odendahl<br>Formatted documentation according to standards </li>
-<li><i>December 15, 2005&nbsp;</i> by Peter Matthes:<br>Implemented. </li>
+<li><i>June 17, 2015&nbsp;</i> by Philipp Mehrfeld:<br/>Added EN ISO 6946 equations and corrected usage of constant alpha_custom </li>
+<li><i>March 26, 2015&nbsp;</i> by Ana Constantin:<br/>Changed equations for differnet surface orientations according to newer work from Gl&uuml;ck </li>
+<li><i>April 1, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions </li>
+<li><i>April 10, 2013&nbsp;</i> by Ole Odendahl<br/>Formatted documentation according to standards </li>
+<li><i>December 15, 2005&nbsp;</i> by Peter Matthes:<br/>Implemented. </li>
 </ul>
 </html>"));
 end HeatConv_inside;
