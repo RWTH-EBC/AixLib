@@ -61,7 +61,7 @@ equation
       points={{-68,42},{-86,42},{-86,-10},{-75,-10}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+  annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,
             -100},{100,100}}), graphics),
 Documentation(revisions="<html>
 <ul>
@@ -79,5 +79,6 @@ This is a very simple example to show TCP-Communication functionality. A feedbac
  is send to a server and back. The signal is not altered by the server.
 </html>"),
  experiment(StopTime=100, __Dymola_Algorithm="Lsodar"),
-    __Dymola_experimentSetupOutput);
+    __Dymola_experimentSetupOutput,
+    Icon(coordinateSystem(extent={{-120,-100},{100,100}})));
 end ExampleClientLoop;
