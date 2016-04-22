@@ -1,5 +1,5 @@
 within AixLib.Fluid.FixedResistances.Examples;
-model Compare_FixedResistances_HydraulicResitance2
+model Compare_FixedResistances_HydraulicResistance2
   "Assess simulation speed of HydraulicResistance"
   extends Modelica.Icons.Example;
 
@@ -45,8 +45,8 @@ equation
   connect(P.y, sou1.p_in) annotation (Line(points={{-79,80},{-74,80},{-74,46},{
           -72,46}}, color={0,0,127}));
   connect(HR.port_b, masFlo2.port_a) annotation (Line(points={{-8,6.10623e-16},
-          {-4,-3.36456e-22},{-4,6.10623e-16},{-5.55112e-16,6.10623e-16}}, color
-        ={0,127,255}));
+          {-4,-3.36456e-22},{-4,6.10623e-16},{-5.55112e-16,6.10623e-16}}, color=
+         {0,127,255}));
   connect(sou1.ports[1], HR.port_a) annotation (Line(points={{-50,38},{-38,38},
           {-38,6.10623e-016},{-28,6.10623e-016}}, color={0,127,255}));
   connect(sin1.ports[1], masFlo2.port_b) annotation (Line(
@@ -56,4 +56,4 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FixedResistances/Examples/FixedResistancesParallel.mos"
         "Simulate and plot"),
     __Dymola_experimentSetupOutput);
-end Compare_FixedResistances_HydraulicResitance2;
+end Compare_FixedResistances_HydraulicResistance2;

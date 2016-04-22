@@ -1,6 +1,6 @@
 within AixLib.Fluid.FixedResistances.Examples;
-model Compare_FixedResistances_HydraulicResitance
-  "Compare models FixedResistancesDpM and HydraulicResitance"
+model Compare_FixedResistances_HydraulicResistance
+  "Compare models FixedResistancesDpM and HydraulicResistance"
   extends Modelica.Icons.Example;
 
  package Medium = AixLib.Media.Water;
@@ -86,4 +86,4 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FixedResistances/Examples/FixedResistancesParallel.mos"
         "Simulate and plot"),
     __Dymola_experimentSetupOutput);
-end Compare_FixedResistances_HydraulicResitance;
+end Compare_FixedResistances_HydraulicResistance;
