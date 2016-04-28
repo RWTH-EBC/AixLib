@@ -12,7 +12,7 @@ protected
   parameter Real sumWeightfactors = if sum(weightfactors) <0.0001 then 0.0001 else sum(weightfactors);
 initial equation
   assert(noEvent(n == size(weightfactors, 1)), "weightfactors (likely Aw) has to have n elements");
-  assert(noEvent(sum(weightfactors)>0.0001),"The sum of the weightfactors (likely the window areas) in SolarRadWeightedSum is 0. In case of no radiation (e.g. no windows) this might be correct.");
+  assert(noEvent(sum(weightfactors)>0.0001),"The sum of the weightfactors (likely the window areas) in SolarRadWeightedSum is 0. In case of no radiation (e.g. no windows) this might be correct.",level=AssertionLevel.warning);
 equation
   solarRad_out = solarRad_in * weightfactors / sumWeightfactors;
 
