@@ -891,7 +891,7 @@ equation
     TsupplyAirOut = T_sup;
   end if;
   // with:
-  dTFan = P_el_sup/(V_dot_sup*rho * (c_pL_iG + X_oda * c_pW_iG));
+  P_el_sup = dTFan * V_dot_sup * rho * (c_pL_iG + X_oda * c_pW_iG);
 
   // transitions and conditions between state machines.
   initialState(startState) annotation (Line(
