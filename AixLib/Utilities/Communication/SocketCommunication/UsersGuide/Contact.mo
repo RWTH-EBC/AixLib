@@ -18,8 +18,8 @@ advances you may have made.
     Fraunhofer-Institute for Building Physics<br>
     Department Energy Efficiency and Indoor Climate<br>
     Group Technical Building Systems<br>
-    Fürther Straße 250<br>
-    D-90429 Nürnberg, Germany<br>
+    Fuerther Strasse 250<br>
+    D-90429 Nuernberg, Germany<br>
     email: <A HREF=\"mailto:georg.schneider@ibp.fraunhofer.de\">georg.schneider@ibp.fraunhofer.de</A><br>&nbsp;
 </td>
 <td></td>
@@ -28,7 +28,7 @@ advances you may have made.
 <td>
     Dr. Jens Oppermann<br>
     WILO SE<br>
-    Nortkirchenstraße 100<br>
+    Nortkirchenstrasse 100<br>
     D-44263 Dortmund, Germany<br>
     email: <A HREF=\"mailto:Jens.Oppermann@wilo.com\">Jens.Oppermann@wilo.com</A><br>&nbsp;
 </td>

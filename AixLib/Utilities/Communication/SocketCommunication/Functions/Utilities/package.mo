@@ -3,6 +3,11 @@ package Utilities "Contains functions to handle string manipulations and convers
   extends Modelica.Icons.Package;
 
 
+
+
+
+
+
    annotation (Documentation(info="<html>
 This package contains a set of functions to communicate via a TCP-Interface using different protocols
    </html>"));

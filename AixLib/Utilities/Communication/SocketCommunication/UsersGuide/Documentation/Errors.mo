@@ -1,4 +1,4 @@
-﻿within AixLib.Utilities.Communication.SocketCommunication.UsersGuide.Documentation;
+within AixLib.Utilities.Communication.SocketCommunication.UsersGuide.Documentation;
 class Errors "Windows sockets errors"
    extends Modelica.Icons.Information;
 
@@ -81,7 +81,7 @@ Bad address.<br> The system detected an invalid pointer address in attempting to
 
 <tr>
 <td> WSAEINVAL <br> 10022 </td><td> 
-Invalid argument.<br> Some invalid argument was supplied (for example, specifying an invalid level to the setsockopt function). In some instances, it also refers to the current state of the socket—for instance, calling accept on a socket that is not listening.
+Invalid argument.<br> Some invalid argument was supplied (for example, specifying an invalid level to the setsockopt function). In some instances, it also refers to the current state of the socket, for instance, calling accept on a socket that is not listening.
 </td>
 </tr>
 
@@ -105,7 +105,7 @@ Resource temporarily unavailable.<br> This error is returned from operations on 
 
 <tr>
 <td> WSAEALREADY <br> 10037 </td><td> 
-Operation already in progress.<br> An operation was attempted on a nonblocking socket with an operation already in progress—that is, calling connect a second time on a nonblocking socket that is already connecting, or canceling an asynchronous request (WSAAsyncGetXbyY) that has already been canceled or completed.
+Operation already in progress.<br> An operation was attempted on a nonblocking socket with an operation already in progress, that is, calling connect a second time on a nonblocking socket that is already connecting, or canceling an asynchronous request (WSAAsyncGetXbyY) that has already been canceled or completed.
 </td>
 </tr>
 
@@ -172,7 +172,7 @@ Address family not supported by protocol family.<br>    An address incompatible 
 <tr>
 <td> WSAEADDRINUSE <br> 10048 </td><td> 
 
-Address already in use.<br>Typically, only one usage of each socket address (protocol/IP address/port) is permitted. This error occurs if an application attempts to bind a socket  to an IP address/port that has already been used for an existing socket,   or a socket that was not closed properly, or one that is still in the process   of closing. For server applications that need to bind multiple sockets to the   same port number, consider using setsockopt (SO_REUSEADDR). Client applications usually need not call bind at all—connect chooses an unused port automatically. When bind is called with a wildcard address (involving ADDR_ANY), a WSAEADDRINUSE error could be delayed until the specific address is committed. This could happen with a call to another function later, including connect, listen, WSAConnect, or WSAJoinLeaf.
+Address already in use.<br>Typically, only one usage of each socket address (protocol/IP address/port) is permitted. This error occurs if an application attempts to bind a socket  to an IP address/port that has already been used for an existing socket,   or a socket that was not closed properly, or one that is still in the process   of closing. For server applications that need to bind multiple sockets to the   same port number, consider using setsockopt (SO_REUSEADDR). Client applications usually need not call bind at all, as connect chooses an unused port automatically. When bind is called with a wildcard address (involving ADDR_ANY), a WSAEADDRINUSE error could be delayed until the specific address is committed. This could happen with a call to another function later, including connect, listen, WSAConnect, or WSAJoinLeaf.
 
 </td>
 </tr>
@@ -254,7 +254,7 @@ Socket is already connected.<br>
 
 Socket is not connected.<br>
 
-    A request to send or receive data was disallowed because the socket is not connected and (when sending on a datagram socket using sendto) no address was supplied. Any other type of operation might also return this error—for example, setsockopt setting SO_KEEPALIVE if the connection has been reset.
+A request to send or receive data was disallowed because the socket is not connected and (when sending on a datagram socket using sendto) no address was supplied. Any other type of operation might also return this error, for example, setsockopt setting SO_KEEPALIVE if the connection has been reset.
 
 </td>
 </tr>
@@ -294,7 +294,7 @@ Connection timed out.<br>
 
 Connection refused.<br>
 
-    No connection could be made because the target computer actively refused it. This usually results from trying to connect to a service that is inactive on the foreign host—that is, one with no server application running.
+No connection could be made because the target computer actively refused it. This usually results from trying to connect to a service that is inactive on the foreign host, that is, one with no server application running.
 
 </td>
 </tr>
@@ -590,7 +590,7 @@ This is a nonrecoverable error.<br>
 
 Valid name, no data record of requested type.<br>
 
-    The requested name is valid and was found in the database, but it does not have the correct associated data being resolved for. The usual example for this is a host name-to-address translation attempt (using gethostbyname or WSAAsyncGetHostByName) which uses the DNS (Domain Name Server). An MX record is returned but no A record—indicating the host itself exists, but is not directly reachable.
+The requested name is valid and was found in the database, but it does not have the correct associated data being resolved for. The usual example for this is a host name-to-address translation attempt (using gethostbyname or WSAAsyncGetHostByName) which uses the DNS (Domain Name Server). An MX record is returned but no A record, indicating the host itself exists, but is not directly reachable.
 
 </td>
 </tr>
