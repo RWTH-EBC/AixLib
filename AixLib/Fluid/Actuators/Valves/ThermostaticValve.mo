@@ -38,19 +38,26 @@ equation
   annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points=  {{-78, 50}, {-78, -60}, {82, 50}, {82, -62}, {-78, 50}},
             lineThickness=                                                                                                    1, fillColor=  {0, 0, 255},
             fillPattern=                                                                                                    FillPattern.Solid, pattern = LinePattern.None, lineColor=  {0, 0, 0})}), Documentation(revisions="<html>
- <p>November 2014, Marcus Fuchs</p>
- <p><ul>
- <li>Changed model to use Annex 60 base class</li>
- </ul></p>
- <p>13.11.2013, by <i>Ana Constantin</i>: implemented</p>
+ <ul>
+ <li><i>November 2014&nbsp;</i>
+    by Marcus Fuchs:<br/>
+    Changed model to use Annex 60 base class</li>
+ <li><i>November 13, 2013&nbsp;</i>
+    by Ana Constantin:<br/>
+    Implemented</li>
+ </ul>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for a simple thermostatic valve.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\"
+    alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>Development of SimpleValve by incorporating the behaviour of a thermostatic head as a P controller with a maximum deviation of <i>P</i> and an influence of the pressure drop on the sensed temperature.</p>
- <p>It is possible to not close the valve completely by allowing for some minimal leakage. Use this option carefully and always check&nbsp;the&nbsp;influence&nbsp;it&nbsp;might have on&nbsp;your&nbsp;results. </p>
+ <p>It is possible to not close the valve completely by allowing for some
+  minimal leakage. Use this option carefully and always
+  check&nbsp;the&nbsp;influence&nbsp;it&nbsp;might have
+  on&nbsp;your&nbsp;results. </p>
  <h4><span style=\"color:#008000\">Example Results</span></h4>
  <p><a href=\"AixLib.HVAC.Radiators.Examples.PumpRadiatorThermostaticValve\">AixLib.HVAC.Radiators.Examples.PumpRadiatorThermostaticValve</a></p>
  </html>"));

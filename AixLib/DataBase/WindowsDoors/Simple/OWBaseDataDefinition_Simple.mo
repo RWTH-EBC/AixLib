@@ -12,7 +12,7 @@ record OWBaseDataDefinition_Simple
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>Base data definition for simple windows. </p>
  <h4><font color=\"#008000\">Level of Development</font></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><font color=\"#008000\">References</font></h4>
  <p>Base data definition for record to be used in model <a href=\"Building.Components.WindowsDoors.WindowSimple\">Building.Components.WindowsDoors.WindowSimple</a></p>
  </html>", revisions = "<html>

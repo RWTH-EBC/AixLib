@@ -118,18 +118,17 @@ equation
   connect(sunblind.Rad_Out, solarRadAdapter.solarRad_in) annotation (Line(
       points={{-1,73},{4.5,73},{4.5,72},{9,72}},
       color={255,128,0}));
-  annotation (           experiment(StopTime = 5.184e+006, Interval = 3600),
+  annotation (
             __Dymola_Commands(file=
                                "modelica://AixLib/Resources/Scripts/Dymola/Building/LowOrder/Examples/Validation/Linear/TestCase9.mos"
         "Simulate and plot"),
-            experimentSetupOutput(events = false),
             Documentation(revisions="<html>
-<p><ul>
+<ul>
  <li><i>May 28, 2015 </i> by Marcus Fuchs:<br/>Added unit testing command to annotations</li>
- </ul></p>
+ </ul>
  <ul>
    <li><i>March, 2012&nbsp;</i>
-          by Moritz Lauster:<br>
+          by Moritz Lauster:<br/>
           Implemented</li>
  </ul>
  </html>", info="<html>
@@ -138,7 +137,7 @@ equation
 <ul>
 <li>longwave radiation heat exchange is taken into account </li>
 </ul>
-<p><br>Reference: Room air temperature </p>
+<p><br/>Reference: Room air temperature </p>
 <p>Variable path: <code>reducedModel.airload.T</code></p>
 <p>Maximum deviation: 0.2 K</p>
 <p>All values are given in the VDI 6007-1.</p>

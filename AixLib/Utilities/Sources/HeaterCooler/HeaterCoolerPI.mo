@@ -54,9 +54,10 @@ equation
           -15},{-24,-14},{-100,-14}}, color={255,0,255},
         pattern=LinePattern.Dash));
   end if;
-  connect(setPointHeat, pITempHeat.soll) annotation (Line(points={{-100,40},{-18,40},{-18,29}}, color={0,0,127}));
-  connect(setPointCool, pITempCool.soll) annotation (Line(points={{-100,-40},{-58,-40},
-          {-18,-40},{-18,-29}}, color={0,0,127}));
+  connect(setPointHeat, pITempHeat.setPoint)
+    annotation (Line(points={{-100,40},{-18,40},{-18,29}}, color={0,0,127}));
+  connect(setPointCool, pITempCool.setPoint) annotation (Line(points={{-100,-40},
+          {-58,-40},{-18,-40},{-18,-29}}, color={0,0,127}));
   annotation (Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This is just as simple heater and/or cooler with a PI-controller. It can be used as an quasi-ideal source for heating and cooling applications. </p>

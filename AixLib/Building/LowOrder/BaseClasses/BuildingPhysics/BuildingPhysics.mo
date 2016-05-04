@@ -1,7 +1,7 @@
 within AixLib.Building.LowOrder.BaseClasses.BuildingPhysics;
 model BuildingPhysics
   "Building physics based on VDI 6007 with improved handling of windows"
-  extends partialBuildingPhysics;
+  extends PartialBuildingPhysics;
   AixLib.Building.LowOrder.BaseClasses.EqAirTemp.EqAirTempEBCMod eqAirTemp(
     aowo=aowo,
     wf_wall=weightfactorswall,
@@ -12,11 +12,11 @@ model BuildingPhysics
     alphaconv_wall=alphaowo,
     alphaconv_win=alphaConvWinOuter,
     awin=awin,
-    orientationswallshorizontal={90,90,90,90,0}) if
+    orientationswallshorizontal=orientationswallshorizontal) if
             withOuterwalls "Equivalent air temperature"
     annotation (Placement(transformation(extent={{-46,0},{-26,20}})));
   AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel.ReducedOrderModelEBCMod
-                                                                               reducedOrderModel(
+    reducedOrderModel(
     epsw=epsw,
     g=g,
     RRest=RRest,
@@ -73,15 +73,29 @@ equation
       Line(points={{80,-90},{80,-90},{80,-28},{80,-26},{68.75,-26},{68.75,-7.2}},
         color={95,95,95}));
   annotation(Documentation(info="<html>
-<p><span style=\"font-family: MS Shell Dlg 2;\"></p><p>This model connects <a href=\"AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel\">ReducedOrderModel</a> with <a href=\"AixLib.Building.Components.Weather.Sunblinds\">Sunblind</a> and <a href=\"AixLib.Building.LowOrder.BaseClasses.EqAirTemp\">EqAirTemp</a>. The base of this model is the Guideline VDI 6007, but with a different handling of windows (they are not merged with exterior walls) and a modified version of the original <a href=\"AixLib.Building.LowOrder.BaseClasses.EqAirTemp\">eqAirTemp</a>.</span></p>
-<p><span style=\"font-family: MS Shell Dlg 2;\"></p><p><b>References</b> </span></p>
+<p>This model connects
+  <a href=\"AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel\">
+    ReducedOrderModel</a> with
+  <a href=\"AixLib.Building.Components.Weather.Sunblinds\">Sunblind</a> and
+  <a href=\"AixLib.Building.LowOrder.BaseClasses.EqAirTemp\">EqAirTemp</a>.
+  The base of this model is the Guideline VDI 6007, but with a different
+  handling of windows (they are not merged with exterior walls) and a modified
+  version of the original
+  <a href=\"AixLib.Building.LowOrder.BaseClasses.EqAirTemp\">eqAirTemp</a>.</p>
+<p><b>References</b></p>
 <ul>
-<li><span style=\"font-family: MS Shell Dlg 2;\">German Association of Engineers: Guideline VDI 6007-1, March 2012: Calculation of transient thermal response of rooms and buildings - Modelling of rooms. </span></li>
-<li><span style=\"font-family: MS Shell Dlg 2;\">Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D. (2014): Low order thermal network models for dynamic simulations of buildings on city district scale. In: Building and Environment 73, p. 223&ndash;231. DOI: <a href=\"http://dx.doi.org/10.1016/j.buildenv.2013.12.016\">10.1016/j.buildenv.2013.12.016</a>. </span></li>
+<li>German Association of Engineers: Guideline VDI 6007-1, March 2012:
+Calculation of transient thermal response of rooms and buildings - Modelling
+of rooms.</li>
+<li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D. (2014):
+Low order thermal network models for dynamic simulations of buildings on city
+district scale. In: Building and Environment 73, p. 223&ndash;231. DOI:
+<a href=\"http://dx.doi.org/10.1016/j.buildenv.2013.12.016\">
+  10.1016/j.buildenv.2013.12.016</a>.</li>
 </ul>
 </html>",  revisions="<html>
 <ul>
-<li><i>June 2015,&nbsp;</i> by Moritz Lauster:<br>Implemented. </li>
+<li><i>June 2015,&nbsp;</i> by Moritz Lauster:<br/>Implemented. </li>
 </ul>
 </html>"));
 end BuildingPhysics;

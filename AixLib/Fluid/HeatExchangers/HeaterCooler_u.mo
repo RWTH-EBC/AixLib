@@ -2,8 +2,7 @@ within AixLib.Fluid.HeatExchangers;
 model HeaterCooler_u "Heater or cooler with prescribed heat flow rate"
   extends AixLib.Fluid.Interfaces.TwoPortHeatMassExchanger(
     redeclare final AixLib.Fluid.MixingVolumes.MixingVolume vol(
-    final prescribedHeatFlowRate=true),
-    final showDesignFlowDirection=false);
+    final prescribedHeatFlowRate=true));
 
   parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal
     "Heat flow rate at u=1, positive for heating";
@@ -100,6 +99,13 @@ AixLib.Fluid.HeatExchangers.Validation.HeaterCooler_u</a>.
 </html>",
 revisions="<html>
 <ul>
+<li>
+November 19, 2015, by Michael Wetter:<br/>
+Removed assignment of parameter
+<code>showDesignFlowDirection</code> in <code>extends</code> statement.
+This is for
+<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/349\">#349</a>.
+</li>
 <li>
 May 6, 2015, by Michael Wetter:<br/>
 Set <code>prescribedHeatFlowRate=true</code>.

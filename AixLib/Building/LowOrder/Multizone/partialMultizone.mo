@@ -1,5 +1,5 @@
 within AixLib.Building.LowOrder.Multizone;
-partial model partialMultizone "partial class for multizone models"
+partial model PartialMultizone "Partial class for multizone models"
   parameter AixLib.DataBase.Buildings.BuildingBaseRecord buildingParam
     "Choose setup for the building" annotation (choicesAllMatching = false);
 protected
@@ -8,7 +8,7 @@ protected
   parameter Integer orientations[:]=zoneParam.n "Number cardinal directions";
 public
   replaceable AixLib.Building.LowOrder.ThermalZone.ThermalZoneEquipped zone[buildingParam.numZones] constrainedby
-    AixLib.Building.LowOrder.ThermalZone.partialThermalZone(zoneParam=zoneParam)
+    AixLib.Building.LowOrder.ThermalZone.PartialThermalZone(zoneParam=zoneParam)
     "Choose thermal zone model" annotation (Placement(transformation(extent={{40,35},
             {80,75}})),choicesAllMatching=true);
   AixLib.Utilities.Interfaces.SolarRad_in radIn[max(orientations)]
@@ -142,10 +142,10 @@ equation
           fillPattern=FillPattern.Solid)}),
     Documentation(revisions="<html>
 <ul>
-<li><i>June 22, 2015&nbsp;</i> by Moritz Lauster:<br>Changed building physics to AixLib</li>
-<li><i>April 25, 2014&nbsp;</i> by Ole Odendahl:<br>Implemented</li>
+<li><i>June 22, 2015&nbsp;</i> by Moritz Lauster:<br/>Changed building physics to AixLib</li>
+<li><i>April 25, 2014&nbsp;</i> by Ole Odendahl:<br/>Implemented</li>
 </ul>
 </html>", info="<html>
 <p>This is a partial model for multi-zone models. It defines connectors and a replaceable thermal zone model.</p>
 </html>"));
-end partialMultizone;
+end PartialMultizone;

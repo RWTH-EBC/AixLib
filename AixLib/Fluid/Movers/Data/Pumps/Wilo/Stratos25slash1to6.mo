@@ -1,7 +1,7 @@
 within AixLib.Fluid.Movers.Data.Pumps.Wilo;
 record Stratos25slash1to6 "Pump data for a Wilo Stratos 25/1-6 pump"
-  extends SpeedControlled_Nrpm(
-    N_nominal=2540,
+  extends Generic(
+    speed_rpm_nominal=2540,
     use_powerCharacteristic=true,
     power(V_flow={8.4618254914e-06,0.000274485730449,0.000555832400486,
           0.000837082776634,0.00110292011218,0.00138657181719,0.00166761756882,
@@ -41,9 +41,14 @@ The pump curve may be altered slightly to guarantee that <i>dp/dm&lt;0</i>
 The figure below illustrates a digitized pump curve.
 </p>
 <p align=\"center\">
-<img alt=\"Pump curve\" src=\"modelica://AixLib/Resources/Images/Fluid/Movers/Data/stratoscurve.png\"/></p>
+<img alt=\"Pump curve\" src=\"modelica://AixLib/Resources/Resources/Images/Fluid/Movers/Data/stratoscurve.png\"/></p>
 </html>", revisions="<html>
 <ul>
+<li>
+February 17, 2016, by Michael Wetter:<br/>
+Updated parameter names for
+<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/396\">#396</a>.
+</li>
 <li>
 December 12, 2014, by Michael Wetter:<br/>
 Added <code>defaultComponentPrefixes</code> and

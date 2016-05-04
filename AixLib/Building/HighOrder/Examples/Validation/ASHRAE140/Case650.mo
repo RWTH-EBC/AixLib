@@ -13,12 +13,12 @@ model Case650
     annotation (Placement(transformation(extent={{-142,61},{-118,85}})));
   Components.Weather.RadiationOnTiltedSurface.RadOnTiltedSurf_Perez
     radOnTiltedSurf_Perez[5](
-    WeatherFormat=2,
     Azimut={180,-90,0,90,0},
     Tilt={90,90,90,90,0},
-    GroundReflection=fill(0.2, 5),
-    Latitude=fill(39.76, 5),
-    h=1609) "N,E,S,W, Horz"
+    each GroundReflection= 0.2,
+    each Latitude= 39.76,
+    each h= 1609,
+    each WeatherFormat=2) "N,E,S,W, Horz"
     annotation (Placement(transformation(extent={{-102,56},{-74,84}})));
 
   Modelica.Blocks.Sources.CombiTimeTable Solar_Radiation(
@@ -50,7 +50,7 @@ model Case650
     annotation (Placement(transformation(extent={{-112,-31},{-99,-18}})));
   Modelica.Blocks.Sources.Constant Source_InternalGains_radiative(k=0.6*200)
     annotation (Placement(transformation(extent={{-112,-58},{-100,-46}})));
-  HVAC.HeatGeneration.IdealHeaterCooler                   idealHeaterCooler(
+  Utilities.Sources.HeaterCooler.HeaterCoolerPI idealHeaterCooler(
     TN_heater=1,
     TN_cooler=1,
     h_heater=1e6,
@@ -80,6 +80,13 @@ model Case650
     table=AERProfile.Profile,
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic)
     annotation (Placement(transformation(extent={{-39,-48},{-26,-35}})));
+  Modelica.Blocks.Continuous.Integrator integrator
+    annotation (Placement(transformation(extent={{71,26.5},{82,37.5}})));
+  Modelica.Blocks.Sources.Constant const(k=293.15) annotation (Placement(
+        transformation(
+        extent={{-7,-7},{7,7}},
+        rotation=90,
+        origin={27,-54})));
 equation
     //Connections for input solar model
   for i in 1:5 loop
@@ -91,9 +98,9 @@ equation
   end for;
 
   // Set outputs
-  AnnualCoolingLoad = idealHeaterCooler.coolMeter.q_kwh/1000;  // in MWh
+  integrator.u =idealHeaterCooler.coolingPower /(1000*1000);  // in MWh
 
-  PowerLoad = idealHeaterCooler.coolMeter.p;
+  PowerLoad =idealHeaterCooler.coolingPower;
 
   connect(Source_Weather.y[1], outsideTemp.T) annotation (Line(
       points={{-93,40},{-80,40},{-80,46.5},{-71.1,46.5}},
@@ -110,8 +117,8 @@ equation
   connect(Source_Weather.y[2], Room.WindSpeedPort) annotation (Line(
       points={{-93,40},{-11.1,40},{-11.1,43.65}},
       color={0,0,127}));
-  connect(Room.thermRoom, idealHeaterCooler.HeatCoolRoom) annotation (Line(
-      points={{5.91,42.215},{5.91,19},{30,19},{30,-22.8},{25.4,-22.8}},
+  connect(Room.thermRoom,idealHeaterCooler.heatCoolRoom)  annotation (Line(
+      points={{5.91,42.215},{5.91,19},{30,19},{30,-28},{25,-28}},
       color={191,0,0}));
   connect(Ground.port, Room.Therm_ground) annotation (Line(
       points={{-55,10},{5.28,10},{5.28,17.82}},
@@ -132,12 +139,15 @@ equation
       points={{-72,-52},{-60,-52},{-60,-24},{-50,-24},{-50,-14},{13.89,-14},{
           13.89,42.83}},
       color={191,0,0}));
-  connect(Source_TsetCool.y[1], idealHeaterCooler.soll_cool) annotation (Line(
-      points={{5.65,-42.5},{11.2,-42.5},{11.2,-28.8}},
-      color={0,0,127}));
+  connect(Source_TsetCool.y[1], idealHeaterCooler.setPointCool) annotation (
+      Line(points={{5.65,-42.5},{13.6,-42.5},{13.6,-31.2}}, color={0,0,127}));
   connect(AirExchangeRate.y[1], Room.AER) annotation (Line(
       points={{-25.35,-41.5},{-21,-41.5},{-21,27.25},{-11.1,27.25}},
       color={0,0,127}));
+  connect(integrator.y, AnnualCoolingLoad)
+    annotation (Line(points={{82.55,32},{100,32},{100,32}}, color={0,0,127}));
+  connect(const.y, idealHeaterCooler.setPointHeat) annotation (Line(points={{27,
+          -46.3},{26,-46.3},{26,-40},{18.2,-40},{18.2,-31.2}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(
         extent={{-150,-100},{120,90}},
         preserveAspectRatio=false,
@@ -216,9 +226,9 @@ equation
     experiment(StopTime=3.1536e+007, Interval=3600),
     __Dymola_experimentSetupOutput(events=false),
     Documentation(revisions="<html>
- <p><ul>
+ <ul>
  <li><i>March 9, 2015</i> by Ana Constantin:<br/>Implemented</li>
- </ul></p>
+ </ul>
  </html>",
          info="<html>
 <p>As described in ASHRAE Standard 140.</p>
@@ -228,7 +238,7 @@ equation
 <li>From 0700 hours to 1800 hours, vent fan = OFF</li>
 <li>Heating = always OFF</li>
 <li>From 1800 hours to 0700 hours, cool = OFF</li>
-<li>From 0700 hours to 1800 hours, cool = ON if temperature &GT; 27 degC; otherwise, cool = OFF</li>
+<li>From 0700 hours to 1800 hours, cool = ON if temperature &gt; 27 degC; otherwise, cool = OFF</li>
 </ul>
 </html>"));
 end Case650;

@@ -37,9 +37,9 @@ equation
       points={{-25,72},{21.18,72},{21.18,42.98}},
       color={0,0,127}));
   annotation(Documentation(revisions="<html>
-<p><ul>
+<ul>
  <li><i>May 28, 2015 </i> by Marcus Fuchs:<br/>Added unit testing command to annotations</li>
- </ul></p>
+ </ul>
  <p><i>February 2014</i>, by Peter Remmen:</p><p>Implemented</p>
  </html>", info="<html>
 <p>Test Case 3 of the VDI6007: <a name=\"result_box\">C</a>alculation of the reaction indoor temperature to a convective heat source for Type room L </p>

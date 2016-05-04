@@ -1,6 +1,6 @@
 within AixLib.Building.LowOrder.BaseClasses.EqAirTemp;
 model EqAirTempVDI
-  extends EqAirTemp.partialEqAirTemp;
+  extends PartialEqAirTemp;
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaowo=20
     "Outer wall's coefficient of heat transfer (outer side)";
   parameter Real orientationswallshorizontal[n]={90,90,90,90}

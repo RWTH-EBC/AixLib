@@ -1,9 +1,7 @@
 BaseParameters
-AirHandlingUnit
 Ductwork
 Fan
 HeatExchanger
-HeatGeneration
 HumidifierAndDehumidifier
 Meter
 Sensors

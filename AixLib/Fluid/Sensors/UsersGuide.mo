@@ -35,12 +35,12 @@ Modelica.Fluid.Examples.Explanatory.MeasuringTemperature</a>.
 <table summary=\"summary\" border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
 <tr><th valign=\"top\" align=\"left\">Correct use</th>
     <td valign=\"top\">
-    <img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Sensors/twoPortHex.png\" />
+    <img alt=\"image\" src=\"modelica://AixLib/Resources/Resources/Images/Fluid/Sensors/twoPortHex.png\" />
     </td>
 </tr>
 <tr><th valign=\"top\" align=\"left\">Not recommended</th>
     <td valign=\"top\">
-    <img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Sensors/onePortHex.png\" />
+    <img alt=\"image\" src=\"modelica://AixLib/Resources/Resources/Images/Fluid/Sensors/onePortHex.png\" />
     </td>
 </tr>
 </table>
@@ -147,7 +147,7 @@ is used to switch the mass flow rate on again. If <code>transferHeat = false</co
 then the sensor output <i>T</i> remains constant if the mass flow rate is zero
 and hence a fan or pump controller that uses this signal may never switch the device
 on again.
-If the sensor ouput <i>T</i> is not used to switch on the mass flow rate, then
+If the sensor output <i>T</i> is not used to switch on the mass flow rate, then
 in general one can use <code>transferHeat=false</code>.
 </p>
 <p>

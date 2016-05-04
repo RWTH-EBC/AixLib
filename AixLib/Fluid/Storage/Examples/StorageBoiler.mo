@@ -72,13 +72,16 @@ equation
       points={{-66,80},{-32,80},{-32,72}},
       color={0,127,255}));
   annotation( experiment(StopTime = 86400, Interval = 60),Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
  <p>This is a simple example of a storage and a boiler.</p>
  </html>", revisions="<html>
- <p>November 2014, Marcus Fuchs</p>
- <p><ul>
- <li>Changed model to use Annex 60 base class</li>
- </ul></p>
- <p>13.12.2013, by <i>Sebastian Stinner</i>: implemented</p>
+ <ul>
+ <li><i>November 2014&nbsp;</i>
+    by Marcus Fuchs:<br/>
+    Changed model to use Annex 60 base class</li>
+ <li><i>13.12.2013</i>
+       by Sebastian Stinner:<br/>
+      implemented</li>
+ </ul>
  </html>"));
 end StorageBoiler;

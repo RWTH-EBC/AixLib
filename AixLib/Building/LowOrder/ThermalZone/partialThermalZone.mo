@@ -1,7 +1,7 @@
 within AixLib.Building.LowOrder.ThermalZone;
-partial model partialThermalZone
-  "partial for ready-to-use reduced order building model"
-  parameter DataBase.Buildings.ZoneBaseRecord zoneParam = DataBase.Buildings.OfficePassiveHouse.OPH_1_Meeting()
+partial model PartialThermalZone
+  "Partial for ready-to-use reduced order building model"
+  parameter DataBase.Buildings.ZoneBaseRecord zoneParam
     "choose setup for this zone" annotation(choicesAllMatching = true);
   Modelica.Blocks.Interfaces.RealInput ventilationRate(
   final quantity="VolumeFlowRate",
@@ -21,8 +21,8 @@ partial model partialThermalZone
             {-60,66}})));
   Modelica.Blocks.Interfaces.RealInput internalGains[3]
     "Input profiles for internal gains persons, machines, light" annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 90, origin = {80, -100}), iconTransformation(extent = {{-12, -12}, {12, 12}}, rotation = 90, origin={80,-60})));
-  replaceable BaseClasses.BuildingPhysics.BuildingPhysics buildingPhysics           constrainedby
-    AixLib.Building.LowOrder.BaseClasses.BuildingPhysics.partialBuildingPhysics(
+  replaceable BaseClasses.BuildingPhysics.BuildingPhysics buildingPhysics constrainedby
+    AixLib.Building.LowOrder.BaseClasses.BuildingPhysics.PartialBuildingPhysics(
     RRest=zoneParam.RRest,
     R1o=zoneParam.R1o,
     C1o=zoneParam.C1o,
@@ -58,8 +58,9 @@ partial model partialThermalZone
     RWin=zoneParam.RWin,
     alphaConvWinInner=zoneParam.alphaConvWinInner,
     alphaConvWinOuter=zoneParam.alphaConvWinOuter,
-    awin=zoneParam.awin) "Building physics"
-                       annotation (Placement(transformation(extent={{-20,0},{20,40}})),
+    awin=zoneParam.awin,
+    orientationswallshorizontal=zoneParam.orientationswallshorizontal)
+    "Building physics"  annotation (Placement(transformation(extent={{-20,0},{20,40}})),
       choicesAllMatching=true);
 public
   Modelica.Blocks.Interfaces.RealInput ventilationTemperature(
@@ -116,4 +117,4 @@ public
  </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})));
-end partialThermalZone;
+end PartialThermalZone;

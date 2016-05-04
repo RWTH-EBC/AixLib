@@ -1,6 +1,6 @@
 within AixLib.Building.LowOrder.BaseClasses.BuildingPhysics;
-partial model partialBuildingPhysics
-  "partial model for building physics (windows and walls)"
+partial model PartialBuildingPhysics
+  "Partial model for building physics (windows and walls)"
   parameter Modelica.SIunits.Area AWin[n] "Area of the windows" annotation(Dialog(tab = "Windows", enable = if withWindows and withOuterwalls then true else false));
   parameter Modelica.SIunits.TransmissionCoefficient gsunblind[n]
     "Total energy transmittances if sunblind is closed" annotation(Dialog(tab = "Windows", group = "Shading", enable = if withWindows and withOuterwalls then true else false));
@@ -56,6 +56,9 @@ partial model partialBuildingPhysics
     "Coefficient of convective heat transfer of the window (outer side)" annotation(Dialog(tab="Windows",enable = if withWindows then true else false));
   parameter Modelica.SIunits.Emissivity awin
     "Coefficient of absorption of the window" annotation(Dialog(tab="Windows",enable = if withWindows then true else false));
+  parameter Real orientationswallshorizontal[n]
+    "orientations of the walls against the vertical (wall,roof)"
+                                                                annotation(Dialog(tab = "Outer walls"));
   SolarRadWeightedSum solRadWeightedSum(n=n, weightfactors=AWin)
     "Aggregates solar radiation through windows" annotation (Placement(transformation(extent={{6,56},{
             34,86}})));
@@ -84,7 +87,7 @@ partial model partialBuildingPhysics
   SolarRadAdapter solarRadAdapter[n] "Converts solar radiation in real"  annotation (Placement(transformation(extent={{-74,28},{-54,48}})));
   replaceable
     AixLib.Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_VDI6007
-    corG   constrainedby
+    corG constrainedby
     Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG(n=n, Uw=UWin)
     "G-value dependent on angles"
     annotation (Placement(transformation(extent={{-24,60},{-4,80}})),choicesAllMatching=true);
@@ -148,4 +151,4 @@ equation
  <li><i>January 2012,&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
  </ul>
  </html>"));
-end partialBuildingPhysics;
+end PartialBuildingPhysics;

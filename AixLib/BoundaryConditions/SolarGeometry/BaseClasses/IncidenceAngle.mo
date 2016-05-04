@@ -15,7 +15,7 @@ block IncidenceAngle "The solar incidence angle on a tilted surface"
   Modelica.Blocks.Interfaces.RealOutput incAng(
     final quantity="Angle",
     final unit="rad",
-    displayUnit="deg") "Incidence angle on a tilted surfce"
+    displayUnit="deg") "Incidence angle on a tilted surface"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 protected
   Real dec_c=Modelica.Math.cos(decAng) "Cosine of declination angle";
@@ -61,5 +61,5 @@ First implementation.
           lineColor={0,0,127},
           textString="solHouAng"),
         Bitmap(extent={{-90,92},{90,-94}}, fileName=
-              "modelica://AixLib/Resources/Images/BoundaryConditions/SolarGeometry/BaseClasses/IncidenceAngle.png")}));
+              "modelica://AixLib/Resources/Resources/Images/BoundaryConditions/SolarGeometry/BaseClasses/IncidenceAngle.png")}));
 end IncidenceAngle;

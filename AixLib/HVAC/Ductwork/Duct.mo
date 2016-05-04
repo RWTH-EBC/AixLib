@@ -20,7 +20,7 @@ equation
  <p>Simple Duct Model with pressure loss and storage of mass and energy</p>
  <p>It consists of one pressure loss model and one Volume model.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Example Results</span></h4>
  <p><a href=\"AixLib.HVAC.Ductwork.Examples.DuctNetwork\">AixLib.HVAC.Ductwork.Examples.DuctNetwork</a> </p>
  </html>", revisions = "<html>

@@ -1,6 +1,6 @@
 within AixLib.Building.LowOrder.BaseClasses.BuildingPhysics;
 model BuildingPhysicsVDI "Building physics according to VDI 6007"
-  extends partialBuildingPhysics;
+  extends PartialBuildingPhysics;
   EqAirTemp.EqAirTempSimple eqAirTemp(
     alphaowo=alphaowo,
     aowo=aowo,
@@ -64,7 +64,7 @@ equation
     annotation (Line(points={{32.6,71},{33.66,71},{33.66,44.32}}, color={0,0,127}));
   annotation (Documentation(info="<html>
 <p>This model connects <a href=\"AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel\">ReducedOrderModel</a> with <a href=\"AixLib.Building.Components.Weather.Sunblinds\">Sunblind</a> and <a href=\"AixLib.Building.LowOrder.BaseClasses.EqAirTemp\">EqAirTemp</a>. All this models have been developed in the context of the Guideline VDI 6007 to have the whole VDI 6007 in Modelica. ThermalZonePhysics reflects all components described in the guideline</p>
-<p><br><b>References</b> </p>
+<p><br/><b>References</b> </p>
 <ul>
 <li>German Association of Engineers: Guideline VDI 6007-1, March 2012: Calculation of transient thermal response of rooms and buildings - Modelling of rooms. </li>
 <li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D. (2014): Low order thermal network models for dynamic simulations of buildings on city district scale. In: Building and Environment 73, p. 223&ndash;231. DOI: <a href=\"http://dx.doi.org/10.1016/j.buildenv.2013.12.016\">10.1016/j.buildenv.2013.12.016</a>. </li>

@@ -13,20 +13,26 @@ equation
   dp = 8 * zeta / (Modelica.Constants.pi ^ 2 * D ^ 4 * rho) * m_flow ^ 2;
   annotation( Icon(graphics={  Rectangle(extent=  {{-80, 46}, {80, -34}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 0},
             fillPattern=                                                                                                    FillPattern.Solid, radius=  45), Text(extent=  {{32, 26}, {-30, -10}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 0},
-            fillPattern=                                                                                                    FillPattern.Solid, textString=  "Zeta")}), Documentation(revisions="<html>
- <p>November 2014, Marcus Fuchs</p>
- <p><ul>
- <li>Changed model to use Annex 60 base class</li>
- </ul></p>
- <p>01.11.2013, by <i>Ana Constantin</i>: implemented</p>
+            fillPattern=FillPattern.Solid, textString=  "Zeta")}),
+  Documentation(revisions="<html>
+  <ul>
+  <li><i>November 2014&nbsp;</i>
+     by Marcus Fuchs:<br/>
+     Changed model to use Annex 60 base class</li>
+  <li><i>November 1, 2013&nbsp;</i>
+     by Ana Constantin:<br/>
+     Implemented</li>
+  </ul>
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Very simple model for a hydraulic resistance with the pressureloss modelled with a pressure loss factor, zeta.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\"
+    alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>Values for pressure loss factor zeta can be easily found in tables.</p>
  <h4><span style=\"color:#008000\">Example Results</span></h4>
- <p><a href=\"AixLib.HVAC.Pumps.Examples.PumpHydraulicResistance_closedLoop\">AixLib.HVAC.Pumps.Examples.PumpHydraulicResistance_closedLoop</a></p>
+ <p><a href=\"AixLib.HVAC.Pumps.Examples.PumpHydraulicResistance_closedLoop\">
+    AixLib.HVAC.Pumps.Examples.PumpHydraulicResistance_closedLoop</a></p>
  </html>"));
 end HydraulicResistance;

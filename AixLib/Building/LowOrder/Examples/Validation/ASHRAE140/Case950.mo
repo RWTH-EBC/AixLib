@@ -124,7 +124,8 @@ model Case950
     fileName="NoName",
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic)
     annotation (Placement(transformation(extent={{-8,-50},{5,-37}})));
-  AixLib.HVAC.Meter.TEnergyMeter coolMeter
+  AixLib.Utilities.Sensors.TEnergyMeter
+                                 coolMeter
     annotation (Placement(transformation(extent={{85,-15},{105,5}})));
   Modelica.Blocks.Sources.Constant const(k=0)
     annotation (Placement(transformation(extent={{12,-61},{24,-49}})));
@@ -207,7 +208,7 @@ equation
       color={0,0,127}));
   connect(Source_TsetHeat.y[1], idealHeaterCooler.setPointCool) annotation (
       Line(points={{5.65,-43.5},{13.6,-43.5},{13.6,-31.2}}, color={0,0,127}));
-  connect(idealHeaterCooler.CoolingPower, coolMeter.p) annotation (Line(points=
+  connect(idealHeaterCooler.coolingPower, coolMeter.p) annotation (Line(points=
          {{26,-24.6},{50,-24.6},{50,-25},{73,-25},{73,-5},{86.4,-5}}, color={0,
           0,127}));
   connect(const.y, idealHeaterCooler.setPointHeat) annotation (Line(points={{24.6,
@@ -297,11 +298,11 @@ equation
 <li>From 0700 hours to 1800 hours, vent fan = OFF</li>
 <li>Heating = always OFF</li>
 <li>From 1800 hours to 0700 hours, cool = OFF</li>
-<li>From 0700 hours to 1800 hours, cool = ON if temperature &GT; 27 degC; otherwise, cool = OFF</li>
+<li>From 0700 hours to 1800 hours, cool = ON if temperature &gt; 27 degC; otherwise, cool = OFF</li>
 </ul>
 </html>", revisions="<html>
- <p><ul>
+ <ul>
  <li><i>March 19, 2015</i> by Peter Remmen:<br/>Implemented</li>
- </ul></p>
+ </ul>
  </html>"));
 end Case950;

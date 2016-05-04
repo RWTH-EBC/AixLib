@@ -7,7 +7,7 @@ partial model FlowMachine_ZeroFlow
 
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal= 1
     "Nominal mass flow rate";
-  parameter Modelica.SIunits.Pressure dp_nominal = 500
+  parameter Modelica.SIunits.PressureDifference dp_nominal = 500
     "Nominal pressure difference";
 
   Modelica.Blocks.Sources.Ramp y(
@@ -30,8 +30,8 @@ partial model FlowMachine_ZeroFlow
   replaceable AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine floMacSta
     constrainedby AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine(
       redeclare package Medium = Medium,
-      energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-      dynamicBalance=false) "Static model of a flow machine"
+      energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState)
+    "Static model of a flow machine"
     annotation (Placement(transformation(extent={{20,70},{40,90}})));
   replaceable AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine floMacDyn
     constrainedby AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine(
@@ -99,6 +99,12 @@ This is the base class for examples that demonstrates the use of a flow machine 
 </html>", revisions="<html>
 <ul>
 <li>
+January 22, 2016, by Michael Wetter:<br/>
+Corrected type declaration of pressure difference.
+This is
+for <a href=\"https://github.com/iea-annex60/modelica-annex60/issues/404\">#404</a>.
+</li>
+<li>
 September 20, 2014, by Michael Wetter:<br/>
 Added <code>constrainedby</code> declaration for medium.
 Otherwise, the pedantic model check of
@@ -106,6 +112,9 @@ Otherwise, the pedantic model check of
 AixLib.Fluid.Movers.Validation.SpeedControlled_Nrpm_Data</a>
 fails because water does not implemented the function
 <code>Xsaturation</code>.
+</li>
+<li>February 20, 2016, by Ruben Baetens:<br/>
+Removal of <code>dynamicBalance</code> as parameter for <code>massDynamics</code> and <code>energyDynamics</code>.
 </li>
 <li>
 March 24 2010, by Michael Wetter:<br/>

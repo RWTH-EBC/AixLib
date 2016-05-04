@@ -36,7 +36,7 @@ equation
   cos_theta = (cos_theta_help + abs(cos_theta_help))/2;
 
   // calculation of R factor [Duffie/Beckman, p.25], due to numerical problems (cos_theta_z in denominator)
-  // R is manually set to 0 for theta_z >= 80° (-> 90° means sunset)
+  // R is manually set to 0 for theta_z >= 80 deg (-> 90 deg means sunset)
   if noEvent(cos_theta_z <= 0.17365) then
     R_help = cos_theta_z*cos_theta;
 
@@ -164,7 +164,7 @@ Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>The <b>RadOnTiltedSurf</b> model calculates the total radiance on a tilted surface. </p>
 <h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <p>The <b>RadOnTiltedSurf</b> model uses output data of the <b><a href=\"AixLib.Building.Components.Weather.BaseClasses.Sun\">Sun</a></b> model and weather data (beam and diffuse radiance on a horizontal surface for TRY format, or beam normal and global horizontal for TMY format) to compute total radiance on a tilted surface. It needs information on the tilt angle and the azimut angle of the surface, the latitude of the location and the ground reflection coefficient. </p>
 <p>The input InDayAngleSun is not explicitly used in the model, but it is part of the partial model and it doesn&apos;t interfere with the calculations. </p>
@@ -176,7 +176,7 @@ Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
   <li><i>March 23, 2015&nbsp;</i> by Ana Constantin:<br/>Adapted solar inputs so it cand work with both TRY and TMY weather format</li>
   <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
   <li><i>March 14, 2005&nbsp;</i>
-         by Timo Haase:<br>
+         by Timo Haase:<br/>
          Implemented.</li>
 </ul>
 </html>"));

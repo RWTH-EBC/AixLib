@@ -10,7 +10,7 @@ model SimpleHouse
   parameter Modelica.SIunits.Volume V_zone = A_wall*3 "Wall area";
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal=3*rad.m_flow_nominal
     "Nominal mass flow rate";
-  parameter Modelica.SIunits.Pressure dp_nominal=200
+  parameter Modelica.SIunits.PressureDifference dp_nominal=200
     "Pressure drop at nominal mass flow rate";
   parameter Boolean allowFlowReversal=false
     "= false because flow will not reverse in these circuits";
@@ -78,7 +78,8 @@ model SimpleHouse
     filteredSpeed=false,
     m_flow_nominal=m_flow_nominal,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-    allowFlowReversal=allowFlowReversal)
+    allowFlowReversal=allowFlowReversal,
+    nominalValuesDefineDefaultPressureCurve=true)
     annotation (Placement(transformation(extent={{80,-158},{60,-138}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor senTemZonAir
     "Zone air temperature sensor"
@@ -97,15 +98,17 @@ model SimpleHouse
     m_flow_nominal=0.01,
     dp_nominal=dp_nominal,
     filteredSpeed=false,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState)
-    "Constant head fan"  annotation (Placement(transformation(
+    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
+    nominalValuesDefineDefaultPressureCurve=true) "Constant head fan"
+                         annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={30,100})));
-  Modelica.Blocks.Logical.Hysteresis hysAir(uLow=273.15 + 24, uHigh=273.15 + 22)
+  Modelica.Blocks.Logical.Hysteresis hysAir(uLow=273.15 + 22, uHigh=273.15 + 24)
     "Hysteresis controller for ventilation"
     annotation (Placement(transformation(extent={{-80,80},{-60,100}})));
-  Modelica.Blocks.Math.BooleanToReal booleanToReal "Boolean to real"
+  Modelica.Blocks.Math.BooleanToReal booleanToReal(realTrue=0, realFalse=1)
+    "Boolean to real"
     annotation (Placement(transformation(extent={{-50,80},{-30,100}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow window
     "Very simple window model"
@@ -249,9 +252,21 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Weather inputs")}),
     experiment(StopTime=1e+06),
-    __Dymola_experimentSetupOutput(events=false),
     Documentation(revisions="<html>
 <ul>
+<li>
+March 11, 2016, by Michael Wetter:<br/>
+Corrected wrong limits for <code>hysAir</code> so that
+<code>uLow &lt; uHigh</code>.
+This is
+for <a href=\"https://github.com/iea-annex60/modelica-annex60/issues/429\">#429</a>.
+</li>
+<li>
+January 22, 2016, by Michael Wetter:<br/>
+Corrected type declaration of pressure difference.
+This is
+for <a href=\"https://github.com/iea-annex60/modelica-annex60/issues/404\">#404</a>.
+</li>
 <li>
 September 19, 2015, by Filip Jorissen:<br/>
 First implementation.
@@ -262,7 +277,10 @@ First implementation.
 This model contains a simple model of a house
 with a heating system, ventilation and weather boundary conditions.
 It servers as a demonstration case of how the <code>AixLib</code> library can be used.
-This model was demonstrated at the joint Annex 60 meeting in Leuven on 18 September 2015.
+</p>
+<p>
+This model was demonstrated at the joint Annex 60 and
+IBPSA-NVL meeting in Leuven on 18 September 2015.
 </p>
 </html>"),
     __Dymola_Commands(file=

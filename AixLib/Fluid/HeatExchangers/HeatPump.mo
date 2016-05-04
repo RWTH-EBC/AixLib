@@ -106,18 +106,21 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Simple model of an on/off-controlled heat pump. The refrigerant circuit is a black-box model represented by tables which calculate the electric power and heat flows of the condenser depending on the source and sink temperature. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\"
+    alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Example Results</span></h4>
- <p><a href=\"AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem\">AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem</a></p>
- <p><a href=\"AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem2\">AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem2</a></p>
+ <p><a href=\"AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem\">
+    AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem</a></p>
+ <p><a href=\"AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem2\">
+    AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem2</a></p>
  </html>", revisions="<html>
- <p>November 2014, Marcus Fuchs</p>
- <p><ul>
- <li>Changed model to use Annex 60 base class</li>
- </ul></p>
- <p>25.11.2013, Kristian Huchtemann</p>
- <p><ul>
- <li>implemented</li>
- </ul></p>
+ <ul>
+ <li><i>November 2014&nbsp;</i>
+    by Marcus Fuchs:<br/>
+    Changed model to use Annex 60 base class</li>
+ <li><i>November 25, 2013&nbsp;</i>
+    by Kristian Huchtemann:<br/>
+    Implemented</li>
+ </ul>
  </html>"));
 end HeatPump;

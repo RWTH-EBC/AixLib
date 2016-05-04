@@ -52,8 +52,8 @@ equation
     Documentation(info="<html>
 <p>ThermSplitter is a simple model which weights a given set of therm inputs to calculate an average temperature or heat flow and the other way around</p>
 <h4>Main equations</h4>
-<p><img src=\"modelica://AixLib/Images/equations/equation-ShHZPTo9.png\" alt=\"signalOutput.Q_flow = splitFactor .* (signalInput.Q_flow * unitvec) \"/></p>
-<p><img src=\"modelica://AixLib/Images/equations/equation-BtreVeqi.png\" alt=\"signalInput.T = sum(signalOutput.T * splitFactor) \"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/Building/LowOrder/BaseClasses/ThermSplitter/equation-ShHZPTo9.png\" alt=\"signalOutput.Q_flow = splitFactor .* (signalInput.Q_flow * unitvec) \"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/Building/LowOrder/BaseClasses/ThermSplitter/equation-BtreVeqi.png\" alt=\"signalInput.T = sum(signalOutput.T * splitFactor) \"/></p>
 <h4>Assumptions and limitations</h4>
 <h4>Typical use and important parameters</h4>
 <p>This model is used to weight therm ports according to given split factors.</p>
