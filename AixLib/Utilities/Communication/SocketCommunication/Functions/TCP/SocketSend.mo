@@ -26,12 +26,14 @@ and send the message \"I am a message!\" with the length of 15 characters to the
 <pre>
 model dummyUsage
 
-  Integer state \"Return variable of functions 0 == OK!, 1 == Error\";
+Integer state \"Return variable of functions 0 == OK!, 1 == Error\";
+Integer socketHandle(start = 0) \"socket handle\";
+
   Modelica.SIUnits.Time sampleTrigger=1 \" Sampletime how often per second telegram is send\";
 
 initial algorithm 
 
-  state := TCPConstructor(\"0.11.11.11\",\"1234\");
+  (socketHandle,state) := TCPConstructor(\"0.11.11.11\",\"1234\");
 
 equation
 
@@ -39,7 +41,7 @@ algorithm
 
   when {sampleTrigger} then
 
-    state = SocketSend(\"I am a message!\", 15);
+    state = SocketSend(\"I am a message!\", 15,socketHandle);
 
   end when;
 
@@ -57,14 +59,14 @@ Source code of SocketSend().
 <p>
 <pre>
 //source code function
-int SocketSend(tData sendbuf, int len)
+int SocketSend(tData sendbuf, int len, int socketHandle)
 {
         int iResult;
     // Send an sendbuf
-    iResult = send( gConnectSocket, sendbuf, len, 0 );
+    iResult = send( socketHandle, sendbuf, len, 0 );
     if (iResult == SOCKET_ERROR) {
         ModelicaFormatMessage(\"Socketsend(): Send failed with error: %d\n\", WSAGetLastError());
-        closesocket(gConnectSocket);
+        closesocket(socketHandle);
         WSACleanup();
         return 1;
     }

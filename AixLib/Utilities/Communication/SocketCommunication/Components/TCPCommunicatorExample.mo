@@ -24,6 +24,7 @@ model TCPCommunicatorExample
     "Maximum number of single characters receiveable per message";
   String message "Variable for the message to be send";
   Integer intLength "integer value of length of message";
+  Integer nextIndex(start=0);
   Integer stateExample
     "dummy variable to check state of function, 0 == OK, 1 == errror";
   String messageRecv "Variable to host received message";
@@ -44,7 +45,7 @@ algorithm
 
    (messageRecv, stateExample) :=Functions.TCP.SocketReceive(maxLen,socketHandle);   // receive message
 
-    y[1] :=Functions.Utilities.convertStrtoDbl(messageRecv);
+    (y[1],nextIndex) := Modelica.Utilities.Strings.scanReal(messageRecv, startIndex=1,unsigned=false,message="");
 
 /************************* In between for expalanation ******************************/
   Modelica.Utilities.Streams.print("SocketReceive(): Message received");

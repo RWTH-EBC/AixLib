@@ -17,8 +17,6 @@
 
 #include <winsock2.h>
 #include <ws2tcpip.h>
-//#include <stdlib.h> //Excluded to avoid clashing with dymosim and DDE compilation
-//#include <stdio.h> //Excluded to avoid clashing with dymosim and DDE compilation
 #include <string.h>
 
 #define MAX_SIZE	256 // Defines maximum number of characters in one message
@@ -40,13 +38,6 @@ typedef unsigned char* tByte; // Array of Byte to be received
     struct addrinfo *gpResult = NULL,
                     *gPtr = NULL,
                     gHints; // 3 times struct addrinfo
-
-
-// For troubleshooting
-
-int add2(int a, int b){
-	return(a+b);
-}
 					
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 // Functions to handle TCP communication
@@ -69,7 +60,7 @@ int SocketInit(void) // Initialize a Socket, incorporated in TCPConstructor()
 	return ans;
 }
 
-int SocketDestruct(int socketHandle) // Destruct socket and clean up
+int SocketDestruct(int socketHandle) // Destruct socket identified by socketHandle and clean up
 {
     // cleanup
     closesocket(socketHandle);
@@ -78,7 +69,7 @@ int SocketDestruct(int socketHandle) // Destruct socket and clean up
 }
 
 // socketHandle is output
-int SocketConnect(tIpAddr ip, tPort port, int* socketHandle) // Connect to server on ip and port
+int SocketConnect(tIpAddr ip, tPort port, int* socketHandle) // Connect to server on ip and port via socket identified by socketHandle
 {
 	int iResult;
     // Resolve the server address and port
@@ -121,7 +112,7 @@ int SocketConnect(tIpAddr ip, tPort port, int* socketHandle) // Connect to serve
 	return 0;
 }
 
-int SocketDisconnect(int socketHandle) // End communcation
+int SocketDisconnect(int socketHandle) // End communcation of socket identified by socketHandle
 {
  	int iResult;
    // shutdown the connection since no more data will be sent
@@ -135,7 +126,7 @@ int SocketDisconnect(int socketHandle) // End communcation
 	return 0;
 }
 
-int SocketSend(tData sendbuf, int len, int socketHandle) // Send data via socket
+int SocketSend(tData sendbuf, int len, int socketHandle) // Send data via socket identified by socketHandle
 {
 	int iResult;
     // Send an initial buffer
@@ -149,7 +140,7 @@ int SocketSend(tData sendbuf, int len, int socketHandle) // Send data via socket
 	return iResult;
 }
 
-int SocketReceive(char **buffer, int maxLen, int socketHandle) // Receive data on socket
+int SocketReceive(char **buffer, int maxLen, int socketHandle) // Receive data on socket identified by socketHandle
 {
 	int iResult;
 	char *answerBuffer;
@@ -159,7 +150,7 @@ int SocketReceive(char **buffer, int maxLen, int socketHandle) // Receive data o
 	return iResult;
 }
 
-int TCPConstructor(int* socketHandle, tIpAddr ip, tPort port) // Initialize socket and connect to server
+int TCPConstructor(int* socketHandle, tIpAddr ip, tPort port) // Initialize socket identified by socketHandle and connect to server
 {
 	// Intialize socket
     if (0 != SocketInit())
@@ -284,18 +275,6 @@ char *convertBytetoHex(unsigned char *ByteStr) {
 	}
     return buffer;
 }
-
-
-void convertStrtoDbl(char* string, double * data) // convert a string into a double
-{
-	*data = atof(string);
-}
-
-void convertStrtoInt(char* string, int * data) // convert a string into a integer
-{
-	*data = atoi(string);
-}
- 
  
 #endif /* defined(_MSC_VER) */
 

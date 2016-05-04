@@ -30,10 +30,11 @@ with IP 0.11.11.11 on port 1234.
 model dummyUsage
 
   Integer state \"Return variable of functions 0 == OK!\";
-   
+  Integer socketHandle(start = 0) \"socket handle\";
+  
 initial algorithm 
 
-  state := TCP_Constructor(\"0.11.11.11\",\"1234\");
+  (socketHandle,state) := TCP_Constructor(1,\"0.11.11.11\",\"1234\");
 
 equation
 
@@ -52,7 +53,7 @@ Dymola messages window. Error codes and descriptions can be found in UsersGuide.
 Source code of TCP_Constructor() in external header file.
 <p>
 <pre>
-int TCP_Constructor(tIpAddr ip, tPort port)
+int TCP_Constructor(int* socketHandle, tIpAddr ip, tPort port)
 {
         // Intialize socket
     if (0 != MySocketInit())
@@ -62,7 +63,7 @@ int TCP_Constructor(tIpAddr ip, tPort port)
     }
                         
         // Connect to Server with ip on port
-        if (0 != MySocketConnect(ip, port)) {
+        if (0 != MySocketConnect(ip, port,socketHandle)) {
         ModelicaFormatMessage(\"MySocketConnect(): Unable to connect to server!\n\");  
                 return 1;
         }
