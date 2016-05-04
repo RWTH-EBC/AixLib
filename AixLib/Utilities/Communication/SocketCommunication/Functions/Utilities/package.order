@@ -1,5 +1,3 @@
-convertStrtoDbl
-convertStrtoInt
 convertBytetoHex
 convertHextoByte
 convertBytetoSgl
