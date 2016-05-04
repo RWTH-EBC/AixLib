@@ -76,6 +76,10 @@ revisions="<HTML>
          by Georg Ferdinand Schneider:<br>
          Revised for publishing</li>
 
+ <li><i>January 25, 2016&nbsp;</i>
+         by Ana Constantin:<br>
+         Added socketHandle to allow for more than one socket in a model</li>
+
 </ul>
 </HTML>"),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),

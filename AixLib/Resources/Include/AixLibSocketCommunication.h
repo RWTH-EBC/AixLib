@@ -1,10 +1,10 @@
 /** TCP socket support (header-only library).
  *
- * @author		Georg Ferdinand Schneider <Georg.Schneider@ibp.fraunhofer.de>
- * @author		Dr. Jens Oppermann <jens.oppermann@wilo.com>
- * @version	    2015-11-12 17:00:00 V1.1
+ * @author		Georg Ferdinand Schneider <Georg.Schneider@ibp.fraunhofer.de> supervised by Dr. Jens Oppermann <jens.oppermann@wilo.com> and Ana Constantin
+ * @author		Artur Loewen<aloewen@eonerc.rwth-aachen.de> and Ana Constantin <aconstantin@eonerc.rwth-aachen.de>
+ * @version	    2016-01-25 12:00:00 V1.2
+				2015-11-12 17:00:00 V1.1
  * @since		2012-04-01
- * @copyright  WILO SE, Nortkirchenstraﬂe 100, 44147 Dortmund, Germany
  */
 
   
