@@ -28,13 +28,14 @@ and send the message \"I am a message!\" with the length of 15 characters to the
 model dummyUsage
 
   Integer state \"Return variable of functions 0 == OK!, 1 == Error\";
+  Integer socketHandle(start = 0) \"socket handle\";
   Modelica.SIUnits.Time sampleTrigger=1 \" Sampletime how often per second telegram is send\";
   parameter Interger maxLen = 512 \"Limits the maximum number of characters receiveable\";
   String bufferRecv \"Variable where received message\";
   
 initial algorithm 
 
-  state := TCPConstructor(\"0.11.11.11\",\"1234\");
+  (socketHandle,state) := TCPConstructor(\"0.11.11.11\",\"1234\");
 
 equation
 
@@ -42,8 +43,8 @@ algorithm
 
   when {sampleTrigger} then
 
-    state = SocketSend(\"I am a message!\", 15);
-    (bufferRecv, state) = SocketReceive(maxLen);
+    state = SocketSend(\"I am a message!\", 15,socketHandle);
+    (bufferRecv, state) = SocketReceive(maxLen,socketHandle);
   
   end when;
 
@@ -61,12 +62,12 @@ Dymola messages window. Error codes and descriptions can be found in UsersGuide.
 Source code of SocketReceive().
 <p>
 <pre>
-int SocketReceive(char **buffer, int maxLen)
+int SocketReceive(char **buffer, int maxLen, int socketHandle)
 {
         int iResult;
         char *answerBuffer;
         answerBuffer = ModelicaAllocateString(maxLen);
-        iResult = recv(gConnectSocket, answerBuffer, maxLen, 0);
+        iResult = recv(socketHandle, answerBuffer, maxLen, 0);
         *buffer = answerBuffer;
         return iResult;
 }

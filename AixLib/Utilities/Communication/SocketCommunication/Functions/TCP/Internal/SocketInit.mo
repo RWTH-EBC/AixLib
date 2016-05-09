@@ -34,7 +34,8 @@ This code snippet will create a local socket.
 <pre>
 model dummyUsage
 
-  Integer state \"Return variable of functions 0 == OK!, 1 == error\";
+Integer state \"Return variable of functions 0 == OK!, 1 == error\";
+Integer socketHandle \" Socket Handle\";
    
 initial algorithm 
 

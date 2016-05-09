@@ -9,10 +9,10 @@ class Overview "Overview"
    to enable Modelica-based co-simulation and hardware-in-the-loop applications. To do so we implemented a 
    set of functions offered by the Microsoft Winsock-API in C to allow a Modelica
    simulation environment to act as a TCP Client and send and receive messages
-   via a TCP socket to a server.   <p>
+   via a TCP socket to a server.<p>
    These messages can be character strings. They need to be specified according to the
-   required application.<p>
-    The authors are not able offer support for the code. Still we encourage every user to contribute to the library.
+   required application and/or top-level protocol invocated on top.<p>
+   The authors are not able offer support for the code. Still we encourage every user to contribute to the package and C-code as well as to the AixLib library.
    <h4>Acknowledgements</h4>
    This research is part of a master thesis which took place at WILO SE
    supervised by the Institute for Energy Efficient Buildings and Indoor Climate.
