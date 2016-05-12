@@ -7,20 +7,8 @@ external "C" ans = SocketInit() annotation (
     Include="#include \"AixLibSocketCommunication.h\"",
     IncludeDirectory="modelica://AixLib/Resources/Include");
 
-annotation (Documentation(revisions="<HTML>
-<ul>
-  <li><i>September 24, 2013&nbsp;</i>
-         by Georg Ferdinand Schneider:<br>
-         First implementation
-</li>
-
- <li><i>October 07, 2015&nbsp;</i>
-         by Georg Ferdinand Schneider:<br>
-         Revised for publishing</li>
-
-</ul>
-</HTML>",info="<html>
-
+annotation (Documentation(
+info="<HTML>
 <p>
 Function to initialize a TCP-Socket. Needs to be called at first. Note that SocketInit() 
 is already included in TCP_Constructor() and is here just for debugging. Returns 0 if initialization 
@@ -75,5 +63,14 @@ int SocketInit(void) // Initialize a Socket, Incorporated in TCP_Constructor()
         return ans;
 }
 <\pre>
-</html>"));
+</HTML>",
+revisions="<HTML>
+<ul><li><i>October 07, 2015&nbsp;</i>
+         by Georg Ferdinand Schneider:<br />
+         Revised for publishing</li>
+         <li><i>September 24, 2013&nbsp;</i>
+         by Georg Ferdinand Schneider:<br />
+         Implemented</li>
+</ul>
+</HTML>"));
 end SocketInit;

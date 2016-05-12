@@ -65,28 +65,43 @@ equation
             -100},{100,100}}), graphics),
 Documentation(revisions="<html>
 <ul>
-  <li><i>June 01, 2013&nbsp;</i>
-         by Georg Ferdinand Schneider:<br>
-         Implemented</li>
   <li><i>September 03, 2013&nbsp;</i>
-         by Georg Ferdinand Schneider:<br>
+         by Georg Ferdinand Schneider:<br />
          Revised documented</li>
+           <li><i>June 01, 2013&nbsp;</i>
+  by Georg Ferdinand Schneider:<br />
+         Implemented</li>
 </ul>
 </html>",
 info="<html>
 
-This is a very simple example to show TCP-Communication functionality. A feedback
+<p>This is a very simple example to show TCP-Communication functionality. A feedback
  control is modeled where a gain controller controls a first order block. The signal
- is send to a server and back. The signal is not altered by the server.
+ is send to a server and back. The signal is not altered by the server.</p>
 
-<h4>Source code of server</h4>
+<h4>Source code of TCP/IP-server</h4>
 
-This is is the source code of a server which may be utilized for testing. The server
-simply returns what he received.
-<p>
+<p>This is is the source code of a server which may be utilized for testing. The
+server simply returns after receiving the character message and sends it back
+to the sender. The code may be compiled and executed from the console. This code
+is taken from Microsoft´s Winsock documentation pages: <a href=\"http://msdn.microsoft.com/de-de/library/windows/desktop/ms737591%28v=vs.85%29.aspx\">Link to MSDN</a> </p>
+The server performs the following tasks:
+<ul>
+<li>Initialise Winsock;</li>
+<li>Create a socket;</li>
+<li>Bind the socket;</li>
+<li>Wait and listen on the socket if a client connects;</li>
+<li>Accept incoming connection from client;</li>
+<li>Receive messages from client as long as it sends and return the received messages unaltered;</li>
+<li>Terminate connection and shut down.</li>
+</ul>
+
+<p>Note before copying for compiling: Some characters needed to be
+changed to comply for HTML documentation (e.g. &amp;).
+</p>
 
 <pre>
-// Copyright (c) Microsoft MSDN
+// Copyright (c) 2015 Microsoft Corporation
 
 #undef UNICODE
 
@@ -101,7 +116,6 @@ simply returns what he received.
 
 // Need to link with Ws2_32.lib
 #pragma comment (lib, \"Ws2_32.lib\")
-// #pragma comment (lib, \"Mswsock.lib\")
 
 #define DEFAULT_BUFLEN 512
 #define DEFAULT_PORT \"27015\"
@@ -122,20 +136,20 @@ int __cdecl main(void)
     int recvbuflen = DEFAULT_BUFLEN;
     
     // Initialize Winsock
-    iResult = WSAStartup(MAKEWORD(2,2), &wsaData);
+    iResult = WSAStartup(MAKEWORD(2,2), &amp;wsaData);
     if (iResult != 0) {
         printf(\"WSAStartup failed with error: %d\n\", iResult);
         return 1;
     }
 
-    ZeroMemory(&hints, sizeof(hints));
+    ZeroMemory(&amp;hints, sizeof(hints));
     hints.ai_family = AF_INET;
     hints.ai_socktype = SOCK_STREAM;
     hints.ai_protocol = IPPROTO_TCP;
     hints.ai_flags = AI_PASSIVE;
 
     // Resolve the server address and port
-    iResult = getaddrinfo(NULL, DEFAULT_PORT, &hints, &result);
+    iResult = getaddrinfo(NULL, DEFAULT_PORT, &amp;hints, &amp;result);
     if ( iResult != 0 ) {
         printf(\"getaddrinfo failed with error: %d\n\", iResult);
         WSACleanup();

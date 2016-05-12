@@ -66,20 +66,15 @@ Higher Level protocols (>OSI-Level 5) need to be added depending on the specific
 </p>
 </html>",
 revisions="<HTML>
-<ul>
-  <li><i>September 24, 2013&nbsp;</i>
-         by Georg Ferdinand Schneider:<br>
-         First implementation
-</li>
-
- <li><i>October 07, 2015&nbsp;</i>
-         by Georg Ferdinand Schneider:<br>
-         Revised for publishing</li>
-
- <li><i>January 25, 2016&nbsp;</i>
-         by Ana Constantin:<br>
+<ul><li><i>January 25, 2016&nbsp;</i>
+         by Ana Constantin:<br />
          Added socketHandle to allow for more than one socket in a model</li>
-
+          <li><i>October 07, 2015&nbsp;</i>
+         by Georg Ferdinand Schneider:<br />
+         Revised for publishing</li>
+         <li><i>September 24, 2013&nbsp;</i>
+         by Georg Ferdinand Schneider:<br />
+         Implemented</li>
 </ul>
 </HTML>"),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),

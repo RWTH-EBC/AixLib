@@ -9,7 +9,7 @@ annotation (    Include="#include \"AixLibSocketCommunication.h\"",
     IncludeDirectory="modelica://AixLib/Resources/Include",   Documentation(
             info="<HTML>
             Function that converts a byte array into a number.
-            <h4>C Source Code of convertBytetoSgl()</h4>
+            <h4>C source code of convertBytetoSgl()</h4>
             <pre>
             float convertBytetoSgl(unsigned char *ByteArray)
             {
@@ -24,22 +24,21 @@ annotation (    Include="#include \"AixLibSocketCommunication.h\"",
               } r;
     
               r.u[0] = ByteArray[1];
-            r.u[1] = ByteArray[0];
-            r.u[2] = ByteArray[3];
-            r.u[3] = ByteArray[2];
+              r.u[1] = ByteArray[0];
+              r.u[2] = ByteArray[3];
+              r.u[3] = ByteArray[2];
               return r.f; 
              }
             </pre>
             </HTML>",
           revisions="<HTML>
-          <ul><li><i>September 24, 2013&nbsp;</i>
-          by Dr. Jens Oppermann:<br>
-           First implementation</li>
-
- <li><i>October 07, 2015&nbsp;</i>
-         by Georg Ferdinand Schneider:<br>
+          <ul>
+           <li><i>October 07, 2015&nbsp;</i>
+ by Georg Ferdinand Schneider:<br />
          Revised for publishing</li>
-
+          <li><i>September 24, 2013&nbsp;</i>
+          by Dr. Jens Oppermann:<br />
+           First implementation</li>
       </ul>
 </HTML>"));
 end convertBytetoSgl;

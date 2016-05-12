@@ -11,17 +11,14 @@ external "C" ans = SocketConnect(ip,port,socketHandle) annotation (
     Include="#include \"AixLibSocketCommunication.h\"",
     IncludeDirectory="modelica://AixLib/Resources/Include");
 
-annotation (Documentation(revisions="<HTML>
-<ul>
-  <li><i>September 24, 2013&nbsp;</i>
-         by Georg Ferdinand Schneider:<br>
-         First implementation
-</li>
-
- <li><i>October 07, 2015&nbsp;</i>
-         by Georg Ferdinand Schneider:<br>
+annotation (Documentation(
+revisions="<HTML>
+<ul><li><i>October 07, 2015&nbsp;</i>
+         by Georg Ferdinand Schneider:<br />
          Revised for publishing</li>
-
+         <li><i>September 24, 2013&nbsp;</i>
+         by Georg Ferdinand Schneider:<br />
+         Implemented</li>
 </ul>
 </HTML>",info="<html>
 

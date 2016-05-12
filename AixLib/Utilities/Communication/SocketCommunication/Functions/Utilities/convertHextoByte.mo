@@ -9,8 +9,8 @@ annotation (    Include="#include \"AixLibSocketCommunication.h\"",
     IncludeDirectory="modelica://AixLib/Resources/Include",
             Documentation(
             info="<HTML>
-            Function that converts a hex string into a byte array.
-            <h4>C Source Code of convertHextobyte()</h4>
+            <p>Function that converts a hex string into a byte array.</p>
+            <h4>C source code of convertHextobyte()</h4>
             <pre>
             unsigned char *convertHextoByte(char *HEXStr)
             {
@@ -29,13 +29,13 @@ annotation (    Include="#include \"AixLibSocketCommunication.h\"",
             </pre>
             </HTML>",
           revisions="<HTML>
-          <ul><li><i>September 24, 2013&nbsp;</i>
-          by Dr. Jens Oppermann:<br>
-           First implementation</li>
-
- <li><i>October 07, 2015&nbsp;</i>
-         by Georg Ferdinand Schneider:<br>
+          <ul>
+           <li><i>October 07, 2015&nbsp;</i>
+           by Georg Ferdinand Schneider:<br />
          Revised for publishing</li>
+          <li><i>September 24, 2013&nbsp;</i>
+          by Dr. Jens Oppermann:<br />
+           First implementation</li>
 
       </ul>
 </HTML>"));

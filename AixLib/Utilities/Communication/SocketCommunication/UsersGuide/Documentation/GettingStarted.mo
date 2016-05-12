@@ -26,7 +26,7 @@ The source code for the server is provided alongside with this library in
 revisions="<HTML>
 <ul>
  <li><i>October 07, 2015&nbsp;</i>
-         by Georg Ferdinand Schneider:<br>
+         by Georg Ferdinand Schneider:<br />
          Revised for publishing</li>
 </ul>
 </HTML>"));

@@ -22,18 +22,17 @@ class Overview "Overview"
 </HTML>",
 revisions="<HTML>
 <ul>
-  <li><i>September 24, 2013&nbsp;</i>
-         by Georg Ferdinand Schneider:<br>
+<li><i>November 12, 2015&nbsp;</i>
+         by Georg Ferdinand Schneider:<br />
+         Revised for publishing</li>
+<li><i>September 24, 2013&nbsp;</i>
+         by Georg Ferdinand Schneider:<br />
          First implementation
 </li>
 
- <li><i>October 07, 2015&nbsp;</i>
-         by Georg Ferdinand Schneider:<br>
-         Revised for publishing</li>
+
          
- <li><i>November 12, 2015&nbsp;</i>
-         by Georg Ferdinand Schneider:<br>
-         Revised for publishing</li>
+ 
 
 </ul>
 </HTML>"));

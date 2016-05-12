@@ -10,18 +10,17 @@ external "C" ans = SocketDestruct(socketHandle) annotation (
 
 annotation (Documentation(info="<html>
 
-<p>
-Function to destruct current socket. Closes socket and frees memory.
- Necessary to call as last function.
-</p>
+<p>Function to destruct current socket. Closes socket and frees memory.
+Necessary to call as last function.</p>
+
 <h4>Usage of Function</h4>
 
-This code snippet will create a local socket and connect to server with IP 0.11.11.11 on port 1234
+ <p>This code snippet will create a local socket and connect to server with IP 0.11.11.11 on port 1234
 and send the message \"I am a message!\" with the length of 15 characters to the server
  every 1 second. If the server sends something after receiving the send message it will receive 
  this message and safe it into bufferRecv. When the simulation ends the socket is closed and 
  blocked memory ist freed.
- <p>
+ </p>
 <pre>
 
 model dummyUsage
@@ -58,13 +57,12 @@ end dummyUsage;
 
 
 <h4>Errors</h4>
-state == 0, everything fine, state == 1, error where an error message will be reported in the 
-Dymola messages window. Error codes and descriptions can be found in UsersGuide.
+<p>state == 0, everything fine, state == 1, error where an error message will be reported in the 
+Dymola messages window. Error codes and descriptions can be found in UsersGuide.</p>
 
 <h4>C Source Code of SocketDestruct()</h4>
 
-Source code of SocketDestruct().
-<p>
+<p>Source code of SocketDestruct().</p>
 <pre>
 int SocketDestruct(int socketHandle)
 {
@@ -74,5 +72,16 @@ int SocketDestruct(int socketHandle)
         return 0;
 }
 </pre>
-</html>"));
+</html>",revisions="<HTML>
+<ul><li><i>January 25, 2016&nbsp;</i>
+         by Ana Constantin:<br />
+         Added socketHandle to allow for more than one socket in a model</li>
+          <li><i>October 07, 2015&nbsp;</i>
+         by Georg Ferdinand Schneider:<br />
+         Revised for publishing</li>
+         <li><i>September 24, 2013&nbsp;</i>
+         by Georg Ferdinand Schneider:<br />
+         Implemented</li>
+</ul>
+</HTML>"));
 end SocketDestruct;

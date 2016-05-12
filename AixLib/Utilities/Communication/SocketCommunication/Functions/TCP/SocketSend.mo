@@ -50,13 +50,13 @@ end dummyUsage;
 </pre>
 
 <h4>Errors</h4>
-state == 0, everything fine, state == 1, error where an error message will be reported in the 
-Dymola messages window. Error codes and descriptions can be found in UsersGuide.
+<p>state == 0, everything fine, state == 1, error where an error message will be reported in the 
+Dymola messages window. Error codes and descriptions can be found in UsersGuide.</p>
 
 <h4>C Source Code of SocketSend()</h4>
 
-Source code of SocketSend().
-<p>
+<p>Source code of SocketSend().</p>
+
 <pre>
 //source code function
 int SocketSend(tData sendbuf, int len, int socketHandle)
@@ -74,5 +74,16 @@ int SocketSend(tData sendbuf, int len, int socketHandle)
 }
 </pre>
 
-</html>"));
+</html>",revisions="<HTML>
+<ul><li><i>January 25, 2016&nbsp;</i>
+         by Ana Constantin:<br />
+         Added socketHandle to allow for more than one socket in a model</li>
+          <li><i>October 07, 2015&nbsp;</i>
+         by Georg Ferdinand Schneider:<br />
+         Revised for publishing</li>
+         <li><i>September 24, 2013&nbsp;</i>
+         by Georg Ferdinand Schneider:<br />
+         Implemented</li>
+</ul>
+</HTML>"));
 end SocketSend;
