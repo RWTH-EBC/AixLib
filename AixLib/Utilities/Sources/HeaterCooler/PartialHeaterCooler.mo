@@ -1,5 +1,5 @@
 within AixLib.Utilities.Sources.HeaterCooler;
-partial model partialHeaterCooler
+partial model PartialHeaterCooler
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCoolRoom
     "Heat port to thermal zone"                                                                annotation(Placement(transformation(extent={{80,-50},
@@ -35,4 +35,4 @@ partial model partialHeaterCooler
  <li><i>June, 2014&nbsp;</i> by Moritz Lauster:<br/>Added some basic documentation</li>
  </ul>
  </html>"));
-end partialHeaterCooler;
+end PartialHeaterCooler;

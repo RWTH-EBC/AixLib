@@ -1,5 +1,5 @@
 within AixLib.Utilities.Sources.HeaterCooler;
-partial model partialHeaterCoolerPI
+partial model PartialHeaterCoolerPI
   extends AixLib.Utilities.Sources.HeaterCooler.partialHeaterCooler;
   parameter Real h_heater = 0 "Upper limit controller output of the heater" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
   parameter Real l_heater = 0 "Lower limit controller output of the heater" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
@@ -88,4 +88,4 @@ equation
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}})));
-end partialHeaterCoolerPI;
+end PartialHeaterCoolerPI;
