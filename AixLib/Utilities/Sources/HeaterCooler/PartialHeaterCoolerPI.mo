@@ -1,6 +1,6 @@
 within AixLib.Utilities.Sources.HeaterCooler;
 partial model PartialHeaterCoolerPI
-  extends AixLib.Utilities.Sources.HeaterCooler.partialHeaterCooler;
+  extends AixLib.Utilities.Sources.HeaterCooler.PartialHeaterCooler;
   parameter Real h_heater = 0 "Upper limit controller output of the heater" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
   parameter Real l_heater = 0 "Lower limit controller output of the heater" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
   parameter Real KR_heater = 1000 "Gain of the heating controller" annotation(Dialog(tab = "Heater", group = "Controller",enable=not recOrSep));
