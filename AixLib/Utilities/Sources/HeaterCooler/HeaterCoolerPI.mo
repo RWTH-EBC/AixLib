@@ -1,6 +1,6 @@
 within AixLib.Utilities.Sources.HeaterCooler;
 model HeaterCoolerPI "heater and cooler with variable setpoints"
-  extends AixLib.Utilities.Sources.HeaterCooler.partialHeaterCoolerPI;
+  extends AixLib.Utilities.Sources.HeaterCooler.PartialHeaterCoolerPI;
   parameter Boolean Heater_on = true "Activates the heater" annotation(Dialog(tab = "Heater",enable=not recOrSep));
   parameter Boolean Cooler_on = true "Activates the cooler" annotation(Dialog(tab = "Cooler",enable=not recOrSep));
   parameter Boolean staOrDyn = true "Static or dynamic activation of heater" annotation(choices(choice = true "Static", choice =  false "Dynamic",

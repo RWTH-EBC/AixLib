@@ -19,14 +19,14 @@ Parts of **AixLib** have been developed within public funded projects and with f
 
 ### Description
 
-**AixLib** contains simplified models of HVAC systems as well as low and higher order building models. 
+**AixLib** contains simplified models of HVAC systems as well as low and higher order building models.
 
 ### Version
 
-The current version 0.2.5 is a pre-release.
+The current version 0.3.1 is a pre-release.
 
 ### How to contribute to the development of AixLib
 
-You are invited to contribute to the development of **AixLib**. 
+You are invited to contribute to the development of **AixLib**.
 Issues can be reported using this site's [Issues section](https://github.com/RWTH-EBC/AixLib/issues).
 Furthermore, you are welcome to contribute via [Pull Requests](https://github.com/RWTH-EBC/AixLib/pulls). The workflow for changes is described in our [Wiki](https://github.com/RWTH-EBC/AixLib/wiki).
