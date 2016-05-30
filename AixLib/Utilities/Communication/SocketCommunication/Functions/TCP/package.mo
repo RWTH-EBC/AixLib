@@ -3,10 +3,6 @@ package TCP "Contains all functions necessary to handle a TCP communication"
   extends Modelica.Icons.Package;
 
 
-
-
-
-
     annotation (Documentation(info="<html>
     This is a package containing a set of C-functions to handle basic TCP-communication within 
     Dymola/Modelica. The set of functions bases on the Winsock Application developed by Microsoft. 

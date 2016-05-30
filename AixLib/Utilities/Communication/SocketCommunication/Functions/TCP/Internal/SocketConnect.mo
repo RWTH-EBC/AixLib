@@ -50,7 +50,7 @@ algorithm
 end dummyUsage;
 </pre>
 <p>
-If server is running function connects to server 0.11.11.11 on port 1234.
+If server is running function connects to server 0.11.11.11 on port 1234.</p>
 
 <h4>Errors</h4>
 state == 0, everything fine, state == 1, error where an error message will be reported in the 
@@ -63,7 +63,7 @@ int SocketConnect(tIpAddr ip, tPort port, int* socketHandle)
 {
         int iResult;
     // Resolve the server address and port
-    iResult = getaddrinfo(ip, port, &gHints, &gpResult);
+    iResult = getaddrinfo(ip, port, &#38;gHints, &#38;gpResult);
     if ( iResult != 0 ) {
                 ModelicaFormatMessage(\"SocketConnect(): getaddrinfo failed with error: %d\n\", iResult);
         WSACleanup();

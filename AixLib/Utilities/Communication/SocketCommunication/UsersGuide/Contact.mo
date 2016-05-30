@@ -10,9 +10,9 @@ Oppermann and Ana Constantin. Contributions to the package are welcome via the <
 webpage <a href=\"https://www.github.com/RWTH-EBC/AixLib\">https://www.github.com/RWTH-EBC/AixLib</a>.</p>
 
 <dl>
-<dt><b>Library Officers:</b><br />&nbsp;</dt>
+<dt><b>Library officers:</b><br />&nbsp;</dt>
 <dd>
-<table border=0 cellspacing=0 cellpadding=1>
+<table summary=\"Library officers\" border=0 cellspacing=0 cellpadding=1>
 <tr>
 <td>
     Georg Ferdinand Schneider<br />

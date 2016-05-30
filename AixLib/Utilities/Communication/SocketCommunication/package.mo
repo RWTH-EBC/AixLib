@@ -3,9 +3,6 @@ package SocketCommunication "Library for socket communication in Modelica"
 extends Modelica.Icons.Package;
 
 
-
-
-
   annotation (Documentation(revisions="<html>
 <ul>
  <li><i>September 03, 2013&nbsp;</i>
