@@ -2,7 +2,7 @@ within AixLib.Utilities.Communication.SocketCommunication.UsersGuide;
 class Contact "Contact"
   extends Modelica.Icons.Contact;
 
-    annotation (Documentation(info="<html>
+    annotation (preferredView="info",Documentation(info="<html>
 
 <p>The content of <code>SocketCommunication</code> package and the set of C functions is part of
 a masterthesis conducted by Georg Ferdinand Schneider under supervision of Dr. Jens

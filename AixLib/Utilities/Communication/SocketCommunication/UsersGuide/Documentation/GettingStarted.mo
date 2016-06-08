@@ -2,7 +2,7 @@ within AixLib.Utilities.Communication.SocketCommunication.UsersGuide.Documentati
 class GettingStarted "Getting started"
   extends Modelica.Icons.Information;
 
-  annotation (Documentation(info="<html>
+  annotation (preferredView="info",Documentation(info="<html>
 
 <p>
 For getting started have a closer look at the models <code>Components.TCPCommunicatorExample</code> 

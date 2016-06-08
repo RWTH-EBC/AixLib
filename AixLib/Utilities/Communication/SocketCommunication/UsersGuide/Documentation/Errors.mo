@@ -2,7 +2,7 @@ within AixLib.Utilities.Communication.SocketCommunication.UsersGuide.Documentati
 class Errors "Windows sockets errors"
    extends Modelica.Icons.Information;
 
-   annotation (preferredView=Info, Documentation(info="<HTML>
+   annotation (preferredView="info", Documentation(info="<HTML>
 
 <p>Table that gives all possible error codes and messages of the Winsock application.
 Error codes as specified on Winsock homepage. (c) Microsoft

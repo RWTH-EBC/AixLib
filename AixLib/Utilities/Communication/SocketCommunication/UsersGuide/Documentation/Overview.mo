@@ -2,7 +2,7 @@ within AixLib.Utilities.Communication.SocketCommunication.UsersGuide.Documentati
 class Overview "Overview"
    extends Modelica.Icons.Information;
 
-   annotation (preferredView=Info, Documentation(info="<HTML>
+   annotation (preferredView="info", Documentation(info="<HTML>
 
    <h4>Introduction</h4>
    <p>This is a library which enables Modelica simulation environments to act as a TCP-Client

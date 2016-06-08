@@ -2,7 +2,7 @@
 class ApplicationAreas "Overview"
    extends Modelica.Icons.Information;
 
-   annotation (preferredView=Info, Documentation(info="<HTML>
+   annotation (preferredView="info", Documentation(info="<HTML>
    <p>The template models and the C-functions shipped with the <code>SocketCommunication</code>-package
    enable a Modelica simulation environment to exchange simulation values at 
    runtime with other tools. The data is exchanged using network sockets and the

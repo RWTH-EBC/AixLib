@@ -61,7 +61,7 @@ equation
       points={{-68,38},{-86,38},{-86,-10},{-75,-10}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,
+  annotation (preferredView="diagram",Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,
             -100},{100,100}}), graphics),
 Documentation(revisions="<html>
 <ul>
