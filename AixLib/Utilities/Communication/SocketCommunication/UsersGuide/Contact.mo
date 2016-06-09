@@ -10,7 +10,6 @@ Oppermann and Ana Constantin. Contributions to the package are welcome via the <
 webpage <a href=\"https://www.github.com/RWTH-EBC/AixLib\">https://www.github.com/RWTH-EBC/AixLib</a>.</p>
 
 <dl>
-<dt><b>Library officers:</b><br />&nbsp;</dt>
 <dd>
 <table summary=\"Library officers\" border=0 cellspacing=0 cellpadding=1>
 <tr>
@@ -41,23 +40,5 @@ webpage <a href=\"https://www.github.com/RWTH-EBC/AixLib\">https://www.github.co
 </td>
 </tr>
 </table>
-<p><br>Dr. Jens Oppermann</p>
-<p>WILO SE</p>
-<p>Nortkirchenstrasse 100</p>
-<p>D-44263 Dortmund, Germany</p>
-<p>email: <a href=\"mailto:Jens.Oppermann@wilo.com\">Jens.Oppermann@wilo.com</a></p>
-<p>&nbsp; </p>
-<table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"<tr>
-<td></td>
-</tr>
-</table>
-<p><br>Ana Constantin</p>
-<p>RWTH Aachen University</p>
-<p>E.ON Energy Research Center</p>
-<p>Institute for Energy Efficient Buildings and Indoor Climate</p>
-<p>Mathieustrasse 10</p>
-<p>D-52074 Aachen, Germany</p>
-<p>email: <a href=\"mailto:aconstantin@eonerc.rwth-aachen.de\">aconstantin@eonerc.rwth-aachen.de</a></p>
-<p>&nbsp; </p>
 </html>"));
 end Contact;

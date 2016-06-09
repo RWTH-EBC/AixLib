@@ -24,7 +24,6 @@ model TCPCommunicatorExample
     "Maximum number of single characters receiveable per message";
   String msgSend "Variable for the message to be send";
   Integer intLength "integer value of length of message";
-  Integer nextIndex(start=0);
   Integer stateExample
     "dummy variable to check state of function, 0 == OK, 1 == errror";
   String msgRecv "Variable to host received message";
