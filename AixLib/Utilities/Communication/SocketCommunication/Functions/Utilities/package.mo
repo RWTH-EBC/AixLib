@@ -4,6 +4,7 @@ package Utilities "Contains functions to handle string manipulations and convers
 
 
    annotation (Documentation(info="<html>
-This package contains a set of functions to communicate via a TCP-Interface using different protocols
+   <p>This package contains auxiliary functions is C which we found helpful when
+   using different protocols on top of TCP.</p>
    </html>"));
 end Utilities;

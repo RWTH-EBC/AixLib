@@ -11,16 +11,12 @@ external "C" ans = SocketDisconnect(socketHandle) annotation (
     IncludeDirectory="modelica://AixLib/Resources/Include");
 
 annotation (Documentation(revisions="<HTML>
-<ul>
-  <li><i>September 24, 2013&nbsp;</i>
-         by Georg Ferdinand Schneider:<br>
-         First implementation
-</li>
-
- <li><i>October 07, 2015&nbsp;</i>
-         by Georg Ferdinand Schneider:<br>
+<ul><li><i>October 07, 2015&nbsp;</i>
+         by Georg Ferdinand Schneider:<br />
          Revised for publishing</li>
-
+         <li><i>September 24, 2013&nbsp;</i>
+         by Georg Ferdinand Schneider:<br />
+         Implemented</li>
 </ul>
 </HTML>",info="<html>
 
@@ -37,18 +33,19 @@ Example connect to server with IP (0.11.11.11) on port 1234 and directly disconn
 model dummyUsage
 
   Integer state \"Return variable of functions 0 == OK!, 1 == error\";
+  Integer socketHandle \" Socket handle\";
    
 initial algorithm 
 
   state := SocketInit();
-  state := SocketConnect(\"0.11.11.11\",\"1234\");
+  (socketHandle,state) := SocketConnect(\"0.11.11.11\",\"1234\");
   
 equation
 
 algorithm
 
  when terminal() then
-  state := SocketDisconnect();
+  state := SocketDisconnect(socketHandle);
  end when;
 end dummyUsage;
 </pre>
@@ -65,14 +62,14 @@ Dymola messages window. Error codes and descriptions can be found in UsersGuide.
 Source code of SocketDisconnect().
 <p>
 <pre>
-int SocketDisconnect(void)
+int SocketDisconnect(int socketHandle)
 {
          int iResult;
    // shutdown the connection since no more data will be sent
-    iResult = shutdown(gConnectSocket, SD_SEND);
+    iResult = shutdown(socketHandle, SD_SEND);
     if (iResult == SOCKET_ERROR) {
         ModelicaFormatMessage(\"SocketDisconnect(): Shutdown failed with error: %d\n\", WSAGetLastError());
-        closesocket(gConnectSocket);
+        closesocket(socketHandle);
         WSACleanup();
         return 1;
     }

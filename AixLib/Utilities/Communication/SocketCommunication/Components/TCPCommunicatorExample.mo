@@ -24,6 +24,7 @@ model TCPCommunicatorExample
     "Maximum number of single characters receiveable per message";
   String msgSend "Variable for the message to be send";
   Integer intLength "integer value of length of message";
+  Integer nextIndex(start=0);
   Integer stateExample
     "dummy variable to check state of function, 0 == OK, 1 == errror";
   String msgRecv "Variable to host received message";
@@ -52,35 +53,22 @@ algorithm
 
 annotation(Documentation(revisions="<html>
 <ul>
-  <li><i>June 01, 2013&nbsp;</i>
-         by Georg Ferdinand Schneider:<br>
-         Implemented</li>
-
  <li><i>September 03, 2013&nbsp;</i>
-         by Georg Ferdinand Schneider:<br>
+         by Georg Ferdinand Schneider:<br />
          Revised and updated </li>
- <li><i>September 03, 2013&nbsp;</i>
-         by Georg Ferdinand Schneider:<br>
-         Revised and updated to segmented type</li>
+<li><i>June 01, 2013&nbsp;</i>
+         by Georg Ferdinand Schneider:<br />
+         Implemented</li>
 </ul>
 </html>", info="<html>
-<p>
-</p>
 
 <h4>Simple TCP Communicator Example</h4>
 
-This is a small example Block which allows to establish a TCP Connection between a Client (i.e. Dymola) 
-and a Server (External) it sends the value of input u[1] as a string to the server and receives a string message.
-This received string message should only contain a real number as it is converted into a Real value afterwards and
-forwarded to output y[1]. Check TCP_Communication.Examples.Example_Client_Loop for a executable example.
-<p>
+<p>This is a small example Block which allows to establish a TCP Connection between a Client (i.e. Dymola) 
+and a Server (External) it sends the value of input <code>u[1]</code> as a string to the server and receives a string message.
+This received string message should only contain a real number as it is converted into a <code>Real</code> value afterwards and
+forwarded to output <code>y[1]</code>. Check <code>AixLib.Utilities.SocketCommunication.Examples.Example_Client_Loop</code> for a executable example.
 </p>
-An example server to connect to also used in this example can be downloaded here:
-<p>
-</p>
-http://msdn.microsoft.com/de-de/library/windows/desktop/ms737591%28v=vs.85%29.aspx
-  
-
 </html>"), Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}}), graphics={
         Rectangle(

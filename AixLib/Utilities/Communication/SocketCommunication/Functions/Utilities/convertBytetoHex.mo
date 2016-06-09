@@ -11,8 +11,8 @@ annotation (
     IncludeDirectory="modelica://AixLib/Resources/Include",
             Documentation(
             info="<HTML>
-            Function that converts a byte array into a hex string.
-            <h4>C Source Code of convertBytetoHex()</h4>
+<p>Function that converts a byte array into a hex string.</p>
+            <h4>C source code of convertBytetoHex()</h4>
             <pre>
             char *convertBytetoHex(unsigned char *ByteStr)
             {
@@ -28,18 +28,17 @@ annotation (
               }
 
             </pre>
-
-
-            </HTML>",
-          revisions="<HTML>
-          <ul><li><i>September 24, 2013&nbsp;</i>
-          by Dr. Jens Oppermann:<br>
-           First implementation</li>
-
- <li><i>October 07, 2015&nbsp;</i>
-         by Georg Ferdinand Schneider:<br>
-         Revised for publishing</li>
-
-      </ul>
+</HTML>",
+revisions="<HTML>
+<ul>
+  <li>
+  <i>October 07, 2015&nbsp;</i>
+  by Georg Ferdinand Schneider:<br />
+  Revised for publishing</li>
+  <li>
+  <i>September 24, 2013&nbsp;</i>
+  by Dr. Jens Oppermann:<br />
+  First implementation</li>
+</ul>
 </HTML>"));
 end convertBytetoHex;

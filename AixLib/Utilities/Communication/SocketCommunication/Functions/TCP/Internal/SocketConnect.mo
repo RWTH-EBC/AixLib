@@ -11,17 +11,14 @@ external "C" ans = SocketConnect(ip,port,socketHandle) annotation (
     Include="#include \"AixLibSocketCommunication.h\"",
     IncludeDirectory="modelica://AixLib/Resources/Include");
 
-annotation (Documentation(revisions="<HTML>
-<ul>
-  <li><i>September 24, 2013&nbsp;</i>
-         by Georg Ferdinand Schneider:<br>
-         First implementation
-</li>
-
- <li><i>October 07, 2015&nbsp;</i>
-         by Georg Ferdinand Schneider:<br>
+annotation (Documentation(
+revisions="<HTML>
+<ul><li><i>October 07, 2015&nbsp;</i>
+         by Georg Ferdinand Schneider:<br />
          Revised for publishing</li>
-
+         <li><i>September 24, 2013&nbsp;</i>
+         by Georg Ferdinand Schneider:<br />
+         Implemented</li>
 </ul>
 </HTML>",info="<html>
 
@@ -38,12 +35,13 @@ Example connect to server with IP (0.11.11.11) on port 1234
 
 model dummyUsage
 
-  Integer state \"Return variable of functions 0 == OK!, 1 == error\";
+Integer state \"Return variable of functions 0 == OK!, 1 == error\";
+Integer socketHandle \"Socket handle\";
    
 initial algorithm 
 
   state := SocketInit();
-  state := SocketConnect(\"0.11.11.11\",\"1234\");
+  (socketHandle,state) := SocketConnect(\"0.11.11.11\",\"1234\");
   
 equation
 
@@ -52,7 +50,7 @@ algorithm
 end dummyUsage;
 </pre>
 <p>
-If server is running function connects to server 0.11.11.11 on port 1234.
+If server is running function connects to server 0.11.11.11 on port 1234.</p>
 
 <h4>Errors</h4>
 state == 0, everything fine, state == 1, error where an error message will be reported in the 
@@ -61,11 +59,11 @@ Dymola messages window. Error codes and descriptions can be found in UsersGuide.
 <h4>C Source Code of SocketConnect()</h4>
 
 <pre>
-int SocketConnect(tIpAddr ip, tPort port)
+int SocketConnect(tIpAddr ip, tPort port, int* socketHandle)
 {
         int iResult;
     // Resolve the server address and port
-    iResult = getaddrinfo(ip, port, &gHints, &gpResult);
+    iResult = getaddrinfo(ip, port, &#38;gHints, &#38;gpResult);
     if ( iResult != 0 ) {
                 ModelicaFormatMessage(\"SocketConnect(): getaddrinfo failed with error: %d\n\", iResult);
         WSACleanup();
@@ -76,19 +74,19 @@ int SocketConnect(tIpAddr ip, tPort port)
     for(gPtr=gpResult; gPtr != NULL ;gPtr=gPtr->ai_next) {
 
         // Create a SOCKET for connecting to server
-        gConnectSocket = socket(gPtr->ai_family, gPtr->ai_socktype, 
+        *socketHandle = socket(gPtr->ai_family, gPtr->ai_socktype, 
             gPtr->ai_protocol);
-        if (gConnectSocket == INVALID_SOCKET) {
+        if (*socketHandle == INVALID_SOCKET) {
                         ModelicaFormatMessage(\"SocketConnect(): Socket failed with error: %ld\n\", WSAGetLastError());
                         WSACleanup();
             return 1;
         }
 
         // Connect to server.
-        iResult = connect( gConnectSocket, gPtr->ai_addr, (int)gPtr->ai_addrlen);
+        iResult = connect( *socketHandle, gPtr->ai_addr, (int)gPtr->ai_addrlen);
         if (iResult == SOCKET_ERROR) {
-            closesocket(gConnectSocket);
-            gConnectSocket = INVALID_SOCKET;
+            closesocket(*socketHandle);
+            *socketHandle = INVALID_SOCKET;
             continue;
         }
         break;
@@ -96,7 +94,7 @@ int SocketConnect(tIpAddr ip, tPort port)
 
     freeaddrinfo(gpResult);
 
-    if (gConnectSocket == INVALID_SOCKET) {
+    if (*socketHandle == INVALID_SOCKET) {
                 ModelicaFormatMessage(\"SocketConnect(): Unable to connect to server!\n\");     
                 WSACleanup();
         return 1;

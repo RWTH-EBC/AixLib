@@ -32,9 +32,9 @@ extends Modelica.Icons.Example;
         rotation=180,
         origin={50,-10})));
   Components.TCPCommunicatorExample tCPCommunicatorExample(portExample="27015",
-      IP_AddressExample="10.39.190.46")
+      IP_AddressExample="127.0.0.1")
     "TCP block which sends values and receives values, has no impact on signal"
-    annotation (Placement(transformation(extent={{-66,32},{-46,52}})));
+    annotation (Placement(transformation(extent={{-66,28},{-46,48}})));
 equation
 
   connect(system.y, feedback.u2)  annotation (Line(
@@ -54,29 +54,50 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(tCPCommunicatorExample.y[1], system.u) annotation (Line(
-      points={{-45,42},{-38,42},{-38,38},{-28,38}},
+      points={{-45,38},{-28,38}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(tCPCommunicatorExample.u[1], limiter.y) annotation (Line(
-      points={{-68,42},{-86,42},{-86,-10},{-75,-10}},
+      points={{-68,38},{-86,38},{-86,-10},{-75,-10}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,
+  annotation (preferredView="diagram",Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,
             -100},{100,100}}), graphics),
 Documentation(revisions="<html>
 <ul>
-  <li><i>June 01, 2013&nbsp;</i>
-         by Georg Ferdinand Schneider:<br>
-         Implemented</li>
   <li><i>September 03, 2013&nbsp;</i>
-         by Georg Ferdinand Schneider:<br>
+         by Georg Ferdinand Schneider:<br />
          Revised documented</li>
+           <li><i>June 01, 2013&nbsp;</i>
+  by Georg Ferdinand Schneider:<br />
+         Implemented</li>
 </ul>
-</html>",information="<html>
+</html>",
+info="<html>
 
-This is a very simple example to show TCP-Communication functionality. A feedback
- control is modeled where a gain controller controls a first order block. The signal
- is send to a server and back. The signal is not altered by the server.
+<p>This is a very simple example to show TCP-Communication functionality. A feedback control is modeled where a gain controller controls a first order block. The signal is send to a server which returns the send message unaltered back to the client.</p>
+
+<h4>TCP/IP-server for testing</h4>
+
+<p>A server to test <code>ExampleClientLoop</code> is provided both as a source code <a href=\"modelica://AixLib/Resources/SocketCommunicationServer/ExampleServer.cpp\">*.cpp-file</a> and as an executable <a href=\"modelica://AixLib/Resources/SocketCommunicationServer/ExampleServer.exe\">*.exe-file</a>. The server simply echoes the received character message and sends it back
+to the sender (i.e. client). The code may be compiled and executed from the console. This code
+is taken from Microsoft´s Winsock documentation pages: <a href=\"http://msdn.microsoft.com/de-de/library/windows/desktop/ms737591%28v=vs.85%29.aspx\">Link to MSDN</a> </p>
+The server performs the following tasks:
+<ul>
+<li>Initialise Winsock;</li>
+<li>Create a socket;</li>
+<li>Bind the socket;</li>
+<li>Wait and listen on the socket if a client connects;</li>
+<li>Accept incoming connection from client;</li>
+<li>Receive messages from client as long as it sends and return the received messages unaltered;</li>
+<li>Terminate connection and shut down.</li>
+</ul>
+
+<h4>Usage</h4>
+<p>Open a console in Windows (Start -> Run -> insert: \"cmd\"), change folder to <code>.../AixLib/Resources/SocketCommunicationServer</code>, run <code>ExampleServer.exe</code>. The Server is now ready to operate. Now simulate <code>ExampleClientLoop</code>.</p>
+
+<h4>Requirements</h4>
+<p>This example and the executable have been tested on Windows 7 using Dymola 2015.</p>
 </html>"),
  experiment(StopTime=100, __Dymola_Algorithm="Lsodar"),
     __Dymola_experimentSetupOutput,
