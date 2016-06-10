@@ -52,12 +52,12 @@ algorithm
 
 annotation(Documentation(revisions="<html>
 <ul>
- <li><i>September 03, 2013&nbsp;</i>
-         by Georg Ferdinand Schneider:<br />
-         Revised and updated </li>
 <li><i>June 01, 2013&nbsp;</i>
          by Georg Ferdinand Schneider:<br />
          Implemented</li>
+ <li><i>September 03, 2013&nbsp;</i>
+         by Georg Ferdinand Schneider:<br />
+         Revised and updated </li>
 </ul>
 </html>", info="<html>
 

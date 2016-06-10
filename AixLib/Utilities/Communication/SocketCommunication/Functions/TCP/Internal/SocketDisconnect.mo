@@ -19,63 +19,46 @@ annotation (Documentation(revisions="<HTML>
          Implemented</li>
 </ul>
 </HTML>",info="<html>
-
-<p>
-Function to shut down current TCP-connection and socket.
-</p>
-
+<p>Function to shut down current TCP-connection and socket. </p>
 <h4>Usage of Function</h4>
-
-Example connect to server with IP (0.11.11.11) on port 1234 and directly disconnect.
-
-<pre>
-
+<p>Example connect to server with IP (0.11.11.11) on port 1234 and directly disconnect. </p>
+<pre>
 model dummyUsage
-
-  Integer state \"Return variable of functions 0 == OK!, 1 == error\";
-  Integer socketHandle \" Socket handle\";
+
+  Integer state &QUOT;Return variable of functions 0 == OK!, 1 == error&QUOT;;
+  Integer socketHandle &QUOT; Socket handle&QUOT;;
    
 initial algorithm 
-
+
   state := SocketInit();
-  (socketHandle,state) := SocketConnect(\"0.11.11.11\",\"1234\");
+  (socketHandle,state) := SocketConnect(&QUOT;0.11.11.11&QUOT;,&QUOT;1234&QUOT;);
   
 equation
-
+
 algorithm
-
+
  when terminal() then
   state := SocketDisconnect(socketHandle);
  end when;
-end dummyUsage;
-</pre>
-<p>
-If server is running function connects to server 0.11.11.11 on port 1234, and directly disconnects.
-
-
+end dummyUsage;</pre>
+<p><br>If server is running function connects to server 0.11.11.11 on port 1234, and directly disconnects. </p>
 <h4>Errors</h4>
-state == 0, everything fine, state == 1, error where an error message will be reported in the 
-Dymola messages window. Error codes and descriptions can be found in UsersGuide.
-
+<p>state == 0, everything fine, state == 1, error where an error message will be reported in the Dymola messages window. Error codes and descriptions can be found in UsersGuide. </p>
 <h4>C Source Code of SocketDisconnect()</h4>
-
-Source code of SocketDisconnect().
-<p>
-<pre>
-int SocketDisconnect(int socketHandle)
+<p>Source code of SocketDisconnect(). </p>
+<pre>int SocketDisconnect(int socketHandle)
 {
          int iResult;
    // shutdown the connection since no more data will be sent
     iResult = shutdown(socketHandle, SD_SEND);
     if (iResult == SOCKET_ERROR) {
-        ModelicaFormatMessage(\"SocketDisconnect(): Shutdown failed with error: %d\n\", WSAGetLastError());
+        ModelicaFormatMessage(&QUOT;SocketDisconnect(): Shutdown failed with error: &percnt;d
+&QUOT;, WSAGetLastError());
         closesocket(socketHandle);
         WSACleanup();
         return 1;
     }
-        return 0;
-}
-</pre>
-
+        return 0;</pre>
+<p><code>}</code> </p>
 </html>"));
 end SocketDisconnect;

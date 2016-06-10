@@ -52,7 +52,8 @@ int SocketInit(void) // Initialize a Socket, Incorporated in TCP_Constructor()
    // Initialize Winsock
     ans = WSAStartup(MAKEWORD(2,2), &gWsaData);
     if (ans != 0) {
-    ModelicaFormatMessage(&quot;SocketInit(): WSAStartup failed with error: %d\n &quot;, ans);
+    ModelicaFormatMessage(&quot;SocketInit(): WSAStartup failed with error: %d
+ &quot;, ans);
         return 1;
     }
         
@@ -62,7 +63,8 @@ int SocketInit(void) // Initialize a Socket, Incorporated in TCP_Constructor()
     gHints.ai_protocol = IPPROTO_TCP;
         return ans;
 }
-<\pre>
+</pre>
+</p>
 </HTML>",
 revisions="<HTML>
 <ul><li><i>October 07, 2015&nbsp;</i>

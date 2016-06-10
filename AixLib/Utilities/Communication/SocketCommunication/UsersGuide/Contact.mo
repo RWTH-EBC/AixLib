@@ -40,5 +40,7 @@ webpage <a href=\"https://www.github.com/RWTH-EBC/AixLib\">https://www.github.co
 </td>
 </tr>
 </table>
+</dl>
+</dd>
 </html>"));
 end Contact;
