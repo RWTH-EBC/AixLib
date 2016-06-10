@@ -55,11 +55,11 @@ end dummyUsage;
 
 <h4>Errors</h4>
 <p>state == 0, everything fine, state == 1, error where an error message will be reported in the 
-Dymola messages window. Error codes and descriptions can be found in UsersGuide.</p>
+Dymola messages window. Error codes and descriptions can be found in <code>UsersGuide</code>.</p>
 
 <h4>C Source Code of SocketReceive()</h4>
 
-<p>Source code of SocketReceive().</p>
+<p>Source code of <code>SocketReceive()</code>.</p>
 
 <pre>
 int SocketReceive(char **buffer, int maxLen, int socketHandle)

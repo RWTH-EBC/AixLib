@@ -27,12 +27,15 @@ extends Modelica.Icons.Example;
     amplitude=5,
     period=1,
     offset=5) "Pulse of set point"
-              annotation (Placement(transformation(
+              annotation (preferredView="diagram",
+    experiment(StartTime=0, StopTime=10,Tolerance=1.0e-4),
+    Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={50,-10})));
   Components.TCPCommunicatorExample tCPCommunicatorExample(portExample="27015",
-      IP_AddressExample="127.0.0.1")
+    samplePeriodExample=0.01,
+    IP_AddressExample="127.0.0.1")
     "TCP block which sends values and receives values, has no impact on signal"
     annotation (Placement(transformation(extent={{-66,28},{-46,48}})));
 equation
@@ -75,7 +78,10 @@ Documentation(revisions="<html>
 </html>",
 info="<html>
 
-<p>This is a very simple example to show TCP-Communication functionality. A feedback control is modeled where a gain controller controls a first order block. The signal is send to a server which returns the send message unaltered back to the client.</p>
+<p>This is a very simple example to show TCP-Communication functionality. 
+A feedback control is modeled where a gain controller controls a first
+order system. The signal is send to a server which returns the send message 
+unaltered back to the client.</p>
 
 <h4>TCP/IP-server for testing</h4>
 
@@ -94,12 +100,22 @@ The server performs the following tasks:
 </ul>
 
 <h4>Usage</h4>
-<p>Open a console in Windows (Start -> Run -> insert: \"cmd\"), change folder to <code>.../AixLib/Resources/SocketCommunicationServer</code>, run <code>ExampleServer.exe</code>. The Server is now ready to operate. Now simulate <code>ExampleClientLoop</code>.</p>
+<p>Open a console in Windows (Start -> Run -> insert: \"cmd\"), change folder
+to <code>.../AixLib/Resources/SocketCommunicationServer</code>,
+run <code>ExampleServer.exe</code>. The Server is now ready to operate. 
+Now simulate <code>ExampleClientLoop</code>.</p>
+
+<h4>Verfication of IP address</h4>
+
+<p>Note: Depending on your network settings it may be required to change 
+the IP address in <code>ExampleClientLoop.tCPCommunicatorExample</code>. 
+Set the IP address to the IP address of your local machine. (You may retrieve 
+your local IP adress in Windows from the console (Start -> Run -> insert: \"cmd\" -> ipconfig)).</p>
 
 <h4>Requirements</h4>
-<p>This example and the executable have been tested on Windows 7 using Dymola 2015.</p>
+<p>This example and the executable have been tested on Windows 7 64-bit using Dymola 2015 32-bit.</p>
 </html>"),
- experiment(StopTime=100, __Dymola_Algorithm="Lsodar"),
+ experiment(StopTime=10, __Dymola_Algorithm="Lsodar"),
     __Dymola_experimentSetupOutput,
     Icon(coordinateSystem(extent={{-120,-100},{100,100}})));
 end ExampleClientLoop;

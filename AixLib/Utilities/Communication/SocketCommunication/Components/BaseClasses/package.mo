@@ -1,5 +1,5 @@
 within AixLib.Utilities.Communication.SocketCommunication.Components;
-package Internal "Modelica.Icons.BasesPackage"
+package BaseClasses "Modelica.Icons.BasesPackage"
   extends Modelica.Icons.BasesPackage;
 
-end Internal;
+end BaseClasses;

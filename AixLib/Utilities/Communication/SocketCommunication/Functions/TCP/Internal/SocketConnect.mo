@@ -23,9 +23,9 @@ revisions="<HTML>
 </HTML>",info="<html>
 
 <p>
-Function to establish a connection between socket created by SocketInit() and TCP-server.
-IP-Address of the server and port to connect to on server have to be given. Note that SocketConnect() 
-is already included in TCP_Constructor() and is here just for debugging.
+Function to establish a connection between socket created by <code>SocketInit()</code> and TCP-server.
+IP-Address of the server and port to connect to on server have to be given. Note that <code>SocketConnect()</code> 
+is already included in <code>TCPConstructor()</code> and is here just for debugging.
 </p>
 <h4>Usage of Function</h4>
 
@@ -54,9 +54,9 @@ If server is running function connects to server 0.11.11.11 on port 1234.</p>
 
 <h4>Errors</h4>
 state == 0, everything fine, state == 1, error where an error message will be reported in the 
-Dymola messages window. Error codes and descriptions can be found in UsersGuide.
+Dymola messages window. Error codes and descriptions can be found in <code>UsersGuide</code>.
 
-<h4>C Source Code of SocketConnect()</h4>
+<h4>C Source Code of <code>SocketConnect()</code></h4>
 
 <pre>
 int SocketConnect(tIpAddr ip, tPort port, int* socketHandle)

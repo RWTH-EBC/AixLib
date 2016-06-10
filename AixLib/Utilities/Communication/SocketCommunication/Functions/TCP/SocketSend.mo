@@ -13,15 +13,15 @@ external "C" ans = SocketSend(sendbuffer,length,socketHandle) annotation (
 annotation (Documentation(info="<html>
 
 <p>
-SocketSend sends the data contained in sendbuffer to the server via the current socket.
+<code>SocketSend()</code> sends the data contained in sendbuffer to the server via the current socket.
  It is necessary to specify the current length of the message.
 </p>
 
 <h4>Usage of Function</h4>
 
-This code snippet will create a local socket and connect to server with IP 0.11.11.11 on port 1234
+<p>This code snippet will create a local socket and connect to server with IP 0.11.11.11 on port 1234
 and send the message \"I am a message!\" with the length of 15 characters to the server
- every 1 second.
+ every 1 second.</p>
 
 <pre>
 model dummyUsage
@@ -51,11 +51,11 @@ end dummyUsage;
 
 <h4>Errors</h4>
 <p>state == 0, everything fine, state == 1, error where an error message will be reported in the 
-Dymola messages window. Error codes and descriptions can be found in UsersGuide.</p>
+Dymola messages window. Error codes and descriptions can be found in <code>UsersGuide</code>.</p>
 
-<h4>C Source Code of SocketSend()</h4>
+<h4>C Source Code of <code>SocketSend()</code></h4>
 
-<p>Source code of SocketSend().</p>
+<p>Source code of <code>SocketSend()</code>.</p>
 
 <pre>
 //source code function
@@ -65,7 +65,7 @@ int SocketSend(tData sendbuf, int len, int socketHandle)
     // Send an sendbuf
     iResult = send( socketHandle, sendbuf, len, 0 );
     if (iResult == SOCKET_ERROR) {
-        ModelicaFormatMessage(\"Socketsend(): Send failed with error: %d\n\", WSAGetLastError());
+        ModelicaFormatMessage(\"SocketSend(): Send failed with error: %d\n\", WSAGetLastError());
         closesocket(socketHandle);
         WSACleanup();
         return 1;

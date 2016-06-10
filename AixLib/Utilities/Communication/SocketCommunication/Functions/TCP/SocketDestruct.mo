@@ -58,11 +58,11 @@ end dummyUsage;
 
 <h4>Errors</h4>
 <p>state == 0, everything fine, state == 1, error where an error message will be reported in the 
-Dymola messages window. Error codes and descriptions can be found in UsersGuide.</p>
+Dymola messages window. Error codes and descriptions can be found in <code>UsersGuide</code>.</p>
 
-<h4>C Source Code of SocketDestruct()</h4>
+<h4>C Source Code of <code>SocketDestruct()</code></h4>
 
-<p>Source code of SocketDestruct().</p>
+<p>Source code of <code>SocketDestruct()</code>.</p>
 <pre>
 int SocketDestruct(int socketHandle)
 {

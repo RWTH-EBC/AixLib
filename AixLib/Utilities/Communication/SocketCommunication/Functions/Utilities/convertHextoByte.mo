@@ -10,7 +10,7 @@ annotation (    Include="#include \"AixLibSocketCommunication.h\"",
             Documentation(
             info="<HTML>
             <p>Function that converts a hex string into a byte array.</p>
-            <h4>C source code of convertHextobyte()</h4>
+            <h4>C source code of <code>convertHextobyte()</code></h4>
             <pre>
             unsigned char *convertHextoByte(char *HEXStr)
             {
