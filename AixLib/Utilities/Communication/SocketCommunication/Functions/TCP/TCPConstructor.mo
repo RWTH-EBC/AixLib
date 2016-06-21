@@ -58,13 +58,13 @@ int TCPConstructor(int* socketHandle, tIpAddr ip, tPort port)
         // Intialize socket
     if (0 != SocketInit())
         {
-        ModelicaFormatMessage(\"SocketInit(): Unable to initialise socket!\n\");  
+        ModelicaFormatMessage(\"SocketInit(): Unable to initialise socket!&#92;n\");  
       return 1;
     }
                         
         // Connect to Server with ip on port
         if (0 != SocketConnect(ip, port,socketHandle)) {
-        ModelicaFormatMessage(\"SocketConnect(): Unable to connect to server!\n\");  
+        ModelicaFormatMessage(\"SocketConnect(): Unable to connect to server!&#92;n\");  
                 return 1;
         }
         return 0;
