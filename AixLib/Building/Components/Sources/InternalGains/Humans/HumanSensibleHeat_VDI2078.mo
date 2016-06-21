@@ -60,12 +60,12 @@ equation
   connect(Nr_People.y, productHeatOutput.u[2]) annotation (Line(
       points={{-53.4,-20},{-36,-20},{-36,16.5},{-24,16.5}},
       color={0,0,127}));
-  annotation(Icon(graphics={  Ellipse(extent = {{-36, 98}, {36, 26}}, lineColor = {255, 213, 170}, fillColor = {255, 213, 170},
-            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-48, 20}, {54, -94}}, fillColor = {255, 0, 0},
-            fillPattern =                                                                                                   FillPattern.Solid, pattern = LinePattern.None), Text(extent = {{-40, -2}, {44, -44}}, lineColor = {255, 255, 255}, fillColor = {255, 0, 0},
-            fillPattern =                                                                                                   FillPattern.Solid, textString = "ERC"), Ellipse(extent = {{-24, 80}, {-14, 70}}, fillColor = {0, 0, 0},
-            fillPattern =                                                                                                   FillPattern.Solid, pattern = LinePattern.None, lineColor = {0, 0, 0}), Ellipse(extent = {{10, 80}, {20, 70}}, fillColor = {0, 0, 0},
-            fillPattern =                                                                                                   FillPattern.Solid, pattern = LinePattern.None, lineColor = {0, 0, 0}), Line(points = {{-18, 54}, {-16, 48}, {-10, 44}, {-4, 42}, {2, 42}, {10, 44}, {16, 48}, {18, 54}}, color = {0, 0, 0}, thickness = 1)}), Documentation(info="<html>
+  annotation(Icon(graphics={  Ellipse(extent=  {{-36, 98}, {36, 26}}, lineColor=  {255, 213, 170}, fillColor=  {255, 213, 170},
+            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-48, 20}, {54, -94}}, fillColor=  {255, 0, 0},
+            fillPattern=                                                                                                    FillPattern.Solid, pattern=  LinePattern.None), Text(extent=  {{-40, -2}, {44, -44}}, lineColor=  {255, 255, 255}, fillColor=  {255, 0, 0},
+            fillPattern=                                                                                                    FillPattern.Solid, textString=  "ERC"), Ellipse(extent=  {{-24, 80}, {-14, 70}}, fillColor=  {0, 0, 0},
+            fillPattern=                                                                                                    FillPattern.Solid, pattern=  LinePattern.None, lineColor=  {0, 0, 0}), Ellipse(extent=  {{10, 80}, {20, 70}}, fillColor=  {0, 0, 0},
+            fillPattern=                                                                                                    FillPattern.Solid, pattern=  LinePattern.None, lineColor=  {0, 0, 0}), Line(points=  {{-18, 54}, {-16, 48}, {-10, 44}, {-4, 42}, {2, 42}, {10, 44}, {16, 48}, {18, 54}}, color=  {0, 0, 0}, thickness=  1)}), Documentation(info="<html>
 <p><b><font style=\"color: #008000; \">Overview</font></b> </p>
 <p>Model for heat output of a human according to VDI 2078 (Table A.1). The model only considers the dry heat emission and divides it into convective and radiative heat transmission. </p>
 <p><b><font style=\"color: #008000; \">Level of Development</font></b> </p>

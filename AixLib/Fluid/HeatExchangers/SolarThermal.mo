@@ -30,7 +30,7 @@ equation
   connect(T_in.T, solarThermalEfficiency.T_col) annotation (Line(
       points={{-70,11},{-71,47.4}},
       color={0,0,127}));
-  annotation( Documentation(info = "<html>
+  annotation (Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p><br/>Model of a solar thermal collector. Inputs are outdoor air temperature and solar irradiation. Based on these values and the collector properties from database, this model creates a heat flow to the fluid circuit.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>

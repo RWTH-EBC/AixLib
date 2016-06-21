@@ -22,7 +22,7 @@ equation
   connect(HX1.port_1b, Medium1out.portMoistAir_a) annotation(Line(points = {{-16, -40}, {-50, -40}}, color = {0, 127, 255}));
   connect(HX1.port_2b, HX.port_2a) annotation(Line(points = {{16, -22}, {24, -22}, {24, 2}, {16, 2}}, color = {0, 127, 255}));
   connect(HX.port_1b, HX1.port_1a) annotation(Line(points = {{-16, 2}, {-24, 2}, {-24, -22}, {-16, -22}}, color = {0, 127, 255}));
-  annotation( Documentation(info = "<html>
+  annotation (Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>A small example of two coupled heat exchangers with varying mass flow rate of both media.</p>
  </html>", revisions = "<html>

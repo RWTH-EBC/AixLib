@@ -13,7 +13,7 @@ protected
 equation
   TAtZero = (T_fwd_max - 20) * 20 / (20 - T_ref_min);
   T_set = 20 + TAtZero - (T_ref - 273.15) / 20 * TAtZero + 273.15;
-  annotation( Documentation(info = "<html>
+  annotation (Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>This model calculates a set-point temperature for the forward flow of a
  heating system as a funktion of a reference temperature. In most cases this

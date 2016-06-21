@@ -1,5 +1,5 @@
 within AixLib.Building.HighOrder;
-package House
+package House 
   extends Modelica.Icons.Package;
 
 

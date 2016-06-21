@@ -65,7 +65,7 @@ int SocketSend(tData sendbuf, int len, int socketHandle)
     // Send an sendbuf
     iResult = send( socketHandle, sendbuf, len, 0 );
     if (iResult == SOCKET_ERROR) {
-        ModelicaFormatMessage(\"SocketSend(): Send failed with error: %d\n\", WSAGetLastError());
+        ModelicaFormatMessage(\"SocketSend(): Send failed with error: %d\", WSAGetLastError());
         closesocket(socketHandle);
         WSACleanup();
         return 1;

@@ -329,16 +329,16 @@ equation
       color={191,0,0}));
   connect(radiatorBa.convPort, convBa) annotation (Line(
       points={{87.93,-33.04},{88,-33.04},{88,-33},{119,-33},{119,-50},{138.5,-50}},
-
       color={191,0,0}));
+
   connect(radiatorBa.radPort, radBa) annotation (Line(
       points={{94.9,-32.87},{94.9,-28},{138,-28}}));
   connect(radiatorCh.radPort, radCh) annotation (Line(
       points={{96.5,46.35},{96.5,49},{140,49}}));
   connect(radiatorCh.convPort, convCh) annotation (Line(
       points={{90.35,46.2},{90,46.2},{90,46},{113,46},{113,25.5},{138.5,25.5}},
-
       color={191,0,0}));
+
   connect(radiatorBr.convPort, convBe) annotation (Line(
       points={{82.64,86.08},{82.64,91},{119,91},{119,73},{138,73}},
       color={191,0,0}));
@@ -387,8 +387,8 @@ equation
       color={0,0,127}));
   connect(valveLi.T_setRoom, TSet[1]) annotation (Line(
       points={{-76.36,11.84},{-76.36,52},{-76,52},{-76,92},{-109,92},{-109,81}},
-
       color={0,0,127}));
+
   connect(convLi, tempSensorLi.port) annotation (Line(
       points={{-139.5,31.5},{-120,31.5},{-120,36},{-108,36}},
       color={191,0,0}));
@@ -434,10 +434,10 @@ equation
  2- Bedroom
  3 - Children
  4 - Bath
- 5 - Kitchen")}), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-150, -100}, {150, 110}}, grid = {1, 1}), graphics={  Rectangle(extent = {{-119, 92}, {123, -79}}, lineColor = {255, 0, 0}, fillColor = {135, 135, 135},
-            fillPattern =                                                                                                   FillPattern.Solid), Line(points = {{-99, 22}, {104, 22}, {104, -6}}, color = {255, 0, 0}, thickness = 1), Line(points = {{-98, 13}, {95, 13}, {95, -6}}, color = {0, 0, 255}, thickness = 1), Line(points = {{-21, 13}, {-21, 35}}, color = {0, 0, 255}, thickness = 1), Line(points = {{-14, 23}, {-14, 45}}, color = {255, 0, 0}, thickness = 1), Text(extent = {{-124, 119}, {-84, 111}}, lineColor = {0, 0, 0},
-            lineThickness =                                                                                                   0.5, fillColor = {215, 215, 215},
-            fillPattern =                                                                                                   FillPattern.Solid, textString = "Set"), Text(extent = {{-70, 81}, {-17, 49}}, lineColor = {0, 0, 0}, textString = "1 - Livingroom
+ 5 - Kitchen")}), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-150, -100}, {150, 110}}, grid = {1, 1}), graphics={  Rectangle(extent=  {{-119, 92}, {123, -79}}, lineColor=  {255, 0, 0}, fillColor=  {135, 135, 135},
+            fillPattern=                                                                                                    FillPattern.Solid), Line(points=  {{-99, 22}, {104, 22}, {104, -6}}, color=  {255, 0, 0}, thickness=  1), Line(points=  {{-98, 13}, {95, 13}, {95, -6}}, color=  {0, 0, 255}, thickness=  1), Line(points=  {{-21, 13}, {-21, 35}}, color=  {0, 0, 255}, thickness=  1), Line(points=  {{-14, 23}, {-14, 45}}, color=  {255, 0, 0}, thickness=  1), Text(extent=  {{-124, 119}, {-84, 111}}, lineColor=  {0, 0, 0},
+            lineThickness=                                                                                                    0.5, fillColor=  {215, 215, 215},
+            fillPattern=                                                                                                    FillPattern.Solid, textString=  "Set"), Text(extent=  {{-70, 81}, {-17, 49}}, lineColor=  {0, 0, 0}, textString=  "1 - Livingroom
  2- Bedroom
  3 - Children
  4 - Bath

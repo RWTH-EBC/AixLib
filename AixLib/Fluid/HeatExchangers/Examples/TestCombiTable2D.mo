@@ -11,7 +11,7 @@ equation
   connect(constSinkTemp.y, from_degC1.u) annotation(Line(points = {{-59, 70}, {-42, 70}}, color = {0, 0, 127}));
   connect(from_degC.y, HeatFlowCondenserTable.u2) annotation(Line(points = {{-19, 30}, {-14, 30}, {-14, 44}, {-2, 44}}, color = {0, 0, 127}));
   connect(from_degC1.y, HeatFlowCondenserTable.u1) annotation(Line(points = {{-19, 70}, {-14, 70}, {-14, 56}, {-2, 56}}, color = {0, 0, 127}));
-  annotation( experiment(StopTime = 1000, Interval = 1), __Dymola_experimentSetupOutput(events = false), Documentation(info = "<html>
+  annotation (experiment(StopTime = 1000, Interval = 1), __Dymola_experimentSetupOutput(events = false), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Example to test the tables used within the HeatPump model</p>
  </html>", revisions = "<html>

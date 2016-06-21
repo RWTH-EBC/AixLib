@@ -47,7 +47,7 @@ equation
   connect(Tout.port_b, boundary_ph1.ports[1]) annotation (Line(
       points={{46,0},{60,0}},
       color={0,127,255}));
-  annotation( experiment(StopTime = 1500, Interval = 1), __Dymola_experimentSetupOutput(events = false), Documentation(revisions="<html>
+  annotation (experiment(StopTime = 1500, Interval = 1), __Dymola_experimentSetupOutput(events = false), Documentation(revisions="<html>
  Will be removed
  </html>"));
 end Pipe_Validation;

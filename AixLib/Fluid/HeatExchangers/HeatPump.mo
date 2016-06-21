@@ -99,7 +99,7 @@ equation
   connect(volumeEvaporator.ports[2], port_b_source) annotation (Line(
       points={{-80,-62},{-80,-70},{-90,-70}},
       color={0,127,255}));
-  annotation( Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent=  {{-80, 80}, {80, -80}}, lineColor=  {0, 0, 255}, fillColor=  {249, 249, 249},
+  annotation (Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent=  {{-80, 80}, {80, -80}}, lineColor=  {0, 0, 255}, fillColor=  {249, 249, 249},
             fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-80, 80}, {-60, -80}}, lineColor=  {0, 0, 255}, fillColor=  {170, 213, 255},
             fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{60, 80}, {80, -80}}, lineColor=  {0, 0, 255}, fillColor=  {255, 170, 213},
             fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-100, 20}, {100, -20}}, lineColor=  {0, 0, 255}, textString=  "%name")}), Documentation(info = "<html>

@@ -35,7 +35,7 @@ extends Modelica.Icons.Example;
         origin={50,-10})));
   Components.TCPCommunicatorExample tCPCommunicatorExample(portExample="27015",
     samplePeriodExample=0.01,
-    IP_AddressExample="127.0.0.1")
+    IP_AddressExample="10.39.190.67")
     "TCP block which sends values and receives values, has no impact on signal"
     annotation (Placement(transformation(extent={{-66,28},{-46,48}})));
 equation
@@ -103,7 +103,10 @@ The server performs the following tasks:
 <p>Open a console in Windows (Start -> Run -> insert: \"cmd\"), change folder
 to <code>.../AixLib/Resources/SocketCommunicationServer</code>,
 run <code>ExampleServer.exe</code>. The Server is now ready to operate. 
-Now simulate <code>ExampleClientLoop</code>.</p>
+Now simulate <code>ExampleClientLoop</code>.
+Please ensure that an installation of Microsoft Visual Studio
+or Microsoft Visual C++ 2010 Express is installed on 
+your machine to execute ExampleServer.exe</p>
 
 <h4>Verfication of IP address</h4>
 
@@ -113,7 +116,8 @@ Set the IP address to the IP address of your local machine. (You may retrieve
 your local IP adress in Windows from the console (Start -> Run -> insert: \"cmd\" -> ipconfig)).</p>
 
 <h4>Requirements</h4>
-<p>This example and the executable have been tested on Windows 7 64-bit using Dymola 2015 32-bit.</p>
+<p>This example and the executable have been tested on Windows 7 64-bit using
+Dymola 2015 32-bit.</p>
 </html>"),
  experiment(StopTime=10, __Dymola_Algorithm="Lsodar"),
     __Dymola_experimentSetupOutput,

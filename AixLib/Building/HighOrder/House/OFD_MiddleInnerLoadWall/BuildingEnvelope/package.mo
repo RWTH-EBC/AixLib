@@ -1,5 +1,5 @@
 within AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall;
-package BuildingEnvelope
+package BuildingEnvelope 
   extends Modelica.Icons.Package;
 
 

@@ -17,7 +17,7 @@ equation
   connect(boundaryMoistAir_phX2.portMoistAir_a, volumeFlowControler.portMoistAir_a) annotation(Line(points = {{-52, 11}, {-24, 11}}, color = {0, 127, 255}));
   connect(volumeFlowControler.portMoistAir_b, boundaryMoistAir_phX1.portMoistAir_a) annotation(Line(points = {{-4, 11}, {54, 11}}, color = {0, 127, 255}));
   connect(volumeFlowControler.VolumeFlowSet, realExpression.y) annotation(Line(points = {{-24.8, 13.1}, {-24.8, 43.2}, {-67, 43.2}, {-67, 44}}, color = {0, 0, 127}));
-  annotation( Documentation(info = "<html>
+  annotation (Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>A small example which shows how the volume flow controller works</p>
  </html>", revisions = "<html>

@@ -1,4 +1,4 @@
 within AixLib.DataBase.Walls.WSchV1995;
-package IW
+package IW 
   extends Modelica.Icons.Package;
 end IW;

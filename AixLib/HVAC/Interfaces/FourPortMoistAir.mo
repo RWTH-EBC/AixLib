@@ -11,7 +11,7 @@ partial model FourPortMoistAir "Component with four moist air ports"
 equation
   dp[1] = port_1a.p - port_1b.p;
   dp[2] = port_2a.p - port_2b.p;
-  annotation( Documentation(info = "<html>
+  annotation (Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Two Port Model for Moist Air</p>
  </html>", revisions = "<html>

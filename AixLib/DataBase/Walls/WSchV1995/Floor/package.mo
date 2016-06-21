@@ -1,4 +1,4 @@
 within AixLib.DataBase.Walls.WSchV1995;
-package Floor
+package Floor 
   extends Modelica.Icons.Package;
 end Floor;

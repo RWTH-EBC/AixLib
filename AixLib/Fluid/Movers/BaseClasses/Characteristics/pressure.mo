@@ -7,7 +7,8 @@ function pressure
   input Modelica.SIunits.VolumeFlowRate V_flow "Volumetric flow rate";
   input Real r_N(unit="1") "Relative revolution, r_N=N/N_nominal";
   input Modelica.SIunits.VolumeFlowRate VDelta_flow "Small volume flow rate";
-  input Modelica.SIunits.PressureDifference dpDelta(displayUnit="Pa") "Small pressure";
+  input Modelica.SIunits.PressureDifference dpDelta(displayUnit="Pa")
+    "Small pressure";
 
   input Modelica.SIunits.VolumeFlowRate V_flow_max
     "Maximum volume flow rate at r_N=1 and dp=0";
@@ -36,7 +37,8 @@ protected
       "Pressure performance data";
     input Integer dimD "Dimension of data vector";
 
-    output Modelica.SIunits.PressureDifference dp(displayUnit="Pa") "Pressure raise";
+    output Modelica.SIunits.PressureDifference dp(displayUnit="Pa")
+      "Pressure raise";
 
   protected
     Modelica.SIunits.VolumeFlowRate rat "Ratio of V_flow/r_N";

@@ -1,5 +1,5 @@
 within AixLib.Building.HighOrder;
-package Rooms
+package Rooms 
   extends Modelica.Icons.Package;
 
 

@@ -35,7 +35,7 @@ equation
   connect(massFlowSensor.m_flow, heatDemand.m_flow_in) annotation (Line(
       points={{-40,11},{-40,30},{-52,30},{-52,60}},
       color={0,0,127}));
-  annotation( Documentation(info = "<html>
+  annotation (Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This basic boiler model calculates the heat demand in order to reach the
   fluid set temperature. The heat input to the fluid is limited between 0 and

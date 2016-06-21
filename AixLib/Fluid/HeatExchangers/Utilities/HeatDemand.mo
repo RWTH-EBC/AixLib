@@ -7,7 +7,7 @@ model HeatDemand "Calculates heat demand to heat m_flow_in from T_in to T_set"
 
 equation
   Q_flow_out = m_flow_in * 4184 * (T_set - T_in);
-  annotation( Documentation(info = "<html>
+  annotation (Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>This control is very simple. Its inputs are a given set temperature T_set,
  the temperature of the fluid T_in and the mass flow rate of the fluid

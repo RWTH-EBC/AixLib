@@ -11,7 +11,7 @@ equation
   port_a.h_outflow = inStream(port_b.h_outflow);
   port_b.h_outflow = inStream(port_a.h_outflow);
   dp = 8 * zeta / (Modelica.Constants.pi ^ 2 * D ^ 4 * rho) * m_flow ^ 2;
-  annotation( Icon(graphics={  Rectangle(extent=  {{-80, 46}, {80, -34}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 0},
+  annotation (Icon(graphics={  Rectangle(extent=  {{-80, 46}, {80, -34}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 0},
             fillPattern=                                                                                                    FillPattern.Solid, radius=  45), Text(extent=  {{32, 26}, {-30, -10}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 0},
             fillPattern=FillPattern.Solid, textString=  "Zeta")}),
   Documentation(revisions="<html>

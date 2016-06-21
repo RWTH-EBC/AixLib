@@ -28,7 +28,7 @@ equation
   connect(SolarRadiation.y, varRad.AOI[1]) annotation (Line(
       points={{-79,50},{-74,50},{-74,43},{-65,43}},
       color={0,0,127}));
-  annotation( experiment(StopTime = 3600, Interval = 60, Algorithm = "Lsodar"),Documentation(info = "<html>
+  annotation (experiment(StopTime = 3600, Interval = 60, Algorithm = "Lsodar"),Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>Simulation to test the <a href=\"AixLib.Building.Components.WindowsDoors.WindowSimple\">WindowSimple</a> model.</p>
  <h4><font color=\"#008000\">Concept</font></h4>
