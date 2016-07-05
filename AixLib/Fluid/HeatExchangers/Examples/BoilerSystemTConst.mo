@@ -65,7 +65,7 @@ equation
   connect(staticPressure.ports[1], pumpSimple.port_a) annotation (Line(
       points={{-90,-20},{-90,-28},{-50,-28},{-50,0}},
       color={0,127,255}));
-  annotation (experiment(StopTime = 82800, Interval = 60), __Dymola_experimentSetupOutput(events = false), Documentation(info = "<html>
+  annotation( experiment(StopTime = 82800, Interval = 60), __Dymola_experimentSetupOutput(events = false), Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>This example models a simple fluid circuit in order to test the boiler model
  for plausibility</p>

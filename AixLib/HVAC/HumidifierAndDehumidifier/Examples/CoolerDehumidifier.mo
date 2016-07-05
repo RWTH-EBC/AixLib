@@ -17,7 +17,7 @@ equation
   connect(coolingDehumidifier.portMoistAir_b, duct.portMoistAir_a) annotation(Line(points = {{-6, 9}, {14, 9}, {14, 11}, {30, 11}}, color = {0, 127, 255}));
   connect(coolingDehumidifier.CoolSurfaceTemperature, temperature_coolingSurface.y) annotation(Line(points = {{-11.76, 19.34}, {-11.76, 50}, {19, 50}}, color = {0, 0, 127}));
   connect(bypassFactor.y, coolingDehumidifier.BypassFactor) annotation(Line(points = {{-39, 50}, {-25.2, 50}, {-25.2, 19.34}}, color = {0, 0, 127}));
-  annotation (experiment(StopTime = 1000, Interval = 1, __Dymola_Algorithm = "Lsodar"),Documentation(info = "<html>
+  annotation( experiment(StopTime = 1000, Interval = 1, __Dymola_Algorithm = "Lsodar"),Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Example shows how the cooling dehumidifier works.</p>
  </html>", revisions = "<html>

@@ -15,7 +15,7 @@ equation
   Re = 4 * rho_MoistAir * Volflow / dynamicViscosity / D / Modelica.Constants.pi;
   Volflow = portMoistAir_a.m_flow * (1 + X_Steam) / rho_MoistAir;
   lambda = if Volflow > 0 then 1 / 8 * dp * D ^ 5 * Modelica.Constants.pi ^ 2 / l / rho_MoistAir / Volflow ^ 2 else 0;
-  annotation (Documentation(info = "<html>
+  annotation( Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Pressure loss model for duct.</p>
  <p>It covers laminar and turbulent regime.</p>

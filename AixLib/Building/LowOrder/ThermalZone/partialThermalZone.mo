@@ -77,7 +77,7 @@ public
   Utilities.Interfaces.Star internalGainsRad "Radiative internal gains" annotation(Placement(transformation(extent={{30,-68},
             {50,-48}}), iconTransformation(extent={{30,-68},{50,-48}})));
   annotation(Icon(coordinateSystem(preserveAspectRatio=false,  extent={{-100,-100},
-            {100,100}}),                                                                                                    graphics={                                Text(extent=  {{-90, 134}, {98, 76}}, lineColor=
+            {100,100}}),                                                                                                    graphics={                                Text(extent = {{-90, 134}, {98, 76}}, lineColor=
               {0,0,255},
           textString="%name"),
         Rectangle(

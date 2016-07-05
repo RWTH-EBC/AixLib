@@ -74,20 +74,20 @@ model FixedResistancesExplicit "Test of multiple resistances in series"
     m_flow=1,
     nPorts=1)
     annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
-  AixLib.Fluid.Sources.Boundary_pT sin1(            redeclare package Medium =
-               Medium, T=273.15 + 10,
+  AixLib.Fluid.Sources.Boundary_pT sin1(            redeclare package Medium
+      =        Medium, T=273.15 + 10,
     nPorts=2,
     use_p_in=false,
     p=101325)                         annotation (Placement(transformation(
           extent={{120,-40},{100,-20}})));
-  AixLib.Fluid.Sources.Boundary_ph sin2(            redeclare package Medium =
-               Medium,
+  AixLib.Fluid.Sources.Boundary_ph sin2(            redeclare package Medium
+      =        Medium,
     nPorts=1,
     use_p_in=false,
     p=101325)                         annotation (Placement(transformation(
           extent={{120,50},{100,70}})));
-  AixLib.Fluid.Sources.Boundary_ph sou1(            redeclare package Medium =
-               Medium,
+  AixLib.Fluid.Sources.Boundary_ph sou1(            redeclare package Medium
+      =        Medium,
     nPorts=1,
     p(displayUnit="Pa") = 101335,
     use_p_in=true)                    annotation (Placement(transformation(

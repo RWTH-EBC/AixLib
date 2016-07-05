@@ -5,13 +5,13 @@ model FlowMachineInterface
 
   import cha = AixLib.Fluid.Movers.BaseClasses.Characteristics;
 
-  parameter AixLib.Fluid.Movers.Data.Generic per "Record with performance data"
+  parameter AixLib.Fluid.Movers.Data.Generic per
+    "Record with performance data"
     annotation (choicesAllMatching=true,
       Placement(transformation(extent={{60,-80},{80,-60}})));
 
   parameter AixLib.Fluid.Movers.BaseClasses.Types.PrescribedVariable preVar=
-    AixLib.Fluid.Movers.BaseClasses.Types.PrescribedVariable.Speed
-    "Type of prescribed variable";
+    AixLib.Fluid.Movers.BaseClasses.Types.PrescribedVariable.Speed "Type of prescribed variable";
   parameter Boolean computePowerUsingSimilarityLaws
     "= true, compute power exactly, using similarity laws. Otherwise approximate.";
 

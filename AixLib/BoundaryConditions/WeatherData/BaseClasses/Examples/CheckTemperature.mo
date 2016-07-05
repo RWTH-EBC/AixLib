@@ -7,7 +7,8 @@ model CheckTemperature "Test model for CheckTemperature"
   AixLib.BoundaryConditions.WeatherData.BaseClasses.CheckTemperature
     cheTemDewPoi "Check dew point temperature"
     annotation (Placement(transformation(extent={{60,-20},{80,0}})));
-  AixLib.Utilities.Time.ModelTime modTim "Block that outputs the model time"
+  AixLib.Utilities.Time.ModelTime modTim
+    "Block that outputs the model time"
     annotation (Placement(transformation(extent={{-100,0},{-80,20}})));
   AixLib.BoundaryConditions.WeatherData.BaseClasses.ConvertTime conTim
     "Block that converts time"

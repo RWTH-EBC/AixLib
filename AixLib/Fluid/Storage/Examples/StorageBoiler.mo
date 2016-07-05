@@ -71,7 +71,7 @@ equation
   connect(boundary_p.ports[1], pump.port_a) annotation (Line(
       points={{-66,80},{-32,80},{-32,72}},
       color={0,127,255}));
-  annotation (experiment(StopTime = 86400, Interval = 60),Documentation(info = "<html>
+  annotation( experiment(StopTime = 86400, Interval = 60),Documentation(info = "<html>
 <h4><font color=\"#008000\">Overview</font></h4>
  <p>This is a simple example of a storage and a boiler.</p>
  </html>", revisions="<html>

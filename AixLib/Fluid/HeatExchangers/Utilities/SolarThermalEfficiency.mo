@@ -17,7 +17,7 @@ equation
   dT = T_col - T_air;
   eta = Collector.eta_zero - Collector.c1 * dT / G - Collector.c2 * dT * dT / G;
   Q_flow = G * eta;
-  annotation (Documentation(info = "<html>
+  annotation( Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>Model for the efficiency of a solar thermal collector. Inputs are outdoor
  air temperature, fluid temperature and solar irradiation. Based on these values

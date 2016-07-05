@@ -19,7 +19,7 @@ equation
   connect(division.y, fuelUse) annotation(Line(points = {{61, 40}, {74, 40}, {74, 0}, {106, 0}}, color = {0, 0, 127}));
   connect(division1.y, tableBoilerEff.u) annotation(Line(points = {{-9, -6}, {-8, -6}, {-8, 20}, {-2, 20}}, color = {0, 0, 127}));
   connect(tableBoilerEff.y[1], division.u2) annotation(Line(points = {{21, 20}, {28, 20}, {28, 34}, {38, 34}}, color = {0, 0, 127}));
-  annotation (Documentation(revisions = "<html>
+  annotation( Documentation(revisions = "<html>
   <ul>
   <li><i>09.10.2013&nbsp;</i>
      by Marcus Fuchs:<br/>

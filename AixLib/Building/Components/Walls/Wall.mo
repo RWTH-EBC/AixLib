@@ -134,7 +134,7 @@ equation
   end if;
   connect(heatStarToComb.thermStarComb, thermStarComb_inside) annotation(Line(points = {{78.4, -1.1}, {78.4, -1.05}, {102, -1.05}, {102, 0}}, color = {191, 0, 0}));
   connect(port_outside, port_outside) annotation(Line(points = {{-98, 4}, {-98, 4}}, color = {191, 0, 0}, pattern = LinePattern.Solid));
-  annotation (Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-20, -120}, {20, 120}}, grid = {1, 1}), graphics={  Rectangle(extent=  {{-16, 120}, {15, -60}}, fillColor=  {215, 215, 215},
+  annotation( Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-20, -120}, {20, 120}}, grid = {1, 1}), graphics={  Rectangle(extent=  {{-16, 120}, {15, -60}}, fillColor=  {215, 215, 215},
             fillPattern=                                                                                                    FillPattern.Backward,  pattern=LinePattern.None, lineColor=  {0, 0, 0}), Rectangle(extent=  {{-16, -90}, {15, -120}},  pattern=LinePattern.None, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215},
             fillPattern=                                                                                                    FillPattern.Backward), Rectangle(extent=  {{-16, -51}, {15, -92}}, lineColor=  {0, 0, 0},  pattern=LinePattern.None, fillColor=  {215, 215, 215},
             fillPattern=                                                                                                    FillPattern.Backward, visible=  not withDoor), Rectangle(extent=  {{-16, 80}, {15, 20}}, fillColor=  {255, 255, 255},

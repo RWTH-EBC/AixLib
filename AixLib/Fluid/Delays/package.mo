@@ -1,8 +1,6 @@
 within AixLib.Fluid;
 package Delays "Package with delay models"
   extends Modelica.Icons.VariantsPackage;
-
-
 annotation (preferredView="info", Documentation(info="<html>
 <p>
 This package contains components models for transport delays in

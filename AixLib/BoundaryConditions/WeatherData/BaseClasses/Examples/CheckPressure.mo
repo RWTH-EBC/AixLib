@@ -5,7 +5,8 @@ model CheckPressure "Test model for pressure check"
   AixLib.BoundaryConditions.WeatherData.BaseClasses.CheckPressure chePre
     "Block that checks the pressure"
     annotation (Placement(transformation(extent={{20,0},{40,20}})));
-  AixLib.Utilities.Time.ModelTime modTim "Block that outputs simulation time"
+  AixLib.Utilities.Time.ModelTime modTim
+    "Block that outputs simulation time"
     annotation (Placement(transformation(extent={{-100,0},{-80,20}})));
   AixLib.BoundaryConditions.WeatherData.BaseClasses.ConvertTime conTim
     "Block that converts time"

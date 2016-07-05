@@ -195,7 +195,7 @@ Revised implementation to allow zero flow rate.
 </html>"),
     Icon(graphics={
         Text(
-          visible=  inputType == AixLib.Fluid.Types.InputType.Continuous,
+          visible = inputType == AixLib.Fluid.Types.InputType.Continuous,
           extent={{20,142},{104,108}},
           textString="dp_in"),
         Line(

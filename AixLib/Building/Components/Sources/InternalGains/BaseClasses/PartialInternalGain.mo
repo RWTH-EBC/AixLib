@@ -20,7 +20,7 @@ equation
   connect(ConvectiveHeat.port, ConvHeat) annotation(Line(points = {{40, 30}, {46, 30}, {46, 60}, {90, 60}}, color = {191, 0, 0}, pattern = LinePattern.Solid));
   connect(gain.y, ConvectiveHeat.Q_flow) annotation(Line(points = {{12.4, 30}, {20, 30}}, color = {0, 0, 127}));
   connect(gain1.y, RadiativeHeat.Q_flow) annotation(Line(points = {{12.4, -10}, {20, -10}}, color = {0, 0, 127}));
-  annotation (Documentation(revisions = "<html>
+  annotation( Documentation(revisions = "<html>
  <ul>
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
  <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>

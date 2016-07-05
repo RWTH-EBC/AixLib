@@ -1,5 +1,5 @@
 within AixLib.Building.Components.Sources.InternalGains;
-package Lights 
+package Lights
   extends Modelica.Icons.Package;
 
 

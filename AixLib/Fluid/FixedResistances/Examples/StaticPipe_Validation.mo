@@ -27,6 +27,6 @@ equation
   connect(pipe.port_b, boundary_ph1.ports[1]) annotation (Line(
       points={{10,0},{40,0}},
       color={0,127,255}));
-  annotation (experiment(StopTime = 1000, Interval = 1), __Dymola_experimentSetupOutput(events = false), Documentation(revisions="<html>
+  annotation( experiment(StopTime = 1000, Interval = 1), __Dymola_experimentSetupOutput(events = false), Documentation(revisions="<html>
  Will be removed </html>"));
 end StaticPipe_Validation;

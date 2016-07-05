@@ -1,7 +1,7 @@
 within AixLib.HVAC.Ductwork;
 model VolumeFlowController
   extends BaseClasses.SimplePressureLoss;
-  outer BaseParameters baseParameters annotation (Icon(graphics = {Rectangle(extent=  {{-100, 100}, {100, -100}}, lineColor=  {0, 0, 0}, fillColor=  {170, 255, 255}, fillPattern=  FillPattern.HorizontalCylinder)}));
+  outer BaseParameters baseParameters annotation( Icon(graphics = {Rectangle(extent=  {{-100, 100}, {100, -100}}, lineColor=  {0, 0, 0}, fillColor=  {170, 255, 255}, fillPattern=  FillPattern.HorizontalCylinder)}));
   Modelica.Blocks.Sources.RealExpression Volumeflow(y = Volflow) annotation(Placement(transformation(extent = {{-88, -38}, {-56, -6}})));
   Modelica.Blocks.Interfaces.RealInput VolumeFlowSet annotation(Placement(transformation(extent = {{-126, 4}, {-90, 38}})));
   Real angle "current angle of Flap";

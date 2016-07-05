@@ -2,7 +2,8 @@ within AixLib.Fluid.MixingVolumes.Validation;
 model MixingVolumeTraceSubstance
   "Test model for mixing volume with trace substance input"
   extends Modelica.Icons.Example;
- package Medium = AixLib.Media.Air(extraPropertiesNames={"CO2"}) "Medium model";
+ package Medium = AixLib.Media.Air(extraPropertiesNames={"CO2"})
+    "Medium model";
 
   parameter Modelica.SIunits.Pressure dp_nominal = 10 "Nominal pressure drop";
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.5

@@ -16,7 +16,7 @@ equation
   connect(Medium1in.portMoistAir_a, HX.port_1a) annotation(Line(points = {{-50, 20}, {-36, 20}, {-36, 12}, {-20, 12}}, color = {0, 127, 255}));
   connect(HX.port_1b, Medium1out.portMoistAir_a) annotation(Line(points = {{-20, -12}, {-36, -12}, {-36, -20}, {-50, -20}}, color = {0, 127, 255}));
   connect(Toda.y, Medium1in.h_in) annotation(Line(points = {{-79, 50}, {-76, 50}, {-76, 20}, {-72, 20}}, color = {0, 0, 127}));
-  annotation (Documentation(info = "<html>
+  annotation( Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>A small example of an heat exchanger with varying temperature of the cold medium.</p>
  </html>", revisions = "<html>

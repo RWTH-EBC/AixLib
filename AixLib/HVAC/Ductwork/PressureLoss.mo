@@ -5,7 +5,7 @@ model PressureLoss "simple pressure loss model based on zeta value"
   parameter Real zeta = 1.0 "Pressure loss factor for flow of port_a -> port_b";
 equation
   zeta_var = zeta;
-  annotation (Icon(graphics={  Rectangle(extent=  {{-100, 100}, {100, -100}}, lineColor=  {0, 0, 0}, fillColor=  {170, 255, 255},
+  annotation( Icon(graphics={  Rectangle(extent=  {{-100, 100}, {100, -100}}, lineColor=  {0, 0, 0}, fillColor=  {170, 255, 255},
             fillPattern=                                                                                                    FillPattern.HorizontalCylinder), Text(extent=  {{88, 44}, {-88, -40}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 0},
             fillPattern=                                                                                                    FillPattern.Solid, textString=  "Zeta =%zeta
  d=%D")}), Documentation(info = "<html>

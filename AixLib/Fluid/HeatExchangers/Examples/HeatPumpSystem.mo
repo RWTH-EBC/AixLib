@@ -98,7 +98,7 @@ equation
   connect(boundary_ph1.ports[1], heatPump.port_b_source) annotation (Line(
       points={{-80,34},{-26,34},{-26,42},{-17,43}},
       color={0,127,255}));
-  annotation (experiment(StopTime = 10800, Interval = 1), __Dymola_experimentSetupOutput(events = false), Documentation(info = "<html>
+  annotation( experiment(StopTime = 10800, Interval = 1), __Dymola_experimentSetupOutput(events = false), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This example models a simple fluid circuit in order to test the heat pump model for plausibility</p>
  </html>", revisions="<html>

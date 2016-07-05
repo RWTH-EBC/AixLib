@@ -6,8 +6,8 @@ partial model partialHeaterCooler
             {100,-30}}), iconTransformation(extent={{80,-50},{100,-30}})));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),
-                   graphics={  Rectangle(extent={{-94,-30},{80,-50}},    lineColor=  {135, 135, 135}, fillColor=  {135, 135, 135},
-            fillPattern=                                                                                                    FillPattern.Solid),                                                                                                    Line(points={{
+                   graphics={  Rectangle(extent={{-94,-30},{80,-50}},    lineColor = {135, 135, 135}, fillColor = {135, 135, 135},
+            fillPattern =                                                                                                   FillPattern.Solid),                                                                                                    Line(points={{
               -46,-30},{-46,60}},                                                                                                    color={0,
               128,255}),                                                                                                    Line(points={{
               -66,36},{-46,60},{-26,36}},                                                                                                    color={0,

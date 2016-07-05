@@ -15,7 +15,7 @@ equation
   connect(boundaryMoistAir_phX2.p_in, add.y) annotation(Line(points = {{-54, 28}, {-92, 28}, {-92, -32}, {60, -32}, {60, -62}, {17, -62}}, color = {0, 0, 127}));
   connect(boundaryMoistAir_phX2.portMoistAir_a, duct.portMoistAir_a) annotation(Line(points = {{-32, 20}, {-12, 20}}, color = {0, 127, 255}));
   connect(duct.portMoistAir_b, boundaryMoistAir_phX1.portMoistAir_a) annotation(Line(points = {{8, 20}, {36, 20}}, color = {0, 127, 255}));
-  annotation (Documentation(info = "<html>
+  annotation( Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>A small example which shows the use of the duct model</p>
  </html>", revisions = "<html>

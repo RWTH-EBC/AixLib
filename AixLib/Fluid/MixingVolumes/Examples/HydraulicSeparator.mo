@@ -174,8 +174,8 @@ equation
   connect(pipe.port_b, temperatureTop.port_a) annotation (Line(
       points={{-10,8},{-10,10},{-8,10}},
       color={0,127,255}));
-  connect(temperatureTop.port_b, hydraulicSeparator.port_a_primary) annotation (
-     Line(
+  connect(temperatureTop.port_b, hydraulicSeparator.port_a_primary) annotation
+    (Line(
       points={{12,10},{17.6,10}},
       color={0,127,255}));
   connect(temperatureMixedTop.port_a, hydraulicSeparator.port_b_secondary)

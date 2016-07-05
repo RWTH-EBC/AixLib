@@ -1,4 +1,4 @@
-within AixLib.Building.Components.Weather.BaseClasses;
+﻿within AixLib.Building.Components.Weather.BaseClasses;
 model Sun "Computes the sun's altitude of the current site"
 
 import Modelica.SIunits.Conversions.from_deg;
@@ -45,8 +45,7 @@ equation
     "the difference between the UTC and the time standard is given by DiffWeatherDataTime and Diff_lokalStandardTime Longitude";
 
 // hour angle of sun, first term calculates local time of day from continuous time signal
-      HourAngleSun = (SolarTime-12) * 360/24
-    "HourAngleSun=0 deg means sun peak";
+      HourAngleSun = (SolarTime-12) * 360/24 "HourAngleSun=0 deg means sun peak";
       if (HourAngleSun > 180) then
         OutHourAngleSun = HourAngleSun - 360;
       elseif (HourAngleSun < -180) then

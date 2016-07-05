@@ -1,4 +1,4 @@
-within AixLib.Building.Components.Weather.RadiationOnTiltedSurface;
+﻿within AixLib.Building.Components.Weather.RadiationOnTiltedSurface;
 model RadOnTiltedSurf_Perez
   "Calculates solar radiation on tilted surfaces according to Perez"
   extends RadiationOnTiltedSurface.BaseClasses.PartialRadOnTiltedSurf;

@@ -15,7 +15,7 @@ equation
   connect(duct.portMoistAir_b, sink.portMoistAir_a) annotation(Line(points = {{52, 11}, {80, 11}}, color = {0, 127, 255}));
   connect(source.portMoistAir_a, steamHumidifier.portMoistAir_a) annotation(Line(points = {{-82, 10}, {-58, 10}, {-58, 9}, {-30, 9}}, color = {0, 127, 255}));
   connect(steamHumidifier.portMoistAir_b, duct.portMoistAir_a) annotation(Line(points = {{-6, 9}, {14, 9}, {14, 11}, {30, 11}}, color = {0, 127, 255}));
-  annotation (experiment(StopTime = 1000, Interval = 1, __Dymola_Algorithm = "Lsodar"),Documentation(info = "<html>
+  annotation( experiment(StopTime = 1000, Interval = 1, __Dymola_Algorithm = "Lsodar"),Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Example shows how the steam humidifier works.</p>
  <p>In this particular set-up not all of the steam is absorbed because it would lead to over saturation.</p>

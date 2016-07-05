@@ -67,7 +67,7 @@ equation
             100}}),
             graphics={
             Text(
-              visible=  inputType == AixLib.Fluid.Types.InputType.Continuous,
+              visible = inputType == AixLib.Fluid.Types.InputType.Continuous,
               extent={{10,124},{102,102}},
               textString="y [0, 1]"),
             Text(
