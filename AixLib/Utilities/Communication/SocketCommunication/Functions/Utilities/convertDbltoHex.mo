@@ -9,7 +9,7 @@ annotation (    Include="#include \"AixLibSocketCommunication.h\"",
     IncludeDirectory="modelica://AixLib/Resources/Include",   Documentation(
             info="<HTML>
             Function that converts a double number into a byte array.
-            <h4>C source code of convertDbltoHex()</h4>
+            <h4>C source code of <code>convertDbltoHex()</code></h4>
             <pre>
           unsigned char **convertDbltoHex(double num) {
           unsigned char *byArr;

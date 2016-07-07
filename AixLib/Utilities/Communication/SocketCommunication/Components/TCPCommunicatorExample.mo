@@ -16,7 +16,7 @@ model TCPCommunicatorExample
     "Start time when sampling starts";
   parameter String IP_AddressExample = "127.0.0.1"
     "IP address or name of Server";
-  parameter String portExample="27015" "Port on Server";
+  parameter String portExample="27015" "Port on server";
   parameter Integer nSend = 1 "Number of datapoints to be written";
   parameter Integer nRecv = 1 "Number of datapoints to be read";
 
@@ -37,7 +37,7 @@ algorithm
      stateExample :=Functions.TCP.SocketSend(msgSend, intLength,socketHandle);    // send message
 
 /************************* In between for expalanation ******************************/
-   Modelica.Utilities.Streams.print("MySocketSend(): Send message to IP " + IP_Address + " at port " + port + ": " + msgSend);
+   Modelica.Utilities.Streams.print("SocketSend(): Send message to IP " + IP_Address + " at port " + port + ": " + msgSend);
 /************************* In between for expalanation ******************************/
 
    (msgRecv, stateExample) :=Functions.TCP.SocketReceive(maxLen,socketHandle);   // receive message
@@ -45,7 +45,7 @@ algorithm
     y[1] :=Modelica.Utilities.Strings.scanReal(msgRecv);
 
 /************************* In between for expalanation ******************************/
-  Modelica.Utilities.Streams.print("MySocketReceive(): Message received from IP " + IP_Address + " at port " + port + ": " + msgRecv);
+  Modelica.Utilities.Streams.print("SocketReceive(): Message received from IP " + IP_Address + " at port " + port + ": " + msgRecv);
 /************************* In between for expalanation ******************************/
 
  end when;
@@ -66,7 +66,7 @@ annotation(Documentation(revisions="<html>
 <p>This is a small example Block which allows to establish a TCP Connection between a Client (i.e. Dymola) 
 and a Server (External) it sends the value of input <code>u[1]</code> as a string to the server and receives a string message.
 This received string message should only contain a real number as it is converted into a <code>Real</code> value afterwards and
-forwarded to output <code>y[1]</code>. Check <code>AixLib.Utilities.SocketCommunication.Examples.Example_Client_Loop</code> for a executable example.
+forwarded to output <code>y[1]</code>. Check <code>SocketCommunication.Examples.ExampleClientLoop</code> for a executable example.
 </p>
 </html>"), Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}}), graphics={

@@ -1,5 +1,5 @@
 within AixLib.Utilities.Communication;
-package SocketCommunication "Library for socket communication in Modelica"
+package SocketCommunication "Package for socket communication in Modelica"
 extends Modelica.Icons.Package;
 
 

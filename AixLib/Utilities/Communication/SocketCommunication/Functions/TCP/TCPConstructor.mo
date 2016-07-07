@@ -16,7 +16,7 @@ annotation (Documentation(info="<html>
 
 <p>
 Intializes a TCP socket and connects to a server on a certain port.
-Comprises MySocketInit() and MySocketConnect(). </p>
+Comprises <code>SocketInit()</code> and <code>SocketConnect()</code>. </p>
  
  
 
@@ -33,7 +33,7 @@ model dummyUsage
   
 initial algorithm 
 
-  (socketHandle,state) := TCP_Constructor(1,\"0.11.11.11\",\"1234\");
+  (socketHandle,state) := TCPConstructor(1,\"0.11.11.11\",\"1234\");
 
 equation
 
@@ -46,25 +46,25 @@ end dummyUsage;
 <h4>Errors</h4>
 <p>state == 0, everything fine, state == 1, error where an error message will be
 reported in the simulation messages window. Error codes and descriptions can be
-found in UsersGuide.</p>
+found in <code>UsersGuide</code>.</p>
 
-<h4>C Source Code of TCP_Constructor()</h4>
+<h4>C Source Code of <code>TCPConstructor()</code></h4>
 
-<p>Source code of TCP_Constructor() in external header file.</p>
+<p>Source code of <code>TCPConstructor()</code> in external header file.</p>
 
 <pre>
-int TCP_Constructor(int* socketHandle, tIpAddr ip, tPort port)
+int TCPConstructor(int* socketHandle, tIpAddr ip, tPort port)
 {
         // Intialize socket
-    if (0 != MySocketInit())
+    if (0 != SocketInit())
         {
-        ModelicaFormatMessage(\"MySocketInit(): Unable to initialise socket!\n\");  
+        ModelicaFormatMessage(\"SocketInit(): Unable to initialise socket!&#92;n\");  
       return 1;
     }
                         
         // Connect to Server with ip on port
-        if (0 != MySocketConnect(ip, port,socketHandle)) {
-        ModelicaFormatMessage(\"MySocketConnect(): Unable to connect to server!\n\");  
+        if (0 != SocketConnect(ip, port,socketHandle)) {
+        ModelicaFormatMessage(\"SocketConnect(): Unable to connect to server!&#92;n\");  
                 return 1;
         }
         return 0;

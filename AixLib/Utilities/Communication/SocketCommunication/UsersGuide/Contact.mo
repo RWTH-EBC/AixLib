@@ -4,9 +4,11 @@ class Contact "Contact"
 
     annotation (preferredView="info",Documentation(info="<html>
 
-<p>The content of <code>SocketCommunication</code> package and the set of C functions is part of
-a masterthesis conducted by Georg Ferdinand Schneider under supervision of Dr. Jens
-Oppermann and Ana Constantin. Contributions to the package are welcome via the <code>AixLib</code> 
+<p>The content of <code>SocketCommunication</code> package and the set of C
+functions is part of a masterthesis conducted by Georg Ferdinand Schneider
+under supervision of Dr. Jens Oppermann and Ana Constantin. 
+We would like to thank WILO SE for financial support of this activity.
+Contributions to the package are welcome via the <code>AixLib</code> 
 webpage <a href=\"https://www.github.com/RWTH-EBC/AixLib\">https://www.github.com/RWTH-EBC/AixLib</a>.</p>
 
 <dl>

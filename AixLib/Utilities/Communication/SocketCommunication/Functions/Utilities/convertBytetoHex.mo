@@ -12,7 +12,7 @@ annotation (
             Documentation(
             info="<HTML>
 <p>Function that converts a byte array into a hex string.</p>
-            <h4>C source code of convertBytetoHex()</h4>
+            <h4>C source code of <code>convertBytetoHex()</code></h4>
             <pre>
             char *convertBytetoHex(unsigned char *ByteStr)
             {

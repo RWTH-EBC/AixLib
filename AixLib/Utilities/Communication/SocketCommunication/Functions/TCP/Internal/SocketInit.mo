@@ -10,8 +10,8 @@ external "C" ans = SocketInit() annotation (
 annotation (Documentation(
 info="<HTML>
 <p>
-Function to initialize a TCP-Socket. Needs to be called at first. Note that SocketInit() 
-is already included in TCP_Constructor() and is here just for debugging. Returns 0 if initialization 
+Function to initialize a TCP-Socket. Needs to be called at first. Note that <code>SocketInit()</code> 
+is already included in <code>TCP_Constructor()</code> and is here just for debugging. Returns 0 if initialization 
 was successful.
 </p>
 
@@ -39,12 +39,12 @@ end dummyUsage;
 
 <h4>Errors</h4>
 state == 0, everything fine, state == 1, error where an error message will be reported in the 
-Dymola messages window. Error codes and descriptions can be found in UsersGuide.
+Dymola messages window. Error codes and descriptions can be found in <code>UsersGuide</code>.
 
-<h4>C-Code of SocketInit()</h4>
+<h4>C-Code of <code>SocketInit()</code></h4>
 
-Source code of function SocketInit().
-<p>
+<p>Source code of function <code>SocketInit()</code>.
+</p>
 <pre>
 int SocketInit(void) // Initialize a Socket, Incorporated in TCP_Constructor()
 {
