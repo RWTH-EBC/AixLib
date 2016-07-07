@@ -1,7 +1,7 @@
 within AixLib.Airflow.AirHandlingUnit;
 model AHU
   "Air Handling Unit with Heat Recovery System, Cooling, Heating, Humidification (adiabatic), Dehumidification"
-  extends AixLib.Airflow.AirHandlingUnit.BaseClasses.partialAHU;
+  extends AixLib.Airflow.AirHandlingUnit.BaseClasses.PartialAHU;
   /*
  indices and abbreviations:
  HRS = heat recovery system
@@ -891,7 +891,7 @@ equation
     TsupplyAirOut = T_sup;
   end if;
   // with:
-  dTFan = P_el_sup/(V_dot_sup*rho * (c_pL_iG + X_oda * c_pW_iG));
+  P_el_sup = dTFan * V_dot_sup * rho * (c_pL_iG + X_oda * c_pW_iG);
 
   // transitions and conditions between state machines.
   initialState(startState) annotation (Line(
@@ -1361,7 +1361,7 @@ equation
     Icon(coordinateSystem(extent={{-100,-40},{100,40}}, preserveAspectRatio=false),
         graphics={Bitmap(
           extent={{-100,-28},{100,28}}, fileName=
-              "modelica://AixLib/Images/AHU/AHUaccToDINV18599-3.jpg"),
+              "modelica://AixLib/Resources/Images/AHU/AHUaccToDINV18599-3.jpg"),
           Rectangle(
           extent={{68,24},{98,-18}},
           fillColor={255,255,255},

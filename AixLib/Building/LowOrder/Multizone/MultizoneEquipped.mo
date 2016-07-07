@@ -38,7 +38,7 @@ model MultizoneEquipped
         rotation=180,
         origin={-94,6})));
   replaceable AixLib.Airflow.AirHandlingUnit.AHU AirHandlingUnit constrainedby
-    AixLib.Airflow.AirHandlingUnit.BaseClasses.partialAHU(
+    AixLib.Airflow.AirHandlingUnit.BaseClasses.PartialAHU(
     BPF_DeHu=buildingParam.BPF_DeHu,
     HRS=buildingParam.HRS,
     efficiencyHRS_enabled=buildingParam.efficiencyHRS_enabled,
