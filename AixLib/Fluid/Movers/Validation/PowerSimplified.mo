@@ -142,7 +142,7 @@ power calculation where the speed <i>N<sub>rpm</sub></i> differs from
 the nominal speed <i>N<sub>nominal</sub></i>.
 </p>
 <p align=\"center\">
-<img alt=\"image\" src=\"modelica://AixLib/Resources/Resources/Images/Fluid/Movers/Validation/PowerSimplified.png\"/>
+<img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Movers/Validation/PowerSimplified.png\"/>
 </p>
 </html>", revisions="<html>
 <ul>

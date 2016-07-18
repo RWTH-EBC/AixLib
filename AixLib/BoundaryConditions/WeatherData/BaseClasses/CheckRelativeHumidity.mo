@@ -34,5 +34,5 @@ First implementation.
 </html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={Bitmap(extent={{-74,74},{76,-78}}, fileName=
-              "modelica://AixLib/Resources/Resources/Images/BoundaryConditions/WeatherData/BaseClasses/relativeHumidity.png")}));
+              "modelica://AixLib/Resources/Images/BoundaryConditions/WeatherData/BaseClasses/relativeHumidity.png")}));
 end CheckRelativeHumidity;
