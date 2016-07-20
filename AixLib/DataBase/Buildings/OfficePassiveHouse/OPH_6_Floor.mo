@@ -7,7 +7,6 @@ record OPH_6_Floor
     Cooler_on = false,
     l_cooler = 0,
     RatioConvectiveHeatLighting = 0.5,
-    zoneID = "OPH_6_Floor",
     usage = "Floor",
     RoomArea = 837.0,
     Vair = 3348.0,

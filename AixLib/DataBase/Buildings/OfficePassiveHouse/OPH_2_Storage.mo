@@ -7,7 +7,6 @@ record OPH_2_Storage
     Cooler_on = false,
     l_cooler = 0,
     RatioConvectiveHeatLighting = 0.5,
-    zoneID = "OPH_2_Storage",
     usage = "Storage",
     RoomArea = 502.0,
     Vair = 2008.0,
