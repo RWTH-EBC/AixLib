@@ -1,72 +1,78 @@
 within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 partial model PartialThermalZone
   "Partial for ready-to-use reduced order building model"
+  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
   parameter DataBase.Buildings.ZoneBaseRecord zoneParam
     "choose setup for this zone" annotation(choicesAllMatching = true);
-  Modelica.Blocks.Interfaces.RealInput ventilationRate(
-  final quantity="VolumeFlowRate",
-  final unit="1/h") "Ventilation and infiltration rate" annotation (Placement(
-        transformation(
+  parameter Integer nPorts=0 "Number of fluid ports"
+    annotation(Evaluate=true,
+    Dialog(connectorSizing=true, tab="General",group="Ports"));
+  Modelica.Blocks.Interfaces.RealInput ventRate(final quantity="VolumeFlowRate",
+      final unit="1/h") "Ventilation and infiltration rate" annotation (
+      Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={-40,-100}), iconTransformation(
         extent={{-12,-12},{12,12}},
         rotation=90,
         origin={-40,-60})));
-  Modelica.Blocks.Interfaces.RealInput internalGains[3]
-    "Input profiles for internal gains persons, machines, light" annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 90, origin = {80, -100}), iconTransformation(extent = {{-12, -12}, {12, 12}}, rotation = 90, origin={80,-60})));
-  Modelica.Blocks.Interfaces.RealInput ventilationTemperature(
+  Modelica.Blocks.Interfaces.RealInput intGains[3]
+    "Input profiles for internal gains persons, machines, light" annotation (
+      Placement(transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=90,
+        origin={80,-100}), iconTransformation(
+        extent={{-12,-12},{12,12}},
+        rotation=90,
+        origin={80,-60})));
+  Modelica.Blocks.Interfaces.RealInput ventTemp(
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC",
-    min=0) "Ventilation and infiltration temperature" annotation (
-      Placement(transformation(extent={{-120,-60},{-80,-20}}),
-        iconTransformation(extent={{-88,-52},{-62,-26}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a internalGainsConv
-    "Convective internal gains" annotation(Placement(transformation(extent={{8,-104},
-            {28,-84}}),                                                                                                    iconTransformation(extent={{8,-104},
-            {28,-84}})));
-  replaceable AixLib.ThermalZones.ReducedOrder.RC.TwoElements ROM         constrainedby
-    AixLib.ThermalZones.ReducedOrder.RC.OneElement(
-    RRest=zoneParam.RRest,
-    R1o=zoneParam.R1o,
-    C1o=zoneParam.C1o,
-    Ao=zoneParam.Ao,
-    T0all=zoneParam.T0all,
-    alphaowi=zoneParam.alphaowi,
-    alphaowo=zoneParam.alphaowo,
-    epso=zoneParam.epso,
-    R1i=zoneParam.R1i,
-    C1i=zoneParam.C1i,
-    Ai=zoneParam.Ai,
-    Vair=zoneParam.Vair,
-    alphaiwi=zoneParam.alphaiwi,
-    rhoair=zoneParam.rhoair,
-    cair=zoneParam.cair,
-    epsi=zoneParam.epsi,
-    aowo=zoneParam.aowo,
-    epsw=zoneParam.epsw,
-    g=zoneParam.g,
-    Imax=zoneParam.Imax,
-    n=zoneParam.n,
-    weightfactorswall=zoneParam.weightfactorswall,
-    weightfactorswindow=zoneParam.weightfactorswindow,
-    weightfactorground=zoneParam.weightfactorground,
-    temperatureground=zoneParam.temperatureground,
-    AWin=zoneParam.Aw,
-    UWin=zoneParam.UWin,
-    gsunblind=zoneParam.gsunblind,
-    withInnerwalls=zoneParam.withInnerwalls,
-    withWindows=zoneParam.withWindows,
-    withOuterwalls=zoneParam.withOuterwalls,
-    splitfac=zoneParam.splitfac,
-    RWin=zoneParam.RWin,
-    alphaConvWinInner=zoneParam.alphaConvWinInner,
-    alphaConvWinOuter=zoneParam.alphaConvWinOuter,
-    awin=zoneParam.awin,
-    orientationswallshorizontal=zoneParam.orientationswallshorizontal)
-    "Thermal Zone"  annotation (Placement(transformation(extent={{-28,4},{20,40}})),
-      choicesAllMatching=true);
+    min=0) "Ventilation and infiltration temperature" annotation (Placement(
+        transformation(extent={{-120,-60},{-80,-20}}), iconTransformation(
+          extent={{-88,-52},{-62,-26}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv
+    "Convective internal gains" annotation (Placement(transformation(extent={{
+            90,-42},{110,-22}}), iconTransformation(extent={{90,-42},{110,-22}})));
+  RC.FourElements ROM(nPorts=nPorts)
+    annotation (Placement(transformation(extent={{38,28},{86,64}})));
+  Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts](
+    redeclare package Medium = Medium)
+    "Auxilliary fluid inlets and outlets to indoor air volume"
+    annotation (
+    Placement(transformation(
+    extent={{-45,-12},{45,12}},
+    origin={17,-94}), iconTransformation(
+    extent={{-30.5,-8},{30.5,8}},
+    origin={150,-171.5})));
+  Modelica.Blocks.Interfaces.RealOutput TAir "Indoor air temperature"
+    annotation (Placement(transformation(extent={{100,46},{120,66}}),
+        iconTransformation(extent={{100,46},{120,66}})));
+  Modelica.Blocks.Interfaces.RealOutput TRad
+    "Mean indoor radiation temperature" annotation (Placement(transformation(
+          extent={{100,18},{120,38}}), iconTransformation(extent={{100,18},{120,
+            38}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad
+    "Convective internal gains" annotation (Placement(transformation(extent={{
+            90,-8},{110,12}}), iconTransformation(extent={{90,-10},{110,10}})));
+  BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
+    annotation (Placement(
+    transformation(extent={{-117,18},{-83,50}}), iconTransformation(
+    extent={{-70,-12},{-50,8}})));
+equation
+  connect(ROM.TAir, TAir) annotation (Line(points={{87,62},{98,62},{98,56},{110,
+          56}}, color={0,0,127}));
+  connect(ROM.ports, ports) annotation (Line(points={{77,28.85},{77,-2},{48,-2},
+          {48,-44},{17,-44},{17,-72},{17,-94}}, color={0,127,255}));
+  connect(ROM.intGainsConv, intGainsConv) annotation (Line(points={{86,50},{92,
+          50},{92,-32},{100,-32},{100,-32}}, color={191,0,0}));
+  connect(ROM.TRad, TRad) annotation (Line(points={{87,58},{96,58},{96,40},{96,
+          40},{96,28},{110,28}}, color={0,0,127}));
+  connect(TRad, TRad)
+    annotation (Line(points={{110,28},{110,28}}, color={0,0,127}));
+  connect(ROM.intGainsRad, intGainsRad) annotation (Line(points={{86.2,54},{94,
+          54},{94,2},{100,2}}, color={191,0,0}));
   annotation(Icon(coordinateSystem(preserveAspectRatio=false,  extent={{-100,-100},
             {100,100}}),                                                                                                    graphics={                                Text(extent = {{-90, 134}, {98, 76}}, lineColor=
               {0,0,255},

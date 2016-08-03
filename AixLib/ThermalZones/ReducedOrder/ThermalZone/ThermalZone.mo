@@ -21,15 +21,14 @@ model ThermalZone
     T0=zoneParam.T0all) "Internal gains from light"
     annotation (Placement(transformation(extent={{40,-40},{60,-21}})));
 equation
-  connect(internalGains[1], human_SensibleHeat_VDI2078.Schedule) annotation (
-      Line(points={{80,-113.333},{80,-60},{32,-60},{32,8.9},{40.9,8.9}}, color={
-          0,0,127}));
-  connect(internalGains[2], machines_SensibleHeat_DIN18599.Schedule)
-    annotation (Line(points={{80,-100},{80,-100},{80,-60},{32,-60},{32,-10.5},{41,
-          -10.5}}, color={0,0,127}));
-  connect(internalGains[3], lights.Schedule) annotation (Line(points={{80,
-          -86.6667},{80,-60},{32,-60},{32,-30.5},{41,-30.5}},
-                                                    color={0,0,127}));
+  connect(intGains[1], human_SensibleHeat_VDI2078.Schedule) annotation (Line(
+        points={{80,-113.333},{80,-60},{32,-60},{32,8.9},{40.9,8.9}}, color={0,
+          0,127}));
+  connect(intGains[2], machines_SensibleHeat_DIN18599.Schedule) annotation (
+      Line(points={{80,-100},{80,-100},{80,-60},{32,-60},{32,-10.5},{41,-10.5}},
+        color={0,0,127}));
+  connect(intGains[3], lights.Schedule) annotation (Line(points={{80,-86.6667},
+          {80,-60},{32,-60},{32,-30.5},{41,-30.5}}, color={0,0,127}));
   connect(lights.ConvHeat, buildingPhysics.internalGainsConv) annotation (
       Line(points={{59,-24.8},{80,-24.8},{80,-52},{8,-52},{8,2}}, color={191,0,
           0}));
