@@ -2,58 +2,29 @@ within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZoneEquipped
   "Ready-to-use reduced order building model with ventilation, infiltration and internal gains"
   extends AixLib.ThermalZones.ReducedOrder.ThermalZone.PartialThermalZone(ROM(
-      redeclare package Medium = Modelica.Media.Air.SimpleAir,
-      VAir=100,
-      alphaRad=5,
-      nOrientations=2,
-      AWin={5,5},
-      ATransparent={5,5},
-      alphaWin=5,
-      RWin=0.1,
-      gWin=0.2,
-      ratioWinConRad=0.09,
-      AExt={100,100},
-      alphaExt=5,
-      nExt=1,
-      RExt={0.1},
-      RExtRem=0.1,
-      CExt={100},
-      AInt=100,
-      alphaInt=5,
-      nInt=1,
-      RInt={0.1},
-      CInt={100},
-      AFloor=100,
-      alphaFloor=5,
-      nFloor=1,
-      RFloor={0.1},
-      RFloorRem=0.1,
-      CFloor={100},
-      ARoof=100,
-      alphaRoof=5,
-      nRoof=1,
-      RRoof={0.1},
-      RRoofRem=0.1,
-      CRoof={100}));
+      redeclare package Medium = Modelica.Media.Air.SimpleAir));
   AixLib.Building.Components.Sources.InternalGains.Humans.HumanSensibleHeat_VDI2078
     human_SensibleHeat_VDI2078(
-    ActivityType=zoneParam.ActivityTypePeople,
-    NrPeople=zoneParam.NrPeople,
-    RatioConvectiveHeat=zoneParam.RatioConvectiveHeatPeople,
-    T0=zoneParam.T0all) "Internal gains from persons"
+    ActivityType=3,
+    T0=zoneParam.T_start,
+    NrPeople=zoneParam.nrPeople,
+    RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople)
+                        "Internal gains from persons"
     annotation (choicesAllMatching=true, Placement(
         transformation(extent={{64,-36},{84,-16}})));
   AixLib.Building.Components.Sources.InternalGains.Machines.Machines_DIN18599 machines_SensibleHeat_DIN18599(
-    ActivityType=zoneParam.ActivityTypeMachines,
-    NrPeople=zoneParam.NrPeopleMachines,
-    ratioConv=zoneParam.RatioConvectiveHeatMachines,
-    T0=zoneParam.T0all) "Internal gains from machines"
+    ratioConv=zoneParam.ratioConvectiveHeatMachines,
+    T0=zoneParam.T_start,
+    ActivityType=2,
+    NrPeople=zoneParam.nrPeopleMachines)
+                        "Internal gains from machines"
     annotation (Placement(transformation(extent={{64,-56},{84,-37}})));
   AixLib.Building.Components.Sources.InternalGains.Lights.Lights_relative lights(
-    RoomArea=zoneParam.RoomArea,
-    LightingPower=zoneParam.LightingPower,
-    ratioConv=zoneParam.RatioConvectiveHeatLighting,
-    T0=zoneParam.T0all) "Internal gains from light"
+    ratioConv=zoneParam.ratioConvectiveHeatLighting,
+    T0=zoneParam.T_start,
+    LightingPower=zoneParam.lightingPower,
+    RoomArea=zoneParam.zoneArea)
+                        "Internal gains from light"
     annotation (Placement(transformation(extent={{64,-76},{84,-57}})));
   Controls.VentilationController.VentilationController ventilationController(
     useConstantOutput=zoneParam.useConstantACHrate,
@@ -62,7 +33,7 @@ model ThermalZoneEquipped
     maxOverheatingACH=zoneParam.maxOverheatingACH,
     maxSummerACH=zoneParam.maxSummerACH,
     winterReduction=zoneParam.winterReduction,
-    Tmean_start=zoneParam.T0all)
+    Tmean_start=zoneParam.T_start)
     "Calculates natural venitlation and infiltration"
     annotation (Placement(transformation(extent={{-70,-72},{-50,-52}})));
   Modelica.Blocks.Math.Add addInfiltrationVentilation
@@ -121,20 +92,22 @@ model ThermalZoneEquipped
     annotation (Placement(transformation(extent={{26,23},{16,33}})));
   Modelica.Thermal.HeatTransfer.Components.Convection theConWall
     "Outdoor convective heat transfer of walls"
-    annotation (Placement(transformation(extent={{24,13},{14,3}})));
+    annotation (Placement(transformation(extent={{26,13},{16,3}})));
   Modelica.Blocks.Sources.Constant const[2](each k=0)
     "Sets sunblind signal to zero (open)"
     annotation (Placement(transformation(extent={{3,-3},{-3,3}},
         rotation=90,
         origin={-26,31})));
-  Modelica.Blocks.Sources.Constant alphaWall(k=25*11.5)
+  Modelica.Blocks.Sources.Constant alphaWall(k=(zoneParam.alphaWallOut +
+        zoneParam.alphaRadWall)*sum(zoneParam.AExt))
     "Outdoor coefficient of heat transfer for walls"
     annotation (Placement(
     transformation(
     extent={{-4,-4},{4,4}},
     rotation=90,
-    origin={19,-5})));
-  Modelica.Blocks.Sources.Constant alphaWin(k=20*14)
+    origin={21,-5})));
+  Modelica.Blocks.Sources.Constant alphaWin(k=(zoneParam.alphaWinOut +
+        zoneParam.alphaRadWin)*sum(zoneParam.AWin))
     "Outdoor coefficient of heat transfer for windows"
     annotation (Placement(
     transformation(
@@ -155,7 +128,7 @@ model ThermalZoneEquipped
     "Prescribed temperature for floor plate outdoor surface temperature"
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
     rotation=90,origin={62,18})));
-  Modelica.Blocks.Sources.Constant TSoil(k=283.15)
+  Modelica.Blocks.Sources.Constant TSoil(k=zoneParam.Tsoil)
     "Outdoor surface temperature for floor plate"
     annotation (Placement(transformation(extent={{4,-4},{-4,4}},
     rotation=180,origin={47,8})));
@@ -192,7 +165,8 @@ model ThermalZoneEquipped
     "Outdoor convective heat transfer of roof"
     annotation (Placement(transformation(extent={{5,-5},{-5,5}},rotation=-90,
     origin={61,73})));
-  Modelica.Blocks.Sources.Constant alphaRoof(k=25*11.5)
+  Modelica.Blocks.Sources.Constant alphaRoof(k=(zoneParam.alphaRoofOut +
+        zoneParam.alphaRadRoof)*zoneParam.ARoof)
     "Outdoor coefficient of heat transfer for roof"
     annotation (Placement(transformation(extent={{4,-4},{-4,4}},origin={74,73})));
   Modelica.Blocks.Sources.Constant const1[2](each k=0)
@@ -224,8 +198,7 @@ equation
   connect(ventRate, addInfiltrationVentilation.u2) annotation (Line(points={{-40,
           -100},{-40,-76},{-30.4,-76},{-30.4,-45.2}}, color={0,0,127}));
   connect(ventilationController.y, mixedTemperature.flowRate_flow2) annotation (
-     Line(points={{-51,-62},{-49,-62},{-49,-30},{-70,-30},{-70,-30},{-70,-25},{-65.6,
-          -25}},
+     Line(points={{-51,-62},{-49,-62},{-49,-30},{-70,-30},{-70,-25},{-65.6,-25}},
         color={0,0,127}));
   connect(ventRate, mixedTemperature.flowRate_flow1) annotation (Line(points={{-40,
           -100},{-74,-100},{-74,-15},{-65.6,-15}}, color={0,0,127}));
@@ -260,9 +233,9 @@ equation
   connect(preTem1.port,theConWin. fluid)
     annotation (Line(points={{8,28},{16,28}},          color={191,0,0}));
   connect(theConWall.fluid,preTem. port)
-    annotation (Line(points={{14,8},{12,8},{8,8}},         color={191,0,0}));
+    annotation (Line(points={{16,8},{16,8},{8,8}},         color={191,0,0}));
   connect(alphaWall.y,theConWall. Gc)
-    annotation (Line(points={{19,-0.6},{19,3}},           color={0,0,127}));
+    annotation (Line(points={{21,-0.6},{21,3}},           color={0,0,127}));
   connect(alphaWin.y,theConWin. Gc)
     annotation (Line(points={{21,36.6},{21,33}},         color={0,0,127}));
   connect(lights.ConvHeat, ROM.intGainsConv) annotation (Line(points={{83,-60.8},
@@ -359,7 +332,7 @@ equation
           22.8},{-64,22.8},{-64,52.4},{-7.4,52.4}}, color={0,0,127}));
   connect(theConWin.solid, ROM.window) annotation (Line(points={{26,28},{30,28},
           {30,50},{37.8,50}}, color={191,0,0}));
-  connect(theConWall.solid, ROM.extWall) annotation (Line(points={{24,8},{34,8},
+  connect(theConWall.solid, ROM.extWall) annotation (Line(points={{26,8},{34,8},
           {34,42},{37.8,42}}, color={191,0,0}));
   connect(const.y, eqAirTemp.sunblind) annotation (Line(points={{-26,27.7},{-26,
           24.85},{-26,20}}, color={0,0,127}));
