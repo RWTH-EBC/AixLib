@@ -7,6 +7,9 @@ partial model PartialThermalZone
   parameter Integer nPorts=0 "Number of fluid ports"
     annotation(Evaluate=true,
     Dialog(connectorSizing=true, tab="General",group="Ports"));
+protected
+  parameter Real ATot = sum(zoneParam.AExt)+sum(zoneParam.AWin)+zoneParam.AInt+zoneParam.ARoof+zoneParam.AFloor;
+public
   Modelica.Blocks.Interfaces.RealInput ventRate(final quantity="VolumeFlowRate",
       final unit="1/h") "Ventilation and infiltration rate" annotation (
       Placement(transformation(
@@ -32,7 +35,7 @@ partial model PartialThermalZone
     min=0) "Ventilation and infiltration temperature" annotation (Placement(
         transformation(extent={{-120,-60},{-80,-20}}), iconTransformation(
           extent={{-88,-52},{-62,-26}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv if ATot > 0 or zoneParam.VAir > 0
     "Convective internal gains" annotation (Placement(transformation(extent={{90,
             -42},{110,-22}}), iconTransformation(extent={{90,-42},{110,-22}})));
   RC.FourElements ROM(nPorts=nPorts, redeclare package Medium =
@@ -80,14 +83,14 @@ partial model PartialThermalZone
     origin={17,-94}), iconTransformation(
     extent={{-30.5,-8},{30.5,8}},
     origin={150,-171.5})));
-  Modelica.Blocks.Interfaces.RealOutput TAir "Indoor air temperature"
+  Modelica.Blocks.Interfaces.RealOutput TAir if ATot > 0 or zoneParam.VAir > 0 "Indoor air temperature"
     annotation (Placement(transformation(extent={{100,46},{120,66}}),
         iconTransformation(extent={{100,46},{120,66}})));
-  Modelica.Blocks.Interfaces.RealOutput TRad
+  Modelica.Blocks.Interfaces.RealOutput TRad if ATot > 0
     "Mean indoor radiation temperature" annotation (Placement(transformation(
           extent={{100,18},{120,38}}), iconTransformation(extent={{100,18},{120,
             38}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad if ATot > 0
     "Convective internal gains" annotation (Placement(transformation(extent={{90,
             -8},{110,12}}), iconTransformation(extent={{90,-10},{110,10}})));
   BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
