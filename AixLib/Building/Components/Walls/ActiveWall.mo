@@ -1,6 +1,6 @@
 within AixLib.Building.Components.Walls;
-model Wall
-  "Simple wall model for outside and inside walls with windows and doors"
+model ActiveWall
+  "From Wall model, with the possibility of intoducing an active layer"
   import BaseLib = AixLib.Utilities;
   //Type parameter
   parameter Boolean outside = true
@@ -171,4 +171,4 @@ equation
  <li><i>April, 2012&nbsp;</i> by Mark Wesseling:<br/>Implemented.</li>
  </ul>
  </html>"));
-end Wall;
+end ActiveWall;
