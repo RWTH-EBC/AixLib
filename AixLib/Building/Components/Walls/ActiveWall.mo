@@ -8,7 +8,7 @@ model ActiveWall
         "Outside Wall",                                                                                                    choice = false
         "Inside Wall",                                                                                                    radioButtons = true));
   // general wall parameters
-  parameter DataBase.Walls.WallBaseDataDefinition WallType = DataBase.Walls.EnEV2009.OW.OW_EnEV2009_S()
+  parameter DataBase.Walls.WallBaseDataDefinition WallType = AixLib.DataBase.Walls.EnEV2009.OW.OW_EnEV2009_S()
     "Choose an outside wall type from the database"                                                                                                     annotation(Dialog(group = "Room Geometry"), choicesAllMatching = true);
   parameter Modelica.SIunits.Length wall_length = 2 "Length of wall" annotation(Dialog(group = "Room Geometry"));
   parameter Modelica.SIunits.Height wall_height = 2 "Height of wall" annotation(Dialog(group = "Room Geometry"));
@@ -54,11 +54,20 @@ model ActiveWall
   // Calculation of clearance
   final parameter Modelica.SIunits.Area clearance = if not outside and withDoor then door_height * door_width else if outside and withDoor and withWindow then windowarea + door_height * door_width else if outside and withWindow then windowarea else if outside and withDoor then door_height * door_width else 0
     "Wall clearance";
+  // active wall
+  parameter Boolean withActiveLayer = true "With an active layer" annotation (Dialog(tab = "Active layer",descriptionLabel = true), choices(__Dymola_checkBox=true));
+  parameter Integer[2] connActiveLayer = {2,3} "Active layer to come between layers" annotation (Dialog(tab = "Active layer",descriptionLabel = true, enable = withActiveLayer), choices(__Dymola_checkBox=true));
+  parameter Modelica.SIunits.ThermalConductivity lambda_al = 1.04 "Thermal conductivity active layer material" annotation (Dialog(tab = "Active layer",descriptionLabel = true, enable = withActiveLayer));
+  parameter Modelica.SIunits.SpecificHeatCapacity cp_al = 1000 "Specific heat capacity active layer material" annotation (Dialog(tab = "Active layer",descriptionLabel = true, enable = withActiveLayer));
+  parameter Modelica.SIunits.Length d_al = 0.001 "Thickness of active layer" annotation (Dialog(tab = "Active layer",descriptionLabel = true, enable = withActiveLayer));
+  parameter Modelica.SIunits.Density rho_al = 197.3 "Density of active layer material" annotation (Dialog(tab = "Active layer",descriptionLabel = true, enable = withActiveLayer));
   // Initial temperature
   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(20)
     "Initial temperature"                                                                                      annotation(Dialog(tab = "Advanced Parameters"));
   // COMPONENT PART
-  BaseClasses.ConvNLayerClearanceStar Wall(h = wall_height, l = wall_length, T0 = T0, clearance = clearance, selectable = true, eps = WallType.eps, wallType = WallType, surfaceOrientation = ISOrientation) "Wall" annotation(Placement(transformation(extent = {{-20, 14}, {2, 34}})));
+  BaseClasses.HTWallSel_activeLayer   Wall(h = wall_height, l = wall_length, T0 = T0, clearance = clearance,                                        wallType = WallType,
+    surfaceOrientation=1,
+    withActiveLayer=withActiveLayer)                                                                                                                                                                         "Wall" annotation(Placement(transformation(extent = {{-20, 14}, {2, 34}})));
   Utilities.HeatTransfer.SolarRadToHeat SolarAbsorption(coeff = solar_absorptance, A = wall_height * wall_length - clearance) if outside annotation(Placement(transformation(origin = {-39, 89}, extent = {{-10, -10}, {10, 10}})));
   BaseLib.Interfaces.SolarRad_in   SolarRadiationPort if outside annotation(Placement(transformation(extent = {{-116, 79}, {-96, 99}}), iconTransformation(extent = {{-36, 100}, {-16, 120}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_outside annotation(Placement(transformation(extent = {{-108, -6}, {-88, 14}}), iconTransformation(extent = {{-31, -10}, {-11, 10}})));
@@ -73,6 +82,21 @@ model ActiveWall
   Utilities.HeatTransfer.HeatConv_outside heatTransfer_Outside(A = wall_length * wall_height - clearance, Model = Model, surfaceType = surfaceType, alpha_custom = alpha_custom) if outside annotation(Placement(transformation(extent = {{-47, 48}, {-27, 68}})));
   Utilities.Interfaces.Adaptors.HeatStarToComb heatStarToComb annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 180, origin = {69, -1})));
   Utilities.Interfaces.HeatStarComb thermStarComb_inside annotation(Placement(transformation(extent = {{92, -10}, {112, 10}}), iconTransformation(extent = {{10, -10}, {30, 10}})));
+  BaseClasses.ActiveLayer activeLayer(A=wall_length*wall_height,
+    T0=T0,
+    lambda=lambda_al,
+    c_p=cp_al,
+    d=d_al,
+    rho=rho_al,
+    surfaceOrientation=ISOrientation)
+    annotation (Placement(transformation(extent={{8,52},{28,72}})));
+  Modelica.Blocks.Interfaces.RealInput PowerActiveLayer
+    "power per square meter" annotation (Placement(transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=180,
+        origin={101,63}), iconTransformation(extent={{-10,-10},{10,10}},
+        rotation=180,
+        origin={28,41})));
 equation
   //   if outside and cardinality(WindSpeedPort) < 2 then
   //     WindSpeedPort = 3;
@@ -133,6 +157,12 @@ equation
   end if;
   connect(heatStarToComb.thermStarComb, thermStarComb_inside) annotation(Line(points = {{78.4, -1.1}, {78.4, -1.05}, {102, -1.05}, {102, 0}}, color = {191, 0, 0}));
   connect(port_outside, port_outside) annotation(Line(points = {{-98, 4}, {-98, 4}}, color = {191, 0, 0}, pattern = LinePattern.Solid));
+  connect(activeLayer.portActiveLayer_b, Wall.portActiveLayer_b) annotation (
+      Line(points={{16.6,52.6},{16.6,42},{-5.26,42},{-5.26,33}}, color={191,0,0}));
+  connect(activeLayer.portActiveLayer_a, Wall.portActiveLayer_a) annotation (
+      Line(points={{16.6,72.2},{-12.74,72.2},{-12.74,33}}, color={191,0,0}));
+  connect(activeLayer.PowerPerSqm, PowerActiveLayer) annotation (Line(points={{30,63},
+          {61,63},{101,63}},                color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-20, -120}, {20, 120}}, grid = {1, 1}), graphics={  Rectangle(extent = {{-16, 120}, {15, -60}}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Backward,  pattern=LinePattern.None, lineColor = {0, 0, 0}), Rectangle(extent = {{-16, -90}, {15, -120}},  pattern=LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Backward), Rectangle(extent = {{-16, -51}, {15, -92}}, lineColor = {0, 0, 0},  pattern=LinePattern.None, fillColor = {215, 215, 215},
