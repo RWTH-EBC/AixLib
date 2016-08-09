@@ -72,7 +72,7 @@ public
     RRoof=zoneParam.RRoof,
     RRoofRem=zoneParam.RRoofRem,
     CRoof=zoneParam.CRoof,
-    T_start=zoneParam.T_start)
+    T_start=zoneParam.T_start) "RC calculation core"
     annotation (Placement(transformation(extent={{38,28},{86,64}})));
   Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts](
     redeclare package Medium = Medium)
@@ -100,7 +100,7 @@ public
 equation
   connect(ROM.TAir, TAir) annotation (Line(points={{87,62},{98,62},{98,56},{110,
           56}}, color={0,0,127}));
-  connect(ROM.ports, ports) annotation (Line(points={{77,28.85},{77,-2},{48,-2},
+  connect(ROM.ports, ports) annotation (Line(points={{77,28.85},{77,-4},{48,-4},
           {48,-44},{17,-44},{17,-72},{17,-94}}, color={0,127,255}));
   connect(ROM.intGainsConv, intGainsConv) annotation (Line(points={{86,50},{92,50},
           {92,-32},{100,-32}}, color={191,0,0}));
@@ -150,5 +150,10 @@ equation
  </ul>
  </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}})));
+            100}}), graphics={
+  Rectangle(
+    extent={{36,68},{88,28}},
+    lineColor={0,0,255},
+    fillColor={215,215,215},
+    fillPattern=FillPattern.Solid)}));
 end PartialThermalZone;
