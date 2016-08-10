@@ -87,12 +87,8 @@ partial model PartialThermalZone
   Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts](
     redeclare package Medium = Medium)
     "Auxilliary fluid inlets and outlets to indoor air volume"
-    annotation (
-    Placement(transformation(
-    extent={{-45,-12},{45,12}},
-    origin={17,-94}), iconTransformation(
-    extent={{-30.5,-8},{30.5,8}},
-    origin={150,-171.5})));
+    annotation (Placement(transformation(extent={{-26,-72},{64,-48}}),
+        iconTransformation(extent={{-26,-72},{64,-48}})));
   Modelica.Blocks.Interfaces.RealOutput TAir if ATot > 0 or zoneParam.VAir > 0
     "Indoor air temperature"
     annotation (Placement(transformation(extent={{100,46},{120,66}}),
@@ -120,7 +116,7 @@ equation
   connect(ROM.TAir, TAir) annotation (Line(points={{87,62},{98,62},{98,56},{110,
           56}}, color={0,0,127}));
   connect(ROM.ports, ports) annotation (Line(points={{77,28.85},{77,-4},{48,-4},
-          {48,-44},{17,-44},{17,-72},{17,-94}}, color={0,127,255}));
+          {48,-44},{17,-44},{17,-60},{19,-60}}, color={0,127,255}));
   connect(ROM.intGainsConv, intGainsConv) annotation (Line(points={{86,50},{92,50},
           {92,-32},{100,-32}}, color={191,0,0}));
   connect(ROM.TRad, TRad) annotation (Line(points={{87,58},{96,58},{96,40},{96,28},
