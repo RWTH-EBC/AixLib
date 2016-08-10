@@ -2,16 +2,19 @@ within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 partial model PartialThermalZone
   "Partial for ready-to-use reduced order building model"
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
+
   parameter DataBase.Buildings.ZoneBaseRecordNew zoneParam
-    "choose setup for this zone" annotation(choicesAllMatching = true);
-  parameter Integer nPorts=0 "Number of fluid ports"
+    "Choose setup for this zone"
+    annotation(choicesAllMatching = true);
+  parameter Integer nPorts=0
+    "Number of fluid ports"
     annotation(Evaluate=true,
     Dialog(connectorSizing=true, tab="General",group="Ports"));
-protected
-  parameter Real ATot = sum(zoneParam.AExt)+sum(zoneParam.AWin)+zoneParam.AInt+zoneParam.ARoof+zoneParam.AFloor;
-public
-  Modelica.Blocks.Interfaces.RealInput ventRate(final quantity="VolumeFlowRate",
-      final unit="1/h") "Ventilation and infiltration rate" annotation (
+  Modelica.Blocks.Interfaces.RealInput ventRate(
+    final quantity="VolumeFlowRate",
+    final unit="1/h")
+    "Ventilation and infiltration rate"
+    annotation (
       Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
@@ -20,7 +23,8 @@ public
         rotation=90,
         origin={-40,-60})));
   Modelica.Blocks.Interfaces.RealInput intGains[3]
-    "Input profiles for internal gains persons, machines, light" annotation (
+    "Input profiles for internal gains persons, machines, light"
+    annotation (
       Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
@@ -32,47 +36,53 @@ public
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC",
-    min=0) "Ventilation and infiltration temperature" annotation (Placement(
+    min=0)
+    "Ventilation and infiltration temperature"
+    annotation (Placement(
         transformation(extent={{-120,-60},{-80,-20}}), iconTransformation(
           extent={{-88,-52},{-62,-26}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv if ATot > 0 or zoneParam.VAir > 0
-    "Convective internal gains" annotation (Placement(transformation(extent={{90,
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv if
+    ATot > 0 or zoneParam.VAir > 0
+    "Convective internal gains"
+    annotation (Placement(transformation(extent={{90,
             -42},{110,-22}}), iconTransformation(extent={{90,-42},{110,-22}})));
-  RC.FourElements ROM(nPorts=nPorts, redeclare package Medium =
-        Modelica.Media.Air.SimpleAir,
-    VAir=zoneParam.VAir,
-    alphaRad=zoneParam.alphaRad,
-    nOrientations=zoneParam.nOrientations,
-    AWin=zoneParam.AWin,
-    ATransparent=zoneParam.ATransparent,
-    alphaWin=zoneParam.alphaWin,
-    RWin=zoneParam.RWin,
-    gWin=zoneParam.gWin,
-    ratioWinConRad=zoneParam.ratioWinConRad,
-    AExt=zoneParam.AExt,
-    alphaExt=zoneParam.alphaExt,
-    nExt=zoneParam.nExt,
-    RExt=zoneParam.RExt,
-    RExtRem=zoneParam.RExtRem,
-    CExt=zoneParam.CExt,
-    AInt=zoneParam.AInt,
-    alphaInt=zoneParam.alphaInt,
-    nInt=zoneParam.nInt,
-    RInt=zoneParam.RInt,
-    CInt=zoneParam.CInt,
-    AFloor=zoneParam.AFloor,
-    alphaFloor=zoneParam.alphaFloor,
-    nFloor=zoneParam.nFloor,
-    RFloor=zoneParam.RFloor,
-    RFloorRem=zoneParam.RFloorRem,
-    CFloor=zoneParam.CFloor,
-    ARoof=zoneParam.ARoof,
-    alphaRoof=zoneParam.alphaRoof,
-    nRoof=zoneParam.nRoof,
-    RRoof=zoneParam.RRoof,
-    RRoofRem=zoneParam.RRoofRem,
-    CRoof=zoneParam.CRoof,
-    T_start=zoneParam.T_start) "RC calculation core"
+  RC.FourElements ROM(
+    final nPorts=nPorts,
+    redeclare final package Medium = Medium,
+    final VAir=zoneParam.VAir,
+    final alphaRad=zoneParam.alphaRad,
+    final nOrientations=zoneParam.nOrientations,
+    final AWin=zoneParam.AWin,
+    final ATransparent=zoneParam.ATransparent,
+    final alphaWin=zoneParam.alphaWin,
+    final RWin=zoneParam.RWin,
+    final gWin=zoneParam.gWin,
+    final ratioWinConRad=zoneParam.ratioWinConRad,
+    final AExt=zoneParam.AExt,
+    final alphaExt=zoneParam.alphaExt,
+    final nExt=zoneParam.nExt,
+    final RExt=zoneParam.RExt,
+    final RExtRem=zoneParam.RExtRem,
+    final CExt=zoneParam.CExt,
+    final AInt=zoneParam.AInt,
+    final alphaInt=zoneParam.alphaInt,
+    final nInt=zoneParam.nInt,
+    final RInt=zoneParam.RInt,
+    final CInt=zoneParam.CInt,
+    final AFloor=zoneParam.AFloor,
+    final alphaFloor=zoneParam.alphaFloor,
+    final nFloor=zoneParam.nFloor,
+    final RFloor=zoneParam.RFloor,
+    final RFloorRem=zoneParam.RFloorRem,
+    final CFloor=zoneParam.CFloor,
+    final ARoof=zoneParam.ARoof,
+    final alphaRoof=zoneParam.alphaRoof,
+    final nRoof=zoneParam.nRoof,
+    final RRoof=zoneParam.RRoof,
+    final RRoofRem=zoneParam.RRoofRem,
+    final CRoof=zoneParam.CRoof,
+    final T_start=zoneParam.T_start)
+    "RC calculation core"
     annotation (Placement(transformation(extent={{38,28},{86,64}})));
   Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts](
     redeclare package Medium = Medium)
@@ -83,20 +93,29 @@ public
     origin={17,-94}), iconTransformation(
     extent={{-30.5,-8},{30.5,8}},
     origin={150,-171.5})));
-  Modelica.Blocks.Interfaces.RealOutput TAir if ATot > 0 or zoneParam.VAir > 0 "Indoor air temperature"
+  Modelica.Blocks.Interfaces.RealOutput TAir if ATot > 0 or zoneParam.VAir > 0
+    "Indoor air temperature"
     annotation (Placement(transformation(extent={{100,46},{120,66}}),
         iconTransformation(extent={{100,46},{120,66}})));
   Modelica.Blocks.Interfaces.RealOutput TRad if ATot > 0
-    "Mean indoor radiation temperature" annotation (Placement(transformation(
+    "Mean indoor radiation temperature"
+    annotation (Placement(transformation(
           extent={{100,18},{120,38}}), iconTransformation(extent={{100,18},{120,
             38}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad if ATot > 0
-    "Convective internal gains" annotation (Placement(transformation(extent={{90,
+    "Convective internal gains"
+    annotation (Placement(transformation(extent={{90,
             -8},{110,12}}), iconTransformation(extent={{90,-10},{110,10}})));
-  BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
+  BoundaryConditions.WeatherData.Bus weaBus
+    "Weather data bus"
     annotation (Placement(
     transformation(extent={{-117,18},{-83,50}}), iconTransformation(
     extent={{-70,-12},{-50,8}})));
+
+protected
+  parameter Real ATot = (sum(zoneParam.AExt) + sum(zoneParam.AWin) +
+  zoneParam.AInt + zoneParam.ARoof+zoneParam.AFloor);
+
 equation
   connect(ROM.TAir, TAir) annotation (Line(points={{87,62},{98,62},{98,56},{110,
           56}}, color={0,0,127}));

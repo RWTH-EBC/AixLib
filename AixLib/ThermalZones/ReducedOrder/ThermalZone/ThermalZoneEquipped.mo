@@ -1,65 +1,71 @@
 within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZoneEquipped
-  "Ready-to-use reduced order building model with ventilation, infiltration and internal gains"
-  extends AixLib.ThermalZones.ReducedOrder.ThermalZone.PartialThermalZone(ROM(
-      redeclare package Medium = Modelica.Media.Air.SimpleAir));
+  "Ready-to-use reduced order building model with ventilation,
+  infiltration and internal gains"
+  extends AixLib.ThermalZones.ReducedOrder.ThermalZone.PartialThermalZone;
+
   AixLib.Building.Components.Sources.InternalGains.Humans.HumanSensibleHeat_VDI2078
     humanSenHea(
-    ActivityType=3,
-    T0=zoneParam.T_start,
-    NrPeople=zoneParam.nrPeople,
-    RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople) if ATot > 0
-    "Internal gains from persons" annotation (choicesAllMatching=true,
+    final ActivityType=3,
+    final T0=zoneParam.T_start,
+    final NrPeople=zoneParam.nrPeople,
+    final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople) if ATot > 0
+    "Internal gains from persons"
+    annotation (choicesAllMatching=true,
       Placement(transformation(extent={{64,-36},{84,-16}})));
-  AixLib.Building.Components.Sources.InternalGains.Machines.Machines_DIN18599 machinesSenHea(
-    ratioConv=zoneParam.ratioConvectiveHeatMachines,
-    T0=zoneParam.T_start,
-    ActivityType=2,
-    NrPeople=zoneParam.nrPeopleMachines) if ATot > 0
+  AixLib.Building.Components.Sources.InternalGains.Machines.Machines_DIN18599
+    machinesSenHea(
+    final ratioConv=zoneParam.ratioConvectiveHeatMachines,
+    final T0=zoneParam.T_start,
+    final ActivityType=2,
+    final NrPeople=zoneParam.nrPeopleMachines) if ATot > 0
     "Internal gains from machines"
     annotation (Placement(transformation(extent={{64,-56},{84,-37}})));
   AixLib.Building.Components.Sources.InternalGains.Lights.Lights_relative lights(
-    ratioConv=zoneParam.ratioConvectiveHeatLighting,
-    T0=zoneParam.T_start,
-    LightingPower=zoneParam.lightingPower,
-    RoomArea=zoneParam.AZone) if    ATot > 0
-                        "Internal gains from light"
+    final ratioConv=zoneParam.ratioConvectiveHeatLighting,
+    final T0=zoneParam.T_start,
+    final LightingPower=zoneParam.lightingPower,
+    final RoomArea=zoneParam.AZone) if ATot > 0
+    "Internal gains from light"
     annotation (Placement(transformation(extent={{64,-76},{84,-57}})));
   Controls.VentilationController.VentilationController ventCont(
-    useConstantOutput=zoneParam.useConstantACHrate,
-    baseACH=zoneParam.baseACH,
-    maxUserACH=zoneParam.maxUserACH,
-    maxOverheatingACH=zoneParam.maxOverheatingACH,
-    maxSummerACH=zoneParam.maxSummerACH,
-    winterReduction=zoneParam.winterReduction,
-    Tmean_start=zoneParam.T_start) if ATot > 0 or zoneParam.VAir > 0
+    final useConstantOutput=zoneParam.useConstantACHrate,
+    final baseACH=zoneParam.baseACH,
+    final maxUserACH=zoneParam.maxUserACH,
+    final maxOverheatingACH=zoneParam.maxOverheatingACH,
+    final maxSummerACH=zoneParam.maxSummerACH,
+    final winterReduction=zoneParam.winterReduction,
+    final Tmean_start=zoneParam.T_start) if ATot > 0 or zoneParam.VAir > 0
     "Calculates natural venitlation and infiltration"
     annotation (Placement(transformation(extent={{-70,-72},{-50,-52}})));
-  Modelica.Blocks.Math.Add addInfVen if                  ATot > 0 or zoneParam.VAir > 0
-    "Combines infiltration and ventilation" annotation (Placement(
+  Modelica.Blocks.Math.Add addInfVen if ATot > 0 or zoneParam.VAir > 0
+    "Combines infiltration and ventilation"
+    annotation (Placement(
         transformation(
         extent={{-6,-6},{6,6}},
         rotation=90,
         origin={-34,-38})));
-  Utilities.Psychrometrics.MixedTemperature mixedTemp if        ATot > 0 or zoneParam.VAir > 0
+  Utilities.Psychrometrics.MixedTemperature mixedTemp if
+    ATot > 0 or zoneParam.VAir > 0
     "Mixes temperature of infiltration flow and mechanical ventilation flow"
     annotation (Placement(transformation(extent={{-66,-28},{-46,-8}})));
   BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[zoneParam.nOrientations](
-    each outSkyCon=true,
-    each outGroCon=true,
-    each lat=zoneParam.lat,
-    azi=zoneParam.aziExtWalls,
-    til=zoneParam.aziExtWalls)
+    each final outSkyCon=true,
+    each final outGroCon=true,
+    each final lat=zoneParam.lat,
+    final azi=zoneParam.aziExtWalls,
+    final til=zoneParam.aziExtWalls)
     "Calculates diffuse solar radiation on titled surface for both directions"
     annotation (Placement(transformation(extent={{-84,10},{-68,26}})));
   BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[zoneParam.nOrientations](
-    each lat=zoneParam.lat,
-    azi=zoneParam.aziExtWalls,
-    til=zoneParam.tiltExtWalls)
+    each final lat=zoneParam.lat,
+    final azi=zoneParam.aziExtWalls,
+    final til=zoneParam.tiltExtWalls)
     "Calculates direct solar radiation on titled surface for both directions"
     annotation (Placement(transformation(extent={{-84,31},{-68,48}})));
-  SolarGain.CorrectionGDoublePane corGDouPan(n=zoneParam.nOrientations, UWin=
-        zoneParam.UWin)
+  SolarGain.CorrectionGDoublePane corGDouPan(
+    final n=zoneParam.nOrientations,
+    final UWin=zoneParam.UWin)
     "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{-50,34},{-36,48}})));
   EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
@@ -67,50 +73,57 @@ model ThermalZoneEquipped
     aWin=0.03,
     eExt=0.9,
     eWin=0.9,
-    n=zoneParam.nOrientations,
-    wfWall=zoneParam.wfWall,
-    wfWin=zoneParam.wfWin,
-    wfGro=zoneParam.wfGro,
-    TGro=zoneParam.Tsoil,
-    alphaWallOut=zoneParam.alphaWallOut,
-    alphaRadWall=zoneParam.alphaRadWall,
-    alphaWinOut=zoneParam.alphaWinOut,
-    alphaRadWin=zoneParam.alphaRadWin,
-    aExt=zoneParam.aExt)
-              "Computes equivalent air temperature"
+    final n=zoneParam.nOrientations,
+    final wfWall=zoneParam.wfWall,
+    final wfWin=zoneParam.wfWin,
+    final wfGro=zoneParam.wfGro,
+    final TGro=zoneParam.Tsoil,
+    final alphaWallOut=zoneParam.alphaWallOut,
+    final alphaRadWall=zoneParam.alphaRadWall,
+    final alphaWinOut=zoneParam.alphaWinOut,
+    final alphaRadWin=zoneParam.alphaRadWin,
+    final aExt=zoneParam.aExt)
+    "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-36,-2},{-16,18}})));
   Modelica.Blocks.Math.Add solRad[zoneParam.nOrientations]
     "Sums up solar radiation of both directions"
     annotation (Placement(transformation(extent={{-54,14},{-44,24}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTem if sum(zoneParam.AExt) > 0
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTem if
+    sum(zoneParam.AExt) > 0
     "Prescribed temperature for exterior walls outdoor surface temperature"
     annotation (Placement(transformation(extent={{-4,8},{8,20}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemWin if
-                                                                         sum(zoneParam.AWin) > 0
+    sum(zoneParam.AWin) > 0
     "Prescribed temperature for windows outdoor surface temperature"
     annotation (Placement(transformation(extent={{-4,24},{8,36}})));
-  Modelica.Thermal.HeatTransfer.Components.Convection theConWin if sum(zoneParam.AWin) > 0
+  Modelica.Thermal.HeatTransfer.Components.Convection theConWin if
+    sum(zoneParam.AWin) > 0
     "Outdoor convective heat transfer of windows"
     annotation (Placement(transformation(extent={{26,25},{16,35}})));
-  Modelica.Thermal.HeatTransfer.Components.Convection theConWall if sum(zoneParam.AExt) > 0
+  Modelica.Thermal.HeatTransfer.Components.Convection theConWall if
+    sum(zoneParam.AExt) > 0
     "Outdoor convective heat transfer of walls"
     annotation (Placement(transformation(extent={{26,19},{16,9}})));
-  Modelica.Blocks.Sources.Constant constSunblind[zoneParam.nOrientations](each
-      k=0) "Sets sunblind signal to zero (open)" annotation (Placement(
+  Modelica.Blocks.Sources.Constant constSunblind[zoneParam.nOrientations](
+    each k=0)
+    "Sets sunblind signal to zero (open)"
+    annotation (Placement(
         transformation(
         extent={{3,-3},{-3,3}},
         rotation=90,
         origin={-26,31})));
-  Modelica.Blocks.Sources.Constant alphaWall(k=(zoneParam.alphaWallOut +
-        zoneParam.alphaRadWall)*sum(zoneParam.AExt))
+  Modelica.Blocks.Sources.Constant alphaWall(
+    final k=(zoneParam.alphaWallOut +
+    zoneParam.alphaRadWall) * sum(zoneParam.AExt))
     "Outdoor coefficient of heat transfer for walls"
     annotation (Placement(
     transformation(
     extent={{-4,-4},{4,4}},
     rotation=90,
     origin={21,1})));
-  Modelica.Blocks.Sources.Constant alphaWin(k=(zoneParam.alphaWinOut +
-        zoneParam.alphaRadWin)*sum(zoneParam.AWin))
+  Modelica.Blocks.Sources.Constant alphaWin(
+    final k=(zoneParam.alphaWinOut +
+    zoneParam.alphaRadWin) * sum(zoneParam.AWin))
     "Outdoor coefficient of heat transfer for windows"
     annotation (Placement(
     transformation(
@@ -118,63 +131,73 @@ model ThermalZoneEquipped
     rotation=90,
     origin={21,43})));
   Building.Components.DryAir.VarAirExchange airExc(
-    V=100,
-    c=1,
-    rho=1) if ATot > 0 or zoneParam.VAir > 0 "Heat flow due to ventilation"
-                                             annotation (Placement(transformation(extent={{-22,-26},{-6,-10}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature ventTempPre if ATot > 0 or zoneParam.VAir > 0
-    "Prescribed temperature for ventilation"  annotation (Placement(
+    final V=zoneParam.VAir) if
+    ATot > 0 or zoneParam.VAir > 0
+    "Heat flow due to ventilation"
+    annotation (Placement(transformation(extent={{-22,-26},{-6,-10}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature ventTempPre if
+    ATot > 0 or zoneParam.VAir > 0
+    "Prescribed temperature for ventilation"
+    annotation (Placement(
         transformation(
         extent={{-6,-6},{6,6}},
         rotation=0,
         origin={-32,-18})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemFloor if zoneParam.AFloor > 0
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemFloor if
+    zoneParam.AFloor > 0
     "Prescribed temperature for floor plate outdoor surface temperature"
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
     rotation=90,origin={62,18})));
-  Modelica.Blocks.Sources.Constant TSoil(k=zoneParam.Tsoil) if zoneParam.AFloor > 0
+  Modelica.Blocks.Sources.Constant TSoil(
+    final k=zoneParam.Tsoil) if zoneParam.AFloor > 0
     "Outdoor surface temperature for floor plate"
     annotation (Placement(transformation(extent={{4,-4},{-4,4}},
     rotation=180,origin={43,8})));
   BoundaryConditions.SolarIrradiation.DiffusePerez HDifTilRoof[zoneParam.nOrientationsRoof](
-    each outSkyCon=false,
-    each outGroCon=false,
-    each lat=zoneParam.lat,
-    azi=zoneParam.aziRoof,
-    til=zoneParam.tiltRoof)
+    each final  outSkyCon=false,
+    each final outGroCon=false,
+    each final lat=zoneParam.lat,
+    final azi=zoneParam.aziRoof,
+    final til=zoneParam.tiltRoof)
     "Calculates diffuse solar radiation on titled surface for roof"
-    annotation (Placement(transformation(extent={{-84,53},{-68,69}})));
+    annotation (Placement(transformation(extent={{-84,55},{-68,71}})));
   BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilRoof[zoneParam.nOrientationsRoof](
-    each lat=zoneParam.lat,
-    azi=zoneParam.aziRoof,
-    til=zoneParam.tiltRoof)
+    each final lat=zoneParam.lat,
+    final azi=zoneParam.aziRoof,
+    final til=zoneParam.tiltRoof)
     "Calculates direct solar radiation on titled surface for roof"
     annotation (Placement(transformation(extent={{-84,78},{-68,95}})));
   EquivalentAirTemperature.VDI6007 eqAirTempRoof(
     eExt=0.9,
-    wfGro=0,
-    n=zoneParam.nOrientationsRoof,
-    aExt=zoneParam.aRoof,
-    wfWall=zoneParam.wfRoof,
-    alphaWallOut=zoneParam.alphaRoofOut,
-    alphaRadWall=zoneParam.alphaRadRoof,
-    wfWin=fill(0, zoneParam.nOrientationsRoof),
-    TGro=273.15) "Computes equivalent air temperature for roof"
-    annotation (Placement(transformation(extent={{-36,64},{-16,84}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemRoof if zoneParam.ARoof > 0
+    final wfGro=0,
+    final n=zoneParam.nOrientationsRoof,
+    final aExt=zoneParam.aRoof,
+    final wfWall=zoneParam.wfRoof,
+    final alphaWallOut=zoneParam.alphaRoofOut,
+    final alphaRadWall=zoneParam.alphaRadRoof,
+    final wfWin=fill(0, zoneParam.nOrientationsRoof),
+    final TGro=273.15)
+    "Computes equivalent air temperature for roof"
+    annotation (Placement(transformation(extent={{-36,66},{-16,86}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTemRoof if
+    zoneParam.ARoof > 0
     "Prescribed temperature for roof outdoor surface temperature"
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},rotation=0,
     origin={45,86})));
-  Modelica.Thermal.HeatTransfer.Components.Convection theConRoof if zoneParam.ARoof > 0
+  Modelica.Thermal.HeatTransfer.Components.Convection theConRoof if
+    zoneParam.ARoof > 0
     "Outdoor convective heat transfer of roof"
     annotation (Placement(transformation(extent={{5,-5},{-5,5}},rotation=-90,
     origin={61,79})));
-  Modelica.Blocks.Sources.Constant alphaRoof(k=(zoneParam.alphaRoofOut +
-        zoneParam.alphaRadRoof)*zoneParam.ARoof)
+  Modelica.Blocks.Sources.Constant alphaRoof(
+    final k=(zoneParam.alphaRoofOut +
+    zoneParam.alphaRadRoof)*zoneParam.ARoof)
     "Outdoor coefficient of heat transfer for roof"
     annotation (Placement(transformation(extent={{4,-4},{-4,4}},origin={74,79})));
-  Modelica.Blocks.Sources.Constant constSunblindRoof[zoneParam.nOrientationsRoof]
-    (each k=0) "Sets sunblind signal to zero (open)" annotation (Placement(
+  Modelica.Blocks.Sources.Constant constSunblindRoof[zoneParam.nOrientationsRoof](
+     each k=0)
+     "Sets sunblind signal to zero (open)"
+     annotation (Placement(
         transformation(
         extent={{3,-3},{-3,3}},
         rotation=90,
@@ -308,7 +331,6 @@ equation
       extent={{-6,3},{-6,3}}));
   connect(weaBus.TDryBul, ventCont.Tambient) annotation (Line(
       points={{-100,34},{-100,34},{-86,34},{-86,-20},{-78,-20},{-78,-62},{-70,-62}},
-
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -329,7 +351,7 @@ equation
           27.7},{-26,24.85},{-26,20}}, color={0,0,127}));
   for i in 1:zoneParam.nOrientationsRoof loop
     connect(weaBus, HDifTilRoof[i].weaBus) annotation (Line(
-      points={{-100,34},{-86,34},{-86,61},{-84,61}},
+      points={{-100,34},{-86,34},{-86,63},{-84,63}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -350,8 +372,7 @@ equation
   connect(theConRoof.solid, ROM.roof)
     annotation (Line(points={{61,74},{60.8,74},{60.8,63}}, color={191,0,0}));
   connect(weaBus.TDryBul, eqAirTempRoof.TDryBul) annotation (Line(
-      points={{-100,34},{-94,34},{-86,34},{-86,74},{-48,74},{-48,68},{-38,68}},
-
+      points={{-100,34},{-94,34},{-86,34},{-86,76},{-48,76},{-48,70},{-38,70}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -359,22 +380,23 @@ equation
       extent={{-6,3},{-6,3}}));
 
   connect(weaBus.TBlaSky, eqAirTempRoof.TBlaSky) annotation (Line(
-      points={{-100,34},{-86,34},{-86,74},{-44,74},{-38,74}},
+      points={{-100,34},{-86,34},{-86,76},{-38,76}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(eqAirTempRoof.TEqAir, preTemRoof.T) annotation (Line(points={{-15,74},
-          {4,74},{24,74},{24,86},{37.8,86},{37.8,86}}, color={0,0,127}));
+  connect(eqAirTempRoof.TEqAir, preTemRoof.T) annotation (Line(points={{-15,76},
+          {4,76},{24,76},{24,86},{37.8,86}},           color={0,0,127}));
   connect(HDirTilRoof.H, solRadRoof.u1) annotation (Line(points={{-67.2,86.5},{-64,
           86.5},{-64,90},{-59,90}}, color={0,0,127}));
-  connect(HDifTilRoof.H, solRadRoof.u2) annotation (Line(points={{-67.2,61},{-64,
-          61},{-64,84},{-59,84}}, color={0,0,127}));
+  connect(HDifTilRoof.H, solRadRoof.u2) annotation (Line(points={{-67.2,63},{
+          -64,63},{-64,84},{-59,84}},
+                                  color={0,0,127}));
   connect(solRadRoof.y, eqAirTempRoof.HSol) annotation (Line(points={{-47.5,87},
-          {-44,87},{-44,80},{-38,80}}, color={0,0,127}));
-  connect(constSunblindRoof.y, eqAirTempRoof.sunblind) annotation (Line(points=
-          {{-26,91.7},{-26,88.85},{-26,86}}, color={0,0,127}));
+          {-44,87},{-44,82},{-38,82}}, color={0,0,127}));
+  connect(constSunblindRoof.y, eqAirTempRoof.sunblind) annotation (Line(points={{-26,
+          91.7},{-26,88}},                   color={0,0,127}));
   annotation(Documentation(info="<html>
 <p>This model combines building physics, models for internal gains and the
 calculation of natural ventilation (window opening) and infiltration. It is
