@@ -5,8 +5,8 @@ model MultizoneEquipped
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor TAirAHUAvg
     "Averaged air temperature of the zones which are supplied by the AHU" annotation (Placement(transformation(extent={{16,-28},
             {8,-20}})));
-  Building.LowOrder.BaseClasses.ThermSplitter splitterThermPercentAir(dimension
-      =buildingParam.numZones, splitFactor=
+  Building.LowOrder.BaseClasses.ThermSplitter splitterThermPercentAir(dimension=
+       buildingParam.numZones, splitFactor=
         AixLib.Building.LowOrder.BaseClasses.ZoneFactorsZero(buildingParam.numZones,
         zoneParam)) annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
@@ -121,12 +121,13 @@ model MultizoneEquipped
         origin={45,14})));
 equation
   for i in 1:buildingParam.numZones loop
-    connect(internalGains[(i*3)-2], airFlowRate.relOccupation[i]) annotation (Line(
-      points={{76,-100},{74,-100},{74,-36},{-76,-36},{-76,10.8},{-72,10.8}},
-      color={0,0,127},
-      smooth=Smooth.None));
-    connect(internalGains[(i*3)-2], airFlowRateSplit.relOccupation[i]) annotation (Line(
-        points={{76,-100},{74,-100},{74,0},{49.32,0},{49.32,7}}, color={0,0,127}));
+    connect(intGains[(i*3) - 2], airFlowRate.relOccupation[i]) annotation (Line(
+        points={{76,-100},{74,-100},{74,-36},{-76,-36},{-76,10.8},{-72,10.8}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    connect(intGains[(i*3) - 2], airFlowRateSplit.relOccupation[i]) annotation
+      (Line(points={{76,-100},{74,-100},{74,0},{49.32,0},{49.32,7}}, color={0,0,
+            127}));
   end for;
 
   connect(AirHandlingUnit.T_outdoorAir, weather[1]) annotation (Line(

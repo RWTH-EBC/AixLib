@@ -1,9 +1,10 @@
 within AixLib.DataBase.Buildings;
 record ZoneBaseRecordNew "Base record definition for zone records"
   extends Modelica.Icons.Record;
+
   parameter Modelica.SIunits.Temperature T_start "Initial temperature";
   parameter Modelica.SIunits.Volume VAir "Air volume of the zone";
-  parameter Modelica.SIunits.Area AZone "net floor area of zone";
+  parameter Modelica.SIunits.Area AZone "Net floor area of zone";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaRad
     "Coefficient of heat transfer for linearized radiation exchange between walls";
   parameter Modelica.SIunits.Angle lat "Latitude of zone location";
@@ -25,27 +26,27 @@ record ZoneBaseRecordNew "Base record definition for zone records"
   parameter Modelica.SIunits.Area AExt[nOrientations] "Areas of exterior walls by orientations";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaExt
     "Convective coefficient of heat transfer for exterior walls (indoor)";
-  parameter Integer nExt "Number of RC-elements of exterior walls";
+  parameter Integer nExt(min=1) "Number of RC-elements of exterior walls";
   parameter Modelica.SIunits.ThermalResistance RExt[nExt] "Resistances of exterior walls, from inside to outside";
   parameter Modelica.SIunits.ThermalResistance RExtRem "Resistance of remaining resistor RExtRem between capacity n and outside";
   parameter Modelica.SIunits.HeatCapacity CExt[nExt] "Heat capacities of exterior walls, from inside to outside";
   parameter Modelica.SIunits.Area AInt "Area of interior walls";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaInt
     "Convective coefficient of heat transfer of interior walls (indoor)";
-  parameter Integer nInt "Number of RC-elements of interior walls";
+  parameter Integer nInt(min=1) "Number of RC-elements of interior walls";
   parameter Modelica.SIunits.ThermalResistance RInt[nInt] "Resistances of interior wall, from port to center";
   parameter Modelica.SIunits.HeatCapacity CInt[nInt] "Heat capacities of interior walls, from port to center";
   parameter Modelica.SIunits.Area AFloor "Area of floor plate";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaFloor
     "Convective coefficient of heat transfer of floor plate (indoor)";
-  parameter Integer nFloor "Number of RC-elements of floor plate";
+  parameter Integer nFloor(min=1) "Number of RC-elements of floor plate";
   parameter Modelica.SIunits.ThermalResistance RFloor[nFloor] "Resistances of floor plate, from inside to outside";
   parameter Modelica.SIunits.ThermalResistance RFloorRem "Resistance of remaining resistor RFloorRem between capacity n and outside";
   parameter Modelica.SIunits.HeatCapacity CFloor[nFloor] "Heat capacities of floor plate, from inside to outside";
   parameter Modelica.SIunits.Area ARoof "Area of roof";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaRoof
     "Convective coefficient of heat transfer of roof (indoor)";
-  parameter Integer nRoof "Number of RC-elements of roof";
+  parameter Integer nRoof(min=1) "Number of RC-elements of roof";
   parameter Modelica.SIunits.ThermalResistance RRoof[nRoof] "Resistances of roof, from inside to outside";
   parameter Modelica.SIunits.ThermalResistance RRoofRem "Resistance of remaining resistor RRoofRem between capacity n and outside";
   parameter Modelica.SIunits.HeatCapacity CRoof[nRoof] "Heat capacities of roof, from inside to outside";

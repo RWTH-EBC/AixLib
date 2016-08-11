@@ -1,104 +1,80 @@
 within AixLib.ThermalZones.ReducedOrder.Multizone;
 partial model PartialMultizone "Partial class for multizone models"
-  parameter AixLib.DataBase.Buildings.BuildingBaseRecord buildingParam
+  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
+
+  parameter AixLib.DataBase.Buildings.BuildingBaseRecordNew buildingParam
     "Choose setup for the building" annotation (choicesAllMatching = false);
-protected
-  parameter AixLib.DataBase.Buildings.ZoneBaseRecord zoneParam[:]=buildingParam.zoneSetup
-    "Choose setup for zones" annotation (choicesAllMatching=false);
-  parameter Integer orientations[:]=zoneParam.n "Number cardinal directions";
-public
-  replaceable AixLib.Building.LowOrder.ThermalZone.ThermalZoneEquipped zone[buildingParam.numZones] constrainedby
-    AixLib.Building.LowOrder.ThermalZone.PartialThermalZone(zoneParam=zoneParam)
-    "Choose thermal zone model" annotation (Placement(transformation(extent={{40,35},
-            {80,75}})),choicesAllMatching=true);
-  AixLib.Utilities.Interfaces.SolarRad_in radIn[max(orientations)]
-    "Solar radiation" annotation (
+  parameter Integer nPorts=0
+    "Number of fluid ports"
+    annotation(Evaluate=true,
+    Dialog(connectorSizing=true, tab="General",group="Ports"));
+  BoundaryConditions.WeatherData.Bus weaBus
+    "Weather data bus"
+    annotation (Placement(
+    transformation(extent={{-117,39},{-83,71}}), iconTransformation(
+    extent={{-70,-12},{-50,8}})));
+  Modelica.Blocks.Interfaces.RealInput intGains[3*buildingParam.numZones]
+    "Input profiles for internal gains persons, machines, light" annotation (
       Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
-        origin={-20,92}), iconTransformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
-        origin={-62,90})));
-  Modelica.Blocks.Interfaces.RealInput internalGains[3*buildingParam.numZones]
-    "Input profiles for internal gains persons, machines, light"
-    annotation (Placement(transformation(extent={{20,-20},{-20,20}},
+        extent={{20,-20},{-20,20}},
         rotation=-90,
-        origin={76,-100}),
-        iconTransformation(extent={{-7,-7},{7,7}},
-        rotation=180,
-        origin={93,65})));
-  Modelica.Blocks.Interfaces.RealInput weather[4]
-    "Weather Input Vector [1]: Air Temperature [2]: Water mass fraction [3]: Sky Radiation [4]: Terrestrial Radiation"
-    annotation (Placement(transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=270,
-        origin={-56,100}), iconTransformation(
-        extent={{-6,-6},{6,6}},
-        rotation=270,
-        origin={-16,94})));
+        origin={76,-100}), iconTransformation(
+        extent={{-7,-7},{7,7}},
+        rotation=90,
+        origin={87,-97})));
+  Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts]
+    annotation (Placement(transformation(extent={{-52,-106},{52,-82}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv[size(zone, 1)]
+    "Convective internal gains"
+    annotation (Placement(transformation(extent={{90,-60},{110,-40}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad[size(zone, 1)]
+    "Convective internal gains"
+    annotation (Placement(transformation(extent={{90,-26},{110,-6}})));
+  Modelica.Blocks.Interfaces.RealOutput TAir[size(zone, 1)]
+    "Indoor air temperature"
+    annotation (Placement(transformation(extent={{100,57},{120,77}})));
+  Modelica.Blocks.Interfaces.RealOutput TRad[size(zone, 1)]
+    "Mean indoor radiation temperature"
+    annotation (Placement(transformation(extent={{100,5},{120,25}})));
+  replaceable AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped zone[buildingParam.numZones](nPorts=
+        nPorts)                                                                                             constrainedby
+    AixLib.ThermalZones.ReducedOrder.ThermalZone.PartialThermalZone(zoneParam=zoneParam)
+    "Choose thermal zone model" annotation (Placement(transformation(extent={{38,35},
+            {80,76}})),choicesAllMatching=true);
+
+protected
+  parameter AixLib.DataBase.Buildings.ZoneBaseRecordNew zoneParam[:]=buildingParam.zoneSetup
+    "Choose setup for zones" annotation (choicesAllMatching=false);
 
 equation
   for i in 1:buildingParam.numZones loop
-    connect(internalGains[(i*3)-2], zone[i].internalGains[1]) annotation (Line(
-      points={{76,-100},{76,41.4}},
-      color={0,0,127},
-      smooth=Smooth.None));
-    connect(internalGains[(i*3)-1], zone[i].internalGains[2]) annotation (Line(
-      points={{76,-100},{76,43}},
-      color={0,0,127},
-      smooth=Smooth.None));
-    connect(internalGains[(i*3)], zone[i].internalGains[3]) annotation (Line(
-      points={{76,-100},{76,44.6}},
-      color={0,0,127},
-      smooth=Smooth.None));
-    //Connect Outside Temperature
-    connect(weather[1], zone[i].weather[1]) annotation (Line(
-          points={{-56,115},{-56,68},{40,68},{40,53.4},{45.2,53.4}},
-          color={0,0,127},
-          smooth=Smooth.None));
-    for j in 3:4 loop
-      //Connect Radiation Vectors. Index has shifted because the absolute humidity has been added at vector position 2.
-      connect(weather[j], zone[i].weather[j - 1]) annotation (Line(
-            points={{-56,100},{-56,68},{40,68},{40,55},{45.2,55}},
-            color={0,0,127},
-            smooth=Smooth.None));
-    end for;
-    for k in 1:orientations[i] loop
-      //Connect the radiation Input according to the required orientations for the individual zone
-      connect(radIn[k], zone[i].solarRad_in[k]) annotation (Line(
-            points={{-20,92},{-20,72},{40,72},{40,64.2},{44,64.2}},
-            color={255,128,0},
-            smooth=Smooth.None));
-    end for;
+    connect(intGains[(i*3) - 2], zone[i].internalGains[1]) annotation (Line(
+        points={{76,-100},{76,41.4}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    connect(intGains[(i*3) - 1], zone[i].internalGains[2]);
+    connect(intGains[(i*3)], zone[i].internalGains[3]);
+    connect(zone[i].weaBus, weaBus) annotation (Line(
+      points={{46.4,55.09},{-24,55.09},{-24,55},{-100,55}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
   end for;
-
+  connect(zone.ports, ports) annotation (Line(points={{62.99,43.2},{62.99,-46},{
+          0,-46},{0,-94}}, color={0,127,255}));
+  connect(zone.intGainsConv, intGainsConv) annotation (Line(points={{80,48.94},{
+          86,48.94},{86,-50},{100,-50}}, color={191,0,0}));
+  connect(zone.intGainsRad, intGainsRad) annotation (Line(points={{80,55.5},{90,
+          55.5},{90,-16},{100,-16}}, color={191,0,0}));
+  connect(zone.TAir, TAir) annotation (Line(points={{82.1,66.98},{89.05,66.98},{
+          89.05,67},{110,67}}, color={0,0,127}));
+  connect(zone.TRad, TRad) annotation (Line(points={{82.1,61.24},{94,61.24},{94,
+          60},{94,15},{110,15}}, color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}}),
-            graphics={
-        Rectangle(
-          extent={{34,78},{86,-70}},
-          lineColor={0,0,255},
-          fillPattern=FillPattern.Solid,
-          fillColor={213,255,170}),
-        Rectangle(
-          extent={{32,78},{-66,32}},
-          lineColor={0,0,255},
-          fillColor={255,255,170},
-          fillPattern=FillPattern.Solid),
-        Text(
-          extent={{-52,78},{-24,68}},
-          lineColor={0,0,255},
-          fillColor={212,221,253},
-          fillPattern=FillPattern.Solid,
-          textString="Weather"),
-        Text(
-          extent={{38,-50},{66,-64}},
-          lineColor={0,0,255},
-          fillColor={213,255,170},
-          fillPattern=FillPattern.Solid,
-          textString="Building")}),
+            100}})),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
          graphics={                                                       Text(
           extent={{-80,-150},{100,-110}},

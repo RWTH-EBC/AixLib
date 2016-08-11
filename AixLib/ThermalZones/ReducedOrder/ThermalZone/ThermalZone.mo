@@ -29,7 +29,7 @@ model ThermalZone
     annotation (Placement(transformation(extent={{64,-76},{84,-57}})));
   SolarGain.CorrectionGDoublePane corGDouPan(
     final n=zoneParam.nOrientations,
-    final UWin=zoneParam.UWin)
+    final UWin=zoneParam.UWin) if sum(zoneParam.ATransparent) > 0
     "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{-12,39},{0,51}})));
   EquivalentAirTemperature.VDI6007WithWindow eqAirTempWall(
@@ -46,7 +46,7 @@ model ThermalZone
     final alphaRadWall=zoneParam.alphaRadWall,
     final alphaWinOut=zoneParam.alphaWinOut,
     final alphaRadWin=zoneParam.alphaRadWin,
-    final aExt=zoneParam.aExt)
+    final aExt=zoneParam.aExt) if (sum(zoneParam.AExt) + sum(zoneParam.AWin)) > 0
     "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-36,-2},{-16,18}})));
   Modelica.Blocks.Sources.Constant constSunblindWall[zoneParam.nOrientations](
@@ -66,7 +66,7 @@ model ThermalZone
     final alphaWallOut=zoneParam.alphaRoofOut,
     final alphaRadWall=zoneParam.alphaRadRoof,
     final wfWin=fill(0, zoneParam.nOrientationsRoof),
-    final TGro=273.15)
+    final TGro=273.15) if zoneParam.ARoof > 0
     "Computes equivalent air temperature for roof"
     annotation (Placement(transformation(extent={{-36,66},{-16,86}})));
   Modelica.Blocks.Sources.Constant constSunblindRoof[zoneParam.nOrientationsRoof](
@@ -178,7 +178,7 @@ equation
           -113.333},{80,-113.333},{80,-78},{54,-78},{54,-27.1},{64.9,-27.1}},
         color={0,0,127}));
   connect(intGains[2],machinesSenHea. Schedule) annotation (Line(points={{80,-100},
-          {70,-100},{70,-78},{54,-78},{54,-46.5},{65,-46.5}}, color={0,0,127}));
+          {80,-100},{80,-78},{54,-78},{54,-46.5},{65,-46.5}}, color={0,0,127}));
   connect(intGains[3],lights. Schedule) annotation (Line(points={{80,-86.6667},
           {80,-86.6667},{80,-78},{54,-78},{54,-66.5},{65,-66.5}},color={0,0,127}));
   connect(lights.ConvHeat, ROM.intGainsConv) annotation (Line(points={{83,-60.8},
