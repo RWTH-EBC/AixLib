@@ -10,6 +10,38 @@ record BuildingBaseRecordNew
   parameter Modelica.SIunits.Volume VAir = sum(zoneSetup.VAir) "Indoor air volume of building";
   parameter Modelica.SIunits.Area ABuilding = sum(zoneSetup.AZone) "Net floor area of building";
 
+  parameter Boolean heatAHU "Status of heating of AHU";
+  parameter Boolean coolAHU "Status of cooling of AHU";
+  parameter Boolean dehuAHU=if heatAHU and coolAHU then true
+       else false
+    "Status of dehumidification of AHU (Cooling and Heating must be enabled)";
+  parameter Boolean huAHU=if heatAHU and coolAHU then true
+       else false
+    "Status of humidification of AHU (Cooling and Heating must be enabled)";
+  parameter Real BPFDehuAHU(
+    min=0,
+    max=1)
+    "By-pass factor of cooling coil during dehumidification";
+  parameter Boolean HRS=true
+    "Status of Heat Recovery System of AHU";
+  parameter Real effHRSAHU_enabled(
+    min=0,
+    max=1) "Efficiency of HRS when enabled";
+  parameter Real effHRSAHU_disabled(
+    min=0,
+    max=1)
+    "Efficiency of HRS when disabled";
+  parameter Modelica.SIunits.Time sampleRateAHU(min=0) = 1800
+    "Time period for sampling";
+  parameter Modelica.SIunits.Pressure dpAHU_sup
+    "Pressure difference over supply fan";
+  parameter Modelica.SIunits.Pressure dpAHU_eta
+    "Pressure difference over extract fan";
+  parameter Modelica.SIunits.Efficiency effFanAHU_sup
+    "Efficiency of supply fan";
+  parameter Modelica.SIunits.Efficiency effFanAHU_eta
+    "Efficiency of extract fan";
+
   annotation (Documentation(revisions="<html>
 <ul>
   <li><i>January 4, 2016&nbsp;</i> by Moritz Lauster:<br/>Clean up of record</li>

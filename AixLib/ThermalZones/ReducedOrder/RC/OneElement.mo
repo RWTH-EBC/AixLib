@@ -58,7 +58,8 @@ model OneElement "Thermal Zone with one element for exterior walls"
 
   Modelica.Blocks.Interfaces.RealInput solRad[nOrientations](
     final quantity="RadiantEnergyFluenceRate",
-    final unit="W/m2") "Solar radiation transmitted through windows"
+    final unit="W/m2") if sum(ATransparent) > 0
+    "Solar radiation transmitted through windows"
     annotation (
     Placement(transformation(extent={{-280,120},{-240,160}}),
     iconTransformation(extent={{-260,140},{-240,160}})));
@@ -134,11 +135,11 @@ model OneElement "Thermal Zone with one element for exterior walls"
     annotation (Placement(transformation(extent={{-180,30},{-160,50}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow convHeatSol(
     final T_ref=T_start) if
-    ratioWinConRad > 0 and (ATot > 0 or VAir > 0)
+    ratioWinConRad > 0 and (ATot > 0 or VAir > 0) and sum(ATransparent) > 0
     "Solar heat considered as convection"
     annotation (Placement(transformation(extent={{-166,114},{-146,134}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow radHeatSol[
-    nOrientations](each final T_ref=T_start) if ATot > 0
+    nOrientations](each final T_ref=T_start) if ATot > 0 and sum(ATransparent) > 0
     "Solar heat considered as radiation"
     annotation (Placement(transformation(extent={{-166,136},{-146,156}})));
   BaseClasses.ThermSplitter thermSplitterIntGains(
@@ -151,7 +152,8 @@ model OneElement "Thermal Zone with one element for exterior walls"
   BaseClasses.ThermSplitter thermSplitterSolRad(
     final splitFactor=splitFactorSolRad,
     final nOut=dimension,
-    final nIn=nOrientations) if ATot > 0 "Splits incoming solar radiation into seperate gains for each wall
+    final nIn=nOrientations) if ATot > 0 and sum(ATransparent) > 0
+    "Splits incoming solar radiation into seperate gains for each wall
     element, weighted by their area"
     annotation (Placement(transformation(extent={{-138,138},{-122,154}})));
   BaseClasses.ExteriorWall extWallRC(
@@ -171,12 +173,13 @@ protected
   parameter Modelica.SIunits.Area[:] AArray = {ATotExt, ATotWin}
     "List of all wall surface areas";
   parameter Integer dimension = sum({if A>0 then 1 else 0 for A in AArray})
-    "Number of non-zero wall surface areas";
+   "Number of non-zero wall surface areas";
   parameter Real splitFactor[dimension, 1]=
-    BaseClasses.splitFacVal(dimension, 1, AArray, fill(0, 1), fill(0, 1))
+    BaseClasses.splitFacVal(dimension, 1, AArray, fill(0, 1), fill(0, 1)) if sum(AArray) > 0
     "Share of each wall surface area that is non-zero";
   parameter Real splitFactorSolRad[dimension, nOrientations]=
-    BaseClasses.splitFacVal(dimension, nOrientations, AArray, AExt, AWin) "Share of each wall surface area that is non-zero, for each orientation
+    BaseClasses.splitFacVal(dimension, nOrientations, AArray, AExt, AWin) if sum(AArray) > 0
+    "Share of each wall surface area that is non-zero, for each orientation
     seperately";
   Modelica.Thermal.HeatTransfer.Components.Convection convExtWall if ATotExt > 0
     "Convective heat transfer of exterior walls"
@@ -198,12 +201,12 @@ protected
     rotation=-90,
     origin={-106,68})));
   Modelica.Blocks.Math.Gain eRadSol[nOrientations](
-    final k=gWin*(1 - ratioWinConRad)*ATransparent)
+    final k=gWin*(1 - ratioWinConRad)*ATransparent) if sum(ATransparent) > 0
     "Emission coefficient of solar radiation considered as radiation"
     annotation (Placement(transformation(extent={{-206,141},{-196,151}})));
   Modelica.Blocks.Math.Gain eConvSol[nOrientations](
     final k=gWin*ratioWinConRad*ATransparent) if
-    ratioWinConRad > 0
+    ratioWinConRad > 0 and sum(ATransparent) > 0
     "Emission coefficient of solar radiation considered as convection"
     annotation (Placement(transformation(extent={{-206,119},{-196,129}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor resExtWallWin(
@@ -225,7 +228,8 @@ protected
     rotation=90,
     origin={210,110})));
   Modelica.Blocks.Math.Sum sumSolRad(final nin=nOrientations) if
-    ratioWinConRad > 0 "Sums up solar radiation from different directions"
+    ratioWinConRad > 0 and sum(ATransparent) > 0
+    "Sums up solar radiation from different directions"
     annotation (Placement(transformation(extent={{-186,118},{-174,130}})));
 
 equation

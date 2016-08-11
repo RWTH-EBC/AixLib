@@ -12,7 +12,7 @@ partial model PartialMultizone "Partial class for multizone models"
     "Weather data bus"
     annotation (Placement(
     transformation(extent={{-117,39},{-83,71}}), iconTransformation(
-    extent={{-70,-12},{-50,8}})));
+    extent={{-110,44},{-90,64}})));
   Modelica.Blocks.Interfaces.RealInput intGains[3*buildingParam.numZones]
     "Input profiles for internal gains persons, machines, light" annotation (
       Placement(transformation(
@@ -21,21 +21,24 @@ partial model PartialMultizone "Partial class for multizone models"
         origin={76,-100}), iconTransformation(
         extent={{-7,-7},{7,7}},
         rotation=90,
-        origin={87,-97})));
+        origin={53,-99})));
   Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts]
-    annotation (Placement(transformation(extent={{-52,-106},{52,-82}})));
+    annotation (Placement(transformation(extent={{-40,-109},{38,-91}}),
+        iconTransformation(extent={{-24,-105},{38,-91}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv[size(zone, 1)]
     "Convective internal gains"
-    annotation (Placement(transformation(extent={{90,-60},{110,-40}})));
+    annotation (Placement(transformation(extent={{-110,-80},{-90,-60}}),
+        iconTransformation(extent={{-110,-80},{-90,-60}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad[size(zone, 1)]
     "Convective internal gains"
-    annotation (Placement(transformation(extent={{90,-26},{110,-6}})));
+    annotation (Placement(transformation(extent={{-110,-46},{-90,-26}}),
+        iconTransformation(extent={{-110,-46},{-90,-26}})));
   Modelica.Blocks.Interfaces.RealOutput TAir[size(zone, 1)]
     "Indoor air temperature"
     annotation (Placement(transformation(extent={{100,57},{120,77}})));
   Modelica.Blocks.Interfaces.RealOutput TRad[size(zone, 1)]
     "Mean indoor radiation temperature"
-    annotation (Placement(transformation(extent={{100,5},{120,25}})));
+    annotation (Placement(transformation(extent={{100,29},{120,49}})));
   replaceable AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped zone[buildingParam.numZones](nPorts=
         nPorts)                                                                                             constrainedby
     AixLib.ThermalZones.ReducedOrder.ThermalZone.PartialThermalZone(zoneParam=zoneParam)
@@ -62,16 +65,19 @@ equation
       index=1,
       extent={{6,3},{6,3}}));
   end for;
-  connect(zone.ports, ports) annotation (Line(points={{62.99,43.2},{62.99,-46},{
-          0,-46},{0,-94}}, color={0,127,255}));
-  connect(zone.intGainsConv, intGainsConv) annotation (Line(points={{80,48.94},{
-          86,48.94},{86,-50},{100,-50}}, color={191,0,0}));
-  connect(zone.intGainsRad, intGainsRad) annotation (Line(points={{80,55.5},{90,
-          55.5},{90,-16},{100,-16}}, color={191,0,0}));
-  connect(zone.TAir, TAir) annotation (Line(points={{82.1,66.98},{89.05,66.98},{
-          89.05,67},{110,67}}, color={0,0,127}));
+  connect(zone.ports, ports) annotation (Line(points={{62.99,43.2},{62.99,-46},
+          {-1,-46},{-1,-100}},
+                           color={0,127,255}));
+  connect(zone.intGainsConv, intGainsConv) annotation (Line(points={{80,48.94},
+          {86,48.94},{86,-78},{66,-78},{66,-78},{-92,-78},{-92,-70},{-100,-70}},
+                                         color={191,0,0}));
   connect(zone.TRad, TRad) annotation (Line(points={{82.1,61.24},{94,61.24},{94,
-          60},{94,15},{110,15}}, color={0,0,127}));
+          60},{94,39},{110,39}}, color={0,0,127}));
+  connect(zone.TAir, TAir) annotation (Line(points={{82.1,66.98},{98,66.98},{98,
+          67},{110,67}}, color={0,0,127}));
+  connect(zone.intGainsRad, intGainsRad) annotation (Line(points={{80,55.5},{90,
+          55.5},{90,-76},{60,-76},{-90,-76},{-90,-36},{-100,-36}}, color={191,0,
+          0}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),
