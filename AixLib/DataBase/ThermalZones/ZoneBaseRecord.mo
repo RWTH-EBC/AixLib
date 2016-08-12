@@ -1,5 +1,5 @@
-within AixLib.DataBase.Buildings;
-record ZoneBaseRecordNew "Base record definition for zone records"
+within AixLib.DataBase.ThermalZones;
+record ZoneBaseRecord "Base record definition for zone records"
   extends Modelica.Icons.Record;
 
   parameter Modelica.SIunits.Temperature T_start "Initial temperature";
@@ -113,4 +113,4 @@ record ZoneBaseRecordNew "Base record definition for zone records"
 <li><i>November, 2012&nbsp;</i> by Moritz Lauster:<br/>Restored links </li>
 </ul>
 </html>"));
-end ZoneBaseRecordNew;
+end ZoneBaseRecord;
