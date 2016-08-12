@@ -1,8 +1,8 @@
 within AixLib.ThermalZones.ReducedOrder.Multizone;
 model Multizone
-  "Multizone with an arbitrary number of thermal zones (vectorized)"
-  extends AixLib.ThermalZones.ReducedOrder.Multizone.PartialMultizone;
-  Modelica.Blocks.Interfaces.RealInput ventTemp[buildingParam.numZones](
+  "Multizone model"
+  extends AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone;
+  Modelica.Blocks.Interfaces.RealInput ventTemp[numZones](
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC",
@@ -11,7 +11,7 @@ model Multizone
         extent={{-6,-6},{6,6}},
         rotation=0,
         origin={-98,26})));
-  Modelica.Blocks.Interfaces.RealInput ventRate[buildingParam.numZones](final
+  Modelica.Blocks.Interfaces.RealInput ventRate[numZones](final
       quantity="VolumeFlowRate", final unit="1/h")
     "Ventilation and infiltration rate" annotation (Placement(transformation(
           extent={{-132,-34},{-92,6}}),  iconTransformation(extent={{-104,-6},{

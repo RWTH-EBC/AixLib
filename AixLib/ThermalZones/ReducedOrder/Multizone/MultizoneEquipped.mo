@@ -1,13 +1,65 @@
 within AixLib.ThermalZones.ReducedOrder.Multizone;
 model MultizoneEquipped
-  "Multizone with basic heat supply system, air handling unit, an arbitrary number of thermal zones (vectorized), and ventilation"
-  extends AixLib.ThermalZones.ReducedOrder.Multizone.PartialMultizone;
+  "Multizone model with ideal heater and cooler and AHU"
+  extends AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone;
+
+  parameter Boolean heatAHU "Status of heating of AHU"
+    annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"));
+  parameter Boolean coolAHU "Status of cooling of AHU"
+    annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"));
+  parameter Boolean dehuAHU=if heatAHU and coolAHU then true
+       else false
+    "Status of dehumidification of AHU (Cooling and Heating must be enabled)"
+    annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"), enable=(heating and cooling));
+  parameter Boolean huAHU=if heatAHU and coolAHU then true
+       else false
+    "Status of humidification of AHU (Cooling and Heating must be enabled)"
+    annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"), enable=(heating and cooling));
+  parameter Real BPFDehuAHU(
+    min=0,
+    max=1)
+    "By-pass factor of cooling coil during dehumidification"
+    annotation (Dialog(tab="AirHandlingUnit", group="Settings AHU Value"));
+  parameter Boolean HRS=true
+    "Status of Heat Recovery System of AHU"
+    annotation (
+      Dialog(tab="AirHandlingUnit", group="AHU Modes"), choices(checkBox=true));
+  parameter Real effHRSAHU_enabled(
+    min=0,
+    max=1) "Efficiency of HRS when enabled"
+    annotation (Dialog(
+      tab="AirHandlingUnit",
+      group="Settings AHU Value",
+      enable=HRS));
+  parameter Real effHRSAHU_disabled(
+    min=0,
+    max=1)
+    "Efficiency of HRS when disabled"
+    annotation (Dialog(
+      tab="AirHandlingUnit",
+      group="Settings AHU Value",
+      enable=HRS));
+  parameter Modelica.SIunits.Time sampleRateAHU(min=0) = 1800
+    "Time period for sampling"
+    annotation (Dialog(tab="AirHandlingUnit", group="Settings for State Machines"));
+  parameter Modelica.SIunits.Pressure dpAHU_sup
+    "Pressure difference over supply fan"
+    annotation (Dialog(tab="AirHandlingUnit", group="Fans"));
+  parameter Modelica.SIunits.Pressure dpAHU_eta
+    "Pressure difference over extract fan"
+    annotation (Dialog(tab="AirHandlingUnit", group="Fans"));
+  parameter Modelica.SIunits.Efficiency effFanAHU_sup
+    "Efficiency of supply fan"
+    annotation (Dialog(tab="AirHandlingUnit", group="Fans"));
+  parameter Modelica.SIunits.Efficiency effFanAHU_eta
+    "Efficiency of extract fan"
+    annotation (Dialog(tab="AirHandlingUnit", group="Fans"));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor TAirAHUAvg
     "Averaged air temperature of the zones which are supplied by the AHU" annotation (Placement(transformation(extent={{46,-36},
             {38,-28}})));
   Building.LowOrder.BaseClasses.ThermSplitter splitterThermPercentAir(dimension=
-       buildingParam.numZones, splitFactor=
-        AixLib.Building.LowOrder.BaseClasses.ZoneFactorsZero(buildingParam.numZones,
+       numZones, splitFactor=
+        AixLib.Building.LowOrder.BaseClasses.ZoneFactorsZero(numZones,
         zoneParam)) annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=0,
@@ -21,12 +73,12 @@ model MultizoneEquipped
         extent={{7,-7},{-7,7}},
         rotation=180,
         origin={-99,1})));
-  Utilities.Sources.HeaterCooler.HeaterCoolerPI heaterCooler[buildingParam.numZones](
+  Utilities.Sources.HeaterCooler.HeaterCoolerPI heaterCooler[numZones](
     zoneParam=zoneParam,
     each recOrSep=true,
     each staOrDyn=true) "Heater Cooler with PI control"
     annotation (Placement(transformation(extent={{-48,-70},{-22,-44}})));
-  Modelica.Blocks.Interfaces.RealInput TSetHeater[buildingParam.numZones](
+  Modelica.Blocks.Interfaces.RealInput TSetHeater[numZones](
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC",
@@ -63,14 +115,15 @@ model MultizoneEquipped
      Placement(transformation(extent={{-52,-6},{18,24}})), choices(choice(
           redeclare AixLib.Airflow.AirHandlingUnit.AHU AirHandlingUnit
           "with AHU"), choice(redeclare AixLib.Airflow.AirHandlingUnit.NoAHU
-          AirHandlingUnit "AHU does not exist")));
+          AirHandlingUnit "AHU does not exist")),Dialog(
+      tab="AirHandlingUnit"));
 
-  Building.LowOrder.BaseClasses.AirFlowRateSum airFlowRate(
+  AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.AirFlowRateSum airFlowRate(
     zoneParam=zoneParam,
-    dimension=buildingParam.numZones,
+    dimension=numZones,
     withProfile=true)
     annotation (Placement(transformation(extent={{-72,2},{-60,18}})));
-  Modelica.Blocks.Interfaces.RealInput TSetCooler[buildingParam.numZones](
+  Modelica.Blocks.Interfaces.RealInput TSetCooler[numZones](
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC",
@@ -107,7 +160,7 @@ model MultizoneEquipped
       Placement(transformation(extent={{94,-76},{114,-56}}), iconTransformation(
           extent={{100,-70},{114,-56}})));
   Modelica.Blocks.Routing.Replicator replicatorTemperatureVentilation(nout=
-        buildingParam.numZones)
+        numZones)
     "replicates scalar temperature of AHU into a vector[numZones] of identical temperatures"
     annotation (Placement(transformation(
         extent={{-5,-5},{5,5}},
@@ -115,15 +168,15 @@ model MultizoneEquipped
         origin={23,39})));
   Modelica.Blocks.Nonlinear.Limiter minTemp(uMax=1000, uMin=1)
     annotation (Placement(transformation(extent={{34,-37},{24,-27}})));
-  Building.LowOrder.BaseClasses.AirFlowRateSplit airFlowRateSplit(
-    dimension=buildingParam.numZones,
+  AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.AirFlowRateSplit airFlowRateSplit(
+    dimension=numZones,
     withProfile=true,
     zoneParam=zoneParam) annotation (Placement(transformation(
         extent={{-7,-8},{7,8}},
         rotation=90,
         origin={45,14})));
 equation
-  for i in 1:buildingParam.numZones loop
+  for i in 1:numZones loop
     connect(intGains[(i*3) - 2], airFlowRate.relOccupation[i]) annotation (Line(
         points={{76,-100},{74,-100},{74,-42},{-76,-42},{-76,6.8},{-72,6.8}},
         color={0,0,127},
@@ -163,9 +216,8 @@ equation
   connect(AirHandlingUnit.Pel, Pel) annotation (Line(points={{0.15,-4.125},{
           0.15,-14.125},{56,-14.125},{92,-14.125},{92,10},{104,10}},
                                                  color={0,0,127}));
-  connect(AirHandlingUnit.QflowH, PHeatAHU) annotation (Line(points={{-6.85,
-          -4.125},{-6.85,-16},{-6,-16},{-6,-16},{93,-16},{93,-10},{104,-10}},
-                                                                      color={0,0,
+  connect(AirHandlingUnit.QflowH, PHeatAHU) annotation (Line(points={{-6.85,-4.125},
+          {-6.85,-16},{-6,-16},{93,-16},{93,-10},{104,-10}},          color={0,0,
           127}));
   connect(AirHandlingUnit.QflowC, PCoolAHU) annotation (Line(points={{-20.85,
           -4.125},{-20.85,-40},{-18,-40},{92,-40},{92,-30},{104,-30}},   color={
