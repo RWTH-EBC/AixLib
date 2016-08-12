@@ -1,6 +1,6 @@
 within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZoneEquipped
-  "Ready-to-use reduced order building model with ventilation,
+  "Thermal zone model with ventilation,
   infiltration and internal gains"
   extends AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone;
 

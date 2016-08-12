@@ -1,7 +1,7 @@
 within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZone
-  "Ready-to-use reduced order building model with internal gains"
-  extends AixLib.ThermalZones.ReducedOrder.ThermalZone.PartialThermalZone;
+  "Thermal zone model with internal gains"
+  extends AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone;
 
   Building.Components.Sources.InternalGains.Humans.HumanSensibleHeat_VDI2078
     humanSenHea(
