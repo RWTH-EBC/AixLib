@@ -1,9 +1,15 @@
-within AixLib.ThermalZones.ReducedOrder.Multizone;
-partial model PartialMultizone "Partial class for multizone models"
+within AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses;
+partial model PartialMultizone "Partial model for multizone models"
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
-  parameter AixLib.DataBase.Buildings.BuildingBaseRecordNew buildingParam
-    "Choose setup for the building" annotation (choicesAllMatching = false);
+  parameter Integer buildingID "Unique identifier of the building";
+  parameter Modelica.SIunits.Volume VAir(min=0) "Indoor air volume of building";
+  parameter Modelica.SIunits.Area ABuilding(min=0) "Net floor area of building";
+  parameter Modelica.SIunits.Area ASurTot(min=0) "Total surface area of building walls and windows (including interior walls)";
+  parameter Integer numZones(min=1)
+    "Number of zones";
+  parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam[:]
+    "Setup for zones" annotation (choicesAllMatching=false);
   parameter Integer nPorts=0
     "Number of fluid ports"
     annotation(Evaluate=true,
@@ -13,7 +19,7 @@ partial model PartialMultizone "Partial class for multizone models"
     annotation (Placement(
     transformation(extent={{-117,39},{-83,71}}), iconTransformation(
     extent={{-110,44},{-90,64}})));
-  Modelica.Blocks.Interfaces.RealInput intGains[3*buildingParam.numZones]
+  Modelica.Blocks.Interfaces.RealInput intGains[3*numZones]
     "Input profiles for internal gains persons, machines, light" annotation (
       Placement(transformation(
         extent={{20,-20},{-20,20}},
@@ -22,41 +28,38 @@ partial model PartialMultizone "Partial class for multizone models"
         extent={{-7,-7},{7,7}},
         rotation=90,
         origin={53,-99})));
-  Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts]
+  Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts*numZones]
+    "Auxilliary fluid inlets and outlets to indoor air volume"
     annotation (Placement(transformation(extent={{-40,-109},{38,-91}}),
         iconTransformation(extent={{-24,-105},{38,-91}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv[size(zone, 1)]
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv[size(zone, 1)] if ASurTot > 0 or VAir > 0
     "Convective internal gains"
     annotation (Placement(transformation(extent={{-110,-80},{-90,-60}}),
         iconTransformation(extent={{-110,-80},{-90,-60}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad[size(zone, 1)]
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad[size(zone, 1)] if ASurTot > 0
     "Convective internal gains"
     annotation (Placement(transformation(extent={{-110,-46},{-90,-26}}),
         iconTransformation(extent={{-110,-46},{-90,-26}})));
-  Modelica.Blocks.Interfaces.RealOutput TAir[size(zone, 1)]
+  Modelica.Blocks.Interfaces.RealOutput TAir[size(zone, 1)] if ASurTot > 0 or VAir > 0
     "Indoor air temperature"
     annotation (Placement(transformation(extent={{100,57},{120,77}})));
-  Modelica.Blocks.Interfaces.RealOutput TRad[size(zone, 1)]
+  Modelica.Blocks.Interfaces.RealOutput TRad[size(zone, 1)] if ASurTot > 0
     "Mean indoor radiation temperature"
     annotation (Placement(transformation(extent={{100,29},{120,49}})));
-  replaceable AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped zone[buildingParam.numZones](nPorts=
-        nPorts)                                                                                             constrainedby
-    AixLib.ThermalZones.ReducedOrder.ThermalZone.PartialThermalZone(zoneParam=zoneParam)
-    "Choose thermal zone model" annotation (Placement(transformation(extent={{38,35},
+  replaceable AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped zone[numZones] constrainedby
+    AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone(
+                                                                    zoneParam=zoneParam, each nPorts=nPorts)
+    "Thermal zone model" annotation (Placement(transformation(extent={{38,35},
             {80,76}})),choicesAllMatching=true);
 
-protected
-  parameter AixLib.DataBase.Buildings.ZoneBaseRecordNew zoneParam[:]=buildingParam.zoneSetup
-    "Choose setup for zones" annotation (choicesAllMatching=false);
-
 equation
-  for i in 1:buildingParam.numZones loop
-    connect(intGains[(i*3) - 2], zone[i].internalGains[1]) annotation (Line(
-        points={{76,-100},{76,41.4}},
+  for i in 1:numZones loop
+    connect(intGains[(i*3) - 2], zone[i].intGains[1]) annotation (Line(
+        points={{76,-100},{76,-30},{76,41.56},{75.8,41.56}},
         color={0,0,127},
         smooth=Smooth.None));
-    connect(intGains[(i*3) - 1], zone[i].internalGains[2]);
-    connect(intGains[(i*3)], zone[i].internalGains[3]);
+    connect(intGains[(i*3) - 1], zone[i].intGains[2]);
+    connect(intGains[(i*3)], zone[i].intGains[3]);
     connect(zone[i].weaBus, weaBus) annotation (Line(
       points={{46.4,55.09},{-24,55.09},{-24,55},{-100,55}},
       color={255,204,51},
@@ -64,10 +67,12 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  end for;
-  connect(zone.ports, ports) annotation (Line(points={{62.99,43.2},{62.99,-46},
+    if nPorts > 0 then
+      connect(zone[i].ports[nPorts], ports[nPorts*(i-1)+1:nPorts*i]) annotation (Line(points={{62.99,43.2},{62.99,-46},
           {-1,-46},{-1,-100}},
                            color={0,127,255}));
+    end if;
+  end for;
   connect(zone.intGainsConv, intGainsConv) annotation (Line(points={{80,48.94},
           {86,48.94},{86,-78},{66,-78},{66,-78},{-92,-78},{-92,-70},{-100,-70}},
                                          color={191,0,0}));
