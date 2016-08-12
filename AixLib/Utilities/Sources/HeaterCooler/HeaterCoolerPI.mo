@@ -23,9 +23,9 @@ model HeaterCoolerPI "heater and cooler with variable setpoints"
         rotation=90,
         origin={22,-72})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpressionHeater(y=if not
-        recOrSep then Heater_on else zoneParam.Heater_on) if staOrDyn annotation (Placement(transformation(extent={{-52,14},{-33,30}})));
+        recOrSep then Heater_on else zoneParam.HeaterOn) if staOrDyn annotation (Placement(transformation(extent={{-52,14},{-33,30}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpressionCooler(y=if not
-        recOrSep then Cooler_on else zoneParam.Cooler_on) if staOrDyn annotation (Placement(transformation(extent={{-52,-30},{-32,-14}})));
+        recOrSep then Cooler_on else zoneParam.CoolerOn) if staOrDyn annotation (Placement(transformation(extent={{-52,-30},{-32,-14}})));
   Modelica.Blocks.Interfaces.BooleanInput heaterActive if not staOrDyn
     "Switches Controler on and off" annotation (Placement(transformation(extent=
            {{-120,-6},{-80,34}}), iconTransformation(

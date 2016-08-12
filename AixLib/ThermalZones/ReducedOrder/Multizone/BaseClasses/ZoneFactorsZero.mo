@@ -4,7 +4,7 @@ function ZoneFactorsZero
   input Integer dimension "Number of zones";
   input Boolean withAHU[dimension] "AHU states of zones";
   input Modelica.SIunits.Volume VAir[dimension] "Indoor air volume of zones";
-  output Real zoneFactor[dimension] "Calculated zone factors";
+  output Real zoneFactor[dimension,1] "Calculated zone factors";
 
 protected
   Real VAirRes "Resulting air volume in zones supplied by the AHU";
@@ -17,9 +17,9 @@ algorithm
   end for;
   for i in 1:dimension loop
     if withAHU[i] then
-      zoneFactor[i] :=VAir[i]/VAirRes;
+      zoneFactor[i,1] :=VAir[i]/VAirRes;
     else
-      zoneFactor[i] :=0;
+      zoneFactor[i,1] :=0;
     end if;
   end for;
   annotation (Documentation(revisions="<html>

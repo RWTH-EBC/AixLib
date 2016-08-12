@@ -57,6 +57,29 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Weight factors of the roof";
   parameter Modelica.SIunits.Emissivity aRoof "Coefficient of absorption of roof (outdoor)";
 
+  parameter Modelica.SIunits.Emissivity aExt "Coefficient of absorption of exterior walls (outdoor)";
+  parameter Modelica.SIunits.Temperature Tsoil "Temperature of soil";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaWallOut
+    "Exterior walls convective coefficient of heat transfer (outdoor)";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaRadWall
+    "Coefficient of heat transfer for linearized radiation for exterior walls";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaWinOut
+    "Windows' convective coefficient of heat transfer (outdoor)";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaRadWin
+    "Coefficient of heat transfer for linearized radiation for windows";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaRoofOut
+    "Roof's convective coefficient of heat transfer (outdoor)";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaRadRoof
+    "Coefficient of heat transfer for linearized radiation for roof";
+  parameter Modelica.SIunits.Angle tiltExtWalls[nOrientations] "Tilts of exterior walls";
+  parameter Modelica.SIunits.Angle aziExtWalls[nOrientations] "Azimuths of exterior walls";
+  parameter Real wfWall[nOrientations]
+    "Weight factors of the walls";
+  parameter Real wfWin[nOrientations]
+    "Weight factors of the windows";
+  parameter Real wfGro
+    "Weight factor of the ground";
+
   parameter Real nrPeople "Number of people in the room";
   parameter Real ratioConvectiveHeatPeople
     "Ratio of convective heat from overall heat output for people";
@@ -84,28 +107,18 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Real maxAHU(unit = "m3/(h.m2)")
     "Maximum specific air flow supplied by the AHU";
 
-  parameter Modelica.SIunits.Emissivity aExt "Coefficient of absorption of exterior walls (outdoor)";
-  parameter Modelica.SIunits.Temperature Tsoil "Temperature of soil";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaWallOut
-    "Exterior walls convective coefficient of heat transfer (outdoor)";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaRadWall
-    "Coefficient of heat transfer for linearized radiation for exterior walls";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaWinOut
-    "Windows' convective coefficient of heat transfer (outdoor)";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaRadWin
-    "Coefficient of heat transfer for linearized radiation for windows";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaRoofOut
-    "Roof's convective coefficient of heat transfer (outdoor)";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaRadRoof
-    "Coefficient of heat transfer for linearized radiation for roof";
-  parameter Modelica.SIunits.Angle tiltExtWalls[nOrientations] "Tilts of exterior walls";
-  parameter Modelica.SIunits.Angle aziExtWalls[nOrientations] "Azimuths of exterior walls";
-  parameter Real wfWall[nOrientations]
-    "Weight factors of the walls";
-  parameter Real wfWin[nOrientations]
-    "Weight factors of the windows";
-  parameter Real wfGro
-    "Weight factor of the ground";
+  parameter Real hHeat "Upper limit controller output";
+  parameter Real lHeat "Lower limit controller output";
+  parameter Real KRHeat "Gain of the controller";
+  parameter Modelica.SIunits.Time TNHeat "Time constant of the controller";
+  parameter Boolean HeaterOn "Use heater component";
+  parameter Real hCool "Upper limit controller output";
+  parameter Real lCool "Lower limit controller output";
+  parameter Real KRCool "Gain of the controller, abs(l_cooler/80)";
+  parameter Modelica.SIunits.Time TNCool
+    "Time constant of the controller";
+  parameter Boolean CoolerOn "Use chiller component";
+
   annotation(Documentation(info="<html>
 <p>This is the base definition of zone records used in <a href=\"AixLib.Building.LowOrder.ThermalZone\">AixLib.Building.LowOrder.ThermalZone</a>. All necessary parameters are defined here. Most values should be overwritten for a specific building, some are default values that might be appropriate in most cases. However, fell free to overwrite them in your own records. </p>
 </html>",  revisions="<html>

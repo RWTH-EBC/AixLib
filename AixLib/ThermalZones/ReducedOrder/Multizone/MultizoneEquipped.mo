@@ -60,7 +60,7 @@ model MultizoneEquipped
   RC.BaseClasses.ThermSplitter splitterThermPercentAir(
     splitFactor=
         AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.ZoneFactorsZero(numZones,
-        zoneParam[:].withAHU,zoneParam[:].VAir),
+        zoneParam.withAHU,zoneParam.VAir),
     nOut=1,
     nIn=numZones)   annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
