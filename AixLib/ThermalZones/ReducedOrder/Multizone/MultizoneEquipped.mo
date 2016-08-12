@@ -57,10 +57,12 @@ model MultizoneEquipped
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor TAirAHUAvg
     "Averaged air temperature of the zones which are supplied by the AHU" annotation (Placement(transformation(extent={{46,-36},
             {38,-28}})));
-  Building.LowOrder.BaseClasses.ThermSplitter splitterThermPercentAir(dimension=
-       numZones, splitFactor=
-        AixLib.Building.LowOrder.BaseClasses.ZoneFactorsZero(numZones,
-        zoneParam)) annotation (Placement(transformation(
+  RC.BaseClasses.ThermSplitter splitterThermPercentAir(
+    splitFactor=
+        AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.ZoneFactorsZero(numZones,
+        zoneParam[:].withAHU,zoneParam[:].VAir),
+    nOut=1,
+    nIn=numZones)   annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=0,
         origin={54,-32})));
@@ -90,28 +92,21 @@ model MultizoneEquipped
         extent={{6,-6},{-6,6}},
         rotation=270,
         origin={-56,-98})));
-  replaceable AixLib.Airflow.AirHandlingUnit.AHU AirHandlingUnit(
-    cooling=buildingParam.coolAHU,
-    dehumidificationSet=buildingParam.dehuAHU,
-    humidificationSet=buildingParam.huAHU,
-    BPF_DeHu=buildingParam.BPFDehuAHU,
-    heating=buildingParam.heatAHU,
-    efficiencyHRS_enabled=buildingParam.effHRSAHU_enabled,
-    efficiencyHRS_disabled=buildingParam.effHRSAHU_disabled)     constrainedby
+  replaceable AixLib.Airflow.AirHandlingUnit.AHU AirHandlingUnit   constrainedby
     AixLib.Airflow.AirHandlingUnit.BaseClasses.PartialAHU(
-    BPF_DeHu=buildingParam.BPF_DeHu,
-    HRS=buildingParam.HRS,
-    efficiencyHRS_enabled=buildingParam.efficiencyHRS_enabled,
-    efficiencyHRS_disabled=buildingParam.efficiencyHRS_disabled,
-    heating=buildingParam.heatingAHU,
-    cooling=buildingParam.coolingAHU,
-    dehumidificationSet=buildingParam.dehumidificationAHU,
-    humidificationSet=buildingParam.humidificationAHU,
-    clockPeriodGeneric=buildingParam.sampleRateAHU,
-    dp_sup=buildingParam.dpAHU_sup,
-    dp_eta=buildingParam.dpAHU_eta,
-    eta_sup=buildingParam.effFanAHU_sup,
-    eta_eta=buildingParam.effFanAHU_eta) "Choose Air Handling Unit" annotation (
+    cooling=coolAHU,
+    dehumidificationSet=dehuAHU,
+    humidificationSet=huAHU,
+    BPF_DeHu=BPFDehuAHU,
+    heating=heatAHU,
+    efficiencyHRS_enabled=effHRSAHU_enabled,
+    efficiencyHRS_disabled=effHRSAHU_disabled,
+    HRS=HRS,
+    clockPeriodGeneric=sampleRateAHU,
+    dp_sup=dpAHU_sup,
+    dp_eta=dpAHU_eta,
+    eta_sup=effFanAHU_sup,
+    eta_eta=effFanAHU_eta) "Choose Air Handling Unit" annotation (
      Placement(transformation(extent={{-52,-6},{18,24}})), choices(choice(
           redeclare AixLib.Airflow.AirHandlingUnit.AHU AirHandlingUnit
           "with AHU"), choice(redeclare AixLib.Airflow.AirHandlingUnit.NoAHU
@@ -260,16 +255,15 @@ equation
       extent={{6,3},{6,3}}));
   connect(heaterCooler.heatCoolRoom, zone.intGainsConv) annotation (Line(points={{-23.3,
           -62.2},{86,-62.2},{86,48.94},{80,48.94}},        color={191,0,0}));
-  connect(splitterThermPercentAir.signalInput, TAirAHUAvg.port)
-    annotation (Line(points={{50,-32},{50,-32},{46,-32}}, color={191,0,0}));
-  connect(splitterThermPercentAir.signalOutput, zone.intGainsConv) annotation (
-      Line(points={{58,-32},{58,-32},{86,-32},{86,48.94},{80,48.94}}, color={191,
-          0,0}));
   connect(AirHandlingUnit.T_outdoorAir, weaBus.TDryBul) annotation (Line(points=
          {{-47.8,3},{-100,3},{-100,55}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
+  connect(splitterThermPercentAir.portIn[1], TAirAHUAvg.port)
+    annotation (Line(points={{50,-32},{48,-32},{46,-32}}, color={191,0,0}));
+  connect(splitterThermPercentAir.portOut, zone.intGainsConv) annotation (Line(
+        points={{58,-32},{86,-32},{86,48.94},{80,48.94}}, color={191,0,0}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}),

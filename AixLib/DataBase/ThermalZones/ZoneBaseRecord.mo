@@ -77,6 +77,13 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Real winterReduction[3]
     "Reduction factor of userACH for cold weather";
 
+  parameter Boolean withAHU
+    "Zone is connected to central air handling unit";
+  parameter Real minAHU(unit = "m3/(h.m2)")
+    "Minimum specific air flow supplied by the AHU";
+  parameter Real maxAHU(unit = "m3/(h.m2)")
+    "Maximum specific air flow supplied by the AHU";
+
   parameter Modelica.SIunits.Emissivity aExt "Coefficient of absorption of exterior walls (outdoor)";
   parameter Modelica.SIunits.Temperature Tsoil "Temperature of soil";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaWallOut
