@@ -54,15 +54,13 @@ model MultizoneEquipped
   parameter Modelica.SIunits.Efficiency effFanAHU_eta
     "Efficiency of extract fan"
     annotation (Dialog(tab="AirHandlingUnit", group="Fans"));
-  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor TAirAHUAvg
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor TAirAHUAvg if ASurTot > 0 or VAir > 0
     "Averaged air temperature of the zones which are supplied by the AHU" annotation (Placement(transformation(extent={{46,-36},
             {38,-28}})));
   RC.BaseClasses.ThermSplitter splitterThermPercentAir(
-    splitFactor=
-        AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.ZoneFactorsZero(numZones,
-        zoneParam.withAHU,zoneParam.VAir),
+    splitFactor=zoneFactor,
     nOut=1,
-    nIn=numZones)   annotation (Placement(transformation(
+    nIn=numZones) if ASurTot > 0 or VAir > 0 annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=0,
         origin={54,-32})));
@@ -78,7 +76,7 @@ model MultizoneEquipped
   Utilities.Sources.HeaterCooler.HeaterCoolerPI heaterCooler[numZones](
     zoneParam=zoneParam,
     each recOrSep=true,
-    each staOrDyn=true) "Heater Cooler with PI control"
+    each staOrDyn=true) if ASurTot > 0 or VAir > 0 "Heater Cooler with PI control"
     annotation (Placement(transformation(extent={{-48,-70},{-22,-44}})));
   Modelica.Blocks.Interfaces.RealInput TSetHeater[numZones](
     final quantity="ThermodynamicTemperature",
@@ -92,7 +90,7 @@ model MultizoneEquipped
         extent={{6,-6},{-6,6}},
         rotation=270,
         origin={-56,-98})));
-  replaceable AixLib.Airflow.AirHandlingUnit.AHU AirHandlingUnit   constrainedby
+  replaceable AixLib.Airflow.AirHandlingUnit.AHU AirHandlingUnit if ASurTot > 0 or VAir > 0  constrainedby
     AixLib.Airflow.AirHandlingUnit.BaseClasses.PartialAHU(
     cooling=coolAHU,
     dehumidificationSet=dehuAHU,
@@ -114,9 +112,9 @@ model MultizoneEquipped
       tab="AirHandlingUnit"));
 
   AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.AirFlowRateSum airFlowRate(
-    zoneParam=zoneParam,
     dimension=numZones,
-    withProfile=true)
+    withProfile=true,
+    zoneParam=zoneParam)
     annotation (Placement(transformation(extent={{-72,2},{-60,18}})));
   Modelica.Blocks.Interfaces.RealInput TSetCooler[numZones](
     final quantity="ThermodynamicTemperature",
@@ -132,44 +130,62 @@ model MultizoneEquipped
         origin={-38,-98})));
   Modelica.Blocks.Interfaces.RealOutput Pel(
    final quantity="Power",
-   final unit="W") "The consumed electrical power supplied from the mains"
+   final unit="W") if ASurTot > 0 or VAir > 0 "The consumed electrical power supplied from the mains"
                                                             annotation (
       Placement(transformation(extent={{94,0},{114,20}}), iconTransformation(
           extent={{100,6},{114,20}})));
   Modelica.Blocks.Interfaces.RealOutput PHeatAHU(final quantity="HeatFlowRate",
-      final unit="W")
+      final unit="W") if ASurTot > 0 or VAir > 0
     "The absorbed heating power supplied from a heating circuit" annotation (
       Placement(transformation(extent={{94,-20},{114,0}}), iconTransformation(
           extent={{100,-14},{114,0}})));
   Modelica.Blocks.Interfaces.RealOutput PCoolAHU(final quantity="HeatFlowRate",
-      final unit="W")
+      final unit="W") if ASurTot > 0 or VAir > 0
     "The absorbed cooling power supplied from a cooling circuit" annotation (
       Placement(transformation(extent={{94,-40},{114,-20}}), iconTransformation(
           extent={{100,-34},{114,-20}})));
   Modelica.Blocks.Interfaces.RealOutput PHeater[size(heaterCooler, 1)](final
-      quantity="HeatFlowRate", final unit="W") "Power for heating" annotation (
+      quantity="HeatFlowRate", final unit="W") if ASurTot > 0 or VAir > 0 "Power for heating" annotation (
       Placement(transformation(extent={{100,-54},{120,-34}}),
         iconTransformation(extent={{100,-52},{114,-38}})));
   Modelica.Blocks.Interfaces.RealOutput PCooler[size(heaterCooler, 1)](final
-      quantity="HeatFlowRate", final unit="W") "Power for cooling" annotation (
+      quantity="HeatFlowRate", final unit="W") if ASurTot > 0 or VAir > 0 "Power for cooling" annotation (
       Placement(transformation(extent={{94,-76},{114,-56}}), iconTransformation(
           extent={{100,-70},{114,-56}})));
   Modelica.Blocks.Routing.Replicator replicatorTemperatureVentilation(nout=
-        numZones)
+        numZones) if ASurTot > 0 or VAir > 0
     "replicates scalar temperature of AHU into a vector[numZones] of identical temperatures"
     annotation (Placement(transformation(
         extent={{-5,-5},{5,5}},
         rotation=90,
         origin={23,39})));
-  Modelica.Blocks.Nonlinear.Limiter minTemp(uMax=1000, uMin=1)
+  Modelica.Blocks.Nonlinear.Limiter minTemp(uMax=1000, uMin=1) if ASurTot > 0 or VAir > 0
     annotation (Placement(transformation(extent={{34,-37},{24,-27}})));
   AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.AirFlowRateSplit airFlowRateSplit(
     dimension=numZones,
     withProfile=true,
-    zoneParam=zoneParam) annotation (Placement(transformation(
+    zoneParam=zoneParam) if ASurTot > 0 or VAir > 0 annotation (Placement(transformation(
         extent={{-7,-8},{7,8}},
         rotation=90,
         origin={45,14})));
+protected
+  parameter Real zoneFactor[numZones,1](fixed=false) "Calculated zone factors";
+  parameter Real VAirRes(fixed=false) "Resulting air volume in zones supplied by the AHU";
+
+initial algorithm
+  for i in 1:numZones loop
+    if zoneParam.withAHU[i] then
+      VAirRes :=VAirRes + zoneParam.VAir[i];
+    end if;
+  end for;
+  for i in 1:numZones loop
+    if zoneParam.withAHU[i] then
+      zoneFactor[i,1] :=zoneParam.VAir[i]/VAirRes;
+    else
+      zoneFactor[i,1] :=0;
+    end if;
+  end for;
+
 equation
   for i in 1:numZones loop
     connect(intGains[(i*3) - 2], airFlowRate.relOccupation[i]) annotation (Line(

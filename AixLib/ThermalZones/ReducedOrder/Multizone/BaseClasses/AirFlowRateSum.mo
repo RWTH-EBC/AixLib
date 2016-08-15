@@ -3,13 +3,14 @@ model AirFlowRateSum
   "Air flow rate based on given profile or on occupation and convertion from m3/(m2h) to m3/s"
 
   parameter Integer dimension "Number of Zones";
-  parameter DataBase.Buildings.ZoneBaseRecord zoneParam[dimension] "Zone Setup";
   parameter Boolean withProfile = false
-    "Choose which input should be considered" annotation(choices(choice =  false
+    "Input that should be considered" annotation(choices(choice =  false
         "Relative Occupation",choice = true "Profile",radioButtons = true));
+  parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam[dimension] "Records of zones";
+
 protected
   Real airFlowVector[dimension]
-    "Temp Variable to sum up the air flow in the zones";
+    "Sum of air flow in the zones";
 public
   Modelica.Blocks.Interfaces.RealInput profile
     "Input profile for AHU operation"
@@ -24,11 +25,11 @@ public
         iconTransformation(extent={{-120,-60},{-80,-20}})));
 equation
   if withProfile then
-    airFlowVector * 3600 = ((zoneParam.minAHU + (zoneParam.maxAHU - zoneParam.minAHU) * profile) .* zoneParam.RoomArea);
+    airFlowVector * 3600 = ((zoneParam.minAHU + (zoneParam.maxAHU - zoneParam.minAHU) * profile) .* zoneParam.AZone);
   else
-    airFlowVector * 3600 = ((zoneParam.minAHU + (zoneParam.maxAHU - zoneParam.minAHU) .* relOccupation) .* zoneParam.RoomArea);
+    airFlowVector * 3600 = ((zoneParam.minAHU + (zoneParam.maxAHU - zoneParam.minAHU) .* relOccupation) .* zoneParam.AZone);
   end if;
-  (airFlowRateOutput) = Building.LowOrder.BaseClasses.SumCondition(
+  (airFlowRateOutput) = AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.SumCondition(
       airFlowVector,
       zoneParam.withAHU,
       dimension);

@@ -10,7 +10,7 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
     Dialog(connectorSizing=true, tab="General",group="Ports"));
   Modelica.Blocks.Interfaces.RealInput ventRate(
     final quantity="VolumeFlowRate",
-    final unit="1/h")
+    final unit="1/h") if ATot > 0 or zoneParam.VAir > 0
     "Ventilation and infiltration rate"
     annotation (
       Placement(transformation(
@@ -34,7 +34,7 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC",
-    min=0)
+    min=0) if ATot > 0 or zoneParam.VAir > 0
     "Ventilation and infiltration temperature"
     annotation (Placement(
         transformation(extent={{-120,-60},{-80,-20}}), iconTransformation(

@@ -3,14 +3,15 @@ model AirFlowRateSplit
   "Splits a given air flow rate into parts and converts unit from m3/s to 1/h"
 
   parameter Integer dimension "Number of Zones";
-  parameter DataBase.Buildings.ZoneBaseRecord zoneParam[dimension] "Zone Setup";
   parameter Boolean withProfile = false
     "Choose which input should be considered" annotation(choices(choice =  false
         "Relative Occupation",choice = true "Profile",radioButtons = true));
+  parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam[dimension] "Records of zones";
+
 protected
   Real airFlowShare[dimension] "Share of zones at air flow";
   Real airFlowVector[dimension]
-    "Temp Variable to sum up the air flow in the zones";
+    "Sum of air flow in the zones";
   Real airFlowRateOutput "Sum of air flow rates";
 public
   Modelica.Blocks.Interfaces.RealInput profile
@@ -35,16 +36,16 @@ public
         iconTransformation(extent={{-120,-20},{-80,20}})));
 equation
   if withProfile then
-    airFlowVector * 3600 = ((zoneParam.minAHU + (zoneParam.maxAHU - zoneParam.minAHU) * profile) .* zoneParam.RoomArea);
+    airFlowVector * 3600 = ((zoneParam.minAHU + (zoneParam.maxAHU - zoneParam.minAHU) * profile) .* zoneParam.AZone);
   else
-    airFlowVector * 3600 = ((zoneParam.minAHU + (zoneParam.maxAHU - zoneParam.minAHU) .* relOccupation) .* zoneParam.RoomArea);
+    airFlowVector * 3600 = ((zoneParam.minAHU + (zoneParam.maxAHU - zoneParam.minAHU) .* relOccupation) .* zoneParam.AZone);
   end if;
   (airFlowRateOutput,airFlowShare) =
-    Building.LowOrder.BaseClasses.SumCondition(
+    AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.SumCondition(
       airFlowVector,
       zoneParam.withAHU,
       dimension);
-  airFlowSplit.*zoneParam.Vair=airFlowShare*airFlow*3600;
+  airFlowSplit.*zoneParam.VAir=airFlowShare*airFlow*3600;
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),           Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={
