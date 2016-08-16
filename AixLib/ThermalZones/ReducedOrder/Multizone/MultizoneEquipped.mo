@@ -61,7 +61,9 @@ model MultizoneEquipped
   RC.BaseClasses.ThermSplitter splitterThermPercentAir(
     splitFactor=zoneFactor,
     nOut=1,
-    nIn=numZones) if ASurTot > 0 or VAir > 0 annotation (Placement(transformation(
+    nIn=numZones) if ASurTot > 0 or VAir > 0
+    "Collector of indoor air temperatures of all zones"
+                                             annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=0,
         origin={54,-28})));
@@ -105,7 +107,7 @@ model MultizoneEquipped
     dp_sup=dpAHU_sup,
     dp_eta=dpAHU_eta,
     eta_sup=effFanAHU_sup,
-    eta_eta=effFanAHU_eta) "Choose Air Handling Unit" annotation (
+    eta_eta=effFanAHU_eta) "Air Handling Unit"        annotation (
      Placement(transformation(extent={{-52,10},{18,40}})), choices(choice(
           redeclare AixLib.Airflow.AirHandlingUnit.AHU AirHandlingUnit
           "with AHU"), choice(redeclare AixLib.Airflow.AirHandlingUnit.NoAHU
@@ -115,7 +117,7 @@ model MultizoneEquipped
   AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.AirFlowRateSum airFlowRate(
     dimension=numZones,
     withProfile=true,
-    zoneParam=zoneParam)
+    zoneParam=zoneParam) "Pre-processor for AHU inputs"
     annotation (Placement(transformation(extent={{-72,22},{-60,34}})));
   Modelica.Blocks.Interfaces.RealInput TSetCooler[numZones](
     final quantity="ThermodynamicTemperature",
@@ -131,18 +133,18 @@ model MultizoneEquipped
         origin={-38,-98})));
   Modelica.Blocks.Interfaces.RealOutput Pel(
    final quantity="Power",
-   final unit="W") if ASurTot > 0 or VAir > 0 "The consumed electrical power supplied from the mains"
+   final unit="W") if ASurTot > 0 or VAir > 0 "Electrical power of AHU"
                                                             annotation (
       Placement(transformation(extent={{94,0},{114,20}}), iconTransformation(
           extent={{100,6},{114,20}})));
   Modelica.Blocks.Interfaces.RealOutput PHeatAHU(final quantity="HeatFlowRate",
       final unit="W") if ASurTot > 0 or VAir > 0
-    "The absorbed heating power supplied from a heating circuit" annotation (
+    "Thermal power of AHU for heating"                           annotation (
       Placement(transformation(extent={{94,-20},{114,0}}), iconTransformation(
           extent={{100,-14},{114,0}})));
   Modelica.Blocks.Interfaces.RealOutput PCoolAHU(final quantity="HeatFlowRate",
       final unit="W") if ASurTot > 0 or VAir > 0
-    "The absorbed cooling power supplied from a cooling circuit" annotation (
+    "Thermal power of AHU for cooling"                           annotation (
       Placement(transformation(extent={{94,-40},{114,-20}}), iconTransformation(
           extent={{100,-34},{114,-20}})));
   Modelica.Blocks.Interfaces.RealOutput PHeater[size(heaterCooler, 1)](final
@@ -161,11 +163,13 @@ model MultizoneEquipped
         rotation=90,
         origin={23,53})));
   Modelica.Blocks.Nonlinear.Limiter minTemp(uMax=1000, uMin=1) if ASurTot > 0 or VAir > 0
+    "Temperature limiter for measured indoor air temperature for AHU"
     annotation (Placement(transformation(extent={{34,-33},{24,-23}})));
   AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.AirFlowRateSplit airFlowRateSplit(
     dimension=numZones,
     withProfile=true,
-    zoneParam=zoneParam) if ASurTot > 0 or VAir > 0 annotation (Placement(transformation(
+    zoneParam=zoneParam) if ASurTot > 0 or VAir > 0
+    "Post-processor for AHU outputs"                annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=90,
         origin={44,28})));
@@ -175,6 +179,7 @@ protected
 
 public
   BaseClasses.RelToAbsHum relToAbsHum
+    "Converter from relative humidity to absolute humidity"
     annotation (Placement(transformation(extent={{-72,4},{-62,14}})));
 initial algorithm
   for i in 1:numZones loop
