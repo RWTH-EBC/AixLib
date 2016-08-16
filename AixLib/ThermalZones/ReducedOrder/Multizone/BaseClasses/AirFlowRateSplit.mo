@@ -23,16 +23,12 @@ public
     "Input for relative occupation"                             annotation (
       Placement(transformation(extent={{-120,-74},{-80,-34}}),
         iconTransformation(extent={{-120,-74},{-80,-34}})));
-  Modelica.Blocks.Interfaces.RealOutput airFlowSplit[dimension](
-  final quantity="VolumeFlowRate",
-  final unit="1/h")
-    "Output for calculated air flow rateOutput for calculated air flow shares"
+  Modelica.Blocks.Interfaces.RealOutput airFlowOut[dimension](final quantity=
+        "VolumeFlowRate", final unit="1/h") "Splitted air flow rate"
     annotation (Placement(transformation(extent={{80,-12},{120,28}}),
         iconTransformation(extent={{80,-12},{120,28}})));
-  Modelica.Blocks.Interfaces.RealInput airFlow(
-  final quantity="VolumeFlowRate",
-  final unit="m3/s")
-    "Output for calculated air flow rateInput for air flow rate"
+  Modelica.Blocks.Interfaces.RealInput airFlowIn(final quantity=
+        "VolumeFlowRate", final unit="m3/s") "Aggregated air flow rate"
     annotation (Placement(transformation(extent={{-120,-20},{-80,20}}),
         iconTransformation(extent={{-120,-20},{-80,20}})));
 equation
@@ -46,7 +42,7 @@ equation
       airFlowVector,
       zoneParam.withAHU,
       dimension);
-  airFlowSplit.*zoneParam.VAir=airFlowShare*airFlow*3600;
+  airFlowOut .* zoneParam.VAir = airFlowShare*airFlowIn*3600;
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),           Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={Text(

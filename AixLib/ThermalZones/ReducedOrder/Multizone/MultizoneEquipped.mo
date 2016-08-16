@@ -212,8 +212,7 @@ equation
           19.75}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(airFlowRate.airFlowRateOutput, AirHandlingUnit.Vflow_in) annotation (
-      Line(
+  connect(airFlowRate.airFlow, AirHandlingUnit.Vflow_in) annotation (Line(
       points={{-60,28},{-58,28},{-58,21.25},{-50.6,21.25}},
       color={0,0,127},
       smooth=Smooth.None));
@@ -264,9 +263,8 @@ equation
   connect(minTemp.y, AirHandlingUnit.T_extractAir) annotation (Line(points={{23.5,
           -28},{20,-28},{20,-16},{26,-16},{26,35.5},{12.4,35.5}},
         color={0,0,127}));
-  connect(zone.ventRate, airFlowRateSplit.airFlowSplit) annotation (Line(
-        points={{50.6,57.2},{50,57.2},{50,38},{43.52,38},{43.52,34}},
-                                                                color={0,0,127}));
+  connect(zone.ventRate, airFlowRateSplit.airFlowOut) annotation (Line(points={
+          {50.6,57.2},{50,57.2},{50,38},{43.52,38},{43.52,34}}, color={0,0,127}));
   connect(AHU[4], airFlowRateSplit.profile) annotation (Line(points={{-100,-1},
           {-100,-1},{-100,-18},{-86,-18},{-86,2},{40,2},{40,10},{40.4,10},{40.4,
           22}},                                                         color={0,
@@ -297,8 +295,8 @@ equation
       extent={{6,3},{6,3}}));
   connect(relToAbsHum.absHum, AirHandlingUnit.X_outdoorAir) annotation (Line(
         points={{-61,9},{-56,9},{-56,15.25},{-47.8,15.25}}, color={0,0,127}));
-  connect(airFlowRateSplit.airFlow, AirHandlingUnit.Vflow_out) annotation (Line(
-        points={{44,22},{44,12},{28,12},{28,44},{-56,44},{-56,31},{-50.6,31}},
+  connect(airFlowRateSplit.airFlowIn, AirHandlingUnit.Vflow_out) annotation (
+      Line(points={{44,22},{44,12},{28,12},{28,44},{-56,44},{-56,31},{-50.6,31}},
         color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{

@@ -16,9 +16,8 @@ public
   Modelica.Blocks.Interfaces.RealInput profile
     "Input profile for AHU operation"
     annotation (Placement(transformation(extent={{-120,20},{-80,60}})));
-  Modelica.Blocks.Interfaces.RealOutput airFlowRateOutput(
-  final quantity="VolumeFlowRate",
-  final unit="m3/s") "Output for calculated air flow rate"
+  Modelica.Blocks.Interfaces.RealOutput airFlow(final quantity="VolumeFlowRate",
+      final unit="m3/s") "Air flow rate"
     annotation (Placement(transformation(extent={{80,-20},{120,20}})));
   Modelica.Blocks.Interfaces.RealInput relOccupation[dimension]
     "Input for relative occupation"                             annotation (
@@ -30,10 +29,11 @@ equation
   else
     airFlowVector * 3600 = ((zoneParam.minAHU + (zoneParam.maxAHU - zoneParam.minAHU) .* relOccupation) .* zoneParam.AZone);
   end if;
-  (airFlowRateOutput) = AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.SumCondition(
-      airFlowVector,
-      zoneParam.withAHU,
-      dimension);
+  (airFlow) =
+    AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.SumCondition(
+    airFlowVector,
+    zoneParam.withAHU,
+    dimension);
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),           Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={Text(
