@@ -5,7 +5,7 @@ block AirFlowRateSum
 
   parameter Integer dimension "Number of Zones";
   parameter Boolean withProfile = false
-    "Input that should be considered" annotation(choices(choice =  false
+    "Profile or occupancy as control value for AHU" annotation(choices(choice =  false
         "Relative Occupation",choice = true "Profile",radioButtons = true));
   parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam[dimension] "Records of zones";
 

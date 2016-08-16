@@ -6,7 +6,7 @@ function SumCondition
 
   input Boolean condition[dimension] "Vector of conditions";
 
-  input Integer dimension "dimension of inputs";
+  input Integer dimension "Dimension of inputs";
 
   output Real vectorSum = 0 "Sum of vector elements where condition is true";
 
