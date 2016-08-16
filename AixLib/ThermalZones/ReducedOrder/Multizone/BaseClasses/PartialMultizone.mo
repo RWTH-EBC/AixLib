@@ -17,7 +17,7 @@ partial model PartialMultizone "Partial model for multizone models"
   BoundaryConditions.WeatherData.Bus weaBus
     "Weather data bus"
     annotation (Placement(
-    transformation(extent={{-117,39},{-83,71}}), iconTransformation(
+    transformation(extent={{-117,53},{-83,85}}), iconTransformation(
     extent={{-110,44},{-90,64}})));
   Modelica.Blocks.Interfaces.RealInput intGains[3*numZones]
     "Input profiles for internal gains persons, machines, light" annotation (
@@ -38,7 +38,7 @@ partial model PartialMultizone "Partial model for multizone models"
         iconTransformation(extent={{-110,-80},{-90,-60}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad[size(zone, 1)] if ASurTot > 0
     "Convective internal gains"
-    annotation (Placement(transformation(extent={{-110,-46},{-90,-26}}),
+    annotation (Placement(transformation(extent={{-110,-26},{-90,-46}}),
         iconTransformation(extent={{-110,-46},{-90,-26}})));
   Modelica.Blocks.Interfaces.RealOutput TAir[size(zone, 1)] if ASurTot > 0 or VAir > 0
     "Indoor air temperature"
@@ -49,39 +49,39 @@ partial model PartialMultizone "Partial model for multizone models"
   replaceable AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped zone[numZones] constrainedby
     AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone(
                                                                     zoneParam=zoneParam, each nPorts=nPorts)
-    "Thermal zone model" annotation (Placement(transformation(extent={{38,35},
-            {80,76}})),choicesAllMatching=true);
+    "Thermal zone model" annotation (Placement(transformation(extent={{38,49},{
+            80,90}})), choicesAllMatching=true);
 
 equation
   for i in 1:numZones loop
     connect(intGains[(i*3) - 2], zone[i].intGains[1]) annotation (Line(
-        points={{76,-100},{76,-30},{76,41.56},{75.8,41.56}},
+        points={{76,-100},{76,55.56},{75.8,55.56}},
         color={0,0,127},
         smooth=Smooth.None));
     connect(intGains[(i*3) - 1], zone[i].intGains[2]);
     connect(intGains[(i*3)], zone[i].intGains[3]);
     connect(zone[i].weaBus, weaBus) annotation (Line(
-      points={{46.4,55.09},{-24,55.09},{-24,55},{-100,55}},
+      points={{46.4,69.09},{-24,69.09},{-24,69},{-100,69}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
     if nPorts > 0 then
-      connect(zone[i].ports[nPorts], ports[nPorts*(i-1)+1:nPorts*i]) annotation (Line(points={{62.99,43.2},{62.99,-46},
-          {-1,-46},{-1,-100}},
+      connect(zone[i].ports[nPorts], ports[nPorts*(i-1)+1:nPorts*i]) annotation (Line(points={{62.99,
+              57.2},{62.99,-46},{-1,-46},{-1,-100}},
                            color={0,127,255}));
     end if;
   end for;
-  connect(zone.intGainsConv, intGainsConv) annotation (Line(points={{80,48.94},
-          {86,48.94},{86,-78},{66,-78},{66,-78},{-92,-78},{-92,-70},{-100,-70}},
+  connect(zone.intGainsConv, intGainsConv) annotation (Line(points={{80,62.94},
+          {86,62.94},{86,-78},{66,-78},{-92,-78},{-92,-70},{-100,-70}},
                                          color={191,0,0}));
-  connect(zone.TRad, TRad) annotation (Line(points={{82.1,61.24},{94,61.24},{94,
+  connect(zone.TRad, TRad) annotation (Line(points={{82.1,75.24},{94,75.24},{94,
           60},{94,39},{110,39}}, color={0,0,127}));
-  connect(zone.TAir, TAir) annotation (Line(points={{82.1,66.98},{98,66.98},{98,
+  connect(zone.TAir, TAir) annotation (Line(points={{82.1,80.98},{98,80.98},{98,
           67},{110,67}}, color={0,0,127}));
-  connect(zone.intGainsRad, intGainsRad) annotation (Line(points={{80,55.5},{90,
-          55.5},{90,-76},{60,-76},{-90,-76},{-90,-36},{-100,-36}}, color={191,0,
+  connect(zone.intGainsRad, intGainsRad) annotation (Line(points={{80,69.5},{90,
+          69.5},{90,-76},{60,-76},{-90,-76},{-90,-36},{-100,-36}}, color={191,0,
           0}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
