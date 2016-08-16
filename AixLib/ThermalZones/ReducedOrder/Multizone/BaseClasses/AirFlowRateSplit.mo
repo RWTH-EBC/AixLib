@@ -1,6 +1,7 @@
 within AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses;
-model AirFlowRateSplit
+block AirFlowRateSplit
   "Splits a given air flow rate into parts and converts unit from m3/s to 1/h"
+  extends Modelica.Blocks.Icons.Block;
 
   parameter Integer dimension "Number of Zones";
   parameter Boolean withProfile = false
@@ -48,60 +49,12 @@ equation
   airFlowSplit.*zoneParam.VAir=airFlowShare*airFlow*3600;
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),           Icon(coordinateSystem(
-          preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={
-        Ellipse(
-          extent={{16,62},{-64,-6}},
-          fillPattern=FillPattern.Solid,
-          fillColor={170,213,255},
-          pattern=LinePattern.None),
-        Ellipse(
-          extent={{-6,18},{-74,-48}},
-          fillColor={170,213,255},
-          fillPattern=FillPattern.Solid,
-          pattern=LinePattern.None),
-        Ellipse(
-          extent={{56,50},{-6,0}},
-          fillColor={170,213,255},
-          fillPattern=FillPattern.Solid,
-          pattern=LinePattern.None),
-        Ellipse(
-          extent={{42,24},{-26,-40}},
-          fillColor={170,213,255},
-          fillPattern=FillPattern.Solid,
-          pattern=LinePattern.None),
-        Ellipse(
-          extent={{72,20},{30,-16}},
-          fillColor={170,213,255},
-          fillPattern=FillPattern.Solid,
-          pattern=LinePattern.None),
-        Text(
-          extent={{-84,-62},{90,-90}},
-          pattern=LinePattern.None,
-          fillColor={170,213,255},
-          fillPattern=FillPattern.Solid,
-          lineColor={0,0,255},
-          textString="%name"),
-        Text(
-          extent={{26,10},{72,-10}},
-          pattern=LinePattern.None,
-          fillColor={170,213,255},
-          fillPattern=FillPattern.Solid,
-          textString="Air",
-          lineColor={0,0,0}),
-        Text(
-          extent={{-68,-2},{16,-30}},
-          pattern=LinePattern.None,
-          fillColor={170,213,255},
-          fillPattern=FillPattern.Solid,
+          preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={Text(
+          extent={{-72,38},{58,-10}},
           lineColor={0,0,0},
-          textString="Occup."),
-        Text(
-          extent={{-58,46},{48,14}},
-          pattern=LinePattern.None,
-          fillColor={170,213,255},
-          fillPattern=FillPattern.Solid,
-          textString="Schedule",
-          lineColor={0,0,0})}),
+          textString="m3/s
+ -> 
+1/h")}),
     Documentation(info="<html>
 <p>This model calculates the volume flow (e.g. for an Air Handling Unit) dependent on:</p>
 <ul>
