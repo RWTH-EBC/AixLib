@@ -90,26 +90,28 @@ model MultizoneEquipped
    final quantity="Power",
    final unit="W") if ASurTot > 0 or VAir > 0 "Electrical power of AHU"
                                                             annotation (
-      Placement(transformation(extent={{74,-26},{94,-6}}),iconTransformation(
-          extent={{80,-20},{94,-6}})));
+      Placement(transformation(extent={{100,-14},{120,6}}),
+                                                          iconTransformation(
+          extent={{80,-20},{100,0}})));
   Modelica.Blocks.Interfaces.RealOutput PHeatAHU(final quantity="HeatFlowRate",
       final unit="W") if ASurTot > 0 or VAir > 0
     "Thermal power of AHU for heating"                           annotation (
-      Placement(transformation(extent={{94,-20},{114,0}}), iconTransformation(
-          extent={{100,-14},{114,0}})));
+      Placement(transformation(extent={{100,-28},{120,-8}}),
+                                                           iconTransformation(
+          extent={{80,-40},{100,-20}})));
   Modelica.Blocks.Interfaces.RealOutput PCoolAHU(final quantity="HeatFlowRate",
       final unit="W") if ASurTot > 0 or VAir > 0
     "Thermal power of AHU for cooling"                           annotation (
-      Placement(transformation(extent={{94,-40},{114,-20}}), iconTransformation(
-          extent={{100,-34},{114,-20}})));
+      Placement(transformation(extent={{100,-40},{120,-20}}),iconTransformation(
+          extent={{80,-60},{100,-40}})));
   Modelica.Blocks.Interfaces.RealOutput PHeater[size(heaterCooler, 1)](final
       quantity="HeatFlowRate", final unit="W") if ASurTot > 0 or VAir > 0 "Power for heating" annotation (
       Placement(transformation(extent={{100,-54},{120,-34}}),
-        iconTransformation(extent={{100,-52},{114,-38}})));
+        iconTransformation(extent={{80,-80},{100,-60}})));
   Modelica.Blocks.Interfaces.RealOutput PCooler[size(heaterCooler, 1)](final
       quantity="HeatFlowRate", final unit="W") if ASurTot > 0 or VAir > 0 "Power for cooling" annotation (
-      Placement(transformation(extent={{94,-76},{114,-56}}), iconTransformation(
-          extent={{100,-70},{114,-56}})));
+      Placement(transformation(extent={{100,-68},{120,-48}}),iconTransformation(
+          extent={{80,-100},{100,-80}})));
   Utilities.Sources.HeaterCooler.HeaterCoolerPI heaterCooler[numZones](
     final zoneParam=zoneParam,
     each recOrSep=true,
@@ -232,20 +234,19 @@ equation
   connect(TSetHeat, heaterCooler.setPointHeat) annotation (Line(points={{-46,-100},
           {-46,-100},{-46,-74},{-32.14,-74},{-32.14,-66.36}}, color={0,0,127}));
   connect(AirHandlingUnit.Pel, Pel) annotation (Line(points={{0.15,11.875},{
-          0.15,-4.125},{56,-4.125},{92,-4.125},{92,-16},{84,-16}},
+          0.15,-4.125},{56,-4.125},{92,-4.125},{92,-4},{110,-4}},
                                                  color={0,0,127}));
   connect(AirHandlingUnit.QflowH, PHeatAHU) annotation (Line(points={{-6.85,
-          11.875},{-6.85,-10},{-6,-10},{93,-10},{104,-10}},           color={0,0,
+          11.875},{-6.85,-18},{-6,-18},{110,-18}},                    color={0,0,
           127}));
   connect(AirHandlingUnit.QflowC, PCoolAHU) annotation (Line(points={{-20.85,
-          11.875},{-20.85,-38},{-18,-38},{92,-38},{92,-30},{104,-30}},   color={
+          11.875},{-20.85,-38},{-18,-38},{92,-38},{92,-30},{110,-30}},   color={
           0,0,127}));
   connect(heaterCooler.heatingPower, PHeater) annotation (Line(points={{-22,
           -51.8},{38,-51.8},{92,-51.8},{92,-50},{92,-44},{110,-44}},
                                                               color={0,0,127}));
   connect(heaterCooler.coolingPower, PCooler) annotation (Line(points={{-22,
-          -57.78},{12,-57.78},{12,-58},{92,-58},{92,-66},{104,-66}},
-                                                             color={0,0,127}));
+          -57.78},{12,-57.78},{12,-58},{92,-58},{110,-58}},  color={0,0,127}));
   connect(replicatorTemperatureVentilation.y, zone.ventTemp)
     annotation (Line(points={{23,58.5},{23,61.505},{43.25,61.505}},
                                                              color={0,0,127}));

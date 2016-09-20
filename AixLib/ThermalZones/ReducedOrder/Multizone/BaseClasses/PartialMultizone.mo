@@ -43,11 +43,11 @@ partial model PartialMultizone "Partial model for multizone models"
   Modelica.Blocks.Interfaces.RealOutput TAir[size(zone, 1)] if ASurTot > 0 or VAir > 0
     "Indoor air temperature"
     annotation (Placement(transformation(extent={{100,71},{120,91}}),
-        iconTransformation(extent={{80,25},{100,44}})));
+        iconTransformation(extent={{80,29},{100,48}})));
   Modelica.Blocks.Interfaces.RealOutput TRad[size(zone, 1)] if ASurTot > 0
     "Mean indoor radiation temperature"
     annotation (Placement(transformation(extent={{100,49},{120,69}}),
-        iconTransformation(extent={{80,1},{100,20}})));
+        iconTransformation(extent={{80,7},{100,26}})));
   replaceable AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped zone[numZones] constrainedby
     AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone(
                                                                    final zoneParam=zoneParam, each final nPorts=nPorts)
@@ -90,7 +90,7 @@ equation
             100}})),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
          graphics={                                                       Text(
-          extent={{-80,-150},{100,-110}},
+          extent={{-80,-170},{100,-130}},
           lineColor={0,0,255},
           textString="%name%"),
         Rectangle(
