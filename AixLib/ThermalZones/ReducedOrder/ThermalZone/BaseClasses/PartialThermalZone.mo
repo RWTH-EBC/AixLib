@@ -42,8 +42,8 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv if
     ATot > 0 or zoneParam.VAir > 0
     "Convective internal gains"
-    annotation (Placement(transformation(extent={{100,-60},{120,-40}}),
-                              iconTransformation(extent={{100,-60},{120,-40}})));
+    annotation (Placement(transformation(extent={{94,-12},{114,8}}),
+                              iconTransformation(extent={{94,-12},{114,8}})));
   RC.FourElements ROM(
     final nPorts=nPorts,
     redeclare final package Medium = Medium,
@@ -85,8 +85,8 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
   Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts](
     redeclare package Medium = Medium)
     "Auxilliary fluid inlets and outlets to indoor air volume"
-    annotation (Placement(transformation(extent={{-46,-96},{44,-72}}),
-        iconTransformation(extent={{-50,-96},{52,-72}})));
+    annotation (Placement(transformation(extent={{-49,-106},{49,-82}}),
+        iconTransformation(extent={{-47,-96},{47,-72}})));
   Modelica.Blocks.Interfaces.RealOutput TAir if ATot > 0 or zoneParam.VAir > 0
     "Indoor air temperature"
     annotation (Placement(transformation(extent={{100,46},{120,66}}),
@@ -94,12 +94,12 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
   Modelica.Blocks.Interfaces.RealOutput TRad if ATot > 0
     "Mean indoor radiation temperature"
     annotation (Placement(transformation(
-          extent={{100,18},{120,38}}), iconTransformation(extent={{100,18},{120,
-            38}})));
+          extent={{100,28},{120,48}}), iconTransformation(extent={{100,28},{120,
+            48}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad if ATot > 0
     "Convective internal gains"
-    annotation (Placement(transformation(extent={{90,
-            -8},{110,12}}), iconTransformation(extent={{100,-20},{120,0}})));
+    annotation (Placement(transformation(extent={{94,8},{114,28}}),
+                            iconTransformation(extent={{100,-20},{120,0}})));
   BoundaryConditions.WeatherData.Bus weaBus
     "Weather data bus"
     annotation (Placement(
@@ -114,16 +114,16 @@ equation
   connect(ROM.TAir, TAir) annotation (Line(points={{87,62},{98,62},{98,56},{110,
           56}}, color={0,0,127}));
   connect(ROM.ports, ports) annotation (Line(points={{77,28.85},{77,-4},{48,-4},
-          {48,-44},{17,-44},{17,-84},{-1,-84}}, color={0,127,255}));
-  connect(ROM.intGainsConv, intGainsConv) annotation (Line(points={{86,50},{92,
-          50},{92,-50},{110,-50}},
-                               color={191,0,0}));
-  connect(ROM.TRad, TRad) annotation (Line(points={{87,58},{96,58},{96,40},{96,28},
-          {110,28}}, color={0,0,127}));
+          {48,-44},{0,-44},{0,-94}},            color={0,127,255}));
+  connect(ROM.intGainsConv, intGainsConv) annotation (Line(points={{86,50},{92,50},
+          {92,-2},{104,-2}},   color={191,0,0}));
+  connect(ROM.TRad, TRad) annotation (Line(points={{87,58},{96,58},{96,40},{96,38},
+          {110,38}}, color={0,0,127}));
   connect(TRad, TRad)
-    annotation (Line(points={{110,28},{110,28}}, color={0,0,127}));
+    annotation (Line(points={{110,38},{110,38}}, color={0,0,127}));
   connect(ROM.intGainsRad, intGainsRad) annotation (Line(points={{86.2,54},{94,54},
-          {94,2},{100,2}}, color={191,0,0}));
+          {94,18},{104,18}},
+                           color={191,0,0}));
   annotation(Icon(coordinateSystem(preserveAspectRatio=false,  extent={{-100,-100},
             {100,100}}),                                                                                                    graphics={                                Text(extent={{
               -80,114},{92,64}},                                                                                                                                                                            lineColor=
