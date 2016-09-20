@@ -7,21 +7,21 @@ model Multizone
     final unit="K",
     displayUnit="degC",
     min=0) "Ventilation and infiltration temperature" annotation (Placement(
-        transformation(extent={{-128,-8},{-88,32}}), iconTransformation(
-        extent={{-6,-6},{6,6}},
+        transformation(extent={{-120,-12},{-80,28}}),iconTransformation(
+        extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={-98,26})));
+        origin={-90,18})));
   Modelica.Blocks.Interfaces.RealInput ventRate[numZones](final
       quantity="VolumeFlowRate", final unit="1/h")
     "Ventilation and infiltration rate" annotation (Placement(transformation(
-          extent={{-132,-34},{-92,6}}),  iconTransformation(extent={{-104,-6},{
-            -92,6}})));
+          extent={{-120,-40},{-80,0}}),  iconTransformation(extent={{-100,-20},
+            {-80,0}})));
 equation
-  connect(zone.ventRate, ventRate) annotation (Line(points={{50.6,43.2},{50.6,
-          43.2},{50.6,-14},{-112,-14}},
+  connect(zone.ventRate, ventRate) annotation (Line(points={{50.6,57.2},{50.6,
+          57.2},{50.6,-20},{-100,-20}},
                                 color={0,0,127}));
-  connect(ventTemp, zone.ventTemp) annotation (Line(points={{-108,12},{-34,12},
-          {-34,47.505},{43.25,47.505}},       color={0,0,127}));
+  connect(ventTemp, zone.ventTemp) annotation (Line(points={{-100,8},{-34,8},{
+          -34,61.505},{43.25,61.505}},        color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})), Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}})),

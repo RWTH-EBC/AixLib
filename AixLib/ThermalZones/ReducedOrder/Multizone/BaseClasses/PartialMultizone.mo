@@ -18,37 +18,39 @@ partial model PartialMultizone "Partial model for multizone models"
     "Weather data bus"
     annotation (Placement(
     transformation(extent={{-117,53},{-83,85}}), iconTransformation(
-    extent={{-110,44},{-90,64}})));
+    extent={{-90,30},{-70,50}})));
   Modelica.Blocks.Interfaces.RealInput intGains[3*numZones]
     "Input profiles for internal gains persons, machines, light" annotation (
       Placement(transformation(
         extent={{20,-20},{-20,20}},
         rotation=-90,
         origin={76,-100}), iconTransformation(
-        extent={{-7,-7},{7,7}},
+        extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={53,-99})));
+        origin={56,-100})));
   Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts*numZones]
     "Auxilliary fluid inlets and outlets to indoor air volume"
-    annotation (Placement(transformation(extent={{-40,-109},{38,-91}}),
-        iconTransformation(extent={{-24,-105},{38,-91}})));
+    annotation (Placement(transformation(extent={{-36,-108},{42,-90}}),
+        iconTransformation(extent={{-42,-110},{42,-90}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv[size(zone, 1)] if ASurTot > 0 or VAir > 0
     "Convective internal gains"
     annotation (Placement(transformation(extent={{-110,-80},{-90,-60}}),
-        iconTransformation(extent={{-110,-80},{-90,-60}})));
+        iconTransformation(extent={{-100,-80},{-80,-60}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad[size(zone, 1)] if ASurTot > 0
     "Convective internal gains"
-    annotation (Placement(transformation(extent={{-110,-26},{-90,-46}}),
-        iconTransformation(extent={{-110,-46},{-90,-26}})));
+    annotation (Placement(transformation(extent={{-110,-30},{-90,-50}}),
+        iconTransformation(extent={{-100,-46},{-80,-26}})));
   Modelica.Blocks.Interfaces.RealOutput TAir[size(zone, 1)] if ASurTot > 0 or VAir > 0
     "Indoor air temperature"
-    annotation (Placement(transformation(extent={{100,57},{120,77}})));
+    annotation (Placement(transformation(extent={{100,71},{120,91}}),
+        iconTransformation(extent={{80,25},{100,44}})));
   Modelica.Blocks.Interfaces.RealOutput TRad[size(zone, 1)] if ASurTot > 0
     "Mean indoor radiation temperature"
-    annotation (Placement(transformation(extent={{100,29},{120,49}})));
+    annotation (Placement(transformation(extent={{100,49},{120,69}}),
+        iconTransformation(extent={{80,1},{100,20}})));
   replaceable AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped zone[numZones] constrainedby
     AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone(
-                                                                    zoneParam=zoneParam, each nPorts=nPorts)
+                                                                   final zoneParam=zoneParam, each final nPorts=nPorts)
     "Thermal zone model" annotation (Placement(transformation(extent={{38,49},{
             80,90}})), choicesAllMatching=true);
 
@@ -69,19 +71,19 @@ equation
       extent={{6,3},{6,3}}));
     if nPorts > 0 then
       connect(zone[i].ports[nPorts], ports[nPorts*(i-1)+1:nPorts*i]) annotation (Line(points={{62.99,
-              57.2},{62.99,-46},{-1,-46},{-1,-100}},
+              57.2},{62.99,-82},{4,-82},{3,-82},{3,-99}},
                            color={0,127,255}));
     end if;
   end for;
-  connect(zone.intGainsConv, intGainsConv) annotation (Line(points={{80,62.94},
-          {86,62.94},{86,-78},{66,-78},{-92,-78},{-92,-70},{-100,-70}},
+  connect(zone.intGainsConv, intGainsConv) annotation (Line(points={{80,62.94},{
+          86,62.94},{86,-78},{66,-78},{-100,-78},{-100,-70}},
                                          color={191,0,0}));
   connect(zone.TRad, TRad) annotation (Line(points={{82.1,75.24},{94,75.24},{94,
-          60},{94,39},{110,39}}, color={0,0,127}));
+          60},{94,59},{110,59}}, color={0,0,127}));
   connect(zone.TAir, TAir) annotation (Line(points={{82.1,80.98},{98,80.98},{98,
-          67},{110,67}}, color={0,0,127}));
+          81},{110,81}}, color={0,0,127}));
   connect(zone.intGainsRad, intGainsRad) annotation (Line(points={{80,69.5},{90,
-          69.5},{90,-76},{60,-76},{-90,-76},{-90,-36},{-100,-36}}, color={191,0,
+          69.5},{90,-76},{60,-76},{-90,-76},{-90,-40},{-100,-40}}, color={191,0,
           0}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
@@ -92,38 +94,38 @@ equation
           lineColor={0,0,255},
           textString="%name%"),
         Rectangle(
-          extent={{-60,-80},{60,40}},
+          extent={{-80,-90},{80,52}},
           lineColor={95,95,95},
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid),
         Polygon(
-          points={{-80,40},{0,80},{80,40},{-80,40}},
+          points={{-100,52},{0,100},{100,52},{-100,52}},
           lineColor={95,95,95},
           smooth=Smooth.None,
           fillColor={217,72,72},
           fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{-38,20},{-8,-16}},
+          extent={{-54,22},{-20,-20}},
           lineColor={95,95,95},
           fillColor={0,128,255},
           fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{10,20},{40,-16}},
-          lineColor={95,95,95},
-          fillColor={0,128,255},
-          fillPattern=FillPattern.Solid),
-        Rectangle(
-          extent={{-12,-44},{12,-80}},
+          extent={{-16,-38},{16,-90}},
           lineColor={95,95,95},
           fillColor={154,77,0},
           fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{-42,20},{-4,24}},
+          extent={{-58,22},{-16,26}},
           lineColor={95,95,95},
           fillColor={95,95,95},
           fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{6,20},{44,24}},
+          extent={{20,22},{54,-20}},
+          lineColor={95,95,95},
+          fillColor={0,128,255},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{16,22},{58,26}},
           lineColor={95,95,95},
           fillColor={95,95,95},
           fillPattern=FillPattern.Solid)}),
