@@ -17,20 +17,20 @@ protected
 public
   Modelica.Blocks.Interfaces.RealInput profile
     "Input profile for AHU operation"
-    annotation (Placement(transformation(extent={{-120,40},{-80,80}}),
-        iconTransformation(extent={{-120,40},{-80,80}})));
+    annotation (Placement(transformation(extent={{-140,40},{-100,80}}),
+        iconTransformation(extent={{-140,40},{-100,80}})));
   Modelica.Blocks.Interfaces.RealInput relOccupation[dimension]
     "Input for relative occupation"                             annotation (
-      Placement(transformation(extent={{-120,-74},{-80,-34}}),
-        iconTransformation(extent={{-120,-74},{-80,-34}})));
+      Placement(transformation(extent={{-140,-74},{-100,-34}}),
+        iconTransformation(extent={{-140,-74},{-100,-34}})));
   Modelica.Blocks.Interfaces.RealOutput airFlowOut[dimension](final quantity=
         "VolumeFlowRate", final unit="1/h") "Splitted air flow rate"
-    annotation (Placement(transformation(extent={{80,-12},{120,28}}),
-        iconTransformation(extent={{80,-12},{120,28}})));
+    annotation (Placement(transformation(extent={{100,-20},{140,20}}),
+        iconTransformation(extent={{100,-20},{140,20}})));
   Modelica.Blocks.Interfaces.RealInput airFlowIn(final quantity=
         "VolumeFlowRate", final unit="m3/s") "Aggregated air flow rate"
-    annotation (Placement(transformation(extent={{-120,-20},{-80,20}}),
-        iconTransformation(extent={{-120,-20},{-80,20}})));
+    annotation (Placement(transformation(extent={{-140,-20},{-100,20}}),
+        iconTransformation(extent={{-140,-20},{-100,20}})));
 equation
   if withProfile then
     airFlowVector * 3600 = ((zoneParam.minAHU + (zoneParam.maxAHU - zoneParam.minAHU) * profile) .* zoneParam.AZone);

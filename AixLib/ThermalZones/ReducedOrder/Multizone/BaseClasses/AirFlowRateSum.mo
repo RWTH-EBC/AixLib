@@ -15,14 +15,16 @@ protected
 public
   Modelica.Blocks.Interfaces.RealInput profile
     "Input profile for AHU operation"
-    annotation (Placement(transformation(extent={{-120,20},{-80,60}})));
+    annotation (Placement(transformation(extent={{-140,20},{-100,60}}),
+        iconTransformation(extent={{-140,20},{-100,60}})));
   Modelica.Blocks.Interfaces.RealOutput airFlow(final quantity="VolumeFlowRate",
       final unit="m3/s") "Air flow rate"
-    annotation (Placement(transformation(extent={{80,-20},{120,20}})));
+    annotation (Placement(transformation(extent={{100,-20},{140,20}}),
+        iconTransformation(extent={{100,-20},{140,20}})));
   Modelica.Blocks.Interfaces.RealInput relOccupation[dimension]
     "Input for relative occupation"                             annotation (
-      Placement(transformation(extent={{-120,-60},{-80,-20}}),
-        iconTransformation(extent={{-120,-60},{-80,-20}})));
+      Placement(transformation(extent={{-140,-60},{-100,-20}}),
+        iconTransformation(extent={{-140,-60},{-100,-20}})));
 equation
   if withProfile then
     airFlowVector * 3600 = ((zoneParam.minAHU + (zoneParam.maxAHU - zoneParam.minAHU) * profile) .* zoneParam.AZone);
