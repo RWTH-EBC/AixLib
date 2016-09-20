@@ -57,33 +57,34 @@ partial model PartialMultizone "Partial model for multizone models"
 equation
   for i in 1:numZones loop
     connect(intGains[(i*3) - 2], zone[i].intGains[1]) annotation (Line(
-        points={{76,-100},{76,55.56},{75.8,55.56}},
+        points={{76,-100},{76,50.64},{75.8,50.64}},
         color={0,0,127},
         smooth=Smooth.None));
     connect(intGains[(i*3) - 1], zone[i].intGains[2]);
     connect(intGains[(i*3)], zone[i].intGains[3]);
     connect(zone[i].weaBus, weaBus) annotation (Line(
-      points={{46.4,69.09},{-24,69.09},{-24,69},{-100,69}},
+      points={{38,69.5},{-24,69.5},{-24,69},{-100,69}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
     if nPorts > 0 then
-      connect(zone[i].ports[nPorts], ports[nPorts*(i-1)+1:nPorts*i]) annotation (Line(points={{62.99,
-              57.2},{62.99,-82},{4,-82},{3,-82},{3,-95}},
+      connect(zone[i].ports[nPorts], ports[nPorts*(i-1)+1:nPorts*i]) annotation (Line(points={{59,
+              52.28},{59,-82},{4,-82},{3,-82},{3,-95}},
                            color={0,127,255}));
     end if;
   end for;
-  connect(zone.intGainsConv, intGainsConv) annotation (Line(points={{80,62.94},{
-          86,62.94},{86,-78},{66,-78},{-100,-78},{-100,-70}},
+  connect(zone.intGainsConv, intGainsConv) annotation (Line(points={{82.1,59.25},
+          {86,59.25},{86,-78},{66,-78},{-100,-78},{-100,-70}},
                                          color={191,0,0}));
-  connect(zone.TRad, TRad) annotation (Line(points={{82.1,75.24},{94,75.24},{94,
+  connect(zone.TRad, TRad) annotation (Line(points={{82.1,77.29},{94,77.29},{94,
           60},{94,59},{110,59}}, color={0,0,127}));
-  connect(zone.TAir, TAir) annotation (Line(points={{82.1,80.98},{98,80.98},{98,
+  connect(zone.TAir, TAir) annotation (Line(points={{82.1,81.8},{98,81.8},{98,
           81},{110,81}}, color={0,0,127}));
-  connect(zone.intGainsRad, intGainsRad) annotation (Line(points={{80,69.5},{90,
-          69.5},{90,-76},{60,-76},{-90,-76},{-90,-40},{-100,-40}}, color={191,0,
+  connect(zone.intGainsRad, intGainsRad) annotation (Line(points={{82.1,67.45},
+          {90,67.45},{90,-76},{60,-76},{-90,-76},{-90,-40},{-100,-40}},
+                                                                   color={191,0,
           0}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
