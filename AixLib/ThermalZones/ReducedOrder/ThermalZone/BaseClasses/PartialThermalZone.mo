@@ -44,6 +44,30 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
     "Convective internal gains"
     annotation (Placement(transformation(extent={{94,-12},{114,8}}),
                               iconTransformation(extent={{100,-60},{120,-40}})));
+  Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts](
+    redeclare package Medium = Medium)
+    "Auxilliary fluid inlets and outlets to indoor air volume"
+    annotation (Placement(transformation(extent={{-49,-106},{49,-82}}),
+        iconTransformation(extent={{-47,-96},{47,-72}})));
+  Modelica.Blocks.Interfaces.RealOutput TAir if ATot > 0 or zoneParam.VAir > 0
+    "Indoor air temperature"
+    annotation (Placement(transformation(extent={{100,46},{120,66}}),
+        iconTransformation(extent={{100,50},{120,70}})));
+  Modelica.Blocks.Interfaces.RealOutput TRad if ATot > 0
+    "Mean indoor radiation temperature"
+    annotation (Placement(transformation(
+          extent={{100,28},{120,48}}), iconTransformation(extent={{100,28},{120,
+            48}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad if ATot > 0
+    "Convective internal gains"
+    annotation (Placement(transformation(extent={{94,8},{114,28}}),
+                            iconTransformation(extent={{100,-20},{120,0}})));
+  BoundaryConditions.WeatherData.Bus weaBus
+    "Weather data bus"
+    annotation (Placement(
+    transformation(extent={{-117,18},{-83,50}}), iconTransformation(
+    extent={{-110,-10},{-90,10}})));
+
   RC.FourElements ROM(
     final nPorts=nPorts,
     redeclare final package Medium = Medium,
@@ -82,29 +106,6 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
     final T_start=zoneParam.T_start)
     "RC calculation core"
     annotation (Placement(transformation(extent={{38,28},{86,64}})));
-  Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts](
-    redeclare package Medium = Medium)
-    "Auxilliary fluid inlets and outlets to indoor air volume"
-    annotation (Placement(transformation(extent={{-49,-106},{49,-82}}),
-        iconTransformation(extent={{-47,-96},{47,-72}})));
-  Modelica.Blocks.Interfaces.RealOutput TAir if ATot > 0 or zoneParam.VAir > 0
-    "Indoor air temperature"
-    annotation (Placement(transformation(extent={{100,46},{120,66}}),
-        iconTransformation(extent={{100,50},{120,70}})));
-  Modelica.Blocks.Interfaces.RealOutput TRad if ATot > 0
-    "Mean indoor radiation temperature"
-    annotation (Placement(transformation(
-          extent={{100,28},{120,48}}), iconTransformation(extent={{100,28},{120,
-            48}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad if ATot > 0
-    "Convective internal gains"
-    annotation (Placement(transformation(extent={{94,8},{114,28}}),
-                            iconTransformation(extent={{100,-20},{120,0}})));
-  BoundaryConditions.WeatherData.Bus weaBus
-    "Weather data bus"
-    annotation (Placement(
-    transformation(extent={{-117,18},{-83,50}}), iconTransformation(
-    extent={{-110,-10},{-90,10}})));
 
 protected
   parameter Real ATot = (sum(zoneParam.AExt) + sum(zoneParam.AWin) +
