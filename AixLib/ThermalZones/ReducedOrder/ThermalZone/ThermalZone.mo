@@ -127,8 +127,8 @@ protected
     "Prescribed temperature for floor plate outdoor surface temperature"
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
     rotation=90,origin={62,18})));
-  Modelica.Blocks.Sources.Constant TSoil(
-    final k=zoneParam.Tsoil) if zoneParam.AFloor > 0
+  Modelica.Blocks.Sources.Constant TSoil(final k=zoneParam.TSoil) if
+                                zoneParam.AFloor > 0
     "Outdoor surface temperature for floor plate"
     annotation (Placement(transformation(extent={{4,-4},{-4,4}},
     rotation=180,origin={43,8})));
