@@ -114,7 +114,7 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Boolean HeaterOn "Use heater component";
   parameter Real hCool "Upper limit controller output";
   parameter Real lCool "Lower limit controller output";
-  parameter Real KRCool "Gain of the controller, abs(l_cooler/80)";
+  parameter Real KRCool "Gain of the controller";
   parameter Modelica.SIunits.Time TNCool
     "Time constant of the controller";
   parameter Boolean CoolerOn "Use chiller component";
