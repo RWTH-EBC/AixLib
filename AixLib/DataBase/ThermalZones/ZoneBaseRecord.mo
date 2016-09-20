@@ -58,7 +58,7 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Modelica.SIunits.Emissivity aRoof "Coefficient of absorption of roof (outdoor)";
 
   parameter Modelica.SIunits.Emissivity aExt "Coefficient of absorption of exterior walls (outdoor)";
-  parameter Modelica.SIunits.Temperature Tsoil "Temperature of soil";
+  parameter Modelica.SIunits.Temperature TSoil "Temperature of soil";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaWallOut
     "Exterior walls convective coefficient of heat transfer (outdoor)";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaRadWall
