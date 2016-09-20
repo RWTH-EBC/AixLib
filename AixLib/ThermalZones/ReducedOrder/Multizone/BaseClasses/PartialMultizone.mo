@@ -27,7 +27,7 @@ partial model PartialMultizone "Partial model for multizone models"
         origin={76,-100}), iconTransformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={56,-110})));
+        origin={60,-110})));
   Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts*numZones]
     "Auxilliary fluid inlets and outlets to indoor air volume"
     annotation (Placement(transformation(extent={{-36,-104},{42,-86}}),
@@ -90,7 +90,7 @@ equation
             100}})),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
          graphics={                                                       Text(
-          extent={{-80,-170},{100,-130}},
+          extent={{-90,96},{90,136}},
           lineColor={0,0,255},
           textString="%name%"),
         Rectangle(
