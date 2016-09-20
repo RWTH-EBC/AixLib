@@ -43,7 +43,7 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
     ATot > 0 or zoneParam.VAir > 0
     "Convective internal gains"
     annotation (Placement(transformation(extent={{94,-12},{114,8}}),
-                              iconTransformation(extent={{94,-12},{114,8}})));
+                              iconTransformation(extent={{100,-60},{120,-40}})));
   RC.FourElements ROM(
     final nPorts=nPorts,
     redeclare final package Medium = Medium,
@@ -90,7 +90,7 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
   Modelica.Blocks.Interfaces.RealOutput TAir if ATot > 0 or zoneParam.VAir > 0
     "Indoor air temperature"
     annotation (Placement(transformation(extent={{100,46},{120,66}}),
-        iconTransformation(extent={{100,46},{120,66}})));
+        iconTransformation(extent={{100,50},{120,70}})));
   Modelica.Blocks.Interfaces.RealOutput TRad if ATot > 0
     "Mean indoor radiation temperature"
     annotation (Placement(transformation(
