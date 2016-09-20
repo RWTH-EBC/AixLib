@@ -27,11 +27,11 @@ partial model PartialMultizone "Partial model for multizone models"
         origin={76,-100}), iconTransformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={56,-100})));
+        origin={56,-110})));
   Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts*numZones]
     "Auxilliary fluid inlets and outlets to indoor air volume"
-    annotation (Placement(transformation(extent={{-36,-108},{42,-90}}),
-        iconTransformation(extent={{-42,-110},{42,-90}})));
+    annotation (Placement(transformation(extent={{-36,-104},{42,-86}}),
+        iconTransformation(extent={{-40,-120},{40,-100}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv[size(zone, 1)] if ASurTot > 0 or VAir > 0
     "Convective internal gains"
     annotation (Placement(transformation(extent={{-110,-80},{-90,-60}}),
@@ -71,7 +71,7 @@ equation
       extent={{6,3},{6,3}}));
     if nPorts > 0 then
       connect(zone[i].ports[nPorts], ports[nPorts*(i-1)+1:nPorts*i]) annotation (Line(points={{62.99,
-              57.2},{62.99,-82},{4,-82},{3,-82},{3,-99}},
+              57.2},{62.99,-82},{4,-82},{3,-82},{3,-95}},
                            color={0,127,255}));
     end if;
   end for;
@@ -94,7 +94,7 @@ equation
           lineColor={0,0,255},
           textString="%name%"),
         Rectangle(
-          extent={{-80,-90},{80,52}},
+          extent={{-80,-100},{80,52}},
           lineColor={95,95,95},
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid),
@@ -110,7 +110,7 @@ equation
           fillColor={0,128,255},
           fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{-16,-38},{16,-90}},
+          extent={{-16,-48},{16,-100}},
           lineColor={95,95,95},
           fillColor={154,77,0},
           fillPattern=FillPattern.Solid),
