@@ -40,11 +40,17 @@ partial model PartialMultizone "Partial model for multizone models"
     "Convective internal gains"
     annotation (Placement(transformation(extent={{-110,-30},{-90,-50}}),
         iconTransformation(extent={{-100,-46},{-80,-26}})));
-  Modelica.Blocks.Interfaces.RealOutput TAir[size(zone, 1)] if ASurTot > 0 or VAir > 0
+  Modelica.Blocks.Interfaces.RealOutput TAir[size(zone, 1)](
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC") if ASurTot > 0 or VAir > 0
     "Indoor air temperature"
     annotation (Placement(transformation(extent={{100,71},{120,91}}),
         iconTransformation(extent={{80,29},{100,48}})));
-  Modelica.Blocks.Interfaces.RealOutput TRad[size(zone, 1)] if ASurTot > 0
+  Modelica.Blocks.Interfaces.RealOutput TRad[size(zone, 1)](
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC") if ASurTot > 0
     "Mean indoor radiation temperature"
     annotation (Placement(transformation(extent={{100,49},{120,69}}),
         iconTransformation(extent={{80,7},{100,26}})));

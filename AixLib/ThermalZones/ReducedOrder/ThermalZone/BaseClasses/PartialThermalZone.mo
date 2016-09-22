@@ -49,11 +49,17 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
     "Auxilliary fluid inlets and outlets to indoor air volume"
     annotation (Placement(transformation(extent={{-49,-106},{49,-82}}),
         iconTransformation(extent={{-47,-96},{47,-72}})));
-  Modelica.Blocks.Interfaces.RealOutput TAir if ATot > 0 or zoneParam.VAir > 0
+  Modelica.Blocks.Interfaces.RealOutput TAir(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC") if ATot > 0 or zoneParam.VAir > 0
     "Indoor air temperature"
     annotation (Placement(transformation(extent={{100,46},{120,66}}),
         iconTransformation(extent={{100,50},{120,70}})));
-  Modelica.Blocks.Interfaces.RealOutput TRad if ATot > 0
+  Modelica.Blocks.Interfaces.RealOutput TRad(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC") if ATot > 0
     "Mean indoor radiation temperature"
     annotation (Placement(transformation(
           extent={{100,28},{120,48}}), iconTransformation(extent={{100,28},{120,

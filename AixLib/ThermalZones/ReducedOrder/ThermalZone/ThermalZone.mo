@@ -41,12 +41,13 @@ model ThermalZone
     final wfWall=zoneParam.wfWall,
     final wfWin=zoneParam.wfWin,
     final wfGro=zoneParam.wfGro,
-    final TGro=zoneParam.Tsoil,
     final alphaWallOut=zoneParam.alphaWallOut,
     final alphaRadWall=zoneParam.alphaRadWall,
     final alphaWinOut=zoneParam.alphaWinOut,
     final alphaRadWin=zoneParam.alphaRadWin,
-    final aExt=zoneParam.aExt) if (sum(zoneParam.AExt) + sum(zoneParam.AWin)) > 0
+    final aExt=zoneParam.aExt,
+    final TGro=zoneParam.TSoil) if
+                                  (sum(zoneParam.AExt) + sum(zoneParam.AWin)) > 0
     "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-36,-2},{-16,18}})));
   Modelica.Blocks.Sources.Constant constSunblindWall[zoneParam.nOrientations](
