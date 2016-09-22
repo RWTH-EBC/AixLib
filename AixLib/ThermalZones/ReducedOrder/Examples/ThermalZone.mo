@@ -5,7 +5,11 @@ model ThermalZone "Illustrates the use of ThermalZone"
 
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone(
       redeclare package Medium = Modelica.Media.Air.SimpleAir, zoneParam=
-        AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office())
+        AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
+    ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
+            each der_T(fixed=true)))),
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    T_start=293.15)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3
                                             weaDat(

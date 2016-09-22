@@ -54,9 +54,17 @@ partial model PartialMultizone "Partial model for multizone models"
     "Mean indoor radiation temperature"
     annotation (Placement(transformation(extent={{100,49},{120,69}}),
         iconTransformation(extent={{80,7},{100,26}})));
-  replaceable AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped zone[numZones] constrainedby
+  replaceable AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped zone[numZones]                                                          constrainedby
     AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone(
-                                                                   final zoneParam=zoneParam, each final nPorts=nPorts)
+                                                                   final zoneParam=zoneParam, each final nPorts=nPorts,     each final energyDynamics=energyDynamics,
+    each final massDynamics=massDynamics,
+    each final p_start=p_start,
+    each final T_start=T_start,
+    each final X_start=X_start,
+    each final C_start=C_start,
+    each final C_nominal=C_nominal,
+    each final mSenFac=mSenFac,
+    redeclare each final package Medium = Medium)
     "Thermal zone model" annotation (Placement(transformation(extent={{38,49},{
             80,90}})), choicesAllMatching=true);
 

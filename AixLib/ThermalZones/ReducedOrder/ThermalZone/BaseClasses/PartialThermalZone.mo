@@ -109,7 +109,14 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
     final RRoof=zoneParam.RRoof,
     final RRoofRem=zoneParam.RRoofRem,
     final CRoof=zoneParam.CRoof,
-    final T_start=zoneParam.T_start)
+    final energyDynamics=energyDynamics,
+    final massDynamics=massDynamics,
+    final p_start=p_start,
+    final X_start=X_start,
+    final T_start=T_start,
+    final C_start=C_start,
+    final C_nominal=C_nominal,
+    final mSenFac=mSenFac)
     "RC calculation core"
     annotation (Placement(transformation(extent={{38,28},{86,64}})));
 
