@@ -46,8 +46,7 @@ model ThermalZone
     final alphaWinOut=zoneParam.alphaWinOut,
     final alphaRadWin=zoneParam.alphaRadWin,
     final aExt=zoneParam.aExt,
-    final TGro=zoneParam.TSoil) if
-                                  (sum(zoneParam.AExt) + sum(zoneParam.AWin)) > 0
+    final TGro=zoneParam.TSoil) if (sum(zoneParam.AExt) + sum(zoneParam.AWin)) > 0
     "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-36,-2},{-16,18}})));
   Modelica.Blocks.Sources.Constant constSunblindWall[zoneParam.nOrientations](
@@ -129,7 +128,7 @@ protected
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
     rotation=90,origin={62,18})));
   Modelica.Blocks.Sources.Constant TSoil(final k=zoneParam.TSoil) if
-                                zoneParam.AFloor > 0
+    zoneParam.AFloor > 0
     "Outdoor surface temperature for floor plate"
     annotation (Placement(transformation(extent={{4,-4},{-4,4}},
     rotation=180,origin={43,8})));
@@ -318,11 +317,18 @@ equation
           -21},{84,-21},{84,-22},{86,-22},{92,-22},{92,50},{86,50},{86,50}},
         color={191,0,0}));
   annotation(Documentation(info="<html>
-<p>This model combines building physics and models for internal gains. It is thought as a ready-to-use thermal zone model. For convenience, all parameters are collected in a record (see<a href=\"AixLib.DataBase.Buildings.ZoneBaseRecord\"> ZoneBaseRecord</a>). </p>
+<p>This model combines building physics and models for internal gains. It is
+thought as a ready-to-use thermal zone model. For convenience, all parameters
+are collected in a record (see<a href=\"AixLib.DataBase.Buildings.ZoneBaseRecord\"> ZoneBaseRecord</a>). </p>
 <p><br/><b>References</b> </p>
 <ul>
-<li>German Association of Engineers: Guideline VDI 6007-1, March 2012: Calculation of transient thermal response of rooms and buildings - Modelling of rooms. </li>
-<li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D. (2014): Low order thermal network models for dynamic simulations of buildings on city district scale. In: Building and Environment 73, p. 223&ndash;231. DOI: <a href=\"http://dx.doi.org/10.1016/j.buildenv.2013.12.016\">10.1016/j.buildenv.2013.12.016</a>. </li>
+<li>German Association of Engineers: Guideline VDI 6007-1, March 2012:
+Calculation of transient thermal response of rooms and buildings - Modelling of
+rooms. </li>
+<li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D. (2014): Low
+order thermal network models for dynamic simulations of buildings on city
+district scale. In: Building and Environment 73, p. 223&ndash;231. DOI:
+<a href=\"http://dx.doi.org/10.1016/j.buildenv.2013.12.016\">10.1016/j.buildenv.2013.12.016</a>. </li>
 </ul>
 <p><b>Example Results</b> </p>
 <p>See <a href=\"Examples\">Examples</a>.</p>

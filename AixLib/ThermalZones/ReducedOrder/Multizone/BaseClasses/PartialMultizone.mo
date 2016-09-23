@@ -2,10 +2,14 @@ within AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses;
 partial model PartialMultizone "Partial model for multizone models"
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
-  parameter Integer buildingID "Unique identifier of the building";
-  parameter Modelica.SIunits.Volume VAir(min=0) "Indoor air volume of building";
-  parameter Modelica.SIunits.Area ABuilding(min=0) "Net floor area of building";
-  parameter Modelica.SIunits.Area ASurTot(min=0) "Total surface area of building walls and windows (including interior walls)";
+  parameter Integer buildingID
+    "Unique identifier of the building";
+  parameter Modelica.SIunits.Volume VAir(min=0)
+    "Indoor air volume of building";
+  parameter Modelica.SIunits.Area ABuilding(min=0)
+    "Net floor area of building";
+  parameter Modelica.SIunits.Area ASurTot(min=0)
+    "Total surface area of building walls and windows (including interior walls)";
   parameter Integer numZones(min=1)
     "Number of zones";
   parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam[:]
@@ -20,43 +24,49 @@ partial model PartialMultizone "Partial model for multizone models"
     transformation(extent={{-117,53},{-83,85}}), iconTransformation(
     extent={{-90,30},{-70,50}})));
   Modelica.Blocks.Interfaces.RealInput intGains[3*numZones]
-    "Input profiles for internal gains persons, machines, light" annotation (
-      Placement(transformation(
-        extent={{20,-20},{-20,20}},
-        rotation=-90,
-        origin={76,-100}), iconTransformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={60,-110})));
+    "Input profiles for internal gains persons, machines, light"
+    annotation (
+    Placement(transformation(
+    extent={{20,-20},{-20,20}},
+    rotation=-90,
+    origin={76,-100}), iconTransformation(
+    extent={{-10,-10},{10,10}},
+    rotation=90,
+    origin={60,-110})));
   Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts*numZones]
     "Auxilliary fluid inlets and outlets to indoor air volume"
     annotation (Placement(transformation(extent={{-36,-104},{42,-86}}),
-        iconTransformation(extent={{-40,-120},{40,-100}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv[size(zone, 1)] if ASurTot > 0 or VAir > 0
+    iconTransformation(extent={{-40,-120},{40,-100}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv[size(zone, 1)]
+    if ASurTot > 0 or VAir > 0
     "Convective internal gains"
     annotation (Placement(transformation(extent={{-110,-80},{-90,-60}}),
-        iconTransformation(extent={{-100,-80},{-80,-60}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad[size(zone, 1)] if ASurTot > 0
+    iconTransformation(extent={{-100,-80},{-80,-60}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad[size(zone, 1)]
+    if ASurTot > 0
     "Convective internal gains"
     annotation (Placement(transformation(extent={{-110,-30},{-90,-50}}),
-        iconTransformation(extent={{-100,-46},{-80,-26}})));
+    iconTransformation(extent={{-100,-46},{-80,-26}})));
   Modelica.Blocks.Interfaces.RealOutput TAir[size(zone, 1)](
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC") if ASurTot > 0 or VAir > 0
     "Indoor air temperature"
     annotation (Placement(transformation(extent={{100,71},{120,91}}),
-        iconTransformation(extent={{80,29},{100,48}})));
+    iconTransformation(extent={{80,29},{100,48}})));
   Modelica.Blocks.Interfaces.RealOutput TRad[size(zone, 1)](
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC") if ASurTot > 0
     "Mean indoor radiation temperature"
     annotation (Placement(transformation(extent={{100,49},{120,69}}),
-        iconTransformation(extent={{80,7},{100,26}})));
-  replaceable AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped zone[numZones]                                                          constrainedby
+    iconTransformation(extent={{80,7},{100,26}})));
+  replaceable AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped zone[numZones]
+    constrainedby
     AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone(
-                                                                   final zoneParam=zoneParam, each final nPorts=nPorts,     each final energyDynamics=energyDynamics,
+    final zoneParam=zoneParam,
+    each final nPorts=nPorts,
+    each final energyDynamics=energyDynamics,
     each final massDynamics=massDynamics,
     each final p_start=p_start,
     each final T_start=T_start,
@@ -65,8 +75,9 @@ partial model PartialMultizone "Partial model for multizone models"
     each final C_nominal=C_nominal,
     each final mSenFac=mSenFac,
     redeclare each final package Medium = Medium)
-    "Thermal zone model" annotation (Placement(transformation(extent={{38,49},{
-            80,90}})), choicesAllMatching=true);
+    "Thermal zone model"
+    annotation (Placement(transformation(extent={{38,49},{
+    80,90}})), choicesAllMatching=true);
 
 equation
   for i in 1:numZones loop
@@ -84,7 +95,8 @@ equation
       index=1,
       extent={{6,3},{6,3}}));
     if nPorts > 0 then
-      connect(zone[i].ports[nPorts], ports[nPorts*(i-1)+1:nPorts*i]) annotation (Line(points={{59,
+      connect(zone[i].ports[nPorts], ports[nPorts*(i-1)+1:nPorts*i])
+      annotation (Line(points={{59,
               52.28},{59,-82},{4,-82},{3,-82},{3,-95}},
                            color={0,127,255}));
     end if;
@@ -146,10 +158,12 @@ equation
           fillPattern=FillPattern.Solid)}),
     Documentation(revisions="<html>
 <ul>
-<li><i>June 22, 2015&nbsp;</i> by Moritz Lauster:<br/>Changed building physics to AixLib</li>
+<li><i>June 22, 2015&nbsp;</i> by Moritz Lauster:<br/>Changed building physics
+to AixLib</li>
 <li><i>April 25, 2014&nbsp;</i> by Ole Odendahl:<br/>Implemented</li>
 </ul>
 </html>", info="<html>
-<p>This is a partial model for multi-zone models. It defines connectors and a replaceable thermal zone model.</p>
+<p>This is a partial model for multi-zone models. It defines connectors and a
+replaceable thermal zone model.</p>
 </html>"));
 end PartialMultizone;

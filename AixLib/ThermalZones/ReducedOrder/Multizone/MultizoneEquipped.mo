@@ -4,9 +4,11 @@ model MultizoneEquipped
   extends
     AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone;
 
-  parameter Boolean heatAHU "Status of heating of AHU"
+  parameter Boolean heatAHU
+    "Status of heating of AHU"
     annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"));
-  parameter Boolean coolAHU "Status of cooling of AHU"
+  parameter Boolean coolAHU
+    "Status of cooling of AHU"
     annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"));
   parameter Boolean dehuAHU=if heatAHU and coolAHU then true
        else false
@@ -24,22 +26,23 @@ model MultizoneEquipped
   parameter Boolean HRS=true
     "Status of Heat Recovery System of AHU"
     annotation (
-      Dialog(tab="AirHandlingUnit", group="AHU Modes"), choices(checkBox=true));
+    Dialog(tab="AirHandlingUnit", group="AHU Modes"), choices(checkBox=true));
   parameter Real effHRSAHU_enabled(
     min=0,
-    max=1) "Efficiency of HRS when enabled"
+    max=1)
+    "Efficiency of HRS when enabled"
     annotation (Dialog(
-      tab="AirHandlingUnit",
-      group="Settings AHU Value",
-      enable=HRS));
+    tab="AirHandlingUnit",
+    group="Settings AHU Value",
+    enable=HRS));
   parameter Real effHRSAHU_disabled(
     min=0,
     max=1)
     "Efficiency of HRS when disabled"
     annotation (Dialog(
-      tab="AirHandlingUnit",
-      group="Settings AHU Value",
-      enable=HRS));
+    tab="AirHandlingUnit",
+    group="Settings AHU Value",
+    enable=HRS));
   parameter Modelica.SIunits.Time sampleRateAHU(min=0) = 1800
     "Time period for sampling"
     annotation (Dialog(tab="AirHandlingUnit", group="Settings for State Machines"));
@@ -56,68 +59,81 @@ model MultizoneEquipped
     "Efficiency of extract fan"
     annotation (Dialog(tab="AirHandlingUnit", group="Fans"));
   Modelica.Blocks.Interfaces.RealInput AHU[4]
-    "Input for AHU Conditions [1]: Desired Air Temperature in K [2]: Desired minimal relative humidity [3]: Desired maximal relative humidity [4]: Schedule Desired Ventilation Flow"
+    "Input for AHU Conditions [1]: Desired Air Temperature in K [2]: Desired
+    minimal relative humidity [3]: Desired maximal relative humidity [4]:
+    Schedule Desired Ventilation Flow"
     annotation (Placement(transformation(
-        extent={{20,20},{-20,-20}},
-        rotation=180,
-        origin={-100,-16}), iconTransformation(
-        extent={{10,-10},{-10,10}},
-        rotation=180,
-        origin={-90,0})));
+    extent={{20,20},{-20,-20}},
+    rotation=180,
+    origin={-100,-16}), iconTransformation(
+    extent={{10,-10},{-10,10}},
+    rotation=180,
+    origin={-90,0})));
   Modelica.Blocks.Interfaces.RealInput TSetHeat[numZones](
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC",
-    min=0) "Set point for heater" annotation (Placement(transformation(
-        extent={{20,-20},{-20,20}},
-        rotation=270,
-        origin={-46,-100}), iconTransformation(
-        extent={{10,-10},{-10,10}},
-        rotation=270,
-        origin={-52,-110})));
+    min=0)
+    "Set point for heater"
+    annotation (Placement(transformation(
+    extent={{20,-20},{-20,20}},
+    rotation=270,
+    origin={-46,-100}), iconTransformation(
+    extent={{10,-10},{-10,10}},
+    rotation=270,
+    origin={-52,-110})));
   Modelica.Blocks.Interfaces.RealInput TSetCool[numZones](
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC",
-    min=0) "Set point for cooler" annotation (Placement(transformation(
-        extent={{20,-20},{-20,20}},
-        rotation=270,
-        origin={-86,-100}), iconTransformation(
-        extent={{10,-10},{-10,10}},
-        rotation=270,
-        origin={-74,-110})));
+    min=0)
+    "Set point for cooler"
+    annotation (Placement(transformation(
+    extent={{20,-20},{-20,20}},
+    rotation=270,
+    origin={-86,-100}), iconTransformation(
+    extent={{10,-10},{-10,10}},
+    rotation=270,
+    origin={-74,-110})));
   Modelica.Blocks.Interfaces.RealOutput Pel(
-   final quantity="Power",
-   final unit="W") if ASurTot > 0 or VAir > 0 "Electrical power of AHU"
-                                                            annotation (
-      Placement(transformation(extent={{100,-14},{120,6}}),
-                                                          iconTransformation(
-          extent={{80,-20},{100,0}})));
+    final quantity="Power",
+    final unit="W") if ASurTot > 0 or VAir > 0
+    "Electrical power of AHU"
+    annotation (Placement(transformation(extent={{100,-14},{120,6}}),
+    iconTransformation(extent={{80,-20},{100,0}})));
   Modelica.Blocks.Interfaces.RealOutput PHeatAHU(final quantity="HeatFlowRate",
-      final unit="W") if ASurTot > 0 or VAir > 0
-    "Thermal power of AHU for heating"                           annotation (
-      Placement(transformation(extent={{100,-28},{120,-8}}),
-                                                           iconTransformation(
-          extent={{80,-40},{100,-20}})));
+    final unit="W") if ASurTot > 0 or VAir > 0
+    "Thermal power of AHU for heating"
+    annotation (
+    Placement(transformation(extent={{100,-28},{120,-8}}),
+    iconTransformation(extent={{80,-40},{100,-20}})));
   Modelica.Blocks.Interfaces.RealOutput PCoolAHU(final quantity="HeatFlowRate",
-      final unit="W") if ASurTot > 0 or VAir > 0
-    "Thermal power of AHU for cooling"                           annotation (
-      Placement(transformation(extent={{100,-40},{120,-20}}),iconTransformation(
-          extent={{80,-60},{100,-40}})));
+    final unit="W") if ASurTot > 0 or VAir > 0
+    "Thermal power of AHU for cooling"
+    annotation (
+    Placement(transformation(extent={{100,-40},{120,-20}}),iconTransformation(
+    extent={{80,-60},{100,-40}})));
   Modelica.Blocks.Interfaces.RealOutput PHeater[numZones](final
-      quantity="HeatFlowRate", final unit="W") if ASurTot > 0 or VAir > 0 "Power for heating" annotation (
-      Placement(transformation(extent={{100,-54},{120,-34}}),
-        iconTransformation(extent={{80,-80},{100,-60}})));
+    quantity="HeatFlowRate", final unit="W") if ASurTot > 0 or VAir > 0
+    "Power for heating"
+    annotation (
+    Placement(transformation(extent={{100,-54},{120,-34}}),
+    iconTransformation(extent={{80,-80},{100,-60}})));
   Modelica.Blocks.Interfaces.RealOutput PCooler[numZones](final
-      quantity="HeatFlowRate", final unit="W") if ASurTot > 0 or VAir > 0 "Power for cooling" annotation (
-      Placement(transformation(extent={{100,-68},{120,-48}}),iconTransformation(
-          extent={{80,-100},{100,-80}})));
+    quantity="HeatFlowRate", final unit="W") if ASurTot > 0 or VAir > 0
+    "Power for cooling"
+    annotation (
+    Placement(transformation(extent={{100,-68},{120,-48}}),iconTransformation(
+    extent={{80,-100},{100,-80}})));
   Utilities.Sources.HeaterCooler.HeaterCoolerPI heaterCooler[numZones](
     final zoneParam=zoneParam,
     each recOrSep=true,
-    each staOrDyn=true) if ASurTot > 0 or VAir > 0 "Heater Cooler with PI control"
+    each staOrDyn=true) if ASurTot > 0 or VAir > 0
+    "Heater Cooler with PI control"
     annotation (Placement(transformation(extent={{-48,-70},{-22,-44}})));
-  replaceable AixLib.Airflow.AirHandlingUnit.AHU AirHandlingUnit if ASurTot > 0 or VAir > 0  constrainedby
+  replaceable AixLib.Airflow.AirHandlingUnit.AHU AirHandlingUnit
+    if ASurTot > 0 or VAir > 0
+    constrainedby
     AixLib.Airflow.AirHandlingUnit.BaseClasses.PartialAHU(
     final cooling=coolAHU,
     final dehumidificationSet=dehuAHU,
@@ -131,34 +147,41 @@ model MultizoneEquipped
     final dp_sup=dpAHU_sup,
     final dp_eta=dpAHU_eta,
     final eta_sup=effFanAHU_sup,
-    final eta_eta=effFanAHU_eta) "Air Handling Unit"        annotation (
-     Placement(transformation(extent={{-52,10},{18,40}})), choices(choice(
-          redeclare AixLib.Airflow.AirHandlingUnit.AHU AirHandlingUnit
-          "with AHU"), choice(redeclare AixLib.Airflow.AirHandlingUnit.NoAHU
-          AirHandlingUnit "AHU does not exist")),Dialog(
-      tab="AirHandlingUnit"));
+    final eta_eta=effFanAHU_eta)
+    "Air Handling Unit"
+    annotation (
+    Placement(transformation(extent={{-52,10},{18,40}})), choices(choice(
+    redeclare AixLib.Airflow.AirHandlingUnit.AHU AirHandlingUnit
+    "with AHU"), choice(redeclare AixLib.Airflow.AirHandlingUnit.NoAHU
+    AirHandlingUnit "AHU does not exist")),Dialog(
+    tab="AirHandlingUnit"));
 
 protected
-  parameter Real zoneFactor[numZones,1](fixed=false) "Calculated zone factors";
-  parameter Real VAirRes(fixed=false) "Resulting air volume in zones supplied by the AHU";
-  Modelica.Blocks.Routing.Replicator replicatorTemperatureVentilation(final nout=
-        numZones) if ASurTot > 0 or VAir > 0
-    "replicates scalar temperature of AHU into a vector[numZones] of identical temperatures"
+  parameter Real zoneFactor[numZones,1](fixed=false)
+    "Calculated zone factors";
+  parameter Real VAirRes(fixed=false)
+    "Resulting air volume in zones supplied by the AHU";
+  Modelica.Blocks.Routing.Replicator replicatorTemperatureVentilation(
+    final nout=numZones) if ASurTot > 0 or VAir > 0
+    "Replicates scalar temperature of AHU into a vector[numZones] of identical
+    temperatures"
     annotation (Placement(transformation(
-        extent={{-5,-5},{5,5}},
-        rotation=90,
-        origin={23,53})));
-  Modelica.Blocks.Nonlinear.Limiter minTemp(uMax=1000, uMin=1) if ASurTot > 0 or VAir > 0
+    extent={{-5,-5},{5,5}},
+    rotation=90,
+    origin={23,53})));
+  Modelica.Blocks.Nonlinear.Limiter minTemp(uMax=1000, uMin=1)
+    if ASurTot > 0 or VAir > 0
     "Temperature limiter for measured indoor air temperature for AHU"
     annotation (Placement(transformation(extent={{30,-33},{20,-23}})));
   AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.AirFlowRateSplit airFlowRateSplit(
     final dimension=numZones,
     withProfile=true,
     final zoneParam=zoneParam) if ASurTot > 0 or VAir > 0
-    "Post-processor for AHU outputs"                annotation (Placement(transformation(
-        extent={{-6,-6},{6,6}},
-        rotation=90,
-        origin={44,28})));
+    "Post-processor for AHU outputs"
+    annotation (Placement(transformation(
+    extent={{-6,-6},{6,6}},
+    rotation=90,
+    origin={44,28})));
   BaseClasses.RelToAbsHum relToAbsHum
     "Converter from relative humidity to absolute humidity"
     annotation (Placement(transformation(extent={{-72,4},{-62,14}})));
@@ -167,17 +190,19 @@ protected
     final nOut=numZones,
     final nIn=1) if        ASurTot > 0 or VAir > 0
     "Collector of indoor air temperatures of all zones"
-                                             annotation (Placement(transformation(
-        extent={{-4,-4},{4,4}},
-        rotation=0,
-        origin={50,-28})));
-  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor TAirAHUAvg if ASurTot > 0 or VAir > 0
-    "Averaged air temperature of the zones which are supplied by the AHU" annotation (Placement(transformation(extent={{42,-32},
-            {34,-24}})));
+    annotation (Placement(transformation(
+    extent={{-4,-4},{4,4}},
+    rotation=0,
+    origin={50,-28})));
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor TAirAHUAvg
+    if ASurTot > 0 or VAir > 0
+    "Averaged air temperature of the zones which are supplied by the AHU"
+    annotation (Placement(transformation(extent={{42,-32},{34,-24}})));
   AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.AirFlowRateSum airFlowRate(
     final dimension=numZones,
     withProfile=true,
-    final zoneParam=zoneParam) "Pre-processor for AHU inputs"
+    final zoneParam=zoneParam)
+    "Pre-processor for AHU inputs"
     annotation (Placement(transformation(extent={{-72,22},{-60,34}})));
 
 initial algorithm
@@ -333,11 +358,20 @@ Cooling"),
           textString="AHU")}),
     Documentation(revisions="<html>
 <ul>
-<li><i>February 26, 2016&nbsp;</i> by Moritz Lauster:<br/>Fixed bug in share of AHU volume flow</li>
-<li><i>June 22, 2015&nbsp;</i> by Moritz Lauster:<br/>Changed building physics to AixLib</li>
+<li><i>February 26, 2016&nbsp;</i> by Moritz Lauster:<br/>Fixed bug in share of
+AHU volume flow</li>
+<li><i>June 22, 2015&nbsp;</i> by Moritz Lauster:<br/>Changed building physics
+to AixLib</li>
 <li><i>April 25, 2014&nbsp;</i> by Ole Odendahl:<br/>Implemented</li>
 </ul>
 </html>", info="<html>
-<p><span style=\"font-family: MS Shell Dlg 2;\">This is a multizone model with a variable number of thermal zones. It adds heater/cooler devices and an air handling unit. Outputs are the thermal demands of the zone heating as well as thermal and electrical demand of the air handling unit. This model is pre-configured and ready-to-use. The<a href=\"AixLib.Building.LowOrder.Multizone.partialMultizone\"> partial class</a> has a replaceable<a href=\"AixLib.Building.LowOrder.ThermalZone\"> thermal zone</a> model, due to the functionalities, <a href=\"AixLib.Building.LowOrder.ThermalZone.ThermalZoneEquipped\">ThermalZoneEquipped</a> is the most suitable recommendation.</span></p>
+<p><span style=\"font-family: MS Shell Dlg 2;\">This is a multizone model with
+a variable number of thermal zones. It adds heater/cooler devices and an air
+handling unit. Outputs are the thermal demands of the zone heating as well as
+thermal and electrical demand of the air handling unit. This model is
+pre-configured and ready-to-use. The<a href=\"AixLib.Building.LowOrder.Multizone.partialMultizone\"> partial class</a>
+has a replaceable<a href=\"AixLib.Building.LowOrder.ThermalZone\"> thermal zone</a>
+model, due to the functionalities, <a href=\"AixLib.Building.LowOrder.ThermalZone.ThermalZoneEquipped\">ThermalZoneEquipped</a>
+is the most suitable recommendation.</span></p>
 </html>"));
 end MultizoneEquipped;

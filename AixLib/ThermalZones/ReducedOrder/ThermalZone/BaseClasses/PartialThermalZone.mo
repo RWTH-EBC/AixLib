@@ -73,7 +73,6 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
     annotation (Placement(
     transformation(extent={{-117,18},{-83,50}}), iconTransformation(
     extent={{-110,-10},{-90,10}})));
-
   RC.FourElements ROM(
     final nPorts=nPorts,
     redeclare final package Medium = Medium,
@@ -139,8 +138,8 @@ equation
           {94,18},{104,18}},
                            color={191,0,0}));
   annotation(Icon(coordinateSystem(preserveAspectRatio=false,  extent={{-100,-100},
-            {100,100}}),                                                                                                    graphics={                                Text(extent={{
-              -80,114},{92,64}},                                                                                                                                                                            lineColor=
+            {100,100}}),graphics={Text(extent={{
+              -80,114},{92,64}},lineColor=
               {0,0,255},
           textString="%name"),
         Rectangle(
@@ -167,10 +166,17 @@ equation
           extent={{10,32},{76,38}},
           lineColor={95,95,95},
           fillColor={95,95,95},
-          fillPattern=FillPattern.Solid)}),                                                       Documentation(info="<html>
-<p>Partial for thermal zone models. It defines connectors and a replaceable <a href=\"AixLib.Building.LowOrder.BaseClasses.BuildingPhysics\">buildingPhysics</a> model.</p>
+          fillPattern=FillPattern.Solid)}),
+          Documentation(info="<html>
+<p>Partial for thermal zone models. It defines connectors and a replaceable
+<a href=\"AixLib.Building.LowOrder.BaseClasses.BuildingPhysics\">buildingPhysics</a> model.</p>
 <h4>Limitation</h4>
-<p>All parameters are collected in one record. This record supports all different <span style=\"font-family: MS Shell Dlg 2;\"><a href=\"AixLib.Building.LowOrder.BaseClasses.BuildingPhysics\">buildingPhysics</a> models (the largest parameter set of all models defines the record) . This means that using a <a href=\"AixLib.Building.LowOrder.BaseClasses.BuildingPhysics\">buildingPhysics</a> model variant 1 is possible with a parameter set defined for variant 2. The user should check that the cominbation of model and parameter set is meaningful.</span></p>
+<p>All parameters are collected in one record. This record supports all
+different <span style=\"font-family: MS Shell Dlg 2;\"><a href=\"AixLib.Building.LowOrder.BaseClasses.BuildingPhysics\">buildingPhysics</a>
+models (the largest parameter set of all models defines the record) . This means
+that using a <a href=\"AixLib.Building.LowOrder.BaseClasses.BuildingPhysics\">buildingPhysics</a>
+model variant 1 is possible with a parameter set defined for variant 2. The user
+should check that the cominbation of model and parameter set is meaningful.</span></p>
 </html>",  revisions = "<html>
  <ul>
    <li><i>March, 2012&nbsp;</i>

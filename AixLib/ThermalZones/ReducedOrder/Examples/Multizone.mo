@@ -8,7 +8,7 @@ model Multizone "Illustrates the use of Multizone"
     buildingID=1,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(
-            thermCapInt(each der_T(fixed=true))))),
+    thermCapInt(each der_T(fixed=true))))),
     T_start=293.15,
     VAir=33500,
     ABuilding=8375,
@@ -19,25 +19,27 @@ model Multizone "Illustrates the use of Multizone"
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office()})
+    "Multizone"
     annotation (Placement(transformation(extent={{32,-8},{52,12}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3
-                                            weaDat(
+    weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
     filNam="modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
     "Weather data reader"
     annotation (Placement(transformation(extent={{-82,30},{-62,50}})));
-  AixLib.BoundaryConditions.WeatherData.Bus
-                                     weaBus "Weather data bus"
+  AixLib.BoundaryConditions.WeatherData.Bus weaBus
+    "Weather data bus"
     annotation (Placement(transformation(extent={{-68,-10},{-34,22}}),
     iconTransformation(extent={{-70,-12},{-50,8}})));
   Modelica.Blocks.Routing.Replicator replicatorTemperatureVentilation(nout=5)
     "Replicates dry bulb air temperature for numZones"
     annotation (Placement(transformation(
-        extent={{-5,-5},{5,5}},
-        rotation=0,
-        origin={-31,-13})));
-  Modelica.Blocks.Sources.Constant const[5](each k=0.2) "Infiltration rate"
+    extent={{-5,-5},{5,5}},
+    rotation=0,
+    origin={-31,-13})));
+  Modelica.Blocks.Sources.Constant const[5](each k=0.2)
+    "Infiltration rate"
     annotation (Placement(transformation(extent={{-36,-38},{-26,-28}})));
   Modelica.Blocks.Sources.CombiTimeTable tableInternalGains(
     tableOnFile=true,
@@ -45,7 +47,8 @@ model Multizone "Illustrates the use of Multizone"
     tableName="Internals",
     fileName=Modelica.Utilities.Files.loadResource(
         "modelica://AixLib/Resources/LowOrder_ExampleData/Internals_Input_6Zone_SIA.txt"),
-    columns=2:16) "Profiles for internal gains"
+    columns=2:16)
+    "Profiles for internal gains"
     annotation (Placement(transformation(extent={{72,-42},{56,-26}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow[5]
     "Radiative heat flow of additional internal gains"
@@ -53,7 +56,8 @@ model Multizone "Illustrates the use of Multizone"
   Modelica.Blocks.Sources.Sine sine(
     amplitude=500,
     freqHz=1/86400,
-    offset=500) "Sinusoidal excitation for additional internal gains"
+    offset=500)
+    "Sinusoidal excitation for additional internal gains"
     annotation (Placement(transformation(extent={{-90,-74},{-70,-54}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow1[5]
     "Convective heat flow of additional internal gains"
@@ -67,15 +71,16 @@ model Multizone "Illustrates the use of Multizone"
   Modelica.Blocks.Routing.Replicator replicatorTemperatureVentilation1(nout=5)
     "Replicates sinusoidal excitation for numZones"
     annotation (Placement(transformation(
-        extent={{-6,-6},{6,6}},
-        rotation=0,
-        origin={-30,-54})));
+    extent={{-6,-6},{6,6}},
+    rotation=0,
+    origin={-30,-54})));
   Modelica.Blocks.Routing.Replicator replicatorTemperatureVentilation2(nout=5)
     "Replicates sinusoidal excitation for numZones"
     annotation (Placement(transformation(
-        extent={{-6,-6},{6,6}},
-        rotation=0,
-        origin={-30,-76})));
+    extent={{-6,-6},{6,6}},
+    rotation=0,
+    origin={-30,-76})));
+    
 equation
   connect(weaDat.weaBus,weaBus)  annotation (Line(
       points={{-62,40},{-51,40},{-51,6}},

@@ -1,7 +1,6 @@
 within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZoneEquipped
-  "Thermal zone model with ventilation,
-  infiltration and internal gains"
+  "Thermal zone model with ventilation, infiltration and internal gains"
   extends AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone;
 
   Controls.VentilationController.VentilationController ventCont(

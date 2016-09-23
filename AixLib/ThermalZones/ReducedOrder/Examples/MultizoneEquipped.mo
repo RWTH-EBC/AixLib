@@ -3,13 +3,12 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
   import AixLib;
   extends Modelica.Icons.Example;
 
-  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped
-                                                       multizone(
+  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
     buildingID=1,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(
-            thermCapInt(each der_T(fixed=true))))),
+    thermCapInt(each der_T(fixed=true))))),
     VAir=33500,
     ABuilding=8375,
     ASurTot=12744.27,
@@ -33,9 +32,9 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
     effHRSAHU_disabled=0.2,
     dpAHU_sup=80000000,
     dpAHU_eta=80000000)
+    "Multizone"
     annotation (Placement(transformation(extent={{32,-8},{52,12}})));
-  AixLib.BoundaryConditions.WeatherData.ReaderTMY3
-                                            weaDat(
+  AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
     filNam="modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
@@ -47,7 +46,8 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
     tableName="Internals",
     fileName=Modelica.Utilities.Files.loadResource(
         "modelica://AixLib/Resources/LowOrder_ExampleData/Internals_Input_6Zone_SIA.txt"),
-    columns=2:16) "Profiles for internal gains"
+    columns=2:16)
+    "Profiles for internal gains"
     annotation (Placement(transformation(extent={{72,-42},{56,-26}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow[5]
     "Radiative heat flow of additional internal gains"
@@ -55,7 +55,8 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
   Modelica.Blocks.Sources.Sine sine(
     amplitude=500,
     freqHz=1/86400,
-    offset=500) "Sinusoidal excitation for additional internal gains"
+    offset=500)
+    "Sinusoidal excitation for additional internal gains"
     annotation (Placement(transformation(extent={{-90,-74},{-70,-54}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow1[5]
     "Convective heat flow of additional internal gains"
@@ -69,15 +70,15 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
   Modelica.Blocks.Routing.Replicator replicatorTemperatureVentilation1(nout=5)
     "Replicates sinusoidal excitation for numZones"
     annotation (Placement(transformation(
-        extent={{-6,-6},{6,6}},
-        rotation=0,
-        origin={-30,-54})));
+    extent={{-6,-6},{6,6}},
+    rotation=0,
+    origin={-30,-54})));
   Modelica.Blocks.Routing.Replicator replicatorTemperatureVentilation2(nout=5)
     "Replicates sinusoidal excitation for numZones"
     annotation (Placement(transformation(
-        extent={{-6,-6},{6,6}},
-        rotation=0,
-        origin={-30,-76})));
+    extent={{-6,-6},{6,6}},
+    rotation=0,
+    origin={-30,-76})));
   Modelica.Blocks.Sources.CombiTimeTable tableAHU(
     tableOnFile=true,
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
@@ -94,9 +95,12 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
     fileName=Modelica.Utilities.Files.loadResource(
         "modelica://AixLib/Resources/LowOrder_ExampleData/Tset_6Zone.txt"),
     columns=2:6)
+    "Set points for heater"
     annotation (Placement(transformation(extent={{72,-66},{56,-50}})));
   Modelica.Blocks.Sources.Constant const[5](each k=0)
+    "Set point for cooler"
     annotation (Placement(transformation(extent={{72,-90},{56,-74}})));
+
 equation
   connect(weaDat.weaBus, multizone.weaBus) annotation (Line(
       points={{-62,40},{-32,40},{-32,6},{34,6}},
