@@ -74,7 +74,7 @@ model MultizoneEquipped
         origin={-46,-100}), iconTransformation(
         extent={{10,-10},{-10,10}},
         rotation=270,
-        origin={-76,-110})));
+        origin={-52,-110})));
   Modelica.Blocks.Interfaces.RealInput TSetCool[numZones](
     final quantity="ThermodynamicTemperature",
     final unit="K",
@@ -85,7 +85,7 @@ model MultizoneEquipped
         origin={-86,-100}), iconTransformation(
         extent={{10,-10},{-10,10}},
         rotation=270,
-        origin={-54,-110})));
+        origin={-74,-110})));
   Modelica.Blocks.Interfaces.RealOutput Pel(
    final quantity="Power",
    final unit="W") if ASurTot > 0 or VAir > 0 "Electrical power of AHU"

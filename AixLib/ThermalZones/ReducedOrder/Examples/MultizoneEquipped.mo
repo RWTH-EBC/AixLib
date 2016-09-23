@@ -1,15 +1,15 @@
 within AixLib.ThermalZones.ReducedOrder.Examples;
-model Multizone "Illustrates the use of Multizone"
+model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
   import AixLib;
   extends Modelica.Icons.Example;
 
-  AixLib.ThermalZones.ReducedOrder.Multizone.Multizone multizone(
+  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped
+                                                       multizone(
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
     buildingID=1,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(
             thermCapInt(each der_T(fixed=true))))),
-    T_start=293.15,
     VAir=33500,
     ABuilding=8375,
     ASurTot=12744.27,
@@ -18,7 +18,8 @@ model Multizone "Illustrates the use of Multizone"
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
-        AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office()})
+        AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office()},
+    T_start=293.15)
     annotation (Placement(transformation(extent={{32,-8},{52,12}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3
                                             weaDat(
@@ -27,18 +28,6 @@ model Multizone "Illustrates the use of Multizone"
     filNam="modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
     "Weather data reader"
     annotation (Placement(transformation(extent={{-82,30},{-62,50}})));
-  AixLib.BoundaryConditions.WeatherData.Bus
-                                     weaBus "Weather data bus"
-    annotation (Placement(transformation(extent={{-68,-10},{-34,22}}),
-    iconTransformation(extent={{-70,-12},{-50,8}})));
-  Modelica.Blocks.Routing.Replicator replicatorTemperatureVentilation(nout=5)
-    "Replicates dry bulb air temperature for numZones"
-    annotation (Placement(transformation(
-        extent={{-5,-5},{5,5}},
-        rotation=0,
-        origin={-31,-13})));
-  Modelica.Blocks.Sources.Constant const[5](each k=0.2) "Infiltration rate"
-    annotation (Placement(transformation(extent={{-36,-38},{-26,-28}})));
   Modelica.Blocks.Sources.CombiTimeTable tableInternalGains(
     tableOnFile=true,
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
@@ -76,29 +65,30 @@ model Multizone "Illustrates the use of Multizone"
         extent={{-6,-6},{6,6}},
         rotation=0,
         origin={-30,-76})));
+  Modelica.Blocks.Sources.CombiTimeTable tableAHU(
+    tableOnFile=true,
+    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+    tableName="AHU",
+    columns=2:5,
+    fileName=Modelica.Utilities.Files.loadResource(
+        "modelica://AixLib/Resources/LowOrder_ExampleData/AHU_Input_6Zone_SIA_4Columns.txt"))
+    "Boundary conditions for air handling unit"
+    annotation (Placement(transformation(extent={{-64,-6},{-48,10}})));
+  Modelica.Blocks.Sources.CombiTimeTable tableTSet(
+    tableOnFile=true,
+    tableName="Tset",
+    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+    fileName=Modelica.Utilities.Files.loadResource(
+        "modelica://AixLib/Resources/LowOrder_ExampleData/Tset_6Zone.txt"),
+    columns=2:6)
+    annotation (Placement(transformation(extent={{72,-66},{56,-50}})));
+  Modelica.Blocks.Sources.Constant const[5](each k=0)
+    annotation (Placement(transformation(extent={{72,-90},{56,-74}})));
 equation
-  connect(weaDat.weaBus,weaBus)  annotation (Line(
-      points={{-62,40},{-51,40},{-51,6}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
   connect(weaDat.weaBus, multizone.weaBus) annotation (Line(
       points={{-62,40},{-32,40},{-32,6},{34,6}},
       color={255,204,51},
       thickness=0.5));
-  connect(weaBus.TDryBul, replicatorTemperatureVentilation.u) annotation (Line(
-      points={{-51,6},{-44,6},{-44,-12},{-37,-12},{-37,-13}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}}));
-  connect(replicatorTemperatureVentilation.y, multizone.ventTemp) annotation (
-      Line(points={{-25.5,-13},{-20,-13},{-20,3.8},{33,3.8}}, color={0,0,127}));
-  connect(const.y, multizone.ventRate) annotation (Line(points={{-25.5,-33},{-18,
-          -33},{-18,1},{33,1}}, color={0,0,127}));
   connect(tableInternalGains.y, multizone.intGains)
     annotation (Line(points={{55.2,-34},{48,-34},{48,-9}}, color={0,0,127}));
   connect(gain.y, replicatorTemperatureVentilation1.u)
@@ -118,7 +108,13 @@ equation
                                 color={191,0,0}));
   connect(prescribedHeatFlow1.port, multizone.intGainsConv) annotation (Line(
         points={{6,-76},{18,-76},{26,-76},{26,-5},{33,-5}}, color={191,0,0}));
+  connect(tableAHU.y, multizone.AHU)
+    annotation (Line(points={{-47.2,2},{14,2},{33,2}}, color={0,0,127}));
+  connect(tableTSet.y, multizone.TSetHeat) annotation (Line(points={{55.2,-58},
+          {36.8,-58},{36.8,-9}}, color={0,0,127}));
+  connect(multizone.TSetCool, const.y) annotation (Line(points={{34.6,-9},{34.6,
+          -82},{55.2,-82}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=3.1536e+007, Interval=3600));
-end Multizone;
+end MultizoneEquipped;
