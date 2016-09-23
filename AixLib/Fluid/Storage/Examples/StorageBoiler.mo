@@ -7,7 +7,7 @@ model StorageBoiler
      Modelica.Media.Water.ConstantPropertyLiquidWater
      constrainedby Modelica.Media.Interfaces.PartialMedium;
 
-  AixLib.HVAC.Storage.Storage storage(
+  AixLib.Fluid.Storage.Storage storage(
     n=10,
     V_HE=0.05,
     kappa=0.4,
@@ -23,9 +23,11 @@ model StorageBoiler
     redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{-56,14},{-36,34}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T = 283.15) annotation(Placement(transformation(extent = {{-94, 14}, {-74, 34}})));
-  Pumps.Pump pump(redeclare package Medium = Medium, m_flow_small=1e-4)
+  AixLib.Fluid.Movers.Pump
+             pump(redeclare package Medium = Medium, m_flow_small=1e-4)
                   annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-32, 62})));
-  HeatGeneration.Boiler boiler(Q_flow_max = 50000, boilerEfficiencyB = AixLib.DataBase.Boiler.BoilerCondensing(),
+  AixLib.Fluid.HeatExchangers.Boiler
+                        boiler(Q_flow_max = 50000, boilerEfficiencyB = AixLib.DataBase.Boiler.BoilerCondensing(),
     redeclare package Medium = Medium,
     m_flow_nominal=0.01)                                                                                          annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {-16, 76})));
   AixLib.Fluid.Sources.FixedBoundary
@@ -33,10 +35,12 @@ model StorageBoiler
                                 annotation(Placement(transformation(extent = {{-86, 70}, {-66, 90}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {6, 60})));
   Modelica.Blocks.Sources.Constant const(k = 273.15 + 80) annotation(Placement(transformation(extent = {{-3, -3}, {3, 3}}, rotation = 180, origin = {13, 69})));
-  Pipes.StaticPipe pipe(D = 0.05, l = 5,
+  AixLib.Fluid.FixedResistances.Pipe
+                   pipe(D = 0.05, l = 5,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                   annotation(Placement(transformation(extent = {{-26, -10}, {-6, 10}})));
-  HydraulicResistances.HydraulicResistance hydraulicResistance(zeta = 1000,
+  AixLib.Fluid.FixedResistances.HydraulicResistance
+                                           hydraulicResistance(zeta = 1000,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                                                      annotation(Placement(transformation(extent = {{8, -10}, {28, 10}})));
   AixLib.Fluid.Sources.Boundary_ph
@@ -48,7 +52,8 @@ model StorageBoiler
   AixLib.Fluid.Sources.FixedBoundary
                       boundary_ph2(nPorts=1, redeclare package Medium = Medium)
                                                      annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation = 180, origin = {-72, 46})));
-  Pipes.StaticPipe pipe1(D = 0.05, l = 5,
+  AixLib.Fluid.FixedResistances.Pipe
+                   pipe1(D = 0.05, l = 5,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                    annotation(Placement(transformation(extent = {{-66, -20}, {-46, 0}})));
 equation
@@ -71,7 +76,7 @@ equation
   connect(boundary_p.ports[1], pump.port_a) annotation (Line(
       points={{-66,80},{-32,80},{-32,72}},
       color={0,127,255}));
-  annotation( experiment(StopTime = 86400, Interval = 60),Documentation(info = "<html>
+  annotation (experiment(StopTime = 86400, Interval = 60),Documentation(info = "<html>
 <h4><font color=\"#008000\">Overview</font></h4>
  <p>This is a simple example of a storage and a boiler.</p>
  </html>", revisions="<html>

@@ -7,7 +7,7 @@ model StorageSolarCollector
      Modelica.Media.Water.ConstantPropertyLiquidWater
      constrainedby Modelica.Media.Interfaces.PartialMedium;
 
-  AixLib.HVAC.Storage.Storage storage(
+  AixLib.Fluid.Storage.Storage storage(
     n=10,
     V_HE=0.05,
     kappa=0.4,
@@ -23,14 +23,16 @@ model StorageSolarCollector
     redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{-56,14},{-36,34}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T = 283.15) annotation(Placement(transformation(extent = {{-94, 14}, {-74, 34}})));
-  Pumps.Pump pump(ControlStrategy = 1,
+  AixLib.Fluid.Movers.Pump
+             pump(ControlStrategy = 1,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                 annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-38, 64})));
   AixLib.Fluid.Sources.FixedBoundary
                      boundary_p(nPorts=1, redeclare package Medium = Medium)
                                 annotation(Placement(transformation(extent = {{-86, 70}, {-66, 90}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {-10, 64})));
-  Pipes.StaticPipe pipe(D = 0.05, l = 5,
+  AixLib.Fluid.FixedResistances.Pipe
+                   pipe(D = 0.05, l = 5,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                   annotation(Placement(transformation(extent = {{-34, -10}, {-14, 10}})));
   AixLib.Fluid.Sources.Boundary_ph
@@ -40,15 +42,18 @@ model StorageSolarCollector
   AixLib.Fluid.Sources.FixedBoundary
                       boundary_ph2(nPorts=1, redeclare package Medium = Medium)
                                                      annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation = 180, origin = {-72, 46})));
-  Pipes.StaticPipe pipe1(D = 0.05, l = 5,
+  AixLib.Fluid.FixedResistances.Pipe
+                   pipe1(D = 0.05, l = 5,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                    annotation(Placement(transformation(extent = {{-68, -20}, {-48, 0}})));
-  HeatGeneration.SolarThermal solarThermal(Collector = AixLib.DataBase.SolarThermal.FlatCollector(), A = 20,
+  AixLib.Fluid.HeatExchangers.SolarThermal
+                              solarThermal(Collector = AixLib.DataBase.SolarThermal.FlatCollector(), A = 20,
     redeclare package Medium = Medium,
     m_flow_nominal=0.01)                                                                                     annotation(Placement(transformation(extent = {{24, -10}, {44, 10}})));
   Modelica.Blocks.Sources.Pulse pulse(period = 3600,               width = 1, amplitude = 60,
     offset=101325)                                                                            annotation(Placement(transformation(extent = {{-142, -14}, {-122, 6}})));
-  AixLib.HVAC.Valves.SimpleValve simpleValve(
+  AixLib.Fluid.Actuators.Valves.SimpleValve
+                                 simpleValve(
     Kvs=2,
     redeclare package Medium = Medium,
     m_flow_small=1e-4) annotation (Placement(transformation(
