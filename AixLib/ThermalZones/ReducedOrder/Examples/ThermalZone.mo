@@ -9,7 +9,7 @@ model ThermalZone "Illustrates the use of ThermalZone"
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
             each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    T_start=293.15)
+    T_start=293.15) "Thermal zone"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3
                                             weaDat(
@@ -22,7 +22,7 @@ model ThermalZone "Illustrates the use of ThermalZone"
                                      weaBus "Weather data bus"
     annotation (Placement(transformation(extent={{-78,-20},{-44,12}}),
     iconTransformation(extent={{-70,-12},{-50,8}})));
-  Modelica.Blocks.Sources.Constant const(k=0.2)
+  Modelica.Blocks.Sources.Constant const(k=0.2) "Infiltration rate"
     annotation (Placement(transformation(extent={{-92,-40},{-72,-20}})));
   Modelica.Blocks.Sources.CombiTimeTable internalGains(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableName = "UserProfiles", fileName = Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/UserProfiles_18599_SIA_Besprechung_Sitzung_Seminar.txt"), columns = {2, 3, 4},
     tableOnFile=false,
@@ -107,20 +107,25 @@ model ThermalZone "Illustrates the use of ThermalZone"
         575940,0,0,0,0; 576000,0,0,0,0; 579540,0,0,0,0; 579600,0,0,0,0; 583140,
         0,0,0,0; 583200,0,0,0,0; 586740,0,0,0,0; 586800,0,0,0,0; 590340,0,0,0,0;
         590400,0,0,0,0; 593940,0,0,0,0; 594000,0,0,0,0; 597540,0,0,0,0; 597600,
-        0,0,0,0; 601140,0,0,0,0; 601200,0,0,0,0; 604740,0,0,0,0])                                                                                                     annotation(Placement(transformation(extent={{-14,-59},
+        0,0,0,0; 601140,0,0,0,0; 601200,0,0,0,0; 604740,0,0,0,0])
+    "Table with profiles for internal gains"                                                                                                                          annotation(Placement(transformation(extent={{-14,-59},
             {0,-45}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
+    "Radiative heat flow of additional internal gains"
     annotation (Placement(transformation(extent={{46,-10},{26,10}})));
   Modelica.Blocks.Sources.Sine sine(
     amplitude=500,
     freqHz=1/86400,
-    offset=500)
+    offset=500) "Sinusoidal excitation for additional internal gains"
     annotation (Placement(transformation(extent={{94,-10},{74,10}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow1
+    "Convective heat flow of additional internal gains"
     annotation (Placement(transformation(extent={{46,-28},{26,-8}})));
   Modelica.Blocks.Math.Gain gain(k=0.5)
+    "Split additional internal gains into radiative an convective"
     annotation (Placement(transformation(extent={{66,-6},{54,6}})));
   Modelica.Blocks.Math.Gain gain1(k=0.5)
+    "Split additional internal gains into radiative an convective"
     annotation (Placement(transformation(extent={{66,-24},{54,-12}})));
 equation
   connect(weaDat.weaBus, thermalZone.weaBus) annotation (Line(
@@ -148,11 +153,11 @@ equation
   connect(prescribedHeatFlow1.port, thermalZone.intGainsConv) annotation (Line(
         points={{26,-18},{18,-18},{18,-5},{11,-5}}, color={191,0,0}));
   connect(gain1.y, prescribedHeatFlow1.Q_flow)
-    annotation (Line(points={{53.4,-18},{46,-18},{46,-18}}, color={0,0,127}));
+    annotation (Line(points={{53.4,-18},{46,-18}},          color={0,0,127}));
   connect(gain.y, prescribedHeatFlow.Q_flow)
     annotation (Line(points={{53.4,0},{49.7,0},{46,0}}, color={0,0,127}));
   connect(sine.y, gain.u)
-    annotation (Line(points={{73,0},{67.2,0},{67.2,0}}, color={0,0,127}));
+    annotation (Line(points={{73,0},{67.2,0}},          color={0,0,127}));
   connect(sine.y, gain1.u) annotation (Line(points={{73,0},{70,0},{70,-18},{67.2,
           -18}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
