@@ -19,7 +19,20 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office()},
-    T_start=293.15)
+    heatAHU=true,
+    coolAHU=true,
+    dehuAHU=true,
+    huAHU=true,
+    BPFDehuAHU=0.2,
+    HRS=false,
+    sampleRateAHU=1800,
+    effFanAHU_sup=0.7,
+    effFanAHU_eta=0.7,
+    T_start=293.15,
+    effHRSAHU_enabled=0.8,
+    effHRSAHU_disabled=0.2,
+    dpAHU_sup=80000000,
+    dpAHU_eta=80000000)
     annotation (Placement(transformation(extent={{32,-8},{52,12}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3
                                             weaDat(
@@ -112,8 +125,8 @@ equation
     annotation (Line(points={{-47.2,2},{14,2},{33,2}}, color={0,0,127}));
   connect(tableTSet.y, multizone.TSetHeat) annotation (Line(points={{55.2,-58},
           {36.8,-58},{36.8,-9}}, color={0,0,127}));
-  connect(multizone.TSetCool, const.y) annotation (Line(points={{34.6,-9},{34.6,
-          -82},{55.2,-82}}, color={0,0,127}));
+  connect(const.y, multizone.TSetCool) annotation (Line(points={{55.2,-82},{
+          34.6,-82},{34.6,-9}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=3.1536e+007, Interval=3600));

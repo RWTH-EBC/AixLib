@@ -164,8 +164,8 @@ protected
     annotation (Placement(transformation(extent={{-72,4},{-62,14}})));
   RC.BaseClasses.ThermSplitter splitterThermPercentAir(
     final splitFactor=zoneFactor,
-    final nOut=1,
-    final nIn=numZones) if ASurTot > 0 or VAir > 0
+    final nOut=numZones,
+    final nIn=1) if        ASurTot > 0 or VAir > 0
     "Collector of indoor air temperatures of all zones"
                                              annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
@@ -182,13 +182,13 @@ protected
 
 initial algorithm
   for i in 1:numZones loop
-    if zoneParam.withAHU[i] then
-      VAirRes :=VAirRes + zoneParam.VAir[i];
+    if zoneParam[i].withAHU then
+      VAirRes :=VAirRes + zoneParam[i].VAir;
     end if;
   end for;
   for i in 1:numZones loop
-    if zoneParam.withAHU[i] then
-      zoneFactor[i,1] :=zoneParam.VAir[i]/VAirRes;
+    if zoneParam[i].withAHU then
+      zoneFactor[i,1] :=zoneParam[i].VAir/VAirRes;
     else
       zoneFactor[i,1] :=0;
     end if;
