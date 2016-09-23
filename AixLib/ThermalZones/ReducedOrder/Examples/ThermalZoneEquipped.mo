@@ -1,6 +1,6 @@
 within AixLib.ThermalZones.ReducedOrder.Examples;
-model ThermalZoneEquipped "Illustrates the use of ThermalZoneEquipped"
-  import AixLib;
+model ThermalZoneEquipped
+  "Illustrates the use of ThermalZoneEquipped"
   extends Modelica.Icons.Example;
 
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped
