@@ -11,11 +11,11 @@ model MultizoneEquipped
   parameter Boolean dehuAHU=if heatAHU and coolAHU then true
        else false
     "Status of dehumidification of AHU (Cooling and Heating must be enabled)"
-    annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"), enable=(heating and cooling));
+    annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"));
   parameter Boolean huAHU=if heatAHU and coolAHU then true
        else false
     "Status of humidification of AHU (Cooling and Heating must be enabled)"
-    annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"), enable=(heating and cooling));
+    annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"));
   parameter Real BPFDehuAHU(
     min=0,
     max=1)
@@ -104,11 +104,11 @@ model MultizoneEquipped
     "Thermal power of AHU for cooling"                           annotation (
       Placement(transformation(extent={{100,-40},{120,-20}}),iconTransformation(
           extent={{80,-60},{100,-40}})));
-  Modelica.Blocks.Interfaces.RealOutput PHeater[size(heaterCooler, 1)](final
+  Modelica.Blocks.Interfaces.RealOutput PHeater[numZones](final
       quantity="HeatFlowRate", final unit="W") if ASurTot > 0 or VAir > 0 "Power for heating" annotation (
       Placement(transformation(extent={{100,-54},{120,-34}}),
         iconTransformation(extent={{80,-80},{100,-60}})));
-  Modelica.Blocks.Interfaces.RealOutput PCooler[size(heaterCooler, 1)](final
+  Modelica.Blocks.Interfaces.RealOutput PCooler[numZones](final
       quantity="HeatFlowRate", final unit="W") if ASurTot > 0 or VAir > 0 "Power for cooling" annotation (
       Placement(transformation(extent={{100,-68},{120,-48}}),iconTransformation(
           extent={{80,-100},{100,-80}})));

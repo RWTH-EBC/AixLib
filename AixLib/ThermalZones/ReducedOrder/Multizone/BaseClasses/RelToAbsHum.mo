@@ -22,7 +22,5 @@ block RelToAbsHum "Converts relative humidity to absolute humidity"
 equation
   absHum * TDryBul = 18.016/8314.3 * 6.1078 * 10^(7.5*
     Modelica.SIunits.Conversions.to_degC(TDryBul)/(237.3 +
-    Modelica.SIunits.Conversions.to_degC(TDryBul)))*relHum/100
-    annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+    Modelica.SIunits.Conversions.to_degC(TDryBul)))*relHum/100;
 end RelToAbsHum;

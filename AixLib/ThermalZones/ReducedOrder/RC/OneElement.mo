@@ -175,10 +175,10 @@ protected
   parameter Integer dimension = sum({if A>0 then 1 else 0 for A in AArray})
    "Number of non-zero wall surface areas";
   parameter Real splitFactor[dimension, 1]=
-    BaseClasses.splitFacVal(dimension, 1, AArray, fill(0, 1), fill(0, 1)) if sum(AArray) > 0
+    BaseClasses.splitFacVal(dimension, 1, AArray, fill(0, 1), fill(0, 1))
     "Share of each wall surface area that is non-zero";
   parameter Real splitFactorSolRad[dimension, nOrientations]=
-    BaseClasses.splitFacVal(dimension, nOrientations, AArray, AExt, AWin) if sum(AArray) > 0
+    BaseClasses.splitFacVal(dimension, nOrientations, AArray, AExt, AWin)
     "Share of each wall surface area that is non-zero, for each orientation
     seperately";
   Modelica.Thermal.HeatTransfer.Components.Convection convExtWall if ATotExt > 0
