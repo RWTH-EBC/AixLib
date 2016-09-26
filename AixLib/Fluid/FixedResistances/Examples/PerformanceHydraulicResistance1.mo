@@ -1,5 +1,5 @@
 within AixLib.Fluid.FixedResistances.Examples;
-model Compare_FixedResistances_HydraulicResistance1
+model PerformanceHydraulicResistance1
   "Assess simulation speed of FixedResistancesDpM"
   extends Modelica.Icons.Example;
 
@@ -57,5 +57,21 @@ equation
     annotation (experiment(StopTime=100000),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FixedResistances/Examples/FixedResistancesParallel.mos"
         "Simulate and plot"),
-    __Dymola_experimentSetupOutput);
-end Compare_FixedResistances_HydraulicResistance1;
+    __Dymola_experimentSetupOutput,
+    Diagram(graphics={Text(
+          extent={{-76,-60},{76,-74}},
+          lineColor={28,108,200},
+          textString="activate time measurement!
+
+OutputCPUtime:=true;")}),
+    __Dymola_experimentFlags(
+      Advanced(GenerateVariableDependencies=false, OutputModelicaCode=false),
+      Evaluate=false,
+      OutputCPUtime=true,
+      OutputFlatModelica=false),
+    Documentation(info="<html>
+<p>Test the simulation time of the resistance model <a href=\"AixLib.Fluid.FixedResistances.FixedResistanceDpM\">FixedResistanceDpM</a>. Use the second test <a href=\"AixLib.Fluid.FixedResistances.Examples.PerformanceHydraulicResistance2\">PerformanceHydraulicResistance2</a> to test the speed of <a href=\"AixLib.Fluid.FixedResistances.HydraulicResistance\">HydraulicResistance</a>. </p>
+<p>During the test the pressure difference will go up and down to test all flow regimes. Especially low pressure differences and mass flow rates will be hard for the solver. A simulation time of 10000 s was chosen to have a sufficiently long time for measurment but avoiding extreme simulation times. On an Intel Xeon E5-2667 @ 2.90 GHz the total simulation time will be around 0.72 s.</p>
+<p>The FixedResistanceDpM model (0.72 s) needs only around 60 &percnt; of the simulation time of the HydraulicResistance model (1.21 s).</p>
+</html>"));
+end PerformanceHydraulicResistance1;

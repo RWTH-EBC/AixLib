@@ -1,5 +1,5 @@
 within AixLib.Fluid.FixedResistances.Examples;
-model Compare_FixedResistances_HydraulicResistance
+model CompareFixedResistances
   "Compare models FixedResistancesDpM and HydraulicResistance"
   extends Modelica.Icons.Example;
 
@@ -48,7 +48,7 @@ model Compare_FixedResistances_HydraulicResistance
             {20,10}})));
   AixLib.Utilities.Diagnostics.AssertEquality assEqu(                message=
         "Inputs differ, check that lossless pipe is correctly implemented.",
-      threShold=100) "Assert equality of the two mass flow rates"
+      threShold=0.1) "Assert equality of the two mass flow rates"
     annotation (Placement(transformation(extent={{40,60},{60,80}})));
   AixLib.Fluid.Sensors.MassFlowRate masFlo1(redeclare package Medium = Medium)
     "Mass flow rate sensor" annotation (Placement(transformation(extent={{20,30},
@@ -82,8 +82,14 @@ equation
   connect(masFlo1.m_flow, assEqu.u2) annotation (Line(
       points={{30,51},{30,64},{38,64}},
       color={0,0,127}));
-    annotation (experiment(StopTime=100000),
+    annotation (experiment(StopTime=3),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FixedResistances/Examples/FixedResistancesParallel.mos"
         "Simulate and plot"),
-    __Dymola_experimentSetupOutput);
-end Compare_FixedResistances_HydraulicResistance;
+    __Dymola_experimentSetupOutput,
+    Documentation(info="<html>
+<p>Compares the mass flow rate of the two pressure loss models <a href=\"AixLib.Fluid.FixedResistances.HydraulicResistance\">HydraulicResistance</a> and <a href=\"AixLib.Fluid.FixedResistances.FixedResistanceDpM\">FixedResistanceDpM</a>. For small pressure differences (up to 800 Pa) the flow rate of HydraulicResistance will be larger than the flow rate of FixedResistanceDpM. The difference is lower than 0.1 kg/s.</p>
+<p>There was a problem with the formulation of the pressure loss calculation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/232\">issue 232</a>). The following graph shows that the flow direction could have been calculated the wrong (red line):</p>
+<p> <img src=\"modelica://AixLib/Resources/Images/Fluid/FixedResistances/Compare_FixedResistances_HydraulicResitance_reformulation1.png\"/></p>
+<p>The correct results are shown in the positive curves (thick lines).</p>
+</html>"));
+end CompareFixedResistances;
