@@ -103,7 +103,14 @@ district scale. In: Building and Environment 73, p. 223&ndash;231. DOI:
 <p>See <a href=\"Examples\">Examples</a>.</p>
 </html>",  revisions="<html>
 <ul>
-<li><i>June, 2015&nbsp;</i> by Moritz Lauster:<br/>Implemented </li>
+  <li>
+  September 27, 2016, by Moritz Lauster:<br/>
+  Reimplementation based on Annex60 and MSL models.
+  </li>
+  <li>
+  March, 2012, by Moritz Lauster:<br/>
+  First implementation.
+  </li>
 </ul>
 </html>"), Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={

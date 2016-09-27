@@ -168,20 +168,19 @@ equation
           fillColor={95,95,95},
           fillPattern=FillPattern.Solid)}),
           Documentation(info="<html>
-<p>Partial for thermal zone models. It defines connectors and a replaceable
-<a href=\"AixLib.Building.LowOrder.BaseClasses.BuildingPhysics\">buildingPhysics</a> model.</p>
-<h4>Limitation</h4>
-<p>All parameters are collected in one record. This record supports all
-different <span style=\"font-family: MS Shell Dlg 2;\"><a href=\"AixLib.Building.LowOrder.BaseClasses.BuildingPhysics\">buildingPhysics</a>
-models (the largest parameter set of all models defines the record) . This means
-that using a <a href=\"AixLib.Building.LowOrder.BaseClasses.BuildingPhysics\">buildingPhysics</a>
-model variant 1 is possible with a parameter set defined for variant 2. The user
-should check that the cominbation of model and parameter set is meaningful.</span></p>
-</html>",  revisions = "<html>
+<p>Partial for <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a> models. It defines connectors and a <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a> model. Most connectors are conditional to allow conditional modifications according to parameters or to pass-through conditional removements in AixLib.ThermalZones.ReducedOrder.RC.FourElements.</p>
+<h4>Typical use and important parameters</h4>
+<p>All parameters are collected in one <a href=\"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a> record. Further parameters for medium, initialization and dynamics originate from <a href=\"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>.</p>
+</html>",  revisions="<html>
  <ul>
-   <li><i>March, 2012&nbsp;</i>
-          by Moritz Lauster:<br/>
-          Implemented</li>
+  <li>
+  September 27, 2016, by Moritz Lauster:<br/>
+  Reimplementation based on Annex60 and MSL models.
+  </li>
+  <li>
+  March, 2012, by Moritz Lauster:<br/>
+  First implementation.
+  </li>
  </ul>
  </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,

@@ -71,12 +71,20 @@ flow rate Vdot_air in m3/s.</p>
  * Azone * 3600^-1 </p>
 </html>", revisions="<html>
 <ul>
-<li><i>October 30, 2015&nbsp;</i> by Moritz Lauster:<br/>Moved and adapted to
-AixLib. Some renaming and adding units</li>
-</ul>
-<ul>
-<li><i>March 3, 2014&nbsp;</i> by Ole Odendahl:<br/>Added documentation and
-formatted appropriately</li>
+  <li>
+  September 27, 2016, by Moritz Lauster:<br/>
+  Moved to fit to new Annex60 structure.
+  </li>
+  <li>
+  October 30, 2015, by Moritz Lauster:<br/>
+  Moved and adapted to
+  AixLib. Some renaming and adding units.
+  </li>
+  <li>
+  March 3, 2015, by Ole Odendahl:<br/>
+  Added documentation and
+  formatted appropriately
+  </li>
 </ul>
 </html>"));
 end AirFlowRateSplit;

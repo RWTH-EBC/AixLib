@@ -69,16 +69,25 @@ outgoing volume flow.</p><p>As AHUs typically work with m3/s, the model calculat
 Azone * 3600^-1 </p>
 </html>", revisions="<html>
 <ul>
-<li><i>February 26, 2016&nbsp;</i> by Moritz Lauster:<br/>To get the correct
-share of volume flow for each zone, more outputs are generated.</li>
-</ul>
-<ul>
-<li><i>October 30, 2015&nbsp;</i> by Moritz Lauster:<br/>Moved and adapted to
-AixLib. Some renaming and adding units</li>
-</ul>
-<ul>
-<li><i>March 3, 2014&nbsp;</i> by Ole Odendahl:<br/>Added documentation and
-formatted appropriately</li>
+  <li>
+  September 27, 2016, by Moritz Lauster:<br/>
+  Moved to fit to new Annex60 structure.
+  </li>
+  <li>
+  February 26, 2016, by Moritz Lauster:<br/>
+  To get the correct share of volume flow 
+  for each zone, more outputs are generated.
+  </li>
+  <li>
+  October 30, 2015, by Moritz Lauster:<br/>
+  Moved and adapted to
+  AixLib. Some renaming and adding units.
+  </li>
+  <li>
+  March 3, 2015, by Ole Odendahl:<br/>
+  Added documentation and
+  formatted appropriately
+  </li>
 </ul>
 </html>"));
 end AirFlowRateSum;

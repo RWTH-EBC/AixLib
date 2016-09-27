@@ -157,9 +157,18 @@ equation
           fillPattern=FillPattern.Solid)}),
     Documentation(revisions="<html>
 <ul>
-<li><i>June 22, 2015&nbsp;</i> by Moritz Lauster:<br/>Changed building physics
-to AixLib</li>
-<li><i>April 25, 2014&nbsp;</i> by Ole Odendahl:<br/>Implemented</li>
+  <li>
+  September 27, 2016, by Moritz Lauster:<br/>
+  Reimplementation based on Annex60 and AixLib models.
+  </li>
+  <li>
+  June 22, 2015, by Moritz Lauster:<br/>
+  Changed building physics to AixLib.
+  </li>
+  <li>
+  April 25, 2014, by Ole Odendahl:<br/>
+  Implemented.
+  </li>
 </ul>
 </html>", info="<html>
 <p>This is a partial model for multi-zone models. It defines connectors and a

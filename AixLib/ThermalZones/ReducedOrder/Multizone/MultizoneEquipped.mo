@@ -131,10 +131,9 @@ model MultizoneEquipped
     each staOrDyn=true) if ASurTot > 0 or VAir > 0
     "Heater Cooler with PI control"
     annotation (Placement(transformation(extent={{-48,-70},{-22,-44}})));
-  replaceable AixLib.Airflow.AirHandlingUnit.AHU AirHandlingUnit
-    if ASurTot > 0 or VAir > 0
-    constrainedby
-    AixLib.Airflow.AirHandlingUnit.BaseClasses.PartialAHU(
+  replaceable AixLib.Airflow.AirHandlingUnit.AHU AirHandlingUnit if
+       ASurTot > 0 or VAir > 0
+    constrainedby AixLib.Airflow.AirHandlingUnit.BaseClasses.PartialAHU(
     final cooling=coolAHU,
     final dehumidificationSet=dehuAHU,
     final humidificationSet=huAHU,
@@ -169,8 +168,8 @@ protected
     extent={{-5,-5},{5,5}},
     rotation=90,
     origin={23,53})));
-  Modelica.Blocks.Nonlinear.Limiter minTemp(uMax=1000, uMin=1)
-    if ASurTot > 0 or VAir > 0
+  Modelica.Blocks.Nonlinear.Limiter minTemp(uMax=1000, uMin=1) if
+       ASurTot > 0 or VAir > 0
     "Temperature limiter for measured indoor air temperature for AHU"
     annotation (Placement(transformation(extent={{30,-33},{20,-23}})));
   AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.AirFlowRateSplit airFlowRateSplit(
@@ -194,8 +193,8 @@ protected
     extent={{-4,-4},{4,4}},
     rotation=0,
     origin={50,-28})));
-  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor TAirAHUAvg
-    if ASurTot > 0 or VAir > 0
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor TAirAHUAvg if
+       ASurTot > 0 or VAir > 0
     "Averaged air temperature of the zones which are supplied by the AHU"
     annotation (Placement(transformation(extent={{42,-32},{34,-24}})));
   AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.AirFlowRateSum airFlowRate(
@@ -295,7 +294,7 @@ equation
     annotation (Line(points={{12.4,23.5},{23,23.5},{23,47}},
                                                          color={0,0,127}));
   connect(heaterCooler.heatCoolRoom, zone.intGainsConv) annotation (Line(points={{-23.3,
-          -62.2},{86,-62.2},{86,59.25},{82.1,59.25}},      color={191,0,0}));
+          -62.2},{86,-62.2},{86,59.25},{80,59.25}},        color={191,0,0}));
   connect(AirHandlingUnit.T_outdoorAir, weaBus.TDryBul) annotation (Line(points={{-47.8,
           19},{-100,19},{-100,69}},      color={0,0,127}), Text(
       string="%second",
@@ -304,8 +303,7 @@ equation
   connect(splitterThermPercentAir.portIn[1], TAirAHUAvg.port)
     annotation (Line(points={{46,-28},{42,-28}},          color={191,0,0}));
   connect(splitterThermPercentAir.portOut, zone.intGainsConv) annotation (Line(
-        points={{54,-28},{86,-28},{86,59.25},{82.1,59.25}},
-                                                          color={191,0,0}));
+        points={{54,-28},{86,-28},{86,59.25},{80,59.25}}, color={191,0,0}));
   connect(relToAbsHum.relHum, weaBus.relHum) annotation (Line(points={{-73,11.6},
           {-100,11.6},{-100,69}}, color={0,0,127}), Text(
       string="%second",
@@ -358,11 +356,19 @@ Cooling"),
           textString="AHU")}),
     Documentation(revisions="<html>
 <ul>
-<li><i>February 26, 2016&nbsp;</i> by Moritz Lauster:<br/>Fixed bug in share of
-AHU volume flow</li>
-<li><i>June 22, 2015&nbsp;</i> by Moritz Lauster:<br/>Changed building physics
-to AixLib</li>
-<li><i>April 25, 2014&nbsp;</i> by Ole Odendahl:<br/>Implemented</li>
+  <li>
+  September 27, 2016, by Moritz Lauster:<br/>
+  Reimplementation based on Annex60 and AixLib models.
+  </li>
+  <li>
+  February 26, 2016, by Moritz Lauster:<br/>
+  Fixed bug in share of
+  AHU volume flow.
+  </li>
+  <li>
+  April 25, 2015, by Ole Odendahl:<br/>
+  Implemented.
+  </li>
 </ul>
 </html>", info="<html>
 <p><span style=\"font-family: MS Shell Dlg 2;\">This is a multizone model with

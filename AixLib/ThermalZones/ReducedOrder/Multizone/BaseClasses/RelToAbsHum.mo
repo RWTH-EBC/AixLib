@@ -20,9 +20,17 @@ block RelToAbsHum "Converts relative humidity to absolute humidity"
     "Absolute humidity in kg water to kg air"
     annotation (Placement(transformation(extent={{100,-20},{140,20}}),
     iconTransformation(extent={{100,-20},{140,20}})));
-    
+
 equation
   absHum * TDryBul = 18.016/8314.3 * 6.1078 * 10^(7.5*
     Modelica.SIunits.Conversions.to_degC(TDryBul)/(237.3 +
     Modelica.SIunits.Conversions.to_degC(TDryBul)))*relHum/100;
+  annotation (Documentation(revisions="<html>
+  <ul>
+  <li>
+  September 27, 2016 by Moritz Lauster:<br/>
+  First Implementation.
+  </li>
+  </ul>
+</html>"));
 end RelToAbsHum;

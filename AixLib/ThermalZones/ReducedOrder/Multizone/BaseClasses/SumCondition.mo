@@ -42,16 +42,24 @@ algorithm
 </ol>
 </html>", revisions="<html>
 <ul>
-<li><i>February 26, 2016&nbsp;</i> by Moritz Lauster:<br/>Added share of volume
-for each zone as output.</li>
-</ul>
-<ul>
-<li><i>October 30, 2015&nbsp;</i> by Moritz Lauster:<br/>Moved and adapted to
-AixLib</li>
-</ul>
-<ul>
-<li><i>March 7, 2014&nbsp;</i> by Ole Odendahl:<br/>Added documentation and
-formatted appropriately</li>
+  <li>
+  September 27, 2016, by Moritz Lauster:<br/>
+  Moved to fit to new Annex60 structure.
+  </li>
+  <li>
+  February 26, 2016, by Moritz Lauster:<br/>
+  Added share of volume
+  for each zone as output.
+  </li>
+  <li>
+  October 30, 2015, by Moritz Lauster:<br/>
+  Moved and adapted to AixLib.
+  </li>
+  <li>
+  March 7, 2014, by Ole Odendahl:<br/>
+  Added documentation and
+  formatted appropriately
+  </li>
 </ul>
 </html>"));
 end SumCondition;
