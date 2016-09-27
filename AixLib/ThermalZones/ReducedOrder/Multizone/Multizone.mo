@@ -43,10 +43,15 @@ equation
 </ul>
 </html>",
         info="<html>
-<p>This is a multizone model with a variable number of thermal zones. It adds no
-further functionalities. The<a href=\"AixLib.Building.LowOrder.Multizone.partialMultizone\"> partial class</a>
-has a replaceable<a href=\"AixLib.Building.LowOrder.ThermalZone\"> thermal zone</a>
-model, due to the functionalities, <a href=\"AixLib.Building.LowOrder.ThermalZone.ThermalZone\">ThermalZone</a>
-is the most suitable recommendation.</p>
+<p>This is a ready-to-use multizone model with a variable number of thermal zones. It defines connectors and a replaceable vector of <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a> models. Most connectors are conditional to allow conditional modifications according to parameters or to pass-through conditional removements in <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a> and subsequently in <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a>.</p>
+<h4>Typical use and important parameters</h4>
+<p>The model needs parameters describing general properties of the building (indoor air volume, net floor area, overall surface area) and a vector with length of number of zones containing <a href=\"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a> records to define zone properties. The user can redeclare the thermal zone model choosing from <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>. Further parameters for medium, initialization and dynamics originate from <a href=\"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>. A typical use case is a simulation of a multizone building for district simulations where the model is connected via heat ports and fluid ports to a heating system. The multizone model serves as boundary condition for the heating system and calculates the building&apos;s reaction to external and internal heat sources. </p>
+<h4>References</h4>
+<ul>
+<li>German Association of Engineers: Guideline VDI 6007-1, March 2012: Calculation of transient thermal response of rooms and buildings - Modelling of rooms. </li>
+<li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D. (2014): Low order thermal network models for dynamic simulations of buildings on city district scale. In: Building and Environment 73, p. 223&ndash;231. DOI: <a href=\"http://dx.doi.org/10.1016/j.buildenv.2013.12.016\">10.1016/j.buildenv.2013.12.016</a>. </li>
+</ul>
+<h4>Examples</h4>
+<p>See <a href=\"AixLib.ThermalZones.ReducedOrder.Examples.Multizone\">AixLib.ThermalZones.ReducedOrder.Examples.Multizone</a>.</p>
 </html>"));
 end Multizone;
