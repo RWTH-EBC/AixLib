@@ -43,12 +43,12 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
     ATot > 0 or zoneParam.VAir > 0
     "Convective internal gains"
     annotation (Placement(transformation(extent={{94,-12},{114,8}}),
-                              iconTransformation(extent={{100,-60},{120,-40}})));
+                              iconTransformation(extent={{90,-60},{110,-40}})));
   Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts](
     redeclare package Medium = Medium)
     "Auxilliary fluid inlets and outlets to indoor air volume"
     annotation (Placement(transformation(extent={{-49,-106},{49,-82}}),
-        iconTransformation(extent={{-47,-96},{47,-72}})));
+        iconTransformation(extent={{-47,-84},{47,-60}})));
   Modelica.Blocks.Interfaces.RealOutput TAir(
     final quantity="ThermodynamicTemperature",
     final unit="K",
@@ -67,7 +67,7 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad if ATot > 0
     "Convective internal gains"
     annotation (Placement(transformation(extent={{94,8},{114,28}}),
-                            iconTransformation(extent={{100,-20},{120,0}})));
+                            iconTransformation(extent={{90,-20},{110,0}})));
   BoundaryConditions.WeatherData.Bus weaBus
     "Weather data bus"
     annotation (Placement(

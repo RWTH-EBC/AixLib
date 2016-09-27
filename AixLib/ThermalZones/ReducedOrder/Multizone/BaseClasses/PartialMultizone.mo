@@ -36,17 +36,17 @@ partial model PartialMultizone "Partial model for multizone models"
   Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts*numZones]
     "Auxilliary fluid inlets and outlets to indoor air volume"
     annotation (Placement(transformation(extent={{-36,-104},{42,-86}}),
-    iconTransformation(extent={{-40,-120},{40,-100}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv[size(zone, 1)]
-    if ASurTot > 0 or VAir > 0
+    iconTransformation(extent={{-40,-110},{40,-90}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv[size(zone, 1)] if
+       ASurTot > 0 or VAir > 0
     "Convective internal gains"
     annotation (Placement(transformation(extent={{-110,-80},{-90,-60}}),
-    iconTransformation(extent={{-100,-80},{-80,-60}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad[size(zone, 1)]
-    if ASurTot > 0
+    iconTransformation(extent={{-90,-80},{-70,-60}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad[size(zone, 1)] if
+       ASurTot > 0
     "Convective internal gains"
     annotation (Placement(transformation(extent={{-110,-30},{-90,-50}}),
-    iconTransformation(extent={{-100,-46},{-80,-26}})));
+    iconTransformation(extent={{-90,-46},{-70,-26}})));
   Modelica.Blocks.Interfaces.RealOutput TAir[size(zone, 1)](
     final quantity="ThermodynamicTemperature",
     final unit="K",
@@ -96,20 +96,19 @@ equation
       extent={{6,3},{6,3}}));
     if nPorts > 0 then
       connect(zone[i].ports[nPorts], ports[nPorts*(i-1)+1:nPorts*i])
-      annotation (Line(points={{59,
-              52.28},{59,-82},{4,-82},{3,-82},{3,-95}},
+      annotation (Line(points={{59,54.74},{59,-82},{4,-82},{3,-82},{3,-95}},
                            color={0,127,255}));
     end if;
   end for;
-  connect(zone.intGainsConv, intGainsConv) annotation (Line(points={{82.1,59.25},
+  connect(zone.intGainsConv, intGainsConv) annotation (Line(points={{80,59.25},
           {86,59.25},{86,-78},{66,-78},{-100,-78},{-100,-70}},
                                          color={191,0,0}));
   connect(zone.TRad, TRad) annotation (Line(points={{82.1,77.29},{94,77.29},{94,
           60},{94,59},{110,59}}, color={0,0,127}));
   connect(zone.TAir, TAir) annotation (Line(points={{82.1,81.8},{98,81.8},{98,
           81},{110,81}}, color={0,0,127}));
-  connect(zone.intGainsRad, intGainsRad) annotation (Line(points={{82.1,67.45},
-          {90,67.45},{90,-76},{60,-76},{-90,-76},{-90,-40},{-100,-40}},
+  connect(zone.intGainsRad, intGainsRad) annotation (Line(points={{80,67.45},{
+          90,67.45},{90,-76},{60,-76},{-90,-76},{-90,-40},{-100,-40}},
                                                                    color={191,0,
           0}));
   annotation (
