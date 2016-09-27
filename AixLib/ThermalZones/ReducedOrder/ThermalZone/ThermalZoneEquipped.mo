@@ -83,24 +83,16 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}}));
   annotation(Documentation(info="<html>
-<p>This model combines building physics, models for internal gains and the
-calculation of natural ventilation (window opening) and infiltration. It is
-thought as a ready-to-use thermal zone model. For convenience, all parameters
-are collected in a record (see
-<a href=\"AixLib.DataBase.Buildings.ZoneBaseRecord\"> ZoneBaseRecord</a>). </p>
-<p><b>References</b></p>
+<p>Comprehensive ready-to-use model for thermal zones, combining caclulation core, handling of solar radiation, internal gains and in addition to <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a> models for infiltration and natural ventilation. Core model is a <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a> model. Conditional removements of the core model are passed-through and related models on thermal zone level are as well conditional. All models for solar radiation are part of Annex60 library. Internal gains are part of AixLib.</p>
+<h4>Typical use and important parameters</h4>
+<p>All parameters are collected in one <a href=\"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a> record. Further parameters for medium, initialization and dynamics originate from <a href=\"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>. A typical use case is a single thermal zone including infiltration and vnetilation connected via heat ports and fluid ports to a heating system. The thermal zone model serves as boundary condition for the heating system and calculates the room&apos;s reaction to external and internal heat sources. The model is used as thermal zone core model in <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone\">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone</a></p></p>
+<h4>References</h4>
 <ul>
-<li>German Association of Engineers: Guideline VDI 6007-1, March 2012:
-Calculation of transient thermal response of rooms and buildings -
-Modelling of rooms.</li>
-<li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D. (2014):
-Low order thermal network models for dynamic simulations of buildings on city
-district scale. In: Building and Environment 73, p. 223&ndash;231. DOI:
-<a href=\"http://dx.doi.org/10.1016/j.buildenv.2013.12.016\">
-10.1016/j.buildenv.2013.12.016</a>.</li>
+<li>German Association of Engineers: Guideline VDI 6007-1, March 2012: Calculation of transient thermal response of rooms and buildings - Modelling of rooms. </li>
+<li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D. (2014): Low order thermal network models for dynamic simulations of buildings on city district scale. In: Building and Environment 73, p. 223&ndash;231. DOI: <a href=\"http://dx.doi.org/10.1016/j.buildenv.2013.12.016\">10.1016/j.buildenv.2013.12.016</a>. </li>
 </ul>
-<p><b>Example Results</b></p>
-<p>See <a href=\"Examples\">Examples</a>.</p>
+<h4>Examples</h4>
+<p>See <a href=\"AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone\">AixLib.ThermalZones.ReducedOrder.Examples.ThermalZone</a>. </p>
 </html>",  revisions="<html>
 <ul>
   <li>

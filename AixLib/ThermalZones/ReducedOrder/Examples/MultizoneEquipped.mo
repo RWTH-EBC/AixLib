@@ -121,10 +121,10 @@ equation
   connect(replicatorTemperatureVentilation1.y, prescribedHeatFlow.Q_flow)
     annotation (Line(points={{-23.4,-54},{-18.7,-54},{-14,-54}}, color={0,0,127}));
   connect(prescribedHeatFlow.port, multizone.intGainsRad) annotation (Line(
-        points={{6,-54},{18,-54},{18,-22},{18,-2},{18,-1.6},{26,-1.6},{33,-1.6}},
+        points={{6,-54},{18,-54},{18,-22},{18,-2},{18,-1.6},{34,-1.6}},
                                 color={191,0,0}));
   connect(prescribedHeatFlow1.port, multizone.intGainsConv) annotation (Line(
-        points={{6,-76},{18,-76},{26,-76},{26,-5},{33,-5}}, color={191,0,0}));
+        points={{6,-76},{18,-76},{26,-76},{26,-5},{34,-5}}, color={191,0,0}));
   connect(tableAHU.y, multizone.AHU)
     annotation (Line(points={{-47.2,2},{14,2},{33,2}}, color={0,0,127}));
   connect(tableTSet.y, multizone.TSetHeat) annotation (Line(points={{55.2,-58},
