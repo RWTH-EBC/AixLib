@@ -37,5 +37,12 @@ equation
   </ul>
 </html>", info="<html>
 <p>Simple model that converts absolute humidity to relative humidity taking into account the air temperature. It is based on Magnus equation and the ideal gas law. All coefficients are based on typical assumptions and combined to one coefficient for reduction of computational effort.</p>
+<h4>References</h4>
+<ul>
+<li><a href=\"http://www.wetterochs.de/wetter/feuchte.html\">http://www.wetterochs.de/wetter/feuchte.html</a></li>
+<li><a href=\"http://www.ib-rauch.de/bautens/formel/abs_luftfeucht.html\">http://www.ib-rauch.de/bautens/formel/abs_luftfeucht.html</a></li>
+<li><a href=\"https://en.wikipedia.org/wiki/Ideal_gas_law\">https://en.wikipedia.org/wiki/Ideal_gas_law</a></li>
+<li><a href=\"https://en.wikipedia.org/wiki/Density_of_air\">https://en.wikipedia.org/wiki/Density_of_air</a> </li>
+</ul>
 </html>"));
 end RelToAbsHum;
