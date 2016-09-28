@@ -82,7 +82,14 @@ record OPH_1_Office "Office zone of office building"
     CoolerOn = false);
   annotation (Documentation(revisions="<html>
  <ul>
- <li><i>June, 2015&nbsp;</i> by Moritz Lauster:<br/>Implemented.</li>
+  <li>
+  September 27, 2016, by Moritz Lauster:<br/>
+  Reimplementation.
+  </li>
+  <li>
+  June, 2015, by Moritz Lauster:<br/>
+  Implemented.
+  </li>
  </ul>
  </html>", info="<html>
 <p><span style=\"font-family: MS Shell Dlg 2;\">Zone &quot;Office&quot; of an example building according to an office building with passive house standard. The building is divided in six zones, this is a typical zoning for an office building. </span></p>

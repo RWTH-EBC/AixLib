@@ -120,17 +120,41 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Boolean CoolerOn "Use chiller component";
 
   annotation(Documentation(info="<html>
-<p>This is the base definition of zone records used in <a href=\"AixLib.Building.LowOrder.ThermalZone\">AixLib.Building.LowOrder.ThermalZone</a>. All necessary parameters are defined here. Most values should be overwritten for a specific building, some are default values that might be appropriate in most cases. However, fell free to overwrite them in your own records. </p>
+<p>This is the base definition of zone records used in <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>. It aggregates all parameters at one record to enhance usability, exchanging entire datasets and automatic generation of these datasets.</p>
+<h4>References</h4>
+<p>For automatic generation of thermal zone and multizone models as well as for datasets, see <a href=\"https://github.com/RWTH-EBC/TEASER\">https://github.com/RWTH-EBC/TEASER</a></p>
 </html>",  revisions="<html>
 <ul>
-<li><i>January 4, 2016 </i>by Moritz Lauster:
-<br/>Clean up.</li>
-<li><i>June, 2015 </i>by Moritz Lauster:
-<br/>Added new parameters to use further calculation cores.</li>
-<li><i>February 4, 2014&nbsp;</i>by Ole Odendahl:<br/>Added new parameters for the setup of the ACH. It is now possible to assign different values to the ACH for each zone based on this record. </li>
-<li><i>January 27, 2014&nbsp;</i>by Ole Odendahl:<br/>Added new parameter withAHU to choose whether the zone is connected to a central air handling unit. Default false </li>
-<li><i>March, 2012&nbsp;</i> by Peter Matthes:<br/>Implemented </li>
-<li><i>November, 2012&nbsp;</i> by Moritz Lauster:<br/>Restored links </li>
+  <li>
+  September 27, 2016, by Moritz Lauster:<br/>
+  Reimplementation.
+  </li>
+  <li>
+  January 4, 2016, by Moritz Lauster:<br/>
+  Clean up.
+  </li>
+  <li>June, 2015, by Moritz Lauster:<br/>
+  Added new parameters to use further calculation cores.
+  </li>
+  <li>
+  February 4, 2014, by Ole Odendahl:<br/>
+  Added new parameters for the setup of the ACH. It is 
+  now possible to assign different values to the ACH for 
+  each zone based on this record.
+  </li>
+  <li>
+  January 27, 2014, by Ole Odendahl:<br/>
+  Added new parameter withAHU to choose whether the zone
+  is connected to a central air handling unit. Default 
+  is false.
+  </li>
+  <li>
+  November, 2012, by Moritz Lauster:<br/>
+  Restored links
+  </li>
+  <li>March, 2012, by Peter Matthes:<br/>
+  Implemented
+  </li>
 </ul>
 </html>"));
 end ZoneBaseRecord;
