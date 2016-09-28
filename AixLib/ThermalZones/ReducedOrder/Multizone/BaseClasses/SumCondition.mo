@@ -1,6 +1,6 @@
 within AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses;
 function SumCondition
-  "Returns the sum of entries of a vector and their share if a condition is true"
+  "Conditional sum and share"
 
   input Real vector[dimension]
     "Input vector";
@@ -29,6 +29,7 @@ algorithm
   end for;
 
   annotation (Documentation(info="<html>
+<p>Returns&nbsp;the&nbsp;sum&nbsp;of&nbsp;entries&nbsp;of&nbsp;a&nbsp;vector&nbsp;and&nbsp;their&nbsp;share&nbsp;if&nbsp;a&nbsp;condition&nbsp;is&nbsp;true.</p>
 <p>Inputs: </p>
 <ol>
 <li>Vector</li>
