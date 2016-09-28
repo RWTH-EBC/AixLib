@@ -1,7 +1,6 @@
 within AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses;
 block AirFlowRateSum
-  "Air flow rate based on given profile or on occupation and convertion from
-  m3/(m2h) to m3/s"
+  "Air flow rate for AHU and unit conversion"
   extends Modelica.Blocks.Icons.Block;
 
   parameter Integer dimension "Number of Zones";
@@ -54,15 +53,18 @@ equation
 ->
 m3/s")}),
     Documentation(info="<html>
-<p>This model calculates the volume flow (e.g. for an Air Handling Unit) dependent on:</p>
+<p>This model calculates the volume flow (e.g. for an Air Handling Unit) for supply of thermal zones dependent on:</p>
 <ul>
-<li>A minimal volume flow (minAHU) in m3/(m2*h)</li>
-<li>A maxmial volume flow (maxAHU = deltaAHU + minAHU) <span style=\"font-family: MS Shell Dlg 2;\">in m3/(m2*h)</span></li>
-<li>A given profile or relative occupation</li>
+<li>Which zone is supplied by the AHU</li>
+<li>A minimal volume flow (minAHU) in m3/(m2*h) per zone</li>
+<li>A maxmial volume flow (maxAHU = deltaAHU + minAHU) <span style=\"font-family: MS Shell Dlg 2;\">in m3/(m2*h) per zone</span></li>
+<li>A given profile or relative occupation per zone</li>
 </ul>
-<p>ZoneBaseRecord is necessary to evaluate which zones are supplied by an AHU and should be incorporated into calculation. </p>
-<p>As AHUs typically work with m3/s, the model calculates the output air flow rate Vdot_air in m3/s.</p>
-<p>airFlowRateOutput = [minAHU + deltaAHU * (profile OR relative Occupation)] * Azone * 3600^-1 </p>
+<p>A vector of <a href=\"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a> records is necessary to evaluate which zones are supplied by an AHU. As AHUs typically work with m3/s, the model calculates the output air flow rate in m3/s.</p>
+<h4>Typical use and important parameters</h4>
+<p>The governing equation is:</p>
+<p>airFlow = [minAHU + deltaAHU * (profile OR relative Occupation)] * Azone * 3600^-1 </p>
+<p>All parameter come from the vector of <a href=\"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a> records. The model is typically used as input adapter for AHU model in <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped\">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.</p>
 </html>", revisions="<html>
 <ul>
   <li>
