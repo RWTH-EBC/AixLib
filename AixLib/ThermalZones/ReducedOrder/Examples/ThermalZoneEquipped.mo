@@ -133,7 +133,7 @@ model ThermalZoneEquipped
   Modelica.Blocks.Math.Gain gain1(k=0.5)
     "Split additional internal gains into radiative an convective"
     annotation (Placement(transformation(extent={{66,-24},{54,-12}})));
-    
+
 equation
   connect(weaDat.weaBus, thermalZone.weaBus) annotation (Line(
       points={{-72,30},{-34,30},{-34,0},{-10,0}},
@@ -156,9 +156,9 @@ equation
   connect(internalGains.y, thermalZone.intGains)
     annotation (Line(points={{0.7,-52},{8,-52},{8,-8.4}}, color={0,0,127}));
   connect(prescribedHeatFlow.port, thermalZone.intGainsRad)
-    annotation (Line(points={{26,0},{11,0},{11,-1}}, color={191,0,0}));
+    annotation (Line(points={{26,0},{10,0},{10,-1}}, color={191,0,0}));
   connect(prescribedHeatFlow1.port, thermalZone.intGainsConv) annotation (Line(
-        points={{26,-18},{18,-18},{18,-5},{11,-5}}, color={191,0,0}));
+        points={{26,-18},{18,-18},{18,-5},{10,-5}}, color={191,0,0}));
   connect(gain1.y, prescribedHeatFlow1.Q_flow)
     annotation (Line(points={{53.4,-18},{46,-18}},          color={0,0,127}));
   connect(gain.y, prescribedHeatFlow.Q_flow)
@@ -169,5 +169,14 @@ equation
           -18}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),experiment(StopTime=
-          3.1536e+007, Interval=3600));
+          3.1536e+007, Interval=3600),
+    Documentation(info="<html>
+<p>This example illustrates the use of <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped\">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped</a>. Parameter set for thermal zone is for an office zone of an office building build as passive house. All boundary conditions are generic to show how to apply different kinds of boundary conditions. The results should show a typical profile for indoor air temperatures, but are not related to a specific building or measurement data.</p>
+</html>", revisions="<html>
+  <ul>
+  <li>September 29, 2016, by Moritz Lauster:<br/>
+  Implemented.
+  </li>
+  </ul>
+</html>"));
 end ThermalZoneEquipped;
