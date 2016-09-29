@@ -1,6 +1,6 @@
 within AixLib.DataBase.ThermalZones.OfficePassiveHouse;
 record OPH_1_Office "Office zone of office building"
-  extends ZoneBaseRecord(
+  extends AixLib.DataBase.ThermalZones.ZoneBaseRecord(
     T_start = 293.15,
     VAir = 6700.0,
     AZone = 1675.0,
