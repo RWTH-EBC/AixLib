@@ -1,6 +1,5 @@
 within AixLib.ThermalZones.ReducedOrder.Examples;
 model Multizone "Illustrates the use of Multizone"
-  import AixLib;
   extends Modelica.Icons.Example;
 
   AixLib.ThermalZones.ReducedOrder.Multizone.Multizone multizone(
