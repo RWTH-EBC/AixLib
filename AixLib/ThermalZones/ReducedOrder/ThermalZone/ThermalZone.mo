@@ -27,11 +27,15 @@ model ThermalZone
     final RoomArea=zoneParam.AZone) if ATot > 0
     "Internal gains from light"
     annotation (Placement(transformation(extent={{64,-76},{84,-57}})));
-  SolarGain.CorrectionGDoublePane corGDouPan(
+  replaceable SolarGain.CorrectionGDoublePane corGDouPan if
+    sum(zoneParam.ATransparent) > 0
+    constrainedby
+    AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG(
     final n=zoneParam.nOrientations,
-    final UWin=zoneParam.UWin) if sum(zoneParam.ATransparent) > 0
+    final UWin=zoneParam.UWin)
     "Correction factor for solar transmission"
-    annotation (Placement(transformation(extent={{-12,39},{0,51}})));
+    annotation (Placement(transformation(extent={{-12,37},{0,49}})),
+    choicesAllMatching=true);
   EquivalentAirTemperature.VDI6007WithWindow eqAirTempWall(
     withLongwave=true,
     aWin=0.03,
@@ -195,20 +199,21 @@ equation
           -52.01},{94,-52.01},{94,54},{86.2,54}}, color={95,95,95}));
   connect(lights.RadHeat, ROM.intGainsRad) annotation (Line(points={{83,-72.01},
           {94,-72.01},{94,54},{86.2,54}}, color={95,95,95}));
-  connect(eqAirTempWall.TEqAirWin, preTemWin.T) annotation (Line(points={{-15,
-          11.8},{-12,11.8},{-12,29},{2.8,29}},  color={0,0,127}));
+  connect(eqAirTempWall.TEqAirWin, preTemWin.T) annotation (Line(points={{-15,11.8},
+          {-12,11.8},{-12,24},{-2,24},{-2,28},{-2,28},{-2,29},{0,29},{2.8,29}},
+                                                color={0,0,127}));
   connect(eqAirTempWall.TEqAir, preTemWall.T) annotation (Line(points={{-15,8},
           {2.8,8}},                    color={0,0,127}));
-  connect(HDirTilWall.H, corGDouPan.HDirTil) annotation (Line(points={{-67.2,
-          39.5},{-58,39.5},{-58,42},{-58,48.6},{-13.2,48.6}}, color={0,0,127}));
+  connect(HDirTilWall.H, corGDouPan.HDirTil) annotation (Line(points={{-67.2,39.5},
+          {-58,39.5},{-58,42},{-58,46.6},{-13.2,46.6}},       color={0,0,127}));
   connect(HDirTilWall.H, solRadWall.u1) annotation (Line(points={{-67.2,39.5},{
           -58,39.5},{-58,22},{-55,22}}, color={0,0,127}));
   connect(HDirTilWall.inc, corGDouPan.inc) annotation (Line(points={{-67.2,36.1},
-          {-60,36.1},{-60,36},{-56,36},{-56,41.4},{-13.2,41.4}}, color={0,0,127}));
+          {-60,36.1},{-60,36},{-56,36},{-56,39.4},{-13.2,39.4}}, color={0,0,127}));
   connect(HDifTiWalll.H, solRadWall.u2) annotation (Line(points={{-67.2,18},{-60,
           18},{-60,16},{-55,16}}, color={0,0,127}));
   connect(HDifTiWalll.HGroDifTil, corGDouPan.HGroDifTil) annotation (Line(
-        points={{-67.2,13.2},{-62,13.2},{-62,43.8},{-13.2,43.8}}, color={0,0,
+        points={{-67.2,13.2},{-62,13.2},{-62,41.8},{-13.2,41.8}}, color={0,0,
           127}));
   connect(solRadWall.y, eqAirTempWall.HSol) annotation (Line(points={{-43.5,19},
           {-42,19},{-42,18},{-42,14},{-38,14}}, color={0,0,127}));
@@ -227,7 +232,7 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(HDifTiWalll.HSkyDifTil, corGDouPan.HSkyDifTil) annotation (Line(
-        points={{-67.2,22.8},{-64,22.8},{-64,46.2},{-13.2,46.2}}, color={0,0,
+        points={{-67.2,22.8},{-64,22.8},{-64,44.2},{-13.2,44.2}}, color={0,0,
           127}));
   connect(theConWin.solid, ROM.window) annotation (Line(points={{30,29},{32,29},
           {32,50},{37.8,50}}, color={191,0,0}));
@@ -307,8 +312,8 @@ equation
     annotation (Line(points={{16,8},{18,8},{18,13},{20,13}}, color={191,0,0}));
   connect(preTemWin.port, theConWin.fluid)
     annotation (Line(points={{16,29},{20,29}}, color={191,0,0}));
-  connect(corGDouPan.solarRadWinTrans, ROM.solRad) annotation (Line(points={{
-          0.6,45},{12,45},{12,61},{37,61}}, color={0,0,127}));
+  connect(corGDouPan.solarRadWinTrans, ROM.solRad) annotation (Line(points={{0.6,43},
+          {12,43},{12,61},{37,61}},         color={0,0,127}));
   connect(alphaWall.y, theConWall.Gc)
     annotation (Line(points={{25,4.4},{25,4.4},{25,8}}, color={0,0,127}));
   connect(alphaWin.y, theConWin.Gc) annotation (Line(points={{25,38.6},{25,36.3},
@@ -397,7 +402,7 @@ equation
     fillColor={215,215,215},
     fillPattern=FillPattern.Solid),
   Text(
-    extent={{-15,37},{2,30}},
+    extent={{-17,35},{0,28}},
     lineColor={0,0,255},
     fillColor={215,215,215},
     fillPattern=FillPattern.Solid,
