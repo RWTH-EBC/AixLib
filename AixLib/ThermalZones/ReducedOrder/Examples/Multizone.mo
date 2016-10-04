@@ -67,18 +67,18 @@ model Multizone "Illustrates the use of Multizone"
   Modelica.Blocks.Math.Gain gain1(k=0.5)
     "Split additional internal gains into radiative an convective"
     annotation (Placement(transformation(extent={{-56,-82},{-44,-70}})));
-  Modelica.Blocks.Routing.Replicator replicatorTemperatureVentilation1(nout=5)
-    "Replicates sinusoidal excitation for numZones"
-    annotation (Placement(transformation(
-    extent={{-6,-6},{6,6}},
-    rotation=0,
-    origin={-30,-54})));
-  Modelica.Blocks.Routing.Replicator replicatorTemperatureVentilation2(nout=5)
-    "Replicates sinusoidal excitation for numZones"
-    annotation (Placement(transformation(
-    extent={{-6,-6},{6,6}},
-    rotation=0,
-    origin={-30,-76})));
+  Modelica.Blocks.Routing.Replicator replicator(nout=5)
+    "Replicates sinusoidal excitation for numZones" annotation (Placement(
+        transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=0,
+        origin={-30,-54})));
+  Modelica.Blocks.Routing.Replicator replicator1(nout=5)
+    "Replicates sinusoidal excitation for numZones" annotation (Placement(
+        transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=0,
+        origin={-30,-76})));
 
 equation
   connect(weaDat.weaBus,weaBus)  annotation (Line(
@@ -105,18 +105,18 @@ equation
           -33},{-18,1},{33,1}}, color={0,0,127}));
   connect(tableInternalGains.y, multizone.intGains)
     annotation (Line(points={{55.2,-34},{48,-34},{48,-9}}, color={0,0,127}));
-  connect(gain.y, replicatorTemperatureVentilation1.u)
+  connect(gain.y, replicator.u)
     annotation (Line(points={{-43.4,-54},{-37.2,-54}}, color={0,0,127}));
   connect(sine.y, gain.u) annotation (Line(points={{-69,-64},{-62,-64},{-62,-54},
           {-57.2,-54}}, color={0,0,127}));
   connect(sine.y, gain1.u) annotation (Line(points={{-69,-64},{-62,-64},{-62,-76},
           {-57.2,-76}}, color={0,0,127}));
-  connect(gain1.y, replicatorTemperatureVentilation2.u) annotation (Line(points={{-43.4,
-          -76},{-37.2,-76}},                    color={0,0,127}));
-  connect(replicatorTemperatureVentilation2.y, prescribedHeatFlow1.Q_flow)
-    annotation (Line(points={{-23.4,-76},{-14,-76}},           color={0,0,127}));
-  connect(replicatorTemperatureVentilation1.y, prescribedHeatFlow.Q_flow)
-    annotation (Line(points={{-23.4,-54},{-18.7,-54},{-14,-54}}, color={0,0,127}));
+  connect(gain1.y, replicator1.u)
+    annotation (Line(points={{-43.4,-76},{-37.2,-76}}, color={0,0,127}));
+  connect(replicator1.y, prescribedHeatFlow1.Q_flow)
+    annotation (Line(points={{-23.4,-76},{-14,-76}}, color={0,0,127}));
+  connect(replicator.y, prescribedHeatFlow.Q_flow) annotation (Line(points={{-23.4,
+          -54},{-18.7,-54},{-14,-54}}, color={0,0,127}));
   connect(prescribedHeatFlow.port, multizone.intGainsRad) annotation (Line(
         points={{6,-54},{18,-54},{18,-22},{18,-2},{18,-1.6},{34,-1.6}},
                                 color={191,0,0}));
