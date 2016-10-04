@@ -30,7 +30,7 @@ equation
   <ul>
   <li><i>April 2016&nbsp;</i>
      by Peter Matthes:<br/>
-     Improved formulation of flow equation according to issue #232.</li>
+     Improved formulation of flow equation according to issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/232\">#232</a>.</li>
   <li><i>November 2014&nbsp;</i>
      by Marcus Fuchs:<br/>
      Changed model to use Annex 60 base class</li>
