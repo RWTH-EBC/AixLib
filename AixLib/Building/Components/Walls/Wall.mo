@@ -22,11 +22,16 @@ model Wall
         "Custom alpha",                                                                                                    radioButtons = true));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_custom = 25
     "Custom alpha for convection (just for manual selection, not recommended)"                                                                      annotation(Dialog(tab = "Surface Parameters", group = "Outside surface", enable = Model == 3 and outside));
-  parameter
-    DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook         surfaceType = DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster()
+ DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook         surfaceType = DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster()
     "Surface type of outside wall"                                                                                                     annotation(Dialog(tab = "Surface Parameters", group = "Outside surface", enable = Model == 2 and outside), choicesAllMatching = true);
   parameter Integer ISOrientation = 1 "Inside surface orientation" annotation(Dialog(tab = "Surface Parameters", group = "Inside surface", compact = true, descriptionLabel = true), choices(choice = 1
         "vertical wall",                                                                                                    choice = 2 "floor", choice = 3 "ceiling", radioButtons = true));
+  parameter Integer calculationMethod = 1
+    "Choose the model for calculation of heat convection at inside surface" annotation(Dialog(tab = "Surface Parameters", group = "Inside surface", compact = true, descriptionLabel = true), choices(choice = 1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
+      choice=2 "By Bernd Glueck",
+      choice=3 "Constant alpha",radioButtons = true));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_constant = 2.5
+    "Constant alpha for convection (just for manual selection, not recommended)" annotation(Dialog(tab = "Surface Parameters", group = "Inside surface", enable = calculationMethod == 3));
   // window parameters
   parameter Boolean withWindow = false
     "Choose if the wall has got a window (only outside walls)"                                    annotation(Dialog(tab = "Window", enable = outside));
@@ -42,8 +47,7 @@ model Wall
   parameter Boolean withSunblind = false "enable support of sunblinding?" annotation(Dialog(tab = "Window", enable = outside and withWindow));
   parameter Real Blinding = 0 "blinding factor <=1" annotation(Dialog(tab = "Window", enable = withWindow and outside and withSunblind));
   parameter Real Limit = 180
-    "minimum specific total solar radiation in W/m2 for blinding becoming active"
-                                                                                                        annotation(Dialog(tab = "Window", enable = withWindow and outside and withSunblind));
+    "minimum specific total solar radiation in W/m2 for blinding becoming active"                       annotation(Dialog(tab = "Window", enable = withWindow and outside and withSunblind));
   // door parameters
   parameter Boolean withDoor = false "Choose if the wall has got a door" annotation(Dialog(tab = "Door"));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer U_door = 1.8
@@ -59,7 +63,7 @@ model Wall
   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(20)
     "Initial temperature"                                                                                      annotation(Dialog(tab = "Advanced Parameters"));
   // COMPONENT PART
-  BaseClasses.ConvNLayerClearanceStar Wall(h = wall_height, l = wall_length, T0 = T0, clearance = clearance, selectable = true, eps = WallType.eps, wallType = WallType, surfaceOrientation = ISOrientation) "Wall" annotation(Placement(transformation(extent = {{-20, 14}, {2, 34}})));
+  BaseClasses.ConvNLayerClearanceStar Wall(h = wall_height, l = wall_length, T0 = T0, clearance = clearance, selectable = true, eps = WallType.eps, wallType = WallType, surfaceOrientation = ISOrientation, calcMethod = calculationMethod, alpha_constant = alpha_constant) "Wall" annotation(Placement(transformation(extent = {{-20, 14}, {2, 34}})));
   Utilities.HeatTransfer.SolarRadToHeat SolarAbsorption(coeff = solar_absorptance, A = wall_height * wall_length - clearance) if outside annotation(Placement(transformation(origin = {-39, 89}, extent = {{-10, -10}, {10, 10}})));
   BaseLib.Interfaces.SolarRad_in   SolarRadiationPort if outside annotation(Placement(transformation(extent = {{-116, 79}, {-96, 99}}), iconTransformation(extent = {{-36, 100}, {-16, 120}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_outside annotation(Placement(transformation(extent = {{-108, -6}, {-88, 14}}), iconTransformation(extent = {{-31, -10}, {-11, 10}})));
@@ -134,12 +138,12 @@ equation
   end if;
   connect(heatStarToComb.thermStarComb, thermStarComb_inside) annotation(Line(points = {{78.4, -1.1}, {78.4, -1.05}, {102, -1.05}, {102, 0}}, color = {191, 0, 0}));
   connect(port_outside, port_outside) annotation(Line(points = {{-98, 4}, {-98, 4}}, color = {191, 0, 0}, pattern = LinePattern.Solid));
-  annotation( Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-20, -120}, {20, 120}}, grid = {1, 1}), graphics={  Rectangle(extent=  {{-16, 120}, {15, -60}}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Backward,  pattern=LinePattern.None, lineColor=  {0, 0, 0}), Rectangle(extent=  {{-16, -90}, {15, -120}},  pattern=LinePattern.None, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Backward), Rectangle(extent=  {{-16, -51}, {15, -92}}, lineColor=  {0, 0, 0},  pattern=LinePattern.None, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Backward, visible=  not withDoor), Rectangle(extent=  {{-16, 80}, {15, 20}}, fillColor=  {255, 255, 255},
-            fillPattern=                                                                                                    FillPattern.Solid, visible=  outside and withWindow, lineColor=  {255, 255, 255}), Line(points=  {{-2, 80}, {-2, 20}}, color=  {0, 0, 0}, visible=  outside and withWindow), Line(points=  {{1, 80}, {1, 20}}, color=  {0, 0, 0}, visible=  outside and withWindow), Line(points=  {{1, 77}, {-2, 77}}, color=  {0, 0, 0}, visible=  outside and withWindow), Line(points=  {{1, 23}, {-2, 23}}, color=  {0, 0, 0}, visible=  outside and withWindow), Ellipse(extent=  {{-16, -60}, {44, -120}}, lineColor=  {0, 0, 0}, startAngle=  359, endAngle=  450, visible=  withDoor), Rectangle(extent=  {{-16, -60}, {15, -90}}, visible=  withDoor, lineColor=  {255, 255, 255}, fillColor=  {255, 255, 255},
-            fillPattern=                                                                                                    FillPattern.Solid), Line(points=  {{1, 50}, {-2, 50}}, color=  {0, 0, 0}, visible=  outside and withWindow), Line(points=  {{15, 80}, {15, 20}}, color=  {0, 0, 0}, visible=  outside and withWindow), Line(points=  {{-16, 80}, {-16, 20}}, color=  {0, 0, 0}, visible=  outside and withWindow), Line(points=  {{-16, -60}, {-16, -90}}, color=  {0, 0, 0}, visible=  withDoor), Line(points=  {{15, -60}, {15, -90}}, color=  {0, 0, 0}, visible=  withDoor), Line(points=  {{-16, -90}, {15, -60}}, color=  {0, 0, 0}, visible=  withDoor), Line(points=  {{-16, -60}, {15, -90}}, color=  {0, 0, 0}, visible=  withDoor)}), Documentation(info = "<html>
+  annotation (Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-20, -120}, {20, 120}}, grid = {1, 1}), graphics={  Rectangle(extent = {{-16, 120}, {15, -60}}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Backward,  pattern=LinePattern.None, lineColor = {0, 0, 0}), Rectangle(extent = {{-16, -90}, {15, -120}},  pattern=LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Backward), Rectangle(extent = {{-16, -51}, {15, -92}}, lineColor = {0, 0, 0},  pattern=LinePattern.None, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Backward, visible = not withDoor), Rectangle(extent = {{-16, 80}, {15, 20}}, fillColor = {255, 255, 255},
+            fillPattern =                                                                                                   FillPattern.Solid, visible = outside and withWindow, lineColor = {255, 255, 255}), Line(points = {{-2, 80}, {-2, 20}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{1, 80}, {1, 20}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{1, 77}, {-2, 77}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{1, 23}, {-2, 23}}, color = {0, 0, 0}, visible = outside and withWindow), Ellipse(extent = {{-16, -60}, {44, -120}}, lineColor = {0, 0, 0}, startAngle = 359, endAngle = 450, visible = withDoor), Rectangle(extent = {{-16, -60}, {15, -90}}, visible = withDoor, lineColor = {255, 255, 255}, fillColor = {255, 255, 255},
+            fillPattern =                                                                                                   FillPattern.Solid), Line(points = {{1, 50}, {-2, 50}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{15, 80}, {15, 20}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{-16, 80}, {-16, 20}}, color = {0, 0, 0}, visible = outside and withWindow), Line(points = {{-16, -60}, {-16, -90}}, color = {0, 0, 0}, visible = withDoor), Line(points = {{15, -60}, {15, -90}}, color = {0, 0, 0}, visible = withDoor), Line(points = {{-16, -90}, {15, -60}}, color = {0, 0, 0}, visible = withDoor), Line(points = {{-16, -60}, {15, -90}}, color = {0, 0, 0}, visible = withDoor)}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Flexible Model for Inside Walls and Outside Walls. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>

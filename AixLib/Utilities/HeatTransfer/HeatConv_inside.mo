@@ -12,9 +12,10 @@ model HeatConv_inside
       choice=3 "Constant alpha",
       radioButtons=true));
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_custom=2.5
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_custom = 2.5
     "Constant heat transfer coefficient" annotation (Dialog(descriptionLabel=true,
         enable=if calcMethod == 3 then true else false));
+
 
   // which orientation of surface?
   parameter Integer surfaceOrientation=1 "Surface orientation" annotation (
