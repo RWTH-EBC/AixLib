@@ -87,5 +87,5 @@ First implementation.
           lineColor={0,0,127},
           textString="decAng"),
         Bitmap(extent={{-90,90},{90,-92}}, fileName=
-              "modelica://AixLib/Resources/Resources/Images/BoundaryConditions/SolarGeometry/BaseClasses/SolarAzimuth.png")}));
+              "modelica://AixLib/Resources/Images/BoundaryConditions/SolarGeometry/BaseClasses/SolarAzimuth.png")}));
 end SolarAzimuth;

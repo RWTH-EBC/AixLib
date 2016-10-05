@@ -61,5 +61,5 @@ First implementation.
           lineColor={0,0,127},
           textString="solHouAng"),
         Bitmap(extent={{-90,92},{90,-94}}, fileName=
-              "modelica://AixLib/Resources/Resources/Images/BoundaryConditions/SolarGeometry/BaseClasses/IncidenceAngle.png")}));
+              "modelica://AixLib/Resources/Images/BoundaryConditions/SolarGeometry/BaseClasses/IncidenceAngle.png")}));
 end IncidenceAngle;

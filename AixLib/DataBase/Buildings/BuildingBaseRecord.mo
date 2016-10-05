@@ -2,7 +2,7 @@ within AixLib.DataBase.Buildings;
 record BuildingBaseRecord "Base record definition for building records"
   extends Modelica.Icons.Record;
   // General
-  parameter String buildingID="M4120" "unique identifier of the building";
+  parameter Integer buildingID=0001 "unique identifier of the building";
   parameter String usage="Office Building" "typical usage of the building";
   parameter Integer numZones=1 "Number of Zones in the building";
   parameter AixLib.DataBase.Buildings.ZoneBaseRecord zoneSetup[:]={AixLib.DataBase.Buildings.ZoneBaseRecord()}

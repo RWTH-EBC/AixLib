@@ -7,7 +7,6 @@ record OPH_4_Restroom
     Cooler_on = false,
     l_cooler = 0,
     RatioConvectiveHeatLighting = 0.5,
-    zoneID = "OPH_4_Restroom",
     usage = "Restroom",
     RoomArea = 134.0,
     Vair = 536.0,
