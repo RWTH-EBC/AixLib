@@ -1,14 +1,11 @@
 within AixLib.ThermalZones.ReducedOrder.Examples;
 model Multizone "Illustrates the use of Multizone"
+  import AixLib;
   extends Modelica.Icons.Example;
 
   AixLib.ThermalZones.ReducedOrder.Multizone.Multizone multizone(
-    redeclare package Medium = Modelica.Media.Air.SimpleAir,
     buildingID=1,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(
-    thermCapInt(each der_T(fixed=true))))),
-    T_start=293.15,
     VAir=33500,
     ABuilding=8375,
     ASurTot=12744.27,
@@ -17,7 +14,11 @@ model Multizone "Illustrates the use of Multizone"
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(),
-        AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office()})
+        AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office()},
+    T_start=293.15,
+    redeclare AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped
+      zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(
+    thermCapInt(each der_T(fixed=true))))))
     "Multizone"
     annotation (Placement(transformation(extent={{32,-8},{52,12}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3
