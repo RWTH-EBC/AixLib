@@ -4,11 +4,8 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
   extends Modelica.Icons.Example;
 
   AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
-    redeclare package Medium = Modelica.Media.Air.SimpleAir,
     buildingID=1,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(
-    thermCapInt(each der_T(fixed=true))))),
     VAir=33500,
     ABuilding=8375,
     ASurTot=12744.27,
@@ -27,9 +24,12 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
     sampleRateAHU=1800,
     effFanAHU_sup=0.7,
     effFanAHU_eta=0.7,
-    T_start=293.15,
     effHRSAHU_enabled=0.8,
     effHRSAHU_disabled=0.2,
+    T_start=293.15,
+    redeclare AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped
+      zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(
+    thermCapInt(each der_T(fixed=true))))),
     dpAHU_sup=80000000,
     dpAHU_eta=80000000)
     "Multizone"
