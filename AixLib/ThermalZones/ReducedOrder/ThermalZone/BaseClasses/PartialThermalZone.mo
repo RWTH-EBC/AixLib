@@ -1,6 +1,6 @@
 within AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses;
 partial model PartialThermalZone "Partial model for thermal zone modelsl"
-  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
+  extends AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.LumpedVolumeDeclarations;
 
   parameter DataBase.ThermalZones.ZoneBaseRecord zoneParam
     "Choose setup for this zone" annotation (choicesAllMatching=true);

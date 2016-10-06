@@ -1,5 +1,6 @@
 AirFlowRateSplit
 AirFlowRateSum
+LumpedVolumeDeclarations
 PartialMultizone
 RelToAbsHum
 SumCondition
