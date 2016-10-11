@@ -21,7 +21,8 @@ public
     Air_temp=true,
     Wind_speed=false,
     SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_RoofN_Roof_S(),
-    fileName="D:/GIT/AixLib/AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt")
+    fileName=Modelica.Utilities.Files.loadResource(
+        "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt"))
     annotation (Placement(transformation(extent={{-93,49},{-68,66}})));
 
 equation
