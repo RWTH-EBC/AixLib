@@ -1,12 +1,9 @@
 within AixLib.Fluid.Storage.BaseClasses;
-partial model Partial_HeatTransfer_Layers
+partial model PartialHeatTransferLayers
   import DataBase;
   final outer parameter Integer n(min=2)=3;
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a[n] therm annotation (
       Placement(transformation(extent={{40,0},{60,20}}, rotation=0)));
-   // Modelica_Fluid.Interfaces.FluidPort_a[n+1] fluidport(  redeclare final
-   //   package Medium =
-   //             Medium) annotation 1;
 
   final outer replaceable package Medium =
       Modelica.Media.Interfaces.PartialMedium "Medium model" annotation(choicesAllMatching);
@@ -66,13 +63,12 @@ final outer replaceable parameter
 <p><img src=\"modelica://HVAC/Images/stars2.png\"/> </p>
 </html>",
       revisions="<html>
-<p><ul>
+      <p><ul>
+      <li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Added to AixLib</li>     
 <li><i>October 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
 </ul></p>
 </html>
 "));
-  //Modelica.Blocks.Interfaces.RealInput m_flow annotation 5;
-  //Modelica.Blocks.Interfaces.RealInput[n+1] H_flow
-  //  "Enthalpy flow between the volumes" annotation 6;
 
-end Partial_HeatTransfer_Layers;
+
+end PartialHeatTransferLayers;

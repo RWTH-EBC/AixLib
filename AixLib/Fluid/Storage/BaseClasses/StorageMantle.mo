@@ -1,79 +1,78 @@
 within AixLib.Fluid.Storage.BaseClasses;
-model storage_mantle
-  import HVAC;
+model StorageMantle
 
 //////parameters////
 
   parameter Modelica.SIunits.Length height=0.15 "Hoehe der Schicht"  annotation(Dialog(tab="Geometrical Parameters"));
   parameter Modelica.SIunits.Diameter D1=1 "Innendurchmesser des Tanks" annotation(Dialog(tab="Geometrical Parameters"));
-  parameter Modelica.SIunits.Thickness d_wall=0.1 "Thickness of wall" annotation(Dialog(tab="Geometrical Parameters"));
-  parameter Modelica.SIunits.Thickness d_ins=0.1 "Thickness of insulation" annotation(Dialog(tab="Geometrical Parameters"));
+  parameter Modelica.SIunits.Thickness sWall=0.1 "Thickness of wall" annotation(Dialog(tab="Geometrical Parameters"));
+  parameter Modelica.SIunits.Thickness sIns=0.1 "Thickness of insulation" annotation(Dialog(tab="Geometrical Parameters"));
   /*parameter SI.Length roughness(min=0) = 2.5e-5 
     "Absolute roughness of storage inside wall (default = smooth steel pipe)" annotation 4;*/
 
-final parameter Modelica.SIunits.Area A_inside= D1*Modelica.Constants.pi * height;
-final parameter Modelica.SIunits.Area A_outside= (D1+2*(d_wall+d_ins))*Modelica.Constants.pi * height;
+final parameter Modelica.SIunits.Area AInside= D1*Modelica.Constants.pi * height;
+final parameter Modelica.SIunits.Area AOutside= (D1+2*(sWall+sIns))*Modelica.Constants.pi * height;
 
-  parameter Modelica.SIunits.ThermalConductivity lambda_wall=50
+  parameter Modelica.SIunits.ThermalConductivity lambdaWall=50
     "Thermal Conductivity of wall";
-    parameter Modelica.SIunits.ThermalConductivity lambda_ins=0.045
+    parameter Modelica.SIunits.ThermalConductivity lambdaIns=0.045
     "Thermal Conductivity of insulation";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_inside=2
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaInside=2
     "Coefficient of Heat Transfer water <-> wall";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_outside=2
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaOutside=2
     "Coefficient of Heat Transfer insulation <-> air";
-  parameter Modelica.SIunits.Temperature T_start_wall=293.15
+  parameter Modelica.SIunits.Temperature TStartWall=293.15
     "Starting Temperature of wall in K";
-  parameter Modelica.SIunits.Temperature T_start_ins=293.15
+  parameter Modelica.SIunits.Temperature TStartIns=293.15
     "Starting Temperature of insulation in K";
-  parameter Modelica.SIunits.Density rho_ins=1600;
-  parameter Modelica.SIunits.SpecificHeatCapacity c_ins=1000;
-  parameter Modelica.SIunits.Density rho_wall=1600;
-  parameter Modelica.SIunits.SpecificHeatCapacity c_wall=1000;
+  parameter Modelica.SIunits.Density rhoIns=1600;
+  parameter Modelica.SIunits.SpecificHeatCapacity cIns=1000;
+  parameter Modelica.SIunits.Density rhoWall=1600;
+  parameter Modelica.SIunits.SpecificHeatCapacity cWall=1000;
 
 //////components///
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_outer
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatportOuter
     annotation (Placement(transformation(extent={{80,0},{100,20}}, rotation=
            0)));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_inner
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatportInner
     annotation (Placement(transformation(extent={{-100,0},{-80,20}},
           rotation=0)));
 
     Utilities.HeatTransfer.CylindricHeatTransfer                       Insulation(
-    rho=rho_ins,
-    c=c_ins,
-    lambda=lambda_ins,
-    T0=T_start_ins,
+    rho=rhoIns,
+    c=cIns,
+    lambda=lambdaIns,
+    T0=TStartIns,
     length=height,
-    d_out=D1 + 2*d_wall + 2*d_ins,
-    d_in=D1 + 2*d_wall)
+    d_out=D1 + 2*sWall + 2*sIns,
+    d_in=D1 + 2*sWall)
     annotation (Placement(transformation(extent={{-4,-12},{44,32}})));
     Utilities.HeatTransfer.CylindricHeatTransfer                       Wall(
-    rho=rho_wall,
-    c=c_wall,
-    lambda=lambda_wall,
-    T0=T_start_wall,
+    rho=rhoWall,
+    c=cWall,
+    lambda=lambdaWall,
+    T0=TStartWall,
     length=height,
-    d_out=D1 + 2*d_wall,
+    d_out=D1 + 2*sWall,
     d_in=D1) annotation (Placement(transformation(extent={{-70,-12},{-22,32}})));
-  AixLib.Utilities.HeatTransfer.HeatConv conv_inside(alpha=alpha_inside, A=
-        A_inside) annotation (Placement(transformation(extent={{-80,4},{-68,16}},
+  AixLib.Utilities.HeatTransfer.HeatConv convInside(alpha=alphaInside, A=
+        AInside) annotation (Placement(transformation(extent={{-80,4},{-68,16}},
           rotation=0)));
-  AixLib.Utilities.HeatTransfer.HeatConv conv_inside1(A=A_outside, alpha=
-        alpha_outside) annotation (Placement(transformation(
+  AixLib.Utilities.HeatTransfer.HeatConv convOutside(A=AOutside, alpha=
+        alphaOutside) annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=180,
         origin={62,10})));
 equation
-  connect(conv_inside.port_a, heatport_inner) annotation (Line(
+  connect(convInside.port_a, heatportInner) annotation (Line(
       points={{-80,10},{-90,10}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(conv_inside1.port_a, heatport_outer) annotation (Line(
+  connect(convOutside.port_a, heatportOuter) annotation (Line(
       points={{68,10},{90,10}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(conv_inside.port_b,Wall.port_a)  annotation (Line(
+  connect(convInside.port_b,Wall.port_a)  annotation (Line(
       points={{-68,10},{-46,10}},
       color={191,0,0},
       smooth=Smooth.None));
@@ -81,7 +80,7 @@ equation
       points={{-46,29.36},{-14,29.36},{-14,10},{20,10}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(Insulation.port_b,conv_inside1.port_b)  annotation (Line(
+  connect(Insulation.port_b,convOutside.port_b)  annotation (Line(
       points={{20,29.36},{38,29.36},{38,10},{56,10}},
       color={191,0,0},
       smooth=Smooth.None));
@@ -130,10 +129,11 @@ equation
 <p>The cylindric heat transfer is implemented consisting of the insulation material and the tank material. Only the material data is used for the calculation of losses. No additional losses are included.</p>
 </html>",
       revisions="<html>
-<p><ul>
+      <p><ul>
+<li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Added to AixLib</li>     
 <li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL</li>
 <li><i>October 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
 </ul></p>
 </html>
 "));
-end storage_mantle;
+end StorageMantle;

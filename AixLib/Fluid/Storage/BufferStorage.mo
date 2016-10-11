@@ -22,11 +22,11 @@ model BufferStorage
       Modelica.Media.Interfaces.PartialMedium "Medium model for HC2"
                  annotation (choicesAllMatching = true, Dialog(group="Medium"));
 
-  parameter Boolean use_heatingCoil1=true "Use Heating Coil1?" annotation(Dialog(tab="Heating Coils and Rod"));
-  parameter Boolean use_heatingCoil2=true "Use Heating Coil2?" annotation(Dialog(tab="Heating Coils and Rod"));
-  parameter Boolean use_heatingRod=true "Use Heating Rod?" annotation(Dialog(tab="Heating Coils and Rod"));
+  parameter Boolean useHeatingCoil1=true "Use Heating Coil1?" annotation(Dialog(tab="Heating Coils and Rod"));
+  parameter Boolean useHeatingCoil2=true "Use Heating Coil2?" annotation(Dialog(tab="Heating Coils and Rod"));
+  parameter Boolean useHeatingRod=true "Use Heating Rod?" annotation(Dialog(tab="Heating Coils and Rod"));
 
-  inner parameter SI.Temperature T_start=298.15 "Start Temperature of fluid" annotation (Dialog(tab="Initialisation"));
+  inner parameter SI.Temperature TStart=298.15 "Start Temperature of fluid" annotation (Dialog(tab="Initialisation"));
 
     inner parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
       AixLib.DataBase.Storage.Generic_500l()
@@ -38,57 +38,57 @@ model BufferStorage
 /////////////CONVECTION/////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_inside=100
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaInside=100
     "Model assumptions Coefficient of Heat Transfer water <-> wall";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_outside=10
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaOutside=10
     "Model assumptions Coefficient of Heat Transfer insulation <-> air";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_HC1=100
-    "Model assumptions Coefficient of Heat Transfer HC1 <-> Heating Water" annotation(Dialog(enable = use_heatingCoil1,tab="Heating Coils and Rod"));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_HC2=100
-    " Model assumptions Coefficient of Heat Transfer HC2 <-> Heating Water" annotation(Dialog(enable = use_heatingCoil2,tab="Heating Coils and Rod"));
-  parameter Boolean Up_to_down_HC1 = true
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaHC1=100
+    "Model assumptions Coefficient of Heat Transfer HC1 <-> Heating Water" annotation(Dialog(enable = useHeatingCoil1,tab="Heating Coils and Rod"));
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaHC2=100
+    " Model assumptions Coefficient of Heat Transfer HC2 <-> Heating Water" annotation(Dialog(enable = useHeatingCoil2,tab="Heating Coils and Rod"));
+  parameter Boolean upToDownHC1 = true
     "Heating Coil 1 orientation from up to down?"
-                                                 annotation(Dialog(enable = use_heatingCoil1,tab="Heating Coils and Rod"));
-  parameter Boolean Up_to_down_HC2 = true
+                                                 annotation(Dialog(enable = useHeatingCoil1,tab="Heating Coils and Rod"));
+  parameter Boolean upToDownHC2 = true
     "Heating Coil 2 orientation from up to down?"
-                                                 annotation(Dialog(enable = use_heatingCoil2,tab="Heating Coils and Rod"));
+                                                 annotation(Dialog(enable = useHeatingCoil2,tab="Heating Coils and Rod"));
 
-  parameter Modelica.SIunits.Temperature T_start_wall=293.15
+  parameter Modelica.SIunits.Temperature TStartWall=293.15
     "Starting Temperature of wall in K" annotation(Dialog(tab="Initialisation"));
-  parameter Modelica.SIunits.Temperature T_start_ins=293.15
+  parameter Modelica.SIunits.Temperature TStartIns=293.15
     "Starting Temperature of insulation in K" annotation(Dialog(tab="Initialisation"));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////final parameters////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
- final parameter Integer n_HC1_up=integer(BaseLib.Utilities.Round(data.h_HC1_up/(data.h_Tank/n) + 0.5,0));
- final parameter Integer n_HC1_low=integer(BaseLib.Utilities.Round(data.h_HC1_low/(data.h_Tank/n) + 0.5,0));
- final parameter Integer dis_HC1 = n_HC1_up-n_HC1_low+1;
+ final parameter Integer nHC1Up=integer(BaseLib.Utilities.Round(data.hHC1Up/(data.hTank/n) + 0.5,0));
+ final parameter Integer nHC1Low=integer(BaseLib.Utilities.Round(data.hHC1Low/(data.hTank/n) + 0.5,0));
+ final parameter Integer disHC1 = nHC1Up-nHC1Low+1;
 
- final parameter Integer n_HC2_up=integer(BaseLib.Utilities.Round(data.h_HC2_up/(data.h_Tank/n) + 0.5,0));
- final parameter Integer n_HC2_low=integer(BaseLib.Utilities.Round(data.h_HC2_low/(data.h_Tank/n) + 0.5,0));
- final parameter Integer dis_HC2 = n_HC2_up-n_HC2_low+1;
+ final parameter Integer nHC2Up=integer(BaseLib.Utilities.Round(data.hHC2Up/(data.hTank/n) + 0.5,0));
+ final parameter Integer nHC2Low=integer(BaseLib.Utilities.Round(data.hHC2Low/(data.hTank/n) + 0.5,0));
+ final parameter Integer disHC2 = nHC2Up-nHC2Low+1;
 
- final parameter Integer n_HR=integer(BaseLib.Utilities.Round(data.h_HR/(data.h_Tank/n) + 0.5,0));
+ final parameter Integer nHR=integer(BaseLib.Utilities.Round(data.hHR/(data.hTank/n) + 0.5,0));
 
- final parameter Integer n_TS1=integer(BaseLib.Utilities.Round(data.h_TS1/(data.h_Tank/n) + 0.5,0));
- final parameter Integer n_TS2=integer(BaseLib.Utilities.Round(data.h_TS2/(data.h_Tank/n) + 0.5,0));
+ final parameter Integer nTS1=integer(BaseLib.Utilities.Round(data.hTS1/(data.hTank/n) + 0.5,0));
+ final parameter Integer nTS2=integer(BaseLib.Utilities.Round(data.hTS2/(data.hTank/n) + 0.5,0));
 
- constant Integer n_lower_ports=integer(max(BaseLib.Utilities.Round(data.h_lower_ports/(data.h_Tank/n) + 0.5,0),1));
- constant Integer n_upper_ports=integer(min(BaseLib.Utilities.Round(data.h_upper_ports/(data.h_Tank/n) + 0.5,0),n));
- constant Boolean input_lowest_layer=(n_lower_ports == 1);
- constant Boolean input_highest_layer=(n_upper_ports == n);
+ constant Integer nLowerPorts=integer(max(BaseLib.Utilities.Round(data.hLowerPorts/(data.hTank/n) + 0.5,0),1));
+ constant Integer nUpperPorts=integer(min(BaseLib.Utilities.Round(data.hUpperPorts/(data.hTank/n) + 0.5,0),n));
+ constant Boolean inpLowLay=(nLowerPorts == 1); //if there is an input at the lowest layer
+ constant Boolean inpHigLay=(nUpperPorts == n);
 
- constant Integer[n] input_actual_layer = cat(1,{if (n_lower_ports==k) then (if (n_upper_ports==k) then 2 else 1) else (if (n_upper_ports==k) then 1 else 0) for k in 1:n});
- constant Integer[n] ports_layer=cat(1,{if input_actual_layer[1]==1 then 3 else 1},{input_actual_layer[k]*2+2 for k in 2:n-1},{if input_actual_layer[n]==1 then 3 else 1});
+ constant Integer[n] inpActLay = cat(1,{if (nLowerPorts==k) then (if (nUpperPorts==k) then 2 else 1) else (if (nUpperPorts==k) then 1 else 0) for k in 1:n});
+ constant Integer[n] portsLayer=cat(1,{if inpActLay[1]==1 then 3 else 1},{inpActLay[k]*2+2 for k in 2:n-1},{if inpActLay[n]==1 then 3 else 1});
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////components/////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatport_outside
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatportOutside
     annotation (Placement(transformation(extent={{68,-4},{88,16}},rotation=0),
         iconTransformation(extent={{68,-4},{88,16}})));
-  Modelica.Blocks.Interfaces.RealOutput T_top
+  Modelica.Blocks.Interfaces.RealOutput TTop
     annotation (Placement(transformation(
         origin={-77,81},
         extent={{-5,5},{5,-5}},
@@ -96,7 +96,7 @@ model BufferStorage
         extent={{-5,5},{5,-5}},
         rotation=0,
         origin={-80,88})));
-  Modelica.Blocks.Interfaces.RealOutput T_bottom
+  Modelica.Blocks.Interfaces.RealOutput TBottom
     annotation (Placement(transformation(
         origin={-77,-77},
         extent={{-5,5},{5,-5}},
@@ -104,46 +104,44 @@ model BufferStorage
         extent={{-5,5},{5,-5}},
         rotation=0,
         origin={-80,-80})));
-  Modelica.Fluid.Interfaces.FluidPort_a fluidport_top1(  redeclare final
-      package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_a fluidportTop1(  redeclare final package
+              Medium =
                 Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-38,92},{-18,110}},rotation=
            0), iconTransformation(extent={{-38,92},{-18,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_a fluidport_bottom2(redeclare final
+  Modelica.Fluid.Interfaces.FluidPort_a fluidportBottom2(redeclare final
       package Medium =
                Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{14,-110},{32,-92}},rotation=
            0), iconTransformation(extent={{14,-110},{32,-92}})));
-  Modelica.Fluid.Interfaces.FluidPort_b fluidport_bottom1(  redeclare final
+  Modelica.Fluid.Interfaces.FluidPort_b fluidportBottom1(  redeclare final
       package Medium =
                  Medium)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-36,-112},{-18,-92}},
           rotation=0), iconTransformation(extent={{-36,-112},{-18,-92}})));
-  Modelica.Fluid.Interfaces.FluidPort_b fluidport_top2(redeclare final package
+  Modelica.Fluid.Interfaces.FluidPort_b fluidportTop2(redeclare final package
       Medium =
         Medium)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{14,92},{36,110}},rotation=0),
         iconTransformation(extent={{14,92},{36,110}})));
 
-  // Deleted: uebergabe von heatCond(lambda=lambda_water) an heat transfer
-
   HeatTransfer heatTransfer annotation (Placement(transformation(extent={{-34,0},
             {-14,20}}, rotation=0)));
 
   MixingVolumes.MixingVolume          layer[n](
-    V=fill(data.h_Tank/n*Modelica.Constants.pi/4*data.d_Tank^2,n),
-    nPorts = ports_layer,
-    T_start=fill(T_start,n),
+    V=fill(data.hTank/n*Modelica.Constants.pi/4*data.dTank^2,n),
+    nPorts = portsLayer,
+    T_start=fill(TStart,n),
     redeclare package Medium = Medium,
     m_flow_nominal=0.05)
     annotation (Placement(transformation(extent={{-6,0},{14,20}})));
 replaceable model HeatTransfer =
-      AixLib.Fluid.Storage.BaseClasses.HeatTransfer_OnlyConduction
-  constrainedby AixLib.Fluid.Storage.BaseClasses.Partial_HeatTransfer_Layers
+      AixLib.Fluid.Storage.BaseClasses.HeatTransferOnlyConduction
+  constrainedby AixLib.Fluid.Storage.BaseClasses.PartialHeatTransferLayers
     "Heat Transfer Model between fluid layers"
 annotation(choicesAllMatching=true, Documentation(info="<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>
@@ -169,13 +167,13 @@ Heat transfer model for heat transfer between two fluid layers.
 /////HEATING COIL 1 ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
-  Modelica.Fluid.Interfaces.FluidPort_a port_HC1_in(redeclare package Medium =
-        MediumHC1) if use_heatingCoil1
+  Modelica.Fluid.Interfaces.FluidPort_a portHC1In(redeclare package Medium =
+        MediumHC1) if useHeatingCoil1
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-92,36},{-72,56}}),
         iconTransformation(extent={{-90,50},{-74,64}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_HC1_out(redeclare package Medium =
-        MediumHC1) if use_heatingCoil1
+  Modelica.Fluid.Interfaces.FluidPort_b portHC1Out(redeclare package Medium =
+        MediumHC1) if useHeatingCoil1
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-90,2},{-70,22}}),
         iconTransformation(extent={{-88,20},{-74,32}})));
@@ -184,13 +182,13 @@ Heat transfer model for heat transfer between two fluid layers.
 /////HEATING COIL 2 ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
-  Modelica.Fluid.Interfaces.FluidPort_a port_HC2_in(redeclare package Medium =
-        MediumHC2) if use_heatingCoil2
+  Modelica.Fluid.Interfaces.FluidPort_a portHC2In(redeclare package Medium =
+        MediumHC2) if useHeatingCoil2
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-92,-30},{-72,-10}}),
         iconTransformation(extent={{-88,-32},{-74,-18}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_HC2_out(redeclare package Medium =
-        MediumHC2) if use_heatingCoil2
+  Modelica.Fluid.Interfaces.FluidPort_b portHC2Out(redeclare package Medium =
+        MediumHC2) if useHeatingCoil2
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-92,-68},{-72,-48}}),
         iconTransformation(extent={{-88,-64},{-74,-50}})));
@@ -200,83 +198,84 @@ Heat transfer model for heat transfer between two fluid layers.
 ////////////////////////////////////////////////////////////////////////////////////////
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatingRod if
-                                          use_heatingRod annotation (
+                                          useHeatingRod annotation (
       Placement(transformation(extent={{-86,-6},{-74,6}}, rotation=0)));
 
 //////////////////////////////////////////////////////////////////////////////////////////
 /////COVER / INSULATION  ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
-  AixLib.Fluid.Storage.BaseClasses.storage_cover top_cover(
-    lambda_wall=data.lambda_wall,
-    lambda_ins=data.lambda_ins,
-    alpha_inside=alpha_inside,
-    alpha_outside=alpha_outside,
-    T_start_wall=T_start_wall,
-    T_start_ins=T_start_ins,
-    rho_ins=data.rho_ins,
-    c_ins=data.c_ins,
-    rho_wall=data.rho_wall,
-    c_wall=data.c_wall,
-    D1=data.d_Tank,
-    d_wall=data.s_wall,
-    d_ins=data.s_ins) annotation (Placement(transformation(
+  AixLib.Fluid.Storage.BaseClasses.StorageCover topCover(
+    lambdaWall=data.lambdaWall,
+    lambdaIns=data.lambdaIns,
+    alphaInside=alphaInside,
+    alphaOutside=alphaOutside,
+    TStartWall=TStartWall,
+    TStartIns=TStartIns,
+    rhoIns=data.rhoIns,
+    cIns=data.cIns,
+    rhoWall=data.rhoWall,
+    cWall=data.cWall,
+    D1=data.dTank,
+    sWall=data.sWall,
+    sIns=data.sIns) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={8,56})));
-  AixLib.Fluid.Storage.BaseClasses.storage_mantle storage_mantle[n](
-    each lambda_wall=data.lambda_wall,
-    each lambda_ins=data.lambda_ins,
-    each T_start_wall=T_start_wall,
-    each T_start_ins=T_start_ins,
-    each rho_ins=data.rho_ins,
-    each c_ins=data.c_ins,
-    each rho_wall=data.rho_wall,
-    each c_wall=data.c_wall,
-    each height=data.h_Tank/n,
-    each D1=data.d_Tank,
-    each d_wall=data.s_wall,
-    each d_ins=data.s_ins,
-    each alpha_inside=alpha_inside,
-    each alpha_outside=alpha_outside)
+  AixLib.Fluid.Storage.BaseClasses.StorageMantle storageMantle[n](
+    each lambdaWall=data.lambdaWall,
+    each lambdaIns=data.lambdaIns,
+    each TStartWall=TStartWall,
+    each TStartIns=TStartIns,
+    each rhoIns=data.rhoIns,
+    each cIns=data.cIns,
+    each rhoWall=data.rhoWall,
+    each cWall=data.cWall,
+    each height=data.hTank/n,
+    each D1=data.dTank,
+    each sWall=data.sWall,
+    each sIns=data.sIns,
+    each alphaInside=alphaInside,
+    each alphaOutside=alphaOutside)
     annotation (Placement(transformation(extent={{20,-2},{40,18}})));
-  AixLib.Fluid.Storage.BaseClasses.storage_cover bottom_cover(
-    lambda_wall=data.lambda_wall,
-    lambda_ins=data.lambda_ins,
-    alpha_inside=alpha_inside,
-    alpha_outside=alpha_outside,
-    T_start_wall=T_start_wall,
-    T_start_ins=T_start_ins,
-    rho_ins=data.rho_ins,
-    c_ins=data.c_ins,
-    rho_wall=data.rho_wall,
-    c_wall=data.c_wall,
-    D1=data.d_Tank,
-    d_wall=data.s_wall,
-    d_ins=data.s_ins) annotation (Placement(transformation(
+  AixLib.Fluid.Storage.BaseClasses.StorageCover bottomCover(
+    lambdaWall=data.lambdaWall,
+    lambdaIns=data.lambdaIns,
+    alphaInside=alphaInside,
+    alphaOutside=alphaOutside,
+    TStartWall=TStartWall,
+    TStartIns=TStartIns,
+    rhoIns=data.rhoIns,
+    cIns=data.cIns,
+    rhoWall=data.rhoWall,
+    cWall=data.cWall,
+    D1=data.dTank,
+    sWall=data.sWall,
+    sIns=data.sIns) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={6,-44})));
 
   AixLib.Fluid.Storage.BaseClasses.HeatingCoil heatingCoil1(
-    dis_HC=dis_HC1,
-    alpha_HC=alpha_HC1,
+    disHC=disHC1,
+    alphaHC=alphaHC1,
     redeclare package Medium = MediumHC1,
-    Length_HC=data.Length_HC1,
-    Pipe_HC=data.Pipe_HC1,
-    allowFlowReversal=true) if
-                              use_heatingCoil1 annotation (Placement(
+    lengthHC=data.lengthHC1,
+    pipeHC=data.pipeHC1,
+    allowFlowReversal=true,
+    m_flow_nominal=0.05) if   useHeatingCoil1 annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-58,29})));
   AixLib.Fluid.Storage.BaseClasses.HeatingCoil heatingCoil2(
-    dis_HC=dis_HC2,
-    Length_HC=data.Length_HC2,
-    alpha_HC=alpha_HC2,
-    Pipe_HC=data.Pipe_HC2,
+    disHC=disHC2,
+    lengthHC=data.lengthHC2,
+    alphaHC=alphaHC2,
+    pipeHC=data.pipeHC2,
     redeclare package Medium = MediumHC2,
-    allowFlowReversal=true) if               use_heatingCoil2 annotation (
+    allowFlowReversal=true,
+    m_flow_nominal=0.05) if                  useHeatingCoil2 annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
@@ -285,45 +284,45 @@ equation
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////connection of Heating Coils//////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
- if use_heatingCoil1 then
+ if useHeatingCoil1 then
 
- for i in n_HC1_low:n_HC1_up loop
+ for i in nHC1Low:nHC1Up loop
 
-   if Up_to_down_HC1 == true then
-     connect(heatingCoil1.Therm1[n_HC1_up+1-i], layer[i].heatPort);
+   if upToDownHC1 == true then
+     connect(heatingCoil1.Therm1[nHC1Up+1-i], layer[i].heatPort);
    else
-     connect(heatingCoil1.Therm1[i-n_HC1_low+1], layer[i].heatPort);
+     connect(heatingCoil1.Therm1[i-nHC1Low+1], layer[i].heatPort);
  end if;
 
 end for;
 
-connect(port_HC1_in, heatingCoil1.port_a) annotation (Line(
+connect(portHC1In, heatingCoil1.port_a) annotation (Line(
       points={{-82,46},{-58,46},{-58,39}},
       color={0,127,255},
       smooth=Smooth.None));
-  connect(port_HC1_out, heatingCoil1.port_b) annotation (Line(
+  connect(portHC1Out, heatingCoil1.port_b) annotation (Line(
       points={{-80,12},{-59,12},{-59,19},{-58,19}},
       color={0,127,255},
       smooth=Smooth.None));
 
 end if;
 
- if use_heatingCoil2 then
+ if useHeatingCoil2 then
 
- for i in n_HC2_low:n_HC2_up loop
+ for i in nHC2Low:nHC2Up loop
 
-   if Up_to_down_HC2 == true then
-     connect(heatingCoil2.Therm1[n_HC2_up+1-i], layer[i].heatPort);
+   if upToDownHC2 == true then
+     connect(heatingCoil2.Therm1[nHC2Up+1-i], layer[i].heatPort);
    else
-     connect(heatingCoil2.Therm1[i-n_HC2_low+1], layer[i].heatPort);
+     connect(heatingCoil2.Therm1[i-nHC2Low+1], layer[i].heatPort);
    end if;
    end for;
 
-  connect(port_HC2_in, heatingCoil2.port_a) annotation (Line(
+  connect(portHC2In, heatingCoil2.port_a) annotation (Line(
       points={{-82,-20},{-55,-20},{-55,-29},{-56,-29}},
       color={0,127,255},
       smooth=Smooth.None));
-  connect(port_HC2_out, heatingCoil2.port_b) annotation (Line(
+  connect(portHC2Out, heatingCoil2.port_b) annotation (Line(
       points={{-82,-58},{-56,-58},{-56,-49}},
       color={0,127,255},
       smooth=Smooth.None));
@@ -334,55 +333,55 @@ end if;
 ///////////////////connection of Heating Rod//////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-if use_heatingRod then
+if useHeatingRod then
 
-connect(heatingRod, layer[n_HR].heatPort);
+connect(heatingRod, layer[nHR].heatPort);
 end if;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////  connection of Temperature Sensor///////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-  if n_TS1 <= 1 then
-    T_bottom = layer[1].heatPort.T;
-  elseif n_TS1 >= n then
-    T_bottom = layer[n].heatPort.T;
+  if nTS1 <= 1 then
+    TBottom = layer[1].heatPort.T;
+  elseif nTS1 >= n then
+    TBottom = layer[n].heatPort.T;
   else
-    T_bottom = layer[n_TS1].heatPort.T;
+    TBottom = layer[nTS1].heatPort.T;
   end if;
-  if n_TS2 <= 1 then
-    T_top = layer[1].heatPort.T;
-  elseif n_TS2 >= n then
-    T_top = layer[n].heatPort.T;
+  if nTS2 <= 1 then
+    TTop = layer[1].heatPort.T;
+  elseif nTS2 >= n then
+    TTop = layer[n].heatPort.T;
   else
-    T_top = layer[n_TS2].heatPort.T;
+    TTop = layer[nTS2].heatPort.T;
   end if;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////connection of volumes and walls//////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
    for i in 1:n loop
-     connect(layer[i].heatPort, storage_mantle[i].heatport_inner);
-     connect(storage_mantle[i].heatport_outer, heatport_outside);
+     connect(layer[i].heatPort, storageMantle[i].heatportInner);
+     connect(storageMantle[i].heatportOuter, heatportOutside);
    end for;
-    connect(layer[1].heatPort, bottom_cover.heatport_inner);
-    connect(layer[n].heatPort,top_cover.heatport_inner);
+    connect(layer[1].heatPort, bottomCover.heatportInner);
+    connect(layer[n].heatPort,topCover.heatportInner);
 
-    connect(bottom_cover.heatport_outer, heatport_outside);
-    connect(top_cover.heatport_outer, heatport_outside);
+    connect(bottomCover.heatportOuter, heatportOutside);
+    connect(topCover.heatportOuter, heatportOutside);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////connections of inner layers//////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
   for i in 2:(n-1) loop
-    if n_lower_ports == i then
-       connect(layer[i].ports[3], fluidport_bottom1);
-       connect(layer[i].ports[4], fluidport_bottom2);
-       if n_upper_ports == i then
-         connect(layer[i].ports[5],fluidport_top1);
-         connect(layer[i].ports[6],fluidport_top2);
+    if nLowerPorts == i then
+       connect(layer[i].ports[3], fluidportBottom1);
+       connect(layer[i].ports[4], fluidportBottom2);
+       if nUpperPorts == i then
+         connect(layer[i].ports[5],fluidportTop1);
+         connect(layer[i].ports[6],fluidportTop2);
        end if;
-    elseif n_upper_ports ==i then
-         connect(layer[i].ports[3],fluidport_top1);
-         connect(layer[i].ports[4],fluidport_top2);
+    elseif nUpperPorts ==i then
+         connect(layer[i].ports[3],fluidportTop1);
+         connect(layer[i].ports[4],fluidportTop2);
     end if;
 
    connect(layer[i].ports[2],layer[i+1].ports[1]);
@@ -390,15 +389,15 @@ end if;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////connections of upper and lower layer/////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-  if n_lower_ports == 1 then
-    connect(layer[1].ports[2],fluidport_bottom1);
-    connect(layer[1].ports[3],fluidport_bottom2);
+  if nLowerPorts == 1 then
+    connect(layer[1].ports[2],fluidportBottom1);
+    connect(layer[1].ports[3],fluidportBottom2);
   end if;
   connect(layer[1].ports[1],layer[2].ports[1]);
 
-  if n_upper_ports == n then
-    connect(layer[n].ports[2],fluidport_top1);
-    connect(layer[n].ports[3],fluidport_top2);
+  if nUpperPorts == n then
+    connect(layer[n].ports[2],fluidportTop1);
+    connect(layer[n].ports[3],fluidportTop2);
   end if;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -510,7 +509,7 @@ end if;
           arrow={Arrow.Filled,Arrow.None},
           origin={-66,57},
           rotation=270,
-          visible=use_heatingCoil1),
+          visible=useHeatingCoil1),
         Line(
           points={{0,9},{0,-9}},
           color={0,0,0},
@@ -519,7 +518,7 @@ end if;
           arrow={Arrow.Filled,Arrow.None},
           origin={-66,25},
           rotation=90,
-          visible = use_heatingCoil1),
+          visible = useHeatingCoil1),
         Rectangle(
           extent={{-80,100},{80,-100}},
           lineColor={0,0,0},
@@ -529,53 +528,53 @@ end if;
           color={0,0,0},
           thickness=1,
           smooth=Smooth.Bezier,
-          visible = use_heatingCoil1),
+          visible = useHeatingCoil1),
         Line(
           points={{-46,25},{56,25}},
           color={0,0,0},
           thickness=1,
           smooth=Smooth.Bezier,
-          visible = use_heatingCoil1),
+          visible = useHeatingCoil1),
         Line(
           points={{-46,50},{56,57}},
           color={0,0,0},
           thickness=1,
           smooth=Smooth.Bezier,
-          visible = use_heatingCoil1),
+          visible = useHeatingCoil1),
         Line(
           points={{56,42},{-46,50}},
           color={0,0,0},
           thickness=1,
           smooth=Smooth.Bezier,
-          visible = use_heatingCoil1),
+          visible = useHeatingCoil1),
         Line(
           points={{-46,34},{56,42}},
           color={0,0,0},
           thickness=1,
           smooth=Smooth.Bezier,
-          visible = use_heatingCoil1),
+          visible = useHeatingCoil1),
         Line(
           points={{56,26},{-46,34}},
           color={0,0,0},
           thickness=1,
           smooth=Smooth.Bezier,
-          visible = use_heatingCoil1),
+          visible = useHeatingCoil1),
         Line(
           points={{-57,25},{-46,58}},
           color={0,0,0},
           thickness=1,
           smooth=Smooth.Bezier,
           arrow={Arrow.Filled,Arrow.None},
-          visible = (use_heatingCoil1 and not
-                                            (Up_to_down_HC1))),
+          visible = (useHeatingCoil1 and not
+                                            (upToDownHC1))),
         Line(
           points={{-57,58},{-46,25}},
           color={0,0,0},
           thickness=1,
           smooth=Smooth.Bezier,
           arrow={Arrow.None,Arrow.Filled},
-          visible = (use_heatingCoil1 and not
-                                            (Up_to_down_HC1))),
+          visible = (useHeatingCoil1 and not
+                                            (upToDownHC1))),
         Line(
           points={{0,9},{0,-9}},
           color={0,0,0},
@@ -583,7 +582,7 @@ end if;
           thickness=1,
           origin={-48,57},
           rotation=270,
-          visible = (use_heatingCoil1 and Up_to_down_HC1)),
+          visible = (useHeatingCoil1 and upToDownHC1)),
         Line(
           points={{0,9},{0,-9}},
           color={0,0,0},
@@ -591,7 +590,7 @@ end if;
           thickness=1,
           origin={-50,25},
           rotation=270,
-          visible = (use_heatingCoil1 and Up_to_down_HC1)),
+          visible = (useHeatingCoil1 and upToDownHC1)),
         Line(
           points={{0,9},{0,-9}},
           color={0,0,0},
@@ -600,43 +599,43 @@ end if;
           arrow={Arrow.Filled,Arrow.None},
           origin={-66,-25},
           rotation=270,
-          visible=use_heatingCoil2),
+          visible=useHeatingCoil2),
         Line(
           points={{-46,-25},{56,-25}},
           color={0,0,0},
           thickness=1,
           smooth=Smooth.Bezier,
-          visible = use_heatingCoil2),
+          visible = useHeatingCoil2),
         Line(
           points={{-46,-32},{56,-25}},
           color={0,0,0},
           thickness=1,
           smooth=Smooth.Bezier,
-          visible = use_heatingCoil2),
+          visible = useHeatingCoil2),
         Line(
           points={{56,-40},{-46,-32}},
           color={0,0,0},
           thickness=1,
           smooth=Smooth.Bezier,
-          visible = use_heatingCoil2),
+          visible = useHeatingCoil2),
         Line(
           points={{-46,-48},{56,-40}},
           color={0,0,0},
           thickness=1,
           smooth=Smooth.Bezier,
-          visible = use_heatingCoil2),
+          visible = useHeatingCoil2),
         Line(
           points={{56,-56},{-46,-48}},
           color={0,0,0},
           thickness=1,
           smooth=Smooth.Bezier,
-          visible = use_heatingCoil2),
+          visible = useHeatingCoil2),
         Line(
           points={{-46,-57},{56,-57}},
           color={0,0,0},
           thickness=1,
           smooth=Smooth.Bezier,
-          visible = use_heatingCoil2),
+          visible = useHeatingCoil2),
         Line(
           points={{0,9},{0,-9}},
           color={0,0,0},
@@ -644,7 +643,7 @@ end if;
           thickness=1,
           origin={-50,-57},
           rotation=270,
-          visible = (use_heatingCoil2 and Up_to_down_HC2)),
+          visible = (useHeatingCoil2 and upToDownHC2)),
         Line(
           points={{0,9},{0,-9}},
           color={0,0,0},
@@ -653,7 +652,7 @@ end if;
           arrow={Arrow.Filled,Arrow.None},
           origin={-66,-57},
           rotation=90,
-          visible = use_heatingCoil2),
+          visible = useHeatingCoil2),
         Line(
           points={{0,9},{0,-9}},
           color={0,0,0},
@@ -661,33 +660,34 @@ end if;
           thickness=1,
           origin={-48,-25},
           rotation=270,
-          visible = (use_heatingCoil2 and Up_to_down_HC2)),
+          visible = (useHeatingCoil2 and upToDownHC2)),
         Line(
           points={{-57,-24},{-46,-57}},
           color={0,0,0},
           thickness=1,
           smooth=Smooth.Bezier,
           arrow={Arrow.None,Arrow.Filled},
-          visible = (use_heatingCoil2 and not
-                                            (Up_to_down_HC2))),
+          visible = (useHeatingCoil2 and not
+                                            (upToDownHC2))),
         Line(
           points={{-57,-57},{-46,-24}},
           color={0,0,0},
           thickness=1,
           smooth=Smooth.Bezier,
           arrow={Arrow.Filled,Arrow.None},
-          visible = (use_heatingCoil2 and not
-                                            (Up_to_down_HC2))),
+          visible = (useHeatingCoil2 and not
+                                            (upToDownHC2))),
         Line(
           points={{-76,-1},{26,-1}},
           color={0,0,0},
           smooth=Smooth.Bezier,
-          visible = use_heatingRod,
+          visible = useHeatingRod,
           thickness=2)}),
                  Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-80,-100},{80,100}}), graphics),
     Documentation(revisions="<html>
-<p><ul>
+    <p><ul>
+<li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Added to AixLib</li>    
 <li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL</li>
 <li><i>December 10, 2013</i> by Kristian Huchtemann:<br/>Added documentation of storage and new heat transfer models.</li>
 <li><i>October 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
@@ -695,24 +695,24 @@ end if;
 </ul></p>
 </html>",
         info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
+<h4><span style=\"color: #008000\">Overview</span></h4>
 <p>Buffer Storage Model with support for heating rod and two heating coils. </p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
+<h4><span style=\"color: #008000\">Level of Development</span></h4>
 <p><img src=\"modelica://HVAC/Images/stars2.png\"/></p>
-<h4><span style=\"color:#008000\">Concept</span></h4>
+<h4><span style=\"color: #008000\">Concept</span></h4>
 <p>It represents a buffer storage stratified into n layers where 1 represents the bottom layer and n represents the top layer. The layers are connected to each other allowing heat and fluid transfer.The heat transfer between the layers can be selected to model the conductance between the layers or different models that additionally represent the buoyancy:</p>
-<p><b>HeatTransfer_onlyConduction</b>: Model for heat transfer between buffer storage layers. Models conductance of water. An effective heat conductivity is therefore calculated. Used in BufferStorage model.</p>
-<p><b>HeatTransfer_lambda_simple: </b>Model for heat transfer between buffer storage layers. Models conductance of water and additional effective conductivity (in case the above layer is colder than the lower layer). Used in BufferStorage model.</p>
-<p><b>HeatTransfer_lambda_eff: </b>Model for heat transfer between buffer storage layers. Models conductance of water and buoyancy according to Viskanta et al., 1997. An effective heat conductivity is therefore calculated. Used in BufferStorage model.</p>
-<p><b>HeatTransfer_lambda_eff_smooth: </b>Same as HeatTransfer_lambda_eff. In addition, the <i>smooth()</i> expression is used for the transition of the buoyancy model.</p>
-<p><b>HeatTransfer_lambda_eff_tanh: </b>Same as HeatTransfer_lambda_eff. In addition, a tanh function is used for the transition of the buoyancy model (VariableTransition model). Attention: the initial value of the FullTransition model is 0.5. This may lead to a mixture of the storage at the beginning of the simulation.</p>
-<p><b>HeatTransfer_buoyancy_Wetter: </b>Model for heat transfer between buffer storage layers. Models buoyancy according to Buildings.Fluid.Storage.BaseClasses.Buoyancy model of Buildings library, cf. https://simulationresearch.lbl.gov/modelica. No conduction is implemented apart from when buoyancy occurs.</p>
+<p><b>HeatTransferOnlyConduction</b>: Model for heat transfer between buffer storage layers. Models conductance of water. An effective heat conductivity is therefore calculated. Used in BufferStorage model.</p>
+<p><b>HeatTransferLambdaSimple: </b>Model for heat transfer between buffer storage layers. Models conductance of water and additional effective conductivity (in case the above layer is colder than the lower layer). Used in BufferStorage model.</p>
+<p><b>HeatTransferLambdaEff: </b>Model for heat transfer between buffer storage layers. Models conductance of water and buoyancy according to Viskanta et al., 1997. An effective heat conductivity is therefore calculated. Used in BufferStorage model.</p>
+<p><b>HeatTransferLambdaEffSmooth: </b>Same as HeatTransfer_lambda_eff. In addition, the <i>smooth()</i> expression is used for the transition of the buoyancy model.</p>
+<p><b>HeatTransferLambdaEffTanh: </b>Same as HeatTransfer_lambda_eff. In addition, a tanh function is used for the transition of the buoyancy model (VariableTransition model). Attention: the initial value of the FullTransition model is 0.5. This may lead to a mixture of the storage at the beginning of the simulation.</p>
+<p><b>HeatTransferBuoyancyWetter: </b>Model for heat transfer between buffer storage layers. Models buoyancy according to Buildings.Fluid.Storage.BaseClasses.Buoyancy model of Buildings library, cf. https://simulationresearch.lbl.gov/modelica. No conduction is implemented apart from when buoyancy occurs.</p>
 <p>The geometrical data for the storage is read by records in the DataBase package. The model also includes heat losses over the storage walls (wall, top and bottom). No pressure losses are included. Thus external pressure loss models are required for the use of the model. </p>
-<h4><span style=\"color:#008000\">Sources</span></h4>
+<h4><span style=\"color: #008000\">Sources</span></h4>
 <ul>
 <li>R. Viskanta, A. KaraIds: Interferometric observations of the temperature structure in water cooled or heated from above. <i>Advances in Water Resources,</i> volume 1, 1977, pages 57-69. Bibtex-Key [R.VISKANTA1977]</li>
 </ul>
-<p><br><b><font style=\"color: #008000; \">Example Results</font></b></p>
-<p><a href=\"HVAC.Examples.BufferStorage.IdealSource\">HVAC.Examples.BufferStorage.IdealSource</a></p>
+<p><br><b><span style=\"color: #008000;\">Example Results</span></b></p>
+<p><a href=\"AixLib.Fluid.Storage.Examples.BufferStorageCharging\">AixLib.Fluid.Storage.Examples.BufferStorageCharging</a></p>
 </html>"));
 end BufferStorage;

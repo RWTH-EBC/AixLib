@@ -4,40 +4,40 @@ record BufferStorageBaseDataDefinition
   extends Modelica.Icons.Record;
 ///////////input parameters////////////
   import SI = Modelica.SIunits;
-  parameter SI.Height h_Tank "Height of storage";
-  parameter SI.Height h_lower_ports "Height of lower ports";
-  parameter SI.Height h_upper_ports "Height of upper ports";
-  parameter SI.Height h_HC1_up "Height of heating Coil";
-  parameter SI.Height h_HC1_low "Height of heating Coil";
-  parameter SI.Height h_HC2_up "Height of heating Coil";
-  parameter SI.Height h_HC2_low "Height of heating Coil";
-  parameter SI.Height h_HR "Height of heating Rod";
-  parameter SI.Diameter d_Tank "Inner diameter of storage";
-  parameter SI.Length s_wall "Thickness of storage Wall";
-  parameter SI.Length s_ins "Thickness of storage insulation";
-  parameter Modelica.SIunits.ThermalConductivity lambda_wall
+  parameter SI.Height hTank "Height of storage";
+  parameter SI.Height hLowerPorts "Height of lower ports";
+  parameter SI.Height hUpperPorts "Height of upper ports";
+  parameter SI.Height hHC1Up "Height of heating Coil";
+  parameter SI.Height hHC1Low "Height of heating Coil";
+  parameter SI.Height hHC2Up "Height of heating Coil";
+  parameter SI.Height hHC2Low "Height of heating Coil";
+  parameter SI.Height hHR "Height of heating Rod";
+  parameter SI.Diameter dTank "Inner diameter of storage";
+  parameter SI.Length sWall "Thickness of storage Wall";
+  parameter SI.Length sIns "Thickness of storage insulation";
+  parameter Modelica.SIunits.ThermalConductivity lambdaWall
     "thermal conductivity of storage wall";
-  parameter Modelica.SIunits.ThermalConductivity lambda_ins
+  parameter Modelica.SIunits.ThermalConductivity lambdaIns
     "thermal conductivity of storage insulation";
   //parameter SI.CoefficientOfHeatTransfer alpha
     //"Coefficient of heat transfer air <-> insulation of tank";
-  parameter SI.Length h_TS1 "Height of lower temperature sensor";
-  parameter SI.Length h_TS2 "Height of upper temperature sensor";
-  parameter SI.Density rho_ins "Density of insulation";
-  parameter SI.SpecificHeatCapacity c_ins "Heat capacity of insulation";
-  parameter SI.Density rho_wall "Density of wall";
-  parameter SI.SpecificHeatCapacity c_wall "Heat capacity of wall";
+  parameter SI.Length hTS1 "Height of lower temperature sensor";
+  parameter SI.Length hTS2 "Height of upper temperature sensor";
+  parameter SI.Density rhoIns "Density of insulation";
+  parameter SI.SpecificHeatCapacity cIns "Heat capacity of insulation";
+  parameter SI.Density rhoWall "Density of wall";
+  parameter SI.SpecificHeatCapacity cWall "Heat capacity of wall";
   parameter SI.Length roughness "Inner roughness of storage wall";
 
   // Heat exchanger Pipes
 
-  parameter DataBase.Pipes.PipeBaseDataDefinition Pipe_HC1
+  parameter DataBase.Pipes.PipeBaseDataDefinition pipeHC1
     "Type of Pipe for HR1";
-  parameter DataBase.Pipes.PipeBaseDataDefinition Pipe_HC2
+  parameter DataBase.Pipes.PipeBaseDataDefinition pipeHC2
     "Type of Pipe for HR2";
 
-  parameter Modelica.SIunits.Length Length_HC1 "Length of Pipe for HR1";
-  parameter Modelica.SIunits.Length Length_HC2 "Length of Pipe for HR2";
+  parameter Modelica.SIunits.Length lengthHC1 "Length of Pipe for HR1";
+  parameter Modelica.SIunits.Length lengthHC2 "Length of Pipe for HR2";
 
   annotation (Icon(graphics),               Documentation(info="<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>
