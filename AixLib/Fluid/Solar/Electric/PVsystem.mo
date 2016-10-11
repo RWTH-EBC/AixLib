@@ -73,20 +73,19 @@ equation
      Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>PV model is based on manufactory data and performance factor including the NOCT.</p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars3.png\"/></p>
 <p><br><b><font style=\"color: #008000; \">Assumptions</font></b></p>
 <p>PV model is based on manufactory data and performance factor.</p>
-<p><img src=\"modelica://HVAC/Images/PV1.png\"/></p>
+<p><img src=\"modelica://AixLib/Images/PV1.png\"/></p>
 <h4><span style=\"color:#008000\">References</span></h4>
 <p>PV system (data) and literature are documented and can be found: </p>
 <p>data:U:\\FG_Modelica\\Intern\\Erweiterung Modelle\\PV\\datasheets</p>
 <p>equation and paper: U:\\FG_Modelica\\Intern\\Erweiterung Modelle\\PV\\equations</p>
 <h4><span style=\"color:#008000\">Example Results</span></h4>
-<p><a href=\"HVAC.Examples.Solar_UC.Electric.Testing_PV\">HVAC.Examples.Solar_UC.Electric.Testing_PV</a></p>
+<p><a href=\"HVAC.Examples.Solar_UC.Electric.Testing_PV\">AixLib.Fluid.Solar.Electric.Examples.Testing_PV</a></p>
 </html>",revisions="<html>
 <p><ul>
 <li><i>Februar 21, 2013 </i> by Corinna Leonhardt:<br/>Implemented</li>
+<li><i>October 11, 2016 </i> by Tobias Blacha:<br/>Moved into AixLib</li>
 </ul></p>
 </html>"));
 end PVsystem;

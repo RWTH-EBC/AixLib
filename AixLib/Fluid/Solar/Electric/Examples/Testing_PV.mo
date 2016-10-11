@@ -49,11 +49,12 @@ equation
     __Dymola_experimentSetupOutput,
     Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
-<p>Simulation to test the <a href=\"HVAC.Components.Solar_UC.Electric.PVsystem\">PVsystem</a> model. The path of the weather matrix file TRY2010_12_Jahr_Modelica-Library.txt needs to be adjusted.</p>
+<p>Simulation to test the <a href=\"HVAC.Components.Solar_UC.Electric.PVsystem\">PVsystem</a> model.</p>
 </html>",
       revisions="<html>
 <p><ul>
 <li><i>April 16, 2014 &nbsp;</i> by Ana Constantin:<br/>Formated documentation.</li>
+<li><i>October 11, 2016 </i> by Tobias Blacha:<br/>Moved into AixLib</li>
 </ul></p>
 </html>"));
 end Testing_PV;

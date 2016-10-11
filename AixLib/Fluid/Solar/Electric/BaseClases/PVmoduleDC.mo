@@ -46,16 +46,15 @@ equation
     StartTime=0),
     Diagram(graphics),
      Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><span style=\"color: #008000\">Overview</span></h4>
 <p>The <b>PVmoduleDC</b> model represents a simple PV cell. </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars2.png\"/></p>
-<p><h4><font color=\"#008000\">Concept</font></h4></p>
+<p><br><h4><span style=\"color: #008000\">Concept</span></h4></p>
 <p>PV moduleDC has a temperature&nbsp;dependency&nbsp;for&nbsp;efficiency.</p>
 </html>",
      revisions="<html>
 <p><ul>
 <li><i>Februar 21, 2013  </i>by Corinna Leonhardt:<br/>Implemented</li>
+<li><i>October 11, 2016 </i> by Tobias Blacha:<br/>Moved into AixLib</li>
 </ul></p>
 </html>"));
 end PVmoduleDC;
