@@ -4,7 +4,7 @@ model HeatPump_detailed "Example for the detailed heat pump model."
  extends Modelica.Icons.Example;
   Modelica.Blocks.Sources.BooleanPulse booleanPulse(period=1000)
     annotation (Placement(transformation(extent={{-80,40},{-60,60}})));
-  Modelica.Fluid.Sources.MassFlowSource_T sourceSideMassFlowSource(
+  Sources.MassFlowSource_T                sourceSideMassFlowSource(
     use_T_in=true,
     redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
@@ -12,14 +12,14 @@ model HeatPump_detailed "Example for the detailed heat pump model."
     T=275.15,
     nPorts=1) annotation (Placement(transformation(extent={{-44,4},{-24,24}})));
 
-  Modelica.Fluid.Sources.FixedBoundary sourceSideFixedBoundary(redeclare
+  Sources.FixedBoundary                sourceSideFixedBoundary(redeclare
       package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
       nPorts=1)
           annotation (Placement(transformation(extent={{-46,-18},{-26,2}})));
-  Modelica.Fluid.Sources.FixedBoundary sinkSideFixedBoundary(redeclare package
+  Sources.FixedBoundary                sinkSideFixedBoundary(redeclare package
       Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, nPorts=1)
     annotation (Placement(transformation(extent={{96,4},{76,24}})));
-  Modelica.Fluid.Sources.MassFlowSource_T sinkSideMassFlowSource(
+  Sources.MassFlowSource_T                sinkSideMassFlowSource(
     redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
     m_flow=0.5,
@@ -27,8 +27,6 @@ model HeatPump_detailed "Example for the detailed heat pump model."
     T=308.15,
     nPorts=1) annotation (Placement(transformation(extent={{20,-58},{40,-38}})));
 
-  inner Modelica.Fluid.System system
-    annotation (Placement(transformation(extent={{64,80},{84,100}})));
   Modelica.Blocks.Sources.Ramp TsuSourceRamp(
     duration=1000,
     startTime=1000,
@@ -42,8 +40,9 @@ model HeatPump_detailed "Example for the detailed heat pump model."
     startTime=0,
     width=51)
     annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
-  Modelica.Fluid.Sensors.TemperatureTwoPort temperature(redeclare package
-      Medium = Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Sensors.TemperatureTwoPort                temperature(redeclare package
+      Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, m_flow_nominal
+      =heatPump.mFlow_conNominal)
     annotation (Placement(transformation(extent={{42,4},{62,24}})));
   Modelica.Blocks.Interfaces.RealOutput Pel
     annotation (Placement(transformation(extent={{100,-20},{120,0}})));
@@ -105,8 +104,7 @@ equation
       color={0,127,255},
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}),
-                      graphics),
+            -100},{100,100}})),
     experiment(StopTime=3600),
     __Dymola_experimentSetupOutput,
     Documentation(info="<html>
