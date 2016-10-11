@@ -29,7 +29,6 @@ model PumpRadiatorValve
     m_flow_small=1e-4)
     annotation (Placement(transformation(extent={{30,10},{50,30}})));
   AixLib.Fluid.HeatExchangers.Radiators.Radiator radiator(
-    RadiatorType=AixLib.DataBase.Radiators.ThermX2_ProfilV_979W(),
     redeclare package Medium = Medium,
     m_flow_nominal=0.01)
     annotation (Placement(transformation(extent={{112,10},{134,30}})));
@@ -49,8 +48,6 @@ equation
           112,20}},                                                                               color = {0, 127, 255}));
   connect(radiator.port_b, pipe1.port_a) annotation(Line(points={{134,20},{160,20},
           {160,-20},{-10,-20}},                                                                                      color = {0, 127, 255}));
-  connect(AirTemp.port, radiator.convPort) annotation(Line(points = {{112, 64}, {118.38, 64}, {118.38, 27.6}}, color = {191, 0, 0}));
-  connect(radiator.radPort, RadTemp.port) annotation(Line(points = {{127.4, 27.8}, {127.4, 64}, {136, 64}}, color = {0, 0, 0}));
   connect(Source_Temp.y, AirTemp.T) annotation(Line(points = {{81, 90}, {98.8, 90}, {98.8, 64}}, color = {0, 0, 127}));
   connect(Source_Temp.y, RadTemp.T) annotation(Line(points = {{81, 90}, {150, 90}, {150, 64}, {149.2, 64}}, color = {0, 0, 127}));
   connect(Source_opening.y, simpleValve.opening) annotation(Line(points = {{31, 70}, {40, 70}, {40, 28}}, color = {0, 0, 127}));
@@ -60,7 +57,11 @@ equation
   connect(PointFixedPressure.ports[1], pump.port_a) annotation (Line(
       points={{-78,20},{-54,20}},
       color={0,127,255}));
-  annotation(Diagram(coordinateSystem(extent={{-100,-100},{160,100}},      preserveAspectRatio=false),   graphics), Icon(coordinateSystem(extent = {{-100, -100}, {160, 100}})), experiment(StopTime = 86400, Interval = 60, __Dymola_Algorithm = "Rkfix2"), __Dymola_experimentSetupOutput(events = false), Documentation(info = "<html>
+  connect(AirTemp.port, radiator.ConvectiveHeat)
+    annotation (Line(points={{112,64},{118,64},{118,22},{120.8,22}}, color={191,0,0}));
+  connect(radiator.RadiativeHeat, RadTemp.port)
+    annotation (Line(points={{127.4,22},{132,22},{132,64},{136,64}}, color={95,95,95}));
+  annotation(Diagram(coordinateSystem(extent={{-100,-100},{160,100}},      preserveAspectRatio=false)),             Icon(coordinateSystem(extent = {{-100, -100}, {160, 100}})), experiment(StopTime = 86400, Interval = 60, __Dymola_Algorithm = "Rkfix2"), __Dymola_experimentSetupOutput(events = false), Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>Pump, boiler, valve and radiator in a closed loop.</p>
  <h4><font color=\"#008000\">Concept</font></h4>
