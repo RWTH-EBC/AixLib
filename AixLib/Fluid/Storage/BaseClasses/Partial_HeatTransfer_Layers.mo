@@ -12,8 +12,8 @@ partial model Partial_HeatTransfer_Layers
       Modelica.Media.Interfaces.PartialMedium "Medium model" annotation(choicesAllMatching);
 
 final outer replaceable parameter
-    DataBase.BufferStorage.BufferStorageBaseDataDefinition data=
-      DataBase.BufferStorage.Vitocell_340_M_800L()
+    AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
+      AixLib.DataBase.Storage.Generic_500l()
     annotation (choicesAllMatching);
 
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{

@@ -1,7 +1,7 @@
 within AixLib.Fluid.Storage.BaseClasses;
 model HeatingCoil
-  import DataBase;
-  import HVAC;
+  //import DataBase;
+  //import HVAC;
 
  parameter Integer dis_HC = 2;
 
@@ -13,23 +13,10 @@ model HeatingCoil
  outer parameter Modelica.SIunits.Temperature T_start=298.15
     "Start Temperature of fluid";
 
- parameter DataBase.Pipes.PipeBaseDataDefinition Pipe_HC=
-      DataBase.Pipes.Copper.Copper_28x1() "Type of Pipe for HR1";
+ parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition Pipe_HC=
+      AixLib.DataBase.Pipes.Copper.Copper_28x1() "Type of Pipe for HR1";
 
-  extends Modelica.Fluid.Interfaces.PartialTwoPort;
-
-  Modelica.Fluid.Pipes.DynamicPipe pipeHC(
-use_HeatTransfer=true,
-    modelStructure=Modelica.Fluid.Types.ModelStructure.a_v_b,
-    redeclare model HeatTransfer =
-        Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.LocalPipeFlowHeatTransfer,
-    length=Length_HC,
-    diameter=Pipe_HC.d_i,
-    nNodes=dis_HC,
-    redeclare package Medium = Medium)                      annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=0,
-        origin={-4,0})));
+  extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
 
     Utilities.HeatTransfer.CylindricHeatTransfer                       PipeWall_HC1[dis_HC](
     each T0=T_start,
@@ -50,7 +37,15 @@ use_HeatTransfer=true,
         origin={-4,52})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm1[dis_HC]
     annotation (Placement(transformation(extent={{-14,94},{6,114}})));
+  FixedResistances.Pipe pipe[dis_HC](D=Pipe_HC.d_i,
+    m_flow_small=1e-5,
+    l=Length_HC/dis_HC)
+    annotation (Placement(transformation(extent={{-14,-10},{6,10}})));
 equation
+  for k in 1:dis_HC-1 loop
+    connect(pipe[k].port_b,pipe[k+1].port_a);
+  end for;
+
   connect(conv_HC1_Outside.port_a, Therm1) annotation (Line(
       points={{-4,58},{-4,70.7},{-4,70.7},{-4,104}},
       color={191,0,0},
@@ -59,19 +54,13 @@ equation
       points={{-4,31.28},{-4,46}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(port_a, pipeHC.port_a) annotation (Line(
-      points={{-100,0},{-14,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  connect(pipeHC.port_b, port_b) annotation (Line(
-      points={{6,0},{100,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  connect(PipeWall_HC1.port_a, pipeHC.heatPorts) annotation (Line(
-      points={{-4,26},{-4,4.4},{-3.9,4.4}},
-      color={191,0,0},
-      smooth=Smooth.None));
-  annotation (Diagram(graphics), Icon(graphics={
+  connect(pipe.heatport, PipeWall_HC1.port_a)
+    annotation (Line(points={{-4,5},{-4,26}},         color={191,0,0}));
+  connect(pipe[1].port_a, port_a)
+    annotation (Line(points={{-14,0},{-100,0}},          color={0,127,255}));
+  connect(pipe[dis_HC].port_b, port_b)
+    annotation (Line(points={{6,0},{100,0}},         color={0,127,255}));
+  annotation (                   Icon(graphics={
         Line(
           points={{-94,0},{-80,80}},
           color={0,0,0},
