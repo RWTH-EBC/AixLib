@@ -1,7 +1,11 @@
 within AixLib.Controls.Continuous;
 model PITemp "PI Controler that can switch the output range of the controler"
 
-  Modelica.Blocks.Interfaces.RealInput soll annotation(Placement(transformation(origin = {-80, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 270)));
+  Modelica.Blocks.Interfaces.RealInput setPoint annotation (Placement(
+        transformation(
+        origin={-80,90},
+        extent={{-10,-10},{10,10}},
+        rotation=270)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm1 annotation(Placement(transformation(extent = {{-70, -100}, {-50, -80}}), iconTransformation(extent = {{-70, -100}, {-50, -80}})));
   parameter Real h = 1 "upper limit controler output" annotation(Dialog(group = "Control"));
   parameter Real l = 0 "lower limit of controler output" annotation(Dialog(group = "Control"));
@@ -27,8 +31,10 @@ equation
   connect(switch1.y, PI.u_m) annotation(Line(points = {{-19, -4}, {-8, -4}, {-8, 28}}, color = {0, 0, 127}));
   connect(PI.y, switch2.u1) annotation(Line(points = {{3, 40}, {24, 40}, {24, 0}, {54, 0}}, color = {0, 0, 127}));
   connect(PI.y, product.u2) annotation(Line(points = {{3, 40}, {14, 40}, {14, -38}, {24, -38}}, color = {0, 0, 127}));
-  connect(soll, PI.u_s) annotation(Line(points = {{-80, 90}, {-80, 40}, {-20, 40}}, color = {0, 0, 127}));
-  connect(soll, switch1.u3) annotation(Line(points = {{-80, 90}, {-80, 6}, {-42, 6}, {-42, 4}}, color = {0, 0, 127}));
+  connect(setPoint, PI.u_s)
+    annotation (Line(points={{-80,90},{-80,40},{-20,40}}, color={0,0,127}));
+  connect(setPoint, switch1.u3) annotation (Line(points={{-80,90},{-80,6},{-42,
+          6},{-42,4}}, color={0,0,127}));
   connect(temperatureSensor.port, Therm1) annotation(Line(points = {{-60, -80}, {-60, -90}}, color = {191, 0, 0}));
   connect(temperatureSensor.T, switch1.u1) annotation(Line(points = {{-60, -60}, {-60, -12}, {-42, -12}}, color = {0, 0, 127}));
   annotation (Documentation(info = "<html>
@@ -37,7 +43,7 @@ equation
  Based on a model by Alexander Hoh with some modifications and the Modelica-Standard PI controller. If set to &quot;on&quot; it will controll the thermal port temperature to the target value (soll). If set to &quot;off&quot; the controller error will become zero and therefore the current output level of the PI controller will remain constant. When this switching occurs the TriggeredTrapezoid will level the current controller output down to zero in a selectable period of time.
  </p>
  <h4><font color=\"#008000\">Level of Development</font></h4>
- <p><img src=\"modelica://AixLib/Images/stars2.png\" alt=\"stars: 2 out of 5\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars2.png\" alt=\"stars: 2 out of 5\"/></p>
  </html>", revisions = "<html>
  <ul>
    <li><i>April, 2016&nbsp;</i>

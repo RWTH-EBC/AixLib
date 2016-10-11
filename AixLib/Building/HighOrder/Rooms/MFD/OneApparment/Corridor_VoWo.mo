@@ -99,7 +99,7 @@ equation
           {118,64},{94,64},{94,-44},{45.9,-44},{45.9,-35.4}},                                                                                                    color = {191, 0, 0}));
   connect(Wall_Ceiling.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{117, 78}, {117, 64}, {94, 64}, {94, -44}, {45.9, -44}, {45.9, -35.4}}, color = {191, 0, 0}));
   connect(airload.port, thermStar_Demux.therm) annotation(Line(points = {{-13, -4}, {40.9, -4}, {40.9, -15.9}}, color = {191, 0, 0}));
-  annotation(__Dymola_Images(Parameters(source = "AixLib/Images/House/VoWo_Corridor.png")), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Polygon(points=  {{-60, 60}, {120, 60}, {120, -60}, {20, -60}, {20, -100}, {-60, -100}, {-60, -18}, {-60, 60}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 255},
+  annotation(__Dymola_Images(Parameters(source = "AixLib/Resources/Images/Building/HighOrder/VoWo_Corridor.png")), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Polygon(points=  {{-60, 60}, {120, 60}, {120, -60}, {20, -60}, {20, -100}, {-60, -100}, {-60, -18}, {-60, 60}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 255},
             fillPattern=                                                                                                    FillPattern.Forward), Text(extent=  {{-26, 6}, {82, -26}}, lineColor=  {0, 0, 0}, fillColor=  {255, 0, 0},
             fillPattern=                                                                                                    FillPattern.Forward, textString=  "Corridor"), Rectangle(extent=  {{-110, -120}, {-90, -140}}, lineColor=  {0, 0, 0},
             lineThickness=                                                                                                    0.5), Rectangle(extent=  {{-110, -90}, {-90, -110}}, lineColor=  {0, 0, 0},
@@ -122,10 +122,10 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for the corridor.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The following figure presents the room&apos;s layout:</p>
- <p><img src=\"modelica://AixLib/Images/House/VoWo_Corridor.png\"
+ <p><img src=\"modelica://AixLib/Resources/Images/Building/HighOrder/VoWo_Corridor.png\"
     alt=\"Room layout\"/></p>
  </html>"));
 end Corridor_VoWo;

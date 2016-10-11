@@ -10,7 +10,7 @@ record SmoothPlaster
 <h4><font color=\"#008000\">Overview</font></h4>
 <p>Material: Smooth plaster </p>
 <h4><font color=\"#008000\">Level of Development</font></h4>
-<p><img src=\"modelica://AixLib/Images/stars5.png\"
+<p><img src=\"modelica://AixLib/Resources/Images/Stars/stars5.png\"
     alt=\"stars: 5 out of 5\"/></p>
 <h4><font color=\"#008000\">References</font></h4>
 <p>Record is used in model <a href=\"AixLib.Utilities.HeatTransfer.HeatConv_outside\">AixLib.Utilities.HeatTransfer.HeatConv_outside</a></p>

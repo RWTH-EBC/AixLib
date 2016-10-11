@@ -284,7 +284,7 @@ equation
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Heat cource with convective and radiative component. The load is determined by a schedule and the type of activity. </p>
 <h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://AixLib/Images/stars2.png\" alt=\"stars: 2 out of 5\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/Stars/stars2.png\" alt=\"stars: 2 out of 5\"/></p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <p>The schedule sets the usage of the room by people. To set a higher number of people, a multiplier is given.</p>
 <p>The schedule describes the presence of only one person, and can take values from 0 to 1. </p>

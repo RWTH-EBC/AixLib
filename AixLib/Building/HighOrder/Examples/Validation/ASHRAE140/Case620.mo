@@ -53,7 +53,7 @@ model Case620
     annotation (Placement(transformation(extent={{-10,-50},{3,-37}})));
   Modelica.Blocks.Sources.Constant Source_TsetH(k=273.15 + 20)
     annotation (Placement(transformation(extent={{40,-50},{27,-37}})));
-  HVAC.HeatGeneration.IdealHeaterCooler                   idealHeaterCooler(
+  Utilities.Sources.HeaterCooler.HeaterCoolerPI idealHeaterCooler(
     TN_heater=1,
     TN_cooler=1,
     h_heater=1e6,
@@ -70,6 +70,10 @@ model Case620
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
     InternalGains_radiative
     annotation (Placement(transformation(extent={{-92,-62},{-72,-42}})));
+  Modelica.Blocks.Continuous.Integrator integrator1
+    annotation (Placement(transformation(extent={{71,44.5},{82,55.5}})));
+  Modelica.Blocks.Continuous.Integrator integrator
+    annotation (Placement(transformation(extent={{71,26.5},{82,37.5}})));
 equation
     //Connections for input solar model
   for i in 1:5 loop
@@ -81,10 +85,10 @@ equation
   end for;
 
   // Set outputs
-  AnnualHeatingLoad = idealHeaterCooler.heatMeter.q_kwh/1000; //in MWh
-  AnnualCoolingLoad = idealHeaterCooler.coolMeter.q_kwh/1000;  // in MWh
+    integrator1.u =idealHeaterCooler.heatingPower /(1000*1000); //in MWh
+    integrator.u =idealHeaterCooler.coolingPower /(1000*1000); //in MWh
 
-  PowerLoad = idealHeaterCooler.heatMeter.p + idealHeaterCooler.coolMeter.p;
+    PowerLoad =idealHeaterCooler.coolingPower  +idealHeaterCooler.heatingPower;
 
   connect(Source_Weather.y[1], outsideTemp.T) annotation (Line(
       points={{-93,40},{-80,40},{-80,46.5},{-71.1,46.5}},
@@ -101,17 +105,16 @@ equation
   connect(Source_Weather.y[2], Room.WindSpeedPort) annotation (Line(
       points={{-93,40},{-11.1,40},{-11.1,43.65}},
       color={0,0,127}));
-  connect(Source_TsetC.y,idealHeaterCooler. soll_cool)       annotation (Line(
-      points={{3.65,-43.5},{11.2,-43.5},{11.2,-28.8}},
-      color={0,0,127}));
-  connect(Source_TsetH.y,idealHeaterCooler. soll_heat)       annotation (Line(
-      points={{26.35,-43.5},{19,-43.5},{19,-28.8}},
-      color={0,0,127}));
+  connect(Source_TsetC.y, idealHeaterCooler.setPointCool) annotation (Line(
+        points={{3.65,-43.5},{13.6,-43.5},{13.6,-31.2}}, color={0,0,127}));
+  connect(Source_TsetH.y, idealHeaterCooler.setPointHeat) annotation (Line(
+        points={{26.35,-43.5},{18.2,-43.5},{18.2,-31.2}},
+                                                      color={0,0,127}));
   connect(AirExchangeRate.y, Room.AER) annotation (Line(
       points={{-26.35,-43.5},{-20,-43.5},{-20,27.25},{-11.1,27.25}},
       color={0,0,127}));
-  connect(Room.thermRoom, idealHeaterCooler.HeatCoolRoom) annotation (Line(
-      points={{5.91,42.215},{5.91,19},{30,19},{30,-22.8},{25.4,-22.8}},
+  connect(Room.thermRoom,idealHeaterCooler.heatCoolRoom)  annotation (Line(
+      points={{5.91,42.215},{5.91,19},{30,19},{30,-28},{25,-28}},
       color={191,0,0}));
   connect(Ground.port, Room.Therm_ground) annotation (Line(
       points={{-55,10},{5.28,10},{5.28,17.82}},
@@ -132,6 +135,10 @@ equation
       points={{-72,-52},{-60,-52},{-60,-24},{-50,-24},{-50,-14},{13.89,-14},{
           13.89,42.83}},
       color={191,0,0}));
+  connect(integrator1.y, AnnualHeatingLoad)
+    annotation (Line(points={{82.55,50},{100,50}},          color={0,0,127}));
+  connect(integrator.y, AnnualCoolingLoad)
+    annotation (Line(points={{82.55,32},{100,32}},          color={0,0,127}));
   annotation (Diagram(coordinateSystem(
         extent={{-150,-100},{120,90}},
         preserveAspectRatio=false,
