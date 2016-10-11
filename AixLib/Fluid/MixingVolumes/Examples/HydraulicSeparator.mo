@@ -8,7 +8,8 @@ model HydraulicSeparator
   AixLib.Fluid.MixingVolumes.HydraulicSeparator hydraulicSeparator(DFlange=
         0.01,
     redeclare package Medium = Medium,
-    pumpMaxVolumeFlow=0.03)
+    pumpMaxVolumeFlow=0.03,
+    m_flow_nominal=0.1)
     annotation (Placement(transformation(extent={{18,-6},{38,14}})));
   AixLib.Fluid.Movers.Pump
                          pump(

@@ -6,13 +6,17 @@ model HydraulicSeparator
       annotation (choicesAllMatching = true);
   parameter Boolean allowFlowReversal=true;
 
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal
+    "Nominal mass flow rate"
+    annotation(Dialog(group = "Nominal condition"));
+
     ///////////////////////////////////////////////////////////////////////////
     //Geometric parameters                                                   //
     ///////////////////////////////////////////////////////////////////////////
   parameter Modelica.SIunits.VolumeFlowRate pumpMaxVolumeFlow
     "Maximum VolumeFlowRate of either primary or secondary Pump";
   parameter Modelica.SIunits.Velocity vmaxExchange=0.2
-    "Maximum velocity of the exchange-flow between top and bottom of the Hydraulische Weiche";
+    "Maximum velocity of the exchange-flow between top and bottom of the Hydraulic Separator";
   parameter Modelica.SIunits.Diameter DFlange "Diameter of the flanges";
   parameter Modelica.SIunits.Diameter D = sqrt(pumpMaxVolumeFlow*4/(Modelica.Constants.pi*vmaxExchange))
     "Diameter of the main-body (Calculated by the model to not exceed vmaxExchang)";
@@ -125,21 +129,21 @@ model HydraulicSeparator
     ///////////////////////////////////////////////////////////////////////////
     //Volumes determining time scale of dynamic behaviour                    //
     ///////////////////////////////////////////////////////////////////////////
-  Modelica.Fluid.Vessels.ClosedVolume volume2(
+  MixingVolume                        volume2(
     redeclare package Medium = Medium,
-    use_portsData=false,
     nPorts=2,
     T_start=T_bottom,
-    V=(Modelica.Constants.pi/4)*D*D*DFlange*0.5)
+    V=(Modelica.Constants.pi/4)*D*D*DFlange*0.5,
+    m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{10,10},{-10,-10}},
         rotation=180,
         origin={-10,64})));
-  Modelica.Fluid.Vessels.ClosedVolume volume1(
+  MixingVolume                        volume1(
     redeclare package Medium = Medium,
-    use_portsData=false,
     nPorts=2,
     T_start=T_bottom,
-    V=(Modelica.Constants.pi/4)*D*D*DFlange*0.5)
+    V=(Modelica.Constants.pi/4)*D*D*DFlange*0.5,
+    m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=180,
         origin={-8,-68})));
