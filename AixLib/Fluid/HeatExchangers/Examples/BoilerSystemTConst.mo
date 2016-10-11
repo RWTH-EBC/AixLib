@@ -16,14 +16,16 @@ model BoilerSystemTConst
   Fluid.Sources.FixedBoundary
                      staticPressure(nPorts=1, redeclare package Medium = Medium)
                                     annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-90, -10})));
-  FixedResistances.StaticPipe
-                   pipe(l = 25, D = 0.01,
+  FixedResistances.FixedResistanceDpM
+                   pipe(
     redeclare package Medium = Medium,
-    m_flow_small=0.001)                   annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {70, 10})));
-  FixedResistances.StaticPipe
-                   pipe1(l = 25, D = 0.01,
+    dp_nominal=200,
+    m_flow_nominal=1)                     annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {70, 10})));
+  FixedResistances.FixedResistanceDpM
+                   pipe1(
     redeclare package Medium = Medium,
-    m_flow_small=0.001)                    annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {10, -50})));
+    dp_nominal=200,
+    m_flow_nominal=1)                      annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {10, -50})));
   Fluid.Sensors.MassFlowRate
                          massFlowSensor(redeclare package Medium = Medium)
                                         annotation(Placement(transformation(extent = {{-40, 60}, {-20, 80}})));
@@ -65,12 +67,13 @@ equation
   connect(staticPressure.ports[1], pumpSimple.port_a) annotation (Line(
       points={{-90,-20},{-90,-28},{-50,-28},{-50,0}},
       color={0,127,255}));
-  annotation( experiment(StopTime = 82800, Interval = 60), __Dymola_experimentSetupOutput(events = false), Documentation(info = "<html>
+  annotation (experiment(StopTime = 82800, Interval = 60), __Dymola_experimentSetupOutput(events = false), Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>This example models a simple fluid circuit in order to test the boiler model
  for plausibility</p>
  </html>", revisions="<html>
  <ul>
+ <li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe</li>
  <li><i>November 2014&nbsp;</i>
     by Marcus Fuchs:<br/>
     Changed model to use Annex 60 base class</li>
