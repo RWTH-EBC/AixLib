@@ -1,6 +1,4 @@
-within AixLib.HVAC;
-
-
+within AixLib.Utilities.Sources;
 model BaseParameters
   parameter Modelica.SIunits.AbsolutePressure p_ambient = 101325
     "Default ambient pressure"                                                              annotation(Dialog(group = "Environment"));
@@ -9,8 +7,7 @@ model BaseParameters
   parameter Modelica.SIunits.Acceleration g = 9.81 "Gravity" annotation(Dialog(group = "Environment"));
   parameter Modelica.SIunits.DynamicViscosity mu_Water = 1e-3
     "Dynamic viscosity of water"                                                           annotation(Dialog(tab = "Substance Properties", group = "Water"));
-  parameter Modelica.SIunits.Density rho_Water = 995.586 "Density of the fluid"
-                                                                                annotation(Dialog(tab = "Substance Properties", group = "Water"));
+  parameter Modelica.SIunits.Density rho_Water = 995.586 "Density of the fluid" annotation(Dialog(tab = "Substance Properties", group = "Water"));
   parameter Modelica.SIunits.SpecificHeatCapacity cp_Water = 4184
     "Specific heat capacity of water"                                                               annotation(Dialog(tab = "Substance Properties", group = "Water"));
   parameter Modelica.SIunits.ThermalConductivity lambda_Water = 0.6
