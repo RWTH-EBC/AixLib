@@ -4,7 +4,9 @@ BoilerSystemTConst
 BoilerSystemTVar
 HeatPumpSystem
 HeatPumpSystem2
-
+PumpRadiatorThermostaticValve
+PumpRadiatorValve
+RadiatorEN442_2
 SolarThermalCollector
 TestCombiTable2D
 WaterHeater_T
