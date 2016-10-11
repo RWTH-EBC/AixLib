@@ -12,7 +12,11 @@ record SchuecoSME1 "SchuecoSME1"
 <h4><span style=\"color: #008000\">Overview</span></h4>
 <p>Monocrystalline Solar Module, single Area=1,27664m2 </p>
 <p><br><h4><span style=\"color: #008000\">References</span></h4></p>
-<p>Record for record used with AixLib.Fluid.Solar.Electric.PVsystem</p>
+<p>
+Record for record used with 
+<a href=\"modelica://AixLib.Fluid.Solar.Electric.PVsystem\">
+AixLib.Fluid.Solar.Electric.PVsystem</a>
+</p>
 </html>",
       revisions="<html>
 <p><ul>

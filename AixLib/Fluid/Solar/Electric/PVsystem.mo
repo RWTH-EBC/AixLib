@@ -86,7 +86,7 @@ equation
 <li>http://sunelec.com/datasheet-library/download/SMA-SunnyBoy-3000_3800_4000.pdf</li>
 </ul>
 <p><br>Source of literature for the calculation of the pv cell efficiency: </p>
-<p>&QUOT;Thermal modelling to analyze the effect of cell temperature on PV modules energy efficiency&QUOT;</p>
+<p>&QUOT;Thermal modelling to analyze the effect of cell temperature on PV modules energy efficiency&QUOT; by Romary, Florian et al.</p>
 <h4><span style=\"color: #008000\">Example Results</span></h4>
 <p><a href=\"HVAC.Examples.Solar_UC.Electric.Testing_PV\">AixLib.Fluid.Solar.Electric.Examples.Testing_PV</a></p>
 </html>",revisions="<html>
