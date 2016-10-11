@@ -1,5 +1,5 @@
 within AixLib.Fluid.HeatPumps;
-model HeatPump_detailed
+model HeatPumpDetailed
   "Heat pump model with good level of detail. Mainly fed with manufacturing data."
   import SI = Modelica.SIunits;
   parameter Boolean HPctrlType =  true "Capacity control type"
@@ -471,4 +471,4 @@ equation
 <li><i>January 09, 2006&nbsp;</i> by Peter Matthes:<br/>V0.1: Initial configuration.</li>
 </ul></p>
 </html>"));
-end HeatPump_detailed;
+end HeatPumpDetailed;

@@ -1,5 +1,5 @@
 within AixLib.Fluid.HeatPumps;
-model HeatPump_simple
+model HeatPumpSimple
 
   replaceable package Medium =
      Modelica.Media.Water.ConstantPropertyLiquidWater
@@ -122,4 +122,4 @@ equation
     Implemented</li>
  </ul>
  </html>"));
-end HeatPump_simple;
+end HeatPumpSimple;

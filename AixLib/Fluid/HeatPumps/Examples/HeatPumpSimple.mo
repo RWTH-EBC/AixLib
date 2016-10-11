@@ -1,5 +1,5 @@
 within AixLib.Fluid.HeatPumps.Examples;
-model HeatPump_simple "Test case for simple heat pump model"
+model HeatPumpSimple "Test case for simple heat pump model"
   import AixLib;
   extends Modelica.Icons.Example;
 
@@ -36,7 +36,7 @@ model HeatPump_simple "Test case for simple heat pump model"
     redeclare package Medium = Medium,
     m_flow_nominal=0.01,
     V=0.1)             annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin={60,-60})));
-  AixLib.Fluid.HeatPumps.HeatPump_simple heatPump(
+  AixLib.Fluid.HeatPumps.HeatPumpSimple heatPump(
     tablePower=[0.0,273.15,283.15; 308.15,1100,1150; 328.15,1600,1750],
     tableHeatFlowCondenser=[0.0,273.15,283.15; 308.15,4800,6300; 328.15,4400,
         5750],
@@ -112,4 +112,4 @@ equation
     Changed BoilerSystem to HeatPumpSystem</li>
  </ul>
  </html>"));
-end HeatPump_simple;
+end HeatPumpSimple;

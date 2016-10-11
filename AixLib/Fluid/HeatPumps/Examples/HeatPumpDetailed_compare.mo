@@ -1,5 +1,5 @@
 within AixLib.Fluid.HeatPumps.Examples;
-model HeatPump_detailed_compare
+model HeatPumpDetailed_compare
   "Example for the detailed heat pump model in order to compare to simple one."
 
  extends Modelica.Icons.Example;
@@ -50,7 +50,7 @@ model HeatPump_detailed_compare
   Modelica.Blocks.Interfaces.RealOutput T_Co_out
     "Temperature of the passing fluid"
     annotation (Placement(transformation(extent={{100,40},{120,60}})));
-  HeatPumps.HeatPump_detailed heatPump(
+  .AixLib.Fluid.HeatPumps.HeatPumpDetailed heatPump(
     redeclare package Medium_con =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
     redeclare package Medium_eva =
@@ -126,4 +126,4 @@ Simple test set-up for the HeatPump model. The heat pump is turned on and off wh
 </ul></p>
 </html>
 "));
-end HeatPump_detailed_compare;
+end HeatPumpDetailed_compare;
