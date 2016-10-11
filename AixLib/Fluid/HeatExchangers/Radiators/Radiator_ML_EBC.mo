@@ -117,7 +117,7 @@ protected
 public
   BaseClasses.PressureDropRadiator pressureDropRadiator(redeclare package
       Medium =                                                                     Medium, PD=PD,
-    m_flow_nominal=m_flow_nominal)
+    m_flow_small=0.01)
     annotation (Placement(transformation(extent={{26,-10},{46,10}})));
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ConvectiveHeat
@@ -137,9 +137,9 @@ public
       Medium =                                                                     Medium,
       m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{62,-10},{82,10}})));
-  Modelica.Blocks.Interfaces.RealOutput T_source
-    "The logarithmic mean temperature is calculated from the temperatures at in- and outlet of the radiator"
-    annotation (Placement(transformation(extent={{-80,-60},{-100,-40}})));
+ // Modelica.Blocks.Interfaces.RealOutput T_source
+ //   "The logarithmic mean temperature is calculated from the temperatures at in- and outlet of the radiator"
+ //   annotation (Placement(transformation(extent={{-80,-60},{-100,-40}})));
 
 equation
   TV_1=multiLayer_HE[1].Tin;
@@ -164,8 +164,8 @@ equation
       color={0,127,255},
       smooth=Smooth.None));
 
-   T_source = (ReturnTemperature.T - FlowTemperature.T)/(log(ReturnTemperature.T
-    /FlowTemperature.T));
+  // T_source = (ReturnTemperature.T - FlowTemperature.T)/(log(ReturnTemperature.T
+  //  /FlowTemperature.T));
   //The logarithmic mean temperature is calculated from the temperatures at in- and outlet of the radiator.
 
   connect(ReturnTemperature.port_b, port_b) annotation (Line(
