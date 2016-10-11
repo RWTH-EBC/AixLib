@@ -2,7 +2,7 @@ within AixLib.Fluid.HeatExchangers.Radiators;
 model Radiator_ML_EBC "radiator multilayer model"
   import Modelica.SIunits;
   import calcT =
-    AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.Calc_Excess_Temp;
+    AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp;
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
 
   // parameter Real kv=.1;
@@ -92,7 +92,7 @@ protected
   parameter SIunits.Power Q_dot_nom_i= length * NominalPower/N;
 
 protected
-  BaseClasses.ML_thermal_delta multiLayer_HE[N](
+  BaseClasses.MultiLayerThermalDelta multiLayer_HE[N](
     redeclare each package Medium = Medium,
     M_Radiator=fill((length*MassSteel)/N, N),
     calc_dT=fill(calc_dT, N),

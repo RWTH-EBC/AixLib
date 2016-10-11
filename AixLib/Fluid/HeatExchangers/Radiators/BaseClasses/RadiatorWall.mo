@@ -1,5 +1,5 @@
 within AixLib.Fluid.HeatExchangers.Radiators.BaseClasses;
-class Radiator_wall "Simple one layer wall"
+class RadiatorWall "Simple one layer wall"
 
   parameter Modelica.SIunits.Thickness d=0.025 "Thickness"
     annotation (Dialog(group="Structure"));
@@ -95,4 +95,4 @@ equation
 <p><h4><font color=\"#008000\">Overview</font></h4></p>
 <p>Simple one layer wall for a radiator</p>
 </html>"));
-end Radiator_wall;
+end RadiatorWall;

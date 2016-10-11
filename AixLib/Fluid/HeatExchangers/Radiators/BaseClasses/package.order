@@ -1,8 +1,8 @@
 calcHeaterExcessTemp
 calcHeatingApplianceExponent
-Calc_Excess_Temp
-HeatConv_Radiator
-Radiator_wall
-ML_thermal_delta
+CalcExcessTemp
+HeatConvRadiator
+RadiatorWall
+MultiLayerThermalDelta
 PressureDropRadiator
 RadiatorTypes

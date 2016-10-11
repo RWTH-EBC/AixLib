@@ -1,5 +1,5 @@
 within AixLib.Fluid.HeatExchangers.Radiators.BaseClasses;
-class Calc_Excess_Temp
+class CalcExcessTemp
   "different choices of calculating the excess temperature of the radiator"
 
   constant Integer ari=1 "arithmetic calculation";
@@ -31,4 +31,4 @@ Variable to determine the different choice to calculate the excess temperature o
 </ul></p>
 </html>
 "));
-end Calc_Excess_Temp;
+end CalcExcessTemp;

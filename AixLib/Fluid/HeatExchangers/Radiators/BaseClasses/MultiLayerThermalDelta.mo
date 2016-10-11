@@ -1,9 +1,9 @@
 within AixLib.Fluid.HeatExchangers.Radiators.BaseClasses;
-model ML_thermal_delta "multi layers of heat exchanger"
+model MultiLayerThermalDelta "multi layers of heat exchanger"
 
   import AixLib;
   import calcT =
-    AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.Calc_Excess_Temp;
+    AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp;
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
@@ -63,7 +63,7 @@ annotation (Dialog(tab="Geometry and Material", group="Geometry"));
         origin={41,51},
         extent={{-11,-23},{11,23}},
         rotation=90)));
-  AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.HeatConv_Radiator
+  AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.HeatConvRadiator
     heatConv_Radiator(
     n=n,
     NominalPower=Q_dot_nom_i,
@@ -72,7 +72,7 @@ annotation (Dialog(tab="Geometry and Material", group="Geometry"));
         origin={-17,51},
         extent={{-11,-27},{11,27}},
         rotation=90)));
-  AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.Radiator_wall radiator_wall(
+  AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.RadiatorWall radiator_wall(
     lambda=LambdaSteel,
     c=CapacitySteel,
     d=d,
@@ -271,4 +271,4 @@ dT_R=Tout - Tair;
 <p><h4><font color=\"#008000\">Overview</font></h4></p>
 <p>Model of the multi layers of heat exchanger. From the water flow is the convective and radiative heat output calculated. </p>
 </html>"));
-end ML_thermal_delta;
+end MultiLayerThermalDelta;

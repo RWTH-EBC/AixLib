@@ -1,5 +1,5 @@
 within AixLib.Fluid.HeatExchangers.Radiators.BaseClasses;
-model HeatConv_Radiator
+model HeatConvRadiator
 
   parameter Real n=1.3 "Radiator exponent";
   parameter Real NominalPower=2000 "nominal power of radiator";
@@ -73,4 +73,4 @@ This model represents the convective heat transfer from a radiator to the enviro
 </ul></p>
 </html>
 "));
-end HeatConv_Radiator;
+end HeatConvRadiator;
