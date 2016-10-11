@@ -92,66 +92,84 @@ model Radiators
     redeclare package Medium = Medium,
     dp(start=1000))
     annotation (Placement(transformation(extent={{49,74},{60,87}})));
-  Fluid.FixedResistances.StaticPipe thStF(D = Diam_Main, l = Length_thSt,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe thStF(
+    diameter = Diam_Main,
+    length = Length_thSt,
     redeclare package Medium = Medium) "through the storage room, flow stream"                        annotation(Placement(transformation(extent = {{57, -85}, {40, -74}})));
-  Fluid.FixedResistances.StaticPipe toKiF(D = Diam_Sec, l = Length_toKi,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe toKiF(
+    diameter = Diam_Sec,
+    length = Length_toKi,
     redeclare package Medium = Medium) "to kitchen, flow stream"                       annotation(Placement(transformation(extent = {{8, -5}, {-8, 5}}, origin = {-49, -74.5})));
-  Fluid.FixedResistances.StaticPipe thStR(D = Diam_Main, l = Length_thSt,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe thStR(
+    diameter = Diam_Main,
+    length = Length_thSt,
     redeclare package Medium = Medium)
     "through the storage room, return stream"                                                           annotation(Placement(transformation(extent = {{40, -102}, {58, -90}})));
-  Fluid.FixedResistances.StaticPipe toKiR(D = Diam_Sec, l = Length_toKi,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe toKiR(
+    diameter = Diam_Sec,
+    length = Length_toKi,
     redeclare package Medium = Medium) "to kitchen, return stream"                       annotation(Placement(transformation(extent = {{-72, -102}, {-56, -90}})));
-  Fluid.FixedResistances.StaticPipe thBathF(D = Diam_Main, l = Length_thBath,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe thBathF(
+    diameter = Diam_Main,
+    length = Length_thBath,
     redeclare package Medium = Medium) "through Bath, flow stream"                            annotation(Placement(transformation(extent = {{8, 4.5}, {-8, -4.5}}, rotation = 270, origin = {-4.5, -62})));
-  Fluid.FixedResistances.StaticPipe thBathR(D = Diam_Main, l = Length_thBath,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe thBathR(
+    diameter = Diam_Main,
+    length = Length_thBath,
     redeclare package Medium = Medium) "through bath, return stream"                            annotation(Placement(transformation(extent = {{8.75, -4.25}, {-8.75, 4.25}}, rotation = 90, origin = {-18.25, -62.75})));
-  Fluid.FixedResistances.StaticPipe thChildren1R(D = Diam_Main, l = Length_thChildren1,
-    m_flow_small=0.0001,
-    redeclare package Medium = Medium) "through chidlren room 1, return stream"                         annotation(Placement(transformation(extent = {{6.5, -5}, {-6.5, 5}}, rotation = 90, origin = {-18, -27.5})));
-  Fluid.FixedResistances.StaticPipe thChildren1F(D = Diam_Main, l = Length_thChildren1,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe thChildren1R(
+    diameter = Diam_Main,
+    length = Length_thChildren1,
+    redeclare package Medium = Medium) "through children room 1, return stream"                         annotation(Placement(transformation(extent = {{6.5, -5}, {-6.5, 5}}, rotation = 90, origin = {-18, -27.5})));
+  Modelica.Fluid.Pipes.StaticPipe thChildren1F(
+    diameter = Diam_Main,
+    length = Length_thChildren1,
     redeclare package Medium = Medium) "through chidlren room 1, flow stream"                                      annotation(Placement(transformation(extent = {{6.5, 5}, {-6.5, -5}}, rotation = 270, origin = {-5, -26.5})));
-  Fluid.FixedResistances.StaticPipe toBathF(D = Diam_Sec, l = Length_toBath,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe toBathF(
+    diameter = Diam_Sec,
+    length = Length_toBath,
     redeclare package Medium = Medium) "to Bath, flow stream"                           annotation(Placement(transformation(extent = {{-8.5, 4.5}, {8.5, -4.5}}, origin = {18.5, -38.5})));
-  Fluid.FixedResistances.StaticPipe toBathR(D = Diam_Sec, l = Length_toBath,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe toBathR(
+    diameter = Diam_Sec,
+    length = Length_toBath,
     redeclare package Medium = Medium) "to bath return stream"                           annotation(Placement(transformation(extent = {{8.5, 4.5}, {-8.5, -4.5}}, origin = {18.5, -49.5})));
   Modelica.Fluid.Interfaces.FluidPort_b RETURN(redeclare package Medium =
         Medium)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"                       annotation(Placement(transformation(extent = {{66, -114}, {86, -94}})));
   Modelica.Fluid.Interfaces.FluidPort_a FLOW(redeclare package Medium = Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"                       annotation(Placement(transformation(extent = {{92, -114}, {112, -94}})));
-  Fluid.FixedResistances.StaticPipe toChildrenF(D = Diam_Sec, l = Length_toChildren,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe toChildrenF(
+    diameter = Diam_Sec,
+    length = Length_toChildren,
     redeclare package Medium = Medium) "to Children, flow stream"                                   annotation(Placement(transformation(extent = {{-8.5, 4.5}, {8.5, -4.5}}, origin = {45.5, 40.5})));
-  Fluid.FixedResistances.StaticPipe toChildrenR(D = Diam_Sec, l = Length_toChildren,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe toChildrenR(
+    diameter = Diam_Sec,
+    length = Length_toChildren,
     redeclare package Medium = Medium) "to Children, return stream"                                   annotation(Placement(transformation(extent = {{7.5, 4.5}, {-7.5, -4.5}}, origin = {47.5, 27})));
-  Fluid.FixedResistances.StaticPipe thChildrenF2(D = Diam_Main, l = Length_thChildren2,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe thChildrenF2(
+    diameter = Diam_Main,
+    length = Length_thChildren2,
     redeclare package Medium = Medium) "through chidlren room, flow stream"                                      annotation(Placement(transformation(extent = {{7, 5}, {-7, -5}}, rotation = 270, origin = {-5, 13})));
-  Fluid.FixedResistances.StaticPipe thChildrenR2(D = Diam_Main, l = Length_thChildren2,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe thChildrenR2(
+    diameter = Diam_Main,
+    length = Length_thChildren2,
     redeclare package Medium = Medium) "through chidlren room, return stream"                                      annotation(Placement(transformation(extent = {{7.5, -5}, {-7.5, 5}}, rotation = 90, origin = {-19, 12.5})));
-  Fluid.FixedResistances.StaticPipe toBedroomF(D = Diam_Sec, l = Length_toBedroom,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe toBedroomF(
+    diameter = Diam_Sec,
+    length = Length_toBedroom,
     redeclare package Medium = Medium) "to Bedroom , flow stream"                                 annotation(Placement(transformation(extent = {{-6.5, 4.5}, {6.5, -4.5}}, origin = {23.5, 80.5})));
-  Fluid.FixedResistances.StaticPipe toBedroomR(D = Diam_Sec, l = Length_toBedroom,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe toBedroomR(
+    diameter = Diam_Sec,
+    length = Length_toBedroom,
     redeclare package Medium = Medium) "to Bedroom, return stream"                                 annotation(Placement(transformation(extent = {{6.5, 4.5}, {-6.5, -4.5}}, origin = {20.5, 66})));
-  Fluid.FixedResistances.StaticPipe toLiF(D = Diam_Sec, l = Length_toLi,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe toLiF(
+    diameter = Diam_Sec,
+    length = Length_toLi,
     redeclare package Medium = Medium) "to livingroom, flow stream"                       annotation(Placement(transformation(extent = {{6, -4.5}, {-6, 4.5}}, origin = {-47.5, 3})));
-  Fluid.FixedResistances.StaticPipe toLiR(D = Diam_Main, l = Length_toLi,
-    m_flow_small=0.0001,
-    redeclare package Medium = Medium) "to livingroom, return stream"                        annotation(Placement(transformation(extent = {{6.5, -5}, {-6.5, 5}}, rotation = 180, origin = {-88.5, -16.5})));
+  Modelica.Fluid.Pipes.StaticPipe   toLiR(
+    redeclare package Medium = Medium,
+    length=Length_toLi,
+    diameter=Diam_Main)                "to livingroom, return stream"                        annotation(Placement(transformation(extent = {{6.5, -5}, {-6.5, 5}}, rotation = 180, origin = {-88.5, -16.5})));
   AixLib.Utilities.Interfaces.Star
                           radLi
     annotation (Placement(transformation(extent={{-148,38},{-132,55}})));
@@ -439,8 +457,9 @@ equation
  2- Bedroom
  3 - Children
  4 - Bath
- 5 - Kitchen")}), Documentation(revisions = "<html>
+ 5 - Kitchen")}), Documentation(revisions="<html>
  <ul>
+ <li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe by MSL pipe</li>
  <li><i>June 19, 2014</i> by Ana Constantin:<br/>Implemented</li>
  </ul>
  </html>", info = "<html>
