@@ -400,7 +400,7 @@ revisions="<html>
 <li><i>November 28, 2014&nbsp;</i> by Roozbeh Sangi:<br>Output for logarithmic mean temperature added</li>
 <li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br>Formatted documentation appropriately</li>
 <li><i>Mai 1, 2011&nbsp;</i> by Ana Constantin:<br>Addapted with a few changes from older model.</li>
-<li><i>October, 2016&nbsp;</i> by Peter Remmen:<br/>Transfer to AixLib.</li>
+<li><i>October, 2016&nbsp;</i> by Peter Remmen:<br/>Transfer to AixLib. Delete EnergyMeter and additional output T_source</li>
 </ul>
 </html>"));
 end Radiator;
