@@ -1,5 +1,5 @@
 within AixLib.DataBase.SolarElectric;
-record solarmodul_aleo_s_24 "solarmodul_aleo_s_24"
+record AleoS24 "solarmodul AleoS24"
   //Area_one_panel=1,33155m2
   extends AixLib.DataBase.SolarElectric.PVBaseRecord(
     Eta0=0.139,
@@ -24,4 +24,4 @@ AixLib.Fluid.Solar.Electric.PVsystem</a>
 <li><i>September 01, 2014&nbsp;</i> by Xian Wu:<br/>Added documentation and formatted appropriately</li>
 </ul></p>
 </html>"));
-end solarmodul_aleo_s_24;
+end AleoS24;

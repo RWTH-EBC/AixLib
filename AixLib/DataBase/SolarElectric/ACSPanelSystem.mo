@@ -1,16 +1,15 @@
 within AixLib.DataBase.SolarElectric;
-record SE6M181_14_panels "SE6M181_14_panels"
-//Polycrystalline Solar Module; single Area= 1,44 m2
+record ACSPanelSystem
   extends AixLib.DataBase.SolarElectric.PVBaseRecord(
-    Eta0=0.126,
-    TempCoeff=0.0043,
-    NoctTempCell=46,
+    Eta0=0.176,
+    TempCoeff=0.003,
+    NoctTempCell=45,
     NoctTemp=25,
     NoctRadiation=1000,
-    Area=1.44);
+    Area=22.63);
   annotation (Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
-<p>Polycrystalline Solar Module, single Area=1,44 m2 </p>
+<p>ACS panel system </p>
 <p><br><h4><span style=\"color: #008000\">References</span></h4></p>
 <p>
 Record for record used with 
@@ -24,4 +23,4 @@ AixLib.Fluid.Solar.Electric.PVsystem</a>
 <li><i>September 01, 2014&nbsp;</i> by Xian Wu:<br/>Added documentation and formatted appropriately</li>
 </ul></p>
 </html>"));
-end SE6M181_14_panels;
+end ACSPanelSystem;

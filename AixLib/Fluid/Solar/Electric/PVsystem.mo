@@ -3,7 +3,7 @@ model PVSystem "PVSystem"
 
    parameter Integer NumberOfPanels = 1 "Number of panels";
   parameter AixLib.DataBase.SolarElectric.PVBaseRecord data=
-      AixLib.DataBase.SolarElectric.SE6M181_14_panels()
+      AixLib.DataBase.SolarElectric.SymphonyEnergySE6M181()
     annotation (choicesAllMatching=true);
 
   parameter Modelica.SIunits.Power MaxOutputPower

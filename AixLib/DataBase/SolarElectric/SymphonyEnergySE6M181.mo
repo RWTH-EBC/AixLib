@@ -1,16 +1,16 @@
 within AixLib.DataBase.SolarElectric;
-record CS6P_250P_poly "CS6P_250P_poly"
-  //Area_one_panel=1,608516m2
+record SymphonyEnergySE6M181 "Symphony Energy SE6M60 series "
+//Polycrystalline Solar Module; single Area= 1,44 m2
   extends AixLib.DataBase.SolarElectric.PVBaseRecord(
-    Eta0=0.1554,
-    TempCoeff=0.0034,
-    NoctTempCell=45,
-    NoctTemp=20,
-    NoctRadiation=800,
-    Area=1.608516);
+    Eta0=0.126,
+    TempCoeff=0.0043,
+    NoctTempCell=46,
+    NoctTemp=25,
+    NoctRadiation=1000,
+    Area=1.44);
   annotation (Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
-<p>single Area=1,608516m2 </p>
+<p>Polycrystalline Solar Module, single Area=1,44 m2 </p>
 <p><br><h4><span style=\"color: #008000\">References</span></h4></p>
 <p>
 Record for record used with 
@@ -24,4 +24,4 @@ AixLib.Fluid.Solar.Electric.PVsystem</a>
 <li><i>September 01, 2014&nbsp;</i> by Xian Wu:<br/>Added documentation and formatted appropriately</li>
 </ul></p>
 </html>"));
-end CS6P_250P_poly;
+end SymphonyEnergySE6M181;

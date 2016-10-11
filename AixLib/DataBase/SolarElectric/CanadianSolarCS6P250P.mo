@@ -1,15 +1,16 @@
 within AixLib.DataBase.SolarElectric;
-record ACS_panel_system
+record CanadianSolarCS6P250P "CS6P250PPoly"
+  //Area_one_panel=1,608516m2
   extends AixLib.DataBase.SolarElectric.PVBaseRecord(
-    Eta0=0.176,
-    TempCoeff=0.003,
+    Eta0=0.1554,
+    TempCoeff=0.0034,
     NoctTempCell=45,
-    NoctTemp=25,
-    NoctRadiation=1000,
-    Area=22.63);
+    NoctTemp=20,
+    NoctRadiation=800,
+    Area=1.608516);
   annotation (Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
-<p>ACS panel system </p>
+<p>single Area=1,608516m2 </p>
 <p><br><h4><span style=\"color: #008000\">References</span></h4></p>
 <p>
 Record for record used with 
@@ -23,4 +24,4 @@ AixLib.Fluid.Solar.Electric.PVsystem</a>
 <li><i>September 01, 2014&nbsp;</i> by Xian Wu:<br/>Added documentation and formatted appropriately</li>
 </ul></p>
 </html>"));
-end ACS_panel_system;
+end CanadianSolarCS6P250P;

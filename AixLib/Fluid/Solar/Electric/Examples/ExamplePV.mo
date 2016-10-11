@@ -3,10 +3,10 @@ model ExamplePV
 
   extends Modelica.Icons.Example;
 
-  PVSystem                                pVsystem(
+  PVSystem pVsystem(
     MaxOutputPower=4000,
     NumberOfPanels=5,
-    data=DataBase.SolarElectric.SE6M181_14_panels())  "cle"
+    data=DataBase.SolarElectric.SymphonyEnergySE6M181()) "cle"
     annotation (Placement(transformation(extent={{-22,38},{-2,58}})));
   Modelica.Blocks.Interfaces.RealOutput Power
     annotation (Placement(transformation(extent={{52,40},{72,60}})));
