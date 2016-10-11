@@ -41,4 +41,6 @@ equation
         points={{-10,52},{-6,52},{-6,2},{-2,2}}, color={191,0,0}));
   connect(source.ports[1], radiator_ML_EBC.port_a)
     annotation (Line(points={{-50,2},{-50,0},{-10,0}}, color={0,127,255}));
+  annotation (experiment(StopTime=864000, Interval=600),
+      __Dymola_experimentSetupOutput);
 end Radiator_ML_EBC;
