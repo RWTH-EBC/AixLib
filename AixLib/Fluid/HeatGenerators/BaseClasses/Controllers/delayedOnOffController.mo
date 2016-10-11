@@ -47,7 +47,7 @@ model delayedOnOffController
       origin={-60,120},
       extent={{-20,-20},{20,20}},
       rotation=270)));
-  Modelica.Blocks.Discrete.UnitDelay unitDelay(samplePeriod=600)
+  Modelica.Blocks.Discrete.UnitDelay unitDelay(samplePeriod=delayUnit)
     annotation (Placement(transformation(extent={{32,-14},{40,-6}})));
   Modelica.Blocks.Math.Feedback feedback
     annotation (Placement(transformation(
@@ -86,8 +86,9 @@ model delayedOnOffController
   Modelica.Blocks.Logical.LessThreshold lessThreshold1(threshold=capacity_min)
     annotation (Placement(transformation(extent={{52,-4},{60,4}}, rotation=
           0)));
-  Modelica.Blocks.Logical.GreaterEqualThreshold greaterEqualThreshold(threshold=
-       130) "Emergency Measure"
+  Modelica.Blocks.Logical.GreaterEqualThreshold greaterEqualThreshold(threshold
+      =130 + 273.15)
+            "Emergency Measure"
     annotation (Placement(transformation(extent={{-78,-88},{-62,-72}},
         rotation=0)));
   Modelica.Blocks.Logical.Or or4 annotation (Placement(transformation(
@@ -316,8 +317,6 @@ equation
     Documentation(info="<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>
 <p>This is model is the decision maker in the CHP model. According to different conditions and timings it decides if the CHP can be turned on or off.</p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars2.png\"/></p>
 <p><h4><font color=\"#008000\">Concept</font></h4></p>
 <p>The following control decisions are implemented:</p>
 <p><ul>
@@ -330,6 +329,7 @@ equation
 </html>",
 revisions="<html>
 <p><ul>
+<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Updated and merged with AixLib</li>
 <li><i>January 23, 2014&nbsp;</i> by Pooyan Jahangiri:<br/>Formatted documentation appropriately</li>
 <li><i>January 31, 2011</i> by Pooyan Jahangiri:<br/>Implemented</li>
 </ul></p>

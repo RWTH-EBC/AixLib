@@ -3,7 +3,7 @@ model PIcontroller
 
   parameter Real K_c=0 "Gain of the controller";
   parameter Modelica.SIunits.Time T_c=1 "Time Constant (T>0 required)";
-  parameter Real minYControl = 25 "Minimum controller output in load operation";
+  parameter Real capacity_min = 25 "Minimum controller output in load operation";
 
   Modelica.Blocks.Logical.Switch switch1
     annotation (Placement(transformation(extent={{-70,0},{-50,20}})));
@@ -12,7 +12,7 @@ model PIcontroller
     yMax=100,
     k=K_c,
     Ti=T_c,
-    yMin=minYControl,
+    yMin=capacity_min,
     y_start=0) annotation (Placement(transformation(
           extent={{-36,34},{-16,54}})));
   Modelica.Blocks.Continuous.LimPID PI1(
@@ -98,8 +98,9 @@ equation
           -60},{-38,-14},{-29.8,-14}}, color={255,0,255}));
   connect(not1.u, switch1.u2) annotation (Line(points={{-68,-60},{-82,-60},{-82,
           10},{-72,10}}, color={255,0,255}));
-  connect(switch1.u3, measurement) annotation (Line(points={{-72,2},{-78,2},{-78,
-          -80},{0,-80},{0,-120}}, color={0,0,127}));
+  connect(switch1.u3, measurement) annotation (Line(points={{-72,2},{-80,2},{
+          -80,-80},{0,-80},{0,-120}},
+                                  color={0,0,127}));
   annotation (         Icon(graphics={Rectangle(
           extent={{-100,100},{100,-100}},
           lineColor={0,0,0},
@@ -113,13 +114,12 @@ equation
     Documentation(info="<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>
 <p>This is model consists of two PI controllers to control the system both when in operation as well as when shuttind down.</p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars2.png\"/></p>
 <p><h4><font color=\"#008000\">Concept</font></h4></p>
 <p>Because changing the controller signal from a certain value to zero is not continuous it will result in unstabilities in the simulation. Therefore, two controllers are implemented. One for the operation as a normal controller and one that change the output signal smoothly from the output of the other controller to zero.</p>
 </html>",
 revisions="<html>
 <p><ul>
+<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Updated and merged with AixLib</li>
 <li><i>January 23, 2014&nbsp;</i> by Pooyan Jahangiri:<br/>Formatted documentation appropriately</li>
 <li><i>January 31, 2011</i> by Pooyan Jahangiri:<br/>Implemented</li>
 </ul></p>

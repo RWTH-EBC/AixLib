@@ -33,6 +33,6 @@ equation
   connect(trapezoid.y, source.T_in)
     annotation (Line(points={{-79,4},{-79,4},{-62,4}}, color={0,0,127}));
   connect(const.y, heatGeneratorNoControll.Q_flow) annotation (Line(points={{
-          -39,40},{-24,40},{-24,6},{-12,6}}, color={0,0,127}));
+          -39,40},{-24,40},{-24,6},{-8,6}}, color={0,0,127}));
   annotation (experiment(StopTime=3600, Interval=1));
 end HeatGeneratorNoControllSystem;

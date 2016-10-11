@@ -68,17 +68,23 @@ partial model PartialHeatGenerator
         origin={-60,-50})));
 equation
   connect(port_a, senTCold.port_a) annotation (Line(points={{-100,0},{-90,0},{-90,
-          -80},{-80,-80}}, color={0,127,255}));
+          -80},{-80,-80}}, color={0,127,255},
+      thickness=1));
   connect(senTCold.port_b, vol.ports[1])
-    annotation (Line(points={{-60,-80},{-42,-80}}, color={0,127,255}));
+    annotation (Line(points={{-60,-80},{-42,-80}}, color={0,127,255},
+      thickness=1));
   connect(vol.ports[2], preDro.port_a) annotation (Line(points={{-38,-80},{-38,-80},
-          {-20,-80}}, color={0,127,255}));
+          {-20,-80}}, color={0,127,255},
+      thickness=1));
   connect(senMasFlo.port_b, port_b) annotation (Line(points={{80,-80},{90,-80},{
-          90,0},{100,0}}, color={0,127,255}));
+          90,0},{100,0}}, color={0,127,255},
+      thickness=1));
   connect(preDro.port_b, senTHot.port_a)
-    annotation (Line(points={{0,-80},{0,-80},{30,-80}}, color={0,127,255}));
+    annotation (Line(points={{0,-80},{0,-80},{30,-80}}, color={0,127,255},
+      thickness=1));
   connect(senTHot.port_b, senMasFlo.port_a)
-    annotation (Line(points={{50,-80},{55,-80},{60,-80}}, color={0,127,255}));
+    annotation (Line(points={{50,-80},{55,-80},{60,-80}}, color={0,127,255},
+      thickness=1));
   connect(heater.port, vol.heatPort) annotation (Line(points={{-60,-60},{-60,-60},
           {-60,-66},{-60,-70},{-50,-70}}, color={191,0,0}));
   annotation (
