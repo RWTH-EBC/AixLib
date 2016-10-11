@@ -1,31 +1,31 @@
 within AixLib.Fluid.HeatGenerators.BaseClasses.Controllers;
 model delayedOnOffController
 
-  parameter Modelica.SIunits.Temperature Treturn_max = 343.15
+  parameter Modelica.SIunits.Temperature maxTreturn = 343.15
     "Maximum Return Temperature";
-  parameter Real deltaT_min = 10 "Minimum Flow and Return Temperature Difference";
-  parameter Real Tflow_range=5 "Range of the Flow temperature";
+  parameter Real minDeltaT = 10 "Minimum Flow and Return Temperature Difference";
+  parameter Real TflowRange=5 "Range of the Flow temperature";
   parameter Modelica.SIunits.Time delayTime = 1800 "On/Off Delay time";
   parameter Boolean initialOutput=false;
   parameter Real delayUnit=200;
-  parameter Real capacity_min = 30 "Minimum allowable working capacity in %";
+  parameter Real minCapacity = 30 "Minimum allowable working capacity in %";
 
   Modelica.Blocks.Logical.And and1 annotation (Placement(transformation(
         extent={{-22,16},{-8,30}}, rotation=0)));
   Modelica.Blocks.Logical.Pre pre2 annotation (Placement(transformation(
         extent={{-48,-12},{-34,0}}, rotation=0)));
-  Modelica.Blocks.Logical.OnOffController onOffController(pre_y_start=false,
-      bandwidth=10)
+  Modelica.Blocks.Logical.OnOffController onOffController(bandwidth=minDeltaT,
+      pre_y_start=initialOutput)
                    annotation (Placement(transformation(extent={{-76,-16},{
           -56,4}}, rotation=0)));
-  Modelica.Blocks.Logical.LessThreshold lessThreshold(threshold=Tflow_range)
+  Modelica.Blocks.Logical.LessThreshold lessThreshold(threshold=TflowRange)
     "Maximum allowable Flow Temperature Variation"
     annotation (Placement(transformation(extent={{-50,38},{-34,54}},
         rotation=0)));
   Modelica.Blocks.Logical.Or or1 annotation (Placement(transformation(
         extent={{4,-14},{12,-2}}, rotation=0)));
   Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(threshold=
-        Treturn_max)
+        maxTreturn)
     "Max Return Temperature Limit"
     annotation (Placement(transformation(
       origin={0,-50},
@@ -83,7 +83,7 @@ model delayedOnOffController
          0)));
   Modelica.Blocks.Logical.Or or3 annotation (Placement(transformation(
         extent={{16,-10},{24,10}}, rotation=0)));
-  Modelica.Blocks.Logical.LessThreshold lessThreshold1(threshold=capacity_min)
+  Modelica.Blocks.Logical.LessThreshold lessThreshold1(threshold=minCapacity)
     annotation (Placement(transformation(extent={{52,-4},{60,4}}, rotation=
           0)));
   Modelica.Blocks.Logical.GreaterEqualThreshold greaterEqualThreshold(threshold=

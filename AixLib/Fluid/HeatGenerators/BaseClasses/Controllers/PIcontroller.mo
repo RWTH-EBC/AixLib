@@ -1,26 +1,26 @@
 within AixLib.Fluid.HeatGenerators.BaseClasses.Controllers;
 model PIcontroller
 
-  parameter Real K_c=0 "Gain of the controller";
-  parameter Modelica.SIunits.Time T_c=1 "Time Constant (T>0 required)";
-  parameter Real capacity_min = 25 "Minimum controller output in load operation";
+  parameter Real Kc=0 "Gain of the controller";
+  parameter Modelica.SIunits.Time Tc=1 "Time Constant (T>0 required)";
+  parameter Real minCapacity = 25 "Minimum controller output in load operation";
 
   Modelica.Blocks.Logical.Switch switch1
     annotation (Placement(transformation(extent={{-70,0},{-50,20}})));
   Modelica.Blocks.Continuous.LimPID PI(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     yMax=100,
-    k=K_c,
-    Ti=T_c,
-    yMin=capacity_min,
-    y_start=0) annotation (Placement(transformation(
+    y_start=0,
+    yMin=minCapacity,
+    k=Kc,
+    Ti=Tc)     annotation (Placement(transformation(
           extent={{-36,34},{-16,54}})));
   Modelica.Blocks.Continuous.LimPID PI1(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     yMax=100,
-    k=K_c,
-    Ti=T_c,
-    yMin=0) annotation (Placement(transformation(extent={
+    yMin=0,
+    k=Kc,
+    Ti=Tc)  annotation (Placement(transformation(extent={
             {-12,72},{8,92}})));
   Modelica.Blocks.Discrete.TriggeredSampler triggeredSampler(y_start=0)
     annotation (Placement(transformation(extent={{-42,74},

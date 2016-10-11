@@ -1,7 +1,8 @@
 within AixLib.Fluid.HeatGenerators;
 model HeatGeneratorNoControll
-  extends AixLib.Fluid.HeatGenerators.BaseClasses.PartialHeatGenerator(vol(V=V),
-      preDro(a=coeffPresLoss));
+  extends AixLib.Fluid.HeatGenerators.BaseClasses.PartialHeatGenerator(
+      pressureDrop(
+             a=coeffPresLoss),                                         vol(V=V));
   Modelica.Blocks.Interfaces.RealInput Q_flow
     annotation (Placement(transformation(extent={{-100,40},{-60,80}}),
         iconTransformation(extent={{-100,40},{-60,80}})));

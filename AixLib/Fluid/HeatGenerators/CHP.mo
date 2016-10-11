@@ -1,13 +1,14 @@
 within AixLib.Fluid.HeatGenerators;
 model CHP
-  extends AixLib.Fluid.HeatGenerators.BaseClasses.PartialHeatGenerator(vol(V=
-          param.vol[1]), preDro(a=1e10));
+  extends AixLib.Fluid.HeatGenerators.BaseClasses.PartialHeatGenerator(
+      pressureDrop(             a=1e10),                               vol(V=
+          param.vol[1]));
 
   parameter AixLib.DataBase.CHP.CHPBaseDataDefinition
                                     param= AixLib.DataBase.CHP.CHP_FMB_31_GSK()
     annotation (choicesAllMatching=true,Dialog(group="Unit properties"));
 
-  parameter Real capacity_min = 30 "Minimum allowable working capacity in %"
+  parameter Real minCapacity = 30 "Minimum allowable working capacity in %"
     annotation(Dialog(group="Unit properties"));
   parameter Boolean electricityDriven = false
     "If the CHP is controlled by electricity demand (external table required)"
@@ -25,9 +26,9 @@ model CHP
     annotation(Dialog(group="Control system"));
   parameter Modelica.SIunits.Time delayTime = 3600 "Shutdown/Startup delay"
     annotation(Dialog(group="Control system"));
-  parameter Real K_c = 1 "Gain of the controller"
+  parameter Real Kc = 1 "Gain of the controller"
     annotation(Dialog(group="Control system"));
-  parameter Modelica.SIunits.Time T_c=60 "Time Constant (T>0 required)"
+  parameter Modelica.SIunits.Time Tc=60 "Time Constant (T>0 required)"
     annotation(Dialog(group="Control system"));
   parameter Modelica.SIunits.Time delayUnit = 60
     "Delay measurement of the controller output"
@@ -41,10 +42,13 @@ model CHP
     delayUnit=delayUnit,
     capacity_min=capacity_min)
     annotation (Placement(transformation(extent={{-44,-10},{-24,10}})));
-  BaseClasses.Controllers.PIcontroller th_control(
+  BaseClasses.Controllers.PIcontroller thControl(
     K_c=K_c,
     T_c=T_c,
-    capacity_min=capacity_min)
+    capacity_min=capacity_min,
+    Kc=Kc,
+    Tc=Tc,
+    minCapacity=minCapacity)
     annotation (Placement(transformation(extent={{-10,20},{10,40}})));
   Modelica.Blocks.Math.Min min
     annotation (Placement(transformation(extent={{20,40},{30,60}},
@@ -54,20 +58,18 @@ model CHP
     fileName="NoName",
     table=param.data_CHP)
     annotation (Placement(transformation(extent={{40,40},{60,60}}, rotation=0)));
-  Modelica.Blocks.Continuous.LimPID el_control(
+  Modelica.Blocks.Continuous.LimPID elControl(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     yMax=100,
     yMin=0,
-    Ti=T_c,
-    k=K_c,
-    y_start=0)
-    annotation (Placement(transformation(extent={{-10,60},{10,80}},
-        rotation=0)));
-  Modelica.Blocks.Sources.Constant setpoint_const(k=if ctrlStrategy then (
-        param.maxVTemp) else (param.maxRTemp))
-    annotation (Placement(transformation(extent={{-86,74},{-74,86}},  rotation=
-          0)));
-  Modelica.Blocks.Sources.Constant const(k=capacity_min + 10)
+    y_start=0,
+    k=Kc,
+    Ti=Tc)     annotation (Placement(transformation(extent={{-10,60},{10,80}},
+          rotation=0)));
+  Modelica.Blocks.Sources.Constant constSetpoint(k=if ctrlStrategy then (param.maxVTemp)
+         else (param.maxRTemp)) annotation (Placement(transformation(extent={{-86,
+            74},{-74,86}}, rotation=0)));
+  Modelica.Blocks.Sources.Constant const(k=minCapacity + 10)
     annotation (Placement(transformation(extent={{-80,-6},{-68,6}},  rotation=
          0)));
   Modelica.Blocks.Logical.Switch ctrlSwitch
@@ -141,16 +143,16 @@ public
         origin={50,90})));
 equation
   if electricityDriven then
-    connect(elset, el_control.u_s);
+    connect(elset, elControl.u_s);
   else
-    el_control.u_s = 1e9;
+    elControl.u_s = 1e9;
   end if;
   if Tset_in then
     connect(Tset, delayedOnOffController.FlowTemp_setpoint);
-    connect(Tset, th_control.setpoint);
+    connect(Tset, thControl.setpoint);
   else
-    connect(setpoint_const.y, delayedOnOffController.FlowTemp_setpoint);
-    connect(setpoint_const.y, th_control.setpoint);
+    connect(constSetpoint.y, delayedOnOffController.FlowTemp_setpoint);
+    connect(constSetpoint.y, thControl.setpoint);
   end if;
 
 
@@ -166,13 +168,13 @@ equation
         points={{-46,6},{-52,6},{-52,-34},{8,-34},{8,-12}}, color={0,0,127}));
   connect(const.y, delayedOnOffController.minCapacity_in)
     annotation (Line(points={{-67.4,0},{-67.4,0},{-46,0}}, color={0,0,127}));
-  connect(ctrlSwitch.y, th_control.measurement)
+  connect(ctrlSwitch.y, thControl.measurement)
     annotation (Line(points={{0,11},{0,11},{0,18}}, color={0,0,127}));
-  connect(delayedOnOffController.y, th_control.ON) annotation (Line(points={{-23,
+  connect(delayedOnOffController.y, thControl.ON) annotation (Line(points={{-23,
           0},{-20,0},{-20,24},{-12,24}}, color={255,0,255}));
-  connect(el_control.y, min.u1) annotation (Line(points={{11,70},{14,70},{14,56},
+  connect(elControl.y, min.u1) annotation (Line(points={{11,70},{14,70},{14,56},
           {19,56}}, color={0,0,127}));
-  connect(th_control.y, min.u2) annotation (Line(points={{11,30},{14,30},{14,44},
+  connect(thControl.y, min.u2) annotation (Line(points={{11,30},{14,30},{14,44},
           {19,44}}, color={0,0,127}));
   connect(min.y, combiTable1Ds.u)
     annotation (Line(points={{30.5,50},{34,50},{38,50}}, color={0,0,127}));
@@ -181,7 +183,7 @@ equation
          {0,0,127}));
   connect(combiTable1Ds.y[1], elPower) annotation (Line(points={{61,50},{70,50},
           {70,68},{30,68},{30,90}}, color={0,0,127}));
-  connect(el_control.u_m, elPower) annotation (Line(points={{0,58},{0,50},{12,50},
+  connect(elControl.u_m, elPower) annotation (Line(points={{0,58},{0,50},{12,50},
           {12,68},{30,68},{30,90}}, color={0,0,127}));
   connect(delayedOnOffController.externalOnOff, ON) annotation (Line(points={{-28,
           12},{-28,40},{-114,40}}, color={255,0,255}));
@@ -212,8 +214,7 @@ equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
         Polygon(
-          points={{-10,-16},{-10,-36},{-8,-30},{8,-30},{10,-36},{10,-16},{-10,
-              -16}},
+          points={{-10,-16},{-10,-36},{-8,-30},{8,-30},{10,-36},{10,-16},{-10,-16}},
           lineColor={0,0,0},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),
@@ -233,8 +234,8 @@ equation
           fillColor={135,135,135},
           fillPattern=FillPattern.Solid),
         Polygon(
-          points={{-4.5,-15.5},{-8,-10},{0,4},{6,-4},{10,-4},{8,-8},{8,-12},{
-              5.5,-15.5},{-4.5,-15.5}},
+          points={{-4.5,-15.5},{-8,-10},{0,4},{6,-4},{10,-4},{8,-8},{8,-12},{5.5,
+              -15.5},{-4.5,-15.5}},
           lineColor={0,0,0},
           fillPattern=FillPattern.Sphere,
           fillColor={255,127,0}),

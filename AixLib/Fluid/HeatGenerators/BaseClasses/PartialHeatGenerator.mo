@@ -58,7 +58,7 @@ partial model PartialHeatGenerator
     allowFlowReversal=allowFlowReversal,
     nPorts=2)
     annotation (Placement(transformation(extent={{-50,-80},{-30,-60}})));
-  Modelica.Fluid.Fittings.GenericResistances.VolumeFlowRate preDro(
+  Modelica.Fluid.Fittings.GenericResistances.VolumeFlowRate pressureDrop(
     redeclare package Medium = Medium,
     b=0,
     m_flow_small=m_flow_small,
@@ -73,14 +73,16 @@ equation
   connect(senTCold.port_b, vol.ports[1])
     annotation (Line(points={{-60,-80},{-42,-80}}, color={0,127,255},
       thickness=1));
-  connect(vol.ports[2], preDro.port_a) annotation (Line(points={{-38,-80},{-38,-80},
-          {-20,-80}}, color={0,127,255},
+  connect(vol.ports[2], pressureDrop.port_a) annotation (Line(
+      points={{-38,-80},{-38,-80},{-20,-80}},
+      color={0,127,255},
       thickness=1));
   connect(senMasFlo.port_b, port_b) annotation (Line(points={{80,-80},{90,-80},{
           90,0},{100,0}}, color={0,127,255},
       thickness=1));
-  connect(preDro.port_b, senTHot.port_a)
-    annotation (Line(points={{0,-80},{0,-80},{30,-80}}, color={0,127,255},
+  connect(pressureDrop.port_b, senTHot.port_a) annotation (Line(
+      points={{0,-80},{0,-80},{30,-80}},
+      color={0,127,255},
       thickness=1));
   connect(senTHot.port_b, senMasFlo.port_a)
     annotation (Line(points={{50,-80},{55,-80},{60,-80}}, color={0,127,255},
