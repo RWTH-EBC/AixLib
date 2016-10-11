@@ -10,7 +10,8 @@ model HydraulicSeparator
    replaceable package Medium = Modelica.Media.Water.StandardWater constrainedby
     Modelica.Media.Interfaces.PartialMedium "Component media";
 
-  AixLib.Fluid.MixingVolumes.HydraulicSeparator hydraulicSeparator(DFlange=
+  AixLib.Fluid.MixingVolumes.HydraulicSeparatorOld
+                                                hydraulicSeparator(DFlange=
         0.01,
     redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{18,-6},{38,14}})));
