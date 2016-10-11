@@ -13,8 +13,7 @@ model Radiator_ML_EBC "radiator multilayer model"
     "choose a radiator"
                     annotation(Dialog(group="Radiator Data", enable=selectable), choicesAllMatching=true);
   parameter
-    AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.RadiatorTypes.RadiatorType
-                                                                                         Type=(if selectable then
+    AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.RadiatorTypes.RadiatorType         Type=(if selectable then
       radiatorType.Type else BaseClasses.RadiatorTypes.PanelRadiator10)
     "Type of radiator" annotation (choicesAllMatching=true, Dialog(
       tab="Geometry and Material",
@@ -111,12 +110,14 @@ protected
     LambdaSteel=fill(LambdaSteel, N),
     eps=fill(eps, N),
     A=fill(A/N, N),
-    d=fill(d, N))
+    d=fill(d, N),
+    m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{-28,-18},{8,18}})));
 
 public
   BaseClasses.PressureDropRadiator pressureDropRadiator(redeclare package
-      Medium =                                                                     Medium, PD=PD)
+      Medium =                                                                     Medium, PD=PD,
+    m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{26,-10},{46,10}})));
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ConvectiveHeat
@@ -129,10 +130,12 @@ public
   AixLib.Utilities.Sensors.EEnergyMeter eEnergyMeter
     annotation (Placement(transformation(extent={{74,-62},{94,-42}})));
   Sensors.TemperatureTwoPort                FlowTemperature(redeclare package
-      Medium =                                                                     Medium)
+      Medium =                                                                     Medium,
+      m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{-78,-10},{-58,10}})));
   Sensors.TemperatureTwoPort                ReturnTemperature(redeclare package
-      Medium =                                                                     Medium)
+      Medium =                                                                     Medium,
+      m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{62,-10},{82,10}})));
   Modelica.Blocks.Interfaces.RealOutput T_source
     "The logarithmic mean temperature is calculated from the temperatures at in- and outlet of the radiator"
