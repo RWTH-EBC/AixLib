@@ -1,14 +1,10 @@
 within AixLib.Fluid.MixingVolumes.Examples;
 model HydraulicSeparator
-  import AixLib;
   extends Modelica.Icons.Example;
   inner AixLib.Utilities.Sources.BaseParameters baseParameters
     annotation (Placement(transformation(extent={{-90,60},{-70,80}})));
 
-    // package Medium =
-    //  Modelica.Media.Water.ConstantPropertyLiquidWater "Medium in the system";
-   replaceable package Medium = Modelica.Media.Water.StandardWater constrainedby
-    Modelica.Media.Interfaces.PartialMedium "Component media";
+  package Medium = AixLib.Media.Water "Medium model for water";
 
   AixLib.Fluid.MixingVolumes.HydraulicSeparator hydraulicSeparator(DFlange=
         0.01,
