@@ -62,7 +62,7 @@ annotation (Dialog(tab="Geometry and Material", group="Geometry", enable=not sel
   parameter Integer N=16 "number of discretisation layers";
 
   parameter
-    AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.Calc_Excess_Temp.Temp         calc_dT=calcT.exp
+    AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp.Temp         calc_dT=calcT.exp
     "select calculation method";
   SIunits.Power Power;
   SIunits.Temperature TV_1;
