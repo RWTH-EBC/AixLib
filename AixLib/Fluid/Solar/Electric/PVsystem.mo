@@ -71,16 +71,23 @@ equation
              graphics),
      __Dymola_experimentSetupOutput,
      Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
+<h4><span style=\"color: #008000\">Overview</span></h4>
 <p>PV model is based on manufactory data and performance factor including the NOCT.</p>
-<p><br><b><font style=\"color: #008000; \">Assumptions</font></b></p>
+<p><br><b><span style=\"color: #008000;\">Assumptions</span></b></p>
 <p>PV model is based on manufactory data and performance factor.</p>
 <p><img src=\"modelica://AixLib/Images/PV1.png\"/></p>
-<h4><span style=\"color:#008000\">References</span></h4>
-<p>PV system (data) and literature are documented and can be found: </p>
-<p>data:U:\\FG_Modelica\\Intern\\Erweiterung Modelle\\PV\\datasheets</p>
-<p>equation and paper: U:\\FG_Modelica\\Intern\\Erweiterung Modelle\\PV\\equations</p>
-<h4><span style=\"color:#008000\">Example Results</span></h4>
+<h4><span style=\"color: #008000\">References</span></h4>
+<p>PV system data (DataBase Records) can be found: </p>
+<ul>
+<li>http://www.eks-solar.de/pdfs/aleo_s24.pdf</li>
+<li>http://soehn-net.de/fileadmin/user_upload/pdf/module/canadian_solar/CS6P220-250P_engl..pdf</li>
+<li>http://www.abc-wagner.de/uploads/media/Datenblatt_Kid_SME-1_Serie_DE.pdf</li>
+<li>http://www.renugen.co.uk/content/Solar_Panel_Brochures_part_4/Solar&percnt;20Panel&percnt;20Brochures&percnt;20part&percnt;204/symphony_brochure/symphony_energy_se-m225.pdf</li>
+<li>http://sunelec.com/datasheet-library/download/SMA-SunnyBoy-3000_3800_4000.pdf</li>
+</ul>
+<p><br>Source of literature for the calculation of the pv cell efficiency: </p>
+<p>&QUOT;Thermal modelling to analyze the effect of cell temperature on PV modules energy efficiency&QUOT;</p>
+<h4><span style=\"color: #008000\">Example Results</span></h4>
 <p><a href=\"HVAC.Examples.Solar_UC.Electric.Testing_PV\">AixLib.Fluid.Solar.Electric.Examples.Testing_PV</a></p>
 </html>",revisions="<html>
 <p><ul>
