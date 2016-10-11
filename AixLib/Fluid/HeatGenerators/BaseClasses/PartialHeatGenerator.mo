@@ -44,8 +44,6 @@ partial model PartialHeatGenerator
     m_flow_small=m_flow_small,
     show_T=false,
     show_V_flow=false,
-    dp_start=dp.start,
-    m_flow_start=m_flow.start,
     allowFlowReversal=allowFlowReversal)
     annotation (Placement(transformation(extent={{-20,-90},{0,-70}})));
   Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium,
