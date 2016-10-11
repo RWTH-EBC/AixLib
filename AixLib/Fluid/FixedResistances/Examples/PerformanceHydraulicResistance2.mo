@@ -76,9 +76,9 @@ OutputCPUtime:=true;")}),
 <p>Running both models in parallel (<a href=\"AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances\">Examples.CompareFixedResistances</a>) will not add equally to the total simulation time as can be seen in the dotted green line.</p>
 <h4>Reformulation of Pressure Loss Equation</h4>
 <p>The equation for the pressure loss has been changed from</p>
-<p><img src=\"modelica://AixLib/Resources/Images/equations/equation-Mmi7vuCj.png\" alt=\"dp = sign(m_flow) * 8 * zeta / (Modelica.Constants.pi ^ 2 * D ^ 4 * rho) * m_flow^2\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/equations/equation-Fluid_FixedResistance_old.png\" alt=\"dp = sign(m_flow) * 8 * zeta / (Modelica.Constants.pi ^ 2 * D ^ 4 * rho) * m_flow^2\"/></p>
 <p>to</p>
-<p><img src=\"modelica://AixLib/Resources/Images/equations/equation-rWtKdszK.png\" alt=\"dp = sign(m_flow) * 8 * zeta / (Modelica.Constants.pi * Modelica.Constants.pi * D * D * D * D * rho) * m_flow * m_flow\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/equations/equation-Fluid_FixedResistance_new.png\" alt=\"dp = sign(m_flow) * 8 * zeta / (Modelica.Constants.pi * Modelica.Constants.pi * D * D * D * D * rho) * m_flow * m_flow\"/></p>
 <p>to avoid exponential terms for Pi, D and m_flow as that showed speed improvements and more stable simulation in a weather model some years ago. However, this did not result in speedups for this model and Dymola 2017 as shown in the following graph:</p>
 <p><img src=\"modelica://AixLib/Resources/Images/Fluid/FixedResistances/Compare_FixedResistances_HydraulicResitance_simulation_speed.png\"/></p>
 </html>"));
