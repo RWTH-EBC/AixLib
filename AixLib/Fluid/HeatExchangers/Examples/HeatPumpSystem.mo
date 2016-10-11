@@ -58,10 +58,11 @@ model HeatPumpSystem "Test case for heat pump model"
   AixLib.Fluid.Sources.Boundary_ph
                       boundary_ph(h = 4184 * 8, nPorts=1,
     redeclare package Medium = Medium)          annotation(Placement(transformation(extent = {{-100, 52}, {-80, 72}})));
-  AixLib.Fluid.FixedResistances.StaticPipe
-                   pipe2(D = 0.01, l = 2,
+  AixLib.Fluid.FixedResistances.FixedResistanceDpM
+                   pipe2(
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)                    annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin = {-64, 58})));
+    m_flow_nominal=0.5,
+    dp_nominal=200)                       annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin = {-64, 58})));
   AixLib.Fluid.Sources.Boundary_ph
                       boundary_ph1(nPorts=1, redeclare package Medium = Medium)
                                    annotation(Placement(transformation(extent = {{-100, 24}, {-80, 44}})));
