@@ -125,7 +125,7 @@ model Case650
     fileName="NoName",
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic)
     annotation (Placement(transformation(extent={{-40,-50},{-27,-37}})));
-  AixLib.Utilities.Sensors.TEnergyMeter coolMeter
+  AixLib.Utilities.Sensors.EnergyMeter  coolMeter
     annotation (Placement(transformation(extent={{85,-11},{105,9}})));
   Modelica.Blocks.Sources.Constant const(k=0)
     annotation (Placement(transformation(extent={{9,-59},{19,-49}})));
