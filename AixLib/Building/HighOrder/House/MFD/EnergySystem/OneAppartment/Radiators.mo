@@ -113,8 +113,7 @@ model Radiators
     redeclare package Medium = Medium) "through bath, return stream"                            annotation(Placement(transformation(extent = {{8.75, -4.25}, {-8.75, 4.25}}, rotation = 90, origin = {-18.25, -62.75})));
   Fluid.FixedResistances.StaticPipe thChildren1R(D = Diam_Main, l = Length_thChildren1,
     m_flow_small=0.0001,
-    redeclare package Medium = Medium) "through chidlren room 1, return stream"
-                                                                                                        annotation(Placement(transformation(extent = {{6.5, -5}, {-6.5, 5}}, rotation = 90, origin = {-18, -27.5})));
+    redeclare package Medium = Medium) "through chidlren room 1, return stream"                         annotation(Placement(transformation(extent = {{6.5, -5}, {-6.5, 5}}, rotation = 90, origin = {-18, -27.5})));
   Fluid.FixedResistances.StaticPipe thChildren1F(D = Diam_Main, l = Length_thChildren1,
     m_flow_small=0.0001,
     redeclare package Medium = Medium) "through chidlren room 1, flow stream"                                      annotation(Placement(transformation(extent = {{6.5, 5}, {-6.5, -5}}, rotation = 270, origin = {-5, -26.5})));
@@ -126,11 +125,9 @@ model Radiators
     redeclare package Medium = Medium) "to bath return stream"                           annotation(Placement(transformation(extent = {{8.5, 4.5}, {-8.5, -4.5}}, origin = {18.5, -49.5})));
   Modelica.Fluid.Interfaces.FluidPort_b RETURN(redeclare package Medium =
         Medium)
-    "Fluid connector b (positive design flow direction is from port_a to port_b)"
-                                                                                                        annotation(Placement(transformation(extent = {{66, -114}, {86, -94}})));
+    "Fluid connector b (positive design flow direction is from port_a to port_b)"                       annotation(Placement(transformation(extent = {{66, -114}, {86, -94}})));
   Modelica.Fluid.Interfaces.FluidPort_a FLOW(redeclare package Medium = Medium)
-    "Fluid connector a (positive design flow direction is from port_a to port_b)"
-                                                                                                        annotation(Placement(transformation(extent = {{92, -114}, {112, -94}})));
+    "Fluid connector a (positive design flow direction is from port_a to port_b)"                       annotation(Placement(transformation(extent = {{92, -114}, {112, -94}})));
   Fluid.FixedResistances.StaticPipe toChildrenF(D = Diam_Sec, l = Length_toChildren,
     m_flow_small=0.0001,
     redeclare package Medium = Medium) "to Children, flow stream"                                   annotation(Placement(transformation(extent = {{-8.5, 4.5}, {8.5, -4.5}}, origin = {45.5, 40.5})));
@@ -155,23 +152,24 @@ model Radiators
   Fluid.FixedResistances.StaticPipe toLiR(D = Diam_Main, l = Length_toLi,
     m_flow_small=0.0001,
     redeclare package Medium = Medium) "to livingroom, return stream"                        annotation(Placement(transformation(extent = {{6.5, -5}, {-6.5, 5}}, rotation = 180, origin = {-88.5, -16.5})));
-  HVAC.Interfaces.RadPort radLi
+  AixLib.Utilities.Interfaces.Star
+                          radLi
     annotation (Placement(transformation(extent={{-148,38},{-132,55}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convLi
     annotation (Placement(transformation(extent={{-146,25},{-133,38}})));
-  HVAC.Interfaces.RadPort radKi
+  AixLib.Utilities.Interfaces.Star radKi
     annotation (Placement(transformation(extent={{-146,-50},{-129,-34}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convKi
     annotation (Placement(transformation(extent={{-145,-66},{-131,-51}})));
-  HVAC.Interfaces.RadPort radBe
+  AixLib.Utilities.Interfaces.Star radBe
     annotation (Placement(transformation(extent={{128,88},{146,106}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convBe
     annotation (Placement(transformation(extent={{130,64},{146,82}})));
-  HVAC.Interfaces.RadPort radCh
+  AixLib.Utilities.Interfaces.Star radCh
     annotation (Placement(transformation(extent={{130,39},{150,59}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convCh
     annotation (Placement(transformation(extent={{131,17},{146,34}})));
-  HVAC.Interfaces.RadPort radBa
+  AixLib.Utilities.Interfaces.Star radBa
     annotation (Placement(transformation(extent={{128,-38},{148,-18}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convBa
     annotation (Placement(transformation(extent={{129,-59},{148,-41}})));
@@ -329,16 +327,16 @@ equation
       color={191,0,0}));
   connect(radiatorBa.convPort, convBa) annotation (Line(
       points={{87.93,-33.04},{88,-33.04},{88,-33},{119,-33},{119,-50},{138.5,-50}},
-
       color={191,0,0}));
+
   connect(radiatorBa.radPort, radBa) annotation (Line(
       points={{94.9,-32.87},{94.9,-28},{138,-28}}));
   connect(radiatorCh.radPort, radCh) annotation (Line(
       points={{96.5,46.35},{96.5,49},{140,49}}));
   connect(radiatorCh.convPort, convCh) annotation (Line(
       points={{90.35,46.2},{90,46.2},{90,46},{113,46},{113,25.5},{138.5,25.5}},
-
       color={191,0,0}));
+
   connect(radiatorBr.convPort, convBe) annotation (Line(
       points={{82.64,86.08},{82.64,91},{119,91},{119,73},{138,73}},
       color={191,0,0}));
@@ -387,8 +385,8 @@ equation
       color={0,0,127}));
   connect(valveLi.T_setRoom, TSet[1]) annotation (Line(
       points={{-76.36,11.84},{-76.36,52},{-76,52},{-76,92},{-109,92},{-109,81}},
-
       color={0,0,127}));
+
   connect(convLi, tempSensorLi.port) annotation (Line(
       points={{-139.5,31.5},{-120,31.5},{-120,36},{-108,36}},
       color={191,0,0}));
@@ -420,17 +418,17 @@ equation
       points={{-79,-51},{-69.7,-51},{-69.7,-66.66}},
       color={0,0,127}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-150,
-            -100},{150,110}},                                                                           grid = {1, 1}), graphics={  Rectangle(extent=  {{1, 100}, {126, 63}},  pattern=LinePattern.None, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{4, 58}, {127, 15}},  pattern=LinePattern.None, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{4, -14}, {127, -67}},  pattern=LinePattern.None, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-129, 29}, {-22, -25}},  pattern=LinePattern.None, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-130, -49}, {-23, -103}},  pattern=LinePattern.None, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-120, -81}, {-69, -96}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0},
-            fillPattern=                                                                                                    FillPattern.Solid, textString=  "Kitchen"), Text(extent=  {{-156.5, 29}, {-49.5, 16}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0},
-            fillPattern=                                                                                                    FillPattern.Solid, textString=  "Livingroom"), Text(extent=  {{31, -15}, {138, -28}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0},
-            fillPattern=                                                                                                    FillPattern.Solid, textString=  "Bath"), Text(extent=  {{-27, 56}, {80, 43}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0},
-            fillPattern=                                                                                                    FillPattern.Solid, textString=  "Children"), Text(extent=  {{-34, 100}, {73, 87}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0},
-            fillPattern=                                                                                                    FillPattern.Solid, textString=  "Bedroom"), Text(extent=  {{-70, 103}, {-17, 71}}, lineColor=  {0, 0, 0}, textString=  "1 - Livingroom
+            -100},{150,110}},                                                                           grid = {1, 1}), graphics={  Rectangle(extent = {{1, 100}, {126, 63}},  pattern=LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{4, 58}, {127, 15}},  pattern=LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{4, -14}, {127, -67}},  pattern=LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-129, 29}, {-22, -25}},  pattern=LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-130, -49}, {-23, -103}},  pattern=LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-120, -81}, {-69, -96}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "Kitchen"), Text(extent = {{-156.5, 29}, {-49.5, 16}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "Livingroom"), Text(extent = {{31, -15}, {138, -28}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "Bath"), Text(extent = {{-27, 56}, {80, 43}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "Children"), Text(extent = {{-34, 100}, {73, 87}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "Bedroom"), Text(extent = {{-70, 103}, {-17, 71}}, lineColor = {0, 0, 0}, textString = "1 - Livingroom
  2- Bedroom
  3 - Children
  4 - Bath
