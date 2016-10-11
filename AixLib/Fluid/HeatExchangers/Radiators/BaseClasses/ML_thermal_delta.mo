@@ -92,10 +92,10 @@ annotation (Dialog(tab="Geometry and Material", group="Geometry"));
     annotation (Placement(transformation(extent={{-16,-28},{6,-6}})));
 
   AixLib.Fluid.Sensors.TemperatureTwoPort   temperatureIn(redeclare package
-      Medium = Medium, m_flow_nominal=1)
+      Medium = Medium, m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{-70,-38},{-50,-18}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort   temperatureOut(redeclare package
-      Medium = Medium, m_flow_nominal=1)
+      Medium = Medium, m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{50,-38},{70,-18}})));
 equation
  // Calculation of excess temperature
