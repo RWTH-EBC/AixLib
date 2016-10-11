@@ -1,7 +1,7 @@
 within AixLib.Fluid.Storage.Examples;
 model BufferStorage_Charging
-  import HVAC;
-  import DataBase;
+
+  extends Modelica.Icons.Example;
   import AixLib;
   replaceable package Medium =
      Modelica.Media.Water.ConstantPropertyLiquidWater
@@ -54,20 +54,16 @@ model BufferStorage_Charging
         origin={62,38})));
 equation
   connect(fixedTemperature.port, storage_Aixlib.heatport_outside) annotation (
-      Line(points={{-38,14},{-30,14},{-30,12.72},{-19.75,12.72}}, color={191,0,
-          0}));
+      Line(points={{-38,14},{-30,14},{-30,12.72},{-19.75,12.72}}, color={191,0,0}));
   connect(storage_Aixlib.fluidport_top1, boundary.ports[1]) annotation (Line(
-        points={{-6.5,24.12},{-5.25,24.12},{-5.25,46},{12,46}}, color={0,127,
-          255}));
+        points={{-6.5,24.12},{-5.25,24.12},{-5.25,46},{12,46}}, color={0,127,255}));
   connect(boundary_ph5.ports[1], storage_Aixlib.fluidport_bottom1) annotation (
-      Line(points={{2,-20},{-8,-20},{-8,-0.24},{-6.625,-0.24}}, color={0,127,
-          255}));
+      Line(points={{2,-20},{-8,-20},{-8,-0.24},{-6.625,-0.24}}, color={0,127,255}));
   connect(boundary1.ports[1], storage_Aixlib.fluidport_top2) annotation (Line(
-        points={{-34,46},{-12,46},{-12,24.12},{-13.125,24.12}}, color={0,127,
-          255}));
+        points={{-34,46},{-12,46},{-12,24.12},{-13.125,24.12}}, color={0,127,255}));
   connect(boundary2.ports[1], storage_Aixlib.fluidport_bottom2) annotation (
-      Line(points={{-36,-20},{-14,-20},{-14,-0.12},{-12.875,-0.12}}, color={0,
-          127,255}));
+      Line(points={{-36,-20},{-14,-20},{-14,-0.12},{-12.875,-0.12}}, color={0,127,
+          255}));
   connect(boundary.m_flow_in, const.y)
     annotation (Line(points={{32,38},{42,38},{51,38}}, color={0,0,127}));
   annotation (
