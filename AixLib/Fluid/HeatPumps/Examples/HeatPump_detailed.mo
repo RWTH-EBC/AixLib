@@ -1,5 +1,5 @@
-within AixLib.Fluid.HeatExchangers.Examples;
-model TestHeatPump
+within AixLib.Fluid.HeatPumps.Examples;
+model HeatPump_detailed "Example for the detailed heat pump model."
 
  extends Modelica.Icons.Example;
   Modelica.Blocks.Sources.BooleanPulse booleanPulse(period=1000)
@@ -50,7 +50,7 @@ model TestHeatPump
   Modelica.Blocks.Interfaces.RealOutput T_Co_out
     "Temperature of the passing fluid"
     annotation (Placement(transformation(extent={{100,40},{120,60}})));
-  Fluid.HeatExchangers.HeatPump.HeatPump heatPump(
+  HeatPumps.HeatPump_detailed heatPump(
     redeclare package Medium_con =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
     redeclare package Medium_eva =
@@ -121,4 +121,4 @@ Simple test set-up for the HeatPump model. The heat pump is turned on and off wh
 </ul></p>
 </html>
 "));
-end TestHeatPump;
+end HeatPump_detailed;

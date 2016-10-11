@@ -1,6 +1,7 @@
 Boiler
 Buildings
 Fans
+HeatPump
 Profiles
 Pumps
 Radiators
@@ -9,4 +10,3 @@ Surfaces
 Walls
 Weather
 WindowsDoors
-HeatPump

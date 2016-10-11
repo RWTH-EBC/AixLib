@@ -1,5 +1,5 @@
-within AixLib.Fluid.HeatExchangers.Examples;
-model HeatPumpSystem2 "Test case for boiler model"
+within AixLib.Fluid.HeatPumps.Examples;
+model HeatPump_simple "Test case for simple heat pump model"
   import AixLib;
   extends Modelica.Icons.Example;
 
@@ -29,7 +29,14 @@ model HeatPumpSystem2 "Test case for boiler model"
   AixLib.Fluid.Sensors.TemperatureTwoPort
                             temperatureSensor(redeclare package Medium = Medium,
       m_flow_nominal=0.01)                    annotation(Placement(transformation(extent = {{60, 60}, {80, 80}})));
-  AixLib.Fluid.HeatExchangers.HeatPump.SimpleHeatPump heatPump(
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow annotation(Placement(transformation(extent = {{32, -90}, {52, -70}})));
+  Modelica.Blocks.Sources.Sine sine(amplitude = 1000, startTime = 60, freqHz = 0.0002, offset = -1000) annotation(Placement(transformation(extent = {{0, -90}, {20, -70}})));
+  AixLib.Fluid.MixingVolumes.MixingVolume
+                volume(nPorts=2,
+    redeclare package Medium = Medium,
+    m_flow_nominal=0.01,
+    V=0.1)             annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin={60,-60})));
+  AixLib.Fluid.HeatPumps.HeatPump_simple heatPump(
     tablePower=[0.0,273.15,283.15; 308.15,1100,1150; 328.15,1600,1750],
     tableHeatFlowCondenser=[0.0,273.15,283.15; 308.15,4800,6300; 328.15,4400,
         5750],
@@ -48,7 +55,8 @@ model HeatPumpSystem2 "Test case for boiler model"
   AixLib.Fluid.Sources.Boundary_ph
                       boundary_ph(h = 4184 * 8, nPorts=1,
     redeclare package Medium = Medium)          annotation(Placement(transformation(extent = {{-100, 52}, {-80, 72}})));
-  Fluid.FixedResistances.StaticPipe pipe2(D = 0.01, l = 2,
+  AixLib.Fluid.FixedResistances.StaticPipe
+                   pipe2(D = 0.01, l = 2,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                    annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin = {-64, 58})));
   AixLib.Fluid.Sources.Boundary_ph
@@ -57,20 +65,13 @@ model HeatPumpSystem2 "Test case for boiler model"
   Modelica.Blocks.Sources.BooleanExpression Source_IsNight annotation(Placement(transformation(extent = {{-102, 4}, {-82, 24}})));
   AixLib.Fluid.HeatExchangers.Utilities.FuelCounter electricityCounter
     annotation (Placement(transformation(extent={{-14,16},{6,36}})));
-  AixLib.Fluid.HeatExchangers.Radiators.Radiator
-                     radiator(RadiatorType = AixLib.DataBase.Radiators.ThermX2_ProfilV_979W(),
-    redeclare package Medium = Medium,
-    m_flow_nominal=0.01)                                                                       annotation(Placement(transformation(extent = {{-11, -10}, {11, 10}}, rotation = 180, origin={69,-50})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature RadTemp annotation(Placement(transformation(extent={{42,-78},
-            {54,-66}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature AirTemp annotation(Placement(transformation(extent={{92,-78},
-            {80,-66}})));
-  Modelica.Blocks.Sources.Constant Source_Temp(k = 273.15 + 20) annotation(Placement(transformation(extent={{4,-94},
-            {24,-74}})));
 equation
   connect(pipe1.port_b, Pump2.port_a) annotation(Line(points = {{20, -50}, {10, -50}, {10, 0}}, color = {0, 127, 255}));
   connect(massFlowSensor.port_b, temperatureSensor.port_a) annotation(Line(points = {{40, 70}, {60, 70}}, color = {0, 127, 255}));
   connect(temperatureSensor.port_b, pipe.port_a) annotation(Line(points = {{80, 70}, {90, 70}, {90, 20}}, color = {0, 127, 255}));
+  connect(sine.y, prescribedHeatFlow.Q_flow) annotation(Line(points = {{21, -80}, {32, -80}}, color = {0, 0, 127}));
+  connect(prescribedHeatFlow.port, volume.heatPort) annotation(Line(points={{52,-80},
+          {70,-80},{70,-60}},                                                                                   color = {191, 0, 0}));
   connect(Pump2.port_b, heatPump.port_a_sink) annotation(Line(points = {{10, 20}, {10, 43}, {1, 43}}, color = {0, 127, 255}));
   connect(heatPump.port_b_sink, massFlowSensor.port_a) annotation(Line(points = {{1, 57}, {6, 57}, {6, 56}, {10, 56}, {10, 70}, {20, 70}}, color = {0, 127, 255}));
   connect(onOffController.y, heatPump.OnOff) annotation(Line(points = {{-15, 84}, {-8, 84}, {-8, 58}}, color = {255, 0, 255}));
@@ -83,6 +84,12 @@ equation
   connect(onOffController.u, temperatureSensor.T) annotation (Line(
       points={{-38,78},{-48,78},{-48,100},{70,100},{70,81}},
       color={0,0,127}));
+  connect(pipe1.port_a, volume.ports[1]) annotation (Line(
+      points={{40,-50},{62,-50}},
+      color={0,127,255}));
+  connect(volume.ports[2], pipe.port_b) annotation (Line(
+      points={{58,-50},{90,-50},{90,0}},
+      color={0,127,255}));
   connect(staticPressure.ports[1], Pump2.port_a) annotation (Line(
       points={{-10,-20},{-10,-28},{10,-28},{10,0}},
       color={0,127,255}));
@@ -92,25 +99,7 @@ equation
   connect(boundary_ph1.ports[1], heatPump.port_b_source) annotation (Line(
       points={{-80,34},{-26,34},{-26,42},{-17,43}},
       color={0,127,255}));
-  connect(Source_Temp.y, AirTemp.T) annotation (Line(
-      points={{25,-84},{96,-84},{96,-72},{93.2,-72}},
-      color={0,0,127}));
-  connect(Source_Temp.y, RadTemp.T) annotation (Line(
-      points={{25,-84},{36,-84},{36,-72},{40.8,-72}},
-      color={0,0,127}));
-  connect(RadTemp.port, radiator.radPort) annotation (Line(
-      points={{54,-72},{64,-72},{64.6,-57.8}},
-      color={191,0,0}));
-  connect(AirTemp.port, radiator.convPort) annotation (Line(
-      points={{80,-72},{74,-72},{73.62,-57.6}},
-      color={191,0,0}));
-  connect(pipe1.port_a, radiator.port_b) annotation (Line(
-      points={{40,-50},{58,-50}},
-      color={0,127,255}));
-  connect(radiator.port_a, pipe.port_b) annotation (Line(
-      points={{80,-50},{90,-50},{90,0}},
-      color={0,127,255}));
-  annotation( experiment(StopTime = 10800, Interval = 1), __Dymola_experimentSetupOutput(events = false), Documentation(info = "<html>
+  annotation (experiment(StopTime = 10800, Interval = 1), __Dymola_experimentSetupOutput(events = false), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This example models a simple fluid circuit in order to test the heat pump model for plausibility</p>
  </html>", revisions="<html>
@@ -123,4 +112,4 @@ equation
     Changed BoilerSystem to HeatPumpSystem</li>
  </ul>
  </html>"));
-end HeatPumpSystem2;
+end HeatPump_simple;
