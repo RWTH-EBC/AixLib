@@ -16,7 +16,8 @@ model Radiator
     redeclare package Medium = Medium,
     m_flow_nominal=0.01)                                     annotation(Placement(transformation(extent={{-10,2},
             {10,22}})));
-  AixLib.HVAC.Interfaces.RadPort radPort
+  AixLib.Utilities.Interfaces.Star
+                                 radPort
     annotation (Placement(transformation(extent={{30,68},{50,88}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convPort annotation(Placement(transformation(extent = {{-52, 66}, {-32, 86}})));
   // Variables
@@ -65,19 +66,19 @@ equation
       color={0,127,255}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
             -100},{100,100}}),                                                                           graphics={                                                       Rectangle(extent={{
-              -40,56},{40,28}},                                                                                                    lineColor=  {255, 0, 0},
-            lineThickness=                                                                                                    1), Text(extent=  {{-34, 52}, {36, 28}}, lineColor=  {255, 0, 0},
-            lineThickness=                                                                                                    1, fillColor=  {0, 0, 255},
-            fillPattern=                                                                                                    FillPattern.Solid, textString=  "Heat transfer equations"), Line(points={{0,
-              24},{0,32},{-2,30},{0,32},{2,30}},                                                                                                    color=  {255, 0, 0}, thickness=  1), Line(points=  {{28, 58}, {34, 68}, {30, 66}, {34, 68}, {34, 64}}, color=  {255, 0, 0}, thickness=  1), Line(points=  {{-32, 60}, {-38, 68}, {-38, 64}, {-38, 68}, {-34, 66}}, color=  {255, 0, 0}, thickness=  1)}), Icon(graphics={  Rectangle(extent=  {{-68, 56}, {-60, -74}}, lineColor=  {95, 95, 95}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-48, 56}, {-40, -74}}, lineColor=  {95, 95, 95}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-28, 56}, {-20, -74}}, lineColor=  {95, 95, 95}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-8, 56}, {0, -74}}, lineColor=  {95, 95, 95}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{12, 56}, {20, -74}}, lineColor=  {95, 95, 95}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{32, 56}, {40, -74}}, lineColor=  {95, 95, 95}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{52, 56}, {60, -74}}, lineColor=  {95, 95, 95}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-74, -60}, {62, -70}}, lineColor=  {95, 95, 95}, fillColor=  {230, 230, 230},
-            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-72, 50}, {64, 40}}, lineColor=  {95, 95, 95}, fillColor=  {230, 230, 230},
+              -40,56},{40,28}},                                                                                                    lineColor = {255, 0, 0},
+            lineThickness =                                                                                                   1), Text(extent = {{-34, 52}, {36, 28}}, lineColor = {255, 0, 0},
+            lineThickness =                                                                                                   1, fillColor = {0, 0, 255},
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "Heat transfer equations"), Line(points={{0,
+              24},{0,32},{-2,30},{0,32},{2,30}},                                                                                                    color = {255, 0, 0}, thickness = 1), Line(points = {{28, 58}, {34, 68}, {30, 66}, {34, 68}, {34, 64}}, color = {255, 0, 0}, thickness = 1), Line(points = {{-32, 60}, {-38, 68}, {-38, 64}, {-38, 68}, {-34, 66}}, color = {255, 0, 0}, thickness = 1)}), Icon(graphics={  Rectangle(extent = {{-68, 56}, {-60, -74}}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-48, 56}, {-40, -74}}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-28, 56}, {-20, -74}}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-8, 56}, {0, -74}}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{12, 56}, {20, -74}}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{32, 56}, {40, -74}}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{52, 56}, {60, -74}}, lineColor = {95, 95, 95}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-74, -60}, {62, -70}}, lineColor = {95, 95, 95}, fillColor = {230, 230, 230},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-72, 50}, {64, 40}}, lineColor = {95, 95, 95}, fillColor = {230, 230, 230},
             fillPattern=FillPattern.Solid)}),
 Documentation(revisions="<html>
   <ul>
