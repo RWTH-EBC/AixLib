@@ -7,19 +7,19 @@ model PVinverterRMS "PVinverterRMS with reliable system manager (from ACS)"
    displayUnit="Nm/s")=uMax2,
   uMin=0)
          annotation(Placement(transformation(extent={{40,70},{60,90}})));
- Modelica.Blocks.Tables.CombiTable1Ds Efficiency_Converter_SunnyBoy3800(
+ Modelica.Blocks.Tables.CombiTable1Ds EfficiencyConverterSunnyBoy3800(
   tableOnFile=false,
   table=[0,0.798700;100,0.848907;200,0.899131;250,0.911689;300,0.921732;350,0.929669;400,0.935906;450,0.940718;500,0.943985;550,0.946260;600,0.947839;700,0.950638;800,0.952875;900,0.954431;1000,0.955214;1250,0.956231;1500,0.956449;2000,0.955198;2500,0.952175;3000,0.948659;3500,0.944961;3800,0.942621])
                                                                                                annotation(Placement(transformation(extent={{-25,55},{-5,75}})));
  Modelica.Blocks.Math.Product product2 annotation(Placement(transformation(extent={{10,70},{30,90}})));
 // StaticBlocksContainer _staticBlocks;
- Modelica.Blocks.Interfaces.RealOutput PV_Power_RMS_W
+ Modelica.Blocks.Interfaces.RealOutput PVPowerRmsW
     "'output Real' as connector"                                                    annotation(Placement(
   transformation(extent={{85,70},{105,90}}),
   iconTransformation(
    origin={100,0},
    extent={{-10,-10},{10,10}})));
- Modelica.Blocks.Interfaces.RealInput DC_power_input
+ Modelica.Blocks.Interfaces.RealInput DCPowerInput
     "'input Real' as connector"                                                   annotation(Placement(
   transformation(extent={{-80,55},{-40,95}}),
   iconTransformation(extent={{-122,-18},{-82,22}})));
@@ -27,19 +27,19 @@ model PVinverterRMS "PVinverterRMS with reliable system manager (from ACS)"
   quantity="Basics.Power",
   displayUnit="kW")=4000 "Upper limits of input signals (max_Output_Power)";
 equation
-  connect(product2.u2,Efficiency_Converter_SunnyBoy3800.y[1]) annotation(Line(
+  connect(product2.u2,EfficiencyConverterSunnyBoy3800.y[1]) annotation(Line(
    points={{8,74},{3,74},{1,74},{1,65},{-4,65}},
    color={0,0,127}));
   connect(product2.y,max_Output_Power.u) annotation(Line(
    points={{31,80},{36,80},{33,80},{38,80}},
    color={0,0,127}));
-  connect(max_Output_Power.y,PV_Power_RMS_W) annotation(Line(
+  connect(max_Output_Power.y,PVPowerRmsW) annotation(Line(
    points={{61,80},{65,80},{90,80},{95,80}},
    color={0,0,127}));
-  connect(product2.u1,DC_power_input) annotation(Line(
+  connect(product2.u1,DCPowerInput) annotation(Line(
    points={{8,86},{5,86},{-55,85},{-55,75},{-60,75}},
    color={0,0,127}));
-  connect(Efficiency_Converter_SunnyBoy3800.u,DC_power_input) annotation(Line(
+  connect(EfficiencyConverterSunnyBoy3800.u,DCPowerInput) annotation(Line(
    points={{-27,65},{-30,65},{-55,65},{-55,75},{-60,75}},
    color={0,0,127}));
   annotation (
@@ -53,7 +53,7 @@ equation
     oversampling=4,
     anaAlgorithm=0,
     typename="AnaStatInfo"),
-   Efficiency_Converter_SunnyBoy3800(
+   EfficiencyConverterSunnyBoy3800(
     tableName(flags=128),
     fileName(flags=128)),
    Icon(

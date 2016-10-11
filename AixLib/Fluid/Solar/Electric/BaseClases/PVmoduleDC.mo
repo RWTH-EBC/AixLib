@@ -2,33 +2,33 @@ within AixLib.Fluid.Solar.Electric.BaseClases;
 model PVmoduleDC "PVmoduleDC with temperature dependency for efficiency"
 
 parameter Real Area=20;
-parameter Real eta0=0.176;
-parameter Real NOCT_Temp=25;
-parameter Real NOCT_Temp_Cell=45;
-parameter Real NOCT_radiation=1000;
+parameter Real Eta0=0.176;
+parameter Real NoctTemp=25;
+parameter Real NoctTempCell=45;
+parameter Real NoctRadiation=1000;
 parameter Real TempCoeff=0.003;
-Real Power_PV;
-Real eta_var;
-Real T_cell;
+Real PowerPV;
+Real EtaVar;
+Real TCell;
 
- Modelica.Blocks.Interfaces.RealInput Solar_Irradation_per_m2
+ Modelica.Blocks.Interfaces.RealInput SolarIrradationPerSquareMeter
     "'input Real' as connector"                                                            annotation(Placement(
   transformation(extent={{-115,49},{-75,89}}),
   iconTransformation(extent={{-122,32},{-82,72}})));
- Modelica.Blocks.Interfaces.RealInput ambient_temperature_in_C
+ Modelica.Blocks.Interfaces.RealInput AmbientTemperatureDegC
     "ambient temperature in Celsius"                                                           annotation(Placement(
   transformation(extent={{-115,-70},{-75,-30}}),
   iconTransformation(extent={{-122,-68},{-82,-28}})));
- Modelica.Blocks.Interfaces.RealOutput DC_output_power
+ Modelica.Blocks.Interfaces.RealOutput DCOutputPower
     "DC output power of PV panels"                                                   annotation(Placement(
   transformation(extent={{110,70},{130,90}}),
   iconTransformation(extent={{90,-10},{110,10}})));
 
 equation
-  T_cell=ambient_temperature_in_C+(NOCT_Temp_Cell-NOCT_Temp)*Solar_Irradation_per_m2/NOCT_radiation;
-  eta_var=eta0-TempCoeff*(T_cell-NOCT_Temp)*eta0;
-  Power_PV=Solar_Irradation_per_m2*Area*eta_var;
-  DC_output_power=Power_PV;
+  TCell=AmbientTemperatureDegC+(NoctTempCell-NoctTemp)*SolarIrradationPerSquareMeter/NoctRadiation;
+  EtaVar=Eta0-TempCoeff*(TCell-NoctTemp)*Eta0;
+  PowerPV=SolarIrradationPerSquareMeter*Area*EtaVar;
+  DCOutputPower=PowerPV;
   annotation (
    Icon(
     coordinateSystem(extent={{-100,-100},{100,100}}),

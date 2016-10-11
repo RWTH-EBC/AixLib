@@ -1,50 +1,50 @@
 within AixLib.Fluid.Solar.Electric;
-model PVsystem "PVSystem"
+model PVSystem "PVSystem"
 
-   parameter Integer NumberOfPanels = 1 "number of Panels %NumberOfPanels";
-  parameter AixLib.DataBase.SolarElectric.PV_data data=
+   parameter Integer NumberOfPanels = 1 "Number of panels";
+  parameter AixLib.DataBase.SolarElectric.PVBaseRecord data=
       AixLib.DataBase.SolarElectric.SE6M181_14_panels()
     annotation (choicesAllMatching=true);
 
-  parameter Modelica.SIunits.Power max_Output_Power
-    " Maximum Output Power for Inverter in W";
+  parameter Modelica.SIunits.Power MaxOutputPower
+    "Maximum output power for inverter in W";
 
- BaseClases.PVmoduleDC pVmoduleDC1(
-    eta0=data.eta0,
-    NOCT_Temp=data.NOCT_Temp,
-    NOCT_Temp_Cell=data.NOCT_Temp_Cell,
-    NOCT_radiation=data.NOCT_radiation,
-    TempCoeff=data.Temp_coeff,
+  BaseClasses.PVModuleDC pVmoduleDC1(
+    Eta0=data.Eta0,
+    NoctTemp=data.NoctTemp,
+    NoctTempCell=data.NoctTempCell,
+    NoctRadiation=data.NoctRadiation,
+    TempCoeff=data.TempCoeff,
     Area=NumberOfPanels*data.Area)
     annotation (Placement(transformation(extent={{-15,60},{5,80}})));
-   Modelica.Blocks.Interfaces.RealOutput PV_Power_W
+   Modelica.Blocks.Interfaces.RealOutput PVPowerW
      annotation (Placement(transformation(extent={{80,0},{100,20}})));
-   Modelica.Blocks.Interfaces.RealInput Temp_outside "in C"
+   Modelica.Blocks.Interfaces.RealInput TempOutside "in C"
      annotation (Placement(transformation(extent={{-126,50},{-86,90}})));
-  BaseClases.PVinverterRMS pVinverterRMS(uMax2=max_Output_Power)
+  BaseClasses.PVInverterRMS pVinverterRMS(uMax2=MaxOutputPower)
     annotation (Placement(transformation(extent={{44,0},{64,20}})));
   AixLib.Utilities.Interfaces.SolarRad_in ic_total_rad
     annotation (Placement(transformation(extent={{-122,-20},{-98,6}})));
    Modelica.Blocks.Math.UnitConversions.To_degC to_degC
      annotation (Placement(transformation(extent={{-70,62},{-50,82}})));
 equation
-  connect(pVmoduleDC1.DC_output_power, pVinverterRMS.DC_power_input)
+  connect(pVmoduleDC1.DCOutputPower, pVinverterRMS.DCPowerInput)
     annotation (Line(
       points={{5,70},{22,70},{22,66},{36,66},{36,10.2},{43.8,10.2}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(pVinverterRMS.PV_Power_RMS_W, PV_Power_W) annotation (Line(
+  connect(pVinverterRMS.PVPowerRmsW, PVPowerW) annotation (Line(
       points={{64,10},{90,10}},
       color={0,0,127},
       smooth=Smooth.None));
 
-   pVmoduleDC1.Solar_Irradation_per_m2 =  ic_total_rad.I;
+   pVmoduleDC1.SolarIrradationPerSquareMeter =  ic_total_rad.I;
 
-   connect(Temp_outside, to_degC.u) annotation (Line(
+   connect(TempOutside, to_degC.u) annotation (Line(
        points={{-106,70},{-90,70},{-90,72},{-72,72}},
        color={0,0,127},
        smooth=Smooth.None));
-   connect(pVmoduleDC1.ambient_temperature_in_C, to_degC.y) annotation (Line(
+   connect(pVmoduleDC1.AmbientTemperatureDegC, to_degC.y) annotation (Line(
        points={{-15.2,65.2},{-31.6,65.2},{-31.6,72},{-49,72}},
        color={0,0,127},
        smooth=Smooth.None));
@@ -75,7 +75,6 @@ equation
 <p>PV model is based on manufactory data and performance factor including the NOCT.</p>
 <p><br><b><span style=\"color: #008000;\">Assumptions</span></b></p>
 <p>PV model is based on manufactory data and performance factor.</p>
-<p><img src=\"modelica://AixLib/Images/PV1.png\"/></p>
 <h4><span style=\"color: #008000\">References</span></h4>
 <p>PV system data (DataBase Records) can be found: </p>
 <ul>
@@ -91,8 +90,8 @@ equation
 <p><a href=\"HVAC.Examples.Solar_UC.Electric.Testing_PV\">AixLib.Fluid.Solar.Electric.Examples.Testing_PV</a></p>
 </html>",revisions="<html>
 <p><ul>
-<li><i>Februar 21, 2013 </i> by Corinna Leonhardt:<br/>Implemented</li>
 <li><i>October 11, 2016 </i> by Tobias Blacha:<br/>Moved into AixLib</li>
+<li><i>Februar 21, 2013 </i> by Corinna Leonhardt:<br/>Implemented</li>
 </ul></p>
 </html>"));
-end PVsystem;
+end PVSystem;
