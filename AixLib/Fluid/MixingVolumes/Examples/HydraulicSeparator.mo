@@ -1,18 +1,14 @@
 within AixLib.Fluid.MixingVolumes.Examples;
 model HydraulicSeparator
-  import AixLib;
   extends Modelica.Icons.Example;
-  inner AixLib.Utilities.Sources.BaseParameters baseParameters
-    annotation (Placement(transformation(extent={{-90,60},{-70,80}})));
 
-    // package Medium =
-    //  Modelica.Media.Water.ConstantPropertyLiquidWater "Medium in the system";
-   replaceable package Medium = Modelica.Media.Water.StandardWater constrainedby
-    Modelica.Media.Interfaces.PartialMedium "Component media";
+  package Medium = AixLib.Media.Water "Component media";
 
   AixLib.Fluid.MixingVolumes.HydraulicSeparator hydraulicSeparator(DFlange=
         0.01,
-    redeclare package Medium = Medium)
+    redeclare package Medium = Medium,
+    pumpMaxVolumeFlow=0.03,
+    m_flow_nominal=0.1)
     annotation (Placement(transformation(extent={{18,-6},{38,14}})));
   AixLib.Fluid.Movers.Pump
                          pump(
@@ -86,7 +82,7 @@ model HydraulicSeparator
       Medium = Medium, m_flow_nominal=1)
     annotation (Placement(transformation(extent={{10,-46},{30,-26}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(
-      T=baseParameters.T_ambient)
+      T=273.15+20)
     annotation (Placement(transformation(extent={{-32,-96},{-12,-76}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor
     thermalConductor(G=1.6e3/8)
@@ -176,19 +172,19 @@ equation
       color={0,127,255}));
   connect(temperatureTop.port_b, hydraulicSeparator.port_a_primary) annotation (
      Line(
-      points={{12,10},{17.6,10}},
+      points={{12,10},{18,9}},
       color={0,127,255}));
   connect(temperatureMixedTop.port_a, hydraulicSeparator.port_b_secondary)
     annotation (Line(
-      points={{38,10},{38.4,10}},
+      points={{38,10},{38,9}},
       color={0,127,255}));
   connect(hydraulicSeparator.port_b_primary, temperatureMixedBottom.port_a)
     annotation (Line(
-      points={{17.6,-2},{18,-2},{18,-16},{-8,-16}},
+      points={{18,-1},{18,-2},{18,-16},{-8,-16}},
       color={0,127,255}));
   connect(hydraulicSeparator.port_a_secondary, temperatureBottom.port_b)
     annotation (Line(
-      points={{38.4,-2},{38,-2},{38,-36},{30,-36}},
+      points={{38,-1},{38,-2},{38,-36},{30,-36}},
       color={0,127,255}));
   annotation (Documentation(info="<html>
 <p>This model shows the usage of a Hydraulic Separator within a simple heating circuit. The primary circuit consists of a tank, a pump, a boiler (represented by a pipe with prescribed heat-flux), a pipe and some sensors. The secondary circuit consists of a pump, a static pipe, a valve and a radiator (represented by a pipe with heat-transfer to the outside). Between the two circuit lies the Hydraulic Separator. The example shows that the model of the Hydraulic Separator works in consistence with ones expactation. There is mixing of the fluids between bottom and top of the Hydraulic Separator depending on the mass flowrates in the circuits. If the mass-flows are the same and no mass is exchanged between top and bottom, there is still a small amount of heat transported via conduction. </p>
