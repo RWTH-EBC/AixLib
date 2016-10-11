@@ -9,11 +9,11 @@ class CalcExcessTemp
   type Temp
     extends Integer;
     annotation (Evaluate=true, choices(
-        choice=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.Calc_Excess_Temp.ari
+        choice=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp.ari
           "arithmetic calculation",
-        choice=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.Calc_Excess_Temp.log
+        choice=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp.log
           "logarithmic calculation",
-        choice=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.Calc_Excess_Temp.exp
+        choice=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp.exp
           "exponential calculation"));
   end Temp;
 
