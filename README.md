@@ -23,7 +23,7 @@ Parts of **AixLib** have been developed within public funded projects and with f
 
 ### Version
 
-The current version 0.3.1 is a pre-release.
+The current version 0.3.2 is a pre-release.
 
 ### How to contribute to the development of AixLib
 

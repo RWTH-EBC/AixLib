@@ -3,8 +3,7 @@ model MixingValveForwardDirection
     extends Modelica.Icons.Example;
     package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater;
 
-  import AixLib;
-  inner AixLib.HVAC.BaseParameters baseParameters
+  inner AixLib.Utilities.Sources.BaseParameters baseParameters
     annotation (Placement(transformation(extent={{80,80},{100,100}})));
   AixLib.Fluid.Sources.Boundary_pT boundary_ph(
               nPorts=1,
@@ -33,11 +32,11 @@ model MixingValveForwardDirection
     tau=1,
     m_flow_nominal=1)
     annotation (Placement(transformation(extent={{-54,-80},{-34,-60}})));
-  AixLib.Fluid.Sensors.MassFlowRate  massFlowSensor1(redeclare package Medium
-      = Medium)
+  AixLib.Fluid.Sensors.MassFlowRate  massFlowSensor1(redeclare package Medium =
+        Medium)
     annotation (Placement(transformation(extent={{-20,60},{0,80}})));
-  AixLib.Fluid.Sensors.MassFlowRate  massFlowSensor2(redeclare package Medium
-      = Medium)
+  AixLib.Fluid.Sensors.MassFlowRate  massFlowSensor2(redeclare package Medium =
+        Medium)
     annotation (Placement(transformation(extent={{-20,-80},{0,-60}})));
   Modelica.Blocks.Sources.Step step(startTime=100, height=0.7)
     annotation (Placement(transformation(extent={{38,-54},{18,-34}})));
