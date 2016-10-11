@@ -252,7 +252,6 @@ equation
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <p>A HydraulicSeparator should have a diameter that allows a maximum velocity of 0.2 m/s (vmaxExchange)for the water exchanged between the top and bottom layer in order to prevent turbulences. The diameter of the main body is therefore calculated with the help of the maximum VolumeFlowRate in either primary or secondary circuit. This is done by the model itself. The height of the HydraulicSeparator is calculated according to VDMA 24770 also depending on the maximum VolumeFlowRate. The model therefore simulates a HydraulicSeparator which is suitable for the circuit used. The size of the flanges has to be set by the user. </p>
 <p><br><b><font style=\"color: #008000; \">References</font></b></p>
-<p><a href=\"http://www.google.de/url?sa=t&rct=j&q=&esrc=s&source=web&cd=2&cad=rja&uact=8&ved=0CCkQFjAB&url=http%3A</p>F</p>Fwww.vaillant.pl</p>Fstepone</p>Fdata</p>Fdownloads</p>Fb6</p>F34</p>F00</p>FSprzeglo_hydr_wg_VDMA.pdf&ei=R9lHVJraO4eNywO9yoBo&usg=AFQjCNFSBhKLlP0X4q2TfQZtRlXd_a4F6A&bvm=bv.77880786,d.bGQ\">VDMA Richtlinie 24770</a>%3
 <p><a href=\"http://www.sinusverteiler.com/files/ausgleich_von_last_und_leistung_01.pdf\">Catalogue Sinusverteiler (Explanation of design and function)</a> </p>
 </html>",
         revisions="<html>

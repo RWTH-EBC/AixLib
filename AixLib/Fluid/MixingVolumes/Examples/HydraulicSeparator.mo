@@ -1,6 +1,5 @@
 within AixLib.Fluid.MixingVolumes.Examples;
 model HydraulicSeparator
-  import AixLib;
   extends Modelica.Icons.Example;
 
   package Medium = AixLib.Media.Water "Component media";
