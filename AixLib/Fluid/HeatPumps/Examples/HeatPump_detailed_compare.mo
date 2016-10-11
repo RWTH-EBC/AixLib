@@ -1,6 +1,6 @@
 within AixLib.Fluid.HeatPumps.Examples;
-model HeatPump_detailed
-  "Example for the detailed heat pump model with manufacturer's data."
+model HeatPump_detailed_compare
+  "Example for the detailed heat pump model in order to compare to simple one."
 
  extends Modelica.Icons.Example;
   Modelica.Blocks.Sources.BooleanPulse booleanPulse(period=1000)
@@ -56,14 +56,14 @@ model HeatPump_detailed
     redeclare package Medium_eva =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
     P_eleOutput=true,
-    HPctrlType=true,
-    dataTable=DataBase.HeatPump.EN255.Vitocal350BWH113(),
-    redeclare function data_poly =
-        BaseClasses.Functions.Characteristics.constantQualityGrade,
-    PT1_cycle=true,
-    CorrFlowCo=true,
-    CorrFlowEv=true,
-    capCalcType=1)
+    capCalcType=2,
+    CorrFlowCo=false,
+    CorrFlowEv=false,
+    dataTable=DataBase.HeatPump.HeatPumpBaseDataDefinition(
+        tableQdot_con=[0,0,10; 35,4800,6300; 55,4400,5750],
+        tableP_ele=[0,0,10; 35,1100,1150; 55,1600,1750],
+        mFlow_conNom=0.01,
+        mFlow_evaNom=0.01))
     annotation (Placement(transformation(extent={{-6,0},{24,20}})));
 equation
   connect(TsuSourceRamp.y, sourceSideMassFlowSource.T_in) annotation (Line(
@@ -126,4 +126,4 @@ Simple test set-up for the HeatPump model. The heat pump is turned on and off wh
 </ul></p>
 </html>
 "));
-end HeatPump_detailed;
+end HeatPump_detailed_compare;
