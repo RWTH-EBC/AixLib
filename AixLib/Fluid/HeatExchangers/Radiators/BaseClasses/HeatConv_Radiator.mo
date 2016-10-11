@@ -64,11 +64,11 @@ equation
 <p>
 This model represents the convective heat transfer from a radiator to the environment.
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars2.png\"/></p>
+
 </html>",
       revisions="<html>
 <p><ul>
+<li><i>October, 2016&nbsp;</i> by Peter Remmen:<br/>Transfer to AixLib.</li>
 <li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
 </ul></p>
 </html>

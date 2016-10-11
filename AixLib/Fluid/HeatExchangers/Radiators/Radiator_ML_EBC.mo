@@ -226,8 +226,6 @@ equation
     Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>The Radiator model represents a heating device. This model also includes the conduction through the radiator wall. </p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars3.png\"/></p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <p>The Radiator model represents a heating device. Heat energy taken from the hot water flow through the device is being emitted via convective and radiative energy transport connectors. The ratio of convective and radiative energy flows depends on the type of the heating device (see table). </p>
 <p>T_source output is relevant for exergy analysis. It describes the&nbsp;logarithmic&nbsp;mean&nbsp;temperature&nbsp;is&nbsp;calculated&nbsp;from&nbsp;the&nbsp;temperatures&nbsp;at&nbsp;in-&nbsp;and&nbsp;outlet&nbsp;of&nbsp;the&nbsp;radiator.</p>
@@ -297,12 +295,12 @@ equation
 <td><p>- no radiative transport -</p></td>
 </tr>
 </table>
-<p><br><br><br><br><br><br><br><br><br><br><br>The Height H of the radiator is discretized in N single Layers, as shown in figure 1 </p>
-<p><br><img src=\"../Images/Schichtenmodell.png\"/></p>
+<p><br>The Height H of the radiator is discretized in N single Layers, as shown in figure 1 </p>
+<p><br><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Schichtenmodell.png\"/></p>
 <p>Figure 1: Multilayer Model of radiator </p>
 <p>For every layer the equation (1) is solved. </p>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
-<td><p><br><br><br><br><br><br><img src=\"../Images/DGL_HK.png\"/> </p></td>
+<td><p><br><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/DGL_HK.png\"/> </p></td>
 <td><p><br>(1) </p></td>
 </tr>
 <tr>
@@ -310,17 +308,17 @@ equation
 <td></td>
 </tr>
 </table>
-<p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>The total heat emission consists of a convective and a radiative part. </p>
+<p><br>The total heat emission consists of a convective and a radiative part. </p>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
-<td><p><img src=\"../Images/Q_ab.png\"/> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Q_ab.png\"/> </p></td>
 <td><p><br>(2) </p></td>
 </tr>
 <tr>
-<td><p><img src=\"../Images/Q_K1.png\"/> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Q_K1.png\"/> </p></td>
 <td><p><br>(3) </p></td>
 </tr>
 <tr>
-<td><p><img src=\"../Images/Q_R1.png\"/> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Q_R1.png\"/> </p></td>
 <td><p><br>(4) </p></td>
 </tr>
 <tr>
@@ -328,13 +326,13 @@ equation
 <td></td>
 </tr>
 </table>
-<p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>The convective heat emission is proportional to <img src=\"../Images/deltaT.png\"/>&nbsp;. The radiative heat emission is proportional to <img src=\"../Images/delta.png\"/>&nbsp;=(T_L + DeltaT)^4-TR^4 (T_L: Room Temperature, DeltaT: heater excess temperature, T_R: radiative temperature). </p>
+<p><br>The convective heat emission is proportional to <img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/deltaT.png\"/>&nbsp;. The radiative heat emission is proportional to <img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/delta.png\"/>&nbsp;=(T_L + DeltaT)^4-TR^4 (T_L: Room Temperature, DeltaT: heater excess temperature, T_R: radiative temperature). </p>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
-<td><p><img src=\"../Images/Q_K.png\"/> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Q_K.png\"/> </p></td>
 <td><p><br>(5) </p></td>
 </tr>
 <tr>
-<td><p><img src=\"../Images/Q_R.png\"/> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Q_R.png\"/> </p></td>
 <td><p><br>(6) </p></td>
 </tr>
 <tr>
@@ -342,25 +340,25 @@ equation
 <td></td>
 </tr>
 </table>
-<p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>The heat emission of the radiator depends on the heater excess temperature. In the model it is possible to choose between: </p>
+<p><br>The heat emission of the radiator depends on the heater excess temperature. In the model it is possible to choose between: </p>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
 <td><h4>Method </h4></td>
 <td><h4>Formula </h4></td>
 <td></td>
 </tr>
 <tr>
-<td><p><br><br><br><br><br><br><br><br><br><br><br>arithmetic heater excess temperature </p></td>
-<td><p><img src=\"../Images/Delta_T_ari.png\"/> </p></td>
+<td><p>arithmetic heater excess temperature </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Delta_T_ari.png\"/> </p></td>
 <td><p><br>(7) </p></td>
 </tr>
 <tr>
 <td><p>logarithmic heater excess temperature </p></td>
-<td><p><img src=\"../Images/Delta_T_log.png\"/> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Delta_T_log.png\"/> </p></td>
 <td><p><br>(8) </p></td>
 </tr>
 <tr>
 <td><p>exponential heater excess temperature according to [2] </p></td>
-<td><p><img src=\"../Images/Delta_T_exp.png\"/> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Delta_T_exp.png\"/> </p></td>
 <td><p><br>(9) </p></td>
 </tr>
 <tr>
@@ -369,14 +367,14 @@ equation
 <td></td>
 </tr>
 </table>
-<p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>Due to stability reasons and accuracy at small heating medium flow, an exponential calculation of the heater excess temperture is recommended. The function &QUOT;calcHeaterExcessTemp &QUOT; regularize the discontinuities in equation (9). </p>
+<p>Due to stability reasons and accuracy at small heating medium flow, an exponential calculation of the heater excess temperture is recommended. The function &quot;calcHeaterExcessTemp &quot; regularize the discontinuities in equation (9). </p>
 <p>The radiator exponent according to DIN 442 is valid for the total heat emission. the radiative heat emission part grows larger. This is considered by the following formulas: </p>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
-<td><p><img src=\"../Images/n_K1.png\"/> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/n_K1.png\"/> </p></td>
 <td><p><br>(10) </p></td>
 </tr>
 <tr>
-<td><p><img src=\"../Images/n_K2.png\"/> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/n_K2.png\"/> </p></td>
 <td><p><br>(11) </p></td>
 </tr>
 <tr>
@@ -384,11 +382,11 @@ equation
 <td></td>
 </tr>
 </table>
-<p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>The modified convective exponent is calculated by (11). The region of discontinuity in eq. (11) has not yet been regulized, so a constant radiator exponent is used for now. </p>
+<p>The modified convective exponent is calculated by (11). The region of discontinuity in eq. (11) has not yet been regulized, so a constant radiator exponent is used for now. </p>
 <p>In the model the heat emission is calculated according to eq. (5), (6) for every layer and the respective power is connected to the romm via the thermal ports. A varHeatSource (inPort=total heat emission) is connected via a thermal port to the enthalpie flow of the heating medium and the stored heat in the radiator mass. </p>
 <p>The pressure loss is calculated with equation (12).</p>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
-<td><p><img src=\"../Images/delta_P.png\"/> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/delta_P.png\"/> </p></td>
 <td><p><br>(12) </p></td>
 </tr>
 </table>
@@ -401,11 +399,6 @@ equation
 <li>[2] Nadler,Norbert: Die W&auml;rmeleistung von Raumheizk&ouml;rpern in expliziter Darstellung, In: HLH L&uuml;ftung/Klima - Heizung/Sanit&auml;r - Geb&auml;udetechnik 11, S.621 - 624, 1991 </li>
 <li>[3] Tritschler, Markus: Bewertung der Genauigkeit von Heizkostenverteilern, Dissertation, Uni Stuttart, 1999 </li>
 </ul>
-<h4><span style=\"color:#008000\">Example Results</span></h4>
-<p><a href=\"HVAC.Examples.HeatExchanger.Verification.Simple_HeatExchanger\">HVAC.Examples.HeatExchanger.Verification.Simple_HeatExchanger</a></p>
-<p><a href=\"HVAC.Examples.HeatExchanger.Validation.PanelRadiator\">HVAC.Examples.HeatExchanger.Validation.PanelRadiator</a></p>
-<p><a href=\"HVAC.Examples.HeatExchanger.Validation.DINSteelRadiator\">HVAC.Examples.HeatExchanger.Validation.DINSteelRadiator</a></p>
-<p><a href=\"HVAC.Examples.HeatExchanger.Validation.PressureDrop\">HVAC.Examples.HeatExchanger.Validation.PressureDrop</a></p>
 </html>",
 revisions="<html>
 <ul>
@@ -414,11 +407,7 @@ revisions="<html>
 <li><i>November 28, 2014&nbsp;</i> by Roozbeh Sangi:<br>Output for logarithmic mean temperature added</li>
 <li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br>Formatted documentation appropriately</li>
 <li><i>Mai 1, 2011&nbsp;</i> by Ana Constantin:<br>Addapted with a few changes from older model.</li>
+<li><i>October, 2016&nbsp;</i> by Peter Remmen:<br/>Transfer to AixLib.</li>
 </ul>
-</html>"),
-    experiment(
-      StopTime=864000,
-      Interval=30,
-      Algorithm="Lsodar"),
-    experimentSetupOutput);
+</html>"));
 end Radiator_ML_EBC;
