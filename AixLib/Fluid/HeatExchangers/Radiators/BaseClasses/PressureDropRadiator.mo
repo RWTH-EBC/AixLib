@@ -1,7 +1,7 @@
 within AixLib.Fluid.HeatExchangers.Radiators.BaseClasses;
 model PressureDropRadiator
   "Calculates the pressure drop in a radiator according to manufacturer data"
-  extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
+  extends AixLib.Fluid.Interfaces.PartialTwoPortTransport;
 
   parameter Real PD
     "Pressure drop coefficient, delta_p[Pa] = PD*m_flow[kg/s]^2";
@@ -10,7 +10,6 @@ equation
    // Isenthalpic state transformation (no storage and no loss of energy)
   port_a.h_outflow = inStream(port_b.h_outflow);
   port_b.h_outflow = inStream(port_a.h_outflow);
-  port_b.m_flow = port_a.m_flow;
 
   //Hydraulic Part: pressure drop
 
@@ -37,5 +36,11 @@ equation
 <li><i>June 10, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
 </ul></p>
 </html>"),
-    Diagram(graphics));
+    Diagram(graphics),
+    experiment(StopTime=86400, Interval=600),
+    Icon(graphics={Rectangle(
+          extent={{-96,96},{96,-96}},
+          lineColor={28,108,200},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid)}));
 end PressureDropRadiator;
