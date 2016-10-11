@@ -26,12 +26,15 @@ model RoomGFOw2_DayNightMode
     redeclare package Medium = Medium,
     dp(start=100),
     m_flow_nominal=0.3,
-    dp_nominal=200) "Hydraulic resistance"
+    dp_nominal=200) "Hydraulic resistance in supply"
     annotation (Placement(transformation(extent={{-6,-36},{14,-16}})));
-  AixLib.Fluid.FixedResistances.StaticPipe pipe_return(
+  AixLib.Fluid.FixedResistances.FixedResistanceDpM res2(
     redeclare package Medium = Medium,
     m_flow_small=0.0001,
-    dp(start=100))                                                      annotation(Placement(transformation(extent = {{28, -82}, {8, -62}})));
+    dp(start=100),
+    m_flow_nominal=0.3,
+    dp_nominal=200) "Hydraulic resistance in return"
+    annotation (Placement(transformation(extent={{28,-82},{8,-62}})));
   Modelica.Blocks.Sources.Constant Tset(k = 273.15 + 20) annotation(Placement(transformation(extent = {{-6, -4}, {4, 6}})));
   Modelica.Blocks.Sources.Constant AirExchange(k = 0.7) annotation(Placement(transformation(extent = {{8, 68}, {18, 78}})));
   AixLib.Fluid.Sources.Boundary_ph
@@ -56,8 +59,8 @@ equation
     annotation (Line(points={{-36,-26},{-6,-26}}, color={0,127,255}));
   connect(heatValve_new.port_b, radiator_ML_delta.port_a) annotation(Line(points={{42,-26},
           {54,-26}},                                                                                         color = {0, 127, 255}));
-  connect(radiator_ML_delta.port_b, pipe_return.port_a) annotation(Line(points={{74,-26},
-          {100,-26},{100,-72},{28,-72}},                                                                                           color = {0, 127, 255}));
+  connect(radiator_ML_delta.port_b, res2.port_a) annotation (Line(points={{74,-26},
+          {100,-26},{100,-72},{28,-72}}, color={0,127,255}));
   connect(room_GF_2OW.AirExchangePort, AirExchange.y) annotation(Line(points = {{30.31, 43.73}, {30.31, 73}, {18.5, 73}}, color = {0, 0, 127}));
   connect(combinedWeather.SolarRadiation_OrientedSurfaces[1], room_GF_2OW.SolarRadiationPort_OW2) annotation(Line(points = {{-90.88, 76.7}, {-90.88, 70}, {0, 70}, {0, 84}, {43.09, 84}, {43.09, 43.82}}, color = {255, 128, 0}));
   connect(combinedWeather.SolarRadiation_OrientedSurfaces[2], room_GF_2OW.SolarRadiationPort_OW1) annotation(Line(points = {{-90.88, 76.7}, {-90.88, 70}, {0, 70}, {0, 31.4}, {16.09, 31.4}}, color = {255, 128, 0}));
@@ -65,7 +68,8 @@ equation
           -60.7333,98.8},{0,98.8},{0,18.8},{16.09,18.8}},                                                                                         color = {0, 0, 127}));
   connect(combinedWeather.AirTemp, varTemp.T) annotation(Line(points={{-60.7333,
           94.9},{0,94.9},{0,60},{-64,60},{-64,48},{-60,48}},                                                                                    color = {0, 0, 127}));
-  connect(Pump.port_a, pipe_return.port_b) annotation(Line(points = {{-92, -26}, {-100, -26}, {-100, -72}, {8, -72}}, color = {0, 127, 255}));
+  connect(Pump.port_a, res2.port_b) annotation (Line(points={{-92,-26},{-100,-26},
+          {-100,-72},{8,-72}}, color={0,127,255}));
   connect(nightMode.SwitchToNightMode,Pump. IsNight) annotation(Line(points = {{-85.15, 10.3}, {-82, 10.3}, {-82, -15.8}}, color = {255, 0, 255}));
   connect(Tset.y, heatValve_new.T_setRoom) annotation(Line(points = {{4.5, 1}, {37.6, 1}, {37.6, -16.2}}, color = {0, 0, 127}));
   connect(radiator_ML_delta.convPort, room_GF_2OW.thermRoom) annotation(Line(points = {{59.8, -18.4}, {59.8, 0}, {30.04, 0}, {30.04, 29.6}}, color = {191, 0, 0}));
