@@ -31,6 +31,26 @@ partial model PartialHeatGenerator
   parameter Modelica.SIunits.Time tauHeaTra=1200
     "Time constant for heat transfer, default 20 minutes"
     annotation (Dialog(tab="Advanced", group="Sensor Properties"));
+  Sensors.TemperatureTwoPort senTHot(
+    redeclare package Medium = Medium,
+    tau=tau,
+    m_flow_nominal=m_flow_nominal,
+    initType=initType,
+    T_start=T_start,
+    transferHeat=transferHeat,
+    TAmb=TAmb,
+    tauHeaTra=tauHeaTra,
+    allowFlowReversal=allowFlowReversal,
+    m_flow_small=m_flow_small)
+    annotation (Placement(transformation(extent={{30,-90},{50,-70}})));
+  Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium,
+      allowFlowReversal=allowFlowReversal)
+    annotation (Placement(transformation(extent={{60,-90},{80,-70}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heater annotation (
+      Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=-90,
+        origin={-60,-50})));
   MixingVolumes.MixingVolume vol(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
@@ -46,26 +66,6 @@ partial model PartialHeatGenerator
     show_V_flow=false,
     allowFlowReversal=allowFlowReversal)
     annotation (Placement(transformation(extent={{-20,-90},{0,-70}})));
-  Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium,
-      allowFlowReversal=allowFlowReversal)
-    annotation (Placement(transformation(extent={{60,-90},{80,-70}})));
-  Sensors.TemperatureTwoPort senTHot(
-    redeclare package Medium = Medium,
-    tau=tau,
-    m_flow_nominal=m_flow_nominal,
-    initType=initType,
-    T_start=T_start,
-    transferHeat=transferHeat,
-    TAmb=TAmb,
-    tauHeaTra=tauHeaTra,
-    allowFlowReversal=allowFlowReversal,
-    m_flow_small=m_flow_small)
-    annotation (Placement(transformation(extent={{30,-90},{50,-70}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heater annotation (
-      Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=-90,
-        origin={-60,-50})));
 equation
   connect(port_a, senTCold.port_a) annotation (Line(points={{-100,0},{-90,0},{-90,
           -80},{-80,-80}}, color={0,127,255},

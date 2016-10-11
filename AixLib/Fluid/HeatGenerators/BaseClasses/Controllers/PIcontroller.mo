@@ -98,9 +98,8 @@ equation
           -60},{-38,-14},{-29.8,-14}}, color={255,0,255}));
   connect(not1.u, switch1.u2) annotation (Line(points={{-68,-60},{-82,-60},{-82,
           10},{-72,10}}, color={255,0,255}));
-  connect(switch1.u3, measurement) annotation (Line(points={{-72,2},{-80,2},{
-          -80,-80},{0,-80},{0,-120}},
-                                  color={0,0,127}));
+  connect(switch1.u3, measurement) annotation (Line(points={{-72,2},{-80,2},{-80,
+          -80},{0,-80},{0,-120}}, color={0,0,127}));
   annotation (         Icon(graphics={Rectangle(
           extent={{-100,100},{100,-100}},
           lineColor={0,0,0},
@@ -119,7 +118,7 @@ equation
 </html>",
 revisions="<html>
 <p><ul>
-<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Updated and merged with AixLib</li>
+<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Variable names updated and merged with AixLib</li>
 <li><i>January 23, 2014&nbsp;</i> by Pooyan Jahangiri:<br/>Formatted documentation appropriately</li>
 <li><i>January 31, 2011</i> by Pooyan Jahangiri:<br/>Implemented</li>
 </ul></p>

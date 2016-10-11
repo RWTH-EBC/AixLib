@@ -80,6 +80,10 @@ model CHP
     annotation (Placement(transformation(extent={{-26,-54},{-14,-42}},
                                                                      rotation=
          0)));
+  Modelica.Blocks.Math.Gain gain(k=1000)
+    annotation (Placement(transformation(extent={{60,-36},{48,-24}})));
+  Modelica.Blocks.Sources.Constant ExothermicTemperature(k=1783.4)
+    annotation (Placement(transformation(extent={{44,12},{60,28}})));
   Modelica.Blocks.Interfaces.RealInput Tset if          Tset_in
     "Temperature setpoint [°C]" annotation (Placement(transformation(extent={{-126,76},
             {-100,104}},         rotation=0), iconTransformation(extent={{-80,-70},
@@ -88,6 +92,20 @@ model CHP
     "Electrical power setpoint" annotation (Placement(transformation(extent={{-126,56},
             {-100,84}},     rotation=0), iconTransformation(extent={{-80,50},{-60,
             70}})));
+  Modelica.Blocks.Interfaces.BooleanInput ON "False for shut down" annotation (
+     Placement(transformation(extent={{-128,26},{-100,54}}),
+        iconTransformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={30,-90})));
+
+
+  Modelica.Blocks.Interfaces.RealOutput Tsource "Combustion temperature"
+    annotation (Placement(transformation(extent={{99.5,41.75},{118,60}}),
+        iconTransformation(
+        extent={{-9.75,-9.75},{9.75,9.75}},
+        rotation=-90,
+        origin={-29.75,-89.75})));
 public
   Modelica.Blocks.Interfaces.RealOutput elPower annotation (Placement(
         transformation(
@@ -96,24 +114,31 @@ public
         rotation=90), iconTransformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={-40,90})));
-  Modelica.Blocks.Interfaces.BooleanInput ON "False for shut down" annotation (
-     Placement(transformation(extent={{-128,26},{-100,54}}),
-        iconTransformation(
+        origin={-50,90})));
+  Modelica.Blocks.Interfaces.RealOutput thPower annotation (Placement(
+        transformation(
+        origin={46,90},
+        extent={{-10,-10},{10,10}},
+        rotation=90), iconTransformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={50,-90})));
-  Modelica.Blocks.Math.Gain gain(k=1000)
-    annotation (Placement(transformation(extent={{60,-36},{48,-24}})));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
-          extent={{-50,68},{50,28}},
-          lineColor={255,255,255},
-          fillPattern=FillPattern.HorizontalCylinder,
-          fillColor={175,175,175},
-          textString="CHP",
-          textStyle={TextStyle.Bold})}),                         Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
-
+        origin={-20,90})));
+  Modelica.Blocks.Interfaces.RealOutput fuelInput
+    annotation (Placement(transformation(
+      origin={61,90},
+      extent={{-10,-11},{10,11}},
+      rotation=90), iconTransformation(
+        extent={{-10,-11},{10,11}},
+        rotation=90,
+        origin={20,90})));
+  Modelica.Blocks.Interfaces.RealOutput fuelConsumption
+    annotation (Placement(transformation(
+      origin={76,90},
+      extent={{-10,-10},{10,10}},
+      rotation=90), iconTransformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={50,90})));
 equation
   if electricityDriven then
     connect(elset, el_control.u_s);
@@ -164,4 +189,82 @@ equation
           {70,-30},{61.2,-30}}, color={0,0,127}));
   connect(gain.y, heater.Q_flow) annotation (Line(points={{47.4,-30},{48,-30},{
           46,-30},{-60,-30},{-60,-40}}, color={0,0,127}));
+
+  connect(ExothermicTemperature.y, Tsource) annotation (Line(
+      points={{60.8,20},{80,20},{80,50.875},{108.75,50.875}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(combiTable1Ds.y[2], thPower) annotation (Line(points={{61,50},{70,50},
+          {70,68},{46,68},{46,90}}, color={0,0,127}));
+  connect(combiTable1Ds.y[3], fuelInput) annotation (Line(points={{61,50},{70,50},
+          {70,68},{61,68},{61,90}}, color={0,0,127}));
+  connect(combiTable1Ds.y[4], fuelConsumption) annotation (Line(points={{61,50},{70,50},{70,68},{76,68},{76,90}}, color={0,0,127}));
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
+          extent={{-50,58},{50,18}},
+          lineColor={255,255,255},
+          fillPattern=FillPattern.HorizontalCylinder,
+          fillColor={175,175,175},
+          textString="CHP",
+          textStyle={TextStyle.Bold}),
+        Rectangle(
+          extent={{-12,6},{12,-36}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Polygon(
+          points={{-10,-16},{-10,-36},{-8,-30},{8,-30},{10,-36},{10,-16},{-10,
+              -16}},
+          lineColor={0,0,0},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{-2,-26},{4,-32}},
+          lineColor={0,0,0},
+          fillColor={135,135,135},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{-18,-54},{-8,-64}},
+          lineColor={0,0,0},
+          fillColor={135,135,135},
+          fillPattern=FillPattern.Solid),
+        Polygon(
+          points={{-2,-30},{-14,-54},{-10,-56},{0,-32},{-2,-30}},
+          lineColor={0,0,0},
+          fillColor={135,135,135},
+          fillPattern=FillPattern.Solid),
+        Polygon(
+          points={{-4.5,-15.5},{-8,-10},{0,4},{6,-4},{10,-4},{8,-8},{8,-12},{
+              5.5,-15.5},{-4.5,-15.5}},
+          lineColor={0,0,0},
+          fillPattern=FillPattern.Sphere,
+          fillColor={255,127,0}),
+        Polygon(
+          points={{-4.5,-13.5},{0,-4},{6,-10},{2,-14},{-4.5,-13.5}},
+          lineColor={255,255,170},
+          fillColor={255,255,170},
+          fillPattern=FillPattern.Solid)}),                      Diagram(
+        coordinateSystem(preserveAspectRatio=false)),
+        Documentation(info="<html>
+<h4><span style=\"color:#008000\">Overview</span></h4>
+<p>A table based combined heat and power (CHP) model. Depending on the user choice, this model can be both heat and electricity driven. </p>
+<h4><span style=\"color:#008000\">Concept</span></h4>
+<p>When controlled by heat demand, the CHP is controlled either by flow temperature or by return temperature. When electricity control is activated, an electricity profile needs to be connected to the model. During electricity controlled operation, heat controllers act as emergency systems.</p>
+<p>A complete On/Off controller is implemented which takes charge of the timing of each turning on and off command. For example it can be set that between each on and off command, the CHP needs 300 seconds (set in parameter SD_delay) to be able to execute the other command. During this time a PI controller controls the temperature continuously.</p>
+<p>Minimum possible capacity can be set to prevent the CHP working in lower capacities. If the timing does not allow a shut down at times lower capacities are required, the CHP works on minimum capacity until the shut down is permitted. This can result in the rise of water temperature higher than setpoint and may in some cases result in temperatures higher than boiling point of water.</p>
+<p>The dimension of thermal and electrical power outputs and fuel input as well as the electricity profile should be in kW. The dimmension of fuel consumption depends on the user&apos;s data. </p>
+<h4><span style=\"color:#008000\">Assumptions</span></h4>
+<p>The combustion temperature T_sorce is at the moment set to a ciosntant value of 1748 K. The value is relevant for exergy analysis.</p>
+<h4><span style=\"color:#008000\">Example Results</span></h4>
+<p><a href=\"HVAC.Examples.CHP.CHP_control\">HVAC.Examples.CHP.CHP_control</a></p>
+</html>",
+revisions="<html>
+<ul>
+<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Merged with AixLib</li>
+<li><i>January 09, 2006&nbsp;</i> by Peter Matthes:<br/>V0.1: Initial configuration.</li>
+<li><i>November 28, 2014&nbsp;</i> by Roozbeh Sangi:<br>Output for source Temperature added.</li>
+<li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br>Formatted documentation appropriately</li>
+<li>by Pooyan Jahangiri:<br>First implementation.</li>
+</ul>
+</html>"));
+
 end CHP;

@@ -86,8 +86,8 @@ model delayedOnOffController
   Modelica.Blocks.Logical.LessThreshold lessThreshold1(threshold=capacity_min)
     annotation (Placement(transformation(extent={{52,-4},{60,4}}, rotation=
           0)));
-  Modelica.Blocks.Logical.GreaterEqualThreshold greaterEqualThreshold(threshold
-      =130 + 273.15)
+  Modelica.Blocks.Logical.GreaterEqualThreshold greaterEqualThreshold(threshold=
+       130 + 273.15)
             "Emergency Measure"
     annotation (Placement(transformation(extent={{-78,-88},{-62,-72}},
         rotation=0)));
@@ -329,7 +329,7 @@ equation
 </html>",
 revisions="<html>
 <p><ul>
-<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Updated and merged with AixLib</li>
+<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Variable names updated and merged with AixLib</li>
 <li><i>January 23, 2014&nbsp;</i> by Pooyan Jahangiri:<br/>Formatted documentation appropriately</li>
 <li><i>January 31, 2011</i> by Pooyan Jahangiri:<br/>Implemented</li>
 </ul></p>

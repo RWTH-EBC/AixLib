@@ -44,5 +44,16 @@ equation
     annotation (Line(points={{-19,-30},{5,-30},{5,-9}}, color={255,0,255}));
   connect(const.y, cHP.Tset) annotation (Line(points={{-19,30},{-14,30},{-14,-6},
           {-7,-6}}, color={0,0,127}));
-  annotation (experiment(StopTime=35000, Interval=60));
+  annotation (Documentation(info="<html>
+<h4><span style=\"color:#008000\">Overview</span></h4>
+<p>The simulation illustrates the behavior of <a href=\"HVAC.Components.HeatGenerators.CHP.CHP\">CHP</a> in diferent conditions. Change the inlet water temperature profile to see the reaction timing. </p>
+</html>",
+        revisions="<html>
+<p><ul>
+<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Merged with AixLib</li>
+<li><i>April 16, 2014 &nbsp;</i> by Ana Constantin:<br/>Formated documentation.</li>
+<li>by Pooyan Jahangiri:<br>First implementation.</li>
+</ul></p>
+</html>"),
+experiment(StopTime=35000, Interval=60));
 end CHPSystem;
