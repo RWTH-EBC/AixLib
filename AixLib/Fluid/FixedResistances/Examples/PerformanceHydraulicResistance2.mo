@@ -68,18 +68,35 @@ OutputCPUtime:=true;")}),
       OutputCPUtime=true,
       OutputFlatModelica=false),
     Documentation(info="<html>
-<p>Test the simulation time of the resistance model <a href=\"AixLib.Fluid.FixedResistances.HydraulicResistance\">HydraulicResistance</a>. Use the second test <a href=\"AixLib.Fluid.FixedResistances.Examples.PerformanceHydraulicResistance1\">PerformanceHydraulicResistance1</a> to test the speed of <a href=\"AixLib.Fluid.FixedResistances.FixedResistanceDpM\">FixedResistanceDpM</a>. </p>
+<p>Test the simulation time of the resistance model <a
+href=\"AixLib.Fluid.FixedResistances.HydraulicResistance\">HydraulicResistance</a>.
+Use the second test <a
+href=\"AixLib.Fluid.FixedResistances.Examples.PerformanceHydraulicResistance1\">PerformanceHydraulicResistance1</a>
+to test the speed of <a
+href=\"AixLib.Fluid.FixedResistances.FixedResistanceDpM\">FixedResistanceDpM</a>.
+</p>
 <h4>Speed Comparison</h4>
-<p>During the test the pressure difference will go up and down to test all flow regimes. Especially low pressure differences and mass flow rates will be hard for the solver. A simulation time of 10000 s was chosen to have a sufficiently long time for measurment but avoiding extreme simulation times. On an Intel Xeon E5-2667 @ 2.90 GHz the total simulation time will be around 1.21 s.</p>
-<p>The FixedResistanceDpM model (0.72 s) needs only around 60 &percnt; of the simulation time of the HydraulicResistance model (1.21 s). The following graph showes the time comparion for a longer simulation time:</p>
-<p><img src=\"modelica://AixLib/Resources/Images/Fluid/FixedResistances/Compare_FixedResistances_HydraulicResitance_sim_speed_single_models.png\"/></p>
-<p>Running both models in parallel (<a href=\"AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances\">Examples.CompareFixedResistances</a>) will not add equally to the total simulation time as can be seen in the dotted green line.</p>
+<p>During the test the pressure difference will go up and down to test all flow
+regimes. Especially low pressure differences and mass flow rates will be hard
+for the solver. A simulation time of 10000 s was chosen to have a sufficiently
+long time for measurment but avoiding extreme simulation times. On an Intel Xeon
+E5-2667 @ 2.90 GHz the total simulation time will be around 1.21 s.</p> <p>The
+FixedResistanceDpM model (0.72 s) needs only around 60 &#37; of the simulation
+time of the HydraulicResistance model (1.21 s). The following graph showes the
+time comparion for a longer simulation time:</p> <p><img
+src=\"modelica://AixLib/Resources/Images/Fluid/FixedResistances/Compare_FixedResistances_HydraulicResitance_sim_speed_single_models.png\"
+alt=\"Comparison of Simulation Speed for Both Models\"/></p>
+<p>Running both models in parallel (<a
+href=\"AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances\">Examples.CompareFixedResistances</a>)
+will not add equally to the total simulation time as can be seen in the dotted
+green line.</p>
 <h4>Reformulation of Pressure Loss Equation</h4>
 <p>The equation for the pressure loss has been changed from</p>
-<p><img src=\"modelica://AixLib/Resources/Images/equations/equation-Fluid_FixedResistance_old.png\" alt=\"dp = sign(m_flow) * 8 * zeta / (Modelica.Constants.pi ^ 2 * D ^ 4 * rho) * m_flow^2\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/equations/equation-Fluid_FixedResistance_old.png\" alt=\"dp = sign(m_flow) * 8 * zeta / (Modelica.Constants.pi ^ 2 * D ^ 4 * rho) * m_flow^2\" /></p>
 <p>to</p>
 <p><img src=\"modelica://AixLib/Resources/Images/equations/equation-Fluid_FixedResistance_new.png\" alt=\"dp = sign(m_flow) * 8 * zeta / (Modelica.Constants.pi * Modelica.Constants.pi * D * D * D * D * rho) * m_flow * m_flow\"/></p>
 <p>to avoid exponential terms for Pi, D and m_flow as that showed speed improvements and more stable simulation in a weather model some years ago. However, this did not result in speedups for this model and Dymola 2017 as shown in the following graph:</p>
-<p><img src=\"modelica://AixLib/Resources/Images/Fluid/FixedResistances/Compare_FixedResistances_HydraulicResitance_simulation_speed.png\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/Fluid/FixedResistances/Compare_FixedResistances_HydraulicResitance_simulation_speed.png\"
+alt=\"Comparison of Simulation Speed for Different Formulation of Flow Equation\"/></p>
 </html>"));
 end PerformanceHydraulicResistance2;

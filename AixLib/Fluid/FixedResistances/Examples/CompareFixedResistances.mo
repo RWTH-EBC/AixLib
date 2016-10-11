@@ -87,9 +87,20 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FixedRe
         "Simulate and plot"),
     __Dymola_experimentSetupOutput,
     Documentation(info="<html>
-<p>Compares the mass flow rate of the two pressure loss models <a href=\"AixLib.Fluid.FixedResistances.HydraulicResistance\">HydraulicResistance</a> and <a href=\"AixLib.Fluid.FixedResistances.FixedResistanceDpM\">FixedResistanceDpM</a>. For small pressure differences (up to 800 Pa) the flow rate of HydraulicResistance will be larger than the flow rate of FixedResistanceDpM. The difference is lower than 0.1 kg/s.</p>
-<p>There was a problem with the formulation of the pressure loss calculation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/232\">issue 232</a>). The following graph shows that the flow direction could have been calculated the wrong (red line):</p>
-<p> <img src=\"modelica://AixLib/Resources/Images/Fluid/FixedResistances/Compare_FixedResistances_HydraulicResitance_reformulation1.png\"/></p>
+<p>Compares the mass flow rate of the two pressure loss models  <a
+href=\"AixLib.Fluid.FixedResistances.HydraulicResistance\">HydraulicResistance</a>
+and <a
+href=\"AixLib.Fluid.FixedResistances.FixedResistanceDpM\">FixedResistanceDpM</a>.
+For small pressure differences (up to 800 Pa) the flow rate of
+HydraulicResistance will be larger than the flow rate of FixedResistanceDpM. The
+difference is lower than 0.1 kg/s.</p>
+<p>There was a problem with the formulation of the pressure loss calculation (see
+issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/232\">issue 232</a>).
+The following graph shows that the flow direction could have been calculated the
+wrong (red line):</p>
+<p> <img
+src=\"modelica://AixLib/Resources/Images/Fluid/FixedResistances/Compare_FixedResistances_HydraulicResitance_reformulation1.png\"
+alt=\"Comparison of old and new Formulation of Flow Equation in HydraulicResistance\"/></p>
 <p>The correct results are shown in the positive curves (thick lines).</p>
 </html>"));
 end CompareFixedResistances;
