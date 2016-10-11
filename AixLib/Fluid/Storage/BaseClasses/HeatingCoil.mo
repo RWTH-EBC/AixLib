@@ -31,7 +31,7 @@ use_HeatTransfer=true,
         rotation=0,
         origin={-4,0})));
 
-    HVAC.Components.Pipes.BaseClasses.Insulation.CylindricHeatTransfer PipeWall_HC1[dis_HC](
+    Utilities.HeatTransfer.CylindricHeatTransfer                       PipeWall_HC1[dis_HC](
     each T0=T_start,
     rho=fill(Pipe_HC.d, dis_HC),
     c=fill(Pipe_HC.c, dis_HC),
@@ -68,7 +68,7 @@ equation
       color={0,127,255},
       smooth=Smooth.None));
   connect(PipeWall_HC1.port_a, pipeHC.heatPorts) annotation (Line(
-      points={{-4,26},{-4,15.2},{-4,4.4},{-3.9,4.4}},
+      points={{-4,26},{-4,4.4},{-3.9,4.4}},
       color={191,0,0},
       smooth=Smooth.None));
   annotation (Diagram(graphics), Icon(graphics={

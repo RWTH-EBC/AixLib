@@ -136,15 +136,12 @@ model BufferStorage
   HeatTransfer heatTransfer annotation (Placement(transformation(extent={{-34,0},
             {-14,20}}, rotation=0)));
 
-  Modelica.Fluid.Vessels.ClosedVolume layer[n](
+  MixingVolumes.MixingVolume          layer[n](
     V=fill(data.h_Tank/n*Modelica.Constants.pi/4*data.d_Tank^2,n),
     nPorts = ports_layer,
     T_start=fill(T_start,n),
-    use_portsData=fill(false,n),
     redeclare package Medium = Medium,
-        use_HeatTransfer=fill(true,n),
-    redeclare model HeatTransfer =
-        Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.IdealHeatTransfer)
+    m_flow_nominal=0.05)
     annotation (Placement(transformation(extent={{-6,0},{14,20}})));
 replaceable model HeatTransfer =
       AixLib.Fluid.Storage.BaseClasses.HeatTransfer_OnlyConduction
@@ -179,8 +176,8 @@ Heat transfer model for heat transfer between two fluid layers.
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-92,36},{-72,56}}),
         iconTransformation(extent={{-90,50},{-74,64}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_HC1_out(redeclare package Medium
-      = MediumHC1) if use_heatingCoil1
+  Modelica.Fluid.Interfaces.FluidPort_b port_HC1_out(redeclare package Medium =
+        MediumHC1) if use_heatingCoil1
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-90,2},{-70,22}}),
         iconTransformation(extent={{-88,20},{-74,32}})));
@@ -194,8 +191,8 @@ Heat transfer model for heat transfer between two fluid layers.
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-92,-30},{-72,-10}}),
         iconTransformation(extent={{-88,-32},{-74,-18}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_HC2_out(redeclare package Medium
-      = MediumHC2) if use_heatingCoil2
+  Modelica.Fluid.Interfaces.FluidPort_b port_HC2_out(redeclare package Medium =
+        MediumHC2) if use_heatingCoil2
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-92,-68},{-72,-48}}),
         iconTransformation(extent={{-88,-64},{-74,-50}})));

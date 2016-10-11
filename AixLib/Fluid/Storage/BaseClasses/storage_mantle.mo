@@ -39,7 +39,7 @@ final parameter Modelica.SIunits.Area A_outside= (D1+2*(d_wall+d_ins))*Modelica.
     annotation (Placement(transformation(extent={{-100,0},{-80,20}},
           rotation=0)));
 
-    HVAC.Components.Pipes.BaseClasses.Insulation.CylindricHeatTransfer Insulation(
+    Utilities.HeatTransfer.CylindricHeatTransfer                       Insulation(
     rho=rho_ins,
     c=c_ins,
     lambda=lambda_ins,
@@ -48,7 +48,7 @@ final parameter Modelica.SIunits.Area A_outside= (D1+2*(d_wall+d_ins))*Modelica.
     d_out=D1 + 2*d_wall + 2*d_ins,
     d_in=D1 + 2*d_wall)
     annotation (Placement(transformation(extent={{-4,-12},{44,32}})));
-    HVAC.Components.Pipes.BaseClasses.Insulation.CylindricHeatTransfer Wall(
+    Utilities.HeatTransfer.CylindricHeatTransfer                       Wall(
     rho=rho_wall,
     c=c_wall,
     lambda=lambda_wall,
@@ -66,11 +66,11 @@ final parameter Modelica.SIunits.Area A_outside= (D1+2*(d_wall+d_ins))*Modelica.
         origin={62,10})));
 equation
   connect(conv_inside.port_a, heatport_inner) annotation (Line(
-      points={{-80,10},{-84.5,10},{-84.5,10},{-90,10}},
+      points={{-80,10},{-90,10}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(conv_inside1.port_a, heatport_outer) annotation (Line(
-      points={{68,10},{78.7,10},{78.7,10},{90,10}},
+      points={{68,10},{90,10}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(conv_inside.port_b,Wall.port_a)  annotation (Line(
