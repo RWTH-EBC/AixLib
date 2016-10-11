@@ -16,15 +16,18 @@ model RoomGFOw2_DayNightMode
     redeclare package Medium = Medium,
     m_flow_small=0.0001,
     dp(start=1000))                                                               annotation(Placement(transformation(extent = {{22, -36}, {42, -16}})));
-  AixLib.Fluid.Movers.Pump Pumo(redeclare package Medium = Medium, m_flow_small=
-       0.0001)                  annotation(Placement(transformation(extent = {{-92, -36}, {-72, -16}})));
-  AixLib.Fluid.HeatExchangers.Boiler boilerTaktTable(redeclare package Medium
-      = Medium, m_flow_nominal=0.01)                 annotation(Placement(transformation(extent = {{-56, -36}, {-36, -16}})));
+  AixLib.Fluid.Movers.Pump Pump(redeclare package Medium = Medium, m_flow_small=
+       0.0001) "Pump in heating system"
+                                annotation(Placement(transformation(extent = {{-92, -36}, {-72, -16}})));
+  AixLib.Fluid.HeatExchangers.Boiler boilerTaktTable(redeclare package Medium =
+        Medium, m_flow_nominal=0.01)                 annotation(Placement(transformation(extent = {{-56, -36}, {-36, -16}})));
   AixLib.Utilities.Sources.NightMode nightMode(dayEnd = 22, dayStart = 6) annotation(Placement(transformation(extent = {{-104, 0}, {-84, 20}})));
-  AixLib.Fluid.FixedResistances.StaticPipe pipe_flow(
+  AixLib.Fluid.FixedResistances.FixedResistanceDpM res(
     redeclare package Medium = Medium,
-    m_flow_small=0.0001,
-    dp(start=100))                                                    annotation(Placement(transformation(extent = {{-6, -36}, {14, -16}})));
+    dp(start=100),
+    m_flow_nominal=0.3,
+    dp_nominal=200) "Hydraulic resistance"
+    annotation (Placement(transformation(extent={{-6,-36},{14,-16}})));
   AixLib.Fluid.FixedResistances.StaticPipe pipe_return(
     redeclare package Medium = Medium,
     m_flow_small=0.0001,
@@ -46,9 +49,11 @@ equation
   connect(room_GF_2OW.thermCeiling, thermCeiling.port) annotation(Line(points = {{50.2, 38.6}, {80, 38.6}, {80, 68}, {82, 68}}, color = {191, 0, 0}));
   connect(room_GF_2OW.thermInsideWall1, thermInsideWall1.port) annotation(Line(points = {{50.2, 27.8}, {80, 27.8}, {80, 44}, {82, 44}}, color = {191, 0, 0}));
   connect(room_GF_2OW.thermInsideWall2, thermInsideWall2.port) annotation(Line(points = {{39.4, 9.8}, {39.4, 0}, {80, 0}, {80, 20}, {82, 20}}, color = {191, 0, 0}));
-  connect(Pumo.port_b, boilerTaktTable.port_a) annotation(Line(points = {{-72, -26}, {-56, -26}}, color = {0, 127, 255}));
-  connect(pipe_flow.port_b, heatValve_new.port_a) annotation(Line(points = {{14, -26}, {22, -26}}, color = {0, 127, 255}));
-  connect(boilerTaktTable.port_b, pipe_flow.port_a) annotation(Line(points = {{-36, -26}, {-6, -26}}, color = {0, 127, 255}));
+  connect(Pump.port_b, boilerTaktTable.port_a) annotation(Line(points = {{-72, -26}, {-56, -26}}, color = {0, 127, 255}));
+  connect(res.port_b, heatValve_new.port_a)
+    annotation (Line(points={{14,-26},{22,-26}}, color={0,127,255}));
+  connect(boilerTaktTable.port_b, res.port_a)
+    annotation (Line(points={{-36,-26},{-6,-26}}, color={0,127,255}));
   connect(heatValve_new.port_b, radiator_ML_delta.port_a) annotation(Line(points={{42,-26},
           {54,-26}},                                                                                         color = {0, 127, 255}));
   connect(radiator_ML_delta.port_b, pipe_return.port_a) annotation(Line(points={{74,-26},
@@ -60,8 +65,8 @@ equation
           -60.7333,98.8},{0,98.8},{0,18.8},{16.09,18.8}},                                                                                         color = {0, 0, 127}));
   connect(combinedWeather.AirTemp, varTemp.T) annotation(Line(points={{-60.7333,
           94.9},{0,94.9},{0,60},{-64,60},{-64,48},{-60,48}},                                                                                    color = {0, 0, 127}));
-  connect(Pumo.port_a, pipe_return.port_b) annotation(Line(points = {{-92, -26}, {-100, -26}, {-100, -72}, {8, -72}}, color = {0, 127, 255}));
-  connect(nightMode.SwitchToNightMode, Pumo.IsNight) annotation(Line(points = {{-85.15, 10.3}, {-82, 10.3}, {-82, -15.8}}, color = {255, 0, 255}));
+  connect(Pump.port_a, pipe_return.port_b) annotation(Line(points = {{-92, -26}, {-100, -26}, {-100, -72}, {8, -72}}, color = {0, 127, 255}));
+  connect(nightMode.SwitchToNightMode,Pump. IsNight) annotation(Line(points = {{-85.15, 10.3}, {-82, 10.3}, {-82, -15.8}}, color = {255, 0, 255}));
   connect(Tset.y, heatValve_new.T_setRoom) annotation(Line(points = {{4.5, 1}, {37.6, 1}, {37.6, -16.2}}, color = {0, 0, 127}));
   connect(radiator_ML_delta.convPort, room_GF_2OW.thermRoom) annotation(Line(points = {{59.8, -18.4}, {59.8, 0}, {30.04, 0}, {30.04, 29.6}}, color = {191, 0, 0}));
   connect(radiator_ML_delta.radPort, room_GF_2OW.starRoom) annotation(Line(points = {{68, -18.2}, {68, 0}, {37.6, 0}, {37.6, 29.6}}, color = {0, 0, 0}));
@@ -69,7 +74,7 @@ equation
   connect(temperatureSensor.T, heatValve_new.T_room) annotation(Line(points = {{23, -10}, {22, -10}, {22, -16.2}, {25.6, -16.2}}, color = {0, 0, 127}));
   connect(temperatureSensor.port, room_GF_2OW.thermRoom) annotation(Line(points = {{23, 0}, {23, 29}, {30.04, 29}, {30.04, 29.6}}, color = {191, 0, 0}));
   connect(temperatureSensor.T, Troom) annotation(Line(points = {{23, -10}, {100, -10}}, color = {0, 0, 127}));
-  connect(tank.ports[1], Pumo.port_a) annotation (Line(
+  connect(tank.ports[1],Pump. port_a) annotation (Line(
       points={{-106,-25},{-100,-25},{-100,-26},{-92,-26}},
       color={0,127,255}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
@@ -80,8 +85,9 @@ equation
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>Energy generation and delivery system consisting of boiler and pump.</p>
  <p>The example works for a day and shows how such a simulation can be set up. It is not guranteed that the model will work stable under sifferent conditions or for longer periods of time.</p>
- </html>", revisions = "<html>
+ </html>", revisions="<html>
  <ul>
+ <li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe by hydraulic resistance</li>
  <li><i>June 19, 2014</i> by Ana Constantin:<br/>Implemented</li>
  </ul>
  </html>"));
