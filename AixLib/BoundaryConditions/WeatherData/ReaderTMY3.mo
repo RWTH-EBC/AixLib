@@ -205,12 +205,12 @@ block ReaderTMY3 "Reader for TMY3 weather data"
             "Select weather file")));
   final parameter Modelica.SIunits.Angle lon(displayUnit="deg")=
     AixLib.BoundaryConditions.WeatherData.BaseClasses.getLongitudeTMY3(
-    filNam) "Longitude";
+    absFilNam) "Longitude";
   final parameter Modelica.SIunits.Angle lat(displayUnit="deg")=
     AixLib.BoundaryConditions.WeatherData.BaseClasses.getLatitudeTMY3(
-    filNam) "Latitude";
+    absFilNam) "Latitude";
   final parameter Modelica.SIunits.Time timZon(displayUnit="h")=
-    AixLib.BoundaryConditions.WeatherData.BaseClasses.getTimeZoneTMY3(filNam)
+    AixLib.BoundaryConditions.WeatherData.BaseClasses.getTimeZoneTMY3(absFilNam)
     "Time zone";
   Bus weaBus "Weather data bus" annotation (Placement(transformation(extent={{
             290,-10},{310,10}}), iconTransformation(extent={{190,-10},{210,10}})));
@@ -225,10 +225,13 @@ block ReaderTMY3 "Reader for TMY3 weather data"
   constant Real epsCos = 1e-6 "Small value to avoid division by 0";
 
 protected
+  final parameter String absFilNam = AixLib.BoundaryConditions.WeatherData.BaseClasses.getAbsolutePath(filNam)
+    "Absolute path of the file";
+
   Modelica.Blocks.Tables.CombiTable1Ds datRea(
     final tableOnFile=true,
     final tableName="tab1",
-    final fileName=AixLib.BoundaryConditions.WeatherData.BaseClasses.getAbsolutePath(filNam),
+    final fileName=absFilNam,
     final smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative,
     final columns={2,3,4,5,6,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,
         28,29,30}) "Data reader"
@@ -285,7 +288,7 @@ protected
   Modelica.Blocks.Tables.CombiTable1Ds datRea1(
     final tableOnFile=true,
     final tableName="tab1",
-    final fileName=AixLib.BoundaryConditions.WeatherData.BaseClasses.getAbsolutePath(filNam),
+    final fileName=absFilNam,
     final smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative,
     final columns=8:11) "Data reader"
     annotation (Placement(transformation(extent={{-80,160},{-60,180}})));
@@ -1553,6 +1556,14 @@ Technical Report, NREL/TP-581-43156, revised May 2008.
 </html>", revisions="<html>
 <ul>
 <li>
+April 21, 2016, by Michael Wetter:<br/>
+Introduced <code>absFilNam</code> to avoid multiple calls to
+<a href=\"modelica://AixLib.BoundaryConditions.WeatherData.BaseClasses.getAbsolutePath\">
+AixLib.BoundaryConditions.WeatherData.BaseClasses.getAbsolutePath</a>.
+This is for
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/506\">Buildings, #506</a>.
+</li>
+<li>
 January 6, 2016, by Moritz Lauster:<br/>
 Changed output <code>radHorIR</code> to <code>HHorIR</code>.
 This is for
@@ -1596,7 +1607,7 @@ March 26, 2015, by Michael Wetter:<br/>
 Added option to obtain the black body sky temperature
 from a parameter or an input signal.
 This is required for
-<a href=\"modelica://AixLib.Rooms.Validation.MixedAirInitialization\">
+<a href=\"modelica://Buildings.Rooms.Validation.MixedAirInitialization\">
 Buildings.Rooms.Validation.MixedAirInitialization</a>.
 </li>
 <li>

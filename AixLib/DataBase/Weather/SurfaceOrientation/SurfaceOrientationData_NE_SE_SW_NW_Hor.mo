@@ -6,7 +6,7 @@ record SurfaceOrientationData_NE_SE_SW_NW_Hor
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Surface Orientation Data for NE,SE,SW and NW </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>Data in this set: </p>
  <table summary=\"Data\" cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>

@@ -6,10 +6,10 @@ model Bouyancy
   parameter Real kappa = 0.4;
   Modelica.SIunits.TemperatureDifference dT;
   Modelica.SIunits.ThermalConductivity lambda_eff;
-  parameter Modelica.SIunits.Acceleration g = baseParameters.g;
-  Modelica.SIunits.SpecificHeatCapacity cp = baseParameters.cp_Water;
-  Modelica.SIunits.ThermalConductivity lambda = baseParameters.lambda_Water;
-  Modelica.SIunits.Density rho = baseParameters.rho_Water;
+  parameter Modelica.SIunits.Acceleration g = Modelica.Constants.g_n;
+  Modelica.SIunits.SpecificHeatCapacity cp = 4180;
+  Modelica.SIunits.ThermalConductivity lambda = 0.598;
+  Modelica.SIunits.Density rho = 1000;
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a annotation(Placement(transformation(extent = {{-16, 86}, {4, 106}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b annotation(Placement(transformation(extent = {{-16, -104}, {4, -84}})));
 equation

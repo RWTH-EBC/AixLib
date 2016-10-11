@@ -1,7 +1,7 @@
 within AixLib.Building.LowOrder.Multizone;
 model Multizone
   "Multizone with an arbitrary number of thermal zones (vectorized)"
-  extends AixLib.Building.LowOrder.Multizone.partialMultizone;
+  extends AixLib.Building.LowOrder.Multizone.PartialMultizone;
   Utilities.Interfaces.Star internalGainsRad[buildingParam.numZones]
     "Radiative internal gains"
     annotation (Placement(transformation(extent={{40,-100},{60,-80}})));

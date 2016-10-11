@@ -2,7 +2,7 @@ within AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel;
 model ReducedOrderModelEBCMod
   import AixLib;
   extends
-    AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel.partialReducedOrderModel(
+    AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel.PartialReducedOrderModel(
       heatConvOuterwall(A=Ao - Aw));
 
    parameter Modelica.SIunits.ThermalResistance RWin=0.017727777777

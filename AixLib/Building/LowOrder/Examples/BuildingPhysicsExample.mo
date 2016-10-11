@@ -22,7 +22,7 @@ model BuildingPhysicsExample
     outerwall(load1(T(fixed=true))),
     innerwall(load1(T(fixed=true))))
               constrainedby
-    AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel.partialReducedOrderModel
+    AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel.PartialReducedOrderModel
     annotation (Placement(transformation(extent={{44,18},{78,52}})),
       choicesAllMatching=true);
   replaceable AixLib.Building.LowOrder.BaseClasses.EqAirTemp.EqAirTempEBCMod
@@ -35,7 +35,7 @@ model BuildingPhysicsExample
     wf_ground=0,
     T_ground=284.15,
     orientationswallshorizontal={90,90,90,90,0}) constrainedby
-    AixLib.Building.LowOrder.BaseClasses.EqAirTemp.partialEqAirTemp
+    AixLib.Building.LowOrder.BaseClasses.EqAirTemp.PartialEqAirTemp
     annotation (Placement(transformation(extent={{-56,16},{-36,36}})));
   Modelica.Blocks.Sources.Constant infiltrationRate(k=1)   annotation(Placement(transformation(extent={{14,-7},
             {24,3}})));

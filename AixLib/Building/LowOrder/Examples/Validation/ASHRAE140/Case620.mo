@@ -149,8 +149,8 @@ equation
 //     SolarMeter[6].p = reducedOrderModel.solarRadToHeatRad.port.Q_flow;
 
     // Set outputs
-    integrator1.u = idealHeaterCooler.HeatingPower/(1000*1000); //in MWh
-    integrator.u = idealHeaterCooler.CoolingPower/(1000*1000); //in MWh
+    integrator1.u =idealHeaterCooler.heatingPower /(1000*1000); //in MWh
+    integrator.u =idealHeaterCooler.coolingPower /(1000*1000); //in MWh
 
 //     //solar radiation
 //     IncidentSolarRadiationN = SolarMeter[1].q_kwh;
@@ -161,7 +161,7 @@ equation
 //
 //     TransmittedSolarRadiation_room = SolarMeter[6].q_kwh / reducedOrderModel.Aw;
 
-    PowerLoad = idealHeaterCooler.CoolingPower + idealHeaterCooler.HeatingPower;
+    PowerLoad =idealHeaterCooler.coolingPower  +idealHeaterCooler.heatingPower;
 
   connect(Source_TsetC.y, idealHeaterCooler.setPointCool) annotation (Line(
         points={{3.65,-43.5},{13.6,-43.5},{13.6,-31.2}}, color={0,0,127}));

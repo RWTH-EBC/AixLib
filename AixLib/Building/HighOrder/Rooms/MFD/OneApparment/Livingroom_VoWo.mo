@@ -101,7 +101,7 @@ equation
   connect(airload.port, ThermRoom) annotation(Line(points = {{-29, 8}, {-20, 8}, {-20, 14}, {-2, 14}}, color = {191, 0, 0}));
   connect(NaturalVentilation.port_b, airload.port) annotation(Line(points = {{-46, -99}, {-20, -99}, {-20, 8}, {-29, 8}}, color = {191, 0, 0}));
   connect(outsideWall.port_outside, thermOutside) annotation(Line(points = {{-4, 84.6}, {-4, 100}, {-86, 100}, {-86, 130}, {-150, 130}}, color = {191, 0, 0}));
-  annotation(__Dymola_Images(Parameters(source = "AixLib/Images/House/VoWo_Livingroom.png")), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-170, -150}, {170, 150}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-170, -150}, {170, 150}}), graphics={  Rectangle(extent=  {{-62, 60}, {112, -92}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 255},
+  annotation(__Dymola_Images(Parameters(source = "AixLib/Resources/Images/Building/HighOrder/VoWo_Livingroom.png")), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-170, -150}, {170, 150}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-170, -150}, {170, 150}}), graphics={  Rectangle(extent=  {{-62, 60}, {112, -92}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 255},
             fillPattern=                                                                                                    FillPattern.Forward), Rectangle(extent=  {{38, 72}, {60, 52}}, lineColor=  {0, 0, 0}, fillColor=  {85, 255, 255},
             fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{40, 70}, {58, 54}}, lineColor=  {0, 0, 0}, fillColor=  {170, 213, 255},
             fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-56, -14}, {104, -32}}, lineColor=  {0, 0, 0}, fillColor=  {255, 0, 0},
@@ -134,10 +134,10 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for the livingroom. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The following figure presents the room&apos;s layout:</p>
- <p><img src=\"modelica://AixLib/Images/House/VoWo_Livingroom.png\"
+ <p><img src=\"modelica://AixLib/Resources/Images/Building/HighOrder/VoWo_Livingroom.png\"
     alt=\"Room layout\"/></p>
  </html>"));
 end Livingroom_VoWo;

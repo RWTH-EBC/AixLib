@@ -95,10 +95,10 @@ equation
   end for;
 
   // Set outputs
-    integrator1.u = idealHeaterCooler.HeatingPower/(1000*1000); //in MWh
-    integrator.u = idealHeaterCooler.CoolingPower/(1000*1000); //in MWh
+    integrator1.u =idealHeaterCooler.heatingPower /(1000*1000); //in MWh
+    integrator.u =idealHeaterCooler.coolingPower /(1000*1000); //in MWh
 
-    PowerLoad = idealHeaterCooler.CoolingPower + idealHeaterCooler.HeatingPower;
+    PowerLoad =idealHeaterCooler.coolingPower  +idealHeaterCooler.heatingPower;
 
   connect(Source_Weather.y[1], outsideTemp.T) annotation (Line(
       points={{-93,40},{-80,40},{-80,46.5},{-71.1,46.5}},

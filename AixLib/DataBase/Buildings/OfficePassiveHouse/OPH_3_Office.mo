@@ -7,7 +7,6 @@ record OPH_3_Office
     Cooler_on = false,
     l_cooler = 0,
     RatioConvectiveHeatLighting = 0.5,
-    zoneID = "OPH_3_Office",
     usage = "Group Office",
     RoomArea = 1675.0,
     Vair = 6700.0,

@@ -9,7 +9,7 @@ record SetTemperatures_Ventilation2perDay
  <p>Model can be used for OFD and MFD. On each floor there is a delay in ventilation between rooms of 30 Min. </p>
  <p>One day is represented. Make sure you set the startTime - parameter when using in a table as the beginning of the day, regardless of the fact that the simulation starts at that moment.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <h4>Table for Natural Ventilation:</h4>
  <p>Column 1: Time</p>
