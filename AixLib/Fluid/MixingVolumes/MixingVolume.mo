@@ -2,27 +2,15 @@ within AixLib.Fluid.MixingVolumes;
 model MixingVolume
   "Mixing volume with inlet and outlet ports (flow reversal is allowed)"
   extends AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume;
-protected
-  Modelica.Blocks.Sources.Constant masExc(k=0)
-    "Block to set mass exchange in volume"
-    annotation (Placement(transformation(extent={{-80,50},{-60,70}})));
+
 equation
-  connect(masExc.y, dynBal.mWat_flow) annotation (Line(
-      points={{-59,60},{20,60},{20,12},{38,12}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  connect(masExc.y, steBal.mWat_flow) annotation (Line(
-      points={{-59,60},{-40,60},{-40,14},{-22,14}},
-      color={0,0,127},
-      smooth=Smooth.None));
   connect(QSen_flow.y, steBal.Q_flow) annotation (Line(
-      points={{-59,88},{-30,88},{-30,18},{-22,18}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      points={{-19,88},{0,88},{0,18},{8,18}},
+      color={0,0,127}));
   connect(QSen_flow.y, dynBal.Q_flow) annotation (Line(
-      points={{-59,88},{28,88},{28,16},{38,16}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      points={{-19,88},{54,88},{54,16},{58,16}},
+      color={0,0,127}));
+
   annotation (
 defaultComponentName="vol",
 Documentation(info="<html>
@@ -36,35 +24,48 @@ The volume can exchange heat through its <code>heatPort</code>.
 The volume can be parameterized as a steady-state model or as
 dynamic model.</p>
 <p>
-To increase the numerical robustness of the model, the parameter
+To increase the numerical robustness of the model, the constant
 <code>prescribedHeatFlowRate</code> can be set by the user.
-This parameter only has an effect if the model has exactly two fluid ports connected,
+This constant only has an effect if the model has exactly two fluid ports connected,
 and if it is used as a steady-state model.
 Use the following settings:
 </p>
 <ul>
-<li>Set <code>prescribedHeatFlowRate=true</code> if there is a model connected to <code>heatPort</code>
-that computes the heat flow rate <i>not</i> as a function of the temperature difference
+<li>Set <code>prescribedHeatFlowRate=true</code> if the <i>only</i> means of heat transfer
+at the <code>heatPort</code> is a prescribed heat flow rate that
+is <i>not</i> a function of the temperature difference
 between the medium and an ambient temperature. Examples include an ideal electrical heater,
 a pump that rejects heat into the fluid stream, or a chiller that removes heat based on a performance curve.
+If the <code>heatPort</code> is not connected, then set <code>prescribedHeatFlowRate=true</code> as
+in this case, <code>heatPort.Q_flow=0</code>.
 </li>
-<li>Set <code>prescribedHeatFlowRate=true</code> if the only means of heat flow at the <code>heatPort</code>
-is computed as <i>K * (T-heatPort.T)</i>, for some temperature <i>T</i> and some conductance <i>K</i>,
-which may itself be a function of temperature or mass flow rate.
+<li>Set <code>prescribedHeatFlowRate=false</code> if there is heat flow at the <code>heatPort</code>
+computed as <i>K * (T-heatPort.T)</i>, for some temperature <i>T</i> and some conductance <i>K</i>,
+which may itself be a function of temperature or mass flow rate.<br/>
+If there is a combination of <i>K * (T-heatPort.T)</i> and a prescribed heat flow rate,
+for example a solar collector that dissipates heat to the ambient and receives heat from
+the solar radiation, then set <code>prescribedHeatFlowRate=false</code>.
 </li>
 </ul>
 <h4>Options</h4>
-<ul>
-<li>Parameter <code>mSenFac</code> can be used to increase the thermal mass of this model
+<p>
+The parameter <code>mSenFac</code> can be used to increase the thermal mass of this model
 without increasing its volume. This way, species concentrations are still calculated
 correctly even though the thermal mass increases. The additional thermal mass is calculated
 based on the density and the value of the function <code>HeatCapacityCp</code>
 of the medium state <code>state_default</code>. <br/>
-This parameter can for instance be useful in a pipe model when the developer wants to 
+This parameter can for instance be useful in a pipe model when the developer wants to
 lump the pipe thermal mass to the fluid volume. By default <code>mSenFac = 1</code>, hence
-the mass is unchanged. For higher values of <code>mSenFac</code>, the mass will be scaled proportionally. 
-</li>
-</ul>
+the mass is unchanged. For higher values of <code>mSenFac</code>, the mass will be scaled proportionally.
+</p>
+<p>
+Set the parameter <code>use_C_flow = true</code> to enable an input connector for the trace substance flow rate.
+This allows to directly add or subtract trace substances such as
+CO2 to the volume.
+See
+<a href=\"modelica://AixLib.Fluid.Sensors.Examples.PPM\">AixLib.Fluid.Sensors.Examples.PPM</a>
+for an example.
+</p>
 <h4>Implementation</h4>
 <p>
 If the model is operated in steady-state and has two fluid ports connected,
@@ -89,17 +90,54 @@ where <code>m_flowInv</code> approximates the expression <code>1/m_flow</code>.
 The variable <code>mXi_flow</code> is used to add a species mass flow rate to the fluid.
 </li>
 </ul>
-
+<p>
+For the rationale of selecting different energy and mass balances, and for the
+use of <code>prescribedHeatFlowRate</code>, see the documentation of
+<a href=\"modelica://AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume\">
+AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume</a>.
+</p>
 <p>
 For simple models that uses this model, see
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.HeaterCoolerPrescribed\">
-AixLib.Fluid.HeatExchangers.HeaterCoolerPrescribed</a> and
-<a href=\"modelica://AixLib.Fluid.MassExchangers.HumidifierPrescribed\">
-AixLib.Fluid.MassExchangers.HumidifierPrescribed</a>.
+<a href=\"modelica://AixLib.Fluid.HeatExchangers.HeaterCooler_u\">
+AixLib.Fluid.HeatExchangers.HeaterCooler_u</a> and
+<a href=\"modelica://AixLib.Fluid.MassExchangers.Humidifier_u\">
+AixLib.Fluid.MassExchangers.Humidifier_u</a>.
 </p>
 
 </html>", revisions="<html>
 <ul>
+<li>
+April 11, 2016 by Michael Wetter:<br/>
+Corrected wrong hyperlink in documentation for
+<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/450\">issue 450</a>.
+</li>
+<li>
+January 19, 2016, by Michael Wetter:<br/>
+Updated documentation due to the addition of an input for trace substance
+in the mixing volume.
+This is for
+<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/372\">
+issue 372</a>.
+</li>
+<li>
+January 17, 2016, by Michael Wetter:<br/>
+Removed <code>protected</code> block <code>masExc</code> as
+this revision introduces a conditional connector for the
+moisture flow rate in the energy and mass balance models.
+This change was done to use the same modeling concept for the
+moisture input as is used for the trace substance input.
+</li>
+<li>
+December 2, 2015, by Filip Jorissen:<br/>
+Changed code for handling trace substance insertions using input <code>C_flow</code>.
+</li>
+<li>
+May 1, 2015 by Michael Wetter<br/>
+Set <code>final</code> keyword for <code>masExc(final k=0)</code>.
+This addresses
+<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/230\">
+issue 230</a>.
+</li>
 <li>
 February 11, 2014 by Michael Wetter:<br/>
 Redesigned implementation of latent and sensible heat flow rates
@@ -149,7 +187,7 @@ is used for smoothing in the steady-state balance equations of the model with tw
 </li>
 <li>
 Another revision was the removal of the parameter <code>use_HeatTransfer</code> as there is
-no noticable overhead in always having the <code>heatPort</code> connector present.
+no noticeable overhead in always having the <code>heatPort</code> connector present.
 </li>
 </ul>
 </li>
@@ -185,5 +223,7 @@ AixLib.Fluid.MixingVolumes.BaseClasses.ClosedVolume</a>.
           textString="V=%V"),         Text(
           extent={{-152,100},{148,140}},
           textString="%name",
-          lineColor={0,0,255})}));
+          lineColor={0,0,255})}),
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
+            100,100}})));
 end MixingVolume;

@@ -1,8 +1,13 @@
+AirFlowRateSplit
+AirFlowRateSum
 SimpleInnerWall
 SimpleOuterWall
 SolarRadAdapter
 SolarRadWeightedSum
+Split
+SumCondition
 ThermSplitter
-ThermalZonePhysics
+ZoneFactorsZero
+BuildingPhysics
 EqAirTemp
 ReducedOrderModel

@@ -1,14 +1,12 @@
 within AixLib.Fluid.Interfaces;
 partial model PartialTwoPortTransport
   "Partial element transporting fluid between two ports without storage of mass or energy"
-  extends AixLib.Fluid.Interfaces.PartialTwoPort(
-    final port_a_exposesState=false,
-    final port_b_exposesState=false);
+  extends AixLib.Fluid.Interfaces.PartialTwoPort;
 
   // Advanced
   // Note: value of dp_start shall be refined by derived model,
   // based on local dp_nominal
-  parameter Medium.AbsolutePressure dp_start = 0
+  parameter Modelica.SIunits.PressureDifference dp_start(displayUnit="Pa") = 0
     "Guess value of dp = port_a.p - port_b.p"
     annotation(Dialog(tab = "Advanced", enable=from_dp));
   parameter Medium.MassFlowRate m_flow_start = 0
@@ -32,42 +30,46 @@ partial model PartialTwoPortTransport
   Medium.MassFlowRate m_flow(
      min=if allowFlowReversal then -Modelica.Constants.inf else 0,
      start = m_flow_start) "Mass flow rate in design flow direction";
-  Modelica.SIunits.Pressure dp(start=dp_start)
+  Modelica.SIunits.PressureDifference dp(start=dp_start,
+                                         displayUnit="Pa")
     "Pressure difference between port_a and port_b (= port_a.p - port_b.p)";
 
   Modelica.SIunits.VolumeFlowRate V_flow=
       m_flow/Modelica.Fluid.Utilities.regStep(m_flow,
-                  Medium.density(state_a),
-                  Medium.density(state_b),
+                  Medium.density(
+                    Medium.setState_phX(
+                      p=  port_a.p,
+                      h=  inStream(port_a.h_outflow),
+                      X=  inStream(port_a.Xi_outflow))),
+                  Medium.density(
+                       Medium.setState_phX(
+                         p=  port_b.p,
+                         h=  inStream(port_b.h_outflow),
+                         X=  inStream(port_b.Xi_outflow))),
                   m_flow_small) if show_V_flow
     "Volume flow rate at inflowing port (positive when flow from port_a to port_b)";
 
   Medium.Temperature port_a_T=
       Modelica.Fluid.Utilities.regStep(port_a.m_flow,
-                  Medium.temperature(state_a),
+                  Medium.temperature(
+                    Medium.setState_phX(
+                      p=  port_a.p,
+                      h=  inStream(port_a.h_outflow),
+                      X=  inStream(port_a.Xi_outflow))),
                   Medium.temperature(Medium.setState_phX(port_a.p, port_a.h_outflow, port_a.Xi_outflow)),
                   m_flow_small) if show_T
     "Temperature close to port_a, if show_T = true";
   Medium.Temperature port_b_T=
       Modelica.Fluid.Utilities.regStep(port_b.m_flow,
-                  Medium.temperature(state_b),
+                  Medium.temperature(
+                    Medium.setState_phX(
+                      p=  port_b.p,
+                      h=  inStream(port_b.h_outflow),
+                      X=  inStream(port_b.Xi_outflow))),
                   Medium.temperature(Medium.setState_phX(port_b.p, port_b.h_outflow, port_b.Xi_outflow)),
                   m_flow_small) if show_T
     "Temperature close to port_b, if show_T = true";
-protected
-  Medium.ThermodynamicState state_a "state for medium inflowing through port_a";
-  Medium.ThermodynamicState state_b "state for medium inflowing through port_b";
 equation
-  // medium states
-  state_a = Medium.setState_phX(
-              port_a.p,
-              inStream(port_a.h_outflow),
-              inStream(port_a.Xi_outflow));
-  state_b = Medium.setState_phX(
-              port_b.p,
-              inStream(port_b.h_outflow),
-              inStream(port_b.Xi_outflow));
-
   // Pressure drop in design flow direction
   dp = port_a.p - port_b.p;
 
@@ -80,10 +82,10 @@ equation
   port_a.m_flow + port_b.m_flow = 0;
 
   // Transport of substances
-  port_a.Xi_outflow = inStream(port_b.Xi_outflow);
+  port_a.Xi_outflow = if allowFlowReversal then inStream(port_b.Xi_outflow) else Medium.X_default[1:Medium.nXi];
   port_b.Xi_outflow = inStream(port_a.Xi_outflow);
 
-  port_a.C_outflow = inStream(port_b.C_outflow);
+  port_a.C_outflow = if allowFlowReversal then inStream(port_b.C_outflow) else zeros(Medium.nC);
   port_b.C_outflow = inStream(port_a.C_outflow);
 
   annotation (
@@ -119,6 +121,42 @@ users have not used this global definition to assign parameters.
 </p>
 </html>", revisions="<html>
 <ul>
+<li>
+January 22, 2016, by Henning Francke:<br/>
+Corrected type declaration of pressure.
+This is
+for <a href=\"https://github.com/iea-annex60/modelica-annex60/issues/404\">#404</a>.
+</li>
+<li>
+November 19, 2015, by Michael Wetter:<br/>
+Removed assignments of parameters
+<code>port_a_exposesState</code> and
+<code>port_b_exposesState</code> in base class.
+This is
+for <a href=\"https://github.com/iea-annex60/modelica-annex60/issues/351\">#351</a>.
+</li>
+<li>
+August 15, 2015, by Filip Jorissen:<br/>
+Implemented more efficient computation of <code>port_a.Xi_outflow</code>
+and <code>port_a.C_outflow</code> when <code>allowFlowReversal=false</code>.
+This is for
+<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/305\">#305</a>.
+</li>
+<li>
+June 6, 2015, by Michael Wetter:<br/>
+Removed protected conditional variables <code>state_a</code> and <code>state_b</code>,
+as they were used outside of a connect statement, which causes an
+error during pedantic model check in Dymola 2016.
+This fixes
+<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/128\">#128</a>.
+</li>
+<li>
+April 1, 2015, by Michael Wetter:<br/>
+Made computation of <code>state_a</code> and <code>state_p</code>
+conditional on <code>show_T</code> or <code>show_V_flow</code>.
+This avoids computing temperature from enthalpy if temperature is
+a state of the medium, and the result is not used.
+</li>
 <li>
 October 21, 2014, by Michael Wetter:<br/>
 Revised implementation.

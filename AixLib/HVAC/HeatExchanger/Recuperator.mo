@@ -25,20 +25,20 @@ equation
   cp1 = baseParameters.cp_Air "constant property";
   cp2 = baseParameters.cp_Air;
   simpleHeatTransfer.Q = Q;
-  connect(port_1a, sensor1.portMoistAir_a) annotation(Line(points = {{-100, 60}, {-84, 60}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(port_2a, sensor2.portMoistAir_a) annotation(Line(points = {{100, -60}, {84, -60}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(volume1.portMoistAir_b, port_1b) annotation(Line(points = {{-40, -10}, {-40, -60}, {-100, -60}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(sensor1.portMoistAir_b, pressureLoss1.portMoistAir_a) annotation(Line(points = {{-64, 60}, {-40, 60}, {-40, 50}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(pressureLoss1.portMoistAir_b, volume1.portMoistAir_a) annotation(Line(points = {{-40, 30}, {-40, 10}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(sensor2.portMoistAir_b, pressureLoss2.portMoistAir_a) annotation(Line(points = {{64, -60}, {40, -60}, {40, -50}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(pressureLoss2.portMoistAir_b, volume2.portMoistAir_a) annotation(Line(points = {{40, -30}, {40, -10}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(volume2.portMoistAir_b, sensor3.portMoistAir_a) annotation(Line(points = {{40, 10}, {40, 60}, {60, 60}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(sensor3.portMoistAir_b, port_2b) annotation(Line(points = {{80, 60}, {100, 60}}, color = {0, 127, 255}, smooth = Smooth.None));
-  connect(volume2.heatPort, simpleHeatTransfer.port_a) annotation(Line(points = {{30, 0}, {10, 0}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(simpleHeatTransfer.port_b, volume1.heatPort) annotation(Line(points = {{-10, 0}, {-30, 0}}, color = {191, 0, 0}, smooth = Smooth.None));
-  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points = {{-80, 80}, {-80, -80}, {80, 80}, {-80, 80}}, lineColor = {175, 175, 175}, smooth = Smooth.None, fillColor = {85, 170, 255},
-            fillPattern =                                                                                                    FillPattern.Solid), Polygon(points = {{-80, -80}, {80, -80}, {80, 80}, {-80, -80}}, lineColor = {175, 175, 175}, smooth = Smooth.None, fillColor = {255, 85, 85},
-            fillPattern =                                                                                                    FillPattern.Solid)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(revisions = "<html>
+  connect(port_1a, sensor1.portMoistAir_a) annotation(Line(points = {{-100, 60}, {-84, 60}}, color = {0, 127, 255}));
+  connect(port_2a, sensor2.portMoistAir_a) annotation(Line(points = {{100, -60}, {84, -60}}, color = {0, 127, 255}));
+  connect(volume1.portMoistAir_b, port_1b) annotation(Line(points = {{-40, -10}, {-40, -60}, {-100, -60}}, color = {0, 127, 255}));
+  connect(sensor1.portMoistAir_b, pressureLoss1.portMoistAir_a) annotation(Line(points = {{-64, 60}, {-40, 60}, {-40, 50}}, color = {0, 127, 255}));
+  connect(pressureLoss1.portMoistAir_b, volume1.portMoistAir_a) annotation(Line(points = {{-40, 30}, {-40, 10}}, color = {0, 127, 255}));
+  connect(sensor2.portMoistAir_b, pressureLoss2.portMoistAir_a) annotation(Line(points = {{64, -60}, {40, -60}, {40, -50}}, color = {0, 127, 255}));
+  connect(pressureLoss2.portMoistAir_b, volume2.portMoistAir_a) annotation(Line(points = {{40, -30}, {40, -10}}, color = {0, 127, 255}));
+  connect(volume2.portMoistAir_b, sensor3.portMoistAir_a) annotation(Line(points = {{40, 10}, {40, 60}, {60, 60}}, color = {0, 127, 255}));
+  connect(sensor3.portMoistAir_b, port_2b) annotation(Line(points = {{80, 60}, {100, 60}}, color = {0, 127, 255}));
+  connect(volume2.heatPort, simpleHeatTransfer.port_a) annotation(Line(points = {{30, 0}, {10, 0}}, color = {191, 0, 0}));
+  connect(simpleHeatTransfer.port_b, volume1.heatPort) annotation(Line(points = {{-10, 0}, {-30, 0}}, color = {191, 0, 0}));
+  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points=  {{-80, 80}, {-80, -80}, {80, 80}, {-80, 80}}, lineColor=  {175, 175, 175}, fillColor=  {85, 170, 255},
+            fillPattern=                                                                                                    FillPattern.Solid), Polygon(points=  {{-80, -80}, {80, -80}, {80, 80}, {-80, -80}}, lineColor=  {175, 175, 175}, fillColor=  {255, 85, 85},
+            fillPattern=                                                                                                    FillPattern.Solid)}), Documentation(revisions = "<html>
  <p>12.01.2014, Peter Matthes</p>
  <ul>
  <li>implemented</li>
@@ -47,7 +47,7 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This model extends <a href=\"AixLib.HVAC.HeatExchanger.RecuperatorNoMediumVarcp\">RecuperatorNoMediumVarcp</a> as computational core (heat exchange model). </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The hydraulic components are taken from other packages to facilitate heat exchange (<a href=\"Volume.VolumeMoistAir\">Volume.VolumeMoistAir</a>), sensors for medium temperature (<a href=\"Sensors.PropertySensorMoistAir\">Sensors.PropertySensorMoistAir</a>) and pressure loss (<a href=\"Ductwork.PressureLoss\">Ductwork.PressureLoss</a>). The necessary inputs for the heat exchange model will be taken from the medium components. The heat transfer from one medium to the other will be calculated by the heat exchange model. The heat flow occurs through the <a href=\"HeatExchanger.BaseClasses.SimpleHeatTransfer\">HeatExchanger.BaseClasses.SimpleHeatTransfer</a> model.</p>
  <p><b><font style=\"color: #008000; \">References</font></b> </p>

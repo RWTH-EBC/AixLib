@@ -3,10 +3,12 @@ partial model PartialCorG
   "partial model for correction of the solar gain factor"
 
    parameter Integer n = 1 "vector size for input and output";
+   parameter Modelica.SIunits.CoefficientOfHeatTransfer Uw = 3
+    "Thermal transmission coefficient of whole window";
 
 public
   Utilities.Interfaces.SolarRad_in SR_input[n] annotation (Placement(
-        transformation(extent={{-122,-20},{-80,20}},rotation=0),
+        transformation(extent={{-122,-20},{-80,20}}),
         iconTransformation(
         extent={{18,-19},{-18,19}},
         rotation=180,
@@ -15,8 +17,7 @@ public
     "transmitted solar radiation through window"
     annotation (Placement(transformation(extent={{80,-10},{100,10}}),
         iconTransformation(extent={{80,-10},{100,10}})));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}), graphics), Icon(coordinateSystem(
+  annotation ( Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={
         Rectangle(
           extent={{-80,80},{80,-80}},
@@ -25,5 +26,12 @@ public
           fillPattern=FillPattern.Solid), Text(
           extent={{-52,24},{62,-16}},
           lineColor={0,0,0},
-          textString="%name")}));
+          textString="%name")}),
+    Documentation(info="<html>
+<h4><span style=\"color:#008000\">Overview</span></h4>
+<p>Partial model for correction cofficient for transmitted solar radiation through a window.</p>
+<h4><span style=\"color:#008000\">Level of Development</span></h4>
+<p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\"
+  alt=\"stars: 3 out of 5\"/> </p>
+</html>"));
 end PartialCorG;

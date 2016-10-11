@@ -10,7 +10,7 @@ partial model PartialTwoWayValve "Partial model for a two way valve"
       rhoStd=Medium.density_pTX(101325, 273.15+4, Medium.X_default));
 
   extends AixLib.Fluid.Actuators.BaseClasses.ActuatorSignal;
-  parameter Modelica.SIunits.Pressure dpFixed_nominal(displayUnit="Pa", min=0) = 0
+  parameter Modelica.SIunits.PressureDifference dpFixed_nominal(displayUnit="Pa", min=0) = 0
     "Pressure drop of pipe and other resistances that are in series"
      annotation(Dialog(group = "Nominal condition"));
 
@@ -27,7 +27,7 @@ protected
  Real k(unit="", min=Modelica.Constants.small)
     "Flow coefficient of valve and pipe in series, k=m_flow/sqrt(dp), with unit=(kg.m)^(1/2).";
 initial equation
-  assert(dpFixed_nominal > -Modelica.Constants.small, "Require dpFixed_nominal >= 0. Received dpFixed_nominal = "
+  assert(dpFixed_nominal > -Modelica.Constants.eps, "Require dpFixed_nominal >= 0. Received dpFixed_nominal = "
         + String(dpFixed_nominal) + " Pa.");
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},
@@ -55,18 +55,14 @@ initial equation
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
         Line(
-          points={{0,40},{0,-4}},
-          color={0,0,0},
-          smooth=Smooth.None),
+          points={{0,40},{0,-4}}),
         Line(
           visible=not filteredOpening,
-          points={{0,100},{0,40}},
-          color={0,0,0},
-          smooth=Smooth.None)}),
+          points={{0,100},{0,40}})}),
 Documentation(info="<html>
 <p>
 Partial model for a two way valve. This is the base model for valves
-with different opening characteristics, such as linear, equal percentage, 
+with different opening characteristics, such as linear, equal percentage,
 quick opening or pressure-independent.
 </p>
 <p>
@@ -89,7 +85,7 @@ which is the flow coefficient in SI units, i.e.,
 it is the ratio between mass flow rate in <code>kg/s</code> and square root
 of pressure drop in <code>Pa</code>.
 </p>
-<h4>Modelling options</h4>
+<h4>Options</h4>
 <p>
 This model allows different parameterization of the flow resistance.
 The different parameterizations are described in
@@ -106,11 +102,30 @@ each valve opening characteristics has different parameters.
 revisions="<html>
 <ul>
 <li>
+April 23, 2016, by Michael Wetter:<br/>
+Changed test in assertion from <code>dpFixed_nominal > -Modelica.Constants.small</code>
+to
+<code>dpFixed_nominal > -Modelica.Constants.eps</code>.
+Otherwise, JModelica evaluates it as <code>true</code> in
+<a href=\"modelica://AixLib.Fluid.Actuators.Valves.Examples.TwoWayValves\">
+AixLib.Fluid.Actuators.Valves.Examples.TwoWayValves</a>.
+See also
+<a href=\"https://trac.jmodelica.org/ticket/4932\">https://trac.jmodelica.org/ticket/4932</a>.
+This is for
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/510\">Buildings, issue 510</a>.
+</li>
+<li>
+January 22, 2016, by Michael Wetter:<br/>
+Corrected type declaration of pressure difference.
+This is
+for <a href=\"https://github.com/iea-annex60/modelica-annex60/issues/404\">#404</a>.
+</li>
+<li>
 January 29, 2015, by Filip Jorissen:<br/>
-Moved the governing equations to 
+Moved the governing equations to
 <a href=\"modelica://AixLib.Fluid.Actuators.BaseClasses.PartialTwoWayValveKv\">
 PartialTwoWayValveKv</a>
-in order to be able to extend from this partial in 
+in order to be able to extend from this partial in
 <a href=\"modelica://AixLib.Fluid.Actuators.Valves.TwoWayPressureIndependent\">
 TwoWayPressureIndependent</a>
 </li>

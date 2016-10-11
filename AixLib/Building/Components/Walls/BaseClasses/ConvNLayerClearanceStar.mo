@@ -32,13 +32,13 @@ model ConvNLayerClearanceStar
   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(16)
     "Initial temperature"                                                                                      annotation(Dialog(group = "Thermal"));
   // 2n HeatConds
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatCondb[n](port_b(each T(start = T0)), port_a(each T(start = T0)), G = A * lambda ./ (d / 2)) annotation(Placement(transformation(extent = {{8, -8}, {28, 12}}, rotation = 0)));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatConda[n](port_b(each T(start = T0)), port_a(each T(start = T0)), G = A .* lambda ./ (d / 2)) annotation(Placement(transformation(extent = {{-50, -8}, {-30, 12}}, rotation = 0)));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatCondb[n](port_b(each T(start = T0)), port_a(each T(start = T0)), G = A * lambda ./ (d / 2)) annotation(Placement(transformation(extent = {{8, -8}, {28, 12}})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatConda[n](port_b(each T(start = T0)), port_a(each T(start = T0)), G = A .* lambda ./ (d / 2)) annotation(Placement(transformation(extent = {{-50, -8}, {-30, 12}})));
   // n Loads
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor Load[n](T(start = fill(T0, n)), C = c .* rho .* A .* d) annotation(Placement(transformation(extent = {{-8, -62}, {12, -42}}, rotation = 0)));
-  Utilities.HeatTransfer.HeatConv_inside HeatConv1(port_b(T(start = T0)), alpha_custom = alpha_custom, A = A, surfaceOrientation = surfaceOrientation) annotation(Placement(transformation(origin = {64, -2}, extent = {{-10, -10}, {10, 10}}, rotation = 180)));
-  Utilities.Interfaces.Star Star annotation(Placement(transformation(extent = {{80, 50}, {100, 70}}, rotation = 0)));
-  Utilities.HeatTransfer.HeatToStar twoStar_RadEx(A = A, eps = eps, Therm(T(start = T0)), Star(T(start = T0))) annotation(Placement(transformation(extent = {{54, 30}, {74, 50}}, rotation = 0)));
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor Load[n](T(start = fill(T0, n)), C = c .* rho .* A .* d) annotation(Placement(transformation(extent = {{-8, -62}, {12, -42}})));
+  Utilities.HeatTransfer.HeatConv_inside HeatConv1(port_b(T(start = T0)), alpha_custom = alpha_custom, A = A, surfaceOrientation = surfaceOrientation) annotation(Placement(transformation(origin={62,2},     extent = {{-10, -10}, {10, 10}}, rotation = 180)));
+  Utilities.Interfaces.Star Star annotation(Placement(transformation(extent = {{80, 50}, {100, 70}})));
+  Utilities.HeatTransfer.HeatToStar twoStar_RadEx(A = A, eps = eps, Therm(T(start = T0)), Star(T(start = T0))) annotation(Placement(transformation(extent = {{54, 30}, {74, 50}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a annotation(Placement(transformation(extent = {{-104, -8}, {-84, 12}}), iconTransformation(extent = {{-100, -20}, {-80, 0}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b annotation(Placement(transformation(extent = {{76, -8}, {96, 12}}), iconTransformation(extent = {{80, -20}, {100, 0}})));
 protected
@@ -46,7 +46,7 @@ protected
 protected
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a dummyTherm
     "This really helps to solve initialisation problems in huge equation systems ..."
-                                                                                                        annotation(Placement(transformation(extent = {{49, -41}, {54, -36}}, rotation = 0)));
+                                                                                                        annotation(Placement(transformation(extent = {{49, -41}, {54, -36}})));
 equation
   // connecting inner elements HeatCondb[i]--Load[i]--HeatConda[i] to n groups
   for i in 1:n loop
@@ -59,27 +59,30 @@ equation
   end for;
   // connecting outmost elements to connectors: port_a--HeatCondb[1]...HeatConda[n]--HeatConv1--port_b
   connect(HeatConda[1].port_a, port_a) annotation(Line(points = {{-50, 2}, {-94, 2}}, color = {200, 100, 0}));
-  connect(HeatConv1.port_a, port_b) annotation(Line(points = {{74, -2}, {84.5, -2}, {84.5, 2}, {86, 2}}, color = {200, 100, 0}));
-  connect(HeatCondb[n].port_b, HeatConv1.port_b) annotation(Line(points = {{28, 2}, {52, 2}, {52, -2}, {54, -2}}, color = {200, 100, 0}));
-  connect(HeatConv1.port_b, twoStar_RadEx.Therm) annotation(Line(points = {{54, -2}, {50, -2}, {50, 40}, {54.8, 40}}, color = {200, 100, 0}));
-  connect(twoStar_RadEx.Star, Star) annotation(Line(points = {{73.1, 40}, {90, 40}, {90, 60}}, color = {95, 95, 95}, pattern = LinePattern.None));
-  connect(HeatConv1.port_b, dummyTherm) annotation(Line(points = {{54, -2}, {51.5, -2}, {51.5, -38.5}}, color = {200, 100, 0}));
+  connect(HeatConv1.port_a, port_b) annotation(Line(points={{72,2},{72,2},{86,2}},                       color = {200, 100, 0}));
+  connect(HeatCondb[n].port_b, HeatConv1.port_b) annotation(Line(points={{28,2},{
+          52,2}},                                                                                                 color = {200, 100, 0}));
+  connect(HeatConv1.port_b, twoStar_RadEx.Therm) annotation(Line(points={{52,2},{
+          50,2},{50,40},{54.8,40}},                                                                                   color = {200, 100, 0}));
+  connect(twoStar_RadEx.Star, Star) annotation(Line(points = {{73.1, 40}, {90, 40}, {90, 60}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
+  connect(HeatConv1.port_b, dummyTherm) annotation(Line(points={{52,2},{51.5,2},
+          {51.5,-38.5}},                                                                                color = {200, 100, 0}));
   // computing approximated longwave radiation exchange
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0})}), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{24, 100}, {80, -100}}, lineColor = {0, 0, 0}, fillColor = {211, 243, 255},
-            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-56, 100}, {0, -100}}, lineColor = {166, 166, 166}, pattern = LinePattern.None, fillColor = {190, 190, 190},
-            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-64, 100}, {-56, -100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {208, 208, 208},
-            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-72, 100}, {-64, -100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {190, 190, 190},
-            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-80, 100}, {-72, -100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {156, 156, 156},
-            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{0, 100}, {8, -100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {208, 208, 208},
-            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{16, 100}, {24, -100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {156, 156, 156},
-            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{8, 100}, {16, -100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {190, 190, 190},
-            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-80, -30}, {80, -42}}, lineColor = {0, 0, 0}, pattern = LinePattern.Dash, fillColor = {255, 255, 255},
-            fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-80, -32}, {80, -39}}, lineColor = {0, 0, 0}, pattern = LinePattern.Dash, fillColor = {215, 215, 215},
-            fillPattern =                                                                                                   FillPattern.Solid, textString = "gap"), Text(extent = {{-44, -40}, {52, -114}}, lineColor = {0, 0, 0}, textString = "n")}), Documentation(info = "<html>
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0})}), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}), Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}), Rectangle(extent=  {{-80, 60}, {80, -100}}, lineColor=  {0, 0, 0}), Rectangle(extent=  {{24, 100}, {80, -100}}, lineColor=  {0, 0, 0}, fillColor=  {211, 243, 255},
+            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-56, 100}, {0, -100}}, lineColor=  {166, 166, 166}, pattern=  LinePattern.None, fillColor=  {190, 190, 190},
+            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-64, 100}, {-56, -100}}, lineColor=  {0, 0, 255}, pattern=  LinePattern.None, fillColor=  {208, 208, 208},
+            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-72, 100}, {-64, -100}}, lineColor=  {0, 0, 255}, pattern=  LinePattern.None, fillColor=  {190, 190, 190},
+            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-80, 100}, {-72, -100}}, lineColor=  {0, 0, 255}, pattern=  LinePattern.None, fillColor=  {156, 156, 156},
+            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{0, 100}, {8, -100}}, lineColor=  {0, 0, 255}, pattern=  LinePattern.None, fillColor=  {208, 208, 208},
+            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{16, 100}, {24, -100}}, lineColor=  {0, 0, 255}, pattern=  LinePattern.None, fillColor=  {156, 156, 156},
+            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{8, 100}, {16, -100}}, lineColor=  {0, 0, 255}, pattern=  LinePattern.None, fillColor=  {190, 190, 190},
+            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-80, -30}, {80, -42}}, lineColor=  {0, 0, 0}, pattern=  LinePattern.Dash, fillColor=  {255, 255, 255},
+            fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-80, -32}, {80, -39}}, lineColor=  {0, 0, 0}, pattern=  LinePattern.Dash, fillColor=  {215, 215, 215},
+            fillPattern=                                                                                                    FillPattern.Solid, textString=  "gap"), Text(extent=  {{-44, -40}, {52, -114}}, lineColor=  {0, 0, 0}, textString=  "n")}), Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>The <b>ConvNLayerClearanceStar</b> model represents a wall, consisting of n different layers with natural convection on one side and (window) clearance.</p>
  <h4><font color=\"#008000\">Level of Development</font></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><font color=\"#008000\">Concept</font></h4>
  <p>There is one inner and one outer <b><a href=\"Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a\">HeatPort</a></b>-connector to simulate one-dimensional heat transfer through the wall and heat storage within the wall.</p>
  <p>The <b>ConvNLayerClearanceStar</b> model extends the basic concept by adding the functionality of approximated longwave radiation exchange. Simply connect all radiation exchanging surfaces via their <b><a href=\"Modelica://AixLib.Utilities.Interfaces.Star\">Star</a></b>-connectors. </p>

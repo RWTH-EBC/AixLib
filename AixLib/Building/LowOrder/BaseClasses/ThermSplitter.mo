@@ -2,7 +2,7 @@ within AixLib.Building.LowOrder.BaseClasses;
 model ThermSplitter
   "A simple model which weights a given set of therm inputs to calculate an average temperature or heat flow and the other way around"
 
-parameter Integer dimension=6 "Dimension of the splitter";
+parameter Integer dimension "Dimension of the splitter";
 
 parameter Real splitFactor[dimension]= fill(1/dimension, dimension)
     "split factor for outputs (between 0 and 1)";
@@ -20,8 +20,7 @@ equation
   signalInput.T = signalOutput.T * splitFactor
     "Equivalent building temperature rerouted to SignalInput";
 
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}), graphics), Icon(coordinateSystem(
+  annotation ( Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={
         Text(
           extent={{-2,4},{26,-30}},
@@ -30,28 +29,22 @@ equation
           textStyle={TextStyle.Bold}),
         Line(
           points={{-80,0},{14,80},{14,80}},
-          color={0,0,255},
-          smooth=Smooth.None),
+          color={0,0,255}),
         Line(
           points={{-80,0},{18,48},{18,48}},
-          color={0,0,255},
-          smooth=Smooth.None),
+          color={0,0,255}),
         Line(
           points={{-80,0},{16,18},{16,18}},
-          color={0,0,255},
-          smooth=Smooth.None),
+          color={0,0,255}),
         Line(
           points={{-80,0},{12,-78},{12,-78}},
-          color={0,0,255},
-          smooth=Smooth.None),
+          color={0,0,255}),
         Line(
           points={{-80,0},{12,-46},{12,-46}},
-          color={0,0,255},
-          smooth=Smooth.None),
+          color={0,0,255}),
         Line(
           points={{-80,0},{12,-18},{12,-18}},
-          color={0,0,255},
-          smooth=Smooth.None),
+          color={0,0,255}),
         Text(
           extent={{-48,-82},{52,-100}},
           lineColor={0,0,255},
@@ -59,8 +52,8 @@ equation
     Documentation(info="<html>
 <p>ThermSplitter is a simple model which weights a given set of therm inputs to calculate an average temperature or heat flow and the other way around</p>
 <h4>Main equations</h4>
-<p><img src=\"modelica://AixLib/Images/equations/equation-ShHZPTo9.png\" alt=\"signalOutput.Q_flow = splitFactor .* (signalInput.Q_flow * unitvec) \"/></p>
-<p><img src=\"modelica://AixLib/Images/equations/equation-BtreVeqi.png\" alt=\"signalInput.T = sum(signalOutput.T * splitFactor) \"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/Building/LowOrder/BaseClasses/ThermSplitter/equation-ShHZPTo9.png\" alt=\"signalOutput.Q_flow = splitFactor .* (signalInput.Q_flow * unitvec) \"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/Building/LowOrder/BaseClasses/ThermSplitter/equation-BtreVeqi.png\" alt=\"signalInput.T = sum(signalOutput.T * splitFactor) \"/></p>
 <h4>Assumptions and limitations</h4>
 <h4>Typical use and important parameters</h4>
 <p>This model is used to weight therm ports according to given split factors.</p>

@@ -7,8 +7,6 @@ model CorG_VDI6007 "correction of the solar gain factor according to VDI6007"
 //  parameter Real coeff=0.6 "Weight coefficient";
  // parameter Modelica.SIunits.Area A=6 "Area of surface";
 //  parameter Real A = 10 "Area of surface";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer Uw = 3
-    "Thermal transmission coefficient of whole window";
 
 // parameters for calculating the transmission correction factor based on VDI_6007 Part-3
   // A0 to A6 are experimental constants VDI 6007 Part-3 page 20
@@ -73,31 +71,20 @@ equation
   end for;
 
 annotation (
-    Diagram(coordinateSystem(
-        preserveAspectRatio=false,
-        extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics),
-    Icon(coordinateSystem(
-        preserveAspectRatio=false,
-        extent={{-100,-100},{100,100}},
-        grid={2,2}), graphics),
-    Window(
-      x=0.29,
-      y=0.14,
-      width=0.6,
-      height=0.6),
     Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
-<p>The <b>RadCondAdapt</b> model computes a heat flow rate caused by the absorbance of radiation. The amount of radiation being transformed into a heat flow is controlled by a given coefficient.</p>
-<p>This model computes the transmission correction factors based on the VDI 6007_Part 3.</p>
+<h4><span style=\"color:#008000\">Overview</span></h4>
+<p>This model computes the transmission correction factors for solar radiation through a double pane window depoending on the incidence angle, based on the VDI 6007_Part 3.</p>
 <p>The correction factors are calculated for the transmitted total and diffuse( cloudy sky) solar radiation, and the reflected radiation from the groung. </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars3.png\"/> </p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
-<p>transmission correction factors (KORg) are calculated based on :</p>
-<p><ul>
+<h4><span style=\"color:#008000\">Level of Development</span></h4>
+<p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\"
+  alt=\"stars: 3 out of 5\"/> </p>
+<h4><span style=\"color:#008000\">Known Limitations</span></h4>
+<p>The model is directly paramtrized for a double pane window.</p>
+<h4><span style=\"color:#008000\">References</span></h4>
+<p>transmission correction factors (CORg) are calculated based on :</p>
+<ul>
 <li>VDI 6007_part3</li>
-</ul></p>
+</ul>
 </html>",
     revisions="<html>
 <p><i>February 24, 2014</i> by Reza Tavakoli:</p>

@@ -1,8 +1,8 @@
 within AixLib.Fluid.HeatExchangers;
 model HeaterCooler_u "Heater or cooler with prescribed heat flow rate"
   extends AixLib.Fluid.Interfaces.TwoPortHeatMassExchanger(
-    redeclare final AixLib.Fluid.MixingVolumes.MixingVolume vol,
-    final showDesignFlowDirection=false);
+    redeclare final AixLib.Fluid.MixingVolumes.MixingVolume vol(
+    final prescribedHeatFlowRate=true));
 
   parameter Modelica.SIunits.HeatFlowRate Q_flow_nominal
     "Heat flow rate at u=1, positive for heating";
@@ -21,20 +21,16 @@ protected
 equation
   connect(u, gai.u) annotation (Line(
       points={{-120,60},{-82,60}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(gai.y, preHea.Q_flow) annotation (Line(
       points={{-59,60},{-40,60}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(preHea.port, vol.heatPort) annotation (Line(
       points={{-20,60},{-9,60},{-9,-10}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(gai.y, Q_flow) annotation (Line(
       points={{-59,60},{-50,60},{-50,80},{80,80},{80,60},{110,60}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={
         Rectangle(
@@ -82,7 +78,7 @@ Optionally, this model can have a flow resistance.
 If no flow resistance is requested, set <code>dp_nominal=0</code>.
 </p>
 <p>
-For a model that uses a an input the fluid temperature leaving at
+For a model that uses as an input the fluid temperature leaving at
 <code>port_b</code>, use
 <a href=\"modelica://AixLib.Fluid.HeatExchangers.HeaterCooler_T\">
 AixLib.Fluid.HeatExchangers.HeaterCooler_T</a>
@@ -103,6 +99,24 @@ AixLib.Fluid.HeatExchangers.Validation.HeaterCooler_u</a>.
 </html>",
 revisions="<html>
 <ul>
+<li>
+November 19, 2015, by Michael Wetter:<br/>
+Removed assignment of parameter
+<code>showDesignFlowDirection</code> in <code>extends</code> statement.
+This is for
+<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/349\">#349</a>.
+</li>
+<li>
+May 6, 2015, by Michael Wetter:<br/>
+Set <code>prescribedHeatFlowRate=true</code>.
+This is for issue
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/412\">
+#412</a>.
+</li>
+<li>
+May 1, 2015, by Marcus Fuchs:<br/>
+Corrected typo in documentation.
+</li>
 <li>
 November 12, 2014, by Michael Wetter:<br/>
 Added output signal <code>Q_flow</code> so that it has

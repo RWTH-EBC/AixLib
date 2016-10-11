@@ -17,9 +17,13 @@ equation
   dT = T_col - T_air;
   eta = Collector.eta_zero - Collector.c1 * dT / G - Collector.c2 * dT * dT / G;
   Q_flow = G * eta;
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
- <p><br/>Model for the efficiency of a solar thermal collector. Inputs are outdoor air temperature, fluid temperature and solar irradiation. Based on these values and the collector properties from database, this model calculates the heat flow to the fluid circuit. We assume that the fluid temperature is equal to the collector temperature.</p>
+  annotation( Documentation(info = "<html>
+ <h4><font color=\"#008000\">Overview</font></h4>
+ <p>Model for the efficiency of a solar thermal collector. Inputs are outdoor
+ air temperature, fluid temperature and solar irradiation. Based on these values
+ and the collector properties from database, this model calculates the heat flow
+ to the fluid circuit. We assume that the fluid temperature is equal to the
+ collector temperature.</p>
  </html>", revisions = "<html>
  <p>19.11.2013, Marcus Fuchs: implemented</p>
  </html>"));

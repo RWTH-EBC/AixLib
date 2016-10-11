@@ -1,6 +1,4 @@
 within AixLib.DataBase.Walls.EnEV2009.Ceiling;
-
-
 record ROsaddleRoom_EnEV2009_SML
   "Saddle roof in room after EnEV 2009, for building of type S (schwer), M (mittel) and L (leicht)"
   extends WallBaseDataDefinition(n(min = 1) = 3 "Number of wall layers", d = {0.22, 0.0125, 0.015}
@@ -18,7 +16,7 @@ record ROsaddleRoom_EnEV2009_SML
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Wall definition according to EnEV 2009. For detailed wall type see above. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars5.png\" alt=\"stars: 5 out of 5\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars5.png\" alt=\"stars: 5 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p><b><font style=\"color: #ff0000; \">Attention:</font></b> The first element in each vector represents the layer connected to <code>port_a</code>(outside), the last element represents the layer connected to <code>port_b</code>(surface facing the room). </p>
  <h4><span style=\"color:#008000\">References</span></h4>
@@ -29,3 +27,4 @@ record ROsaddleRoom_EnEV2009_SML
  </ul>
  </html>"));
 end ROsaddleRoom_EnEV2009_SML;
+

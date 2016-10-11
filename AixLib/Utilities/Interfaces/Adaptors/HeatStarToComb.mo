@@ -8,12 +8,12 @@ model HeatStarToComb
 equation
   connect(thermStarComb.Star, star);
   connect(thermStarComb.Therm, therm);
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -80}, {100, 80}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -80}, {100, 80}}), graphics={  Polygon(points = {{-76, 0}, {86, -72}, {86, 70}, {-76, 0}}, lineColor = {0, 0, 255}, smooth = Smooth.None, fillColor = {0, 0, 0},
-            fillPattern =                                                                                                   FillPattern.Solid)}), Documentation(info = "<html>
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -80}, {100, 80}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -80}, {100, 80}}), graphics={  Polygon(points=  {{-76, 0}, {86, -72}, {86, 70}, {-76, 0}}, lineColor=  {0, 0, 255}, fillColor=  {0, 0, 0},
+            fillPattern=                                                                                                    FillPattern.Solid)}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This adaptor makes it possible to connect HeatStarComb with either Star or Heat connector or both. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/> </p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/> </p>
  </html>", revisions = "<html>
  <ul>
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>

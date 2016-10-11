@@ -1,7 +1,7 @@
 within AixLib.DataBase.Walls.EnEV2009.OW;
 record OW_EnEV2009_M
   "outer wall after EnEV 2009, for building of type M (mittel)"
-  extends WallBaseDataDefinition(n(min = 1) = 4 "Number of wall layers", d = {0.05, 0.6, 0.175, 0.015}
+  extends WallBaseDataDefinition(n(min = 1) = 4 "Number of wall layers", d = {0.05, 0.06, 0.175, 0.015}
       "Thickness of wall layers",                                                                                                  rho = {1800, 120, 350, 1200}
       "Density of wall layers",                                                                                                    lambda = {1, 0.035, 0.11, 0.51}
       "Thermal conductivity of wall layers",                                                                                                    c = {1000, 1030, 1000, 1000}
@@ -16,7 +16,7 @@ record OW_EnEV2009_M
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Wall definition according to EnEV 2009. For detailed wall type see above. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars5.png\" alt=\"stars: 5 out of 5\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars5.png\" alt=\"stars: 5 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p><b><font style=\"color: #ff0000; \">Attention:</font></b> The first element in each vector represents the layer connected to <code>port_a</code>(outside), the last element represents the layer connected to <code>port_b</code>(surface facing the room). </p>
  <h4><span style=\"color:#008000\">References</span></h4>

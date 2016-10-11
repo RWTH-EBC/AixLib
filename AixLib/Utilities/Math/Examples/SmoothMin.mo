@@ -11,20 +11,16 @@ equation
 
   connect(ramp.y, smoLim[1].u1) annotation (Line(
       points={{-19,20},{-12,20},{-12,6},{-2,6}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(smoLim[2].u1, ramp.y) annotation (Line(
       points={{-2,6},{-12,6},{-12,20},{-19,20}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(const.y, smoLim[1].u2) annotation (Line(
       points={{-19,-20},{-12,-20},{-12,-6},{-2,-6}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(const.y, smoLim[2].u2) annotation (Line(
       points={{-19,-20},{-12,-20},{-12,-6},{-2,-6}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   annotation(experiment(StopTime=1.0),
 __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Utilities/Math/Examples/SmoothMin.mos"
@@ -36,7 +32,7 @@ This model tests the implementation of
 AixLib.Utilities.Math.SmoothMin</a>.
 </p>
 <p>
-This model also illustrates that the output can be larger than 
+This model also illustrates that the output can be larger than
 the minimum of the two input signals. Smaller values for <code>deltaX</code>
 will reduce this effect. Therefore do not use this function when the minimum
 output value should be respected.
@@ -48,7 +44,5 @@ March 12, 2015, by Filip Jorissen:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-            100,100}}), graphics));
+</html>"));
 end SmoothMin;

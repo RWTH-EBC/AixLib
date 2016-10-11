@@ -9,13 +9,13 @@ function saturationPressure
                                           nominal=1000) "Saturation pressure";
 
 algorithm
-  pSat := AixLib.Utilities.Math.Functions.spliceFunction(
-             AixLib.Utilities.Psychrometrics.Functions.saturationPressureLiquid(TSat),
-             AixLib.Utilities.Psychrometrics.Functions.sublimationPressureIce(TSat),
-             TSat-273.16,
-             1.0);
-  annotation(Inline=false,
-    smoothOrder=5,
+  pSat := AixLib.Utilities.Math.Functions.regStep(
+             y1=AixLib.Utilities.Psychrometrics.Functions.saturationPressureLiquid(TSat),
+             y2=AixLib.Utilities.Psychrometrics.Functions.sublimationPressureIce(TSat),
+             x=TSat-273.16,
+             x_small=1.0);
+  annotation(Inline=true,
+    smoothOrder=1,
     Documentation(info="<html>
 <p>
 Saturation pressure of water, computed from temperature,
@@ -34,6 +34,20 @@ http://www.nist.gov/data/PDFfiles/jpcrd477.pdf</a>.
 </html>",
 revisions="<html>
 <ul>
+<li>
+March 15, 2016, by Michael Wetter:<br/>
+Replaced <code>spliceFunction</code> with <code>regStep</code>.
+This is for
+<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/300\">issue 300</a>.
+</li>
+<li>
+August 19, 2015 by Michael Wetter:<br/>
+Changed <code>smoothOrder</code> from <i>5</i> to <i>1</i> as
+<a href=\"modelica://AixLib.Utilities.Math.Functions.spliceFunction\">
+AixLib.Utilities.Math.Functions.spliceFunction</a> is only once
+continuously differentiable.
+Inlined the function.
+</li>
 <li>
 November 20, 2013 by Michael Wetter:<br/>
 First implementation, moved from <code>AixLib.Media</code>.

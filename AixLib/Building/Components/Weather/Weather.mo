@@ -10,7 +10,7 @@ model Weather "Complex weather model"
   parameter String tableName = "wetter"
     "table name on file or in function usertab"                                     annotation(Dialog(group = "Properties of Weather Data"));
   parameter String fileName = "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt"
-    "file where matrix is stored"                                                                                                     annotation(Dialog(group = "Properties of Weather Data", __Dymola_loadSelector(filter = "Text files (*.txt);;Matlab files (*.mat)", caption = "Open file in which table is present")));
+    "file where matrix is stored"                                                                                                     annotation(Dialog(group = "Properties of Weather Data", loadSelector(filter = "Text files (*.txt);;Matlab files (*.mat)", caption = "Open file in which table is present")));
   parameter Real offset[:] = {0} "offsets of output signals" annotation(Dialog(group = "Properties of Weather Data"));
   parameter Modelica.Blocks.Types.Smoothness smoothness = Modelica.Blocks.Types.Smoothness.LinearSegments
     "Smoothness of table interpolation"                                                                                                     annotation(Dialog(group = "Properties of Weather Data"));
@@ -18,10 +18,17 @@ model Weather "Complex weather model"
     "Extrapolation of data outside the definition range"                                                                                                     annotation(Dialog(group = "Properties of Weather Data"));
   parameter Real startTime[1] = {0}
     "output = offset for time < startTime (same value for all columns)"                                 annotation(Dialog(group = "Properties of Weather Data"));
+
+  replaceable model RadOnTiltedSurface =
+      AixLib.Building.Components.Weather.RadiationOnTiltedSurface.RadOnTiltedSurf_Liu
+  constrainedby
+    AixLib.Building.Components.Weather.RadiationOnTiltedSurface.BaseClasses.PartialRadOnTiltedSurf
+    "Model for calculating radiation on tilted surfaces"                                                                            annotation(Dialog(group="Solar radiation on oriented surfaces", descriptionLabel = true), choicesAllMatching= true);
+
   parameter
     DataBase.Weather.SurfaceOrientation.SurfaceOrientationBaseDataDefinition         SOD = DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor()
     "Surface orientation data"                                                                                                     annotation(Dialog(group = "Solar radiation on oriented surfaces", descriptionLabel = true), choicesAllMatching = true);
-  Utilities.Interfaces.SolarRad_out SolarRadiation_OrientedSurfaces[size(RadOnTiltedSurf, 1)] annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin={50,96}),    iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-78, -110})));
+  Utilities.Interfaces.SolarRad_out SolarRadiation_OrientedSurfaces[SOD.nSurfaces] annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin={50,96}),    iconTransformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-78, -110})));
   parameter Integer Outopt = 2 "Output options" annotation(Dialog(tab = "Optional output vector", compact = true, descriptionLabel = true), choices(choice = 1
         "one vector",                                                                                                    choice = 2
         "individual vectors",                                                                                                    radioButtons = true));
@@ -38,10 +45,14 @@ model Weather "Complex weather model"
     "Longwave sky radiation on horizontal [W/m2] (TRY col 18)"                                 annotation(Dialog(tab = "Optional output vector", descriptionLabel = true), choices(checkBox = true));
   parameter Boolean Ter_rad = false
     "Longwave terrestric radiation from horizontal [W/m2] (TRY col 19)"                                 annotation(Dialog(tab = "Optional output vector", descriptionLabel = true), choices(checkBox = true));
-  BaseClasses.Sun Sun(Longitude = Longitude, Latitude = Latitude, DiffWeatherDataTime = DiffWeatherDataTime) annotation(Placement(transformation(extent = {{-62, 18}, {-38, 42}}, rotation = 0)));
-  BaseClasses.RadOnTiltedSurf RadOnTiltedSurf[SOD.nSurfaces](each Latitude = Latitude, each GroundReflection = GroundReflection, Azimut = SOD.Azimut, Tilt = SOD.Tilt) annotation(Placement(transformation(extent = {{-2, 18}, {22, 42}}, rotation = 0)));
-  Modelica.Blocks.Sources.CombiTimeTable WeatherData(fileName = fileName, columns = columns, offset = offset, table = [0, 0; 1, 1], startTime = scalar(startTime), tableName = tableName, tableOnFile = tableName <> "NoName", smoothness = smoothness, extrapolation = extrapolation) annotation(Placement(transformation(extent = {{-60, -70}, {-40, -50}}, rotation = 0)));
-  Modelica.Blocks.Routing.DeMultiplex3 deMultiplex(n3 = 9) annotation(Placement(transformation(extent = {{-26, -70}, {-6, -50}}, rotation = 0)));
+  BaseClasses.Sun Sun(
+    Longitude=Longitude,
+    Latitude=Latitude,
+    DiffWeatherDataTime=DiffWeatherDataTime) annotation (Placement(
+        transformation(extent={{-62,18},{-38,42}})));
+  RadOnTiltedSurface RadOnTiltedSurf[SOD.nSurfaces](each Latitude = Latitude, each GroundReflection = GroundReflection, Azimut = SOD.Azimut, Tilt = SOD.Tilt, each WeatherFormat=1) annotation(Placement(transformation(extent = {{-2, 18}, {22, 42}})));
+  Modelica.Blocks.Sources.CombiTimeTable WeatherData(fileName = Modelica.Utilities.Files.loadResource(fileName), columns = columns, offset = offset, table = [0, 0; 1, 1], startTime = scalar(startTime), tableName = tableName, tableOnFile = tableName <> "NoName", smoothness = smoothness, extrapolation = extrapolation) annotation(Placement(transformation(extent = {{-60, -70}, {-40, -50}})));
+  Modelica.Blocks.Routing.DeMultiplex3 deMultiplex(n3 = 9) annotation(Placement(transformation(extent = {{-26, -70}, {-6, -50}})));
   Modelica.Blocks.Interfaces.RealOutput WeatherDataVector[m] if Outopt == 1 and (Cloud_cover or Wind_dir or Wind_speed or Air_temp or Air_press or Mass_frac or Rel_hum or Sky_rad or Ter_rad) annotation(Placement(transformation(origin = {-1, -110}, extent = {{-10, -10}, {10, 10}}, rotation = 270)));
   Modelica.Blocks.Interfaces.RealOutput CloudCover if Cloud_cover and Outopt == 2 "[0..8]" annotation(Placement(transformation(extent = {{114, 74}, {134, 94}}), iconTransformation(extent = {{150, 110}, {170, 130}})));
   Modelica.Blocks.Interfaces.RealOutput WindDirection(unit = "deg") if Wind_dir and Outopt == 2
@@ -154,35 +165,36 @@ equation
     end if;
   end if;
   connect(WeatherData.y, deMultiplex.u) annotation(Line(points = {{-39, -60}, {-28, -60}}, color = {0, 0, 127}));
-  // Connecting n RadOnTiltedSurf
+ // Connecting n RadOnTiltedSurf
   for i in 1:SOD.nSurfaces loop
+    connect(Sun.OutDayAngleSun, RadOnTiltedSurf[i].InDayAngleSun);
     connect(Sun.OutHourAngleSun, RadOnTiltedSurf[i].InHourAngleSun);
     connect(Sun.OutDeclinationSun, RadOnTiltedSurf[i].InDeclinationSun);
-    connect(Sun.OutAzimutSun, RadOnTiltedSurf[i].InAzimutSun);
-    connect(deMultiplex.y1[1], RadOnTiltedSurf[i].InDiffRadHor);
-    connect(deMultiplex.y2[1], RadOnTiltedSurf[i].InBeamRadHor);
+    connect(deMultiplex.y1[1], RadOnTiltedSurf[i].solarInput2);
+    connect(deMultiplex.y2[1], RadOnTiltedSurf[i].solarInput1);
   end for;
+
   connect(RadOnTiltedSurf.OutTotalRadTilted, SolarRadiation_OrientedSurfaces) annotation(Line(points={{20.8,
-          27.6},{50.4,27.6},{50.4,96},{50,96}},                                                                                                    color = {255, 128, 0}, smooth = Smooth.None));
+          34.8},{50.4,34.8},{50.4,96},{50,96}},                                                                                                    color = {255, 128, 0}));
   annotation(Dialog(group = "Solar radiation on oriented surfaces"), Dialog(tab = "Optional output vector", descriptionLabel = true), Diagram(coordinateSystem(preserveAspectRatio=false,  extent={{-150,
             -100},{150,100}}),                                                                                                    graphics={  Line(points = {{-36, 32}, {-4, 32}}, color = {0, 0, 255}), Line(points = {{-36, 28}, {-4, 28}}, color = {0, 0, 255}), Line(points = {{-36, 24}, {-4, 24}}, color = {0, 0, 255}), Line(points = {{5, 13}, {5, -53}, {-3, -53}}, color = {0, 0, 255}), Line(points = {{15, 14}, {15, -60}, {-3, -60}}, color = {0, 0, 255})}), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-150, -100}, {150, 100}}), graphics={  Rectangle(extent = {{-150, 78}, {10, -82}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(
           extent={{-150,78},{10,-72}},
           lineColor={0,0,0},
-          pattern=LinePattern.None,
+           pattern=LinePattern.None,
           fillPattern=FillPattern.HorizontalCylinder,
-          fillColor={170,213,255}),                                                                                                    Ellipse(extent = {{-96, 20}, {-44, -32}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {255, 225, 0},
-            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-150, -22}, {10, -82}}, lineColor = {0, 0, 0}, pattern = LinePattern.None,
-            fillPattern =                                                                                                   FillPattern.HorizontalCylinder, fillColor = {0, 127, 0}), Rectangle(extent = {{-150, -54}, {10, -82}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {0, 127, 0},
-            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-126, -32}, {-118, -50}}, lineColor = {0, 0, 0}, pattern = LinePattern.None,
-            fillPattern =                                                                                                   FillPattern.VerticalCylinder, fillColor = {180, 90, 0}), Ellipse(extent = {{-134, -12}, {-110, -36}}, lineColor = {0, 0, 0}, pattern = LinePattern.None,
-            fillPattern =                                                                                                   FillPattern.Sphere, fillColor = {0, 158, 0}), Polygon(points = {{-126, -50}, {-138, -56}, {-130, -56}, {-118, -50}, {-126, -50}}, lineColor = {0, 0, 0}, pattern = LinePattern.None,
-            fillPattern =                                                                                                   FillPattern.Sphere, fillColor = {0, 77, 0}), Ellipse(extent = {{-125, -54}, {-150, -64}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {0, 77, 0},
-            fillPattern =                                                                                                   FillPattern.Solid), Ellipse(extent = {{-52, 46}, {-36, 38}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {226, 226, 226},
-            fillPattern =                                                                                                   FillPattern.Solid), Ellipse(extent = {{-42, 42}, {-28, 36}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {226, 226, 226},
-            fillPattern =                                                                                                   FillPattern.Solid), Ellipse(extent = {{-44, 42}, {-22, 50}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {226, 226, 226},
-            fillPattern =                                                                                                   FillPattern.Solid), Ellipse(extent = {{-40, 46}, {-16, 38}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {226, 226, 226},
-            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-12, -10}, {-2, -50}}, lineColor = {0, 0, 0}, pattern = LinePattern.None,
+          fillColor={170,213,255}),                                                                                                    Ellipse(extent = {{-96, 20}, {-44, -32}}, lineColor = {0, 0, 255},  pattern=LinePattern.None, fillColor = {255, 225, 0},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-150, -22}, {10, -82}}, lineColor = {0, 0, 0},  pattern=LinePattern.None,
+            fillPattern =                                                                                                   FillPattern.HorizontalCylinder, fillColor = {0, 127, 0}), Rectangle(extent = {{-150, -54}, {10, -82}}, lineColor = {0, 0, 255},  pattern=LinePattern.None, fillColor = {0, 127, 0},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-126, -32}, {-118, -50}}, lineColor = {0, 0, 0},  pattern=LinePattern.None,
+            fillPattern =                                                                                                   FillPattern.VerticalCylinder, fillColor = {180, 90, 0}), Ellipse(extent = {{-134, -12}, {-110, -36}}, lineColor = {0, 0, 0},  pattern=LinePattern.None,
+            fillPattern =                                                                                                   FillPattern.Sphere, fillColor = {0, 158, 0}), Polygon(points = {{-126, -50}, {-138, -56}, {-130, -56}, {-118, -50}, {-126, -50}}, lineColor = {0, 0, 0},  pattern=LinePattern.None,
+            fillPattern =                                                                                                   FillPattern.Sphere, fillColor = {0, 77, 0}), Ellipse(extent = {{-125, -54}, {-150, -64}}, lineColor = {0, 0, 255},  pattern=LinePattern.None, fillColor = {0, 77, 0},
+            fillPattern =                                                                                                   FillPattern.Solid), Ellipse(extent = {{-52, 46}, {-36, 38}}, lineColor = {0, 0, 255},  pattern=LinePattern.None, fillColor = {226, 226, 226},
+            fillPattern =                                                                                                   FillPattern.Solid), Ellipse(extent = {{-42, 42}, {-28, 36}}, lineColor = {0, 0, 255},  pattern=LinePattern.None, fillColor = {226, 226, 226},
+            fillPattern =                                                                                                   FillPattern.Solid), Ellipse(extent = {{-44, 42}, {-22, 50}}, lineColor = {0, 0, 255},  pattern=LinePattern.None, fillColor = {226, 226, 226},
+            fillPattern =                                                                                                   FillPattern.Solid), Ellipse(extent = {{-40, 46}, {-16, 38}}, lineColor = {0, 0, 255},  pattern=LinePattern.None, fillColor = {226, 226, 226},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-12, -10}, {-2, -50}}, lineColor = {0, 0, 0},  pattern=LinePattern.None,
             fillPattern =                                                                                                   FillPattern.VerticalCylinder, fillColor = {226, 226, 226}), Line(points = {{-8, -16}, {-6, -16}}, color = {0, 0, 0}), Line(points = {{-8, -18}, {-6, -18}}, color = {0, 0, 0}), Line(points = {{-8, -28}, {-6, -28}}, color = {0, 0, 0}), Line(points = {{-8, -22}, {-6, -22}}, color = {0, 0, 0}), Line(points = {{-8, -20}, {-6, -20}}, color = {0, 0, 0}), Line(points = {{-8, -26}, {-6, -26}}, color = {0, 0, 0}), Line(points = {{-8, -24}, {-6, -24}}, color = {0, 0, 0}), Line(points = {{-8, -30}, {-6, -30}}, color = {0, 0, 0}), Line(points = {{-8, -32}, {-6, -32}}, color = {0, 0, 0}), Line(points = {{-8, -34}, {-6, -34}}, color = {0, 0, 0}), Line(points = {{-8, -36}, {-6, -36}}, color = {0, 0, 0}), Line(points = {{-8, -38}, {-6, -38}}, color = {0, 0, 0}), Line(points = {{-8, -40}, {-6, -40}}, color = {0, 0, 0}), Line(points = {{-7, -19}, {-7, -47}}, color = {0, 0, 0}, thickness = 0.5), Line(points = {{-7, -43}, {-7, -47}}, color = {0, 0, 0}, thickness = 1), Text(extent = {{-9, -11}, {-5, -15}}, lineColor = {0, 0, 0},
             lineThickness =                                                                                                   1,
             fillPattern =                                                                                                   FillPattern.VerticalCylinder, fillColor = {226, 226, 226}, textString = "degC"), Text(extent = {{-176, 114}, {24, 74}}, lineColor=
@@ -200,7 +212,7 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Supplies weather data using a TRY - data set. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>Input: a TRY data set in an accepted Modelica format (.mat, .txt, with header). The structure should be exactly the one of a TRY, status: TRY 2011.</p>
  <p>Output: </p>
@@ -233,5 +245,5 @@ equation
           by Timo Haase:<br/>
           Implemented.</li>
  </ul>
- </html>"), DymolaStoredErrors);
+ </html>"));
 end Weather;

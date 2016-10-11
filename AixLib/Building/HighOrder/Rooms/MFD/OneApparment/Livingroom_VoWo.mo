@@ -2,7 +2,7 @@ within AixLib.Building.HighOrder.Rooms.MFD.OneApparment;
 model Livingroom_VoWo "Livingroom from the VoWo appartment"
   import AixLib;
   ///////// construction parameters
-  parameter Integer TMC = 1 "Themal Mass Class" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1 "S", choice = 2 "M", choice = 3 "L", radioButtons = true));
+  parameter Integer TMC = 1 "Themal Mass Class" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1 "Heavy", choice = 2 "Medium", choice = 3 "Light", radioButtons = true));
   parameter Integer TIR = 4 "Thermal Insulation Regulation" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1
         "EnEV_2009",                                                                                                    choice = 2
         "EnEV_2002",                                                                                                    choice = 3
@@ -25,10 +25,10 @@ model Livingroom_VoWo "Livingroom from the VoWo appartment"
   parameter Modelica.SIunits.Temperature T0_CE = 295.35 "Ceiling" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
   parameter Modelica.SIunits.Temperature T0_FL = 294.95 "Floor" annotation(Dialog(tab = "Initial temperatures", descriptionLabel = true));
   // Infiltration rate
-  AixLib.Building.Components.Walls.Wall Wall_Neighbour(T0 = T0_IWNeighbour, outside = false, WallType = Type_IWNeigbour, wall_length = 4.2, wall_height = 2.46, withWindow = false, withDoor = false) annotation(Placement(transformation(extent = {{-80, -24}, {-68, 54}}, rotation = 0)));
+  AixLib.Building.Components.Walls.Wall Wall_Neighbour(T0 = T0_IWNeighbour, outside = false, WallType = Type_IWNeigbour, wall_length = 4.2, wall_height = 2.46, withWindow = false, withDoor = false) annotation(Placement(transformation(extent = {{-80, -24}, {-68, 54}})));
   AixLib.Building.Components.Walls.Wall Wall_Corridor(T0 = T0_IWCorridor, outside = false, WallType = Type_IWload, wall_length = 1.54, wall_height = 2.46, withWindow = false, withDoor = false) annotation(Placement(transformation(origin = {19, -43}, extent = {{-4.99999, -31}, {4.99998, 31}}, rotation = 90)));
   AixLib.Building.Components.Walls.Wall Wall_Children(T0 = T0_IWChild, outside = false, WallType = Type_IWload, wall_length = 4.2, wall_height = 2.46, withWindow = false, withDoor = false) annotation(Placement(transformation(origin = {75, 14.9756}, extent = {{-7.00003, -39.0244}, {7.00003, 40.9756}}, rotation = 180)));
-  AixLib.Building.Components.DryAir.Airload airload(V = room_V, T(start = T0_air)) annotation(Placement(transformation(extent = {{-28, 0}, {-48, 20}}, rotation = 0)));
+  AixLib.Building.Components.DryAir.Airload airload(V = room_V, T(start = T0_air)) annotation(Placement(transformation(extent = {{-28, 0}, {-48, 20}})));
   AixLib.Building.Components.Walls.Wall outsideWall(wall_length = 4.645, wall_height = 2.46, windowarea = 3.99, door_height = 0.1, door_width = 0.1, withWindow = true, T0 = T0_OW, solar_absorptance = solar_absorptance_OW, withDoor = false, WallType = Type_OW, WindowType = Type_Win) annotation(Placement(transformation(origin = {-14.9999, 71}, extent = {{-13, -61.0001}, {11, 82.9999}}, rotation = 270)));
   AixLib.Building.Components.Walls.Wall Wall_Bedroom(T0 = T0_IWBedroom, outside = false, WallType = Type_IWload, wall_length = 3.105, wall_height = 2.46, withWindow = false, withDoor = false) annotation(Placement(transformation(origin = {-45, -44}, extent = {{-3.99999, -25}, {3.99998, 25}}, rotation = 90)));
   AixLib.Building.Components.Walls.Wall Wall_Ceiling(T0 = T0_CE, outside = false, WallType = Type_CE, wall_length = 4.2, wall_height = 4.645, Model = 1, ISOrientation = 3, withWindow = false, withDoor = false) annotation(Placement(transformation(origin = {104, 70}, extent = {{-1.99998, -10}, {1.99998, 10}}, rotation = 270)));
@@ -66,32 +66,66 @@ protected
   parameter AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple Type_Win = if TIR == 1 then AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009() else if TIR == 2 then AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2002() else if TIR == 3 then AixLib.DataBase.WindowsDoors.Simple.WindowSimple_WSchV1995() else AixLib.DataBase.WindowsDoors.Simple.WindowSimple_WSchV1984() annotation(Dialog(tab = "Types"));
   parameter Modelica.SIunits.Volume room_V = 4.20 * 4.645 * 2.46;
 equation
-  connect(outsideWall.SolarRadiationPort, SolarRadiation_SE) annotation(Line(points = {{62, 87.6}, {62, 100}, {-66, 100}, {-66, 134}}, color = {255, 128, 0}, smooth = Smooth.None));
-  connect(outsideWall.WindSpeedPort, WindSpeedPort) annotation(Line(points = {{48.8, 84.6}, {48.8, 100}, {-86, 100}, {-86, 30}, {-160, 30}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(Wall_Ceiling.port_outside, thermCeiling) annotation(Line(points = {{104, 72.1}, {104, 84}, {134, 84}, {134, -56}, {-86, -56}, {-86, -110}, {-150, -110}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Wall_Floor.port_outside, thermFloor) annotation(Line(points = {{104, 29.9}, {104, 4}, {134, 4}, {134, -56}, {-86, -56}, {-86, -140}, {-150, -140}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Wall_Children.port_outside, thermChildren) annotation(Line(points = {{82.35, 14}, {104, 14}, {104, 4}, {134, 4}, {134, -80}, {-150, -80}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Wall_Corridor.port_outside, thermCorridor) annotation(Line(points = {{19, -48.25}, {19, -48.25}, {19, -56}, {-86, -56}, {-86, -50}, {-150, -50}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Wall_Bedroom.port_outside, thermBedroom) annotation(Line(points = {{-45, -48.2}, {-45, -56}, {-86, -56}, {-86, -20}, {-150, -20}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Wall_Neighbour.port_outside, thermNeighbour) annotation(Line(points = {{-80.3, 15}, {-86, 15}, {-86, 10}, {-150, 10}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(infiltrationRate.port_a, thermOutside) annotation(Line(points = {{-72, -71}, {-86, -71}, {-86, 130}, {-150, 130}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(ThermRoom, ThermRoom) annotation(Line(points = {{-2, 14}, {-7, 14}, {-7, 14}, {-2, 14}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(thermStar_Demux.star, StarInside1) annotation(Line(points = {{13.6, -8.2}, {13.6, 3.2}, {26, 3.2}, {26, 14}}, color = {95, 95, 95}, pattern = LinePattern.None, smooth = Smooth.None));
-  connect(Wall_Children.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{68, 14}, {54, 14}, {54, -32}, {33.4, -32}, {33.4, -14.1}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Wall_Corridor.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{19, -38}, {19, -32}, {33.4, -32}, {33.4, -14.1}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Wall_Bedroom.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{-45, -40}, {-45, -32}, {33.4, -32}, {33.4, -14.1}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Wall_Neighbour.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{-68, 15}, {-56, 15}, {-56, -32}, {33.4, -32}, {33.4, -14.1}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(outsideWall.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{-4, 60}, {-4, 48}, {-56, 48}, {-56, -32}, {33.4, -32}, {33.4, -14.1}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Wall_Ceiling.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{104, 68}, {104, 58}, {54, 58}, {54, -32}, {33.4, -32}, {33.4, -14.1}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(Wall_Floor.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{104, 34}, {104, 58}, {54, 58}, {54, -32}, {33.4, -32}, {33.4, -14.1}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(thermStar_Demux.therm, ThermRoom) annotation(Line(points = {{13.9, -19.1}, {13.9, -20}, {-20, -20}, {-20, 14}, {-2, 14}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(airload.port, infiltrationRate.port_b) annotation(Line(points = {{-29, 8}, {-20, 8}, {-20, -71}, {-46, -71}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(NaturalVentilation.InPort1, AirExchangePort) annotation(Line(points = {{-70.7, -107.32}, {-86, -107.32}, {-86, 70}, {-160, 70}}, color = {0, 0, 127}, smooth = Smooth.None));
-  connect(NaturalVentilation.port_a, thermOutside) annotation(Line(points = {{-72, -99}, {-86, -99}, {-86, 130}, {-150, 130}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(airload.port, ThermRoom) annotation(Line(points = {{-29, 8}, {-20, 8}, {-20, 14}, {-2, 14}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(NaturalVentilation.port_b, airload.port) annotation(Line(points = {{-46, -99}, {-20, -99}, {-20, 8}, {-29, 8}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(outsideWall.port_outside, thermOutside) annotation(Line(points = {{-4, 84.6}, {-4, 100}, {-86, 100}, {-86, 130}, {-150, 130}}, color = {191, 0, 0}, smooth = Smooth.None));
-  annotation(__Dymola_Images(Parameters(source = "AixLib/Images/House/VoWo_Livingroom.png")), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-170, -150}, {170, 150}}, initialScale = 0.1), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-170, -150}, {170, 150}}, initialScale = 0.1), graphics = {Rectangle(extent=  {{-62, 60}, {112, -92}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 255}, fillPattern=  FillPattern.Forward), Rectangle(extent=  {{38, 72}, {60, 52}}, lineColor=  {0, 0, 0}, fillColor=  {85, 255, 255}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{40, 70}, {58, 54}}, lineColor=  {0, 0, 0}, fillColor=  {170, 213, 255}, fillPattern=  FillPattern.Solid), Text(extent=  {{-56, -14}, {104, -32}}, lineColor=  {0, 0, 0}, fillColor=  {255, 0, 0}, fillPattern=  FillPattern.Forward, textString=  "Livingroom"), Text(extent=  {{42, -98}, {92, -114}}, lineColor=  {0, 0, 0}, lineThickness=  1, fillColor=  {255, 255, 255}, fillPattern=  FillPattern.Solid, textString=  "Corridor"), Rectangle(extent=  {{92, -88}, {112, -118}}, lineColor=  {0, 0, 0}, lineThickness=  1, fillColor=  {127, 0, 0}, fillPattern=  FillPattern.Forward), Ellipse(extent=  {{94, -100}, {96, -102}}, lineColor=  {0, 0, 0}, pattern=  LinePattern.None, lineThickness=  1, fillPattern=  FillPattern.Sphere, fillColor=  {255, 255, 0}), Rectangle(extent=  {{-62, 84}, {-42, 54}}, lineColor=  {0, 0, 0}, lineThickness=  1, fillColor=  {127, 0, 0}, fillPattern=  FillPattern.Forward), Ellipse(extent=  {{-44, 68}, {-46, 66}}, lineColor=  {0, 0, 0}, pattern=  LinePattern.None, lineThickness=  1, fillPattern=  FillPattern.Sphere, fillColor=  {255, 255, 0}), Rectangle(extent=  {{-160, -130}, {-140, -150}}, lineColor=  {0, 0, 0}, lineThickness=  0.5), Rectangle(extent=  {{-160, -100}, {-140, -120}}, lineColor=  {0, 0, 0}, lineThickness=  0.5), Rectangle(extent=  {{-160, -70}, {-140, -90}}, lineColor=  {0, 0, 0}, lineThickness=  0.5), Rectangle(extent=  {{-160, -10}, {-140, -30}}, lineColor=  {0, 0, 0}, lineThickness=  0.5), Rectangle(extent=  {{-160, 20}, {-140, 0}}, lineColor=  {0, 0, 0}, lineThickness=  0.5), Rectangle(extent=  {{-160, 140}, {-140, 120}}, lineColor=  {0, 0, 0}, lineThickness=  0.5), Rectangle(extent=  {{-160, -40}, {-140, -60}}, lineColor=  {0, 0, 0}, lineThickness=  0.5), Rectangle(extent=  {{-160, 90}, {-140, 28}}, lineColor=  {0, 0, 0}, lineThickness=  0.5), Line(points=  {{44, 62}, {50, 68}}, color=  {255, 255, 255}, thickness=  1), Line(points=  {{44, 58}, {54, 68}}, color=  {255, 255, 255}, thickness=  1), Line(points=  {{48, 58}, {54, 64}}, color=  {255, 255, 255}, thickness=  1), Text(extent=  {{50, 78}, {100, 62}}, lineColor=  {0, 0, 0}, lineThickness=  1, fillColor=  {255, 255, 255}, fillPattern=  FillPattern.Solid, textString=  "OW")}), Documentation(revisions = "<html>
+  connect(outsideWall.SolarRadiationPort, SolarRadiation_SE) annotation(Line(points = {{62, 87.6}, {62, 100}, {-66, 100}, {-66, 134}}, color = {255, 128, 0}));
+  connect(outsideWall.WindSpeedPort, WindSpeedPort) annotation(Line(points = {{48.8, 84.6}, {48.8, 100}, {-86, 100}, {-86, 30}, {-160, 30}}, color = {0, 0, 127}));
+  connect(Wall_Ceiling.port_outside, thermCeiling) annotation(Line(points={{104,
+          72.1},{104,84},{134,84},{134,-56},{-86,-56},{-86,-110},{-150,-110}},                                                                                      color = {191, 0, 0}));
+  connect(Wall_Floor.port_outside, thermFloor) annotation(Line(points={{104,
+          29.9},{104,4},{134,4},{134,-56},{-86,-56},{-86,-140},{-150,-140}},                                                                                  color = {191, 0, 0}));
+  connect(Wall_Children.port_outside, thermChildren) annotation(Line(points={{82.35,
+          14},{104,14},{104,4},{134,4},{134,-80},{-150,-80}},                                                                                        color = {191, 0, 0}));
+  connect(Wall_Corridor.port_outside, thermCorridor) annotation(Line(points={{19,
+          -48.25},{19,-48.25},{19,-56},{-86,-56},{-86,-50},{-150,-50}},                                                                                     color = {191, 0, 0}));
+  connect(Wall_Bedroom.port_outside, thermBedroom) annotation(Line(points={{-45,
+          -48.2},{-45,-56},{-86,-56},{-86,-20},{-150,-20}},                                                                                  color = {191, 0, 0}));
+  connect(Wall_Neighbour.port_outside, thermNeighbour) annotation(Line(points = {{-80.3, 15}, {-86, 15}, {-86, 10}, {-150, 10}}, color = {191, 0, 0}));
+  connect(infiltrationRate.port_a, thermOutside) annotation(Line(points = {{-72, -71}, {-86, -71}, {-86, 130}, {-150, 130}}, color = {191, 0, 0}));
+  connect(ThermRoom, ThermRoom) annotation(Line(points = {{-2, 14}, {-7, 14}, {-7, 14}, {-2, 14}}, color = {191, 0, 0}));
+  connect(thermStar_Demux.star, StarInside1) annotation(Line(points = {{13.6, -8.2}, {13.6, 3.2}, {26, 3.2}, {26, 14}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
+  connect(Wall_Children.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{68,14},
+          {54,14},{54,-32},{33.4,-32},{33.4,-14.1}},                                                                                                    color = {191, 0, 0}));
+  connect(Wall_Corridor.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{19,-38},
+          {19,-32},{33.4,-32},{33.4,-14.1}},                                                                                                    color = {191, 0, 0}));
+  connect(Wall_Bedroom.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{-45,-40},
+          {-45,-32},{33.4,-32},{33.4,-14.1}},                                                                                                    color = {191, 0, 0}));
+  connect(Wall_Neighbour.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{-68, 15}, {-56, 15}, {-56, -32}, {33.4, -32}, {33.4, -14.1}}, color = {191, 0, 0}));
+  connect(outsideWall.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{-4, 60}, {-4, 48}, {-56, 48}, {-56, -32}, {33.4, -32}, {33.4, -14.1}}, color = {191, 0, 0}));
+  connect(Wall_Ceiling.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{104,68},
+          {104,58},{54,58},{54,-32},{33.4,-32},{33.4,-14.1}},                                                                                                    color = {191, 0, 0}));
+  connect(Wall_Floor.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{104,34},
+          {104,58},{54,58},{54,-32},{33.4,-32},{33.4,-14.1}},                                                                                                    color = {191, 0, 0}));
+  connect(thermStar_Demux.therm, ThermRoom) annotation(Line(points = {{13.9, -19.1}, {13.9, -20}, {-20, -20}, {-20, 14}, {-2, 14}}, color = {191, 0, 0}));
+  connect(airload.port, infiltrationRate.port_b) annotation(Line(points = {{-29, 8}, {-20, 8}, {-20, -71}, {-46, -71}}, color = {191, 0, 0}));
+  connect(NaturalVentilation.InPort1, AirExchangePort) annotation(Line(points = {{-70.7, -107.32}, {-86, -107.32}, {-86, 70}, {-160, 70}}, color = {0, 0, 127}));
+  connect(NaturalVentilation.port_a, thermOutside) annotation(Line(points = {{-72, -99}, {-86, -99}, {-86, 130}, {-150, 130}}, color = {191, 0, 0}));
+  connect(airload.port, ThermRoom) annotation(Line(points = {{-29, 8}, {-20, 8}, {-20, 14}, {-2, 14}}, color = {191, 0, 0}));
+  connect(NaturalVentilation.port_b, airload.port) annotation(Line(points = {{-46, -99}, {-20, -99}, {-20, 8}, {-29, 8}}, color = {191, 0, 0}));
+  connect(outsideWall.port_outside, thermOutside) annotation(Line(points = {{-4, 84.6}, {-4, 100}, {-86, 100}, {-86, 130}, {-150, 130}}, color = {191, 0, 0}));
+  annotation(__Dymola_Images(Parameters(source = "AixLib/Resources/Images/Building/HighOrder/VoWo_Livingroom.png")), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-170, -150}, {170, 150}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-170, -150}, {170, 150}}), graphics={  Rectangle(extent=  {{-62, 60}, {112, -92}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 255},
+            fillPattern=                                                                                                    FillPattern.Forward), Rectangle(extent=  {{38, 72}, {60, 52}}, lineColor=  {0, 0, 0}, fillColor=  {85, 255, 255},
+            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{40, 70}, {58, 54}}, lineColor=  {0, 0, 0}, fillColor=  {170, 213, 255},
+            fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-56, -14}, {104, -32}}, lineColor=  {0, 0, 0}, fillColor=  {255, 0, 0},
+            fillPattern=                                                                                                    FillPattern.Forward, textString=  "Livingroom"), Text(extent=  {{42, -98}, {92, -114}}, lineColor=  {0, 0, 0},
+            lineThickness=                                                                                                    1, fillColor=  {255, 255, 255},
+            fillPattern=                                                                                                    FillPattern.Solid, textString=  "Corridor"), Rectangle(extent=  {{92, -88}, {112, -118}}, lineColor=  {0, 0, 0},
+            lineThickness=                                                                                                    1, fillColor=  {127, 0, 0},
+            fillPattern=                                                                                                    FillPattern.Forward), Ellipse(extent=  {{94, -100}, {96, -102}}, lineColor=  {0, 0, 0}, pattern=LinePattern.None,
+            lineThickness=                                                                                                    1,
+            fillPattern=                                                                                                    FillPattern.Sphere, fillColor=  {255, 255, 0}), Rectangle(extent=  {{-62, 84}, {-42, 54}}, lineColor=  {0, 0, 0},
+            lineThickness=                                                                                                    1, fillColor=  {127, 0, 0},
+            fillPattern=                                                                                                    FillPattern.Forward), Ellipse(extent=  {{-44, 68}, {-46, 66}}, lineColor=  {0, 0, 0}, pattern=  LinePattern.Solid,
+            lineThickness=                                                                                                    1,
+            fillPattern=                                                                                                    FillPattern.Sphere, fillColor=  {255, 255, 0}), Rectangle(extent=  {{-160, -130}, {-140, -150}}, lineColor=  {0, 0, 0},
+            lineThickness=                                                                                                    0.5), Rectangle(extent=  {{-160, -100}, {-140, -120}}, lineColor=  {0, 0, 0},
+            lineThickness=                                                                                                    0.5), Rectangle(extent=  {{-160, -70}, {-140, -90}}, lineColor=  {0, 0, 0},
+            lineThickness=                                                                                                    0.5), Rectangle(extent=  {{-160, -10}, {-140, -30}}, lineColor=  {0, 0, 0},
+            lineThickness=                                                                                                    0.5), Rectangle(extent=  {{-160, 20}, {-140, 0}}, lineColor=  {0, 0, 0},
+            lineThickness=                                                                                                    0.5), Rectangle(extent=  {{-160, 140}, {-140, 120}}, lineColor=  {0, 0, 0},
+            lineThickness=                                                                                                    0.5), Rectangle(extent=  {{-160, -40}, {-140, -60}}, lineColor=  {0, 0, 0},
+            lineThickness=                                                                                                    0.5), Rectangle(extent=  {{-160, 90}, {-140, 28}}, lineColor=  {0, 0, 0},
+            lineThickness=                                                                                                    0.5), Line(points=  {{44, 62}, {50, 68}}, color=  {255, 255, 255}, thickness=  1), Line(points=  {{44, 58}, {54, 68}}, color=  {255, 255, 255}, thickness=  1), Line(points=  {{48, 58}, {54, 64}}, color=  {255, 255, 255}, thickness=  1), Text(extent=  {{50, 78}, {100, 62}}, lineColor=  {0, 0, 0},
+            lineThickness=                                                                                                    1, fillColor=  {255, 255, 255},
+            fillPattern=                                                                                                    FillPattern.Solid, textString=  "OW")}), Documentation(revisions = "<html>
  <ul>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
  <li><i>August 16, 2011</i> by Ana Constantin:<br/>Implemented</li>
@@ -100,9 +134,10 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for the livingroom. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The following figure presents the room&apos;s layout:</p>
- <p><img src=\"modelica://AixLib/Images/House/VoWo_Livingroom.png\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Building/HighOrder/VoWo_Livingroom.png\"
+    alt=\"Room layout\"/></p>
  </html>"));
 end Livingroom_VoWo;

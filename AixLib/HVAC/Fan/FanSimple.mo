@@ -6,7 +6,7 @@ model FanSimple "Simple Fan Model"
   parameter AixLib.DataBase.Fans.FanCharacteristicsBaseDataDefinition Characteristics = AixLib.DataBase.Fans.Fan1()
     "dp = f(V_flow)  characteristics for the Fan (n = const)"                                                                                                     annotation(choicesAllMatching = true);
   parameter Boolean UseRotationalSpeedInput = false
-    "If true, rotational speed (n/n_0) can be varied by real input"                                                 annotation(Evaluate = true, HideResult = true, choices(__Dymola_checkBox = true));
+    "If true, rotational speed (n/n_0) can be varied by real input"                                                 annotation(Evaluate = true, HideResult = true, choices(checkBox = true));
   Modelica.SIunits.VolumeFlowRate Volflow(min = 0) "Volume Flow before Fan";
   Modelica.SIunits.Pressure PressureIncrease(min = 0)
     "Pressure Increase of Fan";
@@ -52,11 +52,11 @@ equation
   Volflow = portMoistAir_a.m_flow / rho_MoistAir;
   Power = P_t;
   annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Ellipse(extent=  {{-100, 100}, {100, -100}}, lineColor=  {0, 0, 0},
-            fillPattern=                                                                                                    FillPattern.Solid, fillColor=  {170, 255, 255}), Line(points=  {{-78, 60}, {92, 40}, {90, 40}}, color=  {0, 0, 0}, smooth=  Smooth.None), Line(points=  {{-80, -60}, {92, -40}, {92, -40}}, color=  {0, 0, 0}, smooth=  Smooth.None)}), Documentation(info = "<html>
+            fillPattern=                                                                                                    FillPattern.Solid, fillColor=  {170, 255, 255}), Line(points=  {{-78, 60}, {92, 40}, {90, 40}}, color=  {0, 0, 0}), Line(points=  {{-80, -60}, {92, -40}, {92, -40}}, color=  {0, 0, 0})}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>A simple fan model with variation of rotational speed. The properties of the fan are table based.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Example Results</span></h4>
  <p><a href=\"AixLib.HVAC.Fan.Examples.SpeedControlOfFan\">AixLib.HVAC.Fan.Examples.SpeedControlOfFan</a> </p>
  <p><a href=\"AixLib.HVAC.Fan.Examples.FansSerialAndParallel\">AixLib.HVAC.Fan.Examples.FansSerialAndParallel</a> </p>
@@ -65,5 +65,5 @@ equation
  <ul>
  <li>implemented</li>
  </ul>
- </html>"), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
+ </html>"));
 end FanSimple;

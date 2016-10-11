@@ -2,13 +2,77 @@ within AixLib.Fluid.Interfaces;
 model ConservationEquation "Lumped volume with mass and energy balance"
 
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
+
+  // Constants
   constant Boolean initialize_p = not Medium.singleState
     "= true to set up initial equations for pressure"
     annotation(HideResult=true);
 
+  constant Boolean simplify_mWat_flow = true
+    "Set to true to cause port_a.m_flow + port_b.m_flow = 0 even if mWat_flow is non-zero";
+
   // Port definitions
   parameter Integer nPorts=0 "Number of ports"
     annotation(Evaluate=true, Dialog(connectorSizing=true, tab="General",group="Ports"));
+
+  parameter Boolean use_mWat_flow = false
+    "Set to true to enable input connector for moisture mass flow rate"
+    annotation(Evaluate=true, Dialog(tab="Advanced"));
+  parameter Boolean use_C_flow = false
+    "Set to true to enable input connector for trace substance"
+    annotation(Evaluate=true, Dialog(tab="Advanced"));
+
+  Modelica.Blocks.Interfaces.RealInput Q_flow(unit="W")
+    "Sensible plus latent heat flow rate transferred into the medium"
+    annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
+  Modelica.Blocks.Interfaces.RealInput mWat_flow(final quantity="MassFlowRate",
+                                                 unit="kg/s") if
+       use_mWat_flow "Moisture mass flow rate added to the medium"
+    annotation (Placement(transformation(extent={{-140,0},{-100,40}})));
+  Modelica.Blocks.Interfaces.RealInput[Medium.nC] C_flow if
+       use_C_flow "Trace substance mass flow rate added to the medium"
+    annotation (Placement(transformation(extent={{-140,-60},{-100,-20}})));
+
+  // Outputs that are needed in models that use this model
+  Modelica.Blocks.Interfaces.RealOutput hOut(unit="J/kg",
+                                             start=hStart)
+    "Leaving specific enthalpy of the component"
+     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={-50,110})));
+  Modelica.Blocks.Interfaces.RealOutput XiOut[Medium.nXi](each unit="1",
+                                                          each min=0,
+                                                          each max=1)
+    "Leaving species concentration of the component"
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={0,110})));
+  Modelica.Blocks.Interfaces.RealOutput COut[Medium.nC](each min=0)
+    "Leaving trace substances of the component"
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={50,110})));
+  Modelica.Blocks.Interfaces.RealOutput UOut(unit="J")
+    "Internal energy of the component" annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={110,20})));
+  Modelica.Blocks.Interfaces.RealOutput mXiOut[Medium.nXi](each min=0, each unit=
+       "kg") "Species mass of the component"
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={110,-20})));
+  Modelica.Blocks.Interfaces.RealOutput mOut(min=0, unit="kg")
+    "Mass of the component" annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={110,60})));
+  Modelica.Blocks.Interfaces.RealOutput mCOut[Medium.nC](each min=0, each unit="kg")
+    "Trace substance mass of the component"
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={110,-60})));
+
   Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts](
       redeclare each final package Medium = Medium) "Fluid inlets and outlets"
     annotation (Placement(transformation(extent={{-40,-10},{40,10}},
@@ -16,19 +80,19 @@ model ConservationEquation "Lumped volume with mass and energy balance"
 
   // Set nominal attributes where literal values can be used.
   Medium.BaseProperties medium(
-    preferredMediumStates= not (energyDynamics == Modelica.Fluid.Types.Dynamics.SteadyState),
-    p(start=p_start,
-      stateSelect=if not (massDynamics == Modelica.Fluid.Types.Dynamics.SteadyState)
-                     then StateSelect.prefer else StateSelect.default),
+    p(start=p_start),
     h(start=hStart),
     T(start=T_start),
-    Xi(start=X_start[1:Medium.nXi],
-       each stateSelect=if (not (substanceDynamics == Modelica.Fluid.Types.Dynamics.SteadyState))
-                     then StateSelect.prefer else StateSelect.default),
+    Xi(start=X_start[1:Medium.nXi]),
     X(start=X_start),
-    d(start=rho_nominal)) "Medium properties";
+    d(start=rho_start)) "Medium properties";
 
-  Modelica.SIunits.Energy U "Internal energy of fluid";
+  Modelica.SIunits.Energy U(start=fluidVolume*rho_start*
+    Medium.specificInternalEnergy(Medium.setState_pTX(
+     T=T_start,
+     p=p_start,
+     X=X_start[1:Medium.nXi])) +
+    (T_start - Medium.reference_T)*CSen) "Internal energy of fluid";
   Modelica.SIunits.Mass m "Mass of fluid";
   Modelica.SIunits.Mass[Medium.nXi] mXi
     "Masses of independent components in the fluid";
@@ -46,37 +110,11 @@ model ConservationEquation "Lumped volume with mass and energy balance"
   Modelica.SIunits.EnthalpyFlowRate Hb_flow
     "Enthalpy flow across boundaries or energy source/sink";
 
-  // Inputs that need to be defined by an extending class
+  // Parameters that need to be defined by an extending class
   parameter Modelica.SIunits.Volume fluidVolume "Volume";
   final parameter Modelica.SIunits.HeatCapacity CSen=
     (mSenFac - 1)*rho_default*cp_default*fluidVolume
     "Aditional heat capacity for implementing mFactor";
-  Modelica.Blocks.Interfaces.RealInput Q_flow(unit="W")
-    "Sensible plus latent heat flow rate transferred into the medium"
-    annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
-  Modelica.Blocks.Interfaces.RealInput mWat_flow(unit="kg/s")
-    "Moisture mass flow rate added to the medium"
-    annotation (Placement(transformation(extent={{-140,0},{-100,40}})));
-
-  // Outputs that are needed in models that extend this model
-  Modelica.Blocks.Interfaces.RealOutput hOut(unit="J/kg",
-                                             start=hStart)
-    "Leaving enthalpy of the component"
-     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={-50,110})));
-  Modelica.Blocks.Interfaces.RealOutput XiOut[Medium.nXi](each unit="1",
-                                                          each min=0,
-                                                          each max=1)
-    "Leaving species concentration of the component"
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={0,110})));
-  Modelica.Blocks.Interfaces.RealOutput COut[Medium.nC](each min=0)
-    "Leaving trace substances of the component"
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={50,110})));
 protected
   Medium.EnthalpyFlowRate ports_H_flow[nPorts];
   Modelica.SIunits.MassFlowRate ports_mXi_flow[nPorts,Medium.nXi];
@@ -84,7 +122,7 @@ protected
   parameter Modelica.SIunits.SpecificHeatCapacity cp_default=
   Medium.specificHeatCapacityCp(state=state_default)
     "Heat capacity, to compute additional dry mass";
-  parameter Modelica.SIunits.Density rho_nominal=Medium.density(
+  parameter Modelica.SIunits.Density rho_start=Medium.density(
    Medium.setState_pTX(
      T=T_start,
      p=p_start,
@@ -101,7 +139,8 @@ protected
   final parameter Modelica.SIunits.Density rho_default=Medium.density(
     state=state_default) "Density, used to compute fluid mass";
   // Parameter that is used to construct the vector mXi_flow
-  final parameter Real s[Medium.nXi] = {if Modelica.Utilities.Strings.isEqual(string1=Medium.substanceNames[i],
+  final parameter Real s[Medium.nXi] = {if Modelica.Utilities.Strings.isEqual(
+                                            string1=Medium.substanceNames[i],
                                             string2="Water",
                                             caseSensitive=false)
                                             then 1 else 0 for i in 1:Medium.nXi}
@@ -109,6 +148,13 @@ protected
   parameter Modelica.SIunits.SpecificEnthalpy hStart=
     Medium.specificEnthalpy_pTX(p_start, T_start, X_start)
     "Start value for specific enthalpy";
+
+  // Conditional connectors
+  Modelica.Blocks.Interfaces.RealInput mWat_flow_internal(unit="kg/s")
+    "Needed to connect to conditional connector";
+  Modelica.Blocks.Interfaces.RealInput C_flow_internal[Medium.nC]
+    "Needed to connect to conditional connector";
+
 initial equation
   // Assert that the substance with name 'water' has been found.
   assert(Medium.nXi == 0 or abs(sum(s)-1) < 1e-5,
@@ -165,11 +211,32 @@ initial equation
   end if;
 
 equation
+  // Conditional connectors
+  connect(mWat_flow, mWat_flow_internal);
+  if not use_mWat_flow then
+    mWat_flow_internal = 0;
+  end if;
+
+  connect(C_flow, C_flow_internal);
+  if not use_C_flow then
+    C_flow_internal = zeros(Medium.nC);
+  end if;
+
   // Total quantities
   if massDynamics == Modelica.Fluid.Types.Dynamics.SteadyState then
-    m = fluidVolume*rho_nominal;
+    m = fluidVolume*rho_start;
   else
-    m = fluidVolume*medium.d;
+    if simplify_mWat_flow then
+      // If moisture is neglected in mass balance, assume for computation
+      // of the mass of air that the air is at Medium.X_default.
+      m = fluidVolume*Medium.density(Medium.setState_phX(
+        p=  medium.p,
+        h=  hOut,
+        X=  Medium.X_default));
+    else
+      // Use actual density
+      m = fluidVolume*medium.d;
+    end if;
   end if;
   mXi = m*medium.Xi;
   if computeCSen then
@@ -184,12 +251,19 @@ equation
   COut = C;
 
   for i in 1:nPorts loop
-    ports_H_flow[i]     = ports[i].m_flow * actualStream(ports[i].h_outflow)
+    //The semiLinear function should be used for the equations below
+    //for allowing min/max simplifications.
+    //See https://github.com/iea-annex60/modelica-annex60/issues/216 for a discussion and motivation
+    ports_H_flow[i]     = semiLinear(ports[i].m_flow, inStream(ports[i].h_outflow), ports[i].h_outflow)
       "Enthalpy flow";
-    ports_mXi_flow[i,:] = ports[i].m_flow * actualStream(ports[i].Xi_outflow)
-      "Component mass flow";
-    ports_mC_flow[i,:]  = ports[i].m_flow * actualStream(ports[i].C_outflow)
-      "Trace substance mass flow";
+    for j in 1:Medium.nXi loop
+      ports_mXi_flow[i,j] = semiLinear(ports[i].m_flow, inStream(ports[i].Xi_outflow[j]), ports[i].Xi_outflow[j])
+        "Component mass flow";
+    end for;
+    for j in 1:Medium.nC loop
+      ports_mC_flow[i,j]  = semiLinear(ports[i].m_flow, inStream(ports[i].C_outflow[j]),  ports[i].C_outflow[j])
+        "Trace substance mass flow";
+    end for;
   end for;
 
   for i in 1:Medium.nXi loop
@@ -211,21 +285,21 @@ equation
   end if;
 
   if massDynamics == Modelica.Fluid.Types.Dynamics.SteadyState then
-    0 = mb_flow + mWat_flow;
+    0 = mb_flow + (if simplify_mWat_flow then 0 else mWat_flow_internal);
   else
-    der(m) = mb_flow + mWat_flow;
+    der(m) = mb_flow + (if simplify_mWat_flow then 0 else mWat_flow_internal);
   end if;
 
   if substanceDynamics == Modelica.Fluid.Types.Dynamics.SteadyState then
-    zeros(Medium.nXi) = mbXi_flow + mWat_flow * s;
+    zeros(Medium.nXi) = mbXi_flow + mWat_flow_internal * s;
   else
-    der(mXi) = mbXi_flow + mWat_flow * s;
+    der(mXi) = mbXi_flow + mWat_flow_internal * s;
   end if;
 
   if traceDynamics == Modelica.Fluid.Types.Dynamics.SteadyState then
-    zeros(Medium.nC)  = mbC_flow;
+    zeros(Medium.nC)  = mbC_flow + C_flow_internal;
   else
-    der(mC)  = mbC_flow;
+    der(mC)  = mbC_flow + C_flow_internal;
   end if;
 
   // Properties of outgoing flows
@@ -235,7 +309,10 @@ equation
       ports[i].Xi_outflow = medium.Xi;
       ports[i].C_outflow  = C;
   end for;
-
+  UOut=U;
+  mXiOut=mXi;
+  mOut=m;
+  mCOut=mC;
   annotation (
     Documentation(info="<html>
 <p>
@@ -243,6 +320,61 @@ Basic model for an ideally mixed fluid volume with the ability to store mass and
 It implements a dynamic or a steady-state conservation equation for energy and mass fractions.
 The model has zero pressure drop between its ports.
 </p>
+<p>
+If the constant <code>simplify_mWat_flow = true</code> then adding
+moisture does not increase the mass of the volume or the leaving mass flow rate.
+It does however change the mass fraction <code>medium.Xi</code>.
+This allows to decouple the moisture balance from the pressure drop equations.
+If <code>simplify_mWat_flow = false</code>, then
+the outlet mass flow rate is
+<i>m<sub>out</sub> = m<sub>in</sub>  (1 + &Delta; X<sub>w</sub>)</i>,
+where 
+<i>&Delta; X<sub>w</sub></i> is the change in water vapor mass
+fraction across the component. In this case,
+this component couples
+the energy calculation to the
+pressure drop versus mass flow rate calculations.
+However, in typical building HVAC systems,
+<i>&Delta; X<sub>w</sub></i> &lt; <i>0.005</i> kg/kg.
+Hence, by tolerating a relative error of <i>0.005</i> in the mass balance,
+one can decouple these equations.
+Decoupling these equations avoids having
+to compute the energy balance of the humidifier
+and its upstream components when solving for the
+pressure drop of downstream components.
+Therefore, the default value is <code>simplify_mWat_flow = true</code>.
+</p>
+<h4>Typical use and important parameters</h4>
+<p>
+Set the parameter <code>use_mWat_flow_in=true</code> to enable an
+input connector for <code>mWat_flow</code>.
+Otherwise, the model uses <code>mWat_flow = 0</code>.
+</p>
+<p>
+If the constant <code>simplify_mWat_flow = true</code>, which is its default value,
+then the equation
+</p>
+<pre>
+  port_a.m_flow + port_b.m_flow = - mWat_flow;
+</pre>
+<p>
+is simplified as
+</p>
+<pre>
+  port_a.m_flow + port_b.m_flow = 0;
+</pre>
+<p>
+This causes an error in the mass balance of about <i>0.5%</i>, but generally leads to
+simpler equations because the pressure drop equations are then decoupled from the
+mass exchange in this component.
+The model
+<a href=\"modelica://AixLib.Fluid.MixingVolumes.Validation.MixingVolumeAdiabaticCooling\">
+AixLib.Fluid.MixingVolumes.Validation.MixingVolumeAdiabaticCooling</a>
+shows that the relative error on the temperature difference between these
+two options of <code>simplify_mWat_flow</code> is less than
+<i>0.1%</i>.
+</p>
+
 <h4>Implementation</h4>
 <p>
 When extending or instantiating this model, the input
@@ -253,12 +385,16 @@ For most components, this can be set to a parameter.
 Input connectors of the model are
 <ul>
 <li>
-<code>Q_flow</code>, which is the sensible plus latent heat flow rate added to the medium, and
+<code>Q_flow</code>, which is the sensible plus latent heat flow rate added to the medium,
 </li>
 <li>
-<code>mWat_flow</code>, which is the moisture mass flow rate added to the medium.
+<code>mWat_flow</code>, which is the moisture mass flow rate added to the medium, and
+</li>
+<li>
+<code>C_flow</code>, which is the trace substance mass flow rate added to the medium.
 </li>
 </ul>
+
 <p>
 The model can be used as a dynamic model or as a steady-state model.
 However, for a steady-state model with exactly two fluid ports connected,
@@ -275,8 +411,105 @@ AixLib.Fluid.MixingVolumes.MixingVolume</a>.
 </html>", revisions="<html>
 <ul>
 <li>
+February 19, 2016 by Filip Jorissen:<br/>
+Added outputs UOut, mOut, mXiOut, mCOut for being able to
+check conservation of quantities. 
+This if or <a href=\"https://github.com/iea-annex60/modelica-annex60/issues/247\">
+issue 247</a>.
+</li>
+<li>
+January 17, 2016, by Michael Wetter:<br/>
+Added parameter <code>use_C_flow</code> and converted <code>C_flow</code>
+to a conditionally removed connector.
+This is for
+<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/372\">#372</a>.
+</li>
+<li>
+December 16, 2015, by Michael Wetter:<br/>
+Added <code>C_flow</code> to the steady-state trace substance balance,
+and removed the units of <code>C_flow</code> to allow for PPM.
+</li>
+<li>
+December 2, 2015, by Filip Jorissen:<br/>
+Added input <code>C_flow</code> and code for handling trace substance insertions.
+</li>
+<li>
+September 3, 2015, by Filip Jorissen and Michael Wetter:<br/>
+Revised implementation for allowing moisture mass flow rate 
+to be approximated using parameter <code>simplify_mWat_flow</code>. 
+This may lead to smaller algebraic loops.
+This is for
+<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/247\">#247</a>.
+</li>
+<li>
+July 17, 2015, by Michael Wetter:<br/>
+Added constant <code>simplify_mWat_flow</code> to remove dependencies of the pressure drop
+calculation on the moisture balance.
+</li>
+<li>
+June 5, 2015 by Michael Wetter:<br/>
+Removed <code>preferredMediumStates= false</code> in
+the instance <code>medium</code> as the default
+is already <code>false</code>.
+This is for
+<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/260\">#260</a>.
+</li>
+<li>
+June 5, 2015 by Filip Jorissen:<br/>
+Removed <pre>
+Xi(start=X_start[1:Medium.nXi],
+       each stateSelect=if (not (substanceDynamics == Modelica.Fluid.Types.Dynamics.SteadyState))
+       then StateSelect.prefer else StateSelect.default),
+</pre>
+and set
+<code>preferredMediumStates = false</code>
+because the previous declaration led to more equations and
+translation problems in large models.
+This is for
+<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/260\">#260</a>.
+</li>
+<li>
+June 5, 2015, by Michael Wetter:<br/>
+Moved assignment of <code>dynBal.U.start</code>
+from instance <code>dynBal</code> of <code>PartialMixingVolume</code>
+to this model implementation.
+This is required for a pedantic model check in Dymola 2016.
+It addresses
+<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/266\">
+issue 266</a>.
+This revison also renames the protected variable
+<code>rho_nominal</code> to <code>rho_start</code>
+as it depends on the start values and not the nominal values.
+</li>
+<li>
+May 22, 2015 by Michael Wetter:<br/>
+Removed <pre>
+p(stateSelect=if not (massDynamics == Modelica.Fluid.Types.Dynamics.SteadyState)
+then StateSelect.prefer else StateSelect.default)
+</pre>
+because the previous declaration led to the translation error
+<pre>
+The model requires derivatives of some inputs as listed below:
+1 inlet.m_flow
+1 inlet.p
+</pre>
+when translating
+<code>Buildings.Fluid.FMI.Examples.FMU.HeaterCooler_u</code>
+with a dynamic energy balance.
+</li>
+<li>
+May 6, 2015, by Michael Wetter:<br/>
+Corrected documentation.
+</li>
+<li>
+April 13, 2015, by Filip Jorissen:<br/>
+Now using <code>semiLinear()</code> function for calculation of
+<code>ports_H_flow</code>. This enables Dymola to simplify based on
+the <code>min</code> and <code>max</code> attribute of the mass flow rate.
+</li>
+<li>
 February 16, 2015, by Filip Jorissen:<br/>
-Fixed SteadyState massDynamics implementation for compressible media. 
+Fixed SteadyState massDynamics implementation for compressible media.
 Mass <code>m</code> is now constant.
 </li>
 <li>
@@ -440,5 +673,7 @@ Implemented first version in <code>AixLib</code> library, based on model from
         Text(
           extent={{-155,-120},{145,-160}},
           lineColor={0,0,255},
-          textString="%name")}));
+          textString="%name")}),
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
+            100,100}})));
 end ConservationEquation;

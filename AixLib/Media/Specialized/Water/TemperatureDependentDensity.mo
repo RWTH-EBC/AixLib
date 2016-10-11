@@ -8,7 +8,9 @@ package TemperatureDependentDensity
      reference_T=273.15,
      reference_X={1},
      final singleState=true,
-     ThermoStates=Modelica.Media.Interfaces.Choices.IndependentVariables.T);
+     ThermoStates=Modelica.Media.Interfaces.Choices.IndependentVariables.T,
+     AbsolutePressure(start=p_default),
+     Temperature(start=T_default));
    extends Modelica.Icons.Package;
 
   redeclare record FluidConstants =
@@ -20,8 +22,8 @@ package TemperatureDependentDensity
     each molarMass=MM_const);
 
   redeclare record extends ThermodynamicState "Thermodynamic state variables"
-    Modelica.SIunits.Temperature T(start=T_default) "Temperature of medium";
-    Modelica.SIunits.AbsolutePressure p(start=p_default) "Pressure of medium";
+    Temperature T(start=T_default) "Temperature of medium";
+    AbsolutePressure p(start=p_default) "Pressure of medium";
   end ThermodynamicState;
 
   constant Modelica.SIunits.SpecificHeatCapacity cp_const = 4184
@@ -37,7 +39,7 @@ package TemperatureDependentDensity
     state.p = p;
     R=Modelica.Constants.R;
     MM=MM_const;
-    annotation (Documentation(info="<html>
+    annotation(Documentation(info="<html>
     <p>
     Base properties of the medium.
     </p>
@@ -54,7 +56,9 @@ algorithm
       + 254.900074971947
     else
      -0.7025109*state.T + 1220.35045233);
-  annotation (smoothOrder=1,
+  annotation (
+  smoothOrder=1,
+  Inline=true,
 Documentation(info="<html>
 <p>
 This function computes the density as a function of temperature.
@@ -90,7 +94,8 @@ redeclare function extends dynamicViscosity "Return the dynamic viscosity"
 algorithm
   eta := density(state)*kinematicViscosity(state.T);
 annotation (
-Documentation(info="<html>
+  Inline=true,
+  Documentation(info="<html>
 <p>
 This function computes the dynamic viscosity.
 </p>
@@ -108,8 +113,10 @@ end dynamicViscosity;
 redeclare function extends specificEnthalpy "Return the specific enthalpy"
 algorithm
   h := (state.T - reference_T)*cp_const;
-annotation(smoothOrder=5,
-Documentation(info="<html>
+annotation (
+  smoothOrder=5,
+  Inline=true,
+  Documentation(info="<html>
 <p>
 This function computes the specific enthalpy.
 </p>
@@ -130,7 +137,10 @@ function enthalpyOfLiquid "Return the specific enthalpy of liquid"
   output Modelica.SIunits.SpecificEnthalpy h "Specific enthalpy";
 algorithm
   h := (T - reference_T)*cp_const;
-  annotation(smoothOrder=5, derivative=der_enthalpyOfLiquid,
+  annotation (
+    smoothOrder=5,
+    Inline=true,
+    derivative=der_enthalpyOfLiquid,
 Documentation(info="<html>
 <p>
 This function computes the specific enthalpy of liquid water.
@@ -150,8 +160,10 @@ redeclare function extends specificInternalEnergy
     "Return the specific enthalpy"
 algorithm
   u := specificEnthalpy(state) - reference_p/density(state);
-annotation(smoothOrder=5,
-Documentation(info="<html>
+annotation (
+  smoothOrder=5,
+  Inline=true,
+  Documentation(info="<html>
 <p>
 This function computes the specific internal energy.
 </p>
@@ -171,6 +183,7 @@ redeclare function extends specificEntropy "Return the specific entropy"
 algorithm
   s := cv_const*Modelica.Math.log(state.T/reference_T);
   annotation (
+    Inline=true,
     Documentation(info="<html>
 <p>
 This function computes the specific entropy.
@@ -197,7 +210,8 @@ redeclare function extends specificGibbsEnergy
 algorithm
   g := specificEnthalpy(state) - state.T*specificEntropy(state);
 annotation (
-Documentation(info="<html>
+  Inline=true,
+  Documentation(info="<html>
 <p>
 This function computes the specific Gibbs energy.
 </p>
@@ -218,7 +232,8 @@ redeclare function extends specificHelmholtzEnergy
 algorithm
   f := specificInternalEnergy(state) - state.T*specificEntropy(state);
 annotation (
-Documentation(info="<html>
+  Inline=true,
+  Documentation(info="<html>
 <p>
 This function computes the specific Helmholtz energy.
 </p>
@@ -240,7 +255,8 @@ algorithm
             s=specificEntropy(refState),
             X={1}));
 annotation (
-Documentation(info="<html>
+  Inline=true,
+  Documentation(info="<html>
 <p>
 This function computes the specific enthalpy for
 an isentropic state change from the temperature
@@ -276,7 +292,8 @@ algorithm
 //               3.202446788)/((1.5009e-05)*T_degC^3 - 0.00583576*T_degC^2 +
 //               0.0143711*state.T + 996.194534035)
 annotation (
-Documentation(info="<html>
+  Inline=true,
+  Documentation(info="<html>
 <p>
 This function returns the isobaric expansion coefficient,
 </p>
@@ -305,7 +322,8 @@ redeclare function extends isothermalCompressibility
 algorithm
   kappa := 0;
 annotation (
-Documentation(info="<html>
+  Inline=true,
+  Documentation(info="<html>
 <p>
 This function returns the isothermal compressibility coefficient,
 which is zero as this medium is incompressible.
@@ -336,7 +354,8 @@ redeclare function extends density_derp_T
 algorithm
   ddpT := 0;
 annotation (
-Documentation(info="<html>
+  Inline=true,
+  Documentation(info="<html>
 <p>
 This function returns the partial derivative of density
 with respect to pressure at constant temperature,
@@ -356,14 +375,17 @@ end density_derp_T;
 redeclare function extends density_derT_p
     "Return the partial derivative of density with respect to temperature at constant pressure"
 algorithm
-  ddTp := smooth(1, if state.T < 278.15 then
+  ddTp := if state.T < 278.15 then
             -0.042860825
           elseif state.T < 373.15 then
             (0.0000450270000000000*state.T^2 - 0.0362697701000000*state.T +
             6.56195279540750)
           else
-           -0.7025109);
-  annotation (smoothOrder=1, Documentation(info=
+           -0.7025109;
+  annotation (
+  smoothOrder=1,
+  Inline=true,
+  Documentation(info=
                    "<html>
 <p>
 This function computes the derivative of density with respect to temperature
@@ -372,6 +394,12 @@ at constant pressure.
 </html>", revisions=
 "<html>
 <ul>
+<li>
+August 17, 2015, by Michael Wetter:<br/>
+Removed dublicate entry of <code>smooth</code> and <code>smoothOrder</code>.
+This is for
+<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/303\">issue 303</a>.
+</li>
 <li>
 December 18, 2013, by Michael Wetter:<br/>
 First implementation, based on the IDA implementation in <code>therpro.nmf</code>,
@@ -386,7 +414,8 @@ redeclare function extends density_derX
 algorithm
   dddX := fill(0, nX);
 annotation (
-Documentation(info="<html>
+  Inline=true,
+  Documentation(info="<html>
 <p>
 This function returns the partial derivative of density
 with respect to mass fraction,
@@ -407,7 +436,9 @@ redeclare replaceable function extends specificHeatCapacityCp
     "Return the specific heat capacity at constant pressure"
 algorithm
   cp := cp_const;
-    annotation(derivative=der_specificHeatCapacityCp,
+  annotation (
+    Inline=true,
+    derivative=der_specificHeatCapacityCp,
 Documentation(info="<html>
 <p>
 This function returns the specific heat capacity at constant pressure.
@@ -427,7 +458,9 @@ redeclare replaceable function extends specificHeatCapacityCv
     "Return the specific heat capacity at constant volume"
 algorithm
   cv := cv_const;
-    annotation(derivative=der_specificHeatCapacityCp,
+  annotation (
+    Inline=true,
+    derivative=der_specificHeatCapacityCp,
 Documentation(info="<html>
 <p>
 This function computes the specific heat capacity at constant volume.
@@ -448,7 +481,8 @@ redeclare function extends thermalConductivity
 algorithm
   lambda :=0.6065*(-1.48445 + 4.12292*(state.T/298.15) - 1.63866*(state.T/298.15)^2);
   annotation (
-Documentation(info="<html>
+    Inline=true,
+    Documentation(info="<html>
 <p>
 This function returns the thermal conductivity.
 The expression is obtained from Ramires et al. (1995).
@@ -476,7 +510,8 @@ redeclare function extends pressure "Return the pressure"
 algorithm
     p := state.p;
 annotation (
-smoothOrder=99,
+  Inline=true,
+  smoothOrder=99,
 Documentation(info="<html>
 <p>
 This function returns the pressure.
@@ -496,7 +531,8 @@ redeclare function extends temperature "Return the temperature"
 algorithm
     T := state.T;
 annotation (
-smoothOrder=99,
+  Inline=true,
+  smoothOrder=99,
 Documentation(info="<html>
 <p>
 This function returns the temperature.
@@ -515,9 +551,10 @@ end temperature;
 redeclare function extends molarMass "Return the molar mass"
 algorithm
     MM := MM_const;
-    annotation (
-smoothOrder=99,
-Documentation(info="<html>
+  annotation (
+    Inline=true,
+    smoothOrder=99,
+    Documentation(info="<html>
 <p>
 This function returns the molar mass,
 which is assumed to be constant.
@@ -533,25 +570,26 @@ First implementation.
 </html>"));
 end molarMass;
 
-  redeclare function setState_dTX
+redeclare function setState_dTX
     "Return thermodynamic state from d, T, and X or Xi"
     extends Modelica.Icons.Function;
     input Density d "Density";
     input Temperature T "Temperature";
     input MassFraction X[:]=reference_X "Mass fractions";
     output ThermodynamicState state "Thermodynamic state record";
-  algorithm
+algorithm
     assert(false,
       "Pressure can not be computed from temperature and density for an incompressible fluid!");
-  end setState_dTX;
+end setState_dTX;
 
 redeclare function extends setState_phX
     "Return the thermodynamic state as function of pressure p, specific enthalpy h and composition X or Xi"
 algorithm
   state := ThermodynamicState(p=p, T=reference_T + h/cp_const);
   annotation (
-smoothOrder=99,
-Documentation(info="<html>
+    Inline=true,
+    smoothOrder=99,
+    Documentation(info="<html>
 <p>
 This function returns the thermodynamic state for a given pressure,
 specific enthalpy and composition.
@@ -571,8 +609,10 @@ redeclare function extends setState_pTX
     "Return the thermodynamic state as function of p, T and composition X or Xi"
 algorithm
     state := ThermodynamicState(p=p, T=T);
-annotation (smoothOrder=99,
-Documentation(info="<html>
+annotation (
+  smoothOrder=99,
+  Inline=true,
+  Documentation(info="<html>
 <p>
 This function returns the thermodynamic state for a given pressure,
 temperature and composition.
@@ -596,20 +636,25 @@ algorithm
   // s := cv_const*Modelica.Math.log(state.T/reference_T)
   state := ThermodynamicState(p=p, T=reference_T * Modelica.Math.exp(s/cv_const));
   annotation (
-Inline=false,
-Documentation(info="<html>
+    Inline=true,
+    Documentation(info="<html>
 <p>
 This function returns the thermodynamic state based on pressure,
 specific entropy and mass fraction.
 </p>
 <p>
 The state is computed by symbolically solving
-<a href=\"modelica://AixLib.Media.Water.Detailed.specificEntropy\">
-AixLib.Media.Water.Detailed.specificEntropy</a>
+<a href=\"modelica://AixLib.Media.Specialized.Water.TemperatureDependentDensity.specificEntropy\">
+AixLib.Media.Specialized.Water.TemperatureDependentDensity.specificEntropy</a>
 for temperature.
   </p>
 </html>", revisions="<html>
 <ul>
+<li>
+April 11, 2016 by Michael Wetter:<br/>
+Corrected wrong hyperlink in documentation for
+<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/450\">issue 450</a>.
+</li>
 <li>
 December 11, 2013, by Michael Wetter:<br/>
 First implementation.
@@ -642,7 +687,8 @@ replaceable function der_specificHeatCapacityCp
 algorithm
   der_cp := 0;
 annotation (
-Documentation(info="<html>
+  Inline=true,
+  Documentation(info="<html>
 <p>
 This function computes the derivative of the specific heat capacity
 at constant pressure with respect to the state.
@@ -666,7 +712,9 @@ replaceable function der_enthalpyOfLiquid
   output Real der_h "Derivative of liquid enthalpy";
 algorithm
   der_h := cp_const*der_T;
- annotation (Documentation(info=
+annotation (
+  Inline=true,
+  Documentation(info=
 "<html>
 <p>
 This function computes the temperature derivative of the enthalpy of liquid water
@@ -697,8 +745,10 @@ algorithm
       -(7.22111000000000e-7)*T^3 + 0.000809102858950000*T^2
       - 0.312920238272193*T + 40.4003044106506));
 
-annotation (smoothOrder=1,
-Documentation(info="<html>
+annotation (
+  Inline=true,
+  smoothOrder=1,
+  Documentation(info="<html>
 <p>
 This function computes the kinematic viscosity as a function of temperature.
 </p>
@@ -717,12 +767,17 @@ In addition, at 5 &deg;C the kinematic viscosity is linearly extrapolated
 to avoid a large gradient at very low temperatures.
 We selected the same point for the linearization as we used for the density,
 as the density and the kinematic viscosity are combined in
-<a href=\"modelica://AixLib.Media.Water.Detailed.dynamicViscosity\">
-AixLib.Media.Water.Detailed.dynamicViscosity</a>.
+<a href=\"modelica://AixLib.Media.Specialized.Water.TemperatureDependentDensity.dynamicViscosity\">
+AixLib.Media.Specialized.Water.TemperatureDependentDensity.dynamicViscosity</a>.
 </p>
 </html>",
 revisions="<html>
 <ul>
+<li>
+April 11, 2016 by Michael Wetter:<br/>
+Corrected wrong hyperlink in documentation for
+<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/450\">issue 450</a>.
+</li>
 <li>
 December 18, 2013, by Michael Wetter:<br/>
 First implementation, based on the IDA implementation in <code>therpro.nmf</code>,
@@ -732,7 +787,7 @@ but converted from Celsius to Kelvin.
 </html>"));
 end kinematicViscosity;
 
-annotation (preferredView="info", Documentation(info="<html>
+annotation(preferredView="info", Documentation(info="<html>
 <p>
 This medium package models liquid water.
 </p>
@@ -766,18 +821,70 @@ and therefore leads to faster simulation.
 <img src=\"modelica://AixLib/Resources/Images/Media/Water/plotCp.png\" border=\"1\"
 alt=\"Relative variation of specific heat capacity with temperature\"/>
 </p>
+
+
+<p>
+Thermal conductivity is calculated as a function of temperature as shown in the figure below.
+The correlation used to calculate the thermal conductivity is
+</p>
+
+<p align=\"center\" style=\"font-style:italic;\">
+&lambda;(T) = &lambda;(298.15 K) &sdot; (-1.48445+4.12292&sdot;(T/298.15)-1.63866&sdot;(T/298.15)<sup>2</sup>),
+</p>
+<p>
+where <i>&lambda;(298.15 K) = 0.6065</i>  W/(m &sdot; K) is the adopted standard value
+of the thermal conductivity of water at <i>298.15</i> K and <i>0.1</i> MPa.
+</p>
+<p align=\"center\">
+<img src=\"modelica://AixLib/Resources/Images/Media/Water/plotLambda.png\" border=\"1\"
+alt=\"Thermal conductivity as a function of temperature\"/>
+</p>
+
+<p>
+Dynamic viscosity is calculated as the product of density and kinematic viscosity,
+both temperature dependent. However, the kinematic viscosity
+has its own temperture dependent correlation, implemented at
+<a href=\"modelica://AixLib.Media.Specialized.Water.TemperatureDependentDensity.kinematicViscosity\">
+AixLib.Media.Specialized.Water.TemperatureDependentDensity.kinematicViscosity</a>.
+Results of the kinematic viscosity as a function of temperature are shown in the figure below.
+</p>
+<p align=\"center\">
+<img src=\"modelica://AixLib/Resources/Images/Media/Water/plotkinVis.png\" border=\"1\"
+alt=\"Kinematic viscosity as a function of temperature\"/>
+</p>
+
 <p>
 The enthalpy is computed using the convention that <i>h=0</i>
 if <i>T=0</i> &deg;C.
 </p>
 <h4>Limitations</h4>
 <p>
-Specific heat capacity, thermal conductivity and viscosity are constant.
-Water is modeled as an incompressible liquid.
-There are no phase changes.
+Phase changes are not modeled.
 </p>
 </html>", revisions="<html>
 <ul>
+<li>
+July 7, 2016, by Carles Ribas Tugores:<br/>
+Correct Documentation. This is for
+<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/487\">#487</a>.
+</li>
+<li>
+June 6, 2015, by Michael Wetter:<br/>
+Set <code>AbsolutePressure(start=p_default)</code>
+and <code>Temperature(start=T_default)</code>
+to have to have conistent start values.
+See also revision notes of
+<a href=\"modelica://AixLib.Media.Water\">
+AixLib.Media.Water</a>.
+This is for
+<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/266\">#266</a>.
+</li>
+<li>
+May 1, 2015, by Michael Wetter:<br/>
+Added <code>Inline=true</code> for
+<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/227\">
+issue 227</a>.
+</li>
 <li>
 February 25, 2015, by Michael Wetter:<br/>
 Removed <code>stateSelect</code> attribute on pressure as this caused
@@ -819,13 +926,11 @@ First implementation.
           points={{16,-28},{32,-42},{26,-48},{10,-36},{16,-28}},
           lineColor={95,95,95},
           fillPattern=FillPattern.Sphere,
-          smooth=Smooth.None,
           fillColor={95,95,95}),
         Polygon(
           points={{10,34},{26,44},{30,36},{14,26},{10,34}},
           lineColor={95,95,95},
           fillPattern=FillPattern.Sphere,
-          smooth=Smooth.None,
           fillColor={95,95,95}),
         Ellipse(
           extent={{-82,52},{24,-54}},

@@ -1,6 +1,4 @@
 within AixLib.DataBase.Walls.WSchV1984.Ceiling;
-
-
 record ROsaddleAttic_WSchV1984_SML
   "Saddle roof in attic after WSchV1984, for building of type S (schwer), M (mittel) and L (leicht)"
   extends WallBaseDataDefinition(n(min = 1) = 1 "Number of wall layers", d = {0.18}
@@ -18,7 +16,7 @@ record ROsaddleAttic_WSchV1984_SML
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Wall definition according to WSchV 1984. For detailed wall type see above. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars5.png\" alt=\"stars: 5 out of 5\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars5.png\" alt=\"stars: 5 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p><b><font style=\"color: #ff0000; \">Attention:</font></b> The first element in each vector represents the layer connected to <code>port_a</code>(outside), the last element represents the layer connected to <code>port_b</code>(surface facing the room). </p>
  <h4><span style=\"color:#008000\">References</span></h4>
@@ -29,3 +27,4 @@ record ROsaddleAttic_WSchV1984_SML
  </ul>
  </html>"));
 end ROsaddleAttic_WSchV1984_SML;
+

@@ -33,35 +33,21 @@ model Pipe_Validation
       m_flow_nominal=0.01)
     annotation (Placement(transformation(extent={{26,-10},{46,10}})));
 equation
-  connect(prescribedHeatFlow.port, pipe.heatport) annotation(Line(points = {{-18, 30}, {0, 30}, {0, 5}}, color = {191, 0, 0}, smooth = Smooth.None));
-  connect(ramp.y, prescribedHeatFlow.Q_flow) annotation(Line(points = {{-59, 30}, {-38, 30}}, color = {0, 0, 127}, smooth = Smooth.None));
+  connect(prescribedHeatFlow.port, pipe.heatport) annotation(Line(points = {{-18, 30}, {0, 30}, {0, 5}}, color = {191, 0, 0}));
+  connect(ramp.y, prescribedHeatFlow.Q_flow) annotation(Line(points = {{-59, 30}, {-38, 30}}, color = {0, 0, 127}));
   connect(boundary_ph.ports[1], Tin.port_a) annotation (Line(
       points={{-60,0},{-44,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(Tin.port_b, pipe.port_a) annotation (Line(
       points={{-24,0},{-10,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(pipe.port_b, Tout.port_a) annotation (Line(
       points={{10,0},{26,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(Tout.port_b, boundary_ph1.ports[1]) annotation (Line(
       points={{46,0},{60,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-            -100},{100,100}}),                                                                           graphics), experiment(StopTime = 1500, Interval = 1), __Dymola_experimentSetupOutput(events = false), Documentation(revisions="<html>
- <p>November 2014, Marcus Fuchs</p>
- <p><ul>
- <li>Changed model to use Annex 60 base class</li>
- </ul></p>
- <p>01.10.2013, by <i>Pooyan Jahangiri</i>: implemented</p>
- </html>", info = "<html>
- <p><h4><font color=\"#008000\">Overview</font></h4></p>
- <p>Simple example of the pipe connected to two boundaries and a heat source.</p>
- <p><br/><b><font style=\"color: #008000; \">Concept</font></b></p>
- <p>The boundaries have different pressures resulting in a mass flow in the pipe. The pipe is connected to a heat source with variable heat flow. The change in internal energy and the temperature of the pipe can be observed.</p>
+      color={0,127,255}));
+  annotation( experiment(StopTime = 1500, Interval = 1), __Dymola_experimentSetupOutput(events = false), Documentation(revisions="<html>
+ Will be removed
  </html>"));
 end Pipe_Validation;

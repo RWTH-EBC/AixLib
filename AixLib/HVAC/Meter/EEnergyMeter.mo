@@ -12,7 +12,6 @@ equation
   (der(q_joule)) = p;
   q_kwh = Modelica.SIunits.Conversions.to_kWh(q_joule);
   annotation (
-    Diagram(graphics),
     Icon(graphics={
         Rectangle(
           extent={{-40,66},{46,-62}},
@@ -24,14 +23,13 @@ equation
           lineColor={0,0,255},
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
-        Line(points={{4,24},{4,14},{4,16}}, color={0,0,0}),
-        Line(points={{14,24},{14,14},{14,16}}, color={0,0,0}),
-        Line(points={{24,24},{24,14},{24,16}}, color={0,0,0}),
-        Line(points={{-6,24},{-6,14},{-6,16}}, color={0,0,0}),
-        Line(points={{-14,24},{-14,14},{-14,16}}, color={0,0,0}),
+        Line(points={{4,24},{4,14},{4,16}}),
+        Line(points={{14,24},{14,14},{14,16}}),
+        Line(points={{24,24},{24,14},{24,16}}),
+        Line(points={{-6,24},{-6,14},{-6,16}}),
+        Line(points={{-14,24},{-14,14},{-14,16}}),
         Line(
           points={{-16,30},{28,30},{26,30}},
-          color={0,0,0},
           thickness=0.5),
         Line(
           points={{0,30},{10,30},{10,30}},
@@ -58,19 +56,6 @@ equation
           textString=
                "1")}),
     Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
-<p>
-Model of an electric meter (integration over time of the electric power).
-</p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars2.png\"/></p>
-</html>",
-        revisions="<html>
-<ul>
-<li><i>October 15, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
-  <li>
-         by Alexander Hoh:<br>
-         implemented</li>
-<ul>
+Duplicate of  AixLib.Utilities.Sensors.EEnergyMeter - Will be removed
 </html>"));
 end EEnergyMeter;

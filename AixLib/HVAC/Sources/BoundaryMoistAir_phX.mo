@@ -3,11 +3,11 @@ model BoundaryMoistAir_phX
   "boundary for Moist Air, pressure, enthalpy, water fraction"
   outer BaseParameters baseParameters "System properties";
   parameter Boolean use_p_in = false
-    "Get the pressure from the input connector"                                  annotation(Evaluate = true, HideResult = true, choices(__Dymola_checkBox = true));
+    "Get the pressure from the input connector"                                  annotation(Evaluate = true, HideResult = true, choices(checkBox = true));
   parameter Boolean use_h_in = false
-    "Get the specific enthalpy from the input connector"                                  annotation(Evaluate = true, HideResult = true, choices(__Dymola_checkBox = true));
+    "Get the specific enthalpy from the input connector"                                  annotation(Evaluate = true, HideResult = true, choices(checkBox = true));
   parameter Boolean use_X_in = false
-    "Get the water mass fraction per mass dry air from the input connector"                                  annotation(Evaluate = true, HideResult = true, choices(__Dymola_checkBox = true));
+    "Get the water mass fraction per mass dry air from the input connector"                                  annotation(Evaluate = true, HideResult = true, choices(checkBox = true));
   parameter Modelica.SIunits.Pressure p = 1e5 "Fixed value of pressure" annotation(Evaluate = true, Dialog(enable = not use_p_in));
   parameter Modelica.SIunits.SpecificEnthalpy h = 1e4
     "Fixed value of specific enthalpy as energy per mass dry air"                                                   annotation(Evaluate = true, Dialog(enable = not use_h_in));
@@ -40,8 +40,8 @@ equation
   portMoistAir_a.p = p_in_internal;
   portMoistAir_a.h_outflow = h_in_internal;
   portMoistAir_a.X_outflow = X_in_internal;
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Ellipse(extent = {{-100, 100}, {100, -100}}, lineColor = {170, 255, 255},
-            fillPattern =                                                                                                    FillPattern.Sphere, fillColor = {170, 213, 255}), Text(extent = {{-66, 14}, {76, -10}}, lineColor = {0, 0, 255}, textString = "p boundary")}), Documentation(info = "<html>
+  annotation( Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Ellipse(extent=  {{-100, 100}, {100, -100}}, lineColor=  {170, 255, 255},
+            fillPattern=                                                                                                    FillPattern.Sphere, fillColor=  {170, 213, 255}), Text(extent=  {{-66, 14}, {76, -10}}, lineColor=  {0, 0, 255}, textString=  "p boundary")}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Boundary Model for Moist Air. Defines absolute pressure, specific enthalpy per mass dry air and water fraction per mass dry air.</p>
  <h4><span style=\"color:#008000\">Example Results</span></h4>

@@ -1,6 +1,6 @@
 within AixLib.Building.LowOrder.BaseClasses.ReducedOrderModel;
 model ReducedOrderModelStar
-  extends partialReducedOrderModel;
+  extends PartialReducedOrderModel;
   Utilities.HeatTransfer.HeatToStar heatToStarWindow(A=Aw, eps=epsw) if withWindows
     annotation (Placement(transformation(extent={{-16,80},{4,100}})));
   Utilities.HeatTransfer.HeatToStar heatToStarOuterwall(A=Ao, eps=epso) if withOuterwalls
@@ -18,21 +18,18 @@ equation
   connect(heatToStarWindow.Star, internalGainsRad) annotation (Line(
       points={{3.1,90},{12,90},{12,45},{80,45},{80,-90}},
       color={95,95,95},
-      pattern=LinePattern.None,
-      smooth=Smooth.None));
+      pattern=LinePattern.Solid));
   end if;
 
   if withOuterwalls then
       connect(outerwall.port_b, heatToStarOuterwall.Therm) annotation (Line(
       points={{-50,-0.909091},{-46,-0.909091},{-46,18.8}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
 
   connect(heatToStarOuterwall.Star, internalGainsRad) annotation (Line(
       points={{-46,37.1},{-14,37.1},{-14,37},{12,37},{12,45},{80,45},{80,-90}},
       color={95,95,95},
-      pattern=LinePattern.None,
-      smooth=Smooth.None));
+      pattern=LinePattern.Solid));
 
   end if;
 
@@ -40,20 +37,16 @@ equation
       connect(heatToStarInnerwall.Star, internalGainsRad) annotation (Line(
       points={{50,37.1},{12,37.1},{12,45},{80,45},{80,-90}},
       color={95,95,95},
-      pattern=LinePattern.None,
-      smooth=Smooth.None));
+      pattern=LinePattern.Solid));
   connect(heatToStarInnerwall.Therm, innerwall.port_a) annotation (Line(
       points={{50,18.8},{54,18.8},{54,-0.909091},{56,-0.909091}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   end if;
 
   connect(solarRadToHeatRad.port, heatToStarWindow.Therm) annotation (Line(
       points={{-26,90},{-15.2,90}},
-      color={191,0,0},
-      smooth=Smooth.None));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}), graphics), Documentation(info="<html>
+      color={191,0,0}));
+  annotation ( Documentation(info="<html>
 <p>ReducedOrderModelStar extends from partialReducedOrderModel. </p>
 <p>This class contains following additional components: </p>
 <ul>

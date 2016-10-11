@@ -3,20 +3,21 @@ model Case650FF
   import AixLib;
   extends Modelica.Icons.Example;
   parameter AixLib.DataBase.Profiles.Profile_BaseDataDefinition AERProfile = AixLib.DataBase.Profiles.ASHRAE140.Ventilation_caseX50();
-  Components.Weather.BaseClasses.Sun_new sun(
+  AixLib.Building.Components.Weather.BaseClasses.Sun sun(
     TimeCorrection=0,
     Longitude=-104.9,
     DiffWeatherDataTime=-7,
     Diff_localStandardTime_WeatherDataTime=0.5,
     Latitude=39.76)
     annotation (Placement(transformation(extent={{-142,61},{-118,85}})));
-  Components.Weather.BaseClasses.RadOnTiltedSurf_Perez              radOnTiltedSurf_Perez[5](
-    WeatherFormat=2,
+  AixLib.Building.Components.Weather.RadiationOnTiltedSurface.RadOnTiltedSurf_Perez
+    radOnTiltedSurf_Perez[5](
+    each WeatherFormat=2,
     Azimut={180,-90,0,90,0},
     Tilt={90,90,90,90,0},
     GroundReflection=fill(0.2, 5),
     Latitude=fill(39.76, 5),
-    h=1609) "N,E,S,W, Horz"
+    each h=1609) "N,E,S,W, Horz"
     annotation (Placement(transformation(extent={{-104,56},{-76,84}})));
 
   Modelica.Blocks.Sources.CombiTimeTable Solar_Radiation(
@@ -24,14 +25,14 @@ model Case650FF
     tableName="Table",
     columns={2,3},
     fileName=
-        "D:/Git/AixLib/AixLib/Resources/WeatherData/Weatherdata_ASHARE140.mat")
+        Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/WeatherData/Weatherdata_ASHARE140.mat"))
     annotation (Placement(transformation(extent={{-100,0},{-80,20}})));
   Modelica.Blocks.Sources.CombiTimeTable Source_Weather(
     tableOnFile=true,
     columns={2,3,4},
     tableName="Table",
     fileName=
-        "D:/Git/AixLib/AixLib/Resources/WeatherData/WeatherData_Ashrae140_LOM.mat")
+        Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/WeatherData/WeatherData_Ashrae140_LOM.mat"))
     annotation (Placement(transformation(extent={{-100,30},{-80,50}})));
 
     Utilities.Sources.HourOfDay hourOfDay
@@ -91,7 +92,7 @@ model Case650FF
   AixLib.Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_VDI6007
     corG_VDI6007_1(          n=5, Uw=3.0)
     annotation (Placement(transformation(extent={{-48,54},{-28,74}})));
-  Modelica.Blocks.Sources.Constant sunblind[5](k=0)
+  Modelica.Blocks.Sources.Constant sunblind[5](each k=0)
     annotation (Placement(transformation(extent={{-24,69},{-11,82}})));
   AixLib.Building.LowOrder.BaseClasses.SolarRadAdapter solarRadAdapter[5]
     annotation (Placement(transformation(extent={{-45,31.5},{-25,51.5}})));
@@ -118,77 +119,62 @@ FreeFloatTemperature = reducedOrderModel.airload.T;
   connect(Source_InternalGains_convective.y, InternalGains_convective.Q_flow)
     annotation (Line(
       points={{-98.35,-24.5},{-93,-24.5},{-93,-23},{-92,-23},{-92,-24},{-91,-24}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
 
   connect(Source_InternalGains_radiative.y, InternalGains_radiative.Q_flow)
     annotation (Line(
       points={{-99.4,-52},{-92,-52}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(eqAirTemp.equalAirTempWindow, reducedOrderModel.equalAirTempWindow)
     annotation (Line(
       points={{2.78,38.36},{3.9,38.36},{3.9,38.22},{16.2,38.22}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(eqAirTemp.equalAirTemp, reducedOrderModel.equalAirTemp) annotation (
       Line(
       points={{2.78,29.34},{4.4,29.34},{4.4,29.22},{16.2,29.22}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(Source_Weather.y, eqAirTemp.weatherData) annotation (Line(
       points={{-79,40},{-57,40},{-57,35.5},{-16.8,35.5}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(Source_Weather.y[1], reducedOrderModel.ventilationTemperature)
     annotation (Line(
       points={{-79,40},{-57,40},{-57,19.86},{16.2,19.86}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(InternalGains_convective.port, reducedOrderModel.internalGainsConv)
     annotation (Line(
       points={{-71,-24},{-11,-24},{-11,-12},{32.2,-12},{32.2,12.3}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
   connect(InternalGains_radiative.port, reducedOrderModel.internalGainsRad)
     annotation (Line(
       points={{-72,-52},{-52,-52},{-52,-31},{-7,-31},{-7,-13},{41,-13},{41,12.3}},
-      color={191,0,0},
-      smooth=Smooth.None));
+      color={191,0,0}));
 
   connect(radOnTiltedSurf_Perez.OutTotalRadTilted, corG_VDI6007_1.SR_input)
     annotation (Line(
-      points={{-78.8,77},{-53,77},{-53,63.9},{-47.8,63.9}},
-      color={255,128,0},
-      smooth=Smooth.None));
+      points={{-77.4,75.6},{-53,75.6},{-53,63.9},{-47.8,63.9}},
+      color={255,128,0}));
   connect(sunblind.y, eqAirTemp.sunblindsig) annotation (Line(
       points={{-10.35,75.5},{-8,75.5},{-8,44.3}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(solarRadAdapter.solarRad_out, eqAirTemp.solarRad_in) annotation (Line(
       points={{-25,41.5},{-25,41.66},{-17.35,41.66}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(solarRadAdapter.solarRad_in, radOnTiltedSurf_Perez.OutTotalRadTilted)
     annotation (Line(
-      points={{-44,41.5},{-66,41.5},{-66,77},{-78.8,77}},
-      color={255,128,0},
-      smooth=Smooth.None));
+      points={{-44,41.5},{-66,41.5},{-66,75.6},{-77.4,75.6}},
+      color={255,128,0}));
   connect(corG_VDI6007_1.solarRadWinTrans, SolarRadWeightedSum.solarRad_in)
     annotation (Line(
       points={{-29,64},{-1,64}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  connect(SolarRadWeightedSum.solarRad_out, reducedOrderModel.u1) annotation (
-      Line(
-      points={{17,64},{21,64},{21,45.42},{21.64,45.42}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(AirExchangeRate.y[1], reducedOrderModel.ventilationRate) annotation (
       Line(
       points={{-26.35,-43.5},{-24,-43.5},{-24,-11},{22.92,-11},{22.92,12.3}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
+  connect(SolarRadWeightedSum.solarRad_out, reducedOrderModel.solarRad_in)
+    annotation (Line(
+      points={{17,64},{21.64,64},{21.64,45.42}},
+      color={0,0,127}));
   annotation (Diagram(coordinateSystem(
         extent={{-150,-100},{120,90}},
         preserveAspectRatio=false,
@@ -211,7 +197,7 @@ FreeFloatTemperature = reducedOrderModel.airload.T;
           extent={{-139,16},{-111,0}},
           lineColor={0,0,255},
           textString="1 - Direct normal irradiance in W/m2
-2 - global horizontal 
+2 - global horizontal
      radiance in W/m2
 "),     Text(
           extent={{-147,-2},{-79,-10}},
@@ -223,8 +209,8 @@ FreeFloatTemperature = reducedOrderModel.airload.T;
           extent={{-141,48},{-109,30}},
           lineColor={0,0,255},
           textString="1 - Air Temperature in K
-2 - extraterrestrial longwave radiation in W/m²
-3 - terrestrial longwave radiation in W/m²"),
+2 - extraterrestrial longwave radiation in W/m2
+3 - terrestrial longwave radiation in W/m2"),
         Text(
           extent={{35,-91},{96,-99}},
           lineColor={0,0,255},
@@ -272,8 +258,8 @@ FreeFloatTemperature = reducedOrderModel.airload.T;
 <li>no cooling or heating equipment</li>
 </ul>
 </html>", revisions="<html>
- <p><ul>
+ <ul>
  <li><i>March 19, 2015</i> by Peter Remmen:<br/>Implemented</li>
- </ul></p>
+ </ul>
  </html>"));
 end Case650FF;

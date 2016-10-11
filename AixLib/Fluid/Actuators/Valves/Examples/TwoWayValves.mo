@@ -57,52 +57,40 @@ model TwoWayValves "Two way valves with different opening characteristics"
 equation
   connect(y.y, valLin.y) annotation (Line(
       points={{-39,80},{-12,80},{10,80},{10,72}},
-      color={0,0,127},
-      pattern=LinePattern.None));
+      color={0,0,127}));
   connect(y.y, valQui.y) annotation (Line(
       points={{-39,80},{-12,80},{-12,40},{10,40},{10,32}},
-      color={0,0,127},
-      pattern=LinePattern.None));
+      color={0,0,127}));
   connect(y.y, valEqu.y) annotation (Line(
       points={{-39,80},{-12,80},{-12,0},{10,0},{10,-8}},
-      color={0,0,127},
-      pattern=LinePattern.None));
+      color={0,0,127}));
   connect(sou.ports[1], valLin.port_a) annotation (Line(
       points={{-50,3},{-27,3},{-27,60},{0,60}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(valQui.port_a, sou.ports[2]) annotation (Line(
       points={{0,20},{-26,20},{-26,1},{-50,1}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(valEqu.port_a, sou.ports[3]) annotation (Line(
       points={{0,-20},{-26,-20},{-26,-1},{-50,-1}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(valLin.port_b, sin.ports[1]) annotation (Line(
       points={{20,60},{37,60},{37,3},{52,3}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(valQui.port_b, sin.ports[2]) annotation (Line(
       points={{20,20},{36,20},{36,1},{52,1}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(valEqu.port_b, sin.ports[3]) annotation (Line(
       points={{20,-20},{36,-20},{36,-1},{52,-1}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(valInd.y, y.y) annotation (Line(
       points={{10,-48},{10,-40},{-12,-40},{-12,80},{-39,80}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(valInd.port_b, sin.ports[4]) annotation (Line(
       points={{20,-60},{38,-60},{38,-3},{52,-3}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(valInd.port_a, sou.ports[4]) annotation (Line(
       points={{0,-60},{-28,-60},{-28,-3},{-50,-3}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
     annotation (experiment(StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Actuators/Valves/Examples/TwoWayValves.mos"
         "Simulate and plot"),
@@ -134,7 +122,5 @@ June 16, 2008 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-            100,100}}), graphics));
+</html>"));
 end TwoWayValves;

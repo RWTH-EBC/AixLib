@@ -119,9 +119,9 @@ equation
                          graphics), Diagram(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics),
     Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>October 2014,&nbsp;</i> by Peter Remmen:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>", info="<html>
 <p>ReducedOrderModelEBCMod extends from partialReducedOrderModel. </p>
 <p>As windows have nearly no capacity an additional resistance for heat transfer calculation through the window is implemented. </p>
@@ -133,7 +133,7 @@ equation
 <li>convective heat transfer for windows</li>
 </ul>
 <h4>Main equations</h4>
-<p>The concept is described in VDI 6007. All equations can be found in VDI 6007 and &QUOT;Improving a Low Order Building Model for Urban Scale Applications&QUOT; </p>
+<p>The concept is described in VDI 6007. All equations can be found in VDI 6007 and &quot;Improving a Low Order Building Model for Urban Scale Applications&quot; </p>
 <h4>Assumption and limitations</h4>
 <p>This model will only work with <a href=\"AixLib.Building.LowOrder.BaseClasses.EqAirTemp.EqAirTempEBCMod\">EqAirTempEBCMod</a>The longwave radiative heat transfer between the building components is modeled according to Stefan-Boltzmann Law. </p>
 <h4>Typical use and important parameters</h4>

@@ -1,6 +1,4 @@
 within AixLib.DataBase.Profiles;
-
-
 record Profile_BaseDataDefinition "Ventilation profiles"
   extends Modelica.Icons.Record;
   parameter Real[:, :] Profile "First column time";
@@ -22,3 +20,4 @@ record Profile_BaseDataDefinition "Ventilation profiles"
  </ul>
  </html>"));
 end Profile_BaseDataDefinition;
+

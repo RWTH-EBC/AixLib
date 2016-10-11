@@ -2,8 +2,10 @@ within AixLib.Fluid.MassExchangers;
 model Humidifier_u
   "Ideal humidifier or dehumidifier with prescribed water mass flow rate addition or subtraction"
   extends AixLib.Fluid.Interfaces.TwoPortHeatMassExchanger(
-    redeclare replaceable package Medium = Modelica.Media.Interfaces.PartialCondensingGases,
-    redeclare final AixLib.Fluid.MixingVolumes.MixingVolumeMoistAir vol);
+    redeclare replaceable package Medium =
+        Modelica.Media.Interfaces.PartialCondensingGases,
+    redeclare final AixLib.Fluid.MixingVolumes.MixingVolumeMoistAir vol(
+    final prescribedHeatFlowRate=true));
 
   parameter Boolean use_T_in= false
     "Get the temperature from the input connector"
@@ -39,16 +41,13 @@ equation
 
   connect(u, gai.u) annotation (Line(
       points={{-120,60},{-82,60}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(gai.y, vol.mWat_flow) annotation (Line(
       points={{-59,60},{-30,60},{-30,-18},{-11,-18}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   connect(vol.TWat, TWat.y) annotation (Line(
       points={{-11,-14.8},{-20,-14.8},{-20,84},{-50.6,84}},
-      color={0,0,127},
-      smooth=Smooth.None));
+      color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={
         Rectangle(
@@ -120,6 +119,13 @@ in the species vector.
 </html>",
 revisions="<html>
 <ul>
+<li>
+May 6, 2015, by Michael Wetter:<br/>
+Set <code>prescribedHeatFlowRate=true</code>.
+This is for issue
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/412\">
+#412</a>.
+</li>
 <li>
 May 29, 2014, by Michael Wetter:<br/>
 Removed undesirable annotation <code>Evaluate=true</code>.

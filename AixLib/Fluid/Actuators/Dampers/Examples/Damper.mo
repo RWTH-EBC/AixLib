@@ -31,16 +31,13 @@ model Damper
 equation
   connect(yRam.y, res.y) annotation (Line(
       points={{1,50},{10,50},{10,32}},
-      color={0,0,127},
-      pattern=LinePattern.None));
+      color={0,0,127}));
   connect(sou.ports[1], res.port_a) annotation (Line(
       points={{-48,20},{-5.55112e-16,20}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(sin.ports[1], res.port_b) annotation (Line(
       points={{54,20},{20,20}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
     annotation (experiment(StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Actuators/Dampers/Examples/Damper.mos"
         "Simulate and plot"),

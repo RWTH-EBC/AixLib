@@ -100,8 +100,8 @@ see the <i>info</i> section of the class.
 <!-- ============================================== -->
 <tr>
   <td>
-     <a href=\"modelica://AixLib.Fluid.Interfaces.FourPort\">
-                          AixLib.Fluid.Interfaces.FourPort</a>
+     <a href=\"modelica://AixLib.Fluid.Interfaces.PartialFourPort\">
+                          AixLib.Fluid.Interfaces.PartialFourPort</a>
   </td>
   <td>
      This model defines an interface for components with four ports.
@@ -116,12 +116,12 @@ see the <i>info</i> section of the class.
 <!-- ============================================== -->
 <tr>
   <td>
-    <a href=\"modelica://AixLib.Fluid.Interfaces.TemperatureControlledHeatFlow\">
-                         AixLib.Fluid.Interfaces.TemperatureControlledHeatFlow</a>
+    <a href=\"modelica://AixLib.Fluid.Interfaces.PrescribedOutletState\">
+                         AixLib.Fluid.Interfaces.PrescribedOutletState</a>
   </td>
   <td>
     This model calculates a prescribed heat flow (e.g. for an ideal heater or cooler),
-    depending on a set temperature TSet.
+    depending on a set temperature <code>TSet</code>.
   </td>
 </tr>
 <!-- ============================================== -->
@@ -214,19 +214,6 @@ see the <i>info</i> section of the class.
 </html>"));
 
 end UsersGuide;
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 annotation (preferredView="info", Documentation(info="<html>

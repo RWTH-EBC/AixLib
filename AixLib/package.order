@@ -1,8 +1,12 @@
 UsersGuide
+Airflow
+BoundaryConditions
 Building
 Controls
 DataBase
 Fluid
 HVAC
 Media
+ThermalZones
 Utilities
+Types

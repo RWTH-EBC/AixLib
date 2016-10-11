@@ -1,5 +1,5 @@
 within AixLib.HVAC;
-package Meter 
+package Meter
         extends Modelica.Icons.Package;
 
 end Meter;

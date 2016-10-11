@@ -17,10 +17,10 @@ model TwoPortHeatMassExchanger
 
   // Dynamics
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
-    "Formulation of energy balance"
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
   parameter Modelica.Fluid.Types.Dynamics massDynamics=energyDynamics
-    "Formulation of mass balance"
+    "Type of mass balance: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
 
   // Initialization
@@ -30,11 +30,12 @@ model TwoPortHeatMassExchanger
   parameter Medium.Temperature T_start = Medium.T_default
     "Start value of temperature"
     annotation(Dialog(tab = "Initialization"));
-  parameter Medium.MassFraction X_start[Medium.nX] = Medium.X_default
+  parameter Medium.MassFraction X_start[Medium.nX](
+    final quantity=Medium.substanceNames) = Medium.X_default
     "Start value of mass fractions m_i/m"
     annotation (Dialog(tab="Initialization", enable=Medium.nXi > 0));
   parameter Medium.ExtraProperty C_start[Medium.nC](
-       quantity=Medium.extraPropertiesNames)=fill(0, Medium.nC)
+    final quantity=Medium.extraPropertiesNames)=fill(0, Medium.nC)
     "Start value of trace substances"
     annotation (Dialog(tab="Initialization", enable=Medium.nC > 0));
 
@@ -43,6 +44,7 @@ model TwoPortHeatMassExchanger
     redeclare final package Medium = Medium,
     nPorts = 2,
     V=m_flow_nominal*tau/rho_default,
+    final allowFlowReversal=allowFlowReversal,
     final mSenFac=1,
     final m_flow_nominal = m_flow_nominal,
     final energyDynamics=energyDynamics,
@@ -91,16 +93,13 @@ initial algorithm
 equation
   connect(vol.ports[2], port_b) annotation (Line(
       points={{1,0},{100,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(port_a, preDro.port_a) annotation (Line(
       points={{-100,0},{-90,0},{-90,0},{-80,0},{-80,0},{-60,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   connect(preDro.port_b, vol.ports[1]) annotation (Line(
       points={{-40,0},{1,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
+      color={0,127,255}));
   annotation (
     Documentation(info="<html>
 <p>
@@ -123,18 +122,13 @@ For models that extend this model, see for example
 <ul>
 <li>
 the ideal heater or cooler
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.HeaterCoolerPrescribed\">
-AixLib.Fluid.HeatExchangers.HeaterCoolerPrescribed</a>,
+<a href=\"modelica://AixLib.Fluid.HeatExchangers.HeaterCooler_u\">
+AixLib.Fluid.HeatExchangers.HeaterCooler_u</a>, and
 </li>
 <li>
 the ideal humidifier
-<a href=\"modelica://AixLib.Fluid.MassExchangers.HumidifierPrescribed\">
-AixLib.Fluid.MassExchangers.HumidifierPrescribed</a>, and
-</li>
-<li>
-the boiler
-<a href=\"modelica://AixLib.Fluid.Boilers.BoilerPolynomial\">
-AixLib.Fluid.Boilers.BoilerPolynomial</a>.
+<a href=\"modelica://AixLib.Fluid.MassExchangers.Humidifier_u\">
+AixLib.Fluid.MassExchangers.Humidifier_u</a>.
 </li>
 </ul>
 
@@ -147,6 +141,21 @@ Modelica.Fluid.Examples.HeatExchanger.BaseClasses.BasicHX
 </p>
 </html>", revisions="<html>
 <ul>
+<li>
+January 26, 2016, by Michael Wetter:<br/>
+Added <code>final quantity=Medium.substanceNames</code> for <code>X_start</code>.
+</li>
+<li>
+May 6, 2015, by Michael Wetter:<br/>
+Added missing propagation of <code>allowFlowReversal</code> to
+instance <code>vol</code>.
+This is for issue
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/412\">#412</a>.
+</li>
+<li>
+May 1, 2015, by Marcus Fuchs:<br/>
+Fixed links in documentation.
+</li>
 <li>
 October 6, 2014, by Michael Wetter:<br/>
 Changed medium declaration in pressure drop element to be final.

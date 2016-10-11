@@ -31,11 +31,11 @@ equation
   //Calculate help variables
   H_flow_b = portMoistAir_b.m_flow * actualStream(portMoistAir_b.h_outflow);
   H_flow_a = portMoistAir_a.m_flow * actualStream(portMoistAir_a.h_outflow);
-  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent=  {{-80, 80}, {80, -80}}, fillColor=  {85, 170, 255}, fillPattern=  FillPattern.HorizontalCylinder, pattern=  LinePattern.None, lineColor=  {0, 0, 0}), Line(points=  {{-50, -56}, {-50, -34}}, color=  {0, 0, 0}, pattern=  LinePattern.Dash, smooth=  Smooth.None), Line(points=  {{-20, -56}, {-20, -34}}, color=  {0, 0, 0}, pattern=  LinePattern.Dash, smooth=  Smooth.None), Line(points=  {{12, -56}, {12, -34}}, color=  {0, 0, 0}, pattern=  LinePattern.Dash, smooth=  Smooth.None), Line(points=  {{46, -56}, {46, -34}}, color=  {0, 0, 0}, pattern=  LinePattern.Dash, smooth=  Smooth.None)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(info = "<html>
+  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent=  {{-80, 80}, {80, -80}}, fillColor=  {85, 170, 255}, fillPattern=  FillPattern.HorizontalCylinder, pattern=  LinePattern.Solid, lineColor=  {0, 0, 0}), Line(points=  {{-50, -56}, {-50, -34}}, color=  {0, 0, 0}, pattern=  LinePattern.Dash), Line(points=  {{-20, -56}, {-20, -34}}, color=  {0, 0, 0}, pattern=  LinePattern.Dash), Line(points=  {{12, -56}, {12, -34}}, color=  {0, 0, 0}, pattern=  LinePattern.Dash), Line(points=  {{46, -56}, {46, -34}}, color=  {0, 0, 0}, pattern=  LinePattern.Dash)}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for a cooling dehumidfier.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>Model inputs: temperature of cooling temperature and bypass factor.</p>
  <p>Model functions in both directions as a dehumidifier.</p>

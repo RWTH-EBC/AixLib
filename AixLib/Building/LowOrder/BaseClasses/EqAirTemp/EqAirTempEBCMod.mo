@@ -1,6 +1,6 @@
 within AixLib.Building.LowOrder.BaseClasses.EqAirTemp;
 model EqAirTempEBCMod
-  extends EqAirTemp.partialEqAirTemp;
+  extends PartialEqAirTemp;
 parameter Real orientationswallshorizontal[n]={90,90,90,90}
     "orientations of the walls against the vertical (wall,roof)";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaconv_wall=24.67
@@ -69,6 +69,5 @@ equation
 <li>Lauster, M.; Teichmann, J.; Fuchs, M.; Streblow, R.; Mueller, D. (2014): Low order thermal network models for dynamic simulations of buildings on city district scale. In: Building and Environment 73, p. 223&ndash;231. DOI: 10.1016/j.buildenv.2013.12.016.</li>
 <li>Lauster, Moritz; Remmen, Peter; Fuchs, Marcus; Teichmann, Jens; Streblow, Rita; Mueller, Dirk (2014): Modelling long-wave radiation heat exchange for thermal network building simulations at urban scale using Modelica. In: the 10th International Modelica Conference, March 10-12, 2014, Lund, Sweden, March 10-12, 2014: Linkoeping University Electronic Press (Linkoeping Electronic Conference Proceedings), p. 125&ndash;133.</li>
 </ul>
-</html>"), Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-            {100,100}}), graphics));
+</html>"));
 end EqAirTempEBCMod;
