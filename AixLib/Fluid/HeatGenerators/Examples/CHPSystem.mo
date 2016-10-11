@@ -6,7 +6,7 @@ model CHPSystem
         Media.Specialized.Water.TemperatureDependentDensity,
     m_flow_nominal=0.02,
     Tset_in=true,
-    capacity_min=20,
+    minCapacity=20,
     delayTime=300,
     param=DataBase.CHP.CHP_FMB_65_GSK())
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -41,7 +41,7 @@ equation
   connect(trapezoid.y, source.T_in)
     annotation (Line(points={{-79,4},{-62,4}}, color={0,0,127}));
   connect(booleanConstant.y, cHP.ON)
-    annotation (Line(points={{-19,-30},{5,-30},{5,-9}}, color={255,0,255}));
+    annotation (Line(points={{-19,-30},{3,-30},{3,-9}}, color={255,0,255}));
   connect(const.y, cHP.Tset) annotation (Line(points={{-19,30},{-14,30},{-14,-6},
           {-7,-6}}, color={0,0,127}));
   annotation (Documentation(info="<html>

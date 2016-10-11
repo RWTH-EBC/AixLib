@@ -19,10 +19,10 @@ model CHP
   parameter Boolean ctrlStrategy = true
     "True for flow-, false for return- temperature control strategy"
     annotation(Dialog(group="Control system"));
-  parameter Real deltaT_min = 10
+  parameter Real minDeltaT = 10
     "Minimum flow and return temperature difference"
     annotation(Dialog(group="Control system"));
-  parameter Real Tflow_range = 2 "Range of allowable flow temperature"
+  parameter Real TflowRange = 2 "Range of allowable flow temperature"
     annotation(Dialog(group="Control system"));
   parameter Modelica.SIunits.Time delayTime = 3600 "Shutdown/Startup delay"
     annotation(Dialog(group="Control system"));
@@ -35,17 +35,14 @@ model CHP
     annotation(Dialog(group="Control system"));
 
   BaseClasses.Controllers.delayedOnOffController delayedOnOffController(
-    Treturn_max=param.maxRTemp,
-    deltaT_min=deltaT_min,
-    Tflow_range=Tflow_range,
+    maxTreturn=param.maxRTemp,
+    minDeltaT=minDeltaT,
+    TflowRange=TflowRange,
     delayTime=delayTime,
     delayUnit=delayUnit,
-    capacity_min=capacity_min)
+    minCapacity=minCapacity)
     annotation (Placement(transformation(extent={{-44,-10},{-24,10}})));
   BaseClasses.Controllers.PIcontroller thControl(
-    K_c=K_c,
-    T_c=T_c,
-    capacity_min=capacity_min,
     Kc=Kc,
     Tc=Tc,
     minCapacity=minCapacity)
