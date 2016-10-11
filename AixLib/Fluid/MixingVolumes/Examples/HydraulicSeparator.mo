@@ -1,14 +1,14 @@
 within AixLib.Fluid.MixingVolumes.Examples;
 model HydraulicSeparator
   extends Modelica.Icons.Example;
-  inner AixLib.Utilities.Sources.BaseParameters baseParameters
-    annotation (Placement(transformation(extent={{-90,60},{-70,80}})));
 
   package Medium = AixLib.Media.Water "Medium model for water";
 
   AixLib.Fluid.MixingVolumes.HydraulicSeparator hydraulicSeparator(DFlange=
         0.01,
-    redeclare package Medium = Medium)
+    redeclare package Medium = Medium,
+    pumpMaxVolumeFlow=0.03,
+    m_flow_nominal=0.1)
     annotation (Placement(transformation(extent={{18,-6},{38,14}})));
   AixLib.Fluid.Movers.Pump
                          pump(
@@ -89,7 +89,7 @@ model HydraulicSeparator
       Medium = Medium, m_flow_nominal=1)
     annotation (Placement(transformation(extent={{10,-46},{30,-26}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(
-      T=baseParameters.T_ambient)
+      T=273.15+20)
     annotation (Placement(transformation(extent={{-80,-94},{-60,-74}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor
     thermalConductor(G=1.6e3/8)
@@ -156,19 +156,19 @@ equation
       color={0,127,255}));
   connect(temperatureTop.port_b, hydraulicSeparator.port_a_primary) annotation (
      Line(
-      points={{12,10},{17.6,10}},
+      points={{12,10},{18,9}},
       color={0,127,255}));
   connect(temperatureMixedTop.port_a, hydraulicSeparator.port_b_secondary)
     annotation (Line(
-      points={{38,10},{38.4,10}},
+      points={{38,10},{38,9}},
       color={0,127,255}));
   connect(hydraulicSeparator.port_b_primary, temperatureMixedBottom.port_a)
     annotation (Line(
-      points={{17.6,-2},{18,-2},{18,-16},{-8,-16}},
+      points={{18,-1},{18,-2},{18,-16},{-8,-16}},
       color={0,127,255}));
   connect(hydraulicSeparator.port_a_secondary, temperatureBottom.port_b)
     annotation (Line(
-      points={{38.4,-2},{38,-2},{38,-36},{30,-36}},
+      points={{38,-1},{38,-2},{38,-36},{30,-36}},
       color={0,127,255}));
   connect(massFlowSensorPrim.port_b, heatSource.ports[1])
     annotation (Line(points={{-34,8},{-22,18}}, color={0,127,255}));
