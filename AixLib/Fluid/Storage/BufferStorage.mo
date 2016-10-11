@@ -2,8 +2,6 @@ within AixLib.Fluid.Storage;
 model BufferStorage
   "Buffer Storage Model with support for heating rod and two heating coils"
   import SI = Modelica.SIunits;
-  import DataBase;
-  //import HVAC;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////parameters/////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,8 +28,8 @@ model BufferStorage
 
   inner parameter SI.Temperature T_start=298.15 "Start Temperature of fluid" annotation (Dialog(tab="Initialisation"));
 
-    inner parameter DataBase.BufferStorage.BufferStorageBaseDataDefinition data=
-      DataBase.BufferStorage.Vitocell_340_M_800L()
+    inner parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
+      AixLib.DataBase.Storage.Generic_500l()
     annotation (choicesAllMatching);
 
   inner parameter Integer n(min=3)=5 " Model assumptions Number of Layers";
@@ -265,7 +263,9 @@ Heat transfer model for heat transfer between two fluid layers.
     alpha_HC=alpha_HC1,
     redeclare package Medium = MediumHC1,
     Length_HC=data.Length_HC1,
-    Pipe_HC=data.Pipe_HC1) if use_heatingCoil1 annotation (Placement(
+    Pipe_HC=data.Pipe_HC1,
+    allowFlowReversal=true) if
+                              use_heatingCoil1 annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
@@ -275,7 +275,8 @@ Heat transfer model for heat transfer between two fluid layers.
     Length_HC=data.Length_HC2,
     alpha_HC=alpha_HC2,
     Pipe_HC=data.Pipe_HC2,
-    redeclare package Medium = MediumHC2) if use_heatingCoil2 annotation (
+    redeclare package Medium = MediumHC2,
+    allowFlowReversal=true) if               use_heatingCoil2 annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
