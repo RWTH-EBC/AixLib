@@ -1,31 +1,30 @@
 within AixLib.Fluid.HeatGenerators.BaseClasses.Controllers;
 model delayedOnOffController
 
-  parameter Modelica.SIunits.Temperature maxTreturn = 343.15
+  parameter Modelica.SIunits.Temperature MaxTReturn = 343.15
     "Maximum Return Temperature";
-  parameter Real minDeltaT = 10 "Minimum Flow and Return Temperature Difference";
-  parameter Real TflowRange=5 "Range of the Flow temperature";
-  parameter Modelica.SIunits.Time delayTime = 1800 "On/Off Delay time";
-  parameter Boolean initialOutput=false;
-  parameter Real delayUnit=200;
-  parameter Real minCapacity = 30 "Minimum allowable working capacity in %";
+  parameter Real MinDeltaT = 10 "Minimum Flow and Return Temperature Difference";
+  parameter Real TFlowRange=5 "Range of the Flow temperature";
+  parameter Modelica.SIunits.Time DelayTime = 1800 "On/Off Delay time";
+  parameter Boolean InitialOutput=false;
+  parameter Real DelayUnit=200;
+  parameter Real MinCapacity = 30 "Minimum allowable working capacity in %";
 
   Modelica.Blocks.Logical.And and1 annotation (Placement(transformation(
         extent={{-22,16},{-8,30}}, rotation=0)));
   Modelica.Blocks.Logical.Pre pre2 annotation (Placement(transformation(
         extent={{-48,-12},{-34,0}}, rotation=0)));
-  Modelica.Blocks.Logical.OnOffController onOffController(bandwidth=minDeltaT,
-      pre_y_start=initialOutput)
+  Modelica.Blocks.Logical.OnOffController onOffController(bandwidth=MinDeltaT)
                    annotation (Placement(transformation(extent={{-76,-16},{
           -56,4}}, rotation=0)));
-  Modelica.Blocks.Logical.LessThreshold lessThreshold(threshold=TflowRange)
+  Modelica.Blocks.Logical.LessThreshold lessThreshold(threshold=TFlowRange)
     "Maximum allowable Flow Temperature Variation"
     annotation (Placement(transformation(extent={{-50,38},{-34,54}},
         rotation=0)));
   Modelica.Blocks.Logical.Or or1 annotation (Placement(transformation(
         extent={{4,-14},{12,-2}}, rotation=0)));
   Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(threshold=
-        maxTreturn)
+        MaxTReturn)
     "Max Return Temperature Limit"
     annotation (Placement(transformation(
       origin={0,-50},
@@ -47,7 +46,7 @@ model delayedOnOffController
       origin={-60,120},
       extent={{-20,-20},{20,20}},
       rotation=270)));
-  Modelica.Blocks.Discrete.UnitDelay unitDelay(samplePeriod=delayUnit)
+  Modelica.Blocks.Discrete.UnitDelay unitDelay(samplePeriod=DelayUnit)
     annotation (Placement(transformation(extent={{32,-14},{40,-6}})));
   Modelica.Blocks.Math.Feedback feedback
     annotation (Placement(transformation(
@@ -57,7 +56,7 @@ model delayedOnOffController
   Modelica.Blocks.Interfaces.RealInput ControllerOutput
     annotation (Placement(transformation(extent={{-140,-80},{-100,-40}},
         rotation=0)));
-  Modelica.Blocks.Interfaces.RealInput minCapacity_in
+  Modelica.Blocks.Interfaces.RealInput MinCapacity_in
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
         rotation=0)));
   Modelica.Blocks.Logical.Not not1
@@ -73,17 +72,17 @@ model delayedOnOffController
   Modelica.Blocks.Logical.LogicalSwitch logicalSwitch
     annotation (Placement(transformation(extent={{72,12},{78,-12}},
         rotation=0)));
-  Modelica.Blocks.Interfaces.BooleanInput externalOnOff "False for shut down"
+  Modelica.Blocks.Interfaces.BooleanInput ExternalON "False for shut down"
     annotation (Placement(transformation(
-      origin={60,120},
-      extent={{-20,-20},{20,20}},
-      rotation=270)));
+        origin={60,120},
+        extent={{-20,-20},{20,20}},
+        rotation=270)));
   Modelica.Blocks.Logical.Not not3
     annotation (Placement(transformation(extent={{38,86},{26,96}}, rotation=
          0)));
   Modelica.Blocks.Logical.Or or3 annotation (Placement(transformation(
         extent={{16,-10},{24,10}}, rotation=0)));
-  Modelica.Blocks.Logical.LessThreshold lessThreshold1(threshold=minCapacity)
+  Modelica.Blocks.Logical.LessThreshold lessThreshold1(threshold=MinCapacity)
     annotation (Placement(transformation(extent={{52,-4},{60,4}}, rotation=
           0)));
   Modelica.Blocks.Logical.GreaterEqualThreshold greaterEqualThreshold(threshold=
@@ -93,14 +92,14 @@ model delayedOnOffController
         rotation=0)));
   Modelica.Blocks.Logical.Or or4 annotation (Placement(transformation(
         extent={{88,-6},{96,6}}, rotation=0)));
-  Modelica.Blocks.MathBoolean.OnDelay onDelay(delayTime=delayTime)
+  Modelica.Blocks.MathBoolean.OnDelay onDelay(delayTime=DelayTime)
     annotation (Placement(transformation(extent={{50,62},{58,70}})));
-  Modelica.Blocks.MathBoolean.OnDelay onDelay1(delayTime=delayTime)
+  Modelica.Blocks.MathBoolean.OnDelay onDelay1(delayTime=DelayTime)
     annotation (Placement(transformation(extent={{50,-52},{58,-44}})));
-  Modelica.Blocks.Nonlinear.FixedDelay fixedDelay(delayTime=delayTime)
+  Modelica.Blocks.Nonlinear.FixedDelay fixedDelay(delayTime=DelayTime)
     annotation (Placement(transformation(extent={{48,-18},{56,-10}})));
 initial equation
-  pre(y)=initialOutput;
+  pre(y)=InitialOutput;
 
 equation
 
@@ -132,7 +131,7 @@ equation
     points={{-78,-12},{-88,-12},{-88,-60},{-120,-60}},
     color={0,0,127},
     smooth=Smooth.None));
-  connect(onOffController.reference, minCapacity_in) annotation (Line(
+  connect(onOffController.reference,MinCapacity_in)  annotation (Line(
     points={{-78,0},{-120,0}},
     color={0,0,127},
     smooth=Smooth.None));
@@ -140,10 +139,10 @@ equation
     points={{3.2,-12.8},{5.38845e-016,-12.8},{5.38845e-016,-41.2}},
     color={255,0,255},
     smooth=Smooth.None));
-  connect(externalOnOff, not3.u) annotation (Line(
-    points={{60,120},{60,91},{39.2,91}},
-    color={255,0,255},
-    smooth=Smooth.None));
+  connect(ExternalON, not3.u) annotation (Line(
+      points={{60,120},{60,91},{39.2,91}},
+      color={255,0,255},
+      smooth=Smooth.None));
   connect(FlowTemp_setpoint, feedback.u1) annotation (Line(
     points={{-60,120},{-60,88},{-68,88},{-68,66.4}},
     color={0,0,127},
@@ -334,5 +333,4 @@ revisions="<html>
 <li><i>January 31, 2011</i> by Pooyan Jahangiri:<br/>Implemented</li>
 </ul></p>
 </html>"));
-
 end delayedOnOffController;

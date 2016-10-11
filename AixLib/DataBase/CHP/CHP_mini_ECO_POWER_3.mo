@@ -1,14 +1,13 @@
 within AixLib.DataBase.CHP;
 record CHP_mini_ECO_POWER_3 "Vaillant: mini BHKW eco Power 3 (Natural Gas)"
-import DataBase;
-extends DataBase.CHP.CHPBaseDataDefinition(
-  vol={2.72e-3},
+extends CHPBaseDataDefinition(
+  Vol={2.72e-3},
   data_CHP=[0,     0,     0,     0,     0;
            58,  1.76,  4.7,  7.8624,  54.4;
            100,    3,    8, 13.3488,  92.6],
-  maxVTemp=348.15,
-  maxRTemp=338.15,
-  pipe_D=0.08);
+  MaxTFlow=348.15,
+  MaxTReturn=338.15,
+  Pipe_D=0.08);
 /* the el. and thermal powers are in KW. The fuel input is in kW. The fuel consumption is in l/kWh.
  the calorific value of liquid gas is assumed 28 kWh/m^3.
  and the calorific value of natural gas is assumed 12 kWh/m^3.

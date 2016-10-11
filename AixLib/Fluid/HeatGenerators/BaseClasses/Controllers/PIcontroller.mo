@@ -1,9 +1,9 @@
 within AixLib.Fluid.HeatGenerators.BaseClasses.Controllers;
-model PIcontroller
+model PIController
 
   parameter Real Kc=0 "Gain of the controller";
   parameter Modelica.SIunits.Time Tc=1 "Time Constant (T>0 required)";
-  parameter Real minCapacity = 25 "Minimum controller output in load operation";
+  parameter Real MinCapacity = 25 "Minimum controller output in load operation";
 
   Modelica.Blocks.Logical.Switch switch1
     annotation (Placement(transformation(extent={{-70,0},{-50,20}})));
@@ -11,9 +11,10 @@ model PIcontroller
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     yMax=100,
     y_start=0,
-    yMin=minCapacity,
     k=Kc,
-    Ti=Tc)     annotation (Placement(transformation(
+    Ti=Tc,
+    yMin=MinCapacity)
+               annotation (Placement(transformation(
           extent={{-36,34},{-16,54}})));
   Modelica.Blocks.Continuous.LimPID PI1(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
@@ -41,7 +42,7 @@ model PIcontroller
     annotation (Placement(transformation(extent={{70,-10},{90,10}})));
   Modelica.Blocks.Interfaces.RealOutput y annotation (
       Placement(transformation(extent={{100,-10},{120,10}})));
-  Modelica.Blocks.Interfaces.RealInput setpoint annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
+  Modelica.Blocks.Interfaces.RealInput Setpoint annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
   Modelica.Blocks.Interfaces.BooleanInput ON
                                    "Connector of Boolean input signal"
     annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
@@ -82,7 +83,7 @@ equation
           0,255}));
   connect(switch2.u2, triggeredTrapezoid.u) annotation (Line(points={{68,0},{60,
           0},{60,-60},{-38,-60},{-38,-14},{-29.8,-14}}, color={255,0,255}));
-  connect(setpoint, triggeredSampler.u) annotation (Line(points={{-120,60},{-80,
+  connect(Setpoint, triggeredSampler.u) annotation (Line(points={{-120,60},{-80,
           60},{-80,82},{-43.6,82}}, color={0,0,127}));
   connect(triggeredSampler2.u, triggeredSampler.u) annotation (Line(points={{-65.6,
           44},{-80,44},{-80,82},{-43.6,82}}, color={0,0,127}));
@@ -123,4 +124,4 @@ revisions="<html>
 <li><i>January 31, 2011</i> by Pooyan Jahangiri:<br/>Implemented</li>
 </ul></p>
 </html>"));
-end PIcontroller;
+end PIController;

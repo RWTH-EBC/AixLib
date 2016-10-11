@@ -1,12 +1,12 @@
 within AixLib.DataBase.CHP;
 record CHP_FMB_1500_GSMK "FMB-1500-GSMK : Guascor"
   extends CHPBaseDataDefinition(
-    vol={56.0e-3},
+    Vol={56.0e-3},
     data_CHP=[0,0,0,0,0; 50,600,777,1599,159.5; 75,900,1046,2252,224.4; 100,
         1200,1315,2916,290.9],
-    maxVTemp=363.15,
-    maxRTemp=343.15,
-    pipe_D=0.2);
+    MaxTFlow=363.15,
+    MaxTReturn=343.15,
+    Pipe_D=0.2);
 
   annotation (Documentation(info="<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>

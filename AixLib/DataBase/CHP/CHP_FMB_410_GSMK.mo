@@ -1,12 +1,12 @@
 within AixLib.DataBase.CHP;
 record CHP_FMB_410_GSMK "FMB-410-GSMK : Schmitt Enertec"
   extends CHPBaseDataDefinition(
-    vol={22.6e-3},
+    Vol={22.6e-3},
     data_CHP=[0,0,0,0,0; 50,167,269,491,49.0; 75,251,376,703,70.2; 100,334,485,
         913,91.1],
-    maxVTemp=363.15,
-    maxRTemp=343.15,
-    pipe_D=0.13);
+    MaxTFlow=363.15,
+    MaxTReturn=343.15,
+    Pipe_D=0.13);
 
   annotation (Documentation(info="<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>

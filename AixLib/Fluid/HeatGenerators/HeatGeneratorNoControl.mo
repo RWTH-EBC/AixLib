@@ -1,5 +1,5 @@
 within AixLib.Fluid.HeatGenerators;
-model HeatGeneratorNoControll
+model HeatGeneratorNoControl
   extends AixLib.Fluid.HeatGenerators.BaseClasses.PartialHeatGenerator(
       pressureDrop(
              a=coeffPresLoss),                                         vol(V=V));
@@ -54,4 +54,4 @@ the controller is modelled outside the heat generator.
 <li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>First implementation</li>
 </ul></p>
 </html>"));
-end HeatGeneratorNoControll;
+end HeatGeneratorNoControl;

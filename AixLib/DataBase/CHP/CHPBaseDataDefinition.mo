@@ -5,14 +5,14 @@ extends Modelica.Icons.Record;
   import SI = Modelica.SIunits;
   import SIconv = Modelica.SIunits.Conversions.NonSIunits;
 
-  parameter SI.Volume vol[:] "Watervolume of CHP";
+  parameter SI.Volume Vol[:] "Water volume of CHP";
   parameter Real data_CHP[:,5];
           //Matrix contains : [Capacity [%], Electrical Power [kW], Total Heat Recovery [kW], Fuel Input [kW], Fuel Consumption [m3/h]]
 
-  parameter SI.Temperature maxVTemp "Maximum Flow Temperature";
-  parameter SI.Temperature maxRTemp "Maximum Return Temperature";
+  parameter SI.Temperature MaxTFlow "Maximum Flow Temperature";
+  parameter SI.Temperature MaxTReturn "Maximum Return Temperature";
 
-  parameter Real pipe_D "Outlet pipe diameter";
+  parameter Real Pipe_D "Outlet pipe diameter";
 
   annotation (Documentation(info="<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>

@@ -1,11 +1,11 @@
 within AixLib.DataBase.CHP;
 record CHP_mikro_ECO_POWER_1 "Vaillant mikro CHP ecoPOWER 1.0"
   extends CHPBaseDataDefinition(
-    vol={3e-3},
+    Vol={3e-3},
     data_CHP=[0,0,0,0,0; 100,1,2.58,2.63,2.63],
-    maxVTemp=353.15,
-    maxRTemp=343.15,
-    pipe_D=0.08);
+    MaxTFlow=353.15,
+    MaxTReturn=343.15,
+    Pipe_D=0.08);
  //Matrix contains : [Capacity, Electrical Power, Total Heat Recovery, Fuel Input, Fuel Consumption]
 
   annotation (Documentation(info="<html>

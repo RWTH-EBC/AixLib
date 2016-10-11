@@ -11,9 +11,9 @@ model HeatGeneratorNoControllSystem
   Modelica.Fluid.Sources.Boundary_pT sink(redeclare package Medium =
         Media.Specialized.Water.TemperatureDependentDensity, nPorts=1)
     annotation (Placement(transformation(extent={{60,-10},{40,10}})));
-  HeatGeneratorNoControll heatGeneratorNoControll(redeclare package Medium =
-        Media.Specialized.Water.TemperatureDependentDensity, m_flow_nominal=0.03)
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+  HeatGeneratorNoControl heatGeneratorNoControll(redeclare package Medium =
+        Media.Specialized.Water.TemperatureDependentDensity, m_flow_nominal=
+        0.03) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Trapezoid trapezoid(
     rising=7200,
     width=7200,

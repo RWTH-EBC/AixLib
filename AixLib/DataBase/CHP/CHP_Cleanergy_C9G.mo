@@ -1,9 +1,8 @@
 within AixLib.DataBase.CHP;
 record CHP_Cleanergy_C9G
   "Cleanergy: mini BHKW C9G (8-25 kW thermal, Stirling engine for low caloric gas)"
-  import DataBase;
-  extends DataBase.CHP.CHPBaseDataDefinition(
-    vol={4.2e-3},
+  extends CHPBaseDataDefinition(
+    Vol={4.2e-3},
     data_CHP=[0, 0,    0,      0,    0;
              24, 2.00, 7.18,  11.76, 1.31;
              30, 2.70, 9.27,  14.59, 1.62;
@@ -15,9 +14,9 @@ record CHP_Cleanergy_C9G
              80, 7.40, 20.99, 30.20, 3.36;
              90, 8.15, 23.29, 33.27, 3.70;
             100, 8.90, 25.61, 36.33, 4.04],
-    maxVTemp=353.15,
-    maxRTemp=343.15,
-    pipe_D=0.08);
+    MaxTFlow=353.15,
+    MaxTReturn=343.15,
+    Pipe_D=0.08);
     /*
     Minimum modulation limit is unknown and set to the same value as for Vaillant eco power 5.
     
