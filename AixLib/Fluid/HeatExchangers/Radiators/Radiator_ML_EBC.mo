@@ -94,24 +94,24 @@ protected
 protected
   BaseClasses.MultiLayerThermalDelta multiLayer_HE[N](
     redeclare each package Medium = Medium,
-    M_Radiator=fill((length*MassSteel)/N, N),
-    calc_dT=fill(calc_dT, N),
-    Type=fill(Type, N),
-    n=fill(Exponent, N),
-    DensitySteel=fill(DensitySteel, N),
-    CapacitySteel=fill(CapacitySteel, N),
-    length=fill(length, N),
-    T0=T0_N,
-    Vol_Water=fill(Vol_Water, N),
-    s_eff=fill(Type[1], N),
-    Q_dot_nom_i=fill(Q_dot_nom_i, N),
-    dT_nom=fill(dT_nom, N),
-    delta_nom=fill(delta_nom, N),
-    LambdaSteel=fill(LambdaSteel, N),
-    eps=fill(eps, N),
-    A=fill(A/N, N),
-    d=fill(d, N),
-    m_flow_nominal=m_flow_nominal)
+    each M_Radiator=(length*MassSteel)/N,
+    each calc_dT=calc_dT,
+    each Type=Type,
+    each n=Exponent,
+    each DensitySteel=DensitySteel,
+    each CapacitySteel=CapacitySteel,
+    each length=length,
+    each T0=T0_N,
+    each Vol_Water=Vol_Water,
+    each s_eff=Type[1],
+    each Q_dot_nom_i=Q_dot_nom_i,
+    each dT_nom=dT_nom,
+    each delta_nom=delta_nom,
+    each LambdaSteel=LambdaSteel,
+    each eps=eps,
+    each A=A/N,
+    each d=d,
+    each m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{-28,-18},{8,18}})));
 
 public
