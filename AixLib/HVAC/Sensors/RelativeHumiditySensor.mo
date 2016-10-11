@@ -7,9 +7,9 @@ model RelativeHumiditySensor
 equation
   dp = 0;
   Humidity = p_Steam / p_Saturation;
-  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Line(points=  {{0, 100}, {0, 50}}, color=  {0, 0, 127}), Line(points=  {{-92, 0}, {100, 0}}, color=  {0, 128, 255}), Ellipse(extent=  {{-54, 4}, {46, -96}}, lineColor=  {0, 128, 255}, fillColor=  {0, 0, 255},
-            fillPattern=                                                                                                    FillPattern.Solid), Polygon(points=  {{-51, -28}, {0, 84}, {42, -28}, {-51, -28}}, lineColor=  {0, 0, 255}, fillColor=  {0, 0, 255},
-            fillPattern=                                                                                                    FillPattern.Solid)}), Documentation(info = "<html>
+  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Line(points = {{0, 100}, {0, 50}}, color = {0, 0, 127}), Line(points = {{-92, 0}, {100, 0}}, color = {0, 128, 255}), Ellipse(extent = {{-54, 4}, {46, -96}}, lineColor = {0, 128, 255}, fillColor = {0, 0, 255},
+            fillPattern =                                                                                                   FillPattern.Solid), Polygon(points = {{-51, -28}, {0, 84}, {42, -28}, {-51, -28}}, lineColor = {0, 0, 255}, fillColor = {0, 0, 255},
+            fillPattern =                                                                                                   FillPattern.Solid)}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This component monitors the relative Humidity of the mass flow flowing from port_a to port_b. The sensor is ideal, i.e., it does not influence the fluid. </p>
  <p><br/>If there is liquid water in the air, the relative humidity is limited to 1.</p>

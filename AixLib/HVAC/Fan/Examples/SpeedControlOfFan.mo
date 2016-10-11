@@ -20,7 +20,7 @@ equation
   connect(boundaryMoistAir_phX1.portMoistAir_a, fanSimple.portMoistAir_a) annotation(Line(points = {{-52, -2}, {-40, -2}, {-40, 20}, {-30, 20}}, color = {0, 127, 255}));
   connect(volumeFlowController1.portMoistAir_b, boundaryMoistAir_phX2.portMoistAir_a) annotation(Line(points = {{26, -20}, {32, -20}, {32, 1.33227e-015}, {40, 1.33227e-015}}, color = {0, 127, 255}));
   connect(V_dot_set.y, volumeFlowController1.VolumeFlowSet) annotation(Line(points = {{5, 1.33227e-015}, {2, 1.33227e-015}, {2, -17.9}, {5.2, -17.9}}, color = {0, 0, 127}));
-  annotation( Documentation(info = "<html>
+  annotation (Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>A simple Simulation Model which shows the effect of rotational Speed control of a Fan</p>
  </html>", revisions = "<html>

@@ -20,7 +20,7 @@ equation
   connect(Toda.y, Medium2out1.h_in) annotation(Line(points = {{-69, -20}, {-62, -20}}, color = {0, 0, 127}));
   connect(fixedHeatFlow.port, volumeMoistAir.heatPort) annotation(Line(points = {{48, 0}, {40, 0}}, color = {191, 0, 0}));
   connect(Medium2out1.portMoistAir_a, HX.port_1a) annotation(Line(points = {{-40, -20}, {-22, -20}}, color = {0, 127, 255}));
-  annotation( Documentation(info = "<html>
+  annotation (Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>A small example of an heat exchanger in combination with a room model with a heat load (ventilation system with heat recovery). The outdoor air temperature will be varied.</p>
  </html>", revisions = "<html>

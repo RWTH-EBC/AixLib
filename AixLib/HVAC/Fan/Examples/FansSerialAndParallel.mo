@@ -27,7 +27,7 @@ equation
   connect(fanSimple_single.portMoistAir_b, pressureLoss_single.portMoistAir_a) annotation(Line(points = {{-34, -46}, {24, -46}}, color = {0, 127, 255}));
   connect(boundaryMoistAir_phX1_in.portMoistAir_a, fanSimple_single.portMoistAir_a) annotation(Line(points = {{-82, 20}, {-68, 20}, {-68, -46}, {-54, -46}}, color = {0, 127, 255}));
   connect(pressureLoss_single.portMoistAir_b, boundaryMoistAir_phX2_out.portMoistAir_a) annotation(Line(points = {{44, -46}, {58, -46}, {58, 20}, {72, 20}}, color = {0, 127, 255}));
-  annotation( Documentation(info = "<html>
+  annotation (Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>A simple Simulation Model which compares a single fan to two fans in serial and parallel</p>
  </html>", revisions = "<html>

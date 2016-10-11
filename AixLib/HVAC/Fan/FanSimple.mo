@@ -16,8 +16,7 @@ model FanSimple "Simple Fan Model"
   Modelica.SIunits.Power P_t "Technical Work of Fan";
   Modelica.SIunits.Power P_t_rev "Reversible technical Work of Fan";
   Modelica.Blocks.Tables.CombiTable1Ds table_Characteristics(tableOnFile = false, table = Characteristics.dp, smoothness = Modelica.Blocks.Types.Smoothness.LinearSegments, columns = {2, 3})
-    "Table with dp = f(V_flow) and eta = f(V_flow) characteristics for the Fan (n = const)"
-                                                                                                        annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}})));
+    "Table with dp = f(V_flow) and eta = f(V_flow) characteristics for the Fan (n = const)"             annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealOutput Power annotation(Placement(transformation(extent = {{-12, -12}, {12, 12}}, rotation = 270, origin = {0, -104})));
   Modelica.Blocks.Interfaces.RealInput n_relative(min = 0, max = 1) if UseRotationalSpeedInput annotation(Placement(transformation(extent = {{-14, -16}, {14, 16}}, rotation = 270, origin = {0, 106})));
 protected
@@ -51,8 +50,8 @@ equation
   PressureIncrease = n_internal * n_internal * table_Characteristics.y[1];
   Volflow = portMoistAir_a.m_flow / rho_MoistAir;
   Power = P_t;
-  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Ellipse(extent=  {{-100, 100}, {100, -100}}, lineColor=  {0, 0, 0},
-            fillPattern=                                                                                                    FillPattern.Solid, fillColor=  {170, 255, 255}), Line(points=  {{-78, 60}, {92, 40}, {90, 40}}, color=  {0, 0, 0}), Line(points=  {{-80, -60}, {92, -40}, {92, -40}}, color=  {0, 0, 0})}), Documentation(info = "<html>
+  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Ellipse(extent = {{-100, 100}, {100, -100}}, lineColor = {0, 0, 0},
+            fillPattern =                                                                                                   FillPattern.Solid, fillColor = {170, 255, 255}), Line(points = {{-78, 60}, {92, 40}, {90, 40}}, color = {0, 0, 0}), Line(points = {{-80, -60}, {92, -40}, {92, -40}}, color = {0, 0, 0})}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>A simple fan model with variation of rotational speed. The properties of the fan are table based.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>

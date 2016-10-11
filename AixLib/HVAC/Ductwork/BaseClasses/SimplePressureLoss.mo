@@ -7,7 +7,7 @@ partial model SimplePressureLoss
 equation
   Volflow = portMoistAir_a.m_flow * (1 + X_Steam) / rho_MoistAir;
   dp = 8 * zeta_var * rho_MoistAir / D ^ 4 / Modelica.Constants.pi ^ 2 * abs(Volflow) * Volflow;
-  annotation( Documentation(info = "<html>
+  annotation (Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Simple partial pressure loss model based on zeta value, which in this case given as a variable.</p>
  </html>", revisions = "<html>

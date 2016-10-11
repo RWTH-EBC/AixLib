@@ -13,9 +13,9 @@ equation
   connect(volumeMoistAir.heatPort, heatport) annotation(Line(points = {{49, 31}, {44, 31}, {44, 34}, {-2, 34}, {-2, 42}}, color = {191, 0, 0}));
   connect(ductPressureLoss.portMoistAir_b, volumeMoistAir.portMoistAir_a) annotation(Line(points = {{-8, -3.55271e-015}, {-2, -3.55271e-015}, {-2, 0}, {18, 0}}, color = {0, 127, 255}));
   connect(ductPressureLoss.portMoistAir_a, portMoistAir_a) annotation(Line(points = {{-70, -3.55271e-015}, {-86, -3.55271e-015}, {-86, 0}, {-100, 0}}, color = {0, 127, 255}));
-  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -40}, {100, 40}}), graphics={  Rectangle(extent=  {{-100, 33}, {100, -35}}, lineColor=  {0, 0, 0}, fillColor=  {95, 95, 95},
-            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-100, 29}, {100, -31}}, lineColor=  {0, 0, 0}, fillColor=  {170, 255, 255},
-            fillPattern=                                                                                                    FillPattern.HorizontalCylinder)}), Documentation(info = "<html>
+  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -40}, {100, 40}}), graphics={  Rectangle(extent = {{-100, 33}, {100, -35}}, lineColor = {0, 0, 0}, fillColor = {95, 95, 95},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-100, 29}, {100, -31}}, lineColor = {0, 0, 0}, fillColor = {170, 255, 255},
+            fillPattern =                                                                                                   FillPattern.HorizontalCylinder)}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Simple Duct Model with pressure loss and storage of mass and energy</p>
  <p>It consists of one pressure loss model and one Volume model.</p>

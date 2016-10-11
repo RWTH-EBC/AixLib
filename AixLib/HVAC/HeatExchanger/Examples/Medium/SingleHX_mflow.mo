@@ -16,7 +16,7 @@ equation
   connect(HX.port_1b, Medium1out.portMoistAir_a) annotation(Line(points = {{-20, -12}, {-36, -12}, {-36, -20}, {-50, -20}}, color = {0, 127, 255}));
   connect(mflow.y, Medium1in.m_in) annotation(Line(points = {{-79, 50}, {-72, 50}, {-72, 28}}, color = {0, 0, 127}));
   connect(mflow.y, Medium2in.m_in) annotation(Line(points = {{-79, 50}, {74, 50}, {74, -12}}, color = {0, 0, 127}));
-  annotation( Documentation(info = "<html>
+  annotation (Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>A small example of an heat exchanger with varying mass flow rate of both media.</p>
  </html>", revisions = "<html>

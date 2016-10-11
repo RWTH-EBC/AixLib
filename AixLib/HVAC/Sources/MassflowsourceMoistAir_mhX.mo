@@ -43,8 +43,8 @@ equation
   portMoistAir_a.m_flow = -m_in_internal;
   portMoistAir_a.h_outflow = h_in_internal;
   portMoistAir_a.X_outflow = X_in_internal;
-  annotation( Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Ellipse(extent=  {{-100, 100}, {100, -100}}, lineColor=  {170, 255, 255},
-            fillPattern=                                                                                                    FillPattern.Sphere, fillColor=  {170, 213, 255}), Text(extent=  {{-68, 12}, {74, -12}}, lineColor=  {0, 0, 255}, textString=  "m_flow boundary")}), Documentation(info = "<html>
+  annotation (Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Ellipse(extent = {{-100, 100}, {100, -100}}, lineColor = {170, 255, 255},
+            fillPattern =                                                                                                   FillPattern.Sphere, fillColor = {170, 213, 255}), Text(extent = {{-68, 12}, {74, -12}}, lineColor = {0, 0, 255}, textString = "m_flow boundary")}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Boundary Model for Moist Air. Defines mass flow of dry air, specific enthalpy per mass dry air and water fraction per mass dry air.</p>
  <h4><span style=\"color:#008000\">Example Results</span></h4>

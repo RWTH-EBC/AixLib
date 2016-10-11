@@ -70,7 +70,7 @@ algorithm
                             per=per, dimD=dimD);
   elseif r_N <= delta/2 then
     dp := flowApproximationAtOrigin(r_N=r_N, V_flow=V_flow,
-                                    VDelta_flow=  VDelta_flow, dpDelta=dpDelta,
+                                    VDelta_flow = VDelta_flow, dpDelta=dpDelta,
                                     delta=delta, cBar=cBar);
   else
     dp := Modelica.Fluid.Utilities.regStep(x=r_N-0.75*delta,

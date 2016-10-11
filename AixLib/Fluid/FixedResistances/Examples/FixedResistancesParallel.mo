@@ -18,14 +18,14 @@ model FixedResistancesParallel
     linearized=false,
     from_dp=false)
              annotation (Placement(transformation(extent={{-28,30},{-8,50}})));
-  AixLib.Fluid.Sources.Boundary_pT sou1(          redeclare package Medium
-      = Medium,
+  AixLib.Fluid.Sources.Boundary_pT sou1(          redeclare package Medium =
+        Medium,
     T=293.15,
     nPorts=2,
     use_p_in=true)        annotation (Placement(transformation(extent={{-70,28},
             {-50,48}})));
-  AixLib.Fluid.Sources.Boundary_pT sin1(          redeclare package Medium
-      = Medium,
+  AixLib.Fluid.Sources.Boundary_pT sin1(          redeclare package Medium =
+        Medium,
     T=283.15,
     nPorts=2,
     use_p_in=true)        annotation (Placement(transformation(extent={{80,28},

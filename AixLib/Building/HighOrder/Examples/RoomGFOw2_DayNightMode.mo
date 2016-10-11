@@ -18,8 +18,8 @@ model RoomGFOw2_DayNightMode
     dp(start=1000))                                                               annotation(Placement(transformation(extent = {{22, -36}, {42, -16}})));
   AixLib.Fluid.Movers.Pump Pumo(redeclare package Medium = Medium, m_flow_small=
        0.0001)                  annotation(Placement(transformation(extent = {{-92, -36}, {-72, -16}})));
-  AixLib.Fluid.HeatExchangers.Boiler boilerTaktTable(redeclare package Medium
-      = Medium, m_flow_nominal=0.01)                 annotation(Placement(transformation(extent = {{-56, -36}, {-36, -16}})));
+  AixLib.Fluid.HeatExchangers.Boiler boilerTaktTable(redeclare package Medium =
+        Medium, m_flow_nominal=0.01)                 annotation(Placement(transformation(extent = {{-56, -36}, {-36, -16}})));
   AixLib.Utilities.Sources.NightMode nightMode(dayEnd = 22, dayStart = 6) annotation(Placement(transformation(extent = {{-104, 0}, {-84, 20}})));
   AixLib.Fluid.FixedResistances.StaticPipe pipe_flow(
     redeclare package Medium = Medium,

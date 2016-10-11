@@ -21,7 +21,7 @@ equation
   end if;
   port_a.Q_flow = lambda_eff * A / dx * dT;
   port_a.Q_flow + port_b.Q_flow = 0;
-  annotation( Documentation(info = "<html>
+  annotation (Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Bouyancy model for the heat transfer between the layers in a buffer storage.</p>
  </html>", revisions = "<html>

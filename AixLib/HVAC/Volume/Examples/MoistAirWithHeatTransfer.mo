@@ -30,7 +30,7 @@ equation
   connect(volumeMoistAir_M.portMoistAir_b, humiditySensor_M.portMoistAir_a) annotation(Line(points = {{46, -82}, {36, -82}}, color = {0, 127, 255}));
   connect(prescribedHeatFlow.port, volumeMoistAir_M1.heatPort) annotation(Line(points = {{-20, -42}, {-12, -42}, {-12, -62}}, color = {191, 0, 0}));
   connect(ramp.y, prescribedHeatFlow.Q_flow) annotation(Line(points = {{-59, -42}, {-40, -42}}, color = {0, 0, 127}));
-  annotation( experiment(StopTime = 1000, Interval = 1),Documentation(info = "<html>
+  annotation (experiment(StopTime = 1000, Interval = 1),Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Example to show mixing of fluid flows and heat transfer for moist air model</p>
  </html>", revisions = "<html>

@@ -22,19 +22,19 @@ annotation (Documentation(revisions="<HTML>
 <p>Function to shut down current TCP-connection and socket. </p>
 <h4>Usage of Function</h4>
 <p>Example connect to server with IP (0.11.11.11) on port 1234 and directly disconnect. </p>
-<pre>model dummyUsage
-  Integer state &QUOT;Return variable of functions 0 == OK!, 1 == error&QUOT;;
+<pre>model dummyUsage
+  Integer state &QUOT;Return variable of functions 0 == OK!, 1 == error&QUOT;;
   Integer socketHandle &QUOT; Socket handle&QUOT;;
    
 initial algorithm 
-
+
   state := SocketInit();
   (socketHandle,state) := SocketConnect(&QUOT;0.11.11.11&QUOT;,&QUOT;1234&QUOT;);
   
 equation
-
+
 algorithm
-
+
  when terminal() then
   state := SocketDisconnect(socketHandle);
  end when;

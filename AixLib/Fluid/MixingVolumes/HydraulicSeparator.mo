@@ -88,8 +88,8 @@ model HydraulicSeparator
 ///////////////////////////////////////////////////////////////////////////
     //Ports/ Flanges                                                         //
     ///////////////////////////////////////////////////////////////////////////
-  Modelica.Fluid.Interfaces.FluidPort_a port_a_primary(redeclare package Medium
-      = Medium)
+  Modelica.Fluid.Interfaces.FluidPort_a port_a_primary(redeclare package Medium =
+        Medium)
     annotation (Placement(transformation(extent={{-114,50},{-94,70}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a_secondary(redeclare package
       Medium = Medium)
@@ -97,8 +97,8 @@ model HydraulicSeparator
   Modelica.Fluid.Interfaces.FluidPort_b port_b_secondary(redeclare package
       Medium = Medium)
     annotation (Placement(transformation(extent={{94,50},{114,70}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_b_primary(redeclare package Medium
-      = Medium)
+  Modelica.Fluid.Interfaces.FluidPort_b port_b_primary(redeclare package Medium =
+        Medium)
     annotation (Placement(transformation(extent={{-114,-70},{-94,-50}})));
 equation
   connect(staticPipe4.port_a, massFlowSensor.port_b) annotation (Line(

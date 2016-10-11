@@ -56,13 +56,13 @@ equation
   else
     XiSatRefIn=(1-XiDryBul)*XiSat/(1-XiSat);
     XiSat  = AixLib.Utilities.Psychrometrics.Functions.X_pSatpphi(
-      pSat=  AixLib.Utilities.Psychrometrics.Functions.saturationPressureLiquid(TWetBul),
-      p=     p,
-      phi=   1);
+      pSat = AixLib.Utilities.Psychrometrics.Functions.saturationPressureLiquid(TWetBul),
+      p =    p,
+      phi =  1);
     XiDryBul =AixLib.Utilities.Psychrometrics.Functions.X_pSatpphi(
-      p=     p,
-      pSat=  AixLib.Utilities.Psychrometrics.Functions.saturationPressureLiquid(TDryBul),
-      phi=   phi);
+      p =    p,
+      pSat = AixLib.Utilities.Psychrometrics.Functions.saturationPressureLiquid(TDryBul),
+      phi =  phi);
     (TWetBul-AixLib.Utilities.Psychrometrics.Constants.T_ref) * (
               (1-XiDryBul) * AixLib.Utilities.Psychrometrics.Constants.cpAir +
               XiSatRefIn * AixLib.Utilities.Psychrometrics.Constants.cpSte +

@@ -15,9 +15,9 @@ model SteamHumidifier "Steam humidifier, with consideration of saturation"
   Modelica.Blocks.Interfaces.RealInput Temperature_steamIn annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 270, origin = {34, 100}), iconTransformation(extent = {{-14, -14}, {14, 14}}, rotation = 270, origin = {40, 94})));
 equation
   assert(portMoistAir_b.X_outflow < X_Saturation_portb, "
-  Oversaturation X_outflow at port_b = " + String(portMoistAir_b.X_outflow) + " while X_saturation at port_b =" + String(X_Saturation_portb) + ".", level=  AssertionLevel.warning);
+  Oversaturation X_outflow at port_b = " + String(portMoistAir_b.X_outflow) + " while X_saturation at port_b =" + String(X_Saturation_portb) + ".", level = AssertionLevel.warning);
   assert(inStream(portMoistAir_a.X_outflow) < X_Saturation, "
-  Oversaturation X_outflow at port_a = " + String(inStream(portMoistAir_a.X_outflow)) + " while X_saturation at port_a =" + String(X_Saturation) + ".", level=  AssertionLevel.warning);
+  Oversaturation X_outflow at port_a = " + String(inStream(portMoistAir_a.X_outflow)) + " while X_saturation at port_a =" + String(X_Saturation) + ".", level = AssertionLevel.warning);
   // No pressure loss
   dp = 0;
   // Mass balance air
@@ -42,7 +42,7 @@ equation
     Massflow_steamUseful = Massflow_steamIn;
   end if;
   Massflow_steamOut = Massflow_steamIn - Massflow_steamUseful;
-  annotation( Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent=  {{-80, 80}, {80, -80}}, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid, pattern=  LinePattern.Solid), Line(points=  {{-32, 54}, {-64, -48}}, color=  {0, 0, 0}, pattern=  LinePattern.Dot), Line(points=  {{-12, 54}, {-44, -48}}, color=  {0, 0, 0}, pattern=  LinePattern.Dot), Line(points=  {{12, 54}, {-20, -48}}, color=  {0, 0, 0}, pattern=  LinePattern.Dot), Line(points=  {{36, 52}, {4, -50}}, color=  {0, 0, 0}, pattern=  LinePattern.Dot), Line(points=  {{62, 52}, {30, -50}}, color=  {0, 0, 0}, pattern=  LinePattern.Dot), Line(points=  {{-50, 56}, {-20, -44}}, color=  {0, 0, 0}, pattern=  LinePattern.Dot), Line(points=  {{-18, 56}, {12, -44}}, color=  {0, 0, 0}, pattern=  LinePattern.Dot), Line(points=  {{16, 56}, {46, -44}}, color=  {0, 0, 0}, pattern=  LinePattern.Dot)}), Documentation(info = "<html>
+  annotation (Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent = {{-80, 80}, {80, -80}}, fillColor = {215, 215, 215}, fillPattern = FillPattern.Solid, pattern = LinePattern.Solid), Line(points = {{-32, 54}, {-64, -48}}, color = {0, 0, 0}, pattern = LinePattern.Dot), Line(points = {{-12, 54}, {-44, -48}}, color = {0, 0, 0}, pattern = LinePattern.Dot), Line(points = {{12, 54}, {-20, -48}}, color = {0, 0, 0}, pattern = LinePattern.Dot), Line(points = {{36, 52}, {4, -50}}, color = {0, 0, 0}, pattern = LinePattern.Dot), Line(points = {{62, 52}, {30, -50}}, color = {0, 0, 0}, pattern = LinePattern.Dot), Line(points = {{-50, 56}, {-20, -44}}, color = {0, 0, 0}, pattern = LinePattern.Dot), Line(points = {{-18, 56}, {12, -44}}, color = {0, 0, 0}, pattern = LinePattern.Dot), Line(points = {{16, 56}, {46, -44}}, color = {0, 0, 0}, pattern = LinePattern.Dot)}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for a steam humidifier.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>

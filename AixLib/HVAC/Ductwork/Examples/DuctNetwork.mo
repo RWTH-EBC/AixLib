@@ -25,7 +25,7 @@ equation
   connect(pressureLoss1.portMoistAir_b, duct2.portMoistAir_a) annotation(Line(points = {{-38, -35}, {-10, -35}, {-10, 0}, {0, 0}, {0, 2}, {-2, 2}, {-2, 1}}, color = {0, 127, 255}));
   connect(duct.portMoistAir_a, boundaryMoistAir_phX2.portMoistAir_a) annotation(Line(points = {{-60, 0}, {-80, 0}}, color = {0, 127, 255}));
   connect(fixedHeatFlow.port, duct1.heatport) annotation(Line(points = {{-42, 64}, {-9, 64}, {-9, 39.475}}, color = {191, 0, 0}));
-  annotation( Documentation(info = "<html>
+  annotation (Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>A small example which shows how to build a network of ducts</p>
  </html>", revisions = "<html>

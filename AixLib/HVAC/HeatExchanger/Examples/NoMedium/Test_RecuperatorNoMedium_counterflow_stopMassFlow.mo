@@ -28,9 +28,9 @@ equation
   connect(recuperatorNoMedium3.T2out, subtract2.u2) annotation(Line(points = {{-10, 8}, {-16, 8}, {-16, 44}, {-21, 44}}, color = {0, 0, 127}));
   connect(T2out_ideal.y, division2.u2) annotation(Line(points = {{-11, 50}, {-16, 50}, {-16, 60}, {-36, 60}, {-36, 44}, {-41, 44}}, color = {0, 0, 127}));
   connect(subtract2.y, division2.u1) annotation(Line(points = {{-32.5, 47}, {-38.25, 47}, {-38.25, 50}, {-41, 50}}, color = {0, 0, 127}));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent=  {{30, -74}, {98, -96}}, lineColor=  {135, 135, 135}, textString=  "1: counter-current flow
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent = {{30, -74}, {98, -96}}, lineColor = {135, 135, 135}, textString = "1: counter-current flow
  2: co-current flow
- 3: cross flow", horizontalAlignment=  TextAlignment.Left)}), experiment(StopTime = 3.5),Documentation(info = "<html>
+ 3: cross flow", horizontalAlignment = TextAlignment.Left)}), experiment(StopTime = 3.5),Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Going to zero with mass flow will lead to singularities in several equations and therefore, the solver will fail at a specific point. To overcome this problem the equations must be switched to non-singular representations at a specific condition or formulated in a different way for the whole range. For the time being the valid variable range (for mass flow rate for example) can be limited to a lower value above zero. In a more advanced model the flow direction of both media streams should be taken care of automatically.</p>
  </html>"));

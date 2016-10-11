@@ -7,8 +7,7 @@ model Appartment_VoWo "Simulation of 1 apartment "
   parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();
   replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater
     "Medium in the system"                                                                             annotation(Dialog(group = "Medium"), choicesAllMatching = true);
-  AixLib.Building.HighOrder.House.MFD.BuildingAndEnergySystem.OneAppartment_Radiators
-                                                                                      VoWoWSchV1984(redeclare
+  AixLib.Building.HighOrder.House.MFD.BuildingAndEnergySystem.OneAppartment_Radiators VoWoWSchV1984(redeclare
       package Medium =                                                                                                     Medium, fixedHeatFlow3(T_ref = 288.15), fixedHeatFlow5(T_ref = 283.15), fixedHeatFlow16(T_ref = 288.15)) annotation(Placement(transformation(extent = {{-42, -4}, {36, 46}})));
   AixLib.Fluid.HeatExchangers.Boiler boilerTable(boilerEfficiencyB = AixLib.DataBase.Boiler.BoilerConst(),
     redeclare package Medium = Medium,

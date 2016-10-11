@@ -33,15 +33,15 @@ model MixingValveBackwardDirection
                                         temperatureSensor1(redeclare package
       Medium = Medium, m_flow_nominal=1)
     annotation (Placement(transformation(extent={{-8,20},{12,40}})));
-  AixLib.Fluid.Sensors.MassFlowRate  massFlowSensor1(redeclare package Medium
-      = Medium)
+  AixLib.Fluid.Sensors.MassFlowRate  massFlowSensor1(redeclare package Medium =
+        Medium)
     annotation (Placement(transformation(extent={{40,20},{60,40}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
                                         temperatureSensor2(redeclare package
       Medium = Medium, m_flow_nominal=1)
     annotation (Placement(transformation(extent={{4,-38},{24,-18}})));
-  AixLib.Fluid.Sensors.MassFlowRate  massFlowSensor2(redeclare package Medium
-      = Medium)
+  AixLib.Fluid.Sensors.MassFlowRate  massFlowSensor2(redeclare package Medium =
+        Medium)
     annotation (Placement(transformation(extent={{40,-38},{60,-18}})));
   Modelica.Blocks.Sources.Step step(startTime=100, height=0.7)
     annotation (Placement(transformation(extent={{42,-6},{22,14}})));

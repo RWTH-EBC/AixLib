@@ -39,8 +39,7 @@ model Weather "Complex weather model"
   parameter Boolean Air_press = false "Air pressure [Pa] (TRY col 11)" annotation(Dialog(tab = "Optional output vector", descriptionLabel = true), choices(checkBox = true));
   parameter Boolean Mass_frac = false
     "Mass fraction of water in dry air [kg/kg] (TRY col 12)"                                   annotation(Dialog(tab = "Optional output vector", descriptionLabel = true), choices(checkBox = true));
-  parameter Boolean Rel_hum = false "Realtive humidity of air [-] (TRY col 13)"
-                                                                                annotation(Dialog(tab = "Optional output vector", descriptionLabel = true), choices(checkBox = true));
+  parameter Boolean Rel_hum = false "Realtive humidity of air [-] (TRY col 13)" annotation(Dialog(tab = "Optional output vector", descriptionLabel = true), choices(checkBox = true));
   parameter Boolean Sky_rad = false
     "Longwave sky radiation on horizontal [W/m2] (TRY col 18)"                                 annotation(Dialog(tab = "Optional output vector", descriptionLabel = true), choices(checkBox = true));
   parameter Boolean Ter_rad = false

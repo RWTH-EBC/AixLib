@@ -23,9 +23,9 @@ equation
   connect(m2flow.y, recuperatorNoMedium2.m1in) annotation(Line(points = {{45, -10}, {26, -10}, {26, 4}, {10, 4}}, color = {128, 0, 255}));
   connect(T1in.y, recuperatorNoMedium1.T1in) annotation(Line(points = {{45, 20}, {28, 20}, {28, 68}, {10, 68}}, color = {0, 127, 0}));
   connect(m2flow.y, recuperatorNoMedium1.m1in) annotation(Line(points = {{45, -10}, {26, -10}, {26, 64}, {10, 64}}, color = {128, 0, 255}));
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent=  {{30, -74}, {98, -96}}, lineColor=  {135, 135, 135}, textString=  "1: counter-current flow
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent = {{30, -74}, {98, -96}}, lineColor = {135, 135, 135}, textString = "1: counter-current flow
  2: co-current flow
- 3: cross flow", horizontalAlignment=  TextAlignment.Left)}), experiment(StopTime = 3),Documentation(info = "<html>
+ 3: cross flow", horizontalAlignment = TextAlignment.Left)}), experiment(StopTime = 3),Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Testing each flow arrangement. </p>
  <p>Take care of initial conditions! Parallel flow cannot have an efficiency above 0.5.</p>

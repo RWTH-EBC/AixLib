@@ -35,7 +35,7 @@ equation
   connect(massFlowSensor.m_flow, heatDemand.m_flow_in) annotation (Line(
       points={{-40,11},{-40,30},{-52,30},{-52,60}},
       color={0,0,127}));
-  annotation( Documentation(info = "<html>
+  annotation (Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This basic boiler model calculates the heat demand in order to reach the
   fluid set temperature. The heat input to the fluid is limited between 0 and
@@ -72,9 +72,9 @@ equation
     by Marcus Fuchs:<br/>
     Implemented</li>
  </ul>
- </html>"), Icon(graphics={  Rectangle(extent=  {{-40.5, 74.5}, {53.5, -57.5}}, lineColor=  {0, 0, 0},
-            fillPattern=                                                                                             FillPattern.VerticalCylinder, fillColor=  {170, 170, 255}), Polygon(points=  {{-12.5, -19.5}, {-20.5, -3.5}, {1.5, 40.5}, {9.5, 14.5}, {31.5, 18.5}, {21.5, -23.5}, {3.5, -19.5}, {-2.5, -19.5}, {-12.5, -19.5}}, lineColor=  {0, 0, 0},
-            fillPattern=                                                                                                    FillPattern.Sphere, fillColor=  {255, 127, 0}), Rectangle(extent=  {{-20.5, -17.5}, {33.5, -25.5}}, lineColor=  {0, 0, 0},
-            fillPattern=                                                                                                    FillPattern.HorizontalCylinder, fillColor=  {192, 192, 192}), Polygon(points=  {{-10.5, -17.5}, {-0.5, 2.5}, {25.5, -17.5}, {-0.5, -17.5}, {-10.5, -17.5}}, lineColor=  {255, 255, 170}, fillColor=  {255, 255, 170},
-            fillPattern=                                                                                                    FillPattern.Solid)}));
+ </html>"), Icon(graphics={  Rectangle(extent = {{-40.5, 74.5}, {53.5, -57.5}}, lineColor = {0, 0, 0},
+            fillPattern =                                                                                            FillPattern.VerticalCylinder, fillColor = {170, 170, 255}), Polygon(points = {{-12.5, -19.5}, {-20.5, -3.5}, {1.5, 40.5}, {9.5, 14.5}, {31.5, 18.5}, {21.5, -23.5}, {3.5, -19.5}, {-2.5, -19.5}, {-12.5, -19.5}}, lineColor = {0, 0, 0},
+            fillPattern =                                                                                                   FillPattern.Sphere, fillColor = {255, 127, 0}), Rectangle(extent = {{-20.5, -17.5}, {33.5, -25.5}}, lineColor = {0, 0, 0},
+            fillPattern =                                                                                                   FillPattern.HorizontalCylinder, fillColor = {192, 192, 192}), Polygon(points = {{-10.5, -17.5}, {-0.5, 2.5}, {25.5, -17.5}, {-0.5, -17.5}, {-10.5, -17.5}}, lineColor = {255, 255, 170}, fillColor = {255, 255, 170},
+            fillPattern =                                                                                                   FillPattern.Solid)}));
 end Boiler;

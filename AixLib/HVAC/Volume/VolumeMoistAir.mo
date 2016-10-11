@@ -62,7 +62,7 @@ equation
   assert(T >= 273.15 and T <= 373.15, "
   Temperature T is not in the allowed range
   273.15 K <= (T =" + String(T) + " K) <= 373.15 K
-  required from used moist air medium model.", level=  AssertionLevel.warning);
+  required from used moist air medium model.", level = AssertionLevel.warning);
   // Pressure
   portMoistAir_a.p = portMoistAir_b.p;
   p = portMoistAir_a.p;
@@ -96,8 +96,8 @@ equation
   mX = V * rho_Air * X;
   der(mX) = mX_flow_a + mX_flow_b;
   heatPort.T = T;
-  annotation( Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Ellipse(extent=  {{-100, 100}, {100, -100}}, lineColor=  {170, 255, 255},
-            fillPattern=                                                                                                    FillPattern.Sphere, fillColor=  {170, 255, 255})}), Documentation(info = "<html>
+  annotation (Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Ellipse(extent = {{-100, 100}, {100, -100}}, lineColor = {170, 255, 255},
+            fillPattern =                                                                                                   FillPattern.Sphere, fillColor = {170, 255, 255})}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Volume Model for Moist Air without any pressure difference. </p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>

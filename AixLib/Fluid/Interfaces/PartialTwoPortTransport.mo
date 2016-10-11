@@ -38,14 +38,14 @@ partial model PartialTwoPortTransport
       m_flow/Modelica.Fluid.Utilities.regStep(m_flow,
                   Medium.density(
                     Medium.setState_phX(
-                      p=  port_a.p,
-                      h=  inStream(port_a.h_outflow),
-                      X=  inStream(port_a.Xi_outflow))),
+                      p = port_a.p,
+                      h = inStream(port_a.h_outflow),
+                      X = inStream(port_a.Xi_outflow))),
                   Medium.density(
                        Medium.setState_phX(
-                         p=  port_b.p,
-                         h=  inStream(port_b.h_outflow),
-                         X=  inStream(port_b.Xi_outflow))),
+                         p = port_b.p,
+                         h = inStream(port_b.h_outflow),
+                         X = inStream(port_b.Xi_outflow))),
                   m_flow_small) if show_V_flow
     "Volume flow rate at inflowing port (positive when flow from port_a to port_b)";
 
@@ -53,9 +53,9 @@ partial model PartialTwoPortTransport
       Modelica.Fluid.Utilities.regStep(port_a.m_flow,
                   Medium.temperature(
                     Medium.setState_phX(
-                      p=  port_a.p,
-                      h=  inStream(port_a.h_outflow),
-                      X=  inStream(port_a.Xi_outflow))),
+                      p = port_a.p,
+                      h = inStream(port_a.h_outflow),
+                      X = inStream(port_a.Xi_outflow))),
                   Medium.temperature(Medium.setState_phX(port_a.p, port_a.h_outflow, port_a.Xi_outflow)),
                   m_flow_small) if show_T
     "Temperature close to port_a, if show_T = true";
@@ -63,9 +63,9 @@ partial model PartialTwoPortTransport
       Modelica.Fluid.Utilities.regStep(port_b.m_flow,
                   Medium.temperature(
                     Medium.setState_phX(
-                      p=  port_b.p,
-                      h=  inStream(port_b.h_outflow),
-                      X=  inStream(port_b.Xi_outflow))),
+                      p = port_b.p,
+                      h = inStream(port_b.h_outflow),
+                      X = inStream(port_b.Xi_outflow))),
                   Medium.temperature(Medium.setState_phX(port_b.p, port_b.h_outflow, port_b.Xi_outflow)),
                   m_flow_small) if show_T
     "Temperature close to port_b, if show_T = true";
