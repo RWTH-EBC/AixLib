@@ -1,4 +1,4 @@
-within DataBase.Solar.Electric;
+within AixLib.DataBase.SolarElectric;
 record PV_data
     extends Modelica.Icons.Record;
   parameter Real eta0( min=0, max=1) "maximum efficiency [WK-1m-2]";

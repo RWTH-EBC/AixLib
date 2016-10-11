@@ -1,7 +1,7 @@
-within DataBase.Solar.Electric;
+within AixLib.DataBase.SolarElectric;
 record SchuecoSME1 "SchuecoSME1"
   //Monocrystalline Solar Module Area_one_panel=1,27664m2
-  extends DataBase.Solar.Electric.PV_data(
+  extends AixLib.DataBase.SolarElectric.PV_data(
     eta0=0.147,
     Temp_coeff=0.0037,
     NOCT_Temp_Cell=45,

@@ -1,5 +1,3 @@
-within DataBase.Solar;
-package Electric "Modelica.Icons.Package"
-    extends Modelica.Icons.Package;
-
-end Electric;
+within AixLib.DataBase;
+package SolarElectric
+end SolarElectric;

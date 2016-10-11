@@ -1,7 +1,7 @@
-within DataBase.Solar.Electric;
+within AixLib.DataBase.SolarElectric;
 record solarmodul_aleo_s_24 "solarmodul_aleo_s_24"
   //Area_one_panel=1,33155m2
-  extends DataBase.Solar.Electric.PV_data(
+  extends AixLib.DataBase.SolarElectric.PV_data(
     eta0=0.139,
     Temp_coeff=0.0034,
     NOCT_Temp_Cell=47,

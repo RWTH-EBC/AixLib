@@ -1,6 +1,6 @@
-within DataBase.Solar.Electric;
+within AixLib.DataBase.SolarElectric;
 record ACS_panel_system
-  extends DataBase.Solar.Electric.PV_data(
+  extends AixLib.DataBase.SolarElectric.PV_data(
     eta0=0.176,
     Temp_coeff=0.003,
     NOCT_Temp_Cell=45,

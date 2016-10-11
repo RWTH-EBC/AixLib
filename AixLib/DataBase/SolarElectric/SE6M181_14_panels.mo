@@ -1,7 +1,7 @@
-within DataBase.Solar.Electric;
+within AixLib.DataBase.SolarElectric;
 record SE6M181_14_panels "SE6M181_14_panels"
 //Polycrystalline Solar Module; single Area= 1,44 m2
-  extends DataBase.Solar.Electric.PV_data(
+  extends AixLib.DataBase.SolarElectric.PV_data(
     eta0=0.126,
     Temp_coeff=0.0043,
     NOCT_Temp_Cell=46,

@@ -1,7 +1,7 @@
-within DataBase.Solar.Electric;
+within AixLib.DataBase.SolarElectric;
 record CS6P_250P_poly "CS6P_250P_poly"
   //Area_one_panel=1,608516m2
-  extends DataBase.Solar.Electric.PV_data(
+  extends AixLib.DataBase.SolarElectric.PV_data(
     eta0=0.1554,
     Temp_coeff=0.0034,
     NOCT_Temp_Cell=45,
