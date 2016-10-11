@@ -127,8 +127,6 @@ public
         transformation(extent={{30,12},{50,30}}, rotation=0),
         iconTransformation(extent={{30,10},{50,30}})));
 
-  AixLib.Utilities.Sensors.EEnergyMeter eEnergyMeter
-    annotation (Placement(transformation(extent={{74,-62},{94,-42}})));
   Sensors.TemperatureTwoPort                FlowTemperature(redeclare package
       Medium =                                                                     Medium,
       m_flow_nominal=m_flow_nominal)
@@ -137,15 +135,12 @@ public
       Medium =                                                                     Medium,
       m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{62,-10},{82,10}})));
- // Modelica.Blocks.Interfaces.RealOutput T_source
- //   "The logarithmic mean temperature is calculated from the temperatures at in- and outlet of the radiator"
- //   annotation (Placement(transformation(extent={{-80,-60},{-100,-40}})));
+
 
 equation
   TV_1=multiLayer_HE[1].Tin;
   TR_N=multiLayer_HE[N].Tout;
-  Power=abs(ConvectiveHeat.Q_flow + RadiativeHeat.Q_flow);
-  eEnergyMeter.p = Power;
+
   for i in 1:N loop
     connect(multiLayer_HE[i].Convective, ConvectiveHeat);
     connect(multiLayer_HE[i].Radiative, RadiativeHeat);
@@ -164,9 +159,7 @@ equation
       color={0,127,255},
       smooth=Smooth.None));
 
-  // T_source = (ReturnTemperature.T - FlowTemperature.T)/(log(ReturnTemperature.T
-  //  /FlowTemperature.T));
-  //The logarithmic mean temperature is calculated from the temperatures at in- and outlet of the radiator.
+
 
   connect(ReturnTemperature.port_b, port_b) annotation (Line(
       points={{82,0},{100,0}},
