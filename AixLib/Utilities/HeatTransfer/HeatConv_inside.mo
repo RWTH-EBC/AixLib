@@ -279,6 +279,7 @@ equation
 <p><a href=\"AixLib.Utilities.Examples.HeatTransfer_test\">AixLib.Utilities.Examples.HeatTransfer_test </a></p>
 </html>",  revisions="<html>
 <ul>
+<li><i>October 12, 2016&nbsp;</i> by Tobias Blacha:<br/>Algorithm for HeatConv_inside is now selectable via parameters</li>
 <li><i>June 17, 2015&nbsp;</i> by Philipp Mehrfeld:<br/>Added EN ISO 6946 equations and corrected usage of constant alpha_custom </li>
 <li><i>March 26, 2015&nbsp;</i> by Ana Constantin:<br/>Changed equations for differnet surface orientations according to newer work from Gl&uuml;ck </li>
 <li><i>April 1, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions </li>

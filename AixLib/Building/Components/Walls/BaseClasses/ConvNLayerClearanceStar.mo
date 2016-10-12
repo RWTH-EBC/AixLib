@@ -26,7 +26,7 @@ model ConvNLayerClearanceStar
         "horizontal facing up",                                                                                                    choice = 3
         "horizontal facing down",                                                                                                    radioButtons = true));
   parameter Integer calcMethod = 1
-    "Choose the model for calculation of heat convection at outside surface" annotation (Dialog(descriptionLabel = true), choices(
+    "Choose the model for calculation of heat convection at inside surface" annotation (Dialog(descriptionLabel = true), choices(
       choice = 1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
       choice=2 "By Bernd Glueck",
       choice=3 "Constant alpha",radioButtons = true));
@@ -93,15 +93,16 @@ equation
  <p><b><font style=\"color: #ff0000; \">Attention:</font></b> The first element in each vector represents the layer connected to <code>HeatPort_a</code>, the last element represents the layer connected to <code>HeatPort_b</code>. </p>
  <h4><font color=\"#008000\">Example Results</font></h4>
  <p>This model is part of <a href=\"AixLib.Building.Components.Walls.Wall\">Wall</a>  therefore also part of the corresponding examples <a href=\"AixLib.Building.Components.Examples.Walls.InsideWall\">InsideWall</a> and <a href=\"AixLib.Building.Components.Examples.Walls.OutsideWall\">OutsideWall</a>. </p>
- </html>", revisions = "<html>
+ </html>", revisions="<html>
  <ul>
- <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
-   <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
-   <li><i>Aug. 08, 2006&nbsp;</i>
+<li><i>October 12, 2016&nbsp;</i> by Tobias Blacha:<br/>Algorithm for HeatConv_inside is now selectable via parameters</li>
+<li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
+<li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
+<li><i>Aug. 08, 2006&nbsp;</i>
           by Peter Matthes:<br/>
           Fixed wrong connection with heatConv-Module and added connection graphics.</li>
 
-   <li><i>June 19, 2006&nbsp;</i>
+<li><i>June 19, 2006&nbsp;</i>
           by Timo Haase:<br/>
           Implemented.</li>
  </ul>
