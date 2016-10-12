@@ -23,22 +23,22 @@ model Radiators
   parameter Real zeta_through = 0.6 "zeta through" annotation(Dialog(group = "Hydraulic resistance", descriptionLabel = true));
   parameter Real zeta_bend = 1.0 "zeta bend" annotation(Dialog(group = "Hydraulic resistance", descriptionLabel = true));
   //Radiators
-  parameter AixLib.DataBase.Radiators.RadiatiorBaseDataDefinition Type_Radiator_Livingroom = AixLib.DataBase.Radiators.StandardMFD_WSchV1984_OneAppartment.Livingroom()
+  parameter AixLib.DataBase.Radiators.RadiatorBaseDataDefinition Type_Radiator_Livingroom = AixLib.DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom()
     "Livingroom"                                                                                                     annotation(Dialog(group = "Radiators", descriptionLabel = true));
-  parameter AixLib.DataBase.Radiators.RadiatiorBaseDataDefinition Type_Radiator_Bedroom = AixLib.DataBase.Radiators.StandardMFD_WSchV1984_OneAppartment.Bedroom()
+  parameter AixLib.DataBase.Radiators.RadiatorBaseDataDefinition Type_Radiator_Bedroom = AixLib.DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Bedroom()
     "Bedroom"                                                                                                     annotation(Dialog(group = "Radiators", descriptionLabel = true));
-  parameter AixLib.DataBase.Radiators.RadiatiorBaseDataDefinition Type_Radiator_Children = AixLib.DataBase.Radiators.StandardMFD_WSchV1984_OneAppartment.Children()
+  parameter AixLib.DataBase.Radiators.RadiatorBaseDataDefinition Type_Radiator_Children = AixLib.DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Children()
     "Corridor"                                                                                                     annotation(Dialog(group = "Radiators", descriptionLabel = true));
-  parameter AixLib.DataBase.Radiators.RadiatiorBaseDataDefinition Type_Radiator_Bath = AixLib.DataBase.Radiators.StandardMFD_WSchV1984_OneAppartment.Bathroom() "Bath" annotation(Dialog(group = "Radiators", descriptionLabel = true));
-  parameter AixLib.DataBase.Radiators.RadiatiorBaseDataDefinition Type_Radiator_Kitchen = AixLib.DataBase.Radiators.StandardMFD_WSchV1984_OneAppartment.Kitchen()
+  parameter AixLib.DataBase.Radiators.RadiatorBaseDataDefinition Type_Radiator_Bath = AixLib.DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Bathroom() "Bath" annotation(Dialog(group = "Radiators", descriptionLabel = true));
+  parameter AixLib.DataBase.Radiators.RadiatorBaseDataDefinition Type_Radiator_Kitchen = AixLib.DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Kitchen()
     "Kitchen"                                                                                                     annotation(Dialog(group = "Radiators", descriptionLabel = true));
   Fluid.HeatExchangers.Radiators.Radiator radiatorKi(
-    RadiatorType=Type_Radiator_Kitchen,
+    radiatorType=Type_Radiator_Kitchen,
     m_flow_nominal=0.01,
     redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{-89,-83},{-106,-66}})));
   Fluid.HeatExchangers.Radiators.Radiator radiatorBa(
-    RadiatorType=Type_Radiator_Bath,
+    radiatorType=Type_Radiator_Bath,
     m_flow_nominal=0.01,
     redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{83,-48},{100,-31}})));
@@ -50,17 +50,17 @@ model Radiators
     dp(start=1000))
     annotation (Placement(transformation(extent={{-67,-82.5},{-82,-66.5}})));
   Fluid.HeatExchangers.Radiators.Radiator radiatorLi(
-    RadiatorType=Type_Radiator_Livingroom,
+    radiatorType=Type_Radiator_Livingroom,
     m_flow_nominal=0.01,
     redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{-95,-5},{-113,13}})));
   Fluid.HeatExchangers.Radiators.Radiator radiatorBr(
-    RadiatorType=Type_Radiator_Bedroom,
+    radiatorType=Type_Radiator_Bedroom,
     m_flow_nominal=0.01,
     redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{78,72},{94,88}})));
   Fluid.HeatExchangers.Radiators.Radiator radiatorCh(
-    RadiatorType=Type_Radiator_Children,
+    radiatorType=Type_Radiator_Children,
     m_flow_nominal=0.01,
     redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{86,33},{101,48}})));
