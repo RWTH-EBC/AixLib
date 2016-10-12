@@ -10,7 +10,7 @@ model PVSystem "PVSystem"
   parameter Modelica.SIunits.Power MaxOutputPower
     "Maximum output power for inverter";
 
-  BaseClasses.PVModuleDC pVmoduleDC1(
+  BaseClasses.PVModuleDC               pVmoduleDC1(
     Eta0=data.Eta0,
     NoctTemp=data.NoctTemp,
     NoctTempCell=data.NoctTempCell,
@@ -32,7 +32,7 @@ model PVSystem "PVSystem"
                 "Ambient temperature"
      annotation (Placement(transformation(extent={{-126,50},{-86,90}})));
 
-  BaseClasses.PVInverterRMS pVinverterRMS(uMax2=MaxOutputPower)
+  BaseClasses.PVInverterRMS               pVinverterRMS(uMax2=MaxOutputPower)
     "Inverter model including system management"
     annotation (Placement(transformation(extent={{44,0},{64,20}})));
   AixLib.Utilities.Interfaces.SolarRad_in IcTotalRad "Solar radiation in W/m2"
