@@ -14,7 +14,7 @@ model Radiator "Example for EBC radiator"
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     selectable=true,
-    radiatorType=DataBase.Radiators.RadiatorMLBaseDataDefinition(
+    radiatorType=AixLib.DataBase.Radiators.RadiatorBaseDataDefinition(
         NominalPower=496,
         RT_nom={55,45,20},
         PressureDrop=1017878,

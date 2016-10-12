@@ -97,19 +97,17 @@ equation
   connect(Source_Temp.y, RadTemp.T) annotation (Line(
       points={{25,-84},{36,-84},{36,-72},{40.8,-72}},
       color={0,0,127}));
-  connect(RadTemp.port, radiator.radPort) annotation (Line(
-      points={{54,-72},{64,-72},{64.6,-57.8}},
-      color={191,0,0}));
-  connect(AirTemp.port, radiator.convPort) annotation (Line(
-      points={{80,-72},{74,-72},{73.62,-57.6}},
-      color={191,0,0}));
   connect(pipe1.port_a, radiator.port_b) annotation (Line(
       points={{40,-50},{58,-50}},
       color={0,127,255}));
   connect(radiator.port_a, pipe.port_b) annotation (Line(
       points={{80,-50},{90,-50},{90,0}},
       color={0,127,255}));
-  annotation( experiment(StopTime = 10800, Interval = 1), __Dymola_experimentSetupOutput(events = false), Documentation(info = "<html>
+  connect(RadTemp.port, radiator.RadiativeHeat) annotation (Line(points={{54,
+          -72},{60,-72},{60,-52},{64.6,-52}}, color={191,0,0}));
+  connect(AirTemp.port, radiator.ConvectiveHeat) annotation (Line(points={{80,
+          -72},{76,-72},{76,-52},{71.2,-52}}, color={191,0,0}));
+  annotation (experiment(StopTime = 10800, Interval = 1), __Dymola_experimentSetupOutput(events = false), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This example models a simple fluid circuit in order to test the heat pump model for plausibility</p>
  </html>", revisions="<html>
