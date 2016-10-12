@@ -1,17 +1,15 @@
 within AixLib.Fluid.Storage.BaseClasses;
 model StorageMantle
 
-//////parameters////
-
-  parameter Modelica.SIunits.Length height=0.15 "Hoehe der Schicht"  annotation(Dialog(tab="Geometrical Parameters"));
-  parameter Modelica.SIunits.Diameter D1=1 "Innendurchmesser des Tanks" annotation(Dialog(tab="Geometrical Parameters"));
+  parameter Modelica.SIunits.Length height=0.15 "Height of layer"  annotation(Dialog(tab="Geometrical Parameters"));
+  parameter Modelica.SIunits.Diameter D1=1 "Inner tank diameter" annotation(Dialog(tab="Geometrical Parameters"));
   parameter Modelica.SIunits.Thickness sWall=0.1 "Thickness of wall" annotation(Dialog(tab="Geometrical Parameters"));
   parameter Modelica.SIunits.Thickness sIns=0.1 "Thickness of insulation" annotation(Dialog(tab="Geometrical Parameters"));
-  /*parameter SI.Length roughness(min=0) = 2.5e-5 
-    "Absolute roughness of storage inside wall (default = smooth steel pipe)" annotation 4;*/
 
-final parameter Modelica.SIunits.Area AInside= D1*Modelica.Constants.pi * height;
-final parameter Modelica.SIunits.Area AOutside= (D1+2*(sWall+sIns))*Modelica.Constants.pi * height;
+  final parameter Modelica.SIunits.Area AInside= D1*Modelica.Constants.pi * height
+    "Inner area";
+  final parameter Modelica.SIunits.Area AOutside= (D1+2*(sWall+sIns))*Modelica.Constants.pi * height
+    "Outer area";
 
   parameter Modelica.SIunits.ThermalConductivity lambdaWall=50
     "Thermal Conductivity of wall";
@@ -25,20 +23,23 @@ final parameter Modelica.SIunits.Area AOutside= (D1+2*(sWall+sIns))*Modelica.Con
     "Starting Temperature of wall in K";
   parameter Modelica.SIunits.Temperature TStartIns=293.15
     "Starting Temperature of insulation in K";
-  parameter Modelica.SIunits.Density rhoIns=1600;
-  parameter Modelica.SIunits.SpecificHeatCapacity cIns=1000;
-  parameter Modelica.SIunits.Density rhoWall=1600;
-  parameter Modelica.SIunits.SpecificHeatCapacity cWall=1000;
+    parameter Modelica.SIunits.Density rhoIns=1600 "Density of insulation";
+    parameter Modelica.SIunits.SpecificHeatCapacity cIns=1000
+      "Specific heat capacity of insulation";
+    parameter Modelica.SIunits.Density rhoWall=1600 "Density of Insulation";
+    parameter Modelica.SIunits.SpecificHeatCapacity cWall=1000
+      "Specific heat capacity of wall";
 
-//////components///
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatportOuter
+    "Outer heat port"
     annotation (Placement(transformation(extent={{80,0},{100,20}}, rotation=
            0)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatportInner
+    "Inner heat port"
     annotation (Placement(transformation(extent={{-100,0},{-80,20}},
           rotation=0)));
 
-    Utilities.HeatTransfer.CylindricHeatTransfer                       Insulation(
+  AixLib.Utilities.HeatTransfer.CylindricHeatTransfer Insulation(
     rho=rhoIns,
     c=cIns,
     lambda=lambdaIns,
@@ -46,20 +47,27 @@ final parameter Modelica.SIunits.Area AOutside= (D1+2*(sWall+sIns))*Modelica.Con
     length=height,
     d_out=D1 + 2*sWall + 2*sIns,
     d_in=D1 + 2*sWall)
+    "Heat transfer through insulation"
     annotation (Placement(transformation(extent={{-4,-12},{44,32}})));
-    Utilities.HeatTransfer.CylindricHeatTransfer                       Wall(
+
+  AixLib.Utilities.HeatTransfer.CylindricHeatTransfer Wall(
     rho=rhoWall,
     c=cWall,
     lambda=lambdaWall,
     T0=TStartWall,
     length=height,
     d_out=D1 + 2*sWall,
-    d_in=D1) annotation (Placement(transformation(extent={{-70,-12},{-22,32}})));
+    d_in=D1)
+    "Heat transfer through wall"
+    annotation (Placement(transformation(extent={{-70,-12},{-22,32}})));
+
   AixLib.Utilities.HeatTransfer.HeatConv convInside(alpha=alphaInside, A=
-        AInside) annotation (Placement(transformation(extent={{-80,4},{-68,16}},
+        AInside)
+        "Inner heat convection" annotation (Placement(transformation(extent={{-80,4},{-68,16}},
           rotation=0)));
   AixLib.Utilities.HeatTransfer.HeatConv convOutside(A=AOutside, alpha=
-        alphaOutside) annotation (Placement(transformation(
+        alphaOutside)
+        "Outer heat convection" annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=180,
         origin={62,10})));
@@ -130,7 +138,7 @@ equation
 </html>",
       revisions="<html>
       <p><ul>
-<li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Added to AixLib</li>     
+<li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Added to AixLib</li>
 <li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL</li>
 <li><i>October 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
 </ul></p>
