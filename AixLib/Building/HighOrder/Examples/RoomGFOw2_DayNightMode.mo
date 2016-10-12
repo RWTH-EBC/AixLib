@@ -16,19 +16,24 @@ model RoomGFOw2_DayNightMode
     redeclare package Medium = Medium,
     m_flow_small=0.0001,
     dp(start=1000))                                                               annotation(Placement(transformation(extent = {{22, -36}, {42, -16}})));
-  AixLib.Fluid.Movers.Pump Pumo(redeclare package Medium = Medium, m_flow_small=
-       0.0001)                  annotation(Placement(transformation(extent = {{-92, -36}, {-72, -16}})));
+  AixLib.Fluid.Movers.Pump Pump(redeclare package Medium = Medium, m_flow_small=
+       0.0001) "Pump in heating system"
+                                annotation(Placement(transformation(extent = {{-92, -36}, {-72, -16}})));
   AixLib.Fluid.HeatExchangers.Boiler boilerTaktTable(redeclare package Medium =
         Medium, m_flow_nominal=0.01)                 annotation(Placement(transformation(extent = {{-56, -36}, {-36, -16}})));
   AixLib.Utilities.Sources.NightMode nightMode(dayEnd = 22, dayStart = 6) annotation(Placement(transformation(extent = {{-104, 0}, {-84, 20}})));
-  AixLib.Fluid.FixedResistances.StaticPipe pipe_flow(
+  AixLib.Fluid.FixedResistances.FixedResistanceDpM res(
     redeclare package Medium = Medium,
-    m_flow_small=0.0001,
-    dp(start=100))                                                    annotation(Placement(transformation(extent = {{-6, -36}, {14, -16}})));
-  AixLib.Fluid.FixedResistances.StaticPipe pipe_return(
+    dp(start=100),
+    m_flow_nominal=0.3,
+    dp_nominal=200) "Hydraulic resistance in supply"
+    annotation (Placement(transformation(extent={{-6,-36},{14,-16}})));
+  AixLib.Fluid.FixedResistances.FixedResistanceDpM res2(
     redeclare package Medium = Medium,
-    m_flow_small=0.0001,
-    dp(start=100))                                                      annotation(Placement(transformation(extent = {{28, -82}, {8, -62}})));
+    dp(start=100),
+    m_flow_nominal=0.3,
+    dp_nominal=200) "Hydraulic resistance in return"
+    annotation (Placement(transformation(extent={{28,-82},{8,-62}})));
   Modelica.Blocks.Sources.Constant Tset(k = 273.15 + 20) annotation(Placement(transformation(extent = {{-6, -4}, {4, 6}})));
   Modelica.Blocks.Sources.Constant AirExchange(k = 0.7) annotation(Placement(transformation(extent = {{8, 68}, {18, 78}})));
   AixLib.Fluid.Sources.Boundary_ph
@@ -47,13 +52,15 @@ equation
   connect(room_GF_2OW.thermCeiling, thermCeiling.port) annotation(Line(points = {{50.2, 38.6}, {80, 38.6}, {80, 68}, {82, 68}}, color = {191, 0, 0}));
   connect(room_GF_2OW.thermInsideWall1, thermInsideWall1.port) annotation(Line(points = {{50.2, 27.8}, {80, 27.8}, {80, 44}, {82, 44}}, color = {191, 0, 0}));
   connect(room_GF_2OW.thermInsideWall2, thermInsideWall2.port) annotation(Line(points = {{39.4, 9.8}, {39.4, 0}, {80, 0}, {80, 20}, {82, 20}}, color = {191, 0, 0}));
-  connect(Pumo.port_b, boilerTaktTable.port_a) annotation(Line(points = {{-72, -26}, {-56, -26}}, color = {0, 127, 255}));
-  connect(pipe_flow.port_b, heatValve_new.port_a) annotation(Line(points = {{14, -26}, {22, -26}}, color = {0, 127, 255}));
-  connect(boilerTaktTable.port_b, pipe_flow.port_a) annotation(Line(points = {{-36, -26}, {-6, -26}}, color = {0, 127, 255}));
+  connect(Pump.port_b, boilerTaktTable.port_a) annotation(Line(points = {{-72, -26}, {-56, -26}}, color = {0, 127, 255}));
+  connect(res.port_b, heatValve_new.port_a)
+    annotation (Line(points={{14,-26},{22,-26}}, color={0,127,255}));
+  connect(boilerTaktTable.port_b, res.port_a)
+    annotation (Line(points={{-36,-26},{-6,-26}}, color={0,127,255}));
   connect(heatValve_new.port_b, radiator_ML_delta.port_a) annotation(Line(points={{42,-26},
           {54,-26}},                                                                                         color = {0, 127, 255}));
-  connect(radiator_ML_delta.port_b, pipe_return.port_a) annotation(Line(points={{74,-26},
-          {100,-26},{100,-72},{28,-72}},                                                                                           color = {0, 127, 255}));
+  connect(radiator_ML_delta.port_b, res2.port_a) annotation (Line(points={{74,-26},
+          {100,-26},{100,-72},{28,-72}}, color={0,127,255}));
   connect(room_GF_2OW.AirExchangePort, AirExchange.y) annotation(Line(points = {{30.31, 43.73}, {30.31, 73}, {18.5, 73}}, color = {0, 0, 127}));
   connect(combinedWeather.SolarRadiation_OrientedSurfaces[1], room_GF_2OW.SolarRadiationPort_OW2) annotation(Line(points = {{-90.88, 76.7}, {-90.88, 70}, {0, 70}, {0, 84}, {43.09, 84}, {43.09, 43.82}}, color = {255, 128, 0}));
   connect(combinedWeather.SolarRadiation_OrientedSurfaces[2], room_GF_2OW.SolarRadiationPort_OW1) annotation(Line(points = {{-90.88, 76.7}, {-90.88, 70}, {0, 70}, {0, 31.4}, {16.09, 31.4}}, color = {255, 128, 0}));
@@ -61,14 +68,15 @@ equation
           -60.7333,98.8},{0,98.8},{0,18.8},{16.09,18.8}},                                                                                         color = {0, 0, 127}));
   connect(combinedWeather.AirTemp, varTemp.T) annotation(Line(points={{-60.7333,
           94.9},{0,94.9},{0,60},{-64,60},{-64,48},{-60,48}},                                                                                    color = {0, 0, 127}));
-  connect(Pumo.port_a, pipe_return.port_b) annotation(Line(points = {{-92, -26}, {-100, -26}, {-100, -72}, {8, -72}}, color = {0, 127, 255}));
-  connect(nightMode.SwitchToNightMode, Pumo.IsNight) annotation(Line(points = {{-85.15, 10.3}, {-82, 10.3}, {-82, -15.8}}, color = {255, 0, 255}));
+  connect(Pump.port_a, res2.port_b) annotation (Line(points={{-92,-26},{-100,-26},
+          {-100,-72},{8,-72}}, color={0,127,255}));
+  connect(nightMode.SwitchToNightMode,Pump. IsNight) annotation(Line(points = {{-85.15, 10.3}, {-82, 10.3}, {-82, -15.8}}, color = {255, 0, 255}));
   connect(Tset.y, heatValve_new.T_setRoom) annotation(Line(points = {{4.5, 1}, {37.6, 1}, {37.6, -16.2}}, color = {0, 0, 127}));
   connect(Tset_flowTemperature.y, boilerTaktTable.T_set) annotation(Line(points = {{-61.5, -1}, {-56.8, -1}, {-56.8, -19}}, color = {0, 0, 127}));
   connect(temperatureSensor.T, heatValve_new.T_room) annotation(Line(points = {{23, -10}, {22, -10}, {22, -16.2}, {25.6, -16.2}}, color = {0, 0, 127}));
   connect(temperatureSensor.port, room_GF_2OW.thermRoom) annotation(Line(points = {{23, 0}, {23, 29}, {30.04, 29}, {30.04, 29.6}}, color = {191, 0, 0}));
   connect(temperatureSensor.T, Troom) annotation(Line(points = {{23, -10}, {100, -10}}, color = {0, 0, 127}));
-  connect(tank.ports[1], Pumo.port_a) annotation (Line(
+  connect(tank.ports[1],Pump. port_a) annotation (Line(
       points={{-106,-25},{-100,-25},{-100,-26},{-92,-26}},
       color={0,127,255}));
   connect(radiator_ML_delta.ConvectiveHeat, room_GF_2OW.thermRoom) annotation (
@@ -83,8 +91,9 @@ equation
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>Energy generation and delivery system consisting of boiler and pump.</p>
  <p>The example works for a day and shows how such a simulation can be set up. It is not guranteed that the model will work stable under sifferent conditions or for longer periods of time.</p>
- </html>", revisions = "<html>
+ </html>", revisions="<html>
  <ul>
+ <li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe by hydraulic resistance</li>
  <li><i>June 19, 2014</i> by Ana Constantin:<br/>Implemented</li>
  </ul>
  </html>"));

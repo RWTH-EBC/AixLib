@@ -16,12 +16,16 @@ model BoilerSystemTVar
   Fluid.Sources.FixedBoundary
                      staticPressure(nPorts=1, redeclare package Medium = Medium)
                                     annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-90, -10})));
-  Fluid.FixedResistances.StaticPipe pipe(l = 25, D = 0.01,
+  FixedResistances.FixedResistanceDpM
+                                    pipe(
     redeclare package Medium = Medium,
-    m_flow_small=0.001)                   annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {70, 10})));
-  Fluid.FixedResistances.StaticPipe pipe1(l = 25, D = 0.01,
+    m_flow_nominal=1,
+    dp_nominal=200)                       annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {70, 10})));
+  FixedResistances.FixedResistanceDpM
+                                    pipe1(
     redeclare package Medium = Medium,
-    m_flow_small=0.001)                    annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {10, -50})));
+    m_flow_nominal=1,
+    dp_nominal=200)                        annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {10, -50})));
   Fluid.Sensors.MassFlowRate
                          massFlowSensor(redeclare package Medium = Medium)
                                         annotation(Placement(transformation(extent = {{-40, 60}, {-20, 80}})));
@@ -83,6 +87,7 @@ equation
  for plausibility</p>
  </html>", revisions="<html>
  <ul>
+ <li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe</li>
  <li><i>April 2016&nbsp;</i>
     by Peter Remmen:<br/>
     Replace OutdoorTemp model</li>

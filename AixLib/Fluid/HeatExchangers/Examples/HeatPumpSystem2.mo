@@ -1,5 +1,5 @@
 within AixLib.Fluid.HeatExchangers.Examples;
-model HeatPumpSystem2 "Test case for boiler model"
+model HeatPumpSystem2 "Test case for heat pump model"
   import AixLib;
   extends Modelica.Icons.Example;
 
@@ -17,12 +17,16 @@ model HeatPumpSystem2 "Test case for boiler model"
   AixLib.Fluid.Sources.FixedBoundary
                      staticPressure(nPorts=1, redeclare package Medium = Medium)
                                     annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-10, -10})));
-  Fluid.FixedResistances.StaticPipe pipe(D = 0.01, l = 15,
+  AixLib.Fluid.FixedResistances.FixedResistanceDpM
+                                    pipe(
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)                    annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {90, 10})));
-  Fluid.FixedResistances.StaticPipe pipe1(D = 0.01, l = 15,
+    m_flow_nominal=1,
+    dp_nominal=200)                       annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {90, 10})));
+  AixLib.Fluid.FixedResistances.FixedResistanceDpM
+                                    pipe1(
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)                     annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {30, -50})));
+    m_flow_nominal=1,
+    dp_nominal=200)                        annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {30, -50})));
   AixLib.Fluid.Sensors.MassFlowRate
                          massFlowSensor(redeclare package Medium = Medium)
                                         annotation(Placement(transformation(extent = {{20, 60}, {40, 80}})));
@@ -47,9 +51,11 @@ model HeatPumpSystem2 "Test case for boiler model"
   AixLib.Fluid.Sources.Boundary_ph
                       boundary_ph(h = 4184 * 8, nPorts=1,
     redeclare package Medium = Medium)          annotation(Placement(transformation(extent = {{-100, 52}, {-80, 72}})));
-  Fluid.FixedResistances.StaticPipe pipe2(D = 0.01, l = 2,
+  AixLib.Fluid.FixedResistances.FixedResistanceDpM
+                                    pipe2(
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)                    annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin = {-64, 58})));
+    m_flow_nominal=0.5,
+    dp_nominal=200)                       annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin = {-64, 58})));
   AixLib.Fluid.Sources.Boundary_ph
                       boundary_ph1(nPorts=1, redeclare package Medium = Medium)
                                    annotation(Placement(transformation(extent = {{-100, 24}, {-80, 44}})));
@@ -112,6 +118,7 @@ equation
  <p>This example models a simple fluid circuit in order to test the heat pump model for plausibility</p>
  </html>", revisions="<html>
  <ul>
+ <li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe</li>
  <li><i>November 2014&nbsp;</i>
     by Marcus Fuchs:<br/>
     Changed model to use Annex 60 base class</li>
