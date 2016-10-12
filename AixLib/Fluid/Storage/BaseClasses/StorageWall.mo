@@ -1,23 +1,11 @@
 within AixLib.Fluid.Storage.BaseClasses;
-model StorageWall
+model StorageWall "Sandwich wall construction for heat storages"
 
-//////parameters////
-
-  parameter Modelica.SIunits.Length height=0.15 "Hoehe der Schicht"  annotation(Dialog(tab="Geometrical Parameters"));
-  parameter Modelica.SIunits.Diameter D1=1 "Innendurchmesser des Tanks" annotation(Dialog(tab="Geometrical Parameters"));
+  parameter Modelica.SIunits.Length height=0.15 "Hight of layer"  annotation(Dialog(tab="Geometrical Parameters"));
+  parameter Modelica.SIunits.Diameter D1=1 "Inner tank diameter" annotation(Dialog(tab="Geometrical Parameters"));
   parameter Modelica.SIunits.Thickness sWall=0.1 "Thickness of wall" annotation(Dialog(tab="Geometrical Parameters"));
   parameter Modelica.SIunits.Thickness sIns=0.1 "Thickness of insulation" annotation(Dialog(tab="Geometrical Parameters"));
-  /*parameter SI.Length roughness(min=0) = 2.5e-5 
-    "Absolute roughness of storage inside wall (default = smooth steel pipe)" annotation 4;*/
-protected
-  parameter Modelica.SIunits.Area AHor = (D1/2)^2*Modelica.Constants.pi
-    "horizontal area of water in layer";
-  parameter Modelica.SIunits.Area AWall= D1*Modelica.Constants.pi * height
-    "vertical outlining area of water in layer";
-  parameter Modelica.SIunits.Area AIns=(D1+2*sWall)*Modelica.Constants.pi * height;
-  parameter Modelica.SIunits.Area AOutside=(D1+2*(sWall+sIns))*Modelica.Constants.pi * height;
 
-public
   parameter Modelica.SIunits.ThermalConductivity lambdaWall=50
     "Thermal Conductivity of wall";
     parameter Modelica.SIunits.ThermalConductivity lambdaIns=0.045
@@ -30,45 +18,65 @@ public
     "Starting Temperature of wall in K";
   parameter Modelica.SIunits.Temperature TStartIns=293.15
     "Starting Temperature of insulation in K";
-  parameter Modelica.SIunits.Density rhoIns=1600;
-  parameter Modelica.SIunits.SpecificHeatCapacity cIns=1000;
-  parameter Modelica.SIunits.Density rhoWall=1600;
-  parameter Modelica.SIunits.SpecificHeatCapacity cWall=1000;
+  parameter Modelica.SIunits.Density rhoIns=1600 "Density of insulation";
+  parameter Modelica.SIunits.SpecificHeatCapacity cIns=1000
+    "Specific heat capacity of insulation";
+  parameter Modelica.SIunits.Density rhoWall=1600 "Density of Insulation";
+  parameter Modelica.SIunits.SpecificHeatCapacity cWall=1000
+    "Specific heat capacity of wall";
 
-//////components///
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor condWall1(G=(
-        AWall)*(lambdaWall)/(sWall/2)) annotation (Placement(
+        AWall)*(lambdaWall)/(sWall/2))
+        "Heat conduction through first wall layer" annotation (Placement(
         transformation(extent={{-50,0},{-30,20}}, rotation=0)));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor condWall2(G=(
-        AWall)*(lambdaWall)/(sWall/2)) annotation (Placement(
+        AWall)*(lambdaWall)/(sWall/2))
+        "Heat conduction through second wall layer" annotation (Placement(
         transformation(extent={{-20,0},{0,20}}, rotation=0)));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor condIns1(G=(
-        AIns)*(lambdaIns)/(sIns/2)) annotation (Placement(
+        AIns)*(lambdaIns)/(sIns/2))
+        "Heat conduction through first insulation layer" annotation (Placement(
         transformation(extent={{10,0},{30,20}}, rotation=0)));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor condIns2(G=(
-        AIns)*(lambdaIns)/(sIns/2)) annotation (Placement(
+        AIns)*(lambdaIns)/(sIns/2))
+        "Heat conduction through second insulation layer" annotation (Placement(
         transformation(extent={{38,0},{58,20}}, rotation=0)));
   AixLib.Utilities.HeatTransfer.HeatConv convOutside(alpha=alphaOutside, A=
-        AOutside) annotation (Placement(transformation(
+        AOutside)
+        "Outside heat convection" annotation (Placement(transformation(
         origin={72,8},
         extent={{-10,-10},{10,10}},
         rotation=180)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatportOuter
+    "Outer heat port"
     annotation (Placement(transformation(extent={{80,0},{100,20}}, rotation=
            0)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatportInner
+    "Inner heat port"
     annotation (Placement(transformation(extent={{-100,0},{-80,20}},
           rotation=0)));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor loadWall(C=(
-        cWall)*(rhoWall)*(AWall)*(sWall)) annotation (Placement(
+        cWall)*(rhoWall)*(AWall)*(sWall))
+        "Heat capacity of wall" annotation (Placement(
         transformation(extent={{-20,-26},{0,-6}}, rotation=0)));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor loadIns(C=(cIns)
-        *(rhoIns)*(AIns)*(sIns)) annotation (Placement(
+        *(rhoIns)*(AIns)*(sIns))
+        "Heat capacity of insulation" annotation (Placement(
         transformation(extent={{36,-28},{56,-8}}, rotation=0)));
 
   AixLib.Utilities.HeatTransfer.HeatConv convInside(alpha=alphaInside, A=
-        AWall) annotation (Placement(transformation(extent={{-80,0},{-60,20}},
+        AWall)
+        "Inside heat convection" annotation (Placement(transformation(extent={{-80,0},{-60,20}},
           rotation=0)));
+
+  protected
+    parameter Modelica.SIunits.Area AHor = (D1/2)^2*Modelica.Constants.pi
+      "Horizontal area of water in layer";
+    parameter Modelica.SIunits.Area AWall= D1*Modelica.Constants.pi * height
+      "Vertical outlining area of water in layer";
+    parameter Modelica.SIunits.Area AIns=(D1+2*sWall)*Modelica.Constants.pi * height;
+    parameter Modelica.SIunits.Area AOutside=(D1+2*(sWall+sIns))*Modelica.Constants.pi * height;
+
 equation
   connect(convOutside.port_a, heatportOuter) annotation (Line(
       points={{82,8},{85.5,8},{85.5,10},{90,10}},
@@ -152,7 +160,7 @@ equation
 </html>",
       revisions="<html>
       <p><ul>
-<li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Added to AixLib</li>     
+<li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Added to AixLib</li>
 <li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL</li>
 <li><i>October 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
 </ul></p>
