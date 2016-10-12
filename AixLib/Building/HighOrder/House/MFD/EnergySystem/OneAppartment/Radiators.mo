@@ -320,35 +320,7 @@ equation
   connect(hydResBendRight.port_b, thBathF.port_a) annotation (Line(
       points={{-3.75,-72.5},{-3.75,-70},{-4.5,-70}},
       color={0,127,255}));
-  connect(radiatorKi.radPort, radKi) annotation (Line(
-      points={{-100.9,-67.87},{-100.9,-42},{-137.5,-42}}));
-  connect(radiatorKi.convPort, convKi) annotation (Line(
-      points={{-93.93,-68.04},{-93.93,-58.5},{-138,-58.5}},
-      color={191,0,0}));
-  connect(radiatorBa.convPort, convBa) annotation (Line(
-      points={{87.93,-33.04},{88,-33.04},{88,-33},{119,-33},{119,-50},{138.5,-50}},
-      color={191,0,0}));
 
-  connect(radiatorBa.radPort, radBa) annotation (Line(
-      points={{94.9,-32.87},{94.9,-28},{138,-28}}));
-  connect(radiatorCh.radPort, radCh) annotation (Line(
-      points={{96.5,46.35},{96.5,49},{140,49}}));
-  connect(radiatorCh.convPort, convCh) annotation (Line(
-      points={{90.35,46.2},{90,46.2},{90,46},{113,46},{113,25.5},{138.5,25.5}},
-      color={191,0,0}));
-
-  connect(radiatorBr.convPort, convBe) annotation (Line(
-      points={{82.64,86.08},{82.64,91},{119,91},{119,73},{138,73}},
-      color={191,0,0}));
-  connect(radiatorBr.radPort, radBe) annotation (Line(
-      points={{89.2,86.24},{89.2,97},{137,97}}));
-  connect(radiatorLi.radPort, radLi) annotation (Line(
-      points={{-107.6,11.02},{-107.6,11},{-131,11},{-131,46},{-136,46},{-136,
-          46.5},{-140,46.5}}));
-  connect(radiatorLi.convPort, convLi) annotation (Line(
-      points={{-100.22,10.84},{-100.22,12},{-100,12},{-100,14},{-133,14},{-133,
-          32},{-137,32},{-137,31.5},{-139.5,31.5}},
-      color={191,0,0}));
   connect(toKiR.port_b, thStR.port_a) annotation(Line(points = {{-56, -96}, {40, -96}}, color = {0, 127, 255}, thickness = 0.5));
   connect(thBathR.port_b, thStR.port_a) annotation(Line(points = {{-18.25, -71.5}, {-18.25, -96}, {40, -96}}, color = {0, 127, 255}, thickness = 0.5));
   connect(thChildren1R.port_b, thBathR.port_a) annotation(Line(points = {{-18, -34}, {-18, -54}, {-18.25, -54}}, color = {0, 127, 255}, thickness = 0.5));
@@ -417,6 +389,26 @@ equation
   connect(tempSensorKi.T, valveKi.T_room) annotation (Line(
       points={{-79,-51},{-69.7,-51},{-69.7,-66.66}},
       color={0,0,127}));
+  connect(radiatorLi.RadiativeHeat, radLi) annotation (Line(points={{-107.6,5.8},
+          {-107.6,25.9},{-140,25.9},{-140,46.5}}, color={95,95,95}));
+  connect(radiatorLi.ConvectiveHeat, convLi) annotation (Line(points={{-102.2,
+          5.8},{-120.1,5.8},{-120.1,31.5},{-139.5,31.5}}, color={191,0,0}));
+  connect(radKi, radiatorKi.RadiativeHeat) annotation (Line(points={{-137.5,-42},
+          {-119.75,-42},{-119.75,-72.8},{-100.9,-72.8}}, color={95,95,95}));
+  connect(convKi, radiatorKi.ConvectiveHeat) annotation (Line(points={{-138,
+          -58.5},{-117,-58.5},{-117,-72.8},{-95.8,-72.8}}, color={191,0,0}));
+  connect(radiatorBa.RadiativeHeat, radBa) annotation (Line(points={{94.9,-37.8},
+          {117.45,-37.8},{117.45,-28},{138,-28}}, color={95,95,95}));
+  connect(radiatorBa.ConvectiveHeat, convBa) annotation (Line(points={{89.8,
+          -37.8},{113.9,-37.8},{113.9,-50},{138.5,-50}}, color={191,0,0}));
+  connect(radiatorCh.RadiativeHeat, radCh) annotation (Line(points={{96.5,42},{
+          119,42},{119,49},{140,49}}, color={95,95,95}));
+  connect(radiatorCh.ConvectiveHeat, convCh) annotation (Line(points={{92,42},{
+          115,42},{115,25.5},{138.5,25.5}}, color={191,0,0}));
+  connect(radiatorBr.RadiativeHeat, radBe) annotation (Line(points={{89.2,81.6},
+          {113.1,81.6},{113.1,97},{137,97}}, color={95,95,95}));
+  connect(convBe, radiatorBr.ConvectiveHeat) annotation (Line(points={{138,73},
+          {112,73},{112,81.6},{84.4,81.6}}, color={191,0,0}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-150,
             -100},{150,110}},                                                                           grid = {1, 1}), graphics={  Rectangle(extent = {{1, 100}, {126, 63}},  pattern=LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{4, 58}, {127, 15}},  pattern=LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
