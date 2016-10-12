@@ -1,14 +1,14 @@
-within DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment;
+within AixLib.DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment;
 record Radiator_Livingroom
   "ThermX2, Profil V (Kermi) Power=1267W, L=0.5, H=300, Typ=11, {75,65,20}"
-   extends DataBase.Radiators.RadiatorMLBaseDataDefinition(
+   extends AixLib.DataBase.Radiators.RadiatorBaseDataDefinition(
     NominalPower=551,
     RT_nom={75,65,20},
     PressureDrop=583330,
     Exponent=1.2196,
     VolumeWater=1.80,
     MassSteel=9.87,
-    Type=HVAC.Components.HeatExchanger.BaseClasses.RadiatorTypes.ThermX2Typ11,
+    Type=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.RadiatorTypes.ThermX2Typ11,
     length=2.3,
     height=0.3);
   annotation (Documentation(info="<html>
