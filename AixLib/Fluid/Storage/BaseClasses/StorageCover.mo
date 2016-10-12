@@ -1,13 +1,11 @@
 within AixLib.Fluid.Storage.BaseClasses;
-model StorageCover
+model StorageCover "Sandwich wall construction for heat storage cover"
 
-//////parameters////
-
-   parameter Modelica.SIunits.Diameter D1=1 "Innendurchmesser des Tanks" annotation(Dialog(tab="Geometrical Parameters"));
+  parameter Modelica.SIunits.Diameter D1=1 "Inner tank diameter" annotation(Dialog(tab="Geometrical Parameters"));
   parameter Modelica.SIunits.Thickness sWall=0.1 "Thickness of wall" annotation(Dialog(tab="Geometrical Parameters"));
   parameter Modelica.SIunits.Thickness sIns=0.1 "Thickness of insulation" annotation(Dialog(tab="Geometrical Parameters"));
 
-final parameter Modelica.SIunits.Area AWall = D1^2/4*Modelica.Constants.pi "Area";
+  final parameter Modelica.SIunits.Area AWall = D1^2/4*Modelica.Constants.pi "Area";
 
   parameter Modelica.SIunits.ThermalConductivity lambdaWall=50
     "Thermal Conductivity of wall";
@@ -21,44 +19,55 @@ final parameter Modelica.SIunits.Area AWall = D1^2/4*Modelica.Constants.pi "Area
     "Starting Temperature of wall in K";
   parameter Modelica.SIunits.Temperature TStartIns=293.15
     "Starting Temperature of insulation in K";
-  parameter Modelica.SIunits.Density rhoIns=1600;
-  parameter Modelica.SIunits.SpecificHeatCapacity cIns=1000;
-  parameter Modelica.SIunits.Density rhoWall=1600;
-  parameter Modelica.SIunits.SpecificHeatCapacity cWall=1000;
+    parameter Modelica.SIunits.Density rhoIns=1600 "Density of insulation";
+    parameter Modelica.SIunits.SpecificHeatCapacity cIns=1000
+      "Specific heat capacity of insulation";
+    parameter Modelica.SIunits.Density rhoWall=1600 "Density of Insulation";
+    parameter Modelica.SIunits.SpecificHeatCapacity cWall=1000
+      "Specific heat capacity of wall";
 
-//////components///
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor condWall1(G=(
-        AWall)*(lambdaWall)/(sWall/2)) annotation (Placement(
+        AWall)*(lambdaWall)/(sWall/2))
+        "Heat conduction through first wall layer" annotation (Placement(
         transformation(extent={{-50,0},{-30,20}}, rotation=0)));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor condWall2(G=(
-        AWall)*(lambdaWall)/(sWall/2)) annotation (Placement(
+        AWall)*(lambdaWall)/(sWall/2))
+        "Heat conduction through second wall layer" annotation (Placement(
         transformation(extent={{-20,0},{0,20}}, rotation=0)));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor condIns1(G=(
-        AWall)*(lambdaIns)/(sIns/2)) annotation (Placement(
+        AWall)*(lambdaIns)/(sIns/2))
+        "Heat conduction through first insulation layer" annotation (Placement(
         transformation(extent={{10,0},{30,20}}, rotation=0)));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor condIns2(G=(
-        AWall)*(lambdaIns)/(sIns/2)) annotation (Placement(
+        AWall)*(lambdaIns)/(sIns/2))
+        "Heat conduction through second insulation layer" annotation (Placement(
         transformation(extent={{38,0},{58,20}}, rotation=0)));
   AixLib.Utilities.HeatTransfer.HeatConv convOutside(alpha=alphaOutside, A=
-        AWall) annotation (Placement(transformation(
+        AWall)
+        "Outside heat convection" annotation (Placement(transformation(
         origin={72,8},
         extent={{-10,-10},{10,10}},
         rotation=180)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatportOuter
+    "Outer heat port"
     annotation (Placement(transformation(extent={{80,0},{100,20}}, rotation=
            0)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatportInner
+    "Inner heat port"
     annotation (Placement(transformation(extent={{-100,0},{-80,20}},
           rotation=0)));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor loadWall(C=(
-        cWall)*(rhoWall)*(AWall)*(sWall)) annotation (Placement(
+        cWall)*(rhoWall)*(AWall)*(sWall))
+        "Heat capacity of wall" annotation (Placement(
         transformation(extent={{-20,-26},{0,-6}}, rotation=0)));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor loadIns(C=(cIns)
-        *(rhoIns)*(AWall)*(sIns)) annotation (Placement(transformation(
+        *(rhoIns)*(AWall)*(sIns))
+        "Heat capacity of insulation" annotation (Placement(transformation(
           extent={{36,-28},{56,-8}}, rotation=0)));
 
   AixLib.Utilities.HeatTransfer.HeatConv convInside(alpha=alphaInside, A=
-        AWall) annotation (Placement(transformation(extent={{-80,0},{-60,20}},
+        AWall)
+        "Inside heat convection" annotation (Placement(transformation(extent={{-80,0},{-60,20}},
           rotation=0)));
 equation
   connect(convOutside.port_a, heatportOuter) annotation (Line(
@@ -134,19 +143,20 @@ equation
           fillPattern=FillPattern.CrossDiag,
           textString="%name")}),
     Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>Model of a sandwich wall construction for a cover wall for heat storages.</p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars2.png\"/> </p>
-<p><h4><font color=\"#008000\">Concept</font></h4></p>
-<p>The heat transfer is implemented consisting of the insulation material and the tank material. Only the material data is used for the calculation of losses. No additional losses are included.</p>
+<h4><font color=\"#008000\">Concept</font></h4>
+<p>The heat transfer is implemented consisting of the insulation material and
+the tank material. Only the material data is used for the calculation of losses.
+No additional losses are included.</p>
 </html>",
       revisions="<html>
-<p><ul>
-<li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Added to AixLib</li>     
+<ul>
+<li><i>October 12, 2016&nbsp;</i> by Marcus Fuchs:<br/>Add comments and fix documentation</li>
+<li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Added to AixLib</li>
 <li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL</li>
 <li><i>October 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
-</ul></p>
+</ul>
 </html>
 "));
 end StorageCover;
