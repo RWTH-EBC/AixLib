@@ -1,5 +1,5 @@
 within AixLib.Fluid.Storage.BaseClasses;
-model HeatTransferLambdaEff
+model HeatTransferLambdaEff "Heat transfer with buoyancy and effective conductivity"
   extends AixLib.Fluid.Storage.BaseClasses.PartialHeatTransferLayers;
 
   Modelica.SIunits.HeatFlowRate[n-1] qFlow "Heat flow rate from segment i+1 to i";
