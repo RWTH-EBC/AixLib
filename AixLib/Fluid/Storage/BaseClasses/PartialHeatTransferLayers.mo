@@ -1,16 +1,17 @@
 within AixLib.Fluid.Storage.BaseClasses;
-partial model PartialHeatTransferLayers
-  import DataBase;
-  final outer parameter Integer n(min=2)=3;
+partial model PartialHeatTransferLayers "Partial for storage heat transfer models"
+
+  final outer parameter Integer n(min=2)=3 "Number of layers";
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a[n] therm annotation (
       Placement(transformation(extent={{40,0},{60,20}}, rotation=0)));
 
   final outer replaceable package Medium =
       Modelica.Media.Interfaces.PartialMedium "Medium model" annotation(choicesAllMatching);
 
-final outer replaceable parameter
+  final outer replaceable parameter
     AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
       AixLib.DataBase.Storage.Generic_500l()
+      "Storage data record"
     annotation (choicesAllMatching);
 
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
@@ -57,16 +58,15 @@ final outer replaceable parameter
           fillColor={0,0,255},
           fillPattern=FillPattern.Solid)}),
     Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>Partial model for different heat transfer layer models.</p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars2.png\"/> </p>
 </html>",
       revisions="<html>
-      <p><ul>
-      <li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Added to AixLib</li>     
+<ul>
+<li><i>October 12, 2016&nbsp;</i> by Marcus Fuchs:<br/>Add comments and fix documentation</li>
+<li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Added to AixLib</li>
 <li><i>October 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
-</ul></p>
+</ul>
 </html>
 "));
 
