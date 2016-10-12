@@ -126,7 +126,7 @@ model BufferStorage
   HeatTransfer heatTransfer "Heat transfer model" annotation (Placement(transformation(extent={{-34,0},
             {-14,20}}, rotation=0)));
 
-  MixingVolumes.MixingVolume          layer[n](
+  AixLib.Fluid.MixingVolumes.MixingVolume          layer[n](
     V=fill(data.hTank/n*Modelica.Constants.pi/4*data.dTank^2,n),
     nPorts = portsLayer,
     T_start=fill(TStart,n),
@@ -138,21 +138,7 @@ replaceable model HeatTransfer =
       AixLib.Fluid.Storage.BaseClasses.HeatTransferOnlyConduction
   constrainedby AixLib.Fluid.Storage.BaseClasses.PartialHeatTransferLayers
     "Heat Transfer Model between fluid layers"
-annotation(choicesAllMatching=true, Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
-<p>
-Heat transfer model for heat transfer between two fluid layers.
-</p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars2.png\"/></p>
-</html>
-",
- revisions="<html>
-<p><ul>
-<li><i>October 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
-</ul></p>
-</html>
-"));
+annotation(choicesAllMatching=true);
 
 ///////////////////////////////////////////////////////////////////////////////////////
 /////HEATING COILS AND RODS/////////////////////////////////////////////////////////////////////
