@@ -81,19 +81,19 @@ equation
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}),  graphics),
     Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
-<p>
-Model to describe the cylindric heat transfer, for example in pipe insulations.
-</p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars2.png\"/></p>
+<h4><font color=\"#008000\">Overview</font></h4>
+<p> Model to describe the cylindric heat transfer, for example in pipe
+insulations. </p>
+
 </html>",
       revisions="<html>
 <ul>
+<li><i>October 12, 2016&nbsp;</i> by Marcus Fuchs:<br/>Add comments and fix documentation</li>
+<li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Transferred to AixLib</li>
 <li><i>November 13, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
   <li>
-         by Alexander Hoh:<br>
+         by Alexander Hoh:<br/>
          implemented</li>
-<ul>
+</ul>
 </html>"));
 end CylindricHeatTransfer;
