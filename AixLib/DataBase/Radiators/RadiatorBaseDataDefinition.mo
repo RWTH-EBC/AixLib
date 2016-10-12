@@ -1,5 +1,5 @@
 within AixLib.DataBase.Radiators;
-record RadiatorMLBaseDataDefinition "Base Data Definition for Radiators"
+record RadiatorBaseDataDefinition "Base Data Definition for Radiators"
     extends Modelica.Icons.Record;
   parameter Real NominalPower=1000
     "Nominal power of radiator per m at nominal temperatures in W/m "
@@ -45,4 +45,4 @@ parameter Modelica.SIunits.Density DensitySteel=7900
 <li><i>August 13, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
 </ul></p>
 </html>"));
-end RadiatorMLBaseDataDefinition;
+end RadiatorBaseDataDefinition;

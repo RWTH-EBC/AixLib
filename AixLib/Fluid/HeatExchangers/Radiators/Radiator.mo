@@ -7,11 +7,10 @@ model Radiator "radiator multilayer model"
 
   // parameter Real kv=.1;
  parameter Boolean selectable=false "Radiator record" annotation(Dialog(group="Radiator Data"));
- parameter AixLib.DataBase.Radiators.RadiatorMLBaseDataDefinition
-                                                       radiatorType=
-      AixLib.DataBase.Radiators.RadiatorMLBaseDataDefinition()
-    "choose a radiator"
-                    annotation(Dialog(group="Radiator Data", enable=selectable), choicesAllMatching=true);
+  parameter AixLib.DataBase.Radiators.RadiatorBaseDataDefinition radiatorType=
+      AixLib.DataBase.Radiators.RadiatorBaseDataDefinition()
+    "choose a radiator" annotation (Dialog(group="Radiator Data", enable=
+          selectable), choicesAllMatching=true);
   parameter
     AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.RadiatorTypes.RadiatorType         Type=(if selectable then
       radiatorType.Type else BaseClasses.RadiatorTypes.PanelRadiator10)
