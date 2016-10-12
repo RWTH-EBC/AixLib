@@ -1,7 +1,8 @@
 within AixLib.Fluid.Storage.BaseClasses;
-model HeatingCoil
+model HeatingCoil "Heating coil for heat storage model"
+  extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
 
- parameter Integer disHC = 2;
+ parameter Integer disHC = 2 "Number of elements for heating coil discretization";
 
  parameter Modelica.SIunits.Length lengthHC = 3 "Length of Pipe for HC";
 
@@ -14,31 +15,34 @@ model HeatingCoil
  parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition pipeHC=
       AixLib.DataBase.Pipes.Copper.Copper_28x1() "Type of Pipe for HR1";
 
-  extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
-
-    Utilities.HeatTransfer.CylindricHeatTransfer                       pipeWallHC1[disHC](
+ AixLib.Utilities.HeatTransfer.CylindricHeatTransfer pipeWallHC1[disHC](
     each T0=TStart,
     rho=fill(pipeHC.d, disHC),
     c=fill(pipeHC.c, disHC),
     d_out=fill(pipeHC.d_o, disHC),
     d_in=fill(pipeHC.d_i, disHC),
     length=fill(lengthHC/disHC, disHC),
-    lambda=fill(pipeHC.lambda, disHC)) annotation (Placement(transformation(
+    lambda=fill(pipeHC.lambda, disHC))
+    "Heat transfer of pipe wall" annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=0,
         origin={-4,26})));
   AixLib.Utilities.HeatTransfer.HeatConv convHC1Outside[disHC](each alpha=
-        alphaHC, A=fill(pipeHC.d_o*Modelica.Constants.pi*lengthHC/disHC,
-        disHC)) annotation (Placement(transformation(
-        extent={{-6,-6},{6,6}},
-        rotation=270,
-        origin={-4,52})));
+    alphaHC, A=fill(pipeHC.d_o*Modelica.Constants.pi*lengthHC/disHC,
+    disHC))
+    "Outer heat convection" annotation (Placement(transformation(
+    extent={{-6,-6},{6,6}},
+    rotation=270,
+    origin={-4,52})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm1[disHC]
+    "Vectorized heat port"
     annotation (Placement(transformation(extent={{-14,94},{6,114}})));
   FixedResistances.Pipe pipe[disHC](D=pipeHC.d_i,
     m_flow_small=1e-5,
     l=lengthHC/disHC)
+    "Heating coil pipe"
     annotation (Placement(transformation(extent={{-14,-10},{6,10}})));
+
 equation
   for k in 1:disHC-1 loop
     connect(pipe[k].port_b,pipe[k+1].port_a);
@@ -128,19 +132,21 @@ equation
           smooth=Smooth.Bezier,
           visible = use_heatingCoil1)}),
     Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
-<p>Model of a heating coil to heat a fluid (e.g. water) by a given input on the heat port.</p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars2.png\"/> </p>
-<p><h4><font color=\"#008000\">Concept</font></h4></p>
-<p>The heating coil is implemented as a pipe which is going through the storage tank. The heat transfer to the storage tank is modelled with a heat transfer coefficient.</p>
+<h4><font color=\"#008000\">Overview</font></h4>
+<p>Model of a heating coil to heat a fluid (e.g. water) by a given input on the
+heat port.</p>
+<h4><font color=\"#008000\">Concept</font></h4>
+<p>The heating coil is implemented as a pipe which is going through the storage
+tank. The heat transfer to the storage tank is modelled with a heat transfer
+coefficient.</p>
 </html>",
       revisions="<html>
-<p><ul>
-<li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Added to AixLib</li>     
+<ul>
+<li><i>October 12, 2016&nbsp;</i> by Marcus Fuchs:<br/>Add comments and fix documentation</li>
+<li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Added to AixLib</li>
 <li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL</li>
 <li><i>October 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
-</ul></p>
+</ul>
 </html>
 "));
 end HeatingCoil;
