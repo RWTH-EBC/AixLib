@@ -18,8 +18,6 @@ model RoomGFOw2_DayNightMode
     dp(start=1000))                                                               annotation(Placement(transformation(extent = {{22, -36}, {42, -16}})));
   AixLib.Fluid.Movers.Pump Pumo(redeclare package Medium = Medium, m_flow_small=
        0.0001)                  annotation(Placement(transformation(extent = {{-92, -36}, {-72, -16}})));
-  AixLib.Fluid.HeatExchangers.Boiler boilerTaktTable(redeclare package Medium =
-        Medium, m_flow_nominal=0.01)                 annotation(Placement(transformation(extent = {{-56, -36}, {-36, -16}})));
   AixLib.Utilities.Sources.NightMode nightMode(dayEnd = 22, dayStart = 6) annotation(Placement(transformation(extent = {{-104, 0}, {-84, 20}})));
   AixLib.Fluid.FixedResistances.StaticPipe pipe_flow(
     redeclare package Medium = Medium,
@@ -41,14 +39,19 @@ model RoomGFOw2_DayNightMode
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor annotation(Placement(transformation(extent = {{-5, -5}, {5, 5}}, rotation = 270, origin = {23, -5})));
   Modelica.Blocks.Interfaces.RealOutput Troom
     "Absolute temperature as output signal"                                           annotation(Placement(transformation(extent = {{90, -20}, {110, 0}})));
+  AixLib.Fluid.HeatExchangers.HeaterCooler_T hea(
+    redeclare package Medium = Medium,
+    m_flow_nominal=0.01,
+    dp_nominal=0,
+    Q_flow_maxHeat=20000,
+    Q_flow_maxCool=0)
+    annotation (Placement(transformation(extent={{-50,-36},{-30,-16}})));
 equation
   connect(varTemp.port, room_GF_2OW.thermOutside) annotation(Line(points = {{-38, 48}, {17.8, 48}, {17.8, 42.2}}, color = {191, 0, 0}));
   connect(room_GF_2OW.thermCeiling, thermCeiling.port) annotation(Line(points = {{50.2, 38.6}, {80, 38.6}, {80, 68}, {82, 68}}, color = {191, 0, 0}));
   connect(room_GF_2OW.thermInsideWall1, thermInsideWall1.port) annotation(Line(points = {{50.2, 27.8}, {80, 27.8}, {80, 44}, {82, 44}}, color = {191, 0, 0}));
   connect(room_GF_2OW.thermInsideWall2, thermInsideWall2.port) annotation(Line(points = {{39.4, 9.8}, {39.4, 0}, {80, 0}, {80, 20}, {82, 20}}, color = {191, 0, 0}));
-  connect(Pumo.port_b, boilerTaktTable.port_a) annotation(Line(points = {{-72, -26}, {-56, -26}}, color = {0, 127, 255}));
   connect(pipe_flow.port_b, heatValve_new.port_a) annotation(Line(points = {{14, -26}, {22, -26}}, color = {0, 127, 255}));
-  connect(boilerTaktTable.port_b, pipe_flow.port_a) annotation(Line(points = {{-36, -26}, {-6, -26}}, color = {0, 127, 255}));
   connect(heatValve_new.port_b, radiator_ML_delta.port_a) annotation(Line(points={{42,-26},
           {54,-26}},                                                                                         color = {0, 127, 255}));
   connect(radiator_ML_delta.port_b, pipe_return.port_a) annotation(Line(points={{74,-26},
@@ -65,13 +68,18 @@ equation
   connect(Tset.y, heatValve_new.T_setRoom) annotation(Line(points = {{4.5, 1}, {37.6, 1}, {37.6, -16.2}}, color = {0, 0, 127}));
   connect(radiator_ML_delta.convPort, room_GF_2OW.thermRoom) annotation(Line(points = {{59.8, -18.4}, {59.8, 0}, {30.04, 0}, {30.04, 29.6}}, color = {191, 0, 0}));
   connect(radiator_ML_delta.radPort, room_GF_2OW.starRoom) annotation(Line(points = {{68, -18.2}, {68, 0}, {37.6, 0}, {37.6, 29.6}}, color = {0, 0, 0}));
-  connect(Tset_flowTemperature.y, boilerTaktTable.T_set) annotation(Line(points = {{-61.5, -1}, {-56.8, -1}, {-56.8, -19}}, color = {0, 0, 127}));
   connect(temperatureSensor.T, heatValve_new.T_room) annotation(Line(points = {{23, -10}, {22, -10}, {22, -16.2}, {25.6, -16.2}}, color = {0, 0, 127}));
   connect(temperatureSensor.port, room_GF_2OW.thermRoom) annotation(Line(points = {{23, 0}, {23, 29}, {30.04, 29}, {30.04, 29.6}}, color = {191, 0, 0}));
   connect(temperatureSensor.T, Troom) annotation(Line(points = {{23, -10}, {100, -10}}, color = {0, 0, 127}));
   connect(tank.ports[1], Pumo.port_a) annotation (Line(
       points={{-106,-25},{-100,-25},{-100,-26},{-92,-26}},
       color={0,127,255}));
+  connect(Pumo.port_b, hea.port_a) annotation (Line(points={{-72,-26},{-61,-26},
+          {-50,-26}}, color={0,127,255}));
+  connect(hea.port_b, pipe_flow.port_a) annotation (Line(points={{-30,-26},{-18,
+          -26},{-6,-26}}, color={0,127,255}));
+  connect(Tset_flowTemperature.y, hea.TSet) annotation (Line(points={{-61.5,-1},
+          {-58,-1},{-58,-20},{-52,-20}}, color={0,0,127}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
             -100},{100,100}}),                                                                           graphics={  Text(extent = {{-56, -44}, {82, -130}}, lineColor = {0, 0, 255}, textString = "Set initial values for iteration variables (list given by translate, usually pressure drops). Rule of thumb: valves 1000 Pa, pipes 100 Pa. Simulation may still work without some of them, but  it gives warning of division by zero at initialization.
  ")}), experiment(StopTime = 86400, Interval = 60, __Dymola_Algorithm = "Lsodar"), experimentSetupOutput(events = false), Documentation(info = "<html>

@@ -1,6 +1,5 @@
 within AixLib.Fluid.HeatGenerators.BaseClasses.Controllers;
 model InternalControl
-  import BaseLib;
 
   //Parameters
   parameter AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition
@@ -30,11 +29,11 @@ public
         extent={{-12.75,-12.75},{12.75,12.75}},
         rotation=-90,
         origin={-24.75,102.75})));
-  AixLib.Utilities.Sensors.EEnergyMeter eEnergyMeter_P
+  Utilities.Sensors.EnergyMeter         eEnergyMeter_P
       "for primary energy consumption"
     annotation (Placement(transformation(extent={{30,63},{49.5,84}})));
 
-  AixLib.Utilities.Sensors.EEnergyMeter eEnergyMeter_S
+  Utilities.Sensors.EnergyMeter         eEnergyMeter_S
       "for secondary energy consumption"
     annotation (Placement(transformation(extent={{30,82.5},{49.5,103.5}})));
   Modelica.Blocks.Tables.CombiTable1D EfficiencyTable(
@@ -82,7 +81,7 @@ equation
 
   connect(ControlerHeater.y, eEnergyMeter_P.p)
                                     annotation (Line(
-      points={{-24.825,44.25},{4.5,44.25},{4.5,73.5},{31.365,73.5}},
+      points={{-24.825,44.25},{4.5,44.25},{4.5,73.5},{30.65,73.5}},
       color={0,0,127},
       smooth=Smooth.None));
 

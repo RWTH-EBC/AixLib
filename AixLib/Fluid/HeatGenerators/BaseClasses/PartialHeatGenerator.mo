@@ -21,7 +21,7 @@ partial model PartialHeatGenerator
     annotation (Dialog(tab="Advanced", group="Sensor Properties"));
   parameter Modelica.SIunits.Temperature T_start=Medium.T_default
     "Initial or guess value of output (= state)"
-    annotation (Dialog(tab="Advanced", group="Sensor Properties"));
+    annotation (Dialog(tab="Advanced", group="Initialization"));
   parameter Boolean transferHeat=false
     "if true, temperature T converges towards TAmb when no flow"
     annotation (Dialog(tab="Advanced", group="Sensor Properties"));
@@ -56,7 +56,9 @@ partial model PartialHeatGenerator
     m_flow_nominal=m_flow_nominal,
     m_flow_small=m_flow_small,
     allowFlowReversal=allowFlowReversal,
-    nPorts=2)
+    nPorts=2,
+    p_start=p_start,
+    T_start=T_start)
     annotation (Placement(transformation(extent={{-50,-80},{-30,-60}})));
   Modelica.Fluid.Fittings.GenericResistances.VolumeFlowRate pressureDrop(
     redeclare package Medium = Medium,
@@ -64,8 +66,19 @@ partial model PartialHeatGenerator
     m_flow_small=m_flow_small,
     show_T=false,
     show_V_flow=false,
-    allowFlowReversal=allowFlowReversal)
+    allowFlowReversal=allowFlowReversal,
+    dp_start=dp_start,
+    m_flow_start=m_flow_start)
     annotation (Placement(transformation(extent={{-20,-90},{0,-70}})));
+  parameter Modelica.Media.Interfaces.Types.AbsolutePressure dp_start=0
+    "Guess value of dp = port_a.p - port_b.p"
+    annotation (Dialog(tab="Advanced", group="Initialization"));
+  parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate m_flow_start=0
+    "Guess value of m_flow = port_a.m_flow"
+    annotation (Dialog(tab="Advanced", group="Initialization"));
+  parameter Modelica.Media.Interfaces.Types.AbsolutePressure p_start=Medium.p_default
+    "Start value of pressure"
+    annotation (Dialog(tab="Advanced", group="Initialization"));
 equation
   connect(port_a, senTCold.port_a) annotation (Line(points={{-100,0},{-90,0},{-90,
           -80},{-80,-80}}, color={0,127,255},
