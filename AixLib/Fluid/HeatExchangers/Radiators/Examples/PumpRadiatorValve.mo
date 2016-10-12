@@ -4,8 +4,7 @@ model PumpRadiatorValve
   extends Modelica.Icons.Example;
 
   replaceable package Medium =
-     Modelica.Media.Water.ConstantPropertyLiquidWater
-     constrainedby Modelica.Media.Interfaces.PartialMedium;
+     AixLib.Media.Water "Medium Model";
 
   AixLib.Fluid.Movers.Pump
              pump(MinMaxCharacteristics = AixLib.DataBase.Pumps.Pump1(), V_flow_max = 2, ControlStrategy = 2, V_flow(fixed = false), Head_max = 2,
