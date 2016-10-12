@@ -64,7 +64,7 @@ annotation (Dialog(tab="Geometry and Material", group="Geometry", enable=not sel
   parameter
     AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp.Temp         calc_dT=calcT.exp
     "select calculation method";
-  SIunits.Power Power;
+
   SIunits.Temperature TV_1;
   SIunits.Temperature TR_N;
 protected
