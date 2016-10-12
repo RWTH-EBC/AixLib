@@ -1,6 +1,6 @@
 within AixLib.Fluid.Storage.BaseClasses;
 model HeatTransferLambdaEffSmooth
-  extends PartialHeatTransferLayers;
+  extends AixLib.Fluid.Storage.BaseClasses.PartialHeatTransferLayers;
   Modelica.SIunits.HeatFlowRate[n-1] qFlow "Heat flow rate from segment i+1 to i";
 
 

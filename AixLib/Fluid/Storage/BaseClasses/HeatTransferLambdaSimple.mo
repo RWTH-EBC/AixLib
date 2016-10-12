@@ -26,8 +26,8 @@ protected
     "Temperature difference between adjoining volumes";
   Real[n-1] k(unit="W/K") "Effective heat transfer coefficient";
   Real[n-1] lambda(unit="W/mK") "Effective heat conductivity";
-  parameter Modelica.SIunits.ThermalConductivity lambdaWater=0.64;
-
+  parameter Modelica.SIunits.ThermalConductivity lambdaWater=0.64
+    "Thermal conductivity of water";
 
 equation
 
