@@ -27,11 +27,10 @@ record Generic_New_2000l "Pseudo storage with 2000 l (standing)"
     lengthHC2=22);
 
   annotation (Icon(graphics),               Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>Buffer Storage: Generic 2000 l</p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars3.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
-<p>Record is used with <a href=\"HVAC.Components.BufferStorage.BufferStorageHeatingcoils\">HVAC.Components.BufferStorage.BufferStorageHeatingcoils</a></p>
+<h4><font color=\"#008000\">References</font></h4>
+<p>Record is used with <a
+href=\"HVAC.Components.BufferStorage.BufferStorageHeatingcoils\">HVAC.Components.BufferStorage.BufferStorageHeatingcoils</a></p>
 </html>"));
 end Generic_New_2000l;

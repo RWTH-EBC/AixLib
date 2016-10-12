@@ -10,25 +10,24 @@ package Copper
       lambda=393,
       c=390);
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_6x0_6;
 
@@ -41,25 +40,24 @@ Record for copper pipe
       lambda=393,
       c=390);
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_6x0_8;
 
@@ -72,25 +70,24 @@ Record for copper pipe
       lambda=393,
       c=390);
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_6x1;
 
@@ -103,25 +100,24 @@ Record for copper pipe
       lambda=393,
       c=390);
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_8x0_6;
 
@@ -134,25 +130,24 @@ Record for copper pipe
       lambda=393,
       c=390);
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_8x0_8;
 
@@ -165,25 +160,24 @@ Record for copper pipe
       lambda=393,
       c=390);
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_8x1;
 
@@ -196,25 +190,24 @@ Record for copper pipe
       lambda=393,
       c=390);
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_10x0_6;
 
@@ -227,25 +220,24 @@ Record for copper pipe
       lambda=393,
       c=390);
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_10x0_7;
 
@@ -258,25 +250,24 @@ Record for copper pipe
       lambda=393,
       c=390);
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_10x0_8;
 
@@ -289,25 +280,24 @@ Record for copper pipe
       lambda=393,
       c=390);
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_10x1;
 
@@ -320,25 +310,24 @@ Record for copper pipe
       lambda=393,
       c=390);
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_12x0_6;
 
@@ -351,25 +340,24 @@ Record for copper pipe
       lambda=393,
       c=390);
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_12x0_7;
 
@@ -382,25 +370,24 @@ Record for copper pipe
       lambda=393,
       c=390);
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_12x0_8;
 
@@ -415,25 +402,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_12x1;
 
@@ -446,25 +432,24 @@ Record for copper pipe
       lambda=393,
       c=390);
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_14x0_8;
 
@@ -477,25 +462,24 @@ Record for copper pipe
       lambda=393,
       c=390);
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_14x1;
 
@@ -508,25 +492,24 @@ Record for copper pipe
       lambda=393,
       c=390);
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_15x0_7;
 
@@ -539,25 +522,24 @@ Record for copper pipe
       lambda=393,
       c=390);
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_15x0_8;
 
@@ -572,25 +554,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_15x1;
 
@@ -605,25 +586,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_16x1;
 
@@ -636,25 +616,24 @@ Record for copper pipe
       lambda=393,
       c=390);
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_18x0_8;
 
@@ -669,25 +648,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_18x1;
 
@@ -702,25 +680,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_22x0_9;
 
@@ -735,25 +712,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_22x1;
 
@@ -768,25 +744,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_22x1_1;
 
@@ -801,25 +776,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_22x1_2;
 
@@ -833,25 +807,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_22x1_5;
 
@@ -866,25 +839,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_28x0_9;
 
@@ -898,25 +870,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_28x1;
 
@@ -931,25 +902,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_28x1_2;
 
@@ -964,25 +934,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_28x1_5;
 
@@ -997,25 +966,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_35x1;
 
@@ -1030,25 +998,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_35x1_2;
 
@@ -1063,25 +1030,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_35x1_5;
 
@@ -1096,25 +1062,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_40x1;
 
@@ -1129,25 +1094,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_42x1;
 
@@ -1162,25 +1126,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_42x1_2;
 
@@ -1195,25 +1158,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_42x1_5;
 
@@ -1228,25 +1190,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_54x1;
 
@@ -1261,25 +1222,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_54x1_2;
 
@@ -1294,25 +1254,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_54x1_5;
 
@@ -1327,25 +1286,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_54x2;
 
@@ -1360,25 +1318,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_64x2;
 
@@ -1393,25 +1350,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_66_7x1_2;
 
@@ -1426,25 +1382,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_66_7x2;
 
@@ -1459,25 +1414,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_76_1x1_5;
 
@@ -1492,25 +1446,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_76_1x2;
 
@@ -1525,25 +1478,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_88_9x2;
 
@@ -1558,25 +1510,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_108x1_5;
 
@@ -1591,25 +1542,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_108x2_5;
 
@@ -1624,25 +1574,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_133x1_5;
 
@@ -1657,25 +1606,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_133x3;
 
@@ -1690,25 +1638,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_159x2;
 
@@ -1723,25 +1670,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_159x3;
 
@@ -1756,25 +1702,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_219x3;
 
@@ -1789,25 +1734,24 @@ Record for copper pipe
     // Constant chemical Values assumed
 
     annotation (Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>June 29, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>",
   info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Record for copper pipe
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 <p>Source: </p>
-<p><ul>
+<ul>
 <li>DIN EN 1057:2010-06</li>
 <li>Table 3, Page 14</li>
-</ul></p>
+</ul>
 </html>"));
   end Copper_267x3;
 end Copper;

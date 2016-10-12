@@ -28,11 +28,10 @@ record Generic_500l "Generic storage data for a 500 l storage"
 
 
   annotation (Icon(graphics),               Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>Buffer Storage: Buderus Logalux SF 500 l</p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars3.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
-<p>Record is used with <a href=\"HVAC.Components.BufferStorage.BufferStorageHeatingcoils\">HVAC.Components.BufferStorage.BufferStorageHeatingcoils</a></p>
+<h4><font color=\"#008000\">References</font></h4>
+<p>Record is used with <a
+href=\"HVAC.Components.BufferStorage.BufferStorageHeatingcoils\">HVAC.Components.BufferStorage.BufferStorageHeatingcoils</a></p>
 </html>"));
 end Generic_500l;
