@@ -2,23 +2,30 @@ within AixLib.Building.HighOrder.Examples;
 
 
 model Appartment_VoWo "Simulation of 1 apartment "
-  import AixLib;
   extends Modelica.Icons.Example;
   parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();
   replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater
     "Medium in the system"                                                                             annotation(Dialog(group = "Medium"), choicesAllMatching = true);
-  AixLib.Building.HighOrder.House.MFD.BuildingAndEnergySystem.OneAppartment_Radiators
-                                                                                      VoWoWSchV1984(redeclare
+  AixLib.Building.HighOrder.House.MFD.BuildingAndEnergySystem.OneAppartment_Radiators VoWoWSchV1984(redeclare
       package Medium =                                                                                                     Medium, fixedHeatFlow3(T_ref = 288.15), fixedHeatFlow5(T_ref = 283.15), fixedHeatFlow16(T_ref = 288.15)) annotation(Placement(transformation(extent = {{-42, -4}, {36, 46}})));
   AixLib.Fluid.HeatExchangers.Boiler boilerTable(boilerEfficiencyB = AixLib.DataBase.Boiler.BoilerConst(),
     redeclare package Medium = Medium,
     m_flow_nominal=0.01)                                                                                   annotation(Placement(transformation(extent = {{-44, -86}, {-64, -66}})));
-  AixLib.Fluid.Movers.Pump Pumpe(redeclare package Medium = Medium,
-      m_flow_small=0.0001)       annotation(Placement(transformation(extent = {{4, -82}, {-16, -62}})));
-  AixLib.Fluid.FixedResistances.StaticPipe pipe(redeclare package Medium =
-        Medium, m_flow_small=0.0001)            annotation(Placement(transformation(extent = {{-30, -48}, {-18, -36}})));
-  AixLib.Fluid.FixedResistances.StaticPipe pipe2(redeclare package Medium =
-        Medium, m_flow_small=0.0001)             annotation(Placement(transformation(extent = {{26, -50}, {38, -38}})));
+  AixLib.Fluid.Movers.Pump Pump(redeclare package Medium = Medium, m_flow_small
+      =0.0001) "Pump in heating system"
+    annotation (Placement(transformation(extent={{4,-82},{-16,-62}})));
+  AixLib.Fluid.FixedResistances.FixedResistanceDpM
+    res1(redeclare package Medium = Medium,
+    dp_nominal=200,
+    m_flow_nominal=0.3)
+                    "Hydraulic resistance of supply"
+                                                annotation(Placement(transformation(extent = {{-30, -48}, {-18, -36}})));
+  AixLib.Fluid.FixedResistances.FixedResistanceDpM res2(
+    redeclare package Medium = Medium,
+    dp_nominal=200,
+    m_flow_nominal=0.3)
+                    "Hydraulic resistance of return"
+    annotation (Placement(transformation(extent={{26,-50},{38,-38}})));
   Modelica.Blocks.Sources.Constant Source_TsetChildren(k = 273.15 + 22) annotation(Placement(transformation(extent = {{-100, 8}, {-86, 22}})));
   Modelica.Blocks.Sources.Constant Source_TsetLivingroom(k = 273.15 + 20) annotation(Placement(transformation(extent = {{-100, 52}, {-86, 66}})));
   Modelica.Blocks.Sources.Constant Source_TsetBedroom(k = 273.15 + 20) annotation(Placement(transformation(extent = {{-100, 30}, {-86, 44}})));
@@ -30,7 +37,8 @@ model Appartment_VoWo "Simulation of 1 apartment "
                                  tank(nPorts=2, redeclare package Medium =
         Medium)                       annotation(Placement(transformation(extent = {{-8, -8}, {8, 8}}, rotation = 270, origin = {28, -64})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression annotation(Placement(transformation(extent = {{-94, -56}, {-74, -36}})));
-  inner AixLib.HVAC.BaseParameters baseParameters annotation(Placement(transformation(extent = {{80, 80}, {100, 100}})));
+  inner AixLib.Utilities.Sources.BaseParameters baseParameters
+    annotation (Placement(transformation(extent={{80,80},{100,100}})));
   Modelica.Blocks.Sources.Constant Source_TseBoiler(k = 273.15 + 55) annotation(Placement(transformation(extent = {{-86, -96}, {-72, -82}})));
   output Real Ta = combinedWeather.AirTemp;
   // Livingroom
@@ -64,12 +72,13 @@ model Appartment_VoWo "Simulation of 1 apartment "
   output Real travelHVKi = VoWoWSchV1984.Hydraulic.valveKi.opening;
   output Real massFlowKi = VoWoWSchV1984.Hydraulic.valveKi.port_a.m_flow;
 equation
-  connect(Pumpe.port_b, boilerTable.port_a) annotation(Line(points = {{-16, -72}, {-38, -72}, {-38, -76}, {-44, -76}}, color = {0, 127, 255}));
-  connect(boilerTable.port_b, pipe.port_a) annotation(Line(points = {{-64, -76}, {-74, -76}, {-74, -42}, {-30, -42}}, color = {0, 127, 255}));
-  connect(pipe.port_b, VoWoWSchV1984.Inflow) annotation(Line(points={{-18,-42},
+  connect(Pump.port_b, boilerTable.port_a) annotation (Line(points={{-16,-72},{
+          -38,-72},{-38,-76},{-44,-76}}, color={0,127,255}));
+  connect(boilerTable.port_b,res1. port_a) annotation(Line(points = {{-64, -76}, {-74, -76}, {-74, -42}, {-30, -42}}, color = {0, 127, 255}));
+  connect(res1.port_b, VoWoWSchV1984.Inflow) annotation(Line(points={{-18,-42},
           {-5.12727,-42},{-5.12727,-1.5}},                                                                             color = {0, 127, 255}));
-  connect(VoWoWSchV1984.Returnflow, pipe2.port_a) annotation(Line(points={{3.38182,
-          -1.5},{3.38182,-44},{26,-44}},                                                                                 color = {0, 127, 255}));
+  connect(VoWoWSchV1984.Returnflow, res2.port_a) annotation (Line(points={{3.38182,
+          -1.5},{3.38182,-44},{26,-44}}, color={0,127,255}));
   // Here the relevant Variables for the simulation are set as output to limit the dimension of the result file
   connect(combinedWeather.WindSpeed, VoWoWSchV1984.WindSpeedPort) annotation(Line(points={{
           -48.9333,91.6},{-10.4455,91.6},{-10.4455,42.875}},                                                                                         color = {0, 0, 127}));
@@ -87,18 +96,17 @@ equation
           37},{-60,37},{-60,19.9583},{-36.6818,19.9583}},                                                                                      color = {0, 0, 127}));
   connect(Source_TsetChildren.y, VoWoWSchV1984.TSet[3]) annotation(Line(points={{-85.3,
           15},{-72,15},{-72,14},{-60,14},{-60,21.2083},{-36.6818,21.2083}},                                                                                           color = {0, 0, 127}));
-  connect(booleanExpression.y, Pumpe.IsNight) annotation(Line(points = {{-73, -46}, {-6, -46}, {-6, -61.8}}, color = {255, 0, 255}));
+  connect(booleanExpression.y, Pump.IsNight) annotation (Line(points={{-73,-46},
+          {-6,-46},{-6,-61.8}}, color={255,0,255}));
   connect(Source_TsetBath.y, VoWoWSchV1984.TSet[4]) annotation(Line(points={{-85.3,
           -9},{-60,-9},{-60,22.4583},{-36.6818,22.4583}},                                                                                   color = {0, 0, 127}));
   connect(Source_TsetKitchen.y, VoWoWSchV1984.TSet[5]) annotation(Line(points={{-85.3,
           -29},{-60,-29},{-60,23.7083},{-36.6818,23.7083}},                                                                                      color = {0, 0, 127}));
   connect(Source_TseBoiler.y, boilerTable.T_set) annotation(Line(points = {{-71.3, -89}, {-36, -89}, {-36, -69}, {-43.2, -69}}, color = {0, 0, 127}));
-  connect(pipe2.port_b, tank.ports[1]) annotation (Line(
-      points={{38,-44},{54,-44},{54,-86},{29.6,-86},{29.6,-72}},
-      color={0,127,255}));
-  connect(Pumpe.port_a, tank.ports[2]) annotation (Line(
-      points={{4,-72},{14,-72},{14,-84},{26.4,-84},{26.4,-72}},
-      color={0,127,255}));
+  connect(res2.port_b, tank.ports[1]) annotation (Line(points={{38,-44},{54,-44},
+          {54,-86},{29.6,-86},{29.6,-72}}, color={0,127,255}));
+  connect(Pump.port_a, tank.ports[2]) annotation (Line(points={{4,-72},{14,-72},
+          {14,-84},{26.4,-84},{26.4,-72}}, color={0,127,255}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
             -140},{100,100}}),                                                                           graphics={  Text(extent = {{-48, -82}, {90, -168}}, lineColor = {0, 0, 255}, textString = "Set initial values for iteration variables (list given by translate, usually pressure drops). Rule of thumb: valves 1000 Pa, pipes 100 Pa. Simulation may still work without some of them, but  it gives warning of division by zero at initialization.
  ")}), experiment(StopTime = 86400, Interval = 60, __Dymola_Algorithm = "Lsodar"), experimentSetupOutput(states = false, derivatives = false, auxiliaries = false, events = false), Documentation(info = "<html>

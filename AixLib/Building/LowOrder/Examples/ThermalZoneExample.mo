@@ -104,10 +104,10 @@ parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = 
         590400,0,0,0,0; 593940,0,0,0,0; 594000,0,0,0,0; 597540,0,0,0,0; 597600,
         0,0,0,0; 601140,0,0,0,0; 601200,0,0,0,0; 604740,0,0,0,0])                                                                                                     annotation(Placement(transformation(extent = {{14, -71}, {28, -57}})));
   Modelica.Blocks.Sources.CombiTimeTable heatingCooling(extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableName = "UserProfilesHeat", fileName = Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/UserProfilesHeatSimple.txt"), columns = {2, 3}, tableOnFile = false, table = [0, 295.15, 295.2; 3600, 295.1, 295.2; 7200, 295.1, 295.2; 10800, 295.1, 295.2; 14400, 295.1, 295.2; 18000, 295.1, 295.2; 21600, 295.1, 295.2; 25200, 300.1, 300.2; 28800, 300.1, 300.2; 32400, 300.1, 300.2; 36000, 300.1, 300.2; 39600, 300.1, 300.2; 43200, 300.1, 300.2; 46800, 300.1, 300.2; 50400, 300.1, 300.2; 54000, 300.1, 300.2; 57600, 300.1, 300.2; 61200, 300.1, 300.2; 64800, 300.1, 300.2; 68400, 295.1, 295.2; 72000, 295.1, 295.2; 75600, 295.1, 295.2; 79200, 295.1, 295.2; 82800, 295.1, 295.2; 86400, 295.1, 295.2]) annotation(Placement(transformation(extent = {{-56, -75}, {-42, -61}})));
-  Utilities.Sensors.TEnergyMeter
+  Utilities.Sensors.EnergyMeter
                           coolMeter "measures cooling energy" annotation (Placement(transformation(extent={{52,-66},
             {72,-46}})));
-  Utilities.Sensors.TEnergyMeter
+  Utilities.Sensors.EnergyMeter
                           heatMeter "measures heating energy" annotation (Placement(transformation(extent={{52,-48},
             {72,-28}})));
 equation

@@ -92,86 +92,102 @@ model Radiators
     redeclare package Medium = Medium,
     dp(start=1000))
     annotation (Placement(transformation(extent={{49,74},{60,87}})));
-  Fluid.FixedResistances.StaticPipe thStF(D = Diam_Main, l = Length_thSt,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe thStF(
+    diameter = Diam_Main,
+    length = Length_thSt,
     redeclare package Medium = Medium) "through the storage room, flow stream"                        annotation(Placement(transformation(extent = {{57, -85}, {40, -74}})));
-  Fluid.FixedResistances.StaticPipe toKiF(D = Diam_Sec, l = Length_toKi,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe toKiF(
+    diameter = Diam_Sec,
+    length = Length_toKi,
     redeclare package Medium = Medium) "to kitchen, flow stream"                       annotation(Placement(transformation(extent = {{8, -5}, {-8, 5}}, origin = {-49, -74.5})));
-  Fluid.FixedResistances.StaticPipe thStR(D = Diam_Main, l = Length_thSt,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe thStR(
+    diameter = Diam_Main,
+    length = Length_thSt,
     redeclare package Medium = Medium)
     "through the storage room, return stream"                                                           annotation(Placement(transformation(extent = {{40, -102}, {58, -90}})));
-  Fluid.FixedResistances.StaticPipe toKiR(D = Diam_Sec, l = Length_toKi,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe toKiR(
+    diameter = Diam_Sec,
+    length = Length_toKi,
     redeclare package Medium = Medium) "to kitchen, return stream"                       annotation(Placement(transformation(extent = {{-72, -102}, {-56, -90}})));
-  Fluid.FixedResistances.StaticPipe thBathF(D = Diam_Main, l = Length_thBath,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe thBathF(
+    diameter = Diam_Main,
+    length = Length_thBath,
     redeclare package Medium = Medium) "through Bath, flow stream"                            annotation(Placement(transformation(extent = {{8, 4.5}, {-8, -4.5}}, rotation = 270, origin = {-4.5, -62})));
-  Fluid.FixedResistances.StaticPipe thBathR(D = Diam_Main, l = Length_thBath,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe thBathR(
+    diameter = Diam_Main,
+    length = Length_thBath,
     redeclare package Medium = Medium) "through bath, return stream"                            annotation(Placement(transformation(extent = {{8.75, -4.25}, {-8.75, 4.25}}, rotation = 90, origin = {-18.25, -62.75})));
-  Fluid.FixedResistances.StaticPipe thChildren1R(D = Diam_Main, l = Length_thChildren1,
-    m_flow_small=0.0001,
-    redeclare package Medium = Medium) "through chidlren room 1, return stream"
-                                                                                                        annotation(Placement(transformation(extent = {{6.5, -5}, {-6.5, 5}}, rotation = 90, origin = {-18, -27.5})));
-  Fluid.FixedResistances.StaticPipe thChildren1F(D = Diam_Main, l = Length_thChildren1,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe thChildren1R(
+    diameter = Diam_Main,
+    length = Length_thChildren1,
+    redeclare package Medium = Medium) "through children room 1, return stream"                         annotation(Placement(transformation(extent = {{6.5, -5}, {-6.5, 5}}, rotation = 90, origin = {-18, -27.5})));
+  Modelica.Fluid.Pipes.StaticPipe thChildren1F(
+    diameter = Diam_Main,
+    length = Length_thChildren1,
     redeclare package Medium = Medium) "through chidlren room 1, flow stream"                                      annotation(Placement(transformation(extent = {{6.5, 5}, {-6.5, -5}}, rotation = 270, origin = {-5, -26.5})));
-  Fluid.FixedResistances.StaticPipe toBathF(D = Diam_Sec, l = Length_toBath,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe toBathF(
+    diameter = Diam_Sec,
+    length = Length_toBath,
     redeclare package Medium = Medium) "to Bath, flow stream"                           annotation(Placement(transformation(extent = {{-8.5, 4.5}, {8.5, -4.5}}, origin = {18.5, -38.5})));
-  Fluid.FixedResistances.StaticPipe toBathR(D = Diam_Sec, l = Length_toBath,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe toBathR(
+    diameter = Diam_Sec,
+    length = Length_toBath,
     redeclare package Medium = Medium) "to bath return stream"                           annotation(Placement(transformation(extent = {{8.5, 4.5}, {-8.5, -4.5}}, origin = {18.5, -49.5})));
   Modelica.Fluid.Interfaces.FluidPort_b RETURN(redeclare package Medium =
         Medium)
-    "Fluid connector b (positive design flow direction is from port_a to port_b)"
-                                                                                                        annotation(Placement(transformation(extent = {{66, -114}, {86, -94}})));
+    "Fluid connector b (positive design flow direction is from port_a to port_b)"                       annotation(Placement(transformation(extent = {{66, -114}, {86, -94}})));
   Modelica.Fluid.Interfaces.FluidPort_a FLOW(redeclare package Medium = Medium)
-    "Fluid connector a (positive design flow direction is from port_a to port_b)"
-                                                                                                        annotation(Placement(transformation(extent = {{92, -114}, {112, -94}})));
-  Fluid.FixedResistances.StaticPipe toChildrenF(D = Diam_Sec, l = Length_toChildren,
-    m_flow_small=0.0001,
+    "Fluid connector a (positive design flow direction is from port_a to port_b)"                       annotation(Placement(transformation(extent = {{92, -114}, {112, -94}})));
+  Modelica.Fluid.Pipes.StaticPipe toChildrenF(
+    diameter = Diam_Sec,
+    length = Length_toChildren,
     redeclare package Medium = Medium) "to Children, flow stream"                                   annotation(Placement(transformation(extent = {{-8.5, 4.5}, {8.5, -4.5}}, origin = {45.5, 40.5})));
-  Fluid.FixedResistances.StaticPipe toChildrenR(D = Diam_Sec, l = Length_toChildren,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe toChildrenR(
+    diameter = Diam_Sec,
+    length = Length_toChildren,
     redeclare package Medium = Medium) "to Children, return stream"                                   annotation(Placement(transformation(extent = {{7.5, 4.5}, {-7.5, -4.5}}, origin = {47.5, 27})));
-  Fluid.FixedResistances.StaticPipe thChildrenF2(D = Diam_Main, l = Length_thChildren2,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe thChildrenF2(
+    diameter = Diam_Main,
+    length = Length_thChildren2,
     redeclare package Medium = Medium) "through chidlren room, flow stream"                                      annotation(Placement(transformation(extent = {{7, 5}, {-7, -5}}, rotation = 270, origin = {-5, 13})));
-  Fluid.FixedResistances.StaticPipe thChildrenR2(D = Diam_Main, l = Length_thChildren2,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe thChildrenR2(
+    diameter = Diam_Main,
+    length = Length_thChildren2,
     redeclare package Medium = Medium) "through chidlren room, return stream"                                      annotation(Placement(transformation(extent = {{7.5, -5}, {-7.5, 5}}, rotation = 90, origin = {-19, 12.5})));
-  Fluid.FixedResistances.StaticPipe toBedroomF(D = Diam_Sec, l = Length_toBedroom,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe toBedroomF(
+    diameter = Diam_Sec,
+    length = Length_toBedroom,
     redeclare package Medium = Medium) "to Bedroom , flow stream"                                 annotation(Placement(transformation(extent = {{-6.5, 4.5}, {6.5, -4.5}}, origin = {23.5, 80.5})));
-  Fluid.FixedResistances.StaticPipe toBedroomR(D = Diam_Sec, l = Length_toBedroom,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe toBedroomR(
+    diameter = Diam_Sec,
+    length = Length_toBedroom,
     redeclare package Medium = Medium) "to Bedroom, return stream"                                 annotation(Placement(transformation(extent = {{6.5, 4.5}, {-6.5, -4.5}}, origin = {20.5, 66})));
-  Fluid.FixedResistances.StaticPipe toLiF(D = Diam_Sec, l = Length_toLi,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe toLiF(
+    diameter = Diam_Sec,
+    length = Length_toLi,
     redeclare package Medium = Medium) "to livingroom, flow stream"                       annotation(Placement(transformation(extent = {{6, -4.5}, {-6, 4.5}}, origin = {-47.5, 3})));
-  Fluid.FixedResistances.StaticPipe toLiR(D = Diam_Main, l = Length_toLi,
-    m_flow_small=0.0001,
-    redeclare package Medium = Medium) "to livingroom, return stream"                        annotation(Placement(transformation(extent = {{6.5, -5}, {-6.5, 5}}, rotation = 180, origin = {-88.5, -16.5})));
-  HVAC.Interfaces.RadPort radLi
+  Modelica.Fluid.Pipes.StaticPipe   toLiR(
+    redeclare package Medium = Medium,
+    length=Length_toLi,
+    diameter=Diam_Main)                "to livingroom, return stream"                        annotation(Placement(transformation(extent = {{6.5, -5}, {-6.5, 5}}, rotation = 180, origin = {-88.5, -16.5})));
+  AixLib.Utilities.Interfaces.Star
+                          radLi
     annotation (Placement(transformation(extent={{-148,38},{-132,55}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convLi
     annotation (Placement(transformation(extent={{-146,25},{-133,38}})));
-  HVAC.Interfaces.RadPort radKi
+  AixLib.Utilities.Interfaces.Star radKi
     annotation (Placement(transformation(extent={{-146,-50},{-129,-34}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convKi
     annotation (Placement(transformation(extent={{-145,-66},{-131,-51}})));
-  HVAC.Interfaces.RadPort radBe
+  AixLib.Utilities.Interfaces.Star radBe
     annotation (Placement(transformation(extent={{128,88},{146,106}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convBe
     annotation (Placement(transformation(extent={{130,64},{146,82}})));
-  HVAC.Interfaces.RadPort radCh
+  AixLib.Utilities.Interfaces.Star radCh
     annotation (Placement(transformation(extent={{130,39},{150,59}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convCh
     annotation (Placement(transformation(extent={{131,17},{146,34}})));
-  HVAC.Interfaces.RadPort radBa
+  AixLib.Utilities.Interfaces.Star radBa
     annotation (Placement(transformation(extent={{128,-38},{148,-18}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convBa
     annotation (Placement(transformation(extent={{129,-59},{148,-41}})));
@@ -329,16 +345,16 @@ equation
       color={191,0,0}));
   connect(radiatorBa.convPort, convBa) annotation (Line(
       points={{87.93,-33.04},{88,-33.04},{88,-33},{119,-33},{119,-50},{138.5,-50}},
-
       color={191,0,0}));
+
   connect(radiatorBa.radPort, radBa) annotation (Line(
       points={{94.9,-32.87},{94.9,-28},{138,-28}}));
   connect(radiatorCh.radPort, radCh) annotation (Line(
       points={{96.5,46.35},{96.5,49},{140,49}}));
   connect(radiatorCh.convPort, convCh) annotation (Line(
       points={{90.35,46.2},{90,46.2},{90,46},{113,46},{113,25.5},{138.5,25.5}},
-
       color={191,0,0}));
+
   connect(radiatorBr.convPort, convBe) annotation (Line(
       points={{82.64,86.08},{82.64,91},{119,91},{119,73},{138,73}},
       color={191,0,0}));
@@ -387,8 +403,8 @@ equation
       color={0,0,127}));
   connect(valveLi.T_setRoom, TSet[1]) annotation (Line(
       points={{-76.36,11.84},{-76.36,52},{-76,52},{-76,92},{-109,92},{-109,81}},
-
       color={0,0,127}));
+
   connect(convLi, tempSensorLi.port) annotation (Line(
       points={{-139.5,31.5},{-120,31.5},{-120,36},{-108,36}},
       color={191,0,0}));
@@ -420,17 +436,17 @@ equation
       points={{-79,-51},{-69.7,-51},{-69.7,-66.66}},
       color={0,0,127}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-150,
-            -100},{150,110}},                                                                           grid = {1, 1}), graphics={  Rectangle(extent=  {{1, 100}, {126, 63}},  pattern=LinePattern.None, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{4, 58}, {127, 15}},  pattern=LinePattern.None, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{4, -14}, {127, -67}},  pattern=LinePattern.None, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-129, 29}, {-22, -25}},  pattern=LinePattern.None, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-130, -49}, {-23, -103}},  pattern=LinePattern.None, lineColor=  {0, 0, 0}, fillColor=  {215, 215, 215},
-            fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-120, -81}, {-69, -96}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0},
-            fillPattern=                                                                                                    FillPattern.Solid, textString=  "Kitchen"), Text(extent=  {{-156.5, 29}, {-49.5, 16}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0},
-            fillPattern=                                                                                                    FillPattern.Solid, textString=  "Livingroom"), Text(extent=  {{31, -15}, {138, -28}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0},
-            fillPattern=                                                                                                    FillPattern.Solid, textString=  "Bath"), Text(extent=  {{-27, 56}, {80, 43}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0},
-            fillPattern=                                                                                                    FillPattern.Solid, textString=  "Children"), Text(extent=  {{-34, 100}, {73, 87}}, lineColor=  {0, 0, 0}, fillColor=  {0, 0, 0},
-            fillPattern=                                                                                                    FillPattern.Solid, textString=  "Bedroom"), Text(extent=  {{-70, 103}, {-17, 71}}, lineColor=  {0, 0, 0}, textString=  "1 - Livingroom
+            -100},{150,110}},                                                                           grid = {1, 1}), graphics={  Rectangle(extent = {{1, 100}, {126, 63}},  pattern=LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{4, 58}, {127, 15}},  pattern=LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{4, -14}, {127, -67}},  pattern=LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-129, 29}, {-22, -25}},  pattern=LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-130, -49}, {-23, -103}},  pattern=LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
+            fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-120, -81}, {-69, -96}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "Kitchen"), Text(extent = {{-156.5, 29}, {-49.5, 16}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "Livingroom"), Text(extent = {{31, -15}, {138, -28}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "Bath"), Text(extent = {{-27, 56}, {80, 43}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "Children"), Text(extent = {{-34, 100}, {73, 87}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "Bedroom"), Text(extent = {{-70, 103}, {-17, 71}}, lineColor = {0, 0, 0}, textString = "1 - Livingroom
  2- Bedroom
  3 - Children
  4 - Bath
@@ -441,8 +457,9 @@ equation
  2- Bedroom
  3 - Children
  4 - Bath
- 5 - Kitchen")}), Documentation(revisions = "<html>
+ 5 - Kitchen")}), Documentation(revisions="<html>
  <ul>
+ <li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe by MSL pipe</li>
  <li><i>June 19, 2014</i> by Ana Constantin:<br/>Implemented</li>
  </ul>
  </html>", info = "<html>

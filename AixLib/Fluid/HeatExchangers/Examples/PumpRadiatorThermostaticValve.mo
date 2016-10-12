@@ -11,16 +11,18 @@ model PumpRadiatorThermostaticValve
              pump(MinMaxCharacteristics = AixLib.DataBase.Pumps.Pump1(), V_flow_max = 2, ControlStrategy = 2, V_flow(fixed = false),
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                                                                                                     annotation(Placement(transformation(extent = {{-54, 10}, {-34, 30}})));
-  AixLib.Fluid.FixedResistances.StaticPipe
-                   pipe(l = 10, D = 0.01,
+  AixLib.Fluid.FixedResistances.FixedResistanceDpM
+                   pipe(
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)                    annotation(Placement(transformation(extent = {{4, 10}, {24, 30}})));
-  AixLib.Fluid.FixedResistances.StaticPipe
-                   pipe1(l = 10, D = 0.01,
+    dp_nominal=200,
+    m_flow_nominal=0.1)                   annotation(Placement(transformation(extent = {{4, 10}, {24, 30}})));
+  AixLib.Fluid.FixedResistances.FixedResistanceDpM
+                   pipe1(
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)                     annotation(Placement(transformation(extent = {{-10, -30}, {-30, -10}})));
+    dp_nominal=200,
+    m_flow_nominal=0.1)                    annotation(Placement(transformation(extent = {{-10, -30}, {-30, -10}})));
   Modelica.Blocks.Sources.BooleanConstant NightSignal(k = false) annotation(Placement(transformation(extent = {{-76, 50}, {-56, 70}})));
-  inner AixLib.HVAC.BaseParameters baseParameters
+  inner AixLib.Utilities.Sources.BaseParameters baseParameters
     annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
   AixLib.Fluid.Sources.FixedBoundary
                      PointFixedPressure(nPorts=1, redeclare package Medium =
@@ -69,5 +71,9 @@ equation
       color={0,127,255}));
   annotation(Diagram(coordinateSystem(extent={{-100,-100},{160,100}},      preserveAspectRatio=false),   graphics), Icon(coordinateSystem(extent = {{-100, -100}, {160, 100}})), experiment(StopTime = 86400, Interval = 60, __Dymola_Algorithm = "Lsodar"), __Dymola_experimentSetupOutput(events = false), Documentation(info = "<html>
  Duplicate of  AixLib.Fluid.HeatExchangers.Radiators.Examples.PumpRadiatorThermostaticValve
+</html>", revisions="<html>
+ <ul>
+ <li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe</li>
+ </ul>
 </html>"));
 end PumpRadiatorThermostaticValve;

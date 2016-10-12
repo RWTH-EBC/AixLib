@@ -37,10 +37,11 @@ model StorageBoiler
             {-28,88}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin={46,48})));
   Modelica.Blocks.Sources.Constant const(k = 273.15 + 80) annotation(Placement(transformation(extent = {{-3, -3}, {3, 3}}, rotation = 180, origin={51,67})));
-  AixLib.Fluid.FixedResistances.Pipe
-                   pipe(D = 0.05, l = 5,
+  AixLib.Fluid.FixedResistances.FixedResistanceDpM
+                   pipe(
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)                   annotation(Placement(transformation(extent={{12,-12},
+    m_flow_nominal=0.5,
+    dp_nominal=200)                      annotation(Placement(transformation(extent={{12,-12},
             {32,8}})));
   AixLib.Fluid.FixedResistances.HydraulicResistance
                                            hydraulicResistance(zeta = 1000,
@@ -58,10 +59,11 @@ model StorageBoiler
   AixLib.Fluid.Sources.FixedBoundary
                       boundary_ph2(nPorts=1, redeclare package Medium = Medium)
                                                      annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation = 180, origin={-34,44})));
-  AixLib.Fluid.FixedResistances.Pipe
-                   pipe1(D = 0.05, l = 5,
+  AixLib.Fluid.FixedResistances.FixedResistanceDpM
+                   pipe1(
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)                    annotation(Placement(transformation(extent={{-28,-22},
+    m_flow_nominal=0.5,
+    dp_nominal=200)                       annotation(Placement(transformation(extent={{-28,-22},
             {-8,-2}})));
 equation
   connect(fixedTemperature.port, storage.heatPort) annotation(Line(points={{-36,22},
@@ -96,6 +98,7 @@ equation
  <p>This is a simple example of a storage and a boiler.</p>
  </html>", revisions="<html>
  <ul>
+ <li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe</li>
  <li><i>November 2014&nbsp;</i>
     by Marcus Fuchs:<br/>
     Changed model to use Annex 60 base class</li>
