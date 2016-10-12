@@ -30,7 +30,6 @@ model RoomGFOw2_DayNightMode
     annotation (Placement(transformation(extent={{-6,-36},{14,-16}})));
   AixLib.Fluid.FixedResistances.FixedResistanceDpM res2(
     redeclare package Medium = Medium,
-    m_flow_small=0.0001,
     dp(start=100),
     m_flow_nominal=0.3,
     dp_nominal=200) "Hydraulic resistance in return"
