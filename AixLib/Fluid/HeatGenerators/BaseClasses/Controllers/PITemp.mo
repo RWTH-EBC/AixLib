@@ -1,7 +1,6 @@
 within AixLib.Fluid.HeatGenerators.BaseClasses.Controllers;
 model PITemp
   "PI Controler that can switch the output range of the controler"
-  import BaseLib;
 
   Modelica.Blocks.Interfaces.RealInput set annotation (Placement(
         transformation(
