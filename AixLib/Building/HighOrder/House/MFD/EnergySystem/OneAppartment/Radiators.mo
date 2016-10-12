@@ -35,12 +35,14 @@ model Radiators
   Fluid.HeatExchangers.Radiators.Radiator radiatorKi(
     radiatorType=Type_Radiator_Kitchen,
     m_flow_nominal=0.01,
-    redeclare package Medium = Medium)
+    redeclare package Medium = Medium,
+    selectable=true)
     annotation (Placement(transformation(extent={{-89,-83},{-106,-66}})));
   Fluid.HeatExchangers.Radiators.Radiator radiatorBa(
     radiatorType=Type_Radiator_Bath,
     m_flow_nominal=0.01,
-    redeclare package Medium = Medium)
+    redeclare package Medium = Medium,
+    selectable=true)
     annotation (Placement(transformation(extent={{83,-48},{100,-31}})));
   Fluid.Actuators.Valves.ThermostaticValve valveKi(
     Kvs=0.41,
@@ -52,17 +54,20 @@ model Radiators
   Fluid.HeatExchangers.Radiators.Radiator radiatorLi(
     radiatorType=Type_Radiator_Livingroom,
     m_flow_nominal=0.01,
-    redeclare package Medium = Medium)
+    redeclare package Medium = Medium,
+    selectable=true)
     annotation (Placement(transformation(extent={{-95,-5},{-113,13}})));
   Fluid.HeatExchangers.Radiators.Radiator radiatorBr(
     radiatorType=Type_Radiator_Bedroom,
     m_flow_nominal=0.01,
-    redeclare package Medium = Medium)
+    redeclare package Medium = Medium,
+    selectable=true)
     annotation (Placement(transformation(extent={{78,72},{94,88}})));
   Fluid.HeatExchangers.Radiators.Radiator radiatorCh(
     radiatorType=Type_Radiator_Children,
     m_flow_nominal=0.01,
-    redeclare package Medium = Medium)
+    redeclare package Medium = Medium,
+    selectable=true)
     annotation (Placement(transformation(extent={{86,33},{101,48}})));
   Fluid.Actuators.Valves.ThermostaticValve valveBa(
     Kvs=0.24,
