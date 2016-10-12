@@ -129,19 +129,20 @@ equation
           fillPattern=FillPattern.CrossDiag,
           textString="%name")}),
     Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>Model of a sandwich wall construction for a cylindric mantle for heat storages.</p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars2.png\"/> </p>
-<p><h4><font color=\"#008000\">Concept</font></h4></p>
-<p>The cylindric heat transfer is implemented consisting of the insulation material and the tank material. Only the material data is used for the calculation of losses. No additional losses are included.</p>
+<h4><font color=\"#008000\">Concept</font></h4>
+<p>The cylindric heat transfer is implemented consisting of the insulation
+material and the tank material. Only the material data is used for the
+calculation of losses. No additional losses are included.</p>
 </html>",
       revisions="<html>
-      <p><ul>
+<ul>
+<li><i>October 12, 2016&nbsp;</i> by Marcus Fuchs:<br/>Add comments and fix documentation</li>
 <li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Added to AixLib</li>
 <li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL</li>
 <li><i>October 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
-</ul></p>
+</ul>
 </html>
 "));
 end StorageMantle;
