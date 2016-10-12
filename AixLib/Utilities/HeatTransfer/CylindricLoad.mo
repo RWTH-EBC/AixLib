@@ -39,33 +39,16 @@ equation
       width=0.6,
       height=0.6),
     Documentation(revisions="<html>
-<p><ul>
+<ul>
+<li><i>October 12, 2016&nbsp;</i> by Marcus Fuchs:<br/>Add comments and fix documentation</li>
+<li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Transferred to AixLib</li>
 <li><i>November 13, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
-</ul></p>
+</ul>
 </html>
 ",  info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
-<p>
-The <b>CylindricLoad</b> model represents a cylindric heat capacity, which is described by its area, density, thickness and material specific heat capacity.
-</p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars2.png\"/></p>
-<p><h4><font color=\"#008000\">Concept</font></h4></p>
-<p>
-<pre>
-<dl>
-<dt><b>T0</b>
-<dd>Initial temperature, in degrees Celsius.
-<dt><b>rho</b>
-<dd>Density of material, in kg/m3.
-<dt><b>c</b>
-<dd>Specific heat capacity of material, in J/(kg.K).
-<dt><b>d</b>
-<dd>Thickness, in m.
-<dt><b>A</b>
-<dd>Area, in m2.
-</dl>
-</pre>
-</p>
+<h4><font color=\"#008000\">Overview</font></h4>
+<p> The <code>CylindricLoad</code> model represents a cylindric heat capacity, which
+is described by its area, density, thickness and material specific heat
+capacity. </p>
 </html>"));
 end CylindricLoad;
