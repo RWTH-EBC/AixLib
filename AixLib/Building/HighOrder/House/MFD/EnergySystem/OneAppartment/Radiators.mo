@@ -152,23 +152,24 @@ model Radiators
   Fluid.FixedResistances.StaticPipe toLiR(D = Diam_Main, l = Length_toLi,
     m_flow_small=0.0001,
     redeclare package Medium = Medium) "to livingroom, return stream"                        annotation(Placement(transformation(extent = {{6.5, -5}, {-6.5, 5}}, rotation = 180, origin = {-88.5, -16.5})));
-  HVAC.Interfaces.RadPort radLi
+  AixLib.Utilities.Interfaces.Star
+                          radLi
     annotation (Placement(transformation(extent={{-148,38},{-132,55}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convLi
     annotation (Placement(transformation(extent={{-146,25},{-133,38}})));
-  HVAC.Interfaces.RadPort radKi
+  AixLib.Utilities.Interfaces.Star radKi
     annotation (Placement(transformation(extent={{-146,-50},{-129,-34}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convKi
     annotation (Placement(transformation(extent={{-145,-66},{-131,-51}})));
-  HVAC.Interfaces.RadPort radBe
+  AixLib.Utilities.Interfaces.Star radBe
     annotation (Placement(transformation(extent={{128,88},{146,106}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convBe
     annotation (Placement(transformation(extent={{130,64},{146,82}})));
-  HVAC.Interfaces.RadPort radCh
+  AixLib.Utilities.Interfaces.Star radCh
     annotation (Placement(transformation(extent={{130,39},{150,59}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convCh
     annotation (Placement(transformation(extent={{131,17},{146,34}})));
-  HVAC.Interfaces.RadPort radBa
+  AixLib.Utilities.Interfaces.Star radBa
     annotation (Placement(transformation(extent={{128,-38},{148,-18}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convBa
     annotation (Placement(transformation(extent={{129,-59},{148,-41}})));

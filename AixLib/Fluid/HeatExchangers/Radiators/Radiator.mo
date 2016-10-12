@@ -16,7 +16,8 @@ model Radiator
     redeclare package Medium = Medium,
     m_flow_nominal=0.01)                                     annotation(Placement(transformation(extent={{-10,2},
             {10,22}})));
-  AixLib.HVAC.Interfaces.RadPort radPort
+  AixLib.Utilities.Interfaces.Star
+                                 radPort
     annotation (Placement(transformation(extent={{30,68},{50,88}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convPort annotation(Placement(transformation(extent = {{-52, 66}, {-32, 86}})));
   // Variables

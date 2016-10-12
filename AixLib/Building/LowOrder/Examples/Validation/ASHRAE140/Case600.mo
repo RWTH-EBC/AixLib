@@ -43,7 +43,8 @@ model Case600
       annotation (Placement(transformation(extent={{90,22},{110,42}})));
     Modelica.Blocks.Interfaces.RealOutput PowerLoad "in kW"
       annotation (Placement(transformation(extent={{90,6},{110,26}})));
-    Utilities.Sensors.EEnergyMeter SolarMeter[6]
+    AixLib.Utilities.Sensors.EnergyMeter
+                                   SolarMeter[6]
      annotation (Placement(transformation(extent={{86,-86},{106,-66}})));
     Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationN "in kWh/m2"
       annotation (Placement(transformation(extent={{73,-14},{93,6}})));

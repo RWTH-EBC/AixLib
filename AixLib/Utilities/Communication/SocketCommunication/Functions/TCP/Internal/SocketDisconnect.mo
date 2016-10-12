@@ -22,18 +22,23 @@ annotation (Documentation(revisions="<HTML>
 <p>Function to shut down current TCP-connection and socket. </p>
 <h4>Usage of Function</h4>
 <p>Example connect to server with IP (0.11.11.11) on port 1234 and directly disconnect. </p>
-<pre>model dummyUsage
-  Integer state &QUOT;Return variable of functions 0 == OK!, 1 == error&QUOT;;
-  Integer socketHandle &QUOT; Socket handle&QUOT;;
-   
-initial algorithm 
+<pre>
+model dummyUsage
+
+  Integer state &quot;Return variable of functions 0 == OK!, 1 == error&quot;;
+  Integer socketHandle &quot; Socket handle&quot;;
+
+initial algorithm
+
 
   state := SocketInit();
-  (socketHandle,state) := SocketConnect(&QUOT;0.11.11.11&QUOT;,&QUOT;1234&QUOT;);
-  
+  (socketHandle,state) := SocketConnect(&quot;0.11.11.11&quot;,&quot;1234&quot;);
+
 equation
 
+
 algorithm
+
 
  when terminal() then
   state := SocketDisconnect(socketHandle);
@@ -52,8 +57,8 @@ end dummyUsage;</pre>
    // shutdown the connection since no more data will be sent
     iResult = shutdown(socketHandle, SD_SEND);
     if (iResult == SOCKET_ERROR) {
-        ModelicaFormatMessage(&QUOT;SocketDisconnect(): Shutdown failed with error: &percnt;d
-&QUOT;, WSAGetLastError());
+        ModelicaFormatMessage(&quot;SocketDisconnect(): Shutdown failed with error: &#37;d
+&quot;, WSAGetLastError());
         closesocket(socketHandle);
         WSACleanup();
         return 1;

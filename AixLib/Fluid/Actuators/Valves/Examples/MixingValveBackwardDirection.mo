@@ -1,10 +1,9 @@
 within AixLib.Fluid.Actuators.Valves.Examples;
 model MixingValveBackwardDirection
-  import AixLib;
    extends Modelica.Icons.Example;
    package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater;
 
-  inner AixLib.HVAC.BaseParameters baseParameters
+  inner AixLib.Utilities.Sources.BaseParameters baseParameters
     annotation (Placement(transformation(extent={{76,58},{96,78}})));
   AixLib.Fluid.Sources.Boundary_pT boundary_ph(
     redeclare package Medium = Medium,

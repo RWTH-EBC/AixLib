@@ -43,7 +43,7 @@ annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
 <p>Check <a href=\"modelica://AixLib.Utilities.Communication.SocketCommunication.Components.TCPCommunicatorExample\">TCPCommunicatorExample
 </a>  for an algorithm example for sending and receiving telegrams. </p>
 <p>Note a server needs to be accessible for communcation. </p>
-<p>Higher Level protocols (&GT;OSI-Level 5) need to be added depending on the specific application. </p>
+<p>Higher Level protocols (&gt;OSI-Level 5) need to be added depending on the specific application. </p>
 </html>",
 revisions="<HTML>
 <ul>

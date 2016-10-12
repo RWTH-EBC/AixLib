@@ -29,7 +29,8 @@ model Appartment_VoWo "Simulation of 1 apartment "
                                  tank(nPorts=2, redeclare package Medium =
         Medium)                       annotation(Placement(transformation(extent = {{-8, -8}, {8, 8}}, rotation = 270, origin = {28, -64})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression annotation(Placement(transformation(extent = {{-94, -56}, {-74, -36}})));
-  inner AixLib.HVAC.BaseParameters baseParameters annotation(Placement(transformation(extent = {{80, 80}, {100, 100}})));
+  inner AixLib.Utilities.Sources.BaseParameters baseParameters
+    annotation (Placement(transformation(extent={{80,80},{100,100}})));
   Modelica.Blocks.Sources.Constant Source_TseBoiler(k = 273.15 + 55) annotation(Placement(transformation(extent = {{-86, -96}, {-72, -82}})));
   output Real Ta = combinedWeather.AirTemp;
   // Livingroom

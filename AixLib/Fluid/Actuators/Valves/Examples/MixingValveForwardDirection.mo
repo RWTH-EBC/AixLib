@@ -3,8 +3,7 @@ model MixingValveForwardDirection
     extends Modelica.Icons.Example;
     package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater;
 
-  import AixLib;
-  inner AixLib.HVAC.BaseParameters baseParameters
+  inner AixLib.Utilities.Sources.BaseParameters baseParameters
     annotation (Placement(transformation(extent={{80,80},{100,100}})));
   AixLib.Fluid.Sources.Boundary_pT boundary_ph(
               nPorts=1,
