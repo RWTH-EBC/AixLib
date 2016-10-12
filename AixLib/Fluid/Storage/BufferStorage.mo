@@ -123,11 +123,10 @@ model BufferStorage
     annotation (Placement(transformation(extent={{14,92},{36,110}},rotation=0),
         iconTransformation(extent={{14,92},{36,110}})));
 
-  AixLib.Fluid.Storage.BufferStorage.HeatTransfer heatTransfer
-    "Heat transfer model" annotation (Placement(transformation(extent={{-34,0},
+  HeatTransfer heatTransfer "Heat transfer model" annotation (Placement(transformation(extent={{-34,0},
             {-14,20}}, rotation=0)));
 
-  AixLib.Fluid.MixingVolumes.MixingVolume.MixingVolume          layer[n](
+  MixingVolumes.MixingVolume          layer[n](
     V=fill(data.hTank/n*Modelica.Constants.pi/4*data.dTank^2,n),
     nPorts = portsLayer,
     T_start=fill(TStart,n),
@@ -135,10 +134,10 @@ model BufferStorage
     m_flow_nominal=0.05)
     "Layer volumes"
     annotation (Placement(transformation(extent={{-6,0},{14,20}})));
- replaceable model HeatTransfer =
+replaceable model HeatTransfer =
       AixLib.Fluid.Storage.BaseClasses.HeatTransferOnlyConduction
-    constrainedby AixLib.Fluid.Storage.BaseClasses.PartialHeatTransferLayers
-      "Heat Transfer Model between fluid layers"
+  constrainedby AixLib.Fluid.Storage.BaseClasses.PartialHeatTransferLayers
+    "Heat Transfer Model between fluid layers"
 annotation(choicesAllMatching=true, Documentation(info="<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>
 <p>
