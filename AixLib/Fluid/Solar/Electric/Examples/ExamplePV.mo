@@ -6,9 +6,12 @@ model ExamplePV
   PVSystem pVsystem(
     MaxOutputPower=4000,
     NumberOfPanels=5,
-    data=DataBase.SolarElectric.SymphonyEnergySE6M181()) "cle"
+    data=DataBase.SolarElectric.SymphonyEnergySE6M181())
+    "PV system model including the inverter"
     annotation (Placement(transformation(extent={{-22,38},{-2,58}})));
-  Modelica.Blocks.Interfaces.RealOutput Power
+  Modelica.Blocks.Interfaces.RealOutput Power(
+ final quantity="Power",
+ final unit="W") "Output Power of the PV system including the inverter"
     annotation (Placement(transformation(extent={{52,40},{72,60}})));
 public
   AixLib.Building.Components.Weather.Weather Weather(
@@ -23,6 +26,7 @@ public
     SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_RoofN_Roof_S(),
     fileName=Modelica.Utilities.Files.loadResource(
         "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt"))
+    "Weather data input for simulation of PV power "
     annotation (Placement(transformation(extent={{-93,49},{-68,66}})));
 
 equation
@@ -30,7 +34,7 @@ equation
       points={{-3,49},{-3.5,49},{-3.5,50},{62,50}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(Weather.SolarRadiation_OrientedSurfaces[6], pVsystem.ic_total_rad)
+  connect(Weather.SolarRadiation_OrientedSurfaces[6], pVsystem.IcTotalRad)
     annotation (Line(
       points={{-87,48.15},{-87,47.3},{-23,47.3}},
       color={255,128,0},
@@ -40,8 +44,7 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
-            -100,-100},{100,100}}),
-                      graphics),
+            -100,-100},{100,100}})),
     experiment(
       StopTime=3.1536e+007,
       Interval=3600,

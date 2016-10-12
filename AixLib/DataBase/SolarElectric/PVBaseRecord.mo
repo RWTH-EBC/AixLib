@@ -1,12 +1,12 @@
 within AixLib.DataBase.SolarElectric;
 record PVBaseRecord
     extends Modelica.Icons.Record;
-  parameter Real Eta0( min=0, max=1) "maximum efficiency [WK-1m-2]";
-  parameter Real TempCoeff( min=0, max=1) "temperature coeffient in /°C";
-  parameter Real NoctTempCell "meassured cell temperature in °C";
-  parameter Real NoctTemp "defined temperature in °C (mostly 25°C)";
-  parameter Real NoctRadiation "defined radiation in W/m2 (1000 W/m2)";
-  parameter Real Area "Area of one Panel in m2";
+  parameter Modelica.SIunits.Efficiency Eta0( min=0, max=1) "Maximum efficiency";
+  parameter Modelica.SIunits.LinearTemperatureCoefficient TempCoeff( min=0, max=1) "Temperature coeffient";
+  parameter Modelica.SIunits.Temp_K NoctTempCell "Meassured cell temperature";
+  parameter Modelica.SIunits.Temp_K NoctTemp "Defined temperature";
+  parameter Modelica.SIunits.RadiantEnergyFluenceRate NoctRadiation "Defined radiation";
+  parameter Modelica.SIunits.Area Area "Area of one Panel";
 
   annotation (Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>

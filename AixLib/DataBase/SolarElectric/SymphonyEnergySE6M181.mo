@@ -1,11 +1,11 @@
 within AixLib.DataBase.SolarElectric;
 record SymphonyEnergySE6M181 "Symphony Energy SE6M60 series "
-//Polycrystalline Solar Module; single Area= 1,44 m2
+
   extends AixLib.DataBase.SolarElectric.PVBaseRecord(
     Eta0=0.126,
     TempCoeff=0.0043,
-    NoctTempCell=46,
-    NoctTemp=25,
+    NoctTempCell=46+273.15,
+    NoctTemp=25+273.15,
     NoctRadiation=1000,
     Area=1.44);
   annotation (Documentation(info="<html>

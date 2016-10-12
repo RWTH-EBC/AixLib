@@ -1,22 +1,18 @@
 within AixLib.DataBase.SolarElectric;
 record AleoS24 "solarmodul AleoS24"
-  //Area_one_panel=1,33155m2
+
   extends AixLib.DataBase.SolarElectric.PVBaseRecord(
     Eta0=0.139,
     TempCoeff=0.0034,
-    NoctTempCell=47,
-    NoctTemp=25,
+    NoctTempCell=47+273.15,
+    NoctTemp=25+273.15,
     NoctRadiation=1000,
     Area=1.33155);
   annotation (Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
-<p>single Areal=1,33155m2 </p>
+<p>single Area=1,33155m2 </p>
 <p><br><h4><span style=\"color: #008000\">References</span></h4></p>
-<p>
-Record for record used with 
-<a href=\"modelica://AixLib.Fluid.Solar.Electric.PVsystem\">
-AixLib.Fluid.Solar.Electric.PVsystem</a>
-</p>
+<p>Record for record used with <a href=\"modelica://AixLib.Fluid.Solar.Electric.PVsystem\">AixLib.Fluid.Solar.Electric.PVsystem</a> </p>
 </html>",
       revisions="<html>
 <p><ul>

@@ -3,8 +3,8 @@ record ACSPanelSystem
   extends AixLib.DataBase.SolarElectric.PVBaseRecord(
     Eta0=0.176,
     TempCoeff=0.003,
-    NoctTempCell=45,
-    NoctTemp=25,
+    NoctTempCell=45+273.15,
+    NoctTemp=25+273.15,
     NoctRadiation=1000,
     Area=22.63);
   annotation (Documentation(info="<html>
