@@ -2,13 +2,6 @@ within AixLib.Fluid.Storage;
 model BufferStorage
   "Buffer Storage Model with support for heating rod and two heating coils"
   import SI = Modelica.SIunits;
-////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////parameters/////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////MEDIUM/////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////
 
   inner replaceable package Medium =
       Modelica.Media.Interfaces.PartialMedium "Medium model"
@@ -28,9 +21,10 @@ model BufferStorage
 
   inner parameter SI.Temperature TStart=298.15 "Start Temperature of fluid" annotation (Dialog(tab="Initialisation"));
 
-    inner parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
-      AixLib.DataBase.Storage.Generic_500l()
-    annotation (choicesAllMatching);
+  inner parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
+    AixLib.DataBase.Storage.Generic_500l()
+    "Data record for Storage"
+  annotation (choicesAllMatching);
 
   inner parameter Integer n(min=3)=5 " Model assumptions Number of Layers";
 
@@ -85,10 +79,10 @@ model BufferStorage
 ///////////components/////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatportOutside
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatportOutside "Outer heat port"
     annotation (Placement(transformation(extent={{68,-4},{88,16}},rotation=0),
         iconTransformation(extent={{68,-4},{88,16}})));
-  Modelica.Blocks.Interfaces.RealOutput TTop
+  Modelica.Blocks.Interfaces.RealOutput TTop "Temperature at the top"
     annotation (Placement(transformation(
         origin={-77,81},
         extent={{-5,5},{5,-5}},
@@ -96,7 +90,7 @@ model BufferStorage
         extent={{-5,5},{5,-5}},
         rotation=0,
         origin={-80,88})));
-  Modelica.Blocks.Interfaces.RealOutput TBottom
+  Modelica.Blocks.Interfaces.RealOutput TBottom "Temperature at the Bottom"
     annotation (Placement(transformation(
         origin={-77,-77},
         extent={{-5,5},{5,-5}},
@@ -129,20 +123,22 @@ model BufferStorage
     annotation (Placement(transformation(extent={{14,92},{36,110}},rotation=0),
         iconTransformation(extent={{14,92},{36,110}})));
 
-  HeatTransfer heatTransfer annotation (Placement(transformation(extent={{-34,0},
+  AixLib.Fluid.Storage.BufferStorage.HeatTransfer heatTransfer
+    "Heat transfer model" annotation (Placement(transformation(extent={{-34,0},
             {-14,20}}, rotation=0)));
 
-  MixingVolumes.MixingVolume          layer[n](
+  AixLib.Fluid.MixingVolumes.MixingVolume.MixingVolume          layer[n](
     V=fill(data.hTank/n*Modelica.Constants.pi/4*data.dTank^2,n),
     nPorts = portsLayer,
     T_start=fill(TStart,n),
     redeclare package Medium = Medium,
     m_flow_nominal=0.05)
+    "Layer volumes"
     annotation (Placement(transformation(extent={{-6,0},{14,20}})));
-replaceable model HeatTransfer =
+ replaceable model HeatTransfer =
       AixLib.Fluid.Storage.BaseClasses.HeatTransferOnlyConduction
-  constrainedby AixLib.Fluid.Storage.BaseClasses.PartialHeatTransferLayers
-    "Heat Transfer Model between fluid layers"
+    constrainedby AixLib.Fluid.Storage.BaseClasses.PartialHeatTransferLayers
+      "Heat Transfer Model between fluid layers"
 annotation(choicesAllMatching=true, Documentation(info="<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>
 <p>
@@ -687,7 +683,7 @@ end if;
           extent={{-80,-100},{80,100}}), graphics),
     Documentation(revisions="<html>
     <p><ul>
-<li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Added to AixLib</li>    
+<li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Added to AixLib</li>
 <li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL</li>
 <li><i>December 10, 2013</i> by Kristian Huchtemann:<br/>Added documentation of storage and new heat transfer models.</li>
 <li><i>October 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
