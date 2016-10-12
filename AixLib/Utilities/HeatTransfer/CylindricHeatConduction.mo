@@ -1,5 +1,5 @@
 within AixLib.Utilities.HeatTransfer;
-model CylindricHeatConduction
+model CylindricHeatConduction "Heat conduction through cylindric material"
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a
     annotation (Placement(transformation(extent={{-10,-6},{10,14}},
