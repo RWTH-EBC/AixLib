@@ -11,14 +11,16 @@ model PumpRadiatorThermostaticValve
              pump(MinMaxCharacteristics = AixLib.DataBase.Pumps.Pump1(), V_flow_max = 2, ControlStrategy = 2, V_flow(fixed = false),
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                                                                                                     annotation(Placement(transformation(extent = {{-54, 10}, {-34, 30}})));
-  AixLib.Fluid.FixedResistances.StaticPipe
-                   pipe(l = 10, D = 0.01,
+  AixLib.Fluid.FixedResistances.FixedResistanceDpM
+                   pipe(
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)                    annotation(Placement(transformation(extent = {{4, 10}, {24, 30}})));
-  AixLib.Fluid.FixedResistances.StaticPipe
-                   pipe1(l = 10, D = 0.01,
+    m_flow_nominal=0.1,
+    dp_nominal=200)                       annotation(Placement(transformation(extent = {{4, 10}, {24, 30}})));
+  AixLib.Fluid.FixedResistances.FixedResistanceDpM
+                   pipe1(
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)                     annotation(Placement(transformation(extent = {{-10, -30}, {-30, -10}})));
+    m_flow_nominal=0.1,
+    dp_nominal=200)                        annotation(Placement(transformation(extent = {{-10, -30}, {-30, -10}})));
   Modelica.Blocks.Sources.BooleanConstant NightSignal(k = false) annotation(Placement(transformation(extent = {{-76, 50}, {-56, 70}})));
   inner AixLib.Utilities.Sources.BaseParameters baseParameters
     annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
@@ -80,6 +82,7 @@ equation
  equation for over temperature to be correctly calculated.</p>
  </html>", revisions="<html>
  <ul>
+ <li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe</li>
  <li><i>November 2014&nbsp;</i>
     by Marcus Fuchs:<br/>
     Changed model to use Annex 60 base class</li>
