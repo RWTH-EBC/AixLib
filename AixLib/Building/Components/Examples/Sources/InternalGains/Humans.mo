@@ -17,7 +17,7 @@ equation
   connect(human_SensibleHeat_VDI2078_1.ConvHeat, fixedTemp.port) annotation(Line(points = {{19.7, 19}, {38.85, 19}, {38.85, 14}, {58, 14}}, color = {191, 0, 0}));
   connect(human_SensibleHeat_VDI2078_1.RadHeat, fixedTemp.port) annotation(Line(points = {{19.7, 3.4}, {39.85, 3.4}, {39.85, 14}, {58, 14}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
   connect(combiTimeTable.y[1], human_SensibleHeat_VDI2078_1.Schedule) annotation(Line(points = {{-61, -16}, {-42, -16}, {-42, 3.14}, {-21.93, 3.14}}, color = {0, 0, 127}));
-  annotation( experiment(StopTime = 86400),Documentation(info = "<html>
+  annotation (experiment(StopTime = 86400),Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>Simulation to check the functionality of the human heat sources. It only consists of one human (VDI 2078). </p>
  <p>The timetable represents typical working hours with one hour lunch time. The room temperature follows a sine input varying between 18 and 22 degrees over a 24 hour time period.</p>

@@ -182,15 +182,15 @@ protected
 
   final parameter Modelica.SIunits.SpecificHeatCapacity cp1_default=
     Medium1.specificHeatCapacityCp(Medium1.setState_pTX(
-      p=  Medium1.p_default,
-      T=  Medium1.T_default,
-      X=  Medium1.X_default))
+      p = Medium1.p_default,
+      T = Medium1.T_default,
+      X = Medium1.X_default))
     "Specific heat capacity of medium 1 at default medium state";
   final parameter Modelica.SIunits.SpecificHeatCapacity cp2_default=
     Medium2.specificHeatCapacityCp(Medium2.setState_pTX(
-      p=  Medium2.p_default,
-      T=  Medium2.T_default,
-      X=  Medium2.X_default))
+      p = Medium2.p_default,
+      T = Medium2.T_default,
+      X = Medium2.X_default))
     "Specific heat capacity of medium 2 at default medium state";
 
   Medium1.ThermodynamicState staA1 = Medium1.setState_phX(

@@ -37,9 +37,9 @@ equation
   Re = -2 * sqrt(lambda2) * Math.log10(2.51 / sqrt(lambda2 + 1e-10) + 0.27 * (e / D));
   m_flow = sign(dp) * Modelica.Constants.pi / 4 * D * mu * Re;
                                                                                                       annotation(Dialog(tab = "Initialization"),
-             Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent=  {{-100, 40}, {100, -40}}, lineColor=  {0, 0, 0}, fillColor=  {95, 95, 95},
-            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-100, 30}, {100, -30}}, lineColor=  {0, 0, 0}, fillColor=  {0, 128, 255},
-            fillPattern=                                                                                                    FillPattern.HorizontalCylinder)}), Documentation(revisions="<html>
+             Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-100, 40}, {100, -40}}, lineColor = {0, 0, 0}, fillColor = {95, 95, 95},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-100, 30}, {100, -30}}, lineColor = {0, 0, 0}, fillColor = {0, 128, 255},
+            fillPattern =                                                                                                   FillPattern.HorizontalCylinder)}), Documentation(revisions="<html>
 Will be removed
 </html>"));
 end Pipe;

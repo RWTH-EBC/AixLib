@@ -17,8 +17,8 @@ model FlowControlled_m_flow
           per.pressure
         else
           AixLib.Fluid.Movers.BaseClasses.Characteristics.flowParameters(
-            V_flow=  {i/(nOri-1)*2.0*m_flow_nominal/rho_default for i in 0:(nOri-1)},
-            dp=      {i/(nOri-1)*2.0*dp_nominal for i in (nOri-1):-1:0}),
+            V_flow = {i/(nOri-1)*2.0*m_flow_nominal/rho_default for i in 0:(nOri-1)},
+            dp =     {i/(nOri-1)*2.0*dp_nominal for i in (nOri-1):-1:0}),
       final use_powerCharacteristic = if per.havePressureCurve then per.use_powerCharacteristic else false)),
     preSou(m_flow_start=m_flow_start));
 

@@ -17,8 +17,8 @@ initial equation
 equation
   x = time^3*gain;
   y = AixLib.Utilities.Math.Functions.inverseXRegularized(
-    x=  x,
-    delta=  delta);
+    x = x,
+    delta = delta);
   der(y) = der(y_comp);
   err = y-y_comp;
   assert(abs(err) < 1E-3, "Error in implementation.");

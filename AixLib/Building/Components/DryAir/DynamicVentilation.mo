@@ -40,8 +40,8 @@ equation
   connect(less.y, Colder_and_HeatingLimit.u2) annotation(Line(points = {{-59, -50}, {-52, -50}, {-52, 29.4}, {-47.4, 29.4}}, color = {255, 0, 255}));
   connect(port_outside, varAirExchange.port_a) annotation(Line(points = {{-96, -10}, {-96, -8}, {36, -8}}, color = {191, 0, 0}));
   connect(varAirExchange.port_b, port_inside) annotation(Line(points = {{62, -8}, {94, -8}, {94, -10}}, color = {191, 0, 0}));
-  annotation (Icon(graphics={  Rectangle(extent=  {{-80, 80}, {80, -80}}, lineColor=  {0, 0, 0}, fillColor=  {211, 243, 255},
-            fillPattern=                                                                                                    FillPattern.Solid)}), Documentation(revisions = "<html>
+  annotation (Icon(graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 0}, fillColor = {211, 243, 255},
+            fillPattern =                                                                                                   FillPattern.Solid)}), Documentation(revisions = "<html>
  <ul>
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
    <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>

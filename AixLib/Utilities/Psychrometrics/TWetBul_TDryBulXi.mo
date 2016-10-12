@@ -71,9 +71,9 @@ equation
   else
     XiSatRefIn=(1-Xi[iWat])*XiSat/(1-XiSat);
     XiSat  = AixLib.Utilities.Psychrometrics.Functions.X_pSatpphi(
-      pSat=  AixLib.Utilities.Psychrometrics.Functions.saturationPressureLiquid(TWetBul),
-      p=     p,
-      phi=   1);
+      pSat = AixLib.Utilities.Psychrometrics.Functions.saturationPressureLiquid(TWetBul),
+      p =    p,
+      phi =  1);
     (TWetBul-AixLib.Utilities.Psychrometrics.Constants.T_ref) * (
               (1-Xi[iWat]) * AixLib.Utilities.Psychrometrics.Constants.cpAir +
               XiSatRefIn * AixLib.Utilities.Psychrometrics.Constants.cpSte +

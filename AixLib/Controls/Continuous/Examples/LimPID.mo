@@ -36,8 +36,7 @@ model LimPID "Test model for PID controller with optional reverse action"
     yMin=-1,
     initType=Modelica.Blocks.Types.InitPID.InitialState)
           annotation (Placement(transformation(extent={{-20,70},{0,90}})));
-  AixLib.Utilities.Diagnostics.AssertEquality assertEquality1(
-                                                                threShold=1e-10)
+  AixLib.Utilities.Diagnostics.AssertEquality assertEquality1(  threShold=1e-10)
     annotation (Placement(transformation(extent={{60,60},{80,80}})));
 equation
   connect(pulse.y, limPID.u_s) annotation (Line(

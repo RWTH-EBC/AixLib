@@ -30,13 +30,13 @@ equation
         1
       else
        AixLib.Utilities.Math.Functions.smoothLimit(
-        x=  (HGloHor/AixLib.Utilities.Math.Functions.smoothMax(
-                       x1=  HDifHor,
-                       x2=  1e-4,
-                       deltaX=  1e-5) + tmp1)/(1 + tmp1),
-        l=  1,
-        u=  8,
-        deltaX=  0.1));
+        x = (HGloHor/AixLib.Utilities.Math.Functions.smoothMax(
+                       x1 = HDifHor,
+                       x2 = 1e-4,
+                       deltaX = 1e-5) + tmp1)/(1 + tmp1),
+        l = 1,
+        u = 8,
+        deltaX = 0.1));
   annotation (
     defaultComponentName="skyCle",
     Documentation(info="<html>
