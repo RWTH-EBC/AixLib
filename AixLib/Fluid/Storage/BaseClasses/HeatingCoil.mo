@@ -13,7 +13,7 @@ model HeatingCoil "Heating coil for heat storage model"
     "Start Temperature of fluid";
 
  parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition pipeHC=
-      AixLib.DataBase.Pipes.Copper.Copper_28x1() "Type of Pipe for HR1";
+      AixLib.DataBase.Pipes.Copper.Copper_28x1() "Type of Pipe for HC";
 
  AixLib.Utilities.HeatTransfer.CylindricHeatTransfer pipeWallHC1[disHC](
     each T0=TStart,
@@ -37,16 +37,21 @@ model HeatingCoil "Heating coil for heat storage model"
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm1[disHC]
     "Vectorized heat port"
     annotation (Placement(transformation(extent={{-14,94},{6,114}})));
-  FixedResistances.Pipe pipe[disHC](D=pipeHC.d_i,
-    m_flow_small=1e-5,
-    l=lengthHC/disHC)
-    "Heating coil pipe"
-    annotation (Placement(transformation(extent={{-14,-10},{6,10}})));
+Modelica.Fluid.Pipes.DynamicPipe pipe(
+use_HeatTransfer=true,
+    modelStructure=Modelica.Fluid.Types.ModelStructure.a_v_b,
+    redeclare model HeatTransfer =
+        Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.LocalPipeFlowHeatTransfer,
+    length=lengthHC,
+    diameter=pipeHC.d_i,
+    nNodes=disHC,
+    redeclare package Medium = Medium)                      annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-4,0})));
 
 equation
-  for k in 1:disHC-1 loop
-    connect(pipe[k].port_b,pipe[k+1].port_a);
-  end for;
+
 
   connect(convHC1Outside.port_a, Therm1) annotation (Line(
       points={{-4,58},{-4,70.7},{-4,70.7},{-4,104}},
@@ -56,12 +61,14 @@ equation
       points={{-4,31.28},{-4,46}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(pipe.heatport, pipeWallHC1.port_a)
-    annotation (Line(points={{-4,5},{-4,26}},         color={191,0,0}));
-  connect(pipe[1].port_a, port_a)
-    annotation (Line(points={{-14,0},{-100,0}},          color={0,127,255}));
-  connect(pipe[disHC].port_b, port_b)
-    annotation (Line(points={{6,0},{100,0}},         color={0,127,255}));
+
+
+  connect(pipe.heatPorts, pipeWallHC1.port_a) annotation (Line(points={{-3.9,4.4},
+          {-3.9,15.2},{-4,15.2},{-4,26}}, color={127,0,0}));
+  connect(port_a, pipe.port_a)
+    annotation (Line(points={{-100,0},{-57,0},{-14,0}}, color={0,127,255}));
+  connect(pipe.port_b, port_b)
+    annotation (Line(points={{6,0},{54,0},{100,0}}, color={0,127,255}));
   annotation (                   Icon(graphics={
         Line(
           points={{-94,0},{-80,80}},

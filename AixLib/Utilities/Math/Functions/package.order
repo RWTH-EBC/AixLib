@@ -11,6 +11,7 @@ powerLinearized
 quadraticLinear
 regNonZeroPower
 regStep
+round
 smoothExponential
 smoothHeaviside
 smoothLimit

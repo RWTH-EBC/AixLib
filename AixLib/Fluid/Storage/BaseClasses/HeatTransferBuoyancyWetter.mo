@@ -12,7 +12,7 @@ protected
     "Specific heat capacity";
    Modelica.SIunits.TemperatureDifference dT[n-1]
     "Temperature difference between adjoining volumes";
-   parameter Real k(unit="W/K") = data.hTank*Modelica.Constants.pi/4*data.dTank^2*rho0*cp0/tau/n
+   parameter Real k(unit="W/K2") = data.hTank*Modelica.Constants.pi/4*data.dTank^2*rho0*cp0/tau/n
     "Proportionality constant, since we use dT instead of dH";
 equation
 

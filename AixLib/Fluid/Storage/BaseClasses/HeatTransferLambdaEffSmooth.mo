@@ -18,8 +18,8 @@ protected
                               //
  Modelica.SIunits.TemperatureDifference dT[n-1]
     "Temperature difference between adjoining volumes";
-  Real[n-1] k(unit="W/K") "Effective heat transfer coefficient";
-  Real[n-1] lambda(unit="W/mK") "Effective heat conductivity";
+  Modelica.SIunits.ThermalConductance[n-1] k "Effective heat transfer coefficient";
+  Modelica.SIunits.ThermalConductivity[ n-1] lambda "Effective heat conductivity";
   parameter Modelica.SIunits.ThermalConductivity lambdaWater=0.64
     "Thermal conductivity of water";
 equation
@@ -36,7 +36,7 @@ equation
   for i in 2:n-1 loop
        therm[i].Q_flow = -qFlow[i-1]+qFlow[i];
   end for;
-  therm[n].qFlow = -qFlow[n-1];
+  therm[n].Q_flow = -qFlow[n-1];
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),
                       graphics), Documentation(info="<html>

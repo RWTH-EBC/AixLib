@@ -55,21 +55,21 @@ model BufferStorage
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////final parameters////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
- final parameter Integer nHC1Up=integer(BaseLib.Utilities.Round(data.hHC1Up/(data.hTank/n) + 0.5,0));
- final parameter Integer nHC1Low=integer(BaseLib.Utilities.Round(data.hHC1Low/(data.hTank/n) + 0.5,0));
+ final parameter Integer nHC1Up=integer(AixLib.Utilities.Math.Functions.round(data.hHC1Up/(data.hTank/n) + 0.5,0));
+ final parameter Integer nHC1Low=integer(AixLib.Utilities.Math.Functions.round(data.hHC1Low/(data.hTank/n) + 0.5,0));
  final parameter Integer disHC1 = nHC1Up-nHC1Low+1;
 
- final parameter Integer nHC2Up=integer(BaseLib.Utilities.Round(data.hHC2Up/(data.hTank/n) + 0.5,0));
- final parameter Integer nHC2Low=integer(BaseLib.Utilities.Round(data.hHC2Low/(data.hTank/n) + 0.5,0));
+ final parameter Integer nHC2Up=integer(AixLib.Utilities.Math.Functions.round(data.hHC2Up/(data.hTank/n) + 0.5,0));
+ final parameter Integer nHC2Low=integer(AixLib.Utilities.Math.Functions.round(data.hHC2Low/(data.hTank/n) + 0.5,0));
  final parameter Integer disHC2 = nHC2Up-nHC2Low+1;
 
- final parameter Integer nHR=integer(BaseLib.Utilities.Round(data.hHR/(data.hTank/n) + 0.5,0));
+ final parameter Integer nHR=integer(AixLib.Utilities.Math.Functions.round(data.hHR/(data.hTank/n) + 0.5,0));
 
- final parameter Integer nTS1=integer(BaseLib.Utilities.Round(data.hTS1/(data.hTank/n) + 0.5,0));
- final parameter Integer nTS2=integer(BaseLib.Utilities.Round(data.hTS2/(data.hTank/n) + 0.5,0));
+ final parameter Integer nTS1=integer(AixLib.Utilities.Math.Functions.round(data.hTS1/(data.hTank/n) + 0.5,0));
+ final parameter Integer nTS2=integer(AixLib.Utilities.Math.Functions.round(data.hTS2/(data.hTank/n) + 0.5,0));
 
- constant Integer nLowerPorts=integer(max(BaseLib.Utilities.Round(data.hLowerPorts/(data.hTank/n) + 0.5,0),1));
- constant Integer nUpperPorts=integer(min(BaseLib.Utilities.Round(data.hUpperPorts/(data.hTank/n) + 0.5,0),n));
+ constant Integer nLowerPorts=integer(max(AixLib.Utilities.Math.Functions.round(data.hLowerPorts/(data.hTank/n) + 0.5,0),1));
+ constant Integer nUpperPorts=integer(min(AixLib.Utilities.Math.Functions.round(data.hUpperPorts/(data.hTank/n) + 0.5,0),n));
  constant Boolean inpLowLay=(nLowerPorts == 1); //if there is an input at the lowest layer
  constant Boolean inpHigLay=(nUpperPorts == n);
 
@@ -134,11 +134,11 @@ model BufferStorage
     m_flow_nominal=0.05)
     "Layer volumes"
     annotation (Placement(transformation(extent={{-6,0},{14,20}})));
-replaceable model HeatTransfer =
+    replaceable model HeatTransfer =
       AixLib.Fluid.Storage.BaseClasses.HeatTransferOnlyConduction
-  constrainedby AixLib.Fluid.Storage.BaseClasses.PartialHeatTransferLayers
-    "Heat Transfer Model between fluid layers"
-annotation(choicesAllMatching=true);
+    constrainedby AixLib.Fluid.Storage.BaseClasses.PartialHeatTransferLayers
+    "Heat Transfer Model between fluid layers" annotation (choicesAllMatching=
+        true);
 
 ///////////////////////////////////////////////////////////////////////////////////////
 /////HEATING COILS AND RODS/////////////////////////////////////////////////////////////////////

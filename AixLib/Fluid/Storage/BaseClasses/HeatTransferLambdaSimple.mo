@@ -8,7 +8,7 @@ model HeatTransferLambdaSimple "Heat transfer with effective conductivity"
     "Effective thermal conductivity";
 
   Modelica.Blocks.Logical.TriggeredTrapezoid triggeredTrapezoid[n - 1](
-    u(start=false),
+    each u(start=false),
     rising=100,
     falling=10,
     amplitude=const_lambda_eff,
@@ -24,8 +24,7 @@ protected
     "Area of heat transfer between layers";
   Modelica.SIunits.TemperatureDifference dT[n-1]
     "Temperature difference between adjoining volumes";
-  Real[n-1] k(unit="W/K") "Effective heat transfer coefficient";
-  Real[n-1] lambda(unit="W/mK") "Effective heat conductivity";
+  Modelica.SIunits.ThermalConductance k[n-1] "Effective heat transfer coefficient";
   parameter Modelica.SIunits.ThermalConductivity lambdaWater=0.64
     "Thermal conductivity of water";
 
