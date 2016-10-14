@@ -59,7 +59,7 @@ model HeatPumpDetailed_compare
     capCalcType=2,
     CorrFlowCo=false,
     CorrFlowEv=false,
-    dataTable=DataBase.HeatPump.HeatPumpBaseDataDefinition(
+    dataTable=AixLib.DataBase.HeatPump.HeatPumpBaseDataDefinition(
         tableQdot_con=[0,0,10; 35,4800,6300; 55,4400,5750],
         tableP_ele=[0,0,10; 35,1100,1150; 55,1600,1750],
         mFlow_conNom=0.01,

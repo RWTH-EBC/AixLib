@@ -57,7 +57,7 @@ model HeatPumpDetailed
         Modelica.Media.Water.ConstantPropertyLiquidWater,
     P_eleOutput=true,
     HPctrlType=true,
-    dataTable=DataBase.HeatPump.EN255.Vitocal350BWH113(),
+    dataTable=AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113(),
     redeclare function data_poly =
         BaseClasses.Functions.Characteristics.constantQualityGrade,
     PT1_cycle=true,
