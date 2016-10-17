@@ -424,7 +424,7 @@ equation
 <p>Heat pump black box model with two simple heat exchangers, no controllers included. </p>
 <p>Works as on/off-controlled heat pump or heat pump with capacity control. The type of capacity and electrical power calculation can be chosen: </p>
 <ol>
-<li>Polynom<br>a) depending on evaporator input temperature, condenser output temperature and variable speed (via conditional speed connector) for capacity controlled heat pumps <br>b) depending on evaporator input temperature, condenser output temperature and nominal speed for on/off-controlled heat pump </li>
+<li>Polynom<br/>a) depending on evaporator input temperature, condenser output temperature and variable speed (via conditional speed connector) for capacity controlled heat pumps <br/>b) depending on evaporator input temperature, condenser output temperature and nominal speed for on/off-controlled heat pump </li>
 <li>Table data according for on/off-controlled heat pump, depending on evaporator input temperature, condenser output temperature </li>
 </ol>
 <h4><span style=\"color:#008000\">Level of Development</span></h4>
@@ -464,11 +464,11 @@ equation
 <p>See <a href=\"AixLib.Fluid.HeatExchangers.Examples.TestHeatPump\">AixLib.Fluid.HeatExchangers.Examples.TestHeatPump</a> </p>
 </html>",
       revisions="<html>
-<p><ul>
+<ul>
 <li><i>June 23, 2015&nbsp;</i> by Kristian Huchtemann:<br/>formatted for use in AixLib</li>
 <li><i>December 10, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately </li>
 <li><i>March 27, 2013&nbsp;</i> by Kristian Huchtemann:<br/>Corrected connection of evaporator inlet and outlet temperature connectors. Added maximum condenser temperature implementation.</li>
 <li><i>January 09, 2006&nbsp;</i> by Peter Matthes:<br/>V0.1: Initial configuration.</li>
-</ul></p>
+</ul>
 </html>"));
 end HeatPumpDetailed;

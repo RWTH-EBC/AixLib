@@ -15,9 +15,9 @@ record HeatPumpBaseDataDefinition "Basic heat pump data"
 <p>Base data definition used in the HeatPump model. It defines the table table_Qdot_Co which gives the condenser heat flow rate and table_Pel which gives the electric power consumption of the heat pump. Both tables define the power values depending on the evaporator inlet temperature (columns) and the evaporator outlet temperature (rows) in W. The nominal heat flow rate in the condenser and evaporator are also defined as parameters. </p>
 </html>",
         revisions="<html>
-<p><ul>
+<ul>
 <li><i>December 10, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
-</ul></p>
+</ul>
 </html>
 "),Icon,     preferedView="info");
 end HeatPumpBaseDataDefinition;

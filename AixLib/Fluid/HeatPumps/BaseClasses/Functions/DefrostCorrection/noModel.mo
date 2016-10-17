@@ -11,8 +11,8 @@ f_CoPicing:=1;
 <p>No correction factor for icing/defrosting: f_cop_icing=1. </p>
 </html>",
   revisions="<html>
-<p><ul>
+<ul>
 <li><i>December 10, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
-</ul></p>
+</ul>
 </html>"));
 end noModel;

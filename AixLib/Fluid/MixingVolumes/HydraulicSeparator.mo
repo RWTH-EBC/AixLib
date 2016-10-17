@@ -251,13 +251,13 @@ equation
 <p>The HydraulicSeparator is a vertical zylinder with two flanges attached to the top and two attached to the bottom.</p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <p>A HydraulicSeparator should have a diameter that allows a maximum velocity of 0.2 m/s (vmaxExchange)for the water exchanged between the top and bottom layer in order to prevent turbulences. The diameter of the main body is therefore calculated with the help of the maximum VolumeFlowRate in either primary or secondary circuit. This is done by the model itself. The height of the HydraulicSeparator is calculated according to VDMA 24770 also depending on the maximum VolumeFlowRate. The model therefore simulates a HydraulicSeparator which is suitable for the circuit used. The size of the flanges has to be set by the user. </p>
-<p><br><b><font style=\"color: #008000; \">References</font></b></p>
+<p><br/><b><font style=\"color: #008000; \">References</font></b></p>
 <p><a href=\"http://www.sinusverteiler.com/files/ausgleich_von_last_und_leistung_01.pdf\">Catalogue Sinusverteiler (Explanation of design and function)</a> </p>
 </html>",
         revisions="<html>
 <ul>
-<li><i>October 11, 2016&nbsp;</i> by Marcus Fuchs:<br>Transferred alternative version</li>
-<li><i>November 26, 2014&nbsp;</i> by Roozbeh Sangi:<br>implemented</li>
+<li><i>October 11, 2016&nbsp;</i> by Marcus Fuchs:<br/>Transferred alternative version</li>
+<li><i>November 26, 2014&nbsp;</i> by Roozbeh Sangi:<br/>implemented</li>
 </ul>
 </html>"));
 end HydraulicSeparator;

@@ -468,8 +468,8 @@ end if;
 <p>Works as on/off-controlled heat pump or heat pump with capacity control. The type of capacity and electrical power calculation can be chosen: </p>
 <ol>
 <li>Polynom 
-<br>a) depending on evaporator input temperature, condenser output temperature and variable speed (via conditional speed connector) for capacity controlled heat pumps 
-<br>b) depending on evaporator input temperature, condenser output temperature and nominal speed for on/off-controlled heat pump </li>
+<br/>a) depending on evaporator input temperature, condenser output temperature and variable speed (via conditional speed connector) for capacity controlled heat pumps 
+<br/>b) depending on evaporator input temperature, condenser output temperature and nominal speed for on/off-controlled heat pump </li>
 <li>Table data according for on/off-controlled heat pump, depending on evaporator input temperature, condenser output temperature </li>
 </ol>
 <p>The heat pump speed is helt between the boundaries N_min and N_max even if the input speed is higher or lower. But no further controlling is implemented! The control logic is conciously not integrated into this model! </p>
@@ -486,10 +486,10 @@ end if;
 </ul>
 </html>",
       revisions="<html>
-<p><ul>
+<ul>
 <li><i>March 27, 2013</i> by Kristian Huchtemann:<br/>Added maximum condenser temperature implementation.</li>
 <li><i>December 10, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately </li>
 <li><i>April 23, 2013&nbsp;</i> by Kristian Huchtemann:<br/>implemented</li>
-</ul></p>
+</ul>
 </html>"));
 end CycleHP;

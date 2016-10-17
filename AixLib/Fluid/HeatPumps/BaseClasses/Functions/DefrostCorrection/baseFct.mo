@@ -8,8 +8,8 @@ partial function baseFct
 <p>Base funtion used in HeatPump model. Input is the evaporator inlet temperature, output is a CoP-correction factor f_cop_icing. </p>
 </html>",
   revisions="<html>
-<p><ul>
+<ul>
 <li><i>December 10, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
-</ul></p>
+</ul>
 </html>"));
 end baseFct;

@@ -27,8 +27,8 @@ f_CoPicing:=1-factor;
 <p>Correction of CoP (Icing, Defrost) according to Wetter,Afjei 1996. </p>
 </html>",
   revisions="<html>
-<p><ul>
+<ul>
 <li><i>December 10, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
-</ul></p>
+</ul>
 </html>"));
 end WetterAfjei1996;

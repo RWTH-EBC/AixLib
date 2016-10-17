@@ -21,9 +21,9 @@ algorithm
 <p>Carnot CoP multiplied with constant quality grade and constant electric power, no dependency on speed or mass flow rates! </p>
 </html>",
     revisions="<html>
-<p><ul>
+<ul>
 <li><i>June 21, 2015&nbsp;</i> by Kristian Huchtemann:<br/>implemented</li>
-</ul></p>
+</ul>
 </html>
 "));
 end constantQualityGrade;
