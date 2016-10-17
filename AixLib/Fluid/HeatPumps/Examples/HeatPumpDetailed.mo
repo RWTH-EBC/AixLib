@@ -1,7 +1,6 @@
 within AixLib.Fluid.HeatPumps.Examples;
-model HeatPumpSimple_compare
-  "Example for the simple heat pump model in order to compare to detailed one."
-  import AixLib;
+model HeatPumpDetailed
+  "Example for the detailed heat pump model in order to compare to simple one."
 
  extends Modelica.Icons.Example;
   Modelica.Blocks.Sources.BooleanPulse booleanPulse(period=1000)
@@ -15,8 +14,9 @@ model HeatPumpSimple_compare
     nPorts=1) annotation (Placement(transformation(extent={{-44,4},{-24,24}})));
 
   Sources.FixedBoundary                sourceSideFixedBoundary(redeclare
-      package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, nPorts=
-       1) annotation (Placement(transformation(extent={{-46,-18},{-26,2}})));
+      package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+      nPorts=1)
+          annotation (Placement(transformation(extent={{-46,-18},{-26,2}})));
   Sources.FixedBoundary                sinkSideFixedBoundary(redeclare package
       Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, nPorts=1)
     annotation (Placement(transformation(extent={{96,4},{76,24}})));
@@ -43,23 +43,28 @@ model HeatPumpSimple_compare
     annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
   Sensors.TemperatureTwoPort                temperature(redeclare package
       Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, m_flow_nominal=
-       0.01)
+       heatPump.mFlow_conNominal)
     annotation (Placement(transformation(extent={{42,4},{62,24}})));
   Modelica.Blocks.Interfaces.RealOutput Pel
     annotation (Placement(transformation(extent={{100,-20},{120,0}})));
   Modelica.Blocks.Interfaces.RealOutput T_Co_out
     "Temperature of the passing fluid"
     annotation (Placement(transformation(extent={{100,40},{120,60}})));
-  AixLib.Fluid.HeatPumps.HeatPumpSimple heatPump(
-    tablePower=[0.0,273.15,283.15; 308.15,1100,1150; 328.15,1600,1750],
-    tableHeatFlowCondenser=[0.0,273.15,283.15; 308.15,4800,6300; 328.15,4400,
-        5750],
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
-    VolumeEvaporator=0.004,
-    VolumeCondenser=0.004)
-    annotation (Placement(transformation(extent={{-2,4},{18,24}})));
-
+  .AixLib.Fluid.HeatPumps.HeatPumpDetailed heatPump(
+    redeclare package Medium_con =
+        Modelica.Media.Water.ConstantPropertyLiquidWater,
+    redeclare package Medium_eva =
+        Modelica.Media.Water.ConstantPropertyLiquidWater,
+    P_eleOutput=true,
+    capCalcType=2,
+    CorrFlowCo=false,
+    CorrFlowEv=false,
+    dataTable=AixLib.DataBase.HeatPump.HeatPumpBaseDataDefinition(
+        tableQdot_con=[0,0,10; 35,4800,6300; 55,4400,5750],
+        tableP_ele=[0,0,10; 35,1100,1150; 55,1600,1750],
+        mFlow_conNom=0.01,
+        mFlow_evaNom=0.01))
+    annotation (Placement(transformation(extent={{-6,0},{24,20}})));
 equation
   connect(TsuSourceRamp.y, sourceSideMassFlowSource.T_in) annotation (Line(
       points={{-59,10},{-54,10},{-54,18},{-46,18}},
@@ -78,34 +83,46 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
 
-  connect(booleanPulse.y, heatPump.OnOff)
-    annotation (Line(points={{-59,50},{8,50},{8,22}}, color={255,0,255}));
-  connect(sourceSideMassFlowSource.ports[1], heatPump.port_a_source)
-    annotation (Line(points={{-24,14},{-12,14},{-12,21},{-1,21}}, color={0,127,
-          255}));
-  connect(heatPump.port_b_source, sourceSideFixedBoundary.ports[1]) annotation (
-     Line(points={{-1,7},{-12.5,7},{-12.5,-8},{-26,-8}}, color={0,127,255}));
-  connect(heatPump.Power, Pel) annotation (Line(points={{8,5},{10,5},{10,-6},{
-          10,-10},{110,-10}}, color={0,0,127}));
-  connect(heatPump.port_a_sink, sinkSideMassFlowSource.ports[1]) annotation (
-      Line(points={{17,7},{28,7},{28,-8},{54,-8},{54,-48},{40,-48}}, color={0,
-          127,255}));
-  connect(heatPump.port_b_sink, temperature.port_a) annotation (Line(points={{
-          17,21},{34,21},{34,14},{42,14}}, color={0,127,255}));
+  connect(heatPump.P_eleOut, Pel) annotation (Line(
+      points={{4,1},{4,-10},{110,-10}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(booleanPulse.y, heatPump.onOff_in) annotation (Line(
+      points={{-59,50},{4,50},{4,19}},
+      color={255,0,255},
+      smooth=Smooth.None));
+  connect(sourceSideMassFlowSource.ports[1], heatPump.port_evaIn) annotation (
+     Line(
+      points={{-24,14},{-14,14},{-14,17},{-4,17}},
+      color={0,127,255},
+      smooth=Smooth.None));
+  connect(sourceSideFixedBoundary.ports[1], heatPump.port_evaOut) annotation (
+     Line(
+      points={{-26,-8},{-12,-8},{-12,3},{-4,3}},
+      color={0,127,255},
+      smooth=Smooth.None));
+  connect(heatPump.port_conOut, temperature.port_a) annotation (Line(
+      points={{22,17},{28,17},{28,14},{42,14}},
+      color={0,127,255},
+      smooth=Smooth.None));
+  connect(heatPump.port_conIn, sinkSideMassFlowSource.ports[1]) annotation (
+      Line(
+      points={{22,3},{36,3},{36,-18},{50,-18},{50,-48},{40,-48}},
+      color={0,127,255},
+      smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
     experiment(StopTime=3600),
     __Dymola_experimentSetupOutput,
     Documentation(info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
-<p>
-Simple test set-up for the HeatPump model. The heat pump is turned on and off while the source temperature increases linearly. Outputs are the electric power consumptiion of the heat pump and the supply temperature.
-</p>
+<h4><span style=\"color: #008000\">Overview</span></h4>
+<p>Simple test set-up for the HeatPump model. The heat pump is turned on and off while the source temperature increases linearly. Outputs are the electric power consumptiion of the heat pump and the supply temperature. </p>
+<p>Besides using the default simple table data, the user should also test tabulated data from <a href=\"modelica://AixLib.DataBase.HeatPump\">AixLib.DataBase.HeatPump</a> or polynomial functions.</p>
 </html>",
       revisions="<html>
 <ul>
-<li><i>December 10, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
+<li><i>October 17, 2016&nbsp;</i> by Philipp Mehrfeld:<br/>Implemented especially for comparison to simple heat pump model.</li>
 </ul>
 </html>
 "));
-end HeatPumpSimple_compare;
+end HeatPumpDetailed;
