@@ -1,0 +1,148 @@
+within AixLib.Fluid.Storage.BaseClasses;
+model StorageMantle
+
+  parameter Modelica.SIunits.Length height=0.15 "Height of layer"  annotation(Dialog(tab="Geometrical Parameters"));
+  parameter Modelica.SIunits.Diameter D1=1 "Inner tank diameter" annotation(Dialog(tab="Geometrical Parameters"));
+  parameter Modelica.SIunits.Thickness sWall=0.1 "Thickness of wall" annotation(Dialog(tab="Geometrical Parameters"));
+  parameter Modelica.SIunits.Thickness sIns=0.1 "Thickness of insulation" annotation(Dialog(tab="Geometrical Parameters"));
+
+  final parameter Modelica.SIunits.Area AInside= D1*Modelica.Constants.pi * height
+    "Inner area";
+  final parameter Modelica.SIunits.Area AOutside= (D1+2*(sWall+sIns))*Modelica.Constants.pi * height
+    "Outer area";
+
+  parameter Modelica.SIunits.ThermalConductivity lambdaWall=50
+    "Thermal Conductivity of wall";
+    parameter Modelica.SIunits.ThermalConductivity lambdaIns=0.045
+    "Thermal Conductivity of insulation";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaInside=2
+    "Coefficient of Heat Transfer water <-> wall";
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaOutside=2
+    "Coefficient of Heat Transfer insulation <-> air";
+  parameter Modelica.SIunits.Temperature TStartWall=293.15
+    "Starting Temperature of wall in K";
+  parameter Modelica.SIunits.Temperature TStartIns=293.15
+    "Starting Temperature of insulation in K";
+    parameter Modelica.SIunits.Density rhoIns=1600 "Density of insulation";
+    parameter Modelica.SIunits.SpecificHeatCapacity cIns=1000
+      "Specific heat capacity of insulation";
+    parameter Modelica.SIunits.Density rhoWall=1600 "Density of Insulation";
+    parameter Modelica.SIunits.SpecificHeatCapacity cWall=1000
+      "Specific heat capacity of wall";
+
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatportOuter
+    "Outer heat port"
+    annotation (Placement(transformation(extent={{80,0},{100,20}}, rotation=
+           0)));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatportInner
+    "Inner heat port"
+    annotation (Placement(transformation(extent={{-100,0},{-80,20}},
+          rotation=0)));
+
+  AixLib.Utilities.HeatTransfer.CylindricHeatTransfer Insulation(
+    rho=rhoIns,
+    c=cIns,
+    lambda=lambdaIns,
+    T0=TStartIns,
+    length=height,
+    d_out=D1 + 2*sWall + 2*sIns,
+    d_in=D1 + 2*sWall)
+    "Heat transfer through insulation"
+    annotation (Placement(transformation(extent={{-4,-12},{44,32}})));
+
+  AixLib.Utilities.HeatTransfer.CylindricHeatTransfer Wall(
+    rho=rhoWall,
+    c=cWall,
+    lambda=lambdaWall,
+    T0=TStartWall,
+    length=height,
+    d_out=D1 + 2*sWall,
+    d_in=D1)
+    "Heat transfer through wall"
+    annotation (Placement(transformation(extent={{-70,-12},{-22,32}})));
+
+  AixLib.Utilities.HeatTransfer.HeatConv convInside(alpha=alphaInside, A=
+        AInside)
+        "Inner heat convection" annotation (Placement(transformation(extent={{-80,4},{-68,16}},
+          rotation=0)));
+  AixLib.Utilities.HeatTransfer.HeatConv convOutside(A=AOutside, alpha=
+        alphaOutside)
+        "Outer heat convection" annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=180,
+        origin={62,10})));
+equation
+  connect(convInside.port_a, heatportInner) annotation (Line(
+      points={{-80,10},{-90,10}},
+      color={191,0,0},
+      smooth=Smooth.None));
+  connect(convOutside.port_a, heatportOuter) annotation (Line(
+      points={{68,10},{90,10}},
+      color={191,0,0},
+      smooth=Smooth.None));
+  connect(convInside.port_b,Wall.port_a)  annotation (Line(
+      points={{-68,10},{-46,10}},
+      color={191,0,0},
+      smooth=Smooth.None));
+  connect(Wall.port_b,Insulation.port_a)  annotation (Line(
+      points={{-46,29.36},{-14,29.36},{-14,10},{20,10}},
+      color={191,0,0},
+      smooth=Smooth.None));
+  connect(Insulation.port_b,convOutside.port_b)  annotation (Line(
+      points={{20,29.36},{38,29.36},{38,10},{56,10}},
+      color={191,0,0},
+      smooth=Smooth.None));
+  annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
+            -100,-100},{100,100}}),
+                      graphics),
+                       Icon(coordinateSystem(preserveAspectRatio=false,
+          extent={{-100,-100},{100,100}}), graphics={
+        Rectangle(
+          extent={{40,100},{60,-100}},
+          lineColor={0,0,0},
+          pattern=LinePattern.None,
+          fillPattern=FillPattern.VerticalCylinder,
+          fillColor={170,255,255}),
+        Rectangle(
+          extent={{40,-100},{-40,100}},
+          lineColor={0,0,255},
+          pattern=LinePattern.None,
+          fillColor={175,175,175},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{-60,100},{-40,-100}},
+          lineColor={0,0,0},
+          pattern=LinePattern.None,
+          fillPattern=FillPattern.VerticalCylinder,
+          fillColor={170,255,255}),
+        Rectangle(
+          extent={{-10,100},{40,-100}},
+          lineColor={0,0,0},
+          pattern=LinePattern.None,
+          fillColor={175,175,175},
+          fillPattern=FillPattern.CrossDiag),
+        Text(
+          extent={{-100,-40},{100,-80}},
+          lineColor={0,0,0},
+          pattern=LinePattern.None,
+          fillColor={175,175,175},
+          fillPattern=FillPattern.CrossDiag,
+          textString="%name")}),
+    Documentation(info="<html>
+<h4><font color=\"#008000\">Overview</font></h4>
+<p>Model of a sandwich wall construction for a cylindric mantle for heat storages.</p>
+<h4><font color=\"#008000\">Concept</font></h4>
+<p>The cylindric heat transfer is implemented consisting of the insulation
+material and the tank material. Only the material data is used for the
+calculation of losses. No additional losses are included.</p>
+</html>",
+      revisions="<html>
+<ul>
+<li><i>October 12, 2016&nbsp;</i> by Marcus Fuchs:<br/>Add comments and fix documentation</li>
+<li><i>October 11, 2016&nbsp;</i> by Sebastian Stinner:<br/>Added to AixLib</li>
+<li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL</li>
+<li><i>October 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
+</ul>
+</html>
+"));
+end StorageMantle;
