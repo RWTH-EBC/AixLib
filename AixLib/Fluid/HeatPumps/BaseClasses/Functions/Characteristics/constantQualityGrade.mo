@@ -1,7 +1,8 @@
-within AixLib.Fluid.HeatExchangers.HeatPump.Characteristics;
+within AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics;
 function constantQualityGrade
   "Carnot CoP multiplied with constant quality grade and constant electric power"
-  extends AixLib.Fluid.HeatExchangers.HeatPump.Characteristics.baseFct(
+  extends
+    AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.baseFct(
     N,
     T_con,
     T_eva,
@@ -17,11 +18,7 @@ algorithm
   Char:= {P_com,P_com*CoP_C*qualityGrade};
 
   annotation (Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
 <p>Carnot CoP multiplied with constant quality grade and constant electric power, no dependency on speed or mass flow rates! </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
 </html>",
     revisions="<html>
 <p><ul>

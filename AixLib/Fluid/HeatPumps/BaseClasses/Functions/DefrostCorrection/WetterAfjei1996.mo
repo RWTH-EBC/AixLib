@@ -1,7 +1,9 @@
-within AixLib.Fluid.HeatExchangers.HeatPump.DefrostCorrection;
+within AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection;
 function WetterAfjei1996
   "Correction of CoP (Icing, Defrost) according to Wetter,Afjei 1996"
-  extends AixLib.Fluid.HeatExchangers.HeatPump.DefrostCorrection.baseFct(T_eva);
+  extends
+    AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection.baseFct(
+      T_eva);
 
 parameter Real A=0.03;
 parameter Real B=-0.004;
@@ -22,12 +24,7 @@ else
 end if;
 f_CoPicing:=1-factor;
   annotation (Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
-<p>
-Correction of CoP (Icing, Defrost) according to Wetter,Afjei 1996.
-</p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars2.png\"/></p>
+<p>Correction of CoP (Icing, Defrost) according to Wetter,Afjei 1996. </p>
 </html>",
   revisions="<html>
 <p><ul>
