@@ -12,26 +12,26 @@ record Radiator_Kitchen
     length=0.8,
     height=0.3);
   annotation (Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
-<p>Kermi radiator &QUOT;Flachheizk&ouml;rper&QUOT; ThermX2, Profil V </p>
+<h4><font color=\"#008000\">Overview</font></h4>
+<p>Kermi radiator &quot;Flachheizk&ouml;rper&quot; ThermX2, Profil V </p>
 <p>Delta_T = 75&deg;C - 65&deg;C = 10K</p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
+<h4><font color=\"#008000\">Level of Development</font></h4>
 <p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">Concept</font></h4></p>
+<h4><font color=\"#008000\">Concept</font></h4>
 <p><b>Attention</b>: The data for NominalPower, MassSteel and VolumeWater are given per 1 meter. </p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used in model <a href=\"HVAC.Components.HeatExchanger.Radiator_ML\">HVAC.Components.HeatExchanger.Radiator_ML</a></p>
 <p>Source:</p>
-<p><ul>
+<ul>
 <li>Manufacturer: Kermi</li>
 <li>Product: Flachheizk&ouml;rper ThermX2 Profil V</li>
-<li>Booklet: &QUOT;Flachheizk&ouml;rper&QUOT;, I/2010, Pages 44-52.</li>
+<li>Booklet: &quot;Flachheizk&ouml;rper&quot;, I/2010, Pages 44-52.</li>
 <li>Bibtexkey:Kermi-FHK2010</li>
-</ul></p>
+</ul>
 </html>", revisions="<html>
-<p><ul>
+<ul>
 <li><i>August 13, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
 <li><i>November 15, 2011</i> by Ana Constantin:<br/>implemented</li>
-</ul></p>
+</ul>
 </html>"));
 end Radiator_Kitchen;

@@ -32,17 +32,17 @@ parameter Modelica.SIunits.Density DensitySteel=7900
   parameter Modelica.SIunits.Length length=1 "length of radiator";
   parameter Modelica.SIunits.Height height=0.6 "height of radiator";
   annotation (Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>Basic data set for the definition of various radiator models. Values are described in the given table below. </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
+<h4><font color=\"#008000\">Level of Development</font></h4>
 <p><img src=\"modelica://HVAC/Images/stars3.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+<h4><font color=\"#008000\">References</font></h4>
 <p>Base data definition for record used with <a href=\"HVAC.Components.HeatExchanger.Radiator_ML\">HVAC.Components.HeatExchanger.Radiator_ML</a></p>
 </html>",
         revisions="<html>
-<p><ul>
+<ul>
 <li><i>April, 2016&nbsp;</i> by Peter Remmen:<br/>Moved from SVN to AixLib</li>
 <li><i>August 13, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
-</ul></p>
+</ul>
 </html>"));
 end RadiatorBaseDataDefinition;

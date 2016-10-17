@@ -261,14 +261,14 @@ dT_R=Tout - Tair;
           thickness=0.5,
           smooth=Smooth.None)}),
     Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>October, 2016&nbsp;</i> by Peter Remmen:<br/>Transfer to AixLib.</li>
 <li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
-</ul></p>
+</ul>
 </html>
 ", info=
     "<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>Model of the multi layers of heat exchanger. From the water flow is the convective and radiative heat output calculated. </p>
 </html>"));
 end MultiLayerThermalDelta;

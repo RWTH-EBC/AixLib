@@ -357,7 +357,7 @@ User quota exceeded.<br />
 
 
 <tr>
-<td> WSAEDQUOT <br /> 10069 </td><td> 
+<td> WSAEDquot <br /> 10069 </td><td> 
 
 Disk quota exceeded.<br />
 

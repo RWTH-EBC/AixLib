@@ -18,17 +18,17 @@ class CalcExcessTemp
   end Temp;
 
   annotation (Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Variable to determine the different choice to calculate the excess temperature of a radiator.
 </p>
 
 </html>",
       revisions="<html>
-<p><ul>
+<ul>
 <li><i>October, 2016&nbsp;</i> by Peter Remmen:<br/>Transfer to AixLib.</li>
 <li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
-</ul></p>
+</ul>
 </html>
 "));
 end CalcExcessTemp;
