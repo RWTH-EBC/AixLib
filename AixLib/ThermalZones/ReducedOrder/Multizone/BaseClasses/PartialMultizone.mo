@@ -1,6 +1,6 @@
 within AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses;
 partial model PartialMultizone "Partial model for multizone models"
-  extends AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.LumpedVolumeDeclarations;
+  extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
   parameter Integer buildingID
     "Unique identifier of the building";
@@ -73,7 +73,8 @@ partial model PartialMultizone "Partial model for multizone models"
     each final X_start=X_start,
     each final C_start=C_start,
     each final C_nominal=C_nominal,
-    each final mSenFac=mSenFac)
+    each final mSenFac=mSenFac,
+    redeclare each final package Medium = Medium)
     "Thermal zone model"
     annotation (Placement(transformation(extent={{38,49},{
     80,90}})), choicesAllMatching=true);
