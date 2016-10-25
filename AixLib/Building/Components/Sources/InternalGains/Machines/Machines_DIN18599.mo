@@ -282,13 +282,19 @@ equation
           fillPattern=FillPattern.Solid,
           textString="ERC")}),    Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
-<p>Heat source with convective and radiative component. The load is determined by a schedule and the type of activity. </p>
+<p>Heat source with convective and radiative component. The load is determined
+by a schedule and the type of activity. </p>
 <h4><span style=\"color: #008000\">Level of Development</span></h4>
 <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars2.png\" alt=\"stars: 2 out of 5\"/></p>
 <h4><span style=\"color: #008000\">Concept</span></h4>
-<p>The schedule sets the times when the machines are used. They tend to be used more when people are present in the room, and go on stand-by when people are absent from the room. </p>
-<p>The schedule describes the machines corresponding to only one person, and can take values from 0 to 1. For more people, a factor, <b>NrPeople</b>, is provided as parameter.</p>
-<p>The type of activity determines the load for machines in the room for one person according to DIN 18599-10. The following values are used:</p>
+<p>The schedule sets the times when the machines are used. They tend to be used
+more when people are present in the room, and go on stand-by when people are
+absent from the room. </p>
+<p>The schedule describes the machines corresponding to only one person, and can
+take values from 0 to 1. For more people, a factor, <b>NrPeople</b>, is provided
+as parameter.</p>
+<p>The type of activity determines the load for machines in the room for one
+person according to DIN 18599-10. The following values are used:</p>
 <table cellspacing=\"2\" cellpadding=\"0\" border=\"0\" summary = \"Load according to type of activity\"><tr>
 <td style=\"background-color: #dcdcdc\"><p>Activity Type</p></td>
 <td style=\"background-color: #dcdcdc\"><p>Heat Load [W]</p></td>
@@ -307,7 +313,9 @@ equation
 </tr>
 </table>
 <p><br/><br/><br/><b><span style=\"color: #008000;\">Assumptions</span></b></p>
-<p>The surface for radiation exchange is constant throught the simulation, as the machines are always present in the room. For stability reasons a lower limitation of 1e-4 m2 has been introduced.</p>
+<p>The surface for radiation exchange is constant throught the simulation, as
+the machines are always present in the room. For stability reasons a lower
+limitation of 1e-4 m2 has been introduced.</p>
 <h4><span style=\"color: #008000\">References</span></h4>
 <p>DIN 18599-10 </p>
 <h4><span style=\"color: #008000\">Example Results</span></h4>
