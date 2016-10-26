@@ -288,11 +288,11 @@ equation
 </tr>
 </table>
 <p><br/>The Height H of the radiator is discretized in N single Layers, as shown in figure 1 </p>
-<p><br/><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Schichtenmodell.png\"/></p>
+<p><br/><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Schichtenmodell.png\" alt=\"Multilayer Model of radiator \"/></p>
 <p>Figure 1: Multilayer Model of radiator </p>
 <p>For every layer the equation (1) is solved. </p>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
-<td><p><br/><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/DGL_HK.png\"/> </p></td>
+<td><p><br/><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/DGL_HK.png\" alt=\"Equation for every layer\"/> </p></td>
 <td><p><br/>(1) </p></td>
 </tr>
 <tr>
@@ -302,15 +302,15 @@ equation
 </table>
 <p><br/>The total heat emission consists of a convective and a radiative part. </p>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
-<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Q_ab.png\"/> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Q_ab.png\" alt=\"Total heat emission\"/> </p></td>
 <td><p><br/>(2) </p></td>
 </tr>
 <tr>
-<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Q_K1.png\"/> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Q_K1.png\" alt=\"Convective heat emission\"/> </p></td>
 <td><p><br/>(3) </p></td>
 </tr>
 <tr>
-<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Q_R1.png\"/> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Q_R1.png\" alt=\"Radiative heat emission\"/> </p></td>
 <td><p><br/>(4) </p></td>
 </tr>
 <tr>
@@ -318,13 +318,13 @@ equation
 <td></td>
 </tr>
 </table>
-<p><br/>The convective heat emission is proportional to <img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/deltaT.png\"/>&nbsp;. The radiative heat emission is proportional to <img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/delta.png\"/>&nbsp;=(T_L + DeltaT)^4-TR^4 (T_L: Room Temperature, DeltaT: heater excess temperature, T_R: radiative temperature). </p>
+<p><br/>The convective heat emission is proportional to <img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/deltaT.png\" alt=\"delta T\"/>&nbsp;. The radiative heat emission is proportional to <img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/delta.png\" alt=\"delta\"/>&nbsp;=(T_L + DeltaT)^4-TR^4 (T_L: Room Temperature, DeltaT: heater excess temperature, T_R: radiative temperature). </p>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
-<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Q_K.png\"/> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Q_K.png\" alt=\"Convective heat emission, delta T\"/> </p></td>
 <td><p><br/>(5) </p></td>
 </tr>
 <tr>
-<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Q_R.png\"/> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Q_R.png\" alt=\"Radiative heat emission, delta \"/> </p></td>
 <td><p><br/>(6) </p></td>
 </tr>
 <tr>
@@ -340,17 +340,17 @@ equation
 </tr>
 <tr>
 <td><p>arithmetic heater excess temperature </p></td>
-<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Delta_T_ari.png\"/> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Delta_T_ari.png\" alt=\"arithmetic heater excess temperature \"/> </p></td>
 <td><p><br/>(7) </p></td>
 </tr>
 <tr>
 <td><p>logarithmic heater excess temperature </p></td>
-<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Delta_T_log.png\"/> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Delta_T_log.png\" alt=\"logarithmic heater excess temperature \" /> </p></td>
 <td><p><br/>(8) </p></td>
 </tr>
 <tr>
 <td><p>exponential heater excess temperature according to [2] </p></td>
-<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Delta_T_exp.png\"/> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Delta_T_exp.png\"/ alt=\"exponential heater excess temperature \" /> </p></td>
 <td><p><br/>(9) </p></td>
 </tr>
 <tr>
@@ -362,11 +362,11 @@ equation
 <p>Due to stability reasons and accuracy at small heating medium flow, an exponential calculation of the heater excess temperture is recommended. The function &quot;calcHeaterExcessTemp &quot; regularize the discontinuities in equation (9). </p>
 <p>The radiator exponent according to DIN 442 is valid for the total heat emission. the radiative heat emission part grows larger. This is considered by the following formulas: </p>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
-<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/n_K1.png\"/> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/n_K1.png\" alt=\"Radiator exponent \" /> </p></td>
 <td><p><br/>(10) </p></td>
 </tr>
 <tr>
-<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/n_K2.png\"/> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/n_K2.png\" alt=\"Radiator exponent 2\" /> </p></td>
 <td><p><br/>(11) </p></td>
 </tr>
 <tr>
@@ -378,7 +378,7 @@ equation
 <p>In the model the heat emission is calculated according to eq. (5), (6) for every layer and the respective power is connected to the romm via the thermal ports. A varHeatSource (inPort=total heat emission) is connected via a thermal port to the enthalpie flow of the heating medium and the stored heat in the radiator mass. </p>
 <p>The pressure loss is calculated with equation (12).</p>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
-<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/delta_P.png\"/> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/delta_P.png\" alt=\"delta P\" /> </p></td>
 <td><p><br/>(12) </p></td>
 </tr>
 </table>
