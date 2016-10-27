@@ -1,7 +1,5 @@
 within AixLib.Fluid.Solar;
 package Electric
-  extends Modelica.Icons.Package;
-
-
+  extends Modelica.Icons.VariantsPackage;
 
 end Electric;

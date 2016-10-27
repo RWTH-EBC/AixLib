@@ -1,19 +1,12 @@
 within AixLib.Fluid.Solar.Electric.Examples;
 model ExamplePV
-
   extends Modelica.Icons.Example;
 
-  PVSystem pVsystem(
-    MaxOutputPower=4000,
-    NumberOfPanels=5,
-    data=DataBase.SolarElectric.SymphonyEnergySE6M181())
-    "PV system model including the inverter"
-    annotation (Placement(transformation(extent={{-22,38},{-2,58}})));
   Modelica.Blocks.Interfaces.RealOutput Power(
- final quantity="Power",
- final unit="W") "Output Power of the PV system including the inverter"
+    final quantity="Power",
+    final unit="W")
+    "Output Power of the PV system including the inverter"
     annotation (Placement(transformation(extent={{52,40},{72,60}})));
-public
   AixLib.Building.Components.Weather.Weather Weather(
     Latitude=49.5,
     Longitude=8.5,
@@ -28,6 +21,12 @@ public
         "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt"))
     "Weather data input for simulation of PV power "
     annotation (Placement(transformation(extent={{-93,49},{-68,66}})));
+  PVSystem pVsystem(
+    MaxOutputPower=4000,
+    NumberOfPanels=5,
+    data=DataBase.SolarElectric.SymphonyEnergySE6M181())
+    "PV system model including the inverter"
+    annotation (Placement(transformation(extent={{-22,38},{-2,58}})));
 
 equation
   connect(pVsystem.PVPowerW, Power)     annotation (Line(

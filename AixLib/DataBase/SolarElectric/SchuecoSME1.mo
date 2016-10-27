@@ -1,6 +1,5 @@
 within AixLib.DataBase.SolarElectric;
 record SchuecoSME1 "SchuecoSME1"
-
   extends AixLib.DataBase.SolarElectric.PVBaseRecord(
     Eta0=0.147,
     TempCoeff=0.0037,
@@ -13,7 +12,7 @@ record SchuecoSME1 "SchuecoSME1"
 <p>Monocrystalline Solar Module, single Area=1,27664m2 </p>
 <p><br><h4><span style=\"color: #008000\">References</span></h4></p>
 <p>
-Record for record used with 
+Record for record used with
 <a href=\"modelica://AixLib.Fluid.Solar.Electric.PVsystem\">
 AixLib.Fluid.Solar.Electric.PVsystem</a>
 </p>

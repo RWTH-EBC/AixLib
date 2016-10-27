@@ -1,6 +1,5 @@
 within AixLib.DataBase.SolarElectric;
 record SymphonyEnergySE6M181 "Symphony Energy SE6M60 series "
-
   extends AixLib.DataBase.SolarElectric.PVBaseRecord(
     Eta0=0.126,
     TempCoeff=0.0043,
@@ -13,7 +12,7 @@ record SymphonyEnergySE6M181 "Symphony Energy SE6M60 series "
 <p>Polycrystalline Solar Module, single Area=1,44 m2 </p>
 <p><br><h4><span style=\"color: #008000\">References</span></h4></p>
 <p>
-Record for record used with 
+Record for record used with
 <a href=\"modelica://AixLib.Fluid.Solar.Electric.PVsystem\">
 AixLib.Fluid.Solar.Electric.PVsystem</a>
 </p>
