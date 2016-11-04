@@ -221,7 +221,7 @@ equation
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <p>The Radiator model represents a heating device. Heat energy taken from the hot water flow through the device is being emitted via convective and radiative energy transport connectors. The ratio of convective and radiative energy flows depends on the type of the heating device (see table). </p>
 <p>T_source output is relevant for exergy analysis. It describes the&nbsp;logarithmic&nbsp;mean&nbsp;temperature&nbsp;is&nbsp;calculated&nbsp;from&nbsp;the&nbsp;temperatures&nbsp;at&nbsp;in-&nbsp;and&nbsp;outlet&nbsp;of&nbsp;the&nbsp;radiator.</p>
-<table cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
+<table summary=\"heat emission\" cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
 <td><h4>Type</h4></td>
 <td><h4>Fraction of convective transport</h4></td>
 <td><h4>Fraction of radiative transport</h4></td>
@@ -291,7 +291,7 @@ equation
 <p><br/><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Schichtenmodell.png\" alt=\"Multilayer Model of radiator \"/></p>
 <p>Figure 1: Multilayer Model of radiator </p>
 <p>For every layer the equation (1) is solved. </p>
-<table cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
+<table summary=\"equation for multilayer\" cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
 <td><p><br/><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/DGL_HK.png\" alt=\"Equation for every layer\"/> </p></td>
 <td><p><br/>(1) </p></td>
 </tr>
