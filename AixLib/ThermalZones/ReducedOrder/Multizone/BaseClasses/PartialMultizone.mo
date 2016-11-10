@@ -47,7 +47,8 @@ partial model PartialMultizone "Partial model for multizone models"
     annotation (Placement(
     transformation(extent={{-117,53},{-83,85}}), iconTransformation(
     extent={{-90,30},{-70,50}})));
-  Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts*numZones]
+  Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts*numZones](
+      redeclare package Medium = Medium)
     "Auxilliary fluid inlets and outlets to indoor air volume"
     annotation (Placement(transformation(extent={{-36,-104},{42,-86}}),
     iconTransformation(extent={{-40,-110},{40,-90}})));
