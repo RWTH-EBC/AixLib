@@ -23,7 +23,16 @@ Parts of **AixLib** have been developed within public funded projects and with f
 
 ### Version
 
-The current version 0.3.1 is a pre-release.
+The current version 0.3.2 is a pre-release.
+
+### How to cite AixLib
+
+We continuously improve **AixLib** and try to keep the community up-to-date with citable papers:
+
+- AixLib - An Open-Source Modelica Library within the IEA-EBC Annex 60 Framework.
+  Müller D., Lauster M., Constantin A., Fuchs M., Remmen P..
+  BauSIM 2016, p.3–9, September 2016.
+  [link](http://www.iea-annex60.org/downloads/2016-bausim-aixlib.pdf)
 
 ### How to contribute to the development of AixLib
 

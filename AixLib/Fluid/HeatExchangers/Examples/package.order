@@ -2,8 +2,6 @@ AirHeater_T
 AirHeater_u
 BoilerSystemTConst
 BoilerSystemTVar
-HeatPumpSystem
-HeatPumpSystem2
 PumpRadiatorThermostaticValve
 PumpRadiatorValve
 RadiatorEN442_2

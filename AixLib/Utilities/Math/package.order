@@ -11,6 +11,7 @@ Polynominal
 PowerLinearized
 QuadraticLinear
 RegNonZeroPower
+Round
 SmoothExponential
 SmoothHeaviside
 SmoothLimit

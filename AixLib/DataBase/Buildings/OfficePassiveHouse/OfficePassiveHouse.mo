@@ -1,7 +1,6 @@
 within AixLib.DataBase.Buildings.OfficePassiveHouse;
 record OfficePassiveHouse
     extends DataBase.Buildings.BuildingBaseRecord(
-    buildingID = "M4120",
     usage = "Office Building",
     numZones=5,
     zoneSetup={
