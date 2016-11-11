@@ -11,10 +11,10 @@ model MultiLayerThermalDelta "multi layers of heat exchanger"
     "select calculation method of excess temperature";
   parameter
     AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.RadiatorTypes.RadiatorType
-    Type=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.RadiatorTypes.PanelRadiator10
+    Type
     "Type of radiator" annotation (choicesAllMatching=true, Dialog(tab=
           "Geometry and Material", group="Geometry"));
-  parameter Real n=1.3 "Radiator exponent"
+  parameter Real n= "Radiator exponent"
 annotation (Dialog(tab="Geometry and Material", group="Geometry"));
 
   parameter Modelica.SIunits.Density DensitySteel=DensitySteel
@@ -41,11 +41,11 @@ annotation (Dialog(tab="Geometry and Material", group="Geometry"));
   parameter Modelica.SIunits.Length d "Thickness of radiator wall";
 
   Modelica.SIunits.Temperature TIn;
-  Modelica.SIunits.Temperature Tout;
-  Modelica.SIunits.Temperature Trad;
-  Modelica.SIunits.Temperature Tair;
+  Modelica.SIunits.Temperature TOut;
+  Modelica.SIunits.Temperature TRad;
+  Modelica.SIunits.Temperature TAir;
 
-  AixLib.Utilities.Interfaces.Star Radiative annotation (Placement(
+  AixLib.Utilities.Interfaces.Star radiative annotation (Placement(
         transformation(extent={{22,73},{40,89}}, rotation=0)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Convective
     annotation (Placement(transformation(extent={{-48,74},{-32,88}},
@@ -99,13 +99,13 @@ annotation (Dialog(tab="Geometry and Material", group="Geometry"));
 equation
  // Calculation of excess temperature
 TIn=temperatureIn.T;
-Tout=temperatureOut.T;
-Tair=Convective.T;
-Trad=Radiative.T;
+TOut=temperatureOut.T;
+TAir=Convective.T;
+TRad=radiative.T;
 
 // calculation of excess temperature
-dT_V=TIn - Tair;
-dT_R=Tout - Tair;
+dT_V=TIn - TAir;
+dT_R=TOut - TAir;
 
   connect(port_a, temperatureIn.port_a) annotation (Line(
       points={{-100,0},{-80,0},{-80,-28},{-70,-28}},
@@ -135,7 +135,7 @@ dT_R=Tout - Tair;
       points={{-11,27.52},{-11,32},{41,32},{41,40.88}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(twoStar_RadEx.Star, Radiative) annotation (Line(
+  connect(twoStar_RadEx.Star, radiative) annotation (Line(
       points={{41,61.01},{41,68.505},{31,68.505},{31,81}},
       color={95,95,95},
       pattern=LinePattern.None,
@@ -152,7 +152,7 @@ dT_R=Tout - Tair;
           lineColor={0,0,0},
           lineThickness=0.5,
           textString=
-               "Radiative"), Text(
+               "radiative"), Text(
           extent={{-64,106},{-16,84}},
           lineColor={0,0,0},
           lineThickness=0.5,
@@ -238,7 +238,7 @@ dT_R=Tout - Tair;
           lineColor={0,0,0},
           lineThickness=0.5,
           textString=
-               "Tout"),
+               "TOut"),
         Line(
           points={{-70,-56},{-62,-48}},
           color={0,0,0},
