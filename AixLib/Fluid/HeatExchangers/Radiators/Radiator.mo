@@ -137,7 +137,7 @@ public
 
 
 equation
-  TV_1=multiLayer_HE[1].Tin;
+  TV_1=multiLayer_HE[1].TIn;
   TR_N=multiLayer_HE[N].Tout;
 
   for i in 1:N loop
