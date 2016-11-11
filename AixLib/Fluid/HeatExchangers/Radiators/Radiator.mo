@@ -301,7 +301,7 @@ equation
 </tr>
 </table>
 <p><br/>The total heat emission consists of a convective and a radiative part. </p>
-<table cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
+<table summary=\"heat emission conv and rad\" cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
 <td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Q_ab.png\" alt=\"Total heat emission\"/> </p></td>
 <td><p><br/>(2) </p></td>
 </tr>
@@ -319,7 +319,7 @@ equation
 </tr>
 </table>
 <p><br/>The convective heat emission is proportional to <img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/deltaT.png\" alt=\"delta T\"/>&nbsp;. The radiative heat emission is proportional to <img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/delta.png\" alt=\"delta\"/>&nbsp;=(T_L + DeltaT)^4-TR^4 (T_L: Room Temperature, DeltaT: heater excess temperature, T_R: radiative temperature). </p>
-<table cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
+<table summary=\"heat emission conv\" cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
 <td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Q_K.png\" alt=\"Convective heat emission, delta T\"/> </p></td>
 <td><p><br/>(5) </p></td>
 </tr>
@@ -333,7 +333,7 @@ equation
 </tr>
 </table>
 <p><br/>The heat emission of the radiator depends on the heater excess temperature. In the model it is possible to choose between: </p>
-<table cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
+<table summary=\"heat emission excess temperature\" cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
 <td><h4>Method </h4></td>
 <td><h4>Formula </h4></td>
 <td></td>
@@ -361,7 +361,7 @@ equation
 </table>
 <p>Due to stability reasons and accuracy at small heating medium flow, an exponential calculation of the heater excess temperture is recommended. The function &quot;calcHeaterExcessTemp &quot; regularize the discontinuities in equation (9). </p>
 <p>The radiator exponent according to DIN 442 is valid for the total heat emission. the radiative heat emission part grows larger. This is considered by the following formulas: </p>
-<table cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
+<table summary=\"radiator exponent\" cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
 <td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/n_K1.png\" alt=\"Radiator exponent \" /> </p></td>
 <td><p><br/>(10) </p></td>
 </tr>
@@ -377,7 +377,7 @@ equation
 <p>The modified convective exponent is calculated by (11). The region of discontinuity in eq. (11) has not yet been regulized, so a constant radiator exponent is used for now. </p>
 <p>In the model the heat emission is calculated according to eq. (5), (6) for every layer and the respective power is connected to the romm via the thermal ports. A varHeatSource (inPort=total heat emission) is connected via a thermal port to the enthalpie flow of the heating medium and the stored heat in the radiator mass. </p>
 <p>The pressure loss is calculated with equation (12).</p>
-<table cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
+<table summary=\"pressure loss\" cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
 <td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/delta_P.png\" alt=\"delta P\" /> </p></td>
 <td><p><br/>(12) </p></td>
 </tr>
