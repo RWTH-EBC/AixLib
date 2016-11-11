@@ -3,7 +3,7 @@ model PressureDropRadiator
   "Calculates the pressure drop in a radiator according to manufacturer data"
   extends AixLib.Fluid.Interfaces.PartialTwoPortTransport;
 
-  parameter Modelica.SIunits.Pressure PD
+  parameter Real PD(unit="1/(kg.m)")
     "Pressure drop coefficient, delta_p[Pa] = PD*m_flow[kg/s]^2";
 
 equation
