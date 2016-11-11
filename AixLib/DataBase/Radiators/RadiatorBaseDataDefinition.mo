@@ -1,28 +1,28 @@
 within AixLib.DataBase.Radiators;
 record RadiatorBaseDataDefinition "Base Data Definition for Radiators"
     extends Modelica.Icons.Record;
-  parameter Real NominalPower=1000
-    "Nominal power of radiator per m at nominal temperatures in W/m "
+  parameter Real NominalPower(unit="W/m")=1000
+    "Nominal power of radiator per m at nominal temperatures"
     annotation (Dialog(group="Geometry"));
-  parameter Modelica.SIunits.Temp_C RT_nom[3]={75,65,20}
+  parameter Modelica.SIunits.Temperature RT_nom[3]={348.15, 338.15, 293.15}
     "nominal temperatures (Tin, Tout, Tair) according to DIN-EN 442." annotation (Dialog(group="Geometry"));
-  parameter Real PressureDrop = 548208
+  parameter Modelica.SIunits.Pressure PressureDrop = 548208
     "Pressure drop coefficient, delta_p[Pa] = PD*m_flow[kg/s]^2";
   parameter Real Exponent=1.29 annotation (Dialog(group="Geometry"));
   parameter Real VolumeWater(unit="l/m")=20
-    "Water volume inside radiator per m, in l/m"
+    "Water volume inside radiator per m"
     annotation (Dialog(group="Geometry"));
  parameter Real MassSteel(unit="kg/m")=30
-    "Material mass of radiator per m, in kg/m"
+    "Material mass of radiator per m"
     annotation (Dialog(group="Geometry"));
 parameter Modelica.SIunits.Density DensitySteel=7900
-    "Specific density of steel, in kg/m3"
+    "Specific density of steel"
     annotation (Dialog(group="Material"));
   parameter Modelica.SIunits.SpecificHeatCapacity CapacitySteel=551
-    "Specific heat capacity of steel, in J/kgK"
+    "Specific heat capacity of steel"
     annotation (Dialog(group="Material"));
   parameter Modelica.SIunits.ThermalConductivity LambdaSteel=60
-    "Thermal conductivity of steel, in W/mK"
+    "Thermal conductivity of steel"
     annotation (Dialog(group="Material"));
   parameter
     AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.RadiatorTypes.RadiatorType
@@ -34,9 +34,6 @@ parameter Modelica.SIunits.Density DensitySteel=7900
   annotation (Documentation(info="<html>
 <h4><font color=\"#008000\">Overview</font></h4>
 <p>Basic data set for the definition of various radiator models. Values are described in the given table below. </p>
-<h4><font color=\"#008000\">Level of Development</font></h4>
-<p><img src=\"modelica://HVAC/Images/stars3.png\"/></p>
-<h4><font color=\"#008000\">References</font></h4>
 <p>Base data definition for record used with <a href=\"HVAC.Components.HeatExchanger.Radiator_ML\">HVAC.Components.HeatExchanger.Radiator_ML</a></p>
 </html>",
         revisions="<html>

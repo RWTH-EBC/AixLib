@@ -3,7 +3,7 @@ record Radiator_Bathroom
   "ThermX2, Profil V (Kermi) Power=603W, L=700, H=300, Typ=22, {75,65,24}"
   extends AixLib.DataBase.Radiators.RadiatorBaseDataDefinition(
     NominalPower=861,
-    RT_nom={75,65,24},
+    RT_nom={348.15,338.15,297.15},
     PressureDrop=1017878,
     Exponent=1.2776,
     VolumeWater=3.6,
