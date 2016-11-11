@@ -54,7 +54,7 @@ annotation (Dialog(tab="Geometry and Material", group="Geometry", enable=not sel
     "Initial temperature, in degrees Celsius"
     annotation (Dialog(group="Miscellaneous"));
   parameter SIunits.Temperature RT_nom[3]=(if selectable then Modelica.SIunits.Conversions.from_degC(radiatorType.RT_nom) else Modelica.SIunits.Conversions.from_degC({75,65,20}))
-    "nominal temperatures (Tin, Tout, Tair) according to DIN-EN 442."
+    "nominal temperatures (TIn, TOut, TAir) according to DIN-EN 442."
                                                             annotation (Dialog(group="Miscellaneous",enable=not selectable));
   parameter Real PD = (if selectable then radiatorType.PressureDrop else 548208)
     "Pressure drop coefficient, delta_p[Pa] = PD*m_flow[kg/s]^2"                                        annotation (Dialog(group="Miscellaneous", enable=not selectable));
@@ -138,11 +138,11 @@ public
 
 equation
   TV_1=multiLayer_HE[1].TIn;
-  TR_N=multiLayer_HE[N].Tout;
+  TR_N=multiLayer_HE[N].TOut;
 
   for i in 1:N loop
-    connect(multiLayer_HE[i].Convective, ConvectiveHeat);
-    connect(multiLayer_HE[i].Radiative, RadiativeHeat);
+    connect(multiLayer_HE[i].convective, ConvectiveHeat);
+    connect(multiLayer_HE[i].radiative, RadiativeHeat);
   end for;
 
   for j in 1:(N-1) loop

@@ -47,7 +47,7 @@ annotation (Dialog(tab="Geometry and Material", group="Geometry"));
 
   AixLib.Utilities.Interfaces.Star radiative annotation (Placement(
         transformation(extent={{22,73},{40,89}}, rotation=0)));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Convective
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convective
     annotation (Placement(transformation(extent={{-48,74},{-32,88}},
           rotation=0)));
 // protected
@@ -100,7 +100,7 @@ equation
  // Calculation of excess temperature
 TIn=temperatureIn.T;
 TOut=temperatureOut.T;
-TAir=Convective.T;
+TAir=convective.T;
 TRad=radiative.T;
 
 // calculation of excess temperature
@@ -123,7 +123,7 @@ dT_R=TOut - TAir;
       points={{70,-28},{80,-28},{80,0},{100,0}},
       color={0,127,255},
       smooth=Smooth.None));
-  connect(heatConv_Radiator.port_b, Convective) annotation (Line(
+  connect(heatConv_Radiator.port_b, convective) annotation (Line(
       points={{-17,61.34},{-17,68},{-40,68},{-40,81}},
       color={191,0,0},
       smooth=Smooth.None));
