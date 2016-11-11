@@ -45,7 +45,7 @@ model RoomGFOw2_DayNightMode
     selectable=true)                                                                                                         annotation(Placement(transformation(extent = {{54, -36}, {74, -16}})));
   Modelica.Blocks.Sources.Constant Tset_flowTemperature(k = 273.15 + 55) annotation(Placement(transformation(extent = {{-72, -6}, {-62, 4}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor annotation(Placement(transformation(extent = {{-5, -5}, {5, 5}}, rotation = 270, origin = {23, -5})));
-  Modelica.Blocks.Interfaces.RealOutput Troom
+  Modelica.Blocks.Interfaces.RealOutput TRoom
     "Absolute temperature as output signal"                                           annotation(Placement(transformation(extent = {{90, -20}, {110, 0}})));
 equation
   connect(varTemp.port, room_GF_2OW.thermOutside) annotation(Line(points = {{-38, 48}, {17.8, 48}, {17.8, 42.2}}, color = {191, 0, 0}));
@@ -75,7 +75,7 @@ equation
   connect(Tset_flowTemperature.y, boilerTaktTable.T_set) annotation(Line(points = {{-61.5, -1}, {-56.8, -1}, {-56.8, -19}}, color = {0, 0, 127}));
   connect(temperatureSensor.T, heatValve_new.T_room) annotation(Line(points = {{23, -10}, {22, -10}, {22, -16.2}, {25.6, -16.2}}, color = {0, 0, 127}));
   connect(temperatureSensor.port, room_GF_2OW.thermRoom) annotation(Line(points = {{23, 0}, {23, 29}, {30.04, 29}, {30.04, 29.6}}, color = {191, 0, 0}));
-  connect(temperatureSensor.T, Troom) annotation(Line(points = {{23, -10}, {100, -10}}, color = {0, 0, 127}));
+  connect(temperatureSensor.T, TRoom) annotation(Line(points = {{23, -10}, {100, -10}}, color = {0, 0, 127}));
   connect(tank.ports[1],Pump. port_a) annotation (Line(
       points={{-106,-25},{-100,-25},{-100,-26},{-92,-26}},
       color={0,127,255}));
