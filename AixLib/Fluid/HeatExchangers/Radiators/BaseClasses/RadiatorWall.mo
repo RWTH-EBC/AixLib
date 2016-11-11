@@ -1,16 +1,16 @@
 within AixLib.Fluid.HeatExchangers.Radiators.BaseClasses;
 class RadiatorWall "Simple one layer wall"
 
-  parameter Modelica.SIunits.Thickness d=0.025 "Thickness"
+  parameter Modelica.SIunits.Thickness d "Thickness"
     annotation (Dialog(group="Structure"));
-  parameter Modelica.SIunits.ThermalConductivity lambda=2.4
+  parameter Modelica.SIunits.ThermalConductivity lambda
     "Thermal conductivity" annotation (Dialog(group="Structure"));
   parameter Modelica.SIunits.HeatCapacity C "heat capacity of radiator wall";
-  parameter Modelica.SIunits.SpecificHeatCapacity c=1000
+  parameter Modelica.SIunits.SpecificHeatCapacity c
     "Specific heat capacity" annotation (Dialog(group="Structure"));
-  parameter Modelica.SIunits.Temperature T0=Modelica.SIunits.Conversions.from_degC(16)
+  parameter Modelica.SIunits.Temperature T0
     "Initial temperature" annotation (Dialog(group="Thermal"));
-  parameter Modelica.SIunits.Area A=0.8 "Area of radiator surface";
+  parameter Modelica.SIunits.Area A "Area of radiator surface";
   parameter Modelica.SIunits.ThermalConductance G=lambda*A/d;
 
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(

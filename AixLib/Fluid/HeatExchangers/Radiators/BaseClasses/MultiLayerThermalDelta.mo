@@ -1,13 +1,12 @@
 within AixLib.Fluid.HeatExchangers.Radiators.BaseClasses;
 model MultiLayerThermalDelta "multi layers of heat exchanger"
 
-  import AixLib;
   import calcT =
     AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp;
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
-  parameter Modelica.SIunits.Mass M_Radiator=20;
+  parameter Modelica.SIunits.Mass M_Radiator "mass of radiator";
   parameter calcT.Temp calc_dT
     "select calculation method of excess temperature";
   parameter
@@ -15,7 +14,7 @@ model MultiLayerThermalDelta "multi layers of heat exchanger"
     Type=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.RadiatorTypes.PanelRadiator10
     "Type of radiator" annotation (choicesAllMatching=true, Dialog(tab=
           "Geometry and Material", group="Geometry"));
-  parameter Real n=1.3
+  parameter Real n=1.3 "Radiator exponent"
 annotation (Dialog(tab="Geometry and Material", group="Geometry"));
 
   parameter Modelica.SIunits.Density DensitySteel=DensitySteel
@@ -29,19 +28,19 @@ annotation (Dialog(tab="Geometry and Material", group="Geometry"));
     annotation (Dialog(tab="Geometry and Material", group="Material"));
     parameter Modelica.SIunits.Length length=1.05 "Length of radiator, in m"
     annotation (Dialog(tab="Geometry and Material", group="Geometry"));
-  parameter Modelica.SIunits.Temperature T0=Modelica.SIunits.Conversions.from_degC(55)
-    "Initial temperature, in Kelvin"
+  parameter Modelica.SIunits.Temperature T0
+    "Initial temperature"
     annotation (Dialog(group="Miscellaneous"));
-  parameter Modelica.SIunits.Volume Vol_Water=0.0001;
-  parameter Real s_eff=Type[1];
-  parameter Real Q_dot_nom_i=100 "nominal power of single layer";
-  parameter Real dT_nom=50 "Nominal access temperature";
-  parameter Real delta_nom=50 "Nominal Radiation temperature";
-  parameter Modelica.SIunits.Emissivity eps=0.95 "Emissivity";
-  parameter Modelica.SIunits.Area A=1 "area of radiator layer";
-  parameter Modelica.SIunits.Length d=0.025 "Thickness of radiator wall";
+  parameter Modelica.SIunits.Volume Vol_Water "Water volume inside layer";
+  parameter Real s_eff=Type[1] "radiative coefficient";
+  parameter Real Q_dot_nom_i "nominal power of single layer";
+  parameter Real dT_nom "Nominal access temperature";
+  parameter Real delta_nom "Nominal Radiation temperature";
+  parameter Modelica.SIunits.Emissivity eps "Emissivity";
+  parameter Modelica.SIunits.Area A "area of radiator layer";
+  parameter Modelica.SIunits.Length d "Thickness of radiator wall";
 
-  Modelica.SIunits.Temperature Tin;
+  Modelica.SIunits.Temperature TIn;
   Modelica.SIunits.Temperature Tout;
   Modelica.SIunits.Temperature Trad;
   Modelica.SIunits.Temperature Tair;
@@ -99,13 +98,13 @@ annotation (Dialog(tab="Geometry and Material", group="Geometry"));
     annotation (Placement(transformation(extent={{50,-38},{70,-18}})));
 equation
  // Calculation of excess temperature
-Tin=temperatureIn.T;
+TIn=temperatureIn.T;
 Tout=temperatureOut.T;
 Tair=Convective.T;
 Trad=Radiative.T;
 
 // calculation of excess temperature
-dT_V=Tin - Tair;
+dT_V=TIn - Tair;
 dT_R=Tout - Tair;
 
   connect(port_a, temperatureIn.port_a) annotation (Line(
@@ -233,7 +232,7 @@ dT_R=Tout - Tair;
           lineColor={0,0,0},
           lineThickness=0.5,
           textString=
-               "Tin"),
+               "TIn"),
         Text(
           extent={{-52,-86},{-68,-74}},
           lineColor={0,0,0},

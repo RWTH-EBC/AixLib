@@ -1,10 +1,10 @@
 within AixLib.Fluid.HeatExchangers.Radiators.BaseClasses;
 model HeatConvRadiator
 
-  parameter Real n=1.3 "Radiator exponent";
-  parameter Real NominalPower=2000 "nominal power of radiator";
-  parameter Real s_eff=0.3 "fraction of radiation power";
-  parameter Real dT_nom=Modelica.SIunits.Conversions.from_degC(50);
+  parameter Real n "Radiator exponent";
+  parameter Real NominalPower "nominal power of radiator";
+  parameter Real s_eff "fraction of radiation power";
+  parameter Real dT_nom= "nominal temperature difference";
 
 // protected
   parameter Real kA=(1-s_eff)*NominalPower/dT_nom^n;
