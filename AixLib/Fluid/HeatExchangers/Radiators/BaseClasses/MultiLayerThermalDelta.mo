@@ -26,7 +26,7 @@ annotation (Dialog(tab="Geometry and Material", group="Geometry"));
   parameter Modelica.SIunits.ThermalConductivity LambdaSteel=LambdaSteel
     "Thermal conductivity of steel, in W/mK"
     annotation (Dialog(tab="Geometry and Material", group="Material"));
-    parameter Modelica.SIunits.Length length=1.05 "Length of radiator, in m"
+    parameter Modelica.SIunits.Length length "Length of radiator, in m"
     annotation (Dialog(tab="Geometry and Material", group="Geometry"));
   parameter Modelica.SIunits.Temperature T0
     "Initial temperature"
