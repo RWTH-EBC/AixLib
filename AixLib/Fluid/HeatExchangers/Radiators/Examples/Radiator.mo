@@ -1,6 +1,5 @@
 within AixLib.Fluid.HeatExchangers.Radiators.Examples;
 model Radiator "Example for EBC radiator"
-  import AixLib;
   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Water "Medium model";
   Sources.MassFlowSource_T source(redeclare package Medium = Medium,
@@ -10,7 +9,7 @@ model Radiator "Example for EBC radiator"
   Sources.FixedBoundary sink(redeclare package Medium = Medium,
   nPorts=1)
     annotation (Placement(transformation(extent={{98,-10},{78,10}})));
-  AixLib.Fluid.HeatExchangers.Radiators.Radiator radiator_ML_EBC(
+  AixLib.Fluid.HeatExchangers.Radiators.Radiator radiator(
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     selectable=true,
@@ -34,15 +33,15 @@ model Radiator "Example for EBC radiator"
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature radTemp(T=293.15)
     annotation (Placement(transformation(extent={{30,42},{10,62}})));
 equation
-  connect(radiator_ML_EBC.port_b, res.port_a)
+  connect(radiator.port_b, res.port_a)
     annotation (Line(points={{10,0},{10,0},{46,0}}, color={0,127,255}));
   connect(res.port_b, sink.ports[1])
     annotation (Line(points={{66,0},{66,0},{78,0}}, color={0,127,255}));
-  connect(radTemp.port, radiator_ML_EBC.RadiativeHeat)
+  connect(radTemp.port, radiator.RadiativeHeat)
     annotation (Line(points={{10,52},{8,52},{8,2},{4,2}}, color={191,0,0}));
-  connect(convTemp.port, radiator_ML_EBC.ConvectiveHeat) annotation (Line(
+  connect(convTemp.port, radiator.ConvectiveHeat) annotation (Line(
         points={{-10,52},{-6,52},{-6,2},{-2,2}}, color={191,0,0}));
-  connect(source.ports[1], radiator_ML_EBC.port_a)
+  connect(source.ports[1], radiator.port_a)
     annotation (Line(points={{-50,2},{-50,0},{-10,0}}, color={0,127,255}));
   annotation (experiment(StopTime=86400, Interval=600),
       __Dymola_experimentSetupOutput);
