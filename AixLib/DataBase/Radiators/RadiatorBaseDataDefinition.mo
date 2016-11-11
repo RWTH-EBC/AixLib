@@ -6,7 +6,7 @@ record RadiatorBaseDataDefinition "Base Data Definition for Radiators"
     annotation (Dialog(group="Geometry"));
   parameter Modelica.SIunits.Temperature RT_nom[3]
     "nominal temperatures (Tin, Tout, Tair) according to DIN-EN 442." annotation (Dialog(group="Geometry"));
-  parameter Modelica.SIunits.Pressure PressureDrop 
+  parameter Modelica.SIunits.Pressure PressureDrop
     "Pressure drop coefficient, delta_p[Pa] = PD*m_flow[kg/s]^2";
   parameter Real Exponent=1.29 annotation (Dialog(group="Geometry"));
   parameter Real VolumeWater(unit="l/m")
@@ -15,13 +15,13 @@ record RadiatorBaseDataDefinition "Base Data Definition for Radiators"
  parameter Real MassSteel(unit="kg/m")
     "Material mass of radiator per m"
     annotation (Dialog(group="Geometry"));
-parameter Modelica.SIunits.Density DensitySteel
+parameter Modelica.SIunits.Density DensitySteel=7900
     "Specific density of steel"
     annotation (Dialog(group="Material"));
-  parameter Modelica.SIunits.SpecificHeatCapacity CapacitySteel
+  parameter Modelica.SIunits.SpecificHeatCapacity CapacitySteel=551
     "Specific heat capacity of steel"
     annotation (Dialog(group="Material"));
-  parameter Modelica.SIunits.ThermalConductivity LambdaSteel
+  parameter Modelica.SIunits.ThermalConductivity LambdaSteel=60
     "Thermal conductivity of steel"
     annotation (Dialog(group="Material"));
   parameter
