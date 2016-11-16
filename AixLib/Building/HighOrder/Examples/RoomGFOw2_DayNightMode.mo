@@ -42,7 +42,10 @@ model RoomGFOw2_DayNightMode
   AixLib.Fluid.HeatExchangers.Radiators.Radiator radiator_ML_delta(
     redeclare package Medium = Medium,
     m_flow_nominal=0.01,
-    selectable=true)                                                                                                         annotation(Placement(transformation(extent = {{54, -36}, {74, -16}})));
+    selectable=true,
+    radiatorType=
+        AixLib.DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom())
+                                                                                                                             annotation(Placement(transformation(extent = {{54, -36}, {74, -16}})));
   Modelica.Blocks.Sources.Constant Tset_flowTemperature(k = 273.15 + 55) annotation(Placement(transformation(extent = {{-72, -6}, {-62, 4}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor annotation(Placement(transformation(extent = {{-5, -5}, {5, 5}}, rotation = 270, origin = {23, -5})));
   Modelica.Blocks.Interfaces.RealOutput TRoom
