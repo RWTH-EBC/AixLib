@@ -32,7 +32,10 @@ model PumpRadiatorValve
     annotation (Placement(transformation(extent={{30,10},{50,30}})));
   AixLib.Fluid.HeatExchangers.Radiators.Radiator radiator(
     redeclare package Medium = Medium,
-    m_flow_nominal=0.01)
+    m_flow_nominal=0.01,
+    selectable=true,
+    radiatorType=
+        AixLib.DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Kitchen())
     annotation (Placement(transformation(extent={{112,10},{134,30}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature AirTemp annotation(Placement(transformation(extent = {{100, 58}, {112, 70}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature RadTemp annotation(Placement(transformation(extent = {{148, 58}, {136, 70}})));
