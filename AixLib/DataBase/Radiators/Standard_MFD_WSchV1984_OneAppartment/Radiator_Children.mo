@@ -3,7 +3,7 @@ record Radiator_Children
   "ThermX2, Profil V (Kermi) Power=882W, L=1600, H=300, Typ=11, {75,65,20}"
   extends AixLib.DataBase.Radiators.RadiatorBaseDataDefinition(
     NominalPower=551,
-    RT_nom={348.15,338.15,293.15},,
+    RT_nom={348.15,338.15,293.15},
     PressureDrop=583330,
     Exponent=1.2196,
     VolumeWater=1.80,
