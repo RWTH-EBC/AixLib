@@ -7,8 +7,7 @@ model Radiator "radiator multilayer model"
 
   // parameter Real kv=.1;
  parameter Boolean selectable=false "Radiator record" annotation(Dialog(group="Radiator Data"));
-  parameter AixLib.DataBase.Radiators.RadiatorBaseDataDefinition radiatorType=
-      AixLib.DataBase.Radiators.RadiatorBaseDataDefinition()
+  parameter AixLib.DataBase.Radiators.RadiatorBaseDataDefinition radiatorType
     "choose a radiator" annotation (Dialog(group="Radiator Data", enable=
           selectable), choicesAllMatching=true);
   parameter

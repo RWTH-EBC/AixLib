@@ -21,7 +21,11 @@ model Radiator "Example for EBC radiator"
         VolumeWater=3.6,
         MassSteel=17.01,
         length=2.6,
-        height=0.3),
+        height=0.3,
+        DensitySteel=7900,
+        CapacitySteel=551,
+        LambdaSteel=60,
+        Type=BaseClasses.RadiatorTypes.PanelRadiator10),
     calc_dT=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp.exp)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   FixedResistances.FixedResistanceDpM res(redeclare package Medium = Medium,

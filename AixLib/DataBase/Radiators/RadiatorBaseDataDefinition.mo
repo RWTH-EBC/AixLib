@@ -8,25 +8,25 @@ record RadiatorBaseDataDefinition "Base Data Definition for Radiators"
     "nominal temperatures (Tin, Tout, Tair) according to DIN-EN 442." annotation (Dialog(group="Geometry"));
   parameter Modelica.SIunits.Pressure PressureDrop
     "Pressure drop coefficient, delta_p[Pa] = PD*m_flow[kg/s]^2";
-  parameter Real Exponent=1.29 annotation (Dialog(group="Geometry"));
+  parameter Real Exponent annotation (Dialog(group="Geometry"));
   parameter Real VolumeWater(unit="l/m")
     "Water volume inside radiator per m"
     annotation (Dialog(group="Geometry"));
  parameter Real MassSteel(unit="kg/m")
     "Material mass of radiator per m"
     annotation (Dialog(group="Geometry"));
-parameter Modelica.SIunits.Density DensitySteel=7900
+parameter Modelica.SIunits.Density DensitySteel
     "Specific density of steel"
     annotation (Dialog(group="Material"));
-  parameter Modelica.SIunits.SpecificHeatCapacity CapacitySteel=551
+  parameter Modelica.SIunits.SpecificHeatCapacity CapacitySteel
     "Specific heat capacity of steel"
     annotation (Dialog(group="Material"));
-  parameter Modelica.SIunits.ThermalConductivity LambdaSteel=60
+  parameter Modelica.SIunits.ThermalConductivity LambdaSteel
     "Thermal conductivity of steel"
     annotation (Dialog(group="Material"));
   parameter
     AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.RadiatorTypes.RadiatorType
-                                                                     Type=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.RadiatorTypes.PanelRadiator10
+                                                                     Type
     "Type of radiator"
     annotation (Dialog(group="Geometry"));
   parameter Modelica.SIunits.Length length "length of radiator";
