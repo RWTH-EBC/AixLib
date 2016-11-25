@@ -15,13 +15,13 @@ record RadiatorBaseDataDefinition "Base Data Definition for Radiators"
  parameter Real MassSteel(unit="kg/m")
     "Material mass of radiator per m"
     annotation (Dialog(group="Geometry"));
-parameter Modelica.SIunits.Density DensitySteel
+parameter Modelica.SIunits.Density DensitySteel=7900
     "Specific density of steel"
     annotation (Dialog(group="Material"));
-  parameter Modelica.SIunits.SpecificHeatCapacity CapacitySteel
+  parameter Modelica.SIunits.SpecificHeatCapacity CapacitySteel=551
     "Specific heat capacity of steel"
     annotation (Dialog(group="Material"));
-  parameter Modelica.SIunits.ThermalConductivity LambdaSteel
+  parameter Modelica.SIunits.ThermalConductivity LambdaSteel=60
     "Thermal conductivity of steel"
     annotation (Dialog(group="Material"));
   parameter
