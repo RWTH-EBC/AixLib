@@ -14,7 +14,7 @@ model MultiLayerThermalDelta "multi layers of heat exchanger"
     Type
     "Type of radiator" annotation (choicesAllMatching=true, Dialog(tab=
           "Geometry and Material", group="Geometry"));
-  parameter Real n= "Radiator exponent"
+  parameter Real n "Radiator exponent"
 annotation (Dialog(tab="Geometry and Material", group="Geometry"));
 
   parameter Modelica.SIunits.Density DensitySteel=DensitySteel
