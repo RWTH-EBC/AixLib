@@ -5,7 +5,7 @@ class RadiatorWall "Simple one layer wall"
     annotation (Dialog(group="Structure"));
   parameter Modelica.SIunits.ThermalConductivity lambda
     "Thermal conductivity" annotation (Dialog(group="Structure"));
-  parameter Modelica.SIunits.HeatCapacity C "heat capacity of radiator wall";
+  parameter Modelica.SIunits.HeatCapacity C "Heat capacity of radiator wall";
   parameter Modelica.SIunits.SpecificHeatCapacity c
     "Specific heat capacity" annotation (Dialog(group="Structure"));
   parameter Modelica.SIunits.Temperature T0

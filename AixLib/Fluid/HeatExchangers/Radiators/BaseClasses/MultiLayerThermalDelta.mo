@@ -6,9 +6,9 @@ model MultiLayerThermalDelta "multi layers of heat exchanger"
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
-  parameter Modelica.SIunits.Mass M_Radiator "mass of radiator";
+  parameter Modelica.SIunits.Mass M_Radiator "Mass of radiator";
   parameter calcT.Temp calc_dT
-    "select calculation method of excess temperature";
+    "Select calculation method of excess temperature";
   parameter
     AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.RadiatorTypes.RadiatorType
     Type
@@ -32,12 +32,12 @@ annotation (Dialog(tab="Geometry and Material", group="Geometry"));
     "Initial temperature"
     annotation (Dialog(group="Miscellaneous"));
   parameter Modelica.SIunits.Volume Vol_Water "Water volume inside layer";
-  parameter Real s_eff=Type[1] "radiative coefficient";
-  parameter Real Q_dot_nom_i "nominal power of single layer";
+  parameter Real s_eff=Type[1] "Radiative coefficient";
+  parameter Real Q_dot_nom_i "Nominal power of single layer";
   parameter Real dT_nom "Nominal access temperature";
   parameter Real delta_nom "Nominal Radiation temperature";
   parameter Modelica.SIunits.Emissivity eps "Emissivity";
-  parameter Modelica.SIunits.Area A "area of radiator layer";
+  parameter Modelica.SIunits.Area A "Area of radiator layer";
   parameter Modelica.SIunits.Length d "Thickness of radiator wall";
 
   Modelica.SIunits.Temperature TIn;
@@ -103,7 +103,7 @@ TOut=temperatureOut.T;
 TAir=convective.T;
 TRad=radiative.T;
 
-// calculation of excess temperature
+// Calculation of excess temperature
 dT_V=TIn - TAir;
 dT_R=TOut - TAir;
 

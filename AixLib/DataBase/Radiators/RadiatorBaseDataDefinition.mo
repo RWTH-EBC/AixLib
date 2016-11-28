@@ -5,7 +5,7 @@ record RadiatorBaseDataDefinition "Base Data Definition for Radiators"
     "Nominal power of radiator per m at nominal temperatures"
     annotation (Dialog(group="Geometry"));
   parameter Modelica.SIunits.Temperature RT_nom[3]
-    "nominal temperatures (Tin, Tout, Tair) according to DIN-EN 442." annotation (Dialog(group="Geometry"));
+    "Nominal temperatures (Tin, Tout, Tair) according to DIN-EN 442." annotation (Dialog(group="Geometry"));
   parameter Modelica.SIunits.Pressure PressureDrop
     "Pressure drop coefficient, delta_p[Pa] = PD*m_flow[kg/s]^2";
   parameter Real Exponent annotation (Dialog(group="Geometry"));
@@ -29,8 +29,8 @@ parameter Modelica.SIunits.Density DensitySteel=7900
                                                                      Type
     "Type of radiator"
     annotation (Dialog(group="Geometry"));
-  parameter Modelica.SIunits.Length length "length of radiator";
-  parameter Modelica.SIunits.Height height "height of radiator";
+  parameter Modelica.SIunits.Length length "Length of radiator";
+  parameter Modelica.SIunits.Height height "Height of radiator";
   annotation (Documentation(info="<html>
 <h4><font color=\"#008000\">Overview</font></h4>
 <p>Basic data set for the definition of various radiator models. Values are described in the given table below. </p>

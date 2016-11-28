@@ -72,13 +72,13 @@ protected
     annotation (Dialog(tab="Geometry and Material", group="Geometry"));
 
   parameter SIunits.Length d1=2*(Vol_Water/Modelica.Constants.pi/length)^0.5
-    "inner diameter of single layer";
+    "Inner diameter of single layer";
   parameter SIunits.Length d2=2*((Vol_Water+Vol_Steel)/Modelica.Constants.pi/length)^0.5
-    "outer diameter of single layer";
+    "Outer diameter of single layer";
   parameter Real dT_V_nom=RT_nom[1]-RT_nom[3];
   parameter Real dT_R_nom=RT_nom[2]-RT_nom[3];
 
-// calculation of convective excess temperature, according to the chosen calculation method
+// Calculation of convective excess temperature, according to the chosen calculation method
 
   parameter Real dT_nom=if calc_dT==calcT.ari then (dT_V_nom+dT_R_nom)/2 else
   if calc_dT==calcT.log then (dT_V_nom-dT_R_nom)/log(dT_V_nom/dT_R_nom) else
