@@ -1,6 +1,6 @@
 within AixLib.FastHVAC.Components.Sensors;
 model TemperatureSensor " Temperature sensor"
-  import FastHVAC;
+
 
   Modelica.Blocks.Interfaces.RealOutput T( final quantity="ThermodynamicTemperature",
                                           final unit = "K", displayUnit = "degC", min=0)

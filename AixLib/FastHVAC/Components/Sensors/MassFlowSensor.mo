@@ -1,6 +1,6 @@
 within AixLib.FastHVAC.Components.Sensors;
 model MassFlowSensor "Mass flow sensor"
-  import FastHVAC;
+
 
   Modelica.Blocks.Interfaces.RealOutput dotm( unit="kg/s")
     "Output value which contains the measured mass flow of the fluid"
@@ -11,17 +11,17 @@ model MassFlowSensor "Mass flow sensor"
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={10,90})));
-  FastHVAC.Interfaces.EnthalpyPort_a enthalpyPort_a "Input connector"
+  Interfaces.EnthalpyPort_a          enthalpyPort_a "Input connector"
     annotation (Placement(transformation(extent={{-100,-12},{-78,10}}),
         iconTransformation(extent={{-100,-12},{-76,10}})));
-  FastHVAC.Interfaces.EnthalpyPort_b enthalpyPort_b "Output connector"
+  Interfaces.EnthalpyPort_b          enthalpyPort_b "Output connector"
     annotation (Placement(transformation(extent={{80,-12},{102,10}}),
         iconTransformation(extent={{78,-12},{102,10}})));
 equation
   dotm = enthalpyPort_a.m_flow;
 
   connect(enthalpyPort_a, enthalpyPort_b) annotation (Line(
-      points={{-89,-1},{-2.5,-1},{-2.5,-1},{91,-1}},
+      points={{-89,-1},{91,-1}},
       color={176,0,0},
       smooth=Smooth.None));
   annotation ( defaultComponentName="massFlowRate",
@@ -52,8 +52,7 @@ equation
           textString="%name",
           lineColor={0,0,255})}),
                              Diagram(coordinateSystem(preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}}),
-                                     graphics),
+          extent={{-100,-100},{100,100}})),
    Documentation(info="<html>
 <p><h4><span style=\"color:#008000\">Overview</span></h4></p>
 <p> Mass flow sensor measures the mass flow rate.</p>

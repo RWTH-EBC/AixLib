@@ -1,6 +1,5 @@
 within AixLib.FastHVAC.BaseClass;
 model EnergyBalance "Base class depicts energy and mass balances"
-  import FastHVAC;
 
   FastHVAC.Interfaces.EnthalpyPort_a enthalpyPort_a
     "Enthalpie input port includes the parameter temperature, specific enthalpy, specific heat capacity and mass flow"

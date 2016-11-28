@@ -1,6 +1,6 @@
 within AixLib.FastHVAC.BaseClass;
 model WorkingFluid
-  import FastHVAC;
+
 
    parameter FastHVAC.Media.BaseClass.MediumSimple medium=
       FastHVAC.Media.WaterSimple()
