@@ -403,7 +403,7 @@ temperature. In the model it is possible to choose between: </p>
 </tr>
 <tr>
 <td><p>exponential heater excess temperature according to [2] </p></td>
-<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Delta_T_exp.png\"/ alt=\"exponential heater excess temperature \" /> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Delta_T_exp.png\" alt=\"exponential heater excess temperature \" /> </p></td>
 <td><p><br/>(9) </p></td>
 </tr>
 <tr>

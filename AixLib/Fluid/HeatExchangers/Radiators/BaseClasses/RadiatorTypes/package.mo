@@ -1,6 +1,6 @@
 within AixLib.Fluid.HeatExchangers.Radiators.BaseClasses;
-package RadiatorTypes 
-        extends Modelica.Icons.Package;
+package RadiatorTypes
+  extends Modelica.Icons.VariantsPackage;
 
   // constants: ratio of radiative power as a fraction of total heat emission (taken from DIN EN 442-2, 2003),
 

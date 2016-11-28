@@ -15,8 +15,6 @@ record Radiator_Children
 <h4><font color=\"#008000\">Overview</font></h4>
 <p>Kermi radiator &quot;Flachheizk&ouml;rper&quot; ThermX2, Profil V </p>
 <p>Delta_T = 75&deg;C - 65&deg;C = 10K</p>
-<h4><font color=\"#008000\">Level of Development</font></h4>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
 <h4><font color=\"#008000\">Concept</font></h4>
 <p><b>Attention</b>: The data for NominalPower, MassSteel and VolumeWater are
 given per 1 meter. </p>

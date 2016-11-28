@@ -21,7 +21,7 @@ equation
 <h4><font color=\"#008000\">Overview</font></h4>
 <p>Calculates the pressure drop in a radiator according to manufacturer data</p>
 <h4><font color=\"#008000\">Concept</font></h4>
-<p>The pressure drop is calculated according to the folowwing equation [1].</p>
+<p>The pressure drop is calculated according to the following equation [1].</p>
 <p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/equation-8xFaklFH.png\" alt=\"Delta_P = K*m_flow^2\"/></p>
 <p>In order to determine <i>K, </i>manufacturer data is used and : </p>
 <p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/PressureDrop.bmp\"/></p>
