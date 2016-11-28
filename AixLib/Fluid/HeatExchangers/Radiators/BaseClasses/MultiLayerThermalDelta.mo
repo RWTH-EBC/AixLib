@@ -6,7 +6,8 @@ model MultiLayerThermalDelta "multi layers of heat exchanger"
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
-  parameter Modelica.SIunits.Mass M_Radiator "Mass of radiator";
+  parameter Modelica.SIunits.Mass M_Radiator
+    "Mass of radiator";
   parameter calcT.Temp calc_dT
     "Select calculation method of excess temperature";
   parameter
@@ -14,9 +15,9 @@ model MultiLayerThermalDelta "multi layers of heat exchanger"
     Type
     "Type of radiator" annotation (choicesAllMatching=true, Dialog(tab=
           "Geometry and Material", group="Geometry"));
-  parameter Real n "Radiator exponent"
-annotation (Dialog(tab="Geometry and Material", group="Geometry"));
-
+  parameter Real n
+    "Radiator exponent"
+    annotation (Dialog(tab="Geometry and Material", group="Geometry"));
   parameter Modelica.SIunits.Density DensitySteel=DensitySteel
     "Specific density of steel, in kg/m3"
     annotation (Dialog(tab="Geometry and Material", group="Material"));
@@ -26,38 +27,41 @@ annotation (Dialog(tab="Geometry and Material", group="Geometry"));
   parameter Modelica.SIunits.ThermalConductivity LambdaSteel=LambdaSteel
     "Thermal conductivity of steel, in W/mK"
     annotation (Dialog(tab="Geometry and Material", group="Material"));
-    parameter Modelica.SIunits.Length length "Length of radiator, in m"
+  parameter Modelica.SIunits.Length length
+    "Length of radiator, in m"
     annotation (Dialog(tab="Geometry and Material", group="Geometry"));
   parameter Modelica.SIunits.Temperature T0
     "Initial temperature"
     annotation (Dialog(group="Miscellaneous"));
-  parameter Modelica.SIunits.Volume Vol_Water "Water volume inside layer";
-  parameter Real s_eff=Type[1] "Radiative coefficient";
-  parameter Real Q_dot_nom_i "Nominal power of single layer";
-  parameter Real dT_nom "Nominal access temperature";
-  parameter Real delta_nom "Nominal Radiation temperature";
-  parameter Modelica.SIunits.Emissivity eps "Emissivity";
-  parameter Modelica.SIunits.Area A "Area of radiator layer";
-  parameter Modelica.SIunits.Length d "Thickness of radiator wall";
-
+  parameter Modelica.SIunits.Volume Vol_Water
+    "Water volume inside layer";
+  parameter Real s_eff=Type[1]
+    "Radiative coefficient";
+  parameter Real Q_dot_nom_i
+    "Nominal power of single layer";
+  parameter Real dT_nom
+    "Nominal access temperature";
+  parameter Real delta_nom
+    "Nominal Radiation temperature";
+  parameter Modelica.SIunits.Emissivity eps
+    "Emissivity";
+  parameter Modelica.SIunits.Area A
+    "Area of radiator layer";
+  parameter Modelica.SIunits.Length d
+    "Thickness of radiator wall";
+  Real dT_V;
+  Real dT_R;
   Modelica.SIunits.Temperature TIn;
   Modelica.SIunits.Temperature TOut;
   Modelica.SIunits.Temperature TRad;
   Modelica.SIunits.Temperature TAir;
-
   AixLib.Utilities.Interfaces.Star radiative annotation (Placement(
         transformation(extent={{22,73},{40,89}}, rotation=0)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convective
     annotation (Placement(transformation(extent={{-48,74},{-32,88}},
           rotation=0)));
-// protected
-  Real dT_V;
-  Real dT_R;
-  // Real dT_R1;
-  // Real dT_R2;
-
-  AixLib.Utilities.HeatTransfer.HeatToStar                        twoStar_RadEx(
-      A=(s_eff*Q_dot_nom_i)/((delta_nom)*Modelica.Constants.sigma*eps), eps=1)
+  AixLib.Utilities.HeatTransfer.HeatToStar twoStar_RadEx(
+    A=(s_eff*Q_dot_nom_i)/((delta_nom)*Modelica.Constants.sigma*eps), eps=1)
     annotation (Placement(transformation(
         origin={41,51},
         extent={{-11,-23},{11,23}},
@@ -81,15 +85,13 @@ annotation (Dialog(tab="Geometry and Material", group="Geometry"));
         origin={-11,20},
         extent={{-8,-31},{8,31}},
         rotation=90)));
-  AixLib.Fluid.MixingVolumes.MixingVolume
-                                      Volume(
+  AixLib.Fluid.MixingVolumes.MixingVolume Volume(
     redeclare package Medium = Medium,
     T_start=T0,
     V=Vol_Water,
     nPorts=2,
     m_flow_nominal=1)
     annotation (Placement(transformation(extent={{-16,-28},{6,-6}})));
-
   AixLib.Fluid.Sensors.TemperatureTwoPort   temperatureIn(redeclare package
       Medium = Medium, m_flow_nominal=m_flow_nominal)
     annotation (Placement(transformation(extent={{-70,-38},{-50,-18}})));
@@ -262,12 +264,14 @@ dT_R=TOut - TAir;
     Documentation(revisions="<html>
 <ul>
 <li><i>October, 2016&nbsp;</i> by Peter Remmen:<br/>Transfer to AixLib.</li>
-<li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
+<li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and
+formatted appropriately</li>
 </ul>
 </html>
 ", info=
     "<html>
 <h4><font color=\"#008000\">Overview</font></h4>
-<p>Model of the multi layers of heat exchanger. From the water flow is the convective and radiative heat output calculated. </p>
+<p>Model of the multi layers of heat exchanger. From the water flow is the
+convective and radiative heat output calculated. </p>
 </html>"));
 end MultiLayerThermalDelta;

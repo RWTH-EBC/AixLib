@@ -5,18 +5,16 @@ model HeatConvRadiator
   parameter Real NominalPower "Nominal power of radiator";
   parameter Real s_eff "Fraction of radiation power";
   parameter Real dT_nom "Nominal temperature difference";
-
-// protected
   parameter Real kA=(1-s_eff)*NominalPower/dT_nom^n;
   Real alpha_t;
   Modelica.SIunits.Conversions.NonSIunits.Temperature_degC posDiff=
-                                noEvent(abs(port_b.T - port_a.T))
+    noEvent(abs(port_b.T - port_a.T))
     "Positive temperature difference";
-
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b
     annotation (Placement(transformation(extent={{84,-10},{104,10}})));
+
 equation
   alpha_t = if noEvent(posDiff <= 5e-12) then 0 else (kA*noEvent(posDiff^(n-1)));
   port_a.Q_flow + port_b.Q_flow = 0;
@@ -62,14 +60,16 @@ equation
     Documentation(info="<html>
 <h4><font color=\"#008000\">Overview</font></h4>
 <p>
-This model represents the convective heat transfer from a radiator to the environment.
+This model represents the convective heat transfer from a radiator to the
+environment.
 </p>
 
 </html>",
       revisions="<html>
 <ul>
 <li><i>October, 2016&nbsp;</i> by Peter Remmen:<br/>Transfer to AixLib.</li>
-<li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
+<li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and
+formatted appropriately</li>
 </ul>
 </html>
 "));

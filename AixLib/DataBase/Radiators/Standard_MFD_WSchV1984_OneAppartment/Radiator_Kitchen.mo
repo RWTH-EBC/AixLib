@@ -18,7 +18,8 @@ record Radiator_Kitchen
 <h4><font color=\"#008000\">Level of Development</font></h4>
 <p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
 <h4><font color=\"#008000\">Concept</font></h4>
-<p><b>Attention</b>: The data for NominalPower, MassSteel and VolumeWater are given per 1 meter. </p>
+<p><b>Attention</b>: The data for NominalPower, MassSteel and VolumeWater are
+given per 1 meter. </p>
 <h4><font color=\"#008000\">References</font></h4>
 <p>Record is used in model <a href=\"HVAC.Components.HeatExchanger.Radiator_ML\">HVAC.Components.HeatExchanger.Radiator_ML</a></p>
 <p>Source:</p>
@@ -30,7 +31,8 @@ record Radiator_Kitchen
 </ul>
 </html>", revisions="<html>
 <ul>
-<li><i>August 13, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
+<li><i>August 13, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation
+appropriately</li>
 <li><i>November 15, 2011</i> by Ana Constantin:<br/>implemented</li>
 </ul>
 </html>"));

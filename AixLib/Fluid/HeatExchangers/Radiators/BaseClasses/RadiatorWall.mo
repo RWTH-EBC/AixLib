@@ -1,36 +1,37 @@
 within AixLib.Fluid.HeatExchangers.Radiators.BaseClasses;
 class RadiatorWall "Simple one layer wall"
 
-  parameter Modelica.SIunits.Thickness d "Thickness"
+  parameter Modelica.SIunits.Thickness d
+    "Thickness"
     annotation (Dialog(group="Structure"));
   parameter Modelica.SIunits.ThermalConductivity lambda
     "Thermal conductivity" annotation (Dialog(group="Structure"));
-  parameter Modelica.SIunits.HeatCapacity C "Heat capacity of radiator wall";
+  parameter Modelica.SIunits.HeatCapacity C
+    "Heat capacity of radiator wall";
   parameter Modelica.SIunits.SpecificHeatCapacity c
     "Specific heat capacity" annotation (Dialog(group="Structure"));
   parameter Modelica.SIunits.Temperature T0
     "Initial temperature" annotation (Dialog(group="Thermal"));
-  parameter Modelica.SIunits.Area A "Area of radiator surface";
+  parameter Modelica.SIunits.Area A
+    "Area of radiator surface";
   parameter Modelica.SIunits.ThermalConductance G=lambda*A/d;
-
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(
-                                                            C=C)
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a
+    annotation (Placement(transformation(extent={{-104,-8},{-84,12}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b
+    annotation (Placement(transformation(extent={{84,-10},{104,10}})));
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(C=C)
     annotation (Placement(transformation(
         origin={-6,-62},
         extent={{-10,-10},{10,10}},
         rotation=180)));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor
-    thermalConductor(                                             G=G/2)
+    thermalConductor(G=G/2)
     annotation (Placement(transformation(extent={{-56,-30},{-36,-10}},
           rotation=0)));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor
-    thermalConductor1(                                             G=G/2)
+    thermalConductor1(G=G/2)
     annotation (Placement(transformation(extent={{32,-30},{52,-10}},
           rotation=0)));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a
-    annotation (Placement(transformation(extent={{-104,-8},{-84,12}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b
-    annotation (Placement(transformation(extent={{84,-10},{104,10}})));
 equation
   connect(port_a, thermalConductor.port_a) annotation (Line(
       points={{-94,2},{-73,2},{-73,-20},{-56,-20}},

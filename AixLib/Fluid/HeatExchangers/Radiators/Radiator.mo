@@ -140,7 +140,8 @@ protected
 
   parameter Real delta_nom=(dT_nom+RT_nom[3])*(dT_nom+RT_nom[3])*
     (dT_nom+RT_nom[3])*(dT_nom+RT_nom[3])-RT_nom[3]*RT_nom[3]*RT_nom[3]*RT_nom[3];
-  parameter SIunits.Power Q_dot_nom_i= length * NominalPower/N;
+  parameter SIunits.Power Q_dot_nom_i= length * NominalPower/N
+    "Nominal heating power per layer";
 
   BaseClasses.MultiLayerThermalDelta multiLayer_HE[N](
     redeclare each package Medium = Medium,

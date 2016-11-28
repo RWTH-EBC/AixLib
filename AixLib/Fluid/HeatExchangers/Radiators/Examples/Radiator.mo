@@ -7,7 +7,8 @@ model Radiator "Example for EBC radiator"
     m_flow=0.02761,
     T=328.15) annotation (Placement(transformation(extent={{-70,-8},{-50,12}})));
   Sources.FixedBoundary sink(redeclare package Medium = Medium,
-  nPorts=1)
+    nPorts=1)
+    "Sink"
     annotation (Placement(transformation(extent={{98,-10},{78,10}})));
   AixLib.Fluid.HeatExchangers.Radiators.Radiator radiator(
     redeclare package Medium = Medium,
@@ -27,14 +28,18 @@ model Radiator "Example for EBC radiator"
         LambdaSteel=60,
         Type=BaseClasses.RadiatorTypes.PanelRadiator10),
     calc_dT=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp.exp)
+    "Radiator"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   FixedResistances.FixedResistanceDpM res(redeclare package Medium = Medium,
     m_flow_nominal=1,
     dp_nominal=100000)
+    "Pipe"
     annotation (Placement(transformation(extent={{46,-10},{66,10}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature convTemp(T=293.15)
+    "Convetive heat"
     annotation (Placement(transformation(extent={{-30,42},{-10,62}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature radTemp(T=293.15)
+    "Radiative heat"
     annotation (Placement(transformation(extent={{30,42},{10,62}})));
 equation
   connect(radiator.port_b, res.port_a)
