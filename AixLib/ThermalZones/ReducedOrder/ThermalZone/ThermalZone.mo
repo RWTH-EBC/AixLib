@@ -38,7 +38,6 @@ model ThermalZone
     choicesAllMatching=true);
   EquivalentAirTemperature.VDI6007WithWindow eqAirTempWall(
     withLongwave=true,
-    aWin=0.03,
     eExt=0.9,
     eWin=0.9,
     final n=zoneParam.nOrientations,
@@ -50,7 +49,8 @@ model ThermalZone
     final alphaWinOut=zoneParam.alphaWinOut,
     final alphaRadWin=zoneParam.alphaRadWin,
     final aExt=zoneParam.aExt,
-    final TGro=zoneParam.TSoil) if (sum(zoneParam.AExt) + sum(zoneParam.AWin)) > 0
+    final TGro=zoneParam.TSoil,
+    aWin=0) if (sum(zoneParam.AExt) + sum(zoneParam.AWin)) > 0
     "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-36,-2},{-16,18}})));
   Modelica.Blocks.Sources.Constant constSunblindWall[zoneParam.nOrientations](
@@ -199,8 +199,8 @@ equation
           -52.01},{94,-52.01},{94,54},{86.2,54}}, color={95,95,95}));
   connect(lights.RadHeat, ROM.intGainsRad) annotation (Line(points={{83,-72.01},
           {94,-72.01},{94,54},{86.2,54}}, color={95,95,95}));
-  connect(eqAirTempWall.TEqAirWin, preTemWin.T) annotation (Line(points={{-15,11.8},
-          {-12,11.8},{-12,24},{-2,24},{-2,28},{-2,28},{-2,29},{0,29},{2.8,29}},
+  connect(eqAirTempWall.TEqAirWin, preTemWin.T) annotation (Line(points={{-15,
+          11.8},{-12,11.8},{-12,24},{-2,24},{-2,28},{-2,29},{0,29},{2.8,29}},
                                                 color={0,0,127}));
   connect(eqAirTempWall.TEqAir, preTemWall.T) annotation (Line(points={{-15,8},
           {2.8,8}},                    color={0,0,127}));
