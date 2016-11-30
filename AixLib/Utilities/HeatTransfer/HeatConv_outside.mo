@@ -2,7 +2,7 @@ within AixLib.Utilities.HeatTransfer;
 model HeatConv_outside
   "Model for heat transfer at outside surfaces. Choice between multiple models"
   extends Modelica.Thermal.HeatTransfer.Interfaces.Element1D;
-  parameter Integer Model = 1 "Model" annotation(Dialog(group = "Computational Models", compact = true, descriptionLabel = true), choices(choice = 1
+  parameter Integer Model = 1 "Model" annotation(Evaluate = true, Dialog(group = "Computational Models", compact = true, descriptionLabel = true), choices(choice = 1
         "DIN 6946",                                                                                                    choice = 2
         "ASHRAE Fundamentals (convective + radiative)",                                                                                                    choice = 3
         "Custom alpha",                                                                                                    radioButtons = true));
@@ -14,19 +14,25 @@ model HeatConv_outside
     "Surface type"                                                                                                     annotation(Dialog(group = "Surface properties", descriptionLabel = true, enable = Model == 2), choicesAllMatching = true);
   // Variables
   Modelica.SIunits.CoefficientOfHeatTransfer alpha;
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort                             annotation(Placement(transformation(extent = {{-102, -82}, {-82, -62}}), iconTransformation(extent = {{-102, -82}, {-82, -62}})));
+  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if   Model==1 or Model ==2                         annotation(Placement(transformation(extent = {{-102, -82}, {-82, -62}}), iconTransformation(extent = {{-102, -82}, {-82, -62}})));
+
+protected
+  Modelica.Blocks.Interfaces.RealInput WindSpeed_internal(unit="m/s");
 equation
   // Main equation of heat transfer
   port_a.Q_flow = alpha*A*(port_a.T - port_b.T);
 
   //Determine alpha
   if Model == 1 then
-    alpha = (4 + 4*WindSpeedPort);
+    alpha = (4 + 4*WindSpeed_internal);
   elseif Model == 2 then
-    alpha = surfaceType.D + surfaceType.E*WindSpeedPort + surfaceType.F*(WindSpeedPort^2);
+    alpha = surfaceType.D + surfaceType.E*WindSpeed_internal + surfaceType.F*(WindSpeed_internal^2);
   else
     alpha = alpha_custom;
+    WindSpeed_internal = 0;
   end if;
+
+  connect(WindSpeedPort, WindSpeed_internal);
   annotation(Icon(graphics={  Rectangle(extent = {{-80, 70}, {80, -90}}, lineColor = {0, 0, 0}), Rectangle(extent = {{0, 70}, {20, -90}}, lineColor = {0, 0, 255},  pattern = LinePattern.None, fillColor = {156, 156, 156},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{20, 70}, {40, -90}}, lineColor = {0, 0, 255},  pattern = LinePattern.None, fillColor = {182, 182, 182},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{40, 70}, {60, -90}}, lineColor = {0, 0, 255},  pattern = LinePattern.None, fillColor = {207, 207, 207},
@@ -73,7 +79,10 @@ alt=\"alpha \"/> (<b>alpha)</b> value </li>
 <p><b><span style=\"color: #008000;\">Example Results</span></b> </p>
 <p><a href=\"AixLib.Utilities.Examples.HeatTransfer_test\">AixLib.Utilities.Examples.HeatTransfer_test</a> </p>
 <p><a href=\"AixLib.Utilities.Examples.HeatConv_outside\">AixLib.Utilities.Examples.HeatConv_outside</a> </p>
-</html>",  revisions = "<html>
+</html>",  revisions="<html>
+ <ul>
+ <li><i>November 16, 2016&nbsp;</i> by Ana Constantin:<br/>Conditioned input WindSpeedPort and introduced protected input WindSpeed_internal</li>
+ </ul>
  <ul>
  <li><i>April 1, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
  </ul>
