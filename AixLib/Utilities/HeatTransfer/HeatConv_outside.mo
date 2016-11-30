@@ -2,7 +2,7 @@ within AixLib.Utilities.HeatTransfer;
 model HeatConv_outside
   "Model for heat transfer at outside surfaces. Choice between multiple models"
   extends Modelica.Thermal.HeatTransfer.Interfaces.Element1D;
-  parameter Integer Model = 1 "Model" annotation(Dialog(group = "Computational Models", compact = true, descriptionLabel = true), choices(choice = 1
+  parameter Integer Model = 1 "Model" annotation(Evaluate = true, Dialog(group = "Computational Models", compact = true, descriptionLabel = true), choices(choice = 1
         "DIN 6946",                                                                                                    choice = 2
         "ASHRAE Fundamentals (convective + radiative)",                                                                                                    choice = 3
         "Custom alpha",                                                                                                    radioButtons = true));
