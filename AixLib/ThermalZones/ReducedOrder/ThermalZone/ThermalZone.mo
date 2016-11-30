@@ -86,7 +86,7 @@ model ThermalZone
     each final outGroCon=true,
     each final lat=zoneParam.lat,
     final azi=zoneParam.aziExtWalls,
-    final til=zoneParam.aziExtWalls)
+    final til=zoneParam.tiltExtWalls)
     "Calculates diffuse solar radiation on titled surface for both directions"
     annotation (Placement(transformation(extent={{-84,10},{-68,26}})));
   BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilWall[zoneParam.nOrientations](
