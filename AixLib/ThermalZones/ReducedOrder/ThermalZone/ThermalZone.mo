@@ -81,7 +81,7 @@ model ThermalZone
         extent={{3,-3},{-3,3}},
         rotation=90,
         origin={-26,95})));
-  BoundaryConditions.SolarIrradiation.DiffusePerez HDifTiWalll[zoneParam.nOrientations](
+  BoundaryConditions.SolarIrradiation.DiffusePerez HDifTilWall[zoneParam.nOrientations](
     each final outSkyCon=true,
     each final outGroCon=true,
     each final lat=zoneParam.lat,
@@ -210,9 +210,9 @@ equation
           -58,39.5},{-58,22},{-55,22}}, color={0,0,127}));
   connect(HDirTilWall.inc, corGDouPan.inc) annotation (Line(points={{-67.2,36.1},
           {-60,36.1},{-60,36},{-56,36},{-56,39.4},{-13.2,39.4}}, color={0,0,127}));
-  connect(HDifTiWalll.H, solRadWall.u2) annotation (Line(points={{-67.2,18},{-60,
+  connect(HDifTilWall.H, solRadWall.u2) annotation (Line(points={{-67.2,18},{-60,
           18},{-60,16},{-55,16}}, color={0,0,127}));
-  connect(HDifTiWalll.HGroDifTil, corGDouPan.HGroDifTil) annotation (Line(
+  connect(HDifTilWall.HGroDifTil, corGDouPan.HGroDifTil) annotation (Line(
         points={{-67.2,13.2},{-62,13.2},{-62,41.8},{-13.2,41.8}}, color={0,0,
           127}));
   connect(solRadWall.y, eqAirTempWall.HSol) annotation (Line(points={{-43.5,19},
@@ -231,7 +231,7 @@ equation
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(HDifTiWalll.HSkyDifTil, corGDouPan.HSkyDifTil) annotation (Line(
+  connect(HDifTilWall.HSkyDifTil, corGDouPan.HSkyDifTil) annotation (Line(
         points={{-67.2,22.8},{-64,22.8},{-64,44.2},{-13.2,44.2}}, color={0,0,
           127}));
   connect(theConWin.solid, ROM.window) annotation (Line(points={{30,29},{32,29},
@@ -277,7 +277,7 @@ equation
   connect(theConRoof.solid, ROM.roof)
     annotation (Line(points={{61,74},{60.8,74},{60.8,63}}, color={191,0,0}));
   for i in 1:zoneParam.nOrientations loop
-    connect(weaBus, HDifTiWalll[i].weaBus) annotation (Line(
+    connect(weaBus,HDifTilWall [i].weaBus) annotation (Line(
         points={{-100,34},{-100,34},{-86,34},{-86,18},{-84,18}},
         color={255,204,51},
         thickness=0.5), Text(
