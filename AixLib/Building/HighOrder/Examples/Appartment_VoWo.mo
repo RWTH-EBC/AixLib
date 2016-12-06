@@ -8,8 +8,8 @@ model Appartment_VoWo "Simulation of 1 apartment "
     "Medium in the system"                                                                             annotation(Dialog(group = "Medium"), choicesAllMatching = true);
   AixLib.Building.HighOrder.House.MFD.BuildingAndEnergySystem.OneAppartment_Radiators VoWoWSchV1984(redeclare
       package Medium =                                                                                                     Medium, fixedHeatFlow3(T_ref = 288.15), fixedHeatFlow5(T_ref = 283.15), fixedHeatFlow16(T_ref = 288.15)) annotation(Placement(transformation(extent = {{-42, -4}, {36, 46}})));
-  AixLib.Fluid.Movers.Pump Pump(redeclare package Medium = Medium, m_flow_small
-      =0.0001) "Pump in heating system"
+  AixLib.Fluid.Movers.Pump Pump(redeclare package Medium = Medium, m_flow_small=
+       0.0001) "Pump in heating system"
     annotation (Placement(transformation(extent={{4,-82},{-16,-62}})));
   AixLib.Fluid.FixedResistances.FixedResistanceDpM
     res1(redeclare package Medium = Medium,
@@ -77,9 +77,10 @@ model Appartment_VoWo "Simulation of 1 apartment "
     dp_nominal=0)
     annotation (Placement(transformation(extent={{-38,-82},{-58,-62}})));
 equation
-  connect(Pump.port_b, boilerTable.port_a) annotation (Line(points={{-16,-72},{
-          -38,-72},{-38,-76},{-44,-76}}, color={0,127,255}));
-  connect(boilerTable.port_b,res1. port_a) annotation(Line(points = {{-64, -76}, {-74, -76}, {-74, -42}, {-30, -42}}, color = {0, 127, 255}));
+  connect(Pump.port_b, hea.port_a) annotation (Line(points={{-16,-72},{-38,-72},
+          {-38,-72},{-38,-72}},          color={0,127,255}));
+  connect(hea.port_b,res1. port_a) annotation(Line(points={{-58,-72},{-74,-72},
+          {-74,-42},{-30,-42}},                                                                               color = {0, 127, 255}));
   connect(res1.port_b, VoWoWSchV1984.Inflow) annotation(Line(points={{-18,-42},
           {-5.12727,-42},{-5.12727,-1.5}},                                                                             color = {0, 127, 255}));
   connect(VoWoWSchV1984.Returnflow, res2.port_a) annotation (Line(points={{3.38182,
@@ -111,10 +112,6 @@ equation
           {54,-86},{29.6,-86},{29.6,-72}}, color={0,127,255}));
   connect(Pump.port_a, tank.ports[2]) annotation (Line(points={{4,-72},{14,-72},
           {14,-84},{26.4,-84},{26.4,-72}}, color={0,127,255}));
-  connect(Pumpe.port_b, hea.port_a) annotation (Line(points={{-16,-72},{-27,-72},
-          {-38,-72}}, color={0,127,255}));
-  connect(hea.port_b, pipe.port_a) annotation (Line(points={{-58,-72},{-68,-72},
-          {-68,-42},{-30,-42}}, color={0,127,255}));
   connect(Source_TseBoiler.y, hea.TSet) annotation (Line(points={{-71.3,-105},{
           -28,-105},{-28,-66},{-36,-66}}, color={0,0,127}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,

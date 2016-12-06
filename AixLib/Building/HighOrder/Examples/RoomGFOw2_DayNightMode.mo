@@ -19,8 +19,6 @@ model RoomGFOw2_DayNightMode
   AixLib.Fluid.Movers.Pump Pump(redeclare package Medium = Medium, m_flow_small=
        0.0001) "Pump in heating system"
                                 annotation(Placement(transformation(extent = {{-92, -36}, {-72, -16}})));
-  AixLib.Fluid.HeatExchangers.Boiler boilerTaktTable(redeclare package Medium =
-        Medium, m_flow_nominal=0.01)                 annotation(Placement(transformation(extent = {{-56, -36}, {-36, -16}})));
   AixLib.Utilities.Sources.NightMode nightMode(dayEnd = 22, dayStart = 6) annotation(Placement(transformation(extent = {{-104, 0}, {-84, 20}})));
   AixLib.Fluid.FixedResistances.FixedResistanceDpM res(
     redeclare package Medium = Medium,
@@ -44,8 +42,7 @@ model RoomGFOw2_DayNightMode
     m_flow_nominal=0.01,
     selectable=true,
     radiatorType=
-        AixLib.DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom())
-                                                                                                                             annotation(Placement(transformation(extent = {{54, -36}, {74, -16}})));
+        AixLib.DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom())                                annotation(Placement(transformation(extent = {{54, -36}, {74, -16}})));
   Modelica.Blocks.Sources.Constant Tset_flowTemperature(k = 273.15 + 55) annotation(Placement(transformation(extent = {{-72, -6}, {-62, 4}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor annotation(Placement(transformation(extent = {{-5, -5}, {5, 5}}, rotation = 270, origin = {23, -5})));
   Modelica.Blocks.Interfaces.RealOutput TRoom
@@ -62,11 +59,10 @@ equation
   connect(room_GF_2OW.thermCeiling, thermCeiling.port) annotation(Line(points = {{50.2, 38.6}, {80, 38.6}, {80, 68}, {82, 68}}, color = {191, 0, 0}));
   connect(room_GF_2OW.thermInsideWall1, thermInsideWall1.port) annotation(Line(points = {{50.2, 27.8}, {80, 27.8}, {80, 44}, {82, 44}}, color = {191, 0, 0}));
   connect(room_GF_2OW.thermInsideWall2, thermInsideWall2.port) annotation(Line(points = {{39.4, 9.8}, {39.4, 0}, {80, 0}, {80, 20}, {82, 20}}, color = {191, 0, 0}));
-  connect(Pump.port_b, boilerTaktTable.port_a) annotation(Line(points = {{-72, -26}, {-56, -26}}, color = {0, 127, 255}));
   connect(res.port_b, heatValve_new.port_a)
     annotation (Line(points={{14,-26},{22,-26}}, color={0,127,255}));
-  connect(boilerTaktTable.port_b, res.port_a)
-    annotation (Line(points={{-36,-26},{-6,-26}}, color={0,127,255}));
+  connect(hea.port_b, res.port_a)
+    annotation (Line(points={{-30,-26},{-6,-26}}, color={0,127,255}));
   connect(heatValve_new.port_b, radiator_ML_delta.port_a) annotation(Line(points={{42,-26},
           {54,-26}},                                                                                         color = {0, 127, 255}));
   connect(radiator_ML_delta.port_b, res2.port_a) annotation (Line(points={{74,-26},
@@ -95,8 +91,7 @@ equation
 
   connect(Pump.port_b, hea.port_a) annotation (Line(points={{-72,-26},{-61,-26},
           {-50,-26}}, color={0,127,255}));
-  connect(hea.port_b, pipe_flow.port_a) annotation (Line(points={{-30,-26},{-18,
-          -26},{-6,-26}}, color={0,127,255}));
+
   connect(Tset_flowTemperature.y, hea.TSet) annotation (Line(points={{-61.5,-1},
           {-58,-1},{-58,-20},{-52,-20}}, color={0,0,127}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,

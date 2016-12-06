@@ -76,7 +76,6 @@ equation
     annotation (Line(points={{-34,20},{-26,20}}, color={0,127,255}));
   connect(hea.TSet, Source_TempSet_Boiler.y) annotation (Line(points={{-28,26},
           {-34,26},{-34,70},{-21,70}}, color={0,0,127}));
-  annotation(Diagram(coordinateSystem(extent={{-100,-100},{160,100}},      preserveAspectRatio=false)),             Icon(coordinateSystem(extent = {{-100, -100}, {160, 100}})), experiment(StopTime = 86400, Interval = 60, __Dymola_Algorithm = "Lsodar"), __Dymola_experimentSetupOutput(events = false), Documentation(info = "<html>
   connect(AirTemp.port, radiator.ConvectiveHeat) annotation (Line(points={{112,
           64},{116,64},{116,22},{120.8,22}}, color={191,0,0}));
   connect(radiator.RadiativeHeat, RadTemp.port) annotation (Line(points={{127.4,
