@@ -15,13 +15,13 @@ model InternalControl
     //Variable
     Real OutputPower;
 public
-  PITemp                                    ControlerHeater(
-    RangeSwitch=false,
+  Controls.Continuous.PITemp                ControlerHeater(
     KR=KR,
     TN=TN,
     h=paramBoiler.Q_nom,
     l=paramBoiler.Q_min,
-    triggeredTrapezoid(rising=RiseTime, falling=RiseTime))
+    triggeredTrapezoid(rising=RiseTime, falling=RiseTime),
+    RangeSwitch=false)
     annotation (Placement(transformation(extent={{-40.5,36},{-24,52.5}})));
   Modelica.Blocks.Interfaces.BooleanInput isOn "On/Off switch for the boiler"
     annotation (Placement(transformation(extent={{-112.5,27},{-87,52.5}}),
@@ -70,6 +70,9 @@ public
       "Temperature of the cold water[K]"   annotation (Placement(transformation(
           extent={{-125,-51.5},{-85,-11.5}}), iconTransformation(extent={{114.5,
             -30},{87,-2.5}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
+    prescribedTemperature "Converts Tflow_hot real input to temperature"
+    annotation (Placement(transformation(extent={{-69,-7.5},{-54,7.5}})));
 equation
 
   if cardinality(isOn) < 2 then
@@ -101,27 +104,23 @@ equation
       points={{15.525,9.75},{19.5,9.75},{19.5,25.8},{20.1,25.8}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(ControlerHeater.set, Tflow_set) annotation (Line(
-      points={{-38.85,51.675},{-38.85,81},{-100.75,81},{-100.75,81.25}},
-      color={0,0,127},
-      smooth=Smooth.None));
   connect(product.y, QflowHeater) annotation (Line(
       points={{30.45,28.5},{76.5,28.5}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(ControlerHeater.isOn, isOn) annotation (Line(
-      points={{-39.675,40.125},{-90.3375,40.125},{-90.3375,39.75},{-99.75,39.75}},
-      color={255,0,255},
-      smooth=Smooth.None));
 
-  connect(Tflow_hot, ControlerHeater.is) annotation (Line(
-      points={{-106.5,0},{-37.5,0},{-37.5,36.825},{-38.025,36.825}},
-      color={0,0,127},
-      smooth=Smooth.None));
+  connect(ControlerHeater.setPoint, Tflow_set) annotation (Line(points={{-38.85,
+          51.675},{-38.85,81.25},{-100.75,81.25}}, color={0,0,127}));
+  connect(ControlerHeater.onOff, isOn) annotation (Line(points={{-39.675,40.125},
+          {-66.3375,40.125},{-66.3375,39.75},{-99.75,39.75}}, color={255,0,255}));
+  connect(Tflow_hot, prescribedTemperature.T) annotation (Line(points={{-106.5,
+          0},{-88.5,0},{-70.5,0}}, color={0,0,127}));
+  connect(prescribedTemperature.port, ControlerHeater.Therm1) annotation (Line(
+        points={{-54,0},{-37.2,0},{-37.2,36.825}}, color={191,0,0}));
   annotation (Diagram(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
-        grid={1.5,1.5}), graphics), Icon(coordinateSystem(
+        grid={1.5,1.5})),           Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
         grid={1.5,1.5}), graphics={Rectangle(

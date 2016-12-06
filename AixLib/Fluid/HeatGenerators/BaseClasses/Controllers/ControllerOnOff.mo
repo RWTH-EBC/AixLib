@@ -69,6 +69,5 @@ info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Swicthes the boiler off if the flow temperature is too high.</p>
 </html>"),
-    experiment,
-    experimentSetupOutput);
+    experiment);
 end ControllerOnOff;

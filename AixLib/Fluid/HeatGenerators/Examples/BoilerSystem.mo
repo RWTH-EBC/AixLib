@@ -27,11 +27,9 @@ model BoilerSystem
         BaseClasses.Controllers.ExternalControl_nightDayHC,
     declination=1.2,
     FA=0,
-    paramHC=
-        DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day25_Night10(),
+    paramHC=DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day25_Night10(),
     RiseTime=0,
-    TN=0.05)
-            annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+    TN=0.05) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
   Modelica.Fluid.Sources.Boundary_pT sink(nPorts=1, redeclare package Medium =
         Media.Specialized.Water.TemperatureDependentDensity)
@@ -78,23 +76,5 @@ Change the inlet water temperature, heat curve or day and night mode to see the 
     experiment(
       StopTime=86400,
       Interval=60,
-      __Dymola_Algorithm="Dassl"),
-    experimentSetupOutput(events=false),
-    Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>Example to test the implementation of the heating curve.</p>
-<h4><span style=\"color:#008000\">Concept</span></h4>
-<p>For validation plot:</p>
-<ul>
-<li>x-Axis: AmbientTemperature.y</li>
-<li>y-Axis: temperatureFlow.T</li>
-</ul>
-<p>Compare to manufacturer data.</p>
-</html>",
-  revisions="<html>
-  <p><ul>
-  <li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Updated to include various conditions and merged with AixLib</li>
-<li><i>June 23, 2011</i> by Ana Constantin:<br/>Implemented</li>
-</ul></p>
-</html>"));
+      __Dymola_Algorithm="Dassl"));
 end BoilerSystem;

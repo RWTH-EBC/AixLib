@@ -17,9 +17,10 @@ model Boiler
 
   parameter
     AixLib.DataBase.Boiler.DayNightMode.HeatingCurvesDayNightBaseDataDefinition
-    paramHC = AixLib.DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day25_Night10()
-    "Parameters for heating curve"
-  annotation (Dialog( group= "Heating curves"), choicesAllMatching = true);
+    paramHC=
+      AixLib.DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day25_Night10
+      () "Parameters for heating curve"
+    annotation (Dialog(group="Heating curves"), choicesAllMatching=true);
 
   parameter Real KR=1 "Gain of Boiler heater" annotation (Dialog(tab = "General", group = "Boiler type"));
   parameter Modelica.SIunits.Time TN=0.1

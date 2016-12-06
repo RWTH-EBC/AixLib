@@ -3,5 +3,4 @@ PIController
 InternalControl
 PartialExternalControl
 ExternalControl_nightDayHC
-PITemp
 ControllerOnOff

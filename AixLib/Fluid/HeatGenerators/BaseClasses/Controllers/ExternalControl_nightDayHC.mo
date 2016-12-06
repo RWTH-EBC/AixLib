@@ -6,9 +6,10 @@ model ExternalControl_nightDayHC
   //Parameters
   parameter
     AixLib.DataBase.Boiler.DayNightMode.HeatingCurvesDayNightBaseDataDefinition
-    paramHC = AixLib.DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day25_Night10()
-    "Parameters for heating curve"
-  annotation (Dialog( group= "Heating curves"), choicesAllMatching = true);
+    paramHC=
+      AixLib.DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day25_Night10
+      () "Parameters for heating curve"
+    annotation (Dialog(group="Heating curves"), choicesAllMatching=true);
 
   parameter Real declination = 1.1 "Declination" annotation (Dialog( group= "Heating curves"));
 
