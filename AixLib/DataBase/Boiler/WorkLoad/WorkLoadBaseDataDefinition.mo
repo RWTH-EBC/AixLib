@@ -7,10 +7,6 @@ record WorkLoadBaseDataDefinition "Efficiency depending on workload"
   annotation (Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Base data definition for efficiency based on the current work load. </p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars3.png\"/></p>
-<h4><span style=\"color:#008000\">References</span></h4>
-<p>Base data definition for record which at this time is not used in any model</p>
 </html>", revisions="<html>
 <p><ul>
 <li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Merged with AixLib</li>

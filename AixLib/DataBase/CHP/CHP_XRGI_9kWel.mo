@@ -22,8 +22,6 @@ record CHP_XRGI_9kWel "Eco Power: mini BHKW XRGI 9 (12-20 kW thermal)"
   annotation (Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>EC Power mini-BHKW XRGI 9 (Natural Gas) </p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <p>The electrical and thermal powers are in kW. The &QUOT;fuel input&QUOT; is in kW. The fuel consumption is in m&sup3;/h.</p>
 <p>The calorific value of natural gas is assumed to be 11.5 kWh/m&sup3; (10 - 12 kWh/m&sup3;). </p>
@@ -110,8 +108,6 @@ record CHP_XRGI_9kWel "Eco Power: mini BHKW XRGI 9 (12-20 kW thermal)"
 <td valign=\"top\"><p>0,53</p></td>
 </tr>
 </table>
-<p><br><h4><span style=\"color:#008000\">References</span></h4></p>
-<p>Record is used with <a href=\"HVAC.Components.HeatGenerators.CHP.CHP\">HVAC.Components.HeatGenerators.CHP.CHP</a></p>
 <p>Source:</p>
 <ul>
 <li>URL: <a href=\"http://www.ecpower.eu/deutsch/xrgi/technische-daten/xrgir-9.html\">www.ecpower.eu/xrgir-9.html</a></li>

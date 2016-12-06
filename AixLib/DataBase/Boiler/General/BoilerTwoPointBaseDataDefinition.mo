@@ -19,10 +19,6 @@ record BoilerTwoPointBaseDataDefinition
 <p>
 Data set definition for real boilers. The Boiler has a two point (on/off) characteristic.
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars3.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
-<p>Base data definition for record used with <a href=\"HVAC.Components.HeatGenerators.Boiler.BoilerWithController\">HVAC.Components.HeatGenerators.Boiler.BoilerWithController</a></p>
 </html>", revisions="<html>
 <ul>
   <li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Merged with AixLib</li>

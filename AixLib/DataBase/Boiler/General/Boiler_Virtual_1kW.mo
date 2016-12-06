@@ -18,7 +18,5 @@ record Boiler_Virtual_1kW "Boiler virtual 1kW"
 <p>
 Virtual boiler with 1 kW power output.
 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars3.png\"/></p>
 </html>"));
 end Boiler_Virtual_1kW;

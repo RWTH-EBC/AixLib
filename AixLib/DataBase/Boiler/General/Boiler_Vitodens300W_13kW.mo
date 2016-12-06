@@ -13,18 +13,13 @@ record Boiler_Vitodens300W_13kW
 <li><i> Mai 03, 2012&nbsp;</i> by Ana Constantin:<br/>implemented.</li>
 </ul></p>
 </html>", info="<html>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
-<p>Record is used with <a href=\"HVAC.Components.HeatGenerators.Boiler.BoilerWithController\">HVAC.Components.HeatGenerators.Boiler.BoilerWithController</a></p>
 <p>Source:</p>
 <p><ul>
 <li>Product: Vitodens 300 W</li>
 <li>Manufacturer: Viessmann</li>
-<li>Borschure: Vitodens 300W; 5/2010</li>
+<li>Broschure: Vitodens 300W; 5/2010</li>
 <li>Efficiency values from Energieberater</li>
 <li>Watervolume and pressure drop from Vitodens 200-F 11kW</li>
-<li>Bibtexkey: ViessmannVitodens300W2010</li>
 </ul></p>
 </html>"));
 end Boiler_Vitodens300W_13kW;

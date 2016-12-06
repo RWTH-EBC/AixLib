@@ -7,14 +7,9 @@ operatingRange={0.2,1});
   annotation (Documentation(info="<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>
 <p>Record for Buderus Logano Plus GB202 condensing boiler. Temperature range: 40/30&deg;C </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
-<p>Record is not currently used in any model.</p>
 <p>Source:</p>
 <p><ul>
 <li>Buderus &QUOT;Planungsunterlage Logano plus GB202&QUOT; p. 20</li>
-<li>BibTexKey: BuderusLoganoPlusGB202</li>
 </ul></p>
 </html>",
       revisions="<html>

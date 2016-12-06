@@ -11,13 +11,6 @@ record CHP_GG_70 "GG 70 : Sokratherm"
   annotation (Documentation(info="<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>
 <p>Sokratherm BHKW GG 70 </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
-<p>Record is used with <a href=\"HVAC.Components.HeatGenerators.CHP.CHP\">HVAC.Components.HeatGenerators.CHP.CHP</a></p>
-<p>Source:</p>
-<p><ul>
-<li>Bibtexkey: SokrathermBHKW </li>
 </ul></p>
 </html>",
         revisions="<html>

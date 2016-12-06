@@ -32,8 +32,6 @@ record CHP_Cleanergy_C9G
   annotation (Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Cleanergy mini-BHKW C9G (low caloric gas) </p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <p>The electrical and thermal powers are in kW. The &QUOT;fuel input&QUOT; is in kW. The fuel consumption is in m&sup3;/h.</p>
 <p>The calorific value of natural gas is assumed to be 11.5 kWh/m&sup3; (10 - 12 kWh/m&sup3;). </p>
@@ -97,8 +95,6 @@ record CHP_Cleanergy_C9G
 </table>
 <p><br><br><b>The CHP engine is not designed for continuous operation at more than 80&percnt; load (7.2 kW).</b> Continuous use at higher load than 80&percnt; decreases the time between services.</p>
 <p>For low methane applications, the C9G LowCal is capped to 120 bar engine pressure being equivalent to 7.2 kW.</p>
-<h4><span style=\"color:#008000\">References</span></h4>
-<p>Record is used with <a href=\"HVAC.Components.HeatGenerators.CHP.CHP\">HVAC.Components.HeatGenerators.CHP.CHP</a></p>
 <p>Source:</p>
 <ul>
 <li>URL: <a href=\"http://www.ecpower.eu/deutsch/xrgi/technische-daten/xrgir-9.html\">www.ecpower.eu/xrgir-9.html</a></li>

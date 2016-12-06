@@ -23,8 +23,6 @@ record Boiler_Vitocrossal200_311kW
          implemented.</li>
 </ul>
 </html>", info="<html>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
 <p><h4><font color=\"#008000\">Concept</font></h4></p>
 <p>3 efficiencies are given in the TechDoc.</p>
 <p><ol>
@@ -39,7 +37,7 @@ record Boiler_Vitocrossal200_311kW
 <p><ul>
 <li>Product: Vitocrossal 200</li>
 <li>Manufacturer: Viessmann</li>
-<li>Borschure: Vitocrossal 200 CM2 Technical Data; 08/2012</li>
+<li>Broschure: Vitocrossal 200 CM2 Technical Data; 08/2012</li>
 <li>URL: http://www.viessmann.ca/content/dam/internet-ca/pdfs/commercial/vitocrossal_200_tdm.pdf</li>
 </ul></p>
 </html>"));
