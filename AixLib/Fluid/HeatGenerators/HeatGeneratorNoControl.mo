@@ -1,9 +1,9 @@
 within AixLib.Fluid.HeatGenerators;
 model HeatGeneratorNoControl
   extends AixLib.Fluid.HeatGenerators.BaseClasses.PartialHeatGenerator(
-      pressureDrop(
-             a=coeffPresLoss),                                         vol(V=V));
+      pressureDrop(a=coeffPresLoss),vol(V=V));
   Modelica.Blocks.Interfaces.RealInput Q_flow
+    "Prescribed heat flow"
     annotation (Placement(transformation(extent={{-100,40},{-60,80}}),
         iconTransformation(extent={{-100,40},{-60,80}})));
   Modelica.Blocks.Interfaces.RealOutput Tcold
@@ -26,9 +26,9 @@ model HeatGeneratorNoControl
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={40,90})));
-  parameter Modelica.SIunits.Volume V=0.002
+  parameter Modelica.SIunits.Volume V
     "Volume of the heat exchanger inside the heat generator";
-  parameter Real coeffPresLoss=1e10 "Pressure loss coefficient of the heat generator";
+  parameter Real coeffPresLoss "Pressure loss coefficient of the heat generator";
 equation
   connect(heater.Q_flow, Q_flow) annotation (Line(points={{-60,-40},{-60,-40},{
           -60,60},{-80,60}},
@@ -44,7 +44,7 @@ equation
         coordinateSystem(preserveAspectRatio=false)),
         Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
-<p>The model uses the <a href=\"HVAC.Components.HeatGenerators.BaseClasses.PartialHeatGenerator\">PartialHeatGenerator</a>
+<p>The model uses the <a href=\"AixLib.Fluid.HeatGenerators.BaseClasses.PartialHeatGenerator\">AixLib.Fluid.HeatGenerators.BaseClasses.PartialHeatGenerator</a>
 in the most simple setup in order either test its functionalities or to use in cases where
 the controller is modelled outside the heat generator.
 </p>

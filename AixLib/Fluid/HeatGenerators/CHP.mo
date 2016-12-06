@@ -1,14 +1,13 @@
 within AixLib.Fluid.HeatGenerators;
 model CHP
   extends AixLib.Fluid.HeatGenerators.BaseClasses.PartialHeatGenerator(
-      pressureDrop(             a=1e10),                               vol(V=param.Vol[
-          1]));
+      pressureDrop(a=1e10),vol(V=param.Vol[1]));
 
   parameter AixLib.DataBase.CHP.CHPBaseDataDefinition
-                                    param= AixLib.DataBase.CHP.CHP_FMB_31_GSK()
+      param "CHP data set"
     annotation (choicesAllMatching=true,Dialog(group="Unit properties"));
 
-  parameter Real MinCapacity = 30 "Minimum allowable working capacity in %"
+  parameter Real MinCapacity "Minimum allowable working capacity in percent"
     annotation(Dialog(group="Unit properties"));
   parameter Boolean ElectricityDriven = false
     "If the CHP is controlled by electricity demand (external table required)"
@@ -40,34 +39,36 @@ model CHP
     TFlowRange=TFlowRange,
     DelayTime=DelayTime,
     DelayUnit=DelayUnit,
-    MinCapacity=MinCapacity)
+    MinCapacity=MinCapacity) "OnOff controller to swicht between the modes"
     annotation (Placement(transformation(extent={{-44,-10},{-24,10}})));
   BaseClasses.Controllers.PIController thControl(
     Kc=Kc,
     Tc=Tc,
-    MinCapacity=MinCapacity)
+    MinCapacity=MinCapacity) "Thermal controller"
     annotation (Placement(transformation(extent={{-10,20},{10,40}})));
   Modelica.Blocks.Math.Min min
-    annotation (Placement(transformation(extent={{20,40},{30,60}},
+    "Determines the min value of both PI controllers"
+    annotation (Placement(transformation(extent={{20,40},{32,52}},
                            rotation=0)));
   Modelica.Blocks.Tables.CombiTable1Ds combiTable1Ds(
     tableName="NoName",
     fileName="NoName",
-    table=param.data_CHP)
-    annotation (Placement(transformation(extent={{40,40},{60,60}}, rotation=0)));
+    table=param.data_CHP) "time table to read CHP performance data"
+    annotation (Placement(transformation(extent={{48,40},{68,60}}, rotation=0)));
   Modelica.Blocks.Continuous.LimPID elControl(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     yMax=100,
     yMin=0,
     y_start=0,
     k=Kc,
-    Ti=Tc)     annotation (Placement(transformation(extent={{-10,60},{10,80}},
+    Ti=Tc) "Electrical controller" annotation (Placement(transformation(extent={{-10,60},{10,80}},
           rotation=0)));
   Modelica.Blocks.Sources.Constant constSetpoint(k=if CtrlStrategy then (param.MaxTFlow)
-         else (param.MaxTReturn))
+ else
+     (param.MaxTReturn)) "Constant setpoint if utilized"
                                 annotation (Placement(transformation(extent={{-86,
             74},{-74,86}}, rotation=0)));
-  Modelica.Blocks.Sources.Constant const(k=MinCapacity + 10)
+  Modelica.Blocks.Sources.Constant const(k=MinCapacity + 10) "Adds safety value on min capacity"
     annotation (Placement(transformation(extent={{-80,-6},{-68,6}},  rotation=
          0)));
   Modelica.Blocks.Logical.Switch ctrlSwitch
@@ -76,16 +77,16 @@ model CHP
       origin={0,0},
       extent={{-10,10},{10,-10}},
       rotation=90)));
-  Modelica.Blocks.Sources.BooleanConstant booleanConstant(k=CtrlStrategy)
+  Modelica.Blocks.Sources.BooleanConstant booleanConstant(k=CtrlStrategy) "Determines control strategy"
     annotation (Placement(transformation(extent={{-26,-54},{-14,-42}},
                                                                      rotation=
          0)));
-  Modelica.Blocks.Math.Gain gain(k=1000)
+  Modelica.Blocks.Math.Gain gain(k=1000) "Conversion factor"
     annotation (Placement(transformation(extent={{60,-36},{48,-24}})));
-  Modelica.Blocks.Sources.Constant ExothermicTemperature(k=1783.4)
-    annotation (Placement(transformation(extent={{44,12},{60,28}})));
+  Modelica.Blocks.Sources.Constant ExothermicTemperature(k=1783.4) "Exothermic temperature"
+    annotation (Placement(transformation(extent={{52,12},{68,28}})));
   Modelica.Blocks.Interfaces.RealInput TSet if          TSet_in
-    "Temperature setpoint [°C]" annotation (Placement(transformation(extent={{-126,76},
+    "Temperature setpoint [degC]" annotation (Placement(transformation(extent={{-126,76},
             {-100,104}},         rotation=0), iconTransformation(extent={{-80,-70},
             {-60,-50}})));
   Modelica.Blocks.Interfaces.RealInput ElSet if           ElectricityDriven
@@ -107,7 +108,7 @@ model CHP
         rotation=-90,
         origin={-29.75,-89.75})));
 public
-  Modelica.Blocks.Interfaces.RealOutput ElectricalPower annotation (Placement(
+  Modelica.Blocks.Interfaces.RealOutput ElectricalPower "Electrical power" annotation (Placement(
         transformation(
         origin={30,90},
         extent={{-10,-10},{10,10}},
@@ -115,7 +116,7 @@ public
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-50,90})));
-  Modelica.Blocks.Interfaces.RealOutput ThermalPower annotation (Placement(
+  Modelica.Blocks.Interfaces.RealOutput ThermalPower "Thermal power" annotation (Placement(
         transformation(
         origin={46,90},
         extent={{-10,-10},{10,10}},
@@ -123,7 +124,7 @@ public
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-20,90})));
-  Modelica.Blocks.Interfaces.RealOutput FuelInput
+  Modelica.Blocks.Interfaces.RealOutput FuelInput "Fuel input"
     annotation (Placement(transformation(
       origin={61,90},
       extent={{-10,-11},{10,11}},
@@ -131,7 +132,7 @@ public
         extent={{-10,-11},{10,11}},
         rotation=90,
         origin={20,90})));
-  Modelica.Blocks.Interfaces.RealOutput FuelConsumption
+  Modelica.Blocks.Interfaces.RealOutput FuelConsumption "Fuel consumption"
     annotation (Placement(transformation(
       origin={76,90},
       extent={{-10,-10},{10,10}},
@@ -170,35 +171,39 @@ equation
     annotation (Line(points={{0,11},{0,11},{0,18}}, color={0,0,127}));
   connect(delayedOnOffController.y, thControl.ON) annotation (Line(points={{-23,
           0},{-20,0},{-20,24},{-12,24}}, color={255,0,255}));
-  connect(elControl.y, min.u1) annotation (Line(points={{11,70},{14,70},{14,56},
-          {19,56}}, color={0,0,127}));
-  connect(thControl.y, min.u2) annotation (Line(points={{11,30},{14,30},{14,44},
-          {19,44}}, color={0,0,127}));
+  connect(elControl.y, min.u1) annotation (Line(points={{11,70},{14,70},{14,49.6},
+          {18.8,49.6}},
+                    color={0,0,127}));
+  connect(thControl.y, min.u2) annotation (Line(points={{11,30},{14,30},{14,42.4},
+          {18.8,42.4}},
+                    color={0,0,127}));
   connect(min.y, combiTable1Ds.u)
-    annotation (Line(points={{30.5,50},{34,50},{38,50}}, color={0,0,127}));
+    annotation (Line(points={{32.6,46},{40,46},{40,50},{46,50}},
+                                                         color={0,0,127}));
   connect(min.y, delayedOnOffController.ControllerOutput) annotation (Line(
-        points={{30.5,50},{34,50},{34,-32},{-50,-32},{-50,-6},{-46,-6}}, color=
+        points={{32.6,46},{40,46},{40,-32},{-46,-32},{-46,-6}},          color=
          {0,0,127}));
-  connect(combiTable1Ds.y[1], ElectricalPower) annotation (Line(points={{61,50},
-          {70,50},{70,68},{30,68},{30,90}}, color={0,0,127}));
+  connect(combiTable1Ds.y[1], ElectricalPower) annotation (Line(points={{69,50},
+          {76,50},{76,68},{30,68},{30,90}}, color={0,0,127}));
   connect(elControl.u_m, ElectricalPower) annotation (Line(points={{0,58},{0,50},
           {12,50},{12,68},{30,68},{30,90}}, color={0,0,127}));
   connect(delayedOnOffController.ExternalON, ON) annotation (Line(points={{-28,
           12},{-28,40},{-114,40}}, color={255,0,255}));
-  connect(combiTable1Ds.y[2], gain.u) annotation (Line(points={{61,50},{70,50},
-          {70,-30},{61.2,-30}}, color={0,0,127}));
+  connect(combiTable1Ds.y[2], gain.u) annotation (Line(points={{69,50},{76,50},{
+          76,-30},{61.2,-30}},  color={0,0,127}));
   connect(gain.y, heater.Q_flow) annotation (Line(points={{47.4,-30},{48,-30},{
           46,-30},{-60,-30},{-60,-40}}, color={0,0,127}));
 
   connect(ExothermicTemperature.y,TSource)  annotation (Line(
-      points={{60.8,20},{80,20},{80,50.875},{108.75,50.875}},
+      points={{68.8,20},{80,20},{80,50.875},{108.75,50.875}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(combiTable1Ds.y[2], ThermalPower) annotation (Line(points={{61,50},{70,
-          50},{70,68},{46,68},{46,90}}, color={0,0,127}));
-  connect(combiTable1Ds.y[3],FuelInput)  annotation (Line(points={{61,50},{70,50},
-          {70,68},{61,68},{61,90}}, color={0,0,127}));
-  connect(combiTable1Ds.y[4],FuelConsumption)  annotation (Line(points={{61,50},{70,50},{70,68},{76,68},{76,90}}, color={0,0,127}));
+  connect(combiTable1Ds.y[2], ThermalPower) annotation (Line(points={{69,50},{76,
+          50},{76,68},{46,68},{46,90}}, color={0,0,127}));
+  connect(combiTable1Ds.y[3],FuelInput)  annotation (Line(points={{69,50},{76,50},
+          {76,68},{61,68},{61,90}}, color={0,0,127}));
+  connect(combiTable1Ds.y[4],FuelConsumption)  annotation (Line(points={{69,50},
+          {76,50},{76,68},{76,90}},                                                                               color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-50,58},{50,18}},
           lineColor={255,255,255},
@@ -250,11 +255,9 @@ equation
 <p>When controlled by heat demand, the CHP is controlled either by flow temperature or by return temperature. When electricity control is activated, an electricity profile needs to be connected to the model. During electricity controlled operation, heat controllers act as emergency systems.</p>
 <p>A complete On/Off controller is implemented which takes charge of the timing of each turning on and off command. For example it can be set that between each on and off command, the CHP needs 300 seconds (set in parameter SD_delay) to be able to execute the other command. During this time a PI controller controls the temperature continuously.</p>
 <p>Minimum possible capacity can be set to prevent the CHP working in lower capacities. If the timing does not allow a shut down at times lower capacities are required, the CHP works on minimum capacity until the shut down is permitted. This can result in the rise of water temperature higher than setpoint and may in some cases result in temperatures higher than boiling point of water.</p>
-<p>The dimension of thermal and electrical power outputs and fuel input as well as the electricity profile should be in kW. The dimmension of fuel consumption depends on the user&apos;s data. </p>
+<p>The dimension of thermal and electrical power outputs and fuel input as well as the electricity profile should be in kW. The dimension of fuel consumption depends on the user&apos;s data. </p>
 <h4><span style=\"color:#008000\">Assumptions</span></h4>
-<p>The combustion temperature T_sorce is at the moment set to a ciosntant value of 1748 K. The value is relevant for exergy analysis.</p>
-<h4><span style=\"color:#008000\">Example Results</span></h4>
-<p><a href=\"HVAC.Examples.CHP.CHP_control\">HVAC.Examples.CHP.CHP_control</a></p>
+<p>The combustion temperature T_sorce is at the moment set to a constant value of 1748 K. The value is relevant for exergy analysis.</p>
 </html>",
 revisions="<html>
 <ul>

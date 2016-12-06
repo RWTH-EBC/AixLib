@@ -18,8 +18,8 @@ model Boiler
   parameter
     AixLib.DataBase.Boiler.DayNightMode.HeatingCurvesDayNightBaseDataDefinition
     paramHC=
-      AixLib.DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day25_Night10
-      () "Parameters for heating curve"
+      AixLib.DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day25_Night10()
+         "Parameters for heating curve"
     annotation (Dialog(group="Heating curves"), choicesAllMatching=true);
 
   parameter Real KR=1 "Gain of Boiler heater" annotation (Dialog(tab = "General", group = "Boiler type"));
@@ -30,9 +30,9 @@ model Boiler
 
   parameter Real declination=1.1 "Declination" annotation(Dialog(tab="External Control"));
   parameter Modelica.SIunits.TemperatureDifference Tdelta_Max=2
-    "difference from set flow temperature over which boiler stops" annotation(Dialog(tab="External Control"));
+    "Difference from set flow temperature over which boiler stops" annotation(Dialog(tab="External Control"));
   parameter Modelica.SIunits.TemperatureDifference Tdelta_Min=2
-    "difference from set flow temperature under which boiler starts" annotation(Dialog(tab="External Control"));
+    "Difference from set flow temperature under which boiler starts" annotation(Dialog(tab="External Control"));
   parameter Modelica.SIunits.Time Fb=3600
     "Period of time for increased set temperature" annotation(Dialog(tab="External Control"));
   parameter Real FA=0.2 "Increment for increased set temperature" annotation(Dialog(tab="External Control"));
@@ -44,14 +44,14 @@ model Boiler
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={50,-90})));
-  Modelica.Blocks.Interfaces.RealInput TAmbient annotation (Placement(
+  Modelica.Blocks.Interfaces.RealInput TAmbient "Ambient air temperature" annotation (Placement(
         transformation(extent={{-100,40},{-60,80}}), iconTransformation(extent=
            {{-80,60},{-60,80}})));
   BaseClasses.Controllers.InternalControl internalControl(paramBoiler=
         paramBoiler,
     KR=KR,
     TN=TN,
-    RiseTime=RiseTime)
+    RiseTime=RiseTime) "Internal control"
     annotation (Placement(transformation(extent={{-50,-10},{-70,10}})));
 
   ExtControl myExternalControl(paramHC=paramHC,
@@ -59,7 +59,8 @@ model Boiler
     Tdelta_Max=Tdelta_Max,
     Tdelta_Min=Tdelta_Min,
     Fb=Fb,
-    FA=FA)                     annotation (Placement(transformation(extent={{-10,38},
+    FA=FA) "External control"
+     annotation (Placement(transformation(extent={{-10,38},
             {10,58}})));
 
   Modelica.Blocks.Interfaces.BooleanInput SwitchToNightMode
@@ -114,7 +115,7 @@ equation
         coordinateSystem(preserveAspectRatio=false)),
         Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
-<p>A boiler model consisting of the internal bioler controler and a replaceable outer controler. 
+<p>A boiler model consisting of the internal boiler controler and a replaceable outer controler. 
 This controler can be chosen to provide the boiler temperature setpoint based on the chosen conditions 
 such as ambient air temperature, etc.
 </p>
