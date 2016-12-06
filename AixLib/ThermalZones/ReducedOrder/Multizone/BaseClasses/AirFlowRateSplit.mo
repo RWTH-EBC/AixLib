@@ -47,7 +47,7 @@ equation
       airFlowVector,
       zoneParam.withAHU,
       dimension);
-  airFlowOut .* zoneParam.VAir = airFlowShare*airFlowIn*3600;
+  airFlowOut .* (zoneParam.VAir+ones(dimension)*0.00001) = airFlowShare*airFlowIn*3600;
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),           Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-100},{100,100}}),

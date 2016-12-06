@@ -212,7 +212,11 @@ initial algorithm
   end for;
   for i in 1:numZones loop
     if zoneParam[i].withAHU then
-      zoneFactor[i,1] :=zoneParam[i].VAir/VAirRes;
+      if VAirRes > 0 then
+        zoneFactor[i,1] :=zoneParam[i].VAir/VAirRes;
+      else
+        zoneFactor[i,1] :=0;
+      end if;
     else
       zoneFactor[i,1] :=0;
     end if;
