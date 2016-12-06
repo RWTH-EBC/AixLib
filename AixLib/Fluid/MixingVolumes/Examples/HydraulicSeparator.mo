@@ -2,7 +2,7 @@ within AixLib.Fluid.MixingVolumes.Examples;
 model HydraulicSeparator
   extends Modelica.Icons.Example;
 
-  package Medium = AixLib.Media.Water "Component media";
+  package Medium = AixLib.Media.Water "Medium model for water";
 
   AixLib.Fluid.MixingVolumes.HydraulicSeparator hydraulicSeparator(DFlange=
         0.01,
@@ -28,20 +28,24 @@ model HydraulicSeparator
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-94,28})));
-  AixLib.Fluid.FixedResistances.Pipe
-                         pipe(D=0.01, l=2,
+  MixingVolume heatSource(
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)
-    annotation (Placement(transformation(extent={{-30,-2},{-10,18}})));
-  AixLib.Fluid.FixedResistances.Pipe
-                         pipe1(D=0.01, l=10,
+    m_flow_small=1e-4,
+    nPorts=2,
+    m_flow_nominal=0.1,
+    V=0.01) "Mixing volume for heat input"
+    annotation (Placement(transformation(extent={{-30,18},{-10,38}})));
+  MixingVolume heatSink(
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)
-    annotation (Placement(transformation(extent={{30,-46},{10,-66}})));
-  AixLib.Fluid.FixedResistances.StaticPipe
-                               staticPipe(D=0.01, l=10,
+    m_flow_small=1e-4,
+    m_flow_nominal=0.1,
+    nPorts=2,
+    V=0.01)   "Mixing volume for heat sink"
+    annotation (Placement(transformation(extent={{12,-74},{32,-94}})));
+  FixedResistances.FixedResistanceDpM res1(
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)
+    m_flow_nominal=0.1,
+    dp_nominal=200) "Hydraulic resistance in primary circuit"
     annotation (Placement(transformation(extent={{-50,-26},{-70,-6}})));
   AixLib.Fluid.Sensors.MassFlowRate  massFlowSensorPrim(redeclare package
       Medium = Medium)
@@ -50,7 +54,9 @@ model HydraulicSeparator
     Q_flow=1.6e3,
     T_ref=343.15,
     alpha=-0.5)
-    annotation (Placement(transformation(extent={{-42,28},{-22,48}})));
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={-36,60})));
   AixLib.Fluid.Movers.Pump
                          pump1(
     ControlStrategy=2,
@@ -63,11 +69,12 @@ model HydraulicSeparator
                                         temperatureMixedTop(redeclare package
       Medium = Medium, m_flow_nominal=1)
     annotation (Placement(transformation(extent={{38,0},{58,20}})));
-  AixLib.Fluid.FixedResistances.StaticPipe
-                               staticPipe1(D=0.01, l=10,
+  FixedResistances.FixedResistanceDpM res2(
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+    m_flow_nominal=0.1,
+    dp_nominal=200) "Hydraulic resistance in secondary circuit" annotation (
+      Placement(transformation(
+        extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={92,-26})));
   AixLib.Fluid.Actuators.Valves.SimpleValve
@@ -83,10 +90,10 @@ model HydraulicSeparator
     annotation (Placement(transformation(extent={{10,-46},{30,-26}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(
       T=273.15+20)
-    annotation (Placement(transformation(extent={{-32,-96},{-12,-76}})));
+    annotation (Placement(transformation(extent={{-80,-94},{-60,-74}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor
     thermalConductor(G=1.6e3/8)
-    annotation (Placement(transformation(extent={{-4,-96},{16,-76}})));
+    annotation (Placement(transformation(extent={{-50,-94},{-30,-74}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression annotation (
      Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -116,37 +123,20 @@ equation
   connect(pump.port_b, massFlowSensorPrim.port_a) annotation (Line(
       points={{-60,8},{-54,8}},
       color={0,127,255}));
-  connect(pipe.port_a, massFlowSensorPrim.port_b) annotation (Line(
-      points={{-30,8},{-34,8}},
-      color={0,127,255}));
-  connect(fixedHeatFlow.port, pipe.heatport) annotation (Line(
-      points={{-22,38},{-20,38},{-20,13}},
-      color={191,0,0}));
   connect(temperatureMixedTop.port_b, pump1.port_a) annotation (Line(
       points={{58,10},{66,10}},
       color={0,127,255}));
-  connect(pump1.port_b, staticPipe1.port_a) annotation (Line(
-      points={{86,10},{92,10},{92,-16}},
-      color={0,127,255}));
-  connect(staticPipe1.port_b, simpleValve.port_a) annotation (Line(
-      points={{92,-36},{92,-64},{70,-64}},
-      color={0,127,255}));
-  connect(simpleValve.port_b, pipe1.port_a) annotation (Line(
-      points={{50,-64},{40,-64},{40,-56},{30,-56}},
-      color={0,127,255}));
-  connect(pipe1.port_b, massFlowSensor1Sec.port_a) annotation (Line(
-      points={{10,-56},{2,-56}},
-      color={0,127,255}));
+  connect(pump1.port_b, res2.port_a)
+    annotation (Line(points={{86,10},{92,10},{92,-16}}, color={0,127,255}));
+  connect(res2.port_b, simpleValve.port_a)
+    annotation (Line(points={{92,-36},{92,-64},{70,-64}}, color={0,127,255}));
   connect(massFlowSensor1Sec.port_b, temperatureBottom.port_a)
     annotation (Line(
       points={{-18,-56},{-28,-56},{-28,-36},{10,-36}},
       color={0,127,255}));
   connect(thermalConductor.port_a, fixedTemperature.port) annotation (
       Line(
-      points={{-4,-86},{-12,-86}},
-      color={191,0,0}));
-  connect(thermalConductor.port_b, pipe1.heatport) annotation (Line(
-      points={{16,-86},{20,-86},{20,-61}},
+      points={{-50,-84},{-60,-84}},
       color={191,0,0}));
   connect(pump1.IsNight, booleanExpression1.y) annotation (Line(
       points={{76,20.2},{76,25}},
@@ -157,18 +147,12 @@ equation
   connect(step.y, simpleValve.opening) annotation (Line(
       points={{69,-32},{76,-32},{76,-56},{60,-56}},
       color={0,0,127}));
-  connect(staticPipe.port_a, temperatureMixedBottom.port_b) annotation (
-      Line(
-      points={{-50,-16},{-28,-16}},
-      color={0,127,255}));
-  connect(staticPipe.port_b, pump.port_a) annotation (Line(
-      points={{-70,-16},{-92,-16},{-92,8},{-80,8}},
-      color={0,127,255}));
+  connect(res1.port_a, temperatureMixedBottom.port_b)
+    annotation (Line(points={{-50,-16},{-28,-16}}, color={0,127,255}));
+  connect(res1.port_b, pump.port_a) annotation (Line(points={{-70,-16},{-92,-16},
+          {-92,8},{-80,8}}, color={0,127,255}));
   connect(boundary_p.ports[1], pump.port_a) annotation (Line(
       points={{-94,18},{-94,10},{-80,10},{-80,8}},
-      color={0,127,255}));
-  connect(pipe.port_b, temperatureTop.port_a) annotation (Line(
-      points={{-10,8},{-10,10},{-8,10}},
       color={0,127,255}));
   connect(temperatureTop.port_b, hydraulicSeparator.port_a_primary) annotation (
      Line(
@@ -186,6 +170,18 @@ equation
     annotation (Line(
       points={{38,-1},{38,-2},{38,-36},{30,-36}},
       color={0,127,255}));
+  connect(massFlowSensorPrim.port_b, heatSource.ports[1])
+    annotation (Line(points={{-34,8},{-22,18}}, color={0,127,255}));
+  connect(heatSource.ports[2], temperatureTop.port_a)
+    annotation (Line(points={{-18,18},{-8,10}}, color={0,127,255}));
+  connect(fixedHeatFlow.port, heatSource.heatPort)
+    annotation (Line(points={{-36,50},{-36,28},{-30,28}}, color={191,0,0}));
+  connect(thermalConductor.port_b, heatSink.heatPort)
+    annotation (Line(points={{-30,-84},{-10,-84},{12,-84}}, color={191,0,0}));
+  connect(massFlowSensor1Sec.port_a, heatSink.ports[1])
+    annotation (Line(points={{2,-56},{18,-56},{20,-74}}, color={0,127,255}));
+  connect(simpleValve.port_b, heatSink.ports[2])
+    annotation (Line(points={{50,-64},{28,-64},{24,-74}}, color={0,127,255}));
   annotation (Documentation(info="<html>
 <p>This model shows the usage of a Hydraulic Separator within a simple heating circuit. The primary circuit consists of a tank, a pump, a boiler (represented by a pipe with prescribed heat-flux), a pipe and some sensors. The secondary circuit consists of a pump, a static pipe, a valve and a radiator (represented by a pipe with heat-transfer to the outside). Between the two circuit lies the Hydraulic Separator. The example shows that the model of the Hydraulic Separator works in consistence with ones expactation. There is mixing of the fluids between bottom and top of the Hydraulic Separator depending on the mass flowrates in the circuits. If the mass-flows are the same and no mass is exchanged between top and bottom, there is still a small amount of heat transported via conduction. </p>
 </html>", revisions="<html>

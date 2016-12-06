@@ -1,8 +1,6 @@
 FixedResistancesExplicit
 FixedResistancesParallel
 FixedResistancesSeries
-Pipe_Validation
-StaticPipe_Validation
 CompareFixedResistances
 PerformanceHydraulicResistance1
 PerformanceHydraulicResistance2

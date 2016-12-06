@@ -23,24 +23,26 @@ model Radiators
   parameter Real zeta_through = 0.6 "zeta through" annotation(Dialog(group = "Hydraulic resistance", descriptionLabel = true));
   parameter Real zeta_bend = 1.0 "zeta bend" annotation(Dialog(group = "Hydraulic resistance", descriptionLabel = true));
   //Radiators
-  parameter AixLib.DataBase.Radiators.RadiatiorBaseDataDefinition Type_Radiator_Livingroom = AixLib.DataBase.Radiators.StandardMFD_WSchV1984_OneAppartment.Livingroom()
+  parameter AixLib.DataBase.Radiators.RadiatorBaseDataDefinition Type_Radiator_Livingroom = AixLib.DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom()
     "Livingroom"                                                                                                     annotation(Dialog(group = "Radiators", descriptionLabel = true));
-  parameter AixLib.DataBase.Radiators.RadiatiorBaseDataDefinition Type_Radiator_Bedroom = AixLib.DataBase.Radiators.StandardMFD_WSchV1984_OneAppartment.Bedroom()
+  parameter AixLib.DataBase.Radiators.RadiatorBaseDataDefinition Type_Radiator_Bedroom = AixLib.DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Bedroom()
     "Bedroom"                                                                                                     annotation(Dialog(group = "Radiators", descriptionLabel = true));
-  parameter AixLib.DataBase.Radiators.RadiatiorBaseDataDefinition Type_Radiator_Children = AixLib.DataBase.Radiators.StandardMFD_WSchV1984_OneAppartment.Children()
+  parameter AixLib.DataBase.Radiators.RadiatorBaseDataDefinition Type_Radiator_Children = AixLib.DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Children()
     "Corridor"                                                                                                     annotation(Dialog(group = "Radiators", descriptionLabel = true));
-  parameter AixLib.DataBase.Radiators.RadiatiorBaseDataDefinition Type_Radiator_Bath = AixLib.DataBase.Radiators.StandardMFD_WSchV1984_OneAppartment.Bathroom() "Bath" annotation(Dialog(group = "Radiators", descriptionLabel = true));
-  parameter AixLib.DataBase.Radiators.RadiatiorBaseDataDefinition Type_Radiator_Kitchen = AixLib.DataBase.Radiators.StandardMFD_WSchV1984_OneAppartment.Kitchen()
+  parameter AixLib.DataBase.Radiators.RadiatorBaseDataDefinition Type_Radiator_Bath = AixLib.DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Bathroom() "Bath" annotation(Dialog(group = "Radiators", descriptionLabel = true));
+  parameter AixLib.DataBase.Radiators.RadiatorBaseDataDefinition Type_Radiator_Kitchen = AixLib.DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Kitchen()
     "Kitchen"                                                                                                     annotation(Dialog(group = "Radiators", descriptionLabel = true));
   Fluid.HeatExchangers.Radiators.Radiator radiatorKi(
-    RadiatorType=Type_Radiator_Kitchen,
+    radiatorType=Type_Radiator_Kitchen,
     m_flow_nominal=0.01,
-    redeclare package Medium = Medium)
+    redeclare package Medium = Medium,
+    selectable=true)
     annotation (Placement(transformation(extent={{-89,-83},{-106,-66}})));
   Fluid.HeatExchangers.Radiators.Radiator radiatorBa(
-    RadiatorType=Type_Radiator_Bath,
+    radiatorType=Type_Radiator_Bath,
     m_flow_nominal=0.01,
-    redeclare package Medium = Medium)
+    redeclare package Medium = Medium,
+    selectable=true)
     annotation (Placement(transformation(extent={{83,-48},{100,-31}})));
   Fluid.Actuators.Valves.ThermostaticValve valveKi(
     Kvs=0.41,
@@ -50,19 +52,22 @@ model Radiators
     dp(start=1000))
     annotation (Placement(transformation(extent={{-67,-82.5},{-82,-66.5}})));
   Fluid.HeatExchangers.Radiators.Radiator radiatorLi(
-    RadiatorType=Type_Radiator_Livingroom,
+    radiatorType=Type_Radiator_Livingroom,
     m_flow_nominal=0.01,
-    redeclare package Medium = Medium)
+    redeclare package Medium = Medium,
+    selectable=true)
     annotation (Placement(transformation(extent={{-95,-5},{-113,13}})));
   Fluid.HeatExchangers.Radiators.Radiator radiatorBr(
-    RadiatorType=Type_Radiator_Bedroom,
+    radiatorType=Type_Radiator_Bedroom,
     m_flow_nominal=0.01,
-    redeclare package Medium = Medium)
+    redeclare package Medium = Medium,
+    selectable=true)
     annotation (Placement(transformation(extent={{78,72},{94,88}})));
   Fluid.HeatExchangers.Radiators.Radiator radiatorCh(
-    RadiatorType=Type_Radiator_Children,
+    radiatorType=Type_Radiator_Children,
     m_flow_nominal=0.01,
-    redeclare package Medium = Medium)
+    redeclare package Medium = Medium,
+    selectable=true)
     annotation (Placement(transformation(extent={{86,33},{101,48}})));
   Fluid.Actuators.Valves.ThermostaticValve valveBa(
     Kvs=0.24,
@@ -92,66 +97,84 @@ model Radiators
     redeclare package Medium = Medium,
     dp(start=1000))
     annotation (Placement(transformation(extent={{49,74},{60,87}})));
-  Fluid.FixedResistances.StaticPipe thStF(D = Diam_Main, l = Length_thSt,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe thStF(
+    diameter = Diam_Main,
+    length = Length_thSt,
     redeclare package Medium = Medium) "through the storage room, flow stream"                        annotation(Placement(transformation(extent = {{57, -85}, {40, -74}})));
-  Fluid.FixedResistances.StaticPipe toKiF(D = Diam_Sec, l = Length_toKi,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe toKiF(
+    diameter = Diam_Sec,
+    length = Length_toKi,
     redeclare package Medium = Medium) "to kitchen, flow stream"                       annotation(Placement(transformation(extent = {{8, -5}, {-8, 5}}, origin = {-49, -74.5})));
-  Fluid.FixedResistances.StaticPipe thStR(D = Diam_Main, l = Length_thSt,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe thStR(
+    diameter = Diam_Main,
+    length = Length_thSt,
     redeclare package Medium = Medium)
     "through the storage room, return stream"                                                           annotation(Placement(transformation(extent = {{40, -102}, {58, -90}})));
-  Fluid.FixedResistances.StaticPipe toKiR(D = Diam_Sec, l = Length_toKi,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe toKiR(
+    diameter = Diam_Sec,
+    length = Length_toKi,
     redeclare package Medium = Medium) "to kitchen, return stream"                       annotation(Placement(transformation(extent = {{-72, -102}, {-56, -90}})));
-  Fluid.FixedResistances.StaticPipe thBathF(D = Diam_Main, l = Length_thBath,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe thBathF(
+    diameter = Diam_Main,
+    length = Length_thBath,
     redeclare package Medium = Medium) "through Bath, flow stream"                            annotation(Placement(transformation(extent = {{8, 4.5}, {-8, -4.5}}, rotation = 270, origin = {-4.5, -62})));
-  Fluid.FixedResistances.StaticPipe thBathR(D = Diam_Main, l = Length_thBath,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe thBathR(
+    diameter = Diam_Main,
+    length = Length_thBath,
     redeclare package Medium = Medium) "through bath, return stream"                            annotation(Placement(transformation(extent = {{8.75, -4.25}, {-8.75, 4.25}}, rotation = 90, origin = {-18.25, -62.75})));
-  Fluid.FixedResistances.StaticPipe thChildren1R(D = Diam_Main, l = Length_thChildren1,
-    m_flow_small=0.0001,
-    redeclare package Medium = Medium) "through chidlren room 1, return stream"                         annotation(Placement(transformation(extent = {{6.5, -5}, {-6.5, 5}}, rotation = 90, origin = {-18, -27.5})));
-  Fluid.FixedResistances.StaticPipe thChildren1F(D = Diam_Main, l = Length_thChildren1,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe thChildren1R(
+    diameter = Diam_Main,
+    length = Length_thChildren1,
+    redeclare package Medium = Medium) "through children room 1, return stream"                         annotation(Placement(transformation(extent = {{6.5, -5}, {-6.5, 5}}, rotation = 90, origin = {-18, -27.5})));
+  Modelica.Fluid.Pipes.StaticPipe thChildren1F(
+    diameter = Diam_Main,
+    length = Length_thChildren1,
     redeclare package Medium = Medium) "through chidlren room 1, flow stream"                                      annotation(Placement(transformation(extent = {{6.5, 5}, {-6.5, -5}}, rotation = 270, origin = {-5, -26.5})));
-  Fluid.FixedResistances.StaticPipe toBathF(D = Diam_Sec, l = Length_toBath,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe toBathF(
+    diameter = Diam_Sec,
+    length = Length_toBath,
     redeclare package Medium = Medium) "to Bath, flow stream"                           annotation(Placement(transformation(extent = {{-8.5, 4.5}, {8.5, -4.5}}, origin = {18.5, -38.5})));
-  Fluid.FixedResistances.StaticPipe toBathR(D = Diam_Sec, l = Length_toBath,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe toBathR(
+    diameter = Diam_Sec,
+    length = Length_toBath,
     redeclare package Medium = Medium) "to bath return stream"                           annotation(Placement(transformation(extent = {{8.5, 4.5}, {-8.5, -4.5}}, origin = {18.5, -49.5})));
   Modelica.Fluid.Interfaces.FluidPort_b RETURN(redeclare package Medium =
         Medium)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"                       annotation(Placement(transformation(extent = {{66, -114}, {86, -94}})));
   Modelica.Fluid.Interfaces.FluidPort_a FLOW(redeclare package Medium = Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"                       annotation(Placement(transformation(extent = {{92, -114}, {112, -94}})));
-  Fluid.FixedResistances.StaticPipe toChildrenF(D = Diam_Sec, l = Length_toChildren,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe toChildrenF(
+    diameter = Diam_Sec,
+    length = Length_toChildren,
     redeclare package Medium = Medium) "to Children, flow stream"                                   annotation(Placement(transformation(extent = {{-8.5, 4.5}, {8.5, -4.5}}, origin = {45.5, 40.5})));
-  Fluid.FixedResistances.StaticPipe toChildrenR(D = Diam_Sec, l = Length_toChildren,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe toChildrenR(
+    diameter = Diam_Sec,
+    length = Length_toChildren,
     redeclare package Medium = Medium) "to Children, return stream"                                   annotation(Placement(transformation(extent = {{7.5, 4.5}, {-7.5, -4.5}}, origin = {47.5, 27})));
-  Fluid.FixedResistances.StaticPipe thChildrenF2(D = Diam_Main, l = Length_thChildren2,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe thChildrenF2(
+    diameter = Diam_Main,
+    length = Length_thChildren2,
     redeclare package Medium = Medium) "through chidlren room, flow stream"                                      annotation(Placement(transformation(extent = {{7, 5}, {-7, -5}}, rotation = 270, origin = {-5, 13})));
-  Fluid.FixedResistances.StaticPipe thChildrenR2(D = Diam_Main, l = Length_thChildren2,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe thChildrenR2(
+    diameter = Diam_Main,
+    length = Length_thChildren2,
     redeclare package Medium = Medium) "through chidlren room, return stream"                                      annotation(Placement(transformation(extent = {{7.5, -5}, {-7.5, 5}}, rotation = 90, origin = {-19, 12.5})));
-  Fluid.FixedResistances.StaticPipe toBedroomF(D = Diam_Sec, l = Length_toBedroom,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe toBedroomF(
+    diameter = Diam_Sec,
+    length = Length_toBedroom,
     redeclare package Medium = Medium) "to Bedroom , flow stream"                                 annotation(Placement(transformation(extent = {{-6.5, 4.5}, {6.5, -4.5}}, origin = {23.5, 80.5})));
-  Fluid.FixedResistances.StaticPipe toBedroomR(D = Diam_Sec, l = Length_toBedroom,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe toBedroomR(
+    diameter = Diam_Sec,
+    length = Length_toBedroom,
     redeclare package Medium = Medium) "to Bedroom, return stream"                                 annotation(Placement(transformation(extent = {{6.5, 4.5}, {-6.5, -4.5}}, origin = {20.5, 66})));
-  Fluid.FixedResistances.StaticPipe toLiF(D = Diam_Sec, l = Length_toLi,
-    m_flow_small=0.0001,
+  Modelica.Fluid.Pipes.StaticPipe toLiF(
+    diameter = Diam_Sec,
+    length = Length_toLi,
     redeclare package Medium = Medium) "to livingroom, flow stream"                       annotation(Placement(transformation(extent = {{6, -4.5}, {-6, 4.5}}, origin = {-47.5, 3})));
-  Fluid.FixedResistances.StaticPipe toLiR(D = Diam_Main, l = Length_toLi,
-    m_flow_small=0.0001,
-    redeclare package Medium = Medium) "to livingroom, return stream"                        annotation(Placement(transformation(extent = {{6.5, -5}, {-6.5, 5}}, rotation = 180, origin = {-88.5, -16.5})));
+  Modelica.Fluid.Pipes.StaticPipe   toLiR(
+    redeclare package Medium = Medium,
+    length=Length_toLi,
+    diameter=Diam_Main)                "to livingroom, return stream"                        annotation(Placement(transformation(extent = {{6.5, -5}, {-6.5, 5}}, rotation = 180, origin = {-88.5, -16.5})));
   AixLib.Utilities.Interfaces.Star
                           radLi
     annotation (Placement(transformation(extent={{-148,38},{-132,55}})));
@@ -320,35 +343,7 @@ equation
   connect(hydResBendRight.port_b, thBathF.port_a) annotation (Line(
       points={{-3.75,-72.5},{-3.75,-70},{-4.5,-70}},
       color={0,127,255}));
-  connect(radiatorKi.radPort, radKi) annotation (Line(
-      points={{-100.9,-67.87},{-100.9,-42},{-137.5,-42}}));
-  connect(radiatorKi.convPort, convKi) annotation (Line(
-      points={{-93.93,-68.04},{-93.93,-58.5},{-138,-58.5}},
-      color={191,0,0}));
-  connect(radiatorBa.convPort, convBa) annotation (Line(
-      points={{87.93,-33.04},{88,-33.04},{88,-33},{119,-33},{119,-50},{138.5,-50}},
-      color={191,0,0}));
 
-  connect(radiatorBa.radPort, radBa) annotation (Line(
-      points={{94.9,-32.87},{94.9,-28},{138,-28}}));
-  connect(radiatorCh.radPort, radCh) annotation (Line(
-      points={{96.5,46.35},{96.5,49},{140,49}}));
-  connect(radiatorCh.convPort, convCh) annotation (Line(
-      points={{90.35,46.2},{90,46.2},{90,46},{113,46},{113,25.5},{138.5,25.5}},
-      color={191,0,0}));
-
-  connect(radiatorBr.convPort, convBe) annotation (Line(
-      points={{82.64,86.08},{82.64,91},{119,91},{119,73},{138,73}},
-      color={191,0,0}));
-  connect(radiatorBr.radPort, radBe) annotation (Line(
-      points={{89.2,86.24},{89.2,97},{137,97}}));
-  connect(radiatorLi.radPort, radLi) annotation (Line(
-      points={{-107.6,11.02},{-107.6,11},{-131,11},{-131,46},{-136,46},{-136,
-          46.5},{-140,46.5}}));
-  connect(radiatorLi.convPort, convLi) annotation (Line(
-      points={{-100.22,10.84},{-100.22,12},{-100,12},{-100,14},{-133,14},{-133,
-          32},{-137,32},{-137,31.5},{-139.5,31.5}},
-      color={191,0,0}));
   connect(toKiR.port_b, thStR.port_a) annotation(Line(points = {{-56, -96}, {40, -96}}, color = {0, 127, 255}, thickness = 0.5));
   connect(thBathR.port_b, thStR.port_a) annotation(Line(points = {{-18.25, -71.5}, {-18.25, -96}, {40, -96}}, color = {0, 127, 255}, thickness = 0.5));
   connect(thChildren1R.port_b, thBathR.port_a) annotation(Line(points = {{-18, -34}, {-18, -54}, {-18.25, -54}}, color = {0, 127, 255}, thickness = 0.5));
@@ -417,6 +412,26 @@ equation
   connect(tempSensorKi.T, valveKi.T_room) annotation (Line(
       points={{-79,-51},{-69.7,-51},{-69.7,-66.66}},
       color={0,0,127}));
+  connect(radiatorLi.RadiativeHeat, radLi) annotation (Line(points={{-107.6,5.8},
+          {-107.6,25.9},{-140,25.9},{-140,46.5}}, color={95,95,95}));
+  connect(radiatorLi.ConvectiveHeat, convLi) annotation (Line(points={{-102.2,
+          5.8},{-120.1,5.8},{-120.1,31.5},{-139.5,31.5}}, color={191,0,0}));
+  connect(radKi, radiatorKi.RadiativeHeat) annotation (Line(points={{-137.5,-42},
+          {-119.75,-42},{-119.75,-72.8},{-100.9,-72.8}}, color={95,95,95}));
+  connect(convKi, radiatorKi.ConvectiveHeat) annotation (Line(points={{-138,
+          -58.5},{-117,-58.5},{-117,-72.8},{-95.8,-72.8}}, color={191,0,0}));
+  connect(radiatorBa.RadiativeHeat, radBa) annotation (Line(points={{94.9,-37.8},
+          {117.45,-37.8},{117.45,-28},{138,-28}}, color={95,95,95}));
+  connect(radiatorBa.ConvectiveHeat, convBa) annotation (Line(points={{89.8,
+          -37.8},{113.9,-37.8},{113.9,-50},{138.5,-50}}, color={191,0,0}));
+  connect(radiatorCh.RadiativeHeat, radCh) annotation (Line(points={{96.5,42},{
+          119,42},{119,49},{140,49}}, color={95,95,95}));
+  connect(radiatorCh.ConvectiveHeat, convCh) annotation (Line(points={{92,42},{
+          115,42},{115,25.5},{138.5,25.5}}, color={191,0,0}));
+  connect(radiatorBr.RadiativeHeat, radBe) annotation (Line(points={{89.2,81.6},
+          {113.1,81.6},{113.1,97},{137,97}}, color={95,95,95}));
+  connect(convBe, radiatorBr.ConvectiveHeat) annotation (Line(points={{138,73},
+          {112,73},{112,81.6},{84.4,81.6}}, color={191,0,0}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-150,
             -100},{150,110}},                                                                           grid = {1, 1}), graphics={  Rectangle(extent = {{1, 100}, {126, 63}},  pattern=LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{4, 58}, {127, 15}},  pattern=LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
@@ -439,8 +454,9 @@ equation
  2- Bedroom
  3 - Children
  4 - Bath
- 5 - Kitchen")}), Documentation(revisions = "<html>
+ 5 - Kitchen")}), Documentation(revisions="<html>
  <ul>
+ <li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe by MSL pipe</li>
  <li><i>June 19, 2014</i> by Ana Constantin:<br/>Implemented</li>
  </ul>
  </html>", info = "<html>

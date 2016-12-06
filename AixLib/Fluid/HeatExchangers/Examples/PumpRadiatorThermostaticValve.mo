@@ -11,14 +11,16 @@ model PumpRadiatorThermostaticValve
              pump(MinMaxCharacteristics = AixLib.DataBase.Pumps.Pump1(), V_flow_max = 2, ControlStrategy = 2, V_flow(fixed = false),
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                                                                                                     annotation(Placement(transformation(extent = {{-54, 10}, {-34, 30}})));
-  AixLib.Fluid.FixedResistances.StaticPipe
-                   pipe(l = 10, D = 0.01,
+  AixLib.Fluid.FixedResistances.FixedResistanceDpM
+                   pipe(
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)                    annotation(Placement(transformation(extent = {{4, 10}, {24, 30}})));
-  AixLib.Fluid.FixedResistances.StaticPipe
-                   pipe1(l = 10, D = 0.01,
+    dp_nominal=200,
+    m_flow_nominal=0.1)                   annotation(Placement(transformation(extent = {{4, 10}, {24, 30}})));
+  AixLib.Fluid.FixedResistances.FixedResistanceDpM
+                   pipe1(
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)                     annotation(Placement(transformation(extent = {{-10, -30}, {-30, -10}})));
+    dp_nominal=200,
+    m_flow_nominal=0.1)                    annotation(Placement(transformation(extent = {{-10, -30}, {-30, -10}})));
   Modelica.Blocks.Sources.BooleanConstant NightSignal(k = false) annotation(Placement(transformation(extent = {{-76, 50}, {-56, 70}})));
   inner AixLib.Utilities.Sources.BaseParameters baseParameters
     annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
@@ -35,9 +37,11 @@ model PumpRadiatorThermostaticValve
     dp(start=20000))
     annotation (Placement(transformation(extent={{32,10},{52,30}})));
   AixLib.Fluid.HeatExchangers.Radiators.Radiator radiator(
-    RadiatorType=AixLib.DataBase.Radiators.ThermX2_ProfilV_979W(),
     redeclare package Medium = Medium,
-    m_flow_nominal=0.01)
+    m_flow_nominal=0.01,
+    selectable=true,
+    radiatorType=
+        AixLib.DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Kitchen())
     annotation (Placement(transformation(extent={{112,10},{134,30}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature AirTemp annotation(Placement(transformation(extent = {{100, 58}, {112, 70}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature RadTemp annotation(Placement(transformation(extent = {{148, 58}, {136, 70}})));
@@ -59,8 +63,6 @@ equation
           112,20}},                                                                               color = {0, 127, 255}));
   connect(radiator.port_b, pipe1.port_a) annotation(Line(points={{134,20},{160,20},
           {160,-20},{-10,-20}},                                                                                      color = {0, 127, 255}));
-  connect(AirTemp.port, radiator.convPort) annotation(Line(points = {{112, 64}, {118.38, 64}, {118.38, 27.6}}, color = {191, 0, 0}));
-  connect(radiator.radPort, RadTemp.port) annotation(Line(points = {{127.4, 27.8}, {127.4, 64}, {136, 64}}, color = {0, 0, 0}));
   connect(Source_Temp.y, AirTemp.T) annotation(Line(points = {{77, 90}, {98.8, 90}, {98.8, 64}}, color = {0, 0, 127}));
   connect(Source_Temp.y, RadTemp.T) annotation(Line(points = {{77, 90}, {150, 90}, {150, 64}, {149.2, 64}}, color = {0, 0, 127}));
   connect(Source_Temp.y, simpleValve.T_room) annotation(Line(points = {{77, 90}, {80, 90}, {80, 44}, {35.6, 44}, {35.6, 29.8}}, color = {0, 0, 127}));
@@ -75,6 +77,15 @@ equation
   connect(hea.TSet, Source_TempSet_Boiler.y) annotation (Line(points={{-28,26},
           {-34,26},{-34,70},{-21,70}}, color={0,0,127}));
   annotation(Diagram(coordinateSystem(extent={{-100,-100},{160,100}},      preserveAspectRatio=false)),             Icon(coordinateSystem(extent = {{-100, -100}, {160, 100}})), experiment(StopTime = 86400, Interval = 60, __Dymola_Algorithm = "Lsodar"), __Dymola_experimentSetupOutput(events = false), Documentation(info = "<html>
+  connect(AirTemp.port, radiator.ConvectiveHeat) annotation (Line(points={{112,
+          64},{116,64},{116,22},{120.8,22}}, color={191,0,0}));
+  connect(radiator.RadiativeHeat, RadTemp.port) annotation (Line(points={{127.4,
+          22},{132,22},{132,64},{136,64}}, color={95,95,95}));
+  annotation(Diagram(coordinateSystem(extent={{-100,-100},{160,100}},      preserveAspectRatio=false)),             Icon(coordinateSystem(extent = {{-100, -100}, {160, 100}})), experiment(StopTime = 86400, Interval = 60, __Dymola_Algorithm = "Lsodar"), __Dymola_experimentSetupOutput(events = false), Documentation(info = "<html>
  Duplicate of  AixLib.Fluid.HeatExchangers.Radiators.Examples.PumpRadiatorThermostaticValve
+</html>", revisions="<html>
+ <ul>
+ <li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe</li>
+ </ul>
 </html>"));
 end PumpRadiatorThermostaticValve;

@@ -2,19 +2,27 @@ within AixLib.Building.HighOrder.Examples;
 
 
 model Appartment_VoWo "Simulation of 1 apartment "
-  import AixLib;
   extends Modelica.Icons.Example;
   parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();
   replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater
     "Medium in the system"                                                                             annotation(Dialog(group = "Medium"), choicesAllMatching = true);
   AixLib.Building.HighOrder.House.MFD.BuildingAndEnergySystem.OneAppartment_Radiators VoWoWSchV1984(redeclare
       package Medium =                                                                                                     Medium, fixedHeatFlow3(T_ref = 288.15), fixedHeatFlow5(T_ref = 283.15), fixedHeatFlow16(T_ref = 288.15)) annotation(Placement(transformation(extent = {{-42, -4}, {36, 46}})));
-  AixLib.Fluid.Movers.Pump Pumpe(redeclare package Medium = Medium,
-      m_flow_small=0.0001)       annotation(Placement(transformation(extent = {{4, -82}, {-16, -62}})));
-  AixLib.Fluid.FixedResistances.StaticPipe pipe(redeclare package Medium =
-        Medium, m_flow_small=0.0001)            annotation(Placement(transformation(extent = {{-30, -48}, {-18, -36}})));
-  AixLib.Fluid.FixedResistances.StaticPipe pipe2(redeclare package Medium =
-        Medium, m_flow_small=0.0001)             annotation(Placement(transformation(extent = {{26, -50}, {38, -38}})));
+  AixLib.Fluid.Movers.Pump Pump(redeclare package Medium = Medium, m_flow_small
+      =0.0001) "Pump in heating system"
+    annotation (Placement(transformation(extent={{4,-82},{-16,-62}})));
+  AixLib.Fluid.FixedResistances.FixedResistanceDpM
+    res1(redeclare package Medium = Medium,
+    dp_nominal=200,
+    m_flow_nominal=0.3)
+                    "Hydraulic resistance of supply"
+                                                annotation(Placement(transformation(extent = {{-30, -48}, {-18, -36}})));
+  AixLib.Fluid.FixedResistances.FixedResistanceDpM res2(
+    redeclare package Medium = Medium,
+    dp_nominal=200,
+    m_flow_nominal=0.3)
+                    "Hydraulic resistance of return"
+    annotation (Placement(transformation(extent={{26,-50},{38,-38}})));
   Modelica.Blocks.Sources.Constant Source_TsetChildren(k = 273.15 + 22) annotation(Placement(transformation(extent = {{-100, 8}, {-86, 22}})));
   Modelica.Blocks.Sources.Constant Source_TsetLivingroom(k = 273.15 + 20) annotation(Placement(transformation(extent = {{-100, 52}, {-86, 66}})));
   Modelica.Blocks.Sources.Constant Source_TsetBedroom(k = 273.15 + 20) annotation(Placement(transformation(extent = {{-100, 30}, {-86, 44}})));
@@ -69,10 +77,13 @@ model Appartment_VoWo "Simulation of 1 apartment "
     dp_nominal=0)
     annotation (Placement(transformation(extent={{-38,-82},{-58,-62}})));
 equation
-  connect(pipe.port_b, VoWoWSchV1984.Inflow) annotation(Line(points={{-18,-42},
+  connect(Pump.port_b, boilerTable.port_a) annotation (Line(points={{-16,-72},{
+          -38,-72},{-38,-76},{-44,-76}}, color={0,127,255}));
+  connect(boilerTable.port_b,res1. port_a) annotation(Line(points = {{-64, -76}, {-74, -76}, {-74, -42}, {-30, -42}}, color = {0, 127, 255}));
+  connect(res1.port_b, VoWoWSchV1984.Inflow) annotation(Line(points={{-18,-42},
           {-5.12727,-42},{-5.12727,-1.5}},                                                                             color = {0, 127, 255}));
-  connect(VoWoWSchV1984.Returnflow, pipe2.port_a) annotation(Line(points={{3.38182,
-          -1.5},{3.38182,-44},{26,-44}},                                                                                 color = {0, 127, 255}));
+  connect(VoWoWSchV1984.Returnflow, res2.port_a) annotation (Line(points={{3.38182,
+          -1.5},{3.38182,-44},{26,-44}}, color={0,127,255}));
   // Here the relevant Variables for the simulation are set as output to limit the dimension of the result file
   connect(combinedWeather.WindSpeed, VoWoWSchV1984.WindSpeedPort) annotation(Line(points={{
           -48.9333,91.6},{-10.4455,91.6},{-10.4455,42.875}},                                                                                         color = {0, 0, 127}));
@@ -90,17 +101,16 @@ equation
           37},{-60,37},{-60,19.9583},{-36.6818,19.9583}},                                                                                      color = {0, 0, 127}));
   connect(Source_TsetChildren.y, VoWoWSchV1984.TSet[3]) annotation(Line(points={{-85.3,
           15},{-72,15},{-72,14},{-60,14},{-60,21.2083},{-36.6818,21.2083}},                                                                                           color = {0, 0, 127}));
-  connect(booleanExpression.y, Pumpe.IsNight) annotation(Line(points = {{-73, -46}, {-6, -46}, {-6, -61.8}}, color = {255, 0, 255}));
+  connect(booleanExpression.y, Pump.IsNight) annotation (Line(points={{-73,-46},
+          {-6,-46},{-6,-61.8}}, color={255,0,255}));
   connect(Source_TsetBath.y, VoWoWSchV1984.TSet[4]) annotation(Line(points={{-85.3,
           -9},{-60,-9},{-60,22.4583},{-36.6818,22.4583}},                                                                                   color = {0, 0, 127}));
   connect(Source_TsetKitchen.y, VoWoWSchV1984.TSet[5]) annotation(Line(points={{-85.3,
           -29},{-60,-29},{-60,23.7083},{-36.6818,23.7083}},                                                                                      color = {0, 0, 127}));
-  connect(pipe2.port_b, tank.ports[1]) annotation (Line(
-      points={{38,-44},{54,-44},{54,-86},{29.6,-86},{29.6,-72}},
-      color={0,127,255}));
-  connect(Pumpe.port_a, tank.ports[2]) annotation (Line(
-      points={{4,-72},{14,-72},{14,-84},{26.4,-84},{26.4,-72}},
-      color={0,127,255}));
+  connect(res2.port_b, tank.ports[1]) annotation (Line(points={{38,-44},{54,-44},
+          {54,-86},{29.6,-86},{29.6,-72}}, color={0,127,255}));
+  connect(Pump.port_a, tank.ports[2]) annotation (Line(points={{4,-72},{14,-72},
+          {14,-84},{26.4,-84},{26.4,-72}}, color={0,127,255}));
   connect(Pumpe.port_b, hea.port_a) annotation (Line(points={{-16,-72},{-27,-72},
           {-38,-72}}, color={0,127,255}));
   connect(hea.port_b, pipe.port_a) annotation (Line(points={{-58,-72},{-68,-72},

@@ -27,9 +27,11 @@ model SolarThermalCollector
     redeclare package Medium = Medium,
     m_flow_nominal=0.01)
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
-  Fluid.FixedResistances.StaticPipe pipe(l = 100,
+  AixLib.Fluid.FixedResistances.FixedResistanceDpM
+                                    pipe(
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)           annotation(Placement(transformation(extent = {{54, -10}, {74, 10}})));
+    m_flow_nominal=0.1,
+    dp_nominal=200)              annotation(Placement(transformation(extent = {{54, -10}, {74, 10}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
                             T2(redeclare package Medium = Medium,
       m_flow_nominal=0.01)     annotation(Placement(transformation(extent = {{28, -10}, {48, 10}})));
@@ -73,6 +75,7 @@ equation
  <p>(values are according to wolframalpha.com for water at p = 1 atm ) </p>
  </html>", revisions="<html>
  <ul>
+ <li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe</li>
  <li><i>April 2016&nbsp;</i>
     by Peter Remmen:<br/>
     Replace TempAndRad model</li>

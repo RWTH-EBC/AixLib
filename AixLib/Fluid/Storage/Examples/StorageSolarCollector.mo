@@ -3,9 +3,7 @@ model StorageSolarCollector
   extends Modelica.Icons.Example;
   import AixLib;
 
-  replaceable package Medium =
-     Modelica.Media.Water.ConstantPropertyLiquidWater
-     constrainedby Modelica.Media.Interfaces.PartialMedium;
+  replaceable package Medium = AixLib.Media.Water;
 
   AixLib.Fluid.Storage.Storage storage(
     n=10,
@@ -32,10 +30,11 @@ model StorageSolarCollector
                      boundary_p(nPorts=1, redeclare package Medium = Medium)
                                 annotation(Placement(transformation(extent = {{-86, 70}, {-66, 90}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin={36,70})));
-  AixLib.Fluid.FixedResistances.Pipe
-                   pipe(D = 0.05, l = 5,
+  Modelica.Fluid.Pipes.DynamicPipe
+                   pipe(
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)                   annotation(Placement(transformation(extent={{-6,-10},
+    length=10,
+    diameter=0.05)                       annotation(Placement(transformation(extent={{-6,-10},
             {14,10}})));
   AixLib.Fluid.Sources.Boundary_ph
                       boundary_ph1(use_p_in = true, h = 42e3,
@@ -45,10 +44,11 @@ model StorageSolarCollector
   AixLib.Fluid.Sources.FixedBoundary
                       boundary_ph2(nPorts=1, redeclare package Medium = Medium)
                                                      annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation = 180, origin={-76,52})));
-  AixLib.Fluid.FixedResistances.Pipe
-                   pipe1(D = 0.05, l = 5,
+  Modelica.Fluid.Pipes.DynamicPipe
+                   pipe1(
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)                    annotation(Placement(transformation(extent={{-40,-26},
+    length=10,
+    diameter=0.05)                        annotation(Placement(transformation(extent={{-40,-26},
             {-20,-6}})));
   AixLib.Fluid.HeatExchangers.SolarThermal
                               solarThermal(Collector = AixLib.DataBase.SolarThermal.FlatCollector(), A = 20,
@@ -133,6 +133,7 @@ equation
  <p>This is a simple example of a storage and a solar collector.</p>
  </html>", revisions="<html>
  <ul>
+ <li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe</li>
  <li><i>April 2016&nbsp;</i>
     by Peter Remmen:<br/>
     Replace TempAndRad model</li>

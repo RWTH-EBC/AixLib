@@ -1,1 +1,12 @@
+PartialHeatTransferLayers
+HeatTransferOnlyConduction
+HeatTransferLambdaSimple
+HeatTransferLambdaEff
+HeatTransferLambdaEffSmooth
+HeatTransferLambdaEffTanh
+HeatTransferBuoyancyWetter
+HeatingCoil
+StorageWall
+StorageCover
+StorageMantle
 Bouyancy
