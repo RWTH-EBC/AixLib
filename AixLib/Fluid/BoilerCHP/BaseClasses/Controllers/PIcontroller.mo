@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatGenerators.BaseClasses.Controllers;
+within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
 model PIController
 
   parameter Real Kc=0 "Gain of the controller";
