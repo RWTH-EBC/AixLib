@@ -3,25 +3,25 @@ model InternalControl
 
   //Parameters
   parameter AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition
-    paramBoiler = AixLib.DataBase.Boiler.General.Boiler_Vitogas200F_11kW() "Parameters for Boiler"
+    paramBoiler = AixLib.DataBase.Boiler.General.Boiler_Vitogas200F_11kW() "Parameters for boiler"
   annotation (Dialog(tab = "General", group = "Boiler type"), choicesAllMatching = true);
 
-  parameter Real KR = 1 "Gain of Boiler heater";
+  parameter Real KR = 1 "Gain of boiler heater";
   parameter Modelica.SIunits.Time TN = 0.1
-      "Time Constant of boiler heater (T>0 required)";
-  parameter Modelica.SIunits.Time RiseTime=30
-      "Rise/Fall time for step input(T>0 required)";
+      "Time constant of boiler heater (T>0 required)";
+  parameter Modelica.SIunits.Time riseTime=30
+      "Rise/fall time for step input(T>0 required)";
 
     //Variable
-    Real OutputPower;
+    Real outputPower;
 public
   Controls.Continuous.PITemp                ControlerHeater(
     KR=KR,
     TN=TN,
     h=paramBoiler.Q_nom,
     l=paramBoiler.Q_min,
-    triggeredTrapezoid(rising=RiseTime, falling=RiseTime),
-    RangeSwitch=false)
+    triggeredTrapezoid(rising=riseTime, falling=riseTime),
+    rangeSwitch=false) "PI temperature controller"
     annotation (Placement(transformation(extent={{-40.5,36},{-24,52.5}})));
   Modelica.Blocks.Interfaces.BooleanInput isOn "On/Off switch for the boiler"
     annotation (Placement(transformation(extent={{-112.5,27},{-87,52.5}}),
@@ -30,20 +30,20 @@ public
         rotation=-90,
         origin={-24.75,102.75})));
   Utilities.Sensors.EnergyMeter         eEnergyMeter_P
-      "for primary energy consumption"
+      "For primary energy consumption"
     annotation (Placement(transformation(extent={{30,63},{49.5,84}})));
 
   Utilities.Sensors.EnergyMeter         eEnergyMeter_S
-      "for secondary energy consumption"
+      "For secondary energy consumption"
     annotation (Placement(transformation(extent={{30,82.5},{49.5,103.5}})));
-  Modelica.Blocks.Tables.CombiTable1D EfficiencyTable(
+  Modelica.Blocks.Tables.CombiTable1D efficiencyTable(
     tableOnFile=false,
     table=paramBoiler.eta,
     columns={2},
-    smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments)
+    smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments) "Table with efficiency parameters"
     annotation (Placement(transformation(extent={{4.5,4.5},{15,15}})));
   Modelica.Blocks.Interfaces.RealInput Tflow_set
-      "target Temperature of the controller[K]"  annotation (Placement(
+      "Target temperature of the controller[K]"  annotation (Placement(
         transformation(
         extent={{-15.25,-15.25},{15.25,15.25}},
         rotation=0,
@@ -55,11 +55,11 @@ public
     annotation (Placement(transformation(extent={{-13.5,6},{-4.5,15}})));
   Modelica.Blocks.Math.Product product
     annotation (Placement(transformation(extent={{21,24},{30,33}})));
-  Modelica.Blocks.Interfaces.RealInput Tflow_hot "outgoing Temperature [K]"
+  Modelica.Blocks.Interfaces.RealInput Tflow_hot "Outgoing temperature [K]"
     annotation (Placement(transformation(extent={{-126.5,-20},{-86.5,20}}),
         iconTransformation(extent={{113,3},{87,29}})));
   Modelica.Blocks.Interfaces.RealOutput QflowHeater
-      "Connector of Real output signal"
+      "Connector of real output signal"
     annotation (Placement(transformation(extent={{66.5,18.5},{86.5,38.5}}),
         iconTransformation(extent={{-90.5,29},{-110.5,49}})));
   Modelica.Blocks.Interfaces.RealInput mFlow
@@ -79,8 +79,8 @@ equation
     isOn = true;
   end if;
 
-  OutputPower = mFlow * 4184 * (Tflow_hot - Tflow_cold);
-  eEnergyMeter_S.p=OutputPower;
+  outputPower = mFlow * 4184 * (Tflow_hot - Tflow_cold);
+  eEnergyMeter_S.p=outputPower;
 
   connect(ControlerHeater.y, eEnergyMeter_P.p)
                                     annotation (Line(
@@ -92,7 +92,7 @@ equation
       points={{-24.825,44.25},{-18,44.25},{-18,10.5},{-14.4,10.5}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(QNormated.y, EfficiencyTable.u[1]) annotation (Line(
+  connect(QNormated.y,efficiencyTable. u[1]) annotation (Line(
       points={{-4.05,10.5},{-0.3,10.5},{-0.3,9.75},{3.45,9.75}},
       color={0,0,127},
       smooth=Smooth.None));
@@ -100,7 +100,7 @@ equation
       points={{-24.825,44.25},{4.5,44.25},{4.5,31.5},{12,31.5},{20.1,31.2}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(EfficiencyTable.y[1], product.u2) annotation (Line(
+  connect(efficiencyTable.y[1], product.u2) annotation (Line(
       points={{15.525,9.75},{19.5,9.75},{19.5,25.8},{20.1,25.8}},
       color={0,0,127},
       smooth=Smooth.None));

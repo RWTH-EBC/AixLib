@@ -2,19 +2,19 @@ within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
 model delayedOnOffController
 
   parameter Modelica.SIunits.Temperature MaxTReturn = 343.15
-    "Maximum Return Temperature";
-  parameter Real MinDeltaT = 10 "Minimum Flow and Return Temperature Difference";
-  parameter Real TFlowRange=5 "Range of the Flow temperature";
+    "Maximum return temperature";
+  parameter Real MinDeltaT = 10 "Minimum flow and return temperature difference";
+  parameter Real TFlowRange=5 "Range of the flow temperature";
   parameter Modelica.SIunits.Time DelayTime = 1800 "On/Off Delay time";
-  parameter Boolean InitialOutput=false;
-  parameter Real DelayUnit=200;
-  parameter Real MinCapacity = 30 "Minimum allowable working capacity in %";
+  parameter Boolean InitialOutput=false "Initial output";
+  parameter Real DelayUnit=200 "Delay unit";
+  parameter Real MinCapacity = 30 "Minimum allowable working capacity in percent";
 
   Modelica.Blocks.Logical.And and1 annotation (Placement(transformation(
         extent={{-22,16},{-8,30}}, rotation=0)));
   Modelica.Blocks.Logical.Pre pre2 annotation (Placement(transformation(
         extent={{-48,-12},{-34,0}}, rotation=0)));
-  Modelica.Blocks.Logical.OnOffController onOffController(bandwidth=MinDeltaT)
+  Modelica.Blocks.Logical.OnOffController onOffController(bandwidth=MinDeltaT) "OnOff controller"
                    annotation (Placement(transformation(extent={{-76,-16},{
           -56,4}}, rotation=0)));
   Modelica.Blocks.Logical.LessThreshold lessThreshold(threshold=TFlowRange)
@@ -30,33 +30,33 @@ model delayedOnOffController
       origin={0,-50},
       extent={{-8,-8},{8,8}},
       rotation=90)));
-  Modelica.Blocks.Interfaces.RealInput FlowTemp
+  Modelica.Blocks.Interfaces.RealInput flowTemp "Flow temperature"
     annotation (Placement(transformation(extent={{-140,40},{-100,80}},
         rotation=0)));
-  Modelica.Blocks.Interfaces.RealInput ReturnTemp
+  Modelica.Blocks.Interfaces.RealInput ReturnTemp "Return Temperature"
     annotation (Placement(transformation(
       origin={0,-120},
       extent={{-20,-20},{20,20}},
       rotation=90)));
-  Modelica.Blocks.Interfaces.BooleanOutput y
+  Modelica.Blocks.Interfaces.BooleanOutput y "Signal if controller is on or off"
     annotation (Placement(transformation(extent={{100,-10},{120,10}},
         rotation=0)));
-  Modelica.Blocks.Interfaces.RealInput FlowTemp_setpoint
+  Modelica.Blocks.Interfaces.RealInput flowTemp_setpoint "Flow tmeperature setpoint"
     annotation (Placement(transformation(
       origin={-60,120},
       extent={{-20,-20},{20,20}},
       rotation=270)));
-  Modelica.Blocks.Discrete.UnitDelay unitDelay(samplePeriod=DelayUnit)
+  Modelica.Blocks.Discrete.UnitDelay unitDelay(samplePeriod=DelayUnit) "Last value"
     annotation (Placement(transformation(extent={{32,-14},{40,-6}})));
   Modelica.Blocks.Math.Feedback feedback
     annotation (Placement(transformation(
       origin={-68,60},
       extent={{-8,-8},{8,8}},
       rotation=270)));
-  Modelica.Blocks.Interfaces.RealInput ControllerOutput
+  Modelica.Blocks.Interfaces.RealInput controllerOutput "Controller output"
     annotation (Placement(transformation(extent={{-140,-80},{-100,-40}},
         rotation=0)));
-  Modelica.Blocks.Interfaces.RealInput MinCapacity_in
+  Modelica.Blocks.Interfaces.RealInput minCapacity_in "Minimal capacity"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
         rotation=0)));
   Modelica.Blocks.Logical.Not not1
@@ -92,11 +92,11 @@ model delayedOnOffController
         rotation=0)));
   Modelica.Blocks.Logical.Or or4 annotation (Placement(transformation(
         extent={{88,-6},{96,6}}, rotation=0)));
-  Modelica.Blocks.MathBoolean.OnDelay onDelay(delayTime=DelayTime)
+  Modelica.Blocks.MathBoolean.OnDelay onDelay(delayTime=DelayTime) "On delay"
     annotation (Placement(transformation(extent={{50,62},{58,70}})));
-  Modelica.Blocks.MathBoolean.OnDelay onDelay1(delayTime=DelayTime)
+  Modelica.Blocks.MathBoolean.OnDelay onDelay1(delayTime=DelayTime) "On delay"
     annotation (Placement(transformation(extent={{50,-52},{58,-44}})));
-  Modelica.Blocks.Nonlinear.FixedDelay fixedDelay(delayTime=DelayTime)
+  Modelica.Blocks.Nonlinear.FixedDelay fixedDelay(delayTime=DelayTime) "Fixed delay"
     annotation (Placement(transformation(extent={{48,-18},{56,-10}})));
 initial equation
   pre(y)=InitialOutput;
@@ -107,7 +107,7 @@ equation
     points={{-55,-6},{-49.4,-6}},
     color={255,0,255},
     smooth=Smooth.None));
-  connect(feedback.u2, FlowTemp) annotation (Line(
+  connect(feedback.u2,flowTemp)  annotation (Line(
     points={{-74.4,60},{-120,60}},
     color={0,0,127},
     smooth=Smooth.None));
@@ -127,11 +127,11 @@ equation
     points={{-7.3,23},{0,23},{0,-8},{3.2,-8}},
     color={255,0,255},
     smooth=Smooth.None));
-  connect(onOffController.u, ControllerOutput) annotation (Line(
+  connect(onOffController.u,controllerOutput)  annotation (Line(
     points={{-78,-12},{-88,-12},{-88,-60},{-120,-60}},
     color={0,0,127},
     smooth=Smooth.None));
-  connect(onOffController.reference,MinCapacity_in)  annotation (Line(
+  connect(onOffController.reference,minCapacity_in)  annotation (Line(
     points={{-78,0},{-120,0}},
     color={0,0,127},
     smooth=Smooth.None));
@@ -143,7 +143,7 @@ equation
       points={{60,120},{60,91},{39.2,91}},
       color={255,0,255},
       smooth=Smooth.None));
-  connect(FlowTemp_setpoint, feedback.u1) annotation (Line(
+  connect(flowTemp_setpoint, feedback.u1) annotation (Line(
     points={{-60,120},{-60,88},{-68,88},{-68,66.4}},
     color={0,0,127},
     smooth=Smooth.None));
@@ -163,7 +163,7 @@ equation
     points={{-5.8783e-016,-59.6},{-5.8783e-016,-78},{0,-78},{0,-120}},
     color={0,0,127},
     smooth=Smooth.None));
-  connect(greaterEqualThreshold.u, FlowTemp) annotation (Line(
+  connect(greaterEqualThreshold.u,flowTemp)  annotation (Line(
     points={{-79.6,-80},{-90,-80},{-90,60},{-120,60}},
     color={0,0,127},
     smooth=Smooth.None));
@@ -175,7 +175,7 @@ equation
       points={{78.3,0},{87.2,0}},
       color={255,0,255},
       smooth=Smooth.None));
-  connect(unitDelay.u, ControllerOutput)  annotation (Line(
+  connect(unitDelay.u,controllerOutput)   annotation (Line(
       points={{31.2,-10},{28,-10},{28,-22},{-88,-22},{-88,-60},{-120,-60}},
       color={0,0,127},
       smooth=Smooth.None));

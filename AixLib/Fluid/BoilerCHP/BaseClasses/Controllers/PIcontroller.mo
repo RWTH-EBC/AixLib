@@ -13,7 +13,7 @@ model PIController
     y_start=0,
     k=Kc,
     Ti=Tc,
-    yMin=MinCapacity)
+    yMin=MinCapacity) "PI controller"
                annotation (Placement(transformation(
           extent={{-36,34},{-16,54}})));
   Modelica.Blocks.Continuous.LimPID PI1(
@@ -21,7 +21,7 @@ model PIController
     yMax=100,
     yMin=0,
     k=Kc,
-    Ti=Tc)  annotation (Placement(transformation(extent={
+    Ti=Tc) "Limited PI controller" annotation (Placement(transformation(extent={
             {-12,72},{8,92}})));
   Modelica.Blocks.Discrete.TriggeredSampler triggeredSampler(y_start=0)
     annotation (Placement(transformation(extent={{-42,74},
@@ -40,10 +40,10 @@ model PIController
       Placement(transformation(extent={{30,-18},{50,2}})));
   Modelica.Blocks.Logical.Switch switch2
     annotation (Placement(transformation(extent={{70,-10},{90,10}})));
-  Modelica.Blocks.Interfaces.RealOutput y annotation (
+  Modelica.Blocks.Interfaces.RealOutput y "Controller output signal" annotation (
       Placement(transformation(extent={{100,-10},{120,10}})));
-  Modelica.Blocks.Interfaces.RealInput Setpoint annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
-  Modelica.Blocks.Interfaces.BooleanInput ON
+  Modelica.Blocks.Interfaces.RealInput setpoint annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
+  Modelica.Blocks.Interfaces.BooleanInput on
                                    "Connector of Boolean input signal"
     annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
   Modelica.Blocks.Logical.Not not1
@@ -83,7 +83,7 @@ equation
           0,255}));
   connect(switch2.u2, triggeredTrapezoid.u) annotation (Line(points={{68,0},{60,
           0},{60,-60},{-38,-60},{-38,-14},{-29.8,-14}}, color={255,0,255}));
-  connect(Setpoint, triggeredSampler.u) annotation (Line(points={{-120,60},{-80,
+  connect(setpoint, triggeredSampler.u) annotation (Line(points={{-120,60},{-80,
           60},{-80,82},{-43.6,82}}, color={0,0,127}));
   connect(triggeredSampler2.u, triggeredSampler.u) annotation (Line(points={{-65.6,
           44},{-80,44},{-80,82},{-43.6,82}}, color={0,0,127}));
@@ -91,7 +91,7 @@ equation
           18},{-80,82},{-43.6,82}}, color={0,0,127}));
   connect(switch3.u2, triggeredSampler.trigger) annotation (Line(points={{20,36},
           {20,64},{-34,64},{-34,72.56}}, color={255,0,255}));
-  connect(ON, switch1.u2) annotation (Line(points={{-120,-60},{-82,-60},{-82,10},
+  connect(on, switch1.u2) annotation (Line(points={{-120,-60},{-82,-60},{-82,10},
           {-72,10}}, color={255,0,255}));
   connect(triggeredSampler.trigger, switch1.u2) annotation (Line(points={{-34,72.56},
           {-34,64},{-82,64},{-82,10},{-72,10}}, color={255,0,255}));

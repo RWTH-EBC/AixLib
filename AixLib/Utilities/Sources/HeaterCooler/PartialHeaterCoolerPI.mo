@@ -21,7 +21,7 @@ partial model PartialHeaterCoolerPI
             {6,-2}})));
   Controls.Continuous.PITemp
                  pITempCool(
-    RangeSwitch=false,
+    rangeSwitch=false,
     h=if not recOrSep then h_cooler else zoneParam.h_cooler,
     l=if not recOrSep then l_cooler else zoneParam.l_cooler,
     KR=if not recOrSep then KR_cooler else zoneParam.KR_cooler,
@@ -32,7 +32,7 @@ partial model PartialHeaterCoolerPI
             {6,2}})));
   Controls.Continuous.PITemp
                  pITempHeat(
-    RangeSwitch=false,
+    rangeSwitch=false,
     h=if not recOrSep then h_heater else zoneParam.h_heater,
     l=if not recOrSep then l_heater else zoneParam.l_heater,
     KR=if not recOrSep then KR_heater else zoneParam.KR_heater,

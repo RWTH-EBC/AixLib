@@ -24,7 +24,7 @@ model Boiler
   parameter Real KR=1 "Gain of Boiler heater" annotation (Dialog(tab = "General", group = "Boiler type"));
   parameter Modelica.SIunits.Time TN=0.1
     "Time Constant of boiler heater (T>0 required)" annotation (Dialog(tab = "General", group = "Boiler type"));
-  parameter Modelica.SIunits.Time RiseTime=30
+  parameter Modelica.SIunits.Time riseTime=30
     "Rise/Fall time for step input(T>0 required)" annotation (Dialog(tab = "General", group = "Boiler type"));
 
   parameter Real declination=1.1 "Declination" annotation(Dialog(tab="External Control"));
@@ -50,7 +50,7 @@ model Boiler
         paramBoiler,
     KR=KR,
     TN=TN,
-    RiseTime=RiseTime) "Internal control"
+    riseTime=riseTime) "Internal control"
     annotation (Placement(transformation(extent={{-50,-10},{-70,10}})));
 
   ExtControl myExternalControl(paramHC=paramHC,
@@ -62,7 +62,7 @@ model Boiler
      annotation (Placement(transformation(extent={{-10,38},
             {10,58}})));
 
-  Modelica.Blocks.Interfaces.BooleanInput SwitchToNightMode
+  Modelica.Blocks.Interfaces.BooleanInput switchToNightMode
     "Connector of Boolean input signal" annotation (Placement(transformation(
           extent={{-100,10},{-60,50}}), iconTransformation(extent={{-80,30},{-60,
             50}})));
@@ -90,7 +90,7 @@ equation
         color={0,0,127}));
   connect(TAmbient, myExternalControl.Toutside) annotation (Line(points={{-80,60},
           {-22,60},{-22,44.4},{-9.725,44.4}}, color={0,0,127}));
-  connect(myExternalControl.SwitchToNightMode, SwitchToNightMode) annotation (
+  connect(myExternalControl.SwitchToNightMode,switchToNightMode)  annotation (
       Line(points={{-9.95,53.625},{-16.975,53.625},{-16.975,30},{-80,30}},
         color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={

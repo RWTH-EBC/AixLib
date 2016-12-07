@@ -1,6 +1,6 @@
 within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
 partial model PartialExternalControl
-  "with measurement of primary and secondary energy consumption"
+  "With measurement of primary and secondary energy consumption"
 
   Modelica.Blocks.Interfaces.RealInput Toutside "Outside temperature [K]"
     annotation (Placement(transformation(

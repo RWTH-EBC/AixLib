@@ -6,14 +6,14 @@ model HeatGeneratorNoControl
     "Prescribed heat flow"
     annotation (Placement(transformation(extent={{-100,40},{-60,80}}),
         iconTransformation(extent={{-100,40},{-60,80}})));
-  Modelica.Blocks.Interfaces.RealOutput Tcold
+  Modelica.Blocks.Interfaces.RealOutput TCold
     "Temperature of the passing fluid"
     annotation (Placement(transformation(extent={{44,76},{64,96}}),
         iconTransformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-40,90})));
-  Modelica.Blocks.Interfaces.RealOutput Thot "Temperature of the passing fluid"
+  Modelica.Blocks.Interfaces.RealOutput THot "Temperature of the passing fluid"
     annotation (Placement(transformation(extent={{100,50},{120,70}}),
         iconTransformation(
         extent={{-10,-10},{10,10}},
@@ -33,10 +33,10 @@ equation
   connect(heater.Q_flow, Q_flow) annotation (Line(points={{-60,-40},{-60,-40},{
           -60,60},{-80,60}},
                           color={0,0,127}));
-  connect(senTCold.T, Tcold) annotation (Line(points={{-70,-69},{-70,-69},{-70,
+  connect(senTCold.T,TCold)  annotation (Line(points={{-70,-69},{-70,-69},{-70,
           86},{54,86}},
                      color={0,0,127}));
-  connect(senTHot.T, Thot) annotation (Line(points={{40,-69},{40,-69},{40,60},{110,
+  connect(senTHot.T,THot)  annotation (Line(points={{40,-69},{40,-69},{40,60},{110,
           60}}, color={0,0,127}));
   connect(senMasFlo.m_flow, massFlow) annotation (Line(points={{70,-69},{70,-69},
           {70,40},{110,40}}, color={0,0,127}));
@@ -44,7 +44,7 @@ equation
         coordinateSystem(preserveAspectRatio=false)),
         Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
-<p>The model uses the <a href=\"AixLib.Fluid.HeatGenerators.BaseClasses.PartialHeatGenerator\">AixLib.Fluid.HeatGenerators.BaseClasses.PartialHeatGenerator</a>
+<p>The model uses the <a href=\"AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator\">AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>
 in the most simple setup in order either test its functionalities or to use in cases where
 the controller is modelled outside the heat generator.
 </p>

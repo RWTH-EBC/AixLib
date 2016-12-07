@@ -12,14 +12,13 @@ model PITemp "PI Controler that can switch the output range of the controler"
   parameter Real KR = 1 "Gain" annotation(Dialog(group = "Control"));
   parameter Modelica.SIunits.Time TN = 1 "Time Constant (T>0 required)" annotation(Dialog(group = "Control"));
   Modelica.Blocks.Interfaces.RealOutput y annotation(Placement(transformation(extent = {{80, -10}, {100, 10}}), iconTransformation(extent = {{80, -10}, {100, 10}})));
-  parameter Boolean RangeSwitch = false "Switch controler output range";
-  Modelica.Blocks.Interfaces.BooleanInput onOff "Switches Controler on and off"
-                                                                                annotation(Placement(transformation(extent = {{-120, -80}, {-80, -40}}), iconTransformation(extent = {{-100, -60}, {-80, -40}})));
+  parameter Boolean rangeSwitch = false "Switch controler output range";
+  Modelica.Blocks.Interfaces.BooleanInput onOff "Switches Controler on and off" annotation(Placement(transformation(extent = {{-120, -80}, {-80, -40}}), iconTransformation(extent = {{-100, -60}, {-80, -40}})));
   Modelica.Blocks.Logical.Switch switch1 annotation(Placement(transformation(extent = {{-40, 6}, {-20, -14}})));
   Modelica.Blocks.Logical.Switch switch2 annotation(Placement(transformation(extent = {{56, -18}, {76, 2}})));
   Modelica.Blocks.Logical.TriggeredTrapezoid triggeredTrapezoid(rising = 0, falling = 60) annotation(Placement(transformation(extent = {{-40, -60}, {-20, -40}})));
   Modelica.Blocks.Math.Product product annotation(Placement(transformation(extent = {{26, -34}, {46, -54}})));
-  Modelica.Blocks.Continuous.LimPID PI(k = KR, yMax = if RangeSwitch then -l else h, yMin = if RangeSwitch then -h else l, controllerType = Modelica.Blocks.Types.SimpleController.PI, Ti = TN, Td = 0.1) annotation(Placement(transformation(extent = {{-18, 30}, {2, 50}})));
+  Modelica.Blocks.Continuous.LimPID PI(k = KR, yMax = if rangeSwitch then -l else h, yMin = if rangeSwitch then -h else l, controllerType = Modelica.Blocks.Types.SimpleController.PI, Ti = TN, Td = 0.1) annotation(Placement(transformation(extent = {{-18, 30}, {2, 50}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor annotation(Placement(transformation(origin = {-60, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
 equation
   connect(onOff, switch1.u2) annotation(Line(points = {{-100, -60}, {-80, -60}, {-80, -4}, {-42, -4}}, color = {255, 0, 255}));

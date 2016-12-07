@@ -6,14 +6,17 @@ model HeatGeneratorNoControllSystem
         Media.Specialized.Water.TemperatureDependentDensity,
     use_T_in=true,
     nPorts=1,
-    m_flow=0.03)
+    m_flow=0.03) "Source"
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
   Modelica.Fluid.Sources.Boundary_pT sink(redeclare package Medium =
-        Media.Specialized.Water.TemperatureDependentDensity, nPorts=1)
+        Media.Specialized.Water.TemperatureDependentDensity, nPorts=1) "Sink"
     annotation (Placement(transformation(extent={{60,-10},{40,10}})));
   HeatGeneratorNoControl heatGeneratorNoControll(redeclare package Medium =
         Media.Specialized.Water.TemperatureDependentDensity, m_flow_nominal=
-        0.03) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+        0.03,
+    V=0.002,
+    coeffPresLoss=1e10) "Heat generator without control"
+              annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Trapezoid trapezoid(
     rising=7200,
     width=7200,
@@ -21,9 +24,9 @@ model HeatGeneratorNoControllSystem
     period=28800,
     offset=313.15,
     amplitude=50,
-    startTime=7200)
+    startTime=7200) "Source temperature"
     annotation (Placement(transformation(extent={{-100,-6},{-80,14}})));
-  Modelica.Blocks.Sources.Constant const(k=5000)
+  Modelica.Blocks.Sources.Constant const(k=5000) "Prescribed heat flow"
     annotation (Placement(transformation(extent={{-60,30},{-40,50}})));
 equation
   connect(source.ports[1], heatGeneratorNoControll.port_a)
@@ -37,8 +40,8 @@ equation
   annotation (Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>The simulation illustrates the functionality of a simple heat generator in
-<a href=\"HVAC.Components.HeatGenerators.HeatGeneratorNoControll\">HeatGeneratorNoControll</a> 
-in order to test the functionality of the <a href=\"HVAC.Components.HeatGenerators.BaseClasses.PartialHeatGenerator\">PartialHeatGenerator</a>. </p>
+<a href=\"AixLib.Fluid.BoilerCHP.HeatGeneratorNoControl\">AixLib.Fluid.BoilerCHP.HeatGeneratorNoControl</a> 
+in order to test the functionality of the <a href=\"AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator\">AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>. </p>
 </html>",
         revisions="<html>
 <p><ul>
