@@ -1,4 +1,4 @@
 within AixLib.Fluid;
-package HeatGenerators
+package BoilerCHP
   extends Modelica.Icons.VariantsPackage;
-end HeatGenerators;
+end BoilerCHP;
