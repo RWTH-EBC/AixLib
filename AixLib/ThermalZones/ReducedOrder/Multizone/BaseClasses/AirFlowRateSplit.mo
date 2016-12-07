@@ -33,6 +33,8 @@ protected
   Real airFlowVector[dimension]
     "Sum of air flow in the zones";
   Real airFlowRateOutput "Sum of air flow rates";
+  parameter Real defVal[dimension]={if VAir > 0 then 0 else 0.000001 for VAir in zoneParam.VAir}
+    "Default value to prevent division by zero";
 
 equation
   if withProfile then
@@ -47,7 +49,7 @@ equation
       airFlowVector,
       zoneParam.withAHU,
       dimension);
-  airFlowOut .* (zoneParam.VAir+ones(dimension)*0.00001) = airFlowShare*airFlowIn*3600;
+  airFlowOut .* (zoneParam.VAir+defVal) = airFlowShare*airFlowIn*3600;
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),           Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
