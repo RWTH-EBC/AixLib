@@ -1,5 +1,11 @@
 within AixLib.Fluid.BoilerCHP.BaseClasses;
 package Controllers
+  extends Modelica.Icons.VariantsPackage;
+
+
+
+
+
 
 
 

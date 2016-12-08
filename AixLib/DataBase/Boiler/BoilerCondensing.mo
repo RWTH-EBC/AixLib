@@ -1,6 +1,4 @@
 within AixLib.DataBase.Boiler;
-
-
 record BoilerCondensing "Boiler efficency for a condensing boiler"
   extends BoilerEfficiencyBaseDataDefinition(boilerEfficiency = [0.0000, 1.05; 0.2000, 1.05; 0.4000, 1.02; 0.6000, 1.0; 0.8000, 0.98; 1.0000, 0.96]);
   annotation(Documentation(info="<html>

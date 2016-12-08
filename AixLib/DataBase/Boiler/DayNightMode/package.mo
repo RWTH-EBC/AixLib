@@ -1,6 +1,8 @@
 within AixLib.DataBase.Boiler;
 package DayNightMode
-      extends Modelica.Icons.Package;
+      extends Modelica.Icons.VariantsPackage;
+
+
 
 
 
