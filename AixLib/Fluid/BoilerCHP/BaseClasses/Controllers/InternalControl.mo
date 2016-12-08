@@ -1,5 +1,5 @@
 within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
-model InternalControl
+model InternalControl "Internal control model for boiler"
 
   parameter AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition
     paramBoiler
@@ -132,14 +132,11 @@ equation
     Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Internal control of the boiler</p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
 <p><br><h4><span style=\"color:#008000\">Concept</span></h4></p>
 <p>This model is a derivation of BoilerTaktTable.</p>
 <p>There is a differentiation made between primary and secondary energy consumption.</p>
 <p>The primary power output can be read at the output of <b>ControlerHeater. </b>It is then multiplied with an efficienca factor to calculate the the effective heat flow that heats up the fluid in the boiler<b>.</b></p>
-<p>There are two energy meters: one for the primary energy and one for the secondary. The secondary power output is calculated as:</p>
-<p><img src=\"modelica://HVAC/Images/equations/equation-4pZqzkAy.png\" alt=\"P_sec = m_flow *c_p*(T_2-T_1)\"/></p>
-<p>Where T2 is the temperature of the fluid leaving the heater and T1 ist the temperature of the fluid entering the heater. </p>
+<p>There are two energy meters: one for the primary energy and one for the secondary.
 </html>",
 revisions="<html>
 <p><ul>

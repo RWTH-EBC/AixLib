@@ -1,5 +1,5 @@
 within AixLib.Fluid.BoilerCHP.Examples;
-model CHPSystem
+model CHPSystem "Example that illustrates use of CHP model"
   extends Modelica.Icons.Example;
   CHP combinedHeatPower(
     redeclare package Medium =

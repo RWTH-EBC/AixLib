@@ -1,5 +1,5 @@
 within AixLib.Fluid.BoilerCHP;
-model HeatGeneratorNoControl
+model HeatGeneratorNoControl "Simple heat generator without control"
   extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(pressureDrop(
         a=coeffPresLoss), vol(V=V));
   Modelica.Blocks.Interfaces.RealInput Q_flow

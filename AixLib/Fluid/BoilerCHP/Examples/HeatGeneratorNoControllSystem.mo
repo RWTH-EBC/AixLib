@@ -1,5 +1,5 @@
 within AixLib.Fluid.BoilerCHP.Examples;
-model HeatGeneratorNoControllSystem
+model HeatGeneratorNoControllSystem "Example that illustrates use of heat generator without control"
   extends Modelica.Icons.Example;
   Modelica.Fluid.Sources.MassFlowSource_T source(
     redeclare package Medium =

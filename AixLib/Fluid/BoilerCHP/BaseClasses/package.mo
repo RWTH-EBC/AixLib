@@ -1,6 +1,7 @@
 within AixLib.Fluid.BoilerCHP;
-package BaseClasses
+package BaseClasses "Package with base classes for Aix.BoilerCHP"
   extends Modelica.Icons.BasesPackage;
+
 
   annotation (preferredView="info", Documentation(info="<html>
 <p>

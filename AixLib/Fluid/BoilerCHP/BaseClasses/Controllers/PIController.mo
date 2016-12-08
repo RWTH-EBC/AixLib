@@ -1,5 +1,5 @@
 within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
-model PIController
+model PIController "Two coupled PI controllers for CHP control"
 
   parameter Real Kc=0 "Gain of the controller";
   parameter Modelica.SIunits.Time Tc=1 "Time constant (T>0 required)";
@@ -113,7 +113,7 @@ equation
           textString="PI Controller")}),
     Documentation(info="<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>
-<p>This is model consists of two PI controllers to control the system both when in operation as well as when shuttind down.</p>
+<p>This is model consists of two PI controllers to control the system both when in operation as well as when shutting down.</p>
 <p><h4><font color=\"#008000\">Concept</font></h4></p>
 <p>Because changing the controller signal from a certain value to zero is not continuous it will result in unstabilities in the simulation. Therefore, two controllers are implemented. One for the operation as a normal controller and one that change the output signal smoothly from the output of the other controller to zero.</p>
 </html>",

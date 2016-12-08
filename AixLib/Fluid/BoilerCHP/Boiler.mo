@@ -1,5 +1,5 @@
 within AixLib.Fluid.BoilerCHP;
-model Boiler
+model Boiler "Boiler with internal and external control"
   extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(pressureDrop(
         a=paramBoiler.pressureDrop), vol(V=paramBoiler.volume));
 

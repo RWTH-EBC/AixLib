@@ -1,5 +1,5 @@
 within AixLib.Fluid.BoilerCHP.BaseClasses;
-package Controllers
+package Controllers "Package with controllers for boiler and CHP models"
   extends Modelica.Icons.VariantsPackage;
 
 

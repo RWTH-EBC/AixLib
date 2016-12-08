@@ -1,5 +1,5 @@
 within AixLib.Fluid.BoilerCHP.BaseClasses;
-partial model PartialHeatGenerator
+partial model PartialHeatGenerator "Partial model for heat generators"
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
   Sensors.TemperatureTwoPort senTCold(
     redeclare package Medium = Medium,

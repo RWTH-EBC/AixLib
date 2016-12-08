@@ -1,5 +1,5 @@
 within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
-model ControllerOnOff
+model ControllerOnOff "On/Off controller for boiler models"
 
   Modelica.Blocks.Interfaces.BooleanInput onOffExtern annotation (Placement(
         transformation(
@@ -64,7 +64,7 @@ algorithm
 </html>",
 info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
-<p>Swicthes the boiler off if the flow temperature is too high.</p>
+<p>Switches the boiler off if the flow temperature is too high.</p>
 </html>"),
     experiment);
 end ControllerOnOff;

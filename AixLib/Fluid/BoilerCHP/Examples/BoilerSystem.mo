@@ -1,5 +1,5 @@
 within AixLib.Fluid.BoilerCHP.Examples;
-model BoilerSystem
+model BoilerSystem "Example that illustrates use of boiler model"
   extends Modelica.Icons.Example;
 
   Modelica.Fluid.Sources.MassFlowSource_T source(
