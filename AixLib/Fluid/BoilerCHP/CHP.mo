@@ -85,11 +85,16 @@ model CHP "Table based CHP model"
     annotation (Placement(transformation(extent={{60,-36},{48,-24}})));
   Modelica.Blocks.Sources.Constant exothermicTemperature(k=1783.4) "Exothermic temperature"
     annotation (Placement(transformation(extent={{52,12},{68,28}})));
-  Modelica.Blocks.Interfaces.RealInput TSet if          TSetIn
+  Modelica.Blocks.Interfaces.RealInput TSet(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC") if          TSetIn
     "Temperature setpoint" annotation (Placement(transformation(extent={{-126,76},
             {-100,104}},         rotation=0), iconTransformation(extent={{-80,-70},
             {-60,-50}})));
-  Modelica.Blocks.Interfaces.RealInput elSet if           electricityDriven
+  Modelica.Blocks.Interfaces.RealInput elSet(
+    final quantity="Power",
+    final unit="kW") if           electricityDriven
     "Electrical power setpoint" annotation (Placement(transformation(extent={{-126,56},
             {-100,84}},     rotation=0), iconTransformation(extent={{-80,50},{-60,
             70}})));
@@ -100,13 +105,18 @@ model CHP "Table based CHP model"
         rotation=90,
         origin={30,-90})));
 
-  Modelica.Blocks.Interfaces.RealOutput TSource "Combustion temperature"
+  Modelica.Blocks.Interfaces.RealOutput TSource(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC") "Combustion temperature"
     annotation (Placement(transformation(extent={{99.5,41.75},{118,60}}),
         iconTransformation(
         extent={{-9.75,-9.75},{9.75,9.75}},
         rotation=-90,
         origin={-29.75,-89.75})));
-  Modelica.Blocks.Interfaces.RealOutput electricalPower "Electrical power" annotation (Placement(
+  Modelica.Blocks.Interfaces.RealOutput electricalPower(
+    final quantity="Power",
+    final unit="kW") "Electrical power" annotation (Placement(
         transformation(
         origin={30,90},
         extent={{-10,-10},{10,10}},
@@ -114,7 +124,8 @@ model CHP "Table based CHP model"
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-50,90})));
-  Modelica.Blocks.Interfaces.RealOutput thermalPower "Thermal power" annotation (Placement(
+  Modelica.Blocks.Interfaces.RealOutput thermalPower(
+    final unit="kW") "Thermal power" annotation (Placement(
         transformation(
         origin={46,90},
         extent={{-10,-10},{10,10}},
@@ -122,7 +133,8 @@ model CHP "Table based CHP model"
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-20,90})));
-  Modelica.Blocks.Interfaces.RealOutput fuelInput "Fuel input"
+  Modelica.Blocks.Interfaces.RealOutput fuelInput(
+    final unit="kW") "Fuel input"
     annotation (Placement(transformation(
       origin={61,90},
       extent={{-10,-11},{10,11}},

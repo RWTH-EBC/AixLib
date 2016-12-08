@@ -42,7 +42,10 @@ model Boiler "Boiler with internal and external control"
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={50,-90})));
-  Modelica.Blocks.Interfaces.RealInput TAmbient "Ambient air temperature" annotation (Placement(
+  Modelica.Blocks.Interfaces.RealInput TAmbient(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC") "Ambient air temperature" annotation (Placement(
         transformation(extent={{-100,40},{-60,80}}), iconTransformation(extent=
            {{-80,60},{-60,80}})));
   BaseClasses.Controllers.InternalControl internalControl(paramBoiler=

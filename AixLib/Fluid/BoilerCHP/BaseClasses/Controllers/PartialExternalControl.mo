@@ -2,7 +2,10 @@ within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
 partial model PartialExternalControl
   "With measurement of primary and secondary energy consumption"
 
-  Modelica.Blocks.Interfaces.RealInput TOutside "Outside temperature [K]"
+  Modelica.Blocks.Interfaces.RealInput TOutside(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC") "Outside temperature [K]"
     annotation (Placement(transformation(
         extent={{-13.5,-13.5},{13.5,13.5}},
         rotation=0,
@@ -25,12 +28,18 @@ partial model PartialExternalControl
         rotation=270,
         origin={-15,-99}), iconTransformation(extent={{92,8},{112,28}},
           rotation=0)));
-  Modelica.Blocks.Interfaces.RealOutput TFlowSet
-    "Target temperature of the controller [K]" annotation (Placement(
+  Modelica.Blocks.Interfaces.RealOutput TFlowSet(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC")
+    "Target temperature of the controller" annotation (Placement(
         transformation(extent={{92,38},{112,58}}), iconTransformation(extent={{
             92,38},{112,58}})));
-  Modelica.Blocks.Interfaces.RealInput TFlowIs
-    "Actual outgoing temperature [K]" annotation (Placement(transformation(
+  Modelica.Blocks.Interfaces.RealInput TFlowIs(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC")
+    "Actual outgoing temperature" annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={75,-100.5}), iconTransformation(

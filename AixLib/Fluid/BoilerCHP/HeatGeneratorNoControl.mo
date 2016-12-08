@@ -2,24 +2,31 @@ within AixLib.Fluid.BoilerCHP;
 model HeatGeneratorNoControl "Simple heat generator without control"
   extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(pressureDrop(
         a=coeffPresLoss), vol(V=V));
-  Modelica.Blocks.Interfaces.RealInput Q_flow
+  Modelica.Blocks.Interfaces.RealInput Q_flow(final unit="W")
     "Prescribed heat flow"
     annotation (Placement(transformation(extent={{-100,40},{-60,80}}),
         iconTransformation(extent={{-100,40},{-60,80}})));
-  Modelica.Blocks.Interfaces.RealOutput TCold
+  Modelica.Blocks.Interfaces.RealOutput TCold(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC")
     "Temperature of the passing fluid"
     annotation (Placement(transformation(extent={{44,76},{64,96}}),
         iconTransformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-40,90})));
-  Modelica.Blocks.Interfaces.RealOutput THot "Temperature of the passing fluid"
+  Modelica.Blocks.Interfaces.RealOutput THot(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC") "Temperature of the passing fluid"
     annotation (Placement(transformation(extent={{100,50},{120,70}}),
         iconTransformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={0,90})));
-  Modelica.Blocks.Interfaces.RealOutput massFlow
+  Modelica.Blocks.Interfaces.RealOutput massFlow(quantity="MassFlowRate",
+    final unit="kg/s")
     "Mass flow rate from port_a to port_b"
     annotation (Placement(transformation(extent={{100,30},{120,50}}),
         iconTransformation(

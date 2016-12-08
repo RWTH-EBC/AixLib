@@ -30,10 +30,16 @@ model DelayedOnOffController "CHP On/Off controller"
       origin={0,-50},
       extent={{-8,-8},{8,8}},
       rotation=90)));
-  Modelica.Blocks.Interfaces.RealInput flowTemp "Flow temperature"
+  Modelica.Blocks.Interfaces.RealInput flowTemp(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC") "Flow temperature"
     annotation (Placement(transformation(extent={{-140,40},{-100,80}},
         rotation=0)));
-  Modelica.Blocks.Interfaces.RealInput returnTemp "Return temperature"
+  Modelica.Blocks.Interfaces.RealInput returnTemp(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC") "Return temperature"
     annotation (Placement(transformation(
       origin={0,-120},
       extent={{-20,-20},{20,20}},
@@ -41,7 +47,10 @@ model DelayedOnOffController "CHP On/Off controller"
   Modelica.Blocks.Interfaces.BooleanOutput y "Signal if controller is on or off"
     annotation (Placement(transformation(extent={{100,-10},{120,10}},
         rotation=0)));
-  Modelica.Blocks.Interfaces.RealInput flowTemp_setpoint "Flow temperature setpoint"
+  Modelica.Blocks.Interfaces.RealInput flowTemp_setpoint(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC") "Flow temperature setpoint"
     annotation (Placement(transformation(
       origin={-60,120},
       extent={{-20,-20},{20,20}},

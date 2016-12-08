@@ -38,8 +38,11 @@ model InternalControl "Internal control model for boiler"
     columns={2},
     smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments) "Table with efficiency parameters"
     annotation (Placement(transformation(extent={{4.5,4.5},{15,15}})));
-  Modelica.Blocks.Interfaces.RealInput Tflow_set
-      "Target temperature of the controller[K]"  annotation (Placement(
+  Modelica.Blocks.Interfaces.RealInput Tflow_set(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC")
+      "Target temperature of the controller"  annotation (Placement(
         transformation(
         extent={{-15.25,-15.25},{15.25,15.25}},
         rotation=0,
@@ -51,19 +54,26 @@ model InternalControl "Internal control model for boiler"
     annotation (Placement(transformation(extent={{-13.5,6},{-4.5,15}})));
   Modelica.Blocks.Math.Product product
     annotation (Placement(transformation(extent={{21,24},{30,33}})));
-  Modelica.Blocks.Interfaces.RealInput TFlowHot "Outgoing temperature [K]"
+  Modelica.Blocks.Interfaces.RealInput TFlowHot(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC") "Outgoing temperature"
     annotation (Placement(transformation(extent={{-126.5,-20},{-86.5,20}}),
         iconTransformation(extent={{113,3},{87,29}})));
-  Modelica.Blocks.Interfaces.RealOutput QflowHeater
+  Modelica.Blocks.Interfaces.RealOutput QflowHeater(final unit="W")
       "Connector of real output signal"
     annotation (Placement(transformation(extent={{66.5,18.5},{86.5,38.5}}),
         iconTransformation(extent={{-90.5,29},{-110.5,49}})));
-  Modelica.Blocks.Interfaces.RealInput mFlow
-      "Mass flow through the boiler [kg/s]"
+  Modelica.Blocks.Interfaces.RealInput mFlow(quantity="MassFlowRate",
+      final unit="kg/s")
+      "Mass flow through the boiler"
     annotation (Placement(transformation(extent={{-125,-84.5},{-85,-44.5}}),
         iconTransformation(extent={{114.5,-63},{87,-35.5}})));
-  Modelica.Blocks.Interfaces.RealInput TFlowCold
-    "Temperature of the cold water[K]" annotation (Placement(transformation(
+  Modelica.Blocks.Interfaces.RealInput TFlowCold(
+    final quantity="ThermodynamicTemperature",
+    final unit="K",
+    displayUnit="degC")
+    "Temperature of the cold water" annotation (Placement(transformation(
           extent={{-125,-51.5},{-85,-11.5}}), iconTransformation(extent={{114.5,
             -30},{87,-2.5}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
