@@ -1,5 +1,5 @@
 within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
-model ExternalControl_nightDayHC
+model ExternalControlNightDayHC
   "With night and day modes, both with heating curves"
   extends PartialExternalControl;
 
@@ -266,4 +266,4 @@ revisions="<html>
 <li><i>October 12, 2011</i> by Ana Constantin:<br/>Implemented</li>
 </ul></p>
 </html>"));
-end ExternalControl_nightDayHC;
+end ExternalControlNightDayHC;
