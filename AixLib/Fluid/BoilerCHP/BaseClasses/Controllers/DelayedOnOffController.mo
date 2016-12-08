@@ -3,8 +3,8 @@ model DelayedOnOffController
 
   parameter Modelica.SIunits.Temperature maxTReturn = 343.15
     "Maximum return temperature";
-  parameter Real minDeltaT = 10 "Minimum flow and return temperature difference";
-  parameter Real TFlowRange=5 "Range of the flow temperature";
+  parameter Modelica.SIunits.ThermodynamicTemperature minDeltaT = 10 "Minimum flow and return temperature difference";
+  parameter Modelica.SIunits.ThermodynamicTemperature TFlowRange=5 "Range of the flow temperature";
   parameter Modelica.SIunits.Time delayTime = 1800 "On/Off delay time";
   parameter Boolean initialOutput=false "Initial output";
   parameter Real delayUnit=200 "Delay unit";

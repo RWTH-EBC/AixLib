@@ -18,10 +18,10 @@ model CHP
   parameter Boolean ctrlStrategy = true
     "True for flow-, false for return- temperature control strategy"
     annotation(Dialog(group="Control system"));
-  parameter Real minDeltaT = 10
+  parameter Modelica.SIunits.ThermodynamicTemperature minDeltaT = 10
     "Minimum flow and return temperature difference"
     annotation(Dialog(group="Control system"));
-  parameter Real TFlowRange = 2 "Range of allowable flow temperature"
+  parameter Modelica.SIunits.ThermodynamicTemperature TFlowRange = 2 "Range of allowable flow temperature"
     annotation(Dialog(group="Control system"));
   parameter Modelica.SIunits.Time delayTime = 3600 "Shutdown/Startup delay"
     annotation(Dialog(group="Control system"));
