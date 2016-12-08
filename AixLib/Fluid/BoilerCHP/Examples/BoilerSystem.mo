@@ -29,7 +29,9 @@ model BoilerSystem "Example that illustrates use of boiler model"
     FA=0,
     paramHC=DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day25_Night10(),
     riseTime=0,
-    TN=0.05) "Boiler" annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+    TN=0.05,
+    paramBoiler=DataBase.Boiler.General.Boiler_Vitogas200F_11kW())
+             "Boiler" annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
   Modelica.Fluid.Sources.Boundary_pT sink(nPorts=1, redeclare package Medium =
         Media.Specialized.Water.TemperatureDependentDensity) "Sink"

@@ -8,20 +8,20 @@ model PIController "Two coupled PI controllers for CHP control"
   Modelica.Blocks.Logical.Switch switch1
     annotation (Placement(transformation(extent={{-70,0},{-50,20}})));
   Modelica.Blocks.Continuous.LimPID PI(
-    controllerType=Modelica.Blocks.Types.SimpleController.PI,
+    final controllerType=Modelica.Blocks.Types.SimpleController.PI,
     yMax=100,
     y_start=0,
-    k=Kc,
-    Ti=Tc,
-    yMin=minCapacity) "PI controller"
+    final k=Kc,
+    final Ti=Tc,
+    final yMin=minCapacity) "PI controller"
                annotation (Placement(transformation(
           extent={{-36,34},{-16,54}})));
   Modelica.Blocks.Continuous.LimPID PI1(
-    controllerType=Modelica.Blocks.Types.SimpleController.PI,
+    final controllerType=Modelica.Blocks.Types.SimpleController.PI,
     yMax=100,
     yMin=0,
-    k=Kc,
-    Ti=Tc) "Limited PI controller" annotation (Placement(transformation(extent={
+    final k=Kc,
+    final Ti=Tc) "Limited PI controller" annotation (Placement(transformation(extent={
             {-12,72},{8,92}})));
   Modelica.Blocks.Discrete.TriggeredSampler triggeredSampler(y_start=0)
     annotation (Placement(transformation(extent={{-42,74},

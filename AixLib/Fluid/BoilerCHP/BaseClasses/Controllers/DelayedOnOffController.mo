@@ -14,7 +14,7 @@ model DelayedOnOffController "CHP On/Off controller"
         extent={{-22,16},{-8,30}}, rotation=0)));
   Modelica.Blocks.Logical.Pre pre2 annotation (Placement(transformation(
         extent={{-48,-12},{-34,0}}, rotation=0)));
-  Modelica.Blocks.Logical.OnOffController onOffController(bandwidth=minDeltaT) "OnOff controller"
+  Modelica.Blocks.Logical.OnOffController onOffController(final bandwidth=minDeltaT) "OnOff controller"
                    annotation (Placement(transformation(extent={{-76,-16},{
           -56,4}}, rotation=0)));
   Modelica.Blocks.Logical.LessThreshold lessThreshold(threshold=TFlowRange)
@@ -55,7 +55,7 @@ model DelayedOnOffController "CHP On/Off controller"
       origin={-60,120},
       extent={{-20,-20},{20,20}},
       rotation=270)));
-  Modelica.Blocks.Discrete.UnitDelay unitDelay(samplePeriod=delayUnit) "Last value"
+  Modelica.Blocks.Discrete.UnitDelay unitDelay(final samplePeriod=delayUnit) "Last value"
     annotation (Placement(transformation(extent={{32,-14},{40,-6}})));
   Modelica.Blocks.Math.Feedback feedback
     annotation (Placement(transformation(
@@ -91,7 +91,7 @@ model DelayedOnOffController "CHP On/Off controller"
          0)));
   Modelica.Blocks.Logical.Or or3 annotation (Placement(transformation(
         extent={{16,-10},{24,10}}, rotation=0)));
-  Modelica.Blocks.Logical.LessThreshold lessThreshold1(threshold=minCapacity)
+  Modelica.Blocks.Logical.LessThreshold lessThreshold1(final threshold=minCapacity)
     annotation (Placement(transformation(extent={{52,-4},{60,4}}, rotation=
           0)));
   Modelica.Blocks.Logical.GreaterEqualThreshold greaterEqualThreshold(threshold=
@@ -101,11 +101,11 @@ model DelayedOnOffController "CHP On/Off controller"
         rotation=0)));
   Modelica.Blocks.Logical.Or or4 annotation (Placement(transformation(
         extent={{88,-6},{96,6}}, rotation=0)));
-  Modelica.Blocks.MathBoolean.OnDelay onDelay(delayTime=delayTime) "On delay"
+  Modelica.Blocks.MathBoolean.OnDelay onDelay(final delayTime=delayTime) "On delay"
     annotation (Placement(transformation(extent={{50,62},{58,70}})));
-  Modelica.Blocks.MathBoolean.OnDelay onDelay1(delayTime=delayTime) "On delay"
+  Modelica.Blocks.MathBoolean.OnDelay onDelay1(final delayTime=delayTime) "On delay"
     annotation (Placement(transformation(extent={{50,-52},{58,-44}})));
-  Modelica.Blocks.Nonlinear.FixedDelay fixedDelay(delayTime=delayTime) "Fixed delay"
+  Modelica.Blocks.Nonlinear.FixedDelay fixedDelay(final delayTime=delayTime) "Fixed delay"
     annotation (Placement(transformation(extent={{48,-18},{56,-10}})));
 initial equation
   pre(y)=initialOutput;

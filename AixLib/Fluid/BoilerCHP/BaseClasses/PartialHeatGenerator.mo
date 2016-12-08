@@ -2,16 +2,16 @@ within AixLib.Fluid.BoilerCHP.BaseClasses;
 partial model PartialHeatGenerator "Partial model for heat generators"
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
   Sensors.TemperatureTwoPort senTCold(
-    redeclare package Medium = Medium,
-    tau=tau,
-    m_flow_nominal=m_flow_nominal,
-    initType=initType,
-    T_start=T_start,
-    transferHeat=transferHeat,
-    TAmb=TAmb,
-    tauHeaTra=tauHeaTra,
-    allowFlowReversal=allowFlowReversal,
-    m_flow_small=m_flow_small) "Temperature sensor of cold side of heat generator (return)"
+    redeclare final package Medium = Medium,
+    final tau=tau,
+    final m_flow_nominal=m_flow_nominal,
+    final initType=initType,
+    final T_start=T_start,
+    final transferHeat=transferHeat,
+    final TAmb=TAmb,
+    final tauHeaTra=tauHeaTra,
+    final allowFlowReversal=allowFlowReversal,
+    final m_flow_small=m_flow_small) "Temperature sensor of cold side of heat generator (return)"
     annotation (Placement(transformation(extent={{-80,-90},{-60,-70}})));
   parameter Modelica.SIunits.Time tau=1
     "Time constant of the temperature sensors at nominal flow rate"
@@ -32,19 +32,19 @@ partial model PartialHeatGenerator "Partial model for heat generators"
     "Time constant for heat transfer, default 20 minutes"
     annotation (Dialog(tab="Advanced", group="Sensor Properties"));
   Sensors.TemperatureTwoPort senTHot(
-    redeclare package Medium = Medium,
-    tau=tau,
-    m_flow_nominal=m_flow_nominal,
-    initType=initType,
-    T_start=T_start,
-    transferHeat=transferHeat,
-    TAmb=TAmb,
-    tauHeaTra=tauHeaTra,
-    allowFlowReversal=allowFlowReversal,
-    m_flow_small=m_flow_small) "Temperature sensor of hot side of heat generator (supply)"
+    redeclare final package Medium = Medium,
+    final tau=tau,
+    final m_flow_nominal=m_flow_nominal,
+    final initType=initType,
+    final T_start=T_start,
+    final transferHeat=transferHeat,
+    final TAmb=TAmb,
+    final tauHeaTra=tauHeaTra,
+    final allowFlowReversal=allowFlowReversal,
+    final m_flow_small=m_flow_small) "Temperature sensor of hot side of heat generator (supply)"
     annotation (Placement(transformation(extent={{30,-90},{50,-70}})));
-  Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium,
-      allowFlowReversal=allowFlowReversal) "Sensor for mass flwo rate"
+  Sensors.MassFlowRate senMasFlo(redeclare final package Medium = Medium,
+      final allowFlowReversal=allowFlowReversal) "Sensor for mass flwo rate"
     annotation (Placement(transformation(extent={{60,-90},{80,-70}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heater "Prescribed heat flow" annotation (
       Placement(transformation(
@@ -52,23 +52,23 @@ partial model PartialHeatGenerator "Partial model for heat generators"
         rotation=-90,
         origin={-60,-50})));
   MixingVolumes.MixingVolume vol(
-    redeclare package Medium = Medium,
-    m_flow_nominal=m_flow_nominal,
-    m_flow_small=m_flow_small,
-    allowFlowReversal=allowFlowReversal,
-    nPorts=2,
-    p_start=p_start,
-    T_start=T_start) "Fluid volume"
+    redeclare final package Medium = Medium,
+    final m_flow_nominal=m_flow_nominal,
+    final m_flow_small=m_flow_small,
+    final allowFlowReversal=allowFlowReversal,
+    final nPorts=2,
+    final p_start=p_start,
+    final T_start=T_start) "Fluid volume"
     annotation (Placement(transformation(extent={{-50,-80},{-30,-60}})));
   Modelica.Fluid.Fittings.GenericResistances.VolumeFlowRate pressureDrop(
-    redeclare package Medium = Medium,
-    b=0,
-    m_flow_small=m_flow_small,
-    show_T=false,
-    show_V_flow=false,
-    allowFlowReversal=allowFlowReversal,
-    dp_start=dp_start,
-    m_flow_start=m_flow_start) "Pressure drop"
+    redeclare final package Medium = Medium,
+    final b=0,
+    final m_flow_small=m_flow_small,
+    final show_T=false,
+    final show_V_flow=false,
+    final allowFlowReversal=allowFlowReversal,
+    final dp_start=dp_start,
+    final m_flow_start=m_flow_start) "Pressure drop"
     annotation (Placement(transformation(extent={{-20,-90},{0,-70}})));
   parameter Modelica.Media.Interfaces.Types.AbsolutePressure dp_start=0
     "Guess value of dp = port_a.p - port_b.p"

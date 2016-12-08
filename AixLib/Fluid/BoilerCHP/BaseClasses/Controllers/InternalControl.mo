@@ -10,14 +10,14 @@ model InternalControl "Internal control model for boiler"
       "Time constant of boiler heater (T>0 required)";
   parameter Modelica.SIunits.Time riseTime
       "Rise/fall time for step input(T>0 required)";
-  Real outputPower;
-  Controls.Continuous.PITemp                ControlerHeater(
-    KR=KR,
-    TN=TN,
-    h=paramBoiler.Q_nom,
-    l=paramBoiler.Q_min,
-    triggeredTrapezoid(rising=riseTime, falling=riseTime),
-    rangeSwitch=false) "PI temperature controller"
+  Real outputPower "Output power";
+  Controls.Continuous.PITemp  ControlerHeater(
+    final KR=KR,
+    final TN=TN,
+    final h=paramBoiler.Q_nom,
+    final l=paramBoiler.Q_min,
+    triggeredTrapezoid(final rising=riseTime, final falling=riseTime),
+    final rangeSwitch=false) "PI temperature controller"
     annotation (Placement(transformation(extent={{-40.5,36},{-24,52.5}})));
   Modelica.Blocks.Interfaces.BooleanInput isOn "On/Off switch for the boiler"
     annotation (Placement(transformation(extent={{-112.5,27},{-87,52.5}}),
@@ -25,18 +25,18 @@ model InternalControl "Internal control model for boiler"
         extent={{-12.75,-12.75},{12.75,12.75}},
         rotation=-90,
         origin={-24.75,102.75})));
-  Utilities.Sensors.EnergyMeter         eEnergyMeter_P
+  Utilities.Sensors.EnergyMeter eEnergyMeter_P
       "For primary energy consumption"
     annotation (Placement(transformation(extent={{30,63},{49.5,84}})));
 
-  Utilities.Sensors.EnergyMeter         eEnergyMeter_S
+  Utilities.Sensors.EnergyMeter eEnergyMeter_S
       "For secondary energy consumption"
     annotation (Placement(transformation(extent={{30,82.5},{49.5,103.5}})));
   Modelica.Blocks.Tables.CombiTable1D efficiencyTable(
-    tableOnFile=false,
-    table=paramBoiler.eta,
-    columns={2},
-    smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments) "Table with efficiency parameters"
+    final tableOnFile=false,
+    final table=paramBoiler.eta,
+    final columns={2},
+    final smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments) "Table with efficiency parameters"
     annotation (Placement(transformation(extent={{4.5,4.5},{15,15}})));
   Modelica.Blocks.Interfaces.RealInput Tflow_set(
     final quantity="ThermodynamicTemperature",
@@ -50,7 +50,7 @@ model InternalControl "Internal control model for boiler"
         extent={{-12.875,-12.875},{12.875,12.875}},
         rotation=-90,
         origin={20.375,101.125})));
-  Modelica.Blocks.Math.Gain QNormated(k=1/paramBoiler.Q_nom)
+  Modelica.Blocks.Math.Gain QNormated(final k=1/paramBoiler.Q_nom)
     annotation (Placement(transformation(extent={{-13.5,6},{-4.5,15}})));
   Modelica.Blocks.Math.Product product
     annotation (Placement(transformation(extent={{21,24},{30,33}})));

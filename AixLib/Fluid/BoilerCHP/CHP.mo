@@ -34,17 +34,17 @@ model CHP "Table based CHP model"
     annotation(Dialog(group="Control system"));
 
   BaseClasses.Controllers.DelayedOnOffController delayedOnOffController(
-    maxTReturn=param.maxTReturn,
-    minDeltaT=minDeltaT,
-    TFlowRange=TFlowRange,
-    delayTime=delayTime,
-    delayUnit=delayUnit,
-    minCapacity=minCapacity) "OnOff controller to swicht between the modes"
+    final maxTReturn=param.maxTReturn,
+    final minDeltaT=minDeltaT,
+    final TFlowRange=TFlowRange,
+    final delayTime=delayTime,
+    final delayUnit=delayUnit,
+    final minCapacity=minCapacity) "OnOff controller to swicht between the modes"
     annotation (Placement(transformation(extent={{-44,-10},{-24,10}})));
   BaseClasses.Controllers.PIController thControl(
-    Kc=Kc,
-    Tc=Tc,
-    minCapacity=minCapacity) "Thermal controller"
+    final Kc=Kc,
+    final Tc=Tc,
+    final minCapacity=minCapacity) "Thermal controller"
     annotation (Placement(transformation(extent={{-10,20},{10,40}})));
   Modelica.Blocks.Math.Min min
     "Determines the min value of both PI controllers"
@@ -53,22 +53,22 @@ model CHP "Table based CHP model"
   Modelica.Blocks.Tables.CombiTable1Ds combiTable1Ds(
     tableName="NoName",
     fileName="NoName",
-    table=param.data_CHP) "time table to read CHP performance data"
+    final table=param.data_CHP) "time table to read CHP performance data"
     annotation (Placement(transformation(extent={{48,40},{68,60}}, rotation=0)));
   Modelica.Blocks.Continuous.LimPID elControl(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     yMax=100,
     yMin=0,
     y_start=0,
-    k=Kc,
-    Ti=Tc) "Electrical controller" annotation (Placement(transformation(extent={{-10,60},{10,80}},
+    final k=Kc,
+    final Ti=Tc) "Electrical controller" annotation (Placement(transformation(extent={{-10,60},{10,80}},
           rotation=0)));
-  Modelica.Blocks.Sources.Constant constSetpoint(k=if ctrlStrategy then (param.maxTFlow)
+  Modelica.Blocks.Sources.Constant constSetpoint(final k=if ctrlStrategy then (param.maxTFlow)
  else
      (param.maxTReturn)) "Constant setpoint if utilized"
                                 annotation (Placement(transformation(extent={{-86,
             74},{-74,86}}, rotation=0)));
-  Modelica.Blocks.Sources.Constant const(k=minCapacity + 10) "Adds safety value on min capacity"
+  Modelica.Blocks.Sources.Constant const(final k=minCapacity + 10) "Adds safety value on min capacity"
     annotation (Placement(transformation(extent={{-80,-6},{-68,6}},  rotation=
          0)));
   Modelica.Blocks.Logical.Switch ctrlSwitch
@@ -81,7 +81,7 @@ model CHP "Table based CHP model"
     annotation (Placement(transformation(extent={{-26,-54},{-14,-42}},
                                                                      rotation=
          0)));
-  Modelica.Blocks.Math.Gain gain(k=1000) "Conversion factor"
+  Modelica.Blocks.Math.Gain gain(final k=1000) "Conversion factor"
     annotation (Placement(transformation(extent={{60,-36},{48,-24}})));
   Modelica.Blocks.Sources.Constant exothermicTemperature(k=1783.4) "Exothermic temperature"
     annotation (Placement(transformation(extent={{52,12},{68,28}})));

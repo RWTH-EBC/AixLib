@@ -48,19 +48,19 @@ model Boiler "Boiler with internal and external control"
     displayUnit="degC") "Ambient air temperature" annotation (Placement(
         transformation(extent={{-100,40},{-60,80}}), iconTransformation(extent=
            {{-80,60},{-60,80}})));
-  BaseClasses.Controllers.InternalControl internalControl(paramBoiler=
+  BaseClasses.Controllers.InternalControl internalControl(final paramBoiler=
         paramBoiler,
-    KR=KR,
-    TN=TN,
-    riseTime=riseTime) "Internal control"
+    final KR=KR,
+    final TN=TN,
+    final riseTime=riseTime) "Internal control"
     annotation (Placement(transformation(extent={{-50,-10},{-70,10}})));
 
-  ExtControl myExternalControl(paramHC=paramHC,
-    declination=declination,
-    Tdelta_Max=Tdelta_Max,
-    Tdelta_Min=Tdelta_Min,
-    Fb=Fb,
-    FA=FA) "External control"
+  ExtControl myExternalControl(final paramHC=paramHC,
+    final declination=declination,
+    final Tdelta_Max=Tdelta_Max,
+    final Tdelta_Min=Tdelta_Min,
+    final Fb=Fb,
+    final FA=FA) "External control"
      annotation (Placement(transformation(extent={{-10,38},
             {10,58}})));
 
