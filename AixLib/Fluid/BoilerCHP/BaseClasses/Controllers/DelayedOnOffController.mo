@@ -5,10 +5,10 @@ model DelayedOnOffController "CHP On/Off controller"
     "Maximum return temperature";
   parameter Modelica.SIunits.ThermodynamicTemperature minDeltaT "Minimum flow and return temperature difference";
   parameter Modelica.SIunits.ThermodynamicTemperature TFlowRange "Range of the flow temperature";
-  parameter Modelica.SIunits.Time delayTime = 1800 "On/Off delay time";
+  parameter Modelica.SIunits.Time delayTime "On/Off delay time";
   parameter Boolean initialOutput=false "Initial output";
-  parameter Real delayUnit=200 "Delay unit";
-  parameter Real minCapacity = 30 "Minimum allowable working capacity in percent";
+  parameter Real delayUnit "Delay unit";
+  parameter Real minCapacity "Minimum allowable working capacity in percent";
 
   Modelica.Blocks.Logical.And and1 annotation (Placement(transformation(
         extent={{-22,16},{-8,30}}, rotation=0)));

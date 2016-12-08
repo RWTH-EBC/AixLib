@@ -5,10 +5,10 @@ model InternalControl "Internal control model for boiler"
     paramBoiler
     "Parameters for boiler"
   annotation (Dialog(tab = "General", group = "Boiler type"), choicesAllMatching = true);
-  parameter Real KR = 1 "Gain of boiler heater";
-  parameter Modelica.SIunits.Time TN = 0.1
+  parameter Real KR "Gain of boiler heater";
+  parameter Modelica.SIunits.Time TN
       "Time constant of boiler heater (T>0 required)";
-  parameter Modelica.SIunits.Time riseTime=30
+  parameter Modelica.SIunits.Time riseTime
       "Rise/fall time for step input(T>0 required)";
   Real outputPower;
   Controls.Continuous.PITemp                ControlerHeater(

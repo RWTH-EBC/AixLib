@@ -7,14 +7,14 @@ model ExternalControlNightDayHC
     AixLib.DataBase.Boiler.DayNightMode.HeatingCurvesDayNightBaseDataDefinition
     paramHC
     "Parameters for heating curve" annotation (Dialog(group="Heating curves"), choicesAllMatching=true);
-  parameter Real declination = 1.1 "Declination" annotation (Dialog( group= "Heating curves"));
-  parameter Modelica.SIunits.TemperatureDifference Tdelta_Max = 2
+  parameter Real declination "Declination" annotation (Dialog( group= "Heating curves"));
+  parameter Modelica.SIunits.TemperatureDifference Tdelta_Max
     "Difference from set flow temperature over which boiler stops" annotation ( Dialog(group = "OnOff"));
-  parameter Modelica.SIunits.TemperatureDifference Tdelta_Min= 2
+  parameter Modelica.SIunits.TemperatureDifference Tdelta_Min
     "Difference from set flow temperature under which boiler starts" annotation ( Dialog(group = "OnOff"));
-  parameter Modelica.SIunits.Time Fb = 3600
+  parameter Modelica.SIunits.Time Fb
     "Period of time for increased set temperature" annotation ( Dialog(group = "Day/Night Mode"));
-  parameter Real FA = 0.2 "Increment for increased set temperature" annotation ( Dialog(group = "Day/Night Mode"));
+  parameter Real FA "Increment for increased set temperature" annotation ( Dialog(group = "Day/Night Mode"));
   Modelica.Blocks.Logical.Switch switchDayNight "Switch"
     annotation (Placement(transformation(extent={{-19.5,39},{-3,55.5}})));
   ControllerOnOff controlerOnOff "On/Off controller"

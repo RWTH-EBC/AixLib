@@ -3,7 +3,6 @@ record BoilerTwoPointBaseDataDefinition
   "Basic data for boiler with two point characteristic"
   extends Modelica.Icons.Record;
   import SI = Modelica.SIunits;
-  import SIconv = Modelica.SIunits.Conversions.NonSIunits;
 
   parameter String name "Name of boiler";
   parameter SI.Volume volume "Water volume of boiler";

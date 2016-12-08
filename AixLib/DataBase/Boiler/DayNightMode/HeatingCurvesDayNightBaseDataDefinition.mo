@@ -6,8 +6,8 @@ import SI = Modelica.SIunits;
 import SIconv = Modelica.SIunits.Conversions.NonSIunits;
 
 parameter String name "Name of data set";
-parameter Real varFlowTempDay[:, :] "Variable flow temperature during day time";
-parameter Real varFlowTempNight[:, :]
+parameter Real varFlowTempDay[:,:] "Variable flow temperature during day time";
+parameter Real varFlowTempNight[:,:]
     "Variable flow temperature during night time (reduced)";
 
 annotation (Documentation(info="<html>
