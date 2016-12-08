@@ -1,7 +1,7 @@
 within AixLib.Fluid.BoilerCHP;
 model CHP
   extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(pressureDrop(
-        a=1e10), vol(V=param.Vol[1]));
+        a=1e10), vol(V=param.vol[1]));
 
   parameter AixLib.DataBase.CHP.CHPBaseDataDefinition
       param "CHP data set"
@@ -34,7 +34,7 @@ model CHP
     annotation(Dialog(group="Control system"));
 
   BaseClasses.Controllers.DelayedOnOffController delayedOnOffController(
-    maxTReturn=param.MaxTReturn,
+    maxTReturn=param.maxTReturn,
     minDeltaT=minDeltaT,
     TFlowRange=TFlowRange,
     delayTime=delayTime,
@@ -63,9 +63,9 @@ model CHP
     k=Kc,
     Ti=Tc) "Electrical controller" annotation (Placement(transformation(extent={{-10,60},{10,80}},
           rotation=0)));
-  Modelica.Blocks.Sources.Constant constSetpoint(k=if ctrlStrategy then (param.MaxTFlow)
+  Modelica.Blocks.Sources.Constant constSetpoint(k=if ctrlStrategy then (param.maxTFlow)
  else
-     (param.MaxTReturn)) "Constant setpoint if utilized"
+     (param.maxTReturn)) "Constant setpoint if utilized"
                                 annotation (Placement(transformation(extent={{-86,
             74},{-74,86}}, rotation=0)));
   Modelica.Blocks.Sources.Constant const(k=minCapacity + 10) "Adds safety value on min capacity"

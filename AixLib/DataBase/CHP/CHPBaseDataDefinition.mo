@@ -3,15 +3,12 @@ record CHPBaseDataDefinition "Basic CHP data"
 extends Modelica.Icons.Record;
 
   import SI = Modelica.SIunits;
-  import SIconv = Modelica.SIunits.Conversions.NonSIunits;
 
-  parameter SI.volume vol[:] "Water volume of CHP";
+  parameter SI.Volume vol[:] "Water volume of CHP";
   parameter Real data_CHP[:,5];
           //Matrix contains : [capacity [Percent], electrical power [kW], total heat recovery [kW], fuel input [kW], fuel consumption [m3/h]]
-
   parameter SI.Temperature maxTFlow "Maximum flow temperature";
   parameter SI.Temperature maxTReturn "Maximum return temperature";
-
   parameter SI.Length DPipe "Outlet pipe diameter";
 
   annotation (Documentation(info="<html>

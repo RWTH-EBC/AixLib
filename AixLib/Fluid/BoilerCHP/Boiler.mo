@@ -1,7 +1,7 @@
 within AixLib.Fluid.BoilerCHP;
 model Boiler
   extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(pressureDrop(
-        a=paramBoiler.PressureDrop), vol(V=paramBoiler.volume));
+        a=paramBoiler.pressureDrop), vol(V=paramBoiler.volume));
 
   replaceable model ExtControl =
    AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.ExternalControlNightDayHC

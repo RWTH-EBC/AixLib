@@ -2,7 +2,7 @@ within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
 model InternalControl
 
   parameter AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition
-    paramBoiler = AixLib.DataBase.Boiler.General.Boiler_Vitogas200F_11kW()
+    paramBoiler
     "Parameters for boiler"
   annotation (Dialog(tab = "General", group = "Boiler type"), choicesAllMatching = true);
   parameter Real KR = 1 "Gain of boiler heater";
