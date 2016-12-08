@@ -130,13 +130,13 @@ equation
           fillPattern=FillPattern.Solid,
           textString="%name")}),
     Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
+<h4><span style=\"color: #008000\">Overview</span></h4>
 <p>Internal control of the boiler</p>
-<p><br><h4><span style=\"color:#008000\">Concept</span></h4></p>
+<h4><span style=\"color: #008000\">Concept</span></h4>
 <p>This model is a derivation of BoilerTaktTable.</p>
 <p>There is a differentiation made between primary and secondary energy consumption.</p>
 <p>The primary power output can be read at the output of <b>ControlerHeater. </b>It is then multiplied with an efficienca factor to calculate the the effective heat flow that heats up the fluid in the boiler<b>.</b></p>
-<p>There are two energy meters: one for the primary energy and one for the secondary.
+<p>There are two energy meters: one for the primary energy and one for the secondary. </p>
 </html>",
 revisions="<html>
 <p><ul>

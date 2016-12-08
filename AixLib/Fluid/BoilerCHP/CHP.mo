@@ -18,10 +18,10 @@ model CHP "Table based CHP model"
   parameter Boolean ctrlStrategy = true
     "True for flow-, false for return- temperature control strategy"
     annotation(Dialog(group="Control system"));
-  parameter Modelica.SIunits.ThermodynamicTemperature minDeltaT = 10
+  parameter Modelica.SIunits.TemperatureDifference minDeltaT = 10
     "Minimum flow and return temperature difference"
     annotation(Dialog(group="Control system"));
-  parameter Modelica.SIunits.ThermodynamicTemperature TFlowRange = 2 "Range of allowable flow temperature"
+  parameter Modelica.SIunits.TemperatureDifference TFlowRange = 2 "Range of allowable flow temperature"
     annotation(Dialog(group="Control system"));
   parameter Modelica.SIunits.Time delayTime = 3600 "Shutdown/Startup delay"
     annotation(Dialog(group="Control system"));
@@ -106,7 +106,6 @@ model CHP "Table based CHP model"
         extent={{-9.75,-9.75},{9.75,9.75}},
         rotation=-90,
         origin={-29.75,-89.75})));
-public
   Modelica.Blocks.Interfaces.RealOutput electricalPower "Electrical power" annotation (Placement(
         transformation(
         origin={30,90},

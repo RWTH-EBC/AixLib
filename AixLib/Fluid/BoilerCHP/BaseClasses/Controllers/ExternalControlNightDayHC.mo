@@ -246,9 +246,6 @@ equation
     Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>This is a controller model, modelled after the <a href=\"DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day25_Night10\">Vitotronic 200</a>. </p>
-<p>This model is derived from <a href=\"HVAC.Components.HeatGenerators.Boiler.BaseClasses.Controller\">HVAC.Components.HeatGenerators.Boiler.BaseClasses.Controller</a>.</p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars2.png\"/></p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <p>The following control decisions are implemented:</p>
 <ul>

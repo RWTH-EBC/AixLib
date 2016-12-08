@@ -11,13 +11,12 @@ model Boiler "Boiler with internal and external control"
    annotation (Dialog(tab="External Control"),choicesAllMatching=true);
 
   parameter AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition
-    paramBoiler = AixLib.DataBase.Boiler.General.Boiler_Vitogas200F_11kW() "Parameters for Boiler"
+    paramBoiler "Parameters for Boiler"
   annotation (Dialog(tab = "General", group = "Boiler type"), choicesAllMatching = true);
 
   parameter
     AixLib.DataBase.Boiler.DayNightMode.HeatingCurvesDayNightBaseDataDefinition
-    paramHC=
-      AixLib.DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day25_Night10()
+    paramHC
          "Parameters for heating curve"
     annotation (Dialog(group="Heating curves"), choicesAllMatching=true);
 
