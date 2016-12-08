@@ -33,6 +33,7 @@ record HeatingCurves_Vitotronic_Day25_Night10
 </html>",
       revisions="<html>
 <p><ul>
+<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib conventions</li>
 <li><i>July 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
 </ul></p>
 </html>"));

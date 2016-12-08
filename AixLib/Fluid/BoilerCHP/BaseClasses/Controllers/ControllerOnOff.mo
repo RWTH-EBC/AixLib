@@ -56,10 +56,9 @@ algorithm
           textString="Controller")}),
     Documentation(revisions="<html>
 <ul>
-  <li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
-<li><i>Mai 23, 2011&nbsp;</i>
-         by Ana Constantin:<br>
-         Adapted from a model of Kristian Huchtemann.</li>
+<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib conventions</li>
+<li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
+<li><i>Mai 23, 2011&nbsp;</i>by Ana Constantin:<br/>Adapted from a model of Kristian Huchtemann.</li>
 </ul>
 </html>",
 info="<html>

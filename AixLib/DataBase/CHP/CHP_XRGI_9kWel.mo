@@ -117,7 +117,6 @@ record CHP_XRGI_9kWel "Eco Power: mini BHKW XRGI 9 (12-20 kW thermal)"
 <p><ul>
 <li></li>
 <li><i>January 24, 2013</i> by Peter Matthes:<br/>implemented</li>
-
 </ul></p>
 </html>"));
 end CHP_XRGI_9kWel;

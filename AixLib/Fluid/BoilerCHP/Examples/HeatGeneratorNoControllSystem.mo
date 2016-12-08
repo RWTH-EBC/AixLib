@@ -45,6 +45,7 @@ in order to test the functionality of the <a href=\"AixLib.Fluid.BoilerCHP.BaseC
 </html>",
         revisions="<html>
 <p><ul>
+<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib conventions</li>
 <li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>First implementation</li>
 </ul></p>
 </html>"),

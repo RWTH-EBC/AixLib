@@ -18,9 +18,8 @@ record Boiler_Vitocrossal200_311kW
                                   annotation (preferredView="text",
               Documentation(revisions="<html>
 <ul>
-  <li><i>September 28, 2013&nbsp;</i>
-         by Peter Matthes:<br>
-         implemented.</li>
+<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib conventions</li>
+<li><i>September 28, 2013&nbsp;</i>by Peter Matthes:<br/>implemented.</li>
 </ul>
 </html>", info="<html>
 <p><h4><font color=\"#008000\">Concept</font></h4></p>

@@ -104,7 +104,6 @@ record CHP_Cleanergy_C9G
 <p><ul>
 <li></li>
 <li><i>January 24, 2013</i> by Peter Matthes:<br/>implemented</li>
-
 </ul></p>
 </html>"));
 end CHP_Cleanergy_C9G;

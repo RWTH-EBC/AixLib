@@ -29,7 +29,6 @@ record CHP_mini_ECO_POWER_3_LiquidGas
 <p><ul>
 <li></li>
 <li><i>January 24, 2013</i> by Peter Matthes:<br/>implemented</li>
-
 </ul></p>
 </html>"));
 end CHP_mini_ECO_POWER_3_LiquidGas;
