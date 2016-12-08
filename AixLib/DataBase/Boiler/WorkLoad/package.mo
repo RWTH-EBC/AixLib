@@ -1,5 +1,5 @@
 within AixLib.DataBase.Boiler;
-package WorkLoad
+package WorkLoad "Work load records"
       extends Modelica.Icons.VariantsPackage;
 
 

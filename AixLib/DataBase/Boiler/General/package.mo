@@ -1,5 +1,5 @@
 within AixLib.DataBase.Boiler;
-package General
+package General "General purpose records for boiler models"
       extends Modelica.Icons.VariantsPackage;
 
 

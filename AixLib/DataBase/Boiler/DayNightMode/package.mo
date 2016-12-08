@@ -1,5 +1,5 @@
 within AixLib.DataBase.Boiler;
-package DayNightMode
+package DayNightMode "Day and night mode records"
       extends Modelica.Icons.VariantsPackage;
 
 
