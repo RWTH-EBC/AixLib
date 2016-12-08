@@ -70,25 +70,25 @@ model Boiler
 equation
   connect(internalControl.QflowHeater, heater.Q_flow) annotation (Line(points={
           {-49.95,3.9},{-40,3.9},{-40,-20},{-60,-20},{-60,-40}}, color={0,0,127}));
-  connect(senTCold.T, internalControl.Tflow_cold) annotation (Line(points={{-70,
+  connect(senTCold.T, internalControl.TFlowCold) annotation (Line(points={{-70,
           -69},{-70,-69},{-70,-20},{-80,-20},{-80,-1.625},{-70.075,-1.625}},
         color={0,0,127}));
-  connect(senTHot.T, internalControl.Tflow_hot) annotation (Line(points={{40,-69},
+  connect(senTHot.T, internalControl.TFlowHot) annotation (Line(points={{40,-69},
           {40,-18},{-82,-18},{-82,1.6},{-70,1.6}}, color={0,0,127}));
   connect(senMasFlo.m_flow, internalControl.mFlow) annotation (Line(points={{70,-69},
           {70,-69},{70,-22},{-78,-22},{-78,-4.925},{-70.075,-4.925}},
         color={0,0,127}));
   connect(isOn, myExternalControl.isOn) annotation (Line(points={{30,100},{30,76},
           {-20,76},{-20,50},{-9.9,50},{-9.9,50.25}}, color={255,0,255}));
-  connect(senTHot.T, myExternalControl.Tflow_is) annotation (Line(points={{40,-69},
+  connect(senTHot.T, myExternalControl.TFlowIs) annotation (Line(points={{40,-69},
           {40,-69},{40,-18},{6.5,-18},{6.5,38.8}}, color={0,0,127}));
   connect(myExternalControl.isOn_final, internalControl.isOn) annotation (Line(
         points={{10.2,49.8},{20,49.8},{20,20},{-57.525,20},{-57.525,10.275}},
         color={255,0,255}));
-  connect(myExternalControl.Tflow_set, internalControl.Tflow_set) annotation (
-      Line(points={{10.2,52.8},{18,52.8},{18,22},{-62.0375,22},{-62.0375,10.1125}},
-        color={0,0,127}));
-  connect(TAmbient, myExternalControl.Toutside) annotation (Line(points={{-80,60},
+  connect(myExternalControl.TFlowSet, internalControl.Tflow_set) annotation (
+      Line(points={{10.2,52.8},{18,52.8},{18,22},{-62.0375,22},{-62.0375,
+          10.1125}}, color={0,0,127}));
+  connect(TAmbient,myExternalControl.TOutside)  annotation (Line(points={{-80,60},
           {-22,60},{-22,44.4},{-9.725,44.4}}, color={0,0,127}));
   connect(myExternalControl.switchToNightMode,switchToNightMode)  annotation (
       Line(points={{-9.95,53.625},{-16.975,53.625},{-16.975,30},{-80,30}},

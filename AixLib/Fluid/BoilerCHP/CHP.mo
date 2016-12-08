@@ -7,44 +7,44 @@ model CHP
       param "CHP data set"
     annotation (choicesAllMatching=true,Dialog(group="Unit properties"));
 
-  parameter Real MinCapacity "Minimum allowable working capacity in percent"
+  parameter Real minCapacity "Minimum allowable working capacity in percent"
     annotation(Dialog(group="Unit properties"));
-  parameter Boolean ElectricityDriven = false
+  parameter Boolean electricityDriven = false
     "If the CHP is controlled by electricity demand (external table required)"
     annotation(Dialog(group="Control system"),Evaluate=true, HideResult=true, choices(__Dymola_checkBox=true));
-  parameter Boolean TSet_in = true
+  parameter Boolean TSetIn = true
     "Input temperature setpoint from outside (Otherwise max temp in database)"
     annotation(Dialog(group="Control system"),Evaluate=true, HideResult=true, choices(__Dymola_checkBox=true));
-  parameter Boolean CtrlStrategy = true
+  parameter Boolean ctrlStrategy = true
     "True for flow-, false for return- temperature control strategy"
     annotation(Dialog(group="Control system"));
-  parameter Real MinDeltaT = 10
+  parameter Real minDeltaT = 10
     "Minimum flow and return temperature difference"
     annotation(Dialog(group="Control system"));
   parameter Real TFlowRange = 2 "Range of allowable flow temperature"
     annotation(Dialog(group="Control system"));
-  parameter Modelica.SIunits.Time DelayTime = 3600 "Shutdown/Startup delay"
+  parameter Modelica.SIunits.Time delayTime = 3600 "Shutdown/Startup delay"
     annotation(Dialog(group="Control system"));
   parameter Real Kc = 1 "Gain of the controller"
     annotation(Dialog(group="Control system"));
   parameter Modelica.SIunits.Time Tc=60 "Time Constant (T>0 required)"
     annotation(Dialog(group="Control system"));
-  parameter Modelica.SIunits.Time DelayUnit = 60
+  parameter Modelica.SIunits.Time delayUnit = 60
     "Delay measurement of the controller output"
     annotation(Dialog(group="Control system"));
 
-  BaseClasses.Controllers.delayedOnOffController delayedOnOffController(
-    MaxTReturn=param.MaxTReturn,
-    MinDeltaT=MinDeltaT,
+  BaseClasses.Controllers.DelayedOnOffController delayedOnOffController(
+    maxTReturn=param.MaxTReturn,
+    minDeltaT=minDeltaT,
     TFlowRange=TFlowRange,
-    DelayTime=DelayTime,
-    DelayUnit=DelayUnit,
-    MinCapacity=MinCapacity) "OnOff controller to swicht between the modes"
+    delayTime=delayTime,
+    delayUnit=delayUnit,
+    minCapacity=minCapacity) "OnOff controller to swicht between the modes"
     annotation (Placement(transformation(extent={{-44,-10},{-24,10}})));
   BaseClasses.Controllers.PIController thControl(
     Kc=Kc,
     Tc=Tc,
-    MinCapacity=MinCapacity) "Thermal controller"
+    minCapacity=minCapacity) "Thermal controller"
     annotation (Placement(transformation(extent={{-10,20},{10,40}})));
   Modelica.Blocks.Math.Min min
     "Determines the min value of both PI controllers"
@@ -63,12 +63,12 @@ model CHP
     k=Kc,
     Ti=Tc) "Electrical controller" annotation (Placement(transformation(extent={{-10,60},{10,80}},
           rotation=0)));
-  Modelica.Blocks.Sources.Constant constSetpoint(k=if CtrlStrategy then (param.MaxTFlow)
+  Modelica.Blocks.Sources.Constant constSetpoint(k=if ctrlStrategy then (param.MaxTFlow)
  else
      (param.MaxTReturn)) "Constant setpoint if utilized"
                                 annotation (Placement(transformation(extent={{-86,
             74},{-74,86}}, rotation=0)));
-  Modelica.Blocks.Sources.Constant const(k=MinCapacity + 10) "Adds safety value on min capacity"
+  Modelica.Blocks.Sources.Constant const(k=minCapacity + 10) "Adds safety value on min capacity"
     annotation (Placement(transformation(extent={{-80,-6},{-68,6}},  rotation=
          0)));
   Modelica.Blocks.Logical.Switch ctrlSwitch
@@ -77,7 +77,7 @@ model CHP
       origin={0,0},
       extent={{-10,10},{10,-10}},
       rotation=90)));
-  Modelica.Blocks.Sources.BooleanConstant booleanConstant(k=CtrlStrategy) "Determines control strategy"
+  Modelica.Blocks.Sources.BooleanConstant booleanConstant(k=ctrlStrategy) "Determines control strategy"
     annotation (Placement(transformation(extent={{-26,-54},{-14,-42}},
                                                                      rotation=
          0)));
@@ -85,11 +85,11 @@ model CHP
     annotation (Placement(transformation(extent={{60,-36},{48,-24}})));
   Modelica.Blocks.Sources.Constant exothermicTemperature(k=1783.4) "Exothermic temperature"
     annotation (Placement(transformation(extent={{52,12},{68,28}})));
-  Modelica.Blocks.Interfaces.RealInput TSet if          TSet_in
+  Modelica.Blocks.Interfaces.RealInput TSet if          TSetIn
     "Temperature setpoint" annotation (Placement(transformation(extent={{-126,76},
             {-100,104}},         rotation=0), iconTransformation(extent={{-80,-70},
             {-60,-50}})));
-  Modelica.Blocks.Interfaces.RealInput elSet if           ElectricityDriven
+  Modelica.Blocks.Interfaces.RealInput elSet if           electricityDriven
     "Electrical power setpoint" annotation (Placement(transformation(extent={{-126,56},
             {-100,84}},     rotation=0), iconTransformation(extent={{-80,50},{-60,
             70}})));
@@ -140,12 +140,12 @@ public
         rotation=90,
         origin={50,90})));
 equation
-  if ElectricityDriven then
+  if electricityDriven then
     connect(elSet, elControl.u_s);
   else
     elControl.u_s = 1e9;
   end if;
-  if TSet_in then
+  if TSetIn then
     connect(TSet,delayedOnOffController.flowTemp_setpoint);
     connect(TSet,thControl.setpoint);
   else
@@ -159,7 +159,7 @@ equation
           {40,-36},{40,-34},{8,-34},{8,-12}}, color={0,0,127}));
   connect(booleanConstant.y, ctrlSwitch.u2) annotation (Line(points={{-13.4,-48},
           {0,-48},{0,-12}}, color={255,0,255}));
-  connect(delayedOnOffController.ReturnTemp, ctrlSwitch.u3) annotation (Line(
+  connect(delayedOnOffController.returnTemp, ctrlSwitch.u3) annotation (Line(
         points={{-34,-12},{-34,-36},{-8,-36},{-8,-12}}, color={0,0,127}));
   connect(delayedOnOffController.flowTemp, ctrlSwitch.u1) annotation (Line(
         points={{-46,6},{-52,6},{-52,-34},{8,-34},{8,-12}}, color={0,0,127}));
@@ -185,7 +185,7 @@ equation
           {76,50},{76,68},{30,68},{30,90}}, color={0,0,127}));
   connect(elControl.u_m,electricalPower)  annotation (Line(points={{0,58},{0,50},
           {12,50},{12,68},{30,68},{30,90}}, color={0,0,127}));
-  connect(delayedOnOffController.ExternalON,on)  annotation (Line(points={{-28,
+  connect(delayedOnOffController.externalOn,on)  annotation (Line(points={{-28,
           12},{-28,40},{-114,40}}, color={255,0,255}));
   connect(combiTable1Ds.y[2], gain.u) annotation (Line(points={{69,50},{76,50},{
           76,-30},{61.2,-30}},  color={0,0,127}));

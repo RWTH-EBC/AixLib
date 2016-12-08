@@ -51,7 +51,7 @@ model InternalControl
     annotation (Placement(transformation(extent={{-13.5,6},{-4.5,15}})));
   Modelica.Blocks.Math.Product product
     annotation (Placement(transformation(extent={{21,24},{30,33}})));
-  Modelica.Blocks.Interfaces.RealInput Tflow_hot "Outgoing temperature [K]"
+  Modelica.Blocks.Interfaces.RealInput TFlowHot "Outgoing temperature [K]"
     annotation (Placement(transformation(extent={{-126.5,-20},{-86.5,20}}),
         iconTransformation(extent={{113,3},{87,29}})));
   Modelica.Blocks.Interfaces.RealOutput QflowHeater
@@ -62,8 +62,8 @@ model InternalControl
       "Mass flow through the boiler [kg/s]"
     annotation (Placement(transformation(extent={{-125,-84.5},{-85,-44.5}}),
         iconTransformation(extent={{114.5,-63},{87,-35.5}})));
-  Modelica.Blocks.Interfaces.RealInput Tflow_cold
-      "Temperature of the cold water[K]"   annotation (Placement(transformation(
+  Modelica.Blocks.Interfaces.RealInput TFlowCold
+    "Temperature of the cold water[K]" annotation (Placement(transformation(
           extent={{-125,-51.5},{-85,-11.5}}), iconTransformation(extent={{114.5,
             -30},{87,-2.5}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
@@ -75,7 +75,7 @@ equation
     isOn = true;
   end if;
 
-  outputPower = mFlow * 4184 * (Tflow_hot - Tflow_cold);
+  outputPower =mFlow*4184*(TFlowHot - TFlowCold);
   eEnergyMeter_S.p=outputPower;
 
   connect(ControlerHeater.y, eEnergyMeter_P.p)
@@ -109,8 +109,8 @@ equation
           51.675},{-38.85,81.25},{-100.75,81.25}}, color={0,0,127}));
   connect(ControlerHeater.onOff, isOn) annotation (Line(points={{-39.675,40.125},
           {-66.3375,40.125},{-66.3375,39.75},{-99.75,39.75}}, color={255,0,255}));
-  connect(Tflow_hot, prescribedTemperature.T) annotation (Line(points={{-106.5,
-          0},{-88.5,0},{-70.5,0}}, color={0,0,127}));
+  connect(TFlowHot, prescribedTemperature.T) annotation (Line(points={{-106.5,0},
+          {-88.5,0},{-70.5,0}}, color={0,0,127}));
   connect(prescribedTemperature.port, ControlerHeater.Therm1) annotation (Line(
         points={{-54,0},{-37.2,0},{-37.2,36.825}}, color={191,0,0}));
   annotation (Diagram(coordinateSystem(

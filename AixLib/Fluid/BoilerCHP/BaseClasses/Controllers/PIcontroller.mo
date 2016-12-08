@@ -2,8 +2,8 @@ within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
 model PIController
 
   parameter Real Kc=0 "Gain of the controller";
-  parameter Modelica.SIunits.Time Tc=1 "Time Constant (T>0 required)";
-  parameter Real MinCapacity = 25 "Minimum controller output in load operation";
+  parameter Modelica.SIunits.Time Tc=1 "Time constant (T>0 required)";
+  parameter Real minCapacity = 25 "Minimum controller output in load operation";
 
   Modelica.Blocks.Logical.Switch switch1
     annotation (Placement(transformation(extent={{-70,0},{-50,20}})));
@@ -13,7 +13,7 @@ model PIController
     y_start=0,
     k=Kc,
     Ti=Tc,
-    yMin=MinCapacity) "PI controller"
+    yMin=minCapacity) "PI controller"
                annotation (Placement(transformation(
           extent={{-36,34},{-16,54}})));
   Modelica.Blocks.Continuous.LimPID PI1(
@@ -44,12 +44,12 @@ model PIController
       Placement(transformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Interfaces.RealInput setpoint annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
   Modelica.Blocks.Interfaces.BooleanInput on
-                                   "Connector of Boolean input signal"
+                                   "Connector of boolean input signal"
     annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
   Modelica.Blocks.Logical.Not not1
     annotation (Placement(transformation(extent={{-66,-70},{-46,-50}})));
   Modelica.Blocks.Interfaces.RealInput measurement
-    "Connector of second Real input signal" annotation (Placement(
+    "Connector of second real input signal" annotation (Placement(
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,

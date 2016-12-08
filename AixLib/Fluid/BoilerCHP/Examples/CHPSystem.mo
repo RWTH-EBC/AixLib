@@ -5,9 +5,9 @@ model CHPSystem
     redeclare package Medium =
         Media.Specialized.Water.TemperatureDependentDensity,
     m_flow_nominal=0.02,
-    TSet_in=true,
-    MinCapacity=20,
-    DelayTime=300,
+    TSetIn=true,
+    minCapacity=20,
+    delayTime=300,
     param=DataBase.CHP.CHP_FMB_65_GSK()) "CHP"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Fluid.Sources.MassFlowSource_T source(

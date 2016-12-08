@@ -5,9 +5,9 @@ record BoilerTwoPointBaseDataDefinition
   import SI = Modelica.SIunits;
   import SIconv = Modelica.SIunits.Conversions.NonSIunits;
 
-  parameter String name "Name of Boiler";
-  parameter SI.Volume volume "Water volume of Boiler";
-  parameter Real PressureDrop
+  parameter String name "Name of boiler";
+  parameter SI.Volume volume "Water volume of boiler";
+  parameter Real pressureDrop
     "Pressure drop coefficient, delta_p[Pa] = PD*Q_flow[m^3/s]^2";
   parameter SI.Power Q_nom
     "nominal heat power / thermal load, refering to net (inferior) calorific value";

@@ -1,12 +1,12 @@
 within AixLib.DataBase.CHP;
 record CHP_FMB_155_GSK "FMB-155-GSK : Schmitt Enertec"
   extends CHPBaseDataDefinition(
-    Vol={11.97e-3},
+    vol={11.97e-3},
     data_CHP=[0,0,0,0,0; 50,61,129,213,21.2; 75,92,166,283,28.3; 100,122,196,
         348,34.7],
-    MaxTFlow=363.15,
-    MaxTReturn=343.15,
-    Pipe_D=0.13);
+    maxTFlow=363.15,
+    maxTReturn=343.15,
+    DPipe=0.13);
 
   annotation (Documentation(info="<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>

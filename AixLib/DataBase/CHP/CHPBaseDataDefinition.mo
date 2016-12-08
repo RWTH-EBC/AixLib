@@ -1,18 +1,18 @@
 within AixLib.DataBase.CHP;
-record CHPBaseDataDefinition "Basic CHP Data"
+record CHPBaseDataDefinition "Basic CHP data"
 extends Modelica.Icons.Record;
 
   import SI = Modelica.SIunits;
   import SIconv = Modelica.SIunits.Conversions.NonSIunits;
 
-  parameter SI.Volume Vol[:] "Water volume of CHP";
+  parameter SI.volume vol[:] "Water volume of CHP";
   parameter Real data_CHP[:,5];
-          //Matrix contains : [Capacity [%], Electrical Power [kW], Total Heat Recovery [kW], Fuel Input [kW], Fuel Consumption [m3/h]]
+          //Matrix contains : [capacity [Percent], electrical power [kW], total heat recovery [kW], fuel input [kW], fuel consumption [m3/h]]
 
-  parameter SI.Temperature MaxTFlow "Maximum Flow Temperature";
-  parameter SI.Temperature MaxTReturn "Maximum Return Temperature";
+  parameter SI.Temperature maxTFlow "Maximum flow temperature";
+  parameter SI.Temperature maxTReturn "Maximum return temperature";
 
-  parameter Real Pipe_D "Outlet pipe diameter";
+  parameter SI.Length DPipe "Outlet pipe diameter";
 
   annotation (Documentation(info="<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>

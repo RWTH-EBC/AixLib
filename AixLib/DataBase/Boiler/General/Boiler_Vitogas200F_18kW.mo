@@ -3,7 +3,7 @@ record Boiler_Vitogas200F_18kW "Gas-fired boiler Viessmann Vitogas200-F 18kW"
   extends BoilerTwoPointBaseDataDefinition(
     name="Vitogas200F_18kW",
     volume=0.0097,
-    PressureDrop=7853000000,
+    pressureDrop=7853000000,
     Q_nom=19900,
     Q_min=5970,
     eta=[0.3,0.93; 1.0,0.93]);

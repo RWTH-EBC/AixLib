@@ -1,13 +1,13 @@
 within AixLib.DataBase.CHP;
 record CHP_XRGI_9kWel "Eco Power: mini BHKW XRGI 9 (12-20 kW thermal)"
   extends CHPBaseDataDefinition(
-    Vol={3e-3},
+    vol={3e-3},
     data_CHP=[0,   0,   0,           0,   0;
              39,   4,  12, (12+4)/0.90,  (12+4)/0.90/11.5;
             100,   9,  20, (20+9)/0.93,  (20+9)/0.93/11.5],
-    MaxTFlow=353.15,
-    MaxTReturn=343.15,
-    Pipe_D=0.08);
+    maxTFlow=353.15,
+    maxTReturn=343.15,
+    DPipe=0.08);
     /*
     Minimum modulation limit is unknown and set to the same value as for Vaillant eco power 5.
     

@@ -1,11 +1,11 @@
 within AixLib.DataBase.CHP;
 record CHP_GG_50 "GG 50 : Sokratherm"
   extends CHPBaseDataDefinition(
-    Vol={3e-3},
+    vol={3e-3},
     data_CHP=[0,0,0,0,0; 50,24,54,91,9.1; 75,37,68,118,11.8; 100,50,82,146,14.6],
-    MaxTFlow=363.15,
-    MaxTReturn=343.15,
-    Pipe_D=0.08);
+    maxTFlow=363.15,
+    maxTReturn=343.15,
+    DPipe=0.08);
 
   annotation (Documentation(info="<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>

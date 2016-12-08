@@ -68,11 +68,11 @@ equation
     isOn = true;
   end if;
 
-  connect(higher.y, controlerOnOff.T_high) annotation (Line(
+  connect(higher.y, controlerOnOff.THigh) annotation (Line(
       points={{18.75,-19.5},{6,-19.5},{6,-39.735},{-7.5,-39.735}},
       color={255,0,255},
       smooth=Smooth.None));
-  connect(lower.y, controlerOnOff.T_low) annotation (Line(
+  connect(lower.y, controlerOnOff.TLow) annotation (Line(
       points={{20.25,-69},{6,-69},{6,-27.645},{-7.5,-27.645}},
       color={255,0,255},
       smooth=Smooth.None));
@@ -145,7 +145,7 @@ equation
       points={{-30.6,31.5},{-25.5,31.5},{-25.5,40.65},{-21.15,40.65}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(difference.u1, Tflow_is) annotation (Line(
+  connect(difference.u1, TFlowIs) annotation (Line(
       points={{76.65,-47.25},{81,-47.25},{81,-100.5},{75,-100.5}},
       color={0,0,127},
       smooth=Smooth.None));
@@ -168,20 +168,20 @@ equation
           47.25}},
       color={255,0,255},
       smooth=Smooth.None));
-  connect(Toutside, to_degC.u) annotation (Line(
+  connect(TOutside, to_degC.u) annotation (Line(
       points={{-100,-39},{-67.5,-39},{-67.5,-12.75},{-66.75,-12.75}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(isOn, controlerOnOff.OnOffExtern) annotation (Line(
+  connect(isOn, controlerOnOff.onOffExtern) annotation (Line(
       points={{-102.75,18.75},{-58.5,18.75},{-58.5,-12},{-15,-12},{-15,-25.5},{-14.715,
           -25.5}},
       color={255,0,255},
       smooth=Smooth.None));
-  connect(controlerOnOff.OnOffFinal,isOn_final)  annotation (Line(
+  connect(controlerOnOff.onOffFinal,isOn_final)  annotation (Line(
       points={{-14.91,-45.39},{-14.91,-66.945},{-15,-66.945},{-15,-99}},
       color={255,0,255},
       smooth=Smooth.None));
-  connect(Tflow_set, from_degC.y) annotation (Line(
+  connect(TFlowSet, from_degC.y) annotation (Line(
       points={{102,48},{72.3,48}},
       color={0,0,127},
       smooth=Smooth.None));

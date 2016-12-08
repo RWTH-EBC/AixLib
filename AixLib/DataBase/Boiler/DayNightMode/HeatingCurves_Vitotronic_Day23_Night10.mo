@@ -1,6 +1,6 @@
 within AixLib.DataBase.Boiler.DayNightMode;
 record HeatingCurves_Vitotronic_Day23_Night10
-  "Heating Curves for Vitotronic Controller, TsetDay = 23°C, TsetNight = 10°C "
+  "Heating Curves for Vitotronic Controller, TsetDay = 23degC, TsetNight = 10degC "
   extends HeatingCurvesDayNightBaseDataDefinition(
     name="HC_Vitoronic_Day25_Night10",
     varFlowTempDay=[0,1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8; -20,64,67.5,71,

@@ -2,13 +2,13 @@ within AixLib.DataBase.CHP;
 record CHP_mini_ECO_POWER_5_LiquidGas
   "Vaillant: mini BHKW eco Power 4.7 (Liquid gas)"
   extends CHPBaseDataDefinition(
-    Vol={2.72e-3},
+    vol={2.72e-3},
     data_CHP=[0,    0,      0,    0,   0;
              41.6,  1.96,  5.2,   0.07,    14.85;
              100,   4.7,  12.5,   0.171,    35.7],
-    MaxTFlow=348.15,
-    MaxTReturn=338.15,
-    Pipe_D=0.08);
+    maxTFlow=348.15,
+    maxTReturn=338.15,
+    DPipe=0.08);
 /* the el. and thermal powers are in KW. The fuel mass flow is in l/s. The fuel consumption is in l/kWh.
  the calorific value of liquid gas is assumed 28 kWh/m^3.
  and the calorific value of natural gas is assumed 12 kWh/m^3.

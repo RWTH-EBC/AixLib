@@ -2,7 +2,7 @@ within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
 partial model PartialExternalControl
   "With measurement of primary and secondary energy consumption"
 
-  Modelica.Blocks.Interfaces.RealInput Toutside "Outside temperature [K]"
+  Modelica.Blocks.Interfaces.RealInput TOutside "Outside temperature [K]"
     annotation (Placement(transformation(
         extent={{-13.5,-13.5},{13.5,13.5}},
         rotation=0,
@@ -25,16 +25,15 @@ partial model PartialExternalControl
         rotation=270,
         origin={-15,-99}), iconTransformation(extent={{92,8},{112,28}},
           rotation=0)));
-  Modelica.Blocks.Interfaces.RealOutput Tflow_set
-    "Target temperature of the controller [K]"    annotation (Placement(
-        transformation(extent={{92,38},{112,58}}), iconTransformation(extent={
-            {92,38},{112,58}})));
-  Modelica.Blocks.Interfaces.RealInput Tflow_is
-    "Actual outgoing temperature [K]"
-    annotation (Placement(transformation(extent={{-20,-20},{20,20}},
+  Modelica.Blocks.Interfaces.RealOutput TFlowSet
+    "Target temperature of the controller [K]" annotation (Placement(
+        transformation(extent={{92,38},{112,58}}), iconTransformation(extent={{
+            92,38},{112,58}})));
+  Modelica.Blocks.Interfaces.RealInput TFlowIs
+    "Actual outgoing temperature [K]" annotation (Placement(transformation(
+        extent={{-20,-20},{20,20}},
         rotation=90,
-        origin={75,-100.5}),
-        iconTransformation(
+        origin={75,-100.5}), iconTransformation(
         extent={{11.5,-11.5},{-11.5,11.5}},
         rotation=-90,
         origin={65,-92})));

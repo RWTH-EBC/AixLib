@@ -1,31 +1,31 @@
 within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
 model DelayedOnOffController
 
-  parameter Modelica.SIunits.Temperature MaxTReturn = 343.15
+  parameter Modelica.SIunits.Temperature maxTReturn = 343.15
     "Maximum return temperature";
-  parameter Real MinDeltaT = 10 "Minimum flow and return temperature difference";
+  parameter Real minDeltaT = 10 "Minimum flow and return temperature difference";
   parameter Real TFlowRange=5 "Range of the flow temperature";
-  parameter Modelica.SIunits.Time DelayTime = 1800 "On/Off Delay time";
-  parameter Boolean InitialOutput=false "Initial output";
-  parameter Real DelayUnit=200 "Delay unit";
-  parameter Real MinCapacity = 30 "Minimum allowable working capacity in percent";
+  parameter Modelica.SIunits.Time delayTime = 1800 "On/Off delay time";
+  parameter Boolean initialOutput=false "Initial output";
+  parameter Real delayUnit=200 "Delay unit";
+  parameter Real minCapacity = 30 "Minimum allowable working capacity in percent";
 
   Modelica.Blocks.Logical.And and1 annotation (Placement(transformation(
         extent={{-22,16},{-8,30}}, rotation=0)));
   Modelica.Blocks.Logical.Pre pre2 annotation (Placement(transformation(
         extent={{-48,-12},{-34,0}}, rotation=0)));
-  Modelica.Blocks.Logical.OnOffController onOffController(bandwidth=MinDeltaT) "OnOff controller"
+  Modelica.Blocks.Logical.OnOffController onOffController(bandwidth=minDeltaT) "OnOff controller"
                    annotation (Placement(transformation(extent={{-76,-16},{
           -56,4}}, rotation=0)));
   Modelica.Blocks.Logical.LessThreshold lessThreshold(threshold=TFlowRange)
-    "Maximum allowable Flow Temperature Variation"
+    "Maximum allowable flow temperature variation"
     annotation (Placement(transformation(extent={{-50,38},{-34,54}},
         rotation=0)));
   Modelica.Blocks.Logical.Or or1 annotation (Placement(transformation(
         extent={{4,-14},{12,-2}}, rotation=0)));
   Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(threshold=
-        MaxTReturn)
-    "Max Return Temperature Limit"
+        maxTReturn)
+    "Max return temperature limit"
     annotation (Placement(transformation(
       origin={0,-50},
       extent={{-8,-8},{8,8}},
@@ -33,7 +33,7 @@ model DelayedOnOffController
   Modelica.Blocks.Interfaces.RealInput flowTemp "Flow temperature"
     annotation (Placement(transformation(extent={{-140,40},{-100,80}},
         rotation=0)));
-  Modelica.Blocks.Interfaces.RealInput ReturnTemp "Return Temperature"
+  Modelica.Blocks.Interfaces.RealInput returnTemp "Return temperature"
     annotation (Placement(transformation(
       origin={0,-120},
       extent={{-20,-20},{20,20}},
@@ -41,12 +41,12 @@ model DelayedOnOffController
   Modelica.Blocks.Interfaces.BooleanOutput y "Signal if controller is on or off"
     annotation (Placement(transformation(extent={{100,-10},{120,10}},
         rotation=0)));
-  Modelica.Blocks.Interfaces.RealInput flowTemp_setpoint "Flow tmeperature setpoint"
+  Modelica.Blocks.Interfaces.RealInput flowTemp_setpoint "Flow temperature setpoint"
     annotation (Placement(transformation(
       origin={-60,120},
       extent={{-20,-20},{20,20}},
       rotation=270)));
-  Modelica.Blocks.Discrete.UnitDelay unitDelay(samplePeriod=DelayUnit) "Last value"
+  Modelica.Blocks.Discrete.UnitDelay unitDelay(samplePeriod=delayUnit) "Last value"
     annotation (Placement(transformation(extent={{32,-14},{40,-6}})));
   Modelica.Blocks.Math.Feedback feedback
     annotation (Placement(transformation(
@@ -72,7 +72,7 @@ model DelayedOnOffController
   Modelica.Blocks.Logical.LogicalSwitch logicalSwitch
     annotation (Placement(transformation(extent={{72,12},{78,-12}},
         rotation=0)));
-  Modelica.Blocks.Interfaces.BooleanInput ExternalON "False for shut down"
+  Modelica.Blocks.Interfaces.BooleanInput externalOn "False for shut down"
     annotation (Placement(transformation(
         origin={60,120},
         extent={{-20,-20},{20,20}},
@@ -82,24 +82,24 @@ model DelayedOnOffController
          0)));
   Modelica.Blocks.Logical.Or or3 annotation (Placement(transformation(
         extent={{16,-10},{24,10}}, rotation=0)));
-  Modelica.Blocks.Logical.LessThreshold lessThreshold1(threshold=MinCapacity)
+  Modelica.Blocks.Logical.LessThreshold lessThreshold1(threshold=minCapacity)
     annotation (Placement(transformation(extent={{52,-4},{60,4}}, rotation=
           0)));
   Modelica.Blocks.Logical.GreaterEqualThreshold greaterEqualThreshold(threshold=
        130 + 273.15)
-            "Emergency Measure"
+            "Emergency measure"
     annotation (Placement(transformation(extent={{-78,-88},{-62,-72}},
         rotation=0)));
   Modelica.Blocks.Logical.Or or4 annotation (Placement(transformation(
         extent={{88,-6},{96,6}}, rotation=0)));
-  Modelica.Blocks.MathBoolean.OnDelay onDelay(delayTime=DelayTime) "On delay"
+  Modelica.Blocks.MathBoolean.OnDelay onDelay(delayTime=delayTime) "On delay"
     annotation (Placement(transformation(extent={{50,62},{58,70}})));
-  Modelica.Blocks.MathBoolean.OnDelay onDelay1(delayTime=DelayTime) "On delay"
+  Modelica.Blocks.MathBoolean.OnDelay onDelay1(delayTime=delayTime) "On delay"
     annotation (Placement(transformation(extent={{50,-52},{58,-44}})));
-  Modelica.Blocks.Nonlinear.FixedDelay fixedDelay(delayTime=DelayTime) "Fixed delay"
+  Modelica.Blocks.Nonlinear.FixedDelay fixedDelay(delayTime=delayTime) "Fixed delay"
     annotation (Placement(transformation(extent={{48,-18},{56,-10}})));
 initial equation
-  pre(y)=InitialOutput;
+  pre(y)=initialOutput;
 
 equation
 
@@ -139,7 +139,7 @@ equation
     points={{3.2,-12.8},{5.38845e-016,-12.8},{5.38845e-016,-41.2}},
     color={255,0,255},
     smooth=Smooth.None));
-  connect(ExternalON, not3.u) annotation (Line(
+  connect(externalOn, not3.u) annotation (Line(
       points={{60,120},{60,91},{39.2,91}},
       color={255,0,255},
       smooth=Smooth.None));
@@ -159,7 +159,7 @@ equation
     points={{24.4,0},{44,0},{44,45}},
     color={255,0,255},
     smooth=Smooth.None));
-  connect(greaterThreshold.u, ReturnTemp) annotation (Line(
+  connect(greaterThreshold.u,returnTemp)  annotation (Line(
     points={{-5.8783e-016,-59.6},{-5.8783e-016,-78},{0,-78},{0,-120}},
     color={0,0,127},
     smooth=Smooth.None));

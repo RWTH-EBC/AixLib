@@ -24,7 +24,7 @@ model BoilerSystem
         Media.Specialized.Water.TemperatureDependentDensity,
     m_flow_nominal=0.03,
     redeclare model ExtControl =
-        BaseClasses.Controllers.ExternalControl_nightDayHC,
+        BaseClasses.Controllers.ExternalControlNightDayHC,
     declination=1.2,
     FA=0,
     paramHC=DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day25_Night10(),
