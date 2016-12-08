@@ -1,5 +1,5 @@
 within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
-model delayedOnOffController
+model DelayedOnOffController
 
   parameter Modelica.SIunits.Temperature MaxTReturn = 343.15
     "Maximum return temperature";
@@ -333,4 +333,4 @@ revisions="<html>
 <li><i>January 31, 2011</i> by Pooyan Jahangiri:<br/>Implemented</li>
 </ul></p>
 </html>"));
-end delayedOnOffController;
+end DelayedOnOffController;
