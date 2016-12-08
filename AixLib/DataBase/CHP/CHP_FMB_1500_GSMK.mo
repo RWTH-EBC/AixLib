@@ -11,7 +11,6 @@ record CHP_FMB_1500_GSMK "FMB-1500-GSMK : Guascor"
   annotation (Documentation(info="<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>
 <p>Natural Gas CHP: Schmitt Enertec GmbH FMB-1500-GSMK </p>
-</ul></p>
 </html>",
         revisions="<html>
 <p><ul>

@@ -11,7 +11,6 @@ record CHP_FMB_2500_GSMK "FMB-2500-GSMK : Cummins"
   annotation (Documentation(info="<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>
 <p>Natural Gas CHP: Schmitt Enertec GmbH FMB-2500-GSMK </p>
-</ul></p>
 </html>",
         revisions="<html>
 <p><ul>

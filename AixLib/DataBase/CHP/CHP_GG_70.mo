@@ -11,7 +11,6 @@ record CHP_GG_70 "GG 70 : Sokratherm"
   annotation (Documentation(info="<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>
 <p>Sokratherm BHKW GG 70 </p>
-</ul></p>
 </html>",
         revisions="<html>
 <p><ul>
