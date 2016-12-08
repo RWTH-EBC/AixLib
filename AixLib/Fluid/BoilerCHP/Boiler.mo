@@ -4,7 +4,7 @@ model Boiler
         a=paramBoiler.PressureDrop), vol(V=paramBoiler.volume));
 
   replaceable model ExtControl =
-   AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.ExternalControl_nightDayHC
+   AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.ExternalControlNightDayHC
     constrainedby
     AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.PartialExternalControl
     "ExternalControl"
@@ -82,7 +82,7 @@ equation
           {-20,76},{-20,50},{-9.9,50},{-9.9,50.25}}, color={255,0,255}));
   connect(senTHot.T, myExternalControl.Tflow_is) annotation (Line(points={{40,-69},
           {40,-69},{40,-18},{6.5,-18},{6.5,38.8}}, color={0,0,127}));
-  connect(myExternalControl.isOn_Final, internalControl.isOn) annotation (Line(
+  connect(myExternalControl.isOn_final, internalControl.isOn) annotation (Line(
         points={{10.2,49.8},{20,49.8},{20,20},{-57.525,20},{-57.525,10.275}},
         color={255,0,255}));
   connect(myExternalControl.Tflow_set, internalControl.Tflow_set) annotation (
@@ -90,7 +90,7 @@ equation
         color={0,0,127}));
   connect(TAmbient, myExternalControl.Toutside) annotation (Line(points={{-80,60},
           {-22,60},{-22,44.4},{-9.725,44.4}}, color={0,0,127}));
-  connect(myExternalControl.SwitchToNightMode,switchToNightMode)  annotation (
+  connect(myExternalControl.switchToNightMode,switchToNightMode)  annotation (
       Line(points={{-9.95,53.625},{-16.975,53.625},{-16.975,30},{-80,30}},
         color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={

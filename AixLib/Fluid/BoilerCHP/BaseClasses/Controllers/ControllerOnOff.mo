@@ -7,8 +7,7 @@ model ControllerOnOff
         rotation=0,
         origin={-100,0}), iconTransformation(extent={{-112,-38},{-88,-14}})));
   Modelica.Blocks.Interfaces.BooleanInput T_high
-      "Medium temperature is too high"
-                                     annotation (Placement(transformation(
+      "Medium temperature is too high" annotation (Placement(transformation(
         extent={{-12,-12},{12,12}},
         rotation=90,
         origin={46,-100})));
@@ -17,12 +16,11 @@ model ControllerOnOff
         extent={{-12,-12},{12,12}},
         rotation=90,
         origin={-78,-100})));
-  Modelica.Blocks.Interfaces.BooleanOutput OnOffFinal annotation (Placement(
+  Modelica.Blocks.Interfaces.BooleanOutput OnOffFinal "Output signal" annotation (Placement(
         transformation(
         extent={{-11,-10},{11,10}},
         rotation=0,
         origin={99,0}), iconTransformation(extent={{93,-34},{115,-14}})));
-
   Modelica.Blocks.Logical.And OnOff
     annotation (Placement(transformation(extent={{-12,-8},{4,8}})));
 
@@ -39,7 +37,6 @@ equation
       color={255,0,255},
       thickness=0.5,
       smooth=Smooth.None));
-
 algorithm
   if T_low then
     OnOff.u2 :=true;

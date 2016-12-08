@@ -8,11 +8,9 @@ partial model PartialExternalControl
         rotation=0,
         origin={-100,-39}), iconTransformation(extent={{-10.75,-10.5},{10.75,10.5}},
           origin={-97.25,-36})));
-public
   Modelica.Blocks.Interfaces.BooleanInput isOn "On/Off switch for the boiler"
     annotation (Placement(transformation(extent={{-115.5,6},{-90,31.5}}),
         iconTransformation(extent={{-108,13.5},{-90,31.5}})));
-public
   Modelica.Blocks.Interfaces.BooleanInput switchToNightMode
     "Connector of boolean input signal"
     annotation (Placement(transformation(extent={{-13.75,-13.75},{13.75,13.75}},
@@ -21,8 +19,6 @@ public
         extent={{-8.25,-8.5},{8.25,8.5}},
         rotation=0,
         origin={-99.5,56.25})));
-
-public
   Modelica.Blocks.Interfaces.BooleanOutput isOn_final annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
@@ -30,11 +26,11 @@ public
         origin={-15,-99}), iconTransformation(extent={{92,8},{112,28}},
           rotation=0)));
   Modelica.Blocks.Interfaces.RealOutput Tflow_set
-    "target temperature of the controller [K]"    annotation (Placement(
+    "Target temperature of the controller [K]"    annotation (Placement(
         transformation(extent={{92,38},{112,58}}), iconTransformation(extent={
             {92,38},{112,58}})));
   Modelica.Blocks.Interfaces.RealInput Tflow_is
-    "actual outgoing temperature [K]"
+    "Actual outgoing temperature [K]"
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
         rotation=90,
         origin={75,-100.5}),

@@ -1,20 +1,16 @@
 within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
 model InternalControl
 
-  //Parameters
   parameter AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition
-    paramBoiler = AixLib.DataBase.Boiler.General.Boiler_Vitogas200F_11kW() "Parameters for boiler"
+    paramBoiler = AixLib.DataBase.Boiler.General.Boiler_Vitogas200F_11kW()
+    "Parameters for boiler"
   annotation (Dialog(tab = "General", group = "Boiler type"), choicesAllMatching = true);
-
   parameter Real KR = 1 "Gain of boiler heater";
   parameter Modelica.SIunits.Time TN = 0.1
       "Time constant of boiler heater (T>0 required)";
   parameter Modelica.SIunits.Time riseTime=30
       "Rise/fall time for step input(T>0 required)";
-
-    //Variable
-    Real outputPower;
-public
+  Real outputPower;
   Controls.Continuous.PITemp                ControlerHeater(
     KR=KR,
     TN=TN,
