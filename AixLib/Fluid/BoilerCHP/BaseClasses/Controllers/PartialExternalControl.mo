@@ -13,8 +13,8 @@ public
     annotation (Placement(transformation(extent={{-115.5,6},{-90,31.5}}),
         iconTransformation(extent={{-108,13.5},{-90,31.5}})));
 public
-  Modelica.Blocks.Interfaces.BooleanInput SwitchToNightMode
-    "Connector of Boolean input signal"
+  Modelica.Blocks.Interfaces.BooleanInput switchToNightMode
+    "Connector of boolean input signal"
     annotation (Placement(transformation(extent={{-13.75,-13.75},{13.75,13.75}},
         rotation=0,
         origin={-101.75,49.75}), iconTransformation(
@@ -23,14 +23,14 @@ public
         origin={-99.5,56.25})));
 
 public
-  Modelica.Blocks.Interfaces.BooleanOutput isOn_Final annotation (Placement(
+  Modelica.Blocks.Interfaces.BooleanOutput isOn_final annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-15,-99}), iconTransformation(extent={{92,8},{112,28}},
           rotation=0)));
   Modelica.Blocks.Interfaces.RealOutput Tflow_set
-    "target Temperature of the controller [K]"    annotation (Placement(
+    "target temperature of the controller [K]"    annotation (Placement(
         transformation(extent={{92,38},{112,58}}), iconTransformation(extent={
             {92,38},{112,58}})));
   Modelica.Blocks.Interfaces.RealInput Tflow_is
@@ -50,7 +50,7 @@ equation
   annotation (Diagram(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
-        grid={1.5,1.5}), graphics), Icon(coordinateSystem(
+        grid={1.5,1.5})),           Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
         grid={1.5,1.5}), graphics={
