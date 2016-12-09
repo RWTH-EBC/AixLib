@@ -6,8 +6,7 @@ record CHP_mikro_ECO_POWER_1 "Vaillant mikro CHP ecoPOWER 1.0"
     maxTFlow=353.15,
     maxTReturn=343.15,
     DPipe=0.08);
- //Matrix contains : [Capacity, Electrical Power, Total Heat Recovery,
- Fuel Input, Fuel Consumption]
+ //Matrix contains : [Capacity, Electrical Power, Total Heat Recovery,Fuel Input, Fuel Consumption]
 
   annotation (Documentation(info="<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>

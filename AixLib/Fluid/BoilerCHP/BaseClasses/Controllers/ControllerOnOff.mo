@@ -1,12 +1,13 @@
 within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
 model ControllerOnOff "On/Off controller for boiler models"
 
-  Modelica.Blocks.Interfaces.BooleanInput onOffExtern annotation (Placement(
+  Modelica.Blocks.Interfaces.BooleanInput onOffExtern
+    "On/Off signal"
+    annotation (Placement(
         transformation(
         extent={{-12,-12},{12,12}},
         rotation=0,
         origin={-100,0}), iconTransformation(extent={{-112,-38},{-88,-14}})));
-    "On/Off signal"
   Modelica.Blocks.Interfaces.BooleanInput THigh
     "Medium temperature is too high" annotation (Placement(transformation(
         extent={{-12,-12},{12,12}},
