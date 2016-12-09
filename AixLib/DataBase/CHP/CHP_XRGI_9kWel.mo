@@ -9,13 +9,16 @@ record CHP_XRGI_9kWel "Eco Power: mini BHKW XRGI 9 (12-20 kW thermal)"
     maxTReturn=343.15,
     DPipe=0.08);
     /*
-    Minimum modulation limit is unknown and set to the same value as for Vaillant eco power 5.
-    
-    Total efficiency at lower modulation limt is unknown and set arbitrarily to 90 %.
-    Total efficiency at design power is unknown (but assuming the data sheet value 
-    is for the design condition): 93 %.
-    
-    The CHP works with a range of gases: natural gas (all qualities), propane, butane.
+    Minimum modulation limit is unknown and set to the same value as for
+    Vaillant eco power 5.
+
+    Total efficiency at lower modulation limt is unknown and set arbitrarily to
+    90 percent.
+    Total efficiency at design power is unknown (but assuming the data sheet value
+    is for the design condition): 93 percent.
+
+    The CHP works with a range of gases: natural gas (all qualities), propane,
+    butane.
     The last column fuel consumption in m3/h can be set accordingly if needed.
     Here high grade natural gas (11 .. 12 kWh/m3) is used.
     */
@@ -23,8 +26,10 @@ record CHP_XRGI_9kWel "Eco Power: mini BHKW XRGI 9 (12-20 kW thermal)"
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>EC Power mini-BHKW XRGI 9 (Natural Gas) </p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
-<p>The electrical and thermal powers are in kW. The &QUOT;fuel input&QUOT; is in kW. The fuel consumption is in m&sup3;/h.</p>
-<p>The calorific value of natural gas is assumed to be 11.5 kWh/m&sup3; (10 - 12 kWh/m&sup3;). </p>
+<p>The electrical and thermal powers are in kW. The &QUOT;fuel input&QUOT; is in
+kW. The fuel consumption is in m&sup3;/h.</p>
+<p>The calorific value of natural gas is assumed to be 11.5 kWh/m&sup3;
+(10 - 12 kWh/m&sup3;). </p>
 <h4><span style=\"color:#008000\">Data Sheet (English, German)</span></h4>
 <table cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tr>
 <td valign=\"top\"><p>Max. noise level dB(A)</p></td>
@@ -91,7 +96,8 @@ record CHP_XRGI_9kWel "Eco Power: mini BHKW XRGI 9 (12-20 kW thermal)"
 <td valign=\"top\"><p>CO: &LT; 50</p><p>NO<sub>X</sub>: &LT; 100</p></td>
 </tr>
 <tr>
-<td valign=\"top\"><p>Primary energy saving PES (EU Directive, verification in accordance with DIN 4709)</p></td>
+<td valign=\"top\"><p>Primary energy saving PES (EU Directive, verification in
+accordance with DIN 4709)</p></td>
 <td valign=\"top\"><p>22.4 &percnt;</p></td>
 </tr>
 </table>
@@ -100,7 +106,8 @@ record CHP_XRGI_9kWel "Eco Power: mini BHKW XRGI 9 (12-20 kW thermal)"
 <td valign=\"top\"><p>&LT; &frac12; TA Luft</p></td>
 </tr>
 <tr>
-<td valign=\"top\"><p>Prim&auml;renergieeinsparung PEE (EU-Richtlinie, Pr&uuml;fung nach DIN 4709) </p></td>
+<td valign=\"top\"><p>Prim&auml;renergieeinsparung PEE (EU-Richtlinie,
+Pr&uuml;fung nach DIN 4709) </p></td>
 <td valign=\"top\"><p>22,4 &percnt;</p></td>
 </tr>
 <tr>

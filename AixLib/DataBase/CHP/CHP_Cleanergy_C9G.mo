@@ -18,23 +18,29 @@ record CHP_Cleanergy_C9G
     maxTReturn=343.15,
     DPipe=0.08);
     /*
-    Minimum modulation limit is unknown and set to the same value as for Vaillant eco power 5.
-    
-    Total efficiency at lower modulation limt is unknown and set arbitrarily to 90 %.
-    Total efficiency at design power is unknown (but assuming the data sheet value 
-    is for the design condition): 93 %.
-    
-    The CHP works with a range of gases: natural gas (all qualities), propane, butane.
+    Minimum modulation limit is unknown and set to the same value as for Vaillant
+    eco power 5.
+
+    Total efficiency at lower modulation limt is unknown and set arbitrarily to
+    90 percent.
+    Total efficiency at design power is unknown (but assuming the data sheet
+     value
+    is for the design condition): 93 percent.
+
+    The CHP works with a range of gases: natural gas (all qualities), propane,
+    butane.
     The last column fuel consumption in m3/h can be set accordingly if needed.
     Here high grade natural gas (11 .. 12 kWh/m3) is used.
-    
+
     */
   annotation (Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Cleanergy mini-BHKW C9G (low caloric gas) </p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
-<p>The electrical and thermal powers are in kW. The &QUOT;fuel input&QUOT; is in kW. The fuel consumption is in m&sup3;/h.</p>
-<p>The calorific value of natural gas is assumed to be 11.5 kWh/m&sup3; (10 - 12 kWh/m&sup3;). </p>
+<p>The electrical and thermal powers are in kW. The &quot;fuel input&quot; is in
+kW. The fuel consumption is in m&sup3;/h.</p>
+<p>The calorific value of natural gas is assumed to be 11.5 kWh/m&sup3;
+(10 - 12 kWh/m&sup3;). </p>
 <h4><span style=\"color:#008000\">Data Sheet (English, German)</span></h4>
 <table cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tr>
 <td valign=\"top\"><p>Max. noise level dB(A)</p></td>
@@ -57,7 +63,8 @@ record CHP_Cleanergy_C9G
 <td valign=\"top\"><p>10,000</p></td>
 </tr>
 <tr>
-<td valign=\"top\"><p>Fuels: natural gas (all qualities), mainly designed for low caloric gas (bio gas) </p></td>
+<td valign=\"top\"><p>Fuels: natural gas (all qualities), mainly designed for
+low caloric gas (bio gas) </p></td>
 <td valign=\"top\"><p>yes</p></td>
 </tr>
 <tr>
@@ -74,15 +81,18 @@ record CHP_Cleanergy_C9G
 </tr>
 <tr>
 <td valign=\"top\"><p>Electrical efficiency </p></td>
-<td valign=\"top\"><p>21 &percnt; (24&percnt; capacity), 24 &percnt; (80&percnt; capacity)</p></td>
+<td valign=\"top\"><p>21 &percnt; (24&percnt; capacity), 24 &percnt;
+(80&percnt; capacity)</p></td>
 </tr>
 <tr>
 <td valign=\"top\"><p>Thermal efficiency excluding optional condenser</p></td>
-<td valign=\"top\"><p>58 &percnt; (24&percnt; capacity), 70 &percnt; (80&percnt; capacity)</p></td>
+<td valign=\"top\"><p>58 &percnt; (24&percnt; capacity), 70 &percnt;
+(80&percnt; capacity)</p></td>
 </tr>
 <tr>
 <td valign=\"top\"><p>Total efficiency excluding optional condenser</p></td>
-<td valign=\"top\"><p>79 &percnt; (24&percnt; capacity), 94 &percnt; (80&percnt; capacity)</p></td>
+<td valign=\"top\"><p>79 &percnt; (24&percnt; capacity), 94 &percnt;
+(80&percnt; capacity)</p></td>
 </tr>
 <tr>
 <td valign=\"top\"><p>Flow temperature (constant) &deg;C</p></td>
@@ -93,8 +103,11 @@ record CHP_Cleanergy_C9G
 <td valign=\"top\"><p>50 (TRmin = 30 &deg;C)</p></td>
 </tr>
 </table>
-<p><br><br><b>The CHP engine is not designed for continuous operation at more than 80&percnt; load (7.2 kW).</b> Continuous use at higher load than 80&percnt; decreases the time between services.</p>
-<p>For low methane applications, the C9G LowCal is capped to 120 bar engine pressure being equivalent to 7.2 kW.</p>
+<p><br><br><b>The CHP engine is not designed for continuous operation at more
+than 80&percnt; load (7.2 kW).</b> Continuous use at higher load than 80&percnt;
+decreases the time between services.</p>
+<p>For low methane applications, the C9G LowCal is capped to 120 bar engine
+pressure being equivalent to 7.2 kW.</p>
 <p>Source:</p>
 <ul>
 <li>URL: <a href=\"http://www.ecpower.eu/deutsch/xrgi/technische-daten/xrgir-9.html\">www.ecpower.eu/xrgir-9.html</a></li>

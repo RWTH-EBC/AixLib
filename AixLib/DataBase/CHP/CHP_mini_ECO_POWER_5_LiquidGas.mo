@@ -9,7 +9,8 @@ record CHP_mini_ECO_POWER_5_LiquidGas
     maxTFlow=348.15,
     maxTReturn=338.15,
     DPipe=0.08);
-/* the el. and thermal powers are in KW. The fuel mass flow is in l/s. The fuel consumption is in l/kWh.
+/* the el. and thermal powers are in KW. The fuel mass flow is in l/s. The fuel
+consumption is in l/kWh.
  the calorific value of liquid gas is assumed 28 kWh/m^3.
  and the calorific value of natural gas is assumed 12 kWh/m^3.
 */
@@ -17,8 +18,10 @@ record CHP_mini_ECO_POWER_5_LiquidGas
 <p><h4><font color=\"#008000\">Overview</font></h4></p>
 <p>Vaillant mini-BHKW ecoPOWER 4.7 (Liquid Gas) </p>
 <p><h4><font color=\"#008000\">Concept</font></h4></p>
-<p>The electrical and thermal powers are in kW. The fuel mass flow is in l/s. The fuel consumption is in l/kWh.</p>
-<p>The calorific value of liquid gas is assumed to be 28 kWh/m&sup3; and the calorific value of natural gas is assumed to be 12 kWh/m&sup3;. </p>
+<p>The electrical and thermal powers are in kW. The fuel mass flow is in l/s.
+The fuel consumption is in l/kWh.</p>
+<p>The calorific value of liquid gas is assumed to be 28 kWh/m&sup3; and the
+calorific value of natural gas is assumed to be 12 kWh/m&sup3;. </p>
 <p>Source:</p>
 <p><ul>
 <li>URL: <a href=\"http://www.vaillant.de/Produkte/Kraft-Waerme-Kopplung/Blockheizkraftwerke/produkt_vaillant/mini-KWK-System_ecoPOWER_3.0_und_4.7.html\">mini-KWK-System_ecoPOWER_3.0_und_4.7.html</a></li>
