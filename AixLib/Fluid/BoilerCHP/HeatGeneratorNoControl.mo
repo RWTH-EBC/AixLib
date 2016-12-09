@@ -2,6 +2,7 @@ within AixLib.Fluid.BoilerCHP;
 model HeatGeneratorNoControl "Simple heat generator without control"
   extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(pressureDrop(
         a=coeffPresLoss), vol(V=V));
+
   Modelica.Blocks.Interfaces.RealInput Q_flow(final unit="W")
     "Prescribed heat flow"
     annotation (Placement(transformation(extent={{-100,40},{-60,80}}),
@@ -19,7 +20,8 @@ model HeatGeneratorNoControl "Simple heat generator without control"
   Modelica.Blocks.Interfaces.RealOutput THot(
     final quantity="ThermodynamicTemperature",
     final unit="K",
-    displayUnit="degC") "Temperature of the passing fluid"
+    displayUnit="degC")
+    "Temperature of the passing fluid"
     annotation (Placement(transformation(extent={{100,50},{120,70}}),
         iconTransformation(
         extent={{-10,-10},{10,10}},
@@ -35,7 +37,9 @@ model HeatGeneratorNoControl "Simple heat generator without control"
         origin={40,90})));
   parameter Modelica.SIunits.Volume V
     "Volume of the heat exchanger inside the heat generator";
-  parameter Real coeffPresLoss "Pressure loss coefficient of the heat generator";
+  parameter Real coeffPresLoss
+    "Pressure loss coefficient of the heat generator";
+
 equation
   connect(heater.Q_flow, Q_flow) annotation (Line(points={{-60,-40},{-60,-40},{
           -60,60},{-80,60}},
@@ -52,14 +56,17 @@ equation
         Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>The model uses the <a href=\"AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator\">AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>
-in the most simple setup in order either test its functionalities or to use in cases where
+in the most simple setup in order either test its functionalities or to use in
+cases where
 the controller is modelled outside the heat generator.
 </p>
 </html>",
         revisions="<html>
 <p><ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib conventions</li>
-<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>First implementation</li>
+<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
+conventions</li>
+<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>First
+implementation</li>
 </ul></p>
 </html>"));
 end HeatGeneratorNoControl;

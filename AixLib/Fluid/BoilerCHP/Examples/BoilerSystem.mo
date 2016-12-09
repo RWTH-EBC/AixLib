@@ -8,16 +8,19 @@ model BoilerSystem "Example that illustrates use of boiler model"
     redeclare package Medium =
         Media.Specialized.Water.TemperatureDependentDensity,
     m_flow=0.05,
-    T=293.15) "Source"
+    T=293.15)
+    "Source"
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
   Modelica.Fluid.Pipes.StaticPipe pipe(
     length=1,
     diameter=0.025,
     redeclare package Medium =
         Media.Specialized.Water.TemperatureDependentDensity)
+    "Pressure drop"
     annotation (Placement(transformation(extent={{30,-10},{50,10}})));
   inner Modelica.Fluid.System system(p_start=system.p_ambient,
-      p_ambient(displayUnit="Pa")) "Pressure drop"
+    p_ambient(displayUnit="Pa"))
+    "Pressure drop"
     annotation (Placement(transformation(extent={{80,80},{100,100}})));
   Boiler boiler(
     redeclare package Medium =
@@ -31,21 +34,26 @@ model BoilerSystem "Example that illustrates use of boiler model"
     riseTime=0,
     TN=0.05,
     paramBoiler=DataBase.Boiler.General.Boiler_Vitogas200F_11kW())
-             "Boiler" annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-
+    "Boiler"
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Fluid.Sources.Boundary_pT sink(nPorts=1, redeclare package Medium =
-        Media.Specialized.Water.TemperatureDependentDensity) "Sink"
+    Media.Specialized.Water.TemperatureDependentDensity)
+    "Sink"
     annotation (Placement(transformation(extent={{80,-10},{60,10}})));
-  Modelica.Blocks.Sources.BooleanConstant on "Boiler is always on"
+  Modelica.Blocks.Sources.BooleanConstant on
+    "Boiler is always on"
     annotation (Placement(transformation(extent={{-30,-50},{-10,-30}})));
   Modelica.Blocks.Sources.Sine sine(
     amplitude=5,
     freqHz=1/86400,
     phase=4.7123889803847,
-    offset=273.15) "Ambient air temperature"
+    offset=273.15)
+    "Ambient air temperature"
     annotation (Placement(transformation(extent={{-60,60},{-40,80}})));
-  Modelica.Blocks.Sources.BooleanConstant isNight(k=false) "no night-setback"
+  Modelica.Blocks.Sources.BooleanConstant isNight(k=false)
+    "No night-setback"
     annotation (Placement(transformation(extent={{-60,30},{-40,50}})));
+
 equation
   connect(source.ports[1], boiler.port_a)
     annotation (Line(points={{-40,0},{-25,0},{-10,0}}, color={0,127,255}));
@@ -64,15 +72,20 @@ equation
             {100,100}})),
     Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
-<p>The simulation illustrates the behavior of <a href=\"AixLib.Fluid.BoilerCHP.Boiler\">AixLib.Fluid.BoilerCHP.Boiler</a> during a day. 
-Flow temperature of the boiler can be compared to the heating curve produced by the internal controler of the boiler. 
-Change the inlet water temperature, heat curve or day and night mode to see the reaction. </p>
+<p>The simulation illustrates the behavior of <a href=\"AixLib.Fluid.BoilerCHP.Boiler\">AixLib.Fluid.BoilerCHP.Boiler</a> during a day.
+Flow temperature of the boiler can be compared to the heating curve produced by
+the internal controler of the boiler.
+Change the inlet water temperature, heat curve or day and night mode to see the
+reaction. </p>
 </html>",
         revisions="<html>
 <p><ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib conventions</li>
-<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Merged with AixLib</li>
-<li><i>April 16, 2014 &nbsp;</i> by Ana Constantin:<br/>Formated documentation.</li>
+<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
+conventions</li>
+<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Merged with
+ AixLib</li>
+<li><i>April 16, 2014 &nbsp;</i> by Ana Constantin:<br/>Formated
+documentation.</li>
 <li>by Pooyan Jahangiri:<br/>First implementation.</li>
 </ul></p>
 </html>"),

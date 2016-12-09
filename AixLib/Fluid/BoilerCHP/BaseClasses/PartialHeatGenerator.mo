@@ -1,18 +1,7 @@
 within AixLib.Fluid.BoilerCHP.BaseClasses;
 partial model PartialHeatGenerator "Partial model for heat generators"
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
-  Sensors.TemperatureTwoPort senTCold(
-    redeclare final package Medium = Medium,
-    final tau=tau,
-    final m_flow_nominal=m_flow_nominal,
-    final initType=initType,
-    final T_start=T_start,
-    final transferHeat=transferHeat,
-    final TAmb=TAmb,
-    final tauHeaTra=tauHeaTra,
-    final allowFlowReversal=allowFlowReversal,
-    final m_flow_small=m_flow_small) "Temperature sensor of cold side of heat generator (return)"
-    annotation (Placement(transformation(extent={{-80,-90},{-60,-70}})));
+
   parameter Modelica.SIunits.Time tau=1
     "Time constant of the temperature sensors at nominal flow rate"
     annotation (Dialog(tab="Advanced", group="Sensor Properties"));
@@ -31,6 +20,19 @@ partial model PartialHeatGenerator "Partial model for heat generators"
   parameter Modelica.SIunits.Time tauHeaTra=1200
     "Time constant for heat transfer, default 20 minutes"
     annotation (Dialog(tab="Advanced", group="Sensor Properties"));
+  Sensors.TemperatureTwoPort senTCold(
+    redeclare final package Medium = Medium,
+    final tau=tau,
+    final m_flow_nominal=m_flow_nominal,
+    final initType=initType,
+    final T_start=T_start,
+    final transferHeat=transferHeat,
+    final TAmb=TAmb,
+    final tauHeaTra=tauHeaTra,
+    final allowFlowReversal=allowFlowReversal,
+    final m_flow_small=m_flow_small)
+    "Temperature sensor of cold side of heat generator (return)"
+    annotation (Placement(transformation(extent={{-80,-90},{-60,-70}})));
   Sensors.TemperatureTwoPort senTHot(
     redeclare final package Medium = Medium,
     final tau=tau,
@@ -41,12 +43,16 @@ partial model PartialHeatGenerator "Partial model for heat generators"
     final TAmb=TAmb,
     final tauHeaTra=tauHeaTra,
     final allowFlowReversal=allowFlowReversal,
-    final m_flow_small=m_flow_small) "Temperature sensor of hot side of heat generator (supply)"
+    final m_flow_small=m_flow_small)
+    "Temperature sensor of hot side of heat generator (supply)"
     annotation (Placement(transformation(extent={{30,-90},{50,-70}})));
-  Sensors.MassFlowRate senMasFlo(redeclare final package Medium = Medium,
-      final allowFlowReversal=allowFlowReversal) "Sensor for mass flwo rate"
+  Sensors.MassFlowRate senMasFlo(
+    redeclare final package Medium = Medium,
+    final allowFlowReversal=allowFlowReversal)
+    "Sensor for mass flwo rate"
     annotation (Placement(transformation(extent={{60,-90},{80,-70}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heater "Prescribed heat flow" annotation (
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heater
+    "Prescribed heat flow" annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
@@ -58,7 +64,8 @@ partial model PartialHeatGenerator "Partial model for heat generators"
     final allowFlowReversal=allowFlowReversal,
     final nPorts=2,
     final p_start=p_start,
-    final T_start=T_start) "Fluid volume"
+    final T_start=T_start)
+    "Fluid volume"
     annotation (Placement(transformation(extent={{-50,-80},{-30,-60}})));
   Modelica.Fluid.Fittings.GenericResistances.VolumeFlowRate pressureDrop(
     redeclare final package Medium = Medium,
@@ -68,7 +75,8 @@ partial model PartialHeatGenerator "Partial model for heat generators"
     final show_V_flow=false,
     final allowFlowReversal=allowFlowReversal,
     final dp_start=dp_start,
-    final m_flow_start=m_flow_start) "Pressure drop"
+    final m_flow_start=m_flow_start)
+    "Pressure drop"
     annotation (Placement(transformation(extent={{-20,-90},{0,-70}})));
   parameter Modelica.Media.Interfaces.Types.AbsolutePressure dp_start=0
     "Guess value of dp = port_a.p - port_b.p"
@@ -79,6 +87,7 @@ partial model PartialHeatGenerator "Partial model for heat generators"
   parameter Modelica.Media.Interfaces.Types.AbsolutePressure p_start=Medium.p_default
     "Start value of pressure"
     annotation (Dialog(tab="Advanced", group="Initialization"));
+
 equation
   connect(port_a, senTCold.port_a) annotation (Line(points={{-100,0},{-90,0},{-90,
           -80},{-80,-80}}, color={0,127,255},
@@ -114,15 +123,19 @@ equation
 Partial model to implement heat generator models with one heat exchanger volume.
 </p>
 <p>
-Classes that extend this model need to implement the controller which shoud also calculate
+Classes that extend this model need to implement the controller which shoud also
+calculate
 the heat flow to the heat exchanger volume.
 </p>
 <p>
-The volume of the heat exchanger as well as the pressure loss coefficient should be set
+The volume of the heat exchanger as well as the pressure loss coefficient should
+be set
 for each heat generator separately.
 </p>
 </html>", revisions="<html>
 <ul>
+<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
+conventions</li>
 <li>
 October 11, 2016 by Pooyan Jahangiri:<br/>
 First implementation.

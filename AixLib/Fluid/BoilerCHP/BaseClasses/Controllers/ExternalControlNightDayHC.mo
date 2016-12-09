@@ -6,45 +6,66 @@ model ExternalControlNightDayHC
   parameter
     AixLib.DataBase.Boiler.DayNightMode.HeatingCurvesDayNightBaseDataDefinition
     paramHC
-    "Parameters for heating curve" annotation (Dialog(group="Heating curves"), choicesAllMatching=true);
-  parameter Real declination "Declination" annotation (Dialog( group= "Heating curves"));
+    "Parameters for heating curve"
+    annotation (Dialog(group="Heating curves"), choicesAllMatching=true);
+  parameter Real declination
+    "Declination"
+    annotation (Dialog( group= "Heating curves"));
   parameter Modelica.SIunits.TemperatureDifference Tdelta_Max
-    "Difference from set flow temperature over which boiler stops" annotation ( Dialog(group = "OnOff"));
+    "Difference from set flow temperature over which boiler stops"
+    annotation ( Dialog(group = "OnOff"));
   parameter Modelica.SIunits.TemperatureDifference Tdelta_Min
-    "Difference from set flow temperature under which boiler starts" annotation ( Dialog(group = "OnOff"));
+    "Difference from set flow temperature under which boiler starts"
+    annotation ( Dialog(group = "OnOff"));
   parameter Modelica.SIunits.Time Fb
-    "Period of time for increased set temperature" annotation ( Dialog(group = "Day/Night Mode"));
-  parameter Real FA "Increment for increased set temperature" annotation ( Dialog(group = "Day/Night Mode"));
-  Modelica.Blocks.Logical.Switch switchDayNight "Switch"
+    "Period of time for increased set temperature"
+    annotation ( Dialog(group = "Day/Night Mode"));
+  parameter Real FA
+    "Increment for increased set temperature"
+    annotation ( Dialog(group = "Day/Night Mode"));
+  Modelica.Blocks.Logical.Switch switchDayNight
+    "Switch"
     annotation (Placement(transformation(extent={{-19.5,39},{-3,55.5}})));
-  ControllerOnOff controlerOnOff "On/Off controller"
+  ControllerOnOff controlerOnOff
+    "On/Off controller"
     annotation (Placement(transformation(
         extent={{9.75,-9.75},{-9.75,9.75}},
         rotation=90,
         origin={-17.25,-35.25})));
-  Modelica.Blocks.Logical.Timer timer "Timer"
+  Modelica.Blocks.Logical.Timer timer
+    "Timer"
     annotation (Placement(transformation(extent={{-19.5,67.5},{-9,78}})));
-  Modelica.Blocks.Logical.LessEqualThreshold lessEqualThreshold(final threshold=Fb) "Threshold"
+  Modelica.Blocks.Logical.LessEqualThreshold lessEqualThreshold(
+    final threshold=Fb)
+    "Threshold"
     annotation (Placement(transformation(extent={{0,67.5},{10.5,78}})));
   Modelica.Blocks.Logical.And and1
     annotation (Placement(transformation(extent={{13.5,79.5},{24,90}})));
-  Modelica.Blocks.Logical.Switch switchIncreasedSetTemp "Switch"
+  Modelica.Blocks.Logical.Switch switchIncreasedSetTemp
+    "Switch"
     annotation (Placement(transformation(extent={{30,39},{46.5,55.5}})));
-  Modelica.Blocks.Math.Gain increase(final k=1 + FA) "Increase"
+  Modelica.Blocks.Math.Gain increase(
+    final k=1 + FA)
+    "Increase"
     annotation (Placement(transformation(extent={{7.5,49.5},{18,60}})));
-  Modelica.Blocks.Math.Gain noIncrease(final k=1) "No increase"
+  Modelica.Blocks.Math.Gain noIncrease(
+    final k=1)
+    "No increase"
     annotation (Placement(transformation(extent={{7.5,34.5},{18,45}})));
   Modelica.Blocks.Logical.Not not1
     annotation (Placement(transformation(extent={{-19.5,81},{-9,91.5}})));
-  Modelica.Blocks.Sources.Constant declinationConst(k=declination)
+  Modelica.Blocks.Sources.Constant declinationConst(
+    k=declination)
     "Declination"
     annotation (Placement(transformation(extent={{-84,48},{-76.5,55.5}})));
 
 protected
-  Modelica.Blocks.Tables.CombiTable2D flowTempNight(final table=paramHC.varFlowTempNight)
+  Modelica.Blocks.Tables.CombiTable2D flowTempNight(
+    final table=paramHC.varFlowTempNight)
     "Table for setting the flow temperature during night according to the outside temperature"
     annotation (Placement(transformation(extent={{-49.5,49.5},{-31.5,67.5}})));
-  Modelica.Blocks.Tables.CombiTable2D flowTempDay(final table=paramHC.varFlowTempDay)
+  Modelica.Blocks.Tables.CombiTable2D flowTempDay(
+    final table=paramHC.varFlowTempDay)
     "Table for setting the flow temperature druing day according to the outside temperature"
     annotation (Placement(transformation(extent={{-49.5,22.5},{-31.5,40.5}})));
   Modelica.Blocks.Math.UnitConversions.To_degC to_degC
@@ -53,15 +74,21 @@ protected
         origin={-66.75,-8.25})));
   Modelica.Blocks.Math.UnitConversions.From_degC from_degC
     annotation (Placement(transformation(extent={{66,45},{72,51}})));
-  Modelica.Blocks.Logical.GreaterThreshold higher(final threshold=Tdelta_Max) "Higher"
-                                 annotation (Placement(transformation(
+  Modelica.Blocks.Logical.GreaterThreshold higher(
+    final threshold=Tdelta_Max)
+    "Higher"
+    annotation (Placement(transformation(
           extent={{34.5,-27},{19.5,-12}})));
-  Modelica.Blocks.Logical.LessThreshold lower(final threshold=-Tdelta_Min) "Lower"
-                                 annotation (Placement(transformation(
+  Modelica.Blocks.Logical.LessThreshold lower(
+    final threshold=-Tdelta_Min)
+    "Lower"
+    annotation (Placement(transformation(
           extent={{36,-76.5},{21,-61.5}})));
-  Modelica.Blocks.Math.Feedback difference "Difference"
-                                         annotation (Placement(
+  Modelica.Blocks.Math.Feedback difference
+    "Difference"
+    annotation (Placement(
         transformation(extent={{78,-54},{64.5,-40.5}})));
+
 equation
   if cardinality(isOn) < 2 then
     isOn = true;
@@ -249,17 +276,22 @@ equation
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <p>The following control decisions are implemented:</p>
 <ul>
-<li>Switch on/off when the fluid temperature is under/over the set fluid temperature </li>
+<li>Switch on/off when the fluid temperature is under/over the set fluid
+temperature </li>
 <li>Heating curve: fluid temperature depending on the outside temperature</li>
 <li>Average outside temperature</li>
-<li>Increase the set fluid temperature when going to day mode in order to shorten the heating up period </li>
+<li>Increase the set fluid temperature when going to day mode in order to
+shorten the heating up period </li>
 </ul>
 </html>",
 revisions="<html>
 <p><ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib conventions</li>
-<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Merged with AixLib</li>
-<li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
+<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
+conventions</li>
+<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Merged with
+AixLib</li>
+<li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation
+appropriately</li>
 <li><i>October 12, 2011</i> by Ana Constantin:<br/>Implemented</li>
 </ul></p>
 </html>"));

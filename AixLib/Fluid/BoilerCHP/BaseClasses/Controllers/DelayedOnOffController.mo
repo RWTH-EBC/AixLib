@@ -3,71 +3,92 @@ model DelayedOnOffController "CHP On/Off controller"
 
   parameter Modelica.SIunits.Temperature maxTReturn
     "Maximum return temperature";
-  parameter Modelica.SIunits.ThermodynamicTemperature minDeltaT "Minimum flow and return temperature difference";
-  parameter Modelica.SIunits.ThermodynamicTemperature TFlowRange "Range of the flow temperature";
-  parameter Modelica.SIunits.Time delayTime "On/Off delay time";
-  parameter Boolean initialOutput=false "Initial output";
-  parameter Real delayUnit "Delay unit";
-  parameter Real minCapacity "Minimum allowable working capacity in percent";
-
-  Modelica.Blocks.Logical.And and1 annotation (Placement(transformation(
-        extent={{-22,16},{-8,30}}, rotation=0)));
-  Modelica.Blocks.Logical.Pre pre2 annotation (Placement(transformation(
-        extent={{-48,-12},{-34,0}}, rotation=0)));
-  Modelica.Blocks.Logical.OnOffController onOffController(final bandwidth=minDeltaT) "OnOff controller"
-                   annotation (Placement(transformation(extent={{-76,-16},{
-          -56,4}}, rotation=0)));
-  Modelica.Blocks.Logical.LessThreshold lessThreshold(threshold=TFlowRange)
-    "Maximum allowable flow temperature variation"
-    annotation (Placement(transformation(extent={{-50,38},{-34,54}},
-        rotation=0)));
-  Modelica.Blocks.Logical.Or or1 annotation (Placement(transformation(
-        extent={{4,-14},{12,-2}}, rotation=0)));
-  Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(threshold=
-        maxTReturn)
-    "Max return temperature limit"
-    annotation (Placement(transformation(
-      origin={0,-50},
-      extent={{-8,-8},{8,8}},
-      rotation=90)));
+  parameter Modelica.SIunits.ThermodynamicTemperature minDeltaT
+    "Minimum flow and return temperature difference";
+  parameter Modelica.SIunits.ThermodynamicTemperature TFlowRange
+    "Range of the flow temperature";
+  parameter Modelica.SIunits.Time delayTime
+    "On/Off delay time";
+  parameter Boolean initialOutput=false
+    "Initial output";
+  parameter Real delayUnit
+    "Delay unit";
+  parameter Real minCapacity
+    "Minimum allowable working capacity in percent";
   Modelica.Blocks.Interfaces.RealInput flowTemp(
     final quantity="ThermodynamicTemperature",
     final unit="K",
-    displayUnit="degC") "Flow temperature"
+    displayUnit="degC")
+    "Flow temperature"
     annotation (Placement(transformation(extent={{-140,40},{-100,80}},
         rotation=0)));
   Modelica.Blocks.Interfaces.RealInput returnTemp(
     final quantity="ThermodynamicTemperature",
     final unit="K",
-    displayUnit="degC") "Return temperature"
+    displayUnit="degC")
+    "Return temperature"
     annotation (Placement(transformation(
       origin={0,-120},
       extent={{-20,-20},{20,20}},
       rotation=90)));
-  Modelica.Blocks.Interfaces.BooleanOutput y "Signal if controller is on or off"
+  Modelica.Blocks.Interfaces.BooleanOutput y
+    "Signal if controller is on or off"
     annotation (Placement(transformation(extent={{100,-10},{120,10}},
         rotation=0)));
+  Modelica.Blocks.Interfaces.RealInput controllerOutput
+    "Controller output"
+    annotation (Placement(transformation(extent={{-140,-80},{-100,-40}},
+        rotation=0)));
+  Modelica.Blocks.Interfaces.RealInput minCapacity_in
+    "Minimal capacity"
+    annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
+        rotation=0)));
+  Modelica.Blocks.Interfaces.BooleanInput externalOn
+    "False for shut down"
+    annotation (Placement(transformation(
+        origin={60,120},
+        extent={{-20,-20},{20,20}},
+        rotation=270)));
   Modelica.Blocks.Interfaces.RealInput flowTemp_setpoint(
     final quantity="ThermodynamicTemperature",
     final unit="K",
-    displayUnit="degC") "Flow temperature setpoint"
+    displayUnit="degC")
+    "Flow temperature setpoint"
     annotation (Placement(transformation(
       origin={-60,120},
       extent={{-20,-20},{20,20}},
       rotation=270)));
-  Modelica.Blocks.Discrete.UnitDelay unitDelay(final samplePeriod=delayUnit) "Last value"
+  Modelica.Blocks.Logical.And and1 annotation (Placement(transformation(
+        extent={{-22,16},{-8,30}}, rotation=0)));
+  Modelica.Blocks.Logical.Pre pre2 annotation (Placement(transformation(
+        extent={{-48,-12},{-34,0}}, rotation=0)));
+  Modelica.Blocks.Logical.OnOffController onOffController(
+    final bandwidth=minDeltaT)
+    "OnOff controller"
+    annotation (Placement(transformation(extent={{-76,-16},{
+          -56,4}}, rotation=0)));
+  Modelica.Blocks.Logical.LessThreshold lessThreshold(
+    threshold=TFlowRange)
+    "Maximum allowable flow temperature variation"
+    annotation (Placement(transformation(extent={{-50,38},{-34,54}},
+        rotation=0)));
+  Modelica.Blocks.Logical.Or or1 annotation (Placement(transformation(
+        extent={{4,-14},{12,-2}}, rotation=0)));
+  Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(
+    threshold=maxTReturn)
+    "Max return temperature limit"
+    annotation (Placement(transformation(
+      origin={0,-50},
+      extent={{-8,-8},{8,8}},
+      rotation=90)));
+  Modelica.Blocks.Discrete.UnitDelay unitDelay(final samplePeriod=delayUnit)
+    "Last value"
     annotation (Placement(transformation(extent={{32,-14},{40,-6}})));
   Modelica.Blocks.Math.Feedback feedback
     annotation (Placement(transformation(
       origin={-68,60},
       extent={{-8,-8},{8,8}},
       rotation=270)));
-  Modelica.Blocks.Interfaces.RealInput controllerOutput "Controller output"
-    annotation (Placement(transformation(extent={{-140,-80},{-100,-40}},
-        rotation=0)));
-  Modelica.Blocks.Interfaces.RealInput minCapacity_in "Minimal capacity"
-    annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-        rotation=0)));
   Modelica.Blocks.Logical.Not not1
     annotation (Placement(transformation(
       origin={44,51},
@@ -81,37 +102,39 @@ model DelayedOnOffController "CHP On/Off controller"
   Modelica.Blocks.Logical.LogicalSwitch logicalSwitch
     annotation (Placement(transformation(extent={{72,12},{78,-12}},
         rotation=0)));
-  Modelica.Blocks.Interfaces.BooleanInput externalOn "False for shut down"
-    annotation (Placement(transformation(
-        origin={60,120},
-        extent={{-20,-20},{20,20}},
-        rotation=270)));
   Modelica.Blocks.Logical.Not not3
     annotation (Placement(transformation(extent={{38,86},{26,96}}, rotation=
          0)));
   Modelica.Blocks.Logical.Or or3 annotation (Placement(transformation(
         extent={{16,-10},{24,10}}, rotation=0)));
-  Modelica.Blocks.Logical.LessThreshold lessThreshold1(final threshold=minCapacity)
+  Modelica.Blocks.Logical.LessThreshold lessThreshold1(
+    final threshold=minCapacity)
     annotation (Placement(transformation(extent={{52,-4},{60,4}}, rotation=
           0)));
-  Modelica.Blocks.Logical.GreaterEqualThreshold greaterEqualThreshold(threshold=
-       130 + 273.15)
-            "Emergency measure"
+  Modelica.Blocks.Logical.GreaterEqualThreshold greaterEqualThreshold(
+    threshold=130 + 273.15)
+    "Emergency measure"
     annotation (Placement(transformation(extent={{-78,-88},{-62,-72}},
         rotation=0)));
   Modelica.Blocks.Logical.Or or4 annotation (Placement(transformation(
         extent={{88,-6},{96,6}}, rotation=0)));
-  Modelica.Blocks.MathBoolean.OnDelay onDelay(final delayTime=delayTime) "On delay"
+  Modelica.Blocks.MathBoolean.OnDelay onDelay(
+    final delayTime=delayTime)
+    "On delay"
     annotation (Placement(transformation(extent={{50,62},{58,70}})));
-  Modelica.Blocks.MathBoolean.OnDelay onDelay1(final delayTime=delayTime) "On delay"
+  Modelica.Blocks.MathBoolean.OnDelay onDelay1(
+    final delayTime=delayTime)
+    "On delay"
     annotation (Placement(transformation(extent={{50,-52},{58,-44}})));
-  Modelica.Blocks.Nonlinear.FixedDelay fixedDelay(final delayTime=delayTime) "Fixed delay"
+  Modelica.Blocks.Nonlinear.FixedDelay fixedDelay(
+    final delayTime=delayTime)
+    "Fixed delay"
     annotation (Placement(transformation(extent={{48,-18},{56,-10}})));
+
 initial equation
   pre(y)=initialOutput;
 
 equation
-
   connect(onOffController.y, pre2.u) annotation (Line(
     points={{-55,-6},{-49.4,-6}},
     color={255,0,255},
@@ -324,22 +347,30 @@ equation
                "On/Off")}),
     Documentation(info="<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>
-<p>This is model is the decision maker in the CHP model. According to different conditions and timings it decides if the CHP can be turned on or off.</p>
+<p>This is model is the decision maker in the CHP model. According to different
+conditions and timings it decides if the CHP can be turned on or off.</p>
 <p><h4><font color=\"#008000\">Concept</font></h4></p>
 <p>The following control decisions are implemented:</p>
 <p><ul>
 <li>Switch On when the flow temperature is lower than a setpoint.</li>
-<li>Switch Off when the CHP should work in a range lower than its minimum allowable capacity.</li>
-<li>Allow the CHP to be switched On only if it was Off for more than a certain amount of time (delay) or it was On beforehand.</li>
-<li>Allow the CHP to be switched Off only if it was On for more than a certain amount of time (delay) or it was Off beforehand. </li>
-<li>Emergency measures such as maximum allowable flow and return temperatures are implemented.</li>
+<li>Switch Off when the CHP should work in a range lower than its minimum
+allowable capacity.</li>
+<li>Allow the CHP to be switched On only if it was Off for more than a certain
+amount of time (delay) or it was On beforehand.</li>
+<li>Allow the CHP to be switched Off only if it was On for more than a certain
+amount of time (delay) or it was Off beforehand. </li>
+<li>Emergency measures such as maximum allowable flow and return temperatures
+are implemented.</li>
 </ul></p>
 </html>",
 revisions="<html>
 <p><ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib conventions</li>
-<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Variable names updated and merged with AixLib</li>
-<li><i>January 23, 2014&nbsp;</i> by Pooyan Jahangiri:<br/>Formatted documentation appropriately</li>
+<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
+conventions</li>
+<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Variable names
+updated and merged with AixLib</li>
+<li><i>January 23, 2014&nbsp;</i> by Pooyan Jahangiri:<br/>Formatted
+documentation appropriately</li>
 <li><i>January 31, 2011</i> by Pooyan Jahangiri:<br/>Implemented</li>
 </ul></p>
 </html>"));

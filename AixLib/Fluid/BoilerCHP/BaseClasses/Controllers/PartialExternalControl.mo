@@ -5,13 +5,15 @@ partial model PartialExternalControl
   Modelica.Blocks.Interfaces.RealInput TOutside(
     final quantity="ThermodynamicTemperature",
     final unit="K",
-    displayUnit="degC") "Outside temperature [K]"
+    displayUnit="degC")
+    "Outside temperature [K]"
     annotation (Placement(transformation(
         extent={{-13.5,-13.5},{13.5,13.5}},
         rotation=0,
         origin={-100,-39}), iconTransformation(extent={{-10.75,-10.5},{10.75,10.5}},
           origin={-97.25,-36})));
-  Modelica.Blocks.Interfaces.BooleanInput isOn "On/Off switch for the boiler"
+  Modelica.Blocks.Interfaces.BooleanInput isOn
+    "On/Off switch for the boiler"
     annotation (Placement(transformation(extent={{-115.5,6},{-90,31.5}}),
         iconTransformation(extent={{-108,13.5},{-90,31.5}})));
   Modelica.Blocks.Interfaces.BooleanInput switchToNightMode
@@ -22,7 +24,9 @@ partial model PartialExternalControl
         extent={{-8.25,-8.5},{8.25,8.5}},
         rotation=0,
         origin={-99.5,56.25})));
-  Modelica.Blocks.Interfaces.BooleanOutput isOn_final annotation (Placement(
+  Modelica.Blocks.Interfaces.BooleanOutput isOn_final
+    "On/Off output"
+    annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
@@ -32,20 +36,23 @@ partial model PartialExternalControl
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC")
-    "Target temperature of the controller" annotation (Placement(
+    "Target temperature of the controller"
+    annotation (Placement(
         transformation(extent={{92,38},{112,58}}), iconTransformation(extent={{
             92,38},{112,58}})));
   Modelica.Blocks.Interfaces.RealInput TFlowIs(
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC")
-    "Actual outgoing temperature" annotation (Placement(transformation(
+    "Actual outgoing temperature"
+    annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={75,-100.5}), iconTransformation(
         extent={{11.5,-11.5},{-11.5,11.5}},
         rotation=-90,
         origin={65,-92})));
+
 equation
   if cardinality(isOn) < 2 then
     isOn = true;
@@ -76,17 +83,22 @@ equation
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <p>The following control decisions are implemented:</p>
 <ul>
-<li>Switch on/off when the fluid temperature is under/over the set fluid temperature </li>
+<li>Switch on/off when the fluid temperature is under/over the set fluid
+temperature </li>
 <li>Heating curve: fluid temperature depending on the outside temperature</li>
 <li>Average outside temperature</li>
-<li>Increase the set fluid temperature when going to day mode in order to shorten the heating up period </li>
+<li>Increase the set fluid temperature when going to day mode in order to
+shorten the heating up period </li>
 </ul>
 </html>",
 revisions="<html>
 <p><ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib conventions</li>
-<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Merged with AixLib</li>
-<li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
+<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
+conventions</li>
+<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Merged with
+AixLib</li>
+<li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation
+appropriately</li>
 <li><i>October 12, 2011</i> by Ana Constantin:<br/>Implemented</li>
 </ul></p>
 </html>"));

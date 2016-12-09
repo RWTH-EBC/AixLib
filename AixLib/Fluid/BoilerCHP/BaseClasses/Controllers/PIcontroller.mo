@@ -1,9 +1,12 @@
 within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
 model PIController "Two coupled PI controllers for CHP control"
 
-  parameter Real Kc "Gain of the controller";
-  parameter Modelica.SIunits.Time Tc "Time constant (T>0 required)";
-  parameter Real minCapacity "Minimum controller output in load operation";
+  parameter Real Kc
+    "Gain of the controller";
+  parameter Modelica.SIunits.Time Tc
+    "Time constant (T>0 required)";
+  parameter Real minCapacity
+    "Minimum controller output in load operation";
 
   Modelica.Blocks.Logical.Switch switch1
     annotation (Placement(transformation(extent={{-70,0},{-50,20}})));
@@ -13,15 +16,18 @@ model PIController "Two coupled PI controllers for CHP control"
     y_start=0,
     final k=Kc,
     final Ti=Tc,
-    final yMin=minCapacity) "PI controller"
-               annotation (Placement(transformation(
+    final yMin=minCapacity)
+    "PI controller"
+    annotation (Placement(transformation(
           extent={{-36,34},{-16,54}})));
   Modelica.Blocks.Continuous.LimPID PI1(
     final controllerType=Modelica.Blocks.Types.SimpleController.PI,
     yMax=100,
     yMin=0,
     final k=Kc,
-    final Ti=Tc) "Limited PI controller" annotation (Placement(transformation(extent={
+    final Ti=Tc)
+    "Limited PI controller"
+    annotation (Placement(transformation(extent={
             {-12,72},{8,92}})));
   Modelica.Blocks.Discrete.TriggeredSampler triggeredSampler(y_start=0)
     annotation (Placement(transformation(extent={{-42,74},
@@ -32,28 +38,35 @@ model PIController "Two coupled PI controllers for CHP control"
   Modelica.Blocks.Logical.TriggeredTrapezoid triggeredTrapezoid(rising=100)
     annotation (Placement(transformation(extent={{-28,
             -22},{-10,-6}})));
-  Modelica.Blocks.Logical.Switch switch3 annotation (Placement(transformation(
+  Modelica.Blocks.Logical.Switch switch3
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={20,24})));
-  Modelica.Blocks.Math.Product product annotation (
+  Modelica.Blocks.Math.Product product
+    annotation (
       Placement(transformation(extent={{30,-18},{50,2}})));
   Modelica.Blocks.Logical.Switch switch2
     annotation (Placement(transformation(extent={{70,-10},{90,10}})));
-  Modelica.Blocks.Interfaces.RealOutput y "Controller output signal" annotation (
+  Modelica.Blocks.Interfaces.RealOutput y
+    "Controller output signal"
+    annotation (
       Placement(transformation(extent={{100,-10},{120,10}})));
-  Modelica.Blocks.Interfaces.RealInput setpoint annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
+  Modelica.Blocks.Interfaces.RealInput setpoint
+    annotation (Placement(transformation(extent={{-140,40},{-100,80}})));
   Modelica.Blocks.Interfaces.BooleanInput on
-                                   "Connector of boolean input signal"
+    "Connector of boolean input signal"
     annotation (Placement(transformation(extent={{-140,-80},{-100,-40}})));
   Modelica.Blocks.Logical.Not not1
     annotation (Placement(transformation(extent={{-66,-70},{-46,-50}})));
   Modelica.Blocks.Interfaces.RealInput measurement
-    "Connector of second real input signal" annotation (Placement(
+    "Connector of second real input signal"
+    annotation (Placement(
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={0,-120})));
+
 equation
 
   connect(switch1.y, PI.u_m)
@@ -113,15 +126,23 @@ equation
           textString="PI Controller")}),
     Documentation(info="<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>
-<p>This is model consists of two PI controllers to control the system both when in operation as well as when shutting down.</p>
+<p>This is model consists of two PI controllers to control the system both when
+in operation as well as when shutting down.</p>
 <p><h4><font color=\"#008000\">Concept</font></h4></p>
-<p>Because changing the controller signal from a certain value to zero is not continuous it will result in unstabilities in the simulation. Therefore, two controllers are implemented. One for the operation as a normal controller and one that change the output signal smoothly from the output of the other controller to zero.</p>
+<p>Because changing the controller signal from a certain value to zero is not
+continuous it will result in unstabilities in the simulation. Therefore, two
+controllers are implemented. One for the operation as a normal controller and
+one that change the output signal smoothly from the output of the other
+controller to zero.</p>
 </html>",
 revisions="<html>
 <p><ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib conventions</li>
-<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Variable names updated and merged with AixLib</li>
-<li><i>January 23, 2014&nbsp;</i> by Pooyan Jahangiri:<br/>Formatted documentation appropriately</li>
+<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
+conventions</li>
+<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Variable names
+updated and merged with AixLib</li>
+<li><i>January 23, 2014&nbsp;</i> by Pooyan Jahangiri:<br/>Formatted
+documentation appropriately</li>
 <li><i>January 31, 2011</i> by Pooyan Jahangiri:<br/>Implemented</li>
 </ul></p>
 </html>"));

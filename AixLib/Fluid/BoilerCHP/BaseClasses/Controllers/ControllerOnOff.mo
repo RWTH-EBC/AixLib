@@ -6,17 +6,21 @@ model ControllerOnOff "On/Off controller for boiler models"
         extent={{-12,-12},{12,12}},
         rotation=0,
         origin={-100,0}), iconTransformation(extent={{-112,-38},{-88,-14}})));
+    "On/Off signal"
   Modelica.Blocks.Interfaces.BooleanInput THigh
     "Medium temperature is too high" annotation (Placement(transformation(
         extent={{-12,-12},{12,12}},
         rotation=90,
         origin={46,-100})));
-  Modelica.Blocks.Interfaces.BooleanInput TLow "Medium temperature is too low"
+  Modelica.Blocks.Interfaces.BooleanInput TLow
+    "Medium temperature is too low"
     annotation (Placement(transformation(
         extent={{-12,-12},{12,12}},
         rotation=90,
         origin={-78,-100})));
-  Modelica.Blocks.Interfaces.BooleanOutput onOffFinal "Output signal" annotation (Placement(
+  Modelica.Blocks.Interfaces.BooleanOutput onOffFinal
+    "Output signal"
+    annotation (Placement(
         transformation(
         extent={{-11,-10},{11,10}},
         rotation=0,
@@ -56,9 +60,12 @@ algorithm
           textString="Controller")}),
     Documentation(revisions="<html>
 <ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib conventions</li>
-<li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
-<li><i>Mai 23, 2011&nbsp;</i>by Ana Constantin:<br/>Adapted from a model of Kristian Huchtemann.</li>
+<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
+conventions</li>
+<li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation
+appropriately</li>
+<li><i>Mai 23, 2011&nbsp;</i>by Ana Constantin:<br/>Adapted from a model of
+Kristian Huchtemann.</li>
 </ul>
 </html>",
 info="<html>
