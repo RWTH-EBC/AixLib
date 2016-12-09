@@ -142,7 +142,7 @@ equation
 
     // Set outputs
 
-    AnnualCoolingLoad = coolMeter.q_kwh/1000;  // in MWh
+    AnnualCoolingLoad = coolMeter.q_kWh/1000;  // in MWh
 
 //
      PowerLoad =  coolMeter.p;
@@ -208,8 +208,8 @@ equation
       color={0,0,127}));
   connect(Source_TsetHeat.y[1], idealHeaterCooler.setPointCool) annotation (
       Line(points={{5.65,-43.5},{13.6,-43.5},{13.6,-31.2}}, color={0,0,127}));
-  connect(idealHeaterCooler.coolingPower, coolMeter.p) annotation (Line(points=
-         {{26,-24.6},{50,-24.6},{50,-25},{73,-25},{73,-5},{86.4,-5}}, color={0,
+  connect(idealHeaterCooler.coolingPower, coolMeter.p) annotation (Line(points={{26,
+          -24.6},{50,-24.6},{50,-25},{73,-25},{73,-5},{85.6667,-5}},  color={0,
           0,127}));
   connect(const.y, idealHeaterCooler.setPointHeat) annotation (Line(points={{24.6,
           -55},{27,-55},{27,-54},{30,-54},{30,-39},{18.2,-39},{18.2,-31.2}},

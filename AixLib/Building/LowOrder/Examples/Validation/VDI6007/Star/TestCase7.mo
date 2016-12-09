@@ -32,7 +32,10 @@ model TestCase7
     h_heater=500,
     l_cooler=-500,
     KR_heater=1000,
-    KR_cooler=1000) annotation (Placement(transformation(
+    KR_cooler=1000,
+    recOrSep=false,
+    zoneParam=DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office())
+                    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-26,-20})));
