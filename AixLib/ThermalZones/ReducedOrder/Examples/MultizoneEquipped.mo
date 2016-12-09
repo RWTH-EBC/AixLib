@@ -27,10 +27,9 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
     effHRSAHU_enabled=0.8,
     effHRSAHU_disabled=0.2,
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
-    T_start=293.15,
-    redeclare AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped
-      zone[5](ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(
+    zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(
             thermCapInt(each der_T(fixed=true))))),
+    T_start=293.15,
     dpAHU_sup=80000000,
     dpAHU_eta=80000000)
     "Multizone"

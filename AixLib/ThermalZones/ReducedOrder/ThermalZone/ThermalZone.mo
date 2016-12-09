@@ -3,6 +3,12 @@ model ThermalZone
   "Thermal zone model with internal gains"
   extends AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone;
 
+  replaceable model corG = SolarGain.CorrectionGDoublePane
+    constrainedby
+    AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG
+    "Model for correction of solar transmission"
+    annotation(choicesAllMatching=true);
+
   Building.Components.Sources.InternalGains.Humans.HumanSensibleHeat_VDI2078
     humanSenHea(
     final ActivityType=3,
@@ -27,15 +33,9 @@ model ThermalZone
     final RoomArea=zoneParam.AZone) if ATot > 0
     "Internal gains from light"
     annotation (Placement(transformation(extent={{64,-76},{84,-57}})));
-  replaceable SolarGain.CorrectionGDoublePane corGDouPan if
-    sum(zoneParam.ATransparent) > 0
-    constrainedby
-    AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG(
-    final n=zoneParam.nOrientations,
-    final UWin=zoneParam.UWin)
-    "Correction factor for solar transmission"
-    annotation (Placement(transformation(extent={{-12,37},{0,49}})),
-    choicesAllMatching=true);
+  corG corGMod(final n=zoneParam.nOrientations, final UWin=zoneParam.UWin) if
+    sum(zoneParam.ATransparent) > 0 "Correction factor for solar transmission"
+    annotation (Placement(transformation(extent={{-12,37},{0,49}})));
   EquivalentAirTemperature.VDI6007WithWindow eqAirTempWall(
     withLongwave=true,
     eExt=0.9,
@@ -204,17 +204,16 @@ equation
                                                 color={0,0,127}));
   connect(eqAirTempWall.TEqAir, preTemWall.T) annotation (Line(points={{-15,8},
           {2.8,8}},                    color={0,0,127}));
-  connect(HDirTilWall.H, corGDouPan.HDirTil) annotation (Line(points={{-67.2,39.5},
-          {-58,39.5},{-58,42},{-58,46.6},{-13.2,46.6}},       color={0,0,127}));
+  connect(HDirTilWall.H, corGMod.HDirTil) annotation (Line(points={{-67.2,39.5},
+          {-58,39.5},{-58,42},{-58,46.6},{-13.2,46.6}}, color={0,0,127}));
   connect(HDirTilWall.H, solRadWall.u1) annotation (Line(points={{-67.2,39.5},{
           -58,39.5},{-58,22},{-55,22}}, color={0,0,127}));
-  connect(HDirTilWall.inc, corGDouPan.inc) annotation (Line(points={{-67.2,36.1},
-          {-60,36.1},{-60,36},{-56,36},{-56,39.4},{-13.2,39.4}}, color={0,0,127}));
+  connect(HDirTilWall.inc, corGMod.inc) annotation (Line(points={{-67.2,36.1},{-60,
+          36.1},{-60,36},{-56,36},{-56,39.4},{-13.2,39.4}}, color={0,0,127}));
   connect(HDifTilWall.H, solRadWall.u2) annotation (Line(points={{-67.2,18},{-60,
           18},{-60,16},{-55,16}}, color={0,0,127}));
-  connect(HDifTilWall.HGroDifTil, corGDouPan.HGroDifTil) annotation (Line(
-        points={{-67.2,13.2},{-62,13.2},{-62,41.8},{-13.2,41.8}}, color={0,0,
-          127}));
+  connect(HDifTilWall.HGroDifTil, corGMod.HGroDifTil) annotation (Line(points={{
+          -67.2,13.2},{-62,13.2},{-62,41.8},{-13.2,41.8}}, color={0,0,127}));
   connect(solRadWall.y, eqAirTempWall.HSol) annotation (Line(points={{-43.5,19},
           {-42,19},{-42,18},{-42,14},{-38,14}}, color={0,0,127}));
   connect(weaBus.TBlaSky, eqAirTempWall.TBlaSky) annotation (Line(
@@ -231,9 +230,8 @@ equation
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(HDifTilWall.HSkyDifTil, corGDouPan.HSkyDifTil) annotation (Line(
-        points={{-67.2,22.8},{-64,22.8},{-64,44.2},{-13.2,44.2}}, color={0,0,
-          127}));
+  connect(HDifTilWall.HSkyDifTil, corGMod.HSkyDifTil) annotation (Line(points={{
+          -67.2,22.8},{-64,22.8},{-64,44.2},{-13.2,44.2}}, color={0,0,127}));
   connect(theConWin.solid, ROM.window) annotation (Line(points={{30,29},{32,29},
           {32,50},{37.8,50}}, color={191,0,0}));
   connect(theConWall.solid, ROM.extWall) annotation (Line(points={{30,13},{33,
@@ -312,8 +310,8 @@ equation
     annotation (Line(points={{16,8},{18,8},{18,13},{20,13}}, color={191,0,0}));
   connect(preTemWin.port, theConWin.fluid)
     annotation (Line(points={{16,29},{20,29}}, color={191,0,0}));
-  connect(corGDouPan.solarRadWinTrans, ROM.solRad) annotation (Line(points={{0.6,43},
-          {12,43},{12,61},{37,61}},         color={0,0,127}));
+  connect(corGMod.solarRadWinTrans, ROM.solRad) annotation (Line(points={{0.6,43},
+          {12,43},{12,61},{37,61}}, color={0,0,127}));
   connect(alphaWall.y, theConWall.Gc)
     annotation (Line(points={{25,4.4},{25,4.4},{25,8}}, color={0,0,127}));
   connect(alphaWin.y, theConWin.Gc) annotation (Line(points={{25,38.6},{25,36.3},

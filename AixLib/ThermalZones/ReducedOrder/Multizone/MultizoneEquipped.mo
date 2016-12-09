@@ -58,6 +58,11 @@ model MultizoneEquipped
   parameter Modelica.SIunits.Efficiency effFanAHU_eta
     "Efficiency of extract fan"
     annotation (Dialog(tab="AirHandlingUnit", group="Fans"));
+  replaceable model AHUMod =
+    AixLib.Airflow.AirHandlingUnit.AHU
+    constrainedby AixLib.Airflow.AirHandlingUnit.BaseClasses.PartialAHU
+    "Air handling unit model"
+    annotation(Dialog(tab="AirHandlingUnit"),choicesAllMatching=true);
   Modelica.Blocks.Interfaces.RealInput AHU[4]
     "Input for AHU Conditions [1]: Desired Air Temperature in K [2]: Desired
     minimal relative humidity [3]: Desired maximal relative humidity [4]:
@@ -131,9 +136,7 @@ model MultizoneEquipped
     each staOrDyn=true) if ASurTot > 0 or VAir > 0
     "Heater Cooler with PI control"
     annotation (Placement(transformation(extent={{-48,-70},{-22,-44}})));
-  replaceable AixLib.Airflow.AirHandlingUnit.AHU AirHandlingUnit if
-       ASurTot > 0 or VAir > 0
-    constrainedby AixLib.Airflow.AirHandlingUnit.BaseClasses.PartialAHU(
+  AHUMod AirHandlingUnit(
     final cooling=coolAHU,
     final dehumidificationSet=dehuAHU,
     final humidificationSet=huAHU,
@@ -146,14 +149,11 @@ model MultizoneEquipped
     final dp_sup=dpAHU_sup,
     final dp_eta=dpAHU_eta,
     final eta_sup=effFanAHU_sup,
-    final eta_eta=effFanAHU_eta)
+    final eta_eta=effFanAHU_eta) if
+       ASurTot > 0 or VAir > 0
     "Air Handling Unit"
     annotation (
-    Placement(transformation(extent={{-52,10},{18,40}})), choices(choice(
-    redeclare AixLib.Airflow.AirHandlingUnit.AHU AirHandlingUnit
-    "with AHU"), choice(redeclare AixLib.Airflow.AirHandlingUnit.NoAHU
-    AirHandlingUnit "AHU does not exist")),Dialog(
-    tab="AirHandlingUnit"));
+    Placement(transformation(extent={{-52,10},{18,40}})));
 
 protected
   parameter Real zoneFactor[numZones,1](fixed=false)

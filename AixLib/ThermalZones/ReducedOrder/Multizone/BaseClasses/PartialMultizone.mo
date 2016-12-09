@@ -18,6 +18,17 @@ partial model PartialMultizone "Partial model for multizone models"
     "Number of fluid ports"
     annotation(Evaluate=true,
     Dialog(connectorSizing=true, tab="General",group="Ports"));
+  replaceable model corG = SolarGain.CorrectionGDoublePane
+    constrainedby
+    AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG
+    "Model for correction of solar transmission"
+    annotation(choicesAllMatching=true);
+  replaceable model thermalZone =
+      AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped
+    constrainedby
+    AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone
+    "Thermal zone model"
+    annotation(choicesAllMatching=true);
   Modelica.Blocks.Interfaces.RealInput intGains[3*numZones]
     "Input profiles for internal gains persons, machines, light"
     annotation (
@@ -62,10 +73,9 @@ partial model PartialMultizone "Partial model for multizone models"
     "Convective internal gains"
     annotation (Placement(transformation(extent={{-110,-30},{-90,-50}}),
     iconTransformation(extent={{-90,-46},{-70,-26}})));
-  replaceable AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped zone[numZones]
-    constrainedby
-    AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone(
+  thermalZone zone[numZones](
     final zoneParam=zoneParam,
+    each final replaceable model corG=corG,
     each final nPorts=nPorts,
     each final energyDynamics=energyDynamics,
     each final massDynamics=massDynamics,
@@ -78,7 +88,7 @@ partial model PartialMultizone "Partial model for multizone models"
     redeclare each final package Medium = Medium)
     "Thermal zone model"
     annotation (Placement(transformation(extent={{38,49},{
-    80,90}})), choicesAllMatching=true);
+    80,90}})));
 
 equation
   for i in 1:numZones loop

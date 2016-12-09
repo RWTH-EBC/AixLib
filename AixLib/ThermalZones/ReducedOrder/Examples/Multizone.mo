@@ -17,9 +17,8 @@ model Multizone "Illustrates the use of Multizone"
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office()},
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
     T_start=293.15,
-    redeclare AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped
-      zone[5](ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
-          intWallRC(thermCapInt(each der_T(fixed=true))))))
+    zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(
+            thermCapInt(each der_T(fixed=true))))))
     "Multizone"
     annotation (Placement(transformation(extent={{32,-8},{52,12}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3
