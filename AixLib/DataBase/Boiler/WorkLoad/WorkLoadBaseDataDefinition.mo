@@ -9,9 +9,11 @@ record WorkLoadBaseDataDefinition "Efficiency depending on workload"
 <p>Base data definition for efficiency based on the current work load. </p>
 </html>", revisions="<html>
 <p><ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib conventions</li>
+<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
+conventions</li>
 <li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Merged with AixLib</li>
-<li><i>June 27, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
+<li><i>June 27, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and
+formatted appropriately</li>
 </ul></p>
 </html>"));
 end WorkLoadBaseDataDefinition;

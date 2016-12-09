@@ -15,10 +15,10 @@ record Boiler_Vitocrossal200_311kW
            0.8, (0.889+0.957)/2;
            0.9, (0.872+0.953)/2;
            1.0, (0.857+0.952)/2]);
-                                  annotation (preferredView="text",
-              Documentation(revisions="<html>
+    annotation (preferredView="text",Documentation(revisions="<html>
 <ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib conventions</li>
+<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
+conventions</li>
 <li><i>September 28, 2013&nbsp;</i>by Peter Matthes:<br/>implemented.</li>
 </ul>
 </html>", info="<html>
@@ -29,7 +29,8 @@ record Boiler_Vitocrossal200_311kW
 <li>supply: 75 &deg;C, return: 60 &deg;C (first column in data set)</li>
 <li>supply: 90 &deg;C, return: 70 &deg;C (not used in data set)</li>
 </ol></p>
-<p>As supply temperatures around 50 &deg;C are common (see heating curve), the average of the first two efficiencies was used.</p>
+<p>As supply temperatures around 50 &deg;C are common (see heating curve), the
+average of the first two efficiencies was used.</p>
 <p><h4><font color=\"#008000\">References</font></h4></p>
 <p>Record is used with <a href=\"HVAC.Components.HeatGenerators.Boiler.BoilerWithController\">HVAC.Components.HeatGenerators.Boiler.BoilerWithController</a></p>
 <p>Source:</p>

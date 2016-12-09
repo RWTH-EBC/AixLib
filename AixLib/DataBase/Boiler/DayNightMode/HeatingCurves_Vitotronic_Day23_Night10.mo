@@ -28,13 +28,16 @@ record HeatingCurves_Vitotronic_Day23_Night10
 <p><ul>
 <li>Product: Vitotronic 200</li>
 <li>Manufacturer: Viessmann</li>
-<li>Broschure: VITOTRONIC 200 - Heizungsanlage mit witterungsgefuehrter, digitaler Kessel- und Heizkreisregelung; 7/2002</li>
+<li>Broschure: VITOTRONIC 200 - Heizungsanlage mit witterungsgefuehrter,
+digitaler Kessel- und Heizkreisregelung; 7/2002</li>
 </ul></p>
 </html>",
       revisions="<html>
 <p><ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib conventions</li>
-<li><i>July 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
+<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
+conventions</li>
+<li><i>July 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and
+formatted appropriately</li>
 </ul></p>
 </html>"));
 end HeatingCurves_Vitotronic_Day23_Night10;
