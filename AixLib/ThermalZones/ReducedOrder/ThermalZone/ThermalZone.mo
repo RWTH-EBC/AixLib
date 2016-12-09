@@ -33,7 +33,9 @@ model ThermalZone
     final RoomArea=zoneParam.AZone) if ATot > 0
     "Internal gains from light"
     annotation (Placement(transformation(extent={{64,-76},{84,-57}})));
-  corG corGMod(final n=zoneParam.nOrientations, final UWin=zoneParam.UWin) if
+  corG corGMod(
+    final n=zoneParam.nOrientations,
+    final UWin=zoneParam.UWin) if
     sum(zoneParam.ATransparent) > 0 "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{-12,37},{0,49}})));
   EquivalentAirTemperature.VDI6007WithWindow eqAirTempWall(

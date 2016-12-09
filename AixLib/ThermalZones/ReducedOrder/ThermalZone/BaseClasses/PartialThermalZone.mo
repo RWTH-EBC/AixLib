@@ -60,7 +60,7 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
     transformation(extent={{-117,18},{-83,50}}), iconTransformation(
     extent={{-110,-10},{-90,10}})));
   Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts](
-    redeclare package Medium = Medium)
+    redeclare each final package Medium = Medium)
     "Auxilliary fluid inlets and outlets to indoor air volume"
     annotation (Placement(transformation(extent={{-49,-106},{49,-82}}),
         iconTransformation(extent={{-47,-84},{47,-60}})));
