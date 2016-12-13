@@ -1,5 +1,5 @@
 within AixLib.Controls.Continuous;
-model PITemp "PI Controler that can switch the output range of the controler"
+model PITemp "PI controller that can switch the output range of the controller"
 
   Modelica.Blocks.Interfaces.RealInput setPoint annotation (Placement(
         transformation(
@@ -7,12 +7,12 @@ model PITemp "PI Controler that can switch the output range of the controler"
         extent={{-10,-10},{10,10}},
         rotation=270)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm1 annotation(Placement(transformation(extent = {{-70, -100}, {-50, -80}}), iconTransformation(extent = {{-70, -100}, {-50, -80}})));
-  parameter Real h = 1 "upper limit controler output" annotation(Dialog(group = "Control"));
-  parameter Real l = 0 "lower limit of controler output" annotation(Dialog(group = "Control"));
+  parameter Real h = 1 "upper limit controller output" annotation(Dialog(group = "Control"));
+  parameter Real l = 0 "lower limit of controller output" annotation(Dialog(group = "Control"));
   parameter Real KR = 1 "Gain" annotation(Dialog(group = "Control"));
   parameter Modelica.SIunits.Time TN = 1 "Time Constant (T>0 required)" annotation(Dialog(group = "Control"));
   Modelica.Blocks.Interfaces.RealOutput y annotation(Placement(transformation(extent = {{80, -10}, {100, 10}}), iconTransformation(extent = {{80, -10}, {100, 10}})));
-  parameter Boolean rangeSwitch = false "Switch controler output range";
+  parameter Boolean rangeSwitch = false "Switch controller output range";
   Modelica.Blocks.Interfaces.BooleanInput onOff "Switches Controler on and off" annotation(Placement(transformation(extent = {{-120, -80}, {-80, -40}}), iconTransformation(extent = {{-100, -60}, {-80, -40}})));
   Modelica.Blocks.Logical.Switch switch1 annotation(Placement(transformation(extent = {{-40, 6}, {-20, -14}})));
   Modelica.Blocks.Logical.Switch switch2 annotation(Placement(transformation(extent = {{56, -18}, {76, 2}})));
