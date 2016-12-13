@@ -101,14 +101,18 @@ equation
 <h4><font color=\"#008000\">Overview</font></h4>
  <p>This is a simple example of a storage and a boiler.</p>
  </html>", revisions="<html>
- <ul>
- <li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe</li>
- <li><i>November 2014&nbsp;</i>
+<ul>
+<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
+conventions</li>
+<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Merged with
+AixLib and replaced boiler with idealHeater</li>
+<li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe</li>
+<li><i>November 2014&nbsp;</i>
     by Marcus Fuchs:<br/>
     Changed model to use Annex 60 base class</li>
- <li><i>13.12.2013</i>
-       by Sebastian Stinner:<br/>
-      implemented</li>
- </ul>
- </html>"));
+<li><i>13.12.2013</i>
+    by Sebastian Stinner:<br/>
+    implemented</li>
+</ul>
+</html>"));
 end StorageBoiler;

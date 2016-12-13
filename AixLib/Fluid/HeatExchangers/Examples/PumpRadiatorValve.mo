@@ -81,8 +81,12 @@ equation
   Documentation(info = "<html>
   Duplicate of  AixLib.Fluid.HeatExchangers.Radiators.Examples.PumpRadiatorValve
 </html>", revisions="<html>
- <ul>
- <li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe</li>
- </ul>
+<ul>
+<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
+conventions</li>
+<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Merged with
+AixLib and replaced boiler with idealHeater</li>
+<li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe</li>
+</ul>
 </html>"));
 end PumpRadiatorValve;
