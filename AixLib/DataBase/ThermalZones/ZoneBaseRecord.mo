@@ -3,6 +3,7 @@ record ZoneBaseRecord "Base record definition for zone records"
   extends Modelica.Icons.Record;
 
   parameter Modelica.SIunits.Temperature T_start "Initial temperature";
+  parameter Boolean withAirCap = true "Consider capacity of indoor air";
   parameter Modelica.SIunits.Volume VAir "Air volume of the zone";
   parameter Modelica.SIunits.Area AZone "Net floor area of zone";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaRad

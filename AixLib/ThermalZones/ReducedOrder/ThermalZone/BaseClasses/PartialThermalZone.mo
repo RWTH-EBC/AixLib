@@ -76,7 +76,7 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
   RC.FourElements ROM(
     final nPorts=nPorts,
     redeclare final package Medium = Medium,
-    final VAir=zoneParam.VAir,
+    final VAir=if zoneParam.withAirCap then zoneParam.VAir else 0.0,
     final alphaRad=zoneParam.alphaRad,
     final nOrientations=zoneParam.nOrientations,
     final AWin=zoneParam.AWin,
