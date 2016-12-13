@@ -1,6 +1,6 @@
 within AixLib.DataBase.Boiler.General;
 record Boiler_Vitodens300W_13kW
-  "Condesing boiler Viessmann Vitodens 300W 13kW, for Tv/Tr = 50/30 �C"
+  "Condesing boiler Viessmann Vitodens 300W 13kW, for Tv/Tr = 50/30 degC"
   extends BoilerTwoPointBaseDataDefinition(
     name="Vitodens300W_13kW",
     volume=0.0076,
