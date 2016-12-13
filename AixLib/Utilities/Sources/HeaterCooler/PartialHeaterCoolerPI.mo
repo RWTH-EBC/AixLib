@@ -53,10 +53,10 @@ equation
         points={{6,12},{2,12},{2,-40},{90,-40}},
         color={191,0,0},
         smooth=Smooth.None));
-  connect(pITempHeat.Therm1, heatCoolRoom) annotation (Line(
-        points={{-16,11},{-16,-40},{90,-40}},
-        color={191,0,0},
-        smooth=Smooth.None));
+  connect(pITempHeat.heatPort, heatCoolRoom) annotation (Line(
+      points={{-16,11},{-16,-40},{90,-40}},
+      color={191,0,0},
+      smooth=Smooth.None));
   connect(pITempCool.y, Cooling.Q_flow) annotation (Line(
         points={{-1,-20},{26,-20},{26,-12.5}},
         color={0,0,127},
@@ -65,10 +65,10 @@ equation
         points={{6,-12.5},{2.4,-12.5},{2.4,-40},{90,-40}},
         color={191,0,0},
         smooth=Smooth.None));
-  connect(pITempCool.Therm1, heatCoolRoom) annotation (Line(
-        points={{-16,-11},{-16,-40},{90,-40}},
-        color={191,0,0},
-        smooth=Smooth.None));
+  connect(pITempCool.heatPort, heatCoolRoom) annotation (Line(
+      points={{-16,-11},{-16,-40},{90,-40}},
+      color={191,0,0},
+      smooth=Smooth.None));
   connect(Heating.Q_flow, pITempHeat.y) annotation (Line(points={{26,12},{26,20},{-1,20}}, color={0,0,127}));
   connect(Heating.Q_flow,heatingPower)
     annotation (Line(points={{26,12},{26,40},{100,40}}, color={0,0,127}));

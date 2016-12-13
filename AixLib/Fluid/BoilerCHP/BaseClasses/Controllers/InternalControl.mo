@@ -132,8 +132,8 @@ equation
           {-66.3375,40.125},{-66.3375,39.75},{-99.75,39.75}}, color={255,0,255}));
   connect(TFlowHot, prescribedTemperature.T) annotation (Line(points={{-106.5,0},
           {-88.5,0},{-70.5,0}}, color={0,0,127}));
-  connect(prescribedTemperature.port, ControlerHeater.Therm1) annotation (Line(
-        points={{-54,0},{-37.2,0},{-37.2,36.825}}, color={191,0,0}));
+  connect(prescribedTemperature.port, ControlerHeater.heatPort) annotation (
+      Line(points={{-54,0},{-37.2,0},{-37.2,36.825}}, color={191,0,0}));
   annotation (Diagram(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},

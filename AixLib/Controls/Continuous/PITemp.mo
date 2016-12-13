@@ -6,7 +6,9 @@ model PITemp "PI controller that can switch the output range of the controller"
         origin={-80,90},
         extent={{-10,-10},{10,10}},
         rotation=270)));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm1 annotation(Placement(transformation(extent = {{-70, -100}, {-50, -80}}), iconTransformation(extent = {{-70, -100}, {-50, -80}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort annotation (
+      Placement(transformation(extent={{-70,-100},{-50,-80}}),
+        iconTransformation(extent={{-70,-100},{-50,-80}})));
   parameter Real h = 1 "upper limit controller output" annotation(Dialog(group = "Control"));
   parameter Real l = 0 "lower limit of controller output" annotation(Dialog(group = "Control"));
   parameter Real KR = 1 "Gain" annotation(Dialog(group = "Control"));
@@ -34,7 +36,8 @@ equation
     annotation (Line(points={{-80,90},{-80,40},{-20,40}}, color={0,0,127}));
   connect(setPoint, switch1.u3) annotation (Line(points={{-80,90},{-80,6},{-42,
           6},{-42,4}}, color={0,0,127}));
-  connect(temperatureSensor.port, Therm1) annotation(Line(points = {{-60, -80}, {-60, -90}}, color = {191, 0, 0}));
+  connect(temperatureSensor.port, heatPort)
+    annotation (Line(points={{-60,-80},{-60,-90}}, color={191,0,0}));
   connect(temperatureSensor.T, switch1.u1) annotation(Line(points = {{-60, -60}, {-60, -12}, {-42, -12}}, color = {0, 0, 127}));
   annotation (Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
