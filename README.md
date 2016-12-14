@@ -3,9 +3,9 @@ AixLib
 
 **AixLib** is a Modelica model library for building performance simulations. It is being developed at RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficient Buildings and Indoor Climate (EBC) in Aachen, Germany.
 
-This site will be used to further develop the library and make it available under the Modelica license 2.0.
+This site is used to further develop the library and make it available under the Modelica license 2.0.
 
-As the library is developed at RWTH Aachen University's EBC, the library's name **AixLib** is derived from the the city's french name Aix-la-Chapelle, which the people of Aachen are very fond of and use a lot. With the name **AixLib** we follow this local tradition.
+As the library is developed at RWTH Aachen University's EBC, the library's name **AixLib** is derived from the city's French name Aix-la-Chapelle, which the people of Aachen are very fond of and use a lot. With the name **AixLib** we follow this local tradition.
 
 If you have any questions regarding **AixLib**, feel free to contact us at aixlib@eonerc.rwth-aachen.de.
 
