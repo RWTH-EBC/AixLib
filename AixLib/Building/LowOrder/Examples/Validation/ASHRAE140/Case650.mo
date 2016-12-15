@@ -142,7 +142,7 @@ equation
 
     // Set outputs
 
-    AnnualCoolingLoad = coolMeter.q_kwh/1000;  // in MWh
+    AnnualCoolingLoad = coolMeter.q_kWh/1000;  // in MWh
     PowerLoad = coolMeter.p;
 
   connect(Source_InternalGains_convective.y, InternalGains_convective.Q_flow)
@@ -209,8 +209,8 @@ equation
         color={191,0,0}));
   connect(Source_TsetCool.y[1], idealHeaterCooler.setPointCool) annotation (
       Line(points={{3.65,-43.5},{13.6,-43.5},{13.6,-31.2}}, color={0,0,127}));
-  connect(idealHeaterCooler.coolingPower, coolMeter.p) annotation (Line(points=
-         {{26,-24.6},{79,-24.6},{79,-1},{86.4,-1}}, color={0,0,127}));
+  connect(idealHeaterCooler.coolingPower, coolMeter.p) annotation (Line(points={{26,
+          -24.6},{79,-24.6},{79,-1},{85.6667,-1}},  color={0,0,127}));
   connect(const.y, idealHeaterCooler.setPointHeat) annotation (Line(points={{19.5,
           -54},{23,-54},{23,-42},{18.2,-42},{18.2,-31.2}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(
