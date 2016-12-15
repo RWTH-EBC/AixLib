@@ -4,6 +4,7 @@ Chillers
 Delays
 FixedResistances
 HeatExchangers
+BoilerCHP
 HeatPumps
 MassExchangers
 MixingVolumes
