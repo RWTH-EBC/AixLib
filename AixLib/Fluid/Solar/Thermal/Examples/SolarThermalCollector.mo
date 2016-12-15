@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatExchangers.Examples;
+within AixLib.Fluid.Solar.Thermal.Examples;
 model SolarThermalCollector
   "Example to demonstrate the function of the solar thermal collector model"
   import AixLib;
@@ -21,7 +21,7 @@ model SolarThermalCollector
   AixLib.Fluid.Sensors.TemperatureTwoPort
                             T1(redeclare package Medium = Medium,
       m_flow_nominal=0.01)     annotation(Placement(transformation(extent = {{-28, -10}, {-8, 10}})));
-  AixLib.Fluid.HeatExchangers.SolarThermal solarThermal(
+  AixLib.Fluid.Solar.Thermal.SolarThermal solarThermal(
     A=2,
     Collector=AixLib.DataBase.SolarThermal.VacuumCollector(),
     redeclare package Medium = Medium,
@@ -75,6 +75,7 @@ equation
  <p>(values are according to wolframalpha.com for water at p = 1 atm ) </p>
  </html>", revisions="<html>
  <ul>
+ <li><i>December 15, 2016</i> by Moritz Lauster:<br/>Moved</li>
  <li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe</li>
  <li><i>April 2016&nbsp;</i>
     by Peter Remmen:<br/>
