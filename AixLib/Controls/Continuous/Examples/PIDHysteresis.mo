@@ -81,7 +81,7 @@ The figure below shows the control error
 <code>con.y</code>.
 </p>
 <p align=\"center\">
-<img src=\"modelica://AixLib/Resources/Resources/Images/Controls/Continuous/Examples/PIDHysteresis.png\" border=\"1\" alt=\"Control error.\"/>
+<img src=\"modelica://AixLib/Resources/Images/Controls/Continuous/Examples/PIDHysteresis.png\" border=\"1\" alt=\"Control error.\"/>
 </p>
 </html>", revisions="<html>
 <ul>

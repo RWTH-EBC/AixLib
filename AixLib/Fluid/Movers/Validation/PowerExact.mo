@@ -24,7 +24,7 @@ The plot below shows that this leads to a computation of the power consumption
 that is identical to the one from the speed controlled pump <code>pump_Nrpm</code>.
 </p>
 <p align=\"center\">
-<img alt=\"image\" src=\"modelica://AixLib/Resources/Resources/Images/Fluid/Movers/Validation/PowerExact.png\"/>
+<img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Movers/Validation/PowerExact.png\"/>
 </p>
 </html>",
 revisions="<html>

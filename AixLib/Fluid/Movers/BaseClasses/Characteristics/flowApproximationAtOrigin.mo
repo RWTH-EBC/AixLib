@@ -12,7 +12,7 @@ function flowApproximationAtOrigin
   output Modelica.SIunits.PressureDifference dp "Pressure raise";
 algorithm
 
-  // see equation 20 in  AixLib/Resources/Resources/Images/Fluid/Movers/UsersGuide/2013-IBPSA-Wetter.pdf
+  // see equation 20 in  AixLib/Resources/Images/Fluid/Movers/UsersGuide/2013-IBPSA-Wetter.pdf
   // this equation satisfies the constraints detailed in the paper
   // the first term is added for having a faster convergence
   // the last term in the paper is absent here because it can be found in

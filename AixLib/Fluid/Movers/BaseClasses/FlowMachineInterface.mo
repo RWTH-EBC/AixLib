@@ -347,7 +347,7 @@ the simulation stops.");
     // Linear equations to determine cBar
     // Conditions for r_N=delta, V_flow = VDelta_flow
     // Conditions for r_N=delta, V_flow = 0
-    // used in equation 20 in AixLib/Resources/Resources/Images/Fluid/Movers/UsersGuide/2013-IBPSA-Wetter.pdf
+    // used in equation 20 in AixLib/Resources/Images/Fluid/Movers/UsersGuide/2013-IBPSA-Wetter.pdf
     // see function AixLib.Fluid.Movers.BaseClasses.Characteristics.flowApproximationAtOrigin
     cBar[1] :=cha.pressure(
       per=pCur1,
@@ -402,7 +402,7 @@ the simulation stops.");
     // Linear equations to determine cBar
     // Conditions for r_N=delta, V_flow = VDelta_flow
     // Conditions for r_N=delta, V_flow = 0
-    // used in equation 20 in AixLib/Resources/Resources/Images/Fluid/Movers/UsersGuide/2013-IBPSA-Wetter.pdf
+    // used in equation 20 in AixLib/Resources/Images/Fluid/Movers/UsersGuide/2013-IBPSA-Wetter.pdf
     // see function AixLib.Fluid.Movers.BaseClasses.Characteristics.flowApproximationAtOrigin
     cBar[1] :=cha.pressure(
       per=pCur2,
@@ -457,7 +457,7 @@ the simulation stops.");
     // Linear equations to determine cBar
     // Conditions for r_N=delta, V_flow = VDelta_flow
     // Conditions for r_N=delta, V_flow = 0
-    // used in equation 20 in AixLib/Resources/Resources/Images/Fluid/Movers/UsersGuide/2013-IBPSA-Wetter.pdf
+    // used in equation 20 in AixLib/Resources/Images/Fluid/Movers/UsersGuide/2013-IBPSA-Wetter.pdf
     // see function AixLib.Fluid.Movers.BaseClasses.Characteristics.flowApproximationAtOrigin
     cBar[1] :=cha.pressure(
       per=pCur3,

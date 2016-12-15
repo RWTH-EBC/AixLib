@@ -114,7 +114,7 @@ Plotting the variables <code>kv.y</code> versus <code>y.y</code> shows that the 
 reproduces the <i>K<sub>v</sub></i> values shown in the above table.
 </p>
 <p align=\"center\">
-<img alt=\"image\" src=\"modelica://AixLib/Resources/Resources/Images/Fluid/Actuators/Valves/Examples/TwoWayValveTable_kv.png\"/>
+<img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Actuators/Valves/Examples/TwoWayValveTable_kv.png\"/>
 </p>
 <p>
 The parameter <code>filterOpening</code> is set to <code>false</code>,
