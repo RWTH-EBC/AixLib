@@ -26,11 +26,6 @@ partial model PartialHeaterCoolerPI
     l=if not recOrSep then l_cooler else zoneParam.lCool,
     KR=if not recOrSep then KR_cooler else zoneParam.KRCool,
     TN=if not recOrSep then TN_cooler else zoneParam.TNCool)
-    rangeSwitch=false,
-    h=if not recOrSep then h_cooler else zoneParam.h_cooler,
-    l=if not recOrSep then l_cooler else zoneParam.l_cooler,
-    KR=if not recOrSep then KR_cooler else zoneParam.KR_cooler,
-    TN=if not recOrSep then TN_cooler else zoneParam.TN_cooler)
     "PI control for cooler"
     annotation (Placement(transformation(extent={{-20,-10},{0,-30}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow Heating annotation(Placement(transformation(extent={{26,22},
@@ -42,11 +37,6 @@ partial model PartialHeaterCoolerPI
     l=if not recOrSep then l_heater else zoneParam.lHeat,
     KR=if not recOrSep then KR_heater else zoneParam.KRHeat,
     TN=if not recOrSep then TN_heater else zoneParam.TNHeat)
-    rangeSwitch=false,
-    h=if not recOrSep then h_heater else zoneParam.h_heater,
-    l=if not recOrSep then l_heater else zoneParam.l_heater,
-    KR=if not recOrSep then KR_heater else zoneParam.KR_heater,
-    TN=if not recOrSep then TN_heater else zoneParam.TN_heater)
     "PI control for heater" annotation (Placement(transformation(extent={{-20,10},{0,30}})));
   Modelica.Blocks.Interfaces.RealOutput heatingPower(
    final quantity="HeatFlowRate",
