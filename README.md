@@ -1,3 +1,5 @@
+![E.ON EBC RWTH Aachen University](./AixLib/Resources/Images/EBC_Logo.png)
+
 AixLib
 ======
 
