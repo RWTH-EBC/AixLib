@@ -29,7 +29,7 @@ class Acknowledgements "Acknowledgements"
 <li>Thomas Schuetz</li>
 <li>Mark Wesseling </li>
 </ul>
-<p>We would like to thank the folowing people from other institutions that directly contributed to the AixLib library</p>
+<p>We would like to thank the following people from other institutions that directly contributed to the AixLib library</p>
 <ul>
 <li>Thomas Beutlich</li>
 <li>Matthis Thorade</li>
