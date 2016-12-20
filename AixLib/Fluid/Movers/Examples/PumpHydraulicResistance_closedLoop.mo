@@ -4,9 +4,7 @@ model PumpHydraulicResistance_closedLoop
   import AixLib;
   extends Modelica.Icons.Example;
 
-  replaceable package Medium =
-     Modelica.Media.Water.StandardWater
-     constrainedby Modelica.Media.Interfaces.PartialMedium;
+  replaceable package Medium = AixLib.Media.Water;
   AixLib.Fluid.Movers.Pump pump(
     V_flow(fixed=false),
     MinMaxCharacteristics=AixLib.DataBase.Pumps.Pump1(),
@@ -18,12 +16,16 @@ model PumpHydraulicResistance_closedLoop
   Fluid.FixedResistances.HydraulicResistance hydraulicResistance(zeta = 2,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                                                   annotation(Placement(transformation(extent = {{26, 20}, {46, 40}})));
-  Fluid.FixedResistances.StaticPipe pipe(l = 10, D = 0.01,
+  AixLib.Fluid.FixedResistances.PressureDrop pipe(
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)                    annotation(Placement(transformation(extent = {{-4, 20}, {16, 40}})));
-  Fluid.FixedResistances.StaticPipe pipe1(l = 10, D = 0.01,
+    m_flow_nominal=0.5,
+    dp_nominal=200)
+    annotation (Placement(transformation(extent={{-4,20},{16,40}})));
+  AixLib.Fluid.FixedResistances.PressureDrop pipe1(
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)                     annotation(Placement(transformation(extent = {{-12, -20}, {-32, 0}})));
+    m_flow_nominal=0.5,
+    dp_nominal=200)
+    annotation (Placement(transformation(extent={{-12,-20},{-32,0}})));
   Modelica.Blocks.Sources.BooleanPulse NightSignal(period = 86400) annotation(Placement(transformation(extent = {{-60, 60}, {-40, 80}})));
   AixLib.Fluid.Sources.FixedBoundary
                      PointFixedPressure(nPorts=1, redeclare package Medium =
@@ -38,12 +40,13 @@ equation
       points={{-80,30},{-40,30}},
       color={0,127,255}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-            -100},{100,100}}),                                                                           graphics={  Text(extent=  {{-124, 74}, {-62, 44}}, lineColor=  {0, 0, 255}, textString=  "Always have
+            -100},{100,100}}),                                                                           graphics={  Text(extent = {{-124, 74}, {-62, 44}}, lineColor = {0, 0, 255}, textString = "Always have
  a point of fixed pressure
  before a pump
  when building a closed loop")}), experiment(StopTime = 86400, Interval = 60),
  Documentation(revisions="<html>
  <ul>
+ <li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe and change medium</li>
  <li><i>November 2014&nbsp;</i>
     by Marcus Fuchs:<br/>
     Changed model to use Annex 60 base class</li>

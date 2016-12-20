@@ -34,5 +34,5 @@ First implementation.
           extent={{-150,110},{150,150}},
           textString="%name",
           lineColor={0,0,255}), Bitmap(extent={{-92,90},{90,-90}}, fileName=
-              "modelica://AixLib/Resources/Resources/Images/BoundaryConditions/SolarGeometry/BaseClasses/SolarHourAngle.png")}));
+              "modelica://AixLib/Resources/Images/BoundaryConditions/SolarGeometry/BaseClasses/SolarHourAngle.png")}));
 end SolarHourAngle;

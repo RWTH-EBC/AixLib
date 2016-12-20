@@ -27,21 +27,17 @@ model StorageBoiler
   AixLib.Fluid.Movers.Pump
              pump(redeclare package Medium = Medium, m_flow_small=1e-4)
                   annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={6,60})));
-  AixLib.Fluid.HeatExchangers.Boiler
-                        boiler(Q_flow_max = 50000, boilerEfficiencyB = AixLib.DataBase.Boiler.BoilerCondensing(),
-    redeclare package Medium = Medium,
-    m_flow_nominal=0.01)                                                                                          annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin={22,74})));
   AixLib.Fluid.Sources.FixedBoundary
                      boundary_p(nPorts=1, redeclare package Medium = Medium)
                                 annotation(Placement(transformation(extent={{-48,68},
             {-28,88}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin={46,48})));
-  Modelica.Blocks.Sources.Constant const(k = 273.15 + 80) annotation(Placement(transformation(extent = {{-3, -3}, {3, 3}}, rotation = 180, origin={51,67})));
-  AixLib.Fluid.FixedResistances.Pipe
-                   pipe(D = 0.05, l = 5,
+  Modelica.Blocks.Sources.Constant const(k = 273.15 + 80) annotation(Placement(transformation(extent = {{-3, -3}, {3, 3}}, rotation = 180, origin={61,67})));
+  AixLib.Fluid.FixedResistances.PressureDrop pipe(
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)                   annotation(Placement(transformation(extent={{12,-12},
-            {32,8}})));
+    m_flow_nominal=0.5,
+    dp_nominal=200)
+    annotation (Placement(transformation(extent={{12,-12},{32,8}})));
   AixLib.Fluid.FixedResistances.HydraulicResistance
                                            hydraulicResistance(zeta = 1000,
     redeclare package Medium = Medium,
@@ -58,23 +54,25 @@ model StorageBoiler
   AixLib.Fluid.Sources.FixedBoundary
                       boundary_ph2(nPorts=1, redeclare package Medium = Medium)
                                                      annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation = 180, origin={-34,44})));
-  AixLib.Fluid.FixedResistances.Pipe
-                   pipe1(D = 0.05, l = 5,
+  AixLib.Fluid.FixedResistances.PressureDrop pipe1(
     redeclare package Medium = Medium,
-    m_flow_small=1e-4)                    annotation(Placement(transformation(extent={{-28,-22},
-            {-8,-2}})));
+    m_flow_nominal=0.5,
+    dp_nominal=200)
+    annotation (Placement(transformation(extent={{-28,-22},{-8,-2}})));
+  AixLib.Fluid.HeatExchangers.HeaterCooler_T hea(
+    redeclare package Medium = Medium,
+    m_flow_nominal=0.01,
+    dp_nominal=0,
+    Q_flow_maxHeat=50000,
+    Q_flow_maxCool=0)
+    annotation (Placement(transformation(extent={{42,68},{22,88}})));
 equation
   connect(fixedTemperature.port, storage.heatPort) annotation(Line(points={{-36,22},
           {-16,22}},                                                                                color = {191, 0, 0}));
-  connect(pump.port_a, boiler.port_b) annotation(Line(points={{6,70},{6,74},{12,
-          74}},                                                                                   color = {0, 127, 255}));
   connect(booleanExpression.y, pump.IsNight) annotation(Line(points={{35,48},{
           24,48},{24,60},{16.2,60}},                                                                                 color = {255, 0, 255}));
-  connect(const.y, boiler.T_set) annotation(Line(points={{47.7,67},{32.8,67}},     color = {0, 0, 127}));
   connect(pipe.port_b, hydraulicResistance.port_a) annotation(Line(points={{32,-2},
           {46,-2}},                                                                            color = {0, 127, 255}));
-  connect(hydraulicResistance.port_b, boiler.port_a) annotation(Line(points={{66,-2},
-          {90,-2},{90,74},{32,74}},                                                                                   color = {0, 127, 255}));
   connect(pump.port_b, storage.port_a_heatGenerator) annotation(Line(points={{6,50},{
           6,30.8},{0.4,30.8}},                                                                                         color = {0, 127, 255}));
   connect(pipe.port_a, storage.port_b_heatGenerator) annotation(Line(points={{12,-2},
@@ -91,17 +89,28 @@ equation
   connect(boundary_p.ports[1], pump.port_a) annotation (Line(
       points={{-28,78},{6,78},{6,70}},
       color={0,127,255}));
+  connect(pump.port_a, hea.port_b) annotation (Line(points={{6,70},{6,70},{6,78},
+          {6,78},{22,78}}, color={0,127,255}));
+  connect(hydraulicResistance.port_b, hea.port_a) annotation (Line(points={{66,
+          -2},{80,-2},{80,78},{42,78}}, color={0,127,255}));
+  connect(const.y, hea.TSet) annotation (Line(points={{57.7,67},{52,67},{52,84},
+          {44,84}}, color={0,0,127}));
   annotation (experiment(StopTime = 86400, Interval = 60),Documentation(info = "<html>
 <h4><font color=\"#008000\">Overview</font></h4>
  <p>This is a simple example of a storage and a boiler.</p>
  </html>", revisions="<html>
- <ul>
- <li><i>November 2014&nbsp;</i>
+<ul>
+<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
+conventions</li>
+<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Merged with
+AixLib and replaced boiler with idealHeater</li>
+<li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe</li>
+<li><i>November 2014&nbsp;</i>
     by Marcus Fuchs:<br/>
     Changed model to use Annex 60 base class</li>
- <li><i>13.12.2013</i>
-       by Sebastian Stinner:<br/>
-      implemented</li>
- </ul>
- </html>"));
+<li><i>13.12.2013</i>
+    by Sebastian Stinner:<br/>
+    implemented</li>
+</ul>
+</html>"));
 end StorageBoiler;

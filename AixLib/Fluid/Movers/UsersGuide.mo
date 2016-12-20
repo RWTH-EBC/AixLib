@@ -11,7 +11,24 @@ are used for fans or pumps.
 <h4>Model description</h4>
 <p>A detailed description of the fan and pump models can be
 found in
-<a href=\"modelica://AixLib/Resources/Resources/Images/Fluid/Movers/UsersGuide/2013-IBPSA-Wetter.pdf\">Wetter (2013)</a>.
+<a href=\"modelica://AixLib/Resources/Images/Fluid/Movers/UsersGuide/2013-IBPSA-Wetter.pdf\">Wetter (2013)</a>.
+The models are implemented as described in this paper, except
+that equation (20) is no longer used. The reason is that
+the transition (24) caused the derivative
+</p>
+<p align=\"center\" style=\"font-style:italic;\">
+ d &Delta;p(r(t), V(t)) &frasl; d r(t)
+</p>
+<p>
+to have an inflection point in the regularization region
+<i>r(t) &isin; (&delta;/2, &delta;)</i>.
+This caused some models to not converge.
+To correct this, for <i>r(t) &lt; &delta;</i>,
+the term <i>V(t) &frasl; r(t)</i> in (16)
+has been modified so that (16) can be used for any
+value of <i>r(t)</i>.
+</p>
+<p>
 Below, the models are briefly described.
 </p>
 <h5>Performance data</h5>
@@ -143,7 +160,7 @@ Then, a declaration would be
 This will model the following pump curve for the pump input signal <code>y=1</code>.
 </p>
 <p align=\"center\">
-<img alt=\"image\" src=\"modelica://AixLib/Resources/Resources/Images/Fluid/Movers/UsersGuide/pumpCurve.png\"/>
+<img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Movers/UsersGuide/pumpCurve.png\"/>
 </p>
 
 <h5>Models that directly control the head or the mass flow rate</h5>
@@ -350,7 +367,7 @@ The figure below shows for a fan with <code>filteredSpeed=true</code>
 and <code>riseTime=30</code> seconds the
 speed input signal and the actual speed.</p>
 <p align=\"center\">
-<img alt=\"image\" src=\"modelica://AixLib/Resources/Resources/Images/Fluid/Movers/UsersGuide/fanSpeedFiltered.png\"/>
+<img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Movers/UsersGuide/fanSpeedFiltered.png\"/>
 </p>
 
 <p>
@@ -522,7 +539,7 @@ AixLib.Fluid.Movers.BaseClasses.Characteristics</a>.
 <h4>References</h4>
 <p>
 Michael Wetter.
-<a href=\"modelica://AixLib/Resources/Resources/Images/Fluid/Movers/UsersGuide/2013-IBPSA-Wetter.pdf\">
+<a href=\"modelica://AixLib/Resources/Images/Fluid/Movers/UsersGuide/2013-IBPSA-Wetter.pdf\">
 Fan and pump model that has a unique solution for any pressure
 boundary condition and control signal.</a>
 <i>Proc. of the 13th Conference of the International Building Performance
