@@ -14,7 +14,7 @@ model CompareFixedResistances
     width=0.5,
     falling=1,
     period=3)    annotation (Placement(transformation(extent={{-100,70},{-80,90}})));
-    AixLib.Fluid.FixedResistances.FixedResistanceDpM FRdp(
+  AixLib.Fluid.FixedResistances.PressureDrop FRdp(
     redeclare package Medium = Medium,
     deltaM=0.3,
     linearized=false,
@@ -22,7 +22,7 @@ model CompareFixedResistances
     dp(start=P.offset - PAtm.k),
     from_dp=true,
     dp_nominal=10000)
-             annotation (Placement(transformation(extent={{-28,30},{-8,50}})));
+    annotation (Placement(transformation(extent={{-28,30},{-8,50}})));
   AixLib.Fluid.Sources.Boundary_pT sou1(          redeclare package Medium =
         Medium,
     T=293.15,

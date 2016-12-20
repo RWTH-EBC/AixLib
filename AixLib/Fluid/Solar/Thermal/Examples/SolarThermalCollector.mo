@@ -27,11 +27,11 @@ model SolarThermalCollector
     redeclare package Medium = Medium,
     m_flow_nominal=0.01)
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
-  AixLib.Fluid.FixedResistances.FixedResistanceDpM
-                                    pipe(
+  AixLib.Fluid.FixedResistances.PressureDrop pipe(
     redeclare package Medium = Medium,
     m_flow_nominal=0.1,
-    dp_nominal=200)              annotation(Placement(transformation(extent = {{54, -10}, {74, 10}})));
+    dp_nominal=200)
+    annotation (Placement(transformation(extent={{54,-10},{74,10}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort
                             T2(redeclare package Medium = Medium,
       m_flow_nominal=0.01)     annotation(Placement(transformation(extent = {{28, -10}, {48, 10}})));

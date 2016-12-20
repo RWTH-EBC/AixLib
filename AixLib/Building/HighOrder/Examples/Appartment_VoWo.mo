@@ -11,17 +11,15 @@ model Appartment_VoWo "Simulation of 1 apartment "
   AixLib.Fluid.Movers.Pump Pump(redeclare package Medium = Medium, m_flow_small=
        0.0001) "Pump in heating system"
     annotation (Placement(transformation(extent={{4,-82},{-16,-62}})));
-  AixLib.Fluid.FixedResistances.FixedResistanceDpM
-    res1(redeclare package Medium = Medium,
-    dp_nominal=200,
-    m_flow_nominal=0.3)
-                    "Hydraulic resistance of supply"
-                                                annotation(Placement(transformation(extent = {{-30, -48}, {-18, -36}})));
-  AixLib.Fluid.FixedResistances.FixedResistanceDpM res2(
+  AixLib.Fluid.FixedResistances.PressureDrop res1(
     redeclare package Medium = Medium,
     dp_nominal=200,
-    m_flow_nominal=0.3)
-                    "Hydraulic resistance of return"
+    m_flow_nominal=0.3) "Hydraulic resistance of supply"
+    annotation (Placement(transformation(extent={{-30,-48},{-18,-36}})));
+  AixLib.Fluid.FixedResistances.PressureDrop res2(
+    redeclare package Medium = Medium,
+    dp_nominal=200,
+    m_flow_nominal=0.3) "Hydraulic resistance of return"
     annotation (Placement(transformation(extent={{26,-50},{38,-38}})));
   Modelica.Blocks.Sources.Constant Source_TsetChildren(k = 273.15 + 22) annotation(Placement(transformation(extent = {{-100, 8}, {-86, 22}})));
   Modelica.Blocks.Sources.Constant Source_TsetLivingroom(k = 273.15 + 20) annotation(Placement(transformation(extent = {{-100, 52}, {-86, 66}})));
