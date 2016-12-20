@@ -46,7 +46,7 @@ model PowerSimplified
     redeclare package Medium = Medium) "Pressure source"
     annotation (Placement(transformation(extent={{-102,10},{-82,30}})));
 
-  AixLib.Fluid.FixedResistances.FixedResistanceDpM[3] res(
+  AixLib.Fluid.FixedResistances.PressureDrop[3] res(
     redeclare each package Medium = Medium,
     each m_flow_nominal=m_flow_nominal,
     each dp_nominal=40000) "Flow resistance"
@@ -164,7 +164,7 @@ November 5, 2015, by Michael Wetter:<br/>
 Changed parameters since the power is no longer a parameter for the movers
 that take mass flow rate or head as an input.
 This is for
-<a href=\"modelica://https://github.com/lbl-srg/modelica-buildings/issues/457\">issue 457</a>.
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/457\">issue 457</a>.
 </li>
 <li>
 November 22, 2014, by Michael Wetter:<br/>

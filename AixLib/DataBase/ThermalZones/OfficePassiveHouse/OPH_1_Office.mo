@@ -47,7 +47,6 @@ record OPH_1_Office "Office zone of office building"
     alphaWallOut = 20.0,
     alphaRadWall = 5,
     alphaWinOut = 20.0,
-    alphaRadWin = 5,
     alphaRoofOut = 20,
     alphaRadRoof = 5,
     tiltExtWalls = {1.5707963267949, 1.5707963267949, 1.5707963267949, 1.5707963267949, 0},

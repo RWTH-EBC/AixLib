@@ -33,12 +33,11 @@ model StorageBoiler
             {-28,88}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin={46,48})));
   Modelica.Blocks.Sources.Constant const(k = 273.15 + 80) annotation(Placement(transformation(extent = {{-3, -3}, {3, 3}}, rotation = 180, origin={61,67})));
-  AixLib.Fluid.FixedResistances.FixedResistanceDpM
-                   pipe(
+  AixLib.Fluid.FixedResistances.PressureDrop pipe(
     redeclare package Medium = Medium,
     m_flow_nominal=0.5,
-    dp_nominal=200)                      annotation(Placement(transformation(extent={{12,-12},
-            {32,8}})));
+    dp_nominal=200)
+    annotation (Placement(transformation(extent={{12,-12},{32,8}})));
   AixLib.Fluid.FixedResistances.HydraulicResistance
                                            hydraulicResistance(zeta = 1000,
     redeclare package Medium = Medium,
@@ -55,12 +54,11 @@ model StorageBoiler
   AixLib.Fluid.Sources.FixedBoundary
                       boundary_ph2(nPorts=1, redeclare package Medium = Medium)
                                                      annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation = 180, origin={-34,44})));
-  AixLib.Fluid.FixedResistances.FixedResistanceDpM
-                   pipe1(
+  AixLib.Fluid.FixedResistances.PressureDrop pipe1(
     redeclare package Medium = Medium,
     m_flow_nominal=0.5,
-    dp_nominal=200)                       annotation(Placement(transformation(extent={{-28,-22},
-            {-8,-2}})));
+    dp_nominal=200)
+    annotation (Placement(transformation(extent={{-28,-22},{-8,-2}})));
   AixLib.Fluid.HeatExchangers.HeaterCooler_T hea(
     redeclare package Medium = Medium,
     m_flow_nominal=0.01,

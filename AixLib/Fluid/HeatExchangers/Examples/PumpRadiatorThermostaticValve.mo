@@ -11,16 +11,16 @@ model PumpRadiatorThermostaticValve
              pump(MinMaxCharacteristics = AixLib.DataBase.Pumps.Pump1(), V_flow_max = 2, ControlStrategy = 2, V_flow(fixed = false),
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                                                                                                     annotation(Placement(transformation(extent = {{-54, 10}, {-34, 30}})));
-  AixLib.Fluid.FixedResistances.FixedResistanceDpM
-                   pipe(
+  AixLib.Fluid.FixedResistances.PressureDrop pipe(
     redeclare package Medium = Medium,
     dp_nominal=200,
-    m_flow_nominal=0.1)                   annotation(Placement(transformation(extent = {{4, 10}, {24, 30}})));
-  AixLib.Fluid.FixedResistances.FixedResistanceDpM
-                   pipe1(
+    m_flow_nominal=0.1)
+    annotation (Placement(transformation(extent={{4,10},{24,30}})));
+  AixLib.Fluid.FixedResistances.PressureDrop pipe1(
     redeclare package Medium = Medium,
     dp_nominal=200,
-    m_flow_nominal=0.1)                    annotation(Placement(transformation(extent = {{-10, -30}, {-30, -10}})));
+    m_flow_nominal=0.1)
+    annotation (Placement(transformation(extent={{-10,-30},{-30,-10}})));
   Modelica.Blocks.Sources.BooleanConstant NightSignal(k = false) annotation(Placement(transformation(extent = {{-76, 50}, {-56, 70}})));
   inner AixLib.Utilities.Sources.BaseParameters baseParameters
     annotation (Placement(transformation(extent={{-100,80},{-80,100}})));

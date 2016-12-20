@@ -30,7 +30,7 @@ model Radiator "Example for EBC radiator"
     calc_dT=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp.exp)
     "Radiator"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-  FixedResistances.FixedResistanceDpM res(redeclare package Medium = Medium,
+  FixedResistances.PressureDrop       res(redeclare package Medium = Medium,
     m_flow_nominal=1,
     dp_nominal=100000)
     "Pipe"
