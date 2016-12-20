@@ -42,7 +42,7 @@ model HydraulicSeparator
     nPorts=2,
     V=0.01)   "Mixing volume for heat sink"
     annotation (Placement(transformation(extent={{12,-74},{32,-94}})));
-  FixedResistances.FixedResistanceDpM res1(
+  FixedResistances.PressureDrop       res1(
     redeclare package Medium = Medium,
     m_flow_nominal=0.1,
     dp_nominal=200) "Hydraulic resistance in primary circuit"
@@ -69,7 +69,7 @@ model HydraulicSeparator
                                         temperatureMixedTop(redeclare package
       Medium = Medium, m_flow_nominal=1)
     annotation (Placement(transformation(extent={{38,0},{58,20}})));
-  FixedResistances.FixedResistanceDpM res2(
+  FixedResistances.PressureDrop       res2(
     redeclare package Medium = Medium,
     m_flow_nominal=0.1,
     dp_nominal=200) "Hydraulic resistance in secondary circuit" annotation (

@@ -247,7 +247,7 @@ public
         extent={{-7,-6.75},{7,6.75}},
         rotation=-90,
         origin={-120.75,1})));
-  FixedResistances.FixedResistanceDpM hydRes_eva(
+  FixedResistances.PressureDrop       hydRes_eva(
     redeclare package Medium = Medium_eva,
     m_flow_nominal=mFlow_evaNominal,
     m_flow(start=mFlow_evaNominal),
@@ -265,7 +265,7 @@ public
         extent={{7,6.75},{-7,-6.75}},
         rotation=-90,
         origin={121.25,-1})));
-  FixedResistances.FixedResistanceDpM hydRes_con(
+  FixedResistances.PressureDrop       hydRes_con(
     redeclare package Medium = Medium_con,
     m_flow_nominal=mFlow_conNominal,
     m_flow(start=mFlow_conNominal),
