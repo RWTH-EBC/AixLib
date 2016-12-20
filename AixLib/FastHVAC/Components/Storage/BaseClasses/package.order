@@ -1,0 +1,8 @@
+Partial_HeatTransfer_Layers
+HeatTransfer_OnlyConduction
+HeatTransfer_lambda_simple
+HeatTransfer_lambda_eff
+HeatTransfer_lambda_eff_smooth
+HeatTransfer_lambda_eff_tanh
+HeatTransfer_buoyancy_Wetter
+HeatingCoil
