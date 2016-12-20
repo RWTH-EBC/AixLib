@@ -147,9 +147,8 @@ protected
     sum(zoneParam.AExt) > 0
     "Outdoor convective heat transfer of walls"
     annotation (Placement(transformation(extent={{30,18},{20,8}})));
-  Modelica.Blocks.Sources.Constant alphaWin(
-    final k=(zoneParam.alphaWinOut +
-    zoneParam.alphaRadWin) * sum(zoneParam.AWin))
+  Modelica.Blocks.Sources.Constant alphaWin(final k=(zoneParam.alphaWinOut +
+        zoneParam.alphaRadWall)*sum(zoneParam.AWin))
     "Outdoor coefficient of heat transfer for windows"
     annotation (Placement(
     transformation(
@@ -312,7 +311,7 @@ equation
   connect(alphaWall.y, theConWall.Gc)
     annotation (Line(points={{25,4.4},{25,4.4},{25,8}}, color={0,0,127}));
   connect(alphaWin.y, theConWin.Gc) annotation (Line(points={{25,38.6},{25,36.3},
-          {25,36.3},{25,34}}, color={0,0,127}));
+          {25,34}},           color={0,0,127}));
   connect(humanSenHea.ConvHeat, ROM.intGainsConv) annotation (Line(points={{83,
           -21},{84,-21},{84,-22},{86,-22},{92,-22},{92,50},{86,50},{86,50}},
         color={191,0,0}));

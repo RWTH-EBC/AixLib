@@ -66,8 +66,6 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Coefficient of heat transfer for linearized radiation for exterior walls";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaWinOut
     "Windows' convective coefficient of heat transfer (outdoor)";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaRadWin
-    "Coefficient of heat transfer for linearized radiation for windows";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaRoofOut
     "Roof's convective coefficient of heat transfer (outdoor)";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaRadRoof
