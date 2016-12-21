@@ -238,8 +238,9 @@ equation
 <p><a href=\"FastHVAC.Examples.Pipes.DPA_ambientLoss\">DPA_ambientLoss</a></p>
 </html>",
         revisions="<html>
-        <ul>
-        <li><i>January 27, 2015 </i> by Konstantin Finkbeiner:<br/>Addapted to FastHVAC</li>
+<ul>
+<li><i>December 20, 2016&nbsp; </i> Tobias Blacha:<br/>Moved into AixLib</li>
+<li><i>January 27, 2015 </i> by Konstantin Finkbeiner:<br/>Addapted to FastHVAC</li>
 <li><i>November 26, 2014&nbsp;</i> by Roozbeh Sangi:<br>Updated connectors to EBC Library 2.2, Updated documentation, Added example</li>
 <li><i>May 19, 2014&nbsp;</i> by Roozbeh Sangi:<br>Added to the HVAC library</li>
 <li><i>November 13, 2013&nbsp;</i> by Ole Odendahl:<br>Formatted documentation appropriately</li>

@@ -653,8 +653,9 @@ connect(heatTransfer.therm, layer.port);
 </html>",
 revisions="<html>
 <p><ul>
-<li><i>December 16, 2014</i> by Sebastian Stinner:<br/>Implemented.</li>
+<li><i>December 20, 2016&nbsp; </i> Tobias Blacha:<br/>Moved into AixLib</li>
 <li><i>January 27, 2015&nbsp;</i> by Konstantin Finkbeiner:<br/>Added documentation.</li>
+<li><i>December 16, 2014</i> by Sebastian Stinner:<br/>Implemented.</li>
 </ul></p>
 </html>"));
 end Storage_simpleWall;

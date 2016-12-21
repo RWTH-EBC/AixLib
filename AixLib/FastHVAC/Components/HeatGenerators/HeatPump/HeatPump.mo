@@ -457,11 +457,10 @@ equation
 </html>",
       revisions="<html>
 <ul>
+<li><i>November 28, 2016&nbsp; </i> Tobias Blacha:<br/>Moved into AixLib</li>
+<li><i>January 12, 2015&nbsp;</i> by Konstantin Finkbeiner:<br>Addapted to FastHVAC.</li>
 <li><i>December 10, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
-  <li><i>April 23, 2013&nbsp;</i>
-         by Kristian Huchtemann:<br>
-         implemented</li>
-         <li><i>January 12, 2015&nbsp;</i> by Konstantin Finkbeiner:<br>Addapted to FastHVAC.</li>
+<li><i>April 23, 2013&nbsp;</i>by Kristian Huchtemann:<br>implemented</li>
 </ul>
 </html>"));
 end HeatPump;
