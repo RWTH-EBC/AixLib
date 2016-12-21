@@ -16,16 +16,16 @@ model PumpHydraulicResistance_closedLoop
   Fluid.FixedResistances.HydraulicResistance hydraulicResistance(zeta = 2,
     redeclare package Medium = Medium,
     m_flow_small=1e-4)                                                   annotation(Placement(transformation(extent = {{26, 20}, {46, 40}})));
-  AixLib.Fluid.FixedResistances.FixedResistanceDpM
-                                    pipe(
+  AixLib.Fluid.FixedResistances.PressureDrop pipe(
     redeclare package Medium = Medium,
     m_flow_nominal=0.5,
-    dp_nominal=200)                       annotation(Placement(transformation(extent = {{-4, 20}, {16, 40}})));
-  AixLib.Fluid.FixedResistances.FixedResistanceDpM
-                                    pipe1(
+    dp_nominal=200)
+    annotation (Placement(transformation(extent={{-4,20},{16,40}})));
+  AixLib.Fluid.FixedResistances.PressureDrop pipe1(
     redeclare package Medium = Medium,
     m_flow_nominal=0.5,
-    dp_nominal=200)                        annotation(Placement(transformation(extent = {{-12, -20}, {-32, 0}})));
+    dp_nominal=200)
+    annotation (Placement(transformation(extent={{-12,-20},{-32,0}})));
   Modelica.Blocks.Sources.BooleanPulse NightSignal(period = 86400) annotation(Placement(transformation(extent = {{-60, 60}, {-40, 80}})));
   AixLib.Fluid.Sources.FixedBoundary
                      PointFixedPressure(nPorts=1, redeclare package Medium =

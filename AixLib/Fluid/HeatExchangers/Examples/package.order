@@ -1,12 +1,7 @@
 AirHeater_T
 AirHeater_u
-BoilerSystemTConst
-BoilerSystemTVar
 PumpRadiatorThermostaticValve
 PumpRadiatorValve
-RadiatorEN442_2
-SolarThermalCollector
-TestCombiTable2D
 WaterHeater_T
 WaterHeater_u
 BaseClasses

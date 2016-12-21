@@ -115,13 +115,13 @@ equation
     integrator.u =idealHeaterCooler.coolingPower /(1000*1000); //in MWh
 
   //solar radiation
-  IncidentSolarRadiationN = SolarMeter[1].q_kwh;
-  IncidentSolarRadiationE = SolarMeter[2].q_kwh;
-  IncidentSolarRadiationS = SolarMeter[3].q_kwh;
-  IncidentSolarRadiationW = SolarMeter[4].q_kwh;
-  IncidentSolarRadiationHor = SolarMeter[5].q_kwh;
+  IncidentSolarRadiationN = SolarMeter[1].q_kWh;
+  IncidentSolarRadiationE = SolarMeter[2].q_kWh;
+  IncidentSolarRadiationS = SolarMeter[3].q_kWh;
+  IncidentSolarRadiationW = SolarMeter[4].q_kWh;
+  IncidentSolarRadiationHor = SolarMeter[5].q_kWh;
 
-  TransmittedSolarRadiation_room = SolarMeter[6].q_kwh / Room.Win_Area;
+  TransmittedSolarRadiation_room = SolarMeter[6].q_kWh / Room.Win_Area;
 
   PowerLoad =idealHeaterCooler.coolingPower  +idealHeaterCooler.heatingPower;
 

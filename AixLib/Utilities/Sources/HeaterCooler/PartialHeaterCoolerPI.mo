@@ -15,28 +15,28 @@ partial model PartialHeaterCoolerPI
     "Time constant of the cooling controller" annotation(Dialog(tab = "Cooler", group = "Controller",enable=not recOrSep));
   parameter Boolean recOrSep = false "Use record or seperate parameters" annotation(choices(choice =  false
         "Seperate",choice = true "Record",radioButtons = true));
-  parameter AixLib.DataBase.Buildings.ZoneBaseRecord zoneParam
+  parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam
     "Zone definition"                                                            annotation(choicesAllMatching=true,Dialog(enable=recOrSep));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow Cooling annotation(Placement(transformation(extent={{26,-23},
             {6,-2}})));
   Controls.Continuous.PITemp
                  pITempCool(
-    RangeSwitch=false,
-    h=if not recOrSep then h_cooler else zoneParam.h_cooler,
-    l=if not recOrSep then l_cooler else zoneParam.l_cooler,
-    KR=if not recOrSep then KR_cooler else zoneParam.KR_cooler,
-    TN=if not recOrSep then TN_cooler else zoneParam.TN_cooler)
+    rangeSwitch=false,
+    h=if not recOrSep then h_cooler else zoneParam.hCool,
+    l=if not recOrSep then l_cooler else zoneParam.lCool,
+    KR=if not recOrSep then KR_cooler else zoneParam.KRCool,
+    TN=if not recOrSep then TN_cooler else zoneParam.TNCool)
     "PI control for cooler"
     annotation (Placement(transformation(extent={{-20,-10},{0,-30}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow Heating annotation(Placement(transformation(extent={{26,22},
             {6,2}})));
   Controls.Continuous.PITemp
                  pITempHeat(
-    RangeSwitch=false,
-    h=if not recOrSep then h_heater else zoneParam.h_heater,
-    l=if not recOrSep then l_heater else zoneParam.l_heater,
-    KR=if not recOrSep then KR_heater else zoneParam.KR_heater,
-    TN=if not recOrSep then TN_heater else zoneParam.TN_heater)
+    rangeSwitch=false,
+    h=if not recOrSep then h_heater else zoneParam.hHeat,
+    l=if not recOrSep then l_heater else zoneParam.lHeat,
+    KR=if not recOrSep then KR_heater else zoneParam.KRHeat,
+    TN=if not recOrSep then TN_heater else zoneParam.TNHeat)
     "PI control for heater" annotation (Placement(transformation(extent={{-20,10},{0,30}})));
   Modelica.Blocks.Interfaces.RealOutput heatingPower(
    final quantity="HeatFlowRate",
@@ -53,10 +53,10 @@ equation
         points={{6,12},{2,12},{2,-40},{90,-40}},
         color={191,0,0},
         smooth=Smooth.None));
-  connect(pITempHeat.Therm1, heatCoolRoom) annotation (Line(
-        points={{-16,11},{-16,-40},{90,-40}},
-        color={191,0,0},
-        smooth=Smooth.None));
+  connect(pITempHeat.heatPort, heatCoolRoom) annotation (Line(
+      points={{-16,11},{-16,-40},{90,-40}},
+      color={191,0,0},
+      smooth=Smooth.None));
   connect(pITempCool.y, Cooling.Q_flow) annotation (Line(
         points={{-1,-20},{26,-20},{26,-12.5}},
         color={0,0,127},
@@ -65,10 +65,10 @@ equation
         points={{6,-12.5},{2.4,-12.5},{2.4,-40},{90,-40}},
         color={191,0,0},
         smooth=Smooth.None));
-  connect(pITempCool.Therm1, heatCoolRoom) annotation (Line(
-        points={{-16,-11},{-16,-40},{90,-40}},
-        color={191,0,0},
-        smooth=Smooth.None));
+  connect(pITempCool.heatPort, heatCoolRoom) annotation (Line(
+      points={{-16,-11},{-16,-40},{90,-40}},
+      color={191,0,0},
+      smooth=Smooth.None));
   connect(Heating.Q_flow, pITempHeat.y) annotation (Line(points={{26,12},{26,20},{-1,20}}, color={0,0,127}));
   connect(Heating.Q_flow,heatingPower)
     annotation (Line(points={{26,12},{26,40},{100,40}}, color={0,0,127}));

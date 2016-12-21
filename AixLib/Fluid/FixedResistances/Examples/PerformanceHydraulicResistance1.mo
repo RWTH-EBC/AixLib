@@ -14,7 +14,7 @@ model PerformanceHydraulicResistance1
     width=0.5,
     falling=1,
     period=3)    annotation (Placement(transformation(extent={{-100,70},{-80,90}})));
-    AixLib.Fluid.FixedResistances.FixedResistanceDpM FRdp(
+  AixLib.Fluid.FixedResistances.PressureDrop FRdp(
     redeclare package Medium = Medium,
     deltaM=0.3,
     linearized=false,
@@ -22,7 +22,7 @@ model PerformanceHydraulicResistance1
     dp(start=P.offset - PAtm.k),
     dp_nominal=10000,
     from_dp=false)
-             annotation (Placement(transformation(extent={{-28,28},{-8,48}})));
+    annotation (Placement(transformation(extent={{-28,28},{-8,48}})));
   AixLib.Fluid.Sources.Boundary_pT sou1(          redeclare package Medium =
         Medium,
     T=293.15,
