@@ -202,7 +202,7 @@ public
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,-46})));
-   Fluid.Storage.BaseClasses.HeatTransferOnlyConduction
+   BaseClasses.HeatTransfer_OnlyConduction
                 heatTransfer annotation (Placement(transformation(extent={{-8,18},
             {12,38}},  rotation=0)));
 
