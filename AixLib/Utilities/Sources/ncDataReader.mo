@@ -109,6 +109,6 @@ equation
 <p>First you have to select the *.nc-file your data is stored in.</p>
 <p>With the checkboxes, you can select what type of data you want to get. You have to enter the names of the variables/attributes you want to get to the corresponding line.</p>
 <h4><span style=\"color: #008000\">Example Function</span></h4>
-<p><a href=\"NcDataReader2.Examples.Simple\">NcDataReader2.Examples.Simple</a></p>
+<p><a href=\"AixLib.Utilities.Examples.NcDataReader_test\">AixLib.Utilities.Examples.NcDataReader_test</a></p>
 </html>"));
 end NcDataReader;
