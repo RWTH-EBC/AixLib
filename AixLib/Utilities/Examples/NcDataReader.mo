@@ -1,5 +1,5 @@
 within AixLib.Utilities.Examples;
-model NcDataReader_test
+model NcDataReader
   extends Modelica.Icons.Example;
   Sources.NcDataReader NcDataReader_test(
     use_varName=true,
@@ -32,4 +32,4 @@ model NcDataReader_test
 <li><i>Feburary 1, 2017</i> by Fabian Wuellhorst:<br>Implemented.</li>
 </ul>
 </html>"));
-end NcDataReader_test;
+end NcDataReader;
