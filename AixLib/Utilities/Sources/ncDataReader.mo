@@ -102,15 +102,16 @@ equation
           fillPattern=FillPattern.Solid,
           textString="file reader")}),                           Diagram(
         coordinateSystem(preserveAspectRatio=false)),
+        preferredView="info",
     Documentation(revisions="<html>
 <ul>
-<li><i>Feburary 1, 2017</i> by Fabian Wuellhorst:<br>Added documentation</li>
-<li><i>December 14, 2016 </i>by Fabian Wuellhorst:<br>Implemented.</li>
+<li><i>Feburary 1, 2017</i> by Philipp Mehrfeld:<br>Revised documentation.</li>
+<li><i>December 14, 2016 </i> by Fabian Wuellhorst:<br>Implemented.</li>
 </ul>
 </html>", info="<html>
 <p><b><span style=\"color: #008000;\">Overview</span></b> </p>
 <p>The model <b>NcDataReader</b> reads data from netCDF files (based on HDF) to Modelica. You can read attributes of type integer or double/float/Real as well as one dimensional vectors. Therefore, the NcDataReader represents an alternative for the <a href=\"Modelica.Blocks.Sources.CombiTimeTable\">CombiTimeTable</a>.</p>
-<p>You have to select the *.nc-file your data is stored in and define the variable&apos;s names (<code>varName</code>). With the checkboxes, you can select what type of data/attributes should be read in by the model and define afterwards the names of the variables/attributes. </p>
+<p>You have to select the <code>*.nc file</code> your data is stored in and define the variable&apos;s names (<code>varName</code>). With the checkboxes, you can select what type of data/attributes should be read in by the model and define afterwards the names of the variables/attributes. </p>
 <p><b><span style=\"font-size: 12pt; color: #bf2427;\">IMPORTANT:</span></b> This model uses the external library <a href=\"https://github.com/tbeu/netCDF-DataReader\">NcDataReader2</a>. </p>
 <p><b><span style=\"color: #008000;\">Further external information</span></b> </p>
 <p>For further information please consider <a href=\"https://github.com/tbeu/netCDF-DataReader\">netCDF-DataReader GitHub repository</a>. </p>
@@ -119,6 +120,6 @@ equation
 <p><b><span style=\"color: #008000;\">Outlook</span></b> </p>
 <p>If the function NcEasyGetScattered2D works in the future, an implementation to this model should follow. It would substitute <a href=\"Modelica.Blocks.Tables.CombiTable2D\">CombiTable2D</a>. Please have a look at the documentation on how to create netCDF-files and the different interpolation types. More information on that you find here.</p>
 <h4><span style=\"color: #008000\">Example Function</span></h4>
-<p><a href=\"AixLib.Utilities.Examples.NcDataReader_test\">AixLib.Utilities.Examples.NcDataReader_test</a></p>
+<p><a href=\"AixLib.Utilities.Examples.NcDataReader\">AixLib.Utilities.Examples.NcDataReader</a></p>
 </html>"));
 end NcDataReader;
