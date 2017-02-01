@@ -7,11 +7,12 @@ variables:
 
     double temp_year(time_temp_year) ;
         temp_year:interpolation = "discrete" ;
+// interpolation e.g.: discrete, linear, akima
 
     double time_temp_year(time_temp_year) ;
         time_temp_year:extrapolation = "periodic" ;
         time_temp_year:add_offset = 0.f;
-//global attributes:
+// global attributes:
 :float_ex=1.1f;
 :TRY=2010;
 :Region=12;
