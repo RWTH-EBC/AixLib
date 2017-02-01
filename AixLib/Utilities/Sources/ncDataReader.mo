@@ -88,11 +88,18 @@ equation
           fillPattern=FillPattern.Solid,
           textString="%name"),
         Text(
-          extent={{-68,96},{66,2}},
+          extent={{-38,48},{38,-8}},
           lineColor={0,0,0},
           fillColor={248,248,248},
           fillPattern=FillPattern.Solid,
-          textString="TABLE:")}),                                Diagram(
+          textString="
+*.nc 
+"),     Text(
+          extent={{-44,86},{44,26}},
+          lineColor={0,0,0},
+          fillColor={248,248,248},
+          fillPattern=FillPattern.Solid,
+          textString="file reader")}),                           Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>
 <ul>
