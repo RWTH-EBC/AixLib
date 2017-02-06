@@ -2,8 +2,7 @@ within AixLib.Utilities.Sources;
 model NcDataReader
   "File reader for external data"
   import nc = NcDataReader2.Functions;
-  parameter String fileName=Modelica.Utilities.Files.loadResource(
-    "modelica://NcDataReader2/Resources/examples/testfile.nc")
+  parameter String fileName
     "File where external data is stored"
     annotation (Dialog(loadSelector(filter="netCDF files (*.nc)",
     caption="Open file")));
@@ -22,12 +21,12 @@ model NcDataReader
     HideResult=True,
     Evaluate=true,
     choices(checkBox=true));
-  parameter String varName[:]={"test1D"} "Array name in .nc file"
+  parameter String varName[:] "Array name in .nc file"
     annotation (Dialog(enable=use_varName));
-  parameter String attNameReal[:]={"foo"}
+  parameter String attNameReal[:]
     "Name of attribute of type real in .nc file"
     annotation (Dialog(enable=use_attNameReal));
-  parameter String attNameInt[:]={"bar"}
+  parameter String attNameInt[:]
     "Name of attribute of type integer in .nc file"
     annotation (Dialog(enable=use_attNameInt));
   parameter Modelica.SIunits.Time offset=0
@@ -117,7 +116,7 @@ equation
           fillColor={248,248,248},
           fillPattern=FillPattern.Solid,
           textString="
-*.nc 
+*.nc
 "),     Text(
           extent={{-44,86},{44,26}},
           lineColor={0,0,0},
@@ -128,37 +127,39 @@ equation
     preferredView="info",
     Documentation(revisions="<html>
 <ul>
-<li><i>Feburary 1, 2017</i> by Philipp Mehrfeld:<br>Revised documentation.</li>
+<li><i>Feburary 6, 2017</i> by Philipp Mehrfeld:<br>Revised documentation.</li>
 <li><i>December 14, 2016 </i> by Fabian Wuellhorst:<br>Implemented.</li>
 </ul>
 </html>", info="<html>
 <p><b><span style=\"color: #008000;\">Overview</span></b> </p>
 <p>The model <b>NcDataReader</b> reads data from netCDF files (based on HDF) to
-Modelica. You can read attributes of type integer or double/float/Real as well 
-as one dimensional vectors. Therefore, the NcDataReader represents an 
-alternative for the 
+Modelica. You can read attributes of type integer or double/float/Real as well
+as one dimensional vectors. Therefore, the NcDataReader represents an
+alternative for the
 <a href=\"Modelica.Blocks.Sources.CombiTimeTable\">CombiTimeTable</a>.</p>
-<p>You have to select the <code>*.nc file</code> your data is stored in and 
-define the variable&apos;s names (<code>varName</code>). With the checkboxes, 
-you can select what type of data/attributes should be read in by the model and 
+<p>You have to select the <code>*.nc file</code> your data is stored in and
+define the variable&apos;s names (<code>varName</code>). With the checkboxes,
+you can select what type of data/attributes should be read in by the model and
 define afterwards the names of the variables/attributes. </p>
-<p><b><span style=\"font-size: 12pt; color: #bf2427;\">IMPORTANT:</span></b> 
-This model uses the external library 
-<a href=\"https://github.com/tbeu/netCDF-DataReader\">NcDataReader2</a>. </p>
+<p><b><span style=\"font-size: 12pt; color: #bf2427;\">IMPORTANT:</span></b>
+This model needs the external library
+<a href=\"https://github.com/tbeu/netCDF-DataReader\">NcDataReader2</a>.
+Clone or download the repository and load the Modelica library package
+(<code>netCDF-DataReader/NcDataReader2/package.mo</code>).</p>
 <p><b><span style=\"color: #008000;\">Further external information</span></b> </p>
-<p>For further information please consider 
+<p>For further information please consider
 <a href=\"https://github.com/tbeu/netCDF-DataReader\">netCDF-DataReader GitHub repository</a>. </p>
-<p>Have a look directly at the 
-<a href=\"https://github.com/tbeu/netCDF-DataReader/blob/master/NcDataReader2/Resources/doc/ncDataReader2_Manual.pdf\">documentation</a> 
-on how to create netCDF-files (<code>*.nc files</code>) and the different 
+<p>Have a look directly at the
+<a href=\"https://github.com/tbeu/netCDF-DataReader/blob/master/NcDataReader2/Resources/doc/ncDataReader2_Manual.pdf\">documentation</a>
+on how to create netCDF-files (<code>*.nc files</code>) and the different
 interpolation and extrapolation types. </p>
-<p>More information can be found 
+<p>More information can be found
 <a href=\"https://www.j-raedler.de/projects/ncdatareader2/\">here</a>.</p>
 <p><b><span style=\"color: #008000;\">Outlook</span></b> </p>
-<p>If the function NcEasyGetScattered2D works in the future, an implementation 
-to this model should follow. It would substitute 
-<a href=\"Modelica.Blocks.Tables.CombiTable2D\">CombiTable2D</a>. 
-Please have a look at the documentation on how to create netCDF-files and the 
+<p>If the function NcEasyGetScattered2D works in the future, an implementation
+to this model should follow. It would substitute
+<a href=\"Modelica.Blocks.Tables.CombiTable2D\">CombiTable2D</a>.
+Please have a look at the documentation on how to create netCDF-files and the
 different interpolation types. More information on that you find here.</p>
 <h4><span style=\"color: #008000\">Example Function</span></h4>
 <p><a href=\"AixLib.Utilities.Examples.NcDataReader\">AixLib.Utilities.Examples.NcDataReader</a></p>
