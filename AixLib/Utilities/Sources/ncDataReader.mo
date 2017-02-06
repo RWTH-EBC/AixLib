@@ -75,7 +75,7 @@ equation
       yAttInt_internal[i] = 0;
     end for;
   end if;
-     annotation (uses(NcDataReader2(version="2.4.0")),Dialog(group="AHU Modes"), choices(checkBox=true),Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+     annotation (uses(NcDataReader2(version="2.4.0")),Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           lineColor={200,200,200},
           fillColor={248,248,248},
