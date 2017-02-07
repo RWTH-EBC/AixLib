@@ -21,12 +21,12 @@ model NcDataReader
     HideResult=True,
     Evaluate=true,
     choices(checkBox=true));
-  parameter String varName[:] "Array name in .nc file"
+  parameter String varName[:]={""} "Array name in .nc file"
     annotation (Dialog(enable=use_varName));
-  parameter String attNameReal[:]
+  parameter String attNameReal[:]={""}
     "Name of attribute of type real in .nc file"
     annotation (Dialog(enable=use_attNameReal));
-  parameter String attNameInt[:]
+  parameter String attNameInt[:]={""}
     "Name of attribute of type integer in .nc file"
     annotation (Dialog(enable=use_attNameInt));
   parameter Modelica.SIunits.Time offset=0
