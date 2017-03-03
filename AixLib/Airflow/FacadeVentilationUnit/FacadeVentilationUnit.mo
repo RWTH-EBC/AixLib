@@ -89,16 +89,16 @@ public
         extent={{-16,-16},{16,16}},
         rotation=270,
         origin={54,96})));
-  Modelica.Fluid.Interfaces.FluidPort_b Heater_Return(redeclare package Medium
-      = Water)
+  Modelica.Fluid.Interfaces.FluidPort_b Heater_Return(redeclare package Medium =
+        Water)
     "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{82,90},{102,110}})));
   Modelica.Fluid.Interfaces.FluidPort_a Heater_Flow(redeclare package Medium =
         Water)
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{112,90},{132,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Cooler_Return(redeclare package Medium
-      = Water)
+  Modelica.Fluid.Interfaces.FluidPort_b Cooler_Return(redeclare package Medium =
+        Water)
     "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{152,90},{172,110}})));
   Modelica.Fluid.Interfaces.FluidPort_a Cooler_Flow(redeclare package Medium =
@@ -418,6 +418,8 @@ equation
 <p>The portion of fresh air flowing through the recuperator is controlled by means of a bypass damper. The portion of extract air that is recirculated and mixed with the fresh air stream is controlled by means of a circulation damper. The mixed air stream is either heated or cooled in the air-water heat exchangers. The water flow in these heat exchangers is controlled by two-way-valves. </p>
 <h4>Actuators</h4>
 <p>All actuators receive normailized signals (0-1). The supply- and exhaust air fans are table-based. An input signal in &percnt; is transformed into a mass-flow set point for a flow-controlled mover. If the exhaust air fan is not in operation, the entire air flow should be recirculated. Thus, the circulation damper should be fully opened. In that case, the fresh air flap should be closed so that no fresh air can enter the unit. The exhaust air fan has a minimum mass flow rate of 1 m&sup3;/h to make the model more stable. </p>
+<p><br><h4><span style=\"color: #008000\">References</span></h4></p>
+<p>Baranski, M., Sangi, R., F&uuml;tterer, J., M&uuml;ller, D. (2016). An Algorithm for Stepwise Exergy-based Model Predictive Control of Building HVAC Supply Chains. <i>29th international conference on Efficiency, Cost, Optimisation, Simulation and Environmental Impact of Energy Systems</i>. </p>
 </html>", revisions="<html>
 <ul>
 <li><i><span style=\"font-family: Arial,sans-serif;\">November 10, 2016&nbsp;</span></i> by Roozbeh Sangi and Marc Baranski:<br>Implemented.</li>
