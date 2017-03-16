@@ -6,7 +6,7 @@ model Example
   package Medium1 = AixLib.Media.Air;
   package Medium2 = AixLib.Media.Water;
 
-  AixLib.HVAC.FacadeVentilationUnit.FVUController
+  AixLib.Airflow.FacadeVentilationUnit.FVUController
                      FVUController
     annotation (Placement(transformation(extent={{-46,-30},{-6,10}})));
   Modelica.Blocks.Sources.Constant roomTemperature(k=273.15 + 20)
@@ -15,7 +15,7 @@ model Example
     annotation (Placement(transformation(extent={{-94,-28},{-74,-8}})));
   Modelica.Blocks.Sources.Constant co2Concentration(k=1000)
     annotation (Placement(transformation(extent={{-94,-72},{-74,-52}})));
-  AixLib.HVAC.FacadeVentilationUnit.FacadeVentilationUnit
+  AixLib.Airflow.FacadeVentilationUnit.FacadeVentilationUnit
                              FVU(redeclare package Air =
                     Medium1, redeclare package Water = Medium2)
     annotation (Placement(transformation(extent={{70,-56},{106,-36}})));

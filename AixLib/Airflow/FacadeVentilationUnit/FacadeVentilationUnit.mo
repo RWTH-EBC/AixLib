@@ -89,16 +89,16 @@ public
         extent={{-16,-16},{16,16}},
         rotation=270,
         origin={54,96})));
-  Modelica.Fluid.Interfaces.FluidPort_b Heater_Return(redeclare package Medium =
-        Water)
+  Modelica.Fluid.Interfaces.FluidPort_b Heater_Return(redeclare package Medium
+      = Water)
     "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{82,90},{102,110}})));
   Modelica.Fluid.Interfaces.FluidPort_a Heater_Flow(redeclare package Medium =
         Water)
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{112,90},{132,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Cooler_Return(redeclare package Medium =
-        Water)
+  Modelica.Fluid.Interfaces.FluidPort_b Cooler_Return(redeclare package Medium
+      = Water)
     "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{152,90},{172,110}})));
   Modelica.Fluid.Interfaces.FluidPort_a Cooler_Flow(redeclare package Medium =

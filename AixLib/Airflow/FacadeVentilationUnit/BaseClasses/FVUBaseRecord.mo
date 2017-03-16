@@ -1,6 +1,5 @@
 within AixLib.Airflow.FacadeVentilationUnit.BaseClasses;
-record FVUBaseRecord
-  "Base record for the facade ventilation unit model"
+record FVUBaseRecord "Base record for the facade ventilation unit model"
   extends Modelica.Icons.Record;
 
   parameter Real noUnits=1 "Number of identical FVUs";

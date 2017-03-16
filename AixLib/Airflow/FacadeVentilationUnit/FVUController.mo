@@ -12,8 +12,7 @@ model FVUController
   parameter Real fullyOpen = 100
     "Percentage value representing fuly opened flap";
 
-  parameter Real deltaTemp = 100
-    "Added to the set temperature in cooling mode";
+  parameter Real deltaTemp = 100 "Added to the set temperature in cooling mode";
 
   Modelica.Blocks.Interfaces.RealInput roomTemperature
     annotation (Placement(transformation(extent={{-120,70},{-80,110}})));
