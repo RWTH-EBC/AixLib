@@ -2,6 +2,26 @@ within AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140;
 model TestCase600 "Test case 600"
   extends Modelica.Icons.Example;
 
+  Modelica.Blocks.Interfaces.RealOutput AnnualHeatingLoad "in MWh"
+    annotation (Placement(transformation(extent={{142,-45},{162,-25}})));
+  Modelica.Blocks.Interfaces.RealOutput AnnualCoolingLoad "in MWh"
+    annotation (Placement(transformation(extent={{142,-63},{162,-43}})));
+  Modelica.Blocks.Interfaces.RealOutput PowerLoad "in kW"
+    annotation (Placement(transformation(extent={{142,-92},{162,-72}})));
+  Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationN "in kWh/m2"
+    annotation (Placement(transformation(extent={{139,78},{159,98}})));
+  Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationE "in kWh/m2"
+    annotation (Placement(transformation(extent={{139,62},{159,82}})));
+  Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationW "in kWh/m2"
+    annotation (Placement(transformation(extent={{140,29},{160,49}})));
+  Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationS "in kWh/m2"
+    annotation (Placement(transformation(extent={{139,46},{159,66}})));
+  Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationHor "in kWh/m2"
+    annotation (Placement(transformation(extent={{141,12},{161,32}})));
+  Modelica.Blocks.Interfaces.RealOutput TransmittedSolarRadiation_room
+    "in kWh/m2"
+    annotation (Placement(transformation(extent={{141,-28},{162,-8}})));
+
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
@@ -11,7 +31,6 @@ model TestCase600 "Test case 600"
     filNam="D:/GIT/AixLib/AixLib/Resources/WeatherData/ASHRAE140.mos")
     "Weather data reader"
     annotation (Placement(transformation(extent={{-98,68},{-78,88}})));
-
   AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[5](
     each outSkyCon=true,
     each outGroCon=true,
@@ -27,12 +46,13 @@ model TestCase600 "Test case 600"
     azi={0,1.5707963267949,3.1415926535898,0,-1.5707963267949})
     "Calculates direct solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,68},{-48,88}})));
-  AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane corGDoublePane(n=5,
-  UWin=3.046492744695893)
+  AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane
+    corGDoublePane(n=5,
+    UWin=3.046492744695893)
     "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{6,70},{26,90}})));
   AixLib.ThermalZones.ReducedOrder.RC.TwoElements
-  thermalZoneTwoElements(
+    thermalZoneTwoElements(
     VAir=129.60000000000002,
     alphaExt=2.2309677419354843,
     alphaWin=3.16,
@@ -60,10 +80,15 @@ model TestCase600 "Test case 600"
     redeclare package Medium = Modelica.Media.Air.DryAirNasa)
     "Thermal zone"
     annotation (Placement(transformation(extent={{44,14},{92,50}})));
-  AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
+  AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow
+    eqAirTemp(
     n=5,
     wfGro=0,
-    wfWall={0.10339514389812844, 0.17447930532809178, 0.23263907377078896, 0.31500717167489906, 0.17447930532809178},
+    wfWall={0.10339514389812844,
+            0.17447930532809178,
+            0.23263907377078896,
+            0.31500717167489906,
+            0.17447930532809178},
     wfWin={1.0, 0.0, 0.0, 0.0, 0.0},
     withLongwave=true,
     aExt=0.6,
@@ -75,10 +100,12 @@ model TestCase600 "Test case 600"
   Modelica.Blocks.Math.Add solRad[5]
     "Sums up solar radiation of both directions"
     annotation (Placement(transformation(extent={{-38,22},{-28,32}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedTemperature
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
+    prescribedTemperature
     "Prescribed temperature for exterior walls outdoor surface temperature"
     annotation (Placement(transformation(extent={{8,10},{20,22}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedTemperature1
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
+    prescribedTemperature1
     "Prescribed temperature for windows outdoor surface temperature"
     annotation (Placement(transformation(extent={{8,30},{20,42}})));
   Modelica.Thermal.HeatTransfer.Components.Convection thermalConductorWin
@@ -115,10 +142,10 @@ model TestCase600 "Test case 600"
     "Convective heat flow of internal gains"
     annotation (Placement(transformation(extent={{68,-50},{88,-30}})));
   Modelica.Blocks.Sources.Constant souIntGai(k=200) "Internal gains in W"
-    annotation (Placement(transformation(extent={{-2,-37},{11,-24}})));
-  Modelica.Blocks.Math.Gain gainRad(k=0.6)
+    annotation (Placement(transformation(extent={{-2,-33},{11,-20}})));
+  Modelica.Blocks.Math.Gain gainRad(k=0.6) "Radiant part"
     annotation (Placement(transformation(extent={{38,-29},{48,-19}})));
-  Modelica.Blocks.Math.Gain gainCon(k=0.4)
+  Modelica.Blocks.Math.Gain gainCon(k=0.4) "Convective part"
     annotation (Placement(transformation(extent={{38,-45},{48,-35}})));
   Modelica.Blocks.Math.Gain gain(k=0.0441)
     "Conversion to kg/s"
@@ -150,16 +177,16 @@ model TestCase600 "Test case 600"
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     yMax=1,
     yMin=0,
-    Ti=1)   "Heating controller"
+    Ti=1) "Heating controller"
     annotation (Placement(transformation(extent={{14,-68},{30,-52}})));
   Modelica.Blocks.Math.Gain gainHea(k=1e6) "Gain for heating controller"
     annotation (Placement(transformation(extent={{38,-66},{50,-54}})));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensor
     "Sensor for ideal heater"
     annotation (Placement(transformation(extent={{92,-66},{80,-54}})));
-  Modelica.Blocks.Sources.Constant SouTSetH(k=20)
+  Modelica.Blocks.Sources.Constant SouTSetH(k=20) "Set temperature heater"
     annotation (Placement(transformation(extent={{-24,-66},{-12,-54}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow coo "Ideal heater"
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow coo "Ideal cooler"
     annotation (Placement(transformation(extent={{56,-96},{76,-76}})));
   Modelica.Blocks.Math.UnitConversions.From_degC from_degC_coo
     "Convert set temperature from degC to Kelvin"
@@ -168,14 +195,14 @@ model TestCase600 "Test case 600"
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     yMax=0,
     yMin=-1,
-    Ti=1)    "Heating controller"
+    Ti=1) "Cooling controller"
     annotation (Placement(transformation(extent={{14,-94},{30,-78}})));
-  Modelica.Blocks.Math.Gain gainCoo(k=1e6) "Gain for heating controller"
+  Modelica.Blocks.Math.Gain gainCoo(k=1e6) "Gain for cooling controller"
     annotation (Placement(transformation(extent={{38,-92},{50,-80}})));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor hoolFlowSensor
     "Sensor for ideal cooler"
     annotation (Placement(transformation(extent={{92,-92},{80,-80}})));
-  Modelica.Blocks.Sources.Constant SouTSetC(k=27)
+  Modelica.Blocks.Sources.Constant SouTSetC(k=27) "Set temperature cooler"
     annotation (Placement(transformation(extent={{-24,-92},{-12,-80}})));
   Modelica.Blocks.Sources.CombiTimeTable souWea(
     tableOnFile=true,
@@ -187,7 +214,7 @@ model TestCase600 "Test case 600"
   Modelica.Blocks.Math.Add add(k2=-1)
     "Addition of hemispherical and terrestrial radiation"
     annotation (Placement(transformation(extent={{-134,52},{-122,64}})));
-  Modelica.Blocks.Math.Division division "Meand value of radiation"
+  Modelica.Blocks.Math.Division division "Mean value of radiation"
     annotation (Placement(transformation(extent={{-116,48},{-104,60}})));
   Modelica.Blocks.Sources.Constant numRad(k=2) "Number of radiation ports"
     annotation (Placement(transformation(extent={{-134,36},{-122,48}})));
@@ -199,54 +226,39 @@ model TestCase600 "Test case 600"
     "Solar radiation data"
     annotation (Placement(transformation(extent={{-136,4},{-116,24}})));
   Modelica.Blocks.Continuous.Integrator integrator
+    "Integrated annual cooling load"
     annotation (Placement(transformation(extent={{107,-58.5},{118,-47.5}})));
   Modelica.Blocks.Continuous.Integrator integrator1
+    "Integrated annual heating load"
     annotation (Placement(transformation(extent={{107,-40.5},{118,-29.5}})));
   Modelica.Blocks.Math.Gain absCoeffA(k=(1 - 0.03)*0.789)
-    "multiplication withabsorbtioncoefficient and area"
+    "Multiplication with g value and radiant part"
     annotation (Placement(transformation(extent={{109,0},{121,12}})));
-    Modelica.Blocks.Interfaces.RealOutput AnnualHeatingLoad "in MWh"
-      annotation (Placement(transformation(extent={{142,-45},{162,-25}})));
-    Modelica.Blocks.Interfaces.RealOutput AnnualCoolingLoad "in MWh"
-      annotation (Placement(transformation(extent={{142,-63},{162,-43}})));
-    Modelica.Blocks.Interfaces.RealOutput PowerLoad "in kW"
-      annotation (Placement(transformation(extent={{142,-92},{162,-72}})));
-    Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationN "in kWh/m2"
-      annotation (Placement(transformation(extent={{139,78},{159,98}})));
-    Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationE "in kWh/m2"
-      annotation (Placement(transformation(extent={{139,62},{159,82}})));
-    Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationW "in kWh/m2"
-      annotation (Placement(transformation(extent={{140,29},{160,49}})));
-    Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationS "in kWh/m2"
-      annotation (Placement(transformation(extent={{139,46},{159,66}})));
-    Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationHor "in kWh/m2"
-      annotation (Placement(transformation(extent={{141,12},{161,32}})));
-    Modelica.Blocks.Interfaces.RealOutput TransmittedSolarRadiation_room
-    "in kWh/m2"
-      annotation (Placement(transformation(extent={{141,-28},{162,-8}})));
   Modelica.Blocks.Math.Gain gainIntHea(k=1/(1000*1000*3600))
-                                                   "converts to MWh"
+    "Converts to MWh"
     annotation (Placement(transformation(extent={{126,-41},{138,-29}})));
   Modelica.Blocks.Math.Gain gainIntCoo(k=1/(1000*1000*3600))
-                                                   "converts to MWh"
+    "Converts to MWh"
     annotation (Placement(transformation(extent={{126,-59},{138,-47}})));
   Modelica.Blocks.Math.MultiSum multiSum(nu=2)
+    "Sum of heating and cooling power"
     annotation (Placement(transformation(extent={{126,-97},{136,-87}})));
-  Modelica.Blocks.Math.Gain gain2(k=-1)
+  Modelica.Blocks.Math.Gain gain2(k=-1) "Changes sign"
     annotation (Placement(transformation(extent={{108,-96},{118,-85}})));
   Modelica.Blocks.Continuous.Integrator integratorSol[5]
+    "Solar radiation in each direction"
     annotation (Placement(transformation(extent={{69,68.5},{80,79.5}})));
   Modelica.Blocks.Math.Gain gainSol[5](each k=1/(1000*3600))
-                                                     "converts to kWh"
+    "Converts to kWh"
     annotation (Placement(transformation(extent={{88,68},{100,80}})));
   Modelica.Blocks.Continuous.Integrator integratorSolRoo
     "Solar radiation within room"
     annotation (Placement(transformation(extent={{127,0.5},{138,11.5}})));
-  Modelica.Blocks.Math.Gain gainSolRoo(k=1/(1000*3600)) "converts to kWh"
+  Modelica.Blocks.Math.Gain gainSolRoo(k=1/(1000*3600)) "Converts to kWh"
     annotation (Placement(transformation(extent={{144,0},{156,12}})));
-  Modelica.Blocks.Math.Gain gain3(k=-1)
+  Modelica.Blocks.Math.Gain gain3(k=-1) "Changes sign"
     annotation (Placement(transformation(extent={{106,-80},{116,-69}})));
-  Modelica.Blocks.Math.Gain gainPowLoa(k=0.001) "converts to kW"
+  Modelica.Blocks.Math.Gain gainPowLoa(k=0.001) "Converts to kW"
     annotation (Placement(transformation(extent={{126,-76},{138,-64}})));
 equation
   connect(eqAirTemp.TEqAirWin, prescribedTemperature1.T)
@@ -294,52 +306,52 @@ equation
   connect(solRad.y, eqAirTemp.HSol)
     annotation (Line(points={{-27.5,27},{-26,27},{-26,18}},
     color={0,0,127}));
-    connect(weaDat.weaBus, HDifTil[1].weaBus)
+  connect(weaDat.weaBus, HDifTil[1].weaBus)
     annotation (Line(
     points={{-78,78},{-74,78},{-74,46},{-68,46}},
     color={255,204,51},
     thickness=0.5));
-    connect(weaDat.weaBus, HDirTil[1].weaBus)
+  connect(weaDat.weaBus, HDirTil[1].weaBus)
     annotation (Line(
     points={{-78,78},{-73,78},{-68,78}},
     color={255,204,51},
     thickness=0.5));
-    connect(weaDat.weaBus, HDifTil[2].weaBus)
+  connect(weaDat.weaBus, HDifTil[2].weaBus)
     annotation (Line(
     points={{-78,78},{-74,78},{-74,46},{-68,46}},
     color={255,204,51},
     thickness=0.5));
-    connect(weaDat.weaBus, HDirTil[2].weaBus)
+  connect(weaDat.weaBus, HDirTil[2].weaBus)
     annotation (Line(
     points={{-78,78},{-73,78},{-68,78}},
     color={255,204,51},
     thickness=0.5));
-    connect(weaDat.weaBus, HDifTil[3].weaBus)
+  connect(weaDat.weaBus, HDifTil[3].weaBus)
     annotation (Line(
     points={{-78,78},{-74,78},{-74,46},{-68,46}},
     color={255,204,51},
     thickness=0.5));
-    connect(weaDat.weaBus, HDirTil[3].weaBus)
+  connect(weaDat.weaBus, HDirTil[3].weaBus)
     annotation (Line(
     points={{-78,78},{-73,78},{-68,78}},
     color={255,204,51},
     thickness=0.5));
-    connect(weaDat.weaBus, HDifTil[4].weaBus)
+  connect(weaDat.weaBus, HDifTil[4].weaBus)
     annotation (Line(
     points={{-78,78},{-74,78},{-74,46},{-68,46}},
     color={255,204,51},
     thickness=0.5));
-    connect(weaDat.weaBus, HDirTil[4].weaBus)
+  connect(weaDat.weaBus, HDirTil[4].weaBus)
     annotation (Line(
     points={{-78,78},{-73,78},{-68,78}},
     color={255,204,51},
     thickness=0.5));
-    connect(weaDat.weaBus, HDifTil[5].weaBus)
+  connect(weaDat.weaBus, HDifTil[5].weaBus)
     annotation (Line(
     points={{-78,78},{-74,78},{-74,46},{-68,46}},
     color={255,204,51},
     thickness=0.5));
-    connect(weaDat.weaBus, HDirTil[5].weaBus)
+  connect(weaDat.weaBus, HDirTil[5].weaBus)
     annotation (Line(
     points={{-78,78},{-73,78},{-68,78}},
     color={255,204,51},
@@ -379,12 +391,10 @@ equation
   connect(gainCon.y, intGaiCon.Q_flow)
     annotation (Line(points={{48.5,-40},{58,-40},{68,-40}},
                                                    color={0,0,127}));
-  connect(souIntGai.y, gainCon.u) annotation (Line(points={{11.65,-30.5},{
-          23.825,-30.5},{23.825,-40},{37,-40}},
-                                         color={0,0,127}));
-  connect(souIntGai.y, gainRad.u) annotation (Line(points={{11.65,-30.5},{
-          23.825,-30.5},{23.825,-24},{37,-24}},
-                                         color={0,0,127}));
+  connect(souIntGai.y, gainCon.u) annotation (Line(points={{11.65,-26.5},{23.825,
+          -26.5},{23.825,-40},{37,-40}}, color={0,0,127}));
+  connect(souIntGai.y, gainRad.u) annotation (Line(points={{11.65,-26.5},{23.825,
+          -26.5},{23.825,-24},{37,-24}}, color={0,0,127}));
   connect(gain.y,ventilationIn. m_flow_in)
     annotation (Line(points={{-65.3,-30},{-54,-30}}, color={0,0,127}));
   connect(gain.y,gain1. u)
@@ -456,7 +466,7 @@ equation
   connect(hoolFlowSensor.Q_flow, gain2.u) annotation (Line(points={{86,-92},{86,
           -94},{100,-94},{100,-90.5},{107,-90.5}}, color={0,0,127}));
   connect(solRad.y, integratorSol.u) annotation (Line(points={{-27.5,27},{-26,27},
-          {-26,92},{64,92},{64,74},{67.9,74}}, color={0,0,127}));
+          {-26,92},{58,92},{58,74},{67.9,74}}, color={0,0,127}));
   connect(integratorSol.y, gainSol.u)
     annotation (Line(points={{80.55,74},{86.8,74}}, color={0,0,127}));
   connect(gainSol[1].y, IncidentSolarRadiationN) annotation (Line(points={{100.6,
@@ -470,7 +480,8 @@ equation
   connect(gainSol[5].y, IncidentSolarRadiationW) annotation (Line(points={{100.6,
           74},{124,74},{124,39},{150,39}}, color={0,0,127}));
   connect(corGDoublePane.solarRadWinTrans[1], absCoeffA.u) annotation (Line(
-        points={{27,79.2},{58,79.2},{58,62},{104,62},{104,6},{107.8,6}}, color={
+        points={{27,79.2},{40,79.2},{40,80},{54,80},{54,62},{104,62},{104,6},{107.8,
+          6}},                                                           color={
           0,0,127}));
   connect(gainSolRoo.u, integratorSolRoo.y) annotation (Line(points={{142.8,6},{
           142.8,6},{138.55,6}}, color={0,0,127}));
@@ -540,6 +551,47 @@ equation
           lineColor={0,0,255},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
-          textString="Internal Gains")}),
-    Icon(coordinateSystem(extent={{-140,-100},{160,100}})));
+          textString="Internal Gains"),
+        Rectangle(
+          extent={{-106,-8},{-26,-100}},
+          lineColor={0,0,255},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{-97,-89},{-36,-97}},
+          lineColor={0,0,255},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          textString="Infiltration"),
+        Rectangle(
+          extent={{-140,100},{-2,-7}},
+          lineColor={0,0,255},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{-1,100},{101,-7}},
+          lineColor={0,0,255},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{-131,3},{-70,-5}},
+          lineColor={0,0,255},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          textString="Weather"),
+        Text(
+          extent={{49,99},{110,91}},
+          lineColor={0,0,255},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid,
+          textString="Thermal Zone")}),
+    Icon(coordinateSystem(extent={{-140,-100},{160,100}})),
+    Documentation(revisions="<html>
+  <ul>
+  <li>
+  March 17, 2017, by Moritz Lauster:<br/>
+  Implemented.
+  </li>
+  </ul>
+  </html>"));
 end TestCase600;
