@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement;
+within AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements;
 model TestCase600FF "Test case 600"
   extends Modelica.Icons.Example;
 
@@ -11,65 +11,81 @@ model TestCase600FF "Test case 600"
     filNam="D:/GIT/AixLib/AixLib/Resources/WeatherData/ASHRAE140.mos")
     "Weather data reader"
     annotation (Placement(transformation(extent={{-98,68},{-78,88}})));
-  AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[5](
+  AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[4](
     each outSkyCon=true,
     each outGroCon=true,
     each rho=0.2,
-    til={1.5707963267949,1.5707963267949,1.5707963267949,0,1.5707963267949},
+    til={1.5707963267949,1.5707963267949,1.5707963267949,1.5707963267949},
     each lat=0.69394291059295,
-    azi={0,1.5707963267949,3.1415926535898,0,-1.5707963267949})
+    azi={0,1.5707963267949,3.1415926535898,-1.5707963267949})
     "Calculates diffuse solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,36},{-48,56}})));
-  AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[5](
-    til={1.5707963267949,1.5707963267949,1.5707963267949,0,1.5707963267949},
+  AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[4](
+    til={1.5707963267949,1.5707963267949,1.5707963267949,1.5707963267949},
     each lat=0.69394291059295,
-    azi={0,1.5707963267949,3.1415926535898,0,-1.5707963267949})
+    azi={0,1.5707963267949,3.1415926535898,-1.5707963267949})
     "Calculates direct solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,68},{-48,88}})));
   AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane
-    corGDoublePane(n=5,
-    UWin=3.046492744695893)
+    corGDoublePane(
+    UWin=3.046492744695893, n=4)
     "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{6,70},{26,90}})));
-  RC.OneElement thermalZoneOneElement(
+  RC.FourElements thermalZoneFourElements(
     VAir=129.60000000000002,
-    alphaExt=2.2309677419354843,
     alphaWin=3.16,
     gWin=0.789,
     ratioWinConRad=0.03,
     nExt=1,
-    RExt={0.000233924171895},
-    CExt={1002578.02625},
     alphaRad=5.129999999999999,
+    AInt=48.0,
+    alphaInt=4.130000000000001,
+    nInt=1,
+    RInt={0.00123677311011},
+    CInt={935138.308506},
     RWin=0.0133333333333,
-    RExtRem=0.0191529907385,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     extWallRC(thermCapExt(each der_T(fixed=true))),
-    nOrientations=5,
-    AWin={12.0,0.0,0.0,0.0,0.0},
-    ATransparent={12.0,0.0,0.0,0.0,0.0},
-    AExt={9.600000000000001,16.200000000000003,21.6,48.0,16.200000000000003},
+    intWallRC(thermCapInt(each der_T(fixed=true))),
     nPorts=2,
-    redeclare package Medium = Modelica.Media.Air.DryAirNasa) "Thermal zone"
+    redeclare package Medium = Modelica.Media.Air.DryAirNasa,
+    AFloor=0,
+    alphaFloor=0,
+    nFloor=1,
+    RFloor={0.1},
+    RFloorRem=0.1,
+    CFloor={0.1},
+    roofRC(thermCapExt(each der_T(fixed=true))),
+    nOrientations=4,
+    AExt={9.600000000000001,16.200000000000003,21.6,16.200000000000003},
+    alphaExt=3.160000000000001,
+    RExt={0.000401763119801},
+    RExtRem=0.0277316600608,
+    CExt={620991.387295},
+    ARoof=48.0,
+    alphaRoof=1.0,
+    nRoof=1,
+    RRoof={0.000550791436374},
+    CRoof={381586.716241},
+    AWin={12.0,0.0,0.0,0.0},
+    ATransparent={12.0,0.0,0.0,0.0},
+    RRoofRem=0.061807839516) "Thermal zone"
     annotation (Placement(transformation(extent={{44,14},{92,50}})));
   AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow
     eqAirTemp(
-    n=5,
     wfGro=0,
-    wfWall={0.10339514389812844,
-            0.17447930532809178,
-            0.23263907377078896,
-            0.31500717167489906,
-            0.17447930532809178},
-    wfWin={1.0, 0.0, 0.0, 0.0, 0.0},
     withLongwave=true,
     aExt=0.6,
     alphaWallOut=24.670000000000005,
     alphaRad=4.63,
     alphaWinOut=16.37,
+    n=4,
+    wfWall={0.15094339622641512,0.2547169811320755,0.33962264150943394,0.2547169811320755},
+    wfWin={1.0,0.0,0.0,0.0},
     TGro=286.15) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,2},{-4,22}})));
-  Modelica.Blocks.Math.Add solRad[5]
+
+  Modelica.Blocks.Math.Add solRad[4]
     "Sums up solar radiation of both directions"
     annotation (Placement(transformation(extent={{-38,22},{-28,32}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
@@ -86,14 +102,14 @@ model TestCase600FF "Test case 600"
   Modelica.Thermal.HeatTransfer.Components.Convection thermalConductorWall
     "Outdoor convective heat transfer of walls"
     annotation (Placement(transformation(extent={{36,22},{26,12}})));
-  Modelica.Blocks.Sources.Constant const[5](each k=0)
+  Modelica.Blocks.Sources.Constant const[4](each k=0)
     "Sets sunblind signal to zero (open)"
     annotation (Placement(transformation(extent={{-20,30},{-14,36}})));
   AixLib.BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
     annotation (Placement(
     transformation(extent={{-100,6},{-66,38}}),  iconTransformation(
     extent={{-70,-12},{-50,8}})));
-  Modelica.Blocks.Sources.Constant alphaWall(k=29.3*111.60000000000001)
+  Modelica.Blocks.Sources.Constant alphaWall(k=29.3*63.60000000000001)
     "Outdoor coefficient of heat transfer for walls"
     annotation (Placement(
     transformation(
@@ -167,6 +183,48 @@ model TestCase600FF "Test case 600"
   Modelica.Blocks.Math.UnitConversions.To_degC to_degC
     "Indoor air temperature in degC"
     annotation (Placement(transformation(extent={{122,40},{134,52}})));
+  Annex60.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilRoof[1](
+    til={0},
+    each lat=0.69394291059295,
+    azi={0})
+    "Calculates direct solar radiation on titled surface for both directions"
+    annotation (Placement(transformation(extent={{-68,124},{-48,144}})));
+  Annex60.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTilRoof[1](
+    til={0},
+    each lat=0.69394291059295,
+    azi={0})
+    "Calculates diffuse solar radiation on titled surface for both directions"
+    annotation (Placement(transformation(extent={{-68,96},{-48,116}})));
+  Annex60.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 eqAirTempVDI(
+    aExt=0.6,
+    wfGro=0,
+    alphaWallOut=24.670000000000005,
+    alphaRad=4.63,
+    n=1,
+    wfWall={1.0},
+    wfWin={0},
+    TGro=285.15) "Computes equivalent air temperature for roof"
+    annotation (Placement(transformation(extent={{30,110},{50,130}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedTemperatureRoof
+    "Prescribed temperature for roof outdoor surface temperature"
+    annotation (Placement(transformation(extent={{-6,-6},{6,6}},rotation=-90,
+    origin={67,84})));
+  Modelica.Thermal.HeatTransfer.Components.Convection thermalConductorRoof
+    "Outdoor convective heat transfer of roof"
+    annotation (Placement(transformation(extent={{5,-5},{-5,5}},rotation=-90,
+    origin={67,67})));
+  Modelica.Blocks.Sources.Constant alphaRoof(k=1406.4)
+    "Outdoor coefficient of heat transfer for roof"
+    annotation (Placement(transformation(extent={{4,-4},{-4,4}},rotation=0,
+    origin={86,67})));
+  Modelica.Blocks.Sources.Constant const1[1](each k=0)
+    "Sets sunblind signal to zero (open)" annotation (Placement(transformation(
+        extent={{3,-3},{-3,3}},
+        rotation=90,
+        origin={40,151})));
+  Modelica.Blocks.Math.Add solRadRoof[1]
+    "Sums up solar radiation of both directions"
+    annotation (Placement(transformation(extent={{4,126},{14,136}})));
 equation
   connect(eqAirTemp.TEqAirWin, prescribedTemperature1.T)
     annotation (Line(
@@ -253,23 +311,13 @@ equation
     points={{-78,78},{-73,78},{-68,78}},
     color={255,204,51},
     thickness=0.5));
-  connect(weaDat.weaBus, HDifTil[5].weaBus)
-    annotation (Line(
-    points={{-78,78},{-74,78},{-74,46},{-68,46}},
-    color={255,204,51},
-    thickness=0.5));
-  connect(weaDat.weaBus, HDirTil[5].weaBus)
-    annotation (Line(
-    points={{-78,78},{-73,78},{-68,78}},
-    color={255,204,51},
-    thickness=0.5));
-  connect(intGaiRad.port, thermalZoneOneElement.intGainsRad) annotation (Line(
+  connect(intGaiRad.port, thermalZoneFourElements.intGainsRad) annotation (Line(
         points={{88,-24},{96,-24},{96,40},{92,40}}, color={191,0,0}));
-  connect(thermalConductorWin.solid, thermalZoneOneElement.window) annotation (
-      Line(points={{38,37},{40,37},{40,36},{44,36}}, color={191,0,0}));
+  connect(thermalConductorWin.solid, thermalZoneFourElements.window)
+    annotation (Line(points={{38,37},{40,37},{40,36},{44,36}}, color={191,0,0}));
   connect(prescribedTemperature1.port, thermalConductorWin.fluid)
     annotation (Line(points={{20,36},{28,36},{28,37}}, color={191,0,0}));
-  connect(thermalZoneOneElement.extWall, thermalConductorWall.solid)
+  connect(thermalZoneFourElements.extWall, thermalConductorWall.solid)
     annotation (Line(points={{44,28},{40,28},{40,17},{36,17}}, color={191,0,0}));
   connect(thermalConductorWall.fluid, prescribedTemperature.port)
     annotation (Line(points={{26,17},{24,17},{24,16},{20,16}},
@@ -286,9 +334,9 @@ equation
     string="%first",
     index=-1,
     extent={{-6,3},{-6,3}}));
-  connect(intGaiCon.port, thermalZoneOneElement.intGainsConv) annotation (Line(
-        points={{88,-40},{94,-40},{94,36},{92,36}}, color={191,0,0}));
-  connect(corGDoublePane.solarRadWinTrans, thermalZoneOneElement.solRad)
+  connect(intGaiCon.port, thermalZoneFourElements.intGainsConv) annotation (
+      Line(points={{88,-40},{94,-40},{94,36},{92,36}}, color={191,0,0}));
+  connect(corGDoublePane.solarRadWinTrans, thermalZoneFourElements.solRad)
     annotation (Line(points={{27,80},{34,80},{40,80},{40,47},{43,47}}, color={0,
           0,127}));
   connect(gainRad.y, intGaiRad.Q_flow) annotation (Line(points={{48.5,-24},{68,
@@ -316,12 +364,12 @@ equation
       extent={{-6,3},{-6,3}}));
   connect(Inf.y, gain.u) annotation (Line(points={{-85.4,-30},{-85.4,-30},{-81.4,
           -30}}, color={0,0,127}));
-  connect(ventilationIn.ports[1], thermalZoneOneElement.ports[1]) annotation (
-      Line(points={{-34,-38},{-30,-38},{-30,-10},{81.475,-10},{81.475,14.05}},
+  connect(ventilationIn.ports[1], thermalZoneFourElements.ports[1]) annotation
+    (Line(points={{-34,-38},{-30,-38},{-30,-10},{81.475,-10},{81.475,14.05}},
         color={0,127,255}));
-  connect(ventilationOut.ports[1], thermalZoneOneElement.ports[2]) annotation (
-      Line(points={{-34,-70},{-26,-70},{-26,-14},{84.525,-14},{84.525,14.05}},
-        color={0,127,255}));
+  connect(ventilationOut.ports[1], thermalZoneFourElements.ports[2])
+    annotation (Line(points={{-34,-70},{-26,-70},{-26,-14},{84.525,-14},{84.525,
+          14.05}}, color={0,127,255}));
   connect(souWea.y[1], weaDat.TDryBul_in) annotation (Line(points={{-115,84},{-110,
           84},{-110,87},{-99,87}}, color={0,0,127}));
   connect(souWea.y[2], add.u1) annotation (Line(points={{-115,84},{-115,84},{-110,
@@ -338,24 +386,65 @@ equation
           14},{-94,14},{-94,64},{-102,64},{-102,67},{-99,67}}, color={0,0,127}));
   connect(souRad.y[2], weaDat.HGloHor_in) annotation (Line(points={{-115,14},{-94,
           14},{-94,64},{-102,64},{-102,65},{-99,65}}, color={0,0,127}));
-  connect(thermalZoneOneElement.TAir, to_degC.u) annotation (Line(points={{93,
+  connect(thermalZoneFourElements.TAir, to_degC.u) annotation (Line(points={{93,
           48},{106,48},{106,46},{120.8,46}}, color={0,0,127}));
   connect(to_degC.y, FreeFloatTemperature) annotation (Line(points={{134.6,46},
           {142,46},{142,64},{114,64},{114,76},{134,76}}, color={0,0,127}));
+  connect(HDirTilRoof.H, solRadRoof.u1)
+    annotation (Line(points={{-47,134},{-47,134},{3,134}},
+                                                        color={0,0,127}));
+  connect(prescribedTemperatureRoof.port,thermalConductorRoof. fluid)
+    annotation (Line(points={{67,78},{67,78},{67,72}}, color={191,0,0}));
+  connect(thermalConductorRoof.Gc,alphaRoof. y)
+    annotation (Line(points={{72,67},{78,67},{81.6,67}},color={0,0,127}));
+  connect(eqAirTempVDI.TEqAir,prescribedTemperatureRoof. T) annotation (Line(
+        points={{51,120},{56,120},{56,98},{67,98},{67,91.2}},
+                                                            color={0,0,127}));
+  connect(const1.y, eqAirTempVDI.sunblind) annotation (Line(points={{40,147.7},{
+          40,147.7},{40,132}}, color={0,0,127}));
+  connect(HDifTilRoof.H, solRadRoof.u2) annotation (Line(points={{-47,106},{-22,
+          106},{-22,128},{3,128}}, color={0,0,127}));
+  connect(weaDat.weaBus, HDifTilRoof[1].weaBus) annotation (Line(
+      points={{-78,78},{-74,78},{-74,106},{-68,106}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(weaDat.weaBus, HDirTilRoof[1].weaBus) annotation (Line(
+      points={{-78,78},{-74,78},{-74,134},{-68,134}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(solRadRoof.y, eqAirTempVDI.HSol) annotation (Line(points={{14.5,131},{
+          22,131},{22,126},{28,126}}, color={0,0,127}));
+  connect(weaBus.TBlaSky, eqAirTempVDI.TBlaSky) annotation (Line(
+      points={{-83,22},{-70,22},{-70,122},{16,122},{16,120},{28,120}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}}));
+  connect(weaBus.TDryBul, eqAirTempVDI.TDryBul) annotation (Line(
+      points={{-83,22},{-82,22},{-82,14},{-72,14},{-72,94},{16,94},{16,114},{28,
+          114}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}}));
+  connect(thermalConductorRoof.solid, thermalZoneFourElements.roof)
+    annotation (Line(points={{67,62},{66.9,62},{66.9,50}}, color={191,0,0}));
   annotation (experiment(
       StopTime=3.1536e+007,
       Interval=3600,
       __Dymola_Algorithm="Dassl"),
   __Dymola_experimentSetupOutput(equidistant=true,
   events=false),
-    Diagram(coordinateSystem(extent={{-140,-100},{160,100}}), graphics={
+    Diagram(coordinateSystem(extent={{-140,-100},{160,160}}), graphics={
         Rectangle(
-          extent={{102,100},{160,-100}},
+          extent={{102,160},{160,-100}},
           lineColor={0,0,255},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),
         Text(
-          extent={{85,99},{146,91}},
+          extent={{89,155},{150,147}},
           lineColor={0,0,255},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
@@ -394,12 +483,12 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Infiltration"),
         Rectangle(
-          extent={{-140,100},{-2,-7}},
+          extent={{-140,160},{-2,-7}},
           lineColor={0,0,255},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{-1,100},{101,-7}},
+          extent={{-1,160},{101,-7}},
           lineColor={0,0,255},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),
@@ -410,12 +499,12 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Weather"),
         Text(
-          extent={{49,99},{110,91}},
+          extent={{45,155},{106,147}},
           lineColor={0,0,255},
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid,
           textString="Thermal Zone")}),
-    Icon(coordinateSystem(extent={{-140,-100},{160,100}})),
+    Icon(coordinateSystem(extent={{-140,-100},{160,160}})),
     Documentation(revisions="<html>
   <ul>
   <li>
