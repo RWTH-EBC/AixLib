@@ -59,29 +59,6 @@ protected
     extent={{-5,-5},{5,5}},
     rotation=180,
     origin={12,-116})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resExtWallFloor(
-   final G=min(ATotExt, AFloor)*alphaRad) if  ATotExt > 0 and AFloor > 0
-    "Resistor between exterior walls and floor"
-    annotation (Placement(
-    transformation(
-    extent={{-10,-10},{10,10}},
-    rotation=-90,
-    origin={-144,-111})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resIntWallFloor(
-   final G=min(AFloor, AInt)*alphaRad) if  AInt > 0 and AFloor > 0
-    "Resistor between interior walls and floor"
-    annotation (Placement(
-    transformation(
-    extent={{-10,-10},{10,10}},
-    origin={204,-106})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resFloorWin(
-   final G=min(ATotWin, AFloor)*alphaRad) if  ATotWin > 0 and AFloor > 0
-    "Resistor between floor plate and windows"
-    annotation (Placement(
-    transformation(
-    extent={{-10,-10},{10,10}},
-    rotation=-90,
-    origin={-80,-110})));
 
 equation
   connect(floorRC.port_a, convFloor.solid)
@@ -89,24 +66,9 @@ equation
     points={{-10.9091,-136},{-10.9091,-130},{-12,-130},{-12,-124}},
     color={191,0,0},
     smooth=Smooth.None));
-  connect(floorRC.port_a, resExtWallFloor.port_b)
-    annotation (Line(
-    points={{-10.9091,-136},{-10.9091,-132},{-144,-132},{-144,-121}},
-    color={191,0,0},
-    smooth=Smooth.None));
-  connect(floorRC.port_a, resIntWallFloor.port_b)
-    annotation (Line(
-    points={{-10.9091,-136},{-10.9091,-132},{224,-132},{224,-106},{214,-106}},
-    color={191,0,0},
-    smooth=Smooth.None));
   connect(floorRC.port_b, floor)
     annotation (Line(
     points={{-10.9091,-154},{-10.9091,-180},{0,-180}},
-    color={191,0,0},
-    smooth=Smooth.None));
-  connect(resFloorWin.port_a, convWin.solid)
-    annotation (Line(
-    points={{-80,-100},{-80,20},{-146,20},{-146,40},{-116,40}},
     color={191,0,0},
     smooth=Smooth.None));
   if not ATotExt > 0 and not ATotWin > 0 and not AInt > 0 and AFloor > 0 then
@@ -137,15 +99,6 @@ equation
       color={191,0,0},
       smooth=Smooth.None));
   end if;
-  connect(intWallRC.port_a, resIntWallFloor.port_a)
-    annotation (Line(points={{182,-40},{182,-40},{168,-40},{168,-90},{168,-106},
-    {194,-106}}, color={191,0,0}));
-  connect(resFloorWin.port_b, resExtWallFloor.port_b)
-    annotation (Line(points={{-80,-120},{-80,-120},{-80,-132},{-144,-132},{-144,
-    -121}}, color={191,0,0}));
-  connect(resExtWallFloor.port_a, convExtWall.solid)
-    annotation (Line(
-    points={{-144,-101},{-144,-40},{-114,-40}}, color={191,0,0}));
   connect(alphaFloorConst.y, convFloor.Gc)
     annotation (Line(points={{6.5,-116},{6,-116},{-4,-116}},
     color={0,0,127}));

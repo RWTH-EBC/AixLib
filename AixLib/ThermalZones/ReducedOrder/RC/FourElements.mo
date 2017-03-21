@@ -61,35 +61,6 @@ protected
      extent={{-5,-5},{5,5}},
      rotation=180,
      origin={22,120})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resIntRoof(
-    final G=min(AInt, ARoof)*alphaRad) if
-       AInt > 0 and ARoof > 0 "Resistor between interior walls and roof"
-      annotation (Placement(
-      transformation(
-      extent={{-10,-10},{10,10}},
-      rotation=-90,
-      origin={186,10})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resRoofWin(
-    final G=min(ARoof, ATotWin)*alphaRad) if
-       ARoof > 0 and ATotWin > 0 "Resistor between roof and windows"
-      annotation (Placement(transformation(
-      extent={{-10,-10},{10,10}},
-      origin={-154,100})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resRoofFloor(
-    final G=min(ARoof, AFloor)*alphaRad) if
-       ARoof > 0 and AFloor > 0 "Resistor between floor plate and roof"
-      annotation (Placement(
-      transformation(
-      extent={{-10,-10},{10,10}},
-      rotation=-90,
-      origin={-56,-112})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resExtWallRoof(
-    final G=min(ATotExt, ARoof)*alphaRad) if    ATotExt > 0 and ARoof > 0
-    "Resistor between exterior walls and roof"
-      annotation (Placement(
-      transformation(
-      extent={{-10,-10},{10,10}},
-      origin={-108,6})));
 
 equation
   connect(convRoof.solid, roofRC.port_b)
@@ -98,32 +69,6 @@ equation
   connect(roofRC.port_a, roof)
     annotation (Line(points={{-11,165},{-11,168},{-11,180}},
                                                      color={191,0,0}));
-  connect(resRoofWin.port_a, convWin.solid)
-    annotation (Line(points={{-164,100},{-174,100},{-174,82},{-146,82},{-146,40},
-          {-116,40}},                                         color={191,
-    0,0}));
-  connect(resRoofWin.port_b, convRoof.solid)
-    annotation (Line(points={{-144,100},
-    {-114,100},{-82,100},{-82,132},{-12,132},{-12,130}}, color={191,0,0}));
-  connect(resRoofFloor.port_a, convRoof.solid)
-    annotation (Line(points={{-56,-102},
-    {-54,-102},{-54,132},{-12,132},{-12,130}}, color={191,0,0}));
-  connect(resRoofFloor.port_b, resExtWallFloor.port_b)
-    annotation (Line(
-    points={{-56,-122},{-56,-132},{-144,-132},{-144,-121}}, color={191,0,0}));
-  connect(resIntRoof.port_b, intWallRC.port_a)
-    annotation (Line(points={{186,0},{186,-10},{168,-10},{168,-40},{182,-40}},
-                                               color={191,0,0}));
-  connect(resIntRoof.port_a, convRoof.solid)
-    annotation (Line(points={{186,20},
-    {186,20},{186,132},{-12,132},{-12,130}}, color={191,0,0}));
-  connect(resExtWallRoof.port_a, convExtWall.solid)
-    annotation (Line(points={{-118,6},{-130,6},{-130,-12},{-144,-12},{-144,-40},
-          {-114,-40}},                                        color={191,
-    0,0}));
-  connect(resExtWallRoof.port_b, convRoof.solid)
-    annotation (Line(points={{-98,
-    6},{-54,6},{-54,132},{-12,132},{-12,130}}, color={191,0,0}));
   if not ATotExt > 0 and not ATotWin > 0 and not AInt > 0 and not AFloor > 0
     and ARoof > 0 then
     connect(thermSplitterIntGains.portOut[1], roofRC.port_a);

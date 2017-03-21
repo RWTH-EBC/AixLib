@@ -43,29 +43,11 @@ protected
     extent={{5,-5},{-5,5}},
     rotation=-90,
     origin={138,-61})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resExtWallIntWall(
-    final G=min(ATotExt, AInt)*alphaRad) if  ATotExt > 0 and AInt > 0
-    "Resistor between exterior walls and interior walls"
-    annotation (Placement(transformation(extent={{138,-116},{158,-96}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resIntWallWin(
-    final G=min(ATotWin, AInt)*alphaRad) if  ATotWin > 0 and AInt > 0
-    "Resistor between interior walls and windows"
-    annotation (Placement(transformation(extent={{74,-118},{94,-98}})));
 
 equation
-  connect(resExtWallIntWall.port_a, convExtWall.solid)
-    annotation (Line(
-    points={{138,-106},{110,-106},{110,-86},{-144,-86},{-144,-40},{-114,-40}},
-    color={191,0,0},
-    smooth=Smooth.None));
   connect(convIntWall.solid, intWallRC.port_a)
     annotation (Line(
     points={{148,-40},{182,-40}},
-    color={191,0,0},
-    smooth=Smooth.None));
-  connect(intWallRC.port_a, resExtWallIntWall.port_b)
-    annotation (Line(
-    points={{182,-40},{168,-40},{168,-106},{158,-106}},
     color={191,0,0},
     smooth=Smooth.None));
   if not ATotExt > 0 and not ATotWin > 0 and AInt > 0 then
@@ -88,17 +70,6 @@ equation
       color={191,0,0},
       smooth=Smooth.None));
   end if;
-  connect(resIntWallWin.port_b, intWallRC.port_a)
-    annotation (Line(
-    points={{94,-108},{118,-108},{118,-88},{168,-88},{168,-40},{182,-40}},
-    color={191,0,0},
-    smooth=Smooth.None));
-  connect(resIntWallWin.port_a, convWin.solid)
-    annotation (Line(
-    points={{74,-108},{68,-108},{68,-94},{-46,-94},{-46,20},{-146,20},{-146,40},
-    {-116,40}},
-    color={191,0,0},
-    smooth=Smooth.None));
   connect(alphaIntWall.y, convIntWall.Gc)
     annotation (Line(points={{138,-55.5},{138,-53.75},{138,-50}},
     color={0,0,127}));

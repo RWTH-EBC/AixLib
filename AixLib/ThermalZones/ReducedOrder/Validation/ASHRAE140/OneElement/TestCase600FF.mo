@@ -46,11 +46,10 @@ model TestCase600FF "Test case 600"
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     extWallRC(thermCapExt(each der_T(fixed=true))),
     nOrientations=5,
-    AWin={12.0,0.0,0.0,0.0,0.0},
-    ATransparent={12.0,0.0,0.0,0.0,0.0},
     AExt={9.600000000000001,16.200000000000003,21.6,48.0,16.200000000000003},
-    nPorts=2,
-    redeclare package Medium = Modelica.Media.Air.DryAirNasa) "Thermal zone"
+    redeclare package Medium = Modelica.Media.Air.DryAirNasa,
+    AWin={0.0,0.0,0.0,0.0,0.0},
+    ATransparent={0.0,0.0,0.0,0.0,0.0})                       "Thermal zone"
     annotation (Placement(transformation(extent={{44,14},{92,50}})));
   AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow
     eqAirTemp(
@@ -72,12 +71,12 @@ model TestCase600FF "Test case 600"
   Modelica.Blocks.Math.Add solRad[5]
     "Sums up solar radiation of both directions"
     annotation (Placement(transformation(extent={{-38,22},{-28,32}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
-    prescribedTemperature
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature
+    prescribedTemperature(T=263.15)
     "Prescribed temperature for exterior walls outdoor surface temperature"
     annotation (Placement(transformation(extent={{8,10},{20,22}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
-    prescribedTemperature1
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature
+    prescribedTemperature1(T=263.15)
     "Prescribed temperature for windows outdoor surface temperature"
     annotation (Placement(transformation(extent={{8,30},{20,42}})));
   Modelica.Thermal.HeatTransfer.Components.Convection thermalConductorWin
@@ -110,9 +109,6 @@ model TestCase600FF "Test case 600"
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow intGaiRad
     "Radiative heat flow of internal gains"
     annotation (Placement(transformation(extent={{68,-34},{88,-14}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow intGaiCon
-    "Convective heat flow of internal gains"
-    annotation (Placement(transformation(extent={{68,-50},{88,-30}})));
   Modelica.Blocks.Sources.Constant souIntGai(k=200) "Internal gains in W"
     annotation (Placement(transformation(extent={{-2,-33},{11,-20}})));
   Modelica.Blocks.Math.Gain gainRad(k=0.6) "Radiant part"
@@ -122,20 +118,6 @@ model TestCase600FF "Test case 600"
   Modelica.Blocks.Math.Gain gain(k=0.0441)
     "Conversion to kg/s"
     annotation (Placement(transformation(extent={{-80,-37},{-66,-23}})));
-  Fluid.Sources.MassFlowSource_T ventilationIn(
-    use_m_flow_in=true,
-    use_T_in=true,
-    nPorts=1,
-    redeclare package Medium = Modelica.Media.Air.DryAirNasa)
-    "Fan"
-    annotation (Placement(transformation(extent={{-54,-48},{-34,-28}})));
-  Fluid.Sources.MassFlowSource_T ventilationOut(
-    use_m_flow_in=true,
-    use_T_in=false,
-    nPorts=1,
-    redeclare package Medium = Modelica.Media.Air.DryAirNasa)
-    "Fan"
-    annotation (Placement(transformation(extent={{-54,-80},{-34,-60}})));
   Modelica.Blocks.Math.Gain gain1(k=-1) "Reverses ventilation rate"
     annotation (Placement(transformation(extent={{-82,-69},{-68,-55}})));
   Modelica.Blocks.Sources.Constant Inf(k=0.41) "Infiltration rate in 1/h"
@@ -168,12 +150,6 @@ model TestCase600FF "Test case 600"
     "Indoor air temperature in degC"
     annotation (Placement(transformation(extent={{122,40},{134,52}})));
 equation
-  connect(eqAirTemp.TEqAirWin, prescribedTemperature1.T)
-    annotation (Line(
-    points={{-3,15.8},{0,15.8},{0,36},{6.8,36}},   color={0,0,127}));
-  connect(eqAirTemp.TEqAir, prescribedTemperature.T)
-    annotation (Line(points={{-3,12},{4,12},{4,16},{6.8,16}},
-    color={0,0,127}));
   connect(weaDat.weaBus, weaBus)
     annotation (Line(
     points={{-78,78},{-74,78},{-74,34},{-84,34},{-84,28},{-83,28},{-83,22}},
@@ -286,42 +262,17 @@ equation
     string="%first",
     index=-1,
     extent={{-6,3},{-6,3}}));
-  connect(intGaiCon.port, thermalZoneOneElement.intGainsConv) annotation (Line(
-        points={{88,-40},{94,-40},{94,36},{92,36}}, color={191,0,0}));
-  connect(corGDoublePane.solarRadWinTrans, thermalZoneOneElement.solRad)
-    annotation (Line(points={{27,80},{34,80},{40,80},{40,47},{43,47}}, color={0,
-          0,127}));
   connect(gainRad.y, intGaiRad.Q_flow) annotation (Line(points={{48.5,-24},{68,
           -24}},          color={0,0,127}));
-  connect(gainCon.y, intGaiCon.Q_flow)
-    annotation (Line(points={{48.5,-40},{58,-40},{68,-40}},
-                                                   color={0,0,127}));
   connect(souIntGai.y, gainCon.u) annotation (Line(points={{11.65,-26.5},{23.825,
           -26.5},{23.825,-40},{37,-40}}, color={0,0,127}));
   connect(souIntGai.y, gainRad.u) annotation (Line(points={{11.65,-26.5},{23.825,
           -26.5},{23.825,-24},{37,-24}}, color={0,0,127}));
-  connect(gain.y,ventilationIn. m_flow_in)
-    annotation (Line(points={{-65.3,-30},{-54,-30}}, color={0,0,127}));
   connect(gain.y,gain1. u)
     annotation (Line(points={{-65.3,-30},{-64,-30},{-64,-46},{-90,-46},{-90,-62},
           {-83.4,-62}},                    color={0,0,127}));
-  connect(gain1.y,ventilationOut. m_flow_in)
-    annotation (Line(points={{-67.3,-62},{-54,-62}}, color={0,0,127}));
-  connect(weaBus.TDryBul, ventilationIn.T_in) annotation (Line(
-      points={{-83,22},{-83,-14},{-60,-14},{-60,-34},{-56,-34}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}}));
   connect(Inf.y, gain.u) annotation (Line(points={{-85.4,-30},{-85.4,-30},{-81.4,
           -30}}, color={0,0,127}));
-  connect(ventilationIn.ports[1], thermalZoneOneElement.ports[1]) annotation (
-      Line(points={{-34,-38},{-30,-38},{-30,-10},{81.475,-10},{81.475,14.05}},
-        color={0,127,255}));
-  connect(ventilationOut.ports[1], thermalZoneOneElement.ports[2]) annotation (
-      Line(points={{-34,-70},{-26,-70},{-26,-14},{84.525,-14},{84.525,14.05}},
-        color={0,127,255}));
   connect(souWea.y[1], weaDat.TDryBul_in) annotation (Line(points={{-115,84},{-110,
           84},{-110,87},{-99,87}}, color={0,0,127}));
   connect(souWea.y[2], add.u1) annotation (Line(points={{-115,84},{-115,84},{-110,

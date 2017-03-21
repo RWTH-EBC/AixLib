@@ -209,14 +209,6 @@ protected
     ratioWinConRad > 0 and sum(ATransparent) > 0
     "Emission coefficient of solar radiation considered as convection"
     annotation (Placement(transformation(extent={{-206,119},{-196,129}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor resExtWallWin(
-    final G=min(ATotExt, ATotWin)*alphaRad) if ATotExt > 0 and ATotWin > 0
-    "Resistor between exterior walls and windows"
-    annotation (Placement(
-    transformation(
-    extent={{-10,-10},{10,10}},
-    rotation=-90,
-    origin={-146,10})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor senTAir if
     ATot > 0 or VAir > 0 "Indoor air temperature sensor"
     annotation (Placement(transformation(extent={{80,-10},{100,10}})));
@@ -303,11 +295,6 @@ equation
   connect(eRadSol.u, solRad)
     annotation (Line(points={{-207,146},{-214,146},{-214,140},{-260,140}},
     color={0,0,127}));
-  connect(resExtWallWin.port_b, convExtWall.solid)
-    annotation (Line(points={{-146,0},{-144,0},{-144,-40},{-114,-40}},
-    color={191,0,0}));
-  connect(resExtWallWin.port_a, convWin.solid)
-    annotation (Line(points={{-146,20},{-146,40},{-116,40}}, color={191,0,0}));
   connect(alphaWinConst.y, convWin.Gc)
     annotation (Line(points={{-106,61.4},{-106,55.7},{-106,50}},
     color={0,0,127}));

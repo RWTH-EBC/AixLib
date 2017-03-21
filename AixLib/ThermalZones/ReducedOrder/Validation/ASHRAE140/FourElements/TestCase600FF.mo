@@ -47,7 +47,6 @@ model TestCase600FF "Test case 600"
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     extWallRC(thermCapExt(each der_T(fixed=true))),
     intWallRC(thermCapInt(each der_T(fixed=true))),
-    nPorts=2,
     redeclare package Medium = Modelica.Media.Air.DryAirNasa,
     AFloor=0,
     alphaFloor=0,
@@ -63,13 +62,13 @@ model TestCase600FF "Test case 600"
     RExtRem=0.0277316600608,
     CExt={620991.387295},
     ARoof=48.0,
-    alphaRoof=1.0,
     nRoof=1,
     RRoof={0.000550791436374},
     CRoof={381586.716241},
-    AWin={12.0,0.0,0.0,0.0},
-    ATransparent={12.0,0.0,0.0,0.0},
-    RRoofRem=0.061807839516) "Thermal zone"
+    RRoofRem=0.061807839516,
+    AWin={0.0,0.0,0.0,0.0},
+    ATransparent={0.0,0.0,0.0,0.0},
+    alphaRoof=3.160000000000001)    "Thermal zone"
     annotation (Placement(transformation(extent={{44,14},{92,50}})));
   AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow
     eqAirTemp(
@@ -88,12 +87,12 @@ model TestCase600FF "Test case 600"
   Modelica.Blocks.Math.Add solRad[4]
     "Sums up solar radiation of both directions"
     annotation (Placement(transformation(extent={{-38,22},{-28,32}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
-    prescribedTemperature
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature
+    prescribedTemperature(T=263.15)
     "Prescribed temperature for exterior walls outdoor surface temperature"
     annotation (Placement(transformation(extent={{8,10},{20,22}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
-    prescribedTemperature1
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature
+    prescribedTemperature1(T=263.15)
     "Prescribed temperature for windows outdoor surface temperature"
     annotation (Placement(transformation(extent={{8,30},{20,42}})));
   Modelica.Thermal.HeatTransfer.Components.Convection thermalConductorWin
@@ -123,12 +122,6 @@ model TestCase600FF "Test case 600"
     extent={{4,-4},{-4,4}},
     rotation=90,
     origin={32,54})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow intGaiRad
-    "Radiative heat flow of internal gains"
-    annotation (Placement(transformation(extent={{68,-34},{88,-14}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow intGaiCon
-    "Convective heat flow of internal gains"
-    annotation (Placement(transformation(extent={{68,-50},{88,-30}})));
   Modelica.Blocks.Sources.Constant souIntGai(k=200) "Internal gains in W"
     annotation (Placement(transformation(extent={{-2,-33},{11,-20}})));
   Modelica.Blocks.Math.Gain gainRad(k=0.6) "Radiant part"
@@ -138,20 +131,6 @@ model TestCase600FF "Test case 600"
   Modelica.Blocks.Math.Gain gain(k=0.0441)
     "Conversion to kg/s"
     annotation (Placement(transformation(extent={{-80,-37},{-66,-23}})));
-  Fluid.Sources.MassFlowSource_T ventilationIn(
-    use_m_flow_in=true,
-    use_T_in=true,
-    nPorts=1,
-    redeclare package Medium = Modelica.Media.Air.DryAirNasa)
-    "Fan"
-    annotation (Placement(transformation(extent={{-54,-48},{-34,-28}})));
-  Fluid.Sources.MassFlowSource_T ventilationOut(
-    use_m_flow_in=true,
-    use_T_in=false,
-    nPorts=1,
-    redeclare package Medium = Modelica.Media.Air.DryAirNasa)
-    "Fan"
-    annotation (Placement(transformation(extent={{-54,-80},{-34,-60}})));
   Modelica.Blocks.Math.Gain gain1(k=-1) "Reverses ventilation rate"
     annotation (Placement(transformation(extent={{-82,-69},{-68,-55}})));
   Modelica.Blocks.Sources.Constant Inf(k=0.41) "Infiltration rate in 1/h"
@@ -183,19 +162,19 @@ model TestCase600FF "Test case 600"
   Modelica.Blocks.Math.UnitConversions.To_degC to_degC
     "Indoor air temperature in degC"
     annotation (Placement(transformation(extent={{122,40},{134,52}})));
-  Annex60.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilRoof[1](
+  AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilRoof[1](
     til={0},
-    each lat=0.69394291059295,
-    azi={0})
+    azi={0},
+    each lat=0.69394291059295)
     "Calculates direct solar radiation on titled surface for both directions"
     annotation (Placement(transformation(extent={{-68,124},{-48,144}})));
-  Annex60.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTilRoof[1](
+  AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTilRoof[1](
     til={0},
-    each lat=0.69394291059295,
-    azi={0})
+    azi={0},
+    each lat=0.69394291059295)
     "Calculates diffuse solar radiation on titled surface for both directions"
     annotation (Placement(transformation(extent={{-68,96},{-48,116}})));
-  Annex60.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 eqAirTempVDI(
+  AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 eqAirTempVDI(
     aExt=0.6,
     wfGro=0,
     alphaWallOut=24.670000000000005,
@@ -205,7 +184,7 @@ model TestCase600FF "Test case 600"
     wfWin={0},
     TGro=285.15) "Computes equivalent air temperature for roof"
     annotation (Placement(transformation(extent={{30,110},{50,130}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedTemperatureRoof
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature      prescribedTemperatureRoof(T=263.15)
     "Prescribed temperature for roof outdoor surface temperature"
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},rotation=-90,
     origin={67,84})));
@@ -225,13 +204,10 @@ model TestCase600FF "Test case 600"
   Modelica.Blocks.Math.Add solRadRoof[1]
     "Sums up solar radiation of both directions"
     annotation (Placement(transformation(extent={{4,126},{14,136}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow intGaiRad
+    "Radiative heat flow of internal gains"
+    annotation (Placement(transformation(extent={{64,-34},{84,-14}})));
 equation
-  connect(eqAirTemp.TEqAirWin, prescribedTemperature1.T)
-    annotation (Line(
-    points={{-3,15.8},{0,15.8},{0,36},{6.8,36}},   color={0,0,127}));
-  connect(eqAirTemp.TEqAir, prescribedTemperature.T)
-    annotation (Line(points={{-3,12},{4,12},{4,16},{6.8,16}},
-    color={0,0,127}));
   connect(weaDat.weaBus, weaBus)
     annotation (Line(
     points={{-78,78},{-74,78},{-74,34},{-84,34},{-84,28},{-83,28},{-83,22}},
@@ -311,8 +287,6 @@ equation
     points={{-78,78},{-73,78},{-68,78}},
     color={255,204,51},
     thickness=0.5));
-  connect(intGaiRad.port, thermalZoneFourElements.intGainsRad) annotation (Line(
-        points={{88,-24},{96,-24},{96,40},{92,40}}, color={191,0,0}));
   connect(thermalConductorWin.solid, thermalZoneFourElements.window)
     annotation (Line(points={{38,37},{40,37},{40,36},{44,36}}, color={191,0,0}));
   connect(prescribedTemperature1.port, thermalConductorWin.fluid)
@@ -334,42 +308,15 @@ equation
     string="%first",
     index=-1,
     extent={{-6,3},{-6,3}}));
-  connect(intGaiCon.port, thermalZoneFourElements.intGainsConv) annotation (
-      Line(points={{88,-40},{94,-40},{94,36},{92,36}}, color={191,0,0}));
-  connect(corGDoublePane.solarRadWinTrans, thermalZoneFourElements.solRad)
-    annotation (Line(points={{27,80},{34,80},{40,80},{40,47},{43,47}}, color={0,
-          0,127}));
-  connect(gainRad.y, intGaiRad.Q_flow) annotation (Line(points={{48.5,-24},{68,
-          -24}},          color={0,0,127}));
-  connect(gainCon.y, intGaiCon.Q_flow)
-    annotation (Line(points={{48.5,-40},{58,-40},{68,-40}},
-                                                   color={0,0,127}));
   connect(souIntGai.y, gainCon.u) annotation (Line(points={{11.65,-26.5},{23.825,
           -26.5},{23.825,-40},{37,-40}}, color={0,0,127}));
   connect(souIntGai.y, gainRad.u) annotation (Line(points={{11.65,-26.5},{23.825,
           -26.5},{23.825,-24},{37,-24}}, color={0,0,127}));
-  connect(gain.y,ventilationIn. m_flow_in)
-    annotation (Line(points={{-65.3,-30},{-54,-30}}, color={0,0,127}));
   connect(gain.y,gain1. u)
     annotation (Line(points={{-65.3,-30},{-64,-30},{-64,-46},{-90,-46},{-90,-62},
           {-83.4,-62}},                    color={0,0,127}));
-  connect(gain1.y,ventilationOut. m_flow_in)
-    annotation (Line(points={{-67.3,-62},{-54,-62}}, color={0,0,127}));
-  connect(weaBus.TDryBul, ventilationIn.T_in) annotation (Line(
-      points={{-83,22},{-83,-14},{-60,-14},{-60,-34},{-56,-34}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}}));
   connect(Inf.y, gain.u) annotation (Line(points={{-85.4,-30},{-85.4,-30},{-81.4,
           -30}}, color={0,0,127}));
-  connect(ventilationIn.ports[1], thermalZoneFourElements.ports[1]) annotation
-    (Line(points={{-34,-38},{-30,-38},{-30,-10},{81.475,-10},{81.475,14.05}},
-        color={0,127,255}));
-  connect(ventilationOut.ports[1], thermalZoneFourElements.ports[2])
-    annotation (Line(points={{-34,-70},{-26,-70},{-26,-14},{84.525,-14},{84.525,
-          14.05}}, color={0,127,255}));
   connect(souWea.y[1], weaDat.TDryBul_in) annotation (Line(points={{-115,84},{-110,
           84},{-110,87},{-99,87}}, color={0,0,127}));
   connect(souWea.y[2], add.u1) annotation (Line(points={{-115,84},{-115,84},{-110,
@@ -397,9 +344,6 @@ equation
     annotation (Line(points={{67,78},{67,78},{67,72}}, color={191,0,0}));
   connect(thermalConductorRoof.Gc,alphaRoof. y)
     annotation (Line(points={{72,67},{78,67},{81.6,67}},color={0,0,127}));
-  connect(eqAirTempVDI.TEqAir,prescribedTemperatureRoof. T) annotation (Line(
-        points={{51,120},{56,120},{56,98},{67,98},{67,91.2}},
-                                                            color={0,0,127}));
   connect(const1.y, eqAirTempVDI.sunblind) annotation (Line(points={{40,147.7},{
           40,147.7},{40,132}}, color={0,0,127}));
   connect(HDifTilRoof.H, solRadRoof.u2) annotation (Line(points={{-47,106},{-22,
@@ -431,6 +375,10 @@ equation
       extent={{-6,3},{-6,3}}));
   connect(thermalConductorRoof.solid, thermalZoneFourElements.roof)
     annotation (Line(points={{67,62},{66.9,62},{66.9,50}}, color={191,0,0}));
+  connect(gainRad.y, intGaiRad.Q_flow) annotation (Line(points={{48.5,-24},{
+          56.25,-24},{64,-24}}, color={0,0,127}));
+  connect(intGaiRad.port, thermalZoneFourElements.intGainsRad) annotation (Line(
+        points={{84,-24},{98,-24},{98,40},{92,40}}, color={191,0,0}));
   annotation (experiment(
       StopTime=3.1536e+007,
       Interval=3600,
