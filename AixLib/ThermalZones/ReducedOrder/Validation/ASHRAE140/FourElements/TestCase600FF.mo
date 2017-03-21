@@ -177,25 +177,25 @@ model TestCase600FF "Test case 600"
     fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/WeatherData/Weatherdata_ASHARE140.mat"))
     "Solar radiation data"
     annotation (Placement(transformation(extent={{-136,4},{-116,24}})));
-    Modelica.Blocks.Interfaces.RealOutput FreeFloatTemperature(unit="degC")
+  Modelica.Blocks.Interfaces.RealOutput FreeFloatTemperature(unit="degC")
     "in degC"
       annotation (Placement(transformation(extent={{124,66},{144,86}})));
   Modelica.Blocks.Math.UnitConversions.To_degC to_degC
     "Indoor air temperature in degC"
     annotation (Placement(transformation(extent={{122,40},{134,52}})));
-  Annex60.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilRoof[1](
+  AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilRoof[1](
     til={0},
     each lat=0.69394291059295,
     azi={0})
     "Calculates direct solar radiation on titled surface for both directions"
     annotation (Placement(transformation(extent={{-68,124},{-48,144}})));
-  Annex60.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTilRoof[1](
+  AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTilRoof[1](
     til={0},
     each lat=0.69394291059295,
     azi={0})
     "Calculates diffuse solar radiation on titled surface for both directions"
     annotation (Placement(transformation(extent={{-68,96},{-48,116}})));
-  Annex60.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 eqAirTempVDI(
+  AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 eqAirTempVDI(
     aExt=0.6,
     wfGro=0,
     alphaWallOut=24.670000000000005,
@@ -364,8 +364,8 @@ equation
       extent={{-6,3},{-6,3}}));
   connect(Inf.y, gain.u) annotation (Line(points={{-85.4,-30},{-85.4,-30},{-81.4,
           -30}}, color={0,0,127}));
-  connect(ventilationIn.ports[1], thermalZoneFourElements.ports[1]) annotation
-    (Line(points={{-34,-38},{-30,-38},{-30,-10},{81.475,-10},{81.475,14.05}},
+  connect(ventilationIn.ports[1], thermalZoneFourElements.ports[1]) annotation (
+     Line(points={{-34,-38},{-30,-38},{-30,-10},{81.475,-10},{81.475,14.05}},
         color={0,127,255}));
   connect(ventilationOut.ports[1], thermalZoneFourElements.ports[2])
     annotation (Line(points={{-34,-70},{-26,-70},{-26,-14},{84.525,-14},{84.525,
