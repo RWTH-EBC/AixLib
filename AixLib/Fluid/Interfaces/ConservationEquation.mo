@@ -328,7 +328,7 @@ This allows to decouple the moisture balance from the pressure drop equations.
 If <code>simplify_mWat_flow = false</code>, then
 the outlet mass flow rate is
 <i>m<sub>out</sub> = m<sub>in</sub>  (1 + &Delta; X<sub>w</sub>)</i>,
-where 
+where
 <i>&Delta; X<sub>w</sub></i> is the change in water vapor mass
 fraction across the component. In this case,
 this component couples
@@ -367,6 +367,12 @@ is simplified as
 This causes an error in the mass balance of about <i>0.5%</i>, but generally leads to
 simpler equations because the pressure drop equations are then decoupled from the
 mass exchange in this component.
+The model
+<a href=\"modelica://AixLib.Fluid.MixingVolumes.Validation.MixingVolumeAdiabaticCooling\">
+AixLib.Fluid.MixingVolumes.Validation.MixingVolumeAdiabaticCooling</a>
+shows that the relative error on the temperature difference between these
+two options of <code>simplify_mWat_flow</code> is less than
+<i>0.1%</i>.
 </p>
 
 <h4>Implementation</h4>
@@ -407,7 +413,7 @@ AixLib.Fluid.MixingVolumes.MixingVolume</a>.
 <li>
 February 19, 2016 by Filip Jorissen:<br/>
 Added outputs UOut, mOut, mXiOut, mCOut for being able to
-check conservation of quantities. 
+check conservation of quantities.
 This if or <a href=\"https://github.com/iea-annex60/modelica-annex60/issues/247\">
 issue 247</a>.
 </li>
@@ -429,8 +435,8 @@ Added input <code>C_flow</code> and code for handling trace substance insertions
 </li>
 <li>
 September 3, 2015, by Filip Jorissen and Michael Wetter:<br/>
-Revised implementation for allowing moisture mass flow rate 
-to be approximated using parameter <code>simplify_mWat_flow</code>. 
+Revised implementation for allowing moisture mass flow rate
+to be approximated using parameter <code>simplify_mWat_flow</code>.
 This may lead to smaller algebraic loops.
 This is for
 <a href=\"https://github.com/iea-annex60/modelica-annex60/issues/247\">#247</a>.
@@ -488,7 +494,7 @@ The model requires derivatives of some inputs as listed below:
 1 inlet.p
 </pre>
 when translating
-<code>Buildings.Fluid.FMI.Examples.FMU.HeaterCooler_u</code>
+<code>Buildings.Fluid.FMI.ExportContainers.Examples.FMUs.HeaterCooler_u</code>
 with a dynamic energy balance.
 </li>
 <li>

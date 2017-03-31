@@ -30,7 +30,7 @@ equation
   //calculate the measured temperature difference
   TempDiff = T_room - T_setRoom - Influence_PressureDrop_inK;
   //Calculating the valve opening depending on the temperature deviation
-  if TempDiff > P then
+  if TempDiff > P * (1- leakageOpening * Kvs / Kv_setT) then
     opening = leakageOpening;
   else
     opening = min(1, (P - TempDiff) * (Kv_setT / Kvs) / P);

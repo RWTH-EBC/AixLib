@@ -1,7 +1,9 @@
 UsersGuide
 Actuators
+BoilerCHP
 Chillers
 Delays
+FMI
 FixedResistances
 HeatExchangers
 HeatPumps
@@ -9,6 +11,7 @@ MassExchangers
 MixingVolumes
 Movers
 Sensors
+Solar
 Sources
 Storage
 Types

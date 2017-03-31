@@ -18,18 +18,18 @@ partial model PartialTwoWayValve "Partial model for a two way valve"
     "Valve leakage, l=Kv(y=0)/Kv(y=1)";
   input Real phi
     "Ratio actual to nominal mass flow rate of valve, phi=Kv(y)/Kv(y=1)";
-protected
- parameter Real kFixed(unit="", min=0) = if dpFixed_nominal > Modelica.Constants.eps
+  parameter Real kFixed(unit="", min=0) = if dpFixed_nominal > Modelica.Constants.eps
     then m_flow_nominal / sqrt(dpFixed_nominal) else 0
     "Flow coefficient of fixed resistance that may be in series with valve, k=m_flow/sqrt(dp), with unit=(kg.m)^(1/2).";
- Real kVal(unit="", min=Modelica.Constants.small)
+  Real kVal(unit="", min=Modelica.Constants.small)
     "Flow coefficient of valve, k=m_flow/sqrt(dp), with unit=(kg.m)^(1/2).";
- Real k(unit="", min=Modelica.Constants.small)
+  Real k(unit="", min=Modelica.Constants.small)
     "Flow coefficient of valve and pipe in series, k=m_flow/sqrt(dp), with unit=(kg.m)^(1/2).";
 initial equation
-  assert(dpFixed_nominal > -Modelica.Constants.small, "Require dpFixed_nominal >= 0. Received dpFixed_nominal = "
+  assert(dpFixed_nominal > -Modelica.Constants.eps, "Require dpFixed_nominal >= 0. Received dpFixed_nominal = "
         + String(dpFixed_nominal) + " Pa.");
-
+equation
+  assert(phi > -0.2, "Valve control signal needs to be bigger than zero, received phi = " + String(phi));
   annotation (Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},
             {100,100}}),       graphics={
         Polygon(
@@ -102,6 +102,33 @@ each valve opening characteristics has different parameters.
 revisions="<html>
 <ul>
 <li>
+November 16, 2017, by Michael Wetter:<br/>
+Relaxed assertion on <code>phi</code>.<br/>
+This is for
+<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/592\">#592</a>.
+</li>
+<li>
+October 27, 2016, by Filip Jorissen:<br/>
+Added assert for <code>phi &gt; 0</code>.
+This fixes a bug that caused valves to behave
+like pumps for negative control signals.
+This is for
+<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/558\">#558</a>.
+</li>
+<li>
+April 23, 2016, by Michael Wetter:<br/>
+Changed test in assertion from <code>dpFixed_nominal > -Modelica.Constants.small</code>
+to
+<code>dpFixed_nominal > -Modelica.Constants.eps</code>.
+Otherwise, JModelica evaluates it as <code>true</code> in
+<a href=\"modelica://AixLib.Fluid.Actuators.Valves.Examples.TwoWayValves\">
+AixLib.Fluid.Actuators.Valves.Examples.TwoWayValves</a>.
+See also
+<a href=\"https://trac.jmodelica.org/ticket/4932\">https://trac.jmodelica.org/ticket/4932</a>.
+This is for
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/510\">Buildings, issue 510</a>.
+</li>
+<li>
 January 22, 2016, by Michael Wetter:<br/>
 Corrected type declaration of pressure difference.
 This is
@@ -165,7 +192,7 @@ To simplify object inheritance tree, revised base classes
 <code>AixLib.Fluid.Actuators.BaseClasses.PartialDamperExponential</code>,
 <code>AixLib.Fluid.Actuators.BaseClasses.PartialActuator</code>
 and model
-<code>AixLib.Fluid.FixedResistances.FixedResistanceDpM</code>.
+<code>AixLib.Fluid.FixedResistances.PressureDrop</code>.
 </li>
 <li>
 August 12, 2011 by Michael Wetter:<br/>

@@ -1,5 +1,6 @@
-FixedResistancesExplicit
-FixedResistancesParallel
-FixedResistancesSeries
-Pipe_Validation
-StaticPipe_Validation
+CompareFixedResistances
+FlowJunction
+HydraulicDiameter
+PerformanceHydraulicResistance1
+PerformanceHydraulicResistance2
+PressureDrop

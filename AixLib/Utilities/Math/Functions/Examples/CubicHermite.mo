@@ -63,7 +63,7 @@ does not enforce monotonicity.
 The resulting plot should look as shown below, where for better visibility, the support points have been marked with black dots.
 Notice that the red curve is monotone increasing.
 </p>
-<p align=\"center\"><img alt=\"image\" src=\"modelica://AixLib/Resources/Resources/Images/Utilities/Math/Functions/Examples/cubicHermite.png\"/></p>
+<p align=\"center\"><img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Utilities/Math/Functions/Examples/cubicHermite.png\"/></p>
 </html>", revisions="<html>
 <ul>
 <li>
