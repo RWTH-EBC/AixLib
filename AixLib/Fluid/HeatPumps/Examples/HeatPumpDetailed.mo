@@ -3,8 +3,6 @@ model HeatPumpDetailed
   "Example for the detailed heat pump model in order to compare to simple one."
 
  extends Modelica.Icons.Example;
-  Modelica.Blocks.Sources.BooleanPulse booleanPulse(period=1000)
-    annotation (Placement(transformation(extent={{-80,40},{-60,60}})));
   Sources.MassFlowSource_T                sourceSideMassFlowSource(
     use_T_in=true,
     redeclare package Medium =
@@ -65,6 +63,8 @@ model HeatPumpDetailed
         mFlow_conNom=0.01,
         mFlow_evaNom=0.01))
     annotation (Placement(transformation(extent={{-6,0},{24,20}})));
+  BaseClasses.Controls.HPControllerExample hPControllerExample
+    annotation (Placement(transformation(extent={{-40,60},{-20,80}})));
 equation
   connect(TsuSourceRamp.y, sourceSideMassFlowSource.T_in) annotation (Line(
       points={{-59,10},{-54,10},{-54,18},{-46,18}},
@@ -87,10 +87,6 @@ equation
       points={{4,1},{4,-10},{110,-10}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(booleanPulse.y, heatPump.onOff_in) annotation (Line(
-      points={{-59,50},{4,50},{4,19}},
-      color={255,0,255},
-      smooth=Smooth.None));
   connect(sourceSideMassFlowSource.ports[1], heatPump.port_evaIn) annotation (
      Line(
       points={{-24,14},{-14,14},{-14,17},{-4,17}},
@@ -110,6 +106,11 @@ equation
       points={{22,3},{36,3},{36,-18},{50,-18},{50,-48},{40,-48}},
       color={0,127,255},
       smooth=Smooth.None));
+  connect(hPControllerExample.heatPumpControlBus, heatPump.heatPumpControlBus)
+    annotation (Line(
+      points={{-20.1,70},{9,70},{9,36},{9,19.9}},
+      color={255,204,51},
+      thickness=0.5));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
     experiment(StopTime=3600),

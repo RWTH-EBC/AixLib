@@ -197,29 +197,17 @@ public
     mFlow_evaNominal=mFlow_evaNominal,
     T_conMax=T_conMax)
     annotation (Placement(transformation(extent={{-50,-20},{40,40}})));
-  Modelica.Blocks.Interfaces.BooleanInput onOff_in annotation (Placement(
-        transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
-        origin={-50,90})));
-  Modelica.Blocks.Interfaces.RealInput N_in if not HPctrlType annotation (Placement(
-        transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
-        origin={-10,90})));
 
 parameter Boolean heatLosses_con=false
     "Consider heat losses of condenser to ambient"  annotation(Dialog(group="Heat losses of condenser",tab="Advanced"), choices(checkBox=true));
 parameter SI.ThermalConductance R_loss=1
     "Thermal conductance of heat loss to ambient"                                      annotation(Dialog(group = "Heat losses of condenser",tab="Advanced", enable=heatLosses_con));
+  //Modelica.Blocks.Interfaces.RealInput N_inInternal
+  //  "Needed to connect to conditional connector";
 protected
-  Modelica.Blocks.Interfaces.RealInput N_inInternal
-    "Needed to connect to conditional connector";
   Modelica.Blocks.Interfaces.RealInput T_ambInternal
     "Needed to connect to conditional connector";
 public
-  Modelica.Blocks.Sources.RealExpression dummyZero(y=0)
-    annotation (Placement(transformation(extent={{0,60},{20,80}}, rotation=0)));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor
                                 heatConv(G=R_loss)
     annotation (Placement(transformation(extent={{80,52},{100,72}})));
@@ -273,14 +261,13 @@ public
         extent={{-8,-8},{8,8}},
         rotation=90,
         origin={130,22})));
+  BaseClasses.Interfaces.HeatPumpControlBus heatPumpControlBus
+    annotation (Placement(transformation(extent={{-17,82},{17,116}})));
+  Modelica.Blocks.Sources.RealExpression dummyZero
+    annotation (Placement(transformation(extent={{12,46},{32,66}})));
 equation
 
-  if HPctrlType then
-    connect(N_inInternal, dummyZero.y);
-  else
-    connect(N_in,N_inInternal);
-  end if;
-  connect(N_inInternal,cycle.N_in);
+  //connect(N_inInternal,cycle.N_in);
 
   if heatLosses_con then
     connect(T_ambInternal, T_amb);
@@ -362,12 +349,8 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(cycle.P_eleOut, P_eleOut) annotation (Line(
-      points={{-20,-17},{-18,-17},{-18,-56},{-50,-56},{-50,-90}},
+      points={{-20,-17},{-20,-56},{-50,-56},{-50,-90}},
       color={0,0,127},
-      smooth=Smooth.None));
-  connect(cycle.onOff_in, onOff_in) annotation (Line(
-      points={{-20,37},{-22,37},{-22,60},{-50,60},{-50,90}},
-      color={255,0,255},
       smooth=Smooth.None));
   connect(T_evaIn.port_b, evaporator.ports[1]) annotation (Line(points={{-130,16},
           {-130,2.4},{-127.5,2.4}}, color={0,127,255}));
@@ -386,6 +369,65 @@ equation
           -130,-14},{-130,-14},{-130,-0.4},{-127.5,-0.4}}, color={0,127,255}));
   connect(hydRes_eva.port_b, T_evaOut.port_a) annotation (Line(points={{-130,
           -30},{-130,-33},{-130,-36}}, color={0,127,255}));
+  connect(heatPumpControlBus.input_on, cycle.onOff_in) annotation (Line(
+      points={{0.085,99.085},{0.085,70},{-22,70},{-22,37},{-20,37}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}}));
+  connect(heatPumpControlBus.N, cycle.N_in) annotation (Line(
+      points={{0.085,99.085},{0,99.085},{0,60},{0,60},{-8,60},{-8,37}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}}));
+  connect(T_evaIn.T, heatPumpControlBus.T_flow_ev) annotation (Line(points={{-119,
+          26},{-100,26},{-82,26},{-82,99.085},{0.085,99.085}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(T_conIn.T, heatPumpControlBus.T_flow_co) annotation (Line(points={{119,
+          -26},{60,-26},{60,99.085},{0.085,99.085}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(T_evaOut.T, heatPumpControlBus.T_ret_ev) annotation (Line(points={{-119,
+          -46},{-58,-46},{-58,99.085},{0.085,99.085}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(T_conOut.T, heatPumpControlBus.T_ret_co) annotation (Line(points={{119,
+          48},{60,48},{60,99.085},{0.085,99.085}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(mFlow_eva.m_flow, heatPumpControlBus.m_flow_ev) annotation (Line(
+        points={{-119,52},{-72,52},{-72,99.085},{0.085,99.085}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(mFlow_con.m_flow, heatPumpControlBus.m_flow_co) annotation (Line(
+        points={{119,-50},{86,-50},{54,-50},{54,68},{28,68},{28,99.085},{0.085,99.085}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(cycle.P_eleOut, heatPumpControlBus.Pel) annotation (Line(points={{-20,
+          -17},{-20,-17},{-20,-56},{-50,-56},{-50,99.085},{0.085,99.085}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(cycle.CoP_out, heatPumpControlBus.CoP) annotation (Line(points={{-8,-17},
+          {-8,-17},{-8,-34},{-8,-32},{54,-32},{54,68},{28,68},{28,99.085},{0.085,
+          99.085}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-150,-100},
             {150,100}})),           Icon(coordinateSystem(preserveAspectRatio=true,
           extent={{-150,-100},{150,100}}), graphics={
