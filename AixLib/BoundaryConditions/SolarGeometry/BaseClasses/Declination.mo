@@ -66,5 +66,5 @@ First implementation.
           extent={{-150,110},{150,150}},
           textString="%name",
           lineColor={0,0,255}), Bitmap(extent={{-92,92},{92,-92}}, fileName=
-              "modelica://AixLib/Resources/Resources/Images/BoundaryConditions/SolarGeometry/BaseClasses/Declination.png")}));
+              "modelica://AixLib/Resources/Images/BoundaryConditions/SolarGeometry/BaseClasses/Declination.png")}));
 end Declination;

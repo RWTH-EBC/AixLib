@@ -1,5 +1,5 @@
 within AixLib.Airflow.AirHandlingUnit;
-model NoAHU "If no AHU should exist at all"
+model NoAHU "No AHU"
   extends AixLib.Airflow.AirHandlingUnit.BaseClasses.PartialAHU;
   Modelica.Blocks.Sources.Constant dummyPhi_supply(k=0.5)
     annotation (Placement(transformation(extent={{38,0},{56,18}})));

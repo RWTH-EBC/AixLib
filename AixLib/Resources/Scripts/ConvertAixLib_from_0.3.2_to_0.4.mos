@@ -1,0 +1,2 @@
+﻿convertElement("AixLib.Controls.Continuous.PITemp", "RangeSwitch", "rangeSwitch");
+convertElement("AixLib.Controls.Continuous.PITemp", "Therm1", "heatPort");

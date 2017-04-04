@@ -2,7 +2,8 @@ within AixLib.Fluid.Actuators.Valves;
 model MixingValve
   import AixLib;
   extends Modelica.Fluid.Fittings.BaseClasses.PartialTeeJunction;
-  outer AixLib.HVAC.BaseParameters baseParameters "System wide properties";
+  outer AixLib.Utilities.Sources.BaseParameters baseParameters
+    "System wide properties";
 
   parameter Real Kvs = 1.4 "Kv value at full opening (=1)";
   parameter Boolean filteredOpening=false

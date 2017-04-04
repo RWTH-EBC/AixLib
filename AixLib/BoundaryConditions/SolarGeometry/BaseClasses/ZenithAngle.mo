@@ -57,5 +57,5 @@ First implementation.
           lineColor={0,0,127},
           textString="solHouAng"),
         Bitmap(extent={{-90,90},{90,-94}}, fileName=
-              "modelica://AixLib/Resources/Resources/Images/BoundaryConditions/SolarGeometry/BaseClasses/ZenithAngle.png")}));
+              "modelica://AixLib/Resources/Images/BoundaryConditions/SolarGeometry/BaseClasses/ZenithAngle.png")}));
 end ZenithAngle;

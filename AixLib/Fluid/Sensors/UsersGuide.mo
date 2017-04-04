@@ -35,12 +35,12 @@ Modelica.Fluid.Examples.Explanatory.MeasuringTemperature</a>.
 <table summary=\"summary\" border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
 <tr><th valign=\"top\" align=\"left\">Correct use</th>
     <td valign=\"top\">
-    <img alt=\"image\" src=\"modelica://AixLib/Resources/Resources/Images/Fluid/Sensors/twoPortHex.png\" />
+    <img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Sensors/twoPortHex.png\" />
     </td>
 </tr>
 <tr><th valign=\"top\" align=\"left\">Not recommended</th>
     <td valign=\"top\">
-    <img alt=\"image\" src=\"modelica://AixLib/Resources/Resources/Images/Fluid/Sensors/onePortHex.png\" />
+    <img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Sensors/onePortHex.png\" />
     </td>
 </tr>
 </table>

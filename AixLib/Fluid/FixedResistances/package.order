@@ -1,6 +1,7 @@
-FixedResistanceDpM
+HydraulicDiameter
 HydraulicResistance
+Junction
 LosslessPipe
-Pipe
-StaticPipe
+PressureDrop
 Examples
+Validation
