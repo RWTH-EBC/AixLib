@@ -179,6 +179,69 @@ model TestCase600 "Test case 600"
   Modelica.Blocks.Math.UnitConversions.To_degC to_degC
     "Indoor air temperature in degC"
     annotation (Placement(transformation(extent={{122,40},{134,52}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow hea "Ideal heater"
+    annotation (Placement(transformation(extent={{56,-70},{76,-50}})));
+  Modelica.Blocks.Math.UnitConversions.From_degC from_degC_hea
+    "Convert set temperature from degC to Kelvin"
+    annotation (Placement(transformation(extent={{-6,-66},{6,-54}})));
+  Controls.Continuous.LimPID conHea(
+    controllerType=Modelica.Blocks.Types.SimpleController.PI,
+    yMax=1,
+    yMin=0,
+    Ti=1) "Heating controller"
+    annotation (Placement(transformation(extent={{14,-68},{30,-52}})));
+  Modelica.Blocks.Math.Gain gainHea(k=1e6) "Gain for heating controller"
+    annotation (Placement(transformation(extent={{38,-66},{50,-54}})));
+  Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensor
+    "Sensor for ideal heater"
+    annotation (Placement(transformation(extent={{92,-66},{80,-54}})));
+  Modelica.Blocks.Sources.Constant SouTSetH(k=20) "Set temperature heater"
+    annotation (Placement(transformation(extent={{-24,-66},{-12,-54}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow coo "Ideal cooler"
+    annotation (Placement(transformation(extent={{56,-96},{76,-76}})));
+  Modelica.Blocks.Math.UnitConversions.From_degC from_degC_coo
+    "Convert set temperature from degC to Kelvin"
+    annotation (Placement(transformation(extent={{-6,-92},{6,-80}})));
+  Controls.Continuous.LimPID conCoo(
+    controllerType=Modelica.Blocks.Types.SimpleController.PI,
+    yMax=0,
+    yMin=-1,
+    Ti=1) "Cooling controller"
+    annotation (Placement(transformation(extent={{14,-94},{30,-78}})));
+  Modelica.Blocks.Math.Gain gainCoo(k=1e6) "Gain for cooling controller"
+    annotation (Placement(transformation(extent={{38,-92},{50,-80}})));
+  Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor hoolFlowSensor
+    "Sensor for ideal cooler"
+    annotation (Placement(transformation(extent={{92,-92},{80,-80}})));
+  Modelica.Blocks.Sources.Constant SouTSetC(k=27) "Set temperature cooler"
+    annotation (Placement(transformation(extent={{-24,-92},{-12,-80}})));
+  Modelica.Blocks.Continuous.Integrator integrator
+    "Integrated annual cooling load"
+    annotation (Placement(transformation(extent={{107,-58.5},{118,-47.5}})));
+  Modelica.Blocks.Continuous.Integrator integrator1
+    "Integrated annual heating load"
+    annotation (Placement(transformation(extent={{107,-40.5},{118,-29.5}})));
+  Modelica.Blocks.Math.Gain gainIntHea(k=1/(1000*1000*3600))
+    "Converts to MWh"
+    annotation (Placement(transformation(extent={{126,-41},{138,-29}})));
+  Modelica.Blocks.Math.Gain gainIntCoo(k=1/(1000*1000*3600))
+    "Converts to MWh"
+    annotation (Placement(transformation(extent={{126,-59},{138,-47}})));
+  Modelica.Blocks.Math.MultiSum multiSum(nu=2)
+    "Sum of heating and cooling power"
+    annotation (Placement(transformation(extent={{126,-97},{136,-87}})));
+  Modelica.Blocks.Math.Gain gain2(k=-1) "Changes sign"
+    annotation (Placement(transformation(extent={{108,-96},{118,-85}})));
+  Modelica.Blocks.Math.Gain gain3(k=-1) "Changes sign"
+    annotation (Placement(transformation(extent={{106,-80},{116,-69}})));
+  Modelica.Blocks.Math.Gain gainPowLoa(k=0.001) "Converts to kW"
+    annotation (Placement(transformation(extent={{126,-76},{138,-64}})));
+  Modelica.Blocks.Interfaces.RealOutput AnnualHeatingLoad "in MWh"
+    annotation (Placement(transformation(extent={{142,-45},{162,-25}})));
+  Modelica.Blocks.Interfaces.RealOutput AnnualCoolingLoad "in MWh"
+    annotation (Placement(transformation(extent={{142,-63},{162,-43}})));
+  Modelica.Blocks.Interfaces.RealOutput PowerLoad "in kW"
+    annotation (Placement(transformation(extent={{142,-92},{162,-72}})));
 equation
   connect(eqAirTemp.TEqAirWin, prescribedTemperature1.T)
     annotation (Line(
@@ -354,6 +417,65 @@ equation
           93,48},{106,48},{106,46},{120.8,46}}, color={0,0,127}));
   connect(to_degC.y, FreeFloatTemperature) annotation (Line(points={{134.6,46},
           {142,46},{142,64},{114,64},{114,76},{134,76}}, color={0,0,127}));
+  connect(from_degC_hea.y,conHea. u_s)
+    annotation (Line(points={{6.6,-60},{6.6,-60},{12.4,-60}},
+                                                    color={0,0,127}));
+  connect(conHea.y,gainHea. u)
+    annotation (Line(points={{30.8,-60},{30.8,-60},{36.8,-60}},
+                                                     color={0,0,127}));
+  connect(gainHea.y,hea. Q_flow)
+    annotation (Line(points={{50.6,-60},{50.6,-60},{56,-60}},
+                                                   color={0,0,127}));
+  connect(SouTSetH.y,from_degC_hea. u) annotation (Line(points={{-11.4,-60},{-11.4,
+          -60},{-7.2,-60}}, color={0,0,127}));
+  connect(conHea.u_m, thermalZoneThreeElements.TAir) annotation (Line(points={{22,-69.6},
+          {22,-69.6},{22,-74},{101,-74},{101,48},{93,48}},      color={0,0,127}));
+  connect(from_degC_coo.y,conCoo. u_s)
+    annotation (Line(points={{6.6,-86},{6.6,-86},{12.4,-86}},
+                                                    color={0,0,127}));
+  connect(conCoo.y,gainCoo. u)
+    annotation (Line(points={{30.8,-86},{30.8,-86},{36.8,-86}},
+                                                     color={0,0,127}));
+  connect(gainCoo.y,coo. Q_flow)
+    annotation (Line(points={{50.6,-86},{50.6,-86},{56,-86}},
+                                                   color={0,0,127}));
+  connect(SouTSetC.y,from_degC_coo. u) annotation (Line(points={{-11.4,-86},{-11.4,
+          -86},{-7.2,-86}}, color={0,0,127}));
+  connect(conCoo.u_m, thermalZoneThreeElements.TAir) annotation (Line(points={{22,-95.6},
+          {22,-96},{22,-99},{101,-99},{101,48},{93,48}},        color={0,0,127}));
+  connect(hoolFlowSensor.Q_flow, gain2.u) annotation (Line(points={{86,-92},{86,
+          -94},{103,-94},{103,-90.5},{107,-90.5}}, color={0,0,127}));
+  connect(heatFlowSensor.Q_flow, gain3.u) annotation (Line(points={{86,-66},{86,
+          -66},{86,-74},{90,-74},{86,-74},{96,-74},{96,-74.5},{105,-74.5}},
+                                                            color={0,0,127}));
+  connect(heatFlowSensor.port_a, thermalZoneThreeElements.intGainsConv)
+    annotation (Line(points={{92,-60},{94,-60},{94,36},{92,36}}, color={191,0,0}));
+  connect(hoolFlowSensor.port_a, thermalZoneThreeElements.intGainsConv)
+    annotation (Line(points={{92,-86},{94,-86},{94,36},{92,36}}, color={191,0,0}));
+  connect(hea.port,heatFlowSensor. port_b)
+    annotation (Line(points={{76,-60},{78,-60},{80,-60}}, color={191,0,0}));
+  connect(coo.port,hoolFlowSensor. port_b)
+    annotation (Line(points={{76,-86},{78,-86},{80,-86}}, color={191,0,0}));
+  connect(gain2.y,multiSum. u[1]) annotation (Line(points={{118.5,-90.5},{120,-90.5},
+          {120,-90.25},{126,-90.25}},        color={0,0,127}));
+  connect(gain3.y,multiSum. u[2]) annotation (Line(points={{116.5,-74.5},{121.25,
+          -74.5},{121.25,-93.75},{126,-93.75}},        color={0,0,127}));
+  connect(gainIntHea.y,AnnualHeatingLoad)  annotation (Line(points={{138.6,-35},
+          {140.3,-35},{152,-35}}, color={0,0,127}));
+  connect(gainIntHea.u,integrator1. y) annotation (Line(points={{124.8,-35},{121.4,
+          -35},{118.55,-35}},       color={0,0,127}));
+  connect(gainIntCoo.y,AnnualCoolingLoad)  annotation (Line(points={{138.6,-53},
+          {141.3,-53},{152,-53}}, color={0,0,127}));
+  connect(gainIntCoo.u,integrator. y) annotation (Line(points={{124.8,-53},{121.4,
+          -53},{118.55,-53}},       color={0,0,127}));
+  connect(gain3.y,integrator1. u) annotation (Line(points={{116.5,-74.5},{122,-74.5},
+          {122,-64},{102,-64},{102,-35},{105.9,-35}},        color={0,0,127}));
+  connect(gain2.y,integrator. u) annotation (Line(points={{118.5,-90.5},{118.5,-62},
+          {105.9,-62},{105.9,-53}},      color={0,0,127}));
+  connect(multiSum.y,gainPowLoa. u) annotation (Line(points={{136.85,-92},{138,-92},
+          {138,-82},{124.8,-82},{124.8,-70}},      color={0,0,127}));
+  connect(gainPowLoa.y,PowerLoad)  annotation (Line(points={{138.6,-70},{140,-70},
+          {140,-82},{152,-82}},      color={0,0,127}));
   annotation (experiment(
       StopTime=3.1536e+007,
       Interval=3600,
