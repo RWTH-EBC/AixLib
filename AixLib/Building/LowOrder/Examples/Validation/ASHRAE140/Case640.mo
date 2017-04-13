@@ -59,7 +59,9 @@ model Case640
     h_heater=1e6,
     KR_heater=1000,
     l_cooler=-1e6,
-    KR_cooler=1000)
+    KR_cooler=1000,
+    recOrSep=false,
+    zoneParam=AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office())
     annotation (Placement(transformation(extent={{6,-34},{26,-14}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow
     InternalGains_convective
