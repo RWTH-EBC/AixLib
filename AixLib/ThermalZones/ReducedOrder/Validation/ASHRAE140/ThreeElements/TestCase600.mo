@@ -173,12 +173,6 @@ model TestCase600 "Test case 600"
     fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/WeatherData/Weatherdata_ASHARE140.mat"))
     "Solar radiation data"
     annotation (Placement(transformation(extent={{-136,4},{-116,24}})));
-    Modelica.Blocks.Interfaces.RealOutput FreeFloatTemperature(unit="degC")
-    "in degC"
-      annotation (Placement(transformation(extent={{124,66},{144,86}})));
-  Modelica.Blocks.Math.UnitConversions.To_degC to_degC
-    "Indoor air temperature in degC"
-    annotation (Placement(transformation(extent={{122,40},{134,52}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow hea "Ideal heater"
     annotation (Placement(transformation(extent={{56,-70},{76,-50}})));
   Modelica.Blocks.Math.UnitConversions.From_degC from_degC_hea
@@ -413,10 +407,6 @@ equation
           14},{-94,14},{-94,64},{-102,64},{-102,67},{-99,67}}, color={0,0,127}));
   connect(souRad.y[2], weaDat.HGloHor_in) annotation (Line(points={{-115,14},{-94,
           14},{-94,64},{-102,64},{-102,65},{-99,65}}, color={0,0,127}));
-  connect(thermalZoneThreeElements.TAir, to_degC.u) annotation (Line(points={{
-          93,48},{106,48},{106,46},{120.8,46}}, color={0,0,127}));
-  connect(to_degC.y, FreeFloatTemperature) annotation (Line(points={{134.6,46},
-          {142,46},{142,64},{114,64},{114,76},{134,76}}, color={0,0,127}));
   connect(from_degC_hea.y,conHea. u_s)
     annotation (Line(points={{6.6,-60},{6.6,-60},{12.4,-60}},
                                                     color={0,0,127}));
