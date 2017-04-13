@@ -1,5 +1,5 @@
 within AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements;
-model TestCase600FF "Test case 600"
+model TestCase600FF "Test case 600 free floating"
   extends Modelica.Icons.Example;
 
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(

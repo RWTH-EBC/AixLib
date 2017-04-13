@@ -1,5 +1,5 @@
-within AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement;
-model TestCase600FF "Test case 600 free floating"
+within AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements;
+model TestCase600 "Test case 600"
   extends Modelica.Icons.Example;
 
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
@@ -31,7 +31,7 @@ model TestCase600FF "Test case 600 free floating"
     UWin=3.046492744695893)
     "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{6,70},{26,90}})));
-  RC.OneElement thermalZoneOneElement(
+  RC.ThreeElements thermalZoneThreeElements(
     VAir=129.60000000000002,
     alphaExt=2.2309677419354843,
     alphaWin=3.16,
@@ -41,16 +41,28 @@ model TestCase600FF "Test case 600 free floating"
     RExt={0.000233924171895},
     CExt={1002578.02625},
     alphaRad=5.129999999999999,
+    AInt=48.0,
+    alphaInt=4.130000000000001,
+    nInt=1,
+    RInt={0.00123677311011},
+    CInt={935138.308506},
     RWin=0.0133333333333,
     RExtRem=0.0191529907385,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     extWallRC(thermCapExt(each der_T(fixed=true))),
+    intWallRC(thermCapInt(each der_T(fixed=true))),
     nOrientations=5,
     AWin={12.0,0.0,0.0,0.0,0.0},
     ATransparent={12.0,0.0,0.0,0.0,0.0},
     AExt={9.600000000000001,16.200000000000003,21.6,48.0,16.200000000000003},
     nPorts=2,
-    redeclare package Medium = Modelica.Media.Air.DryAirNasa) "Thermal zone"
+    redeclare package Medium = Modelica.Media.Air.DryAirNasa,
+    AFloor=0,
+    alphaFloor=0,
+    nFloor=1,
+    RFloor={0.1},
+    RFloorRem=0.1,
+    CFloor={0.1}) "Thermal zone"
     annotation (Placement(transformation(extent={{44,14},{92,50}})));
   AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow
     eqAirTemp(
@@ -263,13 +275,13 @@ equation
     points={{-78,78},{-73,78},{-68,78}},
     color={255,204,51},
     thickness=0.5));
-  connect(intGaiRad.port, thermalZoneOneElement.intGainsRad) annotation (Line(
-        points={{88,-24},{96,-24},{96,40},{92,40}}, color={191,0,0}));
-  connect(thermalConductorWin.solid, thermalZoneOneElement.window) annotation (
-      Line(points={{38,37},{40,37},{40,36},{44,36}}, color={191,0,0}));
+  connect(intGaiRad.port, thermalZoneThreeElements.intGainsRad) annotation (
+      Line(points={{88,-24},{96,-24},{96,40},{92,40}}, color={191,0,0}));
+  connect(thermalConductorWin.solid, thermalZoneThreeElements.window)
+    annotation (Line(points={{38,37},{40,37},{40,36},{44,36}}, color={191,0,0}));
   connect(prescribedTemperature1.port, thermalConductorWin.fluid)
     annotation (Line(points={{20,36},{28,36},{28,37}}, color={191,0,0}));
-  connect(thermalZoneOneElement.extWall, thermalConductorWall.solid)
+  connect(thermalZoneThreeElements.extWall, thermalConductorWall.solid)
     annotation (Line(points={{44,28},{40,28},{40,17},{36,17}}, color={191,0,0}));
   connect(thermalConductorWall.fluid, prescribedTemperature.port)
     annotation (Line(points={{26,17},{24,17},{24,16},{20,16}},
@@ -286,9 +298,9 @@ equation
     string="%first",
     index=-1,
     extent={{-6,3},{-6,3}}));
-  connect(intGaiCon.port, thermalZoneOneElement.intGainsConv) annotation (Line(
-        points={{88,-40},{94,-40},{94,36},{92,36}}, color={191,0,0}));
-  connect(corGDoublePane.solarRadWinTrans, thermalZoneOneElement.solRad)
+  connect(intGaiCon.port, thermalZoneThreeElements.intGainsConv) annotation (
+      Line(points={{88,-40},{94,-40},{94,36},{92,36}}, color={191,0,0}));
+  connect(corGDoublePane.solarRadWinTrans, thermalZoneThreeElements.solRad)
     annotation (Line(points={{27,80},{34,80},{40,80},{40,47},{43,47}}, color={0,
           0,127}));
   connect(gainRad.y, intGaiRad.Q_flow) annotation (Line(points={{48.5,-24},{68,
@@ -316,12 +328,12 @@ equation
       extent={{-6,3},{-6,3}}));
   connect(Inf.y, gain.u) annotation (Line(points={{-85.4,-30},{-85.4,-30},{-81.4,
           -30}}, color={0,0,127}));
-  connect(ventilationIn.ports[1], thermalZoneOneElement.ports[1]) annotation (
-      Line(points={{-34,-38},{-30,-38},{-30,-10},{81.475,-10},{81.475,14.05}},
-        color={0,127,255}));
-  connect(ventilationOut.ports[1], thermalZoneOneElement.ports[2]) annotation (
-      Line(points={{-34,-70},{-26,-70},{-26,-14},{84.525,-14},{84.525,14.05}},
-        color={0,127,255}));
+  connect(ventilationIn.ports[1], thermalZoneThreeElements.ports[1])
+    annotation (Line(points={{-34,-38},{-30,-38},{-30,-10},{81.475,-10},{81.475,
+          14.05}}, color={0,127,255}));
+  connect(ventilationOut.ports[1], thermalZoneThreeElements.ports[2])
+    annotation (Line(points={{-34,-70},{-26,-70},{-26,-14},{84.525,-14},{84.525,
+          14.05}}, color={0,127,255}));
   connect(souWea.y[1], weaDat.TDryBul_in) annotation (Line(points={{-115,84},{-110,
           84},{-110,87},{-99,87}}, color={0,0,127}));
   connect(souWea.y[2], add.u1) annotation (Line(points={{-115,84},{-115,84},{-110,
@@ -338,8 +350,8 @@ equation
           14},{-94,14},{-94,64},{-102,64},{-102,67},{-99,67}}, color={0,0,127}));
   connect(souRad.y[2], weaDat.HGloHor_in) annotation (Line(points={{-115,14},{-94,
           14},{-94,64},{-102,64},{-102,65},{-99,65}}, color={0,0,127}));
-  connect(thermalZoneOneElement.TAir, to_degC.u) annotation (Line(points={{93,
-          48},{106,48},{106,46},{120.8,46}}, color={0,0,127}));
+  connect(thermalZoneThreeElements.TAir, to_degC.u) annotation (Line(points={{
+          93,48},{106,48},{106,46},{120.8,46}}, color={0,0,127}));
   connect(to_degC.y, FreeFloatTemperature) annotation (Line(points={{134.6,46},
           {142,46},{142,64},{114,64},{114,76},{134,76}}, color={0,0,127}));
   annotation (experiment(
@@ -424,4 +436,4 @@ equation
   </li>
   </ul>
   </html>"));
-end TestCase600FF;
+end TestCase600;
