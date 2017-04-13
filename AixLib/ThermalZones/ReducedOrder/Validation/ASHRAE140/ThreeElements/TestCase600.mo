@@ -204,7 +204,7 @@ model TestCase600 "Test case 600"
     annotation (Placement(transformation(extent={{14,-94},{30,-78}})));
   Modelica.Blocks.Math.Gain gainCoo(k=1e6) "Gain for cooling controller"
     annotation (Placement(transformation(extent={{38,-92},{50,-80}})));
-  Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor hoolFlowSensor
+  Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor coolFlowSensor
     "Sensor for ideal cooler"
     annotation (Placement(transformation(extent={{92,-92},{80,-80}})));
   Modelica.Blocks.Sources.Constant SouTSetC(k=27) "Set temperature cooler"
@@ -433,18 +433,18 @@ equation
           -86},{-7.2,-86}}, color={0,0,127}));
   connect(conCoo.u_m, thermalZoneThreeElements.TAir) annotation (Line(points={{22,-95.6},
           {22,-96},{22,-99},{101,-99},{101,48},{93,48}},        color={0,0,127}));
-  connect(hoolFlowSensor.Q_flow, gain2.u) annotation (Line(points={{86,-92},{86,
+  connect(coolFlowSensor.Q_flow, gain2.u) annotation (Line(points={{86,-92},{86,
           -94},{103,-94},{103,-90.5},{107,-90.5}}, color={0,0,127}));
   connect(heatFlowSensor.Q_flow, gain3.u) annotation (Line(points={{86,-66},{86,
           -66},{86,-74},{90,-74},{86,-74},{96,-74},{96,-74.5},{105,-74.5}},
                                                             color={0,0,127}));
   connect(heatFlowSensor.port_a, thermalZoneThreeElements.intGainsConv)
     annotation (Line(points={{92,-60},{94,-60},{94,36},{92,36}}, color={191,0,0}));
-  connect(hoolFlowSensor.port_a, thermalZoneThreeElements.intGainsConv)
+  connect(coolFlowSensor.port_a, thermalZoneThreeElements.intGainsConv)
     annotation (Line(points={{92,-86},{94,-86},{94,36},{92,36}}, color={191,0,0}));
   connect(hea.port,heatFlowSensor. port_b)
     annotation (Line(points={{76,-60},{78,-60},{80,-60}}, color={191,0,0}));
-  connect(coo.port,hoolFlowSensor. port_b)
+  connect(coo.port,coolFlowSensor. port_b)
     annotation (Line(points={{76,-86},{78,-86},{80,-86}}, color={191,0,0}));
   connect(gain2.y,multiSum. u[1]) annotation (Line(points={{118.5,-90.5},{120,-90.5},
           {120,-90.25},{126,-90.25}},        color={0,0,127}));

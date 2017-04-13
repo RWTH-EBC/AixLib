@@ -192,7 +192,7 @@ model TestCase600 "Test case 600"
     annotation (Placement(transformation(extent={{14,-94},{30,-78}})));
   Modelica.Blocks.Math.Gain gainCoo(k=1e6) "Gain for cooling controller"
     annotation (Placement(transformation(extent={{38,-92},{50,-80}})));
-  Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor hoolFlowSensor
+  Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor coolFlowSensor
     "Sensor for ideal cooler"
     annotation (Placement(transformation(extent={{92,-92},{80,-80}})));
   Modelica.Blocks.Sources.Constant SouTSetC(k=27) "Set temperature cooler"
@@ -423,7 +423,7 @@ equation
   connect(conCoo.u_m, thermalZoneOneElement.TAir) annotation (Line(points={{22,
           -95.6},{22,-96},{22,-96},{22,-96},{22,-99},{101,-99},{101,48},{93,48}},
                                                                 color={0,0,127}));
-  connect(hoolFlowSensor.Q_flow, gain2.u) annotation (Line(points={{86,-92},{86,
+  connect(coolFlowSensor.Q_flow, gain2.u) annotation (Line(points={{86,-92},{86,
           -94},{103,-94},{103,-90.5},{107,-90.5}}, color={0,0,127}));
   connect(heatFlowSensor.Q_flow, gain3.u) annotation (Line(points={{86,-66},{86,
           -66},{86,-74},{90,-74},{86,-74},{96,-74},{96,-74.5},{105,-74.5}},
@@ -450,11 +450,11 @@ equation
           {140,-82},{152,-82}},      color={0,0,127}));
   connect(heatFlowSensor.port_a, thermalZoneOneElement.intGainsConv)
     annotation (Line(points={{92,-60},{94,-60},{94,36},{92,36}}, color={191,0,0}));
-  connect(hoolFlowSensor.port_a, thermalZoneOneElement.intGainsConv)
+  connect(coolFlowSensor.port_a, thermalZoneOneElement.intGainsConv)
     annotation (Line(points={{92,-86},{94,-86},{94,36},{92,36}}, color={191,0,0}));
   connect(hea.port, heatFlowSensor.port_b)
     annotation (Line(points={{76,-60},{78,-60},{80,-60}}, color={191,0,0}));
-  connect(coo.port, hoolFlowSensor.port_b)
+  connect(coo.port,coolFlowSensor. port_b)
     annotation (Line(points={{76,-86},{78,-86},{80,-86}}, color={191,0,0}));
   annotation (experiment(
       StopTime=3.1536e+007,

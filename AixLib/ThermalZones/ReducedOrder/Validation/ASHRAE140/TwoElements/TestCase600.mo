@@ -199,7 +199,7 @@ model TestCase600 "Test case 600"
     annotation (Placement(transformation(extent={{14,-94},{30,-78}})));
   Modelica.Blocks.Math.Gain gainCoo(k=1e6) "Gain for cooling controller"
     annotation (Placement(transformation(extent={{38,-92},{50,-80}})));
-  Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor hoolFlowSensor
+  Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor coolFlowSensor
     "Sensor for ideal cooler"
     annotation (Placement(transformation(extent={{92,-92},{80,-80}})));
   Modelica.Blocks.Sources.Constant SouTSetC(k=27) "Set temperature cooler"
@@ -438,9 +438,9 @@ equation
     annotation (Line(points={{30.8,-86},{36.8,-86}}, color={0,0,127}));
   connect(gainCoo.y, coo.Q_flow)
     annotation (Line(points={{50.6,-86},{56,-86}}, color={0,0,127}));
-  connect(coo.port, hoolFlowSensor.port_b)
+  connect(coo.port,coolFlowSensor. port_b)
     annotation (Line(points={{76,-86},{80,-86}}, color={191,0,0}));
-  connect(hoolFlowSensor.port_a, thermalZoneTwoElements.intGainsConv)
+  connect(coolFlowSensor.port_a, thermalZoneTwoElements.intGainsConv)
     annotation (Line(points={{92,-86},{94,-86},{94,8},{94,36},{92,36}}, color={191,
           0,0}));
   connect(SouTSetC.y, from_degC_coo.u) annotation (Line(points={{-11.4,-86},{-11.4,
@@ -463,7 +463,7 @@ equation
           14},{-94,14},{-94,64},{-102,64},{-102,67},{-99,67}}, color={0,0,127}));
   connect(souRad.y[2], weaDat.HGloHor_in) annotation (Line(points={{-115,14},{-94,
           14},{-94,64},{-102,64},{-102,65},{-99,65}}, color={0,0,127}));
-  connect(hoolFlowSensor.Q_flow, gain2.u) annotation (Line(points={{86,-92},{86,
+  connect(coolFlowSensor.Q_flow, gain2.u) annotation (Line(points={{86,-92},{86,
           -94},{100,-94},{100,-90.5},{107,-90.5}}, color={0,0,127}));
   connect(solRad.y, integratorSol.u) annotation (Line(points={{-27.5,27},{-26,27},
           {-26,92},{58,92},{58,74},{67.9,74}}, color={0,0,127}));

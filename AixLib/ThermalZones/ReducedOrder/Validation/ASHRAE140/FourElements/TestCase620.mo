@@ -1,5 +1,5 @@
 within AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements;
-model TestCase600 "Test case 600"
+model TestCase620 "Test case 620"
   extends Modelica.Icons.Example;
 
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
@@ -67,9 +67,10 @@ model TestCase600 "Test case 600"
     nRoof=1,
     RRoof={0.000550791436374},
     CRoof={381586.716241},
-    AWin={12.0,0.0,0.0,0.0},
-    ATransparent={12.0,0.0,0.0,0.0},
-    RRoofRem=0.061807839516) "Thermal zone"
+    RRoofRem=0.061807839516,
+    AWin={0.0,6.0,0.0,6.0},
+    ATransparent={0.0,6.0,0.0,6.0})
+                             "Thermal zone"
     annotation (Placement(transformation(extent={{44,14},{92,50}})));
   AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow
     eqAirTemp(
@@ -81,7 +82,7 @@ model TestCase600 "Test case 600"
     alphaWinOut=16.37,
     n=4,
     wfWall={0.15094339622641512,0.2547169811320755,0.33962264150943394,0.2547169811320755},
-    wfWin={1.0,0.0,0.0,0.0},
+    wfWin={0.0,0.5,0.0,0.5},
     TGro=286.15) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,2},{-4,22}})));
 
@@ -627,4 +628,4 @@ equation
   </li>
   </ul>
   </html>"));
-end TestCase600;
+end TestCase620;
