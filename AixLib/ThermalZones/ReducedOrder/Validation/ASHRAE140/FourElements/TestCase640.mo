@@ -280,7 +280,7 @@ model TestCase640 "Test case 640"
     annotation (Placement(transformation(extent={{142,-62},{162,-42}})));
   Modelica.Blocks.Interfaces.RealOutput PowerLoad "in kW"
     annotation (Placement(transformation(extent={{142,-91},{162,-71}})));
-  Modelica.Blocks.Sources.CombiTimeTable SouTsetH(
+  Modelica.Blocks.Sources.CombiTimeTable SouTSetH(
     columns={2},
     tableOnFile=false,
     tableName="NoName",
@@ -549,8 +549,8 @@ equation
           22,-69.6},{22,-70},{102,-70},{102,48},{93,48}}, color={0,0,127}));
   connect(conCoo.u_m, thermalZoneFourElements.TAir) annotation (Line(points={{
           22,-95.6},{22,-98},{102,-98},{102,48},{93,48}}, color={0,0,127}));
-  connect(from_degC_hea.u, SouTsetH.y[1]) annotation (Line(points={{-5.2,-60},{
-          -9.4,-60},{-9.4,-60}}, color={0,0,127}));
+  connect(from_degC_hea.u,SouTSetH. y[1]) annotation (Line(points={{-5.2,-60},{
+          -9.4,-60}},            color={0,0,127}));
   annotation (experiment(
       StopTime=3.1536e+007,
       Interval=3600,

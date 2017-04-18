@@ -201,7 +201,7 @@ model TestCase650 "Test case 650"
     table=[0,11.21; 25200,11.21; 25200,0.41; 64800,0.41; 64800,11.21; 86400,
         11.21])
     annotation (Placement(transformation(extent={{-98,-36},{-86,-24}})));
-  Modelica.Blocks.Sources.CombiTimeTable SouTsetC(
+  Modelica.Blocks.Sources.CombiTimeTable SouTSetC(
     columns={2},
     tableOnFile=false,
     tableName="NoName",
@@ -411,8 +411,8 @@ equation
     annotation (Line(points={{76,-86},{78,-86},{80,-86}}, color={191,0,0}));
   connect(gain.u, InfVen.y[1]) annotation (Line(points={{-81.4,-30},{-85.4,-30},
           {-85.4,-30}}, color={0,0,127}));
-  connect(from_degC_coo.u, SouTsetC.y[1]) annotation (Line(points={{-7.2,-86},{
-          -10,-86},{-11.4,-86},{-11.4,-86}}, color={0,0,127}));
+  connect(from_degC_coo.u,SouTSetC. y[1]) annotation (Line(points={{-7.2,-86},{
+          -10,-86},{-11.4,-86}},             color={0,0,127}));
   annotation (experiment(
       StopTime=3.1536e+007,
       Interval=3600,

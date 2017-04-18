@@ -204,7 +204,7 @@ model TestCase650 "Test case 650"
     annotation (Placement(transformation(extent={{142,-63},{162,-43}})));
   Modelica.Blocks.Interfaces.RealOutput PowerLoad "in kW"
     annotation (Placement(transformation(extent={{142,-92},{162,-72}})));
-  Modelica.Blocks.Sources.CombiTimeTable SouTsetC(
+  Modelica.Blocks.Sources.CombiTimeTable SouTSetC(
     columns={2},
     tableOnFile=false,
     tableName="NoName",
@@ -420,8 +420,8 @@ equation
           {138,-82},{124.8,-82},{124.8,-70}},      color={0,0,127}));
   connect(gainPowLoa.y,PowerLoad)  annotation (Line(points={{138.6,-70},{140,-70},
           {140,-82},{152,-82}},      color={0,0,127}));
-  connect(from_degC_coo.u, SouTsetC.y[1]) annotation (Line(points={{-7.2,-86},{
-          -10,-86},{-11.4,-86},{-11.4,-86}}, color={0,0,127}));
+  connect(from_degC_coo.u,SouTSetC. y[1]) annotation (Line(points={{-7.2,-86},{
+          -10,-86},{-11.4,-86}},             color={0,0,127}));
   connect(gain.u, InfVen.y[1]) annotation (Line(points={{-81.4,-30},{-85.4,-30},
           {-85.4,-30}}, color={0,0,127}));
   annotation (experiment(

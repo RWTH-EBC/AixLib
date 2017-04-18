@@ -231,7 +231,7 @@ model TestCase640 "Test case 640"
     annotation (Placement(transformation(extent={{106,-80},{116,-69}})));
   Modelica.Blocks.Math.Gain gainPowLoa(k=0.001) "Converts to kW"
     annotation (Placement(transformation(extent={{126,-76},{138,-64}})));
-  Modelica.Blocks.Sources.CombiTimeTable SouTsetH(
+  Modelica.Blocks.Sources.CombiTimeTable SouTSetH(
     columns={2},
     tableOnFile=false,
     tableName="NoName",
@@ -465,7 +465,7 @@ equation
           -92},{138,-82},{124.8,-82},{124.8,-70}}, color={0,0,127}));
   connect(gainPowLoa.y, PowerLoad) annotation (Line(points={{138.6,-70},{140,
           -70},{140,-82},{152,-82}}, color={0,0,127}));
-  connect(SouTsetH.y[1], from_degC_hea.u) annotation (Line(points={{-11.4,-60},
+  connect(SouTSetH.y[1], from_degC_hea.u) annotation (Line(points={{-11.4,-60},
           {-9.175,-60},{-7.2,-60}}, color={0,0,127}));
   annotation (experiment(
       StopTime=3.1536e+007,
