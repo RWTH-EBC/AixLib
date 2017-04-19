@@ -238,7 +238,8 @@ model TestCase940 "Test case 940"
     fileName="NoName",
     verboseRead=true,
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    table=[0,10; 25200,10; 25200,20; 82800,20; 82800,10; 86400,10])
+    table=[0,10; 25200,10; 25200.01,20; 82800,20; 82800.01,10; 86400,10],
+    smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments)
     annotation (Placement(transformation(extent={{-24,-66},{-12,-54}})));
 equation
   connect(eqAirTemp.TEqAirWin, prescribedTemperature1.T)

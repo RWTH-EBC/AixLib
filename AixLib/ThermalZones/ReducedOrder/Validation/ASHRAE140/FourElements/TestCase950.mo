@@ -262,7 +262,8 @@ model TestCase950 "Test case 950"
     fileName="NoName",
     verboseRead=true,
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    table=[0,100; 25200,100; 25200,27; 64800,27; 64800,100; 86400,100])
+    table=[0,100; 25200,100; 25200.01,27; 64800,27; 64800.01,100; 86400,100],
+    smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments)
     annotation (Placement(transformation(extent={{-22,-92},{-10,-80}})));
   Modelica.Blocks.Sources.CombiTimeTable InfVen(
     columns={2},
