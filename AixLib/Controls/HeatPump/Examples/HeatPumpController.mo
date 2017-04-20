@@ -60,22 +60,6 @@ equation
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(heatPumpControlBus.input_on, booleanValue.activePort) annotation (
-      Line(
-      points={{0.05,-0.05},{20,-0.05},{20,50},{64.5,50}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}}));
-  connect(heatPumpControlBus.input_mode, booleanValue1.activePort) annotation (
-      Line(
-      points={{0.05,-0.05},{10,-0.05},{20,-0.05},{20,28},{64.5,28}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}}));
   connect(temperatureMeasurements[1].y, heatPumpControlBus.T_flow_ev)
     annotation (Line(points={{34.9,4.21885e-015},{0.05,4.21885e-015},{0.05,
           -0.05}}, color={0,0,127}), Text(
@@ -120,12 +104,29 @@ equation
           -66,30},{-66,80},{-63,80}}, color={0,0,127}));
   connect(T_meas.y, output_T_meas) annotation (Line(points={{-79,30},{-74,30},{
           -74,-60},{100,-60}}, color={0,0,127}));
-  connect(heatPumpControlBus.input_on, output_on) annotation (Line(
+  connect(heatPumpControlBus.mode, booleanValue1.activePort) annotation (Line(
+      points={{0.05,-0.05},{10,-0.05},{20,-0.05},{20,28},{64.5,28}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}}));
+  connect(heatPumpControlBus.onOff, booleanValue.activePort) annotation (Line(
+      points={{0.05,-0.05},{20,-0.05},{20,50},{64.5,50}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}}));
+  connect(heatPumpControlBus.onOff, output_on) annotation (Line(
       points={{0.05,-0.05},{20,-0.05},{20,-80},{100,-80}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  annotation (experiment(StopTime=10000, Interval=10));
+  annotation (experiment(StopTime=10000, Interval=10), Documentation(info="<html>
+<p>This example can be used to test that <a href=\"modelica://AixLib.Controls.HeatPump.HPControllerOnOff\">AixLib.Controls.HeatPump.HPControllerOnOff</a> supplies all required signals as specified in <a href=\"modelica://AixLib.Controls.ControllerInterfaces.HeatPumpControlBus\">AixLib.Controls.ControllerInterfaces.HeatPumpControlBus</a>. The generated signals are visualized using the <a href=\"modelica://Modelica.Blocks.Interaction.Show\">Show</a> package. The temperature measurement is supplied by a sine block so that the reaction of the controller can be tested. </p>
+<p>The example also shows how to connect two models, typically a model of a physical component and a controller, via the bus connector. The temperatureMeasurements and the massFlowRateMeasurements are only connected for demonstration purposes and are not required by the controller. </p>
+</html>"));
 end HeatPumpController;
