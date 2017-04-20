@@ -1,7 +1,7 @@
-within AixLib.Controls.HeatPumpControllers;
+within AixLib.Controls.HeatPump;
 partial model HPControllerBaseClass
   "Base class of a heat pump controller with bus interface"
-  AixLib.Fluid.HeatPumps.BaseClasses.Interfaces.HeatPumpControlBus heatPumpControlBus
+  AixLib.Controls.Interfaces.HeatPumpControlBus heatPumpControlBus
     annotation (Placement(transformation(
         extent={{-29.5,-29.5},{29.5,29.5}},
         rotation=270,

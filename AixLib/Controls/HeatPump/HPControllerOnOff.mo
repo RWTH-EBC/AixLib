@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPumpControllers;
+within AixLib.Controls.HeatPump;
 model HPControllerOnOff
   "Simple on/off controller for heat pump model"
   extends HPControllerBaseClass;

@@ -2,5 +2,5 @@ Continuous
 Discrete
 SetPoints
 VentilationController
-HeatPumpControllers
-ControllerInterfaces
+HeatPump
+Interfaces

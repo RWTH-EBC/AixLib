@@ -1,4 +1,4 @@
-within AixLib.Controls.HeatPumpControllers.Examples;
+within AixLib.Controls.HeatPump.Examples;
 model HeatPumpController "Example for usage of heat pump controller"
   extends Modelica.Icons.Example;
 
@@ -9,7 +9,7 @@ model HeatPumpController "Example for usage of heat pump controller"
     annotation (Placement(transformation(extent={{60,60},{80,80}})));
   Modelica.Blocks.Interaction.Show.BooleanValue booleanValue
     annotation (Placement(transformation(extent={{66,40},{86,60}})));
-  ControllerInterfaces.HeatPumpControlBus heatPumpControlBus annotation (
+  Interfaces.HeatPumpControlBus heatPumpControlBus annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
