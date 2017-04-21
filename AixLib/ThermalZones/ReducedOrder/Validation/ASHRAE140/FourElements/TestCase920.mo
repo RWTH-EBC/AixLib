@@ -70,7 +70,7 @@ model TestCase920 "Test case 920"
     AWin={12.0, 0.0, 0.0, 0.0},
     ATransparent={12.0, 0.0, 0.0, 0.0},
     nPorts=2,
-    AExt={9.600000000000001, 16.200000000000003, 21.6, 16.200000000000003})
+    AExt={21.6,10.200000000000003,21.6,48.0,10.200000000000003})
     "Thermal zone"
     annotation (Placement(transformation(extent={{44,14},{92,50}})));
   AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow
@@ -82,11 +82,9 @@ model TestCase920 "Test case 920"
     alphaRad=4.63,
     alphaWinOut=16.37,
     n=4,
-    wfWall={0.15094339622641512,
-            0.25471698113207547,
-            0.33962264150943394,
-            0.25471698113207547},
     wfWin={0.0,0.5,0.0,0.5},
+    wfWall={0.23184720211891743,0.10948340100059993,0.23184720211891743,
+        0.3173387937609652,0.10948340100059993},
     TGro=286.15) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,2},{-4,22}})));
 

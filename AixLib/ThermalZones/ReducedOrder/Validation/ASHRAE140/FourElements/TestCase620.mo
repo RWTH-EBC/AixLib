@@ -57,7 +57,6 @@ model TestCase620 "Test case 620"
     CFloor={0.1},
     roofRC(thermCapExt(each der_T(fixed=true))),
     nOrientations=4,
-    AExt={9.600000000000001,16.200000000000003,21.6,16.200000000000003},
     alphaExt=3.160000000000001,
     RExt={0.000401763119801},
     RExtRem=0.0277316600608,
@@ -69,7 +68,8 @@ model TestCase620 "Test case 620"
     CRoof={381586.716241},
     RRoofRem=0.061807839516,
     AWin={0.0,6.0,0.0,6.0},
-    ATransparent={0.0,6.0,0.0,6.0})
+    ATransparent={0.0,6.0,0.0,6.0},
+    AExt={21.6,10.200000000000003,21.6,48.0,10.200000000000003})
                              "Thermal zone"
     annotation (Placement(transformation(extent={{44,14},{92,50}})));
   AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow
@@ -81,8 +81,9 @@ model TestCase620 "Test case 620"
     alphaRad=4.63,
     alphaWinOut=16.37,
     n=4,
-    wfWall={0.15094339622641512,0.2547169811320755,0.33962264150943394,0.2547169811320755},
     wfWin={0.0,0.5,0.0,0.5},
+    wfWall={0.23263907377078896,0.10985734039176147,0.23263907377078896,
+        0.31500717167489906,0.10985734039176147},
     TGro=286.15) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,2},{-4,22}})));
 

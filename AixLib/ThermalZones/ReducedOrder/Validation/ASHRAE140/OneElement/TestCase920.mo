@@ -50,24 +50,21 @@ model TestCase920 "Test case 920"
     AWin={12.0, 0.0, 0.0, 0.0, 0.0},
     ATransparent={12.0, 0.0, 0.0, 0.0, 0.0},
     nPorts=2,
-    AExt={9.600000000000001, 16.200000000000003, 21.6, 48.0, 16.200000000000003})
+    AExt={21.6,10.200000000000003,21.6,48.0,10.200000000000003})
     "Thermal zone"
     annotation (Placement(transformation(extent={{44,14},{92,50}})));
   AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow
     eqAirTemp(
     n=5,
     wfGro=0,
-    wfWall={0.10304320094174112,
-            0.1738854015891881,
-            0.23184720211891743,
-            0.3173387937609652,
-            0.1738854015891881},
     withLongwave=true,
     aExt=0.6,
     alphaWallOut=24.670000000000005,
     alphaRad=4.63,
     alphaWinOut=16.37,
     wfWin={0.0,0.5,0.0,0.0,0.5},
+    wfWall={0.23184720211891743,0.10948340100059993,0.23184720211891743,
+        0.3173387937609652,0.10948340100059993},
     TGro=286.15) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,2},{-4,22}})));
   Modelica.Blocks.Math.Add solRad[5]
