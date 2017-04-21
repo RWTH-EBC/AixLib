@@ -60,28 +60,25 @@ model TestCase620 "Test case 620"
     extWallRC(thermCapExt(each der_T(fixed=true))),
     intWallRC(thermCapInt(each der_T(fixed=true))),
     nOrientations=5,
-    AExt={9.600000000000001, 16.200000000000003, 21.6, 48.0, 16.200000000000003},
     nPorts=2,
     redeclare package Medium = Modelica.Media.Air.DryAirNasa,
     AWin={0.0,6.0,0.0,0.0,6.0},
-    ATransparent={0.0,6.0,0.0,0.0,6.0})
+    ATransparent={0.0,6.0,0.0,0.0,6.0},
+    AExt={21.6,10.200000000000003,21.6,48.0,10.200000000000003})
     "Thermal zone"
     annotation (Placement(transformation(extent={{44,14},{92,50}})));
   AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow
     eqAirTemp(
     n=5,
     wfGro=0,
-    wfWall={0.10339514389812844,
-            0.17447930532809178,
-            0.23263907377078896,
-            0.31500717167489906,
-            0.17447930532809178},
     withLongwave=true,
     aExt=0.6,
     alphaWallOut=24.670000000000005,
     alphaRad=4.63,
     alphaWinOut=16.37,
     wfWin={0.0,0.5,0.0,0.0,0.5},
+    wfWall={0.23263907377078896,0.10985734039176147,0.23263907377078896,
+        0.31500717167489906,0.10985734039176147},
     TGro=286.15) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,2},{-4,22}})));
   Modelica.Blocks.Math.Add solRad[5]
