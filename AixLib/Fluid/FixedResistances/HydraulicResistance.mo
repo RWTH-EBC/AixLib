@@ -2,7 +2,8 @@ within AixLib.Fluid.FixedResistances;
 model HydraulicResistance
   "Simple model for a hydraulic resistance using a pressure loss factor"
   extends AixLib.Fluid.Interfaces.PartialTwoPortTransport;
-  parameter Real zeta(min=0) "Pressure loss factor for flow of port_a -> port_b";
+  parameter Real zeta(min=0)
+    "Pressure loss factor for flow of port_a -> port_b";
   parameter Modelica.SIunits.Length D "Diameter of component";
 protected
   Modelica.SIunits.Density rho "Density of the fluid";
@@ -13,8 +14,8 @@ equation
     inStream(port_a.Xi_outflow)));
   port_a.h_outflow = inStream(port_b.h_outflow);
   port_b.h_outflow = inStream(port_a.h_outflow);
-  dp = sign(m_flow)*8*zeta/(Modelica.Constants.pi*Modelica.Constants.pi*D*D*D*D*
-    rho)*m_flow*m_flow
+  dp = sign(m_flow)*8*zeta/(Modelica.Constants.pi*Modelica.Constants.pi*D*D*D*D
+    *rho)*m_flow*m_flow
     "Multiplication instead of exponent term for speed improvement";
   annotation (Icon(graphics={Rectangle(
           extent={{-80,46},{80,-34}},
@@ -28,6 +29,9 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Zeta=%zeta")}), Documentation(revisions="<html>
   <ul>
+  <li><i>April 25, 2017&nbsp;</i>
+     by Philipp Mehrfeld:<br/>
+     Delete standard parameterization</li>
   <li><i>April 2016&nbsp;</i>
      by Peter Matthes:<br/>
      Improved formulation of flow equation according to issue #232.</li>
@@ -39,16 +43,13 @@ equation
      Implemented</li>
   </ul>
  </html>", info="<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Very simple model for a hydraulic resistance with the pressureloss modelled 
- with a pressure loss factor, zeta.</p>
- <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\"
-    alt=\"stars: 3 out of 5\"/></p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>Values for pressure loss factor zeta can be easily found in tables.</p>
- <h4><span style=\"color:#008000\">Example Results</span></h4>
- <p><a href=\"AixLib.HVAC.Pumps.Examples.PumpHydraulicResistance_closedLoop\">
-    AixLib.HVAC.Pumps.Examples.PumpHydraulicResistance_closedLoop</a></p>
- </html>"));
+<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
+<p>Very simple model for a hydraulic resistance with the pressureloss modelled with the pressure loss factor <code>zeta</code>. </p>
+<p><b><span style=\"color: #008000;\">Level of Development</span></b> </p>
+<p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/> </p>
+<p><b><span style=\"color: #008000;\">Concept</span></b> </p>
+<p>Values for pressure loss factor zeta can be easily found in tables. </p>
+<p><b><span style=\"color: #008000;\">Example Results</span></b> </p>
+<p><a href=\"AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances\">AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances</a> </p>
+</html>"));
 end HydraulicResistance;
