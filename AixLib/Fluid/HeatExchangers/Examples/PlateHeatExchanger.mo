@@ -109,5 +109,8 @@ equation
 </ul>
 <p>The model requires to provide A and k (average coefficient of heat transfer of heat exchanger). Normally, we do not know k and k will not be a parameter but a function of temperature, mass flow rate and heat exchanger geometry. Therefore, the model must be parameterized by using measurment data for a small operational range. Thus it will be hard to parameterize the model under normal circumstances.</p>
 </html>"),
-    experiment(StopTime=100));
+    experiment(StopTime=100),
+    __Dymola_Commands(file=
+          "Resources/Scripts/Dymola/Fluid/HeatExchangers/PlateHeatExchanger/PlateHeatExchangerSimpleTest.mos"
+        "simulate & plot"));
 end PlateHeatExchanger;
