@@ -163,7 +163,7 @@ equation
           -7.6,-53},{-3,-53}},                                                                            color = {191, 0, 0}, pattern = LinePattern.Dash));
   connect(floor_FH.port_a, thermFloor) annotation(Line(points={{-7.6,-69.7001},
           {-7.6,-90},{-30,-90}},                                                                             color = {191, 0, 0}, pattern = LinePattern.Dash));
-  annotation(__Dymola_Images(Parameters(source = "AixLib/Resources/Images/Building/HighOrder/OW2_1IWl_1IWs_1Pa_1At1Ro.png", Width = 5, Length = 5)), Icon(graphics={  Rectangle(extent = {{-80, 80}, {80, 60}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
+  annotation(Dialog(groupImage = "AixLib/Resources/Images/Building/HighOrder/OW2_1IWl_1IWs_1Pa_1At1Ro.png", Width = 5, Length = 5), Icon(graphics={  Rectangle(extent = {{-80, 80}, {80, 60}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{0, 80}, {-50, 60}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255},
             fillPattern =                                                                                                   FillPattern.Solid, visible = withWindow2), Rectangle(extent = {{6, 64}, {-6, -64}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid, origin = {74, -4}), Rectangle(extent = {{-60, 60}, {68, -68}}, lineColor = {0, 0, 0}, fillColor = {47, 102, 173},
