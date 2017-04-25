@@ -37,16 +37,17 @@ model DPEAgg_ambientLoss
         Medium)
     annotation (Placement(transformation(extent={{-52,-40},{-32,-20}})));
   AixLib.Fluid.FixedResistances.DPEAgg_ambientLoss dynamicPipeEBCAggregated_Ambient_Loss_UC(
-    Heat_Loss_To_Ambient=true,
-    nNodes=5,
     length=2,
-    use_HeatTransferConvective=true,
     redeclare package Medium = Medium,
     parameterPipe=DataBase.Pipes.Copper.Copper_6x1(),
     parameterIso=DataBase.Pipes.Isolation.Iso100pc(),
     diameter=dynamicPipeEBCAggregated_Ambient_Loss_UC.parameterPipe.d_i,
+    use_HeatTransferConvective=false,
+    nNodes=5,
+    Heat_Loss_To_Ambient=true,
+    isEmbedded=true,
     withInsulation=false)
-    annotation (Placement(transformation(extent={{-16,-10},{4,10}})));
+    annotation (Placement(transformation(extent={{-14,-10},{6,10}})));
 equation
   connect(ramp.y, Source.T_in) annotation (Line(
       points={{-79,4},{-66,4}},
@@ -54,26 +55,26 @@ equation
       smooth=Smooth.None));
   connect(dynamicPipeEBCAggregated_Ambient_Loss_UC.Star, fixedTemp.port)
     annotation (Line(
-      points={{-7.4,5.6},{-7.4,30},{-30,30}},
+      points={{-5.4,5.6},{-5.4,30},{-30,30}},
       color={95,95,95},
       pattern=LinePattern.None,
       smooth=Smooth.None));
   connect(Source.ports[1], dynamicPipeEBCAggregated_Ambient_Loss_UC.port_a)
     annotation (Line(
-      points={{-44,0},{-16.4,0}},
+      points={{-44,0},{-14.4,0}},
       color={0,127,255},
       smooth=Smooth.None));
   connect(temperatureBefore.port, dynamicPipeEBCAggregated_Ambient_Loss_UC.port_a)
     annotation (Line(
-      points={{-42,-40},{-30,-40},{-30,0},{-16.4,0}},
+      points={{-42,-40},{-30,-40},{-30,0},{-14.4,0}},
       color={0,127,255},
       smooth=Smooth.None));
   connect(dynamicPipeEBCAggregated_Ambient_Loss_UC.port_b, Sink.ports[1])
-    annotation (Line(points={{4.4,0},{68,0},{68,1}}, color={0,127,255}));
+    annotation (Line(points={{6.4,0},{68,0},{68,1}}, color={0,127,255}));
   connect(temperatureAfter.port, dynamicPipeEBCAggregated_Ambient_Loss_UC.port_b)
-    annotation (Line(points={{24,-40},{40,-40},{40,0},{4.4,0}}, color={0,127,255}));
+    annotation (Line(points={{24,-40},{40,-40},{40,0},{6.4,0}}, color={0,127,255}));
   connect(fixedTemp.port, dynamicPipeEBCAggregated_Ambient_Loss_UC.heatPort_outside)
-    annotation (Line(points={{-30,30},{-4.4,30},{-4.4,5.6}}, color={191,0,0}));
+    annotation (Line(points={{-30,30},{-2.4,30},{-2.4,5.6}}, color={191,0,0}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),  Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
@@ -94,8 +95,8 @@ equation
 </ul>
 </html>"),
     experiment(
-      StopTime=4000,
+      StopTime=400000,
       Interval=30,
-      Algorithm="Lsodar"),
+      __Dymola_Algorithm="Lsodar"),
     experimentSetupOutput(events=false));
 end DPEAgg_ambientLoss;

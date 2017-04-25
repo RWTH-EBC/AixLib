@@ -19,7 +19,7 @@ model DPEAgg_ambientLoss
    parameter Boolean isCircular = true
     "=true if cross sectional area is circular"                                    annotation(Dialog(group = "Geometry"));
    parameter Modelica.SIunits.Diameter diameter=parameterPipe.d_i "Diameter of circular pipe"
-                                                              annotation(Dialog(group = "Geometry"), enable = isCircular);
+                                                              annotation(Dialog,   enable = isCircular);
    parameter Modelica.SIunits.Area crossArea=Modelica.Constants.pi*
       diameter*diameter/4 "Inner cross section area"                                                  annotation(Dialog(group = "Geometry"));
    parameter Modelica.SIunits.Length perimeter=Modelica.Constants.pi*
@@ -50,6 +50,15 @@ model DPEAgg_ambientLoss
     "Formulation of momentum balances"                                                                     annotation(Dialog(tab="Assumptions", group = "Dynamics"));
 
     //Parameter Tab "HeatTransfer"
+
+    parameter Boolean Heat_Loss_To_Ambient = false
+    "= true to internally simulate heat loss to ambient by convection and radiation"                    annotation(Dialog(tab="Heat transfer"));
+    parameter Boolean isEmbedded = false
+    "= true if pipe is embedded in a solid material, for example walls "
+    annotation(Dialog(tab="Heat transfer"));
+    parameter Boolean withInsulation = false
+    "= true to use a pipe with insulation"                                            annotation(Dialog(tab="Heat transfer"));
+
     parameter Boolean use_HeatTransferConvective = true
     "= true to use the convective HeatTransfer model"                                                      annotation(Dialog(tab="Heat transfer"));
     replaceable model HeatTransferConvective =
@@ -63,14 +72,12 @@ model DPEAgg_ambientLoss
     parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition parameterPipe=
       AixLib.DataBase.Pipes.Copper.Copper_6x1() "Pipe type"
     annotation (choicesAllMatching=true, Dialog(tab="Heat transfer"));
-      parameter Boolean withInsulation = false
-    "= true to use a pipe with insulation"                                            annotation(Dialog(tab="Heat transfer"));
-      parameter AixLib.DataBase.Pipes.IsolationBaseDataDefinition
+    parameter AixLib.DataBase.Pipes.IsolationBaseDataDefinition
                                                    parameterIso=
                  AixLib.DataBase.Pipes.Isolation.Iso0pc() "Isolation Type"
           annotation (choicesAllMatching=true, Dialog(tab="Heat transfer"));
-      parameter Boolean Heat_Loss_To_Ambient = false
-    "= true to internally simulate heat loss to ambient by convection and radiation"                    annotation(Dialog(tab="Heat transfer"));
+
+
           parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha=8
     "Heat transfer coefficient to ambient"                      annotation (Dialog(tab="Heat transfer", enable = Heat_Loss_To_Ambient));
     Utilities.HeatTransfer.CylindricHeatTransfer                       PipeWall[nNodes](
@@ -105,7 +112,7 @@ model DPEAgg_ambientLoss
     roughness=roughness,
     height_ab=height_ab,
     redeclare model FlowModel = FlowModel,
-    use_HeatTransfer=true,
+    use_HeatTransfer=Heat_Loss_To_Ambient,
     allowFlowReversal=allowFlowReversal,
     energyDynamics=energyDynamics,
     massDynamics=massDynamics,
@@ -186,51 +193,51 @@ model DPEAgg_ambientLoss
 
 protected
   Modelica.Fluid.Interfaces.HeatPorts_a heatPorts[nNodes]
-    annotation (Placement(transformation(extent={{26,38},{66,46}}),
+    annotation (Placement(transformation(extent={{18,38},{58,46}}),
         iconTransformation(extent={{-46,20},{40,38}})));
 public
   AixLib.Utilities.HeatTransfer.HeatConv heatConv[nNodes](alpha=fill(alpha,
         nNodes), A=Modelica.Constants.pi*PipeWall.d_out*length/nNodes) if
-                                     Heat_Loss_To_Ambient and not withInsulation
+                                     Heat_Loss_To_Ambient and not withInsulation and not isEmbedded
     "Convection from pipe wall" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
-        origin={32,26})));
+        origin={24,26})));
   AixLib.Utilities.HeatTransfer.HeatConv heatConv_withInsulation[nNodes](alpha=
         fill(alpha, nNodes), A=Modelica.Constants.pi*Insulation.d_out*length/
-        nNodes) if                   (Heat_Loss_To_Ambient and withInsulation)
+        nNodes) if                   (Heat_Loss_To_Ambient and withInsulation and not isEmbedded)
     "Convection from insulation" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
-        origin={58,26})));
+        origin={50,26})));
   AixLib.Utilities.HeatTransfer.HeatToStar twoStar_RadEx[nNodes](eps=fill(eps,
         nNodes), A=Modelica.Constants.pi*PipeWall.d_out*length/nNodes) if
-                                     Heat_Loss_To_Ambient and not withInsulation
+                                     Heat_Loss_To_Ambient and not isEmbedded
     "Radiation" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={-50,28})));
+        origin={-58,28})));
 parameter Modelica.SIunits.Emissivity eps = 0.8 "Emissivity"
                                       annotation (Dialog(tab="Heat transfer", enable = Heat_Loss_To_Ambient));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort_outside annotation (Placement(transformation(extent={{34,72},
-            {54,92}}),
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort_outside annotation (Placement(transformation(extent={{26,72},
+            {46,92}}),
         iconTransformation(extent={{6,46},{26,66}})));
 
   Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(m=nNodes)
                 annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=180,
-        origin={44,58})));
+        origin={36,58})));
 
-  AixLib.Utilities.Interfaces.Star Star if    Heat_Loss_To_Ambient and not withInsulation
-    annotation (Placement(transformation(extent={{-62,74},{-42,94}}),
+  AixLib.Utilities.Interfaces.Star Star if    Heat_Loss_To_Ambient and not isEmbedded
+    annotation (Placement(transformation(extent={{-70,74},{-50,94}}),
         iconTransformation(extent={{-24,46},{-4,66}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector_Star(m=nNodes) if
-                                     Heat_Loss_To_Ambient and not withInsulation annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+                                     Heat_Loss_To_Ambient and not isEmbedded annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=180,
-        origin={-52,58})));
+        origin={-60,58})));
 protected
-  Modelica.Fluid.Interfaces.HeatPorts_a heatPorts_Star[nNodes] if Heat_Loss_To_Ambient and not withInsulation
-    annotation (Placement(transformation(extent={{-70,38},{-30,46}}),
+  Modelica.Fluid.Interfaces.HeatPorts_a heatPorts_Star[nNodes] if Heat_Loss_To_Ambient and not isEmbedded
+    annotation (Placement(transformation(extent={{-78,38},{-38,46}}),
         iconTransformation(extent={{-46,20},{40,38}})));
   /*Modelica.Blocks.Math.Sum sum1(nin=n)
     annotation (Placement(transformation(extent={{-20,-100},{0,-80}})));
@@ -269,22 +276,49 @@ equation
   connect(heatPort_outside, thermalCollector.port_b);
 
         //Connect pipe wall or insulation to the outside
-        if (withInsulation and Heat_Loss_To_Ambient) then
-        connect(PipeWall.port_b,Insulation.port_a);
-        connect(Insulation.port_b,  heatConv_withInsulation.port_b);
-        connect( heatConv_withInsulation.port_a, heatPorts);
-        elseif withInsulation then
+
+        if (isEmbedded and Heat_Loss_To_Ambient and not withInsulation) then
+        connect(PipeWall.port_b,heatPorts);
+
+        elseif (isEmbedded and Heat_Loss_To_Ambient and withInsulation) then
         connect(PipeWall.port_b,Insulation.port_a);
         connect(Insulation.port_b,  heatPorts);
-        elseif Heat_Loss_To_Ambient then
-        connect(PipeWall.port_b,  heatConv.port_b);
-        connect( heatConv.port_a, heatPorts);
-        connect( heatConv.port_b, twoStar_RadEx.Therm);
-        connect( twoStar_RadEx.Star, heatPorts_Star);
-        connect( heatPorts_Star, thermalCollector_Star.port_a);
-        connect( thermalCollector_Star.port_b, Star);
 
-      else
+        elseif (withInsulation and Heat_Loss_To_Ambient and not isEmbedded) then
+        connect(PipeWall.port_b,Insulation.port_a);
+        connect(Insulation.port_b,  heatConv_withInsulation.port_b);
+        connect(heatConv_withInsulation.port_a, heatPorts);
+        connect(heatPorts,thermalCollector.port_a);
+        connect(thermalCollector.port_b,heatPort_outside);
+        connect(Insulation.port_b, twoStar_RadEx.Therm);
+        connect(twoStar_RadEx.Star, heatPorts_Star);
+        connect(heatPorts_Star, thermalCollector_Star.port_a);
+        connect(thermalCollector_Star.port_b, Star);
+
+        elseif
+              (Heat_Loss_To_Ambient and not withInsulation and not isEmbedded) then
+        connect(PipeWall.port_b,heatConv.port_b);
+        connect(heatConv.port_a, heatPorts);
+        connect(heatPorts,thermalCollector.port_a);
+        connect(thermalCollector.port_b,heatPort_outside);
+        connect(PipeWall.port_b, twoStar_RadEx.Therm);
+        connect(twoStar_RadEx.Star, heatPorts_Star);
+        connect(heatPorts_Star, thermalCollector_Star.port_a);
+        connect(thermalCollector_Star.port_b, Star);
+
+
+//        elseif withInsulation then
+//        connect(PipeWall.port_b,Insulation.port_a);
+//        connect(Insulation.port_b,  heatPorts);
+//        elseif Heat_Loss_To_Ambient then
+//       connect(PipeWall.port_b,  heatConv.port_b);
+//       connect( heatConv.port_a, heatPorts);
+//       connect( heatConv.port_b, twoStar_RadEx.Therm);
+//       connect( twoStar_RadEx.Star, heatPorts_Star);
+//        connect( heatPorts_Star, thermalCollector_Star.port_a);
+//        connect( thermalCollector_Star.port_b, Star);
+
+        else
         connect(PipeWall.port_b,  heatPorts);
         end if;
 

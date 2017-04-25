@@ -1,3 +1,4 @@
+DPEAgg_ambientLoss
 HydraulicDiameter
 HydraulicResistance
 Junction
@@ -5,4 +6,3 @@ LosslessPipe
 PressureDrop
 Examples
 Validation
-DPEAgg_ambientLoss
