@@ -2,6 +2,9 @@ within AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement;
 model TestCase900FF "Test case 900 free floating"
   extends Modelica.Icons.Example;
 
+  Modelica.Blocks.Interfaces.RealOutput FreeFloatTemperature(unit="degC")
+    "Free floating temperature"
+    annotation (Placement(transformation(extent={{124,66},{144,86}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
@@ -31,7 +34,7 @@ model TestCase900FF "Test case 900 free floating"
     UWin=3.046492744695893)
     "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{6,70},{26,90}})));
-  RC.OneElement thermalZoneOneElement(
+  AixLib.ThermalZones.ReducedOrder.RC.OneElement thermalZoneOneElement(
     redeclare package Medium = Modelica.Media.Air.DryAirNasa,
     VAir=129.60000000000002,
     alphaExt=2.2309677419354843,
@@ -123,14 +126,14 @@ model TestCase900FF "Test case 900 free floating"
   Modelica.Blocks.Math.Gain gain(k=0.0441)
     "Conversion to kg/s"
     annotation (Placement(transformation(extent={{-80,-37},{-66,-23}})));
-  Fluid.Sources.MassFlowSource_T ventilationIn(
+  AixLib.Fluid.Sources.MassFlowSource_T ventilationIn(
     use_m_flow_in=true,
     use_T_in=true,
     nPorts=1,
     redeclare package Medium = Modelica.Media.Air.DryAirNasa)
     "Fan"
     annotation (Placement(transformation(extent={{-54,-48},{-34,-28}})));
-  Fluid.Sources.MassFlowSource_T ventilationOut(
+  AixLib.Fluid.Sources.MassFlowSource_T ventilationOut(
     use_m_flow_in=true,
     use_T_in=false,
     nPorts=1,
@@ -145,7 +148,8 @@ model TestCase900FF "Test case 900 free floating"
     tableOnFile=true,
     columns={2,3,4},
     tableName="Table",
-    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/WeatherData/WeatherData_Ashrae140_LOM.mat"))
+    fileName=Modelica.Utilities.Files.loadResource(
+    "modelica://AixLib/Resources/WeatherData/WeatherData_Ashrae140_LOM.mat"))
     "Weather data"
     annotation (Placement(transformation(extent={{-136,74},{-116,94}})));
   Modelica.Blocks.Math.Add add(k2=-1)
@@ -159,15 +163,14 @@ model TestCase900FF "Test case 900 free floating"
     tableOnFile=true,
     tableName="Table",
     columns={2,3},
-    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/WeatherData/Weatherdata_ASHARE140.mat"))
+    fileName=Modelica.Utilities.Files.loadResource(
+    "modelica://AixLib/Resources/WeatherData/Weatherdata_ASHARE140.mat"))
     "Solar radiation data"
     annotation (Placement(transformation(extent={{-136,4},{-116,24}})));
-    Modelica.Blocks.Interfaces.RealOutput FreeFloatTemperature(unit="degC")
-    "Free floating temperature"
-      annotation (Placement(transformation(extent={{124,66},{144,86}})));
   Modelica.Blocks.Math.UnitConversions.To_degC to_degC
     "Indoor air temperature in degC"
     annotation (Placement(transformation(extent={{122,40},{134,52}})));
+
 equation
   connect(eqAirTemp.TEqAirWin, prescribedTemperature1.T)
     annotation (Line(

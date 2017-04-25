@@ -2,6 +2,10 @@ within AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement;
 model TestCase950 "Test case 950"
   extends Modelica.Icons.Example;
 
+  Modelica.Blocks.Interfaces.RealOutput AnnualCoolingLoad "in MWh"
+    annotation (Placement(transformation(extent={{142,-63},{162,-43}})));
+  Modelica.Blocks.Interfaces.RealOutput PowerLoad "in kW"
+    annotation (Placement(transformation(extent={{142,-92},{162,-72}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
@@ -31,7 +35,7 @@ model TestCase950 "Test case 950"
     UWin=3.046492744695893)
     "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{6,70},{26,90}})));
-  RC.OneElement thermalZoneOneElement(
+  AixLib.ThermalZones.ReducedOrder.RC.OneElement thermalZoneOneElement(
     redeclare package Medium = Modelica.Media.Air.DryAirNasa,
     VAir=129.60000000000002,
     alphaExt=2.2309677419354843,
@@ -123,14 +127,14 @@ model TestCase950 "Test case 950"
   Modelica.Blocks.Math.Gain gain(k=0.0441)
     "Conversion to kg/s"
     annotation (Placement(transformation(extent={{-80,-37},{-66,-23}})));
-  Fluid.Sources.MassFlowSource_T ventilationIn(
+  AixLib.Fluid.Sources.MassFlowSource_T ventilationIn(
     use_m_flow_in=true,
     use_T_in=true,
     nPorts=1,
     redeclare package Medium = Modelica.Media.Air.DryAirNasa)
     "Fan"
     annotation (Placement(transformation(extent={{-54,-48},{-34,-28}})));
-  Fluid.Sources.MassFlowSource_T ventilationOut(
+  AixLib.Fluid.Sources.MassFlowSource_T ventilationOut(
     use_m_flow_in=true,
     use_T_in=false,
     nPorts=1,
@@ -143,7 +147,8 @@ model TestCase950 "Test case 950"
     tableOnFile=true,
     columns={2,3,4},
     tableName="Table",
-    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/WeatherData/WeatherData_Ashrae140_LOM.mat"))
+    fileName=Modelica.Utilities.Files.loadResource(
+    "modelica://AixLib/Resources/WeatherData/WeatherData_Ashrae140_LOM.mat"))
     "Weather data"
     annotation (Placement(transformation(extent={{-136,74},{-116,94}})));
   Modelica.Blocks.Math.Add add(k2=-1)
@@ -157,7 +162,8 @@ model TestCase950 "Test case 950"
     tableOnFile=true,
     tableName="Table",
     columns={2,3},
-    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/WeatherData/Weatherdata_ASHARE140.mat"))
+    fileName=Modelica.Utilities.Files.loadResource(
+    "modelica://AixLib/Resources/WeatherData/Weatherdata_ASHARE140.mat"))
     "Solar radiation data"
     annotation (Placement(transformation(extent={{-136,4},{-116,24}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow coo "Ideal cooler"
@@ -165,7 +171,7 @@ model TestCase950 "Test case 950"
   Modelica.Blocks.Math.UnitConversions.From_degC from_degC_coo
     "Convert set temperature from degC to Kelvin"
     annotation (Placement(transformation(extent={{-6,-92},{6,-80}})));
-  Controls.Continuous.LimPID conCoo(
+  AixLib.Controls.Continuous.LimPID conCoo(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     yMax=0,
     yMin=-1,
@@ -189,10 +195,6 @@ model TestCase950 "Test case 950"
     annotation (Placement(transformation(extent={{108,-96},{118,-85}})));
   Modelica.Blocks.Math.Gain gainPowLoa(k=0.001) "Converts to kW"
     annotation (Placement(transformation(extent={{126,-76},{138,-64}})));
-  Modelica.Blocks.Interfaces.RealOutput AnnualCoolingLoad "in MWh"
-    annotation (Placement(transformation(extent={{142,-63},{162,-43}})));
-  Modelica.Blocks.Interfaces.RealOutput PowerLoad "in kW"
-    annotation (Placement(transformation(extent={{142,-92},{162,-72}})));
   Modelica.Blocks.Sources.CombiTimeTable InfVen(
     columns={2},
     tableOnFile=false,
@@ -212,6 +214,7 @@ model TestCase950 "Test case 950"
     table=[0,100; 25200,100; 25200.01,27; 64800,27; 64800.01,100; 86400,100],
     smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments)
     annotation (Placement(transformation(extent={{-24,-92},{-12,-80}})));
+
 equation
   connect(eqAirTemp.TEqAirWin, prescribedTemperature1.T)
     annotation (Line(
