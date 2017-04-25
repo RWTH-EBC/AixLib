@@ -4,7 +4,7 @@ model HydraulicResistance
   extends AixLib.Fluid.Interfaces.PartialTwoPortTransport;
   parameter Real zeta(min=0)
     "Pressure loss factor for flow of port_a -> port_b";
-  parameter Modelica.SIunits.Length D "Diameter of component";
+  parameter Modelica.SIunits.Length D(min=0) "Diameter of component";
 protected
   Modelica.SIunits.Density rho "Density of the fluid";
 equation
@@ -14,8 +14,8 @@ equation
     inStream(port_a.Xi_outflow)));
   port_a.h_outflow = inStream(port_b.h_outflow);
   port_b.h_outflow = inStream(port_a.h_outflow);
-  dp = sign(m_flow)*8*zeta/(Modelica.Constants.pi*Modelica.Constants.pi*D*D*D*D
-    *rho)*m_flow*m_flow
+  dp = sign(m_flow)*8*zeta/(Modelica.Constants.pi*Modelica.Constants.pi*D*D*D*D*
+    rho)*m_flow*m_flow
     "Multiplication instead of exponent term for speed improvement";
   annotation (Icon(graphics={Rectangle(
           extent={{-80,46},{80,-34}},
