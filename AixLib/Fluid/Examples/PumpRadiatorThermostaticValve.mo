@@ -1,11 +1,10 @@
 within AixLib.Fluid.Examples;
 model PumpRadiatorThermostaticValve
+  "Example of a simple heating system with radiator and thermostatic valve"
   import AixLib;
   extends Modelica.Icons.Example;
 
-  replaceable package Medium =
-     Modelica.Media.Water.ConstantPropertyLiquidWater
-     constrainedby Modelica.Media.Interfaces.PartialMedium;
+  package Medium = AixLib.Media.Water;
 
   AixLib.Fluid.Movers.Pump
              pump(MinMaxCharacteristics = AixLib.DataBase.Pumps.Pump1(), V_flow_max = 2, ControlStrategy = 2, V_flow(fixed = false),
@@ -80,9 +79,16 @@ equation
           64},{116,64},{116,22},{120.8,22}}, color={191,0,0}));
   connect(radiator.RadiativeHeat, RadTemp.port) annotation (Line(points={{127.4,
           22},{132,22},{132,64},{136,64}}, color={95,95,95}));
-  annotation(Diagram(coordinateSystem(extent={{-100,-100},{160,100}},      preserveAspectRatio=false)),             Icon(coordinateSystem(extent = {{-100, -100}, {160, 100}})), experiment(StopTime = 86400, Interval = 60, __Dymola_Algorithm = "Lsodar"), __Dymola_experimentSetupOutput(events = false), Documentation(info = "<html>
- Duplicate of  AixLib.Fluid.HeatExchangers.Radiators.Examples.PumpRadiatorThermostaticValve
+  annotation(Diagram(coordinateSystem(extent={{-100,-100},{160,100}},      preserveAspectRatio=false)),             Icon(coordinateSystem(extent = {{-100, -100}, {160, 100}})), experiment(StopTime = 86400, Interval = 60), Documentation(info = "<html>
+  <p>This model contains a simple model of a heating system, with a pump, ideal
+  heat source, pipes, thermostatic valve and radiator. It serves as a
+  demonstration case of how components of the <code>AixLib</code> library can
+  be used.</p>
 </html>", revisions="<html>
+ <ul>
+ <li><i>April 25, 2017</i> by Peter Remmen:<br/>Moce Example from
+ <code>Fluid.HeatExchangers.Examples</code> to <code>Fluid.Examples</code></li>
+ </ul>
  <ul>
  <li><i>October 11, 2016</i> by Marcus Fuchs:<br/>Replace pipe</li>
  </ul>
