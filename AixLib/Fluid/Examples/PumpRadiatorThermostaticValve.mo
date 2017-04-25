@@ -86,7 +86,7 @@ equation
   be used.</p>
 </html>", revisions="<html>
  <ul>
- <li><i>April 25, 2017</i> by Peter Remmen:<br/>Moce Example from
+ <li><i>April 25, 2017</i> by Peter Remmen:<br/>Move Example from
  <code>Fluid.HeatExchangers.Examples</code> to <code>Fluid.Examples</code></li>
  </ul>
  <ul>

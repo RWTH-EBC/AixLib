@@ -1,11 +1,10 @@
 within AixLib.Fluid.Examples;
 model PumpRadiatorValve
+  "Example of a simple heating system with radiator and simple valve"
   import AixLib;
   extends Modelica.Icons.Example;
 
-  replaceable package Medium =
-     Modelica.Media.Water.ConstantPropertyLiquidWater
-     constrainedby Modelica.Media.Interfaces.PartialMedium;
+  package Medium = AixLib.Media.Water;
 
   AixLib.Fluid.Movers.Pump
              pump(MinMaxCharacteristics = AixLib.DataBase.Pumps.Pump1(), V_flow_max = 2, ControlStrategy = 2, V_flow(fixed = false), Head_max = 2,
@@ -76,11 +75,18 @@ equation
   annotation(Diagram(coordinateSystem(extent={{-100,-100},{160,100}},
   preserveAspectRatio=false)),
   Icon(coordinateSystem(extent = {{-100, -100}, {160, 100}})),
-  experiment(StopTime = 86400, Interval = 60, __Dymola_Algorithm = "Rkfix2"),
-  __Dymola_experimentSetupOutput(events = false),
+  experiment(StopTime = 86400, Interval = 60),
   Documentation(info = "<html>
-  Duplicate of  AixLib.Fluid.HeatExchangers.Radiators.Examples.PumpRadiatorValve
+  <p>
+  This model contains a simple model of a heating system, with a pump, ideal
+  heat source, pipes, simple valve and radiator. It serves as a
+  demonstration case of how components of the <code>AixLib</code> library can
+  be used.</p>
 </html>", revisions="<html>
+<ul>
+<li><i>April 25, 2017</i> by Peter Remmen:<br/>Move Example from
+<code>Fluid.HeatExchangers.Examples</code> to <code>Fluid.Examples</code></li>
+</ul>
 <ul>
 <li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
 conventions</li>
