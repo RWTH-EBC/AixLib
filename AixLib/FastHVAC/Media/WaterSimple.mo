@@ -1,6 +1,6 @@
 within AixLib.FastHVAC.Media;
 record WaterSimple
-extends BaseClass.MediumSimple(
+extends BaseClasses.MediumSimple(
     rho=995,
     c=4119,
     lambda=0.64);

@@ -8,7 +8,6 @@ connector EnthalpyPort_a "Inlet enthalpy connector non-Fluid models"
           fillPattern=FillPattern.Solid,
           fillColor={176,0,0})}), Documentation(info="<html>
 <p>This model defines a inlet enthalpy port for fast non fluid HVAC models</p>
-<p><br><b>Implementation</b></p>
 </html>", revisions="<html>
 <ul>
 <li>

@@ -8,6 +8,8 @@ partial connector EnthalpyPort "Enthalpy port for 1-dim. enthalpy transfer"
   Modelica.SIunits.SpecificHeatCapacity c "Constant specific heat capacity";
 
   annotation (Documentation(info="<html>
+  This is an interface model for a 1-dimensional enthalpy port to consider
+  enthalpy transfer
 </html>", revisions="<html>
 <ul>
 <li>
