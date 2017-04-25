@@ -18,7 +18,7 @@ model WorkingFluid
    C=m_fluid*medium.c, T(start=T0, fixed=true))
     annotation (Placement(transformation(extent={{-24,42},{16,82}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort
-  "Heat transfer into the fluid"
+  "Heat transfer into the working fluid"
     annotation (Placement(transformation(extent={{-10,84},{10,104}})));
 equation
   connect(energyBalance.enthalpyPort_b, enthalpyPort_b) annotation (Line(
