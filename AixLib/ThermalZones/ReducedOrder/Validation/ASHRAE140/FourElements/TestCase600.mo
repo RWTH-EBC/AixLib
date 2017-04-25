@@ -2,6 +2,12 @@ within AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.FourElements;
 model TestCase600 "Test case 600"
   extends Modelica.Icons.Example;
 
+  Modelica.Blocks.Interfaces.RealOutput AnnualHeatingLoad "in MWh"
+    annotation (Placement(transformation(extent={{142,-44},{162,-24}})));
+  Modelica.Blocks.Interfaces.RealOutput AnnualCoolingLoad "in MWh"
+    annotation (Placement(transformation(extent={{142,-62},{162,-42}})));
+  Modelica.Blocks.Interfaces.RealOutput PowerLoad "in kW"
+    annotation (Placement(transformation(extent={{142,-91},{162,-71}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
@@ -31,7 +37,7 @@ model TestCase600 "Test case 600"
     UWin=3.046492744695893, n=4)
     "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{6,70},{26,90}})));
-  RC.FourElements thermalZoneFourElements(
+  AixLib.ThermalZones.ReducedOrder.RC.FourElements thermalZoneFourElements(
     VAir=129.60000000000002,
     alphaWin=3.16,
     gWin=0.789,
@@ -80,11 +86,11 @@ model TestCase600 "Test case 600"
     alphaRad=4.63,
     alphaWinOut=16.37,
     n=4,
-    wfWall={0.15094339622641512,0.2547169811320755,0.33962264150943394,0.2547169811320755},
+    wfWall={0.15094339622641512,0.2547169811320755,0.33962264150943394,
+            0.2547169811320755},
     wfWin={1.0,0.0,0.0,0.0},
     TGro=286.15) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,2},{-4,22}})));
-
   Modelica.Blocks.Math.Add solRad[4]
     "Sums up solar radiation of both directions"
     annotation (Placement(transformation(extent={{-38,22},{-28,32}})));
@@ -138,14 +144,14 @@ model TestCase600 "Test case 600"
   Modelica.Blocks.Math.Gain gain(k=0.0441)
     "Conversion to kg/s"
     annotation (Placement(transformation(extent={{-80,-37},{-66,-23}})));
-  Fluid.Sources.MassFlowSource_T ventilationIn(
+  AixLib.Fluid.Sources.MassFlowSource_T ventilationIn(
     use_m_flow_in=true,
     use_T_in=true,
     nPorts=1,
     redeclare package Medium = Modelica.Media.Air.DryAirNasa)
     "Fan"
     annotation (Placement(transformation(extent={{-54,-48},{-34,-28}})));
-  Fluid.Sources.MassFlowSource_T ventilationOut(
+  AixLib.Fluid.Sources.MassFlowSource_T ventilationOut(
     use_m_flow_in=true,
     use_T_in=false,
     nPorts=1,
@@ -160,7 +166,8 @@ model TestCase600 "Test case 600"
     tableOnFile=true,
     columns={2,3,4},
     tableName="Table",
-    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/WeatherData/WeatherData_Ashrae140_LOM.mat"))
+    fileName=Modelica.Utilities.Files.loadResource(
+    "modelica://AixLib/Resources/WeatherData/WeatherData_Ashrae140_LOM.mat"))
     "Weather data"
     annotation (Placement(transformation(extent={{-136,74},{-116,94}})));
   Modelica.Blocks.Math.Add add(k2=-1)
@@ -174,7 +181,8 @@ model TestCase600 "Test case 600"
     tableOnFile=true,
     tableName="Table",
     columns={2,3},
-    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/WeatherData/Weatherdata_ASHARE140.mat"))
+    fileName=Modelica.Utilities.Files.loadResource(
+    "modelica://AixLib/Resources/WeatherData/Weatherdata_ASHARE140.mat"))
     "Solar radiation data"
     annotation (Placement(transformation(extent={{-136,4},{-116,24}})));
   AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilRoof[1](
@@ -189,7 +197,8 @@ model TestCase600 "Test case 600"
     azi={0})
     "Calculates diffuse solar radiation on titled surface for both directions"
     annotation (Placement(transformation(extent={{-68,96},{-48,116}})));
-  AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 eqAirTempVDI(
+  AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007
+    eqAirTempVDI(
     aExt=0.6,
     wfGro=0,
     alphaWallOut=24.670000000000005,
@@ -199,7 +208,8 @@ model TestCase600 "Test case 600"
     wfWin={0},
     TGro=285.15) "Computes equivalent air temperature for roof"
     annotation (Placement(transformation(extent={{30,110},{50,130}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedTemperatureRoof
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
+    prescribedTemperatureRoof
     "Prescribed temperature for roof outdoor surface temperature"
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},rotation=-90,
     origin={67,84})));
@@ -224,7 +234,7 @@ model TestCase600 "Test case 600"
   Modelica.Blocks.Math.UnitConversions.From_degC from_degC_hea
     "Convert set temperature from degC to Kelvin"
     annotation (Placement(transformation(extent={{-4,-66},{8,-54}})));
-  Controls.Continuous.LimPID conHea(
+  AixLib.Controls.Continuous.LimPID conHea(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     yMax=1,
     yMin=0,
@@ -242,7 +252,7 @@ model TestCase600 "Test case 600"
   Modelica.Blocks.Math.UnitConversions.From_degC from_degC_coo
     "Convert set temperature from degC to Kelvin"
     annotation (Placement(transformation(extent={{-4,-92},{8,-80}})));
-  Controls.Continuous.LimPID conCoo(
+  AixLib.Controls.Continuous.LimPID conCoo(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     yMax=0,
     yMin=-1,
@@ -276,12 +286,7 @@ model TestCase600 "Test case 600"
     annotation (Placement(transformation(extent={{106,-79},{116,-68}})));
   Modelica.Blocks.Math.Gain gainPowLoa(k=0.001) "Converts to kW"
     annotation (Placement(transformation(extent={{126,-75},{138,-63}})));
-  Modelica.Blocks.Interfaces.RealOutput AnnualHeatingLoad "in MWh"
-    annotation (Placement(transformation(extent={{142,-44},{162,-24}})));
-  Modelica.Blocks.Interfaces.RealOutput AnnualCoolingLoad "in MWh"
-    annotation (Placement(transformation(extent={{142,-62},{162,-42}})));
-  Modelica.Blocks.Interfaces.RealOutput PowerLoad "in kW"
-    annotation (Placement(transformation(extent={{142,-91},{162,-71}})));
+
 equation
   connect(eqAirTemp.TEqAirWin, prescribedTemperature1.T)
     annotation (Line(
@@ -627,10 +632,12 @@ equation
   </li>
   </ul>
   </html>", info="<html>
-<p>Test Case 600 of the ASHRAE 140-2007: Calculation of heating/cooling loads for room version light excited by internal and external gains. </p>
+<p>Test Case 600 of the ASHRAE 140-2007: Calculation of heating/cooling loads
+for room version light excited by internal and external gains. </p>
 <h4>Boundary conditions</h4>
 <ul>
-<li>yearly profile for outdoor air temperature and solar radiation in hourly steps </li>
+<li>yearly profile for outdoor air temperature and solar radiation in hourly
+steps </li>
 <li>constant set temperatures of heating and cooling </li>
 <li>constant internal gains and infiltration rate </li>
 </ul>
