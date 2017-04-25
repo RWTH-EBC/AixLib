@@ -1,5 +1,5 @@
 within AixLib.FastHVAC.Interfaces;
-connector EnthalpyPort_b "Outlet connector non-Fluid"
+connector EnthalpyPort_b "Outlet enthalpy connector non-Fluid models"
   extends EnthalpyPort;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={Ellipse(
@@ -13,5 +13,12 @@ connector EnthalpyPort_b "Outlet connector non-Fluid"
           fillPattern=FillPattern.Solid)}), Documentation(info="<html>
 <p>This model defines a inlet enthalpy port for fast non fluid HVAC models</p>
 <h4>Implementation</h4>
+</html>", revisions="<html>
+<ul>
+<li>
+April 25, 2017, by Michael Mans:<br/>
+Moved to AixLib
+</li>
+</ul>
 </html>"));
 end EnthalpyPort_b;

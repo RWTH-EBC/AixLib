@@ -62,7 +62,7 @@ model Boiler "Simple boiler model"
     "Thermal port for output values (temperature, mass flow rate, specific enthalpy, constant specific heat capacity)"
     annotation (Placement(transformation(extent={{40,-10},{60,10}}),
         iconTransformation(extent={{40,-10},{60,10}})));
-  FastHVAC.BaseClass.WorkingFluid boilerFluid(
+  BaseClasses.WorkingFluid        boilerFluid(
   medium=medium,
   T0=T_start,
   m_fluid=medium.rho*paramBoiler.volume)

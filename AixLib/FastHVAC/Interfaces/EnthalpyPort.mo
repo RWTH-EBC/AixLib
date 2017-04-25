@@ -1,5 +1,5 @@
 within AixLib.FastHVAC.Interfaces;
-partial connector EnthalpyPort
+partial connector EnthalpyPort "Enthalpy port for 1-dim. enthalpy transfer"
 
   Modelica.SIunits.Temperature T "Port temperature";
   flow Modelica.SIunits.MassFlowRate m_flow
@@ -8,12 +8,12 @@ partial connector EnthalpyPort
   Modelica.SIunits.SpecificHeatCapacity c "Constant specific heat capacity";
 
   annotation (Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<h4><span style=\"color:#008000\">Assumptions</span></h4>
-<h4><span style=\"color:#008000\">Known Limitations</span></h4>
-<h4><span style=\"color:#008000\">Concept</span></h4>
-<p><br><b><font style=\"color: #008000; \">References</font></b></p>
-<h4><span style=\"color:#008000\">Example Results</span></h4>
+</html>", revisions="<html>
+<ul>
+<li>
+April 25, 2017, by Michael Mans:<br/>
+Moved to AixLib
+</li>
+</ul>
 </html>"));
 end EnthalpyPort;

@@ -1,7 +1,8 @@
 within AixLib.FastHVAC;
-package BaseClass 
+package BaseClasses
 extends Modelica.Icons.BasesPackage;
 
 
+
   annotation ();
-end BaseClass;
+end BaseClasses;
