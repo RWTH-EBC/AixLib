@@ -2,8 +2,8 @@ within AixLib.Fluid.FixedResistances;
 model HydraulicResistance
   "Simple model for a hydraulic resistance using a pressure loss factor"
   extends AixLib.Fluid.Interfaces.PartialTwoPortTransport;
-  parameter Real zeta=1.0 "Pressure loss factor for flow of port_a -> port_b";
-  parameter Modelica.SIunits.Length D=0.05 "Diameter of component";
+  parameter Real zeta(min=0) "Pressure loss factor for flow of port_a -> port_b";
+  parameter Modelica.SIunits.Length D "Diameter of component";
 protected
   Modelica.SIunits.Density rho "Density of the fluid";
 equation
@@ -13,9 +13,9 @@ equation
     inStream(port_a.Xi_outflow)));
   port_a.h_outflow = inStream(port_b.h_outflow);
   port_b.h_outflow = inStream(port_a.h_outflow);
-  dp = sign(m_flow)*8*zeta/(Modelica.Constants.pi*Modelica.Constants.pi*D*D*D*D
-    *rho)*m_flow*m_flow
-    "multiplication instead of exponent term for speed improvement";
+  dp = sign(m_flow)*8*zeta/(Modelica.Constants.pi*Modelica.Constants.pi*D*D*D*D*
+    rho)*m_flow*m_flow
+    "Multiplication instead of exponent term for speed improvement";
   annotation (Icon(graphics={Rectangle(
           extent={{-80,46},{80,-34}},
           lineColor={0,0,255},
@@ -40,7 +40,8 @@ equation
   </ul>
  </html>", info="<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>Very simple model for a hydraulic resistance with the pressureloss modelled with a pressure loss factor, zeta.</p>
+ <p>Very simple model for a hydraulic resistance with the pressureloss modelled 
+ with a pressure loss factor, zeta.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
  <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\"
     alt=\"stars: 3 out of 5\"/></p>
