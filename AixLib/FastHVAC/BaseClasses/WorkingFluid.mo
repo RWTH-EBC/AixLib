@@ -1,24 +1,24 @@
 within AixLib.FastHVAC.BaseClasses;
 model WorkingFluid
 
-   parameter FastHVAC.Media.BaseClass.MediumSimple medium=
-      FastHVAC.Media.WaterSimple()
+  parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple medium=AixLib.FastHVAC.Media.WaterSimple()
     "Mediums charastics (heat capacity, density, thermal conductivity)";
    parameter Modelica.SIunits.Temperature T0 " Initial temperature";
    parameter Modelica.SIunits.Mass m_fluid "Mass of working fluid";
 
-  EnergyBalance energyBalance
+  AixLib.FastHVAC.BaseClasses.EnergyBalance energyBalance
     annotation (Placement(transformation(extent={{-34,-30},{26,30}})));
-  FastHVAC.Interfaces.EnthalpyPort_b enthalpyPort_b
+  AixLib.FastHVAC.Interfaces.EnthalpyPort_b enthalpyPort_b
     "Enthalpie output port includes the parameter temperature, specific enthalpy, specific heat capacity and mass flow"
     annotation (Placement(transformation(extent={{80,-10},{100,10}})));
-  FastHVAC.Interfaces.EnthalpyPort_a enthalpyPort_a
+  AixLib.FastHVAC.Interfaces.EnthalpyPort_a enthalpyPort_a
     "Enthalpie input port includes the parameter temperature, specific enthalpy, specific heat capacity and mass flow"
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(
    C=m_fluid*medium.c, T(start=T0, fixed=true))
     annotation (Placement(transformation(extent={{-24,42},{16,82}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort
+  "Heat transfer into the working fluid"
     annotation (Placement(transformation(extent={{-10,84},{10,104}})));
 equation
   connect(energyBalance.enthalpyPort_b, enthalpyPort_b) annotation (Line(

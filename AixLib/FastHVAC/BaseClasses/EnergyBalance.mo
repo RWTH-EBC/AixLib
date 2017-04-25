@@ -1,11 +1,11 @@
 within AixLib.FastHVAC.BaseClasses;
 model EnergyBalance "Base class depicts energy and mass balances"
 
-  FastHVAC.Interfaces.EnthalpyPort_a enthalpyPort_a
+  AixLib.FastHVAC.Interfaces.EnthalpyPort_a enthalpyPort_a
     "Enthalpie input port includes the parameter temperature, specific enthalpy, specific heat capacity and mass flow"
     annotation (Placement(transformation(extent={{-100,-20},{-40,38}}),
         iconTransformation(extent={{-100,-20},{-60,20}})));
-  FastHVAC.Interfaces.EnthalpyPort_b enthalpyPort_b
+  AixLib.FastHVAC.Interfaces.EnthalpyPort_b enthalpyPort_b
     "Enthalpie output port includes the parameter temperature, specific enthalpy, specific heat capacity and mass flow"
     annotation (Placement(transformation(extent={{40,-20},{100,40}}),
         iconTransformation(extent={{60,-20},{100,20}})));
