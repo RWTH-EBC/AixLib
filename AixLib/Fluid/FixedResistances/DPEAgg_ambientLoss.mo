@@ -363,6 +363,8 @@ equation
 </html>",
         revisions="<html>
 <ul>
+<li><i>April 25, 2017 </i>by Tobias Blacha:<br>Parameter isEmbedded added and correction of connections for different applications</li>
+<li><i>April 25, 2017 </i>by Tobias Blacha:<br>Moved into AixLib</li>
 <li><i>March 18, 2015 </i>by Roozbeh Sangi:<br>Outputs for stored energy and temperature added</li>
 <li><i>November 26, 2014&nbsp;</i> by Roozbeh Sangi:<br>Updated connectors to EBC Library 2.2, Updated documentation, Added example</li>
 <li><i>May 19, 2014&nbsp;</i> by Roozbeh Sangi:<br>Added to the HVAC library</li>
