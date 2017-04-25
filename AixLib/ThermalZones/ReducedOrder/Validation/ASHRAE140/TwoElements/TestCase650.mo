@@ -6,7 +6,6 @@ model TestCase650 "Test case 650"
     annotation (Placement(transformation(extent={{142,-63},{162,-43}})));
   Modelica.Blocks.Interfaces.RealOutput PowerLoad "in kW"
     annotation (Placement(transformation(extent={{142,-92},{162,-72}})));
-
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
@@ -135,14 +134,14 @@ model TestCase650 "Test case 650"
   Modelica.Blocks.Math.Gain gain(k=0.0441)
     "Conversion to kg/s"
     annotation (Placement(transformation(extent={{-80,-37},{-66,-23}})));
-  Fluid.Sources.MassFlowSource_T ventilationIn(
+  AixLib.Fluid.Sources.MassFlowSource_T ventilationIn(
     use_m_flow_in=true,
     use_T_in=true,
     nPorts=1,
     redeclare package Medium = Modelica.Media.Air.DryAirNasa)
     "Fan"
     annotation (Placement(transformation(extent={{-54,-48},{-34,-28}})));
-  Fluid.Sources.MassFlowSource_T ventilationOut(
+  AixLib.Fluid.Sources.MassFlowSource_T ventilationOut(
     use_m_flow_in=true,
     use_T_in=false,
     nPorts=1,
@@ -156,7 +155,7 @@ model TestCase650 "Test case 650"
   Modelica.Blocks.Math.UnitConversions.From_degC from_degC_coo
     "Convert set temperature from degC to Kelvin"
     annotation (Placement(transformation(extent={{-6,-92},{6,-80}})));
-  Controls.Continuous.LimPID conCoo(
+  AixLib.Controls.Continuous.LimPID conCoo(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     yMax=0,
     yMin=-1,
@@ -171,7 +170,8 @@ model TestCase650 "Test case 650"
     tableOnFile=true,
     columns={2,3,4},
     tableName="Table",
-    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/WeatherData/WeatherData_Ashrae140_LOM.mat"))
+    fileName=Modelica.Utilities.Files.loadResource(
+    "modelica://AixLib/Resources/WeatherData/WeatherData_Ashrae140_LOM.mat"))
     "Weather data"
     annotation (Placement(transformation(extent={{-136,74},{-116,94}})));
   Modelica.Blocks.Math.Add add(k2=-1)
@@ -185,7 +185,8 @@ model TestCase650 "Test case 650"
     tableOnFile=true,
     tableName="Table",
     columns={2,3},
-    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/WeatherData/Weatherdata_ASHARE140.mat"))
+    fileName=Modelica.Utilities.Files.loadResource(
+    "modelica://AixLib/Resources/WeatherData/Weatherdata_ASHARE140.mat"))
     "Solar radiation data"
     annotation (Placement(transformation(extent={{-136,4},{-116,24}})));
   Modelica.Blocks.Continuous.Integrator integrator
@@ -220,6 +221,7 @@ model TestCase650 "Test case 650"
     table=[0,11.21; 25200,11.21; 25200,0.41; 64800,0.41; 64800,11.21; 86400,
         11.21])
     annotation (Placement(transformation(extent={{-98,-36},{-86,-24}})));
+
 equation
   connect(eqAirTemp.TEqAirWin, prescribedTemperature1.T)
     annotation (Line(
@@ -504,10 +506,12 @@ equation
   </li>
   </ul>
   </html>", info="<html>
-<p>Test Case 650 of the ASHRAE 140-2007: Calculation of heating/cooling loads for room version light excited by internal and external gains. </p>
+<p>Test Case 650 of the ASHRAE 140-2007: Calculation of heating/cooling loads
+for room version light excited by internal and external gains. </p>
 <h4>Boundary conditions</h4>
 <ul>
-<li>yearly profile for outdoor air temperature and solar radiation in hourly steps </li>
+<li>yearly profile for outdoor air temperature and solar radiation in hourly
+steps </li>
 <li>no heating and daily profile for set temperatures of cooling </li>
 <li>constant internal gains and daily profile for infiltration rate </li>
 </ul>
