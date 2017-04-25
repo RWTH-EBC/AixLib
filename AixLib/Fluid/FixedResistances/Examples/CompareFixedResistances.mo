@@ -41,7 +41,7 @@ model CompareFixedResistances
     m_flow_small=0.001,
     dp_start=P.offset - PAtm.k,
     m_flow_start=0,
-    D=sqrt(1/(sqrt(995.586)*Modelica.Constants.pi)))
+    diameter=sqrt(1/(sqrt(995.586)*Modelica.Constants.pi)))
     annotation (Placement(transformation(extent={{-28,-10},{-8,10}})));
   AixLib.Fluid.Sensors.MassFlowRate masFlo2(redeclare package Medium = Medium)
     "Mass flow rate sensor" annotation (Placement(transformation(extent={{0,-10},
