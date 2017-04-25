@@ -26,7 +26,7 @@ equation
           lineColor={0,0,255},
           fillColor={255,255,0},
           fillPattern=FillPattern.Solid,
-          textString="Zeta")}), Documentation(revisions="<html>
+          textString="Zeta=%zeta")}), Documentation(revisions="<html>
   <ul>
   <li><i>April 2016&nbsp;</i>
      by Peter Matthes:<br/>
