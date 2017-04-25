@@ -2,23 +2,23 @@ within AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements;
 model TestCase600 "Test case 600"
   extends Modelica.Icons.Example;
 
-  Modelica.Blocks.Interfaces.RealOutput AnnualHeatingLoad "in MWh"
+  Modelica.Blocks.Interfaces.RealOutput annualHeatingLoad "in MWh"
     annotation (Placement(transformation(extent={{142,-45},{162,-25}})));
-  Modelica.Blocks.Interfaces.RealOutput AnnualCoolingLoad "in MWh"
+  Modelica.Blocks.Interfaces.RealOutput annualCoolingLoad "in MWh"
     annotation (Placement(transformation(extent={{142,-63},{162,-43}})));
-  Modelica.Blocks.Interfaces.RealOutput PowerLoad "in kW"
+  Modelica.Blocks.Interfaces.RealOutput powerLoad "in kW"
     annotation (Placement(transformation(extent={{142,-92},{162,-72}})));
-  Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationN "in kWh/m2"
+  Modelica.Blocks.Interfaces.RealOutput incidentSolarRadiationN "in kWh/m2"
     annotation (Placement(transformation(extent={{139,78},{159,98}})));
-  Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationE "in kWh/m2"
+  Modelica.Blocks.Interfaces.RealOutput incidentSolarRadiationE "in kWh/m2"
     annotation (Placement(transformation(extent={{139,62},{159,82}})));
-  Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationW "in kWh/m2"
+  Modelica.Blocks.Interfaces.RealOutput incidentSolarRadiationW "in kWh/m2"
     annotation (Placement(transformation(extent={{140,29},{160,49}})));
-  Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationS "in kWh/m2"
+  Modelica.Blocks.Interfaces.RealOutput incidentSolarRadiationS "in kWh/m2"
     annotation (Placement(transformation(extent={{139,46},{159,66}})));
-  Modelica.Blocks.Interfaces.RealOutput IncidentSolarRadiationHor "in kWh/m2"
+  Modelica.Blocks.Interfaces.RealOutput incidentSolarRadiationHor "in kWh/m2"
     annotation (Placement(transformation(extent={{141,12},{161,32}})));
-  Modelica.Blocks.Interfaces.RealOutput TransmittedSolarRadiation_room
+  Modelica.Blocks.Interfaces.RealOutput transmittedSolarRadiationRoom
     "in kWh/m2"
     annotation (Placement(transformation(extent={{141,-28},{162,-8}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
@@ -471,15 +471,15 @@ equation
           {-26,92},{58,92},{58,74},{67.9,74}}, color={0,0,127}));
   connect(integratorSol.y, gainSol.u)
     annotation (Line(points={{80.55,74},{86.8,74}}, color={0,0,127}));
-  connect(gainSol[1].y, IncidentSolarRadiationN) annotation (Line(points={{100.6,
+  connect(gainSol[1].y, incidentSolarRadiationN) annotation (Line(points={{100.6,
           74},{124,74},{124,88},{149,88}}, color={0,0,127}));
-  connect(gainSol[2].y, IncidentSolarRadiationE) annotation (Line(points={{100.6,
+  connect(gainSol[2].y, incidentSolarRadiationE) annotation (Line(points={{100.6,
           74},{124,74},{124,72},{149,72}}, color={0,0,127}));
-  connect(gainSol[3].y, IncidentSolarRadiationS) annotation (Line(points={{100.6,
+  connect(gainSol[3].y, incidentSolarRadiationS) annotation (Line(points={{100.6,
           74},{124,74},{124,56},{149,56}}, color={0,0,127}));
-  connect(gainSol[4].y, IncidentSolarRadiationHor) annotation (Line(points={{100.6,
+  connect(gainSol[4].y, incidentSolarRadiationHor) annotation (Line(points={{100.6,
           74},{124,74},{124,22},{151,22}}, color={0,0,127}));
-  connect(gainSol[5].y, IncidentSolarRadiationW) annotation (Line(points={{100.6,
+  connect(gainSol[5].y, incidentSolarRadiationW) annotation (Line(points={{100.6,
           74},{124,74},{124,39},{150,39}}, color={0,0,127}));
   connect(corGDoublePane.solarRadWinTrans[1], absCoeffA.u) annotation (Line(
         points={{27,79.2},{40,79.2},{40,80},{54,80},{54,62},{104,62},{104,6},{107.8,
@@ -489,7 +489,7 @@ equation
           142.8,6},{138.55,6}}, color={0,0,127}));
   connect(integratorSolRoo.u, absCoeffA.y)
     annotation (Line(points={{125.9,6},{121.6,6}}, color={0,0,127}));
-  connect(gainSolRoo.y, TransmittedSolarRadiation_room) annotation (Line(points={{156.6,6},
+  connect(gainSolRoo.y, transmittedSolarRadiationRoom) annotation (Line(points={{156.6,6},
           {158,6},{158,-6},{110,-6},{110,-18},{151.5,-18}},           color={0,0,
           127}));
   connect(gain2.y, multiSum.u[1]) annotation (Line(points={{118.5,-90.5},{120,
@@ -498,11 +498,11 @@ equation
           -66},{86,-74},{86,-74.5},{96,-74.5},{105,-74.5}}, color={0,0,127}));
   connect(gain3.y, multiSum.u[2]) annotation (Line(points={{116.5,-74.5},{
           121.25,-74.5},{121.25,-93.75},{126,-93.75}}, color={0,0,127}));
-  connect(gainIntHea.y, AnnualHeatingLoad) annotation (Line(points={{138.6,-35},
+  connect(gainIntHea.y, annualHeatingLoad) annotation (Line(points={{138.6,-35},
           {140.3,-35},{152,-35}}, color={0,0,127}));
   connect(gainIntHea.u, integrator1.y) annotation (Line(points={{124.8,-35},{
           121.4,-35},{118.55,-35}}, color={0,0,127}));
-  connect(gainIntCoo.y, AnnualCoolingLoad) annotation (Line(points={{138.6,-53},
+  connect(gainIntCoo.y, annualCoolingLoad) annotation (Line(points={{138.6,-53},
           {141.3,-53},{152,-53}}, color={0,0,127}));
   connect(gainIntCoo.u, integrator.y) annotation (Line(points={{124.8,-53},{
           121.4,-53},{118.55,-53}}, color={0,0,127}));
@@ -512,7 +512,7 @@ equation
           -62},{105.9,-62},{105.9,-53}}, color={0,0,127}));
   connect(multiSum.y, gainPowLoa.u) annotation (Line(points={{136.85,-92},{138,
           -92},{138,-82},{124.8,-82},{124.8,-70}}, color={0,0,127}));
-  connect(gainPowLoa.y, PowerLoad) annotation (Line(points={{138.6,-70},{140,
+  connect(gainPowLoa.y, powerLoad) annotation (Line(points={{138.6,-70},{140,
           -70},{140,-82},{152,-82}}, color={0,0,127}));
   annotation (experiment(
       StopTime=3.1536e+007,

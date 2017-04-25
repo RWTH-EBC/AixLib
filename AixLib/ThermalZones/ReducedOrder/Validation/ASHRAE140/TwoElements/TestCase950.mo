@@ -2,9 +2,9 @@ within AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.TwoElements;
 model TestCase950 "Test case 950"
   extends Modelica.Icons.Example;
 
-  Modelica.Blocks.Interfaces.RealOutput AnnualCoolingLoad "in MWh"
+  Modelica.Blocks.Interfaces.RealOutput annualCoolingLoad "in MWh"
     annotation (Placement(transformation(extent={{142,-63},{162,-43}})));
-  Modelica.Blocks.Interfaces.RealOutput PowerLoad "in kW"
+  Modelica.Blocks.Interfaces.RealOutput powerLoad "in kW"
     annotation (Placement(transformation(extent={{142,-92},{162,-72}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
@@ -410,7 +410,7 @@ equation
           -94},{100,-94},{100,-90.5},{107,-90.5}}, color={0,0,127}));
   connect(gain2.y, multiSum.u[1]) annotation (Line(points={{118.5,-90.5},{120,
           -90.5},{120,-92},{126,-92}},       color={0,0,127}));
-  connect(gainIntCoo.y, AnnualCoolingLoad) annotation (Line(points={{138.6,-53},
+  connect(gainIntCoo.y, annualCoolingLoad) annotation (Line(points={{138.6,-53},
           {141.3,-53},{152,-53}}, color={0,0,127}));
   connect(gainIntCoo.u, integrator.y) annotation (Line(points={{124.8,-53},{
           121.4,-53},{118.55,-53}}, color={0,0,127}));
@@ -418,7 +418,7 @@ equation
           -62},{105.9,-62},{105.9,-53}}, color={0,0,127}));
   connect(multiSum.y, gainPowLoa.u) annotation (Line(points={{136.85,-92},{138,
           -92},{138,-82},{124.8,-82},{124.8,-70}}, color={0,0,127}));
-  connect(gainPowLoa.y, PowerLoad) annotation (Line(points={{138.6,-70},{140,
+  connect(gainPowLoa.y, powerLoad) annotation (Line(points={{138.6,-70},{140,
           -70},{140,-82},{152,-82}}, color={0,0,127}));
   connect(from_degC_coo.u,SouTSetC. y[1])
     annotation (Line(points={{-7.2,-86},{-11.4,-86}}, color={0,0,127}));

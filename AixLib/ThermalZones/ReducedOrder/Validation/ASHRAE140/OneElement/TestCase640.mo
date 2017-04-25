@@ -2,11 +2,11 @@ within AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.OneElement;
 model TestCase640 "Test case 640"
   extends Modelica.Icons.Example;
 
-  Modelica.Blocks.Interfaces.RealOutput AnnualHeatingLoad "in MWh"
+  Modelica.Blocks.Interfaces.RealOutput annualHeatingLoad "in MWh"
     annotation (Placement(transformation(extent={{142,-45},{162,-25}})));
-  Modelica.Blocks.Interfaces.RealOutput AnnualCoolingLoad "in MWh"
+  Modelica.Blocks.Interfaces.RealOutput annualCoolingLoad "in MWh"
     annotation (Placement(transformation(extent={{142,-63},{162,-43}})));
-  Modelica.Blocks.Interfaces.RealOutput PowerLoad "in kW"
+  Modelica.Blocks.Interfaces.RealOutput powerLoad "in kW"
     annotation (Placement(transformation(extent={{142,-92},{162,-72}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
@@ -441,11 +441,11 @@ equation
           {120,-90.25},{126,-90.25}},        color={0,0,127}));
   connect(gain3.y,multiSum. u[2]) annotation (Line(points={{116.5,-74.5},{121.25,
           -74.5},{121.25,-93.75},{126,-93.75}},        color={0,0,127}));
-  connect(gainIntHea.y,AnnualHeatingLoad)  annotation (Line(points={{138.6,-35},
+  connect(gainIntHea.y,annualHeatingLoad)  annotation (Line(points={{138.6,-35},
           {140.3,-35},{152,-35}}, color={0,0,127}));
   connect(gainIntHea.u,integrator1. y) annotation (Line(points={{124.8,-35},{121.4,
           -35},{118.55,-35}},       color={0,0,127}));
-  connect(gainIntCoo.y,AnnualCoolingLoad)  annotation (Line(points={{138.6,-53},
+  connect(gainIntCoo.y,annualCoolingLoad)  annotation (Line(points={{138.6,-53},
           {141.3,-53},{152,-53}}, color={0,0,127}));
   connect(gainIntCoo.u,integrator. y) annotation (Line(points={{124.8,-53},{121.4,
           -53},{118.55,-53}},       color={0,0,127}));
@@ -455,7 +455,7 @@ equation
           {105.9,-62},{105.9,-53}},      color={0,0,127}));
   connect(multiSum.y,gainPowLoa. u) annotation (Line(points={{136.85,-92},{138,-92},
           {138,-82},{124.8,-82},{124.8,-70}},      color={0,0,127}));
-  connect(gainPowLoa.y,PowerLoad)  annotation (Line(points={{138.6,-70},{140,-70},
+  connect(gainPowLoa.y,powerLoad)  annotation (Line(points={{138.6,-70},{140,-70},
           {140,-82},{152,-82}},      color={0,0,127}));
   connect(heatFlowSensor.port_a, thermalZoneOneElement.intGainsConv)
     annotation (Line(points={{92,-60},{94,-60},{94,36},{92,36}}, color={191,0,0}));

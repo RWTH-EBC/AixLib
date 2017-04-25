@@ -2,7 +2,7 @@ within AixLib.ThermalZones.ReducedOrder.Validation.ASHRAE140.ThreeElements;
 model TestCase950FF "Test case 950 free float"
   extends Modelica.Icons.Example;
 
-  Modelica.Blocks.Interfaces.RealOutput FreeFloatTemperature(unit="degC")
+  Modelica.Blocks.Interfaces.RealOutput freeFloatTemperature(unit="degC")
     "Free floating temperature"
     annotation (Placement(transformation(extent={{124,66},{144,86}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
@@ -361,7 +361,7 @@ equation
           14},{-94,64},{-102,64},{-102,65},{-99,65}}, color={0,0,127}));
   connect(gain.u, InfVen.y[1]) annotation (Line(points={{-81.4,-30},{-85.4,-30},
           {-85.4,-30}}, color={0,0,127}));
-  connect(to_degC.y,FreeFloatTemperature)  annotation (Line(points={{134.6,46},{
+  connect(to_degC.y,freeFloatTemperature)  annotation (Line(points={{134.6,46},{
           142,46},{142,64},{114,64},{114,76},{134,76}},  color={0,0,127}));
   connect(thermalZoneThreeElements.TAir, to_degC.u) annotation (Line(points={{93,48},
           {106,48},{106,46},{120.8,46}}, color={0,0,127}));
