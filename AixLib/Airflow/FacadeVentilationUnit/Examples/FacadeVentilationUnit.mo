@@ -1,5 +1,5 @@
-within AixLib.Airflow.FacadeVentilationUnit;
-model Example
+within AixLib.Airflow.FacadeVentilationUnit.Examples;
+model FacadeVentilationUnit
   import AixLib;
   extends Modelica.Icons.Example;
 
@@ -146,4 +146,4 @@ equation
             {100,100}})),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{200,100}})),
     experiment(StopTime=10000));
-end Example;
+end FacadeVentilationUnit;
