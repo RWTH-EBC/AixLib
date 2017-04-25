@@ -51,5 +51,6 @@ equation
 <p>Values for pressure loss factor zeta can be easily found in tables. </p>
 <p><b><span style=\"color: #008000;\">Example Results</span></b> </p>
 <p><a href=\"AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances\">AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances</a> </p>
+<p><a href=\"AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances\">AixLib.Fluid.FixedResistances.Examples.PerformanceHydraulicResistance2</a> </p>
 </html>"));
 end HydraulicResistance;
