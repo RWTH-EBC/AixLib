@@ -29,16 +29,14 @@ equation
       points={{-28,0},{-90,0}},
       color={176,0,0},
       smooth=Smooth.None));
-  connect(heatCapacitor.port, energyBalance.therm) annotation (Line(
-      points={{-4,42},{-4,24}},
-      color={191,0,0},
-      smooth=Smooth.None));
   connect(heatCapacitor.port, heatPort) annotation (Line(
       points={{-4,42},{26,42},{26,88},{0,88},{0,94}},
       color={191,0,0},
       smooth=Smooth.None));
+  connect(heatCapacitor.port, energyBalance.heatPort_a) annotation (Line(points=
+         {{-4,42},{-4,42},{-4,24},{-4,24}}, color={191,0,0}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}), graphics), Icon(coordinateSystem(
+            -100},{100,100}})),           Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={
           Text(
           extent={{-150,-82},{150,-122}},
@@ -58,12 +56,19 @@ equation
 <p>WorkingFluid is based on the models
 <code>FastHVAC.BaseClasses.EnergyBalance</code>
 and 
-<a href=\"modelica:/Modelica.Thermal.HeatTransfer.Components.HeatCapacitor\">HeatCapacitor</a>.
-The heat transfer between through the heatPort is ideal. </p>
-</html>",
-    revisions="<html>
+<a href=\"modelica:/Modelica.Thermal.HeatTransfer.Components.HeatCapacitor\">HeatCapacitor</a>.<br/>
+The heat transfer through the heatPort is ideal. It is used for FastHVAC fluid energy
+balances.</p>
+</html>", revisions="<html>
 <ul>
-<li><i>February 16, 2015&nbsp;</i> by Konstantin Finkbeiner:<br/>Implemented</li>
+<li>
+<i> April 25, 2017</i>, by Michael Mans:<br/>
+Moved to AixLib
+</li>
+<li>
+<i>February 16, 2015&nbsp;</i> by Konstantin Finkbeiner:<br/>
+Implemented
+</li>
 </ul></p>
 </html> "));
 end WorkingFluid;
