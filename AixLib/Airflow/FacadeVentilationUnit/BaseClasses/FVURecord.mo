@@ -2,7 +2,7 @@ within AixLib.Airflow.FacadeVentilationUnit.BaseClasses;
 record FVURecord
   extends Modelica.Icons.Record;
   extends FVUBaseRecord;
-  annotation(Documentation(info = "<html>
+  annotation (Documentation(info="<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>This is the base definition is zone records used in <a href=\"AixLib.Building.LowOrder.ThermalZone\">AixLib.Building.LowOrder.ThermalZone</a>. All necessary parameters are defined here. Most values should be overwritten for a specific building, some are default values that might be appropriate in most cases. However, fell free to overwrite them in your own records.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>

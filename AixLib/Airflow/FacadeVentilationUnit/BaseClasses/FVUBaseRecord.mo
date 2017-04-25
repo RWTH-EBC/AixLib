@@ -73,8 +73,7 @@ record FVUBaseRecord "Base record for the facade ventilation unit model"
  </table>
  <h4><span style=\"color:#008000\">References</span></h4>
  <p>Base data definition for record to be used in model <a href=\"AixLib.Building.LowOrder.ThermalZone\">AixLib.Building.LowOrder.ThermalZone</a></p>
- </html>",
-       revisions="<html>
+ </html>", revisions="<html>
 <ul>
 <li><i>June, 2015 </i>by Moitz Lauster:
 <br>Added new parameters to use further calculation cores.</li>

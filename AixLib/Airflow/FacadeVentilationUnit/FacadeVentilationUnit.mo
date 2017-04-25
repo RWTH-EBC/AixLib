@@ -2,19 +2,18 @@ within AixLib.Airflow.FacadeVentilationUnit;
 model FacadeVentilationUnit
   "Facade Ventilation Unit (FVU) equipped with a recuperator"
 
-  parameter AixLib.Airflow.FacadeVentilationUnit.BaseClasses.FVUBaseRecord FVUParam=
-      BaseClasses.FVUBaseRecord();
+  parameter AixLib.Airflow.FacadeVentilationUnit.BaseClasses.FVUBaseRecord
+    FVUParam=BaseClasses.FVUBaseRecord();
 
   parameter Modelica.SIunits.ThermodynamicTemperature T_start=273.15 + 20
     "Initial temperature in unit";
 
- replaceable package Water =
-      Modelica.Media.Water.ConstantPropertyLiquidWater
+  replaceable package Water = Modelica.Media.Water.ConstantPropertyLiquidWater
     "Water Model in the system";
- replaceable package Air = AixLib.Media.Air "Air Model in the system";
+  replaceable package Air = AixLib.Media.Air "Air Model in the system";
 
 protected
-  parameter Real valveRiseTime = 200;
+  parameter Real valveRiseTime=200;
 
 public
   BaseClasses.SetPower fanExhaustAir(
@@ -89,16 +88,16 @@ public
         extent={{-16,-16},{16,16}},
         rotation=270,
         origin={54,96})));
-  Modelica.Fluid.Interfaces.FluidPort_b Heater_Return(redeclare package Medium =
-        Water)
+  Modelica.Fluid.Interfaces.FluidPort_b Heater_Return(redeclare package Medium
+      = Water)
     "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{82,90},{102,110}})));
   Modelica.Fluid.Interfaces.FluidPort_a Heater_Flow(redeclare package Medium =
         Water)
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{112,90},{132,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Cooler_Return(redeclare package Medium =
-        Water)
+  Modelica.Fluid.Interfaces.FluidPort_b Cooler_Return(redeclare package Medium
+      = Water)
     "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{152,90},{172,110}})));
   Modelica.Fluid.Interfaces.FluidPort_a Cooler_Flow(redeclare package Medium =
@@ -106,16 +105,18 @@ public
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{182,90},{202,110}})));
   Modelica.Fluid.Sensors.Temperature T_FreshAir(redeclare package Medium = Air)
-    annotation (Placement(transformation(extent={{-8,-6},{8,6}},
+    annotation (Placement(transformation(
+        extent={{-8,-6},{8,6}},
         rotation=180,
         origin={-140,-82})));
   Modelica.Fluid.Sensors.Temperature T_OutgoingExhaustAir(redeclare package
-      Medium = Air)
-    annotation (Placement(transformation(extent={{-8,-6},{8,6}},
+      Medium = Air) annotation (Placement(transformation(
+        extent={{-8,-6},{8,6}},
         rotation=0,
         origin={-134,44})));
   Modelica.Fluid.Sensors.Temperature T_SupplyAir(redeclare package Medium = Air)
-    annotation (Placement(transformation(extent={{-8,-6},{8,6}},
+    annotation (Placement(transformation(
+        extent={{-8,-6},{8,6}},
         rotation=180,
         origin={188,2})));
   Modelica.Fluid.Sensors.Temperature T_AfterHeatRecovery(redeclare package
@@ -140,24 +141,24 @@ public
         extent={{-17,-17},{17,17}},
         rotation=270,
         origin={3,97})));
-  Modelica.Blocks.Math.Add add1(
-                               k1=-1)
+  Modelica.Blocks.Math.Add add1(k1=-1)
     annotation (Placement(transformation(extent={{-65,47},{-55,57}})));
-  Modelica.Blocks.Sources.RealExpression realExpression1(
-                                                        y=1)
-    annotation (Placement(transformation(extent={{-6.5,-8},{6.5,8}},
+  Modelica.Blocks.Sources.RealExpression realExpression1(y=1) annotation (
+      Placement(transformation(
+        extent={{-6.5,-8},{6.5,8}},
         rotation=180,
         origin={-59.5,30})));
   Modelica.Fluid.Sensors.Temperature T_Mix(redeclare package Medium = Air)
     annotation (Placement(transformation(extent={{32,42},{48,54}})));
-  Modelica.Fluid.Sensors.Temperature T_AfterFan(redeclare package Medium =
-        Air) annotation (Placement(transformation(extent={{70,42},{86,54}})));
+  Modelica.Fluid.Sensors.Temperature T_AfterFan(redeclare package Medium = Air)
+    annotation (Placement(transformation(extent={{70,42},{86,54}})));
   inner Modelica.Fluid.System system
     annotation (Placement(transformation(extent={{180,-100},{200,-80}})));
-  AixLib.Fluid.FixedResistances.FixedResistanceDpM res(m_flow_nominal=FVUParam.m2_flow_nominal_heater,
-      dp_nominal=100, redeclare package Medium =
-        Air)
-    annotation (Placement(transformation(extent={{-5,-5},{5,5}},
+  AixLib.Fluid.FixedResistances.FixedResistanceDpM res(
+    m_flow_nominal=FVUParam.m2_flow_nominal_heater,
+    dp_nominal=100,
+    redeclare package Medium = Air) annotation (Placement(transformation(
+        extent={{-5,-5},{5,5}},
         rotation=180,
         origin={-141,26})));
   Modelica.Blocks.Interfaces.RealOutput SupplyTemperature annotation (Placement(
@@ -213,10 +214,9 @@ public
         extent={{-9,-9},{9,9}},
         rotation=0,
         origin={-112,-68})));
-  AixLib.Fluid.HeatExchangers.ConstantEffectiveness recuperator(redeclare
-      package Medium1 =
-        Air, redeclare package Medium2 =
-        Air,
+  AixLib.Fluid.HeatExchangers.ConstantEffectiveness recuperator(
+    redeclare package Medium1 = Air,
+    redeclare package Medium2 = Air,
     eps=0.6,
     m1_flow_nominal=FVUParam.m2_flow_nominal_heater,
     m2_flow_nominal=FVUParam.m2_flow_nominal_heater,
@@ -226,18 +226,17 @@ public
   Modelica.Fluid.Vessels.ClosedVolume volume(
     nPorts=4,
     use_portsData=false,
-    V=0.01, redeclare package Medium =
-        Air,
-    T_start=T_start)
-             annotation (Placement(transformation(
+    V=0.01,
+    redeclare package Medium = Air,
+    T_start=T_start) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={18,14})));
   AixLib.Fluid.FixedResistances.FixedResistanceDpM res1(
-                                                       m_flow_nominal=FVUParam.m2_flow_nominal_heater,
-      dp_nominal=100, redeclare package Medium =
-        Air)
-    annotation (Placement(transformation(extent={{-5,-5},{5,5}},
+    m_flow_nominal=FVUParam.m2_flow_nominal_heater,
+    dp_nominal=100,
+    redeclare package Medium = Air) annotation (Placement(transformation(
+        extent={{-5,-5},{5,5}},
         rotation=180,
         origin={-61,-68})));
   Modelica.Blocks.Interfaces.RealInput damperFreshAirOpening
@@ -249,7 +248,7 @@ public
   AixLib.Fluid.Actuators.Valves.TwoWayQuickOpening heatingValve(
     m_flow_nominal=0.05,
     redeclare package Medium = Water,
-    dpValve_nominal=200)              annotation (Placement(transformation(
+    dpValve_nominal=200) annotation (Placement(transformation(
         extent={{-9,9},{9,-9}},
         rotation=90,
         origin={122,60})));
@@ -303,8 +302,9 @@ equation
 
   connect(T_Mix.port, fanSupplyAir.port_a)
     annotation (Line(points={{40,42},{40,26},{52,26}}, color={0,127,255}));
-  connect(OutgoingExhaustAir, res.port_b)
-    annotation (Line(points={{-160,26},{-146,26}}, color={0,127,255},
+  connect(OutgoingExhaustAir, res.port_b) annotation (Line(
+      points={{-160,26},{-146,26}},
+      color={0,127,255},
       thickness=1));
   connect(fanExhaustAir.port_b, res.port_a) annotation (Line(
       points={{-128,26},{-136,26}},
@@ -328,7 +328,7 @@ equation
       points={{202,-68},{202,-68}},
       color={0,127,255},
       smooth=Smooth.None));
-  connect(T_beforeCooler.port,heater. port_b2) annotation (Line(
+  connect(T_beforeCooler.port, heater.port_b2) annotation (Line(
       points={{129,6},{130,6},{130,26},{116,26}},
       color={0,127,255},
       smooth=Smooth.None));
@@ -336,67 +336,67 @@ equation
     annotation (Line(points={{-103,-68},{-91,-68}}, color={0,127,255}));
   connect(FreshAir, damperFreshAir.port_a)
     annotation (Line(points={{-158,-68},{-121,-68}}, color={0,127,255}));
-  connect(damperFreshAir.port_b, damperBypass.port_a) annotation (Line(points={{
-          -103,-68},{-100,-68},{-100,36},{-36,36}}, color={0,127,255}));
+  connect(damperFreshAir.port_b, damperBypass.port_a) annotation (Line(points={
+          {-103,-68},{-100,-68},{-100,36},{-36,36}}, color={0,127,255}));
   connect(fanSupplyAir.port_b, heater.port_a2)
     annotation (Line(points={{72,26},{84,26},{96,26}}, color={0,127,255}));
-  connect(ExhaustAir, recuperator.port_a2) annotation (Line(points={{202,-68},{104,
-          -68},{-4,-68},{-4,-38},{-24,-38}}, color={0,127,255}));
-  connect(recuperator.port_b2, fanExhaustAir.port_a) annotation (Line(points={{-44,-38},
-          {-44,-38},{-90,-38},{-90,26},{-108,26}},            color={0,127,
-          255}));
+  connect(ExhaustAir, recuperator.port_a2) annotation (Line(points={{202,-68},{
+          104,-68},{-4,-68},{-4,-38},{-24,-38}}, color={0,127,255}));
+  connect(recuperator.port_b2, fanExhaustAir.port_a) annotation (Line(points={{
+          -44,-38},{-44,-38},{-90,-38},{-90,26},{-108,26}}, color={0,127,255}));
   connect(recuperator.port_b1, volume.ports[1]) annotation (Line(points={{-24,-26},
           {-6,-26},{-6,24},{21,24}}, color={0,127,255}));
-  connect(damperBypass.port_b, volume.ports[2]) annotation (Line(points={{-18,36},
-          {19,36},{19,24}},     color={0,127,255}));
-  connect(damperCirculationAir.port_b, volume.ports[3]) annotation (Line(points={{30,-6},
-          {30,-6},{30,24},{17,24}},         color={0,127,255}));
+  connect(damperBypass.port_b, volume.ports[2])
+    annotation (Line(points={{-18,36},{19,36},{19,24}}, color={0,127,255}));
+  connect(damperCirculationAir.port_b, volume.ports[3]) annotation (Line(points
+        ={{30,-6},{30,-6},{30,24},{17,24}}, color={0,127,255}));
   connect(fanSupplyAir.port_a, volume.ports[4])
     annotation (Line(points={{52,26},{15,26},{15,24}}, color={0,127,255}));
   connect(T_AfterHeatRecovery.port, recuperator.port_b1) annotation (Line(
         points={{-20,-10},{-20,-26},{-24,-26}}, color={0,127,255}));
-  connect(heater.port_b2,cooler. port_a2) annotation (Line(points={{116,26},{
-          140,26},{162,26}}, color={0,127,255}));
+  connect(heater.port_b2, cooler.port_a2)
+    annotation (Line(points={{116,26},{140,26},{162,26}}, color={0,127,255}));
   connect(damperHeatRecovery.port_b, res1.port_a)
     annotation (Line(points={{-73,-68},{-56,-68}}, color={0,127,255}));
   connect(res1.port_b, recuperator.port_a1) annotation (Line(points={{-66,-68},
           {-50,-68},{-50,-26},{-44,-26}}, color={0,127,255}));
-  connect(heater.port_a1, heatingValve.port_a) annotation (Line(points={{116,
-          38},{122,38},{122,51}}, color={0,127,255}));
-  connect(heatingValve.port_b, Heater_Flow) annotation (Line(points={{122,69},
-          {122,84.5},{122,100}}, color={0,127,255}));
-  connect(Cooler_Return, cooler.port_b1) annotation (Line(points={{162,100},{
-          162,38},{162,38}}, color={0,127,255}));
-  connect(cooler.port_a1, coolingValve.port_a) annotation (Line(points={{182,38},
-          {192,38},{192,49}},     color={0,127,255}));
-  connect(coolingValve.port_b, Cooler_Flow) annotation (Line(points={{192,67},{
-          192,74},{192,100}},           color={0,127,255}));
+  connect(heater.port_a1, heatingValve.port_a)
+    annotation (Line(points={{116,38},{122,38},{122,51}}, color={0,127,255}));
+  connect(heatingValve.port_b, Heater_Flow) annotation (Line(points={{122,69},{
+          122,84.5},{122,100}}, color={0,127,255}));
+  connect(Cooler_Return, cooler.port_b1)
+    annotation (Line(points={{162,100},{162,38},{162,38}}, color={0,127,255}));
+  connect(cooler.port_a1, coolingValve.port_a)
+    annotation (Line(points={{182,38},{192,38},{192,49}}, color={0,127,255}));
+  connect(coolingValve.port_b, Cooler_Flow)
+    annotation (Line(points={{192,67},{192,74},{192,100}}, color={0,127,255}));
   connect(Heater_Return, heater.port_b1) annotation (Line(points={{92,100},{94,
           100},{94,38},{96,38}}, color={0,127,255}));
   connect(HRCDamperOpening, add1.u1)
     annotation (Line(points={{-100,100},{-100,55},{-66,55}}, color={0,0,127}));
-  connect(fanExhaustAirPower, fanExhaustAir.powerShare) annotation (Line(points=
-         {{-150,100},{-150,100},{-150,70},{-150,64},{-118,64},{-118,36}}, color=
-         {0,0,127}));
+  connect(fanExhaustAirPower, fanExhaustAir.powerShare) annotation (Line(points
+        ={{-150,100},{-150,100},{-150,70},{-150,64},{-118,64},{-118,36}}, color
+        ={0,0,127}));
   connect(damperFreshAirOpening, damperFreshAir.y) annotation (Line(points={{-50,
           100},{-50,100},{-50,76},{-50,68},{-104,68},{-104,-32},{-112,-32},{-112,
           -57.2}}, color={0,0,127}));
   connect(HRCDamperOpening, damperHeatRecovery.y) annotation (Line(points={{-100,
           100},{-100,55},{-82,55},{-82,-57.2}}, color={0,0,127}));
-  connect(fanSupplyAirPower, fanSupplyAir.powerShare) annotation (Line(points={{
-          50,100},{50,100},{50,68},{50,62},{62,62},{62,36}}, color={0,0,127}));
+  connect(fanSupplyAirPower, fanSupplyAir.powerShare) annotation (Line(points={
+          {50,100},{50,100},{50,68},{50,62},{62,62},{62,36}}, color={0,0,127}));
   connect(heatingValveOpening, heatingValve.y)
     annotation (Line(points={{142,100},{142,60},{132.8,60}}, color={0,0,127}));
-  connect(coolingValveOpening, coolingValve.y) annotation (Line(points={{212,100},
-          {212,100},{212,62},{212,58},{202.8,58}}, color={0,0,127}));
+  connect(coolingValveOpening, coolingValve.y) annotation (Line(points={{212,
+          100},{212,100},{212,62},{212,58},{202.8,58}}, color={0,0,127}));
   connect(damperCircularAirOpening, damperCirculationAir.y) annotation (Line(
         points={{0,100},{0,100},{0,18},{0,-16},{18,-16}}, color={0,0,127}));
-  connect(ExhaustAir, damperCirculationAir.port_a) annotation (Line(points={{202,
-          -68},{114,-68},{30,-68},{30,-26}}, color={0,127,255}));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-160,
-            -100},{200,100}})),
-    Icon(coordinateSystem(extent={{-160,-100},{200,100}}, preserveAspectRatio=false),
-        graphics={Rectangle(
+  connect(ExhaustAir, damperCirculationAir.port_a) annotation (Line(points={{
+          202,-68},{114,-68},{30,-68},{30,-26}}, color={0,127,255}));
+  annotation (
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-160,-100},{
+            200,100}})),
+    Icon(coordinateSystem(extent={{-160,-100},{200,100}}, preserveAspectRatio=
+            false), graphics={Rectangle(
           extent={{-160,100},{200,-100}},
           lineColor={0,0,255},
           fillPattern=FillPattern.Solid,
