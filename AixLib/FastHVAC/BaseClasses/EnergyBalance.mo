@@ -37,21 +37,18 @@ equation
           preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
         graphics),
     Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
 <ul>
-<li>Base class EnergyBalance depicts change of condition of the fluid due to heat transfer.</li>
-<li>Two enthalpy ports describe the input and output condition of the fluid (temperature, specific enthalpy, specific heat capacity, mass flow).</li>
-<li>One thermal port depicts the heat flow, which is transfered on the fluid. </li>
-</ul>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<h4><span style=\"color:#008000\">Assumptions</span></h4>
-<h4><span style=\"color:#008000\">Concept</span></h4>
-<p>Five equations are used to describe the energy and mass balances:</p>
+<li>Base class EnergyBalance depicts change of condition of the fluid due to heat
+transfer.</li>
+<li>Two enthalpy ports describe the input and output condition of the fluid
+(temperature, specific enthalpy, specific heat capacity, mass flow).</li>
+<li>One thermal port depicts the heat flow, which is transfered on the fluid</li>
+</html>", revisions="<html>
 <ul>
-<li>mass balance</li>
-<li>Thermal port sets new temperature of the fluid </li>
+<li>
+April 25, 2017, by Michael Mans:<br/>
+Moved to AixLib
+</li>
 </ul>
-<p><br><b><font style=\"color: #008000; \">References</font></b></p>
-<h4><span style=\"color:#008000\">Example Results</span></h4>
 </html>"));
 end EnergyBalance;

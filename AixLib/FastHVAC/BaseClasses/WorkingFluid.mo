@@ -55,14 +55,10 @@ equation
           fillColor={0,0,255},
           textString="workingFluid")}),
     Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>Model for a working fluid.  </p>
-
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars2.png\"/></p>
-
-<h4><span style=\"color:#008000\">Concept</span></h4>
-<p>WorkingFluid is based on the models <a href=\"FastHVAC.BaseClass.EnergyBalance\">EnergyBalance</a> and <a href=\"modelica:/Modelica.Thermal.HeatTransfer.Components.HeatCapacitor\">HeatCapacitor</a>.
+<p>WorkingFluid is based on the models
+<code>FastHVAC.BaseClasses.EnergyBalance</code>
+and 
+<a href=\"modelica:/Modelica.Thermal.HeatTransfer.Components.HeatCapacitor\">HeatCapacitor</a>.
 The heat transfer between through the heatPort is ideal. </p>
 </html>",
     revisions="<html>

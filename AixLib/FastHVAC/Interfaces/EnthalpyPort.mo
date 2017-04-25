@@ -11,7 +11,7 @@ partial connector EnthalpyPort "Enthalpy port for 1-dim. enthalpy transfer"
 </html>", revisions="<html>
 <ul>
 <li>
-April 25, 2017, by Michael Mans:<br/>
+<i>April 25, 2017</i>, by Michael Mans:<br/>
 Moved to AixLib
 </li>
 </ul>
