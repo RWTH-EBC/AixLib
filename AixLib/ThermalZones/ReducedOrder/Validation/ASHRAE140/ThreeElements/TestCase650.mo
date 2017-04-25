@@ -506,5 +506,13 @@ equation
   Implemented.
   </li>
   </ul>
-  </html>"));
+  </html>", info="<html>
+<p>Test Case 650 of the ASHRAE 140-2007: Calculation of heating/cooling loads for room version light excited by internal and external gains. </p>
+<h4>Boundary conditions</h4>
+<ul>
+<li>yearly profile for outdoor air temperature and solar radiation in hourly steps </li>
+<li>no heating and daily profile for set temperatures of cooling </li>
+<li>constant internal gains and daily profile for infiltration rate </li>
+</ul>
+</html>"));
 end TestCase650;

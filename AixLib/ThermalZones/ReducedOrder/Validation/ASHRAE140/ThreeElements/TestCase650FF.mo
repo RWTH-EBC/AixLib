@@ -183,7 +183,7 @@ model TestCase650FF "Test case 650 free float"
     "Indoor air temperature in degC"
     annotation (Placement(transformation(extent={{122,40},{134,52}})));
     Modelica.Blocks.Interfaces.RealOutput FreeFloatTemperature(unit="degC")
-    "in degC"
+    "Free floating temperature"
       annotation (Placement(transformation(extent={{124,66},{144,86}})));
 equation
   connect(eqAirTemp.TEqAirWin, prescribedTemperature1.T)
@@ -441,5 +441,12 @@ equation
   Implemented.
   </li>
   </ul>
-  </html>"));
+  </html>", info="<html>
+<p>Test Case 650FF of the ASHRAE 140-2007: Calculation of free float indoor air temperature for room version light excited by internal and external gains. </p>
+<h4>Boundary conditions</h4>
+<ul>
+<li>yearly profile for outdoor air temperature and solar radiation in hourly steps </li>
+<li>constant internal gains and daily profile for infiltration rate </li>
+</ul>
+</html>"));
 end TestCase650FF;
