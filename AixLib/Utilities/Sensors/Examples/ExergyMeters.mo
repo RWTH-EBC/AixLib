@@ -1,5 +1,5 @@
-within AixLib.Utilities.Sensors.ExergyMeter;
-model Example
+within AixLib.Utilities.Sensors.Examples;
+model ExergyMeters
 
   extends Modelica.Icons.Example;
 
@@ -18,7 +18,7 @@ model Example
     each freqHz=1/3600,
     each offset=3000)
     annotation (Placement(transformation(extent={{-10,-20},{10,0}})));
-  StoredExergyMeter exergyStorageMeterMedium(
+  ExergyMeter.StoredExergyMeter exergyStorageMeterMedium(
     redeclare package Medium = Medium,
     T_ref_start=T_ref.k,
     T_start=T_start,
@@ -34,7 +34,7 @@ model Example
     annotation (Placement(transformation(extent={{-100,-100},{-80,-80}})));
   inner Modelica.Fluid.System system
     annotation (Placement(transformation(extent={{80,-100},{100,-80}})));
-  HeatExergyMeter exHeatSec
+  ExergyMeter.HeatExergyMeter exHeatSec
     annotation (Placement(transformation(extent={{74,5},{94,25}})));
   AixLib.Fluid.Movers.FlowControlled_m_flow pumpPrim(
     addPowerToMedium=false,
@@ -64,10 +64,10 @@ model Example
         extent={{-7,-7.5},{7,7.5}},
         rotation=180,
         origin={-53,56.5})));
-  FlowExergyMeter exPrimIn(redeclare package Medium = Medium)
+  ExergyMeter.FlowExergyMeter exPrimIn(redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{-36,76},{-14,96}})));
-  FlowExergyMeter exPrimOut(redeclare package Medium = Medium) annotation (
-      Placement(transformation(
+  ExergyMeter.FlowExergyMeter exPrimOut(redeclare package Medium = Medium)
+    annotation (Placement(transformation(
         extent={{-11,10},{11,-10}},
         rotation=180,
         origin={-25,57})));
@@ -106,10 +106,10 @@ model Example
         extent={{10,-10},{-10,10}},
         rotation=270,
         origin={94,70})));
-  FlowExergyMeter exSecOut(redeclare package Medium = Medium)
+  ExergyMeter.FlowExergyMeter exSecOut(redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{34,72},{56,92}})));
-  FlowExergyMeter exSecIn(redeclare package Medium = Medium) annotation (
-      Placement(transformation(
+  ExergyMeter.FlowExergyMeter exSecIn(redeclare package Medium = Medium)
+    annotation (Placement(transformation(
         extent={{-11,10},{11,-10}},
         rotation=180,
         origin={41,54})));
@@ -122,7 +122,7 @@ model Example
         origin={-28,24})));
   Modelica.Blocks.Math.Gain gain(k=-1)
     annotation (Placement(transformation(extent={{28,18},{40,30}})));
-  HeatExergyMeter exHeatPrim annotation (Placement(transformation(
+  ExergyMeter.HeatExergyMeter exHeatPrim annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={-68,15})));
@@ -166,7 +166,7 @@ equation
   connect(exPrimIn.port_b, bufferStorageHeatingcoils.port_a_heatGenerator)
     annotation (Line(points={{-16,86},{0.24,86},{0.24,85.96}},  color={0,127,255}));
   connect(bufferStorageHeatingcoils.port_b_heatGenerator, exPrimOut.port_a)
-    annotation (Line(points={{0.24,57.4},{-5.88,57.4},{-5.88,57},{-16,57}},
+    annotation (Line(points={{0.24,57.4},{-5.88,57.4},{-5.88,57},{-14,57}},
         color={0,127,255}));
   connect(exPrimOut.port_b, pipePrim.port_a) annotation (Line(points={{-36,57},
           {-46,57},{-46,56.5}},color={0,127,255}));
@@ -182,7 +182,7 @@ equation
   connect(exSecIn.port_a, pipeSec.port_b)
     annotation (Line(points={{50,54},{58,54},{58,54.5}}, color={0,127,255}));
   connect(exSecIn.port_b, bufferStorageHeatingcoils.port_a_consumer)
-    annotation (Line(points={{30,54},{28,54},{28,46},{12,46},{12,54}}, color={0,
+    annotation (Line(points={{32,54},{28,54},{28,46},{12,46},{12,54}}, color={0,
           127,255}));
   connect(pipeSec.port_a, consumer.ports[1]) annotation (Line(points={{74,54.5},
           {80,54.5},{80,68},{84,68}}, color={0,127,255}));
@@ -209,15 +209,15 @@ equation
   connect(storageTemperatures.y, exergyStorageMeterMedium.T)
     annotation (Line(points={{-9,-58},{-34,-58},{-34,-40}}, color={0,0,127}));
   connect(T_ref.y, exPrimOut.T_ref) annotation (Line(points={{-79,-10},{-64,-10},
-          {-50,-10},{-50,38},{-35,38},{-35,47}}, color={0,0,127}));
+          {-50,-10},{-50,38},{-33,38},{-33,47}}, color={0,0,127}));
   connect(T_ref.y, exPrimIn.T_ref) annotation (Line(points={{-79,-10},{-50,-10},
           {-50,38},{-40,38},{-40,66},{-34,66},{-17,66},{-17,76}}, color={0,0,127}));
   connect(T_ref.y, exSecIn.T_ref) annotation (Line(points={{-79,-10},{-50,-10},
-          {-50,38},{31,38},{31,44}},color={0,0,127}));
+          {-50,38},{33,38},{33,44}},color={0,0,127}));
   connect(T_ref.y, exSecOut.T_ref) annotation (Line(points={{-79,-10},{-64,-10},
           {-50,-10},{-50,38},{56,38},{56,62},{53,62},{53,72}}, color={0,0,127}));
   connect(p_ref.y, exPrimOut.p_ref) annotation (Line(points={{-79,-50},{-76,-50},
-          {-76,-30},{-52,-30},{-52,40},{-26,40},{-26,47}}, color={0,0,127}));
+          {-76,-30},{-52,-30},{-52,40},{-24,40},{-24,47}}, color={0,0,127}));
   connect(p_ref.y, exPrimIn.p_ref) annotation (Line(points={{-79,-50},{-76,-50},
           {-76,-30},{-52,-30},{-52,40},{-42,40},{-42,68},{-26,68},{-26,76}},
         color={0,0,127}));
@@ -225,14 +225,14 @@ equation
           {-76,40},{-42,40},{-42,68},{-8,68},{-8,96},{30,96},{30,64},{44,64},{44,
           72}}, color={0,0,127}));
   connect(p_ref.y, exSecIn.p_ref) annotation (Line(points={{-79,-50},{-76,-50},
-          {-76,40},{-42,40},{-42,68},{-8,68},{-8,40},{40,40},{40,44}},color={0,0,
+          {-76,40},{-42,40},{-42,68},{-8,68},{-8,40},{42,40},{42,44}},color={0,0,
           127}));
   connect(X_ref.y, exSecIn.X_ref) annotation (Line(points={{-79,-90},{-50,-90},
-          {44,-90},{44,34},{49,34},{49,44}},color={0,0,127}));
+          {44,-90},{44,34},{51,34},{51,44}},color={0,0,127}));
   connect(X_ref.y, exSecOut.X_ref) annotation (Line(points={{-79,-90},{-18,-90},
           {44,-90},{44,34},{54,34},{54,62},{35,62},{35,72}}, color={0,0,127}));
   connect(X_ref.y, exPrimOut.X_ref) annotation (Line(points={{-79,-90},{-54,-90},
-          {-54,42},{-17,42},{-17,47}}, color={0,0,127}));
+          {-54,42},{-15,42},{-15,47}}, color={0,0,127}));
   connect(X_ref.y, exPrimIn.X_ref) annotation (Line(points={{-79,-90},{-54,-90},
           {-54,44},{-35,44},{-35,76}}, color={0,0,127}));
   connect(pumpMassFlow.y, pumpPrim.m_flow_in) annotation (Line(points={{-87.4,
@@ -260,4 +260,4 @@ equation
 <li><i><span style=\"font-family: Arial,sans-serif;\">November 10, 2016&nbsp;</i> by Marc Baranski and Roozbeh Sangi:<br>Implemented.</span></li>
 </ul>
 </html>"));
-end Example;
+end ExergyMeters;
