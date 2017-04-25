@@ -255,14 +255,7 @@ protected
         origin={90,24})));
         */
 equation
-   // check if the diameters of the pipe and pipe wall are compatible
-   assert(diameter == parameterPipe.d_i, "The diameter of the pipe wall is not consistent with the diameter given for the pipe", AssertionLevel.error);
-      /*Temperature=mediums[1].T+mediums[2].T/2;
 
-   for i in 1:n loop
-    der(Us[i])= sum1.u[i];
-    end for;
-    */
   connect(pipe.port_b, port_b) annotation (Line(
       points={{0,-36},{104,-36}},
       color={0,127,255},
