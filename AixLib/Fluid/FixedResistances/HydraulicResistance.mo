@@ -4,7 +4,7 @@ model HydraulicResistance
   extends AixLib.Fluid.Interfaces.PartialTwoPortTransport;
   parameter Real zeta(min=0)
     "Pressure loss factor for flow of port_a -> port_b";
-  parameter Modelica.SIunits.Length diameter(min=0) "Diameter of component";
+  parameter Modelica.SIunits.Diameter diameter "Diameter of component";
 protected
   Modelica.SIunits.Density rho "Density of the fluid";
 equation
@@ -45,8 +45,6 @@ equation
  </html>", info="<html>
 <p><b><span style=\"color: #008000;\">Overview</span></b> </p>
 <p>Very simple model for a hydraulic resistance with the pressureloss modelled with the pressure loss factor <code>zeta</code>. </p>
-<p><b><span style=\"color: #008000;\">Level of Development</span></b> </p>
-<p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/> </p>
 <p><b><span style=\"color: #008000;\">Concept</span></b> </p>
 <p>Values for pressure loss factor zeta can be easily found in tables. </p>
 <p><b><span style=\"color: #008000;\">Example Results</span></b> </p>
