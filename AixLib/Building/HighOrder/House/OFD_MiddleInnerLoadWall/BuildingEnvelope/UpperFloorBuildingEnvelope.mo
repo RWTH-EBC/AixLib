@@ -3,7 +3,7 @@ within AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
 
 model UpperFloorBuildingEnvelope
   ///////// construction parameters
-  parameter Integer TMC = 1 "Themal Mass Class" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1 "Heavy", choice = 2 "Medium", choice = 3 "Light", radioButtons = true));
+  parameter Integer TMC = 1 "Thermal Mass Class" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1 "Heavy", choice = 2 "Medium", choice = 3 "Light", radioButtons = true));
   parameter Integer TIR = 1 "Thermal Insulation Regulation" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1
         "EnEV_2009",                                                                                                    choice = 2
         "EnEV_2002",                                                                                                    choice = 3
