@@ -1,12 +1,78 @@
 within AixLib.Fluid.FixedResistances;
 model HydraulicResistance
   "Model for a hydraulic resistance using a pressure loss factor zeta"
-  extends AixLib.Fluid.BaseClasses.PartialResistance;
+  extends AixLib.Fluid.BaseClasses.PartialResistance(
+    final m_flow_turbulent = if computeFlowResistance then 0.25 * ReCrit * Modelica.Constants.pi * diameter * mu_default * rho_default else 0);
+
   parameter Real zeta(min=0, unit="")
     "Pressure loss factor for flow of port_a -> port_b";
-  parameter Modelica.SIunits.Diameter diameter "Diameter of component";
+  parameter Modelica.SIunits.Diameter diameter
+    "Diameter of component";
+  parameter Modelica.SIunits.ReynoldsNumber ReCrit = 2300
+    "Critical Reynolds number";
 
+  final parameter Real k(unit="") = if computeFlowResistance then
+        m_flow_nominal_pos / sqrt(dp_nominal_pos) else 0
+    "Flow coefficient, k=m_flow/sqrt(dp), with unit=(kg.m)^(1/2)";
+protected
+  final parameter Boolean computeFlowResistance=(dp_nominal_pos > Modelica.Constants.eps)
+    "Flag to enable/disable computation of flow resistance"
+   annotation(Evaluate=true);
+  parameter Medium.ThermodynamicState state_default=
+    Medium.setState_pTX(
+      T=Medium.T_default,
+      p=Medium.p_default,
+      X=Medium.X_default[1:Medium.nXi]) "Default state";
+  parameter Modelica.SIunits.Density rho_default = Medium.density(state_default)
+    "Density at nominal condition";
+  parameter Modelica.SIunits.DynamicViscosity mu_default = Medium.dynamicViscosity(
+      state_default)
+    "Dynamic viscosity at nominal condition";
+initial equation
+ if computeFlowResistance then
+   assert(m_flow_turbulent > 0, "m_flow_turbulent must be bigger than zero.");
+ end if;
+
+ assert(m_flow_nominal_pos > 0, "m_flow_nominal_pos must be non-zero. Check parameters.");
 equation
+  // Pressure drop calculation
+  if computeFlowResistance then
+    if linearized then
+      m_flow*m_flow_nominal_pos = k^2*dp;
+    else
+      if homotopyInitialization then
+        if from_dp then
+          m_flow=homotopy(
+            actual=AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_dp(
+              dp=dp,
+              k=k,
+              m_flow_turbulent=m_flow_turbulent),
+            simplified=m_flow_nominal_pos*dp/dp_nominal_pos);
+        else
+          dp=homotopy(
+            actual=AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow(
+              m_flow=m_flow,
+              k=k,
+              m_flow_turbulent=m_flow_turbulent),
+            simplified=dp_nominal_pos*m_flow/m_flow_nominal_pos);
+         end if;  // from_dp
+      else // do not use homotopy
+        if from_dp then
+          m_flow=AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_dp(
+            dp=dp,
+            k=k,
+            m_flow_turbulent=m_flow_turbulent);
+        else
+          dp=AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow(
+            m_flow=m_flow,
+            k=k,
+            m_flow_turbulent=m_flow_turbulent);
+        end if;  // from_dp
+      end if; // homotopyInitialization
+    end if; // linearized
+  else // do not compute flow resistance
+    dp = 0;
+  end if;  // computeFlowResistance
 
   dp = sign(m_flow)*8*zeta/(Modelica.Constants.pi*Modelica.Constants.pi*
     diameter*diameter*diameter*diameter*rho)*m_flow*m_flow
