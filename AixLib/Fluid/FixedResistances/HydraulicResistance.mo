@@ -1,19 +1,13 @@
 within AixLib.Fluid.FixedResistances;
 model HydraulicResistance
-  "Simple model for a hydraulic resistance using a pressure loss factor"
-  extends AixLib.Fluid.Interfaces.PartialTwoPortTransport;
-  parameter Real zeta(min=0)
+  "Model for a hydraulic resistance using a pressure loss factor zeta"
+  extends AixLib.Fluid.BaseClasses.PartialResistance;
+  parameter Real zeta(min=0, unit="")
     "Pressure loss factor for flow of port_a -> port_b";
   parameter Modelica.SIunits.Diameter diameter "Diameter of component";
-protected
-  Modelica.SIunits.Density rho "Density of the fluid";
+
 equation
-  rho = Medium.density(Medium.setState_phX(
-    port_a.p,
-    inStream(port_a.h_outflow),
-    inStream(port_a.Xi_outflow)));
-  port_a.h_outflow = inStream(port_b.h_outflow);
-  port_b.h_outflow = inStream(port_a.h_outflow);
+
   dp = sign(m_flow)*8*zeta/(Modelica.Constants.pi*Modelica.Constants.pi*
     diameter*diameter*diameter*diameter*rho)*m_flow*m_flow
     "Multiplication instead of exponent term for speed improvement";
