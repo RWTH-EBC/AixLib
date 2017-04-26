@@ -1,82 +1,92 @@
 within AixLib.Fluid.FixedResistances;
 model HydraulicResistance
-  "Model for a hydraulic resistance using a pressure loss factor zeta"
+  "Simple model for a hydraulic resistance using a pressure loss factor"
   extends AixLib.Fluid.BaseClasses.PartialResistance(
-    final m_flow_turbulent = if computeFlowResistance then 0.25 * ReCrit * Modelica.Constants.pi * diameter * mu_default * rho_default else 0);
-
+    final m_flow(start=m_flow_start),
+    final dp(start=dp_start),
+    final m_flow_turbulent=100*m_flow_nominal);
+  // No usage of m_flow_turbulent since zeta approach does not distinguish between laminar and turbulent flow.
   parameter Real zeta(min=0, unit="")
     "Pressure loss factor for flow of port_a -> port_b";
-  parameter Modelica.SIunits.Diameter diameter
-    "Diameter of component";
-  parameter Modelica.SIunits.ReynoldsNumber ReCrit = 2300
-    "Critical Reynolds number";
+  parameter Modelica.SIunits.Diameter diameter "Diameter of component";
+  parameter Modelica.SIunits.PressureDifference dp_start(displayUnit="Pa") = 0
+    "Guess value of dp = port_a.p - port_b.p"
+    annotation (Dialog(tab="Advanced"));
+  parameter Medium.MassFlowRate m_flow_start=0
+    "Guess value of m_flow = port_a.m_flow" annotation (Dialog(tab="Advanced"));
 
-  final parameter Real k(unit="") = if computeFlowResistance then
-        m_flow_nominal_pos / sqrt(dp_nominal_pos) else 0
-    "Flow coefficient, k=m_flow/sqrt(dp), with unit=(kg.m)^(1/2)";
+
 protected
-  final parameter Boolean computeFlowResistance=(dp_nominal_pos > Modelica.Constants.eps)
-    "Flag to enable/disable computation of flow resistance"
-   annotation(Evaluate=true);
-  parameter Medium.ThermodynamicState state_default=
-    Medium.setState_pTX(
-      T=Medium.T_default,
-      p=Medium.p_default,
-      X=Medium.X_default[1:Medium.nXi]) "Default state";
-  parameter Modelica.SIunits.Density rho_default = Medium.density(state_default)
-    "Density at nominal condition";
-  parameter Modelica.SIunits.DynamicViscosity mu_default = Medium.dynamicViscosity(
-      state_default)
-    "Dynamic viscosity at nominal condition";
+  final parameter Real k(min=0, unit="") = Modelica.Fluid.Fittings.BaseClasses.lossConstant_D_zeta(D=diameter,zeta=zeta) "Calculate loss coefficient based on diameter and zeta";
+
+  final parameter Modelica.SIunits.PressureDifference dp_small = 1E-4*abs(dp_nominal) "Small pressure difference for regularization of zero pressure difference";
+  Modelica.SIunits.Density rho_a "Density of the fluid at port_a";
+  Modelica.SIunits.Density rho_b "Density of the fluid at port_b";
+
 initial equation
- if computeFlowResistance then
-   assert(m_flow_turbulent > 0, "m_flow_turbulent must be bigger than zero.");
- end if;
-
- assert(m_flow_nominal_pos > 0, "m_flow_nominal_pos must be non-zero. Check parameters.");
+  assert(m_flow_nominal_pos > 0, "m_flow_nominal_pos must be non-zero. Check parameters.");
 equation
-  // Pressure drop calculation
-  if computeFlowResistance then
-    if linearized then
-      m_flow*m_flow_nominal_pos = k^2*dp;
-    else
-      if homotopyInitialization then
-        if from_dp then
-          m_flow=homotopy(
-            actual=AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_dp(
-              dp=dp,
-              k=k,
-              m_flow_turbulent=m_flow_turbulent),
-            simplified=m_flow_nominal_pos*dp/dp_nominal_pos);
-        else
-          dp=homotopy(
-            actual=AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow(
-              m_flow=m_flow,
-              k=k,
-              m_flow_turbulent=m_flow_turbulent),
-            simplified=dp_nominal_pos*m_flow/m_flow_nominal_pos);
-         end if;  // from_dp
-      else // do not use homotopy
-        if from_dp then
-          m_flow=AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_dp(
-            dp=dp,
-            k=k,
-            m_flow_turbulent=m_flow_turbulent);
-        else
-          dp=AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow(
-            m_flow=m_flow,
-            k=k,
-            m_flow_turbulent=m_flow_turbulent);
-        end if;  // from_dp
-      end if; // homotopyInitialization
-    end if; // linearized
-  else // do not compute flow resistance
-    dp = 0;
-  end if;  // computeFlowResistance
 
-  dp = sign(m_flow)*8*zeta/(Modelica.Constants.pi*Modelica.Constants.pi*
-    diameter*diameter*diameter*diameter*rho)*m_flow*m_flow
-    "Multiplication instead of exponent term for speed improvement";
+
+  rho_a = Medium.density(Medium.setState_phX(
+    p=port_a.p,
+    h=inStream(port_a.h_outflow),
+    X=inStream(port_a.Xi_outflow)));
+
+  rho_b = Medium.density(Medium.setState_phX(
+    p=port_b.p,
+    h=inStream(port_b.h_outflow),
+    X=inStream(port_b.Xi_outflow)));
+
+  // Pressure drop calculation
+
+  if linearized then
+    m_flow*m_flow_nominal_pos = k^2*dp;
+  else
+    if homotopyInitialization then
+      if from_dp then
+        m_flow = homotopy(actual=
+          Modelica.Fluid.Utilities.regRoot2(
+          dp,
+          dp_small,
+          rho_a/k,
+          rho_b/k),
+          simplified=m_flow_nominal_pos*dp/dp_nominal_pos);
+      else
+        dp = homotopy(actual=
+          Modelica.Fluid.Utilities.regSquare2(
+          m_flow,
+          m_flow_small,
+          k/rho_a,
+          k/rho_b),
+          simplified=dp_nominal_pos*m_flow/m_flow_nominal_pos);
+      end if;
+      // from_dp
+    else
+      // do not use homotopy
+      if from_dp then
+        m_flow = Modelica.Fluid.Utilities.regRoot2(
+          dp,
+          dp_small,
+          rho_a/k,
+          rho_b/k);
+      else
+        dp = Modelica.Fluid.Utilities.regSquare2(
+          m_flow,
+          m_flow_small,
+          k/rho_a,
+          k/rho_b);
+      end if;
+      // from_dp
+    end if;
+    // homotopyInitialization
+  end if;
+  // linearized
+
+
+  port_a.h_outflow = inStream(port_b.h_outflow);
+  port_b.h_outflow = inStream(port_a.h_outflow);
+
   annotation (Icon(graphics={Rectangle(
           extent={{-80,40},{80,-40}},
           lineColor={0,0,255},
