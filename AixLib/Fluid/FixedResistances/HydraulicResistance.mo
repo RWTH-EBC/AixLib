@@ -18,12 +18,12 @@ equation
     diameter*diameter*diameter*diameter*rho)*m_flow*m_flow
     "Multiplication instead of exponent term for speed improvement";
   annotation (Icon(graphics={Rectangle(
-          extent={{-80,46},{80,-34}},
+          extent={{-80,40},{80,-40}},
           lineColor={0,0,255},
           fillColor={255,255,0},
           fillPattern=FillPattern.Solid,
           radius=45), Text(
-          extent={{32,26},{-30,-10}},
+          extent={{32,20},{-30,-16}},
           lineColor={0,0,255},
           fillColor={255,255,0},
           fillPattern=FillPattern.Solid,
