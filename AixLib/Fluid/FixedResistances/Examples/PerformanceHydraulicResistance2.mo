@@ -56,8 +56,6 @@ equation
       points={{60,38},{52,38},{52,6.10623e-016},{20,6.10623e-016}},
       color={0,127,255}));
     annotation (experiment(StopTime=10000),
-__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FixedResistances/Examples/FixedResistancesParallel.mos"
-        "Simulate and plot"),
     __Dymola_experimentSetupOutput,
     Diagram(graphics={Text(
           extent={{-72,-60},{80,-74}},

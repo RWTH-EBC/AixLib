@@ -78,9 +78,6 @@ equation
     annotation (Line(points={{30,51},{30,64},{38,64}}, color={0,0,127}));
   annotation (
     experiment(StopTime=3),
-    __Dymola_Commands(file=
-          "modelica://AixLib/Resources/Scripts/Dymola/Fluid/FixedResistances/Examples/FixedResistancesParallel.mos"
-        "Simulate and plot"),
     __Dymola_experimentSetupOutput,
     Documentation(info="<html>
 <p>Compares the mass flow rate of the two pressure loss models  <a
