@@ -83,10 +83,6 @@ equation
   end if;
   // linearized
 
-
-  port_a.h_outflow = inStream(port_b.h_outflow);
-  port_b.h_outflow = inStream(port_a.h_outflow);
-
   annotation (Icon(graphics={Rectangle(
           extent={{-80,40},{80,-40}},
           lineColor={0,0,255},
