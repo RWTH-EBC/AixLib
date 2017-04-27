@@ -41,8 +41,8 @@ model CompareFixedResistances
     m_flow_start=0,
     diameter=sqrt(1/(sqrt(995.586)*Modelica.Constants.pi)),
     m_flow_nominal=1,
-    from_dp=true,
-    zeta=10000/8)
+    zeta=10000/8,
+    from_dp=true)
     annotation (Placement(transformation(extent={{-28,-10},{-8,10}})));
   AixLib.Fluid.Sensors.MassFlowRate masFlo2(redeclare package Medium = Medium)
     "Mass flow rate sensor"
@@ -83,12 +83,8 @@ equation
         "Simulate and plot"),
     __Dymola_experimentSetupOutput,
     Documentation(info="<html>
-    <p>Compares the mass flow rate of the two pressure loss models 
-    <a href=\"AixLib.Fluid.FixedResistances.HydraulicResistance\">HydraulicResistance</a> 
-    and <a href=\"AixLib.Fluid.FixedResistances.FixedResistanceDpM\">FixedResistanceDpM</a>. 
-    For small pressure differences (up to 800 Pa) the flow rate of 
-    HydraulicResistance will be larger than the flow rate of FixedResistanceDpM. 
-    The difference is lower than 0.1 kg/s.</p>
+<p>Compares the mass flow rate of the two pressure loss models <a href=\"AixLib.Fluid.FixedResistances.HydraulicResistance\">HydraulicResistance</a> and <a href=\"AixLib.Fluid.FixedResistances.FixedResistanceDpM\">FixedResistanceDpM</a>. For small pressure differences (up to 800 Pa) the flow rate of HydraulicResistance will be larger than the flow rate of FixedResistanceDpM. The difference is lower than 0.1 kg/s.</p>
+<p><br>Change parameter<code> HR.from_dp </code>to<code> false </code>and the simulation time will increase by about 25 &percnt;. Thus, choose this parameter depending whether you are using a mass flow source or a pressure source.</p>
 </html>", revisions="<html>
   <ul>
   <li><i>April 27, 2017&nbsp;</i>
