@@ -83,8 +83,18 @@ equation
         "Simulate and plot"),
     __Dymola_experimentSetupOutput,
     Documentation(info="<html>
-<p>Compares the mass flow rate of the two pressure loss models <a href=\"AixLib.Fluid.FixedResistances.HydraulicResistance\">HydraulicResistance</a> and <a href=\"AixLib.Fluid.FixedResistances.FixedResistanceDpM\">FixedResistanceDpM</a>. For small pressure differences (up to 800 Pa) the flow rate of HydraulicResistance will be larger than the flow rate of FixedResistanceDpM. The difference is lower than 0.1 kg/s.</p>
-<p><br>Change parameter<code> HR.from_dp </code>to<code> false </code>and the simulation time will increase by about 25 &percnt;. Thus, choose this parameter depending whether you are using a mass flow source or a pressure source.</p>
+    <p>Compares the mass flow rate of the two pressure loss models 
+    <a href=\"AixLib.Fluid.FixedResistances.HydraulicResistance\">HydraulicResistance</a> 
+    and <a href=\"AixLib.Fluid.FixedResistances.FixedResistanceDpM\">FixedResistanceDpM</a>. 
+    For small pressure differences (up to 800 Pa) the flow rate of 
+    HydraulicResistance will be larger than the flow rate of FixedResistanceDpM. 
+    The difference is lower than 0.1 kg/s.</p>
+    <p><br>Change parameter<code> HR.from_dp </code>to<code> false </code>and the 
+    simulation time will increase by about 25 &percnt;. </p>
+    <p>Choosing this parameter depending whether you are using a mass flow source 
+    or a pressure source might improve the stability of the simulation. </p>
+    <p>Using a mass flow source and<code> HR.from_dp = false </code>shows similiar 
+    simulation speed as with  <code>HR.from_dp = true</code>.</p>
 </html>", revisions="<html>
   <ul>
   <li><i>April 27, 2017&nbsp;</i>
