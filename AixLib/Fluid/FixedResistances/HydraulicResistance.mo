@@ -129,7 +129,5 @@ exist no distinction between laminar and turbulent flow regarding &zeta;-values.
 <p><b><span style=\"color: #008000;\">Example Results</span></b> </p>
 <p><a href=\"AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances\">
 AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances</a> </p>
-<p><a href=\"AixLib.Fluid.FixedResistances.Examples.PerformanceHydraulicResistance2\">
-AixLib.Fluid.FixedResistances.Examples.PerformanceHydraulicResistance2</a> </p>
 </html>"));
 end HydraulicResistance;
