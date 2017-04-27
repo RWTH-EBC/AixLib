@@ -7,12 +7,12 @@ model CompareFixedResistances
   Modelica.Blocks.Sources.Constant PAtm(k=101325)
     annotation (Placement(transformation(extent={{66,76},{86,96}})));
   Modelica.Blocks.Sources.Trapezoid P(
-    offset=101325,
-    amplitude=12000,
     rising=1,
     width=0.5,
     falling=1,
-    period=3)
+    period=3,
+    amplitude=-12000,
+    offset=101325 + 6000)
     annotation (Placement(transformation(extent={{-100,70},{-80,90}})));
   AixLib.Fluid.FixedResistances.PressureDrop FRdp(
     redeclare package Medium = Medium,
@@ -37,11 +37,12 @@ model CompareFixedResistances
     annotation (Placement(transformation(extent={{80,28},{60,48}})));
   HydraulicResistance HR(
     redeclare package Medium = Medium,
-    zeta=10000/8,
     dp_start=P.offset - PAtm.k,
     m_flow_start=0,
     diameter=sqrt(1/(sqrt(995.586)*Modelica.Constants.pi)),
-    m_flow_nominal=1)
+    m_flow_nominal=1,
+    from_dp=true,
+    zeta=10000/8)
     annotation (Placement(transformation(extent={{-28,-10},{-8,10}})));
   AixLib.Fluid.Sensors.MassFlowRate masFlo2(redeclare package Medium = Medium)
     "Mass flow rate sensor"
