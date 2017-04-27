@@ -115,9 +115,11 @@ equation
   </ul>
  </html>", info="<html>
 <p><b><span style=\"color: #008000;\">Overview</span></b> </p>
-<p>Very simple model for a hydraulic resistance with the pressureloss modelled with the pressure loss factor <code>zeta</code>. </p>
+<p>Very simple model for a hydraulic resistance with the pressureloss modelled with the pressure loss factor <code>zeta</code> (&zeta). </p>
 <p><b><span style=\"color: #008000;\">Concept</span></b> </p>
 <p>Values for pressure loss factor zeta can be easily found in tables. </p>
+<p>&Delta;p = 0.5*&zeta;*&rho;*v*|v|</p>
+<p><br>= 8*&zeta;/(&pi;^2*D^4*&rho;) * m_flow*|m_flow| </p>
 <p><b><span style=\"color: #008000;\">Example Results</span></b> </p>
 <p><a href=\"AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances\">AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances</a> </p>
 <p><a href=\"AixLib.Fluid.FixedResistances.Examples.PerformanceHydraulicResistance2\">AixLib.Fluid.FixedResistances.Examples.PerformanceHydraulicResistance2</a> </p>
