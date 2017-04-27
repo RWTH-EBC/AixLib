@@ -38,10 +38,10 @@ model CompareFixedResistances
   HydraulicResistance HR(
     redeclare package Medium = Medium,
     zeta=10000/8,
-    m_flow_small=0.001,
     dp_start=P.offset - PAtm.k,
     m_flow_start=0,
-    diameter=sqrt(1/(sqrt(995.586)*Modelica.Constants.pi)))
+    diameter=sqrt(1/(sqrt(995.586)*Modelica.Constants.pi)),
+    m_flow_nominal=1)
     annotation (Placement(transformation(extent={{-28,-10},{-8,10}})));
   AixLib.Fluid.Sensors.MassFlowRate masFlo2(redeclare package Medium = Medium)
     "Mass flow rate sensor"
@@ -60,8 +60,8 @@ equation
   connect(P.y, sou1.p_in) annotation (Line(points={{-79,80},{-74,80},{-74,46},{
           -72,46}}, color={0,0,127}));
   connect(HR.port_b, masFlo2.port_a) annotation (Line(points={{-8,6.10623e-16},
-          {-4,-3.36456e-22},{-4,6.10623e-16},{-5.55112e-16,6.10623e-16}}, color
-        ={0,127,255}));
+          {-4,-3.36456e-22},{-4,6.10623e-16},{-5.55112e-16,6.10623e-16}}, color=
+         {0,127,255}));
   connect(FRdp.port_b, masFlo1.port_a)
     annotation (Line(points={{-8,40},{20,40}}, color={0,127,255}));
   connect(sou1.ports[1], FRdp.port_a)

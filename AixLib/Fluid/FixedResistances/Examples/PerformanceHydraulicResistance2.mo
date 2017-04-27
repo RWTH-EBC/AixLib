@@ -4,16 +4,18 @@ model PerformanceHydraulicResistance2
   extends Modelica.Icons.Example;
 
  package Medium = AixLib.Media.Water;
-    Modelica.Blocks.Sources.Constant PAtm(k=101325)
+    Modelica.Blocks.Sources.Constant PAtm(y(unit="Pa"), k(unit="Pa") = 101325)
       annotation (Placement(transformation(extent={{66,76},{86,96}})));
     Modelica.Blocks.Sources.Trapezoid
                                  P(
-    offset=101325,
     amplitude=12000,
     rising=1,
     width=0.5,
     falling=1,
-    period=3)    annotation (Placement(transformation(extent={{-100,70},{-80,90}})));
+    period=3,
+    y(unit="Pa"),
+    offset(unit="Pa") = 101325)
+                 annotation (Placement(transformation(extent={{-100,70},{-80,90}})));
   AixLib.Fluid.Sources.Boundary_pT sou1(          redeclare package Medium =
         Medium,
     T=293.15,
@@ -29,10 +31,11 @@ model PerformanceHydraulicResistance2
     HydraulicResistance HR(
     redeclare package Medium = Medium,
     zeta=10000/8,
-    m_flow_small=0.001,
-    dp_start=P.offset - PAtm.k,
     m_flow_start=0,
-    diameter=sqrt(1/(sqrt(995.586)*Modelica.Constants.pi)))
+    diameter=sqrt(1/(sqrt(995.586)*Modelica.Constants.pi)),
+    m_flow_nominal=1.0883,
+    from_dp=true,
+    dp_start=P.offset - PAtm.k)
     annotation (Placement(transformation(extent={{-28,-10},{-8,10}})));
   AixLib.Fluid.Sensors.MassFlowRate masFlo2(redeclare package Medium = Medium)
     "Mass flow rate sensor" annotation (Placement(transformation(extent={{0,-10},
