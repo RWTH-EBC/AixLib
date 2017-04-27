@@ -4,6 +4,10 @@ model HydraulicResistance
   extends AixLib.Fluid.BaseClasses.PartialResistance(
     final m_flow(start=m_flow_start),
     final dp(start=dp_start),
+    final dp_nominal=
+      8 * zeta * m_flow_nominal * m_flow_nominal /
+      (rho_default * Modelica.Constants.pi * Modelica.Constants.pi *
+      diameter * diameter * diameter * diameter),
     final m_flow_turbulent=100*m_flow_nominal);
   // No usage of m_flow_turbulent since zeta approach does not distinguish between laminar and turbulent flow.
   parameter Real zeta(min=0, unit="")
@@ -15,18 +19,20 @@ model HydraulicResistance
   parameter Medium.MassFlowRate m_flow_start=0
     "Guess value of m_flow = port_a.m_flow" annotation (Dialog(tab="Advanced"));
 
-
 protected
   final parameter Real k(min=0, unit="") = Modelica.Fluid.Fittings.BaseClasses.lossConstant_D_zeta(D=diameter,zeta=zeta) "Calculate loss coefficient based on diameter and zeta";
 
   final parameter Modelica.SIunits.PressureDifference dp_small = 1E-4*abs(dp_nominal) "Small pressure difference for regularization of zero pressure difference";
+
+  final parameter Modelica.SIunits.Density rho_default = Medium.density(state_default)
+    "Density at nominal condition";
+
   Modelica.SIunits.Density rho_a "Density of the fluid at port_a";
   Modelica.SIunits.Density rho_b "Density of the fluid at port_b";
 
 initial equation
   assert(m_flow_nominal_pos > 0, "m_flow_nominal_pos must be non-zero. Check parameters.");
 equation
-
 
   rho_a = Medium.density(Medium.setState_phX(
     p=port_a.p,
@@ -41,7 +47,7 @@ equation
   // Pressure drop calculation
 
   if linearized then
-    m_flow*m_flow_nominal_pos = k^2*dp;
+    m_flow*m_flow_nominal_pos = k*k*dp;
   else
     if homotopyInitialization then
       if from_dp then
