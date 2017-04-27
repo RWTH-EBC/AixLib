@@ -100,9 +100,9 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Zeta=%zeta")}), Documentation(revisions="<html>
   <ul>
-  <li><i>April 25, 2017&nbsp;</i>
+  <li><i>April 27, 2017&nbsp;</i>
      by Philipp Mehrfeld:<br/>
-     Delete standard parameterization</li>
+     Model acc. to IBPSA conventions. Take into account homotopyInit., linearization, from_dp.</li>
   <li><i>April 2016&nbsp;</i>
      by Peter Matthes:<br/>
      Improved formulation of flow equation according to issue #232.</li>
