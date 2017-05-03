@@ -5,23 +5,30 @@ model HeatPumpController "Example for usage of heat pump controller"
   HPControllerOnOff hPControllerOnOff(bandwidth=2)
     "Simple on/off controller for a heat pump"
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
-  Modelica.Blocks.Interaction.Show.RealValue realValue
+  Modelica.Blocks.Interaction.Show.RealValue showN
+    "Shows the current value of the revolution speed"
     annotation (Placement(transformation(extent={{60,60},{80,80}})));
-  Modelica.Blocks.Interaction.Show.BooleanValue booleanValue
+  Modelica.Blocks.Interaction.Show.BooleanValue showOnOff
+    "Shows the current value of the on/off signal"
     annotation (Placement(transformation(extent={{66,40},{86,60}})));
-  Interfaces.HeatPumpControlBus heatPumpControlBus annotation (
+  Interfaces.HeatPumpControlBus heatPumpControlBus
+    "Required to make the signals on the bus accessible"
+                                                   annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,0})));
-  Modelica.Blocks.Interaction.Show.BooleanValue booleanValue1
+  Modelica.Blocks.Interaction.Show.BooleanValue showMode
+    "Shows the current value of the mode signal"
     annotation (Placement(transformation(extent={{66,18},{86,38}})));
   Modelica.Blocks.Sources.RealExpression temperatureMeasurements[4](y={280,290,
-        300,310}) annotation (Placement(transformation(
+        300,310}) "Represents temperature measurements in heat pump"
+                  annotation (Placement(transformation(
         extent={{-31,-10},{31,10}},
         rotation=180,
         origin={69,0})));
   Modelica.Blocks.Sources.RealExpression massFlowRateMeasurements[2](y={0.5,1})
+    "Represents mass flow rate measurements in heat pump"
     annotation (Placement(transformation(
         extent={{-31,-10},{31,10}},
         rotation=180,
@@ -29,20 +36,22 @@ model HeatPumpController "Example for usage of heat pump controller"
   Modelica.Blocks.Sources.Sine T_meas(
     freqHz=1/3600,
     amplitude=6,
-    offset=310) "generates the measured temperature"
+    offset=310) "Generates the measured temperature"
     annotation (Placement(transformation(extent={{-100,20},{-80,40}})));
   Modelica.Blocks.Sources.Constant T_set(k=310)
-    "provides the temperature set point"
+    "Provides the temperature set point"
     annotation (Placement(transformation(extent={{-100,-40},{-80,-20}})));
-  Modelica.Blocks.Interaction.Show.RealValue realValue1
+  Modelica.Blocks.Interaction.Show.RealValue showT_meas
+    "Shows the current value of the measured temperature"
     annotation (Placement(transformation(extent={{-60,70},{-20,90}})));
   Modelica.Blocks.Interfaces.RealOutput output_T_meas(
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC",
-    min=0) "Temperature measurement"
+    min=0) "Outputs the temperature measurement"
     annotation (Placement(transformation(extent={{85,-75},{115,-45}})));
   Modelica.Blocks.Interfaces.BooleanOutput output_on
+    "Outputs the on/off signal"
     annotation (Placement(transformation(extent={{86,-94},{114,-66}})));
 equation
   connect(hPControllerOnOff.heatPumpControlBus, heatPumpControlBus) annotation (
@@ -53,7 +62,7 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(heatPumpControlBus.N, realValue.numberPort) annotation (Line(
+  connect(heatPumpControlBus.N, showN.numberPort) annotation (Line(
       points={{0.05,-0.05},{20,-0.05},{20,70},{58.5,70}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -100,18 +109,18 @@ equation
           {-70,30},{-70,4},{-60,4}}, color={0,0,127}));
   connect(T_set.y, hPControllerOnOff.T_set) annotation (Line(points={{-79,-30},
           {-70,-30},{-70,-4},{-60,-4}}, color={0,0,127}));
-  connect(T_meas.y, realValue1.numberPort) annotation (Line(points={{-79,30},{
+  connect(T_meas.y,showT_meas. numberPort) annotation (Line(points={{-79,30},{
           -66,30},{-66,80},{-63,80}}, color={0,0,127}));
   connect(T_meas.y, output_T_meas) annotation (Line(points={{-79,30},{-74,30},{
           -74,-60},{100,-60}}, color={0,0,127}));
-  connect(heatPumpControlBus.mode, booleanValue1.activePort) annotation (Line(
+  connect(heatPumpControlBus.mode, showMode.activePort) annotation (Line(
       points={{0.05,-0.05},{10,-0.05},{20,-0.05},{20,28},{64.5,28}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(heatPumpControlBus.onOff, booleanValue.activePort) annotation (Line(
+  connect(heatPumpControlBus.onOff, showOnOff.activePort) annotation (Line(
       points={{0.05,-0.05},{20,-0.05},{20,50},{64.5,50}},
       color={255,204,51},
       thickness=0.5), Text(
