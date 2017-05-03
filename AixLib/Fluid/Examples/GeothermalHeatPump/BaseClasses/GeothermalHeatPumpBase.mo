@@ -4,11 +4,11 @@ model GeothermalHeatPumpBase
 
   replaceable package Medium = AixLib.Media.Water;
 
-  parameter Modelica.SIunits.Temperature T_start_cold[5] = 300*ones(5);
+  parameter Modelica.SIunits.Temperature T_start_cold[5] = 300*ones(5) "Initial temperature of cold components";
 
-  parameter Modelica.SIunits.Temperature T_start_warm[5] = 300*ones(5);
+  parameter Modelica.SIunits.Temperature T_start_warm[5] = 300*ones(5) "Initial temperature of warm components";
 
-  parameter Modelica.SIunits.Temperature T_start_hot = 300;
+  parameter Modelica.SIunits.Temperature T_start_hot = 300 "Initial temperature of high temperature components";
 
 
   HeatPumps.HeatPumpSimple         heatPumpTab(volumeEvaporator(T_start = T_start_cold[1]), volumeCondenser(T_start = T_start_warm[5]), redeclare
@@ -18,9 +18,9 @@ model GeothermalHeatPumpBase
         3500,3700,3800; 323.15,4500,4400,4600,5000,5100],
     tableHeatFlowCondenser=[0,266.16,275.15,280.15,283.15,293.15; 308.15,
         9700,11600,13000,14800,16300; 323.15,10000,11200,12900,16700,
-        17500]) "\"Stiebel Eltron WPL 18\""
+        17500]) "Base load energy conversion unit"
     annotation (Placement(transformation(extent={{-40,-14},{-4,20}})));
-  Storage.Storage bufferStorageHeatingcoils(
+  Storage.Storage coldStorage(
     layer_HE(T_start=T_start_cold),
     layer(T_start=T_start_cold),
     redeclare package Medium = Medium,
@@ -33,13 +33,12 @@ model GeothermalHeatPumpBase
     h=1.5,
     V_HE=0.02,
     A_HE=7,
-    d=1) annotation (Placement(transformation(extent={{52,-14},{24,20}})));
-  AixLib.Fluid.FixedResistances.HydraulicResistance orifice(redeclare package
-      Medium =
-        Medium,
+    d=1) "Storage tank for buffering cold demand"
+    annotation (Placement(transformation(extent={{52,-14},{24,20}})));
+  AixLib.Fluid.FixedResistances.HydraulicResistance resistanceColdStorage(
+    redeclare package Medium = Medium,
     m_flow_small=1E-4*0.5,
-    D=0.05)
-           annotation (Placement(transformation(
+    D=0.05) annotation (Placement(transformation(
         extent={{-6,-7},{6,7}},
         rotation=180,
         origin={-34,38})));
@@ -48,28 +47,17 @@ model GeothermalHeatPumpBase
     T=284.15,
     nPorts=1)
     annotation (Placement(transformation(extent={{-158,-60},{-146,-48}})));
-  AixLib.Fluid.Movers.Pump pumpGeothermalField(
+  AixLib.Fluid.FixedResistances.HydraulicResistance resistanceGeothermalSource(
     redeclare package Medium = Medium,
-    V_flow_max=1.5,
     m_flow_small=1E-4*0.5,
-    ControlStrategy=1,
-    Head_max=10)
-    annotation (Placement(transformation(extent={{-90,-58},{-80,-49}})));
-  AixLib.Fluid.FixedResistances.HydraulicResistance orifice2(redeclare package
-      Medium =
-        Medium,
-    m_flow_small=1E-4*0.5,
-    D=0.05)
-           annotation (Placement(transformation(
+    D=0.05) annotation (Placement(transformation(
         extent={{-6,-7},{6,7}},
         rotation=0,
         origin={-70,-54})));
-  AixLib.Fluid.FixedResistances.HydraulicResistance orifice1(redeclare package
-      Medium =
-        Medium,
+  AixLib.Fluid.FixedResistances.HydraulicResistance resistanceColdConsumerFlow(
+    redeclare package Medium = Medium,
     m_flow_small=1E-4*0.5,
-    D=0.05)
-           annotation (Placement(transformation(
+    D=0.05) annotation (Placement(transformation(
         extent={{-7,-7},{7,7}},
         rotation=0,
         origin={87,-20})));
@@ -87,7 +75,7 @@ model GeothermalHeatPumpBase
         extent={{-6,-7},{6,7}},
         rotation=90,
         origin={-60,1})));
-  Storage.Storage bufferStorageHeatingcoils1(
+  Storage.Storage heatStorage(
     layer_HE(T_start=T_start_warm),
     layer(T_start=T_start_warm),
     redeclare package Medium = Medium,
@@ -100,13 +88,12 @@ model GeothermalHeatPumpBase
     A_HE=3,
     h=1,
     V_HE=0.01,
-    d=1) annotation (Placement(transformation(extent={{52,-96},{24,-62}})));
-  AixLib.Fluid.FixedResistances.HydraulicResistance orifice3(redeclare package
-      Medium =
-        Medium,
+    d=1) "Storage tank for buffering heat demand"
+    annotation (Placement(transformation(extent={{52,-96},{24,-62}})));
+  AixLib.Fluid.FixedResistances.HydraulicResistance resistanceHeatStorage(
+    redeclare package Medium = Medium,
     m_flow_small=1E-4*0.5,
-    D=0.05)
-           annotation (Placement(transformation(
+    D=0.05) annotation (Placement(transformation(
         extent={{-6,-7},{6,7}},
         rotation=90,
         origin={-18,-78})));
@@ -116,16 +103,14 @@ model GeothermalHeatPumpBase
   AixLib.Fluid.Sources.Boundary_pT geothField_sink2(redeclare package Medium =
         Medium, nPorts=1)
     annotation (Placement(transformation(extent={{-158,-15},{-146,-3}})));
-  AixLib.Fluid.FixedResistances.HydraulicResistance orifice4(redeclare package
-      Medium =
-        Medium,
+  AixLib.Fluid.FixedResistances.HydraulicResistance resistanceHeatConsumerFlow(
+    redeclare package Medium = Medium,
     m_flow_small=1E-4*0.5,
     zeta=2,
-    D=0.05)
-           annotation (Placement(transformation(
+    D=0.05) annotation (Placement(transformation(
         extent={{-7,-7},{7,7}},
         rotation=0,
-        origin={83,-50})));
+        origin={87,-50})));
   AixLib.Fluid.Actuators.Valves.SimpleValve
                                  valveColdStorage(redeclare package Medium =
         Medium, m_flow_small=1E-4*0.5)                                               annotation (Placement(
@@ -146,34 +131,32 @@ model GeothermalHeatPumpBase
     redeclare package Medium = Medium,
     addPowerToMedium=false,
     T_start=T_start_cold[1])
+    "Pump moving fluid from storage tank to cold consumers"
     annotation (Placement(transformation(extent={{58,-27},{72,-13}})));
   AixLib.Fluid.Movers.FlowControlled_dp pumpHeatConsumer(
     m_flow_nominal=0.05,
     redeclare package Medium = Medium,
     addPowerToMedium=false,
     T_start=T_start_warm[5])
+    "Pump moving fluid from storage tank to heat consumers"
     annotation (Placement(transformation(extent={{56,-57},{70,-43}})));
   Modelica.Blocks.Sources.RealExpression realExpression
     annotation (Placement(transformation(extent={{-28,-144},{-8,-124}})));
-  AixLib.Fluid.FixedResistances.HydraulicResistance orifice5(redeclare package
-      Medium =
-        Medium,
+  AixLib.Fluid.FixedResistances.HydraulicResistance resistanceColdConsumerReturn(
+    redeclare package Medium = Medium,
     m_flow_small=1E-4*0.5,
-    D=0.05)
-           annotation (Placement(transformation(
+    D=0.05) annotation (Placement(transformation(
         extent={{-7,-7},{7,7}},
         rotation=180,
         origin={87,32})));
-  AixLib.Fluid.FixedResistances.HydraulicResistance orifice6(redeclare package
-      Medium =
-        Medium,
+  AixLib.Fluid.FixedResistances.HydraulicResistance resistanceHeatConsumerReturn(
+    redeclare package Medium = Medium,
     m_flow_small=1E-4*0.5,
     zeta=2,
-    D=0.05)
-           annotation (Placement(transformation(
+    D=0.05) annotation (Placement(transformation(
         extent={{-7,-7},{7,7}},
         rotation=180,
-        origin={89,-106})));
+        origin={87,-106})));
   AixLib.Fluid.Movers.FlowControlled_dp pumpCondenser(
     m_flow_nominal=0.05,
     redeclare package Medium = Medium,
@@ -186,19 +169,28 @@ model GeothermalHeatPumpBase
     m_flow_nominal=0.05,
     redeclare package Medium = Medium,
     addPowerToMedium=false,
-    T_start=T_start_cold[1]) annotation (Placement(transformation(
+    T_start=T_start_cold[1])
+    "Pump moving fluid from storage tank to evaporator of heat pump"
+                             annotation (Placement(transformation(
         extent={{-7,7},{7,-7}},
         rotation=180,
-        origin={7,38})));
+        origin={7,36})));
+  AixLib.Fluid.Movers.FlowControlled_dp pumpGeothermalSource(
+    m_flow_nominal=0.05,
+    redeclare package Medium = Medium,
+    addPowerToMedium=false,
+    T_start=T_start_cold[1])
+    "Pump moving fluid from geothermal source into system" annotation (
+      Placement(transformation(
+        extent={{-7,-7},{7,7}},
+        rotation=0,
+        origin={-89,-54})));
 equation
 
 
 
-  connect(pumpGeothermalField.port_b, orifice2.port_a) annotation (Line(
-      points={{-80,-53.5},{-78,-53.5},{-78,-54},{-76,-54}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  connect(orifice2.port_b, valveColdSource.port_a) annotation (Line(
+  connect(resistanceGeothermalSource.port_b, valveColdSource.port_a)
+    annotation (Line(
       points={{-64,-54},{-36,-54}},
       color={0,127,255},
       smooth=Smooth.None));
@@ -208,22 +200,23 @@ equation
       color={0,127,255},
       smooth=Smooth.None));
 
-  connect(orifice.port_b, valveColdStorage.port_a) annotation (Line(
+  connect(resistanceColdStorage.port_b, valveColdStorage.port_a) annotation (
+      Line(
       points={{-40,38},{-46,38}},
       color={0,127,255},
       smooth=Smooth.None));
-  connect(orifice3.port_b, valveHeatStorage.port_a) annotation (Line(
+  connect(resistanceHeatStorage.port_b, valveHeatStorage.port_a) annotation (
+      Line(
       points={{-18,-72},{-18,-69}},
       color={0,127,255},
       smooth=Smooth.None));
 
-  connect(bufferStorageHeatingcoils.port_a_consumer, pumpColdConsumer.port_a)
-    annotation (Line(points={{38,-14},{38,-14},{38,-20},{58,-20}}, color={0,127,
-          255}));
-  connect(pumpColdConsumer.port_b, orifice1.port_a)
+  connect(coldStorage.port_a_consumer, pumpColdConsumer.port_a) annotation (
+      Line(points={{38,-14},{38,-14},{38,-20},{58,-20}}, color={0,127,255}));
+  connect(pumpColdConsumer.port_b, resistanceColdConsumerFlow.port_a)
     annotation (Line(points={{72,-20},{80,-20}}, color={0,127,255}));
-  connect(pumpHeatConsumer.port_b, orifice4.port_a)
-    annotation (Line(points={{70,-50},{73,-50},{76,-50}}, color={0,127,255}));
+  connect(pumpHeatConsumer.port_b, resistanceHeatConsumerFlow.port_a)
+    annotation (Line(points={{70,-50},{80,-50}}, color={0,127,255}));
   connect(valveHeatSource.port_b, heatPumpTab.port_a_source) annotation (Line(
         points={{-60,7},{-60,14.9},{-38.2,14.9}}, color={0,127,255}));
   connect(valveColdStorage.port_b, heatPumpTab.port_a_source) annotation (Line(
@@ -237,32 +230,31 @@ equation
   connect(geothField_sink2.ports[1], heatPumpTab.port_b_source) annotation (
       Line(points={{-146,-9},{-92,-9},{-92,-8.9},{-38.2,-8.9}},     color={0,127,
           255}));
-  connect(geothField_source.ports[1], pumpGeothermalField.port_a) annotation (
-      Line(points={{-146,-54},{-90,-54},{-90,-53.5}}, color={0,127,255}));
-  connect(bufferStorageHeatingcoils1.port_a_heatGenerator, heatPumpTab.port_b_sink)
+  connect(heatStorage.port_a_heatGenerator, heatPumpTab.port_b_sink)
     annotation (Line(points={{26.24,-64.04},{10,-64.04},{10,14.9},{-5.8,14.9}},
         color={0,127,255}));
-  connect(bufferStorageHeatingcoils1.port_b_consumer, pumpHeatConsumer.port_a)
-    annotation (Line(points={{38,-62},{38,-62},{38,-50},{56,-50}}, color={0,127,
-          255}));
-  connect(orifice5.port_b, bufferStorageHeatingcoils.port_b_consumer)
+  connect(heatStorage.port_b_consumer, pumpHeatConsumer.port_a) annotation (
+      Line(points={{38,-62},{38,-62},{38,-50},{56,-50}}, color={0,127,255}));
+  connect(resistanceColdConsumerReturn.port_b, coldStorage.port_b_consumer)
     annotation (Line(points={{80,32},{38,32},{38,20}}, color={0,127,255}));
-  connect(orifice6.port_b, bufferStorageHeatingcoils1.port_a_consumer)
-    annotation (Line(points={{82,-106},{72,-106},{38,-106},{38,-96}}, color={0,
-          127,255}));
-  connect(heatPumpTab.port_b_source, bufferStorageHeatingcoils.port_b_heatGenerator)
-    annotation (Line(points={{-38.2,-8.9},{-38.2,-24},{18,-24},{18,-10.6},{
-          26.24,-10.6}}, color={0,127,255}));
-  connect(pumpEvaporator.port_b, orifice.port_a) annotation (Line(points={{
-          -8.88178e-016,38},{-8.88178e-016,38},{-28,38}}, color={0,127,255}));
-  connect(bufferStorageHeatingcoils.port_a_heatGenerator, pumpEvaporator.port_a)
-    annotation (Line(points={{26.24,17.96},{20,17.96},{20,38},{14,38}}, color={
-          0,127,255}));
-  connect(bufferStorageHeatingcoils1.port_b_heatGenerator, pumpCondenser.port_a)
-    annotation (Line(points={{26.24,-92.6},{16,-92.6},{16,-98},{6,-98}}, color=
-          {0,127,255}));
-  connect(pumpCondenser.port_b, orifice3.port_a) annotation (Line(points={{-8,
-          -98},{-18,-98},{-18,-84}}, color={0,127,255}));
+  connect(resistanceHeatConsumerReturn.port_b, heatStorage.port_a_consumer)
+    annotation (Line(points={{80,-106},{80,-106},{38,-106},{38,-96}}, color={0,127,
+          255}));
+  connect(heatPumpTab.port_b_source, coldStorage.port_b_heatGenerator)
+    annotation (Line(points={{-38.2,-8.9},{-38.2,-24},{18,-24},{18,-10.6},{26.24,
+          -10.6}}, color={0,127,255}));
+  connect(pumpEvaporator.port_b, resistanceColdStorage.port_a) annotation (Line(
+        points={{-8.88178e-016,36},{-8.88178e-016,38},{-28,38}}, color={0,127,255}));
+  connect(coldStorage.port_a_heatGenerator, pumpEvaporator.port_a) annotation (
+      Line(points={{26.24,17.96},{20,17.96},{20,36},{14,36}}, color={0,127,255}));
+  connect(heatStorage.port_b_heatGenerator, pumpCondenser.port_a) annotation (
+      Line(points={{26.24,-92.6},{16,-92.6},{16,-98},{6,-98}}, color={0,127,255}));
+  connect(pumpCondenser.port_b, resistanceHeatStorage.port_a) annotation (Line(
+        points={{-8,-98},{-18,-98},{-18,-84}}, color={0,127,255}));
+  connect(pumpGeothermalSource.port_b, resistanceGeothermalSource.port_a)
+    annotation (Line(points={{-82,-54},{-79,-54},{-76,-54}}, color={0,127,255}));
+  connect(pumpGeothermalSource.port_a, geothField_source.ports[1])
+    annotation (Line(points={{-96,-54},{-146,-54}}, color={0,127,255}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-160,
           -120},{160,80}})),              Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-160,-120},{160,80}}),
