@@ -441,10 +441,7 @@ equation
     annotation (Line(points={{67,62},{66.9,62},{66.9,50}}, color={191,0,0}));
   annotation (experiment(
       StopTime=3.1536e+007,
-      Interval=3600,
-      __Dymola_Algorithm="Dassl"),
-  __Dymola_experimentSetupOutput(equidistant=true,
-  events=false),
+      Interval=3600),
     Diagram(coordinateSystem(extent={{-140,-100},{160,160}}), graphics={
         Rectangle(
           extent={{102,160},{160,-100}},
