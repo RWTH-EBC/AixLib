@@ -214,7 +214,7 @@ model TestCase950FF "Test case 950 free float"
     "Outdoor convective heat transfer of roof"
     annotation (Placement(transformation(extent={{5,-5},{-5,5}},rotation=-90,
     origin={67,67})));
-  Modelica.Blocks.Sources.Constant alphaRoof(k=1406.4)
+  Modelica.Blocks.Sources.Constant alphaRoof(k=29.3*48)
     "Outdoor coefficient of heat transfer for roof"
     annotation (Placement(transformation(extent={{4,-4},{-4,4}},rotation=0,
     origin={86,67})));
