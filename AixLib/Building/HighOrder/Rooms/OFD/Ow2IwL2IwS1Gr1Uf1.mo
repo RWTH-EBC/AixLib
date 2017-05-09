@@ -174,7 +174,7 @@ equation
   connect(NaturalVentilation.InPort1, AirExchangePort) annotation(Line(points = {{-67, -46.4}, {-80, -46.4}, {-80, 74}, {-20, 74}, {-20, 100}}, color = {0, 0, 127}));
   connect(NaturalVentilation.port_b, airload.port) annotation(Line(points = {{-48, -40}, {-6, -40}, {-6, -12}, {1, -12}}, color = {191, 0, 0}));
   connect(thermInsideWall1b, thermInsideWall1b) annotation(Line(points = {{90, -10}, {85, -10}, {85, -10}, {90, -10}}, color = {191, 0, 0}));
-  annotation(Dialog(groupImage = "AixLib/Resources/Images/Building/HighOrder/2OW_2IWl_1IWs_1Gr_Pa.png", Width = 5, Length = 5), Icon(graphics={  Rectangle(extent = {{-6, -46}, {6, 46}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
+  annotation(Dialog(groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/2OW_2IWl_1IWs_1Gr_Pa.png", Width = 5, Length = 5), Icon(graphics={  Rectangle(extent = {{-6, -46}, {6, 46}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid, origin = {74, -22}, radius = 0), Rectangle(extent = {{-80, 80}, {80, 60}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{25, 10}, {-25, -10}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255},
             fillPattern =                                                                                                   FillPattern.Solid, origin = {-25, 70}, rotation = 180, visible = withWindow2), Rectangle(extent = {{6, 18}, {-6, -18}}, lineColor = {0, 0, 0}, fillColor = {135, 135, 135},

@@ -156,7 +156,7 @@ equation
   connect(NaturalVentilation.port_b, airload.port) annotation(Line(points = {{-48, -40}, {-6, -40}, {-6, -12}, {1, -12}}, color = {191, 0, 0}));
   connect(roof.WindSpeedPort, WindSpeedPort) annotation(Line(points={{69.7333,
           62.15},{69.7333,72},{-80,72},{-80,-50},{-99.5,-50}},                                                                                color = {0, 0, 127}));
-  annotation(Dialog(groupImage = "AixLib/Resources/Images/Building/HighOrder/OW1_2IWl_2IWs_1Pa_1At1Ro.png", Width = 5, Length = 5), Icon(graphics={  Rectangle(extent = {{-80, 80}, {80, 68}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
+  annotation(Dialog(groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/OW1_2IWl_2IWs_1Pa_1At1Ro.png", Width = 5, Length = 5), Icon(graphics={  Rectangle(extent = {{-80, 80}, {80, 68}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{80, 60}, {68, -68}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-60, 68}, {68, -68}}, lineColor = {0, 0, 0}, fillColor = {47, 102, 173},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-80, 68}, {-60, -80}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},

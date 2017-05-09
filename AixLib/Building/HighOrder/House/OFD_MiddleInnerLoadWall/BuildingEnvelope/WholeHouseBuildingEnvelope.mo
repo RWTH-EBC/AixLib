@@ -82,7 +82,7 @@ equation
   connect(attic_2Ro_5Rooms.SolarRadiationPort_OW1, East) annotation (Line(
       points={{-27.38,62},{-74,62},{-74,90},{60,90},{60,-18},{90,-18}},
       color={255,128,0}));
-  annotation(Dialog(groupImage = "AixLib/Resources/Images/Building/HighOrder/Grundriss.png"), Icon(graphics={  Bitmap(extent = {{-78, 74}, {72, -68}}, fileName = "modelica://AixLib/Resources/Images/Building/HighOrder/Grundriss.PNG")}), Documentation(info = "<html>
+  annotation(Dialog(groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/Grundriss.png"), Icon(graphics={  Bitmap(extent = {{-78, 74}, {72, -68}}, fileName = "modelica://AixLib/Resources/Images/Building/HighOrder/Grundriss.PNG")}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for the envelope of the whole one family dwelling.</p>
  <h4><span style=\"color:#008000\">Level of Development</span></h4>
