@@ -19,8 +19,8 @@ info="<html>
 Record for copper pipe
 </p>
 
-<h4><font color=\"#008000\">References</font></h4>
-<p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
+
+
 <p>Source: </p>
 <ul>
 <li>DIN EN 1057:2010-06</li>
