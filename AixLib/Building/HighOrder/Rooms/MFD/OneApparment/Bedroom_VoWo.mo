@@ -5,7 +5,7 @@ model Bedroom_VoWo "Bedroom from the VoWo appartment"
   import AixLib;
   ///////// construction parameters
   parameter Integer TMC = 1 "Thermal Mass Class" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1 "Heavy", choice = 2 "Medium", choice = 3 "Light", radioButtons = true));
-  parameter Integer TIR = 4 "Thermal Insulation Regulation" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1
+  parameter Integer TIR = 4 "Thermal Insulation Regulation" annotation(Dialog(groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/VoWo_Bedroom.png", group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1
         "EnEV_2009",                                                                                                    choice = 2
         "EnEV_2002",                                                                                                    choice = 3
         "WSchV_1995",                                                                                                    choice = 4
@@ -102,28 +102,28 @@ equation
   connect(NaturalVentilation.port_a, thermOutside) annotation(Line(points = {{66, 85}, {44, 85}, {44, 90}, {-100, 90}}, color = {191, 0, 0}));
   connect(airload.port, NaturalVentilation.port_b) annotation(Line(points = {{29, 6}, {44, 6}, {44, 66}, {100, 66}, {100, 85}, {94, 85}}, color = {191, 0, 0}));
   connect(outsideWall.port_outside, thermOutside) annotation(Line(points = {{-4, -102.5}, {-4, -130}, {-80, -130}, {-80, 90}, {-100, 90}}, color = {191, 0, 0}));
-  annotation(Dialog(groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/VoWo_Bedroom.png"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Rectangle(extent=  {{-54, 68}, {98, -112}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 255},
-            fillPattern=                                                                                                    FillPattern.Forward), Text(extent=  {{-40, 2}, {84, -26}}, lineColor=  {0, 0, 0}, fillColor=  {255, 0, 0},
-            fillPattern=                                                                                                    FillPattern.Forward, textString=  "Bedroom"), Rectangle(extent=  {{-42, -104}, {-20, -124}}, lineColor=  {0, 0, 0}, fillColor=  {85, 255, 255},
-            fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-40, -106}, {-22, -122}}, lineColor=  {0, 0, 0}, fillColor=  {170, 213, 255},
-            fillPattern=                                                                                                    FillPattern.Solid), Line(points=  {{-36, -118}, {-26, -108}}, color=  {255, 255, 255}, thickness=  1), Line(points=  {{-32, -118}, {-26, -112}}, color=  {255, 255, 255}, thickness=  1), Line(points=  {{-36, -114}, {-30, -108}}, color=  {255, 255, 255}, thickness=  1), Text(extent=  {{-32, -112}, {18, -128}}, lineColor=  {0, 0, 0},
-            lineThickness=                                                                                                    1, fillColor=  {255, 255, 255},
-            fillPattern=                                                                                                    FillPattern.Solid, textString=  "OW"), Text(extent=  {{26, 92}, {76, 76}}, lineColor=  {0, 0, 0},
-            lineThickness=                                                                                                    1, fillColor=  {255, 255, 255},
-            fillPattern=                                                                                                    FillPattern.Solid, textString=  "Corridor"), Rectangle(extent=  {{-54, 94}, {-34, 64}}, lineColor=  {0, 0, 0},
-            lineThickness=                                                                                                    1, fillColor=  {127, 0, 0},
-            fillPattern=                                                                                                    FillPattern.Forward), Ellipse(extent=  {{-52, 82}, {-50, 80}}, lineColor=  {0, 0, 0}, pattern=LinePattern.None,
-            lineThickness=                                                                                                    1,
-            fillPattern=                                                                                                    FillPattern.Sphere, fillColor=  {255, 255, 0}), Text(extent=  {{-72, -16}, {-76, -18}}, lineColor=  {0, 0, 0},
-            lineThickness=                                                                                                    0.5, textString=  "Edit Here"), Rectangle(extent=  {{-110, -110}, {-90, -130}}, lineColor=  {0, 0, 0},
-            lineThickness=                                                                                                    0.5), Rectangle(extent=  {{-110, -80}, {-90, -100}}, lineColor=  {0, 0, 0},
-            lineThickness=                                                                                                    0.5), Rectangle(extent=  {{-110, -20}, {-90, -40}}, lineColor=  {0, 0, 0},
-            lineThickness=                                                                                                    0.5), Rectangle(extent=  {{-110, 10}, {-90, -10}}, lineColor=  {0, 0, 0},
-            lineThickness=                                                                                                    0.5), Rectangle(extent=  {{-110, 72}, {-90, 18}}, lineColor=  {0, 0, 0},
-            lineThickness=                                                                                                    0.5), Rectangle(extent=  {{-110, 100}, {-90, 80}}, lineColor=  {0, 0, 0},
-            lineThickness=                                                                                                    0.5), Rectangle(extent=  {{-110, -50}, {-90, -70}}, lineColor=  {0, 0, 0},
-            lineThickness=                                                                                                    0.5), Rectangle(extent=  {{-110, -140}, {-90, -160}}, lineColor=  {0, 0, 0},
-            lineThickness=                                                                                                    0.5)}), Documentation(revisions = "<html>
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Rectangle(extent = {{-54, 68}, {98, -112}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
+            fillPattern =                                                                                                   FillPattern.Forward), Text(extent = {{-40, 2}, {84, -26}}, lineColor = {0, 0, 0}, fillColor = {255, 0, 0},
+            fillPattern =                                                                                                   FillPattern.Forward, textString = "Bedroom"), Rectangle(extent = {{-42, -104}, {-20, -124}}, lineColor = {0, 0, 0}, fillColor = {85, 255, 255},
+            fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-40, -106}, {-22, -122}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255},
+            fillPattern =                                                                                                   FillPattern.Solid), Line(points = {{-36, -118}, {-26, -108}}, color = {255, 255, 255}, thickness = 1), Line(points = {{-32, -118}, {-26, -112}}, color = {255, 255, 255}, thickness = 1), Line(points = {{-36, -114}, {-30, -108}}, color = {255, 255, 255}, thickness = 1), Text(extent = {{-32, -112}, {18, -128}}, lineColor = {0, 0, 0},
+            lineThickness =                                                                                                   1, fillColor = {255, 255, 255},
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "OW"), Text(extent = {{26, 92}, {76, 76}}, lineColor = {0, 0, 0},
+            lineThickness =                                                                                                   1, fillColor = {255, 255, 255},
+            fillPattern =                                                                                                   FillPattern.Solid, textString = "Corridor"), Rectangle(extent = {{-54, 94}, {-34, 64}}, lineColor = {0, 0, 0},
+            lineThickness =                                                                                                   1, fillColor = {127, 0, 0},
+            fillPattern =                                                                                                   FillPattern.Forward), Ellipse(extent = {{-52, 82}, {-50, 80}}, lineColor = {0, 0, 0}, pattern=LinePattern.None,
+            lineThickness =                                                                                                   1,
+            fillPattern =                                                                                                   FillPattern.Sphere, fillColor = {255, 255, 0}), Text(extent = {{-72, -16}, {-76, -18}}, lineColor = {0, 0, 0},
+            lineThickness =                                                                                                   0.5, textString = "Edit Here"), Rectangle(extent = {{-110, -110}, {-90, -130}}, lineColor = {0, 0, 0},
+            lineThickness =                                                                                                   0.5), Rectangle(extent = {{-110, -80}, {-90, -100}}, lineColor = {0, 0, 0},
+            lineThickness =                                                                                                   0.5), Rectangle(extent = {{-110, -20}, {-90, -40}}, lineColor = {0, 0, 0},
+            lineThickness =                                                                                                   0.5), Rectangle(extent = {{-110, 10}, {-90, -10}}, lineColor = {0, 0, 0},
+            lineThickness =                                                                                                   0.5), Rectangle(extent = {{-110, 72}, {-90, 18}}, lineColor = {0, 0, 0},
+            lineThickness =                                                                                                   0.5), Rectangle(extent = {{-110, 100}, {-90, 80}}, lineColor = {0, 0, 0},
+            lineThickness =                                                                                                   0.5), Rectangle(extent = {{-110, -50}, {-90, -70}}, lineColor = {0, 0, 0},
+            lineThickness =                                                                                                   0.5), Rectangle(extent = {{-110, -140}, {-90, -160}}, lineColor = {0, 0, 0},
+            lineThickness =                                                                                                   0.5)}), Documentation(revisions = "<html>
  <ul>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
  <li><i>August 16, 2011</i> by Ana Constantin:<br/>Implemented</li>

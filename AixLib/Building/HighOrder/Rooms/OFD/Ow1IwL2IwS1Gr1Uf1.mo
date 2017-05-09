@@ -10,7 +10,7 @@ model Ow1IwL2IwS1Gr1Uf1
         "WSchV_1995",                                                                                                    choice = 4
         "WSchV_1984",                                                                                                    radioButtons = true));
   parameter Integer TRY = 1
-    "Region according to TRY, influences the ground temperature"                         annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice=1 "TRY01",
+    "Region according to TRY, influences the ground temperature"                         annotation(Dialog(groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/1OW_2IWl_2IWs_1Gr_Pa.png", group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice=1 "TRY01",
                  choice = 2 "TRY02", choice = 3 "TRY03",  choice = 4 "TRY04", choice = 5 "TRY05", choice = 6 "TRY06", choice = 7 "TRY07", choice = 8 "TRY08",
         choice = 9 "TRY09", choice = 10 "TRY10", choice = 11 "TRY11", choice = 12 "TRY12", choice = 13 "TRY13", choice = 14 "TRY14", choice= 15 "TRY15",radioButtons = true));
   parameter Boolean withFloorHeating = false
@@ -157,7 +157,7 @@ equation
   connect(NaturalVentilation.port_a, thermOutside) annotation(Line(points = {{-68, -40}, {-80, -40}, {-80, 90}, {-90, 90}}, color = {191, 0, 0}));
   connect(NaturalVentilation.port_b, airload.port) annotation(Line(points = {{-48, -40}, {-6, -40}, {-6, -12}, {1, -12}}, color = {191, 0, 0}));
   connect(thermCeiling, thermCeiling) annotation(Line(points = {{90, 70}, {85, 70}, {85, 70}, {90, 70}}, color = {191, 0, 0}));
-  annotation(Dialog(groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/1OW_2IWl_2IWs_1Gr_Pa.png"), Icon(graphics={  Rectangle(extent = {{6, 65}, {-6, -65}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
+  annotation(Icon(graphics={  Rectangle(extent = {{6, 65}, {-6, -65}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid, origin = {74, -3}, rotation = 180), Rectangle(extent = {{-60, 68}, {68, -68}}, lineColor = {0, 0, 0}, fillColor = {47, 102, 173},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-80, 68}, {-60, -80}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-60, -68}, {80, -80}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
