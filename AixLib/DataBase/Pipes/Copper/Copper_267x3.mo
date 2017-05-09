@@ -7,7 +7,7 @@ record Copper_267x3 "Copper 267x3"
     d=8900,
     lambda=393,
     c=390);
-  // Constant chemical Values assumed
+  // Constant chemical values assumed
 
   annotation (Documentation(revisions="<html>
 <ul>

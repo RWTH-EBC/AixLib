@@ -7,7 +7,7 @@ record Copper_28x1_5 "Copper 28x1.5"
     d=8900,
     lambda=393,
     c=390);
-  // Constant chemical Values assumed
+  // Constant chemical values assumed
 
   annotation (Documentation(revisions="<html>
 <ul>
