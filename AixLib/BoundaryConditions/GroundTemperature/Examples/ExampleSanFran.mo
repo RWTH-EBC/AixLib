@@ -9,7 +9,7 @@ model ExampleSanFran
   temperature" annotation (Placement(
         transformation(extent={{-90,54},{-50,94}}), iconTransformation(extent={{
             -168,6},{-148,26}})));
-  Modelica.Blocks.Interfaces.RealOutput T "Output to show air temperature"
+  Modelica.Blocks.Interfaces.RealOutput T_air "Output to show air temperature"
     annotation (Placement(transformation(extent={{140,62},{160,82}})));
   Modelica.Blocks.Continuous.Integrator integrator "Integrates air temperature 
   to compute average air temperature"
@@ -49,17 +49,16 @@ model ExampleSanFran
     annotation (Placement(transformation(extent={{140,-10},{160,10}})));
 equation
 
- T_max= max(T_max,T);
- T_min= min(T_min,T);
+ T_max=max(T_max, T_air);
+ T_min=min(T_min, T_air);
  T_amp = (T_max-T_min)/2;
-  connect(T, weaBus.TDryBul) annotation (Line(points={{150,72},{-70,72},{-70,74}},
-        color={0,0,127}), Text(
+  connect(T_air, weaBus.TDryBul) annotation (Line(points={{150,72},{-70,72},{-70,
+          74}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(integrator.u, T)
-    annotation (Line(points={{-2,50},{-14,50},{-14,72},{150,72}},
-                                                color={0,0,127}));
+  connect(integrator.u, T_air) annotation (Line(points={{-2,50},{-14,50},{-14,
+          72},{150,72}}, color={0,0,127}));
   connect(integrator.y, division.u1) annotation (Line(points={{21,50},{30,50},{30,
           36},{38,36}}, color={0,0,127}));
   connect(division.y, T_mean)
