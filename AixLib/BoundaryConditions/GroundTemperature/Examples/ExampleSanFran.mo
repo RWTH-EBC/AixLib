@@ -35,8 +35,8 @@ model ExampleSanFran
     t_shift=23,
     alpha=0.039,
     D=1,
-    T_amp=14.0625,
-    T_mean=286.65) "Undisturbed ground temperature model"
+    T_mean=286.95,
+    T_amp=15.49)   "Undisturbed ground temperature model"
     annotation (Placement(transformation(extent={{40,-60},{60,-40}})));
   Modelica.Blocks.Interfaces.RealOutput T_ground "Output to show ground 
   temperature"
@@ -102,5 +102,14 @@ temperature over the year.</p>
 
 
 
-</html>"), experiment(StopTime=3.1536e+007));
+</html>"), experiment(
+      StopTime=3.1536e+007,
+      __Dymola_NumberOfIntervals=10000,
+      __Dymola_Algorithm="Euler"),
+    __Dymola_experimentSetupOutput,
+    __Dymola_experimentFlags(
+      Advanced(GenerateVariableDependencies=false, OutputModelicaCode=false),
+      Evaluate=false,
+      OutputCPUtime=false,
+      OutputFlatModelica=false));
 end ExampleSanFran;
