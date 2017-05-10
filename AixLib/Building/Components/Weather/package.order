@@ -2,3 +2,5 @@ Weather
 RadiationOnTiltedSurface
 Sunblinds
 BaseClasses
+Weather_NoSolarRad
+SolarRadiationBus
