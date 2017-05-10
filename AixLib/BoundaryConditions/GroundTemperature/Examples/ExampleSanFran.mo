@@ -51,7 +51,7 @@ equation
 
  T_max= max(T_max,T);
  T_min= min(T_min,T);
- T_amp = T_max-T_min;
+ T_amp = (T_max-T_min)/2;
   connect(T, weaBus.TDryBul) annotation (Line(points={{150,72},{-70,72},{-70,74}},
         color={0,0,127}), Text(
       string="%second",
