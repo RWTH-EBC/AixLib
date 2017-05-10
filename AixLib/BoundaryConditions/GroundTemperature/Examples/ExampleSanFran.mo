@@ -1,45 +1,57 @@
 within AixLib.BoundaryConditions.GroundTemperature.Examples;
 model ExampleSanFran
   extends Modelica.Icons.Example;
-  Real T_max(start=0);
-  Real T_min(start=300);
+  Real T_max(start=0) "Keeps track of the maximum air temperature";
+  Real T_min(start=300) "Keeps track of the minimum air temperature";
 
-  AixLib.BoundaryConditions.WeatherData.Bus    weaBus annotation (Placement(
+
+  AixLib.BoundaryConditions.WeatherData.Bus    weaBus "Component to supply air 
+  temperature" annotation (Placement(
         transformation(extent={{-90,54},{-50,94}}), iconTransformation(extent={{
             -168,6},{-148,26}})));
-  Modelica.Blocks.Interfaces.RealOutput T
+  Modelica.Blocks.Interfaces.RealOutput T "Output to show air temperature"
     annotation (Placement(transformation(extent={{140,62},{160,82}})));
-  Modelica.Blocks.Continuous.Integrator integrator
+  Modelica.Blocks.Continuous.Integrator integrator "Integrates air temperature 
+  to compute average air temperature"
     annotation (Placement(transformation(extent={{0,40},{20,60}})));
-  Modelica.Blocks.Math.Division division
+  Modelica.Blocks.Math.Division division "Division for average air temperature"
     annotation (Placement(transformation(extent={{40,20},{60,40}})));
-  Modelica.Blocks.Sources.RealExpression realExpression2(y=time)
-    annotation (Placement(transformation(extent={{-22,-18},{-2,2}})));
-  Modelica.Blocks.Interfaces.RealOutput T_mean
+  Modelica.Blocks.Sources.RealExpression timeSource(y=time) "Denominator for 
+  average air temperature"
+    annotation (Placement(transformation(extent={{-40,-18},{-20,2}})));
+  Modelica.Blocks.Interfaces.RealOutput T_mean "Output of average air 
+  temperature since beginning of simulation"
     annotation (Placement(transformation(extent={{140,20},{160,40}})));
-  Modelica.Blocks.Math.Max max1
+  Modelica.Blocks.Math.Max max1 "Function to prevent division by 0 at time=0"
     annotation (Placement(transformation(extent={{10,-12},{30,8}})));
-  Modelica.Blocks.Sources.RealExpression realExpression1(y=1)
-    annotation (Placement(transformation(extent={{-22,-6},{-2,14}})));
-  AixLib.BoundaryConditions.WeatherData.ReaderTMY3    weaDat(filNam=
-        "modelica://Buildings/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos",
-      computeWetBulbTemperature=false) "File reader that reads weather data"
+  Modelica.Blocks.Sources.RealExpression denominatorAtTimeZero(y=1) "Real source
+  to prevent division by 0 at time=0"
+    annotation (Placement(transformation(extent={{-40,4},{-20,24}})));
+  AixLib.BoundaryConditions.WeatherData.ReaderTMY3    weaDat(
+      computeWetBulbTemperature=false, filNam="modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
+                                       "File reader that reads weather data"
     annotation (Placement(transformation(extent={{-40,78},{-20,98}})));
   GroundTemperatureKusuda groundTemperatureKasuda(
-    T_mean=286.65,
     t_shift=23,
     alpha=0.039,
     D=1,
-    T_amp=14.0625)
+    T_amp=14.0625,
+    T_mean=286.65) "Undisturbed ground temperature model"
     annotation (Placement(transformation(extent={{40,-60},{60,-40}})));
-  Modelica.Blocks.Interfaces.RealOutput T_ground
+  Modelica.Blocks.Interfaces.RealOutput T_ground "Output to show ground 
+  temperature"
     annotation (Placement(transformation(extent={{140,-56},{160,-36}})));
-  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor "Sensor
+  to show ground temperature"
     annotation (Placement(transformation(extent={{74,-60},{94,-40}})));
+  Modelica.Blocks.Interfaces.RealOutput T_amp
+    "Keeps track of the amplitude of the air temperature"
+    annotation (Placement(transformation(extent={{140,-10},{160,10}})));
 equation
 
  T_max= max(T_max,T);
  T_min= min(T_min,T);
+ T_amp = T_max-T_min;
   connect(T, weaBus.TDryBul) annotation (Line(points={{150,72},{-70,72},{-70,74}},
         color={0,0,127}), Text(
       string="%second",
@@ -55,10 +67,10 @@ equation
                                                 color={0,0,127}));
   connect(division.u2, max1.y)
     annotation (Line(points={{38,24},{31,24},{31,-2}}, color={0,0,127}));
-  connect(max1.u2, realExpression2.y)
-    annotation (Line(points={{8,-8},{4,-8},{-1,-8}}, color={0,0,127}));
-  connect(realExpression1.y, max1.u1)
-    annotation (Line(points={{-1,4},{8,4}}, color={0,0,127}));
+  connect(max1.u2, timeSource.y)
+    annotation (Line(points={{8,-8},{-19,-8}}, color={0,0,127}));
+  connect(denominatorAtTimeZero.y, max1.u1)
+    annotation (Line(points={{-19,14},{2,14},{2,4},{8,4}}, color={0,0,127}));
   connect(weaDat.weaBus, weaBus) annotation (Line(
       points={{-20,88},{-16,88},{-16,86},{-10,86},{-10,74},{-70,74}},
       color={255,204,51},
@@ -73,10 +85,22 @@ equation
   annotation (Documentation(revisions="<html>
 <p>
 <ul>
+<li><i>May 2017</i>, by Felix Bünning: Updated documentation, added T_amp as output</li>
 <li><i>October 2016</i>, by Felix Bünning: Developed and implemented</li>
 </ul>
 </p>
 </html>", info="<html>
-Example to test Kusuda ground temperature model with the weather model from the Modelica Buildings Library.
+<p>Example to test and tune Kusuda ground temperature model with the weather model from the Modelica Buildings Library.</p>
+
+<p>The outputs T, T<sub>amp</sub> and T<sub>mean</sub> in the top of the model can be used to determine the parameters 
+t<sub>shift</sub> (day of the coldest air temperature in the year), T<sub>mean</sub> (average air temperature in the year)
+ and T<sub>amp</sub> (amplitude of the air temperature) for the Kusuda ground temperature model. </p>
+
+<p>The output T<sub>ground</sub> constitutes the main result of this example and shows the trajectory of the ground
+temperature over the year.</p>
+
+
+
+
 </html>"), experiment(StopTime=3.1536e+007));
 end ExampleSanFran;
