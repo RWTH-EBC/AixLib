@@ -384,10 +384,10 @@ determine the cost for the adjustments. The cheaper supplier is selcted by the b
 
 <h4><span style=\"color: #008000\">Example Results</span></h4>
 <p>The results show that the agent-based control system keeps the room temperature between 19.2 and 20.8 degC most of the time.</p>
-<p><img src=\"modelica://HVACAgentBasedControl/Resources/Images/ExampleT.PNG\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/ExampleT.PNG\"/></p>
 <p>The results for the capacity of the heat suppliers further show that for an increase in heat supply the cheaper supplier is always chosen first and for a decrease the more expensive one. In real-life systems this could be
 a heat-pump and a heating rod for example.</p>
-<p><img src=\"modelica://HVACAgentBasedControl/Resources/Images/ExampleCap.PNG\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/ExampleCap.PNG\"/></p>
 <p>The trading procedure can be followed in the command line window of the dymosim.exe or found in the dslog.txt file after simulation. For one negotiation round it looks as follows.</p>
 
 <ul>

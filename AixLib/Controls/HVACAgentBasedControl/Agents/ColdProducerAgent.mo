@@ -712,7 +712,7 @@ equation
 </ul>
 <h4><span style=\"color: #008000\">Concept</span></h4>
 <p>The heat producer agent recives a call for proposal from the broker with a requested capacity adjustment. It makes a proposal with the help of a Cost function for the adjustment and sends it back to the broker. If the proposal is accepted, the agent confirms the adjustment and adjusts the capacity of the controlled device accordingly. The logic is implemented with the help of the StateGraph library. Communication is realized with the help of the DeviceDriver library and follows the language standards for multi-agent-systems set by the FIPA to the highest possible extend for Modelica models. The following figure shows the behaviour of the consumer agent. For further information please refer to the first reference.</p>
-<p><img src=\"modelica://HVACAgentBasedControl/Resources/Images/ProducerAgent.png\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/ProducerAgent.png\"/></p>
 <h4><span style=\"color: #008000\">References</span></h4>
 <ul>
 <li>Roozbeh Sangi, Felix B&uuml;nning, Marc Baranski, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic. </li>

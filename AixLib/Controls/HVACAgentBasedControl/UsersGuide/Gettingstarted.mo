@@ -31,7 +31,9 @@ The system consists of two thermal zones (or rooms) and two heat producers e.g. 
 description please refer to the <a href=\"HVACAgentBasedControl.Examples.SimpleHeatingSystem.BuildingHeating\">model itself</a>. There are more examples available in the Example package if
 you need further input.
 </p>
-<p><img src=\"modelica://HVACAgentBasedControl/Resources/Images/ExampleSystem.PNG\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/ExampleSystem.PNG\"/></p>
+
+
 </html>", revisions="<html>
 <ul>
 <li>November 2016, by Felix B&uuml;nning: Original implementation</li>
