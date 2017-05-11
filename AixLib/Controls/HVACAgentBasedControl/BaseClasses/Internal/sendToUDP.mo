@@ -9,7 +9,7 @@ function sendToUDP
   input Real dummy;
   output Real dummy2;
 algorithm
-  HVACAgentBasedControl.BaseClasses.Internal.sendTo(
+  AixLib.Controls.HVACAgentBasedControl.BaseClasses.Internal.sendTo(
     socket,
     ipAddress,
     port,
