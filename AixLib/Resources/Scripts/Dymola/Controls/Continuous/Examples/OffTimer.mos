@@ -1,4 +1,4 @@
-simulateModel("AixLib.Controls.Continuous.Examples.OffTimer", method="dassl", stopTime=1, resultFile="OffTimer");
+simulateModel("AixLib.Controls.Continuous.Examples.OffTimer", method="dassl", tolerance=1e-6, stopTime=1, resultFile="OffTimer");
 
 removePlots();
 createPlot(id = 14,
