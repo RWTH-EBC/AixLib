@@ -22,7 +22,8 @@ model ExampleSanFran
   Modelica.Blocks.Interfaces.RealOutput T_mean "Output of average air 
   temperature since beginning of simulation"
     annotation (Placement(transformation(extent={{140,20},{160,40}})));
-  Modelica.Blocks.Math.Max max1 "Function to prevent division by 0 at time=0"
+  Modelica.Blocks.Math.Max denominatorTmean
+    "Max-function to prevent division by 0 at time=0"
     annotation (Placement(transformation(extent={{10,-12},{30,8}})));
   Modelica.Blocks.Sources.RealExpression denominatorAtTimeZero(y=1) "Real source
   to prevent division by 0 at time=0"
@@ -64,11 +65,11 @@ equation
   connect(division.y, T_mean)
     annotation (Line(points={{61,30},{92,30},{150,30}},
                                                 color={0,0,127}));
-  connect(division.u2, max1.y)
+  connect(division.u2, denominatorTmean.y)
     annotation (Line(points={{38,24},{31,24},{31,-2}}, color={0,0,127}));
-  connect(max1.u2, timeSource.y)
+  connect(denominatorTmean.u2, timeSource.y)
     annotation (Line(points={{8,-8},{-19,-8}}, color={0,0,127}));
-  connect(denominatorAtTimeZero.y, max1.u1)
+  connect(denominatorAtTimeZero.y, denominatorTmean.u1)
     annotation (Line(points={{-19,14},{2,14},{2,4},{8,4}}, color={0,0,127}));
   connect(weaDat.weaBus, weaBus) annotation (Line(
       points={{-20,88},{-16,88},{-16,86},{-10,86},{-10,74},{-70,74}},
