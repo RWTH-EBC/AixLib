@@ -176,12 +176,14 @@ model BuildingWithPV
     "Weather data reader"
     annotation (Placement(transformation(extent={{-60,118},{-40,138}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone
-              thermalZone(zoneParam=
-        AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_1_Meeting())                               annotation(Placement(transformation(extent={{-18,70},
+              thermalZone(redeclare package Medium =
+        Modelica.Media.Air.SimpleAir, zoneParam=
+        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office())                                    annotation(Placement(transformation(extent={{-18,70},
             {8,96}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone
-              thermalZone1(zoneParam=
-        AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_4_Restroom())                              annotation(Placement(transformation(extent={{64,70},
+              thermalZone1(redeclare package Medium =
+        Modelica.Media.Air.SimpleAir, zoneParam=
+        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office())                                    annotation(Placement(transformation(extent={{64,70},
             {90,96}})));
   BoundaryConditions.WeatherData.Bus        weaBus
     "Weather data bus"

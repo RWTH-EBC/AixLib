@@ -5,15 +5,17 @@ model BuildingHeating
 
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone
               thermalZone(zoneParam=
-        AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_1_Meeting())                               annotation(Placement(transformation(extent={{-60,58},
+        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office(), redeclare
+      package Medium = Modelica.Media.Air.SimpleAir)                                                annotation(Placement(transformation(extent={{-60,58},
             {-34,84}})));
   Modelica.Blocks.Sources.Constant infiltrationRate(k=0)   annotation(Placement(transformation(extent={{-138,40},
             {-124,54}})));
   Modelica.Blocks.Sources.Constant infiltrationTemperature(k = 288.15) annotation(Placement(transformation(extent={{-138,62},
             {-124,76}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone
-              thermalZone1(zoneParam=
-        AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_4_Restroom())                              annotation(Placement(transformation(extent={{22,58},
+              thermalZone1(redeclare package Medium =
+        Modelica.Media.Air.SimpleAir, zoneParam=
+        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office())                                    annotation(Placement(transformation(extent={{22,58},
             {48,84}})));
   AixLib.Fluid.Movers.FlowControlled_m_flow fan(redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater, m_flow_nominal=2)
@@ -60,10 +62,6 @@ model BuildingHeating
     sampleTriggerTime=120,
     G=10)
     annotation (Placement(transformation(extent={{20,120},{40,140}})));
-  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
-    annotation (Placement(transformation(extent={{-26,102},{-6,122}})));
-  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor1
-    annotation (Placement(transformation(extent={{54,102},{74,122}})));
   Modelica.Blocks.Sources.Constant roomSetPoint(k=273.15 + 20)
     annotation (Placement(transformation(extent={{-138,-6},{-124,8}})));
   inner Agents.MessageNotification messageNotification(n=5)
@@ -164,10 +162,6 @@ equation
           100,-80},{100,-60}}, color={0,127,255}));
   connect(bou.ports[1], fan.port_a) annotation (Line(points={{122,-70},{100,-70},
           {100,-60}}, color={0,127,255}));
-  connect(temperatureSensor.T, roomAgent.T) annotation (Line(points={{-6,112},{
-          0,112},{0,146},{-52,146},{-52,138}}, color={0,0,127}));
-  connect(temperatureSensor1.T, roomAgent1.T) annotation (Line(points={{74,112},
-          {88,112},{88,146},{28,146},{28,138}}, color={0,0,127}));
   connect(heatProducerAgent.calcCapacity, constantFactor.capacity)
     annotation (Line(points={{-96,-119},{-96,-110}}, color={0,0,127}));
   connect(heatProducerAgent.calcCost, constantFactor.cost) annotation (Line(
@@ -210,24 +204,16 @@ equation
     annotation (Line(points={{60,-12},{24,-12},{24,-6}}, color={0,127,255}));
   connect(val1.port_a, fan.port_b) annotation (Line(points={{80,-12},{100,-12},{
           100,-40}}, color={0,127,255}));
-  connect(PID1.u_m, temperatureSensor1.T) annotation (Line(points={{88,22},{88,22},
-          {88,16},{112,16},{112,112},{74,112}}, color={0,0,127}));
   connect(val.port_b, volume.ports[2]) annotation (Line(points={{-40,-10},{-40,-10},
           {-68,-10},{-68,-6}}, color={0,127,255}));
   connect(val.port_a, fan.port_b) annotation (Line(points={{-20,-10},{-6,-10},{-6,
           -20},{100,-20},{100,-40}}, color={0,127,255}));
   connect(PID2.y, val.y)
     annotation (Line(points={{-27,34},{-30,34},{-30,2}}, color={0,0,127}));
-  connect(PID2.u_m, temperatureSensor.T) annotation (Line(points={{-16,22},{-16,
-          22},{-16,14},{4,14},{4,112},{-6,112}}, color={0,0,127}));
   connect(roomSetPoint.y, PID1.u_s) annotation (Line(points={{-123.3,1},{-106,1},
           {-106,20},{106,20},{106,34},{100,34}}, color={0,0,127}));
   connect(PID2.u_s, PID1.u_s) annotation (Line(points={{-4,34},{0,34},{0,20},{106,
           20},{106,34},{100,34}}, color={0,0,127}));
-  connect(temperatureSensor.T, T_room) annotation (Line(points={{-6,112},{10,112},
-          {10,98},{128,98},{128,106},{150,106}}, color={0,0,127}));
-  connect(T_room1, temperatureSensor1.T) annotation (Line(points={{150,88},{128,
-          88},{102,88},{102,112},{74,112}}, color={0,0,127}));
   connect(hea.Q_flow, Cap_device) annotation (Line(points={{-39,-74},{-32,-74},
           {-32,-62},{82,-62},{82,-100},{150,-100}}, color={0,0,127}));
   connect(hea1.Q_flow, Cap_device1) annotation (Line(points={{41,-74},{74,-74},
@@ -269,6 +255,18 @@ equation
 
       color={255,204,51},
       thickness=0.5));
+  connect(thermalZone.TAir, roomAgent.T) annotation (Line(points={{-32.7,78.8},
+          {-20,78.8},{-20,144},{-52,144},{-52,138}}, color={0,0,127}));
+  connect(thermalZone1.TAir, roomAgent1.T) annotation (Line(points={{49.3,78.8},
+          {62,78.8},{62,144},{28,144},{28,138}}, color={0,0,127}));
+  connect(thermalZone1.TAir, T_room1) annotation (Line(points={{49.3,78.8},{80,
+          78.8},{80,88},{150,88}}, color={0,0,127}));
+  connect(thermalZone1.TAir, PID1.u_m) annotation (Line(points={{49.3,78.8},{
+          112,78.8},{112,12},{88,12},{88,22}}, color={0,0,127}));
+  connect(PID2.u_m, thermalZone.TAir) annotation (Line(points={{-16,22},{-16,12},
+          {-2,12},{-2,78.8},{-32.7,78.8}}, color={0,0,127}));
+  connect(thermalZone.TAir, T_room) annotation (Line(points={{-32.7,78.8},{4,
+          78.8},{4,106},{150,106}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
