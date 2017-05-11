@@ -31,26 +31,26 @@ model NcDataReader
     annotation (Dialog(enable=use_attNameInt));
   parameter Modelica.SIunits.Time offset=0
     "Time period prior current simulation time";
-  Modelica.Blocks.Interfaces.RealOutput y[(size(varName))[1]] if
+  Modelica.Blocks.Interfaces.RealOutput y[size(varName, 1)] if
        use_varName
     "Output Vector with all variables"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-  Modelica.Blocks.Interfaces.RealOutput yAttReal[(size(attNameReal))[1]] if
+  Modelica.Blocks.Interfaces.RealOutput yAttReal[size(attNameReal, 1)] if
        use_attNameReal
     "Output Vector with all attributes of type double" annotation (Placement(
         transformation(extent={{100,64},{120,84}}), iconTransformation(extent={{
             100,64},{120,84}})));
-  Modelica.Blocks.Interfaces.IntegerOutput yAttInt[(size(attNameInt))[1]] if
+  Modelica.Blocks.Interfaces.IntegerOutput yAttInt[size(attNameInt, 1)] if
        use_attNameInt
     "Output Vector with all attributes of type integer" annotation (Placement(
         transformation(extent={{100,-74},{120,-54}}), iconTransformation(extent=
            {{100,-74},{120,-54}})));
 protected
-  Modelica.Blocks.Interfaces.RealOutput y_internal[(size(varName))[1]]
+  Modelica.Blocks.Interfaces.RealOutput y_internal[size(varName, 1)]
     "Needed to connect to conditional connector";
-  Modelica.Blocks.Interfaces.RealOutput yAttReal_internal[(size(attNameReal))[1]]
+  Modelica.Blocks.Interfaces.RealOutput yAttReal_internal[size(attNameReal, 1)]
     "Needed to connect to conditional connector";
-  Modelica.Blocks.Interfaces.IntegerOutput yAttInt_internal[(size(attNameInt))[1]]
+  Modelica.Blocks.Interfaces.IntegerOutput yAttInt_internal[size(attNameInt, 1)]
     "Needed to connect to conditional connector";
 equation
   connect(y, y_internal);
@@ -58,40 +58,40 @@ equation
   connect(yAttInt, yAttInt_internal);
 
   if use_varName then
-    for i in 1:(size(varName))[1] loop
+    for i in 1:size(varName, 1) loop
       y_internal[i] = nc.ncEasyGet1D(
         fileName,
         varName[i],
         time - offset);
     end for;
   else
-    for i in 1:(size(varName))[1] loop
+    for i in 1:size(varName, 1) loop
       y_internal[i] = 0;
     end for;
   end if;
 
   if use_attNameReal then
-    for i in 1:(size(attNameReal))[1] loop
+    for i in 1:size(attNameReal, 1) loop
       yAttReal_internal[i] = nc.ncEasyGetAttributeDouble(
         fileName,
         "",
         attNameReal[i]);
     end for;
   else
-    for i in 1:(size(attNameReal))[1] loop
+    for i in 1:size(attNameReal, 1) loop
       yAttReal_internal[i] = 0;
     end for;
   end if;
 
   if use_attNameInt then
-    for i in 1:(size(attNameInt))[1] loop
+    for i in 1:size(attNameInt, 1) loop
       yAttInt_internal[i] = nc.ncEasyGetAttributeLong(
         fileName,
         "",
         attNameInt[i]);
     end for;
   else
-    for i in 1:(size(attNameInt))[1] loop
+    for i in 1:size(attNameInt, 1) loop
       yAttInt_internal[i] = 0;
     end for;
   end if;
