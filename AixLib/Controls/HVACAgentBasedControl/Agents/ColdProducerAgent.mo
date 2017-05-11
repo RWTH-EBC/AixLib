@@ -357,7 +357,7 @@ algorithm
     else
 
       if noEvent(((setCapacity+get_content.y[1]) <= minCapacityInternal)) then
-        if noEvent(setCapacity < 0+1) then
+        if noEvent(setCapacity < minCapacityInternal+10) then
           totalRequest := 0;
           calcCapacity := 0;
           calc_active := true;
