@@ -3,29 +3,17 @@ model BuildingHeating
   extends Modelica.Icons.Example;
   parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();
 
-  AixLib.Building.LowOrder.ThermalZone.ThermalZone
+  ThermalZones.ReducedOrder.ThermalZone.ThermalZone
               thermalZone(zoneParam=
-        AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_1_Meeting(),
-      redeclare
-      AixLib.Building.LowOrder.BaseClasses.BuildingPhysics.BuildingPhysicsVDI
-      buildingPhysics)                                                                              annotation(Placement(transformation(extent={{-60,58},
+        AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_1_Meeting())                               annotation(Placement(transformation(extent={{-60,58},
             {-34,84}})));
-  AixLib.Building.Components.Weather.Weather
-                             weather(                                                                                           Air_temp = true, Sky_rad = true, Ter_rad = true, Outopt = 1,
-    fileName=
-        "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt",
-    WeatherData(tableOnFile=false, table=weatherDataDay.weatherData))                                                                                                     annotation(Placement(transformation(extent={{-118,
-            120},{-88,140}})));
   Modelica.Blocks.Sources.Constant infiltrationRate(k=0)   annotation(Placement(transformation(extent={{-138,40},
             {-124,54}})));
   Modelica.Blocks.Sources.Constant infiltrationTemperature(k = 288.15) annotation(Placement(transformation(extent={{-138,62},
             {-124,76}})));
-  AixLib.Building.LowOrder.ThermalZone.ThermalZone
+  ThermalZones.ReducedOrder.ThermalZone.ThermalZone
               thermalZone1(zoneParam=
-        AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_4_Restroom(),
-      redeclare
-      AixLib.Building.LowOrder.BaseClasses.BuildingPhysics.BuildingPhysicsVDI
-      buildingPhysics)                                                                              annotation(Placement(transformation(extent={{22,58},
+        AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_4_Restroom())                              annotation(Placement(transformation(extent={{22,58},
             {48,84}})));
   AixLib.Fluid.Movers.FlowControlled_m_flow fan(redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater, m_flow_nominal=2)
@@ -161,115 +149,13 @@ model BuildingHeating
   Modelica.Blocks.Interfaces.RealOutput Cap_device1(unit="W")
     "Capacity of heating device"
     annotation (Placement(transformation(extent={{140,-136},{160,-116}})));
-  Modelica.Blocks.Sources.CombiTimeTable internalGains1(
-                                                       extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableName = "UserProfiles", fileName = Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/UserProfiles_18599_SIA_Besprechung_Sitzung_Seminar.txt"), columns = {2, 3, 4},
-    tableOnFile=false,
-    table=[0,0,0.1,0,0; 3540,0,0.1,0,0; 3600,0,0.1,0,0; 7140,0,0.1,0,0; 7200,0,
-        0.1,0,0; 10740,0,0.1,0,0; 10800,0,0.1,0,0; 14340,0,0.1,0,0; 14400,0,0.1,
-        0,0; 17940,0,0.1,0,0; 18000,0,0.1,0,0; 21540,0,0.1,0,0; 21600,0,0.1,0,0;
-        25140,0,0.1,0,0; 25200,0,0.1,0,0; 28740,0,0.1,0,0; 28800,0,0.1,0,0;
-        32340,0,0.1,0,0; 32400,0.6,0.6,1,1; 35940,0.6,0.6,1,1; 36000,1,1,1,1;
-        39540,1,1,1,1; 39600,0.4,0.4,1,1; 43140,0.4,0.4,1,1; 43200,0,0.1,0,0;
-        46740,0,0.1,0,0; 46800,0,0.1,0,0; 50340,0,0.1,0,0; 50400,0.6,0.6,1,1;
-        53940,0.6,0.6,1,1; 54000,1,1,1,1; 57540,1,1,1,1; 57600,0.4,0.4,1,1;
-        61140,0.4,0.4,1,1; 61200,0,0.1,0,0; 64740,0,0.1,0,0; 64800,0,0.1,0,0;
-        68340,0,0.1,0,0; 68400,0,0.1,0,0; 71940,0,0.1,0,0; 72000,0,0.1,0,0;
-        75540,0,0.1,0,0; 75600,0,0.1,0,0; 79140,0,0.1,0,0; 79200,0,0.1,0,0;
-        82740,0,0.1,0,0; 82800,0,0.1,0,0; 86340,0,0.1,0,0; 86400,0,0.1,0,0;
-        89940,0,0.1,0,0; 90000,0,0.1,0,0; 93540,0,0.1,0,0; 93600,0,0.1,0,0;
-        97140,0,0.1,0,0; 97200,0,0.1,0,0; 100740,0,0.1,0,0; 100800,0,0.1,0,0;
-        104340,0,0.1,0,0; 104400,0,0.1,0,0; 107940,0,0.1,0,0; 108000,0,0.1,0,0;
-        111540,0,0.1,0,0; 111600,0,0.1,0,0; 115140,0,0.1,0,0; 115200,0,0.1,0,0;
-        118740,0,0.1,0,0; 118800,0.6,0.6,1,1; 122340,0.6,0.6,1,1; 122400,1,1,1,
-        1; 125940,1,1,1,1; 126000,0.4,0.4,1,1; 129540,0.4,0.4,1,1; 129600,0,0.1,
-        0,0; 133140,0,0.1,0,0; 133200,0,0.1,0,0; 136740,0,0.1,0,0; 136800,0.6,
-        0.6,1,1; 140340,0.6,0.6,1,1; 140400,1,1,1,1; 143940,1,1,1,1; 144000,0.4,
-        0.4,1,1; 147540,0.4,0.4,1,1; 147600,0,0.1,0,0; 151140,0,0.1,0,0; 151200,
-        0,0.1,0,0; 154740,0,0.1,0,0; 154800,0,0.1,0,0; 158340,0,0.1,0,0; 158400,
-        0,0.1,0,0; 161940,0,0.1,0,0; 162000,0,0.1,0,0; 165540,0,0.1,0,0; 165600,
-        0,0.1,0,0; 169140,0,0.1,0,0; 169200,0,0.1,0,0; 172740,0,0.1,0,0; 172800,
-        0,0.1,0,0; 176340,0,0.1,0,0; 176400,0,0.1,0,0; 179940,0,0.1,0,0; 180000,
-        0,0.1,0,0; 183540,0,0.1,0,0; 183600,0,0.1,0,0; 187140,0,0.1,0,0; 187200,
-        0,0.1,0,0; 190740,0,0.1,0,0; 190800,0,0.1,0,0; 194340,0,0.1,0,0; 194400,
-        0,0.1,0,0; 197940,0,0.1,0,0; 198000,0,0.1,0,0; 201540,0,0.1,0,0; 201600,
-        0,0.1,0,0; 205140,0,0.1,0,0; 205200,0.6,0.6,1,1; 208740,0.6,0.6,1,1;
-        208800,1,1,1,1; 212340,1,1,1,1; 212400,0.4,0.4,1,1; 215940,0.4,0.4,1,1;
-        216000,0,0.1,0,0; 219540,0,0.1,0,0; 219600,0,0.1,0,0; 223140,0,0.1,0,0;
-        223200,0.6,0.6,1,1; 226740,0.6,0.6,1,1; 226800,1,1,1,1; 230340,1,1,1,1;
-        230400,0.4,0.4,1,1; 233940,0.4,0.4,1,1; 234000,0,0.1,0,0; 237540,0,0.1,
-        0,0; 237600,0,0.1,0,0; 241140,0,0.1,0,0; 241200,0,0.1,0,0; 244740,0,0.1,
-        0,0; 244800,0,0.1,0,0; 248340,0,0.1,0,0; 248400,0,0.1,0,0; 251940,0,0.1,
-        0,0; 252000,0,0.1,0,0; 255540,0,0.1,0,0; 255600,0,0.1,0,0; 259140,0,0.1,
-        0,0; 259200,0,0.1,0,0; 262740,0,0.1,0,0; 262800,0,0.1,0,0; 266340,0,0.1,
-        0,0; 266400,0,0.1,0,0; 269940,0,0.1,0,0; 270000,0,0.1,0,0; 273540,0,0.1,
-        0,0; 273600,0,0.1,0,0; 277140,0,0.1,0,0; 277200,0,0.1,0,0; 280740,0,0.1,
-        0,0; 280800,0,0.1,0,0; 284340,0,0.1,0,0; 284400,0,0.1,0,0; 287940,0,0.1,
-        0,0; 288000,0,0.1,0,0; 291540,0,0.1,0,0; 291600,0.6,0.6,1,1; 295140,0.6,
-        0.6,1,1; 295200,1,1,1,1; 298740,1,1,1,1; 298800,0.4,0.4,1,1; 302340,0.4,
-        0.4,1,1; 302400,0,0.1,0,0; 305940,0,0.1,0,0; 306000,0,0.1,0,0; 309540,0,
-        0.1,0,0; 309600,0.6,0.6,1,1; 313140,0.6,0.6,1,1; 313200,1,1,1,1; 316740,
-        1,1,1,1; 316800,0.4,0.4,1,1; 320340,0.4,0.4,1,1; 320400,0,0.1,0,0;
-        323940,0,0.1,0,0; 324000,0,0.1,0,0; 327540,0,0.1,0,0; 327600,0,0.1,0,0;
-        331140,0,0.1,0,0; 331200,0,0.1,0,0; 334740,0,0.1,0,0; 334800,0,0.1,0,0;
-        338340,0,0.1,0,0; 338400,0,0.1,0,0; 341940,0,0.1,0,0; 342000,0,0.1,0,0;
-        345540,0,0.1,0,0; 345600,0,0.1,0,0; 349140,0,0.1,0,0; 349200,0,0.1,0,0;
-        352740,0,0.1,0,0; 352800,0,0.1,0,0; 356340,0,0.1,0,0; 356400,0,0.1,0,0;
-        359940,0,0.1,0,0; 360000,0,0.1,0,0; 363540,0,0.1,0,0; 363600,0,0.1,0,0;
-        367140,0,0.1,0,0; 367200,0,0.1,0,0; 370740,0,0.1,0,0; 370800,0,0.1,0,0;
-        374340,0,0.1,0,0; 374400,0,0.1,0,0; 377940,0,0.1,0,0; 378000,0.6,0.6,1,
-        1; 381540,0.6,0.6,1,1; 381600,1,1,1,1; 385140,1,1,1,1; 385200,0.4,0.4,1,
-        1; 388740,0.4,0.4,1,1; 388800,0,0.1,0,0; 392340,0,0.1,0,0; 392400,0,0.1,
-        0,0; 395940,0,0.1,0,0; 396000,0.6,0.6,1,1; 399540,0.6,0.6,1,1; 399600,1,
-        1,1,1; 403140,1,1,1,1; 403200,0.4,0.4,1,1; 406740,0.4,0.4,1,1; 406800,0,
-        0.1,0,0; 410340,0,0.1,0,0; 410400,0,0.1,0,0; 413940,0,0.1,0,0; 414000,0,
-        0.1,0,0; 417540,0,0.1,0,0; 417600,0,0.1,0,0; 421140,0,0.1,0,0; 421200,0,
-        0.1,0,0; 424740,0,0.1,0,0; 424800,0,0.1,0,0; 428340,0,0.1,0,0; 428400,0,
-        0.1,0,0; 431940,0,0.1,0,0; 432000,0,0,0,0; 435540,0,0,0,0; 435600,0,0,0,
-        0; 439140,0,0,0,0; 439200,0,0,0,0; 442740,0,0,0,0; 442800,0,0,0,0;
-        446340,0,0,0,0; 446400,0,0,0,0; 449940,0,0,0,0; 450000,0,0,0,0; 453540,
-        0,0,0,0; 453600,0,0,0,0; 457140,0,0,0,0; 457200,0,0,0,0; 460740,0,0,0,0;
-        460800,0,0,0,0; 464340,0,0,0,0; 464400,0,0,0,0; 467940,0,0,0,0; 468000,
-        0,0,0,0; 471540,0,0,0,0; 471600,0,0,0,0; 475140,0,0,0,0; 475200,0,0,0,0;
-        478740,0,0,0,0; 478800,0,0,0,0; 482340,0,0,0,0; 482400,0,0,0,0; 485940,
-        0,0,0,0; 486000,0,0,0,0; 489540,0,0,0,0; 489600,0,0,0,0; 493140,0,0,0,0;
-        493200,0,0,0,0; 496740,0,0,0,0; 496800,0,0,0,0; 500340,0,0,0,0; 500400,
-        0,0,0,0; 503940,0,0,0,0; 504000,0,0,0,0; 507540,0,0,0,0; 507600,0,0,0,0;
-        511140,0,0,0,0; 511200,0,0,0,0; 514740,0,0,0,0; 514800,0,0,0,0; 518340,
-        0,0,0,0; 518400,0,0,0,0; 521940,0,0,0,0; 522000,0,0,0,0; 525540,0,0,0,0;
-        525600,0,0,0,0; 529140,0,0,0,0; 529200,0,0,0,0; 532740,0,0,0,0; 532800,
-        0,0,0,0; 536340,0,0,0,0; 536400,0,0,0,0; 539940,0,0,0,0; 540000,0,0,0,0;
-        543540,0,0,0,0; 543600,0,0,0,0; 547140,0,0,0,0; 547200,0,0,0,0; 550740,
-        0,0,0,0; 550800,0,0,0,0; 554340,0,0,0,0; 554400,0,0,0,0; 557940,0,0,0,0;
-        558000,0,0,0,0; 561540,0,0,0,0; 561600,0,0,0,0; 565140,0,0,0,0; 565200,
-        0,0,0,0; 568740,0,0,0,0; 568800,0,0,0,0; 572340,0,0,0,0; 572400,0,0,0,0;
-        575940,0,0,0,0; 576000,0,0,0,0; 579540,0,0,0,0; 579600,0,0,0,0; 583140,
-        0,0,0,0; 583200,0,0,0,0; 586740,0,0,0,0; 586800,0,0,0,0; 590340,0,0,0,0;
-        590400,0,0,0,0; 593940,0,0,0,0; 594000,0,0,0,0; 597540,0,0,0,0; 597600,
-        0,0,0,0; 601140,0,0,0,0; 601200,0,0,0,0; 604740,0,0,0,0])                                                                                                     annotation(Placement(transformation(extent={{-138,
-            -31},{-124,-17}})));
-  Modelica.Blocks.Math.Gain gain[3](k={0.8,0.8,0.8})
-    annotation (Placement(transformation(extent={{-102,52},{-94,60}})));
+  BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
+    calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
+    computeWetBulbTemperature=false,
+    filNam="modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
+    "Weather data reader"
+    annotation (Placement(transformation(extent={{-122,92},{-102,112}})));
 equation
-  connect(weather.SolarRadiation_OrientedSurfaces,thermalZone. solarRad_in) annotation(Line(points={{-110.8,
-          119},{-110.8,76.98},{-57.4,76.98}},                                                                                               color = {255, 128, 0}));
-  connect(infiltrationRate.y,thermalZone. ventilationRate) annotation(Line(points={{-123.3,
-          47},{-52.2,47},{-52.2,63.2}},                                                                                          color = {0, 0, 127}));
-  connect(weather.WeatherDataVector,thermalZone. weather) annotation(Line(points={{-103.1,
-          119},{-103.1,71},{-56.62,71}},                                                                                  color = {0, 0, 127}));
-  connect(infiltrationTemperature.y,thermalZone. ventilationTemperature)
-    annotation (Line(points={{-123.3,69},{-89.65,69},{-89.65,65.93},{-56.75,65.93}},
-        color={0,0,127}));
-  connect(thermalZone1.solarRad_in, weather.SolarRadiation_OrientedSurfaces)
-    annotation (Line(points={{24.6,76.98},{-12,76.98},{-12,96},{-108,96},{-110.8,
-          96},{-110.8,119}},        color={255,128,0}));
-  connect(thermalZone1.ventilationTemperature, thermalZone.ventilationTemperature)
-    annotation (Line(points={{25.25,65.93},{4,65.93},{4,58},{-90,58},{-90,65.93},
-          {-56.75,65.93}},color={0,0,127}));
-  connect(infiltrationRate.y, thermalZone1.ventilationRate) annotation (Line(
-        points={{-123.3,47},{29.8,47},{29.8,63.2}}, color={0,0,127}));
-  connect(thermalZone1.weather, weather.WeatherDataVector) annotation (Line(
-        points={{25.38,71},{-10,71},{-10,94},{-103.1,94},{-103.1,119}}, color={
-          0,0,127}));
   connect(hydraulicResistance.port_a, fan.port_b) annotation (Line(points={{-80,
           -36},{100,-36},{100,-40}}, color={0,127,255}));
   connect(hea.port_b, hea1.port_a) annotation (Line(points={{-40,-80},{-10,-80},
@@ -278,14 +164,8 @@ equation
           100,-80},{100,-60}}, color={0,127,255}));
   connect(bou.ports[1], fan.port_a) annotation (Line(points={{122,-70},{100,-70},
           {100,-60}}, color={0,127,255}));
-  connect(temperatureSensor.port, thermalZone.internalGainsConv) annotation (
-      Line(points={{-26,112},{-26,112},{-26,50},{-47,50},{-47,63.46}}, color={
-          191,0,0}));
   connect(temperatureSensor.T, roomAgent.T) annotation (Line(points={{-6,112},{
           0,112},{0,146},{-52,146},{-52,138}}, color={0,0,127}));
-  connect(temperatureSensor1.port, thermalZone1.internalGainsConv) annotation (
-      Line(points={{54,112},{54,112},{54,50},{35,50},{35,63.46}},
-        color={191,0,0}));
   connect(temperatureSensor1.T, roomAgent1.T) annotation (Line(points={{74,112},
           {88,112},{88,146},{28,146},{28,138}}, color={0,0,127}));
   connect(heatProducerAgent.calcCapacity, constantFactor.capacity)
@@ -322,12 +202,8 @@ equation
           {20,-28},{-114,-28},{-114,-80},{-60,-80}}, color={0,127,255}));
   connect(volume.heatPort, thermalConductor.port_a) annotation (Line(points={{-80,
           4},{-88,4},{-88,34},{-78,34}}, color={191,0,0}));
-  connect(thermalConductor.port_b, thermalZone.internalGainsConv)
-    annotation (Line(points={{-58,34},{-47,34},{-47,63.46}}, color={191,0,0}));
   connect(thermalConductor1.port_a, volume1.heatPort)
     annotation (Line(points={{12,34},{6,34},{6,4},{12,4}}, color={191,0,0}));
-  connect(thermalConductor1.port_b, thermalZone1.internalGainsConv)
-    annotation (Line(points={{32,34},{35,34},{35,63.46}}, color={191,0,0}));
   connect(PID1.y, val1.y)
     annotation (Line(points={{77,34},{70,34},{70,0}}, color={0,0,127}));
   connect(val1.port_b, volume1.ports[2])
@@ -348,8 +224,6 @@ equation
           {-106,20},{106,20},{106,34},{100,34}}, color={0,0,127}));
   connect(PID2.u_s, PID1.u_s) annotation (Line(points={{-4,34},{0,34},{0,20},{106,
           20},{106,34},{100,34}}, color={0,0,127}));
-  connect(thermalZone1.internalGains, internalGains.y) annotation (Line(points={
-          {45.4,63.2},{45.4,54},{-36,54},{-36,23},{-123.3,23}}, color={0,0,127}));
   connect(temperatureSensor.T, T_room) annotation (Line(points={{-6,112},{10,112},
           {10,98},{128,98},{128,106},{150,106}}, color={0,0,127}));
   connect(T_room1, temperatureSensor1.T) annotation (Line(points={{150,88},{128,
@@ -358,10 +232,43 @@ equation
           {-32,-62},{82,-62},{82,-100},{150,-100}}, color={0,0,127}));
   connect(hea1.Q_flow, Cap_device1) annotation (Line(points={{41,-74},{74,-74},
           {74,-126},{150,-126}}, color={0,0,127}));
-  connect(gain.y, thermalZone.internalGains) annotation (Line(points={{-93.6,56},
-          {-68,56},{-36.6,56},{-36.6,63.2}}, color={0,0,127}));
-  connect(gain.u, internalGains1.y) annotation (Line(points={{-102.8,56},{-118,
-          56},{-118,-24},{-123.3,-24}}, color={0,0,127}));
+  connect(thermalConductor.port_b, thermalZone.intGainsConv) annotation (Line(
+        points={{-58,34},{-46,34},{-30,34},{-30,64.5},{-34,64.5}}, color={191,0,
+          0}));
+  connect(thermalZone.intGainsRad, thermalZone.intGainsConv) annotation (Line(
+        points={{-34,69.7},{-32,69.7},{-32,70},{-30,70},{-30,64.5},{-34,64.5}},
+        color={191,0,0}));
+  connect(thermalConductor1.port_b, thermalZone1.intGainsConv) annotation (Line(
+        points={{32,34},{54,34},{54,64.5},{48,64.5}}, color={191,0,0}));
+  connect(thermalZone1.intGainsRad, thermalZone1.intGainsConv) annotation (Line(
+        points={{48,69.7},{52,69.7},{52,70},{54,70},{54,64.5},{48,64.5}}, color
+        ={191,0,0}));
+  connect(thermalZone.ventTemp, infiltrationTemperature.y) annotation (Line(
+        points={{-61.69,65.93},{-91.845,65.93},{-91.845,69},{-123.3,69}}, color
+        ={0,0,127}));
+  connect(thermalZone1.ventTemp, infiltrationTemperature.y) annotation (Line(
+        points={{20.31,65.93},{-24,65.93},{-24,86},{-72,86},{-72,69},{-100,69},
+          {-123.3,69}}, color={0,0,127}));
+  connect(infiltrationRate.y, thermalZone.ventRate) annotation (Line(points={{
+          -123.3,47},{-86,47},{-86,56},{-56.1,56},{-56.1,60.08}}, color={0,0,
+          127}));
+  connect(thermalZone1.ventRate, thermalZone.ventRate) annotation (Line(points=
+          {{25.9,60.08},{25.9,56},{-56.1,56},{-56.1,60.08}}, color={0,0,127}));
+  connect(thermalZone.intGains, internalGains.y) annotation (Line(points={{
+          -36.6,60.08},{-36.6,48},{-84,48},{-84,38},{-114,38},{-114,23},{-123.3,
+          23}}, color={0,0,127}));
+  connect(thermalZone1.intGains, internalGains.y) annotation (Line(points={{
+          45.4,60.08},{45.4,48},{-62,48},{-84,48},{-84,38},{-114,38},{-114,23},
+          {-123.3,23}}, color={0,0,127}));
+  connect(weaDat.weaBus, thermalZone.weaBus) annotation (Line(
+      points={{-102,102},{-64,102},{-64,71},{-60,71}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(weaDat.weaBus, thermalZone1.weaBus) annotation (Line(
+      points={{-102,102},{-76,102},{-48,102},{-48,92},{-16,92},{-16,71},{22,71}},
+
+      color={255,204,51},
+      thickness=0.5));
   annotation (Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},
