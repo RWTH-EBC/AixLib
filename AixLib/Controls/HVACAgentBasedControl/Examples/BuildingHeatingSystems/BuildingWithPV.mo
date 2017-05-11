@@ -368,6 +368,9 @@ equation
           {-102,-4},{-102,36},{-116,36},{-116,30}}, color={0,0,127}));
   connect(to_degC2.u, roomAgent1.T) annotation (Line(points={{-120,-36},{-108,
           -36},{-108,-28},{80,-28},{80,40},{108,40},{108,32}}, color={0,0,127}));
+  connect(thermalZone1.ventRate, thermalZone.ventRate) annotation (Line(points=
+          {{67.9,72.08},{28,72.08},{28,64},{-42,64},{-42,68},{-42,68},{-42,76},
+          {-14.1,76},{-14.1,72.08}}, color={0,0,127}));
   annotation (                                                          Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-150,-150},{150,150}},
         initialScale=0.1)),
