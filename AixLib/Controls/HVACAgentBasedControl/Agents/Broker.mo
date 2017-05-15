@@ -958,7 +958,7 @@ equation
 </ul>
 <h4><span style=\"color: #008000\">Concept</span></h4>
 <p>The broker agent gets cooling- or heating requests from one or more room-agents and collects them to one big request. The broker then calls for proposals from all producer agents and afterwards collects the proposals. The best-suited price and capcity is chosen and confirmed to the related producer agent. The other agents are rejected. The logic is implemented with the help of the StateGraph library. Communication is realized with the help of the DeviceDriver library and follows the language standards for multi-agent-systems set by the FIPA to the highest possible extend for Modelica models. The following figure shows the behaviour of the broker agent. For further information please refer to the first reference.</p>
-<p><img src=\"modelica://HVACAgentBasedControl/Resources/Images/Broker.png\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/Broker.png\"/></p>
 <h4><span style=\"color: #008000\">References</span></h4>
 <ul>
 <li>Roozbeh Sangi, Felix B&uuml;nning, Marc Baranski, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic. </li>

@@ -52,11 +52,6 @@ model BuildingWithPV
     zeta=10,
     m_flow_small=0.001)
     annotation (Placement(transformation(extent={{-30,-50},{-50,-30}})));
-  AixLib.Building.LowOrder.ThermalZone.ThermalZoneEquipped thermalZone(zoneParam=
-       AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_1_Meeting(), redeclare
-      AixLib.Building.LowOrder.BaseClasses.BuildingPhysics.BuildingPhysicsVDI
-      buildingPhysics)
-    annotation (Placement(transformation(extent={{-40,112},{-20,132}})));
   HVACAgentBasedControl.Agents.Broker broker(name=20001)
     annotation (Placement(transformation(extent={{100,120},{120,140}})));
   HVACAgentBasedControl.Agents.HeatProducerAgent heatProducerAgent(
@@ -79,21 +74,6 @@ model BuildingWithPV
     currentCapacityDiscrete(start=0),
     maxCapacity=10000)
     annotation (Placement(transformation(extent={{32,-106},{52,-86}})));
-  AixLib.Building.LowOrder.ThermalZone.ThermalZoneEquipped thermalZone1(
-                                                                     redeclare
-      AixLib.Building.LowOrder.BaseClasses.BuildingPhysics.BuildingPhysicsVDI
-      buildingPhysics, zoneParam=
-        AixLib.DataBase.Buildings.OfficePassiveHouse.OPH_1_Meeting())
-    annotation (Placement(transformation(extent={{60,112},{80,132}})));
-  AixLib.Building.Components.Weather.Weather
-                                      weather(
-    Air_temp=true,
-    Sky_rad=true,
-    Ter_rad=true,
-    Air_press=true,
-    Rel_hum=true,
-    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt"))
-    annotation (Placement(transformation(extent={{-98,79},{-64,101}})));
   Modelica.Blocks.Sources.RealExpression zero(y=0) annotation (Placement(
         transformation(
         extent={{10,-10},{-10,10}},
@@ -115,10 +95,6 @@ model BuildingWithPV
     sampleRate=1,
     sampleTriggerTime=120,
     G=2) annotation (Placement(transformation(extent={{100,14},{120,34}})));
-  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
-    annotation (Placement(transformation(extent={{-124,38},{-104,58}})));
-  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor1
-    annotation (Placement(transformation(extent={{76,38},{96,58}})));
   Modelica.Blocks.Continuous.LimPID PID(
     yMax=1,
     initType=Modelica.Blocks.Types.InitPID.InitialOutput,
@@ -142,7 +118,7 @@ model BuildingWithPV
         transformation(
         extent={{10,-10},{-10,10}},
         rotation=180,
-        origin={-86,54})));
+        origin={-84,8})));
   Modelica.Blocks.Sources.RealExpression zero2(y=1)
                                                    annotation (Placement(
         transformation(
@@ -193,6 +169,32 @@ model BuildingWithPV
   inner HVACAgentBasedControl.Agents.MessageNotification messageNotification
     annotation (Placement(transformation(extent={{130,80},{150,100}})));
 
+  BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
+    calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
+    computeWetBulbTemperature=false,
+    filNam="modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
+    "Weather data reader"
+    annotation (Placement(transformation(extent={{-60,118},{-40,138}})));
+  ThermalZones.ReducedOrder.ThermalZone.ThermalZone
+              thermalZone(redeclare package Medium =
+        Modelica.Media.Air.SimpleAir, zoneParam=
+        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office())                                    annotation(Placement(transformation(extent={{-18,70},
+            {8,96}})));
+  ThermalZones.ReducedOrder.ThermalZone.ThermalZone
+              thermalZone1(redeclare package Medium =
+        Modelica.Media.Air.SimpleAir, zoneParam=
+        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office())                                    annotation(Placement(transformation(extent={{64,70},
+            {90,96}})));
+  BoundaryConditions.WeatherData.Bus        weaBus
+    "Weather data bus"
+    annotation (Placement(transformation(extent={{18,112},{52,144}}),
+    iconTransformation(extent={{-70,-12},{-50,8}})));
+  Modelica.Blocks.Sources.Constant infiltrationRate(k=0)   annotation(Placement(transformation(extent={{-92,60},
+            {-78,74}})));
+  Modelica.Blocks.Sources.Constant infiltrationTemperature(k = 288.15) annotation(Placement(transformation(extent={{-92,82},
+            {-78,96}})));
+  Modelica.Blocks.Sources.Constant internalGains[3](k={0,0,0})
+    annotation (Placement(transformation(extent={{-92,36},{-78,50}})));
 equation
   connect(hydraulicResistance.port_a, hea.port_b) annotation (Line(points={{-12,
           -122},{-12,-122},{-18,-122}},
@@ -241,72 +243,13 @@ equation
     annotation (Line(points={{36,-87},{36,-82}},            color={0,0,127}));
   connect(constantFactor1.cost, heatProducerAgent1.calcCost) annotation (Line(
         points={{48,-83},{48,-85.5},{48,-88}},                color={0,0,127}));
-  connect(thermalZone.internalGainsConv, vol.heatPort) annotation (Line(points={{-30,
-          116.2},{-30,20},{-26,20},{-18,20}},                     color={191,0,0}));
-  connect(vol1.heatPort, thermalZone1.internalGainsConv) annotation (Line(
-        points={{38,20},{70,20},{70,116.2}},              color={191,0,0}));
-  connect(weather.SolarRadiation_OrientedSurfaces, thermalZone1.solarRad_in)
-    annotation (Line(points={{-89.84,77.9},{-89.84,72},{52,72},{52,126.6},{62,126.6}},
-        color={255,128,0}));
-  connect(weather.SolarRadiation_OrientedSurfaces, thermalZone.solarRad_in)
-    annotation (Line(points={{-89.84,77.9},{-89.84,72},{-52,72},{-52,126.6},{-38,
-          126.6}},
-        color={255,128,0}));
-  connect(thermalZone.weather[1], weather.AirTemp) annotation (Line(points={{-37.4,
-          121.2},{-50,121.2},{-50,93.3},{-62.8667,93.3}}, color={0,0,127}));
-  connect(thermalZone1.weather[1], weather.AirTemp) annotation (Line(points={{62.6,
-          121.2},{60,121.2},{54,121.2},{54,93.3},{-62.8667,93.3}}, color={0,0,127}));
-  connect(thermalZone.weather[2], weather.SkyRadiation) annotation (Line(points={{-37.4,
-          122},{-48,122},{-48,80.1},{-62.8667,80.1}},        color={0,0,127}));
-  connect(thermalZone1.weather[2], weather.SkyRadiation) annotation (Line(
-        points={{62.6,122},{56,122},{56,80.1},{-62.8667,80.1}}, color={0,0,127}));
-  connect(thermalZone1.weather[3], weather.TerrestrialRadiation) annotation (
-      Line(points={{62.6,122.8},{58,122.8},{58,76.8},{-62.8667,76.8}}, color={0,
-          0,127}));
-  connect(thermalZone.weather[3], weather.TerrestrialRadiation) annotation (
-      Line(points={{-37.4,122.8},{-42,122.8},{-42,122},{-46,122},{-46,76.8},{
-          -62.8667,76.8}},
-                  color={0,0,127}));
 
-  connect(thermalZone1.internalGains[1], zero.y)
-    annotation (Line(points={{78,115.2},{78,110},{-77,110}}, color={0,0,127}));
-  connect(thermalZone1.internalGains[2], zero.y)
-    annotation (Line(points={{78,116},{78,110},{-77,110}},   color={0,0,127}));
-  connect(thermalZone1.internalGains[3], zero.y)
-    annotation (Line(points={{78,116.8},{78,110},{-77,110}},
-                                                           color={0,0,127}));
-  connect(thermalZone.internalGains[1], zero.y) annotation (Line(points={{-22,115.2},
-          {-22,115.2},{-22,110},{-77,110}},           color={0,0,127}));
-  connect(thermalZone.internalGains[2], zero.y) annotation (Line(points={{-22,116},
-          {-22,110},{-77,110}}, color={0,0,127}));
-  connect(thermalZone.internalGains[3], zero.y)
-    annotation (Line(points={{-22,116.8},{-22,110},{-77,110}},
-                                                             color={0,0,127}));
-  connect(fixedHeatFlow.port, thermalZone.internalGainsRad) annotation (Line(
-        points={{-78,128},{-68,128},{-68,100},{-26,100},{-26,116.2}},
-                                                                    color={191,0,
-          0}));
-  connect(fixedHeatFlow.port, thermalZone1.internalGainsRad) annotation (Line(
-        points={{-78,128},{-68,128},{-68,100},{74,100},{74,116.2}},
-                                                                  color={191,0,0}));
-  connect(temperatureSensor.port, thermalZone.internalGainsConv) annotation (
-      Line(points={{-124,48},{-130,48},{-136,48},{-136,64},{-30,64},{-30,116.2}},
-        color={191,0,0}));
-  connect(temperatureSensor1.port, thermalZone1.internalGainsConv)
-    annotation (Line(points={{76,48},{70,48},{70,116.2}},
-                                                        color={191,0,0}));
-  connect(temperatureSensor.T, roomAgent.T) annotation (Line(points={{-104,48},{
-          -96,48},{-96,34},{-116,34},{-116,30}}, color={0,0,127}));
-  connect(temperatureSensor1.T, roomAgent1.T)
-    annotation (Line(points={{96,48},{108,48},{108,32}}, color={0,0,127}));
-  connect(PID.u_m, temperatureSensor.T) annotation (Line(points={{-56,26},{-56,26},
-          {-56,20},{-96,20},{-96,48},{-104,48}}, color={0,0,127}));
   connect(PID1.u_m, roomAgent1.T) annotation (Line(points={{150,26},{150,20},{122,
           20},{122,48},{108,48},{108,32}}, color={0,0,127}));
-  connect(PID.u_s, zero1.y) annotation (Line(points={{-68,38},{-70,38},{-70,54},
-          {-75,54}}, color={0,0,127}));
+  connect(PID.u_s, zero1.y) annotation (Line(points={{-68,38},{-70,38},{-70,8},
+          {-73,8}},  color={0,0,127}));
   connect(PID1.u_s, zero1.y) annotation (Line(points={{138,38},{128,38},{128,62},
-          {-70,62},{-70,54},{-75,54}},  color={0,0,127}));
+          {-70,62},{-70,8},{-73,8}},    color={0,0,127}));
   connect(PID.y, val1.y) annotation (Line(points={{-45,38},{-38,38},{-38,-6},{10,
           -6}}, color={0,0,127}));
   connect(PID1.y, val.y) annotation (Line(points={{161,38},{170,38},{170,-6},{46,
@@ -346,18 +289,8 @@ equation
   connect(T1, to_degC2.y)
     annotation (Line(points={{-162,-36},{-152,-36},{-143,-36}},
                                                           color={0,0,127}));
-  connect(to_degC1.u, temperatureSensor.T) annotation (Line(points={{-120,-4},{-94,
-          -4},{-94,48},{-104,48}},     color={0,0,127}));
-  connect(to_degC2.u, temperatureSensor1.T) annotation (Line(points={{-120,-36},
-          {-74,-36},{84,-36},{84,24},{96,24},{96,48}},
-                                                  color={0,0,127}));
   connect(to_degC3.y, T_air) annotation (Line(points={{-139,108},{-158,108}},
                       color={0,0,127}));
-  connect(weather.AirTemp, to_degC3.u) annotation (Line(points={{-62.8667,93.3},
-          {-62.8667,116},{-108,116},{-108,108},{-116,108}}, color={0,0,127}));
-  connect(weather.SkyRadiation, constantFactor1.rad) annotation (Line(points={{
-          -62.8667,80.1},{76,80.1},{76,8},{102,8},{102,-74.2},{50,-74.2}},
-        color={0,0,127}));
   connect(constantFactor1.electricity_free, electricity_free) annotation (Line(
         points={{51,-68.8},{92,-68.8},{92,-80},{104,-80},{104,-70},{174,-70}},
         color={255,0,255}));
@@ -376,16 +309,68 @@ equation
           -64},{11,-64}}, color={255,0,255}));
   connect(or1.y, heatProducerAgent1.OnOff_external) annotation (Line(points={{25,-94},
           {28,-94},{28,-99.4},{34,-99.4}},         color={255,0,255}));
-  connect(thermalZone.ventilationRate, zero.y)
-    annotation (Line(points={{-34,116},{-34,110},{-77,110}}, color={0,0,127}));
-  connect(thermalZone1.ventilationRate, zero.y)
-    annotation (Line(points={{66,116},{66,110},{-77,110}}, color={0,0,127}));
-  connect(weather.AirTemp, thermalZone.ventilationTemperature) annotation (Line(
-        points={{-62.8667,93.3},{-42,93.3},{-42,118.1},{-37.5,118.1}}, color={0,
-          0,127}));
-  connect(thermalZone1.ventilationTemperature, weather.AirTemp) annotation (
-      Line(points={{62.5,118.1},{44,118.1},{44,93.3},{-62.8667,93.3}}, color={0,
-          0,127}));
+  connect(weaDat.weaBus, thermalZone1.weaBus) annotation (Line(
+      points={{-40,128},{-40,128},{-6,128},{-6,104},{26,104},{26,83},{64,83}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(weaDat.weaBus,thermalZone. weaBus) annotation (Line(
+      points={{-40,128},{-22,128},{-22,83},{-18,83}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(weaDat.weaBus, weaBus) annotation (Line(
+      points={{-40,128},{-2,128},{-2,128},{35,128}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(constantFactor1.rad, weaBus.HGloHor) annotation (Line(points={{50,
+          -74.2},{66,-74.2},{66,-76},{120,-76},{120,108},{68,108},{68,128},{35,
+          128}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(vol.heatPort, thermalZone.intGainsConv) annotation (Line(points={{-18,
+          20},{-24,20},{-24,38},{8,38},{8,76.5}}, color={191,0,0}));
+  connect(vol.heatPort, thermalZone.intGainsRad) annotation (Line(points={{-18,
+          20},{-22,20},{-22,18},{-24,18},{-24,38},{8,38},{8,81.7}}, color={191,
+          0,0}));
+  connect(vol1.heatPort, thermalZone1.intGainsConv) annotation (Line(points={{
+          38,20},{50,20},{50,68},{96,68},{96,76.5},{90,76.5}}, color={191,0,0}));
+  connect(vol1.heatPort, thermalZone1.intGainsRad) annotation (Line(points={{38,
+          20},{50,20},{50,68},{98,68},{98,81.7},{90,81.7}}, color={191,0,0}));
+  connect(thermalZone.ventTemp, infiltrationTemperature.y) annotation (Line(
+        points={{-19.69,77.93},{-47.845,77.93},{-47.845,89},{-77.3,89}}, color=
+          {0,0,127}));
+  connect(thermalZone1.ventTemp, infiltrationTemperature.y) annotation (Line(
+        points={{62.31,77.93},{20,77.93},{20,106},{-28,106},{-28,89},{-77.3,89}},
+        color={0,0,127}));
+  connect(infiltrationRate.y, thermalZone.ventRate) annotation (Line(points={{
+          -77.3,67},{-42,67},{-42,76},{-14.1,76},{-14.1,72.08}}, color={0,0,127}));
+  connect(thermalZone.intGains, internalGains.y) annotation (Line(points={{5.4,
+          72.08},{5.4,68},{-40,68},{-40,58},{-70,58},{-70,43},{-77.3,43}},
+        color={0,0,127}));
+  connect(thermalZone1.intGains, internalGains.y) annotation (Line(points={{
+          87.4,72.08},{87.4,68},{-18,68},{-40,68},{-40,58},{-70,58},{-70,43},{
+          -77.3,43}}, color={0,0,127}));
+  connect(roomAgent.T, PID.u_m) annotation (Line(points={{-116,30},{-116,38},{
+          -100,38},{-100,18},{-56,18},{-56,26}}, color={0,0,127}));
+  connect(thermalZone1.TAir, roomAgent1.T) annotation (Line(points={{91.3,90.8},
+          {108,90.8},{108,32}}, color={0,0,127}));
+  connect(thermalZone.TAir, roomAgent.T) annotation (Line(points={{9.3,90.8},{
+          16,90.8},{16,56},{-116,56},{-116,30}}, color={0,0,127}));
+  connect(to_degC3.u, weaBus.TDryBul) annotation (Line(points={{-116,108},{-108,
+          108},{-108,142},{35,142},{35,128}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(to_degC1.u, roomAgent.T) annotation (Line(points={{-120,-4},{-112,-4},
+          {-102,-4},{-102,36},{-116,36},{-116,30}}, color={0,0,127}));
+  connect(to_degC2.u, roomAgent1.T) annotation (Line(points={{-120,-36},{-108,
+          -36},{-108,-28},{80,-28},{80,40},{108,40},{108,32}}, color={0,0,127}));
+  connect(thermalZone1.ventRate, thermalZone.ventRate) annotation (Line(points=
+          {{67.9,72.08},{28,72.08},{28,64},{-42,64},{-42,68},{-42,68},{-42,76},
+          {-14.1,76},{-14.1,72.08}}, color={0,0,127}));
   annotation (                                                          Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-150,-150},{150,150}},
         initialScale=0.1)),
@@ -415,6 +400,6 @@ equation
 <p>This model was used to present the HVACAgentBasedControl library in [Roozbeh Sangi, Felix B&uuml;nning, Marc Baranski, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic]. For detailed information please refer to this source. </p>
 <h4><span style=\"color: #008000\">Example Results</span></h4>
 <p>The results generated by this model differ from the results presented in [Roozbeh Sangi, Felix B&uuml;nning, Marc Baranski, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic] because an older version of the AixLib library was used. The model presented here was adapted to the use of the most recent AixLib library, which has a different physical model for the thermal zones than the version used originally. The result image below (generated with this model) however gives an impression on how the system behaves depneding on the price of electricity.</p>
-<p><img src=\"modelica://HVACAgentBasedControl/Resources/Images/ExamplePV.PNG\"/> </p>
+<p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/ExamplePV.PNG\"/> </p>
 </html>"));
 end BuildingWithPV;

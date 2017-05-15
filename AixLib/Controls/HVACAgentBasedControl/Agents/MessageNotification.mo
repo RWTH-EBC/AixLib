@@ -78,9 +78,9 @@ performance). If usePoke is set to true, the Boolean sendOut connectors of every
 their inbox in case one agent has send out a message. This reduces event generation during idle times of the agents and thus may increase simulation perfomance in systems with long idle times of the agents. Example images 
 for both methods are provided below. For further information you can also refer to the example results.</p>
 <p>System with usePoke=false</p>
-<p><img src=\"modelica://HVACAgentBasedControl/Resources/Images/ExampleSystemMarked.png\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/ExampleSystemMarked.png\"/></p>
 <p>System with usePoke=true</p>
-<p><img src=\"modelica://HVACAgentBasedControl/Resources/Images/ExampleSystemMarkedPoke.PNG\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/ExampleSystemMarkedPoke.PNG\"/></p>
 <h4><span style=\"color: #008000\">Example Results</span></h4>
 <ul>
 <li><a href=\"HVACAgentBasedControl.Examples.SimpleHeatingSystem.BuildingHeating\">System with usePoke=false</a></li>

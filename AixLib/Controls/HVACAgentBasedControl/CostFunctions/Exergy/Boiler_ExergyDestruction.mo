@@ -52,9 +52,9 @@ equation
 <li><span style=\"font-family: MS Shell Dlg 2;\">It is used together with a HeatProducerAgent.</span></li>
 </ul>
 <p><b><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Concept</span></b></p>
-<p><span style=\"font-family: MS Shell Dlg 2;\"><img src=\"modelica://HVACAgentBasedControl/Resources/Images/Boiler.png\"/></span></p>
+<p><span style=\"font-family: MS Shell Dlg 2;\"><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/Boiler.png\"/></span></p>
 <p><span style=\"font-family: MS Shell Dlg 2;\">The figure above shows the control volume for the boiler. Based on this volume the following function for exergy destruction has been developed. Details can be found in the reference.</span></p>
-<p><span style=\"font-family: MS Shell Dlg 2;\"><img src=\"modelica://HVACAgentBasedControl/Resources/Images/boilerCostfkt.PNG\"/></span></p>
+<p><span style=\"font-family: MS Shell Dlg 2;\"><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/boilerCostfkt.PNG\"/></span></p>
 <h4><span style=\"color: #008000\">References</span></h4>
 <ul>
 <li>Felix B&uuml;nning. Development of a Modelica-library for agent-based control of HVAC systems. Bachelor thesis, 2016, RWTH Aachen University, Aachen, Germany. </li>

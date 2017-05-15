@@ -56,7 +56,7 @@ equation
   pkgIn.backwardTrigger = trigger;
   //pkgIn.backwardTrigger = noEvent(sample(0, sampleTime));
   when noEvent(trigger) then
-    dummy = HVACAgentBasedControl.BaseClasses.Internal.sendToUDP(
+    dummy = AixLib.Controls.HVACAgentBasedControl.BaseClasses.Internal.sendToUDP(
       socket,
       IPAddress,
       port_send,

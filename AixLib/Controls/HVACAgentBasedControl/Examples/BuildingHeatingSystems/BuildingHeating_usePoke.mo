@@ -43,7 +43,7 @@ For more information you can also refer to <a href=\"HVACAgentBasedControl.Agent
 <h4><span style=\"color: #008000\">Example Results</span></h4>
 <p>The results show that in the presented example, the simulation time can be reduced by 50%. However, during the times where the agents are actually active, the conventional
 communication method has better performance.</p>
-<p><img src=\"modelica://HVACAgentBasedControl/Resources/Images/Example_usePoke.PNG\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/Example_usePoke.PNG\"/></p>
 
 </html>", revisions="<html>
 <p>
