@@ -30,7 +30,7 @@ model HeatPumpSimple
                     Medium, m_flow_nominal=0.01)
                     "Temperature sensor at outlet on the sink side"   annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {80, 50})));
   Modelica.Blocks.Interfaces.BooleanInput OnOff
-                    "On Off input signal of the heatpump"      annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 270, origin = {0, 80})));
+                    "On Off input signal of the heat pump"      annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 270, origin = {0, 80})));
   Fluid.Sensors.TemperatureTwoPort
                     temperatureSourceIn(redeclare package Medium =
                     Medium, m_flow_nominal=0.01)
@@ -42,19 +42,19 @@ model HeatPumpSimple
                     "Heat flow on the source side" annotation(Placement(transformation(extent={{4,-4},{
             -4,4}},                                                                                                    origin={-46,-50})));
   Modelica.Blocks.Tables.CombiTable2D PowerTable(table = tablePower)
-                    "calculates electric power based on temperature in source and sink" annotation(Placement(transformation(extent = {{-52, 20}, {-32, 40}})));
+                    "Calculates electric power based on temperature in source and sink" annotation(Placement(transformation(extent = {{-52, 20}, {-32, 40}})));
   Modelica.Blocks.Tables.CombiTable2D HeatFlowCondenserTable(table = tableHeatFlowCondenser)
                     "Calculates heat flow based on temperature in source and sink" annotation(Placement(transformation(extent = {{-52, -12}, {-32, 8}})));
   Modelica.Blocks.Logical.Switch SwitchHeatFlowCondenser
-                    "Switch to deactivate heatflow when off" annotation(Placement(transformation(extent = {{14, -20}, {34, 0}})));
+                    "Switch to deactivate heat flow when off" annotation(Placement(transformation(extent = {{14, -20}, {34, 0}})));
   Modelica.Blocks.Sources.Constant constZero2(k = 0)
-                    "zero heatflow, when heatpump off" annotation(Placement(transformation(extent = {{-26, -28}, {-6, -8}})));
+                    "Zero heat flow, when heat pump off" annotation(Placement(transformation(extent = {{-26, -28}, {-6, -8}})));
   Modelica.Blocks.Logical.Switch SwitchPower
                     "Switch to deactivate Power when off" annotation(Placement(transformation(extent = {{14, 12}, {34, 32}})));
   Modelica.Blocks.Sources.Constant constZero1(k = 0)
-                    "zero power, when heatpump off" annotation(Placement(transformation(extent = {{-26, 4}, {-6, 24}})));
+                    "Zero power, when heat pump off" annotation(Placement(transformation(extent = {{-26, 4}, {-6, 24}})));
   Modelica.Blocks.Math.Feedback feedbackHeatFlowEvaporator
-                    "calculates evaporator heatflow with total energy balance" annotation(Placement(transformation(extent = {{10, -60}, {-10, -40}})));
+                    "Calculates evaporator heat flow with total energy balance" annotation(Placement(transformation(extent = {{10, -60}, {-10, -40}})));
   Modelica.Blocks.Interfaces.RealOutput Power "Connector of Real output signal" annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {0, -90})));
   parameter Modelica.SIunits.Volume VolumeEvaporator = 0.01 "Volume im m3";
   parameter Modelica.SIunits.Volume VolumeCondenser = 0.01 "Volume im m3";
@@ -126,12 +126,17 @@ equation
     AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem2</a></p>
  </html>", revisions="<html>
  <ul>
- <li><i>November 2014&nbsp;</i>
-    by Marcus Fuchs:<br/>
-    Changed model to use Annex 60 base class</li>
- <li><i>November 25, 2013&nbsp;</i>
-    by Kristian Huchtemann:<br/>
-    Implemented</li>
+   <li>
+   May 15, 2017, by Christian Behm:<br/>
+   Added missing documentation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/373\">issue 373</a>).
+  </li>
+  <li>
+   November, 2014, by Marcus Fuchs:<br/>
+   Changed model to use Annex 60 base class
+  </li>
+  <li>
+   November 25, 2013, by Kristian Huchtemann:<br/>
+   Implemented</li>
  </ul>
  </html>"));
 end HeatPumpSimple;
