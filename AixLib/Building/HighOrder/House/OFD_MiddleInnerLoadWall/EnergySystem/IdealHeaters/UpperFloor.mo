@@ -3,7 +3,7 @@ within AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall.EnergySystem.Idea
 
 model UpperFloor
   parameter Real ratioRadHeat = 0.3
-    "ratio of radiative heat from total heat generated" annotation(Dialog(groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/UpperFloor_Hydraulics.png"));
+    "ratio of radiative heat from total heat generated";
   Utilities.Interfaces.Star Rad_Bedroom annotation(Placement(transformation(extent = {{-149, 80}, {-129, 100}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Con_Bedroom annotation(Placement(transformation(extent = {{-150, 49}, {-130, 69}})));
   Utilities.Interfaces.Star Rad_Children2 annotation(Placement(transformation(extent = {{-149, -25}, {-129, -5}})));
