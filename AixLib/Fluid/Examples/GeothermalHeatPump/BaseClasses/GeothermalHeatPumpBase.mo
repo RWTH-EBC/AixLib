@@ -2,6 +2,8 @@ within AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses;
 model GeothermalHeatPumpBase
   "Base class of the geothermal heat pump system"
 
+  extends Modelica.Icons.Example;
+
   replaceable package Medium = AixLib.Media.Water "Medium model used for hydronic components";
 
   parameter Modelica.SIunits.Temperature T_start_cold[5] = 300*ones(5) "Initial temperature of cold components";
@@ -270,19 +272,7 @@ equation
     annotation (Line(points={{-96,-54},{-146,-54}}, color={0,127,255}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-160,
           -120},{160,80}})),              Icon(coordinateSystem(
-          preserveAspectRatio=false, extent={{-160,-120},{160,80}}),
-        graphics={Rectangle(
-          extent={{-160,80},{160,-120}},
-          lineColor={0,0,255},
-          fillColor={255,170,85},
-          fillPattern=FillPattern.Solid), Text(
-          extent={{-10,-6},{32,-26}},
-          lineColor={0,0,0},
-          fillColor={255,170,85},
-          fillPattern=FillPattern.Solid,
-          textStyle={TextStyle.Bold},
-          textString="Heat
-Pump")}),
+          preserveAspectRatio=false, extent={{-160,-120},{160,80}})),
     experiment(StopTime=3600, Interval=10),
     __Dymola_experimentSetupOutput(
       states=false,
