@@ -1,5 +1,5 @@
 within AixLib.FastHVAC.Examples.HeatGenerators.HeatPump;
-model WasterWaterHeatPump
+model WasteWaterHeatPump
   extends Modelica.Icons.Example;
   Components.HeatGenerators.HeatPump.HeatPump heatPump
     annotation (Placement(transformation(extent={{-36,-44},{-66,-24}})));
@@ -173,4 +173,4 @@ equation
           {-32,-4},{-32,-12},{-32,-25},{-46,-25}}, color={255,0,255}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})));
-end WasterWaterHeatPump;
+end WasteWaterHeatPump;
