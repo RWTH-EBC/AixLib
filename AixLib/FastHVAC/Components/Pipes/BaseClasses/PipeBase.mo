@@ -6,7 +6,7 @@ model PipeBase
       Medium
      ******************************************************************* */
     parameter Integer nNodes( min=3)=3 "Number of discrete flow volumes";
-    parameter FastHVAC.Media.BaseClass.MediumSimple medium=
+    parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
       FastHVAC.Media.WaterSimple()
     "Mediums charastics  (heat capacity, density, thermal conductivity)"
     annotation(choicesAllMatching);
@@ -38,7 +38,7 @@ model PipeBase
         transformation(extent={{88,-10},{108,10}}), iconTransformation(extent={{
             88,-10},{108,10}})));
 
-  FastHVAC.BaseClass.WorkingFluid pipeFluid[nNodes](
+  FastHVAC.BaseClasses.WorkingFluid pipeFluid[nNodes](
     medium=fill(medium,nNodes),
     T0=fill(T_0,nNodes),
     m_fluid=fill(V_fluid/nNodes*medium.rho, nNodes))

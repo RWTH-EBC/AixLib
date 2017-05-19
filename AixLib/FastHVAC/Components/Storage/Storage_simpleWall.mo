@@ -6,17 +6,17 @@ model Storage_simpleWall
      ******************************************************************* */
 
 public
-  parameter FastHVAC.Media.BaseClass.MediumSimple medium=
+  parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
       FastHVAC.Media.WaterSimple()
     "Mediums charastics (heat capacity, density, thermal conductivity)"
     annotation(Dialog(group="Medium"),choicesAllMatching);
 
-    parameter FastHVAC.Media.BaseClass.MediumSimple mediumHC1=
+    parameter FastHVAC.Media.BaseClasses.MediumSimple mediumHC1=
       FastHVAC.Media.WaterSimple()
     "Mediums charastics for HC1 (heat capacity, density, thermal conductivity)"
     annotation(Dialog(group="Medium"),choicesAllMatching);
 
-     parameter FastHVAC.Media.BaseClass.MediumSimple mediumHC2=
+     parameter FastHVAC.Media.BaseClasses.MediumSimple mediumHC2=
       FastHVAC.Media.WaterSimple()
     "Mediums charastics HC2 (heat capacity, density, thermal conductivity)"
     annotation(Dialog(group="Medium"),choicesAllMatching);
@@ -136,13 +136,13 @@ public
         iconTransformation(extent={{10,-110},{30,-90}})));
 
 public
-  FastHVAC.BaseClass.EnergyBalance   energyBalance_load[n,n_load_cycles]
+  FastHVAC.BaseClasses.EnergyBalance   energyBalance_load[n,n_load_cycles]
     annotation (Placement(transformation(
         extent={{-20,-19},{20,19}},
         rotation=270,
         origin={-59,0})));
 
-  FastHVAC.BaseClass.EnergyBalance   energyBalance_unload[n,n_unload_cycles]
+  FastHVAC.BaseClasses.EnergyBalance   energyBalance_unload[n,n_unload_cycles]
     annotation (Placement(transformation(
         extent={{-20,20},{20,-20}},
         rotation=270,

@@ -4,7 +4,7 @@ model HeatingCoil
 
  parameter Integer dis_HC = 2;
 
-  parameter Media.BaseClass.MediumSimple medium_HC=Media.WaterSimple()
+  parameter Media.BaseClasses.MediumSimple medium_HC=Media.WaterSimple()
     "Mediums charastics  (heat capacity, density, thermal conductivity)";
 
  parameter Modelica.SIunits.Length length_HC = 3 "Length of Pipe for HC";

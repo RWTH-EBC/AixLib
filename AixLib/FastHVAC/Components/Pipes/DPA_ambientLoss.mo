@@ -11,7 +11,7 @@ model DPA_ambientLoss "Discretized DynamicPipe with heat loss to ambient"
     parameter Modelica.SIunits.Temperature T_0=Modelica.SIunits.Conversions.from_degC(20)
     "Initial temperature of fluid";
     parameter Boolean selectable=true "Pipe record";
-    parameter FastHVAC.Media.BaseClass.MediumSimple medium=
+    parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
       FastHVAC.Media.WaterSimple()
     "Mediums charastics  (heat capacity, density, thermal conductivity)";
 
