@@ -7,3 +7,5 @@ HeatConv_outside
 HeatToStar
 HeatToStar_Avar
 SolarRadToHeat
+CylindricHeatConduction_fouling
+HeatConvPipe_inside
