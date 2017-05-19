@@ -241,7 +241,7 @@ model TestCase9 "VDI 6007 Test Case 9 model"
   Modelica.Blocks.Math.Gain gain(k=65.99081593)
     "Convert long-wave radiation into black body sky temperature"
     annotation (Placement(transformation(extent={{-52,-10},{-46,-4}})));
-  BaseClasses.AssertEqualityThreePeriods assEqu(
+  BaseClasses.VerifyDifferenceThreePeriods assEqu(
     startTime=3600,
     endTime=86400,
     startTime2=781200,
@@ -394,7 +394,7 @@ equation
   Implemented.
   </li>
   </ul>
-  </html>"),experiment(StopTime=5.184e+006, Interval=60),
+  </html>"),experiment(Tolerance=1e-6, StopTime=5.184e+006, Interval=60),
   __Dymola_Commands(file=
   "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Validation/VDI6007/TestCase9.mos"
         "Simulate and plot"));
