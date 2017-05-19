@@ -50,7 +50,7 @@ model WasterWaterHeatPump
   Modelica.Blocks.Sources.Constant dotm_unload(k=0)
     annotation (Placement(transformation(extent={{106,-112},{94,-102}})));
   Components.Sensors.TemperatureSensor T_return_water_cond
-    annotation (Placement(transformation(extent={{-72,-8},{-92,12}})));
+    annotation (Placement(transformation(extent={{-68,-10},{-88,10}})));
   Modelica.Blocks.Sources.Constant dotm_water_evap(k=0.003)
     annotation (Placement(transformation(extent={{2,-6},{14,6}})));
   Components.Pumps.FluidSource          fluidSource3(medium=
@@ -61,8 +61,8 @@ model WasterWaterHeatPump
   Components.Sinks.Vessel          vessel3
                                           annotation (Placement(transformation(
         extent={{12,-7},{-12,7}},
-        rotation=0,
-        origin={-87,30})));
+        rotation=-90,
+        origin={-95,42})));
   Modelica.Blocks.Sources.Constant T_flow_water_cond(k=273.15 + 10)
     annotation (Placement(transformation(extent={{-104,-96},{-84,-76}})));
   Modelica.Blocks.Sources.Constant dotm__water_cond(k=0.007)
@@ -99,7 +99,7 @@ model WasterWaterHeatPump
         rotation=270,
         origin={35,-92})));
   Modelica.Blocks.Sources.BooleanPulse booleanPulse(period=1000, width=20)
-    annotation (Placement(transformation(extent={{-56,-16},{-36,4}})));
+    annotation (Placement(transformation(extent={{-52,-14},{-32,6}})));
 equation
   connect(fluidSource1.enthalpyPort_b, wasteWaterStorage.UnloadingCycle_In[1])
     annotation (Line(points={{78,-87.4},{77.6,-87.4},{77.6,-66}},
@@ -110,7 +110,7 @@ equation
   connect(dotm_unload.y, fluidSource1.dotm) annotation (Line(points={{93.4,-107},
           {92,-107},{92,-89.56},{88.8,-89.56}},  color={0,0,127}));
   connect(vessel3.enthalpyPort_a, T_return_water_cond.enthalpyPort_b)
-    annotation (Line(points={{-78.6,30},{-91,30},{-91,1.9}},
+    annotation (Line(points={{-95,33.6},{-87,33.6},{-87,-0.1}},
                                                            color={176,0,0}));
   connect(fluidSource3.enthalpyPort_b, heatPump.enthalpyPort_inCo) annotation (
       Line(points={{-77,-48},{-77,-42.2},{-63.6,-42.2}},             color={176,
@@ -150,7 +150,8 @@ equation
   connect(less.u2, wasteWaterStorage.T_layers[10]) annotation (Line(points={{50.8,
           37.2},{50.23,37.2},{50.23,-42}},      color={0,0,127}));
   connect(T_return_water_cond.enthalpyPort_a, heatPump.enthalpyPort_outCo)
-    annotation (Line(points={{-73.2,1.9},{-63.2,1.9},{-63.2,-25.6}}, color={176,
+    annotation (Line(points={{-69.2,-0.1},{-63.2,-0.1},{-63.2,-25.6}},
+                                                                     color={176,
           0,0}));
   connect(T_wastewater.y, WasteWater_in.T_fluid) annotation (Line(points={{48,
           84.4},{48,84.4},{48,78},{32.2,78},{32.2,72}}, color={0,0,127}));
@@ -168,8 +169,8 @@ equation
           {116,38},{116,16},{116,8},{71,8}}, color={0,0,127}));
   connect(threeWayValve.enthalpyPort_b, vessel2.enthalpyPort_a) annotation (
       Line(points={{52,8},{40,8},{40,-83.6},{35,-83.6}}, color={176,0,0}));
-  connect(booleanPulse.y, heatPump.onOff_in) annotation (Line(points={{-35,-6},
-          {-32,-6},{-32,-12},{-32,-25},{-46,-25}}, color={255,0,255}));
+  connect(booleanPulse.y, heatPump.onOff_in) annotation (Line(points={{-31,-4},
+          {-32,-4},{-32,-12},{-32,-25},{-46,-25}}, color={255,0,255}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})));
 end WasterWaterHeatPump;
