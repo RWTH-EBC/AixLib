@@ -1,21 +1,21 @@
 within AixLib.FastHVAC.Components.Storage;
 model HeatStorage "Simple model of a heat storage"
-
+  import AixLib;
 
   /* *******************************************************************
       Medium
      ******************************************************************* */
- parameter AixLib.FastHVAC.Media.BaseClass.MediumSimple medium=
+ parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple medium=
       AixLib.FastHVAC.Media.WaterSimple()
     "Mediums charastics (heat capacity, density, thermal conductivity)"
     annotation(Dialog(group="Medium"),choicesAllMatching);
 
-     parameter AixLib.FastHVAC.Media.BaseClass.MediumSimple mediumHC1=
+     parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple mediumHC1=
       AixLib.FastHVAC.Media.WaterSimple()
     "Mediums charastics for HC1 (heat capacity, density, thermal conductivity)"
     annotation(Dialog(group="Medium"),choicesAllMatching);
 
-     parameter AixLib.FastHVAC.Media.BaseClass.MediumSimple mediumHC2=
+     parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple mediumHC2=
       AixLib.FastHVAC.Media.WaterSimple()
     "Mediums charastics for HC2 (heat capacity, density, thermal conductivity)"
     annotation(Dialog(group="Medium"),choicesAllMatching);
@@ -114,13 +114,15 @@ public
             {10,-110},{30,-90}})));
 
 public
-  FastHVAC.BaseClass.EnergyBalance   energyBalance_load[n]
+  AixLib.FastHVAC.BaseClasses.EnergyBalance
+                                     energyBalance_load[n]
     annotation (Placement(transformation(
         extent={{-20,-19},{20,19}},
         rotation=270,
         origin={-41,0})));
 
-  FastHVAC.BaseClass.EnergyBalance   energyBalance_unload[n]
+  AixLib.FastHVAC.BaseClasses.EnergyBalance
+                                     energyBalance_unload[n]
     annotation (Placement(transformation(
         extent={{-20,20},{20,-20}},
         rotation=270,
@@ -251,11 +253,11 @@ connect(heatingRod, layer[n_HR].port);
 
      for m in 1:n loop
        if m<=integer(min(max(AixLib.Utilities.Math.Functions.round(load_cycles[ 1]/(data.hTank/n) + 0.5, 0), 1), n)) and m>=integer(min(max(AixLib.Utilities.Math.Functions.round(load_cycles[ 2]/(data.hTank/n) + 0.5, 0), 1), n)) then
-         connect(energyBalance_load[m].therm,layer[m].port);
+         connect(energyBalance_load[m].heatPort_a,layer[m].port);
        elseif m>integer(min(max(AixLib.Utilities.Math.Functions.round(load_cycles[1]/(data.hTank/n) + 0.5, 0), 1), n)) then
-      connect(energyBalance_load[m].therm, varTemp_load[2].port);
+      connect(energyBalance_load[m].heatPort_a, varTemp_load[2].port);
        else
-      connect(energyBalance_load[m].therm, varTemp_load[1].port);
+      connect(energyBalance_load[m].heatPort_a, varTemp_load[1].port);
        end if;
 
      end for;
@@ -290,16 +292,16 @@ if integer(min(max(AixLib.Utilities.Math.Functions.round(load_cycles[ 1]/(data.h
 
      for m in 1:n loop
        if m>=integer(min(max(AixLib.Utilities.Math.Functions.round(unload_cycles[ 1]/(data.hTank/n) + 0.5, 0), 1), n)) and m<=integer(min(max(AixLib.Utilities.Math.Functions.round(unload_cycles[2]/(data.hTank/n) + 0.5, 0), 1), n)) then
-         connect(energyBalance_unload[m].therm,layer[m].port);
+         connect(energyBalance_unload[m].heatPort_a,layer[m].port);
        elseif m>integer(min(max(AixLib.Utilities.Math.Functions.round(unload_cycles[ 2]/(data.hTank/n) + 0.5, 0), 1), n)) then
-      connect(energyBalance_unload[m].therm, varTemp_unload[2].port);
+      connect(energyBalance_unload[m].heatPort_a, varTemp_unload[2].port);
        else
-      connect(energyBalance_unload[m].therm, varTemp_unload[1].port);
+      connect(energyBalance_unload[m].heatPort_a, varTemp_unload[1].port);
        end if;
      end for;
   /* *************Setting of the lower temperature********************************/
      if integer(min(max(AixLib.Utilities.Math.Functions.round(unload_cycles[ 1]/(data.hTank/n) + 0.5, 0), 1), n))==1 then
-       //just a dummy value, because the dummy varTemp_load is not connected to any energyBalance
+       //just a dummy value, because the dummy is not connected to any energyBalance
     varTemp_unload[1].T = 323.15;
      else
     varTemp_unload[1].T = UnloadingCycle_In.T;

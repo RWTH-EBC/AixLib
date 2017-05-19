@@ -1,24 +1,23 @@
 within AixLib.FastHVAC.Components.Storage;
 model HeatStorage_variablePorts "Simple model of a heat storage"
-
-
+  import AixLib;
 
   /* *******************************************************************
       Medium
      ******************************************************************* */
 
 public
-  parameter FastHVAC.Media.BaseClass.MediumSimple medium=
+  parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
       FastHVAC.Media.WaterSimple()
     "Mediums charastics (heat capacity, density, thermal conductivity)"
     annotation(Dialog(group="Medium"),choicesAllMatching);
 
-    parameter FastHVAC.Media.BaseClass.MediumSimple mediumHC1=
+    parameter FastHVAC.Media.BaseClasses.MediumSimple mediumHC1=
       FastHVAC.Media.WaterSimple()
     "Mediums charastics for HC1 (heat capacity, density, thermal conductivity)"
     annotation(Dialog(group="Medium"),choicesAllMatching);
 
-     parameter FastHVAC.Media.BaseClass.MediumSimple mediumHC2=
+     parameter FastHVAC.Media.BaseClasses.MediumSimple mediumHC2=
       FastHVAC.Media.WaterSimple()
     "Mediums charastics HC2 (heat capacity, density, thermal conductivity)"
     annotation(Dialog(group="Medium"),choicesAllMatching);
@@ -117,13 +116,15 @@ public
         iconTransformation(extent={{10,-110},{30,-90}})));
 
 public
-  FastHVAC.BaseClass.EnergyBalance   energyBalance_load[n,n_load_cycles]
+  AixLib.FastHVAC.BaseClasses.EnergyBalance
+                                     energyBalance_load[n,n_load_cycles]
     annotation (Placement(transformation(
         extent={{-20,-19},{20,19}},
         rotation=270,
         origin={-39,0})));
 
-  FastHVAC.BaseClass.EnergyBalance   energyBalance_unload[n,n_unload_cycles]
+  AixLib.FastHVAC.BaseClasses.EnergyBalance
+                                     energyBalance_unload[n,n_unload_cycles]
     annotation (Placement(transformation(
         extent={{-20,20},{20,-20}},
         rotation=270,
@@ -257,11 +258,11 @@ connect(heatingRod, layer[n_HR].port);
 
      for m in 1:n loop
        if m<=load_cycles[k,1] and m>=load_cycles[k,2] then
-         connect(energyBalance_load[m, k].therm,layer[m].port);
+         connect(energyBalance_load[m, k].heatPort_a,layer[m].port);
        elseif m>load_cycles[k,1] then
-        connect(energyBalance_load[m, k].therm, varTemp_load[k, 2].port);
+        connect(energyBalance_load[m, k].heatPort_a, varTemp_load[k, 2].port);
        else
-        connect(energyBalance_load[m, k].therm, varTemp_load[k, 1].port);
+        connect(energyBalance_load[m, k].heatPort_a, varTemp_load[k, 1].port);
        end if;
      end for;
 
@@ -294,11 +295,11 @@ connect(heatingRod, layer[n_HR].port);
 
      for m in 1:n loop
        if m>=unload_cycles[k,1] and m<=unload_cycles[k,2] then
-         connect(energyBalance_unload[m, k].therm,layer[m].port);
+         connect(energyBalance_unload[m, k].heatPort_a,layer[m].port);
        elseif m>unload_cycles[k,2] then
-        connect(energyBalance_unload[m, k].therm, varTemp_unload[k, 2].port);
+        connect(energyBalance_unload[m, k].heatPort_a, varTemp_unload[k, 2].port);
        else
-        connect(energyBalance_unload[m, k].therm, varTemp_unload[k, 1].port);
+        connect(energyBalance_unload[m, k].heatPort_a, varTemp_unload[k, 1].port);
        end if;
      end for;
 
