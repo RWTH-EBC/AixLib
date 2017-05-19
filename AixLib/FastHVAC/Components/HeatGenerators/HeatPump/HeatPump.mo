@@ -5,12 +5,12 @@ model HeatPump "Simple heat pump model"
       Medium
       ******************************************************************* */
 
-     parameter FastHVAC.Media.BaseClass.MediumSimple medium_ev=
+     parameter FastHVAC.Media.BaseClasses.MediumSimple medium_ev=
       FastHVAC.Media.WaterSimple()
     "Standard charastics for water (heat capacity, density, thermal conductivity)"
     annotation (Evaluate=true, Dialog(tab="Evaporator, Condenser",group="Evaporator"),choicesAllMatching=true);
 
-     parameter FastHVAC.Media.BaseClass.MediumSimple medium_co=
+     parameter FastHVAC.Media.BaseClasses.MediumSimple medium_co=
       FastHVAC.Media.WaterSimple()
     "Standard charastics for water (heat capacity, density, thermal conductivity)"
     annotation (Evaluate=true, Dialog(tab="Evaporator, Condenser",group="Evaporator"),choicesAllMatching=true);
@@ -216,7 +216,7 @@ FastHVAC.Interfaces.EnthalpyPort_b enthalpyPort_outEv annotation (Placement(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-130,26})));
-  FastHVAC.BaseClass.WorkingFluid evFluid(
+  BaseClasses.WorkingFluid        evFluid(
   medium=medium_ev,
   m_fluid=volume_ev*medium_ev.rho,
   T0=T_startEv) annotation (Placement(transformation(
@@ -239,7 +239,7 @@ FastHVAC.Interfaces.EnthalpyPort_b enthalpyPort_outEv annotation (Placement(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={130,-32})));
-  FastHVAC.BaseClass.WorkingFluid coFluid(
+  BaseClasses.WorkingFluid        coFluid(
   medium=medium_co,
   m_fluid=volume_co*medium_co.rho,
   T0=T_startCo) annotation (Placement(transformation(
