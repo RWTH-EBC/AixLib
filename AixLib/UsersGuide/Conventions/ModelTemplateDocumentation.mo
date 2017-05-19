@@ -1,7 +1,8 @@
 within AixLib.UsersGuide.Conventions;
 
 
-model ModelTemplateDocumentation "Template documentation for EBC's models"
+model ModelTemplateDocumentation "Template documentation for AixLib models"
+
   annotation(Documentation(info="<html>
 <p>
 A short introduction.
