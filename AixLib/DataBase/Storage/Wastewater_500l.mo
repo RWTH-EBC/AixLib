@@ -28,7 +28,7 @@ record Wastewater_500l "Wastewater storage data for a 500 l storage"
 
   annotation (Icon(graphics),               Documentation(info="<html>
 <h4><font color=\"#008000\">Overview</font></h4>
-<p>Buffer Storage: Buderus Logalux SF 500 l</p>
+<p>Buffer Storage: Values are copied from Buderus Logalux SF 500 l</p>
 <h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a
 href=\"HVAC.Components.BufferStorage.BufferStorageHeatingcoils\">HVAC.Components.BufferStorage.BufferStorageHeatingcoils</a></p>
