@@ -5,34 +5,40 @@ model HeatPumpSimple
 
  extends Modelica.Icons.Example;
   Modelica.Blocks.Sources.BooleanPulse booleanPulse(period=1000)
+    "Pulse signal for the on/off input of the heat pump"
     annotation (Placement(transformation(extent={{-80,40},{-60,60}})));
   Sources.MassFlowSource_T                sourceSideMassFlowSource(
     use_T_in=true,
     redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
     m_flow=1,
-    T=275.15,
-    nPorts=1) annotation (Placement(transformation(extent={{-44,4},{-24,24}})));
+    nPorts=1,
+    T=275.15) "Ideal mass flow source at the inlet of the source side"
+              annotation (Placement(transformation(extent={{-44,4},{-24,24}})));
 
   Sources.FixedBoundary                sourceSideFixedBoundary(redeclare
       package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, nPorts=
-       1) annotation (Placement(transformation(extent={{-46,-18},{-26,2}})));
+       1) "Fixed boundary at the outlet of the source side"
+          annotation (Placement(transformation(extent={{-46,-18},{-26,2}})));
   Sources.FixedBoundary                sinkSideFixedBoundary(redeclare package
       Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, nPorts=1)
+    "Fixed boundary at the outlet of the sink side"
     annotation (Placement(transformation(extent={{96,4},{76,24}})));
   Sources.MassFlowSource_T                sinkSideMassFlowSource(
     redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
     m_flow=0.5,
     use_m_flow_in=true,
-    T=308.15,
-    nPorts=1) annotation (Placement(transformation(extent={{20,-58},{40,-38}})));
+    nPorts=1,
+    T=308.15) "Ideal mass flor source at the inlet of the sink side"
+              annotation (Placement(transformation(extent={{20,-58},{40,-38}})));
 
   Modelica.Blocks.Sources.Ramp TsuSourceRamp(
     duration=1000,
     startTime=1000,
     height=25,
     offset=278)
+    "Ramp signal for the temperature input of the source side's ideal mass flow source"
     annotation (Placement(transformation(extent={{-80,0},{-60,20}})));
   Modelica.Blocks.Sources.Pulse massFlowPulse(
     amplitude=0.5,
@@ -40,15 +46,17 @@ model HeatPumpSimple
     offset=0,
     startTime=0,
     width=51)
+    "Pulse signal for the mass flow input of the sink side's ideal mass flow source"
     annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
   Sensors.TemperatureTwoPort                temperature(redeclare package
       Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, m_flow_nominal=
-       0.01)
+       0.01) "Temperature sensor at the outlet of the sink side"
     annotation (Placement(transformation(extent={{42,4},{62,24}})));
   Modelica.Blocks.Interfaces.RealOutput Pel
+    "Power consumption of the heat pump"
     annotation (Placement(transformation(extent={{100,-20},{120,0}})));
   Modelica.Blocks.Interfaces.RealOutput T_Co_out
-    "Temperature of the passing fluid"
+    "Temperature at the outlet of the sink side of the heat pump"
     annotation (Placement(transformation(extent={{100,40},{120,60}})));
   AixLib.Fluid.HeatPumps.HeatPumpSimple heatPump(
     tablePower=[0.0,273.15,283.15; 308.15,1100,1150; 328.15,1600,1750],
@@ -56,7 +64,7 @@ model HeatPumpSimple
         5750],
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
     VolumeEvaporator=0.004,
-    VolumeCondenser=0.004)
+    VolumeCondenser=0.004) "Simple heat pump based on manufacturing data"
     annotation (Placement(transformation(extent={{-2,4},{18,24}})));
 
 equation
@@ -96,15 +104,20 @@ equation
     experiment(StopTime=3600),
     __Dymola_experimentSetupOutput,
     Documentation(info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
-<p>
-Simple test set-up for the HeatPump model. The heat pump is turned on and off while the source temperature increases linearly. Outputs are the electric power consumptiion of the heat pump and the supply temperature.
-</p>
+<h4><span style=\"color: #008000\">Overview</span></h4>
+<p>Simple test set-up for the HeatPumpSimple model. The heat pump is turned on and off while the source temperature increases linearly. Outputs are the electric power consumption of the heat pump and the supply temperature. </p>
 </html>",
       revisions="<html>
-<ul>
-<li><i>December 10, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
-</ul>
+ <ul>
+  <li>
+  May 19, 2017, by Mirko Engelpracht:<br/>
+  Added missing documentation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/391\">issue 391</a>).
+  </li>
+  <li>
+  December 10, 2013, by Ole Odendahl:<br/>
+  Formatted documentation appropriately.
+  </li>
+ </ul>
 </html>
 "));
 end HeatPumpSimple;
