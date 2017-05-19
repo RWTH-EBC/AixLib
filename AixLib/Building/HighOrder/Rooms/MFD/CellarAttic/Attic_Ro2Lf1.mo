@@ -5,7 +5,7 @@ model Attic_Ro2Lf1
   "Attic with two saddle roofs and on floor towards the rooms on the lower floors"
   import AixLib;
   ///////// construction parameters
-  parameter Integer TIR = 4 "Thermal Insulation Regulation" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1
+  parameter Integer TIR = 4 "Thermal Insulation Regulation" annotation(Dialog(groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/MFD_Attic.png", group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1
         "EnEV_2009",                                                                                                    choice = 2
         "EnEV_2002",                                                                                                    choice = 3
         "WSchV_1995",                                                                                                    choice = 4
@@ -87,7 +87,7 @@ equation
   connect(NaturalVentilation.port_a, thermOutside) annotation(Line(points = {{-70, -46}, {-80, -46}, {-80, 90}, {-90, 90}}, color = {191, 0, 0}));
   connect(NaturalVentilation.port_b, airload.port) annotation(Line(points = {{-50, -46}, {-28, -46}, {-28, -28}, {-10, -28}, {-10, -12}, {1, -12}}, color = {191, 0, 0}));
   connect(NaturalVentilation.InPort1, AirExchangePort) annotation(Line(points = {{-69, -52.4}, {-80, -52.4}, {-80, 25}, {-100, 25}}, color = {0, 0, 127}));
-  annotation(__Dymola_Images(Parameters(source = "AixLib/Resources/Images/Building/HighOrder/MFD_Attic.png", Width = 5, Length = 5)), Icon(graphics={  Polygon(points = {{-58, -20}, {16, 54}, {90, -20}, {76, -20}, {16, 40}, {-44, -20}, {-58, -20}}, lineColor = {0, 0, 0},
+  annotation(Icon(graphics={  Polygon(points = {{-58, -20}, {16, 54}, {90, -20}, {76, -20}, {16, 40}, {-44, -20}, {-58, -20}}, lineColor = {0, 0, 0},
             fillPattern =                                                                                                    FillPattern.Solid, fillColor = {175, 175, 175}), Polygon(points = {{-24, 0}, {6, 30}, {-8, 30}, {-38, 0}, {-24, 0}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255},
             fillPattern =                                                                                                   FillPattern.Solid, visible = withWindow1), Text(extent = {{-36, 10}, {12, 22}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255},
             fillPattern =                                                                                                   FillPattern.Solid, textString = "Win1", visible = withWindow1), Polygon(points = {{26, 30}, {56, 0}, {70, 0}, {40, 30}, {26, 30}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255},
