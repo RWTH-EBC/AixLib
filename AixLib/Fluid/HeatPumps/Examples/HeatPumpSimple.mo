@@ -30,7 +30,7 @@ model HeatPumpSimple
     m_flow=0.5,
     use_m_flow_in=true,
     nPorts=1,
-    T=308.15) "Ideal mass flor source at the inlet of the sink side"
+    T=308.15) "Ideal mass flow source at the inlet of the sink side"
               annotation (Placement(transformation(extent={{20,-58},{40,-38}})));
 
   Modelica.Blocks.Sources.Ramp TsuSourceRamp(
