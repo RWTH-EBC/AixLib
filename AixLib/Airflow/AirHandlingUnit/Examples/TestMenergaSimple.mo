@@ -8,42 +8,47 @@ model TestMenergaSimple
   replaceable package MediumWater = AixLib.Media.Water;
 
   extends Modelica.Icons.Example;
-  Fluid.Sources.Boundary_pT exhaustAir(
-     redeclare package Medium = MediumAir,
-    X={0.03,0.97},
+  Fluid.Sources.Boundary_pT supplyAir(
+    redeclare package Medium = MediumAir,
+    nPorts=1,
+    X={0.02,0.98},
+    p=100000,
+    T=294.15) "Sink for supply air"
+    annotation (Placement(transformation(extent={{-92,6},{-72,26}})));
+  Fluid.Sources.Boundary_pT outsideAir(
+    redeclare package Medium = MediumAir,
+    X={0.01,0.99},
     nPorts=1,
     p=100000,
-    T=296.15)                                        "Source for Exhaust Air"
-    annotation (Placement(transformation(extent={{-94,12},{-74,32}})));
-  Fluid.Sources.Boundary_pT supplyAir(
-     redeclare package Medium = MediumAir,
+    T=283.15) "Source for outside air"
+    annotation (Placement(transformation(extent={{104,12},{84,32}})));
+  MenergaSimple menergaSimple
+    annotation (Placement(transformation(extent={{-48,10},{52,56}})));
+  Fluid.Sources.Boundary_pT exhaustAir(
+    redeclare package Medium = MediumAir,
+    nPorts=1,
+    X={0.03,0.97},
+    p=100000,
+    T=296.15) "Source for exhaust air"
+    annotation (Placement(transformation(extent={{-92,52},{-72,72}})));
+  Fluid.Sources.Boundary_pT exitAir(
+    redeclare package Medium = MediumAir,
+    nPorts=1,
     X={0.01,0.99},
-    p=101000,
-    T=293.15,
-    nPorts=1)                                        "Sink for Supply Air"
-    annotation (Placement(transformation(extent={{122,12},{142,32}})));
-  Fluid.FixedResistances.PressureDrop res(
-    redeclare package Medium = MediumAir,
-    m_flow_nominal=1,
-    dp_nominal=1)
-    annotation (Placement(transformation(extent={{-28,12},{-8,32}})));
-  Fluid.Movers.FlowControlled_m_flow exhaustAirFan(
-    redeclare package Medium = MediumAir,
-    addPowerToMedium=false,
-    m_flow_nominal=5.1,
-    redeclare Fluid.Movers.Data.Generic per)
-    "provides pressure difference to transport the exhaust air"
-    annotation (Placement(transformation(extent={{28,14},{44,30}})));
-  Modelica.Blocks.Sources.Constant exhaust_mflow(k=5.1)
-    "nominal mass flow for exhaust air fan"
-    annotation (Placement(transformation(extent={{-24,50},{-4,70}})));
+    p=100000,
+    T=283.15) "Sink für exit air" annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=-90,
+        origin={0,86})));
 equation
-  connect(exhaustAir.ports[1], res.port_a)
-    annotation (Line(points={{-74,22},{-52,22},{-28,22}}, color={0,127,255}));
-  connect(res.port_b, exhaustAirFan.port_a)
-    annotation (Line(points={{-8,22},{6,22},{28,22}}, color={0,127,255}));
-  connect(exhaustAirFan.port_b, supplyAir.ports[1])
-    annotation (Line(points={{44,22},{58,22},{142,22}}, color={0,127,255}));
-  connect(exhaust_mflow.y, exhaustAirFan.m_flow_in) annotation (Line(points={{
-          -3,60},{18,60},{18,56},{35.84,56},{35.84,31.6}}, color={0,0,127}));
+  connect(outsideAir.ports[1], menergaSimple.externalAir) annotation (Line(
+        points={{84,22},{51.4,22},{51.4,22.6}}, color={0,127,255}));
+  connect(supplyAir.ports[1], menergaSimple.SupplyAir) annotation (Line(points=
+          {{-72,16},{-68,16},{-68,20},{-46.4,20},{-46.4,22.6}}, color={0,127,
+          255}));
+  connect(exhaustAir.ports[1], menergaSimple.exhaustAir) annotation (Line(
+        points={{-72,62},{-66,62},{-66,56},{-46.4,56},{-46.4,50.4}}, color={0,
+          127,255}));
+  connect(exitAir.ports[1], menergaSimple.ExitAir) annotation (Line(points={{
+          -1.77636e-015,76},{-1.77636e-015,53.8},{3.2,53.8}}, color={0,127,255}));
 end TestMenergaSimple;
