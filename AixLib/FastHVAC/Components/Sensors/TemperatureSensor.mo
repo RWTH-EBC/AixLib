@@ -92,7 +92,7 @@ equation
     Documentation(info="<html>
 <p><h4><span style=\"color:#008000\">Overview</span></h4></p>
 <p> Temperature sensor measures the absolute temperature.</p>
-<p><a href=\"FastHVAC.Examples.Sensors.TestSensors\">FastHVAC.Examples.Sensors.TestSensors</a></p>
+
 
 <p><ul>
 </html>",
