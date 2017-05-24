@@ -95,7 +95,8 @@ model Window "Calculation of solar energy transmitted through windows"
 
   vdi6007.BaseClasses.Sunblind sunblind[n](lim=lim)
     annotation (Placement(transformation(extent={{-68,-42},{-56,-30}})));
-  AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGTaueDoublePane CorGTaue(
+  AixLib.ThermalZones.ReducedOrder.Windows.SolarGain.CorrectionGTaueDoublePane
+    CorGTaue(
     final n=n,
     final UWin=UWin,
     final xi=xi,

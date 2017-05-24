@@ -18,9 +18,9 @@ partial model PartialMultizone "Partial model for multizone models"
     "Number of fluid ports"
     annotation(Evaluate=true,
     Dialog(connectorSizing=true, tab="General",group="Ports"));
-  replaceable model corG = SolarGain.CorrectionGDoublePane
+  replaceable model corG = Windows.SolarGain.CorrectionGDoublePane
     constrainedby
-    AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG
+    AixLib.ThermalZones.ReducedOrder.Windows.SolarGain.BaseClasses.PartialCorrectionG
     "Model for correction of solar transmission"
     annotation(choicesAllMatching=true);
   replaceable model thermalZone =
