@@ -2,7 +2,9 @@ within AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses;
 model GeothermalHeatPumpBase
   "Base class of the geothermal heat pump system"
 
-  replaceable package Medium = AixLib.Media.Water;
+  extends Modelica.Icons.Example;
+
+  replaceable package Medium = AixLib.Media.Water "Medium model used for hydronic components";
 
   parameter Modelica.SIunits.Temperature T_start_cold[5] = 300*ones(5) "Initial temperature of cold components";
 
@@ -11,7 +13,7 @@ model GeothermalHeatPumpBase
   parameter Modelica.SIunits.Temperature T_start_hot = 300 "Initial temperature of high temperature components";
 
 
-  HeatPumps.HeatPumpSimple         heatPumpTab(volumeEvaporator(T_start = T_start_cold[1]), volumeCondenser(T_start = T_start_warm[5]), redeclare
+  heatPumpControlled               heatPumpTab(volumeEvaporator(T_start = T_start_cold[1]), volumeCondenser(T_start = T_start_warm[5]), redeclare
       package Medium =
         Medium,
     tablePower=[0,266.15,275.15,280.15,283.15,293.15; 308.15,3300,3400,
@@ -35,42 +37,48 @@ model GeothermalHeatPumpBase
     A_HE=7,
     d=1) "Storage tank for buffering cold demand"
     annotation (Placement(transformation(extent={{52,-14},{24,20}})));
-  AixLib.Fluid.FixedResistances.HydraulicResistance resistanceColdStorage(
+  FixedResistances.PressureDrop                     resistanceColdStorage(
     redeclare package Medium = Medium,
-    m_flow_small=1E-4*0.5,
-    D=0.05) annotation (Placement(transformation(
+    m_flow_nominal=0.5,
+    dp_nominal=15000) "Resistance in evaporator circuit"
+            annotation (Placement(transformation(
         extent={{-6,-7},{6,7}},
         rotation=180,
         origin={-34,38})));
-  AixLib.Fluid.Sources.Boundary_pT geothField_source(
+  AixLib.Fluid.Sources.Boundary_pT geothFieldSource(
     redeclare package Medium = Medium,
-    T=284.15,
-    nPorts=1)
+    nPorts=1,
+    T=284.15) "Source representing geothermal field"
     annotation (Placement(transformation(extent={{-158,-60},{-146,-48}})));
-  AixLib.Fluid.FixedResistances.HydraulicResistance resistanceGeothermalSource(
+  FixedResistances.PressureDrop                     resistanceGeothermalSource(
     redeclare package Medium = Medium,
-    m_flow_small=1E-4*0.5,
-    D=0.05) annotation (Placement(transformation(
+    m_flow_nominal=0.5,
+    dp_nominal=15000) "Resistance in geothermal field circuit"
+            annotation (Placement(transformation(
         extent={{-6,-7},{6,7}},
         rotation=0,
         origin={-70,-54})));
-  AixLib.Fluid.FixedResistances.HydraulicResistance resistanceColdConsumerFlow(
+  FixedResistances.PressureDrop                     resistanceColdConsumerFlow(
     redeclare package Medium = Medium,
-    m_flow_small=1E-4*0.5,
-    D=0.05) annotation (Placement(transformation(
+    m_flow_nominal=0.2,
+    dp_nominal=10000) "Resistance in cold consumer flow line"
+            annotation (Placement(transformation(
         extent={{-7,-7},{7,7}},
         rotation=0,
         origin={87,-20})));
-  inner Utilities.Sources.BaseParameters
-                                   baseParameters
-    annotation (Placement(transformation(extent={{140,60},{160,80}})));
-  AixLib.Fluid.Actuators.Valves.SimpleValve
+  Actuators.Valves.TwoWayQuickOpening
                                  valveColdSource(redeclare package Medium =
-        Medium, m_flow_small=1E-4*0.5)
+        Medium,
+    m_flow_nominal=0.5,
+    dpValve_nominal=5000)
+    "Valve connecting geothermal field to the condenser of the heat pump"
     annotation (Placement(transformation(extent={{-36,-61},{-24,-47}})));
-  AixLib.Fluid.Actuators.Valves.SimpleValve
+  Actuators.Valves.TwoWayQuickOpening
                                  valveHeatSource(redeclare package Medium =
-        Medium, m_flow_small=1E-4*0.5)                                              annotation (Placement(
+        Medium,
+    m_flow_nominal=0.5,
+    dpValve_nominal=5000)
+    "Valve connecting geothermal field to the evaporator of the heat pump"          annotation (Placement(
         transformation(
         extent={{-6,-7},{6,7}},
         rotation=90,
@@ -90,37 +98,44 @@ model GeothermalHeatPumpBase
     V_HE=0.01,
     d=1) "Storage tank for buffering heat demand"
     annotation (Placement(transformation(extent={{52,-96},{24,-62}})));
-  AixLib.Fluid.FixedResistances.HydraulicResistance resistanceHeatStorage(
+  FixedResistances.PressureDrop                     resistanceHeatStorage(
     redeclare package Medium = Medium,
-    m_flow_small=1E-4*0.5,
-    D=0.05) annotation (Placement(transformation(
+    m_flow_nominal=0.5,
+    dp_nominal=15000) "Resistance in condenser circuit"
+            annotation (Placement(transformation(
         extent={{-6,-7},{6,7}},
         rotation=90,
         origin={-18,-78})));
   AixLib.Fluid.Sources.Boundary_pT geothField_sink1(redeclare package Medium =
-        Medium, nPorts=1)
+        Medium, nPorts=1) "One of two sinks representing geothermal field"
     annotation (Placement(transformation(extent={{-158,20},{-146,32}})));
-  AixLib.Fluid.Sources.Boundary_pT geothField_sink2(redeclare package Medium =
-        Medium, nPorts=1)
+  AixLib.Fluid.Sources.Boundary_pT geothFieldSink2(redeclare package Medium =
+        Medium, nPorts=1) "One of two sinks representing geothermal field"
     annotation (Placement(transformation(extent={{-158,-15},{-146,-3}})));
-  AixLib.Fluid.FixedResistances.HydraulicResistance resistanceHeatConsumerFlow(
+  FixedResistances.PressureDrop                     resistanceHeatConsumerFlow(
     redeclare package Medium = Medium,
-    m_flow_small=1E-4*0.5,
-    zeta=2,
-    D=0.05) annotation (Placement(transformation(
+    m_flow_nominal=0.2,
+    dp_nominal=10000) "Resistance in heat consumer flow line"
+            annotation (Placement(transformation(
         extent={{-7,-7},{7,7}},
         rotation=0,
         origin={87,-50})));
-  AixLib.Fluid.Actuators.Valves.SimpleValve
+  Actuators.Valves.TwoWayQuickOpening
                                  valveColdStorage(redeclare package Medium =
-        Medium, m_flow_small=1E-4*0.5)                                               annotation (Placement(
+        Medium,
+    m_flow_nominal=0.5,
+    dpValve_nominal=5000)
+    "Valve connecting cold storage to the evaporator of the heat pump"               annotation (Placement(
         transformation(
         extent={{-6,7},{6,-7}},
         rotation=180,
         origin={-52,38})));
-  AixLib.Fluid.Actuators.Valves.SimpleValve
+  Actuators.Valves.TwoWayQuickOpening
                                  valveHeatStorage(redeclare package Medium =
-        Medium, m_flow_small=1E-4*0.5)                                               annotation (Placement(
+        Medium,
+    m_flow_nominal=0.5,
+    dpValve_nominal=5000)
+    "Valve connecting heat storage to the condenser of the heat pump"                annotation (Placement(
         transformation(
         extent={{-6,-7},{6,7}},
         rotation=90,
@@ -140,20 +155,19 @@ model GeothermalHeatPumpBase
     T_start=T_start_warm[5])
     "Pump moving fluid from storage tank to heat consumers"
     annotation (Placement(transformation(extent={{56,-57},{70,-43}})));
-  Modelica.Blocks.Sources.RealExpression realExpression
-    annotation (Placement(transformation(extent={{-28,-144},{-8,-124}})));
-  AixLib.Fluid.FixedResistances.HydraulicResistance resistanceColdConsumerReturn(
+  FixedResistances.PressureDrop                     resistanceColdConsumerReturn(
     redeclare package Medium = Medium,
-    m_flow_small=1E-4*0.5,
-    D=0.05) annotation (Placement(transformation(
+    m_flow_nominal=0.2,
+    dp_nominal=10000) "Resistance in cold consumer return line"
+            annotation (Placement(transformation(
         extent={{-7,-7},{7,7}},
         rotation=180,
         origin={87,32})));
-  AixLib.Fluid.FixedResistances.HydraulicResistance resistanceHeatConsumerReturn(
+  FixedResistances.PressureDrop                     resistanceHeatConsumerReturn(
     redeclare package Medium = Medium,
-    m_flow_small=1E-4*0.5,
-    zeta=2,
-    D=0.05) annotation (Placement(transformation(
+    m_flow_nominal=0.2,
+    dp_nominal=10000) "Resistance in heat consumer return line"
+            annotation (Placement(transformation(
         extent={{-7,-7},{7,7}},
         rotation=180,
         origin={87,-106})));
@@ -161,7 +175,9 @@ model GeothermalHeatPumpBase
     m_flow_nominal=0.05,
     redeclare package Medium = Medium,
     addPowerToMedium=false,
-    T_start=T_start_cold[1]) annotation (Placement(transformation(
+    T_start=T_start_cold[1])
+    "Pump moving fluid from storage tank to condenser of heat pump"
+                             annotation (Placement(transformation(
         extent={{-7,7},{7,-7}},
         rotation=180,
         origin={-1,-98})));
@@ -227,9 +243,8 @@ equation
         points={{-18,-57},{-18,-54},{-5.8,-54},{-5.8,-8.9}}, color={0,127,255}));
   connect(heatPumpTab.port_b_sink, geothField_sink1.ports[1]) annotation (Line(
         points={{-5.8,14.9},{2,14.9},{2,26},{-146,26}}, color={0,127,255}));
-  connect(geothField_sink2.ports[1], heatPumpTab.port_b_source) annotation (
-      Line(points={{-146,-9},{-92,-9},{-92,-8.9},{-38.2,-8.9}},     color={0,127,
-          255}));
+  connect(geothFieldSink2.ports[1], heatPumpTab.port_b_source) annotation (Line(
+        points={{-146,-9},{-92,-9},{-92,-8.9},{-38.2,-8.9}}, color={0,127,255}));
   connect(heatStorage.port_a_heatGenerator, heatPumpTab.port_b_sink)
     annotation (Line(points={{26.24,-64.04},{10,-64.04},{10,14.9},{-5.8,14.9}},
         color={0,127,255}));
@@ -253,23 +268,11 @@ equation
         points={{-8,-98},{-18,-98},{-18,-84}}, color={0,127,255}));
   connect(pumpGeothermalSource.port_b, resistanceGeothermalSource.port_a)
     annotation (Line(points={{-82,-54},{-79,-54},{-76,-54}}, color={0,127,255}));
-  connect(pumpGeothermalSource.port_a, geothField_source.ports[1])
+  connect(pumpGeothermalSource.port_a, geothFieldSource.ports[1])
     annotation (Line(points={{-96,-54},{-146,-54}}, color={0,127,255}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-160,
           -120},{160,80}})),              Icon(coordinateSystem(
-          preserveAspectRatio=false, extent={{-160,-120},{160,80}}),
-        graphics={Rectangle(
-          extent={{-160,80},{160,-120}},
-          lineColor={0,0,255},
-          fillColor={255,170,85},
-          fillPattern=FillPattern.Solid), Text(
-          extent={{-10,-6},{32,-26}},
-          lineColor={0,0,0},
-          fillColor={255,170,85},
-          fillPattern=FillPattern.Solid,
-          textStyle={TextStyle.Bold},
-          textString="Heat
-Pump")}),
+          preserveAspectRatio=false, extent={{-160,-120},{160,80}})),
     experiment(StopTime=3600, Interval=10),
     __Dymola_experimentSetupOutput(
       states=false,
@@ -277,18 +280,20 @@ Pump")}),
       inputs=false,
       auxiliaries=false),
     Documentation(info="<html>
-<p><b><span style=\"font-family: MS Shell Dlg 2; font-size: 10pt;\">Information</b> </span></p>
+<p><b><span style=\"font-family: MS Shell Dlg 2; font-size: 10pt;\">Information</span></b> </p>
 <p><b><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Overview</span></b> </p>
 <p><span style=\"font-family: MS Shell Dlg 2;\">Simple model of a combined heat and cold supply system. The geothermal heat pump can either transport heat </span></p>
 <p><span style=\"font-family: MS Shell Dlg 2;\">- from the cold to the heat storage</span></p>
 <p><span style=\"font-family: MS Shell Dlg 2;\">- from the cold storage to the geothermal field (heat storage disconnected)</span></p>
 <p><span style=\"font-family: MS Shell Dlg 2;\">- from the geothermal field to the heat storage</span></p>
-<p><span style=\"font-family: MS Shell Dlg 2;\">depending on the state of charge of the storages. The three modes are switched automatically by actuating the four valves. All the pumps continuously generate a constant pressure difference. In the flow line of the heating circuit a boiler is switched on if the flow temperature drops below a threshold. Alternatively, a heating rod in the heat storage can be used.</span></p>
-<p><br><b><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Level of Development</span></b> </p>
-<p><span style=\"font-family: MS Shell Dlg 2;\"><img src=\"modelica://AixLib/Images/stars3.png\"/> </span></p>
-<p><b><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Example Results</span></b> </p>
-<p><span style=\"font-family: MS Shell Dlg 2;\"><a href=\"AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem\">AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem</a> </span></p>
-<p><span style=\"font-family: MS Shell Dlg 2;\"><a href=\"AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem2\">AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem2</a> </p><p></span></p>
-<p><span style=\"font-family: MS Shell Dlg 2;\"></p><p></span></p>
+<p><span style=\"font-family: MS Shell Dlg 2;\">All the pumps continuously generate a constant pressure difference. In the flow line of the heating circuit a boiler is switched on if the flow temperature drops below a threshold. </span></p>
+<p><span style=\"font-family: MS Shell Dlg 2;\">Consumers are modeled as sinks are sources with a constant temperature.</span></p>
+</html>", revisions="<html>
+<ul>
+<li>
+May 19, 2017, by Marc Baranski:<br/>
+First implementation.
+</li>
+</ul>
 </html>"));
 end GeothermalHeatPumpBase;

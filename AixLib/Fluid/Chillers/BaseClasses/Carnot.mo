@@ -11,15 +11,6 @@ partial model Carnot
     "Nominal heating flow rate"
     annotation (Dialog(group="Nominal condition"));
 
-  parameter AixLib.Fluid.Types.EfficiencyInput effInpEva
-    "Temperatures of evaporator fluid used to compute Carnot efficiency"
-    annotation (Dialog(tab="Advanced", group="Temperature dependence"),
-                Evaluate=True);
-  parameter AixLib.Fluid.Types.EfficiencyInput effInpCon
-    "Temperatures of condenser fluid used to compute Carnot efficiency"
-    annotation (Dialog(tab="Advanced", group="Temperature dependence"),
-                Evaluate=True);
-
   parameter Modelica.SIunits.TemperatureDifference dTEva_nominal(
     final max=0) = -10 "Temperature difference evaporator outlet-inlet"
     annotation (Dialog(group="Nominal condition"));
@@ -137,23 +128,9 @@ partial model Carnot
     x2=TCon-TEva,
     deltaX=0.25) "Carnot efficiency";
 
-  Modelica.SIunits.Temperature TCon(start=TCon_nominal)=
-    if effInpCon == AixLib.Fluid.Types.EfficiencyInput.port_a then
-             Medium1.temperature(staA1)
-           elseif effInpCon == AixLib.Fluid.Types.EfficiencyInput.port_b or
-                  effInpCon == AixLib.Fluid.Types.EfficiencyInput.volume then
-             Medium1.temperature(staB1)
-           else
-             0.5 * (Medium1.temperature(staA1)+Medium1.temperature(staB1))
+  Modelica.SIunits.Temperature TCon(start=TCon_nominal) = Medium1.temperature(staB1)
     "Condenser temperature used to compute efficiency";
-  Modelica.SIunits.Temperature TEva(start=TEva_nominal)=
-    if effInpEva == AixLib.Fluid.Types.EfficiencyInput.port_a then
-             Medium2.temperature(staA2)
-           elseif effInpEva == AixLib.Fluid.Types.EfficiencyInput.port_b or
-                  effInpEva == AixLib.Fluid.Types.EfficiencyInput.volume then
-             Medium2.temperature(staB2)
-           else
-             0.5 * (Medium2.temperature(staA2)+Medium2.temperature(staB2))
+  Modelica.SIunits.Temperature TEva(start=TEva_nominal) = Medium2.temperature(staB2)
     "Evaporator temperature used to compute efficiency";
 
 protected
@@ -182,15 +159,15 @@ protected
 
   final parameter Modelica.SIunits.SpecificHeatCapacity cp1_default=
     Medium1.specificHeatCapacityCp(Medium1.setState_pTX(
-      p=  Medium1.p_default,
-      T=  Medium1.T_default,
-      X=  Medium1.X_default))
+      p = Medium1.p_default,
+      T = Medium1.T_default,
+      X = Medium1.X_default))
     "Specific heat capacity of medium 1 at default medium state";
   final parameter Modelica.SIunits.SpecificHeatCapacity cp2_default=
     Medium2.specificHeatCapacityCp(Medium2.setState_pTX(
-      p=  Medium2.p_default,
-      T=  Medium2.T_default,
-      X=  Medium2.X_default))
+      p = Medium2.p_default,
+      T = Medium2.T_default,
+      X = Medium2.X_default))
     "Specific heat capacity of medium 2 at default medium state";
 
   Medium1.ThermodynamicState staA1 = Medium1.setState_phX(
@@ -237,6 +214,8 @@ initial equation
   assert(abs(AixLib.Utilities.Math.Functions.polynomial(
          a=a, x=1)-1) < 0.01, "Efficiency curve is wrong. Need etaPL(y=1)=1.");
   assert(etaCarnot_nominal_internal < 1,   "Parameters lead to etaCarnot_nominal > 1. Check parameters.");
+
+
 
 equation
   connect(port_a2, eva.port_a)
@@ -349,7 +328,7 @@ the condenser temperature <i>T<sub>con,0</sub></i>, in which
 case the model computes the Carnot effectivness as
 </p>
 <p align=\"center\" style=\"font-style:italic;\">
-&eta;<sub>Carnot,0</sub> = 
+&eta;<sub>Carnot,0</sub> =
   COP<sub>0</sub>
 &frasl;  (T<sub>use,0</sub> &frasl; (T<sub>con,0</sub>-T<sub>eva,0</sub>)),
 </p>
@@ -389,6 +368,14 @@ and the part load ratio are set up.
 </p>
 </html>", revisions="<html>
 <ul>
+<li>
+January 2, 2017, by Filip Jorissen:<br/>
+Removed option for choosing what temperature
+should be used to compute the Carnot efficiency.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/497\">
+issue 497</a>.
+</li>
 <li>
 January 26, 2016, by Michael Wetter:<br/>
 First implementation of this base class.

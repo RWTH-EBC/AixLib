@@ -7,7 +7,7 @@ model FlowJunctionSteadyStateNoPressureDrop
 
   AixLib.Fluid.FixedResistances.Junction spl(
     redeclare package Medium = Medium,
-    m_flow_nominal={1,2,3},
+    m_flow_nominal={2,2,2},
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     dp_nominal={0,0,0}) "Splitter"
     annotation (Placement(transformation(extent={{10,-10},{30,10}})));
@@ -45,29 +45,26 @@ model FlowJunctionSteadyStateNoPressureDrop
 
   Modelica.Blocks.Sources.Ramp m3_flow(
     height=1,
-    offset=-1,
     duration=20,
-    startTime=70) "Ramp mass flow signal"
+    startTime=70,
+    offset=1)     "Ramp mass flow signal"
     annotation (Placement(transformation(extent={{-92,-62},{-72,-42}})));
 
   AixLib.Fluid.Sensors.TemperatureTwoPort senTem1(
     redeclare package Medium = Medium,
-    m_flow_nominal=1,
-    tau=0)
+    m_flow_nominal=1)
     "Temperature sensor"
     annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
 
   AixLib.Fluid.Sensors.TemperatureTwoPort senTem2(
     redeclare package Medium = Medium,
-    m_flow_nominal=2,
-    tau=0)
+    m_flow_nominal=2)
     "Temperature sensor"
     annotation (Placement(transformation(extent={{40,-10},{60,10}})));
 
   AixLib.Fluid.Sensors.TemperatureTwoPort senTem3(
     redeclare package Medium = Medium,
-    m_flow_nominal=3,
-    tau=0)
+    m_flow_nominal=3)
     "Temperature sensor"
     annotation (Placement(transformation(extent={{-20,-70},{0,-50}})));
 equation
@@ -87,7 +84,7 @@ equation
     annotation (Line(points={{-69,8},{-60,8}}, color={0,0,127}));
   connect(m3_flow.y, bou3.m_flow_in)
     annotation (Line(points={{-71,-52},{-60,-52}}, color={0,0,127}));
-  annotation (experiment(StopTime=100.0),
+  annotation (experiment(Tolerance=1e-6, StopTime=100),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FixedResistances/Validation/FlowJunctionSteadyStateNoPressureDrop.mos"
         "Simulate and plot"),
     Documentation(info="<html>
@@ -102,10 +99,16 @@ with no flow resistance.
 </html>", revisions="<html>
 <ul>
 <li>
+January 18, 2017, by Michael Wetter:<br/>
+Changed <code>spl.m_flow_nominal</code>, boundary condition and enabled sensor dynamics.<br/>
+This is for
+<a href=\"modelica://https://github.com/ibpsa/modelica-ibpsa/issues/657\">issue 657</a>.
+</li>
+<li>
 October 14, 2016, by Michael Wetter:<br/>
 First implementation.<br/>
 This is for
-<a href=\"modelica://https://github.com/iea-annex60/modelica-annex60/issues/451\">issue 451</a>.
+<a href=\"modelica://https://github.com/ibpsa/modelica-ibpsa/issues/451\">issue 451</a>.
 </li>
 </ul>
 </html>"));

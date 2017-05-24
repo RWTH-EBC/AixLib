@@ -398,7 +398,7 @@ at constant pressure.
 August 17, 2015, by Michael Wetter:<br/>
 Removed dublicate entry of <code>smooth</code> and <code>smoothOrder</code>.
 This is for
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/303\">issue 303</a>.
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/303\">issue 303</a>.
 </li>
 <li>
 December 18, 2013, by Michael Wetter:<br/>
@@ -653,7 +653,7 @@ for temperature.
 <li>
 April 11, 2016 by Michael Wetter:<br/>
 Corrected wrong hyperlink in documentation for
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/450\">issue 450</a>.
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/450\">issue 450</a>.
 </li>
 <li>
 December 11, 2013, by Michael Wetter:<br/>
@@ -776,7 +776,7 @@ revisions="<html>
 <li>
 April 11, 2016 by Michael Wetter:<br/>
 Corrected wrong hyperlink in documentation for
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/450\">issue 450</a>.
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/450\">issue 450</a>.
 </li>
 <li>
 December 18, 2013, by Michael Wetter:<br/>
@@ -843,7 +843,7 @@ alt=\"Thermal conductivity as a function of temperature\"/>
 <p>
 Dynamic viscosity is calculated as the product of density and kinematic viscosity,
 both temperature dependent. However, the kinematic viscosity
-has its own temperture dependent correlation, implemented at
+has its own temperature dependent correlation, implemented at
 <a href=\"modelica://AixLib.Media.Specialized.Water.TemperatureDependentDensity.kinematicViscosity\">
 AixLib.Media.Specialized.Water.TemperatureDependentDensity.kinematicViscosity</a>.
 Results of the kinematic viscosity as a function of temperature are shown in the figure below.
@@ -866,7 +866,7 @@ Phase changes are not modeled.
 <li>
 July 7, 2016, by Carles Ribas Tugores:<br/>
 Correct Documentation. This is for
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/487\">#487</a>.
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/487\">#487</a>.
 </li>
 <li>
 June 6, 2015, by Michael Wetter:<br/>
@@ -877,12 +877,12 @@ See also revision notes of
 <a href=\"modelica://AixLib.Media.Water\">
 AixLib.Media.Water</a>.
 This is for
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/266\">#266</a>.
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/266\">#266</a>.
 </li>
 <li>
 May 1, 2015, by Michael Wetter:<br/>
 Added <code>Inline=true</code> for
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/227\">
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/227\">
 issue 227</a>.
 </li>
 <li>
@@ -897,7 +897,7 @@ to fail with the error message
 February 3, 2015, by Michael Wetter:<br/>
 Removed <code>stateSelect.prefer</code> for temperature.
 This is for
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/160\">#160</a>.
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/160\">#160</a>.
 </li>
 <li>
 October 15, 2014, by Michael Wetter:<br/>

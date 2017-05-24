@@ -9,7 +9,7 @@ model GroundFloorBuildingEnvelope
         "EnEV_2002",                                                                                                    choice = 3
         "WSchV_1995",                                                                                                    choice = 4
         "WSchV_1984",                                                                                                    radioButtons = true));
-  parameter Integer TRY = 1 "Region according to TRY" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice=1 "TRY01",
+  parameter Integer TRY = 1 "Region according to TRY" annotation(Dialog(groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/Groundfloor_5Rooms.png", group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice=1 "TRY01",
                  choice = 2 "TRY02", choice = 3 "TRY03",  choice = 4 "TRY04", choice = 5 "TRY05", choice = 6 "TRY06", choice = 7 "TRY07", choice = 8 "TRY08",
         choice = 9 "TRY09", choice = 10 "TRY10", choice = 11 "TRY11", choice = 12 "TRY12", choice = 13 "TRY13", choice = 14 "TRY14", choice= 15 "TRY15",radioButtons = true));
   parameter Boolean withFloorHeating = false
@@ -184,7 +184,7 @@ equation
   connect(Corridor.thermFloor, ThermFloor[3]) annotation(Line(points = {{66.4, -13.56}, {66.4, -32}, {90, -32}, {90, -92}, {4, -92}, {4, -94}, {2, -94}}, color = {191, 0, 0}, pattern = LinePattern.Dash));
   connect(WC_Storage.thermFloor, ThermFloor[4]) annotation(Line(points = {{69.18, -54.24}, {90, -54.24}, {90, -91.6}, {2, -91.6}}, color = {191, 0, 0}, pattern = LinePattern.Dash));
   connect(Kitchen.thermFloor, ThermFloor[5]) annotation(Line(points = {{-68.4, -44.32}, {-90, -44.32}, {-90, -92}, {-4, -92}, {2, -89.2}}, color = {191, 0, 0}, pattern = LinePattern.Dash));
-  annotation(__Dymola_Images(Parameters(source = "AixLib/Resources/Images/Building/HighOrder/Groundfloor_5Rooms.png")), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Bitmap(extent = {{-96, 90}, {100, -106}}, fileName = "modelica://AixLib/Resources/Images/Building/HighOrder/Groundfloor_icon.png"), Text(extent = {{-66, 66}, {10, 54}}, lineColor = {0, 0, 0}, textString = "Livingroom"), Text(extent = {{14, 76}, {64, 62}}, lineColor = {0, 0, 0}, textString = "Hobby"), Text(extent = {{22, 24}, {56, 14}}, lineColor = {0, 0, 0}, textString = "Corridor"), Text(extent = {{-2, -42}, {74, -52}}, lineColor = {0, 0, 0}, textString = "WC_Storage"), Text(extent = {{-50, -10}, {-6, -24}}, lineColor = {0, 0, 0}, textString = "Kitchen")}), Documentation(revisions = "<html>
+  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Bitmap(extent = {{-96, 90}, {100, -106}}, fileName = "modelica://AixLib/Resources/Images/Building/HighOrder/Groundfloor_icon.png"), Text(extent = {{-66, 66}, {10, 54}}, lineColor = {0, 0, 0}, textString = "Livingroom"), Text(extent = {{14, 76}, {64, 62}}, lineColor = {0, 0, 0}, textString = "Hobby"), Text(extent = {{22, 24}, {56, 14}}, lineColor = {0, 0, 0}, textString = "Corridor"), Text(extent = {{-2, -42}, {74, -52}}, lineColor = {0, 0, 0}, textString = "WC_Storage"), Text(extent = {{-50, -10}, {-6, -24}}, lineColor = {0, 0, 0}, textString = "Kitchen")}), Documentation(revisions = "<html>
  <ul>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
  <li><i>July 10, 2011</i> by Ana Constantin:<br/>Implemented</li>

@@ -2,5 +2,6 @@ PumpRadiatorThermostaticValve
 PumpRadiatorValve
 ResistanceVolumeFlowReversal
 SimpleHouse
+FlowSystem
 Performance
 GeothermalHeatPump
