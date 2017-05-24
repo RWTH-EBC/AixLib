@@ -10,10 +10,12 @@ model Window "Calculation of solar energy transmitted through windows"
     "Total energy transmittance of windows"
     annotation(Dialog(group="window"));
   parameter Modelica.SIunits.TransmissionCoefficient g_TotDir[n]
-    "Total energy transmittance of windows with closed sunscreen for direct radiation"
+    "Total energy transmittance of windows with closed sunscreen for direct
+     radiation"
     annotation(Dialog(group="window"));
   parameter Modelica.SIunits.TransmissionCoefficient g_TotDif[n]
-    "Total energy transmittance of windows with closed sunscreen for diffuse radiation"
+    "Total energy transmittance of windows with closed sunscreen for diffuse
+     radiation"
     annotation(Dialog(group="window"));
   parameter Modelica.SIunits.TransmissionCoefficient T_L[n]
     "degree of light transmission for direct irradiation"
@@ -30,7 +32,8 @@ model Window "Calculation of solar energy transmitted through windows"
   parameter Modelica.SIunits.Angle xi(displayUnit="degree")= 0
     "elevation angle";
   parameter Modelica.SIunits.Angle til[n](displayUnit="deg")
-    "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for roof"
+    "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for
+    roof"
     annotation (Dialog(group="window"));
   parameter Modelica.SIunits.Angle azi[n] "Surface azimuth"
     annotation (Dialog(group="window"));
@@ -58,11 +61,13 @@ model Window "Calculation of solar energy transmitted through windows"
     final T_LTotDir=T_LTotDir,
     final T_LTotDif=T_LTotDif,
     final lim=lim,
-    final til=til) annotation (Placement(transformation(extent={{20,-32},{86,30}})));
+    final til=til) annotation (
+    Placement(transformation(extent={{20,-32},{86,30}})));
   AixLib.BoundaryConditions.SolarGeometry.IncidenceAngle incAng[n](
     each lat=lat,
     final azi=azi,
-    final til=til) annotation (Placement(transformation(extent={{-40,74},{-30,84}})));
+    final til=til) annotation (
+    Placement(transformation(extent={{-40,74},{-30,84}})));
   AixLib.BoundaryConditions.WeatherData.Bus weaBus "Weather data"
     annotation (Placement(transformation(extent={{-108,-10},{-88,10}}),
         iconTransformation(extent={{-108,-10},{-88,10}})));
@@ -73,16 +78,19 @@ model Window "Calculation of solar energy transmitted through windows"
   AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[n](
     final til=til,
     each lat=lat,
-    final azi=azi) annotation (Placement(transformation(extent={{-32,-6},{-20,6}})));
+    final azi=azi) annotation (
+    Placement(transformation(extent={{-32,-6},{-20,6}})));
   AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[n](
     final til=til,
     each lat=lat,
     final azi=azi)
     annotation (Placement(transformation(extent={{-60,-54},{-40,-34}})));
 equation
-  connect(window.HVis, HVis) annotation (Line(points={{89.3,11.4},{94,11.4},{94,
+  connect(window.HVis, HVis) annotation (
+  Line(points={{89.3,11.4},{94,11.4},{94,
           40},{110,40}}, color={0,0,127}));
-  connect(window.HWin, HWin) annotation (Line(points={{89.3,-13.4},{96,-13.4},{96,
+  connect(window.HWin, HWin) annotation (
+  Line(points={{89.3,-13.4},{96,-13.4},{96,
           -40},{110,-40}}, color={0,0,127}));
   connect(incAng.y, window.incAng) annotation (Line(points={{-29.5,79},{-10,79},
           {-10,80},{8,80},{8,24.42},{16.7,24.42}}, color={0,0,127}));
@@ -94,9 +102,11 @@ equation
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(altAng.alt, window.alt) annotation (Line(points={{-9.6,60},{-8,60},{-8,
+  connect(altAng.alt, window.alt) annotation (
+  Line(points={{-9.6,60},{-8,60},{-8,
           7.06},{16.7,7.06}}, color={0,0,127}));
-  connect(altAng.zen, zen.y)   annotation (Line(points={{-18.8,60},{-19.6,60}}, color={0,0,127}));
+  connect(altAng.zen, zen.y)   annotation (Line(points={{-18.8,60},{-19.6,60}},
+   color={0,0,127}));
   connect(weaBus, zen.weaBus) annotation (Line(
       points={{-98,0},{-64,0},{-64,60},{-28,60}},
       color={255,204,51},
@@ -120,7 +130,8 @@ equation
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(HDirTil.H, window.HDirTil) annotation (Line(points={{-39,-44},{-12,-44},
+  connect(HDirTil.H, window.HDirTil) annotation (
+  Line(points={{-39,-44},{-12,-44},
           {-12,-25.18},{16.7,-25.18}}, color={0,0,127}));
       for i in 1:n loop
           connect(weaBus, HDifTil[i].weaBus) annotation (Line(
@@ -171,9 +182,19 @@ equation
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}}), graphics),
     Documentation(info="<html>
-<p>This model calculates the input of heat and visible light into the room due to solar irradiation. Therefore it uses the calculations of VDI 6007 part 3.  It considers  the correction values for non-vertical and non-parallel radiation incidence.</p>
-<p>To calculate the solar irradiation and the solar geometry it uses the models of the  <a href=\"AixLib.BoundaryConditions\">BoundaryConditions</a> package.</p>
-<p>An example on how this model should be used is  <a href=\"vdi6007.Examples.Window\">Window</a>. To consider the additional heat input in case of ventilation with the solar protection the  <a href=\"vdi6007.BaseClasses.VentilationHeat\">VentilationHeat</a> model can be used.</p>
+<p>This model calculates the input of heat and visible light into the room due
+to solar irradiation. Therefore it uses the calculations of VDI 6007 part 3.
+  It considers  the correction values for non-vertical and non-parallel
+   radiation incidence.</p>
+<p>To calculate the solar irradiation and the solar geometry it uses the models
+ of the
+ <a href=\"AixLib.BoundaryConditions\">BoundaryConditions</a> package.</p>
+<p>An example on how this model should be used is
+  <a href=\"vdi6007.Examples.Window\">Window</a>.
+  To consider the additional heat input in case of ventilation
+   with the solar protection the
+    <a href=\"vdi6007.BaseClasses.VentilationHeat\">VentilationHeat</a>
+    model can be used.</p>
   <h4>References</h4>
   <p>VDI. German Association of Engineers Guideline VDI 6007-3
   June 2015. Calculation of transient thermal response of rooms

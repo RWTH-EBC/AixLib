@@ -95,8 +95,7 @@ model Window "Calculation of solar energy transmitted through windows"
 
   vdi6007.BaseClasses.Sunblind sunblind[n](lim=lim)
     annotation (Placement(transformation(extent={{-68,-42},{-56,-30}})));
-  AixLib.ThermalZones.ReducedOrder.Windows.SolarGain.CorrectionGTaueDoublePane
-    CorGTaue(
+  AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGTaueDoublePane CorGTaue(
     final n=n,
     final UWin=UWin,
     final xi=xi,
@@ -126,7 +125,8 @@ equation
   connect(HDirTil, sunblind.HDirTil) annotation (Line(points={{-112,-80},{-81.5,
           -80},{-81.5,-39.6},{-68.6,-39.6}},
                                            color={0,0,127}));
-  connect(sunblind.sunscreen, CorGTaue.sunscreen) annotation (Line(points={{-55.4,
+  connect(sunblind.sunscreen, CorGTaue.sunscreen) annotation (
+  Line(points={{-55.4,
           -36},{-38,-36},{-38,-10},{-28.8,-10}},
                                             color={255,0,255}));
   connect(HVisible.HVis, HVis) annotation (Line(points={{102.2,40},{102.2,
@@ -158,7 +158,8 @@ equation
   connect(hDif_toClearCovered[1].HDifHorCle, HVisible.HDifHorCle)
     annotation (Line(points={{-53,-14},{-42,-14},{-42,44.18},{54.46,44.18}},
         color={0,0,127}));
-  connect(HDifTil, hDif_toClearCovered.HDifTil) annotation (Line(points={{-112,0},
+  connect(HDifTil, hDif_toClearCovered.HDifTil) annotation (
+  Line(points={{-112,0},
           {-92,0},{-92,-2},{-75,-2}},  color={0,0,127}));
 
   connect(HWindow.HWin, HWin) annotation (Line(points={{102.3,-40},{102.3,-40},
@@ -198,9 +199,11 @@ equation
   connect(alt, HWindow.alt) annotation (Line(points={{-112,24},{4,24},{4,-35.38},
           {52.39,-35.38}}, color={0,0,127}));
   for i in 1:n loop
-      connect(nTot, hDif_toClearCovered[i].nTot) annotation (Line(points={{-112,54},
+      connect(nTot, hDif_toClearCovered[i].nTot) annotation (
+      Line(points={{-112,54},
           {-82,54},{-82,-8},{-75,-8}}, color={0,0,127}));
-  connect(HDifHor, hDif_toClearCovered[i].HDifHor) annotation (Line(points={{-112,
+  connect(HDifHor, hDif_toClearCovered[i].HDifHor) annotation (
+  Line(points={{-112,
           -24},{-94,-24},{-94,-14},{-75,-14}}, color={0,0,127}));
   end for;
    annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
@@ -232,12 +235,16 @@ equation
           fillPattern=FillPattern.Solid,
           textString="%name
 ")}),                                                            Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}})),
+        coordinateSystem(preserveAspectRatio=false,
+        extent={{-100,-100},{100,100}})),
     Documentation(revisions="<html>
 <ul>
 <li>June 30, 2016,&nbsp; by Stanley Risch:<br>Implemented. </li>
 </html>", info="<html>
-<p>This model calculates the input of heat and visible light into the room due to solar irradiation. Therefore it uses the calculations of VDI 6007 part 3.  It considers  the correction values for non-vertical and non-parallel radiation incidence.</p>
+<p>This model calculates the input of heat and visible light into the room due
+ to solar irradiation. Therefore it uses the calculations of VDI 6007 part 3.
+   It considers  the correction values for non-vertical and non-parallel
+   radiation incidence.</p>
 
   <h4>References</h4>
   <p>VDI. German Association of Engineers Guideline VDI 6007-3

@@ -77,14 +77,17 @@ equation
   else
     HVen=0;
   end if;
-  annotation (defaultComponentName="ventilationHeat",Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+  annotation (defaultComponentName="ventilationHeat",Icon(
+  coordinateSystem(preserveAspectRatio=false), graphics={
           Bitmap(extent={{-94,-96},{96,96}}, fileName=
               "modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/Windows/BaseClasses/VentilationHeat.png")}),
                                                                  Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
-The model considers additional heat input in the event of window ventilation and simultaneously closed external solar protection based on VDI 6007 part 3.
-<br>The closed external solar protection absorbs solar irradiation which is brought into the room by convection.
+The model considers additional heat input in the event of window ventilation
+ and simultaneously closed external solar protection based on VDI 6007 part 3.
+<br>The closed external solar protection absorbs solar irradiation which is
+ brought into the room by convection.
   <h4>References</h4>
   <p>VDI. German Association of Engineers Guideline VDI 6007-3
   June 2015. Calculation of transient thermal response of rooms

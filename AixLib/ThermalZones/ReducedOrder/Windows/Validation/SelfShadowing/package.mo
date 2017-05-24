@@ -6,6 +6,7 @@ package SelfShadowing
 
 
   annotation (Documentation(info="<html>
-This package contains four tests for the <a href=\"Windows.BaseClasses.SelfShadowing\">SelfShadowing</a> model. 
+This package contains four tests for the
+<a href=\"Windows.BaseClasses.SelfShadowing\">SelfShadowing</a> model. 
 </html>"));
 end SelfShadowing;

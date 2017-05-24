@@ -25,7 +25,8 @@ model ShadedWindow
   parameter Modelica.SIunits.Angle xi(  displayUnit="degree")= 0
     "elevation angle";
   parameter Modelica.SIunits.Angle til[n](displayUnit="deg")
-    "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for roof"
+    "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for
+    roof"
     annotation (Dialog(group="window"));
   parameter Modelica.SIunits.Length b[n] "width of window"
     annotation (Dialog(group="window"));
@@ -52,12 +53,15 @@ model ShadedWindow
     "distance between projection (below) and window"
     annotation (Dialog(group="window"));
   parameter Modelica.SIunits.Angle azi[n](displayUnit="degree")
-    "Surface azimuth. azi=-90 degree if surface outward unit normal points toward east; azi=0 if it points toward south"
+    "Surface azimuth. azi=-90 degree if surface outward unit normal points
+    toward east; azi=0 if it points toward south"
     annotation (Dialog(group="window"));
   parameter Integer nCorPoi(min = 1) "Number of corner points"
       annotation(dialog(group="skyline"));
-  parameter Modelica.SIunits.Angle[nCorPoi] alpha(displayUnit="deg") "Azimuth of corner points, sorted from north to east to south to west,
-     azi=-90 degree if surface outward unit normal points toward east; azi=0 if it points toward south"
+  parameter Modelica.SIunits.Angle[nCorPoi] alpha(displayUnit="deg")
+  "Azimuth of corner points, sorted from north to east to south to west,
+     azi=-90 degree if surface outward unit normal points toward east;
+     azi=0 if it points toward south"
       annotation(dialog(group="skyline"));
   parameter Modelica.SIunits.Height[nCorPoi] deltaH
     "Difference between height of corner point and the window centre"
@@ -69,10 +73,12 @@ model ShadedWindow
     "corner points i and i+1 are gap between buildings: true, else: false"
     annotation(dialog(group="skyline"));
   parameter Modelica.SIunits.TransmissionCoefficient g_TotDir[n]
-    "Total energy transmittance of windows with closed sunscreen for direct radiation"
+    "Total energy transmittance of windows with closed sunscreen for direct
+     radiation"
     annotation(Dialog(group="window"));
   parameter Modelica.SIunits.TransmissionCoefficient g_TotDif[n]
-    "Total energy transmittance of windows with closed sunscreen for diffuse radiation"
+    "Total energy transmittance of windows with closed sunscreen for diffuse
+     radiation"
     annotation(Dialog(group="window"));
 
     Modelica.Blocks.Interfaces.RealOutput HVis[n](
@@ -118,7 +124,8 @@ model ShadedWindow
   AixLib.BoundaryConditions.SolarGeometry.IncidenceAngle incAng[n](
     each lat=lat,
     final azi=azi,
-    final til=til) annotation (Placement(transformation(extent={{-40,70},{-30,80}})));
+    final til=til) annotation (
+    Placement(transformation(extent={{-40,70},{-30,80}})));
   AixLib.BoundaryConditions.SolarGeometry.BaseClasses.AltitudeAngle altAng
     annotation (Placement(transformation(extent={{-30,-8},{-22,0}})));
   AixLib.BoundaryConditions.SolarGeometry.ZenithAngle zen(each lat=lat)
@@ -126,7 +133,8 @@ model ShadedWindow
   AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[n](
     final til=til,
     each lat=lat,
-    final azi=azi) annotation (Placement(transformation(extent={{-38,-78},{-26,-66}})));
+    final azi=azi) annotation (
+    Placement(transformation(extent={{-38,-78},{-26,-66}})));
   AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[n](
     final til=til,
     each lat=lat,
@@ -134,7 +142,8 @@ model ShadedWindow
     annotation (Placement(transformation(extent={{-66,40},{-52,54}})));
   AixLib.BoundaryConditions.WeatherData.Bus weaBus "Weather data"
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-  AixLib.BoundaryConditions.SolarGeometry.BaseClasses.SolarAzimuth solAzi(lat=lat)
+  AixLib.BoundaryConditions.SolarGeometry.BaseClasses.SolarAzimuth solAzi(
+  lat=lat)
     annotation (Placement(transformation(extent={{-40,-34},{-32,-26}})));
   AixLib.BoundaryConditions.SolarGeometry.BaseClasses.Declination decAng
     annotation (Placement(transformation(extent={{-66,-36},{-60,-30}})));
@@ -143,8 +152,10 @@ equation
           {95.4,40},{110,40}}, color={0,0,127}));
   connect(shadedWindow.HWin, HWin) annotation (Line(points={{89.7,-13},{95.4,-13},
           {95.4,-40},{110,-40}}, color={0,0,127}));
-  connect(altAng.zen,zen. y)   annotation (Line(points={{-30.8,-4},{-30,-4},{-30,
-          -4},{-36,-4},{-44,-4},{-44,-8},{-53.6,-8}},                           color={0,0,127}));
+  connect(altAng.zen,zen. y)   annotation (
+  Line(points={{-30.8,-4},{-30,-4},{-30,
+          -4},{-36,-4},{-44,-4},{-44,-8},{-53.6,-8}},
+          color={0,0,127}));
   connect(weaBus,zen. weaBus) annotation (Line(
       points={{-100,0},{-84,0},{-84,-6},{-68,-6},{-68,-8},{-62,-8},{-62,-8}},
       color={255,204,51},
@@ -162,13 +173,17 @@ equation
       extent={{-6,3},{-6,3}}));
   connect(HDifTil.H, shadedWindow.HDifTil) annotation (Line(points={{-25.4,-72},
           {-20,-72},{-20,-24.9},{8.3,-24.9}}, color={0,0,127}));
-  connect(altAng.alt, shadedWindow.alt) annotation (Line(points={{-21.6,-4},{-18,
+  connect(altAng.alt, shadedWindow.alt) annotation (
+  Line(points={{-21.6,-4},{-18,
           -4},{-18,-4.6},{8.3,-4.6}}, color={0,0,127}));
-  connect(zen.y, solAzi.zen) annotation (Line(points={{-53.6,-8},{-50,-8},{-50,-27.6},
+  connect(zen.y, solAzi.zen) annotation (
+  Line(points={{-53.6,-8},{-50,-8},{-50,-27.6},
           {-40.8,-27.6}}, color={0,0,127}));
-  connect(solAzi.solAzi, shadedWindow.solAzi) annotation (Line(points={{-31.6,-30},
+  connect(solAzi.solAzi, shadedWindow.solAzi) annotation (
+  Line(points={{-31.6,-30},
           {-26,-30},{-26,-14.4},{8.3,-14.4}}, color={0,0,127}));
-  connect(decAng.decAng, solAzi.decAng) annotation (Line(points={{-59.7,-33},{-45.85,
+  connect(decAng.decAng, solAzi.decAng) annotation (
+  Line(points={{-59.7,-33},{-45.85,
           -33},{-45.85,-30},{-40.8,-30}}, color={0,0,127}));
   connect(weaBus.cloTim, decAng.nDay) annotation (Line(
       points={{-100,0},{-84,0},{-84,-33},{-66.6,-33}},
@@ -178,7 +193,8 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(weaBus.solTim, solAzi.solTim) annotation (Line(
-      points={{-100,0},{-84,0},{-84,-44},{-84,-72},{-56,-72},{-56,-44},{-48,-44},
+      points={{-100,0},{-84,0},{-84,-44},{-84,-72},{-56,-72},
+      {-56,-44},{-48,-44},
           {-42,-44},{-42,-32.4},{-40.8,-32.4}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -227,7 +243,8 @@ equation
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  annotation (defaultComponentName="shadedWindow",Icon(coordinateSystem(preserveAspectRatio=false),
+  annotation (defaultComponentName="shadedWindow",Icon(
+  coordinateSystem(preserveAspectRatio=false),
         graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},
@@ -256,12 +273,23 @@ equation
           fillColor={170,255,255},
           fillPattern=FillPattern.Solid,
           textString="%name
-")}),                                                                                                Diagram(
+")}),
+Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
-<p>This model calculates the input of heat and visible light into the room due to solar irradiation. This model calculates the input of heat and visible light into the room due to solar irradiation. Therefore it uses the calculations of VDI 6007 part 3.  It considers  the correction values for non-vertical and non-parallel radiation incidence.</p>
-<p> Additionaly to the <a href=\"Windows.Window\">Window</a> model it includes the formation of shades because of the window itself and because of the surrounding skyline.  </p>
-<p>An example on how this model should be used is  <a href=\"Windows.Examples.ShadedWindow\">ShadedWindow</a>. To consider the additional heat input in case of ventilation with the solar protection the  <a href=\"Windows.BaseClasses.VentilationHeat\">VentilationHeat</a> model can be used.</p>
+<p>This model calculates the input of heat and visible light into the room due
+ to solar irradiation. This model calculates the input of heat and visible
+ light into the room due to solar irradiation. Therefore it uses the
+ calculations of VDI 6007 part 3.  It considers  the correction values for
+  non-vertical and non-parallel radiation incidence.</p>
+<p> Additionaly to the <a href=\"Windows.Window\">Window</a> model it includes
+ the formation of shades because of the window itself and because of the
+  surrounding skyline.  </p>
+<p>An example on how this model should be used is
+<a href=\"Windows.Examples.ShadedWindow\">ShadedWindow</a>. To consider the
+ additional heat input in case of ventilation with the solar protection the
+  <a href=\"Windows.BaseClasses.VentilationHeat\">VentilationHeat</a>
+   model can be used.</p>
   <h4>References</h4>
   <p>VDI. German Association of Engineers Guideline VDI 6007-3
   June 2015. Calculation of transient thermal response of rooms

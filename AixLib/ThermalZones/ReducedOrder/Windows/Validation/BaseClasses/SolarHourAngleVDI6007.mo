@@ -20,12 +20,16 @@ protected
 equation
   clock=(integer(time/3600)-0.5-integer(time/day)*24);
   J_=from_deg(360*105/365);
-  zgl=0.0066+7.3525*Modelica.Math.cos(J_+from_deg(85.9))+9.9359*Modelica.Math.cos(2*J_+from_deg(108.9))+0.3387*Modelica.Math.cos(3*J_+from_deg(105.2));
-  woz=(integer(time/3600)-0.5-integer(time/day)*24)-4*(15-to_deg(lon))/60+zgl/60;
+  zgl=0.0066+7.3525*Modelica.Math.cos(J_+from_deg(85.9))+9.9359*
+    Modelica.Math.cos(2*J_+from_deg(108.9))+0.3387*
+    Modelica.Math.cos(3*J_+from_deg(105.2));
+    woz=(integer(time/3600)-0.5-integer(time/day)*24)-4*
+    (15-to_deg(lon))/60+zgl/60;
   solHouAng=(12-woz)*2*Modelica.Constants.pi/24;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
-This model computes the solar hour angle for test case 1 and 3 of VDI2078 in April.
+This model computes the solar hour angle for test case 1 and 3 of VDI2078 in
+April.
 </html>"));
 end SolarHourAngleVDI6007;

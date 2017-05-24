@@ -1,6 +1,7 @@
 within AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses;
 partial model PartialCorrectionGTaue
-  "Partial model for correction of the solar gain factor and for the transluence"
+  "Partial model for correction of the solar gain factor and for the 
+  transluence"
   import Modelica.Constants.pi;
   import Modelica.SIunits.Conversions.to_deg;
   import
@@ -93,18 +94,21 @@ protected
   parameter Real A6=4.74*10^(-12)
     "Constant 6 to calculate reference transmission";
 
-  parameter Modelica.SIunits.TransmissionCoefficient tau_1DifCov= tau_DifCov*tau_iDif
+  parameter Modelica.SIunits.TransmissionCoefficient tau_1DifCov=
+    tau_DifCov*tau_iDif
     "Degreee of transmission for single pane window";
   parameter Modelica.SIunits.ReflectionCoefficient rho_T1DifCov=1-(tau_DifCov)
-    "Part of degree of transmission for single pane window related to tau_1DifCov";
+    "Part of degree of transmission for single pane window related to 
+    tau_1DifCov";
   parameter Modelica.SIunits.ReflectionCoefficient rho_11DifCov=rho_T1DifCov/
-    (2-(rho_T1DifCov)) "Part of degree of transmission for single pane window related to
-    rho_T1_diff";
+    (2-(rho_T1DifCov)) "Part of degree of transmission for single pane window 
+    related to rho_T1_diff";
   parameter Modelica.SIunits.ReflectionCoefficient rho_1DifCov= rho_11DifCov+
     (((1-rho_11DifCov)*tau_iDif)^2*rho_11DifCov)/(1-(rho_11DifCov*tau_iDif)^2)
     "Degree of reflection for single pane window";
   parameter Modelica.SIunits.TransmissionCoefficient tau_DifCov=0.84
-    "Energetic degree of transmission for diffuse radiation for uniformly overcast sky";
+    "Energetic degree of transmission for diffuse radiation for uniformly
+     overcast sky";
 
   parameter Modelica.SIunits.TransmissionCoefficient tau_iDif=0.903
     "Pure degree of transmission for diffuse radiation";
@@ -130,9 +134,11 @@ protected
   Modelica.SIunits.TransmissionCoefficient[n] tau_1DifCle
     "Degreee of transmission for single pane window";
   Modelica.SIunits.ReflectionCoefficient[n] rho_T1DifCle
-    "Part of degree of transmission for single pane window related to tau_1DifCle";
+    "Part of degree of transmission for single pane window related to 
+    tau_1DifCle";
   Modelica.SIunits.ReflectionCoefficient[n] rho_11DifCle
-    "Part of degree of transmission for single pane window related to T1_DifCle";
+    "Part of degree of transmission for single pane window related to
+     T1_DifCle";
   Modelica.SIunits.ReflectionCoefficient[n] rho_1DifCle
     "Degree of reflection for single pane window";
   Modelica.SIunits.Emissivity[n] a_1DifCle
@@ -158,7 +164,8 @@ equation
   to_deg(incAng[i])+A2)*to_deg(incAng[i])+A1)*to_deg(incAng[i])+A0 <0 then
   tau_Dir[i]=0;
   else
-  tau_Dir[i]= (((((A6*to_deg(incAng[i])+A5)*to_deg(incAng[i])+A4)*to_deg(incAng[i])+A3)*
+  tau_Dir[i]= (((((A6*to_deg(incAng[i])+A5)*to_deg(incAng[i])+A4)*to_deg(
+    incAng[i])+A3)*
   to_deg(incAng[i])+A2)*to_deg(incAng[i])+A1)*to_deg(incAng[i])+A0;
   end if;
   tau_1Dir[i]= tau_Dir[i]*taui_Dir[i];
@@ -168,11 +175,13 @@ equation
   (1-(rho_11Dir[i]*taui_Dir[i])^2);
   a_1Dir[i]= 1-tau_1Dir[i]-rho_1Dir[i];
   //Calculating variables for diffuse, clear irradiation
-  if 0.83-0.075*(to_deg(to_surfaceTiltVDI(til[i]))/70-1)^2+(0.052+0.033*(to_deg(to_surfaceTiltVDI(til[i]))/90-1)^2)
-  *(Modelica.Math.cos(incAng[i])+0.15)^2 < 0 then
+  if 0.83-0.075*(to_deg(to_surfaceTiltVDI(til[i]))/70-1)^2+(0.052+0.033*(
+    to_deg(to_surfaceTiltVDI(til[i]))/90-1)^2)
+    *(Modelica.Math.cos(incAng[i])+0.15)^2 < 0 then
   tau_DifCle[i] = 0;
   else
-  tau_DifCle[i]=0.83-0.075*(to_deg(to_surfaceTiltVDI(til[i]))/70-1)^2+(0.052+0.033*(to_deg(to_surfaceTiltVDI(til[i]))/90-1)^2)
+  tau_DifCle[i]=0.83-0.075*(to_deg(to_surfaceTiltVDI(til[i]))/70-1)^2+(0.052+
+  0.033*(to_deg(to_surfaceTiltVDI(til[i]))/90-1)^2)
   *(Modelica.Math.cos(incAng[i])+0.15)^2;
   end if;
   tau_1DifCle[i]= tau_DifCle[i]*tau_iDif;
@@ -189,7 +198,8 @@ equation
   else
     gamma_x[i]=xi+to_surfaceTiltVDI(til[i]);
   end if;
-  tau_Gro[i] = 0.84*Modelica.Math.sin(gamma_x[i])^(0.88*(1-0.5*abs(Modelica.Math.sin(2*gamma_x[i]))));
+  tau_Gro[i] = 0.84*Modelica.Math.sin(gamma_x[i])^(0.88*(1-0.5*abs(
+    Modelica.Math.sin(2*gamma_x[i]))));
   tau_1Gro[i]=tau_Gro[i]*tau_iDif;
   rho_T1Gro[i]= 1-tau_Gro[i];
   rho_11Gro[i]= rho_T1Gro[i]/(2-rho_T1Gro[i]);
@@ -211,7 +221,11 @@ equation
   Documentation(info="<html>
   <p>Partial model for correction factors for transmitted solar radiation
   through a transparent element.</p> 
-<p><a href=\"vdi6007.BaseClasses.CorrrectionGTaueDoublePane\">CorrectionGTaueDoublePane</a> uses this model to calculate the correction values for double pane windows. This model can be used as a partial model to calculate the correction values for single pane windows and triple pane windows according to the VDI Guideline <\\p>
+  <p><a href=\"vdi6007.BaseClasses.CorrrectionGTaueDoublePane\">CorrectionGTaueDoublePane</a>
+  uses this model to calculate the correction values for double pane windows.
+  This model can be used as a partial model to calculate the correction values
+  for single pane windows and triple pane windows according to the VDI 
+  Guideline <\\p>
   <h4>References</h4>
   <p>VDI. German Association of Engineers Guideline VDI 6007-3
   June 2015. Calculation of transient thermal response of rooms
@@ -220,6 +234,7 @@ equation
   <p><i>February 24, 2014</i> by Reza Tavakoli:</p>
   <p>Implemented. </p>
 <p><i>May 25, 2016 </i>by Stanley Risch:</p>
-<p>Added the correction of the transluence factor according to VDI6007 Part 3</p>
+<p>Added the correction of the transluence factor according to VDI6007 Part 3
+</p>
   </html>"));
 end PartialCorrectionGTaue;

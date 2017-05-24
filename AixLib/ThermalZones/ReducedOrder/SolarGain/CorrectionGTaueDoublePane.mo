@@ -1,6 +1,6 @@
 within AixLib.ThermalZones.ReducedOrder.SolarGain;
-model CorrectionGTaueDoublePane "Correction of the solar gain factor and the transluance factor according to 
-  VDI6007 Part 3"
+model CorrectionGTaueDoublePane "Correction of the solar gain factor and the 
+  transluance factor according to VDI6007 Part 3"
   extends BaseClasses.PartialCorrectionGTaue;
   import Modelica.SIunits.Conversions.to_deg;
   // Parameters for the transmission correction factor based on VDI 6007 Part 3
@@ -42,19 +42,25 @@ model CorrectionGTaueDoublePane "Correction of the solar gain factor and the tra
   Real[n] Qsek2_Gro
     "Overall coefficient of heat transfer for double pane window";
 protected
-  parameter Modelica.SIunits.TransmissionCoefficient g_Dir0=taue_Dir0+Q210+Q220 "Reference vertical parallel transmission coefficient for direct radiation
+  parameter Modelica.SIunits.TransmissionCoefficient g_Dir0=taue_Dir0+Q210+Q220
+  "Reference vertical parallel transmission coefficient for direct radiation
     for double pane window";
-  parameter Modelica.SIunits.TransmissionCoefficient Q210=(1-rho_1Dir0-0.907*A0)*(1+(0.907*A0*rho_1Dir0/(1-rho_1Dir0^2)))*UWin/25;
-  parameter Modelica.SIunits.TransmissionCoefficient Q220=(1-rho_1Dir0-0.907*A0)*(0.907*A0/(1-rho_1Dir0^2))*(1-UWin/7.7);
-  parameter Modelica.SIunits.TransmissionCoefficient taue_Dir0=(A0*0.907)^2/(1-rho_1Dir0^2)
+  parameter Modelica.SIunits.TransmissionCoefficient Q210=
+    (1-rho_1Dir0-0.907*A0)*(1+(0.907*A0*rho_1Dir0/(1-rho_1Dir0^2)))*UWin/25;
+  parameter Modelica.SIunits.TransmissionCoefficient Q220=
+    (1-rho_1Dir0-0.907*A0)*(0.907*A0/(1-rho_1Dir0^2))*(1-UWin/7.7);
+  parameter Modelica.SIunits.TransmissionCoefficient taue_Dir0=
+    (A0*0.907)^2/(1-rho_1Dir0^2)
     "Reference vertical parallel transmission coefficient for direct radiation";
-  parameter Modelica.SIunits.ReflectionCoefficient rho_1Dir0=rho_11Dir0+(((1-rho_11Dir0)*0.907)^2*rho_11Dir0)/
-  (1-(rho_11Dir0*0.907)^2);
+  parameter Modelica.SIunits.ReflectionCoefficient rho_1Dir0=
+    rho_11Dir0+(((1-rho_11Dir0)*0.907)^2*rho_11Dir0)/
+    (1-(rho_11Dir0*0.907)^2);
   parameter Modelica.SIunits.ReflectionCoefficient rho_11Dir0=(1-A0)/(2-(1-A0));
   parameter Modelica.SIunits.ReflectionCoefficient XN2_DifCov=1-rho_1DifCov^2
     "Calculation factor to simplify equations";
-  parameter Modelica.SIunits.TransmissionCoefficient tau_2DifCov=(tau_1DifCov^2)/
-    XN2_DifCov "Energetic dregree of transmission for second pane";
+  parameter Modelica.SIunits.TransmissionCoefficient tau_2DifCov=
+    (tau_1DifCov^2)/XN2_DifCov
+    "Energetic dregree of transmission for second pane";
   parameter Modelica.SIunits.Emissivity a_1DifCov=1-tau_1DifCov-rho_1DifCov
     "Degree of absorption for single pane window";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer Q21_DifCov=
@@ -69,7 +75,8 @@ protected
 
 equation
   for i in 1:n loop
-    //Calculating variables for the overall degree of energy passage for direct irradiation
+    //Calculating variables for the overall degree of energy passage for
+    //direct irradiation
     if (1-rho_1Dir[i]^2)==0 then
       XN2_Dir[i]=10^(-20);
     else
@@ -86,12 +93,14 @@ equation
     else
       XN2_DifCle[i]= 1-rho_1DifCle[i]^2;
     end if;
-    Q21_DifCle[i]=a_1DifCle[i]*(1+(tau_1DifCle[i]*rho_1DifCle[i]/XN2_DifCle[i]))*UWin/25;
+    Q21_DifCle[i]=a_1DifCle[i]*(1+(tau_1DifCle[i]*rho_1DifCle[i]/
+      XN2_DifCle[i]))*UWin/25;
     Q22_DifCle[i]= a_1DifCle[i]*(tau_1DifCle[i]/XN2_DifCle[i])*(1-(UWin/7.7));
     Qsek2_DifCle[i]=Q21_DifCle[i]+Q22_DifCle[i];
     tau_2DifCle[i]= tau_1DifCle[i]^2/XN2_DifCle[i];
 
-    //Calculating variables for the overall degree of energy passage for ground reflexion radiation
+    //Calculating variables for the overall degree of energy passage for ground
+    //reflexion radiation
     if (1-rho_1Gro[i]^2)==0 then
       XN2_Gro[i]=10^(-20);
     else
@@ -132,8 +141,9 @@ equation
   extent={{-100,-100},{100,100}},
   grid={2,2})),
   Documentation(info="<html>
-  <p><a href=\"vdi6007.BaseClasses.CorrrectionGTaueDoublePane\">CorrectionGTaueDoublePane</a> computes 
-  transmission correction factors for the g-factor and the transluence. Transmission properties of transparent
+  <p><a href=\"vdi6007.BaseClasses.CorrrectionGTaueDoublePane\">CorrectionGTaueDoublePane</a> 
+  computes transmission correction factors for the g-factor and the transluence. 
+  Transmission properties of transparent
   elements are in general dependent on the solar incidence angle. To take this
   dependency into account, correction factors can multiplied with the solar
   radiation. These factors should not be mistaken as calculation of solar
@@ -153,6 +163,7 @@ equation
 <p><i>September 12, 2015 </i>by Moritz Lauster: </p>
 <p>Adapted to Annex 60 requirements. </p>
 <p><i>May 25, 2016 </i>by Stanley Risch:</p>
-<p>Added the correction of the transluence factor according to VDI6007 Part 3</p>
+<p>Added the correction of the transluence factor according to VDI6007 Part 3
+</p>
 </html>"));
 end CorrectionGTaueDoublePane;

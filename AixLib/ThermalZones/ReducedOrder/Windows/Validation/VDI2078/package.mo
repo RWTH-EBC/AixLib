@@ -4,6 +4,10 @@ package VDI2078
 
   annotation (Documentation(info="<html>
 
-<p>This package contains parts of VDI2078 test cases 1 and 3. In test case 1 the <a href=\"Windows.BaseClasses.Illumination\">Illumination</a> model is tested. In test case 3 the <a href=\"Windows.BaseClasses.VentilationHeat\">VentilationHeat</a> model is tested.</p>
+<p>This package contains parts of VDI2078 test cases 1 and 3. In test case 1
+ the <a href=\"Windows.BaseClasses.Illumination\">Illumination</a> model is
+ tested. In test case 3 the
+  <a href=\"Windows.BaseClasses.VentilationHeat\">VentilationHeat</a>
+  model is tested.</p>
 </html>"));
 end VDI2078;

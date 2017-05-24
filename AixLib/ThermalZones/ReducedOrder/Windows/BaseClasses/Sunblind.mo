@@ -26,7 +26,9 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
-<p>This model computes whether the sunscreen is active or not. Therefor it compares the irradiation on the window with a limit for the sunscreen to be active set as a parameter.</p>
+<p>This model computes whether the sunscreen is active or not. Therefore it
+ compares the irradiation on the window with a limit for the sunscreen to be
+ active set as a parameter.</p>
 
 </html>",
       revisions="<html>

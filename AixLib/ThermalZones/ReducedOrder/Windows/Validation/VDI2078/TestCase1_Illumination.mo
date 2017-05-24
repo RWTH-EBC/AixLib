@@ -285,13 +285,13 @@ model TestCase1_Illumination
     "solar altitude angle"
     annotation (Placement(transformation(extent={{-102,-70},{-82,-50}})));
 
-  AixLib.ThermalZones.ReducedOrder.Windows.SolarGain.CorrectionGTaueDoublePane
-    CorGTaue(
+  AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGTaueDoublePane CorGTaue(
     n=1,
     UWin=1.4,
     xi=0,
     til(displayUnit="deg") = {1.5707963267949})
-    "Correction values for non-parallel and non-vertical irradiation for VDI2078 test case 1"
+    "Correction values for non-parallel and non-vertical irradiation for
+    VDI2078 test case 1"
     annotation (Placement(transformation(extent={{-52,46},{-32,66}})));
   Windows.BaseClasses.Sunblind sunblind(lim=200)
     "Calculates if the sunblind is active"
@@ -791,7 +791,8 @@ model TestCase1_Illumination
     HDirTil "Direct irradiation on the tilted window"
     annotation (Placement(transformation(extent={{-26,-96},{-6,-76}})));
   Windows.BaseClasses.Conversions.to_HDirNor to_HDirNor
-    "Convertion of the horizontal direct irradiation to the normal direct irradiation"
+    "Convertion of the horizontal direct irradiation to the normal direct
+    irradiation"
     annotation (Placement(transformation(extent={{-58,-74},{-48,-64}})));
   Windows.BaseClasses.Illumination illumination(
     e_ILim1=250,
@@ -805,8 +806,8 @@ model TestCase1_Illumination
     til={1.5707963267949})
     "determining the switch moments for VDI2078 test case 1"
     annotation (Placement(transformation(extent={{62,-8},{82,12}})));
-  Windows.Validation.BaseClasses.SolarHourAngleVDI6007 solarHourAngleVDI(lon=
-        0.15009831567151)
+  Windows.Validation.BaseClasses.SolarHourAngleVDI6007 solarHourAngleVDI(
+    lon=0.15009831567151)
     "Solar hour angle based on the calculations of VDI6007"
     annotation (Placement(transformation(extent={{-76,-98},{-68,-90}})));
   BoundaryConditions.SolarGeometry.BaseClasses.IncidenceAngle
@@ -1066,7 +1067,8 @@ equation
   connect(sunblind.sunscreen, CorGTaue.sunscreen[1]) annotation (Line(
         points={{-5.3,-41},{-5.3,20},{-52,20},{-56,20},{-56,42},{-56,54},
           {-51,54}}, color={255,0,255}));
-  connect(to_HDirNor.HDirNor, HDirTil.HDirNor) annotation (Line(points={{-47,-69},
+  connect(to_HDirNor.HDirNor, HDirTil.HDirNor) annotation (
+  Line(points={{-47,-69},
           {-34,-69},{-34,-80},{-28,-80}},  color={0,0,127}));
   connect(HDirHor.y[1], to_HDirNor.HDirHor) annotation (Line(points={{-81,104},
           {-70,104},{-70,-67},{-59,-67}},      color={0,0,127}));
@@ -1139,10 +1141,13 @@ equation
       points={{-37.2,6},{-28,6},{-28,-38.1},{-20.7,-38.1}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation (experiment(StartTime=0,StopTime=1638000),Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,
+  annotation (experiment(StartTime=0,StopTime=1638000),Diagram(
+  coordinateSystem(preserveAspectRatio=false, extent={{-120,
             -100},{120,120}}), graphics),
     Icon(coordinateSystem(extent={{-120,-100},{120,120}})),
     Documentation(info="<html>
-<p>This model simulates parts of VDI2078 test case 1. The solar irradiation is treated as an input. To calculate the boundary conditions <a href=\"AixLib.BoundaryConditions\">AixLib</a> models are used. </p>
+<p>This model simulates parts of VDI2078 test case 1. The solar irradiation is
+ treated as an input. To calculate the boundary conditions
+ <a href=\"AixLib.BoundaryConditions\">AixLib</a> models are used. </p>
 </html>"));
 end TestCase1_Illumination;

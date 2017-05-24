@@ -162,7 +162,8 @@ model ShadedWindow
     final dBel=dBel,
     final azi=azi,
     final til=til,
-    final n=n) annotation (Placement(transformation(extent={{-34,-62},{-14,-42}})));
+    final n=n) annotation (Placement(transformation(
+    extent={{-34,-62},{-14,-42}})));
   Modelica.Blocks.Math.Product productSelfShadowing[n]
     annotation (Placement(transformation(extent={{4,-6},{18,8}})));
   SkylineShadowing skylineShadow(
@@ -239,7 +240,8 @@ equation
   connect(selfShadowing.x_As, productSelfShadowing.u2) annotation (Line(
         points={{-13.1,-51.9},{-9.1,-51.9},{-9.1,-12},{-6,-12},{-6,-8},{2.6,
           -8},{2.6,-3.2}}, color={0,0,127}));
-  annotation (defaultComponentName="shadedWindow",Icon(coordinateSystem(preserveAspectRatio=false),
+  annotation (defaultComponentName="shadedWindow",Icon(coordinateSystem(
+  preserveAspectRatio=false),
         graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},
@@ -268,11 +270,18 @@ equation
           fillColor={170,255,255},
           fillPattern=FillPattern.Solid,
           textString="%name
-")}),                                                                                                Diagram(
+")}),
+Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
-<p>This model calculates the input of heat and visible light into the room due to solar irradiation. This model calculates the input of heat and visible light into the room due to solar irradiation. Therefore it uses the calculations of VDI 6007 part 3.  It considers  the correction values for non-vertical and non-parallel radiation incidence.</p>
-<p> Additionaly to the <a href=\"vdi6007.Window\">Window</a> model it includes the formation of shades because of the window itself and because of the surrounding skyline.  </p>
+<p>This model calculates the input of heat and visible light into the room due
+ to solar irradiation. This model calculates the input of heat and visible
+  light into the room due to solar irradiation. Therefore it uses the
+  calculations of VDI 6007 part 3.  It considers  the correction values for
+  non-vertical and non-parallel radiation incidence.</p>
+<p> Additionaly to the <a href=\"vdi6007.Window\">Window</a> model it includes
+the formation of shades because of the window itself and because of the
+surrounding skyline.  </p>
 
   <h4>References</h4>
   <p>VDI. German Association of Engineers Guideline VDI 6007-3

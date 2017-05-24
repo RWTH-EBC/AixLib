@@ -70,7 +70,8 @@ equation
       points={{-67,34},{38,34},{38,69.8},{54.4,69.8}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(incAng2.incAng, selfShadowingBalkony.incAng[1]) annotation (Line(points={
+  connect(incAng2.incAng, selfShadowingBalkony.incAng[1]) annotation (
+  Line(points={
           {-5,-36},{28,-36},{28,-35.8},{54.4,-35.8}}, color={0,0,127}));
   connect(altSine1.y, incAng2.alt) annotation (Line(
       points={{-67,-20},{-44,-20},{-44,-30.6},{-28.2,-30.6}},

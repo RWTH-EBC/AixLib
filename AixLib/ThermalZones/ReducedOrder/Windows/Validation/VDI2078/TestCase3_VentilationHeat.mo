@@ -86,7 +86,8 @@ model TestCase3_VentilationHeat
         0.0,0.0; 0.0,0.0; 0.0,0.0; 0.0,0.0; 0.0,0.0; 0.0,0.0; 0.0,0.0;
         0.0,0.0],
     fileName=
-        "C:/Users/Stanley/Documents/BA/VDI6007-3/Resources/WeatherData/Trimble/Trimble_Wetterdaten_April_HDirHor.txt")
+        "C:/Users/Stanley/Documents/BA/VDI6007-3/Resources/WeatherData/Trimble/
+        Trimble_Wetterdaten_April_HDirHor.txt")
     "Direct irradiation on horizontal surface"
     annotation (Placement(transformation(extent={{-96,-26},{-82,-12}})));
   Modelica.Blocks.Sources.CombiTimeTable alt(
@@ -753,9 +754,11 @@ model TestCase3_VentilationHeat
     HDirTil "Direct solar irradiation on the window"
     annotation (Placement(transformation(extent={{-30,-26},{-14,-10}})));
   Windows.BaseClasses.Conversions.to_HDirNor to_HDirNor
-    "Converts the direct irradiation onto a horizontal surface to direct irradiation on a normal surface"
+    "Converts the direct irradiation onto a horizontal surface to direct
+    irradiation on a normal surface"
     annotation (Placement(transformation(extent={{-58,-8},{-46,4}})));
-  Windows.Validation.BaseClasses.SolarHourAngleVDI6007 SolHouAng(lon(displayUnit="deg") = 0.15009831567151)
+  Windows.Validation.BaseClasses.SolarHourAngleVDI6007 SolHouAng(
+    lon(displayUnit="deg") = 0.15009831567151)
     "Solar hour angle based on calculation of VDI 6007"
     annotation (Placement(transformation(extent={{-64,-40},{-58,-34}})));
   Windows.Validation.BaseClasses.SolarDeclinationAngleVDI6007 decAng
@@ -892,7 +895,8 @@ equation
           {-81.3,-28},{-80,-28},{-76,-28},{-68,-28},{-68,-16},{-68,-6},{
           -62,-6},{-62,-4.4},{-59.2,-4.4}},
                          color={0,0,127}));
-  connect(HDirTil.HDirTil, ventilationHeat.HDirTil) annotation (Line(points={{-13.2,
+  connect(HDirTil.HDirTil, ventilationHeat.HDirTil) annotation (
+  Line(points={{-13.2,
           -18},{64,-18},{64,-2},{79,-2}},        color={0,0,127}));
   connect(HDirTil.HDirTil, sunblind.HDirTil) annotation (Line(points={{-13.2,
           -18},{16,-18},{16,-0.4},{47.6,-0.4}}, color={0,0,127}));
@@ -907,9 +911,12 @@ equation
   connect(incAng.solHouAng, SolHouAng.solHouAng) annotation (Line(points={{
           -57.2,-36.88},{-57.45,-36.88},{-57.45,-37},{-57.7,-37}}, color={0,
           0,127}));
-  annotation (experiment(StartTime=0,StopTime=1638000),Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+  annotation (experiment(StartTime=0,StopTime=1638000),Icon(coordinateSystem(
+  preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
-<p>This model simulates parts of VDI2078 test case 3. The solar irradiation is treated as an input. To calculate the boundary conditions <a href=\"AixLib.BoundaryConditions\">AixLib</a> models are used.</p>
+<p>This model simulates parts of VDI2078 test case 3. The solar irradiation is
+treated as an input. To calculate the boundary conditions
+<a href=\"AixLib.BoundaryConditions\">AixLib</a> models are used.</p>
 </html>"));
 end TestCase3_VentilationHeat;

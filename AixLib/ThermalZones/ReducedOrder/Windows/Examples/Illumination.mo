@@ -19,8 +19,7 @@ model Illumination "Testmodel for Illumination"
     til={1.5707963267949})
     "Determining the switch times for the illumination in the room"
     annotation (Placement(transformation(extent={{52,-10},{72,10}})));
-  AixLib.ThermalZones.ReducedOrder.Windows.SolarGain.CorrectionGTaueDoublePane
-    CorGTaue(
+  AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGTaueDoublePane CorGTaue(
     n=1,
     UWin=1.4,
     til={90}) "Correction values for non-vertical non-parallel irradiation"

@@ -13,7 +13,8 @@ package BaseClasses "BaseClasses for Windows"
 
 
   annotation (Documentation(info="<html>
-<p>The BaseClasses package provides the basic models for the window calculations.<\\p>
+<p>The BaseClasses package provides the basic models for the window
+calculations.<\\p>
 </html>",
         revisions="<html>
 <ul>

@@ -49,7 +49,9 @@ model SelfShadowingTestAbove
   BaseClasses.IncidenceAngleVDI6007 incAng2(azi=0, til=90)
     "Incidence angle for the window"
     annotation (Placement(transformation(extent={{-26,-38},{-6,-18}})));
-  Modelica.Blocks.Sources.Sine solAziSine(freqHz=0.25, amplitude=2*Modelica.Constants.pi)
+  Modelica.Blocks.Sources.Sine solAziSine(
+    freqHz=0.25,
+    amplitude=2*Modelica.Constants.pi)
     "Solar azimuth generated as a sine"
     annotation (Placement(transformation(extent={{-88,-52},{-68,-32}})));
 equation

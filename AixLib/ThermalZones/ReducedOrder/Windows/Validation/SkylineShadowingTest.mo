@@ -13,7 +13,9 @@ model SkylineShadowingTest
     "Shadow due to buildings on the west and east side"
     annotation (Placement(transformation(extent={{28,-10},{48,10}})));
 
-  Modelica.Blocks.Sources.Sine solAziSine(freqHz=1, amplitude=Modelica.Constants.pi)
+  Modelica.Blocks.Sources.Sine solAziSine(
+  freqHz=1,
+  amplitude=Modelica.Constants.pi)
     "Solar azimuth input generated as sine"
     annotation (Placement(transformation(extent={{-48,-10},{-28,10}})));
 equation
@@ -28,6 +30,10 @@ equation
 <ul>
 </html>",
       info="<html>
-This is an example for the <a href=\"Windows.BaseClasses.SkylineShadowing\">SkylineShadowing</a> model. It simulates two buildings which shade the window. One smaller building is on the east side and one bigger building on the west side. Between the buildings there is a gap.<\\p>
+This is an example for the
+<a href=\"Windows.BaseClasses.SkylineShadowing\">SkylineShadowing</a> model.
+ It simulates two buildings which shade the window.
+ One smaller building is on the east side and one bigger building on the west
+  side. Between the buildings there is a gap.<\\p>
 </html>"));
 end SkylineShadowingTest;
