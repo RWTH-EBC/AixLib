@@ -130,15 +130,22 @@ diameters. This example approximates a similar network with comparable flows and
 pressures using the <a href=\"AixLib.Fluid.FixedResistances.HydraulicDiameter\">
 AixLib.Fluid.FixedResistances.HydraulicDiameter</a> model to represent the
 pipes.</p>
+<p>In addition, the original network connected the demand nodes directly into
+the network nodes. To more closely approximate a test case for district heating,
+additional pipes have been added to this model to represent the connection
+pieces between the demand nodes and the rest of the network. </p>
 <h4>Assumptions and limitations</h4>
-<p>While this model is far from perfect, it may be helpful as a starting point for developing new DHC component models. </p>
+<p>While this model is far from perfect, it may be helpful as a starting point
+for developing new DHC component models. </p>
 <h4>Validation</h4>
 <p>Like in in <a
 href=\"AixLib.Fluid.DistrictHeatingCooling.ReferenceNetworks.HydraulicValidation\">
 AixLib.Fluid.DistrictHeatingCooling.ReferenceNetworks.HydraulicValidation</a>,
 the outputs compare the relative deviations between the calculated pressures at
 the demand nodes B1, B2, and B3 with the reference results given in Larock et
-al. [2000]. The results show deviations below 0.4 percent. </p>
+al. [2000]. The results show deviations below 5 percent. The deviation is mainly
+caused by the newly introduced pipes 6-8. Without them, the deviations are below
+0.4 percent. </p>
 <h4>References</h4>
 <ul>
 <li><a href=\"https://www.crcpress.com/Hydraulics-of-Pipeline-Systems/Larock-Jeppson-Watters/p/book/9780849318061\">Larock, Bruce E., Roland W. Jeppson, and Gary Z. Watters. <i>Hydraulics of pipeline systems</i>. Boca Raton, FL: CRC Press, 2000.</a></li>
