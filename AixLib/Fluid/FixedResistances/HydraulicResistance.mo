@@ -122,7 +122,8 @@ equation
 <p>&Delta;p = 0.5*&zeta;*&rho;*v*|v|</p>
 <p>= 8*&zeta;/(&pi;^2*D^4*&rho;) * m_flow*|m_flow| </p>
 <p><br>Since this a simplified approach to calculate/generate a pressure drop, there exist no distinction between laminar and turbulent flow regarding &zeta;-values.</p>
-<p>The non-existance of a turbulent flow as well as the different approach of being able to use tabled zeta values, mainly distinguish this model from 
+<p>The non-existance of a turbulent flow, the equation handling near zero as well as the different approach of being able to use tabled zeta values, 
+mainly distinguish this model from 
 <a href=\"AixLib.Fluid.FixedResistances.PressureDrop\">AixLib.Fluid.FixedResistances.PressureDrop</a>.</p>
 <p><b><span style=\"color: #008000;\">Example Results</span></b> </p>
 <p><a href=\"AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances\">AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances</a> </p>
