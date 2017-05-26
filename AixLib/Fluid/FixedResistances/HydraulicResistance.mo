@@ -115,19 +115,16 @@ equation
   </ul>
  </html>", info="<html>
 <p><b><span style=\"color: #008000;\">Overview</span></b> </p>
-<p>Very simple model for a hydraulic resistance with the pressureloss modelled 
-with the pressure loss factor <code>zeta</code> (&zeta;). </p>
+<p>Very simple model for a hydraulic resistance with the pressureloss modelled with the pressure loss factor <code>zeta</code> (&zeta;). </p>
 <p><b><span style=\"color: #008000;\">Concept</span></b> </p>
 <p>Values for pressure loss factor zeta can be easily found in tables. </p>
-<p>The following equation represents the dependencies of<code> m_flow(_nominal), 
-dp(_nominal), zeta </code>and the<code> diameter (D)</code>.</p>
+<p>The following equation represents the dependencies of<code> m_flow(_nominal), dp(_nominal), zeta </code>and the<code> diameter (D)</code>.</p>
 <p>&Delta;p = 0.5*&zeta;*&rho;*v*|v|</p>
 <p>= 8*&zeta;/(&pi;^2*D^4*&rho;) * m_flow*|m_flow| </p>
-<br>
-<p>Since this a simplified approach to calculate/generate a pressure drop, there 
-exist no distinction between laminar and turbulent flow regarding &zeta;-values.</p>
+<p><br>Since this a simplified approach to calculate/generate a pressure drop, there exist no distinction between laminar and turbulent flow regarding &zeta;-values.</p>
+<p>The non-existance of a turbulent flow as well as the different approach of being able to use tabled zeta values, mainly distinguish this model from 
+<a href=\"AixLib.Fluid.FixedResistances.PressureDrop\">AixLib.Fluid.FixedResistances.PressureDrop</a>.</p>
 <p><b><span style=\"color: #008000;\">Example Results</span></b> </p>
-<p><a href=\"AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances\">
-AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances</a> </p>
+<p><a href=\"AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances\">AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances</a> </p>
 </html>"));
 end HydraulicResistance;
