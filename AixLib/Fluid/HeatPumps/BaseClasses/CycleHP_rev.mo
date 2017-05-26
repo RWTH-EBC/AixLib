@@ -1,36 +1,23 @@
 within AixLib.Fluid.HeatPumps.BaseClasses;
 model CycleHP_rev "cycle for reversible heat pump"
   import SI = Modelica.SIunits;
-  type OperationMode = String annotation(choices( choice = "heat pump" "heat pump", choice = "chiller" "chiller", choice = "reversible" "reversible"));
-  parameter OperationMode operationMode = "heat pump" "Type in: heat pump; chiller; reversible" annotation(Dialog(group = "Control Mode"));
-  type ControlMode = String annotation(choices( choice = "speed control" "speed control", choice = "on/off" "on/off"));
-  parameter ControlMode controlMode = "on/off" "Type in: speed control; on/off" annotation(Dialog(group = "Control Mode"));
+  parameter AixLib.Controls.Types.OperationMode_HP operationMode = heatPump "Operation mode of the machine" annotation(Dialog(group = "Control Mode"));
+  parameter AixLib.Controls.Types.ControlMode_HP controlMode = onOff "Control mode of the machine" annotation(Dialog(group = "Control Mode"));
 
   // heat pump data
   parameter
-    AutomationLibrary.DataBaseX.HeatPumps.HeatPumpTableBaseDataDefinition
-    HeatPumpDataT=AutomationLibrary.DataBaseX.HeatPumps.Galetti_HeatPump_MFE005MH()
-    "HeatPump data, including look-up tables for Pel and Quse"
-    annotation (choicesAllMatching=true, Dialog(group="Control Mode", enable=(controlMode == "on/off") and (operationMode == "heat pump" or operationMode == "reversible")));
+    AixLib.DataBase.HeatPump.HeatPumpBaseDataDefinition_new
+    HeatPumpData=AixLib.DataBase.HeatPump.Galetti_HeatPump_MFE005MH()
+    "HeatPump data, make sure you have the correct tables (on/off) or polynoms (speed control)"
+    annotation (choicesAllMatching=true, Dialog(group="Control Mode", enable=(operationMode == "heat pump" or operationMode == "reversible")));
 
-  parameter
-    AutomationLibrary.DataBaseX.HeatPumps.HeatPumpPolyBaseDataDefinition
-    HeatPumpDataP=AutomationLibrary.DataBaseX.HeatPumps.Danfoss_HRH029U2_record()
-    "HeatPump data, including polynomial functionf for Pel and Quse"
-    annotation (choicesAllMatching=true, Dialog(group="Control Mode", enable=(controlMode == "speed control") and (operationMode == "heat pump" or operationMode == "reversible")));
 
   // chiller data
   parameter
-    AutomationLibrary.DataBaseX.HeatPumps.HeatPumpTableBaseDataDefinition
-    ChillerDataT=AutomationLibrary.DataBaseX.HeatPumps.Galetti_Chiller_MFE005M()
-    "Chiller data, including look-up tables for Pel and Quse"
-    annotation (choicesAllMatching=true, Dialog(group="Control Mode", enable=(controlMode == "on/off") and (operationMode == "chiller" or operationMode == "reversible")));
-
-  parameter
-    AutomationLibrary.DataBaseX.HeatPumps.HeatPumpPolyBaseDataDefinition
-    ChillerDataP=AutomationLibrary.DataBaseX.HeatPumps.Danfoss_HRH029U2_record()
-    "Chiller data, including polynomial function for Pel and Quse"
-    annotation (choicesAllMatching=true, Dialog(group="Control Mode", enable=(controlMode == "speed control") and (operationMode == "chiller" or operationMode == "reversible")));
+    AixLib.DataBase.HeatPump.HeatPumpBaseDataDefinition_new
+    ChillerData = AixLib.DataBase.HeatPump.Galetti_Chiller_MFE005M()
+    "Chiller data, make sure you have the correct tables (on/off) or polynoms (speed control)"
+    annotation (choicesAllMatching=true, Dialog(group="Control Mode", enable=(operationMode == "chiller" or operationMode == "reversible")));
 
 protected
   final parameter Real table_QflowUse_HP[:,:]=HeatPumpDataT.table_QflowUse;
@@ -99,7 +86,6 @@ public
   Real CoP;
   Real CoP_corr;
   Real CoP_char;
-  Real N;
   Real f_cop_icing;
   //Real f_cop_spread;
   Real Char[2];
@@ -116,8 +102,8 @@ public
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={140,-62})));
-  Modelica.Blocks.Interfaces.BooleanInput input_On annotation (Placement(
-        transformation(
+  Modelica.Blocks.Interfaces.BooleanInput isOn "if true, pump is on"
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-50,90})));
@@ -129,8 +115,8 @@ public
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={140,-38})));
-  Modelica.Blocks.Interfaces.RealInput input_N annotation (Placement(
-        transformation(
+  Modelica.Blocks.Interfaces.RealInput N(unit="rpm")
+    "rotational speed in [rpm]" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-10,90})));
@@ -190,10 +176,10 @@ public
     "look up table for electrical power in heat pump mode" annotation (extent=[-60,
         -20; -40,0], Placement(transformation(extent={{-60,20},{-40,40}})));
 public
-  Modelica.Blocks.Sources.RealExpression source_Tsource(y=Tsource_corr)
+  Modelica.Blocks.Sources.RealExpression real_T_source(y=T_source_corr)
     annotation (Placement(transformation(extent={{-96,50},{-76,70}}, rotation=0)));
 public
-  Modelica.Blocks.Sources.RealExpression source_Tuse(y=Tuse_corr) annotation (
+  Modelica.Blocks.Sources.RealExpression real_T_use(y=T_use_corr) annotation (
       Placement(transformation(extent={{-96,20},{-76,40}}, rotation=0)));
   Modelica.Blocks.Continuous.FirstOrder firstOrder(T=T_hp_cycle) if PT1_cycle
     annotation (Placement(transformation(extent={{42,-6},{62,14}})));
@@ -222,11 +208,7 @@ public
           rotation=0)));
   Modelica.Blocks.Math.Add add
     annotation (Placement(transformation(extent={{-56,-52},{-46,-42}})));
-  Modelica.Blocks.Nonlinear.FixedDelay fixedDelay(delayTime=delayTime) if delay_QflowUse
-    annotation (Placement(transformation(extent={{2,-6},{22,14}})));
 
-  parameter Boolean delay_QflowUse=false "Delay model for capacity" annotation(Dialog(group = "Start/stop behavior",tab="Advanced"));
-  parameter SI.Time delayTime=0 "Delay time of capacity to electric power" annotation(Dialog(group = "Start/stop behavior",tab="Advanced", enable=delay_QflowUse));
 /*  Modelica.Blocks.Logical.TriggeredTrapezoid trapezoid(
     amplitude=1,
     rising=rising,
@@ -241,10 +223,10 @@ public
    //         -64},{-102,-44}},
    //       rotation=0)));
 public
-  Modelica.Blocks.Interfaces.RealOutput output_QflowCo "Qflow condenser"
+  Modelica.Blocks.Interfaces.RealOutput Q_flow_Co "heat flow in condesner"
     annotation (Placement(transformation(extent={{130,38},{150,58}}),
         iconTransformation(extent={{130,38},{150,58}})));
-  Modelica.Blocks.Interfaces.RealInput input_TCo_in(unit="K")
+  Modelica.Blocks.Interfaces.RealInput T_Co_in(unit="K")
     "Entry temperature in condenser [K]" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
@@ -252,20 +234,20 @@ public
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-140,-48})));
-  Modelica.Blocks.Interfaces.RealInput input_TEv_in(unit="K")
+  Modelica.Blocks.Interfaces.RealInput T_Ev_in(unit="K")
     "Entry temperature in evaporator[K]" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-130,74}), iconTransformation(extent={{-150,80},{-130,100}})));
-  Modelica.Blocks.Interfaces.RealOutput output_QflowEv annotation (Placement(
-        transformation(
+  Modelica.Blocks.Interfaces.RealOutput Q_flow_Ev "heat flow from evaporator"
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-130,10}), iconTransformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={140,20})));
-  Modelica.Blocks.Interfaces.RealInput input_TCo_out(unit="K")
+  Modelica.Blocks.Interfaces.RealInput T_Co_out(unit="K")
     "Exit temperature in condenser [K]" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
@@ -273,17 +255,17 @@ public
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-140,-72})));
-  Modelica.Blocks.Interfaces.RealInput input_TEv_out(unit="K")
+  Modelica.Blocks.Interfaces.RealInput T_Ev_out(unit="K")
     "Exit temperature from evaporator [K]" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-130,52}), iconTransformation(extent={{-150,56},{-130,76}})));
-  Modelica.Blocks.Interfaces.RealInput input_mflow_Ev(unit="kg/s")
+  Modelica.Blocks.Interfaces.RealInput m_flow_Ev(unit="kg/s")
     "mass flow in evaporator [kg/s]" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-130,30}), iconTransformation(extent={{-150,30},{-130,50}})));
-  Modelica.Blocks.Interfaces.RealInput input_mflow_Co(unit="kg/s")
+  Modelica.Blocks.Interfaces.RealInput m_flow_Co(unit="kg/s")
     "mass flow in condenser [kg/s]" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
@@ -292,7 +274,7 @@ public
         rotation=0,
         origin={-140,-24})));
 public
-  Modelica.Blocks.Sources.RealExpression source_TuseLimit(y=TuseLimit)
+  Modelica.Blocks.Sources.RealExpression real_T_useLimit(y=TuseLimit)
     "limit for Tuse at maximum Pel" annotation (Placement(transformation(extent=
            {{14,52},{34,72}}, rotation=0)));
 public
@@ -305,13 +287,6 @@ public
     yMin=0,
     y_start=1) annotation (Placement(transformation(extent={{46,56},{66,76}})));
 
-   Modelica.Blocks.Interfaces.RealOutput output_N "[rpm]"
-    annotation (Placement(transformation(extent={{130,-20},{150,0}}),
-        iconTransformation(extent={{130,-20},{150,0}})));
-public
-  Modelica.Blocks.Sources.RealExpression real_Pel1(y=Pel)
-    annotation (Placement(transformation(extent={{92,80},{112,100}},
-          rotation=0)));
   Modelica.Blocks.Tables.CombiTable2D Table_QflowUse_C(
     tableName="NoName",
     fileName="NoName",
@@ -328,13 +303,13 @@ public
                         not ((controlMode == "speed control"))
     "look up table for electrical power in chiller mode" annotation (extent=[-60,
         -20; -40,0], Placement(transformation(extent={{-26,20},{-6,40}})));
-  Modelica.Blocks.Interfaces.BooleanInput input_isHP
-    "heatPump = true; chiller = false" annotation (Placement(transformation(
+  Modelica.Blocks.Interfaces.BooleanInput isHP
+    "if true then heat pump, else chiller" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={22,90})));
 public
-  Modelica.Blocks.Sources.RealExpression source_Tuse_is(y=Tuse) "current Tuse"
+  Modelica.Blocks.Sources.RealExpression real_TuseIs(y=Tuse) "current Tuse"
     annotation (Placement(transformation(extent={{14,36},{34,56}}, rotation=0)));
   Modelica.Blocks.Continuous.LimPID PID_max_QflowUse_C(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
@@ -345,39 +320,39 @@ public
 equation
 
   // Decide on Source and Use inputs and outputs
-    if input_isHP then // heat pump mode
-          Tuse = input_TCo_out;
-          Tuse_in = input_TCo_in;
-          Tsource = input_TEv_in;
-          Tsource_out = input_TEv_out;
-          output_QflowCo = QflowUse;
-          output_QflowEv = (-1)*QflowSource;
-          mflowUse = input_mflow_Co;
-          mflowSource=input_mflow_Ev;
-          TuseLimit = if (controlMode == "on/Off") then HeatPumpDataT.TuseMax else HeatPumpDataP.TuseMax;
-          Table_QflowUse_HP.u1 = source_Tuse.y;
-          Table_QflowUse_HP.u2 = source_Tsource.y;
-          Table_Pel_HP.u1 = source_Tuse.y;
-          Table_Pel_HP.u2 = source_Tsource.y;
+  if isHP then         // heat pump mode
+          Tuse =T_Co_out;
+          Tuse_in =T_Co_in;
+          Tsource =T_Ev_in;
+          Tsource_out =T_Ev_out;
+    Q_flow_Co = QflowUse;
+    Q_flow_Ev = (-1)*QflowSource;
+          mflowUse =m_flow_Co;
+          mflowSource=m_flow_Ev;
+          TuseLimit = HeatPumpData.TuseMax;
+          Table_QflowUse_HP.u1 =real_T_use.y;
+          Table_QflowUse_HP.u2 =real_T_source.y;
+          Table_Pel_HP.u1 =real_T_use.y;
+          Table_Pel_HP.u2 =real_T_source.y;
           Table_QflowUse_C.u1 = 0;
           Table_QflowUse_C.u2 = 0;
           Table_Pel_C.u1 = 0;
           Table_Pel_C.u2 = 0;
           product_QflowUse_max.u1 = PID_max_QflowUse_HP.y;
     else // chiller mode
-          Tuse = input_TEv_out;
-          Tuse_in = input_TEv_in;
-          Tsource = input_TCo_in;
-          Tsource_out = input_TCo_out;
-          output_QflowCo = QflowSource;
-          output_QflowEv = (-1)*QflowUse;
-          mflowUse = input_mflow_Ev;
-          mflowSource=input_mflow_Co;
-          TuseLimit = if (controlMode == "on/Off") then HeatPumpDataT.TuseMin else HeatPumpDataP.TuseMin;
-          Table_QflowUse_C.u1 = source_Tuse.y;
-          Table_QflowUse_C.u2 = source_Tsource.y;
-          Table_Pel_C.u1 = source_Tuse.y;
-          Table_Pel_C.u2 = source_Tsource.y;
+          Tuse =T_Ev_out;
+          Tuse_in =T_Ev_in;
+          Tsource =T_Co_in;
+          Tsource_out =T_Co_out;
+    Q_flow_Co = QflowSource;
+    Q_flow_Ev = (-1)*QflowUse;
+          mflowUse =m_flow_Ev;
+          mflowSource=m_flow_Co;
+          TuseLimit = HeatPumpData.TuseMin;
+          Table_QflowUse_C.u1 =real_T_use.y;
+          Table_QflowUse_C.u2 =real_T_source.y;
+          Table_Pel_C.u1 =real_T_use.y;
+          Table_Pel_C.u2 =real_T_source.y;
           Table_QflowUse_HP.u1 = 0;
           Table_QflowUse_HP.u2 = 0;
           Table_Pel_HP.u1 = 0;
@@ -385,22 +360,13 @@ equation
           product_QflowUse_max.u1 = PID_max_QflowUse_C.y;
   end if;
 
-  if (controlMode == "on/off") then // cycle data as table
-    Nmax=HeatPumpDataT.Nmax;
-    Nmin=HeatPumpDataT.Nmin;
-  else // cycle data as polynom
-    Nmax=HeatPumpDataP.Nmax;
-    Nmin=HeatPumpDataP.Nmin;
-  end if;
+    Nmax=HeatPumpData.Nmax;
+    Nmin=HeatPumpData.Nmin;
 
   // correction of temperatures used in the table/polynomial
-  if (controlMode == "on/off") then
-    mflowUse_nom= HeatPumpDataT.mFlowUseNom;
-    mflowSource_nom= HeatPumpDataT.mFlowSourceNom;
-  else
-    mflowUse_nom=HeatPumpDataP.mFlowUseNom;
-    mflowSource_nom=HeatPumpDataP.mFlowSourceNom;
-  end if;
+    mflowUse_nom= HeatPumpData.mFlowUseNom;
+    mflowSource_nom= HeatPumpData.mFlowSourceNom;
+
 
   if CorrFlowUse then
     Tuse_corr=1/2*(mflowUse/mflowUse_nom*(Tuse - Tuse_in) +
@@ -424,13 +390,13 @@ equation
   if (controlMode == "on/off") then
     N=HeatPumpDataT.Nnom;
   else // capacity control mode
-    if input_N > Nmax then
+    if N > Nmax then
       N=Nmax;
   else
-      if input_N < Nmin then
+      if N < Nmin then
       N=Nmin;
     else
-      N=input_N;
+      N=N;
     end if;
   end if;
 end if;
@@ -443,10 +409,10 @@ end if;
     Char=AutomationLibrary.DataBaseX.HeatPumps.baseFct_withAlgorithmSI(N,Tuse_corr, Tsource_corr,HeatPumpDataP.Pel_fTuseTsourceN,HeatPumpDataP.QflowUse_fTuseTsourceN);
   end if;
 
-  if input_On then
+  if isOn then
     QflowUse_char=Char[2];
     Pel_char=Char[1];
-    CoP_char=QflowUse_char/Pel_char;
+    CoP_char=QflowUse_char/max(Pel_char, 1e-3);
   else
     QflowUse_char=0;
     Pel_char=0;
@@ -465,13 +431,13 @@ end if;
   //calculation of heat pump characteristics
     Pel=Pel_char*factor_scale;
     QflowUse=firstOrder_out_internal;
-  if input_On then
+  if isOn then
     if QflowUse-Pel*eta_el>0 then
       QflowSource=(QflowUse-Pel*eta_el);
     else
       QflowSource=0;
     end if;
-    CoP=QflowUse/(Pel+real_Pel_add.y);
+    CoP=QflowUse/max((Pel+real_Pel_add.y), 1e-3);
   else
     QflowSource=0;
     CoP=0;
@@ -480,8 +446,6 @@ end if;
   //internal connections for conditional models
   connect(product_Pel_CoP.y,delay_in_internal);
   if delay_QflowUse then
-    connect(delay_in_internal,fixedDelay.u);
-    connect(fixedDelay.y,delay_out_internal);
   else
     connect(delay_in_internal,delay_out_internal);
   end if;
@@ -498,7 +462,7 @@ end if;
      connect(QflowUse_table_internal,dummy_zero.y);
      connect(Pel_table_internal,dummy_zero.y);
    else
-     if input_isHP then
+    if isHP then
       QflowUse_table_internal = Table_QflowUse_HP.y;
       Pel_table_internal = Table_Pel_HP.y;
      else
@@ -546,15 +510,15 @@ end if;
       points={{61,34},{102,34}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(PID_max_QflowUse_HP.u_s, source_TuseLimit.y) annotation (Line(
+  connect(PID_max_QflowUse_HP.u_s, real_T_useLimit.y) annotation (Line(
       points={{44,66},{40,66},{40,62},{35,62}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(source_Tuse_is.y, PID_max_QflowUse_HP.u_m) annotation (Line(points={{35,46},
-          {35,46},{56,46},{56,54}},     color={0,0,127}));
-  connect(source_TuseLimit.y, PID_max_QflowUse_C.u_s)
+  connect(real_TuseIs.y, PID_max_QflowUse_HP.u_m) annotation (Line(points={{35,46},
+          {35,46},{56,46},{56,54}}, color={0,0,127}));
+  connect(real_T_useLimit.y, PID_max_QflowUse_C.u_s)
     annotation (Line(points={{35,62},{76,62}}, color={0,0,127}));
-  connect(source_Tuse_is.y, PID_max_QflowUse_C.u_m)
+  connect(real_TuseIs.y, PID_max_QflowUse_C.u_m)
     annotation (Line(points={{35,46},{88,46},{88,50}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-150,
             -100},{150,100}})),     Icon(coordinateSystem(preserveAspectRatio=true,
@@ -572,30 +536,25 @@ end if;
           textString="%name
 "),     Ellipse(extent={{-80,80},{80,-80}}, lineColor={0,0,0})}),
              Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
+<h4><span style=\"color: #008000\">Overview</span></h4>
 <p>Heat pump refrigerant circuit black box model with two simple heat exchangers, no controllers included. It is used within the HeatPump model and delivers the basic functionality of the heat pump. The HeatPump model only adds the external heat exchangers and according connectors.</p>
-<p>This model is derived from <a href=\"HVAC.Components.HeatGenerators.HeatPump.Partial.Cycle\">HVAC.Components.HeatGenerators.HeatPump.Partial.Cycle</a>, just without checkboxes.</p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars2.png\"/></p>
-<h4><span style=\"color:#008000\">Assumptions</span></h4>
+<h4><span style=\"color: #008000\">Assumptions</span></h4>
 <p>Correction models of the calculation can be activated that effect the efficiency or the start-up and shut-off behavior of the heat pump. </p>
 <ol>
 <li>Icing and Defrosting: Simple model that use the evaporator inlet temperature and calculates a factor for CoP correction (according to Wetter and Afjei, 1996). Not enabled for table data, as usually already included (data according EN255 and EN14511). </li>
 <li>Mass flow in condenser/evaporator: Model according to Pahud and Lachal, 2004, that corrects the temperatures used within table and polynomial. </li>
 <li>First order behavior of heat pump capacity: Start-up and shut-off of heat pump can be modeled with a first order behavior. </li>
-<li>Start-up and shut-off: Pel_off is corrected by a trapezoid shape. </li>
-<li>Delay of heat pump capacity: Start-up and shut-off of heat pump can be modeled with a delay time. </li>
 <li>Electric efficiency: The electric efficiency of the electric drive is implemented to calculate the evaporator heat flow </li>
 <li>Scaling factor: A scaling facor is implemented for scaling of the heat pump power and capacity without effecting the heat pump efficiency which is not physically correct but may be helpful for rough calculation. </li>
 <li>Additional electric power: This is a constant value that is added to the power consumption. This may be helpful if e.g. an electric drive operates together with the compressor and shall be included in overall electric power and CoP calculation. </li>
 <li>The smoothness of table interpolation can be chosen. </li>
 <li>Allowed sink temperature: A maximum condenser outlet temperature limits the condenser heat flow through a PID controller. </li>
 </ol>
-<h4><span style=\"color:#008000\">Known Limitations</span></h4>
+<h4><span style=\"color: #008000\">Known Limitations</span></h4>
 <ul>
 <li>Allowed source temperature: No limits for source temperature is implemented. Though, usually this is not a problem if the heat pump is properly integrated into a system model. </li>
 </ul>
-<h4><span style=\"color:#008000\">Concept</span></h4>
+<h4><span style=\"color: #008000\">Concept</span></h4>
 <p>Works as on/off-controlled heat pump or heat pump with capacity control. The type of capacity and electrical power calculation can be chosen: </p>
 <ol>
 <li>Polynom <br>a) depending on evaporator input temperature, condenser output temperature and variable speed (via conditional speed connector) for capacity controlled heat pumps <br>b) depending on evaporator input temperature, condenser output temperature and nominal speed for on/off-controlled heat pump </li>
@@ -607,7 +566,7 @@ end if;
 <li>The condenser and evaporator can be parametized with a certain external fluid volume to represent their thermal inertia in the tab Evaporator/Condenser</li>
 <li>A first order element can be added to the calculation in the tab Advanced if the check box PT1_cycle is enabled (see: <i>Correction models)</i> </li>
 </ol>
-<h4><span style=\"color:#008000\">References</span></h4>
+<h4><span style=\"color: #008000\">References</span></h4>
 <ul>
 <li>Pahud, D. and Lachal, B.: <i>Mesure des performances thermiques d?une pompe &agrave; chaleur coupl&eacute;e sur des sondes g&eacute;othermiques &agrave; Lugano (TI)</i>. Office f&eacute;d&eacute;ral de l&apos;energie, Bern, Switzerland. 2004. </li>
 <li>Wetter, M. and Afjei, T.: <i>TRNSYS TYPE 401 - Kompressionsw&auml;rmepumpe inklusiv Frost- und Taktverluste</i>. Zentralschweizerisches Technikum Luzern - Ingenieruschule HTL, Switzerland. 1996. </li>

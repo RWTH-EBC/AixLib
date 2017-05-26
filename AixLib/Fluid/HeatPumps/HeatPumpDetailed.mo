@@ -377,7 +377,7 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(heatPumpControlBus.N, cycle.N_in) annotation (Line(
-      points={{0.085,99.085},{0,99.085},{0,60},{0,60},{-8,60},{-8,37}},
+      points={{0.085,99.085},{0,99.085},{0,60},{-8,60},{-8,37}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
