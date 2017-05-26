@@ -90,7 +90,7 @@ equation
     HydraulicResistance will be larger than the flow rate of FixedResistanceDpM. 
     The difference is lower than 0.1 kg/s.</p>
     <p>The parameters of the two models are chosen in a way to achieve the same pressure drop. 
-    Results visualize the eqution handling near zero.
+    Results visualize the equation handling near zero.
     Furthermore, the parameter <code>HR.zeta</code> includes the denominator 8 due to the 
     calculation of <span style=\" font-family:'Courier New,courier'; color:#0000ff;\">final 
     </span><span style=\" font-family:'Courier New,courier';\">dp_nominal=8*zeta*...</span>

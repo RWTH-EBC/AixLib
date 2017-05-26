@@ -115,7 +115,7 @@ equation
   </ul>
  </html>", info="<html>
 <p><b><span style=\"color: #008000;\">Overview</span></b> </p>
-<p>Very simple model for a hydraulic resistance with the pressureloss modelled with the pressure loss factor <code>zeta</code> (&zeta;). </p>
+<p>Simple model for a hydraulic resistance with the pressureloss modelled with the pressure loss factor <code>zeta</code> (&zeta;). </p>
 <p><b><span style=\"color: #008000;\">Concept</span></b> </p>
 <p>Values for pressure loss factor zeta can be easily found in tables. </p>
 <p>The following equation represents the dependencies of<code> m_flow(_nominal), dp(_nominal), zeta </code>and the<code> diameter (D)</code>.</p>
