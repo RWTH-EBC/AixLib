@@ -94,7 +94,7 @@ equation
           fillColor={255,255,0},
           fillPattern=FillPattern.Solid,
           radius=45), Text(
-          extent={{32,20},{-30,-16}},
+          extent={{74,40},{-74,-42}},
           lineColor={0,0,255},
           fillColor={255,255,0},
           fillPattern=FillPattern.Solid,
