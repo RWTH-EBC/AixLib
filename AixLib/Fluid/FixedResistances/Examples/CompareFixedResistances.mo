@@ -41,8 +41,8 @@ model CompareFixedResistances
     m_flow_start=0,
     diameter=sqrt(1/(sqrt(995.586)*Modelica.Constants.pi)),
     m_flow_nominal=1,
-    zeta=10000/8,
-    from_dp=true)
+    from_dp=true,
+    zeta=10000/8)
     annotation (Placement(transformation(extent={{-28,-10},{-8,10}})));
   AixLib.Fluid.Sensors.MassFlowRate masFlo2(redeclare package Medium = Medium)
     "Mass flow rate sensor"
@@ -89,6 +89,13 @@ equation
     For small pressure differences (up to 800 Pa) the flow rate of 
     HydraulicResistance will be larger than the flow rate of FixedResistanceDpM. 
     The difference is lower than 0.1 kg/s.</p>
+    <p>The parameters of the two models are chosen in a way to achieve the same pressure drop. 
+    Results visualize the eqution handling near zero.
+    Furthermore, the parameter <code>HR.zeta</code> includes the denominator 8 due to the 
+    calculation of <span style=\" font-family:'Courier New,courier'; color:#0000ff;\">final 
+    </span><span style=\" font-family:'Courier New,courier';\">dp_nominal=8*zeta*...</span>
+    in the model 
+    <a href=\"AixLib.Fluid.FixedResistances.HydraulicResistance\">HydraulicResistance</a>.</p>
     <p><br>Change parameter<code> HR.from_dp </code>to<code> false </code>and the 
     simulation time will increase by about 25 &percnt;. </p>
     <p>Choosing this parameter depending whether you are using a mass flow source 
