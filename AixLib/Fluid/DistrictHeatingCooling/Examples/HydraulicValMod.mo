@@ -96,25 +96,28 @@ model HydraulicValMod
         origin={40,4})));
   Pipes.FlowResistance          pipe6(
     redeclare package Medium = Medium,
-    m_flow_nominal=59.7352,
     length=15,
-    diameter=0.15) "Pipe 6"          annotation (Placement(transformation(
+    diameter=0.15,
+    m_flow_nominal=28.175)
+                   "Pipe 6"          annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-60,30})));
   Pipes.FlowResistance          pipe7(
     redeclare package Medium = Medium,
-    m_flow_nominal=59.7352,
     length=15,
-    diameter=0.15) "Pipe 7"          annotation (Placement(transformation(
+    diameter=0.15,
+    m_flow_nominal=42.213)
+                   "Pipe 7"          annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={20,50})));
   Pipes.FlowResistance          pipe8(
     redeclare package Medium = Medium,
-    m_flow_nominal=59.7352,
     length=15,
-    diameter=0.15) "Pipe 8"          annotation (Placement(transformation(
+    diameter=0.15,
+    m_flow_nominal=22.6)
+                   "Pipe 8"          annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={22,-60})));
