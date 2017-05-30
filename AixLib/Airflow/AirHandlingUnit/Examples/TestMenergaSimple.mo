@@ -39,7 +39,7 @@ model TestMenergaSimple
     T=283.15) "Sink für exit air" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
-        origin={0,86})));
+        origin={-12,86})));
 equation
   connect(outsideAir.ports[1], menergaSimple.externalAir) annotation (Line(
         points={{84,22},{51.4,22},{51.4,22.6}}, color={0,127,255}));
@@ -49,6 +49,7 @@ equation
   connect(exhaustAir.ports[1], menergaSimple.exhaustAir) annotation (Line(
         points={{-72,62},{-66,62},{-66,56},{-46.4,56},{-46.4,50.4}}, color={0,
           127,255}));
-  connect(exitAir.ports[1], menergaSimple.ExitAir) annotation (Line(points={{
-          -1.77636e-015,76},{-1.77636e-015,53.8},{3.2,53.8}}, color={0,127,255}));
+  connect(exitAir.ports[1], menergaSimple.ExitAir) annotation (Line(points={{-12,76},
+          {-12,53.8},{3.2,53.8}},                             color={0,127,255}));
+  annotation (experiment(StopTime=1800, Interval=10));
 end TestMenergaSimple;
