@@ -1,0 +1,2 @@
+simulateModel("AixLib.Fluid.FixedResistances.Examples.CompareFixedResistances", stopTime=3, method="dassl", resultFile="CompareFixedResistances");
+createPlot(x="FRdp.dp", y={"HR.m_flow", "FRdp.m_flow"}, grid=true, colors={{28,108,200}, {238,46,47}});
