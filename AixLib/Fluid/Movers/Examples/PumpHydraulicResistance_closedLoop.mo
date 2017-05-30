@@ -15,8 +15,7 @@ model PumpHydraulicResistance_closedLoop
     annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
   Fluid.FixedResistances.HydraulicResistance hydraulicResistance(zeta = 2,
     redeclare package Medium = Medium,
-    m_flow_small=1e-4,
-    diameter=0.05)                                                       annotation(Placement(transformation(extent = {{26, 20}, {46, 40}})));
+    m_flow_small=1e-4)                                                   annotation(Placement(transformation(extent = {{26, 20}, {46, 40}})));
   AixLib.Fluid.FixedResistances.PressureDrop pipe(
     redeclare package Medium = Medium,
     m_flow_nominal=0.5,

@@ -41,8 +41,7 @@ model StorageBoiler
   AixLib.Fluid.FixedResistances.HydraulicResistance
                                            hydraulicResistance(zeta = 1000,
     redeclare package Medium = Medium,
-    m_flow_small=1e-4,
-    diameter=0.05)                                                          annotation(Placement(transformation(extent={{46,-12},
+    m_flow_small=1e-4)                                                      annotation(Placement(transformation(extent={{46,-12},
             {66,8}})));
   AixLib.Fluid.Sources.Boundary_ph
                       boundary_ph1(use_p_in = true, h = 0.8e5,
