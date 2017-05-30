@@ -23,7 +23,7 @@ model SimpleRoomThreeElements
     azi={3.1415926535898,4.7123889803847})
     "Calculates direct solar radiation on titled surface for both directions"
     annotation (Placement(transformation(extent={{-68,52},{-48,72}})));
-  Windows.SolarGain.CorrectionGDoublePane corGDouPan(n=2, UWin=2.1)
+  SolarGain.CorrectionGDoublePane corGDouPan(n=2, UWin=2.1)
     "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{6,54},{26,74}})));
   RC.ThreeElements thermalZoneThreeElements(

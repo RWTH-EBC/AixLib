@@ -32,8 +32,9 @@ model TestCase920 "Test case 920"
     azi={0,1.5707963267949,3.1415926535898,-1.5707963267949})
     "Calculates direct solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,68},{-48,88}})));
-  AixLib.ThermalZones.ReducedOrder.Windows.SolarGain.CorrectionGDoublePane
-    corGDoublePane(UWin=3.046492744695893, n=4)
+  AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane
+    corGDoublePane(
+    UWin=3.046492744695893, n=4)
     "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{6,70},{26,90}})));
   AixLib.ThermalZones.ReducedOrder.RC.FourElements thermalZoneFourElements(

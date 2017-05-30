@@ -3,9 +3,9 @@ model ThermalZone
   "Thermal zone model with internal gains"
   extends AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone;
 
-  replaceable model corG = Windows.SolarGain.CorrectionGDoublePane
+  replaceable model corG = SolarGain.CorrectionGDoublePane
     constrainedby
-    AixLib.ThermalZones.ReducedOrder.Windows.SolarGain.BaseClasses.PartialCorrectionG
+    AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses.PartialCorrectionG
     "Model for correction of solar transmission"
     annotation(choicesAllMatching=true);
 
