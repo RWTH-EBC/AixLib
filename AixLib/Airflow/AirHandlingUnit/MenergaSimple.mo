@@ -37,9 +37,6 @@ model MenergaSimple "A first simple model of the Menerga SorpSolair"
                         "Fan to provide mass flow in main supply air vent"
     annotation (Placement(transformation(extent={{96,16},{76,36}})));
 
-  Modelica.Blocks.Sources.Constant InletFlow_mflow(k=5.1)
-    "nominal mass flow rate in outside air fan"
-    annotation (Placement(transformation(extent={{30,80},{50,100}})));
   Modelica.Fluid.Interfaces.FluidPort_b ExitAir(
     redeclare package Medium = MediumAir,
     m_flow(max=if allowFlowReversal then +Modelica.Constants.inf else 0),
@@ -66,17 +63,11 @@ model MenergaSimple "A first simple model of the Menerga SorpSolair"
     redeclare Fluid.Movers.Data.Generic per)
     "provides pressure difference to deliver regeneration air"
     annotation (Placement(transformation(extent={{188,294},{168,314}})));
-  Modelica.Blocks.Sources.Constant RegenAir_mflow(k=1)
-    "nominal mass flow for regeneration air fan"
-    annotation (Placement(transformation(extent={{96,328},{116,348}})));
-  Modelica.Blocks.Sources.Constant exhaust_mflow(k=5.1)
-    "nominal mass flow for exhaust air fan"
-    annotation (Placement(transformation(extent={{-426,338},{-406,358}})));
   Fluid.MassExchangers.Humidifier_u Absorber(
     redeclare package Medium = MediumAir,
-    mWat_flow_nominal=-0.0001,
     m_flow_nominal=5.1,
-    dp_nominal=0)
+    dp_nominal=0,
+    mWat_flow_nominal=-0.012806)
     "dehumidifier to imitate the effect of the absorber module"
     annotation (Placement(transformation(extent={{-14,16},{-34,36}})));
   Fluid.HeatExchangers.ConstantEffectiveness HeatingCoil(redeclare package
@@ -89,10 +80,9 @@ model MenergaSimple "A first simple model of the Menerga SorpSolair"
     annotation (Placement(transformation(extent={{-400,10},{-420,30}})));
   Fluid.MassExchangers.Humidifier_u steamHumidifier(
     redeclare package Medium = MediumAir,
-    dp_nominal=50,
     m_flow_nominal=5.1,
-    mWat_flow_nominal=0.001)
-                            "steam Humdifier outside of Menerga"
+    mWat_flow_nominal=0.001,
+    dp_nominal=0)           "steam Humdifier outside of Menerga"
     annotation (Placement(transformation(extent={{-512,16},{-532,36}})));
   Fluid.Sources.Boundary_pT WaterInletCoil(
   redeclare package Medium = MediumWater,
@@ -106,12 +96,6 @@ model MenergaSimple "A first simple model of the Menerga SorpSolair"
     T=313.15)
     "Water Outlet for the Water Circle at the heating coil"
     annotation (Placement(transformation(extent={{-360,-40},{-380,-20}})));
-  Modelica.Blocks.Sources.Constant InletFlow_mflow1(k=1)
-    "nominal mass flow in steamHumidifier"
-    annotation (Placement(transformation(extent={{-534,76},{-514,96}})));
-  Modelica.Blocks.Sources.Constant InletFlow_mflow2(k=1)
-    "water mass flow in absorber"
-    annotation (Placement(transformation(extent={{-48,80},{-28,100}})));
   Fluid.Sensors.TemperatureTwoPort senTemReg(
   redeclare package Medium = MediumAir, m_flow_nominal=1)
     "Temperature of Outside Air in Regeneration Vent"
@@ -160,12 +144,12 @@ model MenergaSimple "A first simple model of the Menerga SorpSolair"
     m2_flow_nominal=5.1,
     dp1_nominal=0,
     dp2_nominal=0)  "Adiabatic Recuperator between exhaust and supply air"
-    annotation (Placement(transformation(extent={{-450,256},{-430,276}})));
+    annotation (Placement(transformation(extent={{-412,250},{-392,270}})));
   Fluid.MassExchangers.Humidifier_u Desorber(
     redeclare package Medium = MediumAir,
     m_flow_nominal=1,
-    mWat_flow_nominal=0.0001,
-    dp_nominal=0)
+    dp_nominal=0,
+    mWat_flow_nominal=0.01522)
     "humidifier to imitate the effect of the desorber module"
     annotation (Placement(transformation(extent={{102,294},{82,314}})));
   Fluid.Sensors.TemperatureTwoPort senTemExi(redeclare package Medium =
@@ -215,43 +199,37 @@ end TwoWayEqualPercentageAdd;
     l=0.001,
     m_flow_nominal=5.1,
     A=3.6,
-    dpValve_nominal=50,
+    dpValve_nominal=10,
     dpAdd=1) "damper at entry to supply air stream"
              annotation (Placement(transformation(extent={{224,16},{204,36}})));
-  Modelica.Blocks.Sources.Constant valOpeningY05(k=1) "opening of damper Y05"
-    annotation (Placement(transformation(extent={{160,72},{180,92}})));
   Modelica.Blocks.Sources.BooleanConstant booleanConstant(final k=false)
     "Only valRecupTop has conditional Kv value"
-    annotation (Placement(transformation(extent={{202,82},{212,92}})));
+    annotation (Placement(transformation(extent={{200,66},{210,76}})));
   TwoWayEqualPercentageAdd Y07(
     redeclare package Medium = MediumAir,
     l=0.001,
     m_flow_nominal=1,
-    dpValve_nominal=20,
     A=1,
+    dpValve_nominal=10,
     dpAdd=1) "damper at entry of regeneration air" annotation (Placement(
         transformation(
-        extent={{10,10},{-10,-10}},
+        extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={314,178})));
-  Modelica.Blocks.Sources.Constant valOpeningY07(k=1) "opening of damper Y07"
-    annotation (Placement(transformation(extent={{228,172},{248,192}})));
   TwoWayEqualPercentageAdd Y06(
     redeclare package Medium = MediumAir,
     l=0.001,
     m_flow_nominal=5.1,
     A=3.6,
-    dpValve_nominal=50,
+    dpValve_nominal=10,
     dpAdd=1) "damper at bypass of absorber"
     annotation (Placement(transformation(extent={{-8,-66},{-28,-46}})));
-  Modelica.Blocks.Sources.Constant valOpeningY06(k=1) "opening of damper Y06"
-    annotation (Placement(transformation(extent={{-82,-44},{-62,-24}})));
   TwoWayEqualPercentageAdd Y08(
     redeclare package Medium = MediumAir,
     l=0.001,
     m_flow_nominal=5.1,
     A=3.6,
-    dpValve_nominal=50,
+    dpValve_nominal=10,
     dpAdd=1) "damper at exit of regeneration air"
     annotation (Placement(transformation(extent={{-16,294},{-36,314}})));
   TwoWayEqualPercentageAdd Y04(
@@ -259,15 +237,15 @@ end TwoWayEqualPercentageAdd;
     l=0.001,
     m_flow_nominal=5.1,
     A=3.6,
-    dpValve_nominal=50,
+    dpValve_nominal=10,
     dpAdd=1) "damper at exit of exhaust air side"
-    annotation (Placement(transformation(extent={{-180,294},{-160,314}})));
+    annotation (Placement(transformation(extent={{-200,294},{-180,314}})));
   TwoWayEqualPercentageAdd Y03(
     redeclare package Medium = MediumAir,
     l=0.001,
     m_flow_nominal=5.1,
     A=3.6,
-    dpValve_nominal=50,
+    dpValve_nominal=10,
     dpAdd=1) "damper at bypass of recuperator on exhaust air side"
     annotation (Placement(transformation(extent={{-450,294},{-430,314}})));
   TwoWayEqualPercentageAdd Y02(
@@ -275,7 +253,7 @@ end TwoWayEqualPercentageAdd;
     l=0.001,
     m_flow_nominal=5.1,
     A=3.6,
-    dpValve_nominal=50,
+    dpValve_nominal=10,
     dpAdd=1) "damper at bypass of recuperator"
     annotation (Placement(transformation(extent={{-360,16},{-380,36}})));
   TwoWayEqualPercentageAdd Y01(
@@ -283,24 +261,16 @@ end TwoWayEqualPercentageAdd;
     l=0.001,
     m_flow_nominal=5.1,
     A=3.6,
-    dpValve_nominal=50,
+    dpValve_nominal=10,
     dpAdd=1) "damper at entry of recuperator of supply air side" annotation (
       Placement(transformation(
-        extent={{10,-10},{-10,10}},
+        extent={{10,10},{-10,-10}},
         rotation=-90,
         origin={-372,70})));
-  Modelica.Blocks.Sources.Constant valOpeningY08(k=1) "opening of damper Y08"
-    annotation (Placement(transformation(extent={{-58,328},{-38,348}})));
   Modelica.Blocks.Sources.BooleanConstant booleanConstant1(
                                                           final k=false)
     "Only valRecupTop has conditional Kv value"
-    annotation (Placement(transformation(extent={{-108,268},{-98,278}})));
-  Modelica.Blocks.Sources.Constant valOpeningY03(k=0) "opening of damper Y03"
-    annotation (Placement(transformation(extent={{-478,332},{-458,352}})));
-  Modelica.Blocks.Sources.Constant valOpeningY02(k=0) "opening of Y02"
-    annotation (Placement(transformation(extent={{-434,46},{-414,66}})));
-  Modelica.Blocks.Sources.Constant valOpeningY01(k=1) "opening of Y01"
-    annotation (Placement(transformation(extent={{-318,80},{-338,100}})));
+    annotation (Placement(transformation(extent={{-110,348},{-100,358}})));
   Modelica.Blocks.Sources.BooleanConstant booleanConstant2(
                                                           final k=false)
     "Only valRecupTop has conditional Kv value"
@@ -309,8 +279,6 @@ end TwoWayEqualPercentageAdd;
                                                           final k=false)
     "Only valRecupTop has conditional Kv value"
     annotation (Placement(transformation(extent={{-326,52},{-336,62}})));
-  Modelica.Blocks.Sources.Constant valOpeningY04(k=1) "opening of damper Y04"
-    annotation (Placement(transformation(extent={{-194,330},{-174,350}})));
   Fluid.FixedResistances.PressureDrop resSupAir(
     redeclare package Medium = MediumAir,
     m_flow_nominal=5.1,
@@ -323,7 +291,7 @@ end TwoWayEqualPercentageAdd;
         transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
-        origin={-108,314})));
+        origin={-128,314})));
   Fluid.FixedResistances.PressureDrop resExhAir(
     redeclare package Medium = MediumAir,
     m_flow_nominal=5.1,
@@ -348,13 +316,20 @@ end TwoWayEqualPercentageAdd;
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={332,26})));
+  BaseClasses.BusController busController
+    annotation (Placement(transformation(extent={{-212,344},{-172,384}})));
+  Modelica.Blocks.Sources.BooleanConstant booleanConstant4(
+                                                          final k=false)
+    "Only valRecupTop has conditional Kv value"
+    annotation (Placement(transformation(extent={{-44,-34},{-34,-24}})));
+  Fluid.MassExchangers.Humidifier_u evaporator(
+    redeclare package Medium = MediumAir,
+    dp_nominal=0,
+    m_flow_nominal=5.1,
+    mWat_flow_nominal=0.02)
+    "humidifier to imitate the effect of the evaporation in the recuperator"
+    annotation (Placement(transformation(extent={{-454,256},{-434,276}})));
 equation
-  connect(InletFlow_mflow.y, outsideAirFan.m_flow_in) annotation (Line(points={{
-          51,90},{51,90},{86.2,90},{86.2,38}}, color={0,0,127}));
-  connect(RegenAir_mflow.y, regenerationAirFan.m_flow_in) annotation (Line(
-        points={{117,338},{178.2,338},{178.2,316}}, color={0,0,127}));
-  connect(exhaust_mflow.y, exhaustAirFan.m_flow_in) annotation (Line(points={{-405,
-          348},{-360.2,348},{-360.2,316}}, color={0,0,127}));
   connect(outsideAirFan.port_b, Absorber.port_a)
     annotation (Line(points={{76,26},{32,26},{-14,26}}, color={0,127,255}));
   connect(WaterInletCoil.ports[1], HeatingCoil.port_a2) annotation (Line(points={{-440,
@@ -362,10 +337,6 @@ equation
   connect(HeatingCoil.port_b2, WaterOutletCoil.ports[1]) annotation (Line(
         points={{-400,14},{-400,-30},{-380,-30}},                    color={0,127,
           255}));
-  connect(InletFlow_mflow1.y, steamHumidifier.u)
-    annotation (Line(points={{-513,86},{-510,86},{-510,32}}, color={0,0,127}));
-  connect(InletFlow_mflow2.y, Absorber.u) annotation (Line(points={{-27,90},{
-          -12,90},{-12,32}},               color={0,0,127}));
   connect(HeatingCoil.port_b1, senTemHea.port_a)
     annotation (Line(points={{-420,26},{-434,26}}, color={0,127,255}));
   connect(exhaustAir, senTemExh.port_a)
@@ -392,81 +363,61 @@ equation
           26},{-624,26}}, color={0,127,255}));
   connect(Absorber.port_b, senMasFloSup.port_a)
     annotation (Line(points={{-34,26},{-172,26}},          color={0,127,255}));
-  connect(senMasFloExh.port_b, recuperator.port_a1)
-    annotation (Line(points={{-472,304},{-458,304},{-458,272},{-450,272}},
-                                                     color={0,127,255}));
-  connect(recuperator.port_b1, exhaustAirFan.port_a) annotation (Line(points={{-430,
-          272},{-430,304},{-370,304}},      color={0,127,255}));
-  connect(recuperator.port_b2, HeatingCoil.port_a1) annotation (Line(points={{-450,
-          260},{-450,246},{-400,246},{-400,26}},      color={0,127,255}));
+  connect(recuperator.port_b1, exhaustAirFan.port_a) annotation (Line(points={{-392,
+          266},{-392,304},{-370,304}},      color={0,127,255}));
+  connect(recuperator.port_b2, HeatingCoil.port_a1) annotation (Line(points={{-412,
+          254},{-412,246},{-400,246},{-400,26}},      color={0,127,255}));
   connect(Y05.port_b, outsideAirFan.port_a)
     annotation (Line(points={{204,26},{150,26},{96,26}}, color={0,127,255}));
-  connect(valOpeningY05.y, Y05.y) annotation (Line(points={{181,82},{194,82},{
-          194,76},{214,76},{214,38}}, color={0,0,127}));
-  connect(booleanConstant.y,Y05. addPreDro) annotation (Line(points={{212.5,87},
-          {218,87},{218,36.6}}, color={255,0,255}));
-  connect(InletFlow_mflow2.y, Desorber.u) annotation (Line(points={{-27,90},{0,
-          90},{0,310},{104,310}}, color={0,0,127}));
+  connect(booleanConstant.y,Y05. addPreDro) annotation (Line(points={{210.5,71},
+          {218,71},{218,36.6}}, color={255,0,255}));
   connect(Y07.port_b, senTemReg.port_a) annotation (Line(points={{314,188},{314,
           188},{314,304},{300,304}}, color={0,127,255}));
-  connect(Y07.y, valOpeningY07.y) annotation (Line(points={{302,178},{256,178},
-          {256,182},{249,182}}, color={0,0,127}));
-  connect(booleanConstant.y, Y07.addPreDro) annotation (Line(points={{212.5,87},
-          {263.25,87},{263.25,174},{303.4,174}}, color={255,0,255}));
+  connect(booleanConstant.y, Y07.addPreDro) annotation (Line(points={{210.5,71},
+          {326,71},{326,150},{326,174},{324.6,174}},
+                                                 color={255,0,255}));
   connect(outsideAirFan.port_b, Y06.port_a) annotation (Line(points={{76,26},{
           32,26},{32,-56},{-8,-56}}, color={0,127,255}));
   connect(Y06.port_b, senMasFloSup.port_a) annotation (Line(points={{-28,-56},{
           -110,-56},{-110,26},{-172,26}}, color={0,127,255}));
-  connect(valOpeningY06.y, Y06.y) annotation (Line(points={{-61,-34},{-40,-34},
-          {-40,-44},{-18,-44}}, color={0,0,127}));
-  connect(Y06.addPreDro, booleanConstant.y) annotation (Line(points={{-14,-45.4},
-          {240,-45.4},{240,87},{212.5,87}}, color={255,0,255}));
   connect(Desorber.port_b, Y08.port_a)
     annotation (Line(points={{82,304},{34,304},{-16,304}}, color={0,127,255}));
-  connect(Y08.y, valOpeningY08.y) annotation (Line(points={{-26,316},{-32,316},
-          {-32,338},{-37,338}}, color={0,0,127}));
-  connect(booleanConstant1.y, Y08.addPreDro) annotation (Line(points={{-97.5,
-          273},{-20.75,273},{-20.75,314.6},{-22,314.6}}, color={255,0,255}));
+  connect(booleanConstant1.y, Y08.addPreDro) annotation (Line(points={{-99.5,
+          353},{-20.75,353},{-20.75,314.6},{-22,314.6}}, color={255,0,255}));
   connect(senTemExi.port_b, Y04.port_a)
-    annotation (Line(points={{-212,304},{-180,304}}, color={0,127,255}));
-  connect(Y04.addPreDro, booleanConstant1.y) annotation (Line(points={{-174,
-          314.6},{-154,314.6},{-154,273},{-97.5,273}}, color={255,0,255}));
+    annotation (Line(points={{-212,304},{-198,304},{-200,304}},
+                                                     color={0,127,255}));
+  connect(Y04.addPreDro, booleanConstant1.y) annotation (Line(points={{-194,
+          314.6},{-160,314.6},{-160,353},{-99.5,353}}, color={255,0,255}));
   connect(senMasFloExh.port_b, Y03.port_a) annotation (Line(points={{-472,304},
           {-462,304},{-450,304}}, color={0,127,255}));
   connect(Y03.port_b, exhaustAirFan.port_a) annotation (Line(points={{-430,304},
           {-402,304},{-370,304}}, color={0,127,255}));
-  connect(valOpeningY03.y, Y03.y) annotation (Line(points={{-457,342},{-440,342},
-          {-440,316}}, color={0,0,127}));
   connect(senTemAbs.port_b, Y02.port_a)
     annotation (Line(points={{-316,26},{-360,26}}, color={0,127,255}));
   connect(Y02.port_b, HeatingCoil.port_a1) annotation (Line(points={{-380,26},{
           -380,26},{-400,26}}, color={0,127,255}));
-  connect(recuperator.port_a2, Y01.port_b) annotation (Line(points={{-430,260},
-          {-372,260},{-372,80}}, color={0,127,255}));
+  connect(recuperator.port_a2, Y01.port_b) annotation (Line(points={{-392,254},
+          {-372,254},{-372,80}}, color={0,127,255}));
   connect(senTemAbs.port_b, Y01.port_a) annotation (Line(points={{-316,26},{
           -350,26},{-350,60},{-372,60}}, color={0,127,255}));
-  connect(valOpeningY02.y, Y02.y) annotation (Line(points={{-413,56},{-392,56},
-          {-392,38},{-370,38}}, color={0,0,127}));
-  connect(Y01.y, valOpeningY01.y) annotation (Line(points={{-360,70},{-342,70},
-          {-342,90},{-339,90}}, color={0,0,127}));
   connect(Y03.addPreDro, booleanConstant2.y) annotation (Line(points={{-444,
           314.6},{-470,314.6},{-470,325},{-485.5,325}}, color={255,0,255}));
   connect(booleanConstant3.y, Y01.addPreDro) annotation (Line(points={{-336.5,
-          57},{-343.25,57},{-343.25,66},{-361.4,66}}, color={255,0,255}));
+          57},{-384,57},{-384,58},{-384,66},{-382.6,66}},
+                                                      color={255,0,255}));
   connect(booleanConstant3.y, Y02.addPreDro) annotation (Line(points={{-336.5,
           57},{-345.25,57},{-345.25,36.6},{-366,36.6}}, color={255,0,255}));
-  connect(Y04.y, valOpeningY04.y) annotation (Line(points={{-170,316},{-162,316},
-          {-162,340},{-173,340}}, color={0,0,127}));
   connect(senMasFloSup.port_b, resSupAir.port_a)
     annotation (Line(points={{-192,26},{-244,26}}, color={0,127,255}));
   connect(resSupAir.port_b, senTemAbs.port_a) annotation (Line(points={{-264,26},
           {-280,26},{-296,26}}, color={0,127,255}));
-  connect(Y08.port_b, resExiAir.port_a) annotation (Line(points={{-36,304},{-70,
-          304},{-108,304}}, color={0,127,255}));
-  connect(Y04.port_b, resExiAir.port_a) annotation (Line(points={{-160,304},{
-          -160,304},{-108,304}}, color={0,127,255}));
-  connect(resExiAir.port_b, ExitAir) annotation (Line(points={{-108,324},{-118,
-          324},{-118,338},{-128,338}}, color={0,127,255}));
+  connect(Y08.port_b, resExiAir.port_a) annotation (Line(points={{-36,304},{
+          -128,304}},       color={0,127,255}));
+  connect(Y04.port_b, resExiAir.port_a) annotation (Line(points={{-180,304},{
+          -180,304},{-128,304}}, color={0,127,255}));
+  connect(resExiAir.port_b, ExitAir) annotation (Line(points={{-128,324},{-128,
+          324},{-128,338}},            color={0,127,255}));
   connect(exhaustAirFan.port_b, resExhAir.port_a) annotation (Line(points={{
           -350,304},{-324,304},{-304,304}}, color={0,127,255}));
   connect(resExhAir.port_b, senTemExi.port_a) annotation (Line(points={{-284,
@@ -481,6 +432,96 @@ equation
     annotation (Line(points={{322,26},{322,26},{224,26}}, color={0,127,255}));
   connect(resOutAir.port_b, Y07.port_a)
     annotation (Line(points={{322,26},{314,26},{314,168}}, color={0,127,255}));
+  connect(Y03.y, busController.openingY03) annotation (Line(points={{-440,316},
+          {-358,316},{-358,364.1},{-191.9,364.1}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(exhaustAirFan.m_flow_in, busController.exhaustFan) annotation (Line(
+        points={{-360.2,316},{-358.1,316},{-358.1,364.1},{-191.9,364.1}}, color
+        ={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(Y04.y, busController.openingY04) annotation (Line(points={{-190,316},
+          {-178,316},{-178,364.1},{-191.9,364.1}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(Y08.y, busController.openingY08) annotation (Line(points={{-26,316},{
+          -26,316},{-26,364.1},{-191.9,364.1}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(regenerationAirFan.m_flow_in, busController.regenerationFan)
+    annotation (Line(points={{178.2,316},{178,316},{178,364.1},{-191.9,364.1}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(Y06.y, busController.openingY06) annotation (Line(points={{-18,-44},{
+          -20,-44},{-20,-106},{364,-106},{364,364.1},{-191.9,364.1}}, color={0,
+          0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(Y02.y, busController.openingY02) annotation (Line(points={{-370,38},{
+          -372,38},{-372,50},{-646,50},{-646,364.1},{-191.9,364.1}}, color={0,0,
+          127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(steamHumidifier.u, busController.mWatSteamHumid) annotation (Line(
+        points={{-510,32},{-510,50},{-646,50},{-646,364.1},{-191.9,364.1}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(Y01.y, busController.openingY01) annotation (Line(points={{-384,70},{
+          -402,70},{-426,70},{-426,50},{-646,50},{-646,364.1},{-191.9,364.1}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(Y05.y, busController.openingY05) annotation (Line(points={{214,38},{
+          214,54},{364,54},{364,364.1},{-191.9,364.1}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(Y07.y, busController.openingY07) annotation (Line(points={{326,178},{
+          364,178},{364,364.1},{-191.9,364.1}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(outsideAirFan.m_flow_in, busController.outsideFan) annotation (Line(
+        points={{86.2,38},{86.2,54},{364,54},{364,364.1},{-191.9,364.1}}, color
+        ={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(Absorber.u, busController.mWatAbsorber) annotation (Line(points={{-12,
+          32},{-12,32},{-12,52},{-12,54},{364,54},{364,364.1},{-191.9,364.1}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(Desorber.u, busController.mWatDesorber) annotation (Line(points={{104,
+          310},{104,310},{104,364.1},{-191.9,364.1}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(Y06.addPreDro, booleanConstant4.y) annotation (Line(points={{-14,
+          -45.4},{-24,-45.4},{-24,-29},{-33.5,-29}}, color={255,0,255}));
+  connect(senMasFloExh.port_b, evaporator.port_a) annotation (Line(points={{
+          -472,304},{-464,304},{-464,266},{-454,266}}, color={0,127,255}));
+  connect(evaporator.port_b, recuperator.port_a1) annotation (Line(points={{
+          -434,266},{-434,266},{-412,266}}, color={0,127,255}));
+  connect(evaporator.u, busController.mWatEvaporator) annotation (Line(points={
+          {-456,272},{-456,270},{-646,270},{-646,364.1},{-191.9,364.1}}, color=
+          {0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-640,-100},
             {360,360}})),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-640,-100},{360,360}})));
