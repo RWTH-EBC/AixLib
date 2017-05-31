@@ -1,7 +1,6 @@
 within AixLib.FastHVAC;
-package Media
+package Media 
   extends Modelica.Icons.Package;
-
 
 
 annotation (preferredView="info", Documentation(info="<html>

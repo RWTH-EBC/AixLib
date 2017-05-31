@@ -5,16 +5,23 @@ model CylindricHeatConduction_fouling
   parameter Modelica.SIunits.Length d_out=0.02 "outer diameter of pipe";
   parameter Modelica.SIunits.Length length=1 " Length of pipe";
   parameter Integer nParallel = 1 "Number of identical parallel pipes";
-  parameter Modelica.SIunits.ThermalConductivity lambda_film=1.06 "Heat conductivity of the biofilm";
-  parameter Modelica.SIunits.Velocity v_bio_grow = 3.617E-09 "Growing velocity of biofilm in m/s";
-  parameter Modelica.SIunits.Velocity v_bio_clean = 8.3E-06 "Cleaning velocity of biofilm in m/s";
-  parameter Modelica.SIunits.Length s_biofilm_max = 0.005 "Thikness of biofilm, when cleaning will be started";
-  parameter Modelica.SIunits.Length s_biofilm_min = 0.0005 "Thikness of biofilm, when cleaning will be started";
-  parameter Modelica.SIunits.Length s_biofilm_0 = 0.0001 "Thikness of biofilm at simulation start";
+  parameter Modelica.SIunits.ThermalConductivity lambda_film=1.06
+    "Heat conductivity of the biofilm";
+  parameter Modelica.SIunits.Velocity v_bio_grow = 3.617E-09
+    "Growing velocity of biofilm in m/s";
+  parameter Modelica.SIunits.Velocity v_bio_clean = 8.3E-06
+    "Cleaning velocity of biofilm in m/s";
+  parameter Modelica.SIunits.Length s_biofilm_max = 0.005
+    "Thikness of biofilm, when cleaning will be started";
+  parameter Modelica.SIunits.Length s_biofilm_min = 0.0005
+    "Thikness of biofilm, when cleaning will be started";
+  parameter Modelica.SIunits.Length s_biofilm_0 = 0.0001
+    "Thikness of biofilm at simulation start";
 
   Boolean isclean;
-  Modelica.SIunits.Length s_biofilm(start=s_biofilm_0,fixed=true) "thikness of biofilm";
-  Modelica.SIunits.Length d_out_biofilm "Thikness of biofilm, when cleaning will be started";
+ // Modelica.SIunits.Length s_biofilm
+  Modelica.SIunits.Length d_out_biofilm
+    "Thikness of biofilm, when cleaning will be started";
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a
     annotation (Placement(transformation(extent={{-10,-6},{10,14}},
@@ -23,6 +30,9 @@ model CylindricHeatConduction_fouling
     annotation (Placement(transformation(extent={{-10,78},{10,98}},
           rotation=0)));
 
+  Modelica.Blocks.Interfaces.RealOutput s_biofilm( start=s_biofilm_0,fixed=true)
+    "thickness of biofilm"
+    annotation (Placement(transformation(extent={{82,-8},{102,12}})));
 initial equation
   pre(isclean)=false;
 

@@ -11,7 +11,8 @@ public
       FastHVAC.Media.WaterSimple()
     "Mediums charastics (heat capacity, density, thermal conductivity)"
     annotation(Dialog(group="Medium"),choicesAllMatching);
-
+  parameter Modelica.SIunits.Temperature abc=323.15
+    "Start temperature of medium" annotation(Dialog(tab="Initialisation"));
     parameter FastHVAC.Media.BaseClasses.MediumSimple mediumHC1=
       FastHVAC.Media.WaterSimple()
     "Mediums charastics for HC1 (heat capacity, density, thermal conductivity)"
@@ -42,7 +43,7 @@ public
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_out=15
     "Coefficient at the outer wall";
   inner parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
-      AixLib.DataBase.Storage.Generic_500l() "Storage data"
+      AixLib.DataBase.Storage.Wastewater_500l() "Storage data"
     annotation (choicesAllMatching);
   parameter Integer[n_load_cycles, 2] load_cycles= {{n,1},{n,1}}
     "Loading cycle connection pairs (upper position first)"
@@ -66,15 +67,18 @@ public
     "Heating Coil 1 orientation from up to down?"
                                                  annotation(Dialog(enable = use_heatingCoil1,tab="Heating Coils and Rod"));
 
-  parameter Modelica.SIunits.ThermalConductivity lambda_film=1.06 "Heat conductivity of the biofilm";
-  parameter Modelica.SIunits.Velocity v_bio_grow = 3.617E-09 "Growing velocity of biofilm in m/s";
-  parameter Modelica.SIunits.Velocity v_bio_clean = 8.3E-06 "Cleaning velocity of biofilm in m/s";
-  parameter Modelica.SIunits.Length s_biofilm_max = 0.005 "Thikness of biofilm, when cleaning will be started";
-  parameter Modelica.SIunits.Length s_biofilm_min = 0.0005 "Thikness of biofilm, when cleaning will be started";
-  parameter Modelica.SIunits.Length s_biofilm_0 = 0.0001 "Thikness of biofilm at simulation start";
-
-
-
+  parameter Modelica.SIunits.ThermalConductivity lambda_film=1.06
+    "Heat conductivity of the biofilm";
+  parameter Modelica.SIunits.Velocity v_bio_grow = 3.617E-09
+    "Growing velocity of biofilm in m/s";
+  parameter Modelica.SIunits.Velocity v_bio_clean = 8.3E-06
+    "Cleaning velocity of biofilm in m/s";
+  parameter Modelica.SIunits.Length s_biofilm_max = 0.005
+    "Thikness of biofilm, when cleaning will be started";
+  parameter Modelica.SIunits.Length s_biofilm_min = 0.0005
+    "Thikness of biofilm, when cleaning will be started";
+  parameter Modelica.SIunits.Length s_biofilm_0 = 0.0001
+    "Thikness of biofilm at simulation start";
 
   /* *******************************************************************
       Final Parameters
@@ -215,6 +219,8 @@ Heat transfer model for heat transfer between two fluid layers.
 </html>
 "));
 
+  Modelica.Blocks.Interfaces.RealOutput s_biofilm
+    annotation (Placement(transformation(extent={{94,68},{114,88}})));
 equation
   der(Heat_loss) = out.Q_flow/(1000*3600);
 
@@ -332,6 +338,8 @@ connect(heatTransfer.therm, layer.port);
       points={{-78,50.8},{-78,40},{-100,40}},
       color={176,0,0},
       smooth=Smooth.None));
+  connect(heatingCoil1.s_biofilm, s_biofilm) annotation (Line(points={{-71.4,49.2},
+          {-71.4,44},{-54,44},{-54,84},{104,84},{104,78}}, color={0,0,127}));
  annotation (Placement(transformation(extent={{-110,-90},{-90,-70}}),
         iconTransformation(extent={{-90,-66},{-76,-52}})),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,

@@ -16,12 +16,18 @@ model HeatingCoilFouling
  parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition pipe_HC=
       AixLib.DataBase.Pipes.Copper.Copper_28x1() "Type of Pipe for HR1";
 
-  parameter Modelica.SIunits.ThermalConductivity lambda_film=1.06 "Heat conductivity of the biofilm";
-  parameter Modelica.SIunits.Velocity v_bio_grow = 3.617E-09 "Growing velocity of biofilm in m/s";
-  parameter Modelica.SIunits.Velocity v_bio_clean = 8.3E-06 "Cleaning velocity of biofilm in m/s";
-  parameter Modelica.SIunits.Length s_biofilm_max = 0.005 "Thikness of biofilm, when cleaning will be started";
-  parameter Modelica.SIunits.Length s_biofilm_min = 0.0005 "Thikness of biofilm, when cleaning will be started";
-  parameter Modelica.SIunits.Length s_biofilm_0 = 0.0001 "Thikness of biofilm at simulation start";
+  parameter Modelica.SIunits.ThermalConductivity lambda_film=1.06
+    "Heat conductivity of the biofilm";
+  parameter Modelica.SIunits.Velocity v_bio_grow = 3.617E-09
+    "Growing velocity of biofilm in m/s";
+  parameter Modelica.SIunits.Velocity v_bio_clean = 8.3E-06
+    "Cleaning velocity of biofilm in m/s";
+  parameter Modelica.SIunits.Length s_biofilm_max = 0.005
+    "Thikness of biofilm, when cleaning will be started";
+  parameter Modelica.SIunits.Length s_biofilm_min = 0.0005
+    "Thikness of biofilm, when cleaning will be started";
+  parameter Modelica.SIunits.Length s_biofilm_0 = 0.0001
+    "Thikness of biofilm at simulation start";
 
   FastHVAC.Components.Pipes.BaseClasses.PipeBase pipeHC(
     medium=medium_HC,
@@ -76,10 +82,13 @@ model HeatingCoilFouling
     lambda=fill(pipe_HC.lambda, dis_HC),
     T0=fill(T_start_HC, dis_HC))
     annotation (Placement(transformation(extent={{-14,34},{6,54}})));
+  Modelica.Blocks.Interfaces.RealOutput s_biofilm
+    annotation (Placement(transformation(extent={{98,56},{118,76}})));
 equation
 
     for i in 1:dis_HC loop
       connect(m_flow.dotm, conv_HC1_Inside[i].m_flow);
+      //connect(cylindricHeatConduction_fouling[i].s_biofilm, s_biofilm);
     end for;
   connect(conv_HC1_Outside.port_a, Therm1) annotation (Line(
       points={{-4,92},{-4,104}},
@@ -101,6 +110,8 @@ equation
     annotation (Line(points={{-4,80},{-4,76.8}}, color={191,0,0}));
   connect(cylindricHeatTransfer.port_b, cylindricHeatConduction_fouling.port_a)
     annotation (Line(points={{-4,52.8},{-4,52.8},{-4,68.4}}, color={191,0,0}));
+  connect(cylindricHeatConduction_fouling[1].s_biofilm, s_biofilm) annotation (
+      Line(points={{5.2,68.2},{53.6,68.2},{53.6,66},{108,66}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),  Icon(graphics={
         Line(

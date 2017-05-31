@@ -3,7 +3,7 @@ model WasteWaterHeatPump
   extends Modelica.Icons.Example;
   Components.HeatGenerators.HeatPump.HeatPump heatPump
     annotation (Placement(transformation(extent={{-36,-44},{-66,-24}})));
-  Components.Pumps.FluidSource WasteWater_in(medium=
+  Components.Pipes.Pumps.FluidSource WasteWater_in(medium=
         AixLib.FastHVAC.Media.WaterSimple()) annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
@@ -42,7 +42,7 @@ model WasteWaterHeatPump
         extent={{-12,-7},{12,7}},
         rotation=0,
         origin={103,-12})));
-  Components.Pumps.FluidSource          fluidSource1(medium=
+  Components.Pipes.Pumps.FluidSource fluidSource1(medium=
         AixLib.FastHVAC.Media.WaterSimple())
     annotation (Placement(transformation(extent={{90,-94},{78,-82}})));
   Modelica.Blocks.Sources.Constant T_unload(k=273.15 + 10)
@@ -53,9 +53,10 @@ model WasteWaterHeatPump
     annotation (Placement(transformation(extent={{-68,-10},{-88,10}})));
   Modelica.Blocks.Sources.Constant dotm_water_evap(k=0.003)
     annotation (Placement(transformation(extent={{2,-6},{14,6}})));
-  Components.Pumps.FluidSource          fluidSource3(medium=
-        AixLib.FastHVAC.Media.WaterSimple())
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+  Components.Pipes.Pumps.FluidSource fluidSource3(medium=
+        AixLib.FastHVAC.Media.WaterSimple()) annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-76,-58})));
   Components.Sinks.Vessel          vessel3
@@ -69,7 +70,7 @@ model WasteWaterHeatPump
     annotation (Placement(transformation(extent={{-40,-96},{-60,-76}})));
   Components.Sensors.TemperatureSensor T_return_water_evap
     annotation (Placement(transformation(extent={{-26,-60},{-6,-40}})));
-  Components.Pumps.Pump evap_pump
+  Components.Pipes.Pumps.Pump evap_pump
     annotation (Placement(transformation(extent={{16,-30},{36,-10}})));
   Components.Sensors.TemperatureSensor temperature annotation (Placement(
         transformation(
@@ -100,6 +101,9 @@ model WasteWaterHeatPump
         origin={35,-92})));
   Modelica.Blocks.Sources.BooleanPulse booleanPulse(period=1000, width=20)
     annotation (Placement(transformation(extent={{-52,-14},{-32,6}})));
+  Components.Storage.BaseClasses.WasteWaterStorageControl
+    wasteWaterStorageControl
+    annotation (Placement(transformation(extent={{-72,56},{-38,90}})));
 equation
   connect(fluidSource1.enthalpyPort_b, wasteWaterStorage.UnloadingCycle_In[1])
     annotation (Line(points={{78,-87.4},{77.6,-87.4},{77.6,-66}},
@@ -161,7 +165,7 @@ equation
      Line(points={{29,54},{8,54},{8,38},{-14.1,38},{-14.1,40.8}}, color={176,0,
           0}));
   connect(temperature.enthalpyPort_b, threeWayValve.enthalpyPort_ab)
-    annotation (Line(points={{-14.1,23},{-14.1,16},{20,16},{20,24},{62,24},{62,
+    annotation (Line(points={{-14.1,23},{-14.1,18},{8,18},{8,26},{62,26},{62,
           17.8}}, color={176,0,0}));
   connect(threeWayValve.enthalpyPort_a, wasteWaterStorage.LoadingCycle_In[1])
     annotation (Line(points={{62,-2},{62,-18},{68.4,-18}}, color={176,0,0}));
