@@ -953,7 +953,7 @@ equation
 <h4><span style=\"color: #008000\">Overview</span></h4>
 <ul>
 <li>This model is a broker agent which collects requests from room-agent and buys heat for the lowest price from producer agents.</li>
-<li>It is based on communication via UDP and logic implemented with the help of the StateGraph Modelica library./li&GT; </li>
+<li>It is based on communication via UDP and logic implemented with the help of the StateGraph Modelica library.</li>
 <li>It is used together with at least one room or consumer agent and at least one producer agent.</li>
 </ul>
 <h4><span style=\"color: #008000\">Concept</span></h4>
@@ -967,7 +967,7 @@ equation
 </ul>
 <h4><span style=\"color: #008000\">Example Results</span></h4>
 <ul>
-<li><a href=\"HVACAgentBasedControl.Examples.SimpleHeatingSystem.BuildingHeating\">Simple Heating System</a></li>
+<li><a href=\"HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating\">Simple Heating System</a></li>
 </ul>
 </html>",
       revisions="<html>

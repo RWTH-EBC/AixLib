@@ -227,11 +227,11 @@ equation
   connect(thermalConductor1.port_b, thermalZone1.intGainsConv) annotation (Line(
         points={{32,34},{54,34},{54,64.5},{48,64.5}}, color={191,0,0}));
   connect(thermalZone1.intGainsRad, thermalZone1.intGainsConv) annotation (Line(
-        points={{48,69.7},{52,69.7},{52,70},{54,70},{54,64.5},{48,64.5}}, color
-        ={191,0,0}));
+        points={{48,69.7},{52,69.7},{52,70},{54,70},{54,64.5},{48,64.5}}, color=
+         {191,0,0}));
   connect(thermalZone.ventTemp, infiltrationTemperature.y) annotation (Line(
-        points={{-61.69,65.93},{-91.845,65.93},{-91.845,69},{-123.3,69}}, color
-        ={0,0,127}));
+        points={{-61.69,65.93},{-91.845,65.93},{-91.845,69},{-123.3,69}}, color=
+         {0,0,127}));
   connect(thermalZone1.ventTemp, infiltrationTemperature.y) annotation (Line(
         points={{20.31,65.93},{-24,65.93},{-24,86},{-72,86},{-72,69},{-100,69},
           {-123.3,69}}, color={0,0,127}));
@@ -252,9 +252,9 @@ equation
       thickness=0.5));
   connect(weaDat.weaBus, thermalZone1.weaBus) annotation (Line(
       points={{-102,102},{-76,102},{-48,102},{-48,92},{-16,92},{-16,71},{22,71}},
-
       color={255,204,51},
       thickness=0.5));
+
   connect(thermalZone.TAir, roomAgent.T) annotation (Line(points={{-32.7,78.8},
           {-20,78.8},{-20,144},{-52,144},{-52,138}}, color={0,0,127}));
   connect(thermalZone1.TAir, roomAgent1.T) annotation (Line(points={{49.3,78.8},

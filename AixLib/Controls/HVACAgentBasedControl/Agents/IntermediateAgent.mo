@@ -661,12 +661,12 @@ equation
     Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
 <ul>
-<li>This model is an intermediate agent which represents devices to connect thermal circuits (heat exchnager, mixing valve).</li>
+<li>This model is an intermediate agent which represents devices to connect thermal circuits (heat exchanger, mixing valve).</li>
 <li>It is based on communication via UDP and logic implemented with the help of the StateGraph Modelica library.</li>
 <li>It is used together with a broker-agent and at least one producer-agent.</li>
 </ul>
 <h4><span style=\"color: #008000\">Concept</span></h4>
-<p>The intermediate agent acts as a producer in front of one broker (bottom) and consumer in front of another broker (top). When it gets a call for proposal from the bottom broker, it passes it on to the top broker as an request. This broker handels the request and responds with a price information. The intermediate agent adds its own costs and passes it on as a proposal to the bottom broker. The proposal gets either rejected or accepted. This is passed on a a confirm/reject to the top broker. The intermediate agent also adjusts it capacity according to the requested adjustment. The logic is implemented with the help of the StateGraph library. Communication is realized with the help of the DeviceDriver library and follows the language standards for multi-agent-systems set by the FIPA to the highest possible extend for Modelica models. The following figure shows the behaviour of the roomagent. For further information please refer to the first reference.</p>
+<p>The intermediate agent acts as a producer in front of one broker (bottom) and consumer in front of another broker (top). When it gets a call for proposal from the bottom broker, it passes it on to the top broker as an request. This broker handels the request and responds with a price information. The intermediate agent adds its own costs and passes it on as a proposal to the bottom broker. The proposal gets either rejected or accepted. This is passed on a confirm/reject to the top broker. The intermediate agent also adjusts it capacity according to the requested adjustment. The logic is implemented with the help of the StateGraph library. Communication is realized with the help of the DeviceDriver library and follows the language standards for multi-agent-systems set by the FIPA to the highest possible extend for Modelica models. The following figure shows the behaviour of the roomagent. For further information please refer to the first reference.</p>
 <p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/IntermediateAgent.png\"/></p>
 <h4><span style=\"color: #008000\">References</span></h4>
 <ul>

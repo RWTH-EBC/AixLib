@@ -646,7 +646,7 @@ equation
 </ul>
 <h4><span style=\"color: #008000\">Example Results</span></h4>
 <ul>
-<li><a href=\"HVACAgentBasedControl.Examples.SimpleHeatingSystem.BuildingHeating\">Simple Heating System</a></li>
+<li><a href=\"HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating\">Simple Heating System</a></li>
 </ul>
 </html>",
       revisions="<html>
