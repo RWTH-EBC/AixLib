@@ -1,15 +1,16 @@
 within AixLib.Fluid.FixedResistances;
 model DPEAgg_ambientLoss
-  "Discretized DynamicPipeEBC1 with heat loss to ambient"
+  "Discretized DynamicPipe with heat loss to ambient"
 
 
   import Modelica.Fluid.Types.ModelStructure;
 
   outer Modelica.Fluid.System system "System wide properties";
 
+
    // Parameters Tab "General"
     replaceable package Medium =
-      Modelica.Media.Water.ConstantPropertyLiquidWater                           constrainedby
+      Modelica.Media.Water.ConstantPropertyLiquidWater constrainedby
     Modelica.Media.Interfaces.PartialMedium "Medium in the component"
       annotation (choicesAllMatching = true);
 
@@ -18,8 +19,8 @@ model DPEAgg_ambientLoss
                                            annotation(Dialog(group = "Geometry"));
    parameter Boolean isCircular = true
     "=true if cross sectional area is circular"                                    annotation(Dialog(group = "Geometry"));
-   parameter Modelica.SIunits.Diameter diameter=parameterPipe.d_i "Diameter of circular pipe"
-                                                              annotation(Dialog,   enable = isCircular);
+   parameter Modelica.SIunits.Diameter diameter=parameterPipe.d_i
+   "Diameter of circular pipe"                                annotation(Dialog,   enable = isCircular);
    parameter Modelica.SIunits.Area crossArea=Modelica.Constants.pi*
       diameter*diameter/4 "Inner cross section area"                                                  annotation(Dialog(group = "Geometry"));
    parameter Modelica.SIunits.Length perimeter=Modelica.Constants.pi*
@@ -37,6 +38,7 @@ model DPEAgg_ambientLoss
     "Wall friction, gravity, momentum flow"
       annotation(Dialog(group="Pressure loss"), choicesAllMatching=true);
 
+
     // Parameter Tab "Assumptions"
     parameter Boolean allowFlowReversal = system.allowFlowReversal
     "= true to allow flow reversal, false restricts to design direction (port_a -> port_b)"
@@ -49,8 +51,9 @@ model DPEAgg_ambientLoss
     parameter Modelica.Fluid.Types.Dynamics momentumDynamics = system.momentumDynamics
     "Formulation of momentum balances"                                                                     annotation(Dialog(tab="Assumptions", group = "Dynamics"));
 
-    //Parameter Tab "HeatTransfer"
 
+
+    //Parameter Tab "HeatTransfer"
     parameter Boolean Heat_Loss_To_Ambient = false
     "= true to internally simulate heat loss to ambient by convection and radiation"                    annotation(Dialog(tab="Heat transfer"));
     parameter Boolean isEmbedded = false
@@ -77,8 +80,7 @@ model DPEAgg_ambientLoss
                  AixLib.DataBase.Pipes.Isolation.Iso0pc() "Isolation Type"
           annotation (choicesAllMatching=true, Dialog(tab="Heat transfer"));
 
-
-          parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha=8
+    parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha=8
     "Heat transfer coefficient to ambient"                      annotation (Dialog(tab="Heat transfer", enable = Heat_Loss_To_Ambient));
     Utilities.HeatTransfer.CylindricHeatTransfer                       PipeWall[nNodes](
     rho=fill(parameterPipe.d, nNodes),
@@ -143,6 +145,8 @@ model DPEAgg_ambientLoss
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-114,-46},{-94,-26}}),
         iconTransformation(extent={{-114,-10},{-94,10}})));
+
+
     // Parameter Tab "Initialisation"
    parameter Medium.AbsolutePressure p_a_start=system.p_start
     "Start value of pressure at port a"
@@ -175,6 +179,8 @@ model DPEAgg_ambientLoss
   parameter Medium.MassFlowRate m_flow_start = system.m_flow_start
     "Start value for mass flow rate"
        annotation(Evaluate=true, Dialog(tab = "Initialization"));
+
+
 
     // Parameter Tab "Advanced"
     parameter Integer nNodes(min=2)=2 "Number of discrete flow volumes"
@@ -268,7 +274,7 @@ equation
   connect(heatPorts, thermalCollector.port_a);
   connect(heatPort_outside, thermalCollector.port_b);
 
-        //Connect pipe wall or insulation to the outside
+        //Connect pipe wall or insulation to the outside.
 
         if (isEmbedded and Heat_Loss_To_Ambient and not withInsulation) then
         connect(PipeWall.port_b,heatPorts);
@@ -343,15 +349,13 @@ equation
           fillColor={0,0,0},
           textString="%nNodes")}),
     Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>Dynamic Pipe with pipe wall and insulation wall which allows discretisation of pipe wall and pipe insulation.This model considers heat loss through radiation and convection. It is useful when pipe is not embedded in wall.</p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars3.png\"/> </p>
-<h4><span style=\"color:#008000\">Concept</span></h4>
+<h4><span style=\"color: #008000\">Overview</span></h4>
+<p>Dynamic Pipe with pipe wall and insulation wall which allows discretisation of pipe wall and pipe insulation. This model considers heat loss through radiation and convection if pipe is not embedded in wall. In case that the pipe is embedded in the wall, heat transfer between the pipe wall / insulation and the surrounding material is based on heat conduction.</p>
+<h4><span style=\"color: #008000\">Concept</span></h4>
 <p>Developed by using the <a href=\"HVAC.Components.Pipes.DynamicPipeEBCAggregated\">DynamicPipeEBCAggregated</a> model from the EBC HVAC library. The model already includes heat-transfer by convection and by radiation. Instead of modeling these phenomena outside the pipe, an ambient temperature can be prescribed at the heat-port and the star of the pipe, so the loss to ambient will be calculated within the pipe model. The purpose is to clean up bigger models and to simplify modeling systems with pipes outside building-walls. </p>
 <p>Differently from <a href=\"HVAC.Components.Pipes.DPE_ambientLoss\">DPE_ambientLoss</a> for each discretisation of the pipe, there is a connector to the corresponding element of the discretized pipe wall. Each element of the discretised pipe wall is connected to a corresponding element of the discretized insulation wall. The heat-ports and stars of all nodes are then collected to form two single ports, which can be connected to an ambient temperature. </p>
 <p>It is possible to choose no insulation, if used for example for CCA ( concrete core activation). </p>
-<h4><span style=\"color:#008000\">Example Results</span></h4>
+<h4><span style=\"color: #008000\">Example Results</span></h4>
 <p><a href=\"HVAC.Examples.Pipes.DPEAgg_ambientLoss\">HVAC.Examples.Pipes.DPEAgg_ambientLoss</a></p>
 </html>",
         revisions="<html>
