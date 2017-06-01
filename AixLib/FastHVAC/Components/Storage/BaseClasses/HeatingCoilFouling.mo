@@ -84,11 +84,13 @@ model HeatingCoilFouling
     annotation (Placement(transformation(extent={{-14,34},{6,54}})));
   Modelica.Blocks.Interfaces.RealOutput s_biofilm
     annotation (Placement(transformation(extent={{98,56},{118,76}})));
+  Modelica.Blocks.Interfaces.BooleanInput biofilm_removing
+    annotation (Placement(transformation(extent={{-124,46},{-84,86}})));
 equation
 
     for i in 1:dis_HC loop
       connect(m_flow.dotm, conv_HC1_Inside[i].m_flow);
-      //connect(cylindricHeatConduction_fouling[i].s_biofilm, s_biofilm);
+      connect(biofilm_removing,cylindricHeatConduction_fouling[i].biofilm_removing);
     end for;
   connect(conv_HC1_Outside.port_a, Therm1) annotation (Line(
       points={{-4,92},{-4,104}},

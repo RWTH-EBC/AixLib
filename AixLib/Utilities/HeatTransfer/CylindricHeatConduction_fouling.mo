@@ -18,8 +18,6 @@ model CylindricHeatConduction_fouling
   parameter Modelica.SIunits.Length s_biofilm_0 = 0.0001
     "Thikness of biofilm at simulation start";
 
-  Boolean isclean;
- // Modelica.SIunits.Length s_biofilm
   Modelica.SIunits.Length d_out_biofilm
     "Thikness of biofilm, when cleaning will be started";
 
@@ -33,18 +31,14 @@ model CylindricHeatConduction_fouling
   Modelica.Blocks.Interfaces.RealOutput s_biofilm( start=s_biofilm_0,fixed=true)
     "thickness of biofilm"
     annotation (Placement(transformation(extent={{82,-8},{102,12}})));
+  Modelica.Blocks.Interfaces.BooleanInput biofilm_removing
+    annotation (Placement(transformation(extent={{-128,-18},{-88,22}})));
 initial equation
-  pre(isclean)=false;
+  pre(biofilm_removing)=false;
 
 equation
 
-  if s_biofilm>=s_biofilm_min and s_biofilm<s_biofilm_max and pre(isclean)==false or s_biofilm<s_biofilm_min then
-    isclean=false;
-  else
-    isclean=true;
-  end if;
-
-  if isclean then
+  if biofilm_removing then
     der(s_biofilm)=-v_bio_clean;
   else
     der(s_biofilm)=v_bio_grow;

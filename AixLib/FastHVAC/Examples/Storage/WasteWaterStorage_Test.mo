@@ -21,7 +21,7 @@ model WasteWaterStorage_Test
     T_start_wall=293.15,
     T_start_ins=293.15)
     annotation (Placement(transformation(extent={{-8,-40},{46,20}})));
-  Components.Pipes.Pumps.FluidSource fluidSource
+  Components.Pumps.FluidSource fluidSource
     annotation (Placement(transformation(extent={{-42,54},{-22,74}})));
   Modelica.Blocks.Sources.Constant tLoad1(k=273.15 + 20)
     annotation (Placement(transformation(extent={{-102,76},{-82,96}})));
@@ -39,12 +39,12 @@ model WasteWaterStorage_Test
         extent={{-12,-7},{12,7}},
         rotation=270,
         origin={-19,-82})));
-  Components.Pipes.Pumps.FluidSource fluidSource2 annotation (Placement(
+  Components.Pumps.FluidSource fluidSource2 annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={28,-62})));
-  Components.Pipes.Pumps.FluidSource fluidSource4
+  Components.Pumps.FluidSource fluidSource4
     annotation (Placement(transformation(extent={{-70,8},{-50,28}})));
   Modelica.Blocks.Sources.Constant T_HC1(k=273.15 + 10)
     annotation (Placement(transformation(extent={{-100,14},{-80,34}})));

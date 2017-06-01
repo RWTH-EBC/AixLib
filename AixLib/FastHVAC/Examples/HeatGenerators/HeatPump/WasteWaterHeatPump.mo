@@ -3,7 +3,7 @@ model WasteWaterHeatPump
   extends Modelica.Icons.Example;
   Components.HeatGenerators.HeatPump.HeatPump heatPump
     annotation (Placement(transformation(extent={{-36,-44},{-66,-24}})));
-  Components.Pipes.Pumps.FluidSource WasteWater_in(medium=
+  Components.Pumps.FluidSource WasteWater_in(medium=
         AixLib.FastHVAC.Media.WaterSimple()) annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
@@ -42,7 +42,7 @@ model WasteWaterHeatPump
         extent={{-12,-7},{12,7}},
         rotation=0,
         origin={103,-12})));
-  Components.Pipes.Pumps.FluidSource fluidSource1(medium=
+  Components.Pumps.FluidSource fluidSource1(medium=
         AixLib.FastHVAC.Media.WaterSimple())
     annotation (Placement(transformation(extent={{90,-94},{78,-82}})));
   Modelica.Blocks.Sources.Constant T_unload(k=273.15 + 10)
@@ -53,7 +53,7 @@ model WasteWaterHeatPump
     annotation (Placement(transformation(extent={{-68,-10},{-88,10}})));
   Modelica.Blocks.Sources.Constant dotm_water_evap(k=0.003)
     annotation (Placement(transformation(extent={{2,-6},{14,6}})));
-  Components.Pipes.Pumps.FluidSource fluidSource3(medium=
+  Components.Pumps.FluidSource fluidSource3(medium=
         AixLib.FastHVAC.Media.WaterSimple()) annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
@@ -70,7 +70,7 @@ model WasteWaterHeatPump
     annotation (Placement(transformation(extent={{-40,-96},{-60,-76}})));
   Components.Sensors.TemperatureSensor T_return_water_evap
     annotation (Placement(transformation(extent={{-26,-60},{-6,-40}})));
-  Components.Pipes.Pumps.Pump evap_pump
+  Components.Pumps.Pump evap_pump
     annotation (Placement(transformation(extent={{16,-30},{36,-10}})));
   Components.Sensors.TemperatureSensor temperature annotation (Placement(
         transformation(

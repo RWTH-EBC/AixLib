@@ -221,6 +221,11 @@ Heat transfer model for heat transfer between two fluid layers.
 
   Modelica.Blocks.Interfaces.RealOutput s_biofilm
     annotation (Placement(transformation(extent={{94,68},{114,88}})));
+  Modelica.Blocks.Interfaces.BooleanInput biofilm_removing annotation (
+      Placement(transformation(
+        extent={{-14,-11},{14,11}},
+        rotation=-90,
+        origin={63,106})));
 equation
   der(Heat_loss) = out.Q_flow/(1000*3600);
 
@@ -340,10 +345,12 @@ connect(heatTransfer.therm, layer.port);
       smooth=Smooth.None));
   connect(heatingCoil1.s_biofilm, s_biofilm) annotation (Line(points={{-71.4,49.2},
           {-71.4,44},{-54,44},{-54,84},{104,84},{104,78}}, color={0,0,127}));
+  connect(biofilm_removing, heatingCoil1.biofilm_removing) annotation (Line(
+        points={{63,106},{63,86},{-71.4,86},{-71.4,70.4}}, color={255,0,255}));
  annotation (Placement(transformation(extent={{-110,-90},{-90,-70}}),
         iconTransformation(extent={{-90,-66},{-76,-52}})),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}})),
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
+            100,100}})),
     experiment(StopTime=3.1536e+007, Interval=600),
     __Dymola_experimentSetupOutput(events=false),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
