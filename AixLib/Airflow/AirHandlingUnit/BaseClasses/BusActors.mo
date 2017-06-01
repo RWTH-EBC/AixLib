@@ -1,6 +1,6 @@
 within AixLib.Airflow.AirHandlingUnit.BaseClasses;
-expandable connector BusController
-  "Bus Connector between the physical model and the controller"
+expandable connector BusActors
+  "Bus Connector for actors between the physical model and the controller"
   extends Modelica.Icons.SignalBus;
   import SI = Modelica.SIunits;
 
@@ -25,15 +25,10 @@ expandable connector BusController
   Real regenerationFan "real input m_flow for regenerationAirFan in kg/s";
   Real exhaustFan "real input m_flow for exhaustAirFan in kg/s";
 
-
   Real mWatSteamHumid( min=0, max=1) "input for steam humidifier between 0 and 1";
   Real mWatAbsorber( min=0, max=1) "input for dehumidification in absorber";
   Real mWatDesorber( min=0, max=1) "input for humidification in desorber";
   Real mWatEvaporator( min=0, max=1) "input for the humidifier to 
                           imitate the evaporation at the recuperator";
 
-
-
-
-
-end BusController;
+end BusActors;

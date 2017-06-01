@@ -14,14 +14,14 @@ model TestMenergaSimple
     X={0.02,0.98},
     p=100000,
     T=294.15) "Sink for supply air"
-    annotation (Placement(transformation(extent={{-98,-34},{-78,-14}})));
+    annotation (Placement(transformation(extent={{-100,-38},{-80,-18}})));
   Fluid.Sources.Boundary_pT outsideAir(
     redeclare package Medium = MediumAir,
     X={0.01,0.99},
     nPorts=1,
     p=100000,
     T=283.15) "Source for outside air"
-    annotation (Placement(transformation(extent={{102,-34},{82,-14}})));
+    annotation (Placement(transformation(extent={{100,-24},{80,-4}})));
   MenergaSimple menergaSimple
     annotation (Placement(transformation(extent={{-48,-36},{52,10}})));
   Fluid.Sources.Boundary_pT exhaustAir(
@@ -30,7 +30,7 @@ model TestMenergaSimple
     X={0.03,0.97},
     p=100000,
     T=296.15) "Source for exhaust air"
-    annotation (Placement(transformation(extent={{-92,-6},{-72,14}})));
+    annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
   Fluid.Sources.Boundary_pT exitAir(
     redeclare package Medium = MediumAir,
     nPorts=1,
@@ -39,24 +39,28 @@ model TestMenergaSimple
     T=283.15) "Sink für exit air" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
-        origin={70,88})));
+        origin={0,40})));
   BaseClasses.Controllers.MenergaController menergaController
-    annotation (Placement(transformation(extent={{-24,60},{-4,80}})));
+    annotation (Placement(transformation(extent={{-10,70},{10,90}})));
 equation
-  connect(outsideAir.ports[1], menergaSimple.externalAir) annotation (Line(
-        points={{82,-24},{51.4,-24},{51.4,-23.4}},
-                                                color={0,127,255}));
-  connect(supplyAir.ports[1], menergaSimple.SupplyAir) annotation (Line(points={{-78,-24},
-          {-78,-23.4},{-46.4,-23.4}},                           color={0,127,
+  connect(outsideAir.ports[1], menergaSimple.outsideAir) annotation (Line(
+        points={{80,-14},{51,-14},{51,-14.2}}, color={0,127,255}));
+  connect(supplyAir.ports[1],menergaSimple.supplyAir)  annotation (Line(points={{-80,-28},
+          {-80,-27.6},{-46.8,-27.6}},                           color={0,127,
           255}));
   connect(exhaustAir.ports[1], menergaSimple.exhaustAir) annotation (Line(
-        points={{-72,4},{-46.4,4.4}},                                color={0,
+        points={{-80,0},{-47,-0.2}},                                 color={0,
           127,255}));
-  connect(exitAir.ports[1], menergaSimple.ExitAir) annotation (Line(points={{70,78},
-          {70,7.8},{3.2,7.8}},                                color={0,127,255}));
-  connect(menergaController.busController, menergaSimple.busController)
-    annotation (Line(
-      points={{-4.2,70.2},{-4.2,40.1},{-3.2,40.1},{-3.2,10.4}},
+  connect(exitAir.ports[1], menergaSimple.ExitAir) annotation (Line(points={{
+          -1.77636e-015,30},{-1.77636e-015,8.2},{0.4,8.2}},   color={0,127,255}));
+  connect(menergaController.busActors, menergaSimple.busActors) annotation (
+      Line(
+      points={{10,76.4},{29.8,76.4},{29.8,12},{21.2,12},{21.2,10}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(menergaSimple.busSensors, menergaController.busSensors) annotation (
+      Line(
+      points={{-16.2,10},{-16.2,12},{-28,12},{-28,76.6},{-10,76.6}},
       color={255,204,51},
       thickness=0.5));
   annotation (experiment(StopTime=1800, Interval=10));
