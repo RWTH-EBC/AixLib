@@ -42,6 +42,18 @@ model TestMenergaSimple
         origin={0,40})));
   BaseClasses.Controllers.MenergaController menergaController
     annotation (Placement(transformation(extent={{-10,70},{10,90}})));
+  Modelica.Fluid.Sources.Boundary_pT boundary(
+    nPorts=1,
+    redeclare package Medium = MediumWater,
+    T=318.15) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={-40,-72})));
+  Modelica.Fluid.Sources.Boundary_pT boundary1(nPorts=1, redeclare package
+      Medium = MediumWater) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={0,-72})));
 equation
   connect(outsideAir.ports[1], menergaSimple.outsideAir) annotation (Line(
         points={{80,-14},{51,-14},{51,-14.2}}, color={0,127,255}));
@@ -63,5 +75,9 @@ equation
       points={{-16.2,10},{-16.2,12},{-28,12},{-28,76.6},{-10,76.6}},
       color={255,204,51},
       thickness=0.5));
+  connect(boundary.ports[1], menergaSimple.port_a) annotation (Line(points={{
+          -40,-62},{-34,-62},{-34,-36},{-26,-36}}, color={0,127,255}));
+  connect(boundary1.ports[1], menergaSimple.port_b) annotation (Line(points={{
+          6.66134e-016,-62},{-8,-62},{-8,-36},{-23.8,-36}}, color={0,127,255}));
   annotation (experiment(StopTime=1800, Interval=10));
 end TestMenergaSimple;

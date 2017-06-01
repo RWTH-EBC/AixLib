@@ -8,7 +8,7 @@ model evaporationHeatModel
   Modelica.Blocks.Interfaces.RealInput u
     annotation (Placement(transformation(extent={{-124,-20},{-84,20}})));
 equation
-  port_a.Q_flow=2000;
+  port_a.Q_flow=u*2453700;
 
 
 

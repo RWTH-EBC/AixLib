@@ -6,7 +6,13 @@ model MenergaSimple "A first simple model of the Menerga SorpSolair"
   replaceable package MediumWater = AixLib.Media.Water;
   import SI = Modelica.SIunits;
 
-    parameter SI.MassFlowRate mWat_evap_nominal( min=0, max=0.03) = 0.02 "mass flow of water in evaporisation";
+  parameter SI.MassFlowRate mWat_evap_nominal( min=0, max=0.03) = 0.02
+                 "mass flow of water in evaporisation in kg/s";
+  parameter SI.MassFlowRate mWat_mflow_nominal( min=0, max=1) = 0.2
+                 "nominal mass flow of water in kg/s";
+  parameter SI.MassFlowRate mWat_mflow_small(  min=0, max=1) = mWat_mflow_nominal / 10000
+                 "leakage mass flow of water";
+
     //parameter Modelica.SIunits.MassFlowRate mFlowNomOut=0.5
     //"Nominal mass flow rate OutgoingAir";
     //parameter Modelica.SIunits.MassFlowRate mFlowNomIn=0.5
@@ -90,17 +96,6 @@ model MenergaSimple "A first simple model of the Menerga SorpSolair"
     mWat_flow_nominal=0.001,
     dp_nominal=0)           "steam Humdifier outside of Menerga"
     annotation (Placement(transformation(extent={{-520,16},{-540,36}})));
-  Fluid.Sources.Boundary_pT WaterInletCoil(
-  redeclare package Medium = MediumWater,
-    nPorts=1,
-    T=313.15)
-    "Water Source for the Water circle in the heating Coil"
-    annotation (Placement(transformation(extent={{-460,-40},{-440,-20}})));
-  Fluid.Sources.Boundary_pT WaterOutletCoil(
-  redeclare package Medium = MediumWater, nPorts=1,
-    T=313.15)
-    "Water Outlet for the Water Circle at the heating coil"
-    annotation (Placement(transformation(extent={{-360,-40},{-380,-20}})));
   Fluid.Sensors.TemperatureTwoPort T04_senTemOut(redeclare package Medium =
         MediumAir, m_flow_nominal=1)
     "Temperature of Outside Air in Regeneration Vent"
@@ -359,14 +354,34 @@ end TwoWayEqualPercentageAdd;
   Modelica.Blocks.Math.Gain mWat_gain(k=mWat_evap_nominal)
     "calculates the mass flow of evaporated water"
     annotation (Placement(transformation(extent={{-524,244},{-504,264}})));
+  Fluid.Movers.Pump pump(redeclare package Medium = MediumWater,
+      MinMaxCharacteristics=DataBase.Pumps.Pump1(),
+    m_flow_small=mWat_mflow_small)                  annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={-420,-20})));
+  Modelica.Blocks.Sources.BooleanConstant isNight(final k=false)
+    "boolean to activate the night modus for the pump"
+    annotation (Placement(transformation(extent={{-462,-24},{-452,-14}})));
+  Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
+        MediumWater)
+    annotation (Placement(transformation(extent={{-430,-110},{-410,-90}})));
+  Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
+        MediumWater)
+    annotation (Placement(transformation(extent={{-408,-110},{-388,-90}})));
+  Modelica.Blocks.Sources.Constant valOpeningY03(k=1) "opening of damper Y03"
+    annotation (Placement(transformation(extent={{-472,-64},{-452,-44}})));
+  Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear val(
+    redeclare package Medium = MediumWater,
+    m_flow_nominal=1,
+    dpValve_nominal=500) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={-420,-54})));
 equation
   connect(outsideAirFan.port_b, Absorber.port_a)
     annotation (Line(points={{76,26},{32,26},{-14,26}}, color={0,127,255}));
-  connect(WaterInletCoil.ports[1], HeatingCoil.port_a2) annotation (Line(points={{-440,
-          -30},{-420,-30},{-420,14}},                             color={0,127,255}));
-  connect(HeatingCoil.port_b2, WaterOutletCoil.ports[1]) annotation (Line(
-        points={{-400,14},{-400,-30},{-380,-30}},                    color={0,127,
-          255}));
   connect(HeatingCoil.port_b1, T03_senTemHea.port_a)
     annotation (Line(points={{-420,26},{-434,26}}, color={0,127,255}));
   connect(exhaustAir, T02_senTemExh.port_a) annotation (Line(points={{-630,258},
@@ -613,10 +628,24 @@ equation
           350,118}}, color={0,127,255}));
   connect(evaporationHeatModel.port_a, evaporator.heatPort) annotation (Line(
         points={{-472.2,254},{-468,254},{-468,260},{-454,260}}, color={191,0,0}));
-  connect(evaporator.u, mWat_gain.u) annotation (Line(points={{-456,272},{-512,
-          272},{-526,272},{-526,254}}, color={0,0,127}));
+  connect(evaporator.u, mWat_gain.u) annotation (Line(points={{-456,272},{-512,272},
+          {-526,272},{-526,254}}, color={0,0,127}));
   connect(mWat_gain.y, evaporationHeatModel.u) annotation (Line(points={{-503,
-          254},{-518,254},{-492.4,254}}, color={0,0,127}));
+          254},{-492.4,254}},       color={0,0,127}));
+  connect(pump.port_b, HeatingCoil.port_a2) annotation (Line(points={{-420,-10},
+          {-420,14}},                    color={0,127,255}));
+  connect(isNight.y,pump. IsNight) annotation (Line(points={{-451.5,-19},{
+          -430.2,-20}},                     color={255,0,255}));
+  connect(HeatingCoil.port_b2, port_b) annotation (Line(points={{-400,14},{-400,
+          14},{-400,-100},{-398,-100}}, color={0,127,255}));
+  connect(port_a, val.port_1) annotation (Line(points={{-420,-100},{-420,-82},{
+          -420,-64}}, color={0,127,255}));
+  connect(val.port_2, pump.port_a) annotation (Line(points={{-420,-44},{-420,
+          -37},{-420,-30}}, color={0,127,255}));
+  connect(HeatingCoil.port_b2, val.port_3) annotation (Line(points={{-400,14},{
+          -400,14},{-400,-54},{-410,-54}}, color={0,127,255}));
+  connect(valOpeningY03.y, val.y) annotation (Line(points={{-451,-54},{-440,-54},
+          {-432,-54}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-640,-100},
             {360,360}}), graphics={Rectangle(
           extent={{-638,358},{360,-100}},

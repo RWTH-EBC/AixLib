@@ -223,7 +223,7 @@ model")}),                                                         Diagram(
       Modelica.Blocks.Sources.Constant InletFlow_mflow2(k=0.1)
         "water mass flow in absorber"
         annotation (Placement(transformation(extent={{-220,-160},{-200,-140}})));
-      Modelica.Blocks.Sources.Constant InletFlow_mflow3(k=0.1)
+      Modelica.Blocks.Sources.Constant InletFlow_mflow3(k=0.2)
         "water mass flow in absorber"
         annotation (Placement(transformation(extent={{-220,-224},{-200,-204}})));
       Modelica.Blocks.Sources.Constant InletFlow_mflowDes(k=0.1)
@@ -235,18 +235,12 @@ model")}),                                                         Diagram(
         "opening for damper Y02"
         annotation (Placement(transformation(extent={{-222,182},{-202,202}})));
       Modelica.Blocks.Sources.Constant T01_Set(k=293.15) "Setpoint of T01"
-        annotation (Placement(transformation(extent={{-306,182},{-286,202}})));
+        annotation (Placement(transformation(extent={{-306,176},{-286,196}})));
       Modelica.Blocks.Sources.Constant constOne(k=1)
-        annotation (Placement(transformation(extent={{-334,188},{-314,208}})));
+        annotation (Placement(transformation(extent={{-340,194},{-320,214}})));
       Modelica.Blocks.Math.Add add(k2=-1)
-        annotation (Placement(transformation(extent={{-182,182},{-162,202}})));
+        annotation (Placement(transformation(extent={{-136,188},{-116,208}})));
     equation
-      connect(valOpeningY01.y, busActors.openingY01) annotation (Line(points={{
-              -201,224},{-68,224},{-68,-69.64},{101.375,-69.64}}, color={0,0,
-              127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
       connect(valOpeningY03.y, busActors.openingY03) annotation (Line(points={{
               -201,160},{-68,160},{-68,-69.64},{101.375,-69.64}}, color={0,0,
               127}), Text(
@@ -326,20 +320,26 @@ model")}),                                                         Diagram(
           index=1,
           extent={{6,3},{6,3}}));
       connect(valOpeningY02.u_m, busSensors.T01) annotation (Line(points={{-212,
-              180},{-272,180},{-272,172},{-342,172},{-342,-63.61},{-388.575,
+              180},{-272,180},{-272,166},{-342,166},{-342,-63.61},{-388.575,
               -63.61}}, color={0,0,127}), Text(
           string="%second",
           index=1,
           extent={{6,3},{6,3}}));
-      connect(T01_Set.y, valOpeningY02.u_s)
-        annotation (Line(points={{-285,192},{-224,192}}, color={0,0,127}));
-      connect(constOne.y, add.u1) annotation (Line(points={{-313,198},{-218,198},
-              {-184,198}}, color={0,0,127}));
-      connect(valOpeningY02.y, add.u2) annotation (Line(points={{-201,192},{
-              -192,192},{-192,186},{-184,186}}, color={0,0,127}));
-      connect(add.y, busActors.openingY02) annotation (Line(points={{-161,192},
-              {-114,192},{-68,192},{-68,-69.64},{101.375,-69.64}}, color={0,0,
+      connect(T01_Set.y, valOpeningY02.u_s) annotation (Line(points={{-285,186},
+              {-254,186},{-254,192},{-224,192}}, color={0,0,127}));
+      connect(constOne.y, add.u1) annotation (Line(points={{-319,204},{-250,204},
+              {-138,204}}, color={0,0,127}));
+      connect(valOpeningY02.y, add.u2)
+        annotation (Line(points={{-201,192},{-138,192}}, color={0,0,127}));
+      connect(add.y, busActors.openingY02) annotation (Line(points={{-115,198},
+              {-115,198},{-68,198},{-68,-69.64},{101.375,-69.64}}, color={0,0,
               127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(valOpeningY02.y, busActors.openingY01) annotation (Line(points={{
+              -201,192},{-150,192},{-150,218},{-68,218},{-68,-69.64},{101.375,
+              -69.64}}, color={0,0,127}), Text(
           string="%second",
           index=1,
           extent={{6,3},{6,3}}));
