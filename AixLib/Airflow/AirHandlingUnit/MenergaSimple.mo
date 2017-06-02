@@ -6,7 +6,7 @@ model MenergaSimple "A first simple model of the Menerga SorpSolair"
   replaceable package MediumWater = AixLib.Media.Water;
   import SI = Modelica.SIunits;
 
-  parameter SI.MassFlowRate mWat_evap_nominal( min=0, max=0.03) = 0.02
+  parameter SI.MassFlowRate mWat_evap_nominal( min=0, max=2.77) = 0.05
                  "mass flow of water in evaporisation in kg/s";
   parameter SI.MassFlowRate mWat_mflow_nominal( min=0, max=1) = 0.2
                  "nominal mass flow of water in kg/s";
@@ -78,10 +78,10 @@ model MenergaSimple "A first simple model of the Menerga SorpSolair"
   Fluid.MassExchangers.Humidifier_u Absorber(
     redeclare package Medium = MediumAir,
     m_flow_nominal=5.1,
-    dp_nominal=0,
-    mWat_flow_nominal=-0.012806)
+    mWat_flow_nominal=-0.012806,
+    dp_nominal=300)
     "dehumidifier to imitate the effect of the absorber module"
-    annotation (Placement(transformation(extent={{-14,16},{-34,36}})));
+    annotation (Placement(transformation(extent={{-86,16},{-106,36}})));
   Fluid.HeatExchangers.ConstantEffectiveness HeatingCoil(redeclare package
       Medium1=MediumAir, redeclare package Medium2 = MediumWater,
     m1_flow_nominal=5.1,
@@ -107,12 +107,6 @@ model MenergaSimple "A first simple model of the Menerga SorpSolair"
   redeclare package Medium = MediumAir, m_flow_nominal=5.1)
     "Temperature of supply air before heating coil"
     annotation (Placement(transformation(extent={{-296,16},{-316,36}})));
-  Fluid.Sensors.MassFlowRate senMasFloExh(
-  redeclare package Medium = MediumAir) "Mass Flow of moist Exhaust Air"
-    annotation (Placement(transformation(extent={{-492,294},{-472,314}})));
-  Fluid.Sensors.MassFlowRate senMasFloSup(
-  redeclare package Medium = MediumAir) "Mass Flow in Supply Air"
-    annotation (Placement(transformation(extent={{-172,16},{-192,36}})));
   Fluid.Sensors.TemperatureTwoPort T03_senTemHea(redeclare package Medium =
         MediumAir, m_flow_nominal=5.1)
     "Temperature of supply air after heating coil"
@@ -138,8 +132,9 @@ model MenergaSimple "A first simple model of the Menerga SorpSolair"
     redeclare package Medium2 = MediumAir,
     m1_flow_nominal=5.1,
     m2_flow_nominal=5.1,
-    dp1_nominal=0,
-    dp2_nominal=0)  "Adiabatic Recuperator between exhaust and supply air"
+    dp2_nominal=132,
+    dp1_nominal=127)
+                    "Adiabatic Recuperator between exhaust and supply air"
     annotation (Placement(transformation(extent={{-412,250},{-392,270}})));
   Fluid.MassExchangers.Humidifier_u Desorber(
     redeclare package Medium = MediumAir,
@@ -242,6 +237,7 @@ end TwoWayEqualPercentageAdd;
     m_flow_nominal=5.1,
     A=3.6,
     dpValve_nominal=10,
+    y_start=0,
     dpAdd=1) "damper at bypass of recuperator on exhaust air side"
     annotation (Placement(transformation(extent={{-450,294},{-430,314}})));
   TwoWayEqualPercentageAdd Y02(
@@ -250,6 +246,7 @@ end TwoWayEqualPercentageAdd;
     m_flow_nominal=5.1,
     A=3.6,
     dpValve_nominal=10,
+    y_start=0,
     dpAdd=1) "damper at bypass of recuperator"
     annotation (Placement(transformation(extent={{-360,16},{-380,36}})));
   TwoWayEqualPercentageAdd Y01(
@@ -278,7 +275,7 @@ end TwoWayEqualPercentageAdd;
   Fluid.FixedResistances.PressureDrop resSupAir(
     redeclare package Medium = MediumAir,
     m_flow_nominal=5.1,
-    dp_nominal=1157) "combined pressure loss of supply air side"
+    dp_nominal=725)  "combined pressure loss of supply air side"
     annotation (Placement(transformation(extent={{-244,16},{-264,36}})));
   Fluid.FixedResistances.PressureDrop resExiAir(
     redeclare package Medium = MediumAir,
@@ -291,7 +288,7 @@ end TwoWayEqualPercentageAdd;
   Fluid.FixedResistances.PressureDrop resExhAir(
     redeclare package Medium = MediumAir,
     m_flow_nominal=5.1,
-    dp_nominal=570) "combined pressure loss of exhaust air " annotation (
+    dp_nominal=443) "combined pressure loss of exhaust air " annotation (
       Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=180,
@@ -356,7 +353,9 @@ end TwoWayEqualPercentageAdd;
     annotation (Placement(transformation(extent={{-524,244},{-504,264}})));
   Fluid.Movers.Pump pump(redeclare package Medium = MediumWater,
       MinMaxCharacteristics=DataBase.Pumps.Pump1(),
-    m_flow_small=mWat_mflow_small)                  annotation (Placement(
+    m_flow_small=mWat_mflow_small,
+    Head(start=0.4),
+    ControlStrategy=1)                              annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
@@ -364,32 +363,29 @@ end TwoWayEqualPercentageAdd;
   Modelica.Blocks.Sources.BooleanConstant isNight(final k=false)
     "boolean to activate the night modus for the pump"
     annotation (Placement(transformation(extent={{-462,-24},{-452,-14}})));
-  Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
-        MediumWater)
+  Modelica.Fluid.Interfaces.FluidPort_a watInlHeaCoi(redeclare package Medium
+      = MediumWater) "water inlet for the heating coil"
     annotation (Placement(transformation(extent={{-430,-110},{-410,-90}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
-        MediumWater)
+  Modelica.Fluid.Interfaces.FluidPort_b watOutHeaCoi(redeclare package Medium
+      = MediumWater) "water outlet in the heating coil outlet"
     annotation (Placement(transformation(extent={{-408,-110},{-388,-90}})));
-  Modelica.Blocks.Sources.Constant valOpeningY03(k=1) "opening of damper Y03"
-    annotation (Placement(transformation(extent={{-472,-64},{-452,-44}})));
-  Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear val(
+  Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear threeWayValveHeaCoi(
     redeclare package Medium = MediumWater,
     m_flow_nominal=1,
-    dpValve_nominal=500) annotation (Placement(transformation(
+    dpValve_nominal=500) "Three way valve in the heating coil water circuit"
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-420,-54})));
+  Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium = MediumAir)
+    annotation (Placement(transformation(extent={{-14,16},{-34,36}})));
 equation
-  connect(outsideAirFan.port_b, Absorber.port_a)
-    annotation (Line(points={{76,26},{32,26},{-14,26}}, color={0,127,255}));
   connect(HeatingCoil.port_b1, T03_senTemHea.port_a)
     annotation (Line(points={{-420,26},{-434,26}}, color={0,127,255}));
   connect(exhaustAir, T02_senTemExh.port_a) annotation (Line(points={{-630,258},
           {-592,258},{-592,304}}, color={0,127,255}));
   connect(T02_senTemExh.port_b, T02_senRelHumExh.port_a)
     annotation (Line(points={{-572,304},{-554,304}}, color={0,127,255}));
-  connect(T02_senRelHumExh.port_b, senMasFloExh.port_a) annotation (Line(points=
-         {{-534,304},{-534,304},{-492,304}}, color={0,127,255}));
   connect(T03_senTemHea.port_b, T03_senRelHumHea.port_a)
     annotation (Line(points={{-454,26},{-468,26}}, color={0,127,255}));
   connect(T03_senRelHumHea.port_b, steamHumidifier.port_a) annotation (Line(
@@ -400,8 +396,6 @@ equation
         points={{-578,26},{-588,26},{-594,26}}, color={0,127,255}));
   connect(T01_senRelHumSup.port_b, supplyAir) annotation (Line(points={{-614,26},
           {-628,26},{-628,-16}}, color={0,127,255}));
-  connect(Absorber.port_b, senMasFloSup.port_a)
-    annotation (Line(points={{-34,26},{-172,26}},          color={0,127,255}));
   connect(recuperator.port_b1, exhAirFan_N02.port_a) annotation (Line(points={{-392,
           266},{-392,304},{-370,304}}, color={0,127,255}));
   connect(recuperator.port_b2, HeatingCoil.port_a1) annotation (Line(points={{-412,
@@ -415,8 +409,6 @@ equation
                                                  color={255,0,255}));
   connect(outsideAirFan.port_b, Y06.port_a) annotation (Line(points={{76,26},{
           32,26},{32,-56},{-8,-56}}, color={0,127,255}));
-  connect(Y06.port_b, senMasFloSup.port_a) annotation (Line(points={{-28,-56},{
-          -110,-56},{-110,26},{-172,26}}, color={0,127,255}));
   connect(Desorber.port_b, Y08.port_a)
     annotation (Line(points={{82,304},{34,304},{-16,304}}, color={0,127,255}));
   connect(booleanConstant1.y, Y08.addPreDro) annotation (Line(points={{-99.5,
@@ -426,8 +418,6 @@ equation
                                                      color={0,127,255}));
   connect(Y04.addPreDro, booleanConstant1.y) annotation (Line(points={{-194,
           314.6},{-160,314.6},{-160,353},{-99.5,353}}, color={255,0,255}));
-  connect(senMasFloExh.port_b, Y03.port_a) annotation (Line(points={{-472,304},
-          {-462,304},{-450,304}}, color={0,127,255}));
   connect(Y03.port_b, exhAirFan_N02.port_a) annotation (Line(points={{-430,304},
           {-402,304},{-370,304}}, color={0,127,255}));
   connect(senTemAbs.port_b, Y02.port_a)
@@ -444,8 +434,6 @@ equation
           {-384,57},{-384,58},{-384,66},{-382.6,66}}, color={255,0,255}));
   connect(booleanConstant3.y, Y02.addPreDro) annotation (Line(points={{-407.5,57},
           {-367.25,57},{-367.25,36.6},{-366,36.6}},     color={255,0,255}));
-  connect(senMasFloSup.port_b, resSupAir.port_a)
-    annotation (Line(points={{-192,26},{-244,26}}, color={0,127,255}));
   connect(resSupAir.port_b, senTemAbs.port_a) annotation (Line(points={{-264,26},
           {-280,26},{-296,26}}, color={0,127,255}));
   connect(Y08.port_b, resExiAir.port_a) annotation (Line(points={{-36,304},{
@@ -517,8 +505,9 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(Y05.y, busActors.openingY05) annotation (Line(points={{154,38},{154,54},
-          {364,54},{364,364.1},{-186.1,364.1}}, color={0,0,127}), Text(
+  connect(Y05.y, busActors.openingY05) annotation (Line(points={{154,38},{154,
+          56},{364,56},{364,364.1},{-186.1,364.1}},
+                                                color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
@@ -528,13 +517,14 @@ equation
       index=1,
       extent={{6,3},{6,3}}));
   connect(outsideAirFan.m_flow_in, busActors.outsideFan) annotation (Line(
-        points={{86.2,38},{86.2,54},{364,54},{364,364.1},{-186.1,364.1}}, color=
+        points={{86.2,38},{86.2,48},{86,48},{86,56},{364,56},{364,364.1},{
+          -186.1,364.1}},                                                 color=
          {0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(Absorber.u, busActors.mWatAbsorber) annotation (Line(points={{-12,32},
-          {-12,32},{-12,52},{-12,54},{364,54},{364,364.1},{-186.1,364.1}},
+  connect(Absorber.u, busActors.mWatAbsorber) annotation (Line(points={{-84,32},
+          {-84,32},{-84,56},{364,56},{364,364.1},{-186.1,364.1}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -546,8 +536,6 @@ equation
       extent={{6,3},{6,3}}));
   connect(Y06.addPreDro, booleanConstant4.y) annotation (Line(points={{-14,-66.6},
           {-14,-66.6},{-14,-81},{-0.5,-81}},         color={255,0,255}));
-  connect(senMasFloExh.port_b, evaporator.port_a) annotation (Line(points={{
-          -472,304},{-464,304},{-464,266},{-454,266}}, color={0,127,255}));
   connect(evaporator.port_b, recuperator.port_a1) annotation (Line(points={{
           -434,266},{-434,266},{-412,266}}, color={0,127,255}));
   connect(evaporator.u, busActors.mWatEvaporator) annotation (Line(points={{-456,
@@ -613,13 +601,14 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(T04_senTemOut.T, busSensors.T04) annotation (Line(points={{324,37},{324,
-          44},{368,44},{368,369.9},{-315.9,369.9}}, color={0,0,127}), Text(
+  connect(T04_senTemOut.T, busSensors.T04) annotation (Line(points={{324,37},{
+          324,50},{368,50},{368,369.9},{-315.9,369.9}},
+                                                    color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(T04_senRelHumOut.phi, busSensors.T04_RelHum) annotation (Line(points={
-          {279.9,37},{279.9,44},{368,44},{368,369.9},{-315.9,369.9}}, color={0,0,
+  connect(T04_senRelHumOut.phi, busSensors.T04_RelHum) annotation (Line(points={{279.9,
+          37},{279.9,50},{368,50},{368,369.9},{-315.9,369.9}},        color={0,0,
           127}), Text(
       string="%second",
       index=1,
@@ -636,16 +625,38 @@ equation
           {-420,14}},                    color={0,127,255}));
   connect(isNight.y,pump. IsNight) annotation (Line(points={{-451.5,-19},{
           -430.2,-20}},                     color={255,0,255}));
-  connect(HeatingCoil.port_b2, port_b) annotation (Line(points={{-400,14},{-400,
-          14},{-400,-100},{-398,-100}}, color={0,127,255}));
-  connect(port_a, val.port_1) annotation (Line(points={{-420,-100},{-420,-82},{
-          -420,-64}}, color={0,127,255}));
-  connect(val.port_2, pump.port_a) annotation (Line(points={{-420,-44},{-420,
-          -37},{-420,-30}}, color={0,127,255}));
-  connect(HeatingCoil.port_b2, val.port_3) annotation (Line(points={{-400,14},{
-          -400,14},{-400,-54},{-410,-54}}, color={0,127,255}));
-  connect(valOpeningY03.y, val.y) annotation (Line(points={{-451,-54},{-440,-54},
-          {-432,-54}}, color={0,0,127}));
+  connect(HeatingCoil.port_b2, watOutHeaCoi) annotation (Line(points={{-400,14},
+          {-400,14},{-400,-100},{-398,-100}}, color={0,127,255}));
+  connect(watInlHeaCoi, threeWayValveHeaCoi.port_1) annotation (Line(points={{-420,
+          -100},{-420,-82},{-420,-64}}, color={0,127,255}));
+  connect(threeWayValveHeaCoi.port_2, pump.port_a) annotation (Line(points={{-420,
+          -44},{-420,-37},{-420,-30}}, color={0,127,255}));
+  connect(HeatingCoil.port_b2, threeWayValveHeaCoi.port_3) annotation (Line(
+        points={{-400,14},{-400,14},{-400,-54},{-410,-54}}, color={0,127,255}));
+  connect(threeWayValveHeaCoi.y, busActors.openValveHeatCoil) annotation (Line(
+        points={{-432,-54},{-538,-54},{-646,-54},{-646,364.1},{-186.1,364.1}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(T02_senRelHumExh.port_b, Y03.port_a)
+    annotation (Line(points={{-534,304},{-450,304}}, color={0,127,255}));
+  connect(Y06.port_b, resSupAir.port_a) annotation (Line(points={{-28,-56},{
+          -140,-56},{-140,26},{-244,26}}, color={0,127,255}));
+  connect(senMasFlo.m_flow, busSensors.mFlowAbs) annotation (Line(points={{-24,
+          37},{-24,50},{368,50},{368,369.9},{-315.9,369.9}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(T02_senRelHumExh.port_b, evaporator.port_a) annotation (Line(points={
+          {-534,304},{-494,304},{-494,266},{-454,266}}, color={0,127,255}));
+  connect(outsideAirFan.port_b, senMasFlo.port_a)
+    annotation (Line(points={{76,26},{32,26},{-14,26}}, color={0,127,255}));
+  connect(senMasFlo.port_b, Absorber.port_a)
+    annotation (Line(points={{-34,26},{-60,26},{-86,26}}, color={0,127,255}));
+  connect(Absorber.port_b, resSupAir.port_a) annotation (Line(points={{-106,26},
+          {-106,26},{-244,26}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-640,-100},
             {360,360}}), graphics={Rectangle(
           extent={{-638,358},{360,-100}},

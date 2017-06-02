@@ -19,8 +19,11 @@ expandable connector BusSensors "Bus Connector to Controller for sensor signals"
                 "Temperature signal from exhaust air inlet";
   Real T04_RelHum( min=0, max=100)
                 "Relative humidity in percent from exhaust air inlet";
-  SI.Pressure P01 "pressure from supply air before steam humidifier";
-  SI.Pressure P02 "pressure from exhaust air inlet";
-
+  SI.Pressure P01
+                "pressure from supply air before steam humidifier";
+  SI.Pressure P02
+                "pressure from exhaust air inlet";
+  SI.MassFlowRate mFlowAbs
+                "mass flow rate through absorber";
 
 end BusSensors;
