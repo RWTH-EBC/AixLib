@@ -148,11 +148,6 @@ equation
   connect(pumpGeothermalSource.dp_in, pressureDifference.y) annotation (Line(
         points={{-89.14,-45.6},{-89.14,-36},{56,-36},{56,6},{147.4,6}},color={0,
           0,127}));
-  connect(hPControllerOnOff.heatPumpControlBus, heatPumpTab.heatPumpControlBus)
-    annotation (Line(
-      points={{-42.05,72.05},{-22,72.05},{-22,19.66}},
-      color={255,204,51},
-      thickness=0.5));
   connect(TStorageSet.y, hPControllerOnOff.T_meas) annotation (Line(points={{-147.4,
           10},{-116,10},{-116,76},{-62,76}}, color={0,0,127}));
   connect(TStorageUpper.y, hPControllerOnOff.T_set) annotation (Line(points={{-139,68},
@@ -188,6 +183,14 @@ equation
   connect(TStorageUpper.y, heatStorageTemperature) annotation (Line(points={{
           -139,68},{-132,68},{-120,68},{-120,-88},{-100,-88},{-100,-120}},
         color={0,0,127}));
+  connect(hPControllerOnOff.heatPumpControlBus, heatPumpControlBus) annotation
+    (Line(
+      points={{-42.05,72.05},{-28,72.05},{-28,79},{-0.5,79}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
   annotation (experiment(StopTime=86400, Interval=10), Documentation(info="<html>
 <p>Example model demonstrating the use of the <code>AixLib</code> hydraulic components and basic controllers. This model extends <a href=\"modelica://AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpBase\">AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpBase</a>.</p>
 <p>The system model is for a hydronic system with a geothermal heat pump. The heat pump transfers heat from a cold to heat storage. If the temperature in the heat storage exceeds the maximum temperature, the heat pump can be connected to the geothermal field instead. The field thus functions as a heat sink. If the temperature in the cold storage drops below the minimum, the geothermal field can be used as a heat source. </p>

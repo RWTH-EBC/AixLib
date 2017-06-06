@@ -13,7 +13,7 @@ model GeothermalHeatPumpBase
   parameter Modelica.SIunits.Temperature T_start_hot = 300 "Initial temperature of high temperature components";
 
 
-  heatPumpControlled               heatPumpTab(volumeEvaporator(T_start = T_start_cold[1]), volumeCondenser(T_start = T_start_warm[5]), redeclare
+  HeatPumps.HeatPumpSimple         heatPumpTab(volumeEvaporator(T_start = T_start_cold[1]), volumeCondenser(T_start = T_start_warm[5]), redeclare
       package Medium =
         Medium,
     tablePower=[0,266.15,275.15,280.15,283.15,293.15; 308.15,3300,3400,
@@ -201,6 +201,8 @@ model GeothermalHeatPumpBase
         extent={{-7,-7},{7,7}},
         rotation=0,
         origin={-89,-54})));
+  Controls.Interfaces.HeatPumpControlBus        heatPumpControlBus
+    annotation (Placement(transformation(extent={{-21,60},{20,98}})));
 equation
 
 
@@ -270,6 +272,12 @@ equation
     annotation (Line(points={{-82,-54},{-79,-54},{-76,-54}}, color={0,127,255}));
   connect(pumpGeothermalSource.port_a, geothFieldSource.ports[1])
     annotation (Line(points={{-96,-54},{-146,-54}}, color={0,127,255}));
+  connect(heatPumpTab.OnOff, heatPumpControlBus.onOff) annotation (Line(points=
+          {{-22,16.6},{-22,16.6},{-22,60},{-0.3975,60},{-0.3975,79.095}}, color
+        ={255,0,255}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-160,
           -120},{160,80}})),              Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-160,-120},{160,80}})),
