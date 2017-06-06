@@ -22,6 +22,11 @@ model GeothermalHeatPumpBase
         9700,11600,13000,14800,16300; 323.15,10000,11200,12900,16700,
         17500]) "Base load energy conversion unit"
     annotation (Placement(transformation(extent={{-40,-14},{-4,20}})));
+
+    replaceable AixLib.Fluid.Interfaces.PartialTwoPortTransport PeakLoadDevice constrainedby
+    AixLib.Fluid.Interfaces.PartialTwoPort
+    annotation (Placement(transformation(extent={{108,-56},{120,-44}})));
+
   Storage.Storage coldStorage(
     layer_HE(T_start=T_start_cold),
     layer(T_start=T_start_cold),
@@ -272,12 +277,14 @@ equation
     annotation (Line(points={{-82,-54},{-79,-54},{-76,-54}}, color={0,127,255}));
   connect(pumpGeothermalSource.port_a, geothFieldSource.ports[1])
     annotation (Line(points={{-96,-54},{-146,-54}}, color={0,127,255}));
-  connect(heatPumpTab.OnOff, heatPumpControlBus.onOff) annotation (Line(points=
-          {{-22,16.6},{-22,16.6},{-22,60},{-0.3975,60},{-0.3975,79.095}}, color
-        ={255,0,255}), Text(
+  connect(heatPumpTab.OnOff, heatPumpControlBus.onOff) annotation (Line(points={
+          {-22,16.6},{-22,16.6},{-22,60},{-0.3975,60},{-0.3975,79.095}}, color={
+          255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
+  connect(resistanceHeatConsumerFlow.port_b, PeakLoadDevice.port_a) annotation (
+     Line(points={{94,-50},{102,-50},{108,-50}}, color={0,127,255}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-160,
           -120},{160,80}})),              Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-160,-120},{160,80}})),

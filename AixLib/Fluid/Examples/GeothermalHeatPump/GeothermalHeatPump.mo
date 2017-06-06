@@ -1,15 +1,8 @@
 within AixLib.Fluid.Examples.GeothermalHeatPump;
 model GeothermalHeatPump "Example of a geothermal heat pump system"
-  extends BaseClasses.GeothermalHeatPumpBase;
-  Modelica.Blocks.Sources.BooleanConstant trueSource "Outputs a true signal"
-    annotation (Placement(transformation(extent={{-6,6},{6,-6}},
-        rotation=180,
-        origin={154,-68})));
-  Modelica.Blocks.Sources.BooleanConstant falseSource(k=false)
-    "Outputs a false signal"
-    annotation (Placement(transformation(extent={{-6,6},{6,-6}},
-        rotation=180,
-        origin={154,-36})));
+  extends BaseClasses.GeothermalHeatPumpBase(
+  redeclare AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.Boiler PeakLoadDevice(redeclare
+        package                                                                                          Medium = Medium));
   Sources.Boundary_pT coldConsumerFlow(redeclare package Medium = Medium,
       nPorts=1) annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
@@ -41,22 +34,6 @@ model GeothermalHeatPump "Example of a geothermal heat pump system"
         extent={{-6,-6},{6,6}},
         rotation=180,
         origin={154,6})));
-  Modelica.Blocks.Sources.Constant ambientTemperature(k=273.15 + 10)
-    "Dummy for ambient temperature"
-    annotation (Placement(transformation(
-        extent={{-6,-6},{6,6}},
-        rotation=180,
-        origin={154,-86})));
-  BoilerCHP.Boiler                   boiler(                                redeclare
-      package Medium =
-        Medium,                                                               m_flow_nominal=0.5,
-    paramHC=DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day23_Night10(),
-    paramBoiler=DataBase.Boiler.General.Boiler_Vitogas200F_11kW())
-    "Peak load energy conversion unit"
-    annotation (Placement(transformation(
-        extent={{10,10},{-10,-10}},
-        rotation=180,
-        origin={122,-50})));
   Controls.HeatPump.HPControllerOnOff hPControllerOnOff(bandwidth=5)
     "Controls the temperature in the heat storage by switching the heat pump on or off"
     annotation (Placement(transformation(extent={{-62,62},{-42,82}})));
@@ -117,25 +94,16 @@ model GeothermalHeatPump "Example of a geothermal heat pump system"
         origin={-45.5,-119.5}), iconTransformation(extent={{10,-10},{-10,10}},
         rotation=90,
         origin={-60.5,-109})));
-  Modelica.Blocks.Sources.RealExpression chemicalEnergyFlowRateSource(y=boiler.internalControl.ControlerHeater.y)
-    "Outputs the chemical energy flow rate of the boiler"
-    annotation (Placement(transformation(extent={{-160,-88},{-140,-68}})));
   inner Modelica.Fluid.System system
     annotation (Placement(transformation(extent={{140,60},{160,80}})));
 equation
   connect(resistanceColdConsumerFlow.port_b, coldConsumerFlow.ports[1])
     annotation (Line(points={{94,-20},{122,-20},{148,-20}}, color={0,127,255}));
-  connect(boiler.port_b, heatConsumerFlow.ports[1]) annotation (Line(points={{
-          132,-50},{132,-50},{150,-50}}, color={0,127,255}));
   connect(pressureDifference.y, pumpColdConsumer.dp_in) annotation (Line(points={{147.4,6},
           {147.4,6},{64.86,6},{64.86,-11.6}},        color={0,0,127}));
   connect(pressureDifference.y, pumpHeatConsumer.dp_in) annotation (Line(points={{147.4,6},
           {147.4,6},{56,6},{56,-36},{62.86,-36},{62.86,-41.6}},        color={0,
           0,127}));
-  connect(ambientTemperature.y, boiler.TAmbient) annotation (Line(points={{147.4,
-          -86},{96,-86},{96,-43},{115,-43}}, color={0,0,127}));
-  connect(resistanceHeatConsumerFlow.port_b, boiler.port_a)
-    annotation (Line(points={{94,-50},{112,-50}}, color={0,127,255}));
   connect(resistanceColdConsumerReturn.port_a, coldConsumerReturn.ports[1])
     annotation (Line(points={{94,32},{148,32}}, color={0,127,255}));
   connect(resistanceHeatConsumerReturn.port_a, heatConsumerReturn.ports[1])
@@ -152,8 +120,6 @@ equation
           10},{-116,10},{-116,76},{-62,76}}, color={0,0,127}));
   connect(TStorageUpper.y, hPControllerOnOff.T_set) annotation (Line(points={{-139,68},
           {-120,68},{-100,68},{-62,68}},               color={0,0,127}));
-  connect(trueSource.y, boiler.isOn) annotation (Line(points={{147.4,-68},{127,-68},
-          {127,-59}}, color={255,0,255}));
   connect(TStorageUpper.y, geothermalFieldControllerWarm.temperature)
     annotation (Line(points={{-139,68},{-120,68},{-120,-26},{-100,-26}}, color=
           {0,0,127}));
@@ -172,25 +138,26 @@ equation
   connect(geothermalFieldControllerWarm.valveOpening2, valveHeatStorage.y)
     annotation (Line(points={{-83.04,-30.8},{-56,-30.8},{-56,-63},{-26.4,-63}},
         color={0,0,127}));
-  connect(falseSource.y, boiler.switchToNightMode) annotation (Line(points={{
-          147.4,-36},{128,-36},{110,-36},{110,-46},{115,-46}}, color={255,0,255}));
   connect(heatPumpTab.Power, heatPumpPower) annotation (Line(points={{-22,-12.3},
           {-22,-12.3},{-22,-40},{-45.5,-40},{-45.5,-119.5}}, color={0,0,127}));
-  connect(chemicalEnergyFlowRateSource.y, chemicalEnergyFlowRate) annotation (
-      Line(points={{-139,-78},{-71.5,-78},{-71.5,-119.5}}, color={0,0,127}));
   connect(TStorageLower.y, coldStorageTemperature) annotation (Line(points={{
           -139,52},{-134,52},{-134,-120}}, color={0,0,127}));
   connect(TStorageUpper.y, heatStorageTemperature) annotation (Line(points={{
           -139,68},{-132,68},{-120,68},{-120,-88},{-100,-88},{-100,-120}},
         color={0,0,127}));
-  connect(hPControllerOnOff.heatPumpControlBus, heatPumpControlBus) annotation
-    (Line(
+  connect(hPControllerOnOff.heatPumpControlBus, heatPumpControlBus) annotation (
+     Line(
       points={{-42.05,72.05},{-28,72.05},{-28,79},{-0.5,79}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
+  connect(PeakLoadDevice.port_b, heatConsumerFlow.ports[1]) annotation (Line(
+        points={{120,-50},{136,-50},{150,-50}}, color={0,127,255}));
+  connect(PeakLoadDevice.chemicalEnergyFlowRate, chemicalEnergyFlowRate)
+    annotation (Line(points={{112.77,-56.54},{112.77,-120},{-30,-120},{-30,-98},
+          {-71.5,-98},{-71.5,-119.5}}, color={0,0,127}));
   annotation (experiment(StopTime=86400, Interval=10), Documentation(info="<html>
 <p>Example model demonstrating the use of the <code>AixLib</code> hydraulic components and basic controllers. This model extends <a href=\"modelica://AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpBase\">AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpBase</a>.</p>
 <p>The system model is for a hydronic system with a geothermal heat pump. The heat pump transfers heat from a cold to heat storage. If the temperature in the heat storage exceeds the maximum temperature, the heat pump can be connected to the geothermal field instead. The field thus functions as a heat sink. If the temperature in the cold storage drops below the minimum, the geothermal field can be used as a heat source. </p>
