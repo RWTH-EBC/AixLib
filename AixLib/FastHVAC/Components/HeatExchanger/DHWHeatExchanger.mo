@@ -43,7 +43,7 @@ public
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={30,90})));
-  BaseClasses.WorkingFluid                                 layer_heater[n](
+  FastHVAC.BaseClasses.WorkingFluid                                 layer_heater[n](
   each medium = medium,
   each m_fluid=m_heater/n,
   each T0=T0)
@@ -55,7 +55,7 @@ public
         extent={{-20,-20},{20,20}},
         rotation=0,
         origin={0,0})));
-  BaseClasses.WorkingFluid                                 layer_dHW[n](
+  FastHVAC.BaseClasses.WorkingFluid                                 layer_dHW[n](
   each medium = medium,
   each m_fluid=m_heater/n,
   each T0=T0)

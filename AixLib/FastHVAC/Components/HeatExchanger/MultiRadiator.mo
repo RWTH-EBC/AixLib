@@ -7,10 +7,9 @@ model MultiRadiator "Simple multi radiator model"
 parameter Integer n(min=2) = 3 "Number of radiators";
 
 parameter Boolean selectable=false "Radiator record" annotation(Dialog(group="Radiator Data"));
-parameter AixLib.DataBase.Radiators.RadiatorBaseDataDefinition radiatorType
- "Choose a radiator"
-    annotation (Dialog(group="Radiator Data", enable=selectable),
-      choicesAllMatching=true);
+  parameter AixLib.DataBase.Radiators.RadiatorBaseDataDefinition radiatorType
+    "Choose a radiator" annotation (Dialog(group="Radiator Data", enable=
+          selectable), choicesAllMatching=true);
 parameter FastHVAC.Media.BaseClasses.MediumSimple medium= FastHVAC.Media.WaterSimple()
     "Standard charastics for water (heat capacity, density, thermal conductivity)"
     annotation (choicesAllMatching);
