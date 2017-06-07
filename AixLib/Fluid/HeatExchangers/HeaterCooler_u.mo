@@ -19,6 +19,12 @@ protected
     annotation (Placement(transformation(extent={{-40,50},{-20,70}})));
   Modelica.Blocks.Math.Gain gai(k=Q_flow_nominal) "Gain"
     annotation (Placement(transformation(extent={{-80,50},{-60,70}})));
+public
+  Modelica.Blocks.Interfaces.RealOutput T(unit="K") "Temperature of the internal volume"
+    annotation (Placement(transformation(extent={{100,-68},{120,-48}}),
+        iconTransformation(extent={{100,-68},{120,-48}})));
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
+    annotation (Placement(transformation(extent={{-10,-70},{10,-50}})));
 equation
   connect(u, gai.u) annotation (Line(
       points={{-120,60},{-82,60}},
@@ -32,6 +38,10 @@ equation
   connect(gai.y, Q_flow) annotation (Line(
       points={{-59,60},{-50,60},{-50,80},{80,80},{80,60},{110,60}},
       color={0,0,127}));
+  connect(vol.heatPort, temperatureSensor.port) annotation (Line(points={{-9,-10},
+          {-20,-10},{-20,-60},{-10,-60}}, color={191,0,0}));
+  connect(temperatureSensor.T, T) annotation (Line(points={{10,-60},{60,-60},{60,
+          -58},{110,-58}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={
         Rectangle(
@@ -63,7 +73,17 @@ equation
           lineColor={0,0,255},
           pattern=LinePattern.None,
           fillColor={0,0,0},
-          fillPattern=FillPattern.Solid)}),
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{70,-58},{100,-60}},
+          lineColor={0,0,255},
+          pattern=LinePattern.None,
+          fillColor={0,0,127},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{72,-66},{116,-94}},
+          lineColor={0,0,127},
+          textString="T_out")}),
 defaultComponentName="hea",
 Documentation(info="<html>
 <p>
@@ -100,60 +120,17 @@ AixLib.Fluid.HeatExchangers.Validation.HeaterCooler_u</a>.
 </html>",
 revisions="<html>
 <ul>
-<li>
-November 3, 2016, by Michael Wetter:<br/>
-Set <code>preHea(final alpha=0)</code> as this allows to simplify the
-system of equations.<br/>
-This is for
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/570\">#570</a>.
-</li>
-<li>
-November 19, 2015, by Michael Wetter:<br/>
-Removed assignment of parameter
-<code>showDesignFlowDirection</code> in <code>extends</code> statement.
-This is for
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/349\">#349</a>.
-</li>
-<li>
-May 6, 2015, by Michael Wetter:<br/>
-Set <code>prescribedHeatFlowRate=true</code>.
-This is for issue
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/412\">
-#412</a>.
-</li>
-<li>
-May 1, 2015, by Marcus Fuchs:<br/>
-Corrected typo in documentation.
-</li>
-<li>
-November 12, 2014, by Michael Wetter:<br/>
-Added output signal <code>Q_flow</code> so that it has
-the same output ports as
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.Validation.HeaterCooler_T\">
-AixLib.Fluid.HeatExchangers.Validation.HeaterCooler_T</a>.
-</li>
-<li>
-September 11, 2014, by Christoph Nytsch-Geusen:<br/>
-Renaming class to <code>HeaterCooler_u</code>.
-</li>
-<li>
-October 15, 2013, by Michael Wetter:<br/>
-Redeclared the control volume to be final so that it does not show
-anymore in the parameter window.
-</li>
-<li>
-July 11, 2011, by Michael Wetter:<br/>
-Redeclared fluid volume as final. This prevents the fluid volume model
-to appear in the dialog window.
-</li>
-<li>
-May 24, 2011, by Michael Wetter:<br/>
-Changed base class to allow using the model as a dynamic or a steady-state model.
-</li>
-<li>
-April 17, 2008, by Michael Wetter:<br/>
-First implementation.
-</li>
+<li>June 6, 2017, by Lars Schellhas:<br>Add an output for <code>T_out</code> as this allows to solve some problems with heat exchange while the exchanger is in standby (<code>m_flow = 0</code>).</li>
+<li>November 3, 2016, by Michael Wetter:<br>Set <code>preHea(final alpha=0)</code> as this allows to simplify the system of equations.<br>This is for <a href=\"https://github.com/iea-annex60/modelica-annex60/issues/570\">#570</a>. </li>
+<li>November 19, 2015, by Michael Wetter:<br>Removed assignment of parameter <code>showDesignFlowDirection</code> in <code>extends</code> statement. This is for <a href=\"https://github.com/iea-annex60/modelica-annex60/issues/349\">#349</a>. </li>
+<li>May 6, 2015, by Michael Wetter:<br>Set <code>prescribedHeatFlowRate=true</code>. This is for issue <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/412\">#412</a>. </li>
+<li>May 1, 2015, by Marcus Fuchs:<br>Corrected typo in documentation. </li>
+<li>November 12, 2014, by Michael Wetter:<br>Added output signal <code>Q_flow</code> so that it has the same output ports as <a href=\"modelica://AixLib.Fluid.HeatExchangers.Validation.HeaterCooler_T\">AixLib.Fluid.HeatExchangers.Validation.HeaterCooler_T</a>. </li>
+<li>September 11, 2014, by Christoph Nytsch-Geusen:<br>Renaming class to <code>HeaterCooler_u</code>. </li>
+<li>October 15, 2013, by Michael Wetter:<br>Redeclared the control volume to be final so that it does not show anymore in the parameter window. </li>
+<li>July 11, 2011, by Michael Wetter:<br>Redeclared fluid volume as final. This prevents the fluid volume model to appear in the dialog window. </li>
+<li>May 24, 2011, by Michael Wetter:<br>Changed base class to allow using the model as a dynamic or a steady-state model. </li>
+<li>April 17, 2008, by Michael Wetter:<br>First implementation. </li>
 </ul>
 </html>"));
 end HeaterCooler_u;
