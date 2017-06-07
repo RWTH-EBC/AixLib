@@ -3,21 +3,24 @@ partial model PartialRack
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
 
 
-  parameter Integer n_servers = 16 "Number of servers in rack";
-  parameter Integer n_racks = 1
-    "Number of racks (only for experimental purposes, since this is a model of a single rack)";
-  parameter Modelica.SIunits.Mass m_server = 24.4
-    "Average mass of a single server (1 to 4 HU)";
-  parameter Modelica.SIunits.SpecificHeatCapacity cp_IT = 600
-    "Average heat capacity of all the IT equipments";
-  parameter Modelica.SIunits.Mass m_RackHousing = 50
-    "Mass of rack housing (usually about 50kg per rack)";
+  parameter Integer nServers = 16 "Number of servers in rack" annotation (Dialog(group="Servers"));
+  parameter Integer nRacks = 1
+    "Number of racks (only for experimental purposes, since this is a model of a single rack)" annotation (Dialog(group="Racks"));
+  parameter Modelica.SIunits.Mass mServers = 24.4
+    "Average mass of a single server (1 to 4 HU)" annotation (Dialog(group="Servers"));
+  parameter Modelica.SIunits.SpecificHeatCapacity cpIT = 600
+    "Average heat capacity of all the IT equipments" annotation (Dialog(group="Servers"));
+  parameter Modelica.SIunits.Mass mRackHousing = 50
+    "Mass of rack housing (usually about 50kg per rack)" annotation (Dialog(group="Racks"));
   parameter Real ConvectiveCoefficient = 12000
-    "Real parameter representing the convective thermal conductance in [W/K] of the rack";
+    "Real parameter representing the convective thermal conductance in [W/K] of the rack" annotation (Dialog(group="Servers"));
     parameter Modelica.SIunits.Temperature T_startIT = 307.15
-    "Initial temperature of the IT surface";
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor rackHeatCapacitor(C=cp_IT*n_racks*(n_servers*m_server+m_RackHousing), T(start=
-         T_startIT, fixed=true))
+    "Initial temperature of the IT surface" annotation(Dialog(tab="Advanced", group="Initialization"));
+  parameter Modelica.Media.Interfaces.Types.Temperature T_startAir=301.15
+    "Start value of the air temperature inside the rack" annotation(Dialog(tab="Advanced", group="Initialization"));
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor rackHeatCapacitor(                                                    T(start=
+         T_startIT, fixed=true), C=cpIT*nRacks*(nServers*mServers +
+        mRackHousing))
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
@@ -40,15 +43,10 @@ partial model PartialRack
     use_portsData=false,
     redeclare package Medium = Medium,
     T_start=T_startAir)     annotation (Placement(transformation(extent={{68,6},{88,26}})));
-  Modelica.Fluid.Pipes.DynamicPipe coolingChannel(redeclare package Medium =
-        Medium)
-    annotation (Placement(transformation(extent={{-88,-10},{-68,10}})));
   Modelica.Fluid.Sensors.TemperatureTwoPort flowTemperature(redeclare package
       Medium = Medium)
     annotation (Placement(transformation(extent={{-62,-10},{-42,10}})));
 
-  parameter Modelica.Media.Interfaces.Types.Temperature T_startAir=301.15
-    "Start value of the air temperature inside the rack";
 equation
   connect(RackConvectiveCoefficient.y,rackConvection. Gc) annotation (Line(
       points={{27,30},{40,30}},
@@ -68,14 +66,6 @@ equation
       smooth=Smooth.None));
   connect(port_b,rackVolume. ports[1]) annotation (Line(
       points={{100,0},{76,0},{76,6}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  connect(port_a, coolingChannel.port_a) annotation (Line(
-      points={{-100,0},{-88,0}},
-      color={0,127,255},
-      smooth=Smooth.None));
-  connect(coolingChannel.port_b, flowTemperature.port_a) annotation (Line(
-      points={{-68,0},{-62,0}},
       color={0,127,255},
       smooth=Smooth.None));
   connect(flowTemperature.port_b, rackVolume.ports[2]) annotation (Line(
@@ -169,6 +159,22 @@ equation
           fillColor={255,0,0},
           fillPattern=FillPattern.Solid)}),                      Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}})),
-    experiment,
-    __Dymola_experimentSetupOutput(events=false));
+    Documentation(info="<html>
+<p>
+Partial rack model including the thermal capacities and a temperature sensor.
+</p>
+<p>
+Classes that extend this model need to implement the calculation of the final heat generation from a main parameter such as CPU utilization and a pressure drop component.
+</p>
+<p>
+The sizing of the volume and channel or pipe should be defined in the extended model as various cooling types use different components.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+<i>June 07, 2017&nbsp;</i>  by Pooyan Jahangiri:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end PartialRack;
