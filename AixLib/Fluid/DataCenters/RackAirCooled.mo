@@ -29,7 +29,9 @@ model RackAirCooled
     annotation (Placement(transformation(extent={{100,80},{120,100}})));
 
 
-  FixedResistances.PressureDrop pressureDrop(redeclare package Medium = Medium)
+  FixedResistances.PressureDrop pressureDrop(redeclare package Medium = Medium,
+    m_flow_nominal=0.02*nServers*nRacks,
+    dp_nominal=100*nServers*nRacks)
     annotation (Placement(transformation(extent={{-90,-10},{-70,10}})));
 equation
   connect(rackPowerCorrectionTable.y, IdlePower.u) annotation (Line(
