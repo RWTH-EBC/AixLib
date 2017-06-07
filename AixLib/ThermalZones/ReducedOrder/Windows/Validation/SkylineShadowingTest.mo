@@ -1,6 +1,5 @@
 within AixLib.ThermalZones.ReducedOrder.Windows.Validation;
 model SkylineShadowingTest
-  import AixLib;
   extends Modelica.Icons.Example;
 
   AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.SkylineShadowing

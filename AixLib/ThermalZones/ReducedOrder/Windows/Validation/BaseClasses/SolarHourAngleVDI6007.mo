@@ -3,9 +3,7 @@ model SolarHourAngleVDI6007 "Calculates the solar hour angle every hour based on
   It is modelled to test other Models based on VDI2078. It doesn't consider summer time"
 
   extends Modelica.Blocks.Icons.Block;
-  import Modelica.SIunits.Conversions.from_deg;
   parameter Modelica.SIunits.Angle lon "Longitude";
-  import Modelica.SIunits.Conversions.to_deg;
   Modelica.SIunits.Angle J_;
   Modelica.SIunits.Time zgl "time equation";
   Modelica.SIunits.Time woz "true time";
@@ -19,12 +17,12 @@ protected
   Real clock;
 equation
   clock=(integer(time/3600)-0.5-integer(time/day)*24);
-  J_=from_deg(360*105/365);
-  zgl=0.0066+7.3525*Modelica.Math.cos(J_+from_deg(85.9))+9.9359*
-    Modelica.Math.cos(2*J_+from_deg(108.9))+0.3387*
-    Modelica.Math.cos(3*J_+from_deg(105.2));
+  J_=Modelica.SIunits.Conversions.from_deg(360*105/365);
+  zgl=0.0066+7.3525*Modelica.Math.cos(J_+Modelica.SIunits.Conversions.from_deg(85.9))+9.9359*
+    Modelica.Math.cos(2*J_+Modelica.SIunits.Conversions.from_deg(108.9))+0.3387*
+    Modelica.Math.cos(3*J_+Modelica.SIunits.Conversions.from_deg(105.2));
     woz=(integer(time/3600)-0.5-integer(time/day)*24)-4*
-    (15-to_deg(lon))/60+zgl/60;
+    (15-Modelica.SIunits.Conversions.to_deg(lon))/60+zgl/60;
   solHouAng=(12-woz)*2*Modelica.Constants.pi/24;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),

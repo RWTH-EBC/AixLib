@@ -1,8 +1,7 @@
 within AixLib.ThermalZones.ReducedOrder.SolarGain;
-model CorrectionGTaueDoublePane "Correction of the solar gain factor and the 
+model CorrectionGTaueDoublePane "Correction of the solar gain factor and the
   transluance factor according to VDI6007 Part 3"
   extends BaseClasses.PartialCorrectionGTaue;
-  import Modelica.SIunits.Conversions.to_deg;
   // Parameters for the transmission correction factor based on VDI 6007 Part 3
   // A0 to A6 are experimental constants VDI 6007 Part 3 page 20
 
@@ -141,8 +140,8 @@ equation
   extent={{-100,-100},{100,100}},
   grid={2,2})),
   Documentation(info="<html>
-  <p><a href=\"vdi6007.BaseClasses.CorrrectionGTaueDoublePane\">CorrectionGTaueDoublePane</a> 
-  computes transmission correction factors for the g-factor and the transluence. 
+  <p><a href=\"vdi6007.BaseClasses.CorrrectionGTaueDoublePane\">CorrectionGTaueDoublePane</a>
+  computes transmission correction factors for the g-factor and the transluence.
   Transmission properties of transparent
   elements are in general dependent on the solar incidence angle. To take this
   dependency into account, correction factors can multiplied with the solar

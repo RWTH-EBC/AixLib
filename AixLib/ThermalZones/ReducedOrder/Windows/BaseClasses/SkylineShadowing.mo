@@ -3,9 +3,6 @@ model SkylineShadowing
   "Calculation of the limit elevation angle for shadowing by a skyline
    (for direct solar irradiation)"
   extends Modelica.Blocks.Icons.Block;
-  import
-    AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_northAzimuth;
-  import Modelica.Constants.pi;
   parameter Integer n(min = 1) "Number of corner points"
       annotation(dialog(group="skyline"));
   parameter Modelica.SIunits.Angle[n] alpha(displayUnit="deg")
@@ -41,7 +38,7 @@ protected
   Modelica.SIunits.Angle[n-1] Y "Calculation factor to simplify equations";
   Modelica.SIunits.Angle altLimi[n-1](displayUnit="deg")
     "limit elevation angle for shadowing by a skyline for point i and i+1";
-  Modelica.SIunits.Angle gamma[n]( min=0,max=pi/2,displayUnit="deg")
+  Modelica.SIunits.Angle gamma[n]( min=0,max=Modelica.Constants.pi/2,displayUnit="deg")
     "elevation angle of the obstruction for point i";
 equation
   //Calculating gamma
@@ -50,17 +47,30 @@ equation
   end for;
   //Calculating altLim
   for i in 1:(n-1) loop
-    X[i] = pi-Y[i]-(to_northAzimuth(alpha[i+1])-to_northAzimuth(alpha[i]));
+    X[i] = Modelica.Constants.pi-Y[i]-(
+    AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_northAzimuth(
+    alpha[i+1])-
+    AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_northAzimuth(
+    alpha[i]));
     Y[i] = Modelica.Math.atan((Modelica.Math.tan(gamma[i+1])*Modelica.Math.sin(
-    to_northAzimuth(alpha[i+1])-to_northAzimuth(alpha[i])))/(Modelica.Math.tan(
-    gamma[i])-Modelica.Math.tan(gamma[i+1])*Modelica.Math.cos(to_northAzimuth(
-    alpha[i+1])-to_northAzimuth(alpha[i]))));
+    AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_northAzimuth(
+    alpha[i+1])-
+    AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_northAzimuth(
+    alpha[i])))/(Modelica.Math.tan(gamma[i])-Modelica.Math.tan(gamma[i+1])*
+    Modelica.Math.cos(
+    AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_northAzimuth(
+    alpha[i+1])-
+    AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_northAzimuth(
+    alpha[i]))));
     if gap[i] then
-      altLimi[i]=-pi/2;
+      altLimi[i]=-Modelica.Constants.pi/2;
     else
     altLimi[i] = Modelica.Math.atan(Modelica.Math.sin(gamma[i])/
-    Modelica.Math.cos(gamma[i])*Modelica.Math.sin(pi-X[i]-(to_northAzimuth(
-    solAzi)-to_northAzimuth(alpha[i])))/Modelica.Math.sin(X[i]));
+    Modelica.Math.cos(gamma[i])*Modelica.Math.sin(Modelica.Constants.pi-X[i]-(
+    AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_northAzimuth(
+    solAzi)-
+    AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_northAzimuth(
+    alpha[i])))/Modelica.Math.sin(X[i]));
     end if;
   end for;
   altLim=max(altLimi);

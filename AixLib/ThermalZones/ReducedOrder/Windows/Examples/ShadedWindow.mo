@@ -1,6 +1,5 @@
 within AixLib.ThermalZones.ReducedOrder.Windows.Examples;
 model ShadedWindow "Testmodel for ShadedWindow"
-  import AixLib.ThermalZones.ReducedOrder.Windows;
   extends Modelica.Icons.Example;
 
   BoundaryConditions.WeatherData.ReaderTMY3 weaDat(

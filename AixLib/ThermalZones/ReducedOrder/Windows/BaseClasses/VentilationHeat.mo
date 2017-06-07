@@ -1,8 +1,6 @@
 within AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses;
 block VentilationHeat "heat input due to ventilation with closed sunblind"
   extends Modelica.Blocks.Icons.Block;
-  import
-    AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI;
   parameter Real x_f(min=0,max=1) "percentage of open windowarea"
     annotation(dialog(group="window"));
   parameter Modelica.SIunits.Distance d "distance sunscreen to window"
@@ -72,7 +70,9 @@ equation
   //calculating Output HVen
   if sunscreen then
     HVen=(HDirTil+HDifTil+(HDifHor+HDirNor*Modelica.Math.sin(alt))*0.5*rho*
-    (1-Modelica.Math.cos(to_surfaceTiltVDI(til))))*(1-rho_e-tau_e)*factor_gv*
+    (1-Modelica.Math.cos(
+    AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(
+    til))))*(1-rho_e-tau_e)*factor_gv*
     x_f;
   else
     HVen=0;

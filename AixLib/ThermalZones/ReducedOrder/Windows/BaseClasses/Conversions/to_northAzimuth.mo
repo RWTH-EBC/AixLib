@@ -2,11 +2,10 @@ within AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions;
 function to_northAzimuth
   "Conversion from azimuth based on AixLib to north based azimuth"
   extends Modelica.SIunits.Icons.Conversion;
-  import Modelica.Constants.pi;
   input Modelica.SIunits.Angle azi;
   output Modelica.SIunits.Angle alpha;
 algorithm
-  alpha:=pi+azi;
+  alpha:=Modelica.Constants.pi+azi;
 
   annotation (Documentation(info="<html>
 <p>This Function converts the azimuth based on <a href=\"AixLib\">AixLib</a> to

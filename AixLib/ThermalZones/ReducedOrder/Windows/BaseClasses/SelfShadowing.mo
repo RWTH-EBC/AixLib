@@ -4,11 +4,6 @@ block SelfShadowing
   parameter Integer n(min = 1) "number of windows"
     annotation(dialog(group="window"));
   extends Modelica.Blocks.Icons.Block;
-  import
-    AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_northAzimuth;
-  import
-    AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI;
-  import Modelica.Constants.pi;
   parameter Modelica.SIunits.Length b[n] "width of window"
     annotation (Dialog(group="Window parameter"));
   parameter Modelica.SIunits.Height h[n] "height of window"
@@ -87,11 +82,19 @@ equation
        e_hn[i]=10^20;
        e_vn[i]=10^20;
     else
-      e_hn[i]=Modelica.Math.sin(to_northAzimuth(azi[i])-to_northAzimuth(solAzi))
-      *Modelica.Math.cos(alt)/Modelica.Math.cos(incAng[i]);
-      e_vn[i]=(Modelica.Math.sin(alt)*Modelica.Math.sin(to_surfaceTiltVDI(
-      til[i]))-Modelica.Math.cos(alt)*Modelica.Math.cos(to_surfaceTiltVDI(
-      til[i]))*Modelica.Math.cos(to_northAzimuth(azi[i])-to_northAzimuth(
+      e_hn[i]=Modelica.Math.sin(
+      AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_northAzimuth(
+      azi[i])-
+      AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_northAzimuth(
+      solAzi))*Modelica.Math.cos(alt)/Modelica.Math.cos(incAng[i]);
+      e_vn[i]=(Modelica.Math.sin(alt)*Modelica.Math.sin(
+      AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(
+      til[i]))-Modelica.Math.cos(alt)*Modelica.Math.cos(
+      AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(
+      til[i]))*Modelica.Math.cos(
+      AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_northAzimuth(
+      azi[i])-
+      AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_northAzimuth(
       solAzi)))/Modelica.Math.cos(incAng[i]);
     end if;
 
@@ -161,7 +164,7 @@ equation
 VDI 6007 part 3. Parameters with Index 2 are alligned on the other side</p>
 <p>(i.e.: dRig is the distance between the projection and the window on the
 right handside, dBel is the distance between the projection below and the
-window). eh and ev are calculated within the model and are shown for 
+window). eh and ev are calculated within the model and are shown for
 demonstration.</p>
 <p>The connectors are all solar geometry dimensions and can be calculated by
 the SolarGeometry package of AixLib. </p>

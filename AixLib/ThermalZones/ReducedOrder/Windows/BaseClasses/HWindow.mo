@@ -1,8 +1,7 @@
 within AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses;
 model HWindow "Calculates the solar heat input through the window"
   extends Modelica.Blocks.Icons.Block;
-  import
-    AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI;
+
   parameter Integer n(min=1) "number of windows"
     annotation (Dialog(group="window"));
   parameter Modelica.SIunits.TransmissionCoefficient g[n]
@@ -109,8 +108,9 @@ equation
    end if;
    //Calculating HWin
     HWin[i]=(HDirTil[i]*g_Dirx[i]*CorG_Dir[i]+HDifTilCov[i]*g_Difx[i]*
-    CorG_DifCov[i]+HDifTilCle[i]*g_Difx[i]*CorG_DifCle[i]+0.5*rho*
-    (1-Modelica.Math.cos(to_surfaceTiltVDI(til[i])))*
+    CorG_DifCov[i]+HDifTilCle[i]*g_Difx[i]*CorG_DifCle[i]+0.5*rho*(1-
+    Modelica.Math.cos(AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(
+    til[i])))*
     (HDirNor*Modelica.Math.sin(alt)+HDifHor)*g_Difx[i]*CorG_Gro[i]);
   end for
   annotation (defaultComponentName="HWin",Icon(coordinateSystem(

@@ -2,9 +2,6 @@ within AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses;
 model HVisible
   "Calculates the solar energy entering the room in the visible area"
   extends Modelica.Blocks.Icons.Block;
-  import
-    AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI;
-  import Modelica.SIunits.Conversions.to_deg;
   parameter Integer n(min=1) "number of windows"
     annotation (Dialog(group="window"));
 
@@ -129,10 +126,16 @@ protected
 
 equation
   //calculating H_RoomL
-  Cor_KMDir=(17.72+4.4585*to_deg(alt)-0.087563*to_deg(alt)^2+7.39487*10^(-4)
-  *to_deg(alt)^3-2.167*10^(-6)*to_deg(alt)^4-8.4132*10^(-10)*to_deg(alt)^5)/115;
-  Cor_KMDifCle=(15.1+3.1076*to_deg(alt)+0.0048*to_deg(alt)^2-0.0014*
-  to_deg(alt)^3+2.04*10^(-5)*to_deg(alt)^4-8.91*10^(-8)*to_deg(alt)^5)/115;
+  Cor_KMDir=(17.72+4.4585*Modelica.SIunits.Conversions.to_deg(alt)-0.087563*
+  Modelica.SIunits.Conversions.to_deg(alt)^2+7.39487*10^(-4)
+  *Modelica.SIunits.Conversions.to_deg(alt)^3-2.167*10^(-6)*
+  Modelica.SIunits.Conversions.to_deg(alt)^4-8.4132*10^(-10)*
+  Modelica.SIunits.Conversions.to_deg(alt)^5)/115;
+  Cor_KMDifCle=(15.1+3.1076*Modelica.SIunits.Conversions.to_deg(alt)+0.0048*
+  Modelica.SIunits.Conversions.to_deg(alt)^2-0.0014*
+  Modelica.SIunits.Conversions.to_deg(alt)^3+2.04*10^(-5)*
+  Modelica.SIunits.Conversions.to_deg(alt)^4-8.91*10^(-8)*
+  Modelica.SIunits.Conversions.to_deg(alt)^5)/115;
 
   for i in 1:n loop
     if sunscreen[i] then
@@ -147,7 +150,7 @@ equation
     HVis[i]=(HDirTil[i]*T_LDirx[i]*CorTaue_Dir[i]*Cor_KMDir+HDifTilCle[i]*
     T_LDifx[i]*CorTaue_DifCle[i]*Cor_KMDifCle+HDifTilCov[i]*T_LDifx[i]*
     CorTaue_DifCov[i]*Cor_KMDifCov+H_EvaHor[i]*0.5*rho*(1-Modelica.Math.cos(
-    to_surfaceTiltVDI(til[i])))*CorTaue_Gro[i]);
+    AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(til[i])))*CorTaue_Gro[i]);
   end for;
     annotation (defaultComponentName="HVis",Icon(coordinateSystem(
     preserveAspectRatio=false)), Diagram(coordinateSystem(

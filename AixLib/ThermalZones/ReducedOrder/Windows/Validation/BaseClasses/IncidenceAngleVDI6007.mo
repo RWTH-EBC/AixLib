@@ -2,10 +2,6 @@ within AixLib.ThermalZones.ReducedOrder.Windows.Validation.BaseClasses;
 block IncidenceAngleVDI6007
   "The solar incidence angle on a tilted surface"
   extends Modelica.Blocks.Icons.Block;
-  import
-    AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI;
-  import
-    AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_northAzimuth;
   parameter Modelica.SIunits.Angle azi(displayUnit="degree")
     "Surface azimuth. azi=-90 degree if surface outward unit normal points toward east; azi=0 if it points toward south";
   parameter Modelica.SIunits.Angle til(displayUnit="degree")
@@ -23,8 +19,15 @@ block IncidenceAngleVDI6007
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 
 equation
-  incAng = max(0, Modelica.Math.acos(Modelica.Math.cos(to_surfaceTiltVDI(til))*Modelica.Math.sin(alt) +
-  Modelica.Math.sin(to_surfaceTiltVDI(til))*Modelica.Math.cos(alt)*Modelica.Math.cos((abs(to_northAzimuth(azi)-to_northAzimuth(solAzi))))));
+  incAng = max(0, Modelica.Math.acos(Modelica.Math.cos(
+  AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(
+  til))*Modelica.Math.sin(alt) + Modelica.Math.sin(
+  AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(
+  til))*Modelica.Math.cos(alt)*Modelica.Math.cos((abs(
+  AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_northAzimuth(
+  azi)-
+  AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_northAzimuth(
+  solAzi))))));
 
   annotation (
     defaultComponentName="incAng",

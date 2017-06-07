@@ -1,6 +1,5 @@
 within AixLib.ThermalZones.ReducedOrder.Windows.Validation.VDI2078;
 model TestCase1_Illumination
-  import AixLib;
     extends Modelica.Icons.Example;
 
   Modelica.Blocks.Sources.CombiTimeTable HDirHor(

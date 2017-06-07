@@ -2,11 +2,10 @@ within AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions;
 function to_surfaceTiltVDI
   "Conversion of AixLib surface tilt to surface tilt according to VDI 6007"
   extends Modelica.SIunits.Icons.Conversion;
-  import Modelica.Constants.pi;
   input Modelica.SIunits.Angle til;
   output Modelica.SIunits.Angle gamma_F;
 algorithm
-  gamma_F:=pi-til;
+  gamma_F:=Modelica.Constants.pi-til;
 
   annotation (Documentation(info="<html>
 This function converts the inclination of a surface from the

@@ -1,7 +1,5 @@
 within AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses;
 model Window "Calculation of solar energy transmitted through windows"
-  import vdi6007 = AixLib.ThermalZones.ReducedOrder.Windows;
-  import AixLib;
   parameter Integer n(min = 1) "number of windows"
     annotation(dialog(group="window"));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer UWin
@@ -93,7 +91,8 @@ model Window "Calculation of solar energy transmitted through windows"
     annotation (Placement(transformation(extent={{100,-50},{120,-30}}),
         iconTransformation(extent={{100,-50},{120,-30}})));
 
-  vdi6007.BaseClasses.Sunblind sunblind[n](lim=lim)
+  AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Sunblind sunblind[n](
+    lim=lim)
     annotation (Placement(transformation(extent={{-68,-42},{-56,-30}})));
   AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGTaueDoublePane CorGTaue(
     final n=n,
@@ -101,16 +100,16 @@ model Window "Calculation of solar energy transmitted through windows"
     final xi=xi,
     final til=til)
     annotation (Placement(transformation(extent={{-30,-22},{-6,8}})));
-  vdi6007.BaseClasses.HVisible HVisible(
+  AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.HVisible HVisible(
     final n=n,
     final T_LTotDir=T_LTotDir,
     final T_LTotDif=T_LTotDif,
     final til=til,
     final T_L=T_L)
     annotation (Placement(transformation(extent={{56,18},{100,62}})));
-  vdi6007.BaseClasses.Conversions.HDif_toClearCovered hDif_toClearCovered[n]
+  AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.HDif_toClearCovered hDif_toClearCovered[n]
     annotation (Placement(transformation(extent={{-74,-18},{-54,2}})));
-  vdi6007.BaseClasses.HWindow HWindow(
+  AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.HWindow HWindow(
     final g=g,
     final til=til,
     final n=n,

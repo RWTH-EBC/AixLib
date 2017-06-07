@@ -1,6 +1,5 @@
 within AixLib.ThermalZones.ReducedOrder.Windows.Examples;
 model Window "Testmodel for Window"
-  import vdi6007 = AixLib.ThermalZones.ReducedOrder.Windows;
     extends Modelica.Icons.Example;
 
   BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
@@ -30,7 +29,7 @@ equation
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
   <p>This example shows the application of
-  <a href=\"vdi6007.Window\">Window</a>.
+  <a href=\"AixLib.ThermalZones.ReducedOrder.Windows.Window\">Window</a>.
    For solar radiation, the example relies on the standard
   weather file in AixLib.</p>
   <p>The idea of the example is to show a typical application of all

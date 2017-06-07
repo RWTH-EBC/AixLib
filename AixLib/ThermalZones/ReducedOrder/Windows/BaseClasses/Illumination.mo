@@ -2,12 +2,6 @@ within AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses;
 model Illumination
   "Determining the activation and deactivation times of the illumination"
   extends Modelica.Blocks.Icons.Block;
-  import
-    AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_northAzimuth;
-  import
-    AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI;
-  import Modelica.SIunits.Conversions.to_deg;
-  import Modelica.Constants.pi;
   parameter Real D "daylight quotient";
   parameter Modelica.SIunits.Illuminance e_ILim1
     "internal illumninance required in reference point in the morning and
@@ -87,12 +81,12 @@ equation
   end if;
   //Calculating HLimVis
   for i in 1:n loop
-    r_DifCov[i]=0.182*(1.178*(1+Modelica.Math.cos(to_surfaceTiltVDI(til[i])))+
-    (pi-to_surfaceTiltVDI(til[i]))*
-    Modelica.Math.cos(to_surfaceTiltVDI(til[i]))+Modelica.Math.sin(
-    to_surfaceTiltVDI(til[i])));
+    r_DifCov[i]=0.182*(1.178*(1+Modelica.Math.cos(AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(til[i])))+
+    (Modelica.Constants.pi-AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(til[i]))*
+    Modelica.Math.cos(AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(til[i]))+Modelica.Math.sin(
+    AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(til[i])));
     HLimVisi[i]=e_ILim/(D*k_mDifCov)*(r_DifCov[i]*T_L[i]*
-    CorTaue_DifCov[i]+0.5*rho*(1-Modelica.Math.cos(to_surfaceTiltVDI(til[i])))*
+    CorTaue_DifCov[i]+0.5*rho*(1-Modelica.Math.cos(AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(til[i])))*
     T_L[i]*CorTaue_Gro[i])*(1-r[i])*A[i];
     HVisi[i]=HVis[i]*(1-r[i])*A[i];
   end for;

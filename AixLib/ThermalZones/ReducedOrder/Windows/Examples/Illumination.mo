@@ -1,7 +1,5 @@
 within AixLib.ThermalZones.ReducedOrder.Windows.Examples;
 model Illumination "Testmodel for Illumination"
-  import vdi6007 = AixLib.ThermalZones.ReducedOrder.Windows;
-  import AixLib;
   extends Modelica.Icons.Example;
 
   Windows.BaseClasses.HeatIllumination heatIllumination(HIll1=120, HIll2=240)
