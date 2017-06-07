@@ -1,7 +1,7 @@
 within AixLib.Fluid.DataCenters;
 model ServerRoomAirCooled
   extends AixLib.Fluid.DataCenters.BaseClasses.PartialServerRoom(volumeInlet(
-        nPorts=2), volumeRoom(nPorts=3));
+        nPorts=2, V=VInlet), volumeRoom(nPorts=3, V=VRoom));
 
 
 
@@ -10,9 +10,9 @@ model ServerRoomAirCooled
     use_portsData=false,
     use_HeatTransfer=true,
     each X_start=X_start,
-    V=13.2,
     nPorts=2,
-    T_start=T_start)
+    T_start=T_start,
+    V=VHotAisle)
               annotation (Placement(transformation(extent={{-66,20},{-74,28}})));
   Modelica.Fluid.Vessels.ClosedVolume volumeHotAisle4(
     redeclare package Medium = Medium,
@@ -20,8 +20,8 @@ model ServerRoomAirCooled
     each X_start=X_start,
     nPorts=2,
     use_HeatTransfer=true,
-    V=13.2,
-    T_start=T_start)
+    T_start=T_start,
+    V=VHotAisle)
               annotation (Placement(transformation(extent={{76,20},{84,28}})));
   Modelica.Blocks.Interfaces.RealInput CPUutilization[2] annotation (Placement(
         transformation(
@@ -34,8 +34,8 @@ model ServerRoomAirCooled
     each X_start=X_start,
     use_HeatTransfer=true,
     nPorts=3,
-    V=13.2,
-    T_start=T_start)
+    T_start=T_start,
+    V=VColdAisle)
               annotation (Placement(transformation(extent={{-8,0},{8,16}})));
   RackAirCooled                                                  racks1(
       redeclare package Medium = Medium,
@@ -53,6 +53,12 @@ model ServerRoomAirCooled
     annotation (Placement(transformation(extent={{100,-50},{120,-30}})));
   Modelica.Blocks.Math.Add add
     annotation (Placement(transformation(extent={{80,-46},{92,-34}})));
+  parameter Modelica.SIunits.Volume VInlet=56.25
+    "Volume of the inlet or false floor";
+  parameter Modelica.SIunits.Volume VRoom=55
+    "Volume of the room excluding the volume taken by racks and other equipment";
+  parameter Modelica.SIunits.Volume VColdAisle=13.2 "Volume of the cold aisle";
+  parameter Modelica.SIunits.Volume VHotAisle=13.2 "Volume of the hot aisle";
 equation
 
   connect(volumeColdAisle.ports[1], racks1.port_a) annotation (Line(points={{
@@ -73,18 +79,18 @@ equation
         points={{79.2,20},{79.2,20},{0,20},{0,70}}, color={0,127,255}));
   connect(racks2.port_b, volumeHotAisle4.ports[2]) annotation (Line(points={{50,
           0},{68,0},{80.8,0},{80.8,20}}, color={0,127,255}));
-  connect(racks1.port_b, volumeHotAisle1.ports[1]) annotation (Line(points={{
-          -50,0},{-69.2,0},{-69.2,20}}, color={0,127,255}));
+  connect(racks1.port_b, volumeHotAisle1.ports[1]) annotation (Line(points={{-50,
+          0},{-69.2,0},{-69.2,20}}, color={0,127,255}));
   connect(volumeHotAisle1.ports[2], volumeRoom.ports[3]) annotation (Line(
         points={{-70.8,20},{-70.8,20},{0,20},{0,70}}, color={0,127,255}));
   connect(volumeHotAisle1.heatPort, heatConvOuterwall.port_a) annotation (Line(
         points={{-66,24},{-16,24},{-16,50},{-24,50}}, color={191,0,0}));
   connect(volumeHotAisle4.heatPort, heatConvOuterwall.port_a) annotation (Line(
         points={{76,24},{-16,24},{-16,50},{-24,50}}, color={191,0,0}));
-  connect(CPUutilization[1], racks1.CPUutilization) annotation (Line(points={{
-          70,-110},{70,-46},{-20,-46},{-20,9},{-29,9}}, color={0,0,127}));
-  connect(CPUutilization[2], racks2.CPUutilization) annotation (Line(points={{
-          70,-90},{70,-90},{70,-46},{20,-46},{20,9},{29,9}}, color={0,0,127}));
+  connect(CPUutilization[1], racks1.CPUutilization) annotation (Line(points={{70,
+          -110},{70,-46},{-20,-46},{-20,9},{-29,9}}, color={0,0,127}));
+  connect(CPUutilization[2], racks2.CPUutilization) annotation (Line(points={{70,
+          -90},{70,-90},{70,-46},{20,-46},{20,9},{29,9}}, color={0,0,127}));
     annotation (
 Icon(coordinateSystem(preserveAspectRatio=false, extent={{-120,-100},{100,100}}),
          graphics={
