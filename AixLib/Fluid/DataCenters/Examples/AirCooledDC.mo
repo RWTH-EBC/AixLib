@@ -52,7 +52,19 @@ equation
     annotation (Line(points={{-60,0},{-56,0},{-50,0}}, color={0,127,255}));
   connect(bou.ports[1], pipe_RMain.port_b)
     annotation (Line(points={{20,-70},{40,-70},{40,-50}}, color={0,127,255}));
-  connect(sine.y, serverRoomAirCooled.CPUutilization) annotation (Line(points={
-          {-39.5,15},{-28,15},{-28,10},{-18.1818,10}}, color={0,0,127}));
-  annotation (experiment(StopTime=86400, Interval=100));
+  connect(sine.y, serverRoomAirCooled.CPUutilization) annotation (Line(points={{-39.5,
+          15},{-28,15},{-28,10},{-18.1818,10}},        color={0,0,127}));
+  annotation (experiment(StopTime=86400, Interval=100),
+    Documentation(info="<html>
+<p>
+Simple example of an air cooled server room with the CPU-utilization varying as a sine function between 40 and 100 percent.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+<i>June 07, 2017&nbsp;</i>  by Pooyan Jahangiri:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end AirCooledDC;

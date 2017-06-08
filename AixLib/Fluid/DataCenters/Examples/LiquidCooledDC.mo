@@ -4,10 +4,10 @@ model LiquidCooledDC
   ServerRoomLiquidCooled serverRoomLiquidCooled(
     m_flow_nominal=1,
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
     VInlet=0.01,
     VRoom=0.01)
     annotation (Placement(transformation(extent={{-20,-20},{20,20}})));
+
   Modelica.Fluid.Pipes.DynamicPipe pipe_FMain(
     nNodes=4,
     length=10,
@@ -34,10 +34,10 @@ model LiquidCooledDC
   Sources.MassFlowSource_T boundary(
     nPorts=1,
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
     m_flow=1,
     T=291.15)
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
+
   Sources.FixedBoundary bou(nPorts=1, redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater)
     annotation (Placement(transformation(extent={{0,-80},{20,-60}})));
@@ -60,5 +60,17 @@ equation
     annotation (Line(points={{20,-70},{40,-70},{40,-50}}, color={0,127,255}));
   connect(sine.y, serverRoomLiquidCooled.CPUutilization) annotation (Line(
         points={{-39.5,15},{-28,15},{-28,10},{-18.1818,10}}, color={0,0,127}));
-  annotation (experiment(StopTime=86400, Interval=100));
+  annotation (experiment(StopTime=86400, Interval=100),
+    Documentation(info="<html>
+<p>
+Simple example of a water cooled server room with the CPU-utilization varying as a sine function between 40 and 100 percent.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+<i>June 07, 2017&nbsp;</i>  by Pooyan Jahangiri:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end LiquidCooledDC;

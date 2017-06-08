@@ -86,5 +86,22 @@ equation
   connect(coolingConvection.solid, rackVolume.heatPort)
     annotation (Line(points={{50,-20},{50,16},{68,16}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}})));
+        coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}})),
+    Documentation(info="<html>
+<p>
+This is a simple liquid cooled rack model considering the whole rack or a row of racks as a single lumped volume and air node inside. 
+It calculates the heat dissipation of the IT components in the servers located in the racks based on the CPU utilization.
+The values are chosen based on measurement data of a test bed at TU Berlin.
+</p>
+<p>
+Changing the idle power of a single server and number f racks and servers, this model can simulate various data center rack setups.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+<i>June 07, 2017&nbsp;</i>  by Pooyan Jahangiri:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end RackLiquidCooled;
