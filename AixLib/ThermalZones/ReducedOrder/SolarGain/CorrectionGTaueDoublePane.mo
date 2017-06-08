@@ -1,6 +1,6 @@
 within AixLib.ThermalZones.ReducedOrder.SolarGain;
 model CorrectionGTaueDoublePane "Correction of the solar gain factor and the
-  transluance factor according to VDI6007 Part 3"
+  translucence factor according to VDI6007 Part 3"
   extends BaseClasses.PartialCorrectionGTaue;
   // Parameters for the transmission correction factor based on VDI 6007 Part 3
   // A0 to A6 are experimental constants VDI 6007 Part 3 page 20
@@ -9,7 +9,7 @@ model CorrectionGTaueDoublePane "Correction of the solar gain factor and the
   Modelica.SIunits.ReflectionCoefficient[n] XN2_Dir
     "Calculation factor to simplify equations";
   Modelica.SIunits.TransmissionCoefficient[n] tau_2Dir
-    "Energetic dregree of transmission for second pane";
+    "Energetic degree of transmission for second pane";
   Real[n] Q21_Dir
     "Coefficient of heat transfer for exterior pane of double pane window";
   Real[n] Q22_Dir
@@ -21,7 +21,7 @@ model CorrectionGTaueDoublePane "Correction of the solar gain factor and the
   Modelica.SIunits.ReflectionCoefficient[n] XN2_DifCle
     "Calculation factor to simplify equations";
   Modelica.SIunits.TransmissionCoefficient[n] tau_2DifCle
-    "Energetic dregree of transmission for second pane";
+    "Energetic degree of transmission for second pane";
   Real[n] Q21_DifCle
     "Coefficient of heat transfer for exterior pane of double pane window";
   Real[n] Q22_DifCle
@@ -33,7 +33,7 @@ model CorrectionGTaueDoublePane "Correction of the solar gain factor and the
   Modelica.SIunits.ReflectionCoefficient[n] XN2_Gro
     "Calculation factor to simplify equations";
   Modelica.SIunits.TransmissionCoefficient[n] tau_2Gro
-    "Energetic dregree of transmission for second pane";
+    "Energetic degree of transmission for second pane";
   Real[n] Q21_Gro
     "Coefficient of heat transfer for exterior pane of double pane window";
   Real[n] Q22_Gro
@@ -59,7 +59,7 @@ protected
     "Calculation factor to simplify equations";
   parameter Modelica.SIunits.TransmissionCoefficient tau_2DifCov=
     (tau_1DifCov^2)/XN2_DifCov
-    "Energetic dregree of transmission for second pane";
+    "Energetic degree of transmission for second pane";
   parameter Modelica.SIunits.Emissivity a_1DifCov=1-tau_1DifCov-rho_1DifCov
     "Degree of absorption for single pane window";
   parameter Modelica.SIunits.CoefficientOfHeatTransfer Q21_DifCov=
@@ -99,7 +99,7 @@ equation
     tau_2DifCle[i]= tau_1DifCle[i]^2/XN2_DifCle[i];
 
     //Calculating variables for the overall degree of energy passage for ground
-    //reflexion radiation
+    //reflection radiation
     if (1-rho_1Gro[i]^2)==0 then
       XN2_Gro[i]=10^(-20);
     else
@@ -141,7 +141,7 @@ equation
   grid={2,2})),
   Documentation(info="<html>
   <p><a href=\"vdi6007.BaseClasses.CorrrectionGTaueDoublePane\">CorrectionGTaueDoublePane</a>
-  computes transmission correction factors for the g-factor and the transluence.
+  computes transmission correction factors for the g-factor and the translucence.
   Transmission properties of transparent
   elements are in general dependent on the solar incidence angle. To take this
   dependency into account, correction factors can multiplied with the solar
@@ -162,7 +162,7 @@ equation
 <p><i>September 12, 2015 </i>by Moritz Lauster: </p>
 <p>Adapted to Annex 60 requirements. </p>
 <p><i>May 25, 2016 </i>by Stanley Risch:</p>
-<p>Added the correction of the transluence factor according to VDI6007 Part 3
+<p>Added the correction of the translucence factor according to VDI6007 Part 3
 </p>
 </html>"));
 end CorrectionGTaueDoublePane;

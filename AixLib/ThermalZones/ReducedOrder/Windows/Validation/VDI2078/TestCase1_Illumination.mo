@@ -803,7 +803,7 @@ model TestCase1_Illumination
     T_L={0.72},
     D=0.027,
     til={1.5707963267949})
-    "determining the switch moments for VDI2078 test case 1"
+    "Determining the switch moments for VDI2078 test case 1"
     annotation (Placement(transformation(extent={{62,-8},{82,12}})));
   Windows.Validation.BaseClasses.SolarHourAngleVDI6007 solarHourAngleVDI(
     lon=0.15009831567151)

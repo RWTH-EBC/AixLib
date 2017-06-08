@@ -1,12 +1,13 @@
 within AixLib.ThermalZones.ReducedOrder.Windows.Validation.BaseClasses;
-model SolarHourAngleVDI6007 "Calculates the solar hour angle every hour based on the equations of VDI 6007 part 3.
-  It is modelled to test other Models based on VDI2078. It doesn't consider summer time"
+model SolarHourAngleVDI6007 "Calculates the solar hour angle every hour based
+  on the equations of VDI 6007 part 3. It is modelled to test other Models
+   based on VDI2078. It doesn't consider summer time"
 
   extends Modelica.Blocks.Icons.Block;
   parameter Modelica.SIunits.Angle lon "Longitude";
   Modelica.SIunits.Angle J_;
-  Modelica.SIunits.Time zgl "time equation";
-  Modelica.SIunits.Time woz "true time";
+  Modelica.SIunits.Time zgl "Time equation";
+  Modelica.SIunits.Time woz "True time";
   Modelica.Blocks.Interfaces.RealOutput solHouAng(
     final quantity="Angle",
     final unit="rad",

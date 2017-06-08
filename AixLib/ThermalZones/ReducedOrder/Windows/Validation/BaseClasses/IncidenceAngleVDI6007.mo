@@ -3,13 +3,16 @@ block IncidenceAngleVDI6007
   "The solar incidence angle on a tilted surface"
   extends Modelica.Blocks.Icons.Block;
   parameter Modelica.SIunits.Angle azi(displayUnit="degree")
-    "Surface azimuth. azi=-90 degree if surface outward unit normal points toward east; azi=0 if it points toward south";
+    "Surface azimuth. azi=-90 degree if surface outward unit normal points
+     toward east; azi=0 if it points toward south";
   parameter Modelica.SIunits.Angle til(displayUnit="degree")
     "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for roof";
-  Modelica.Blocks.Interfaces.RealInput solAzi(quantity="Angle", unit="rad")
+  Modelica.Blocks.Interfaces.RealInput solAzi(final quantity="Angle",
+    final unit="rad")
     "Solar azimuth angle"
     annotation (Placement(transformation(extent={{-140,-68},{-100,-28}})));
-  Modelica.Blocks.Interfaces.RealInput alt(quantity="Angle", unit="rad")
+  Modelica.Blocks.Interfaces.RealInput alt(final quantity="Angle",
+    final unit="rad")
     "solar altitude angle"
     annotation (Placement(transformation(extent={{-142,34},{-102,74}})));
   Modelica.Blocks.Interfaces.RealOutput incAng(

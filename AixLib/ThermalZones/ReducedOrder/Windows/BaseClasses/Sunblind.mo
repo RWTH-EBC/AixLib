@@ -13,7 +13,7 @@ model Sunblind "Calculates if sunblind of window is active"
     annotation (Placement(transformation(extent={{-114,-64},{-100,-50}}),
         iconTransformation(extent={{-120,-70},{-100,-50}})));
   Modelica.Blocks.Interfaces.BooleanOutput sunscreen
-    "if true: sunscreen is closed, else sunscreen is open;"
+    "If true: sunscreen is closed, else sunscreen is open;"
       annotation (Placement(transformation(extent={{98,-10},{118,10}}),
         iconTransformation(extent={{100,-10},{120,10}})));
 

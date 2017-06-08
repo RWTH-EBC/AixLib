@@ -2,7 +2,7 @@ within AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses;
 model HWindow "Calculates the solar heat input through the window"
   extends Modelica.Blocks.Icons.Block;
 
-  parameter Integer n(min=1) "number of windows"
+  parameter Integer n(min=1) "Number of windows"
     annotation (Dialog(group="window"));
   parameter Modelica.SIunits.TransmissionCoefficient g[n]
     "Total energy transmittance of windows"
@@ -20,7 +20,7 @@ model HWindow "Calculates the solar heat input through the window"
     roof"
     annotation (Dialog(group="window"));
   final parameter Modelica.SIunits.ReflectionCoefficient rho=0.2
-    "degree of ground reflection";
+    "Degree of ground reflection";
   Modelica.Blocks.Interfaces.RealInput alt(
     final quantity="Angle",
     final unit="rad",
@@ -55,7 +55,7 @@ model HWindow "Calculates the solar heat input through the window"
     annotation (Placement(transformation(extent={{-120,-26},{-106,-12}}),
         iconTransformation(extent={{-114,-26},{-100,-12}})));
   Modelica.Blocks.Interfaces.BooleanInput sunscreen[n]
-    "true: sunscreen closed, false: sunscreen open"
+    "True: sunscreen closed, false: sunscreen open"
     annotation (Placement(transformation(extent={{-120,-40},{-80,0}}),
         iconTransformation(extent={{-114,-6},{-100,8}})));
   Modelica.Blocks.Interfaces.RealInput CorG_Dir[n](
@@ -92,10 +92,10 @@ model HWindow "Calculates the solar heat input through the window"
         iconTransformation(extent={{100,-10},{120,10}})));
 protected
   Modelica.SIunits.TransmissionCoefficient g_Dirx[n]
-    "calculation variable to determine the active total energy transmittance of
+    "Calculation variable to determine the active total energy transmittance of
      windows for direct radiation";
   Modelica.SIunits.TransmissionCoefficient g_Difx[n]
-    "calculation variable to determine the active total energy transmittance of
+    "Calculation variable to determine the active total energy transmittance of
     windows for diffuse radiation";
 equation
   for i in 1:n loop

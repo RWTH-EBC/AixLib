@@ -14,22 +14,22 @@ model SkylineShadowing
     "Difference between height of corner point and the window centre"
     annotation(dialog(group="skyline"));
   parameter Modelica.SIunits.Distance[n] s
-    "horizontal distance between corner point and window centre"
+    "Horizontal distance between corner point and window centre"
     annotation(dialog(group="skyline"));
   parameter Boolean[n-1] gap
-    "corner points i and i+1 are gap between buildings: true, else: false"
+    "Corner points i and i+1 are gap between buildings: true, else: false"
     annotation(dialog(group="skyline"));
 
   Modelica.Blocks.Interfaces.RealInput solAzi(
-    quantity="Angle",
-    unit="rad",
+    final quantity="Angle",
+    final unit="rad",
     displayUnit="deg") "Solar azimuth"
      annotation (Placement(transformation(extent={{-140,-30},{-100,10}}),
         iconTransformation(extent={{-120,-10},{-100,10}})));
   Modelica.Blocks.Interfaces.RealOutput altLim(
-    quantity="Angle",
-    unit="rad",
-    displayUnit="deg") "limit elevation angle for shadowing by a skyline"
+    final quantity="Angle",
+    final unit="rad",
+    final displayUnit="deg") "Limit elevation angle for shadowing by a skyline"
   annotation (Placement(transformation(extent={{100,-14},{128,14}}),
         iconTransformation(extent={{100,-10},{120,10}})));
 
@@ -37,9 +37,10 @@ protected
   Modelica.SIunits.Angle[n-1] X "Calculation factor to simplify equations";
   Modelica.SIunits.Angle[n-1] Y "Calculation factor to simplify equations";
   Modelica.SIunits.Angle altLimi[n-1](displayUnit="deg")
-    "limit elevation angle for shadowing by a skyline for point i and i+1";
-  Modelica.SIunits.Angle gamma[n]( min=0,max=Modelica.Constants.pi/2,displayUnit="deg")
-    "elevation angle of the obstruction for point i";
+    "Limit elevation angle for shadowing by a skyline for point i and i+1";
+  Modelica.SIunits.Angle gamma[n]( min=0,max=Modelica.Constants.pi/2,
+    displayUnit="deg")
+    "Elevation angle of the obstruction for point i";
 equation
   //Calculating gamma
   for i in 1:n loop

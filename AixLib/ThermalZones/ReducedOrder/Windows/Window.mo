@@ -1,7 +1,7 @@
 within AixLib.ThermalZones.ReducedOrder.Windows;
 model Window "Calculation of solar energy transmitted through windows"
   parameter Modelica.SIunits.Angle lat "Latitude";
-  parameter Integer n(min = 1) "number of windows"
+  parameter Integer n(min = 1) "Number of windows"
     annotation(dialog(group="window"));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer UWin
     "Thermal transmission coefficient of whole window"
@@ -18,19 +18,19 @@ model Window "Calculation of solar energy transmitted through windows"
      radiation"
     annotation(Dialog(group="window"));
   parameter Modelica.SIunits.TransmissionCoefficient T_L[n]
-    "degree of light transmission for direct irradiation"
+    "Degree of light transmission for direct irradiation"
     annotation (Dialog(group="window"));
   parameter Modelica.SIunits.TransmissionCoefficient T_LTotDir[n]
-    "degree of light transmission for direct irradiation, with sunscreen"
+    "Degree of light transmission for direct irradiation, with sunscreen"
     annotation (Dialog(group="window"));
   parameter Modelica.SIunits.TransmissionCoefficient T_LTotDif[n]
-    "degree of light transmission for diffuse irradiation, with sunscreen"
+    "Degree of light transmission for diffuse irradiation, with sunscreen"
     annotation (Dialog(group="window"));
   parameter Modelica.SIunits.RadiantEnergyFluenceRate lim
     "Limit for the sunscreen to become active"
     annotation(dialog(group="sunscreen"));
   parameter Modelica.SIunits.Angle xi(displayUnit="degree")= 0
-    "elevation angle";
+    "Elevation angle";
   parameter Modelica.SIunits.Angle til[n](displayUnit="deg")
     "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for
     roof"
@@ -40,7 +40,7 @@ model Window "Calculation of solar energy transmitted through windows"
   extends Modelica.Blocks.Icons.Block;
   Modelica.Blocks.Interfaces.RealOutput HVis[n](
     final quantity="RadiantEnergyFluenceRate",
-    final unit="W/m2") "solar energy entering the room in the visible area"
+    final unit="W/m2") "Solar energy entering the room in the visible area"
     annotation (Placement(transformation(extent={{100,30},{120,50}}),
         iconTransformation(extent={{100,30},{120,50}})));
 

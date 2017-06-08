@@ -1,11 +1,11 @@
 within AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses;
 block VentilationHeat "heat input due to ventilation with closed sunblind"
   extends Modelica.Blocks.Icons.Block;
-  parameter Real x_f(min=0,max=1) "percentage of open windowarea"
+  parameter Real x_f(min=0,max=1) "Percentage of open windowarea"
     annotation(dialog(group="window"));
-  parameter Modelica.SIunits.Distance d "distance sunscreen to window"
+  parameter Modelica.SIunits.Distance d "Distance sunscreen to window"
     annotation(dialog(group="sunscreen"));
-  parameter Boolean screen "if screen: true, if blind: false"
+  parameter Boolean screen "If screen: true, if blind: false"
     annotation(dialog(group="sunscreen"));
   parameter Modelica.SIunits.TransmissionCoefficient tau_e
     "Transmission coefficient of sunscreen"
@@ -19,32 +19,32 @@ block VentilationHeat "heat input due to ventilation with closed sunblind"
     annotation (Dialog(group="window"));
 
    Modelica.Blocks.Interfaces.BooleanInput sunscreen
-    "true: sunscreen closed, false: sunscreen open"
+    "True: sunscreen closed, false: sunscreen open"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}}),
         iconTransformation(extent={{-120,10},{-100,30}})));
    Modelica.Blocks.Interfaces.RealInput HDirTil(final quantity=
      "RadiantEnergyFluenceRate",final unit="W/m2")
-    "direct radiation on a tilted surface"
+    "Direct radiation on a tilted surface"
    annotation (Placement(transformation(extent={{-140,-50},{-100,-10}}),
         iconTransformation(extent={{-120,-30},{-100,-10}})));
    Modelica.Blocks.Interfaces.RealInput HDifTil(final quantity=
    "RadiantEnergyFluenceRate", final unit="W/m2")
-    "diffuse radiation on a tilted surface"
+    "Diffuse radiation on a tilted surface"
    annotation (Placement(transformation(extent={{-140,20},{-100,60}}),
         iconTransformation(extent={{-120,40},{-100,60}})));
    Modelica.Blocks.Interfaces.RealInput HDifHor(final quantity=
      "RadiantEnergyFluenceRate",final unit="W/m2")
-    "diffuse radiation on horizontal surface"
+    "Diffuse radiation on horizontal surface"
    annotation (Placement(transformation(extent={{-140,50},{-100,90}}),
         iconTransformation(extent={{-120,70},{-100,90}})));
    Modelica.Blocks.Interfaces.RealInput HDirNor(final quantity=
      "RadiantEnergyFluenceRate",final unit="W/m2")
-    "direct radiation on horizontal surface"
+    "Direct radiation on horizontal surface"
    annotation (Placement(transformation(extent={{-140,-80},{-100,-40}}),
         iconTransformation(extent={{-120,-60},{-100,-40}})));
   Modelica.Blocks.Interfaces.RealOutput HVen(final quantity=
     "RadiantEnergyFluenceRate", final unit="W/m2")
-    "heat input due to ventilation"
+    "Heat input due to ventilation"
     annotation (Placement(transformation(extent={{100,-10},{120,10}}),
         iconTransformation(extent={{100,-12},{124,12}})));
   Modelica.Blocks.Interfaces.RealInput alt(
@@ -56,7 +56,7 @@ block VentilationHeat "heat input due to ventilation with closed sunblind"
 protected
    parameter Modelica.SIunits.ReflectionCoefficient rho=0.2
     "ground reflection";
-   Real factor_gv "calculation factor";
+   Real factor_gv "Calculation factor";
 
 equation
   //calculating factor_gv

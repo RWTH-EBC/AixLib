@@ -2,17 +2,17 @@ within AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses;
 model HVisible
   "Calculates the solar energy entering the room in the visible area"
   extends Modelica.Blocks.Icons.Block;
-  parameter Integer n(min=1) "number of windows"
+  parameter Integer n(min=1) "Number of windows"
     annotation (Dialog(group="window"));
 
   parameter Modelica.SIunits.TransmissionCoefficient T_L[n]
-    "degree of light transmission"
+    "Degree of light transmission"
     annotation (Dialog(group="window"));
   parameter Modelica.SIunits.TransmissionCoefficient T_LTotDir[n]
-    "degree of light transmission for direct irradiation, with sunscreen"
+    "Degree of light transmission for direct irradiation, with sunscreen"
     annotation (Dialog(group="window"));
   parameter Modelica.SIunits.TransmissionCoefficient T_LTotDif[n]
-    "degree of light transmission for diffuse irradiation, with sunscreen"
+    "Degree of light transmission for diffuse irradiation, with sunscreen"
     annotation (Dialog(group="window"));
 
   parameter Modelica.SIunits.Angle til[n](displayUnit="deg")
@@ -20,30 +20,30 @@ model HVisible
     roof"
     annotation (Dialog(group="window"));
   final parameter Modelica.SIunits.ReflectionCoefficient rho=0.2
-    "degree of ground reflection";
+    "Degree of ground reflection";
 
   Modelica.Blocks.Interfaces.BooleanInput sunscreen[n]
-    "true: sunscreen closed, false: sunscreen open"
+    "True: sunscreen closed, false: sunscreen open"
     annotation (Placement(transformation(extent={{-120,-40},{-80,0}}),
         iconTransformation(extent={{-114,-6},{-100,8}})));
   Modelica.Blocks.Interfaces.RealInput CorTaue_Dir[n](
     final quantity="TransmissionCoefficient",
     final unit="1")
-    "Correction value for transluance for direct irradiation"
+    "Correction value for translucence for direct irradiation"
     annotation (Placement(transformation(extent={{-128,78},{-108,98}}),
         iconTransformation(extent={{-114,-106},{-100,-92}})));
 
   Modelica.Blocks.Interfaces.RealInput CorTaue_DifCle[n](
     final quantity="TransmissionCoefficient",
     final unit="1")
-    "Correction value for transluance for diffuse irradiation during clear sky"
+    "Correction value for translucence for diffuse irradiation during clear sky"
     annotation (Placement(transformation(extent={{-120,-92},{-100,-72}}),
         iconTransformation(extent={{-114,-86},{-100,-72}})));
 
   Modelica.Blocks.Interfaces.RealInput CorTaue_DifCov[n](
     final quantity="TransmissionCoefficient",
     final unit="1")
-    "Correction value for transluance for diffuse irradiation during covered
+    "Correction value for translucence for diffuse irradiation during covered
     sky"
     annotation (Placement(transformation(extent={{-120,-72},{-100,-52}}),
         iconTransformation(extent={{-114,-66},{-100,-52}})));
@@ -51,7 +51,7 @@ model HVisible
   Modelica.Blocks.Interfaces.RealInput CorTaue_Gro[n](
     final quantity="TransmissionCoefficient",
     final unit="1")
-    "Correction value for transluance for ground reflexion radiation"
+    "Correction value for translucence for ground reflection radiation"
     annotation (Placement(transformation(extent={{-120,-52},{-100,-32}}),
         iconTransformation(extent={{-114,-46},{-100,-32}})));
      Modelica.Blocks.Interfaces.RealInput alt(
@@ -107,22 +107,22 @@ model HVisible
 
 protected
   parameter Real Cor_KMDifCov=1
-    "correction factor for diffuse irradiation at uniformly overcast skies
+    "Correction factor for diffuse irradiation at uniformly overcast skies
     according to DIN 5034-2";
   Real Cor_KMDir
-    "correction factor for direct solar irradiation according to DIN 5034-2";
+    "Correction factor for direct solar irradiation according to DIN 5034-2";
   Real Cor_KMDifCle
-    "correction factor for diffuse irradiation at cloudless clear skies
+    "Correction factor for diffuse irradiation at cloudless clear skies
     according to DIN 5034-2";
   Modelica.SIunits.TransmissionCoefficient T_LDifx[n]
-    "calculation variable for the degree of light transmission for diffuse
+    "Calculation variable for the degree of light transmission for diffuse
     irradiation";
   Modelica.SIunits.TransmissionCoefficient T_LDirx[n]
-    "calculation variable for the degree of light transmission for direct
+    "Calculation variable for the degree of light transmission for direct
     irradiation";
   Modelica.SIunits.EnergyFlowRate H_EvaHor[n]
-    "evaluated solar irradiation onto the horizontal for determining the ground
-     reflexion radiation";
+    "Evaluated solar irradiation onto the horizontal for determining the ground
+     reflection radiation";
 
 equation
   //calculating H_RoomL

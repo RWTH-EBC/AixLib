@@ -1,14 +1,14 @@
 within AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses;
 partial model PartialCorrectionGTaue
   "Partial model for correction of the solar gain factor and for the
-  transluence"
+  translucence"
   parameter Integer n(min = 1) "number of windows"
     annotation(dialog(group="window"));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer UWin
     "Thermal transmission coefficient of whole window"
     annotation(dialog(group="window"));
   parameter Modelica.SIunits.Angle xi( displayUnit="degree")=0
-    "elevation angle";
+    "Elevation angle";
   parameter Modelica.SIunits.Angle[n] til(displayUnit="degree")
     "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for roof"
     annotation(dialog(group="window"));
@@ -23,7 +23,7 @@ partial model PartialCorrectionGTaue
     final quantity="TransmissionCoefficient",
     final unit="1")
     "Transmission coefficient correction factor for diffuse radiation while
-    clear sky"
+     clear sky"
     annotation (Placement(transformation(extent={{80,-50},{100,-30}}),
     iconTransformation(extent={{80,-50},{100,-30}})));
   Modelica.Blocks.Interfaces.RealOutput[n] CorG_DifCov(
@@ -42,26 +42,26 @@ partial model PartialCorrectionGTaue
   Modelica.Blocks.Interfaces.RealOutput[n] CorTaue_Dir(
     final quantity="TransmissionCoefficient",
     final unit="1")
-    "Correction value for transluance for direct irradiation"
+    "Correction value for translucence for direct irradiation"
     annotation (Placement(transformation(extent={{80,10},{100,30}}),
     iconTransformation(extent={{80,10},{100,30}})));
   Modelica.Blocks.Interfaces.RealOutput[n] CorTaue_DifCle(
     final quantity="TransmissionCoefficient",
     final unit="1")
-    "Correction value for transluance for diffuse irradiation during clear sky"
+    "Correction value for translucence for diffuse irradiation during clear sky"
     annotation (Placement(transformation(extent={{80,30},{100,50}}),
     iconTransformation(extent={{80,30},{100,50}})));
   Modelica.Blocks.Interfaces.RealOutput[n] CorTaue_DifCov(
     final quantity="TransmissionCoefficient",
     final unit="1")
-    "Correction value for transluance for diffuse irradiation during covered
+    "Correction value for translucence for diffuse irradiation during covered
      sky"
     annotation (Placement(transformation(extent={{80,50},{100,70}}),
     iconTransformation(extent={{80,50},{100,70}})));
   Modelica.Blocks.Interfaces.RealOutput[n] CorTaue_Gro(
     final quantity="TransmissionCoefficient",
     final unit="1")
-    "Correction value for transluance for ground reflexion radiation"
+    "Correction value for translucence for ground reflection radiation"
     annotation (Placement(transformation(extent={{80,70},{100,90}}),
     iconTransformation(extent={{80,70},{100,90}})));
 
@@ -73,7 +73,7 @@ partial model PartialCorrectionGTaue
     annotation (Placement(transformation(extent={{-120,-10},{-80,30}}),
     iconTransformation(extent={{-100,10},{-80,30}})));
   Modelica.Blocks.Interfaces.BooleanInput sunscreen[n]
-    "true: sunscreen closed, false: sunscreen open"
+    "True: sunscreen closed, false: sunscreen open"
     annotation (Placement(transformation(extent={{-120,-40},{-80,0}}),
         iconTransformation(extent={{-100,-30},{-80,-10}})));
 
@@ -112,7 +112,7 @@ protected
   parameter Modelica.SIunits.TransmissionCoefficient tau_iDif=0.903
     "Pure degree of transmission for diffuse radiation";
   Modelica.SIunits.Angle[n] gamma_x
-    "calculation factor for ground reflexion radiation";
+    "Calculation factor for ground reflection radiation";
   Modelica.SIunits.TransmissionCoefficient[n] tau_Dir
     "Energetic degree of transmission for direct radiation";
   Modelica.SIunits.TransmissionCoefficient[n] taui_Dir
@@ -143,7 +143,7 @@ protected
   Modelica.SIunits.Emissivity[n] a_1DifCle
     "Degree of absorption for single pane window";
   Modelica.SIunits.TransmissionCoefficient[n] tau_Gro
-    "Energetic degree of transmission for ground reflexion radiation";
+    "Energetic degree of transmission for ground reflection radiation";
   Modelica.SIunits.TransmissionCoefficient[n] tau_1Gro
     "Degreee of transmission for single pane window";
   Modelica.SIunits.ReflectionCoefficient[n] rho_T1Gro
@@ -199,15 +199,18 @@ equation
   rho_1DifCle[i]=rho_11DifCle[i]+(((1-rho_11DifCle[i])*tau_iDif)^2
   *rho_11DifCle[i])/(1-(rho_11DifCle[i]*tau_iDif)^2);
   a_1DifCle[i]=1-tau_1DifCle[i]-rho_1DifCle[i];
-  //Calculating variables for ground reflexion radiation
-  if (xi+AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(
+  //Calculating variables for ground reflection radiation
+  if (xi+
+    AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(
     til[i]))<0 then
     gamma_x[i]=0;
-  elseif (xi+AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(
+  elseif (xi+
+    AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(
     til[i]))>Modelica.Constants.pi/2 then
     gamma_x[i]=Modelica.Constants.pi/2;
   else
-    gamma_x[i]=xi+AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(
+    gamma_x[i]=xi+
+    AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(
     til[i]);
   end if;
   tau_Gro[i] = 0.84*Modelica.Math.sin(gamma_x[i])^(0.88*(1-0.5*abs(
@@ -246,7 +249,7 @@ equation
   <p><i>February 24, 2014</i> by Reza Tavakoli:</p>
   <p>Implemented. </p>
 <p><i>May 25, 2016 </i>by Stanley Risch:</p>
-<p>Added the correction of the transluence factor according to VDI6007 Part 3
+<p>Added the correction of the translucence factor according to VDI6007 Part 3
 </p>
   </html>"));
 end PartialCorrectionGTaue;
