@@ -2,7 +2,7 @@ within AixLib.Media;
 package Refrigerants "Package with models for different refrigerants"
   package Interfaces "Package with interfaces for refrigerant models"
     extends Modelica.Icons.InterfacesPackage;
-    package TemplateHybridTwoPhaseMedium
+    partial package TemplateHybridTwoPhaseMedium
       "Template for media models using a hybrid aprroach"
 
       /*Provide basic definitions of the refrigerent. Therefore, fullfill constants
@@ -784,7 +784,7 @@ package Refrigerants "Package with models for different refrigerants"
       /*Provide Helmholtz equations of state (EoS). These EoS must be fitted to
     different refrigerents. However, the structure will not change and, therefore,
     the coefficients, which are obtained during the fitting procedure, are 
-    provided by a record.
+    provided by a record. These coefficients have to be provided within the template.
     Just change if needed.
   */
       replaceable partial function alpha_0
@@ -804,55 +804,60 @@ package Refrigerants "Package with models for different refrigerants"
       replaceable partial function tau_d_alpha_0_d_tau
       "Short form for tau*(dalpha_0/dtau)@delta=const"
         input Real tau "Density";
-        output Real tau_d_alpha_0_d_tau = 0;
+        output Real tau_d_alpha_0_d_tau = 0 "Tau*(dalpha_0/dtau)@delta=const";
       end tau_d_alpha_0_d_tau;
 
       replaceable partial function tau_d_alpha_r_d_tau
-      "Short form for tau*(dalpha_r/dtau@delta=const"
-        input Real delta;
-        input Real tau;
-        output Real tau_d_alpha_r_d_tau = 0;
+      "Short form for tau*(dalpha_r/dtau)@delta=const"
+        input Real delta "Temperature";
+        input Real tau "Density";
+        output Real tau_d_alpha_r_d_tau = 0 "Tau*(dalpha_r/dtau)@delta=const";
       end tau_d_alpha_r_d_tau;
 
       replaceable partial function tau_delta_d2_alpha_r_d_tau_d_delta
       "Short form for tau*delta*(ddalpha_r/(dtau*ddelta))"
-        input Real delta;
-        input Real tau;
-        output Real tau_delta_d2_alpha_r_d_tau_d_delta = 0;
+        input Real delta "Temperature";
+        input Real tau "Density";
+        output Real tau_delta_d2_alpha_r_d_tau_d_delta = 0
+        "Tau*delta*(ddalpha_r/(dtau*ddelta))";
       end tau_delta_d2_alpha_r_d_tau_d_delta;
 
       replaceable partial function tau2_d2_alpha_r_d_tau2
       "Short form for tau*tau*(ddalpha_r/(dtau*dtau))@delta=const"
-          input Real delta;
-          input Real tau;
-          output Real tau2_d2_alpha_r_d_tau2 = 0;
+          input Real delta "Temperature";
+          input Real tau "Density";
+          output Real tau2_d2_alpha_r_d_tau2 = 0
+          "Tau*tau*(ddalpha_r/(dtau*dtau))@delta=const";
       end tau2_d2_alpha_r_d_tau2;
 
       replaceable partial function tau2_d2_alpha_0_d_tau2
       "Short form for tau*tau*(ddalpha_0/(dtau*dtau))@delta=const"
-          input Real tau;
-          output Real tau2_d2_alpha_0_d_tau2 = 0;
+          input Real tau "Density";
+          output Real tau2_d2_alpha_0_d_tau2 = 0
+          "Tau*tau*(ddalpha_0/(dtau*dtau))@delta=const";
       end tau2_d2_alpha_0_d_tau2;
 
       replaceable partial function delta_d_alpha_r_d_delta
       "Short form for delta*(dalpha_r/(ddelta))@tau=const"
-        input Real delta;
-        input Real tau;
-        output Real delta_d_alpha_r_d_delta = 0;
+        input Real delta "Temperature";
+        input Real tau "Density";
+        output Real delta_d_alpha_r_d_delta = 0 "Delta*(dalpha_r/(ddelta))@tau=const";
       end delta_d_alpha_r_d_delta;
 
       replaceable partial function delta3_d3_alpha_r_d_delta3
       "Short form for delta*delta*delta(dddalpha_r/(ddelta*delta*delta))@tau=const"
-        input Real delta;
-        input Real tau;
-        output Real delta3_d3_alpha_r_d_delta3 = 0;
+        input Real delta "Temperature";
+        input Real tau "Density";
+        output Real delta3_d3_alpha_r_d_delta3 = 0
+        "Delta*delta*delta(dddalpha_r/(ddelta*delta*delta))@tau=const";
       end delta3_d3_alpha_r_d_delta3;
 
       replaceable partial function delta2_d2_alpha_r_d_delta2
       "Short form for delta*delta(ddalpha_r/(ddelta*delta))@tau=const"
-        input Real delta;
-        input Real tau;
-        output Real delta2_d2_alpha_r_d_delta2 = 0;
+        input Real delta "Temperature";
+        input Real tau "Density";
+        output Real delta2_d2_alpha_r_d_delta2 = 0
+        "Delta*delta(ddalpha_r/(ddelta*delta))@tau=const";
       end delta2_d2_alpha_r_d_delta2;
 
 
@@ -1102,15 +1107,16 @@ package Refrigerants "Package with models for different refrigerants"
         Real R = Modelica.Constants.R/MM;
         Real delta = d/(d_crit*MM);
         Real tau = T_crit/T;
+
         SaturationProperties sat = setSat_T(T);
         Real phase_dT = if not ((d < bubbleDensity(sat) and d > dewDensity(sat)) and T
              < fluidConstants[1].criticalTemperature) then 1 else 2;
 
       algorithm
         if phase_dT == 1 or phase == 1 then
-          p := d*R*T*(1+delta_d_alpha_r_d_delta(delta,tau)); // verified
+          p := d*R*T*(1+delta_d_alpha_r_d_delta(delta,tau));
         elseif phase_dT == 2 or phase == 2 then
-          p :=saturationPressure(T);
+          p := saturationPressure(T);
         end if;
       annotation(derivative(noDerivative=phase)=pressure_dT_der,
           inverse(d=density_pT(p=p,T=T,phase=phase)),
@@ -1119,101 +1125,99 @@ package Refrigerants "Package with models for different refrigerants"
       end pressure_dT;
 
       redeclare replaceable partial function density_pT
-        "Computes density as a function of pressure and temperature"
+      "Computes density as a function of pressure and temperature"
           extends Modelica.Icons.Function;
           input AbsolutePressure p "Pressure";
           input Temperature T "Temperature";
-          input FixedPhase phase=0 "2 for two-phase, 1 for one-phase, 0 if not known";
+          input FixedPhase phase = 0 "2 for two-phase, 1 for one-phase, 0 if not known";
           output Density d "Density";
       end density_pT;
 
-      redeclare function density_ph "returns density for given p and h"
+      redeclare function density_ph
+      "Computes density as a function of pressure and enthalpy"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "Pressure";
-        input SpecificEnthalpy h "Enthalpy";
-        input FixedPhase phase=0 "2 for two-phase, 1 for one-phase, 0 if not known";
-        output Density d "Temperature";
+        input SpecificEnthalpy h "Specific enthalpy";
+        input FixedPhase phase = 0 "2 for two-phase, 1 for one-phase, 0 if not known";
+        output Density d "Density";
 
       protected
-          SpecificEnthalpy dh=10;
+          SpecificEnthalpy dh = 10;
           SaturationProperties sat;
           SpecificEnthalpy h_dew;
           SpecificEnthalpy h_bubble;
 
       algorithm
-          sat.psat:=p;
-          sat.Tsat:=saturationTemperature(p);
-          h_dew:=dewEnthalpy(sat);
-          h_bubble:=bubbleEnthalpy(sat);
+          sat := setSat_p(p=p);
+          h_dew := dewEnthalpy(sat);
+          h_bubble := bubbleEnthalpy(sat);
 
-            if h<h_bubble-dh or h>h_dew+dh then
-              d:=density_pT(p=p,T=temperature_ph(p=p,h=h));
+          if h<h_bubble-dh or h>h_dew+dh then
+              d := density_pT(p=p,T=temperature_ph(p=p,h=h));
           else
-              if h<h_bubble then
-                  d:=bubbleDensity(sat)*(1 - (h_bubble - h)/dh) + density_pT(p=p,T=temperature_ph(p=p,h=h))*(h_bubble - h)/dh;
-              elseif h>h_dew then
-                  d:=dewDensity(sat)*(1 - (h - h_dew)/dh) + density_pT(p=p,T=temperature_ph(p=p,h=h))*(h - h_dew)/dh;
-              else
-                  d:=1/((1-(h-h_bubble)/(h_dew-h_bubble))/bubbleDensity(sat) + ((h-h_bubble)/(h_dew-h_bubble))/dewDensity(sat));
-              end if;
+            if h<h_bubble then
+                d := bubbleDensity(sat)*(1 - (h_bubble - h)/dh) + density_pT(
+                  p=p,T=temperature_ph(p=p,h=h))*(h_bubble - h)/dh;
+            elseif h>h_dew then
+                d := dewDensity(sat)*(1 - (h - h_dew)/dh) + density_pT(
+                  p=p,T=temperature_ph(p=p,h=h))*(h - h_dew)/dh;
+            else
+                d := 1/((1-(h-h_bubble)/(h_dew-h_bubble))/bubbleDensity(sat) +
+                  ((h-h_bubble)/(h_dew-h_bubble))/dewDensity(sat));
+            end if;
           end if;
-
       annotation(derivative(noDerivative=phase)=density_ph_der,
               Inline=false,
               LateInline=true);
       end density_ph;
 
-      redeclare function density_ps "returns density for given p and s"
+      redeclare function density_ps
+      "Computes density as a function of pressure and entropy"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "Pressure";
-        input SpecificEntropy s "Entropy";
-        input FixedPhase phase=0 "2 for two-phase, 1 for one-phase, 0 if not known";
+        input SpecificEntropy s "Specific entropy";
+        input FixedPhase phase = 0 "2 for two-phase, 1 for one-phase, 0 if not known";
         output Density d "Temperature";
 
       protected
-          SpecificEntropy ds=50*p/(30e5-0.5e5);
+          SpecificEntropy ds = 50*p/(30e5-0.5e5);
           SaturationProperties sat;
           SpecificEntropy s_dew;
           SpecificEntropy s_bubble;
 
       algorithm
-          sat:=setSat_p(p=p);
-          s_dew:=dewEntropy(sat);
-          s_bubble:=bubbleEntropy(sat);
+          sat := setSat_p(p=p);
+          s_dew := dewEntropy(sat);
+          s_bubble := bubbleEntropy(sat);
 
           if s<s_bubble-ds or s>s_dew+ds then
               d:=density_pT(p=p,T=temperature_ps(p=p,s=s,phase=phase));
           else
-              if s<s_bubble then
-                  d:=bubbleDensity(sat)*(1 - (s_bubble - s)/ds) + density_pT(p=p,T=temperature_ps(p=p,s=s,phase=phase),phase=phase)*(s_bubble - s)/ds;
-              elseif s>s_dew then
-                  d:=dewDensity(sat)*(1 - (s - s_dew)/ds) + density_pT(p=p,T=temperature_ps(p=p,s=s,phase=phase),phase=phase)*(s - s_dew)/ds;
-              else
-                  d:=1/((1-(s-s_bubble)/(s_dew-s_bubble))/bubbleDensity(sat) + ((s-s_bubble)/(s_dew-s_bubble))/dewDensity(sat));
-              end if;
+            if s<s_bubble then
+                d:=bubbleDensity(sat)*(1 - (s_bubble - s)/ds) + density_pT(
+                  p=p,T=temperature_ps(p=p,s=s,phase=phase),phase=phase)*(s_bubble - s)/ds;
+            elseif s>s_dew then
+                d:=dewDensity(sat)*(1 - (s - s_dew)/ds) + density_pT(
+                  p=p,T=temperature_ps(p=p,s=s,phase=phase),phase=phase)*(s - s_dew)/ds;
+            else
+                d:=1/((1-(s-s_bubble)/(s_dew-s_bubble))/bubbleDensity(sat) +
+                  ((s-s_bubble)/(s_dew-s_bubble))/dewDensity(sat));
+            end if;
           end if;
-
       annotation(Inline=false,
               LateInline=true);
       end density_ps;
 
       redeclare function specificEnthalpy_pT
-      "returns specific enthalpy for given p and T"
+      "Computes specific enthalpy as a function of pressure and temperature"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "Pressure";
         input Temperature T "Temperature";
-        input FixedPhase phase=0 "2 for two-phase, 1 for one-phase, 0 if not known";
-        output SpecificEnthalpy h "specific enthalpy";
+        input FixedPhase phase = 0 "2 for two-phase, 1 for one-phase, 0 if not known";
+        output SpecificEnthalpy h "Specific enthalpy";
 
       algorithm
-        h:=specificEnthalpy_dT(
-            density_pT(
-              p,
-              T,
-              phase),
-            T,
-            phase);
-
+        h := specificEnthalpy_dT(density_pT(p,T,phase),T,phase);
       annotation(inverse(T=temperature_ph(p=p,h=h,phase=phase)),
               Inline=false,
               LateInline=true);
@@ -1225,34 +1229,37 @@ package Refrigerants "Package with models for different refrigerants"
         input Density d "Density";
         input Temperature T "Temperature";
         input FixedPhase phase "2 for two-phase, 1 for one-phase, 0 if not known";
-        output SpecificEnthalpy h "specific enthalpy";
+        output SpecificEnthalpy h "Specific enthalpy";
 
       protected
         Real T_crit = fluidConstants[1].criticalTemperature;
         Real d_crit = fluidConstants[1].criticalMolarVolume;
         Real MM = fluidConstants[1].molarMass;
         Real R = Modelica.Constants.R/MM;
-        SaturationProperties sat = setSat_T(T);
+
+        Real tau = T_crit/T;
         Real delta = d/(d_crit*MM);
         Real dewDelta = dewDensity(sat)/(d_crit*MM);
         Real bubbleDelta = bubbleDensity(sat)/(d_crit*MM);
-        Real tau = T_crit/T;
+
+        SaturationProperties sat = setSat_T(T);
         Real phase_dT = if not ((d < bubbleDensity(sat) and d > dewDensity(sat)) and T
              < fluidConstants[1].criticalTemperature) then 1 else 2;
-        Real quality = if phase==2 or phase_dT==2 then (bubbleDensity(sat)/d - 1)/(bubbleDensity(sat)/dewDensity(sat) - 1) else 1;
+        Real quality = if phase==2 or phase_dT==2 then (bubbleDensity(sat)/d - 1)/
+            (bubbleDensity(sat)/dewDensity(sat) - 1) else 1;
         Real hl=0;
         Real hv=0;
 
       algorithm
         if phase_dT == 1 or phase == 1 then
-          h:=R*T*(tau_d_alpha_0_d_tau(tau) + tau_d_alpha_r_d_tau(delta, tau) +
-          delta_d_alpha_r_d_delta(delta, tau) + 1); // verified
+          h := R*T*(tau_d_alpha_0_d_tau(tau) + tau_d_alpha_r_d_tau(delta, tau) +
+          delta_d_alpha_r_d_delta(delta, tau) + 1);
         elseif phase_dT == 2 or phase == 2 then
-          hl:=R*T*(tau_d_alpha_0_d_tau(tau) + tau_d_alpha_r_d_tau(bubbleDelta, tau) +
+          hl := R*T*(tau_d_alpha_0_d_tau(tau) + tau_d_alpha_r_d_tau(bubbleDelta, tau) +
           delta_d_alpha_r_d_delta(bubbleDelta, tau) + 1);
-          hv:=R*T*(tau_d_alpha_0_d_tau(tau) + tau_d_alpha_r_d_tau(dewDelta, tau) +
+          hv := R*T*(tau_d_alpha_0_d_tau(tau) + tau_d_alpha_r_d_tau(dewDelta, tau) +
           delta_d_alpha_r_d_delta(dewDelta, tau) + 1);
-          h:=hl + quality*(hv-hl);
+          h := hl + quality*(hv-hl);
         end if;
       annotation(derivative(noDerivative=phase)=specificEnthalpy_dT_der,
               Inline=false,
@@ -1260,15 +1267,15 @@ package Refrigerants "Package with models for different refrigerants"
       end specificEnthalpy_dT;
 
       redeclare function specificEnthalpy_ps
-      "returns specific Enthalpy for given p and s"
+      "Computes specific enthalpy as a function of pressure and entropy"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "Pressure";
-        input SpecificEntropy s "Entropy";
-        input FixedPhase phase=0 "2 for two-phase, 1 for one-phase, 0 if not known";
-        output SpecificEnthalpy h "Enthalpy";
+        input SpecificEntropy s "Specific entropy";
+        input FixedPhase phase = 0 "2 for two-phase, 1 for one-phase, 0 if not known";
+        output SpecificEnthalpy h "Specific enthalpy";
 
       protected
-          SpecificEntropy ds=100*p/(30e5-0.5e5);
+          SpecificEntropy ds = 100*p/(30e5-0.5e5);
           SaturationProperties sat;
           SpecificEntropy s_dew;
           SpecificEntropy s_bubble;
@@ -1283,247 +1290,255 @@ package Refrigerants "Package with models for different refrigerants"
           h_bubble:=bubbleEnthalpy(sat);
 
           if s<s_bubble-ds or s>s_dew+ds then
-              h:=specificEnthalpy_pT(p=p,T=temperature_ps(p=p,s=s,phase=phase),phase=phase);
+              h := specificEnthalpy_pT(p=p,T=temperature_ps(
+                p=p,s=s,phase=phase),phase=phase);
           else
-              if s<s_bubble then
-                  h:=h_bubble*(1 - (s_bubble - s)/ds) + specificEnthalpy_pT(p=p,T=temperature_ps(p=p,s=s,phase=phase),phase=phase)*(s_bubble - s)/ds;
-              elseif s>s_dew then
-                  h:=h_dew*(1 - (s - s_dew)/ds) + specificEnthalpy_pT(p=p,T=temperature_ps(p=p,s=s,phase=phase),phase=phase)*(s - s_dew)/ds;
-              else
-                  h:=h_bubble+(s-s_bubble)/(s_dew-s_bubble)*(h_dew-h_bubble);
-              end if;
+            if s<s_bubble then
+                h := h_bubble*(1 - (s_bubble - s)/ds) + specificEnthalpy_pT(
+                  p=p,T=temperature_ps(p=p,s=s,phase=phase),phase=phase)*(s_bubble - s)/ds;
+            elseif s>s_dew then
+                h := h_dew*(1 - (s - s_dew)/ds) + specificEnthalpy_pT(
+                  p=p,T=temperature_ps(p=p,s=s,phase=phase),phase=phase)*(s - s_dew)/ds;
+            else
+                h := h_bubble+(s-s_bubble)/(s_dew-s_bubble)*(h_dew-h_bubble);
+            end if;
           end if;
       annotation(Inline=false,
               LateInline=true);
       end specificEnthalpy_ps;
 
 
-      /*Provide functions partial derivatives. These functions are needed to calculate
-    thermodinamic properties.  
+      /*Provide functions partial derivatives. These functions may depend on the
+    Helmholtz EoS and are needed to calculate thermodynamic properties.  
     Just change these functions if needed.
   */
-      replaceable function pressure_dT_der "time derivative of pressure_dT"
-
+      replaceable function pressure_dT_der
+      "Calculates time derivative of pressure_dT"
         input Density d "Density";
         input Temperature T "Temperature";
-        input FixedPhase phase=0 "2 for two-phase, 1 for one-phase, 0 if not known";
-        input Real der_d "Density derivative";
-        input Real der_T "Temperature derivative";
+        input FixedPhase phase = 0 "2 for two-phase, 1 for one-phase, 0 if not known";
+        input Real der_d "Time derivative of density";
+        input Real der_T "Time derivative of temperature";
         output Real der_p "Time derivative of pressure";
 
       protected
-        ThermodynamicState state=setState_dTX(
-            d=d,
-            T=T,
-            phase=phase);
+        ThermodynamicState state = setState_dTX(d=d,T=T,phase=phase);
 
       algorithm
         der_p := der_d*pressure_derd_T(state=state) + der_T*pressure_derT_d(state=state);
       end pressure_dT_der;
 
-      replaceable function pressure_derT_d "returns pressure derivative (dp/dT)@d=const"
-        input ThermodynamicState state;
-        output Real dpdT;
-
-      protected
-        ThermodynamicState state_l;
-        ThermodynamicState state_v;
-        Real T_crit = fluidConstants[1].criticalTemperature;
-        Real d_crit = fluidConstants[1].criticalMolarVolume;
-        Real MM = fluidConstants[1].molarMass;
-        Real R = Modelica.Constants.R/MM;
-        Real delta = state.d/(d_crit*MM);
-        Real tau = T_crit/state.T;
-        SaturationProperties sat = setSat_p(state.p);
-        Real phase_dT = if not ((state.d < bubbleDensity(sat) and state.d > dewDensity(sat)) and state.T
-             < fluidConstants[1].criticalTemperature) then 1 else 2;
-        Real phase_ph = if ((state.h <= bubbleEnthalpy(sat) or state.h >= dewEnthalpy(sat)) or state.p >
-              fluidConstants[1].criticalPressure) then 1 else 2;
-
-      algorithm
-        if state.phase==1 then
-          dpdT:=R*state.d*(1 + delta_d_alpha_r_d_delta(delta=delta, tau=tau) - tau_delta_d2_alpha_r_d_tau_d_delta(delta=delta, tau=tau));
-        elseif state.phase==2 then
-      //    state_l:=setBubbleState(sat);
-      //    state_v:=setDewState(sat);
-          dpdT := Modelica.Constants.inf;// (specificEntropy(state_v)-specificEntropy(state_l))/(1.0/state_v.d-1.0/state_l.d);
-        end if;
-      end pressure_derT_d;
-
-      replaceable function pressure_derd_T "returns pressure derivative (dp/dd)@T=const"
-        input ThermodynamicState state;
-        output Real dpdd;
+      replaceable function pressure_derd_T
+      "Calculates pressure derivative (dp/dd)@T=const"
+        input ThermodynamicState state "Thermodynamic state";
+        output Real dpdd "Pressure derivative (dp/dd)@T=const";
 
       protected
         Real T_crit = fluidConstants[1].criticalTemperature;
         Real d_crit = fluidConstants[1].criticalMolarVolume;
         Real MM = fluidConstants[1].molarMass;
         Real R = Modelica.Constants.R/MM;
+
         Real delta = state.d/(d_crit*MM);
         Real tau = T_crit/state.T;
+
         SaturationProperties sat = setSat_p(state.p);
-        Real phase_dT = if not ((state.d < bubbleDensity(sat) and state.d > dewDensity(sat)) and state.T
-             < fluidConstants[1].criticalTemperature) then 1 else 2;
-        Real phase_ph = if ((state.h <= bubbleEnthalpy(sat) or state.h >= dewEnthalpy(sat)) or state.p >
-              fluidConstants[1].criticalPressure) then 1 else 2;
+        Real phase_dT = if not ((state.d < bubbleDensity(sat) and
+          state.d > dewDensity(sat)) and state.T < fluidConstants[1].criticalTemperature)
+          then 1 else 2;
+        Real phase_ph = if ((state.h <= bubbleEnthalpy(sat) or
+          state.h >= dewEnthalpy(sat)) or state.p > fluidConstants[1].criticalPressure)
+          then 1 else 2;
 
       algorithm
         if state.phase==1 then
-          dpdd:=R*state.T*(1 + 2*delta_d_alpha_r_d_delta(delta=delta, tau=tau) + delta2_d2_alpha_r_d_delta2(delta=delta, tau=tau));
+          dpdd := R*state.T*(1 + 2*delta_d_alpha_r_d_delta(delta=delta,tau=tau) +
+            delta2_d2_alpha_r_d_delta2(delta=delta,tau=tau));
         elseif state.phase==2 then
           dpdd := Modelica.Constants.small;
         end if;
       end pressure_derd_T;
 
-
-
-
-      replaceable function temperature_derh_p "returns temperature derivative (dd/dh)@p=const"
-        input ThermodynamicState state;
-        output Real dThp;
+      replaceable function pressure_derT_d
+      "Calculates pressure derivative (dp/dT)@d=const"
+        input ThermodynamicState state "Thermodynamic state";
+        output Real dpdT "Pressure derivative (dp/dT)@d=const";
 
       protected
         Real T_crit = fluidConstants[1].criticalTemperature;
         Real d_crit = fluidConstants[1].criticalMolarVolume;
         Real MM = fluidConstants[1].molarMass;
         Real R = Modelica.Constants.R/MM;
+
         Real delta = state.d/(d_crit*MM);
         Real tau = T_crit/state.T;
+
         SaturationProperties sat = setSat_p(state.p);
-        Real phase_dT = if not ((state.d < bubbleDensity(sat) and state.d > dewDensity(sat)) and state.T
-             < fluidConstants[1].criticalTemperature) then 1 else 2;
-        Real phase_ph = if ((state.h <= bubbleEnthalpy(sat) or state.h >= dewEnthalpy(sat)) or state.p >
-              fluidConstants[1].criticalPressure) then 1 else 2;
+        Real phase_dT = if not ((state.d < bubbleDensity(sat) and
+          state.d > dewDensity(sat)) and state.T < fluidConstants[1].criticalTemperature)
+          then 1 else 2;
+        Real phase_ph = if ((state.h <= bubbleEnthalpy(sat) or
+          state.h >= dewEnthalpy(sat)) or state.p > fluidConstants[1].criticalPressure)
+          then 1 else 2;
 
       algorithm
         if state.phase==1 then
-          dThp := 1 / (specificEnthalpy_derT_d(state) - specificEnthalpy_derd_T(state)*pressure_derT_d(state)/pressure_derd_T(state));
+          dpdT:=R*state.d*(1 + delta_d_alpha_r_d_delta(delta=delta,tau=tau) -
+            tau_delta_d2_alpha_r_d_tau_d_delta(delta=delta,tau=tau));
+        elseif state.phase==2 then
+          dpdT := Modelica.Constants.inf;
+        end if;
+      end pressure_derT_d;
+
+      replaceable function temperature_derh_p
+      "Calculates temperature derivative (dT/dh)@p=const"
+        input ThermodynamicState state "Thermodynamic state";
+        output Real dThp "Temperature derivative (dT/dh)@p=const";
+
+      protected
+        Real T_crit = fluidConstants[1].criticalTemperature;
+        Real d_crit = fluidConstants[1].criticalMolarVolume;
+        Real MM = fluidConstants[1].molarMass;
+        Real R = Modelica.Constants.R/MM;
+
+        Real delta = state.d/(d_crit*MM);
+        Real tau = T_crit/state.T;
+
+        SaturationProperties sat = setSat_p(state.p);
+        Real phase_dT = if not ((state.d < bubbleDensity(sat) and
+            state.d > dewDensity(sat)) and state.T < fluidConstants[1].criticalTemperature)
+            then 1 else 2;
+        Real phase_ph = if ((state.h <= bubbleEnthalpy(sat) or
+            state.h >= dewEnthalpy(sat)) or state.p > fluidConstants[1].criticalPressure)
+            then 1 else 2;
+
+      algorithm
+        if state.phase==1 then
+          dThp := 1 / (specificEnthalpy_derT_d(state) - specificEnthalpy_derd_T(state)*
+            pressure_derT_d(state)/pressure_derd_T(state));
         elseif state.phase==2 then
           dThp:=Modelica.Constants.small;
         end if;
       end temperature_derh_p;
 
-      replaceable function temperature_derp_h "returns temperature derivative (dd/dp)@h=const"
-      input ThermodynamicState state;
-      output Real dTph;
+      replaceable function temperature_derp_h
+      "Calculates temperature derivative (dT/dp)@h=const"
+      input ThermodynamicState state "Thermodynamic state";
+      output Real dTph "Temperature derivative (dT/dp)@h=const";
 
       protected
         Real T_crit = fluidConstants[1].criticalTemperature;
         Real d_crit = fluidConstants[1].criticalMolarVolume;
         Real MM = fluidConstants[1].molarMass;
         Real R = Modelica.Constants.R/MM;
-        SaturationProperties sat = setSat_p(state.p);
+
         Real tau = T_crit/state.T;
         Real delta = state.d/(d_crit*MM);
-        Real phase_dT = if not ((state.d < bubbleDensity(sat) and state.d > dewDensity(sat)) and state.T
-             < fluidConstants[1].criticalTemperature) then 1 else 2;
-        Real phase_ph = if ((state.h <= bubbleEnthalpy(sat) or state.h >= dewEnthalpy(sat)) or state.p >
-              fluidConstants[1].criticalPressure) then 1 else 2;
-        AbsolutePressure dp=0.2;
+
+        SaturationProperties sat = setSat_p(state.p);
+        Real phase_dT = if not ((state.d < bubbleDensity(sat) and
+          state.d > dewDensity(sat)) and state.T < fluidConstants[1].criticalTemperature)
+          then 1 else 2;
+        Real phase_ph = if ((state.h <= bubbleEnthalpy(sat) or
+          state.h >= dewEnthalpy(sat)) or state.p > fluidConstants[1].criticalPressure)
+          then 1 else 2;
 
       algorithm
         if state.phase==1 then
-          dTph := 1 / (pressure_derT_d(state) - pressure_derd_T(state)*specificEnthalpy_derT_d(state)/specificEnthalpy_derd_T(state));
+          dTph := 1 / (pressure_derT_d(state) - pressure_derd_T(state)*
+            specificEnthalpy_derT_d(state)/specificEnthalpy_derd_T(state));
         elseif state.phase==2 then
           dTph:=Modelica.Constants.small;
         end if;
       end temperature_derp_h;
 
       replaceable function temperature_ph_der
-        "returns derivative of temperature for given p and h"
+      "Calculates time derivative of temperature_ph"
         extends Modelica.Icons.Function;
         input AbsolutePressure p "Pressure";
-        input SpecificEnthalpy h "Enthalpy";
-        input FixedPhase phase=0 "2 for two-phase, 1 for one-phase, 0 if not known";
-        input Real der_p "time derivative of pressure";
-        input Real der_h "time derivative of specific enthalpy";
-        output Real der_T "time derivative of density";
+        input SpecificEnthalpy h "Specific enthalpy";
+        input FixedPhase phase = 0 "2 for two-phase, 1 for one-phase, 0 if not known";
+        input Real der_p "Time derivative of pressure";
+        input Real der_h "Time derivative of specific enthalpy";
+        output Real der_T "Time derivative of density";
 
       protected
-        ThermodynamicState state=
-            setState_phX(
-            p=p,
-            h=h,
-            phase=phase);
+        ThermodynamicState state = setState_phX(p=p,h=h,phase=phase);
 
       algorithm
-          der_T := der_p*temperature_derp_h(state=state) + der_h*temperature_derh_p(state=state);
+          der_T := der_p*temperature_derp_h(state=state) +
+            der_h*temperature_derh_p(state=state);
       end temperature_ph_der;
 
+      replaceable function density_ph_der
+      "Calculates time derivative of density_ph"
 
-
-
-
-      replaceable function density_ph_der "time derivative of density_ph"
-
-        input AbsolutePressure p;
-        input SpecificEnthalpy h;
-        input FixedPhase phase=0 "2 for two-phase, 1 for one-phase, 0 if not known";
-        input Real der_p "time derivative of pressure";
-        input Real der_h "time derivative of specific enthalpy";
-        output Real der_d "time derivative of density";
+        input AbsolutePressure p "Pressure";
+        input SpecificEnthalpy h "Specific Enthalpy";
+        input FixedPhase phase = 0 "2 for two-phase, 1 for one-phase, 0 if not known";
+        input Real der_p "Time derivative of pressure";
+        input Real der_h "Time derivative of specific enthalpy";
+        output Real der_d "Time derivative of density";
 
       protected
-        ThermodynamicState state=setState_phX(
-            p=p,
-            h=h,
-            phase=phase);
+        ThermodynamicState state = setState_phX(p=p,h=h,phase=phase);
 
       algorithm
           der_d := der_p*density_derp_h(state=state) + der_h*density_derh_p(state=state);
       end density_ph_der;
 
       redeclare function extends density_derh_p
-      "returns density derivative (dd/dh)@p=const"
-      //input state
-      //output ddhp
+      "Calculates density derivative (dd/dh)@p=const"
 
       protected
         Real T_crit = fluidConstants[1].criticalTemperature;
         Real d_crit = fluidConstants[1].criticalMolarVolume;
         Real MM = fluidConstants[1].molarMass;
         Real R = Modelica.Constants.R/MM;
-        SaturationProperties sat = setSat_p(state.p);
+
         Real tau = T_crit/state.T;
         Real delta = state.d/(d_crit*MM);
-        Real phase_dT = if not ((state.d < bubbleDensity(sat) and state.d > dewDensity(sat)) and state.T
-             < fluidConstants[1].criticalTemperature) then 1 else 2;
-        Real phase_ph = if ((state.h <= bubbleEnthalpy(sat) or state.h >= dewEnthalpy(sat)) or state.p >
-              fluidConstants[1].criticalPressure) then 1 else 2;
-        AbsolutePressure dp=0.2;
+
+        SaturationProperties sat = setSat_p(state.p);
+        Real phase_dT = if not ((state.d < bubbleDensity(sat) and
+          state.d > dewDensity(sat)) and state.T < fluidConstants[1].criticalTemperature)
+          then 1 else 2;
+        Real phase_ph = if ((state.h <= bubbleEnthalpy(sat) or
+          state.h >= dewEnthalpy(sat)) or state.p > fluidConstants[1].criticalPressure)
+          then 1 else 2;
+
+        AbsolutePressure dp = 0.2;
 
       algorithm
         if state.phase==1 then
-          ddhp := 1 / (specificEnthalpy_derd_T(state) - specificEnthalpy_derT_d(state)*pressure_derd_T(state)/pressure_derT_d(state));
-      //    ddhp:=1/(state.T*R/state.d*(tau_delta_d2_alpha_r_d_tau_d_delta(tau=tau, delta=
-      //      delta) + delta_d_alpha_r_d_delta(tau=tau, delta=delta) +
-      //      delta2_d2_alpha_r_d_delta2(tau=tau, delta=delta)));
+          ddhp := 1 / (specificEnthalpy_derd_T(state) - specificEnthalpy_derT_d(state)*
+            pressure_derd_T(state)/pressure_derT_d(state));
         elseif state.phase==2 then
-          ddhp:=-(state.d^2)/state.T*(saturationTemperature(state.p+0.1)-saturationTemperature(state.p-0.1))/dp;
+          ddhp:=-(state.d^2)/state.T*(saturationTemperature(state.p+dp/2)-
+            saturationTemperature(state.p-dp/2))/dp;
         end if;
       end density_derh_p;
 
 
       redeclare function extends density_derp_h
-      "returns density derivative (dd/dp)@h=const"
-      //input state
-      //output ddph
+      "Calculates density derivative (dd/dp)@h=const"
 
       algorithm
-          ddph := 1 / (pressure_derd_T(state) - pressure_derT_d(state)*specificEnthalpy_derd_T(state)/specificEnthalpy_derT_d(state));
+          ddph := 1 / (pressure_derd_T(state) - pressure_derT_d(state)*
+            specificEnthalpy_derd_T(state)/specificEnthalpy_derT_d(state));
       end density_derp_h;
 
       redeclare function extends dBubbleDensity_dPressure
-      "Return bubble point density derivative"
-      // inherited from: PartialTwoPhaseMedium
-      // inherits input sat and output ddldp
+      "Calculates bubble point density derivative"
 
       protected
-        ThermodynamicState state_l=setBubbleState(sat);
-        ThermodynamicState state_v=setDewState(sat);
-        Real ddpT = 1.0/pressure_derd_T(state_l);
-        Real ddTp = -pressure_derT_d(state_l)/pressure_derd_T(state_l);
-        Real dTp=(1.0/state_v.d - 1.0/state_l.d)/(specificEntropy(state_v) - specificEntropy(state_l));
+        ThermodynamicState state_l = setBubbleState(sat);
+        ThermodynamicState state_v = setDewState(sat);
+
+        Real ddpT = 1 / pressure_derd_T(state_l);
+        Real ddTp = -pressure_derT_d(state_l) / pressure_derd_T(state_l);
+        Real dTp = (1/state_v.d - 1/state_l.d)/(specificEntropy(state_v) -
+          specificEntropy(state_l));
 
       algorithm
         ddldp := ddpT + ddTp*dTp;
@@ -1531,131 +1546,135 @@ package Refrigerants "Package with models for different refrigerants"
 
 
       redeclare function extends dDewDensity_dPressure
-      "Return dew point density derivative"
-      // inherited from: PartialTwoPhaseMedium
-      // inherits input sat and output ddvdp
+      "Calculates dew point density derivative"
 
       protected
-        ThermodynamicState state_l=setBubbleState(sat);
-        ThermodynamicState state_v=setDewState(sat);
-        Real ddpT = 1.0/pressure_derd_T(state_v);
+        ThermodynamicState state_l = setBubbleState(sat);
+        ThermodynamicState state_v = setDewState(sat);
+
+        Real ddpT = 1/pressure_derd_T(state_v);
         Real ddTp = -pressure_derT_d(state_v)/pressure_derd_T(state_v);
-        Real dTp=(1.0/state_v.d - 1.0/state_l.d)/(specificEntropy(state_v) - specificEntropy(state_l));
+        Real dTp = (1/state_v.d - 1/state_l.d)/(specificEntropy(state_v) -
+          specificEntropy(state_l));
 
       algorithm
         ddvdp := ddpT + ddTp*dTp;
       end dDewDensity_dPressure;
 
-
-
-
-
-
-
-
-      replaceable function specificEnthalpy_dT_der "time derivative of specificEnthalpy_dT"
-
+      replaceable function specificEnthalpy_dT_der
+      "Calculates time derivative of specificEnthalpy_dT"
         input Density d "Density";
         input Temperature T "Temperature";
         input FixedPhase phase=0 "2 for two-phase, 1 for one-phase, 0 if not known";
-        input Real der_d "Density derivative";
-        input Real der_T "Temperature derivative";
-        output Real der_h "Time derivative of enthalpy";
+        input Real der_d "Time derivative of density";
+        input Real der_T "Time derivative of temperature";
+        output Real der_h "Time derivative of specific enthalpy";
 
       protected
-        ThermodynamicState state=
-            setState_dT(
-            d=d,
-            T=T,
-            phase=phase);
+        ThermodynamicState state = setState_dT(d=d,T=T,phase=phase);
 
       algorithm
-        der_h := der_d*specificEnthalpy_derd_T(state=state) + der_T*specificEnthalpy_derT_d(state=state);
+        der_h := der_d*specificEnthalpy_derd_T(state=state) +
+          der_T*specificEnthalpy_derT_d(state=state);
       end specificEnthalpy_dT_der;
 
-      replaceable function specificEnthalpy_derT_d "returns enthalpy derivative (dh/dT)@d=const"
-        input ThermodynamicState state;
-        output Real dhTd;
+      replaceable function specificEnthalpy_derT_d
+      "Calculates enthalpy derivative (dh/dT)@d=const"
+        input ThermodynamicState state "Thermodynamic state";
+        output Real dhTd "Enthalpy derivative (dh/dT)@d=const";
 
       protected
         Real T_crit = fluidConstants[1].criticalTemperature;
         Real d_crit = fluidConstants[1].criticalMolarVolume;
         Real MM = fluidConstants[1].molarMass;
         Real R = Modelica.Constants.R/MM;
+
         Real delta = state.d/(d_crit*MM);
         Real tau = T_crit/state.T;
+
         SaturationProperties sat = setSat_p(state.p);
-        Real phase_dT = if not ((state.d < bubbleDensity(sat) and state.d > dewDensity(sat)) and state.T
-             < fluidConstants[1].criticalTemperature) then 1 else 2;
-        Real phase_ph = if ((state.h <= bubbleEnthalpy(sat) or state.h >= dewEnthalpy(sat)) or state.p >
-              fluidConstants[1].criticalPressure) then 1 else 2;
-        AbsolutePressure dp=0.2;
+        Real phase_dT = if not ((state.d < bubbleDensity(sat) and
+          state.d > dewDensity(sat)) and state.T < fluidConstants[1].criticalTemperature)
+          then 1 else 2;
+        Real phase_ph = if ((state.h <= bubbleEnthalpy(sat) or
+          state.h >= dewEnthalpy(sat)) or state.p > fluidConstants[1].criticalPressure)
+          then 1 else 2;
 
       algorithm
         if state.phase==1 then
-          dhTd:=R*(-tau2_d2_alpha_0_d_tau2(tau=tau) - tau2_d2_alpha_r_d_tau2(delta=delta, tau=tau) + 1 + delta_d_alpha_r_d_delta(delta=delta, tau=tau) - tau_delta_d2_alpha_r_d_tau_d_delta(delta=delta, tau=tau));
+          dhTd := R*(-tau2_d2_alpha_0_d_tau2(tau=tau) - tau2_d2_alpha_r_d_tau2(
+            delta=delta, tau=tau) + 1 + delta_d_alpha_r_d_delta(delta=delta,tau=tau) -
+            tau_delta_d2_alpha_r_d_tau_d_delta(delta=delta, tau=tau));
         elseif state.phase==2 then
           dhTd:=Modelica.Constants.inf;
         end if;
       end specificEnthalpy_derT_d;
 
-      replaceable function specificEnthalpy_derd_T "returns enthalpy derivative (dh/dd)@T=const"
-        input ThermodynamicState state;
-        output Real dhdT;
+      replaceable function specificEnthalpy_derd_T
+      "Calculates enthalpy derivative (dh/dd)@T=const"
+        input ThermodynamicState state "Thermodynamic state";
+        output Real dhdT "Enthalpy derivative (dh/dd)@T=const";
 
       protected
         Real T_crit = fluidConstants[1].criticalTemperature;
         Real d_crit = fluidConstants[1].criticalMolarVolume;
         Real MM = fluidConstants[1].molarMass;
         Real R = Modelica.Constants.R/MM;
+
         Real delta = state.d/(d_crit*MM);
         Real tau = T_crit/state.T;
+
         SaturationProperties sat = setSat_p(state.p);
-        Real phase_dT = if not ((state.d < bubbleDensity(sat) and state.d > dewDensity(sat)) and state.T
-             < fluidConstants[1].criticalTemperature) then 1 else 2;
-        Real phase_ph = if ((state.h <= bubbleEnthalpy(sat) or state.h >= dewEnthalpy(sat)) or state.p >
-              fluidConstants[1].criticalPressure) then 1 else 2;
-        AbsolutePressure dp=0.2;
+        Real phase_dT = if not ((state.d < bubbleDensity(sat) and
+            state.d > dewDensity(sat)) and state.T < fluidConstants[1].criticalTemperature)
+            then 1 else 2;
+        Real phase_ph = if ((state.h <= bubbleEnthalpy(sat) or
+            state.h >= dewEnthalpy(sat)) or state.p > fluidConstants[1].criticalPressure)
+            then 1 else 2;
 
       algorithm
         if state.phase==1 then
-          dhdT:=R*state.T/state.d*(tau_delta_d2_alpha_r_d_tau_d_delta(delta=delta, tau=tau) + delta_d_alpha_r_d_delta(delta=delta, tau=tau) + delta2_d2_alpha_r_d_delta2(delta=delta, tau=tau));
+          dhdT:=R*state.T/state.d*(tau_delta_d2_alpha_r_d_tau_d_delta(
+            delta=delta,tau=tau) + delta_d_alpha_r_d_delta(delta=delta,tau=tau) +
+            delta2_d2_alpha_r_d_delta2(delta=delta,tau=tau));
         elseif state.phase==2 then
-          dhdT := -1/state.d^2*(bubbleEnthalpy(sat)-dewEnthalpy(sat))/(1/bubbleDensity(sat)-1/dewDensity(sat));
+          dhdT := -1/state.d^2*(bubbleEnthalpy(sat)-dewEnthalpy(sat))/
+            (1/bubbleDensity(sat)-1/dewDensity(sat));
         end if;
       end specificEnthalpy_derd_T;
 
       redeclare function extends dBubbleEnthalpy_dPressure
-      "Return bubble point enthalpy derivative"
-      // inherited from: PartialTwoPhaseMedium
-      // inherits input sat and output dhldp
+      "Calculates bubble point enthalpy derivative"
 
       protected
-        ThermodynamicState state_l=setBubbleState(sat);
-        ThermodynamicState state_v=setDewState(sat);
+        ThermodynamicState state_l = setBubbleState(sat);
+        ThermodynamicState state_v = setDewState(sat);
         Real dhpT = specificEnthalpy_derd_T(state_l)/pressure_derd_T(state_l);
-        Real dhTp = specificEnthalpy_derT_d(state_l) - specificEnthalpy_derd_T(state_l)*pressure_derT_d(state_l)/pressure_derd_T(state_l);
-        Real dTp=(1.0/state_v.d - 1.0/state_l.d)/(specificEntropy(state_v) - specificEntropy(state_l));
+        Real dhTp = specificEnthalpy_derT_d(state_l) - specificEnthalpy_derd_T(state_l)*
+          pressure_derT_d(state_l)/pressure_derd_T(state_l);
+        Real dTp = (1/state_v.d - 1/state_l.d)/
+          (specificEntropy(state_v) - specificEntropy(state_l));
 
       algorithm
         dhldp := dhpT + dhTp*dTp;
       end dBubbleEnthalpy_dPressure;
 
       redeclare function extends dDewEnthalpy_dPressure
-      "Return dew point enthalpy derivative"
-      // inherited from: PartialTwoPhaseMedium
-      // inherits input sat and output dhvdp
+      "Calculates dew point enthalpy derivative"
 
       protected
-        ThermodynamicState state_l=setBubbleState(sat);
-        ThermodynamicState state_v=setDewState(sat);
+        ThermodynamicState state_l = setBubbleState(sat);
+        ThermodynamicState state_v = setDewState(sat);
         Real dhpT = specificEnthalpy_derd_T(state_v)/pressure_derd_T(state_v);
-        Real dhTp = specificEnthalpy_derT_d(state_v) - specificEnthalpy_derd_T(state_v)*pressure_derT_d(state_v)/pressure_derd_T(state_v);
-        Real dTp=(1.0/state_v.d - 1.0/state_l.d)/(specificEntropy(state_v) - specificEntropy(state_l));
+        Real dhTp = specificEnthalpy_derT_d(state_v) - specificEnthalpy_derd_T(state_v)*
+          pressure_derT_d(state_v)/pressure_derd_T(state_v);
+        Real dTp=(1.0/state_v.d - 1.0/state_l.d)/
+          (specificEntropy(state_v) - specificEntropy(state_l));
 
       algorithm
         dhvdp := dhpT + dhTp*dTp;
       end dDewEnthalpy_dPressure;
+
       annotation (Documentation(revisions="<html>
 <ul>
   <li>
@@ -1759,6 +1778,36 @@ package Refrigerants "Package with models for different refrigerants"
 </ul>
 </html>"));
   end R410a;
+
+  package R1270 "Package with models for refrigerant R1270"
+    extends Modelica.Icons.VariantsPackage;
+    annotation (Documentation(info="<html>
+<p>A detailed documentation will follow later. </p>
+<p><b>Main equations</b> </p>
+<p>xxx </p>
+<p><b>Assumptions and limitations</b> </p>
+<p>xxx </p>
+<p><b>Typical use and important parameters</b> </p>
+<p>xxx </p>
+<p><b>Options</b> </p>
+<p>xxx </p>
+<p><b>Dynamics</b> </p>
+<p>Describe which states and dynamics are present in the model and which parameters may be used to influence them. This need not be added in partial classes. </p>
+<p><b>Validation</b> </p>
+<p>Describe whether the validation was done using analytical validation, comparative model validation or empirical validation. </p>
+<p><b>Implementation</b> </p>
+<p>xxx </p>
+<p><b>References</b> </p>
+<p>xxx </p>
+</html>", revisions="<html>
+<ul>
+  <li>
+  June 8, 2017, by Mirko Engelpracht:<br/>
+  First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
+  </li>
+</ul>
+</html>"));
+  end R1270;
   annotation (Documentation(info="<html>
 <p>A detailed documentation will follow later. </p>
 <ul>
