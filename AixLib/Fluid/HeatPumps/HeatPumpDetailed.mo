@@ -98,7 +98,7 @@ model HeatPumpDetailed
                                               redeclare package Medium =
         Medium_eva,
     m_flow_nominal=mFlow_evaNominal,
-    T_start=T_startEva) "Temperature sensor at inlet of the Evaporator"
+    T_start=T_startEva) "Temperature sensor at inlet of the evaporator"
                     annotation (Placement(transformation(
         origin={-130,26},
         extent={{-10,-10},{10,10}},
@@ -107,7 +107,7 @@ model HeatPumpDetailed
                                              redeclare package Medium =
         Medium_con,
     m_flow_nominal=mFlow_conNominal,
-    T_start=T_startCon) "Temperature sensor at inlet of the Condenser"
+    T_start=T_startCon) "Temperature sensor at inlet of the condenser"
                     annotation (Placement(transformation(
         origin={130,-26},
         extent={{-10,-10},{10,10}},
@@ -124,7 +124,7 @@ model HeatPumpDetailed
                                              redeclare package Medium =
         Medium_con,
     m_flow_nominal=mFlow_conNominal,
-    T_start=T_startCon) "Temperature sensor at outlet of the Condenser"
+    T_start=T_startCon) "Temperature sensor at outlet of the condenser"
                     annotation (Placement(transformation(
         origin={130,48},
         extent={{-10,-10},{10,10}},
@@ -133,13 +133,13 @@ model HeatPumpDetailed
                                               redeclare package Medium =
         Medium_eva,
     m_flow_nominal=mFlow_evaNominal,
-    T_start=T_startEva) "Temperature sensor at outlet of the Evaporator"
+    T_start=T_startEva) "Temperature sensor at outlet of the evaporator"
                     annotation (Placement(transformation(
         origin={-130,-46},
         extent={{-10,-10},{10,10}},
         rotation=270)));
   Sensors.MassFlowRate                mFlow_con(redeclare package Medium =
-        Medium_con) "Mass flow sensor at the Condenser" annotation (Placement(transformation(
+        Medium_con) "Mass flow sensor at the condenser" annotation (Placement(transformation(
         origin={130,-50},
         extent={{-10,-10},{10,10}},
         rotation=90)));
@@ -155,14 +155,16 @@ model HeatPumpDetailed
         rotation=270,
         origin={-10,-90})));
 
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heatFlowRate_con "Heat flow rate of the Condenser"
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heatFlowRate_con
+    "Heat flow rate of the condenser"
     annotation (Placement(transformation(
         origin={95,1},
         extent={{9,-9},{-9,9}},
         rotation=180)));
 
 public
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heatFlowRate_eva "Heat flow rate of the Evaporator"
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heatFlowRate_eva
+    "Heat flow rate of the evaporator"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
           rotation=180,
         origin={-96,2})));
@@ -172,7 +174,7 @@ public
                                                                                               (capCalcType==1)));
 
   Sensors.MassFlowRate                mFlow_eva(redeclare package Medium =
-        Medium_eva) "Mass flow sensor at the Evaporator" annotation (Placement(transformation(
+        Medium_eva) "Mass flow sensor at the evaporator" annotation (Placement(transformation(
         origin={-130,52},
         extent={{-10,-10},{10,10}},
         rotation=270)));
@@ -197,13 +199,14 @@ public
     mFlow_evaNominal=mFlow_evaNominal,
     T_conMax=T_conMax) "Heat pump refrigerant circuit black box model"
     annotation (Placement(transformation(extent={{-50,-20},{40,40}})));
-  Modelica.Blocks.Interfaces.BooleanInput onOff_in annotation (Placement(
+  Modelica.Blocks.Interfaces.BooleanInput onOff_in
+    "Enable or disable heat pump"                  annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-50,90})));
   Modelica.Blocks.Interfaces.RealInput N_in if not HPctrlType
-    "Connector of Real input signal to be converted"          annotation (Placement(
+    "rotational speed of compressor"                          annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
@@ -219,10 +222,11 @@ protected
   Modelica.Blocks.Interfaces.RealInput T_ambInternal
     "Needed to connect to conditional connector";
 public
-  Modelica.Blocks.Sources.RealExpression dummyZero(y=0)
+  Modelica.Blocks.Sources.RealExpression dummyZero(y=0) "dummy value"
     annotation (Placement(transformation(extent={{0,60},{20,80}}, rotation=0)));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor
                                 heatConv(G=R_loss)
+    "Heat flow through a wall with a given conductance"
     annotation (Placement(transformation(extent={{80,52},{100,72}})));
   Modelica.Blocks.Interfaces.RealInput T_amb if
                                                heatLosses_con
@@ -233,11 +237,12 @@ public
         rotation=270,
         origin={50,90})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTemp
+    "Variable temperature boundary condition in Kelvin"
     annotation (Placement(transformation(extent={{80,76},{100,96}})));
   parameter SI.Temperature T_conMax=338.15
     "Maximum condenser outlet temperature" annotation(Dialog(group = "Capacity data"));
   Modelica.Blocks.Math.Gain gainMinusOne(k=-1)
-    "Negate volume flow of Evaporator"         annotation (Placement(
+    "Negative volume flow of evaporator"       annotation (Placement(
         transformation(
         extent={{-5,-5},{5,5}},
         rotation=180,
@@ -247,7 +252,7 @@ public
     T_start(displayUnit="K") = T_startEva,
     m_flow_nominal=mFlow_evaNominal,
     redeclare package Medium = Medium_eva,
-    V=volume_eva) "Instantaneously mixing of Evaporator input and output mass flow" annotation (Placement(transformation(
+    V=volume_eva) "Volume of evaporator"                                            annotation (Placement(transformation(
         extent={{-7,-6.75},{7,6.75}},
         rotation=-90,
         origin={-120.75,1})));
@@ -255,7 +260,8 @@ public
     redeclare package Medium = Medium_eva,
     m_flow_nominal=mFlow_evaNominal,
     m_flow(start=mFlow_evaNominal),
-    dp_nominal=dp_evaNominal) "The pressure drop caused by flow resistance of the Evaporator"
+    dp_nominal=dp_evaNominal)
+    "The pressure drop caused by flow resistance of the evaporator"
                            annotation (Placement(transformation(
         extent={{8,-8},{-8,8}},
         rotation=90,
@@ -265,8 +271,7 @@ public
     redeclare package Medium = Medium_con,
     T_start(displayUnit="K") = T_startCon,
     m_flow_nominal=mFlow_conNominal,
-    V=volume_con) "Instantaneously mixing Condenser input and output mass flow"
-                                                                                annotation (Placement(transformation(
+    V=volume_con) "Volume of condenser"                                         annotation (Placement(transformation(
         extent={{7,6.75},{-7,-6.75}},
         rotation=-90,
         origin={121.25,-1})));
@@ -274,7 +279,8 @@ public
     redeclare package Medium = Medium_con,
     m_flow_nominal=mFlow_conNominal,
     m_flow(start=mFlow_conNominal),
-    dp_nominal=dp_conNominal) "The pressure drop caused by flow resistance of the Condenser" annotation (Placement(transformation(
+    dp_nominal=dp_conNominal)
+    "The pressure drop caused by flow resistance of the condenser"                           annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=90,
         origin={130,22})));

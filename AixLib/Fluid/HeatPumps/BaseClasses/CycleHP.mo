@@ -96,9 +96,7 @@ parameter SI.Temperature T_conMax=338.15 "Maximum condenser outlet temperature" 
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-10,-90})));
-  Modelica.Blocks.Interfaces.RealInput N_in
-    "Connector of Real input signal to be converted"
-                                             annotation (Placement(
+  Modelica.Blocks.Interfaces.RealInput N_in  annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
@@ -431,7 +429,7 @@ end if;
       color={0,0,127},
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-150,-100},
-            {150,100}})),           Icon(coordinateSystem(preserveAspectRatio=true,
+            {150,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio=true,
           extent={{-150,-100},{150,100}}), graphics={
         Rectangle(
           extent={{-130,90},{130,-90}},
