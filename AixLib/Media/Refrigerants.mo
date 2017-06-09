@@ -185,7 +185,71 @@ package Refrigerants "Package with models for different refrigerants"
     record ThermodynamicStatePropertiesBaseDataDefinition
       "Record definition for fitting coefficients for the thermodynamic state properties"
       extends Modelica.Icons.Record;
+
+      parameter String name
+      "Short description of the record"
+      annotation (Dialog(group="General"));
+
+      parameter Integer temperature_ph_nT[:]
+      "Polynomial order for p (SC) | Polynomial order for h (SC) | Total number of terms (SC) |
+   Polynomial order for p (SH) | Polynomial order for h (SH) | Total number of terms (SH)"
+      annotation (Dialog(group="Temperature_ph"));
+      parameter Real temperature_ph_sc[:]
+      "Coefficients for supercooled regime"
+      annotation (Dialog(group="Temperature_ph"));
+      parameter Real temperature_ph_sh[:]
+      "Coefficients for superheated regime"
+      annotation (Dialog(group="Temperature_ph"));
+      parameter Real temperature_ph_iO[:]
+      "Mean SC p | Mean SC h | Std SC p | Std SC h | 
+   Mean SH p | Mean SH h | Std SH p | Std SH h"
+      annotation (Dialog(group="Temperature_ph"));
+    // temperature_ph_nT = {5, 5, 21, 5, 5, 21},
+    // temperature_ph_sc = {291.384236041825, -0.0704729863184529, 20.5578417380748, -0.00678884566695906, 0.136811720776647, -0.770247506716285, 0.000202836611783306, -0.00447602797382070, 0.0309332207143316, -0.0386472469260710, -9.71248676197528e-06, 0.000273729410002939, -0.00177519423682889, 0.00767135438646387, -0.00751600683912493, 7.98267274869292e-07, -1.12691051342428e-05, 0.000134930636679386, -0.000392485634748443, 0.00140205757787774, -0.00163000559967510},
+    // temperature_ph_sh = {308.060027778396, 6.59039876392094, 20.7950243141380, 0.0453108439023189, -1.43969687581506, -0.411365889418558, 0.00540769150996739, -0.0188305448625778, 0.255977908649908, -0.00497446957449581, -0.000196566506959251, -0.00847992074678385, 0.00660309588666398, -0.0432200997543392, 0.00465132954244280, -4.64422678045603e-05, 0.000787074643540945, 0.00281445602040784, -0.00176606807260317, 0.00590025752789791, -0.000577281104194347},
+    // temperature_ph_iO = {1682457.51267010, 247137.397786416, 720642.233056887, 54003.5903158973, 382099.574228781,  639399.497939419, 403596.556578661, 37200.2691858212},
+
+      parameter Integer temperature_ps_nT[:]
+      "Polynomial order for p (SC) | Polynomial order for s (SC) | Total number of terms (SC) |
+   Polynomial order for p (SH) | Polynomial order for s (SH) | Total number of terms (SH)"
+      annotation (Dialog(group="Temperature_ps"));
+      parameter Real temperature_ps_sc[:]
+      "Coefficients for supercooled regime"
+      annotation (Dialog(group="Temperature_ps"));
+      parameter Real temperature_ps_sh[:]
+      "Coefficients for superheated regime"
+      annotation (Dialog(group="Temperature_ps"));
+      parameter Real temperature_ps_iO[:]
+      "Mean SC p | Mean SC s | Std SC p | Std SC s | 
+   Mean SH p | Mean SH s | Std SH p | Std SH s"
+      annotation (Dialog(group="Temperature_ps"));
+    // temperature_ps_nT = {5, 5, 21, 5, 5, 21},
+    // temperature_ps_sc = {290.574168937952,0.490828546245446,19.8608752914032,0.117871744016533,0.130154107880201,-0.0408172235661160,0.0181671755438826,0.0292848788419663,0.0324083687227166,-0.0857625427384498,0.00191602988674819,0.00377150163705040,0.00622225803519055,0.00799217399325639,-0.0124017661200968,0.000114975996621020,0.000243666235393007,0.000459514035453056,0.000907175802732240,0.00127247920370296,-0.00192723964571896},
+    // temperature_ps_sh = {305.667994209752,34.3546579581206,36.3220486736092,0.956829304294540,0.239229453753890,0.702977715170277,0.129780738468536,-0.303362575167080,0.000814283563881690,-0.100508863694088,0.0577060502424694,-0.0264862744961215,0.0826586807740864,-0.00125351482775024,0.0160903628800248,0.0132124973316544,-0.00720862103838031,0.00736011556482272,-0.00773556171071259,0.00365836572791750,-0.000494569833066580},
+    // temperature_ps_iO = {14.225189003160570, 1.152465068418020e+03, 0.499169296800688, 1.792997138404026e+02, 12.3876547448383, 2715.65359560750, 0.961902709412239, 207.473158311391},
+
+        Real x1 = (log(p)-cf.temperature_ps_iO[1])/cf.temperature_ps_iO[3];
+        Real y1 = (s-cf.temperature_ps_iO[2])/cf.temperature_ps_iO[4];
+        Real T1 = c2[1] + c2[2]*x2 + c2[3]*y2 + c2[4]*x2^2 + c2[5]*x2*y2 + c2[6]*y2^2 + c2[7]*x2^3 + c2[8]*x2^2*y2 + c2[9]*x2*y2^2 + c2[10]*y2^3 + c2[11]*x2^4 + c2[12]*x2^3*y2 + c2[13]*x2^2*y2^2 + c2[14]*x2*y2^3 + c2[15]*y2^4 + c2[16]*x2^5 + c2[17]*x2^4*y2 + c2[18]*x2^3*y2^2 + c2[19]*x2^2*y2^3 + c2[20]*x2*y2^4 + c2[21]*y2^5;
+
+        Real x2 = (log(p)-cf.temperature_ps_iO[5])/cf.temperature_ps_iO[7];
+        Real y2 = (s-cf.temperature_ps_iO[6])/cf.temperature_ps_iO[8];
+        Real T2 = c1[1] + c1[2]*x1 + c1[3]*y1 + c1[4]*x1^2 + c1[5]*x1*y1 + c1[6]*y1^2 + c1[7]*x1^3 + c1[8]*x1^2*y1 + c1[9]*x1*y1^2 + c1[10]*y1^3 + c1[11]*x1^4 + c1[12]*x1^3*y1 + c1[13]*x1^2*y1^2 + c1[14]*x1*y1^3 + c1[15]*y1^4 + c1[16]*x1^5 + c1[17]*x1^4*y1 + c1[18]*x1^3*y1^2 + c1[19]*x1^2*y1^3 + c1[20]*x1*y1^4 + c1[21]*y1^5;
+
+
     end ThermodynamicStatePropertiesBaseDataDefinition;
+
+    package R134a "Package provides data for R134a"
+      extends Modelica.Icons.VariantsPackage;
+    end R134a;
+
+    package R410a "Package provides data for R410a"
+      extends Modelica.Icons.VariantsPackage;
+    end R410a;
+
+    package R718 "Package provides data for R718"
+      extends Modelica.Icons.VariantsPackage;
+    end R718;
 
     package R1270 "Package provides data for R1270"
       extends Modelica.Icons.VariantsPackage;
@@ -567,118 +631,20 @@ package Refrigerants "Package with models for different refrigerants"
     reduce computing time. Moreover, these functions may have a heuristic to deal with
     discontinuities. Add furhter fits if necessary.
   */
-      redeclare function temperature_ph
+      redeclare function extends temperature_ph
       "Calculates temperature as function of pressure and specific enthalpy"
-        extends Modelica.Icons.Function;
-        input AbsolutePressure p "Pressure";
-        input SpecificEnthalpy h "Specific enthalpy";
-        input FixedPhase phase=0 "2 for two-phase, 1 for one-phase, 0 if not known";
-        output Temperature T "Temperature";
-
       protected
-        Real c2[:] = {291.384236041825,-0.0704729863184529,20.5578417380748,-0.00678884566695906,0.136811720776647,-0.770247506716285,0.000202836611783306,-0.00447602797382070,0.0309332207143316,-0.0386472469260710,-9.71248676197528e-06,0.000273729410002939,-0.00177519423682889,0.00767135438646387,-0.00751600683912493,7.98267274869292e-07,-1.12691051342428e-05,0.000134930636679386,-0.000392485634748443,0.00140205757787774,-0.00163000559967510};
-        Real meanx2 = 1682457.51267010;
-        Real meany2 = 247137.397786416;
-        Real stdx2 = 720642.233056887;
-        Real stdy2 = 54003.5903158973;
-        Real x2 = (p-meanx2)/stdx2;
-        Real y2 = (h-meany2)/stdy2;
-        Real T2 = c2[1] + c2[2]*x2 + c2[3]*y2 + c2[4]*x2^2 + c2[5]*x2*y2 + c2[6]*y2^2 + c2[7]*x2^3 + c2[8]*x2^2*y2 + c2[9]*x2*y2^2 + c2[10]*y2^3 + c2[11]*x2^4 + c2[12]*x2^3*y2 + c2[13]*x2^2*y2^2 + c2[14]*x2*y2^3 + c2[15]*y2^4 + c2[16]*x2^5 + c2[17]*x2^4*y2 + c2[18]*x2^3*y2^2 + c2[19]*x2^2*y2^3 + c2[20]*x2*y2^4 + c2[21]*y2^5;
-
-        Real c1[:] = {308.060027778396,6.59039876392094,20.7950243141380,0.0453108439023189,-1.43969687581506,-0.411365889418558,0.00540769150996739,-0.0188305448625778,0.255977908649908,-0.00497446957449581,-0.000196566506959251,-0.00847992074678385,0.00660309588666398,-0.0432200997543392,0.00465132954244280,-4.64422678045603e-05,0.000787074643540945,0.00281445602040784,-0.00176606807260317,0.00590025752789791,-0.000577281104194347};
-        Real meanx1 = 382099.574228781;
-        Real meany1 = 639399.497939419;
-        Real stdx1 = 403596.556578661;
-        Real stdy1 = 37200.2691858212;
-        Real x1 = (p-meanx1)/stdx1;
-        Real y1 = (h-meany1)/stdy1;
-        Real T1 = c1[1] + c1[2]*x1 + c1[3]*y1 + c1[4]*x1^2 + c1[5]*x1*y1 + c1[6]*y1^2 + c1[7]*x1^3 + c1[8]*x1^2*y1 + c1[9]*x1*y1^2 + c1[10]*y1^3 + c1[11]*x1^4 + c1[12]*x1^3*y1 + c1[13]*x1^2*y1^2 + c1[14]*x1*y1^3 + c1[15]*y1^4 + c1[16]*x1^5 + c1[17]*x1^4*y1 + c1[18]*x1^3*y1^2 + c1[19]*x1^2*y1^3 + c1[20]*x1*y1^4 + c1[21]*y1^5;
-
+        AixLib.Media.Refrigerants.DataBase.ThermodynamicStatePropertiesBaseDataDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.TSP_Sangi();
         SpecificEnthalpy dh = 10;
-        SaturationProperties sat;
-        SpecificEnthalpy h_dew;
-        SpecificEnthalpy h_bubble;
-
-      algorithm
-        sat := setSat_p(p=p);
-        h_dew := dewEnthalpy(sat);
-        h_bubble := bubbleEnthalpy(sat);
-
-        if h<h_bubble-dh then
-          T := T2;
-        elseif h>h_dew+dh then
-          T := T1;
-        else
-          if h<h_bubble then
-              T := saturationTemperature(p)*(1 - (h_bubble - h)/dh) +
-                T2*(h_bubble - h)/dh;
-          elseif h>h_dew then
-              T := saturationTemperature(p)*(1 - (h - h_dew)/dh) +
-                T1*(h - h_dew)/dh;
-          else
-              T := saturationTemperature(p);
-          end if;
-        end if;
-      annotation(derivative(noDerivative=phase)=temperature_ph_der,
-          inverse(h=specificEnthalpy_pT(p=p,T=T,phase=phase)),
-              Inline=false,
-              LateInline=true);
       end temperature_ph;
 
-      redeclare function temperature_ps
+      redeclare function extends temperature_ps
       "Calculates temperature as function of pressure and specific entroy"
-        extends Modelica.Icons.Function;
-        input AbsolutePressure p "Pressure";
-        input SpecificEntropy s "Specific entropy";
-        input FixedPhase phase = 0 "2 for two-phase, 1 for one-phase, 0 if not known";
-        output Temperature T "Temperature";
-
       protected
-        Real c2[:] = {290.574168937952,0.490828546245446,19.8608752914032,0.117871744016533,0.130154107880201,-0.0408172235661160,0.0181671755438826,0.0292848788419663,0.0324083687227166,-0.0857625427384498,0.00191602988674819,0.00377150163705040,0.00622225803519055,0.00799217399325639,-0.0124017661200968,0.000114975996621020,0.000243666235393007,0.000459514035453056,0.000907175802732240,0.00127247920370296,-0.00192723964571896};
-        Real meanx2 = 14.225189003160570;
-        Real meany2 = 1.152465068418020e+03;
-        Real stdx2 = 0.499169296800688;
-        Real stdy2 = 1.792997138404026e+02;
-        Real x2 = (log(p)-meanx2)/stdx2;
-        Real y2 = (s-meany2)/stdy2;
-        Real T2 = c2[1] + c2[2]*x2 + c2[3]*y2 + c2[4]*x2^2 + c2[5]*x2*y2 + c2[6]*y2^2 + c2[7]*x2^3 + c2[8]*x2^2*y2 + c2[9]*x2*y2^2 + c2[10]*y2^3 + c2[11]*x2^4 + c2[12]*x2^3*y2 + c2[13]*x2^2*y2^2 + c2[14]*x2*y2^3 + c2[15]*y2^4 + c2[16]*x2^5 + c2[17]*x2^4*y2 + c2[18]*x2^3*y2^2 + c2[19]*x2^2*y2^3 + c2[20]*x2*y2^4 + c2[21]*y2^5;
-
-        Real c1[:] = {305.667994209752,34.3546579581206,36.3220486736092,0.956829304294540,0.239229453753890,0.702977715170277,0.129780738468536,-0.303362575167080,0.000814283563881690,-0.100508863694088,0.0577060502424694,-0.0264862744961215,0.0826586807740864,-0.00125351482775024,0.0160903628800248,0.0132124973316544,-0.00720862103838031,0.00736011556482272,-0.00773556171071259,0.00365836572791750,-0.000494569833066580};
-        Real meanx1 = 12.3876547448383;
-        Real meany1 = 2715.65359560750;
-        Real stdx1 = 0.961902709412239;
-        Real stdy1 = 207.473158311391;
-        Real x1 = (log(p)-meanx1)/stdx1;
-        Real y1 = (s-meany1)/stdy1;
-        Real T1 = c1[1] + c1[2]*x1 + c1[3]*y1 + c1[4]*x1^2 + c1[5]*x1*y1 + c1[6]*y1^2 + c1[7]*x1^3 + c1[8]*x1^2*y1 + c1[9]*x1*y1^2 + c1[10]*y1^3 + c1[11]*x1^4 + c1[12]*x1^3*y1 + c1[13]*x1^2*y1^2 + c1[14]*x1*y1^3 + c1[15]*y1^4 + c1[16]*x1^5 + c1[17]*x1^4*y1 + c1[18]*x1^3*y1^2 + c1[19]*x1^2*y1^3 + c1[20]*x1*y1^4 + c1[21]*y1^5;
-
+        AixLib.Media.Refrigerants.DataBase.ThermodynamicStatePropertiesBaseDataDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.TSP_Sangi();
         SpecificEntropy ds = 10;
-        SaturationProperties sat;
-        SpecificEntropy s_dew;
-        SpecificEntropy s_bubble;
-
-      algorithm
-        sat := setSat_p(p=p);
-        s_dew := dewEntropy(sat);
-        s_bubble := bubbleEntropy(sat);
-
-        if s<s_bubble-ds then
-          T := T2;
-        elseif s>s_dew+ds then
-          T := T1;
-        else
-          if s<s_bubble then
-              T:=saturationTemperature(p)*(1 - (s_bubble - s)/ds) +
-                T2*(s_bubble - s)/ds;
-          elseif s>s_dew then
-              T:=saturationTemperature(p)*(1 - (s - s_dew)/ds) +
-                T1*(s - s_dew)/ ds;
-          else
-              T:=saturationTemperature(p);
-          end if;
-        end if;
-      annotation(Inline=false,
-              LateInline=true);
       end temperature_ps;
 
       redeclare function extends density_pT
@@ -1507,6 +1473,117 @@ package Refrigerants "Package with models for different refrigerants"
     independent variables. Moreover, these functions may depend on the Helmholtz
     EoS. Just change these functions if needed.
   */
+
+      redeclare replaceable function temperature_ph
+      "Calculates temperature as function of pressure and specific enthalpy"
+        extends Modelica.Icons.Function;
+        input AbsolutePressure p "Pressure";
+        input SpecificEnthalpy h "Specific enthalpy";
+        input FixedPhase phase=0 "2 for two-phase, 1 for one-phase, 0 if not known";
+        output Temperature T "Temperature";
+
+      protected
+        AixLib.Media.Refrigerants.DataBase.ThermodynamicStatePropertiesBaseDataDefinition
+          cf = AixLib.Media.Refrigerants.DataBase.R1270.TSP_Sangi();
+
+        SpecificEnthalpy dh = 10;
+        SaturationProperties sat;
+        SpecificEnthalpy h_dew;
+        SpecificEnthalpy h_bubble;
+
+        Real x1 = (p-cf.temperature_ph_iO[1])/cf.temperature_ph_iO[3];
+        Real y1 = (h-cf.temperature_ph_iO[2])/cf.temperature_ph_iO[4];
+        Real T1 = cf.temperature_ph_sc[1] + cf.temperature_ph_sc[2]*x1 +
+          cf.temperature_ph_sc[3]*y1 + cf.temperature_ph_sc[4]*x1^2 +
+          cf.temperature_ph_sc[5]*x1*y1 + cf.temperature_ph_sc[6]*y1^2 +
+          cf.temperature_ph_sc[7]*x1^3 + cf.temperature_ph_sc[8]*x1^2*y1 +
+          cf.temperature_ph_sc[9]*x1*y1^2 + cf.temperature_ph_sc[10]*y1^3 +
+          cf.temperature_ph_sc[11]*x1^4 + cf.temperature_ph_sc[12]*x1^3*y1 +
+          cf.temperature_ph_sc[13]*x1^2*y1^2 + cf.temperature_ph_sc[14]*x1*y1^3 +
+          cf.temperature_ph_sc[15]*y1^4 + cf.temperature_ph_sc[16]*x1^5 +
+          cf.temperature_ph_sc[17]*x1^4*y1 + cf.temperature_ph_sc[18]*x1^3*y1^2 +
+          cf.temperature_ph_sc[19]*x1^2*y1^3 + cf.temperature_ph_sc[20]*x1*y1^4 +
+          cf.temperature_ph_sc[21]*y1^5;
+        Real x2 = (p-cf.temperature_ph_iO[5])/cf.temperature_ph_iO[7];
+        Real y2 = (h-cf.temperature_ph_iO[6])/cf.temperature_ph_iO[8];
+        Real T2 = cf.temperature_ph_sh[1] + cf.temperature_ph_sh[2]*x2 +
+          cf.temperature_ph_sh[3]*y2 + cf.temperature_ph_sh[4]*x2^2 +
+          cf.temperature_ph_sh[5]*x2*y2 + cf.temperature_ph_sh[6]*y2^2 +
+          cf.temperature_ph_sh[7]*x2^3 + cf.temperature_ph_sh[8]*x2^2*y2 +
+          cf.temperature_ph_sh[9]*x2*y2^2 + cf.temperature_ph_sh[10]*y2^3 +
+          cf.temperature_ph_sh[11]*x2^4 + cf.temperature_ph_sh[12]*x2^3*y2 +
+          cf.temperature_ph_sh[13]*x2^2*y2^2 + cf.temperature_ph_sh[14]*x2*y2^3 +
+          cf.temperature_ph_sh[15]*y2^4 + cf.temperature_ph_sh[16]*x2^5 +
+          cf.temperature_ph_sh[17]*x2^4*y2 + cf.temperature_ph_sh[18]*x2^3*y2^2 +
+          cf.temperature_ph_sh[19]*x2^2*y2^3 + cf.temperature_ph_sh[20]*x2*y2^4 +
+          cf.temperature_ph_sh[21]*y2^5;
+
+      algorithm
+        sat := setSat_p(p=p);
+        h_dew := dewEnthalpy(sat);
+        h_bubble := bubbleEnthalpy(sat);
+        if h<h_bubble-dh then
+          T := T1;
+        elseif h>h_dew+dh then
+          T := T2;
+        else
+          if h<h_bubble then
+              T := saturationTemperature(p)*(1 - (h_bubble - h)/dh) +
+                T1*(h_bubble - h)/dh;
+          elseif h>h_dew then
+              T := saturationTemperature(p)*(1 - (h - h_dew)/dh) +
+                T2*(h - h_dew)/dh;
+          else
+              T := saturationTemperature(p);
+          end if;
+        end if;
+      annotation(derivative(noDerivative=phase)=temperature_ph_der,
+          inverse(h=specificEnthalpy_pT(p=p,T=T,phase=phase)),
+              Inline=false,
+              LateInline=true);
+      end temperature_ph;
+
+      redeclare replaceable function temperature_ps
+      "Calculates temperature as function of pressure and specific entroy"
+        extends Modelica.Icons.Function;
+        input AbsolutePressure p "Pressure";
+        input SpecificEntropy s "Specific entropy";
+        input FixedPhase phase = 0 "2 for two-phase, 1 for one-phase, 0 if not known";
+        output Temperature T "Temperature";
+
+      protected
+        AixLib.Media.Refrigerants.DataBase.ThermodynamicStatePropertiesBaseDataDefinition
+          cf = AixLib.Media.Refrigerants.DataBase.R1270.TSP_Sangi();
+
+        SpecificEntropy ds = 10;
+        SaturationProperties sat;
+        SpecificEntropy s_dew;
+        SpecificEntropy s_bubble;
+
+      algorithm
+        sat := setSat_p(p=p);
+        s_dew := dewEntropy(sat);
+        s_bubble := bubbleEntropy(sat);
+
+        if s<s_bubble-ds then
+          T := T2;
+        elseif s>s_dew+ds then
+          T := T1;
+        else
+          if s<s_bubble then
+              T:=saturationTemperature(p)*(1 - (s_bubble - s)/ds) +
+                T2*(s_bubble - s)/ds;
+          elseif s>s_dew then
+              T:=saturationTemperature(p)*(1 - (s - s_dew)/ds) +
+                T1*(s - s_dew)/ ds;
+          else
+              T:=saturationTemperature(p);
+          end if;
+        end if;
+      annotation(Inline=false,
+              LateInline=true);
+      end temperature_ps;
+
       redeclare function pressure_dT
       "Computes pressure as a function of density and temperature"
         extends Modelica.Icons.Function;
@@ -2194,6 +2271,10 @@ package Refrigerants "Package with models for different refrigerants"
 </html>"));
   end R410a;
 
+  package R718 "Package with models for the refrigertant R718"
+    extends Modelica.Icons.VariantsPackage;
+  end R718;
+
   package R1270 "Package with models for refrigerant R1270"
     extends Modelica.Icons.VariantsPackage;
 
@@ -2334,175 +2415,6 @@ package Refrigerants "Package with models for different refrigerants"
   */
 
 
-      /*Provide polynomial functions for saturation properties. These functions are
-    fitted to external data (e.g. data extracted from RefProp or FluidProp). The
-    code fragments below are examples for fitting aproaches.
-  */
-      redeclare function extends saturationPressure
-      "Saturation pressure of refrigerant (Ancillary equation)"
-      protected
-         Real N1 = -6.7722;
-         Real N2 = 1.6938;
-         Real N3 = -1.3341;
-         Real N4 = -3.1876;
-         Real N5 = 0.94937;
-         Real T_crit = fluidConstants[1].criticalTemperature;
-         Real T_trip = fluidConstants[1].triplePointTemperature;
-         Real p_crit = fluidConstants[1].criticalPressure;
-         Real p_trip = fluidConstants[1].triplePointPressure;
-         Real OM = (1 - T/T_crit);
-
-      algorithm
-         if T>T_crit then
-           p := p_crit;
-         elseif T<T_trip then
-           p := p_trip;
-         else
-           p := p_crit * exp(T_crit/T * (N1*OM + N2*OM^1.5 + N3*OM^2.2 + N4*OM^4.8 + N5*OM^6.2));
-         end if;
-      end saturationPressure;
-
-      redeclare function extends saturationTemperature
-      "Saturation temperature of refrigerant (Ancillary equation)"
-      protected
-         Real N[:] = {398148862.940126,-199919955.396472,-757908233.955288,367952699.725659,667046798.608578,-312549990.204649,-357938868.077720,161410013.061604,130510724.837043,-56445981.8598188,-34132767.2831829,14097753.3378770,6597033.14683305,-2588996.07334184,-956016.453555908,354129.363109993,104671.216535750,-36365.4299997343,-8551.71765339857,2737.41277992834,548.032269738263,-169.618396241937,-14.0609083306686,-0.171965430903563,5.14960741195450,-3.21018399915220,2.10314346387695,-1.50075370184942,1.08909694031671,-0.809987090417357,0.624647765942656,-0.509758482228388,0.452113517399419,-0.485252422559269,0.812915722176255,0.0497845322480886};
-         Real mean_p = 1570581.06473046;
-         Real std_p = 2557900;
-         Real mean_T = 314.714456959068;
-         Real std_T = 89.9988984287752;
-         Real T_1 = 0;
-         Real x;
-
-      algorithm
-          x := (p - mean_p)/std_p;
-          for k in 1:35 loop
-            T_1 := T_1 + N[k]*x^(36 - k);
-          end for;
-          T_1 := T_1 + N[36];
-          T := T_1*std_T + mean_T;
-      end saturationTemperature;
-
-      redeclare function extends bubbleDensity
-      "Boiling curve specific density of refrigerant (Ancillary equation)"
-      protected
-         Real N[:] = {168.562039493205,102.498679842295,-417.252850518645,-379.369839448631,259.875445333347,360.650888848736,-34.2860732305720,-167.388526468939,-38.3089822429208,32.2321439731247,16.2401795687420,-1.02099838936652,-2.73648898021723,-1.28146729979824,-0.699142505344287,-0.486571806528472,-0.362711228684454,-0.295698328266597,-0.257687633710071,-0.232292001969948,-0.214228995994567,-0.205569405748410,-0.209973677149465,-0.241754621811309,-0.319880945311610,-0.921191170759037,0.0299586382685047};
-         Real mean_T = 303.15;
-         Real std_T = 90;
-         Real mean_b = 479.636056419640;
-         Real std_b = 158.710809951891;
-         Real dl_1 = 0;
-         Real x;
-
-      algorithm
-          x := (sat.Tsat - mean_T)/std_T;
-          for k in 1:26 loop
-            dl_1 := dl_1 + N[k]*x^(27 - k);
-          end for;
-          dl_1 := dl_1 + N[27];
-          dl := dl_1*std_b + mean_b;
-      end bubbleDensity;
-
-      redeclare function extends dewDensity
-      "Dew curve specific density of refrigerant (Ancillary equation)"
-      protected
-         Real N[:] = {24729.5537485333,-4790.47306548912,-52999.2668562323,7058.92241323013,52982.2892015502,-2370.58912808463,-31858.6373859460,-1861.34451993193,12491.6995976091,2253.53926320725,-3122.52067135369,-1051.27601610942,412.382050285300,267.637744405501,12.9822226129711,-27.0147438072994,-10.2971934822874,-0.739113632299647,1.49114325185849,1.35527523720564,0.923630488185071,0.672792235972464,0.560751132479985,0.509690199864535,0.490192151807828,0.495282411314377,0.590898303947074,0.811832008381672,0.808375476827012,-0.0754744015174044};
-         Real mean_T = 303.15;
-         Real std_T = 90;
-         Real mean_d = 28.4811865500103;
-         Real std_d = 66.6559013317995;
-         Real dv_1 = 0;
-         Real x;
-
-      algorithm
-          x := (sat.Tsat - mean_T)/std_T;
-          for k in 1:29 loop
-            dv_1 := dv_1 + N[k]*x^(30 - k);
-          end for;
-          dv_1 := dv_1 + N[30];
-          dv := dv_1*std_d + mean_d;
-      end dewDensity;
-
-      redeclare function extends bubbleEnthalpy
-      "Boiling curve specific enthalpy of refrigerant (Ancillary equation)"
-      protected
-         Real N[:] = {-9294767843.63885,4601044486.87677,20637884091.3137,-9916466348.59996,-21359403718.5665,9947264847.89552,13636958532.2276,-6142679157.11019,-6000574809.17466,2607836222.80069,1926833832.78873,-805551262.020446,-466601813.162386,187005402.363897,86860131.7909424,-33235234.3082519,-12561996.4230609,4567071.19402525,1416354.06388980,-486313.365924655,-124542.594195178,40167.0083231862,8397.46595050577,-2498.28167363608,-462.619336965067,137.536958919031,6.47029425217843,2.64758244293881,-5.32098880051055,3.46672373461629,-2.26302221729487,1.59069973995372,-1.13913175345066,0.832473481266347,-0.610337601733258,0.487787294421858,-0.381084129429948,0.372237411342447,-0.349666671598220,0.849926390294104,0.0361438659731507};
-         Real mean_p = 1570581.06473046;
-         Real std_p = 2557900;
-         Real mean_b = 315624.984387066;
-         Real std_b = 256478.426329608;
-         Real hl_1 = 0;
-         Real x;
-
-      algorithm
-          x := (sat.psat - mean_p)/std_p;
-          for k in 1:40 loop
-            hl_1 := hl_1 + N[k]*x^(41 - k);
-          end for;
-          hl_1 := hl_1 + N[41];
-          hl := hl_1*std_b + mean_b;
-      end bubbleEnthalpy;
-
-      redeclare function extends dewEnthalpy
-      "Dew curve specific enthalpy of refrigerant (Ancillary equation)"
-      protected
-         Real N[:] = {-18775386313.6055,9394086287.20505,41644196829.4943,-20247895189.1885,-43051291028.3205,20309540510.1720,27452478313.3802,-12538264110.1784,-12063991762.7160,5319760814.06607,3868950611.13826,-1641348684.22018,-936106557.039505,380310593.940752,174364505.252102,-67425029.5319391,-25335355.2373842,9258056.41821587,2898773.57918601,-997509.402878578,-263711.217390457,88279.4166642683,18539.6674822496,-7265.37195240485,-791.349145978091,783.380077339674,-118.386708715477,-87.4509889200359,28.7466309562791,22.7165909170454,-12.9134840899498,0.379188043464810,-1.09461342269619,2.21831905224981,-1.37432108544607,0.840516589045987,-0.879264408088915,0.602870738214699,-0.988765189667206,0.736977778701680,0.0980593948500622};
-         Real mean_p=1570581.06473046;
-         Real std_p=2557900;
-         Real mean_d=611770.954390520;
-         Real std_d=72569.9367503185;
-         Real hv_1=0;
-         Real x;
-
-      algorithm
-          x := (sat.psat - mean_p)/std_p;
-          for k in 1:40 loop
-            hv_1 := hv_1 + N[k]*x^(41 - k);
-          end for;
-          hv_1 := hv_1 + N[41];
-          hv := hv_1*std_d + mean_d;
-      end dewEnthalpy;
-
-      redeclare function extends bubbleEntropy
-      "Boiling curve specific entropy of refrigerant (Ancillary equation)"
-      protected
-         Real N[:] = {-15349607814.6221,7636274154.59154,34083168950.6415,-16468859514.8044,-35274256182.5208,16529163595.4961,22520438414.7263,-10212384678.3319,-9909434496.20396,4337708567.68782,3182094478.82347,-1340537038.41870,-770642130.029990,311344581.740643,143483390.503767,-55358907.3112437,-20756825.7164981,7610600.46375838,2341379.49521742,-810782.536880512,-205991.835180489,66975.5024566354,13911.5167143464,-4172.85884728481,-763.056131634308,226.059931948838,12.7752539636391,3.11268958206643,-7.85167676769299,5.00328992083909,-3.24391515196012,2.26101216009097,-1.60045805379047,1.15217954418816,-0.838779616598381,0.651059130787342,-0.506702271997059,0.465184273228716,-0.435627195532008,0.805470640142587,0.0457609974234471};
-         Real mean_p = 1570581.06473046;
-         Real std_p = 2557900;
-         Real mean_b = 1376.30588505819;
-         Real std_b = 826.068105213303;
-         Real sl_1 = 0;
-         Real x;
-
-      algorithm
-          x := (sat.psat - mean_p)/std_p;
-          for k in 1:40 loop
-            sl_1 := sl_1 + N[k]*x^(41 - k);
-          end for;
-          sl_1 := sl_1 + N[41];
-          sl := sl_1*std_b + mean_b;
-      end bubbleEntropy;
-
-      redeclare function extends dewEntropy
-      "Dew curve specific entropy of propane (Ancillary equation)"
-      protected
-         Real N[:] = {77490431827.9399,-38415276654.6987,-172242854661.379,82962121367.1925,178399484846.286,-83356734431.6106,-113970547248.801,51553752249.9676,50177422017.5857,-21921194748.1992,-16120343329.1663,6783508534.79747,3904793200.14042,-1578181058.50373,-726577962.821200,281202937.346275,104799948.851401,-38715062.2946953,-11716161.8016396,4105031.67420979,1007213.05553646,-326165.883627773,-65541.5043152719,16329.6212516804,3852.60757433586,91.0319174951408,-343.494332982509,-224.377993905924,107.459438248960,24.4635507698644,-8.50688453256311,-13.0500554559933,6.58097770859788,-1.42438707828771,1.58146106221061,-1.50959232991508,0.669411569821680,-0.759627313555789,-0.113920392204933,-0.624499077638527,-0.00619048868799449};
-         Real mean_p = 1570581.06473046;
-         Real std_p = 2557900;
-         Real mean_d = 2335.75170536325;
-         Real std_d = 97.9077112667096;
-         Real sv_1 = 0;
-         Real x;
-
-      algorithm
-          x := (sat.psat - mean_p)/std_p;
-          for k in 1:40 loop
-            sv_1 := sv_1 + N[k]*x^(41 - k);
-          end for;
-          sv_1 := sv_1 + N[41];
-          sv := sv_1*std_d + mean_d;
-      end dewEntropy;
-
-
       /*Provide Helmholtz equatos of state (EoS). These EoS must be fitted to
     different refrigerents. However, the structure will not change and, therefore,
     the coefficients, which are obtained during the fitting procedure, are 
@@ -2578,6 +2490,67 @@ package Refrigerants "Package with models for different refrigerants"
         AixLib.Media.Refrigerants.DataBase.HelmholtzEquationOfStateBaseDateDefinition
           cf =  AixLib.Media.Refrigerants.DataBase.R1270.EoS_Sangi();
       end delta2_d2_alpha_r_d_delta2;
+
+
+      /*Provide polynomial functions for saturation properties. These functions are
+    fitted to external data (e.g. data extracted from RefProp or FluidProp). The
+    code fragments below are examples for fitting aproaches.
+  */
+      redeclare function extends saturationPressure
+      "Saturation pressure of refrigerant (Ancillary equation)"
+      protected
+        AixLib.Media.Refrigerants.DataBase.BubbleDewStatePropertiesBaseDataDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.BDSP_Sangi();
+      end saturationPressure;
+
+      redeclare function extends saturationTemperature
+      "Saturation temperature of refrigerant (Ancillary equation)"
+      protected
+        AixLib.Media.Refrigerants.DataBase.BubbleDewStatePropertiesBaseDataDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.BDSP_Sangi();
+      end saturationTemperature;
+
+      redeclare function extends bubbleDensity
+      "Boiling curve specific density of refrigerant (Ancillary equation)"
+      protected
+        AixLib.Media.Refrigerants.DataBase.BubbleDewStatePropertiesBaseDataDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.BDSP_Sangi();
+      end bubbleDensity;
+
+      redeclare function extends dewDensity
+      "Dew curve specific density of refrigerant (Ancillary equation)"
+      protected
+        AixLib.Media.Refrigerants.DataBase.BubbleDewStatePropertiesBaseDataDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.BDSP_Sangi();
+      end dewDensity;
+
+      redeclare function extends bubbleEnthalpy
+      "Boiling curve specific enthalpy of refrigerant (Ancillary equation)"
+      protected
+        AixLib.Media.Refrigerants.DataBase.BubbleDewStatePropertiesBaseDataDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.BDSP_Sangi();
+      end bubbleEnthalpy;
+
+      redeclare function extends dewEnthalpy
+      "Dew curve specific enthalpy of refrigerant (Ancillary equation)"
+      protected
+        AixLib.Media.Refrigerants.DataBase.BubbleDewStatePropertiesBaseDataDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.BDSP_Sangi();
+      end dewEnthalpy;
+
+      redeclare function extends bubbleEntropy
+      "Boiling curve specific entropy of refrigerant (Ancillary equation)"
+      protected
+        AixLib.Media.Refrigerants.DataBase.BubbleDewStatePropertiesBaseDataDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.BDSP_Sangi();
+      end bubbleEntropy;
+
+      redeclare function extends dewEntropy
+      "Dew curve specific entropy of propane (Ancillary equation)"
+      protected
+        AixLib.Media.Refrigerants.DataBase.BubbleDewStatePropertiesBaseDataDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.BDSP_Sangi();
+      end dewEntropy;
 
 
       /*Provide functions to calculate further thermodynamic properties like the
