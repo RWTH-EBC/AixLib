@@ -107,7 +107,7 @@ package Refrigerants "Package with models for different refrigerants"
       extends Modelica.Icons.VariantsPackage;
       record EoS_Sangi "Record with accurate fitting coefficients for R1270"
         extends HelmholtzEquationOfStateBaseDateDefinition(
-          name = "Coefficients taken from FastPropane model (see Sangi et al.)",
+          name = "Coefficients taken from FastPropane model developed by Sangi et al.",
           alpha_0_nL = 1,
           alpha_0_l1 = {3},
           alpha_0_l2 = {1},
@@ -477,125 +477,37 @@ package Refrigerants "Package with models for different refrigerants"
       redeclare function extends tau_d_alpha_0_d_tau
       "Short form for tau*(dalpha_0/dtau)@delta=const"
       protected
-        Real a1 = -4.970583;
-        Real a2 = 4.29352;
-        Real a3 = 3.043;
-        Real a4 = 5.874;
-        Real a5 = 9.337;
-        Real a6 = 7.922;
-        Real b3 = 1.062478;
-        Real b4 = 3.344237;
-        Real b5 = 5.363757;
-        Real b6 = 11.762957;
-      algorithm
-        tau_d_alpha_0_d_tau := 3 + a2*tau + tau*(a3*b3*(1/(exp(b3*tau) - 1)) + a4*b4*
-        (1/(exp(b4*tau) - 1)) + a5*b5*(1/(exp(b5*tau) - 1)) + a6*b6*(1/(exp(b6*tau) -
-        1))); // verified
+        AixLib.Media.Refrigerants.DataBase.HelmholtzEquationOfStateBaseDateDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.EoS_Sangi();
       end tau_d_alpha_0_d_tau;
+
+      redeclare function extends tau2_d2_alpha_0_d_tau2
+      "Short form for tau*tau*(ddalpha_0/(dtau*dtau))@delta=const"
+      protected
+        AixLib.Media.Refrigerants.DataBase.HelmholtzEquationOfStateBaseDateDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.EoS_Sangi();
+      end tau2_d2_alpha_0_d_tau2;
 
       redeclare function extends tau_d_alpha_r_d_tau
       "Short form for tau*(dalpha_r/dtau)@delta=const"
       protected
-        Real Nk[:] = {0.042910051, 1.7313671, -2.4516524, 0.34157466, -0.46047898, -0.66847295, 0.20889705, 0.19421381, -0.22917851, -0.60405866, 0.066680654, 0.017534618, 0.33874242, 0.22228777, -0.23219062, -0.092206940, -0.47575718, -0.017486824};
-        Real tk[:] = {1.00, 0.33, 0.80, 0.43, 0.90, 2.46, 2.09, 0.88, 1.09, 3.25, 4.62, 0.76, 2.50, 2.75, 3.05, 2.55, 8.40, 6.75};
-        Real dk[:] = {4,1,1,2,2,1,3,6,6,2,3,1,1,1,2,2,4,1};
-        Real lk[:] = {0,0,0,0,0,1,1,1,1,2,2,0,0,0,0,0,0,0};
-        Real eta_k[:] = {0,0,0,0,0,0,0,0,0,0,0,0.963,1.977,1.917,2.307,2.546,3.28,14.6};
-        Real beta_k[:] = {0,0,0,0,0,0,0,0,0,0,0,2.33,3.47,3.15,3.19,0.92,18.8,547.8};
-        Real gamma_k[:] = {0,0,0,0,0,0,0,0,0,0,0,0.684,0.829,1.419,0.817,1.500,1.426,1.093};
-        Real eps_k[:] = {0,0,0,0,0,0,0,0,0,0,0,1.283,0.6936,0.788,0.473,0.8577,0.271,0.948};
-
-      algorithm
-        for k in 1:5 loop
-          tau_d_alpha_r_d_tau :=tau_d_alpha_r_d_tau + Nk[k]*delta^dk[k]*tau^tk[k]*
-          tk[k];
-        end for;
-        for k in 6:11 loop
-          tau_d_alpha_r_d_tau :=tau_d_alpha_r_d_tau + Nk[k]*delta^dk[k]*tau^tk[k]*
-          exp(-delta^lk[k])*tk[k];
-        end for;
-        for k in 12:18 loop
-          tau_d_alpha_r_d_tau :=tau_d_alpha_r_d_tau + Nk[k]*delta^dk[k]*tau^tk[k]*
-          exp(-eta_k[k]*(delta - eps_k[k])^2 - beta_k[k]*(tau - gamma_k[k])^2)*(tk[
-          k] - 2*beta_k[k]*tau*(tau - gamma_k[k]));
-        end for; // verified
+        AixLib.Media.Refrigerants.DataBase.HelmholtzEquationOfStateBaseDateDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.EoS_Sangi();
       end tau_d_alpha_r_d_tau;
 
       redeclare function extends tau_delta_d2_alpha_r_d_tau_d_delta
       "Short form for tau*delta*(ddalpha_r/(dtau*ddelta))"
       protected
-          Real Nk[:] =   {0.042910051,1.7313671, -2.4516524, 0.34157466, -0.46047898, -0.66847295, 0.20889705, 0.19421381, -0.22917851, -0.60405866, 0.066680654, 0.017534618, 0.33874242, 0.22228777, -0.23219062, -0.092206940, -0.47575718, -0.017486824};
-          Real tk[:] =   {1.00, 0.33, 0.80, 0.43, 0.90, 2.46, 2.09, 0.88, 1.09, 3.25, 4.62, 0.76, 2.50, 2.75, 3.05, 2.55, 8.40, 6.75};
-          Real dk[:] =   {4,1,1,2,2,1,3,6,6,2,3,1,1,1,2,2,4,1};
-          Real lk[:] =  {0,0,0,0,0,1,1,1,1,2,2,0,0,0,0,0,0,0};
-          Real eta_k[:] =  {0,0,0,0,0,0,0,0,0,0,0,0.963,1.977,1.917,2.307,2.546,3.28,14.6};
-          Real beta_k[:] =  {0,0,0,0,0,0,0,0,0,0,0,2.33,3.47,3.15,3.19,0.92,18.8,547.8};
-          Real gamma_k[:] =  {0,0,0,0,0,0,0,0,0,0,0,0.684,0.829,1.419,0.817,1.500,1.426,1.093};
-          Real eps_k[:] =  {0,0,0,0,0,0,0,0,0,0,0,1.283,0.6936,0.788,0.473,0.8577,0.271,0.948};
-
-      algorithm
-          for k in 1:5 loop
-            tau_delta_d2_alpha_r_d_tau_d_delta :=tau_delta_d2_alpha_r_d_tau_d_delta +
-            Nk[k]*delta^dk[k]*tau^tk[k]*dk[k]*tk[k];
-          end for;
-          for k in 6:11 loop
-            tau_delta_d2_alpha_r_d_tau_d_delta :=tau_delta_d2_alpha_r_d_tau_d_delta +
-            Nk[k]*delta^dk[k]*tau^tk[k]*exp(-delta^lk[k])*tk[k]*(dk[k] - lk[k]*delta^
-            lk[k]);
-          end for;
-          for k in 12:18 loop
-            tau_delta_d2_alpha_r_d_tau_d_delta :=tau_delta_d2_alpha_r_d_tau_d_delta +
-            Nk[k]*delta^dk[k]*tau^tk[k]*exp(-eta_k[k]*(delta - eps_k[k])^2 - beta_k[k]
-            *(tau - gamma_k[k])^2)*((dk[k] - 2*eta_k[k]*delta*(delta - eps_k[k]))*(tk[
-             k] - 2*beta_k[k]*tau*(tau - gamma_k[k]))); // verified
-          end for;
+        AixLib.Media.Refrigerants.DataBase.HelmholtzEquationOfStateBaseDateDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.EoS_Sangi();
       end tau_delta_d2_alpha_r_d_tau_d_delta;
 
       redeclare function extends tau2_d2_alpha_r_d_tau2
       "Short form for tau*tau*(ddalpha_r/(dtau*dtau))@delta=const"
       protected
-          Real Nk[:] = {0.042910051, 1.7313671, -2.4516524, 0.34157466, -0.46047898, -0.66847295, 0.20889705, 0.19421381, -0.22917851, -0.60405866, 0.066680654, 0.017534618, 0.33874242, 0.22228777, -0.23219062, -0.092206940, -0.47575718, -0.017486824};
-          Real tk[:] = {1.00, 0.33, 0.80, 0.43, 0.90, 2.46, 2.09, 0.88, 1.09, 3.25, 4.62, 0.76, 2.50, 2.75, 3.05, 2.55, 8.40, 6.75};
-          Real dk[:] = {4,1,1,2,2,1,3,6,6,2,3,1,1,1,2,2,4,1};
-          Real lk[:] = {0,0,0,0,0,1,1,1,1,2,2,0,0,0,0,0,0,0};
-          Real eta_k[:] = {0,0,0,0,0,0,0,0,0,0,0,0.963,1.977,1.917,2.307,2.546,3.28,14.6};
-          Real beta_k[:] = {0,0,0,0,0,0,0,0,0,0,0,2.33,3.47,3.15,3.19,0.92,18.8,547.8};
-          Real gamma_k[:] = {0,0,0,0,0,0,0,0,0,0,0,0.684,0.829,1.419,0.817,1.500,1.426,1.093};
-          Real eps_k[:] = {0,0,0,0,0,0,0,0,0,0,0,1.283,0.6936,0.788,0.473,0.8577,0.271,0.948};
-
-      algorithm
-          for k in 1:5 loop
-            tau2_d2_alpha_r_d_tau2 :=tau2_d2_alpha_r_d_tau2 + Nk[k]*delta^dk[k]*tau
-            ^tk[k]*tk[k]*(tk[k] - 1);
-          end for;
-          for k in 6:11 loop
-            tau2_d2_alpha_r_d_tau2 :=tau2_d2_alpha_r_d_tau2 + Nk[k]*delta^dk[k]*tau
-            ^tk[k]*exp(-delta^lk[k])*tk[k]*(tk[k] - 1);
-          end for;
-          for k in 12:18 loop
-            tau2_d2_alpha_r_d_tau2 :=tau2_d2_alpha_r_d_tau2 + Nk[k]*delta^dk[k]*tau
-            ^tk[k]*exp(-eta_k[k]*(delta - eps_k[k])^2 - beta_k[k]*(tau - gamma_k[k])
-            ^2)*((tk[k] - 2*beta_k[k]*tau*(tau - gamma_k[k]))^2 - tk[k] - 2*beta_k[
-            k]*tau^2); // verified
-          end for;
+        AixLib.Media.Refrigerants.DataBase.HelmholtzEquationOfStateBaseDateDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.EoS_Sangi();
       end tau2_d2_alpha_r_d_tau2;
-
-      redeclare function extends tau2_d2_alpha_0_d_tau2
-      "Short form for tau*tau*(ddalpha_0/(dtau*dtau))@delta=const"
-      protected
-          Real a3 = 3.043;
-          Real a4 = 5.874;
-          Real a5 = 9.337;
-          Real a6 = 7.922;
-          Real b3 = 1.062478;
-          Real b4 = 3.344237;
-          Real b5 = 5.363757;
-          Real b6 = 11.762957;
-      algorithm
-          tau2_d2_alpha_0_d_tau2 :=-3 - tau^2*(a3*b3^2*(exp(b3*tau)/(exp(b3*tau) -
-          1)^2) + a4*b4^2*(exp(b4*tau)/(exp(b4*tau) - 1)^2) + a5*b5^2*(exp(b5*tau)/
-          (exp(b5*tau) - 1)^2) + a6*b6^2*(exp(b6*tau)/(exp(b6*tau) - 1)^2)); // verified
-      end tau2_d2_alpha_0_d_tau2;
 
       redeclare function extends delta_d_alpha_r_d_delta
       "Short form for delta*(dalpha_r/(ddelta))@tau=const"
@@ -1043,13 +955,16 @@ package Refrigerants "Package with models for different refrigerants"
       algorithm
         alpha_0 := log(delta);
         for k in 1:cf.alpha_0_nL loop
-          alpha_0 := alpha_0 + cf.alpha_0_l1[k]*log(tau^cf.alpha_0_l2[k]);
+          alpha_0 := alpha_0 +
+            cf.alpha_0_l1[k]*log(tau^cf.alpha_0_l2[k]);
         end for;
-        for k in cf.alpha_0_nL+1:cf.alpha_0_nL+cf.alpha_0_nP loop
-          alpha_0 := alpha_0 + cf.alpha_0_p1[k]*tau^cf.alpha_0_p2[k];
+        for k in 1:cf.alpha_0_nP loop
+          alpha_0 := alpha_0 +
+            cf.alpha_0_p1[k]*tau^cf.alpha_0_p2[k];
         end for;
-        for k in cf.alpha_0_nL+cf.alpha_0_nP+1:cf.alpha_0_nL+cf.alpha_0_nP+cf.alpha_0_nE loop
-          alpha_0 := alpha_0 + cf.alpha_0_e1[k]*log(1-exp(cf.alpha_0_e2[k]*tau));
+        for k in 1:cf.alpha_0_nE loop
+          alpha_0 := alpha_0 +
+            cf.alpha_0_e1[k]*log(1-exp(cf.alpha_0_e2[k]*tau));
         end for;
       end alpha_0;
 
@@ -1065,16 +980,19 @@ package Refrigerants "Package with models for different refrigerants"
 
       algorithm
         for k in 1:cf.alpha_r_nP loop
-          alpha_r := alpha_r + cf.alpha_r_p1[k]*delta^cf.alpha_r_p2[k]*tau^cf.alpha_r_p3[k];
+          alpha_r := alpha_r +
+            cf.alpha_r_p1[k]*delta^cf.alpha_r_p2[k]*tau^cf.alpha_r_p3[k];
         end for;
-        for k in cf.alpha_r_nP+1:cf.alpha_r_nP+cf.alpha_r_nB loop
-          alpha_r := alpha_r + cf.alpha_r_b1[k]*delta^cf.alpha_r_b2[k]*
-            tau^cf.alpha_r_b3[k]*exp(-delta^cf.alpha_r_b4[k]);
+        for k in 1:cf.alpha_r_nB loop
+          alpha_r := alpha_r +
+            cf.alpha_r_b1[k]*delta^cf.alpha_r_b2[k]*tau^cf.alpha_r_b3[k]*
+            exp(-delta^cf.alpha_r_b4[k]);
         end for;
-        for k in cf.alpha_r_nP+cf.alpha_r_nB+1:cf.alpha_r_nP+cf.alpha_r_nB+cf.alpha_r_nG loop
-          alpha_r :=alpha_r + cf.alpha_r_g1[k]*delta^cf.alpha_r_g2[k]*
-            tau^cf.alpha_r_g3[k]*exp(cf.alpha_r_g4[k]*(delta - cf.alpha_r_g5[k])
-            ^2 + cf.alpha_r_g6[k]*(tau - cf.alpha_r_g7[k])^2);
+        for k in 1:cf.alpha_r_nG loop
+          alpha_r := alpha_r +
+            cf.alpha_r_g1[k]*delta^cf.alpha_r_g2[k]*tau^cf.alpha_r_g3[k]*
+            exp(cf.alpha_r_g4[k]*(delta - cf.alpha_r_g5[k])^2 +
+            cf.alpha_r_g6[k]*(tau - cf.alpha_r_g7[k])^2);
         end for;
       end alpha_r;
 
@@ -1082,13 +1000,79 @@ package Refrigerants "Package with models for different refrigerants"
       "Short form for tau*(dalpha_0/dtau)@delta=const"
         input Real tau "Density";
         output Real tau_d_alpha_0_d_tau = 0 "Tau*(dalpha_0/dtau)@delta=const";
+
+      protected
+        AixLib.Media.Refrigerants.DataBase.HelmholtzEquationOfStateBaseDateDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.EoS_Sangi();
+
+      algorithm
+        for k in 1:cf.alpha_0_nL loop
+          tau_d_alpha_0_d_tau := tau_d_alpha_0_d_tau +
+            cf.alpha_0_l1[k]*cf.alpha_0_l2[k];
+        end for;
+        for k in 1:cf.alpha_0_nP loop
+          tau_d_alpha_0_d_tau := tau_d_alpha_0_d_tau +
+            cf.alpha_0_p1[k]*cf.alpha_0_p2[k]*tau^cf.alpha_0_p2[k];
+        end for;
+        for k in 1:cf.alpha_0_nE loop
+          tau_d_alpha_0_d_tau := tau_d_alpha_0_d_tau +
+            tau*cf.alpha_0_e1[k]*cf.alpha_0_e2[k]/(1-exp(-cf.alpha_0_e2[k]*tau));
+        end for;
       end tau_d_alpha_0_d_tau;
+
+      replaceable partial function tau2_d2_alpha_0_d_tau2
+      "Short form for tau*tau*(ddalpha_0/(dtau*dtau))@delta=const"
+          input Real tau "Density";
+          output Real tau2_d2_alpha_0_d_tau2 = 0
+          "Tau*tau*(ddalpha_0/(dtau*dtau))@delta=const";
+
+      protected
+        AixLib.Media.Refrigerants.DataBase.HelmholtzEquationOfStateBaseDateDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.EoS_Sangi();
+
+      algorithm
+        for k in 1:cf.alpha_0_nL loop
+          tau2_d2_alpha_0_d_tau2 := tau2_d2_alpha_0_d_tau2 -
+            cf.alpha_0_l1[k]*cf.alpha_0_l2[k];
+        end for;
+        for k in 1:cf.alpha_0_nP loop
+          tau2_d2_alpha_0_d_tau2 := tau2_d2_alpha_0_d_tau2 +
+            cf.alpha_0_p1[k]*cf.alpha_0_p2[k]*(cf.alpha_0_p2[k]-1)*tau^cf.alpha_0_p2[k];
+        end for;
+        for k in 1:cf.alpha_0_nE loop
+          tau2_d2_alpha_0_d_tau2 := tau2_d2_alpha_0_d_tau2 -
+            tau^2*cf.alpha_0_e1[k]*cf.alpha_0_e2[k]^2*exp(-cf.alpha_0_e2[k]*tau)/
+            ((1-exp(-cf.alpha_0_e2[k]*tau))^2);
+        end for;
+      end tau2_d2_alpha_0_d_tau2;
 
       replaceable partial function tau_d_alpha_r_d_tau
       "Short form for tau*(dalpha_r/dtau)@delta=const"
         input Real delta "Temperature";
         input Real tau "Density";
         output Real tau_d_alpha_r_d_tau = 0 "Tau*(dalpha_r/dtau)@delta=const";
+
+      protected
+        AixLib.Media.Refrigerants.DataBase.HelmholtzEquationOfStateBaseDateDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.EoS_Sangi();
+
+      algorithm
+        for k in 1:cf.alpha_r_nP loop
+          tau_d_alpha_r_d_tau := tau_d_alpha_r_d_tau +
+            cf.alpha_r_p1[k]*cf.alpha_r_p3[k]*delta^cf.alpha_r_p2[k]*tau^cf.alpha_r_p3[k];
+        end for;
+        for k in 1:cf.alpha_r_nB loop
+          tau_d_alpha_r_d_tau := tau_d_alpha_r_d_tau +
+            cf.alpha_r_b1[k]*cf.alpha_r_b3[k]*delta^cf.alpha_r_b2[k]*
+            tau^cf.alpha_r_b3[k]*exp(-delta^cf.alpha_r_b4[k]);
+        end for;
+        for k in 1:cf.alpha_r_nG loop
+          tau_d_alpha_r_d_tau := tau_d_alpha_r_d_tau +
+            cf.alpha_r_g1[k]*delta^cf.alpha_r_g2[k]*tau^cf.alpha_r_g3[k]*
+            exp(cf.alpha_r_g4[k]*(delta - cf.alpha_r_g5[k])^2 + cf.alpha_r_g6[k]*
+            (tau - cf.alpha_r_g7[k])^2)*(cf.alpha_r_g3[k]+2*cf.alpha_r_g6[k]*
+            tau*(tau-cf.alpha_r_g7[k]));
+        end for;
       end tau_d_alpha_r_d_tau;
 
       replaceable partial function tau_delta_d2_alpha_r_d_tau_d_delta
@@ -1097,6 +1081,31 @@ package Refrigerants "Package with models for different refrigerants"
         input Real tau "Density";
         output Real tau_delta_d2_alpha_r_d_tau_d_delta = 0
         "Tau*delta*(ddalpha_r/(dtau*ddelta))";
+
+      protected
+        AixLib.Media.Refrigerants.DataBase.HelmholtzEquationOfStateBaseDateDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.EoS_Sangi();
+
+      algorithm
+        for k in 1:cf.alpha_r_nP loop
+          tau_delta_d2_alpha_r_d_tau_d_delta := tau_delta_d2_alpha_r_d_tau_d_delta +
+            cf.alpha_r_p1[k]*cf.alpha_r_p2[k]*cf.alpha_r_p3[k]*
+            delta^cf.alpha_r_p2[k]*tau^cf.alpha_r_p3[k];
+        end for;
+        for k in 1:cf.alpha_r_nB loop
+          tau_delta_d2_alpha_r_d_tau_d_delta := tau_delta_d2_alpha_r_d_tau_d_delta +
+            cf.alpha_r_b1[k]*cf.alpha_r_b3[k]*delta^cf.alpha_r_b2[k]*tau^cf.alpha_r_b3[k]*
+            exp(-delta^cf.alpha_r_b4[k])*(cf.alpha_r_b2[k]-cf.alpha_r_b4[k]*
+            delta^cf.alpha_r_b4[k]);
+        end for;
+        for k in 1:cf.alpha_r_nG loop
+          tau_delta_d2_alpha_r_d_tau_d_delta := tau_delta_d2_alpha_r_d_tau_d_delta +
+            cf.alpha_r_g1[k]*delta^cf.alpha_r_g2[k]*tau^cf.alpha_r_g3[k]*
+            exp(cf.alpha_r_g4[k]*(delta - cf.alpha_r_g5[k])^2 + cf.alpha_r_g6[k]*
+            (tau - cf.alpha_r_g7[k])^2)*(cf.alpha_r_g3[k]+2*cf.alpha_r_g6[k]*tau*
+            (tau-cf.alpha_r_g7[k]))*(cf.alpha_r_g2[k]+2*cf.alpha_r_g4[k]*delta*
+            (delta-cf.alpha_r_g5[k]));
+        end for;
       end tau_delta_d2_alpha_r_d_tau_d_delta;
 
       replaceable partial function tau2_d2_alpha_r_d_tau2
@@ -1105,20 +1114,44 @@ package Refrigerants "Package with models for different refrigerants"
           input Real tau "Density";
           output Real tau2_d2_alpha_r_d_tau2 = 0
           "Tau*tau*(ddalpha_r/(dtau*dtau))@delta=const";
-      end tau2_d2_alpha_r_d_tau2;
 
-      replaceable partial function tau2_d2_alpha_0_d_tau2
-      "Short form for tau*tau*(ddalpha_0/(dtau*dtau))@delta=const"
-          input Real tau "Density";
-          output Real tau2_d2_alpha_0_d_tau2 = 0
-          "Tau*tau*(ddalpha_0/(dtau*dtau))@delta=const";
-      end tau2_d2_alpha_0_d_tau2;
+      protected
+        AixLib.Media.Refrigerants.DataBase.HelmholtzEquationOfStateBaseDateDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.EoS_Sangi();
+
+      algorithm
+        for k in 1:cf.alpha_r_nP loop
+          tau2_d2_alpha_r_d_tau2 := tau2_d2_alpha_r_d_tau2 +
+            cf.alpha_r_p1[k]*cf.alpha_r_p3[k]*(cf.alpha_r_p3[k]-1)*
+            delta^cf.alpha_r_p2[k]*tau^cf.alpha_r_p3[k];
+        end for;
+        for k in 1:cf.alpha_r_nB loop
+          tau2_d2_alpha_r_d_tau2 := tau2_d2_alpha_r_d_tau2 +
+            cf.alpha_r_b1[k]*cf.alpha_r_b3[k]*(cf.alpha_r_b3[k]-1)*delta^cf.alpha_r_b2[k]*
+            tau^cf.alpha_r_b3[k]*exp(-delta^cf.alpha_r_b4[k]);
+        end for;
+        for k in 1:cf.alpha_r_nG loop
+          tau2_d2_alpha_r_d_tau2 := tau2_d2_alpha_r_d_tau2 +
+            cf.alpha_r_g1[k]*delta^cf.alpha_r_g2[k]*tau^cf.alpha_r_g3[k]*
+            exp(cf.alpha_r_g4[k]*(delta - cf.alpha_r_g5[k])^2 + cf.alpha_r_g6[k]*
+            (tau - cf.alpha_r_g7[k])^2)*(cf.alpha_r_g3[k]+2*cf.alpha_r_g6[k]*
+            tau*(tau-cf.alpha_r_g7[k]));
+        end for;
+          //   Nk[k]*delta^dk[k]*tau
+          //   ^tk[k]*exp(-eta_k[k]*(delta - eps_k[k])^2 - beta_k[k]*(tau - gamma_k[k])
+          //   ^2)*((tk[k] - 2*beta_k[k]*tau*(tau - gamma_k[k]))^2 - tk[k] - 2*beta_k[
+          //   k]*tau^2); // verified
+      end tau2_d2_alpha_r_d_tau2;
 
       replaceable partial function delta_d_alpha_r_d_delta
       "Short form for delta*(dalpha_r/(ddelta))@tau=const"
         input Real delta "Temperature";
         input Real tau "Density";
         output Real delta_d_alpha_r_d_delta = 0 "Delta*(dalpha_r/(ddelta))@tau=const";
+
+      protected
+        AixLib.Media.Refrigerants.DataBase.HelmholtzEquationOfStateBaseDateDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.EoS_Sangi();
       end delta_d_alpha_r_d_delta;
 
       replaceable partial function delta3_d3_alpha_r_d_delta3
@@ -1127,6 +1160,10 @@ package Refrigerants "Package with models for different refrigerants"
         input Real tau "Density";
         output Real delta3_d3_alpha_r_d_delta3 = 0
         "Delta*delta*delta(dddalpha_r/(ddelta*delta*delta))@tau=const";
+
+      protected
+        AixLib.Media.Refrigerants.DataBase.HelmholtzEquationOfStateBaseDateDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.EoS_Sangi();
       end delta3_d3_alpha_r_d_delta3;
 
       replaceable partial function delta2_d2_alpha_r_d_delta2
@@ -1135,6 +1172,10 @@ package Refrigerants "Package with models for different refrigerants"
         input Real tau "Density";
         output Real delta2_d2_alpha_r_d_delta2 = 0
         "Delta*delta(ddalpha_r/(ddelta*delta))@tau=const";
+
+      protected
+        AixLib.Media.Refrigerants.DataBase.HelmholtzEquationOfStateBaseDateDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.EoS_Sangi();
       end delta2_d2_alpha_r_d_delta2;
 
 
@@ -2417,168 +2458,51 @@ package Refrigerants "Package with models for different refrigerants"
       redeclare function extends alpha_0
       "Dimensionless Helmholz energy (Ideal gas contribution alpha_0)"
       protected
-          Real a1 = -4.970583;
-          Real a2 = 4.29352;
-          Real a3 = 3.043;
-          Real a4 = 5.874;
-          Real a5 = 9.337;
-          Real a6 = 7.922;
-          Real b3 = 1.062478;
-          Real b4 = 3.344237;
-          Real b5 = 5.363757;
-          Real b6 = 11.762957;
-
-      algorithm
-          alpha_0 := log(delta) + 3*log(tau) + a1 + a2*tau + a3*log(1-exp(-b3*tau)) + a4*log(1-exp(-b4*tau)) + a5*log(1-exp(-b5*tau)) + a6*log(1-exp(-b6*tau)); // verified
+        AixLib.Media.Refrigerants.DataBase.HelmholtzEquationOfStateBaseDateDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.EoS_Sangi();
       end alpha_0;
 
       redeclare function extends alpha_r
       "Dimensionless Helmholz energy (Residual part alpha_r)"
       protected
-          Real Nk[:] = {0.042910051, 1.7313671, -2.4516524, 0.34157466, -0.46047898, -0.66847295, 0.20889705, 0.19421381, -0.22917851, -0.60405866, 0.066680654, 0.017534618, 0.33874242, 0.22228777, -0.23219062, -0.092206940, -0.47575718, -0.017486824};
-          Real tk[:] = {1.00, 0.33, 0.80, 0.43, 0.90, 2.46, 2.09, 0.88, 1.09, 3.25, 4.62, 0.76, 2.50, 2.75, 3.05, 2.55, 8.40, 6.75};
-          Real dk[:] = {4,1,1,2,2,1,3,6,6,2,3,1,1,1,2,2,4,1};
-          Real lk[:] = {0,0,0,0,0,1,1,1,1,2,2,0,0,0,0,0,0,0};
-          Real eta_k[:] = {0,0,0,0,0,0,0,0,0,0,0,0.963,1.977,1.917,2.307,2.546,3.28,14.6};
-          Real beta_k[:] = {0,0,0,0,0,0,0,0,0,0,0,2.33,3.47,3.15,3.19,0.92,18.8,547.8};
-          Real gamma_k[:] = {0,0,0,0,0,0,0,0,0,0,0,0.684,0.829,1.419,0.817,1.500,1.426,1.093};
-          Real eps_k[:] = {0,0,0,0,0,0,0,0,0,0,0,1.283,0.6936,0.788,0.473,0.8577,0.271,0.948};
-
-      algorithm
-          for k in 1:5 loop
-            alpha_r :=alpha_r + Nk[k]*delta^dk[k]*tau^tk[k];
-          end for;
-          for k in 6:11 loop
-            alpha_r :=alpha_r + Nk[k]*delta^dk[k]*tau^tk[k]*exp(-delta^lk[k]);
-          end for;
-          for k in 12:18 loop
-            alpha_r :=alpha_r + Nk[k]*delta^dk[k]*tau^tk[k]*exp(-eta_k[k]*(delta - eps_k[k])
-              ^2 - beta_k[k]*(tau - gamma_k[k])^2); // verified
-          end for;
+        AixLib.Media.Refrigerants.DataBase.HelmholtzEquationOfStateBaseDateDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.EoS_Sangi();
       end alpha_r;
 
       redeclare function extends tau_d_alpha_0_d_tau
       "Short form for tau*(dalpha_0/dtau)@delta=const"
       protected
-        Real a1 = -4.970583;
-        Real a2 = 4.29352;
-        Real a3 = 3.043;
-        Real a4 = 5.874;
-        Real a5 = 9.337;
-        Real a6 = 7.922;
-        Real b3 = 1.062478;
-        Real b4 = 3.344237;
-        Real b5 = 5.363757;
-        Real b6 = 11.762957;
-      algorithm
-        tau_d_alpha_0_d_tau := 3 + a2*tau + tau*(a3*b3*(1/(exp(b3*tau) - 1)) + a4*b4*
-        (1/(exp(b4*tau) - 1)) + a5*b5*(1/(exp(b5*tau) - 1)) + a6*b6*(1/(exp(b6*tau) -
-        1))); // verified
+        AixLib.Media.Refrigerants.DataBase.HelmholtzEquationOfStateBaseDateDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.EoS_Sangi();
       end tau_d_alpha_0_d_tau;
+
+      redeclare function extends tau2_d2_alpha_0_d_tau2
+      "Short form for tau*tau*(ddalpha_0/(dtau*dtau))@delta=const"
+      protected
+        AixLib.Media.Refrigerants.DataBase.HelmholtzEquationOfStateBaseDateDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.EoS_Sangi();
+      end tau2_d2_alpha_0_d_tau2;
 
       redeclare function extends tau_d_alpha_r_d_tau
       "Short form for tau*(dalpha_r/dtau)@delta=const"
       protected
-        Real Nk[:] = {0.042910051, 1.7313671, -2.4516524, 0.34157466, -0.46047898, -0.66847295, 0.20889705, 0.19421381, -0.22917851, -0.60405866, 0.066680654, 0.017534618, 0.33874242, 0.22228777, -0.23219062, -0.092206940, -0.47575718, -0.017486824};
-        Real tk[:] = {1.00, 0.33, 0.80, 0.43, 0.90, 2.46, 2.09, 0.88, 1.09, 3.25, 4.62, 0.76, 2.50, 2.75, 3.05, 2.55, 8.40, 6.75};
-        Real dk[:] = {4,1,1,2,2,1,3,6,6,2,3,1,1,1,2,2,4,1};
-        Real lk[:] = {0,0,0,0,0,1,1,1,1,2,2,0,0,0,0,0,0,0};
-        Real eta_k[:] = {0,0,0,0,0,0,0,0,0,0,0,0.963,1.977,1.917,2.307,2.546,3.28,14.6};
-        Real beta_k[:] = {0,0,0,0,0,0,0,0,0,0,0,2.33,3.47,3.15,3.19,0.92,18.8,547.8};
-        Real gamma_k[:] = {0,0,0,0,0,0,0,0,0,0,0,0.684,0.829,1.419,0.817,1.500,1.426,1.093};
-        Real eps_k[:] = {0,0,0,0,0,0,0,0,0,0,0,1.283,0.6936,0.788,0.473,0.8577,0.271,0.948};
-
-      algorithm
-        for k in 1:5 loop
-          tau_d_alpha_r_d_tau :=tau_d_alpha_r_d_tau + Nk[k]*delta^dk[k]*tau^tk[k]*
-          tk[k];
-        end for;
-        for k in 6:11 loop
-          tau_d_alpha_r_d_tau :=tau_d_alpha_r_d_tau + Nk[k]*delta^dk[k]*tau^tk[k]*
-          exp(-delta^lk[k])*tk[k];
-        end for;
-        for k in 12:18 loop
-          tau_d_alpha_r_d_tau :=tau_d_alpha_r_d_tau + Nk[k]*delta^dk[k]*tau^tk[k]*
-          exp(-eta_k[k]*(delta - eps_k[k])^2 - beta_k[k]*(tau - gamma_k[k])^2)*(tk[
-          k] - 2*beta_k[k]*tau*(tau - gamma_k[k]));
-        end for; // verified
+        AixLib.Media.Refrigerants.DataBase.HelmholtzEquationOfStateBaseDateDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.EoS_Sangi();
       end tau_d_alpha_r_d_tau;
 
       redeclare function extends tau_delta_d2_alpha_r_d_tau_d_delta
       "Short form for tau*delta*(ddalpha_r/(dtau*ddelta))"
       protected
-          Real Nk[:] =   {0.042910051,1.7313671, -2.4516524, 0.34157466, -0.46047898, -0.66847295, 0.20889705, 0.19421381, -0.22917851, -0.60405866, 0.066680654, 0.017534618, 0.33874242, 0.22228777, -0.23219062, -0.092206940, -0.47575718, -0.017486824};
-          Real tk[:] =   {1.00, 0.33, 0.80, 0.43, 0.90, 2.46, 2.09, 0.88, 1.09, 3.25, 4.62, 0.76, 2.50, 2.75, 3.05, 2.55, 8.40, 6.75};
-          Real dk[:] =   {4,1,1,2,2,1,3,6,6,2,3,1,1,1,2,2,4,1};
-          Real lk[:] =  {0,0,0,0,0,1,1,1,1,2,2,0,0,0,0,0,0,0};
-          Real eta_k[:] =  {0,0,0,0,0,0,0,0,0,0,0,0.963,1.977,1.917,2.307,2.546,3.28,14.6};
-          Real beta_k[:] =  {0,0,0,0,0,0,0,0,0,0,0,2.33,3.47,3.15,3.19,0.92,18.8,547.8};
-          Real gamma_k[:] =  {0,0,0,0,0,0,0,0,0,0,0,0.684,0.829,1.419,0.817,1.500,1.426,1.093};
-          Real eps_k[:] =  {0,0,0,0,0,0,0,0,0,0,0,1.283,0.6936,0.788,0.473,0.8577,0.271,0.948};
-
-      algorithm
-          for k in 1:5 loop
-            tau_delta_d2_alpha_r_d_tau_d_delta :=tau_delta_d2_alpha_r_d_tau_d_delta +
-            Nk[k]*delta^dk[k]*tau^tk[k]*dk[k]*tk[k];
-          end for;
-          for k in 6:11 loop
-            tau_delta_d2_alpha_r_d_tau_d_delta :=tau_delta_d2_alpha_r_d_tau_d_delta +
-            Nk[k]*delta^dk[k]*tau^tk[k]*exp(-delta^lk[k])*tk[k]*(dk[k] - lk[k]*delta^
-            lk[k]);
-          end for;
-          for k in 12:18 loop
-            tau_delta_d2_alpha_r_d_tau_d_delta :=tau_delta_d2_alpha_r_d_tau_d_delta +
-            Nk[k]*delta^dk[k]*tau^tk[k]*exp(-eta_k[k]*(delta - eps_k[k])^2 - beta_k[k]
-            *(tau - gamma_k[k])^2)*((dk[k] - 2*eta_k[k]*delta*(delta - eps_k[k]))*(tk[
-             k] - 2*beta_k[k]*tau*(tau - gamma_k[k]))); // verified
-          end for;
+        AixLib.Media.Refrigerants.DataBase.HelmholtzEquationOfStateBaseDateDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.EoS_Sangi();
       end tau_delta_d2_alpha_r_d_tau_d_delta;
 
       redeclare function extends tau2_d2_alpha_r_d_tau2
       "Short form for tau*tau*(ddalpha_r/(dtau*dtau))@delta=const"
       protected
-          Real Nk[:] = {0.042910051, 1.7313671, -2.4516524, 0.34157466, -0.46047898, -0.66847295, 0.20889705, 0.19421381, -0.22917851, -0.60405866, 0.066680654, 0.017534618, 0.33874242, 0.22228777, -0.23219062, -0.092206940, -0.47575718, -0.017486824};
-          Real tk[:] = {1.00, 0.33, 0.80, 0.43, 0.90, 2.46, 2.09, 0.88, 1.09, 3.25, 4.62, 0.76, 2.50, 2.75, 3.05, 2.55, 8.40, 6.75};
-          Real dk[:] = {4,1,1,2,2,1,3,6,6,2,3,1,1,1,2,2,4,1};
-          Real lk[:] = {0,0,0,0,0,1,1,1,1,2,2,0,0,0,0,0,0,0};
-          Real eta_k[:] = {0,0,0,0,0,0,0,0,0,0,0,0.963,1.977,1.917,2.307,2.546,3.28,14.6};
-          Real beta_k[:] = {0,0,0,0,0,0,0,0,0,0,0,2.33,3.47,3.15,3.19,0.92,18.8,547.8};
-          Real gamma_k[:] = {0,0,0,0,0,0,0,0,0,0,0,0.684,0.829,1.419,0.817,1.500,1.426,1.093};
-          Real eps_k[:] = {0,0,0,0,0,0,0,0,0,0,0,1.283,0.6936,0.788,0.473,0.8577,0.271,0.948};
-
-      algorithm
-          for k in 1:5 loop
-            tau2_d2_alpha_r_d_tau2 :=tau2_d2_alpha_r_d_tau2 + Nk[k]*delta^dk[k]*tau
-            ^tk[k]*tk[k]*(tk[k] - 1);
-          end for;
-          for k in 6:11 loop
-            tau2_d2_alpha_r_d_tau2 :=tau2_d2_alpha_r_d_tau2 + Nk[k]*delta^dk[k]*tau
-            ^tk[k]*exp(-delta^lk[k])*tk[k]*(tk[k] - 1);
-          end for;
-          for k in 12:18 loop
-            tau2_d2_alpha_r_d_tau2 :=tau2_d2_alpha_r_d_tau2 + Nk[k]*delta^dk[k]*tau
-            ^tk[k]*exp(-eta_k[k]*(delta - eps_k[k])^2 - beta_k[k]*(tau - gamma_k[k])
-            ^2)*((tk[k] - 2*beta_k[k]*tau*(tau - gamma_k[k]))^2 - tk[k] - 2*beta_k[
-            k]*tau^2); // verified
-          end for;
+        AixLib.Media.Refrigerants.DataBase.HelmholtzEquationOfStateBaseDateDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.EoS_Sangi();
       end tau2_d2_alpha_r_d_tau2;
-
-      redeclare function extends tau2_d2_alpha_0_d_tau2
-      "Short form for tau*tau*(ddalpha_0/(dtau*dtau))@delta=const"
-      protected
-          Real a3 = 3.043;
-          Real a4 = 5.874;
-          Real a5 = 9.337;
-          Real a6 = 7.922;
-          Real b3 = 1.062478;
-          Real b4 = 3.344237;
-          Real b5 = 5.363757;
-          Real b6 = 11.762957;
-      algorithm
-          tau2_d2_alpha_0_d_tau2 :=-3 - tau^2*(a3*b3^2*(exp(b3*tau)/(exp(b3*tau) -
-          1)^2) + a4*b4^2*(exp(b4*tau)/(exp(b4*tau) - 1)^2) + a5*b5^2*(exp(b5*tau)/
-          (exp(b5*tau) - 1)^2) + a6*b6^2*(exp(b6*tau)/(exp(b6*tau) - 1)^2)); // verified
-      end tau2_d2_alpha_0_d_tau2;
 
       redeclare function extends delta_d_alpha_r_d_delta
       "Short form for delta*(dalpha_r/(ddelta))@tau=const"
@@ -3105,7 +3029,7 @@ package Refrigerants "Package with models for different refrigerants"
         Text(
           extent={{8,20},{40,0}},
           lineColor={28,108,200},
-          textString="R744"),
+          textString="R718"),
         Ellipse(
           extent={{-28,-34},{-8,-54}},
           lineColor={0,0,0},
