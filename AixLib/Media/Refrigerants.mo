@@ -96,6 +96,90 @@ package Refrigerants "Package with models for different refrigerants"
     record BubbleDewStatePropertiesBaseDataDefinition
       "Record definition for thermodynamic state properties at bubble or dew line"
       extends Modelica.Icons.Record;
+
+      parameter String name
+      "Short description of the record"
+      annotation (Dialog(group="General"));
+
+      parameter Integer saturationPressure_nT
+      "Number of terms for saturation pressure"
+      annotation (Dialog(group="Saturation pressure"));
+      parameter Real saturationPressure_n[:]
+      "First coefficient for saturation pressure"
+      annotation (Dialog(group="Saturation pressure"));
+      parameter Real saturationPressure_e[:]
+      "Second coefficient for saturation pressure"
+      annotation (Dialog(group="Saturation pressure"));
+
+      parameter Integer saturationTemperature_nT
+      "Number of terms for saturation temperature"
+      annotation (Dialog(group="Saturation temperature"));
+      parameter Real saturationTemperature_n[:]
+      "Fitting coefficients for saturation temperature"
+      annotation (Dialog(group="Saturation temperature"));
+      parameter Real saturationTemperature_iO[:]
+      "Mean input | Std input | Mean output | Std output"
+      annotation (Dialog(group="Saturation temperature"));
+
+      parameter Integer bubbleDensity_nT
+      "Number of terms for bubble density"
+      annotation (Dialog(group="Bubble density"));
+      parameter Real bubbleDensity_n[:]
+      "Fitting coefficients for bubble density"
+      annotation (Dialog(group="Bubble density"));
+      parameter Real bubbleDensity_iO[:]
+      "Mean input | Std input | Mean output | Std output"
+      annotation (Dialog(group="Bubble density"));
+
+      parameter Integer dewDensity_nT
+      "Number of terms for dew density"
+      annotation (Dialog(group="Dew density"));
+      parameter Real dewDensity_n[:]
+      "Fitting coefficients for dew density"
+      annotation (Dialog(group="Dew density"));
+      parameter Real dewDensity_iO[:]
+      "Mean input | Std input | Mean output | Std output"
+      annotation (Dialog(group="Dew density"));
+
+      parameter Integer bubbleEnthalpy_nT
+      "Number of terms for bubble enthalpy"
+      annotation (Dialog(group="Bubble Enthalpy"));
+      parameter Real bubbleEnthalpy_n[:]
+      "Fitting coefficients for bubble enthalpy"
+      annotation (Dialog(group="Bubble Enthalpy"));
+      parameter Real bubbleEnthalpy_iO[:]
+      "Mean input | Std input | Mean output | Std output"
+      annotation (Dialog(group="Bubble Enthalpy"));
+
+      parameter Integer dewEnthalpy_nT
+      "Number of terms for dew enthalpy"
+      annotation (Dialog(group="Dew Enthalpy"));
+      parameter Real dewEnthalpy_n[:]
+      "Fitting coefficients for dew enthalpy"
+      annotation (Dialog(group="Dew Enthalpy"));
+      parameter Real dewEnthalpy_iO[:]
+      "Mean input | Std input | Mean output | Std output"
+      annotation (Dialog(group="Dew Enthalpy"));
+
+      parameter Integer bubbleEntropy_nT
+      "Number of terms for bubble entropy"
+      annotation (Dialog(group="Bubble Entropy"));
+      parameter Real bubbleEntropy_n[:]
+      "Fitting coefficients for bubble entropy"
+      annotation (Dialog(group="Bubble Entropy"));
+      parameter Real bubbleEntropy_iO[:]
+      "Mean input | Std input | Mean output | Std output"
+      annotation (Dialog(group="Bubble Entropy"));
+
+      parameter Integer dewEntropy_nT
+      "Number of terms for dew entropy"
+      annotation (Dialog(group="Dew Entropy"));
+      parameter Real dewEntropy_n[:]
+      "Fitting coefficients for dew entropy"
+      annotation (Dialog(group="Dew Entropy"));
+      parameter Real dewEntropy_iO[:]
+      "Mean input | Std input | Mean output | Std output"
+      annotation (Dialog(group="Dew Entropy"));
     end BubbleDewStatePropertiesBaseDataDefinition;
 
     record ThermodynamicStatePropertiesBaseDataDefinition
@@ -136,6 +220,35 @@ package Refrigerants "Package with models for different refrigerants"
           alpha_r_g7 = {0.684, 0.829, 1.419, 0.817, 1.500, 1.426, 1.093});
 
       end EoS_Sangi;
+
+      record BDSP_Sangi "Record with accurate fitting coefficients for R1270"
+        extends BubbleDewStatePropertiesBaseDataDefinition(
+          name = "Coefficients taken from FastPropane model developed by Sangi et al.",
+          saturationPressure_nT = 5,
+          saturationPressure_n = {-6.7722, 1.6938, -1.3341, -3.1876, 0.94937},
+          saturationPressure_e = {1,  1.5,  2.2,  4.8,  6.5},
+          saturationTemperature_nT = 36,
+          saturationTemperature_n = {398148862.940126, -199919955.396472, -757908233.955288, 367952699.725659, 667046798.608578, -312549990.204649, -357938868.077720, 161410013.061604, 130510724.837043, -56445981.8598188, -34132767.2831829, 14097753.3378770, 6597033.14683305, -2588996.07334184, -956016.453555908, 354129.363109993, 104671.216535750, -36365.4299997343, -8551.71765339857, 2737.41277992834, 548.032269738263, -169.618396241937, -14.0609083306686, -0.171965430903563, 5.14960741195450, -3.21018399915220, 2.10314346387695, -1.50075370184942, 1.08909694031671, -0.809987090417357, 0.624647765942656, -0.509758482228388, 0.452113517399419, -0.485252422559269, 0.812915722176255, 0.0497845322480886},
+          saturationTemperature_iO = {1570581.06473046, 2557900, 314.714456959068, 89.9988984287752},
+          bubbleDensity_nT = 27,
+          bubbleDensity_n = {168.562039493205, 102.498679842295, -417.252850518645, -379.369839448631, 259.875445333347, 360.650888848736, -34.2860732305720, -167.388526468939, -38.3089822429208, 32.2321439731247, 16.2401795687420, -1.02099838936652, -2.73648898021723, -1.28146729979824, -0.699142505344287, -0.486571806528472, -0.362711228684454, -0.295698328266597, -0.257687633710071, -0.232292001969948, -0.214228995994567, -0.205569405748410, -0.209973677149465, -0.241754621811309, -0.319880945311610, -0.921191170759037, 0.0299586382685047},
+          bubbleDensity_iO = {303.15, 90, 479.636056419640, 158.710809951891},
+          dewDensity_nT = 30,
+          dewDensity_n = {24729.5537485333, -4790.47306548912, -52999.2668562323, 7058.92241323013, 52982.2892015502, -2370.58912808463, -31858.6373859460, -1861.34451993193, 12491.6995976091, 2253.53926320725, -3122.52067135369, -1051.27601610942, 412.382050285300, 267.637744405501, 12.9822226129711, -27.0147438072994, -10.2971934822874, -0.739113632299647, 1.49114325185849, 1.35527523720564, 0.923630488185071, 0.672792235972464, 0.560751132479985, 0.509690199864535, 0.490192151807828, 0.495282411314377, 0.590898303947074, 0.811832008381672, 0.808375476827012, -0.0754744015174044},
+          dewDensity_iO = {303.15, 90, 28.4811865500103, 66.6559013317995},
+          bubbleEnthalpy_nT = 41,
+          bubbleEnthalpy_n = {-9294767843.63885, 4601044486.87677, 20637884091.3137, -9916466348.59996, -21359403718.5665, 9947264847.89552, 13636958532.2276, -6142679157.11019, -6000574809.17466, 2607836222.80069, 1926833832.78873, -805551262.020446, -466601813.162386, 187005402.363897, 86860131.7909424, -33235234.3082519, -12561996.4230609, 4567071.19402525, 1416354.06388980, -486313.365924655, -124542.594195178, 40167.0083231862, 8397.46595050577, -2498.28167363608, -462.619336965067, 137.536958919031, 6.47029425217843, 2.64758244293881, -5.32098880051055, 3.46672373461629, -2.26302221729487, 1.59069973995372, -1.13913175345066, 0.832473481266347, -0.610337601733258, 0.487787294421858, -0.381084129429948, 0.372237411342447, -0.349666671598220, 0.849926390294104, 0.0361438659731507},
+          bubbleEnthalpy_iO = {1570581.06473046, 2557900, 315624.984387066, 256478.426329608},
+          dewEnthalpy_nT = 41,
+          dewEnthalpy_n = {-18775386313.6055, 9394086287.20505, 41644196829.4943, -20247895189.1885, -43051291028.3205, 20309540510.1720, 27452478313.3802, -12538264110.1784, -12063991762.7160, 5319760814.06607, 3868950611.13826, -1641348684.22018, -936106557.039505, 380310593.940752, 174364505.252102, -67425029.5319391, -25335355.2373842, 9258056.41821587, 2898773.57918601, -997509.402878578, -263711.217390457, 88279.4166642683, 18539.6674822496, -7265.37195240485, -791.349145978091, 783.380077339674, -118.386708715477, -87.4509889200359, 28.7466309562791, 22.7165909170454, -12.9134840899498, 0.379188043464810, -1.09461342269619, 2.21831905224981, -1.37432108544607, 0.840516589045987, -0.879264408088915, 0.602870738214699, -0.988765189667206, 0.736977778701680, 0.0980593948500622},
+          dewEnthalpy_iO = {1570581.06473046, 2557900, 611770.954390520, 72569.9367503185},
+          bubbleEntropy_nT = 41,
+          bubbleEntropy_n = {-15349607814.6221, 7636274154.59154, 34083168950.6415, -16468859514.8044, -35274256182.5208, 16529163595.4961, 22520438414.7263, -10212384678.3319, -9909434496.20396, 4337708567.68782, 3182094478.82347, -1340537038.41870, -770642130.029990, 311344581.740643, 143483390.503767, -55358907.3112437, -20756825.7164981, 7610600.46375838, 2341379.49521742, -810782.536880512, -205991.835180489, 66975.5024566354, 13911.5167143464, -4172.85884728481, -763.056131634308, 226.059931948838, 12.7752539636391, 3.11268958206643, -7.85167676769299, 5.00328992083909, -3.24391515196012, 2.26101216009097, -1.60045805379047, 1.15217954418816, -0.838779616598381, 0.651059130787342, -0.506702271997059, 0.465184273228716, -0.435627195532008, 0.805470640142587, 0.0457609974234471},
+          bubbleEntropy_iO = {1570581.06473046, 2557900, 1376.30588505819, 826.068105213303},
+          dewEntropy_nT = 41,
+          dewEntropy_n = {77490431827.9399, -38415276654.6987, -172242854661.379, 82962121367.1925, 178399484846.286, -83356734431.6106, -113970547248.801, 51553752249.9676, 50177422017.5857, -21921194748.1992, -16120343329.1663, 6783508534.79747, 3904793200.14042, -1578181058.50373, -726577962.821200, 281202937.346275, 104799948.851401, -38715062.2946953, -11716161.8016396, 4105031.67420979, 1007213.05553646, -326165.883627773, -65541.5043152719, 16329.6212516804, 3852.60757433586, 91.0319174951408, -343.494332982509, -224.377993905924, 107.459438248960, 24.4635507698644, -8.50688453256311, -13.0500554559933, 6.58097770859788, -1.42438707828771, 1.58146106221061, -1.50959232991508, 0.669411569821680, -0.759627313555789, -0.113920392204933, -0.624499077638527, -0.00619048868799449},
+          dewEntropy_iO = {1570581.06473046, 2557900, 2335.75170536325, 97.9077112667096});
+      end BDSP_Sangi;
     end R1270;
     annotation (Icon(graphics={
         Rectangle(extent={{-62,66},{-2,24}}, lineColor={0,0,0}),
@@ -971,22 +1084,21 @@ package Refrigerants "Package with models for different refrigerants"
 
 
       /*Provide polynomial functions for saturation properties. These functions are
-    fitted to external data (e.g. data extracted from RefProp or FluidProp). The
-    code fragments below are examples for fitting aproaches.
+    fitted to external data (e.g. data extracted from RefProp or FluidProp). Currently,
+    just one fitting approach is implemented. Therefore, the coefficients, which are
+    obtained during the fitting procedure, are provided by records.
   */
       redeclare function extends saturationPressure
       "Saturation pressure of refrigerant (Ancillary equation)"
       protected
-        Real N1 = -6.7722;
-        Real N2 = 1.6938;
-        Real N3 = -1.3341;
-        Real N4 = -3.1876;
-        Real N5 = 0.94937;
+         AixLib.Media.Refrigerants.DataBase.BubbleDewStatePropertiesBaseDataDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.BDSP_Sangi();
         Real T_crit = fluidConstants[1].criticalTemperature;
         Real T_trip = fluidConstants[1].triplePointTemperature;
         Real p_crit = fluidConstants[1].criticalPressure;
         Real p_trip = fluidConstants[1].triplePointPressure;
         Real OM = (1 - T/T_crit);
+        Real p_1 = 0;
 
       algorithm
         if T>T_crit then
@@ -994,148 +1106,130 @@ package Refrigerants "Package with models for different refrigerants"
         elseif T<T_trip then
          p := p_trip;
         else
-         p := p_crit * exp(T_crit/T * (N1*OM + N2*OM^1.5 + N3*OM^2.2 + N4*OM^4.8 + N5*OM^6.2));
+          for k in 1:cf.saturationPressure_nT loop
+            p_1 :=p_1 + cf.saturationPressure_n[k]*OM^cf.saturationPressure_e[k];
+          end for;
+         p := p_crit * exp(T_crit/T * p_1);
         end if;
       end saturationPressure;
 
       redeclare function extends saturationTemperature
       "Saturation temperature of refrigerant (Ancillary equation)"
       protected
-        Real N[:] = {398148862.940126,-199919955.396472,-757908233.955288,367952699.725659,667046798.608578,-312549990.204649,-357938868.077720,161410013.061604,130510724.837043,-56445981.8598188,-34132767.2831829,14097753.3378770,6597033.14683305,-2588996.07334184,-956016.453555908,354129.363109993,104671.216535750,-36365.4299997343,-8551.71765339857,2737.41277992834,548.032269738263,-169.618396241937,-14.0609083306686,-0.171965430903563,5.14960741195450,-3.21018399915220,2.10314346387695,-1.50075370184942,1.08909694031671,-0.809987090417357,0.624647765942656,-0.509758482228388,0.452113517399419,-0.485252422559269,0.812915722176255,0.0497845322480886};
-        Real mean_p = 1570581.06473046;
-        Real std_p = 2557900;
-        Real mean_T = 314.714456959068;
-        Real std_T = 89.9988984287752;
+         AixLib.Media.Refrigerants.DataBase.BubbleDewStatePropertiesBaseDataDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.BDSP_Sangi();
         Real T_1 = 0;
         Real x;
 
       algorithm
-        x := (p - mean_p)/std_p;
-        for k in 1:35 loop
-          T_1 := T_1 + N[k]*x^(36 - k);
+        x := (p - cf.saturationTemperature_iO[1])/cf.saturationTemperature_iO[2];
+        for k in 1:cf.saturationTemperature_nT-1 loop
+          T_1 := T_1 + cf.saturationTemperature_n[k]*x^(cf.saturationTemperature_nT - k);
         end for;
-        T_1 := T_1 + N[36];
-        T := T_1*std_T + mean_T;
+        T_1 := T_1 + cf.saturationTemperature_n[cf.saturationTemperature_nT];
+        T := T_1*cf.saturationTemperature_iO[4] + cf.saturationTemperature_iO[3];
       end saturationTemperature;
 
       redeclare function extends bubbleDensity
       "Boiling curve specific density of refrigerant (Ancillary equation)"
       protected
-        Real N[:] = {168.562039493205,102.498679842295,-417.252850518645,-379.369839448631,259.875445333347,360.650888848736,-34.2860732305720,-167.388526468939,-38.3089822429208,32.2321439731247,16.2401795687420,-1.02099838936652,-2.73648898021723,-1.28146729979824,-0.699142505344287,-0.486571806528472,-0.362711228684454,-0.295698328266597,-0.257687633710071,-0.232292001969948,-0.214228995994567,-0.205569405748410,-0.209973677149465,-0.241754621811309,-0.319880945311610,-0.921191170759037,0.0299586382685047};
-        Real mean_T = 303.15;
-        Real std_T = 90;
-        Real mean_b = 479.636056419640;
-        Real std_b = 158.710809951891;
+         AixLib.Media.Refrigerants.DataBase.BubbleDewStatePropertiesBaseDataDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.BDSP_Sangi();
         Real dl_1 = 0;
         Real x;
 
       algorithm
-        x := (sat.Tsat - mean_T)/std_T;
-        for k in 1:26 loop
-          dl_1 := dl_1 + N[k]*x^(27 - k);
+        x := (sat.Tsat - cf.bubbleDensity_iO[1])/cf.bubbleDensity_iO[2];
+        for k in 1:cf.bubbleDensity_nT-1 loop
+          dl_1 := dl_1 + cf.bubbleDensity_n[k]*x^(cf.bubbleDensity_nT - k);
         end for;
-        dl_1 := dl_1 + N[27];
-        dl := dl_1*std_b + mean_b;
+        dl_1 := dl_1 + cf.bubbleDensity_n[cf.bubbleDensity_nT];
+        dl := dl_1*cf.bubbleDensity_iO[4] + cf.bubbleDensity_iO[3];
       end bubbleDensity;
 
       redeclare function extends dewDensity
       "Dew curve specific density of refrigerant (Ancillary equation)"
       protected
-        Real N[:] = {24729.5537485333,-4790.47306548912,-52999.2668562323,7058.92241323013,52982.2892015502,-2370.58912808463,-31858.6373859460,-1861.34451993193,12491.6995976091,2253.53926320725,-3122.52067135369,-1051.27601610942,412.382050285300,267.637744405501,12.9822226129711,-27.0147438072994,-10.2971934822874,-0.739113632299647,1.49114325185849,1.35527523720564,0.923630488185071,0.672792235972464,0.560751132479985,0.509690199864535,0.490192151807828,0.495282411314377,0.590898303947074,0.811832008381672,0.808375476827012,-0.0754744015174044};
-        Real mean_T = 303.15;
-        Real std_T = 90;
-        Real mean_d = 28.4811865500103;
-        Real std_d = 66.6559013317995;
+         AixLib.Media.Refrigerants.DataBase.BubbleDewStatePropertiesBaseDataDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.BDSP_Sangi();
         Real dv_1 = 0;
         Real x;
 
       algorithm
-        x := (sat.Tsat - mean_T)/std_T;
-        for k in 1:29 loop
-          dv_1 := dv_1 + N[k]*x^(30 - k);
+        x := (sat.Tsat - cf.dewDensity_iO[1])/cf.dewDensity_iO[2];
+        for k in 1:cf.dewDensity_nT-1 loop
+          dv_1 := dv_1 + cf.dewDensity_n[k]*x^(cf.dewDensity_nT - k);
         end for;
-        dv_1 := dv_1 + N[30];
-        dv := dv_1*std_d + mean_d;
+        dv_1 := dv_1 + cf.dewDensity_n[cf.dewDensity_nT];
+        dv := dv_1*cf.dewDensity_iO[4] + cf.dewDensity_iO[3];
       end dewDensity;
 
       redeclare function extends bubbleEnthalpy
       "Boiling curve specific enthalpy of refrigerant (Ancillary equation)"
       protected
-        Real N[:] = {-9294767843.63885,4601044486.87677,20637884091.3137,-9916466348.59996,-21359403718.5665,9947264847.89552,13636958532.2276,-6142679157.11019,-6000574809.17466,2607836222.80069,1926833832.78873,-805551262.020446,-466601813.162386,187005402.363897,86860131.7909424,-33235234.3082519,-12561996.4230609,4567071.19402525,1416354.06388980,-486313.365924655,-124542.594195178,40167.0083231862,8397.46595050577,-2498.28167363608,-462.619336965067,137.536958919031,6.47029425217843,2.64758244293881,-5.32098880051055,3.46672373461629,-2.26302221729487,1.59069973995372,-1.13913175345066,0.832473481266347,-0.610337601733258,0.487787294421858,-0.381084129429948,0.372237411342447,-0.349666671598220,0.849926390294104,0.0361438659731507};
-        Real mean_p = 1570581.06473046;
-        Real std_p = 2557900;
-        Real mean_b = 315624.984387066;
-        Real std_b = 256478.426329608;
+         AixLib.Media.Refrigerants.DataBase.BubbleDewStatePropertiesBaseDataDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.BDSP_Sangi();
         Real hl_1 = 0;
         Real x;
 
       algorithm
-        x := (sat.psat - mean_p)/std_p;
-        for k in 1:40 loop
-          hl_1 := hl_1 + N[k]*x^(41 - k);
+        x := (sat.psat - cf.bubbleEnthalpy_iO[1])/cf.bubbleEnthalpy_iO[2];
+        for k in 1:cf.bubbleEnthalpy_nT-1 loop
+          hl_1 := hl_1 + cf.bubbleEnthalpy_n[k]*x^(cf.bubbleEnthalpy_nT - k);
         end for;
-        hl_1 := hl_1 + N[41];
-        hl := hl_1*std_b + mean_b;
+        hl_1 := hl_1 + cf.bubbleEnthalpy_n[cf.bubbleEnthalpy_nT];
+        hl := hl_1*cf.bubbleEnthalpy_iO[4] + cf.bubbleEnthalpy_iO[3];
       end bubbleEnthalpy;
 
       redeclare function extends dewEnthalpy
       "Dew curve specific enthalpy of refrigerant (Ancillary equation)"
       protected
-        Real N[:] = {-18775386313.6055,9394086287.20505,41644196829.4943,-20247895189.1885,-43051291028.3205,20309540510.1720,27452478313.3802,-12538264110.1784,-12063991762.7160,5319760814.06607,3868950611.13826,-1641348684.22018,-936106557.039505,380310593.940752,174364505.252102,-67425029.5319391,-25335355.2373842,9258056.41821587,2898773.57918601,-997509.402878578,-263711.217390457,88279.4166642683,18539.6674822496,-7265.37195240485,-791.349145978091,783.380077339674,-118.386708715477,-87.4509889200359,28.7466309562791,22.7165909170454,-12.9134840899498,0.379188043464810,-1.09461342269619,2.21831905224981,-1.37432108544607,0.840516589045987,-0.879264408088915,0.602870738214699,-0.988765189667206,0.736977778701680,0.0980593948500622};
-        Real mean_p=1570581.06473046;
-        Real std_p=2557900;
-        Real mean_d=611770.954390520;
-        Real std_d=72569.9367503185;
+         AixLib.Media.Refrigerants.DataBase.BubbleDewStatePropertiesBaseDataDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.BDSP_Sangi();
         Real hv_1=0;
         Real x;
 
       algorithm
-        x := (sat.psat - mean_p)/std_p;
-        for k in 1:40 loop
-          hv_1 := hv_1 + N[k]*x^(41 - k);
+        x := (sat.psat - cf.dewEnthalpy_iO[1])/cf.dewEnthalpy_iO[2];
+        for k in 1:cf.dewEnthalpy_nT-1 loop
+          hv_1 := hv_1 + cf.dewEnthalpy_n[k]*x^(cf.dewEnthalpy_nT - k);
         end for;
-        hv_1 := hv_1 + N[41];
-        hv := hv_1*std_d + mean_d;
+        hv_1 := hv_1 + cf.dewEnthalpy_n[cf.dewEnthalpy_nT];
+        hv := hv_1*cf.dewEnthalpy_iO[4] + cf.dewEnthalpy_iO[3];
       end dewEnthalpy;
 
       redeclare function extends bubbleEntropy
       "Boiling curve specific entropy of refrigerant (Ancillary equation)"
       protected
-        Real N[:] = {-15349607814.6221,7636274154.59154,34083168950.6415,-16468859514.8044,-35274256182.5208,16529163595.4961,22520438414.7263,-10212384678.3319,-9909434496.20396,4337708567.68782,3182094478.82347,-1340537038.41870,-770642130.029990,311344581.740643,143483390.503767,-55358907.3112437,-20756825.7164981,7610600.46375838,2341379.49521742,-810782.536880512,-205991.835180489,66975.5024566354,13911.5167143464,-4172.85884728481,-763.056131634308,226.059931948838,12.7752539636391,3.11268958206643,-7.85167676769299,5.00328992083909,-3.24391515196012,2.26101216009097,-1.60045805379047,1.15217954418816,-0.838779616598381,0.651059130787342,-0.506702271997059,0.465184273228716,-0.435627195532008,0.805470640142587,0.0457609974234471};
-        Real mean_p = 1570581.06473046;
-        Real std_p = 2557900;
-        Real mean_b = 1376.30588505819;
-        Real std_b = 826.068105213303;
+         AixLib.Media.Refrigerants.DataBase.BubbleDewStatePropertiesBaseDataDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.BDSP_Sangi();
         Real sl_1 = 0;
         Real x;
 
       algorithm
-        x := (sat.psat - mean_p)/std_p;
-        for k in 1:40 loop
-          sl_1 := sl_1 + N[k]*x^(41 - k);
+        x := (sat.psat - cf.bubbleEntropy_iO[1])/cf.bubbleEntropy_iO[2];
+        for k in 1:cf.bubbleEntropy_nT-1 loop
+          sl_1 := sl_1 + cf.bubbleEntropy_n[k]*x^(cf.bubbleEntropy_nT - k);
         end for;
-        sl_1 := sl_1 + N[41];
-        sl := sl_1*std_b + mean_b;
+        sl_1 := sl_1 + cf.bubbleEntropy_n[cf.bubbleEntropy_nT];
+        sl := sl_1*cf.bubbleEntropy_iO[4] + cf.bubbleEntropy_iO[3];
       end bubbleEntropy;
 
       redeclare function extends dewEntropy
       "Dew curve specific entropy of propane (Ancillary equation)"
       protected
-        Real N[:] = {77490431827.9399,-38415276654.6987,-172242854661.379,82962121367.1925,178399484846.286,-83356734431.6106,-113970547248.801,51553752249.9676,50177422017.5857,-21921194748.1992,-16120343329.1663,6783508534.79747,3904793200.14042,-1578181058.50373,-726577962.821200,281202937.346275,104799948.851401,-38715062.2946953,-11716161.8016396,4105031.67420979,1007213.05553646,-326165.883627773,-65541.5043152719,16329.6212516804,3852.60757433586,91.0319174951408,-343.494332982509,-224.377993905924,107.459438248960,24.4635507698644,-8.50688453256311,-13.0500554559933,6.58097770859788,-1.42438707828771,1.58146106221061,-1.50959232991508,0.669411569821680,-0.759627313555789,-0.113920392204933,-0.624499077638527,-0.00619048868799449};
-        Real mean_p = 1570581.06473046;
-        Real std_p = 2557900;
-        Real mean_d = 2335.75170536325;
-        Real std_d = 97.9077112667096;
+         AixLib.Media.Refrigerants.DataBase.BubbleDewStatePropertiesBaseDataDefinition
+          cf =  AixLib.Media.Refrigerants.DataBase.R1270.BDSP_Sangi();
         Real sv_1 = 0;
         Real x;
 
       algorithm
-        x := (sat.psat - mean_p)/std_p;
-        for k in 1:40 loop
-          sv_1 := sv_1 + N[k]*x^(41 - k);
+        x := (sat.psat - cf.dewEntropy_iO[1])/cf.dewEntropy_iO[2];
+        for k in 1:cf.dewEntropy_nT-1 loop
+          sv_1 := sv_1 + cf.dewEntropy_n[k]*x^(cf.dewEntropy_nT - k);
         end for;
-        sv_1 := sv_1 + N[41];
-        sv := sv_1*std_d + mean_d;
+        sv_1 := sv_1 + cf.dewEntropy_n[cf.dewEntropy_nT];
+        sv := sv_1*cf.dewEntropy_iO[4] + cf.dewEntropy_iO[3];
       end dewEntropy;
 
 
