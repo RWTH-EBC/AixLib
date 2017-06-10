@@ -1446,7 +1446,7 @@ package Refrigerants "Package with models for different refrigerants"
       end velocityOfSound;
 
       redeclare function extends isobaricExpansionCoefficient
-      "Return overall the isobaric expansion coefficient beta"
+      "Isobaric expansion coefficient beta of refrigerant"
       protected
         Real T_crit = fluidConstants[1].criticalTemperature;
         Real d_crit = fluidConstants[1].criticalMolarVolume;
@@ -1456,11 +1456,6 @@ package Refrigerants "Package with models for different refrigerants"
         IsobaricExpansionCoefficient betal;
         IsobaricExpansionCoefficient betav;
         SaturationProperties sat = setSat_T(state.T);
-
-        Real tau = T_crit/state.T;
-        Real delta = state.d/(d_crit*MM);
-        Real deltaL = bubbleDensity(sat)/(d_crit*MM);
-        Real deltaG = dewDensity(sat)/(d_crit*MM);
 
         Real quality = if state.phase==2 then (bubbleDensity(sat)/
           state.d - 1)/(bubbleDensity(sat)/dewDensity(sat) - 1) else 1;
@@ -1480,19 +1475,33 @@ package Refrigerants "Package with models for different refrigerants"
          end if;
       end isobaricExpansionCoefficient;
 
-    // replaceable partial function isothermalCompressibility
-    //   "Return overall the isothermal compressibility factor"
-    //   extends Modelica.Icons.Function;
-    //   input ThermodynamicState state "Thermodynamic state record";
-    //   output SI.IsothermalCompressibility kappa "Isothermal compressibility";
-    //   annotation (Documentation(info="<html>
-    // <pre>
-    //
-    // kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
-    //
-    // </pre>
-    // </html>"));
-    // end isothermalCompressibility;
+      redeclare function extends isothermalCompressibility
+      "Isothermal compressibility factor of refrigerant"
+      protected
+        Real T_crit = fluidConstants[1].criticalTemperature;
+        Real d_crit = fluidConstants[1].criticalMolarVolume;
+        Real MM = fluidConstants[1].molarMass;
+        Real R = Modelica.Constants.R/MM;
+
+        Modelica.SIunits.IsothermalCompressibility kappal;
+        Modelica.SIunits.IsothermalCompressibility kappav;
+        SaturationProperties sat = setSat_T(state.T);
+
+        Real quality = if state.phase==2 then (bubbleDensity(sat)/
+          state.d - 1)/(bubbleDensity(sat)/dewDensity(sat) - 1) else 1;
+        Real phase_dT = if not ((state.d < bubbleDensity(sat) and state.d >
+          dewDensity(sat)) and state.T < fluidConstants[1].criticalTemperature)
+          then 1 else 2;
+
+      algorithm
+         if state.phase==1 or phase_dT==1 then
+           kappa := -1/state.d *  pressure_derd_T(state)^(-1);
+         elseif state.phase==2 or phase_dT==2 then
+           kappal := -1/bubbleDensity(sat) * pressure_derd_T(setBubbleState(sat))^(-1);
+           kappav := -1/dewDensity(sat) * pressure_derd_T(setDewState(sat))^(-1);
+           kappa := kappal + quality*(kappav-kappal);
+         end if;
+      end isothermalCompressibility;
 
 
       /*Provide functions to calculate thermodynamic properties depending on the
