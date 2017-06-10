@@ -1503,7 +1503,7 @@ package Refrigerants "Package with models for different refrigerants"
          end if;
       end isothermalCompressibility;
 
-      replaceable function IsothermalThrottlingCoefficient
+      replaceable function isothermalThrottlingCoefficient
       "Isothermal throttling coefficient of refrigerant"
         input ThermodynamicState state "Thermodynamic state";
         output Real delta_T "Isothermal throttling coefficient";
@@ -1534,7 +1534,38 @@ package Refrigerants "Package with models for different refrigerants"
              pressure_derd_T(setDewState(sat))^(-1);
            delta_T := delta_Tl + quality*(delta_Tv-delta_Tl);
          end if;
-      end IsothermalThrottlingCoefficient;
+      end isothermalThrottlingCoefficient;
+
+      replaceable function jouleThomsonCoefficient
+      "Joule-Thomson coefficient of refrigerant"
+        input ThermodynamicState state "Thermodynamic state";
+        output Real my "Isothermal throttling coefficient";
+
+      protected
+        Real T_crit = fluidConstants[1].criticalTemperature;
+        Real d_crit = fluidConstants[1].criticalMolarVolume;
+        Real MM = fluidConstants[1].molarMass;
+        Real R = Modelica.Constants.R/MM;
+
+        Real myl;
+        Real myv;
+        SaturationProperties sat = setSat_T(state.T);
+
+        Real quality = if state.phase==2 then (bubbleDensity(sat)/
+          state.d - 1)/(bubbleDensity(sat)/dewDensity(sat) - 1) else 1;
+        Real phase_dT = if not ((state.d < bubbleDensity(sat) and state.d >
+          dewDensity(sat)) and state.T < fluidConstants[1].criticalTemperature)
+          then 1 else 2;
+
+      algorithm
+         if state.phase==1 or phase_dT==1 then
+           my := temperature_derp_h(state);
+         elseif state.phase==2 or phase_dT==2 then
+           myl := temperature_derp_h(setBubbleState(sat));
+           myv := temperature_derp_h(setDewState(sat));
+           my := myl + quality*(myv-myl);
+         end if;
+      end jouleThomsonCoefficient;
 
 
       /*Provide functions to calculate thermodynamic properties depending on the
