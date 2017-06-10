@@ -1306,15 +1306,15 @@ package Refrigerants "Package with models for different refrigerants"
 
         SpecificEntropy sl;
         SpecificEntropy sv;
+        SaturationProperties sat = setSat_T(state.T);
 
         Real tau = T_crit/state.T;
         Real delta = state.d/(d_crit*MM);
-        Real deltaL = bubbleDensity(setSat_T(state.T))/(d_crit*MM);
-        Real deltaG = dewDensity(setSat_T(state.T))/(d_crit*MM);
+        Real deltaL = bubbleDensity(sat)/(d_crit*MM);
+        Real deltaG = dewDensity(sat)/(d_crit*MM);
 
-        Real quality = (bubbleDensity(setSat_T(state.T))/state.d - 1)/
-          (bubbleDensity(setSat_T(state.T))/dewDensity(setSat_T(state.T)) - 1);
-        SaturationProperties sat = setSat_T(state.T);
+        Real quality = (bubbleDensity(sat)/state.d - 1)/
+          (bubbleDensity(sat)/dewDensity(sat) - 1);
 
       algorithm
         if state.phase==1 then
@@ -1339,16 +1339,15 @@ package Refrigerants "Package with models for different refrigerants"
 
         SpecificHeatCapacity cpl;
         SpecificHeatCapacity cpv;
+        SaturationProperties sat = setSat_T(state.T);
 
         Real tau = T_crit/state.T;
         Real delta = state.d/(d_crit*MM);
-        Real deltaL = bubbleDensity(setSat_T(state.T))/(d_crit*MM);
-        Real deltaG = dewDensity(setSat_T(state.T))/(d_crit*MM);
+        Real deltaL = bubbleDensity(sat)/(d_crit*MM);
+        Real deltaG = dewDensity(sat)/(d_crit*MM);
 
-        Real quality = if state.phase==2 then (bubbleDensity(setSat_T(state.T))/
-          state.d - 1)/(bubbleDensity(setSat_T(state.T))/dewDensity(
-          setSat_T(state.T)) - 1) else 1;
-        SaturationProperties sat = setSat_T(state.T);
+        Real quality = if state.phase==2 then (bubbleDensity(sat)/
+          state.d - 1)/(bubbleDensity(sat)/dewDensity(sat) - 1) else 1;
         Real phase_dT = if not ((state.d < bubbleDensity(sat) and state.d >
           dewDensity(sat)) and state.T < fluidConstants[1].criticalTemperature)
           then 1 else 2;
@@ -1359,11 +1358,11 @@ package Refrigerants "Package with models for different refrigerants"
             tau) - tau_delta_d2_alpha_r_d_tau_d_delta(delta, tau))^2)/(1 + 2*
             delta_d_alpha_r_d_delta(delta, tau) + delta2_d2_alpha_r_d_delta2(delta, tau));
         elseif state.phase==2 or phase_dT==2 then
-          cpl := specificHeatCapacityCv(setBubbleState(setSat_T(state.T))) + R*((1 +
+          cpl := specificHeatCapacityCv(setBubbleState(sat)) + R*((1 +
             delta_d_alpha_r_d_delta(deltaL, tau) - tau_delta_d2_alpha_r_d_tau_d_delta(
             deltaL, tau))^2)/(1 + 2*delta_d_alpha_r_d_delta(deltaL, tau) +
             delta2_d2_alpha_r_d_delta2(deltaL, tau));
-          cpv := specificHeatCapacityCv(setDewState(setSat_T(state.T))) + R*((1 +
+          cpv := specificHeatCapacityCv(setDewState(sat)) + R*((1 +
             delta_d_alpha_r_d_delta(deltaG, tau) - tau_delta_d2_alpha_r_d_tau_d_delta(
             deltaG, tau))^2)/(1 + 2*delta_d_alpha_r_d_delta(deltaG, tau) +
             delta2_d2_alpha_r_d_delta2(deltaG, tau));
@@ -1381,16 +1380,15 @@ package Refrigerants "Package with models for different refrigerants"
 
         SpecificHeatCapacity cvl;
         SpecificHeatCapacity cvv;
+        SaturationProperties sat = setSat_T(state.T);
 
         Real tau = T_crit/state.T;
         Real delta = state.d/(d_crit*MM);
-        Real deltaL = bubbleDensity(setSat_T(state.T))/(d_crit*MM);
-        Real deltaG = dewDensity(setSat_T(state.T))/(d_crit*MM);
+        Real deltaL = bubbleDensity(sat)/(d_crit*MM);
+        Real deltaG = dewDensity(sat)/(d_crit*MM);
 
-        Real quality = if state.phase==2 then (bubbleDensity(setSat_T(state.T))/
-          state.d - 1)/(bubbleDensity(setSat_T(state.T))/dewDensity(
-          setSat_T(state.T)) - 1) else 1;
-        SaturationProperties sat = setSat_T(state.T);
+        Real quality = if state.phase==2 then (bubbleDensity(sat)/
+          state.d - 1)/(bubbleDensity(sat)/dewDensity(sat) - 1) else 1;
         Real phase_dT = if not ((state.d < bubbleDensity(sat) and state.d >
            dewDensity(sat)) and state.T < fluidConstants[1].criticalTemperature)
            then 1 else 2;
@@ -1415,16 +1413,15 @@ package Refrigerants "Package with models for different refrigerants"
 
         VelocityOfSound aL;
         VelocityOfSound aG;
+        SaturationProperties sat = setSat_T(state.T);
 
         Real tau = T_crit/state.T;
         Real delta = state.d/(d_crit*MM);
-        Real deltaL = bubbleDensity(setSat_T(state.T))/(d_crit*MM);
-        Real deltaG = dewDensity(setSat_T(state.T))/(d_crit*MM);
+        Real deltaL = bubbleDensity(sat)/(d_crit*MM);
+        Real deltaG = dewDensity(sat)/(d_crit*MM);
 
-        Real quality = if state.phase==2 then (bubbleDensity(setSat_T(state.T))/
-          state.d - 1)/(bubbleDensity(setSat_T(state.T))/dewDensity(
-          setSat_T(state.T)) - 1) else 1;
-        SaturationProperties sat = setSat_T(state.T);
+        Real quality = if state.phase==2 then (bubbleDensity(sat)/
+          state.d - 1)/(bubbleDensity(sat)/dewDensity(sat) - 1) else 1;
         Real phase_dT = if not ((state.d < bubbleDensity(sat) and state.d >
           dewDensity(sat)) and state.T < fluidConstants[1].criticalTemperature)
           then 1 else 2;
@@ -1447,6 +1444,55 @@ package Refrigerants "Package with models for different refrigerants"
             a:=aL + quality*(aG-aL);
         end if;
       end velocityOfSound;
+
+      redeclare function extends isobaricExpansionCoefficient
+      "Return overall the isobaric expansion coefficient beta"
+      protected
+        Real T_crit = fluidConstants[1].criticalTemperature;
+        Real d_crit = fluidConstants[1].criticalMolarVolume;
+        Real MM = fluidConstants[1].molarMass;
+        Real R = Modelica.Constants.R/MM;
+
+        IsobaricExpansionCoefficient betal;
+        IsobaricExpansionCoefficient betav;
+        SaturationProperties sat = setSat_T(state.T);
+
+        Real tau = T_crit/state.T;
+        Real delta = state.d/(d_crit*MM);
+        Real deltaL = bubbleDensity(sat)/(d_crit*MM);
+        Real deltaG = dewDensity(sat)/(d_crit*MM);
+
+        Real quality = if state.phase==2 then (bubbleDensity(sat)/
+          state.d - 1)/(bubbleDensity(sat)/dewDensity(sat) - 1) else 1;
+        Real phase_dT = if not ((state.d < bubbleDensity(sat) and state.d >
+          dewDensity(sat)) and state.T < fluidConstants[1].criticalTemperature)
+          then 1 else 2;
+
+      algorithm
+         if state.phase==1 or phase_dT==1 then
+           beta := -1/state.d * pressure_derT_d(state) * pressure_derd_T(state)^(-1);
+         elseif state.phase==2 or phase_dT==2 then
+           betal := -1/bubbleDensity(sat) * pressure_derT_d(setBubbleState(sat)) *
+             pressure_derd_T(setBubbleState(sat))^(-1);
+           betav := -1/dewDensity(sat) * pressure_derT_d(setDewState(sat)) *
+             pressure_derd_T(setDewState(sat))^(-1);
+           beta := betal + quality*(betav-betal);
+         end if;
+      end isobaricExpansionCoefficient;
+
+    // replaceable partial function isothermalCompressibility
+    //   "Return overall the isothermal compressibility factor"
+    //   extends Modelica.Icons.Function;
+    //   input ThermodynamicState state "Thermodynamic state record";
+    //   output SI.IsothermalCompressibility kappa "Isothermal compressibility";
+    //   annotation (Documentation(info="<html>
+    // <pre>
+    //
+    // kappa is defined as - 1/v * der(v,p), with v = 1/d at constant temperature T.
+    //
+    // </pre>
+    // </html>"));
+    // end isothermalCompressibility;
 
 
       /*Provide functions to calculate thermodynamic properties depending on the
