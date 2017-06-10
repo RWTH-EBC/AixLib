@@ -1503,6 +1503,39 @@ package Refrigerants "Package with models for different refrigerants"
          end if;
       end isothermalCompressibility;
 
+      replaceable function IsothermalThrottlingCoefficient
+      "Isothermal throttling coefficient of refrigerant"
+        input ThermodynamicState state "Thermodynamic state";
+        output Real delta_T "Isothermal throttling coefficient";
+
+      protected
+        Real T_crit = fluidConstants[1].criticalTemperature;
+        Real d_crit = fluidConstants[1].criticalMolarVolume;
+        Real MM = fluidConstants[1].molarMass;
+        Real R = Modelica.Constants.R/MM;
+
+        Real delta_Tl;
+        Real delta_Tv;
+        SaturationProperties sat = setSat_T(state.T);
+
+        Real quality = if state.phase==2 then (bubbleDensity(sat)/
+          state.d - 1)/(bubbleDensity(sat)/dewDensity(sat) - 1) else 1;
+        Real phase_dT = if not ((state.d < bubbleDensity(sat) and state.d >
+          dewDensity(sat)) and state.T < fluidConstants[1].criticalTemperature)
+          then 1 else 2;
+
+      algorithm
+         if state.phase==1 or phase_dT==1 then
+           delta_T := specificEnthalpy_derd_T(state) *  pressure_derd_T(state)^(-1);
+         elseif state.phase==2 or phase_dT==2 then
+           delta_Tl := specificEnthalpy_derd_T(setBubbleState(sat)) *
+             pressure_derd_T(setBubbleState(sat))^(-1);
+           delta_Tv := specificEnthalpy_derd_T(setDewState(sat)) *
+             pressure_derd_T(setDewState(sat))^(-1);
+           delta_T := delta_Tl + quality*(delta_Tv-delta_Tl);
+         end if;
+      end IsothermalThrottlingCoefficient;
+
 
       /*Provide functions to calculate thermodynamic properties depending on the
     independent variables. Moreover, these functions may depend on the Helmholtz
