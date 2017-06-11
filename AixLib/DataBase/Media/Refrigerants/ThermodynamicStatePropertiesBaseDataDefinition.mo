@@ -1,6 +1,7 @@
 within AixLib.DataBase.Media.Refrigerants;
 record ThermodynamicStatePropertiesBaseDataDefinition
-  "Record definition for fitting coefficients for the thermodynamic state properties"
+  "Base data definition for fitting coefficients of thermodynamic state 
+  properties"
   extends Modelica.Icons.Record;
 
   parameter String name

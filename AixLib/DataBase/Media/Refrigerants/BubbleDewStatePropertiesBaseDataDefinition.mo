@@ -1,6 +1,7 @@
 within AixLib.DataBase.Media.Refrigerants;
 record BubbleDewStatePropertiesBaseDataDefinition
-  "Record definition for thermodynamic state properties at bubble or dew line"
+  "Base data definition for fitting coefficients of thermodynamic state 
+  properties at bubble and dew line"
   extends Modelica.Icons.Record;
 
   parameter String name

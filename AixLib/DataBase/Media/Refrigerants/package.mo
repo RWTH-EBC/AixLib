@@ -2,6 +2,12 @@ within AixLib.DataBase.Media;
 package Refrigerants "Package provides records describing properties of different refrigerants"
 extends Modelica.Icons.Package;
 
+
+
+
+
+
+
 annotation (Icon(graphics={
         Rectangle(
           lineColor={200,200,200},
@@ -145,16 +151,20 @@ annotation (Icon(graphics={
           lineColor={0,0,0},
           fillPattern=FillPattern.Sphere,
           fillColor={120,120,120})}), Documentation(info="<html>
-<p>This package provides records for different media. </p>
+<p>This package provides records describing properties of different refrigerant media. In this case, properties are, for example, fitting coefficients obtained for the Helmholtz equation of state or the saturation pressure. These fitting coefficients are used for models stored in <a href=\"modelica://AixLib.Media.Refrigerants\">AixLib.Media.Refrigerants</a>.</p>
+<p>For reasons of simplicity, this package is structured as follows:</p>
+<ol>
+<li><i>Base data definitions: </i>All base data definitions are saved as separate records.</li>
+<li><i>Refrigerant packages:</i> For the different refrigerant media, records inherited from the base data definitions are saved within one refrigerant package.</li>
+</ol>
 <p><b>Assumptions and limitations</b> </p>
-<p>xxx </p>
-<p><b>Typical use and important parameters</b> </p>
-<p>xxx </p>
-<p><b>Dynamics</b> </p>
-<p>Describe which states and dynamics are present in the model and which parameters may be used to influence them. This need not be added in partial classes. </p>
-<p><b>Validation</b> </p>
-<p>Describe whether the validation was done using analytical validation, comparative model validation or empirical validation. </p>
-<p><b>References</b> </p>
-<p>xxx </p>
+<p>Currently, there is implemented just one approach (i.e. the hybrid approach) to model refrigerant media (for detailed information, please see <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMedium\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMedium</a>). Hence, the base data definitions support just the hybrids approach.</p>
+</html>", revisions="<html>
+<ul>
+  <li>
+  June 9, 2017, by Mirko Engelpracht:<br/>
+  First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
+  </li>
+</ul>
 </html>"));
 end Refrigerants;
