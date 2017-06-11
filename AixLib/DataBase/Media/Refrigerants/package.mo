@@ -144,5 +144,17 @@ annotation (Icon(graphics={
           extent={{8,-38},{28,-58}},
           lineColor={0,0,0},
           fillPattern=FillPattern.Sphere,
-          fillColor={120,120,120})}));
+          fillColor={120,120,120})}), Documentation(info="<html>
+<p>This package provides records for different media. </p>
+<p><b>Assumptions and limitations</b> </p>
+<p>xxx </p>
+<p><b>Typical use and important parameters</b> </p>
+<p>xxx </p>
+<p><b>Dynamics</b> </p>
+<p>Describe which states and dynamics are present in the model and which parameters may be used to influence them. This need not be added in partial classes. </p>
+<p><b>Validation</b> </p>
+<p>Describe whether the validation was done using analytical validation, comparative model validation or empirical validation. </p>
+<p><b>References</b> </p>
+<p>xxx </p>
+</html>"));
 end Refrigerants;

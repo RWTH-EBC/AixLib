@@ -30,5 +30,14 @@ annotation (Icon(graphics={
           color={175,175,175}),
         Line(
           points={{68,20},{86,-58}},
-          color={175,175,175})}));
+          color={175,175,175})}), Documentation(info="<html>
+<p>This package provides records describing properties of different media. Properties means, for example, base properties (e.g. critical temperature or triple temperature) or fitting coefficients (e.g. coefficients of the Helmholtz equation of state or coefficients of the saturation pressure&apos;s formula). However, properties are implemented just for refrigerant media by now.</p>
+</html>", revisions="<html>
+<ul>
+  <li>
+  June 9, 2017, by Mirko Engelpracht:<br/>
+  First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
+  </li>
+</ul>
+</html>"));
 end Media;
