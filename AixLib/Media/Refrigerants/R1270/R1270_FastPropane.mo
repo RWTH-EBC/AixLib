@@ -1,5 +1,5 @@
 within AixLib.Media.Refrigerants.R1270;
-package HybridR1270
+package R1270_FastPropane
   "Refrigerant model for R1270 using the hybrid approach"
 
     /*Provide basic definitions of the refrigerent. Therefore, fullfill constants
@@ -447,4 +447,4 @@ package HybridR1270
     AbsolutePressure dp = 0.2;
   end density_derh_p;
 
-end HybridR1270;
+end R1270_FastPropane;
