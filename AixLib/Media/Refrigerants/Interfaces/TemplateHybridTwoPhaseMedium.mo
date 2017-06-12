@@ -1,8 +1,8 @@
 within AixLib.Media.Refrigerants.Interfaces;
 partial package TemplateHybridTwoPhaseMedium
-  "Template for media models using a hybrid aprroach"
+  "Template for media models using a hybrid approach"
 
-  /*Provide basic definitions of the refrigerent. Therefore, fullfill constants
+  /*Provide basic definitions of the refrigerant. Therefore, fill constants
     or parameters and may add new constants or parameters if needed. Moreover,
     provide references within the information of the package.
   */
@@ -24,6 +24,10 @@ partial package TemplateHybridTwoPhaseMedium
       each dipoleMoment = 1,
       each hasCriticalData=true) "Thermodynamic constants for refrigerant";
 
+  /*Provide basic information about the refrigerant. These basic information
+    are the refrigerant name as well as the valid refrigerant limits in terms of
+    specific enthalpy, density, absolute pressure and temperature.
+  */
   extends AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMedium(
     mediumName="Name",
     substanceNames={"Name"},
@@ -131,25 +135,26 @@ partial package TemplateHybridTwoPhaseMedium
     The computation of vector X[nX] from Xi[nXi] is already included in
     the base class Interfaces.PartialMedium.BaseProperties, so it should not
     be repeated here.
-    The code fragment above is for a single-substance medium with
+
+    The code fragments above are for a single-substance medium with
     p,T as independent variables.
   */
 
   /*Provide Helmholtz equations of state (EoS). These EoS must be fitted to
-    different refrigerents. However, the structure will not change and, therefore,
-    the coefficients, which are obtained during the fitting procedure, are 
-    provided by records.
+    different refrigerants. However, the structure will not change and, 
+    therefore, the coefficients, which are obtained during the fitting 
+    procedure, are provided by records.
     Just change if needed.
   */
   redeclare function extends alpha_0
-  "Dimensionless Helmholz energy (Ideal gas contribution alpha_0)"
+  "Dimensionless Helmholtz energy (Ideal gas contribution alpha_0)"
   protected
     AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition
       cf =  AixLib.DataBase.Media.Refrigerants.R1270.EoS_Sangi();
   end alpha_0;
 
   redeclare function extends alpha_r
-  "Dimensionless Helmholz energy (Residual part alpha_r)"
+  "Dimensionless Helmholtz energy (Residual part alpha_r)"
   protected
     AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition
       cf =  AixLib.DataBase.Media.Refrigerants.R1270.EoS_Sangi();
@@ -212,9 +217,10 @@ partial package TemplateHybridTwoPhaseMedium
   end delta2_d2_alpha_r_d_delta2;
 
   /*Provide polynomial functions for saturation properties. These functions are
-    fitted to external data (e.g. data extracted from RefProp or FluidProp). Currently,
-    just one fitting approach is implemented. Therefore, the coefficients, which are
-    obtained during the fitting procedure, are provided by records.
+    fitted to external data (e.g. data extracted from RefProp or FluidProp). 
+    Currently, just one fitting approach is implemented. Therefore, 
+    the coefficients, which are obtained during the fitting procedure, 
+    are provided by records.
   */
   redeclare function extends saturationPressure
   "Saturation pressure of refrigerant (Ancillary equation)"
@@ -273,7 +279,7 @@ partial package TemplateHybridTwoPhaseMedium
   end dewEntropy;
 
   /*Provide functions to calculate further thermodynamic properties like the
-    dynamic viscosity or thermal concutivity. Also add references.
+    dynamic viscosity or thermal conductivity. Also add references.
   */
   redeclare function extends dynamicViscosity
   "Calculates dynamic viscosity of refrigerant"
@@ -297,9 +303,9 @@ partial package TemplateHybridTwoPhaseMedium
   end surfaceTension;
 
   /*Provide functions to calculate further thermodynamic properties depending on
-    thermodynamic properties. These functions are polynomial fits in order to
-    reduce computing time. Moreover, these functions may have a heuristic to deal with
-    discontinuities. Add furhter fits if necessary.
+    the independent state properties. These functions are polynomial fits in 
+    order to reduce computing time. Moreover, these functions may have a
+    heuristic to deal with discontinuities. Add further fits if necessary.
   */
   redeclare function extends temperature_ph
   "Calculates temperature as function of pressure and specific enthalpy"
@@ -310,7 +316,7 @@ partial package TemplateHybridTwoPhaseMedium
   end temperature_ph;
 
   redeclare function extends temperature_ps
-  "Calculates temperature as function of pressure and specific entroy"
+  "Calculates temperature as function of pressure and specific entropy"
   protected
     AixLib.DataBase.Media.Refrigerants.ThermodynamicStatePropertiesBaseDataDefinition
       cf =  AixLib.DataBase.Media.Refrigerants.R1270.TSP_Sangi();
@@ -358,6 +364,18 @@ partial package TemplateHybridTwoPhaseMedium
 </ul>
 </html>",
         info="<html>
-<p>This package is a <b>template</b> for <b>new medium</b> models using a hybrid approach (for detailed information please see <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMedium\">AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMedium</a>). For a new refrigerant model just make a copy of this package, remove the &QUOT;partial&QUOT; keyword from the package and provide the information that is requested in the comments of the Modelica source. A refrigerant package inherits from <b>PartialHybridTwoPhaseMedium</b> and provides the equations for the refrigerant. Moreover, the PartialHybridTwoPhaseMedium package inherits from <b>PartialMedium</b> and, therefore, the details of this package are described in <a href=\"modelica://Modelica.Media.UsersGuide\">Modelica.Media.UsersGuide</a>.</p>
+<p>This package is a <b>template</b> for <b>new refrigerant</b> models using a hybrid approach based on the &QUOT;Fast_Propane&QUOT; model developed by Sangi et al. (for detailed information, please checkout <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMedium\">AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMedium</a>). For a new refrigerant model just make a copy of this package, remove the &QUOT;partial&QUOT; keyword from the package and provide the information that is requested in the comments of the Modelica code. The following <b>information is requested</b>:</p>
+<ol>
+<li><u>Fluid constants:</u><i> </i>Provide basic information of the refrigerant and add the reference.</li>
+<li><u>Basic information:</u><i> </i>Provide basic information like the refrigerant name and its valid fluid limits in terms of different thermodynamic state properties.</li>
+<li><u>Base properties:</u> Provide information about the refrigerant&apos;s base properties like the relation between specific enthalpy, specific internal energy, pressure and density.</li>
+<li><u>Helmholtz EoS:</u> Provide the records that contain the fitting coefficients for the Helmholtz equation of state.</li>
+<li><u>Saturation state properties:</u> Provide the records that contain the fitting coefficients for the thermodynamic state properties at bubble and dew line.</li>
+<li><u>Further thermodynamic properties:</u> Provide formulas for further thermodynamic properties like the thermal conductivity or surface tension.</li>
+<li><u>Fitted state properties:</u> Provide the records that contain the fitting coefficients for thermodynamic state properties that depend on two independent state properties.</li>
+</ol>
+<p>A refrigerant package inherits from <b>PartialHybridTwoPhaseMedium</b> and provides the equations for the refrigerant. Moreover, the PartialHybridTwoPhaseMedium package inherits from <b>PartialMedium</b> and, therefore, the details of this package are described in <a href=\"modelica://Modelica.Media.UsersGuide\">Modelica.Media.UsersGuide</a>.</p>
+<p><b>References</b> </p>
+<p>Sangi, Roozbeh; Jahangiri, Pooyan; Klasing, Freerk; Streblow, Rita; M&uuml;ller, Dirk (2014): <a href=\"http://dx.doi.org/10.3384/ecp14096\">A Medium Model for the Refrigerant Propane for Fast and Accurate Dynamic Simulations</a>. In: <i>The 10th International Modelica Conference</i>. Lund, Sweden, March 10-12, 2014: Link&ouml;ping University Electronic Press (Link&ouml;ping Electronic Conference Proceedings), S. 1271&ndash;1275</p>
 </html>"));
 end TemplateHybridTwoPhaseMedium;
