@@ -4,7 +4,7 @@ package Interfaces "Package with interfaces for refrigerant models"
 
 
   annotation (Documentation(info="<html>
-<p>This package provides basic interfaces for the definition of new refrigerant models.</p><p>A detailed documentation will follow later (e.g. which aprroaches are provided within this package).</p>
+<p>This package provides basic interfaces for the definition of new refrigerant models. Therefore, both partial packages of different refrigerant modelling approaches and templates for these modelling approaches are provided in this package. However, there is just one approach (i.e. <b>the hybrid approach</b>) provided in this package by now.</p>
 </html>",
         revisions="<html>
 <ul>
