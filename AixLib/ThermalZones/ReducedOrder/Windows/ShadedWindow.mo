@@ -10,13 +10,13 @@ model ShadedWindow
    parameter Modelica.SIunits.TransmissionCoefficient g[n]
     "Total energy transmittance of windows"
     annotation(Dialog(group="window"));
-  parameter Modelica.SIunits.TransmissionCoefficient T_L[n]
+  parameter Modelica.SIunits.TransmissionCoefficient tau_vis[n]
     "Degree of light transmission for direct irradiation"
     annotation (Dialog(group="window"));
-  parameter Modelica.SIunits.TransmissionCoefficient T_LTotDir[n]
+  parameter Modelica.SIunits.TransmissionCoefficient tau_visTotDir[n]
     "Degree of light transmission for direct irradiation, with sunscreen"
     annotation (Dialog(group="window"));
-  parameter Modelica.SIunits.TransmissionCoefficient T_LTotDif[n]
+  parameter Modelica.SIunits.TransmissionCoefficient tau_visTotDif[n]
     "Degree of light transmission for diffuse irradiation, with sunscreen"
     annotation (Dialog(group="window"));
   parameter Modelica.SIunits.RadiantEnergyFluenceRate lim
@@ -93,13 +93,13 @@ model ShadedWindow
     "Solar radiation transmitted through aggregated window"
     annotation (Placement(transformation(extent={{100,-50},{120,-30}}),
         iconTransformation(extent={{100,-50},{120,-30}})));
-  BaseClasses.ShadedWindow shadedWindow(
+  AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.ShadedWindow shadedWindow(
     final n=n,
     final UWin=UWin,
     final g=g,
-    final T_L=T_L,
-    final T_LTotDir=T_LTotDir,
-    final T_LTotDif=T_LTotDif,
+    final tau_vis=tau_vis,
+    final tau_visTotDir=tau_visTotDir,
+    final tau_visTotDif=tau_visTotDif,
     final lim=lim,
     final til=til,
     final b=b,

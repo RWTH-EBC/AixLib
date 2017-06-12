@@ -23,7 +23,7 @@ model Illumination
     annotation (Dialog(group="window"));
   parameter Modelica.SIunits.Area A[n] "Window area"
     annotation (Dialog(group="window"));
-  parameter Modelica.SIunits.TransmissionCoefficient T_L[n]
+  parameter Modelica.SIunits.TransmissionCoefficient tau_vis[n]
     "Degree of light transmission"
     annotation (Dialog(group="window"));
   final parameter Modelica.SIunits.ReflectionCoefficient rho=0.2
@@ -39,7 +39,7 @@ model Illumination
     "Solar energy entering the room in the visible area"
     annotation (Placement(transformation(extent={{-120,50},{-100,70}}),
         iconTransformation(extent={{-120,50},{-100,70}})));
-  Modelica.Blocks.Interfaces.RealInput CorTaue_DifCov[n](
+  Modelica.Blocks.Interfaces.RealInput corTaue_DifCov[n](
     final quantity="TransmissionCoefficient",
     final unit="1")
     "Correction value for translucence for diffuse irradiation during covered
@@ -47,7 +47,7 @@ model Illumination
     annotation (Placement(transformation(extent={{-120,-70},{-100,-50}}),
         iconTransformation(extent={{-120,-70},{-100,-50}})));
 
-  Modelica.Blocks.Interfaces.RealInput CorTaue_Gro[n](
+  Modelica.Blocks.Interfaces.RealInput corTaue_Gro[n](
     final quantity="TransmissionCoefficient",
     final unit="1")
     "Correction value for translucence for ground reflection radiation"
@@ -90,10 +90,10 @@ equation
     til[i]))+Modelica.Math.sin(
     AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(
     til[i])));
-    HLimVisi[i]=e_ILim/(D*k_mDifCov)*(r_DifCov[i]*T_L[i]*CorTaue_DifCov[i]+0.5*
+    HLimVisi[i]=e_ILim/(D*k_mDifCov)*(r_DifCov[i]*tau_vis[i]*corTaue_DifCov[i]+0.5*
     rho*(1-Modelica.Math.cos(
     AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(
-    til[i])))*T_L[i]*CorTaue_Gro[i])*(1-r[i])*A[i];
+    til[i])))*tau_vis[i]*corTaue_Gro[i])*(1-r[i])*A[i];
     HVisi[i]=HVis[i]*(1-r[i])*A[i];
   end for;
   HLimVis=sum(HLimVisi);

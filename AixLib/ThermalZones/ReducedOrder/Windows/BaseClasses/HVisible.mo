@@ -5,13 +5,13 @@ model HVisible
   parameter Integer n(min=1) "Number of windows"
     annotation (Dialog(group="window"));
 
-  parameter Modelica.SIunits.TransmissionCoefficient T_L[n]
+  parameter Modelica.SIunits.TransmissionCoefficient tau_vis[n]
     "Degree of light transmission"
     annotation (Dialog(group="window"));
-  parameter Modelica.SIunits.TransmissionCoefficient T_LTotDir[n]
+  parameter Modelica.SIunits.TransmissionCoefficient tau_visTotDir[n]
     "Degree of light transmission for direct irradiation, with sunscreen"
     annotation (Dialog(group="window"));
-  parameter Modelica.SIunits.TransmissionCoefficient T_LTotDif[n]
+  parameter Modelica.SIunits.TransmissionCoefficient tau_visTotDif[n]
     "Degree of light transmission for diffuse irradiation, with sunscreen"
     annotation (Dialog(group="window"));
 
@@ -26,21 +26,21 @@ model HVisible
     "True: sunscreen closed, false: sunscreen open"
     annotation (Placement(transformation(extent={{-120,-40},{-80,0}}),
         iconTransformation(extent={{-114,-6},{-100,8}})));
-  Modelica.Blocks.Interfaces.RealInput CorTaue_Dir[n](
+  Modelica.Blocks.Interfaces.RealInput corTaue_Dir[n](
     final quantity="TransmissionCoefficient",
     final unit="1")
     "Correction value for translucence for direct irradiation"
     annotation (Placement(transformation(extent={{-128,78},{-108,98}}),
         iconTransformation(extent={{-114,-106},{-100,-92}})));
 
-  Modelica.Blocks.Interfaces.RealInput CorTaue_DifCle[n](
+  Modelica.Blocks.Interfaces.RealInput corTaue_DifCle[n](
     final quantity="TransmissionCoefficient",
     final unit="1")
     "Correction value for translucence for diffuse irradiation during clear sky"
     annotation (Placement(transformation(extent={{-120,-92},{-100,-72}}),
         iconTransformation(extent={{-114,-86},{-100,-72}})));
 
-  Modelica.Blocks.Interfaces.RealInput CorTaue_DifCov[n](
+  Modelica.Blocks.Interfaces.RealInput corTaue_DifCov[n](
     final quantity="TransmissionCoefficient",
     final unit="1")
     "Correction value for translucence for diffuse irradiation during covered
@@ -48,7 +48,7 @@ model HVisible
     annotation (Placement(transformation(extent={{-120,-72},{-100,-52}}),
         iconTransformation(extent={{-114,-66},{-100,-52}})));
 
-  Modelica.Blocks.Interfaces.RealInput CorTaue_Gro[n](
+  Modelica.Blocks.Interfaces.RealInput corTaue_Gro[n](
     final quantity="TransmissionCoefficient",
     final unit="1")
     "Correction value for translucence for ground reflection radiation"
@@ -114,10 +114,10 @@ protected
   Real Cor_KMDifCle
     "Correction factor for diffuse irradiation at cloudless clear skies
     according to DIN 5034-2";
-  Modelica.SIunits.TransmissionCoefficient T_LDifx[n]
+  Modelica.SIunits.TransmissionCoefficient tau_visDifx[n]
     "Calculation variable for the degree of light transmission for diffuse
     irradiation";
-  Modelica.SIunits.TransmissionCoefficient T_LDirx[n]
+  Modelica.SIunits.TransmissionCoefficient tau_visDirx[n]
     "Calculation variable for the degree of light transmission for direct
     irradiation";
   Modelica.SIunits.EnergyFlowRate H_EvaHor[n]
@@ -139,18 +139,18 @@ equation
 
   for i in 1:n loop
     if sunscreen[i] then
-      T_LDifx[i]=T_LTotDif[i];
-      T_LDirx[i]=T_LTotDir[i];
+      tau_visDifx[i]=tau_visTotDif[i];
+      tau_visDirx[i]=tau_visTotDir[i];
     else
-      T_LDifx[i]=T_L[i];
-      T_LDirx[i]=T_L[i];
+      tau_visDifx[i]=tau_vis[i];
+      tau_visDirx[i]=tau_vis[i];
     end if;
     H_EvaHor[i]=(HDirNor*Cor_KMDir*Modelica.Math.sin(alt)+HDifHorCle
-    *Cor_KMDifCle+HDifHorCov*Cor_KMDifCov)*T_LDifx[i];
-    HVis[i]=(HDirTil[i]*T_LDirx[i]*CorTaue_Dir[i]*Cor_KMDir+HDifTilCle[i]*
-    T_LDifx[i]*CorTaue_DifCle[i]*Cor_KMDifCle+HDifTilCov[i]*T_LDifx[i]*
-    CorTaue_DifCov[i]*Cor_KMDifCov+H_EvaHor[i]*0.5*rho*(1-Modelica.Math.cos(
-    AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(til[i])))*CorTaue_Gro[i]);
+    *Cor_KMDifCle+HDifHorCov*Cor_KMDifCov)*tau_visDifx[i];
+    HVis[i]=(HDirTil[i]*tau_visDirx[i]*corTaue_Dir[i]*Cor_KMDir+HDifTilCle[i]*
+    tau_visDifx[i]*corTaue_DifCle[i]*Cor_KMDifCle+HDifTilCov[i]*tau_visDifx[i]*
+    corTaue_DifCov[i]*Cor_KMDifCov+H_EvaHor[i]*0.5*rho*(1-Modelica.Math.cos(
+    AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(til[i])))*corTaue_Gro[i]);
   end for;
     annotation (defaultComponentName="HVis",Icon(coordinateSystem(
     preserveAspectRatio=false)), Diagram(coordinateSystem(

@@ -58,27 +58,27 @@ model HWindow "Calculates the solar heat input through the window"
     "True: sunscreen closed, false: sunscreen open"
     annotation (Placement(transformation(extent={{-120,-40},{-80,0}}),
         iconTransformation(extent={{-114,-6},{-100,8}})));
-  Modelica.Blocks.Interfaces.RealInput CorG_Dir[n](
+  Modelica.Blocks.Interfaces.RealInput corG_Dir[n](
     final quantity="TransmissionCoefficient",
     final unit="1")
     "Transmission coefficient correction factor for direct radiation"
     annotation (Placement(transformation(extent={{-120,86},{-100,106}}),
     iconTransformation(extent={{-114,92},{-100,106}})));
-  Modelica.Blocks.Interfaces.RealInput CorG_DifCle[n](
+  Modelica.Blocks.Interfaces.RealInput corG_DifCle[n](
     final quantity="TransmissionCoefficient",
     final unit="1")
     "Transmission coefficient correction factor for diffuse radiation while
     clear sky"
     annotation (Placement(transformation(extent={{-130,68},{-110,88}}),
     iconTransformation(extent={{-114,74},{-100,88}})));
-  Modelica.Blocks.Interfaces.RealInput CorG_DifCov[n](
+  Modelica.Blocks.Interfaces.RealInput corG_DifCov[n](
     final quantity="TransmissionCoefficient",
     final unit="1")
     "Transmission coefficient correction factor for diffuse radiation while
     covered sky"
     annotation (Placement(transformation(extent={{-120,48},{-100,68}}),
     iconTransformation(extent={{-114,54},{-100,68}})));
-  Modelica.Blocks.Interfaces.RealInput CorG_Gro[n](
+  Modelica.Blocks.Interfaces.RealInput corG_Gro[n](
     final quantity="TransmissionCoefficient",
     final unit="1")
     "Transmission coefficient correction factor for ground reflection radiation"
@@ -107,11 +107,11 @@ equation
       g_Difx[i]=g[i];
    end if;
    //Calculating HWin
-    HWin[i]=(HDirTil[i]*g_Dirx[i]*CorG_Dir[i]+HDifTilCov[i]*g_Difx[i]*
-    CorG_DifCov[i]+HDifTilCle[i]*g_Difx[i]*CorG_DifCle[i]+0.5*rho*(1-
+    HWin[i]=(HDirTil[i]*g_Dirx[i]*corG_Dir[i]+HDifTilCov[i]*g_Difx[i]*
+    corG_DifCov[i]+HDifTilCle[i]*g_Difx[i]*corG_DifCle[i]+0.5*rho*(1-
     Modelica.Math.cos(AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_surfaceTiltVDI(
     til[i])))*
-    (HDirNor*Modelica.Math.sin(alt)+HDifHor)*g_Difx[i]*CorG_Gro[i]);
+    (HDirNor*Modelica.Math.sin(alt)+HDifHor)*g_Difx[i]*corG_Gro[i]);
   end for
   annotation (defaultComponentName="HWin",Icon(coordinateSystem(
   preserveAspectRatio=false)), Diagram(

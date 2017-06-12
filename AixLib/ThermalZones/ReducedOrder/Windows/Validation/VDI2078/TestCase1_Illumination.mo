@@ -292,7 +292,7 @@ model TestCase1_Illumination
     "Correction values for non-parallel and non-vertical irradiation for
     VDI2078 test case 1"
     annotation (Placement(transformation(extent={{-52,46},{-32,66}})));
-  Windows.BaseClasses.Sunblind sunblind(lim=200)
+  AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Sunblind sunblind(lim=200)
     "Calculates if the sunblind is active"
     annotation (Placement(transformation(extent={{-20,-46},{-6,-36}})));
   Modelica.Blocks.Sources.CombiTimeTable HDifHorCle(
@@ -786,43 +786,43 @@ model TestCase1_Illumination
         1638000,0])
     "Diffuse irradiation at covered sky on tilted surface"
     annotation (Placement(transformation(extent={{-102,-44},{-82,-24}})));
-  BoundaryConditions.SolarIrradiation.BaseClasses.DirectTiltedSurface
+  AixLib.BoundaryConditions.SolarIrradiation.BaseClasses.DirectTiltedSurface
     HDirTil "Direct irradiation on the tilted window"
     annotation (Placement(transformation(extent={{-26,-96},{-6,-76}})));
-  Windows.BaseClasses.Conversions.to_HDirNor to_HDirNor
+  AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_HDirNor to_HDirNor
     "Convertion of the horizontal direct irradiation to the normal direct
     irradiation"
     annotation (Placement(transformation(extent={{-58,-74},{-48,-64}})));
-  Windows.BaseClasses.Illumination illumination(
+  AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Illumination illumination(
     e_ILim1=250,
     e_ILim2=500,
     office=true,
     n=1,
     r={0.21},
     A={5.13},
-    T_L={0.72},
+    tau_vis={0.72},
     D=0.027,
     til={1.5707963267949})
     "Determining the switch moments for VDI2078 test case 1"
     annotation (Placement(transformation(extent={{62,-8},{82,12}})));
-  Windows.Validation.BaseClasses.SolarHourAngleVDI6007 solarHourAngleVDI(
+  AixLib.ThermalZones.ReducedOrder.Windows.Validation.BaseClasses.SolarHourAngleVDI6007 solarHourAngleVDI(
     lon=0.15009831567151)
     "Solar hour angle based on the calculations of VDI6007"
     annotation (Placement(transformation(extent={{-76,-98},{-68,-90}})));
-  BoundaryConditions.SolarGeometry.BaseClasses.IncidenceAngle
+  AixLib.BoundaryConditions.SolarGeometry.BaseClasses.IncidenceAngle
     incAng(
     azi(displayUnit="deg") = 0,
     til(displayUnit="deg") = 1.5707963267949,
     lat=0.86393797973719) "Solar incidence angle on the tilted window"
     annotation (Placement(transformation(extent={{-54,-94},{-44,-84}})));
-  Windows.Validation.BaseClasses.SolarDeclinationAngleVDI6007 solarDeclinationAngleVDI
+  AixLib.ThermalZones.ReducedOrder.Windows.Validation.BaseClasses.SolarDeclinationAngleVDI6007 solarDeclinationAngleVDI
     "Solar declination angle based on the calculations of VDI6007"
     annotation (Placement(transformation(extent={{-76,-84},{-68,-76}})));
-  Windows.BaseClasses.HVisible HVis(
+  AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.HVisible HVis(
     n=1,
-    T_LTotDir={0.08},
-    T_LTotDif={0.32},
-    T_L={0.72},
+    tau_visTotDir={0.08},
+    tau_visTotDif={0.32},
+    tau_vis={0.72},
     til={1.5707963267949}) "visible light entering the room"
     annotation (Placement(transformation(extent={{40,24},{90,84}})));
   Modelica.Blocks.Sources.CombiTimeTable HVisSum_VDI2078(
@@ -1088,11 +1088,11 @@ equation
   connect(incAng.incAng, CorGTaue.incAng[1]) annotation (Line(points={{-43.5,
           -89},{-43.5,-18},{-60,-18},{-60,58},{-51,58}},       color={0,0,
           127}));
-  connect(CorGTaue.CorTaue_Gro, illumination.CorTaue_Gro) annotation (Line(
+  connect(CorGTaue.corTaue_Gro, illumination.corTaue_Gro) annotation (Line(
         points={{-33,64},{0,64},{0,54},{14,54},{14,46},{12,46},{12,2},{61,
           2}},
         color={0,0,127}));
-  connect(CorGTaue.CorTaue_DifCov, illumination.CorTaue_DifCov) annotation (
+  connect(CorGTaue.corTaue_DifCov, illumination.corTaue_DifCov) annotation (
      Line(points={{-33,62},{24,62},{24,-4},{61,-4}}, color={0,0,127}));
   connect(HVis.HVis, illumination.HVis) annotation (Line(points={{92.5,54},
           {98,54},{98,52},{98,20},{56,20},{56,8},{61,8}},         color={0,
@@ -1111,13 +1111,13 @@ equation
         color={255,0,255}));
   connect(alt.y[1], HVis.alt) annotation (Line(points={{-81,-60},{-30,-60},
           {-30,38},{4,38},{4,48.3},{38.25,48.3}}, color={0,0,127}));
-  connect(CorGTaue.CorTaue_Gro, HVis.CorTaue_Gro) annotation (Line(points={
+  connect(CorGTaue.corTaue_Gro, HVis.corTaue_Gro) annotation (Line(points={
           {-33,64},{2,64},{2,42.3},{38.25,42.3}}, color={0,0,127}));
-  connect(CorGTaue.CorTaue_DifCov, HVis.CorTaue_DifCov) annotation (Line(
+  connect(CorGTaue.corTaue_DifCov, HVis.corTaue_DifCov) annotation (Line(
         points={{-33,62},{2,62},{2,36.3},{38.25,36.3}}, color={0,0,127}));
-  connect(CorGTaue.CorTaue_DifCle, HVis.CorTaue_DifCle) annotation (Line(
+  connect(CorGTaue.corTaue_DifCle, HVis.corTaue_DifCle) annotation (Line(
         points={{-33,60},{2,60},{2,30.3},{38.25,30.3}}, color={0,0,127}));
-  connect(CorGTaue.CorTaue_Dir, HVis.CorTaue_Dir) annotation (Line(points={
+  connect(CorGTaue.corTaue_Dir, HVis.corTaue_Dir) annotation (Line(points={
           {-33,58},{2,58},{2,24.3},{38.25,24.3}}, color={0,0,127}));
   connect(HDifTilCov.y, HVis.HDifTilCov) annotation (Line(points={{-81,
           -34},{-22,-34},{-22,69.3},{38.25,69.3}}, color={0,0,127}));

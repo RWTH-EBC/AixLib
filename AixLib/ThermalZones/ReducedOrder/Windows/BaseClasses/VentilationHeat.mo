@@ -11,7 +11,7 @@ block VentilationHeat "heat input due to ventilation with closed sunblind"
     "Transmission coefficient of sunscreen"
      annotation(dialog(group="sunscreen"));
   parameter Modelica.SIunits.ReflectionCoefficient rho_e
-    "Reflection Coefficient of sunscreen"
+    "Reflection coefficient of sunscreen"
      annotation(dialog(group="sunscreen"));
   parameter Modelica.SIunits.Angle til(displayUnit="deg")
     "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for
@@ -23,7 +23,7 @@ block VentilationHeat "heat input due to ventilation with closed sunblind"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}}),
         iconTransformation(extent={{-120,10},{-100,30}})));
    Modelica.Blocks.Interfaces.RealInput HDirTil(final quantity=
-     "RadiantEnergyFluenceRate",final unit="W/m2")
+     "RadiantEnergyFluenceRate", final unit="W/m2")
     "Direct radiation on a tilted surface"
    annotation (Placement(transformation(extent={{-140,-50},{-100,-10}}),
         iconTransformation(extent={{-120,-30},{-100,-10}})));

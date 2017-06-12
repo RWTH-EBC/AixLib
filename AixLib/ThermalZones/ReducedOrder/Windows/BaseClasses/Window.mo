@@ -16,13 +16,13 @@ model Window "Calculation of solar energy transmitted through windows"
     "Total energy transmittance of windows with closed sunscreen for diffuse
      radiation"
     annotation(Dialog(group="window"));
-  parameter Modelica.SIunits.TransmissionCoefficient T_L[n]
+  parameter Modelica.SIunits.TransmissionCoefficient tau_vis[n]
     "Degree of light transmission for direct irradiation"
     annotation (Dialog(group="window"));
-  parameter Modelica.SIunits.TransmissionCoefficient T_LTotDir[n]
+  parameter Modelica.SIunits.TransmissionCoefficient tau_visTotDir[n]
     "Degree of light transmission for direct irradiation, with sunscreen"
     annotation (Dialog(group="window"));
-  parameter Modelica.SIunits.TransmissionCoefficient T_LTotDif[n]
+  parameter Modelica.SIunits.TransmissionCoefficient tau_visTotDif[n]
     "Degree of light transmission for diffuse irradiation, with sunscreen"
     annotation (Dialog(group="window"));
   parameter Modelica.SIunits.RadiantEnergyFluenceRate lim
@@ -102,12 +102,13 @@ model Window "Calculation of solar energy transmitted through windows"
     annotation (Placement(transformation(extent={{-30,-22},{-6,8}})));
   AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.HVisible HVisible(
     final n=n,
-    final T_LTotDir=T_LTotDir,
-    final T_LTotDif=T_LTotDif,
+    final tau_visTotDir=tau_visTotDir,
+    final tau_visTotDif=tau_visTotDif,
     final til=til,
-    final T_L=T_L)
+    final tau_vis=tau_vis)
     annotation (Placement(transformation(extent={{56,18},{100,62}})));
-  AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.HDif_toClearCovered hDif_toClearCovered[n]
+  AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.HDifToClearCovered
+    hDif_toClearCovered[n]
     annotation (Placement(transformation(extent={{-74,-18},{-54,2}})));
   AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.HWindow HWindow(
     final g=g,
@@ -133,15 +134,15 @@ equation
   connect(sunblind.sunscreen, HVisible.sunscreen) annotation (Line(points=
           {{-55.4,-36},{-38,-36},{-38,40.22},{54.46,40.22}}, color={255,0,
           255}));
-  connect(CorGTaue.CorTaue_Dir, HVisible.CorTaue_Dir) annotation (Line(
+  connect(CorGTaue.corTaue_Dir, HVisible.corTaue_Dir) annotation (Line(
         points={{-7.2,-4},{22,-4},{22,18.22},{54.46,18.22}}, color={0,0,127}));
-  connect(CorGTaue.CorTaue_DifCle, HVisible.CorTaue_DifCle) annotation (
+  connect(CorGTaue.corTaue_DifCle, HVisible.corTaue_DifCle) annotation (
       Line(points={{-7.2,-1},{18,-1},{18,22.62},{54.46,22.62}}, color={0,0,
           127}));
-  connect(CorGTaue.CorTaue_DifCov, HVisible.CorTaue_DifCov) annotation (
+  connect(CorGTaue.corTaue_DifCov, HVisible.corTaue_DifCov) annotation (
       Line(points={{-7.2,2},{14,2},{14,27.02},{54.46,27.02}}, color={0,0,
           127}));
-  connect(CorGTaue.CorTaue_Gro, HVisible.CorTaue_Gro) annotation (Line(
+  connect(CorGTaue.corTaue_Gro, HVisible.corTaue_Gro) annotation (Line(
         points={{-7.2,5},{10,5},{10,31.42},{54.46,31.42}}, color={0,0,127}));
   connect(alt, HVisible.alt) annotation (Line(points={{-112,24},{-30,24},{-30,
           35.82},{54.46,35.82}}, color={0,0,127}));
@@ -166,15 +167,15 @@ equation
   connect(sunblind.sunscreen, HWindow.sunscreen) annotation (Line(points={
           {-55.4,-36},{-2,-36},{-2,-39.78},{52.39,-39.78}}, color={255,0,
           255}));
-  connect(CorGTaue.CorG_Dir, HWindow.CorG_Dir) annotation (Line(points={{-7.2,
+  connect(CorGTaue.corG_Dir, HWindow.corG_Dir) annotation (Line(points={{-7.2,
           -10},{22,-10},{22,-18.22},{52.39,-18.22}}, color={0,0,127}));
-  connect(CorGTaue.CorG_DifCle, HWindow.CorG_DifCle) annotation (Line(
+  connect(CorGTaue.corG_DifCle, HWindow.corG_DifCle) annotation (Line(
         points={{-7.2,-13},{18.4,-13},{18.4,-22.18},{52.39,-22.18}}, color=
           {0,0,127}));
-  connect(CorGTaue.CorG_DifCov, HWindow.CorG_DifCov) annotation (Line(
+  connect(CorGTaue.corG_DifCov, HWindow.corG_DifCov) annotation (Line(
         points={{-7.2,-16},{16,-16},{16,-26.58},{52.39,-26.58}}, color={0,0,
           127}));
-  connect(CorGTaue.CorG_Gro, HWindow.CorG_Gro) annotation (Line(points={{-7.2,
+  connect(CorGTaue.corG_Gro, HWindow.corG_Gro) annotation (Line(points={{-7.2,
           -19},{12.4,-19},{12.4,-30.98},{52.39,-30.98}}, color={0,0,127}));
   connect(HDifHor, HWindow.HDifHor) annotation (Line(points={{-112,-24},{-94,
           -24},{-94,-72},{44,-72},{44,-61.78},{48,-61.78},{52.39,-61.78}},

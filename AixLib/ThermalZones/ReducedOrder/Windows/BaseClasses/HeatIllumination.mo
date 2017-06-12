@@ -6,10 +6,11 @@ model HeatIllumination "heating energy due to Illumination"
   parameter Modelica.SIunits.EnergyFlowRate HIll2
     "Energyoutput of Illumination during daytime";
   Modelica.Blocks.Interfaces.BooleanInput Illumination
+    "True if Illumination is on, False if it is turned off"
     annotation (Placement(transformation(extent={{-140,-30},{-100,10}}),
         iconTransformation(extent={{-120,-10},{-100,10}})));
   Modelica.Blocks.Interfaces.RealOutput HIll(final quantity=
-    "EnergyFlowRate", final unit="W") "Energoutput of Illumination"
+    "EnergyFlowRate", final unit="W") "Energyoutput of Illumination"
     annotation (Placement(transformation(extent={{100,-10},{120,10}}),
         iconTransformation(extent={{100,-12},{124,12}})));
 protected

@@ -2,7 +2,7 @@ within AixLib.ThermalZones.ReducedOrder.Windows.Validation.VDI2078;
 model TestCase3_VentilationHeat
   extends Modelica.Icons.Example;
 
-  Windows.BaseClasses.VentilationHeat ventilationHeat(
+  AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.VentilationHeat ventilationHeat(
     x_f=0.8,
     d=0.1,
     screen=false,
@@ -11,7 +11,7 @@ model TestCase3_VentilationHeat
     til=1.5707963267949)
     "Calculates the heat input due to ventialtion for test case 3 of VDI2078"
     annotation (Placement(transformation(extent={{80,-10},{100,10}})));
-  Windows.BaseClasses.Sunblind sunblind(lim=200)
+  AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Sunblind sunblind(lim=200)
     "Calculates if the sunblind of the window is active"
     annotation (Placement(transformation(extent={{48,-2},{56,6}})));
   Modelica.Blocks.Sources.CombiTimeTable HDirHor(
@@ -744,24 +744,24 @@ model TestCase3_VentilationHeat
         1627200,0; 1630800,0; 1634400,0; 1638000,0])
     "Diffuse irradiation on a horizontal surface at clear sky"
     annotation (Placement(transformation(extent={{-96,36},{-82,50}})));
-  BoundaryConditions.SolarGeometry.BaseClasses.IncidenceAngle
+  AixLib.BoundaryConditions.SolarGeometry.BaseClasses.IncidenceAngle
     incAng(
     azi(displayUnit="deg") = 0,
     til(displayUnit="deg") = 1.5707963267949,
     lat=0.86393797973719) "Incidence angle for the window"
     annotation (Placement(transformation(extent={{-56,-40},{-44,-28}})));
-  BoundaryConditions.SolarIrradiation.BaseClasses.DirectTiltedSurface
+  AixLib.BoundaryConditions.SolarIrradiation.BaseClasses.DirectTiltedSurface
     HDirTil "Direct solar irradiation on the window"
     annotation (Placement(transformation(extent={{-30,-26},{-14,-10}})));
-  Windows.BaseClasses.Conversions.to_HDirNor to_HDirNor
+  AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions.to_HDirNor to_HDirNor
     "Converts the direct irradiation onto a horizontal surface to direct
     irradiation on a normal surface"
     annotation (Placement(transformation(extent={{-58,-8},{-46,4}})));
-  Windows.Validation.BaseClasses.SolarHourAngleVDI6007 SolHouAng(
+  AixLib.ThermalZones.ReducedOrder.Windows.Validation.BaseClasses.SolarHourAngleVDI6007 SolHouAng(
     lon(displayUnit="deg") = 0.15009831567151)
     "Solar hour angle based on calculation of VDI 6007"
     annotation (Placement(transformation(extent={{-64,-40},{-58,-34}})));
-  Windows.Validation.BaseClasses.SolarDeclinationAngleVDI6007 decAng
+  AixLib.ThermalZones.ReducedOrder.Windows.Validation.BaseClasses.SolarDeclinationAngleVDI6007 decAng
     "Declination angle  based on the calculations of VDI6007"
     annotation (Placement(transformation(extent={{-64,-34},{-58,-28}})));
   Modelica.Blocks.Sources.CombiTimeTable HVen_VDI2078(

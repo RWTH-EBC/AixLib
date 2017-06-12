@@ -13,52 +13,52 @@ partial model PartialCorrectionGTaue
     "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for roof"
     annotation(dialog(group="window"));
 
-  Modelica.Blocks.Interfaces.RealOutput[n] CorG_Dir(
+  Modelica.Blocks.Interfaces.RealOutput[n] corG_Dir(
     final quantity="TransmissionCoefficient",
     final unit="1")
     "Transmission coefficient correction factor for direct radiation"
     annotation (Placement(transformation(extent={{80,-30},{100,-10}}),
     iconTransformation(extent={{80,-30},{100,-10}})));
-  Modelica.Blocks.Interfaces.RealOutput[n] CorG_DifCle(
+  Modelica.Blocks.Interfaces.RealOutput[n] corG_DifCle(
     final quantity="TransmissionCoefficient",
     final unit="1")
     "Transmission coefficient correction factor for diffuse radiation while
      clear sky"
     annotation (Placement(transformation(extent={{80,-50},{100,-30}}),
     iconTransformation(extent={{80,-50},{100,-30}})));
-  Modelica.Blocks.Interfaces.RealOutput[n] CorG_DifCov(
+  Modelica.Blocks.Interfaces.RealOutput[n] corG_DifCov(
     final quantity="TransmissionCoefficient",
     final unit="1")
     "Transmission coefficient correction factor for diffuse radiation while
      covered sky"
     annotation (Placement(transformation(extent={{80,-70},{100,-50}}),
     iconTransformation(extent={{80,-70},{100,-50}})));
-  Modelica.Blocks.Interfaces.RealOutput[n] CorG_Gro(
+  Modelica.Blocks.Interfaces.RealOutput[n] corG_Gro(
     final quantity="TransmissionCoefficient",
     final unit="1")
     "Transmission coefficient correction factor for ground reflection radiation"
     annotation (Placement(transformation(extent={{80,-90},{100,-70}}),
     iconTransformation(extent={{80,-90},{100,-70}})));
-  Modelica.Blocks.Interfaces.RealOutput[n] CorTaue_Dir(
+  Modelica.Blocks.Interfaces.RealOutput[n] corTaue_Dir(
     final quantity="TransmissionCoefficient",
     final unit="1")
     "Correction value for translucence for direct irradiation"
     annotation (Placement(transformation(extent={{80,10},{100,30}}),
     iconTransformation(extent={{80,10},{100,30}})));
-  Modelica.Blocks.Interfaces.RealOutput[n] CorTaue_DifCle(
+  Modelica.Blocks.Interfaces.RealOutput[n] corTaue_DifCle(
     final quantity="TransmissionCoefficient",
     final unit="1")
     "Correction value for translucence for diffuse irradiation during clear sky"
     annotation (Placement(transformation(extent={{80,30},{100,50}}),
     iconTransformation(extent={{80,30},{100,50}})));
-  Modelica.Blocks.Interfaces.RealOutput[n] CorTaue_DifCov(
+  Modelica.Blocks.Interfaces.RealOutput[n] corTaue_DifCov(
     final quantity="TransmissionCoefficient",
     final unit="1")
     "Correction value for translucence for diffuse irradiation during covered
      sky"
     annotation (Placement(transformation(extent={{80,50},{100,70}}),
     iconTransformation(extent={{80,50},{100,70}})));
-  Modelica.Blocks.Interfaces.RealOutput[n] CorTaue_Gro(
+  Modelica.Blocks.Interfaces.RealOutput[n] corTaue_Gro(
     final quantity="TransmissionCoefficient",
     final unit="1")
     "Correction value for translucence for ground reflection radiation"
@@ -78,19 +78,19 @@ partial model PartialCorrectionGTaue
         iconTransformation(extent={{-100,-30},{-80,-10}})));
 
 protected
-  parameter Real A0=0.918
+  parameter Real a0=0.918
     "Constant 0 to calculate reference transmission";
-  parameter Real A1=2.21*10^(-4)
+  parameter Real a1=2.21*10^(-4)
     "Constant 1 to calculate reference transmission";
-  parameter Real A2=-2.75*10^(-5)
+  parameter Real a2=-2.75*10^(-5)
     "Constant 2 to calculate reference transmission";
-  parameter Real A3=-3.82*10^(-7)
+  parameter Real a3=-3.82*10^(-7)
     "Constant 3 to calculate reference transmission";
-  parameter Real A4=5.83*10^(-8)
+  parameter Real a4=5.83*10^(-8)
     "Constant 4 to calculate reference transmission";
-  parameter Real A5=-1.15*10^(-9)
+  parameter Real a5=-1.15*10^(-9)
     "Constant 5 to calculate reference transmission";
-  parameter Real A6=4.74*10^(-12)
+  parameter Real a6=4.74*10^(-12)
     "Constant 6 to calculate reference transmission";
 
   parameter Modelica.SIunits.TransmissionCoefficient tau_1DifCov=
@@ -159,19 +159,19 @@ equation
   for i in 1:n loop
   //Calculating variables for direct irradiation
   taui_Dir[i]= 0.907^(1/sqrt(1-(Modelica.Math.sin(incAng[i])/1.515)^2));
-  if (((((A6*(incAng[i])+A5)*Modelica.SIunits.Conversions.to_deg(incAng[i])+A4)*
-    Modelica.SIunits.Conversions.to_deg(incAng[i])+A3)*
-    Modelica.SIunits.Conversions.to_deg(incAng[i])+A2)*
-    Modelica.SIunits.Conversions.to_deg(incAng[i])+A1)*
-    Modelica.SIunits.Conversions.to_deg(incAng[i])+A0 <0 then
+  if (((((a6*(incAng[i])+a5)*Modelica.SIunits.Conversions.to_deg(incAng[i])+a4)*
+    Modelica.SIunits.Conversions.to_deg(incAng[i])+a3)*
+    Modelica.SIunits.Conversions.to_deg(incAng[i])+a2)*
+    Modelica.SIunits.Conversions.to_deg(incAng[i])+a1)*
+    Modelica.SIunits.Conversions.to_deg(incAng[i])+a0 <0 then
   tau_Dir[i]=0;
   else
-  tau_Dir[i]= (((((A6*Modelica.SIunits.Conversions.to_deg(incAng[i])+A5)*
-  Modelica.SIunits.Conversions.to_deg(incAng[i])+A4)*
-  Modelica.SIunits.Conversions.to_deg(incAng[i])+A3)*
-  Modelica.SIunits.Conversions.to_deg(incAng[i])+A2)*
-  Modelica.SIunits.Conversions.to_deg(incAng[i])+A1)*
-  Modelica.SIunits.Conversions.to_deg(incAng[i])+A0;
+  tau_Dir[i]= (((((a6*Modelica.SIunits.Conversions.to_deg(incAng[i])+a5)*
+  Modelica.SIunits.Conversions.to_deg(incAng[i])+a4)*
+  Modelica.SIunits.Conversions.to_deg(incAng[i])+a3)*
+  Modelica.SIunits.Conversions.to_deg(incAng[i])+a2)*
+  Modelica.SIunits.Conversions.to_deg(incAng[i])+a1)*
+  Modelica.SIunits.Conversions.to_deg(incAng[i])+a0;
   end if;
   tau_1Dir[i]= tau_Dir[i]*taui_Dir[i];
   rho_T1Dir[i]= 1-tau_Dir[i];

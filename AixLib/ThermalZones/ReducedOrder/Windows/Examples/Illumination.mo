@@ -2,10 +2,10 @@ within AixLib.ThermalZones.ReducedOrder.Windows.Examples;
 model Illumination "Testmodel for Illumination"
   extends Modelica.Icons.Example;
 
-  Windows.BaseClasses.HeatIllumination heatIllumination(HIll1=120, HIll2=240)
+  AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.HeatIllumination heatIllumination(HIll1=120, HIll2=240)
     "Heat input into the room due to the illumination"
     annotation (Placement(transformation(extent={{76,-10},{96,10}})));
-  Windows.BaseClasses.Illumination illumination(
+  AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Illumination illumination(
     D=0.27,
     e_ILim1=250,
     e_ILim2=500,
@@ -13,7 +13,7 @@ model Illumination "Testmodel for Illumination"
     n=1,
     r={0.21},
     A={5.13},
-    T_L={0.72},
+    tau_vis={0.72},
     til={1.5707963267949})
     "Determining the switch times for the illumination in the room"
     annotation (Placement(transformation(extent={{52,-10},{72,10}})));
@@ -22,32 +22,32 @@ model Illumination "Testmodel for Illumination"
     UWin=1.4,
     til={90}) "Correction values for non-vertical non-parallel irradiation"
     annotation (Placement(transformation(extent={{18,-42},{38,-22}})));
-  Windows.BaseClasses.Sunblind sunblind(lim=200)
+  AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Sunblind sunblind(lim=200)
     "Calculates if the sunblind of the window is active"
     annotation (Placement(transformation(extent={{-16,-64},{-6,-54}})));
-  BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil(
+  AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil(
     azi=0,
     til=1.5707963267949,
     lat=0.86393797973719) "Diffuse irradiation on the window"
     annotation (Placement(transformation(extent={{-60,-18},{-40,2}})));
-  Windows.Window window(
+  AixLib.ThermalZones.ReducedOrder.Windows.Window window(
     n=1,
     UWin=1.4,
     g={0.64},
     g_TotDir={0.08},
     g_TotDif={0.27},
-    T_L={0.72},
-    T_LTotDir={0.08},
-    T_LTotDif={0.32},
+    tau_vis={0.72},
+    tau_visTotDir={0.08},
+    tau_visTotDif={0.32},
     lim=200,
     azi={0},
     lat=0.86393797973719,
     til={1.5707963267949}) "Window facing the south in a wall"
     annotation (Placement(transformation(extent={{-10,24},{10,44}})));
-  BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
+  AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     filNam="modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
-  BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil(
+  AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil(
     azi=0,
     til=1.5707963267949,
     lat=0.86393797973719) "Direct irradiation on the surface"
@@ -55,9 +55,9 @@ model Illumination "Testmodel for Illumination"
 equation
   connect(illumination.Illumination, heatIllumination.Illumination)
     annotation (Line(points={{73,0},{75,0}}, color={255,0,255}));
-  connect(CorGTaue.CorTaue_Gro, illumination.CorTaue_Gro) annotation (Line(
+  connect(CorGTaue.corTaue_Gro, illumination.corTaue_Gro) annotation (Line(
         points={{37,-24},{40,-24},{40,0},{51,0}}, color={0,0,127}));
-  connect(CorGTaue.CorTaue_DifCov, illumination.CorTaue_DifCov) annotation (
+  connect(CorGTaue.corTaue_DifCov, illumination.corTaue_DifCov) annotation (
      Line(points={{37,-26},{44,-26},{44,-6},{51,-6}}, color={0,0,127}));
   connect(HDifTil.H, sunblind.HDifTil) annotation (Line(points={{-39,-8},{-32,
           -8},{-32,-42},{-32,-44},{-32,-56},{-24,-56},{-20,-56},{-20,-56.1},{-16.5,

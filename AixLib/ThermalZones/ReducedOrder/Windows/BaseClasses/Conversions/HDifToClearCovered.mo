@@ -1,6 +1,5 @@
 within AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Conversions;
-model HDif_toClearCovered
-  "Splits the total diffuse irradiation in diffuse irradiation at clear and
+model HDifToClearCovered "Splits the total diffuse irradiation in diffuse irradiation at clear and
   covered sky"
   extends Modelica.Blocks.Icons.Block;
 
@@ -64,4 +63,4 @@ of the total diffuse irradiation. Therefore it uses the total sky cover.</p>
 <ul>
 <li>June 30, 2016,&nbsp; by Stanley Risch:<br>Implemented. </li>
 </html>"));
-end HDif_toClearCovered;
+end HDifToClearCovered;

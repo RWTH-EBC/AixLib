@@ -2,7 +2,7 @@ within AixLib.ThermalZones.ReducedOrder.Windows.Examples;
 model VentilationHeat "Testmodel for VentilationHeat"
   extends Modelica.Icons.Example;
 
-  BaseClasses.VentilationHeat ventilationHeat(
+  AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.VentilationHeat ventilationHeat(
     d=0.1,
     screen=true,
     x_f=0.8,
@@ -11,40 +11,40 @@ model VentilationHeat "Testmodel for VentilationHeat"
     til=1.5707963267949)
     "Heat input due to ventilation with closed sunblind"
     annotation (Placement(transformation(extent={{56,-10},{76,10}})));
-  BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
+  AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     filNam="modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
-  BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil(
+  AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil(
     azi=0,
     til=1.5707963267949,
     lat=0.86393797973719) "Diffuse irradiation on the window"
            annotation (Placement(transformation(extent={{-42,20},{-26,36}})));
-  BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil(
+  AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil(
     azi=0,
     til=1.5707963267949,
     lat=0.86393797973719) "Direct solar irradiation on the window"
            annotation (Placement(transformation(extent={{-42,-8},{-26,8}})));
-  BaseClasses.Sunblind sunblind(lim=200) "Sunblind of the window"
+  AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Sunblind sunblind(lim=200) "Sunblind of the window"
     annotation (Placement(transformation(extent={{-16,8},{-2,22}})));
-  BoundaryConditions.SolarGeometry.BaseClasses.AltitudeAngle altAng
+  AixLib.BoundaryConditions.SolarGeometry.BaseClasses.AltitudeAngle altAng
     "Solar altitude angle"
     annotation (Placement(transformation(extent={{10,-20},{20,-10}})));
-  BoundaryConditions.SolarGeometry.ZenithAngle zen(lat=0.86393797973719)
+  AixLib.BoundaryConditions.SolarGeometry.ZenithAngle zen(lat=0.86393797973719)
     "Solar zenith angle"
     annotation (Placement(transformation(extent={{-2,-20},{8,-10}})));
-  BoundaryConditions.WeatherData.Bus weaBus "Weather bus"
+  AixLib.BoundaryConditions.WeatherData.Bus weaBus "Weather bus"
                                             annotation (Placement(
         transformation(extent={{-70,38},{-38,68}}), iconTransformation(extent={{
             -196,50},{-176,70}})));
-  ThermalZones.ReducedOrder.Windows.Window window(
+  AixLib.ThermalZones.ReducedOrder.Windows.Window window(
     n=1,
     UWin=1.4,
     g={0.64},
     g_TotDir={0.08},
     g_TotDif={0.27},
-    T_L={0.72},
-    T_LTotDir={0.08},
-    T_LTotDif={0.32},
+    tau_vis={0.72},
+    tau_visTotDir={0.08},
+    tau_visTotDif={0.32},
     lim=200,
     azi={0},
     lat=0.86393797973719,

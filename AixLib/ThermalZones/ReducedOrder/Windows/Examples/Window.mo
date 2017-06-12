@@ -2,18 +2,18 @@ within AixLib.ThermalZones.ReducedOrder.Windows.Examples;
 model Window "Testmodel for Window"
     extends Modelica.Icons.Example;
 
-  BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
+  AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     filNam="modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")
     annotation (Placement(transformation(extent={{-42,-10},{-22,10}})));
-  Windows.Window window(
+  AixLib.ThermalZones.ReducedOrder.Windows.Window window(
     n=2,
     UWin=1.4,
     g={0.64,0.64},
     g_TotDir={0.08,0.08},
     g_TotDif={0.27,0.27},
-    T_L={0.72,0.72},
-    T_LTotDir={0.08,0.08},
-    T_LTotDif={0.32,0.32},
+    tau_vis={0.72,0.72},
+    tau_visTotDir={0.08,0.08},
+    tau_visTotDif={0.32,0.32},
     lim=200,
     lat=0.86393797973719,
     til={1.5707963267949,1.5707963267949},

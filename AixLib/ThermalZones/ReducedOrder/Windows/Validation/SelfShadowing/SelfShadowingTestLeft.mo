@@ -2,7 +2,7 @@ within AixLib.ThermalZones.ReducedOrder.Windows.Validation.SelfShadowing;
 model SelfShadowingTestLeft
   extends Modelica.Icons.Example;
 
-  Windows.BaseClasses.SelfShadowing selfShadowingLeft(
+  AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.SelfShadowing selfShadowingLeft(
     final bRig={0},
     final n=1,
     final b={1},
@@ -18,7 +18,7 @@ model SelfShadowingTestLeft
     final dLef={0.01})
     "Shadowing due to a projection on the left-hand side of the window"
     annotation (Placement(transformation(extent={{62,-4},{94,24}})));
-  BaseClasses.IncidenceAngleVDI6007 incAng1(azi=0, til=90)
+  AixLib.ThermalZones.ReducedOrder.Windows.Validation.BaseClasses.IncidenceAngleVDI6007 incAng1(azi=0, til=90)
     "Incidence angle for the window"
     annotation (Placement(transformation(extent={{-10,-12},{10,8}})));
   Modelica.Blocks.Sources.Constant alt(k=0.3490658504)

@@ -2,7 +2,7 @@ within AixLib.ThermalZones.ReducedOrder.Windows.Validation.SelfShadowing;
 model SelfShadowingTestBelow
   extends Modelica.Icons.Example;
 
-  Windows.BaseClasses.SelfShadowing selfShadowingBelow(
+    AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.SelfShadowing selfShadowingBelow(
     final bRig={0},
     final n=1,
     final b={1},
@@ -17,7 +17,7 @@ model SelfShadowingTestBelow
     final dBel={0.01},
     final bBel={1}) "Shadowing due to a projection below"
     annotation (Placement(transformation(extent={{56,46},{88,74}})));
-  BaseClasses.IncidenceAngleVDI6007 incAng1(azi=0, til=90)
+    AixLib.ThermalZones.ReducedOrder.Windows.Validation.BaseClasses.IncidenceAngleVDI6007 incAng1(azi=0, til=90)
     "Incidence Angle for the window"
     annotation (Placement(transformation(extent={{-26,40},{-6,60}})));
   Modelica.Blocks.Sources.Constant solAzi(k=0)
@@ -26,7 +26,7 @@ model SelfShadowingTestBelow
   Modelica.Blocks.Sources.Sine altSine(freqHz=1, amplitude=Modelica.Constants.pi
         /3) "Solar altitude angle generated as a sine"
     annotation (Placement(transformation(extent={{-88,56},{-68,76}})));
-  Windows.BaseClasses.SelfShadowing selfShadowingBalkony(
+  AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.SelfShadowing selfShadowingBalkony(
     final bRig={0},
     final n=1,
     final b={1},
@@ -41,7 +41,7 @@ model SelfShadowingTestBelow
     final bBel={1},
     final dBel={-0.2}) "Shadowing due to a balkony"
     annotation (Placement(transformation(extent={{56,-40},{88,-12}})));
-  BaseClasses.IncidenceAngleVDI6007 incAng2(azi=0, til=90)
+  AixLib.ThermalZones.ReducedOrder.Windows.Validation.BaseClasses.IncidenceAngleVDI6007 incAng2(azi=0, til=90)
     "Incidence angle for the window"
     annotation (Placement(transformation(extent={{-26,-46},{-6,-26}})));
   Modelica.Blocks.Sources.Constant solAzi1(k=0)
