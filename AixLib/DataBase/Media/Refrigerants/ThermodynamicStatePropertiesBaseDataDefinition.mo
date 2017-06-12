@@ -59,7 +59,8 @@ record ThermodynamicStatePropertiesBaseDataDefinition
   First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
 </ul>
-</html>", info="<html>
+</html>",
+        info="<html>
 <p>This record is a base data definition for fitting coefficients of the thermodynamic state properties depending on two independent state variables. These thermodynamic state properties are given as fitted formulas in order to reduce the overall computing time of the refrigerant model. Therefore, the fitting approach is based on &QUOT;Fast_Propane&QUOT; model developed by Sangi et al..</p>
 <p>Sangi et al. used the <b>following fitting approaches</b>, which are also implemented within <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMedium\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMedium</a>:<br></p>
 <table cellspacing=\"0\" cellpadding=\"3\" border=\"1\" width=\"80%\"><tr>
