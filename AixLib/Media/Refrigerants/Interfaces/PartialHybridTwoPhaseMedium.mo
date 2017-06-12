@@ -15,14 +15,16 @@ partial package PartialHybridTwoPhaseMedium
     variables "p, T, d, h" (e.g., medium.T)
   */
 
+
   /*Provide Helmholtz equations of state (EoS). These EoS must be fitted to
-    different refrigerents. However, the structure will not change and, therefore,
-    the coefficients, which are obtained during the fitting procedure, are 
-    provided by a record. These coefficients have to be provided within the template.
+    different refrigerants. However, the structure will not change and, 
+    therefore, the coefficients, which are obtained during the fitting 
+    procedure, are provided by a record. These coefficients have to be 
+    provided within the template.
     Just change if needed.
   */
   replaceable function alpha_0
-  "Dimensionless Helmholz energy (Ideal gas contribution alpha_0)"
+  "Dimensionless Helmholtz energy (Ideal gas contribution alpha_0)"
     input Real delta "Temperature";
     input Real tau "Density";
     output Real alpha_0 = 0 "Dimensionless ideal gas Helmholz energy";
@@ -48,7 +50,7 @@ partial package PartialHybridTwoPhaseMedium
   end alpha_0;
 
   replaceable partial function alpha_r
-  "Dimensionless Helmholz energy (Residual part alpha_r)"
+  "Dimensionless Helmholtz energy (Residual part alpha_r)"
       input Real delta "Temperature";
       input Real tau "Density";
       output Real alpha_r = 0 "Dimensionless residual Helmholz energy";
@@ -138,7 +140,8 @@ partial package PartialHybridTwoPhaseMedium
   algorithm
     for k in 1:cf.alpha_r_nP loop
       tau_d_alpha_r_d_tau := tau_d_alpha_r_d_tau +
-        cf.alpha_r_p1[k]*cf.alpha_r_p3[k]*delta^cf.alpha_r_p2[k]*tau^cf.alpha_r_p3[k];
+        cf.alpha_r_p1[k]*cf.alpha_r_p3[k]*delta^cf.alpha_r_p2[k]*
+        tau^cf.alpha_r_p3[k];
     end for;
     for k in 1:cf.alpha_r_nB loop
       tau_d_alpha_r_d_tau := tau_d_alpha_r_d_tau +
@@ -173,9 +176,9 @@ partial package PartialHybridTwoPhaseMedium
     end for;
     for k in 1:cf.alpha_r_nB loop
       tau_delta_d2_alpha_r_d_tau_d_delta := tau_delta_d2_alpha_r_d_tau_d_delta +
-        cf.alpha_r_b1[k]*cf.alpha_r_b3[k]*delta^cf.alpha_r_b2[k]*tau^cf.alpha_r_b3[k]*
-        exp(-delta^cf.alpha_r_b4[k])*(cf.alpha_r_b2[k]-cf.alpha_r_b4[k]*
-        delta^cf.alpha_r_b4[k]);
+        cf.alpha_r_b1[k]*cf.alpha_r_b3[k]*delta^cf.alpha_r_b2[k]*tau^
+        cf.alpha_r_b3[k]*exp(-delta^cf.alpha_r_b4[k])*(cf.alpha_r_b2[k]-
+        cf.alpha_r_b4[k]*delta^cf.alpha_r_b4[k]);
     end for;
     for k in 1:cf.alpha_r_nG loop
       tau_delta_d2_alpha_r_d_tau_d_delta := tau_delta_d2_alpha_r_d_tau_d_delta +
@@ -206,8 +209,8 @@ partial package PartialHybridTwoPhaseMedium
     end for;
     for k in 1:cf.alpha_r_nB loop
       tau2_d2_alpha_r_d_tau2 := tau2_d2_alpha_r_d_tau2 +
-        cf.alpha_r_b1[k]*cf.alpha_r_b3[k]*(cf.alpha_r_b3[k]-1)*delta^cf.alpha_r_b2[k]*
-        tau^cf.alpha_r_b3[k]*exp(-delta^cf.alpha_r_b4[k]);
+        cf.alpha_r_b1[k]*cf.alpha_r_b3[k]*(cf.alpha_r_b3[k]-1)*delta^
+        cf.alpha_r_b2[k]*tau^cf.alpha_r_b3[k]*exp(-delta^cf.alpha_r_b4[k]);
     end for;
     for k in 1:cf.alpha_r_nG loop
       tau2_d2_alpha_r_d_tau2 := tau2_d2_alpha_r_d_tau2 +
@@ -222,7 +225,8 @@ partial package PartialHybridTwoPhaseMedium
   "Short form for delta*(dalpha_r/(ddelta))@tau=const"
     input Real delta "Temperature";
     input Real tau "Density";
-    output Real delta_d_alpha_r_d_delta = 0 "Delta*(dalpha_r/(ddelta))@tau=const";
+    output Real delta_d_alpha_r_d_delta = 0
+      "Delta*(dalpha_r/(ddelta))@tau=const";
 
   protected
     AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition
@@ -231,7 +235,8 @@ partial package PartialHybridTwoPhaseMedium
   algorithm
     for k in 1:cf.alpha_r_nP loop
       delta_d_alpha_r_d_delta := delta_d_alpha_r_d_delta +
-        cf.alpha_r_p1[k]*cf.alpha_r_p2[k]*delta^cf.alpha_r_p2[k]*tau^cf.alpha_r_p3[k];
+        cf.alpha_r_p1[k]*cf.alpha_r_p2[k]*delta^cf.alpha_r_p2[k]*tau^
+        cf.alpha_r_p3[k];
     end for;
     for k in 1:cf.alpha_r_nB loop
       delta_d_alpha_r_d_delta := delta_d_alpha_r_d_delta +
@@ -262,8 +267,8 @@ partial package PartialHybridTwoPhaseMedium
   algorithm
     for k in 1:cf.alpha_r_nP loop
       delta3_d3_alpha_r_d_delta3 := delta3_d3_alpha_r_d_delta3 +
-        cf.alpha_r_p1[k]*cf.alpha_r_p2[k]*(cf.alpha_r_p2[k]-1)*(cf.alpha_r_p2[k]-2)*
-        delta^cf.alpha_r_p2[k]*tau^cf.alpha_r_p3[k];
+        cf.alpha_r_p1[k]*cf.alpha_r_p2[k]*(cf.alpha_r_p2[k]-1)*
+        (cf.alpha_r_p2[k]-2)*delta^cf.alpha_r_p2[k]*tau^cf.alpha_r_p3[k];
     end for;
     for k in 1:cf.alpha_r_nB loop
       delta3_d3_alpha_r_d_delta3 := delta3_d3_alpha_r_d_delta3 +
@@ -280,11 +285,11 @@ partial package PartialHybridTwoPhaseMedium
         cf.alpha_r_g1[k]*delta^cf.alpha_r_g2[k]*tau^cf.alpha_r_g3[k]*
         exp(cf.alpha_r_g4[k]*(delta - cf.alpha_r_g5[k])^2 + cf.alpha_r_g6[k]*
         (tau - cf.alpha_r_g7[k])^2)*((cf.alpha_r_g2[k]-2-2*cf.alpha_r_g4[k]*
-        delta*(delta-cf.alpha_r_g5[k]))*((cf.alpha_r_g2[k]+2*cf.alpha_r_g4[k]*delta*
-        (delta-cf.alpha_r_g5[k]))^2-cf.alpha_r_g2[k]+2*cf.alpha_r_g4[k]^2*delta^2)+
-        delta*(4*cf.alpha_r_g4[k]^2*delta+2*cf.alpha_r_g2[k]+4*cf.alpha_r_g4[k]*delta*
-        (delta-cf.alpha_r_g5[k])*(4*cf.alpha_r_g4[k]*delta-2*cf.alpha_r_g4[k]*
-        cf.alpha_r_g5[k])));
+        delta*(delta-cf.alpha_r_g5[k]))*((cf.alpha_r_g2[k]+2*cf.alpha_r_g4[k]*
+        delta*(delta-cf.alpha_r_g5[k]))^2-cf.alpha_r_g2[k]+2*cf.alpha_r_g4[k]^
+        2*delta^2)+delta*(4*cf.alpha_r_g4[k]^2*delta+2*cf.alpha_r_g2[k]+4*
+        cf.alpha_r_g4[k]*delta*(delta-cf.alpha_r_g5[k])*(4*cf.alpha_r_g4[k]*
+        delta-2*cf.alpha_r_g4[k]*cf.alpha_r_g5[k])));
     end for;
   end delta3_d3_alpha_r_d_delta3;
 
@@ -316,15 +321,18 @@ partial package PartialHybridTwoPhaseMedium
       delta2_d2_alpha_r_d_delta2 := delta2_d2_alpha_r_d_delta2 +
         cf.alpha_r_g1[k]*delta^cf.alpha_r_g2[k]*tau^cf.alpha_r_g3[k]*
         exp(cf.alpha_r_g4[k]*(delta - cf.alpha_r_g5[k])^2 + cf.alpha_r_g6[k]*
-        (tau - cf.alpha_r_g7[k])^2)*((cf.alpha_r_g2[k]+2*cf.alpha_r_g4[k]*delta*
-        (delta-cf.alpha_r_g5[k]))^2-cf.alpha_r_g2[k]+2*cf.alpha_r_g4[k]^2*delta^2);
+        (tau - cf.alpha_r_g7[k])^2)*((cf.alpha_r_g2[k]+2*cf.alpha_r_g4[k]*
+        delta*(delta-cf.alpha_r_g5[k]))^2-cf.alpha_r_g2[k]+2*cf.alpha_r_g4[k]^
+        2*delta^2);
     end for;
   end delta2_d2_alpha_r_d_delta2;
 
+
   /*Provide polynomial functions for saturation properties. These functions are
-    fitted to external data (e.g. data extracted from RefProp or FluidProp). Currently,
-    just one fitting approach is implemented. Therefore, the coefficients, which are
-    obtained during the fitting procedure, are provided by records.
+    fitted to external data (e.g. data extracted from RefProp or FluidProp). 
+    Currently, just one fitting approach is implemented. Therefore, the 
+    coefficients, which are obtained during the fitting procedure, are provided
+     by records.
   */
   redeclare function extends saturationPressure
   "Saturation pressure of refrigerant (Ancillary equation)"
@@ -362,7 +370,8 @@ partial package PartialHybridTwoPhaseMedium
   algorithm
     x := (p - cf.saturationTemperature_iO[1])/cf.saturationTemperature_iO[2];
     for k in 1:cf.saturationTemperature_nT-1 loop
-      T_1 := T_1 + cf.saturationTemperature_n[k]*x^(cf.saturationTemperature_nT - k);
+      T_1 := T_1 + cf.saturationTemperature_n[k]*x^
+        (cf.saturationTemperature_nT - k);
     end for;
     T_1 := T_1 + cf.saturationTemperature_n[cf.saturationTemperature_nT];
     T := T_1*cf.saturationTemperature_iO[4] + cf.saturationTemperature_iO[3];
@@ -470,8 +479,10 @@ partial package PartialHybridTwoPhaseMedium
     sv := sv_1*cf.dewEntropy_iO[4] + cf.dewEntropy_iO[3];
   end dewEntropy;
 
+
   /*Provide functions that set the actual state depending on the given input
-    parameters. Additionally, state functions for the two-phase region are needed.  
+    parameters. Additionally, state functions for the two-phase region 
+    are needed.  
     Just change these functions if needed.
   */
   redeclare function extends setDewState
@@ -539,6 +550,7 @@ partial package PartialHybridTwoPhaseMedium
       h = specificEnthalpy_ps(p=p,s=s,phase=phase),
       phase = phase);
   end setState_psX;
+
 
   /*Provide functions to calculate thermodynamic properties using the EoS.
     Just change these functions if needed.
@@ -608,14 +620,14 @@ partial package PartialHybridTwoPhaseMedium
 
   algorithm
     if state.phase==1 then
-       s := R*(tau_d_alpha_0_d_tau(tau) + tau_d_alpha_r_d_tau(delta, tau) - alpha_0(
-          delta, tau) - alpha_r(delta, tau));
+      s := R*(tau_d_alpha_0_d_tau(tau) + tau_d_alpha_r_d_tau(delta, tau) -
+        alpha_0(delta, tau) - alpha_r(delta, tau));
     elseif state.phase==2 then
-       sl := R*(tau_d_alpha_0_d_tau(tau) + tau_d_alpha_r_d_tau(deltaL, tau) - alpha_0(
-          deltaL, tau) - alpha_r(deltaL, tau));
-       sv := R*(tau_d_alpha_0_d_tau(tau) + tau_d_alpha_r_d_tau(deltaG, tau) - alpha_0(
-          deltaG, tau) - alpha_r(deltaG, tau));
-        s := sl + quality*(sv-sl);
+      sl := R*(tau_d_alpha_0_d_tau(tau) + tau_d_alpha_r_d_tau(deltaL, tau) -
+        alpha_0(deltaL, tau) - alpha_r(deltaL, tau));
+      sv := R*(tau_d_alpha_0_d_tau(tau) + tau_d_alpha_r_d_tau(deltaG, tau) -
+        alpha_0(deltaG, tau) - alpha_r(deltaG, tau));
+       s := sl + quality*(sv-sl);
     end if;
   end specificEntropy;
 
@@ -644,17 +656,21 @@ partial package PartialHybridTwoPhaseMedium
 
   algorithm
     if state.phase==1 or phase_dT==1 then
-      cp := specificHeatCapacityCv(state) + R*((1 + delta_d_alpha_r_d_delta(delta,
-        tau) - tau_delta_d2_alpha_r_d_tau_d_delta(delta, tau))^2)/(1 + 2*
-        delta_d_alpha_r_d_delta(delta, tau) + delta2_d2_alpha_r_d_delta2(delta, tau));
+      cp := specificHeatCapacityCv(state) + R*((1 +
+        delta_d_alpha_r_d_delta(delta, tau) -
+        tau_delta_d2_alpha_r_d_tau_d_delta(delta, tau))^2)/(1 + 2*
+        delta_d_alpha_r_d_delta(delta, tau) +
+        delta2_d2_alpha_r_d_delta2(delta, tau));
     elseif state.phase==2 or phase_dT==2 then
       cpl := specificHeatCapacityCv(setBubbleState(sat)) + R*((1 +
-        delta_d_alpha_r_d_delta(deltaL, tau) - tau_delta_d2_alpha_r_d_tau_d_delta(
-        deltaL, tau))^2)/(1 + 2*delta_d_alpha_r_d_delta(deltaL, tau) +
+        delta_d_alpha_r_d_delta(deltaL, tau) -
+        tau_delta_d2_alpha_r_d_tau_d_delta(deltaL, tau))^2)/(1 + 2*
+        delta_d_alpha_r_d_delta(deltaL, tau) +
         delta2_d2_alpha_r_d_delta2(deltaL, tau));
       cpv := specificHeatCapacityCv(setDewState(sat)) + R*((1 +
-        delta_d_alpha_r_d_delta(deltaG, tau) - tau_delta_d2_alpha_r_d_tau_d_delta(
-        deltaG, tau))^2)/(1 + 2*delta_d_alpha_r_d_delta(deltaG, tau) +
+        delta_d_alpha_r_d_delta(deltaG, tau) -
+        tau_delta_d2_alpha_r_d_tau_d_delta(deltaG, tau))^2)/(1 + 2*
+        delta_d_alpha_r_d_delta(deltaG, tau) +
         delta2_d2_alpha_r_d_delta2(deltaG, tau));
       cp := cpl + quality*(cpv-cpl);
     end if;
@@ -685,10 +701,13 @@ partial package PartialHybridTwoPhaseMedium
 
   algorithm
     if state.phase==1 or phase_dT==1 then
-      cv := -R*(tau2_d2_alpha_0_d_tau2(tau) + tau2_d2_alpha_r_d_tau2(delta, tau));
+      cv := -R*(tau2_d2_alpha_0_d_tau2(tau) +
+        tau2_d2_alpha_r_d_tau2(delta, tau));
     elseif state.phase==2 or phase_dT==2 then
-      cvl := -R*(tau2_d2_alpha_0_d_tau2(tau) + tau2_d2_alpha_r_d_tau2(deltaL, tau));
-      cvv := -R*(tau2_d2_alpha_0_d_tau2(tau) + tau2_d2_alpha_r_d_tau2(deltaG, tau));
+      cvl := -R*(tau2_d2_alpha_0_d_tau2(tau) +
+        tau2_d2_alpha_r_d_tau2(deltaL, tau));
+      cvv := -R*(tau2_d2_alpha_0_d_tau2(tau) +
+        tau2_d2_alpha_r_d_tau2(deltaG, tau));
       cv := cvl + quality*(cvv-cvl);
     end if;
   end specificHeatCapacityCv;
@@ -719,18 +738,21 @@ partial package PartialHybridTwoPhaseMedium
   algorithm
     if state.phase==1 or phase_dT==1 then
         a := (R*state.T*(1+2*delta_d_alpha_r_d_delta(delta,tau)+
-          delta2_d2_alpha_r_d_delta2(delta,tau)-(1+delta_d_alpha_r_d_delta(delta,tau)-
-          tau_delta_d2_alpha_r_d_tau_d_delta(delta,tau))^2/(tau2_d2_alpha_0_d_tau2(tau)
-          +tau2_d2_alpha_r_d_tau2(delta,tau))))^0.5;
+          delta2_d2_alpha_r_d_delta2(delta,tau)-(1+
+          delta_d_alpha_r_d_delta(delta,tau)-
+          tau_delta_d2_alpha_r_d_tau_d_delta(delta,tau))^2/(
+          tau2_d2_alpha_0_d_tau2(tau)+tau2_d2_alpha_r_d_tau2(delta,tau))))^0.5;
     elseif state.phase==2 or phase_dT==2 then
         aG := (R*state.T*(1+2*delta_d_alpha_r_d_delta(deltaL,tau)+
-          delta2_d2_alpha_r_d_delta2(deltaL,tau)-(1+delta_d_alpha_r_d_delta(deltaL,tau)-
-          tau_delta_d2_alpha_r_d_tau_d_delta(deltaL,tau))^2/(tau2_d2_alpha_0_d_tau2(tau)+
-          tau2_d2_alpha_r_d_tau2(deltaL,tau))))^0.5;
+          delta2_d2_alpha_r_d_delta2(deltaL,tau)-(1+
+          delta_d_alpha_r_d_delta(deltaL,tau)-
+          tau_delta_d2_alpha_r_d_tau_d_delta(deltaL,tau))^2/(
+          tau2_d2_alpha_0_d_tau2(tau)+tau2_d2_alpha_r_d_tau2(deltaL,tau))))^0.5;
         aL := (R*state.T*(1+2*delta_d_alpha_r_d_delta(deltaG,tau)+
-          delta2_d2_alpha_r_d_delta2(deltaG,tau)-(1+delta_d_alpha_r_d_delta(deltaG,tau)-
-          tau_delta_d2_alpha_r_d_tau_d_delta(deltaG,tau))^2/(tau2_d2_alpha_0_d_tau2(tau)+
-          tau2_d2_alpha_r_d_tau2(deltaG,tau))))^0.5;
+          delta2_d2_alpha_r_d_delta2(deltaG,tau)-(1+
+          delta_d_alpha_r_d_delta(deltaG,tau)-
+          tau_delta_d2_alpha_r_d_tau_d_delta(deltaG,tau))^2/(
+          tau2_d2_alpha_0_d_tau2(tau)+tau2_d2_alpha_r_d_tau2(deltaG,tau))))^0.5;
         a:=aL + quality*(aG-aL);
     end if;
   end velocityOfSound;
@@ -755,7 +777,8 @@ partial package PartialHybridTwoPhaseMedium
 
   algorithm
      if state.phase==1 or phase_dT==1 then
-       beta := -1/state.d * pressure_derT_d(state) * pressure_derd_T(state)^(-1);
+       beta := -1/state.d * pressure_derT_d(state) *
+         pressure_derd_T(state)^(-1);
      elseif state.phase==2 or phase_dT==2 then
        betal := -1/bubbleDensity(sat) * pressure_derT_d(setBubbleState(sat)) *
          pressure_derd_T(setBubbleState(sat))^(-1);
@@ -785,11 +808,12 @@ partial package PartialHybridTwoPhaseMedium
 
   algorithm
      if state.phase==1 or phase_dT==1 then
-       kappa := -1/state.d *  pressure_derd_T(state)^(-1);
+      kappa := -1/state.d *  pressure_derd_T(state)^(-1);
      elseif state.phase==2 or phase_dT==2 then
-       kappal := -1/bubbleDensity(sat) * pressure_derd_T(setBubbleState(sat))^(-1);
-       kappav := -1/dewDensity(sat) * pressure_derd_T(setDewState(sat))^(-1);
-       kappa := kappal + quality*(kappav-kappal);
+      kappal := -1/bubbleDensity(sat) *
+        pressure_derd_T(setBubbleState(sat))^(-1);
+      kappav := -1/dewDensity(sat) * pressure_derd_T(setDewState(sat))^(-1);
+      kappa := kappal + quality*(kappav-kappal);
      end if;
   end isothermalCompressibility;
 
@@ -857,11 +881,11 @@ partial package PartialHybridTwoPhaseMedium
      end if;
   end jouleThomsonCoefficient;
 
+
   /*Provide functions to calculate thermodynamic properties depending on the
     independent variables. Moreover, these functions may depend on the Helmholtz
     EoS. Just change these functions if needed.
   */
-
   redeclare replaceable function temperature_ph
   "Calculates temperature as function of pressure and specific enthalpy"
     extends Modelica.Icons.Function;
@@ -936,7 +960,8 @@ partial package PartialHybridTwoPhaseMedium
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";
     input SpecificEntropy s "Specific entropy";
-    input FixedPhase phase = 0 "2 for two-phase, 1 for one-phase, 0 if not known";
+    input FixedPhase phase = 0
+      "2 for two-phase, 1 for one-phase, 0 if not known";
     output Temperature T "Temperature";
 
   protected
@@ -1016,8 +1041,8 @@ partial package PartialHybridTwoPhaseMedium
     Real tau = T_crit/T;
 
     SaturationProperties sat = setSat_T(T);
-    Real phase_dT = if not ((d < bubbleDensity(sat) and d > dewDensity(sat)) and T
-         < fluidConstants[1].criticalTemperature) then 1 else 2;
+    Real phase_dT = if not ((d < bubbleDensity(sat) and d > dewDensity(sat))
+      and T < fluidConstants[1].criticalTemperature) then 1 else 2;
 
   algorithm
     if phase_dT == 1 or phase == 1 then
@@ -1036,7 +1061,8 @@ partial package PartialHybridTwoPhaseMedium
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";
     input Temperature T "Temperature";
-    input FixedPhase phase = 0 "2 for two-phase, 1 for one-phase, 0 if not known";
+    input FixedPhase phase = 0
+      "2 for two-phase, 1 for one-phase, 0 if not known";
     output Density d "Density";
 
   protected
@@ -1081,9 +1107,9 @@ partial package PartialHybridTwoPhaseMedium
       d := d2;
     else
         if p<sat.psat then
-          d := bubbleDensity(sat)*(1 - (sat.psat - p)/dp) + d1*(sat.psat - p)/dp;
+          d := bubbleDensity(sat)*(1 -(sat.psat - p)/dp) + d1*(sat.psat - p)/dp;
         elseif p>=sat.psat then
-          d := dewDensity(sat)*(1 - (p - sat.psat)/dp) + d2*(p - sat.psat)/dp;
+          d := dewDensity(sat)*(1 -(p - sat.psat)/dp) + d2*(p - sat.psat)/dp;
         end if;
     end if;
   annotation(inverse(p=pressure_dT(d=d,T=T,phase=phase)),
@@ -1096,7 +1122,8 @@ partial package PartialHybridTwoPhaseMedium
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";
     input SpecificEnthalpy h "Specific enthalpy";
-    input FixedPhase phase = 0 "2 for two-phase, 1 for one-phase, 0 if not known";
+    input FixedPhase phase = 0
+      "2 for two-phase, 1 for one-phase, 0 if not known";
     output Density d "Density";
 
   protected
@@ -1134,7 +1161,8 @@ partial package PartialHybridTwoPhaseMedium
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";
     input SpecificEntropy s "Specific entropy";
-    input FixedPhase phase = 0 "2 for two-phase, 1 for one-phase, 0 if not known";
+    input FixedPhase phase = 0
+      "2 for two-phase, 1 for one-phase, 0 if not known";
     output Density d "Temperature";
 
   protected
@@ -1153,10 +1181,12 @@ partial package PartialHybridTwoPhaseMedium
     else
       if s<s_bubble then
         d:=bubbleDensity(sat)*(1 - (s_bubble - s)/ds) + density_pT(
-          p=p,T=temperature_ps(p=p,s=s,phase=phase),phase=phase)*(s_bubble - s)/ds;
+          p=p,T=temperature_ps(p=p,s=s,phase=phase),phase=phase)*
+          (s_bubble - s)/ds;
       elseif s>s_dew then
         d:=dewDensity(sat)*(1 - (s - s_dew)/ds) + density_pT(
-          p=p,T=temperature_ps(p=p,s=s,phase=phase),phase=phase)*(s - s_dew)/ds;
+          p=p,T=temperature_ps(p=p,s=s,phase=phase),phase=phase)*
+          (s - s_dew)/ds;
       else
         d:=1/((1-(s-s_bubble)/(s_dew-s_bubble))/bubbleDensity(sat) +
           ((s-s_bubble)/(s_dew-s_bubble))/dewDensity(sat));
@@ -1171,7 +1201,8 @@ partial package PartialHybridTwoPhaseMedium
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";
     input Temperature T "Temperature";
-    input FixedPhase phase = 0 "2 for two-phase, 1 for one-phase, 0 if not known";
+    input FixedPhase phase = 0
+      "2 for two-phase, 1 for one-phase, 0 if not known";
     output SpecificEnthalpy h "Specific enthalpy";
 
   algorithm
@@ -1201,8 +1232,8 @@ partial package PartialHybridTwoPhaseMedium
     Real bubbleDelta = bubbleDensity(sat)/(d_crit*MM);
 
     SaturationProperties sat = setSat_T(T);
-    Real phase_dT = if not ((d < bubbleDensity(sat) and d > dewDensity(sat)) and T
-      < fluidConstants[1].criticalTemperature) then 1 else 2;
+    Real phase_dT = if not ((d < bubbleDensity(sat) and d > dewDensity(sat))
+      and T < fluidConstants[1].criticalTemperature) then 1 else 2;
     Real quality = if phase==2 or phase_dT==2 then (bubbleDensity(sat)/d - 1)/
       (bubbleDensity(sat)/dewDensity(sat) - 1) else 1;
     Real hl=0;
@@ -1213,8 +1244,9 @@ partial package PartialHybridTwoPhaseMedium
       h := R*T*(tau_d_alpha_0_d_tau(tau) + tau_d_alpha_r_d_tau(delta, tau) +
         delta_d_alpha_r_d_delta(delta, tau) + 1);
     elseif phase_dT == 2 or phase == 2 then
-      hl := R*T*(tau_d_alpha_0_d_tau(tau) + tau_d_alpha_r_d_tau(bubbleDelta, tau) +
-        delta_d_alpha_r_d_delta(bubbleDelta, tau) + 1);
+      hl := R*T*(tau_d_alpha_0_d_tau(tau) +
+        tau_d_alpha_r_d_tau(bubbleDelta, tau) + delta_d_alpha_r_d_delta(
+        bubbleDelta, tau) + 1);
       hv := R*T*(tau_d_alpha_0_d_tau(tau) + tau_d_alpha_r_d_tau(dewDelta, tau) +
         delta_d_alpha_r_d_delta(dewDelta, tau) + 1);
       h := hl + quality*(hv-hl);
@@ -1229,7 +1261,8 @@ partial package PartialHybridTwoPhaseMedium
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";
     input SpecificEntropy s "Specific entropy";
-    input FixedPhase phase = 0 "2 for two-phase, 1 for one-phase, 0 if not known";
+    input FixedPhase phase = 0
+      "2 for two-phase, 1 for one-phase, 0 if not known";
     output SpecificEnthalpy h "Specific enthalpy";
 
   protected
@@ -1253,10 +1286,12 @@ partial package PartialHybridTwoPhaseMedium
     else
       if s<s_bubble then
         h := h_bubble*(1 - (s_bubble - s)/ds) + specificEnthalpy_pT(
-          p=p,T=temperature_ps(p=p,s=s,phase=phase),phase=phase)*(s_bubble - s)/ds;
+          p=p,T=temperature_ps(p=p,s=s,phase=phase),phase=phase)*
+          (s_bubble - s)/ds;
       elseif s>s_dew then
         h := h_dew*(1 - (s - s_dew)/ds) + specificEnthalpy_pT(
-          p=p,T=temperature_ps(p=p,s=s,phase=phase),phase=phase)*(s - s_dew)/ds;
+          p=p,T=temperature_ps(p=p,s=s,phase=phase),phase=phase)*
+          (s - s_dew)/ds;
       else
         h := h_bubble+(s-s_bubble)/(s_dew-s_bubble)*(h_dew-h_bubble);
       end if;
@@ -1273,7 +1308,8 @@ partial package PartialHybridTwoPhaseMedium
   "Calculates time derivative of pressure_dT"
     input Density d "Density";
     input Temperature T "Temperature";
-    input FixedPhase phase = 0 "2 for two-phase, 1 for one-phase, 0 if not known";
+    input FixedPhase phase = 0
+      "2 for two-phase, 1 for one-phase, 0 if not known";
     input Real der_d "Time derivative of density";
     input Real der_T "Time derivative of temperature";
     output Real der_p "Time derivative of pressure";
@@ -1282,7 +1318,8 @@ partial package PartialHybridTwoPhaseMedium
     ThermodynamicState state = setState_dTX(d=d,T=T,phase=phase);
 
   algorithm
-    der_p := der_d*pressure_derd_T(state=state) + der_T*pressure_derT_d(state=state);
+    der_p := der_d*pressure_derd_T(state=state) + der_T*
+      pressure_derT_d(state=state);
   end pressure_dT_der;
 
   replaceable function pressure_derd_T
@@ -1301,11 +1338,11 @@ partial package PartialHybridTwoPhaseMedium
 
     SaturationProperties sat = setSat_p(state.p);
     Real phase_dT = if not ((state.d < bubbleDensity(sat) and
-      state.d > dewDensity(sat)) and state.T < fluidConstants[1].criticalTemperature)
-      then 1 else 2;
+      state.d > dewDensity(sat)) and state.T <
+      fluidConstants[1].criticalTemperature) then 1 else 2;
     Real phase_ph = if ((state.h <= bubbleEnthalpy(sat) or
-      state.h >= dewEnthalpy(sat)) or state.p > fluidConstants[1].criticalPressure)
-      then 1 else 2;
+      state.h >= dewEnthalpy(sat)) or state.p >
+      fluidConstants[1].criticalPressure) then 1 else 2;
 
   algorithm
     if state.phase==1 then
@@ -1332,11 +1369,11 @@ partial package PartialHybridTwoPhaseMedium
 
     SaturationProperties sat = setSat_p(state.p);
     Real phase_dT = if not ((state.d < bubbleDensity(sat) and
-      state.d > dewDensity(sat)) and state.T < fluidConstants[1].criticalTemperature)
-      then 1 else 2;
+      state.d > dewDensity(sat)) and state.T <
+      fluidConstants[1].criticalTemperature) then 1 else 2;
     Real phase_ph = if ((state.h <= bubbleEnthalpy(sat) or
-      state.h >= dewEnthalpy(sat)) or state.p > fluidConstants[1].criticalPressure)
-      then 1 else 2;
+      state.h >= dewEnthalpy(sat)) or state.p >
+      fluidConstants[1].criticalPressure) then 1 else 2;
 
   algorithm
     if state.phase==1 then
@@ -1363,16 +1400,17 @@ partial package PartialHybridTwoPhaseMedium
 
     SaturationProperties sat = setSat_p(state.p);
     Real phase_dT = if not ((state.d < bubbleDensity(sat) and
-        state.d > dewDensity(sat)) and state.T < fluidConstants[1].criticalTemperature)
-        then 1 else 2;
+        state.d > dewDensity(sat)) and state.T <
+        fluidConstants[1].criticalTemperature) then 1 else 2;
     Real phase_ph = if ((state.h <= bubbleEnthalpy(sat) or
-        state.h >= dewEnthalpy(sat)) or state.p > fluidConstants[1].criticalPressure)
-        then 1 else 2;
+        state.h >= dewEnthalpy(sat)) or state.p >
+        fluidConstants[1].criticalPressure) then 1 else 2;
 
   algorithm
     if state.phase==1 then
-      dThp := 1 / (specificEnthalpy_derT_d(state) - specificEnthalpy_derd_T(state)*
-        pressure_derT_d(state)/pressure_derd_T(state));
+      dThp := 1 / (specificEnthalpy_derT_d(state) -
+        specificEnthalpy_derd_T(state)*pressure_derT_d(state)/
+        pressure_derd_T(state));
     elseif state.phase==2 then
       dThp:=Modelica.Constants.small;
     end if;
@@ -1394,11 +1432,11 @@ partial package PartialHybridTwoPhaseMedium
 
     SaturationProperties sat = setSat_p(state.p);
     Real phase_dT = if not ((state.d < bubbleDensity(sat) and
-      state.d > dewDensity(sat)) and state.T < fluidConstants[1].criticalTemperature)
-      then 1 else 2;
+      state.d > dewDensity(sat)) and state.T <
+      fluidConstants[1].criticalTemperature) then 1 else 2;
     Real phase_ph = if ((state.h <= bubbleEnthalpy(sat) or
-      state.h >= dewEnthalpy(sat)) or state.p > fluidConstants[1].criticalPressure)
-      then 1 else 2;
+      state.h >= dewEnthalpy(sat)) or state.p >
+      fluidConstants[1].criticalPressure) then 1 else 2;
 
   algorithm
     if state.phase==1 then
@@ -1414,7 +1452,8 @@ partial package PartialHybridTwoPhaseMedium
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";
     input SpecificEnthalpy h "Specific enthalpy";
-    input FixedPhase phase = 0 "2 for two-phase, 1 for one-phase, 0 if not known";
+    input FixedPhase phase = 0
+      "2 for two-phase, 1 for one-phase, 0 if not known";
     input Real der_p "Time derivative of pressure";
     input Real der_h "Time derivative of specific enthalpy";
     output Real der_T "Time derivative of density";
@@ -1432,7 +1471,8 @@ partial package PartialHybridTwoPhaseMedium
 
     input AbsolutePressure p "Pressure";
     input SpecificEnthalpy h "Specific Enthalpy";
-    input FixedPhase phase = 0 "2 for two-phase, 1 for one-phase, 0 if not known";
+    input FixedPhase phase = 0
+      "2 for two-phase, 1 for one-phase, 0 if not known";
     input Real der_p "Time derivative of pressure";
     input Real der_h "Time derivative of specific enthalpy";
     output Real der_d "Time derivative of density";
@@ -1441,7 +1481,8 @@ partial package PartialHybridTwoPhaseMedium
     ThermodynamicState state = setState_phX(p=p,h=h,phase=phase);
 
   algorithm
-      der_d := der_p*density_derp_h(state=state) + der_h*density_derh_p(state=state);
+      der_d := der_p*density_derp_h(state=state) +
+      der_h*density_derh_p(state=state);
   end density_ph_der;
 
   redeclare replaceable function extends density_derh_p
@@ -1458,18 +1499,19 @@ partial package PartialHybridTwoPhaseMedium
 
     SaturationProperties sat = setSat_p(state.p);
     Real phase_dT = if not ((state.d < bubbleDensity(sat) and
-      state.d > dewDensity(sat)) and state.T < fluidConstants[1].criticalTemperature)
-      then 1 else 2;
+      state.d > dewDensity(sat)) and state.T <
+      fluidConstants[1].criticalTemperature) then 1 else 2;
     Real phase_ph = if ((state.h <= bubbleEnthalpy(sat) or
-      state.h >= dewEnthalpy(sat)) or state.p > fluidConstants[1].criticalPressure)
-      then 1 else 2;
+      state.h >= dewEnthalpy(sat)) or state.p >
+      fluidConstants[1].criticalPressure) then 1 else 2;
 
     AbsolutePressure dp = 0.2;
 
   algorithm
     if state.phase==1 then
-      ddhp := 1 / (specificEnthalpy_derd_T(state) - specificEnthalpy_derT_d(state)*
-        pressure_derd_T(state)/pressure_derT_d(state));
+      ddhp := 1 / (specificEnthalpy_derd_T(state) -
+        specificEnthalpy_derT_d(state)*pressure_derd_T(state)/
+        pressure_derT_d(state));
     elseif state.phase==2 then
       ddhp:=-(state.d^2)/state.T*(saturationTemperature(state.p+dp/2)-
         saturationTemperature(state.p-dp/2))/dp;
@@ -1549,17 +1591,18 @@ partial package PartialHybridTwoPhaseMedium
 
     SaturationProperties sat = setSat_p(state.p);
     Real phase_dT = if not ((state.d < bubbleDensity(sat) and
-      state.d > dewDensity(sat)) and state.T < fluidConstants[1].criticalTemperature)
-      then 1 else 2;
+      state.d > dewDensity(sat)) and state.T <
+      fluidConstants[1].criticalTemperature) then 1 else 2;
     Real phase_ph = if ((state.h <= bubbleEnthalpy(sat) or
-      state.h >= dewEnthalpy(sat)) or state.p > fluidConstants[1].criticalPressure)
-      then 1 else 2;
+      state.h >= dewEnthalpy(sat)) or state.p >
+      fluidConstants[1].criticalPressure) then 1 else 2;
 
   algorithm
     if state.phase==1 then
       dhTd := R*(-tau2_d2_alpha_0_d_tau2(tau=tau) - tau2_d2_alpha_r_d_tau2(
-        delta=delta, tau=tau) + 1 + delta_d_alpha_r_d_delta(delta=delta,tau=tau) -
-        tau_delta_d2_alpha_r_d_tau_d_delta(delta=delta, tau=tau));
+        delta=delta, tau=tau) + 1 + delta_d_alpha_r_d_delta(
+        delta=delta,tau=tau) - tau_delta_d2_alpha_r_d_tau_d_delta(
+        delta=delta, tau=tau));
     elseif state.phase==2 then
       dhTd:=Modelica.Constants.inf;
     end if;
@@ -1581,11 +1624,11 @@ partial package PartialHybridTwoPhaseMedium
 
     SaturationProperties sat = setSat_p(state.p);
     Real phase_dT = if not ((state.d < bubbleDensity(sat) and
-        state.d > dewDensity(sat)) and state.T < fluidConstants[1].criticalTemperature)
-        then 1 else 2;
+        state.d > dewDensity(sat)) and state.T <
+        fluidConstants[1].criticalTemperature) then 1 else 2;
     Real phase_ph = if ((state.h <= bubbleEnthalpy(sat) or
-        state.h >= dewEnthalpy(sat)) or state.p > fluidConstants[1].criticalPressure)
-        then 1 else 2;
+        state.h >= dewEnthalpy(sat)) or state.p >
+        fluidConstants[1].criticalPressure) then 1 else 2;
 
   algorithm
     if state.phase==1 then
@@ -1605,8 +1648,8 @@ partial package PartialHybridTwoPhaseMedium
     ThermodynamicState state_l = setBubbleState(sat);
     ThermodynamicState state_v = setDewState(sat);
     Real dhpT = specificEnthalpy_derd_T(state_l)/pressure_derd_T(state_l);
-    Real dhTp = specificEnthalpy_derT_d(state_l) - specificEnthalpy_derd_T(state_l)*
-      pressure_derT_d(state_l)/pressure_derd_T(state_l);
+    Real dhTp = specificEnthalpy_derT_d(state_l) - specificEnthalpy_derd_T(
+      state_l)*pressure_derT_d(state_l)/pressure_derd_T(state_l);
     Real dTp = (1/state_v.d - 1/state_l.d)/
       (specificEntropy(state_v) - specificEntropy(state_l));
 
@@ -1621,8 +1664,8 @@ partial package PartialHybridTwoPhaseMedium
     ThermodynamicState state_l = setBubbleState(sat);
     ThermodynamicState state_v = setDewState(sat);
     Real dhpT = specificEnthalpy_derd_T(state_v)/pressure_derd_T(state_v);
-    Real dhTp = specificEnthalpy_derT_d(state_v) - specificEnthalpy_derd_T(state_v)*
-      pressure_derT_d(state_v)/pressure_derd_T(state_v);
+    Real dhTp = specificEnthalpy_derT_d(state_v) - specificEnthalpy_derd_T(
+      state_v)*pressure_derT_d(state_v)/pressure_derd_T(state_v);
     Real dTp=(1.0/state_v.d - 1.0/state_l.d)/
       (specificEntropy(state_v) - specificEntropy(state_l));
 
@@ -1638,27 +1681,96 @@ partial package PartialHybridTwoPhaseMedium
   </li>
 </ul>
 </html>", info="<html>
-<p>A detailed documentation will follow later.</p>
-<ul>
-<li>Which approach is provided?</li>
-<li>Source?</li>
-<li>Why hybrid? (Polynomial fits and Helmholtz EoS)</li>
-</ul>
-<p><b>Main equations</b> </p>
-<p>xxx </p>
-<p><b>Assumptions and limitations</b> </p>
-<p>xxx </p>
-<p><b>Typical use and important parameters</b> </p>
-<p>xxx </p>
-<p><b>Options</b> </p>
-<p>xxx </p>
-<p><b>Dynamics</b> </p>
-<p>Describe which states and dynamics are present in the model and which parameters may be used to influence them. This need not be added in partial classes. </p>
-<p><b>Validation</b> </p>
-<p>Describe whether the validation was done using analytical validation, comparative model validation or empirical validation. </p>
-<p><b>Implementation</b> </p>
-<p>xxx </p>
+<p>This package provides the implementation of a refrigerant modelling approach using a hybrid approach. The hybrid approach is developed by Sangi et al. and consists of both the Helmholtz equation of state and fitted formula for thermodynamic state properties at bubble or dew line (e.g. p<sub>sat</sub> or h<sub>l,sat</sub>) and thermodynamic state properties depending on two independent state properties (e.g. T_ph or T_ps). In the following, the basic formulas of the hybrid approach are given.</p>
+<p><b>The Helmholtz equation of state</b></p>
+<p>The Helmholtz equation of state (EoS) allows the accurate description of fluids&apos; thermodynamic behaviour and uses the Helmholtz energy as fundamental thermodynamic relation with temperature and density as independent variables. Furthermore, the EoS allows determining all thermodynamic state properties from its partial derivatives and its<b> general formula</b> is given below:</p>
+<p align=\"center\"><img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/Helmholtz_EoS.png\"/></p>
+<p>As it can be seen, the general formula of the EoS can be divided in two part: The <b>ideal gas part (left summand) </b>and the <b>residual part (right summand)</b>. Both parts&apos; formulas are given below:</p>
+<p align=\"center\"><img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/Helmholtz_IdealGasPart.png\"/></p>
+<p align=\"center\"><img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/Helmholtz_ResidualPart.png\"/></p>
+<p><br>Both, the ideal gas part and the residual part can be divided in three subparts (i.e. the summations) that contain different coefficients (e.g. nL, l<sub>i</sub>, p<sub>i</sub> or e<sub>i</sub>). These coefficients are fitting coefficients and must be obtained during a fitting procedure. While the fitting procedure, the general formula of the EoS is fitted to external data (e.g. NIST Refprop 9.1) and the fitting coefficients are determined. In order to keep the package clear and easy to extend, the fitting coefficients are stored in records inherited from the base data definition <a href=\"modelica://AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition\">AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition</a>.</p>
+<p>For further information of <b>the EoS and its partial derivatives</b>, please read the paper &QUOT;<a href=\"http://www.ep.liu.se/ecp/076/006/ecp12076006.pdf\">HelmholtzMedia - A fluid properties library</a>&QUOT; by Thorade and Saadat as well as the paper &QUOT;<a href=\"http://gfzpublic.gfz-potsdam.de/pubman/item/escidoc:247373:5/component/escidoc:306833/247373.pdf\">Partial derivatives of thermodynamic state properties for dynamic simulation</a>&QUOT; by Thorade and Saadat.</p>
+<p><b>Fitted formulas</b></p>
+<p>Fitted formulas allow to reduce the overall computing time of the refrigerant model. Therefore, both thermodynamic state properties at bubble and dew line and thermodynamic state properties depending on two independent state properties are expresses as fitted formulas. The fitted formulas&apos; approaches implemented in this package are developed by Sangi et al. within their &QUOT;Fast_Propane&QUOT; model and given below:<br></p>
+<table cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"80%\"><tr>
+<td valign=\"middle\"><p><i>Saturation pressure</i></p></td>
+<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/SaturationPressure.png\"/></p></td>
+</tr>
+<tr>
+<td valign=\"middle\"><p><i>Saturation temperature</i></p></td>
+<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/SaturationTemperature.png\"/></p></td>
+</tr>
+<tr>
+<td valign=\"middle\"><p><i>Bubble density</i></p></td>
+<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/BubbleDensity.png\"/></p></td>
+</tr>
+<tr>
+<td valign=\"middle\"><p><i>Dew density</i></p></td>
+<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/DewDensity.png\"/></p></td>
+</tr>
+<tr>
+<td valign=\"middle\"><p><i>Bubble Enthalpy</i></p></td>
+<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/BubbleEnthalpy.png\"/></p></td>
+</tr>
+<tr>
+<td valign=\"middle\"><p><i>Dew Enthalpy</i></p></td>
+<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/DewEnthalpy.png\"/></p></td>
+</tr>
+<tr>
+<td valign=\"middle\"><p><i>Bubble Entropy</i></p></td>
+<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/BubbleEntropy.png\"/></p></td>
+</tr>
+<tr>
+<td valign=\"middle\"><p><i>Dew Entropy</i></p></td>
+<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/DewEntropy.png\"/></p></td>
+</tr>
+</table>
+<br>
+<table cellspacing=\"0\" cellpadding=\"3\" border=\"1\" width=\"80%\"><tr>
+<td rowspan=\"2\" valign=\"middle\"><p><i>Temperature_ph</i></p></td>
+<td valign=\"middle\"><p>First Input</p></td>
+<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/Temperature_ph_Input1.png\"/></p></td>
+</tr>
+<tr>
+<td valign=\"middle\"><p>Second Input</p></td>
+<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/Temperature_ph_Input2.png\"/></p></td>
+</tr>
+<tr>
+<td rowspan=\"2\" valign=\"middle\"><p><i>Temperature_ps</i></p></td>
+<td valign=\"middle\"><p>First Input</p></td>
+<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/Temperature_ps_Input1.png\"/></p></td>
+</tr>
+<tr>
+<td valign=\"middle\"><p>Second Input</p></td>
+<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/Temperature_ps_Input2.png\"/></p></td>
+</tr>
+<tr>
+<td rowspan=\"2\" valign=\"middle\"><p><i>Density_pT</i></p></td>
+<td valign=\"middle\"><p>First Input</p></td>
+<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/Density_pT_Input1.png\"/></p></td>
+</tr>
+<tr>
+<td valign=\"middle\"><p>Second Input</p></td>
+<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/Density_pT_Input2.png\"/></p></td>
+</tr>
+<tr>
+<td valign=\"middle\"><p><i>Functional approach</i></p></td>
+<td colspan=\"2\" valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/StateProperties_Approach.png\"/></p></td>
+</tr>
+</table>
+<p>As it can be seen, the fitted formulas consist basically of the coefficients e<sub>i</sub>, c<sub>i</sub> as well as of the parameters Mean<sub>i</sub> and Std<sub>i</sub>. These coefficients are the fitting coefficients and must be obtained during a fitting procedure. While the fitting procedure, the formulas presented above are fitted to external data (e.g. NIST Refprop 9.1) and the fitting coefficients are determined. In order to keep the package clear and easy to extend, the fitting coefficients are stored in records inherited from the base data definition <a href=\"modelica://AixLib.DataBase.Media.Refrigerants.BubbleDewStatePropertiesBaseDataDefinition\">AixLib.DataBase.Media.Refrigerants.BubbleDewStatePropertiesBaseDataDefinition</a> and <a href=\"modelica://AixLib.DataBase.Media.Refrigerants.ThermodynamicStatePropertiesBaseDataDefinition\">AixLib.DataBase.Media.Refrigerants.ThermodynamicStatePropertiesBaseDataDefinition</a>.</p>
+<p>For further information of <b>the hybrid approach</b>, please read the paper &QUOT;<a href=\"http://dx.doi.org/10.3384/ecp14096\">A Medium Model for the Refrigerant Propane for Fast and Accurate Dynamic Simulations</a>&QUOT; by Sangi et al..</p>
+<p><b>Assumptions and limitations</b></p>
+<p>Two limitations are known for this package:</p>
+<ol>
+<li>The modelling approach implemented in this package is a hybrid approach and, therefore, is based on the Helmholtz equation of state as well as on fitted formula. Hence, the refrigerant model is just valid within the valid range of the fitted formula.</li>
+<li>It may be possible to have discontinuities when moving from one region to another (e.g. from supercooled region to two-phase region). However, functions are implemented to reach a smooth transition between the regions and to avoid these discontinuities as far as possible. (Sangi et al., 2014)</li>
+</ol>
+<p><b>Typical use and important parameters</b></p>
+<p>The refrigerant models provided in this package are typically used for heat pumps and refrigerating machines. However, it is just a partial package and, hence, it must be completed before usage. In order to allow an easy completion of the package, a template is provided in <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMedium\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMedium</a>.</p>
 <p><b>References</b> </p>
-<p>xxx </p>
+<p>Thorade, Matthis; Saadat, Ali (2012): <a href=\"http://www.ep.liu.se/ecp/076/006/ecp12076006.pdf\">HelmholtzMedia - A fluid properties library</a>. In: <i>Proceedings of the 9th International Modelica Conference</i>; September 3-5; 2012; Munich; Germany. Link&ouml;ping University Electronic Press, S. 63&ndash;70.</p>
+<p>Thorade, Matthis; Saadat, Ali (2013): <a href=\"http://gfzpublic.gfz-potsdam.de/pubman/item/escidoc:247373:5/component/escidoc:306833/247373.pdf\">Partial derivatives of thermodynamic state properties for dynamic simulation</a>. In:<i> Environmental earth sciences 70 (8)</i>, S. 3497&ndash;3503.</p>
+<p>Sangi, Roozbeh; Jahangiri, Pooyan; Klasing, Freerk; Streblow, Rita; M&uuml;ller, Dirk (2014): <a href=\"http://dx.doi.org/10.3384/ecp14096\">A Medium Model for the Refrigerant Propane for Fast and Accurate Dynamic Simulations</a>. In: <i>The 10th International Modelica Conference</i>. Lund, Sweden, March 10-12, 2014: Link&ouml;ping University Electronic Press (Link&ouml;ping Electronic Conference Proceedings), S. 1271&ndash;1275</p>
 </html>"));
 end PartialHybridTwoPhaseMedium;
