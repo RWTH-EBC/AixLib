@@ -46,4 +46,34 @@ record TSP_Sangi "Record with fitting coefficients taken from the Fast_Propane
     density_pT_iO={382099.574228781,307.564799259815,403596.556578661,22.5879133275781,
         1682457.51267010,290.645659315997,720642.233056887,19.9347318052857});
 
+  annotation (Documentation(revisions="<html>
+<ul>
+  <li>
+  June 10, 2017, by Mirko Engelpracht:<br/>
+  First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
+  </li>
+</ul>
+</html>", info="<html>
+<p>In this record, fitting coefficients are provided for the Helmholtz equation of state (EoS). For detailed information of the EoS as well as the fitting coefficients, please checkout <a href=\"modelica://AixLib.DataBase.Media.Refrigerants.ThermodynamicStatePropertiesBaseDataDefinition\">AixLib.DataBase.Media.Refrigerants.ThermodynamicStatePropertiesBaseDataDefinition</a>. The fitting coefficients are used in a hybrid refrigerant model provided in <a href=\"modelica://AixLib.Media.Refrigerants\">AixLib.Media.Refrigerants</a>. For detailed information, please checkout <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMedium\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMedium</a>.</p>
+<p><b>Assumptions and limitations</b></p>
+<p>The provided coefficients are fitted to external data by Sangi et al. and are valid within the following range:<br></p>
+<table cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"30%\"><tr>
+<td><p>Parameter</p></td>
+<td><p>Minimum Value</p></td>
+<td><p>Maximum Value</p></td>
+</tr>
+<tr>
+<td><p>Pressure (p) in bar</p></td>
+<td><p>0.5</p></td>
+<td><p>30</p></td>
+</tr>
+<tr>
+<td><p>Temperature (T) in K</p></td>
+<td><p>263.15</p></td>
+<td><p>343.15</p></td>
+</tr>
+</table>
+<p><b>References</b></p>
+<p>Sangi, Roozbeh; Jahangiri, Pooyan; Klasing, Freerk; Streblow, Rita; M&uuml;ller, Dirk (2014): <a href=\"http://dx.doi.org/10.3384/ecp14096\">A Medium Model for the Refrigerant Propane for Fast and Accurate Dynamic Simulations</a>. In: <i>The 10th International Modelica Conference</i>. Lund, Sweden, March 10-12, 2014: Link&ouml;ping University Electronic Press (Link&ouml;ping Electronic Conference Proceedings), S. 1271&ndash;1275</p>
+</html>"));
 end TSP_Sangi;
