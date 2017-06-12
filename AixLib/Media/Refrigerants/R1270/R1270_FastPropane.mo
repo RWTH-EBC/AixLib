@@ -1,6 +1,6 @@
 within AixLib.Media.Refrigerants.R1270;
 package R1270_FastPropane
-  "Refrigerant model developed by Sangi et al.for R1270 using the hybrid 
+  "Refrigerant model developed by Sangi et al. for R1270 using a hybrid 
   approach"
 
   /*Provide basic definitions of the refrigerant. Therefore, fill constants
@@ -455,4 +455,37 @@ package R1270_FastPropane
     AbsolutePressure dp = 0.2;
   end density_derh_p;
 
+  annotation (Documentation(revisions="<html>
+<ul>
+  <li>
+  June 12, 2017, by Mirko Engelpracht:<br/>
+  First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
+  </li>
+</ul>
+</html>", info="<html>
+<p>This package provides a refrigerant model for R1270 using a hybrid approach developed by Sangi et al.. The hybrid approach is implemented in <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMedium\">AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMedium</a> and the refrigerant model is implemented by complete the template <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMedium\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMedium</a>. The fitting coefficients required in the template are saved in the package <a href=\"modelica://AixLib.DataBase.Media.Refrigerants.R1270\">AixLib.DataBase.Media.Refrigerants.R1270</a>.</p>
+<p><b>Assumptions and limitations</b> </p>
+<p>The implemented coefficients are fitted to external data by Sangi et al. and are valid within the following range:<br></p>
+<table cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"30%\"><tr>
+<td><p>Parameter</p></td>
+<td><p>Minimum Value</p></td>
+<td><p>Maximum Value</p></td>
+</tr>
+<tr>
+<td><p>Pressure (p) in bar</p></td>
+<td><p>0.5</p></td>
+<td><p>30</p></td>
+</tr>
+<tr>
+<td><p>Temperature (T) in K</p></td>
+<td><p>263.15</p></td>
+<td><p>343.15</p></td>
+</tr>
+</table>
+<p><b>Validation</b> </p>
+<p>Sangi et al. validated their model by comparing it to results obtained from the Helmholtz. They found out that relative error of the refrigerant model compared to HelmholtzMedia (Thorade and Saadat, 2012) is close to zero.</p>
+<p><b>References</b> </p>
+<p>Thorade, Matthis; Saadat, Ali (2012): <a href=\"http://www.ep.liu.se/ecp/076/006/ecp12076006.pdf\">HelmholtzMedia - A fluid properties library</a>. In: <i>Proceedings of the 9th International Modelica Conference</i>; September 3-5; 2012; Munich; Germany. Link&ouml;ping University Electronic Press, S. 63&ndash;70.</p>
+<p>Sangi, Roozbeh; Jahangiri, Pooyan; Klasing, Freerk; Streblow, Rita; M&uuml;ller, Dirk (2014): <a href=\"http://dx.doi.org/10.3384/ecp14096\">A Medium Model for the Refrigerant Propane for Fast and Accurate Dynamic Simulations</a>. In: <i>The 10th International Modelica Conference</i>. Lund, Sweden, March 10-12, 2014: Link&ouml;ping University Electronic Press (Link&ouml;ping Electronic Conference Proceedings), S. 1271&ndash;1275</p>
+</html>"));
 end R1270_FastPropane;
