@@ -1,5 +1,5 @@
 within AixLib.Media.Refrigerants;
-package R1270 "Package with models for refrigerant R1270"
+package R1270 "Package with models refrigerant R1270"
   extends Modelica.Icons.VariantsPackage;
 
   annotation (Documentation(info="<html>

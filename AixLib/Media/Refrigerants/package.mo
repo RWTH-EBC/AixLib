@@ -8,23 +8,24 @@ package Refrigerants "Package with models for different refrigerants"
 
 
   annotation (Documentation(info="<html>
-<p>A detailed documentation will follow later. </p>
-<ul>
-<li>What is implemented so far?</li>
-<li>e.g. Approaches and refrigerants</li>
-<li>e.g. Limitations for implemented refrigerants</li>
-<li>Main references?</li>
-</ul>
+<p>This package contains models for different refrigerants. The models are based on hybrid approach developed by Sangi et al. and use both the Helmholtz equation of state (EoS) and fitted formula for thermodynamic state properties at bubble or dew line (e.g. p<sub>sat</sub> or h<sub>l,sat</sub>) and thermodynamic state properties depending on two independent state properties (e.g. T_ph or T_ps).</p>
+<p>The hybrid approach is implemented in the package <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMedium\">AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMedium</a> and the fitting coefficients are stored in records in the package <a href=\"modelica://AixLib.DataBase.Media.Refrigerants\">AixLib.DataBase.Media.Refrigerants</a>. In order to allow an easy extension, a template for new refrigerant models using the hybrid approach is provided in <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMedium\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMedium</a>.</p>
+<p>Currently, the <b>following refrigerants are implemented</b>:</p>
+<ol>
+<li>R134a</li>
+<li>R410a</li>
+<li>R718</li>
+<li>R1270</li>
+</ol>
+<p>For further information of <b>the EoS and its partial derivatives</b>, please read the paper &QUOT;<a href=\"http://www.ep.liu.se/ecp/076/006/ecp12076006.pdf\">HelmholtzMedia - A fluid properties library</a>&QUOT; by Thorade and Saadat as well as the paper &QUOT;<a href=\"http://gfzpublic.gfz-potsdam.de/pubman/item/escidoc:247373:5/component/escidoc:306833/247373.pdf\">Partial derivatives of thermodynamic state properties for dynamic simulation</a>&QUOT; by Thorade and Saadat. For further information of <b>the hybrid approach</b>, please read the paper &QUOT;<a href=\"http://dx.doi.org/10.3384/ecp14096\">A Medium Model for the Refrigerant Propane for Fast and Accurate Dynamic Simulations</a>&QUOT; by Sangi et al..</p>
 <p><b>Assumptions and limitations</b> </p>
-<p>xxx </p>
+<p>The refrigerant models in this package are using a hybrid approach and, therefore, are based on the Helmholtz equation of state as well as on fitted formula. Hence, the refrigerant models are just valid within the valid range of the fitted formula. To find out the valid range of each refrigerant model, please checkout its information.</p>
 <p><b>Typical use and important parameters</b> </p>
-<p>xxx </p>
-<p><b>Dynamics</b> </p>
-<p>Describe which states and dynamics are present in the model and which parameters may be used to influence them. This need not be added in partial classes. </p>
-<p><b>Validation</b> </p>
-<p>Describe whether the validation was done using analytical validation, comparative model validation or empirical validation. </p>
+<p>The refrigerant models provided in this package are typically used for heat pumps and refrigerating machines.</p>
 <p><b>References</b> </p>
-<p>xxx </p>
+<p>Thorade, Matthis; Saadat, Ali (2012): <a href=\"http://www.ep.liu.se/ecp/076/006/ecp12076006.pdf\">HelmholtzMedia - A fluid properties library</a>. In: <i>Proceedings of the 9th International Modelica Conference</i>; September 3-5; 2012; Munich; Germany. Link&ouml;ping University Electronic Press, S. 63&ndash;70.</p>
+<p>Thorade, Matthis; Saadat, Ali (2013): <a href=\"http://gfzpublic.gfz-potsdam.de/pubman/item/escidoc:247373:5/component/escidoc:306833/247373.pdf\">Partial derivatives of thermodynamic state properties for dynamic simulation</a>. In:<i> Environmental earth sciences 70 (8)</i>, S. 3497&ndash;3503.</p>
+<p>Sangi, Roozbeh; Jahangiri, Pooyan; Klasing, Freerk; Streblow, Rita; M&uuml;ller, Dirk (2014): <a href=\"http://dx.doi.org/10.3384/ecp14096\">A Medium Model for the Refrigerant Propane for Fast and Accurate Dynamic Simulations</a>. In: <i>The 10th International Modelica Conference</i>. Lund, Sweden, March 10-12, 2014: Link&ouml;ping University Electronic Press (Link&ouml;ping Electronic Conference Proceedings), S. 1271&ndash;1275</p>
 </html>", revisions="<html>
 <ul>
   <li>
