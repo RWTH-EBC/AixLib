@@ -2,64 +2,17 @@ within AixLib.Media.Refrigerants.Examples;
 model RefrigerantDerivativeCheck
   "Model that tests the derivative implementation"
   extends Modelica.Icons.Example;
-
-  // Define the refrigerant that shall be tested
-  package Medium = AixLib.Media.Refrigerant.R1270.R1270_FastPropane;
-
-  // Define the fluid limits of the medium that shall be tested
-  parameter Modelica.SIunits.SpecificEnthalpy h_min = 1;
-  parameter Modelica.SIunits.SpecificEnthalpy h_max = 1;
-  parameter Modelica.SIunits.Density d_min = 1;
-  parameter Modelica.SIunits.Density d_max = 1;
-  parameter Modelica.SIunits.AbsolutePressure p_min = 1;
-  parameter Modelica.SIunits.AbsolutePressure p_max = 1;
-  parameter Modelica.SIunits.Temperature T_min = 1;
-  parameter Modelica.SIunits.Temperature T_max = 1;
-
-  // Define variables that shall be tested
-  Modelica.SIunits.Temperature T "Temperature";
-  Modelica.SIunits.SpecificEnthalpy hLiqSym "Liquid phase enthalpy";
-  Modelica.SIunits.SpecificEnthalpy hLiqCod "Liquid phase enthalpy";
-  Modelica.SIunits.SpecificHeatCapacity cpSym "Specific heat capacity";
-  Modelica.SIunits.SpecificHeatCapacity cpCod "Specific heat capacity";
-  Modelica.SIunits.SpecificHeatCapacity cvSym "Specific heat capacity";
-  Modelica.SIunits.SpecificHeatCapacity cvCod "Specific heat capacity";
-
-  // Define the conversion factor for the test
-  constant Real convT(unit="K/s3") = 100
-  "Conversion factor to satisfy unit check";
-
-initial equation
-     hLiqSym = hLiqCod;
-     cpSym   = cpCod;
-     cvSym   = cvCod;
-
+  extends AixLib.Media.Examples.BaseClasses.FluidProperties(
+    redeclare package Medium =
+        AixLib.Media.Refrigerants.R1270.R1270_FastPropane,
+    TMin=273.15,
+    TMax=373.15);
 equation
-    T = 273.15 + convT * time^3;
-    hLiqCod = Medium.enthalpyOfLiquid(T);
-    der(hLiqCod)=der(hLiqSym);
-    assert(abs(hLiqCod-hLiqSym) < 1E-2, "Model has an error");
-
-    cpCod=Medium.specificHeatCapacityCp(
-      Medium.setState_pTX(
-         p=1e5,
-         T=T,
-         X=Medium.X_default));
-    der(cpCod)=der(cpSym);
-    assert(abs(cpCod-cpSym) < 1E-2, "Model has an error");
-
-     cvCod=Medium.specificHeatCapacityCv(
-      Medium.setState_pTX(
-         p=1e5,
-         T=T,
-         X=Medium.X_default));
-    der(cvCod)=der(cvSym);
-    assert(abs(cvCod-cvSym) < 1E-2, "Model has an error");
-
-   annotation(experiment(
-                 StartTime=0, StopTime=1,
-                 Tolerance=1E-8),
-__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Media/Examples/WaterDerivativeCheck.mos"
+  // Check the implementation of the base properties
+  basPro.state.p=p;
+  basPro.state.T=T;
+   annotation(experiment(StopTime=80, Tolerance=1e-008),
+      __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Media/Examples/WaterDerivativeCheck.mos"
         "Simulate and plot"),
       Documentation(info="<html>
   <p>
@@ -80,5 +33,6 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Media/Example
   First implementation.
   </li>
   </ul>
-  </html>"));
+  </html>"),
+    __Dymola_experimentSetupOutput);
 end RefrigerantDerivativeCheck;
