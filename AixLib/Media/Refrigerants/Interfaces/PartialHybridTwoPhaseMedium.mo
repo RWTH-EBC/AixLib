@@ -811,11 +811,11 @@ partial package PartialHybridTwoPhaseMedium
 
   algorithm
      if state.phase==1 or phase_dT==1 then
-      kappa := -1/state.d *  pressure_derd_T(state)^(-1);
+      kappa := 1/state.d *  pressure_derd_T(state)^(-1);
      elseif state.phase==2 or phase_dT==2 then
-      kappal := -1/bubbleDensity(sat) *
+      kappal := 1/bubbleDensity(sat) *
         pressure_derd_T(setBubbleState(sat))^(-1);
-      kappav := -1/dewDensity(sat) * pressure_derd_T(setDewState(sat))^(-1);
+      kappav := 1/dewDensity(sat) * pressure_derd_T(setDewState(sat))^(-1);
       kappa := kappal + quality*(kappav-kappal);
      end if;
   end isothermalCompressibility;
@@ -823,7 +823,7 @@ partial package PartialHybridTwoPhaseMedium
   replaceable function isothermalThrottlingCoefficient
   "Isothermal throttling coefficient of refrigerant"
     input ThermodynamicState state "Thermodynamic state";
-    output Real delta_T "Isothermal throttling coefficient";
+    output Real delta_T(unit="J/(Pa.kg)") "Isothermal throttling coefficient";
 
   protected
     Real T_crit = fluidConstants[1].criticalTemperature;
@@ -856,7 +856,7 @@ partial package PartialHybridTwoPhaseMedium
   replaceable function jouleThomsonCoefficient
   "Joule-Thomson coefficient of refrigerant"
     input ThermodynamicState state "Thermodynamic state";
-    output Real my "Isothermal throttling coefficient";
+    output Real my(unit="K/Pa") "Isothermal throttling coefficient";
 
   protected
     Real T_crit = fluidConstants[1].criticalTemperature;
@@ -1348,10 +1348,10 @@ partial package PartialHybridTwoPhaseMedium
       fluidConstants[1].criticalPressure) then 1 else 2;
 
   algorithm
-    if state.phase==1 then
+    if state.phase==1 or phase_dT==1 then
       dpdd := R*state.T*(1 + 2*delta_d_alpha_r_d_delta(delta=delta,tau=tau) +
         delta2_d2_alpha_r_d_delta2(delta=delta,tau=tau));
-    elseif state.phase==2 then
+    elseif state.phase==2 or phase_dT==2 then
       dpdd := Modelica.Constants.small;
     end if;
   end pressure_derd_T;
@@ -1379,10 +1379,10 @@ partial package PartialHybridTwoPhaseMedium
       fluidConstants[1].criticalPressure) then 1 else 2;
 
   algorithm
-    if state.phase==1 then
+    if state.phase==1 or phase_dT==1 then
       dpdT:=R*state.d*(1 + delta_d_alpha_r_d_delta(delta=delta,tau=tau) -
         tau_delta_d2_alpha_r_d_tau_d_delta(delta=delta,tau=tau));
-    elseif state.phase==2 then
+    elseif state.phase==2 or phase_dT==2 then
       dpdT := Modelica.Constants.inf;
     end if;
   end pressure_derT_d;
@@ -1442,11 +1442,11 @@ partial package PartialHybridTwoPhaseMedium
       fluidConstants[1].criticalPressure) then 1 else 2;
 
   algorithm
-    if state.phase==1 then
+    if state.phase==1 or phase_dT==1 then
       dTph := 1 / (pressure_derT_d(state) - pressure_derd_T(state)*
         specificEnthalpy_derT_d(state)/specificEnthalpy_derd_T(state));
-    elseif state.phase==2 then
-      dTph:=Modelica.Constants.small;
+    elseif state.phase==2 or phase_dT==2 then
+      dTph := Modelica.Constants.small;
     end if;
   end temperature_derp_h;
 
@@ -1601,12 +1601,12 @@ partial package PartialHybridTwoPhaseMedium
       fluidConstants[1].criticalPressure) then 1 else 2;
 
   algorithm
-    if state.phase==1 then
+    if state.phase==1 or phase_dT==1 then
       dhTd := R*(-tau2_d2_alpha_0_d_tau2(tau=tau) - tau2_d2_alpha_r_d_tau2(
         delta=delta, tau=tau) + 1 + delta_d_alpha_r_d_delta(
         delta=delta,tau=tau) - tau_delta_d2_alpha_r_d_tau_d_delta(
         delta=delta, tau=tau));
-    elseif state.phase==2 then
+    elseif state.phase==2 or phase_dT==2 then
       dhTd:=Modelica.Constants.inf;
     end if;
   end specificEnthalpy_derT_d;
@@ -1634,11 +1634,11 @@ partial package PartialHybridTwoPhaseMedium
         fluidConstants[1].criticalPressure) then 1 else 2;
 
   algorithm
-    if state.phase==1 then
+    if state.phase==1 or phase_dT==1 then
       dhdT:=R*state.T/state.d*(tau_delta_d2_alpha_r_d_tau_d_delta(
         delta=delta,tau=tau) + delta_d_alpha_r_d_delta(delta=delta,tau=tau) +
         delta2_d2_alpha_r_d_delta2(delta=delta,tau=tau));
-    elseif state.phase==2 then
+    elseif state.phase==2 or phase_dT==2 then
       dhdT := -1/state.d^2*(bubbleEnthalpy(sat)-dewEnthalpy(sat))/
         (1/bubbleDensity(sat)-1/dewDensity(sat));
     end if;
