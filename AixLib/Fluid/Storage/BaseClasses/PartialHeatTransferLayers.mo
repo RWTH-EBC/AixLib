@@ -1,13 +1,13 @@
 within AixLib.Fluid.Storage.BaseClasses;
 partial model PartialHeatTransferLayers "Partial for storage heat transfer models"
 
-  outer parameter Integer n(min=2)=3 "Number of layers";
+  parameter Integer n(min=2)=3 "Number of layers";
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a[n] therm annotation (
       Placement(transformation(extent={{40,0},{60,20}}, rotation=0)));
-  outer replaceable package Medium =
+  replaceable package Medium =
       Modelica.Media.Interfaces.PartialMedium "Medium model" annotation(choicesAllMatching);
 
-  outer replaceable parameter
+  replaceable parameter
     AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
       AixLib.DataBase.Storage.Generic_500l()
       "Storage data record"

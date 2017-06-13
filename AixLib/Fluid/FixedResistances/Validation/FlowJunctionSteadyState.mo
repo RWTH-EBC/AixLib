@@ -7,7 +7,7 @@ model FlowJunctionSteadyState
 
   AixLib.Fluid.FixedResistances.Junction spl(
     redeclare package Medium = Medium,
-    m_flow_nominal={1,2,3},
+    m_flow_nominal={2,2,2},
     dp_nominal={5,10,15},
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState) "Splitter"
     annotation (Placement(transformation(extent={{10,-10},{30,10}})));
@@ -54,22 +54,19 @@ model FlowJunctionSteadyState
 
   AixLib.Fluid.Sensors.TemperatureTwoPort senTem1(
     redeclare package Medium = Medium,
-    m_flow_nominal=1,
-    tau=0)
+    m_flow_nominal=1)
     "Temperature sensor"
     annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
 
   AixLib.Fluid.Sensors.TemperatureTwoPort senTem2(
     redeclare package Medium = Medium,
-    m_flow_nominal=2,
-    tau=0)
+    m_flow_nominal=2)
     "Temperature sensor"
     annotation (Placement(transformation(extent={{40,-10},{60,10}})));
 
   AixLib.Fluid.Sensors.TemperatureTwoPort senTem3(
     redeclare package Medium = Medium,
-    m_flow_nominal=3,
-    tau=0)
+    m_flow_nominal=3)
     "Temperature sensor"
     annotation (Placement(transformation(extent={{-20,-70},{0,-50}})));
 equation
@@ -91,7 +88,7 @@ equation
     annotation (Line(points={{30,0},{35,0},{40,0}}, color={0,127,255}));
   connect(senTem2.port_b, bou2.ports[1])
     annotation (Line(points={{60,0},{70,0}},        color={0,127,255}));
-  annotation (experiment(StopTime=100.0),
+  annotation (experiment(Tolerance=1e-6, StopTime=100),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FixedResistances/Validation/FlowJunctionSteadyState.mos"
         "Simulate and plot"),
 Documentation(info="<html>
@@ -105,10 +102,16 @@ The splitter model has been configured as a steady-state model.
 </html>", revisions="<html>
 <ul>
 <li>
+January 18, 2017, by Michael Wetter:<br/>
+Changed <code>spl.m_flow_nominal</code>, boundary condition and enabled sensor dynamics.<br/>
+This is for
+<a href=\"modelica://https://github.com/ibpsa/modelica-ibpsa/issues/657\">issue 657</a>.
+</li>
+<li>
 October 14, 2016, by Michael Wetter:<br/>
 First implementation.<br/>
 This is for
-<a href=\"modelica://https://github.com/iea-annex60/modelica-annex60/issues/451\">issue 451</a>.
+<a href=\"modelica://https://github.com/ibpsa/modelica-ibpsa/issues/451\">issue 451</a>.
 </li>
 </ul>
 </html>"));

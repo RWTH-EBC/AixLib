@@ -245,7 +245,7 @@ equation
   Solar radiation on tilted surface is calculated using models of
   AixLib. The thermal zone is a simple room defined in Guideline
   VDI 6007 Part 1 (VDI, 2012). All models, parameters and inputs
-  except sunblinds, seperate handling of heat transfer through
+  except sunblinds, separate handling of heat transfer through
   windows and solar radiation are similar to the ones defined for
   the guideline&apos;s test room. For solar radiation, the example
   relies on the standard weather file in AixLib.</p>
@@ -269,7 +269,7 @@ equation
   </li>
   </ul>
   </html>"),
-  experiment(StopTime=3.1536e+007, Interval=3600),
+  experiment(Tolerance=1e-6, StopTime=3.1536e+007, Interval=3600),
   __Dymola_Commands(file=
   "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/SimpleRoomTwoElements.mos"
         "Simulate and plot"));
