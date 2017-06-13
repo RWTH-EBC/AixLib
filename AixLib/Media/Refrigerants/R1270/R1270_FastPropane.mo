@@ -9,21 +9,21 @@ package R1270_FastPropane
   */
   constant Modelica.Media.Interfaces.PartialTwoPhaseMedium.FluidConstants[1]
     refrigerantConstants(
-      each chemicalFormula = "CXHY",
-      each structureFormula = "CXHY",
-      each casRegistryNumber = "xx-xx-x",
-      each iupacName = "name",
-      each molarMass = 1,
-      each criticalTemperature = 1,
-      each criticalPressure = 1,
-      each criticalMolarVolume = 1,
-      each normalBoilingPoint = 1,
-      each triplePointTemperature = 1,
-      each meltingPoint = 1,
-      each acentricFactor = 1,
-      each triplePointPressure = 1,
-      each dipoleMoment = 1,
-      each hasCriticalData=true) "Thermodynamic constants for refrigerant";
+     each chemicalFormula = "C3H8",
+     each structureFormula = "C3H8",
+     each casRegistryNumber = "74-98-6",
+     each iupacName = "Propane",
+     each molarMass = 0.04409562,
+     each criticalTemperature = 369.89,
+     each criticalPressure = 4.2512e6,
+     each criticalMolarVolume = 5e3,
+     each normalBoilingPoint = 231.036,
+     each triplePointTemperature = 85.525,
+     each meltingPoint = 85.45,
+     each acentricFactor = 0.153,
+     each triplePointPressure = 0.00017,
+     each dipoleMoment = 0.1,
+     each hasCriticalData=true) "Thermodynamic constants for Propane";
 
   /*Provide basic information about the refrigerant. These basic information
     are the refrigerant name as well as the valid refrigerant limits in terms of
@@ -488,5 +488,6 @@ package R1270_FastPropane
 <p>Thorade, Matthis; Saadat, Ali (2012): <a href=\"http://www.ep.liu.se/ecp/076/006/ecp12076006.pdf\">HelmholtzMedia - A fluid properties library</a>. In: <i>Proceedings of the 9th International Modelica Conference</i>; September 3-5; 2012; Munich; Germany. Link&ouml;ping University Electronic Press, S. 63&ndash;70.</p>
 <p>Sangi, Roozbeh; Jahangiri, Pooyan; Klasing, Freerk; Streblow, Rita; M&uuml;ller, Dirk (2014): <a href=\"http://dx.doi.org/10.3384/ecp14096\">A Medium Model for the Refrigerant Propane for Fast and Accurate Dynamic Simulations</a>. In: <i>The 10th International Modelica Conference</i>. Lund, Sweden, March 10-12, 2014: Link&ouml;ping University Electronic Press (Link&ouml;ping Electronic Conference Proceedings), S. 1271&ndash;1275</p>
 <p>Klasing,Freerk: A New Design for Direct Exchange Geothermal Heat Pumps - Modeling, Simulation and Exergy Analysis. <i>Master thesis</i></p>
+<p>Scalabrin, G.; Marchi, P.; Span, R. (2006): A Reference Multiparameter Viscosity Equation for Propane with an Optimized Functional Form. In: <i>J. Phys. Chem. Ref. Data, Vol. 35, No. 3</i>, S. 1415-1442</p>
 </html>"));
 end R1270_FastPropane;
