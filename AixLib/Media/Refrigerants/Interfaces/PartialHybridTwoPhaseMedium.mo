@@ -617,12 +617,15 @@ partial package PartialHybridTwoPhaseMedium
 
     Real quality = (bubbleDensity(sat)/state.d - 1)/
       (bubbleDensity(sat)/dewDensity(sat) - 1);
+    Real phase_dT = if not ((state.d < bubbleDensity(sat) and state.d >
+      dewDensity(sat)) and state.T < fluidConstants[1].criticalTemperature)
+      then 1 else 2;
 
   algorithm
-    if state.phase==1 then
+    if state.phase==1 or phase_dT==1 then
       s := R*(tau_d_alpha_0_d_tau(tau) + tau_d_alpha_r_d_tau(delta, tau) -
         alpha_0(delta, tau) - alpha_r(delta, tau));
-    elseif state.phase==2 then
+    elseif state.phase==2 or phase_dT==2 then
       sl := R*(tau_d_alpha_0_d_tau(tau) + tau_d_alpha_r_d_tau(deltaL, tau) -
         alpha_0(deltaL, tau) - alpha_r(deltaL, tau));
       sv := R*(tau_d_alpha_0_d_tau(tau) + tau_d_alpha_r_d_tau(deltaG, tau) -
