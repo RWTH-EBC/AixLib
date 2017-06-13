@@ -1760,6 +1760,20 @@ partial package PartialHybridTwoPhaseMedium
 </table>
 <p>As it can be seen, the fitted formulas consist basically of the coefficients e<sub>i</sub>, c<sub>i</sub> as well as of the parameters Mean<sub>i</sub> and Std<sub>i</sub>. These coefficients are the fitting coefficients and must be obtained during a fitting procedure. While the fitting procedure, the formulas presented above are fitted to external data (e.g. NIST Refprop 9.1) and the fitting coefficients are determined. In order to keep the package clear and easy to extend, the fitting coefficients are stored in records inherited from the base data definition <a href=\"modelica://AixLib.DataBase.Media.Refrigerants.BubbleDewStatePropertiesBaseDataDefinition\">AixLib.DataBase.Media.Refrigerants.BubbleDewStatePropertiesBaseDataDefinition</a> and <a href=\"modelica://AixLib.DataBase.Media.Refrigerants.ThermodynamicStatePropertiesBaseDataDefinition\">AixLib.DataBase.Media.Refrigerants.ThermodynamicStatePropertiesBaseDataDefinition</a>.</p>
 <p>For further information of <b>the hybrid approach</b>, please read the paper &QUOT;<a href=\"http://dx.doi.org/10.3384/ecp14096\">A Medium Model for the Refrigerant Propane for Fast and Accurate Dynamic Simulations</a>&QUOT; by Sangi et al..</p>
+<p><b>Smooth transition</b></p>
+<p>To ensure a smooth transition between different regions (e.g. from supercooled region to two-phase region) and, therefore, to avoid discontinuities as far as possible, Sangi et al. implemented functions for a smooth transition between the regions. An example (i.e. specificEnthalpy_ps) of these functions is given below:<br></p>
+<table cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"80%\"><tr>
+<td valign=\"middle\"><p><i>From supercooled region to bubble line and vice versa</i></p></td>
+<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/SupercooledToTwoPhase.png\"/></p></td>
+<tr>
+<td valign=\"middle\"><p><i>From dew line to superheated region and vice versa</i></p></td>
+<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/TwoPhaseToSuperheated.png\"/></p></td>
+</tr>
+<tr>
+<td valign=\"middle\"><p><i>From bubble or dew line to two-phase region and vice versa</i></p></td>
+<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/SaturationToTwoPhase.png\"/></p></td>
+</tr>
+</table>
 <p><b>Assumptions and limitations</b></p>
 <p>Two limitations are known for this package:</p>
 <ol>
@@ -1772,5 +1786,6 @@ partial package PartialHybridTwoPhaseMedium
 <p>Thorade, Matthis; Saadat, Ali (2012): <a href=\"http://www.ep.liu.se/ecp/076/006/ecp12076006.pdf\">HelmholtzMedia - A fluid properties library</a>. In: <i>Proceedings of the 9th International Modelica Conference</i>; September 3-5; 2012; Munich; Germany. Link&ouml;ping University Electronic Press, S. 63&ndash;70.</p>
 <p>Thorade, Matthis; Saadat, Ali (2013): <a href=\"http://gfzpublic.gfz-potsdam.de/pubman/item/escidoc:247373:5/component/escidoc:306833/247373.pdf\">Partial derivatives of thermodynamic state properties for dynamic simulation</a>. In:<i> Environmental earth sciences 70 (8)</i>, S. 3497&ndash;3503.</p>
 <p>Sangi, Roozbeh; Jahangiri, Pooyan; Klasing, Freerk; Streblow, Rita; M&uuml;ller, Dirk (2014): <a href=\"http://dx.doi.org/10.3384/ecp14096\">A Medium Model for the Refrigerant Propane for Fast and Accurate Dynamic Simulations</a>. In: <i>The 10th International Modelica Conference</i>. Lund, Sweden, March 10-12, 2014: Link&ouml;ping University Electronic Press (Link&ouml;ping Electronic Conference Proceedings), S. 1271&ndash;1275</p>
+<p>Klasing,Freerk: A New Design for Direct Exchange Geothermal Heat Pumps - Modeling, Simulation and Exergy Analysis. <i>Master thesis</i></p>
 </html>"));
 end PartialHybridTwoPhaseMedium;
