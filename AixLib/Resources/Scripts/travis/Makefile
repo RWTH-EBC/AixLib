@@ -4,4 +4,4 @@
 ROOT = ../../../..
 
 test-documentation:
-	(ls; cd $(ROOT)/AixLib; Resources/Scripts/runUnitTests.py --validate-html-only)
+	(cd $(ROOT)/AixLib; python Resources/Scripts/runUnitTests.py --validate-html-only)
