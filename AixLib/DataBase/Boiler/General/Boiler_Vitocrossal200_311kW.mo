@@ -24,11 +24,11 @@ conventions</li>
 </html>", info="<html>
 <h4><font color=\"#008000\">Concept</font></h4>
 <p>3 efficiencies are given in the TechDoc.</p>
-<p><ol>
+<ol>
 <li>supply: 40 &deg;C, return: 30 &deg;C (second column in data set)</li>
 <li>supply: 75 &deg;C, return: 60 &deg;C (first column in data set)</li>
 <li>supply: 90 &deg;C, return: 70 &deg;C (not used in data set)</li>
-</ol></p>
+</ol>
 <p>As supply temperatures around 50 &deg;C are common (see heating curve), the
 average of the first two efficiencies was used.</p>
 <h4><font color=\"#008000\">References</font></h4>
