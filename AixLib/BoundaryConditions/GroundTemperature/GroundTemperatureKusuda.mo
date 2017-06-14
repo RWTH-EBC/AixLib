@@ -52,8 +52,8 @@ equation
     Documentation(revisions="<html>
 <p>
 <ul>
-<li><i>May 2017</i>, by Felix Bünning: Updated information window according to documentation standards</li>
-<li><i>October 2016</i>, by Felix Bünning: Developed and implemented</li>
+<li><i>May 2017</i>, by Felix Buenning: Updated information window according to documentation standards</li>
+<li><i>October 2016</i>, by Felix Buenning: Developed and implemented</li>
 </ul>
 </p>
 </html>", info="<html>
