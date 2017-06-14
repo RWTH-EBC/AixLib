@@ -28,8 +28,8 @@ calorific value of natural gas is assumed to be 12 kWh/m&sup3;. </p>
 </ul>
 </html>",
       revisions="<html>
-<p><ul>
+<ul>
 <li><i>January 24, 2013</i> by Peter Matthes:<br/>implemented</li>
-</ul></p>
+</ul>
 </html>"));
 end CHP_mini_ECO_POWER_3;

@@ -22,7 +22,7 @@ conventions</li>
 <li><i>September 28, 2013&nbsp;</i>by Peter Matthes:<br/>implemented.</li>
 </ul>
 </html>", info="<html>
-<p><h4><font color=\"#008000\">Concept</font></h4></p>
+<h4><font color=\"#008000\">Concept</font></h4>
 <p>3 efficiencies are given in the TechDoc.</p>
 <p><ol>
 <li>supply: 40 &deg;C, return: 30 &deg;C (second column in data set)</li>
@@ -31,14 +31,14 @@ conventions</li>
 </ol></p>
 <p>As supply temperatures around 50 &deg;C are common (see heating curve), the
 average of the first two efficiencies was used.</p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.HeatGenerators.Boiler.BoilerWithController\">HVAC.Components.HeatGenerators.Boiler.BoilerWithController</a></p>
 <p>Source:</p>
-<p><ul>
+<ul>
 <li>Product: Vitocrossal 200</li>
 <li>Manufacturer: Viessmann</li>
 <li>Broschure: Vitocrossal 200 CM2 Technical Data; 08/2012</li>
 <li>URL: http://www.viessmann.ca/content/dam/internet-ca/pdfs/commercial/vitocrossal_200_tdm.pdf</li>
-</ul></p>
+</ul>
 </html>"));
 end Boiler_Vitocrossal200_311kW;
