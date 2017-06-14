@@ -8,7 +8,7 @@ partial model PartialDemand
   Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
         Medium) "Inlet port of demand node"
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-  Annex60.Fluid.Sensors.TemperatureTwoPort senT_supply(redeclare package Medium =
+  AixLib.Fluid.Sensors.TemperatureTwoPort senT_supply(redeclare package Medium =
         Medium, m_flow_nominal=1) "Supply flow temperature sensor"
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
 equation

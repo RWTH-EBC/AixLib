@@ -5,7 +5,7 @@ model IdealSink "Demand node as an ideal sink without return flow"
   parameter Modelica.SIunits.MassFlowRate prescribedFlow
     "Prescribed mass flow rate, positive values are discharged from the network";
 
-  Annex60.Fluid.Sources.MassFlowSource_T sink(
+  AixLib.Fluid.Sources.MassFlowSource_T sink(
     redeclare package Medium = Medium,
     nPorts=1,
     use_m_flow_in=false,
