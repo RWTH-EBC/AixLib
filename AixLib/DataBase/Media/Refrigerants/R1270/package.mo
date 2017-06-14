@@ -4,6 +4,11 @@ package R1270 "Package provides records for R1270"
 
 
 
+
+
+
+
+
   annotation (Documentation(info="<html>
 <p>This package provides records with fitting coefficients for the refrigerant R1270. The records are inherited from the base data definitions provided in AixLib.DataBase.Media.Refrigerants and the fitting coefficients are used for the refrigerant model provided in AixLib.Media.Refrigerants.</p>
 <p>For detailed information of the <b>base data definitions</b>, please checkout the following records:</p>

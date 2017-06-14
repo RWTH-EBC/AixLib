@@ -1,6 +1,6 @@
 within AixLib.DataBase.Media.Refrigerants.R1270;
-record TSP_Sangi "Record with fitting coefficients taken from the Fast_Propane
-    model"
+record TSP_Sangi
+  "Record with fitting coefficients taken from the Fast_Propane model"
   import AixLib;
   extends
     AixLib.DataBase.Media.Refrigerants.ThermodynamicStatePropertiesBaseDataDefinition(
@@ -54,7 +54,7 @@ record TSP_Sangi "Record with fitting coefficients taken from the Fast_Propane
   </li>
 </ul>
 </html>", info="<html>
-<p>In this record, fitting coefficients are provided for the Helmholtz equation of state (EoS). For detailed information of the EoS as well as the fitting coefficients, please checkout <a href=\"modelica://AixLib.DataBase.Media.Refrigerants.ThermodynamicStatePropertiesBaseDataDefinition\">AixLib.DataBase.Media.Refrigerants.ThermodynamicStatePropertiesBaseDataDefinition</a>. The fitting coefficients are used in a hybrid refrigerant model provided in <a href=\"modelica://AixLib.Media.Refrigerants\">AixLib.Media.Refrigerants</a>. For detailed information, please checkout <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMedium\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMedium</a>.</p>
+<p>In this record, fitting coefficients are provided for thermodynamic properties calculated from two independent state variables. For detailed information of these thermodynamic properties as well as the fitting coefficients, please checkout <a href=\"modelica://AixLib.DataBase.Media.Refrigerants.ThermodynamicStatePropertiesBaseDataDefinition\">AixLib.DataBase.Media.Refrigerants.ThermodynamicStatePropertiesBaseDataDefinition</a>. The fitting coefficients are used in a hybrid refrigerant model provided in <a href=\"modelica://AixLib.Media.Refrigerants\">AixLib.Media.Refrigerants</a>. For detailed information, please checkout <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMedium\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMedium</a>.</p>
 <p><b>Assumptions and limitations</b></p>
 <p>The provided coefficients are fitted to external data by Sangi et al. and are valid within the following range:<br></p>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"30%\"><tr>

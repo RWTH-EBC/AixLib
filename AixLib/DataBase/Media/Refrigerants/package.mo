@@ -1,6 +1,6 @@
 within AixLib.DataBase.Media;
 package Refrigerants "Package provides records describing properties of different refrigerants"
-extends Modelica.Icons.Package;
+  extends Modelica.Icons.Package;
 
 
 
@@ -8,7 +8,7 @@ extends Modelica.Icons.Package;
 
 
 
-annotation (Icon(graphics={
+  annotation (Icon(graphics={
         Rectangle(
           lineColor={200,200,200},
           fillColor={248,248,248},

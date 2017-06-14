@@ -1,8 +1,9 @@
 within AixLib.DataBase.Media.Refrigerants.R1270;
-record EoS_Sangi "Record with fitting coefficients taken from the Fast_Propane
-    model"
+record EoS_Sangi
+  "Record with fitting coefficients taken from the Fast_Propane model"
   import AixLib;
-  extends AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition(
+  extends
+    AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition(
     name="Coefficients taken from Fast_Propane model developed by Sangi et al.",
     alpha_0_nL=1,
     alpha_0_l1={3},

@@ -1,8 +1,8 @@
 within AixLib.DataBase;
 package Media "Package provides records describing properties of different media"
-extends Modelica.Icons.Package;
+  extends Modelica.Icons.Package;
 
-annotation (Icon(graphics={
+  annotation (Icon(graphics={
         Line(
           points={{-40,20},{-44,88},{-44,88}},
           color={175,175,175}),
