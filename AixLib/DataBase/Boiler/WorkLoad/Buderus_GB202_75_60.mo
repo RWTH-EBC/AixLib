@@ -10,7 +10,7 @@ operatingRange={0.2,1});
 75/60&deg;C </p>
 <p>Source:</p>
 <ul>
-<li>Buderus &QUOT;Planungsunterlage Logano plus GB202&QUOT; p. 20</li>
+<li>Buderus Planungsunterlage Logano plus GB202 p. 20</li>
 </ul>
 </html>",
       revisions="<html>

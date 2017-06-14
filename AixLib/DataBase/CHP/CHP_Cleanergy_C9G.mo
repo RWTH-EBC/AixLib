@@ -42,7 +42,7 @@ kW. The fuel consumption is in m&sup3;/h.</p>
 <p>The calorific value of natural gas is assumed to be 11.5 kWh/m&sup3;
 (10 - 12 kWh/m&sup3;). </p>
 <h4><span style=\"color:#008000\">Data Sheet (English, German)</span></h4>
-<table cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tr>
+<table summary=\"Data Sheet\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tr>
 <td valign=\"top\"><p>Max. noise level dB(A)</p></td>
 <td valign=\"top\"><p>49</p></td>
 </tr>
@@ -81,18 +81,18 @@ low caloric gas (bio gas) </p></td>
 </tr>
 <tr>
 <td valign=\"top\"><p>Electrical efficiency </p></td>
-<td valign=\"top\"><p>21 &percnt; (24&percnt; capacity), 24 &percnt;
-(80&percnt; capacity)</p></td>
+<td valign=\"top\"><p>21 &#37; (24&#37; capacity), 24 &#37;
+(80&#37; capacity)</p></td>
 </tr>
 <tr>
 <td valign=\"top\"><p>Thermal efficiency excluding optional condenser</p></td>
-<td valign=\"top\"><p>58 &percnt; (24&percnt; capacity), 70 &percnt;
-(80&percnt; capacity)</p></td>
+<td valign=\"top\"><p>58 &#37; (24&#37; capacity), 70 &#37;
+(80&#37; capacity)</p></td>
 </tr>
 <tr>
 <td valign=\"top\"><p>Total efficiency excluding optional condenser</p></td>
-<td valign=\"top\"><p>79 &percnt; (24&percnt; capacity), 94 &percnt;
-(80&percnt; capacity)</p></td>
+<td valign=\"top\"><p>79 &#37; (24&#37; capacity), 94 &#37;
+(80&#37; capacity)</p></td>
 </tr>
 <tr>
 <td valign=\"top\"><p>Flow temperature (constant) &deg;C</p></td>
@@ -104,7 +104,7 @@ low caloric gas (bio gas) </p></td>
 </tr>
 </table>
 <p><br><br><b>The CHP engine is not designed for continuous operation at more
-than 80&percnt; load (7.2 kW).</b> Continuous use at higher load than 80&percnt;
+than 80&#37; load (7.2 kW).</b> Continuous use at higher load than 80&#37;
 decreases the time between services.</p>
 <p>For low methane applications, the C9G LowCal is capped to 120 bar engine
 pressure being equivalent to 7.2 kW.</p>
@@ -115,7 +115,6 @@ pressure being equivalent to 7.2 kW.</p>
 </html>",
         revisions="<html>
 <ul>
-<li></li>
 <li><i>January 24, 2013</i> by Peter Matthes:<br/>implemented</li>
 </ul>
 </html>"));

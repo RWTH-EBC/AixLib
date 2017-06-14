@@ -10,6 +10,6 @@ formatted appropriately</li>
 </html>",
       info="<html>
 <h4><font color=\"#008000\">Overview</font></h4>
-<p>Free workload range (0-1) with fixed efficiency of 100&percnt; </p>
+<p>Free workload range (0-1) with fixed efficiency of 100&#37; </p>
 </html>"));
 end ideal;
