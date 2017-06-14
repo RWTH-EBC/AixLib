@@ -15,7 +15,7 @@ model WasteWaterStorageControl
     "highest Temperature of lowest layer of heatingwater in storage for leaving heatpump on";
   parameter Modelica.SIunits.Density rho_WasteWater = 995
     "density wastewater - should be taken from model !-!-!";
-  parameter Modelica.SIunits.Volume V_storage = 995
+  parameter Modelica.SIunits.Volume V_storage = 5
     "Volume of wastewater storage";
   parameter Modelica.SIunits.MassFlowRate dot_m_cond_pump_fix = 0.07
     "Massflowrate of condensor Pump if HP is on";
@@ -25,12 +25,17 @@ model WasteWaterStorageControl
     "number of layers in wastewater storage";
   parameter Integer n_HeatingWater_layers = 10
     "number of layers in wastewater storage";
-  inner parameter Integer t_cleaning = 600 "time duration of cleaning process";
-  Boolean biofilm_removing "true if cleaning is necessary";
-  Boolean cleaning_finished "true if cleaning is finished";
+  inner parameter Integer t_cleaning = 600 "time duration of realeasing water + cleaning process";
+  Boolean iscleaning "true if cleaning is necessary";
+  Boolean cleaning_finished( start=false) "true if cleaning is finished";
   Integer time_0 "time when cleaning starts";
   Modelica.SIunits.Volume V_WasteWater( start=0)
     "Volume to simulate growing water level during fill process";
+  Boolean bypass_forced_opened_value;
+  Boolean bypass_forced_closed_value;
+//   Real time_refill;
+//   Real time_refill_0;
+//   Real refill_mean_temperature_sum                    "mean temperature during refill";
 
 //  Modelica.SIunits.Temperature T_mean_cleaning
 //   "Mean temperature of incoming wastewater during refill process after cleaning";
@@ -57,7 +62,7 @@ model WasteWaterStorageControl
         rotation=0,
         origin={24,-42})));
   Modelica.Blocks.Sources.Constant const(k=0)
-    annotation (Placement(transformation(extent={{100,-18},{90,-8}})));
+    annotation (Placement(transformation(extent={{100,-30},{90,-20}})));
   Modelica.Blocks.Interfaces.RealInput T_WasteWaterStorage[n_WasteWater_layers]
     annotation (Placement(transformation(extent={{-116,-84},{-88,-54}})));
   Modelica.Blocks.Interfaces.RealOutput dot_m_evap_pump
@@ -87,28 +92,37 @@ model WasteWaterStorageControl
   Modelica.Blocks.Logical.And and2
     annotation (Placement(transformation(extent={{54,-38},{64,-28}})));
   Modelica.Blocks.Interfaces.BooleanOutput HP_ison annotation (Placement(transformation(extent={{-94,58},{-114,78}})));
-  Modelica.Blocks.Interfaces.BooleanOutput iscleaning(start=false) annotation (Placement(
+  Modelica.Blocks.Interfaces.BooleanOutput biofilm_removing(start=false) annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
-        origin={86,-106})));
-  Modelica.Blocks.Sources.BooleanConstant bypass_forced_opened annotation (Placement(transformation(extent={{14,2},{26,14}})));
-  Modelica.Blocks.Sources.BooleanConstant bypass_forced_closed annotation (Placement(transformation(extent={{14,-22},{26,-10}})));
+        origin={30,-104})));
 
+
+  Modelica.Blocks.Sources.BooleanExpression bypass_forced_opened(y=
+        bypass_forced_opened_value)
+    annotation (Placement(transformation(extent={{10,6},{30,26}})));
+  Modelica.Blocks.Sources.BooleanExpression bypass_forced_closed(y=
+        bypass_forced_closed_value)
+    annotation (Placement(transformation(extent={{12,-20},{32,0}})));
+
+// initial equation
+// refill_mean_temperature_sum=0;
 equation
   ////////////////////////////////////////////////// Heatpump control
 
+  //  if lowest temperature in heatingstorage is lower than a specified max temperature and  wastewater temperature is high enough and no cleaning is in procedure than set heatingpump on
  if T_HeatingWaterStorage[1]<T_HeatingWater_lower_max and  T_WasteWaterStorage[n_WasteWater_layers]>T_WasteWater_upper_min and not iscleaning then
    HP_ison=true;
  else
    HP_ison=false;
  end if;
 
-  ////////////////////////////////////////////////// Pump Control
+  ////////////////////////////////////////////////// Evaporator and condensor pump control
 
 if HP_ison then
-  dot_m_cond_pump = 0.07;
-  dot_m_evap_pump = 0.07;
+  dot_m_cond_pump = dot_m_cond_pump_fix;
+  dot_m_evap_pump = dot_m_evap_pump_fix;
 else
   dot_m_cond_pump = 0;
   dot_m_evap_pump = 0;
@@ -116,89 +130,54 @@ end if;
 
   ////////////////////////////////////////////////// Cleaning
 
-  // iniate cleaning if conditions are ok
-when (T_HeatingWaterStorage[n_HeatingWater_layers] > T_HeatingWater_min_cleaning and (rho_WasteWater * V_storage)/wastewatermassFlowRate.dotm < 600 and  wastewatertemperature.T > T_WasteWater_min_cleaning and not pre(iscleaning) and s_biofilm>s_biofilm_max) then
+   // iniate cleaning if conditions are ok
+when T_HeatingWaterStorage[n_HeatingWater_layers] > T_HeatingWater_min_cleaning and (rho_WasteWater * V_storage)/wastewatermassFlowRate.dotm < 600 and  wastewatertemperature.T > T_WasteWater_min_cleaning and not (pre(iscleaning)) and s_biofilm>s_biofilm_max then
    iscleaning =true;
    time_0=time;
    V_WasteWater = 0;
+   // reinitialize after cleaning is done
 elsewhen cleaning_finished then
   iscleaning=false;
   time_0=0;
   V_WasteWater = V_storage;
 end when;
 
-  // cleaning procedure itself
+   // cleaning procedure itself
  when iscleaning then
-
-     //first release wastewater from tank and clean (fixed time)
+   //first release wastewater from tank and clean (fixed time)
    if time < time_0 + t_cleaning then
      cleaning_finished=false;
      der(V_WasteWater)=0;
-     bypass_forced_opened.y=true;
-     bypass_forced_closed.y=false;
+     bypass_forced_opened_value=true;
+     bypass_forced_closed_value=false;
        if s_biofilm>s_biofilm_min then
          biofilm_removing=true;
        else
          biofilm_removing=false;
        end if;
     else
-     // after releasing wastewater and cleaning start refill
+   // after releasing wastewater and cleaning: start refill
     biofilm_removing=false;
-    bypass_forced_opened.y= false;
+    bypass_forced_opened_value= false;
       if V_WasteWater < V_storage then
         cleaning_finished=false;
         der(V_WasteWater) = wastewatermassFlowRate.dotm/rho_WasteWater;
-        bypass_forced_closed.y=true;
-         // after refill go back to normal operation mode
+        bypass_forced_closed_value=true;
+
+    // after refill go back to normal operation mode
       else
+
         cleaning_finished=true;
         der(V_WasteWater)=0;
-        bypass_forced_closed.y=false;
+        bypass_forced_closed_value=false;
       end if;
    end if;
  end when;
 
- //  //Cleaning
-//    // check if cleaning should be done
-//   if T_HeatingWaterStorage[10] < T_HeatingWater_min and (rho_WasteWater * V_storage)/wastewatermassFlowRate.dotm > 300 and  wastewatertemperature.T < T_WasteWater_min and (s_biofilm>=s_biofilm_min and s_biofilm<s_biofilm_max and pre(iscleaning)==false or s_biofilm<s_biofilm_min) then
-//    iscleaning=false;
-//  else
-//    iscleaning=true;
-//   end if;
-//
-//    // iniate cleaning
-//   when iscleaning and not pre(iscleaning) then
-//     HP_ison = false;
-//     time_0=time;
-//     V_WasteWater = 0;
-//   end when;
-//
-//    //cleaning procedure itself
-//   when iscleaning and pre(iscleaning) then
-//     HP_ison=false;
-//       //release wastewater from tank and clean (fixed time)
-//     if time < time_0 + t_cleaning then
-//       der(V_WasteWater)=0;
-//       bypass_forced_opened.y=true;
-//       bypass_forced_closed.y=false;
-//     else
-//       // after releasing wastewater and cleaning start refill
-//       bypass_forced_opened.y= false;
-//       der(V_WasteWater) = -WW_control_out_storage.m_flow/rho_WasteWater;
-//       if V_WasteWater < V_storage then
-//         bypass_forced_closed.y=true;
-//       else
-//         bypass_forced_closed.y=false;
-//       end if;
-//     end if;
-//   elsewhen not iscleaning then
-//     der(V_WasteWater)=0;
-//     HP_ison=true;
-//     bypass_forced_opened.y=false;
-//     bypass_forced_closed.y=false;
-//   end when;
 
-  connect(const.y, switch1.u1) annotation (Line(points={{89.5,-13},{78.4,-13},{78.4,
+
+
+  connect(const.y, switch1.u1) annotation (Line(points={{89.5,-25},{78.4,-25},{78.4,
           -37.6}}, color={0,0,127}));
   connect(const1.y, switch1.u3) annotation (Line(points={{66.6,-56},{72,-56},{72,
           -50},{76,-50},{76,-50.4},{78.4,-50.4}},
@@ -222,16 +201,16 @@ end when;
   connect(T_WasteWaterStorage[1], less.u2) annotation (Line(points={{-102,-82.5},
           {-72,-82.5},{-72,-50},{16.8,-50},{16.8,-46.8}},
                                                        color={0,0,127}));
-  connect(bypass_forced_closed.y, nor.u2) annotation (Line(points={{26.6,-16},{34,
-          -16},{34,-28.8},{36.8,-28.8}}, color={255,0,255}));
-  connect(bypass_forced_opened.y, nor.u1) annotation (Line(points={{26.6,8},{34,
-          8},{34,0},{36.8,0},{36.8,-24}}, color={255,0,255}));
+  connect(bypass_forced_closed.y, nor.u2) annotation (Line(points={{33,-10},{34,
+          -10},{34,-28.8},{36.8,-28.8}}, color={255,0,255}));
+  connect(bypass_forced_opened.y, nor.u1) annotation (Line(points={{31,16},{36,16},
+          {36,0},{36.8,0},{36.8,-24}},    color={255,0,255}));
   connect(less.y, and2.u2) annotation (Line(points={{30.6,-42},{44,-42},{44,-37},
           {53,-37}}, color={255,0,255}));
   connect(nor.y, and2.u1) annotation (Line(points={{50.6,-24},{54,-24},{54,-33},
           {53,-33}}, color={255,0,255}));
-  connect(bypass_forced_opened.y, or1.u1) annotation (Line(points={{26.6,8},{42,
-          8},{42,-11},{65,-11}}, color={255,0,255}));
+  connect(bypass_forced_opened.y, or1.u1) annotation (Line(points={{31,16},{42,16},
+          {42,-11},{65,-11}},    color={255,0,255}));
   connect(and2.y, or1.u2) annotation (Line(points={{64.5,-33},{64.5,-20},{62,-20},
           {62,-15},{65,-15}}, color={255,0,255}));
   connect(or1.y, switch1.u2) annotation (Line(points={{76.5,-11},{78,-11},{78,-22},
