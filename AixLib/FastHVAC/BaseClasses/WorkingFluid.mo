@@ -69,6 +69,6 @@ Moved to AixLib
 <i>February 16, 2015&nbsp;</i> by Konstantin Finkbeiner:<br/>
 Implemented
 </li>
-</ul></p>
+</ul>
 </html> "));
 end WorkingFluid;

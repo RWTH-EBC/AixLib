@@ -346,12 +346,12 @@ equation
         textString=
                "On/Off")}),
     Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>This is model is the decision maker in the CHP model. According to different
 conditions and timings it decides if the CHP can be turned on or off.</p>
-<p><h4><font color=\"#008000\">Concept</font></h4></p>
+<h4><font color=\"#008000\">Concept</font></h4>
 <p>The following control decisions are implemented:</p>
-<p><ul>
+<ul>
 <li>Switch On when the flow temperature is lower than a setpoint.</li>
 <li>Switch Off when the CHP should work in a range lower than its minimum
 allowable capacity.</li>
@@ -361,10 +361,10 @@ amount of time (delay) or it was On beforehand.</li>
 amount of time (delay) or it was Off beforehand. </li>
 <li>Emergency measures such as maximum allowable flow and return temperatures
 are implemented.</li>
-</ul></p>
+</ul>
 </html>",
 revisions="<html>
-<p><ul>
+<ul>
 <li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
 conventions</li>
 <li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Variable names
@@ -372,6 +372,6 @@ updated and merged with AixLib</li>
 <li><i>January 23, 2014&nbsp;</i> by Pooyan Jahangiri:<br/>Formatted
 documentation appropriately</li>
 <li><i>January 31, 2011</i> by Pooyan Jahangiri:<br/>Implemented</li>
-</ul></p>
+</ul>
 </html>"));
 end DelayedOnOffController;
