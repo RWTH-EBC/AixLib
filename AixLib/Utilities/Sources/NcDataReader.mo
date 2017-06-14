@@ -127,8 +127,8 @@ equation
     preferredView="info",
     Documentation(revisions="<html>
 <ul>
-<li><i>Feburary 6, 2017</i> by Philipp Mehrfeld:<br>Revised documentation.</li>
-<li><i>December 14, 2016 </i> by Fabian Wuellhorst:<br>Implemented.</li>
+<li><i>Feburary 6, 2017</i> by Philipp Mehrfeld:<br>Revised documentation.</br></li>
+<li><i>December 14, 2016 </i> by Fabian Wuellhorst:<br>Implemented.</br></li>
 </ul>
 </html>", info="<html>
 <p><b><span style=\"color: #008000;\">Overview</span></b> </p>

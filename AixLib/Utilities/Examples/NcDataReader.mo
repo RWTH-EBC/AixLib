@@ -38,7 +38,7 @@ recommended to have a look into the source <code>*.cdl file</code>
 <a href=\"https://github.com/tbeu/netCDF-DataReader\">netCDF-DataReader GitHub repository</a>. </p>
 </html>", revisions="<html>
 <ul>
-<li><i>Feburary 1, 2017</i> by Fabian Wuellhorst:<br>Implemented.</li>
+<li><i>Feburary 1, 2017</i> by Fabian Wuellhorst:<br>Implemented.</br></li>
 </ul>
 </html>"));
 end NcDataReader;

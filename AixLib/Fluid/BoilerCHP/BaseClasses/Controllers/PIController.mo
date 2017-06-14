@@ -125,14 +125,14 @@ equation
           fillPattern=FillPattern.Solid,
           textString="PI Controller")}),
     Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
-<p>This is model consists of two PI controllers to control the system both when
-in operation as well as when shutting down.</p>
-<p><h4><font color=\"#008000\">Concept</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
+<p>This is model consists of two PI controllers to control the system both
+when in operation as well as when shutting down.</p>
+<h4><font color=\"#008000\">Concept</font></h4>
 <p>Because changing the controller signal from a certain value to zero is not
 continuous it will result in unstabilities in the simulation. Therefore, two
 controllers are implemented. One for the operation as a normal controller and
-one that change the output signal smoothly from the output of the other
+one that change the output signal smoothly from the output of the other 
 controller to zero.</p>
 </html>",
 revisions="<html>
