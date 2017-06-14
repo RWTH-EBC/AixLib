@@ -57,7 +57,7 @@ equation
 </html>", info="<html>
 
 <ul>
-<li>This model is a simple model for undisturbed ground temperature</span></li>
+<li>This model is a simple model for undisturbed ground temperature</li>
 <li>It is used with district heating grids or LTN in order to model thermal pipe losses</li>
 </ul>
 
@@ -74,7 +74,7 @@ The ground temperature is only dependent on the set parameters.</p>
 
 <p><b>Differently then stated in the parameter description below t<sub>shift</sub> needs to be 
 declared in days and &alpha; needs to me declared in m2/day! (The Modelica SI unit diffusivity 
-does not support m2/day as a display unit.)</p>
+does not support m2/day as a display unit.)</b></p>
 
 
 <p>A typical value for &alpha; is bewteen 0.03 and 0.05 m2/day.</p>
