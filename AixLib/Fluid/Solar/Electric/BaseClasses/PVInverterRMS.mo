@@ -71,10 +71,10 @@ equation
     StopTime=1,
     StartTime=0),
      Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>October 11, 2016 </i> by Tobias Blacha:<br/>Moved into AixLib</li>
 <li><i>Februar 21, 2013  </i>by Corinna Leonhardt:<br/>Implemented</li>
-</ul></p>
+</ul>
 </html>",
      info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
