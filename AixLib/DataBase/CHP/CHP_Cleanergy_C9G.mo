@@ -114,9 +114,9 @@ pressure being equivalent to 7.2 kW.</p>
 </ul>
 </html>",
         revisions="<html>
-<p><ul>
+<ul>
 <li></li>
 <li><i>January 24, 2013</i> by Peter Matthes:<br/>implemented</li>
-</ul></p>
+</ul>
 </html>"));
 end CHP_Cleanergy_C9G;

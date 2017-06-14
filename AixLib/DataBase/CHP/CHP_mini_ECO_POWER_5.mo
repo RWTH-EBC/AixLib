@@ -22,14 +22,13 @@ The fuel consumption is in l/kWh.</p>
 <p>The calorific value of liquid gas is assumed to be 28 kWh/m&sup3; and the
 calorific value of natural gas is assumed to be 12 kWh/m&sup3;. </p>
 <p>Source:</p>
-<p><ul>
+<ul>
 <li>URL: <a href=\"http://www.vaillant.de/Produkte/Kraft-Waerme-Kopplung/Blockheizkraftwerke/produkt_vaillant/mini-KWK-System_ecoPOWER_3.0_und_4.7.html\">mini-KWK-System_ecoPOWER_3.0_und_4.7.html</a></li>
 <li>URL: <a href=\"http://www.vaillant.de/stepone2/data/downloads/21/4b/00/Prospekt-KWK.pdf\">Prospekt-KWK.pdf</a></li>
-</ul></p>
+</ul>
 </html>",
         revisions="<html>
 <ul>
-<li></li>
 <li><i>January 24, 2013</i> by Peter Matthes:<br/>implemented</li>
 </ul>
 </html>"));

@@ -14,22 +14,21 @@ consumption is in l/kWh.
  and the calorific value of natural gas is assumed 12 kWh/m^3.
 */
 annotation (Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>Vaillant mini-BHKW ecoPOWER 3.0 (Natural Gas) </p>
-<p><h4><font color=\"#008000\">Concept</font></h4></p>
+<h4><font color=\"#008000\">Concept</font></h4>
 <p>The electrical and thermal powers are in kW. The fuel mass flow is in l/s.
 The fuel consumption is in l/kWh.</p>
 <p>The calorific value of liquid gas is assumed to be 28 kWh/m&sup3; and the
 calorific value of natural gas is assumed to be 12 kWh/m&sup3;. </p>
 <p>Source:</p>
-<p><ul>
+<ul>
 <li>URL: <a href=\"http://www.vaillant.de/Produkte/Kraft-Waerme-Kopplung/Blockheizkraftwerke/produkt_vaillant/mini-KWK-System_ecoPOWER_3.0_und_4.7.html\">mini-KWK-System_ecoPOWER_3.0_und_4.7.html</a></li>
 <li>URL: <a href=\"http://www.vaillant.de/stepone2/data/downloads/21/4b/00/Prospekt-KWK.pdf\">Prospekt-KWK.pdf</a></li>
-</ul></p>
+</ul>
 </html>",
       revisions="<html>
 <p><ul>
-<li></li>
 <li><i>January 24, 2013</i> by Peter Matthes:<br/>implemented</li>
 </ul></p>
 </html>"));
