@@ -3,7 +3,7 @@ model BufferStorage
   "Buffer Storage Model with support for heating rod and two heating coils"
   import SI = Modelica.SIunits;
 
-  inner replaceable package Medium =
+  replaceable package Medium =
       Modelica.Media.Interfaces.PartialMedium "Medium model"
                  annotation (Dialog(group="Medium"),choicesAllMatching = true);
 
@@ -19,14 +19,14 @@ model BufferStorage
   parameter Boolean useHeatingCoil2=true "Use Heating Coil2?" annotation(Dialog(tab="Heating Coils and Rod"));
   parameter Boolean useHeatingRod=true "Use Heating Rod?" annotation(Dialog(tab="Heating Coils and Rod"));
 
-  inner parameter SI.Temperature TStart=298.15 "Start Temperature of fluid" annotation (Dialog(tab="Initialisation"));
+  parameter SI.Temperature TStart=298.15 "Start Temperature of fluid" annotation (Dialog(tab="Initialisation"));
 
-  inner parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
+  parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
     AixLib.DataBase.Storage.Generic_500l()
     "Data record for Storage"
   annotation (choicesAllMatching);
 
-  inner parameter Integer n(min=3)=5 " Model assumptions Number of Layers";
+  parameter Integer n(min=3)=5 " Model assumptions Number of Layers";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////CONVECTION/////////////////////////////////////////////////////////////////////////////
@@ -136,7 +136,8 @@ model BufferStorage
     annotation (Placement(transformation(extent={{-6,0},{14,20}})));
     replaceable model HeatTransfer =
       AixLib.Fluid.Storage.BaseClasses.HeatTransferOnlyConduction
-    constrainedby AixLib.Fluid.Storage.BaseClasses.PartialHeatTransferLayers
+    constrainedby AixLib.Fluid.Storage.BaseClasses.PartialHeatTransferLayers(n=n,
+      redeclare package Medium = Medium, data=data)
     "Heat Transfer Model between fluid layers" annotation (choicesAllMatching=
         true);
 
@@ -244,7 +245,8 @@ model BufferStorage
     lengthHC=data.lengthHC1,
     pipeHC=data.pipeHC1,
     allowFlowReversal=true,
-    m_flow_nominal=0.05) if   useHeatingCoil1 annotation (Placement(
+    m_flow_nominal=0.05,
+    TStart=TStart) if         useHeatingCoil1 annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
@@ -256,7 +258,8 @@ model BufferStorage
     pipeHC=data.pipeHC2,
     redeclare package Medium = MediumHC2,
     allowFlowReversal=true,
-    m_flow_nominal=0.05) if                  useHeatingCoil2 annotation (
+    m_flow_nominal=0.05,
+    TStart=TStart) if                        useHeatingCoil2 annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
@@ -665,7 +668,7 @@ end if;
           visible = useHeatingRod,
           thickness=2)}),
                  Diagram(coordinateSystem(preserveAspectRatio=false,
-          extent={{-80,-100},{80,100}}), graphics),
+          extent={{-80,-100},{80,100}})),
     Documentation(revisions="<html>
 <ul>
 <li><i>October 12, 2016&nbsp;</i> by Marcus Fuchs:<br/>Add comments and fix documentation</li>

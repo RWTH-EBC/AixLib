@@ -58,19 +58,13 @@ partial model PartialMultizone "Partial model for multizone models"
     annotation (Placement(
     transformation(extent={{-117,53},{-83,85}}), iconTransformation(
     extent={{-90,30},{-70,50}})));
-  Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts*numZones](
-      redeclare each final package Medium = Medium)
-    "Auxilliary fluid inlets and outlets to indoor air volume"
-    annotation (Placement(transformation(extent={{-36,-104},{42,-86}}),
-    iconTransformation(extent={{-40,-110},{40,-90}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsConv[size(zone, 1)] if
        ASurTot > 0 or VAir > 0
     "Convective internal gains"
     annotation (Placement(transformation(extent={{-110,-80},{-90,-60}}),
     iconTransformation(extent={{-90,-80},{-70,-60}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad[size(zone, 1)] if
-       ASurTot > 0
-    "Convective internal gains"
+       ASurTot > 0 "Radiative internal gains"
     annotation (Placement(transformation(extent={{-110,-30},{-90,-50}}),
     iconTransformation(extent={{-90,-46},{-70,-26}})));
   thermalZone zone[numZones](
@@ -105,11 +99,6 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-    if nPorts > 0 then
-      connect(zone[i].ports[nPorts], ports[nPorts*(i-1)+1:nPorts*i])
-      annotation (Line(points={{59,54.74},{59,-82},{4,-82},{3,-82},{3,-95}},
-                           color={0,127,255}));
-    end if;
   end for;
   connect(zone.intGainsConv, intGainsConv) annotation (Line(points={{80,59.25},
           {86,59.25},{86,-78},{66,-78},{-100,-78},{-100,-70}},

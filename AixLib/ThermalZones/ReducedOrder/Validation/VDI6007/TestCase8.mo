@@ -221,7 +221,7 @@ model TestCase8 "VDI 6007 Test Case 8 model"
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTem
     "Outdoor air temperature"
     annotation (Placement(transformation(extent={{4,-10},{16,2}})));
-  BaseClasses.AssertEqualityThreePeriods assEqu(
+  BaseClasses.VerifyDifferenceThreePeriods assEqu(
     startTime=3600,
     endTime=86400,
     startTime2=781200,
@@ -367,7 +367,7 @@ equation
   Implemented.
   </li>
   </ul>
-  </html>"),experiment(StopTime=5.184e+006, Interval=60),
+  </html>"),experiment(Tolerance=1e-6, StopTime=5.184e+006, Interval=60),
   __Dymola_Commands(file=
   "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Validation/VDI6007/TestCase8.mos"
         "Simulate and plot"));

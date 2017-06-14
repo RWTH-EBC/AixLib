@@ -4,8 +4,6 @@ model Carnot_TEva
  extends AixLib.Fluid.Chillers.BaseClasses.PartialCarnot_T(
    final COP_is_for_cooling = true,
    final QCon_flow_nominal = -QEva_flow_nominal*(1 + COP_nominal)/COP_nominal,
-   effInpEva=AixLib.Fluid.Types.EfficiencyInput.port_b,
-   effInpCon=AixLib.Fluid.Types.EfficiencyInput.port_a,
    PEle(y=-QEva_flow/COP),
    redeclare HeatExchangers.HeaterCooler_u con(
     final from_dp=from_dp1,
@@ -46,6 +44,7 @@ protected
     annotation (Placement(transformation(extent={{-80,30},{-60,50}})));
 initial equation
   assert(QEva_flow_nominal < 0, "Parameter QEva_flow_nominal must be negative.");
+
 
 equation
   connect(TSet, eva.TSet) annotation (Line(points={{-120,90},{-66,90},{28,90},{28,
@@ -89,7 +88,7 @@ the condenser temperature <i>T<sub>con,0</sub></i>, in which
 case the model computes the Carnot effectivness as
 </p>
 <p align=\"center\" style=\"font-style:italic;\">
-&eta;<sub>Carnot,0</sub> = 
+&eta;<sub>Carnot,0</sub> =
   COP<sub>0</sub>
 &frasl;  (T<sub>eva,0</sub> &frasl; (T<sub>con,0</sub>-T<sub>eva,0</sub>)).
 </p>
@@ -143,12 +142,9 @@ The maximum cooling capacity is set by the parameter <code>QEva_flow_min</code>,
 which is by default set to negative infinity.
 </p>
 <p>
-By default, the coefficient of performance depends on the
-evaporator leaving temperature and the condenser entering
-temperature.
-This can be changed with the parameters
-<code>effInpEva</code> and
-<code>effInpCon</code>.
+The coefficient of performance depends on the
+evaporator and condenser leaving temperature
+since otherwise the second law of thermodynamics may be violated.
 </p>
 <h4>Notes</h4>
 <p>
@@ -159,6 +155,24 @@ AixLib.Fluid.HeatPumps.Examples.Carnot_TCon</a>.
 </html>",
 revisions="<html>
 <ul>
+<li>
+January 2, 2017, by Filip Jorissen:<br/>
+Removed parameters
+<code>effInpEva</code> and <code>effInpCon</code>
+and updated documentation.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/497\">
+issue 497</a>.
+</li>
+<li>
+August 8, 2016, by Michael Wetter:<br/>
+Changed default temperature to compute COP to be the leaving temperature as
+use of the entering temperature can violate the 2nd law if the temperature
+lift is small.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/497\">
+Annex 60, issue 497</a>.
+</li>
 <li>
 November 25, 2015 by Michael Wetter:<br/>
 First implementation.
