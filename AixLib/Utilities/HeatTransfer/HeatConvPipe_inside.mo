@@ -5,7 +5,7 @@ model HeatConvPipe_inside
   parameter Modelica.SIunits.Length length= 1 "length of total pipe";
   parameter Modelica.SIunits.Length d_i = 0.02 "inner diameter of pipe";
   parameter Modelica.SIunits.Length d_a = 0.025 "outer diameter of pipe";
-  parameter Modelica.SIunits.Area A_sur = 2;
+  parameter Modelica.SIunits.Area A_sur = 2 "surfuce for heat transfer";
   parameter FastHVAC.Media.BaseClasses.Medium medium=
       FastHVAC.Media.Water()
     "Mediums charastics  (heat capacity, density, thermal conductivity)";

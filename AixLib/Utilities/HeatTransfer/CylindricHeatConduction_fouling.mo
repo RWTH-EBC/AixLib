@@ -11,10 +11,6 @@ model CylindricHeatConduction_fouling
     "Growing velocity of biofilm in m/s";
   parameter Modelica.SIunits.Velocity v_bio_clean = 8.3E-06
     "Cleaning velocity of biofilm in m/s";
-  parameter Modelica.SIunits.Length s_biofilm_max = 0.005
-    "Thikness of biofilm, when cleaning will be started";
-  parameter Modelica.SIunits.Length s_biofilm_min = 0.0005
-    "Thikness of biofilm, when cleaning will be started";
   parameter Modelica.SIunits.Length s_biofilm_0 = 0.0001
     "Thikness of biofilm at simulation start";
 
@@ -28,7 +24,7 @@ model CylindricHeatConduction_fouling
     annotation (Placement(transformation(extent={{-10,78},{10,98}},
           rotation=0)));
 
-  Modelica.Blocks.Interfaces.RealOutput s_biofilm( start=s_biofilm_0,fixed=true)
+  Modelica.Blocks.Interfaces.RealOutput s_biofilm( start=s_biofilm_0,fixed=true,min=0)
     "thickness of biofilm"
     annotation (Placement(transformation(extent={{82,-8},{102,12}})));
   Modelica.Blocks.Interfaces.BooleanInput biofilm_removing
