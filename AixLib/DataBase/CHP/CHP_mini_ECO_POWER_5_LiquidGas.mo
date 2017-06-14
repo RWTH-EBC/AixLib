@@ -15,9 +15,9 @@ consumption is in l/kWh.
  and the calorific value of natural gas is assumed 12 kWh/m^3.
 */
   annotation (Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>Vaillant mini-BHKW ecoPOWER 4.7 (Liquid Gas) </p>
-<p><h4><font color=\"#008000\">Concept</font></h4></p>
+<h4><font color=\"#008000\">Concept</font></h4>
 <p>The electrical and thermal powers are in kW. The fuel mass flow is in l/s.
 The fuel consumption is in l/kWh.</p>
 <p>The calorific value of liquid gas is assumed to be 28 kWh/m&sup3; and the
@@ -29,9 +29,9 @@ calorific value of natural gas is assumed to be 12 kWh/m&sup3;. </p>
 </ul></p>
 </html>",
         revisions="<html>
-<p><ul>
+<ul>
 <li></li>
 <li><i>January 24, 2013</i> by Peter Matthes:<br/>implemented</li>
-</ul></p>
+</ul>
 </html>"));
 end CHP_mini_ECO_POWER_5_LiquidGas;

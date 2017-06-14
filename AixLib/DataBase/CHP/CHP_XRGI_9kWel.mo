@@ -121,9 +121,9 @@ Pr&uuml;fung nach DIN 4709) </p></td>
 </ul>
 </html>",
         revisions="<html>
-<p><ul>
+<ul>
 <li></li>
 <li><i>January 24, 2013</i> by Peter Matthes:<br/>implemented</li>
-</ul></p>
+</ul>
 </html>"));
 end CHP_XRGI_9kWel;
