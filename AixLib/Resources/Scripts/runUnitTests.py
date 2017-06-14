@@ -47,6 +47,8 @@ def _validate_html(path):
         else:
             print errMsg[i].encode('utf-8')
 
+    print "Number of total conflicting files: ", n_msg
+
     if n_msg == 0:
         return 0
     else:
