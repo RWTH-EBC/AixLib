@@ -25,7 +25,7 @@ install:
   - export PYTHONIOENCODING=UTF8 # just in case
   - pip install --upgrade pip setuptools wheel
   - pip install --only-binary=numpy,scipy,matplotlib numpy scipy matplotlib
-  - pip install git+https://github.com/lbl-srg/BuildingsPy@master
+  - pip install git+https://github.com/MichaMans/BuildingsPy.git@uft8_error
 
 # Execute tests
 script:
