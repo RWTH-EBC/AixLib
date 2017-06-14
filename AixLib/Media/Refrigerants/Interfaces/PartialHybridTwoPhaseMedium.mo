@@ -889,6 +889,38 @@ partial package PartialHybridTwoPhaseMedium
     independent variables. Moreover, these functions may depend on the Helmholtz
     EoS. Just change these functions if needed.
   */
+  redeclare function pressure_dT
+  "Computes pressure as a function of density and temperature"
+    extends Modelica.Icons.Function;
+    input Density d "Density";
+    input Temperature T "Temperature";
+    input FixedPhase phase "2 for two-phase, 1 for one-phase, 0 if not known";
+    output AbsolutePressure p "Pressure";
+
+  protected
+    Real T_crit = fluidConstants[1].criticalTemperature;
+    Real d_crit = fluidConstants[1].criticalMolarVolume;
+    Real MM = fluidConstants[1].molarMass;
+    Real R = Modelica.Constants.R/MM;
+    Real delta = d/(d_crit*MM);
+    Real tau = T_crit/T;
+
+    SaturationProperties sat = setSat_T(T);
+    Real phase_dT = if not ((d < bubbleDensity(sat) and d > dewDensity(sat))
+      and T < fluidConstants[1].criticalTemperature) then 1 else 2;
+
+  algorithm
+    if phase_dT == 1 or phase == 1 then
+      p := d*R*T*(1+delta_d_alpha_r_d_delta(delta,tau));
+    elseif phase_dT == 2 or phase == 2 then
+      p := saturationPressure(T);
+    end if;
+  annotation(derivative(noDerivative=phase)=pressure_dT_der,
+    inverse(d=density_pT(p=p,T=T,phase=phase)),
+    Inline=false,
+    LateInline=true);
+  end pressure_dT;
+
   redeclare replaceable function temperature_ph
   "Calculates temperature as function of pressure and specific enthalpy"
     extends Modelica.Icons.Function;
@@ -1027,38 +1059,6 @@ partial package PartialHybridTwoPhaseMedium
           LateInline=true);
   end temperature_ps;
 
-  redeclare function pressure_dT
-  "Computes pressure as a function of density and temperature"
-    extends Modelica.Icons.Function;
-    input Density d "Density";
-    input Temperature T "Temperature";
-    input FixedPhase phase "2 for two-phase, 1 for one-phase, 0 if not known";
-    output AbsolutePressure p "Pressure";
-
-  protected
-    Real T_crit = fluidConstants[1].criticalTemperature;
-    Real d_crit = fluidConstants[1].criticalMolarVolume;
-    Real MM = fluidConstants[1].molarMass;
-    Real R = Modelica.Constants.R/MM;
-    Real delta = d/(d_crit*MM);
-    Real tau = T_crit/T;
-
-    SaturationProperties sat = setSat_T(T);
-    Real phase_dT = if not ((d < bubbleDensity(sat) and d > dewDensity(sat))
-      and T < fluidConstants[1].criticalTemperature) then 1 else 2;
-
-  algorithm
-    if phase_dT == 1 or phase == 1 then
-      p := d*R*T*(1+delta_d_alpha_r_d_delta(delta,tau));
-    elseif phase_dT == 2 or phase == 2 then
-      p := saturationPressure(T);
-    end if;
-  annotation(derivative(noDerivative=phase)=pressure_dT_der,
-      inverse(d=density_pT(p=p,T=T,phase=phase)),
-          Inline=false,
-          LateInline=true);
-  end pressure_dT;
-
   redeclare replaceable partial function density_pT
   "Computes density as a function of pressure and temperature"
     extends Modelica.Icons.Function;
@@ -1116,8 +1116,8 @@ partial package PartialHybridTwoPhaseMedium
         end if;
     end if;
   annotation(inverse(p=pressure_dT(d=d,T=T,phase=phase)),
-          Inline=false,
-          LateInline=true);
+    Inline=false,
+    LateInline=true);
   end density_pT;
 
   redeclare replaceable function density_ph
@@ -1387,6 +1387,25 @@ partial package PartialHybridTwoPhaseMedium
     end if;
   end pressure_derT_d;
 
+  replaceable function temperature_ph_der
+  "Calculates time derivative of temperature_ph"
+    extends Modelica.Icons.Function;
+    input AbsolutePressure p "Pressure";
+    input SpecificEnthalpy h "Specific enthalpy";
+    input FixedPhase phase = 0
+      "2 for two-phase, 1 for one-phase, 0 if not known";
+    input Real der_p "Time derivative of pressure";
+    input Real der_h "Time derivative of specific enthalpy";
+    output Real der_T "Time derivative of density";
+
+  protected
+    ThermodynamicState state = setState_phX(p=p,h=h,phase=phase);
+
+  algorithm
+      der_T := der_p*temperature_derp_h(state=state) +
+        der_h*temperature_derh_p(state=state);
+  end temperature_ph_der;
+
   replaceable function temperature_derh_p
   "Calculates temperature derivative (dT/dh)@p=const"
     input ThermodynamicState state "Thermodynamic state";
@@ -1449,25 +1468,6 @@ partial package PartialHybridTwoPhaseMedium
       dTph := Modelica.Constants.small;
     end if;
   end temperature_derp_h;
-
-  replaceable function temperature_ph_der
-  "Calculates time derivative of temperature_ph"
-    extends Modelica.Icons.Function;
-    input AbsolutePressure p "Pressure";
-    input SpecificEnthalpy h "Specific enthalpy";
-    input FixedPhase phase = 0
-      "2 for two-phase, 1 for one-phase, 0 if not known";
-    input Real der_p "Time derivative of pressure";
-    input Real der_h "Time derivative of specific enthalpy";
-    output Real der_T "Time derivative of density";
-
-  protected
-    ThermodynamicState state = setState_phX(p=p,h=h,phase=phase);
-
-  algorithm
-      der_T := der_p*temperature_derp_h(state=state) +
-        der_h*temperature_derh_p(state=state);
-  end temperature_ph_der;
 
   replaceable function density_ph_der
   "Calculates time derivative of density_ph"
@@ -1778,10 +1778,11 @@ partial package PartialHybridTwoPhaseMedium
 </tr>
 </table>
 <p><b>Assumptions and limitations</b></p>
-<p>Two limitations are known for this package:</p>
+<p>Three limitations are known for this package:</p>
 <ol>
 <li>The modelling approach implemented in this package is a hybrid approach and, therefore, is based on the Helmholtz equation of state as well as on fitted formula. Hence, the refrigerant model is just valid within the valid range of the fitted formula.</li>
 <li>It may be possible to have discontinuities when moving from one region to another (e.g. from supercooled region to two-phase region). However, functions are implemented to reach a smooth transition between the regions and to avoid these discontinuities as far as possible. (Sangi et al., 2014)</li>
+<li>Not all time derivatives are implemented. So far, the following time derivatives are implemented: pressure_dT_der, temperature_ph_der, density_ph_der and specificEnthalpy_dT_der.</li>
 </ol>
 <p><b>Typical use and important parameters</b></p>
 <p>The refrigerant models provided in this package are typically used for heat pumps and refrigerating machines. However, it is just a partial package and, hence, it must be completed before usage. In order to allow an easy completion of the package, a template is provided in <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMedium\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMedium</a>.</p>
