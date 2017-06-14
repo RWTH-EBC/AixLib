@@ -1,15 +1,15 @@
 within AixLib.Media.Refrigerants.Examples;
-model RefrigerantTestImplementation
+model RefrigerantTestImplementationB
   "Model to test the refrigerant implementation"
   extends Modelica.Icons.Example;
-  extends Modelica.Media.Examples.Tests.Components.PartialTestModel(
+  extends Modelica.Media.Examples.Tests.Components.PartialTestModel2(
     redeclare package Medium =
         AixLib.Media.Refrigerants.R1270.R1270_FastPropane,
     p_start = 0.5e5,
     T_start = 263.15,
     h_start = 177e3);
 
-        annotation (experiment(Tolerance=1e-6, StopTime=1.0),
+    annotation (experiment(Tolerance=1e-6, StopTime=1.0),
   __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Media/Examples/WaterTestImplementation.mos"
           "Simulate and plot"),
       Documentation(info="<html>
@@ -22,4 +22,4 @@ model RefrigerantTestImplementation
   </li>
 </ul>
 </html>"));
-end RefrigerantTestImplementation;
+end RefrigerantTestImplementationB;
