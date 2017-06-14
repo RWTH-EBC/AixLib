@@ -31,6 +31,7 @@ public
     "Starting Temperature of wall in K" annotation(Dialog(tab="Initialisation"));
   parameter Modelica.SIunits.Temperature T_start_ins=293.15
     "Starting Temperature of insulation in K" annotation(Dialog(tab="Initialisation"));
+
   /* *******************************************************************
       HeatStorage Parameters
      ******************************************************************* */
@@ -73,10 +74,6 @@ public
     "Growing velocity of biofilm in m/s";
   parameter Modelica.SIunits.Velocity v_bio_clean = 8.3E-06
     "Cleaning velocity of biofilm in m/s";
-  parameter Modelica.SIunits.Length s_biofilm_max = 0.005
-    "Thikness of biofilm, when cleaning will be started";
-  parameter Modelica.SIunits.Length s_biofilm_min = 0.0005
-    "Thikness of biofilm, when cleaning will be started";
   parameter Modelica.SIunits.Length s_biofilm_0 = 0.0001
     "Thikness of biofilm at simulation start";
 
@@ -144,7 +141,7 @@ public
     annotation (Placement(transformation(extent={{-110,30},{-90,50}}),
         iconTransformation(extent={{-90,-62},{-74,-46}})));
 
-  AixLib.FastHVAC.Components.Storage.BaseClasses.HeatingCoilFouling
+  AixLib.FastHVAC.Components.Storage.BaseClasses.HeatingCoilFoulingHalfIsolated
     heatingCoil1(
     dis_HC=dis_HC1,
     alpha_HC=alpha_HC1,
@@ -154,11 +151,9 @@ public
     lambda_film=lambda_film,
     v_bio_grow=v_bio_grow,
     T_start_HC=T_start_HC,
-    s_biofilm_max=s_biofilm_max,
     v_bio_clean=v_bio_clean,
-    s_biofilm_min=s_biofilm_min,
-    s_biofilm_0=s_biofilm_0)
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+    s_biofilm_0=s_biofilm_0) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-78,60})));
 
@@ -225,8 +220,19 @@ Heat transfer model for heat transfer between two fluid layers.
       Placement(transformation(
         extent={{-14,-11},{14,11}},
         rotation=-90,
-        origin={63,106})));
+        origin={43,106})));
+
+
 equation
+
+//   // calculate and set temperature in tank to mean temperature during refill
+//   when setMeanTemperature then
+//      for i in 1:n loop
+//         layer[i].T=refill_mean_temperature;
+//      end for;
+//   end when;
+
+
   der(Heat_loss) = out.Q_flow/(1000*3600);
 
   for k in 1:n loop
@@ -319,6 +325,8 @@ equation
 
 end for;
 
+
+
   for i in 1:n loop
     T_layers[i] = layer[i].T;
   end for;
@@ -343,10 +351,10 @@ connect(heatTransfer.therm, layer.port);
       points={{-78,50.8},{-78,40},{-100,40}},
       color={176,0,0},
       smooth=Smooth.None));
-  connect(heatingCoil1.s_biofilm, s_biofilm) annotation (Line(points={{-71.4,49.2},
-          {-71.4,44},{-54,44},{-54,84},{104,84},{104,78}}, color={0,0,127}));
+  connect(heatingCoil1.s_biofilm, s_biofilm) annotation (Line(points={{-71.2,49.2},
+          {-71.2,44},{-54,44},{-54,84},{104,84},{104,78}}, color={0,0,127}));
   connect(biofilm_removing, heatingCoil1.biofilm_removing) annotation (Line(
-        points={{63,106},{63,86},{-71.4,86},{-71.4,70.4}}, color={255,0,255}));
+        points={{43,106},{43,86},{-71.4,86},{-71.4,70.4}}, color={255,0,255}));
  annotation (Placement(transformation(extent={{-110,-90},{-90,-70}}),
         iconTransformation(extent={{-90,-66},{-76,-52}})),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
@@ -595,4 +603,6 @@ revisions="<html>
 
 </ul></p>
 </html>"));
+
+
 end WasteWaterStorage;
