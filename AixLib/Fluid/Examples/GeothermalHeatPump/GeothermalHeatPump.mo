@@ -43,7 +43,7 @@ model GeothermalHeatPump "Example of a geothermal heat pump system"
   Modelica.Blocks.Sources.Constant TStorageSet(k=273.15 + 35)
     "Set point of upper heat storage temperature"
     annotation (Placement(transformation(extent={{-160,4},{-148,16}})));
-  BaseClasses.geothermalFieldController geothermalFieldControllerWarm
+  BaseClasses.geothermalFieldController geothermalFieldControllerHeat
     "Controls the heat exchange with the geothermal field and the heat storage"
     annotation (Placement(transformation(extent={{-100,-34},{-84,-18}})));
   BaseClasses.geothermalFieldController geothermalFieldControllerCold(
@@ -120,7 +120,7 @@ equation
           10},{-116,10},{-116,76},{-62,76}}, color={0,0,127}));
   connect(TStorageUpper.y, hPControllerOnOff.T_set) annotation (Line(points={{-139,68},
           {-120,68},{-100,68},{-62,68}},               color={0,0,127}));
-  connect(TStorageUpper.y, geothermalFieldControllerWarm.temperature)
+  connect(TStorageUpper.y,geothermalFieldControllerHeat. temperature)
     annotation (Line(points={{-139,68},{-120,68},{-120,-26},{-100,-26}}, color=
           {0,0,127}));
   connect(TStorageLower.y, geothermalFieldControllerCold.temperature)
@@ -132,10 +132,10 @@ equation
   connect(geothermalFieldControllerCold.valveOpening2, valveHeatSource.y)
     annotation (Line(points={{-83.04,31.2},{-82,31.2},{-82,1},{-68.4,1}}, color=
          {0,0,127}));
-  connect(valveColdSource.y, geothermalFieldControllerWarm.valveOpening1)
+  connect(valveColdSource.y,geothermalFieldControllerHeat. valveOpening1)
     annotation (Line(points={{-30,-45.6},{-30,-45.6},{-30,-32},{-30,-21.2},{
           -83.04,-21.2}}, color={0,0,127}));
-  connect(geothermalFieldControllerWarm.valveOpening2, valveHeatStorage.y)
+  connect(geothermalFieldControllerHeat.valveOpening2, valveHeatStorage.y)
     annotation (Line(points={{-83.04,-30.8},{-56,-30.8},{-56,-63},{-26.4,-63}},
         color={0,0,127}));
   connect(heatPumpTab.Power, heatPumpPower) annotation (Line(points={{-22,-12.3},
