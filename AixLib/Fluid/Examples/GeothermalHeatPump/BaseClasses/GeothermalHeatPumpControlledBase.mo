@@ -4,15 +4,9 @@ model GeothermalHeatPumpControlledBase
   extends BaseClasses.GeothermalHeatPumpBase(
   redeclare AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.Boiler PeakLoadDevice(redeclare
         package Medium =                                                                                          Medium));
-  Controls.HeatPump.HPControllerOnOff hPControllerOnOff(bandwidth=5)
-    "Controls the temperature in the heat storage by switching the heat pump on or off"
-    annotation (Placement(transformation(extent={{-62,62},{-42,82}})));
-  Modelica.Blocks.Sources.RealExpression TStorageUpper(y=heatStorage.layer[
-        heatStorage.n].T) "Temperature of upper heat storage layer"
+  Modelica.Blocks.Sources.RealExpression getTStorageUpper(y=heatStorage.layer[
+        heatStorage.n].T) "Gets the temperature of upper heat storage layer"
     annotation (Placement(transformation(extent={{-160,58},{-140,78}})));
-  Modelica.Blocks.Sources.Constant TStorageSet(k=273.15 + 35)
-    "Set point of upper heat storage temperature"
-    annotation (Placement(transformation(extent={{-160,4},{-148,16}})));
   Control.geothermalFieldController     geothermalFieldControllerHeat
     "Controls the heat exchange with the geothermal field and the heat storage"
     annotation (Placement(transformation(extent={{-100,-34},{-84,-18}})));
@@ -20,8 +14,8 @@ model GeothermalHeatPumpControlledBase
       temperature_low=273.15 + 6, temperature_high=273.15 + 8)
     "Controls the heat exchange with the geothermal field and the heat storage"
     annotation (Placement(transformation(extent={{-100,28},{-84,44}})));
-  Modelica.Blocks.Sources.RealExpression TStorageLower(y=coldStorage.layer[1].T)
-    "Temperature of lower cold storage layer"
+  Modelica.Blocks.Sources.RealExpression getTStorageLower(y=coldStorage.layer[1].T)
+    "Gets the temperature of lower cold storage layer"
     annotation (Placement(transformation(extent={{-160,42},{-140,62}})));
   Modelica.Blocks.Interfaces.RealOutput coldStorageTemperature(
     final quantity="ThermodynamicTemperature",
@@ -67,14 +61,10 @@ model GeothermalHeatPumpControlledBase
   inner Modelica.Fluid.System system
     annotation (Placement(transformation(extent={{140,60},{160,80}})));
 equation
-  connect(TStorageSet.y, hPControllerOnOff.T_meas) annotation (Line(points={{-147.4,
-          10},{-116,10},{-116,76},{-62,76}}, color={0,0,127}));
-  connect(TStorageUpper.y, hPControllerOnOff.T_set) annotation (Line(points={{-139,68},
-          {-120,68},{-100,68},{-62,68}},               color={0,0,127}));
-  connect(TStorageUpper.y,geothermalFieldControllerHeat. temperature)
+  connect(getTStorageUpper.y, geothermalFieldControllerHeat.temperature)
     annotation (Line(points={{-139,68},{-120,68},{-120,-26},{-100,-26}}, color=
           {0,0,127}));
-  connect(TStorageLower.y, geothermalFieldControllerCold.temperature)
+  connect(getTStorageLower.y, geothermalFieldControllerCold.temperature)
     annotation (Line(points={{-139,52},{-122,52},{-108,52},{-108,36},{-100,36}},
         color={0,0,127}));
   connect(geothermalFieldControllerCold.valveOpening1, valveColdStorage.y)
@@ -91,19 +81,11 @@ equation
         color={0,0,127}));
   connect(heatPumpTab.Power, heatPumpPower) annotation (Line(points={{-22,-12.3},
           {-22,-12.3},{-22,-40},{-45.5,-40},{-45.5,-119.5}}, color={0,0,127}));
-  connect(TStorageLower.y, coldStorageTemperature) annotation (Line(points={{
-          -139,52},{-134,52},{-134,-120}}, color={0,0,127}));
-  connect(TStorageUpper.y, heatStorageTemperature) annotation (Line(points={{
-          -139,68},{-132,68},{-120,68},{-120,-88},{-100,-88},{-100,-120}},
+  connect(getTStorageLower.y, coldStorageTemperature) annotation (Line(points={
+          {-139,52},{-134,52},{-134,-120}}, color={0,0,127}));
+  connect(getTStorageUpper.y, heatStorageTemperature) annotation (Line(points={
+          {-139,68},{-132,68},{-120,68},{-120,-88},{-100,-88},{-100,-120}},
         color={0,0,127}));
-  connect(hPControllerOnOff.heatPumpControlBus, heatPumpControlBus) annotation (
-     Line(
-      points={{-42.05,72.05},{-28,72.05},{-28,79},{-0.5,79}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
   connect(PeakLoadDevice.chemicalEnergyFlowRate, chemicalEnergyFlowRate)
     annotation (Line(points={{112.77,-56.54},{112.77,-120},{-30,-120},{-30,-98},
           {-71.5,-98},{-71.5,-119.5}}, color={0,0,127}));

@@ -156,7 +156,7 @@ model GeothermalHeatPumpBase
     addPowerToMedium=false,
     T_start=T_start_warm[5])
     "Pump moving fluid from storage tank to heat consumers"
-    annotation (Placement(transformation(extent={{56,-57},{70,-43}})));
+    annotation (Placement(transformation(extent={{58,-57},{72,-43}})));
   FixedResistances.PressureDrop                     resistanceColdConsumerReturn(
     redeclare package Medium = Medium,
     m_flow_nominal=0.2,
@@ -236,7 +236,7 @@ equation
   connect(pumpColdConsumer.port_b, resistanceColdConsumerFlow.port_a)
     annotation (Line(points={{72,-20},{80,-20}}, color={0,127,255}));
   connect(pumpHeatConsumer.port_b, resistanceHeatConsumerFlow.port_a)
-    annotation (Line(points={{70,-50},{80,-50}}, color={0,127,255}));
+    annotation (Line(points={{72,-50},{80,-50}}, color={0,127,255}));
   connect(valveHeatSource.port_b, heatPumpTab.port_a_source) annotation (Line(
         points={{-60,7},{-60,14.9},{-38.2,14.9}}, color={0,127,255}));
   connect(valveColdStorage.port_b, heatPumpTab.port_a_source) annotation (Line(
@@ -252,7 +252,7 @@ equation
     annotation (Line(points={{26.24,-64.04},{10,-64.04},{10,14.9},{-5.8,14.9}},
         color={0,127,255}));
   connect(heatStorage.port_b_consumer, pumpHeatConsumer.port_a) annotation (
-      Line(points={{38,-62},{38,-62},{38,-50},{56,-50}}, color={0,127,255}));
+      Line(points={{38,-62},{38,-62},{38,-50},{58,-50}}, color={0,127,255}));
   connect(resistanceColdConsumerReturn.port_b, coldStorage.port_b_consumer)
     annotation (Line(points={{80,32},{38,32},{38,20}}, color={0,127,255}));
   connect(resistanceHeatConsumerReturn.port_b, heatStorage.port_a_consumer)
