@@ -62,7 +62,7 @@ CHP can be observed.
 Change the inlet water temperature profile to see the reaction timing. </p>
 </html>",
         revisions="<html>
-<p><ul>
+<ul>
 <li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
 conventions</li>
 <li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Merged with
@@ -70,7 +70,7 @@ AixLib</li>
 <li><i>April 16, 2014 &nbsp;</i> by Ana Constantin:<br/>Formated
 documentation.</li>
 <li>by Pooyan Jahangiri:<br/>First implementation.</li>
-</ul></p>
+</ul>
 </html>"),
 experiment(StopTime=35000, Interval=60));
 end CHPSystem;
