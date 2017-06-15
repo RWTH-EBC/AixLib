@@ -1,7 +1,10 @@
 within AixLib.Fluid.Examples.GeothermalHeatPump.Components;
 model GeothermalHeatPump
   "Component model of the geothermal heat pump example with connectors"
-  extends BaseClasses.GeothermalHeatPumpControlledBase;
+  extends
+    AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpControlledBase(
+  redeclare AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl PeakLoadDevice(redeclare
+        package Medium =                                                                                          Medium));
   Modelica.Fluid.Interfaces.FluidPort_b port_b_consumerCold(redeclare package
       Medium = Medium) "Port to cold consumers" annotation (Placement(
         transformation(extent={{150,-30},{170,-10}}), iconTransformation(extent={{-170,30},
@@ -38,6 +41,8 @@ model GeothermalHeatPump
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-60,90})));
+  Controls.Interfaces.BoilerControlBus boilerControlBus
+    annotation (Placement(transformation(extent={{90,60},{132,98}})));
 equation
   connect(resistanceColdConsumerReturn.port_a, port_a_consumerCold)
     annotation (Line(points={{94,32},{160,32}}, color={0,127,255}));
@@ -81,4 +86,26 @@ equation
     annotation (Line(points={{-139,68},{-100,68},{-100,90}}, color={0,0,127}));
   connect(getTStorageLower.y, TStorageLower) annotation (Line(points={{-139,52},
           {-88,52},{-88,66},{-60,66},{-60,90}}, color={0,0,127}));
+  connect(PeakLoadDevice.boilerControlBus, boilerControlBus) annotation (Line(
+      points={{114,-44.06},{114,66},{111,66},{111,79}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(chemicalEnergyFlowRate, boilerControlBus.chemicalEnergyFlowRate)
+    annotation (Line(points={{-71.5,-119.5},{-71.5,-92},{-28,-92},{-28,-114},{
+          104,-114},{104,66},{111.105,66},{111.105,79.095}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  annotation (Documentation(revisions="<html>
+<ul>
+<li>
+May 19, 2017, by Marc Baranski:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end GeothermalHeatPump;

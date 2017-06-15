@@ -300,7 +300,7 @@ equation
 <p><span style=\"font-family: MS Shell Dlg 2;\">- from the cold to the heat storage</span></p>
 <p><span style=\"font-family: MS Shell Dlg 2;\">- from the cold storage to the geothermal field (heat storage disconnected)</span></p>
 <p><span style=\"font-family: MS Shell Dlg 2;\">- from the geothermal field to the heat storage</span></p>
-<p><span style=\"font-family: MS Shell Dlg 2;\">All the pumps continuously generate a constant pressure difference. In the flow line of the heating circuit a boiler is switched on if the flow temperature drops below a threshold. </span></p>
+<p><span style=\"font-family: MS Shell Dlg 2;\">In the flow line of the heating circuit a boiler is connected as a peak load device. </span></p>
 <p><span style=\"font-family: MS Shell Dlg 2;\">Consumers are modeled as sinks are sources with a constant temperature.</span></p>
 </html>", revisions="<html>
 <ul>

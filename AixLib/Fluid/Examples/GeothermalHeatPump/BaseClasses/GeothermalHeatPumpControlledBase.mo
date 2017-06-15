@@ -1,9 +1,7 @@
 within AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses;
 model GeothermalHeatPumpControlledBase
   "Example of a geothermal heat pump system with controllers"
-  extends BaseClasses.GeothermalHeatPumpBase(
-  redeclare AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.Boiler PeakLoadDevice(redeclare
-        package Medium =                                                                                          Medium));
+  extends BaseClasses.GeothermalHeatPumpBase;
   Modelica.Blocks.Sources.RealExpression getTStorageUpper(y=heatStorage.layer[
         heatStorage.n].T) "Gets the temperature of upper heat storage layer"
     annotation (Placement(transformation(extent={{-160,58},{-140,78}})));
@@ -86,9 +84,6 @@ equation
   connect(getTStorageUpper.y, heatStorageTemperature) annotation (Line(points={
           {-139,68},{-132,68},{-120,68},{-120,-88},{-100,-88},{-100,-120}},
         color={0,0,127}));
-  connect(PeakLoadDevice.chemicalEnergyFlowRate, chemicalEnergyFlowRate)
-    annotation (Line(points={{112.77,-56.54},{112.77,-120},{-30,-120},{-30,-98},
-          {-71.5,-98},{-71.5,-119.5}}, color={0,0,127}));
   annotation (experiment(StopTime=86400, Interval=10), Documentation(info="<html>
 <p>Example model demonstrating the use of the <code>AixLib</code> hydraulic components and basic controllers. This model extends <a href=\"modelica://AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpBase\">AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpBase</a>.</p>
 <p>The system model is for a hydronic system with a geothermal heat pump. The heat pump transfers heat from a cold to heat storage. If the temperature in the heat storage exceeds the maximum temperature, the heat pump can be connected to the geothermal field instead. The field thus functions as a heat sink. If the temperature in the cold storage drops below the minimum, the geothermal field can be used as a heat source. </p>

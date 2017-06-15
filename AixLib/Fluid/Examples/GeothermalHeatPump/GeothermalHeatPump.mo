@@ -2,7 +2,7 @@ within AixLib.Fluid.Examples.GeothermalHeatPump;
 model GeothermalHeatPump "Example of a geothermal heat pump system"
   extends
     AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpControlledBase(
-  redeclare AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.Boiler PeakLoadDevice(redeclare
+  redeclare AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone PeakLoadDevice(redeclare
         package Medium =                                                                                          Medium));
 
   Sources.Boundary_pT coldConsumerFlow(redeclare package Medium = Medium,
@@ -77,4 +77,15 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
+  connect(PeakLoadDevice.chemicalEnergyFlowRate, chemicalEnergyFlowRate)
+    annotation (Line(points={{112.77,-56.54},{112.77,-118},{-26,-118},{-26,-100},
+          {-71.5,-100},{-71.5,-119.5}}, color={0,0,127}));
+  annotation (experiment(StopTime=86400, Interval=10), Documentation(revisions="<html>
+<ul>
+<li>
+May 19, 2017, by Marc Baranski:<br/>
+First implementation.
+</li>
+</ul>
+</html>"));
 end GeothermalHeatPump;
