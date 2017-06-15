@@ -70,7 +70,8 @@ equation
 <h4><span style=\"color: #008000\">Overview</span></h4>
 <p>PV model is based on manufactory data and performance factor including the
 NOC</p>
-<p><br><b><span style=\"color: #008000;\">Assumptions</span></b></p>
+<p><br/>
+<b><span style=\"color: #008000;\">Assumptions</span></b></p>
 <p>PV model is based on manufactory data and performance factor.</p>
 <h4><span style=\"color: #008000\">References</span></h4>
 <p>PV system data (DataBase Records) can be found: </p>
@@ -81,15 +82,18 @@ NOC</p>
 <li><a href=\"http://www.renugen.co.uk/content/Solar_Panel_Brochures_part_4/Solar&amp;percnt;20Panel&amp;percnt;20Brochures&amp;percnt;20part&amp;percnt;204/symphony_brochure/symphony_energy_se-m225.pdf\">Renugen</a></li>
 <li><a href=\"http://sunelec.com/datasheet-library/download/SMA-SunnyBoy-3000_3800_4000.pdf\">sunelec</a></li>
 </ul>
-<p><br>Source of literature for the calculation of the pv cell efficiency: </p>
+<p><br/>
+Source of literature for the calculation of the pv cell efficiency: </p>
 <p><q>Thermal modelling to analyze the effect of cell temperature on PV
 modules energy efficiency</q> by Romary, Florian et al.</p>
 <h4><span style=\"color: #008000\">Example Results</span></h4>
 <p><a href=\"HVAC.Examples.Solar_UC.Electric.Testing_PV\">AixLib.Fluid.Solar.Electric.Examples.Testing_PV</a></p>
 </html>",revisions="<html>
 <ul>
-<li><i>October 11, 2016 </i> by Tobias Blacha:<br/>Moved into AixLib</li>
-<li><i>Februar 21, 2013 </i> by Corinna Leonhardt:<br/>Implemented</li>
+<li><i>October 11, 2016 </i> by Tobias Blacha:<br/>
+Moved into AixLib</li>
+<li><i>Februar 21, 2013 </i> by Corinna Leonhardt:<br/>
+Implemented</li>
 </ul>
 </html>"));
 end PVSystem;

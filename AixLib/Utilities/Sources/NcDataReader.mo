@@ -127,13 +127,13 @@ equation
     preferredView="info",
     Documentation(revisions="<html>
 <ul>
-<li><i>Feburary 6, 2017</i> by Philipp Mehrfeld:</br>
+<li><i>Feburary 6, 2017</i> by Philipp Mehrfeld:<br/>
 Revised documentation.</li>
-<li><i>December 14, 2016 </i> by Fabian Wuellhorst:</br>
+<li><i>December 14, 2016 </i> by Fabian Wuellhorst:<br/>
 Implemented.</li>
 </ul>
 </html>", info="<html>
-<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
+<p><b><span style=\"color: #008000;\">Overview</span></b></p>
 <p>The model <b>NcDataReader</b> reads data from netCDF files (based on HDF) to
 Modelica. You can read attributes of type integer or double/float/Real as well
 as one dimensional vectors. Therefore, the NcDataReader represents an

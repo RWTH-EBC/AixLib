@@ -72,14 +72,17 @@ equation
     StartTime=0),
      Documentation(revisions="<html>
 <ul>
-<li><i>October 11, 2016 </i> by Tobias Blacha:<br/>Moved into AixLib</li>
-<li><i>Februar 21, 2013  </i>by Corinna Leonhardt:<br/>Implemented</li>
+<li><i>October 11, 2016 </i> by Tobias Blacha:<br/>
+Moved into AixLib</li>
+<li><i>Februar 21, 2013  </i>by Corinna Leonhardt:<br/>
+Implemented</li>
 </ul>
 </html>",
      info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
 <p>The<b> PVinverterRMS</b> model represents a simple PV inverter. </p>
-<p><br><b><span style=\"color: #008000;\">Concept</span></b></p>
+<p><br/>
+<b><span style=\"color: #008000;\">Concept</span></b></p>
 <p>PVinverterRMS&nbsp;with&nbsp;reliable&nbsp;system&nbsp;manager.</p>
 </html>"));
 end PVInverterRMS;

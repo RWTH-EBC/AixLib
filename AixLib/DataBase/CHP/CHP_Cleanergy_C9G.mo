@@ -103,7 +103,9 @@ low caloric gas (bio gas) </p></td>
 <td valign=\"top\"><p>50 (TRmin = 30 &deg;C)</p></td>
 </tr>
 </table>
-<p><br><br><b>The CHP engine is not designed for continuous operation at more
+<p><br/>
+<br/>
+<b>The CHP engine is not designed for continuous operation at more
 than 80&#37; load (7.2 kW).</b> Continuous use at higher load than 80&#37;
 decreases the time between services.</p>
 <p>For low methane applications, the C9G LowCal is capped to 120 bar engine
@@ -115,7 +117,8 @@ pressure being equivalent to 7.2 kW.</p>
 </html>",
         revisions="<html>
 <ul>
-<li><i>January 24, 2013</i> by Peter Matthes:<br/>implemented</li>
+<li><i>January 24, 2013</i> by Peter Matthes:<br/>
+implemented</li>
 </ul>
 </html>"));
 end CHP_Cleanergy_C9G;

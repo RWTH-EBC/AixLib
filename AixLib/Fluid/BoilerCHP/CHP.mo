@@ -306,15 +306,20 @@ of 1748 K. The value is relevant for exergy analysis.</p>
 </html>",
 revisions="<html>
 <ul>
-<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
+<li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>
+Adapted to AixLib
 conventions</li>
-<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Merged with
+<li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>
+Merged with
 AixLib</li>
-<li><i>January 09, 2006&nbsp;</i> by Peter Matthes:<br/>V0.1: Initial
+<li><i>January 09, 2006&nbsp;</i> by Peter Matthes:<br/>
+V0.1: Initial
 configuration.</li>
-<li><i>November 28, 2014&nbsp;</i> by Roozbeh Sangi:<br/>Output for source
+<li><i>November 28, 2014&nbsp;</i> by Roozbeh Sangi:<br/>
+Output for source
 Temperature added.</li>
-<li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation
+<li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>
+Formatted documentation
 appropriately</li>
 <li>by Pooyan Jahangiri:<br>First implementation.</li>
 </ul>
