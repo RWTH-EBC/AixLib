@@ -321,7 +321,8 @@ Temperature added.</li>
 <li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>
 Formatted documentation
 appropriately</li>
-<li>by Pooyan Jahangiri:<br>First implementation.</li>
+<li>by Pooyan Jahangiri:<br/>
+First implementation.</li>
 </ul>
 </html>"));
 end CHP;
