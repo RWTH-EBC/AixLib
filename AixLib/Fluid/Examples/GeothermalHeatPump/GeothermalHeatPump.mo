@@ -43,10 +43,10 @@ model GeothermalHeatPump "Example of a geothermal heat pump system"
   Modelica.Blocks.Sources.Constant TStorageSet(k=273.15 + 35)
     "Set point of upper heat storage temperature"
     annotation (Placement(transformation(extent={{-160,4},{-148,16}})));
-  BaseClasses.geothermalFieldController geothermalFieldControllerHeat
+  Control.geothermalFieldController     geothermalFieldControllerHeat
     "Controls the heat exchange with the geothermal field and the heat storage"
     annotation (Placement(transformation(extent={{-100,-34},{-84,-18}})));
-  BaseClasses.geothermalFieldController geothermalFieldControllerCold(
+  Control.geothermalFieldController     geothermalFieldControllerCold(
       temperature_low=273.15 + 6, temperature_high=273.15 + 8)
     "Controls the heat exchange with the geothermal field and the heat storage"
     annotation (Placement(transformation(extent={{-100,28},{-84,44}})));

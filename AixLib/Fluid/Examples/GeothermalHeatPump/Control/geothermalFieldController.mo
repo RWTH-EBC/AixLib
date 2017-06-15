@@ -1,4 +1,4 @@
-within AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses;
+within AixLib.Fluid.Examples.GeothermalHeatPump.Control;
 model geothermalFieldController
   "Controls the heat exchange with a heat or cold source by setting two valves"
 
@@ -10,7 +10,6 @@ model geothermalFieldController
     "true = hysteresis with negation = for warm side";
   parameter Modelica.SIunits.Time delayTime=10
     "Time delay between opening of valve 1 and 2";
-
 
   Modelica.Blocks.Logical.Switch switch
     "Switches between fully opened and fully closed"
@@ -90,7 +89,6 @@ model geothermalFieldController
         rotation=180,
         origin={-26,-48})));
 equation
-
 
   connect(approxFullyOpened.y, switch.u1) annotation (Line(points={{-43.4,26},{
           -38,26},{-38,4.8},{-29.2,4.8}}, color={0,0,127}));
