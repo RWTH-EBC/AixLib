@@ -112,11 +112,8 @@ model GeothermalHeatPumpBase
         rotation=90,
         origin={-18,-78})));
   AixLib.Fluid.Sources.Boundary_pT geothField_sink1(redeclare package Medium =
-        Medium, nPorts=1) "One of two sinks representing geothermal field"
+        Medium, nPorts=2) "One of two sinks representing geothermal field"
     annotation (Placement(transformation(extent={{-158,20},{-146,32}})));
-  AixLib.Fluid.Sources.Boundary_pT geothFieldSink2(redeclare package Medium =
-        Medium, nPorts=1) "One of two sinks representing geothermal field"
-    annotation (Placement(transformation(extent={{-158,-15},{-146,-3}})));
   FixedResistances.PressureDrop                     resistanceHeatConsumerFlow(
     redeclare package Medium = Medium,
     m_flow_nominal=0.2,
@@ -249,9 +246,8 @@ equation
   connect(valveHeatStorage.port_b, heatPumpTab.port_a_sink) annotation (Line(
         points={{-18,-57},{-18,-54},{-5.8,-54},{-5.8,-8.9}}, color={0,127,255}));
   connect(heatPumpTab.port_b_sink, geothField_sink1.ports[1]) annotation (Line(
-        points={{-5.8,14.9},{2,14.9},{2,26},{-146,26}}, color={0,127,255}));
-  connect(geothFieldSink2.ports[1], heatPumpTab.port_b_source) annotation (Line(
-        points={{-146,-9},{-92,-9},{-92,-8.9},{-38.2,-8.9}}, color={0,127,255}));
+        points={{-5.8,14.9},{2,14.9},{2,27.2},{-146,27.2}},
+                                                        color={0,127,255}));
   connect(heatStorage.port_a_heatGenerator, heatPumpTab.port_b_sink)
     annotation (Line(points={{26.24,-64.04},{10,-64.04},{10,14.9},{-5.8,14.9}},
         color={0,127,255}));
@@ -285,6 +281,9 @@ equation
       extent={{6,3},{6,3}}));
   connect(resistanceHeatConsumerFlow.port_b, PeakLoadDevice.port_a) annotation (
      Line(points={{94,-50},{102,-50},{108,-50}}, color={0,127,255}));
+  connect(geothField_sink1.ports[2], heatPumpTab.port_b_source) annotation (
+      Line(points={{-146,24.8},{-92,24.8},{-92,-8.9},{-38.2,-8.9}}, color={0,
+          127,255}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-160,
           -120},{160,80}})),              Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-160,-120},{160,80}})),
