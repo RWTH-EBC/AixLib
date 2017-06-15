@@ -141,8 +141,9 @@ equation
           fillPattern=FillPattern.Solid),                                                                                                       Text(extent={{
               -56,28},{64,-24}},                                                                                                                                                      lineColor = {175, 175, 175}, textString = "%name")}),
     Documentation(info="<html>
-<p><span style=\"font-family: MS Shell Dlg 2;\">This is a model of a controller, which manipulates the opening of two valves. If the measured temperature drops below the lower thrshold, the first valve is fully closed and the second valve is fully opened. The opposite constellation applies if the temperature exceeds the higher threshold. To avoid zero mass flow rates, the opening is only close 0. Additionally, a delay can be set so that the valves do not react simultaneously (opened valve is closed first).</span></p>
-</html>", revisions="<html>
+<p><span style=\"font-family: MS Shell Dlg 2;\">This is a model of a controller, which manipulates the opening of two valves. If the measured temperature drops below the lower thrshold, the first valve is fully closed and the second valve is fully opened. The opposite constellation applies if the temperature exceeds the higher threshold. To avoid zero mass flow rates, the opening is only close 0. Additionally, a delay can be set so that the valves do not react simultaneously (opened valve is closed first). It can be used in <a href=\"modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.GeothermalHeatPump\">
+AixLib.Fluid.Examples.GeothermalHeatPump.Components.GeothermalHeatPump</a>.</span></p>
+",        revisions="<html>
 <ul>
 <li>May 24, 2017, by Alexander K&uuml;mpel:<br>Delay improved.</li>
 <li>May 19, 2017, by Marc Baranski:<br>First implementation. </li>

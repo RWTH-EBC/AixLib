@@ -13,7 +13,8 @@ expandable connector PumpControlBus
     Icon(coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
-<p>Definition of a standard heat pump bus that contains basic data points that appear in every heat pump.</p>
+<p>Definition of a standard control bus that includes all the pressure set points required for <a href=\"modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.GeothermalHeatPump\">
+AixLib.Fluid.Examples.GeothermalHeatPump.Components.GeothermalHeatPump</a>.</p>
 </html>", revisions="<html>
 <p>March 31, 2017, by Marc Baranski:</p>
 <p>First implementation. </p>

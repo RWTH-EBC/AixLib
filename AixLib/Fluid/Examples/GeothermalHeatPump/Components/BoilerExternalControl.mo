@@ -36,5 +36,7 @@ May 19, 2017, by Marc Baranski:<br/>
 First implementation.
 </li>
 </ul>
+</html>", info="<html>
+<p>Model containing the simple boiler model <a href=\"modelica://AixLib.Fluid.BoilerCHP.Boiler\">AixLib.Fluid.BoilerCHP.Boiler</a> and interfaces for external control.</p>
 </html>"));
 end BoilerExternalControl;

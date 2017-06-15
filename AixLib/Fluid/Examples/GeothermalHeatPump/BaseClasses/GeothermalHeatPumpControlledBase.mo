@@ -85,10 +85,7 @@ equation
           {-139,68},{-132,68},{-120,68},{-120,-88},{-100,-88},{-100,-120}},
         color={0,0,127}));
   annotation (experiment(StopTime=86400, Interval=10), Documentation(info="<html>
-<p>Example model demonstrating the use of the <code>AixLib</code> hydraulic components and basic controllers. This model extends <a href=\"modelica://AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpBase\">AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpBase</a>.</p>
-<p>The system model is for a hydronic system with a geothermal heat pump. The heat pump transfers heat from a cold to heat storage. If the temperature in the heat storage exceeds the maximum temperature, the heat pump can be connected to the geothermal field instead. The field thus functions as a heat sink. If the temperature in the cold storage drops below the minimum, the geothermal field can be used as a heat source. </p>
-<p>The heat pump is on/off-controlled. The controlled variable is always the heat storage temperature. The temperature in the cold storage is not relevant for the control of the heat pump.</p>
-<p>The geothermal field can be connected to or separated from the storages by opening or closing four valves. One pair of valves is controlled by one controller which ensures that the temperature in the respective storage are not too high or too low, respectively. </p>
+<p>Base class of an example demonstrating the use of a heat pump connected to two storages and a geothermal source. This model also includes basic controllers.</p>
 </html>", revisions="<html>
 <ul>
 <li>
