@@ -107,5 +107,14 @@ May 19, 2017, by Marc Baranski:<br/>
 First implementation.
 </li>
 </ul>
+</html>", info="<html>
+<p><b><span style=\"font-family: MS Shell Dlg 2; font-size: 10pt;\">Information</span></b> </p>
+<p><b><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Overview</span></b> </p>
+<p><span style=\"font-family: MS Shell Dlg 2;\">Simple component model of a combined heat and cold supply system. The geothermal heat pump can either transport heat </span></p>
+<p><span style=\"font-family: MS Shell Dlg 2;\">- from the cold to the heat storage</span></p>
+<p><span style=\"font-family: MS Shell Dlg 2;\">- from the cold storage to the geothermal field (heat storage disconnected)</span></p>
+<p><span style=\"font-family: MS Shell Dlg 2;\">- from the geothermal field to the heat storage</span></p>
+<p><span style=\"font-family: MS Shell Dlg 2;\">In the flow line of the heating circuit a boiler is connected as a peak load device. </span></p>
+<p><span style=\"font-family: MS Shell Dlg 2;\">Consumers are modeled as sinks are sources with a constant temperature.</span></p>
 </html>"));
 end GeothermalHeatPump;

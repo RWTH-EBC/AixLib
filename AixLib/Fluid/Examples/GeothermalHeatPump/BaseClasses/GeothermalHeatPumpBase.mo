@@ -2,7 +2,6 @@ within AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses;
 model GeothermalHeatPumpBase
   "Base class of the geothermal heat pump system"
 
-  extends Modelica.Icons.Example;
 
   replaceable package Medium = AixLib.Media.Water "Medium model used for hydronic components";
 
@@ -294,7 +293,7 @@ equation
       inputs=false,
       auxiliaries=false),
     Documentation(info="<html>
-<p>Base class of an example demonstrating the use of a heat pump connected to two storages and a geothermal source.</p>
+<p>Base class of an example demonstrating the use of a heat pump connected to two storages and a geothermal source. A replaceable model is connected in the flow line of the heating circuit. A peak load device can be added here. </p>
 </html>", revisions="<html>
 <ul>
 <li>
