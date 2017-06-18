@@ -45,7 +45,7 @@ the network into the ideal sink. </p>
 </html>", revisions="<html>
 <ul>
 <li>
-May 27, 2017, by Marcus Fuchs:<br/>
+June 18, 2017, by Marcus Fuchs:<br/>
 First implementation for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
 </li>
 </ul>

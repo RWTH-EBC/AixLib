@@ -49,7 +49,8 @@ equation
 ideal flow sink discharging a prescribed mass flow rate from the DHC system's
 supply network. Note that the <code>prescribed_m_flow</code> parameter should be
 given as a positive value, specifying the mass flow rate to be extracted from
-the network into the ideal sink. </p>
+the network into the ideal sink.</p>
+<p>This is a minimal implementation not using the demand node base class.</p>
 </html>", revisions="<html>
 <ul>
 <li>

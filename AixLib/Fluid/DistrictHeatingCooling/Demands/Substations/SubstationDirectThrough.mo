@@ -9,4 +9,15 @@ model SubstationDirectThrough
   redeclare AixLib.Fluid.DistrictHeatingCooling.Demands.Substations.FlowControl.NoFlowControl flowControl(prescribed_m_flow=prescribed_m_flow),
   redeclare AixLib.Fluid.DistrictHeatingCooling.Demands.Substations.HeatTransfer.NoHeatTransfer heatTransfer(prescribedQ=prescribedQ));
 
+  annotation (Documentation(revisions="<html>
+<ul>
+<li>
+June 18, 2017, by Marcus Fuchs:<br/>
+First implementation for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
+</li>
+</ul>
+</html>", info="<html>
+<p>This is a basic placeholder. Instead of flow control behavior,
+this model does not affect the fluid.</p>
+</html>"));
 end SubstationDirectThrough;

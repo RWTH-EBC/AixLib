@@ -24,8 +24,8 @@ partial model PartialDemand
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={60,0})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort senT_return(redeclare package Medium
-      = Medium, m_flow_nominal=1) "Return flow temperature sensor"
+  AixLib.Fluid.Sensors.TemperatureTwoPort senT_return(redeclare package Medium =
+        Medium, m_flow_nominal=1) "Return flow temperature sensor"
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 equation
   connect(port_a, senT_supply.port_a)
