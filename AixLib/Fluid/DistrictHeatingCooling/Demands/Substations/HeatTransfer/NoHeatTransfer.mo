@@ -17,5 +17,10 @@ June 18, 2017, by Marcus Fuchs:<br/>
 First implementation for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
 </li>
 </ul>
-</html>"));
+</html>"), Icon(graphics={Rectangle(
+          extent={{-100,100},{100,-100}},
+          lineColor={28,108,200},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid), Line(points={{-90,0},{90,0}}, color={
+              28,108,200})}));
 end NoHeatTransfer;

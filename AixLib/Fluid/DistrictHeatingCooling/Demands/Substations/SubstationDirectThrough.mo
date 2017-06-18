@@ -19,5 +19,5 @@ First implementation for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/403
 </html>", info="<html>
 <p>This is a basic placeholder. Instead of flow control behavior,
 this model does not affect the fluid.</p>
-</html>"));
+</html>"), Icon(graphics={Line(points={{-90,0},{90,0}}, color={28,108,200})}));
 end SubstationDirectThrough;
