@@ -12,14 +12,14 @@ model IdealSinkMin
         Medium, m_flow_nominal=1) "Supply flow temperature sensor"
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
 
-  parameter Modelica.SIunits.MassFlowRate prescribedFlow
+  parameter Modelica.SIunits.MassFlowRate prescribed_m_flow
     "Prescribed mass flow rate, positive values are discharged from the network";
 
   AixLib.Fluid.Sources.MassFlowSource_T sink(
     redeclare package Medium = Medium,
     nPorts=1,
     use_m_flow_in=false,
-    m_flow=-prescribedFlow)
+    m_flow=-prescribed_m_flow)
               "Flow demand of the substation" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
@@ -47,7 +47,7 @@ equation
           fillPattern=FillPattern.Solid)}), Documentation(info="<html>
 <p> This model implements a very simple demand node representation with only an
 ideal flow sink discharging a prescribed mass flow rate from the DHC system's
-supply network. Note that the <code>prescribedFlow</code> parameter should be
+supply network. Note that the <code>prescribed_m_flow</code> parameter should be
 given as a positive value, specifying the mass flow rate to be extracted from
 the network into the ideal sink. </p>
 </html>", revisions="<html>

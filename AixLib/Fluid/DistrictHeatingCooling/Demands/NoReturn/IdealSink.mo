@@ -4,10 +4,10 @@ model IdealSink
   extends AixLib.Fluid.DistrictHeatingCooling.BaseClasses.Demands.NoReturn.PartialDemand(
     redeclare AixLib.Fluid.DistrictHeatingCooling.Demands.Substations.SubstationDirectThrough substation);
 
-  parameter Modelica.SIunits.MassFlowRate prescribedFlow
+  parameter Modelica.SIunits.MassFlowRate prescribed_m_flow
     "Prescribed mass flow rate, positive values are discharged from the network";
 
-  Modelica.Blocks.Sources.Constant m_flow_set(k=prescribedFlow)
+  Modelica.Blocks.Sources.Constant m_flow_set(k=prescribed_m_flow)
     "Set the value for constant mass flow rate"
     annotation (Placement(transformation(extent={{-80,70},{-60,90}})));
   Modelica.Blocks.Math.Gain changeSign(k=-1)
@@ -39,7 +39,7 @@ equation
           fillPattern=FillPattern.Solid)}), Documentation(info="<html>
 <p> This model implements a very simple demand node representation with only an
 ideal flow sink discharging a prescribed mass flow rate from the DHC system's
-supply network. Note that the <code>prescribedFlow</code> parameter should be
+supply network. Note that the <code>prescribed_m_flow</code> parameter should be
 given as a positive value, specifying the mass flow rate to be extracted from
 the network into the ideal sink. </p>
 </html>", revisions="<html>

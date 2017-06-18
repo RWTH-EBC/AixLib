@@ -55,19 +55,19 @@ model HydraulicValMod
         rotation=180,
         origin={90,-60})));
   Demands.NoReturn.IdealSinkMin B1(redeclare package Medium = Medium,
-      prescribedFlow=28.175) "Demand node B1" annotation (Placement(
+      prescribed_m_flow=28.175) "Demand node B1" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-90,30})));
   Demands.NoReturn.IdealSinkMin B2(redeclare package Medium = Medium,
-      prescribedFlow=42.213) "Demand node B2" annotation (Placement(
+      prescribed_m_flow=42.213) "Demand node B2" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={20,80})));
   Demands.NoReturn.IdealSinkMin B3(redeclare package Medium = Medium,
-      prescribedFlow=22.6) "Demand node B3" annotation (Placement(
+      prescribed_m_flow=22.6) "Demand node B3" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,

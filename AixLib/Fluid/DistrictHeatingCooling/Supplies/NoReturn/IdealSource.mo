@@ -1,7 +1,7 @@
 within AixLib.Fluid.DistrictHeatingCooling.Supplies.NoReturn;
 model IdealSource
   "Simple supply node model with ideal flow source and no return port"
-  extends BaseClasses.NoReturn.PartialSupply;
+  extends BaseClasses.Supplies.NoReturn.PartialSupply;
   AixLib.Fluid.Sources.Boundary_pT source(          redeclare package Medium =
         Medium,
     p=p_supply,
