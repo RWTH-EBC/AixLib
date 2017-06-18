@@ -1,4 +1,4 @@
-within AixLib.Fluid.DistrictHeatingCooling.BaseClasses.NoReturn;
+within AixLib.Fluid.DistrictHeatingCooling.BaseClasses.Supplies.NoReturn;
 partial model PartialSupply
   "Base class for modeling supply nodes in DHC systems without return lines"
 
@@ -14,8 +14,8 @@ partial model PartialSupply
   Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
         Medium)                                "Outlet of supply node"
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
-  AixLib.Fluid.Sensors.TemperatureTwoPort senT_supply(redeclare package Medium =
-        Medium, m_flow_nominal=1) "Supply flow temperature sensor"
+  AixLib.Fluid.Sensors.TemperatureTwoPort senT_supply(redeclare package Medium
+      = Medium, m_flow_nominal=1) "Supply flow temperature sensor"
     annotation (Placement(transformation(extent={{40,-10},{60,10}})));
   AixLib.Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium =
         Medium) "Mass flow rate sensor"

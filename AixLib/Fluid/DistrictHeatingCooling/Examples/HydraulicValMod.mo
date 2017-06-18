@@ -54,25 +54,22 @@ model HydraulicValMod
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={90,-60})));
-  Demands.NoReturn.IdealSink
-                           B1(
-    redeclare package Medium = Medium, prescribedFlow=28.175)
-              "Demand node B1"
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+  Demands.NoReturn.IdealSinkMin B1(redeclare package Medium = Medium,
+      prescribedFlow=28.175) "Demand node B1" annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-90,30})));
-  Demands.NoReturn.IdealSink
-                           B2(
-    redeclare package Medium = Medium, prescribedFlow=42.213)
-                    "Demand node B2" annotation (Placement(transformation(
+  Demands.NoReturn.IdealSinkMin B2(redeclare package Medium = Medium,
+      prescribedFlow=42.213) "Demand node B2" annotation (Placement(
+        transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={20,80})));
-  Demands.NoReturn.IdealSink
-                           B3(
-    redeclare package Medium = Medium, prescribedFlow=22.6)
-                  "Demand node B3"
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+  Demands.NoReturn.IdealSinkMin B3(redeclare package Medium = Medium,
+      prescribedFlow=22.6) "Demand node B3" annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-10,-60})));
   Modelica.Blocks.Interfaces.RealOutput deviationPressure1(final unit="1")

@@ -1,27 +1,35 @@
 within AixLib.Fluid.DistrictHeatingCooling.Demands.NoReturn;
-model IdealSink
-  "Demand node as an ideal sink without return flow, using demand base class"
-  extends AixLib.Fluid.DistrictHeatingCooling.BaseClasses.Demands.NoReturn.PartialDemand(
-    redeclare AixLib.Fluid.DistrictHeatingCooling.Demands.Substations.SubstationDirectThrough substation);
+model IdealSinkMin
+  "Demand node as an ideal sink without return flow, minimal implementation"
+
+  replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
+    "Medium model" annotation (choicesAllMatching=true);
+
+  Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
+        Medium) "Inlet port of demand node"
+    annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
+  AixLib.Fluid.Sensors.TemperatureTwoPort senT_supply(redeclare package Medium =
+        Medium, m_flow_nominal=1) "Supply flow temperature sensor"
+    annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
 
   parameter Modelica.SIunits.MassFlowRate prescribedFlow
     "Prescribed mass flow rate, positive values are discharged from the network";
 
-  Modelica.Blocks.Sources.Constant m_flow_set(k=prescribedFlow)
-    "Set the value for constant mass flow rate"
-    annotation (Placement(transformation(extent={{-80,70},{-60,90}})));
-  Modelica.Blocks.Math.Gain changeSign(k=-1)
-    "Changes sign of prescribed flow for extraction from network" annotation (
-      Placement(transformation(
+  AixLib.Fluid.Sources.MassFlowSource_T sink(
+    redeclare package Medium = Medium,
+    nPorts=1,
+    use_m_flow_in=false,
+    m_flow=-prescribedFlow)
+              "Flow demand of the substation" annotation (Placement(
+        transformation(
         extent={{-10,-10},{10,10}},
-        rotation=0,
-        origin={10,80})));
+        rotation=270,
+        origin={0,30})));
 equation
-
-  connect(m_flow_set.y, changeSign.u)
-    annotation (Line(points={{-59,80},{-2,80}}, color={0,0,127}));
-  connect(changeSign.y, sink.m_flow_in) annotation (Line(points={{21,80},{84,80},
-          {84,10},{70,8}}, color={0,0,127}));
+  connect(port_a, senT_supply.port_a)
+    annotation (Line(points={{-100,0},{-80,0}}, color={0,127,255}));
+  connect(senT_supply.port_b, sink.ports[1])
+    annotation (Line(points={{-60,0},{0,0},{0,20}}, color={0,127,255}));
   annotation (Icon(graphics={
           Rectangle(
           extent={{-100,100},{100,-100}},
@@ -50,4 +58,4 @@ First implementation for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/403
 </li>
 </ul>
 </html>"));
-end IdealSink;
+end IdealSinkMin;

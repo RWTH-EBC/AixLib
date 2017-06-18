@@ -1,4 +1,4 @@
-within AixLib.Fluid.DistrictHeatingCooling.BaseClasses;
+within AixLib.Fluid.DistrictHeatingCooling.BaseClasses.Supplies;
 package NoReturn "Base classes to model only the supply network of DHC systems (without return lines)"
 extends Modelica.Icons.BasesPackage;
 
