@@ -42,8 +42,8 @@ equation
           fillPattern=FillPattern.Solid),
                              Ellipse(
           extent={{-8,40},{72,-40}},
-          lineColor={28,108,200},
-          fillColor={28,108,200},
+          lineColor={135,135,135},
+          fillColor={135,135,135},
           fillPattern=FillPattern.Solid)}), Documentation(info="<html>
 <p> This model implements a very simple demand node representation with only an
 ideal flow sink discharging a prescribed mass flow rate from the DHC system's

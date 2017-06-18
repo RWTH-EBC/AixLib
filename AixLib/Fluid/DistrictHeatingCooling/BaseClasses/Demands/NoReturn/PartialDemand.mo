@@ -27,6 +27,16 @@ partial model PartialDemand
   AixLib.Fluid.Sensors.TemperatureTwoPort senT_return(redeclare package Medium =
         Medium, m_flow_nominal=1) "Return flow temperature sensor"
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
+
+protected
+  final parameter Medium.ThermodynamicState sta_default = Medium.setState_pTX(
+    T=Medium.T_default,
+    p=Medium.p_default,
+    X=Medium.X_default[1:Medium.nXi]) "Medium state at default properties";
+  final parameter Modelica.SIunits.SpecificHeatCapacity cp_default=
+    Medium.specificHeatCapacityCp(sta_default)
+    "Specific heat capacity of the fluid";
+
 equation
   connect(port_a, senT_supply.port_a)
     annotation (Line(points={{-100,0},{-80,0}}, color={0,127,255}));
