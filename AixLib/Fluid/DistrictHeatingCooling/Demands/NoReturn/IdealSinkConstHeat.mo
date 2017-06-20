@@ -22,8 +22,8 @@ model IdealSinkConstHeat
         rotation=0,
         origin={10,80})));
   Modelica.Blocks.Math.Gain heatToMassFlow(k=1/(dTDesign*cp_default))
-    "Calculates mass flow rate based on design dT from heat demand" annotation
-    (Placement(transformation(
+    "Calculates mass flow rate based on design dT from heat demand" annotation (
+     Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-30,80})));

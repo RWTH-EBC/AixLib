@@ -10,7 +10,7 @@ partial model PartialDemand
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
   AixLib.Fluid.Sensors.TemperatureTwoPort senT_supply(redeclare package Medium =
         Medium, m_flow_nominal=1) "Supply flow temperature sensor"
-    annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
+    annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
   replaceable Demands.Substations.PartialSubstation substation(redeclare
       package Medium = Medium)
     "Substation model for demand node"
@@ -37,15 +37,21 @@ protected
     Medium.specificHeatCapacityCp(sta_default)
     "Specific heat capacity of the fluid";
 
+public
+  Sensors.Pressure senPre_supply(redeclare package Medium = Medium)
+    "Supply pressure arriving at demand node"
+    annotation (Placement(transformation(extent={{-90,10},{-70,30}})));
 equation
-  connect(port_a, senT_supply.port_a)
-    annotation (Line(points={{-100,0},{-80,0}}, color={0,127,255}));
   connect(senT_supply.port_b, substation.port_a)
-    annotation (Line(points={{-60,0},{-20,0}}, color={0,127,255}));
+    annotation (Line(points={{-40,0},{-20,0}}, color={0,127,255}));
   connect(substation.port_b, senT_return.port_a)
     annotation (Line(points={{0,0},{10,0},{20,0}}, color={0,127,255}));
   connect(sink.ports[1], senT_return.port_b) annotation (Line(points={{50,
           1.11022e-015},{46,1.11022e-015},{46,0},{40,0}}, color={0,127,255}));
+  connect(port_a, senT_supply.port_a)
+    annotation (Line(points={{-100,0},{-60,0}}, color={0,127,255}));
+  connect(senPre_supply.port, senT_supply.port_a)
+    annotation (Line(points={{-80,10},{-80,0},{-60,0}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Rectangle(
           extent={{-100,100},{100,-100}},
