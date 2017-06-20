@@ -42,7 +42,13 @@ partial package PartialHybridTwoPhaseMedium
   replaceable record SmoothTransition
     "Record that contains ranges to calculate a smooth transition between
     different regions"
-
+    SpecificEnthalpy T_ph = 10;
+    SpecificEntropy T_ps = 10;
+    AbsolutePressure d_pT = 10;
+    SpecificEnthalpy d_ph = 10;
+    Real d_ps(unit="J/(Pa.K.kg)") =  50/(30e5-0.5e5);
+    Real h_ps(unit="J/(Pa.K.kg)") = 100/(30e5-0.5e5);
+    AbsolutePressure d_derh_p = 0.2;
   end SmoothTransition;
 
   /*Provide Helmholtz equations of state (EoS). These EoS must be fitted to
@@ -1034,8 +1040,9 @@ partial package PartialHybridTwoPhaseMedium
 
   protected
     TSP cf;
+    SmoothTransition st;
 
-    SpecificEnthalpy dh = 10;
+    SpecificEnthalpy dh = st.T_ph;
     SpecificEnthalpy h_dew;
     SpecificEnthalpy h_bubble;
 
@@ -1132,8 +1139,9 @@ partial package PartialHybridTwoPhaseMedium
 
   protected
     TSP cf;
+    SmoothTransition st;
 
-    SpecificEntropy ds = 10;
+    SpecificEntropy ds = st.T_ps;
     SpecificEntropy s_dew;
     SpecificEntropy s_bubble;
 
@@ -1228,8 +1236,9 @@ partial package PartialHybridTwoPhaseMedium
 
   protected
     TSP cf;
+    SmoothTransition st;
 
-    AbsolutePressure dp = 10;
+    AbsolutePressure dp = st.d_pT;
     SaturationProperties sat = setSat_T(T=T);
 
     Real x1;
@@ -1316,7 +1325,9 @@ partial package PartialHybridTwoPhaseMedium
     output Density d "Density";
 
   protected
-    SpecificEnthalpy dh = 10;
+    SmoothTransition st;
+
+    SpecificEnthalpy dh = st.d_ph;
     SaturationProperties sat;
     SpecificEnthalpy h_dew;
     SpecificEnthalpy h_bubble;
@@ -1357,7 +1368,9 @@ partial package PartialHybridTwoPhaseMedium
     output Density d "Temperature";
 
   protected
-    SpecificEntropy ds = 50*p/(30e5-0.5e5);
+    SmoothTransition st;
+
+    SpecificEntropy ds = p*st.d_ps;
     SaturationProperties sat;
     SpecificEntropy s_dew;
     SpecificEntropy s_bubble;
@@ -1466,7 +1479,9 @@ partial package PartialHybridTwoPhaseMedium
     output SpecificEnthalpy h "Specific enthalpy";
 
   protected
-    SpecificEntropy ds = 100*p/(30e5-0.5e5);
+    SmoothTransition st;
+
+    SpecificEntropy ds = p*st.h_ps;
     SaturationProperties sat;
     SpecificEntropy s_dew;
     SpecificEntropy s_bubble;
@@ -1684,12 +1699,14 @@ partial package PartialHybridTwoPhaseMedium
     "Calculates density derivative (dd/dh)@p=const"
 
   protected
+    SmoothTransition st;
+
+    AbsolutePressure dp = st.d_derh_p;
+
     SaturationProperties sat = setSat_p(state.p);
     Real phase_dT = if not ((state.d < bubbleDensity(sat) and
       state.d > dewDensity(sat)) and state.T <
       fluidConstants[1].criticalTemperature) then 1 else 2;
-
-    AbsolutePressure dp = 0.2;
 
   algorithm
     if state.phase==1 or phase_dT==1 then

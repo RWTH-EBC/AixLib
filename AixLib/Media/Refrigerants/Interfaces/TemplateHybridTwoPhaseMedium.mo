@@ -160,6 +160,18 @@ partial package TemplateHybridTwoPhaseMedium
     extends AixLib.DataBase.Media.Refrigerants.R1270.TSP_Sangi;
   end TSP;
 
+  redeclare record SmoothTransition
+    "Record that contains ranges to calculate a smooth transition between
+    different regions"
+    SpecificEnthalpy T_ph = 10;
+    SpecificEntropy T_ps = 10;
+    AbsolutePressure d_pT = 10;
+    SpecificEnthalpy d_ph = 10;
+    Real d_ps(unit="J/(Pa.K.kg)") =  50/(30e5-0.5e5);
+    Real h_ps(unit="J/(Pa.K.kg)") = 100/(30e5-0.5e5);
+    AbsolutePressure d_derh_p = 0.2;
+  end SmoothTransition;
+
   /*Provide functions to calculate further thermodynamic properties like the
     dynamic viscosity or thermal conductivity. Also add references.
   */
@@ -183,53 +195,6 @@ partial package TemplateHybridTwoPhaseMedium
   algorithm
 
   end surfaceTension;
-
-  /*Provide functions to calculate further thermodynamic properties depending on
-    the independent state properties. These functions are polynomial fits in 
-    order to reduce computing time. Moreover, these functions may have a
-    heuristic to deal with discontinuities. Add further fits if necessary.
-  */
-  redeclare function extends temperature_ph
-  "Calculates temperature as function of pressure and specific enthalpy"
-  protected
-    SpecificEnthalpy dh = 10;
-  end temperature_ph;
-
-  redeclare function extends temperature_ps
-  "Calculates temperature as function of pressure and specific entropy"
-  protected
-    SpecificEntropy ds = 10;
-  end temperature_ps;
-
-  redeclare function extends density_pT
-  "Calculates density as function of pressure and temperature"
-  protected
-    AbsolutePressure dp = 10;
-  end density_pT;
-
-  redeclare function extends density_ph
-  "Computes density as a function of pressure and enthalpy"
-  protected
-    SpecificEnthalpy dh = 10;
-  end density_ph;
-
-  redeclare function extends density_ps
-  "Computes density as a function of pressure and entropy"
-  protected
-    SpecificEntropy ds = 50*p/(30e5-0.5e5);
-  end density_ps;
-
-  redeclare function extends specificEnthalpy_ps
-  "Computes specific enthalpy as a function of pressure and entropy"
-  protected
-    SpecificEntropy ds = 100*p/(30e5-0.5e5);
-  end specificEnthalpy_ps;
-
-  redeclare function extends density_derh_p
-  "Calculates density derivative (dd/dh)@p=const"
-  protected
-    AbsolutePressure dp = 0.2;
-  end density_derh_p;
 
   annotation (Documentation(revisions="<html>
 <ul>
