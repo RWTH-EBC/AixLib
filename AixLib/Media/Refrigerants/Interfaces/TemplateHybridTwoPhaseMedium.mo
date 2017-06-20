@@ -140,143 +140,25 @@ partial package TemplateHybridTwoPhaseMedium
     p,T as independent variables.
   */
 
-  /*Provide Helmholtz equations of state (EoS). These EoS must be fitted to
-    different refrigerants. However, the structure will not change and, 
-    therefore, the coefficients, which are obtained during the fitting 
-    procedure, are provided by records.
-    Just change if needed.
+  /*Provide records thats contain the fitting coefficients for all fitted
+    formula (e.g. Helmholtz equation of state).
   */
-  redeclare function extends alpha_0
-  "Dimensionless Helmholtz energy (Ideal gas contribution alpha_0)"
-  protected
-    AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.EoS_Sangi();
-  end alpha_0;
+  redeclare record EoS
+    "Record that contains fitting coefficients of the Helmholtz EoS"
+    extends AixLib.DataBase.Media.Refrigerants.R1270.EoS_Sangi;
+  end EoS;
 
-  redeclare function extends alpha_r
-  "Dimensionless Helmholtz energy (Residual part alpha_r)"
-  protected
-    AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.EoS_Sangi();
-  end alpha_r;
+  redeclare record BDSP
+    "Record that contains fitting coefficients of the state properties at bubble
+    and dew lines"
+    extends AixLib.DataBase.Media.Refrigerants.R1270.BDSP_Sangi;
+  end BDSP;
 
-  redeclare function extends tau_d_alpha_0_d_tau
-  "Short form for tau*(dalpha_0/dtau)@delta=const"
-  protected
-    AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.EoS_Sangi();
-  end tau_d_alpha_0_d_tau;
-
-  redeclare function extends tau2_d2_alpha_0_d_tau2
-  "Short form for tau*tau*(ddalpha_0/(dtau*dtau))@delta=const"
-  protected
-    AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.EoS_Sangi();
-  end tau2_d2_alpha_0_d_tau2;
-
-  redeclare function extends tau_d_alpha_r_d_tau
-  "Short form for tau*(dalpha_r/dtau)@delta=const"
-  protected
-    AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.EoS_Sangi();
-  end tau_d_alpha_r_d_tau;
-
-  redeclare function extends tau_delta_d2_alpha_r_d_tau_d_delta
-  "Short form for tau*delta*(ddalpha_r/(dtau*ddelta))"
-  protected
-    AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.EoS_Sangi();
-  end tau_delta_d2_alpha_r_d_tau_d_delta;
-
-  redeclare function extends tau2_d2_alpha_r_d_tau2
-  "Short form for tau*tau*(ddalpha_r/(dtau*dtau))@delta=const"
-  protected
-    AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.EoS_Sangi();
-  end tau2_d2_alpha_r_d_tau2;
-
-  redeclare function extends delta_d_alpha_r_d_delta
-  "Short form for delta*(dalpha_r/(ddelta))@tau=const"
-  protected
-    AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.EoS_Sangi();
-  end delta_d_alpha_r_d_delta;
-
-  redeclare function extends delta3_d3_alpha_r_d_delta3
-  "Short form for delta*delta*delta(dddalpha_r/(ddelta*delta*delta))@tau=const"
-  protected
-    AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.EoS_Sangi();
-  end delta3_d3_alpha_r_d_delta3;
-
-  redeclare function extends delta2_d2_alpha_r_d_delta2
-  "Short form for delta*delta(ddalpha_r/(ddelta*delta))@tau=const"
-  protected
-    AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.EoS_Sangi();
-  end delta2_d2_alpha_r_d_delta2;
-
-  /*Provide polynomial functions for saturation properties. These functions are
-    fitted to external data (e.g. data extracted from RefProp or FluidProp). 
-    Currently, just one fitting approach is implemented. Therefore, 
-    the coefficients, which are obtained during the fitting procedure, 
-    are provided by records.
-  */
-  redeclare function extends saturationPressure
-  "Saturation pressure of refrigerant (Ancillary equation)"
-  protected
-    AixLib.DataBase.Media.Refrigerants.BubbleDewStatePropertiesBaseDataDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.BDSP_Sangi();
-  end saturationPressure;
-
-  redeclare function extends saturationTemperature
-  "Saturation temperature of refrigerant (Ancillary equation)"
-  protected
-    AixLib.DataBase.Media.Refrigerants.BubbleDewStatePropertiesBaseDataDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.BDSP_Sangi();
-  end saturationTemperature;
-
-  redeclare function extends bubbleDensity
-  "Boiling curve specific density of refrigerant (Ancillary equation)"
-  protected
-    AixLib.DataBase.Media.Refrigerants.BubbleDewStatePropertiesBaseDataDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.BDSP_Sangi();
-  end bubbleDensity;
-
-  redeclare function extends dewDensity
-  "Dew curve specific density of refrigerant (Ancillary equation)"
-  protected
-    AixLib.DataBase.Media.Refrigerants.BubbleDewStatePropertiesBaseDataDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.BDSP_Sangi();
-  end dewDensity;
-
-  redeclare function extends bubbleEnthalpy
-  "Boiling curve specific enthalpy of refrigerant (Ancillary equation)"
-  protected
-    AixLib.DataBase.Media.Refrigerants.BubbleDewStatePropertiesBaseDataDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.BDSP_Sangi();
-  end bubbleEnthalpy;
-
-  redeclare function extends dewEnthalpy
-  "Dew curve specific enthalpy of refrigerant (Ancillary equation)"
-  protected
-    AixLib.DataBase.Media.Refrigerants.BubbleDewStatePropertiesBaseDataDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.BDSP_Sangi();
-  end dewEnthalpy;
-
-  redeclare function extends bubbleEntropy
-  "Boiling curve specific entropy of refrigerant (Ancillary equation)"
-  protected
-    AixLib.DataBase.Media.Refrigerants.BubbleDewStatePropertiesBaseDataDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.BDSP_Sangi();
-  end bubbleEntropy;
-
-  redeclare function extends dewEntropy
-  "Dew curve specific entropy of propane (Ancillary equation)"
-  protected
-    AixLib.DataBase.Media.Refrigerants.BubbleDewStatePropertiesBaseDataDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.BDSP_Sangi();
-  end dewEntropy;
+  redeclare record TSP
+    "Record that contains fitting coefficients of the state properties
+    calculated with two independent state properties"
+    extends AixLib.DataBase.Media.Refrigerants.R1270.TSP_Sangi;
+  end TSP;
 
   /*Provide functions to calculate further thermodynamic properties like the
     dynamic viscosity or thermal conductivity. Also add references.
@@ -310,24 +192,18 @@ partial package TemplateHybridTwoPhaseMedium
   redeclare function extends temperature_ph
   "Calculates temperature as function of pressure and specific enthalpy"
   protected
-    AixLib.DataBase.Media.Refrigerants.ThermodynamicStatePropertiesBaseDataDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.TSP_Sangi();
     SpecificEnthalpy dh = 10;
   end temperature_ph;
 
   redeclare function extends temperature_ps
   "Calculates temperature as function of pressure and specific entropy"
   protected
-    AixLib.DataBase.Media.Refrigerants.ThermodynamicStatePropertiesBaseDataDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.TSP_Sangi();
     SpecificEntropy ds = 10;
   end temperature_ps;
 
   redeclare function extends density_pT
   "Calculates density as function of pressure and temperature"
   protected
-    AixLib.DataBase.Media.Refrigerants.ThermodynamicStatePropertiesBaseDataDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.TSP_Sangi();
     AbsolutePressure dp = 10;
   end density_pT;
 

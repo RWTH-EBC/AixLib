@@ -15,6 +15,29 @@ partial package PartialHybridTwoPhaseMedium
     variables "p, T, d, h" (e.g., medium.T)
   */
 
+  /*Provide records thats contain the fitting coefficients for all fitted
+    formula (e.g. Helmholtz equation of state). These records must be
+    redeclared within the template to provide the coefficients.
+  */
+  replaceable record EoS
+    "Record that contains fitting coefficients of the Helmholtz EoS"
+    extends
+      AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition;
+  end EoS;
+
+  replaceable record BDSP
+    "Record that contains fitting coefficients of the state properties at bubble
+    and dew lines"
+    extends
+      AixLib.DataBase.Media.Refrigerants.BubbleDewStatePropertiesBaseDataDefinition;
+  end BDSP;
+
+  replaceable record TSP
+    "Record that contains fitting coefficients of the state properties
+    calculated with two independent state properties"
+    extends
+      AixLib.DataBase.Media.Refrigerants.ThermodynamicStatePropertiesBaseDataDefinition;
+  end TSP;
 
   /*Provide Helmholtz equations of state (EoS). These EoS must be fitted to
     different refrigerants. However, the structure will not change and, 
@@ -30,8 +53,7 @@ partial package PartialHybridTwoPhaseMedium
     output Real alpha_0 = 0 "Dimensionless ideal gas Helmholz energy";
 
   protected
-    AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.EoS_Sangi();
+    EoS cf;
 
   algorithm
     alpha_0 := log(delta);
@@ -56,8 +78,7 @@ partial package PartialHybridTwoPhaseMedium
       output Real alpha_r = 0 "Dimensionless residual Helmholz energy";
 
   protected
-    AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.EoS_Sangi();
+    EoS cf;
 
   algorithm
     for k in 1:cf.alpha_r_nP loop
@@ -83,8 +104,7 @@ partial package PartialHybridTwoPhaseMedium
     output Real tau_d_alpha_0_d_tau = 0 "Tau*(dalpha_0/dtau)@delta=const";
 
   protected
-    AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.EoS_Sangi();
+    EoS cf;
 
   algorithm
     for k in 1:cf.alpha_0_nL loop
@@ -108,8 +128,7 @@ partial package PartialHybridTwoPhaseMedium
       "Tau*tau*(ddalpha_0/(dtau*dtau))@delta=const";
 
   protected
-    AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.EoS_Sangi();
+    EoS cf;
 
   algorithm
     for k in 1:cf.alpha_0_nL loop
@@ -134,8 +153,7 @@ partial package PartialHybridTwoPhaseMedium
     output Real tau_d_alpha_r_d_tau = 0 "Tau*(dalpha_r/dtau)@delta=const";
 
   protected
-    AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.EoS_Sangi();
+    EoS cf;
 
   algorithm
     for k in 1:cf.alpha_r_nP loop
@@ -165,8 +183,7 @@ partial package PartialHybridTwoPhaseMedium
     "Tau*delta*(ddalpha_r/(dtau*ddelta))";
 
   protected
-    AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.EoS_Sangi();
+    EoS cf;
 
   algorithm
     for k in 1:cf.alpha_r_nP loop
@@ -198,8 +215,7 @@ partial package PartialHybridTwoPhaseMedium
       "Tau*tau*(ddalpha_r/(dtau*dtau))@delta=const";
 
   protected
-    AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.EoS_Sangi();
+    EoS cf;
 
   algorithm
     for k in 1:cf.alpha_r_nP loop
@@ -229,8 +245,7 @@ partial package PartialHybridTwoPhaseMedium
       "Delta*(dalpha_r/(ddelta))@tau=const";
 
   protected
-    AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.EoS_Sangi();
+    EoS cf;
 
   algorithm
     for k in 1:cf.alpha_r_nP loop
@@ -261,8 +276,7 @@ partial package PartialHybridTwoPhaseMedium
     "Delta*delta*delta(dddalpha_r/(ddelta*delta*delta))@tau=const";
 
   protected
-    AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.EoS_Sangi();
+    EoS cf;
 
   algorithm
     for k in 1:cf.alpha_r_nP loop
@@ -301,8 +315,7 @@ partial package PartialHybridTwoPhaseMedium
     "Delta*delta(ddalpha_r/(ddelta*delta))@tau=const";
 
   protected
-    AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.EoS_Sangi();
+    EoS cf;
 
   algorithm
     for k in 1:cf.alpha_r_nP loop
@@ -337,8 +350,7 @@ partial package PartialHybridTwoPhaseMedium
   redeclare function extends saturationPressure
   "Saturation pressure of refrigerant (Ancillary equation)"
   protected
-     AixLib.DataBase.Media.Refrigerants.BubbleDewStatePropertiesBaseDataDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.BDSP_Sangi();
+    BDSP cf;
     Real T_crit = fluidConstants[1].criticalTemperature;
     Real T_trip = fluidConstants[1].triplePointTemperature;
     Real p_crit = fluidConstants[1].criticalPressure;
@@ -362,8 +374,7 @@ partial package PartialHybridTwoPhaseMedium
   redeclare function extends saturationTemperature
   "Saturation temperature of refrigerant (Ancillary equation)"
   protected
-     AixLib.DataBase.Media.Refrigerants.BubbleDewStatePropertiesBaseDataDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.BDSP_Sangi();
+    BDSP cf;
     Real T_1 = 0;
     Real x;
 
@@ -380,8 +391,7 @@ partial package PartialHybridTwoPhaseMedium
   redeclare function extends bubbleDensity
   "Boiling curve specific density of refrigerant (Ancillary equation)"
   protected
-     AixLib.DataBase.Media.Refrigerants.BubbleDewStatePropertiesBaseDataDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.BDSP_Sangi();
+    BDSP cf;
     Real dl_1 = 0;
     Real x;
 
@@ -397,8 +407,7 @@ partial package PartialHybridTwoPhaseMedium
   redeclare function extends dewDensity
   "Dew curve specific density of refrigerant (Ancillary equation)"
   protected
-     AixLib.DataBase.Media.Refrigerants.BubbleDewStatePropertiesBaseDataDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.BDSP_Sangi();
+    BDSP cf;
     Real dv_1 = 0;
     Real x;
 
@@ -414,8 +423,7 @@ partial package PartialHybridTwoPhaseMedium
   redeclare function extends bubbleEnthalpy
   "Boiling curve specific enthalpy of refrigerant (Ancillary equation)"
   protected
-     AixLib.DataBase.Media.Refrigerants.BubbleDewStatePropertiesBaseDataDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.BDSP_Sangi();
+    BDSP cf;
     Real hl_1 = 0;
     Real x;
 
@@ -431,8 +439,7 @@ partial package PartialHybridTwoPhaseMedium
   redeclare function extends dewEnthalpy
   "Dew curve specific enthalpy of refrigerant (Ancillary equation)"
   protected
-     AixLib.DataBase.Media.Refrigerants.BubbleDewStatePropertiesBaseDataDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.BDSP_Sangi();
+    BDSP cf;
     Real hv_1=0;
     Real x;
 
@@ -448,8 +455,7 @@ partial package PartialHybridTwoPhaseMedium
   redeclare function extends bubbleEntropy
   "Boiling curve specific entropy of refrigerant (Ancillary equation)"
   protected
-     AixLib.DataBase.Media.Refrigerants.BubbleDewStatePropertiesBaseDataDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.BDSP_Sangi();
+    BDSP cf;
     Real sl_1 = 0;
     Real x;
 
@@ -465,8 +471,7 @@ partial package PartialHybridTwoPhaseMedium
   redeclare function extends dewEntropy
   "Dew curve specific entropy of propane (Ancillary equation)"
   protected
-     AixLib.DataBase.Media.Refrigerants.BubbleDewStatePropertiesBaseDataDefinition
-      cf =  AixLib.DataBase.Media.Refrigerants.R1270.BDSP_Sangi();
+    BDSP cf;
     Real sv_1 = 0;
     Real x;
 
@@ -930,8 +935,7 @@ partial package PartialHybridTwoPhaseMedium
     output Temperature T "Temperature";
 
   protected
-    AixLib.DataBase.Media.Refrigerants.ThermodynamicStatePropertiesBaseDataDefinition
-      cf = AixLib.DataBase.Media.Refrigerants.R1270.TSP_Sangi();
+    TSP cf;
 
     SpecificEnthalpy dh = 10;
     SaturationProperties sat;
@@ -1000,8 +1004,7 @@ partial package PartialHybridTwoPhaseMedium
     output Temperature T "Temperature";
 
   protected
-    AixLib.DataBase.Media.Refrigerants.ThermodynamicStatePropertiesBaseDataDefinition
-      cf = AixLib.DataBase.Media.Refrigerants.R1270.TSP_Sangi();
+    TSP cf;
 
     SpecificEntropy ds = 10;
     SaturationProperties sat;
@@ -1069,8 +1072,7 @@ partial package PartialHybridTwoPhaseMedium
     output Density d "Density";
 
   protected
-    AixLib.DataBase.Media.Refrigerants.ThermodynamicStatePropertiesBaseDataDefinition
-      cf = AixLib.DataBase.Media.Refrigerants.R1270.TSP_Sangi();
+    TSP cf;
 
     AbsolutePressure dp = 10;
     SaturationProperties sat;
