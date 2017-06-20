@@ -9,7 +9,7 @@ model RefrigerantTestImplementationA
     T_start = 263.15,
     h_start = 177e3);
 
-    annotation (experiment(Tolerance=1e-6, StopTime=1.0),
+    annotation (experiment(Tolerance=1e-006),
   __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Media/Examples/WaterTestImplementation.mos"
           "Simulate and plot"),
       Documentation(info="<html>
@@ -21,5 +21,10 @@ model RefrigerantTestImplementationA
   First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
 </ul>
-</html>"));
+</html>"),
+    __Dymola_experimentFlags(
+      Advanced(GenerateVariableDependencies=false, OutputModelicaCode=false),
+      Evaluate=true,
+      OutputCPUtime=false,
+      OutputFlatModelica=false));
 end RefrigerantTestImplementationA;

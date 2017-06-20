@@ -110,7 +110,7 @@ equation
     "Error in implementation of specificEnthalpy_ps");
 
   annotation (
-experiment(Tolerance=1e-6, StopTime=80),
+experiment(StopTime=80, Tolerance=1e-006),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Media/Examples/WaterTemperatureEnthalpyInversion.mos"
         "Simulate and plot"),
     Documentation(info="<html>
@@ -137,5 +137,10 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Media/Example
   First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
 </ul>
-</html>"));
+</html>"),
+    __Dymola_experimentFlags(
+      Advanced(GenerateVariableDependencies=false, OutputModelicaCode=false),
+      Evaluate=true,
+      OutputCPUtime=false,
+      OutputFlatModelica=false));
 end RefrigerantInversions;
