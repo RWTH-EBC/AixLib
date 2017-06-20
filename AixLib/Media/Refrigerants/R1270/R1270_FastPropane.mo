@@ -184,10 +184,8 @@ package R1270_FastPropane
       Real dv[:] = {1.0, 2.0, 3.0, 13.0, 12.0, 16.0, 0.0, 18.0, 20.0, 13.0, 4.0, 0.0, 1.0};
       Real nv[:] = {-0.7548580e-1, 0.7607150, -0.1665680, 0.1627612e-5, 0.1443764e-4, -0.2759086e-6, -0.1032756, -0.2498159e-7, 0.4069891e-8, -0.1513434e-5, 0.2591327e-2, 0.5650076, 0.1207253};
 
-      Real T_crit = fluidConstants[1].criticalTemperature;
       Real d_crit = fluidConstants[1].criticalMolarVolume;
       Real MM = fluidConstants[1].molarMass;
-      Real R = Modelica.Constants.R/MM;
 
       ThermodynamicState dewState = setDewState(setSat_T(state.T));
       ThermodynamicState bubbleState = setBubbleState(setSat_T(state.T));
@@ -197,14 +195,13 @@ package R1270_FastPropane
       Real etaL;
       Real etaG;
       Real Hc = 17.1045;
-      Real Tr = state.T/T_crit;
+      Real Tr = state.T/fluidConstants[1].criticalTemperature;
 
       SaturationProperties sat = setSat_T(state.T);
-      Real quality = if state.phase==2 then (bubbleState.d/state.d - 1)/
-        (bubbleState.d/dewState.d - 1) else 1;
       Real phase_dT = if not ((state.d < bubbleDensity(sat) and state.d >
         dewDensity(sat)) and state.T < fluidConstants[1].criticalTemperature)
         then 1 else 2;
+      Real quality;
 
   algorithm
       if state.phase==1 or phase_dT==1 then
@@ -222,6 +219,8 @@ package R1270_FastPropane
         etaG := 0;
         drG := dewState.d/(d_crit*MM);
         drL := bubbleState.d/(d_crit*MM);
+        quality :=if state.phase == 2 then (bubbleState.d/state.d - 1)/(
+        bubbleState.d/dewState.d - 1) else 1;
         for i in 1:11 loop
             etaL := etaL + nv[i]*Tr^tv[i]*drL^dv[i];
             etaG := etaG + nv[i]*Tr^tv[i]*drG^dv[i];
@@ -245,18 +244,14 @@ package R1270_FastPropane
       Real C[:] = {3.66486e-4,-2.21696e-3,2.64213e+0};
       Real A[:] = {-1.24778e-3,8.16371e-3,1.99374e-2};
 
-      Real T_crit = fluidConstants[1].criticalTemperature;
       Real d_crit = fluidConstants[1].criticalMolarVolume;
       Real MM = fluidConstants[1].molarMass;
 
-      Real delta = state.d/(d_crit*MM);
-      Real deltaL = bubbleDensity(setSat_T(state.T))/(d_crit*MM);
-      Real deltaG = dewDensity(setSat_T(state.T))/(d_crit*MM);
-      Real tau = T_crit/state.T;
+      Real delta;
+      Real deltaL;
+      Real deltaG;
+      Real tau = fluidConstants[1].criticalTemperature/state.T;
 
-      Real quality = if state.phase==2 then (bubbleDensity(setSat_T(
-        state.T))/state.d - 1)/(bubbleDensity(setSat_T(state.T))/
-        dewDensity(setSat_T(state.T)) - 1) else 1;
       Real lambda0 = A[1]+A[2]/tau+A[3]/(tau^2);
       Real lambdar = 0;
       Real lambdarL = 0;
@@ -268,8 +263,10 @@ package R1270_FastPropane
       Real phase_dT = if not ((state.d < bubbleDensity(sat) and state.d >
         dewDensity(sat)) and state.T < fluidConstants[1].criticalTemperature)
         then 1 else 2;
+      Real quality;
 
   algorithm
+    delta :=state.d/(d_crit*MM);
     if state.phase==1 or phase_dT==1 then
       for i in 1:5 loop
           lambdar := lambdar + (B1[i] + B2[i]/tau)*delta^i;
@@ -277,6 +274,11 @@ package R1270_FastPropane
       lambda := (lambda0 + lambdar + (C[1]/(C[2] + abs(1.0/tau - 1.0))*
         exp(-(C[3]*(delta - 1.0))^2)));
     elseif state.phase==2 or phase_dT==2 then
+      deltaL :=bubbleDensity(setSat_T(state.T))/(d_crit*MM);
+      deltaG :=dewDensity(setSat_T(state.T))/(d_crit*MM);
+      quality :=if state.phase == 2 then (bubbleDensity(setSat_T(state.T))/
+        state.d - 1)/(bubbleDensity(setSat_T(state.T))/dewDensity(setSat_T(
+        state.T)) - 1) else 1;
       for i in 1:5 loop
           lambdarL := lambdarL + (B1[i] + B2[i]/tau)*deltaL^i;
           lambdarG := lambdarG + (B1[i] + B2[i]/tau)*deltaG^i;
