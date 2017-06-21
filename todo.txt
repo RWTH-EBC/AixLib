@@ -1,0 +1,73 @@
+ToDo:
+
+
+ - Temperaturprofile von Abwasser und Warmwasser
+ - Nicht direkte Regelung der Reinigung über Filmwanddicke, sondern über Rückrechnung aus Wärmeübergang
+ - zustrom überprüfung für reinigung ändern, wie noch zu überlegen!
+
+
+Parameterisierung, die noch durchgeführt werden muss:
+ - Heizwendellänge (über Storage Record)
+ - Wärmeübergangskoeffizient an der außen Seite (beide Tanks!)
+ - T_HeatingWater_min_cleaning
+ - T_WasteWater_upper_min
+ - T_WasteWater_min_cleaning
+ - t_cleaning <- evtl. Ablaufzeit händisch berechnen?
+ - Media.Wastewater 
+ - Media: Water -> Sole im evap kreislauf
+
+
+
+Besprechen mit Sebastian: 
+
+ - Medientypen
+ - Tankgeometrie
+ - Was für Präsentation vorbereiten:
+		- Aufgenommene el. Energie der WP
+		- Einfluss Biofilmdicke auf Wärmeübergang
+		- Temperaturverlust durch Reinigungsvorgang als f(Reinigungszeit)
+
+Evtl. noch einfügen:
+ - Temperaturabhängigkeit der Stoffwerte und somit des Wärmeübergangs
+
+
+
+Fragen:
+
+Randbedingungen:
+
+ - Bypass öffnen, wenn T_zu > T_speicher_min oder T_speicher_mean?
+
+
+
+
+
+
+
+Modellierung:
+Wie ist der Aufbau des Modells am sinnvollsten:
+
+ Modularer Aufbau des Modells -> Eigene Teilmodelle (Regler, Tank, Wärmepumpe, Pumpen etc.)
+ Problem: Oft Variablen oder Parameter aus anderen Teilmodellen erfoderlich, insbesondere beim Regler
+ Lösungsmöglichkeiten: 
+
+			Paramter erst auf aller oberster Ebene festlegen und durch Tabs struktieren
+			
+			Variablen:
+			Entweder: Inner/Outer: Inner Variablen auf der obersten Eben definieren die über Outer auf den darunter liegenden Ebenen referenziert werden
+
+			oder: 	 Variablen über Interfaces ( bspw. Realinput) über Modellgrenzen übergeben
+
+				
+			oder gibt es eine bessere Möglichkeit?
+
+
+- Dichte von Medium abgreifen, wie -> Medium auf oberster Ebene über record definieren, darunter alles durchschleifen - Problem: Eig. würde Medium in Abwasserprofilen definiert. Gibt es eine Möglichkeit dies abzugreifen?
+
+
+Icons?!
+
+
+
+http://www.modelica-forum.com/forums/lofiversion/index.php/t106.html
+
