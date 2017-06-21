@@ -11,8 +11,6 @@ public
       FastHVAC.Media.WaterSimple()
     "Mediums charastics (heat capacity, density, thermal conductivity)"
     annotation(Dialog(group="Medium"),choicesAllMatching);
-  parameter Modelica.SIunits.Temperature abc=323.15
-    "Start temperature of medium" annotation(Dialog(tab="Initialisation"));
     parameter FastHVAC.Media.BaseClasses.MediumSimple mediumHC1=
       FastHVAC.Media.WaterSimple()
     "Mediums charastics for HC1 (heat capacity, density, thermal conductivity)"

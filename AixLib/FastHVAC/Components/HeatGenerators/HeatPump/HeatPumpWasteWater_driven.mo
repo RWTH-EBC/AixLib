@@ -8,24 +8,32 @@ model HeatPumpWasteWater_driven
   parameter FastHVAC.Media.BaseClasses.Medium Medium_WasteWater = FastHVAC.Media.WasteWater();
   parameter Integer n_HeatingWater_layers=10;
   parameter Modelica.SIunits.Density rho_WasteWater = 995;
+  parameter Modelica.SIunits.Temperature T_ambient=273.15+15;
+    parameter Modelica.SIunits.Length s_biofilm_max = 0.005
+    "max thickness of biofilm, when cleaning should be started";
+  parameter Modelica.SIunits.Length s_biofilm_min= 0.0005
+    "min thickness of biofilm, that could be reached by cleaning";
+    Modelica.SIunits.HeatFlowRate total_heat;
 
-  Components.HeatGenerators.HeatPump.HeatPump heatPump
+  Components.HeatGenerators.HeatPump.HeatPump heatPump(cap_calcType=2,
+      data_table=DataBase.HeatPump.EN255.Vitocal350BWH110())
     annotation (Placement(transformation(extent={{-36,-76},{-66,-56}})));
   Components.Storage.WasteWaterStorage wasteWaterStorage(
     n_load_cycles=1,
     n_unload_cycles=1,
     data=AixLib.DataBase.Storage.Wastewater_500l(),
-    load_cycles=[10,2],
     unload_cycles=[1,10],
-    n_HC1_up=10,
     n_HC1_low=1,
     n=10,
     alpha_HC1=450,
     Up_to_down_HC1=true,
-    T_start=295.15,
-    T_start_HC=295.15,
-    T_start_wall=295.15,
-    T_start_ins=295.15)
+    n_HC1_up=10,
+    load_cycles=[10,1],
+    T_start=283.15,
+    T_start_HC=288.15,
+    T_start_wall=288.15,
+    T_start_ins=288.15,
+    v_bio_clean=8.3E-05)
     annotation (Placement(transformation(extent={{54,-68},{96,-26}})));
   Components.Sinks.Vessel          vessel1
                                           annotation (Placement(transformation(
@@ -48,7 +56,12 @@ model HeatPumpWasteWater_driven
     V_storage=wasteWaterStorage.data.hTank*wasteWaterStorage.data.dTank^2*
         Modelica.Constants.pi/4,
     rho_WasteWater=rho_WasteWater,
-    n_HeatingWater_layers=n_HeatingWater_layers)
+    n_HeatingWater_layers=n_HeatingWater_layers,
+    s_biofilm_max=s_biofilm_max,
+    s_biofilm_min=s_biofilm_min,
+    dot_m_cond_pump_fix=0.3,
+    dot_m_evap_pump_fix=0.3,
+    t_cleaning=3600)
     annotation (Placement(transformation(extent={{56,26},{90,60}})));
   Interfaces.EnthalpyPort_a toHeatPump
     annotation (Placement(transformation(extent={{-104,-56},{-96,-48}})));
@@ -60,10 +73,15 @@ model HeatPumpWasteWater_driven
     n_HeatingWater_layers]
     annotation (Placement(transformation(extent={{-112,-104},{-96,-78}})));
   Pumps.Pump cond_pump
-    annotation (Placement(transformation(extent={{-82,-34},{-96,-18}})));
+    annotation (Placement(transformation(extent={{-84,-32},{-98,-16}})));
   Interfaces.EnthalpyPort_b fromWasteWaterStorage
-    annotation (Placement(transformation(extent={{56,-104},{64,-96}})));
+    annotation (Placement(transformation(extent={{42,-106},{50,-98}})));
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature ambient(T=T_ambient)
+    annotation (Placement(transformation(extent={{112,0},{92,20}})));
+  Interfaces.EnthalpyPort_b fromWasteWaterStorage1
+    annotation (Placement(transformation(extent={{66,-104},{74,-96}})));
 equation
+   total_heat = sum(wasteWaterStorage.heatingCoil1.Therm1[k].Q_flow for k in 1:10);
   //get heat transfer coefficient at the upper level for cleaning control
  // wasteWaterStorageControl.Q_wastewater_upperlevel = wasteWaterStorage.heatingCoil1.Therm1[wasteWaterStorage.n].Q_flow;
 
@@ -90,12 +108,12 @@ connect(  fluidSource1.enthalpyPort_b, wasteWaterStorage.UnloadingCycle_In[1])
     annotation (Line(points={{54.64,27.36},{10,27.36},{10,-34},{-2,-34}},color={
           0,0,127}));
   connect(T_return_water_cond.enthalpyPort_b, cond_pump.enthalpyPort_a)
-    annotation (Line(points={{-77,-26.1},{-79.5,-26.1},{-79.5,-26},{-82.28,-26}},
+    annotation (Line(points={{-77,-26.1},{-79.5,-26.1},{-79.5,-24},{-84.28,-24}},
         color={176,0,0}));
-  connect(cond_pump.enthalpyPort_b, fromHeatPump) annotation (Line(points={{
-          -95.72,-26},{-100,-26},{-100,70},{-102,70}}, color={176,0,0}));
+  connect(cond_pump.enthalpyPort_b, fromHeatPump) annotation (Line(points={{-97.72,
+          -24},{-100,-24},{-100,70},{-102,70}},        color={176,0,0}));
   connect(wasteWaterStorageControl.dot_m_cond_pump, cond_pump.dotm_setValue)
-    annotation (Line(points={{54.64,31.1},{-14,31.1},{-14,-6},{-89,-6},{-89,-19.6}},
+    annotation (Line(points={{54.64,31.1},{-14,31.1},{-14,-6},{-91,-6},{-91,-17.6}},
         color={0,0,127}));
   connect(heatPump.enthalpyPort_outCo, T_return_water_cond.enthalpyPort_a)
     annotation (Line(points={{-63.2,-57.6},{-63.2,-50},{-50,-50},{-50,-26.1},{-59.2,
@@ -121,12 +139,13 @@ connect(  fluidSource1.enthalpyPort_b, wasteWaterStorage.UnloadingCycle_In[1])
       Line(points={{7.6,-42},{24,-42},{24,-34.4},{58.2,-34.4}}, color={176,0,0}));
   connect(heatPump.enthalpyPort_outEv, evap_pump.enthalpyPort_a) annotation (
       Line(points={{-38.6,-74.2},{-11.6,-74.2},{-11.6,-42}}, color={176,0,0}));
-  connect(wasteWaterStorage.LoadingCycle_Out[1], fromWasteWaterStorage)
-    annotation (Line(points={{70.8,-68},{66,-68},{66,-100},{60,-100}}, color={176,
-          0,0}));
+  connect(ambient.port, wasteWaterStorage.out) annotation (Line(points={{92,10},
+          {87.6,10},{87.6,-30.2}}, color={191,0,0}));
   connect(wasteWaterStorageControl.WW_control_out_bypass, fromWasteWaterStorage)
-    annotation (Line(points={{61.78,26.34},{61.78,-16},{52,-16},{52,-100},{60,-100}},
+    annotation (Line(points={{61.78,26.34},{61.78,-18},{52,-18},{52,-102},{46,-102}},
         color={176,0,0}));
+  connect(wasteWaterStorage.LoadingCycle_Out[1], fromWasteWaterStorage1)
+    annotation (Line(points={{70.8,-68},{70,-68},{70,-100}}, color={176,0,0}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})));
 end HeatPumpWasteWater_driven;

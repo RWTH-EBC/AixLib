@@ -23,7 +23,12 @@ model HeatConvPipe_inside
 equation
   u      =      4*m_flow/(Modelica.Constants.pi * d_i^2 * medium.rho);
   Re     =      medium.rho * u * d_i / medium.eta;
+
+  if u >0 then
   zeta   =      (1.8*log10(Re)-1.5)^(-2);
+  else
+    zeta = 0;
+  end if;
   Pr     =      medium.eta *medium.c /medium.lambda;
   if Re<= 2300 then
     Nu   =      3.66;
