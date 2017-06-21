@@ -8,7 +8,8 @@ model PipeStatic "Static pipe implementation"
     m_flow_nominal=m_flow_nominal,
     roughness=roughness,
     thicknessIns=thicknessIns,
-    lambdaI=lambdaIns)
+    lambdaI=lambdaIns,
+    res(fac=2))
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T(
         displayUnit="K") = T_ground)
@@ -40,5 +41,8 @@ First implementation for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/403
 </html>", info="<html>
 <p>A wrapper around the static pipe model proposed in 
 <a href=\"https://github.com/bramvdh91/modelica-ibpsa/issues/76\">issue 76 of the IBPSA pipe model developement</a></<p>
+<p>Note that this pipe currently uses a factor of 2 on the nominal pressure loss to account for bends etc.</p>
+<p>Currently, this pipe requires loading the fork of the Modelica IBPSA library from https://github.com/bramvdh91/modelica-ibpsa
+and using branch <code>pipe_issue76_static</code>.</p>
 </html>"));
 end PipeStatic;

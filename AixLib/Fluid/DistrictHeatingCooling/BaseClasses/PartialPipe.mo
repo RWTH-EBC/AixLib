@@ -7,7 +7,7 @@ partial model PartialPipe
       Modelica.Media.Interfaces.PartialMedium "Medium in the component"
       annotation (choicesAllMatching = true);
 
-  parameter Modelica.SIunits.Temperature T_ground "Ground temperature";
+  parameter Modelica.SIunits.Temperature T_ground = 273.15 + 10 "Ground temperature";
 
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal
     "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
