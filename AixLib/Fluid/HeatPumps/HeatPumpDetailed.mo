@@ -143,13 +143,13 @@ model HeatPumpDetailed
         origin={130,-50},
         extent={{-10,-10},{10,10}},
         rotation=90)));
-  Modelica.Blocks.Interfaces.RealOutput P_eleOut if
-                                                   P_eleOutput "Output of the electical power consumption" annotation (
+  Modelica.Blocks.Interfaces.RealOutput P_eleOut(unit="W") if
+                                                   P_eleOutput "Electical power consumption" annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-50,-90})));
-  Modelica.Blocks.Interfaces.RealOutput CoP_out if CoP_output "Output of the Coefficient of Performance" annotation (Placement(
+  Modelica.Blocks.Interfaces.RealOutput CoP_out if CoP_output "Coefficient of Performance" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
@@ -206,7 +206,7 @@ public
         rotation=270,
         origin={-50,90})));
   Modelica.Blocks.Interfaces.RealInput N_in if not HPctrlType
-    "rotational speed of compressor"                          annotation (Placement(
+    "Rotational speed of compressor"                          annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
@@ -222,27 +222,26 @@ protected
   Modelica.Blocks.Interfaces.RealInput T_ambInternal
     "Needed to connect to conditional connector";
 public
-  Modelica.Blocks.Sources.RealExpression dummyZero(y=0) "dummy value"
+  Modelica.Blocks.Sources.RealExpression dummyZero(y=0) "Dummy value used for rotational speed"
     annotation (Placement(transformation(extent={{0,60},{20,80}}, rotation=0)));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor
                                 heatConv(G=R_loss)
-    "Heat flow through a wall with a given conductance"
+    "Heat flow through condenser casing with a given conductance"
     annotation (Placement(transformation(extent={{80,52},{100,72}})));
   Modelica.Blocks.Interfaces.RealInput T_amb if
                                                heatLosses_con
-    "Connector of Real input signa (ambient temperatur)l to be converted"
-                                                              annotation (Placement(
+    "Ambient temperatur input signal"                         annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={50,90})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTemp
-    "Variable temperature boundary condition in Kelvin"
+    "Foreces heat losses according to ambient temperature"
     annotation (Placement(transformation(extent={{80,76},{100,96}})));
   parameter SI.Temperature T_conMax=338.15
     "Maximum condenser outlet temperature" annotation(Dialog(group = "Capacity data"));
   Modelica.Blocks.Math.Gain gainMinusOne(k=-1)
-    "Negative volume flow of evaporator"       annotation (Placement(
+    "Calculated heat flow in evaporator has to be withdrawn"       annotation (Placement(
         transformation(
         extent={{-5,-5},{5,5}},
         rotation=180,
@@ -261,7 +260,7 @@ public
     m_flow_nominal=mFlow_evaNominal,
     m_flow(start=mFlow_evaNominal),
     dp_nominal=dp_evaNominal)
-    "The pressure drop caused by flow resistance of the evaporator"
+    "The pressure drop caused by flow resistance in the evaporator"
                            annotation (Placement(transformation(
         extent={{8,-8},{-8,8}},
         rotation=90,
@@ -280,7 +279,7 @@ public
     m_flow_nominal=mFlow_conNominal,
     m_flow(start=mFlow_conNominal),
     dp_nominal=dp_conNominal)
-    "The pressure drop caused by flow resistance of the condenser"                           annotation (Placement(transformation(
+    "The pressure drop caused by flow resistance in the condenser"                           annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=90,
         origin={130,22})));
