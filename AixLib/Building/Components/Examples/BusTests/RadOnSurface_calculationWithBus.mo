@@ -5,9 +5,9 @@ model RadOnSurface_calculationWithBus
     radOnTiltedSurf_Liu_bus[5](
     Latitude=0.86393797973719,
     Azimut=Modelica.SIunits.Conversions.from_deg(weather_NoSolarRad.SOD.Azimut),
-
     Tilt=Modelica.SIunits.Conversions.from_deg(weather_NoSolarRad.SOD.Tilt))
     annotation (Placement(transformation(extent={{-42,60},{-10,84}})));
+
   AixLib.Building.Components.Weather.Weather_NoSolarRad weather_NoSolarRad(
       fileName=
         "D:/Git/AixLib/AixLib/AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt",

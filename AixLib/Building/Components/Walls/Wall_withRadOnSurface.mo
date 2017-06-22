@@ -65,7 +65,6 @@ model Wall_withRadOnSurface
   // COMPONENT PART
   BaseClasses.ConvNLayerClearanceStar Wall(h = wall_height, l = wall_length, T0 = T0, clearance = clearance, selectable = true, eps = WallType.eps, wallType = WallType, surfaceOrientation = ISOrientation, calcMethod = calculationMethod, alpha_constant = alpha_constant) "Wall" annotation(Placement(transformation(extent = {{-20, 14}, {2, 34}})));
   Utilities.HeatTransfer.SolarRadToHeat SolarAbsorption(coeff = solar_absorptance, A = wall_height * wall_length - clearance) if outside annotation(Placement(transformation(origin = {-39, 89}, extent = {{-10, -10}, {10, 10}})));
-  BaseLib.Interfaces.SolarRad_in   SolarRadiationPort if outside annotation(Placement(transformation(extent = {{-116, 79}, {-96, 99}}), iconTransformation(extent = {{-36, 100}, {-16, 120}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_outside annotation(Placement(transformation(extent = {{-108, -6}, {-88, 14}}), iconTransformation(extent = {{-31, -10}, {-11, 10}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort if outside and (Model ==1 or Model == 2)  annotation(Placement(transformation(extent = {{-113, 54}, {-93, 74}}), iconTransformation(extent = {{-31, 78}, {-11, 98}})));
   Weather.Sunblinds.Sunblind Sunblind(
@@ -82,8 +81,12 @@ model Wall_withRadOnSurface
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=270,
-        origin={-100,-64}), iconTransformation(extent={{-172,-14},{-152,6}})));
-  Weather.RadiationOnTiltedSurface.RadOnTiltedSurf_Liu radOnTiltedSurf_Liu
+        origin={-100,-64}), iconTransformation(extent={{-27,-45},{-7,-25}})));
+  Weather.RadiationOnTiltedSurface.RadOnTiltedSurf_Perez_bus
+                                                       radOnTiltedSurf_Liu(
+    Azimut=0,
+    Latitude=0.69813170079773,
+    Tilt=1.5707963267949)
     annotation (Placement(transformation(extent={{-80,-58},{-60,-38}})));
 equation
   //   if outside and cardinality(WindSpeedPort) < 2 then
@@ -104,7 +107,6 @@ equation
   // ********************standard connection for outside wall*********
   //******************************************************************
   if outside then
-    connect(SolarRadiationPort, SolarAbsorption.solarRad_in) annotation(Line(points = {{-106, 89}, {-77, 89}, {-77, 87}, {-49.1, 87}}, color = {255, 128, 0}));
     if Model == 1 or Model == 2 then
       connect(WindSpeedPort, heatTransfer_Outside.WindSpeedPort) annotation(Line(points = {{-103, 64}, {-68, 64}, {-68, 50.8}, {-46.2, 50.8}}, color = {0, 0, 127}));
     end if;
@@ -132,7 +134,9 @@ equation
   // **** connections for outside wall with window without sunblind****
   //******************************************************************
   if outside and withWindow and not withSunblind then
-    connect(windowSimple.solarRad_in, SolarRadiationPort) annotation(Line(points = {{-13.7, -27.2}, {-81, -27.2}, {-81, 89}, {-106, 89}}, color = {255, 128, 0}));
+    connect(radOnTiltedSurf_Liu.OutTotalRadTilted, windowSimple.solarRad_in)
+    annotation (Line(points={{-61,-44},{-56,-44},{-56,-27.2},{-13.7,-27.2}},
+        color={255,128,0}));
   end if;
   //******************************************************************
   // **** connections for outside wall with window and sunblind****
@@ -140,11 +144,25 @@ equation
   if outside and withWindow and withSunblind then
     connect(Sunblind.Rad_Out[1], windowSimple.solarRad_in) annotation(Line(points={{-22.15,
             -6.7},{-18,-6.7},{-18,-27.2},{-13.7,-27.2}},                                                                                         color = {255, 128, 0}));
-    connect(Sunblind.Rad_In[1], SolarRadiationPort) annotation(Line(points={{-42.85,
-            -6.7},{-81,-6.7},{-81,89},{-106,89}},                                                                                  color = {255, 128, 0}));
+    connect(radOnTiltedSurf_Liu.OutTotalRadTilted, Sunblind.Rad_In[1])
+    annotation (Line(points={{-61,-44},{-56,-44},{-56,-6.7},{-42.85,-6.7}},
+        color={255,128,0}));
   end if;
   connect(heatStarToComb.thermStarComb, thermStarComb_inside) annotation(Line(points = {{78.4, -1.1}, {78.4, -1.05}, {102, -1.05}, {102, 0}}, color = {191, 0, 0}));
   connect(port_outside, port_outside) annotation(Line(points = {{-98, 4}, {-98, 4}}, color = {191, 0, 0}, pattern = LinePattern.Solid));
+  connect(solarRadiationBus, radOnTiltedSurf_Liu.solarRadiationBus) annotation (
+     Line(
+      points={{-100,-64},{-90,-64},{-90,-47.2},{-79.6,-47.2}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}}));
+  connect(radOnTiltedSurf_Liu.OutTotalRadTilted, SolarAbsorption.solarRad_in)
+    annotation (Line(points={{-61,-44},{-56,-44},{-56,87},{-49.1,87}}, color={255,
+          128,0}));
+
+
   annotation (Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-20, -120}, {20, 120}}, grid = {1, 1}), graphics={  Rectangle(extent = {{-16, 120}, {15, -60}}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Backward,  pattern=LinePattern.None, lineColor = {0, 0, 0}), Rectangle(extent = {{-16, -90}, {15, -120}},  pattern=LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Backward), Rectangle(extent = {{-16, -51}, {15, -92}}, lineColor = {0, 0, 0},  pattern=LinePattern.None, fillColor = {215, 215, 215},
