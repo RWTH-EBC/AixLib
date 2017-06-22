@@ -44,7 +44,7 @@ equation
           {0,0,127}));
   annotation (
     experiment(
-      StopTime=31536000,
+      StopTime=315360000,
       Interval=1800,
       __Dymola_Algorithm="Lsodar"),
     __Dymola_experimentSetupOutput,
