@@ -344,11 +344,13 @@ equation
 
   if heatLosses_con then
     connect(T_ambInternal, T_amb);
+    connect(heatConv.port_b, condenser.heatPort);
   else
-    connect(varTemp.T, dummyZero.y);
+    connect(T_ambInternal, dummyZero.y);
   end if;
   connect(varTemp.T, T_ambInternal);
-  connect(varTemp.port, heatConv.port_a);
+  connect(varTemp.port, heatConv.port_a) annotation (Line(points={{100,86},{104,
+        86},{104,74},{74,74},{74,62},{80,62}}, color={191,0,0}));
 
   //fluid connections evaporator
   connect(T_evaOut.port_b, port_evaOut) annotation (Line(
