@@ -24,9 +24,9 @@ import Modelica.SIunits.Conversions.to_deg;
   Modelica.Blocks.Interfaces.RealOutput OutDayAngleSun(unit="rad")
                                                         annotation (Placement(transformation(extent={{80,-4},{100,16}})));
 
-  Real DeclinationSun;
-  Real HourAngleSun;
-  Real DayAngleSun;
+  Modelica.SIunits.Angle DeclinationSun;
+  Modelica.SIunits.Angle HourAngleSun;
+  Modelica.SIunits.Angle DayAngleSun;
   Real StandardTime "the time of the standard time zone of the WeatherData";
 equation
 //calculation of the SolarTime (Duffie2006 chap. 1.5)
@@ -36,10 +36,10 @@ equation
     "NumberOfDay is calculated as float because then the variables that use NumberoOfDay in their calculation don't have to be interpolated between the time-steps. To get the integer value it has to be calculated with: NumberOfDay =floor(time/86400) + 1";
 
       // day angle of sun
-      DayAngleSun = 360/365.25*(NumberOfDay - 1)
+      DayAngleSun = 2*Modelica.Constants.pi/365.25*(NumberOfDay - 1)
     "360 is an angle in degree and 365 is the number of days in one year. The earth rotation in one year is 360 degrees";
 
-      OutDayAngleSun = Modelica.SIunits.Conversions.from_deg(DayAngleSun);
+      OutDayAngleSun = DayAngleSun;
 
       // equation of time in hours - used to convert local time in solar time
       TimeEquation = 229.2*(0.000075+0.001868*cos(DayAngleSun)-0.032077*sin(DayAngleSun)-0.014615*cos(2*DayAngleSun)-0.04089*sin(2*DayAngleSun))/60;

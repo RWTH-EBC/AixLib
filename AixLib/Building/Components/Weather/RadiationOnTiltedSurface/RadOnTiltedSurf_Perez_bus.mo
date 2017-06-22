@@ -1,10 +1,8 @@
 within AixLib.Building.Components.Weather.RadiationOnTiltedSurface;
-model RadOnTiltedSurf_Perez
+model RadOnTiltedSurf_Perez_bus
   "Calculates solar radiation on tilted surfaces according to Perez"
-  extends RadiationOnTiltedSurface.BaseClasses.PartialRadOnTiltedSurf;
+  extends BaseClasses.PartialRadOnTiltedSurf_bus;
 
-  import Modelica.SIunits.Conversions.to_deg;
-  import Modelica.SIunits.Conversions.from_deg;
   import Modelica.Math.sin;
   import Modelica.Math.acos;
   import Modelica.Math.cos;
@@ -150,7 +148,7 @@ public
 
 equation
     if GroundReflexApprox then
-      rho = GroundReflection*rho_avg*max(a_rho*cos(from_deg(InDayAngleSun)), b_rho*(from_deg(InDayAngleSun-180))^2 + c_rho);
+      rho = GroundReflection*rho_avg*max(a_rho*cos(InDayAngleSun), b_rho*(InDayAngleSun-Modelica.Constants.pi)^2 + c_rho);
       //rho = 1.25*GroundReflection + 0.25*GroundReflection*cos(from_deg(InDayAngleSun)) - 0.5*GroundReflection*(sin(from_deg(InDayAngleSun)))^2 "another approximation"
     else
       rho = GroundReflection;
@@ -158,23 +156,23 @@ equation
     rho_out=rho;
 
     // calculation of cos_theta_z [Duffie/Beckman, p.15], cos_theta_z is manually cut at 0 (no neg. values);
-    cos_theta_z_help =  sin(from_deg(InDeclinationSun))*sin(from_deg(Latitude))
-                      + cos(from_deg(InDeclinationSun))*cos(from_deg(Latitude))*cos(from_deg(InHourAngleSun));
+    cos_theta_z_help =  sin(InDeclinationSun)*sin(Latitude)
+                      + cos(InDeclinationSun)*cos(Latitude)*cos(InHourAngleSun);
 
-    theta_z = to_deg(acos(cos_theta_z_help));
+    theta_z = acos(cos_theta_z_help);
     cos_theta_z = (cos_theta_z_help + abs(cos_theta_z_help))/2;
-    theta_z_pos = to_deg(acos(cos_theta_z));
+    theta_z_pos = acos(cos_theta_z);
     theta_z_out = theta_z_pos;
 
     //calculation of cos_theta [Duffie/Beckman, p.15], cos_theta is manually cut at 0 (no neg. values);
-    cos_theta_help =  sin(from_deg(InDeclinationSun))*sin(from_deg(Latitude))*cos(from_deg(Tilt))
-                    - sin(from_deg(InDeclinationSun))*cos(from_deg(Latitude))*sin(from_deg(Tilt))*cos(from_deg(Azimut))
-                    + cos(from_deg(InDeclinationSun))*cos(from_deg(Latitude))*cos(from_deg(Tilt))*cos(from_deg(InHourAngleSun))
-                    + cos(from_deg(InDeclinationSun))*sin(from_deg(Latitude))*sin(from_deg(Tilt))*cos(from_deg(Azimut))*cos(from_deg(InHourAngleSun))
-                    + cos(from_deg(InDeclinationSun))*sin(from_deg(Tilt))*sin(from_deg(Azimut))*sin(from_deg(InHourAngleSun));
+    cos_theta_help =  sin(InDeclinationSun)*sin(Latitude)*cos(Tilt)
+                    - sin(InDeclinationSun)*cos(Latitude)*sin(Tilt)*cos(Azimut)
+                    + cos(InDeclinationSun)*cos(Latitude)*cos(Tilt)*cos(InHourAngleSun)
+                    + cos(InDeclinationSun)*sin(Latitude)*sin(Tilt)*cos(Azimut)*cos(InHourAngleSun)
+                    + cos(InDeclinationSun)*sin(Tilt)*sin(Azimut)*sin(InHourAngleSun);
 
     cos_theta = (cos_theta_help + abs(cos_theta_help))/2;
-    theta_out = to_deg(acos(cos_theta));
+    theta_out = acos(cos_theta);
 
     // calculation of R factor [Duffie/Beckman, p.25], but in order not to divide by zero it is determined like a/b in the Model of Perez [Duffie/Beckman, p.94] where the minimum b is set to cos(85 deg);
             // R is manually set to 0 for theta_z_pos >= 80 degrees (-> 90 degrees means sunset)__old solution for the numerical problems of dividing by zero;
@@ -204,19 +202,19 @@ equation
   BeamRadTilt = R*InBeamRadHor;
 
   //calculation of the Groundreflected Irradiation on a tilted surface;
-  RadGroundRefl = rho*(InBeamRadHor + InDiffRadHor)*((1 - cos(from_deg(Tilt)))/2);
+  RadGroundRefl = rho*(InBeamRadHor + InDiffRadHor)*((1 - cos(Tilt))/2);
 
   // calculating of the diffuse irradiation with the Method of [Perez 1990];
 
       //getting brightness coefficients from brightness coefficient vector;
 
     //Calculation of the extraterrestrial Radiation on a horizontal Surface [Duffie/Beckman 2006, p.9];
-      ExtraterRadHor = SolarConstant * (1.000110 + 0.034221 * cos(from_deg(InDayAngleSun))
-                      + 0.001280 * sin(from_deg(InDayAngleSun)) + 0.000719 * cos(2*from_deg(InDayAngleSun))
-                      + 0.000077 * sin(2*from_deg(InDayAngleSun)));
+      ExtraterRadHor = SolarConstant * (1.000110 + 0.034221 * cos(InDayAngleSun)
+                      + 0.001280 * sin(InDayAngleSun) + 0.000719 * cos(2*InDayAngleSun)
+                      + 0.000077 * sin(2*InDayAngleSun));
 
     //Calculation of the Airmass [Duffie/Beckman 2006, p.10];
-      Airmass = exp(-0.0001184*h) / (cos_theta_z + 0.5057 * (96.080 - theta_z_pos)^(-1.634));
+      Airmass = exp(-0.0001184*h) / (cos_theta_z + 0.5057 * (96.080 - Modelica.SIunits.Conversions.to_deg(theta_z_pos))^(-1.634));
 
 /*    //Calculation of epsilon like in the Perez model [Duffie/Beckman 2006, p.94]. In order not to divide by zero, the minimum of c(the diffuse irradiation on a horizontal surface) is set 0.1 W/m2;
       c = max(0.1, InDiffRadHor);
@@ -224,7 +222,7 @@ equation
       */
       //Calculation of epsilon like in the EngineeringReference(EnergyPlus) page 143 In order not to divide by zero, the minimum of c(the diffuse irradiation on a horizontal surface) is set 0.1 W/m2;
       c = max(0.1, InDiffRadHor);
-      epsilon = (((InBeamRadHor/b + c) / c) + 1.041 * (from_deg(theta_z_out))^3) / (1 + 1.041 * (from_deg(theta_z_out))^3);
+      epsilon = (((InBeamRadHor/b + c) / c) + 1.041 * (theta_z_out)^3) / (1 + 1.041 * (theta_z_out)^3);
 
       ////get the right coefficients for determining the brigthness coefficient;
       FijFactors.u = epsilon;
@@ -240,13 +238,13 @@ equation
       brightness_out=delta;
 
     //Calculation of the brightness coefficients [Duffie/Beckman 2006, p.94]
-      F1 = max(0, f11 + f12 * delta + from_deg(theta_z_out) * f13);
-      F2 = f21 + f22 * delta + from_deg(theta_z_out) * f23;
+      F1 = max(0, f11 + f12 * delta + theta_z_out * f13);
+      F2 = f21 + f22 * delta + theta_z_out * f23;
 
-    DiffRadTiltHZ = InDiffRadHor * F2 * sin(from_deg(Tilt))
+    DiffRadTiltHZ = InDiffRadHor * F2 * sin(Tilt)
     "diffuse irradiance from the sky horizon on the tilted Surface";
 
-    DiffRadTiltDOM = InDiffRadHor * (1 - F1)*((1 + cos(from_deg(Tilt)))/2)
+    DiffRadTiltDOM = InDiffRadHor * (1 - F1)*((1 + cos(Tilt))/2)
     "diffuse irradiation from sky dome on a tilted Surface";
 
     DiffRadTiltCS = InDiffRadHor * F1 * R
@@ -402,4 +400,4 @@ Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
 
 
 </html>"));
-end RadOnTiltedSurf_Perez;
+end RadOnTiltedSurf_Perez_bus;

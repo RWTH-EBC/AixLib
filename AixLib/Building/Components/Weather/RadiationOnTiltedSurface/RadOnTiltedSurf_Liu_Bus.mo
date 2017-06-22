@@ -3,7 +3,6 @@ model RadOnTiltedSurf_Liu_bus
   "Calculates solar radiation on tilted surfaces according to Liu, with Bus"
   extends BaseClasses.PartialRadOnTiltedSurf_bus;
 
-import Modelica.SIunits.Conversions.from_deg;
 
   Real InBeamRadHor "beam irradiance on the horizontal surface";
   Real InDiffRadHor "diffuse irradiance on the horizontal surface";
