@@ -1,0 +1,145 @@
+#!/usr/bin/env python
+#######################################################
+# Script that runs all unit tests or, optionally,
+# only checks the html syntax.
+#
+# To run the unit tests, this script
+# - creates temporary directories for each processor,
+# - copies the library directory into these
+#   temporary directories,
+# - creates run scripts that run all unit tests,
+# - runs these unit tests,
+# - collects the dymola log files from each process,
+# - writes the combined log file 'unitTests.log'
+#   in the current directory,
+# - checks whether all unit tests run successfully,
+#   and produced the same results as the reference
+#   results, and
+# - exits with the message
+#    'Unit tests completed successfully.' or with
+#   an error message.
+#
+# If no errors occurred during the unit tests, then
+# this script returns 0. Otherwise, it returns a
+# non-zero exit value.
+#
+# MWetter@lbl.gov                            2011-02-23
+#######################################################
+
+def _validate_html():
+    import buildingspy.development.validator as v
+
+    val = v.Validator()
+    errMsg = val.validateHTMLInPackage(".")
+    n_msg = len(errMsg)
+    for i in range(n_msg):
+        if i == 0:
+            print "The following malformed html syntax has been found:\n%s" % errMsg[i]
+        else:
+            print errMsg[i]
+
+    if n_msg == 0:
+        return 0
+    else:
+        return 1
+
+def _setEnvironmentVariables(var, value):
+    ''' Add to the environment variable `var` the value `value`
+    '''
+    import os
+    import platform
+    if os.environ.has_key(var):
+        if platform.system() == "Windows":
+            os.environ[var] = value + ";" + os.environ[var]
+        else:
+            os.environ[var] = value + ":" + os.environ[var]
+    else:
+        os.environ[var] = value
+
+def _runUnitTests(batch, single_package, n_pro):
+    import buildingspy.development.regressiontest as u
+
+    ut = u.Tester()
+    ut.batchMode(batch)
+    if single_package is not None:
+        ut.setSinglePackage(single_package)
+    ut.setNumberOfThreads(n_pro)
+    ut.pedanticModelica(True)
+    # Below are some option that may occassionally be used.
+    # These are currently not exposed as command line arguments.
+#    ut.setNumberOfThreads(1)
+#    ut.deleteTemporaryDirectories(False)
+#    ut.useExistingResults(['/tmp/tmp-Buildings-0-fagmeZ'])
+
+    # Run the regression tests
+    retVal = ut.run()
+    return retVal
+
+def _runOpenModelicaUnitTests():
+    import buildingspy.development.regressiontest as u
+    ut = u.Tester()
+    ut.batchMode(batch)
+    ut.test_OpenModelica(cmpl=True, simulate=True,
+                         packages=['Examples'], number=-1)
+
+if __name__ == '__main__':
+    import multiprocessing
+    import platform
+    import argparse
+    import os
+    import sys
+
+    # Configure the argument parser
+    parser = argparse.ArgumentParser(description='Run the unit tests or the html validation only.')
+    unit_test_group = parser.add_argument_group("arguments to run unit tests")
+
+    unit_test_group.add_argument("-b", "--batch",
+                        action="store_true",
+                        help="Run in batch mode without user interaction")
+    unit_test_group.add_argument('-s', "--single-package",
+                        metavar="Modelica.Package",
+                        help="Test only the Modelica package Modelica.Package")
+    unit_test_group.add_argument("-n", "--number-of-processors",
+                        type=int,
+                        default = multiprocessing.cpu_count(),
+                        help='Maximum number of processors to be used')
+
+    html_group = parser.add_argument_group("arguments to check html syntax only")
+    html_group.add_argument("--validate-html-only",
+                           action="store_true")
+
+
+    # Set environment variables
+    if platform.system() == "Windows":
+        _setEnvironmentVariables("PATH",
+                                 os.path.join(os.path.abspath('.'),
+                                              "Resources", "Library", "win32"))
+    else:
+        _setEnvironmentVariables("LD_LIBRARY_PATH",
+                                 os.path.join(os.path.abspath('.'),
+                                              "Resources", "Library", "linux32"))
+
+    # The path to buildingspy must be added to sys.path to work on Linux.
+    # If only added to os.environ, the Python interpreter won't find buildingspy
+    sys.path.append(os.path.join(os.path.abspath('.'), "..", "..", "BuildingsPy"))
+
+
+    # Parse the arguments
+    args = parser.parse_args()
+
+    if args.validate_html_only:
+        # Validate the html syntax only, and then exit
+        ret_val = _validate_html()
+        exit(ret_val)
+
+    if args.single_package:
+        single_package = args.single_package
+    else:
+        single_package = None
+
+    retVal = _runUnitTests(batch = args.batch,
+                           single_package = single_package,
+                           n_pro = args.number_of_processors)
+    exit(retVal)
+
+#   _runOpenModelicaUnitTests()
