@@ -15,7 +15,8 @@ extends ActiveWallBaseDataDefinition(
     PressureDropCoefficient=32.981);
     annotation (Documentation(revisions="<html>
 <ul>
-<li><i>February 13, 2014&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
+<li><i>February 13, 2014&nbsp;</i> by Ana Constantin:<br/>
+Implemented.</li>
 </ul>
 </html>",
       info="<html>
@@ -29,7 +30,7 @@ extends ActiveWallBaseDataDefinition(
 <li>Product: Comfort Panel HL</li>
 <li>Manufacturer: Uponor</li>
 <li>Borschure: Geb&auml;udetechnik / TECHNISCHER GESAMTKATALOG 2013/14 / Uponor Kassettendeckensystzem Comfort Panel HL</li>
-<li>c_top_ratio: guess value 99&percnt; goes towards the room</li>
+<li>c_top_ratio: guess value 99 %; goes towards the room</li>
 <li>C_Floorheating: guess value (it shouldn&apos;t be too small, but the storage is minimal)</li>
 <li>k_isolation: guess value according to the the PE-X material</li>
 </ul>

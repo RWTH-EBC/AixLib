@@ -82,8 +82,6 @@ equation
 <p>
 The model multiplies the mass flow rate and enthalpy of a medium at constant pressure and temperature.
 </p>
-<h4><font color=\"#008000\">Level of Development</font></h4>
-<p><img src=\"modelica://HVAC/Images/stars3.png\"/></p>
 <h4><font color=\"#008000\">Example Results</font></h4>
 <p><a href=\"BaseLib.Examples.Multiplier_test\">BaseLib.Examples.Multiplier_test </a></p>
 </html>",

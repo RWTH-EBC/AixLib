@@ -19,7 +19,5 @@ Added documentation.</li>
       info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Calculation of the logarithmic over temperature. </p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars3.png\"/></p>
 </html>"));
 end logDT;

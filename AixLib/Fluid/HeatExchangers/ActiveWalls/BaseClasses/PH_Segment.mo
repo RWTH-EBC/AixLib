@@ -188,15 +188,13 @@ equation
           origin={-22,-54},
           rotation=180)}),
     Documentation(revisions="<html>
-<p><ul>
+<ul>
 <li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL</li>
 <li><i>November 06, 2014&nbsp;</i> by Ana Constantin:<br/>Added documentation.</li>
-</ul></p>
+</ul>
 </html>",
       info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Model for a panel heating element, consisting of a water volume, heat conduction upwards and downwards through the wall layers, convection and radiation exchange at the room facing side.</p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars2.png\"/></p>
 </html>"));
 end PH_Segment;

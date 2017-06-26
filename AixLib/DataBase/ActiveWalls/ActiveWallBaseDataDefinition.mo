@@ -29,11 +29,11 @@ annotation (Documentation(revisions="<html>
 <ul>
   <li>
 <i>February 14, 2014&nbsp;</i>
-         by Ana Constantin:<br>
+         by Ana Constantin:<br/>
          Changed name of heat capacity per are to C_Activated Element, to be able to use it for both heating and cooling.</li>
   <li>
 <i>September 20, 2013&nbsp;</i>
-         by Mark Wesseling:<br>
+         by Mark Wesseling:<br/>
          Implemented.</li>
 </ul>
 </html>",
@@ -41,8 +41,6 @@ annotation (Documentation(revisions="<html>
 <h4><font color=\"#008000\">Overview</font></h4>
 <p>Base record for Active Walls (Ceiling and Floor) models. </p>
 <p>Defines heat exchange properties and storage capacity of the active part of the wall.</p>
-<ul>
-</ul>
 <h4><font color=\"#008000\">References</font></h4>
 <p>Base data definition for record used with <a href=\"EBC.HVAC.Components.ActiveWalls.Panelheating_1D_Dis\">EBC.HVAC.Components.ActiveWalls.Panelheating_1D_Dis</a></p>
 
