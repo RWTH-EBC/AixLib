@@ -187,15 +187,14 @@ equation
           thickness=4,
           smooth=Smooth.None)}),
     Documentation(revisions="<html>
-<p><ul>
-<li><i>November 06, 2014&nbsp;</i> by Ana Constantin:<br/>Added documentation.</li>
-</ul></p>
+<ul>
+<li><i>November 06, 2014&nbsp;</i> by Ana Constantin:<br/>
+Added documentation.</li>
+</ul>
 </html>",
         info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Model for a contributor for different floor heating circuits in a house.</p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars2.png\"/></p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <p>The contributor is built to connect six floor heating circuits together. The volume is used for nummerical reasons, to have a point where all the flows mix together. </p>
 <h4><span style=\"color:#008000\">Example Results</span></h4>

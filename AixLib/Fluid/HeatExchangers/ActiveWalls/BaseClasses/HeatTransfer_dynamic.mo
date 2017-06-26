@@ -102,8 +102,9 @@ equation
           origin={6,45},
           rotation=360)}),
       Documentation(revisions="<html>
-<p><ul>
-<li><i>August 03, 2014&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+<ul>
+<li><i>August 03, 2014&nbsp;</i> by Ana Constantin:<br/>
+Implemented.</li>
+</ul>
 </html>"));
 end HeatTransfer_dynamic;

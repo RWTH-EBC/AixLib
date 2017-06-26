@@ -22,11 +22,9 @@ port_b.p = if noEvent(port_a.m_flow>=0) then port_a.p - Tubelength*m*(port_a.m_f
     Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Model for calculating the pressure drop.</p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars2.png\"/></p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <p>The pressure drop is calculated according to the following equation [1].</p>
-<p><img src=\"modelica://HVAC/Images/equations/equation-8xFaklFH.png\" alt=\"Delta_P = K*m_flow^2\"/></p>
+<p><img src=\"modelica://HVAC/Images/equations/equation-8xFaklFH.png\" alt="text" alt=\"Delta_P = K*m_flow^2\"/></p>
 <p>In order to determine <i>K, </i>manufacturer data is used and : </p>
 <p><img src=\"modelica://HVAC/Images/PressureDrop.bmp\"/></p>
 <p>With the help onf the Matlab Curve Fit Toolbox a curve y = K*x^2 is fitted through several selected points.</p>
@@ -38,9 +36,10 @@ port_b.p = if noEvent(port_a.m_flow>=0) then port_a.p - Tubelength*m*(port_a.m_f
 </html>",
   revisions=
         "<html>
-<p><ul>
-<li><i>June 10, 2011&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+<ul>
+<li><i>June 10, 2011&nbsp;</i> by Ana Constantin:<br/>
+Implemented.</li>
+</ul>
 </html>"),
     Diagram(graphics),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{

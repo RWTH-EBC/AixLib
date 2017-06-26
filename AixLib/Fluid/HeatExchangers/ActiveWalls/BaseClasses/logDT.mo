@@ -11,9 +11,10 @@ Temp_out :=(Temp_in[1] - Temp_in[2])/log((Temp_in[1] - Temp_in[3])/(Temp_in[2] -
     Temp_in[3]));
 
   annotation (Documentation(revisions="<html>
-<p><ul>
-<li><i>November 06, 2014&nbsp;</i> by Ana Constantin:<br/>Added documentation.</li>
-</ul></p>
+<ul>
+<li><i>November 06, 2014&nbsp;</i> by Ana Constantin:<br/>
+Added documentation.</li>
+</ul>
 </html>",
       info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>

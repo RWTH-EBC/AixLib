@@ -198,7 +198,8 @@ equation
 </html>",
         revisions="<html>
 <ul>
-<li><i>November 28, 2014&nbsp;</i> by Xian Wu:<br>Added to the HVAC library</li>
+<li><i>November 28, 2014&nbsp;</i> by Xian Wu:<br/>
+Added to the HVAC library</li>
 </ul>
 </html>"),
     experiment(StopTime=86400, Interval=60),

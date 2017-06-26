@@ -265,8 +265,6 @@ annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,
     Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Model for floor heating, with one pipe running through the whole floor.</p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars2.png\"/></p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <p>The assumption is made that there is one pipe that runs thorugh the whole floor. Which means that a discretisation of the floor heating is done, the discretisation elements will be connected in series: the flow temperature of one element is the return temperature of the element before.</p>
 <p>The pressure drop is calculated at the end for the whole length of the pipe.</p>
@@ -279,9 +277,11 @@ annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,
 <p><a href=\"HVAC.Examples.ActiveWalls.ActiveWalls_Test\">HVAC.Examples.ActiveWalls.ActiveWalls_Test</a></p>
 </html>",
         revisions="<html>
-<p><ul>
-<li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL</li>
-<li><i>November 06, 2014&nbsp;</i> by Ana Constantin:<br/>Added documentation.</li>
-</ul></p>
+<ul>
+<li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>
+Uses components from MSL</li>
+<li><i>November 06, 2014&nbsp;</i> by Ana Constantin:<br/>
+Added documentation.</li>
+</ul>
 </html>"));
 end Panelheating_1D_Dis;

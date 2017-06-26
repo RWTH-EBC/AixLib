@@ -11,8 +11,9 @@ Temp_out :=(Temp_in[2] - Temp_in[1])/log(abs((Temp_in[1] - Temp_in[3])/(Temp_in[
     Temp_in[3])));
 
     annotation (Documentation(revisions="<html>
-<p><ul>
-<li><i>August 03, 2014&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+<ul>
+<li><i>August 03, 2014&nbsp;</i> by Ana Constantin:<br/>
+Implemented.</li>
+</ul>
 </html>"));
 end logUnderDT;

@@ -80,13 +80,13 @@ equation
     Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Model for heat conduction using elements from the MSL.</p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars2.png\"/></p>
 </html>",
       revisions="<html>
-<p><ul>
-<li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL</li>
-<li><i>November 06, 2014&nbsp;</i> by Ana Constantin:<br/>Added documentation.</li>
-</ul></p>
+<ul>
+<li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>
+Uses components from MSL</li>
+<li><i>November 06, 2014&nbsp;</i> by Ana Constantin:<br/>
+Added documentation.</li>
+</ul>
 </html>"));
 end Panel_Segment;
