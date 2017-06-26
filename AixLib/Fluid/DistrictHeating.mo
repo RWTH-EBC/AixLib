@@ -96,8 +96,8 @@ package DistrictHeating "Package with models for district heating network"
       annotation (Placement(transformation(extent={{-24,-30.5},{24,30.5}},
           rotation=0,
           origin={-42,-30.5})));
-    AixLib.Fluid.Movers.FlowControlled_m_flow Stg2Hp(redeclare package Medium
-        = Medium, m_flow_nominal=20)  annotation (Placement(transformation(
+    AixLib.Fluid.Movers.FlowControlled_m_flow Stg2Hp(redeclare package Medium =
+          Medium, m_flow_nominal=20)  annotation (Placement(transformation(
           extent={{-9,-9.5},{9,9.5}},
           rotation=180,
           origin={-125,-68.5})));
@@ -109,20 +109,19 @@ package DistrictHeating "Package with models for district heating network"
       annotation (Placement(transformation(extent={{-10,-10},{10,10}},
           rotation=270,
           origin={-116,-38})));
-    AixLib.Fluid.Movers.FlowControlled_m_flow HpStg1(redeclare package Medium
-        = Medium, m_flow_nominal=12)  annotation (Placement(transformation(
+    AixLib.Fluid.Movers.FlowControlled_m_flow HpStg1(redeclare package Medium =
+          Medium, m_flow_nominal=12)  annotation (Placement(transformation(
           extent={{-9,-9.5},{9,9.5}},
           rotation=270,
           origin={-202,-62.5})));
     ExergyBasedControl.DistrictHeating.HeatGeneratorUnit.CollectorUnit collectorUnit
       annotation (Placement(transformation(extent={{-213,-134},{-191,-111}})));
-    AixLib.Fluid.Movers.FlowControlled_m_flow Stg2Stg1(redeclare package Medium
-        = Medium, m_flow_nominal=12)  annotation (Placement(transformation(
+    AixLib.Fluid.Movers.FlowControlled_m_flow Stg2Stg1(redeclare package Medium =
+          Medium, m_flow_nominal=12)  annotation (Placement(transformation(
           extent={{-9,-9.5},{9,9.5}},
           rotation=180,
           origin={-93,-122.5})));
-    AixLib.Fluid.Sensors.TemperatureTwoPort TempEvaIn(redeclare package Medium
-        =                                                                        Medium,
+    AixLib.Fluid.Sensors.TemperatureTwoPort TempEvaIn(redeclare package Medium = Medium,
         m_flow_nominal=10) annotation (Placement(transformation(
           extent={{-10,-10},{10,10}},
           rotation=270,
@@ -208,8 +207,8 @@ package DistrictHeating "Package with models for district heating network"
         Medium =                                                                   Medium,
         m_flow_nominal=10) annotation (Placement(transformation(extent={{223,50},
               {250,74}})));
-    AixLib.Fluid.Movers.FlowControlled_m_flow CHPPump(redeclare package Medium
-        = Medium, m_flow_nominal=12) annotation (Placement(transformation(
+    AixLib.Fluid.Movers.FlowControlled_m_flow CHPPump(redeclare package Medium =
+          Medium, m_flow_nominal=12) annotation (Placement(transformation(
           extent={{-15,-15},{15,15}},
           rotation=90,
           origin={76,213})));
@@ -556,7 +555,6 @@ package DistrictHeating "Package with models for district heating network"
         minDeltaT=5,
         param=
             ExergyBasedControl.DistrictHeating.DataBase.CHP_TechnicalData_485KW(),
-
         minCapacity=40,
         Tc=200,
         TFlowRange=2,
@@ -1101,14 +1099,14 @@ package DistrictHeating "Package with models for district heating network"
             transformation(
             extent={{-8,-8},{8,8}},
             rotation=180,
-            origin={60,34})));
+            origin={60,36})));
       AixLib.Fluid.Sources.Boundary_pT Source(
         redeclare package Medium = Medium,
         nPorts=1,
         T=303.15) annotation (Placement(transformation(
             extent={{-8,-8},{8,8}},
             rotation=180,
-            origin={60,4})));
+            origin={60,2})));
       Modelica.Blocks.Sources.CombiTimeTable WeatherData(
         tableOnFile=true,
         extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
@@ -1138,10 +1136,10 @@ package DistrictHeating "Package with models for district heating network"
             rotation=180,
             origin={34,-10})));
     equation
-      connect(Source.ports[1], solarDistrictHeating.port_a) annotation (Line(points={{52,4},{
-              44,4},{44,9.33333},{30.1674,9.33333}},         color={0,127,255}));
-      connect(Sink.ports[1], solarDistrictHeating.port_b) annotation (Line(points={{52,34},
-              {44,34},{44,28.8533},{30,28.8533}},        color={0,127,255}));
+      connect(Source.ports[1], solarDistrictHeating.port_a) annotation (Line(points={{52,2},{
+              44,2},{44,9.33333},{30.1674,9.33333}},         color={0,127,255}));
+      connect(Sink.ports[1], solarDistrictHeating.port_b) annotation (Line(points={{52,36},
+              {44,36},{44,28.8533},{30,28.8533}},        color={0,127,255}));
       connect(solarDistrictHeating.flowTempSolCir, solarDistrictHeatingController.FlowTempSol)
         annotation (Line(points={{-18.5581,31.9467},{-86,31.9467},{-86,-40.3125},
               {-44.9312,-40.3125}},
