@@ -1,4 +1,0 @@
-simulateModel("AixLib.Utilities.Math.Examples.InverseXRegularized", method="euler", resultFile="InverseXRegularizedBlock");
-createPlot(id = 1,
- y = {"inverseXRegularized.y"},
- grid = true);

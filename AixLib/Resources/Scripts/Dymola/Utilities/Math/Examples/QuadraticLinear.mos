@@ -1,4 +1,0 @@
-simulateModel("AixLib.Utilities.Math.Examples.QuadraticLinear", method="euler", resultFile="QuadraticLinear");
-createPlot(id = 1,
- y = {"quadraticLinear.y"},
- grid = true);

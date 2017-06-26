@@ -1,4 +1,0 @@
-simulateModel("AixLib.Utilities.Math.Examples.Average", method="euler", resultFile="Average");
-createPlot(id = 1,
- y = {"average.y"},
- grid = true);

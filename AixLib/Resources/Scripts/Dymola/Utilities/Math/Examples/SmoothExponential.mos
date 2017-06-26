@@ -1,4 +1,0 @@
-simulateModel("AixLib.Utilities.Math.Examples.SmoothExponential", method="euler", resultFile="SmoothExponential");
-createPlot(id = 1,
- y = {"smoothExponential.y"},
- grid = true);
