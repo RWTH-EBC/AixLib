@@ -356,7 +356,7 @@ annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,
 <p>Modification of Panelheating_1D_Dis.</p>
 <p>Panels are connected in parallel in sets of x.</p>
 <h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars2.png\"/></p>
+<p><img src=\"modelica://HVAC/Images/stars2.png\" alt="text"/></p>
 <p>The discretisation is the number of parallel connections.</p>
 <p>The set of x gives the tube length and the volume of water for every discretisation.</p>
 <p>The model can work for only heating, only cooling, or heating and cooling, both as floor or ceiling. The combination of floor and cooling wouldn&apos;t make too much sense.</p>
@@ -366,10 +366,10 @@ annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,
 <p>The model is a greybox model: half physical model, half empirical formula. </p>
 <p><b><font style=\"color: #ff0000; \">Attention:</font></b> When switching from cooling to heating mode the values for heat transfer coefficients don&apos;t change smoothly. So if the switch is not some type of step change for the flow temperature (see example) the model can become stuck constantly switching between hetaing and cooling mode. Realistically a change should be sudden, because there is supposed to be a certain temperature difference between room temperature and mean temperature of heating system. However a chnage can be gradual, when feeding the model with measurement data. As a solution please think about making the chnage more step like, or of introducing a a tolerance interval around the switching point, where the model is only cooling, or heating, or not doing anything. </p>
 <h4><span style=\"color:#008000\">Example</span></h4>
-<a href=\"HVAC.Examples.ActiveWalls.Panel_CoolingAndHeating\">HVAC.Examples.ActiveWalls.Panel_CoolingAndHeating</a></p>
+<a href=\"HVAC.Examples.ActiveWalls.Panel_CoolingAndHeating\">HVAC.Examples.ActiveWalls.Panel_CoolingAndHeating</a>
 </html>", revisions="<html>
-<p><ul>
+<ul>
 <li><i>August 03, 2014&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
-</ul></p>
+</ul>
 </html>"));
 end Panel_Dis1D;
