@@ -35,8 +35,8 @@ parameter HeatCapacityPerArea C_down;
   Modelica.Fluid.Sensors.TemperatureTwoPort t_flow(redeclare package Medium =
         Medium)
     annotation (Placement(transformation(extent={{-70,-36},{-50,-16}})));
-  Modelica.Fluid.Sensors.TemperatureTwoPort t_return(redeclare package Medium
-      = Medium)
+  Modelica.Fluid.Sensors.TemperatureTwoPort t_return(redeclare package Medium =
+        Medium)
     annotation (Placement(transformation(extent={{50,-36},{70,-16}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermDown
     annotation (Placement(transformation(extent={{-22,-110},{-2,-90}})));

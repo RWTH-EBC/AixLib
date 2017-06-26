@@ -3,8 +3,8 @@ model ActiveWalls_Test
   extends Modelica.Icons.Example;
       replaceable package Medium =
       Modelica.Media.Water.ConstantPropertyLiquidWater "Medium in the system"                annotation(choicesAllMatching = true);
-  HeatExchangers.ActiveWalls.Contributor contributor(redeclare package Medium
-      = Medium)
+  HeatExchangers.ActiveWalls.Contributor contributor(redeclare package Medium =
+        Medium)
     annotation (Placement(transformation(extent={{-44,-20},{36,20}})));
   HeatExchangers.ActiveWalls.Panelheating_1D_Dis panelheating_1D_Dis1(
       redeclare package Medium = Medium)

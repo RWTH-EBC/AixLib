@@ -2,6 +2,7 @@ ConstantEffectiveness
 HeaterCooler_T
 HeaterCooler_u
 ActiveBeams
+ActiveWalls
 Radiators
 Examples
 Validation
