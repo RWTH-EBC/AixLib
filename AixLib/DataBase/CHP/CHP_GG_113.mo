@@ -9,12 +9,12 @@ record CHP_GG_113 "GG 113 : Sokratherm"
     DPipe=0.1);
 
   annotation (Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>Sokratherm BHKW GG 113 </p>
 </html>",
         revisions="<html>
-<p><ul>
+<ul>
 <li><i>August 13, 2013&nbsp;</i> by Ole Odendahl:<br/>Added reference</li>
-</ul></p>
+</ul>
 </html>"));
 end CHP_GG_113;
