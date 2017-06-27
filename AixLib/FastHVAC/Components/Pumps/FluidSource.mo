@@ -32,6 +32,7 @@ equation
   enthalpyPort_b.m_flow = -m_flow " set value of outlet port ";
   enthalpyPort_b.c = cp " set value of outlet port ";
   enthalpyPort_b.T = T_fluid " set value of outlet port ";
+  enthalpyPort_b.h = cp*T_fluid " set value of outlet port ";
 
 
     annotation (
