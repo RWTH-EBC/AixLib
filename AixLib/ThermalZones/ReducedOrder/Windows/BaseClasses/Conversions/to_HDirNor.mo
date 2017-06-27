@@ -10,13 +10,13 @@ model to_HDirNor
     displayUnit="deg") "Solar altitude angle"
     annotation (Placement(transformation(extent={{-140,-60},{-100,-20}}),
         iconTransformation(extent={{-140,-60},{-100,-20}})));
-  Modelica.Blocks.Interfaces.RealInput HDirHor(quantity=
-        "RadiantEnergyFluenceRate", unit="W/m2")
+  Modelica.Blocks.Interfaces.RealInput HDirHor(final quantity=
+        "RadiantEnergyFluenceRate", final unit="W/m2")
     "Direct normal radiation"
     annotation (Placement(transformation(extent={{-140,20},{-100,60}}),
         iconTransformation(extent={{-140,20},{-100,60}})));
-  Modelica.Blocks.Interfaces.RealOutput HDirNor(quantity=
-        "RadiantEnergyFluenceRate", unit="W/m2")
+  Modelica.Blocks.Interfaces.RealOutput HDirNor(final quantity=
+        "RadiantEnergyFluenceRate", final unit="W/m2")
     "Direct normal radiation"
     annotation (Placement(transformation(extent={{100,-20},{140,20}})));
 

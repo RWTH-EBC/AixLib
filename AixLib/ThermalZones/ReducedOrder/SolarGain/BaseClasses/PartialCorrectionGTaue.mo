@@ -2,7 +2,7 @@ within AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses;
 partial model PartialCorrectionGTaue
   "Partial model for correction of the solar gain factor and for the
   translucence"
-  parameter Integer n(min = 1) "number of windows"
+  parameter Integer n(min = 1) "Number of windows"
     annotation(dialog(group="window"));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer UWin
     "Thermal transmission coefficient of whole window"

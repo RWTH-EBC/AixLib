@@ -3,36 +3,36 @@ model HDifToClearCovered "Splits the total diffuse irradiation in diffuse irradi
   covered sky"
   extends Modelica.Blocks.Icons.Block;
 
-  Modelica.Blocks.Interfaces.RealInput HDifHor( quantity=
-    "RadiantEnergyFluenceRate", unit="W/m2")
+  Modelica.Blocks.Interfaces.RealInput HDifHor(final quantity=
+    "RadiantEnergyFluenceRate", final unit="W/m2")
     "Horizontal diffuse solar radiation."
      annotation (Placement(transformation(extent={{-116,-66},{-100,-50}}),
         iconTransformation(extent={{-120,-70},{-100,-50}})));
 
-   Modelica.Blocks.Interfaces.RealInput HDifTil( quantity=
-    "RadiantEnergyFluenceRate", unit="W/m2")
+   Modelica.Blocks.Interfaces.RealInput HDifTil(final quantity=
+    "RadiantEnergyFluenceRate", final unit="W/m2")
     "Hemispherical diffuse solar irradiation on a tilted surface from the sky"
     annotation (Placement(transformation(extent={{-116,54},{-100,70}}),
         iconTransformation(extent={{-120,50},{-100,70}})));
-   Modelica.Blocks.Interfaces.RealOutput HDifHorCov( quantity=
-    "RadiantEnergyFluenceRate", unit="W/m2")
+   Modelica.Blocks.Interfaces.RealOutput HDifHorCov(final quantity=
+    "RadiantEnergyFluenceRate", final unit="W/m2")
     "Horizontal diffuse solar radiation at covered sky."
     annotation (Placement(transformation(extent={{104,-26},{120,-10}}),
         iconTransformation(extent={{100,-30},{120,-10}})));
 
-  Modelica.Blocks.Interfaces.RealOutput HDifHorCle( quantity=
-    "RadiantEnergyFluenceRate", unit="W/m2")
+  Modelica.Blocks.Interfaces.RealOutput HDifHorCle(final quantity=
+    "RadiantEnergyFluenceRate", final unit="W/m2")
     "Horizontal diffuse solar radiation at clear sky."
     annotation (Placement(transformation(extent={{104,-66},{120,-50}}),
         iconTransformation(extent={{100,-70},{120,-50}})));
 
-  Modelica.Blocks.Interfaces.RealOutput HDifTilCov( quantity=
-    "RadiantEnergyFluenceRate", unit="W/m2")
+  Modelica.Blocks.Interfaces.RealOutput HDifTilCov(final quantity=
+    "RadiantEnergyFluenceRate", final unit="W/m2")
     "Hemispherical diffuse solar irradiation on a tilted surface at covered sky"
     annotation (Placement(transformation(extent={{104,14},{120,30}}),
         iconTransformation(extent={{100,10},{120,30}})));
-  Modelica.Blocks.Interfaces.RealOutput HDifTilCle( quantity=
-    "RadiantEnergyFluenceRate", unit="W/m2")
+  Modelica.Blocks.Interfaces.RealOutput HDifTilCle(final quantity=
+    "RadiantEnergyFluenceRate", final unit="W/m2")
     "Hemispherical diffuse solar irradiation on a tilted surface at clear sky"
     annotation (Placement(transformation(extent={{104,54},{120,70}}),
         iconTransformation(extent={{100,50},{120,70}})));
