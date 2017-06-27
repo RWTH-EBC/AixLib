@@ -823,7 +823,7 @@ model TestCase1_Illumination
     tau_visTotDir={0.08},
     tau_visTotDif={0.32},
     tau_vis={0.72},
-    til={1.5707963267949}) "visible light entering the room"
+    til={1.5707963267949}) "Visible light entering the room"
     annotation (Placement(transformation(extent={{40,24},{90,84}})));
   Modelica.Blocks.Sources.CombiTimeTable HVisSum_VDI2078(
     columns={2},
