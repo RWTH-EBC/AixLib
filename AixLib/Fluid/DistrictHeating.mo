@@ -1,16 +1,1227 @@
 within AixLib.Fluid;
 package DistrictHeating "Package with models for district heating network"
+  package Components "Components for district heating model "
+
+    model DividerUnit "Divider unit for direct or indirect supply"
+
+      replaceable package Medium = AixLib.Media.Water;
+
+      Modelica.Fluid.Interfaces.FluidPort_a port_a( redeclare package Medium =
+            Medium)
+        annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
+      Modelica.Fluid.Interfaces.FluidPort_b port_b( redeclare package Medium =
+            Medium)
+        annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
+      Modelica.Fluid.Interfaces.FluidPort_b port_b1( redeclare package Medium =
+            Medium)
+        annotation (Placement(transformation(extent={{90,-10},{110,10}})));
+      AixLib.Fluid.Actuators.Valves.TwoWayQuickOpening dirSupplyValve( redeclare
+          package Medium =
+            Medium,
+        m_flow_nominal=10,
+        dpValve_nominal=6000) "Valve for direct supply"
+        annotation (Placement(transformation(extent={{30,-10},{50,10}})));
+      AixLib.Fluid.Actuators.Valves.TwoWayQuickOpening indirSupplyValve( redeclare
+          package Medium =
+            Medium,
+        m_flow_nominal=10,
+        dpValve_nominal=6000) "Valve for indirect supply"
+                                    annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=270,
+            origin={0,-46})));
+      Modelica.Blocks.Interfaces.RealInput ValveOpDir
+        "valve opening of direct supply" annotation (Placement(transformation(
+              extent={{-126,54},{-86,94}}), iconTransformation(extent={{-108,58},{-82,
+                84}})));
+      Modelica.Blocks.Interfaces.RealInput ValveOpIndir
+        "valve opening of indirect supply" annotation (Placement(transformation(
+              extent={{-126,26},{-86,66}}), iconTransformation(extent={{-108,30},{-82,
+                56}})));
+    equation
+      connect(port_a, dirSupplyValve.port_a)
+        annotation (Line(points={{-100,0},{-74,0},{30,0}}, color={0,127,255}));
+      connect(dirSupplyValve.port_b, port_b1)
+        annotation (Line(points={{50,0},{100,0}},         color={0,127,255}));
+      connect(port_a, indirSupplyValve.port_a)
+        annotation (Line(points={{-100,0},{0,0},{0,-36}}, color={0,127,255}));
+      connect(indirSupplyValve.port_b, port_b)
+        annotation (Line(points={{0,-56},{0,-100}},          color={0,127,255}));
+      connect(ValveOpIndir, indirSupplyValve.y) annotation (Line(points={{-106,46},{
+              -38,46},{-38,-28},{22,-28},{22,-46},{12,-46}}, color={0,0,127}));
+      connect(ValveOpDir, dirSupplyValve.y)
+        annotation (Line(points={{-106,74},{40,74},{40,12}}, color={0,0,127}));
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+            coordinateSystem(preserveAspectRatio=false)));
+    end DividerUnit;
+
+    model CollectorUnit "Collector unit for direct or indirect supply"
+
+      replaceable package Medium = AixLib.Media.Water;
+
+      Modelica.Fluid.Interfaces.FluidPort_b port_a( redeclare package Medium =
+            Medium)
+        annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
+      Modelica.Fluid.Interfaces.FluidPort_a port_b( redeclare package Medium =
+            Medium)
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+            rotation=180,
+            origin={0,100})));
+      Modelica.Fluid.Interfaces.FluidPort_a port_b1( redeclare package Medium =
+            Medium)
+        annotation (Placement(transformation(extent={{90,-10},{110,10}})));
+      AixLib.Fluid.Actuators.Valves.TwoWayQuickOpening dirSupplyValve( redeclare
+          package Medium =
+            Medium,
+        m_flow_nominal=10,
+        dpValve_nominal=6000)
+        "Valve for direct supply"
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+            rotation=180,
+            origin={40,0})));
+      AixLib.Fluid.Actuators.Valves.TwoWayQuickOpening indirSupplyValve( redeclare
+          package Medium =
+            Medium,
+        m_flow_nominal=10,
+        dpValve_nominal=6000) "Valve for indirect supply"
+                                    annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=270,
+            origin={0,44})));
+      Modelica.Blocks.Interfaces.RealInput ValveOpDir
+        "valve opening of direct supply" annotation (Placement(transformation(
+              extent={{-126,54},{-86,94}}), iconTransformation(extent={{-108,58},{-82,
+                84}})));
+      Modelica.Blocks.Interfaces.RealInput ValveOpIndir
+        "valve opening of indirect supply" annotation (Placement(transformation(
+              extent={{-126,26},{-86,66}}), iconTransformation(extent={{-108,30},{-82,
+                56}})));
+    equation
+      connect(port_b, port_b)
+        annotation (Line(points={{0,100},{0,100},{0,100}}, color={0,127,255}));
+      connect(port_b, indirSupplyValve.port_a)
+        annotation (Line(points={{0,100},{0,77},{0,54}}, color={0,127,255}));
+      connect(indirSupplyValve.port_b, port_a)
+        annotation (Line(points={{0,34},{0,0},{-100,0}}, color={0,127,255}));
+      connect(port_b1, dirSupplyValve.port_a)
+        annotation (Line(points={{100,0},{75,0},{50,0}}, color={0,127,255}));
+      connect(dirSupplyValve.port_b, port_a)
+        annotation (Line(points={{30,0},{-100,0},{-100,0}}, color={0,127,255}));
+      connect(ValveOpDir, dirSupplyValve.y) annotation (Line(points={{-106,74},{-58,
+              74},{-58,-38},{40,-38},{40,-12}}, color={0,0,127}));
+      connect(ValveOpIndir, indirSupplyValve.y) annotation (Line(points={{-106,46},
+              {-32,46},{-32,74},{30,74},{30,44},{12,44}}, color={0,0,127}));
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+            coordinateSystem(preserveAspectRatio=false)));
+    end CollectorUnit;
+
+    model BuffStorageExtHEx
+      "Buffer storage model with external heat exchanger for solar collectors"
+
+      replaceable package Medium = AixLib.Media.Water;
+
+      AixLib.Fluid.HeatExchangers.ConstantEffectiveness hex(
+      redeclare package Medium2 = Medium,
+        dp1_nominal=600,
+        dp2_nominal=600,
+        eps=0.8,
+        m1_flow_nominal=10,
+        m2_flow_nominal=10,
+        redeclare package Medium1 = Medium)
+       annotation (Placement(
+            transformation(
+            extent={{-13,-12},{13,12}},
+            rotation=90,
+            origin={-29,0})));
+      AixLib.Fluid.Storage.BufferStorage bufferStorage(
+        useHeatingCoil1=false,
+        useHeatingCoil2=false,
+        useHeatingRod=false,
+        upToDownHC1=false,
+        upToDownHC2=false,
+        redeclare package Medium = Medium,
+        redeclare model HeatTransfer =
+            AixLib.Fluid.Storage.BaseClasses.HeatTransferLambdaEff,
+        redeclare package MediumHC1 = Medium,
+        redeclare package MediumHC2 = Medium,
+        n=10,
+        TStart=303.15,
+        data=AixLib.DataBase.Storage.Generic_New_2000l(
+            hTank=4.5,
+            hUpperPorts=4.4,
+            dTank=6,
+            hTS2=1),
+        TStartWall=303.15,
+        TStartIns=303.15)
+        annotation (Placement(transformation(extent={{-19,-24},{19,24}},
+            rotation=0,
+            origin={51,-2})));
+      Modelica.Fluid.Interfaces.FluidPort_a port_a( redeclare package Medium =
+            Medium)
+        annotation (Placement(transformation(extent={{-110,-50},{-90,-30}})));
+      Modelica.Fluid.Interfaces.FluidPort_b port_b( redeclare package Medium =
+            Medium)
+        annotation (Placement(transformation(extent={{-110,30},{-90,50}})));
+      Modelica.Fluid.Interfaces.FluidPort_a port_a1( redeclare package Medium = Medium)
+        annotation (Placement(transformation(extent={{90,-56},{110,-36}})));
+      Modelica.Fluid.Interfaces.FluidPort_b port_b1( redeclare package Medium = Medium)
+        annotation (Placement(transformation(extent={{90,30},{110,50}})));
+      Modelica.Fluid.Sensors.TemperatureTwoPort SolarCollFlowTemp(redeclare
+          package Medium =
+                   Medium)
+        annotation (Placement(transformation(extent={{-72,-50},{-52,-30}})));
+      Modelica.Fluid.Sensors.TemperatureTwoPort SolarCollRetTemp(redeclare
+          package Medium =
+                   Medium)
+       annotation (
+          Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=180,
+            origin={-62,40})));
+      Modelica.Fluid.Sensors.TemperatureTwoPort StorageSideRetTemp(redeclare
+          package Medium =                                                                    Medium)
+        annotation (Placement(transformation(extent={{-8,-8},{8,8}},
+            rotation=180,
+            origin={76,-46})));
+      AixLib.Fluid.Movers.FlowControlled_m_flow StgLoopPump(redeclare package
+          Medium = Medium, m_flow_nominal=10)  annotation (Placement(transformation(
+            extent={{-9,-9},{9,9}},
+            rotation=180,
+            origin={3,-50})));
+      Modelica.Fluid.Sensors.TemperatureTwoPort StorageSideFlowTemp(
+                                                                   redeclare
+          package Medium =                                                                    Medium)
+        annotation (Placement(transformation(extent={{-8,-8},{8,8}},
+            rotation=0,
+            origin={74,40})));
+      Modelica.Fluid.Sensors.TemperatureTwoPort StorageLoopOutTemp(redeclare
+          package Medium = Medium) annotation (Placement(transformation(
+            extent={{-8,-8},{8,8}},
+            rotation=180,
+            origin={32,-50})));
+      Modelica.Fluid.Sensors.TemperatureTwoPort StorageLoopInTemp(redeclare
+          package Medium =
+                   Medium) annotation (Placement(transformation(
+            extent={{-8,-8},{8,8}},
+            rotation=0,
+            origin={30,40})));
+      Modelica.Blocks.Interfaces.RealOutput StgTempTop
+        annotation (Placement(transformation(extent={{94,72},{114,92}}),
+            iconTransformation(extent={{94,72},{114,92}})));
+      Modelica.Blocks.Interfaces.RealOutput StgTempBott
+        annotation (Placement(transformation(extent={{96,-88},{116,-68}}),
+            iconTransformation(extent={{96,-88},{116,-68}})));
+      Modelica.Blocks.Interfaces.RealOutput TempSolColRet
+        "Return temperature of solar collector " annotation (Placement(
+            transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=180,
+            origin={-106,76}), iconTransformation(
+            extent={{-10,-10},{10,10}},
+            rotation=180,
+            origin={-104,80})));
+      Modelica.Blocks.Interfaces.RealOutput TempSolCollFlow
+        "Flow temperature of solar collector" annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=180,
+            origin={-106,-74}), iconTransformation(
+            extent={{-10,-10},{10,10}},
+            rotation=180,
+            origin={-106,-80})));
+      Modelica.Blocks.Interfaces.RealInput MassFlowStgLoop annotation (Placement(
+            transformation(
+            extent={{-14,-14},{14,14}},
+            rotation=90,
+            origin={-16,-100}), iconTransformation(
+            extent={{-10,-10},{10,10}},
+            rotation=90,
+            origin={-20,-96})));
+    equation
+      connect(port_a, SolarCollFlowTemp.port_a)
+        annotation (Line(points={{-100,-40},{-72,-40}}, color={0,127,255}));
+      connect(SolarCollFlowTemp.port_b, hex.port_a1) annotation (Line(points={{-52,-40},
+              {-36.2,-40},{-36.2,-13}}, color={0,127,255}));
+      connect(hex.port_b1, SolarCollRetTemp.port_a) annotation (Line(points={{-36.2,
+              13},{-36.2,40},{-52,40}}, color={0,127,255}));
+      connect(SolarCollRetTemp.port_b, port_b)
+        annotation (Line(points={{-72,40},{-100,40}}, color={0,127,255}));
+      connect(port_a1, StorageSideRetTemp.port_a)
+        annotation (Line(points={{100,-46},{84,-46}}, color={0,127,255}));
+      connect(StorageSideRetTemp.port_b, bufferStorage.fluidportBottom2)
+        annotation (Line(points={{68,-46},{56.4625,-46},{56.4625,-26.24}}, color={0,
+              127,255}));
+      connect(bufferStorage.fluidportTop2, StorageSideFlowTemp.port_a) annotation (
+          Line(points={{56.9375,22.24},{56.9375,40},{66,40}}, color={0,127,255}));
+      connect(StorageSideFlowTemp.port_b, port_b1)
+        annotation (Line(points={{82,40},{100,40}}, color={0,127,255}));
+      connect(bufferStorage.fluidportBottom1, StorageLoopOutTemp.port_a)
+        annotation (Line(points={{44.5875,-26.48},{44.5875,-50},{40,-50}}, color={0,
+              127,255}));
+      connect(StorageLoopInTemp.port_b, bufferStorage.fluidportTop1) annotation (
+          Line(points={{38,40},{44.35,40},{44.35,22.24}}, color={0,127,255}));
+      connect(StorageLoopOutTemp.port_b, StgLoopPump.port_a)
+        annotation (Line(points={{24,-50},{12,-50}}, color={0,127,255}));
+      connect(StgLoopPump.port_b, hex.port_a2) annotation (Line(points={{-6,-50},{-12,
+              -50},{-12,40},{-21.8,40},{-21.8,13}}, color={0,127,255}));
+      connect(hex.port_b2, StorageLoopInTemp.port_a) annotation (Line(points={{
+              -21.8,-13},{-21.8,-18},{8,-18},{8,40},{22,40}}, color={0,127,255}));
+      connect(SolarCollRetTemp.T, TempSolColRet) annotation (Line(
+          points={{-62,29},{-62,22},{-86,22},{-86,76},{-106,76}},
+          color={0,0,127},
+          pattern=LinePattern.Dash));
+      connect(SolarCollFlowTemp.T, TempSolCollFlow) annotation (Line(
+          points={{-62,-29},{-62,-20},{-84,-20},{-84,-74},{-106,-74}},
+          color={0,0,127},
+          pattern=LinePattern.Dash));
+      connect(bufferStorage.TTop, StgTempTop) annotation (Line(
+          points={{32,19.12},{30,19.12},{30,20},{14,20},{14,82},{104,82}},
+          color={0,0,127},
+          pattern=LinePattern.Dash));
+      connect(bufferStorage.TBottom, StgTempBott) annotation (Line(
+          points={{32,-21.2},{22,-21.2},{22,-34},{52,-34},{52,-78},{106,-78}},
+          color={0,0,127},
+          pattern=LinePattern.Dash));
+      connect(MassFlowStgLoop, StgLoopPump.m_flow_in) annotation (Line(points={{-16,
+              -100},{-16,-80},{3.18,-80},{3.18,-60.8}}, color={0,0,127}));
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+            Rectangle(
+              extent={{100,-100},{-100,100}},
+              lineColor={0,0,0},
+              fillPattern=FillPattern.Solid,
+              fillColor={215,215,215}), Text(
+              extent={{-76,86},{78,-76}},
+              lineColor={28,108,200},
+              textString="Seasonal 
+heat storage")}),                                                    Diagram(
+            coordinateSystem(preserveAspectRatio=false), graphics={Rectangle(
+              extent={{-100,100},{-30,-100}},
+              lineColor={0,0,0},
+              fillColor={255,255,170},
+              fillPattern=FillPattern.Solid), Text(
+              extent={{-88,104},{-46,80}},
+              lineColor={0,0,0},
+              fillColor={255,255,170},
+              fillPattern=FillPattern.Solid,
+              textStyle={TextStyle.Bold},
+              textString="Solar collector side
+"),         Rectangle(
+              extent={{100,-100},{-30,100}},
+              lineColor={0,0,0},
+              fillPattern=FillPattern.Solid,
+              fillColor={215,215,215}),       Text(
+              extent={{14,100},{50,84}},
+              lineColor={0,0,0},
+              fillColor={255,255,170},
+              fillPattern=FillPattern.Solid,
+              textStyle={TextStyle.Bold},
+              textString="Heat storage side
+")}));
+    end BuffStorageExtHEx;
+
+    model SolarThermal "Model of a solar thermal panel"
+      import AixLib;
+      extends AixLib.Fluid.HeatExchangers.BaseClasses.PartialHeatGen(
+        volume(redeclare package Medium = Medium, V=MediumVolume),
+        massFlowSensor(redeclare package Medium = Medium),
+        T_in(redeclare package Medium = Medium));
+      parameter Real MediumVolume = 0.2 "Medium volume in solar collector in m3";
+      parameter Real A = 1 "Area of solar thermal collector in m2";
+      parameter AixLib.DataBase.SolarThermal.SolarThermalBaseDataDefinition
+        Collector = AixLib.DataBase.SolarThermal.SimpleAbsorber()
+        "Properties of Solar Thermal Collector"                                                                                                     annotation(choicesAllMatching = true);
+      Modelica.Blocks.Interfaces.RealInput T_air "Outdoor air temperature in K" annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 270, origin = {-60, 108})));
+      Modelica.Blocks.Interfaces.RealInput Irradiation
+        "Solar irradiation on a horizontal plane in W/m2" annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 270, origin = {10, 108})));
+      Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {0, 34})));
+      AixLib.Fluid.Solar.Thermal.BaseClasses.SolarThermalEfficiency
+        solarThermalEfficiency(Collector=Collector)
+        annotation (Placement(transformation(extent={{-76,48},{-56,68}})));
+      Modelica.Blocks.Math.Max max1 annotation(Placement(transformation(extent = {{-46, 40}, {-26, 60}})));
+      Modelica.Blocks.Sources.Constant const(k = 0) annotation(Placement(transformation(extent = {{-66, 30}, {-58, 38}})));
+      Modelica.Blocks.Math.Gain gain(k = A) annotation(Placement(transformation(extent = {{-16, 44}, {-4, 56}})));
+    equation
+      connect(T_air, solarThermalEfficiency.T_air) annotation(Line(points = {{-60, 108}, {-60, 78}, {-71, 78}, {-71, 68.6}}, color = {0, 0, 127}));
+      connect(solarThermalEfficiency.G, Irradiation) annotation(Line(points = {{-65, 68.6}, {-65, 74}, {10, 74}, {10, 108}}, color = {0, 0, 127}));
+      connect(prescribedHeatFlow.port, volume.heatPort) annotation(Line(points={{0,24},{
+              -10,10}},                                                                              color = {191, 0, 0}));
+      connect(solarThermalEfficiency.Q_flow, max1.u1) annotation(Line(points = {{-55.2, 58}, {-52, 58}, {-52, 56}, {-48, 56}}, color = {0, 0, 127}));
+      connect(const.y, max1.u2) annotation(Line(points = {{-57.6, 34}, {-54, 34}, {-54, 44}, {-48, 44}}, color = {0, 0, 127}));
+      connect(max1.y, gain.u) annotation(Line(points = {{-25, 50}, {-17.2, 50}}, color = {0, 0, 127}));
+      connect(gain.y, prescribedHeatFlow.Q_flow) annotation(Line(points = {{-3.4, 50}, {0, 50}, {0, 44}}, color = {0, 0, 127}));
+      connect(T_in.T, solarThermalEfficiency.T_col) annotation (Line(
+          points={{-70,11},{-71,47.4}},
+          color={0,0,127}));
+      annotation (Documentation(info = "<html>
+ <h4><span style=\"color:#008000\">Overview</span></h4>
+ <p><br/>Model of a solar thermal collector. Inputs are outdoor air temperature and solar irradiation. Based on these values and the collector properties from database, this model creates a heat flow to the fluid circuit.</p>
+ <h4><span style=\"color:#008000\">Level of Development</span></h4>
+ <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\"
+    alt=\"stars: 3 out of 5\"/></p>
+ <h4><span style=\"color:#008000\">Concept</span></h4>
+ <p>The model maps solar collector efficiency based on the equation</p>
+ <p><img src=\"modelica://AixLib/Resources/Images/Fluid/HeatExchanger/SolarThermal/equation-vRK5Io7E.png\"
+    alt=\"eta = eta_o - c_1 * deltaT / G - c_2 * deltaT^2/ G\"/></p>
+ <h4><span style=\"color:#008000\">Known Limitations</span></h4>
+ <ul>
+ <li>Connected directly with Sources.TempAndRad, this model only represents a
+    horizontal collector. There is no calculation for radiation on tilted
+    surfaces. </li>
+ <li>With the standard BaseParameters, this model uses water as working
+    fluid</li>
+ </ul>
+ <p><b><font style=\"color: #008000; \">Example Results</font></b></p>
+ <p><a href=\"AixLib.HVAC.HeatGeneration.Examples.SolarThermalCollector\">AixLib.HVAC.HeatGeneration.Examples.SolarThermalCollector</a></p>
+ </html>",     revisions="<html>
+ <ul>
+ <li><i>December 15, 2016</i> by Moritz Lauster:<br/>Moved</li>
+ <li><i>November 2014&nbsp;</i>
+    by Marcus Fuchs:<br/>
+    Changed model to use Annex 60 base class</li>
+ <li><i>November 19, 2013&nbsp;</i>
+    by Marcus Fuchs:<br/>
+    Implemented</li>
+ </ul>
+ </html>"),     Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 80}, {88, -80}}, lineColor = {255, 128, 0},
+                fillPattern =                                                                                                   FillPattern.Solid, fillColor = {255, 128, 0}), Rectangle(extent = {{-70, 70}, {-64, -72}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
+                fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-70, 70}, {-40, 64}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
+                fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-40, 70}, {-46, -72}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
+                fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-44, -72}, {-22, -66}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
+                fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-4, -72}, {22, -66}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
+                fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{2, 70}, {-4, -72}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
+                fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-24, 70}, {2, 64}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
+                fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-24, 70}, {-18, -72}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
+                fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{40, -72}, {62, -66}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
+                fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{44, 70}, {38, -72}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
+                fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{18, 70}, {44, 64}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
+                fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{18, 70}, {24, -72}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
+                fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{76, -72}, {96, -66}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
+                fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{82, 70}, {76, -72}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
+                fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{56, 70}, {82, 64}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
+                fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{56, 70}, {62, -72}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
+                fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-88, -72}, {-64, -66}}, lineColor = {0, 0, 0}, fillColor = {0, 0, 0},
+                fillPattern =                                                                                                   FillPattern.Solid)}));
+    end SolarThermal;
+  end Components;
 
   extends Modelica.Icons.VariantsPackage;
+
+  package Controller
+    "Packages that contains controller blocks for district heating model "
+
+    model SolCirController_TempIrradBased
+      "Solar circuit controller based on temperatures and irradiation"
+      Modelica.Blocks.Interfaces.RealInput CurrIrradiation annotation (Placement(
+            transformation(extent={{-186,34},{-146,74}}), iconTransformation(
+              extent={{-174,38},{-144,68}})));
+      Modelica.Blocks.Tables.CombiTable1D TurnOnCurve(
+        table=[-12,380; 15,180],
+        tableOnFile=false,
+        columns={2})
+        annotation (Placement(transformation(extent={{-128,16},{-108,36}})));
+      Modelica.Blocks.Interfaces.RealInput ambTemp
+        "Ambient temperature in Celcius" annotation (Placement(transformation(
+              extent={{-186,6},{-146,46}}), iconTransformation(extent={{-174,4},{
+                -144,34}})));
+      Modelica.Blocks.Math.Add add1(
+                                   k2=-1)
+        annotation (Placement(transformation(extent={{-84,22},{-64,42}})));
+      Modelica.Blocks.Logical.Hysteresis hysteresis(
+        uHigh=0,
+        uLow=-100,
+        pre_y_start=false)
+                 annotation (Placement(transformation(extent={{-54,24},{-38,40}})));
+      Modelica.Blocks.Interfaces.RealInput FlowTempSol
+        "Flow temperature of solar collector" annotation (Placement(
+            transformation(extent={{-186,-44},{-146,-4}}), iconTransformation(
+              extent={{-174,-34},{-144,-4}})));
+      Modelica.Blocks.Interfaces.RealInput StgTempBott
+        "Temperature at the bottom of the storage" annotation (Placement(
+            transformation(extent={{-186,-72},{-146,-32}}), iconTransformation(
+              extent={{-174,-70},{-144,-40}})));
+      Modelica.Blocks.Math.Add TempDifference(k2=-1)
+        annotation (Placement(transformation(extent={{-112,-46},{-92,-26}})));
+      Modelica.Blocks.Logical.LogicalSwitch logicalSwitch
+        annotation (Placement(transformation(extent={{84,-38},{104,-18}})));
+      Modelica.Blocks.Logical.Switch switch1
+        annotation (Placement(transformation(extent={{108,14},{128,34}})));
+      Modelica.Blocks.Sources.Constant MassFlow(k=8)
+        "Mass flow when the pump is on"
+        annotation (Placement(transformation(extent={{68,52},{88,72}})));
+      Modelica.Blocks.Sources.Constant MassFlowInput(k=0)
+        "Mass Flow if the pump is off"
+        annotation (Placement(transformation(extent={{52,6},{72,26}})));
+      Modelica.Blocks.Interfaces.RealOutput MFSolColPump
+        annotation (Placement(transformation(extent={{146,-15},{176,15}})));
+      Modelica.Blocks.Interfaces.BooleanOutput OnOffSolPump
+        annotation (Placement(transformation(extent={{146,40},{176,70}})));
+      Modelica.Blocks.Logical.Hysteresis hysteresis1(
+        pre_y_start=false,
+        uLow=2,
+        uHigh=5) annotation (Placement(transformation(extent={{-74,-46},{-56,-27}})));
+      Modelica.Blocks.Logical.And and2
+        annotation (Placement(transformation(extent={{-6,-38},{14,-18}})));
+    equation
+      connect(TurnOnCurve.u[1], ambTemp)
+        annotation (Line(points={{-130,26},{-166,26}}, color={0,0,127}));
+      connect(CurrIrradiation, add1.u1) annotation (Line(points={{-166,54},{-96,
+              54},{-96,38},{-86,38}}, color={0,0,127}));
+      connect(TurnOnCurve.y[1], add1.u2)
+        annotation (Line(points={{-107,26},{-86,26}}, color={0,0,127}));
+      connect(add1.y, hysteresis.u)
+        annotation (Line(points={{-63,32},{-55.6,32}}, color={0,0,127}));
+      connect(FlowTempSol, TempDifference.u1) annotation (Line(points={{-166,-24},
+              {-126,-24},{-126,-30},{-114,-30}}, color={0,0,127}));
+      connect(MFSolColPump, MFSolColPump)
+        annotation (Line(points={{161,0},{161,0}}, color={0,0,127}));
+      connect(switch1.y, MFSolColPump) annotation (Line(points={{129,24},{140,24},
+              {140,0},{161,0}}, color={0,0,127}));
+      connect(TempDifference.y, hysteresis1.u) annotation (Line(points={{-91,-36},
+              {-75.8,-36},{-75.8,-36.5}}, color={0,0,127}));
+      connect(StgTempBott, TempDifference.u2) annotation (Line(points={{-166,-52},
+              {-138,-52},{-138,-42},{-114,-42}}, color={0,0,127}));
+      connect(hysteresis1.y, and2.u2) annotation (Line(points={{-55.1,-36.5},{-8,
+              -36.5},{-8,-36}}, color={255,0,255}));
+      connect(hysteresis.y, and2.u1) annotation (Line(points={{-37.2,32},{-24,32},
+              {-24,-28},{-8,-28}}, color={255,0,255}));
+      connect(and2.y, logicalSwitch.u2)
+        annotation (Line(points={{15,-28},{82,-28}}, color={255,0,255}));
+      connect(and2.y, logicalSwitch.u1) annotation (Line(points={{15,-28},{28,-28},
+              {28,-20},{82,-20}}, color={255,0,255}));
+      connect(logicalSwitch.y, switch1.u2) annotation (Line(points={{105,-28},{
+              116,-28},{116,4},{88,4},{88,24},{106,24}}, color={255,0,255}));
+      connect(MassFlow.y, switch1.u1) annotation (Line(points={{89,62},{96,62},{
+              96,32},{106,32}}, color={0,0,127}));
+      connect(MassFlowInput.y, switch1.u3)
+        annotation (Line(points={{73,16},{106,16}},          color={0,0,127}));
+      connect(logicalSwitch.y, OnOffSolPump) annotation (Line(points={{105,-28},{
+              134,-28},{134,55},{161,55}}, color={255,0,255}));
+      connect(hysteresis1.y, logicalSwitch.u3) annotation (Line(points={{-55.1,
+              -36.5},{-40,-36.5},{-40,-48},{54,-48},{54,-36},{82,-36}}, color={
+              255,0,255}));
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-160,
+                -100},{160,100}}), graphics={Rectangle(
+              extent={{-160,100},{160,-100}},
+              lineColor={0,0,0},
+              fillColor={202,234,243},
+              fillPattern=FillPattern.Solid), Text(
+              extent={{-58,34},{62,-60}},
+              lineColor={0,0,0},
+              fillColor={202,234,243},
+              fillPattern=FillPattern.Solid,
+              textString="Solar circuit 
+Controller
+")}),                                                                Diagram(
+            coordinateSystem(preserveAspectRatio=false, extent={{-160,-100},{160,
+                100}})),
+        experiment(StopTime=604800, Interval=5));
+    end SolCirController_TempIrradBased;
+
+    model StgCirController_TempBased
+      "Storage circuit controller based on temperatures"
+
+      Modelica.Blocks.Interfaces.BooleanInput OnOffSolPump annotation (Placement(
+            transformation(extent={{-126,6},{-86,46}}), iconTransformation(extent=
+               {{-106,18},{-82,42}})));
+      Modelica.Blocks.Interfaces.RealInput FlowTempSol annotation (Placement(
+            transformation(extent={{-126,-20},{-86,20}}), iconTransformation(
+              extent={{-106,-14},{-82,10}})));
+      Modelica.Blocks.Interfaces.RealInput StgTempBott annotation (Placement(
+            transformation(extent={{-126,-48},{-86,-8}}), iconTransformation(
+              extent={{-106,-46},{-82,-22}})));
+      Modelica.Blocks.Math.Add add1(
+                                   k2=-1)
+        annotation (Placement(transformation(extent={{-64,-13},{-48,3}})));
+      Modelica.Blocks.Logical.And and1
+        annotation (Placement(transformation(extent={{16,16},{36,36}})));
+      Modelica.Blocks.Logical.Switch switch1
+        annotation (Placement(transformation(extent={{58,16},{78,36}})));
+      Modelica.Blocks.Sources.Constant constMassFlow(k=8)
+        annotation (Placement(transformation(extent={{16,48},{36,68}})));
+      Modelica.Blocks.Logical.Hysteresis hysteresis(
+        pre_y_start=false,
+        uLow=2,
+        uHigh=5) annotation (Placement(transformation(extent={{-32,-13},{-16,3}})));
+      Modelica.Blocks.Sources.Constant constMassFlow1(k=0)
+        annotation (Placement(transformation(extent={{16,-14},{36,6}})));
+      Modelica.Blocks.Interfaces.RealOutput MFStgCirPump annotation (Placement(
+            transformation(extent={{92,-16},{124,16}}), iconTransformation(extent=
+               {{92,-13},{118,13}})));
+      Modelica.Blocks.Interfaces.BooleanOutput OnOffStgCirPump annotation (
+          Placement(transformation(extent={{96,36},{124,64}}), iconTransformation(
+              extent={{92,18},{118,44}})));
+    equation
+      connect(FlowTempSol, add1.u1) annotation (Line(points={{-106,0},{-65.6,0},{
+              -65.6,-0.2}}, color={0,0,127}));
+      connect(StgTempBott, add1.u2) annotation (Line(points={{-106,-28},{-78,-28},
+              {-78,-9.8},{-65.6,-9.8}}, color={0,0,127}));
+      connect(OnOffSolPump, and1.u1)
+        annotation (Line(points={{-106,26},{14,26}}, color={255,0,255}));
+      connect(and1.y, switch1.u2)
+        annotation (Line(points={{37,26},{46.5,26},{56,26}}, color={255,0,255}));
+      connect(constMassFlow.y, switch1.u1) annotation (Line(points={{37,58},{46,
+              58},{46,34},{56,34}}, color={0,0,127}));
+      connect(add1.y, hysteresis.u)
+        annotation (Line(points={{-47.2,-5},{-33.6,-5}}, color={0,0,127}));
+      connect(hysteresis.y, and1.u2) annotation (Line(points={{-15.2,-5},{-4,-5},
+              {-4,18},{14,18}}, color={255,0,255}));
+      connect(constMassFlow1.y, switch1.u3) annotation (Line(points={{37,-4},{46,
+              -4},{46,18},{56,18}}, color={0,0,127}));
+      connect(MFStgCirPump, MFStgCirPump)
+        annotation (Line(points={{108,0},{104.5,0},{108,0}}, color={0,0,127}));
+      connect(switch1.y, MFStgCirPump) annotation (Line(points={{79,26},{84,26},{
+              84,0},{108,0}}, color={0,0,127}));
+      connect(and1.y, OnOffStgCirPump) annotation (Line(points={{37,26},{42,26},{
+              42,50},{110,50}}, color={255,0,255}));
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+              Rectangle(
+              extent={{-100,100},{100,-100}},
+              lineColor={0,0,0},
+              fillColor={202,234,243},
+              fillPattern=FillPattern.Solid), Text(
+              extent={{-44,28},{48,-48}},
+              lineColor={0,0,0},
+              fillColor={202,234,243},
+              fillPattern=FillPattern.Solid,
+              textString="Storage Circuit
+Controller
+")}),                                                                Diagram(
+            coordinateSystem(preserveAspectRatio=false)));
+    end StgCirController_TempBased;
+
+    model ModeBasedController "Mode-Based Controller for the buffer storage"
+      Modelica.Blocks.Interfaces.RealInput Stg1TopTemp annotation (Placement(
+            transformation(extent={{-203,-6},{-163,34}}), iconTransformation(
+              extent={{-191,6},{-163,34}})));
+      Modelica.Blocks.Interfaces.RealInput Stg2TopTemp annotation (Placement(
+            transformation(extent={{-202,68},{-162,108}}), iconTransformation(
+              extent={{-190,80},{-162,108}})));
+      Modelica.Blocks.Interfaces.RealInput setPointStg2
+        "Setpoint temperature at the top of the storage 2" annotation (Placement(
+            transformation(extent={{-202,40},{-162,80}}), iconTransformation(
+              extent={{-190,52},{-162,80}})));
+      Modelica.Blocks.Logical.OnOffController
+                                   less(             pre_y_start=true, bandwidth=
+            5)
+        annotation (Placement(transformation(extent={{-94,38},{-74,58}})));
+      Modelica.Blocks.Logical.Hysteresis hysteresis(
+        pre_y_start=false,
+        uLow=5,
+        uHigh=10)
+        annotation (Placement(transformation(extent={{-94,-2},{-74,18}})));
+      Modelica.Blocks.Math.Add add(k2=-1)
+        annotation (Placement(transformation(extent={{-122,-2},{-102,18}})));
+      Modelica.Blocks.Logical.And and1
+        annotation (Placement(transformation(extent={{-54,16},{-34,36}})));
+      Modelica.Blocks.Logical.Switch ValveOpDirSupp
+        annotation (Placement(transformation(extent={{56,50},{76,70}})));
+      Modelica.Blocks.Sources.Constant const(k=1)
+        annotation (Placement(transformation(extent={{-54,58},{-34,78}})));
+      Modelica.Blocks.Sources.Constant const1(k=0)
+        annotation (Placement(transformation(extent={{-12,22},{8,42}})));
+      Modelica.Blocks.Logical.And and2
+        annotation (Placement(transformation(extent={{-2,-52},{18,-32}})));
+      Modelica.Blocks.Logical.Not not1 annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=270,
+            origin={-20,-6})));
+      Modelica.Blocks.Logical.Switch ValveOpIndirSupp
+        annotation (Placement(transformation(extent={{54,-53},{76,-31}})));
+      Modelica.Blocks.Sources.Constant const2(k=1)
+        annotation (Placement(transformation(extent={{4,-16},{24,4}})));
+      Modelica.Blocks.Sources.Constant const3(k=0)
+        annotation (Placement(transformation(extent={{-4,-84},{16,-64}})));
+      Modelica.Blocks.Interfaces.RealOutput ValveOpDir
+        annotation (Placement(transformation(extent={{190,44},{220,74}})));
+      Modelica.Blocks.Interfaces.RealOutput ValveOpIndir
+        annotation (Placement(transformation(extent={{192,-38},{222,-8}})));
+      Modelica.Blocks.Logical.Switch MFDir
+        annotation (Placement(transformation(extent={{126,2},{146,22}})));
+      Modelica.Blocks.Sources.Constant const4(k=4)
+        annotation (Placement(transformation(extent={{84,24},{104,44}})));
+      Modelica.Blocks.Sources.Constant const5(k=0)
+        annotation (Placement(transformation(extent={{84,-16},{104,4}})));
+      Modelica.Blocks.Logical.Switch MFIndir
+        annotation (Placement(transformation(extent={{148,-78},{168,-58}})));
+      Modelica.Blocks.Sources.Constant const6(k=10)
+        annotation (Placement(transformation(extent={{98,-58},{118,-38}})));
+      Modelica.Blocks.Sources.Constant const7(k=0)
+        annotation (Placement(transformation(extent={{90,-94},{110,-74}})));
+      Modelica.Blocks.Interfaces.RealOutput MFDirSupp
+        annotation (Placement(transformation(extent={{190,14},{220,44}})));
+      Modelica.Blocks.Interfaces.RealOutput evaMF
+        annotation (Placement(transformation(extent={{192,-68},{222,-38}})));
+      Modelica.Blocks.Interfaces.BooleanOutput IndirSuppSignal annotation (
+          Placement(transformation(
+            extent={{-14,-14},{14,14}},
+            rotation=270,
+            origin={68,-198})));
+      Modelica.Blocks.Interfaces.BooleanOutput DirSuppSignal annotation (
+          Placement(transformation(
+            extent={{-14,-14},{14,14}},
+            rotation=270,
+            origin={46,-198}), iconTransformation(
+            extent={{-14,-14},{14,14}},
+            rotation=270,
+            origin={34,-198})));
+      Modelica.Blocks.Continuous.LimPID setPointSelection(controllerType=Modelica.Blocks.Types.SimpleController.PI,
+        yMax=80,
+        yMin=50,
+        Ti=10,
+        k=0.005)
+        annotation (Placement(transformation(extent={{-112,-142},{-90,-120}})));
+      Modelica.Blocks.Logical.Switch RPM "Rotational speed of the compressor"
+        annotation (Placement(transformation(extent={{-6,-142},{14,-122}})));
+      Modelica.Blocks.Sources.Constant const8(k=0)
+        annotation (Placement(transformation(extent={{-42,-172},{-22,-152}})));
+      Modelica.Blocks.Interfaces.RealOutput CompRPM
+        annotation (Placement(transformation(extent={{188,-194},{220,-162}})));
+      Modelica.Blocks.Interfaces.RealInput HPCondTemp annotation (Placement(
+            transformation(extent={{-206,-192},{-166,-152}}), iconTransformation(
+              extent={{-194,-180},{-166,-152}})));
+      Modelica.Blocks.Logical.Switch MFIndir1
+        annotation (Placement(transformation(extent={{150,-136},{170,-116}})));
+      Modelica.Blocks.Sources.Constant const9(k=10)
+        annotation (Placement(transformation(extent={{110,-118},{130,-98}})));
+      Modelica.Blocks.Sources.Constant const10(k=0)
+        annotation (Placement(transformation(extent={{108,-162},{128,-142}})));
+      Modelica.Blocks.Interfaces.RealOutput conMF
+        annotation (Placement(transformation(extent={{194,-140},{224,-110}})));
+      AixLib.Controls.Continuous.LimPID conPID(
+        controllerType=Modelica.Blocks.Types.SimpleController.PI,
+        yMax=3700,
+        yMin=800,
+        Ti=1,
+        k=1)  annotation (Placement(transformation(extent={{-62,-141},{-42,-121}})));
+    equation
+      connect(Stg1TopTemp, add.u1)
+        annotation (Line(points={{-183,14},{-124,14}}, color={0,0,127}));
+      connect(add.y, hysteresis.u)
+        annotation (Line(points={{-101,8},{-96,8}}, color={0,0,127}));
+      connect(less.y, and1.u1) annotation (Line(points={{-73,48},{-70,48},{-70,26},
+              {-56,26}}, color={255,0,255}));
+      connect(hysteresis.y, and1.u2) annotation (Line(points={{-73,8},{-70,8},{
+              -70,18},{-56,18}}, color={255,0,255}));
+      connect(and1.y, ValveOpDirSupp.u2) annotation (Line(points={{-33,26},{-20,
+              26},{-20,60},{54,60}}, color={255,0,255}));
+      connect(const.y, ValveOpDirSupp.u1)
+        annotation (Line(points={{-33,68},{54,68}}, color={0,0,127}));
+      connect(const1.y, ValveOpDirSupp.u3) annotation (Line(points={{9,32},{12,32},
+              {12,52},{54,52}}, color={0,0,127}));
+      connect(and2.u2, and1.u1) annotation (Line(points={{-4,-50},{-64,-50},{-64,
+              26},{-56,26}}, color={255,0,255}));
+      connect(and1.y, not1.u)
+        annotation (Line(points={{-33,26},{-20,26},{-20,6}}, color={255,0,255}));
+      connect(not1.y, and2.u1) annotation (Line(points={{-20,-17},{-20,-42},{-4,
+              -42}}, color={255,0,255}));
+      connect(and2.y, ValveOpIndirSupp.u2)
+        annotation (Line(points={{19,-42},{51.8,-42}}, color={255,0,255}));
+      connect(const2.y, ValveOpIndirSupp.u1) annotation (Line(points={{25,-6},{42,
+              -6},{42,-33.2},{51.8,-33.2}}, color={0,0,127}));
+      connect(const3.y, ValveOpIndirSupp.u3) annotation (Line(points={{17,-74},{
+              44,-74},{44,-50.8},{51.8,-50.8}}, color={0,0,127}));
+      connect(ValveOpDirSupp.y, ValveOpDir)
+        annotation (Line(points={{77,60},{205,60},{205,59}}, color={0,0,127}));
+      connect(MFDir.u2, ValveOpDirSupp.u2) annotation (Line(points={{124,12},{36,
+              12},{36,60},{54,60}}, color={255,0,255}));
+      connect(const4.y, MFDir.u1) annotation (Line(points={{105,34},{112,34},{112,
+              20},{124,20}}, color={0,0,127}));
+      connect(const5.y, MFDir.u3) annotation (Line(points={{105,-6},{114,-6},{114,
+              4},{124,4}}, color={0,0,127}));
+      connect(MFIndir.u2, ValveOpIndirSupp.u2) annotation (Line(points={{146,-68},
+              {34,-68},{34,-42},{51.8,-42}}, color={255,0,255}));
+      connect(ValveOpIndirSupp.y, ValveOpIndir) annotation (Line(points={{77.1,
+              -42},{82,-42},{86,-42},{86,-23},{207,-23}}, color={0,0,127}));
+      connect(const6.y, MFIndir.u1) annotation (Line(points={{119,-48},{124,-48},
+              {124,-60},{146,-60}}, color={0,0,127}));
+      connect(const7.y, MFIndir.u3) annotation (Line(points={{111,-84},{126,-84},
+              {126,-76},{146,-76}}, color={0,0,127}));
+      connect(MFDir.y, MFDirSupp) annotation (Line(points={{147,12},{158,12},{158,
+              29},{205,29}}, color={0,0,127}));
+      connect(MFIndir.y, evaMF) annotation (Line(points={{169,-68},{180,-68},{180,
+              -53},{207,-53}}, color={0,0,127}));
+      connect(IndirSuppSignal, ValveOpIndirSupp.u2) annotation (Line(points={{68,
+              -198},{68,-68},{34,-68},{34,-42},{51.8,-42}}, color={255,0,255}));
+      connect(DirSuppSignal, ValveOpDirSupp.u2) annotation (Line(points={{46,-198},
+              {46,12},{36,12},{36,60},{54,60}}, color={255,0,255}));
+      connect(Stg2TopTemp, setPointSelection.u_m) annotation (Line(points={{-182,
+              88},{-132,88},{-132,-162},{-101,-162},{-101,-144.2}}, color={0,0,
+              127}));
+      connect(RPM.u2, ValveOpIndirSupp.u2) annotation (Line(points={{-8,-132},{
+              -16,-132},{-16,-104},{68,-104},{68,-68},{34,-68},{34,-42},{51.8,-42}},
+            color={255,0,255}));
+      connect(const8.y, RPM.u3) annotation (Line(points={{-21,-162},{-14,-162},{
+              -14,-140},{-8,-140}},color={0,0,127}));
+      connect(RPM.y, CompRPM) annotation (Line(points={{15,-132},{32,-132},{32,
+              -178},{204,-178}}, color={0,0,127}));
+      connect(MFIndir1.u2, ValveOpIndirSupp.u2) annotation (Line(points={{148,
+              -126},{68,-126},{68,-68},{34,-68},{34,-42},{51.8,-42}}, color={255,
+              0,255}));
+      connect(const9.y, MFIndir1.u1) annotation (Line(points={{131,-108},{138,
+              -108},{138,-118},{148,-118}}, color={0,0,127}));
+      connect(const10.y, MFIndir1.u3) annotation (Line(points={{129,-152},{136,
+              -152},{136,-134},{148,-134}}, color={0,0,127}));
+      connect(MFIndir1.y, conMF) annotation (Line(points={{171,-126},{209,-126},{
+              209,-125}}, color={0,0,127}));
+      connect(Stg2TopTemp, less.u) annotation (Line(points={{-182,88},{-128,88},{
+              -128,42},{-96,42}}, color={0,0,127}));
+      connect(setPointStg2, less.reference) annotation (Line(points={{-182,60},{
+              -112,60},{-112,54},{-96,54}}, color={0,0,127}));
+      connect(setPointStg2, setPointSelection.u_s) annotation (Line(points={{-182,
+              60},{-140,60},{-140,-131},{-114.2,-131}}, color={0,0,127}));
+      connect(Stg2TopTemp, add.u2) annotation (Line(points={{-182,88},{-152,88},{
+              -152,2},{-124,2}}, color={0,0,127}));
+      connect(setPointSelection.y, conPID.u_s) annotation (Line(points={{-88.9,
+              -131},{-78,-131},{-64,-131}}, color={0,0,127}));
+      connect(HPCondTemp, conPID.u_m) annotation (Line(points={{-186,-172},{-52,
+              -172},{-52,-143}}, color={0,0,127}));
+      connect(conPID.y, RPM.u1) annotation (Line(points={{-41,-131},{-26,-131},{
+              -26,-124},{-8,-124}}, color={0,0,127}));
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-180,
+                -200},{200,100}})),                                  Diagram(
+            coordinateSystem(preserveAspectRatio=false, extent={{-180,-200},{200,
+                100}}), graphics={Rectangle(
+              extent={{-180,-100},{26,-200}},
+              lineColor={28,108,200},
+              fillColor={255,255,170},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{-64,-188},{36,-194}},
+              lineColor={28,108,200},
+              fillColor={215,215,215},
+              fillPattern=FillPattern.Solid,
+              textString="Cascade controller to control the 
+temperature at condensor outlet"),
+            Text(
+              extent={{-118,96},{-66,78}},
+              lineColor={238,46,47},
+              textString="Stg1 = Seasonal storage
+Stg2 = Buffer storage 
+",            horizontalAlignment=TextAlignment.Left)}));
+    end ModeBasedController;
+
+    model BackupController "Controller for backup system"
+      Modelica.Blocks.Interfaces.RealInput FlowTempSDH annotation (Placement(
+            transformation(extent={{-163,-2},{-127,34}}), iconTransformation(
+              extent={{-147,-12},{-122,12}})));
+      Modelica.Blocks.Interfaces.RealInput buffStgSetpoint annotation (Placement(
+            transformation(extent={{-163,34},{-126,72}}),  iconTransformation(
+              extent={{-147,44},{-122,70}})));
+      AixLib.Controls.Continuous.LimPID conPID(
+        controllerType=Modelica.Blocks.Types.SimpleController.PI,
+        yMin=0,
+        yMax=1,
+        k=0.001,
+        Ti=10)
+              annotation (Placement(transformation(extent={{-8,-8},{8,8}},
+            rotation=0,
+            origin={-20,53})));
+      Modelica.Blocks.Logical.Switch Switcher annotation (Placement(
+            transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=0,
+            origin={26,0})));
+      Modelica.Blocks.Sources.Constant ValveOp(k=0) annotation (Placement(
+            transformation(
+            extent={{-8,-8},{8,8}},
+            rotation=0,
+            origin={-20,-30})));
+
+      Modelica.Blocks.Interfaces.RealOutput AuxValve annotation (Placement(
+            transformation(extent={{136,-32},{160,-8}}), iconTransformation(
+              extent={{132,-11},{154,11}})));
+      Modelica.Blocks.Logical.Switch Switcher1 annotation (Placement(
+            transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=0,
+            origin={26,-56})));
+      Modelica.Blocks.Sources.Constant ValveOp1(k=0) annotation (Placement(
+            transformation(
+            extent={{-8,-8},{8,8}},
+            rotation=0,
+            origin={-20,-84})));
+      Modelica.Blocks.Sources.Constant MassFlowCHP(k=0.5)
+                                                        annotation (Placement(
+            transformation(
+            extent={{-8,-8},{8,8}},
+            rotation=0,
+            origin={-20,-56})));
+      Modelica.Blocks.Interfaces.RealOutput MasFlowcHP annotation (Placement(
+            transformation(extent={{128,-66},{154,-40}}), iconTransformation(
+              extent={{132,-62},{154,-40}})));
+      Modelica.Blocks.Logical.OnOffController TempBand(pre_y_start=false,
+          bandwidth=5) annotation (Placement(transformation(
+            extent={{-9,-9},{9,9}},
+            rotation=0,
+            origin={-91,-5})));
+      Modelica.Blocks.Math.Add add(k2=-1)
+        annotation (Placement(transformation(extent={{86,30},{106,50}})));
+      Modelica.Blocks.Sources.Constant const(k=1)
+        annotation (Placement(transformation(extent={{48,54},{64,70}})));
+      Modelica.Blocks.Interfaces.RealOutput BypassValve annotation (Placement(
+            transformation(extent={{136,27},{162,53}}), iconTransformation(extent=
+               {{132,33},{154,56}})));
+      Modelica.Blocks.Interfaces.RealInput buffStgTopTemp annotation (Placement(
+            transformation(extent={{-163,-46},{-127,-10}}), iconTransformation(
+              extent={{-145,-68},{-120,-42}})));
+      Modelica.Blocks.Logical.And and1
+        annotation (Placement(transformation(extent={{-56,-15},{-36,5}})));
+      Modelica.Blocks.Logical.Less and2
+        annotation (Placement(transformation(extent={{-100,-44},{-82,-25}})));
+      Modelica.Blocks.Sources.Constant lowerLimit(k=2.5) annotation (Placement(
+            transformation(
+            extent={{-8,-8},{8,8}},
+            rotation=0,
+            origin={-126,-86})));
+      Modelica.Blocks.Math.Add add1(
+                                   k2=-1)
+        annotation (Placement(transformation(extent={{-100,-78},{-84,-62}})));
+    equation
+      connect(ValveOp.y, Switcher.u3) annotation (Line(points={{-11.2,-30},{0,-30},
+              {0,-8},{14,-8}}, color={0,0,127}));
+      connect(buffStgSetpoint, conPID.u_s) annotation (Line(points={{-144.5,53},{
+              -72,53},{-29.6,53}},            color={0,0,127}));
+      connect(conPID.u_m, FlowTempSDH) annotation (Line(points={{-20,43.4},{-20,
+              16},{-145,16}}, color={0,0,127}));
+      connect(conPID.y, Switcher.u1) annotation (Line(points={{-11.2,53},{0,53},{
+              0,8},{14,8}}, color={0,0,127}));
+      connect(Switcher.y, AuxValve) annotation (Line(points={{37,0},{54,0},{54,
+              -20},{148,-20}}, color={0,0,127}));
+      connect(Switcher1.u2, Switcher.u2) annotation (Line(points={{14,-56},{8,-56},
+              {4,-56},{4,0},{14,0}},         color={255,0,255}));
+      connect(ValveOp1.y, Switcher1.u3) annotation (Line(points={{-11.2,-84},{4,
+              -84},{4,-64},{14,-64}}, color={0,0,127}));
+      connect(Switcher1.u1, MassFlowCHP.y) annotation (Line(points={{14,-48},{10,
+              -48},{-4,-48},{-4,-56},{-11.2,-56}}, color={0,0,127}));
+      connect(Switcher1.y,MasFlowcHP)  annotation (Line(points={{37,-56},{74,-56},
+              {74,-53},{141,-53}}, color={0,0,127}));
+      connect(const.y, add.u1) annotation (Line(points={{64.8,62},{70,62},{70,46},
+              {84,46}}, color={0,0,127}));
+      connect(add.u2, AuxValve) annotation (Line(points={{84,34},{54,34},{54,-20},
+              {148,-20}}, color={0,0,127}));
+      connect(add.y, BypassValve)
+        annotation (Line(points={{107,40},{128,40},{149,40}}, color={0,0,127}));
+      connect(TempBand.y, and1.u1) annotation (Line(points={{-81.1,-5},{-72,-5},{
+              -58,-5}}, color={255,0,255}));
+      connect(TempBand.u, buffStgTopTemp) annotation (Line(points={{-101.8,-10.4},
+              {-118,-10.4},{-118,-28},{-145,-28}}, color={0,0,127}));
+      connect(and2.y, and1.u2) annotation (Line(points={{-81.1,-34.5},{-74,-34.5},
+              {-74,-13},{-58,-13}}, color={255,0,255}));
+      connect(and1.y, Switcher.u2) annotation (Line(points={{-35,-5},{-28,-5},{
+              -28,0},{14,0}}, color={255,0,255}));
+      connect(and2.u1, buffStgTopTemp) annotation (Line(points={{-101.8,-34.5},{
+              -118,-34.5},{-118,-28},{-145,-28}}, color={0,0,127}));
+      connect(TempBand.reference, conPID.u_s) annotation (Line(points={{-101.8,
+              0.4},{-110,0.4},{-110,53},{-72,53},{-29.6,53}}, color={0,0,127}));
+      connect(lowerLimit.y, add1.u2) annotation (Line(points={{-117.2,-86},{-112,
+              -86},{-112,-74.8},{-101.6,-74.8}}, color={0,0,127}));
+      connect(add1.u1, conPID.u_s) annotation (Line(points={{-101.6,-65.2},{-110,
+              -65.2},{-110,53},{-29.6,53}}, color={0,0,127}));
+      connect(add1.y, and2.u2) annotation (Line(points={{-83.2,-70},{-72,-70},{
+              -72,-52},{-126,-52},{-126,-42.1},{-101.8,-42.1}}, color={0,0,127}));
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-140,
+                -100},{140,100}}), graphics={Rectangle(
+              extent={{-140,100},{140,-100}},
+              lineColor={0,0,0},
+              fillColor={85,170,255},
+              fillPattern=FillPattern.Solid), Text(
+              extent={{-26,-2},{24,-34}},
+              lineColor={255,255,255},
+              fillColor={28,108,200},
+              fillPattern=FillPattern.Solid,
+              textString="%name
+")}),   Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-140,-100},{
+                140,100}})));
+    end BackupController;
+
+    model SolarDistrictHeatingController "Controller model for solar district heating "
+
+      AixLib.Fluid.DistrictHeating.Controller.StgCirController_TempBased
+        stgCirController_TempBased
+        annotation (Placement(transformation(extent={{-8,-4},{22,20}})));
+      AixLib.Fluid.DistrictHeating.Controller.SolCirController_TempIrradBased
+        solCirController_TempIrradBased
+        annotation (Placement(transformation(extent={{-64,16},{-28,42}})));
+      Modelica.Blocks.Interfaces.RealInput CurrIrrad "measured irradiation"
+        annotation (Placement(transformation(extent={{-124,34},{-88,70}}),
+            iconTransformation(extent={{-122,30},{-100,52}})));
+      Modelica.Blocks.Interfaces.RealInput SeasStgBotTemp
+        "Storage temperature at the bottom" annotation (Placement(transformation(
+              extent={{-124,-40},{-88,-4}}), iconTransformation(extent={{-122,-12},
+                {-100,10}})));
+      Modelica.Blocks.Interfaces.RealInput FlowTempSol
+        "Solar flow temperature in C" annotation (Placement(transformation(extent={{-124,
+                -14},{-88,22}}),      iconTransformation(extent={{-122,-56},{-100,
+                -34}})));
+      Modelica.Blocks.Interfaces.RealInput AmbTemp "ambient temperature in C"
+        annotation (Placement(transformation(extent={{-124,10},{-88,46}}),
+            iconTransformation(extent={{-122,10},{-100,32}})));
+      Modelica.Blocks.Interfaces.RealOutput MFSolCirPump annotation (Placement(
+            transformation(extent={{176,64},{200,88}}),iconTransformation(extent={{188,62},
+                {206,80}})));
+      Modelica.Blocks.Interfaces.RealOutput MFStgCirPump annotation (Placement(
+            transformation(extent={{176,46},{200,70}}),  iconTransformation(
+              extent={{188,44},{206,62}})));
+      Modelica.Blocks.Interfaces.BooleanOutput SolColPump annotation (Placement(
+            transformation(extent={{-12,-12},{12,12}},
+            rotation=90,
+            origin={50,82}),                           iconTransformation(extent={{-12,-12},
+                {12,12}},
+            rotation=90,
+            origin={26,80})));
+      Modelica.Blocks.Interfaces.BooleanOutput StgCirPump annotation (Placement(
+            transformation(extent={{-12,-12},{12,12}},
+            rotation=90,
+            origin={72,82}),                             iconTransformation(
+              extent={{-12,-12},{12,12}},
+            rotation=90,
+            origin={54,80})));
+      Modelica.Blocks.Interfaces.RealInput SeasStgTopTemp
+        "Storage temperature at the top" annotation (Placement(transformation(
+              extent={{-126,-66},{-88,-28}}), iconTransformation(extent={{-122,
+                -34},{-100,-12}})));
+      Modelica.Blocks.Interfaces.RealInput setPointBuffStg
+        "Set point temperature of buffer storage in [°C]"
+                                                  annotation (Placement(
+            transformation(extent={{-125,58},{-87,96}}), iconTransformation(
+              extent={{-122,52},{-100,74}})));
+      Modelica.Blocks.Interfaces.RealOutput ValveOpIndir annotation (Placement(
+            transformation(extent={{176,13},{200,37}}),  iconTransformation(
+              extent={{188,9},{206,26}})));
+      Modelica.Blocks.Interfaces.RealOutput ValveOpDir annotation (Placement(
+            transformation(extent={{176,30},{200,54}}),iconTransformation(extent={{188,26},
+                {206,44}})));
+      AixLib.Fluid.DistrictHeating.Controller.ModeBasedController
+        stateMachine
+        annotation (Placement(transformation(extent={{-8,-52},{22,-28}})));
+      Modelica.Blocks.Interfaces.RealOutput EvaMF
+        annotation (Placement(transformation(extent={{176,-2},{200,22}}),
+            iconTransformation(extent={{188,-10},{206,8}})));
+      Modelica.Blocks.Interfaces.RealOutput ConMF
+        annotation (Placement(transformation(extent={{176,-18},{200,6}}),
+            iconTransformation(extent={{188,-28},{206,-10}})));
+      Modelica.Blocks.Interfaces.RealOutput DirSuppMF
+        annotation (Placement(transformation(extent={{176,-34},{200,-10}}),
+            iconTransformation(extent={{188,-46},{206,-28}})));
+      Modelica.Blocks.Interfaces.RealInput TopTempBuffStg
+        "Top temperature of the buffer storage in [°C]" annotation (Placement(
+            transformation(
+            extent={{-19,-19},{19,19}},
+            rotation=90,
+            origin={-67,-85}), iconTransformation(
+            extent={{-11,-11},{11,11}},
+            rotation=270,
+            origin={-73,74})));
+      Modelica.Blocks.Interfaces.BooleanOutput hpSignal
+        "OnOff signal of the heat pump" annotation (Placement(transformation(
+            extent={{-12,-12},{12,12}},
+            rotation=270,
+            origin={16,-86}), iconTransformation(
+            extent={{-11,-11},{11,11}},
+            rotation=270,
+            origin={25,-77})));
+      Modelica.Blocks.Interfaces.BooleanOutput DirSupp annotation (Placement(
+            transformation(
+            extent={{-12,-12},{12,12}},
+            rotation=270,
+            origin={-2,-86}), iconTransformation(
+            extent={{-11,-11},{11,11}},
+            rotation=270,
+            origin={-1,-77})));
+      Modelica.Blocks.Interfaces.RealOutput hpRPM annotation (Placement(
+            transformation(
+            extent={{-12,-12},{12,12}},
+            rotation=270,
+            origin={36,-86}), iconTransformation(
+            extent={{-11,-11},{11,11}},
+            rotation=270,
+            origin={51,-77})));
+      Modelica.Blocks.Interfaces.RealInput hpCondTemp
+        "Flow temperature of condensator in C" annotation (Placement(
+            transformation(
+            extent={{-20,-20},{20,20}},
+            rotation=90,
+            origin={-22,-85}), iconTransformation(
+            extent={{-11,-11},{11,11}},
+            rotation=0,
+            origin={-111,-65})));
+      AixLib.Fluid.DistrictHeating.Controller.BackupController
+        BackupSystemController
+        annotation (Placement(transformation(extent={{62,-26},{104,4}})));
+      Modelica.Blocks.Interfaces.RealInput FlowTempSDH
+        "Flow temperature of the solar district heating network in [°C]"
+        annotation (Placement(transformation(extent={{-127,-94},{-87,-54}}),
+            iconTransformation(extent={{-11,-10.5},{11,10.5}},
+            rotation=270,
+            origin={-49,74.5})));
+      Modelica.Blocks.Interfaces.RealOutput valOpBypass annotation (Placement(
+            transformation(extent={{176,-56},{200,-32}}), iconTransformation(
+              extent={{188,-64},{206,-46}})));
+      Modelica.Blocks.Interfaces.RealOutput valOpAux annotation (Placement(
+            transformation(extent={{176,-74},{200,-50}}), iconTransformation(
+              extent={{188,-82},{206,-64}})));
+    equation
+      connect(CurrIrrad, solCirController_TempIrradBased.CurrIrradiation)
+        annotation (Line(points={{-106,52},{-82,52},{-82,35.89},{-63.8875,35.89}},
+            color={0,0,127}));
+      connect(AmbTemp, solCirController_TempIrradBased.ambTemp) annotation (Line(
+            points={{-106,28},{-82,28},{-82,31.47},{-63.8875,31.47}},
+                                                                    color={0,0,
+              127}));
+      connect(FlowTempSol, solCirController_TempIrradBased.FlowTempSol)
+        annotation (Line(points={{-106,4},{-106,10},{-78,10},{-78,26.53},{
+              -63.8875,26.53}}, color={0,0,127}));
+      connect(SeasStgBotTemp, solCirController_TempIrradBased.StgTempBott)
+        annotation (Line(points={{-106,-22},{-72,-22},{-72,21.85},{-63.8875,21.85}},
+            color={0,0,127}));
+      connect(FlowTempSol, stgCirController_TempBased.FlowTempSol) annotation (
+          Line(points={{-106,4},{-40,4},{-40,7.76},{-7.1,7.76}},     color={0,0,
+              127}));
+      connect(SeasStgBotTemp, stgCirController_TempBased.StgTempBott) annotation (
+         Line(points={{-106,-22},{-24,-22},{-24,3.92},{-7.1,3.92}}, color={0,0,
+              127}));
+      connect(solCirController_TempIrradBased.MFSolColPump, MFSolCirPump)
+        annotation (Line(points={{-27.8875,29},{130,29},{130,76},{188,76}},
+                                                                          color={
+              0,0,127}));
+      connect(setPointBuffStg, stateMachine.setPointStg2) annotation (Line(points={{-106,77},
+              {-76,77},{-76,-30.72},{-7.68421,-30.72}},           color={0,0,127}));
+      connect(SeasStgTopTemp, stateMachine.Stg1TopTemp) annotation (Line(points={{-107,
+              -47},{-58,-47},{-58,-34.4},{-7.76316,-34.4}},       color={0,0,127}));
+      connect(stateMachine.ValveOpDir, ValveOpDir) annotation (Line(points={{22.3947,
+              -31.28},{144,-31.28},{144,42},{188,42}},
+                                                     color={0,0,127}));
+      connect(stateMachine.ValveOpIndir, ValveOpIndir) annotation (Line(points={{22.5526,
+              -37.84},{148,-37.84},{148,25},{188,25}}, color={0,0,127}));
+      connect(TopTempBuffStg, stateMachine.Stg2TopTemp) annotation (Line(points={{-67,-85},
+              {-67,-60},{-24,-60},{-24,-28.48},{-7.68421,-28.48}},
+            color={0,0,127}));
+      connect(stateMachine.MFDirSupp, DirSuppMF) annotation (Line(points={{22.3947,
+              -33.68},{130,-33.68},{130,-22},{188,-22}},
+                                               color={0,0,127}));
+      connect(stateMachine.IndirSuppSignal, hpSignal) annotation (Line(points={{11.5789,
+              -51.84},{11.5789,-64},{16,-64},{16,-86}},         color={255,0,255}));
+      connect(stateMachine.DirSuppSignal, DirSupp) annotation (Line(points={{8.89474,
+              -51.84},{8.89474,-64},{-2,-64},{-2,-86}}, color={255,0,255}));
+      connect(solCirController_TempIrradBased.OnOffSolPump, SolColPump) annotation (
+         Line(points={{-27.8875,36.15},{-27.8875,36},{14,36},{14,62},{50,62},{50,82}},
+            color={255,0,255}));
+      connect(stgCirController_TempBased.OnOffStgCirPump, StgCirPump) annotation (
+          Line(points={{22.75,11.72},{22.75,12},{72,12},{72,82}}, color={255,0,255}));
+      connect(stgCirController_TempBased.OnOffSolPump, SolColPump) annotation (Line(
+            points={{-7.1,11.6},{-14,11.6},{-14,36},{14,36},{14,62},{50,62},{50,82}},
+            color={255,0,255}));
+      connect(stateMachine.CompRPM, hpRPM) annotation (Line(points={{22.3158,
+              -50.24},{36,-50.24},{36,-86}}, color={0,0,127}));
+      connect(hpCondTemp, stateMachine.HPCondTemp) annotation (Line(points={{-22,-85},
+              {-22,-49.28},{-8,-49.28}},      color={0,0,127}));
+      connect(stateMachine.evaMF, EvaMF) annotation (Line(points={{22.5526,
+              -40.24},{156,-40.24},{156,10},{188,10}},
+                                               color={0,0,127}));
+      connect(stateMachine.conMF, ConMF) annotation (Line(points={{22.7105,-46},
+              {150,-46},{150,-6},{188,-6}},color={0,0,127}));
+      connect(stgCirController_TempBased.MFStgCirPump, MFStgCirPump) annotation (
+          Line(points={{22.75,8},{138,8},{138,58},{188,58}},
+                                                           color={0,0,127}));
+      connect(setPointBuffStg, BackupSystemController.buffStgSetpoint)
+        annotation (Line(points={{-106,77},{-56,77},{-56,44},{52,44},{52,-2.45},{
+              62.825,-2.45}}, color={0,0,127}));
+      connect(FlowTempSDH, BackupSystemController.FlowTempSDH) annotation (Line(
+            points={{-107,-74},{-94,-74},{-84,-74},{-84,-11},{62.825,-11}}, color=
+             {0,0,127}));
+      connect(TopTempBuffStg, BackupSystemController.buffStgTopTemp) annotation (
+          Line(points={{-67,-85},{-67,-19.25},{63.125,-19.25}}, color={0,0,127}));
+      connect(BackupSystemController.BypassValve, valOpBypass) annotation (Line(
+            points={{104.45,-4.325},{164,-4.325},{164,-44},{188,-44}}, color={0,0,
+              127}));
+      connect(BackupSystemController.AuxValve, valOpAux) annotation (Line(points=
+              {{104.45,-11},{130,-11},{130,-62},{188,-62}}, color={0,0,127}));
+      connect(DirSuppMF, DirSuppMF) annotation (Line(points={{188,-22},{184,-22},
+              {184,-22},{188,-22}}, color={0,0,127}));
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-120,
+                -80},{200,80}}), graphics={Rectangle(
+              extent={{-120,80},{200,-80}},
+              lineColor={0,0,0},
+              fillColor={66,143,244},
+              fillPattern=FillPattern.Solid), Text(
+              extent={{26,4},{64,-22}},
+              lineColor={255,255,255},
+              textString="%name
+")}),                                           Diagram(coordinateSystem(
+              preserveAspectRatio=false, extent={{-120,-80},{200,80}}), graphics={
+              Rectangle(
+              extent={{-38,80},{28,72}},
+              lineColor={33,130,241},
+              fillColor={170,213,255},
+              fillPattern=FillPattern.Solid),
+              Text(
+              extent={{-30,82},{22,64}},
+              lineColor={0,0,255},
+              fillColor={202,234,243},
+              fillPattern=FillPattern.Solid,
+              textString="***All temperature inputs should be in Celcius*** 
+
+")}),   Documentation(info="<html>
+<h4>Overview</h4>
+<p>This model represents a mode-based controller for the heat generation unit. The controller comprises following blocks: </p>
+<ol>
+<li>&QUOT;Solar circuit controller&QUOT; block which controls the pump in the solar circuit</li>
+<li>&QUOT;Storage circuit controller&QUOT; block which controls the pump in the seasonal storage circuit</li>
+<li>&QUOT;StateMachine&QUOT; block in which operation modes are defined</li>
+<li>&QUOT;BackupSystemController&QUOT; block which controls control vavles after the buffer storage  </li>
+</ol>
+</html>"));
+    end SolarDistrictHeatingController;
+  end Controller;
+
+  package BaseClasses
+    extends Modelica.Icons.BasesPackage;
+    package Functions
+      extends Modelica.Icons.Package;
+      package Characteristics
+        extends Modelica.Icons.Package;
+        function BaseFct
+          input Real N;
+          input Real T_con;
+          input Real T_eva;
+          input Real mFlow_eva;
+          input Real mFlow_con;
+          output Real Char[2];
+        end BaseFct;
+
+        function VariableNrpm
+          "Electrical power calculation dependent on variable rotational speed (rpm)"
+          extends
+            AixLib.Fluid.DistrictHeating.BaseClasses.Functions.Characteristics.BaseFct(
+            N,
+            T_con,
+            T_eva,
+            mFlow_eva,
+            mFlow_con);
+             parameter Real qualityGrade=0.3 "Constant quality grade";
+             parameter Real N_max= 3000 "Maximum speed of compressor in 1/min";
+             parameter Modelica.SIunits.Power P_com=23000 "Maximum electric power input for compressor";
+
+        protected
+            Real CoP_C "Carnot CoP";
+            Real Pel_curr "Current electrical power dependent on rotational speed";
+        algorithm
+          Pel_curr:=((N/N_max)^3)*P_com;
+          CoP_C:=T_con/(T_con - T_eva);
+          Char:= {Pel_curr,Pel_curr*CoP_C*qualityGrade};
+
+        end VariableNrpm;
+      end Characteristics;
+    end Functions;
+  end BaseClasses;
 
   partial model SolarDistrictHeating_BaseClass
     "Base class of a solar district heating  "
 
     replaceable package Medium = AixLib.Media.Water;
 
-    ExergyBasedControl.DistrictHeating.HeatGeneratorUnit.BuffStorageExtHEx heatStorageSolarColl
+    AixLib.Fluid.DistrictHeating.Components.BuffStorageExtHEx heatStorageSolarColl
       annotation (Placement(transformation(extent={{-330,-56},{-286,-15}})));
-    ExergyBasedControl.DistrictHeating.HeatGeneratorUnit.SolarThermal solarCollector(
+    AixLib.Fluid.DistrictHeating.Components.SolarThermal solarCollector(
       Collector=AixLib.DataBase.SolarThermal.FlatCollector(),
       show_T=true,
       redeclare package Medium = Medium,
@@ -53,13 +1264,13 @@ package DistrictHeating "Package with models for district heating network"
       volume_con=0.1,
       N_max=3700,
       redeclare replaceable function data_poly =
-          ExergyBasedControl.DistrictHeating.BaseClasses.Functions.Characteristics.VariableNrpm
+          AixLib.Fluid.DistrictHeating.BaseClasses.Functions.Characteristics.VariableNrpm
           (N_max=3700, P_com=60000),
       T_startEva=303.15,
       T_startCon=313.15,
       T_conMax=353.15)
       annotation (Placement(transformation(extent={{-206,-48},{-146,-8}})));
-    ExergyBasedControl.DistrictHeating.HeatGeneratorUnit.DividerUnit dividerUnit(
+    AixLib.Fluid.DistrictHeating.Components.DividerUnit dividerUnit(
         redeclare package Medium = Medium)
       annotation (Placement(transformation(extent={{-212,53},{-192,73}})));
     AixLib.Fluid.Sensors.TemperatureTwoPort TempCondOut(redeclare package
@@ -114,7 +1325,7 @@ package DistrictHeating "Package with models for district heating network"
           extent={{-9,-9.5},{9,9.5}},
           rotation=270,
           origin={-202,-62.5})));
-    ExergyBasedControl.DistrictHeating.HeatGeneratorUnit.CollectorUnit collectorUnit
+    AixLib.Fluid.DistrictHeating.Components.CollectorUnit collectorUnit
       annotation (Placement(transformation(extent={{-213,-134},{-191,-111}})));
     AixLib.Fluid.Movers.FlowControlled_m_flow Stg2Stg1(redeclare package Medium =
           Medium, m_flow_nominal=12)  annotation (Placement(transformation(
@@ -386,7 +1597,7 @@ package DistrictHeating "Package with models for district heating network"
         color={0,127,255},
         thickness=1));
     connect(Replaceable4.port_b, heatStorageSolarColl.port_a1) annotation (Line(
-        points={{-265,-74},{-265,-44.93},{-286,-44.93}},
+        points={{-265,-75.6364},{-265,-44.93},{-286,-44.93}},
         color={0,127,255},
         thickness=1));
     connect(Replaceable4.port_a, collectorUnit.port_a) annotation (Line(
@@ -398,7 +1609,7 @@ package DistrictHeating "Package with models for district heating network"
         color={0,127,255},
         thickness=1));
     connect(dividerUnit.port_a, Replaceable3.port_b) annotation (Line(
-        points={{-212,63},{-265,63},{-265,22}},
+        points={{-212,63},{-265,63},{-265,20.3636}},
         color={0,127,255},
         thickness=1));
     connect(bou1.ports[1], cHP.port_b) annotation (Line(points={{147,284},{147,260},
@@ -470,7 +1681,7 @@ package DistrictHeating "Package with models for district heating network"
         thickness=1));
     connect(bufferStorage.fluidportBottom2, Replaceable5.port_b) annotation (
         Line(
-        points={{-35.1,-61.305},{-36,-61.305},{-36,-122},{278,-122}},
+        points={{-35.1,-61.305},{-36,-61.305},{-36,-122},{280.545,-122}},
         color={0,127,255},
         thickness=1));
     connect(Replaceable1.port_a, FlowTempSDH.port_b) annotation (Line(
@@ -522,9 +1733,9 @@ package DistrictHeating "Package with models for district heating network"
     "Solar district heating model with control input connectors"
 
      extends
-      ExergyBasedControl.DistrictHeating.DistrictHeating_ExergyAnalysis.AixLib_SolarDistrictHeating_BaseClass(
+      AixLib.Fluid.DistrictHeating.SolarDistrictHeating_BaseClass(
       redeclare
-        ExergyBasedControl.DistrictHeating.DistrictHeating_ExergyAnalysis.ExergyAnalysisTool.ExergyMeterMediumMixed
+        AixLib.Fluid.Sensors.ExergyMeterMediumMixed
         Replaceable1,
       redeclare AixLib.Fluid.Movers.FlowControlled_dp Replaceable2(
         m_flow_nominal=10,
@@ -533,20 +1744,20 @@ package DistrictHeating "Package with models for district heating network"
           per,
         inputType=AixLib.Fluid.Types.InputType.Continuous),
       redeclare
-        ExergyBasedControl.DistrictHeating.DistrictHeating_ExergyAnalysis.ExergyAnalysisTool.ExergyMeterMediumMixed
+        AixLib.Fluid.Sensors.ExergyMeterMediumMixed
         Replaceable3,
       redeclare
-        ExergyBasedControl.DistrictHeating.DistrictHeating_ExergyAnalysis.ExergyAnalysisTool.ExergyMeterMediumMixed
+        AixLib.Fluid.Sensors.ExergyMeterMediumMixed
         Replaceable4,
       redeclare
-        ExergyBasedControl.DistrictHeating.DistrictHeating_ExergyAnalysis.ExergyAnalysisTool.ExergyMeterMediumMixed
+        AixLib.Fluid.Sensors.ExergyMeterMediumMixed
         Replaceable5,
       redeclare AixLib.Fluid.Sensors.TemperatureTwoPort Replaceable6(
           m_flow_nominal=10),
       redeclare AixLib.Fluid.Sensors.TemperatureTwoPort Replaceable7(
           m_flow_nominal=10),
       heatPump(redeclare function data_poly =
-            ExergyBasedControl.DistrictHeating.BaseClasses.Functions.Characteristics.VariableNrpm
+            AixLib.Fluid.DistrictHeating.BaseClasses.Functions.Characteristics.VariableNrpm
             (N_max=3700, P_com=60000)),
       cHP(
         m_flow_nominal=10,
@@ -554,7 +1765,7 @@ package DistrictHeating "Package with models for district heating network"
         ctrlStrategy=true,
         minDeltaT=5,
         param=
-            ExergyBasedControl.DistrictHeating.DataBase.CHP_TechnicalData_485KW(),
+            AixLib.DataBase.CHP.CHP_FMB_410_GSMK(),
         minCapacity=40,
         Tc=200,
         TFlowRange=2,
@@ -842,245 +2053,6 @@ package DistrictHeating "Package with models for district heating network"
 </html>"));
   end SolarDistrictHeating;
 
-  model SolarDistrictHeatingController
-    "Controller model for solar district heating "
-
-    ExergyBasedControl.DistrictHeating.HeatGeneratorUnit.Controller.StgCirController_TempBased
-      stgCirController_TempBased
-      annotation (Placement(transformation(extent={{-8,-4},{22,20}})));
-    ExergyBasedControl.DistrictHeating.HeatGeneratorUnit.Controller.SolCirController_TempIrradBased
-      solCirController_TempIrradBased
-      annotation (Placement(transformation(extent={{-64,16},{-28,42}})));
-    Modelica.Blocks.Interfaces.RealInput CurrIrrad "measured irradiation"
-      annotation (Placement(transformation(extent={{-124,34},{-88,70}}),
-          iconTransformation(extent={{-122,30},{-100,52}})));
-    Modelica.Blocks.Interfaces.RealInput SeasStgBotTemp
-      "Storage temperature at the bottom" annotation (Placement(transformation(
-            extent={{-124,-40},{-88,-4}}), iconTransformation(extent={{-122,-12},
-              {-100,10}})));
-    Modelica.Blocks.Interfaces.RealInput FlowTempSol
-      "Solar flow temperature in C" annotation (Placement(transformation(extent={{-124,
-              -14},{-88,22}}),      iconTransformation(extent={{-122,-56},{-100,
-              -34}})));
-    Modelica.Blocks.Interfaces.RealInput AmbTemp "ambient temperature in C"
-      annotation (Placement(transformation(extent={{-124,10},{-88,46}}),
-          iconTransformation(extent={{-122,10},{-100,32}})));
-    Modelica.Blocks.Interfaces.RealOutput MFSolCirPump annotation (Placement(
-          transformation(extent={{176,64},{200,88}}),iconTransformation(extent={{188,62},
-              {206,80}})));
-    Modelica.Blocks.Interfaces.RealOutput MFStgCirPump annotation (Placement(
-          transformation(extent={{176,46},{200,70}}),  iconTransformation(
-            extent={{188,44},{206,62}})));
-    Modelica.Blocks.Interfaces.BooleanOutput SolColPump annotation (Placement(
-          transformation(extent={{-12,-12},{12,12}},
-          rotation=90,
-          origin={50,82}),                           iconTransformation(extent={{-12,-12},
-              {12,12}},
-          rotation=90,
-          origin={26,80})));
-    Modelica.Blocks.Interfaces.BooleanOutput StgCirPump annotation (Placement(
-          transformation(extent={{-12,-12},{12,12}},
-          rotation=90,
-          origin={72,82}),                             iconTransformation(
-            extent={{-12,-12},{12,12}},
-          rotation=90,
-          origin={54,80})));
-    Modelica.Blocks.Interfaces.RealInput SeasStgTopTemp
-      "Storage temperature at the top" annotation (Placement(transformation(
-            extent={{-126,-66},{-88,-28}}), iconTransformation(extent={{-122,
-              -34},{-100,-12}})));
-    Modelica.Blocks.Interfaces.RealInput setPointBuffStg
-      "Set point temperature of buffer storage in [°C]"
-                                                annotation (Placement(
-          transformation(extent={{-125,58},{-87,96}}), iconTransformation(
-            extent={{-122,52},{-100,74}})));
-    Modelica.Blocks.Interfaces.RealOutput ValveOpIndir annotation (Placement(
-          transformation(extent={{176,13},{200,37}}),  iconTransformation(
-            extent={{188,9},{206,26}})));
-    Modelica.Blocks.Interfaces.RealOutput ValveOpDir annotation (Placement(
-          transformation(extent={{176,30},{200,54}}),iconTransformation(extent={{188,26},
-              {206,44}})));
-    ExergyBasedControl.DistrictHeating.HeatGeneratorUnit.Controller.StorageController_v2
-      stateMachine
-      annotation (Placement(transformation(extent={{-8,-52},{22,-28}})));
-    Modelica.Blocks.Interfaces.RealOutput EvaMF
-      annotation (Placement(transformation(extent={{176,-2},{200,22}}),
-          iconTransformation(extent={{188,-10},{206,8}})));
-    Modelica.Blocks.Interfaces.RealOutput ConMF
-      annotation (Placement(transformation(extent={{176,-18},{200,6}}),
-          iconTransformation(extent={{188,-28},{206,-10}})));
-    Modelica.Blocks.Interfaces.RealOutput DirSuppMF
-      annotation (Placement(transformation(extent={{176,-34},{200,-10}}),
-          iconTransformation(extent={{188,-46},{206,-28}})));
-    Modelica.Blocks.Interfaces.RealInput TopTempBuffStg
-      "Top temperature of the buffer storage in [°C]" annotation (Placement(
-          transformation(
-          extent={{-19,-19},{19,19}},
-          rotation=90,
-          origin={-67,-85}), iconTransformation(
-          extent={{-11,-11},{11,11}},
-          rotation=270,
-          origin={-73,74})));
-    Modelica.Blocks.Interfaces.BooleanOutput hpSignal
-      "OnOff signal of the heat pump" annotation (Placement(transformation(
-          extent={{-12,-12},{12,12}},
-          rotation=270,
-          origin={16,-86}), iconTransformation(
-          extent={{-11,-11},{11,11}},
-          rotation=270,
-          origin={25,-77})));
-    Modelica.Blocks.Interfaces.BooleanOutput DirSupp annotation (Placement(
-          transformation(
-          extent={{-12,-12},{12,12}},
-          rotation=270,
-          origin={-2,-86}), iconTransformation(
-          extent={{-11,-11},{11,11}},
-          rotation=270,
-          origin={-1,-77})));
-    Modelica.Blocks.Interfaces.RealOutput hpRPM annotation (Placement(
-          transformation(
-          extent={{-12,-12},{12,12}},
-          rotation=270,
-          origin={36,-86}), iconTransformation(
-          extent={{-11,-11},{11,11}},
-          rotation=270,
-          origin={51,-77})));
-    Modelica.Blocks.Interfaces.RealInput hpCondTemp
-      "Flow temperature of condensator in C" annotation (Placement(
-          transformation(
-          extent={{-20,-20},{20,20}},
-          rotation=90,
-          origin={-22,-85}), iconTransformation(
-          extent={{-11,-11},{11,11}},
-          rotation=0,
-          origin={-111,-65})));
-    ExergyBasedControl.DistrictHeating.HeatGeneratorUnit.Controller.CHP_Controller
-      BackupSystemController
-      annotation (Placement(transformation(extent={{62,-26},{104,4}})));
-    Modelica.Blocks.Interfaces.RealInput FlowTempSDH
-      "Flow temperature of the solar district heating network in [°C]"
-      annotation (Placement(transformation(extent={{-127,-94},{-87,-54}}),
-          iconTransformation(extent={{-11,-10.5},{11,10.5}},
-          rotation=270,
-          origin={-49,74.5})));
-    Modelica.Blocks.Interfaces.RealOutput valOpBypass annotation (Placement(
-          transformation(extent={{176,-56},{200,-32}}), iconTransformation(
-            extent={{188,-64},{206,-46}})));
-    Modelica.Blocks.Interfaces.RealOutput valOpAux annotation (Placement(
-          transformation(extent={{176,-74},{200,-50}}), iconTransformation(
-            extent={{188,-82},{206,-64}})));
-  equation
-    connect(CurrIrrad, solCirController_TempIrradBased.CurrIrradiation)
-      annotation (Line(points={{-106,52},{-82,52},{-82,35.89},{-63.8875,35.89}},
-          color={0,0,127}));
-    connect(AmbTemp, solCirController_TempIrradBased.ambTemp) annotation (Line(
-          points={{-106,28},{-82,28},{-82,31.47},{-63.8875,31.47}},
-                                                                  color={0,0,
-            127}));
-    connect(FlowTempSol, solCirController_TempIrradBased.FlowTempSol)
-      annotation (Line(points={{-106,4},{-106,10},{-78,10},{-78,26.53},{
-            -63.8875,26.53}}, color={0,0,127}));
-    connect(SeasStgBotTemp, solCirController_TempIrradBased.StgTempBott)
-      annotation (Line(points={{-106,-22},{-72,-22},{-72,21.85},{-63.8875,21.85}},
-          color={0,0,127}));
-    connect(FlowTempSol, stgCirController_TempBased.FlowTempSol) annotation (
-        Line(points={{-106,4},{-40,4},{-40,7.76},{-7.1,7.76}},     color={0,0,
-            127}));
-    connect(SeasStgBotTemp, stgCirController_TempBased.StgTempBott) annotation (
-       Line(points={{-106,-22},{-24,-22},{-24,3.92},{-7.1,3.92}}, color={0,0,
-            127}));
-    connect(solCirController_TempIrradBased.MFSolColPump, MFSolCirPump)
-      annotation (Line(points={{-27.8875,29},{130,29},{130,76},{188,76}},
-                                                                        color={
-            0,0,127}));
-    connect(setPointBuffStg, stateMachine.setPointStg2) annotation (Line(points={{-106,77},
-            {-76,77},{-76,-30.72},{-7.68421,-30.72}},           color={0,0,127}));
-    connect(SeasStgTopTemp, stateMachine.Stg1TopTemp) annotation (Line(points={{-107,
-            -47},{-58,-47},{-58,-34.4},{-7.76316,-34.4}},       color={0,0,127}));
-    connect(stateMachine.ValveOpDir, ValveOpDir) annotation (Line(points={{22.3947,
-            -31.28},{144,-31.28},{144,42},{188,42}},
-                                                   color={0,0,127}));
-    connect(stateMachine.ValveOpIndir, ValveOpIndir) annotation (Line(points={{22.5526,
-            -37.84},{148,-37.84},{148,25},{188,25}}, color={0,0,127}));
-    connect(TopTempBuffStg, stateMachine.Stg2TopTemp) annotation (Line(points={{-67,-85},
-            {-67,-60},{-24,-60},{-24,-28.48},{-7.68421,-28.48}},
-          color={0,0,127}));
-    connect(stateMachine.MFDirSupp, DirSuppMF) annotation (Line(points={{22.3947,
-            -33.68},{130,-33.68},{130,-22},{188,-22}},
-                                             color={0,0,127}));
-    connect(stateMachine.IndirSuppSignal, hpSignal) annotation (Line(points={{11.5789,
-            -51.84},{11.5789,-64},{16,-64},{16,-86}},         color={255,0,255}));
-    connect(stateMachine.DirSuppSignal, DirSupp) annotation (Line(points={{8.89474,
-            -51.84},{8.89474,-64},{-2,-64},{-2,-86}}, color={255,0,255}));
-    connect(solCirController_TempIrradBased.OnOffSolPump, SolColPump) annotation (
-       Line(points={{-27.8875,36.15},{-27.8875,36},{14,36},{14,62},{50,62},{50,82}},
-          color={255,0,255}));
-    connect(stgCirController_TempBased.OnOffStgCirPump, StgCirPump) annotation (
-        Line(points={{22.75,11.72},{22.75,12},{72,12},{72,82}}, color={255,0,255}));
-    connect(stgCirController_TempBased.OnOffSolPump, SolColPump) annotation (Line(
-          points={{-7.1,11.6},{-14,11.6},{-14,36},{14,36},{14,62},{50,62},{50,82}},
-          color={255,0,255}));
-    connect(stateMachine.CompRPM, hpRPM) annotation (Line(points={{22.3158,
-            -50.24},{36,-50.24},{36,-86}}, color={0,0,127}));
-    connect(hpCondTemp, stateMachine.HPCondTemp) annotation (Line(points={{-22,-85},
-            {-22,-49.28},{-8,-49.28}},      color={0,0,127}));
-    connect(stateMachine.evaMF, EvaMF) annotation (Line(points={{22.5526,-40.24},
-            {156,-40.24},{156,10},{188,10}}, color={0,0,127}));
-    connect(stateMachine.conMF, ConMF) annotation (Line(points={{22.7105,-46},{
-            150,-46},{150,-6},{188,-6}}, color={0,0,127}));
-    connect(stgCirController_TempBased.MFStgCirPump, MFStgCirPump) annotation (
-        Line(points={{22.75,8},{138,8},{138,58},{188,58}},
-                                                         color={0,0,127}));
-    connect(setPointBuffStg, BackupSystemController.buffStgSetpoint)
-      annotation (Line(points={{-106,77},{-56,77},{-56,44},{52,44},{52,-2.45},{
-            62.825,-2.45}}, color={0,0,127}));
-    connect(FlowTempSDH, BackupSystemController.FlowTempSDH) annotation (Line(
-          points={{-107,-74},{-94,-74},{-84,-74},{-84,-11},{62.825,-11}}, color=
-           {0,0,127}));
-    connect(TopTempBuffStg, BackupSystemController.buffStgTopTemp) annotation (
-        Line(points={{-67,-85},{-67,-19.25},{63.125,-19.25}}, color={0,0,127}));
-    connect(BackupSystemController.BypassValve, valOpBypass) annotation (Line(
-          points={{104.45,-4.325},{164,-4.325},{164,-44},{188,-44}}, color={0,0,
-            127}));
-    connect(BackupSystemController.AuxValve, valOpAux) annotation (Line(points=
-            {{104.45,-11},{130,-11},{130,-62},{188,-62}}, color={0,0,127}));
-    connect(DirSuppMF, DirSuppMF) annotation (Line(points={{188,-22},{184,-22},
-            {184,-22},{188,-22}}, color={0,0,127}));
-    annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-120,
-              -80},{200,80}}), graphics={Rectangle(
-            extent={{-120,80},{200,-80}},
-            lineColor={0,0,0},
-            fillColor={66,143,244},
-            fillPattern=FillPattern.Solid), Text(
-            extent={{26,4},{64,-22}},
-            lineColor={255,255,255},
-            textString="%name
-")}),                                         Diagram(coordinateSystem(
-            preserveAspectRatio=false, extent={{-120,-80},{200,80}}), graphics={
-            Rectangle(
-            extent={{-38,80},{28,72}},
-            lineColor={33,130,241},
-            fillColor={170,213,255},
-            fillPattern=FillPattern.Solid),
-            Text(
-            extent={{-30,82},{22,64}},
-            lineColor={0,0,255},
-            fillColor={202,234,243},
-            fillPattern=FillPattern.Solid,
-            textString="***All temperature inputs should be in Celcius*** 
-
-")}), Documentation(info="<html>
-<h4>Overview</h4>
-<p>This model represents a mode-based controller for the heat generation unit. The controller comprises following blocks: </p>
-<ol>
-<li>&QUOT;Solar circuit controller&QUOT; block which controls the pump in the solar circuit</li>
-<li>&QUOT;Storage circuit controller&QUOT; block which controls the pump in the seasonal storage circuit</li>
-<li>&QUOT;StateMachine&QUOT; block in which operation modes are defined</li>
-<li>&QUOT;BackupSystemController&QUOT; block which controls control vavles after the buffer storage  </li>
-</ol>
-</html>"));
-  end SolarDistrictHeatingController;
-
   package Examples "Collection of models that illustrate model use and test models"
   extends Modelica.Icons.ExamplesPackage;
 
@@ -1089,9 +2061,9 @@ package DistrictHeating "Package with models for district heating network"
         replaceable package Medium = AixLib.Media.Water;
         extends Modelica.Icons.Example;
 
-      ExergyBasedControl.DistrictHeating.DistrictHeating_ExergyAnalysis.AixLib_SolarDistrictHeating solarDistrictHeating
+      AixLib.Fluid.DistrictHeating.SolarDistrictHeating solarDistrictHeating
         annotation (Placement(transformation(extent={{-18,4},{30,36}})));
-      ExergyBasedControl.DistrictHeating.DistrictHeating_ExergyAnalysis.AixLib_SolarDistrictHeatingController solarDistrictHeatingController
+      AixLib.Fluid.DistrictHeating.Controller.SolarDistrictHeatingController solarDistrictHeatingController
         annotation (Placement(transformation(extent={{-46,-46},{-8,-20}})));
       AixLib.Fluid.Sources.Boundary_pT Sink(          redeclare package Medium =
                    Medium, nPorts=1)

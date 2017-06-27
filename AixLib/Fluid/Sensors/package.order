@@ -25,6 +25,7 @@ TraceSubstances
 TraceSubstancesTwoPort
 Velocity
 VolumeFlowRate
+ExergyMeterMediumMixed
 Conversions
 Examples
 BaseClasses
