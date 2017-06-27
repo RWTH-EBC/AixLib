@@ -1,7 +1,7 @@
 within AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses;
 block SelfShadowing
   "Self-shadowing due to projections for direct radiation"
-  parameter Integer n(min = 1) "number of windows"
+  parameter Integer n(min = 1) "Number of windows"
     annotation(dialog(group="window"));
   extends Modelica.Blocks.Icons.Block;
   parameter Modelica.SIunits.Length b[n] "Width of window"
@@ -73,7 +73,7 @@ protected
     "Auxiliary variable for shadow from below";
   Modelica.SIunits.Distance s_h[n] "Horizontal reduction of window";
   Modelica.SIunits.Distance s_v[n] "Vertical reduction of window";
-  Modelica.SIunits.Area A_S[n] "Auxiliary variable for effective Area";
+  Modelica.SIunits.Area A_S[n] "Auxiliary variable for effective area";
   Modelica.SIunits.Area A_s[n] "Effective windowarea";
 equation
   for i in 1:n loop

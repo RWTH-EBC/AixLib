@@ -11,7 +11,7 @@ model SolarDeclinationAngleVDI6007 "Calculates the solar azimuth angle based on
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 protected
     constant Modelica.SIunits.Time day=86400 "Number of seconds in a day";
-    Modelica.SIunits.Angle J_;
+    Modelica.SIunits.Angle J_ "Daily Angle for 105th day of the year";
 equation
   J_=Modelica.SIunits.Conversions.from_deg(360*105/365);
   decAng=Modelica.SIunits.Conversions.from_deg(0.3948-23.2559*

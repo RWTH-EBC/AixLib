@@ -26,7 +26,7 @@ model Illumination
   parameter Modelica.SIunits.TransmissionCoefficient tau_vis[n]
     "Degree of light transmission"
     annotation (Dialog(group="window"));
-  final parameter Modelica.SIunits.ReflectionCoefficient rho=0.2
+  parameter Modelica.SIunits.ReflectionCoefficient rho=0.2
     "Degree of ground reflection";
 
   Modelica.Blocks.Interfaces.BooleanOutput Illumination
@@ -53,7 +53,7 @@ model Illumination
     "Correction value for translucence for ground reflection radiation"
     annotation (Placement(transformation(extent={{-120,-10},{-100,10}}),
         iconTransformation(extent={{-120,-10},{-100,10}})));
-//protected
+
   constant Modelica.SIunits.Time day=86400 "Number of seconds in a day";
   constant Modelica.SIunits.Time week=604800 "Number of seconds in a week";
 

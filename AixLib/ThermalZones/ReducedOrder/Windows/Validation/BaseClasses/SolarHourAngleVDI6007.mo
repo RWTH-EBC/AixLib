@@ -5,7 +5,8 @@ model SolarHourAngleVDI6007 "Calculates the solar hour angle every hour based
 
   extends Modelica.Blocks.Icons.Block;
   parameter Modelica.SIunits.Angle lon "Longitude";
-  Modelica.SIunits.Angle J_;
+  Modelica.SIunits.Angle J_     Modelica.SIunits.Angle J_
+  "Daily Angle for 105th day of the year";
   Modelica.SIunits.Time zgl "Time equation";
   Modelica.SIunits.Time woz "True time";
   Modelica.Blocks.Interfaces.RealOutput solHouAng(
@@ -15,9 +16,7 @@ model SolarHourAngleVDI6007 "Calculates the solar hour angle every hour based
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 protected
   constant Modelica.SIunits.Time day=86400 "Number of seconds in a day";
-  Real clock;
 equation
-  clock=(integer(time/3600)-0.5-integer(time/day)*24);
   J_=Modelica.SIunits.Conversions.from_deg(360*105/365);
   zgl=0.0066+7.3525*Modelica.Math.cos(J_+Modelica.SIunits.Conversions.from_deg(85.9))+9.9359*
     Modelica.Math.cos(2*J_+Modelica.SIunits.Conversions.from_deg(108.9))+0.3387*

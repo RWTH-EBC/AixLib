@@ -4,6 +4,7 @@ model Window "Testmodel for Window"
 
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     filNam="modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")
+    "Weather data for Chicago"
     annotation (Placement(transformation(extent={{-42,-10},{-22,10}})));
   AixLib.ThermalZones.ReducedOrder.Windows.Window window(
     n=2,

@@ -281,7 +281,7 @@ model TestCase1_Illumination
         1609200,0.739755433; 1612800,0.606187916; 1616400,0.450168115;
         1620000,0.28318588; 1623600,0.113490388; 1627200,-0.052089885;
         1630800,-0.206727187; 1634400,-0.342547809; 1638000,-0.450098665])
-    "solar altitude angle"
+    "Solar altitude angle"
     annotation (Placement(transformation(extent={{-102,-70},{-82,-50}})));
 
   AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGTaueDoublePane CorGTaue(

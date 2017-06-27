@@ -53,9 +53,10 @@ block VentilationHeat "heat input due to ventilation with closed sunblind"
     displayUnit="deg") "Solar altitude angle"
     annotation (Placement(transformation(extent={{-140,-110},{-100,-70}}),
         iconTransformation(extent={{-120,-90},{-100,-70}})));
-protected
+
    parameter Modelica.SIunits.ReflectionCoefficient rho=0.2
-    "ground reflection";
+    "Ground reflection";
+protected
    Real factor_gv "Calculation factor";
 
 equation

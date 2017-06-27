@@ -13,6 +13,7 @@ model VentilationHeat "Testmodel for VentilationHeat"
     annotation (Placement(transformation(extent={{56,-10},{76,10}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     filNam="modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")
+    "Weather data for Chicago"
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
   AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil(
     azi=0,

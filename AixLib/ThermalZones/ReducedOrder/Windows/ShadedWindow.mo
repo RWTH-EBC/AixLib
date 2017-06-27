@@ -120,32 +120,42 @@ model ShadedWindow
     final gap=gap,
     final g_TotDir=g_TotDir,
     final g_TotDif=g_TotDif)
+    "Base class of ShadedWindow"
     annotation (Placement(transformation(extent={{12,-34},{86,36}})));
   AixLib.BoundaryConditions.SolarGeometry.IncidenceAngle incAng[n](
     each lat=lat,
     final azi=azi,
-    final til=til) annotation (
+    final til=til)
+    "Calculates the incidence angle"
+    annotation (
     Placement(transformation(extent={{-40,70},{-30,80}})));
   AixLib.BoundaryConditions.SolarGeometry.BaseClasses.AltitudeAngle altAng
+  "Calculates the altitude angle"
     annotation (Placement(transformation(extent={{-30,-8},{-22,0}})));
   AixLib.BoundaryConditions.SolarGeometry.ZenithAngle zen(each lat=lat)
+  "Calculates the zenith angle"
     annotation (Placement(transformation(extent={{-62,-12},{-54,-4}})));
   AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[n](
     final til=til,
     each lat=lat,
-    final azi=azi) annotation (
+    final azi=azi)
+    "Calculates the diffuse irradiation on a tilted surface after Perez"
+    annotation (
     Placement(transformation(extent={{-38,-78},{-26,-66}})));
   AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[n](
     final til=til,
     each lat=lat,
     final azi=azi)
+    "Calculates the direct irradiation on a tilted surface"
     annotation (Placement(transformation(extent={{-66,40},{-52,54}})));
-  AixLib.BoundaryConditions.WeatherData.Bus weaBus "Weather data"
+  AixLib.BoundaryConditions.WeatherData.Bus weaBus "Weather bus"
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
   AixLib.BoundaryConditions.SolarGeometry.BaseClasses.SolarAzimuth solAzi(
   lat=lat)
+  "Calculates the solar azimuth angle"
     annotation (Placement(transformation(extent={{-40,-34},{-32,-26}})));
   AixLib.BoundaryConditions.SolarGeometry.BaseClasses.Declination decAng
+  "Calculates the declination angle"
     annotation (Placement(transformation(extent={{-66,-36},{-60,-30}})));
 equation
   connect(shadedWindow.HVis, HVis) annotation (Line(points={{89.7,15},{95.4,15},

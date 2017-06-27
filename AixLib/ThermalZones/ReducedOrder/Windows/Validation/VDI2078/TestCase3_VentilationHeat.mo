@@ -86,8 +86,7 @@ model TestCase3_VentilationHeat
         0.0,0.0; 0.0,0.0; 0.0,0.0; 0.0,0.0; 0.0,0.0; 0.0,0.0; 0.0,0.0;
         0.0,0.0],
     fileName=
-        "C:/Users/Stanley/Documents/BA/VDI6007-3/Resources/WeatherData/Trimble/
-        Trimble_Wetterdaten_April_HDirHor.txt")
+        "")
     "Direct irradiation on horizontal surface"
     annotation (Placement(transformation(extent={{-96,-26},{-82,-12}})));
   Modelica.Blocks.Sources.CombiTimeTable alt(
