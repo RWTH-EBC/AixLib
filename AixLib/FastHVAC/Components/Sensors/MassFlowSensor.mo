@@ -11,10 +11,10 @@ model MassFlowSensor "Mass flow sensor"
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={10,90})));
-  Interfaces.EnthalpyPort_a          enthalpyPort_a "Input connector"
+  Interfaces.EnthalpyPort_a enthalpyPort_a "Input connector"
     annotation (Placement(transformation(extent={{-100,-12},{-78,10}}),
         iconTransformation(extent={{-100,-12},{-76,10}})));
-  Interfaces.EnthalpyPort_b          enthalpyPort_b "Output connector"
+  Interfaces.EnthalpyPort_b enthalpyPort_b "Output connector"
     annotation (Placement(transformation(extent={{80,-12},{102,10}}),
         iconTransformation(extent={{78,-12},{102,10}})));
 equation
