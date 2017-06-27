@@ -54,9 +54,9 @@ equation
 <p>Simulation to test the <a href=\"HVAC.Components.Solar_UC.Electric.PVsystem\">PVsystem</a> model.</p>
 </html>",
       revisions="<html>
-<p><ul>
+<ul>
 <li><i>October 11, 2016 </i> by Tobias Blacha:<br/>Moved into AixLib</li>
 <li><i>April 16, 2014 &nbsp;</i> by Ana Constantin:<br/>Formated documentation.</li>
-</ul></p>
+</ul>
 </html>"));
 end ExamplePV;

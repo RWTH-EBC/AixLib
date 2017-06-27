@@ -83,12 +83,10 @@ equation
   connect(temperatureSensor.T, T_ground) annotation (Line(points={{94,-50},{110,
           -50},{110,-46},{150,-46}}, color={0,0,127}));
   annotation (Documentation(revisions="<html>
-<p>
 <ul>
-<li><i>May 2017</i>, by Felix Bünning: Updated documentation, added T_amp as output</li>
-<li><i>October 2016</i>, by Felix Bünning: Developed and implemented</li>
+<li><i>May 2017</i>, by Felix Buenning: Updated documentation, added T_amp as output</li>
+<li><i>October 2016</i>, by Felix Buenning: Developed and implemented</li>
 </ul>
-</p>
 </html>", info="<html>
 <p>Example to test and tune Kusuda ground temperature model with the weather model from the Modelica Buildings Library.</p>
 
