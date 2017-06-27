@@ -50,8 +50,7 @@ equation
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Model for an ideal pump.</p>
 
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars3.png\"/></p>
+
 <h4><span style=\"color:#008000\">Assumptions</span></h4>
 <p>Ideal pump</p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
@@ -69,8 +68,9 @@ equation
 </html>",
     revisions="<html>
 <ul>
-<li><i>December 16, 2014&nbsp;</i> by Konstantin Finkbeiner:<br/>Implemented</li>
-</ul></p>
+<li><i>December 16, 2014&nbsp;</i> by Konstantin Finkbeiner:<br/>
+Implemented</li>
+</ul>
 </html> "),
     Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,
             100}}),   graphics={
