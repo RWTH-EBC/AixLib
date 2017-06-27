@@ -5,7 +5,7 @@ model SolarHourAngleVDI6007 "Calculates the solar hour angle every hour based
 
   extends Modelica.Blocks.Icons.Block;
   parameter Modelica.SIunits.Angle lon "Longitude";
-  Modelica.SIunits.Angle J_     Modelica.SIunits.Angle J_
+  Modelica.SIunits.Angle J_
   "Daily Angle for 105th day of the year";
   Modelica.SIunits.Time zgl "Time equation";
   Modelica.SIunits.Time woz "True time";
