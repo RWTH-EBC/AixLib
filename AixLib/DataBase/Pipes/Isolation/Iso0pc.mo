@@ -10,7 +10,7 @@ record Iso0pc "Coating, no insulation"
 
   annotation (Documentation(info="<html>
 <h4><font color=\"#008000\">Overview</font></h4>
-<p>0&percnt; isolation. </p>
+<p>0 %; isolation. </p>
 <h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 </html>",

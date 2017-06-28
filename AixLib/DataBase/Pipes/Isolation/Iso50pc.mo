@@ -9,7 +9,7 @@ record Iso50pc "50% Isolation (thickness isolation = 0.5 x d_o)"
 
   annotation (Documentation(info="<html>
 <h4><font color=\"#008000\">Overview</font></h4>
-<p>50&percnt; isolation.  Calculated according to: <i>thickness isolation = 0.5 x d_o</i></p>
+<p>50 %; isolation.  Calculated according to: <i>thickness isolation = 0.5 x d_o</i></p>
 <h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 </html>",
