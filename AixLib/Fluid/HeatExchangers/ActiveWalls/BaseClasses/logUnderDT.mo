@@ -12,6 +12,8 @@ Temp_out :=(Temp_in[2] - Temp_in[1])/log(abs((Temp_in[1] - Temp_in[3])/(Temp_in[
 
     annotation (Documentation(revisions="<html>
 <ul>
+<li><i>June 15, 2017&nbsp;</i> by Tobias Blacha:<br/>
+Moved into AixLib</li>
 <li><i>August 03, 2014&nbsp;</i> by Ana Constantin:<br/>
 Implemented.</li>
 </ul>

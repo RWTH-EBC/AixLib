@@ -103,6 +103,8 @@ equation
           rotation=360)}),
       Documentation(revisions="<html>
 <ul>
+<li><i>June 15, 2017&nbsp;</i> by Tobias Blacha:<br/>
+Moved into AixLib</li>
 <li><i>August 03, 2014&nbsp;</i> by Ana Constantin:<br/>
 Implemented.</li>
 </ul>

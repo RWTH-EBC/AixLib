@@ -198,7 +198,10 @@ equation
 </html>",
         revisions="<html>
 <ul>
-<li><i>November 28, 2014&nbsp;</i> by Xian Wu:<br/>Added to the HVAC library.</li>
+<li><i>June 15, 2017&nbsp;</i> by Tobias Blacha:<br/>
+Moved into AixLib</li>
+<li><i>November 28, 2014&nbsp;</i> by Xian Wu:<br/>
+Added to the HVAC library.</li>
 </ul>
 </html>"),
     experiment(StopTime=86400, Interval=60),

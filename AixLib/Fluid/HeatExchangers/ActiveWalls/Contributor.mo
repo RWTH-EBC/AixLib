@@ -188,6 +188,8 @@ equation
           smooth=Smooth.None)}),
     Documentation(revisions="<html>
 <ul>
+<li><i>June 15, 2017&nbsp;</i> by Tobias Blacha:<br/>
+Moved into AixLib</li>
 <li><i>November 06, 2014&nbsp;</i> by Ana Constantin:<br/>
 Added documentation.</li>
 </ul>

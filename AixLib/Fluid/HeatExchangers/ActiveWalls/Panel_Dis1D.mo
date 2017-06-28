@@ -367,7 +367,10 @@ annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,
 <a href=\"HVAC.Examples.ActiveWalls.Panel_CoolingAndHeating\">HVAC.Examples.ActiveWalls.Panel_CoolingAndHeating</a>
 </html>", revisions="<html>
 <ul>
-<li><i>August 03, 2014&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
+<li><i>June 15, 2017&nbsp;</i> by Tobias Blacha:<br/>
+Moved into AixLib</li>
+<li><i>August 03, 2014&nbsp;</i> by Ana Constantin:<br/>
+Implemented.</li>
 </ul>
 </html>"));
 end Panel_Dis1D;

@@ -189,6 +189,8 @@ equation
           rotation=180)}),
     Documentation(revisions="<html>
 <ul>
+<li><i>June 15, 2017&nbsp;</i> by Tobias Blacha:<br/>
+Moved into AixLib</li>
 <li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL</li>
 <li><i>November 06, 2014&nbsp;</i> by Ana Constantin:<br/>Added documentation.</li>
 </ul>
