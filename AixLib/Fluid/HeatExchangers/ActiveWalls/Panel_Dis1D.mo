@@ -364,7 +364,7 @@ annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,
 <p>The model is a greybox model: half physical model, half empirical formula. </p>
 <p><b><font style=\"color: #ff0000; \">Attention:</font></b> When switching from cooling to heating mode the values for heat transfer coefficients don&apos;t change smoothly. So if the switch is not some type of step change for the flow temperature (see example) the model can become stuck constantly switching between hetaing and cooling mode. Realistically a change should be sudden, because there is supposed to be a certain temperature difference between room temperature and mean temperature of heating system. However a chnage can be gradual, when feeding the model with measurement data. As a solution please think about making the chnage more step like, or of introducing a a tolerance interval around the switching point, where the model is only cooling, or heating, or not doing anything. </p>
 <h4><span style=\"color:#008000\">Example</span></h4>
-<a href=\"HVAC.Examples.ActiveWalls.Panel_CoolingAndHeating\">HVAC.Examples.ActiveWalls.Panel_CoolingAndHeating</a>
+<a href=\"AixLib.Fluid.HeatExchangers.Examples.ActiveWalls.Panel_CoolingAndHeating\">AixLib.Fluid.HeatExchangers.Examples.ActiveWalls.Panel_CoolingAndHeating</a>
 </html>", revisions="<html>
 <ul>
 <li><i>June 15, 2017&nbsp;</i> by Tobias Blacha:<br/>

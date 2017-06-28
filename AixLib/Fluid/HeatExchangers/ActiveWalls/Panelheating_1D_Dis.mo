@@ -274,7 +274,7 @@ annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,
 <li>Bernd Glueck, Bauteilaktivierung 1999, Page 41</li>
 </ul>
 <h4><span style=\"color:#008000\">Example Results</span></h4>
-<p><a href=\"HVAC.Examples.ActiveWalls.ActiveWalls_Test\">AixLib.Fluid.HeatExchangers.Examples.ActiveWalls.ActiveWalls_Test</a></p>
+<p><a href=\"AixLib.Fluid.HeatExchangers.Examples.ActiveWalls.ActiveWalls_Test\">AixLib.Fluid.HeatExchangers.Examples.ActiveWalls.ActiveWalls_Test</a></p>
 </html>",
         revisions="<html>
 <ul>

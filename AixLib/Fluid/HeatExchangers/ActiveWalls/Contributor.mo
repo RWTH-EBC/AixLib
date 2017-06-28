@@ -200,6 +200,6 @@ Added documentation.</li>
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <p>The contributor is built to connect six floor heating circuits together. The volume is used for nummerical reasons, to have a point where all the flows mix together. </p>
 <h4><span style=\"color:#008000\">Example Results</span></h4>
-<p><a href=\"HVAC.Examples.ActiveWalls.ActiveWalls_Test\">HVAC.Examples.ActiveWalls.ActiveWalls_Test</a></p>
+<p><a href=\"AixLib.Fluid.HeatExchangers.Examples.ActiveWalls.ActiveWalls_Test\">AixLib.Fluid.HeatExchangers.Examples.ActiveWalls.ActiveWalls_Test</a></p>
 </html>"));
 end Contributor;

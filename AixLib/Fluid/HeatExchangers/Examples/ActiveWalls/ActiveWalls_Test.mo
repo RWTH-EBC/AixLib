@@ -194,7 +194,7 @@ equation
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),           Documentation(info="<html>
-<p>A simple example to test the models <a href=\"HVAC.Components.ActiveWalls_UC.Panelheating_1D_Dis\">panelheating_1D_Dis1</a> and <a href=\"HVAC.Components.ActiveWalls_UC.Contributor\">contributor</a>.</p>
+<p>A simple example to test the models <a href=\"AixLib.Fluid.HeatExchangers.ActiveWalls.Panelheating_1D_Dis\">panelheating_1D_Dis1</a> and <a href=\"AixLib.Fluid.HeatExchangers.ActiveWalls.Contributor\">contributor</a>.</p>
 </html>",
         revisions="<html>
 <ul>

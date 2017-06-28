@@ -146,6 +146,6 @@ equation
 <ul>
 <li><i>June 15, 2017&nbsp;</i> by Tobias Blacha:<br/>
 Moved into AixLib</li>
-<ul/>
+</ul>
 </html>"));
 end Panel_CoolingAndHeating;
