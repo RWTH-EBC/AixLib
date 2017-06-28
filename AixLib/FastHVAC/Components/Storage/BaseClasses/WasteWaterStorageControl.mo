@@ -5,18 +5,21 @@ model WasteWaterStorageControl
     "max thickness of biofilm, when cleaning should be started";
   parameter Modelica.SIunits.Length s_biofilm_min= 0.0005
     "min thickness of biofilm, that could be reached by cleaning";
-  parameter Modelica.SIunits.Temperature T_WasteWater_min_cleaning = 273.15 + 10
-    "min Temperature of incoming wastewater for starting cleaning process";
+
+  parameter Modelica.SIunits.Temperature T_HeatingWater_lower_max = 273.15 + 30
+    "max Temperature of lowest layer of heatingwater in storage for leaving heatpump on";
   parameter Modelica.SIunits.Temperature T_WasteWater_upper_min = 273.15 + 15
     "min Temperature of highest layer in wastewaterstorage for leaving heatpump on";
+      parameter Modelica.SIunits.Temperature T_WasteWater_min_cleaning = 273.15 + 10
+    "min Temperature of incoming wastewater for starting cleaning process";
   parameter Modelica.SIunits.Temperature T_HeatingWater_min_cleaning = 273.15 + 45
     "min Temperature of highest layer of heatingwater in storage for starting cleaning process";
-  parameter Modelica.SIunits.Temperature T_HeatingWater_lower_max = 273.15 + 30
-    "highest Temperature of lowest layer of heatingwater in storage for leaving heatpump on";
+
   parameter Modelica.SIunits.Density rho_WasteWater = 995
     "density wastewater - should be taken from model !-!-!";
-  parameter Modelica.SIunits.Volume V_storage = 5
-    "Volume of wastewater storage";
+   Modelica.SIunits.Volume V_storage "Volume of wastewater storage";
+  parameter Modelica.SIunits.Length d_storage = 1 "Diameter of wastewater storage";
+  parameter Modelica.SIunits.Length h_storage = 1 "Height of wastewater storage";
   parameter Modelica.SIunits.MassFlowRate dot_m_cond_pump_fix = 0.07
     "Massflowrate of condensor Pump if HP is on";
   parameter Modelica.SIunits.MassFlowRate dot_m_evap_pump_fix = 0.07
@@ -25,9 +28,10 @@ model WasteWaterStorageControl
     "number of layers in wastewater storage";
   parameter Integer n_HeatingWater_layers = 10
     "number of layers in wastewater storage";
-  parameter Integer t_cleaning = 600 "time duration of realeasing water + cleaning process";
+  Integer t_releasing "time duration of realeasing water + cleaning process";
+  parameter Integer t_cleaning = 600 "time duration of cleaning process";
   Integer t_cleaning_end "";
-  Boolean iscleaning "true if cleaning is started";
+  //Boolean iscleaning "true if cleaning is started";
   Boolean cleaning_finished "true if cleaning is finished";
   Integer time_cleaning_start "time when cleaning starts";
   Modelica.SIunits.Volume V_WasteWater
@@ -90,11 +94,6 @@ model WasteWaterStorageControl
     annotation (Placement(transformation(extent={{56,-44},{66,-34}})));
   Modelica.Blocks.Interfaces.BooleanOutput HP_ison annotation (Placement(transformation(extent={{-100,86},
             {-120,106}})));
-  Modelica.Blocks.Interfaces.BooleanOutput biofilm_removing(start=false) annotation (Placement(
-        transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=-90,
-        origin={30,-104})));
 
 
   Modelica.Blocks.Sources.BooleanExpression bypass_forced_opened(y=
@@ -104,6 +103,11 @@ model WasteWaterStorageControl
         bypass_forced_closed_value)
     annotation (Placement(transformation(extent={{12,-42},{32,-22}})));
 
+  Modelica.Blocks.Interfaces.BooleanOutput iscleaning(start=false) annotation (
+      Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=-90,
+        origin={48,-98})));
 initial equation
 time_cleaning_start = 0;
 cleaning_finished=true;
@@ -112,12 +116,15 @@ bypass_forced_opened_value=false;
 bypass_forced_closed_value=false;
 V_WasteWater = 0;
 equation
+  V_storage=Modelica.Constants.pi * d_storage^2/4*h_storage;
 
-  t_cleaning_end = time_cleaning_start + t_cleaning;
+  // Calculation of release time (Torricelli)  --  0.1 =^d_outlet
+ t_releasing = integer((d_storage/0.1)^2*(2*h_storage/9.81*(1-(0.1/d_storage)^4))^0.5);
+ t_cleaning_end = time_cleaning_start + t_releasing +  t_cleaning;
+
   ////////////////////////////////////////////////// Heatpump control
-
   //  if lowest temperature in heatingstorage is lower than a specified max temperature and  wastewater temperature is high enough and no cleaning is in procedure than set heatingpump on
- if                                                                                                                                  not iscleaning then
+ if T_WasteWaterStorage[n_WasteWater_layers]>T_WasteWater_upper_min and not iscleaning then
       /*T_HeatingWaterStorage[1]<T_HeatingWater_lower_max and T_WasteWaterStorage[n_WasteWater_layers]>T_WasteWater_upper_min and*/
 
    HP_ison=true;
@@ -134,51 +141,6 @@ else
   dot_m_cond_pump = 0;
   dot_m_evap_pump = 0;
 end if;
-
-
-//working code below:
-  ////////////////////////////////////////////////// Cleaning
-
-//    // iniate cleaning if conditions are ok
-// when T_HeatingWaterStorage[n_HeatingWater_layers] > T_HeatingWater_min_cleaning                                                                        and  wastewatertemperature.T > T_WasteWater_min_cleaning and not (pre(iscleaning)) and s_biofilm>s_biofilm_max then
-//                                                                                 /*and (rho_WasteWater * V_storage)/wastewatermassFlowRate.dotm < 600*/
-//    iscleaning =true;
-//    time_cleaning_start=time;
-//    // reinitialize after cleaning is done
-//   // V_WasteWater=0;
-// elsewhen pre(cleaning_finished) then
-//   iscleaning=false;
-//   time_cleaning_start=0;
-//   //V_WasteWater=0;
-// end when;
-//
-//
-//     // cleaning procedure itself
-//   when iscleaning and time <= t_cleaning_end then
-//     //first release wastewater from tank and clean (fixed time) and hold bypass opened
-//    // if  then
-//       cleaning_finished=false;
-//       der(V_WasteWater)=0;
-//       bypass_forced_opened_value=true;
-//       bypass_forced_closed_value=false;
-//       biofilm_removing=true;
-//      // after releasing wastewater and cleaning: start refill and hold bypass closed
-//   elsewhen iscleaning and time >t_cleaning_end then
-//      bypass_forced_opened_value= false;
-//      biofilm_removing=false;
-//        if V_WasteWater < V_storage then
-//          cleaning_finished=false;
-//          der(V_WasteWater) = wastewatermassFlowRate.dotm/rho_WasteWater;
-//          bypass_forced_closed_value=true;
-//
-//      // after refill go back to normal operation mode
-//        else
-//          cleaning_finished=true;
-//          der(V_WasteWater)=0;
-//          bypass_forced_closed_value=false;
-//          reinit(V_WasteWater,0);
-//        end if;
-//  end when;
 
    // iniate cleaning if conditions are ok
 when T_HeatingWaterStorage[n_HeatingWater_layers] > T_HeatingWater_min_cleaning                                                                        and  wastewatertemperature.T > T_WasteWater_min_cleaning and not (pre(iscleaning)) and s_biofilm>s_biofilm_max then
@@ -201,12 +163,12 @@ end when;
       der(V_WasteWater)=0;
       bypass_forced_opened_value=true;
       bypass_forced_closed_value=false;
-      biofilm_removing=true;
+     // biofilm_removing=true;
 
      // after releasing wastewater and cleaning: start refill and hold bypass closed
   elsewhen iscleaning and time >t_cleaning_end  and V_WasteWater < V_storage then
      bypass_forced_opened_value= false;
-     biofilm_removing=false;
+     //biofilm_removing=false;
          cleaning_finished=false;
          der(V_WasteWater) = wastewatermassFlowRate.dotm/rho_WasteWater;
          bypass_forced_closed_value=true;
@@ -214,7 +176,7 @@ end when;
      // after refill go back to normal operation mode
   elsewhen iscleaning and V_WasteWater >=V_storage then
          bypass_forced_opened_value= false;
-         biofilm_removing=false;
+         //biofilm_removing=false;
          cleaning_finished=true;
          der(V_WasteWater)=0;
          bypass_forced_closed_value=false;

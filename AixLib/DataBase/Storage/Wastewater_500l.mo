@@ -23,7 +23,7 @@ record Wastewater_500l "Wastewater storage data for a 500 l storage"
     roughness=2.5e-5,
     pipeHC1=AixLib.DataBase.Pipes.Copper.Copper_22x1_5(),
     pipeHC2=AixLib.DataBase.Pipes.Copper.Copper_28x1(),
-    lengthHC1=20,
+    lengthHC1=Modelica.Constants.pi*dTank*hTank/(0.13),
     lengthHC2=Modelica.Constants.eps);
 
   annotation (Icon(graphics),               Documentation(info="<html>

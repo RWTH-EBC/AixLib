@@ -174,6 +174,7 @@ public
         Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a
                            out
     annotation (Placement(transformation(extent={{90,90},{110,110}}),iconTransformation(extent={{50,70},{70,90}})));
+
   BaseClasses.HeatingCoil heatingCoil1(
     T_start=T_start,
     dis_HC=dis_HC1,

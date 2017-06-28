@@ -58,6 +58,7 @@ public
     "Number of loading cycle connection pairs"
      annotation (Dialog(tab="Connections"));
 
+
   /* ***************Heating Coil Section********************************/
 
    parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_HC1=20
@@ -74,6 +75,18 @@ public
     "Cleaning velocity of biofilm in m/s";
   parameter Modelica.SIunits.Length s_biofilm_0 = 0.0001
     "Thikness of biofilm at simulation start";
+
+      /* *******************************************************************
+      Calculating of calculated biofilm thickness
+      Measuring of biofilm thickniss isn't possible in reality, so it has to be calculated
+     ******************************************************************* */
+//        Modelica.SIunits.Length s_biofilm_calc(start=s_biofilm_0, min=0);
+        Modelica.SIunits.HeatFlowRate Q_brine;
+//        Real dTln;
+//        Modelica.SIunits.ThermalConductance kA;
+//        Modelica.SIunits.CoefficientOfHeatTransfer alpha_i;
+//   parameter Modelica.SIunits.Length s_biofilm_max = 0.005
+//     "max thickness of biofilm, when cleaning should be started";
 
   /* *******************************************************************
       Final Parameters
@@ -221,15 +234,44 @@ Heat transfer model for heat transfer between two fluid layers.
         origin={43,106})));
 
 
+  AixLib.FastHVAC.Components.Sensors.TemperatureSensor T_brine_flow
+    annotation (Placement(transformation(extent={{-88,76},{-78,86}})));
+  AixLib.FastHVAC.Components.Sensors.MassFlowSensor mdot_brine
+    annotation (Placement(transformation(extent={{-66,24},{-78,36}})));
+  AixLib.FastHVAC.Components.Sensors.TemperatureSensor T_brine_return
+    annotation (Placement(transformation(extent={{-82,26},{-90,34}})));
+initial equation
+  //  s_biofilm_calc=s_biofilm_0;
+  //dTln=1;
+
 equation
+      Q_brine = mdot_brine.dotm*mediumHC1.c*(T_brine_return.T-T_brine_flow.T);
+//     Q_brine=kA*dTln;
+//      dTln=((T_layers[n]-T_brine_flow.T)-(T_layers[1]-T_brine_return.T))/log((T_layers[n]-T_brine_flow.T)/(T_layers[1]-T_brine_return.T));
+//      if not biofilm_removing then
+//      kA=(2*Modelica.Constants.pi*data.lengthHC1/2)/((2/alpha_i/data.pipeHC1.d_i)
+//        + (2/((data.pipeHC1.d_o + 2*s_biofilm_calc)*alpha_HC1)) + (1/lambda_film*log((
+//       data.pipeHC1.d_o + 2*s_biofilm_calc)/data.pipeHC1.d_o)) + (1/data.pipeHC1.lambda
+//       *log(data.pipeHC1.d_o/data.pipeHC1.d_i)));
+//      else
+//     s_biofilm_calc = s_biofilm_0;
+//      end if;
+//      alpha_i=heatingCoil1.conv_HC1_Inside[1].alpha;
 
-//   // calculate and set temperature in tank to mean temperature during refill
-//   when setMeanTemperature then
-//      for i in 1:n loop
-//         layer[i].T=refill_mean_temperature;
-//      end for;
-//   end when;
 
+
+
+//     if T_layers[n]-T_brine_flow.T<0 or T_layers[1]-T_brine_return.T < 0 then
+//       dTln = 5;
+//       else
+//     end if;
+//
+    //alpha_i=4289;
+    //        and not initial() then
+//     if not biofilm_removing and not initial() then
+//      else
+//      s_biofilm_calc=s_biofilm_0;
+//     end if;
 
   der(Heat_loss) = out.Q_flow/(1000*3600);
 
@@ -341,18 +383,22 @@ connect(heatTransfer.therm, layer.port);
       points={{120,-50},{96,-50},{96,-26},{118,-26}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(port_HC1_in, heatingCoil1.enthalpyPort_a1) annotation (Line(
-      points={{-100,80},{-78,80},{-78,69.6}},
-      color={176,0,0},
-      smooth=Smooth.None));
-  connect(heatingCoil1.enthalpyPort_b1, port_HC1_out) annotation (Line(
-      points={{-78,50.8},{-78,40},{-100,40}},
-      color={176,0,0},
-      smooth=Smooth.None));
-  connect(heatingCoil1.s_biofilm, s_biofilm) annotation (Line(points={{-71.2,49.2},
-          {-71.2,44},{-54,44},{-54,84},{104,84},{104,78}}, color={0,0,127}));
   connect(biofilm_removing, heatingCoil1.biofilm_removing) annotation (Line(
         points={{43,106},{43,86},{-71.4,86},{-71.4,70.4}}, color={255,0,255}));
+  connect(port_HC1_in, T_brine_flow.enthalpyPort_a) annotation (Line(points={{-100,
+          80},{-87.4,80},{-87.4,80.95}}, color={176,0,0}));
+  connect(T_brine_flow.enthalpyPort_b, heatingCoil1.enthalpyPort_a1)
+    annotation (Line(points={{-78.5,80.95},{-78.5,75.475},{-78,75.475},{-78,69.6}},
+        color={176,0,0}));
+  connect(port_HC1_out, T_brine_return.enthalpyPort_b) annotation (Line(points={
+          {-100,40},{-94,40},{-94,29.96},{-89.6,29.96}}, color={176,0,0}));
+  connect(heatingCoil1.enthalpyPort_b1, mdot_brine.enthalpyPort_a) annotation (
+      Line(points={{-78,50.8},{-72,50.8},{-72,36},{-60,36},{-60,29.94},{-66.72,29.94}},
+        color={176,0,0}));
+  connect(mdot_brine.enthalpyPort_b, T_brine_return.enthalpyPort_a) annotation (
+     Line(points={{-77.4,29.94},{-79.7,29.94},{-79.7,29.96},{-82.48,29.96}},
+        color={176,0,0}));
+  connect(heatingCoil1.s_biofilm, s_biofilm) annotation (Line(points={{-71.2,49.2},{86,49.2},{86,78},{104,78}}, color={0,0,127}));
  annotation (Placement(transformation(extent={{-110,-90},{-90,-70}}),
         iconTransformation(extent={{-90,-66},{-76,-52}})),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
