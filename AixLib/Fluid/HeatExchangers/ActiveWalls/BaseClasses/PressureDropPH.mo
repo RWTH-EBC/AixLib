@@ -26,7 +26,7 @@ port_b.p = if noEvent(port_a.m_flow>=0) then port_a.p - Tubelength*m*(port_a.m_f
 <p>The pressure drop is calculated according to the following equation [1].</p>
 <p><img src=\"modelica://HVAC/Images/equations/equation-8xFaklFH.png\" alt=\"Delta_P = K*m_flow^2\"/></p>
 <p>In order to determine <i>K, </i>manufacturer data is used and : </p>
-<p><img src=\"modelica://HVAC/Images/PressureDrop.bmp\" alt="text"/></p>
+<p><img src=\"modelica://HVAC/Images/PressureDrop.bmp\" alt=\"Pressure Drop\"/></p>
 <p>With the help onf the Matlab Curve Fit Toolbox a curve y = K*x^2 is fitted through several selected points.</p>
 <h4><span style=\"color:#008000\">Reference</span></h4>
 <p>Source:</p>

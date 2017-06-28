@@ -355,8 +355,6 @@ annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Modification of Panelheating_1D_Dis.</p>
 <p>Panels are connected in parallel in sets of x.</p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars2.png\" alt="text"/></p>
 <p>The discretisation is the number of parallel connections.</p>
 <p>The set of x gives the tube length and the volume of water for every discretisation.</p>
 <p>The model can work for only heating, only cooling, or heating and cooling, both as floor or ceiling. The combination of floor and cooling wouldn&apos;t make too much sense.</p>
