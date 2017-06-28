@@ -4,8 +4,6 @@ model Carnot_TCon
  extends AixLib.Fluid.Chillers.BaseClasses.PartialCarnot_T(
    final COP_is_for_cooling = false,
    final QEva_flow_nominal = -QCon_flow_nominal*(COP_nominal-1)/COP_nominal,
-   effInpEva=AixLib.Fluid.Types.EfficiencyInput.port_a,
-   effInpCon=AixLib.Fluid.Types.EfficiencyInput.port_b,
    PEle(y=QCon_flow/COP),
    redeclare HeatExchangers.HeaterCooler_T con(
     final from_dp=from_dp1,
@@ -93,7 +91,7 @@ the condenser temperature <i>T<sub>con,0</sub></i>, in which
 case the model computes the Carnot effectivness as
 </p>
 <p align=\"center\" style=\"font-style:italic;\">
-&eta;<sub>Carnot,0</sub> = 
+&eta;<sub>Carnot,0</sub> =
   COP<sub>0</sub>
 &frasl;  (T<sub>con,0</sub> &frasl; (T<sub>con,0</sub>-T<sub>eva,0</sub>)).
 </p>
@@ -143,12 +141,9 @@ The maximum heating capacity is set by the parameter <code>QCon_flow_max</code>,
 which is by default set to infinity.
 </p>
 <p>
-By default, the coefficient of performance depends on the
-evaporator entering temperature and the condenser leaving
-temperature.
-This can be changed with the parameters
-<code>effInpEva</code> and
-<code>effInpCon</code>.
+The coefficient of performance depends on the
+evaporator and condenser leaving temperature
+since otherwise the second law of thermodynamics may be violated.
 </p>
 <h4>Notes</h4>
 <p>
@@ -160,11 +155,27 @@ AixLib.Fluid.Chillers.Examples.Carnot_TEva</a>.
 revisions="<html>
 <ul>
 <li>
+January 3, 2017, by Michael Wetter:<br/>
+Removed parameters
+<code>effInpEva</code> and <code>effInpCon</code>
+and updated documentation.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/497\">
+issue 497</a>.
+</li>
+<li>
+August 8, 2016, by Michael Wetter:<br/>
+Changed default temperature to compute COP to be the leaving temperature as
+use of the entering temperature can violate the 2nd law if the temperature
+lift is small.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/497\">
+Annex 60, issue 497</a>.
+</li>
+<li>
 November 25, 2015 by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}})));
+</html>"));
 end Carnot_TCon;
