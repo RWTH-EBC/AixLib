@@ -9,16 +9,16 @@ record Iso0pc "Coating, no insulation"
   // would yield ~1mm coating for a DN25 pipe
 
   annotation (Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>0&percnt; isolation. </p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars3.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
+<h4><font color=\"#008000\">References</font></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 </html>",
       revisions="<html>
-<p><ul>
+<ul>
+<li><i>April 25, 2017 </i>by Tobias Blacha:<br/>
+Moved into AixLib</li>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
-</ul></p>
+</ul>
 </html>"));
 end Iso0pc;
