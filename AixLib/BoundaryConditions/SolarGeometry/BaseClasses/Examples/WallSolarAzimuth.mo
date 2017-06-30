@@ -7,7 +7,7 @@ extends Modelica.Icons.Example;
     til=1.5707963267949) "solar incidence angle"
     annotation (Placement(transformation(extent={{-20,-40},{0,-20}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=
-        "modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")
+        "modelica://AixLib/Resources/WeatherData/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")
     "Weather data"
     annotation (Placement(transformation(extent={{-100,0},{-80,20}})));
   AixLib.BoundaryConditions.WeatherData.Bus weaBus "Weather bus"
