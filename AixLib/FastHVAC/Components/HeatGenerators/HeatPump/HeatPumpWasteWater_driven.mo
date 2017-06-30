@@ -16,9 +16,9 @@ model HeatPumpWasteWater_driven
     Modelica.SIunits.HeatFlowRate total_heat;
 
   Components.HeatGenerators.HeatPump.HeatPump heatPump(cap_calcType=2,
-      data_table=DataBase.HeatPump.EN255.Vitocal350BWH110(),
     Pel_ouput=true,
-    CoP_output=true)
+    CoP_output=true,
+    data_table=DataBase.HeatPump.EN255.Vitocal350BWH110())
     annotation (Placement(transformation(extent={{-36,-76},{-66,-56}})));
   Components.Storage.WasteWaterStorage wasteWaterStorage(
     n_load_cycles=1,
@@ -31,10 +31,10 @@ model HeatPumpWasteWater_driven
     n_HC1_up=10,
     load_cycles=[10,1],
     alpha_HC1=200,
-    T_start=283.15,
+    T_start=303.15,
     T_start_HC=273.15,
-    T_start_wall=288.15,
-    T_start_ins=288.15)
+    T_start_wall=293.15,
+    T_start_ins=293.15)
     annotation (Placement(transformation(extent={{54,-68},{96,-26}})));
   Components.Sinks.Vessel          vessel1
                                           annotation (Placement(transformation(
@@ -62,8 +62,8 @@ model HeatPumpWasteWater_driven
     dot_m_evap_pump_fix=0.3,
     d_storage=wasteWaterStorage.data.dTank,
     h_storage=wasteWaterStorage.data.hTank,
-    T_WasteWater_upper_min=273.15 + 7,
-    t_cleaning=600)
+    t_cleaning=600,
+    T_WasteWater_upper_min=273.15 + 10)
     annotation (Placement(transformation(extent={{56,26},{90,60}})));
   Interfaces.EnthalpyPort_a toHeatPump
     annotation (Placement(transformation(extent={{-104,-56},{-96,-48}})));
