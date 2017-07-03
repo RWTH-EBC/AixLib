@@ -1379,10 +1379,10 @@ AixLib\Resources\src\convertEPW\doc\stylesheet.css
 AixLib\Resources\src\convertEPW\src\ConvertWeatherData.java
 AixLib\Resources\src\convertEPW\src\Makefile
 AixLib\Resources\src\convertEPW\src\Manifest.txt
-AixLib\Resources\weatherdata\USA_CA_San.Francisco.Intl.AP.724940_TMY3.epw
-AixLib\Resources\weatherdata\USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos
-AixLib\Resources\weatherdata\USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw
-AixLib\Resources\weatherdata\USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos
+AixLib\Resources\WeatherData\USA_CA_San.Francisco.Intl.AP.724940_TMY3.epw
+AixLib\Resources\WeatherData\USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos
+AixLib\Resources\WeatherData\USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw
+AixLib\Resources\WeatherData\USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos
 AixLib\Resources\www\navigation.png
 AixLib\ThermalZones\ReducedOrder\EquivalentAirTemperature\BaseClasses\PartialVDI6007.mo
 AixLib\ThermalZones\ReducedOrder\EquivalentAirTemperature\BaseClasses\package.mo
