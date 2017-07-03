@@ -1,3 +1,12 @@
+*.mat
+buildlog.txt
+dsfinal.txt
+dsin.txt
+dslog.txt
+dsmodel.c
+dymosim.exe
+dymosim.exp
+dymosim.lib
 *.bak-mo
 *.pyc
 *.log
