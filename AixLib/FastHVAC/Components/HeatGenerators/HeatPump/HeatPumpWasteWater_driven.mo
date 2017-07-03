@@ -62,8 +62,8 @@ model HeatPumpWasteWater_driven
     dot_m_evap_pump_fix=0.3,
     d_storage=wasteWaterStorage.data.dTank,
     h_storage=wasteWaterStorage.data.hTank,
-    t_cleaning=600,
-    T_WasteWater_upper_min=273.15 + 10)
+    T_WasteWater_upper_min=273.15 + 10,
+    t_cleaning=3600)
     annotation (Placement(transformation(extent={{56,26},{90,60}})));
   Interfaces.EnthalpyPort_a toHeatPump
     annotation (Placement(transformation(extent={{-104,-56},{-96,-48}})));

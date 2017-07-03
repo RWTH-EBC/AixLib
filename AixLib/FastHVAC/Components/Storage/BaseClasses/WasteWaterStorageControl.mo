@@ -29,7 +29,7 @@ model WasteWaterStorageControl
   parameter Integer n_HeatingWater_layers = 10
     "number of layers in wastewater storage";
   Integer t_releasing "time duration of realeasing water + cleaning process";
-  parameter Integer t_cleaning = 600 "time duration of cleaning process";
+  parameter Integer t_cleaning = 3600 "time duration of cleaning process";
   Integer t_cleaning_end "";
   //Boolean iscleaning "true if cleaning is started";
   Boolean cleaning_finished "true if cleaning is finished";
@@ -71,7 +71,7 @@ model WasteWaterStorageControl
   Modelica.Blocks.Interfaces.RealInput T_HeatingWaterStorage[n_HeatingWater_layers]
     annotation (Placement(transformation(extent={{-116,60},{-92,86}})));
 
-  Modelica.Blocks.Interfaces.RealInput s_biofilm(min=0)
+  Modelica.Blocks.Interfaces.RealInput s_biofilm
     annotation (Placement(transformation(extent={{126,16},{86,56}})));
   Sensors.TemperatureSensor wastewatertemperature annotation (Placement(
         transformation(
@@ -124,9 +124,8 @@ equation
 
   ////////////////////////////////////////////////// Heatpump control
   //  if lowest temperature in heatingstorage is lower than a specified max temperature and  wastewater temperature is high enough and no cleaning is in procedure than set heatingpump on
- if T_WasteWaterStorage[n_WasteWater_layers]>T_WasteWater_upper_min                                                                                 and not iscleaning then
+ if T_WasteWaterStorage[n_WasteWater_layers]>T_WasteWater_upper_min  and not iscleaning then
                                                                       /*and T_HeatingWaterStorage[n_HeatingWater_layers]<T_HeatingWater_lower_max*/
-
    HP_ison=true;
  else
    HP_ison=false;
@@ -143,7 +142,9 @@ else
 end if;
 
    // iniate cleaning if conditions are ok
-when T_HeatingWaterStorage[n_HeatingWater_layers] > T_HeatingWater_min_cleaning                                                                                                                                     and not (pre(iscleaning)) and s_biofilm>s_biofilm_max then
+   when                                                                 not (pre(iscleaning)) and s_biofilm>s_biofilm_max then
+        /*T_HeatingWaterStorage[10] > T_HeatingWater_min_cleaning and*/
+
                                                                                                                                                        /*and  wastewatertemperature.T > T_WasteWater_min_cleaning*/
                                                                                 /*and (rho_WasteWater * V_storage)/wastewatermassFlowRate.dotm < 600*/
    iscleaning =true;

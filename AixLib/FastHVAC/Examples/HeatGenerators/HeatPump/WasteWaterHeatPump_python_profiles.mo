@@ -8522,12 +8522,7 @@ model WasteWaterHeatPump_python_profiles
         31501560,308.15; 31501620,308.15; 31504980,308.15; 31505040,308.15;
         31519860,308.15; 31519920,308.15; 31528260,308.15; 31528320,308.15;
         31530480,308.15; 31530540,308.15])
-    annotation (Placement(transformation(extent={{-56,12},{-76,32}})));
-  Modelica.Blocks.Sources.Pulse pulse(
-    amplitude=0.0113,
-    width=30,
-    period=120)
-    annotation (Placement(transformation(extent={{146,-130},{126,-110}})));
+    annotation (Placement(transformation(extent={{-30,24},{-50,44}})));
   Modelica.Blocks.Sources.TimeTable massflowgrey1(table=[0,0; 22500,
         0.0228753294516724; 23400,0.0211446029977979; 24300,0.0512797407196225;
         25200,0.0282258127623425; 26100,0.0728923315918382; 27000,
@@ -17609,7 +17604,7 @@ model WasteWaterHeatPump_python_profiles
         0.0120757969207057; 31527000,0.00517704650893154; 31527900,0; 31528800,
         0.0131159061681306; 31529700,0; 31530600,0.00755977534997524; 31531500,
         0.00525322197442671; 31532400,0])
-    annotation (Placement(transformation(extent={{38,-136},{58,-116}})));
+    annotation (Placement(transformation(extent={{114,-110},{94,-90}})));
 equation
   connect(dotm_heatingwater_load.y, WasteWater_in.dotm) annotation (Line(points=
          {{-14.5,-2.35},{-5.5,-2.35},{-5.5,-5.4},{-2.82,-5.4}}, color={0,0,127}));
@@ -17649,14 +17644,14 @@ equation
     annotation (Line(points={{-4.04,-53.6},{-18,-53.6},{-18,-54},{-30,-54},{-30,
           -55.84},{-56,-55.84}},
                     color={176,0,0}));
+  connect(tGrey.y, fluidSource.T_fluid) annotation (Line(points={{-51,34},{-68,
+          34},{-68,5},{-87.38,5}}, color={0,0,127}));
   connect(massflowgrey.y, fluidSource.dotm) annotation (Line(points={{-129,28},
-          {-98,28},{-98,5},{-94.86,5}}, color={0,0,127}));
-  connect(tGrey.y, fluidSource.T_fluid) annotation (Line(points={{-77,22},{-82,
-          22},{-82,5},{-87.38,5}}, color={0,0,127}));
-  connect(massflowgrey1.y, WasteWater_in1.dotm) annotation (Line(points={{59,
-          -126},{68,-126},{68,-108},{48,-108},{48,-96.6}}, color={0,0,127}));
+          {-112,28},{-112,5},{-94.86,5}}, color={0,0,127}));
+  connect(massflowgrey1.y, WasteWater_in1.dotm) annotation (Line(points={{93,
+          -100},{66,-100},{66,-118},{66,-96.6},{48,-96.6}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    experiment(StopTime=5.256e+006),
+    experiment(StopTime=5.256e+006, Interval=60),
     __Dymola_experimentSetupOutput(outputs=false, events=false));
 end WasteWaterHeatPump_python_profiles;
