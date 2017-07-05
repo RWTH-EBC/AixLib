@@ -56,8 +56,6 @@ equation
             fillPattern =                                                                                                   FillPattern.Solid), Line(points = {{-8, 36}, {-8, -72}, {-72, -72}, {-72, 36}, {-8, 36}}, color = {0, 0, 0}), Line(points = {{72, 36}, {72, -72}, {10, -72}, {10, 36}, {72, 36}}, color = {0, 0, 0}), Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 0})}), Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>The <b>WindowSimple</b> model represents a window described by the thermal transmission coefficient and the coefficient of solar energy transmission. </p>
- <h4><font color=\"#008000\">Level of Development</font></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><font color=\"#008000\">Concept</font></h4>
  <p>Phenomena being simulated: </p>
  <ul>
