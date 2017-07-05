@@ -490,8 +490,6 @@ equation
 <li>Polynom<br/>a) depending on evaporator input temperature, condenser output temperature and variable speed (via conditional speed connector) for capacity controlled heat pumps <br/>b) depending on evaporator input temperature, condenser output temperature and nominal speed for on/off-controlled heat pump </li>
 <li>Table data according for on/off-controlled heat pump, depending on evaporator input temperature, condenser output temperature </li>
 </ol>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\"
     alt=\"stars: 3 out of 5\"/></p>
 <h4><span style=\"color:#008000\">Assumptions</span></h4>
 <p>Correction models of the calculation can be activated that effect the efficiency or the start-up and shut-off behavior of the heat pump. </p>

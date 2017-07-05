@@ -246,8 +246,6 @@ fluid-streams into one resulting fluid-stream.
 It is based on two seperate SimpleValve from the AixLib Library.
 The Model features a RealInput which controls the mixture of the streams in a
 range between 0 and 1. A filtered option is available.</p>
-<h4><font color=\"#008000\">Level of Development</font></h4>
-<p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\"
     alt=\"stars: 3 out of 5\"/></p>
 <h4><span style=\"color:#008000\">Assumptions</span></h4>
 <p>The model assumes that pressure loss and friction phenomena of a

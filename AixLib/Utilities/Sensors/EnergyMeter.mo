@@ -20,8 +20,6 @@ equation
 <p><b><span style=\"color: #008000;\">Overview</span></b> </p>
 <p>Model of an energy meter (integration over time of the Real input connector [W]). </p>
 <p><span style=\"font-size: 14pt;\">BE CAREFUL:</span> Model<b> might slow down the simulation speed</b> since unnecessaries state events might be triggered.</p><p>So please check prior whether it is worth to implement the meter.</p>
-<p><b><span style=\"color: #008000;\">Level of Development</span></b> </p>
-<p><img src=\"modelica://AixLib/Resources/Images/Stars/stars2.png\" alt=\"stars: 2 out of 5\"/> </p>
 </html>",  revisions="<html>
  <ul>
  <li><i>October 11, 2016&nbsp;</i> by Philipp Mehrfeld:<br/>Removed two old models and combined to this one. Give input connector unit [W].</li>

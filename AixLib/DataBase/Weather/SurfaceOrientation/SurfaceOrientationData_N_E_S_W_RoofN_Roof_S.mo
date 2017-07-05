@@ -7,8 +7,6 @@ record SurfaceOrientationData_N_E_S_W_RoofN_Roof_S
   annotation(Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Surface Orientation Data for N,E,S,W,Roof_N and Roof_S suitable to standard OFD.</p>
- <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>Data in this set: </p>
  <table summary=\"Data\" cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
