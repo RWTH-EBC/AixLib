@@ -23,7 +23,6 @@ model HeatPumpWasteWater_driven
   Components.Storage.WasteWaterStorage wasteWaterStorage(
     n_load_cycles=1,
     n_unload_cycles=1,
-    data=AixLib.DataBase.Storage.Wastewater_500l(),
     unload_cycles=[1,10],
     n_HC1_low=1,
     n=10,
@@ -31,10 +30,13 @@ model HeatPumpWasteWater_driven
     n_HC1_up=10,
     load_cycles=[10,1],
     alpha_HC1=200,
+    redeclare model HeatTransfer =
+        Storage.BaseClasses.HeatTransfer_buoyancy_Wetter,
     T_start=303.15,
     T_start_HC=273.15,
     T_start_wall=293.15,
-    T_start_ins=293.15)
+    T_start_ins=293.15,
+    data=DataBase.Storage.Wastewater_500l())
     annotation (Placement(transformation(extent={{54,-68},{96,-26}})));
   Components.Sinks.Vessel          vessel1
                                           annotation (Placement(transformation(
@@ -145,13 +147,13 @@ connect(  fluidSource1.enthalpyPort_b, wasteWaterStorage.UnloadingCycle_In[1])
   connect(wasteWaterStorage.LoadingCycle_Out[1], fromWasteWaterStorage1)
     annotation (Line(points={{70.8,-68},{70,-68},{70,-100}}, color={176,0,0}));
   connect(wasteWaterStorageControl.iscleaning, wasteWaterStorage.biofilm_removing)
-    annotation (Line(points={{81.16,26.34},{81.16,2.17},{84.03,2.17},{84.03,
+    annotation (Line(points={{81.5,24.98},{81.5,2.17},{84.03,2.17},{84.03,
           -24.74}}, color={255,0,255}));
-  connect(wasteWaterStorage.s_biofilm, wasteWaterStorageControl.s_biofilm)
-    annotation (Line(points={{96.84,-30.62},{120,-30.62},{120,46},{91.02,46},{
-          91.02,49.12}}, color={0,0,127}));
   connect(heatPump.Pel_out, fuelCounter.fuel_in) annotation (Line(points={{-46,
           -74.4},{-46,-88},{-12,-88}}, color={0,0,127}));
+  connect(wasteWaterStorage.s_biofilm, wasteWaterStorageControl.s_biofilm)
+    annotation (Line(points={{96.84,-30.62},{116,-30.62},{116,30},{91.36,30},{
+          91.36,27.36}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})));
 end HeatPumpWasteWater_driven;

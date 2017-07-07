@@ -6,7 +6,7 @@ model WasteWaterStorageControl
   parameter Modelica.SIunits.Length s_biofilm_min= 0.0005
     "min thickness of biofilm, that could be reached by cleaning";
 
-  parameter Modelica.SIunits.Temperature T_HeatingWater_lower_max = 273.15 + 61
+  parameter Modelica.SIunits.Temperature T_HeatingWater_set = 273.15 + 61
     "max Temperature of third highest layer of heatingwater in storage for leaving heatpump on";
   parameter Modelica.SIunits.Temperature T_WasteWater_upper_min = 273.15 + 15
     "min Temperature of highest layer in wastewaterstorage for leaving heatpump on";
@@ -16,7 +16,7 @@ model WasteWaterStorageControl
     "min Temperature of highest layer of heatingwater in storage for starting cleaning process";
 
   parameter Modelica.SIunits.Density rho_WasteWater = 995
-    "density wastewater - should be taken from model !-!-!";
+    "density wastewater";
    Modelica.SIunits.Volume V_storage "Volume of wastewater storage";
   parameter Modelica.SIunits.Length d_storage = 1 "Diameter of wastewater storage";
   parameter Modelica.SIunits.Length h_storage = 1 "Height of wastewater storage";
@@ -72,7 +72,7 @@ model WasteWaterStorageControl
     annotation (Placement(transformation(extent={{-116,60},{-92,86}})));
 
   Modelica.Blocks.Interfaces.RealInput s_biofilm
-    annotation (Placement(transformation(extent={{126,16},{86,56}})));
+    annotation (Placement(transformation(extent={{128,-112},{88,-72}})));
   Sensors.TemperatureSensor wastewatertemperature annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
@@ -107,7 +107,23 @@ model WasteWaterStorageControl
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
-        origin={48,-98})));
+        origin={50,-106})));
+  Modelica.Blocks.Logical.OnOffController onOffController(bandwidth=5)
+    annotation (Placement(transformation(extent={{-34,78},{-48,92}})));
+  Modelica.Blocks.Logical.And and1
+    annotation (Placement(transformation(extent={{-62,86},{-76,100}})));
+  Modelica.Blocks.Sources.Constant set_Temperature_Heating_Storage(k=
+        T_HeatingWater_set)
+    annotation (Placement(transformation(extent={{-14,82},{-24,92}})));
+  Modelica.Blocks.Logical.Greater greater
+    annotation (Placement(transformation(extent={{-48,52},{-38,62}})));
+  Modelica.Blocks.Sources.Constant min_Temperature_WasteWater(k=
+        T_WasteWater_upper_min)
+    annotation (Placement(transformation(extent={{-68,42},{-58,52}})));
+  Modelica.Blocks.Logical.And and3
+    annotation (Placement(transformation(extent={{-24,58},{-34,72}})));
+  Modelica.Blocks.Logical.Not not1
+    annotation (Placement(transformation(extent={{-6,60},{-16,72}})));
 initial equation
 time_cleaning_start = 0;
 cleaning_finished=true;
@@ -119,17 +135,17 @@ equation
   V_storage=Modelica.Constants.pi * d_storage^2/4*h_storage;
 
   // Calculation of release time (Torricelli)  --  0.1 =^d_outlet
- t_releasing = integer((d_storage/0.1)^2*(2*h_storage/9.81*(1-(0.1/d_storage)^4))^0.5);
+ t_releasing = integer((d_storage/0.1)^2*(2*h_storage/Modelica.Constants.g_n*(1-(0.1/d_storage)^4))^0.5);
  t_cleaning_end = time_cleaning_start + t_releasing +  t_cleaning;
 
-  ////////////////////////////////////////////////// Heatpump control
-  //  if lowest temperature in heatingstorage is lower than a specified max temperature and  wastewater temperature is high enough and no cleaning is in procedure than set heatingpump on
- if T_WasteWaterStorage[n_WasteWater_layers]>T_WasteWater_upper_min  and not iscleaning then
-                                                                      /*and T_HeatingWaterStorage[n_HeatingWater_layers]<T_HeatingWater_lower_max*/
-   HP_ison=true;
- else
-   HP_ison=false;
- end if;
+//   ////////////////////////////////////////////////// Heatpump control
+//   //  if lowest temperature in heatingstorage is lower than a specified max temperature and  wastewater temperature is high enough and no cleaning is in procedure than set heatingpump on
+//  if T_WasteWaterStorage[n_WasteWater_layers]>T_WasteWater_upper_min and T_HeatingWaterStorage[n_HeatingWater_layers-5]<T_HeatingWater_lower_max and not iscleaning then
+//                                                                       /**/
+//    HP_ison=true;
+//  else
+//    HP_ison=false;
+//  end if;
 
   ////////////////////////////////////////////////// Evaporator and condensor pump control
 
@@ -142,11 +158,12 @@ else
 end if;
 
    // iniate cleaning if conditions are ok
-   when                                                                 not (pre(iscleaning)) and s_biofilm>s_biofilm_max then
+   when wastewatermassFlowRate.dotm/(rho_WasteWater * V_storage) > 1/6000 and not (pre(iscleaning)) and s_biofilm>s_biofilm_max then
+        /**/
         /*T_HeatingWaterStorage[10] > T_HeatingWater_min_cleaning and*/
 
                                                                                                                                                        /*and  wastewatertemperature.T > T_WasteWater_min_cleaning*/
-                                                                                /*and (rho_WasteWater * V_storage)/wastewatermassFlowRate.dotm < 600*/
+                                                                                /**/
    iscleaning =true;
    time_cleaning_start=time;
    // reinitialize after cleaning is done
@@ -209,9 +226,6 @@ end when;
   connect(wastewatermassFlowRate.enthalpyPort_b, wastewatertemperature.enthalpyPort_a)
     annotation (Line(points={{-0.1,33},{-0.1,33},{-0.1,8.8},{-4.1,8.8}},
                                                                  color={176,0,0}));
-  connect(T_WasteWaterStorage[1], less.u2) annotation (Line(points={{-104,37.6},
-          {-72,37.6},{-72,-50},{16.8,-50},{16.8,-46.8}},
-                                                       color={0,0,127}));
   connect(bypass_forced_closed.y, nor.u2) annotation (Line(points={{33,-32},{34,
           -32},{34,-34.8},{36.8,-34.8}}, color={255,0,255}));
   connect(less.y, and2.u2) annotation (Line(points={{30.6,-42},{44,-42},{44,-43},
@@ -226,6 +240,29 @@ end when;
           {36,-30},{36.8,-30}}, color={255,0,255}));
   connect(bypass_forced_opened.y, or1.u1) annotation (Line(points={{35,-8},{52,-8},
           {52,-9},{71,-9}}, color={255,0,255}));
+  connect(set_Temperature_Heating_Storage.y, onOffController.reference)
+    annotation (Line(points={{-24.5,87},{-28.25,87},{-28.25,89.2},{-32.6,89.2}},
+        color={0,0,127}));
+  connect(onOffController.y, and1.u1) annotation (Line(points={{-48.7,85},{-48.7,
+          93},{-60.6,93}}, color={255,0,255}));
+  connect(min_Temperature_WasteWater.y, greater.u2) annotation (Line(points={{-57.5,
+          47},{-53.75,47},{-53.75,53},{-49,53}}, color={0,0,127}));
+  connect(and1.y, HP_ison) annotation (Line(points={{-76.7,93},{-89.35,93},{-89.35,
+          96},{-110,96}}, color={255,0,255}));
+  connect(T_WasteWaterStorage[1], less.u2) annotation (Line(points={{-104,37.6},
+          {-104,48},{-82,48},{-82,-46.8},{16.8,-46.8}}, color={0,0,127}));
+  connect(T_HeatingWaterStorage[8], onOffController.u) annotation (Line(points={
+          {-104,79.5},{-32.6,79.5},{-32.6,80.8}}, color={0,0,127}));
+  connect(greater.y, and3.u2) annotation (Line(points={{-37.5,57},{-23,57},{-23,
+          59.4}}, color={255,0,255}));
+  connect(and3.u1, not1.y) annotation (Line(points={{-23,65},{-19.5,65},{-19.5,66},
+          {-16.5,66}}, color={255,0,255}));
+  connect(not1.u, iscleaning) annotation (Line(points={{-5,66},{8,66},{8,64},{116,
+          64},{116,-72},{46,-72},{46,-106},{50,-106}}, color={255,0,255}));
+  connect(and3.y, and1.u2) annotation (Line(points={{-34.5,65},{-60.6,65},{-60.6,
+          87.4}}, color={255,0,255}));
+  connect(T_WasteWaterStorage[10], greater.u1) annotation (Line(points={{-104,
+          66.4},{-76,66.4},{-76,57},{-49,57}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}})));
 end WasteWaterStorageControl;

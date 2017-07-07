@@ -31,7 +31,7 @@ model WasteWaterHeatPump_python_profiles
     annotation (Placement(transformation(
         extent={{6,-7},{-6,7}},
         rotation=0,
-        origin={78,-67})));
+        origin={86,-71})));
   Components.Sinks.Vessel          vessel annotation (Placement(transformation(
         extent={{-12,-7},{12,7}},
         rotation=270,
@@ -71,10 +71,10 @@ model WasteWaterHeatPump_python_profiles
     redeclare model HeatTransfer =
         Components.Storage.BaseClasses.HeatTransfer_OnlyConduction,
     alpha_HC1=200,
+    data=DataBase.Storage.Generic_750l(),
     T_start=323.15,
     T_start_wall=293.15,
-    T_start_ins=293.15,
-    data=DataBase.Storage.Generic_750l())
+    T_start_ins=293.15)
     annotation (Placement(transformation(extent={{-8,-80},{36,-36}})));
 
   Modelica.Blocks.Sources.TimeTable massflowgrey(table=[0,0; 21360,
@@ -8523,7 +8523,7 @@ model WasteWaterHeatPump_python_profiles
         31519860,308.15; 31519920,308.15; 31528260,308.15; 31528320,308.15;
         31530480,308.15; 31530540,308.15])
     annotation (Placement(transformation(extent={{-30,24},{-50,44}})));
-  Modelica.Blocks.Sources.TimeTable massflowgrey1(table=[0,0; 22500,
+  Modelica.Blocks.Sources.TimeTable massflowfresh(table=[0,0; 22500,
         0.0228753294516724; 23400,0.0211446029977979; 24300,0.0512797407196225;
         25200,0.0282258127623425; 26100,0.0728923315918382; 27000,
         0.0326510048772799; 27900,0.0378102963392924; 28800,0.0242267190277168;
@@ -17611,7 +17611,7 @@ equation
   connect(T_heatingwater_load.y, WasteWater_in.T_fluid) annotation (Line(points=
          {{11.5,-2.35},{11.5,-2.35},{11.5,-5.4},{1.94,-5.4}}, color={0,0,127}));
   connect(T_heatingwater_unload.y, WasteWater_in1.T_fluid) annotation (Line(
-        points={{71.4,-67},{78,-67},{78,-89.8},{48,-89.8}}, color={0,0,127}));
+        points={{79.4,-71},{78,-71},{78,-89.8},{48,-89.8}}, color={0,0,127}));
   connect(fluidSource.enthalpyPort_b, heatPumpWasteWater_driven.WW_in)
     annotation (Line(points={{-90.9,-13},{-90.9,-22.5},{-86.6,-22.5},{-86.6,
           -29.66}}, color={176,0,0}));
@@ -17644,12 +17644,12 @@ equation
     annotation (Line(points={{-4.04,-53.6},{-18,-53.6},{-18,-54},{-30,-54},{-30,
           -55.84},{-56,-55.84}},
                     color={176,0,0}));
-  connect(tGrey.y, fluidSource.T_fluid) annotation (Line(points={{-51,34},{-68,
-          34},{-68,5},{-87.38,5}}, color={0,0,127}));
+  connect(massflowfresh.y, WasteWater_in1.dotm) annotation (Line(points={{93,
+          -100},{90,-100},{90,-96.6},{48,-96.6}}, color={0,0,127}));
+  connect(tGrey.y, fluidSource.T_fluid) annotation (Line(points={{-51,34},{-60,
+          34},{-60,10},{-87.38,10},{-87.38,5}}, color={0,0,127}));
   connect(massflowgrey.y, fluidSource.dotm) annotation (Line(points={{-129,28},
-          {-112,28},{-112,5},{-94.86,5}}, color={0,0,127}));
-  connect(massflowgrey1.y, WasteWater_in1.dotm) annotation (Line(points={{93,
-          -100},{66,-100},{66,-118},{66,-96.6},{48,-96.6}}, color={0,0,127}));
+          {-126,28},{-126,22},{-122,22},{-122,5},{-94.86,5}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=5.256e+006, Interval=60),
