@@ -9,7 +9,6 @@ record Glass
   annotation (Documentation(info="<html>
 <h4><font color=\"#008000\">Overview</font></h4>
 <p>Material: Glass </p>
-    alt=\"stars: 5 out of 5\"/></p>
 <h4><font color=\"#008000\">References</font></h4>
 <p>Record is used in model <a href=\"AixLib.Utilities.HeatTransfer.HeatConv_outside\">AixLib.Utilities.HeatTransfer.HeatConv_outside</a></p>
  <p>Source</p>

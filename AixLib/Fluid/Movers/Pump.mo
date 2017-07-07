@@ -53,7 +53,6 @@ equation
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Simple table based pump model.</p>
-    alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>Simple table based pump model with the following features:</p>
  <ul>

@@ -30,6 +30,5 @@ public
     Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Partial model for correction cofficient for transmitted solar radiation through a window.</p>
-  alt=\"stars: 3 out of 5\"/> </p>
 </html>"));
 end PartialCorG;
