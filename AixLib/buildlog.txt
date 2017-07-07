@@ -1,0 +1,20 @@
+ 
+Compiling and linking the model (Visual C++). 
+ 
+dsmodel.c
+dsmodelext1.c
+dsmodelext10.c
+dsmodelext11.c
+dsmodelext2.c
+dsmodelext3.c
+dsmodelext4.c
+dsmodelext5.c
+dsmodelext6.c
+dsmodelext7.c
+dsmodelext8.c
+dsmodelext9.c
+Generating Code...
+   Creating library dymosim.lib and object dymosim.exp
+ 
+Successful generation of Dymosim. 
+ 

@@ -18,7 +18,8 @@ model HeatPumpWasteWater_driven
   Components.HeatGenerators.HeatPump.HeatPump heatPump(cap_calcType=2,
     Pel_ouput=true,
     CoP_output=true,
-    data_table=DataBase.HeatPump.EN255.Vitocal350BWH110())
+    data_table=DataBase.HeatPump.EN255.Vitocal350BWH110(),
+    T_startEv=283.15)
     annotation (Placement(transformation(extent={{-36,-76},{-66,-56}})));
   Components.Storage.WasteWaterStorage wasteWaterStorage(
     n_load_cycles=1,
@@ -32,11 +33,11 @@ model HeatPumpWasteWater_driven
     alpha_HC1=200,
     redeclare model HeatTransfer =
         Storage.BaseClasses.HeatTransfer_buoyancy_Wetter,
+    data=DataBase.Storage.Wastewater_500l(),
     T_start=303.15,
-    T_start_HC=273.15,
+    T_start_HC=283.15,
     T_start_wall=293.15,
-    T_start_ins=293.15,
-    data=DataBase.Storage.Wastewater_500l())
+    T_start_ins=293.15)
     annotation (Placement(transformation(extent={{54,-68},{96,-26}})));
   Components.Sinks.Vessel          vessel1
                                           annotation (Placement(transformation(
@@ -60,12 +61,12 @@ model HeatPumpWasteWater_driven
     n_HeatingWater_layers=n_HeatingWater_layers,
     s_biofilm_max=s_biofilm_max,
     s_biofilm_min=s_biofilm_min,
-    dot_m_cond_pump_fix=0.3,
-    dot_m_evap_pump_fix=0.3,
     d_storage=wasteWaterStorage.data.dTank,
     h_storage=wasteWaterStorage.data.hTank,
     T_WasteWater_upper_min=273.15 + 10,
-    t_cleaning=3600)
+    t_cleaning=3600,
+    dot_m_cond_pump_fix=0.2,
+    dot_m_evap_pump_fix=0.2)
     annotation (Placement(transformation(extent={{56,26},{90,60}})));
   Interfaces.EnthalpyPort_a toHeatPump
     annotation (Placement(transformation(extent={{-104,-56},{-96,-48}})));

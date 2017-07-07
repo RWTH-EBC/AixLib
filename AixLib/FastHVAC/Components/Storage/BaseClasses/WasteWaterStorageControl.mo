@@ -58,10 +58,6 @@ model WasteWaterStorageControl
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={0,-68})));
-  Modelica.Blocks.Logical.Less less annotation (Placement(transformation(
-        extent={{-6,-6},{6,6}},
-        rotation=0,
-        origin={24,-42})));
   Modelica.Blocks.Sources.Constant const(k=0)
     annotation (Placement(transformation(extent={{100,-30},{90,-20}})));
   Modelica.Blocks.Interfaces.RealInput T_WasteWaterStorage[n_WasteWater_layers]
@@ -108,22 +104,20 @@ model WasteWaterStorageControl
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={50,-106})));
-  Modelica.Blocks.Logical.OnOffController onOffController(bandwidth=5)
-    annotation (Placement(transformation(extent={{-34,78},{-48,92}})));
-  Modelica.Blocks.Logical.And and1
-    annotation (Placement(transformation(extent={{-62,86},{-76,100}})));
-  Modelica.Blocks.Sources.Constant set_Temperature_Heating_Storage(k=
-        T_HeatingWater_set)
-    annotation (Placement(transformation(extent={{-14,82},{-24,92}})));
-  Modelica.Blocks.Logical.Greater greater
-    annotation (Placement(transformation(extent={{-48,52},{-38,62}})));
-  Modelica.Blocks.Sources.Constant min_Temperature_WasteWater(k=
-        T_WasteWater_upper_min)
-    annotation (Placement(transformation(extent={{-68,42},{-58,52}})));
-  Modelica.Blocks.Logical.And and3
-    annotation (Placement(transformation(extent={{-24,58},{-34,72}})));
   Modelica.Blocks.Logical.Not not1
-    annotation (Placement(transformation(extent={{-6,60},{-16,72}})));
+    annotation (Placement(transformation(extent={{22,72},{12,84}})));
+  Modelica.Blocks.Logical.OnOffController onOffController(bandwidth=5)
+    annotation (Placement(transformation(extent={{-38,34},{-58,54}})));
+  Modelica.Blocks.Sources.Constant const2(k=273.15 + 61)
+    annotation (Placement(transformation(extent={{-16,50},{-28,62}})));
+  Modelica.Blocks.Logical.And and1
+    annotation (Placement(transformation(extent={{-34,76},{-54,96}})));
+  Modelica.Blocks.Logical.OnOffController onOffController1(bandwidth=2)
+    annotation (Placement(transformation(extent={{-30,-56},{-10,-36}})));
+  Modelica.Blocks.Math.Add add(k2=-1)
+    annotation (Placement(transformation(extent={{-64,-22},{-52,-10}})));
+  Modelica.Blocks.Sources.Constant const3(k=0)
+    annotation (Placement(transformation(extent={{-18,-26},{-30,-14}})));
 initial equation
 time_cleaning_start = 0;
 cleaning_finished=true;
@@ -177,33 +171,26 @@ end when;
     // cleaning procedure itself
   when iscleaning and time <= t_cleaning_end then
     //first release wastewater from tank and clean (fixed time) and hold bypass opened
-   // if  then
       cleaning_finished=false;
-      der(V_WasteWater)=0;
       bypass_forced_opened_value=true;
       bypass_forced_closed_value=false;
-     // biofilm_removing=true;
-
      // after releasing wastewater and cleaning: start refill and hold bypass closed
   elsewhen iscleaning and time >t_cleaning_end  and V_WasteWater < V_storage then
      bypass_forced_opened_value= false;
-     //biofilm_removing=false;
          cleaning_finished=false;
-         der(V_WasteWater) = wastewatermassFlowRate.dotm/rho_WasteWater;
          bypass_forced_closed_value=true;
-
      // after refill go back to normal operation mode
   elsewhen iscleaning and V_WasteWater >=V_storage then
          bypass_forced_opened_value= false;
-         //biofilm_removing=false;
          cleaning_finished=true;
-         der(V_WasteWater)=0;
          bypass_forced_closed_value=false;
-         //reinit(V_WasteWater,0);
-
  end when;
 
-
+  if iscleaning and time >t_cleaning_end  and V_WasteWater < V_storage then
+    der(V_WasteWater) = wastewatermassFlowRate.dotm/rho_WasteWater;
+  else
+    der(V_WasteWater) = 0;
+  end if;
 
   connect(const.y, switch1.u1) annotation (Line(points={{89.5,-25},{78.4,-25},{78.4,
           -37.6}}, color={0,0,127}));
@@ -219,8 +206,6 @@ end when;
   connect(wastewatertemperature.enthalpyPort_b, threeWayValve.enthalpyPort_ab)
     annotation (Line(points={{-4.1,-9},{-4.1,-17.5},{1.77636e-015,-17.5},{1.77636e-015,
           -58.2}}, color={176,0,0}));
-  connect(wastewatertemperature.T, less.u1)
-    annotation (Line(points={{7,-1},{7,-42},{16.8,-42}},    color={0,0,127}));
   connect(WW_control_in, wastewatermassFlowRate.enthalpyPort_a)
     annotation (Line(points={{0,98},{-0.1,98},{-0.1,50.8}}, color={176,0,0}));
   connect(wastewatermassFlowRate.enthalpyPort_b, wastewatertemperature.enthalpyPort_a)
@@ -228,8 +213,6 @@ end when;
                                                                  color={176,0,0}));
   connect(bypass_forced_closed.y, nor.u2) annotation (Line(points={{33,-32},{34,
           -32},{34,-34.8},{36.8,-34.8}}, color={255,0,255}));
-  connect(less.y, and2.u2) annotation (Line(points={{30.6,-42},{44,-42},{44,-43},
-          {55,-43}}, color={255,0,255}));
   connect(nor.y, and2.u1) annotation (Line(points={{50.6,-30},{54,-30},{54,-39},
           {55,-39}}, color={255,0,255}));
   connect(and2.y, or1.u2) annotation (Line(points={{66.5,-39},{66.5,-20},{62,-20},
@@ -240,29 +223,29 @@ end when;
           {36,-30},{36.8,-30}}, color={255,0,255}));
   connect(bypass_forced_opened.y, or1.u1) annotation (Line(points={{35,-8},{52,-8},
           {52,-9},{71,-9}}, color={255,0,255}));
-  connect(set_Temperature_Heating_Storage.y, onOffController.reference)
-    annotation (Line(points={{-24.5,87},{-28.25,87},{-28.25,89.2},{-32.6,89.2}},
-        color={0,0,127}));
-  connect(onOffController.y, and1.u1) annotation (Line(points={{-48.7,85},{-48.7,
-          93},{-60.6,93}}, color={255,0,255}));
-  connect(min_Temperature_WasteWater.y, greater.u2) annotation (Line(points={{-57.5,
-          47},{-53.75,47},{-53.75,53},{-49,53}}, color={0,0,127}));
-  connect(and1.y, HP_ison) annotation (Line(points={{-76.7,93},{-89.35,93},{-89.35,
-          96},{-110,96}}, color={255,0,255}));
-  connect(T_WasteWaterStorage[1], less.u2) annotation (Line(points={{-104,37.6},
-          {-104,48},{-82,48},{-82,-46.8},{16.8,-46.8}}, color={0,0,127}));
-  connect(T_HeatingWaterStorage[8], onOffController.u) annotation (Line(points={
-          {-104,79.5},{-32.6,79.5},{-32.6,80.8}}, color={0,0,127}));
-  connect(greater.y, and3.u2) annotation (Line(points={{-37.5,57},{-23,57},{-23,
-          59.4}}, color={255,0,255}));
-  connect(and3.u1, not1.y) annotation (Line(points={{-23,65},{-19.5,65},{-19.5,66},
-          {-16.5,66}}, color={255,0,255}));
-  connect(not1.u, iscleaning) annotation (Line(points={{-5,66},{8,66},{8,64},{116,
-          64},{116,-72},{46,-72},{46,-106},{50,-106}}, color={255,0,255}));
-  connect(and3.y, and1.u2) annotation (Line(points={{-34.5,65},{-60.6,65},{-60.6,
-          87.4}}, color={255,0,255}));
-  connect(T_WasteWaterStorage[10], greater.u1) annotation (Line(points={{-104,
-          66.4},{-76,66.4},{-76,57},{-49,57}}, color={0,0,127}));
+  connect(T_HeatingWaterStorage[8], onOffController.u) annotation (Line(points=
+          {{-104,79.5},{-60,79.5},{-60,22},{-18,22},{-18,38},{-36,38}}, color={
+          0,0,127}));
+  connect(const2.y, onOffController.reference) annotation (Line(points={{-28.6,
+          56},{-32,56},{-32,50},{-36,50}}, color={0,0,127}));
+  connect(not1.y, and1.u2)
+    annotation (Line(points={{11.5,78},{-32,78}}, color={255,0,255}));
+  connect(onOffController.y, and1.u1) annotation (Line(points={{-59,44},{-58,44},
+          {-58,70},{-22,70},{-22,86},{-32,86}}, color={255,0,255}));
+  connect(and1.y, HP_ison) annotation (Line(points={{-55,86},{-78,86},{-78,96},
+          {-110,96}}, color={255,0,255}));
+  connect(onOffController1.y, and2.u2) annotation (Line(points={{-9,-46},{24,
+          -46},{24,-43},{55,-43}}, color={255,0,255}));
+  connect(add.y, onOffController1.u) annotation (Line(points={{-51.4,-16},{-48,
+          -16},{-48,-18},{-42,-18},{-42,-52},{-32,-52}}, color={0,0,127}));
+  connect(const3.y, onOffController1.reference) annotation (Line(points={{-30.6,
+          -20},{-32,-20},{-32,-40}}, color={0,0,127}));
+  connect(wastewatertemperature.T, add.u1) annotation (Line(points={{7,-1},{7,
+          10},{-70,10},{-70,-12.4},{-65.2,-12.4}}, color={0,0,127}));
+  connect(T_WasteWaterStorage[1], add.u2) annotation (Line(points={{-104,37.6},
+          {-76,37.6},{-76,-19.6},{-65.2,-19.6}}, color={0,0,127}));
+  connect(iscleaning, not1.u) annotation (Line(points={{50,-106},{50,-70},{116,
+          -70},{116,78},{23,78}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}})));
 end WasteWaterStorageControl;

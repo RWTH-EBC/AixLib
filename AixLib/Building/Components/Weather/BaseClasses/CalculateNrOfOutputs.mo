@@ -1,6 +1,4 @@
 within AixLib.Building.Components.Weather.BaseClasses;
-
-
 function CalculateNrOfOutputs "Calculates number of outputs"
   input Boolean Cloud_cover "Cloud cover";
   input Boolean Wind_dir "Wind direction";

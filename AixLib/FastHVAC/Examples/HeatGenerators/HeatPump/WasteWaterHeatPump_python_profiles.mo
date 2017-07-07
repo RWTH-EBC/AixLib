@@ -27,11 +27,6 @@ model WasteWaterHeatPump_python_profiles
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={40,-94})));
-  Modelica.Blocks.Sources.Constant T_heatingwater_unload(k=273.15 + 10)
-    annotation (Placement(transformation(
-        extent={{6,-7},{-6,7}},
-        rotation=0,
-        origin={86,-71})));
   Components.Sinks.Vessel          vessel annotation (Placement(transformation(
         extent={{-12,-7},{12,7}},
         rotation=270,
@@ -71,8 +66,8 @@ model WasteWaterHeatPump_python_profiles
     redeclare model HeatTransfer =
         Components.Storage.BaseClasses.HeatTransfer_OnlyConduction,
     alpha_HC1=200,
-    data=DataBase.Storage.Generic_750l(),
-    T_start=323.15,
+    data=DataBase.Storage.Generic_750l(dTank=0.8),
+    T_start=339.15,
     T_start_wall=293.15,
     T_start_ins=293.15)
     annotation (Placement(transformation(extent={{-8,-80},{36,-36}})));
@@ -17605,13 +17600,13 @@ model WasteWaterHeatPump_python_profiles
         0.0131159061681306; 31529700,0; 31530600,0.00755977534997524; 31531500,
         0.00525322197442671; 31532400,0])
     annotation (Placement(transformation(extent={{114,-110},{94,-90}})));
+  Building.Components.Weather.ColdWaterTemperature coldWaterTemperature
+    annotation (Placement(transformation(extent={{110,-80},{90,-60}})));
 equation
   connect(dotm_heatingwater_load.y, WasteWater_in.dotm) annotation (Line(points=
          {{-14.5,-2.35},{-5.5,-2.35},{-5.5,-5.4},{-2.82,-5.4}}, color={0,0,127}));
   connect(T_heatingwater_load.y, WasteWater_in.T_fluid) annotation (Line(points=
          {{11.5,-2.35},{11.5,-2.35},{11.5,-5.4},{1.94,-5.4}}, color={0,0,127}));
-  connect(T_heatingwater_unload.y, WasteWater_in1.T_fluid) annotation (Line(
-        points={{79.4,-71},{78,-71},{78,-89.8},{48,-89.8}}, color={0,0,127}));
   connect(fluidSource.enthalpyPort_b, heatPumpWasteWater_driven.WW_in)
     annotation (Line(points={{-90.9,-13},{-90.9,-22.5},{-86.6,-22.5},{-86.6,
           -29.66}}, color={176,0,0}));
@@ -17650,8 +17645,11 @@ equation
           34},{-60,10},{-87.38,10},{-87.38,5}}, color={0,0,127}));
   connect(massflowgrey.y, fluidSource.dotm) annotation (Line(points={{-129,28},
           {-126,28},{-126,22},{-122,22},{-122,5},{-94.86,5}}, color={0,0,127}));
+  connect(coldWaterTemperature.coldWaterTemperature, WasteWater_in1.T_fluid)
+    annotation (Line(points={{89.3,-69.9},{78.65,-69.9},{78.65,-89.8},{48,-89.8}},
+        color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    experiment(StopTime=5.256e+006, Interval=60),
+    experiment(StopTime=31536000, Interval=60),
     __Dymola_experimentSetupOutput(outputs=false, events=false));
 end WasteWaterHeatPump_python_profiles;
