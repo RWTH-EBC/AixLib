@@ -37,9 +37,9 @@ public
   inner parameter Real tau(min=0) = 1000 "Time constant for mixing";
   inner parameter Integer n(min=3) = 5 "Model assumptions Number of Layers";
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_in=1500
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_in=150
     "Coefficient at the inner wall";
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_out=15
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_out=1500
     "Coefficient at the outer wall";
   inner parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
       AixLib.DataBase.Storage.Wastewater_500l() "Storage data"
@@ -81,7 +81,7 @@ public
       Measuring of biofilm thickniss isn't possible in reality, so it has to be calculated
      ******************************************************************* */
 //        Modelica.SIunits.Length s_biofilm_calc(start=s_biofilm_0, min=0);
-        Modelica.SIunits.HeatFlowRate Q_brine;
+//        Modelica.SIunits.HeatFlowRate Q_brine;
 //        Real dTln;
 //        Modelica.SIunits.ThermalConductance kA;
 //        Modelica.SIunits.CoefficientOfHeatTransfer alpha_i;
@@ -245,7 +245,7 @@ initial equation
   //dTln=1;
 
 equation
-      Q_brine = mdot_brine.dotm*mediumHC1.c*(T_brine_return.T-T_brine_flow.T);
+//      Q_brine = mdot_brine.dotm*mediumHC1.c*(T_brine_return.T-T_brine_flow.T);
 //     Q_brine=kA*dTln;
 //      dTln=((T_layers[n]-T_brine_flow.T)-(T_layers[1]-T_brine_return.T))/log((T_layers[n]-T_brine_flow.T)/(T_layers[1]-T_brine_return.T));
 //      if not biofilm_removing then
@@ -388,7 +388,7 @@ connect(heatTransfer.therm, layer.port);
   connect(port_HC1_in, T_brine_flow.enthalpyPort_a) annotation (Line(points={{-100,
           80},{-87.4,80},{-87.4,80.95}}, color={176,0,0}));
   connect(T_brine_flow.enthalpyPort_b, heatingCoil1.enthalpyPort_a1)
-    annotation (Line(points={{-78.5,80.95},{-78.5,75.475},{-78,75.475},{-78,69.6}},
+    annotation (Line(points={{-78.5,80.95},{-78.5,75.475},{-78,75.475},{-78,70.2}},
         color={176,0,0}));
   connect(port_HC1_out, T_brine_return.enthalpyPort_b) annotation (Line(points={
           {-100,40},{-94,40},{-94,29.96},{-89.6,29.96}}, color={176,0,0}));

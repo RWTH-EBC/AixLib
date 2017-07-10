@@ -47,7 +47,7 @@ model HeatingCoilFoulingHalfIsolated
   AixLib.FastHVAC.Interfaces.EnthalpyPort_b enthalpyPort_b1
     annotation (Placement(transformation(extent={{82,-10},{102,10}})));
   AixLib.FastHVAC.Interfaces.EnthalpyPort_a enthalpyPort_a1
-    annotation (Placement(transformation(extent={{-106,-10},{-86,10}})));
+    annotation (Placement(transformation(extent={{-112,-10},{-92,10}})));
   Utilities.HeatTransfer.HeatConvPipe_inside conv_HC1_Inside[dis_HC](
     d_i=fill(pipe_HC.d_i, dis_HC),
     d_a=fill(pipe_HC.d_o, dis_HC),
@@ -58,7 +58,7 @@ model HeatingCoilFoulingHalfIsolated
         rotation=270,
         origin={-4,20})));
   Sensors.MassFlowSensor m_flow
-    annotation (Placement(transformation(extent={{38,-10},{58,10}})));
+    annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
   Utilities.HeatTransfer.CylindricHeatConduction_fouling
     cylindricHeatConduction_fouling[dis_HC](
     v_bio_grow=fill(v_bio_grow, dis_HC),
@@ -92,16 +92,8 @@ equation
       points={{-4,92},{-4,104}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(pipeHC.enthalpyPort_a1, enthalpyPort_a1) annotation (Line(
-      points={{-13.8,0},{-96,0}},
-      color={176,0,0},
-      smooth=Smooth.None));
   connect(pipeHC.heatPorts, conv_HC1_Inside.port_b)
     annotation (Line(points={{-4.1,4.9},{-4.1,10},{-4,10}}, color={127,0,0}));
-  connect(pipeHC.enthalpyPort_b1, m_flow.enthalpyPort_a)
-    annotation (Line(points={{5.8,0},{39.2,0},{39.2,-0.1}}, color={176,0,0}));
-  connect(m_flow.enthalpyPort_b, enthalpyPort_b1) annotation (Line(points={{57,
-          -0.1},{74.5,-0.1},{74.5,0},{92,0}}, color={176,0,0}));
   connect(conv_HC1_Inside.port_a, cylindricHeatTransfer.port_a) annotation (
       Line(points={{-4,30},{-4,30},{-4,44}},         color={191,0,0}));
   connect(conv_HC1_Outside.port_b, cylindricHeatConduction_fouling.port_b)
@@ -110,6 +102,12 @@ equation
     annotation (Line(points={{-4,52.8},{-4,52.8},{-4,68.4}}, color={191,0,0}));
   connect(cylindricHeatConduction_fouling[1].s_biofilm, s_biofilm) annotation (
       Line(points={{5.2,68.2},{55.6,68.2},{55.6,68},{108,68}}, color={0,0,127}));
+  connect(m_flow.enthalpyPort_a, enthalpyPort_a1) annotation (Line(points={{
+          -58.8,-0.1},{-63.4,-0.1},{-63.4,0},{-102,0}}, color={176,0,0}));
+  connect(m_flow.enthalpyPort_b, pipeHC.enthalpyPort_a1) annotation (Line(
+        points={{-41,-0.1},{-27.5,-0.1},{-27.5,0},{-13.8,0}}, color={176,0,0}));
+  connect(pipeHC.enthalpyPort_b1, enthalpyPort_b1)
+    annotation (Line(points={{5.8,0},{92,0}}, color={176,0,0}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),  Icon(graphics={
         Line(

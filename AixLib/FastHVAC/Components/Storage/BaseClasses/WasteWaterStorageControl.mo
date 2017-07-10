@@ -108,7 +108,7 @@ model WasteWaterStorageControl
     annotation (Placement(transformation(extent={{22,72},{12,84}})));
   Modelica.Blocks.Logical.OnOffController onOffController(bandwidth=5)
     annotation (Placement(transformation(extent={{-38,34},{-58,54}})));
-  Modelica.Blocks.Sources.Constant const2(k=273.15 + 61)
+  Modelica.Blocks.Sources.Constant const2(k=T_HeatingWater_set)
     annotation (Placement(transformation(extent={{-16,50},{-28,62}})));
   Modelica.Blocks.Logical.And and1
     annotation (Placement(transformation(extent={{-34,76},{-54,96}})));
@@ -118,6 +118,16 @@ model WasteWaterStorageControl
     annotation (Placement(transformation(extent={{-64,-22},{-52,-10}})));
   Modelica.Blocks.Sources.Constant const3(k=0)
     annotation (Placement(transformation(extent={{-18,-26},{-30,-14}})));
+  Modelica.Blocks.Logical.Switch switch2
+    annotation (Placement(transformation(extent={{-92,-28},{-72,-8}})));
+  Modelica.Blocks.Sources.Constant const4(k=dot_m_cond_pump_fix)
+    annotation (Placement(transformation(extent={{-138,-12},{-126,0}})));
+  Modelica.Blocks.Sources.Constant const5(k=0)
+    annotation (Placement(transformation(extent={{-138,-32},{-126,-20}})));
+  Modelica.Blocks.Logical.Switch switch3
+    annotation (Placement(transformation(extent={{-96,-56},{-76,-36}})));
+  Modelica.Blocks.Sources.Constant const6(k=dot_m_evap_pump_fix)
+    annotation (Placement(transformation(extent={{-140,-52},{-128,-40}})));
 initial equation
 time_cleaning_start = 0;
 cleaning_finished=true;
@@ -143,13 +153,13 @@ equation
 
   ////////////////////////////////////////////////// Evaporator and condensor pump control
 
-if HP_ison then
-  dot_m_cond_pump = dot_m_cond_pump_fix;
-  dot_m_evap_pump = dot_m_evap_pump_fix;
-else
-  dot_m_cond_pump = 0;
-  dot_m_evap_pump = 0;
-end if;
+// if HP_ison then
+//   dot_m_cond_pump = dot_m_cond_pump_fix;
+//   dot_m_evap_pump = dot_m_evap_pump_fix;
+// else
+//   dot_m_cond_pump = 0;
+//   dot_m_evap_pump = 0;
+// end if;
 
    // iniate cleaning if conditions are ok
    when wastewatermassFlowRate.dotm/(rho_WasteWater * V_storage) > 1/6000 and not (pre(iscleaning)) and s_biofilm>s_biofilm_max then
@@ -246,6 +256,23 @@ end when;
           {-76,37.6},{-76,-19.6},{-65.2,-19.6}}, color={0,0,127}));
   connect(iscleaning, not1.u) annotation (Line(points={{50,-106},{50,-70},{116,
           -70},{116,78},{23,78}}, color={255,0,255}));
+  connect(switch2.y, dot_m_cond_pump) annotation (Line(points={{-71,-18},{-70,
+          -18},{-70,-70},{-108,-70}},
+                                 color={0,0,127}));
+  connect(const5.y, switch2.u3) annotation (Line(points={{-125.4,-26},{-94,-26}},
+                                 color={0,0,127}));
+  connect(const4.y, switch2.u1) annotation (Line(points={{-125.4,-6},{-116,-6},
+          {-116,-16},{-106,-16},{-106,-10},{-94,-10}},color={0,0,127}));
+  connect(HP_ison, switch2.u2) annotation (Line(points={{-110,96},{-78,96},{-78,
+          0},{-98,0},{-98,-18},{-94,-18}}, color={255,0,255}));
+  connect(switch3.y, dot_m_evap_pump) annotation (Line(points={{-75,-46},{-70,
+          -46},{-70,-92},{-108,-92}}, color={0,0,127}));
+  connect(const5.y, switch3.u3) annotation (Line(points={{-125.4,-26},{-122,-26},
+          {-122,-54},{-98,-54}}, color={0,0,127}));
+  connect(const6.y, switch3.u1) annotation (Line(points={{-127.4,-46},{-114,-46},
+          {-114,-38},{-98,-38}}, color={0,0,127}));
+  connect(HP_ison, switch3.u2) annotation (Line(points={{-110,96},{-78,96},{-78,
+          0},{-102,0},{-102,-46},{-98,-46}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}})));
 end WasteWaterStorageControl;

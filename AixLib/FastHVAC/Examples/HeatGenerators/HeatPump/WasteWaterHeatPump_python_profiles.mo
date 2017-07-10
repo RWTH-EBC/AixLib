@@ -2,7 +2,7 @@ within AixLib.FastHVAC.Examples.HeatGenerators.HeatPump;
 model WasteWaterHeatPump_python_profiles
   extends Modelica.Icons.Example;
   Components.HeatGenerators.HeatPump.HeatPumpWasteWater_driven
-    heatPumpWasteWater_driven(n_HeatingWater_layers=10)
+    heatPumpWasteWater_driven(n_HeatingWater_layers=10, T_ambient=288.15)
     annotation (Placement(transformation(extent={{-56,-64},{-92,-30}})));
   Components.Pumps.FluidSource WasteWater_in(medium=
         AixLib.FastHVAC.Media.WaterSimple()) annotation (Placement(
@@ -59,17 +59,17 @@ model WasteWaterHeatPump_python_profiles
     use_heatingCoil2=false,
     use_heatingRod=false,
     Up_to_down_HC1=true,
-    n_HC1_low=1,
     n_HC1_up=10,
     n=10,
     load_cycles=[10,1],
     redeclare model HeatTransfer =
         Components.Storage.BaseClasses.HeatTransfer_OnlyConduction,
     alpha_HC1=200,
-    data=DataBase.Storage.Generic_750l(dTank=0.8),
+    data=DataBase.Storage.Generic_750l(),
     T_start=339.15,
     T_start_wall=293.15,
-    T_start_ins=293.15)
+    T_start_ins=293.15,
+    n_HC1_low=1)
     annotation (Placement(transformation(extent={{-8,-80},{36,-36}})));
 
   Modelica.Blocks.Sources.TimeTable massflowgrey(table=[0,0; 21360,
@@ -17632,13 +17632,6 @@ equation
   connect(heatStorage_variablePorts.T_layers, heatPumpWasteWater_driven.T_HeatingWaterStorage)
     annotation (Line(points={{-5.8,-58},{-30,-58},{-30,-62.47},{-55.28,-62.47}},
         color={0,0,127}));
-  connect(heatStorage_variablePorts.port_HC1_in, heatPumpWasteWater_driven.fromHeatPump)
-    annotation (Line(points={{-3.6,-44.8},{-29.8,-44.8},{-29.8,-35.1},{-55.64,
-          -35.1}}, color={176,0,0}));
-  connect(heatStorage_variablePorts.port_HC1_out, heatPumpWasteWater_driven.toHeatPump)
-    annotation (Line(points={{-4.04,-53.6},{-18,-53.6},{-18,-54},{-30,-54},{-30,
-          -55.84},{-56,-55.84}},
-                    color={176,0,0}));
   connect(massflowfresh.y, WasteWater_in1.dotm) annotation (Line(points={{93,
           -100},{90,-100},{90,-96.6},{48,-96.6}}, color={0,0,127}));
   connect(tGrey.y, fluidSource.T_fluid) annotation (Line(points={{-51,34},{-60,
@@ -17648,6 +17641,12 @@ equation
   connect(coldWaterTemperature.coldWaterTemperature, WasteWater_in1.T_fluid)
     annotation (Line(points={{89.3,-69.9},{78.65,-69.9},{78.65,-89.8},{48,-89.8}},
         color={0,0,127}));
+  connect(heatPumpWasteWater_driven.fromHeatPump, heatStorage_variablePorts.port_HC1_in)
+    annotation (Line(points={{-55.64,-35.1},{-29.82,-35.1},{-29.82,-44.8},{-3.6,
+          -44.8}}, color={176,0,0}));
+  connect(heatStorage_variablePorts.port_HC1_out, heatPumpWasteWater_driven.toHeatPump)
+    annotation (Line(points={{-4.04,-53.6},{-31.02,-53.6},{-31.02,-55.84},{-56,
+          -55.84}}, color={176,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=31536000, Interval=60),

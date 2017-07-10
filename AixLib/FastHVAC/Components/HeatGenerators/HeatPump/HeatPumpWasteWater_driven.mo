@@ -15,29 +15,35 @@ model HeatPumpWasteWater_driven
     "min thickness of biofilm, that could be reached by cleaning";
     Modelica.SIunits.HeatFlowRate total_heat;
 
-  Components.HeatGenerators.HeatPump.HeatPump heatPump(cap_calcType=2,
+  Components.HeatGenerators.HeatPump.HeatPump heatPump(
     Pel_ouput=true,
     CoP_output=true,
+    corrFlowCo=true,
+    corrFlowEv=true,
+    smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
+    cap_calcType=2,
     data_table=DataBase.HeatPump.EN255.Vitocal350BWH110(),
-    T_startEv=283.15)
+    T_startEv=283.15,
+    T_startCo=338.15,
+    T_maxCo=338.15)
     annotation (Placement(transformation(extent={{-36,-76},{-66,-56}})));
   Components.Storage.WasteWaterStorage wasteWaterStorage(
     n_load_cycles=1,
     n_unload_cycles=1,
     unload_cycles=[1,10],
-    n_HC1_low=1,
     n=10,
     Up_to_down_HC1=true,
     n_HC1_up=10,
     load_cycles=[10,1],
-    alpha_HC1=200,
-    redeclare model HeatTransfer =
-        Storage.BaseClasses.HeatTransfer_buoyancy_Wetter,
     data=DataBase.Storage.Wastewater_500l(),
+    redeclare model HeatTransfer =
+        Storage.BaseClasses.HeatTransfer_OnlyConduction,
+    alpha_HC1=250,
     T_start=303.15,
     T_start_HC=283.15,
     T_start_wall=293.15,
-    T_start_ins=293.15)
+    T_start_ins=293.15,
+    n_HC1_low=1)
     annotation (Placement(transformation(extent={{54,-68},{96,-26}})));
   Components.Sinks.Vessel          vessel1
                                           annotation (Placement(transformation(
@@ -65,8 +71,9 @@ model HeatPumpWasteWater_driven
     h_storage=wasteWaterStorage.data.hTank,
     T_WasteWater_upper_min=273.15 + 10,
     t_cleaning=3600,
-    dot_m_cond_pump_fix=0.2,
-    dot_m_evap_pump_fix=0.2)
+    dot_m_cond_pump_fix=0.263,
+    dot_m_evap_pump_fix=0.778,
+    T_HeatingWater_set=273.15 + 60)
     annotation (Placement(transformation(extent={{56,26},{90,60}})));
   Interfaces.EnthalpyPort_a toHeatPump
     annotation (Placement(transformation(extent={{-104,-56},{-96,-48}})));
@@ -81,7 +88,7 @@ model HeatPumpWasteWater_driven
     annotation (Placement(transformation(extent={{-84,-32},{-98,-16}})));
   Interfaces.EnthalpyPort_b fromWasteWaterStorage
     annotation (Placement(transformation(extent={{42,-106},{50,-98}})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature ambient(T=T_ambient)
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature ambient(T=288.15)
     annotation (Placement(transformation(extent={{112,0},{92,20}})));
   Interfaces.EnthalpyPort_b fromWasteWaterStorage1
     annotation (Placement(transformation(extent={{66,-104},{74,-96}})));
@@ -100,9 +107,6 @@ connect(  fluidSource1.enthalpyPort_b, wasteWaterStorage.UnloadingCycle_In[1])
                                                             color={0,0,127}));
   connect(dotm_unload.y, fluidSource1.dotm) annotation (Line(points={{111.4,-95},
           {92,-95},{92,-89.56},{88.8,-89.56}},   color={0,0,127}));
-  connect(wasteWaterStorage.port_HC1_out, heatPump.enthalpyPort_inEv)
-    annotation (Line(points={{57.78,-58.34},{-3.93,-58.34},{-3.93,-57.8},{-38.6,
-          -57.8}}, color={176,0,0}));
   connect(wasteWaterStorage.UnloadingCycle_Out[1], vessel1.enthalpyPort_a)
     annotation (Line(points={{79.2,-26},{74,-26},{74,-12},{94.6,-12}}, color={
           176,0,0}));
@@ -155,6 +159,9 @@ connect(  fluidSource1.enthalpyPort_b, wasteWaterStorage.UnloadingCycle_In[1])
   connect(wasteWaterStorage.s_biofilm, wasteWaterStorageControl.s_biofilm)
     annotation (Line(points={{96.84,-30.62},{116,-30.62},{116,30},{91.36,30},{
           91.36,27.36}}, color={0,0,127}));
+  connect(wasteWaterStorage.port_HC1_out, heatPump.enthalpyPort_inEv)
+    annotation (Line(points={{57.78,-58.34},{9.89,-58.34},{9.89,-57.8},{-38.6,-57.8}},
+        color={176,0,0}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})));
 end HeatPumpWasteWater_driven;
