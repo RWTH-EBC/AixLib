@@ -36,11 +36,11 @@ equation
   Head = -dp / (Medium.density(Medium.setState_phX(port_a.p, inStream(port_a.h_outflow), inStream(port_a.Xi_outflow))) * Modelica.Constants.g_n);
   annotation(Icon(coordinateSystem(preserveAspectRatio = false,
   extent = {{-100, -100}, {100, 100}}),
-  graphics={  Ellipse(extent=  {{-100, 96}, {100, -104}},
-  lineColor=  {0, 0, 0}, fillColor=  {0, 127, 0},
+  graphics={  Ellipse(extent = {{-100, 96}, {100, -104}},
+  lineColor = {0, 0, 0}, fillColor = {0, 127, 0},
             fillPattern=FillPattern.Solid),
-            Polygon(points=  {{-42, 70}, {78, -4}, {-42, -78}, {-42, 70}},
-            lineColor=  {0, 0, 0}, fillColor=  {175, 175, 175},
+            Polygon(points = {{-42, 70}, {78, -4}, {-42, -78}, {-42, 70}},
+            lineColor = {0, 0, 0}, fillColor = {175, 175, 175},
             fillPattern=FillPattern.Solid)}), Documentation(revisions="<html>
  <ul>
  <li><i>November 2014&nbsp;</i>

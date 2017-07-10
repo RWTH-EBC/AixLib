@@ -35,8 +35,7 @@ model cP_DH
       min=0.1,
       max=50,
       nominal=20),
-    y(
-      min=1,
+    y(min=1,
       max=5000,
       nominal=4000)) "cp = dh/dT"
     annotation (Placement(transformation(extent={{12,-10},{32,10}})));
@@ -46,16 +45,16 @@ model cP_DH
     nominal=293.15,
     quantity="ThermodynamicTemperature",
     unit="K",
-    displayUnit="degC") annotation (Placement(transformation(rotation=0, extent
-          ={{-110,-30},{-90,-10}})));
+    displayUnit="degC") annotation (Placement(transformation(rotation=0, extent=
+           {{-110,-30},{-90,-10}})));
   Modelica.Blocks.Interfaces.RealInput T_in(
     min=253.15,
     max=323.15,
     nominal=278.15,
     quantity="ThermodynamicTemperature",
     unit="K",
-    displayUnit="degC") annotation (Placement(transformation(rotation=0, extent
-          ={{-110,-70},{-90,-50}})));
+    displayUnit="degC") annotation (Placement(transformation(rotation=0, extent=
+           {{-110,-70},{-90,-50}})));
   Modelica.Blocks.Interfaces.RealInput h_out(
     min=1,
     max=5000,

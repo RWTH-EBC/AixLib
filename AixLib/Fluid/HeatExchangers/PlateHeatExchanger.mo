@@ -73,163 +73,162 @@ protected
     Medium2.setState_phX(port_b2.p, inStream(port_b2.h_outflow), inStream(port_b2.Xi_outflow))
     "state for medium inflowing through port_b2";
 public
-  AixLib.Fluid.Sensors.MassFlowRate massFlow_DH(redeclare package Medium =
-        Medium1) "Mass Flow DH"
-    annotation (Placement(transformation(extent={{-74,52},{-58,68}})));
-  AixLib.Fluid.Sensors.MassFlowRate massFlow_HS(redeclare package Medium =
-        Medium2) "Mass Flow HS"
-    annotation (Placement(transformation(extent={{76,-52},{60,-68}})));
-  AixLib.Fluid.MixingVolumes.MixingVolume Mixer_DH(
+  AixLib.Fluid.Sensors.MassFlowRate mFlow1(redeclare package Medium = Medium1)
+    "Mass Flow 1"
+    annotation (Placement(transformation(extent={{-68,52},{-52,68}})));
+  AixLib.Fluid.Sensors.MassFlowRate mFlow2(redeclare package Medium = Medium2)
+    "Mass Flow 2"
+    annotation (Placement(transformation(extent={{68,-52},{52,-68}})));
+  AixLib.Fluid.MixingVolumes.MixingVolume Mixer1(
     nPorts=2,
     V=V_ColdCircuit,
     m_flow_nominal=m_flow1_nominal,
-    redeclare package Medium = Medium1) "Mixer for DH Volume"
-    annotation (Placement(transformation(extent={{-6,60},{-22,44}})));
-  AixLib.Fluid.MixingVolumes.MixingVolume Mixer_HS(
+    redeclare package Medium = Medium1) "Mixer for first Volume"
+    annotation (Placement(transformation(extent={{-12,60},{-28,44}})));
+  AixLib.Fluid.MixingVolumes.MixingVolume Mixer2(
     nPorts=2,
     V=V_WarmCircuit,
     m_flow_nominal=m_flow2_nominal,
-    redeclare package Medium = Medium2) "Mixer for HS Volume"
-    annotation (Placement(transformation(extent={{6,-60},{22,-44}})));
+    redeclare package Medium = Medium2) "Mixer for second Volume"
+    annotation (Placement(transformation(extent={{12,-60},{28,-44}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow sink
     annotation (Placement(transformation(extent={{8,-8},{-8,8}},
         rotation=-90,
-        origin={-6,16})));
+        origin={-26,16})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow source
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=-90,
-        origin={6,-18})));
-  Modelica.Fluid.Sensors.TemperatureTwoPort T_DH_in(redeclare package Medium =
-        Medium1) "Temperature of Mass Flow DH (in)"
-    annotation (Placement(transformation(extent={{-52,68},{-36,52}})));
-  Modelica.Fluid.Sensors.SpecificEnthalpyTwoPort Enthalpy_DH_in(redeclare
-      package Medium = Medium1) "Enthalpy of Mass Flow DH (in)"
-    annotation (Placement(transformation(extent={{-96,52},{-80,68}})));
-  Modelica.Fluid.Sensors.SpecificEnthalpyTwoPort Enthalpy_DH_out(redeclare
-      package Medium = Medium1) "Enthalpy of Mass Flow DH (out)"
-    annotation (Placement(transformation(extent={{78,68},{94,52}})));
-  Modelica.Fluid.Sensors.TemperatureTwoPort T_DH_out(redeclare package Medium =
-        Medium1) "Temperature of Mass Flow DH (in)"
-    annotation (Placement(transformation(extent={{58,68},{74,52}})));
-  Modelica.Fluid.Sensors.TemperatureTwoPort T_HS_in(redeclare package Medium =
-        Medium2) "Temperature of Mass Flow HS (in)"
-    annotation (Placement(transformation(extent={{60,-68},{44,-52}})));
-  Modelica.Fluid.Sensors.SpecificEnthalpyTwoPort Enhalpy_HS_in(redeclare
-      package Medium = Medium2) "Enthalpy of Mass Flow HS (in)"
-    annotation (Placement(transformation(extent={{94,-68},{78,-52}})));
-  Modelica.Fluid.Sensors.SpecificEnthalpyTwoPort Enthalpy_HS_out(redeclare
-      package Medium = Medium2) "Enthalpy of Mass Flow HS (out)"
-    annotation (Placement(transformation(extent={{-36,-68},{-52,-52}})));
-  Modelica.Fluid.Sensors.TemperatureTwoPort T_HS_out(redeclare package Medium =
-        Medium2) "Temperature of Mass Flow HS (out)"
-    annotation (Placement(transformation(extent={{-64,-68},{-80,-52}})));
-  Utilities.cP_DH cP_DH(realExpression(y=0.01)) annotation (
-      Placement(transformation(
-        rotation=-90,
-        extent={{-10,-10},{10,10}},
-        origin={70,18})));
-  Utilities.cP_HS cP_HS annotation (Placement(transformation(
-        rotation=-90,
-        extent={{-10,-10},{10,10}},
-        origin={70,-18})));
+        origin={-26,-18})));
+  Modelica.Fluid.Sensors.TemperatureTwoPort T1_in(redeclare package Medium =
+        Medium1) "Temperature of Mass Flow 1 (in)"
+    annotation (Placement(transformation(extent={{-48,68},{-32,52}})));
+  Modelica.Fluid.Sensors.SpecificEnthalpyTwoPort h1_in(redeclare package Medium =
+        Medium1) "Enthalpy of Mass Flow 1 (in)"
+    annotation (Placement(transformation(extent={{-88,52},{-72,68}})));
+  Modelica.Fluid.Sensors.SpecificEnthalpyTwoPort h1_out(redeclare package
+      Medium = Medium1) "Enthalpy of Mass Flow 1 (out)"
+    annotation (Placement(transformation(extent={{72,68},{88,52}})));
+  Modelica.Fluid.Sensors.TemperatureTwoPort T1_out(redeclare package Medium =
+        Medium1) "Temperature of Mass Flow 1 (in)"
+    annotation (Placement(transformation(extent={{52,68},{68,52}})));
+  Modelica.Fluid.Sensors.TemperatureTwoPort T2_in(redeclare package Medium =
+        Medium2) "Temperature of Mass Flow 2 (in)"
+    annotation (Placement(transformation(extent={{48,-68},{32,-52}})));
+  Modelica.Fluid.Sensors.SpecificEnthalpyTwoPort h2_in(redeclare package Medium =
+        Medium2) "Enthalpy of Mass Flow 2 (in)"
+    annotation (Placement(transformation(extent={{88,-68},{72,-52}})));
+  Modelica.Fluid.Sensors.SpecificEnthalpyTwoPort h2_out(redeclare package
+      Medium = Medium2) "Enthalpy of Mass Flow 2 (out)"
+    annotation (Placement(transformation(extent={{-52,-68},{-68,-52}})));
+  Modelica.Fluid.Sensors.TemperatureTwoPort T2_out(redeclare package Medium =
+        Medium2) "Temperature of Mass Flow 2 (out)"
+    annotation (Placement(transformation(extent={{-72,-68},{-88,-52}})));
   Utilities.Heat_Transfer heatTransfer(tempCalcOutflow(effectiveness(A=A, k=k)))
     "computes the current heat flow from/to DH and HS volume" annotation (
       Placement(transformation(
         rotation=-90,
         extent={{-10,-10},{10,10}},
-        origin={32,0})));
+        origin={0,0})));
   Modelica.Blocks.Continuous.Integrator Measure_Qflow
     "Integrator to measure Qflow over the whole simulation time" annotation (
       Placement(transformation(
         extent={{5,-5},{-5,5}},
         rotation=0,
-        origin={5,29})));
+        origin={-61,15})));
   AixLib.Fluid.FixedResistances.PressureDrop res1(
     redeclare package Medium = Medium1,
     m_flow_nominal=m_flow1_nominal,
     dp_nominal=dp1_nominal) "pressure drop on side 1"
-    annotation (Placement(transformation(extent={{18,50},{38,70}})));
+    annotation (Placement(transformation(extent={{10,50},{30,70}})));
   AixLib.Fluid.FixedResistances.PressureDrop res2(
     redeclare package Medium = Medium2,
     m_flow_nominal=m_flow2_nominal,
     dp_nominal=dp2_nominal)
-    annotation (Placement(transformation(extent={{-6,-70},{-26,-50}})));
+    annotation (Placement(transformation(extent={{-10,-70},{-30,-50}})));
+  Utilities.cpCalc cpCalc1 annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=-90,
+        origin={60,20})));
+  Utilities.cpCalc cpCalc2 annotation (Placement(transformation(
+        extent={{-10,10},{10,-10}},
+        rotation=90,
+        origin={60,-20})));
 equation
   dp1 = port_a1.p - port_b1.p;
   dp2 = port_a2.p - port_b2.p;
-  connect(Mixer_HS.heatPort,source. port) annotation (Line(points={{6,-52},{6,-26}},
-                                          color={191,0,0}));
-  connect(Mixer_DH.heatPort,sink. port) annotation (Line(points={{-6,52},{-6,40},
-          {-6,24}},                 color={191,0,0}));
-  connect(massFlow_HS.m_flow, heatTransfer.m_flow_HS) annotation (Line(points={{
-          68,-68.8},{68,-68.8},{68,-100},{112,-100},{112,-2},{42,-2}}, color={0,
-          0,127}));
-  connect(massFlow_DH.m_flow, heatTransfer.m_flow_DH) annotation (Line(points={{
-          -66,68.8},{-66,100},{112,100},{112,2},{42,2}}, color={0,0,127}));
-  connect(cP_DH.cp, heatTransfer.cp_DH)
-    annotation (Line(points={{70,8},{70,4},{42,4}}, color={0,0,127}));
-  connect(cP_HS.cp, heatTransfer.cp_HS)
-    annotation (Line(points={{70,-8},{70,-4},{42,-4}}, color={0,0,127}));
-  connect(heatTransfer.Q_flow_HS, source.Q_flow) annotation (Line(points={{22,-4},
-          {22,-4},{6,-4},{6,-10}}, color={0,0,127}));
-  connect(heatTransfer.Q_flow_DH, sink.Q_flow) annotation (Line(points={{22,4},{
-          22,4},{-6,4},{-6,8}},                      color={0,0,127}));
-  connect(T_DH_in.port_b, Mixer_DH.ports[1])
-    annotation (Line(points={{-36,60},{-12.4,60}}, color={0,127,255}));
-  connect(T_DH_in.T, cP_DH.T_in) annotation (Line(points={{-44,51.2},{-44,51.2},
-          {-44,50},{-44,48},{64,48},{64,28}}, color={0,0,127}));
-  connect(T_DH_in.T, heatTransfer.T_DH_in) annotation (Line(points={{-44,51.2},{
-          -44,48},{52,48},{52,8},{42,8}}, color={0,0,127}));
-  connect(Enthalpy_DH_in.port_b, massFlow_DH.port_a)
-    annotation (Line(points={{-80,60},{-80,60},{-74,60}}, color={0,127,255}));
-  connect(Enthalpy_DH_in.h_out, cP_DH.h_in) annotation (Line(points={{-88,68.8},
-          {-88,68.8},{-88,84},{72,84},{72,28}}, color={0,0,127}));
-  connect(Enthalpy_DH_out.h_out, cP_DH.h_out) annotation (Line(points={{86,51.2},
-          {86,51.2},{86,48},{76,48},{76,28}}, color={0,0,127}));
-  connect(T_DH_out.port_b, Enthalpy_DH_out.port_a)
-    annotation (Line(points={{74,60},{76,60},{78,60}}, color={0,127,255}));
-  connect(T_DH_out.T, cP_DH.T_out)
-    annotation (Line(points={{66,51.2},{68,51.2},{68,28}}, color={0,0,127}));
-  connect(massFlow_HS.port_b, T_HS_in.port_a)
-    annotation (Line(points={{60,-60},{60,-60}}, color={0,127,255}));
-  connect(T_HS_in.port_b, Mixer_HS.ports[1]) annotation (Line(points={{44,-60},{
-          44,-60},{12.4,-60}}, color={0,127,255}));
-  connect(T_HS_in.T, cP_HS.T_in) annotation (Line(points={{52,-51.2},{52,-51.2},
-          {52,-40},{64,-40},{64,-28}}, color={0,0,127}));
-  connect(T_HS_in.T, heatTransfer.T_HS_in) annotation (Line(points={{52,-51.2},{
-          52,-51.2},{52,-8},{42,-8}}, color={0,0,127}));
-  connect(Enhalpy_HS_in.port_b, massFlow_HS.port_a)
-    annotation (Line(points={{78,-60},{78,-60},{76,-60}}, color={0,127,255}));
-  connect(Enhalpy_HS_in.h_out, cP_HS.h_in) annotation (Line(points={{86,-51.2},{
-          86,-51.2},{86,-40},{72,-40},{72,-28}}, color={0,0,127}));
-  connect(Enthalpy_HS_out.h_out, cP_HS.h_out) annotation (Line(points={{-44,-51.2},
-          {-44,-51.2},{-44,-36},{76,-36},{76,-28}}, color={0,0,127}));
-  connect(Enthalpy_HS_out.port_b, T_HS_out.port_a) annotation (Line(points={{-52,
-          -60},{-52,-60},{-64,-60}}, color={0,127,255}));
-  connect(T_HS_out.T, cP_HS.T_out) annotation (Line(points={{-72,-51.2},{-72,-32},
-          {68,-32},{68,-28}}, color={0,0,127}));
-  connect(heatTransfer.Q_flow_DH, Measure_Qflow.u) annotation (Line(points={{22,4},{
-          16,4},{16,29},{14,29},{11,29}},            color={0,0,127}));
-  connect(port_a1, Enthalpy_DH_in.port_a)
-    annotation (Line(points={{-100,60},{-98,60},{-96,60}}, color={0,127,255}));
-  connect(port_a2, Enhalpy_HS_in.port_a)
-    annotation (Line(points={{100,-60},{98,-60},{94,-60}}, color={0,127,255}));
-  connect(T_HS_out.port_b, port_b2) annotation (Line(points={{-80,-60},{-80,-60},
+  connect(Mixer2.heatPort, source.port) annotation (Line(points={{12,-52},{12,
+          -40},{12,-26},{-26,-26}}, color={191,0,0}));
+  connect(Mixer1.heatPort, sink.port) annotation (Line(points={{-12,52},{-12,34},
+          {-26,34},{-26,24}}, color={191,0,0}));
+  connect(mFlow1.m_flow, heatTransfer.mFlow1) annotation (Line(points={{-60,
+          68.8},{-60,90},{90,90},{90,2},{10,2}}, color={0,0,127}));
+  connect(heatTransfer.Q_flow_2, source.Q_flow) annotation (Line(points={{-10,
+          -4},{-10,-4},{-26,-4},{-26,-10}}, color={0,0,127}));
+  connect(heatTransfer.Q_flow_1, sink.Q_flow) annotation (Line(points={{-10,4},
+          {-10,4},{-26,4},{-26,8}}, color={0,0,127}));
+  connect(T1_in.port_b, Mixer1.ports[1])
+    annotation (Line(points={{-32,60},{-18.4,60}}, color={0,127,255}));
+  connect(T1_in.T, heatTransfer.T1_in) annotation (Line(points={{-40,51.2},{-40,
+          40},{40,40},{40,8},{10,8}}, color={0,0,127}));
+  connect(h1_in.port_b, mFlow1.port_a)
+    annotation (Line(points={{-72,60},{-68,60}}, color={0,127,255}));
+  connect(T1_out.port_b, h1_out.port_a)
+    annotation (Line(points={{68,60},{68,60},{72,60}}, color={0,127,255}));
+  connect(mFlow2.port_b, T2_in.port_a)
+    annotation (Line(points={{52,-60},{52,-60},{48,-60}}, color={0,127,255}));
+  connect(T2_in.port_b, Mixer2.ports[1]) annotation (Line(points={{32,-60},{32,
+          -60},{18.4,-60}}, color={0,127,255}));
+  connect(T2_in.T, heatTransfer.T2_in) annotation (Line(points={{40,-51.2},{40,
+          -51.2},{40,-8},{10,-8}}, color={0,0,127}));
+  connect(h2_in.port_b, mFlow2.port_a)
+    annotation (Line(points={{72,-60},{72,-60},{68,-60}}, color={0,127,255}));
+  connect(h2_out.port_b, T2_out.port_a) annotation (Line(points={{-68,-60},{-68,
+          -60},{-72,-60}}, color={0,127,255}));
+  connect(port_a1, h1_in.port_a)
+    annotation (Line(points={{-100,60},{-88,60}}, color={0,127,255}));
+  connect(port_a2, h2_in.port_a)
+    annotation (Line(points={{100,-60},{88,-60}}, color={0,127,255}));
+  connect(T2_out.port_b, port_b2) annotation (Line(points={{-88,-60},{-88,-60},
           {-100,-60}}, color={0,127,255}));
-  connect(port_b1, Enthalpy_DH_out.port_b)
-    annotation (Line(points={{100,60},{98,60},{94,60}}, color={0,127,255}));
-  connect(massFlow_DH.port_b, T_DH_in.port_a) annotation (Line(
-      points={{-58,60},{-52,60}},
+  connect(port_b1, h1_out.port_b)
+    annotation (Line(points={{100,60},{88,60}}, color={0,127,255}));
+  connect(mFlow1.port_b, T1_in.port_a) annotation (Line(
+      points={{-52,60},{-48,60}},
       color={0,127,255},
       smooth=Smooth.None));
-  connect(Mixer_DH.ports[2], res1.port_a) annotation (Line(points={{-15.6,60},{-15.6,
-          60},{18,60}}, color={0,127,255}));
-  connect(res1.port_b, T_DH_out.port_a)
-    annotation (Line(points={{38,60},{58,60}}, color={0,127,255}));
-  connect(Enthalpy_HS_out.port_a,res2. port_b)
-    annotation (Line(points={{-36,-60},{-26,-60}}, color={0,127,255}));
-  connect(res2.port_a, Mixer_HS.ports[2])
-    annotation (Line(points={{-6,-60},{15.6,-60}}, color={0,127,255}));
+  connect(Mixer1.ports[2], res1.port_a) annotation (Line(points={{-21.6,60},{
+          -21.6,60},{10,60}}, color={0,127,255}));
+  connect(res1.port_b, T1_out.port_a)
+    annotation (Line(points={{30,60},{42,60},{52,60}}, color={0,127,255}));
+  connect(h2_out.port_a, res2.port_b)
+    annotation (Line(points={{-52,-60},{-30,-60}}, color={0,127,255}));
+  connect(res2.port_a, Mixer2.ports[2])
+    annotation (Line(points={{-10,-60},{21.6,-60}}, color={0,127,255}));
+  connect(cpCalc1.cp, heatTransfer.cP1)
+    annotation (Line(points={{60,10},{60,4},{10,4}}, color={0,0,127}));
+  connect(cpCalc1.h_out, h1_out.h_out) annotation (Line(points={{66,30},{66,30},
+          {66,40},{80,40},{80,51.2}}, color={0,0,127}));
+  connect(cpCalc1.T_out, T1_out.T) annotation (Line(points={{58,30},{58,30},{58,
+          51.2},{60,51.2}}, color={0,0,127}));
+  connect(h1_in.h_out, cpCalc1.h_in) annotation (Line(points={{-80,68.8},{-80,
+          68.8},{-80,80},{66,80},{66,46},{62,46},{62,30}},         color={0,0,
+          127}));
+  connect(T1_in.T, cpCalc1.T_in) annotation (Line(points={{-40,51.2},{-40,40},{
+          54,40},{54,30}}, color={0,0,127}));
+  connect(cpCalc2.cp, heatTransfer.cP2)
+    annotation (Line(points={{60,-10},{60,-4},{10,-4}}, color={0,0,127}));
+  connect(h2_in.h_out, cpCalc2.h_in) annotation (Line(points={{80,-51.2},{80,
+          -40},{62,-40},{62,-30}}, color={0,0,127}));
+  connect(T2_out.T, cpCalc2.T_out) annotation (Line(points={{-80,-51.2},{-80,
+          -34},{58,-34},{58,-30}}, color={0,0,127}));
+  connect(h2_out.h_out, cpCalc2.h_out) annotation (Line(points={{-60,-51.2},{
+          -60,-51.2},{-60,-38},{66,-38},{66,-30}}, color={0,0,127}));
+  connect(heatTransfer.Q_flow_1, Measure_Qflow.u) annotation (Line(points={{-10,
+          4},{-40,4},{-40,15},{-55,15}}, color={0,0,127}));
+  connect(mFlow2.m_flow, heatTransfer.mFlow2) annotation (Line(points={{60,
+          -68.8},{60,-90},{90,-90},{90,-2},{10,-2}}, color={0,0,127}));
+  connect(T2_in.T, cpCalc2.T_in) annotation (Line(points={{40,-51.2},{40,-42},{
+          54,-42},{54,-30}}, color={0,0,127}));
   annotation (
   preferredView="info",
     Documentation(info="<html>
@@ -252,8 +251,10 @@ mass transfer and pressure drop equations.
 <li><i>January 22, 2016</i>, by Michael Wetter:<br>Corrected type declaration of pressure difference. This is for <a href=\"https://github.com/iea-annex60/modelica-annex60/issues/404\">#404</a>. </li>
 </ul>
 </html>"),
-    Diagram(coordinateSystem(preserveAspectRatio=false, initialScale=0.1)),
-    Icon(coordinateSystem(preserveAspectRatio=false, initialScale=0.1),
+    Diagram(coordinateSystem(preserveAspectRatio=false, initialScale=0.1,
+        extent={{-100,-100},{100,100}})),
+    Icon(coordinateSystem(preserveAspectRatio=false, initialScale=0.1,
+        extent={{-100,-120},{100,100}}),
                     graphics={
         Rectangle(
           extent={{-100,80},{100,-80}},

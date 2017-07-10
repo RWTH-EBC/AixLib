@@ -1,6 +1,4 @@
 within AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
-
-
 model GroundFloorBuildingEnvelope
   ///////// construction parameters
   parameter Integer TMC = 1 "Thermal Mass Class" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1 "Heavy", choice = 2 "Medium", choice = 3 "Light", radioButtons = true));

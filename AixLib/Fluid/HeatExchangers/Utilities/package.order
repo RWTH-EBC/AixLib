@@ -1,5 +1,6 @@
 cP_HS
 cP_DH
 Heat_Transfer
-Inputs4toOutputs2
-Temperature_detection
+HXcharacteristic
+TempCalcOutflow
+cpCalc

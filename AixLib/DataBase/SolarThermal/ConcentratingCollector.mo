@@ -1,6 +1,4 @@
 within AixLib.DataBase.SolarThermal;
-
-
 record ConcentratingCollector "Properties of a CRC collector"
   extends SolarThermalBaseDataDefinition(eta_zero = 0.65, c1 = 1, c2 = 0.004);
   annotation(Documentation(info = "<html>

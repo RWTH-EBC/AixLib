@@ -1,6 +1,4 @@
 within AixLib.DataBase.Fans;
-
-
 record Fan1 "Fan with Diameter of 250mm"
   extends FanCharacteristicsBaseDataDefinition(dp = [0, 1100, 0.3; 900, 1050, 0.4; 1500, 1000, 0.6; 2000, 800, 0.7; 2500, 500, 0.5; 2600, 400, 0.4; 2700, 0, 0.3]);
   annotation(Documentation(info = "<html>
