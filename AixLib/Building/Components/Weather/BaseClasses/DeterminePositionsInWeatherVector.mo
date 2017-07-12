@@ -1,6 +1,4 @@
 within AixLib.Building.Components.Weather.BaseClasses;
-
-
 function DeterminePositionsInWeatherVector
   "Determines position in weather vector"
   input Boolean Cloud_cover "Cloud cover";

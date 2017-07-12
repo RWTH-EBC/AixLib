@@ -9,4 +9,3 @@ class Copyright "Copyright"
          </html>
          "));
 end Copyright;
-

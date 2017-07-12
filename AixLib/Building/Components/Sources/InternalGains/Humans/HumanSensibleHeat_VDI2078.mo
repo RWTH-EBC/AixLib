@@ -1,6 +1,4 @@
 within AixLib.Building.Components.Sources.InternalGains.Humans;
-
-
 model HumanSensibleHeat_VDI2078
   "Model for sensible heat output after VDI 2078 "
   // Number of Persons

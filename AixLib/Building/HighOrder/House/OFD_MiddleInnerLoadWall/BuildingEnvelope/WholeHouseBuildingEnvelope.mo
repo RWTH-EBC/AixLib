@@ -1,6 +1,4 @@
 within AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
-
-
 model WholeHouseBuildingEnvelope
   import AixLib;
   ///////// construction parameters
