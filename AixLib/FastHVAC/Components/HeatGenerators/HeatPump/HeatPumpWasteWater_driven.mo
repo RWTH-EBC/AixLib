@@ -92,13 +92,11 @@ model HeatPumpWasteWater_driven
     annotation (Placement(transformation(extent={{112,0},{92,20}})));
   Interfaces.EnthalpyPort_b fromWasteWaterStorage1
     annotation (Placement(transformation(extent={{66,-104},{74,-96}})));
-  Utilities.Sensors.FuelCounter fuelCounter
-    annotation (Placement(transformation(extent={{-12,-98},{8,-78}})));
   Components.Sensors.TemperatureSensor T_flowCond annotation (Placement(
         transformation(
         extent={{5,-6},{-5,6}},
         rotation=180,
-        origin={-95,-68})));
+        origin={-71,-76})));
   Components.Sensors.TemperatureSensor T_flowCond1 annotation (Placement(
         transformation(
         extent={{5,-6},{-5,6}},
@@ -116,9 +114,19 @@ model HeatPumpWasteWater_driven
   Modelica.Blocks.Sources.Constant const(k=3)
     annotation (Placement(transformation(extent={{-174,-62},{-162,-50}})));
   BaseClasses.WorkingFluid workingFluid(T0=318.15, m_fluid=0.03)
-    annotation (Placement(transformation(extent={{-88,-60},{-68,-76}})));
+    annotation (Placement(transformation(extent={{-98,-58},{-78,-74}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
     annotation (Placement(transformation(extent={{-144,-102},{-124,-82}})));
+  Modelica.Blocks.Interfaces.RealOutput P_el_Heatpump annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=-90,
+        origin={-44,-110})));
+  Modelica.Blocks.Interfaces.RealOutput P_el_Heatpump_Heatingrod annotation (
+      Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=-90,
+        origin={-110,-114})));
 equation
    total_heat = sum(wasteWaterStorage.heatingCoil1.Therm1[k].Q_flow for k in 1:10);
   //get heat transfer coefficient at the upper level for cleaning control
@@ -151,8 +159,8 @@ connect(  fluidSource1.enthalpyPort_b, wasteWaterStorage.UnloadingCycle_In[1])
   connect(wasteWaterStorageControl.dot_m_cond_pump, cond_pump.dotm_setValue)
     annotation (Line(points={{54.64,31.1},{-14,31.1},{-14,-6},{-91,-6},{-91,-17.6}},
         color={0,0,127}));
-  connect(heatPump.enthalpyPort_outCo, T_returnCond.enthalpyPort_a) annotation
-    (Line(points={{-63.2,-57.6},{-63.2,-50},{-50,-50},{-50,-26.1},{-59.2,-26.1}},
+  connect(heatPump.enthalpyPort_outCo, T_returnCond.enthalpyPort_a) annotation (
+     Line(points={{-63.2,-57.6},{-63.2,-50},{-50,-50},{-50,-26.1},{-59.2,-26.1}},
         color={176,0,0}));
   connect(wasteWaterStorage.T_layers, wasteWaterStorageControl.T_WasteWaterStorage)
     annotation (Line(points={{56.1,-47},{46,-47},{46,51.84},{55.32,51.84}},
@@ -176,14 +184,9 @@ connect(  fluidSource1.enthalpyPort_b, wasteWaterStorage.UnloadingCycle_In[1])
   connect(wasteWaterStorageControl.iscleaning, wasteWaterStorage.biofilm_removing)
     annotation (Line(points={{81.5,24.98},{81.5,2.17},{84.03,2.17},{84.03,
           -24.74}}, color={255,0,255}));
-  connect(heatPump.Pel_out, fuelCounter.fuel_in) annotation (Line(points={{-46,
-          -74.4},{-46,-88},{-12,-88}}, color={0,0,127}));
   connect(wasteWaterStorage.s_biofilm, wasteWaterStorageControl.s_biofilm)
     annotation (Line(points={{96.84,-30.62},{116,-30.62},{116,30},{91.36,30},{
           91.36,27.36}}, color={0,0,127}));
-  connect(T_flowCond.enthalpyPort_a, toHeatPump) annotation (Line(points={{
-          -99.4,-67.94},{-99.4,-66.97},{-100,-66.97},{-100,-52}}, color={176,0,
-          0}));
   connect(T_flowCond1.enthalpyPort_a, wasteWaterStorage.port_HC1_out)
     annotation (Line(points={{13.4,-66.06},{38.7,-66.06},{38.7,-58.34},{57.78,
           -58.34}}, color={176,0,0}));
@@ -192,23 +195,29 @@ connect(  fluidSource1.enthalpyPort_b, wasteWaterStorage.UnloadingCycle_In[1])
         color={176,0,0}));
   connect(add.y, PID.u_s)
     annotation (Line(points={{-147.6,-68},{-139.2,-68}}, color={0,0,127}));
-  connect(PID.u_m, T_flowCond.T) annotation (Line(points={{-132,-75.2},{-114,
-          -75.2},{-114,-74.6},{-94.5,-74.6}}, color={0,0,127}));
+  connect(PID.u_m, T_flowCond.T) annotation (Line(points={{-132,-75.2},{-102,
+          -75.2},{-102,-82.6},{-70.5,-82.6}}, color={0,0,127}));
   connect(add.u2, T_flowCond1.T) annotation (Line(points={{-156.8,-70.4},{
           -156.8,-98},{8.5,-98},{8.5,-59.4}}, color={0,0,127}));
   connect(const.y, add.u1) annotation (Line(points={{-161.4,-56},{-158,-56},{
           -158,-65.6},{-156.8,-65.6}}, color={0,0,127}));
-  connect(heatPump.enthalpyPort_inCo, workingFluid.enthalpyPort_b) annotation (
-      Line(points={{-63.6,-74.2},{-68,-74.2},{-68,-68},{-69,-68}}, color={176,0,
-          0}));
-  connect(T_flowCond.enthalpyPort_b, workingFluid.enthalpyPort_a) annotation (
-      Line(points={{-90.5,-67.94},{-90,-67.94},{-90,-68},{-87,-68}}, color={176,
-          0,0}));
   connect(prescribedHeatFlow.Q_flow, PID.y) annotation (Line(points={{-144,-92},
           {-134,-92},{-134,-68},{-125.4,-68}}, color={0,0,127}));
   connect(prescribedHeatFlow.port, workingFluid.heatPort) annotation (Line(
-        points={{-124,-92},{-102,-92},{-102,-75.52},{-78,-75.52}}, color={191,0,
+        points={{-124,-92},{-102,-92},{-102,-73.52},{-88,-73.52}}, color={191,0,
           0}));
+  connect(heatPump.Pel_out, P_el_Heatpump) annotation (Line(points={{-46,-74.4},
+          {-46,-92},{-46,-110},{-44,-110}}, color={0,0,127}));
+  connect(prescribedHeatFlow.Q_flow, P_el_Heatpump_Heatingrod) annotation (Line(
+        points={{-144,-92},{-142,-92},{-142,-114},{-110,-114}}, color={0,0,127}));
+  connect(toHeatPump, workingFluid.enthalpyPort_a) annotation (Line(points={{
+          -100,-52},{-100,-66},{-97,-66}}, color={176,0,0}));
+  connect(workingFluid.enthalpyPort_b, T_flowCond.enthalpyPort_a) annotation (
+      Line(points={{-79,-66},{-78,-66},{-78,-75.94},{-75.4,-75.94}}, color={176,
+          0,0}));
+  connect(heatPump.enthalpyPort_inCo, T_flowCond.enthalpyPort_b) annotation (
+      Line(points={{-63.6,-74.2},{-66,-74.2},{-66,-75.94},{-66.5,-75.94}},
+        color={176,0,0}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})));
 end HeatPumpWasteWater_driven;
