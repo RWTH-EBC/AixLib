@@ -1,6 +1,10 @@
 within AixLib.Airflow.AirHandlingUnit.BaseClasses;
 partial model PartialAHU "Defines necessary parameters and connectors"
 
+
+  parameter Real clockPeriodGeneric(min=0) = 1800
+    "time period in s for sampling (= converting time-continous into time-discrete) input variables. Recommendation: half of the duration of one simulation interval"
+    annotation (Dialog(group="Settings for State Machines"));
     // Booleans for possible AHU modes
   inner parameter Boolean heating=true "Heating Function of AHU"
     annotation (Dialog(group="AHU Modes"));
@@ -18,12 +22,19 @@ partial model PartialAHU "Defines necessary parameters and connectors"
   inner parameter Real BPF_DeHu(
     min=0,
     max=1) = 0.2
-    "By-pass factor of cooling coil during dehumidification. Necessary to calculate the real outgoing enthalpy flow of heat exchanger in dehumidification mode taking the surface enthalpy of the cooling coil into account"
+    "By-pass factor of cooling coil during dehumidification. Necessary to 
+    calculate the real outgoing enthalpy flow of heat exchanger in 
+    dehumidification mode taking the surface enthalpy of the cooling coil into account"
     annotation (Dialog(group="Settings AHU Value", enable=(dehumidification
            and cooling and heating)));
   inner parameter Boolean HRS=true
     "Is a HeatRecoverySystem physically integrated in the AHU?"
     annotation (Dialog(group="AHU Modes"), choices(checkBox=true));
+  parameter Boolean use_Vflow_inextractAir=false
+    "If incoming volume flow of outdoor/supply air should not equal the 
+    volume flow of extract air, set this parameter to true"
+    annotation (Evaluate=true, HideResult=true, Dialog(group="AHU Modes"),
+      choices(checkBox=true));
   // Efficiency of HRS
   parameter Real efficiencyHRS_enabled(
     min=0,
@@ -32,13 +43,9 @@ partial model PartialAHU "Defines necessary parameters and connectors"
   parameter Real efficiencyHRS_disabled(
     min=0,
     max=1) = 0.2
-    "taking a little heat transfer into account although HRS is disabled (in case that a HRS is physically installed in the AHU)"
+    "taking a little heat transfer into account although HRS is disabled 
+    (in case that a HRS is physically installed in the AHU)"
     annotation (Dialog(group="Settings AHU Value", enable=HRS));
-
-  parameter Real clockPeriodGeneric(min=0) = 1800
-    "time period in s for sampling (= converting time-continous into time-discrete) input variables. Recommendation: half of the duration of one simulation interval"
-    annotation (Dialog(group="Settings for State Machines"));
-
   // assumed increase in ventilator pressure
   parameter Modelica.SIunits.Pressure dp_sup=800
     "pressure difference over supply fan"
@@ -142,9 +149,17 @@ partial model PartialAHU "Defines necessary parameters and connectors"
   Modelica.Blocks.Interfaces.RealInput Vflow_in_extractAir(unit="m3/s") "m3/s"
     annotation (Placement(transformation(extent={{114,80},{86,108}}),
         iconTransformation(extent={{88,32},{80,40}})));
+protected
+  Modelica.Blocks.Interfaces.RealInput Vflow_in_extractAir_internal(unit="m3/s") "m3/sNeeded to connect to conditional connector";
 equation
   dehumidification = if dehumidificationSet and heating and cooling then dehumidificationSet else false;
   humidification = if dehumidificationSet and heating and cooling then humidificationSet else false;
+
+  connect(Vflow_in_extractAir, Vflow_in_extractAir_internal);
+
+  if not use_Vflow_inextractAir then
+    Vflow_in_extractAir_internal = Vflow_in;
+  end if;
 
   annotation (Diagram(coordinateSystem(extent={{-100,-100},{100,100}},
           preserveAspectRatio=false)), Icon(coordinateSystem(extent={{-100,-40},
