@@ -66,36 +66,36 @@ partial model PartialAHU "Defines necessary parameters and connectors"
     annotation (Placement(transformation(
         extent={{14,-14},{-14,14}},
         rotation=0,
-        origin={100,90}),iconTransformation(
+        origin={100,78}),iconTransformation(
         extent={{-4,-4},{4,4}},
         rotation=180,
-        origin={84,28})));
+        origin={84,22})));
   Modelica.Blocks.Interfaces.RealInput phi_extractAir(start=0.8)
     "relativ Humidity [Range: 0...1]" annotation (Placement(transformation(
         extent={{14,-14},{-14,14}},
         rotation=0,
-        origin={100,72}),iconTransformation(
+        origin={100,62}),iconTransformation(
         extent={{-4,-4},{4,4}},
         rotation=180,
-        origin={84,18})));
+        origin={84,12})));
   Modelica.Blocks.Interfaces.RealOutput phi_supply(start=0.8)
     "relativ Humidity [Range: 0...1]" annotation (Placement(transformation(
         extent={{-9,-9},{9,9}},
         rotation=0,
-        origin={99,9}),  iconTransformation(
+        origin={99,5}),  iconTransformation(
         extent={{4,-4},{-4,4}},
         rotation=180,
         origin={84,-34})));
   Modelica.Blocks.Interfaces.RealInput T_supplyAir(unit="K", start=295.15)
     "K (use as PortIn)"
-    annotation (Placement(transformation(extent={{114,28},{86,56}}),
+    annotation (Placement(transformation(extent={{114,22},{86,50}}),
         iconTransformation(extent={{88,-18},{80,-10}})));
   Modelica.Blocks.Interfaces.RealInput phi_supplyAir[2](start={0.4,0.6})
     "relativ Humidity [Range: 0...1] (Vector: [1] min, [2] max)" annotation (
       Placement(transformation(
         extent={{14,-14},{-14,14}},
         rotation=0,
-        origin={100,24}),iconTransformation(
+        origin={100,20}),iconTransformation(
         extent={{-4,-4},{4,4}},
         rotation=180,
         origin={84,-24})));
@@ -135,10 +135,13 @@ partial model PartialAHU "Defines necessary parameters and connectors"
     "K (use as PortOut)"                                                                            annotation (Placement(transformation(
         extent={{-9,-9},{9,9}},
         rotation=0,
-        origin={99,57}), iconTransformation(
+        origin={99,49}), iconTransformation(
         extent={{4,-4},{-4,4}},
         rotation=180,
         origin={84,-4})));
+  Modelica.Blocks.Interfaces.RealInput Vflow_in_extractAir(unit="m3/s") "m3/s"
+    annotation (Placement(transformation(extent={{114,80},{86,108}}),
+        iconTransformation(extent={{88,32},{80,40}})));
 equation
   dehumidification = if dehumidificationSet and heating and cooling then dehumidificationSet else false;
   humidification = if dehumidificationSet and heating and cooling then humidificationSet else false;
