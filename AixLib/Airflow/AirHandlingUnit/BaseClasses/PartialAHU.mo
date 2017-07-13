@@ -133,7 +133,8 @@ partial model PartialAHU "Defines necessary parameters and connectors"
         extent={{-5,-5},{5,5}},
         rotation=-90,
         origin={49,-35})));
-  Modelica.Blocks.Interfaces.RealOutput Vflow_out(unit="m3/s",start=1e-3) "m3/s"
+  Modelica.Blocks.Interfaces.RealOutput Vflow_out(unit="m3/s",start=1e-3)
+    "supply volume flow in m3/s"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
