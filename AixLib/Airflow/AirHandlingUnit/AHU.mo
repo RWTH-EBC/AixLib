@@ -87,7 +87,7 @@ model AHU
 
   // Sampler (time-continous to time-discrete variables)
 
-  Modelica_Synchronous.RealSignals.Sampler.SampleVectorizedAndClocked sample(n=8)
+  Modelica_Synchronous.RealSignals.Sampler.SampleVectorizedAndClocked sample(n=9)
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
@@ -1277,19 +1277,20 @@ equation
   //stateToHuCHRS_false==false,
 
   connect(T_outdoorAir, sample.u[1]) annotation (Line(points={{-100,56},{-100,
-          56},{-67.75,56},{-67.75,26}},
+          56},{-67.7778,56},{-67.7778,26}},
                                     color={0,0,127}));
   connect(X_outdoorAir, sample.u[2]) annotation (Line(points={{-100,36},{-100,
-          36},{-67.25,36},{-67.25,26}},
+          36},{-67.3333,36},{-67.3333,26}},
                                     color={0,0,127}));
-  connect(T_supplyAir, sample.u[3]) annotation (Line(points={{100,36},{100,42},{
-          -66.75,42},{-66.75,26}},
+  connect(T_supplyAir, sample.u[3]) annotation (Line(points={{100,36},{100,42},
+          {-66.8889,42},{-66.8889,26}},
                             color={0,0,127}));
   connect(T_extractAir, sample.u[4]) annotation (Line(points={{100,78},{-60,78},
-          {-60,60},{-66.25,60},{-66.25,26}},
+          {-60,60},{-66.4444,60},{-66.4444,26}},
                             color={0,0,127}));
-  connect(Vflow_in, sample.u[8]) annotation (Line(points={{-100,82},{-64.25,82},
-          {-64.25,26}},color={0,0,127}));
+  connect(Vflow_in, sample.u[8]) annotation (Line(points={{-100,82},{-64.6667,
+          82},{-64.6667,26}},
+                       color={0,0,127}));
   connect(Vflow_in_extractAir_internal, sample.u[9]);
   connect(hold_phi_sup.y, phi_supply) annotation (Line(points={{79,9},{99,9},{99,
           5}},                color={0,0,127}));
