@@ -1275,18 +1275,18 @@ equation
   connect(X_outdoorAir, sample.u[2]) annotation (Line(points={{-100,36},{-100,
           36},{-67.25,36},{-67.25,26}},
                                     color={0,0,127}));
-  connect(T_supplyAir, sample.u[3]) annotation (Line(points={{100,42},{100,42},
+  connect(T_supplyAir, sample.u[3]) annotation (Line(points={{100,36},{100,42},
           {-66.75,42},{-66.75,26}},
                             color={0,0,127}));
-  connect(T_extractAir, sample.u[4]) annotation (Line(points={{100,90},{-60,90},
+  connect(T_extractAir, sample.u[4]) annotation (Line(points={{100,78},{-60,78},
           {-60,60},{-66.25,60},{-66.25,26}},
                             color={0,0,127}));
   connect(Vflow_in, sample.u[8]) annotation (Line(points={{-100,82},{-64.25,82},
           {-64.25,26}},color={0,0,127}));
   connect(hold_phi_sup.y, phi_supply) annotation (Line(points={{79,9},{99,9},{
-          99,9}},             color={0,0,127}));
+          99,5}},             color={0,0,127}));
   connect(TsupAirOut.y, T_supplyAirOut) annotation (Line(points={{79,57},{99,57},
-          {99,57}},                                                                          color={0,0,127}));
+          {99,49}},                                                                          color={0,0,127}));
 public
   block StateExtra
 
