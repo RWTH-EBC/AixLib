@@ -30,7 +30,7 @@ partial model PartialAHU "Defines necessary parameters and connectors"
   inner parameter Boolean HRS=true
     "Is a HeatRecoverySystem physically integrated in the AHU?"
     annotation (Dialog(group="AHU Modes"), choices(checkBox=true));
-  parameter Boolean use_Vflow_inextractAir=false
+  parameter Boolean use_Vflow_in_extractAir=false
     "If incoming volume flow of outdoor/supply air should not equal the 
     volume flow of extract air, set this parameter to true"
     annotation (Evaluate=true, HideResult=true, Dialog(group="AHU Modes"),
@@ -140,25 +140,26 @@ partial model PartialAHU "Defines necessary parameters and connectors"
         rotation=-90,
         origin={54,-100}),iconTransformation(extent={{4,-4},{-4,4}}, origin={-96,16})));
   Modelica.Blocks.Interfaces.RealOutput T_supplyAirOut(unit="K", start=295.15)
-    "K (use as PortOut)"                                                                            annotation (Placement(transformation(
+    "K (use as PortOut)" annotation (Placement(transformation(
         extent={{-9,-9},{9,9}},
         rotation=0,
         origin={99,49}), iconTransformation(
         extent={{4,-4},{-4,4}},
         rotation=180,
         origin={84,-4})));
-  Modelica.Blocks.Interfaces.RealInput Vflow_in_extractAir(unit="m3/s") "m3/s"
+  Modelica.Blocks.Interfaces.RealInput Vflow_in_extractAir(unit="m3/s") if
+   use_Vflow_in_extractAir "Volume flow of extract air"
     annotation (Placement(transformation(extent={{114,80},{86,108}}),
         iconTransformation(extent={{88,32},{80,40}})));
 protected
-  Modelica.Blocks.Interfaces.RealInput Vflow_in_extractAir_internal(unit="m3/s") "m3/sNeeded to connect to conditional connector";
+  Modelica.Blocks.Interfaces.RealInput Vflow_in_extractAir_internal(unit="m3/s") "Needed to connect to conditional connector";
 equation
   dehumidification = if dehumidificationSet and heating and cooling then dehumidificationSet else false;
   humidification = if dehumidificationSet and heating and cooling then humidificationSet else false;
 
   connect(Vflow_in_extractAir, Vflow_in_extractAir_internal);
 
-  if not use_Vflow_inextractAir then
+  if not use_Vflow_in_extractAir then
     Vflow_in_extractAir_internal = Vflow_in;
   end if;
 
