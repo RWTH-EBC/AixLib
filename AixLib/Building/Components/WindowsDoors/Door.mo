@@ -31,8 +31,6 @@ equation
  <li>the conductive heat transfer through the door with a U-Value is set to 1.8 W/(m&sup2;K) (EnEV2009)</li>
  <li>the radiative heat transfer on both sides</li>
  </ul>
- <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Assumptions</span></h4>
  <ul>
  <li>Constant U-value.</li>

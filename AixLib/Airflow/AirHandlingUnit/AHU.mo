@@ -1383,9 +1383,6 @@ equation
 <p>It is based on incoming and outgoing enthalpy flows of moist air (thermodynamic principle).</p>
 <p><span style=\"font-family: MS Shell Dlg 2;\">The model aims to need little computational effort. Therefore state machines represent the basis of the model and no Modelica Fluid is used.</span></p>
 <p>If simulation runs instable, reduce clockPeriodGeneric and/or use one of the alternative equations for the calculation of <code>p_sat_surface</code> in both dehumidification state machines (see source code of these state machines).</p>
-<h4><span style=\"color: #008000\">Level of Development</span></h4>
-<p><img src=\"modelica://AixLib/Resources/Images/stars4.png\" alt=\"stars: 4 out of 5\"/></p>
-<p>4 stars because the model was validated with an AHU test bench at E.ON ERC EBC, RWTH Aachen University. Additionally, simulations of a city district were made and compared to measurement data. Examples and descriptions are recorded in [1]. </p>
 <h4><span style=\"color: #008000\">Assumptions</span></h4>
 <p>For further explanation for each parameter see noted sources and [1]! Please note that the assumptions are made regarding AHUs which are implemented in laboratories.</p>
 <ul>
