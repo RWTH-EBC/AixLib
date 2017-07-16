@@ -19,6 +19,6 @@ calculations.<\\p>
         revisions="<html>
 <ul>
 <li>July 1 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
-<ul/>
+</ul>
 </html>"));
 end BaseClasses;

@@ -84,7 +84,7 @@ equation
     Documentation(revisions="<html>
 <ul>
 <li>May 23, 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
-<ul/>
+</ul>
 </html>", info="<html>
 <p>This model considers third party shadowing due to horizon vertical
 exaggeration and/or obstruction for direct radiation based on VDI 6007 part 3.

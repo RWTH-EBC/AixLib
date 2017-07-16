@@ -18,6 +18,6 @@ algorithm
         revisions="<html>
 <ul>
 <li>June 07, 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
-<ul/>
+</ul>
 </html>"));
 end to_northAzimuth;

@@ -96,6 +96,6 @@ The model considers additional heat input in the event of window ventilation
 </html>", revisions="<html>
 <ul>
 <li>May 5, 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
-<ul/>
+</ul>
 </html>"));
 end VentilationHeat;

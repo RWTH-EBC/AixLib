@@ -177,6 +177,6 @@ Example package. </p>
 </html>", revisions="<html>
 <ul>
 <li>May 23, 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
-<ul/>
+</ul>
 </html>"));
 end SelfShadowing;

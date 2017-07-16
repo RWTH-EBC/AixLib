@@ -45,6 +45,6 @@ equation
       revisions="<html>
 <ul>
 <li>July 13, 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
-<ul/>
+</ul>
 </html>"));
 end Window;

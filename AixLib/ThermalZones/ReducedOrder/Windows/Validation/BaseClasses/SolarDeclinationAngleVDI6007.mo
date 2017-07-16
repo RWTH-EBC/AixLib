@@ -24,5 +24,9 @@ equation
     Documentation(info="<html>
 This model computes the solar declination angle for test case 1 and 3 of
 the VDI2078 in April.
+</html>", revisions="<html>
+<ul>
+<li>July 17 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
+</ul>
 </html>"));
 end SolarDeclinationAngleVDI6007;

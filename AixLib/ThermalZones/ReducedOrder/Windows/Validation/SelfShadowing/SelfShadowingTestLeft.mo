@@ -48,5 +48,9 @@ equation
             100,100}})),
     Documentation(info="<html>
 <p>This model simulates a projection on the left-hand side of the window.</p>
+</html>", revisions="<html>
+<ul>
+<li>July 17 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
+</ul>
 </html>"));
 end SelfShadowingTestLeft;

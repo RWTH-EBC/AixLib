@@ -159,6 +159,6 @@ equation
     Documentation(revisions="<html>
 <ul>
 <li>June 30, 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
-<ul/>
+</ul>
 </html>"));
 end HVisible;

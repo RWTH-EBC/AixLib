@@ -92,7 +92,7 @@ equation
     Documentation(revisions="<html>
 <ul>
 <li>May 23, 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
-<ul/>
+</ul>
 </html>",
       info="<html>
 This model calculates the activation and deactivation times of the illumination

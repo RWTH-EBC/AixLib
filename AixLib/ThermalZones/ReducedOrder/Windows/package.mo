@@ -42,13 +42,17 @@ tested with parts of test case 1 and parts of test case 3 of VDI2078.
  is tested within the test cases. The shadowing models are not included in the
  validation of VDI2078.
   Therfore the models were tested on plausibility with simple examples.<\\p>
+</html>", revisions="<html>
+<ul>
+<li>June 07, 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
+</ul>
 </html>"));
   end UsersGuide;
 
   annotation (Documentation(revisions="<html>
 <ul>
 <li>July 17 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
-<ul/>
+</ul>
 </html>", info="<html>
 <p>This package provides two models which calculate the solar heat transmitted
  through windows into the room. <a href=\"Windows.Window\">Window</a> considers

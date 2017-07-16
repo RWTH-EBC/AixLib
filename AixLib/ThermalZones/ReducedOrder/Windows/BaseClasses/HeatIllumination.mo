@@ -34,5 +34,9 @@ equation
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
 <p>This model calculates the heat input in the room due to illumination.</p>
+</html>", revisions="<html>
+<ul>
+<li>July 17 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
+</ul>
 </html>"));
 end HeatIllumination;
