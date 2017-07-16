@@ -87,7 +87,7 @@ equation
     Documentation(info="<html>
 The model considers additional heat input in the event of window ventilation
  and simultaneously closed external solar protection based on VDI 6007 part 3.
-<br>The closed external solar protection absorbs solar irradiation which is
+<br/>The closed external solar protection absorbs solar irradiation which is
  brought into the room by convection.
   <h4>References</h4>
   <p>VDI. German Association of Engineers Guideline VDI 6007-3
