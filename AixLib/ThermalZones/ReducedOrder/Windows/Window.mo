@@ -210,6 +210,6 @@ to solar irradiation. Therefore it uses the calculations of VDI 6007 part 3.
 </html>",
         revisions="<html>
 <ul>
-<li>June 30, 2016,&nbsp; by Stanley Risch:<br>Implemented. </li>
+<li>June 30, 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li></ul>
 </html>"));
 end Window;

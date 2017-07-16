@@ -7,9 +7,6 @@ model Illumination "Testmodel for Illumination"
     annotation (Placement(transformation(extent={{76,-10},{96,10}})));
   AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Illumination illumination(
     D=0.27,
-    e_ILim1=250,
-    e_ILim2=500,
-    office=true,
     n=1,
     r={0.21},
     A={5.13},
@@ -52,11 +49,13 @@ model Illumination "Testmodel for Illumination"
     til=1.5707963267949,
     lat=0.86393797973719) "Direct irradiation on the surface"
     annotation (Placement(transformation(extent={{-66,-64},{-46,-44}})));
+  Modelica.Blocks.Sources.Constant const(k=500)
+    annotation (Placement(transformation(extent={{-6,-14},{14,6}})));
 equation
   connect(illumination.Illumination, heatIllumination.Illumination)
     annotation (Line(points={{73,0},{75,0}}, color={255,0,255}));
   connect(CorGTaue.corTaue_Gro, illumination.corTaue_Gro) annotation (Line(
-        points={{37,-24},{40,-24},{40,0},{51,0}}, color={0,0,127}));
+        points={{37,-24},{40,-24},{40,4},{51,4}}, color={0,0,127}));
   connect(CorGTaue.corTaue_DifCov, illumination.corTaue_DifCov) annotation (
      Line(points={{37,-26},{44,-26},{44,-6},{51,-6}}, color={0,0,127}));
   connect(HDifTil.H, sunblind.HDifTil) annotation (Line(points={{-39,-8},{-32,
@@ -74,7 +73,7 @@ equation
       color={255,204,51},
       thickness=0.5));
   connect(window.HVis, illumination.HVis)
-    annotation (Line(points={{11,38},{32,38},{32,6},{51,6}}, color={0,0,127}));
+    annotation (Line(points={{11,38},{32,38},{32,8},{51,8}}, color={0,0,127}));
   connect(weaDat.weaBus, HDirTil.weaBus) annotation (Line(
       points={{-80,0},{-74,0},{-74,-54},{-66,-54}},
       color={255,204,51},
@@ -83,6 +82,8 @@ equation
           -36,-54},{-36,-62},{-16.5,-62}}, color={0,0,127}));
   connect(HDirTil.inc, CorGTaue.incAng[1]) annotation (Line(points={{-45,-58},{-40,
           -58},{-40,-30},{19,-30}}, color={0,0,127}));
+  connect(const.y, illumination.e_ILim) annotation (Line(points={{15,-4},{32,-4},
+          {32,-2},{51,-2}}, color={0,0,127}));
   annotation (experiment(StartTime=0,StopTime=31536000),Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),

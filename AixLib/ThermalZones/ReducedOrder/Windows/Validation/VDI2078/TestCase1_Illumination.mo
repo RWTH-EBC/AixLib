@@ -794,9 +794,6 @@ model TestCase1_Illumination
     irradiation"
     annotation (Placement(transformation(extent={{-58,-74},{-48,-64}})));
   AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses.Illumination illumination(
-    e_ILim1=250,
-    e_ILim2=500,
-    office=true,
     n=1,
     r={0.21},
     A={5.13},
@@ -1062,6 +1059,8 @@ model TestCase1_Illumination
     annotation (Placement(transformation(extent={{82,-42},{102,-22}})));
   Modelica.Blocks.Math.Add HDifTil
     annotation (Placement(transformation(extent={{-54,-2},{-38,14}})));
+  BaseClasses.e_ILim_TestCasesVDI e_ILim_TestCasesVDI
+    annotation (Placement(transformation(extent={{8,-28},{24,-14}})));
 equation
   connect(sunblind.sunscreen, CorGTaue.sunscreen[1]) annotation (Line(
         points={{-5.3,-41},{-5.3,20},{-52,20},{-56,20},{-56,42},{-56,54},
@@ -1089,13 +1088,12 @@ equation
           -89},{-43.5,-18},{-60,-18},{-60,58},{-51,58}},       color={0,0,
           127}));
   connect(CorGTaue.corTaue_Gro, illumination.corTaue_Gro) annotation (Line(
-        points={{-33,64},{0,64},{0,54},{14,54},{14,46},{12,46},{12,2},{61,
-          2}},
+        points={{-33,64},{0,64},{0,54},{14,54},{14,46},{12,46},{12,6},{61,6}},
         color={0,0,127}));
   connect(CorGTaue.corTaue_DifCov, illumination.corTaue_DifCov) annotation (
      Line(points={{-33,62},{24,62},{24,-4},{61,-4}}, color={0,0,127}));
-  connect(HVis.HVis, illumination.HVis) annotation (Line(points={{92.5,54},
-          {98,54},{98,52},{98,20},{56,20},{56,8},{61,8}},         color={0,
+  connect(HVis.HVis, illumination.HVis) annotation (Line(points={{92.5,54},{98,54},
+          {98,52},{98,20},{56,20},{56,10},{61,10}},               color={0,
           0,127}));
   connect(to_HDirNor.HDirNor, HVis.HDirNor) annotation (Line(points={{-47,-69},
           {-2,-69},{-2,83.7},{38.25,83.7}},        color={0,0,127}));
@@ -1140,9 +1138,11 @@ equation
       points={{-37.2,6},{-28,6},{-28,-38.1},{-20.7,-38.1}},
       color={0,0,127},
       smooth=Smooth.None));
+  connect(e_ILim_TestCasesVDI.e_ILim, illumination.e_ILim) annotation (Line(
+        points={{24.8,-21},{30,-21},{30,-20},{30,0},{61,0}}, color={0,0,127}));
   annotation (experiment(StartTime=0,StopTime=1638000),Diagram(
   coordinateSystem(preserveAspectRatio=false, extent={{-120,
-            -100},{120,120}}), graphics),
+            -100},{120,120}})),
     Icon(coordinateSystem(extent={{-120,-100},{120,120}})),
     Documentation(info="<html>
 <p>This model simulates parts of VDI2078 test case 1. The solar irradiation is

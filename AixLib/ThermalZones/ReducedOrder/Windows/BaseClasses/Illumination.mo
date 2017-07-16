@@ -3,12 +3,6 @@ model Illumination
   "Determining the activation and deactivation times of the illumination"
   extends Modelica.Blocks.Icons.Block;
   parameter Real D "Daylight quotient";
-  parameter Modelica.SIunits.Illuminance e_ILim1
-    "Internal illumninance required in reference point in the morning and
-    evening";
-  parameter Modelica.SIunits.Illuminance e_ILim2
-    "Internal illumainance required in reference point during working hours";
-  parameter Boolean office "If true: room is office";
   final parameter Modelica.SIunits.LuminousEfficacy k_mDifCov=115
     "Radiation equivalent for uniformly overcast skies";
 
@@ -37,8 +31,8 @@ model Illumination
   Modelica.Blocks.Interfaces.RealInput HVis[n](final quantity=
     "RadiantEnergyFluenceRate", final unit="W/m2")
     "Solar energy entering the room in the visible area"
-    annotation (Placement(transformation(extent={{-120,50},{-100,70}}),
-        iconTransformation(extent={{-120,50},{-100,70}})));
+    annotation (Placement(transformation(extent={{-120,70},{-100,90}}),
+        iconTransformation(extent={{-120,70},{-100,90}})));
   Modelica.Blocks.Interfaces.RealInput corTaue_DifCov[n](
     final quantity="TransmissionCoefficient",
     final unit="1")
@@ -51,14 +45,14 @@ model Illumination
     final quantity="TransmissionCoefficient",
     final unit="1")
     "Correction value for translucence for ground reflection radiation"
-    annotation (Placement(transformation(extent={{-120,-10},{-100,10}}),
-        iconTransformation(extent={{-120,-10},{-100,10}})));
+    annotation (Placement(transformation(extent={{-120,30},{-100,50}}),
+        iconTransformation(extent={{-120,30},{-100,50}})));
 
-  constant Modelica.SIunits.Time day=86400 "Number of seconds in a day";
-  constant Modelica.SIunits.Time week=604800 "Number of seconds in a week";
+  Modelica.Blocks.Interfaces.RealInput e_ILim
+    "Internal illumance in reference point"
+    annotation (Placement(transformation(extent={{-120,-30},{-100,-10}}),
+        iconTransformation(extent={{-120,-30},{-100,-10}})));
 
-  Modelica.SIunits.Illuminance e_ILim
-    "Internal illumance in reference point";
   Real r_DifCov[n] "Conversion factor";
 
   Modelica.SIunits.EnergyFlowRate HLimVisi[n] "Thresholds within the room";
@@ -69,16 +63,6 @@ model Illumination
   Modelica.SIunits.EnergyFlowRate HVisSum "Sum of HVisi";
 
 equation
-  //Picking value for e_ILim
-  if (time-integer(time/day)*day)>64800 or (time-integer(time/day)*day)<25200
-    or (office and time-integer(time/week)*week>432000) then
-    e_ILim=0;
-  elseif (time-integer(time/day)*day)>28800 and
-    (time-integer(time/day)*day)<57600 then
-    e_ILim=e_ILim2;
-  else
-    e_ILim=e_ILim1;
-  end if;
   //Calculating HLimVis
   for i in 1:n loop
     r_DifCov[i]=0.182*(1.178*(1+Modelica.Math.cos(
