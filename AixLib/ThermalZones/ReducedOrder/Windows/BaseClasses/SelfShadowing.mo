@@ -176,6 +176,7 @@ Example package. </p>
   and buildings - modelling of solar radiation.</p>
 </html>", revisions="<html>
 <ul>
-<li>May 23, 2016,&nbsp; by Stanley Risch:<br>Implemented. </li>
+<li>May 23, 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
+<ul/>
 </html>"));
 end SelfShadowing;

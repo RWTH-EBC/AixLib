@@ -33,6 +33,7 @@ equation
 </html>",
       revisions="<html>
 <ul>
-<li>June 30, 2016,&nbsp; by Stanley Risch:<br>Implemented. </li>
+<li>June 30, 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
+<ul/>
 </html>"));
 end Sunblind;

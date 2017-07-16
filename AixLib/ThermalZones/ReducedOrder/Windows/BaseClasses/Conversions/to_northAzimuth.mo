@@ -17,7 +17,7 @@ algorithm
 </html>",
         revisions="<html>
 <ul>
-<li>June 07, 2016,&nbsp; by Stanley Risch:<br>Implemented. </li>
-<ul>
+<li>June 07, 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
+<ul/>
 </html>"));
 end to_northAzimuth;

@@ -47,7 +47,8 @@ tested with parts of test case 1 and parts of test case 3 of VDI2078.
 
   annotation (Documentation(revisions="<html>
 <ul>
-<li>July 17 2016,&nbsp; by Stanley Risch:<br>Implemented. </li>
+<li>July 17 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
+<ul/>
 </html>", info="<html>
 <p>This package provides two models which calculate the solar heat transmitted
  through windows into the room. <a href=\"Windows.Window\">Window</a> considers

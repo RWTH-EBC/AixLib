@@ -18,6 +18,7 @@ calculations.<\\p>
 </html>",
         revisions="<html>
 <ul>
-<li>July 1 2016,&nbsp; by Stanley Risch:<br>Implemented. </li>
+<li>July 1 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
+<ul/>
 </html>"));
 end BaseClasses;

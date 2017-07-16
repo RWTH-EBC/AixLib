@@ -284,8 +284,7 @@ equation
           fillPattern=FillPattern.Solid,
           textString="%name
 ")}),
-Diagram(
-        coordinateSystem(preserveAspectRatio=false)),
+Diagram(coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
 <p>This model calculates the input of heat and visible light into the room due
  to solar irradiation. This model calculates the input of heat and visible
@@ -307,6 +306,7 @@ Diagram(
 </html>",
         revisions="<html>
 <ul>
-<li>June 30, 2016,&nbsp; by Stanley Risch:<br>Implemented. </li>
+<li>June 30, 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
+<ul/>
 </html>"));
 end ShadedWindow;
