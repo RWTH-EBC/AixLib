@@ -1,6 +1,7 @@
 within AixLib.Fluid.DistrictHeatingCooling.BaseClasses.Supplies.NoReturn;
 partial model PartialSupply
   "Base class for modeling supply nodes in DHC systems without return lines"
+  import AixLib;
 
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium model" annotation (choicesAllMatching=true);
@@ -20,6 +21,10 @@ partial model PartialSupply
   AixLib.Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium =
         Medium) "Mass flow rate sensor"
     annotation (Placement(transformation(extent={{70,-10},{90,10}})));
+  replaceable
+    AixLib.Fluid.DistrictHeatingCooling.Supplies.Controllers.Temperature.PartialControllerT
+    controllerT
+    annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
 equation
   connect(port_b, senMasFlo.port_b)
     annotation (Line(points={{100,0},{90,0}}, color={0,127,255}));
