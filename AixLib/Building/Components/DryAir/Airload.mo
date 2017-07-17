@@ -26,8 +26,6 @@ equation
  </html>", info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>The <b>Airload</b> model represents a heat capacity consisting of air. It is described by its volume, density and specific heat capacity. </p>
- <h4><font color=\"#008000\">Level of Development</font></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><font color=\"#008000\">Example Results</font></h4>
  <p><a href=\"AixLib.Building.Components.Examples.DryAir.DryAir_test\">AixLib.Building.Components.Examples.DryAir.DryAir_test</a> </p>
  </html>"));
