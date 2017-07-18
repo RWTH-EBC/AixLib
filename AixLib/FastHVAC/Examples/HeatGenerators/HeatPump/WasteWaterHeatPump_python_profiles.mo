@@ -6,8 +6,9 @@ model WasteWaterHeatPump_python_profiles
     heatPump(cap_calcType=1, redeclare function data_poly =
           Fluid.HeatPumps.BaseClasses.Functions.Characteristics.constantQualityGrade
           (qualityGrade=0.35, P_com=1500)),
-    T_ambient=288.15,
-    PID(yMax=1000, k=0.05))
+    PID(yMax=1000, k=0.05),
+    wasteWaterStorage(v_bio_clean=8e-7),
+    T_ambient=288.15)
     annotation (Placement(transformation(extent={{-56,-66},{-92,-32}})));
   Components.Pumps.FluidSource Freshwater_load_dummy(medium=
         AixLib.FastHVAC.Media.WaterSimple()) annotation (Placement(
@@ -71,10 +72,10 @@ model WasteWaterHeatPump_python_profiles
     n_HC1_low=1,
     use_heatingRod=true,
     n_HR=10,
+    data=DataBase.Storage.Generic_750l(),
     T_start=339.15,
     T_start_wall=293.15,
-    T_start_ins=293.15,
-    data=DataBase.Storage.Generic_750l())
+    T_start_ins=293.15)
     annotation (Placement(transformation(extent={{-8,-80},{36,-36}})));
 
   Building.Components.Weather.ColdWaterTemperature coldWaterTemperature
@@ -32968,7 +32969,7 @@ model WasteWaterHeatPump_python_profiles
         0.107462593351838; 31501560,0; 31504860,0; 31504920,0.124911718282381;
         31504980,0; 31519740,0; 31519800,0.107120378137978; 31519860,0;
         31528140,0; 31528200,0.0748320579799286; 31528260,0; 31530360,0;
-        31530420,0.170939513738677; 31530480,0])
+        31530420,0.170939513738677; 31530480,0; 31530481,0])
     annotation (Placement(transformation(extent={{-142,24},{-122,44}})));
   Modelica.Blocks.Sources.CombiTimeTable tgrey_combi(smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments,
       table=[0,308.15; 21240,308.15; 21300,308.15; 21360,308.15; 23580,308.15;
@@ -38341,9 +38342,63 @@ model WasteWaterHeatPump_python_profiles
     annotation (Placement(transformation(extent={{120,40},{140,60}})));
   Modelica.Blocks.Continuous.Integrator energyHW(k=1/(1000*3600))
     annotation (Placement(transformation(extent={{156,42},{176,62}})));
+  Modelica.Blocks.Interfaces.RealOutput energyWHOut
+    "Connector of Real output signal"
+    annotation (Placement(transformation(extent={{20,78},{40,98}})));
+  Modelica.Blocks.Interfaces.RealOutput energyEvOut
+    "Connector of Real output signal"
+    annotation (Placement(transformation(extent={{20,56},{40,76}})));
+  Modelica.Blocks.Interfaces.RealOutput elConsOut
+    annotation (Placement(transformation(extent={{208,-92},{228,-72}})));
+  Modelica.Blocks.Interfaces.RealOutput sBiofilm[10]
+    annotation (Placement(transformation(extent={{120,90},{140,110}})));
+
+  Modelica.Blocks.Interfaces.BooleanOutput
+                                        removingFilm
+    annotation (Placement(transformation(extent={{66,76},{86,96}})));
+  Modelica.Blocks.Interfaces.RealOutput massFlowGrey[size(massflowgrey_combi.y,
+    1)] "Connector of Real output signals"
+    annotation (Placement(transformation(extent={{-128,114},{-108,134}})));
+  Modelica.Blocks.Interfaces.RealOutput massFlowFresh[size(massflowfresh_combi.y,
+    1)] "Connector of Real output signals"
+    annotation (Placement(transformation(extent={{64,-132},{84,-112}})));
+  Modelica.Blocks.Interfaces.RealOutput energyHWOut
+    "Connector of Real output signal"
+    annotation (Placement(transformation(extent={{188,42},{208,62}})));
+  Modelica.Blocks.Interfaces.RealOutput P_el_Heatpump
+    annotation (Placement(transformation(extent={{-92,-136},{-72,-116}})));
+  Modelica.Blocks.Interfaces.RealOutput T_layersWaste[10]
+    annotation (Placement(transformation(extent={{-140,-26},{-120,-6}})));
+  Modelica.Blocks.Interfaces.RealOutput T_layers[10]
+    annotation (Placement(transformation(extent={{-32,-84},{-12,-64}})));
+  Modelica.Blocks.Interfaces.RealOutput COPout
+    annotation (Placement(transformation(extent={{-140,-44},{-120,-24}})));
+  Modelica.Blocks.Interfaces.RealOutput dotQCo
+    annotation (Placement(transformation(extent={{120,72},{140,92}})));
+  Modelica.Blocks.Continuous.Integrator energyCo(k=1/(1000*3600))
+    annotation (Placement(transformation(extent={{146,72},{166,92}})));
+  Modelica.Blocks.Interfaces.RealOutput energyCoOut
+    "Connector of Real output signal"
+    annotation (Placement(transformation(extent={{174,72},{194,92}})));
+  Modelica.Blocks.Interfaces.RealOutput losses
+    annotation (Placement(transformation(extent={{-140,-60},{-120,-40}})));
+  Modelica.Blocks.Continuous.Integrator lossesInt(
+                                                 k=1/(1000*3600))
+    annotation (Placement(transformation(extent={{-132,-84},{-112,-64}})));
+  Modelica.Blocks.Interfaces.RealOutput lossesIntOut
+    "Connector of Real output signal"
+    annotation (Placement(transformation(extent={{-116,-102},{-96,-82}})));
 equation
 dotQEv=heatPumpWasteWater_driven.heatPump.heatFlow_dotQEv.Q_flow*(-1);
+dotQCo=heatPumpWasteWater_driven.heatPump.heatFlow_dotQCo.Q_flow;
+losses=sum(heatStorage_variablePorts.storage_mantle.heatportInner.Q_flow)+heatStorage_variablePorts.top_cover.heatportInner.Q_flow+heatStorage_variablePorts.bottom_cover.heatportInner.Q_flow;
+for k in 1:10 loop
+  sBiofilm[k]=heatPumpWasteWater_driven.wasteWaterStorage.heatingCoil1.cylindricHeatConduction_fouling[k].s_biofilm;
+end for;
 energyEv.u=dotQEv;
+removingFilm=heatPumpWasteWater_driven.wasteWaterStorageControl.iscleaning;
+T_layersWaste=heatPumpWasteWater_driven.wasteWaterStorage.T_layers;
+COPout=heatPumpWasteWater_driven.heatPump.CoP_out;
   connect(dotm_heatingwater_load.y, Freshwater_load_dummy.dotm) annotation (
       Line(points={{-14.5,-2.35},{-5.5,-2.35},{-5.5,-5.4},{-2.82,-5.4}}, color=
           {0,0,127}));
@@ -38448,8 +38503,44 @@ energyEv.u=dotQEv;
           118,31.5},{118,44}}, color={0,0,127}));
   connect(powerHW.y, energyHW.u) annotation (Line(points={{141,50},{146,50},{
           146,52},{154,52}}, color={0,0,127}));
+  connect(energyWH.y, energyWHOut) annotation (Line(points={{11,74},{20,74},{20,
+          88},{30,88}}, color={0,0,127}));
+  connect(energyEv.y, energyEvOut) annotation (Line(points={{9,38},{16,38},{16,66},
+          {30,66}}, color={0,0,127}));
+  connect(energyElConsumption.y, elConsOut)
+    annotation (Line(points={{203,-82},{218,-82}}, color={0,0,127}));
+  connect(massflowgrey_combi.y, massFlowGrey) annotation (Line(points={{-121,34},
+          {-128,34},{-128,120},{-118,120},{-118,124}}, color={0,0,127}));
+  connect(massflowfresh_combi.y, massFlowFresh)
+    annotation (Line(points={{79,-108},{74,-108},{74,-122}}, color={0,0,127}));
+  connect(energyHW.y, energyHWOut)
+    annotation (Line(points={{177,52},{198,52}}, color={0,0,127}));
+  connect(heatPumpWasteWater_driven.P_el_Heatpump, P_el_Heatpump) annotation (
+      Line(points={{-66.08,-67.7},{-66.08,-126},{-82,-126}}, color={0,0,127}));
+  connect(heatStorage_variablePorts.T_layers, T_layers) annotation (Line(points=
+         {{-5.8,-58},{-14,-58},{-14,-74},{-22,-74}}, color={0,0,127}));
+  connect(dotQCo, energyCo.u)
+    annotation (Line(points={{130,82},{138,82},{144,82}}, color={0,0,127}));
+  connect(energyCo.y, energyCoOut)
+    annotation (Line(points={{167,82},{184,82}}, color={0,0,127}));
+  connect(losses, lossesInt.u) annotation (Line(points={{-130,-50},{-130,-63},{-134,
+          -63},{-134,-74}}, color={0,0,127}));
+  connect(lossesInt.y, lossesIntOut) annotation (Line(points={{-111,-74},{-106,-74},
+          {-106,-92}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    experiment(StopTime=3.1536e+007, Interval=60),
-    __Dymola_experimentSetupOutput(outputs=false, events=false));
+    experiment(
+      StopTime=3.1536e+007,
+      Interval=60,
+      __Dymola_Algorithm="Dassl"),
+    __Dymola_experimentSetupOutput(
+      states=false,
+      derivatives=false,
+      inputs=false,
+      auxiliaries=false),
+    __Dymola_experimentFlags(
+      Advanced(GenerateVariableDependencies=false, OutputModelicaCode=false),
+      Evaluate=false,
+      OutputCPUtime=false,
+      OutputFlatModelica=false));
 end WasteWaterHeatPump_python_profiles;
