@@ -89,6 +89,18 @@ equation
       color={255,128,0}));
   connect(heatStarToCombHeaters.thermStarComb, heatingToRooms) annotation (Line(
         points={{-67.4,-18.1},{-90,-18.1},{-90,-60}}, color={191,0,0}));
+  if withFloorHeating then
+    connect(heatStarToCombHeaters[1:5].therm, groundFloor_Building.ThermFloor[1:5])
+      annotation (Line(
+        points={{-47.9,-23.1},{-40,-23.1},{-40,-92.7},{-22.976,-92.7}},
+        color={191,0,0},
+        pattern=LinePattern.Dash));
+    connect(heatStarToCombHeaters[6:9].therm, upperFloor_Building.ThermFloor[1:4])
+      annotation (Line(
+        points={{-47.9,-23.1},{-36,-23.1},{-36,-20.7},{-23.1825,-20.7}},
+        color={191,0,0},
+        pattern=LinePattern.Dash));
+  end if;
   annotation(Icon(graphics={  Bitmap(extent = {{-78, 74}, {72, -68}}, fileName = "modelica://AixLib/Resources/Images/Building/HighOrder/Grundriss.PNG")}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for the envelope of the whole one family dwelling.</p>
