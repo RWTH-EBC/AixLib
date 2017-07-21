@@ -26,7 +26,8 @@ model WholeHouseBuildingEnvelope
   Rooms.OFD.Attic_Ro2Lf5 attic_2Ro_5Rooms(length = 10.64, room1_length = 5.875, room2_length = 3.215, room3_length = 3.92, room4_length = 3.215, room5_length = 4.62, room1_width = 3.84, room2_width = 3.84, room3_width = 3.84, room4_width = 3.84, room5_width = 3.84, roof_width1 = 3.36, roof_width2 = 3.36, solar_absorptance_RO = 0.1, width = 4.75, TMC = TMC, TIR = TIR, alfa = 1.5707963267949) annotation(Placement(transformation(extent = {{-26, 46}, {20, 86}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermOutside annotation(Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort annotation(Placement(transformation(extent = {{-120, 26}, {-80, 66}}), iconTransformation(extent = {{-108, 38}, {-80, 66}})));
-  Modelica.Blocks.Interfaces.RealInput AirExchangePort[4] annotation(Placement(transformation(extent = {{-120, -16}, {-80, 24}}), iconTransformation(extent = {{-108, -4}, {-80, 24}})));
+  Modelica.Blocks.Interfaces.RealInput AirExchangePort[8]
+    "1..4 for groundFloor. 5..8 for upperFloor"           annotation(Placement(transformation(extent = {{-120, -16}, {-80, 24}}), iconTransformation(extent = {{-108, -4}, {-80, 24}})));
   Utilities.Interfaces.SolarRad_in SolarRadiationPort_RoofS annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {90, 58})));
   Utilities.Interfaces.SolarRad_in SolarRadiationPort_RoofN annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {90, 90})));
   Utilities.Interfaces.SolarRad_in North annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {90, 18})));
