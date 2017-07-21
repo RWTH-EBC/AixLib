@@ -88,16 +88,15 @@ model UpperFloorBuildingEnvelope
             -100},{-86,-90}})));
 equation
   if withFloorHeating then
-    connect(Bedroom.thermFloor1, ThermFloor[1]) annotation(Line(points={{-66.4,
-            38.32},{-90,38.32},{-90,-100.5},{-96,-100.5}},                                                                       color = {191, 0, 0}, pattern = LinePattern.Dash));
+    connect(Bedroom.thermFloor1, ThermFloor[1]) annotation(Line(points={{-66.4,38.32},
+            {-90,38.32},{-90,-100.5},{-96,-100.5}},                                                                              color = {191, 0, 0}, pattern = LinePattern.Dash));
     connect(Children1.thermFloor1, ThermFloor[2]) annotation(Line(points={{67.18,
             46.24},{90,46.24},{90,20},{2,20},{2,-2},{-90,-2},{-90,-98},{-98,-98},
             {-98,-98},{-96,-98},{-96,-97.5}},                                                                                           color = {191, 0, 0}, pattern = LinePattern.Dash));
     connect(Bath.thermRoom, ThermFloor[3]) annotation(Line(points={{68.8,-64.8},
-            {90,-64.8},{90,20},{2,20},{2,-2},{-90,-2},{-90,-94},{-96,-94},{-96,
-            -94.5}},                                                                                                           color = {191, 0, 0}, pattern = LinePattern.Dash));
-    connect(Children2.thermRoom, ThermFloor[4]) annotation(Line(points={{-68,
-            -58.4},{-90,-58.4},{-90,-91.5},{-96,-91.5}},                                                                             color = {191, 0, 0}, pattern = LinePattern.Dash));
+            {90,-64.8},{90,20},{2,20},{2,-2},{-90,-2},{-90,-94},{-96,-94},{-96,-94.5}},                                        color = {191, 0, 0}, pattern = LinePattern.Dash));
+    connect(Children2.thermRoom, ThermFloor[4]) annotation(Line(points={{-68,-58.4},
+            {-90,-58.4},{-90,-91.5},{-96,-91.5}},                                                                                    color = {191, 0, 0}, pattern = LinePattern.Dash));
   end if;
   connect(Bedroom.SolarRadiationPort_OW2, West) annotation(Line(points = {{-53.1, 78.32}, {-53.1, 86}, {90, 86}, {90, -84}, {110, -84}}, color = {255, 128, 0}));
   connect(Children1.SolarRadiationPort_OW2, West) annotation(Line(points = {{54.545, 76.24}, {54.545, 86}, {90, 86}, {90, -84}, {110, -84}}, color = {255, 128, 0}));
@@ -132,9 +131,9 @@ equation
   connect(Children1.SolarRadiationPort_Roof, RoofN) annotation(Line(points = {{48.94, 76}, {48.94, 86}, {90, 86}, {90, 76}, {110, 76}}, color = {255, 128, 0}));
   connect(Corridor.SolarRadiationPort_Roof, RoofN) annotation(Line(points = {{47.2, 10}, {48, 10}, {48, 18}, {90, 18}, {90, 76}, {110, 76}}, color = {255, 128, 0}));
   connect(Bath.SolarRadiationPort_Roof, RoofN) annotation(Line(points = {{50.94, -84}, {50, -84}, {50, -92}, {90, -92}, {90, 76}, {110, 76}}, color = {255, 128, 0}));
-  connect(Bedroom.thermFloor, thermFloor_Bedroom) annotation(Line(points={{-68,
-          17.2},{-68,6},{-90,6},{-90,-92},{-56,-92},{-56,-94},{-56,-94},{-56,
-          -110},{-56,-110}},                                                                                               color = {191, 0, 0}));
+  connect(Bedroom.thermFloor, thermFloor_Bedroom) annotation(Line(points={{-68,17.2},
+          {-68,6},{-90,6},{-90,-92},{-56,-92},{-56,-94},{-56,-94},{-56,-110},{-56,
+          -110}},                                                                                                          color = {191, 0, 0}));
   connect(Children1.thermFloor, thermFloor_Children1) annotation(Line(points={{68.7,
           30.4},{68.7,20},{90,20},{90,-92},{-32,-92},{-32,-110}},                                                                                                color = {191, 0, 0}));
   connect(Corridor.thermFloor, thermFloor_Corridor) annotation(Line(points={{68,
@@ -158,17 +157,16 @@ equation
   connect(Bath.thermRoom, ThermBath) annotation(Line(points = {{68.8, -64.8}, {68.8, -52}, {36, -52}, {36, -40}, {20, -40}}, color = {191, 0, 0}));
   connect(Children2.SolarRadiationPort_Roof, RoofS) annotation(Line(points = {{-49.2, -84}, {-50, -84}, {-50, -92}, {90, -92}, {90, 44}, {110, 44}}, color = {255, 128, 0}));
   connect(Corridor.AirExchangePort, AirExchangePort_doorSt.y) annotation(Line(points = {{82, -10.71}, {90, -10.71}, {90, -92}, {-90, -92}, {-90, -60}, {-99.2, -60}}, color = {0, 0, 127}));
-  connect(Bedroom.thermFloor1, ThermFloor[1]) annotation(Line(points={{-66.4,
-          38.32},{-90,38.32},{-90,-100.5},{-96,-100.5}},                                                                       color = {191, 0, 0}, pattern = LinePattern.Dash));
-  connect(Children1.thermFloor1, ThermFloor[2]) annotation(Line(points={{67.18,
-          46.24},{90,46.24},{90,20},{2,20},{2,-2},{-90,-2},{-90,-96},{-96,-96},
-          {-96,-97.5}},                                                                                                               color = {191, 0, 0}, pattern = LinePattern.Dash));
-  connect(Bath.thermRoom, ThermFloor[3]) annotation(Line(points={{68.8,-64.8},{
-          90,-64.8},{90,20},{2,20},{2,-2},{-90,-2},{-90,-94},{-94,-94},{-94,-94},
-          {-96,-94},{-96,-94.5}},                                                                                            color = {191, 0, 0}, pattern = LinePattern.Dash));
-  connect(Children2.thermRoom, ThermFloor[4]) annotation(Line(points={{-68,
-          -58.4},{-90,-58.4},{-90,-91.5},{-96,-91.5}},                                                                             color = {191, 0, 0}, pattern = LinePattern.Dash));
-  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Bitmap(extent = {{-96, 90}, {100, -106}}, fileName = "modelica://AixLib/Resources/Images/Building/HighOrder/Upperfloor_icon.png"), Text(extent = {{-56, 74}, {-4, 60}}, lineColor = {0, 0, 0}, textString = "Bedroom"), Text(extent = {{16, 76}, {62, 66}}, lineColor = {0, 0, 0}, textString = "Children1"), Text(extent = {{22, 28}, {64, 14}}, lineColor = {0, 0, 0}, textString = "Corridor"), Text(extent = {{22, -42}, {58, -56}}, lineColor = {0, 0, 0}, textString = "Bath"), Text(extent = {{-62, -2}, {-6, -16}}, lineColor = {0, 0, 0}, textString = "Children2")}), Documentation(revisions = "<html>
+  connect(Bedroom.thermFloor1, ThermFloor[1]) annotation(Line(points={{-66.4,38.32},
+          {-90,38.32},{-90,-100.5},{-96,-100.5}},                                                                              color = {191, 0, 0}, pattern = LinePattern.Dash));
+  connect(Children1.thermFloor1, ThermFloor[2]) annotation(Line(points={{67.18,46.24},
+          {90,46.24},{90,20},{2,20},{2,-2},{-90,-2},{-90,-96},{-96,-96},{-96,-97.5}},                                                 color = {191, 0, 0}, pattern = LinePattern.Dash));
+  connect(Bath.thermRoom, ThermFloor[3]) annotation(Line(points={{68.8,-64.8},{90,
+          -64.8},{90,20},{2,20},{2,-2},{-90,-2},{-90,-94},{-94,-94},{-94,-94},{-96,
+          -94},{-96,-94.5}},                                                                                                 color = {191, 0, 0}, pattern = LinePattern.Dash));
+  connect(Children2.thermRoom, ThermFloor[4]) annotation(Line(points={{-68,-58.4},
+          {-90,-58.4},{-90,-91.5},{-96,-91.5}},                                                                                    color = {191, 0, 0}, pattern = LinePattern.Dash));
+  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Bitmap(extent = {{-100, -100}, {100, 100}}, fileName = "modelica://AixLib/Resources/Images/Building/HighOrder/Upperfloor_icon.png"), Text(extent = {{-56, 74}, {-4, 60}}, lineColor = {0, 0, 0}, textString = "Bedroom"), Text(extent = {{16, 76}, {62, 66}}, lineColor = {0, 0, 0}, textString = "Children1"), Text(extent = {{22, 28}, {64, 14}}, lineColor = {0, 0, 0}, textString = "Corridor"), Text(extent = {{22, -42}, {58, -56}}, lineColor = {0, 0, 0}, textString = "Bath"), Text(extent = {{-62, -2}, {-6, -16}}, lineColor = {0, 0, 0}, textString = "Children2")}), Documentation(revisions = "<html>
 
  <ul>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
