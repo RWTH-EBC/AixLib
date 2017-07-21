@@ -71,8 +71,10 @@ equation
   connect(groundFloor_Building.thermCorridor, varAirExchange.port_b) annotation(Line(points = {{24.4, -39.4}, {36, -39.4}, {36, -38}}, color = {191, 0, 0}));
   connect(upperFloor_Building.thermCorridor, varAirExchange.port_a) annotation(Line(points = {{22.3, -24.6}, {36, -24.6}, {36, -26}}, color = {191, 0, 0}));
   connect(AirExchangeCorridor_Source.y, varAirExchange.InPort1) annotation(Line(points = {{26.2, -32}, {28, -32}, {28, -24}, {32.16, -24}, {32.16, -26.6}}, color = {0, 0, 127}));
-  connect(groundFloor_Building.AirExchangePort, AirExchangePort) annotation(Line(points = {{-29.6, -68.78}, {-74, -68.78}, {-74, 4}, {-100, 4}}, color = {0, 0, 127}));
-  connect(upperFloor_Building.AirExchangePort, AirExchangePort) annotation(Line(points = {{-29.45, 1.14}, {-74, 1.14}, {-74, 4}, {-100, 4}}, color = {0, 0, 127}));
+  connect(groundFloor_Building.AirExchangePort[1:4], AirExchangePort[1:4]) annotation(Line(points={{-29.6,
+          -65.855},{-74,-65.855},{-74,1.5},{-100,1.5}},                                                                                                    color = {0, 0, 127}));
+  connect(upperFloor_Building.AirExchangePort[1:4], AirExchangePort[5:8]) annotation(Line(points={{-29.45,
+          4.065},{-74,4.065},{-74,21.5},{-100,21.5}},                                                                                                  color = {0, 0, 127}));
   connect(AirExchangeAttic_Source.y, attic_2Ro_5Rooms.AirExchangePort) annotation(Line(points = {{-51.6, 74}, {-26, 74}}, color = {0, 0, 127}));
   connect(attic_2Ro_5Rooms.SolarRadiationPort_RO1, SolarRadiationPort_RoofS) annotation(Line(points = {{-14.5, 84}, {-14, 88}, {-14, 90}, {60, 90}, {60, 58}, {90, 58}}, color = {255, 128, 0}));
   connect(attic_2Ro_5Rooms.SolarRadiationPort_RO2, SolarRadiationPort_RoofN) annotation(Line(points = {{8.5, 84}, {10, 84}, {10, 90}, {90, 90}}, color = {255, 128, 0}));
