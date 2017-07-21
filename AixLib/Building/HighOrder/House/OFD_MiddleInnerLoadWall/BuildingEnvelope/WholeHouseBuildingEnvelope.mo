@@ -1,6 +1,4 @@
 within AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
-
-
 model WholeHouseBuildingEnvelope
   import AixLib;
   ///////// construction parameters
@@ -13,8 +11,6 @@ model WholeHouseBuildingEnvelope
   parameter Integer TRY = 1 "Region according to TRY" annotation(Dialog(groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/Grundriss.png", group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1 "TRY01", choice = 2 "TRY02", choice = 3 "TRY03", choice = 4 "TRY04", choice = 5 "TRY05", choice = 6 "TRY06", choice = 7 "TRY07", choice = 8 "TRY08", choice = 9 "TRY09", choice = 10 "TRY10", choice = 11 "TRY11", choice = 12 "TRY12", choice = 13 "TRY13", choice = 14 "TRY14", choice = 15 "TRY15", radioButtons = true));
   parameter Boolean withFloorHeating = false
     "If true, that floor has different connectors"                                          annotation(Dialog(group = "Construction parameters"), choices(checkBox = true));
-  replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater
-    "Medium in the system"                                                                             annotation(Dialog(tab = "Hydraulics", group = "Medium"), choicesAllMatching = true);
   parameter Real AirExchangeCorridor = 2 "Air exchange corridors in 1/h " annotation(Dialog(group = "Air Exchange Corridors", descriptionLabel = true));
   parameter Real AirExchangeAttic = 0 "Air exchange attic in 1/h " annotation(Dialog(group = "Air Exchange Attic", descriptionLabel = true));
   // Dynamic Ventilation
