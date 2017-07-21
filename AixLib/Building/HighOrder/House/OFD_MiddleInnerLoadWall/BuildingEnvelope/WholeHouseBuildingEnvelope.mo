@@ -100,6 +100,61 @@ equation
         points={{-47.9,-23.1},{-36,-23.1},{-36,-20.7},{-23.1825,-20.7}},
         color={191,0,0},
         pattern=LinePattern.Dash));
+  else
+    connect(heatStarToCombHeaters[1].therm, groundFloor_Building.ThermLivingroom)
+      annotation (Line(points={{-47.9,-23.1},{-44,-23.1},{-44,-52.14},{-7.04,-52.14}},
+          color={191,0,0}));
+    connect(heatStarToCombHeaters[1].star, groundFloor_Building.StarLivingroom)
+      annotation (Line(points={{-47.6,-12.2},{-38,-12.2},{-38,-57.6},{-6.8,-57.6}},
+          color={95,95,95}));
+    connect(heatStarToCombHeaters[2].therm, groundFloor_Building.ThermHobby)
+      annotation (Line(points={{-47.9,-23.1},{-44,-23.1},{-44,-52},{2,-52},{2,-52},
+            {2,-52.4},{2.8,-52.4}}, color={191,0,0}));
+    connect(heatStarToCombHeaters[2].star, groundFloor_Building.StarHobby)
+      annotation (Line(points={{-47.6,-12.2},{-38,-12.2},{-38,-57.6},{2.8,-57.6}},
+          color={95,95,95}));
+    connect(heatStarToCombHeaters[3].therm, groundFloor_Building.ThermCorridor)
+      annotation (Line(points={{-47.9,-23.1},{-44,-23.1},{-44,-66.96},{1.36,-66.96}},
+          color={191,0,0}));
+    connect(heatStarToCombHeaters[3].star, groundFloor_Building.StarCorridor)
+      annotation (Line(points={{-47.6,-12.2},{-38,-12.2},{-38,-72.16},{1.36,-72.16}},
+          color={95,95,95}));
+    connect(heatStarToCombHeaters[4].therm, groundFloor_Building.ThermWC_Storage)
+      annotation (Line(points={{-47.9,-23.1},{-44,-23.1},{-44,-81},{3.28,-81}},
+          color={191,0,0}));
+    connect(heatStarToCombHeaters[4].star, groundFloor_Building.StarWC_Storage)
+      annotation (Line(points={{-47.6,-12.2},{-38,-12.2},{-38,-86.2},{3.28,-86.2}},
+          color={95,95,95}));
+    connect(heatStarToCombHeaters[5].therm, groundFloor_Building.ThermKitchen)
+      annotation (Line(points={{-47.9,-23.1},{-44,-23.1},{-44,-81},{-6.32,-81}},
+          color={191,0,0}));
+    connect(heatStarToCombHeaters[5].star, groundFloor_Building.StarKitchen)
+      annotation (Line(points={{-47.6,-12.2},{-38,-12.2},{-38,-86.2},{-6.32,-86.2}},
+          color={95,95,95}));
+    connect(heatStarToCombHeaters[6].therm, upperFloor_Building.ThermBedroom)
+      annotation (Line(points={{-47.9,-23.1},{-44,-23.1},{-44,19.6},{-7.6,19.6}},
+          color={191,0,0}));
+    connect(heatStarToCombHeaters[6].star, upperFloor_Building.StarBedroom)
+      annotation (Line(points={{-47.6,-12.2},{-38,-12.2},{-38,14.4},{-7.6,14.4}},
+          color={95,95,95}));
+    connect(heatStarToCombHeaters[7].therm, upperFloor_Building.ThermChildren1)
+      annotation (Line(points={{-47.9,-23.1},{-44,-23.1},{-44,19.6},{1.6,19.6}},
+          color={191,0,0}));
+    connect(heatStarToCombHeaters[7].star, upperFloor_Building.StarChildren1)
+      annotation (Line(points={{-47.6,-12.2},{-38,-12.2},{-38,14.4},{1.6,14.4}},
+          color={95,95,95}));
+    connect(heatStarToCombHeaters[8].therm, upperFloor_Building.ThermBath)
+      annotation (Line(points={{-47.9,-23.1},{-44,-23.1},{-44,-6.4},{1.6,-6.4}},
+          color={191,0,0}));
+    connect(heatStarToCombHeaters[8].star, upperFloor_Building.StarBath)
+      annotation (Line(points={{-47.6,-12.2},{1.6,-12.2},{1.6,-11.6}}, color={95,95,
+            95}));
+    connect(heatStarToCombHeaters[9].therm, upperFloor_Building.ThermChildren2)
+      annotation (Line(points={{-47.9,-23.1},{-44,-23.1},{-44,-6.4},{-7.6,-6.4}},
+          color={191,0,0}));
+    connect(heatStarToCombHeaters[9].star, upperFloor_Building.StarChildren2)
+      annotation (Line(points={{-47.6,-12.2},{-8,-12.2},{-8,-12},{-8,-12},{-8,-12},
+            {-8,-12},{-8,-11.6},{-7.6,-11.6}}, color={95,95,95}));
   end if;
   annotation(Icon(graphics={  Bitmap(extent = {{-78, 74}, {72, -68}}, fileName = "modelica://AixLib/Resources/Images/Building/HighOrder/Grundriss.PNG")}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
