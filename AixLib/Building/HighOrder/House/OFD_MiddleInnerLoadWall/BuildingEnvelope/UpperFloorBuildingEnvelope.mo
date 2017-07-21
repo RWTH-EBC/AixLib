@@ -1,6 +1,4 @@
 within AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
-
-
 model UpperFloorBuildingEnvelope
   ///////// construction parameters
   parameter Integer TMC = 1 "Thermal Mass Class" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1 "Heavy", choice = 2 "Medium", choice = 3 "Light", radioButtons = true));
@@ -50,9 +48,12 @@ model UpperFloorBuildingEnvelope
     "Tset_children2"                                                              annotation(Dialog(group = "Dynamic ventilation", descriptionLabel = true, enable = if withDynamicVentilation then true else false));
   Utilities.Interfaces.SolarRad_in RoofS annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {110, 44})));
   Utilities.Interfaces.SolarRad_in RoofN annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {110, 76})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor_Bedroom annotation(Placement(transformation(extent = {{-100, -120}, {-80, -100}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor_Children1 annotation(Placement(transformation(extent = {{-60, -120}, {-40, -100}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor_Corridor annotation(Placement(transformation(extent = {{-20, -120}, {0, -100}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor_Bedroom annotation(Placement(transformation(extent={{-66,
+            -120},{-46,-100}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor_Children1 annotation(Placement(transformation(extent={{-42,
+            -120},{-22,-100}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor_Corridor annotation(Placement(transformation(extent={{-10,
+            -120},{10,-100}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor_Bath annotation(Placement(transformation(extent = {{20, -120}, {40, -100}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloor_Children2 annotation(Placement(transformation(extent = {{60, -120}, {80, -100}})));
   Rooms.OFD.Ow2IwL2IwS1Lf1At1Ro1 Bedroom(TMC = TMC, TIR = TIR, solar_absorptance_OW = solar_absorptance_OW, withWindow2 = true, room_length = length5 + length6 + thickness_IWsimple, room_lengthb = length6, room_width_long = room_width_long, room_width_short = room_width_short, room_height_long = room_height_long, room_height_short = room_height_short, roof_width = roof_width, solar_absorptance_RO = solar_absorptance_RO, windowarea_OW2 = windowarea_62, withWindow3 = true, windowarea_RO = windowarea_63, withDoor2 = false, withFloorHeating = withFloorHeating, T0_air = 295.11, T0_OW1 = 295.15, T0_OW2 = 295.15, T0_IW1a = 295.15, T0_IW1b = 295.15, T0_IW2 = 295.15, T0_CE = 295.1, T0_RO = 295.15, T0_FL = 295.12, withDynamicVentilation = withDynamicVentilation, HeatingLimit = HeatingLimit, Max_VR = Max_VR, Diff_toTempset = Diff_toTempset, Tset = Tset_Bedroom) annotation(Placement(transformation(extent = {{-82, 14}, {-42, 78}})));
@@ -82,13 +83,21 @@ model UpperFloorBuildingEnvelope
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermChildren2 annotation(Placement(transformation(extent = {{-26, -46}, {-14, -34}})));
   Utilities.Interfaces.Star StarChildren2 annotation(Placement(transformation(extent = {{-28, -68}, {-12, -52}})));
   Modelica.Blocks.Sources.Constant AirExchangePort_doorSt(k = 0) "Storage" annotation(Placement(transformation(extent = {{-116, -68}, {-100, -52}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermFloor[4] if withFloorHeating annotation(Placement(transformation(extent = {{-6, -6}, {6, 6}}), iconTransformation(extent = {{-4, -2}, {10, 8}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermFloor[4] if withFloorHeating annotation(Placement(transformation(extent={{-102,
+            -102},{-90,-90}}),                                                                                                                            iconTransformation(extent={{-100,
+            -100},{-86,-90}})));
 equation
   if withFloorHeating then
-    connect(Bedroom.thermFloor1, ThermFloor[1]) annotation(Line(points = {{-66.4, 38.32}, {-90, 38.32}, {-90, -4.5}, {0, -4.5}}, color = {191, 0, 0}, pattern = LinePattern.Dash));
-    connect(Children1.thermFloor1, ThermFloor[2]) annotation(Line(points = {{67.18, 46.24}, {90, 46.24}, {90, 20}, {0, 20}, {0, -1.5}}, color = {191, 0, 0}, pattern = LinePattern.Dash));
-    connect(Bath.thermRoom, ThermFloor[3]) annotation(Line(points = {{68.8, -64.8}, {90, -64.8}, {90, 20}, {0, 20}, {0, 1.5}}, color = {191, 0, 0}, pattern = LinePattern.Dash));
-    connect(Children2.thermRoom, ThermFloor[4]) annotation(Line(points = {{-68, -58.4}, {-90, -58.4}, {-90, -4}, {0, -4}, {0, 4.5}}, color = {191, 0, 0}, pattern = LinePattern.Dash));
+    connect(Bedroom.thermFloor1, ThermFloor[1]) annotation(Line(points={{-66.4,
+            38.32},{-90,38.32},{-90,-100.5},{-96,-100.5}},                                                                       color = {191, 0, 0}, pattern = LinePattern.Dash));
+    connect(Children1.thermFloor1, ThermFloor[2]) annotation(Line(points={{67.18,
+            46.24},{90,46.24},{90,20},{2,20},{2,-2},{-90,-2},{-90,-98},{-98,-98},
+            {-98,-98},{-96,-98},{-96,-97.5}},                                                                                           color = {191, 0, 0}, pattern = LinePattern.Dash));
+    connect(Bath.thermRoom, ThermFloor[3]) annotation(Line(points={{68.8,-64.8},
+            {90,-64.8},{90,20},{2,20},{2,-2},{-90,-2},{-90,-94},{-96,-94},{-96,
+            -94.5}},                                                                                                           color = {191, 0, 0}, pattern = LinePattern.Dash));
+    connect(Children2.thermRoom, ThermFloor[4]) annotation(Line(points={{-68,
+            -58.4},{-90,-58.4},{-90,-91.5},{-96,-91.5}},                                                                             color = {191, 0, 0}, pattern = LinePattern.Dash));
   end if;
   connect(Bedroom.SolarRadiationPort_OW2, West) annotation(Line(points = {{-53.1, 78.32}, {-53.1, 86}, {90, 86}, {90, -84}, {110, -84}}, color = {255, 128, 0}));
   connect(Children1.SolarRadiationPort_OW2, West) annotation(Line(points = {{54.545, 76.24}, {54.545, 86}, {90, 86}, {90, -84}, {110, -84}}, color = {255, 128, 0}));
@@ -123,9 +132,13 @@ equation
   connect(Children1.SolarRadiationPort_Roof, RoofN) annotation(Line(points = {{48.94, 76}, {48.94, 86}, {90, 86}, {90, 76}, {110, 76}}, color = {255, 128, 0}));
   connect(Corridor.SolarRadiationPort_Roof, RoofN) annotation(Line(points = {{47.2, 10}, {48, 10}, {48, 18}, {90, 18}, {90, 76}, {110, 76}}, color = {255, 128, 0}));
   connect(Bath.SolarRadiationPort_Roof, RoofN) annotation(Line(points = {{50.94, -84}, {50, -84}, {50, -92}, {90, -92}, {90, 76}, {110, 76}}, color = {255, 128, 0}));
-  connect(Bedroom.thermFloor, thermFloor_Bedroom) annotation(Line(points = {{-68, 17.2}, {-68, 6}, {-90, 6}, {-90, -110}}, color = {191, 0, 0}));
-  connect(Children1.thermFloor, thermFloor_Children1) annotation(Line(points = {{68.7, 30.4}, {68, 26}, {68, 20}, {90, 20}, {90, -92}, {-50, -92}, {-50, -110}}, color = {191, 0, 0}));
-  connect(Corridor.thermFloor, thermFloor_Corridor) annotation(Line(points = {{68, -26.1}, {68, -32}, {90, -32}, {90, -92}, {-10, -92}, {-10, -110}}, color = {191, 0, 0}));
+  connect(Bedroom.thermFloor, thermFloor_Bedroom) annotation(Line(points={{-68,
+          17.2},{-68,6},{-90,6},{-90,-92},{-56,-92},{-56,-94},{-56,-94},{-56,
+          -110},{-56,-110}},                                                                                               color = {191, 0, 0}));
+  connect(Children1.thermFloor, thermFloor_Children1) annotation(Line(points={{68.7,
+          30.4},{68.7,20},{90,20},{90,-92},{-32,-92},{-32,-110}},                                                                                                color = {191, 0, 0}));
+  connect(Corridor.thermFloor, thermFloor_Corridor) annotation(Line(points={{68,
+          -26.1},{68,-32},{90,-32},{90,-92},{0,-92},{0,-110}},                                                                                        color = {191, 0, 0}));
   connect(Bath.thermFloor, thermFloor_Bath) annotation(Line(points = {{70.7, -38.4}, {70.7, -32}, {90, -32}, {90, -92}, {30, -92}, {30, -110}}, color = {191, 0, 0}));
   connect(Children2.thermFloor, thermFloor_Children2) annotation(Line(points = {{-70, -23.2}, {-70, -14}, {-90, -14}, {-90, -92}, {70, -92}, {70, -110}}, color = {191, 0, 0}));
   connect(Corridor.thermRoom, thermCorridor) annotation(Line(points = {{66, -5.2}, {66, -14}, {90, -14}, {90, -110}, {110, -110}}, color = {191, 0, 0}));
@@ -145,10 +158,16 @@ equation
   connect(Bath.thermRoom, ThermBath) annotation(Line(points = {{68.8, -64.8}, {68.8, -52}, {36, -52}, {36, -40}, {20, -40}}, color = {191, 0, 0}));
   connect(Children2.SolarRadiationPort_Roof, RoofS) annotation(Line(points = {{-49.2, -84}, {-50, -84}, {-50, -92}, {90, -92}, {90, 44}, {110, 44}}, color = {255, 128, 0}));
   connect(Corridor.AirExchangePort, AirExchangePort_doorSt.y) annotation(Line(points = {{82, -10.71}, {90, -10.71}, {90, -92}, {-90, -92}, {-90, -60}, {-99.2, -60}}, color = {0, 0, 127}));
-  connect(Bedroom.thermFloor1, ThermFloor[1]) annotation(Line(points = {{-66.4, 38.32}, {-90, 38.32}, {-90, -4.5}, {0, -4.5}}, color = {191, 0, 0}, pattern = LinePattern.Dash));
-  connect(Children1.thermFloor1, ThermFloor[2]) annotation(Line(points = {{67.18, 46.24}, {90, 46.24}, {90, 20}, {0, 20}, {0, -1.5}}, color = {191, 0, 0}, pattern = LinePattern.Dash));
-  connect(Bath.thermRoom, ThermFloor[3]) annotation(Line(points = {{68.8, -64.8}, {90, -64.8}, {90, 20}, {0, 20}, {0, 1.5}}, color = {191, 0, 0}, pattern = LinePattern.Dash));
-  connect(Children2.thermRoom, ThermFloor[4]) annotation(Line(points = {{-68, -58.4}, {-90, -58.4}, {-90, -4}, {0, -4}, {0, 4.5}}, color = {191, 0, 0}, pattern = LinePattern.Dash));
+  connect(Bedroom.thermFloor1, ThermFloor[1]) annotation(Line(points={{-66.4,
+          38.32},{-90,38.32},{-90,-100.5},{-96,-100.5}},                                                                       color = {191, 0, 0}, pattern = LinePattern.Dash));
+  connect(Children1.thermFloor1, ThermFloor[2]) annotation(Line(points={{67.18,
+          46.24},{90,46.24},{90,20},{2,20},{2,-2},{-90,-2},{-90,-96},{-96,-96},
+          {-96,-97.5}},                                                                                                               color = {191, 0, 0}, pattern = LinePattern.Dash));
+  connect(Bath.thermRoom, ThermFloor[3]) annotation(Line(points={{68.8,-64.8},{
+          90,-64.8},{90,20},{2,20},{2,-2},{-90,-2},{-90,-94},{-94,-94},{-94,-94},
+          {-96,-94},{-96,-94.5}},                                                                                            color = {191, 0, 0}, pattern = LinePattern.Dash));
+  connect(Children2.thermRoom, ThermFloor[4]) annotation(Line(points={{-68,
+          -58.4},{-90,-58.4},{-90,-91.5},{-96,-91.5}},                                                                             color = {191, 0, 0}, pattern = LinePattern.Dash));
   annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Bitmap(extent = {{-96, 90}, {100, -106}}, fileName = "modelica://AixLib/Resources/Images/Building/HighOrder/Upperfloor_icon.png"), Text(extent = {{-56, 74}, {-4, 60}}, lineColor = {0, 0, 0}, textString = "Bedroom"), Text(extent = {{16, 76}, {62, 66}}, lineColor = {0, 0, 0}, textString = "Children1"), Text(extent = {{22, 28}, {64, 14}}, lineColor = {0, 0, 0}, textString = "Corridor"), Text(extent = {{22, -42}, {58, -56}}, lineColor = {0, 0, 0}, textString = "Bath"), Text(extent = {{-62, -2}, {-6, -16}}, lineColor = {0, 0, 0}, textString = "Children2")}), Documentation(revisions = "<html>
 
  <ul>

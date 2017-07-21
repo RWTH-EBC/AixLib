@@ -42,9 +42,12 @@ model WholeHouseBuildingEnvelope
   AixLib.Utilities.Interfaces.HeatStarComb heatingToRooms[9]
     annotation (Placement(transformation(extent={{-100,-70},{-80,-50}})));
 equation
-  connect(groundFloor_Building.thermCeiling_Livingroom, upperFloor_Building.thermFloor_Bedroom) annotation(Line(points = {{-24.08, -39.66}, {-24.08, -32.83}, {-23.7, -32.83}, {-23.7, -24.6}}, color = {191, 0, 0}));
-  connect(groundFloor_Building.thermCeiling_Hobby, upperFloor_Building.thermFloor_Children1) annotation(Line(points = {{-13.76, -39.66}, {-13.76, -32.83}, {-14.5, -32.83}, {-14.5, -24.6}}, color = {191, 0, 0}));
-  connect(groundFloor_Building.thermCeiling_Corridor, upperFloor_Building.thermFloor_Corridor) annotation(Line(points = {{-4.64, -39.66}, {-4.64, -32.83}, {-5.3, -32.83}, {-5.3, -24.6}}, color = {191, 0, 0}));
+  connect(groundFloor_Building.thermCeiling_Livingroom, upperFloor_Building.thermFloor_Bedroom) annotation(Line(points={{-24.08,
+          -39.66},{-24.08,-32.83},{-15.88,-32.83},{-15.88,-24.6}},                                                                                                                              color = {191, 0, 0}));
+  connect(groundFloor_Building.thermCeiling_Hobby, upperFloor_Building.thermFloor_Children1) annotation(Line(points={{-13.76,
+          -39.66},{-13.76,-32.83},{-10.36,-32.83},{-10.36,-24.6}},                                                                                                                           color = {191, 0, 0}));
+  connect(groundFloor_Building.thermCeiling_Corridor, upperFloor_Building.thermFloor_Corridor) annotation(Line(points={{-4.64,
+          -39.66},{-4.64,-32.83},{-3,-32.83},{-3,-24.6}},                                                                                                                                  color = {191, 0, 0}));
   connect(groundFloor_Building.thermCeiling_WCStorage, upperFloor_Building.thermFloor_Bath) annotation(Line(points = {{4.96, -39.66}, {4.96, -32.83}, {3.9, -32.83}, {3.9, -24.6}}, color = {191, 0, 0}));
   connect(groundFloor_Building.thermCeiling_Kitchen, upperFloor_Building.thermFloor_Children2) annotation(Line(points = {{15.04, -39.66}, {15.04, -32.83}, {13.1, -32.83}, {13.1, -24.6}}, color = {191, 0, 0}));
   connect(upperFloor_Building.thermOutside, thermOutside) annotation(Line(points = {{-27.84, 23.24}, {-74, 23.24}, {-74, 90}, {-90, 90}}, color = {191, 0, 0}));
