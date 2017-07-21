@@ -230,9 +230,9 @@ equation
       // If moisture is neglected in mass balance, assume for computation
       // of the mass of air that the air is at Medium.X_default.
       m = fluidVolume*Medium.density(Medium.setState_phX(
-        p=  medium.p,
-        h=  hOut,
-        X=  Medium.X_default));
+        p = medium.p,
+        h = hOut,
+        X = Medium.X_default));
     else
       // Use actual density
       m = fluidVolume*medium.d;

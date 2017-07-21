@@ -27,7 +27,7 @@ equation
 
   dp = AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow(
     m_flow=m_flow,
-    k=  k,
+    k = k,
     m_flow_turbulent=m_flow_turbulent);
 
   // Equate first and second order derivatives
