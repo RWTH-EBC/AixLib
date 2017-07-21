@@ -37,6 +37,10 @@ model WholeHouseBuildingEnvelope
   AixLib.Building.Components.DryAir.VarAirExchange varAirExchange(V = upperFloor_Building.Corridor.airload.V) annotation(Placement(transformation(extent = {{-6, -6}, {6, 6}}, rotation = 270, origin = {36, -32})));
   Modelica.Blocks.Sources.Constant AirExchangeCorridor_Source(k = AirExchangeCorridor) annotation(Placement(transformation(extent = {{22, -34}, {26, -30}})));
   Modelica.Blocks.Sources.Constant AirExchangeAttic_Source(k = AirExchangeAttic) annotation(Placement(transformation(extent = {{-60, 70}, {-52, 78}})));
+  AixLib.Utilities.Interfaces.Adaptors.HeatStarToComb heatStarToCombHeaters[9]
+    annotation (Placement(transformation(extent={{-68,-26},{-48,-10}})));
+  AixLib.Utilities.Interfaces.HeatStarComb heatingToRooms[9]
+    annotation (Placement(transformation(extent={{-100,-70},{-80,-50}})));
 equation
   connect(groundFloor_Building.thermCeiling_Livingroom, upperFloor_Building.thermFloor_Bedroom) annotation(Line(points = {{-24.08, -39.66}, {-24.08, -32.83}, {-23.7, -32.83}, {-23.7, -24.6}}, color = {191, 0, 0}));
   connect(groundFloor_Building.thermCeiling_Hobby, upperFloor_Building.thermFloor_Children1) annotation(Line(points = {{-13.76, -39.66}, {-13.76, -32.83}, {-14.5, -32.83}, {-14.5, -24.6}}, color = {191, 0, 0}));
@@ -78,6 +82,8 @@ equation
   connect(attic_2Ro_5Rooms.SolarRadiationPort_OW1, East) annotation (Line(
       points={{-27.38,62},{-74,62},{-74,90},{60,90},{60,-18},{90,-18}},
       color={255,128,0}));
+  connect(heatStarToCombHeaters.thermStarComb, heatingToRooms) annotation (Line(
+        points={{-67.4,-18.1},{-90,-18.1},{-90,-60}}, color={191,0,0}));
   annotation(Icon(graphics={  Bitmap(extent = {{-78, 74}, {72, -68}}, fileName = "modelica://AixLib/Resources/Images/Building/HighOrder/Grundriss.PNG")}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for the envelope of the whole one family dwelling.</p>
