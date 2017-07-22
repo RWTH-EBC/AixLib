@@ -26,12 +26,12 @@ record CHP_XRGI_9kWel "Eco Power: mini BHKW XRGI 9 (12-20 kW thermal)"
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>EC Power mini-BHKW XRGI 9 (Natural Gas) </p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
-<p>The electrical and thermal powers are in kW. The &QUOT;fuel input&QUOT; is in
+<p>The electrical and thermal powers are in kW. The fuel input is in
 kW. The fuel consumption is in m&sup3;/h.</p>
 <p>The calorific value of natural gas is assumed to be 11.5 kWh/m&sup3;
 (10 - 12 kWh/m&sup3;). </p>
 <h4><span style=\"color:#008000\">Data Sheet (English, German)</span></h4>
-<table cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tr>
+<table summary=\"Data Sheet\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tr>
 <td valign=\"top\"><p>Max. noise level dB(A)</p></td>
 <td valign=\"top\"><p>49</p></td>
 </tr>
@@ -44,7 +44,8 @@ kW. The fuel consumption is in m&sup3;/h.</p>
 <td valign=\"top\"><p>0.59</p></td>
 </tr>
 <tr>
-<td valign=\"top\"><p>Weight kg</p></td>
+<td valign=\"top\"><p>Weight kg</
+p></td>
 <td valign=\"top\"><p>440</p></td>
 </tr>
 <tr>
@@ -69,15 +70,15 @@ kW. The fuel consumption is in m&sup3;/h.</p>
 </tr>
 <tr>
 <td valign=\"top\"><p>Electrical efficiency </p></td>
-<td valign=\"top\"><p>29.5 &percnt;</p></td>
+<td valign=\"top\"><p>29.5 &#37;</p></td>
 </tr>
 <tr>
 <td valign=\"top\"><p>Thermal efficiency excluding optional condenser</p></td>
-<td valign=\"top\"><p>63.5 &percnt;</p></td>
+<td valign=\"top\"><p>63.5 &#37;</p></td>
 </tr>
 <tr>
 <td valign=\"top\"><p>Total efficiency excluding optional condenser</p></td>
-<td valign=\"top\"><p>93 &percnt;</p></td>
+<td valign=\"top\"><p>93 &#37;</p></td>
 </tr>
 <tr>
 <td valign=\"top\"><p>Flow temperature (constant) &deg;C</p></td>
@@ -93,22 +94,22 @@ kW. The fuel consumption is in m&sup3;/h.</p>
 </tr>
 <tr>
 <td valign=\"top\"><p>Emissions mg/Nm<sup>3</sup></p></td>
-<td valign=\"top\"><p>CO: &LT; 50</p><p>NO<sub>X</sub>: &LT; 100</p></td>
+<td valign=\"top\"><p>CO: &#60; 50</p><p>NO<sub>X</sub>: &#60; 100</p></td>
 </tr>
 <tr>
 <td valign=\"top\"><p>Primary energy saving PES (EU Directive, verification in
 accordance with DIN 4709)</p></td>
-<td valign=\"top\"><p>22.4 &percnt;</p></td>
+<td valign=\"top\"><p>22.4 &#37;</p></td>
 </tr>
 </table>
-<table cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tr>
+<table summary=\"Emmisions\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tr>
 <td valign=\"top\"><p>Emission</p></td>
-<td valign=\"top\"><p>&LT; &frac12; TA Luft</p></td>
+<td valign=\"top\"><p>&#60; &frac12; TA Luft</p></td>
 </tr>
 <tr>
 <td valign=\"top\"><p>Prim&auml;renergieeinsparung PEE (EU-Richtlinie,
 Pr&uuml;fung nach DIN 4709) </p></td>
-<td valign=\"top\"><p>22,4 &percnt;</p></td>
+<td valign=\"top\"><p>22,4 &#37;</p></td>
 </tr>
 <tr>
 <td valign=\"top\"><p>Prim&auml;renergiefaktor fp (EnEV 2009, EN15326)</p></td>
@@ -121,9 +122,8 @@ Pr&uuml;fung nach DIN 4709) </p></td>
 </ul>
 </html>",
         revisions="<html>
-<p><ul>
-<li></li>
+<ul>
 <li><i>January 24, 2013</i> by Peter Matthes:<br/>implemented</li>
-</ul></p>
+</ul>
 </html>"));
 end CHP_XRGI_9kWel;

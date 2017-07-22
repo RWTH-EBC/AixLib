@@ -8,7 +8,7 @@ model GetHeaderElement "Test model to get header element"
   parameter Modelica.SIunits.Time timeZone(fixed=false, displayUnit="h")
     "Time zone";
 
-  parameter String filNam = "modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"
+  parameter String filNam = "modelica://AixLib/Resources/WeatherData/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"
     "Name of weather data file";
 
   final parameter String absFilNam = AixLib.BoundaryConditions.WeatherData.BaseClasses.getAbsolutePath(filNam)
@@ -52,7 +52,7 @@ First implementation.
 </li>
 </ul>
 </html>"),
-experiment(StopTime=1.0),
+experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/WeatherData/BaseClasses/Examples/GetHeaderElement.mos"
         "Simulate and plot"));
 end GetHeaderElement;

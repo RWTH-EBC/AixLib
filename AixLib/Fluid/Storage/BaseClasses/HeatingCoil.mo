@@ -9,8 +9,8 @@ model HeatingCoil "Heating coil for heat storage model"
  parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaHC=20
     "Model assumptions Coefficient of Heat Transfer HC <-> Heating Water";
 
- outer parameter Modelica.SIunits.Temperature TStart=298.15
-    "Start Temperature of fluid";
+ parameter Modelica.SIunits.Temperature TStart=298.15
+    "Start Temperature of fluid" annotation(Dialog(group = "Initialization"));
 
  parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition pipeHC=
       AixLib.DataBase.Pipes.Copper.Copper_28x1() "Type of Pipe for HC";
