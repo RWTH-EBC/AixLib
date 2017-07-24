@@ -5,7 +5,6 @@ class Overview "Overview"
 <p>The HVAC Agent-based Control Library (this Modelica package) is developed by:</p>
 <p>Roozbeh Sangi (rsangi@eonerc.rwth-aachen.de)</p>
 <p>Felix B&uuml;nning (fbuenning@eonerc.rwth-aachen.de)</p>
-<p> </p>
 <p>RWTH Aachen University </p>
 <p>E.ON Energy Research Center</p>
 <p>Institute for Energy Efficient Buildings and Indoor Climate  </p>

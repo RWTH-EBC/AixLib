@@ -381,12 +381,10 @@ equation
       inputs=false,
       auxiliaries=false),
     Documentation(revisions="<html>
-<p>
 <ul>
 <li>November 2016, by Felix Bünning: Updated to use AixLib 0.3.2, included in HVACAgentBasedControl library</li>
 <li>February 2016, by Felix Bünning: Developed and implemented</li>
 </ul>
-</p>
 </html>", info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
 <ul>

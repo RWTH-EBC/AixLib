@@ -147,13 +147,11 @@ equation
           fillPattern=FillPattern.Solid,
           textString="A")}),
     Documentation(revisions="<html>
-<p>
 <ul>
 <li>December 2016, by Felix Bünning: Changed some variables to Integer type in order to avoid warnings caused by using the \"==\" operator</li>
 <li>November 2016, by Felix Bünning: Added feature to use internal inbox refresh (better performance), updated Info window</li>
 <li>October 2015, by Felix Bünning: Developed and implemented</li>
 </ul>
-</p>
 </html>",
       info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
@@ -166,7 +164,7 @@ equation
 <p>The communication takes place via UDP network communication and is implemented with the help of elements from the DeviceDriver library. The inbox is refreshed based on a sample time, the outbox is triggered by an external boolean input. </p>
 <p>Since sampling creates time events, the simulation performance will be bad for models with a high number of equations. For this reason, an alternative refresh mechanism can be used with &quot;usePoke=true&quot;. In order to use this mechanism the component &quot;MessageNotification&quot; needs to be added to the system. </p>
 <p>The partial agent implements the message parameters performative, sender, receiver, reply to, content, ontology and message ID. The parameters are described in the reference.</p>
-<p><br/><b><span style=\"color: #008000;\">References</span></b></p>
+<h4><span style=\"color: #008000;\">References</span></h4>
 <ul>
 <li>Roozbeh Sangi, Felix B&uuml;nning, Marc Baranski, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic.</li>
 </ul>

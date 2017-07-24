@@ -46,11 +46,9 @@ communication method has better performance.</p>
 <p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/Example_usePoke.PNG\"/></p>
 
 </html>", revisions="<html>
-<p>
 <ul>
 <li>November 2016, by Felix Bünning: Developed and implemented</li>
 </ul>
-</p>
 </html>"),
     experiment(StartTime=2.6784e+006, StopTime=3.2832e+006),
     __Dymola_experimentSetupOutput);

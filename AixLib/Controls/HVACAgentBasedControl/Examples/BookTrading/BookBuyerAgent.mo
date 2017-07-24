@@ -414,7 +414,7 @@ equation
 </ul>
 <h4><span style=\"color: #008000\">Concept</span></h4>
 <p>The BookBuyerAgent calls for proposals from all known BookSellerAgents to buy a book, which is set before simulation. The agent then compares all offers from the seller agent and choses the book with the lowest price. Afterwards the book is bought from the seller agent. The logic is implemented with the help of the StateGraph library. Communication is realized with the help of the DeviceDriver library and follows the language standards for multi-agent-systems set by the FIPA to the highest possible extend for Modelica models. The presented agent has the purpose of demonstrating the possibility of agent implementation in Modelica by implementing the behaviour of the BookBuyer agent presented in Caire, 2009, JADE PROGRAMMING FOR BEGINNERS. </p>
-<p><br/><b><span style=\"color: #008000;\">References</span></b></p>
+<h4><span style=\"color: #008000;\">References</span></h4>
 <ul>
 <li>Felix B&uuml;nning. Development of a Modelica-library for agent-based control of HVAC systems. Bachelor thesis, 2016, RWTH Aachen University, Aachen, Germany. </li>
 <li>FIPA ACL Message Structure Specification</li>
@@ -428,11 +428,9 @@ equation
 </ul>
 </html>",
       revisions="<html>
-<p>
 <ul>
 <li>October 2015, by Felix Bünning: Developed and implemented</li>
 </ul>
-</p>
 </html>"), Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-200,-200},
             {200,200}}),       graphics={
         Rectangle(

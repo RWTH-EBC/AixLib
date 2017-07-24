@@ -374,8 +374,8 @@ equation
 </ul>
 <h4><span style=\"color: #008000\">Concept</span></h4>
 <p>The two thermal zones are connected to a weather model, which results in different thermal loads depending on the boundary conditions. Each zone is equipped with a thermostatic valve,
-which allows to control the temperature in the zones to a limited degree. When the temperature in the zones goes above 20.5 or below 19.5 degC (and the valves are fully closed or opened) 
-the RoomAgents become active and order an increase or decrease in heat supply from the broker. The broker calls for proposals from both heat suplliers. The suppliers use cost functions to 
+which allows to control the temperature in the zones to a limited degree. When the temperature in the zones goes above 20.5 or below 19.5 degC (and the valves are fully closed or opened)
+the RoomAgents become active and order an increase or decrease in heat supply from the broker. The broker calls for proposals from both heat suplliers. The suppliers use cost functions to
 determine the cost for the adjustments. The cheaper supplier is selcted by the broker and increases or decreases its heat supply.</p>
 
 <h4><span style=\"color: #008000\">Example Results</span></h4>
@@ -404,11 +404,9 @@ a heat-pump and a heating rod for example.</p>
 <li>Broker 10003 rejects the proposal of 30002.</li>
 </ul>
 </html>", revisions="<html>
-<p>
 <ul>
 <li>November 2016, by Felix Bünning: Developed and implemented</li>
 </ul>
-</p>
 </html>"),
     experiment(StartTime=2.6784e+006, StopTime=3.2832e+006),
     __Dymola_experimentSetupOutput(

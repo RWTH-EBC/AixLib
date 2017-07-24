@@ -268,7 +268,7 @@ equation
 </ul>
 <h4><span style=\"color: #008000\">Concept</span></h4>
 <p>The BookSellerAgent responds to calls from a BookBuyerAgent. This can be a call for proposals or a request to buy a book. When a call for proposals comes in, the BookSellerAgent checks whether the required book is in stock or not. If yes, it reponds with the corresponding price, if no, it refuses the call. When a request to buy a book comes in, the agent looks for the book in stock, sells it and afterwards removes it from the stock list. The logic is implemented with the help of the StateGraph library. Communication is realized with the help of the DeviceDriver library and follows the language standards for multi-agent-systems set by the FIPA to the highest possible extend for Modelica models. The presented agent has the purpose of demonstrating the possibility of agent implementation in Modelica by implementing the behaviour of the BookSeller agent presented in Caire, 2009, JADE PROGRAMMING FOR BEGINNERS. </p>
-<p><br/><b><span style=\"color: #008000;\">References</span></b></p>
+<h4><span style=\"color: #008000;\">References</span></h4>
 <ul>
 <li>Felix B&uuml;nning. Development of a Modelica-library for agent-based control of HVAC systems. Bachelor thesis, 2016, RWTH Aachen University, Aachen, Germany. </li>
 <li>FIPA ACL Message Structure Specification</li>
@@ -282,11 +282,9 @@ equation
 </ul>
 </html>",
       revisions="<html>
-<p>
 <ul>
 <li>October 2015, by Felix Bünning: Developed and implemented</li>
 </ul>
-</p>
 </html>"),Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}}), graphics={
         Rectangle(

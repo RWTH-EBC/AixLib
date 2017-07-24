@@ -40,7 +40,7 @@ model BookTrading
 <h4><span style=\"color: #008000\">Concept</span></h4>
 <p>The model consists of three BookBuyerAgents and three BookSeller agents. Two of the agents try to buy the book Harry Potter 1 (ISBN=3551555559) and one tries to buy Lord of the Rings (ISBN=0618640150). Two of the seller agents have Harry Potter in Stock, none has Lord of the Rings in stock. The log (which can be found in the simulation tab of the Dymola message window), shows how the different requests are served (see Example Results). For further details, please refer to the first reference. </p>
 <p>The logic is implemented with the help of the StateGraph library. Communication is realized with the help of the DeviceDriver library and follows the language standards for multi-agent-systems set by the FIPA to the highest possible extend for Modelica models. </p>
-<p><br/><b><span style=\"color: #008000;\">References</span></b></p>
+<h4><span style=\"color: #008000;\">References</span></h4>
 <ul>
 <li>Felix B&uuml;nning. Development of a Modelica-library for agent-based control of HVAC systems. Bachelor thesis, 2016, RWTH Aachen University, Aachen, Germany. </li>
 <li>FIPA ACL Message Structure Specification</li>
@@ -82,11 +82,9 @@ model BookTrading
 </ul>
 </html>",
       revisions="<html>
-<p>
 <ul>
 <li>October 2015, by Felix Bünning: Developed and implemented</li>
 </ul>
-</p>
 </html>"),experiment(StopTime=400, Tolerance=1e-012),
       __Dymola_experimentSetupOutput);
 end BookTrading;
