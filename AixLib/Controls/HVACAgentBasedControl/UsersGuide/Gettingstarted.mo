@@ -3,7 +3,7 @@ class Gettingstarted "Getting started"
   extends Modelica.Icons.Information;
   annotation (Documentation(info="<html>
 <h4><span style=\"color: #008000\">What you can do with this library</span></h4>
-<p>The Modelica HVACAgentBasedControl presents a set of agents which can control building energy systems and systems of similar characteristics (e.g. district heating networks or electrical smart-grids). It depcits a plug&AMP;play solution to control systems with multiple energy suppliers. With the help of a market-based communication mechanism and cost functions for each energy supplier, the most cost effective supplier in the system is always chosen. With the help of individual cost functions the &quot;costs&quot; that should be minimized can be defined individually by the developer (e.g. money, primary energy, exergy destruction). </p>
+<p>The Modelica HVACAgentBasedControl presents a set of agents which can control building energy systems and systems of similar characteristics (e.g. district heating networks or electrical smart-grids). It offers a plug&amp;play solution to control systems with multiple energy suppliers. With the help of a market-based communication mechanism and cost functions for each energy supplier, the most cost effective supplier in the system is always chosen. With the help of individual cost functions the &quot;costs&quot; that should be minimized can be defined individually by the developer (e.g. money, primary energy, exergy destruction). </p>
 <h4><span style=\"color: #008000\">How you set up your system with agent-based control</span></h4>
 <p>If you want to control a building energy system with multiple heat/cold suppliers and multiple heat/cold consumers here is how you set up the system:</p>
 <ul>
@@ -20,8 +20,14 @@ class Gettingstarted "Getting started"
 <p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/ExampleSystem.PNG\"/> </p>
 </html>", revisions="<html>
 <ul>
-<li>November 2016, by Felix B&uuml;nning: Original implementation</li>
-<li><i><span style=\"font-family: Arial,sans-serif;\">December 2016&nbsp;</i></span><span style=\"font-family: MS Shell Dlg 2;\"> by Roozbeh Sangi:<br>revised</span></li>
+<li>
+December 2016, by Roozbeh Sangi:<br/>
+Revised.
+</li>
+<li>
+November 2016, by Felix B&uuml;nning:<br/>
+Original implementation
+</li>
 </ul>
 </html>"));
 end Gettingstarted;

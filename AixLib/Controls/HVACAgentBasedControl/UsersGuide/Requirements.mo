@@ -10,7 +10,7 @@ class Requirements "Requirements"
 </html>", revisions="<html>
 <ul>
 <li>November 2016, by Felix B&uuml;nning: Developed and implemented</li>
-<li><i><span style=\"font-family: Arial,sans-serif;\">December 2016&nbsp;</i></span><span style=\"font-family: MS Shell Dlg 2;\"> by Roozbeh Sangi:<br>revised</span></li>
+<li><i><span style=\"font-family: Arial,sans-serif;\">December 2016&nbsp;</i></span><span style=\"font-family: MS Shell Dlg 2;\"> by Roozbeh Sangi:<br/>revised</span></li>
 </ul>
 </html>"));
 end Requirements;

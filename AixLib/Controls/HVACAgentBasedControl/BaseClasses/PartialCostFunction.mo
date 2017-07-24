@@ -47,7 +47,7 @@ equation
 <ul>
 <li>This model implements a partial cost function.</li>
 </ul>
-<p><br><b><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Concept</span></b></p>
+<p><br/><b><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Concept</span></b></p>
 <p>An input and output for capacity and cost respectively is implemented. Also the basic icon is implemented.</p>
 <h4><span style=\"color: #008000\">References</span></h4>
 <ul>

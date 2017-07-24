@@ -23,7 +23,7 @@ model NetworkCommunication1
 <h4><span style=\"color: #008000\">Concept</span></h4>
 <p>The model NetworkCommunication1 harbors the BookSellerAgent. The model NetworkCommunication2 harbors the BookBuyerAgent. In order to run the system, the model NetworkCommunication1 needs to be opened on one machine and the model NetworkCommunicatio2 needs to be opened on another machine on the same local network. In the parameters of the featured BookBuyerAgent and BookSellerAgent the network IP adress of the other machine needs to be specified under &quot;uDPSend_adapted(IPAddress=&quot;134.130.49.128&quot;)&quot;. (For example, if NetworkCommunication1 runs on a machine with local IP address 192.168.2.1 and NetworkCommunication2 runs on a machine with local IP address 192.168.2.2, change the parameter of the BookSellerAgent in NetworkCommunication1 to &quot;uDPSend_adapted(IPAddress=&quot;192.168.2.2&quot;)&quot;.) </p>
 <p>Start the simulation of both models at roughly the same time and a book will be traded over the local network, as can be seen in the example results. </p>
-<p><br><b><span style=\"color: #008000;\">References</span></b></p>
+<p><br/><b><span style=\"color: #008000;\">References</span></b></p>
 <ul>
 <li>Felix B&uuml;nning. Development of a Modelica-library for agent-based control of HVAC systems. Bachelor thesis, 2016, RWTH Aachen University, Aachen, Germany. </li>
 <li>FIPA ACL Message Structure Specification</li>

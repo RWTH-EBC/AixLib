@@ -729,7 +729,7 @@ equation
 <li>December 2016, by Felix B&uuml;nning: Changed some variables to Integer type in order to avoid warnings caused by using the &quot;==&quot; operator</li>
 <li>November 2016, by Felix B&uuml;nning: Implemented variable minimum load</li>
 <li>October 2015, by Felix B&uuml;nning: Developed and implemented</li>
-<li><i><span style=\"font-family: Arial,sans-serif;\">December 2016&nbsp;</i></span><span style=\"font-family: MS Shell Dlg 2;\"> by Roozbeh Sangi:</span><span style=\"font-family: Arial,sans-serif;\"><br></span><span style=\"font-family: MS Shell Dlg 2;\">revised</span></li>
+<li><i><span style=\"font-family: Arial,sans-serif;\">December 2016&nbsp;</i></span><span style=\"font-family: MS Shell Dlg 2;\"> by Roozbeh Sangi:</span><span style=\"font-family: Arial,sans-serif;\"><br/></span><span style=\"font-family: MS Shell Dlg 2;\">revised</span></li>
 </ul>
 </html>"));
 end ColdProducerAgent;

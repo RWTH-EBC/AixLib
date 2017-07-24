@@ -166,7 +166,7 @@ equation
 <p>The communication takes place via UDP network communication and is implemented with the help of elements from the DeviceDriver library. The inbox is refreshed based on a sample time, the outbox is triggered by an external boolean input. </p>
 <p>Since sampling creates time events, the simulation performance will be bad for models with a high number of equations. For this reason, an alternative refresh mechanism can be used with &quot;usePoke=true&quot;. In order to use this mechanism the component &quot;MessageNotification&quot; needs to be added to the system. </p>
 <p>The partial agent implements the message parameters performative, sender, receiver, reply to, content, ontology and message ID. The parameters are described in the reference.</p>
-<p><br><b><span style=\"color: #008000;\">References</span></b></p>
+<p><br/><b><span style=\"color: #008000;\">References</span></b></p>
 <ul>
 <li>Roozbeh Sangi, Felix B&uuml;nning, Marc Baranski, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic.</li>
 </ul>

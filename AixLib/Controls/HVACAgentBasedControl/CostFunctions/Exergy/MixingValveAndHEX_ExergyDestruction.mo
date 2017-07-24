@@ -67,7 +67,7 @@ equation
 <p><span style=\"font-family: MS Shell Dlg 2;\"><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/HEX.png\"/></span></p>
 <p><span style=\"font-family: MS Shell Dlg 2;\">The figure above shows the control volume for the mixing valve and heat exchanger. Based on this volume the following function for exergy destruction has been developed. Details can be found in the reference.</span></p>
 <p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/HEXCostfkt2.PNG\"/></p>
-<p><br><b><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">References</span></b></p>
+<p><br/><b><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">References</span></b></p>
 <ul>
 <li>Felix B&uuml;nning. Development of a Modelica-library for agent-based control of HVAC systems. Bachelor thesis, 2016, RWTH Aachen University, Aachen, Germany. </li>
 </ul>

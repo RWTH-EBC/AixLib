@@ -13,7 +13,7 @@ class Overview "Overview"
 <p>52074 Aachen</p>
 <p>Germany </p>
 <p>www.eonerc.rwth-aachen.de/ebc </p>
-<p><br><span style=\"font-family: Arial,sans-serif;\">The HVAC Agent-based Control Library consists of the following main packages: </span></p>
+<p><br/><span style=\"font-family: Arial,sans-serif;\">The HVAC Agent-based Control Library consists of the following main packages: </span></p>
 <ul>
 <li><span style=\"font-family: Arial,sans-serif;\">BaseClasses</span></li>
 <li><span style=\"font-family: Arial,sans-serif;\">Agents</span></li>
@@ -22,7 +22,7 @@ class Overview "Overview"
 </ul>
 </html>", revisions="<html>
 <ul>
-<li><i><span style=\"font-family: Arial,sans-serif;\">December 2016&nbsp;</i></span><span style=\"font-family: MS Shell Dlg 2;\"> by Roozbeh Sangi:<br>implemented</span></li>
+<li><i><span style=\"font-family: Arial,sans-serif;\">December 2016&nbsp;</i></span><span style=\"font-family: MS Shell Dlg 2;\"> by Roozbeh Sangi:<br/>implemented</span></li>
 </ul>
 </html>"));
 end Overview;

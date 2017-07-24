@@ -98,7 +98,7 @@ equation
 <li><span style=\"font-family: MS Shell Dlg 2;\">This model determines the exergy destruction of a heating rod based on the inputs of the component.</span></li>
 <li><span style=\"font-family: MS Shell Dlg 2;\">It is used together with a HeatProducerAgent.</span></li>
 </ul>
-<p><br><b><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Concept</span></b></p>
+<p><br/><b><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Concept</span></b></p>
 <p><span style=\"font-family: MS Shell Dlg 2;\">Instead of a calculation with the help of inflowing and outflowing enthaplies, this cost function calculates the exergy product based on a heat flux. The estimation of the average temperature of the heat flux causes a small uncertainty compared to the other approach. However, this cost function leads to a more stable and reliable simulation. Details can be found in the reference.</span></p>
 <p><b><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">References</span></b></p>
 <ul>
