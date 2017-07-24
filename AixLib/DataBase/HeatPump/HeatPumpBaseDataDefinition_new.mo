@@ -30,9 +30,9 @@ record HeatPumpBaseDataDefinition_new "Basic heat pump dataheat pump data with l
    parameter Real table_Pel[:,:]
     "Electrical power lookup table: first column - Tuse in K (u1); first row - Tsource in K (u2); table values - Pel in W (y)";
 
-   parameter Real[:] Pel_fTuseTsourceN
+   parameter Real[:] Pel_fTuseTsourceN = {0}
     "coefficients to calculate the electrical power as a function of the use temperature, the source temperature and the revolution speed";
-   parameter Real[:] QflowUse_fTuseTsourceN
+   parameter Real[:] QflowUse_fTuseTsourceN = {0}
     "coefficients to calculate heatflow as a function of the use temperature, the source temperature and the revolution speed";
 
   annotation (Documentation(info="<html>

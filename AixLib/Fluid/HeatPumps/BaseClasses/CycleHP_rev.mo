@@ -1,8 +1,8 @@
 within AixLib.Fluid.HeatPumps.BaseClasses;
 model CycleHP_rev "cycle for reversible heat pump"
   import SI = Modelica.SIunits;
-  parameter AixLib.Controls.Types.OperationMode_HP operationMode = heatPump "Operation mode of the machine" annotation(Dialog(group = "Control Mode"));
-  parameter AixLib.Controls.Types.ControlMode_HP controlMode = onOff "Control mode of the machine" annotation(Dialog(group = "Control Mode"));
+  parameter AixLib.Controls.Types.OperationMode_HP operationMode = AixLib.Controls.Types.OperationMode_HP.heatPump "Operation mode of the machine" annotation(Dialog(group = "Control Mode"));
+  parameter AixLib.Controls.Types.ControlMode_HP controlMode = AixLib.Controls.Types.ControlMode_HP.onOff "Control mode of the machine" annotation(Dialog(group = "Control Mode"));
 
   // heat pump data
   parameter
@@ -10,8 +10,6 @@ model CycleHP_rev "cycle for reversible heat pump"
     HeatPumpData=AixLib.DataBase.HeatPump.Galetti_HeatPump_MFE005MH()
     "HeatPump data, make sure you have the correct tables (on/off) or polynoms (speed control)"
     annotation (choicesAllMatching=true, Dialog(group="Control Mode", enable=(operationMode == "heat pump" or operationMode == "reversible")));
-
-
   // chiller data
   parameter
     AixLib.DataBase.HeatPump.HeatPumpBaseDataDefinition_new
@@ -19,13 +17,6 @@ model CycleHP_rev "cycle for reversible heat pump"
     "Chiller data, make sure you have the correct tables (on/off) or polynoms (speed control)"
     annotation (choicesAllMatching=true, Dialog(group="Control Mode", enable=(operationMode == "chiller" or operationMode == "reversible")));
 
-protected
-  final parameter Real table_QflowUse_HP[:,:]=HeatPumpDataT.table_QflowUse;
-  final parameter Real table_Pel_HP[:,:]= HeatPumpDataT.table_Pel;
-  final parameter Real table_QflowUse_C[:,:]=ChillerDataT.table_QflowUse;
-  final parameter Real table_Pel_C[:,:]= ChillerDataT.table_Pel;
-
-public
     replaceable function Corr_icing =
       AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection.noModel
                                                                  constrainedby
@@ -69,6 +60,17 @@ public
     "Nominal mass flow rate source medium"
   annotation(Dialog(group="Mass flow correction",tab="Advanced",enable=(CorrFlowSource and (controlMode == "speed control"))));
 
+  parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments
+    "smoothness of table interpolation" annotation(Dialog(group = "Assumptions",tab="Advanced", enable=not
+                                                                                          ((controlMode == "speed control"))));
+
+protected
+  final parameter Real table_QflowUse_HP[:,:]=HeatPumpData.table_QflowUse;
+  final parameter Real table_Pel_HP[:,:]= HeatPumpData.table_Pel;
+  final parameter Real table_QflowUse_C[:,:]=ChillerData.table_QflowUse;
+  final parameter Real table_Pel_C[:,:]= ChillerData.table_Pel;
+
+
  // parameter SI.TemperatureDifference deltaT_Ev_nominal=5 "Nominal temperature spread in evaporator"
  // annotation(Dialog(group="Mass flow correction",tab="Advanced", enable=(CorrFlowSource and (controlMode == "speed control"))));
 
@@ -89,10 +91,29 @@ public
   Real f_cop_icing;
   //Real f_cop_spread;
   Real Char[2];
-  Real Tuse_corr;
-  Real Tsource_corr;
+  SI.ThermodynamicTemperature Tuse_corr;
+  SI.ThermodynamicTemperature Tsource_corr;
   Real Nmax;
   Real Nmin;
+
+protected
+  SI.ThermodynamicTemperature TuseLimit "limit for Tuse, when Pel = PelMax";
+  Modelica.Blocks.Interfaces.RealInput firstOrder_out_internal
+    "Needed to connect to conditional model";
+  Modelica.Blocks.Interfaces.RealOutput firstOrder_in_internal
+    "Needed to connect to conditional model";
+  Modelica.Blocks.Interfaces.RealInput delay_out_internal
+    "Needed to connect to conditional model";
+  Modelica.Blocks.Interfaces.RealOutput delay_in_internal
+    "Needed to connect to conditional model";
+  Modelica.Blocks.Interfaces.RealInput QflowUse_table_internal
+    "Needed to connect to conditional model";
+  Modelica.Blocks.Interfaces.RealInput Pel_table_internal
+    "Needed to connect to conditional model";
+  /*Modelica.Blocks.Interfaces.RealInput Pel_trapezoid_internal 
+    "Needed to connect to conditional model";*/
+  SI.MassFlowRate mflowUse_nom;
+  SI.MassFlowRate mflowSource_nom;
 
   Modelica.Blocks.Interfaces.RealOutput output_Pel annotation (Placement(
         transformation(
@@ -121,24 +142,6 @@ public
         rotation=270,
         origin={-10,90})));
 
-protected
-  SI.ThermodynamicTemperature TuseLimit "limit for Tuse, when Pel = PelMax";
-  Modelica.Blocks.Interfaces.RealInput firstOrder_out_internal
-    "Needed to connect to conditional model";
-  Modelica.Blocks.Interfaces.RealOutput firstOrder_in_internal
-    "Needed to connect to conditional model";
-  Modelica.Blocks.Interfaces.RealInput delay_out_internal
-    "Needed to connect to conditional model";
-  Modelica.Blocks.Interfaces.RealOutput delay_in_internal
-    "Needed to connect to conditional model";
-  Modelica.Blocks.Interfaces.RealInput QflowUse_table_internal
-    "Needed to connect to conditional model";
-  Modelica.Blocks.Interfaces.RealInput Pel_table_internal
-    "Needed to connect to conditional model";
-  /*Modelica.Blocks.Interfaces.RealInput Pel_trapezoid_internal 
-    "Needed to connect to conditional model";*/
-  SI.MassFlowRate mflowUse_nom;
-  SI.MassFlowRate mflowSource_nom;
 
 public
   Modelica.Blocks.Sources.RealExpression real_QflowUse(y=QflowUse) annotation (
@@ -163,7 +166,7 @@ public
     fileName="NoName",
     smoothness=smoothness,
     table=table_QflowUse_HP) if
-                            not ((controlMode == "speed control"))
+                            not ((controlMode == AixLib.Controls.Types.ControlMode_HP.onOff.speedControl))
     "look up table for Qflow use for heat pump mode" annotation (extent=[-60,40;
         -40,60], Placement(transformation(extent={{-58,48},{-38,68}})));
 
@@ -172,14 +175,14 @@ public
     fileName="NoName",
     smoothness=smoothness,
     table=table_Pel_HP) if
-                        not ((controlMode == "speed control"))
+                        not ((controlMode == AixLib.Controls.Types.ControlMode_HP.onOff.speedControl))
     "look up table for electrical power in heat pump mode" annotation (extent=[-60,
         -20; -40,0], Placement(transformation(extent={{-60,20},{-40,40}})));
 public
-  Modelica.Blocks.Sources.RealExpression real_T_source(y=T_source_corr)
+  Modelica.Blocks.Sources.RealExpression real_T_source(y=Tsource_corr)
     annotation (Placement(transformation(extent={{-96,50},{-76,70}}, rotation=0)));
 public
-  Modelica.Blocks.Sources.RealExpression real_T_use(y=T_use_corr) annotation (
+  Modelica.Blocks.Sources.RealExpression real_T_use(y=Tuse_corr)  annotation (
       Placement(transformation(extent={{-96,20},{-76,40}}, rotation=0)));
   Modelica.Blocks.Continuous.FirstOrder firstOrder(T=T_hp_cycle) if PT1_cycle
     annotation (Placement(transformation(extent={{42,-6},{62,14}})));
@@ -195,9 +198,7 @@ public
   Modelica.Blocks.Sources.RealExpression real_CoP_corr(y=CoP_corr)
     annotation (Placement(transformation(extent={{-32,-50},{-12,-30}},
           rotation=0)));
-  parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments
-    "smoothness of table interpolation" annotation(Dialog(group = "Assumptions",tab="Advanced", enable=not
-                                                                                          ((controlMode == "speed control"))));
+
 public
   Modelica.Blocks.Logical.TriggeredTrapezoid real_Pel_add(amplitude=Pel_add)
     annotation (Placement(transformation(extent={{-72,-54},{-64,-46}},
@@ -274,7 +275,7 @@ public
         rotation=0,
         origin={-140,-24})));
 public
-  Modelica.Blocks.Sources.RealExpression real_T_useLimit(y=TuseLimit)
+  Modelica.Blocks.Sources.RealExpression real_TuseLimit(y=TuseLimit)
     "limit for Tuse at maximum Pel" annotation (Placement(transformation(extent=
            {{14,52},{34,72}}, rotation=0)));
 public
@@ -292,7 +293,7 @@ public
     fileName="NoName",
     smoothness=smoothness,
     table=table_QflowUse_C) if
-                            not ((controlMode == "speed control"))
+                            not ((controlMode == AixLib.Controls.Types.ControlMode_HP.onOff.speedControl))
     "look up table for Qflow use for chiller mode" annotation (extent=[-60,40; -40,
         60], Placement(transformation(extent={{-26,48},{-6,68}})));
   Modelica.Blocks.Tables.CombiTable2D Table_Pel_C(
@@ -300,7 +301,7 @@ public
     fileName="NoName",
     smoothness=smoothness,
     table=table_Pel_C) if
-                        not ((controlMode == "speed control"))
+                        not ((controlMode == AixLib.Controls.Types.ControlMode_HP.onOff.speedControl))
     "look up table for electrical power in chiller mode" annotation (extent=[-60,
         -20; -40,0], Placement(transformation(extent={{-26,20},{-6,40}})));
   Modelica.Blocks.Interfaces.BooleanInput isHP
@@ -321,43 +322,43 @@ equation
 
   // Decide on Source and Use inputs and outputs
   if isHP then         // heat pump mode
-          Tuse =T_Co_out;
-          Tuse_in =T_Co_in;
-          Tsource =T_Ev_in;
-          Tsource_out =T_Ev_out;
+    Tuse =T_Co_out;
+    Tuse_in =T_Co_in;
+    Tsource =T_Ev_in;
+    Tsource_out =T_Ev_out;
     Q_flow_Co = QflowUse;
     Q_flow_Ev = (-1)*QflowSource;
-          mflowUse =m_flow_Co;
-          mflowSource=m_flow_Ev;
-          TuseLimit = HeatPumpData.TuseMax;
-          Table_QflowUse_HP.u1 =real_T_use.y;
-          Table_QflowUse_HP.u2 =real_T_source.y;
-          Table_Pel_HP.u1 =real_T_use.y;
-          Table_Pel_HP.u2 =real_T_source.y;
-          Table_QflowUse_C.u1 = 0;
-          Table_QflowUse_C.u2 = 0;
-          Table_Pel_C.u1 = 0;
-          Table_Pel_C.u2 = 0;
-          product_QflowUse_max.u1 = PID_max_QflowUse_HP.y;
-    else // chiller mode
-          Tuse =T_Ev_out;
-          Tuse_in =T_Ev_in;
-          Tsource =T_Co_in;
-          Tsource_out =T_Co_out;
+    mflowUse =m_flow_Co;
+    mflowSource=m_flow_Ev;
+    TuseLimit = HeatPumpData.TuseMax;
+    Table_QflowUse_HP.u1 =real_T_use.y;
+    Table_QflowUse_HP.u2 =real_T_source.y;
+    Table_Pel_HP.u1 =real_T_use.y;
+    Table_Pel_HP.u2 =real_T_source.y;
+    Table_QflowUse_C.u1 = 0;
+    Table_QflowUse_C.u2 = 0;
+    Table_Pel_C.u1 = 0;
+    Table_Pel_C.u2 = 0;
+    product_QflowUse_max.u1 = PID_max_QflowUse_HP.y;
+  else // chiller mode
+    Tuse =T_Ev_out;
+    Tuse_in =T_Ev_in;
+    Tsource =T_Co_in;
+    Tsource_out =T_Co_out;
     Q_flow_Co = QflowSource;
     Q_flow_Ev = (-1)*QflowUse;
-          mflowUse =m_flow_Ev;
-          mflowSource=m_flow_Co;
-          TuseLimit = HeatPumpData.TuseMin;
-          Table_QflowUse_C.u1 =real_T_use.y;
-          Table_QflowUse_C.u2 =real_T_source.y;
-          Table_Pel_C.u1 =real_T_use.y;
-          Table_Pel_C.u2 =real_T_source.y;
-          Table_QflowUse_HP.u1 = 0;
-          Table_QflowUse_HP.u2 = 0;
-          Table_Pel_HP.u1 = 0;
-          Table_Pel_HP.u2 = 0;
-          product_QflowUse_max.u1 = PID_max_QflowUse_C.y;
+    mflowUse =m_flow_Ev;
+    mflowSource=m_flow_Co;
+    TuseLimit = HeatPumpData.TuseMin;
+    Table_QflowUse_C.u1 =real_T_use.y;
+    Table_QflowUse_C.u2 =real_T_source.y;
+    Table_Pel_C.u1 =real_T_use.y;
+    Table_Pel_C.u2 =real_T_source.y;
+    Table_QflowUse_HP.u1 = 0;
+    Table_QflowUse_HP.u2 = 0;
+    Table_Pel_HP.u1 = 0;
+    Table_Pel_HP.u2 = 0;
+    product_QflowUse_max.u1 = PID_max_QflowUse_C.y;
   end if;
 
     Nmax=HeatPumpData.Nmax;
@@ -387,23 +388,23 @@ equation
 //  output_Tsource_mean = Tsource_corr;
 
   // determination of speed N
-  if (controlMode == "on/off") then
+  if (controlMode == AixLib.Controls.Types.ControlMode_HP.onOff) then
     N=HeatPumpDataT.Nnom;
   else // capacity control mode
     if N > Nmax then
       N=Nmax;
-  else
-      if N < Nmin then
-      N=Nmin;
     else
-      N=N;
+      if N < Nmin then
+        N=Nmin;
+      else
+        N=N;
+      end if;
     end if;
   end if;
-end if;
   output_N =N;
 
-  // determination of basic heat pump characteristics QflowUse_char and Pel_char and CoP_char
-  if (controlMode == "on/off") then // cycle data as table
+  //determination of basic heat pump characteristics QflowUse_char and Pel_char and CoP_char
+  if (controlMode == AixLib.Controls.Types.ControlMode_HP.onOff) then // cycle data as table
     Char = {Pel_table_internal,QflowUse_table_internal};
   else // cycle data as polynom
     Char=AutomationLibrary.DataBaseX.HeatPumps.baseFct_withAlgorithmSI(N,Tuse_corr, Tsource_corr,HeatPumpDataP.Pel_fTuseTsourceN,HeatPumpDataP.QflowUse_fTuseTsourceN);
@@ -420,7 +421,7 @@ end if;
   end if;
 
   // determination of CoP-corrections
-  if (controlMode == "speed control") then
+  if (controlMode == AixLib.Controls.Types.ControlMode_HP.onOff.speedControl) then
     f_cop_icing=Corr_icing(Tsource_corr-273.15);
   else
     f_cop_icing=1;
@@ -445,8 +446,7 @@ end if;
 
   //internal connections for conditional models
   connect(product_Pel_CoP.y,delay_in_internal);
-  if delay_QflowUse then
-  else
+  if (delay_QflowUse == false) then
     connect(delay_in_internal,delay_out_internal);
   end if;
   connect(delay_out_internal,firstOrder_in_internal);
@@ -458,7 +458,7 @@ end if;
 
   end if;
 
-   if (controlMode == "speed control") then // cycle data as polynom
+   if (controlMode == AixLib.Controls.Types.ControlMode_HP.onOff.speedControl) then // cycle data as polynom
      connect(QflowUse_table_internal,dummy_zero.y);
      connect(Pel_table_internal,dummy_zero.y);
    else
@@ -510,13 +510,13 @@ end if;
       points={{61,34},{102,34}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(PID_max_QflowUse_HP.u_s, real_T_useLimit.y) annotation (Line(
+  connect(PID_max_QflowUse_HP.u_s, real_TuseLimit.y) annotation (Line(
       points={{44,66},{40,66},{40,62},{35,62}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(real_TuseIs.y, PID_max_QflowUse_HP.u_m) annotation (Line(points={{35,46},
           {35,46},{56,46},{56,54}}, color={0,0,127}));
-  connect(real_T_useLimit.y, PID_max_QflowUse_C.u_s)
+  connect(real_TuseLimit.y, PID_max_QflowUse_C.u_s)
     annotation (Line(points={{35,62},{76,62}}, color={0,0,127}));
   connect(real_TuseIs.y, PID_max_QflowUse_C.u_m)
     annotation (Line(points={{35,46},{88,46},{88,50}}, color={0,0,127}));
