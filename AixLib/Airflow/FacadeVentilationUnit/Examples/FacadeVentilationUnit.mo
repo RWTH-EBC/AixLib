@@ -123,8 +123,8 @@ equation
   connect(freshAirSource.ports[1], FVU.exhaustAirConnector) annotation (Line(
         points={{24,-37},{42,-37},{42,-43.4},{70,-43.4}}, color={0,127,255}));
   connect(exhaustAirSink.ports[1], FVU.freshAirConnector) annotation (Line(
-        points={{26,-74},{26,-70},{42,-70},{42,-52.8},{70.2,-52.8}}, color={0,
-          127,255}));
+        points={{26,-74},{26,-70},{42,-70},{42,-52.8},{70.2,-52.8}}, color={0,127,
+          255}));
   connect(FVU.supplyAirConnector, supplyAirTemperature.port_a) annotation (Line(
         points={{106.2,-43.4},{106.2,-44},{120,-44}}, color={0,127,255}));
   connect(supplyAirTemperature.port_b, supplyAirSink.ports[1]) annotation (Line(
@@ -143,8 +143,8 @@ equation
       extent={{6,3},{6,3}}));
   connect(roomTemperature.y, extractAirSource.T_in) annotation (Line(points={{-79,
           50},{46,50},{192,50},{192,-70},{180,-70}}, color={0,0,127}));
-  connect(outdoorTemperature.y, exhaustAirSink.T_in) annotation (Line(points={{
-          -79,16},{-64,16},{-64,-70},{4,-70}}, color={0,0,127}));
+  connect(outdoorTemperature.y, exhaustAirSink.T_in) annotation (Line(points={{-79,
+          16},{-64,16},{-64,-70},{4,-70}}, color={0,0,127}));
   connect(roomTemperature.y, fVUControlBus1.roomTemperature) annotation (Line(
         points={{-79,50},{-62,50},{-46,50},{-46,27.95},{-25.95,27.95}}, color={
           0,0,127}), Text(
@@ -183,6 +183,7 @@ First implementation.
 </li>
 </ul>
 </html>", info="<html>
-<p>This model demonstrates the usage of the facade ventilation unit connected to the standard controller. </p>
+<p>This model demonstrates the usage of the facade ventilation unit connected 
+to the standard controller. </p>
 </html>"));
 end FacadeVentilationUnit;
