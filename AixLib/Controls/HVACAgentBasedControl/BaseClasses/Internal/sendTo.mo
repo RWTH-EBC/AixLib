@@ -18,10 +18,8 @@ encapsulated function sendTo
   annotation (Documentation(info="<html>
 The function was copied from the Modelica_DeviceDrivers library and changed to the degree that the variable \"port\" is no longer of the type Integer but Real instead.
 </html>", revisions="<html>
-<p>
 <ul>
 <li>November 2016: Adapted from Modelica_DeviceDrivers by Felix B&uuml;nning</li>
 </ul>
-</p>
 </html>"));
 end sendTo;

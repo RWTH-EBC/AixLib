@@ -36,18 +36,16 @@ equation
           textString="$")}),                Diagram(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-100},{100,100}})),
     Documentation(revisions="<html>
-<p>
 <ul>
 <li>November 2016: Developed and implemented by Felix B&uuml;nning</li>
 </ul>
-</p>
 </html>",
     info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
 <ul>
 <li>This model implements a partial cost function.</li>
 </ul>
-<p><br/><b><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Concept</span></b></p>
+<h4><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Concept</span></h4>
 <p>An input and output for capacity and cost respectively is implemented. Also the basic icon is implemented.</p>
 <h4><span style=\"color: #008000\">References</span></h4>
 <ul>

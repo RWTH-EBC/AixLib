@@ -87,11 +87,9 @@ equation
 <li><a href=\"HVACAgentBasedControl.Examples.HVACAgentsCommunications.SimpleCommunication\">ExampleAgentSystem</a></li>
 </ul>
 </html>", revisions="<html>
-<p>
 <ul>
 <li>October 2015, by Felix Bünning: Copied and adapted from the Modelica DeviceDrivers library</li>
 </ul>
-</p>
 </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}})));

@@ -85,10 +85,8 @@ equation
 <p>The model simulates a trigger, which is only active for a certain period of time, thus not creating events throughout the whole simulation time.</p>
 </html>",
     revisions="<html>
-<p>
 <ul>
 <li>November 2016: Developed and implemented by Felix B&uuml;nning</li>
 </ul>
-</p>
 </html>"));
 end SendSample;
