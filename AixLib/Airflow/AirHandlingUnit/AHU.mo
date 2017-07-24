@@ -1353,19 +1353,19 @@ equation
                    graphics={
         Bitmap(
           extent={{36,-42},{100,4}}, fileName=
-              "modelica://AixLib/Resources/Images/AHU/HumidifierCooling.jpg"),
+              "modelica://AixLib/Images/AHU/HumidifierCooling.jpg"),
         Bitmap(
           extent={{-100,-90},{-36,-44}}, fileName=
-              "modelica://AixLib/Resources/Images/AHU/Dehumidifier.jpg"),
+              "modelica://AixLib/Images/AHU/Dehumidifier.jpg"),
         Bitmap(
           extent={{-32,-42},{32,4}}, fileName=
-              "modelica://AixLib/Resources/Images/AHU/HumidifierHeating.jpg"),
+              "modelica://AixLib/Images/AHU/HumidifierHeating.jpg"),
         Bitmap(
           extent={{-32,-90},{32,-44}}, fileName=
-              "modelica://AixLib/Resources/Images/AHU/Heating.jpg"),
+              "modelica://AixLib/Images/AHU/Heating.jpg"),
         Bitmap(
           extent={{36,-90},{100,-44}}, fileName=
-              "modelica://AixLib/Resources/Images/AHU/Cooling.jpg")}),
+              "modelica://AixLib/Images/AHU/Cooling.jpg")}),
     experiment(StopTime=13398, Interval=5),
     Icon(coordinateSystem(extent={{-100,-40},{100,40}}, preserveAspectRatio=false),
         graphics={Bitmap(
