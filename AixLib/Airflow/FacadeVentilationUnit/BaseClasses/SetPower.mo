@@ -109,9 +109,10 @@ equation
 <p>This model sets the mass flow rate of the air flow through a facade ventilation unit based on the input value, which is the power share set point of the fan.</p>
 </html>", revisions="<html>
 <ul>
-  <li><i>Septmeber, 2014&nbsp;</i>
-    by by Roozbeh Sangi and Marc Baranski:<br/>
-    Model implemented</li>
+<li>
+July, 2017 by Marc Baranski and Roozbeh Sangi:<br/>
+First implementation.
+</li>
 </ul>
 </html>"));
 end SetPower;

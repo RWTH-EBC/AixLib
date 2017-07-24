@@ -165,9 +165,10 @@ equation
     experiment(StopTime=10000),
     Documentation(revisions="<html>
 <ul>
-  <li><i>Septmeber, 2014&nbsp;</i>
-    by by Roozbeh Sangi and Marc Baranski:<br/>
-    Model implemented</li>
+<li>
+July, 2017 by Marc Baranski and Roozbeh Sangi:<br/>
+First implementation.
+</li>
 </ul>
 </html>", info="<html>
 <p>This model demonstrates the usage of the facade ventilation unit connected to the standard controller. </p>

@@ -7,9 +7,10 @@ record FVURecord
 <p>This paramter record can be used for the <a href=\"AixLib.Airflow.FacadeVentilationUnit.FacadeVentilationUnit\">AixLib.Airflow.FacadeVentilationUnit.FacadeVentilationUnit</a>.</p>
 </html>",  revisions="<html>
 <ul>
-  <li><i>Septmeber, 2014&nbsp;</i>
-    by by Roozbeh Sangi and Marc Baranski:<br/>
-    Model implemented</li>
+<li>
+July, 2017 by Marc Baranski and Roozbeh Sangi:<br/>
+First implementation.
+</li>
 </ul>
 </html>"));
 end FVURecord;

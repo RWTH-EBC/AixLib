@@ -31,9 +31,10 @@ record FVUBaseRecord "Base record for the facade ventilation unit model"
 <p>This is the base definition of the paramter record that can be used for the <a href=\"AixLib.Airflow.FacadeVentilationUnit.FacadeVentilationUnit\">AixLib.Airflow.FacadeVentilationUnit.FacadeVentilationUnit</a>.</p>
 </html>",  revisions="<html>
 <ul>
-  <li><i>Septmeber, 2014&nbsp;</i>
-    by by Roozbeh Sangi and Marc Baranski:<br/>
-    Model implemented</li>
+<li>
+July, 2017 by Marc Baranski and Roozbeh Sangi:<br/>
+First implementation.
+</li>
 </ul>
 </html>"));
 

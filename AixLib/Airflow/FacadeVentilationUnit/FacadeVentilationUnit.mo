@@ -70,16 +70,16 @@ public
     m1_flow_nominal=FVUParam.m1_flow_nominal_cooler,
     m2_flow_nominal=FVUParam.m2_flow_nominal_cooler)
     annotation (Placement(transformation(extent={{182,22},{162,42}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Heater_Return(redeclare package Medium
-      = Water)
+  Modelica.Fluid.Interfaces.FluidPort_b Heater_Return(redeclare package Medium =
+        Water)
     "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{82,90},{102,110}})));
   Modelica.Fluid.Interfaces.FluidPort_a Heater_Flow(redeclare package Medium =
         Water)
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{112,90},{132,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Cooler_Return(redeclare package Medium
-      = Water)
+  Modelica.Fluid.Interfaces.FluidPort_b Cooler_Return(redeclare package Medium =
+        Water)
     "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{152,90},{172,110}})));
   Modelica.Fluid.Interfaces.FluidPort_a Cooler_Flow(redeclare package Medium =
@@ -328,8 +328,8 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(fanSupplyAir.powerShare, fVUControlBus.fanSupplyAirPower) annotation
-    (Line(points={{62,36},{62,62},{0.145,62},{0.145,101.145}}, color={0,0,127}),
+  connect(fanSupplyAir.powerShare, fVUControlBus.fanSupplyAirPower) annotation (
+     Line(points={{62,36},{62,62},{0.145,62},{0.145,101.145}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
@@ -359,14 +359,14 @@ equation
       index=1,
       extent={{6,3},{6,3}}));
   connect(heatingValve.y, fVUControlBus.heatingValveOpening) annotation (Line(
-        points={{132.8,60},{140,60},{140,76},{0.145,76},{0.145,101.145}}, color
-        ={0,0,127}), Text(
+        points={{132.8,60},{140,60},{140,76},{0.145,76},{0.145,101.145}}, color=
+         {0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
   connect(coolingValve.y, fVUControlBus.coolingValveOpening) annotation (Line(
-        points={{202.8,58},{210,58},{210,76},{0.145,76},{0.145,101.145}}, color
-        ={0,0,127}), Text(
+        points={{202.8,58},{210,58},{210,76},{0.145,76},{0.145,101.145}}, color=
+         {0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
@@ -398,9 +398,10 @@ equation
 <p>Baranski, M., Sangi, R., F&uuml;tterer, J., M&uuml;ller, D. (2016). An Algorithm for Stepwise Exergy-based Model Predictive Control of Building HVAC Supply Chains. <i>29th international conference on Efficiency, Cost, Optimisation, Simulation and Environmental Impact of Energy Systems</i>. </p>
 </html>", revisions="<html>
 <ul>
-  <li><i>Septmeber, 2014&nbsp;</i>
-    by by Roozbeh Sangi and Marc Baranski:<br/>
-    Model implemented</li>
+<li>
+July, 2017 by Marc Baranski and Roozbeh Sangi:<br/>
+First implementation.
+</li>
 </ul>
 </html>"));
 end FacadeVentilationUnit;
