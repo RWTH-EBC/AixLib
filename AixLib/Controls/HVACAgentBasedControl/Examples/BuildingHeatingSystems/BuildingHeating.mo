@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems;
+within AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems;
 model BuildingHeating
   extends Modelica.Icons.Example;
   parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();
@@ -373,19 +373,8 @@ equation
 <li>The agents used are two RoomAgents, two HeatProducerAgents, one Broker and one MessageNotification</li>
 </ul>
 <h4><span style=\"color: #008000\">Concept</span></h4>
-<p>The two thermal zones are connected to a weather model, which results in different thermal loads depending on the boundary conditions. Each zone is equipped with a thermostatic valve,
-which allows to control the temperature in the zones to a limited degree. When the temperature in the zones goes above 20.5 or below 19.5 degC (and the valves are fully closed or opened)
-the RoomAgents become active and order an increase or decrease in heat supply from the broker. The broker calls for proposals from both heat suplliers. The suppliers use cost functions to
-determine the cost for the adjustments. The cheaper supplier is selcted by the broker and increases or decreases its heat supply.</p>
-
-<h4><span style=\"color: #008000\">Example Results</span></h4>
-<p>The results show that the agent-based control system keeps the room temperature between 19.2 and 20.8 degC most of the time.</p>
-<p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/ExampleT.PNG\"/></p>
-<p>The results for the capacity of the heat suppliers further show that for an increase in heat supply the cheaper supplier is always chosen first and for a decrease the more expensive one. In real-life systems this could be
-a heat-pump and a heating rod for example.</p>
-<p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/ExampleCap.PNG\"/></p>
-<p>The trading procedure can be followed in the command line window of the dymosim.exe or found in the dslog.txt file after simulation. For one negotiation round it looks as follows.</p>
-
+<p>The two thermal zones are connected to a weather model, which results in different thermal loads depending on the boundary conditions. Each zone is equipped with a thermostatic valve, which allows to control the temperature in the zones to a limited degree. When the temperature in the zones goes above 20.5 or below 19.5 degC (and the valves are fully closed or opened) the RoomAgents become active and order an increase or decrease in heat supply from the broker. The broker calls for proposals from both heat suplliers. The suppliers use cost functions to determine the cost for the adjustments. The cheaper supplier is selcted by the broker and increases or decreases its heat supply. </p>
+<p>The trading procedure can be followed in the command line window of the dymosim.exe or found in the dslog.txt file after simulation. For one negotiation round it looks as follows. </p>
 <ul>
 <li>RoomAgent 10002 requests 25.1956 W of heat from Broker 10003.</li>
 <li>Broker 10003 collected the request of 25.1956 W of heat from Consumer 10002.</li>
@@ -405,7 +394,8 @@ a heat-pump and a heating rod for example.</p>
 </ul>
 </html>", revisions="<html>
 <ul>
-<li>November 2016, by Felix Bünning: Developed and implemented</li>
+<li>July 2017, by Roozbeh Sangi: Documentation modified</li>
+<li>November 2016, by Felix B&uuml;nning: Developed and implemented</li>
 </ul>
 </html>"),
     experiment(StartTime=2.6784e+006, StopTime=3.2832e+006),

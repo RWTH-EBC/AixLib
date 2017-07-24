@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems;
+within AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems;
 model BuildingHeating_usePoke
   extends BuildingHeating(
     roomAgent(usePoke=true),
@@ -32,22 +32,13 @@ equation
 <li>The alternative agent communication saves significant simulation time in systems where the agents are not active all the time</li>
 </ul>
 <h4><span style=\"color: #008000\">Concept</span></h4>
-<p>The parameter \"usePoke\" is set to true in all agents of the system. The parameter \"n\" in messageNotification is set to the number of other agents in the system (here 5).
-The \"senOut\" boolean outputs are then connected to the \"u\" input of the messageNotification agent. The system is set up.</p>
-<p>The conventional communication method uses a constant refresh-rate in the UDP inboxes of all agents, leading to excessive event generation, even when the agents are not active. This
-again leads to long simulation times. By using \"usePoke\", the UDP inboxes of the agents are only refreshed when another agent send out a message. The other agents are \"poked\" by the boolean
-signal and update their inboxes. In systems where the agents are idle in long periods of time, the \"usePoke\" technique can save substantial simulation time.</p>
-<p>
-For more information you can also refer to <a href=\"HVACAgentBasedControl.Agents.MessageNotification\">MessageNotification model</a>
-</p>
-<h4><span style=\"color: #008000\">Example Results</span></h4>
-<p>The results show that in the presented example, the simulation time can be reduced by 50%. However, during the times where the agents are actually active, the conventional
-communication method has better performance.</p>
-<p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/Example_usePoke.PNG\"/></p>
-
+<p>The parameter &QUOT;usePoke&QUOT; is set to true in all agents of the system. The parameter &QUOT;n&QUOT; in messageNotification is set to the number of other agents in the system (here 5). The &QUOT;senOut&QUOT; boolean outputs are then connected to the &QUOT;u&QUOT; input of the messageNotification agent. The system is set up.</p>
+<p>The conventional communication method uses a constant refresh-rate in the UDP inboxes of all agents, leading to excessive event generation, even when the agents are not active. This again leads to long simulation times. By using &QUOT;usePoke&QUOT;, the UDP inboxes of the agents are only refreshed when another agent send out a message. The other agents are &QUOT;poked&QUOT; by the boolean signal and update their inboxes. In systems where the agents are idle in long periods of time, the &QUOT;usePoke&QUOT; technique can save substantial simulation time.</p>
+<p>For more information you can also refer to <a href=\"HVACAgentBasedControl.Agents.MessageNotification\">MessageNotification model</a>  </p>
 </html>", revisions="<html>
 <ul>
-<li>November 2016, by Felix Bünning: Developed and implemented</li>
+<li>July 2017, by Roozbeh Sangi: Documentation modified</li>
+<li>November 2016, by Felix B&uuml;nning: Developed and implemented</li>
 </ul>
 </html>"),
     experiment(StartTime=2.6784e+006, StopTime=3.2832e+006),
