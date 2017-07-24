@@ -651,7 +651,7 @@ equation
 </html>",
       revisions="<html>
 <ul>
-<li>December 2016, by Felix B&uuml;nning: Changed some variables to Integer type in order to avoid warnings caused by using the &QUOT;==&QUOT; operator</li>
+<li>December 2016, by Felix B&uuml;nning: Changed some variables to Integer type in order to avoid warnings caused by using the &quot;==&quot; operator</li>
 <li>November 2016, by Felix B&uuml;nning: Implemented variable maximum load</li>
 <li>October 2015, by Felix B&uuml;nning: Developed and implemented</li>
 <li><i><span style=\"font-family: Arial,sans-serif;\">December 2016&nbsp;</i></span><span style=\"font-family: MS Shell Dlg 2;\"> by Roozbeh Sangi:<br>revised</span></li>

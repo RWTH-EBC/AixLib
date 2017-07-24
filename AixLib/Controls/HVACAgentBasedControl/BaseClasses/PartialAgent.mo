@@ -164,7 +164,7 @@ equation
 </ul>
 <h4><span style=\"color: #008000\">Concept</span></h4>
 <p>The communication takes place via UDP network communication and is implemented with the help of elements from the DeviceDriver library. The inbox is refreshed based on a sample time, the outbox is triggered by an external boolean input. </p>
-<p>Since sampling creates time events, the simulation performance will be bad for models with a high number of equations. For this reason, an alternative refresh mechanism can be used with &QUOT;usePoke=true&QUOT;. In order to use this mechanism the component &QUOT;MessageNotification&QUOT; needs to be added to the system. </p>
+<p>Since sampling creates time events, the simulation performance will be bad for models with a high number of equations. For this reason, an alternative refresh mechanism can be used with &quot;usePoke=true&quot;. In order to use this mechanism the component &quot;MessageNotification&quot; needs to be added to the system. </p>
 <p>The partial agent implements the message parameters performative, sender, receiver, reply to, content, ontology and message ID. The parameters are described in the reference.</p>
 <p><br><b><span style=\"color: #008000;\">References</span></b></p>
 <ul>

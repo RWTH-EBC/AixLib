@@ -65,12 +65,12 @@ equation
 <h4><span style=\"color: #008000\">Overview</span></h4>
 <ul>
 <li>This model is necessary to enable the agents to communicate with each other</li>
-<li>It needs to be placed in every system that uses agent-based control, similar to the &QUOT;System&QUOT; model in the Modelica.Fluid package</li>
+<li>It needs to be placed in every system that uses agent-based control, similar to the &quot;System&quot; model in the Modelica.Fluid package</li>
 <li>It supports two different types of agent communication</li>
 <li><h4>If you used an earlier version of this library and have problems running your agent system, add this component and the system should run again</h4></li>
 </ul>
 <p><b><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Concept</span></b></p>
-<p>Every agent system needs a MessageNotification model in order to function, similar to the &QUOT;System&QUOT; model of the Modelica.Fluid library. The MessageNotification is responsible for ensuring that the agents receive their messages and update their inbox.</p>
+<p>Every agent system needs a MessageNotification model in order to function, similar to the &quot;System&quot; model of the Modelica.Fluid library. The MessageNotification is responsible for ensuring that the agents receive their messages and update their inbox.</p>
 <p>There are two different possibilities to notify the agents when they receive a message. The standard one corresponds to earlier versions of the library and is set by setting usePoke=false in the MessageNotification models and all other agents in the system. When this setting is made, the UDP inbox of all agents gets updated every n seconds (n set by user). This is straight forward but also leads to time event generation (weak simulation performance). If usePoke is set to true, the Boolean sendOut connectors of every agent in the system needs to be connected to the Boolean receive[n] input of the MessageNotification model. With this method, the agents only update their inbox in case one agent has sent out a message. This reduces event generation during idle times of the agents and thus may increase simulation perfomance in systems with long idle times of the agents. Example images for both methods are provided below. For further information you can also refer to the example results.</p>
 <p>System with usePoke=false</p>
 <p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/ExampleSystemMarked.png\"/></p>
