@@ -8,7 +8,7 @@ model ExergyMeters
 
   parameter Integer n = 10 "Number of layers";
 
-  parameter Real mass = 1000 "Mass of one layer";
+  parameter Modelica.SIunits.Mass mass = 1000 "Mass of one layer";
 
   package Medium = AixLib.Media.Water "Medium in the sensor"
                            annotation (choicesAllMatching=true);
@@ -16,7 +16,7 @@ model ExergyMeters
   Modelica.Blocks.Sources.Sine pulse(
     each amplitude=1000,
     each freqHz=1/3600,
-    each offset=3000)
+    each offset=3000) "Sine wave to vary heat generation and demand"
     annotation (Placement(transformation(extent={{-10,-20},{10,0}})));
   ExergyMeter.StoredExergyMeter exergyStorageMeterMedium(
     redeclare package Medium = Medium,
@@ -25,16 +25,18 @@ model ExergyMeters
     exergyContent_start=1.70904e+08,
     n=n,
     mass=mass)
+    "Outputs the exergy content and rate of change of the considered storage"
     annotation (Placement(transformation(extent={{-44,-40},{-24,-20}})));
-  Modelica.Blocks.Sources.Constant T_ref(k=273.15)
+  Modelica.Blocks.Sources.Constant T_ref(k=273.15) "Reference temperature"
     annotation (Placement(transformation(extent={{-100,-20},{-80,0}})));
-  Modelica.Blocks.Sources.Constant p_ref(k=101300)
+  Modelica.Blocks.Sources.Constant p_ref(k=101300) "Reference pressure"
     annotation (Placement(transformation(extent={{-100,-60},{-80,-40}})));
-  Modelica.Blocks.Sources.Constant X_ref[1](k={1})
+  Modelica.Blocks.Sources.Constant X_ref[1](k={1}) "Reference composition"
     annotation (Placement(transformation(extent={{-100,-100},{-80,-80}})));
-  inner Modelica.Fluid.System system
+  inner Modelica.Fluid.System system "Basic parameters"
     annotation (Placement(transformation(extent={{80,-100},{100,-80}})));
   ExergyMeter.HeatExergyMeter exHeatSec
+    "Exergy content of the heat flux on secondary side"
     annotation (Placement(transformation(extent={{74,5},{94,25}})));
   AixLib.Fluid.Movers.FlowControlled_m_flow pumpPrim(
     addPowerToMedium=false,
@@ -45,7 +47,8 @@ model ExergyMeters
     m_flow_small=0.001)
     annotation (Placement(transformation(extent={{-64,76},{-44,96}})));
   AixLib.Fluid.Storage.Storage
-                             bufferStorageHeatingcoils(layer_HE(T_start=T_start), layer(T_start=T_start),
+  bufferStorageHeatingcoils(
+  layer_HE(each T_start=T_start), layer(each T_start=T_start),
     redeclare package Medium = Medium,
     lambda_ins=0.075,
     s_ins=0.2,
@@ -56,17 +59,21 @@ model ExergyMeters
     V_HE=0.02,
     A_HE=7,
     n=10,
-    d=2) annotation (Placement(transformation(extent={{26,54},{-2,88}})));
-  AixLib.Fluid.FixedResistances.StaticPipe pipePrim(
-    D=0.1,
+    d=2) "Storage tank"
+         annotation (Placement(transformation(extent={{26,54},{-2,88}})));
+  Fluid.FixedResistances.PressureDrop      pipePrim(
     redeclare package Medium = Medium,
-    m_flow_small=0.001) annotation (Placement(transformation(
+    m_flow_nominal=0.5,
+    dp_nominal=50000) "Main resistance in primary circuit"
+                        annotation (Placement(transformation(
         extent={{-7,-7.5},{7,7.5}},
         rotation=180,
         origin={-53,56.5})));
   ExergyMeter.FlowExergyMeter exPrimIn(redeclare package Medium = Medium)
+    "Exergy content of medium flow entering the storage on primary side"
     annotation (Placement(transformation(extent={{-36,76},{-14,96}})));
   ExergyMeter.FlowExergyMeter exPrimOut(redeclare package Medium = Medium)
+    "Exergy content of medium flow exiting the storage on primary side"
     annotation (Placement(transformation(
         extent={{-11,10},{11,-10}},
         rotation=180,
@@ -76,7 +83,7 @@ model ExergyMeters
     use_HeatTransfer=true,
     use_portsData=false,
     V(displayUnit="l") = 0.05,
-    T_start=T_start)                                                            annotation (Placement(
+    T_start=T_start) "Volume to heat up the medium"                             annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
@@ -87,12 +94,13 @@ model ExergyMeters
     redeclare package Medium = Medium,
     T_start=T_start,
     m_flow_nominal=0.5,
-    m_flow_small=0.001)
+    m_flow_small=0.001) "Pump in secondary circuit"
     annotation (Placement(transformation(extent={{60,72},{80,92}})));
-  AixLib.Fluid.FixedResistances.StaticPipe pipeSec(
-    D=0.1,
+  Fluid.FixedResistances.PressureDrop      pipeSec(
     redeclare package Medium = Medium,
-    m_flow_small=0.001) annotation (Placement(transformation(
+    m_flow_nominal=0.5,
+    dp_nominal=50000) "Main resistance in secondary circuit"
+                        annotation (Placement(transformation(
         extent={{-8,-7.5},{8,7.5}},
         rotation=180,
         origin={66,54.5})));
@@ -102,13 +110,16 @@ model ExergyMeters
     V(displayUnit="l") = 0.05,
     use_portsData=false,
     nPorts=2,
-    T_start=T_start) annotation (Placement(transformation(
+    T_start=T_start) "Volume to cool down the medium"
+                     annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=270,
         origin={94,70})));
   ExergyMeter.FlowExergyMeter exSecOut(redeclare package Medium = Medium)
+    "Exergy content of medium flow entering the storage on secondary side"
     annotation (Placement(transformation(extent={{34,72},{56,92}})));
   ExergyMeter.FlowExergyMeter exSecIn(redeclare package Medium = Medium)
+    "Exergy content of medium flow exiting the storage on secondary side"
     annotation (Placement(transformation(
         extent={{-11,10},{11,-10}},
         rotation=180,
@@ -121,13 +132,18 @@ model ExergyMeters
         rotation=180,
         origin={-28,24})));
   Modelica.Blocks.Math.Gain gain(k=-1)
+    "Negative sign to switch the direction of the heat flux"
     annotation (Placement(transformation(extent={{28,18},{40,30}})));
-  ExergyMeter.HeatExergyMeter exHeatPrim annotation (Placement(transformation(
+  ExergyMeter.HeatExergyMeter exHeatPrim
+    "Exergy content of the heat flux on primary side"
+                                         annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={-68,15})));
   Modelica.Blocks.Sources.RealExpression storageTemperatures[n](y=
-        bufferStorageHeatingcoils.layer[:].heatPort.T) annotation (Placement(
+        bufferStorageHeatingcoils.layer[:].heatPort.T)
+    "Outputs the temperatures of the single storage layers"
+                                                       annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
@@ -137,14 +153,16 @@ model ExergyMeters
   AixLib.Fluid.Sources.Boundary_pT expansionVesselSec(
     redeclare package Medium = Medium,
     nPorts=1,
-    p=110000) annotation (Placement(transformation(
+    p=110000) "Expansion vessel in secondary circuit"
+              annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=270,
         origin={58,94})));
   AixLib.Fluid.Sources.Boundary_pT expansionVesselPrim(
     redeclare package Medium = Medium,
     nPorts=1,
-    p=110000) annotation (Placement(transformation(
+    p=110000) "Expansion vessel in primary circuit"
+              annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=270,
         origin={-70,94})));
@@ -157,9 +175,10 @@ equation
   connect(X_ref.y, exergyStorageMeterMedium.X_ref) annotation (Line(points={{-79,-90},
           {-54,-90},{-54,-37},{-44,-37}},    color={0,0,127}));
   connect(p_ref.y, exergyStorageMeterMedium.p) annotation (Line(points={{-79,-50},
-          {-74,-50},{-39,-50},{-39,-41}},         color={0,0,127}));
+          {-74,-50},{-39,-50},{-39,-40.8}},       color={0,0,127}));
   connect(X_ref.y, exergyStorageMeterMedium.X) annotation (Line(points={{-79,-90},
-          {-80,-90},{-29,-90},{-29,-41}},color={0,0,127}));
+          {-80,-90},{-29,-90},{-29,-40.8}},
+                                         color={0,0,127}));
 
   connect(pumpPrim.port_b, exPrimIn.port_a)
     annotation (Line(points={{-44,86},{-40,86},{-36,86}}, color={0,127,255}));
@@ -168,8 +187,8 @@ equation
   connect(bufferStorageHeatingcoils.port_b_heatGenerator, exPrimOut.port_a)
     annotation (Line(points={{0.24,57.4},{-5.88,57.4},{-5.88,57},{-14,57}},
         color={0,127,255}));
-  connect(exPrimOut.port_b, pipePrim.port_a) annotation (Line(points={{-36,57},
-          {-46,57},{-46,56.5}},color={0,127,255}));
+  connect(exPrimOut.port_b, pipePrim.port_a) annotation (Line(points={{-34,57},{
+          -46,57},{-46,56.5}}, color={0,127,255}));
   connect(pipePrim.port_b, heater.ports[1]) annotation (Line(points={{-60,56.5},
           {-72,56.5},{-72,68},{-74,68}}, color={0,127,255}));
   connect(heater.ports[2], pumpPrim.port_a) annotation (Line(points={{-74,72},{-70,
@@ -180,7 +199,7 @@ equation
   connect(exSecOut.port_b, pumpSec.port_a)
     annotation (Line(points={{54,82},{54,82},{60,82}}, color={0,127,255}));
   connect(exSecIn.port_a, pipeSec.port_b)
-    annotation (Line(points={{50,54},{58,54},{58,54.5}}, color={0,127,255}));
+    annotation (Line(points={{52,54},{58,54},{58,54.5}}, color={0,127,255}));
   connect(exSecIn.port_b, bufferStorageHeatingcoils.port_a_consumer)
     annotation (Line(points={{32,54},{28,54},{28,46},{12,46},{12,54}}, color={0,
           127,255}));
@@ -240,24 +259,20 @@ equation
                                                       color={0,0,127}));
   connect(pumpMassFlow.y, pumpSec.m_flow_in) annotation (Line(points={{-87.4,94},
           {-76,94},{-76,100},{69.8,100},{69.8,94}}, color={0,0,127}));
-  connect(expansionVesselSec.ports[1], pumpSec.port_a) annotation (Line(points=
-          {{58,90},{58,82},{58,82},{58,82},{60,82},{60,82}}, color={0,127,255}));
+  connect(expansionVesselSec.ports[1], pumpSec.port_a) annotation (Line(points={{58,90},
+          {58,82},{60,82}},                                  color={0,127,255}));
   connect(expansionVesselPrim.ports[1], pumpPrim.port_a)
     annotation (Line(points={{-70,90},{-70,86},{-64,86}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=1000, Interval=10),
-    __Dymola_experimentSetupOutput,
-    __Dymola_experimentFlags(
-      Advanced(GenerateVariableDependencies=false, OutputModelicaCode=false),
-      Evaluate=false,
-      OutputCPUtime=true,
-      OutputFlatModelica=false),
     Documentation(info="<html>
-<p><span style=\"font-family: MS Shell Dlg 2;\">This model shows the usage of all three ExergyMeters.</span></p>
+    <p><span style=\"font-family: MS Shell Dlg 2;\">This model shows the usage of 
+    all three ExergyMeters.</span></p>
 </html>", revisions="<html>
 <ul>
-<li><i><span style=\"font-family: Arial,sans-serif;\">November 10, 2016&nbsp;</i> by Marc Baranski and Roozbeh Sangi:<br>Implemented.</span></li>
+<li><i><span style=\"font-family: Arial,sans-serif;\">November 10, 
+2016&nbsp;</i> by Marc Baranski and Roozbeh Sangi:<br>Implemented.</span></li>
 </ul>
 </html>"));
 end ExergyMeters;
