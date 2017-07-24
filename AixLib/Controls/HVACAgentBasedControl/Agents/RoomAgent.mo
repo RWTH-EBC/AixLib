@@ -127,7 +127,7 @@ algorithm
       Modelica.Utilities.Streams.print("RoomAgent "+ String(name)+ " requests " + String(content.u[1]) + " W of heat from Broker "+ String(broker)+".");
   end when;
 
-  //send out "not understood" message, if message has unknown performative
+  // Send out "not understood" message, if message has unknown performative
   when noEvent(composeNotUnderstood.active) then
     content.u[1] := 0;
     content.u[2] := 0;
@@ -139,7 +139,7 @@ algorithm
     messageID.u[1] := name*name + integer(time);
   end when;
 
-  //confirm the information by broker
+  // Confirm the information by broker
   when noEvent(composeConfirm.active) then
     content.u[1] := get_content.y[1];
     content.u[2] := get_content.y[2];

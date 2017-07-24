@@ -9,9 +9,9 @@ model IntermediateAgent
   Real newCost(start=0);
   Real ownCost(start=0);
 
-//CostFunction related components
+// CostFunction related components
 
-//This section contains the blocks for the state-machine logic of the agent
+// This section contains the blocks for the state-machine logic of the agent
   Modelica.StateGraph.InitialStep waiting(nOut=2, nIn=5)
                                           annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -262,8 +262,8 @@ equation
       color={0,0,0},
       smooth=Smooth.None));
 
-//The algorithm section contains the logic of the broker, describing the
-//actions taken during each active state of the agent
+// The algorithm section contains the logic of the broker, describing the
+// actions taken during each active state of the agent
 algorithm
 
   when waiting.active then
@@ -273,13 +273,13 @@ algorithm
 
   end when;
 
-  //externalshutDown
+  // ExternalshutDown
   when noEvent(shutDown.active) then
     setCapacity :=0;
     setCapacityOut := setCapacity;
   end when;
 
-  //compute costs for the requested amount of heat
+  // Compute costs for the requested amount of heat
   when passOnCall.active then
     currentClient := getsender.y[1];
     performative.u[1] := 19;
@@ -347,7 +347,7 @@ algorithm
     end if;
   end when;
 
-//send out "not understood" message, if message has unknown performative
+// Send out "not understood" message, if message has unknown performative
   when composeNotUnderstood.active then
     performative.u[1] := 11; //"not understood"
     content.u[1] := 0;

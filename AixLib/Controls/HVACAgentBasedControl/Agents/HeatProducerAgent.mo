@@ -13,9 +13,9 @@ model HeatProducerAgent
   Real calcCapacityInternal(start=1);
   parameter Boolean maxCapacityExternal=false;
 
-//CostFunction related components
+// CostFunction related components
 
-//This section contains the blocks for the state-machine logic of the agent
+// This section contains the blocks for the state-machine logic of the agent
   Modelica.StateGraph.InitialStep waiting(       nOut=2, nIn=4)
                                           annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -176,7 +176,7 @@ public
     annotation (Placement(transformation(extent={{-134,154},{-114,174}})));
 equation
   if maxCapacityExternal then
-    //connect(maxCapacity,maxCapacityInternal);
+    // connect(maxCapacity,maxCapacityInternal);
     maxCapacityInternal = zeroOrderHold.y;
   else
     maxCapacityInternal = maxCapacity;
@@ -283,8 +283,8 @@ equation
       color={0,0,0},
       smooth=Smooth.None));
 
-//The algorithm section contains the logic of the broker, describing the
-//actions taken during each active state of the agent
+// The algorithm section contains the logic of the broker, describing the
+// actions taken during each active state of the agent
 algorithm
 
   when noEvent(waiting.active) then
@@ -294,13 +294,13 @@ algorithm
 
   end when;
 
-  //externalshutDown
+  // ExternalshutDown
   when noEvent(shutDown.active) then
     setCapacity :=0;
     setCapacityOut := setCapacity;
   end when;
 
-  //compute costs for the requested amount of heat
+  // Compute costs for the requested amount of heat
   when noEvent(computeProposal.active) then
 
     if get_content.y[1] >0 then
@@ -380,7 +380,7 @@ algorithm
 
   end when;
 
-//adjust heat according to the confirmation by the broker, send confirmation
+// Adjust heat according to the confirmation by the broker, send confirmation
   when (adjustHeat.active) then
 
     setCapacity := setCapacity + get_content.y[1];
@@ -399,7 +399,7 @@ algorithm
 
   end when;
 
-//confirm the receiving of the reject
+// Confirm the receiving of the reject
   when noEvent(confirm.active) then
     uDPSend_adapted.receiver := getsender.y[1];
     receiver.u[1] := getsender.y[1];
@@ -410,7 +410,7 @@ algorithm
 
   end when;
 
-//send out "not understood" message, if message has unknown performative
+// Send out "not understood" message, if message has unknown performative
   when noEvent(composeNotUnderstood.active) then
     uDPSend_adapted.receiver := getsender.y[1];
     receiver.u[1] := getsender.y[1];
@@ -469,10 +469,10 @@ equation
       color={0,0,0},
       smooth=Smooth.None));
 
-  /*connect(calcCapacity, calcCapacity) annotation (Line(
+  /* connect(calcCapacity, calcCapacity) annotation (Line(
       points={{-90,198},{-90,198}},
       color={0,0,127},
-      smooth=Smooth.None));*/
+      smooth=Smooth.None)); */
   connect(OnOff_external, not2.u) annotation (Line(points={{-80,-34},{-172,
           -34},{-172,-177},{-169,-177}},
                                    color={255,0,255}));

@@ -15,9 +15,9 @@ model ColdProducerAgent
   parameter Boolean maxCapacityExternal=false
     "Use external input for minimal capacity";
 
-//CostFunction related components
+// CostFunction related components
 
-//This section contains the blocks for the state-machine logic of the agent
+// This section contains the blocks for the state-machine logic of the agent
   Modelica.StateGraph.InitialStep waiting(       nOut=2, nIn=4)
                                           annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -300,8 +300,8 @@ equation
       color={0,0,0},
       smooth=Smooth.None));
 
-//The algorithm section contains the logic of the broker, describing the
-//actions taken during each active state of the agent
+// The algorithm section contains the logic of the broker, describing the
+// actions taken during each active state of the agent
 algorithm
 
   when noEvent(waiting.active) then
@@ -311,13 +311,13 @@ algorithm
 
   end when;
 
-  //externalshutDown
+  // ExternalshutDown
   when noEvent(shutDown.active) then
     setCapacity :=0;
     setCapacityOut := setCapacity;
   end when;
 
-  //compute costs for the requested amount of heat
+  // Compute costs for the requested amount of heat
   when noEvent(computeProposal.active) then
 
     if get_content.y[1] >0 then
@@ -404,7 +404,7 @@ algorithm
 
   end when;
 
-//adjust heat according to the confirmation by the broker, send confirmation
+// Adjust heat according to the confirmation by the broker, send confirmation
   when noEvent(adjustHeat.active) then
 
     setCapacity := setCapacity + get_content.y[1];
@@ -423,7 +423,7 @@ algorithm
 
   end when;
 
-//confirm the receiving of the reject
+// Confirm the receiving of the reject
   when noEvent(confirm.active) then
     uDPSend_adapted.receiver := getsender.y[1];
     receiver.u[1] := getsender.y[1];
@@ -434,13 +434,15 @@ algorithm
 
   end when;
 
-//send out "not understood" message, if message has unknown performative
+// Send out "not understood" message, if message has unknown performative
   when noEvent(composeNotUnderstood.active) then
     performative.u[1] := 11; //"not understood"
     content.u[1] := 0;
     content.u[2] := 0;
     messageID.u[1] := name*name + integer(time);
   end when;
+
+
 
 equation
   connect(transition2.outPort, sendConfirmation.inPort[1]) annotation (Line(

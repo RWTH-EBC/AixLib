@@ -22,12 +22,12 @@ model Broker
   Real heatingRequestSum(start=0);
   Integer requestCounter(start=1);
 
-  //variables for average price (for storage)
+  // Variables for average price (for storage)
   Real totalPrice;
   Real totalHeat;
   Real averagePrice;
 
-  //variables for finding the lowest price combination
+  // Variables for finding the lowest price combination
   Real heatingCalculationSum(start=0);
   Integer cheapest(start=1);
   Real heatingPriceSum;
@@ -35,14 +35,14 @@ model Broker
   Real restHeat;
   Boolean calculationDone( start=false);
 
-  //variable for composing information
+  // Variable for composing information
   Integer informationCounter(start=1);
   Boolean informationDone(start=false);
 
-  //variables for requests from producers
+  // Variables for requests from producers
   Boolean finalRequestDone(start=false);
 
-//This section contains the blocks for the state-machine logic of the agent
+// This section contains the blocks for the state-machine logic of the agent
 
 public
   Modelica.StateGraph.InitialStep waiting(nIn=7)
@@ -142,8 +142,8 @@ public
         getperformative.y[1] == 19))
     annotation (Placement(transformation(extent={{-4,-452},{-30,-434}})));
 
-//The algorithm section contains the logic of the broker, describing the
-//actions taken during each active state of the agent
+// The algorithm section contains the logic of the broker, describing the
+// actions taken during each active state of the agent
 
   Modelica.StateGraph.Step composeInformation(nOut=1, nIn=2)
     annotation (Placement(transformation(extent={{-34,-64},{-14,-44}})));
@@ -289,15 +289,15 @@ algorithm
     requestsExceedSupply := false;
   end when;
 
-//collecting requests to bundle goals
+// Collecting requests to bundle goals
   when noEvent(requests.active) then
 
-    //collect the requests
+    // Collect the requests
     heatingRequestSum := heatingRequestSum + get_content.y[1];
     requestTable[requestCounter,1] := get_content.y[1];
     requestAddresses[requestCounter,1] := getsender.y[1];
 
-    //create the confirmation for the consumer agent
+    // Create the confirmation for the consumer agent
     performative.u[1] := 5; //"confirm"
     ontology.u[1] :=1;
     sender.u[1] := name;
@@ -312,7 +312,7 @@ algorithm
     requestCounter := requestCounter +1;
   end when;
 
-//broker calls all heatSuppliers in the list for a proposal for the requested heat
+// Broker calls all heatSuppliers in the list for a proposal for the requested heat
   when noEvent(callForProposal.active) then
       performative.u[1]:= 4;
       sender.u[1]:=name;
@@ -325,8 +325,8 @@ algorithm
       Modelica.Utilities.Streams.print("Broker "+ String(name)+ " calls for proposal of " + String(heatingRequestSum) + " W of heat from Producer " + String(receiver.u[1])+".");
   end when;
 
-//receiving the proposals and add the information that proposal was received
-//price for the proposal and maximum capacity
+// Receiving the proposals and add the information that proposal was received
+// price for the proposal and maximum capacity
    when noEvent(collectProposal.active) then
 
      if noEvent(getperformative.y[1] == 13) then
@@ -354,7 +354,7 @@ algorithm
     proposalCounter := proposalCounter +1;
   end when;
 
-//check whether the possible supply exceeds the demand
+// Check whether the possible supply exceeds the demand
   when  noEvent(checkAvailability.active) then
     if abs(sum(heatSupplierTable[:,4])) < (abs(heatingRequestSum)-1) then
       Modelica.Utilities.Streams.print("Broker received less proposals than necessary to fulfill demand. Ordering all available capacity.");
@@ -366,12 +366,12 @@ algorithm
 
   end when;
 
-  //abort procedure if demand exceeds supply
+  // Abort procedure if demand exceeds supply
   when noEvent(limitedSupplyAbort.active) then
     Modelica.Utilities.Streams.print("Broker received no proposal. Abort process.");
   end when;
 
-   //block to compute the price
+   // Block to compute the price
    when noEvent(computePrice.active) then
      restHeat := heatingRequestSum;
 
@@ -400,7 +400,7 @@ algorithm
      calculationDone := true;
    end when;
 
-   //composeinformation for consumer agents in order to get a confirmation afterwards
+   // Composeinformation for consumer agents in order to get a confirmation afterwards
    when noEvent(composeInformation.active) then
      performative.u[1]:=8;
      sender.u[1]:=name;
@@ -414,7 +414,7 @@ algorithm
      Modelica.Utilities.Streams.print("Broker "+ String(name)+ " asks for a confirmation of " + String(content.u[2]) + " W of heat for the total price of " + String(content.u[1]) + " from Consumer " + String(receiver.u[1])+".");
    end when;
 
-   //collect confirms of the consumers and catch the final amount of heat requested
+   // Collect confirms of the consumers and catch the final amount of heat requested
    when noEvent(collectConfirm.active) then
      if noEvent(getperformative.y[1] == 5) then
        heatingRequestSum := heatingRequestSum + get_content.y[2];
@@ -448,16 +448,16 @@ algorithm
 
      restHeat := heatingRequestSum;
 
-     //writing the right price back from column 5 to column 7 and resetting the requested capacity
+     // Writing the right price back from column 5 to column 7 and resetting the requested capacity
      for i in 1:size(heatSupplierTable,1) loop
        heatSupplierTable[i,7] := heatSupplierTable[i,5];
        heatSupplierTable[i,6] := 0;
      end for;
 
-     //as long as the total request is not served, the next cheapest supplier is looked for
+     // As long as the total request is not served, the next cheapest supplier is looked for
      while (abs(heatingCalculationSum)<abs(heatingRequestSum)) loop
        lowestPrice := min(heatSupplierTable[:,7]);
-       //looking for the index of the cheapest supplier
+       // Looking for the index of the cheapest supplier
        for i in 1:size(heatSupplierTable,1) loop
          if noEvent(Modelica.Math.isEqual(heatSupplierTable[i,7],lowestPrice)) then
            cheapest := i;
@@ -474,14 +474,14 @@ algorithm
 
      end while;
 
-     //update the average energy price
+     // Update the average energy price
      totalPrice := totalPrice + heatingPriceSum;
      totalHeat := totalHeat + heatingRequestSum;
      averagePrice := totalPrice/totalHeat;
      counter:=1; //reset counter for next block
    end when;
 
-//block to send out accept proposal to all providing producers
+// Block to send out accept proposal to all providing producers
    when noEvent(sendOutRequest.active) then
 
      sender.u[1]:=name;
@@ -513,7 +513,7 @@ algorithm
 
    end when;
 
-//send out "not understood" message, if message has unknown performative
+// Send out "not understood" message, if message has unknown performative
   when noEvent(composeNotUnderstood.active) then
     performative.u[1] := 11; //"not understood"
     content.u[1] := 0;
@@ -524,6 +524,7 @@ algorithm
     ontology.u[1] := getontology.y[1];
     messageID.u[1] := name*name + integer(time);
   end when;
+
 
 equation
   connect(newMessage.inPort,waiting. outPort[1]) annotation (Line(

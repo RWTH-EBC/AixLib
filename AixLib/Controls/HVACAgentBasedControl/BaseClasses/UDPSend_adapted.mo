@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HVACAgentBasedControl.BaseClasses;
+within AixLib.Controls.HVACAgentBasedControl.BaseClasses;
 model UDPSend_adapted "A block for sending UDP datagrams"
   import Modelica_DeviceDrivers;
   extends Modelica_DeviceDrivers.Utilities.Icons.BaseIcon;
@@ -6,7 +6,7 @@ model UDPSend_adapted "A block for sending UDP datagrams"
   import Modelica_DeviceDrivers.Packaging.SerialPackager;
   import Modelica_DeviceDrivers.Communication.UDPSocket;
 
-  //parameter Modelica.SIunits.Period sampleTime=0.01
+  // Parameter Modelica.SIunits.Period sampleTime=0.01
   //  "Sample time for update";
   parameter Boolean autoBufferSize = true
     "true, buffer size is deduced automatically, otherwise set it manually."
@@ -54,7 +54,7 @@ equation
     bufferSize = if autoBufferSize then Modelica_DeviceDrivers.Packaging.SerialPackager_.getBufferSize(pkgIn.pkg) else userBufferSize;
   end when;
   pkgIn.backwardTrigger = trigger;
-  //pkgIn.backwardTrigger = noEvent(sample(0, sampleTime));
+  // pkgIn.backwardTrigger = noEvent(sample(0, sampleTime));
   when noEvent(trigger) then
     dummy = AixLib.Controls.HVACAgentBasedControl.BaseClasses.Internal.sendToUDP(
       socket,
@@ -88,7 +88,8 @@ equation
 </ul>
 </html>", revisions="<html>
 <ul>
-<li>October 2015, by Felix Bünning: Copied and adapted from the Modelica DeviceDrivers library</li>
+<li>July 2017, by Roozbeh Sangi: Documentation revised</li>
+<li>October 2015, by Felix B&uuml;nning: Copied and adapted from the Modelica DeviceDrivers library</li>
 </ul>
 </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
