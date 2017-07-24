@@ -412,13 +412,11 @@ equation
     Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
 <p>This is a model for Facade Ventilation Unit (FVU), which can be used for heating, cooling and ventilation purposes. It is equipped with two speed-controlled fans, a recuperator and two air-water heat exchangers. </p>
-<p><br><b><span style=\"color: #008000;\">Level of Development</span></b> </p>
-<p><span style=\"font-family: MS Shell Dlg 2;\"><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\"/></span></p>
-<p><br><b><span style=\"color: #005c00;\">Operation Modes of FVU:</span></b> </p>
+<p><br><b><span style=\"color: #008000;\">Operation Modes</b> </span></p>
 <p>The portion of fresh air flowing through the recuperator is controlled by means of a bypass damper. The portion of extract air that is recirculated and mixed with the fresh air stream is controlled by means of a circulation damper. The mixed air stream is either heated or cooled in the air-water heat exchangers. The water flow in these heat exchangers is controlled by two-way-valves. </p>
-<h4>Actuators</h4>
+<h4><span style=\"color: #008000\">Actuators</span></h4>
 <p>All actuators receive normailized signals (0-1). The supply- and exhaust air fans are table-based. An input signal in &percnt; is transformed into a mass-flow set point for a flow-controlled mover. If the exhaust air fan is not in operation, the entire air flow should be recirculated. Thus, the circulation damper should be fully opened. In that case, the fresh air flap should be closed so that no fresh air can enter the unit. The exhaust air fan has a minimum mass flow rate of 1 m&sup3;/h to make the model more stable. </p>
-<p><br><h4><span style=\"color: #008000\">References</span></h4></p>
+<h4><span style=\"color: #008000\">References</span></h4>
 <p>Baranski, M., Sangi, R., F&uuml;tterer, J., M&uuml;ller, D. (2016). An Algorithm for Stepwise Exergy-based Model Predictive Control of Building HVAC Supply Chains. <i>29th international conference on Efficiency, Cost, Optimisation, Simulation and Environmental Impact of Energy Systems</i>. </p>
 </html>", revisions="<html>
 <ul>

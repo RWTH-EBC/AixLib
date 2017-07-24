@@ -1,5 +1,6 @@
 within AixLib.Airflow.FacadeVentilationUnit.Examples;
-model FacadeVentilationUnit
+model FacadeVentilationUnit "Example showing the use of facade ventilation unit
+  and controller"
   import AixLib;
   extends Modelica.Icons.Example;
 
@@ -151,5 +152,7 @@ equation
     by by Roozbeh Sangi and Marc Baranski:<br/>
     Model implemented</li>
 </ul>
+</html>", info="<html>
+<p>This model demonstrates the usage of the facade ventilation unit connected to the standard controller. </p>
 </html>"));
 end FacadeVentilationUnit;

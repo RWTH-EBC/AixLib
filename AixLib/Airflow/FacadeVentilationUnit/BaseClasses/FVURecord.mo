@@ -3,53 +3,9 @@ record FVURecord
   extends Modelica.Icons.Record;
   extends FVUBaseRecord;
   annotation (Documentation(info="<html>
- <h4><span style=\"color:#008000\">Overview</span></h4>
- <p>This is the base definition is zone records used in <a href=\"AixLib.Building.LowOrder.ThermalZone\">AixLib.Building.LowOrder.ThermalZone</a>. All necessary parameters are defined here. Most values should be overwritten for a specific building, some are default values that might be appropriate in most cases. However, fell free to overwrite them in your own records.</p>
- <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Images/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
- <h4><span style=\"color:#008000\">Concept</span></h4>
- <p>Remark: The design heating power Q_N of the building is the sum of net design power according to transmission and ventilation losses at a given outdoor temperature and an additional re-heating power for early morning heat up after night set-back. Net design power can be simulated with constant boundary conditions (e. g.: no internal or external gains, Touside=-12 degC, ACH=0.5). The additional re-heating power is computed by a factor [f_RH]=W/m2 and the heated zone floor area.</p>
- <p>The factor f_RH in W/m2 can be chosen form the following table:</p>
- <table summary=\"factor f_RH\" cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
- <td></td>
- <td><h4 align=\"center\">1 K</h4></td>
- <td><h4 align=\"center\">2 K</h4></td>
- <td><h4 align=\"center\">3 K</h4></td>
- </tr>
- <tr>
- <td><h4 align=\"center\">re-heat time</h4></td>
- <td><h4 align=\"center\">light</h4></td>
- <td><h4 align=\"center\">medium</h4></td>
- <td><h4 align=\"center\">heavy</h4></td>
- </tr>
- <tr>
- <td><p>1 h</p></td>
- <td><p>11</p></td>
- <td><p>22</p></td>
- <td><p>45</p></td>
- </tr>
- <tr>
- <td><p>2 h</p></td>
- <td><p>6</p></td>
- <td><p>11</p></td>
- <td><p>22</p></td>
- </tr>
- <tr>
- <td><p>3 h</p></td>
- <td><p>4</p></td>
- <td><p>9</p></td>
- <td><p>16</p></td>
- </tr>
- <tr>
- <td><p>4 h</p></td>
- <td><p>2</p></td>
- <td><p>7</p></td>
- <td><p>13</p></td>
- </tr>
- </table>
- <h4><span style=\"color:#008000\">References</span></h4>
- <p>Base data definition for record to be used in model <a href=\"AixLib.Building.LowOrder.ThermalZone\">AixLib.Building.LowOrder.ThermalZone</a></p>
- </html>", revisions="<html>
+<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
+<p>This paramter record can be used for the <a href=\"AixLib.Airflow.FacadeVentilationUnit.FacadeVentilationUnit\">AixLib.Airflow.FacadeVentilationUnit.FacadeVentilationUnit</a>.</p>
+</html>",  revisions="<html>
 <ul>
   <li><i>Septmeber, 2014&nbsp;</i>
     by by Roozbeh Sangi and Marc Baranski:<br/>

@@ -1,5 +1,5 @@
 within AixLib.Airflow.FacadeVentilationUnit;
-model FVUController
+model FVUController "Rule-based controller of a facade ventilation unit"
 
   parameter Real minimumSupTemp=273.15 + 17 "Minimum supply air temperature";
 
@@ -334,9 +334,8 @@ equation
     Model implemented</li>
 </ul>
 </html>", info="<html>
-<p><span style=\"font-family: Arial,sans-serif;\">This model is the controller of the facade ventilation unit.</span></p>
-<p><b><span style=\"font-family: Arial,sans-serif; color: #008000;\">Level of Development</span></b></span><span style=\"font-family: MS Shell Dlg 2;\"> </p>
-<p><span style=\"font-family: MS Shell Dlg 2;\"><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\"/></span></p>
+<p><b><span style=\"font-family: Arial,sans-serif; color: #008000;\">Overview</span></b></p>
+<p>This model is the controller of the facade ventilation unit.</p>
 <p><br><span style=\"font-family: MS Shell Dlg 2;\">It makes use of six two-point controllers that determine </span></p>
 <p><span style=\"font-family: MS Shell Dlg 2;\">- Heating</span></p>
 <p><span style=\"font-family: MS Shell Dlg 2;\">- Cooling</span></p>

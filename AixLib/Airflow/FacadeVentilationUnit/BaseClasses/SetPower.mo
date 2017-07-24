@@ -106,7 +106,7 @@ equation
           color={170,213,255},
           arrow={Arrow.None,Arrow.Filled})}),
     Documentation(info="<html>
-<p>Thsi model sets the mass flow rate of the air flow through a facade ventilation unit based on the input value, which is the power share set point of the fan.</p>
+<p>This model sets the mass flow rate of the air flow through a facade ventilation unit based on the input value, which is the power share set point of the fan.</p>
 </html>", revisions="<html>
 <ul>
   <li><i>Septmeber, 2014&nbsp;</i>
