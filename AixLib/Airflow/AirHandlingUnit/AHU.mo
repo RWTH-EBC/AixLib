@@ -1353,24 +1353,24 @@ equation
                    graphics={
         Bitmap(
           extent={{36,-42},{100,4}}, fileName=
-              "modelica://AixLib/Resources/Images/AHU/HumidifierCooling.jpg"),
+              "modelica://AixLib/Resources/Images/Airflow/AirHandlingUnit/HumidifierCooling.jpg"),
         Bitmap(
           extent={{-100,-90},{-36,-44}}, fileName=
-              "modelica://AixLib/Resources/Images/AHU/Dehumidifier.jpg"),
+              "modelica://AixLib/Resources/Images/Airflow/AirHandlingUnit/Dehumidifier.jpg"),
         Bitmap(
           extent={{-32,-42},{32,4}}, fileName=
-              "modelica://AixLib/Resources/Images/AHU/HumidifierHeating.jpg"),
+              "modelica://AixLib/Resources/Images/Airflow/AirHandlingUnit/HumidifierHeating.jpg"),
         Bitmap(
           extent={{-32,-90},{32,-44}}, fileName=
-              "modelica://AixLib/Resources/Images/AHU/Heating.jpg"),
+              "modelica://AixLib/Resources/Images/Airflow/AirHandlingUnit/Heating.jpg"),
         Bitmap(
           extent={{36,-90},{100,-44}}, fileName=
-              "modelica://AixLib/Resources/Images/AHU/Cooling.jpg")}),
+              "modelica://AixLib/Resources/Images/Airflow/AirHandlingUnit/Cooling.jpg")}),
     experiment(StopTime=13398, Interval=5),
     Icon(coordinateSystem(extent={{-100,-40},{100,40}}, preserveAspectRatio=false),
         graphics={Bitmap(
           extent={{-100,-28},{100,28}}, fileName=
-              "modelica://AixLib/Resources/Images/AHU/AHUaccToDINV18599-3.jpg"),
+              "modelica://AixLib/Resources/Images/Airflow/AirHandlingUnit/AHUaccToDINV18599-3.jpg"),
           Rectangle(
           extent={{68,24},{98,-18}},
           fillColor={255,255,255},
@@ -1409,7 +1409,7 @@ equation
 <li>This model of an AHU is able to represent 5 cases: only heating, only cooling, dehumidification, humidification plus heating, humidification plus cooling.</li>
 </ul>
 <p><br/>Figure 1 [5, appendix D] </p>
-<p><img src=\"modelica://AixLib/Resources/Images/AHU/AHUaccToDINV18599-3.jpg\"
+<p><img src=\"modelica://AixLib/Resources/Images/Airflow/AirHandlingUnit/AHUaccToDINV18599-3.jpg\"
     alt=\"schema of AHU\"/> </p>
 <p><br/><b><span style=\"color: #008000;\">References</span></b></p>
 <ul>
