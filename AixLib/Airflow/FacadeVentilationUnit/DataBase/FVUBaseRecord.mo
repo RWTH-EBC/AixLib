@@ -1,4 +1,4 @@
-within AixLib.Airflow.FacadeVentilationUnit.BaseClasses;
+within AixLib.Airflow.FacadeVentilationUnit.DataBase;
 record FVUBaseRecord "Base record for the facade ventilation unit model"
   extends Modelica.Icons.Record;
 

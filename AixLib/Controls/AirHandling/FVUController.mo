@@ -392,18 +392,13 @@ equation
     Model implemented</li>
 </ul>
 </html>", info="<html>
-<p><b><span style=\"font-family: Arial,sans-serif; color: #008000;\">Overview</span></b></p>
-<p>This model is the controller of the facade ventilation unit.</p>
-<p><br><span style=\"font-family: MS Shell Dlg 2;\">It makes use of six two-point controllers that determine </span></p>
-<p><span style=\"font-family: MS Shell Dlg 2;\">- Heating</span></p>
-<p><span style=\"font-family: MS Shell Dlg 2;\">- Cooling</span></p>
-<p><span style=\"font-family: MS Shell Dlg 2;\">- Ventilation</span></p>
-<p><span style=\"font-family: MS Shell Dlg 2;\">demand and indicate if </span></p>
-<p><span style=\"font-family: MS Shell Dlg 2;\">- Free cooling</span></p>
-<p><span style=\"font-family: MS Shell Dlg 2;\">- Heat recovery</span></p>
-<p><span style=\"font-family: MS Shell Dlg 2;\">- Cold recovery</span></p>
-<p><span style=\"font-family: MS Shell Dlg 2;\">is possible. </span></p>
-<p><span style=\"font-family: MS Shell Dlg 2;\">As these are decentralized controllers and as the fresh air temperature is measured inside the unit, we require an additional measurement mode. This mode is activated every two hours if there is no ventilation demand and the unit consequently circulates air. In order to measure the correct fresh air temperature, the circulation damper is closed for twenty minutes. Furthermore, the exhaust air fan is switched on and the fresh air damper is opened. This allows ambient air to flow inside the unit. </span></p>
-<p><span style=\"font-family: MS Shell Dlg 2;\">The temperature set point in cooling mode is increased by adding the value &QUOT;deltaTemp&QUOT; to the set point in heating mode.</span></p>
+<h4><span style=\"color:#008000\">Overview</span></h4>
+<p>This model is the controller of the facade ventilation unit. It makes use of six two-point controllers that determine heating, 
+cooling and ventilation demand. It further indicates if free cooling, heat recovery or cold recovery is possible. As these are decentralized controllers 
+and as the fresh air temperature is measured inside the unit, we require an additional measurement mode. This mode is activated every two hours if there 
+is no ventilation demand and the unit consequently circulates air. In order to measure the correct fresh air temperature, the circulation damper is closed 
+for twenty minutes. Furthermore, the exhaust air fan is switched on and the fresh air damper is opened. This allows ambient air to flow inside the unit.
+The temperature set point in cooling mode is increased by adding the value &QUOT;deltaTemp&QUOT; to the set point in heating mode.
+</p>
 </html>"));
 end FVUController;
