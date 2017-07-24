@@ -14,7 +14,7 @@ class ApplicationAreas "Overview"
 <table summary=\"Citation\">   
 <tr>
 <td>[1]</td>
-<td>Schneider, G.F., Oppermann, J., Constantin, A., Streblow, R. and Müller, D. (2015)
+<td>Schneider, G.F., Oppermann, J., Constantin, A., Streblow, R. and Mueller, D. (2015)
    Hardware-in-the-Loop-Simulation of a Building Energy and Control System to Investigate Circulating Pump 
    Control Using Modelica. In: Proceedings of the 11th International Modelica Conference. Versailles, France, pp.225–233.</td>
 </tr>

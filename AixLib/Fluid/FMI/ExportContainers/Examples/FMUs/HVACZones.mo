@@ -1,7 +1,6 @@
 within AixLib.Fluid.FMI.ExportContainers.Examples.FMUs;
 block HVACZones
   "Declaration of an FMU that exports a simple convective only HVAC system for two zones"
-  import AixLib;
   extends AixLib.Fluid.FMI.ExportContainers.HVACZones(
     redeclare final package Medium = MediumA,
     nZon = 2,
@@ -140,7 +139,7 @@ block HVACZones
   BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     pAtmSou=AixLib.BoundaryConditions.Types.DataSource.Parameter,
     TDryBul=TOut_nominal,
-    filNam="modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos",
+    filNam="modelica://AixLib/Resources/WeatherData/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos",
     TDryBulSou=AixLib.BoundaryConditions.Types.DataSource.File,
     computeWetBulbTemperature=false) "Weather data reader"
     annotation (Placement(transformation(extent={{-152,130},{-132,150}})));
@@ -327,6 +326,10 @@ ports which are exposed at the FMU interface.
 </p>
 </html>", revisions="<html>
 <ul>
+<li>
+April 4, 2017, by Michael Wetter:<br/>
+Removed import statement.
+</li>
 <li>
 November 11, 2016, by Michael Wetter:<br/>
 Made the cooling coil replaceable because the Buildings library

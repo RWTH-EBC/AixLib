@@ -44,7 +44,8 @@ record BufferStorageBaseDataDefinition
 <p> Base data definition for buffer storage records </p>
 <h4><font color=\"#008000\">References</font></h4>
 <p>Base data definition for record used with <a
-href=\"HVAC.Components.BufferStorage.BufferStorageHeatingcoils\">HVAC.Components.BufferStorage.BufferStorageHeatingcoils</a></p>
+href=\"AixLib.Fluid.Storage.Storage\">AixLib.Fluid.Storage.Storage</a> and <a
+href=\"AixLib.Fluid.Storage.BufferStorage\">AixLib.Fluid.Storage.BufferStorage</a> </p>
 </html>",
         revisions="<html>
 <ul>

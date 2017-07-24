@@ -87,7 +87,7 @@ model AHU
 
   // Sampler (time-continous to time-discrete variables)
 
-  Modelica_Synchronous.RealSignals.Sampler.SampleVectorizedAndClocked sample(n=8)
+  Modelica_Synchronous.RealSignals.Sampler.SampleVectorizedAndClocked sample(n=9)
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
@@ -747,6 +747,7 @@ equation
   X_supMax = sample.y[6];
   X_eta = sample.y[7];
   V_dot_sup = sample.y[8];
+  V_dot_eta = sample.y[9];
 
   // absolute humidity for state of saturated outdoor air
   X_odaSat = molarMassRatio*(611.2*exp(17.62*(T_oda - T_0)/(243.12 + T_oda -
@@ -847,9 +848,6 @@ equation
     Modelica.Media.Air.MoistAir.saturationPressure(T_extractAir))/(p_0 -
     phi_extractAir*Modelica.Media.Air.MoistAir.saturationPressure(T_extractAir));
 
-  // equation for outgoing volume flow
-  V_dot_sup = V_dot_eta "no leckage between supply and extract air";
-
   // calculation of T_5 and T_6 regarding the electrical power consumption
   P_el_sup = V_dot_sup*dp_sup/eta_sup
     "Calculation of electrical power consumption";
@@ -872,8 +870,17 @@ equation
     stateToOnlyHeatingHRS_false or stateToOnlyCoolingHRS_true or
     stateToOnlyCoolingHRS_false then true else false;
 
-  Vflow_out = hold(V_dot_eta);
-  Pel = if Vflow_out > 0 then hold(P_el_eta) + hold(P_el_sup) else 0;
+  Vflow_out = hold(V_dot_sup);
+  if Vflow_out > 0 and hold(V_dot_eta) <= 0 then
+    Pel = hold(P_el_sup);
+  elseif Vflow_out <= 0 and hold(V_dot_eta) > 0 then
+    Pel = hold(P_el_eta);
+  elseif Vflow_out > 0 and hold(V_dot_eta) > 0 then
+    Pel = hold(P_el_eta) + hold(P_el_sup);
+  else
+    Pel = 0;
+  end if;
+
   QflowH = if hold(Q_dot_H) > 0 then hold(Q_dot_H) else 0;
   QflowC = if hold(Q_dot_C) > 0 then hold(Q_dot_C) else 0;
 
@@ -1270,23 +1277,25 @@ equation
   //stateToHuCHRS_false==false,
 
   connect(T_outdoorAir, sample.u[1]) annotation (Line(points={{-100,56},{-100,
-          56},{-67.75,56},{-67.75,26}},
+          56},{-67.7778,56},{-67.7778,26}},
                                     color={0,0,127}));
   connect(X_outdoorAir, sample.u[2]) annotation (Line(points={{-100,36},{-100,
-          36},{-67.25,36},{-67.25,26}},
+          36},{-67.3333,36},{-67.3333,26}},
                                     color={0,0,127}));
-  connect(T_supplyAir, sample.u[3]) annotation (Line(points={{100,42},{100,42},
-          {-66.75,42},{-66.75,26}},
+  connect(T_supplyAir, sample.u[3]) annotation (Line(points={{100,36},{100,42},
+          {-66.8889,42},{-66.8889,26}},
                             color={0,0,127}));
-  connect(T_extractAir, sample.u[4]) annotation (Line(points={{100,90},{-60,90},
-          {-60,60},{-66.25,60},{-66.25,26}},
+  connect(T_extractAir, sample.u[4]) annotation (Line(points={{100,78},{-60,78},
+          {-60,60},{-66.4444,60},{-66.4444,26}},
                             color={0,0,127}));
-  connect(Vflow_in, sample.u[8]) annotation (Line(points={{-100,82},{-64.25,82},
-          {-64.25,26}},color={0,0,127}));
-  connect(hold_phi_sup.y, phi_supply) annotation (Line(points={{79,9},{99,9},{
-          99,9}},             color={0,0,127}));
+  connect(Vflow_in, sample.u[8]) annotation (Line(points={{-100,82},{-64.6667,
+          82},{-64.6667,26}},
+                       color={0,0,127}));
+  connect(Vflow_in_extractAir_internal, sample.u[9]);
+  connect(hold_phi_sup.y, phi_supply) annotation (Line(points={{79,9},{99,9},{99,
+          5}},                color={0,0,127}));
   connect(TsupAirOut.y, T_supplyAirOut) annotation (Line(points={{79,57},{99,57},
-          {99,57}},                                                                          color={0,0,127}));
+          {99,49}},                                                                          color={0,0,127}));
 public
   block StateExtra
 
@@ -1374,9 +1383,6 @@ equation
 <p>It is based on incoming and outgoing enthalpy flows of moist air (thermodynamic principle).</p>
 <p><span style=\"font-family: MS Shell Dlg 2;\">The model aims to need little computational effort. Therefore state machines represent the basis of the model and no Modelica Fluid is used.</span></p>
 <p>If simulation runs instable, reduce clockPeriodGeneric and/or use one of the alternative equations for the calculation of <code>p_sat_surface</code> in both dehumidification state machines (see source code of these state machines).</p>
-<h4><span style=\"color: #008000\">Level of Development</span></h4>
-<p><img src=\"modelica://AixLib/Resources/Images/stars4.png\" alt=\"stars: 4 out of 5\"/></p>
-<p>4 stars because the model was validated with an AHU test bench at E.ON ERC EBC, RWTH Aachen University. Additionally, simulations of a city district were made and compared to measurement data. Examples and descriptions are recorded in [1]. </p>
 <h4><span style=\"color: #008000\">Assumptions</span></h4>
 <p>For further explanation for each parameter see noted sources and [1]! Please note that the assumptions are made regarding AHUs which are implemented in laboratories.</p>
 <ul>

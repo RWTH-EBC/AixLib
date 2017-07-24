@@ -5,7 +5,7 @@ model DiffuseIsotropic
   parameter Real rho=0.2 "Ground reflectance";
 
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=
-        "modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
+        "modelica://AixLib/Resources/WeatherData/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
     annotation (Placement(transformation(extent={{-40,0},{-20,20}})));
   AixLib.BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
     annotation (Placement(
@@ -71,7 +71,7 @@ First implementation.
 </li>
 </ul>
 </html>"),
-experiment(StartTime=1.82304e+07, StopTime=1.83168e+07),
+experiment(StartTime=1.82304e+07, Tolerance=1e-6, StopTime=1.83168e+07),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarIrradiation/Examples/DiffuseIsotropic.mos"
         "Simulate and plot"));
 end DiffuseIsotropic;

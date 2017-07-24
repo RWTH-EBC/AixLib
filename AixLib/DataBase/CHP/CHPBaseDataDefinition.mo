@@ -12,15 +12,15 @@ extends Modelica.Icons.Record;
   parameter SI.Length DPipe "Outlet pipe diameter";
 
   annotation (Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>Base data record for combined heat and power generators (CHP). </p>
 </html>",
         revisions="<html>
-<p><ul>
+<ul>
 <li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
 conventions</li>
 <li><i>June 27, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and
 formatted appropriately</li>
-</ul></p>
+</ul>
 </html>"));
 end CHPBaseDataDefinition;
