@@ -127,13 +127,12 @@ equation
     annotation (Line(points={{-60,0},{-36,0},{-10,0}}, color={0,127,255}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})), Documentation(info="<html>
-            <p><span style=\"font-family: MS Shell Dlg 2;\">The model calculates
-            the exergy content of a medium flow consisting of multiple 
-            substances. The reference environment is variable and modeled using
-            a boundary with temperature, pressure and composition as input.
-            The medium model is replaceable. The physical enthalpy and entropy
-            are determined using the respective sensors from MSL. The sensor is
-            ideal, i.e., it does not influence the fluid. </span></p>
+<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
+<p>The model calculates the exergy content of a medium flow consisting of multiple substances. 
+The reference environment is variable and modeled using a boundary with temperature, pressure 
+and composition as input. The medium model is replaceable. The physical enthalpy and entropy 
+are determined using the respective sensors from MSL. The sensor is ideal, i.e., it does not 
+influence the fluid.</p>
 </html>", revisions="<html>
 <ul>
 <li><i><span style=\"font-family: Arial,sans-serif;\">November 10, 

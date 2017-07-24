@@ -267,9 +267,10 @@ equation
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=1000, Interval=10),
     Documentation(info="<html>
-    <p><span style=\"font-family: MS Shell Dlg 2;\">This model shows the usage of 
-    all three ExergyMeters.</span></p>
-</html>", revisions="<html>
+<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
+<p>This model shows the usage of all three ExergyMeters.</p>
+</html>
+",        revisions="<html>
 <ul>
 <li><i><span style=\"font-family: Arial,sans-serif;\">November 10, 
 2016&nbsp;</i> by Marc Baranski and Roozbeh Sangi:<br>Implemented.</span></li>

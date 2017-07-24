@@ -125,10 +125,11 @@ equation
     Icon(coordinateSystem(preserveAspectRatio=false, extent={
     {-100,-100},{100,100}})),
     Documentation(info="<html>
-    <p><span style=\"font-family: MS Shell Dlg 2;\">The model calculates the 
-    exergy flow rate of a radiaitive or convective heat flux. The reference 
-    environment is variable.</span></p>
-</html>", revisions="<html>
+<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
+<p>The model calculates the exergy flow rate of a radiaitive or convective heat flux. 
+The reference environment is variable.</p>
+</html>
+",        revisions="<html>
 <ul>
 <li><i><span style=\"font-family: Arial,sans-serif;\">November 10, 
 2016&nbsp;</i> by Marc Baranski and Roozbeh Sangi:<br>Implemented.</span></li>
