@@ -28,6 +28,12 @@ expandable connector FVUControlBus
 
  Modelica.SIunits.Concentration co2Concentration "CO2 concentration measurement";
 
+ Modelica.SIunits.ThermodynamicTemperature mixTemperature
+ "Temperature measurement of the mixed circulation and fresh air streams";
+
+ Modelica.SIunits.ThermodynamicTemperature supplyTemperature
+ "Temperature measurement of the supply air streams";
+
 
 
   annotation (

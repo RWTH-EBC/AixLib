@@ -398,7 +398,7 @@ cooling and ventilation demand. It further indicates if free cooling, heat recov
 and as the fresh air temperature is measured inside the unit, we require an additional measurement mode. This mode is activated every two hours if there 
 is no ventilation demand and the unit consequently circulates air. In order to measure the correct fresh air temperature, the circulation damper is closed 
 for twenty minutes. Furthermore, the exhaust air fan is switched on and the fresh air damper is opened. This allows ambient air to flow inside the unit.
-The temperature set point in cooling mode is increased by adding the value &QUOT;deltaTemp&QUOT; to the set point in heating mode.
+The temperature set point in cooling mode is increased by adding the value deltaTemp to the set point in heating mode.
 </p>
 </html>"));
 end FVUController;

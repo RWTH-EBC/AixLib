@@ -1,6 +1,6 @@
 within AixLib.Airflow.FacadeVentilationUnit.BaseClasses;
 model SetPower
-  "This model defines a specific massflow rate based on the input power share"
+  "This model defines a specific mass flow rate based on the input power share"
 
   extends Modelica.Fluid.Interfaces.PartialTwoPort;
 
@@ -16,6 +16,7 @@ model SetPower
 
   Modelica.Blocks.Tables.CombiTable1D volumeFlow(table=[0,1; 0.1,25; 0.2,40;
         0.3,60; 0.4,90; 0.5,100; 0.6,140; 0.7,175; 0.8,200; 0.9,225; 1,260])
+    "Correlates the relative input signal and a volume flow rate"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
@@ -40,8 +41,11 @@ model SetPower
     p_start=p_start,
     riseTime=120,
     nominalValuesDefineDefaultPressureCurve=true)
+    "Mass-flow-controlled mover that sets the mass flow rate according to the table output"
     annotation (Placement(transformation(extent={{-10,10},{10,-10}})));
-  Modelica.Blocks.Math.Gain gain(k=1.2/3600*noUnits) annotation (Placement(
+  Modelica.Blocks.Math.Gain gain(k=1.2/3600*noUnits)
+    "Used to transform the volume flow rate in m3/h into a mass flow rate in kg/s"
+                                                     annotation (Placement(
         transformation(
         extent={{-6,-6},{6,6}},
         rotation=90,

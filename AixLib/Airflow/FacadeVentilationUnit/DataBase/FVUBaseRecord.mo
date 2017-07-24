@@ -1,5 +1,6 @@
 within AixLib.Airflow.FacadeVentilationUnit.DataBase;
-record FVUBaseRecord "Base record for the facade ventilation unit model"
+record FVUBaseRecord
+  "Base record for the facade ventilation unit model"
   extends Modelica.Icons.Record;
 
   parameter Integer noUnits=1 "Number of identical FVUs";
@@ -25,6 +26,10 @@ record FVUBaseRecord "Base record for the facade ventilation unit model"
     "Nominal pressure loss on air side of cooler";
   parameter Modelica.SIunits.Pressure p_default=101300
     "Default static pressure at outlet";
+  parameter Modelica.SIunits.Time damperRiseTimeLong = 90 "Rising time of the 
+   slowly moving dampers";
+  parameter Modelica.SIunits.Time damperRiseTimeShort = 20 "Rising time of the 
+   slowly moving dampers";
 
   annotation (Documentation(info="<html>
 <p><b><span style=\"color: #008000;\">Overview</span></b> </p>
