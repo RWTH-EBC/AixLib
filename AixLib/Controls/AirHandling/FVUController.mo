@@ -5,24 +5,15 @@ model FVUController "Rule-based controller of a facade ventilation unit"
 
   parameter Real co2SetConcentration=600 "Set point for CO2 concentration";
 
-  parameter Real maxSupFanPower=60 "Maximum supply air fan power";
+  parameter Real maxSupFanPower=0.6 "Maximum relative supply air fan power (0..1)";
 
-  parameter Real maxExFanPower=60 "Maximum exhaust air fan power";
+  parameter Real maxExFanPower=0.6 "Maximum relative exhaust air fan power (0..1)";
 
-  parameter Real fullyOpen=100 "Percentage value representing fuly opened flap";
 
   parameter Real deltaTemp=100 "Added to the set temperature in cooling mode";
 
-  Modelica.Blocks.Interfaces.RealInput roomTemperature
-    annotation (Placement(transformation(extent={{-120,100},{-80,140}})));
-  Modelica.Blocks.Interfaces.RealInput outdoorTemperature
-    annotation (Placement(transformation(extent={{-120,40},{-80,80}})));
-  Modelica.Blocks.Interfaces.RealInput co2Concentration
-    annotation (Placement(transformation(extent={{-120,-80},{-80,-40}})));
-  Modelica.Blocks.Interfaces.RealInput roomSetTemperature
-    annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
   Modelica.Blocks.Logical.OnOffController roomToBeCooled(bandwidth=2)
-    annotation (Placement(transformation(extent={{-60,110},{-40,130}})));
+    annotation (Placement(transformation(extent={{-58,110},{-38,130}})));
   Modelica.Blocks.Logical.OnOffController roomToBeHeated(bandwidth=2)
     annotation (Placement(transformation(extent={{-60,80},{-40,100}})));
   Modelica.Blocks.Logical.OnOffController roomToBeVentilated(bandwidth=200)
@@ -98,38 +89,27 @@ model FVUController "Rule-based controller of a facade ventilation unit"
     annotation (Placement(transformation(extent={{134,56},{148,70}})));
   Modelica.Blocks.Logical.RSFlipFlop rSFlipFlop
     annotation (Placement(transformation(extent={{105,70},{121,86}})));
-  Modelica.Blocks.Interfaces.RealOutput fanExhaustAirPower
-    annotation (Placement(transformation(extent={{210,52},{230,72}})));
   Modelica.Blocks.Logical.Switch switch5
     annotation (Placement(transformation(extent={{28,-2},{40,10}})));
-  Modelica.Blocks.Interfaces.RealOutput coolingValveOpening
-    annotation (Placement(transformation(extent={{210,110},{230,130}})));
-  Modelica.Blocks.Interfaces.RealOutput heatingValveOpening
-    annotation (Placement(transformation(extent={{210,80},{230,100}})));
   Modelica.Blocks.Logical.Switch switch1
     annotation (Placement(transformation(extent={{160,-3},{172,9}})));
   Modelica.Blocks.Logical.Switch switch2
     annotation (Placement(transformation(extent={{116,-8},{128,4}})));
   Modelica.Blocks.Sources.Constant supplyFan(k=maxSupFanPower)
     annotation (Placement(transformation(extent={{84,4},{96,16}})));
-  Modelica.Blocks.Interfaces.RealOutput fanSupplyAirPower
-    annotation (Placement(transformation(extent={{210,20},{230,40}})));
   Modelica.Blocks.Logical.Greater PexaLargerPsupa
     annotation (Placement(transformation(extent={{138,14},{150,28}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=if
-        fanExhaustAirPower > fanSupplyAirPower + 0.1 or fanExhaustAirPower <
-        fanSupplyAirPower - 0.1 then false else true)
+        fVUControlBus.fanExhaustAirPower > fVUControlBus.fanSupplyAirPower + 0.1
+         or fVUControlBus.fanExhaustAirPower < fVUControlBus.fanSupplyAirPower -
+        0.1 then false else true)
     annotation (Placement(transformation(extent={{120,-40},{140,-20}})));
   Modelica.Blocks.Logical.Switch switch6
     annotation (Placement(transformation(extent={{160,-36},{172,-24}})));
-  Modelica.Blocks.Interfaces.RealOutput circulationdamperOpening
-    annotation (Placement(transformation(extent={{208,-10},{228,10}})));
   Modelica.Blocks.Logical.Or or3
     annotation (Placement(transformation(extent={{28,-20},{42,-6}})));
   Modelica.Blocks.Logical.Switch useHRC
     annotation (Placement(transformation(extent={{62,-19},{74,-7}})));
-  Modelica.Blocks.Interfaces.RealOutput HRCDamperOpening
-    annotation (Placement(transformation(extent={{210,-40},{230,-20}})));
   Modelica.Blocks.Logical.Pre pre1 annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=180,
@@ -138,8 +118,6 @@ model FVUController "Rule-based controller of a facade ventilation unit"
     annotation (Placement(transformation(extent={{40,-56},{52,-44}})));
   Modelica.Blocks.Logical.Switch switch7
     annotation (Placement(transformation(extent={{64,-56},{76,-44}})));
-  Modelica.Blocks.Interfaces.RealOutput freshAirDamperOpening
-    annotation (Placement(transformation(extent={{210,-70},{230,-50}})));
   Modelica.Blocks.Sources.Constant delta(k=deltaTemp) annotation (Placement(
         transformation(
         extent={{-6,-6},{6,6}},
@@ -147,17 +125,11 @@ model FVUController "Rule-based controller of a facade ventilation unit"
         origin={-86,84})));
   Modelica.Blocks.Math.Add add2
     annotation (Placement(transformation(extent={{-92,94},{-80,106}})));
+  Interfaces.FVUControlBus fVUControlBus annotation (Placement(transformation(
+        extent={{-32,-32},{32,32}},
+        rotation=90,
+        origin={220,38})));
 equation
-  connect(outdoorTemperature, add.u1) annotation (Line(points={{-100,60},{-78,
-          60},{-78,-12.4},{-63.2,-12.4}}, color={0,0,127}));
-  connect(roomTemperature, add.u2) annotation (Line(points={{-100,120},{-74,120},
-          {-74,-10},{-68,-10},{-66,-10},{-66,-19.6},{-63.2,-19.6}}, color={0,0,
-          127}));
-  connect(outdoorTemperature, add1.u2) annotation (Line(points={{-100,60},{-88,
-          60},{-78,60},{-78,-69.6},{-65.2,-69.6}}, color={0,0,127}));
-  connect(roomTemperature, add1.u1) annotation (Line(points={{-100,120},{-88,
-          120},{-74,120},{-74,-62.4},{-65.2,-62.4}},
-                                               color={0,0,127}));
   connect(add1.y, heatRecoveryPossible.u)
     annotation (Line(points={{-51.4,-66},{-42,-66}}, color={0,0,127}));
   connect(add.y, coldRecoveryPossible.u) annotation (Line(points={{-49.4,-16},{
@@ -168,20 +140,19 @@ equation
       Line(points={{-55.4,-42},{-52,-42},{-52,-24},{-42,-24}}, color={0,0,127}));
   connect(setDeviationRecovery.y, heatRecoveryPossible.reference) annotation (
       Line(points={{-55.4,-42},{-52,-42},{-52,-54},{-42,-54}}, color={0,0,127}));
-  connect(roomToBeCooled.y, and1.u1) annotation (Line(points={{-39,120},{-28,
-          120},{-28,117},{-1.4,117}},
+  connect(roomToBeCooled.y, and1.u1) annotation (Line(points={{-37,120},{-28,120},
+          {-28,117},{-1.4,117}},
                                color={255,0,255}));
   connect(coldRecoveryPossible.y, and1.u2) annotation (Line(points={{-19,-30},{
           -6,-30},{-6,111.4},{-1.4,111.4}},
                                           color={255,0,255}));
-  connect(roomToBeCooled.y, useCoolingValve.u2) annotation (Line(points={{-39,120},
+  connect(roomToBeCooled.y, useCoolingValve.u2) annotation (Line(points={{-37,120},
           {-28,120},{-28,130},{22,130},{22,116},{60.8,116}},  color={255,0,255}));
-  connect(roomToBeCooled.y, and2.u1) annotation (Line(points={{-39,120},{-28,
-          120},{-28,81},{-1.4,81}},
-                               color={255,0,255}));
+  connect(roomToBeCooled.y, and2.u1) annotation (Line(points={{-37,120},{-28,120},
+          {-28,81},{-1.4,81}}, color={255,0,255}));
   connect(freeCoolingPossible.y, and2.u2) annotation (Line(points={{-19,0},{-12,
           0},{-12,75.4},{-1.4,75.4}},   color={255,0,255}));
-  connect(roomToBeCooled.y, climatizationNeeded.u1) annotation (Line(points={{-39,120},
+  connect(roomToBeCooled.y, climatizationNeeded.u1) annotation (Line(points={{-37,120},
           {-28,120},{-28,43},{-1.4,43}},    color={255,0,255}));
   connect(roomToBeHeated.y, climatizationNeeded.u2) annotation (Line(points={{-39,90},
           {-30,90},{-30,37.4},{-1.4,37.4}},   color={255,0,255}));
@@ -215,8 +186,6 @@ equation
           100,82.8},{103.4,82.8}}, color={255,0,255}));
   connect(rSFlipFlop.Q, timer.u) annotation (Line(points={{121.8,82.8},{127.4,
           82.8},{127.4,83},{132.6,83}}, color={255,0,255}));
-  connect(switch4.y, fanExhaustAirPower) annotation (Line(points={{126.6,30},{
-          192,30},{192,62},{220,62}},color={0,0,127}));
   connect(zero.y, useCoolingValve.u3) annotation (Line(points={{12.6,64},{24,64},
           {34,64},{34,111.2},{60.8,111.2}},
                                           color={0,0,127}));
@@ -228,16 +197,9 @@ equation
           18},{20,18},{20,-0.8},{26.8,-0.8}},color={0,0,127}));
   connect(switch5.y, useCoolingValve.u1) annotation (Line(points={{40.6,4},{56,
           4},{56,120},{56,120.8},{60.8,120.8}},   color={0,0,127}));
-  connect(useCoolingValve.y, coolingValveOpening) annotation (Line(points={{74.6,
-          116},{82,116},{82,134},{204,134},{204,120},{220,120}},  color={0,0,
-          127}));
-  connect(useHeatingValve.y, heatingValveOpening) annotation (Line(points={{74.6,84},
-          {78,84},{78,110},{200,110},{200,90},{220,90}},        color={0,0,127}));
   connect(co2SeetConcentrationSource.y, roomToBeVentilated.u)
     annotation (Line(points={{-52.6,36},{-62,36},{-62,54}},
                                                           color={0,0,127}));
-  connect(co2Concentration, roomToBeVentilated.reference) annotation (Line(
-        points={{-100,-60},{-76,-60},{-76,66},{-62,66}}, color={0,0,127}));
   connect(climatizationNeeded.y, switch2.u2) annotation (Line(points={{14.7,43},
           {52,43},{52,-2},{114.8,-2}},   color={255,0,255}));
   connect(supplyFan.y, switch2.u1) annotation (Line(points={{96.6,10},{110,10},
@@ -246,16 +208,12 @@ equation
           {80,24},{80,-6.8},{114.8,-6.8}},   color={0,0,127}));
   connect(switch2.y, switch1.u3) annotation (Line(points={{128.6,-2},{154,-2},{
           154,-1.8},{158.8,-1.8}},    color={0,0,127}));
-  connect(switch1.y, fanSupplyAirPower) annotation (Line(points={{172.6,3},{200,
-          3},{200,30},{220,30}},     color={0,0,127}));
   connect(PexaLargerPsupa.y, switch1.u2) annotation (Line(points={{150.6,21},{
           152,21},{152,3},{158.8,3}},     color={255,0,255}));
   connect(switch4.y, switch1.u1) annotation (Line(points={{126.6,30},{142,30},{
           156,30},{156,7.8},{158.8,7.8}},    color={0,0,127}));
   connect(booleanExpression.y, switch6.u2)
     annotation (Line(points={{141,-30},{158.8,-30}}, color={255,0,255}));
-  connect(switch6.y, circulationdamperOpening) annotation (Line(points={{172.6,
-          -30},{196,-30},{196,0},{218,0}},     color={0,0,127}));
   connect(and1.y, or3.u1) annotation (Line(points={{14.7,117},{20,117},{20,-13},
           {26.6,-13}},color={255,0,255}));
   connect(and3.y, or3.u2) annotation (Line(points={{14.7,3},{18,3},{18,-18.6},{
@@ -266,21 +224,12 @@ equation
           100},{30,18},{50,18},{50,-8.2},{60.8,-8.2}},color={0,0,127}));
   connect(zero.y, useHRC.u3) annotation (Line(points={{12.6,64},{34,64},{34,24},
           {54,24},{54,-17.8},{60.8,-17.8}}, color={0,0,127}));
-  connect(useHRC.y, HRCDamperOpening) annotation (Line(points={{74.6,-13},{74,
-          -13},{74,-14},{186,-14},{186,-30},{220,-30}},
-                                                   color={0,0,127}));
   connect(add1.y, freeCoolingPossible.u) annotation (Line(points={{-51.4,-66},{
           -46,-66},{-46,-6},{-42,-6}},   color={0,0,127}));
   connect(timePassed1.y, pre1.u) annotation (Line(points={{174.6,69},{182,69},{
           182,52},{171.2,52}}, color={255,0,255}));
   connect(pre1.y, rSFlipFlop.R) annotation (Line(points={{157.4,52},{100,52},{
           100,73.2},{103.4,73.2}}, color={255,0,255}));
-  connect(roomTemperature, roomToBeHeated.u) annotation (Line(points={{-100,120},
-          {-74,120},{-74,84},{-62,84}},color={0,0,127}));
-  connect(roomSetTemperature, roomToBeHeated.reference) annotation (Line(points={{-100,0},
-          {-70,0},{-70,96},{-62,96}},              color={0,0,127}));
-  connect(roomTemperature, roomToBeCooled.reference) annotation (Line(points={{-100,
-          120},{-74,120},{-74,126},{-62,126}},  color={0,0,127}));
   connect(switch4.y, PexaLargerPsupa.u1) annotation (Line(points={{126.6,30},{
           130,30},{130,21},{136.8,21}},color={0,0,127}));
   connect(switch2.y, PexaLargerPsupa.u2) annotation (Line(points={{128.6,-2},{
@@ -310,8 +259,6 @@ equation
                      color={255,0,255}));
   connect(greaterThreshold.y, switch7.u2) annotation (Line(points={{52.6,-50},{
           58,-50},{62.8,-50}}, color={255,0,255}));
-  connect(switch7.y, freshAirDamperOpening) annotation (Line(points={{76.6,-50},
-          {180,-50},{180,-60},{220,-60}}, color={0,0,127}));
   connect(switch4.y, greaterThreshold.u) annotation (Line(points={{126.6,30},{
           174,30},{182,30},{182,-38},{78,-38},{78,-30},{32,-30},{32,-50},{38.8,
           -50}},
@@ -329,11 +276,108 @@ equation
           {54,24},{54,-54.8},{62.8,-54.8}}, color={0,0,127}));
   connect(delta.y, add2.u2) annotation (Line(points={{-92.6,84},{-96,84},{-96,
           96.4},{-93.2,96.4}}, color={0,0,127}));
-  connect(roomSetTemperature, add2.u1) annotation (Line(points={{-100,0},{-70,0},
-          {-70,110},{-96,110},{-96,103.6},{-93.2,103.6}},  color={0,0,127}));
-  connect(add2.y, roomToBeCooled.u) annotation (Line(points={{-79.4,100},{-72,
-          100},{-66,100},{-66,114},{-62,114}},
+  connect(add2.y, roomToBeCooled.u) annotation (Line(points={{-79.4,100},{-72,100},
+          {-66,100},{-66,114},{-60,114}},
                                        color={0,0,127}));
+  connect(useCoolingValve.y, fVUControlBus.coolingValveOpening) annotation (
+      Line(points={{74.6,116},{82,116},{82,132},{192,132},{192,38.16},{219.84,
+          38.16}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(useHeatingValve.y, fVUControlBus.heatingValveOpening) annotation (
+      Line(points={{74.6,84},{78,84},{78,110},{192,110},{192,38.16},{219.84,
+          38.16}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(switch4.y, fVUControlBus.fanExhaustAirPower) annotation (Line(points={{126.6,
+          30},{162,30},{192,30},{192,38.16},{219.84,38.16}},        color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(switch1.y, fVUControlBus.fanSupplyAirPower) annotation (Line(points={{172.6,3},
+          {182,3},{192,3},{192,38.16},{219.84,38.16}},          color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(switch6.y, fVUControlBus.circulationDamperOpening) annotation (Line(
+        points={{172.6,-30},{192,-30},{192,38.16},{219.84,38.16}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(useHRC.y, fVUControlBus.hRCDamperOpening) annotation (Line(points={{74.6,
+          -13},{192,-13},{192,38.16},{219.84,38.16}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(switch7.y, fVUControlBus.freshAirDamperOpening) annotation (Line(
+        points={{76.6,-50},{192,-50},{192,38.16},{219.84,38.16}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(roomToBeCooled.reference, fVUControlBus.roomTemperature) annotation (
+      Line(points={{-60,126},{-74,126},{-74,140},{219.84,140},{219.84,38.16}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(roomToBeHeated.u, fVUControlBus.roomTemperature) annotation (Line(
+        points={{-62,84},{-74,84},{-74,140},{219.84,140},{219.84,38.16}}, color=
+         {0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(add1.u1, fVUControlBus.roomTemperature) annotation (Line(points={{-65.2,
+          -62.4},{-74,-62.4},{-74,140},{219.84,140},{219.84,38.16}}, color={0,0,
+          127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(add.u2, fVUControlBus.roomTemperature) annotation (Line(points={{-63.2,
+          -19.6},{-74,-19.6},{-74,140},{219.84,140},{219.84,38.16}}, color={0,0,
+          127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(add1.u2, fVUControlBus.outdoorTemperature) annotation (Line(points={{-65.2,
+          -69.6},{-80,-69.6},{-80,-100},{219.84,-100},{219.84,38.16}}, color={0,
+          0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(add.u1, fVUControlBus.outdoorTemperature) annotation (Line(points={{-63.2,
+          -12.4},{-80,-12.4},{-80,-100},{219.84,-100},{219.84,38.16}}, color={0,
+          0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(add2.u1, fVUControlBus.roomSetTemperature) annotation (Line(points={{-93.2,
+          103.6},{-98,103.6},{-98,144},{219.84,144},{219.84,38.16}}, color={0,0,
+          127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(roomToBeHeated.reference, fVUControlBus.roomSetTemperature)
+    annotation (Line(points={{-62,96},{-68,96},{-68,144},{219.84,144},{219.84,
+          38.16}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(roomToBeVentilated.reference, fVUControlBus.co2Concentration)
+    annotation (Line(points={{-62,66},{-84,66},{-84,-96},{219.84,-96},{219.84,
+          38.16}},
+        color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{220,
             160}}), graphics={Rectangle(extent={{-100,160},{220,-100}},  lineColor = {135, 135, 135}, fillColor = {255, 255, 170},
