@@ -371,7 +371,7 @@ equation
 <li>It is based on communication via UDP and logic implemented with the help of the StateGraph Modelica library.</li>
 <li>It is used together with a broker-agent and at least one producer-agent.</li>
 </ul>
-<p><b><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Concept</span></b></p>
+<h4><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Concept</span></h4>
 <p>The room agent observes the temperature inside a room. If the temperature crosses a certain treshhold and a pre-defined sample-time has elapsed, a cooling or heating request is calculated and send to a broker agent. The broker-agent ensures that the requested heat is produced. The logic is implemented with the help of the StateGraph library. Communication is realized with the help of the DeviceDriver library and follows the language standards for multi-agent-systems set by the FIPA to the highest possible extend for Modelica models. The following figure shows the behaviour of the roomagent. For further information please refer to the first reference.</p>
 <p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/RoomAgent.png\"/></p>
 <h4><span style=\"color: #008000\">References</span></h4>

@@ -14,7 +14,7 @@ class Gettingstarted "Getting started"
 <li>Write down all names of the ProducerAgents in the &quot;startTable&quot; of the broker. Delete or add more lines if necessary.</li>
 </ul>
 <p>The system is now ready to go. </p>
-<p><b>If you used older versions of this library, please add a MessageNotification agent to your agent-based systems in order to make them work. For more information please refer to <a href=\"HVACAgentBasedControl.Agents.MessageNotification\">MessageNotification model</a>. </b></p>
+<h4>If you used older versions of this library, please add a MessageNotification agent to your agent-based systems in order to make them work. For more information please refer to <a href=\"HVACAgentBasedControl.Agents.MessageNotification\">MessageNotification model</a>. </h4>
 <h4><span style=\"color: #008000\">What can a building energy system with agent-based control look like?</span></h4>
 <p>Below you see an example building energy system which can be found <a href=\"HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating\">here</a>. The system consists of two thermal zones (or rooms) and two heat producers e.g. a heat pump and a boiler. The system is set up as described in the section above. For a more detailed description please refer to the <a href=\"HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating\">model itself</a>. There are more examples available in the Example package if you need further input. </p>
 <p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/ExampleSystem.PNG\"/> </p>

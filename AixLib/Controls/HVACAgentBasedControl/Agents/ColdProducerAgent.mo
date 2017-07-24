@@ -719,7 +719,7 @@ equation
 <li>FIPA ACL Message Structure Specification</li>
 <li>FIPA Communicative Act Library Specification </li>
 </ul>
-<p><b><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Example Results</span></b></p>
+<h4><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Example Results</span></h4>
 <ul>
 <li><a href=\"HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating\">Simple Heating System</a></li>
 </ul>

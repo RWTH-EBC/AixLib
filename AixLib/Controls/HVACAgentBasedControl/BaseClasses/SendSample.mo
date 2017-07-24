@@ -76,12 +76,12 @@ equation
           thickness=0.5)}),                                      Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
-<p><b><span style=\"color: #008000;\">Overview</span></b></p>
+<h4><span style=\"color: #008000;\">Overview</span></h4>
 <ul>
 <li>This model creates a burst of Boolean singals (on-off-on-off) at a rising edge on the input</li>
 <li>It is used by the PartialAgent when \"usePoke=true\" is selected</li>
 </ul>
-<p><b><span style=\"color: #008000;\">Concept</span></b></p>
+<h4><span style=\"color: #008000;\">Concept</span></h4>
 <p>The model simulates a trigger, which is only active for a certain period of time, thus not creating events throughout the whole simulation time.</p>
 </html>",
     revisions="<html>

@@ -143,7 +143,7 @@ equation
 </ul>
 </html>",
     info="<html>
-<p><b><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Overview</span></b></p>
+<h4><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Overview</span></h4>
 <ul>
 <li><span style=\"font-family: MS Shell Dlg 2;\">Identical to the cost function in the Exergy package, except a primary energy factor is included.</span></li>
 </ul>

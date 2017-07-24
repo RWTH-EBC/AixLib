@@ -78,7 +78,7 @@ equation
 </ul>
 <h4><span style=\"color: #008000\">Concept</span></h4>
 <p>The model changes the model published in the Modelica_DeviceDrivers library by an input for the name of the receiver. The receiver is therefore no longer a parameter but now a variable of the model. This change is necessary as some agents need to communicate with a number of different recipents (the broker for example).</p>
-<p><br/><b><span style=\"color: #008000;\">References</span></b></p>
+<h4><span style=\"color: #008000;\">References</span></h4>
 <ul>
 <li>Roozbeh Sangi, Felix B&uuml;nning, Marc Baranski, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic.</li>
 </ul>
