@@ -40,9 +40,6 @@ model PIDHysteresis
   parameter Modelica.Blocks.Types.InitPID initType=Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState
     "Type of initialization (1: no init, 2: steady state, 3: initial state, 4: initial output)"
     annotation (Dialog(group="Initialization"));
-  parameter Boolean limitsAtInit=true
-    "= false, if limits are ignored during initializiation"
-    annotation (Dialog(group="Initialization"));
   parameter Real xi_start=0
     "Initial or guess value value for integrator output (= integrator state)"
     annotation (Dialog(group="Initialization"));
@@ -66,7 +63,6 @@ model PIDHysteresis
     final Ni=Ni,
     final Nd=Nd,
     final initType=initType,
-    final limitsAtInit=limitsAtInit,
     final xi_start=xi_start,
     final xd_start=xd_start,
     final y_start=y_start,
@@ -172,6 +168,11 @@ is small enough.
 </html>", revisions="<html>
 <ul>
 <li>
+September 29, 2016, by Michael Wetter:<br/>
+Removed parameter <code>limitsAtInit</code> because it is no longer
+used in the PID controller.
+</li>
+<li>
 April 13, 2016, by Michael Wetter:<br/>
 Set <code>zer(final k=0)</code> and made swi, zer and zer1 protected
 which they are also for
@@ -185,7 +186,7 @@ Changed the default value to <code>strict=true</code>
 in order to avoid events when the controller saturates.
 Also assigned propogated values to be <code>final</code>.
 This is for
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/433\">issue 433</a>.
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/433\">issue 433</a>.
 </li>
 <li>
 February 24, 2010, by Michael Wetter:<br/>

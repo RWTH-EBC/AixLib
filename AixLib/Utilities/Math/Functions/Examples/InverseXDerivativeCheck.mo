@@ -19,13 +19,13 @@ equation
   y = AixLib.Utilities.Math.Functions.inverseXRegularized(
     x=  x,
     delta=  delta);
-  der(y) = der(y_comp);
+  der(y_comp) = AixLib.Utilities.Math.Functions.BaseClasses.der_inverseXRegularized(x=x,delta=delta,x_der=der(x));
   err = y-y_comp;
   assert(abs(err) < 1E-3, "Error in implementation.");
 annotation (
 experiment(
       StartTime=-1,
-      StopTime=1,
+      StopTime=1.0,
       Tolerance=1e-08),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Math/Functions/Examples/InverseXDerivativeCheck.mos"
         "Simulate and plot"),
@@ -42,6 +42,12 @@ If the derivative implementation is wrong, the simulation will stop with an erro
 </html>",
 revisions="<html>
 <ul>
+<li>
+June 22, 2016, by Filip Jorissen:<br/>
+Changed example such that it explicitly uses
+<a href=\"modelica://AixLib.Utilities.Math.Functions.BaseClasses.der_inverseXRegularized\">
+AixLib.Utilities.Math.Functions.BaseClasses.der_inverseXRegularized</a>.
+</li>
 <li>
 August 11, 2015, by Michael Wetter:<br/>
 First implementation.

@@ -1,6 +1,4 @@
-FixedResistancesExplicit
-FixedResistancesParallel
-FixedResistancesSeries
 CompareFixedResistances
-PerformanceHydraulicResistance1
-PerformanceHydraulicResistance2
+FlowJunction
+HydraulicDiameter
+PressureDrop

@@ -12,12 +12,12 @@ model Delay
     height=20,
     offset=101315)
                  annotation (Placement(transformation(extent={{-94,30},{-74,50}})));
-    AixLib.Fluid.FixedResistances.FixedResistanceDpM res1(
+  AixLib.Fluid.FixedResistances.PressureDrop res1(
     from_dp=true,
     m_flow_nominal=5,
     dp_nominal=5,
     redeclare package Medium = Medium)
-             annotation (Placement(transformation(extent={{-30,-4},{-10,16}})));
+    annotation (Placement(transformation(extent={{-30,-4},{-10,16}})));
   AixLib.Fluid.Sources.Boundary_pT sou(
                 T=293.15, redeclare package Medium = Medium,
     use_p_in=true,
@@ -28,12 +28,12 @@ model Delay
     use_p_in=true,
     nPorts=1)             annotation (Placement(transformation(extent={{78,-4},
             {58,16}})));
-    AixLib.Fluid.FixedResistances.FixedResistanceDpM res2(
+  AixLib.Fluid.FixedResistances.PressureDrop res2(
     from_dp=true,
     m_flow_nominal=5,
     dp_nominal=5,
     redeclare package Medium = Medium)
-             annotation (Placement(transformation(extent={{26,-4},{46,16}})));
+    annotation (Placement(transformation(extent={{26,-4},{46,16}})));
   AixLib.Fluid.Delays.DelayFirstOrder del(         m_flow_nominal=5, redeclare
       package Medium = Medium,
     nPorts=2,
@@ -59,7 +59,7 @@ equation
   connect(res2.port_a, del.ports[2]) annotation (Line(
       points={{26,6},{10,6}},
       color={0,127,255}));
-    annotation (experiment(StopTime=300),
+    annotation (experiment(Tolerance=1e-6, StopTime=300),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Delays/Examples/Delay.mos"
         "Simulate and plot"));
 end Delay;

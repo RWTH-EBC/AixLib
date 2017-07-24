@@ -5,10 +5,9 @@ model VAVBoxExponential
 
  package Medium = AixLib.Media.Air;
 
-  AixLib.Fluid.Actuators.Dampers.Exponential dam(
-         redeclare package Medium = Medium, A=1.8,
-    m_flow_nominal=2)
-         annotation (Placement(transformation(extent={{20,10},{40,30}})));
+  AixLib.Fluid.Actuators.Dampers.Exponential dam(redeclare package Medium =
+        Medium, m_flow_nominal=2)
+    annotation (Placement(transformation(extent={{20,10},{40,30}})));
     Modelica.Blocks.Sources.Step yDam(
     height=-1,
     offset=1,
@@ -19,13 +18,13 @@ model VAVBoxExponential
     offset=101330,
     startTime=0,
     duration=60) annotation (Placement(transformation(extent={{-100,40},{-80,60}})));
-  AixLib.Fluid.Sources.Boundary_pT sou(             redeclare package Medium
-      =        Medium, T=273.15 + 20,
+  AixLib.Fluid.Sources.Boundary_pT sou(             redeclare package Medium =
+               Medium, T=273.15 + 20,
     nPorts=2,
     use_p_in=true)                      annotation (Placement(transformation(
           extent={{-70,-20},{-50,0}})));
-  AixLib.Fluid.Sources.Boundary_pT sin(             redeclare package Medium
-      =        Medium, T=273.15 + 20,
+  AixLib.Fluid.Sources.Boundary_pT sin(             redeclare package Medium =
+               Medium, T=273.15 + 20,
     nPorts=2,
     use_p_in=true)                      annotation (Placement(transformation(
           extent={{72,-20},{52,0}})));
@@ -34,15 +33,14 @@ model VAVBoxExponential
   AixLib.Fluid.Actuators.Dampers.VAVBoxExponential vav(
     redeclare package Medium = Medium,
     dp_nominal=5,
-    A=1.8,
     m_flow_nominal=2)
-         annotation (Placement(transformation(extent={{-2,-50},{18,-30}})));
-    AixLib.Fluid.FixedResistances.FixedResistanceDpM res(
+    annotation (Placement(transformation(extent={{-2,-50},{18,-30}})));
+  AixLib.Fluid.FixedResistances.PressureDrop res(
     from_dp=true,
     m_flow_nominal=2,
     redeclare package Medium = Medium,
     dp_nominal=5 - 0.45*2^2/1.2/1.8^2/2)
-             annotation (Placement(transformation(extent={{-36,10},{-16,30}})));
+    annotation (Placement(transformation(extent={{-36,10},{-16,30}})));
 
 equation
   connect(yDam.y,dam. y) annotation (Line(
@@ -71,7 +69,7 @@ equation
       color={0,127,255}));
  annotation (             __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Actuators/Dampers/Examples/VAVBoxExponential.mos"
         "Simulate and plot"),
-    experiment(StopTime=240),
+    experiment(Tolerance=1e-6, StopTime=240),
 Documentation(info="<html>
 <p>
 Test model for the variable air volume flow box.

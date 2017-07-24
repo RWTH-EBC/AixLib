@@ -14,17 +14,17 @@ model PowerSimplified
   AixLib.Fluid.Movers.SpeedControlled_Nrpm pump_Nrpm(
     redeclare package Medium = Medium,
     per=per,
-    filteredSpeed=false,
+    use_inputFilter=false,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial)
     "Pump with RPM as control signal"
     annotation (Placement(transformation(extent={{-60,50},{-40,70}})));
-  AixLib.Fluid.Movers.FlowControlled_dp  pump_dp(
+  AixLib.Fluid.Movers.FlowControlled_dp pump_dp(
     redeclare package Medium = Medium,
     redeclare Data.Pumps.Wilo.Stratos30slash1to8 per(
       pressure(V_flow={0,0}, dp={0,0}),
       use_powerCharacteristic=false,
-    hydraulicEfficiency(V_flow={0}, eta={0.3577})),
-    filteredSpeed=false,
+      hydraulicEfficiency(V_flow={0}, eta={0.3577})),
+    use_inputFilter=false,
     m_flow_nominal=m_flow_nominal,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial)
     "Pump with pressure rise as control signal"
@@ -35,8 +35,8 @@ model PowerSimplified
     redeclare Data.Pumps.Wilo.Stratos30slash1to8 per(
       pressure(V_flow={0,0}, dp={0,0}),
       use_powerCharacteristic=false,
-    hydraulicEfficiency(V_flow={0}, eta={0.3577})),
-    filteredSpeed=false,
+      hydraulicEfficiency(V_flow={0}, eta={0.3577})),
+    use_inputFilter=false,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial)
     "Pump with mass flow rate as control signal"
     annotation (Placement(transformation(extent={{-60,-30},{-40,-10}})));
@@ -46,7 +46,7 @@ model PowerSimplified
     redeclare package Medium = Medium) "Pressure source"
     annotation (Placement(transformation(extent={{-102,10},{-82,30}})));
 
-  AixLib.Fluid.FixedResistances.FixedResistanceDpM[3] res(
+  AixLib.Fluid.FixedResistances.PressureDrop[3] res(
     redeclare each package Medium = Medium,
     each m_flow_nominal=m_flow_nominal,
     each dp_nominal=40000) "Flow resistance"
@@ -109,7 +109,7 @@ equation
   connect(dpSet.y, pump_dp.dp_in) annotation (Line(
       points={{2.2,40},{-50.2,40},{-50.2,32}},
       color={0,0,127}));
-  annotation (    experiment(StopTime=200),
+  annotation (    experiment(Tolerance=1e-6, StopTime=200),
     __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/Validation/PowerSimplified.mos"
         "Simulate and plot"),
@@ -157,14 +157,14 @@ in OpenModelica to the error message
 <li>
 March 2, 2016, by Filip Jorissen:<br/>
 Revised implementation for
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/417\">#417</a>.
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/417\">#417</a>.
 </li>
 <li>
 November 5, 2015, by Michael Wetter:<br/>
 Changed parameters since the power is no longer a parameter for the movers
 that take mass flow rate or head as an input.
 This is for
-<a href=\"modelica://https://github.com/lbl-srg/modelica-buildings/issues/457\">issue 457</a>.
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/457\">issue 457</a>.
 </li>
 <li>
 November 22, 2014, by Michael Wetter:<br/>

@@ -2,8 +2,7 @@ within AixLib.Fluid.BaseClasses;
 partial model PartialResistance "Partial model for a hydraulic resistance"
     extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(
      show_T=false,
-     dp(start=0,
-        nominal=if dp_nominal_pos > Modelica.Constants.eps
+     dp(nominal=if dp_nominal_pos > Modelica.Constants.eps
           then dp_nominal_pos else 1),
      m_flow(
         nominal=if m_flow_nominal_pos > Modelica.Constants.eps
@@ -80,12 +79,19 @@ Models that extend this class need to implement an equation that relates
 </p>
 <p>
 See for example
-<a href=\"modelica://AixLib.Fluid.FixedResistances.FixedResistanceDpM\">
-AixLib.Fluid.FixedResistances.FixedResistanceDpM</a> for a model that extends
+<a href=\"modelica://AixLib.Fluid.FixedResistances.PressureDrop\">
+AixLib.Fluid.FixedResistances.PressureDrop</a> for a model that extends
 this base class.
 </p>
 </html>", revisions="<html>
 <ul>
+<li>
+November 3, 2016, by Michael Wetter:<br/>
+Removed start value for pressure difference
+to simplify the parameter window.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/552\">#552</a>.
+</li>
 <li>
 January 26, 2016, by Michael Wetter:<br/>
 Avoided assignment of <code>dp(nominal=0)</code> if <code>dp_nominal_pos = 0</code>
@@ -96,7 +102,7 @@ as nominal values are not allowed to be zero.
 January 22, 2016, by Michael Wetter:<br/>
 Corrected type declaration of pressure difference.
 This is
-for <a href=\"https://github.com/iea-annex60/modelica-annex60/issues/404\">#404</a>.
+for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
 </li>
 <li>
 August 15, 2015, by Filip Jorissen:<br/>
@@ -104,7 +110,7 @@ Implemented more efficient computation of <code>port_a.Xi_outflow</code>,
 <code>port_a.h_outflow</code>
 and <code>port_a.C_outflow</code> when <code>allowFlowReversal=false</code>.
 This is for
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/281\">#281</a>.
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/281\">#281</a>.
 </li>
 <li>
 January 13, 2015, by Marcus Fuchs:<br/>
@@ -141,7 +147,7 @@ To simplify object inheritance tree, revised base classes
 <code>AixLib.Fluid.Actuators.BaseClasses.PartialDamperExponential</code>,
 <code>AixLib.Fluid.Actuators.BaseClasses.PartialActuator</code>
 and model
-<code>AixLib.Fluid.FixedResistances.FixedResistanceDpM</code>.
+<code>AixLib.Fluid.FixedResistances.PressureDrop</code>.
 </li>
 <li>
 August 5, 2011, by Michael Wetter:<br/>

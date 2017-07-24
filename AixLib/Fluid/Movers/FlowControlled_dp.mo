@@ -18,8 +18,8 @@ model FlowControlled_dp
           per.pressure
         else
           AixLib.Fluid.Movers.BaseClasses.Characteristics.flowParameters(
-            V_flow=  {i/(nOri-1)*2.0*m_flow_nominal/rho_default for i in 0:(nOri-1)},
-            dp=      {i/(nOri-1)*2.0*dp_nominal for i in (nOri-1):-1:0}),
+            V_flow = {i/(nOri-1)*2.0*m_flow_nominal/rho_default for i in 0:(nOri-1)},
+            dp =     {i/(nOri-1)*2.0*dp_nominal for i in (nOri-1):-1:0}),
       final use_powerCharacteristic = if per.havePressureCurve then per.use_powerCharacteristic else false)));
 
   parameter Modelica.SIunits.PressureDifference dp_start(
@@ -31,8 +31,8 @@ model FlowControlled_dp
   parameter Modelica.SIunits.PressureDifference dp_nominal(
     min=0,
     displayUnit="Pa")=
-      if rho_default < 500 then 500 else 10000 "Nominal pressure raise, used to normalized the filter if filteredSpeed=true,
-        to set default values of constantHead and heads, and 
+      if rho_default < 500 then 500 else 10000 "Nominal pressure raise, used to normalized the filter if use_inputFilter=true,
+        to set default values of constantHead and heads, and
         and for default pressure curve if not specified in record per"
     annotation(Dialog(group="Nominal condition"));
 
@@ -42,13 +42,15 @@ model FlowControlled_dp
     "Constant pump head, used when inputType=Constant"
     annotation(Dialog(enable=inputType == AixLib.Fluid.Types.InputType.Constant));
 
+  // By default, set heads proportional to sqrt(speed/speed_nominal)
   parameter Modelica.SIunits.PressureDifference[:] heads(
     each min=0,
-    each displayUnit="Pa") = dp_nominal*{1}
+    each displayUnit="Pa")=
+    dp_nominal*{(per.speeds[i]/per.speeds[end])^2 for i in 1:size(per.speeds, 1)}
     "Vector of head set points, used when inputType=Stages"
     annotation(Dialog(enable=inputType == AixLib.Fluid.Types.InputType.Stages));
 
-  Modelica.Blocks.Interfaces.RealInput dp_in(min=0, final unit="Pa") if
+  Modelica.Blocks.Interfaces.RealInput dp_in(final unit="Pa") if
     inputType == AixLib.Fluid.Types.InputType.Continuous
     "Prescribed pressure rise"
     annotation (Placement(transformation(
@@ -59,7 +61,7 @@ model FlowControlled_dp
         rotation=-90,
         origin={-2,120})));
 
-  Modelica.Blocks.Interfaces.RealOutput dp_actual(min=0, final unit="Pa", displayUnit="Pa")
+  Modelica.Blocks.Interfaces.RealOutput dp_actual(final unit="Pa")
     annotation (Placement(transformation(extent={{100,10},{120,30}}),
         iconTransformation(extent={{100,10},{120,30}})));
 
@@ -72,7 +74,7 @@ equation
   assert(inputSwitch.u >= -1E-3,
     "Pressure set point for mover cannot be negative. Obtained dp = " + String(inputSwitch.u));
 
-  if filteredSpeed then
+  if use_inputFilter then
     connect(filter.y, gain.u) annotation (Line(
       points={{34.7,88},{36,88},{36,42}},
       color={0,0,127},
@@ -107,7 +109,7 @@ in record <code>per</code>, which is of type
 AixLib.Fluid.Movers.SpeedControlled_Nrpm</a>.
 </p>
 <p>
-If <code>filteredSpeed=true</code>, then the parameter <code>dp_nominal</code> is
+If <code>use_inputFilter=true</code>, then the parameter <code>dp_nominal</code> is
 used to normalize the filter. This is used to improve the numerics of the transient response.
 The actual pressure raise of the mover at steady-state is independent
 of the value of <code>dp_nominal</code>. It is recommended to set
@@ -123,16 +125,35 @@ User's Guide</a> for more information.
       revisions="<html>
 <ul>
 <li>
+March 24, 2017, by Michael Wetter:<br/>
+Renamed <code>filteredSpeed</code> to <code>use_inputFilter</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/665\">#665</a>.
+</li>
+<li>
+December 2, 2016, by Michael Wetter:<br/>
+Removed <code>min</code> attribute as otherwise numerical noise can cause
+the assertion on the limit to fail.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/606\">#606</a>.
+</li>
+<li>
+November 14, 2016, by Michael Wetter:<br/>
+Changed default values for <code>heads</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/583\">#583</a>.
+</li>
+<li>
 March 2, 2016, by Filip Jorissen:<br/>
 Refactored model such that it directly extends <code>PartialFlowMachine</code>.
 This is for
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/417\">#417</a>.
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/417\">#417</a>.
 </li>
 <li>
 January 22, 2016, by Michael Wetter:<br/>
 Corrected type declaration of pressure difference.
 This is
-for <a href=\"https://github.com/iea-annex60/modelica-annex60/issues/404\">#404</a>.
+for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
 </li>
 <li>
 November 5, 2015, by Michael Wetter:<br/>
@@ -157,7 +178,7 @@ and
 <a href=\"modelica://AixLib.Fluid.Movers.FlowControlled_y\">
 AixLib.Fluid.Movers.FlowControlled_y</a>.<br/>
 This is for
-<a href=\"modelica://https://github.com/lbl-srg/modelica-buildings/issues/457\">
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/457\">
 issue 457</a>.
 <li>
 April 2, 2015, by Filip Jorissen:<br/>

@@ -7,7 +7,7 @@ model IncidenceAngle "Test model for solar incidence angle"
     azi=0.3) "Incidence angle on horizontal surface"
     annotation (Placement(transformation(extent={{0,70},{20,90}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
-    filNam="modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")
+    filNam="modelica://AixLib/Resources/WeatherData/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")
     "Weather data (Chicago)"
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
   AixLib.BoundaryConditions.SolarGeometry.IncidenceAngle incAngNor(
@@ -76,7 +76,7 @@ First implementation.
 </li>
 </ul>
 </html>"),
-experiment(StopTime=86400),
+experiment(Tolerance=1e-6, StopTime=86400),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarGeometry/Examples/IncidenceAngle.mos"
         "Simulate and plot"));
 end IncidenceAngle;

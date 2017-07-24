@@ -33,7 +33,7 @@ package Air
 
   // There must not be any stateSelect=StateSelect.prefer for
   // the pressure.
-  // Otherwise, translateModel("AixLib.Fluid.FMI.Examples.FMUs.ResistanceVolume")
+  // Otherwise, translateModel("Buildings.Fluid.FMI.ExportContainers.Examples.FMUs.ResistanceVolume")
   // will fail as Dymola does an index reduction and outputs
   //   Differentiated the equation
   //   vol.dynBal.medium.p+res.dp-inlet.p = 0.0;
@@ -57,7 +57,7 @@ package Air
 
     MassFraction X_steam "Mass fraction of steam water";
     MassFraction X_air "Mass fraction of air";
-    Modelica.SIunits.TemperatureDifference dT
+    Modelica.SIunits.TemperatureDifference dT(start=T_default-reference_T)
       "Temperature difference used to compute enthalpy";
   equation
     assert(T >= 200.0 and T <= 423.15, "
@@ -608,7 +608,7 @@ revisions="<html>
 <li>
 April 30, 2015, by Filip Jorissen and Michael Wetter:<br/>
 Added <code>Inline=true</code> for
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/227\">
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/227\">
 issue 227</a>.
 </li>
 </ul>
@@ -721,7 +721,7 @@ revisions="<html>
 <li>
 April 30, 2015, by Filip Jorissen and Michael Wetter:<br/>
 Added <code>Inline=true</code> for
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/227\">
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/227\">
 issue 227</a>.
 </li>
 </ul>
@@ -966,6 +966,12 @@ if <i>T=0</i> &deg;C and no water vapor is present.
 </html>", revisions="<html>
 <ul>
 <li>
+November 4, 2016, by Michael Wetter:<br/>
+Set default value for <code>dT.start</code> in base properties.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/575\">#575</a>.
+</li>
+<li>
 June 6, 2015, by Michael Wetter:<br/>
 Set <code>AbsolutePressure(start=p_default)</code> to avoid
 a translation error if
@@ -979,7 +985,7 @@ Modelica.Media.Interfaces.Types</a>
 sets a default value of <i>1E-5</i>.
 A similar change has been done for pressure.
 This fixes
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/266\">#266</a>.
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/266\">#266</a>.
 </li>
 <li>
 June 5, 2015, by Michael Wetter:<br/>
@@ -991,7 +997,7 @@ Modelica.Media.Interfaces.PartialMedium</a>.
 Note that the default is <code>preferredMediumState=false</code>
 and hence the same states are used as were used before.
 This is for
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/260\">#260</a>.
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/260\">#260</a>.
 </li>
 <li>
 May 11, 2015, by Michael Wetter:<br/>
@@ -1007,20 +1013,20 @@ causing the translation to stop with an error.
 <li>
 May 1, 2015, by Michael Wetter:<br/>
 Added <code>Inline=true</code> for
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/227\">
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/227\">
 issue 227</a>.
 </li>
 <li>
 March 20, 2015, by Michael Wetter:<br/>
 Added missing term <code>state.p/reference_p</code> in function
 <code>specificEntropy</code>.
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/193\">#193</a>.
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/193\">#193</a>.
 </li>
 <li>
 February 3, 2015, by Michael Wetter:<br/>
 Removed <code>stateSelect.prefer</code> for temperature.
 This is for
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/160\">#160</a>.
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/160\">#160</a>.
 </li>
 <li>
 July 24, 2014, by Michael Wetter:<br/>

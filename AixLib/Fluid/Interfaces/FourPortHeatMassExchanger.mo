@@ -63,6 +63,11 @@ model FourPortHeatMassExchanger
     "Nominal value of trace substances. (Set to typical order of magnitude.)"
    annotation (Dialog(tab="Initialization", group = "Medium 2", enable=Medium2.nC > 0));
 
+  Modelica.SIunits.HeatFlowRate Q1_flow = vol1.heatPort.Q_flow
+    "Heat flow rate into medium 1";
+  Modelica.SIunits.HeatFlowRate Q2_flow = vol2.heatPort.Q_flow
+    "Heat flow rate into medium 2";
+
   AixLib.Fluid.MixingVolumes.MixingVolume vol1(
     redeclare final package Medium = Medium1,
     nPorts = 2,
@@ -81,8 +86,7 @@ model FourPortHeatMassExchanger
     final C_start=C1_start,
     final C_nominal=C1_nominal,
     mSenFac=1) "Volume for fluid 1"
-                               annotation (Placement(transformation(extent={{-10,70},
-            {10,50}})));
+    annotation (Placement(transformation(extent={{-10,70}, {10,50}})));
 
   replaceable AixLib.Fluid.MixingVolumes.MixingVolume vol2
     constrainedby AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume(
@@ -108,14 +112,8 @@ model FourPortHeatMassExchanger
         extent={{-10,10},{10,-10}},
         rotation=180)));
 
-  Modelica.SIunits.HeatFlowRate Q1_flow = vol1.heatPort.Q_flow
-    "Heat flow rate into medium 1";
-  Modelica.SIunits.HeatFlowRate Q2_flow = vol2.heatPort.Q_flow
-    "Heat flow rate into medium 2";
-
-  AixLib.Fluid.FixedResistances.FixedResistanceDpM preDro1(
+  AixLib.Fluid.FixedResistances.PressureDrop preDro1(
     redeclare final package Medium = Medium1,
-    final use_dh=false,
     final m_flow_nominal=m1_flow_nominal,
     final deltaM=deltaM1,
     final allowFlowReversal=allowFlowReversal1,
@@ -123,14 +121,11 @@ model FourPortHeatMassExchanger
     final from_dp=from_dp1,
     final linearized=linearizeFlowResistance1,
     final homotopyInitialization=homotopyInitialization,
-    final dp_nominal=dp1_nominal,
-    final dh=1,
-    final ReC=4000) "Pressure drop model for fluid 1"
+    final dp_nominal=dp1_nominal) "Flow resistance of fluid 1"
     annotation (Placement(transformation(extent={{-80,70},{-60,90}})));
 
-  AixLib.Fluid.FixedResistances.FixedResistanceDpM preDro2(
+  AixLib.Fluid.FixedResistances.PressureDrop preDro2(
     redeclare final package Medium = Medium2,
-    final use_dh=false,
     final m_flow_nominal=m2_flow_nominal,
     final deltaM=deltaM2,
     final allowFlowReversal=allowFlowReversal2,
@@ -138,9 +133,7 @@ model FourPortHeatMassExchanger
     final from_dp=from_dp2,
     final linearized=linearizeFlowResistance2,
     final homotopyInitialization=homotopyInitialization,
-    final dp_nominal=dp2_nominal,
-    final dh=1,
-    final ReC=4000) "Pressure drop model for fluid 2"
+    final dp_nominal=dp2_nominal) "Flow resistance of fluid 2"
     annotation (Placement(transformation(extent={{80,-90},{60,-70}})));
 
 protected
@@ -233,9 +226,15 @@ Modelica.Fluid.Examples.HeatExchanger.BaseClasses.BasicHX</a>.
 </html>", revisions="<html>
 <ul>
 <li>
+December 1, 2016, by Michael Wetter:<br/>
+Updated model as <code>use_dh</code> is no longer a parameter in the pressure drop model.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/480\">#480</a>.
+</li>
+<li>
 April 11, 2016 by Michael Wetter:<br/>
 Corrected wrong hyperlink in documentation for
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/450\">issue 450</a>.
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/450\">issue 450</a>.
 </li>
 <li>
 January 26, 2016, by Michael Wetter:<br/>
@@ -245,14 +244,14 @@ Set <code>quantity</code> attributes.
 November 13, 2015, by Michael Wetter:<br/>
 Changed assignments of start values in <code>extends</code> statement.
 This is for issue
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/299\">#299</a>.
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/299\">#299</a>.
 </li>
 <li>
 June 2, 2015, by Filip Jorissen:<br/>
 Removed final modifier from <code>mSenFac</code> in
 <code>vol1</code> and <code>vol2</code>.
 This is for issue
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/258=\">#258</a>.
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/258=\">#258</a>.
 </li>
 <li>
 May 6, 2015, by Michael Wetter:<br/>

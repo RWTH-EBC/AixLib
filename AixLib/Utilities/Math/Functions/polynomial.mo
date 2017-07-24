@@ -1,5 +1,6 @@
 within AixLib.Utilities.Math.Functions;
 function polynomial "Polynomial function"
+  extends Modelica.Icons.Function;
  input Real x "Independent variable";
  input Real a[:] "Coefficients";
  output Real y "Result";
@@ -22,6 +23,12 @@ The polynomial has the form
 revisions="<html>
 <ul>
 <li>
+December 14, 2016, by Michael Wetter:<br/>
+Removed derivative annotation.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/602\">issue 602</a>.
+</li>
+<li>
 March 30, 2011, by Michael Wetter:<br/>
 Added <code>zeroDerivative</code> keyword.
 </li>
@@ -35,6 +42,5 @@ First implementation.
 </li>
 </ul>
 </html>"),
-smoothOrder=999,
-derivative(zeroDerivative=a)=AixLib.Utilities.Math.Functions.BaseClasses.der_polynomial);
+smoothOrder=999);
 end polynomial;

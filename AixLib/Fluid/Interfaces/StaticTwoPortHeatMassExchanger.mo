@@ -13,6 +13,7 @@ model StaticTwoPortHeatMassExchanger
     annotation(Evaluate=true, Dialog(tab="Advanced"));
 
   // Model inputs
+  // Q_flow is the sensible plus latent heat flow rate
   input Modelica.SIunits.HeatFlowRate Q_flow "Heat transferred into the medium";
   input Modelica.SIunits.MassFlowRate mWat_flow
     "Moisture mass flow rate added to the medium";
@@ -27,9 +28,9 @@ model StaticTwoPortHeatMassExchanger
     final m_flow_small=m_flow_small)
     "Control volume for steady-state energy and mass balance"
     annotation (Placement(transformation(extent={{15,-10}, {35,10}})));
-  AixLib.Fluid.FixedResistances.FixedResistanceDpM preDro(
+
+  AixLib.Fluid.FixedResistances.PressureDrop preDro(
     redeclare final package Medium = Medium,
-    final use_dh=false,
     final m_flow_nominal=m_flow_nominal,
     final deltaM=deltaM,
     final allowFlowReversal=allowFlowReversal,
@@ -37,7 +38,7 @@ model StaticTwoPortHeatMassExchanger
     final from_dp=from_dp,
     final linearized=linearizeFlowResistance,
     final homotopyInitialization=homotopyInitialization,
-    final dp_nominal=dp_nominal) "Pressure drop model"
+    final dp_nominal=dp_nominal) "Flow resistance"
     annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
 
   // Outputs that are needed in models that extend this model
@@ -106,7 +107,7 @@ that extend or instantiate this model.
 The following inputs need to be assigned:
 <ul>
 <li>
-<code>Q_flow</code>, which is the heat flow rate added to the medium.
+<code>Q_flow</code>, which is the sensible and latent heat flow rate added to the medium.
 </li>
 <li>
 <code>mWat_flow</code>, which is the moisture mass flow rate added to the medium.
@@ -148,6 +149,19 @@ are the results of an iterative solver.
 </html>", revisions="<html>
 <ul>
 <li>
+April 11, 2017, by Michael Wetter:<br/>
+Updated documentation to make clear that <code>Q_flow</code>
+includes latent heat flow rate.<br/>
+This is for issue
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/704\">Buildings #704</a>.
+</li>
+<li>
+December 1, 2016, by Michael Wetter:<br/>
+Updated model as <code>use_dh</code> is no longer a parameter in the pressure drop model.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/480\">#480</a>.
+</li>
+<li>
 January 22, 2016 by Michael Wetter:<br/>
 Removed assignment of <code>sensibleOnly</code> in <code>bal1</code> and <code>bal2</code>
 as this constant has been removed in
@@ -159,7 +173,7 @@ November 19, 2015, by Michael Wetter:<br/>
 Removed assignment of parameter
 <code>showDesignFlowDirection</code> in <code>extends</code> statement.
 This is for
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/349\">#349</a>.
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/349\">#349</a>.
 </li>
 <li>
 July 2, 2015 by Michael Wetter:<br/>
@@ -168,7 +182,7 @@ added default values for outlet quantities at <code>port_a</code>
 if <code>allowFlowReversal=false</code> and
 updated documentation.
 See
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/281\">
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/281\">
 issue 281</a> for a discussion.
 </li>
 <li>
@@ -176,7 +190,7 @@ July 1, 2015 by Filip Jorissen:<br/>
 Renamed <code>use_safeDivision</code> into
 <code>prescribedHeatFlowRate</code>.
 See
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/282\">
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/282\">
 issue 282</a> for a discussion.
 </li>
 <li>

@@ -34,7 +34,7 @@ model MixingVolumeInitialization "Test model for mixing volume initialization"
     annotation (Placement(transformation(extent={{20,20},{40,40}})));
 
   inner Modelica.Fluid.System system
-    annotation (Placement(transformation(extent={{-80,80},{-60,100}})));
+    annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
 equation
   connect(sou1.ports[1], pipe1.port_a) annotation (Line(
       points={{-40,20},{-20,20}},
@@ -51,7 +51,7 @@ equation
     annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
             -100},{180,100}}),      graphics),
 experiment(StopTime=0.001,
-           Tolerance=1e-6),
+           Tolerance=1e-06),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/MixingVolumeInitialization.mos"
         "Simulate and plot"),
     Documentation(info="<html>

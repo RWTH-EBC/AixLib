@@ -22,7 +22,7 @@ partial model FlowMachine_ZeroFlow
     p=101325,
     T=293.15,
     nPorts=4) annotation (Placement(transformation(extent={{-88,-46},{-68,-26}})));
-  AixLib.Fluid.FixedResistances.FixedResistanceDpM dpSta(
+  AixLib.Fluid.FixedResistances.PressureDrop dpSta(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     dp_nominal=dp_nominal/2) "Pressure drop"
@@ -39,19 +39,19 @@ partial model FlowMachine_ZeroFlow
       energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
     "Dynamic model of a flow machine"
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
-  AixLib.Fluid.FixedResistances.FixedResistanceDpM dpDyn(
+  AixLib.Fluid.FixedResistances.PressureDrop dpDyn(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     dp_nominal=dp_nominal/2) "Pressure drop"
     annotation (Placement(transformation(extent={{60,-10},{80,10}})));
   Modelica.Blocks.Math.Gain gain "Gain for input signal"
     annotation (Placement(transformation(extent={{-46,90},{-26,110}})));
-  AixLib.Fluid.FixedResistances.FixedResistanceDpM dpSta1(
+  AixLib.Fluid.FixedResistances.PressureDrop dpSta1(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     dp_nominal=dp_nominal/2) "Pressure drop"
     annotation (Placement(transformation(extent={{-20,70},{0,90}})));
-  AixLib.Fluid.FixedResistances.FixedResistanceDpM dpDyn1(
+  AixLib.Fluid.FixedResistances.PressureDrop dpDyn1(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     dp_nominal=dp_nominal/2) "Pressure drop"
@@ -102,7 +102,7 @@ This is the base class for examples that demonstrates the use of a flow machine 
 January 22, 2016, by Michael Wetter:<br/>
 Corrected type declaration of pressure difference.
 This is
-for <a href=\"https://github.com/iea-annex60/modelica-annex60/issues/404\">#404</a>.
+for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
 </li>
 <li>
 September 20, 2014, by Michael Wetter:<br/>

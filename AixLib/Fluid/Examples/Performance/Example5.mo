@@ -20,7 +20,7 @@ equation
           extent={{-62,24},{-18,-4}},
           lineColor={0,0,255},
           textString="See code")}),
-    experiment(StopTime=100000),
+    experiment(Tolerance=1e-6, StopTime=20),
     Documentation(revisions="<html>
 <ul>
 <li>
@@ -75,8 +75,7 @@ models for building energy simulation.<br/>
 Submitted: 11th Modelica Conference. Paris, France. Sep. 2015.
 </li>
 </ul>
-</html>
-"), __Dymola_Commands(file=
+</html>"), __Dymola_Commands(file=
           "Resources/Scripts/Dymola/Fluid/Examples/Performance/Example5.mos"
         "Simulate and plot"));
 end Example5;

@@ -75,7 +75,7 @@ protected
     parameter Boolean use_mWat_flow
       "Set to true to enable exchange of moisture";
     parameter Boolean allowFlowReversal=true
-      "= true to allow flow reversal, false restricts to design direction (port_a -> port_b)";
+      "= false to simplify equations, assuming, but not enforcing, no flow reversal";
   equation
     connect(conEqn.port_b, sin.ports[1])
       annotation (Line(points={{12,0},{62,0},{62,2}}, color={0,127,255}));
@@ -101,7 +101,7 @@ equation
   connect(mWat_flow.y, modAirNoRev.mWat_flow) annotation (Line(points={{-59,30},
           {-40,30},{-40,-56},{-10.8,-56}}, color={0,0,127}));
   annotation (
-  experiment(StopTime=3600),
+  experiment(Tolerance=1e-6, StopTime=3600),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Interfaces/Examples/StaticTwoPortConservationEquation.mos"
         "Simulate and plot"),
 Documentation(info="<html>

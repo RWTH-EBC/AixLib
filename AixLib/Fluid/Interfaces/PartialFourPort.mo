@@ -9,10 +9,10 @@ partial model PartialFourPort "Partial model with four ports"
       annotation (choicesAllMatching = true);
 
   parameter Boolean allowFlowReversal1 = true
-    "= true to allow flow reversal in medium 1, false restricts to design direction (port_a -> port_b)"
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal for medium 1"
     annotation(Dialog(tab="Assumptions"), Evaluate=true);
   parameter Boolean allowFlowReversal2 = true
-    "= true to allow flow reversal in medium 2, false restricts to design direction (port_a -> port_b)"
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal for medium 2"
     annotation(Dialog(tab="Assumptions"), Evaluate=true);
 
   Modelica.Fluid.Interfaces.FluidPort_a port_a1(
@@ -78,7 +78,7 @@ Removed parameters
 <code>h_outflow_a2_start</code> and
 <code>h_outflow_b2_start</code>.
 This is for issue
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/299\">#299</a>.
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/299\">#299</a>.
 </li>
 <li>
 October 30, 2015, by Matthis Thorade:<br/>

@@ -29,7 +29,7 @@ model Density "Test model for the density sensor"
     m_flow_nominal=10,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial) "Volume"
     annotation (Placement(transformation(extent={{-10,0},{10,20}})));
-  AixLib.Fluid.FixedResistances.FixedResistanceDpM dp(
+  AixLib.Fluid.FixedResistances.PressureDrop dp(
     redeclare package Medium = Medium,
     m_flow_nominal=10,
     dp_nominal=200) "Flow resistance"
@@ -62,7 +62,7 @@ equation
   connect(ramp.y, masFloRat.m_flow_in) annotation (Line(
       points={{-69,8},{-50,8}},
       color={0,0,127}));
-    annotation (experiment(StopTime=60),
+    annotation (experiment(Tolerance=1e-6, StopTime=60),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sensors/Examples/Density.mos"
         "Simulate and plot"),
     Documentation(info="<html>

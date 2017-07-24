@@ -14,9 +14,7 @@ model PowerInterface
 
   Modelica.Blocks.Interfaces.RealInput etaHyd(
     final quantity="Efficiency",
-    final unit="1",
-    min=0,
-    max=1) "Hydraulic efficiency"
+    final unit="1") "Hydraulic efficiency"
     annotation (Placement(transformation(extent={{-140,80},{-100,120}}),
         iconTransformation(extent={{-140,80},{-100,120}})));
 
@@ -119,16 +117,23 @@ AixLib.Fluid.Movers.BaseClasses.PartialFlowMachine</a>.
       revisions="<html>
 <ul>
 <li>
+December 2, 2016, by Michael Wetter:<br/>
+Removed <code>min</code> attribute as otherwise numerical noise can cause
+the assertion on the limit to fail.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/606\">#606</a>.
+</li>
+<li>
 March 15, 2016, by Michael Wetter:<br/>
 Replaced <code>spliceFunction</code> with <code>regStep</code>.
 This is for
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/300\">issue 300</a>.
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/300\">issue 300</a>.
 </li>
 <li>
 February 19, 2016, by Michael Wetter:<br/>
 First implementation during refactoring of mover models to make implementation clearer.
 This is for
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/417\">#417</a>.
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/417\">#417</a>.
 </li>
 </ul>
 </html>"),

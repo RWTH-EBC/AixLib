@@ -1,5 +1,5 @@
-TCPConstructor
-SocketSend
-SocketReceive
 SocketDestruct
+SocketReceive
+SocketSend
+TCPConstructor
 Internal

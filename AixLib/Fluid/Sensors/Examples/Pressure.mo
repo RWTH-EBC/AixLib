@@ -19,7 +19,7 @@ model Pressure "Test model for the pressure sensor"
      annotation (Placement(transformation(
           extent={{-52,-10},{-32,10}})));
 
-  AixLib.Fluid.FixedResistances.FixedResistanceDpM dp(
+  AixLib.Fluid.FixedResistances.PressureDrop dp(
     redeclare package Medium = Medium,
     m_flow_nominal=10,
     dp_nominal=200) "Flow resistance"
@@ -61,7 +61,7 @@ equation
   connect(senRelPre.port_b, dp.port_b) annotation (Line(
       points={{18,-40},{30,-40},{30,0},{18,0}},
       color={0,127,255}));
-    annotation (experiment(StopTime=1),
+    annotation (experiment(Tolerance=1e-6, StopTime=1),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sensors/Examples/Pressure.mos"
         "Simulate and plot"),
     Documentation(info="<html>

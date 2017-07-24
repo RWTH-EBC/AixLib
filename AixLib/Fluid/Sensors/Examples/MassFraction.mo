@@ -29,7 +29,7 @@ model MassFraction "Test model for the mass fraction sensor"
     m_flow_nominal=10,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial) "Volume"
     annotation (Placement(transformation(extent={{0,10},{20,30}})));
-  AixLib.Fluid.FixedResistances.FixedResistanceDpM dp(
+  AixLib.Fluid.FixedResistances.PressureDrop dp(
     redeclare package Medium = Medium,
     m_flow_nominal=10,
     dp_nominal=200) "Flow resistance"
@@ -54,7 +54,7 @@ equation
   connect(vol.ports[3], senMasFra2.port) annotation (Line(
       points={{12.6667,10},{30,10},{30,36}},
       color={0,127,255}));
-    annotation (experiment(StopTime=10),
+    annotation (experiment(Tolerance=1e-6, StopTime=10),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sensors/Examples/MassFraction.mos"
         "Simulate and plot"),
     Documentation(info="<html>

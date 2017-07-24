@@ -6,12 +6,12 @@ model FlowControlled_dp "Fan with zero mass flow rate and head as input"
     redeclare AixLib.Fluid.Movers.FlowControlled_dp floMacSta(
       redeclare package Medium = Medium,
       m_flow_nominal=m_flow_nominal,
-      filteredSpeed=false,
+      use_inputFilter=false,
       energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState),
     redeclare AixLib.Fluid.Movers.FlowControlled_dp floMacDyn(
       redeclare package Medium = Medium,
       m_flow_nominal=m_flow_nominal,
-      filteredSpeed=false,
+      use_inputFilter=false,
       energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial));
 
 equation
@@ -24,7 +24,7 @@ equation
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{160,
             160}})),
-experiment(StopTime=1.0),
+experiment(Tolerance=1e-06, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/Validation/FlowControlled_dp.mos"
         "Simulate and plot"),
     Documentation(info="<html>
@@ -41,14 +41,14 @@ This ensures that the actual speed is equal to the input signal.
 November 5, 2015, by Michael Wetter:<br/>
 Changed parameters of fan since the power is no longer a parameter.
 This is for
-<a href=\"modelica://https://github.com/lbl-srg/modelica-buildings/issues/457\">issue 457</a>.
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/457\">issue 457</a>.
 </li>
 <li>
 September 2, 2015, by Michael Wetter:<br/>
 Changed example so that the fans use different powers, one being computed
 based on efficiency, the other based on the specified power.
 This is for
-<a href=\"modelica://https://github.com/lbl-srg/modelica-buildings/issues/457\">issue 457</a>.
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/457\">issue 457</a>.
 </li>
 <li>
 February 14, 2012, by Michael Wetter:<br/>

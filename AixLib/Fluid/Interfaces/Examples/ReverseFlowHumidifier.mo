@@ -3,14 +3,14 @@ model ReverseFlowHumidifier
   "Model that tests the reverse flow for a humidifier"
   extends Modelica.Icons.Example;
 package Medium = AixLib.Media.Air;
-  AixLib.Utilities.Diagnostics.AssertEquality assTem(threShold=0.01)
-    "Assert to test if the outputs of the forward flow and reverse flow model are identical"
+  Modelica.Blocks.Math.Add cheTem(k2=-1)
+    "Check whether the outputs of the forward flow and reverse flow model are identical"
     annotation (Placement(transformation(extent={{80,0},{100,20}})));
-  AixLib.Utilities.Diagnostics.AssertEquality assEnt(threShold=0.5)
-    "Assert to test if the outputs of the forward flow and reverse flow model are identical"
+  Modelica.Blocks.Math.Add cheEnt(k2=-1)
+    "Check whether the outputs of the forward flow and reverse flow model are identical"
     annotation (Placement(transformation(extent={{80,-30},{100,-10}})));
-  AixLib.Utilities.Diagnostics.AssertEquality assMas(threShold=1E-5)
-    "Assert to test if the outputs of the forward flow and reverse flow model are identical"
+  Modelica.Blocks.Math.Add cheMas(k2=-1)
+    "Check whether the outputs of the forward flow and reverse flow model are identical"
     annotation (Placement(transformation(extent={{80,-60},{100,-40}})));
   AixLib.Fluid.MassExchangers.Humidifier_u humBac(
     redeclare package Medium = Medium,
@@ -18,8 +18,8 @@ package Medium = AixLib.Media.Air;
     m_flow(start=1),
     m_flow_nominal=1,
     mWat_flow_nominal=0.1,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    T=283.15) "Humidifier with backward flow"
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
+    "Humidifier with backward flow"
     annotation (Placement(transformation(extent={{-32,-16},{-52,4}})));
   AixLib.Fluid.MassExchangers.Humidifier_u humFor(
     redeclare package Medium = Medium,
@@ -27,8 +27,8 @@ package Medium = AixLib.Media.Air;
     m_flow(start=1),
     m_flow_nominal=1,
     mWat_flow_nominal=0.1,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    T=283.15) "Humidifier with forward flow"
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
+    "Humidifier with forward flow"
     annotation (Placement(transformation(extent={{-50,20},{-30,40}})));
   Modelica.Blocks.Sources.Constant u2(k=0.01) "Control input"
     annotation (Placement(transformation(extent={{-92,54},{-80,66}})));
@@ -69,14 +69,14 @@ package Medium = AixLib.Media.Air;
   Sensors.MassFraction senMas2(redeclare package Medium = Medium)
     "Mass fraction sensor"
     annotation (Placement(transformation(extent={{20,-60},{40,-40}})));
-  FixedResistances.FixedResistanceDpM res1(
+  FixedResistances.PressureDrop res1(
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     from_dp=true,
     linearized=false,
     dp_nominal=1000) "Fixed resistance"
     annotation (Placement(transformation(extent={{-10,20},{10,40}})));
-  FixedResistances.FixedResistanceDpM res2(
+  FixedResistances.PressureDrop res2(
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     from_dp=true,
@@ -133,22 +133,22 @@ equation
   connect(res2.port_b, sink1.ports[2]) annotation (Line(
       points={{10,-6},{16,-6},{16,26},{30,26}},
       color={0,127,255}));
-  connect(senTem1.T, assTem.u1) annotation (Line(
+  connect(senTem1.T,cheTem. u1) annotation (Line(
       points={{-13,80},{0,80},{0,60},{70,60},{70,16},{78,16}},
       color={0,0,127}));
-  connect(senEnt1.h_out, assEnt.u1) annotation (Line(
+  connect(senEnt1.h_out,cheEnt. u1) annotation (Line(
       points={{31,80},{40,80},{40,54},{66,54},{66,-14},{78,-14}},
       color={0,0,127}));
-  connect(senMas1.X, assMas.u1) annotation (Line(
+  connect(senMas1.X,cheMas. u1) annotation (Line(
       points={{71,80},{80,80},{80,64},{64,64},{64,-44},{78,-44}},
       color={0,0,127}));
-  connect(senTem2.T, assTem.u2) annotation (Line(
+  connect(senTem2.T,cheTem. u2) annotation (Line(
       points={{-43,-50},{-20,-50},{-20,-30},{50,-30},{50,4},{78,4}},
       color={0,0,127}));
-  connect(senEnt2.h_out, assEnt.u2) annotation (Line(
+  connect(senEnt2.h_out,cheEnt. u2) annotation (Line(
       points={{1,-50},{8,-50},{8,-32},{54,-32},{54,-26},{78,-26}},
       color={0,0,127}));
-  connect(senMas2.X, assMas.u2) annotation (Line(
+  connect(senMas2.X,cheMas. u2) annotation (Line(
       points={{41,-50},{60,-50},{60,-56},{78,-56}},
       color={0,0,127}));
   connect(humFor.port_a, source1.ports[1]) annotation (Line(
@@ -158,15 +158,27 @@ equation
       points={{-80,-6},{-52,-6}},
       color={0,127,255}));
   annotation (
-experiment(StopTime=1),
+experiment(Tolerance=1e-6, StopTime=1),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Interfaces/Examples/ReverseFlowHumidifier.mos"
         "Simulate and plot"),
     Documentation(info="<html>
 This model tests whether the results for a humidifer are
 identical for forward flow and reverse flow.
-If the results differ, then an assert is triggered.
 </html>", revisions="<html>
 <ul>
+<li>
+April 12, 2017, by Michael Wetter:<br/>
+Removed temperature connection that is no longer needed.<br/>
+This is for issue
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/704\">Buildings #704</a>.
+</li>
+<li>
+November 2, 2016, by Michael Wetter:<br/>
+Changed assertions to blocks that compute the difference,
+and added the difference to the regression results.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/564\">issue 564</a>.
+</li>
 <li>
 October 9, 2013, by Michael Wetter:<br/>
 Replaced

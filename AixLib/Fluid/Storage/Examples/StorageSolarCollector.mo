@@ -50,10 +50,12 @@ model StorageSolarCollector
     length=10,
     diameter=0.05)                        annotation(Placement(transformation(extent={{-40,-26},
             {-20,-6}})));
-  AixLib.Fluid.HeatExchangers.SolarThermal
-                              solarThermal(Collector = AixLib.DataBase.SolarThermal.FlatCollector(), A = 20,
+  AixLib.Fluid.Solar.Thermal.SolarThermal solarThermal(
+    Collector=AixLib.DataBase.SolarThermal.FlatCollector(),
+    A=20,
     redeclare package Medium = Medium,
-    m_flow_nominal=0.01)                                                                                     annotation(Placement(transformation(extent = {{24, -10}, {44, 10}})));
+    m_flow_nominal=0.01)
+    annotation (Placement(transformation(extent={{24,-10},{44,10}})));
   Modelica.Blocks.Sources.Pulse pulse(period = 3600,               width = 1, amplitude = 60,
     offset=101325)                                                                            annotation(Placement(transformation(extent={{-96,-18},
             {-76,2}})));

@@ -1,15 +1,6 @@
 within AixLib.Fluid.Movers.BaseClasses;
 package Characteristics "Functions for fan or pump characteristics"
 
-
-
-
-
-
-
-
-
-
   annotation (Documentation(info="<html>
 <p>
 This package implements performance curves for fans and pumps,
@@ -24,6 +15,15 @@ User's Guide</a> for information about these performance curves.
 </html>",
 revisions="<html>
 <ul>
+<li>
+September 8, 2016, by Michael Wetter:<br/>
+Deleted function <code>performanceCurve</code> as it is no longer needed. Instead, the function
+<a href=\"modelica://AixLib.Fluid.Movers.BaseClasses.Characteristics.pressure\">
+AixLib.Fluid.Movers.BaseClasses.Characteristics.pressure</a>
+is used for all speeds.<br/>
+This is
+for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/458\">#458</a>.
+</li>
 <li>
 September 29, 2011, by Michael Wetter:<br/>
 New implementation due to changes from polynomial to cubic hermite splines.

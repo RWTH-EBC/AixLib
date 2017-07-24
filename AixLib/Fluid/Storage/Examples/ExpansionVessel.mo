@@ -5,6 +5,7 @@ model ExpansionVessel "Test model for expansion vessel"
 // package Medium = Modelica.Media.Water.WaterIF97OnePhase_ph "Medium model";
  package Medium = AixLib.Media.Water "Medium model";
 
+
   AixLib.Fluid.Storage.ExpansionVessel expVes(
     redeclare package Medium = Medium, V_start=1) "Expansion vessel"
     annotation (Placement(transformation(extent={{60,-10},{80,10}})));
@@ -49,5 +50,5 @@ To see the effect of the expansion vessel, delete the connecting line between
 the volume and the expansion vessel and check how much more the pressure increases
 as the fluid is heated.
 </html>"),
-    experiment(StopTime=7200));
+    experiment(Tolerance=1e-6, StopTime=7200));
 end ExpansionVessel;

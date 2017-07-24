@@ -1,11 +1,12 @@
 within AixLib.ThermalZones.ReducedOrder.Examples;
-model SimpleRoomThreeElements "Illustrates the use of ThermalZoneThreeElements"
+model SimpleRoomThreeElements
+  "Illustrates the use of a thermal zone with three heat conduction elements"
   extends Modelica.Icons.Example;
 
   BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
-    filNam="modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
+    filNam="modelica://AixLib/Resources/WeatherData/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
     "Weather data reader"
     annotation (Placement(transformation(extent={{-98,52},{-78,72}})));
   BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[2](
@@ -67,13 +68,9 @@ model SimpleRoomThreeElements "Illustrates the use of ThermalZoneThreeElements"
     withLongwave=true,
     aExt=0.7,
     alphaWallOut=20,
-    alphaRadWall=5,
+    alphaRad=5,
     alphaWinOut=20,
-    alphaRadWin=5,
-    aWin=0.03,
-    eExt=0.9,
-    TGro=285.15,
-    eWin=0.9) "Computes equivalent air temperature"
+    TGro=285.15) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
   Modelica.Blocks.Math.Add solRad[2]
     "Sums up solar radiation of both directions"
@@ -221,15 +218,15 @@ equation
     thickness=0.5));
   connect(perRad.port, thermalZoneThreeElements.intGainsRad)
     annotation (
-    Line(points={{68,-32},{84,-32},{100,-32},{100,24},{92.2,24}},
+    Line(points={{68,-32},{84,-32},{100,-32},{100,24},{92,24}},
     color={191,0,0}));
   connect(theConWin.solid, thermalZoneThreeElements.window)
-    annotation (Line(points={{38,21},{40,21},{40,20},{43.8,20}}, color=
+    annotation (Line(points={{38,21},{40,21},{40,20},{44,20}},   color=
     {191,0,0}));
   connect(preTem1.port, theConWin.fluid)
     annotation (Line(points={{20,20},{28,20},{28,21}}, color={191,0,0}));
   connect(thermalZoneThreeElements.extWall, theConWall.solid)
-    annotation (Line(points={{43.8,12},{40,12},{40,1},{36,1}},
+    annotation (Line(points={{44,12},{40,12},{40,1},{36,1}},
     color={191,0,0}));
   connect(theConWall.fluid, preTem.port)
     annotation (Line(points={{26,1},{24,1},{24,0},{20,0}}, color={191,0,0}));
@@ -272,7 +269,7 @@ equation
   Solar radiation on tilted surface is calculated using models of
   AixLib. The thermal zone is a simple room defined in Guideline
   VDI 6007 Part 1 (VDI, 2012). All models, parameters and inputs
-  except sunblinds, seperate handling of heat transfer through
+  except sunblinds, separate handling of heat transfer through
   windows, an extra wall element for ground floor (with additional
   area) and solar radiation are similar to the ones defined for the
   guideline&apos;s test room. For solar radiation, the example
@@ -297,7 +294,7 @@ equation
   </li>
   </ul>
   </html>"),
-  experiment(StopTime=3.1536e+007, Interval=3600),
+  experiment(Tolerance=1e-6, StopTime=3.1536e+007, Interval=3600),
   __Dymola_Commands(file=
   "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/SimpleRoomThreeElements.mos"
         "Simulate and plot"));

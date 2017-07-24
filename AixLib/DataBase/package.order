@@ -1,6 +1,5 @@
 Boiler
-Buildings
-Fans
+CHP
 HeatPump
 Pipes
 Profiles
@@ -10,6 +9,7 @@ SolarElectric
 SolarThermal
 Storage
 Surfaces
+ThermalZones
 Walls
 Weather
 WindowsDoors

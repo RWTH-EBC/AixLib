@@ -74,7 +74,9 @@ model Case600
     h_heater=1e6,
     KR_heater=1000,
     l_cooler=-1e6,
-    KR_cooler=1000)
+    KR_cooler=1000,
+    recOrSep=false,
+    zoneParam=DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office())
     annotation (Placement(transformation(extent={{6,-34},{26,-14}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow Ground(Q_flow=0)
     "adiabatic boundary"
@@ -107,17 +109,17 @@ equation
   SolarMeter[6].p = Room.outerWall_South.solarRadWinTrans;
 
   //solar radiation
-  IncidentSolarRadiationN = SolarMeter[1].q_kwh;
-  IncidentSolarRadiationE = SolarMeter[2].q_kwh;
-  IncidentSolarRadiationS = SolarMeter[3].q_kwh;
-  IncidentSolarRadiationW = SolarMeter[4].q_kwh;
-  IncidentSolarRadiationHor = SolarMeter[5].q_kwh;
+  IncidentSolarRadiationN = SolarMeter[1].q_kWh;
+  IncidentSolarRadiationE = SolarMeter[2].q_kWh;
+  IncidentSolarRadiationS = SolarMeter[3].q_kWh;
+  IncidentSolarRadiationW = SolarMeter[4].q_kWh;
+  IncidentSolarRadiationHor = SolarMeter[5].q_kWh;
 
-  TransmittedSolarRadiation_room = SolarMeter[6].q_kwh / Room.Win_Area;
+  TransmittedSolarRadiation_room = SolarMeter[6].q_kWh / Room.Win_Area;
 
-  PowerLoad =idealHeaterCooler.coolingPower  +idealHeaterCooler.heatingPower;
-  integrator1.u =idealHeaterCooler.heatingPower /(1000*1000); //in MWh
-  integrator.u =idealHeaterCooler.coolingPower /(1000*1000); //in MWh
+  PowerLoad =(idealHeaterCooler.coolingPower  +idealHeaterCooler.heatingPower)/1000;
+  integrator1.u =idealHeaterCooler.heatingPower /(1000*1000*3600); //in MWh
+  integrator.u =idealHeaterCooler.coolingPower /(1000*1000*3600); //in MWh
 
   connect(Source_Weather.y[1], outsideTemp.T) annotation (Line(
       points={{-93,40},{-80,40},{-80,46.5},{-71.1,46.5}},

@@ -3,6 +3,7 @@ Bicubic
 Biquadratic
 BooleanReplicator
 IntegerReplicator
+IntegratorWithReset
 InverseXRegularized
 Max
 Min
@@ -11,7 +12,6 @@ Polynominal
 PowerLinearized
 QuadraticLinear
 RegNonZeroPower
-Round
 SmoothExponential
 SmoothHeaviside
 SmoothLimit

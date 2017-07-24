@@ -17,8 +17,8 @@ model FlowControlled_m_flow
           per.pressure
         else
           AixLib.Fluid.Movers.BaseClasses.Characteristics.flowParameters(
-            V_flow=  {i/(nOri-1)*2.0*m_flow_nominal/rho_default for i in 0:(nOri-1)},
-            dp=      {i/(nOri-1)*2.0*dp_nominal for i in (nOri-1):-1:0}),
+            V_flow = {i/(nOri-1)*2.0*m_flow_nominal/rho_default for i in 0:(nOri-1)},
+            dp =     {i/(nOri-1)*2.0*dp_nominal for i in (nOri-1):-1:0}),
       final use_powerCharacteristic = if per.havePressureCurve then per.use_powerCharacteristic else false)),
     preSou(m_flow_start=m_flow_start));
 
@@ -36,7 +36,9 @@ model FlowControlled_m_flow
     "Constant pump mass flow rate, used when inputType=Constant"
     annotation(Dialog(enable=inputType == AixLib.Fluid.Types.InputType.Constant));
 
-  parameter Modelica.SIunits.MassFlowRate[:] massFlowRates = m_flow_nominal*{0}
+  // By default, set massFlowRates proportional to (speed/speed_nominal)
+  parameter Modelica.SIunits.MassFlowRate[:] massFlowRates=
+    m_flow_nominal*{per.speeds[i]/per.speeds[end] for i in 1:size(per.speeds, 1)}
     "Vector of mass flow rate set points, used when inputType=Stage"
     annotation(Dialog(enable=inputType == AixLib.Fluid.Types.InputType.Stages));
 
@@ -59,7 +61,7 @@ model FlowControlled_m_flow
         iconTransformation(extent={{100,10},{120,30}})));
 
 equation
-  if filteredSpeed then
+  if use_inputFilter then
     connect(filter.y, m_flow_actual) annotation (Line(
       points={{34.7,88},{44,88},{44,20},{110,20}},
       color={0,0,127},
@@ -99,10 +101,22 @@ User's Guide</a> for more information.
       revisions="<html>
 <ul>
 <li>
+March 24, 2017, by Michael Wetter:<br/>
+Renamed <code>filteredSpeed</code> to <code>use_inputFilter</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/665\">#665</a>.
+</li>
+<li>
+November 10, 2016, by Michael Wetter:<br/>
+Changed default values for <code>massFlowRates</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/583\">#583</a>.
+</li>
+<li>
 March 2, 2016, by Filip Jorissen:<br/>
 Refactored model such that it directly extends <code>PartialFlowMachine</code>.
 This is for
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/417\">#417</a>.
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/417\">#417</a>.
 </li>
 <li>
 April 2, 2015, by Filip Jorissen:<br/>

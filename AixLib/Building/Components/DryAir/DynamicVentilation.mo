@@ -24,7 +24,8 @@ model DynamicVentilation
   Modelica.Blocks.Logical.Less less annotation(Placement(transformation(extent = {{-80, -60}, {-60, -40}})));
 equation
   connect(port_outside, Sensor_Toutside.port) annotation(Line(points = {{-96, -10}, {-96, -4}, {-90, -4}, {-90, 2}}, color = {191, 0, 0}));
-  connect(port_inside, pITemp.Therm1) annotation(Line(points = {{94, -10}, {94, 27}, {-18, 27}}, color = {191, 0, 0}));
+  connect(port_inside, pITemp.heatPort)
+    annotation (Line(points={{94,-10},{94,27},{-18,27}}, color={191,0,0}));
   connect(Sensor_Toutside.T, Higher_HeatingLimit.u) annotation(Line(points = {{-90, 22}, {-90, 30}, {-82, 30}}, color = {0, 0, 127}));
   connect(multiSum.y, pITemp.setPoint) annotation (Line(points={{-26.98,74},{-22,
           74},{-22,45},{-20,45}}, color={0,0,127}));
@@ -40,8 +41,8 @@ equation
   connect(less.y, Colder_and_HeatingLimit.u2) annotation(Line(points = {{-59, -50}, {-52, -50}, {-52, 29.4}, {-47.4, 29.4}}, color = {255, 0, 255}));
   connect(port_outside, varAirExchange.port_a) annotation(Line(points = {{-96, -10}, {-96, -8}, {36, -8}}, color = {191, 0, 0}));
   connect(varAirExchange.port_b, port_inside) annotation(Line(points = {{62, -8}, {94, -8}, {94, -10}}, color = {191, 0, 0}));
-  annotation (Icon(graphics={  Rectangle(extent=  {{-80, 80}, {80, -80}}, lineColor=  {0, 0, 0}, fillColor=  {211, 243, 255},
-            fillPattern=                                                                                                    FillPattern.Solid)}), Documentation(revisions = "<html>
+  annotation (Icon(graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 0}, fillColor = {211, 243, 255},
+            fillPattern =                                                                                                   FillPattern.Solid)}), Documentation(revisions = "<html>
  <ul>
  <li><i>Mai 19, 2014&nbsp;</i> by Ana Constantin:<br/>Uses components from MSL and respects the naming conventions</li>
    <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
@@ -50,8 +51,6 @@ equation
  </html>", info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>This model ventilates the solar gains away. </p>
- <h4><font color=\"#008000\">Level of Development</font></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><font color=\"#008000\">Concept</font></h4>
  <p>The model is used for simulations of heating periods. The outside temperature can be so high, that the heating system shuts down and the temperature in the room rises too high.</p>
  <p>When the outside temperature rises above the heating limit, the model is activated and tries to lower the temperature under the set temperature of the room plus 2K.</p>

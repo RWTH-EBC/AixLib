@@ -24,8 +24,8 @@ model SpeedControlled_y_linear
   AixLib.Fluid.Movers.SpeedControlled_y pumFixDp(
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-    per(pressure(V_flow=2/1000*{0, m_flow_nominal}, dp={2*dp_nominal, 0})),
-    filteredSpeed=false) "Pump with fixed pressure raise"
+    per(pressure(V_flow=2/1000*{0,m_flow_nominal}, dp={2*dp_nominal,0})),
+    use_inputFilter=false) "Pump with fixed pressure raise"
     annotation (Placement(transformation(extent={{40,80},{60,100}})));
 
   AixLib.Fluid.Sources.Boundary_pT sou1(
@@ -36,7 +36,7 @@ model SpeedControlled_y_linear
     nPorts=1) annotation (Placement(transformation(extent={{-10,-10},{10,10}},
           rotation=180,
         origin={128,90})));
-  AixLib.Fluid.FixedResistances.FixedResistanceDpM dp1(
+  AixLib.Fluid.FixedResistances.PressureDrop dp1(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     dp_nominal=0.01*dp_nominal) "Pressure drop"
@@ -49,8 +49,8 @@ model SpeedControlled_y_linear
   AixLib.Fluid.Movers.SpeedControlled_y pumFixM_flow(
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-    per(pressure(V_flow=2/1000*{0, m_flow_nominal}, dp={2*dp_nominal, 0})),
-    filteredSpeed=false) "Pump with fixed mass flow rate"
+    per(pressure(V_flow=2/1000*{0,m_flow_nominal}, dp={2*dp_nominal,0})),
+    use_inputFilter=false) "Pump with fixed mass flow rate"
     annotation (Placement(transformation(extent={{40,40},{60,60}})));
   AixLib.Fluid.Sources.Boundary_pT sou3(
     redeclare package Medium = Medium,
@@ -85,7 +85,7 @@ equation
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{160,
             160}})),
-experiment(StopTime=1.0),
+experiment(Tolerance=1e-06, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/Validation/SpeedControlled_y_linear.mos"
         "Simulate and plot"),
     Documentation(info="<html>
@@ -110,7 +110,7 @@ Removal of <code>dynamicBalance</code> as parameter for <code>massDynamics</code
 January 22, 2016, by Michael Wetter:<br/>
 Corrected type declaration of pressure difference.
 This is
-for <a href=\"https://github.com/iea-annex60/modelica-annex60/issues/404\">#404</a>.
+for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
 </li>
 <li>
 February 14, 2012, by Michael Wetter:<br/>

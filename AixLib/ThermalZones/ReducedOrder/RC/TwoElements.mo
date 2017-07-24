@@ -23,7 +23,7 @@ model TwoElements
     annotation(Dialog(group="Interior walls"),choices(checkBox = true));
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intWallIndoorSurface if
-    indoorPortIntWalls "Auxilliary port at indoor surface of interior walls"
+    indoorPortIntWalls "Auxiliary port at indoor surface of interior walls"
     annotation (Placement(transformation(extent={{-130,-190},{-110,-170}}),
     iconTransformation(extent={{-130,-190},{-110,-170}})));
   BaseClasses.InteriorWall intWallRC(
@@ -153,7 +153,7 @@ equation
   fillColor={230,230,230},
   fillPattern=FillPattern.Solid,
   pattern=LinePattern.None), Text(
-  extent={{-64,74},{60,-50}},
+  extent={{-60,60},{64,-64}},
   lineColor={0,0,0},
   textString="2")}));
 end TwoElements;

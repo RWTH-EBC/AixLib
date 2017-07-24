@@ -3,8 +3,9 @@ InverseXDerivativeCheck
 InverseXDerivative_2_Check
 InverseXRegularized
 IsMonotonic
-PolynomialDerivativeCheck
+Polynomial
 PowerLinearized
+QuinticHermite
 RegNonZeroPower
 RegNonZeroPowerDerivativeCheck
 RegNonZeroPowerDerivative_2_Check
