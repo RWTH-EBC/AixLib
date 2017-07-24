@@ -7,7 +7,7 @@ model FacadeVentilationUnit "Example showing the use of facade ventilation unit
   package Medium1 = AixLib.Media.Air;
   package Medium2 = AixLib.Media.Water;
 
-  AixLib.Airflow.FacadeVentilationUnit.FVUController FVUController
+  AixLib.Controls.AirHandling.FVUController          FVUController
     annotation (Placement(transformation(extent={{-46,-30},{-6,10}})));
   Modelica.Blocks.Sources.Constant roomTemperature(k=273.15 + 20)
     annotation (Placement(transformation(extent={{-94,48},{-74,68}})));
@@ -89,11 +89,14 @@ model FacadeVentilationUnit "Example showing the use of facade ventilation unit
     annotation (Placement(transformation(extent={{120,-54},{140,-34}})));
 equation
   connect(roomTemperature.y, FVUController.roomTemperature) annotation (Line(
-        points={{-73,58},{-54,58},{-54,8},{-46,8}}, color={0,0,127}));
+        points={{-73,58},{-54,58},{-54,3.84615},{-46,3.84615}},
+                                                    color={0,0,127}));
   connect(roomSetTemperature.y, FVUController.roomSetTemperature)
-    annotation (Line(points={{-73,-18},{-46,-18},{-46,-16}}, color={0,0,127}));
+    annotation (Line(points={{-73,-18},{-46,-18},{-46,-14.6154}},
+                                                             color={0,0,127}));
   connect(co2Concentration.y, FVUController.co2Concentration) annotation (Line(
-        points={{-73,-62},{-56,-62},{-56,-28},{-46,-28}}, color={0,0,127}));
+        points={{-73,-62},{-56,-62},{-56,-23.8462},{-46,-23.8462}},
+                                                          color={0,0,127}));
   connect(FVU.ExhaustAir, room_out.ports[1]) annotation (Line(
       points={{106.2,-52.8},{148,-52.8},{148,-66},{158,-66}},
       color={0,127,255},
@@ -117,23 +120,30 @@ equation
   connect(ambient_out.ports[1], FVU.FreshAir) annotation (Line(points={{26,-74},
           {26,-70},{42,-70},{42,-52.8},{70.2,-52.8}}, color={0,127,255}));
   connect(FVUController.coolingValveOpening, FVU.coolingValveOpening)
-    annotation (Line(points={{-6,8},{44,8},{107.2,8},{107.2,-36}}, color={0,0,
+    annotation (Line(points={{-6,3.84615},{44,3.84615},{107.2,3.84615},{107.2,
+          -36}},                                                   color={0,0,
           127}));
   connect(FVUController.heatingValveOpening, FVU.heatingValveOpening)
-    annotation (Line(points={{-6,2},{40,2},{100.2,2},{100.2,-36}}, color={0,0,
+    annotation (Line(points={{-6,-0.769231},{40,-0.769231},{100.2,-0.769231},{
+          100.2,-36}},                                             color={0,0,
           127}));
   connect(FVUController.fanExhaustAirPower, FVU.fanExhaustAirPower) annotation (
-     Line(points={{-6,-4},{26,-4},{71.3,-4},{71.3,-36.3}}, color={0,0,127}));
+     Line(points={{-6,-5.07692},{26,-5.07692},{71.3,-5.07692},{71.3,-36.3}},
+                                                           color={0,0,127}));
   connect(FVUController.fanSupplyAirPower, FVU.fanSupplyAirPower) annotation (
       Line(points={{-6,-10},{91.4,-10},{91.4,-36.4}}, color={0,0,127}));
   connect(FVUController.circulationdamperOpening, FVU.damperCircularAirOpening)
-    annotation (Line(points={{-6,-16},{86.3,-16},{86.3,-36.3}}, color={0,0,127}));
+    annotation (Line(points={{-6.25,-14.6154},{86.3,-14.6154},{86.3,-36.3}},
+                                                                color={0,0,127}));
   connect(FVUController.HRCDamperOpening, FVU.HRCDamperOpening) annotation (
-      Line(points={{-6,-22},{18,-22},{76.3,-22},{76.3,-36.3}}, color={0,0,127}));
+      Line(points={{-6,-19.2308},{18,-19.2308},{76.3,-19.2308},{76.3,-36.3}},
+                                                               color={0,0,127}));
   connect(FVUController.freshAirDamperOpening, FVU.damperFreshAirOpening)
-    annotation (Line(points={{-6,-28},{81,-28},{81,-36}}, color={0,0,127}));
+    annotation (Line(points={{-6,-23.8462},{81,-23.8462},{81,-36}},
+                                                          color={0,0,127}));
   connect(outdoorTemperature.y, FVUController.outdoorTemperature) annotation (
-      Line(points={{-73,24},{-62,24},{-62,-4},{-46,-4}}, color={0,0,127}));
+      Line(points={{-73,24},{-62,24},{-62,-5.38462},{-46,-5.38462}},
+                                                         color={0,0,127}));
   connect(outdoorTemperature.y, ambient_out.T_in) annotation (Line(points={{-73,
           24},{-62,24},{-62,-70},{4,-70}}, color={0,0,127}));
   connect(FVU.SupplyAir, supplyAirTemperature.port_a) annotation (Line(points={
