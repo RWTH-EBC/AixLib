@@ -271,9 +271,8 @@ equation
 <p>This model shows the usage of all three ExergyMeters.</p>
 </html>
 ",        revisions="<html>
-<ul>
-<li><i><span style=\"font-family: Arial,sans-serif;\">November 10, 
-2016&nbsp;</i> by Marc Baranski and Roozbeh Sangi:<br>Implemented.</span></li>
-</ul>
+ <ul>
+ <li>by Marc Baranski and Roozbeh Sangi:<br/>implemented</li>
+ </ul>
 </html>"));
 end ExergyMeters;

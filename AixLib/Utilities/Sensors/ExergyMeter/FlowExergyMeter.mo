@@ -134,10 +134,9 @@ and composition as input. The medium model is replaceable. The physical enthalpy
 are determined using the respective sensors from MSL. The sensor is ideal, i.e., it does not 
 influence the fluid.</p>
 </html>", revisions="<html>
-<ul>
-<li><i><span style=\"font-family: Arial,sans-serif;\">November 10, 
-2016&nbsp;</i> by Marc Baranski and Roozbeh Sangi:<br>Implemented.</span></li>
-</ul>
+ <ul>
+ <li>by Marc Baranski and Roozbeh Sangi:<br/>implemented</li>
+ </ul>
 </html>"),
     Icon(coordinateSystem(extent={{-100,-100},{120,100}})));
 end FlowExergyMeter;
