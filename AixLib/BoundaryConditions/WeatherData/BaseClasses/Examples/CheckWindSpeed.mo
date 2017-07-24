@@ -15,7 +15,7 @@ protected
     tableOnFile=true,
     tableName="tab1",
     fileName=Modelica.Utilities.Files.loadResource(
-       "modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"),
+       "modelica://AixLib/Resources/WeatherData/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"),
     columns=2:30,
     smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative)
     "Data reader"
@@ -49,7 +49,7 @@ First implementation.
 </li>
 </ul>
 </html>"),
-  experiment(StopTime=8640000),
+  experiment(Tolerance=1e-6, StartTime=0, StopTime=8640000),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/WeatherData/BaseClasses/Examples/CheckWindSpeed.mos"
         "Simulate and plot"));
 end CheckWindSpeed;

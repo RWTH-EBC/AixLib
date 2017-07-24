@@ -6,7 +6,7 @@ model SimpleRoomOneElement
   BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
-    filNam="modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
+    filNam="modelica://AixLib/Resources/WeatherData/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
     "Weather data reader"
     annotation (Placement(transformation(extent={{-98,52},{-78,72}})));
   BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[2](
@@ -239,7 +239,7 @@ equation
   Solar radiation on tilted surface is calculated using models of
   AixLib. The thermal zone is a simple room defined in Guideline
   VDI 6007 Part 1 (VDI, 2012). All models, parameters and inputs
-  except sunblinds, seperate handling of heat transfer through
+  except sunblinds, separate handling of heat transfer through
   windows, no wall element for internal walls and solar radiation
   are similar to the ones defined for the guideline&apos;s test
   room. For solar radiation, the example relies on the standard
@@ -264,7 +264,7 @@ equation
   </li>
   </ul>
   </html>"),
-  experiment(StopTime=3.1536e+007, Interval=3600),
+  experiment(Tolerance=1e-6, StopTime=3.1536e+007, Interval=3600),
   __Dymola_Commands(file=
   "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/SimpleRoomOneElement.mos"
         "Simulate and plot"));

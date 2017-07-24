@@ -10,7 +10,7 @@ model Ow2IwL1IwS1Gr1Uf1
         "WSchV_1995",                                                                                                    choice = 4
         "WSchV_1984",                                                                                                    radioButtons = true));
   parameter Integer TRY = 1
-    "Region according to TRY, influences the ground temperature"                         annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice=1 "TRY01",
+    "Region according to TRY, influences the ground temperature"                         annotation(Dialog(groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/2OW_1IWl_1IWs_1Gr_Pa.png", group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice=1 "TRY01",
                  choice = 2 "TRY02", choice = 3 "TRY03",  choice = 4 "TRY04", choice = 5 "TRY05", choice = 6 "TRY06", choice = 7 "TRY07", choice = 8 "TRY08",
         choice = 9 "TRY09", choice = 10 "TRY10", choice = 11 "TRY11", choice = 12 "TRY12", choice = 13 "TRY13", choice = 14 "TRY14", choice= 15 "TRY15",radioButtons = true));
   parameter Boolean withFloorHeating = false
@@ -167,7 +167,7 @@ equation
           {-25.6,-90},{-20,-90}},                                                                               color = {191, 0, 0}, pattern = LinePattern.Dash));
   connect(floor_FH.port_b, thermFloor) annotation(Line(points={{-25.6,-72.3},{
           -25.6,-63},{-19,-63}},                                                                            color = {191, 0, 0}, pattern = LinePattern.Dash));
-  annotation(__Dymola_Images(Parameters(source = "AixLib/Resources/Images/Building/HighOrder/2OW_1IWl_1IWs_1Gr_Pa.png")), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 80}, {80, 60}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
+  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 80}, {80, 60}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{0, 80}, {-50, 60}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255},
             fillPattern =                                                                                                   FillPattern.Solid, visible = withWindow2), Rectangle(extent = {{6, 64}, {-6, -64}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Solid, origin = {74, -4}, rotation = 360), Rectangle(extent = {{-60, -68}, {80, -80}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
@@ -190,8 +190,6 @@ equation
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for a room with 2&nbsp;outer&nbsp;walls,&nbsp;1&nbsp;inner&nbsp;wall&nbsp;load,&nbsp;1&nbsp;inner&nbsp;wall&nbsp;simple,&nbsp;1&nbsp;floor&nbsp;towards&nbsp;ground,&nbsp;1&nbsp;ceiling&nbsp;towards&nbsp;upper&nbsp;floor.</p>
- <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The following figure presents the room&apos;s layout:</p>
  <p><img src=\"modelica://AixLib/Resources/Images/Building/HighOrder/2OW_1IWl_1IWs_1Gr_Pa.png\"

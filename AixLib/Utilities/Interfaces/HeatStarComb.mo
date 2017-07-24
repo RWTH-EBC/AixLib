@@ -9,8 +9,6 @@ connector HeatStarComb "Combines therm connector and star connector."
  <p>
  This connector makes a single connection for a combination of Radiation and Convection possible.
  </p>
- <h4><font color=\"#008000\">Level of Development</font></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  </html>
  ", revisions = "<html>
  <ul>

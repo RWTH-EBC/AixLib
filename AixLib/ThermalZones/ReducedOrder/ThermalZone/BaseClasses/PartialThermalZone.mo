@@ -70,7 +70,7 @@ partial model PartialThermalZone "Partial model for thermal zone modelsl"
     annotation (Placement(transformation(extent={{94,-12},{114,8}}),
                               iconTransformation(extent={{90,-60},{110,-40}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a intGainsRad if ATot > 0
-    "Convective internal gains"
+    "Radiative internal gains"
     annotation (Placement(transformation(extent={{94,8},{114,28}}),
                             iconTransformation(extent={{90,-20},{110,0}})));
   RC.FourElements ROM(
@@ -126,7 +126,7 @@ protected
 equation
   connect(ROM.TAir, TAir) annotation (Line(points={{87,62},{98,62},{98,56},{110,
           56}}, color={0,0,127}));
-  connect(ROM.ports, ports) annotation (Line(points={{77,28.85},{77,-4},{48,-4},
+  connect(ROM.ports, ports) annotation (Line(points={{77,28.05},{77,-4},{48,-4},
           {48,-44},{0,-44},{0,-94}},            color={0,127,255}));
   connect(ROM.intGainsConv, intGainsConv) annotation (Line(points={{86,50},{92,50},
           {92,-2},{104,-2}},   color={191,0,0}));
@@ -134,7 +134,7 @@ equation
           {110,38}}, color={0,0,127}));
   connect(TRad, TRad)
     annotation (Line(points={{110,38},{110,38}}, color={0,0,127}));
-  connect(ROM.intGainsRad, intGainsRad) annotation (Line(points={{86.2,54},{94,54},
+  connect(ROM.intGainsRad, intGainsRad) annotation (Line(points={{86,54},{94,54},
           {94,18},{104,18}},
                            color={191,0,0}));
   annotation(Icon(coordinateSystem(preserveAspectRatio=false,  extent={{-100,-100},

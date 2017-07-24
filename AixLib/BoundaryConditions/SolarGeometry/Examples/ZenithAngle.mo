@@ -5,7 +5,7 @@ model ZenithAngle "Test model for zenith angle"
     "Zenith angle"
     annotation (Placement(transformation(extent={{20,0},{40,20}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
-    filNam="modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")
+    filNam="modelica://AixLib/Resources/WeatherData/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")
     annotation (Placement(transformation(extent={{-40,0},{-20,20}})));
 equation
   connect(weaDat.weaBus, zen.weaBus) annotation (Line(
@@ -31,7 +31,7 @@ First implementation.
 </li>
 </ul>
 </html>"),
-  experiment(StartTime=100000, StopTime=300000),
+  experiment(StartTime=100000, Tolerance=1e-6, StopTime=300000),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarGeometry/Examples/ZenithAngle.mos"
         "Simulate and plot"));
 end ZenithAngle;

@@ -11,7 +11,7 @@ model SkyBrightness "Test model for sky brightness"
     "Sky brightness"
     annotation (Placement(transformation(extent={{60,-16},{80,4}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=
-    "modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
+    "modelica://AixLib/Resources/WeatherData/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
     "Weather data"
     annotation (Placement(transformation(extent={{-80,-20},{-60,0}})));
   AixLib.BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
@@ -59,7 +59,7 @@ First implementation.
 </li>
 </ul>
 </html>"),
-experiment(StopTime=8640000),
+experiment(Tolerance=1e-6, StopTime=8640000),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarIrradiation/BaseClasses/Examples/SkyBrightness.mos"
         "Simulate and plot"));
 end SkyBrightness;

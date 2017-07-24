@@ -11,14 +11,14 @@ parameter Real varFlowTempNight[:,:]
     "Variable flow temperature during night time (reduced)";
 
 annotation (Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Base data defintion for boilers: Heating curves -  Tflow = f(Toutside) - for
 night and day modes.
 </p>
 </html>",
     revisions="<html>
-<p><ul>
+<ul>
 <li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
 conventions</li>
 <li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Merged with
@@ -26,6 +26,6 @@ AixLib</li>
 <li><i>July 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation
 appropriately</li>
 <li><i>Mai 23, 2011</i> by Ana Constantin:<br/>implemented</li>
-</ul></p>
+</ul>
 </html>"),  preferredView="info");
 end HeatingCurvesDayNightBaseDataDefinition;

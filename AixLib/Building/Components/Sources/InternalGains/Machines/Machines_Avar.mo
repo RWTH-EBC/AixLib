@@ -251,8 +251,6 @@ equation
     Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
 <p>Heat source with convective and radiative component. The load is determined by a power input signal. </p>
-<h4><span style=\"color: #008000\">Level of Development</span></h4>
-<p><img src=\"modelica://AixLib/Resources/Images/Stars/stars2.png\" alt=\"stars: 2 out of 5\"/></p>
 <h4><span style=\"color: #008000\">Concept</span></h4>
 <p>The input signal can take values from 0 to an arbitrary maximum value. </p>
 <p>The parameter A can be given by an extra input in the radiative converter.</p>

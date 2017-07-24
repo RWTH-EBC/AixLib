@@ -284,8 +284,6 @@ equation
 <h4><span style=\"color: #008000\">Overview</span></h4>
 <p>Heat source with convective and radiative component. The load is determined
 by a schedule and the type of activity. </p>
-<h4><span style=\"color: #008000\">Level of Development</span></h4>
-<p><img src=\"modelica://AixLib/Resources/Images/Stars/stars2.png\" alt=\"stars: 2 out of 5\"/></p>
 <h4><span style=\"color: #008000\">Concept</span></h4>
 <p>The schedule sets the times when the machines are used. They tend to be used
 more when people are present in the room, and go on stand-by when people are

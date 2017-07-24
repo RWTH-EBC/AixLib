@@ -62,7 +62,8 @@ annotation (defaultComponentName="senSpeEnt",
           textString="s"),
         Line(points={{0,100},{0,70}}, color={0,0,127}),
         Line(points={{-100,0},{-70,0}}, color={0,128,255}),
-        Line(points={{70,0},{100,0}}, color={0,128,255})}),
+        Line(points={{70,0},{100,0}}, color={0,128,255}),
+        Ellipse(extent={{-70,70},{70,-70}}, lineColor={255,0,0})}),
   Documentation(info="<html>
 <p>
 This model outputs the specific entropy of the passing fluid.
@@ -77,11 +78,11 @@ AixLib.Fluid.Sensors.UsersGuide</a> for an explanation.
 <ul>
 <li>
 January 18, 2016 by Filip Jorissen:<br/>
-Using parameter <code>tauInv</code> 
+Using parameter <code>tauInv</code>
 since this now exists in
 <a href=\"modelica://AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor\">AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor</a>.
 This is for
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/372\">#372</a>.
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/372\">#372</a>.
 </li>
 <li>
 August 31, 2013, by Michael Wetter:<br/>
