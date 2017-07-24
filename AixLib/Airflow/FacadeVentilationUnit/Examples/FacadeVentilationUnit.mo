@@ -121,8 +121,8 @@ equation
   connect(FVUController.heatingValveOpening, FVU.heatingValveOpening)
     annotation (Line(points={{-6,2},{40,2},{100.2,2},{100.2,-36}}, color={0,0,
           127}));
-  connect(FVUController.fanExhaustAirPower, FVU.fanExhaustAirPower) annotation
-    (Line(points={{-6,-4},{26,-4},{71.3,-4},{71.3,-36.3}}, color={0,0,127}));
+  connect(FVUController.fanExhaustAirPower, FVU.fanExhaustAirPower) annotation (
+     Line(points={{-6,-4},{26,-4},{71.3,-4},{71.3,-36.3}}, color={0,0,127}));
   connect(FVUController.fanSupplyAirPower, FVU.fanSupplyAirPower) annotation (
       Line(points={{-6,-10},{91.4,-10},{91.4,-36.4}}, color={0,0,127}));
   connect(FVUController.circulationdamperOpening, FVU.damperCircularAirOpening)
@@ -144,5 +144,12 @@ equation
             100}})),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             200,100}})),
-    experiment(StopTime=10000));
+    experiment(StopTime=10000),
+    Documentation(revisions="<html>
+<ul>
+  <li><i>Septmeber, 2014&nbsp;</i>
+    by by Roozbeh Sangi and Marc Baranski:<br/>
+    Model implemented</li>
+</ul>
+</html>"));
 end FacadeVentilationUnit;

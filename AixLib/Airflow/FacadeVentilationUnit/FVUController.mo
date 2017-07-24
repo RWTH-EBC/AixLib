@@ -161,8 +161,8 @@ equation
     annotation (Line(points={{-51.4,-96},{-42,-96}}, color={0,0,127}));
   connect(add.y, coldRecoveryPossible.u) annotation (Line(points={{-49.4,-46},{
           -48,-46},{-48,-66},{-42,-66}}, color={0,0,127}));
-  connect(setDeviationFreeCooling.y, freeCoolingPossible.reference) annotation
-    (Line(points={{-47.4,-24},{-46,-24},{-42,-24}}, color={0,0,127}));
+  connect(setDeviationFreeCooling.y, freeCoolingPossible.reference) annotation (
+     Line(points={{-47.4,-24},{-46,-24},{-42,-24}}, color={0,0,127}));
   connect(setDeviationRecovery.y, coldRecoveryPossible.reference) annotation (
       Line(points={{-55.4,-72},{-52,-72},{-52,-54},{-42,-54}}, color={0,0,127}));
   connect(setDeviationRecovery.y, heatRecoveryPossible.reference) annotation (
@@ -266,8 +266,8 @@ equation
           100,43.2},{103.4,43.2}}, color={255,0,255}));
   connect(roomTemperature, roomToBeHeated.u) annotation (Line(points={{-100,90},
           {-74,90},{-74,54},{-62,54}}, color={0,0,127}));
-  connect(roomSetTemperature, roomToBeHeated.reference) annotation (Line(points
-        ={{-100,-30},{-70,-30},{-70,66},{-62,66}}, color={0,0,127}));
+  connect(roomSetTemperature, roomToBeHeated.reference) annotation (Line(points=
+         {{-100,-30},{-70,-30},{-70,66},{-62,66}}, color={0,0,127}));
   connect(roomTemperature, roomToBeCooled.reference) annotation (Line(points={{
           -100,90},{-74,90},{-74,96},{-62,96}}, color={0,0,127}));
   connect(switch4.y, PexaLargerPsupa.u1) annotation (Line(points={{126.6,0},{
@@ -329,7 +329,9 @@ equation
             220,100}})),
     Documentation(revisions="<html>
 <ul>
-<li><i><span style=\"font-family: Arial,sans-serif;\">November 10, 2016&nbsp;</span></i> by Roozbeh Sangi and Marc Baranski:<br>Implemented.</li>
+  <li><i>Septmeber, 2014&nbsp;</i>
+    by by Roozbeh Sangi and Marc Baranski:<br/>
+    Model implemented</li>
 </ul>
 </html>", info="<html>
 <p><span style=\"font-family: Arial,sans-serif;\">This model is the controller of the facade ventilation unit.</span></p>

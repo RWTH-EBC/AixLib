@@ -109,8 +109,9 @@ equation
 <p>Thsi model sets the mass flow rate of the air flow through a facade ventilation unit based on the input value, which is the power share set point of the fan.</p>
 </html>", revisions="<html>
 <ul>
-<li><i><span style=\"font-family: Arial,sans-serif;\">November 10, 2016&nbsp;</span></i> by Roozbeh Sangi and Marc Baranski:<br>Input changed from revolving speed to power.</li>
-<li><i>August 20, 2008&nbsp;</i> by Peter Matthes:<br>Implemented.</li>
+  <li><i>Septmeber, 2014&nbsp;</i>
+    by by Roozbeh Sangi and Marc Baranski:<br/>
+    Model implemented</li>
 </ul>
 </html>"));
 end SetPower;

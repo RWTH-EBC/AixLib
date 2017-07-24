@@ -88,16 +88,16 @@ public
         extent={{-16,-16},{16,16}},
         rotation=270,
         origin={54,96})));
-  Modelica.Fluid.Interfaces.FluidPort_b Heater_Return(redeclare package Medium
-      = Water)
+  Modelica.Fluid.Interfaces.FluidPort_b Heater_Return(redeclare package Medium =
+        Water)
     "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{82,90},{102,110}})));
   Modelica.Fluid.Interfaces.FluidPort_a Heater_Flow(redeclare package Medium =
         Water)
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{112,90},{132,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Cooler_Return(redeclare package Medium
-      = Water)
+  Modelica.Fluid.Interfaces.FluidPort_b Cooler_Return(redeclare package Medium =
+        Water)
     "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{152,90},{172,110}})));
   Modelica.Fluid.Interfaces.FluidPort_a Cooler_Flow(redeclare package Medium =
@@ -154,7 +154,7 @@ public
     annotation (Placement(transformation(extent={{70,42},{86,54}})));
   inner Modelica.Fluid.System system
     annotation (Placement(transformation(extent={{180,-100},{200,-80}})));
-  AixLib.Fluid.FixedResistances.FixedResistanceDpM res(
+  Fluid.FixedResistances.PressureDrop              res(
     m_flow_nominal=FVUParam.m2_flow_nominal_heater,
     dp_nominal=100,
     redeclare package Medium = Air) annotation (Placement(transformation(
@@ -232,12 +232,12 @@ public
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={18,14})));
-  AixLib.Fluid.FixedResistances.FixedResistanceDpM res1(
+  Fluid.FixedResistances.PressureDrop              res1(
     m_flow_nominal=FVUParam.m2_flow_nominal_heater,
     dp_nominal=100,
     redeclare package Medium = Air) annotation (Placement(transformation(
         extent={{-5,-5},{5,5}},
-        rotation=180,
+        rotation=0,
         origin={-61,-68})));
   Modelica.Blocks.Interfaces.RealInput damperFreshAirOpening
     "Actuator position (0: closed, 1: open)" annotation (Placement(
@@ -348,18 +348,14 @@ equation
           {-6,-26},{-6,24},{21,24}}, color={0,127,255}));
   connect(damperBypass.port_b, volume.ports[2])
     annotation (Line(points={{-18,36},{19,36},{19,24}}, color={0,127,255}));
-  connect(damperCirculationAir.port_b, volume.ports[3]) annotation (Line(points
-        ={{30,-6},{30,-6},{30,24},{17,24}}, color={0,127,255}));
+  connect(damperCirculationAir.port_b, volume.ports[3]) annotation (Line(points=
+         {{30,-6},{30,-6},{30,24},{17,24}}, color={0,127,255}));
   connect(fanSupplyAir.port_a, volume.ports[4])
     annotation (Line(points={{52,26},{15,26},{15,24}}, color={0,127,255}));
   connect(T_AfterHeatRecovery.port, recuperator.port_b1) annotation (Line(
         points={{-20,-10},{-20,-26},{-24,-26}}, color={0,127,255}));
   connect(heater.port_b2, cooler.port_a2)
     annotation (Line(points={{116,26},{140,26},{162,26}}, color={0,127,255}));
-  connect(damperHeatRecovery.port_b, res1.port_a)
-    annotation (Line(points={{-73,-68},{-56,-68}}, color={0,127,255}));
-  connect(res1.port_b, recuperator.port_a1) annotation (Line(points={{-66,-68},
-          {-50,-68},{-50,-26},{-44,-26}}, color={0,127,255}));
   connect(heater.port_a1, heatingValve.port_a)
     annotation (Line(points={{116,38},{122,38},{122,51}}, color={0,127,255}));
   connect(heatingValve.port_b, Heater_Flow) annotation (Line(points={{122,69},{
@@ -374,9 +370,9 @@ equation
           100},{94,38},{96,38}}, color={0,127,255}));
   connect(HRCDamperOpening, add1.u1)
     annotation (Line(points={{-100,100},{-100,55},{-66,55}}, color={0,0,127}));
-  connect(fanExhaustAirPower, fanExhaustAir.powerShare) annotation (Line(points
-        ={{-150,100},{-150,100},{-150,70},{-150,64},{-118,64},{-118,36}}, color
-        ={0,0,127}));
+  connect(fanExhaustAirPower, fanExhaustAir.powerShare) annotation (Line(points=
+         {{-150,100},{-150,100},{-150,70},{-150,64},{-118,64},{-118,36}}, color=
+         {0,0,127}));
   connect(damperFreshAirOpening, damperFreshAir.y) annotation (Line(points={{-50,
           100},{-50,100},{-50,76},{-50,68},{-104,68},{-104,-32},{-112,-32},{-112,
           -57.2}}, color={0,0,127}));
@@ -392,6 +388,10 @@ equation
         points={{0,100},{0,100},{0,18},{0,-16},{18,-16}}, color={0,0,127}));
   connect(ExhaustAir, damperCirculationAir.port_a) annotation (Line(points={{
           202,-68},{114,-68},{30,-68},{30,-26}}, color={0,127,255}));
+  connect(damperHeatRecovery.port_b, res1.port_a) annotation (Line(points={{-73,
+          -68},{-69.5,-68},{-66,-68}}, color={0,127,255}));
+  connect(res1.port_b, recuperator.port_a1) annotation (Line(points={{-56,-68},
+          {-50,-68},{-50,-26},{-44,-26}}, color={0,127,255}));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-160,-100},{
             200,100}})),
@@ -422,7 +422,9 @@ equation
 <p>Baranski, M., Sangi, R., F&uuml;tterer, J., M&uuml;ller, D. (2016). An Algorithm for Stepwise Exergy-based Model Predictive Control of Building HVAC Supply Chains. <i>29th international conference on Efficiency, Cost, Optimisation, Simulation and Environmental Impact of Energy Systems</i>. </p>
 </html>", revisions="<html>
 <ul>
-<li><i><span style=\"font-family: Arial,sans-serif;\">November 10, 2016&nbsp;</span></i> by Roozbeh Sangi and Marc Baranski:<br>Implemented.</li>
+  <li><i>Septmeber, 2014&nbsp;</i>
+    by by Roozbeh Sangi and Marc Baranski:<br/>
+    Model implemented</li>
 </ul>
 </html>"));
 end FacadeVentilationUnit;
