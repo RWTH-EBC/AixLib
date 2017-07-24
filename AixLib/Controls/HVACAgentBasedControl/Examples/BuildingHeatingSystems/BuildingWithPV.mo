@@ -1,4 +1,4 @@
-within AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems;
+ï»¿within AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems;
 model BuildingWithPV
   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Water;
@@ -383,8 +383,8 @@ equation
     Documentation(revisions="<html>
 <p>
 <ul>
-<li>November 2016, by Felix Bünning: Updated to use AixLib 0.3.2, included in HVACAgentBasedControl library</li>
-<li>February 2016, by Felix Bünning: Developed and implemented</li>
+<li>November 2016, by Felix BÃ¼nning: Updated to use AixLib 0.3.2, included in HVACAgentBasedControl library</li>
+<li>February 2016, by Felix BÃ¼nning: Developed and implemented</li>
 </ul>
 </p>
 </html>", info="<html>

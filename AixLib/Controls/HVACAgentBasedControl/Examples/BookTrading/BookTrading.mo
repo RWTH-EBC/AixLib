@@ -1,4 +1,4 @@
-within AixLib.Controls.HVACAgentBasedControl.Examples.BookTrading;
+﻿within AixLib.Controls.HVACAgentBasedControl.Examples.BookTrading;
 model BookTrading
     extends Modelica.Icons.Example;
 
@@ -84,7 +84,7 @@ model BookTrading
       revisions="<html>
 <p>
 <ul>
-<li>October 2015, by Felix B�nning: Developed and implemented</li>
+<li>October 2015, by Felix Bünning: Developed and implemented</li>
 </ul>
 </p>
 </html>"),experiment(StopTime=400, Tolerance=1e-012),

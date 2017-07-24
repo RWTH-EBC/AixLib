@@ -1,4 +1,4 @@
-within AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems;
+﻿within AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems;
 model BuildingHeating
   extends Modelica.Icons.Example;
   parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();
@@ -406,7 +406,7 @@ a heat-pump and a heating rod for example.</p>
 </html>", revisions="<html>
 <p>
 <ul>
-<li>November 2016, by Felix B�nning: Developed and implemented</li>
+<li>November 2016, by Felix Bünning: Developed and implemented</li>
 </ul>
 </p>
 </html>"),

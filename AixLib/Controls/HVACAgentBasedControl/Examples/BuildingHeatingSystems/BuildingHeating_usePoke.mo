@@ -1,4 +1,4 @@
-within AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems;
+﻿within AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems;
 model BuildingHeating_usePoke
   extends BuildingHeating(
     roomAgent(usePoke=true),
@@ -48,7 +48,7 @@ communication method has better performance.</p>
 </html>", revisions="<html>
 <p>
 <ul>
-<li>November 2016, by Felix B�nning: Developed and implemented</li>
+<li>November 2016, by Felix Bünning: Developed and implemented</li>
 </ul>
 </p>
 </html>"),

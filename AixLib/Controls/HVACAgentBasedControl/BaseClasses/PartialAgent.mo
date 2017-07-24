@@ -1,4 +1,4 @@
-within AixLib.Controls.HVACAgentBasedControl.BaseClasses;
+ï»¿within AixLib.Controls.HVACAgentBasedControl.BaseClasses;
 partial model PartialAgent
   parameter Integer name "Name of the agent (five-digit number, eg. 10001)";
   parameter Boolean usePoke=false
@@ -149,9 +149,9 @@ equation
     Documentation(revisions="<html>
 <p>
 <ul>
-<li>December 2016, by Felix Bünning: Changed some variables to Integer type in order to avoid warnings caused by using the \"==\" operator</li>
-<li>November 2016, by Felix Bünning: Added feature to use internal inbox refresh (better performance), updated Info window</li>
-<li>October 2015, by Felix Bünning: Developed and implemented</li>
+<li>December 2016, by Felix BÃ¼nning: Changed some variables to Integer type in order to avoid warnings caused by using the \"==\" operator</li>
+<li>November 2016, by Felix BÃ¼nning: Added feature to use internal inbox refresh (better performance), updated Info window</li>
+<li>October 2015, by Felix BÃ¼nning: Developed and implemented</li>
 </ul>
 </p>
 </html>",
