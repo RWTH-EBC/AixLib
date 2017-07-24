@@ -5,7 +5,7 @@ model AirTemperatureEnthalpyInversion
   extends AixLib.Media.Examples.BaseClasses.TestTemperatureEnthalpyInversion(
     redeclare package Medium = AixLib.Media.Air);
   annotation (
-experiment(StopTime=1.0),
+experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Media/Examples/AirTemperatureEnthalpyInversion.mos"
         "Simulate and plot"),
     Documentation(info="<html>

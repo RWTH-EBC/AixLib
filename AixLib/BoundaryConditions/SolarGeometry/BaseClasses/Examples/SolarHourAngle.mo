@@ -5,7 +5,7 @@ model SolarHourAngle "Test model for solar hour angle"
     solHouAng "Solar hour Angle"
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
   WeatherData.ReaderTMY3 weaDat(
-    filNam="modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")
+    filNam="modelica://AixLib/Resources/WeatherData/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")
     "Weather data"
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
   WeatherData.Bus weaBus "Weather bus"
@@ -27,7 +27,7 @@ equation
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  annotation (experiment(StopTime=86400),
+  annotation (experiment(Tolerance=1e-6, StopTime=86400),
 Documentation(info="<html>
 <p>
 This example computes the solar hour angle,

@@ -30,7 +30,8 @@ record Generic_New_2000l "Pseudo storage with 2000 l (standing)"
 <h4><font color=\"#008000\">Overview</font></h4>
 <p>Buffer Storage: Generic 2000 l</p>
 <h4><font color=\"#008000\">References</font></h4>
-<p>Record is used with <a
-href=\"HVAC.Components.BufferStorage.BufferStorageHeatingcoils\">HVAC.Components.BufferStorage.BufferStorageHeatingcoils</a></p>
+<p>Base data definition for record used with <a
+href=\"AixLib.Fluid.Storage.Storage\">AixLib.Fluid.Storage.Storage</a> and <a
+href=\"AixLib.Fluid.Storage.BufferStorage\">AixLib.Fluid.Storage.BufferStorage</a> </p>
 </html>"));
 end Generic_New_2000l;

@@ -92,7 +92,7 @@ shorten the heating up period </li>
 </ul>
 </html>",
 revisions="<html>
-<p><ul>
+<ul>
 <li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
 conventions</li>
 <li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>Merged with
@@ -100,6 +100,6 @@ AixLib</li>
 <li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation
 appropriately</li>
 <li><i>October 12, 2011</i> by Ana Constantin:<br/>Implemented</li>
-</ul></p>
+</ul>
 </html>"));
 end PartialExternalControl;

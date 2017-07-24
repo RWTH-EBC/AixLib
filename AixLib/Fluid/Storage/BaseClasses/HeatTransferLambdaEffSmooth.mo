@@ -8,7 +8,7 @@ protected
   parameter Real kappa=0.41 "Karman constant";
   parameter Modelica.SIunits.Length height=data.hTank/n
     "Height of fluid layers";
-  Real beta=350e-6 "Thermal expansion coefficient in 1/K";
+  parameter Real beta=350e-6 "Thermal expansion coefficient in 1/K";
   parameter Modelica.SIunits.Area A=Modelica.Constants.pi/4*data.dTank^2
     "Area of heat transfer between layers";
    parameter Modelica.SIunits.Density rho=1000

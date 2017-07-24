@@ -7,7 +7,7 @@ model RelativeAirMass "Test model for relative air mass"
         0.34906585039887)
     annotation (Placement(transformation(extent={{-20,0},{0,20}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=
-        "modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
+        "modelica://AixLib/Resources/WeatherData/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
     annotation (Placement(transformation(extent={{-60,0},{-40,20}})));
 equation
   connect(zen.y, relAirMas.zen) annotation (Line(
@@ -30,7 +30,7 @@ First implementation.
 </li>
 </ul>
 </html>"),
-  experiment(StopTime=864000),
+  experiment(Tolerance=1e-6, StopTime=864000),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarIrradiation/BaseClasses/Examples/RelativeAirMass.mos"
         "Simulate and plot"));
 end RelativeAirMass;

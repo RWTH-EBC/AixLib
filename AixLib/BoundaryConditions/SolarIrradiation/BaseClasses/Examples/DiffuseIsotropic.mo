@@ -6,7 +6,7 @@ model DiffuseIsotropic
     HDifTilIso(til=1.5707963267949)
     annotation (Placement(transformation(extent={{40,0},{60,20}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=
-        "modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
+        "modelica://AixLib/Resources/WeatherData/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
     annotation (Placement(transformation(extent={{-60,0},{-40,20}})));
   AixLib.BoundaryConditions.WeatherData.Bus weaBus
     annotation (Placement(transformation(extent={{-11,-1},{9,21}})));
@@ -45,7 +45,7 @@ First implementation.
 </li>
 </ul>
 </html>"),
-  experiment(StopTime=8640000),
+  experiment(Tolerance=1e-6, StartTime=0, StopTime=8640000),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarIrradiation/BaseClasses/Examples/DiffuseIsotropic.mos"
         "Simulate and plot"));
 end DiffuseIsotropic;
