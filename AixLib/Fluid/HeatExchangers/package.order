@@ -1,6 +1,8 @@
 ConstantEffectiveness
-HeaterCooler_T
 HeaterCooler_u
+Heater_T
+PrescribedOutlet
+SensibleCooler_T
 ActiveBeams
 Radiators
 Examples
