@@ -100,9 +100,9 @@ model FVUController "Rule-based controller of a facade ventilation unit"
   Modelica.Blocks.Logical.Greater PexaLargerPsupa
     annotation (Placement(transformation(extent={{138,14},{150,28}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=if
-        fVUControlBus.fanExhaustAirPower > fVUControlBus.fanSupplyAirPower + 0.1
-         or fVUControlBus.fanExhaustAirPower < fVUControlBus.fanSupplyAirPower -
-        0.1 then false else true)
+        fVUControlBus.fanExhaustAirPower > fVUControlBus.fanSupplyAirPower +
+        0.001 or fVUControlBus.fanExhaustAirPower < fVUControlBus.fanSupplyAirPower
+         - 0.001 then false else true)
     annotation (Placement(transformation(extent={{120,-40},{140,-20}})));
   Modelica.Blocks.Logical.Switch switch6
     annotation (Placement(transformation(extent={{160,-36},{172,-24}})));
@@ -114,7 +114,7 @@ model FVUController "Rule-based controller of a facade ventilation unit"
         extent={{-6,-6},{6,6}},
         rotation=180,
         origin={164,52})));
-  Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(threshold=5)
+  Modelica.Blocks.Logical.GreaterThreshold greaterThreshold(threshold=0.05)
     annotation (Placement(transformation(extent={{40,-56},{52,-44}})));
   Modelica.Blocks.Logical.Switch switch7
     annotation (Placement(transformation(extent={{64,-56},{76,-44}})));

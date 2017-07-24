@@ -20,7 +20,7 @@ public
     noUnits=fVUParam.noUnits,
     m_flow_nominal=fVUParam.m2_flow_nominal_heater,
     T_start=T_start,
-    p_start=fVUParam.p_default + exhaustAirPressureDrop.dp_nominal)
+    p_start=fVUParam.dp2_nominal_heater)
     "The fan on the exhaust air side" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
@@ -29,8 +29,8 @@ public
     redeclare package Medium = Air,
     noUnits=fVUParam.noUnits,
     m_flow_nominal=fVUParam.m2_flow_nominal_heater,
-    p_start=fVUParam.p_default + fVUParam.dp2_nominal_heater +
-    fVUParam.dp2_nominal_cooler)
+    p_start=5*fVUParam.dp2_nominal_heater,
+    dp_nominal=5*fVUParam.dp2_nominal_heater)
     "The fan on the supply air side"
     annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
@@ -116,19 +116,11 @@ public
     annotation (Placement(transformation(extent={{32,42},{48,54}})));
   inner Modelica.Fluid.System system
     annotation (Placement(transformation(extent={{180,-100},{200,-80}})));
-  Fluid.FixedResistances.PressureDrop exhaustAirPressureDrop(
-    m_flow_nominal=fVUParam.m2_flow_nominal_heater,
-    dp_nominal=100,
-    redeclare package Medium = Air) "Pressure drop on the exhaust air side"
-    annotation (Placement(transformation(
-        extent={{-5,-5},{5,5}},
-        rotation=180,
-        origin={-141,26})));
   AixLib.Fluid.Actuators.Valves.TwoWayQuickOpening damperCirculationAir(
     m_flow_nominal=0.05,
     dpValve_nominal=500,
     redeclare package Medium = Air,
-    riseTime=fVUParam.damperRiseTimeShort)
+    riseTime=fVUParam.damperRiseTimeLong)
                  "Damper that controls the air stream that is recirculated"
                  annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -145,10 +137,10 @@ public
         rotation=0,
         origin={-27,36})));
   AixLib.Fluid.Actuators.Valves.TwoWayQuickOpening damperHeatRecovery(
-    m_flow_nominal=0.05,
     dpValve_nominal=500,
     redeclare package Medium = Air,
-    riseTime=fVUParam.damperRiseTimeLong)
+    riseTime=fVUParam.damperRiseTimeLong,
+    m_flow_nominal=fVUParam.m2_flow_nominal_heater)
     "The first of two dampers that control the air flow through the recuperator"
                  annotation (Placement(transformation(
         extent={{-9,-9},{9,9}},
@@ -161,10 +153,10 @@ public
         rotation=180,
         origin={129,4})));
   AixLib.Fluid.Actuators.Valves.TwoWayQuickOpening damperFreshAir(
-    m_flow_nominal=0.05,
     dpValve_nominal=500,
     redeclare package Medium = Air,
-    riseTime=fVUParam.damperRiseTimeShort)
+    riseTime=fVUParam.damperRiseTimeShort,
+    m_flow_nominal=fVUParam.m2_flow_nominal_heater)
                  "Can be used to disconnect the unit from fresh air source"
                  annotation (Placement(transformation(
         extent={{-9,-9},{9,9}},
@@ -191,29 +183,21 @@ public
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={18,14})));
-  Fluid.FixedResistances.PressureDrop freshAirPressureDrop(
-    m_flow_nominal=fVUParam.m2_flow_nominal_heater,
-    dp_nominal=100,
-    redeclare package Medium = Air) "Pressure drop on the fresh air side"
-    annotation (Placement(transformation(
-        extent={{-5,-5},{5,5}},
-        rotation=0,
-        origin={-61,-68})));
   AixLib.Fluid.Actuators.Valves.TwoWayQuickOpening heatingValve(
-    m_flow_nominal=0.05,
     redeclare package Medium = Water,
-    dpValve_nominal=200,
-    riseTime=fVUParam.damperRiseTimeLong)
+    riseTime=fVUParam.damperRiseTimeLong,
+    dpValve_nominal=fVUParam.dp1_nominal_heater,
+    m_flow_nominal=fVUParam.m1_flow_nominal_heater)
     "Valve controlling the heating water flow into the unit"
                          annotation (Placement(transformation(
         extent={{-9,9},{9,-9}},
         rotation=90,
         origin={122,60})));
   AixLib.Fluid.Actuators.Valves.TwoWayQuickOpening coolingValve(
-    m_flow_nominal=0.05,
     redeclare package Medium = Water,
-    dpValve_nominal=200,
-    riseTime=fVUParam.damperRiseTimeLong)
+    riseTime=fVUParam.damperRiseTimeLong,
+    dpValve_nominal=fVUParam.dp1_nominal_heater,
+    m_flow_nominal=fVUParam.m1_flow_nominal_heater)
     "Valve controlling the cooling water flow into the unit"
                          annotation (Placement(transformation(
         extent={{-9,9},{9,-9}},
@@ -252,14 +236,6 @@ equation
 
   connect(mixAirTemperature.port, fanSupplyAir.port_a)
     annotation (Line(points={{40,42},{40,26},{52,26}}, color={0,127,255}));
-  connect(exhaustAirConnector, exhaustAirPressureDrop.port_b) annotation (Line(
-      points={{-160,26},{-146,26}},
-      color={0,127,255},
-      thickness=1));
-  connect(fanExhaustAir.port_b, exhaustAirPressureDrop.port_a) annotation (Line(
-      points={{-128,26},{-136,26}},
-      color={0,127,255},
-      thickness=1));
   connect(freshAirConnector, freshAirConnector) annotation (Line(
       points={{-158,-68},{-158,-68}},
       color={0,127,255},
@@ -309,15 +285,11 @@ equation
   connect(cooler.port_a1, coolingValve.port_a)
     annotation (Line(points={{182,38},{192,38},{192,49}}, color={0,127,255}));
   connect(coolingValve.port_b, coolerFlowConnector)
-    annotation (Line(points={{192,67},{192,74},{192,100}}, color={0,127,255}));
+    annotation (Line(points={{192,67},{192,67},{192,100}}, color={0,127,255}));
   connect(heaterReturnConnector, heater.port_b1) annotation (Line(points={{92,100},
           {94,100},{94,38},{96,38}}, color={0,127,255}));
   connect(extractAirConnector, damperCirculationAir.port_a) annotation (Line(
         points={{202,-68},{114,-68},{30,-68},{30,-26}}, color={0,127,255}));
-  connect(damperHeatRecovery.port_b, freshAirPressureDrop.port_a) annotation (
-      Line(points={{-73,-68},{-69.5,-68},{-66,-68}}, color={0,127,255}));
-  connect(freshAirPressureDrop.port_b, recuperator.port_a1) annotation (Line(
-        points={{-56,-68},{-50,-68},{-50,-26},{-44,-26}}, color={0,127,255}));
   connect(damperCirculationAir.y, fVUControlBus.circulationDamperOpening)
     annotation (Line(points={{18,-16},{12,-16},{0.145,-16},{0.145,101.145}},
         color={0,0,127}), Text(
@@ -363,6 +335,22 @@ equation
   connect(coolingValve.y, fVUControlBus.coolingValveOpening) annotation (Line(
         points={{202.8,58},{210,58},{210,76},{0.145,76},{0.145,101.145}}, color=
          {0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(damperHeatRecovery.port_b, recuperator.port_a1) annotation (Line(
+        points={{-73,-68},{-58,-68},{-58,-26},{-44,-26}}, color={0,127,255}));
+  connect(fanExhaustAir.port_b, exhaustAirConnector) annotation (Line(points={{
+          -128,26},{-144,26},{-160,26}}, color={0,127,255}));
+  connect(coolerTemperature.T, fVUControlBus.supplyTemperature) annotation (
+      Line(points={{182.4,2},{172,2},{160,2},{160,-20},{80,-20},{80,84},{0.145,
+          84},{0.145,101.145}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(mixAirTemperature.T, fVUControlBus.mixTemperature) annotation (Line(
+        points={{45.6,48},{52,48},{52,84},{0.145,84},{0.145,101.145}}, color={0,
+          0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));

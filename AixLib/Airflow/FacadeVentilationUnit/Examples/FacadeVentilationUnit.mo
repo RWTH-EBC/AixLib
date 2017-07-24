@@ -42,7 +42,7 @@ model FacadeVentilationUnit "Example showing the use of facade ventilation unit
     redeclare package Medium = Medium2,
     use_T_in=true,
     nPorts=1,
-    p=140000) "Source of the cooling water" annotation (Placement(
+    p=101000) "Source of the cooling water" annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
@@ -51,7 +51,7 @@ model FacadeVentilationUnit "Example showing the use of facade ventilation unit
     redeclare package Medium = Medium2,
     use_T_in=true,
     nPorts=1,
-    p=140000) "Source of the heating water" annotation (Placement(
+    p=101000) "Source of the heating water" annotation (Placement(
         transformation(
         extent={{-9,-10},{9,10}},
         rotation=270,
