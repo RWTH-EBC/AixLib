@@ -139,7 +139,7 @@ equation
     Documentation(revisions="<html>
 <ul>
 <li>October 2015, by Felix B&uuml;nning: Developed and implemented</li>
-<li><i><span style=\"font-family: Arial,sans-serif;\">December 2016&nbsp;</i></span><span style=\"font-family: MS Shell Dlg 2;\"> by Roozbeh Sangi:</span><span style=\"font-family: Arial,sans-serif;\"><br/></span><span style=\"font-family: MS Shell Dlg 2;\">revised</span></li>
+<li>December 2016, by Roozbeh Sangi:<br/>revised</li>
 </ul>
 </html>",
     info="<html>

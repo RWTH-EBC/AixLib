@@ -137,7 +137,7 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Heat exchanger acts as a
 consumer in the High Temp Circuit
-and as a producer in the 
+and as a producer in the
 Low Temp Circuit"),
         Line(
           points={{-60,-10},{-26,-8}},
@@ -159,7 +159,7 @@ Low Temp Circuit"),
     Documentation(revisions="<html>
 <ul>
 <li>October 2015, by Felix B&uuml;nning: Developed and implemented</li>
-<li><i><span style=\"font-family: Arial,sans-serif;\">December 2016&nbsp;</i></span><span style=\"font-family: MS Shell Dlg 2;\"> by Roozbeh Sangi:</span><span style=\"font-family: Arial,sans-serif;\"><br/></span><span style=\"font-family: MS Shell Dlg 2;\">revised</span></li>
+<li>December 2016, by Roozbeh Sangi:<br/>revised</li>
 </ul>
 </html>",
       info="<html>

@@ -6,7 +6,10 @@ class Award "Award"
 <p><br/>.<img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/Award.jpg\"/></p>
 </html>", revisions="<html>
 <ul>
-<li><i><span style=\"font-family: Arial,sans-serif;\">May 2017&nbsp;</i></span><span style=\"font-family: MS Shell Dlg 2;\"> by Roozbeh Sangi:<br/>implemented</span></li>
+<li>
+May 2017, by Roozbeh Sangi:<br/>
+implemented.
+</li>
 </ul>
 </html>"));
 end Award;

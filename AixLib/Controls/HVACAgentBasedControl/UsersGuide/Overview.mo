@@ -22,7 +22,10 @@ class Overview "Overview"
 </ul>
 </html>", revisions="<html>
 <ul>
-<li><i><span style=\"font-family: Arial,sans-serif;\">December 2016&nbsp;</i></span><span style=\"font-family: MS Shell Dlg 2;\"> by Roozbeh Sangi:<br/>implemented</span></li>
+<li>
+December 2016, by Roozbeh Sangi:<br/>
+implemented.
+</li>
 </ul>
 </html>"));
 end Overview;
