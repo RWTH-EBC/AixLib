@@ -1,0 +1,23 @@
+last-generated=2017-03-10
+statistics-fmu-dependencies=
+{
+  "Outputs": {
+    "fluPor[1].forward.T": [], 
+    "QGaiRad_flow": [], 
+    "fluPor[2].m_flow": [], 
+    "QGaiSenCon_flow": [], 
+    "fluPor[1].m_flow": [], 
+    "QGaiLat_flow": [], 
+    "fluPor[2].forward.T": []
+  }, 
+  "InitialUnknowns": {
+    "fluPor[1].forward.T": [], 
+    "QGaiRad_flow": [], 
+    "fluPor[2].m_flow": [], 
+    "QGaiSenCon_flow": [], 
+    "fluPor[1].m_flow": [], 
+    "QGaiLat_flow": [], 
+    "fluPor[2].forward.T": []
+  }, 
+  "Derivatives": {}
+}
