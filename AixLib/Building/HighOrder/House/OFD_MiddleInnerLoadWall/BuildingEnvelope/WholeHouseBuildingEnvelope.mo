@@ -138,10 +138,11 @@ model WholeHouseBuildingEnvelope
     thermFloorHeatingDownHeatFlow[9] if withFloorHeating
     "Thermal connector for heat flow of floor heating going downwards through the floors/ceilings"
     annotation (Placement(transformation(extent={{-104,-104},{-88,-88}}),
-        iconTransformation(extent={{-100,-100},{-86,-90}})));
+        iconTransformation(extent={{-76,-70},{-62,-60}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a groundTemp[5]
     "HeatPorts to force ground temperature(s) for the ground floor."
-    annotation (Placement(transformation(extent={{16,-108},{36,-88}})));
+    annotation (Placement(transformation(extent={{16,-108},{36,-88}}),
+        iconTransformation(extent={{-10,-70},{10,-50}})));
 equation
   connect(groundFloor_Building.thermCeiling_Livingroom, upperFloor_Building.thermFloor_Bedroom)
     annotation (Line(points={{-24.08,-39.66},{-24.08,-32.83},{-15.88,-32.83},{-15.88,
