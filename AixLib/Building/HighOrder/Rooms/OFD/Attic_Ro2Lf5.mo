@@ -1,6 +1,4 @@
 within AixLib.Building.HighOrder.Rooms.OFD;
-
-
 model Attic_Ro2Lf5
   "Attic with 2 saddle roofs and a floor toward 5 rooms on the lower floor, with all other walls towards the outside"
   import AixLib;
@@ -140,9 +138,11 @@ equation
   connect(OW1.SolarRadiationPort, SolarRadiationPort_OW1) annotation(Line(points = {{-80.2, -2.75}, {-86, -2.75}, {-86, -20}, {-106, -20}}, color = {255, 128, 0}));
   connect(OW2.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{81, -16}, {76, -16}, {76, -28}, {-29.9, -28}, {-29.9, -19.4}}, color = {191, 0, 0}));
   connect(OW2.port_outside, thermOutside) annotation(Line(points = {{89.2, -16}, {100, -16}, {100, 80}, {-90, 80}, {-90, 90}}, color = {191, 0, 0}));
-  connect(OW2.WindSpeedPort, WindSpeedPort) annotation(Line(points = {{89.2, -0.6}, {100, -0.6}, {100, -28}, {-86, -28}, {-86, 0}, {-99.5, 0}}, color = {0, 0, 127}));
+  connect(OW2.WindSpeedPort, WindSpeedPort) annotation(Line(points={{89.2,-0.6},
+          {96,-0.6},{96,-48},{-88,-48},{-88,0},{-99.5,0}},                                                                                      color = {0, 0, 127}));
   connect(OW2.SolarRadiationPort, SolarRadiationPort_OW2) annotation(Line(points = {{90.2, 3.25}, {100, 3.25}, {100, -18}, {110, -18}}, color = {255, 128, 0}));
-  connect(airload.port, ThermAttic) annotation(Line(points = {{1, -12}, {-4, -12}, {-4, -10}, {18, -10}, {18, 18}}, color = {191, 0, 0}));
+  connect(airload.port, ThermAttic) annotation(Line(points={{1,-12},{-4,-12},{
+          -4,18},{8,18},{8,18},{18,18},{18,18}},                                                                    color = {191, 0, 0}));
   annotation(Icon(graphics={  Polygon(points = {{-58, -20}, {16, 54}, {90, -20}, {76, -20}, {16, 40}, {-44, -20}, {-58, -20}}, lineColor = {0, 0, 0},
             fillPattern =                                                                                                                                                                                                        FillPattern.Solid, fillColor = {175, 175, 175}), Polygon(points = {{-24, 0}, {6, 30}, {-8, 30}, {-38, 0}, {-24, 0}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255},
             fillPattern =                                                                                                   FillPattern.Solid, visible = withWindow1), Text(extent = {{-36, 10}, {12, 22}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255},

@@ -9,10 +9,6 @@ model Ow2IwL1IwS1Gr1Uf1
         "EnEV_2002",                                                                                                    choice = 3
         "WSchV_1995",                                                                                                    choice = 4
         "WSchV_1984",                                                                                                    radioButtons = true));
-  parameter Integer TRY = 1
-    "Region according to TRY, influences the ground temperature"                         annotation(Dialog(groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/2OW_1IWl_1IWs_1Gr_Pa.png", group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice=1 "TRY01",
-                 choice = 2 "TRY02", choice = 3 "TRY03",  choice = 4 "TRY04", choice = 5 "TRY05", choice = 6 "TRY06", choice = 7 "TRY07", choice = 8 "TRY08",
-        choice = 9 "TRY09", choice = 10 "TRY10", choice = 11 "TRY11", choice = 12 "TRY12", choice = 13 "TRY13", choice = 14 "TRY14", choice= 15 "TRY15",radioButtons = true));
   parameter Boolean withFloorHeating = false
     "If true, that floor has different connectors"                                          annotation(Dialog(group = "Construction parameters"), choices(checkBox = true));
   //Initial temperatures
@@ -79,14 +75,8 @@ model Ow2IwL1IwS1Gr1Uf1
   Utilities.Interfaces.Star starRoom annotation(Placement(transformation(extent = {{10, 10}, {30, 30}}), iconTransformation(extent = {{10, 10}, {30, 30}})));
   AixLib.Building.Components.DryAir.VarAirExchange NaturalVentilation(V = room_V) annotation(Placement(transformation(extent={{-70,-44},
             {-50,-24}})));
-protected
-      parameter Modelica.SIunits.Temperature T_Ground=if TRY == 1 then 282.15 else if TRY == 2 then 281.55 else if TRY == 3 then 281.65 else if TRY == 4 then 282.65
- else
-     if TRY == 5 then 281.25 else if TRY ==6 then 279.95 else if TRY == 7 then 281.95 else if TRY == 8 then 279.95 else if TRY == 9 then 281.05 else if TRY == 10 then 276.15
- else
-     if TRY == 11 then 279.45 else if TRY == 12 then 283.35 else if TRY == 13 then 281.05 else if TRY == 14 then 281.05 else 279.95
-    "Ground temperature"                                   annotation(Dialog(group="Outer wall properties", descriptionLabel = true));
   //Door properties
+protected
   parameter Real U_door_OD1 = if TIR == 1 then 1.8 else 2.9 "U-value" annotation(Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor1));
   parameter Real eps_door_OD1 = 0.95 "eps" annotation(Dialog(group = "Windows and Doors", descriptionLabel = true, enable = withDoor1));
   parameter Real U_door_OD2 = if TIR == 1 then 1.8 else 2.9 "U-value" annotation(Dialog(group = "Windows and Doors", joinNext = true, descriptionLabel = true, enable = withDoor2));
@@ -160,7 +150,7 @@ equation
   connect(thermOutside, NaturalVentilation.port_a) annotation(Line(points={{-90,90},
           {-80,90},{-80,-34},{-70,-34}},                                                                                    color = {191, 0, 0}));
   connect(NaturalVentilation.port_b, airload.port) annotation(Line(points={{-50,-34},
-          {-6,-34},{-6,-12},{1,-12}},                                                                                     color = {191, 0, 0}));
+          {-40,-34},{-40,-40},{-6,-40},{-6,-12},{1,-12}},                                                                 color = {191, 0, 0}));
   connect(ground,floor_FH. port_b) annotation (Line(
       points={{-6,-94},{-32,-94},{-32,-89.7},{-31.6,-89.7}},
       color={191,0,0},
@@ -180,7 +170,7 @@ equation
   connect(floor.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{-29,-62},
           {-29,-40},{-20.1,-40},{-20.1,-35.4}},                                                                                                      color = {191, 0, 0}, pattern = LinePattern.Dash));
   connect(dynamicVentilation.port_inside, airload.port) annotation (Line(
-      points={{-48.66,-54.6},{-24,-54.6},{-24,-48},{-2,-48},{-2,-12},{1,-12}},
+      points={{-48.66,-54.6},{-2,-54.6},{-2,-48},{-2,-48},{-2,-12},{1,-12}},
       color={191,0,0},
       pattern=LinePattern.Dash));
   connect(dynamicVentilation.port_outside, thermOutside) annotation (Line(

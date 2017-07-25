@@ -150,7 +150,7 @@ equation
   connect(NaturalVentilation.port_a, thermOutside) annotation(Line(points={{-68,-28},
           {-80,-28},{-80,90},{-90,90}},                                                                                     color = {191, 0, 0}));
   connect(NaturalVentilation.port_b, airload.port) annotation(Line(points={{-48,-28},
-          {-6,-28},{-6,-12},{1,-12}},                                                                                     color = {191, 0, 0}));
+          {-40,-28},{-40,-40},{-6,-40},{-6,-12},{1,-12}},                                                                 color = {191, 0, 0}));
   connect(roof.WindSpeedPort, WindSpeedPort) annotation(Line(points={{69.7333,
           62.15},{69.7333,72},{-80,72},{-80,-50},{-99.5,-50}},                                                                                color = {0, 0, 127}));
   connect(thermFloorHeatingDownHeatFlow, floor.port_outside) annotation (Line(
@@ -177,7 +177,7 @@ equation
       color={191,0,0},
       pattern=LinePattern.Dash));
   connect(dynamicVentilation.port_inside, airload.port) annotation (Line(
-      points={{-46.72,-48.6},{-24,-48.6},{-24,-48},{-2,-48},{-2,-12},{1,-12}},
+      points={{-46.72,-48.6},{-2,-48.6},{-2,-46},{-2,-46},{-2,-12},{1,-12}},
       color={191,0,0},
       pattern=LinePattern.Dash));
   annotation(Icon(graphics={  Rectangle(extent = {{-80, 80}, {80, 68}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
