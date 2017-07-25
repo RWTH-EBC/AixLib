@@ -383,7 +383,7 @@ equation
       auxiliaries=false),
     Documentation(revisions="<html>
 <ul>
-<li>July 2017, by Roozbeh Sangi: Documentation modified</li>
+<li>July 2017, by Roozbeh Sangi: Documentation and model modified</li>
 <li>November 2016, by Felix B&uuml;nning: Updated to use AixLib 0.3.2, included in HVACAgentBasedControl library</li>
 <li>February 2016, by Felix B&uuml;nning: Developed and implemented</li>
 </ul>

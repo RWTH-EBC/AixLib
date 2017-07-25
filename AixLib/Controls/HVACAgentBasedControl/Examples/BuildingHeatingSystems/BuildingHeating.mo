@@ -239,11 +239,11 @@ model BuildingHeating
     annotation (Placement(transformation(extent={{-56,-28},{-46,-18}})));
   Fluid.FixedResistances.HydraulicResistance hydraulicResistance(
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
     m_flow_nominal=0.02,
     zeta=10,
     diameter=0.05)
     annotation (Placement(transformation(extent={{-66,-46},{-86,-26}})));
+
 equation
   connect(hea.port_b, hea1.port_a) annotation (Line(points={{-40,-80},{-10,-80},
           {20,-80}}, color={0,127,255}));
@@ -395,7 +395,7 @@ equation
 </ul>
 </html>", revisions="<html>
 <ul>
-<li>July 2017, by Roozbeh Sangi: Documentation modified</li>
+<li>July 2017, by Roozbeh Sangi: Documentation and modified</li>
 <li>November 2016, by Felix B&uuml;nning: Developed and implemented</li>
 </ul>
 </html>"),
