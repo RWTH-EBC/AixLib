@@ -58,8 +58,8 @@ model Ow1IwL2IwS1Gr1Uf1
   AixLib.Building.Components.DryAir.Airload airload(V = room_V, T(start = T0_air)) annotation(Placement(transformation(extent = {{0, -20}, {20, 0}})));
   AixLib.Building.Components.Walls.Wall Ceiling(T0 = T0_CE, outside = false, WallType = Type_CE, wall_length = room_length, wall_height = room_width, withWindow = false, withDoor = false, ISOrientation = 3) annotation(Placement(transformation(origin = {-31, 60}, extent = {{2, -9}, {-2, 9}}, rotation = 90)));
   AixLib.Building.Components.Walls.Wall floor(T0 = T0_FL, outside = false, WallType = Type_FL, wall_length = room_length, wall_height = room_width, withWindow = false, withDoor = false, ISOrientation = 2) if withFloorHeating == false annotation(Placement(transformation(origin = {-27, -60}, extent = {{-2.00002, -11}, {2.00001, 11}}, rotation = 90)));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermInsideWall3 annotation(Placement(transformation(extent={{34,-106},
-            {54,-86}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermInsideWall3 annotation(Placement(transformation(extent={{34,-104},
+            {54,-84}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermInsideWall2a annotation(Placement(transformation(extent = {{80, 20}, {100, 40}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermOutside annotation(Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort annotation(Placement(transformation(extent = {{-109.5, -70}, {-89.5, -50}}), iconTransformation(extent = {{-109.5, -70}, {-89.5, -50}})));
@@ -69,7 +69,7 @@ model Ow1IwL2IwS1Gr1Uf1
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermRoom annotation(Placement(transformation(extent = {{-30, 10}, {-10, 30}})));
   Utilities.Interfaces.Star starRoom annotation(Placement(transformation(extent = {{10, 10}, {30, 30}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a         ground annotation(Placement(transformation(extent={{-16,
-            -110},{4,-90}})));
+            -104},{4,-84}})));
   AixLib.Building.Components.Walls.Wall inside_wall2b(T0 = T0_IW2b, outside = false, WallType = Type_IWload, wall_length = room_lengthb, wall_height = room_height, withWindow = false, withDoor = false) annotation(Placement(transformation(origin = {61, -17}, extent = {{-3, -15}, {3, 15}}, rotation = 180)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermInsideWall2b annotation(Placement(transformation(extent = {{80, -20}, {100, 0}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermInsideWall1 annotation(Placement(transformation(extent = {{20, 80}, {40, 100}})));
@@ -117,8 +117,8 @@ protected
   parameter AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple Type_Win = if TIR == 1 then AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009() else if TIR == 2 then AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2002() else if TIR == 3 then AixLib.DataBase.WindowsDoors.Simple.WindowSimple_WSchV1995() else AixLib.DataBase.WindowsDoors.Simple.WindowSimple_WSchV1984() annotation(Dialog(tab = "Types"));
   parameter Modelica.SIunits.Volume room_V = room_length * room_width * room_height;
 equation
-  connect(thermInsideWall3, thermInsideWall3) annotation(Line(points={{44,-96},{
-          44,-96}},                                                                            color = {191, 0, 0}));
+  connect(thermInsideWall3, thermInsideWall3) annotation(Line(points={{44,-94},
+          {44,-94}},                                                                           color = {191, 0, 0}));
   connect(Tair.port, airload.port) annotation(Line(points = {{24, -13}, {24, -40}, {-6, -40}, {-6, -12}, {1, -12}}, color = {191, 0, 0}));
   connect(starRoom, thermStar_Demux.star) annotation(Line(points = {{20, 20}, {20, 4}, {-14.2, 4}, {-14.2, -15.6}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
   connect(inside_wall2b.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{58, -17}, {40, -17}, {40, -40}, {-20.1, -40}, {-20.1, -35.4}}, color = {191, 0, 0}));
@@ -126,7 +126,7 @@ equation
   connect(inside_wall1.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{23,54},
           {23,54},{23,40},{-40,40},{-40,-40},{-20.1,-40},{-20.1,-35.4}},                                                                                                    color = {191, 0, 0}));
   connect(inside_wall3.port_outside, thermInsideWall3) annotation(Line(points={{25,
-          -64.25},{25,-77.375},{44,-77.375},{44,-96}},                                                                                   color = {191, 0, 0}));
+          -64.25},{25,-77.375},{44,-77.375},{44,-94}},                                                                                   color = {191, 0, 0}));
   connect(inside_wall2b.port_outside, thermInsideWall2b) annotation(Line(points = {{64.15, -17}, {77.225, -17}, {77.225, -10}, {90, -10}}, color = {191, 0, 0}));
   connect(inside_wall2a.port_outside, thermInsideWall2a) annotation(Line(points = {{64.15, 23}, {78.225, 23}, {78.225, 30}, {90, 30}}, color = {191, 0, 0}));
   connect(inside_wall1.port_outside, thermInsideWall1) annotation(Line(points={{23,
@@ -157,7 +157,7 @@ equation
           {-40,-24},{-40,-40},{-6,-40},{-6,-12},{1,-12}},                                                                 color = {191, 0, 0}));
   connect(thermCeiling, thermCeiling) annotation(Line(points = {{90, 70}, {85, 70}, {85, 70}, {90, 70}}, color = {191, 0, 0}));
   connect(ground, floor_FH.port_b) annotation (Line(
-      points={{-6,-100},{-32,-100},{-32,-89.7},{-31.6,-89.7}},
+      points={{-6,-94},{-32,-94},{-32,-89.7},{-31.6,-89.7}},
       color={191,0,0},
       pattern=LinePattern.Dash));
   connect(thermFloorHeatingDownHeatFlow, floor_FH.port_a) annotation (Line(
@@ -169,7 +169,7 @@ equation
       color={191,0,0},
       pattern=LinePattern.Dash));
   connect(ground, floor.port_outside) annotation (Line(
-      points={{-6,-100},{-6,-74},{-24,-74},{-24,-62.1},{-27,-62.1}},
+      points={{-6,-94},{-6,-74},{-24,-74},{-24,-62.1},{-27,-62.1}},
       color={191,0,0},
       pattern=LinePattern.Dash));
   connect(floor.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points={{-27,-58},
