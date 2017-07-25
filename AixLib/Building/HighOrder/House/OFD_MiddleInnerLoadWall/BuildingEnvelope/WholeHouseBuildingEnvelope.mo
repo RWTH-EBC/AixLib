@@ -89,9 +89,9 @@ model WholeHouseBuildingEnvelope
         transformation(extent={{-120,26},{-80,66}}), iconTransformation(extent=
             {{-108,38},{-80,66}})));
   Modelica.Blocks.Interfaces.RealInput AirExchangePort[8]
-    "1..4 for groundFloor. 5..8 for upperFloor" annotation (Placement(
-        transformation(extent={{-120,-16},{-80,24}}), iconTransformation(extent
-          ={{-108,-4},{-80,24}})));
+    "1: LivingRoom_GF, 2: Hobby_GF, 3: WC_Storage_GF, 4: Kitchen_GF, 5: Bedroom_UF, 6: Child1_UF, 7: Bath_UF, 8: Child2_UF"
+    annotation (Placement(transformation(extent={{-120,-16},{-80,24}}),
+        iconTransformation(extent={{-108,-4},{-80,24}})));
   Utilities.Interfaces.SolarRad_in SolarRadiationPort_RoofS annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -132,6 +132,7 @@ model WholeHouseBuildingEnvelope
   AixLib.Utilities.Interfaces.Adaptors.HeatStarToComb heatStarToCombHeaters[9]
     annotation (Placement(transformation(extent={{-68,-26},{-48,-10}})));
   AixLib.Utilities.Interfaces.HeatStarComb heatingToRooms[9]
+    "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Bath_UF, 9: Child2_UF"
     annotation (Placement(transformation(extent={{-100,-46},{-80,-26}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a
     thermFloorHeatingDownHeatFlow[9] if withFloorHeating
