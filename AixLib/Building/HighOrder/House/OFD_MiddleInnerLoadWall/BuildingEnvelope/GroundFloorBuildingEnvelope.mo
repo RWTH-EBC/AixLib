@@ -126,25 +126,15 @@ model GroundFloorBuildingEnvelope
             {-12,-44}}), iconTransformation(extent={{-24,-56},{-12,-44}})));
   Utilities.Interfaces.Star StarKitchen annotation(Placement(transformation(extent={{-26,-78},
             {-10,-62}}), iconTransformation(extent={{-26,-78},{-10,-62}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermFloor[5] if withFloorHeating annotation(Placement(transformation(extent={{-102,
-            -100},{-90,-88}}),                                                                                                                                iconTransformation(extent={{-100,
-            -100},{-86,-90}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloorHeatingDownHeatFlow[5] if
+                                                                       withFloorHeating
+    "Thermal connector for heat flow of floor heating going downwards through the wall/floor/ceiling"
+    annotation (Placement(transformation(extent={{-102,-100},{-90,-88}}),
+        iconTransformation(extent={{-100,-100},{-86,-90}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a groundTemp[5]
     "HeatPort to force a ground temperature for the ground level's floor."
     annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
 equation
-  if withFloorHeating then
-    connect(Livingroom.thermFloor, ThermFloor[1]) annotation(Line(points={{-68.84,
-            38.32},{-68.84,6},{-90,6},{-90,-98.8},{-96,-98.8}},                                                                                        color = {191, 0, 0}, pattern = LinePattern.Dash));
-    connect(Hobby.thermFloor, ThermFloor[2]) annotation(Line(points={{69.18,46.24},
-            {69.18,22},{90,22},{90,-92},{-96,-92},{-96,-96.4}},                                                                                 color = {191, 0, 0}, pattern = LinePattern.Dash));
-    connect(Corridor.thermFloor, ThermFloor[3]) annotation(Line(points={{66.4,-13.56},
-            {66.4,-32},{90,-32},{90,-92},{4,-92},{4,-94},{-96,-94}},                                                                                        color = {191, 0, 0}, pattern = LinePattern.Dash));
-    connect(WC_Storage.thermFloor, ThermFloor[4]) annotation(Line(points={{69.18,
-            -54.24},{90,-54.24},{90,-91.6},{-96,-91.6}},                                                                             color = {191, 0, 0}, pattern = LinePattern.Dash));
-    connect(Kitchen.thermFloor, ThermFloor[5]) annotation(Line(points={{-68.4,-44.32},
-            {-90,-44.32},{-90,-89.2},{-96,-89.2}},                                                                                           color = {191, 0, 0}, pattern = LinePattern.Dash));
-  end if;
   connect(Livingroom.SolarRadiationPort_OW2, West) annotation(Line(points = {{-52.89, 77.68}, {-52.89, 86}, {90, 86}, {90, -16}, {110, -16}}, color = {255, 128, 0}));
   connect(Hobby.SolarRadiationPort_OW2, West) annotation(Line(points = {{55.405, 75.76}, {55.405, 86}, {90, 86}, {90, -16}, {110, -16}}, color = {255, 128, 0}));
   connect(Hobby.SolarRadiationPort_OW1, North) annotation(Line(points = {{83.905, 59.2}, {90, 59.2}, {90, 88}, {110, 88}}, color = {255, 128, 0}));
@@ -172,7 +162,8 @@ equation
   connect(Kitchen.thermInsideWall1a, WC_Storage.thermInsideWall1) annotation(Line(points = {{-46, -61.6}, {-34, -61.6}, {-34, -92}, {36, -92}, {36, -62}, {47.9, -62}, {47.9, -62.4}}, color = {191, 0, 0}));
   connect(Livingroom.thermInsideWall1b, Corridor.thermInsideWall2a) annotation(Line(points = {{-44.2, 42.8}, {-32, 42.8}, {-32, 86}, {36, 86}, {36, -3.3}, {44, -3.3}}, color = {191, 0, 0}));
   connect(Kitchen.thermInsideWall2, Livingroom.thermInsideWall2) annotation(Line(points = {{-58, -23.2}, {-58, -14}, {-90, -14}, {-90, 6}, {-57.4, 6}, {-57.4, 17.2}}, color = {191, 0, 0}));
-  connect(Corridor.thermInsideWall3, WC_Storage.thermInsideWall2) annotation(Line(points = {{56, -26.1}, {56, -32}, {59.3, -32}, {59.3, -38.4}}, color = {191, 0, 0}));
+  connect(Corridor.thermInsideWall3, WC_Storage.thermInsideWall2) annotation(Line(points={{53.2,
+          -26.86},{53.2,-32},{59.3,-32},{59.3,-38.4}},                                                                                           color = {191, 0, 0}));
   connect(Hobby.thermInsideWall2, Corridor.thermInsideWall1) annotation(Line(points = {{59.3, 30.4}, {59.3, 22}, {90, 22}, {90, 14}, {56, 14}, {56, 8.1}}, color = {191, 0, 0}));
   connect(Corridor.thermRoom, thermCorridor) annotation(Line(points = {{66, -5.2}, {66, -32}, {90, -32}, {90, 100}, {110, 100}, {110, 110}}, color = {191, 0, 0}));
   connect(Hobby.starRoom, StarHobby) annotation(Line(points = {{61.2, 56.8}, {61.2, 44}, {36, 44}, {36, 40}, {20, 40}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
@@ -198,16 +189,37 @@ equation
           -68,-54},{-34,-54},{-34,-50},{-18,-50}},                                                                                  color = {191, 0, 0}));
   connect(Corridor.AirExchangePort, AirExchangePort_doorSt.y) annotation(Line(points = {{82, -12.8}, {90, -12.8}, {90, -92}, {-90, -92}, {-90, -60}, {-99.2, -60}}, color = {0, 0, 127}));
   connect(Livingroom.starRoom, StarLivingroom) annotation(Line(points = {{-59.6, 52.4}, {-59.6, 48}, {-32, 48}, {-32, 40}, {-20, 40}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
-  connect(Livingroom.thermFloor, ThermFloor[1]) annotation(Line(points={{-68.84,
-          38.32},{-68.84,6},{-90,6},{-90,-98.8},{-96,-98.8}},                                                                                        color = {191, 0, 0}, pattern = LinePattern.Dash));
-  connect(Hobby.thermFloor, ThermFloor[2]) annotation(Line(points={{69.18,46.24},
-          {69.18,22},{90,22},{90,-92},{-96,-92},{-96,-96.4}},                                                                                 color = {191, 0, 0}, pattern = LinePattern.Dash));
-  connect(Corridor.thermFloor, ThermFloor[3]) annotation(Line(points={{66.4,-13.56},
-          {66.4,-32},{90,-32},{90,-92},{4,-92},{4,-94},{-96,-94}},                                                                                        color = {191, 0, 0}, pattern = LinePattern.Dash));
-  connect(WC_Storage.thermFloor, ThermFloor[4]) annotation(Line(points={{69.18,-54.24},
-          {90,-54.24},{90,-91.6},{-96,-91.6}},                                                                                     color = {191, 0, 0}, pattern = LinePattern.Dash));
-  connect(Kitchen.thermFloor, ThermFloor[5]) annotation(Line(points={{-68.4,-44.32},
-          {-90,-44.32},{-90,-89.2},{-96,-89.2}},                                                                                           color = {191, 0, 0}, pattern = LinePattern.Dash));
+  connect(Livingroom.thermFloorHeatingDownHeatFlow,
+    thermFloorHeatingDownHeatFlow[1]) annotation (Line(
+      points={{-74.12,19.76},{-74.12,12},{-88,12},{-88,-98.8},{-96,-98.8}},
+      color={191,0,0},
+      pattern=LinePattern.Dash));
+  connect(Hobby.thermFloorHeatingDownHeatFlow, thermFloorHeatingDownHeatFlow[2])
+    annotation (Line(points={{73.74,32.32},{73.74,24},{-8,24},{-8,2},{-88,2},{-88,
+          -96.4},{-96,-96.4}}, color={191,0,0},
+      pattern=LinePattern.Dash));
+  connect(Corridor.thermFloorHeatingDownHeatFlow, thermFloorHeatingDownHeatFlow[
+    3]) annotation (Line(points={{71.2,-24.58},{71.2,-30},{-8,-30},{-8,2},{-88,2},
+          {-88,-94},{-96,-94}}, color={191,0,0},
+      pattern=LinePattern.Dash));
+  connect(WC_Storage.thermFloorHeatingDownHeatFlow,
+    thermFloorHeatingDownHeatFlow[4]) annotation (Line(points={{73.74,-40.32},{73.74,
+          -30},{-8,-30},{-8,2},{-88,2},{-88,-91.6},{-96,-91.6}}, color={191,0,0},
+      pattern=LinePattern.Dash));
+  connect(Kitchen.thermFloorHeatingDownHeatFlow, thermFloorHeatingDownHeatFlow[5])
+    annotation (Line(points={{-73.2,-25.76},{-73.2,2},{-88,2},{-88,-89.2},{-96,-89.2}},
+        color={191,0,0},
+      pattern=LinePattern.Dash));
+  connect(Livingroom.ground, groundTemp[1]) annotation (Line(points={{-65.32,
+          15.92},{-65.32,-4},{0,-4},{0,-108}}, color={191,0,0}));
+  connect(Hobby.ground, groundTemp[2]) annotation (Line(points={{66.14,29.44},{
+          66.14,26},{0,26},{0,-104},{0,-104}}, color={191,0,0}));
+  connect(Corridor.ground, groundTemp[3]) annotation (Line(points={{63.2,-26.86},
+          {63.2,-34},{0,-34},{0,-100}}, color={191,0,0}));
+  connect(WC_Storage.ground, groundTemp[4]) annotation (Line(points={{66.14,
+          -37.44},{66.14,-34},{0,-34},{0,-96},{0,-96}}, color={191,0,0}));
+  connect(Kitchen.ground, groundTemp[5]) annotation (Line(points={{-65.2,-21.92},
+          {-65.2,-4},{0,-4},{0,-92},{0,-92}}, color={191,0,0}));
   annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Bitmap(extent = {{-100, -100}, {100, 100}}, fileName = "modelica://AixLib/Resources/Images/Building/HighOrder/Groundfloor_icon.png"), Text(extent = {{-66, 66}, {10, 54}}, lineColor = {0, 0, 0}, textString = "Livingroom"), Text(extent = {{14, 76}, {64, 62}}, lineColor = {0, 0, 0}, textString = "Hobby"), Text(extent = {{22, 24}, {56, 14}}, lineColor = {0, 0, 0}, textString = "Corridor"), Text(extent = {{-2, -42}, {74, -52}}, lineColor = {0, 0, 0}, textString = "WC_Storage"), Text(extent = {{-50, -10}, {-6, -24}}, lineColor = {0, 0, 0}, textString = "Kitchen")}), Documentation(revisions = "<html>
  <ul>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
