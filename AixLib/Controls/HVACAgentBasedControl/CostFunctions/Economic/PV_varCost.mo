@@ -1,4 +1,4 @@
-within AixLib.Controls.HVACAgentBasedControl.CostFunctions.Economic;
+﻿within AixLib.Controls.HVACAgentBasedControl.CostFunctions.Economic;
 model PV_varCost
   extends HVACAgentBasedControl.BaseClasses.PartialCostFunction;
   parameter Real p = 0.30 "Price per kWh of fuel";
@@ -88,7 +88,7 @@ equation
     Documentation(revisions="<html>
 <p>
 <ul>
-<li>December 2015, by Felix B�nning: Developed and implemented</li>
+<li>December 2015, by Felix Bünning: Developed and implemented</li>
 </ul>
 </p>
 </html>",
