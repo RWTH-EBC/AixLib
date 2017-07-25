@@ -208,8 +208,8 @@ equation
         points={{22.3,23.76},{60,23.76},{60,90},{90,90}}, color={255,128,0}));
   connect(groundFloor_Building.thermCorridor, varAirExchange.port_b)
     annotation (Line(points={{24.4,-39.4},{36,-39.4},{36,-38}}, color={191,0,0}));
-  connect(upperFloor_Building.thermCorridor, varAirExchange.port_a) annotation
-    (Line(points={{22.3,-24.6},{36,-24.6},{36,-26}}, color={191,0,0}));
+  connect(upperFloor_Building.thermCorridor, varAirExchange.port_a) annotation (
+     Line(points={{22.3,-24.6},{36,-24.6},{36,-26}}, color={191,0,0}));
   connect(AirExchangeCorridor_Source.y, varAirExchange.InPort1) annotation (
       Line(points={{26.2,-32},{28,-32},{28,-24},{32.16,-24},{32.16,-26.6}},
         color={0,0,127}));
@@ -230,8 +230,8 @@ equation
   connect(attic_2Ro_5Rooms.SolarRadiationPort_OW2, West) annotation (Line(
         points={{22.3,62.4},{60,62.4},{60,-90},{90,-90}}, color={255,128,0}));
   connect(attic_2Ro_5Rooms.SolarRadiationPort_OW1, East) annotation (Line(
-        points={{-27.38,62},{-74,62},{-74,90},{60,90},{60,-18},{90,-18}}, color
-        ={255,128,0}));
+        points={{-27.38,62},{-74,62},{-74,90},{60,90},{60,-18},{90,-18}}, color=
+         {255,128,0}));
   connect(heatStarToCombHeaters.thermStarComb, heatingToRooms) annotation (Line(
         points={{-67.4,-18.1},{-90,-18.1},{-90,-36}}, color={191,0,0}));
   connect(heatStarToCombHeaters[1].therm, groundFloor_Building.ThermLivingroom)

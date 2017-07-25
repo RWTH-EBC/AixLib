@@ -12,7 +12,6 @@ model UpperFloorBuildingEnvelope
   parameter Integer TIR=1 "Thermal Insulation Regulation" annotation (Dialog(
       groupImage=
           "modelica://AixLib/Resources/Images/Building/HighOrder/Upperfloor_5Rooms.png",
-
       group="Construction parameters",
       compact=true,
       descriptionLabel=true), choices(
@@ -21,6 +20,7 @@ model UpperFloorBuildingEnvelope
       choice=3 "WSchV_1995",
       choice=4 "WSchV_1984",
       radioButtons=true));
+
   parameter Boolean withFloorHeating=false
     "If true, that floor has different connectors" annotation (Dialog(group=
           "Construction parameters"), choices(checkBox=true));
@@ -395,8 +395,8 @@ equation
   connect(Children1.thermCeiling, thermCeiling_Children1) annotation (Line(
         points={{45.9,68.8},{36,68.8},{36,86},{-50,86},{-50,110},{-49,109}},
         color={191,0,0}));
-  connect(Corridor.thermCeiling, thermCeiling_Corridor) annotation (Line(points
-        ={{44,0.5},{36,0.5},{36,86},{-12,86},{-12,110},{-11,109}}, color={191,0,
+  connect(Corridor.thermCeiling, thermCeiling_Corridor) annotation (Line(points=
+         {{44,0.5},{36,0.5},{36,86},{-12,86},{-12,110},{-11,109}}, color={191,0,
           0}));
   connect(Bath.thermCeiling, thermCeiling_Bath) annotation (Line(points={{47.9,
           -76.8},{36,-76.8},{36,-92},{90,-92},{90,86},{29,86},{29,109}}, color=
@@ -442,8 +442,8 @@ equation
   connect(Corridor.thermRoom, thermCorridor) annotation (Line(points={{66,-5.2},
           {66,-14},{90,-14},{90,-110},{110,-110}}, color={191,0,0}));
   connect(Bedroom.AirExchangePort, AirExchangePort[1]) annotation (Line(points=
-          {{-67.3,76.88},{-67.3,86},{-90,86},{-90,-22.25},{-115,-22.25}}, color
-        ={0,0,127}));
+          {{-67.3,76.88},{-67.3,86},{-90,86},{-90,-22.25},{-115,-22.25}}, color=
+         {0,0,127}));
   connect(Children1.AirExchangePort, AirExchangePort[2]) annotation (Line(
         points={{66.895,75.64},{66.895,86},{-90,86},{-90,-14.75},{-115,-14.75}},
         color={0,0,127}));
@@ -513,7 +513,6 @@ equation
             {100,100}}), graphics={
         Bitmap(extent={{-100,-100},{100,100}}, fileName=
               "modelica://AixLib/Resources/Images/Building/HighOrder/Upperfloor_icon.png"),
-
         Text(
           extent={{-56,74},{-4,60}},
           lineColor={0,0,0},

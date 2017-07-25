@@ -298,8 +298,8 @@ model GroundFloorBuildingEnvelope
     annotation (Placement(transformation(extent={{14,54},{26,66}})));
   Utilities.Interfaces.Star StarHobby
     annotation (Placement(transformation(extent={{12,32},{28,48}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermCorridor annotation
-    (Placement(transformation(extent={{8,-2},{20,10}}), iconTransformation(
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermCorridor annotation (
+     Placement(transformation(extent={{8,-2},{20,10}}), iconTransformation(
           extent={{8,-2},{20,10}})));
   Utilities.Interfaces.Star StarCorridor annotation (Placement(transformation(
           extent={{6,-24},{22,-8}}), iconTransformation(extent={{6,-24},{22,-8}})));
@@ -375,8 +375,8 @@ equation
   connect(Hobby.thermCeiling, thermCeiling_Hobby) annotation (Line(points={{
           47.9,68.8},{36,68.8},{36,86},{-50,86},{-50,109},{-49,109}}, color={
           191,0,0}));
-  connect(Corridor.thermCeiling, thermCeiling_Corridor) annotation (Line(points
-        ={{44,4.3},{36,4.3},{36,86},{-10,86},{-10,109},{-11,109}}, color={191,0,
+  connect(Corridor.thermCeiling, thermCeiling_Corridor) annotation (Line(points=
+         {{44,4.3},{36,4.3},{36,86},{-10,86},{-10,109},{-11,109}}, color={191,0,
           0}));
   connect(WC_Storage.thermCeiling, thermCeiling_WCStorage) annotation (Line(
         points={{47.9,-76.8},{36,-76.8},{36,-92},{90,-92},{90,86},{29,86},{29,
@@ -387,8 +387,8 @@ equation
   connect(Kitchen.thermInsideWall1a, WC_Storage.thermInsideWall1) annotation (
       Line(points={{-46,-61.6},{-34,-61.6},{-34,-92},{36,-92},{36,-62},{47.9,-62},
           {47.9,-62.4}}, color={191,0,0}));
-  connect(Livingroom.thermInsideWall1b, Corridor.thermInsideWall2a) annotation
-    (Line(points={{-44.2,42.8},{-32,42.8},{-32,86},{36,86},{36,-3.3},{44,-3.3}},
+  connect(Livingroom.thermInsideWall1b, Corridor.thermInsideWall2a) annotation (
+     Line(points={{-44.2,42.8},{-32,42.8},{-32,86},{36,86},{36,-3.3},{44,-3.3}},
         color={191,0,0}));
   connect(Kitchen.thermInsideWall2, Livingroom.thermInsideWall2) annotation (
       Line(points={{-58,-23.2},{-58,-14},{-90,-14},{-90,6},{-57.4,6},{-57.4,
@@ -467,7 +467,6 @@ equation
   connect(Corridor.thermFloorHeatingDownHeatFlow, thermFloorHeatingDownHeatFlow[
     3]) annotation (Line(
       points={{71.2,-24.58},{71.2,-30},{-8,-30},{-8,2},{-88,2},{-88,-94},{-96,-94}},
-
       color={191,0,0},
       pattern=LinePattern.Dash));
 
@@ -496,7 +495,6 @@ equation
             {100,100}}), graphics={
         Bitmap(extent={{-100,-100},{100,100}}, fileName=
               "modelica://AixLib/Resources/Images/Building/HighOrder/Groundfloor_icon.png"),
-
         Text(
           extent={{-66,66},{10,54}},
           lineColor={0,0,0},
@@ -525,5 +523,4 @@ equation
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for the envelope of the ground floor.</p>
  </html>"));
-
 end GroundFloorBuildingEnvelope;
