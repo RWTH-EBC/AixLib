@@ -8,7 +8,6 @@ model WholeHouseBuildingEnvelope
         "EnEV_2002",                                                                                                    choice = 3
         "WSchV_1995",                                                                                                    choice = 4
         "WSchV_1984",                                                                                                    radioButtons = true));
-  parameter Integer TRY = 1 "Region according to TRY" annotation(Dialog(groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/Grundriss.png", group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1 "TRY01", choice = 2 "TRY02", choice = 3 "TRY03", choice = 4 "TRY04", choice = 5 "TRY05", choice = 6 "TRY06", choice = 7 "TRY07", choice = 8 "TRY08", choice = 9 "TRY09", choice = 10 "TRY10", choice = 11 "TRY11", choice = 12 "TRY12", choice = 13 "TRY13", choice = 14 "TRY14", choice = 15 "TRY15", radioButtons = true));
   parameter Boolean withFloorHeating = false
     "If true, that floor has different connectors"                                          annotation(Dialog(group = "Construction parameters"), choices(checkBox = true));
   parameter Real AirExchangeCorridor = 2 "Air exchange corridors in 1/h " annotation(Dialog(group = "Air Exchange Corridors", descriptionLabel = true));
@@ -20,8 +19,7 @@ model WholeHouseBuildingEnvelope
   parameter Real Max_VR = 200 "Maximal ventilation rate" annotation(Dialog(group = "Dynamic ventilation", descriptionLabel = true, enable = if withDynamicVentilation then true else false));
   parameter Modelica.SIunits.TemperatureDifference Diff_toTempset = 3
     "Difference to set temperature"                                                                   annotation(Dialog(group = "Dynamic ventilation", descriptionLabel = true, enable = if withDynamicVentilation then true else false));
-  GroundFloorBuildingEnvelope groundFloor_Building(TMC = TMC, TIR = TIR, withDynamicVentilation = withDynamicVentilation, HeatingLimit = HeatingLimit, Max_VR = Max_VR, Diff_toTempset = Diff_toTempset, withFloorHeating = withFloorHeating,
-    TRY=TRY)                                                                                                     annotation(Placement(transformation(extent = {{-26, -94}, {22, -42}})));
+  GroundFloorBuildingEnvelope groundFloor_Building(TMC = TMC, TIR = TIR, withDynamicVentilation = withDynamicVentilation, HeatingLimit = HeatingLimit, Max_VR = Max_VR, Diff_toTempset = Diff_toTempset, withFloorHeating = withFloorHeating)                                                                                                     annotation(Placement(transformation(extent = {{-26, -94}, {22, -42}})));
   AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.UpperFloorBuildingEnvelope upperFloor_Building(TMC = TMC, TIR = TIR, HeatingLimit = HeatingLimit, Max_VR = Max_VR, Diff_toTempset = Diff_toTempset, withDynamicVentilation = withDynamicVentilation, withFloorHeating = withFloorHeating) annotation(Placement(transformation(extent = {{-26, -22}, {20, 30}})));
   Rooms.OFD.Attic_Ro2Lf5 attic_2Ro_5Rooms(length = 10.64, room1_length = 5.875, room2_length = 3.215, room3_length = 3.92, room4_length = 3.215, room5_length = 4.62, room1_width = 3.84, room2_width = 3.84, room3_width = 3.84, room4_width = 3.84, room5_width = 3.84, roof_width1 = 3.36, roof_width2 = 3.36, solar_absorptance_RO = 0.1, width = 4.75, TMC = TMC, TIR = TIR, alfa = 1.5707963267949) annotation(Placement(transformation(extent = {{-26, 46}, {20, 86}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermOutside annotation(Placement(transformation(extent = {{-100, 80}, {-80, 100}})));
@@ -162,8 +160,8 @@ equation
       points={{-96,-88.8889},{-36,-88.8889},{-36,-20.7},{-23.1825,-20.7}},
       color={191,0,0},
       pattern=LinePattern.Dash));
-  connect(groundFloor_Building.groundTemp, groundTemp) annotation (Line(points=
-          {{-2,-94},{-2,-99},{26,-99},{26,-98}}, color={191,0,0}));
+  connect(groundFloor_Building.groundTemp, groundTemp) annotation (Line(points={
+          {-2,-94},{-2,-99},{26,-99},{26,-98}}, color={191,0,0}));
   annotation(Icon(graphics={  Bitmap(extent = {{-78, 74}, {72, -68}}, fileName = "modelica://AixLib/Resources/Images/Building/HighOrder/Grundriss.PNG")}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for the envelope of the whole one family dwelling.</p>

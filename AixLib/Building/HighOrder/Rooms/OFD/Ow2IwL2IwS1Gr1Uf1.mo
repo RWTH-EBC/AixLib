@@ -21,8 +21,8 @@ model Ow2IwL2IwS1Gr1Uf1
       choice=4 "WSchV_1984",
       radioButtons=true));
   parameter Boolean withFloorHeating=false
-    "If true, that floor has different connectors" annotation (Dialog(group=
-          "Construction parameters"), choices(checkBox=true));
+    "If true, that floor has different connectors" annotation (Dialog(group="Construction parameters"),
+      choices(checkBox=true));
   parameter Modelica.SIunits.Temperature T0_air=295.15 "Air"
     annotation (Dialog(tab="Initial temperatures", descriptionLabel=true));
   parameter Modelica.SIunits.Temperature T0_OW1=295.15 "OW1"
@@ -280,10 +280,29 @@ model Ow2IwL2IwS1Gr1Uf1
         origin={-20,-26})));
   AixLib.Building.Components.DryAir.VarAirExchange NaturalVentilation(V=room_V)
     annotation (Placement(transformation(extent={{-68,-42},{-48,-22}})));
-  //Door properties
+  AixLib.Building.Components.Walls.BaseClasses.SimpleNLayer floor_FH(
+    h=room_width,
+    l=room_length,
+    n=Type_FL.n,
+    d=Type_FL.d,
+    rho=Type_FL.rho,
+    lambda=Type_FL.lambda,
+    c=Type_FL.c,
+    T0=T0_FL) if withFloorHeating "floor component if using Floor heating"
+    annotation (Placement(transformation(
+        origin={-30,-87},
+        extent={{3.00007,16},{-3,-16}},
+        rotation=90)));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ground
+    annotation (Placement(transformation(extent={{-16,-104},{4,-84}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a
+    thermFloorHeatingDownHeatFlow if withFloorHeating
+    "Thermal connector for heat flow of floor heating going downwards through the wall/floor/ceiling"
+    annotation (Placement(transformation(extent={{-84,-86},{-70,-72}}),
+        iconTransformation(extent={{-56,-92},{-36,-72}})));
 protected
-  parameter Real U_door_OD1=if TIR == 1 then 1.8 else 2.9 "U-value" annotation
-    (Dialog(
+  parameter Real U_door_OD1=if TIR == 1 then 1.8 else 2.9 "U-value" annotation (
+     Dialog(
       group="Windows and Doors",
       joinNext=true,
       descriptionLabel=true,
@@ -292,8 +311,8 @@ protected
       group="Windows and Doors",
       descriptionLabel=true,
       enable=withDoor1));
-  parameter Real U_door_OD2=if TIR == 1 then 1.8 else 2.9 "U-value" annotation
-    (Dialog(
+  parameter Real U_door_OD2=if TIR == 1 then 1.8 else 2.9 "U-value" annotation (
+     Dialog(
       group="Windows and Doors",
       joinNext=true,
       descriptionLabel=true,
@@ -303,8 +322,8 @@ protected
       descriptionLabel=true,
       enable=withDoor2));
   // Infiltration rate
-  parameter Real n50(unit="h-1") = if TIR == 1 or TIR == 2 then 3 else if TIR
-     == 3 then 4 else 6 "Air exchange rate at 50 Pa pressure difference"
+  parameter Real n50(unit="h-1") = if TIR == 1 or TIR == 2 then 3 else if TIR ==
+    3 then 4 else 6 "Air exchange rate at 50 Pa pressure difference"
     annotation (Dialog(tab="Infiltration"));
   parameter Real e=0.03 "Coefficient of windshield"
     annotation (Dialog(tab="Infiltration"));
@@ -320,22 +339,22 @@ protected
        else AixLib.DataBase.Walls.EnEV2002.OW.OW_EnEV2002_L() else if TIR == 3
        then if TMC == 1 then AixLib.DataBase.Walls.WSchV1995.OW.OW_WSchV1995_S()
        else if TMC == 2 then AixLib.DataBase.Walls.WSchV1995.OW.OW_WSchV1995_M()
-       else AixLib.DataBase.Walls.WSchV1995.OW.OW_WSchV1995_L() else if TMC ==
-      1 then AixLib.DataBase.Walls.WSchV1984.OW.OW_WSchV1984_S() else if TMC
-       == 2 then AixLib.DataBase.Walls.WSchV1984.OW.OW_WSchV1984_M() else
+       else AixLib.DataBase.Walls.WSchV1995.OW.OW_WSchV1995_L() else if TMC == 1
+       then AixLib.DataBase.Walls.WSchV1984.OW.OW_WSchV1984_S() else if TMC == 2
+       then AixLib.DataBase.Walls.WSchV1984.OW.OW_WSchV1984_M() else
       AixLib.DataBase.Walls.WSchV1984.OW.OW_WSchV1984_L()
     annotation (Dialog(tab="Types"));
   //Inner wall Types
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_IWsimple=if TIR
-       == 1 then if TMC == 1 then
-      AixLib.DataBase.Walls.EnEV2009.IW.IWsimple_EnEV2009_S_half() else if TMC
-       == 2 then AixLib.DataBase.Walls.EnEV2009.IW.IWsimple_EnEV2009_M_half()
-       else AixLib.DataBase.Walls.EnEV2009.IW.IWsimple_EnEV2009_L_half() else
-      if TIR == 2 then if TMC == 1 then
-      AixLib.DataBase.Walls.EnEV2002.IW.IWsimple_EnEV2002_S_half() else if TMC
-       == 2 then AixLib.DataBase.Walls.EnEV2002.IW.IWsimple_EnEV2002_M_half()
-       else AixLib.DataBase.Walls.EnEV2002.IW.IWsimple_EnEV2002_L_half() else
-      if TIR == 3 then if TMC == 1 then
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_IWsimple=if TIR ==
+      1 then if TMC == 1 then
+      AixLib.DataBase.Walls.EnEV2009.IW.IWsimple_EnEV2009_S_half() else if TMC ==
+      2 then AixLib.DataBase.Walls.EnEV2009.IW.IWsimple_EnEV2009_M_half() else
+      AixLib.DataBase.Walls.EnEV2009.IW.IWsimple_EnEV2009_L_half() else if TIR ==
+      2 then if TMC == 1 then
+      AixLib.DataBase.Walls.EnEV2002.IW.IWsimple_EnEV2002_S_half() else if TMC ==
+      2 then AixLib.DataBase.Walls.EnEV2002.IW.IWsimple_EnEV2002_M_half() else
+      AixLib.DataBase.Walls.EnEV2002.IW.IWsimple_EnEV2002_L_half() else if TIR ==
+      3 then if TMC == 1 then
       AixLib.DataBase.Walls.WSchV1995.IW.IWsimple_WSchV1995_S_half() else if
       TMC == 2 then
       AixLib.DataBase.Walls.WSchV1995.IW.IWsimple_WSchV1995_M_half() else
@@ -346,30 +365,30 @@ protected
       AixLib.DataBase.Walls.WSchV1984.IW.IWsimple_WSchV1984_M_half() else
       AixLib.DataBase.Walls.WSchV1984.IW.IWsimple_WSchV1984_L_half()
     annotation (Dialog(tab="Types"));
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_IWload=if TIR ==
-      1 then if TMC == 1 then
-      AixLib.DataBase.Walls.EnEV2009.IW.IWload_EnEV2009_S_half() else if TMC
-       == 2 then AixLib.DataBase.Walls.EnEV2009.IW.IWload_EnEV2009_M_half()
-       else AixLib.DataBase.Walls.EnEV2009.IW.IWload_EnEV2009_L_half() else if
-      TIR == 2 then if TMC == 1 then
-      AixLib.DataBase.Walls.EnEV2002.IW.IWload_EnEV2002_S_half() else if TMC
-       == 2 then AixLib.DataBase.Walls.EnEV2002.IW.IWload_EnEV2002_M_half()
-       else AixLib.DataBase.Walls.EnEV2002.IW.IWload_EnEV2002_L_half() else if
-      TIR == 3 then if TMC == 1 then
-      AixLib.DataBase.Walls.WSchV1995.IW.IWload_WSchV1995_S_half() else if TMC
-       == 2 then AixLib.DataBase.Walls.WSchV1995.IW.IWload_WSchV1995_M_half()
-       else AixLib.DataBase.Walls.WSchV1995.IW.IWload_WSchV1995_L_half() else
-      if TMC == 1 then
-      AixLib.DataBase.Walls.WSchV1984.IW.IWload_WSchV1984_S_half() else if TMC
-       == 2 then AixLib.DataBase.Walls.WSchV1984.IW.IWload_WSchV1984_M_half()
-       else AixLib.DataBase.Walls.WSchV1984.IW.IWload_WSchV1984_L_half()
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_IWload=if TIR == 1
+       then if TMC == 1 then
+      AixLib.DataBase.Walls.EnEV2009.IW.IWload_EnEV2009_S_half() else if TMC ==
+      2 then AixLib.DataBase.Walls.EnEV2009.IW.IWload_EnEV2009_M_half() else
+      AixLib.DataBase.Walls.EnEV2009.IW.IWload_EnEV2009_L_half() else if TIR ==
+      2 then if TMC == 1 then
+      AixLib.DataBase.Walls.EnEV2002.IW.IWload_EnEV2002_S_half() else if TMC ==
+      2 then AixLib.DataBase.Walls.EnEV2002.IW.IWload_EnEV2002_M_half() else
+      AixLib.DataBase.Walls.EnEV2002.IW.IWload_EnEV2002_L_half() else if TIR ==
+      3 then if TMC == 1 then
+      AixLib.DataBase.Walls.WSchV1995.IW.IWload_WSchV1995_S_half() else if TMC ==
+      2 then AixLib.DataBase.Walls.WSchV1995.IW.IWload_WSchV1995_M_half() else
+      AixLib.DataBase.Walls.WSchV1995.IW.IWload_WSchV1995_L_half() else if TMC ==
+      1 then AixLib.DataBase.Walls.WSchV1984.IW.IWload_WSchV1984_S_half() else
+      if TMC == 2 then
+      AixLib.DataBase.Walls.WSchV1984.IW.IWload_WSchV1984_M_half() else
+      AixLib.DataBase.Walls.WSchV1984.IW.IWload_WSchV1984_L_half()
     annotation (Dialog(tab="Types"));
   // Floor to ground type
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_FL=if TIR == 1
        then AixLib.DataBase.Walls.EnEV2009.Floor.FLground_EnEV2009_SML() else
       if TIR == 2 then
-      AixLib.DataBase.Walls.EnEV2002.Floor.FLground_EnEV2002_SML() else if TIR
-       == 3 then AixLib.DataBase.Walls.WSchV1995.Floor.FLground_WSchV1995_SML()
+      AixLib.DataBase.Walls.EnEV2002.Floor.FLground_EnEV2002_SML() else if TIR ==
+      3 then AixLib.DataBase.Walls.WSchV1995.Floor.FLground_WSchV1995_SML()
        else AixLib.DataBase.Walls.WSchV1984.Floor.FLground_WSchV1984_SML()
     annotation (Dialog(tab="Types"));
   // Ceiling to upper floor type
@@ -394,102 +413,82 @@ protected
   //Window type
   parameter AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple
     Type_Win=if TIR == 1 then
-      AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009() else if TIR
-       == 2 then AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2002()
-       else if TIR == 3 then
+      AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009() else if TIR ==
+      2 then AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2002() else
+      if TIR == 3 then
       AixLib.DataBase.WindowsDoors.Simple.WindowSimple_WSchV1995() else
       AixLib.DataBase.WindowsDoors.Simple.WindowSimple_WSchV1984()
     annotation (Dialog(tab="Types"));
   parameter Modelica.SIunits.Volume room_V=room_length*room_width*room_height;
-public
-  AixLib.Building.Components.Walls.BaseClasses.SimpleNLayer floor_FH(
-    h=room_width,
-    l=room_length,
-    n=Type_FL.n,
-    d=Type_FL.d,
-    rho=Type_FL.rho,
-    lambda=Type_FL.lambda,
-    c=Type_FL.c,
-    T0=T0_FL) if withFloorHeating "floor component if using Floor heating"
-    annotation (Placement(transformation(
-        origin={-30,-87},
-        extent={{3.00007,16},{-3,-16}},
-        rotation=90)));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ground
-    annotation (Placement(transformation(extent={{-16,-104},{4,-84}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a
-    thermFloorHeatingDownHeatFlow if withFloorHeating
-    "Thermal connector for heat flow of floor heating going downwards through the wall/floor/ceiling"
-    annotation (Placement(transformation(extent={{-84,-86},{-70,-72}}),
-        iconTransformation(extent={{-56,-92},{-36,-72}})));
 equation
   connect(thermInsideWall2, thermInsideWall2)
     annotation (Line(points={{30,-90},{30,-90}}, color={191,0,0}));
-  connect(WindSpeedPort, outside_wall2.WindSpeedPort) annotation (Line(points={
-          {-99.5,-40},{-80,-40},{-80,74},{42.8,74},{42.8,64.25}}, color={0,0,
-          127}));
+  connect(WindSpeedPort, outside_wall2.WindSpeedPort) annotation (Line(points={{-99.5,
+          -40},{-80,-40},{-80,74},{42.8,74},{42.8,64.25}},       color={0,0,127}));
   connect(thermRoom, thermRoom)
     annotation (Line(points={{-20,20},{-20,20}}, color={191,0,0}));
   connect(thermOutside, thermOutside)
     annotation (Line(points={{-90,90},{-90,90}}, color={191,0,0}));
   connect(thermOutside, outside_wall1.port_outside) annotation (Line(points={{-90,
-          90},{-90,82},{-80,82},{-80,6},{-68,6},{-68,15},{-64.25,15}}, color={
-          191,0,0}));
-  connect(outside_wall1.WindSpeedPort, WindSpeedPort) annotation (Line(points={
-          {-64.25,36.2667},{-80,36.2667},{-80,-40},{-99.5,-40}}, color={0,0,127}));
+          90},{-90,82},{-80,82},{-80,6},{-68,6},{-68,15},{-64.25,15}}, color={191,
+          0,0}));
+  connect(outside_wall1.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-64.25,
+          36.2667},{-80,36.2667},{-80,-40},{-99.5,-40}},        color={0,0,127}));
   connect(inside_wall1b.thermStarComb_inside, thermStar_Demux.thermStarComb)
     annotation (Line(points={{58,-15},{52,-15},{52,-40},{-20,-40},{-20,-38},{-20.1,
           -35.4}}, color={191,0,0}));
   connect(inside_wall1a.thermStarComb_inside, thermStar_Demux.thermStarComb)
     annotation (Line(points={{58,24},{52,24},{52,-40},{-20.1,-40},{-20.1,-38},{
-          -20.1,-35.4}}, color={191,0,0}));
+          -20.1,-35.4}},
+                   color={191,0,0}));
   connect(outside_wall1.thermStarComb_inside, thermStar_Demux.thermStarComb)
     annotation (Line(points={{-54,15},{-40,15},{-40,-40},{-20.1,-40},{-20.1,-35.4}},
         color={191,0,0}));
-  connect(outside_wall2.SolarRadiationPort, SolarRadiationPort_OW2) annotation
-    (Line(points={{47.75,65.5},{47.75,74},{50.5,74},{50.5,88},{50.5,101}},
+  connect(outside_wall2.SolarRadiationPort, SolarRadiationPort_OW2) annotation (
+     Line(points={{47.75,65.5},{47.75,74},{50.5,74},{50.5,88},{50.5,101}},
         color={255,128,0}));
-  connect(outside_wall2.port_outside, thermOutside) annotation (Line(points={{
-          23,64.25},{23,74},{-80,74},{-80,82},{-90,82},{-90,90}}, color={191,0,
-          0}));
+  connect(outside_wall2.port_outside, thermOutside) annotation (Line(points={{23,
+          64.25},{23,74},{-80,74},{-80,82},{-90,82},{-90,90}}, color={191,0,0}));
   connect(Ceiling.port_outside, thermCeiling) annotation (Line(points={{-30,
-          64.15},{-30,64.15},{-30,74},{84,74},{84,70},{90,70}}, color={191,0,0}));
+          64.15},{-30,64.15},{-30,74},{84,74},{84,70},{90,70}},
+                                                         color={191,0,0}));
   connect(starRoom, thermStar_Demux.star) annotation (Line(
       points={{20,20},{20,4},{-14.2,4},{-14.2,-15.6}},
       color={95,95,95},
       pattern=LinePattern.Solid));
   connect(outside_wall2.thermStarComb_inside, thermStar_Demux.thermStarComb)
-    annotation (Line(points={{23,54},{23,54},{23,40},{-40,40},{-40,-40},{-20.1,
-          -40},{-20.1,-35.4}}, color={191,0,0}));
+    annotation (Line(points={{23,54},{23,54},{23,40},{-40,40},{-40,-40},{-20.1,-40},
+          {-20.1,-35.4}}, color={191,0,0}));
   connect(inside_wall2.thermStarComb_inside, thermStar_Demux.thermStarComb)
     annotation (Line(points={{22,-56},{22,-40},{-20.1,-40},{-20.1,-38},{-20.1,-35.4}},
         color={191,0,0}));
-  connect(inside_wall2.port_outside, thermInsideWall2) annotation (Line(points=
-          {{22,-64.2},{22,-77.3},{30,-77.3},{30,-90}}, color={191,0,0}));
+  connect(inside_wall2.port_outside, thermInsideWall2) annotation (Line(points={{22,
+          -64.2},{22,-77.3},{30,-77.3},{30,-90}},     color={191,0,0}));
   connect(inside_wall1a.port_outside, thermInsideWall1a) annotation (Line(
         points={{64.15,24},{77.225,24},{77.225,30},{90,30}}, color={191,0,0}));
   connect(inside_wall1b.port_outside, thermInsideWall1b) annotation (Line(
         points={{64.15,-15},{79.225,-15},{79.225,-10},{90,-10}}, color={191,0,0}));
-  connect(thermStar_Demux.therm, airload.port) annotation (Line(points={{-25.1,
-          -15.9},{-25.1,-12},{1,-12}}, color={191,0,0}));
-  connect(infiltrationRate.port_a, thermOutside) annotation (Line(points={{-68,
-          56},{-80,56},{-80,82},{-90,82},{-90,90}}, color={191,0,0}));
-  connect(SolarRadiationPort_OW1, outside_wall1.SolarRadiationPort) annotation
-    (Line(points={{-99.5,30},{-80,30},{-80,41.5833},{-65.5,41.5833}}, color={
-          255,128,0}));
+  connect(thermStar_Demux.therm, airload.port) annotation (Line(points={{-25.1,-15.9},
+          {-25.1,-12},{1,-12}}, color={191,0,0}));
+  connect(infiltrationRate.port_a, thermOutside) annotation (Line(points={{-68,56},
+          {-80,56},{-80,82},{-90,82},{-90,90}}, color={191,0,0}));
+  connect(SolarRadiationPort_OW1, outside_wall1.SolarRadiationPort) annotation (
+     Line(points={{-99.5,30},{-80,30},{-80,41.5833},{-65.5,41.5833}}, color={255,
+          128,0}));
   connect(thermStar_Demux.therm, thermRoom) annotation (Line(points={{-25.1,-15.9},
           {-25.1,2.05},{-20,2.05},{-20,20}}, color={191,0,0}));
-  connect(Tair.port, airload.port) annotation (Line(points={{24,-13},{24,-40},{
-          -6,-40},{-6,-12},{1,-12}}, color={191,0,0}));
-  connect(infiltrationRate.port_b, airload.port) annotation (Line(points={{-50,
-          56},{-40,56},{-40,-40},{-6,-40},{-6,-12},{1,-12}}, color={191,0,0}));
+  connect(Tair.port, airload.port) annotation (Line(points={{24,-13},{24,-40},{-6,
+          -40},{-6,-12},{1,-12}}, color={191,0,0}));
+  connect(infiltrationRate.port_b, airload.port) annotation (Line(points={{-50,56},
+          {-40,56},{-40,-40},{-6,-40},{-6,-12},{1,-12}}, color={191,0,0}));
   connect(Ceiling.thermStarComb_inside, thermStar_Demux.thermStarComb)
     annotation (Line(points={{-30,58},{-30,40},{-40,40},{-40,-40},{-20.1,-40},{
-          -20.1,-35.4}}, color={191,0,0}));
+          -20.1,-35.4}},
+                   color={191,0,0}));
   connect(NaturalVentilation.port_a, thermOutside) annotation (Line(points={{-68,
           -32},{-80,-32},{-80,90},{-90,90}}, color={191,0,0}));
-  connect(NaturalVentilation.InPort1, AirExchangePort) annotation (Line(points=
-          {{-67,-38.4},{-80,-38.4},{-80,74},{-20,74},{-20,100}}, color={0,0,127}));
+  connect(NaturalVentilation.InPort1, AirExchangePort) annotation (Line(points={
+          {-67,-38.4},{-80,-38.4},{-80,74},{-20,74},{-20,100}}, color={0,0,127}));
   connect(NaturalVentilation.port_b, airload.port) annotation (Line(points={{-48,
           -32},{-40,-32},{-40,-40},{-6,-40},{-6,-12},{1,-12}}, color={191,0,0}));
   connect(thermInsideWall1b, thermInsideWall1b) annotation (Line(points={{90,-10},
@@ -520,8 +519,8 @@ equation
       color={191,0,0},
       pattern=LinePattern.Dash));
   connect(dynamicVentilation.port_inside, airload.port) annotation (Line(
-      points={{-46.72,-52.6},{-24,-52.6},{-2,-52.6},{-2,-52},{-2,-48},{-2,-48},
-          {-2,-12},{1,-12}},
+      points={{-46.72,-52.6},{-24,-52.6},{-2,-52.6},{-2,-52},{-2,-48},{-2,-48},{
+          -2,-12},{1,-12}},
       color={191,0,0},
       pattern=LinePattern.Dash));
   annotation (Icon(graphics={
