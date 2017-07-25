@@ -37,12 +37,6 @@ model BuildingHeating
     Q_flow_nominal=1)
     annotation (Placement(transformation(extent={{20,-90},{40,-70}})));
 
-  AixLib.Fluid.FixedResistances.HydraulicResistance hydraulicResistance(
-      redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater,
-    m_flow_small=0.001,
-    zeta=10)
-    annotation (Placement(transformation(extent={{-80,-46},{-100,-26}})));
   AixLib.Fluid.Sources.FixedBoundary bou(nPorts=1, redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater)
     annotation (Placement(transformation(extent={{142,-80},{122,-60}})));
@@ -243,9 +237,14 @@ model BuildingHeating
     annotation (Placement(transformation(extent={{-148,-34},{-128,-14}})));
   Modelica.Blocks.Math.Gain gain[3](k={0.8,0.8,0.8})
     annotation (Placement(transformation(extent={{-56,-28},{-46,-18}})));
+  Fluid.FixedResistances.HydraulicResistance hydraulicResistance(
+    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+
+    m_flow_nominal=0.02,
+    zeta=10,
+    diameter=0.05)
+    annotation (Placement(transformation(extent={{-66,-46},{-86,-26}})));
 equation
-  connect(hydraulicResistance.port_a, fan.port_b) annotation (Line(points={{-80,
-          -36},{100,-36},{100,-40}}, color={0,127,255}));
   connect(hea.port_b, hea1.port_a) annotation (Line(points={{-40,-80},{-10,-80},
           {20,-80}}, color={0,127,255}));
   connect(hea1.port_b, fan.port_a) annotation (Line(points={{40,-80},{66,-80},{
@@ -280,8 +279,6 @@ equation
           148,-21},{148,-50.2},{112,-50.2}}, color={0,0,127}));
   connect(volume.ports[1], hea.port_a) annotation (Line(points={{-72,-6},{-72,-6},
           {-72,-10},{-114,-10},{-114,-80},{-60,-80}}, color={0,127,255}));
-  connect(hydraulicResistance.port_b, hea.port_a) annotation (Line(points={{-100,
-          -36},{-114,-36},{-114,-80},{-60,-80}}, color={0,127,255}));
   connect(volume1.ports[1], hea.port_a) annotation (Line(points={{20,-6},{20,-6},
           {20,-28},{-114,-28},{-114,-80},{-60,-80}}, color={0,127,255}));
   connect(volume.heatPort, thermalConductor.port_a) annotation (Line(points={{-80,
@@ -358,6 +355,10 @@ equation
           -24},{-92,-23},{-57,-23}}, color={0,0,127}));
   connect(gain.y, thermalZone.intGains) annotation (Line(points={{-45.5,-23},{
           -36.6,-23},{-36.6,60.08}}, color={0,0,127}));
+  connect(hydraulicResistance.port_a, fan.port_b) annotation (Line(points={{-66,
+          -36},{100,-36},{100,-40}}, color={0,127,255}));
+  connect(hydraulicResistance.port_b, hea.port_a) annotation (Line(points={{-86,
+          -36},{-86,-36},{-114,-36},{-114,-80},{-60,-80}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(
         preserveAspectRatio=false,
         extent={{-100,-100},{100,100}},

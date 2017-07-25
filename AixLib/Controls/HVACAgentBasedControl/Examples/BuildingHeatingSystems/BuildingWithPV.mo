@@ -15,9 +15,6 @@ model BuildingWithPV
     dp_nominal(displayUnit="bar") = 1000,
     Q_flow_nominal=1)
     annotation (Placement(transformation(extent={{22,-132},{42,-112}})));
-  AixLib.Fluid.FixedResistances.HydraulicResistance hydraulicResistance(
-      redeclare package Medium = Medium, m_flow_small=0.001)
-    annotation (Placement(transformation(extent={{-12,-132},{8,-112}})));
   AixLib.Fluid.Movers.FlowControlled_m_flow fan(
     redeclare package Medium = Medium,
     m_flow_nominal=1,
@@ -47,11 +44,6 @@ model BuildingWithPV
     m_flow_nominal=1,
     dpValve_nominal(displayUnit="bar") = 10000)
     annotation (Placement(transformation(extent={{20,-28},{0,-8}})));
-  AixLib.Fluid.FixedResistances.HydraulicResistance hydraulicResistance1(
-    redeclare package Medium = Medium,
-    zeta=10,
-    m_flow_small=0.001)
-    annotation (Placement(transformation(extent={{-30,-50},{-50,-30}})));
   HVACAgentBasedControl.Agents.Broker broker(name=20001)
     annotation (Placement(transformation(extent={{100,120},{120,140}})));
   HVACAgentBasedControl.Agents.HeatProducerAgent heatProducerAgent(
@@ -195,13 +187,19 @@ model BuildingWithPV
             {-78,96}})));
   Modelica.Blocks.Sources.Constant internalGains[3](k={0,0,0})
     annotation (Placement(transformation(extent={{-92,36},{-78,50}})));
+  Fluid.FixedResistances.HydraulicResistance hydraulicResistance1(
+    redeclare package Medium = Medium,
+    m_flow_nominal=0.02,
+    zeta=10,
+    diameter=0.05)
+    annotation (Placement(transformation(extent={{-40,-48},{-60,-28}})));
+  Fluid.FixedResistances.HydraulicResistance hydraulicResistance(
+    redeclare package Medium = Medium,
+    m_flow_nominal=0.02,
+    zeta=10,
+    diameter=0.05)
+    annotation (Placement(transformation(extent={{-10,-132},{10,-112}})));
 equation
-  connect(hydraulicResistance.port_a, hea.port_b) annotation (Line(points={{-12,
-          -122},{-12,-122},{-18,-122}},
-                                     color={0,127,255}));
-  connect(hydraulicResistance.port_b, hea1.port_a)
-    annotation (Line(points={{8,-122},{22,-122}},
-                                                color={0,127,255}));
   connect(fan.port_a, hea1.port_b)
     annotation (Line(points={{72,-106},{72,-122},{42,-122}},
                                                           color={0,127,255}));
@@ -215,11 +213,6 @@ equation
   connect(fan.port_b, val1.port_a) annotation (Line(points={{72,-86},{72,-40},{24,
           -40},{24,-18},{20,-18}},
                               color={0,127,255}));
-  connect(hydraulicResistance1.port_a, fan.port_b)
-    annotation (Line(points={{-30,-40},{72,-40},{72,-86}},
-                                                       color={0,127,255}));
-  connect(hydraulicResistance1.port_b, hea.port_a) annotation (Line(points={{-50,-40},
-          {-80,-40},{-80,-122},{-38,-122}},    color={0,127,255}));
   connect(vol.ports[2], hea.port_a) annotation (Line(points={{-6,10},{-10,10},{
           -10,2},{-80,2},{-80,-122},{-38,-122}},  color={0,127,255}));
   connect(vol1.ports[2], hea.port_a) annotation (Line(points={{26,10},{26,10},{26,
@@ -371,6 +364,14 @@ equation
   connect(thermalZone1.ventRate, thermalZone.ventRate) annotation (Line(points=
           {{67.9,72.08},{28,72.08},{28,64},{-42,64},{-42,68},{-42,68},{-42,76},
           {-14.1,76},{-14.1,72.08}}, color={0,0,127}));
+  connect(fan.port_b, hydraulicResistance1.port_a) annotation (Line(points={{72,
+          -86},{72,-86},{72,-38},{-40,-38}}, color={0,127,255}));
+  connect(hydraulicResistance1.port_b, hea.port_a) annotation (Line(points={{
+          -60,-38},{-60,-38},{-80,-38},{-80,-122},{-38,-122}}, color={0,127,255}));
+  connect(hea.port_b, hydraulicResistance.port_a) annotation (Line(points={{-18,
+          -122},{-14,-122},{-10,-122}}, color={0,127,255}));
+  connect(hydraulicResistance.port_b, hea1.port_a)
+    annotation (Line(points={{10,-122},{22,-122}}, color={0,127,255}));
   annotation (                                                          Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-150,-150},{150,150}},
         initialScale=0.1)),
