@@ -1,7 +1,7 @@
-within AixLib.Building.BatteryModel;
-model BatteryRoom
+within AixLib.Building.BatteryModel.Backup;
+model BatteryRoom3
   "Thermal model of a room, which contains racks of (different) battery types"
-   parameter Integer nBatRacks=6   "Number of battery racks installed in the battery room" annotation (Dialog(
+   parameter Integer nBatRacks=10  "Number of battery racks installed in the battery room" annotation (Dialog(
       descriptionLabel=true), choices(
       choice=1 "1",
       choice=2 "2",
@@ -154,11 +154,21 @@ model BatteryRoom
       areaStandingAtWall=0)} "Parameters for the different battery racks";
 
 protected
-  parameter Boolean listBatTypes[10] = {batType1, batType2, batType3, batType4, batType5, batType6, batType7, batType8, batType9, batType10} "List for the different Battery Types";
-  parameter Integer listNBats[nBatRacks] = {if nBatRacks >= i then rackParameters[i].nParallels * rackParameters[i].nSeries * rackParameters[i].nStacked else 0 for i in 1:nBatRacks} "List for the different number of Batteries per rack";
-  parameter Integer sumBatsType1 = sum({if batTypes[i] == true then listNBats[i] else 0 for i in 1:nBatRacks}) "Sum of installed batteries from type 1";
-  parameter Integer sumBatsType2 = sum({if batTypes[i] == false then listNBats[i] else 0 for i in 1:nBatRacks}) "Sum of installed batteries from type 1";
-  parameter Real listFractionFactors[nBatRacks] = {if batTypes[i] == true then listNBats[i] / sumBatsType1 else listNBats[i] / sumBatsType2 for i in 1:nBatRacks} "List of the fraction factors for the racks";
+  parameter Integer sumBatsType1=0 "Sum of installed batteries from type 1";
+  parameter Integer sumBatsType2=0 "Sum of installed batteries from type 2";
+  parameter Real listFractionFactors[10] = zeros(10) "List of the fraction factors for the racks";
+  parameter Boolean batTypes[10] = {batType1, batType2, batType3, batType4, batType5, batType6, batType7, batType8, batType9, batType10} "List for the different Battery Types";
+  parameter Integer listNBats[10] = zeros(10) "List for the different number of Batteries per rack";
+  //parameter Integer nBats1=0 "Number of Batteries in Rack 1";
+  //parameter Integer nBats2=0 "Number of Batteries in Rack 2";
+  //parameter Integer nBats3=0 "Number of Batteries in Rack 3";
+  //parameter Integer nBats4=0 "Number of Batteries in Rack 4";
+  //parameter Integer nBats5=0 "Number of Batteries in Rack 5";
+  //parameter Integer nBats6=0 "Number of Batteries in Rack 6";
+  //parameter Integer nBats7=0 "Number of Batteries in Rack 7";
+  //parameter Integer nBats8=0 "Number of Batteries in Rack 8";
+  //parameter Integer nBats9=0 "Number of Batteries in Rack 9";
+  //parameter Integer nBats10=0 "Number of Batteries in Rack 10";
 
 public
   Modelica.Blocks.Interfaces.RealInput Battery1_Loss
@@ -382,11 +392,60 @@ public
   Modelica.Blocks.Sources.BooleanExpression batteryType10(y=batType6) if nBatRacks > 9
     annotation (Placement(transformation(extent={{-132,-200},{-108,-180}})));
 
-  Utilities.Interfaces.ThermalRadiationCollector radCollector(m=nBatRacks)
-    annotation (Placement(transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=90,
-        origin={114,60})));
+initial equation
+
+  //nBats1 = rackParameters[1].nParallels*rackParameters[1].nSeries*rackParameters[1].nStacked;
+  //nBats2 = rackParameters[2].nParallels*rackParameters[2].nSeries*rackParameters[2].nStacked;
+  //nBats3 = rackParameters[3].nParallels*rackParameters[3].nSeries*rackParameters[3].nStacked;
+  //nBats4 = rackParameters[4].nParallels*rackParameters[4].nSeries*rackParameters[4].nStacked;
+  //nBats5 = rackParameters[5].nParallels*rackParameters[5].nSeries*rackParameters[5].nStacked;
+  //nBats6 = rackParameters[6].nParallels*rackParameters[6].nSeries*rackParameters[6].nStacked;
+  //nBats7 = rackParameters[7].nParallels*rackParameters[7].nSeries*rackParameters[7].nStacked;
+  //nBats8 = rackParameters[8].nParallels*rackParameters[8].nSeries*rackParameters[8].nStacked;
+  //nBats9 = rackParameters[9].nParallels*rackParameters[9].nSeries*rackParameters[9].nStacked;
+  //nBats10 = rackParameters[10].nParallels*rackParameters[10].nSeries*rackParameters[10].nStacked;
+
+  //if nBatRacks == 1 then
+    //listNBats = {nBats1, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+  //elseif nBatRacks == 2 then
+    //listNBats = {nBats1, nBats2, 0, 0, 0, 0, 0, 0, 0, 0};
+  //elseif nBatRacks == 3 then
+    //listNBats = {nBats1, nBats2, nBats3, 0, 0, 0, 0, 0, 0, 0};
+  //elseif nBatRacks == 4 then
+    //listNBats = {nBats1, nBats2, nBats3, nBats4, 0, 0, 0, 0, 0, 0};
+  //elseif nBatRacks == 5 then
+    //listNBats = {nBats1, nBats2, nBats3, nBats4, nBats5, 0, 0, 0, 0, 0};
+  //elseif nBatRacks == 6 then
+    //listNBats = {nBats1, nBats2, nBats3, nBats4, nBats5, nBats6, 0, 0, 0, 0};
+  //elseif nBatRacks == 7 then
+    //listNBats = {nBats1, nBats2, nBats3, nBats4, nBats5, nBats6, nBats7, 0, 0, 0};
+  //elseif nBatRacks == 8 then
+    //listNBats = {nBats1, nBats2, nBats3, nBats4, nBats5, nBats6, nBats7, nBats8, 0, 0};
+  //elseif nBatRacks == 9 then
+    //listNBats = {nBats1, nBats2, nBats3, nBats4, nBats5, nBats6, nBats7, nBats8, nBats9, 0};
+  //elseif nBatRacks == 10 then
+    //listNBats = {nBats1, nBats2, nBats3, nBats4, nBats5, nBats6, nBats7, nBats8, nBats9, nBats10};
+  //end if;
+
+  listNBats = {if nBatRacks >= i then rackParameters[i].nParallels * rackParameters[i].nSeries * rackParameters[i].nStacked else 0 for i in 1:10};
+
+  for i in 1:nBatRacks loop
+    if batTypes[i] == true then
+      sumBatsType1 = sumBatsType1 + listNBats[i];
+    else
+      sumBatsType2 = sumBatsType2 + listNBats[i];
+    end if;
+  end for;
+
+  listFractionFactors = {if batTypes[j] == true then listNBats[j] / sumBatsType1 else listNBats[j] / sumBatsType2 for j in 1:10};
+
+  //for j in 1:nBatRacks loop
+    //if batTypes[j] == true then
+      //listFractionFactors[j] = listNBats[j] / sumBatsType1;
+    //else
+      //listFractionFactors[j] = listNBats[j] / sumBatsType2;
+    //end if;
+  //end for;
 
 equation
 
@@ -532,33 +591,31 @@ equation
           -160,-100},{-160,-198},{-82,-198}}, color={0,0,127}));
   connect(convCollector.port_b, port_conv)
     annotation (Line(points={{134,-60},{200,-60}}, color={191,0,0}));
+  connect(batteryRack_1.star, star) annotation (Line(points={{40,192},{80,192},{
+          80,60},{201,60}}, color={95,95,95}));
+  connect(batteryRack_2.star, star) annotation (Line(points={{40,152},{80,152},{
+          80,60},{201,60}}, color={95,95,95}));
+  connect(batteryRack_3.star, star) annotation (Line(points={{40,112},{80,112},{
+          80,60},{201,60}}, color={95,95,95}));
+  connect(batteryRack_4.star, star) annotation (Line(points={{40,72},{80,72},{80,
+          60},{201,60}}, color={95,95,95}));
+  connect(batteryRack_5.star, star) annotation (Line(points={{40,32},{80,32},{80,
+          60},{201,60}}, color={95,95,95}));
+  connect(batteryRack_6.star, star) annotation (Line(points={{40,-28},{80,-28},{
+          80,60},{201,60}}, color={95,95,95}));
+  connect(batteryRack_7.star, star) annotation (Line(points={{40,-68},{80,-68},{
+          80,60},{201,60}}, color={95,95,95}));
+  connect(batteryRack_8.star, star) annotation (Line(points={{40,-108},{80,-108},
+          {80,60},{201,60}}, color={95,95,95}));
+  connect(batteryRack_9.star, star) annotation (Line(points={{40,-148},{80,-148},
+          {80,60},{201,60}}, color={95,95,95}));
+  connect(batteryRack_10.star, star) annotation (Line(points={{40,-188},{80,-188},
+          {80,60},{201,60}}, color={95,95,95}));
   connect(batteryRack_1.battery_temperature, battery1_temperature) annotation (
       Line(points={{36,200},{36,210},{92,210},{92,160},{120,160},{120,210}},
         color={0,0,127}));
   connect(batteryRack_10.battery_temperature, battery2_temperature) annotation (
      Line(points={{36,-180},{36,-168},{160,-168},{160,210}}, color={0,0,127}));
-  connect(radCollector.Star_b, star)
-    annotation (Line(points={{133.6,60},{201,60}}, color={95,95,95}));
-  connect(batteryRack_1.star, radCollector.Star_a[1]) annotation (Line(points={{
-          40,192},{80,192},{80,60},{94,60}}, color={95,95,95}));
-  connect(batteryRack_2.star, radCollector.Star_a[2]) annotation (Line(points={{
-          40,152},{80,152},{80,60},{94,60}}, color={95,95,95}));
-  connect(batteryRack_3.star, radCollector.Star_a[3]) annotation (Line(points={{
-          40,112},{80,112},{80,60},{94,60}}, color={95,95,95}));
-  connect(batteryRack_4.star, radCollector.Star_a[4]) annotation (Line(points={{
-          40,72},{80,72},{80,60},{94,60}}, color={95,95,95}));
-  connect(batteryRack_5.star, radCollector.Star_a[5]) annotation (Line(points={{
-          40,32},{80,32},{80,60},{94,60}}, color={95,95,95}));
-  connect(batteryRack_6.star, radCollector.Star_a[6]) annotation (Line(points={{
-          40,-28},{80,-28},{80,60},{94,60}}, color={95,95,95}));
-  connect(batteryRack_7.star, radCollector.Star_a[7]) annotation (Line(points={{
-          40,-68},{80,-68},{80,60},{94,60}}, color={95,95,95}));
-  connect(batteryRack_8.star, radCollector.Star_a[8]) annotation (Line(points={{
-          40,-108},{80,-108},{80,60},{94,60}}, color={95,95,95}));
-  connect(batteryRack_9.star, radCollector.Star_a[9]) annotation (Line(points={{
-          40,-148},{80,-148},{80,60},{94,60}}, color={95,95,95}));
-  connect(batteryRack_10.star, radCollector.Star_a[10]) annotation (Line(points=
-         {{40,-188},{80,-188},{80,60},{94,60}}, color={95,95,95}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-200,-200},{200,200}}),
                                                       graphics={Rectangle(
@@ -581,14 +638,10 @@ equation
 <p>The model needs an input of heat loss of the batteries and separates this input automatically on the different battery racks.</p>
 </ul>
 <p><b><font style=\"color: #008000; \">Example</font></b> </p>
-<p><a href=\"AixLib.Building.BatteryModel.ExampleBatteryRoom\">AixLib.Building.BatteryModel.ExampleBatteryRoom </a></p>
-<p><b><font style=\"color: #008000; \">References</font></b> </p>
-<p>The model uses the <a href=\"AixLib.Utilities.Interfaces.ThermalRadiationCollector\">AixLib.Utilities.Interfaces.ThermalRadiationCollector </a>to collect the radiation heat of the different battery racks.
-The <b>ThermalRadiationCollector</b> is based on the <b>ThermalCollector</b> from the Modelica Library.</p>
-<p>The model uses the record <a href=\"AixLib.DataBase.Batteries.RackBaseDataDefinition\">AixLib.DataBase.Batteries.RackBaseDataDefinition </a>to define the rack parameters.</p>
+<p><a href=\"AixLib.Building.BatteryModel.ExampleBattery\">AixLib.Building.BatteryModel.ExampleBattery </a></p>
 </html>",  revisions="<html>
 <ul>
-<li><i>July 26, 2017&nbsp;</i> by Paul Thiele:<br/>Implemented. </li>
+<li><i>July 24, 2017&nbsp;</i> by Paul Thiele:<br/>Implemented. </li>
 </ul>
 </html>"));
-end BatteryRoom;
+end BatteryRoom3;
