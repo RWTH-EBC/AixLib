@@ -42,9 +42,7 @@ equation
           points={{0,-30},{60,30}},
           color={95,95,95})}),
     Documentation(info="<html>
-<p>
-This is a model to collect the radiation heat flows from <i>m</i> star points to one single star point.
-</p>
-</p>The model is based on the <a href=\"Modelica.Thermal.HeatTransfer.Components.ThermalCollector\">Modelica.Thermal.HeatTransfer.Components.ThermalCollector </a> model.</p>
+<p>This is a model to collect the radiation heat flows from <i>m</i> star points to one single star point.</p>
+<p>The model is based on the <a href=\"Modelica.Thermal.HeatTransfer.Components.ThermalCollector\">Modelica.Thermal.HeatTransfer.Components.ThermalCollector </a> model.</p>
 </html>"));
 end ThermalRadiationCollector;
