@@ -156,9 +156,9 @@ model BatteryRoom
 protected
   parameter Boolean listBatTypes[10] = {batType1, batType2, batType3, batType4, batType5, batType6, batType7, batType8, batType9, batType10} "List for the different Battery Types";
   parameter Integer listNBats[nBatRacks] = {if nBatRacks >= i then rackParameters[i].nParallels * rackParameters[i].nSeries * rackParameters[i].nStacked else 0 for i in 1:nBatRacks} "List for the different number of Batteries per rack";
-  parameter Integer sumBatsType1 = sum({if batTypes[i] == true then listNBats[i] else 0 for i in 1:nBatRacks}) "Sum of installed batteries from type 1";
-  parameter Integer sumBatsType2 = sum({if batTypes[i] == false then listNBats[i] else 0 for i in 1:nBatRacks}) "Sum of installed batteries from type 1";
-  parameter Real listFractionFactors[nBatRacks] = {if batTypes[i] == true then listNBats[i] / sumBatsType1 else listNBats[i] / sumBatsType2 for i in 1:nBatRacks} "List of the fraction factors for the racks";
+  parameter Integer sumBatsType1 = sum({if listBatTypes[i] == true then listNBats[i] else 0 for i in 1:nBatRacks}) "Sum of installed batteries from type 1";
+  parameter Integer sumBatsType2 = sum({if listBatTypes[i] == false then listNBats[i] else 0 for i in 1:nBatRacks}) "Sum of installed batteries from type 2";
+  parameter Real listFractionFactors[nBatRacks] = {if listBatTypes[i] == true then listNBats[i] / sumBatsType1 else listNBats[i] / sumBatsType2 for i in 1:nBatRacks} "List of the fraction factors for the racks";
 
 public
   Modelica.Blocks.Interfaces.RealInput Battery1_Loss

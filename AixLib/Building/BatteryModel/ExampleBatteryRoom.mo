@@ -7,7 +7,6 @@ model ExampleBatteryRoom "Example Battery"
     duration=500)
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
   BatteryRoom batteryRoom(nBatRacks=4,
-    nBatTypes=2,
     batType3=false,
     batType4=false,
     rackParameters={AixLib.DataBase.Batteries.RackBaseDataDefinition(
@@ -80,7 +79,8 @@ model ExampleBatteryRoom "Example Battery"
         nStacked=0,
         airBetweenStacks=false,
         batArrangement=true,
-        areaStandingAtWall=0)})
+        areaStandingAtWall=0)},
+    nBatTypes=2)
     annotation (Placement(transformation(extent={{-20,-20},{20,20}})));
   Modelica.Blocks.Sources.Ramp ramp1(
     offset=0,
