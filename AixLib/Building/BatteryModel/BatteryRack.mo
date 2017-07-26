@@ -24,8 +24,7 @@ model BatteryRack
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
     "Converts the Real Heat Input to Heat"
     annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor HeatCapBat(C=
-        nParallels*nSeries*nStacked*BatType.cp*BatType.massBat)
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor HeatCapBat(C=nParallels*nSeries*nStacked*BatType.cp*BatType.massBat)
     "Heat capacity of the battery (C=nBats*cp_Bat*mass_Bat)"
     annotation (Placement(transformation(extent={{-10,70},{10,90}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor

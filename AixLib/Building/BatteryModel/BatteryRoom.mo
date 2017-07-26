@@ -20,62 +20,52 @@ model BatteryRoom
       choice=2 "2",
       radioButtons = true), choicesAllMatching = true);
    parameter Boolean batType1 = true "Battery Type of Rack 1" annotation (Dialog(
-      tab="Battery Rack Types",
-      descriptionLabel=true), choices(
+      tab="Battery Rack Types", descriptionLabel=true), choices(
       choice=true "Type 1",
       choice=false "Type 2",
       radioButtons = true), choicesAllMatching = true);
    parameter Boolean batType2 = true "Battery Type of Rack 2" annotation (Dialog(
-      tab="Battery Rack Types",
-      descriptionLabel=true), choices(
+      tab="Battery Rack Types", descriptionLabel=true), choices(
       choice=true "Type 1",
       choice=false "Type 2",
       radioButtons = true), choicesAllMatching = true);
    parameter Boolean batType3 = true "Battery Type of Rack 3" annotation (Dialog(
-      tab="Battery Rack Types",
-      descriptionLabel=true), choices(
+      tab="Battery Rack Types", descriptionLabel=true), choices(
       choice=true "Type 1",
       choice=false "Type 2",
       radioButtons = true), choicesAllMatching = true);
    parameter Boolean batType4 = true "Battery Type of Rack 4" annotation (Dialog(
-      tab="Battery Rack Types",
-      descriptionLabel=true), choices(
+      tab="Battery Rack Types", descriptionLabel=true), choices(
       choice=true "Type 1",
       choice=false "Type 2",
       radioButtons = true), choicesAllMatching = true);
    parameter Boolean batType5 = true "Battery Type of Rack 5" annotation (Dialog(
-      tab="Battery Rack Types",
-      descriptionLabel=true), choices(
+      tab="Battery Rack Types", descriptionLabel=true), choices(
       choice=true "Type 1",
       choice=false "Type 2",
       radioButtons = true), choicesAllMatching = true);
    parameter Boolean batType6 = true "Battery Type of Rack 6" annotation (Dialog(
-      tab="Battery Rack Types",
-      descriptionLabel=true), choices(
+      tab="Battery Rack Types", descriptionLabel=true), choices(
       choice=true "Type 1",
       choice=false "Type 2",
       radioButtons = true), choicesAllMatching = true);
    parameter Boolean batType7 = true "Battery Type of Rack 7" annotation (Dialog(
-      tab="Battery Rack Types",
-      descriptionLabel=true), choices(
+      tab="Battery Rack Types", descriptionLabel=true), choices(
       choice=true "Type 1",
       choice=false "Type 2",
       radioButtons = true), choicesAllMatching = true);
    parameter Boolean batType8 = true "Battery Type of Rack 8" annotation (Dialog(
-      tab="Battery Rack Types",
-      descriptionLabel=true), choices(
+      tab="Battery Rack Types", descriptionLabel=true), choices(
       choice=true "Type 1",
       choice=false "Type 2",
       radioButtons = true), choicesAllMatching = true);
    parameter Boolean batType9 = true "Battery Type of Rack 9" annotation (Dialog(
-      tab="Battery Rack Types",
-      descriptionLabel=true), choices(
+      tab="Battery Rack Types", descriptionLabel=true), choices(
       choice=true "Type 1",
       choice=false "Type 2",
       radioButtons = true), choicesAllMatching = true);
    parameter Boolean batType10 = true "Battery Type of Rack 10" annotation (Dialog(
-      tab="Battery Rack Types",
-      descriptionLabel=true), choices(
+      tab="Battery Rack Types", descriptionLabel=true), choices(
       choice=true "Type 1",
       choice=false "Type 2",
       radioButtons = true), choicesAllMatching = true);
