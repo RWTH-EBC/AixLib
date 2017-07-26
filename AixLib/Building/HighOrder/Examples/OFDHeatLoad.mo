@@ -30,12 +30,12 @@ model OFDHeatLoad "Test environment to determine OFD's nominal heat load"
   Modelica.Blocks.Sources.RealExpression sumHeatLoads(y=-sum(
         prescribedTemperature[:].port.Q_flow))
     annotation (Placement(transformation(extent={{42,-72},{62,-52}})));
-  Modelica.Blocks.Sources.RealExpression HeatLoads[size(prescribedTemperature,
+  Modelica.Blocks.Sources.RealExpression heatLoads[size(prescribedTemperature,
     1)](y=-(prescribedTemperature[:].port.Q_flow))
     annotation (Placement(transformation(extent={{42,-92},{62,-72}})));
-  Modelica.Blocks.Interfaces.RealOutput TotalheatLoad
+  Modelica.Blocks.Interfaces.RealOutput totalHeatLoad
     annotation (Placement(transformation(extent={{88,-72},{108,-52}})));
-  Modelica.Blocks.Interfaces.RealOutput RoomHeatLoads[size(
+  Modelica.Blocks.Interfaces.RealOutput roomHeatLoads[size(
     prescribedTemperature, 1)]
     annotation (Placement(transformation(extent={{88,-92},{108,-72}})));
   House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope
@@ -78,12 +78,12 @@ equation
       points={{79,80},{74,80},{74,63},{69,63}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(sumHeatLoads.y,TotalheatLoad)
+  connect(sumHeatLoads.y,totalHeatLoad)
                                     annotation (Line(
       points={{63,-62},{98,-62}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(HeatLoads.y,RoomHeatLoads)  annotation (Line(
+  connect(heatLoads.y,roomHeatLoads)  annotation (Line(
       points={{63,-82},{98,-82}},
       color={0,0,127},
       smooth=Smooth.None));
