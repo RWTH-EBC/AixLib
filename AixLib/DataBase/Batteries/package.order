@@ -1,2 +1,4 @@
-BatteryTypes
-BatteryRacks
+BatteryBaseDataDefinition
+LeadBattery1
+RackBaseDataDefinition
+RackBaseDataZeros

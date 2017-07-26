@@ -11,6 +11,8 @@ record BatteryBaseDataDefinition
   parameter SI.SpecificHeatCapacity cp
     "Specific Heat Capacity of the battery";
   parameter SI.Mass massBat "Mass of the battery";
+  parameter SI.Area radiationArea "Battery's area for the radiation";
+  parameter SI.Emissivity eps "Battery's emissivity coefficient";
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}), graphics={
         Text(

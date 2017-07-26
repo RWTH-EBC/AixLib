@@ -5,7 +5,9 @@ record LeadBattery1 "Lead Battery 1"
     width=0.5,
     length=0.2,
     cp=1100,
-    massBat=130);
+    massBat=130,
+    radiationArea=12,
+    eps=0.95);
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}), graphics={
         Text(

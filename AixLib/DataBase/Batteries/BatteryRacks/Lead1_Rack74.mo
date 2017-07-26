@@ -1,7 +1,7 @@
 within AixLib.DataBase.Batteries.BatteryRacks;
 record Lead1_Rack74
   "Battery Rack with 74 Batteries (Lead Batteries) not stacked and standing at one wall"
-  extends BatteryRacks.RackBaseDataDefinition(
+  extends BatteryTypes.RackBaseDataZeros(
     BatType = AixLib.DataBase.Batteries.BatteryTypes.LeadBattery1(),
     nParallels = 37,
     nSeries = 2,
