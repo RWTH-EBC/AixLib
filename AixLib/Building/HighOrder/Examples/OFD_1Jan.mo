@@ -19,7 +19,7 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
   AixLib.Building.Components.Weather.Weather Weather(Latitude = 49.5, Longitude = 8.5, GroundReflection = 0.2, tableName = "wetter", extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, SOD = AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_RoofN_Roof_S(), Wind_dir = false, Wind_speed = true, Air_temp = true, fileName = "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt", WeatherData(tableOnFile=false, table=weatherDataDay.weatherData)) annotation(Placement(transformation(extent={{125,55},
             {77,87}})));
   AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope
-    OFD(TIR=3)
+    OFD(TIR=3, withDynamicVentilation=true)
         annotation (Placement(transformation(extent={{-35,-48},{60,47}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature tempOutside
     annotation (Placement(transformation(extent={{-4,53},{-16.5,66}})));

@@ -27,7 +27,7 @@ model WholeHouseBuildingEnvelope
   parameter Real AirExchangeAttic=0 "Air exchange attic in 1/h "
     annotation (Dialog(group="Air Exchange Attic", descriptionLabel=true));
   // Dynamic Ventilation
-  parameter Boolean withDynamicVentilation=true "Dynamic ventilation"
+  parameter Boolean withDynamicVentilation=false "Dynamic ventilation"
     annotation (Dialog(group="Dynamic ventilation", descriptionLabel=true),
       choices(checkBox=true));
   parameter Modelica.SIunits.Temperature HeatingLimit=253.15
