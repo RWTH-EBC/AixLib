@@ -1,0 +1,1 @@
+﻿convertClass("AixLib.Fluid.HeatExchangers.HeaterCooler_T", "AixLib.Fluid.HeatExchangers.Heater_T");
