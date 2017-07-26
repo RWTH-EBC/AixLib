@@ -70,17 +70,17 @@ model WholeHouseBuildingEnvelope
     room3_length=3.92,
     room4_length=3.215,
     room5_length=4.62,
-    room1_width=3.84,
-    room2_width=3.84,
-    room3_width=3.84,
-    room4_width=3.84,
-    room5_width=3.84,
     roof_width1=3.36,
     roof_width2=3.36,
     solar_absorptance_RO=0.1,
     width=4.75,
     TMC=TMC,
     TIR=TIR,
+    room1_width=2.28,
+    room2_width=2.28,
+    room3_width=2.28,
+    room4_width=2.28,
+    room5_width=2.28,
     alfa=1.5707963267949)
     annotation (Placement(transformation(extent={{-26,46},{20,86}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermOutside
@@ -222,16 +222,11 @@ equation
   connect(AirExchangeAttic_Source.y, attic_2Ro_5Rooms.AirExchangePort)
     annotation (Line(points={{-51.6,74},{-26,74}}, color={0,0,127}));
   connect(attic_2Ro_5Rooms.SolarRadiationPort_RO1, SolarRadiationPort_RoofS)
-    annotation (Line(points={{-14.5,84},{-14,88},{-14,90},{60,90},{60,58},{90,
-          58}}, color={255,128,0}));
+    annotation (Line(points={{-14.5,84},{-14.5,90},{60,90},{60,58},{90,58}},
+                color={255,128,0}));
   connect(attic_2Ro_5Rooms.SolarRadiationPort_RO2, SolarRadiationPort_RoofN)
     annotation (Line(points={{8.5,84},{10,84},{10,90},{90,90}}, color={255,128,
           0}));
-  connect(attic_2Ro_5Rooms.SolarRadiationPort_OW2, West) annotation (Line(
-        points={{22.3,62.4},{60,62.4},{60,-90},{90,-90}}, color={255,128,0}));
-  connect(attic_2Ro_5Rooms.SolarRadiationPort_OW1, East) annotation (Line(
-        points={{-27.38,62},{-74,62},{-74,90},{60,90},{60,-18},{90,-18}}, color=
-         {255,128,0}));
   connect(heatStarToCombHeaters.thermStarComb, heatingToRooms) annotation (Line(
         points={{-67.4,-18.1},{-90,-18.1},{-90,-36}}, color={191,0,0}));
   connect(heatStarToCombHeaters[1].therm, groundFloor_Building.ThermLivingroom)
@@ -301,6 +296,11 @@ equation
       pattern=LinePattern.Dash));
   connect(groundFloor_Building.groundTemp, groundTemp) annotation (Line(points=
           {{-2,-94},{-2,-99},{26,-99},{26,-98}}, color={191,0,0}));
+  connect(East, attic_2Ro_5Rooms.SolarRadiationPort_OW1) annotation (Line(
+        points={{90,-18},{60,-18},{60,90},{-74,90},{-74,62},{-27.38,62}}, color
+        ={255,128,0}));
+  connect(West, attic_2Ro_5Rooms.SolarRadiationPort_OW2) annotation (Line(
+        points={{90,-90},{60,-90},{60,62.4},{22.3,62.4}}, color={255,128,0}));
   annotation (Icon(graphics={Bitmap(extent={{-78,74},{72,-68}}, fileName=
               "modelica://AixLib/Resources/Images/Building/HighOrder/Grundriss.PNG")}),
       Documentation(info="<html>

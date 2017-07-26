@@ -94,13 +94,13 @@ equation
         points={{-93,71},{-78,71},{-78,0.09375},{-32.15,0.09375}}, color={0,0,127}));
   connect(NaturalVentilation.y[2], OFD.AirExchangePort[6]) annotation (Line(
         points={{-93,71},{-78,71},{-78,6.74375},{-32.15,6.74375}}, color={0,0,127}));
-  connect(NaturalVentilation.y[4], OFD.AirExchangePort[3]) annotation (Line(
+  connect(NaturalVentilation.y[3], OFD.AirExchangePort[3]) annotation (Line(
         points={{-93,71},{-78,71},{-78,1.75625},{-32.15,1.75625}}, color={0,0,127}));
-  connect(NaturalVentilation.y[4], OFD.AirExchangePort[7]) annotation (Line(
+  connect(NaturalVentilation.y[3], OFD.AirExchangePort[7]) annotation (Line(
         points={{-93,71},{-78,71},{-78,8.40625},{-32.15,8.40625}}, color={0,0,127}));
-  connect(NaturalVentilation.y[3], OFD.AirExchangePort[4]) annotation (Line(
+  connect(NaturalVentilation.y[4], OFD.AirExchangePort[4]) annotation (Line(
         points={{-93,71},{-78,71},{-78,3.41875},{-32.15,3.41875}}, color={0,0,127}));
-  connect(NaturalVentilation.y[3], OFD.AirExchangePort[8]) annotation (Line(
+  connect(NaturalVentilation.y[4], OFD.AirExchangePort[8]) annotation (Line(
         points={{-93,71},{-78,71},{-78,10.0687},{-32.15,10.0687}}, color={0,0,127}));
   connect(heatStarToCombHeaters.thermStarComb, OFD.heatingToRooms) annotation (
       Line(points={{-42.42,-17.5688},{-36.68,-17.5688},{-36.68,-17.6},{-30.25,
