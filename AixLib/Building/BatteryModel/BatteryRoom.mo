@@ -569,7 +569,6 @@ equation
 <p><b><font style=\"color: #008000; \">Concept</font></b> </p>
 <p>This is a base model, which can be expanded if there are more difficult models needed. This base model can deal with ten battery racks and two different types of installed battery types. </p>
 <p>The model needs an input of heat loss of the batteries and separates this input automatically on the different battery racks.</p>
-</ul>
 <p><b><font style=\"color: #008000; \">Example</font></b> </p>
 <p><a href=\"AixLib.Building.BatteryModel.ExampleBatteryRoom\">AixLib.Building.BatteryModel.ExampleBatteryRoom </a></p>
 <p><b><font style=\"color: #008000; \">References</font></b> </p>

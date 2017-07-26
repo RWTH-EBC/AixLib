@@ -112,7 +112,6 @@ equation
 <p>- battery's temperature</p>
 <p>- radiation heat</p>
 <p>- convection heat</p>
-</ul>
 <p><b><font style=\"color: #008000; \">Example</font></b> </p>
 <p><a href=\"AixLib.Building.BatteryModel.ExampleBatteryRoom\">AixLib.Building.BatteryModel.ExampleBatteryRoom </a></p>
 <p><b><font style=\"color: #008000; \">References</font></b> </p>
