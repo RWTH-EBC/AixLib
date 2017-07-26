@@ -1,6 +1,4 @@
 within AixLib.Building.HighOrder.Examples;
-
-
 model Appartment_VoWo "Simulation of 1 apartment "
   extends Modelica.Icons.Example;
   parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();

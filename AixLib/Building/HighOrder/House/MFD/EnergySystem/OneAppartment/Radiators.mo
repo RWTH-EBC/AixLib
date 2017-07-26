@@ -1,6 +1,4 @@
 within AixLib.Building.HighOrder.House.MFD.EnergySystem.OneAppartment;
-
-
 model Radiators
   //Pipe lengths
  replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater
