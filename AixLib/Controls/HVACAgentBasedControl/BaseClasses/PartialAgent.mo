@@ -149,7 +149,7 @@ equation
     Documentation(revisions="<html>
 <ul>
 <li>July 2017, by Roozbeh Sangi: Documentation revised</li>
-<li>December 2016, by Felix B&uuml;nning: Changed some variables to Integer type in order to avoid warnings caused by using the &QUOT;==&QUOT; operator</li>
+<li>December 2016, by Felix B&uuml;nning: Changed some variables to Integer type in order to avoid warnings caused by using the &quot;==&quot; operator</li>
 <li>November 2016, by Felix B&uuml;nning: Added feature to use internal inbox refresh (better performance), updated Info window</li>
 <li>October 2015, by Felix B&uuml;nning: Developed and implemented</li>
 </ul>
