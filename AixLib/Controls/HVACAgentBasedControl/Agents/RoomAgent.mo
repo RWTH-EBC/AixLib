@@ -373,7 +373,7 @@ equation
 </ul>
 <h4><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Concept</span></h4>
 <p>The room agent observes the temperature inside a room. If the temperature crosses a certain treshhold and a pre-defined sample-time has elapsed, a cooling or heating request is calculated and send to a broker agent. The broker-agent ensures that the requested heat is produced. The logic is implemented with the help of the StateGraph library. Communication is realized with the help of the DeviceDriver library and follows the language standards for multi-agent-systems set by the FIPA to the highest possible extend for Modelica models. The following figure shows the behaviour of the roomagent. For further information please refer to the first reference.</p>
-<p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/RoomAgent.png\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/RoomAgent.png\" alt=\"Room agent\"/></p>
 <h4><span style=\"color: #008000\">References</span></h4>
 <ul>
 <li>Roozbeh Sangi, Felix B&uuml;nning, Marc Baranski, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic. </li>
@@ -387,10 +387,10 @@ equation
 </html>",
       revisions="<html>
 <ul>
+<li>December 2016, by Roozbeh Sangi:<br/>revised</li>
 <li>December 2016, by Felix B&uuml;nning: Changed some variables to Integer type in order to avoid warnings caused by using the &quot;==&quot; operator</li>
 <li>November 2016, by Felix B&uuml;nning: Made coefficients for load estimation accessible for the user</li>
 <li>October 2015, by Felix B&uuml;nning: Developed and implemented</li>
-<li>December 2016, by Roozbeh Sangi:<br/>revised</li>
 </ul>
 </html>"),Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-200,
             -300},{200,200}}), graphics={

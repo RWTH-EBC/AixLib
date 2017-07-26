@@ -86,11 +86,9 @@ equation
 (with PV)")}),                              Diagram(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-100},{100,100}})),
     Documentation(revisions="<html>
-<p>
 <ul>
 <li>December 2015, by Felix Bünning: Developed and implemented</li>
 </ul>
-</p>
 </html>",
     info="<html>
 <p><b><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Overview</span></b></p>

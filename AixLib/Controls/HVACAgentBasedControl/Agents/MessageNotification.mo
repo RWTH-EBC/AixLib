@@ -56,11 +56,9 @@ equation
           thickness=0.5)}),                                      Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>
-<p>
 <ul>
 <li>November 2016, by Felix Bünning: Developed and implemented</li>
 </ul>
-</p>
 </html>", info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
 <ul>
@@ -73,9 +71,9 @@ equation
 <p>Every agent system needs a MessageNotification model in order to function, similar to the &quot;System&quot; model of the Modelica.Fluid library. The MessageNotification is responsible for ensuring that the agents receive their messages and update their inbox.</p>
 <p>There are two different possibilities to notify the agents when they receive a message. The standard one corresponds to earlier versions of the library and is set by setting usePoke=false in the MessageNotification models and all other agents in the system. When this setting is made, the UDP inbox of all agents gets updated every n seconds (n set by user). This is straight forward but also leads to time event generation (weak simulation performance). If usePoke is set to true, the Boolean sendOut connectors of every agent in the system needs to be connected to the Boolean receive[n] input of the MessageNotification model. With this method, the agents only update their inbox in case one agent has sent out a message. This reduces event generation during idle times of the agents and thus may increase simulation perfomance in systems with long idle times of the agents. Example images for both methods are provided below. For further information you can also refer to the example results.</p>
 <p>System with usePoke=false</p>
-<p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/ExampleSystemMarked.png\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/ExampleSystemMarked.png\" alt=\"Example system\"/></p>
 <p>System with usePoke=true</p>
-<p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/ExampleSystemMarkedPoke.PNG\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/ExampleSystemMarkedPoke.PNG\" alt=\"Example system poke\"/></p>
 <h4><span style=\"color: #008000\">Example Results</span></h4>
 <ul>
 <li><a href=\"HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating\">System with usePoke=false</a></li>

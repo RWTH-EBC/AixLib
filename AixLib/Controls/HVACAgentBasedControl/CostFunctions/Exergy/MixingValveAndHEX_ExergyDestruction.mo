@@ -73,10 +73,8 @@ equation
 </ul>
 </html>",
     revisions="<html>
-<p>
 <ul>
 <li>October 2015, by Felix Bünning: Developed and implemented</li>
 </ul>
-</p>
 </html>"));
 end MixingValveAndHEX_ExergyDestruction;

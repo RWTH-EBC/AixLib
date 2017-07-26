@@ -55,19 +55,17 @@ equation
 <li><span style=\"font-family: MS Shell Dlg 2;\">It is used together with a HeatProducerAgent.</span></li>
 </ul>
 <h4><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Concept</span></h4>
-<p><span style=\"font-family: MS Shell Dlg 2;\"><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/HeatingRod.png\"/></span></p>
+<p><span style=\"font-family: MS Shell Dlg 2;\"><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/HeatingRod.png\" alt=\"Heating rod\"/></span></p>
 <p><span style=\"font-family: MS Shell Dlg 2;\">The figure above shows the control volume for the heating rod. Based on this volume the following function for exergy destruction has been developed. Details can be found in the reference.</span></p>
-<p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/heatingRodCostfkt.PNG\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/heatingRodCostfkt.PNG\" alt=\"Heating rod cost function\"/></p>
 <h4><span style=\"color: #008000\">References</span></h4>
 <ul>
 <li>Felix B&uuml;nning. Development of a Modelica-library for agent-based control of HVAC systems. Bachelor thesis, 2016, RWTH Aachen University, Aachen, Germany. </li>
 </ul>
 </html>",
     revisions="<html>
-<p>
 <ul>
 <li>October 2015, by Felix Bünning: Developed and implemented</li>
 </ul>
-</p>
 </html>"));
 end HeatingRod_ExergyDestruction;

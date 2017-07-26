@@ -667,7 +667,7 @@ equation
 </ul>
 <h4><span style=\"color: #008000\">Concept</span></h4>
 <p>The intermediate agent acts as a producer in front of one broker (bottom) and consumer in front of another broker (top). When it gets a call for proposal from the bottom broker, it passes it on to the top broker as an request. This broker handels the request and responds with a price information. The intermediate agent adds its own costs and passes it on as a proposal to the bottom broker. The proposal gets either rejected or accepted. This is passed on a confirm/reject to the top broker. The intermediate agent also adjusts it capacity according to the requested adjustment. The logic is implemented with the help of the StateGraph library. Communication is realized with the help of the DeviceDriver library and follows the language standards for multi-agent-systems set by the FIPA to the highest possible extend for Modelica models. The following figure shows the behaviour of the roomagent. For further information please refer to the first reference.</p>
-<p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/IntermediateAgent.png\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/IntermediateAgent.png\" alt=\"Intermediate agent\"/></p>
 <h4><span style=\"color: #008000\">References</span></h4>
 <ul>
 <li>Roozbeh Sangi, Felix B&uuml;nning, Marc Baranski, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic. </li>
@@ -681,9 +681,9 @@ equation
 </html>",
       revisions="<html>
 <ul>
+<li>December 2016, by Roozbeh Sangi:<br/>revised</li>
 <li>December 2016, by Felix B&uuml;nning: Changed some variables to Integer type in order to avoid warnings caused by using the &quot;==&quot; operator</li>
 <li>October 2015, by Felix B&uuml;nning: Developed and implemented</li>
-<li>December 2016, by Roozbeh Sangi:<br/>revised</li>
 </ul>
 </html>"));
 end IntermediateAgent;

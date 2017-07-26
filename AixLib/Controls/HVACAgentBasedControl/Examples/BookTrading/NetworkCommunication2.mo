@@ -34,9 +34,9 @@ model NetworkCommunication2
 </ul>
 <h4><span style=\"color: #008000\">Example Results</span></h4>
 <p>Results on the machine running NetworkCommunication1 (BookSellerAgent):</p>
-<p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/ScreenshotSellerAgent_marked.png\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/ScreenshotSellerAgent_marked.png\" alt=\"Seller agent\"/></p>
 <p>Results on the machine running NetworkCommunication2 (BookBuyerAgent):</p>
-<p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/ScreenshotBuyerAgent_marked.png\"/> </p>
+<p><img src=\"modelica:/AixLib/Resources/Images/Controls/HVACAgentBasedControl/ScreenshotBuyerAgent_marked.png\" alt=\"Buyer agent\"/> </p>
 </html>", revisions="<html>
 <ul>
 <li>November 2016, by Felix B&uuml;nning: Info-window updated</li>

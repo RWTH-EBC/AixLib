@@ -60,10 +60,8 @@ equation
 <li>Felix B&uuml;nning. Development of a Modelica-library for agent-based control of HVAC systems. Bachelor thesis, 2016, RWTH Aachen University, Aachen, Germany. </li>
 </ul>
 </html>", revisions="<html>
-<p>
 <ul>
 <li>October 2015, by Felix Bünning: Developed and implemented</li>
 </ul>
-</p>
 </html>"));
 end Boiler_ExergyDestruction;
