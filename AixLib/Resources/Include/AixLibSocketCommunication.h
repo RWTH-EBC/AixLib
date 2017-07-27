@@ -140,7 +140,7 @@ int SocketSend(tData sendbuf, int len, int socketHandle) // Send data via socket
 	return iResult;
 }
 
-int SocketReceive(char **buffer, int maxLen, int socketHandle) // Receive data on socket identified by socketHandle
+int SocketReceive(const char **buffer, int maxLen, int socketHandle) // Receive data on socket identified by socketHandle
 {
 	int iResult;
 	char *answerBuffer;
@@ -221,7 +221,7 @@ float convertBytetoSgl(unsigned char *ByteArray) {
 	return r.f; // *((Float*)&byArr)
 }
 
-unsigned char **convertDbltoHex(double num) {
+unsigned char *convertDbltoHex(double num) {
 	unsigned char *byArr;
 	unsigned char *buffer;
     int i;

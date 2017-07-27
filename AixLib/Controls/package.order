@@ -1,4 +1,7 @@
 Continuous
 Discrete
+HVACAgentBasedControl
+HeatPump
 SetPoints
 VentilationController
+Interfaces

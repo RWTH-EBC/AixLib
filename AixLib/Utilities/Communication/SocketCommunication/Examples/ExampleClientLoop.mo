@@ -78,16 +78,16 @@ Documentation(revisions="<html>
 </html>",
 info="<html>
 
-<p>This is a very simple example to show TCP-Communication functionality. 
+<p>This is a very simple example to show TCP-Communication functionality.
 A feedback control is modeled where a gain controller controls a first
-order system. The signal is send to a server which returns the send message 
+order system. The signal is send to a server which returns the send message
 unaltered back to the client.</p>
 
 <h4>TCP/IP-server for testing</h4>
 
 <p>A server to test <code>ExampleClientLoop</code> is provided both as a source code <a href=\"modelica://AixLib/Resources/SocketCommunicationServer/ExampleServer.cpp\">*.cpp-file</a> and as an executable <a href=\"modelica://AixLib/Resources/SocketCommunicationServer/ExampleServer.exe\">*.exe-file</a>. The server simply echoes the received character message and sends it back
 to the sender (i.e. client). The code may be compiled and executed from the console. This code
-is taken from Microsoft´s Winsock documentation pages: <a href=\"http://msdn.microsoft.com/de-de/library/windows/desktop/ms737591%28v=vs.85%29.aspx\">Link to MSDN</a> </p>
+is taken from Microsoft's Winsock documentation pages: <a href=\"http://msdn.microsoft.com/de-de/library/windows/desktop/ms737591%28v=vs.85%29.aspx\">Link to MSDN</a> </p>
 The server performs the following tasks:
 <ul>
 <li>Initialise Winsock;</li>
@@ -102,14 +102,14 @@ The server performs the following tasks:
 <h4>Usage</h4>
 <p>Open a console in Windows (Start -> Run -> insert: \"cmd\"), change folder
 to <code>.../AixLib/Resources/SocketCommunicationServer</code>,
-run <code>ExampleServer.exe</code>. The Server is now ready to operate. 
+run <code>ExampleServer.exe</code>. The Server is now ready to operate.
 Now simulate <code>ExampleClientLoop</code>.</p>
 
 <h4>Verfication of IP address</h4>
 
-<p>Note: Depending on your network settings it may be required to change 
-the IP address in <code>ExampleClientLoop.tCPCommunicatorExample</code>. 
-Set the IP address to the IP address of your local machine. (You may retrieve 
+<p>Note: Depending on your network settings it may be required to change
+the IP address in <code>ExampleClientLoop.tCPCommunicatorExample</code>.
+Set the IP address to the IP address of your local machine. (You may retrieve
 your local IP adress in Windows from the console (Start -> Run -> insert: \"cmd\" -> ipconfig)).</p>
 
 <h4>Requirements</h4>

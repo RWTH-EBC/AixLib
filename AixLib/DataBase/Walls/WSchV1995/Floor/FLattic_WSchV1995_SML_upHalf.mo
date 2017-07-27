@@ -16,8 +16,6 @@ record FLattic_WSchV1995_SML_upHalf
  </html>", info="<html>
 <p><b><span style=\"color: #008000;\">Overview</span></b> </p>
 <p>Wall definition according to WSchV 1995. For detailed wall type see above. </p>
-<p><b><span style=\"color: #008000;\">Level of Development</span></b> </p>
-<p><img src=\"modelica://AixLib/Resources/Images/Stars/stars5.png\" alt=\"stars: 5 out of 5\"/> </p>
 <p><b><span style=\"color: #008000;\">Concept</span></b> </p>
 <p><b><span style=\"color: #ff0000;\">Attention:</span></b> The first element in each vector represents the layer connected to <code>port_a</code>(outside), the last element represents the layer connected to <code>port_b</code>(surface facing the room). </p>
 <p><b><span style=\"color: #008000;\">References</span></b> </p>

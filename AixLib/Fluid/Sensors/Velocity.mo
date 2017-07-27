@@ -114,7 +114,7 @@ with <code>diameter = 0.1</code>.
 <li>
 May 20, 2016, by Marcus Fuchs:<br/>
 First implementation.
-Implementation is based on 
+Implementation is based on
 <a href=\"modelica://AixLib.Fluid.Sensors.VolumeFlowRate\">
 AixLib.Fluid.Sensors.VolumeFlowRate</a>.
 </li>

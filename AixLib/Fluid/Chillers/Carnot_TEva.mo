@@ -4,8 +4,6 @@ model Carnot_TEva
  extends AixLib.Fluid.Chillers.BaseClasses.PartialCarnot_T(
    final COP_is_for_cooling = true,
    final QCon_flow_nominal = -QEva_flow_nominal*(1 + COP_nominal)/COP_nominal,
-   effInpEva=AixLib.Fluid.Types.EfficiencyInput.port_b,
-   effInpCon=AixLib.Fluid.Types.EfficiencyInput.port_a,
    PEle(y=-QEva_flow/COP),
    redeclare HeatExchangers.HeaterCooler_u con(
     final from_dp=from_dp1,
@@ -17,13 +15,12 @@ model Carnot_TEva
     final energyDynamics=energyDynamics,
     final homotopyInitialization=homotopyInitialization,
     final Q_flow_nominal=QCon_flow_nominal),
-   redeclare HeatExchangers.HeaterCooler_T eva(
+   redeclare HeatExchangers.SensibleCooler_T eva(
     final from_dp=from_dp2,
     final dp_nominal=dp2_nominal,
     final linearizeFlowResistance=linearizeFlowResistance2,
     final deltaM=deltaM2,
-    final Q_flow_maxHeat=0,
-    final Q_flow_maxCool=QEva_flow_min,
+    final QMin_flow=QEva_flow_min,
     final tau=tau2,
     final T_start=T2_start,
     final energyDynamics=energyDynamics,
@@ -49,8 +46,8 @@ initial equation
 
 equation
   connect(TSet, eva.TSet) annotation (Line(points={{-120,90},{-66,90},{28,90},{28,
-          -54},{12,-54}}, color={0,0,127}));
-  connect(eva.Q_flow, QEva_flow) annotation (Line(points={{-11,-54},{-40,-54},{-40,
+          -52},{12,-52}}, color={0,0,127}));
+  connect(eva.Q_flow, QEva_flow) annotation (Line(points={{-11,-52},{-40,-52},{-40,
           -90},{110,-90}}, color={0,0,127}));
   connect(QCon_flow_internal.y, yCon.u)
     annotation (Line(points={{-59,40},{-42,40}},          color={0,0,127}));
@@ -59,7 +56,7 @@ equation
   connect(QCon_flow_internal.y, QCon_flow) annotation (Line(points={{-59,40},{-52,
           40},{-52,80},{80,80},{80,90},{110,90}}, color={0,0,127}));
   connect(QCon_flow_internal.u1, eva.Q_flow) annotation (Line(points={{-82,46},{
-          -90,46},{-90,-54},{-11,-54}}, color={0,0,127}));
+          -90,46},{-90,-52},{-11,-52}}, color={0,0,127}));
   connect(QCon_flow_internal.u2, PEle.y) annotation (Line(points={{-82,34},{-88,
           34},{-88,20},{72,20},{72,0},{61,0}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},
@@ -89,7 +86,7 @@ the condenser temperature <i>T<sub>con,0</sub></i>, in which
 case the model computes the Carnot effectivness as
 </p>
 <p align=\"center\" style=\"font-style:italic;\">
-&eta;<sub>Carnot,0</sub> = 
+&eta;<sub>Carnot,0</sub> =
   COP<sub>0</sub>
 &frasl;  (T<sub>eva,0</sub> &frasl; (T<sub>con,0</sub>-T<sub>eva,0</sub>)).
 </p>
@@ -143,12 +140,9 @@ The maximum cooling capacity is set by the parameter <code>QEva_flow_min</code>,
 which is by default set to negative infinity.
 </p>
 <p>
-By default, the coefficient of performance depends on the
-evaporator leaving temperature and the condenser entering
-temperature.
-This can be changed with the parameters
-<code>effInpEva</code> and
-<code>effInpCon</code>.
+The coefficient of performance depends on the
+evaporator and condenser leaving temperature
+since otherwise the second law of thermodynamics may be violated.
 </p>
 <h4>Notes</h4>
 <p>
@@ -159,6 +153,31 @@ AixLib.Fluid.HeatPumps.Examples.Carnot_TCon</a>.
 </html>",
 revisions="<html>
 <ul>
+<li>
+May 8, 2017, by Michael Wetter:<br/>
+Replaced model that interfaces with fluid stream.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/763\">
+AixLib, #763</a>.
+</li>
+<li>
+January 2, 2017, by Filip Jorissen:<br/>
+Removed parameters
+<code>effInpEva</code> and <code>effInpCon</code>
+and updated documentation.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/497\">
+issue 497</a>.
+</li>
+<li>
+August 8, 2016, by Michael Wetter:<br/>
+Changed default temperature to compute COP to be the leaving temperature as
+use of the entering temperature can violate the 2nd law if the temperature
+lift is small.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/497\">
+Annex 60, issue 497</a>.
+</li>
 <li>
 November 25, 2015 by Michael Wetter:<br/>
 First implementation.

@@ -29,7 +29,7 @@ partial model PartialCarnot_y
       final homotopyInitialization=homotopyInitialization,
       final Q_flow_nominal=QEva_flow_nominal));
 
-  parameter Modelica.SIunits.Power P_nominal
+  parameter Modelica.SIunits.Power P_nominal(min=0)
     "Nominal compressor power (at y=1)"
     annotation (Dialog(group="Nominal condition"));
 
@@ -166,6 +166,10 @@ that uses the leaving fluid temperature as the control signal.
 revisions="<html>
 <ul>
 <li>
+June 15, 2017, by Michael Wetter:<br/>
+Added <code>min</code> attribute to parameter <code>P_nominal</code>.
+</li>
+<li>
 January 26, 2016, by Michael Wetter:<br/>
 Implemented in the Annex 60 library the models
 <a href=\"modelica://AixLib.Fluid.Chillers.Carnot_y\">AixLib.Fluid.Chillers.Carnot_y</a>
@@ -183,7 +187,7 @@ Corrected wrong computation of <code>staB1</code> and <code>staB2</code>
 which mistakenly used the <code>inStream</code> operator
 for the configuration without flow reversal.
 This is for
-<a href=\"modelica://https://github.com/lbl-srg/modelica-buildings/issues/476\">
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/476\">
 issue 476</a>.
 </li>
 <li>
@@ -195,7 +199,7 @@ but it will write a warning so that users can transition their models.
 <br/>
 Corrected <code>assert</code> statement for the efficiency curve.
 This is for
-<a href=\"modelica://https://github.com/lbl-srg/modelica-buildings/issues/468\">
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/468\">
 issue 468</a>.
 </li>
 <li>

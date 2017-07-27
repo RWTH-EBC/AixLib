@@ -53,12 +53,12 @@ equation
 in order to test the functionality of the <a href=\"AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator\">AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>. </p>
 </html>",
         revisions="<html>
-<p><ul>
+<ul>
 <li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
 conventions</li>
 <li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>First
 implementation</li>
-</ul></p>
+</ul>
 </html>"),
 experiment(StopTime=3600, Interval=1));
 end HeatGeneratorNoControllSystem;

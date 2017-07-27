@@ -1,6 +1,4 @@
 within AixLib.Building.HighOrder.House.MFD.EnergySystem.OneAppartment;
-
-
 model Radiators
   //Pipe lengths
  replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater
@@ -13,7 +11,7 @@ model Radiators
   parameter Modelica.SIunits.Length Length_toBath = 2 "l4  " annotation(Dialog(group = "Pipe lengths", descriptionLabel = true, joinNext = true));
   parameter Modelica.SIunits.Length Length_toChildren = 0.5 "l3  " annotation(Dialog(group = "Pipe lengths", descriptionLabel = true, joinNext = true));
   parameter Modelica.SIunits.Length Length_toBedroom = 4.0 "l2  " annotation(Dialog(group = "Pipe lengths", descriptionLabel = true, joinNext = true));
-  parameter Modelica.SIunits.Length Length_toLi = 7 "l1  " annotation(Dialog(group = "Pipe lengths", descriptionLabel = true));
+  parameter Modelica.SIunits.Length Length_toLi = 7 "l1  " annotation(Dialog(group = "Pipe lengths", groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/GroundFloor_Hydraulics.png", descriptionLabel = true));
   //Pipe diameters
   parameter Modelica.SIunits.Diameter Diam_Main = 0.016 "Diameter main pipe" annotation(Dialog(group = "Pipe diameters", descriptionLabel = true));
   parameter Modelica.SIunits.Diameter Diam_Sec = 0.013
@@ -199,47 +197,41 @@ model Radiators
   Modelica.Blocks.Interfaces.RealInput TSet[5] annotation(Placement(transformation(extent = {{-123, 78}, {-95, 108}}), iconTransformation(extent = {{-10.5, -12}, {10.5, 12}}, rotation = 270, origin = {-105.5, 96})));
   Fluid.FixedResistances.HydraulicResistance hydResInflow(
     zeta=zeta_bend,
-    D=Diam_Main,
-    m_flow_small=0.0001,
+    diameter=Diam_Main,
     redeclare package Medium = Medium) "hydraulic resistance in floor"
     annotation (Placement(transformation(extent={{24,-84},{10,-75}})));
   Fluid.FixedResistances.HydraulicResistance hydResRadKi(
     zeta=3*zeta_bend,
-    D=Diam_Sec,
-    m_flow_small=0.0001,
+    diameter=Diam_Sec,
     redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{-113,-100.5},{-99,-91.5}})));
   Fluid.FixedResistances.HydraulicResistance hydResBendRight(
     zeta=zeta_bend,
-    D=Diam_Main,
-    m_flow_small=0.0001,
-    redeclare package Medium = Medium) "hydraulic resistance bend right"
+    diameter=Diam_Main,
+    redeclare package Medium = Medium,
+    m_flow_nominal=0.0001)             "hydraulic resistance bend right"
     annotation (Placement(transformation(
         extent={{-3.25,-2.25},{3.25,2.25}},
         rotation=90,
         origin={-3.75,-75.75})));
   Fluid.FixedResistances.HydraulicResistance hydResRadBa(
     zeta=2*zeta_bend,
-    D=Diam_Sec,
-    m_flow_small=0.0001,
+    diameter=Diam_Sec,
     redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{67,-53},{57,-44}})));
   Fluid.FixedResistances.HydraulicResistance hydResRadLi(
     zeta=3*zeta_bend,
-    D=Diam_Sec,
-    m_flow_small=0.0001,
+    diameter=Diam_Sec,
     redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{-116,-21},{-102,-12}})));
   Fluid.FixedResistances.HydraulicResistance hydResRadCh(
     zeta=2*zeta_bend,
-    D=Diam_Sec,
-    m_flow_small=0.0001,
+    diameter=Diam_Sec,
     redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{84,22.5},{74,31.5}})));
   Fluid.FixedResistances.HydraulicResistance hydResRadBe(
     zeta=3*zeta_bend,
-    D=Diam_Sec,
-    m_flow_small=0.0001,
+    diameter=Diam_Sec,
     redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{74,61.5},{60,70.5}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor tempSensorLi
@@ -462,9 +454,6 @@ equation
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>The model is exemplarly build with components found in the HVAC package.</p>
- <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\"
-    alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The model should be used as an example on how such a system can be built and connected to the building envelope.</p>
  </html>"));
