@@ -150,17 +150,19 @@ protected
                Placement(transformation(extent={{10,-55},{0,-45}})));
 
   Modelica.Blocks.Interfaces.RealInput y_reset_internal
-    "Internal connector for controller output reset"
+   "Internal connector for controller output reset"
    annotation(Evaluate=true);
 
   Modelica.Blocks.Math.Add3 addI(
     final k1=revAct,
-    final k2=-revAct) if with_I "Adder for I gain"
+    final k2=-revAct) if with_I
+    "Adder for I gain"
        annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
 
   Modelica.Blocks.Math.Add addSat(
     final k1=+1,
-    final k2=-1) if with_I "Adder for integrator feedback"
+    final k2=-1) if with_I
+    "Adder for integrator feedback"
     annotation (Placement(
         transformation(
         origin={80,-50},
@@ -181,6 +183,7 @@ protected
     final uMin=yMin,
     final strict=strict) "Output limiter"
     annotation (Placement(transformation(extent={{70,-10},{90,10}})));
+
 
   Modelica.Blocks.Sources.RealExpression intRes(
     final y=y_reset_internal/k - addPID.u1 - addPID.u2) if

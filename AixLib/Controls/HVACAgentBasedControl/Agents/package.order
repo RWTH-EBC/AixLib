@@ -1,7 +1,7 @@
-MessageNotification
-HeatProducerAgent
+Broker
 ColdProducerAgent
 ConsumerAgent
+HeatProducerAgent
 IntermediateAgent
+MessageNotification
 RoomAgent
-Broker

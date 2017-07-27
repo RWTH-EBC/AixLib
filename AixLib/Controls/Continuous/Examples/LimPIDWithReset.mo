@@ -1,5 +1,6 @@
 within AixLib.Controls.Continuous.Examples;
-model LimPIDWithReset "Example that demonstrates the controller output reset"
+model LimPIDWithReset
+  "Example that demonstrates the controller output reset"
   extends Modelica.Icons.Example;
 
   Plant plaWitRes "Plant connected to controller with reset" annotation (
@@ -15,18 +16,20 @@ model LimPIDWithReset "Example that demonstrates the controller output reset"
     width=50,
     offset=293.15,
     y(unit="K"),
-    period=180) "Temperature set point"
+    period=180)    "Temperature set point"
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
 
 protected
-  model Plant "Plant model"
+  model Plant
+    "Plant model"
     extends Modelica.Blocks.Icons.Block;
 
     Modelica.Blocks.Interfaces.RealInput Q_flow(unit="W")
       "Heat flow rate added to system"
       annotation (Placement(
           transformation(extent={{-120,-10},{-100,10}})));
-    Modelica.Blocks.Interfaces.RealOutput T(unit="K") "Controlled temperature"
+    Modelica.Blocks.Interfaces.RealOutput T(unit="K")
+      "Controlled temperature"
       annotation (Placement(
           transformation(extent={{100,-10},{120,10}})));
 
@@ -108,7 +111,8 @@ First implementation.
     Modelica.Blocks.Interfaces.RealInput TSet(unit="K") "Temperature set point"
       annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
 
-    Modelica.Blocks.Interfaces.RealInput u_m(unit="K") "Measured temperature"
+    Modelica.Blocks.Interfaces.RealInput u_m(unit="K")
+      "Measured temperature"
       annotation (Placement(transformation(
             rotation=90,extent={{-10,-10},{10,10}},
           origin={0,-110}), iconTransformation(
@@ -116,7 +120,8 @@ First implementation.
           rotation=90,
           origin={0,-110})));
 
-    Modelica.Blocks.Interfaces.RealOutput y "Control signal"
+    Modelica.Blocks.Interfaces.RealOutput y
+      "Control signal"
       annotation (Placement(transformation(
             extent={{100,-10},{120,10}}), iconTransformation(extent={{
               100,-10},{120,10}})));
@@ -129,7 +134,8 @@ First implementation.
       Ti=1,
       k=10) "PI controller"
       annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-    Modelica.Blocks.Math.Gain gain(k=5000) "Gain for heat flow rate"
+    Modelica.Blocks.Math.Gain gain(k=5000)
+                                          "Gain for heat flow rate"
       annotation (Placement(transformation(extent={{30,-10},{50,10}})));
     Modelica.Blocks.Logical.GreaterThreshold trigger(threshold=303.15)
       "Trigger input for controller reset"
