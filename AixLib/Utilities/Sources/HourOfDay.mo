@@ -21,8 +21,6 @@ equation
  <p>
  Additional to passed simulation seconds (SOY), hours (HOY) and days (DOY) this model provides the passed seconds of a day and the passed hours of a day. That can be used for a controller that will act depending on the time of the day for example.
  </p>
- <h4><font color=\"#008000\">Level of Development</font></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><font color=\"#008000\">Example Results</font></h4>
  <p><a href=\"AixLib.Utilities.Examples.TimeUtilities_test\">AixLib.Utilities.Examples.TimeUtilities_test</a> </p>
  </html>", revisions = "<html>

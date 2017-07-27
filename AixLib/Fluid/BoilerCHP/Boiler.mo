@@ -135,7 +135,6 @@ such as ambient air temperature, etc.
 </p>
 </html>",
         revisions="<html>
-<p>
 <ul>
 <li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
 conventions</li>
@@ -150,6 +149,6 @@ added.</li>
 <li><i>October 7, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation
 appropriately</li>
 <li><i>April 20, 2012&nbsp;</i> by Ana Constanting:<br/>Implemented</li>
-</ul></p>
+</ul>
 </html>"));
 end Boiler;

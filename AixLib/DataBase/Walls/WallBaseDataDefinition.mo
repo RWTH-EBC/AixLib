@@ -14,8 +14,6 @@ record WallBaseDataDefinition "Wall base data definition"
   annotation(Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>Wall BaseDataDefinition actually doesn&apos;t need predefined values and that is desirable to get errors thrown when using an unparameterised wall in a model. </p>
- <h4><font color=\"#008000\">Level of Development</font></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><font color=\"#008000\">Concept</font></h4>
  <p><b><font style=\"color: #ff0000; \">Attention:</font></b> The first element in each vector represents the layer connected to <code>port_a</code>(outside), the last element represents the layer connected to <code>port_b</code>(surface facing the room). </p>
  <h4><font color=\"#008000\">References</font></h4>

@@ -55,8 +55,6 @@ equation
     info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Simple light heat source model.</p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://AixLib/Resources/Images/Stars/stars2.png\" alt=\"stars: 2 out of 5\"/></p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <p>The area is variable and can be set via a special input in the radiative converter.</p>
 <p>The input signal can take values from 0 to an arbitrary maximum value. </p>

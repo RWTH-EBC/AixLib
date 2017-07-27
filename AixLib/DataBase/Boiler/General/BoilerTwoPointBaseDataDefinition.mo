@@ -16,7 +16,7 @@ record BoilerTwoPointBaseDataDefinition
     "Minimal heat power / thermal load, refering to net (inferior) calorific value";
   parameter Real[:,2] eta "Normal supply level";
   annotation (Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>
 Data set definition for real boilers. The Boiler has a two point (on/off)
 characteristic.

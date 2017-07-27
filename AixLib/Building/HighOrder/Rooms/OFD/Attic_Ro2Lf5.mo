@@ -157,8 +157,6 @@ equation
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for an attic&nbsp;with&nbsp;2&nbsp;saddle&nbsp;roofs&nbsp;and&nbsp;a&nbsp;floor&nbsp;toward&nbsp;5&nbsp;rooms&nbsp;on&nbsp;the&nbsp;lower&nbsp;floor,&nbsp;with&nbsp;all&nbsp;other&nbsp;walls&nbsp;towards&nbsp;the&nbsp;outside.</p>
- <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The following figure presents the room&apos;s layout:</p>
  <p><img src=\"modelica://AixLib/Resources/Images/Building/HighOrder/Attic_2Ro_5Rooms.png\"

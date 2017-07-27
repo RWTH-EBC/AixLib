@@ -1,6 +1,10 @@
 within AixLib.Airflow.AirHandlingUnit.BaseClasses;
 partial model PartialAHU "Defines necessary parameters and connectors"
 
+
+  parameter Real clockPeriodGeneric(min=0) = 1800
+    "time period in s for sampling (= converting time-continous into time-discrete) input variables. Recommendation: half of the duration of one simulation interval"
+    annotation (Dialog(group="Settings for State Machines"));
     // Booleans for possible AHU modes
   inner parameter Boolean heating=true "Heating Function of AHU"
     annotation (Dialog(group="AHU Modes"));
@@ -18,12 +22,19 @@ partial model PartialAHU "Defines necessary parameters and connectors"
   inner parameter Real BPF_DeHu(
     min=0,
     max=1) = 0.2
-    "By-pass factor of cooling coil during dehumidification. Necessary to calculate the real outgoing enthalpy flow of heat exchanger in dehumidification mode taking the surface enthalpy of the cooling coil into account"
+    "By-pass factor of cooling coil during dehumidification. Necessary to 
+    calculate the real outgoing enthalpy flow of heat exchanger in 
+    dehumidification mode taking the surface enthalpy of the cooling coil into account"
     annotation (Dialog(group="Settings AHU Value", enable=(dehumidification
            and cooling and heating)));
   inner parameter Boolean HRS=true
     "Is a HeatRecoverySystem physically integrated in the AHU?"
     annotation (Dialog(group="AHU Modes"), choices(checkBox=true));
+  parameter Boolean use_Vflow_in_extractAir=false
+    "If incoming volume flow of outdoor/supply air should not equal the 
+    volume flow of extract air, set this parameter to true"
+    annotation (Evaluate=true, HideResult=true, Dialog(group="AHU Modes"),
+      choices(checkBox=true));
   // Efficiency of HRS
   parameter Real efficiencyHRS_enabled(
     min=0,
@@ -32,13 +43,9 @@ partial model PartialAHU "Defines necessary parameters and connectors"
   parameter Real efficiencyHRS_disabled(
     min=0,
     max=1) = 0.2
-    "taking a little heat transfer into account although HRS is disabled (in case that a HRS is physically installed in the AHU)"
+    "taking a little heat transfer into account although HRS is disabled 
+    (in case that a HRS is physically installed in the AHU)"
     annotation (Dialog(group="Settings AHU Value", enable=HRS));
-
-  parameter Real clockPeriodGeneric(min=0) = 1800
-    "time period in s for sampling (= converting time-continous into time-discrete) input variables. Recommendation: half of the duration of one simulation interval"
-    annotation (Dialog(group="Settings for State Machines"));
-
   // assumed increase in ventilator pressure
   parameter Modelica.SIunits.Pressure dp_sup=800
     "pressure difference over supply fan"
@@ -66,36 +73,36 @@ partial model PartialAHU "Defines necessary parameters and connectors"
     annotation (Placement(transformation(
         extent={{14,-14},{-14,14}},
         rotation=0,
-        origin={100,90}),iconTransformation(
+        origin={100,78}),iconTransformation(
         extent={{-4,-4},{4,4}},
         rotation=180,
-        origin={84,28})));
+        origin={84,22})));
   Modelica.Blocks.Interfaces.RealInput phi_extractAir(start=0.8)
     "relativ Humidity [Range: 0...1]" annotation (Placement(transformation(
         extent={{14,-14},{-14,14}},
         rotation=0,
-        origin={100,72}),iconTransformation(
+        origin={100,62}),iconTransformation(
         extent={{-4,-4},{4,4}},
         rotation=180,
-        origin={84,18})));
+        origin={84,12})));
   Modelica.Blocks.Interfaces.RealOutput phi_supply(start=0.8)
     "relativ Humidity [Range: 0...1]" annotation (Placement(transformation(
         extent={{-9,-9},{9,9}},
         rotation=0,
-        origin={99,9}),  iconTransformation(
+        origin={99,5}),  iconTransformation(
         extent={{4,-4},{-4,4}},
         rotation=180,
         origin={84,-34})));
   Modelica.Blocks.Interfaces.RealInput T_supplyAir(unit="K", start=295.15)
     "K (use as PortIn)"
-    annotation (Placement(transformation(extent={{114,28},{86,56}}),
+    annotation (Placement(transformation(extent={{114,22},{86,50}}),
         iconTransformation(extent={{88,-18},{80,-10}})));
   Modelica.Blocks.Interfaces.RealInput phi_supplyAir[2](start={0.4,0.6})
     "relativ Humidity [Range: 0...1] (Vector: [1] min, [2] max)" annotation (
       Placement(transformation(
         extent={{14,-14},{-14,14}},
         rotation=0,
-        origin={100,24}),iconTransformation(
+        origin={100,20}),iconTransformation(
         extent={{-4,-4},{4,4}},
         rotation=180,
         origin={84,-24})));
@@ -126,22 +133,35 @@ partial model PartialAHU "Defines necessary parameters and connectors"
         extent={{-5,-5},{5,5}},
         rotation=-90,
         origin={49,-35})));
-  Modelica.Blocks.Interfaces.RealOutput Vflow_out(unit="m3/s",start=1e-3) "m3/s"
+  Modelica.Blocks.Interfaces.RealOutput Vflow_out(unit="m3/s",start=1e-3)
+    "supply volume flow in m3/s"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={54,-100}),iconTransformation(extent={{4,-4},{-4,4}}, origin={-96,16})));
   Modelica.Blocks.Interfaces.RealOutput T_supplyAirOut(unit="K", start=295.15)
-    "K (use as PortOut)"                                                                            annotation (Placement(transformation(
+    "K (use as PortOut)" annotation (Placement(transformation(
         extent={{-9,-9},{9,9}},
         rotation=0,
-        origin={99,57}), iconTransformation(
+        origin={99,49}), iconTransformation(
         extent={{4,-4},{-4,4}},
         rotation=180,
         origin={84,-4})));
+  Modelica.Blocks.Interfaces.RealInput Vflow_in_extractAir(unit="m3/s") if
+   use_Vflow_in_extractAir "Volume flow of extract air"
+    annotation (Placement(transformation(extent={{114,80},{86,108}}),
+        iconTransformation(extent={{88,32},{80,40}})));
+protected
+  Modelica.Blocks.Interfaces.RealInput Vflow_in_extractAir_internal(unit="m3/s") "Needed to connect to conditional connector";
 equation
   dehumidification = if dehumidificationSet and heating and cooling then dehumidificationSet else false;
   humidification = if dehumidificationSet and heating and cooling then humidificationSet else false;
+
+  connect(Vflow_in_extractAir, Vflow_in_extractAir_internal);
+
+  if not use_Vflow_in_extractAir then
+    Vflow_in_extractAir_internal = Vflow_in;
+  end if;
 
   annotation (Diagram(coordinateSystem(extent={{-100,-100},{100,100}},
           preserveAspectRatio=false)), Icon(coordinateSystem(extent={{-100,-40},
