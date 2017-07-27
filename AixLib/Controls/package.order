@@ -3,4 +3,5 @@ Discrete
 HeatPump
 SetPoints
 VentilationController
+HVACAgentBasedControl
 Interfaces
