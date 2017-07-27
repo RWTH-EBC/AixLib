@@ -363,11 +363,11 @@ end TwoWayEqualPercentageAdd;
   Modelica.Blocks.Sources.BooleanConstant isNight(final k=false)
     "boolean to activate the night modus for the pump"
     annotation (Placement(transformation(extent={{-462,-24},{-452,-14}})));
-  Modelica.Fluid.Interfaces.FluidPort_a watInlHeaCoi(redeclare package Medium
-      = MediumWater) "water inlet for the heating coil"
+  Modelica.Fluid.Interfaces.FluidPort_a watInlHeaCoi(redeclare package Medium =
+        MediumWater) "water inlet for the heating coil"
     annotation (Placement(transformation(extent={{-430,-110},{-410,-90}})));
-  Modelica.Fluid.Interfaces.FluidPort_b watOutHeaCoi(redeclare package Medium
-      = MediumWater) "water outlet in the heating coil outlet"
+  Modelica.Fluid.Interfaces.FluidPort_b watOutHeaCoi(redeclare package Medium =
+        MediumWater) "water outlet in the heating coil outlet"
     annotation (Placement(transformation(extent={{-408,-110},{-388,-90}})));
   Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear threeWayValveHeaCoi(
     redeclare package Medium = MediumWater,
@@ -671,5 +671,15 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Menerga 
 SorpSolair")}),                                                  Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-640,-100},{360,360}})));
+        coordinateSystem(preserveAspectRatio=false, extent={{-640,-100},{360,360}}),
+        graphics={Text(
+          extent={{-224,170},{-88,136}},
+          lineColor={28,108,200},
+          textString="Volumina an den Knoten einfügen"), Text(
+          extent={{-226,84},{-136,52}},
+          lineColor={28,108,200},
+          textString="Mehr Module: 
+Heizregister
+Rekuperator
+Sorption?")}));
 end MenergaSimple;
