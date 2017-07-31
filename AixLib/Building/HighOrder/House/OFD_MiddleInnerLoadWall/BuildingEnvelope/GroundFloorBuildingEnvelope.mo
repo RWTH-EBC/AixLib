@@ -274,6 +274,7 @@ model GroundFloorBuildingEnvelope
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort
     annotation (Placement(transformation(extent={{-130,12},{-100,42}})));
   Modelica.Blocks.Interfaces.RealInput AirExchangePort[4]
+    "1: LivingRoom_GF, 2: Hobby_GF, 3: WC_Storage_GF, 4: Kitchen_GF"
     annotation (Placement(transformation(extent={{-130,-18},{-100,12}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermOutside
     annotation (Placement(transformation(extent={{-116,66},{-100,82}})));

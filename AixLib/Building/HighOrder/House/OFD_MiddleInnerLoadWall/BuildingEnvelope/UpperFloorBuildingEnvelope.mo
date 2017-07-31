@@ -307,6 +307,7 @@ model UpperFloorBuildingEnvelope
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort
     annotation (Placement(transformation(extent={{-130,10},{-100,40}})));
   Modelica.Blocks.Interfaces.RealInput AirExchangePort[4]
+    "5: Bedroom_UF, 6: Child1_UF, 7: Bath_UF, 8: Child2_UF"
     annotation (Placement(transformation(extent={{-130,-26},{-100,4}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermOutside
     annotation (Placement(transformation(extent={{-116,66},{-100,82}})));
