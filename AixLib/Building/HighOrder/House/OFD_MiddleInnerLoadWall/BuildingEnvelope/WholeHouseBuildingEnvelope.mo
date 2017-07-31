@@ -11,6 +11,7 @@ model WholeHouseBuildingEnvelope
       choice=3 "Light",
       radioButtons=true));
   parameter Integer TIR=1 "Thermal Insulation Regulation" annotation (Dialog(
+      groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/Grundriss.png",
       group="Construction parameters",
       compact=true,
       descriptionLabel=true), choices(
@@ -297,8 +298,8 @@ equation
   connect(groundFloor_Building.groundTemp, groundTemp) annotation (Line(points=
           {{-2,-94},{-2,-99},{26,-99},{26,-98}}, color={191,0,0}));
   connect(East, attic_2Ro_5Rooms.SolarRadiationPort_OW1) annotation (Line(
-        points={{90,-18},{60,-18},{60,90},{-74,90},{-74,62},{-27.38,62}}, color
-        ={255,128,0}));
+        points={{90,-18},{60,-18},{60,90},{-74,90},{-74,62},{-27.38,62}}, color=
+         {255,128,0}));
   connect(West, attic_2Ro_5Rooms.SolarRadiationPort_OW2) annotation (Line(
         points={{90,-90},{60,-90},{60,62.4},{22.3,62.4}}, color={255,128,0}));
   annotation (Icon(graphics={Bitmap(extent={{-78,74},{72,-68}}, fileName=

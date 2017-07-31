@@ -10,6 +10,7 @@ model GroundFloorBuildingEnvelope
       choice=3 "Light",
       radioButtons=true));
   parameter Integer TIR=1 "Thermal Insulation Regulation" annotation (Dialog(
+      groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/Groundfloor_5Rooms.png",
       group="Construction parameters",
       compact=true,
       descriptionLabel=true), choices(
