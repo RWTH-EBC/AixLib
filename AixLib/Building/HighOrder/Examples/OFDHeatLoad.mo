@@ -3,9 +3,12 @@ model OFDHeatLoad "Test environment to determine OFD's nominal heat load"
   extends Modelica.Icons.Example;
   Modelica.Blocks.Sources.Constant constRooms[9](k={293.15,293.15,288.15,293.15,
         293.15,293.15,293.15,297.15,293.15})
+    "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Bath_UF, 9: Child2_UF"
     annotation (Placement(transformation(extent={{-70,-62},{-50,-42}})));
   Modelica.Blocks.Sources.Constant constAirEx[8](k={0.5,0.5,0.5,0.5,0.5,0.5,0.5,
-        0.5}) annotation (Placement(transformation(extent={{-70,6},{-50,26}})));
+        0.5})
+    "1: LivingRoom_GF, 2: Hobby_GF, 3: WC_Storage_GF, 4: Kitchen_GF, 5: Bedroom_UF, 6: Child1_UF, 7: Bath_UF, 8: Child2_UF"
+              annotation (Placement(transformation(extent={{-70,6},{-50,26}})));
   Modelica.Blocks.Sources.Constant constWind(k=0)
     annotation (Placement(transformation(extent={{-70,36},{-50,56}})));
   Modelica.Blocks.Sources.Constant constAmb(k=271.15)
@@ -94,14 +97,14 @@ equation
     annotation (Line(points={{-28,64},{-11.2,64},{-11.2,43.2}}, color={191,0,0}));
   connect(groundTemp.port, wholeHouseBuildingEnvelope.groundTemp)
     annotation (Line(points={{-42,-90},{14,-90},{14,1.2}}, color={191,0,0}));
-  connect(varRad.solarRad_out[1], wholeHouseBuildingEnvelope.North) annotation
-    (Line(points={{51,69.1667},{48,69.1667},{48,23.04},{39.2,23.04}}, color={
+  connect(varRad.solarRad_out[1], wholeHouseBuildingEnvelope.North) annotation (
+     Line(points={{51,69.1667},{48,69.1667},{48,23.04},{39.2,23.04}}, color={
           255,128,0}));
   connect(varRad.solarRad_out[2], wholeHouseBuildingEnvelope.East) annotation (
       Line(points={{51,69.5},{48,69.5},{48,12.96},{39.2,12.96}}, color={255,128,
           0}));
-  connect(varRad.solarRad_out[3], wholeHouseBuildingEnvelope.South) annotation
-    (Line(points={{51,69.8333},{48,69.8333},{48,2.32},{39.2,2.32}}, color={255,
+  connect(varRad.solarRad_out[3], wholeHouseBuildingEnvelope.South) annotation (
+     Line(points={{51,69.8333},{48,69.8333},{48,2.32},{39.2,2.32}}, color={255,
           128,0}));
   connect(varRad.solarRad_out[4], wholeHouseBuildingEnvelope.West) annotation (
       Line(points={{51,70.1667},{48,70.1667},{48,-7.2},{39.2,-7.2}}, color={255,
@@ -115,8 +118,8 @@ equation
   connect(heatStarToComb.thermStarComb, wholeHouseBuildingEnvelope.heatingToRooms)
     annotation (Line(points={{-14.6,-16.1},{-6,-16.1},{-6,-8},{-11.2,-8},{-11.2,
           7.92}}, color={191,0,0}));
-  connect(constAirEx.y, wholeHouseBuildingEnvelope.AirExchangePort) annotation
-    (Line(points={{-49,16},{-44,16},{-44,20.8},{-12.32,20.8}}, color={0,0,127}));
+  connect(constAirEx.y, wholeHouseBuildingEnvelope.AirExchangePort) annotation (
+     Line(points={{-49,16},{-44,16},{-44,20.8},{-12.32,20.8}}, color={0,0,127}));
   annotation (Diagram(graphics={
         Text(
           extent={{-112,-40},{-74,-62}},
