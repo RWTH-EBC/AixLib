@@ -491,10 +491,6 @@ equation
   connect(roof.WindSpeedPort, WindSpeedPort) annotation (Line(points={{67.4667,
           62.1499},{67.4667,70},{-80,70},{-80,-40},{-99.5,-40}},
                                                         color={0,0,127}));
-  connect(thermFloorHeatingDownHeatFlow, floor.port_outside) annotation (Line(
-      points={{-77,-79},{-76,-79},{-76,-70},{-27,-70},{-27,-62.1}},
-      color={191,0,0},
-      pattern=LinePattern.Dash));
   connect(thermFloorHeatingDownHeatFlow, floor_FH.port_a) annotation (Line(
       points={{-77,-79},{-77,-80},{-31.6,-80},{-31.6,-82.2999}},
       color={191,0,0},

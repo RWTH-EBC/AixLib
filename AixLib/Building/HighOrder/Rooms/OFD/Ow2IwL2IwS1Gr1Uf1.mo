@@ -501,10 +501,6 @@ equation
       points={{-77,-79},{-77,-80},{-31.6,-80},{-31.6,-84.2999}},
       color={191,0,0},
       pattern=LinePattern.Dash));
-  connect(thermFloorHeatingDownHeatFlow, floor.port_outside) annotation (Line(
-      points={{-77,-79},{-76,-79},{-76,-70},{-27,-70},{-27,-62.1}},
-      color={191,0,0},
-      pattern=LinePattern.Dash));
   connect(ground, floor.port_outside) annotation (Line(
       points={{-6,-94},{-6,-74},{-24,-74},{-24,-62.1},{-27,-62.1}},
       color={191,0,0},

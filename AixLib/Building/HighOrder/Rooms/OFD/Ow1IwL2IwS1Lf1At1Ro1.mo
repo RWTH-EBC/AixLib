@@ -14,7 +14,6 @@ model Ow1IwL2IwS1Lf1At1Ro1
   parameter Integer TIR=1 "Thermal Insulation Regulation" annotation (Dialog(
       groupImage=
           "modelica://AixLib/Resources/Images/Building/HighOrder/OW1_2IWl_2IWs_1Pa_1At1Ro.png",
-
       group="Construction parameters",
       compact=true,
       descriptionLabel=true), choices(
@@ -391,10 +390,10 @@ protected
       room_height_long - room_length*(room_width_long - room_width_short)*(
       room_height_long - room_height_short)*0.5;
 equation
-  connect(outside_wall1.WindSpeedPort, WindSpeedPort) annotation (Line(points={
-          {-64.25,38.2667},{-80,38.2667},{-80,-50},{-99.5,-50}}, color={0,0,127}));
-  connect(outside_wall1.SolarRadiationPort, SolarRadiationPort_OW1) annotation
-    (Line(points={{-65.5,43.5833},{-80,43.5833},{-80,30},{-99.5,30}}, color={0,
+  connect(outside_wall1.WindSpeedPort, WindSpeedPort) annotation (Line(points={{-64.25,
+          38.2667},{-80,38.2667},{-80,-50},{-99.5,-50}},         color={0,0,127}));
+  connect(outside_wall1.SolarRadiationPort, SolarRadiationPort_OW1) annotation (
+     Line(points={{-65.5,43.5833},{-80,43.5833},{-80,30},{-99.5,30}}, color={0,
           0,0}));
   connect(inside_wall3.port_outside, thermInsideWall3) annotation (Line(points=
           {{20,-64.2},{20,-74},{30,-74},{30,-90}}, color={191,0,0}));
@@ -426,8 +425,8 @@ equation
   connect(inside_wall2a.thermStarComb_inside, thermStar_Demux.thermStarComb)
     annotation (Line(points={{58,19},{40,19},{40,-40},{-20.1,-40},{-20.1,-35.4}},
         color={191,0,0}));
-  connect(roof.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation
-    (Line(points={{58,56},{58,40},{40,40},{40,-40},{-20.1,-40},{-20.1,-35.4}},
+  connect(roof.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation (
+     Line(points={{58,56},{58,40},{40,40},{40,-40},{-20.1,-40},{-20.1,-35.4}},
         color={191,0,0}));
   connect(Ceiling.thermStarComb_inside, thermStar_Demux.thermStarComb)
     annotation (Line(points={{28,58},{28,40},{40,40},{40,-40},{-20.1,-40},{
@@ -459,10 +458,6 @@ equation
           -28},{-40,-28},{-40,-40},{-6,-40},{-6,-12},{1,-12}}, color={191,0,0}));
   connect(roof.WindSpeedPort, WindSpeedPort) annotation (Line(points={{69.7333,
           62.15},{69.7333,72},{-80,72},{-80,-50},{-99.5,-50}}, color={0,0,127}));
-  connect(thermFloorHeatingDownHeatFlow, floor.port_outside) annotation (Line(
-      points={{-77,-79},{-76,-79},{-76,-70},{-24,-70},{-24,-62.1}},
-      color={191,0,0},
-      pattern=LinePattern.Dash));
   connect(thermFloorHeatingDownHeatFlow, floor_FH.port_a) annotation (Line(
       points={{-77,-79},{-77,-80},{-31.6,-80},{-31.6,-82.2999}},
       color={191,0,0},
