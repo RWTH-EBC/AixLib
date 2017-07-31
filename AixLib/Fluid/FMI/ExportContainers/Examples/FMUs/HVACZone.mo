@@ -136,7 +136,7 @@ block HVACZone
   BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     pAtmSou=AixLib.BoundaryConditions.Types.DataSource.Parameter,
     TDryBul=TOut_nominal,
-    filNam="modelica://AixLib/Resources/WeatherData/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos",
+    filNam="modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos",
     TDryBulSou=AixLib.BoundaryConditions.Types.DataSource.File,
     computeWetBulbTemperature=false) "Weather data reader"
     annotation (Placement(transformation(extent={{-152,130},{-132,150}})));
