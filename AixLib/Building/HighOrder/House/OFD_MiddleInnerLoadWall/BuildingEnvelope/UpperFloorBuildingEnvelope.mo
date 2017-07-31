@@ -307,7 +307,7 @@ model UpperFloorBuildingEnvelope
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort
     annotation (Placement(transformation(extent={{-130,10},{-100,40}})));
   Modelica.Blocks.Interfaces.RealInput AirExchangePort[4]
-    "5: Bedroom_UF, 6: Child1_UF, 7: Bath_UF, 8: Child2_UF"
+    "1(5): Bedroom_UF, 2 (6): Child1_UF, 3(7): Bath_UF, 4(8): Child2_UF"
     annotation (Placement(transformation(extent={{-130,-26},{-100,4}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermOutside
     annotation (Placement(transformation(extent={{-116,66},{-100,82}})));
@@ -341,7 +341,9 @@ model UpperFloorBuildingEnvelope
     annotation (Placement(transformation(extent={{-28,-68},{-12,-52}})));
   Modelica.Blocks.Sources.Constant AirExchangePort_doorSt(k=0) "Storage"
     annotation (Placement(transformation(extent={{-116,-68},{-100,-52}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermFloor[4] if withFloorHeating
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermFloorHeatingDownHeatFlow[4] if
+                                                                       withFloorHeating
+    "1(6): Bedroom_UF, 2(7): Child1_UF, 3(8): Bath_UF, 4(9): Child2_UF"
     annotation (Placement(transformation(extent={{-102,-102},{-90,-90}}),
         iconTransformation(extent={{-100,-100},{-86,-90}})));
 equation
@@ -489,24 +491,25 @@ equation
   connect(Corridor.AirExchangePort, AirExchangePort_doorSt.y) annotation (Line(
         points={{82,-10.71},{90,-10.71},{90,-92},{-90,-92},{-90,-60},{-99.2,-60}},
         color={0,0,127}));
-  connect(Bedroom.thermFloorHeatingDownHeatFlow, ThermFloor[1]) annotation (
-      Line(
+  connect(Bedroom.thermFloorHeatingDownHeatFlow, thermFloorHeatingDownHeatFlow[
+    1]) annotation (Line(
       points={{-71.2,19.76},{-71.2,-2},{-88,-2},{-88,-100.5},{-96,-100.5}},
       color={191,0,0},
       pattern=LinePattern.Dash));
-  connect(Children1.thermFloorHeatingDownHeatFlow, ThermFloor[2]) annotation (
-      Line(
+  connect(Children1.thermFloorHeatingDownHeatFlow,
+    thermFloorHeatingDownHeatFlow[2]) annotation (Line(
       points={{71.74,32.32},{71.74,22},{-4,22},{-4,-2},{-88,-2},{-88,-97.5},{-96,
           -97.5}},
       color={191,0,0},
       pattern=LinePattern.Dash));
-  connect(Bath.thermFloorHeatingDownHeatFlow, ThermFloor[3]) annotation (Line(
+  connect(Bath.thermFloorHeatingDownHeatFlow, thermFloorHeatingDownHeatFlow[3])
+    annotation (Line(
       points={{73.74,-40.32},{73.74,-30},{-4,-30},{-4,-2},{-88,-2},{-88,-94.5},
           {-96,-94.5}},
       color={191,0,0},
       pattern=LinePattern.Dash));
-  connect(Children2.thermFloorHeatingDownHeatFlow, ThermFloor[4]) annotation (
-      Line(
+  connect(Children2.thermFloorHeatingDownHeatFlow,
+    thermFloorHeatingDownHeatFlow[4]) annotation (Line(
       points={{-73.2,-25.76},{-73.2,-2},{-88,-2},{-88,-91.5},{-96,-91.5}},
       color={191,0,0},
       pattern=LinePattern.Dash));

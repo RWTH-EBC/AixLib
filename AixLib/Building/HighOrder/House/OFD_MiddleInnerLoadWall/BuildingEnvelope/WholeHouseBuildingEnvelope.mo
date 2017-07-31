@@ -137,7 +137,7 @@ model WholeHouseBuildingEnvelope
     annotation (Placement(transformation(extent={{-100,-46},{-80,-26}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a
     thermFloorHeatingDownHeatFlow[9] if withFloorHeating
-    "Thermal connector for heat flow of floor heating going downwards through the floors/ceilings"
+    "Thermal connector for heat flow of floor heating going downwards through the floors/ceilings; 1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Bath_UF, 9: Child2_UF"
     annotation (Placement(transformation(extent={{-104,-104},{-88,-88}}),
         iconTransformation(extent={{-76,-70},{-62,-60}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a groundTemp[5]
@@ -290,8 +290,8 @@ equation
       points={{-96,-96},{-22.976,-96},{-22.976,-92.7}},
       color={191,0,0},
       pattern=LinePattern.Dash));
-  connect(thermFloorHeatingDownHeatFlow[6:9], upperFloor_Building.ThermFloor[1:
-    4]) annotation (Line(
+  connect(thermFloorHeatingDownHeatFlow[6:9], upperFloor_Building.thermFloorHeatingDownHeatFlow[
+    1:4]) annotation (Line(
       points={{-96,-88.8889},{-36,-88.8889},{-36,-20.7},{-23.1825,-20.7}},
       color={191,0,0},
       pattern=LinePattern.Dash));

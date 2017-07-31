@@ -319,7 +319,7 @@ model GroundFloorBuildingEnvelope
             -10,-62}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a
     thermFloorHeatingDownHeatFlow[5] if                                withFloorHeating
-    "Thermal connector for heat flow of floor heating going downwards through the wall/floor/ceiling"
+    "Thermal connector for heat flow of floor heating going downwards through the wall/floor/ceiling. 1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF"
     annotation (Placement(transformation(extent={{-102,-100},{-90,-88}}),
         iconTransformation(extent={{-100,-100},{-86,-90}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a groundTemp[5]
