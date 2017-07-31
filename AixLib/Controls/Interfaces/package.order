@@ -2,5 +2,7 @@ HeatPumpControlBus
 ComponentShellTwoPort
 BasicControllerShell
 BasicPriorityControllerBus
-BusSwitch
-Testconnector
+HeatPumpBusSwitch
+TestSwitch
+TestSwitchVectorBus
+TestSwitchVectorBusOpposite

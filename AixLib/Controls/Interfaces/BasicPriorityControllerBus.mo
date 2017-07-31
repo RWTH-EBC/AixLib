@@ -4,7 +4,8 @@ expandable connector BasicPriorityControllerBus
   extends Modelica.Icons.SignalBus;
 
   Real priority "Priority for the usage of different controllers";
-
+  Boolean OnOff "On Off";
+  Modelica.SIunits.Temperature Tout "Temperature";
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
