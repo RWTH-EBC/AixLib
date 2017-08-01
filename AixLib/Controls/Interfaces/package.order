@@ -6,3 +6,5 @@ HeatPumpBusSwitch
 TestSwitch
 TestSwitchVectorBus
 TestSwitchVectorBusOpposite
+BoilerBusSwitchBMS
+BoilerBusSwitchComponent

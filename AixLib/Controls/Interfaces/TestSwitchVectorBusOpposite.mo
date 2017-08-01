@@ -1,6 +1,6 @@
 within AixLib.Controls.Interfaces;
 model TestSwitchVectorBusOpposite
-  "Switches between several signalBus outputs"
+  "Switches between several signalBus outputs, signal between component and controller"
 
   parameter Integer n=5 "number of switchable ports";
 
