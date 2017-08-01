@@ -139,6 +139,7 @@ Table 8"),
           extent={{-94,-80},{-56,-102}},
           lineColor={28,108,200},
           textString="DIN EN 12831 Beiblatt 1
+Table 1 \\theta'_m,e and see
 Calculation example: Chapter 6.1.3.4"),
         Text(
           extent={{-112,90},{-74,68}},
