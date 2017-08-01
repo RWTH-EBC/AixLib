@@ -23,8 +23,7 @@ model OFDHeatLoad "Test environment to determine OFD's nominal heat load"
         extent={{10,-8},{-10,8}},
         rotation=0,
         origin={-24,-16})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
-    prescribedTemperature1
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedAmbTemperature
     annotation (Placement(transformation(extent={{-40,58},{-28,70}})));
   Utilities.Sources.PrescribedSolarRad        varRad(n=6)
     annotation (Placement(transformation(extent={{70,60},{50,80}})));
@@ -44,20 +43,21 @@ model OFDHeatLoad "Test environment to determine OFD's nominal heat load"
   House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope
     wholeHouseBuildingEnvelope
     annotation (Placement(transformation(extent={{-14,-10},{42,46}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedHeatFlowRad[9]
+    annotation (Placement(transformation(extent={{-60,-24},{-48,-12}})));
+  Modelica.Blocks.Sources.Constant adiabaticRadRooms[9](k=fill(0, 9))
+    "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Bath_UF, 9: Child2_UF"
+    annotation (Placement(transformation(extent={{-90,-26},{-74,-10}})));
 equation
   connect(constRooms.y,prescribedTemperature. T) annotation (Line(
       points={{-49,-52},{-37.2,-52}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(prescribedTemperature.port,heatStarToComb. star) annotation (Line(
-      points={{-24,-52},{-18,-52},{-18,-32},{-40,-32},{-40,-10.2},{-34.4,-10.2}},
-      color={191,0,0},
-      smooth=Smooth.None));
   connect(prescribedTemperature.port,heatStarToComb. therm) annotation (Line(
       points={{-24,-52},{-16,-52},{-16,-30},{-38,-30},{-38,-21.1},{-34.1,-21.1}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(constAmb.y,prescribedTemperature1. T) annotation (Line(
+  connect(constAmb.y, prescribedAmbTemperature.T) annotation (Line(
       points={{-49,80},{-46,80},{-46,64},{-41.2,64}},
       color={0,0,127},
       smooth=Smooth.None));
@@ -93,7 +93,7 @@ equation
   connect(constWind.y, wholeHouseBuildingEnvelope.WindSpeedPort) annotation (
       Line(points={{-49,46},{-38,46},{-38,32.56},{-12.32,32.56}}, color={0,0,
           127}));
-  connect(prescribedTemperature1.port, wholeHouseBuildingEnvelope.thermOutside)
+  connect(prescribedAmbTemperature.port, wholeHouseBuildingEnvelope.thermOutside)
     annotation (Line(points={{-28,64},{-11.2,64},{-11.2,43.2}}, color={191,0,0}));
   connect(groundTemp.port, wholeHouseBuildingEnvelope.groundTemp)
     annotation (Line(points={{-42,-90},{14,-90},{14,1.2}}, color={191,0,0}));
@@ -120,6 +120,10 @@ equation
           7.92}}, color={191,0,0}));
   connect(constAirEx.y, wholeHouseBuildingEnvelope.AirExchangePort) annotation (
      Line(points={{-49,16},{-44,16},{-44,20.8},{-12.32,20.8}}, color={0,0,127}));
+  connect(adiabaticRadRooms.y, prescribedHeatFlowRad.T)
+    annotation (Line(points={{-73.2,-18},{-61.2,-18}}, color={0,0,127}));
+  connect(prescribedHeatFlowRad.port, heatStarToComb.star) annotation (Line(
+        points={{-48,-18},{-44,-18},{-44,-10.2},{-34.4,-10.2}}, color={191,0,0}));
   annotation (Diagram(graphics={
         Text(
           extent={{-112,-40},{-74,-62}},
