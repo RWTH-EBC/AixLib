@@ -307,7 +307,10 @@ equation
       Documentation(info="<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for the envelope of the whole one family dwelling.</p>
- </html>", revisions="<html>
+<p><b><span style=\"color: #008000;\">Ground temperature</span></b> </p>
+<p>The ground temperature can be coupled to any desired prescriped temperature. Anyway, suitable ground temperatures depending on locations in Germany are listed as &Theta;'_m,e in the comprehensive table 1 in &quot;Beiblatt 1&quot; in the norm DIN EN 12831.</p>
+<p>Or a ground temperature can be chosen according to a TRY region, which is listed below: if ...</p><p>TRY_Region == 1 then 282.15 K</p><p>TRY_Region == 2 then 281.55 K</p><p>TRY_Region == 3 then 281.65 K</p><p>TRY_Region == 4 then 282.65 K</p><p>TRY_Region == 5 then 281.25 K</p><p>TRY_Region == 6 then 279.95 K</p><p>TRY_Region == 7 then 281.95 K</p><p>TRY_Region == 8 then 279.95 K</p><p>TRY_Region == 9 then 281.05 K</p><p>TRY_Region == 10 then 276.15 K</p><p>TRY_Region == 11 then 279.45 K</p><p>TRY_Region == 12 then 283.35 K</p><p>TRY_Region == 13 then 281.05 K</p><p>TRY_Region == 14 then 281.05 K</p><p>TRY_Region == 15 then 279.95 K </p>
+</html>",  revisions="<html>
 
  <ul>
  <li><i>August 1, 2017</i> by Philipp Mehrfeld:<br/>Add heat-star-combi to connect heaters in a more clever way</li>
