@@ -43,7 +43,7 @@ model OFDHeatLoad "Test environment to determine OFD's nominal heat load"
   House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope
     wholeHouseBuildingEnvelope
     annotation (Placement(transformation(extent={{-14,-10},{42,46}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedHeatFlowRad[9]
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow    prescribedHeatFlowRad[9]
     annotation (Placement(transformation(extent={{-60,-24},{-48,-12}})));
   Modelica.Blocks.Sources.Constant adiabaticRadRooms[9](k=fill(0, 9))
     "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Bath_UF, 9: Child2_UF"
@@ -120,10 +120,10 @@ equation
           7.92}}, color={191,0,0}));
   connect(constAirEx.y, wholeHouseBuildingEnvelope.AirExchangePort) annotation (
      Line(points={{-49,16},{-44,16},{-44,20.8},{-12.32,20.8}}, color={0,0,127}));
-  connect(adiabaticRadRooms.y, prescribedHeatFlowRad.T)
-    annotation (Line(points={{-73.2,-18},{-61.2,-18}}, color={0,0,127}));
   connect(prescribedHeatFlowRad.port, heatStarToComb.star) annotation (Line(
         points={{-48,-18},{-44,-18},{-44,-10.2},{-34.4,-10.2}}, color={191,0,0}));
+  connect(adiabaticRadRooms.y, prescribedHeatFlowRad.Q_flow)
+    annotation (Line(points={{-73.2,-18},{-60,-18}}, color={0,0,127}));
   annotation (Diagram(graphics={
         Text(
           extent={{-112,-40},{-74,-62}},
