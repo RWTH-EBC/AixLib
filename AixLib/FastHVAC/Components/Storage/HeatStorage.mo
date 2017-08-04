@@ -1,6 +1,6 @@
 within AixLib.FastHVAC.Components.Storage;
 model HeatStorage "Simple model of a heat storage"
-  import AixLib;
+
 
   /* *******************************************************************
       Medium
@@ -114,15 +114,13 @@ public
             {10,-110},{30,-90}})));
 
 public
-  AixLib.FastHVAC.BaseClasses.EnergyBalance
-                                     energyBalance_load[n]
+  FastHVAC.BaseClasses.EnergyBalance   energyBalance_load[n]
     annotation (Placement(transformation(
         extent={{-20,-19},{20,19}},
         rotation=270,
         origin={-41,0})));
 
-  AixLib.FastHVAC.BaseClasses.EnergyBalance
-                                     energyBalance_unload[n]
+  FastHVAC.BaseClasses.EnergyBalance   energyBalance_unload[n]
     annotation (Placement(transformation(
         extent={{-20,20},{20,-20}},
         rotation=270,
@@ -253,11 +251,11 @@ connect(heatingRod, layer[n_HR].port);
 
      for m in 1:n loop
        if m<=integer(min(max(AixLib.Utilities.Math.Functions.round(load_cycles[ 1]/(data.hTank/n) + 0.5, 0), 1), n)) and m>=integer(min(max(AixLib.Utilities.Math.Functions.round(load_cycles[ 2]/(data.hTank/n) + 0.5, 0), 1), n)) then
-         connect(energyBalance_load[m].heatPort_a,layer[m].port);
+         connect(energyBalance_load[m].therm,layer[m].port);
        elseif m>integer(min(max(AixLib.Utilities.Math.Functions.round(load_cycles[1]/(data.hTank/n) + 0.5, 0), 1), n)) then
-      connect(energyBalance_load[m].heatPort_a, varTemp_load[2].port);
+      connect(energyBalance_load[m].therm, varTemp_load[2].port);
        else
-      connect(energyBalance_load[m].heatPort_a, varTemp_load[1].port);
+      connect(energyBalance_load[m].therm, varTemp_load[1].port);
        end if;
 
      end for;
@@ -292,16 +290,16 @@ if integer(min(max(AixLib.Utilities.Math.Functions.round(load_cycles[ 1]/(data.h
 
      for m in 1:n loop
        if m>=integer(min(max(AixLib.Utilities.Math.Functions.round(unload_cycles[ 1]/(data.hTank/n) + 0.5, 0), 1), n)) and m<=integer(min(max(AixLib.Utilities.Math.Functions.round(unload_cycles[2]/(data.hTank/n) + 0.5, 0), 1), n)) then
-         connect(energyBalance_unload[m].heatPort_a,layer[m].port);
+         connect(energyBalance_unload[m].therm,layer[m].port);
        elseif m>integer(min(max(AixLib.Utilities.Math.Functions.round(unload_cycles[ 2]/(data.hTank/n) + 0.5, 0), 1), n)) then
-      connect(energyBalance_unload[m].heatPort_a, varTemp_unload[2].port);
+      connect(energyBalance_unload[m].therm, varTemp_unload[2].port);
        else
-      connect(energyBalance_unload[m].heatPort_a, varTemp_unload[1].port);
+      connect(energyBalance_unload[m].therm, varTemp_unload[1].port);
        end if;
      end for;
   /* *************Setting of the lower temperature********************************/
      if integer(min(max(AixLib.Utilities.Math.Functions.round(unload_cycles[ 1]/(data.hTank/n) + 0.5, 0), 1), n))==1 then
-       //just a dummy value, because the dummy is not connected to any energyBalance
+       //just a dummy value, because the dummy varTemp_load is not connected to any energyBalance
     varTemp_unload[1].T = 323.15;
      else
     varTemp_unload[1].T = UnloadingCycle_In.T;

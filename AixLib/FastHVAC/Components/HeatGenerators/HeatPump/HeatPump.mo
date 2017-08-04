@@ -216,7 +216,7 @@ FastHVAC.Interfaces.EnthalpyPort_b enthalpyPort_outEv annotation (Placement(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-130,26})));
-  BaseClasses.WorkingFluid        evFluid(
+  FastHVAC.BaseClasses.WorkingFluid evFluid(
   medium=medium_ev,
   m_fluid=volume_ev*medium_ev.rho,
   T0=T_startEv) annotation (Placement(transformation(
@@ -239,7 +239,7 @@ FastHVAC.Interfaces.EnthalpyPort_b enthalpyPort_outEv annotation (Placement(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={130,-32})));
-  BaseClasses.WorkingFluid        coFluid(
+  FastHVAC.BaseClasses.WorkingFluid coFluid(
   medium=medium_co,
   m_fluid=volume_co*medium_co.rho,
   T0=T_startCo) annotation (Placement(transformation(

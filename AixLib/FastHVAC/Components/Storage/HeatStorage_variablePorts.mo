@@ -1,6 +1,7 @@
 within AixLib.FastHVAC.Components.Storage;
 model HeatStorage_variablePorts "Simple model of a heat storage"
-  import AixLib;
+
+
 
   /* *******************************************************************
       Medium
@@ -116,15 +117,13 @@ public
         iconTransformation(extent={{10,-110},{30,-90}})));
 
 public
-  AixLib.FastHVAC.BaseClasses.EnergyBalance
-                                     energyBalance_load[n,n_load_cycles]
+  FastHVAC.BaseClasses.EnergyBalance   energyBalance_load[n,n_load_cycles]
     annotation (Placement(transformation(
         extent={{-20,-19},{20,19}},
         rotation=270,
         origin={-39,0})));
 
-  AixLib.FastHVAC.BaseClasses.EnergyBalance
-                                     energyBalance_unload[n,n_unload_cycles]
+  FastHVAC.BaseClasses.EnergyBalance   energyBalance_unload[n,n_unload_cycles]
     annotation (Placement(transformation(
         extent={{-20,20},{20,-20}},
         rotation=270,
@@ -174,7 +173,6 @@ public
         Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a
                            out
     annotation (Placement(transformation(extent={{90,90},{110,110}}),iconTransformation(extent={{50,70},{70,90}})));
-
   BaseClasses.HeatingCoil heatingCoil1(
     T_start=T_start,
     dis_HC=dis_HC1,
