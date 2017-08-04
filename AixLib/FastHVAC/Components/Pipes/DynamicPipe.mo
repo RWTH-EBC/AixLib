@@ -6,7 +6,7 @@ model DynamicPipe
       Medium
      ******************************************************************* */
 parameter Boolean selectable=true "Pipe record";
-    parameter FastHVAC.Media.BaseClass.MediumSimple medium=
+    parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
       FastHVAC.Media.WaterSimple()
     "Mediums charastics  (heat capacity, density, thermal conductivity)"
     annotation(choicesAllMatching);

@@ -1,7 +1,7 @@
 within AixLib.FastHVAC.Components.Sinks;
 model Sink "Simple sink model"
 
-  parameter FastHVAC.Media.BaseClass.MediumSimple medium=
+  parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
       FastHVAC.Media.WaterSimple()
     "Mediums charastics (heat capacity, density, thermal conductivity)"
     annotation (choicesAllMatching);
@@ -10,7 +10,7 @@ model Sink "Simple sink model"
       Components
       ******************************************************************* */
 
-  FastHVAC.BaseClass.WorkingFluid fluid(
+  FastHVAC.BaseClasses.WorkingFluid fluid(
     T0(start=333.15),
     m_fluid=1,
     medium=medium)

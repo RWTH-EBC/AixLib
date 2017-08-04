@@ -8,7 +8,7 @@ model ML_thermal_delta "Multi layers of heat exchanger"
      Parameters
      ******************************************************************* */
 
-     parameter FastHVAC.Media.BaseClass.MediumSimple medium=
+     parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
       FastHVAC.Media.WaterSimple()
     "Standard charastics for fluid (heat capacity, density, thermal conductivity)";
 
@@ -93,7 +93,7 @@ model ML_thermal_delta "Multi layers of heat exchanger"
   AixLib.Utilities.Interfaces.Star Radiative annotation (Placement(
         transformation(extent={{36,70},{56,90}}), iconTransformation(extent={{
             36,70},{56,90}})));
-  BaseClass.WorkingFluid radiatorFluid(
+  FastHVAC.BaseClasses.WorkingFluid radiatorFluid(
     T0=T0,
     medium=medium,
     m_fluid=medium.rho*vol_water)

@@ -4,7 +4,7 @@ model Radiator_ML "Simple radiator multilayer model"
   import calcT =
     AixLib.FastHVAC.Components.HeatExchanger.BaseClasses.Calc_Excess_Temp;
 
-  parameter FastHVAC.Media.BaseClass.MediumSimple medium= FastHVAC.Media.WaterSimple()
+  parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple medium= AixLib.FastHVAC.Media.WaterSimple()
     "Standard charastics for water (heat capacity, density, thermal conductivity)"
     annotation (choicesAllMatching);
 
@@ -14,9 +14,8 @@ model Radiator_ML "Simple radiator multilayer model"
 
   parameter Boolean selectable=false "Radiator record" annotation(Dialog(group="Radiator Data"));
   parameter AixLib.DataBase.Radiators.RadiatorBaseDataDefinition radiatorType
-       "Choose a radiator"
-    annotation (Dialog(group="Radiator Data", enable=selectable),
-      choicesAllMatching=true);
+    "Choose a radiator" annotation (Dialog(group="Radiator Data", enable=
+          selectable), choicesAllMatching=true);
   parameter
     FastHVAC.Components.HeatExchanger.BaseClasses.RadiatorTypes.RadiatorType Type=(if
       selectable then radiatorType.Type else AixLib.FastHVAC.Components.HeatExchanger.BaseClasses.RadiatorTypes.PanelRadiator10)
