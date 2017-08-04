@@ -28,4 +28,3 @@ equation
  </ul>
  </html>"));
 end HeatToStar_Avar;
-
