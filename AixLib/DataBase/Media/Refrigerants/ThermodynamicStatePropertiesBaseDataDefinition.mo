@@ -12,46 +12,101 @@ record ThermodynamicStatePropertiesBaseDataDefinition
   "Polynomial order for p (SC) | Polynomial order for h (SC) | Total number of terms (SC) |
    Polynomial order for p (SH) | Polynomial order for h (SH) | Total number of terms (SH)"
   annotation (Dialog(group="Temperature_ph"));
-  parameter Real temperature_ph_sc[:]
-  "Coefficients for supercooled regime"
+  parameter Real temperature_ph_sc_a[:]
+  "Coefficients a for supercooled regime"
   annotation (Dialog(group="Temperature_ph"));
-  parameter Real temperature_ph_sh[:]
-  "Coefficients for superheated regime"
+  parameter Real temperature_ph_sc_b[:]
+  "Coefficients b for supercooled regime"
+  annotation (Dialog(group="Temperature_ph"));
+  parameter Real temperature_ph_sc_c[:]
+  "Coefficients c for supercooled regime"
+  annotation (Dialog(group="Temperature_ph"));
+  parameter Real temperature_ph_sc_d[:]
+  "Coefficient d for supercooled regime"
+  annotation (Dialog(group="Temperature_ph"));
+  parameter Real temperature_ph_sh_a[:]
+  "Coefficients a for superheated regime"
+  annotation (Dialog(group="Temperature_ph"));
+  parameter Real temperature_ph_sh_b[:]
+  "Coefficients b for superheated regime"
+  annotation (Dialog(group="Temperature_ph"));
+  parameter Real temperature_ph_sh_c[:]
+  "Coefficients c for superheated regime"
+  annotation (Dialog(group="Temperature_ph"));
+  parameter Real temperature_ph_sh_d[:]
+  "Coefficient d for superheated regime"
   annotation (Dialog(group="Temperature_ph"));
   parameter Real temperature_ph_iO[:]
-  "Mean SC p | Mean SC h | Std SC p | Std SC h | 
-   Mean SH p | Mean SH h | Std SH p | Std SH h"
+  "Mean SC p | Std SC p | Mean SC h | Std SC h | Mean SC T | Std SC T |
+   Mean SH p | Std SH p | Mean SH h | Std SH h | Mean SH T | Std SH T"
   annotation (Dialog(group="Temperature_ph"));
 
   parameter Integer temperature_ps_nT[:]
   "Polynomial order for p (SC) | Polynomial order for s (SC) | Total number of terms (SC) |
    Polynomial order for p (SH) | Polynomial order for s (SH) | Total number of terms (SH)"
   annotation (Dialog(group="Temperature_ps"));
-  parameter Real temperature_ps_sc[:]
-  "Coefficients for supercooled regime"
+  parameter Real temperature_ps_sc_a[:]
+  "Coefficients a for supercooled regime"
   annotation (Dialog(group="Temperature_ps"));
-  parameter Real temperature_ps_sh[:]
-  "Coefficients for superheated regime"
+  parameter Real temperature_ps_sc_b[:]
+  "Coefficients b for supercooled regime"
+  annotation (Dialog(group="Temperature_ps"));
+  parameter Real temperature_ps_sc_c[:]
+  "Coefficients c for supercooled regime"
+  annotation (Dialog(group="Temperature_ps"));
+  parameter Real temperature_ps_sc_d[:]
+  "Coefficient d for supercooled regime"
+  annotation (Dialog(group="Temperature_ps"));
+  parameter Real temperature_ps_sh_a[:]
+  "Coefficients a for superheated regime"
+  annotation (Dialog(group="Temperature_ps"));
+  parameter Real temperature_ps_sh_b[:]
+  "Coefficients b for superheated regime"
+  annotation (Dialog(group="Temperature_ps"));
+  parameter Real temperature_ps_sh_c[:]
+  "Coefficients c for superheated regime"
+  annotation (Dialog(group="Temperature_ps"));
+  parameter Real temperature_ps_sh_d[:]
+  "Coefficient d for superheated regime"
   annotation (Dialog(group="Temperature_ps"));
   parameter Real temperature_ps_iO[:]
-  "Mean SC p | Mean SC s | Std SC p | Std SC s | 
-   Mean SH p | Mean SH s | Std SH p | Std SH s"
+  "Mean SC p | Std SC p | Mean SC s | Std SC s | Mean SC T | Std SC T | 
+   Mean SH p | Std SH p | Mean SH s | Std SH s | Mean SH T | Std SH T"
   annotation (Dialog(group="Temperature_ps"));
 
   parameter Integer density_pT_nT[:]
   "Polynomial order for p (SC) | Polynomial order for T (SC) | Total number of terms (SC) |
    Polynomial order for p (SH) | Polynomial order for T (SH) | Total number of terms (SH)"
   annotation (Dialog(group="Density_pT"));
-  parameter Real density_pT_sc[:]
-  "Coefficients for supercooled regime"
+  parameter Real density_pT_sc_a[:]
+  "Coefficients a for supercooled regime"
   annotation (Dialog(group="Density_pT"));
-  parameter Real density_pT_sh[:]
-  "Coefficients for superheated regime"
+  parameter Real density_pT_sc_b[:]
+  "Coefficients b for supercooled regime"
+  annotation (Dialog(group="Density_pT"));
+  parameter Real density_pT_sc_c[:]
+  "Coefficients c for supercooled regime"
+  annotation (Dialog(group="Density_pT"));
+  parameter Real density_pT_sc_d[:]
+  "Coefficient d for supercooled regime"
+  annotation (Dialog(group="Density_pT"));
+  parameter Real density_pT_sh_a[:]
+  "Coefficients a for superheated regime"
+  annotation (Dialog(group="Density_pT"));
+  parameter Real density_pT_sh_b[:]
+  "Coefficients b for superheated regime"
+  annotation (Dialog(group="Density_pT"));
+  parameter Real density_pT_sh_c[:]
+  "Coefficients c for superheated regime"
+  annotation (Dialog(group="Density_pT"));
+  parameter Real density_pT_sh_d[:]
+  "Coefficient d for superheated regime"
   annotation (Dialog(group="Density_pT"));
   parameter Real density_pT_iO[:]
-  "Mean SC p | Mean SC T | Std SC p | Std SC T | 
-   Mean SH p | Mean SH T | Std SH p | Std SH T"
+  "Mean SC p | Std SC p | Mean SC T | Std SC T | Mean SC d | Std SC d |
+   Mean SH p | Std SH p | Mean SH T | Std SH T | Mean SH d | Std SH d"
   annotation (Dialog(group="Density_pT"));
+
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
@@ -62,7 +117,7 @@ record ThermodynamicStatePropertiesBaseDataDefinition
 </html>",
         info="<html>
 <p>This record is a base data definition for fitting coefficients of the thermodynamic state properties depending on two independent state variables. These thermodynamic state properties are given as fitted formulas in order to reduce the overall computing time of the refrigerant model. Therefore, the fitting approach is based on &QUOT;Fast_Propane&QUOT; model developed by Sangi et al..</p>
-<p>Sangi et al. used the <b>following fitting approaches</b>, which are also implemented within <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMedium\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMedium</a>:<br></p>
+<p>Sangi et al. used the <b>following fitting approaches</b>, which are also implemented within <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord</a>:<br></p>
 <table cellspacing=\"0\" cellpadding=\"3\" border=\"1\" width=\"80%\"><tr>
 <td valign=\"middle\" rowspan=\"2\"><p><i>Temperature_ph</i></p></td>
 <td valign=\"middle\"><p>First Input</p></td>

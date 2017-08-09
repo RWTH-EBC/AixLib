@@ -4,7 +4,8 @@ model RefrigerantInversions
   extends Modelica.Icons.Example;
 
   // Define the refrigerant that shall be tested
-  package Medium = AixLib.Media.Refrigerants.R1270.R1270_FastPropane;
+  package Medium =
+      AixLib.Media.Refrigerants.R1270.R1270_IIR_P05_30_T263_343_Record; // HelmholtzMedia.HelmholtzFluids.Propane
 
   // Define the fluid limits of the medium that shall be tested
   parameter Modelica.SIunits.AbsolutePressure p_min = 0.5e5
@@ -89,25 +90,32 @@ equation
   // Calculate inverse thermodynamic properties
   TInv_h = Medium.temperature_ph(p = p, h = h, phase = 0);
   assert(abs(T - TInv_h) < errorTemperature_ph,
-    "Error in implementation of temperature_ph");
+    "Error in implementation of temperature_ph",
+    level=AssertionLevel.warning);
   TInv_s = Medium.temperature_ps(p = p, s = s, phase = 0);
   assert(abs(T - TInv_s) < errorTemperature_ps,
-    "Error in implementation of temperature_ph");
+    "Error in implementation of temperature_ph",
+    level=AssertionLevel.warning);
   pInv_d = Medium.pressure_dT(d = d, T = T, phase = 0);
   assert(abs(p - pInv_d) < errorPressure_dT,
-    "Error in implementation of temperature_ph");
+    "Error in implementation of temperature_ph",
+    level=AssertionLevel.warning);
   dInv_h = Medium.density_ph(p = p, h = h, phase = 0);
   assert(abs(d - dInv_h) < errorDensity_ph,
-    "Error in implementation of density_ph");
+    "Error in implementation of density_ph",
+    level=AssertionLevel.warning);
   dInv_s = Medium.density_ps(p = p, s = s, phase = 0);
   assert(abs(d - dInv_s) < errorDensity_ps,
-    "Error in implementation of density_ps");
+    "Error in implementation of density_ps",
+    level=AssertionLevel.warning);
   hInv_d = Medium.specificEnthalpy_dT(d = d, T = T, phase = 0);
   assert(abs(h - hInv_d) < errorSpecificEnthalpy_dT,
-    "Error in implementation of specificEnthalpy_dT");
+    "Error in implementation of specificEnthalpy_dT",
+    level=AssertionLevel.warning);
   hInv_s = Medium.specificEnthalpy_ps(p = p, s = s, phase = 0);
   assert(abs(h - hInv_s) < errorSpecificEnthalpy_ps,
-    "Error in implementation of specificEnthalpy_ps");
+    "Error in implementation of specificEnthalpy_ps",
+    level=AssertionLevel.warning);
 
   annotation (
 experiment(StopTime=80, Tolerance=1e-006),

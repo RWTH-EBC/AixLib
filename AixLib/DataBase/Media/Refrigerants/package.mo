@@ -7,7 +7,6 @@ package Refrigerants "Package provides records describing properties of differen
 
 
 
-
   annotation (Icon(graphics={
         Rectangle(
           lineColor={200,200,200},
@@ -158,7 +157,7 @@ package Refrigerants "Package provides records describing properties of differen
 <li><i>Refrigerant packages:</i> For the different refrigerant media, records inherited from the base data definitions are saved within one refrigerant package.</li>
 </ol>
 <p><b>Assumptions and limitations</b> </p>
-<p>Currently, there is implemented just one approach (i.e. the hybrid approach) to model refrigerant media (for detailed information, please see <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMedium\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMedium</a>). Hence, the base data definitions support just the hybrid approach.</p>
+<p>Currently, there is implemented just one approach (i.e. the hybrid approach) to model refrigerant media (for detailed information, please see <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord</a>). Hence, the base data definitions support just the hybrid approach.</p>
 </html>", revisions="<html>
 <ul>
   <li>

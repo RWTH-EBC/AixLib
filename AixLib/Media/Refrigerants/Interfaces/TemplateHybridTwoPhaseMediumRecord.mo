@@ -1,5 +1,6 @@
-within AixLib.Media.Refrigerants.R134a;
-package R134a_FstImp "Refrigerant model developed by Engelpracht"
+within AixLib.Media.Refrigerants.Interfaces;
+partial package TemplateHybridTwoPhaseMediumRecord
+  "Template for media models using a hybrid approach with records"
 
   /*Provide basic definitions of the refrigerant. Therefore, fill constants
     or parameters and may add new constants or parameters if needed. Moreover,
@@ -7,40 +8,41 @@ package R134a_FstImp "Refrigerant model developed by Engelpracht"
   */
   constant Modelica.Media.Interfaces.PartialTwoPhaseMedium.FluidConstants[1]
     refrigerantConstants(
-     each chemicalFormula = "C3H8",
-     each structureFormula = "C3H8",
-     each casRegistryNumber = "74-98-6",
-     each iupacName = "Propane",
-     each molarMass = 0.04409562,
-     each criticalTemperature = 369.89,
-     each criticalPressure = 4.2512e6,
-     each criticalMolarVolume = 5e3,
-     each normalBoilingPoint = 231.036,
-     each triplePointTemperature = 85.525,
-     each meltingPoint = 85.45,
-     each acentricFactor = 0.153,
-     each triplePointPressure = 0.00017,
-     each dipoleMoment = 0.1,
-     each hasCriticalData=true) "Thermodynamic constants for R134a";
+      each chemicalFormula = "CXHY",
+      each structureFormula = "CXHY",
+      each casRegistryNumber = "xx-xx-x",
+      each iupacName = "name",
+      each molarMass = 1,
+      each criticalTemperature = 1,
+      each criticalPressure = 1,
+      each criticalMolarVolume = 1,
+      each normalBoilingPoint = 1,
+      each triplePointTemperature = 1,
+      each meltingPoint = 1,
+      each acentricFactor = 1,
+      each triplePointPressure = 1,
+      each dipoleMoment = 1,
+      each hasCriticalData=true) "Thermodynamic constants for refrigerant";
 
   /*Provide basic information about the refrigerant. These basic information
     are the refrigerant name as well as the valid refrigerant limits in terms of
     specific enthalpy, density, absolute pressure and temperature.
   */
-  extends AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMedium(
-    mediumName="Propane",
-    substanceNames={"Propane"},
+  extends
+    AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord(
+    mediumName="Name",
+    substanceNames={"Name"},
     singleState=false,
     SpecificEnthalpy(
       start=1.0e5,
       nominal=1.0e5,
-      min=177e3,
-      max=576e3),
+      min=50e3,
+      max=1000e3),
     Density(
       start=500,
-      nominal=529,
-      min=0.77,
-      max=547),
+      nominal=500,
+      min=0.5,
+      max=100),
     AbsolutePressure(
       start=1e5,
       nominal=5e5,
@@ -49,8 +51,8 @@ package R134a_FstImp "Refrigerant model developed by Engelpracht"
     Temperature(
       start=273.15,
       nominal=273.15,
-      min=263.15,
-      max=343.15),
+      min=200.15,
+      max=423.15),
     smoothModel=true,
     onePhase=false,
     ThermoStates=Choices.IndependentVariables.phX,
@@ -78,12 +80,12 @@ package R134a_FstImp "Refrigerant model developed by Engelpracht"
       for the initialization of nonlinear solver iterations.
     */
 
-  //redeclare record extends ThermodynamicState "Thermodynamic state"
-  //  Density d "Density";
-  //  Temperature T "Temperature";
-  //  AbsolutePressure p "Pressure";
-  //  SpecificEnthalpy h "Enthalpy";
-  //end ThermodynamicState;
+//   redeclare record extends ThermodynamicState "Thermodynamic state"
+//     Density d "Density";
+//     Temperature T "Temperature";
+//     AbsolutePressure p "Pressure";
+//     SpecificEnthalpy h "Enthalpy";
+//   end ThermodynamicState;
   /*The record "ThermodynamicState" contains the input arguments
     of all the function and is defined together with the used
     type definitions in PartialMedium. The record most often contains two of the
@@ -144,19 +146,19 @@ package R134a_FstImp "Refrigerant model developed by Engelpracht"
   */
   redeclare record EoS
     "Record that contains fitting coefficients of the Helmholtz EoS"
-    extends AixLib.DataBase.Media.Refrigerants.R134a.EoS_Engelpracht;
+    extends AixLib.DataBase.Media.Refrigerants.R1270.EoS_IIR_P05_30_T263_343;
   end EoS;
 
   redeclare record BDSP
     "Record that contains fitting coefficients of the state properties at bubble
     and dew lines"
-    extends AixLib.DataBase.Media.Refrigerants.R134a.BDSP_Engelpracht;
+    extends AixLib.DataBase.Media.Refrigerants.R1270.BDSP_IIR_P05_30_T263_343;
   end BDSP;
 
   redeclare record TSP
     "Record that contains fitting coefficients of the state properties
     calculated with two independent state properties"
-    extends AixLib.DataBase.Media.Refrigerants.R134a.TSP_Engelpracht;
+    extends AixLib.DataBase.Media.Refrigerants.R1270.TSP_IIR_P05_30_T263_343;
   end TSP;
 
   redeclare record SmoothTransition
@@ -198,33 +200,24 @@ package R134a_FstImp "Refrigerant model developed by Engelpracht"
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
-  June 20, 2017, by Mirko Engelpracht:<br/>
+  June 6, 2017, by Mirko Engelpracht:<br/>
   First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
 </ul>
-</html>", info="<html>
-<p>This package provides a refrigerant model for R134a using a hybrid approach developed by Sangi et al.. The hybrid approach is implemented in <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMedium\">AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMedium</a> and the refrigerant model is implemented by complete the template <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMedium\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMedium</a>. The fitting coefficients required in the template are saved in the package <a href=\"modelica://AixLib.DataBase.Media.Refrigerants.R134a\">AixLib.DataBase.Media.Refrigerants.R134a</a>.</p>
-<p><b>Assumptions and limitations</b> </p>
-<p>The implemented coefficients are fitted to external data by Engelpracht and are valid within the following range:<br></p>
-<table cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"30%\"><tr>
-<td><p>Parameter</p></td>
-<td><p>Minimum Value</p></td>
-<td><p>Maximum Value</p></td>
-</tr>
-<tr>
-<td><p>Pressure (p) in bar</p></td>
-<td><p>?</p></td>
-<td><p>?</p></td>
-</tr>
-<tr>
-<td><p>Temperature (T) in K</p></td>
-<td><p>?</p></td>
-<td><p>?</p></td>
-</tr>
-</table>
-<p><b>Validation</b> </p>
-<p> The model is validated by comparing results obtained from the example model <a href=\"modelica://AixLib.Media.Refrigerants.Examples.RefrigerantProperties\">AixLib.Media.Refrigerants.Examples.RefrigerantProperties</a> to external data (i.e. NIST RefProp 9.1).</p>
+</html>",
+        info="<html>
+<p>This package is a <b>template</b> for <b>new refrigerant</b> models using a hybrid approach based on the &QUOT;Fast_Propane&QUOT; model developed by Sangi et al. (for detailed information, please checkout <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord\">AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord</a>). For a new refrigerant model just make a copy of this package, remove the &QUOT;partial&QUOT; keyword from the package and provide the information that is requested in the comments of the Modelica code. The following <b>information is requested</b>:</p>
+<ol>
+<li><u>Fluid constants:</u><i> </i>Provide basic information of the refrigerant and add the reference.</li>
+<li><u>Basic information:</u><i> </i>Provide basic information like the refrigerant name and its valid fluid limits in terms of different thermodynamic state properties.</li>
+<li><u>Base properties:</u> Provide information about the refrigerant&apos;s base properties like the relation between specific enthalpy, specific internal energy, pressure and density.</li>
+<li><u>Helmholtz EoS:</u> Provide the records that contain the fitting coefficients for the Helmholtz equation of state.</li>
+<li><u>Saturation state properties:</u> Provide the records that contain the fitting coefficients for the thermodynamic state properties at bubble and dew line.</li>
+<li><u>Fitted state properties:</u> Provide the records that contain the fitting coefficients for thermodynamic state properties that depend on two independent state properties.</li>
+<li><u>Further thermodynamic properties:</u> Provide formulas for further thermodynamic properties like the thermal conductivity or surface tension.</li>
+</ol>
+<p>A refrigerant package inherits from <b>PartialHybridTwoPhaseMediumRecord</b> and provides the equations for the refrigerant. Moreover, the PartialHybridTwoPhaseMedium package inherits from <b>PartialMedium</b> and, therefore, the details of this package are described in <a href=\"modelica://Modelica.Media.UsersGuide\">Modelica.Media.UsersGuide</a>.</p>
 <p><b>References</b> </p>
-<p>Engelpracht, Mirko (2017): Development of scalable and modular simulation models for heat pumps and refrigerating machines. <i>Master Thesis</i></p>
+<p>Sangi, Roozbeh; Jahangiri, Pooyan; Klasing, Freerk; Streblow, Rita; M&uuml;ller, Dirk (2014): <a href=\"http://dx.doi.org/10.3384/ecp14096\">A Medium Model for the Refrigerant Propane for Fast and Accurate Dynamic Simulations</a>. In: <i>The 10th International Modelica Conference</i>. Lund, Sweden, March 10-12, 2014: Link&ouml;ping University Electronic Press (Link&ouml;ping Electronic Conference Proceedings), S. 1271&ndash;1275</p>
 </html>"));
-end R134a_FstImp;
+end TemplateHybridTwoPhaseMediumRecord;

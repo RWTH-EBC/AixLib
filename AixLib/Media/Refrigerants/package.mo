@@ -6,15 +6,13 @@ package Refrigerants "Package with models for different refrigerants"
 
 
 
-
   annotation (Documentation(info="<html>
 <p>This package contains models for different refrigerants. The models are based on hybrid approach developed by Sangi et al. and use both the Helmholtz equation of state (EoS) and fitted formula for thermodynamic state properties at bubble or dew line (e.g. p<sub>sat</sub> or h<sub>l,sat</sub>) and thermodynamic state properties depending on two independent state properties (e.g. T_ph or T_ps).</p>
-<p>The hybrid approach is implemented in the package <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMedium\">AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMedium</a> and the fitting coefficients are stored in records in the package <a href=\"modelica://AixLib.DataBase.Media.Refrigerants\">AixLib.DataBase.Media.Refrigerants</a>. In order to allow an easy extension, a template for new refrigerant models using the hybrid approach provided in <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMedium\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMedium</a>.</p>
+<p>The hybrid approach is implemented in the package <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord\">AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord</a> and the fitting coefficients are stored in records in the package <a href=\"modelica://AixLib.DataBase.Media.Refrigerants\">AixLib.DataBase.Media.Refrigerants</a>. In order to allow an easy extension, a template for new refrigerant models using the hybrid approach provided in <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord</a>. Moreover, the hybrid approach is also implented in the package <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumFormula\">AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumFormula</a> using the template <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumFormula\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumFormula</a>. Within the second template, no records are used to provide the fitting coefficients. Therefore, the obtained formulas are implemented in an explicit form in order to speed up the simulation.</p>
 <p>Currently, the <b>following refrigerants are implemented</b>:</p>
 <ol>
 <li>R134a</li>
 <li>R410a</li>
-<li>R718</li>
 <li>R1270</li>
 </ol>
 <p>For further information of <b>the EoS and its partial derivatives</b>, please read the paper &QUOT;<a href=\"http://www.ep.liu.se/ecp/076/006/ecp12076006.pdf\">HelmholtzMedia - A fluid properties library</a>&QUOT; by Thorade and Saadat as well as the paper &QUOT;<a href=\"http://gfzpublic.gfz-potsdam.de/pubman/item/escidoc:247373:5/component/escidoc:306833/247373.pdf\">Partial derivatives of thermodynamic state properties for dynamic simulation</a>&QUOT; by Thorade and Saadat. For further information of <b>the hybrid approach</b>, please read the paper &QUOT;<a href=\"http://dx.doi.org/10.3384/ecp14096\">A Medium Model for the Refrigerant Propane for Fast and Accurate Dynamic Simulations</a>&QUOT; by Sangi et al..</p>

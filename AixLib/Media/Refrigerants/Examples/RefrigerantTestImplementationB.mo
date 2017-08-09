@@ -4,10 +4,10 @@ model RefrigerantTestImplementationB
   extends Modelica.Icons.Example;
   extends Modelica.Media.Examples.Tests.Components.PartialTestModel2(
     redeclare package Medium =
-        AixLib.Media.Refrigerants.R1270.R1270_FastPropane,
+       HelmholtzMedia.HelmholtzFluids.Propane,
     p_start = 0.5e5,
     T_start = 263.15,
-    h_start = 177e3);
+    h_start = 177e3);                          //AixLib.Media.Refrigerants.R1270.R1270_IIR_P05_30_T263_343_Formula
 
     annotation (experiment(Tolerance=1e-006),
   __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Media/Examples/WaterTestImplementation.mos"

@@ -95,7 +95,7 @@ record HelmholtzEquationOfStateBaseDateDefinition
   </li>
 </ul>
 </html>", info="<html>
-<p>This record is a base data definition for fitting coefficients of the <b>Helmholtz equation of state (EoS)</b>. The EoS allows the accurate description of fluids&apos; thermodynamic behaviour and uses the Helmholtz energy as fundamental thermodynamic relation with temperature and density as independent variables. The<b> general formula</b> of the EoS as it is implemented within <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMedium\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMedium</a> is given below:</p>
+<p>This record is a base data definition for fitting coefficients of the <b>Helmholtz equation of state (EoS)</b>. The EoS allows the accurate description of fluids&apos; thermodynamic behaviour and uses the Helmholtz energy as fundamental thermodynamic relation with temperature and density as independent variables. The<b> general formula</b> of the EoS as it is implemented within <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord</a> is given below:</p>
 <p align=\"center\"><img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Helmholtz_EoS.png\"/> </p>
 <p>As it can be seen, the general formula of the EoS can be divided in two part: The <b>ideal gas part</b> and the <b>residual part</b>. Both parts&apos; formulas are given below:</p>
 <p align=\"center\"><img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Helmholtz_IdealGasPart.png\"/> </p>

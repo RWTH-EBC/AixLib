@@ -95,7 +95,7 @@ record BubbleDewStatePropertiesBaseDataDefinition
 </ul>
 </html>", info="<html>
 <p>This record is a base data definition for fitting coefficients of the thermodynamic state properties at bubble and dew line. If these state properties are not expressed as fitted formula, the state properties at vapour-liquid equilibrium will be identified iteratively and, as a consequence, the computing time will rise (Thorade and Matthias, 2012). In order to reduce the computing time, the thermodynamic state properties are expressed as fitted formula based on the approach presented by Sangi et al. within their &QUOT;Fast_Propane&QUOT; model.</p>
-<p>Sangi et al. used the <b>following fitting approaches</b>, which are also implemented within <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMedium\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMedium</a>:<br></p>
+<p>Sangi et al. used the <b>following fitting approaches</b>, which are also implemented within <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord</a>:<br></p>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"80%\"><tr>
 <td VALIGN=\"MIDDLE\"><p><i>Saturation pressure</i></p></td>
 <td VALIGN=\"MIDDLE\"><img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/SaturationPressure.png\"/></td>
