@@ -16,6 +16,7 @@ model HeatingCoil
  parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition pipe_HC=
       AixLib.DataBase.Pipes.Copper.Copper_28x1() "Type of Pipe for HR1";
 
+
   FastHVAC.Components.Pipes.BaseClasses.PipeBase pipeHC(
     medium=medium_HC,
     parameterPipe=pipe_HC,
@@ -51,8 +52,8 @@ model HeatingCoil
     annotation (Placement(transformation(extent={{-106,-10},{-86,10}})));
   Sensors.MassFlowSensor m_flow
     annotation (Placement(transformation(extent={{30,-10},{50,10}})));
-  Utilities.HeatTransfer.HeatConvPipeInside conv_HC1_Inside[dis_HC] annotation
-    (Placement(transformation(
+  Utilities.HeatTransfer.HeatConvPipeInside conv_HC1_Inside[dis_HC] annotation (
+     Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-4,26})));
