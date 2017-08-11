@@ -1,8 +1,8 @@
 ﻿within AixLib.FastHVAC.Media;
 record WaterSimple
 extends AixLib.FastHVAC.Media.BaseClasses.MediumSimple(
-    rho=995,
-    c=4119,
+    rho=999.7,
+    c=4195,
     lambda=0.579,
     eta=0.0013059 "all Data from VDI-Waermeatlas 1bar, 10 °C");
   annotation (Documentation(info="<html>
