@@ -49,7 +49,7 @@ model HeatingCoil
     annotation (Placement(transformation(extent={{82,-10},{102,10}})));
   AixLib.FastHVAC.Interfaces.EnthalpyPort_a enthalpyPort_a1
     annotation (Placement(transformation(extent={{-106,-10},{-86,10}})));
-  Utilities.HeatTransfer.HeatConvPipe_inside conv_HC1_Inside[dis_HC](
+  Utilities.HeatTransfer.HeatConvPipeInside  conv_HC1_Inside[dis_HC](
     d_i=fill(pipe_HC.d_i, dis_HC),
     d_a=fill(pipe_HC.d_o, dis_HC),
     A_sur=fill(pipe_HC.d_o*Modelica.Constants.pi*length_HC/dis_HC, dis_HC),
