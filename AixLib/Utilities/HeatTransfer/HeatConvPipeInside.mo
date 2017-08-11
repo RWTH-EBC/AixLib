@@ -18,6 +18,7 @@ model HeatConvPipeInside
   Modelica.SIunits.PrandtlNumber Pr;
   Modelica.SIunits.CoefficientOfHeatTransfer alpha;
   Real zeta "pressure loss coefficient";
+
   Modelica.Blocks.Interfaces.RealInput m_flow annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=-90,

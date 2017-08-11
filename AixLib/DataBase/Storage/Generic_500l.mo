@@ -23,7 +23,7 @@ record Generic_500l "Generic storage data for a 500 l storage"
     roughness=2.5e-5,
     pipeHC1=AixLib.DataBase.Pipes.Copper.Copper_22x1_5(),
     pipeHC2=AixLib.DataBase.Pipes.Copper.Copper_28x1(),
-    lengthHC1=Modelica.Constants.pi*dTank*hTank/(0.13),
+    lengthHC1=Modelica.Constants.eps,
     lengthHC2=Modelica.Constants.eps);
 
 
