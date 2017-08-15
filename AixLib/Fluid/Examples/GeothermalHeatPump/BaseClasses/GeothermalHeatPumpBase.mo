@@ -70,9 +70,8 @@ model GeothermalHeatPumpBase
         extent={{-7,-7},{7,7}},
         rotation=0,
         origin={87,-20})));
-  Actuators.Valves.TwoWayQuickOpening
-                                 valveColdSource(redeclare package Medium =
-        Medium,
+  Actuators.Valves.TwoWayQuickOpening valveHeatSink(
+    redeclare package Medium = Medium,
     m_flow_nominal=0.5,
     dpValve_nominal=5000)
     "Valve connecting geothermal field to the condenser of the heat pump"
@@ -208,13 +207,12 @@ equation
 
 
 
-  connect(resistanceGeothermalSource.port_b, valveColdSource.port_a)
-    annotation (Line(
+  connect(resistanceGeothermalSource.port_b, valveHeatSink.port_a) annotation (
+      Line(
       points={{-64,-54},{-36,-54}},
       color={0,127,255},
       smooth=Smooth.None));
-  connect(valveHeatSource.port_a, valveColdSource.port_a) annotation (
-      Line(
+  connect(valveHeatSource.port_a, valveHeatSink.port_a) annotation (Line(
       points={{-60,-5},{-60,-54},{-36,-54}},
       color={0,127,255},
       smooth=Smooth.None));
@@ -240,7 +238,7 @@ equation
         points={{-60,7},{-60,14.9},{-38.2,14.9}}, color={0,127,255}));
   connect(valveColdStorage.port_b, heatPumpTab.port_a_source) annotation (Line(
         points={{-58,38},{-62,38},{-62,14.9},{-38.2,14.9}}, color={0,127,255}));
-  connect(valveColdSource.port_b, heatPumpTab.port_a_sink) annotation (Line(
+  connect(valveHeatSink.port_b, heatPumpTab.port_a_sink) annotation (Line(
         points={{-24,-54},{-16,-54},{-5.8,-54},{-5.8,-8.9}}, color={0,127,255}));
   connect(valveHeatStorage.port_b, heatPumpTab.port_a_sink) annotation (Line(
         points={{-18,-57},{-18,-54},{-5.8,-54},{-5.8,-8.9}}, color={0,127,255}));
