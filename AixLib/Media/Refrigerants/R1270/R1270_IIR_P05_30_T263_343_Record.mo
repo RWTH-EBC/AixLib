@@ -34,23 +34,23 @@ package R1270_IIR_P05_30_T263_343_Record "Refrigerant model developed by Sangi e
     substanceNames={"Propane"},
     singleState=false,
     SpecificEnthalpy(
-      start=1.0e5,
-      nominal=1.0e5,
+      start=2.057e5,
+      nominal=2.057e5,
       min=177e3,
       max=576e3),
     Density(
-      start=500,
+      start=300,
       nominal=529,
       min=0.77,
       max=547),
     AbsolutePressure(
-      start=1e5,
+      start=4.7446e5,
       nominal=5e5,
       min=0.5e5,
       max=30e5),
     Temperature(
       start=273.15,
-      nominal=273.15,
+      nominal=333.15,
       min=263.15,
       max=343.15),
     smoothModel=true,
