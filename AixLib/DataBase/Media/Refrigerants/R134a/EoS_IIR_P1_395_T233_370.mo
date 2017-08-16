@@ -1,28 +1,28 @@
-within AixLib.DataBase.Media.Refrigerants.R134a;
+﻿within AixLib.DataBase.Media.Refrigerants.R134a;
 record EoS_IIR_P1_395_T233_370
   "Record with fitting coefficients calculated for first implementation"
   import AixLib;
   extends
     AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition(
-    name="Coefficients taken from Engelpracht",
+    name="Coefficients taken from Tillner-Roth and Baehr, An International Standard Formulation for the thermodynamic Properties of 1,1,1,2‐Tetrafluoroethane (HFC‐134a) for Temperatures from 170 K to 455 K and Pressures up to 70 MPa",
     alpha_0_nL=1,
     alpha_0_l1={-1.629789},
     alpha_0_l2={1},
     alpha_0_nP=4,
-    alpha_0_p1={-1.019535,9.047135,-9.723916,-3.92717},
+    alpha_0_p1={-1.02084672674949,9.04757355104757,-9.723916,-3.92717},
     alpha_0_p2={0,1,-0.5,-0.75},
     alpha_0_nE=0,
     alpha_0_e1={0},
     alpha_0_e2={0},
-    alpha_r_nP=0,
-    alpha_r_p1={0},
-    alpha_r_p2={0},
-    alpha_r_p3={0},
-    alpha_r_nB=21,
-    alpha_r_b1={0.05586817,0.498223,0.02458698,0.0008570145,0.0004788584,-1.800808,0.2671641,-0.04781652,0.01423987,0.3324062,-0.007485907,0.0001017263,-0.5184567,-0.08692288,0.2057144,-0.005000457,0.0004603262,-0.003497836,0.006995038,-0.01452184,-0.0001285458},
-    alpha_r_b2={-0.5,0,0,0,1.5,1.5,2,2,1,3,5,1,5,5,6,10,10,10,18,22,50},
-    alpha_r_b3={2,1,3,6,6,1,1,2,5,2,2,4,1,4,1,2,4,1,5,3,10},
-    alpha_r_b4={0,0,0,0,0,0,0,0,1,1,1,2,2,2,2,2,2,3,3,3,4},
+    alpha_r_nP=8,
+    alpha_r_p1={0.05586817,0.498223,0.02458698,0.0008570145,0.0004788584,-1.800808,0.2671641,-0.04781652},
+    alpha_r_p2={2,1,3,6,6,1,1,2},
+    alpha_r_p3={-0.5,0,0,0,1.5,1.5,2,2},
+    alpha_r_nB=13,
+    alpha_r_b1={0.01423987,0.3324062,-0.007485907,0.0001017263,-0.5184567,-0.08692288,0.2057144,-0.005000457,0.0004603262,-0.003497836,0.006995038,-0.01452184,-0.0001285458},
+    alpha_r_b2={5,2,2,4,1,4,1,2,4,1,5,3,10},
+    alpha_r_b3={1,3,5,1,5,5,6,10,10,10,18,22,50},
+    alpha_r_b4={1,1,1,2,2,2,2,2,2,3,3,3,4},
     alpha_r_nG=0,
     alpha_r_g1={0},
     alpha_r_g2={0},
