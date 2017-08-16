@@ -5,19 +5,19 @@ model RefrigerantInversions
 
   // Define the refrigerant that shall be tested
   package Medium =
-      AixLib.Media.Refrigerants.R1270.R1270_IIR_P05_30_T263_343_Record; // HelmholtzMedia.HelmholtzFluids.Propane
+      AixLib.Media.Refrigerants.R410a.R410a_IIR_P05_48_T233_340_Record;
 
   // Define the fluid limits of the medium that shall be tested
-  parameter Modelica.SIunits.AbsolutePressure p_min = 0.5e5
+  parameter Modelica.SIunits.AbsolutePressure p_min = 1e5
     "Fluid limit: Minimum absolute pressure"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.AbsolutePressure p_max = 30e5
+  parameter Modelica.SIunits.AbsolutePressure p_max = 48e5
     "Fluid limit: Maximum absolute pressure"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.Temperature T_min = 263.15
+  parameter Modelica.SIunits.Temperature T_min = 233.15
     "Fluid limit: Minimum temperature"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.Temperature T_max = 343.15
+  parameter Modelica.SIunits.Temperature T_max = 340.15
     "Fluid limit: Maximum temperature"
     annotation (Dialog(group="Fluid limits"));
 
@@ -148,7 +148,8 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Media/Example
 </html>"),
     __Dymola_experimentFlags(
       Advanced(GenerateVariableDependencies=false, OutputModelicaCode=false),
-      Evaluate=true,
-      OutputCPUtime=false,
-      OutputFlatModelica=false));
+      Evaluate=false,
+      OutputCPUtime=true,
+      OutputFlatModelica=false),
+    __Dymola_experimentSetupOutput);
 end RefrigerantInversions;

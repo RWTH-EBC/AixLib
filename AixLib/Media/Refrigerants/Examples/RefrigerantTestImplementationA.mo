@@ -4,10 +4,13 @@ model RefrigerantTestImplementationA
   extends Modelica.Icons.Example;
   extends Modelica.Media.Examples.Tests.Components.PartialTestModel(
     redeclare package Medium =
-        AixLib.Media.Refrigerants.R134a.R134a_IIR_P1_295_T233_370_Record,
-    p_start = 0.5e5,
-    T_start = 233.15,
-    h_start = 151e3);                           //HelmholtzMedia.HelmholtzFluids.R134a
+    AixLib.Media.Refrigerants.R410a.R410a_IIR_P05_48_T233_340_Record,
+    h_start=151000,
+    p_start=150000,
+    T_start=333.15,
+    fixedMassFlowRate(use_T_ambient=true),
+    volume(use_T_start=true),
+    ambient(use_T_ambient=true));
     annotation (experiment(Tolerance=1e-006),
   __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Media/Examples/WaterTestImplementation.mos"
           "Simulate and plot"),
@@ -23,7 +26,8 @@ model RefrigerantTestImplementationA
 </html>"),
     __Dymola_experimentFlags(
       Advanced(GenerateVariableDependencies=false, OutputModelicaCode=false),
-      Evaluate=true,
-      OutputCPUtime=false,
-      OutputFlatModelica=false));
+      Evaluate=false,
+      OutputCPUtime=true,
+      OutputFlatModelica=false),
+    __Dymola_experimentSetupOutput);
 end RefrigerantTestImplementationA;

@@ -5,37 +5,37 @@ model RefrigerantProperties
 
   // Define the refrigerant that shall be tested
   package Medium =
-      HelmholtzMedia.HelmholtzFluids.R134a; // AixLib.Media.Refrigerants.R1270.R1270_IIR_P05_30_T263_343_Formula
+      AixLib.Media.Refrigerants.R410a.R410a_IIR_P05_48_T233_340_Record;
 
   // Define way of calculating pressure and temperature
-  parameter Boolean wayOfCalc = true
+  parameter Boolean wayOfCalc = false
     "true = Slowly raise pressure and change temperature | false = Slowly raise
     temperature and change pressure"
     annotation (Dialog(group="General"));
 
   // Define the fluid limits of the medium that shall be tested
-  parameter Modelica.SIunits.SpecificEnthalpy h_min = 150e3
+  parameter Modelica.SIunits.SpecificEnthalpy h_min = 144e3
     "Fluid limit: Minimum specific enthalpy"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.SpecificEnthalpy h_max = 492e3
+  parameter Modelica.SIunits.SpecificEnthalpy h_max = 520e3
     "Fluid limit: Maximum specific enthalpy"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.Density d_min = 3.5
+  parameter Modelica.SIunits.Density d_min = 5.5
     "Fluid limit: Minimum density"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.Density d_max = 1450
+  parameter Modelica.SIunits.Density d_max = 1325
     "Fluid limit: Maximum density"
     annotation (Dialog(group="Fluid limits"));
   parameter Modelica.SIunits.AbsolutePressure p_min = 1e5
     "Fluid limit: Minimum absolute pressure"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.AbsolutePressure p_max = 38.5e5
+  parameter Modelica.SIunits.AbsolutePressure p_max = 48e5
     "Fluid limit: Maximum absolute pressure"
     annotation (Dialog(group="Fluid limits"));
   parameter Modelica.SIunits.Temperature T_min = 233.15
     "Fluid limit: Minimum temperature"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.Temperature T_max = 333.15
+  parameter Modelica.SIunits.Temperature T_max = 340.15
     "Fluid limit: Maximum temperature"
     annotation (Dialog(group="Fluid limits"));
 
@@ -96,10 +96,10 @@ model RefrigerantProperties
     "Actual specific entropy";
   Modelica.SIunits.SpecificInternalEnergy u
     "Actual specific internal energy";
-//   Modelica.SIunits.SpecificEnergy g
-//     "Actual specific Gibbs energy";
-//   Modelica.SIunits.SpecificEnergy f
-//     "Actual specific Helmholtz energy";
+  Modelica.SIunits.SpecificEnergy g
+    "Actual specific Gibbs energy";
+  Modelica.SIunits.SpecificEnergy f
+    "Actual specific Helmholtz energy";
 
   Medium.SaturationProperties satT
     "Actual saturation properties calculated with temperature";
@@ -132,16 +132,16 @@ model RefrigerantProperties
       "Actual isobaric expansion coefficient";
     Modelica.SIunits.IsothermalCompressibility kappa
       "Actual isothermal compressibility";
-    Real delta_T(unit="J/(Pa.kg)")
-      "Actual isothermal throttling coefficient";
-    Real my(unit="K/Pa")
-      "Actual Joule-Thomson coefficient";
+    // Real delta_T(unit="J/(Pa.kg)")
+    //   "Actual isothermal throttling coefficient";
+    // Real my(unit="K/Pa")
+    //   "Actual Joule-Thomson coefficient";
     Medium.DynamicViscosity eta
       "Actual dynamic viscosity";
     Medium.ThermalConductivity lambda
       "Actual thermal conductivity";
-    Medium.SurfaceTension sigma
-      "Acutal surface tension";
+    // Medium.SurfaceTension sigma
+    //   "Acutal surface tension";
   end ThermodynamicProperties;
 
   record StateErrors
@@ -229,30 +229,30 @@ equation
 
   // Change independent thermodynamic state properties acording to time
   if wayOfCalc then
-    T =  T_min + convT * (time - convChange);
-    p =  p_min + convP * time;
+    T =  min((T_min + convT * (time - convChange)),T_max);
+    p =  min((p_min + convP * time),p_max);
   else
-    T =  T_min + convT * time;
-    p =  p_min + convP * (time - convChange);
+    T =  min((T_min + convT * time),T_max);
+    p =  min((p_min + convP * (time - convChange)),p_max);
   end if;
 
   // Calculate furhter thermodynamic state properties
   d = Medium.density(state_pT);
   h = Medium.specificEnthalpy(state_pT);
   s = Medium.specificEntropy(state_pT);
-  u = Medium.specificInternalEnergy(state_pT);
-  //g = Medium.specificGibbsEnergy(state_pT);
-  //f = Medium.specificHelmholtzEnergy(state_pT);
+  u = h - p/d;
+  g = h - T*s;
+  f = h - p/d -T*s;
 
   // Calculate and check saturation properties
   satT = Medium.setSat_T(T);
   satP = Medium.setSat_p(satT.psat);
-   assert(abs(satT.Tsat-satP.Tsat) < 1E-2,
-     "Model has an error within saturation properties - Tsat",
-     level=AssertionLevel.warning);
-   assert(abs(satT.psat-satP.psat) < 1E-2,
-     "Model has an error within saturation properties - psat",
-     level=AssertionLevel.warning);
+  assert(abs(satT.Tsat-satP.Tsat) < 1E-2,
+    "Model has an error within saturation properties - Tsat",
+    level=AssertionLevel.warning);
+  assert(abs(satT.psat-satP.psat) < 1E-2,
+    "Model has an error within saturation properties - psat",
+    level=AssertionLevel.warning);
 
   // Calculate and check state functions
   bubbleState = Medium.setBubbleState(satT,1);
@@ -261,42 +261,42 @@ equation
   state_dT = Medium.setState_dT(d,T);
   state_ph = Medium.setState_ph(p,h);
   state_ps = Medium.setState_ps(p,s);
-   assert(abs(Medium.temperature(state_pT)-Medium.temperature(state_dT))
-       < errorPressure_dT, "Error in temperature of state_dT",
-       level=AssertionLevel.warning);
-   assert(abs(Medium.pressure(state_pT)-Medium.pressure(state_dT))
-       < errorPressure_dT, "Error in pressure of state_dT",
-       level=AssertionLevel.warning);
-   assert(abs(Medium.density(state_pT)-Medium.density(state_dT))
-       < errorDensity_dT, "Error in density of state_dT",
-       level=AssertionLevel.warning);
-   assert(abs(Medium.specificEnthalpy(state_pT)-Medium.specificEnthalpy(state_dT))
-       < errorSpecificEnthalpy_dT, "Error in specific enthalpy of state_dT",
-       level=AssertionLevel.warning);
-   assert(abs(Medium.temperature(state_pT)-Medium.temperature(state_ph))
-       < errorTemperature_ph, "Error in temperature of state_ph",
-       level=AssertionLevel.warning);
-   assert(abs(Medium.pressure(state_pT)-Medium.pressure(state_ph))
-       < errorPressure_ph, "Error in pressure of state_ph",
-       level=AssertionLevel.warning);
-   assert(abs(Medium.density(state_pT)-Medium.density(state_ph))
-       < errorDensity_ph, "Error in density of state_ph",
-       level=AssertionLevel.warning);
-   assert(abs(Medium.specificEnthalpy(state_pT)-Medium.specificEnthalpy(state_ph))
-       < errorSpecificEnthalpy_ph, "Error in specific enthalpy of state_ph",
-       level=AssertionLevel.warning);
-   assert(abs(Medium.temperature(state_pT)-Medium.temperature(state_ps))
-        < errorTemperature_ps, "Error in temperature of state_ps",
-       level=AssertionLevel.warning);
-   assert(abs(Medium.pressure(state_pT)-Medium.pressure(state_ps))
-        < errorPressure_ps, "Error in pressure of state_ps",
-       level=AssertionLevel.warning);
-   assert(abs(Medium.density(state_pT)-Medium.density(state_ps))
-        < errorDensity_ps, "Error in density of state_ps",
-       level=AssertionLevel.warning);
-   assert(abs(Medium.specificEnthalpy(state_pT)-Medium.specificEnthalpy(state_ps))
-        < errorSpecificEnthalpy_ps, "Error in specific enthalpy of state_ps",
-       level=AssertionLevel.warning);
+  assert(abs(Medium.temperature(state_pT)-Medium.temperature(state_dT))
+     < errorPressure_dT, "Error in temperature of state_dT",
+     level=AssertionLevel.warning);
+  assert(abs(Medium.pressure(state_pT)-Medium.pressure(state_dT))
+     < errorPressure_dT, "Error in pressure of state_dT",
+     level=AssertionLevel.warning);
+  assert(abs(Medium.density(state_pT)-Medium.density(state_dT))
+     < errorDensity_dT, "Error in density of state_dT",
+     level=AssertionLevel.warning);
+  assert(abs(Medium.specificEnthalpy(state_pT)-Medium.specificEnthalpy(state_dT))
+     < errorSpecificEnthalpy_dT, "Error in specific enthalpy of state_dT",
+     level=AssertionLevel.warning);
+  assert(abs(Medium.temperature(state_pT)-Medium.temperature(state_ph))
+     < errorTemperature_ph, "Error in temperature of state_ph",
+     level=AssertionLevel.warning);
+  assert(abs(Medium.pressure(state_pT)-Medium.pressure(state_ph))
+     < errorPressure_ph, "Error in pressure of state_ph",
+     level=AssertionLevel.warning);
+  assert(abs(Medium.density(state_pT)-Medium.density(state_ph))
+     < errorDensity_ph, "Error in density of state_ph",
+     level=AssertionLevel.warning);
+  assert(abs(Medium.specificEnthalpy(state_pT)-Medium.specificEnthalpy(state_ph))
+     < errorSpecificEnthalpy_ph, "Error in specific enthalpy of state_ph",
+     level=AssertionLevel.warning);
+  assert(abs(Medium.temperature(state_pT)-Medium.temperature(state_ps))
+      < errorTemperature_ps, "Error in temperature of state_ps",
+     level=AssertionLevel.warning);
+  assert(abs(Medium.pressure(state_pT)-Medium.pressure(state_ps))
+      < errorPressure_ps, "Error in pressure of state_ps",
+     level=AssertionLevel.warning);
+  assert(abs(Medium.density(state_pT)-Medium.density(state_ps))
+      < errorDensity_ps, "Error in density of state_ps",
+     level=AssertionLevel.warning);
+  assert(abs(Medium.specificEnthalpy(state_pT)-Medium.specificEnthalpy(state_ps))
+      < errorSpecificEnthalpy_ps, "Error in specific enthalpy of state_ps",
+     level=AssertionLevel.warning);
 
   // Calculate further properties
   thermodynamicProperties.cp = Medium.specificHeatCapacityCp(state_pT);
@@ -304,11 +304,11 @@ equation
   thermodynamicProperties.w = Medium.velocityOfSound(state_pT);
   thermodynamicProperties.betta = Medium.isobaricExpansionCoefficient(state_pT);
   thermodynamicProperties.kappa = Medium.isothermalCompressibility(state_pT);
-  thermodynamicProperties.delta_T = Medium.isothermalThrottlingCoefficient(state_pT);
-  thermodynamicProperties.my = Medium.jouleThomsonCoefficient(state_pT);
+  // thermodynamicProperties.delta_T = Medium.isothermalThrottlingCoefficient(state_pT);
+  // thermodynamicProperties.my = Medium.jouleThomsonCoefficient(state_pT);
   thermodynamicProperties.eta = Medium.dynamicViscosity(state_pT);
   thermodynamicProperties.lambda = Medium.thermalConductivity(state_pT);
-  thermodynamicProperties.sigma = Medium.surfaceTension(satT);
+  // thermodynamicProperties.sigma = Medium.surfaceTension(satT);
 
   // Calculate errors of thermodynamic state properties
   stateErros.errorTemperature_dTMax =  abs(state_dT.T - state_pT.T);
@@ -377,7 +377,8 @@ revisions="<html>
 </html>"),
     __Dymola_experimentFlags(
       Advanced(GenerateVariableDependencies=false, OutputModelicaCode=false),
-      Evaluate=true,
-      OutputCPUtime=false,
-      OutputFlatModelica=false));
+      Evaluate=false,
+      OutputCPUtime=true,
+      OutputFlatModelica=false),
+    __Dymola_experimentSetupOutput);
 end RefrigerantProperties;
