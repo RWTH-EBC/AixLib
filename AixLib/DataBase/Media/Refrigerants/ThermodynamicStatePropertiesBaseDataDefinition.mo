@@ -106,7 +106,6 @@ record ThermodynamicStatePropertiesBaseDataDefinition
   "Mean SC p | Std SC p | Mean SC T | Std SC T | Mean SC d | Std SC d |
    Mean SH p | Std SH p | Mean SH T | Std SH T | Mean SH d | Std SH d"
   annotation (Dialog(group="Density_pT"));
-
   annotation (Documentation(revisions="<html>
 <ul>
   <li>

@@ -86,7 +86,6 @@ record HelmholtzEquationOfStateBaseDateDefinition
   parameter Real alpha_r_g7[:]
   "Seventh coefficient of the equation's (alpha_r) third part"
   annotation (Dialog(group="Residual part"));
-
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
