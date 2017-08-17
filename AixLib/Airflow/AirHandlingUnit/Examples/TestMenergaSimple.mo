@@ -1,4 +1,4 @@
-within AixLib.Airflow.AirHandlingUnit.Examples;
+﻿within AixLib.Airflow.AirHandlingUnit.Examples;
 model TestMenergaSimple
   "Example model to test the MenergaSimple model"
 
@@ -36,7 +36,7 @@ model TestMenergaSimple
     nPorts=1,
     X={0.01,0.99},
     p=100000,
-    T=283.15) "Sink f�r exit air" annotation (Placement(transformation(
+    T=283.15) "Sink für exit air" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={0,40})));
@@ -49,8 +49,8 @@ model TestMenergaSimple
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-40,-72})));
-  Modelica.Fluid.Sources.Boundary_pT WatSin(nPorts=1, redeclare package Medium
-      = MediumWater) "Water sink" annotation (Placement(transformation(
+  Modelica.Fluid.Sources.Boundary_pT WatSin(nPorts=1, redeclare package Medium =
+        MediumWater) "Water sink" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={0,-72})));
