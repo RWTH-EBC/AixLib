@@ -1,6 +1,6 @@
 BaseParameters
 HourOfDay
+NcDataReader
 NightMode
 PrescribedSolarRad
-NcDataReader
 HeaterCooler
