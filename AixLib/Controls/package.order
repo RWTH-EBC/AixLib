@@ -1,6 +1,6 @@
 Continuous
 Discrete
-AirHandling
+HVACAgentBasedControl
 HeatPump
 SetPoints
 VentilationController
