@@ -3,7 +3,8 @@ record DC20 "solar fluid 50%-vol DC20"
 extends AixLib.FastHVAC.Media.BaseClasses.MediumSimple(
     rho=1043,
     c=3600,
-    lambda=0.4);
+    lambda=0.4,
+    eta=0.0064666);
   annotation (Documentation(info="<html>
 <p>
 This record declares parameters for the solar fluid with 50%-vol DC20.
