@@ -1,7 +1,7 @@
 within AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses;
 model GeothermalHeatPumpControlledDetailed
   "Example of a geothermal heat pump system with controllers"
-  extends BaseClasses.GeothermalHeatPumpBaseDetailed;
+  extends BaseClasses.GeothermalHeatPumpBaseDetailed(heatPumpPoly(P_eleOutput=true));
   Modelica.Blocks.Sources.RealExpression getTStorageUpper(y=heatStorage.layer[
         heatStorage.n].T) "Gets the temperature of upper heat storage layer"
     annotation (Placement(transformation(extent={{-160,58},{-140,78}})));
@@ -57,13 +57,15 @@ equation
   connect(getTStorageUpper.y, heatStorageTemperature) annotation (Line(points={
           {-139,68},{-132,68},{-120,68},{-120,-88},{-100,-88},{-100,-120}},
         color={0,0,127}));
+  connect(heatPumpPoly.P_eleOut, heatPumpPower) annotation (Line(points={{-28,-12.8},
+          {-38,-12.8},{-38,-119.5},{-45.5,-119.5}}, color={0,0,127}));
   annotation (experiment(StopTime=86400, Interval=10), Documentation(info="<html>
 <p>Base class of an example demonstrating the use of a heat pump connected to two storages and a geothermal source. A replaceable model is connected in the flow line of the heating circuit. A peak load device can be added here.  This model also includes basic controllers.</p>
 </html>", revisions="<html>
 <ul>
 <li>
-May 19, 2017, by Marc Baranski:<br/>
-First implementation.
+August 25, 2017, by Thomas Schild:<br/>
+Mode development with continuous control features
 </li>
 </ul>
 </html>"));

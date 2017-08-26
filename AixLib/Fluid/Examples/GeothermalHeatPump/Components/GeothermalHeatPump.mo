@@ -45,6 +45,8 @@ model GeothermalHeatPump
     annotation (Placement(transformation(extent={{90,60},{132,98}})));
   Control.ValveControlBus valveControlBus
     annotation (Placement(transformation(extent={{-72,58},{-30,100}})));
+  Modes.Communication.SensorDataBus sensorDataBus
+    annotation (Placement(transformation(extent={{128,60},{172,98}})));
 equation
   connect(resistanceColdConsumerReturn.port_a, port_a_consumerCold)
     annotation (Line(points={{94,32},{160,32}}, color={0,127,255}));

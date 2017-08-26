@@ -14,10 +14,11 @@ model GeothermalHeatPumpBaseDetailed
     HPctrlType=false,
     redeclare package Medium_con = Medium,
     redeclare package Medium_eva = Medium,
-    redeclare function data_poly = Modes.Danfoss_HRH029U2_hpc,
     PT1_cycle=true,
     P_eleOutput=false,
-    CoP_output=false) "Base load energy conversion unit"
+    CoP_output=false,
+    redeclare function data_poly = Modes.constantQualityGradeModes,
+    N_max=5000)       "Base load energy conversion unit"
     annotation (Placement(transformation(extent={{-40,-14},{-4,10}})));
 
     replaceable AixLib.Fluid.Interfaces.PartialTwoPortTransport PeakLoadDevice constrainedby
