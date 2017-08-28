@@ -50,13 +50,13 @@ model HeatExergyMeter
     "Outgoing radiation"
     annotation (Placement(transformation(extent={{90,-90},{110,-70}})));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensorRad if
-     useRadiativeHeatFlow
+     useRadiativeHeatFlow "Heat flow sensor used for radiative heat"
     annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=0,
         origin={0,-74})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensorRad if
-       useRadiativeHeatFlow
+     useRadiativeHeatFlow
     "Temperature sensor for radiative heat"
     annotation (Placement(transformation(extent={{-100,-60},{-80,-40}})));
 
@@ -126,13 +126,12 @@ equation
     {-100,-100},{100,100}})),
     Documentation(info="<html>
 <p><b><span style=\"color: #008000;\">Overview</span></b> </p>
-<p>The model calculates the exergy flow rate of a radiaitive or convective heat flux. 
-The reference environment is variable.</p>
+<p>The model calculates the exergy flow rate of a radiaitive or convective heat
+flux. The reference environment is variable.</p>
 </html>
 ",        revisions="<html>
  <ul>
  <li>by Marc Baranski and Roozbeh Sangi:<br/>implemented</li>
  </ul>
 </html>"));
-
 end HeatExergyMeter;

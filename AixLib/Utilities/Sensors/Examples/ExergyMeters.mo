@@ -254,11 +254,10 @@ equation
           {-54,42},{-15,42},{-15,47}}, color={0,0,127}));
   connect(X_ref.y, exPrimIn.X_ref) annotation (Line(points={{-79,-90},{-54,-90},
           {-54,44},{-35,44},{-35,76}}, color={0,0,127}));
-  connect(pumpMassFlow.y, pumpPrim.m_flow_in) annotation (Line(points={{-87.4,
-          94},{-76,94},{-76,100},{-54.2,100},{-54.2,98}},
-                                                      color={0,0,127}));
+  connect(pumpMassFlow.y, pumpPrim.m_flow_in) annotation (Line(points={{-87.4,94},
+          {-76,94},{-76,100},{-54,100},{-54,98}},     color={0,0,127}));
   connect(pumpMassFlow.y, pumpSec.m_flow_in) annotation (Line(points={{-87.4,94},
-          {-76,94},{-76,100},{69.8,100},{69.8,94}}, color={0,0,127}));
+          {-76,94},{-76,100},{70,100},{70,94}},     color={0,0,127}));
   connect(expansionVesselSec.ports[1], pumpSec.port_a) annotation (Line(points={{58,90},
           {58,82},{60,82}},                                  color={0,127,255}));
   connect(expansionVesselPrim.ports[1], pumpPrim.port_a)
@@ -268,9 +267,20 @@ equation
     experiment(StopTime=1000, Interval=10),
     Documentation(info="<html>
 <p><b><span style=\"color: #008000;\">Overview</span></b> </p>
-<p>This model shows the usage of all three ExergyMeters.</p>
-</html>
-",        revisions="<html>
+<p>This model shows the usage of all three ExergyMeters, namely</p>
+<p>- enthalpy flow: 
+<a href=\"modelica://AixLib.Utilities.Sensors.ExergyMeter.FlowExergyMeter\">
+AixLib.Utilities.Sensors.ExergyMeter.FlowExergyMeter</a></p>
+<p>- heat flow: 
+<a href=\"modelica://AixLib.Utilities.Sensors.ExergyMeter.HeatExergyMeter\">
+AixLib.Utilities.Sensors.ExergyMeter.HeatExergyMeter</a></p>
+<p>- stored energy: 
+<a href=\"modelica://AixLib.Utilities.Sensors.ExergyMeter.StoredExergyMeter\">
+AixLib.Utilities.Sensors.ExergyMeter.StoredExergyMeter</a></p>
+<p>The system is a simplified energy supply system. The supplied heat flow rate
+matches the extracted heat flow rate. Due to the irreversibilities, 
+especially in the storage, the exergy output is smaller than the exergy input. </p>
+</html>", revisions="<html>
  <ul>
  <li>by Marc Baranski and Roozbeh Sangi:<br/>implemented</li>
  </ul>
