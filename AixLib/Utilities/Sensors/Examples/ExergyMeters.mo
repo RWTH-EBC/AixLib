@@ -184,36 +184,34 @@ model ExergyMeters
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=180,
         origin={66,-4})));
-  ExergyMeter.StoredExergyMeter exergyStorageMeterMedium1(
+  ExergyMeter.StoredExergyMeter exergyStorageMeterConsumer(
     redeclare package Medium = Medium,
     T_ref_start=T_ref.k,
     T_start=T_start,
     n=1,
     exergyContent_start=17074.08599,
     mass=1)
-    "Outputs the exergy content and rate of change of the considered storage"
+    "Outputs the exergy content and rate of change of the consumer volume"
     annotation (Placement(transformation(extent={{-50,-56},{-30,-36}})));
-  Modelica.Blocks.Sources.RealExpression storageTemperatures1(y=consumer.heatPort.T)
-    "Outputs the temperatures of the single storage layers" annotation (
-      Placement(transformation(
+  Modelica.Blocks.Sources.RealExpression consumerTemperature(y=consumer.heatPort.T)
+    "Outlet temperature of consumer" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={2,-62})));
-  ExergyMeter.StoredExergyMeter exergyStorageMeterMedium2(
+  ExergyMeter.StoredExergyMeter exergyStorageMeterHeater(
     redeclare package Medium = Medium,
     T_ref_start=T_ref.k,
     T_start=T_start,
     n=1,
     exergyContent_start=17074.08599,
     mass=1)
-    "Outputs the exergy content and rate of change of the considered storage"
+    "Outputs the exergy content and rate of change of the heater volume"
     annotation (Placement(transformation(extent={{-42,-94},{-22,-74}})));
-  Modelica.Blocks.Sources.RealExpression storageTemperatures2(y=heater.heatPort.T)
-    "Outputs the temperatures of the single storage layers" annotation (
-      Placement(transformation(
+  Modelica.Blocks.Sources.RealExpression heaterTemperature(y=heater.heatPort.T)
+    "Outlet temperature of heater" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
-        origin={2,-96})));
+        origin={2,-98})));
 equation
   connect(T_ref.y, exergyStorageMeterMedium.T_ref) annotation (Line(points={{-79,-10},
           {-72,-10},{-72,-9},{-44,-9}},
@@ -341,46 +339,45 @@ equation
     annotation (Line(points={{84,4},{84,-4},{73.2,-4}}, color={0,0,127}));
   connect(gain1.y, calcExergyDestructionLoss_2.u[2]) annotation (Line(points={{59.4,
           -4},{42,-4},{42,-70.8},{58,-70.8}}, color={0,0,127}));
-  connect(p_ref.y, exergyStorageMeterMedium1.p_ref) annotation (Line(points={{-79,
-          -50},{-76,-50},{-76,-46},{-50,-46}}, color={85,85,255}));
-  connect(p_ref.y, exergyStorageMeterMedium1.p) annotation (Line(points={{-79,-50},
-          {-76,-50},{-76,-64},{-45,-64},{-45,-60},{-45,-56.8}}, color={0,0,127}));
-  connect(X_ref.y, exergyStorageMeterMedium1.X_ref) annotation (Line(points={{-79,
-          -90},{-70,-90},{-70,-53},{-50,-53}}, color={0,127,0}));
-  connect(X_ref.y, exergyStorageMeterMedium1.X) annotation (Line(points={{-79,-90},
-          {-70,-90},{-70,-66},{-35,-66},{-35,-56.8}}, color={0,0,127}));
-  connect(storageTemperatures1.y, exergyStorageMeterMedium1.T[1]) annotation (
-      Line(points={{-9,-62},{-40,-62},{-40,-62},{-40,-56}}, color={0,0,127}));
-  connect(T_ref.y, exergyStorageMeterMedium1.T_ref) annotation (Line(points={{-79,
-          -10},{-72,-10},{-72,-39},{-50,-39}}, color={255,0,0}));
-  connect(exergyStorageMeterMedium1.exergyChangeRate,
-    calcExergyDestructionLoss_2.u[4]) annotation (Line(points={{-29.4,-52.2},{38,
-          -52.2},{38,-69.2},{58,-69.2}}, color={0,0,127}));
-  connect(X_ref.y, exergyStorageMeterMedium2.X_ref) annotation (Line(points={{-79,
+  connect(p_ref.y, exergyStorageMeterConsumer.p_ref) annotation (Line(points={{
+          -79,-50},{-76,-50},{-76,-46},{-50,-46}}, color={85,85,255}));
+  connect(p_ref.y, exergyStorageMeterConsumer.p) annotation (Line(points={{-79,
+          -50},{-76,-50},{-76,-64},{-45,-64},{-45,-60},{-45,-56.8}}, color={0,0,
+          127}));
+  connect(X_ref.y, exergyStorageMeterConsumer.X_ref) annotation (Line(points={{
+          -79,-90},{-70,-90},{-70,-53},{-50,-53}}, color={0,127,0}));
+  connect(X_ref.y, exergyStorageMeterConsumer.X) annotation (Line(points={{-79,
+          -90},{-70,-90},{-70,-66},{-35,-66},{-35,-56.8}}, color={0,0,127}));
+  connect(consumerTemperature.y, exergyStorageMeterConsumer.T[1])
+    annotation (Line(points={{-9,-62},{-40,-62},{-40,-56}}, color={0,0,127}));
+  connect(T_ref.y, exergyStorageMeterConsumer.T_ref) annotation (Line(points={{
+          -79,-10},{-72,-10},{-72,-39},{-50,-39}}, color={255,0,0}));
+  connect(exergyStorageMeterConsumer.exergyChangeRate,
+    calcExergyDestructionLoss_2.u[4]) annotation (Line(points={{-29.4,-52.2},{
+          38,-52.2},{38,-69.2},{58,-69.2}}, color={0,0,127}));
+  connect(X_ref.y, exergyStorageMeterHeater.X_ref) annotation (Line(points={{-79,
           -90},{-70,-90},{-70,-91},{-42,-91}}, color={0,127,0}));
-  connect(X_ref.y, exergyStorageMeterMedium2.X) annotation (Line(points={{-79,-90},
+  connect(X_ref.y, exergyStorageMeterHeater.X) annotation (Line(points={{-79,-90},
           {-70,-90},{-70,-100},{-28,-100},{-28,-98},{-27,-98},{-27,-94.8}},
         color={0,0,127}));
-  connect(p_ref.y, exergyStorageMeterMedium2.p_ref) annotation (Line(points={{-79,
+  connect(p_ref.y, exergyStorageMeterHeater.p_ref) annotation (Line(points={{-79,
           -50},{-76,-50},{-76,-84},{-42,-84}}, color={85,85,255}));
-  connect(p_ref.y, exergyStorageMeterMedium2.p) annotation (Line(points={{-79,-50},
-          {-76,-50},{-76,-100},{-37,-100},{-37,-98},{-37,-94.8}}, color={0,0,127}));
-  connect(T_ref.y, exergyStorageMeterMedium2.T_ref) annotation (Line(points={{-79,
-          -10},{-72,-10},{-72,-77},{-42,-77}}, color={255,0,0}));
-  connect(exergyStorageMeterMedium2.exergyChangeRate,
-    calcExergyDestructionLoss_2.u[5]) annotation (Line(points={{-21.4,-90.2},{38,
-          -90.2},{38,-68.4},{58,-68.4}}, color={0,0,127}));
-  connect(exergyStorageMeterMedium1.exergyChangeRate,
-    calcExergyDestructionLoss_1.u[6]) annotation (Line(points={{-29.4,-52.2},{
-          38,-52.2},{38,-32},{38,-28.8571},{58,-28.8571}},
-                                                        color={0,0,127}));
-  connect(exergyStorageMeterMedium2.exergyChangeRate,
-    calcExergyDestructionLoss_1.u[7]) annotation (Line(points={{-21.4,-90.2},{
-          38,-90.2},{38,-28.2857},{58,-28.2857}},
-                                               color={0,0,127}));
-  connect(exergyStorageMeterMedium2.T[1], storageTemperatures2.y) annotation (
-      Line(points={{-32,-94},{-32,-98},{-12,-98},{-12,-96},{-9,-96}}, color={0,0,
+  connect(p_ref.y, exergyStorageMeterHeater.p) annotation (Line(points={{-79,-50},
+          {-76,-50},{-76,-100},{-37,-100},{-37,-98},{-37,-94.8}}, color={0,0,
           127}));
+  connect(T_ref.y, exergyStorageMeterHeater.T_ref) annotation (Line(points={{-79,
+          -10},{-72,-10},{-72,-77},{-42,-77}}, color={255,0,0}));
+  connect(exergyStorageMeterHeater.exergyChangeRate,
+    calcExergyDestructionLoss_2.u[5]) annotation (Line(points={{-21.4,-90.2},{
+          38,-90.2},{38,-68.4},{58,-68.4}}, color={0,0,127}));
+  connect(exergyStorageMeterConsumer.exergyChangeRate,
+    calcExergyDestructionLoss_1.u[6]) annotation (Line(points={{-29.4,-52.2},{
+          38,-52.2},{38,-32},{38,-28.8571},{58,-28.8571}}, color={0,0,127}));
+  connect(exergyStorageMeterHeater.exergyChangeRate,
+    calcExergyDestructionLoss_1.u[7]) annotation (Line(points={{-21.4,-90.2},{
+          38,-90.2},{38,-28.2857},{58,-28.2857}}, color={0,0,127}));
+  connect(exergyStorageMeterHeater.T[1], heaterTemperature.y) annotation (Line(
+        points={{-32,-94},{-32,-98},{-12,-98},{-9,-98}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=7200, Interval=10),
