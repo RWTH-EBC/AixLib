@@ -246,10 +246,16 @@ equation
   June 2015. Calculation of transient thermal response of rooms
   and buildings - modelling of solar radiation.</p>
   </html>", revisions="<html>
+<ul>
+<li>
   <p><i>February 24, 2014</i> by Reza Tavakoli:</p>
   <p>Implemented. </p>
+</li>
+<li>
 <p><i>May 25, 2016 </i>by Stanley Risch:</p>
 <p>Added the correction of the translucence factor according to VDI6007 Part 3
 </p>
+</li>
+</ul>
   </html>"));
 end PartialCorrectionGTaue;

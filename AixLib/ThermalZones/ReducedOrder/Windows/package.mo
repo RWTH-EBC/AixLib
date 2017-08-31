@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.ReducedOrder;
+﻿within AixLib.ThermalZones.ReducedOrder;
 package Windows "This Package calculates solar gain through windows"
   extends Modelica.Icons.VariantsPackage;
 
@@ -42,6 +42,25 @@ tested with parts of test case 1 and parts of test case 3 of VDI2078.
  is tested within the test cases. The shadowing models are not included in the
  validation of VDI2078.
   Therfore the models were tested on plausibility with simple examples.<\\p>
+
+<h4>References</h4>
+<ul>
+<li>
+VDI 6007-1: <br/>
+Berechnung des instationären thermischen Verhaltens von Räumen und Gebäuden - Raummodell.<br/>
+Düsseldorf : VDI-Gesellschaft Bauen und Gebäudetechnik. 2015.
+</li>
+<li>
+VDI 6007-2: <br/>
+Berechnung des instationären thermischen Verhaltens von Räumen und Gebäuden - Fenstermodell.<br/>
+Düsseldorf : VDI-Gesellschaft Bauen und Gebäudetechnik. 2015.
+</li>
+<li>
+VDI 6007-3: <br/>
+Berechnung des instationären thermischen Verhaltens von Räumen und Gebäuden - Modell der solaren Einstrahlung.<br/>
+Düsseldorf : VDI-Gesellschaft Bauen und Gebäudetechnik. 2015.
+</li>
+</ul>
 </html>", revisions="<html>
 <ul>
 <li>June 07, 2016,&nbsp; by Stanley Risch:<br/>Implemented. </li>
