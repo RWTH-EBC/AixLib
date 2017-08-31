@@ -26,7 +26,9 @@ model BufferStorage_variablePorts
     n_HR=10,
     unload_cycles=[1,10; 4,10],
     T_start_wall=323.15,
-    T_start_ins=323.15)
+    T_start_ins=323.15,
+    redeclare model HeatTransfer =
+        Components.Storage.BaseClasses.HeatTransfer_directed_heat_transfer_f)
     annotation (Placement(transformation(extent={{-6,-40},{48,20}})));
   FastHVAC.Components.Pumps.FluidSource fluidSource
     annotation (Placement(transformation(extent={{-70,50},{-50,70}})));

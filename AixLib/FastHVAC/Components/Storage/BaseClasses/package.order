@@ -1,4 +1,10 @@
 Partial_HeatTransfer_Layers
+buoyancy_ditribution
+HeatTransfer_directed_heat_transfer_f
+HeatTransfer_qbuoy
+HeatTransfer_qbuoy_timer
+Q_buoy_function
+qbuoy_functions
 HeatTransfer_OnlyConduction
 HeatTransfer_lambda_simple
 HeatTransfer_lambda_eff
