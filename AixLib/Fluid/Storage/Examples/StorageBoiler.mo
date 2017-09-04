@@ -41,8 +41,8 @@ model StorageBoiler
   AixLib.Fluid.FixedResistances.HydraulicResistance
                                            hydraulicResistance(zeta = 1000,
     redeclare package Medium = Medium,
-    m_flow_small=1e-4,
-    diameter=0.05)                                                          annotation(Placement(transformation(extent={{46,-12},
+    diameter=0.05,
+    m_flow_nominal=0.001)                                                   annotation(Placement(transformation(extent={{46,-12},
             {66,8}})));
   AixLib.Fluid.Sources.Boundary_ph
                       boundary_ph1(use_p_in = true, h = 0.8e5,
@@ -60,12 +60,10 @@ model StorageBoiler
     m_flow_nominal=0.5,
     dp_nominal=200)
     annotation (Placement(transformation(extent={{-28,-22},{-8,-2}})));
-  AixLib.Fluid.HeatExchangers.HeaterCooler_T hea(
+  AixLib.Fluid.HeatExchangers.Heater_T       hea(
     redeclare package Medium = Medium,
     m_flow_nominal=0.01,
-    dp_nominal=0,
-    Q_flow_maxHeat=50000,
-    Q_flow_maxCool=0)
+    dp_nominal=0)
     annotation (Placement(transformation(extent={{42,68},{22,88}})));
 equation
   connect(fixedTemperature.port, storage.heatPort) annotation(Line(points={{-36,22},
@@ -94,8 +92,8 @@ equation
           {6,78},{22,78}}, color={0,127,255}));
   connect(hydraulicResistance.port_b, hea.port_a) annotation (Line(points={{66,
           -2},{80,-2},{80,78},{42,78}}, color={0,127,255}));
-  connect(const.y, hea.TSet) annotation (Line(points={{57.7,67},{52,67},{52,84},
-          {44,84}}, color={0,0,127}));
+  connect(const.y, hea.TSet) annotation (Line(points={{57.7,67},{52,67},{52,86},
+          {44,86}}, color={0,0,127}));
   annotation (experiment(StopTime = 86400, Interval = 60),Documentation(info = "<html>
 <h4><font color=\"#008000\">Overview</font></h4>
  <p>This is a simple example of a storage and a boiler.</p>

@@ -9,8 +9,6 @@ record Pump1 "Pump with maximum head of 5 m"
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Record for a pump with a maximum head of 5 m and a maximum volume flow of 4 m3/h.</p>
  <p>Values are assumptions.</p>
- <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The record contains just one table.</p>
  <p>Table structure:</p>
