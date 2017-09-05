@@ -82,13 +82,14 @@ model ActiveWall
   Utilities.HeatTransfer.HeatConv_outside heatTransfer_Outside(A = wall_length * wall_height - clearance, Model = Model, surfaceType = surfaceType, alpha_custom = alpha_custom) if outside annotation(Placement(transformation(extent = {{-47, 48}, {-27, 68}})));
   Utilities.Interfaces.Adaptors.HeatStarToComb heatStarToComb annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 180, origin = {69, -1})));
   Utilities.Interfaces.HeatStarComb thermStarComb_inside annotation(Placement(transformation(extent = {{92, -10}, {112, 10}}), iconTransformation(extent = {{10, -10}, {30, 10}})));
-  BaseClasses.ActiveLayer activeLayer(A=wall_length*wall_height,
+  BaseClasses.ActiveLayer activeLayer(
     T0=T0,
     lambda=lambda_al,
     c_p=cp_al,
     d=d_al,
     rho=rho_al,
-    surfaceOrientation=ISOrientation)
+    surfaceOrientation=ISOrientation,
+    A=(wall_length*wall_height) - clearance)
     annotation (Placement(transformation(extent={{8,52},{28,72}})));
   Modelica.Blocks.Interfaces.RealInput PowerActiveLayer
     "power per square meter" annotation (Placement(transformation(

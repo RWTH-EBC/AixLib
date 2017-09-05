@@ -81,10 +81,6 @@ equation
           50,2},{50,40},{54.8,40}},                                                                                   color = {200, 100, 0}));
   connect(twoStar_RadEx.Star, Star) annotation(Line(points = {{73.1, 40}, {90, 40}, {90, 60}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
   // computing approximated longwave radiation exchange
-  connect(HeatCondb[1].port_b,portActiveLayer_a)  annotation (Line(points={{28,2},{
-          34,2},{34,22},{-22,22},{-22,90},{-34,90}},         color={191,0,0}));
-  connect(portActiveLayer_b, HeatConda[1].port_a) annotation (Line(points={{34,90},
-          {34,22},{-58,22},{-58,2},{-50,2}}, color={191,0,0}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0})}), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{24, 100}, {80, -100}}, lineColor = {0, 0, 0}, fillColor = {211, 243, 255},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-56, 100}, {0, -100}}, lineColor = {166, 166, 166}, pattern = LinePattern.None, fillColor = {190, 190, 190},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-64, 100}, {-56, -100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {208, 208, 208},
