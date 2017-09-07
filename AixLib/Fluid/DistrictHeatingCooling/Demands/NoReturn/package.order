@@ -2,3 +2,4 @@ IdealSinkMin
 IdealSinkConstFlow
 IdealSinkConstHeat
 IdealSinkHeat
+IdealSinkHeatInput
