@@ -24,8 +24,9 @@ expandable connector BusActors
   Real regenerationFan
                       "real input m_flow for regenerationAirFan in kg/s";
   Real exhaustFan     "real input m_flow for exhaustAirFan in kg/s";
-  Real mWatSteamHumid( min=0, max=1)
-                      "input for steam humidifier between 0 and 1";
+  Real mWatSteamHumid( min=0, max=0.02)
+                      "setpoint for absolute humidity
+                        for steam humidifier between 0 and 0.02";
   Real mWatAbsorber( min=0, max=1)
                       "input for dehumidification in absorber";
   Real mWatDesorber( min=0, max=1)

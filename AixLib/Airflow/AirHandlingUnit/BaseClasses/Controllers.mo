@@ -21,7 +21,8 @@ package Controllers "contains all the control models"
       annotation (Placement(transformation(extent={{-26,-36},{24,14}})));
   equation
     if true then
-      connect(pN_intern_optimal.busActors, busActors);
+      //connect(pN_intern_optimal.busActors, busActors);
+      connect(development.busActors, busActors);
     end if;
 
     connect(busSensors, development.busSensors) annotation (Line(
@@ -258,17 +259,9 @@ model")}),                                                         Diagram(
         Ti=80,
         k=0.06) "opening of the three way valve in the heating coil circuit"
         annotation (Placement(transformation(extent={{-220,-258},{-200,-238}})));
-      Modelica.Blocks.Continuous.LimPID mWatSteHum_u(         yMin=0,
-        Td=10,
-        controllerType=Modelica.Blocks.Types.SimpleController.PI,
-        Ti=80,
-        k=0.06,
-        yMax=0.01)
-                "nominal water mass flow for steam humidifier"
-        annotation (Placement(transformation(extent={{-220,-130},{-200,-110}})));
-      Modelica.Blocks.Sources.Constant relHumSetPoi(k=0.5)
-        "set point for the relative humidity" annotation (Placement(
-            transformation(extent={{-290,-124},{-270,-104}})));
+      Modelica.Blocks.Sources.Constant relHumSet(k=0.5)
+        "set point for the rel humidity"
+        annotation (Placement(transformation(extent={{-298,-128},{-278,-108}})));
       Modelica.Blocks.Math.Gain gainAbs(k=0.1)
         "gain for absorber water mass flow" annotation (Placement(
             transformation(extent={{-218,-158},{-198,-138}})));
@@ -280,6 +273,15 @@ model")}),                                                         Diagram(
           Placement(transformation(extent={{-354,-196},{-334,-176}})));
       Modelica.Blocks.Sources.Constant valOpeningY02(k=0) "opening of Y02"
         annotation (Placement(transformation(extent={{-222,202},{-202,222}})));
+      Modelica.Blocks.Continuous.LimPID PID(
+        yMin=0,
+        controllerType=Modelica.Blocks.Types.SimpleController.PI,
+        yMax=1,
+        Ti=80,
+        k=0.2)                                                    annotation (
+          Placement(transformation(extent={{-220,-128},{-200,-108}})));
+      relToAbsHum absHumSet1 annotation (Placement(transformation(extent={{-134,
+                -128},{-114,-108}})));
     equation
       connect(valOpeningY03.y, busActors.openingY03) annotation (Line(points={{
               -201,160},{-68,160},{-68,-69.64},{101.375,-69.64}}, color={0,0,
@@ -373,20 +375,6 @@ model")}),                                                         Diagram(
           string="%second",
           index=1,
           extent={{6,3},{6,3}}));
-      connect(mWatSteHum_u.u_m, busSensors.T01_RelHum) annotation (Line(points=
-              {{-210,-132},{-346,-132},{-346,-63.61},{-388.575,-63.61}}, color=
-              {0,0,127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(relHumSetPoi.y, mWatSteHum_u.u_s) annotation (Line(points={{-269,
-              -114},{-256,-114},{-256,-120},{-222,-120}}, color={0,0,127}));
-      connect(mWatSteHum_u.y, busActors.mWatSteamHumid) annotation (Line(points=
-             {{-199,-120},{-32,-120},{-32,-69.64},{101.375,-69.64}}, color={0,0,
-              127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
       connect(mFlowAbsPart.y, gainAbs.u) annotation (Line(points={{-275,-174},{
               -250,-174},{-250,-148},{-220,-148}}, color={0,0,127}));
       connect(mFlowAbsPart.u1, busSensors.mFlowAbs) annotation (Line(points={{
@@ -412,6 +400,28 @@ model")}),                                                         Diagram(
       connect(valOpeningConY02.u_m, busSensors.T01) annotation (Line(points={{
               -354,154},{-362,154},{-362,-63.61},{-388.575,-63.61}}, color={0,0,
               127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(PID.y, absHumSet1.relHum)
+        annotation (Line(points={{-199,-118},{-134.6,-118}}, color={0,0,127}));
+      connect(relHumSet.y, PID.u_s)
+        annotation (Line(points={{-277,-118},{-222,-118}}, color={0,0,127}));
+      connect(PID.u_m, busSensors.T01_RelHum) annotation (Line(points={{-210,
+              -130},{-210,-130},{-210,-134},{-210,-134},{-210,-134},{-336,-134},
+              {-336,-63.61},{-388.575,-63.61}}, color={0,0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(absHumSet1.Tem, busSensors.T01) annotation (Line(points={{-134.6,
+              -112.2},{-336,-112.2},{-336,-63.61},{-388.575,-63.61}}, color={0,
+              0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(absHumSet1.absHum, busActors.mWatSteamHumid) annotation (Line(
+            points={{-113.4,-118},{-68,-118},{-68,-69.64},{101.375,-69.64}},
+            color={0,0,127}), Text(
           string="%second",
           index=1,
           extent={{6,3},{6,3}}));

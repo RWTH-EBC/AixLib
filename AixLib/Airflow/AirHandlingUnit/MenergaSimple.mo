@@ -334,7 +334,7 @@ end TwoWayEqualPercentageAdd;
         origin={-420,-20})));
   Modelica.Blocks.Sources.BooleanConstant isNight(final k=false)
     "boolean to activate the night modus for the pump"
-    annotation (Placement(transformation(extent={{-462,-24},{-452,-14}})));
+    annotation (Placement(transformation(extent={{-464,-26},{-454,-16}})));
   Modelica.Fluid.Interfaces.FluidPort_a watInlHeaCoi(redeclare package Medium =
         MediumWater) "water inlet for the heating coil"
     annotation (Placement(transformation(extent={{-430,-110},{-410,-90}})));
@@ -587,14 +587,14 @@ equation
           254},{-492.4,254}},       color={0,0,127}));
   connect(pump.port_b, HeatingCoil.port_a2) annotation (Line(points={{-420,-10},
           {-420,14}},                    color={0,127,255}));
-  connect(isNight.y,pump. IsNight) annotation (Line(points={{-451.5,-19},{
+  connect(isNight.y,pump. IsNight) annotation (Line(points={{-453.5,-21},{
           -430.2,-20}},                     color={255,0,255}));
   connect(HeatingCoil.port_b2, watOutHeaCoi) annotation (Line(points={{-400,14},
           {-400,14},{-400,-100},{-398,-100}}, color={0,127,255}));
   connect(watInlHeaCoi, threeWayValveHeaCoi.port_1) annotation (Line(points={{-420,
           -100},{-420,-82},{-420,-64}}, color={0,127,255}));
   connect(threeWayValveHeaCoi.port_2, pump.port_a) annotation (Line(points={{-420,
-          -44},{-420,-37},{-420,-30}}, color={0,127,255}));
+          -44},{-420,-30}},            color={0,127,255}));
   connect(HeatingCoil.port_b2, threeWayValveHeaCoi.port_3) annotation (Line(
         points={{-400,14},{-400,14},{-400,-54},{-410,-54}}, color={0,127,255}));
   connect(threeWayValveHeaCoi.y, busActors.openValveHeatCoil) annotation (Line(
