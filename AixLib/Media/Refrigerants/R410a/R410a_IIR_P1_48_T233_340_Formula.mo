@@ -1,6 +1,6 @@
 ﻿within AixLib.Media.Refrigerants.R410a;
-package R410a_IIR_P05_48_T233_340_Formula
-  "Refrigerant model developed by Engelpracht"
+package R410a_IIR_P1_48_T233_340_Formula
+  "Refrigerant model for R410a using a hybrid approach with explicit formulas"
 
   /*Provide basic definitions of the refrigerant. Therefore, fill constants
     or parameters and may add new constants or parameters if needed. Moreover,
@@ -46,7 +46,7 @@ package R410a_IIR_P05_48_T233_340_Formula
     AbsolutePressure(
       start=2e5,
       nominal=5e5,
-      min=0.5e5,
+      min=1e5,
       max=48e5),
     Temperature(
       start=273.15,
@@ -640,4 +640,4 @@ package R410a_IIR_P05_48_T233_340_Formula
 <p>Fröba, A. P.; Leipertz, A. (2003): Thermophysical Properties of the Refrigerant Mixtures R410A and R407C from Dynamic Light Scattering (DLS). In: <i>International Journal ofThermophysics 24 (5)</i>, S. 1185–1206. DOI: 10.1023/A:1026152331710.</p>
 <p>Engelpracht, Mirko (2017): Development of modular and scalable simulation models for heat pumps and chillers considering various refrigerants. <i>Master Thesis</i></p>
 </html>"));
-end R410a_IIR_P05_48_T233_340_Formula;
+end R410a_IIR_P1_48_T233_340_Formula;

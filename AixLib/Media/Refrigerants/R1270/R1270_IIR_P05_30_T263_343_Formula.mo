@@ -1,6 +1,6 @@
 within AixLib.Media.Refrigerants.R1270;
-package R1270_IIR_P05_30_T263_343_Formula "Refrigerant model developed by Sangi et al. for R1270 using a hybrid 
-  approach"
+package R1270_IIR_P05_30_T263_343_Formula
+  "Refrigerant model for R1270 using a hybrid approach with explicit formulas developed by Sangi et al."
 
   /*Provide basic definitions of the refrigerant. Therefore, fill constants
     or parameters and may add new constants or parameters if needed. Moreover,

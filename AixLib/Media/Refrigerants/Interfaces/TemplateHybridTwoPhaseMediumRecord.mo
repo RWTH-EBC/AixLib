@@ -80,18 +80,6 @@ partial package TemplateHybridTwoPhaseMediumRecord
       for the initialization of nonlinear solver iterations.
     */
 
-//   redeclare record extends ThermodynamicState "Thermodynamic state"
-//     Density d "Density";
-//     Temperature T "Temperature";
-//     AbsolutePressure p "Pressure";
-//     SpecificEnthalpy h "Enthalpy";
-//   end ThermodynamicState;
-  /*The record "ThermodynamicState" contains the input arguments
-    of all the function and is defined together with the used
-    type definitions in PartialMedium. The record most often contains two of the
-    variables "p, T, d, h" (e.g., medium.T)
-  */
-
   redeclare replaceable model extends BaseProperties(
     h(stateSelect=StateSelect.prefer),
     d(stateSelect=StateSelect.default),
@@ -146,19 +134,19 @@ partial package TemplateHybridTwoPhaseMediumRecord
   */
   redeclare record EoS
     "Record that contains fitting coefficients of the Helmholtz EoS"
-    extends AixLib.DataBase.Media.Refrigerants.R1270.EoS_IIR_P05_30_T263_343;
+    extends AixLib.DataBase.Media.Refrigerants.R290.EoS_IIR_P05_30_T263_343;
   end EoS;
 
   redeclare record BDSP
     "Record that contains fitting coefficients of the state properties at bubble
     and dew lines"
-    extends AixLib.DataBase.Media.Refrigerants.R1270.BDSP_IIR_P05_30_T263_343;
+    extends AixLib.DataBase.Media.Refrigerants.R290.BDSP_IIR_P05_30_T263_343;
   end BDSP;
 
   redeclare record TSP
     "Record that contains fitting coefficients of the state properties
     calculated with two independent state properties"
-    extends AixLib.DataBase.Media.Refrigerants.R1270.TSP_IIR_P05_30_T263_343;
+    extends AixLib.DataBase.Media.Refrigerants.R290.TSP_IIR_P05_30_T263_343;
   end TSP;
 
   redeclare record SmoothTransition
@@ -172,7 +160,6 @@ partial package TemplateHybridTwoPhaseMediumRecord
     Real h_ps(unit="J/(Pa.K.kg)") = 100/(30e5-0.5e5);
     AbsolutePressure d_derh_p = 0.2;
   end SmoothTransition;
-
   /*Provide functions to calculate further thermodynamic properties like the
     dynamic viscosity or thermal conductivity. Also add references.
   */
@@ -196,7 +183,6 @@ partial package TemplateHybridTwoPhaseMediumRecord
   algorithm
 
   end surfaceTension;
-
   annotation (Documentation(revisions="<html>
 <ul>
   <li>

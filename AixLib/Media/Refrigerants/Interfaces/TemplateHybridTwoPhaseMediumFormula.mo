@@ -80,18 +80,6 @@ partial package TemplateHybridTwoPhaseMediumFormula
       for the initialization of nonlinear solver iterations.
     */
 
-//   redeclare record extends ThermodynamicState "Thermodynamic state"
-//     Density d "Density";
-//     Temperature T "Temperature";
-//     AbsolutePressure p "Pressure";
-//     SpecificEnthalpy h "Enthalpy";
-//   end ThermodynamicState;
-  /*The record "ThermodynamicState" contains the input arguments
-    of all the function and is defined together with the used
-    type definitions in PartialMedium. The record most often contains two of the
-    variables "p, T, d, h" (e.g., medium.T)
-  */
-
   redeclare replaceable model extends BaseProperties(
     h(stateSelect=StateSelect.prefer),
     d(stateSelect=StateSelect.default),
@@ -155,7 +143,6 @@ partial package TemplateHybridTwoPhaseMediumFormula
     Real h_ps(unit="J/(Pa.K.kg)") = 100/(30e5-0.5e5);
     AbsolutePressure d_derh_p = 0.2;
   end SmoothTransition;
-
   /*Provide Helmholtz equations of state (EoS) using an explicit formula.
   */
   redeclare function extends alpha_0
@@ -229,7 +216,6 @@ partial package TemplateHybridTwoPhaseMediumFormula
   annotation(Inline=false,
           LateInline=true);
   end tau_delta_d2_alpha_r_d_tau_d_delta;
-
   /*Provide polynomial functions for saturation properties. These functions are
     fitted to external data (e.g. data extracted from RefProp or FluidProp). 
     Currently, just one fitting approach is implemented.
@@ -327,7 +313,6 @@ partial package TemplateHybridTwoPhaseMediumFormula
     annotation(Inline=false,
             LateInline=true);
   end dewEntropy;
-
   /*Provide functions to calculate thermodynamic properties depending on the
     independent variables. Moreover, these functions may depend on the Helmholtz
     EoS.
@@ -413,7 +398,6 @@ partial package TemplateHybridTwoPhaseMediumFormula
           Inline=false,
           LateInline=true);
   end density_pT;
-
   /*Provide functions to calculate further thermodynamic properties like the
     dynamic viscosity or thermal conductivity. Also add references.
   */
@@ -437,7 +421,6 @@ partial package TemplateHybridTwoPhaseMediumFormula
   algorithm
 
   end surfaceTension;
-
   annotation (Documentation(revisions="<html>
 <ul>
   <li>

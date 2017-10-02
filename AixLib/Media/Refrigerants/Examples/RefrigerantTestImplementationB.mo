@@ -4,7 +4,7 @@ model RefrigerantTestImplementationB
   extends Modelica.Icons.Example;
   extends Modelica.Media.Examples.Tests.Components.PartialTestModel2(
     redeclare package Medium =
-    AixLib.Media.Refrigerants.R410a.R410a_IIR_P05_48_T233_340_Record,
+        AixLib.Media.Refrigerants.R410a.R410a_IIR_P1_48_T233_340_Record,
     h_start=151000,
     p_start=150000,
     T_start=333.15,

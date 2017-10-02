@@ -4,26 +4,28 @@ model RefrigerantsFittedFormulas
   extends Modelica.Icons.Example;
 
   // Define the refrigerant that shall be tested
+  //
   package MediumInt =
-    AixLib.Media.Refrigerants.R134a.R134a_IIR_P1_395_T233_370_Formula
+    AixLib.Media.Refrigerants.R134a.R134a_IIR_P1_395_T233_455_Formula
     "Internal medium model";
   package MediumExt =
     HelmholtzMedia.HelmholtzFluids.R134a "External medium model";
 
   // Define parameters that define the range for calculating the fitted formulas
+  //
   parameter Modelica.SIunits.SpecificEnthalpy h_min = 150e3
     "Fluid limit: Minimum specific enthalpy"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.SpecificEnthalpy h_max = 492e3
+  parameter Modelica.SIunits.SpecificEnthalpy h_max = 550e3
     "Fluid limit: Maximum specific enthalpy"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.SpecificEntropy s_min = 1.25e3
+  parameter Modelica.SIunits.SpecificEntropy s_min = 1.0e3
     "Fluid limit: Minimum specific entropy"
     annotation (Dialog(group="Fluid limits"));
   parameter Modelica.SIunits.SpecificEntropy s_max = 1.8e3
     "Fluid limit: Maximum specific entropy"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.Density d_min = 3.5
+  parameter Modelica.SIunits.Density d_min = 2.0
     "Fluid limit: Minimum density"
     annotation (Dialog(group="Fluid limits"));
   parameter Modelica.SIunits.Density d_max = 1425 "Fluid limit: Maximum density"
@@ -37,11 +39,12 @@ model RefrigerantsFittedFormulas
   parameter Modelica.SIunits.Temperature T_min = 233.15
     "Fluid limit: Minimum temperature"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.Temperature T_max = 367.15
+  parameter Modelica.SIunits.Temperature T_max = 455.15
     "Fluid limit: Maximum temperature"
     annotation (Dialog(group="Fluid limits"));
 
   // Define the conversion factor for the test
+  //
   Real convT(start = (T_max-T_min)/80)
     "Conversion factor in K/s for temperature to satisfy unit check";
   Real convD(start = (d_max-d_min)/(80*80))
@@ -52,6 +55,7 @@ model RefrigerantsFittedFormulas
     "Conversion factor in J/kg/K/s for specific entropy to satisfy unit check";
 
   // Defines state variables
+  //
   Modelica.SIunits.AbsolutePressure p_sat
     "Actual pressure for calculating saturation properties";
   Modelica.SIunits.Temperature T "Actual pulsating temperature";
@@ -66,6 +70,7 @@ model RefrigerantsFittedFormulas
   Real deltaInt "Actual dimensionless density of internal medium";
 
   // Define variables for the derivates of the EoS
+  //
   record EoS "Record that contains calculated properties of the EoS"
     Real f_iInt "Ideal part of the internal Helmholtz energy";
     Real f_iExt "Ideal part of the external Helmholtz energy";
@@ -163,30 +168,36 @@ algorithm
     convH := (h_max - h_min)/80;
     convS := (s_max - s_min)/80;
     convD := (d_max - d_min)/(80*80);
-    convChange := if delay(T,1) >= T_max-convT then time else convChangeTmp;
+    convChange := if noEvent(delay(T,1)) >= T_max-convT then time else convChangeTmp;
 
 equation
+
   // Change correction factors for temperature and pressure calculation
+  //
   convChangeTmp = convChange;
 
   // Change independent thermodynamic state properties acording to time
+  //
   T =  T_min + convT * (time - convChange);
   h =  h_min + convH * (time - convChange);
   s =  s_min + convS * (time - convChange);
   d =  d_min + convD * time;
 
   // Calculate dimensionless thermydynamic state properties acording to time
+  //
   tauInt = MediumInt.fluidConstants[1].criticalTemperature/T;
   deltaInt = d/(MediumInt.fluidConstants[1].molarMass*
     MediumInt.fluidConstants[1].criticalMolarVolume);
 
   // Calculate state properties for calculating saturation properties acording to time
+  //
   T_sat = T_min + (min(MediumInt.fluidConstants[1].criticalTemperature,
     T_max)-T_min)/(80*80) * time;
   p_sat = p_min + (min(MediumInt.fluidConstants[1].criticalPressure,
     p_max)-p_min)/(80*80) * time;
 
   // Calculate derivatives of the EoS
+  //
   eos.f_iInt = MediumInt.alpha_0(deltaInt,tauInt);
   eos.f_iExt = MediumExt.EoS.f_i(deltaInt,tauInt);
   eos.f_rInt = MediumInt.alpha_r(deltaInt,tauInt);
@@ -212,6 +223,7 @@ equation
   eos.f_rtdInt = MediumInt.tau_delta_d2_alpha_r_d_tau_d_delta(deltaInt,tauInt)
       /tauInt/deltaInt;
   eos.f_rtdExt = MediumExt.EoS.f_rtd(deltaInt,tauInt);
+
   eos.df_i = (eos.f_iInt-eos.f_iExt);
   eos.df_r = (eos.f_rInt-eos.f_rExt);
   eos.df_it = (eos.f_itInt-eos.f_itExt);
@@ -223,6 +235,7 @@ equation
   eos.df_rtd = (eos.f_rtdInt-eos.f_rtdExt);
 
   // Calculate saturation properties
+  //
   saturation.p_satInt = MediumInt.saturationPressure(T_sat);
   saturation.p_satExt = MediumExt.saturationPressure_sat(MediumExt.setSat_T(T_sat));
   saturation.T_satInt = MediumInt.saturationTemperature(p_sat);
@@ -239,6 +252,7 @@ equation
   saturation.s_lExt = MediumExt.bubbleEntropy(MediumExt.setSat_p(p_sat));
   saturation.s_vInt = MediumInt.dewEntropy(MediumInt.setSat_p(p_sat));
   saturation.s_vExt = MediumExt.dewEntropy(MediumExt.setSat_p(p_sat));
+
   saturation.dp_sat = (saturation.p_satInt-saturation.p_satExt)
       /saturation.p_satExt*100;
   saturation.dT_sat = (saturation.T_satInt-saturation.T_satExt)
@@ -256,19 +270,21 @@ equation
   saturation.ds_v = (saturation.s_vInt-saturation.s_vExt)
       /saturation.s_vExt*100;
 
-   // Calculate further state properties
-    properties.d_ptInt = MediumInt.density_pT(p_sat, T);
-    properties.d_ptExt = MediumExt.density_pT(p_sat, T);
-    properties.T_phInt = MediumInt.temperature_ph(p_sat,h);
-    properties.T_phExt = MediumExt.temperature_ph(p_sat,h);
-    properties.T_psInt = MediumInt.temperature_ps(p_sat,s);
-    properties.T_psExt = MediumExt.temperature_ps(p_sat,s);
-    properties.dd_pt = (properties.d_ptInt-properties.d_ptExt)
-      /properties.d_ptExt*100;
-    properties.dT_ph = (properties.T_phInt-properties.T_phExt)
-      /properties.T_phExt*100;
-    properties.dT_ps = (properties.T_psInt-properties.T_psExt)
-      /properties.T_psExt*100;
+  // Calculate further state properties
+  //
+  properties.d_ptInt = MediumInt.density_pT(p_sat, T);
+  properties.d_ptExt = MediumExt.density_pT(p_sat, T);
+  properties.T_phInt = MediumInt.temperature_ph(p_sat,h);
+  properties.T_phExt = MediumExt.temperature_ph(p_sat,h);
+  properties.T_psInt = MediumInt.temperature_ps(p_sat,s);
+  properties.T_psExt = MediumExt.temperature_ps(p_sat,s);
+
+  properties.dd_pt = (properties.d_ptInt-properties.d_ptExt)
+    /properties.d_ptExt*100;
+  properties.dT_ph = (properties.T_phInt-properties.T_phExt)
+    /properties.T_phExt*100;
+  properties.dT_ps = (properties.T_psInt-properties.T_psExt)
+    /properties.T_psExt*100;
   annotation(experiment(StopTime=6400, Tolerance=1e-006),
     __Dymola_experimentSetupOutput,
     __Dymola_experimentFlags(

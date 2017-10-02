@@ -5,7 +5,8 @@ model RefrigerantInversions
 
   // Define the refrigerant that shall be tested
   package Medium =
-      AixLib.Media.Refrigerants.R410a.R410a_IIR_P05_48_T233_340_Record;
+      AixLib.Media.Refrigerants.R410a.R410a_IIR_P1_48_T233_340_Record
+      "Internal medium model";
 
   // Define the fluid limits of the medium that shall be tested
   parameter Modelica.SIunits.AbsolutePressure p_min = 1e5
@@ -21,34 +22,13 @@ model RefrigerantInversions
     "Fluid limit: Maximum temperature"
     annotation (Dialog(group="Fluid limits"));
 
-  // Define accuracies for formulas denpending on fitted formulas
-  parameter Real errorTemperature_ph = 0.095
-    "Accuracy of temperature_ph"
-    annotation (Dialog(group="Accuraties"));
-  parameter Real errorTemperature_ps = 3
-    "Accuracy of temperature_ps"
-    annotation (Dialog(group="Accuraties"));
-  parameter Real errorPressure_dT = 120000
-    "Accuracy of pressure_dT"
-    annotation (Dialog(group="Accuraties"));
-  parameter Real errorDensity_ph = 0.26
-    "Accuracy of density_ph"
-    annotation (Dialog(group="Accuraties"));
-  parameter Real errorDensity_ps = 120
-    "Accuracy of density_ps"
-    annotation (Dialog(group="Accuraties"));
-  parameter Real errorSpecificEnthalpy_dT = 0.0000001
-    "Accuracy of specificEnthalpy_dT"
-    annotation (Dialog(group="Accuraties"));
-  parameter Real errorSpecificEnthalpy_ps = 43700
-    "Accuracy of specificEnthalpy_ps"
-    annotation (Dialog(group="Accuraties"));
-
   // Define the conversion factor for the unit test
+  //
   Real convT
     "Conversion factor for temperature to satisfy unit check";
 
   // Define variables that shall be calculated
+  //
   Modelica.SIunits.Temperature T
     "Actual temperature";
   Modelica.SIunits.Temperature TInv_h
@@ -75,47 +55,31 @@ model RefrigerantInversions
     "Actual specific entropy";
 
 equation
+
   // Calculate the conversion factors for the unit test
+  //
   convT = (T_max - T_min) / (80^3);
 
   // Calculate independent state properties
+  //
   T = T_min + convT * time^3;
   p = p_min + 1 / (1 + exp(-0.1 * (time - 40))) * (p_max - p_min);
 
   // Calculate thermodynamic properties depending on p and T
+  //
   h = Medium.specificEnthalpy_pT(p = p, T = T);
   d = Medium.density_pT(p = p, T = T);
   s = Medium.specificEntropy(Medium.setState_pT(p = p, T = T));
 
   // Calculate inverse thermodynamic properties
+  //
   TInv_h = Medium.temperature_ph(p = p, h = h, phase = 0);
-  assert(abs(T - TInv_h) < errorTemperature_ph,
-    "Error in implementation of temperature_ph",
-    level=AssertionLevel.warning);
   TInv_s = Medium.temperature_ps(p = p, s = s, phase = 0);
-  assert(abs(T - TInv_s) < errorTemperature_ps,
-    "Error in implementation of temperature_ph",
-    level=AssertionLevel.warning);
   pInv_d = Medium.pressure_dT(d = d, T = T, phase = 0);
-  assert(abs(p - pInv_d) < errorPressure_dT,
-    "Error in implementation of temperature_ph",
-    level=AssertionLevel.warning);
   dInv_h = Medium.density_ph(p = p, h = h, phase = 0);
-  assert(abs(d - dInv_h) < errorDensity_ph,
-    "Error in implementation of density_ph",
-    level=AssertionLevel.warning);
   dInv_s = Medium.density_ps(p = p, s = s, phase = 0);
-  assert(abs(d - dInv_s) < errorDensity_ps,
-    "Error in implementation of density_ps",
-    level=AssertionLevel.warning);
   hInv_d = Medium.specificEnthalpy_dT(d = d, T = T, phase = 0);
-  assert(abs(h - hInv_d) < errorSpecificEnthalpy_dT,
-    "Error in implementation of specificEnthalpy_dT",
-    level=AssertionLevel.warning);
   hInv_s = Medium.specificEnthalpy_ps(p = p, s = s, phase = 0);
-  assert(abs(h - hInv_s) < errorSpecificEnthalpy_ps,
-    "Error in implementation of specificEnthalpy_ps",
-    level=AssertionLevel.warning);
 
   annotation (
 experiment(StopTime=80, Tolerance=1e-006),
@@ -126,7 +90,6 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Media/Example
 <ol>
 <li>The <i>refrigerant package</i> that shall be tested.</li>
 <li>The <i>refrigerant&apos;s fluid limits</i> that are determined by the fitting procedure.</li>
-<li>The <i>accuracies of formulas</i> (e.g. temperature_ph) that are directly fitted to external data or that depend on further fitted formula.</li>
 </ol>
 <p>The following <b>inversions</b> are calculated and checked:</p>
 <ol>

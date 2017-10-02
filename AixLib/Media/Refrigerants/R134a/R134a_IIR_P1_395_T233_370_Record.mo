@@ -1,6 +1,6 @@
 ﻿within AixLib.Media.Refrigerants.R134a;
 package R134a_IIR_P1_395_T233_370_Record
-  "Refrigerant model developed by Engelpracht"
+  "Refrigerant model for R134a using a hybrid approach with recods"
 
   /*Provide basic definitions of the refrigerant. Therefore, fill constants
     or parameters and may add new constants or parameters if needed. Moreover,

@@ -13,7 +13,7 @@ package Refrigerants "Package with models for different refrigerants"
 <ol>
 <li>R134a</li>
 <li>R410a</li>
-<li>R1270</li>
+<li>R290</li>
 </ol>
 <p>For further information of <b>the EoS and its partial derivatives</b>, please read the paper &QUOT;<a href=\"http://www.ep.liu.se/ecp/076/006/ecp12076006.pdf\">HelmholtzMedia - A fluid properties library</a>&QUOT; by Thorade and Saadat as well as the paper &QUOT;<a href=\"http://gfzpublic.gfz-potsdam.de/pubman/item/escidoc:247373:5/component/escidoc:306833/247373.pdf\">Partial derivatives of thermodynamic state properties for dynamic simulation</a>&QUOT; by Thorade and Saadat. For further information of <b>the hybrid approach</b>, please read the paper &QUOT;<a href=\"http://dx.doi.org/10.3384/ecp14096\">A Medium Model for the Refrigerant Propane for Fast and Accurate Dynamic Simulations</a>&QUOT; by Sangi et al..</p>
 <p><b>Assumptions and limitations</b> </p>
@@ -103,7 +103,7 @@ package Refrigerants "Package with models for different refrigerants"
         Text(
           extent={{56,20},{88,0}},
           lineColor={28,108,200},
-          textString="R1270"),
+          textString="R290"),
         Text(
           extent={{8,20},{40,0}},
           lineColor={28,108,200},
