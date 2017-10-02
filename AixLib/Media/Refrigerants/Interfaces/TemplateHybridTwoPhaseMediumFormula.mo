@@ -30,7 +30,7 @@ partial package TemplateHybridTwoPhaseMediumFormula
     specific enthalpy, density, absolute pressure and temperature.
   */
   extends
-    WorkingVersion.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumFormula(
+    AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumFormula(
     mediumName="Name",
     substanceNames={"Name"},
     singleState=false,
@@ -80,55 +80,6 @@ partial package TemplateHybridTwoPhaseMediumFormula
       model, while the start attribute should be a reasonable default value
       for the initialization of nonlinear solver iterations.
     */
-
-  redeclare replaceable model extends BaseProperties(
-    h(stateSelect=StateSelect.prefer),
-    d(stateSelect=StateSelect.default),
-    T(stateSelect=StateSelect.default),
-    p(stateSelect=StateSelect.prefer)) "Base properties of refrigerant"
-
-    Integer phase(min=0, max=2, start=1)
-      "2 for two-phase, 1 for one-phase, 0 if not known";
-    SaturationProperties sat(Tsat(start=300.0), psat(start=1.0e5))
-      "Saturation temperature and pressure";
-
-  equation
-    MM = fluidConstants[1].molarMass;
-    phase = if ((h < bubbleEnthalpy(sat) or h > dewEnthalpy(sat)) or p >
-          fluidConstants[1].criticalPressure) then 1 else 2;
-    phase = state.phase;
-
-    d = state.d; //density_ph(p=p,h=h,phase=phase);
-    T = state.T; //temperature_ph(p=p,h=h,phase=phase);
-    d = density_ph(p=p,h=h,phase=phase);
-    T = temperature_ph(p=p,h=h,phase=phase);
-    p = state.p; //pressure_dT(d, T, phase);
-    h = state.h; //specificEnthalpy_dT(d, T, phase);
-
-    sat.Tsat = saturationTemperature(p=p);
-    sat.psat = p; //saturationPressure(T=T);
-
-    u = h - p/d;
-    R = Modelica.Constants.R/MM;
-  end BaseProperties;
-  /*Provide an implementation of model BaseProperties,
-    that is defined in PartialMedium. Select two independent
-    variables from p, T, d, u, h. The other independent
-    variables are the mass fractions "Xi", if there is more
-    than one substance. Provide 3 equations to obtain the remaining
-    variables as functions of the independent variables.
-    It is also necessary to provide two additional equations to set
-    the gas constant R and the molar mass MM of the medium.
-    Finally, the thermodynamic state vector, defined in the base class
-    Interfaces.PartialMedium.BaseProperties, should be set, according to
-    its definition (see ThermodynamicState below).
-    The computation of vector X[nX] from Xi[nXi] is already included in
-    the base class Interfaces.PartialMedium.BaseProperties, so it should not
-    be repeated here.
-
-    The code fragments above are for a single-substance medium with
-    p,T as independent variables.
-  */
 
   /*Provide records thats contain the coefficients for the smooth transition
     between different regions.
@@ -243,6 +194,7 @@ partial package TemplateHybridTwoPhaseMediumFormula
     Real x;
 
   algorithm
+
     annotation(Inline=false,
           LateInline=true);
   end saturationTemperature;
@@ -253,6 +205,7 @@ partial package TemplateHybridTwoPhaseMediumFormula
     Real x;
 
   algorithm
+
     annotation(Inline=false,
           LateInline=true);
   end bubbleDensity;
@@ -263,6 +216,7 @@ partial package TemplateHybridTwoPhaseMediumFormula
     Real x;
 
   algorithm
+
     annotation(Inline=false,
           LateInline=true);
   end dewDensity;
@@ -273,6 +227,7 @@ partial package TemplateHybridTwoPhaseMediumFormula
     Real x;
 
   algorithm
+
     annotation(Inline=false,
           LateInline=true);
   end bubbleEnthalpy;
@@ -283,6 +238,7 @@ partial package TemplateHybridTwoPhaseMediumFormula
     Real x;
 
   algorithm
+
     annotation(Inline=false,
           LateInline=true);
   end dewEnthalpy;
@@ -293,6 +249,7 @@ partial package TemplateHybridTwoPhaseMediumFormula
     Real x;
 
   algorithm
+
     annotation(Inline=false,
           LateInline=true);
   end bubbleEntropy;
@@ -303,6 +260,7 @@ partial package TemplateHybridTwoPhaseMediumFormula
     Real x;
 
   algorithm
+
     annotation(Inline=false,
             LateInline=true);
   end dewEntropy;
@@ -332,6 +290,7 @@ partial package TemplateHybridTwoPhaseMediumFormula
     Real T2;
 
   algorithm
+
   annotation(derivative(noDerivative=phase)=temperature_ph_der,
       inverse(h=specificEnthalpy_pT(p=p,T=T,phase=phase)),
           Inline=false,
@@ -360,6 +319,7 @@ partial package TemplateHybridTwoPhaseMediumFormula
     Real T2;
 
   algorithm
+
   annotation(Inline=false,
           LateInline=true);
   end temperature_ps;
@@ -385,6 +345,7 @@ partial package TemplateHybridTwoPhaseMediumFormula
     Real d2;
 
   algorithm
+
   annotation(inverse(p=pressure_dT(d=d,T=T,phase=phase)),
           Inline=false,
           LateInline=true);

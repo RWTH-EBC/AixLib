@@ -6,7 +6,7 @@ model RefrigerantProperties
   // Define the refrigerant that shall be tested
   //
   package Medium =
-      AixLib.Media.Refrigerants.R410a.R410a_IIR_P1_48_T233_473_Horner
+      AixLib.Media.Refrigerants.R134a.R134a_IIR_P1_395_T233_455_Horner
       "Internal medium model";
 
   // Define way of calculating pressure and temperature
@@ -33,13 +33,13 @@ model RefrigerantProperties
   parameter Modelica.SIunits.AbsolutePressure p_min = 1e5
     "Fluid limit: Minimum absolute pressure"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.AbsolutePressure p_max = 48e5
+  parameter Modelica.SIunits.AbsolutePressure p_max = 39e5
     "Fluid limit: Maximum absolute pressure"
     annotation (Dialog(group="Fluid limits"));
   parameter Modelica.SIunits.Temperature T_min = 233.15
     "Fluid limit: Minimum temperature"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.Temperature T_max = 470.15
+  parameter Modelica.SIunits.Temperature T_max = 455.15
     "Fluid limit: Maximum temperature"
     annotation (Dialog(group="Fluid limits"));
 
@@ -101,6 +101,12 @@ model RefrigerantProperties
       "Actual isobaric expansion coefficient";
     Modelica.SIunits.IsothermalCompressibility kappa
       "Actual isothermal compressibility";
+    Modelica.SIunits.IsentropicExponent gamma
+      "Actual isentropic coefficient";
+    Real delta_T(unit= "J/(Pa.kg)")
+      "Actual isothermal throttling coefficient";
+    Real my(unit="K/Pa")
+      "Actual joule Thomson Coefficient";
     Medium.DynamicViscosity eta
       "Actual dynamic viscosity";
     Medium.ThermalConductivity lambda
@@ -234,6 +240,9 @@ equation
   thermodynamicProperties.w = Medium.velocityOfSound(state_pT);
   thermodynamicProperties.betta = Medium.isobaricExpansionCoefficient(state_pT);
   thermodynamicProperties.kappa = Medium.isothermalCompressibility(state_pT);
+  thermodynamicProperties.gamma = Medium.isentropicExponent(state_pT);
+  thermodynamicProperties.delta_T = Medium.isothermalThrottlingCoefficient(state_pT);
+  thermodynamicProperties.my = Medium.jouleThomsonCoefficient(state_pT);
   thermodynamicProperties.eta = Medium.dynamicViscosity(state_pT);
   thermodynamicProperties.lambda = Medium.thermalConductivity(state_pT);
   thermodynamicProperties.sigma = Medium.surfaceTension(satT);
