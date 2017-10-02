@@ -15,7 +15,7 @@ package R410a_IIR_P1_48_T233_473_Horner
      each molarMass = 0.072585414240660,
      each criticalTemperature = 3.444943810810253e+02,
      each criticalPressure = 4.901264589893823e+06,
-     each criticalMolarVolume = 6324,
+     each criticalMolarVolume = 1/6324,
      each normalBoilingPoint = 221.71,
      each triplePointTemperature = 200,
      each meltingPoint = 118.15,
@@ -99,9 +99,9 @@ package R410a_IIR_P1_48_T233_473_Horner
     p(stateSelect=StateSelect.prefer)) "Base properties of refrigerant"
 
     Integer phase(min=0, max=2, start=1)
-    "2 for two-phase, 1 for one-phase, 0 if not known";
+      "2 for two-phase, 1 for one-phase, 0 if not known";
     SaturationProperties sat(Tsat(start=300.0), psat(start=1.0e5))
-    "Saturation temperature and pressure";
+      "Saturation temperature and pressure";
 
   equation
     MM = fluidConstants[1].molarMass;
@@ -144,8 +144,7 @@ package R410a_IIR_P1_48_T233_473_Horner
   /*Provide records thats contain the coefficients for the smooth transition
     between different regions.
   */
-  redeclare record SmoothTransition
-    "Record that contains ranges to calculate a smooth transition between
+  redeclare record SmoothTransition "Record that contains ranges to calculate a smooth transition between
     different regions"
     SpecificEnthalpy T_ph = 5;
     SpecificEntropy T_ps = 5;
@@ -158,7 +157,7 @@ package R410a_IIR_P1_48_T233_473_Horner
   /*Provide Helmholtz equations of state (EoS) using an explicit formula.
   */
   redeclare function extends alpha_0
-  "Dimensionless Helmholtz energy (Ideal gas contribution alpha_0)"
+    "Dimensionless Helmholtz energy (Ideal gas contribution alpha_0)"
   algorithm
     alpha_0 := log(delta) + (-1) * log(tau^(1)) + (36.8871) * tau^(0) + (7.15807) * tau^(1) + (-46.87575) * tau^(-0.1) + (2.0623) * log(1-exp(-(2.02326)*tau)) + (5.9751) * log(1-exp(-(5.00154)*tau)) + (1.5612) * log(1-exp(-(11.2484)*tau));
   annotation(Inline=false,
@@ -166,7 +165,7 @@ package R410a_IIR_P1_48_T233_473_Horner
   end alpha_0;
 
   redeclare function extends alpha_r
-  "Dimensionless Helmholtz energy (Residual part alpha_r)"
+    "Dimensionless Helmholtz energy (Residual part alpha_r)"
   algorithm
     alpha_r := (0.987252) * delta^(1) * tau^(0.44) + (-1.03017) * delta^(1) * tau^(1.2) + (1.17666) * delta^(1) * tau^(2.97) + (-0.138991) * delta^(2) * tau^(2.95) + (0.00302373) * delta^(5) * tau^(0.2) + (-2.53639) * delta^(1) * tau^(1.93) * exp(-delta^(1)) + (-1.9668) * delta^(2) * tau^(1.78) * exp(-delta^(1)) + (-0.83048) * delta^(3) * tau^(3) * exp(-delta^(1)) + (0.172477) * delta^(5) * tau^(0.2) * exp(-delta^(1)) + (-0.261116) * delta^(5) * tau^(0.74) * exp(-delta^(1)) + (-0.0745473) * delta^(5) * tau^(3) * exp(-delta^(1)) + (0.679757) * delta^(1) * tau^(2.1) * exp(-delta^(2)) + (-0.652431) * delta^(1) * tau^(4.3) * exp(-delta^(2)) + (0.0553849) * delta^(4) * tau^(0.25) * exp(-delta^(2)) + (-0.071097) * delta^(4) * tau^(7) * exp(-delta^(2)) + (-0.000875332) * delta^(9) * tau^(4.7) * exp(-delta^(2)) + (0.020076) * delta^(2) * tau^(13) * exp(-delta^(3)) + (-0.0139761) * delta^(2) * tau^(16) * exp(-delta^(3)) + (-0.018511) * delta^(4) * tau^(25) * exp(-delta^(3)) + (0.0171939) * delta^(5) * tau^(17) * exp(-delta^(3)) + (-0.00482049) * delta^(6) * tau^(7.4) * exp(-delta^(3));
   annotation(Inline=false,
@@ -174,7 +173,7 @@ package R410a_IIR_P1_48_T233_473_Horner
   end alpha_r;
 
   redeclare function extends tau_d_alpha_0_d_tau
-  "Short form for tau*(dalpha_0/dtau)@delta=const"
+    "Short form for tau*(dalpha_0/dtau)@delta=const"
   algorithm
     tau_d_alpha_0_d_tau := (-1)*(1) + (36.8871)*(0)*tau^(0) + (7.15807)*(1)*tau^(1) + (-46.87575)*(-0.1)*tau^(-0.1) + tau*(2.0623)*(2.02326)/(exp((2.02326)*tau)-1) + tau*(5.9751)*(5.00154)/(exp((5.00154)*tau)-1) + tau*(1.5612)*(11.2484)/(exp((11.2484)*tau)-1);
   annotation(Inline=false,
@@ -182,7 +181,7 @@ package R410a_IIR_P1_48_T233_473_Horner
   end tau_d_alpha_0_d_tau;
 
   redeclare function extends tau2_d2_alpha_0_d_tau2
-  "Short form for tau*tau*(ddalpha_0/(dtau*dtau))@delta=const"
+    "Short form for tau*tau*(ddalpha_0/(dtau*dtau))@delta=const"
   algorithm
     tau2_d2_alpha_0_d_tau2 := -(-1)*(1) + (36.8871)*(0)*((0)-1)*tau^(0) + (7.15807)*(1)*((1)-1)*tau^(1) + (-46.87575)*(-0.1)*((-0.1)-1)*tau^(-0.1) -tau^2*(2.0623)*(2.02326)^2*exp((2.02326)*tau)/(exp((2.02326)*tau)-1)^2 -tau^2*(5.9751)*(5.00154)^2*exp((5.00154)*tau)/(exp((5.00154)*tau)-1)^2 -tau^2*(1.5612)*(11.2484)^2*exp((11.2484)*tau)/(exp((11.2484)*tau)-1)^2;
   annotation(Inline=false,
@@ -190,7 +189,7 @@ package R410a_IIR_P1_48_T233_473_Horner
   end tau2_d2_alpha_0_d_tau2;
 
   redeclare function extends tau_d_alpha_r_d_tau
-  "Short form for tau*(dalpha_r/dtau)@delta=const"
+    "Short form for tau*(dalpha_r/dtau)@delta=const"
   algorithm
     tau_d_alpha_r_d_tau := (0.987252)*(0.44)*delta^(1)*tau^(0.44) + (-1.03017)*(1.2)*delta^(1)*tau^(1.2) + (1.17666)*(2.97)*delta^(1)*tau^(2.97) + (-0.138991)*(2.95)*delta^(2)*tau^(2.95) + (0.00302373)*(0.2)*delta^(5)*tau^(0.2) + (-2.53639)*(1.93)*delta^(1)*tau^(1.93)*exp(-delta^(1)) + (-1.9668)*(1.78)*delta^(2)*tau^(1.78)*exp(-delta^(1)) + (-0.83048)*(3)*delta^(3)*tau^(3)*exp(-delta^(1)) + (0.172477)*(0.2)*delta^(5)*tau^(0.2)*exp(-delta^(1)) + (-0.261116)*(0.74)*delta^(5)*tau^(0.74)*exp(-delta^(1)) + (-0.0745473)*(3)*delta^(5)*tau^(3)*exp(-delta^(1)) + (0.679757)*(2.1)*delta^(1)*tau^(2.1)*exp(-delta^(2)) + (-0.652431)*(4.3)*delta^(1)*tau^(4.3)*exp(-delta^(2)) + (0.0553849)*(0.25)*delta^(4)*tau^(0.25)*exp(-delta^(2)) + (-0.071097)*(7)*delta^(4)*tau^(7)*exp(-delta^(2)) + (-0.000875332)*(4.7)*delta^(9)*tau^(4.7)*exp(-delta^(2)) + (0.020076)*(13)*delta^(2)*tau^(13)*exp(-delta^(3)) + (-0.0139761)*(16)*delta^(2)*tau^(16)*exp(-delta^(3)) + (-0.018511)*(25)*delta^(4)*tau^(25)*exp(-delta^(3)) + (0.0171939)*(17)*delta^(5)*tau^(17)*exp(-delta^(3)) + (-0.00482049)*(7.4)*delta^(6)*tau^(7.4)*exp(-delta^(3));
   annotation(Inline=false,
@@ -198,7 +197,7 @@ package R410a_IIR_P1_48_T233_473_Horner
   end tau_d_alpha_r_d_tau;
 
   redeclare function extends tau2_d2_alpha_r_d_tau2
-  "Short form for tau*tau*(ddalpha_r/(dtau*dtau))@delta=const"
+    "Short form for tau*tau*(ddalpha_r/(dtau*dtau))@delta=const"
   algorithm
     tau2_d2_alpha_r_d_tau2 := (0.987252)*(0.44)*((0.44)-1)*delta^(1)*tau^(0.44) + (-1.03017)*(1.2)*((1.2)-1)*delta^(1)*tau^(1.2) + (1.17666)*(2.97)*((2.97)-1)*delta^(1)*tau^(2.97) + (-0.138991)*(2.95)*((2.95)-1)*delta^(2)*tau^(2.95) + (0.00302373)*(0.2)*((0.2)-1)*delta^(5)*tau^(0.2) + (-2.53639)*(1.93)*((1.93)-1)*delta^(1)*tau^(1.93)*exp(-delta^(1)) + (-1.9668)*(1.78)*((1.78)-1)*delta^(2)*tau^(1.78)*exp(-delta^(1)) + (-0.83048)*(3)*((3)-1)*delta^(3)*tau^(3)*exp(-delta^(1)) + (0.172477)*(0.2)*((0.2)-1)*delta^(5)*tau^(0.2)*exp(-delta^(1)) + (-0.261116)*(0.74)*((0.74)-1)*delta^(5)*tau^(0.74)*exp(-delta^(1)) + (-0.0745473)*(3)*((3)-1)*delta^(5)*tau^(3)*exp(-delta^(1)) + (0.679757)*(2.1)*((2.1)-1)*delta^(1)*tau^(2.1)*exp(-delta^(2)) + (-0.652431)*(4.3)*((4.3)-1)*delta^(1)*tau^(4.3)*exp(-delta^(2)) + (0.0553849)*(0.25)*((0.25)-1)*delta^(4)*tau^(0.25)*exp(-delta^(2)) + (-0.071097)*(7)*((7)-1)*delta^(4)*tau^(7)*exp(-delta^(2)) + (-0.000875332)*(4.7)*((4.7)-1)*delta^(9)*tau^(4.7)*exp(-delta^(2)) + (0.020076)*(13)*((13)-1)*delta^(2)*tau^(13)*exp(-delta^(3)) + (-0.0139761)*(16)*((16)-1)*delta^(2)*tau^(16)*exp(-delta^(3)) + (-0.018511)*(25)*((25)-1)*delta^(4)*tau^(25)*exp(-delta^(3)) + (0.0171939)*(17)*((17)-1)*delta^(5)*tau^(17)*exp(-delta^(3)) + (-0.00482049)*(7.4)*((7.4)-1)*delta^(6)*tau^(7.4)*exp(-delta^(3));
   annotation(Inline=false,
@@ -206,7 +205,7 @@ package R410a_IIR_P1_48_T233_473_Horner
   end tau2_d2_alpha_r_d_tau2;
 
   redeclare function extends delta_d_alpha_r_d_delta
-  "Short form for delta*(dalpha_r/(ddelta))@tau=const"
+    "Short form for delta*(dalpha_r/(ddelta))@tau=const"
   algorithm
     delta_d_alpha_r_d_delta := (0.987252)*(1)*delta^(1)*tau^(0.44) + (-1.03017)*(1)*delta^(1)*tau^(1.2) + (1.17666)*(1)*delta^(1)*tau^(2.97) + (-0.138991)*(2)*delta^(2)*tau^(2.95) + (0.00302373)*(5)*delta^(5)*tau^(0.2) + (-2.53639)*delta^(1)*tau^(1.93)*((1)-(1)*delta^(1))*exp(-delta^(1)) + (-1.9668)*delta^(2)*tau^(1.78)*((2)-(1)*delta^(1))*exp(-delta^(1)) + (-0.83048)*delta^(3)*tau^(3)*((3)-(1)*delta^(1))*exp(-delta^(1)) + (0.172477)*delta^(5)*tau^(0.2)*((5)-(1)*delta^(1))*exp(-delta^(1)) + (-0.261116)*delta^(5)*tau^(0.74)*((5)-(1)*delta^(1))*exp(-delta^(1)) + (-0.0745473)*delta^(5)*tau^(3)*((5)-(1)*delta^(1))*exp(-delta^(1)) + (0.679757)*delta^(1)*tau^(2.1)*((1)-(2)*delta^(2))*exp(-delta^(2)) + (-0.652431)*delta^(1)*tau^(4.3)*((1)-(2)*delta^(2))*exp(-delta^(2)) + (0.0553849)*delta^(4)*tau^(0.25)*((4)-(2)*delta^(2))*exp(-delta^(2)) + (-0.071097)*delta^(4)*tau^(7)*((4)-(2)*delta^(2))*exp(-delta^(2)) + (-0.000875332)*delta^(9)*tau^(4.7)*((9)-(2)*delta^(2))*exp(-delta^(2)) + (0.020076)*delta^(2)*tau^(13)*((2)-(3)*delta^(3))*exp(-delta^(3)) + (-0.0139761)*delta^(2)*tau^(16)*((2)-(3)*delta^(3))*exp(-delta^(3)) + (-0.018511)*delta^(4)*tau^(25)*((4)-(3)*delta^(3))*exp(-delta^(3)) + (0.0171939)*delta^(5)*tau^(17)*((5)-(3)*delta^(3))*exp(-delta^(3)) + (-0.00482049)*delta^(6)*tau^(7.4)*((6)-(3)*delta^(3))*exp(-delta^(3));
   annotation(Inline=false,
@@ -214,7 +213,7 @@ package R410a_IIR_P1_48_T233_473_Horner
   end delta_d_alpha_r_d_delta;
 
   redeclare function extends delta2_d2_alpha_r_d_delta2
-  "Short form for delta*delta(ddalpha_r/(ddelta*delta))@tau=const"
+    "Short form for delta*delta(ddalpha_r/(ddelta*delta))@tau=const"
   algorithm
     delta2_d2_alpha_r_d_delta2 := (0.987252)*(1)*((1)-1)*delta^(1)*tau^(0.44) + (-1.03017)*(1)*((1)-1)*delta^(1)*tau^(1.2) + (1.17666)*(1)*((1)-1)*delta^(1)*tau^(2.97) + (-0.138991)*(2)*((2)-1)*delta^(2)*tau^(2.95) + (0.00302373)*(5)*((5)-1)*delta^(5)*tau^(0.2) + (-2.53639)*delta^(1)*tau^(1.93)*(((1)-(1)*delta^(1))*((1)-1-(1)*delta^(1))-(1)^2*delta^(1))*exp(-delta^(1)) + (-1.9668)*delta^(2)*tau^(1.78)*(((2)-(1)*delta^(1))*((2)-1-(1)*delta^(1))-(1)^2*delta^(1))*exp(-delta^(1)) + (-0.83048)*delta^(3)*tau^(3)*(((3)-(1)*delta^(1))*((3)-1-(1)*delta^(1))-(1)^2*delta^(1))*exp(-delta^(1)) + (0.172477)*delta^(5)*tau^(0.2)*(((5)-(1)*delta^(1))*((5)-1-(1)*delta^(1))-(1)^2*delta^(1))*exp(-delta^(1)) + (-0.261116)*delta^(5)*tau^(0.74)*(((5)-(1)*delta^(1))*((5)-1-(1)*delta^(1))-(1)^2*delta^(1))*exp(-delta^(1)) + (-0.0745473)*delta^(5)*tau^(3)*(((5)-(1)*delta^(1))*((5)-1-(1)*delta^(1))-(1)^2*delta^(1))*exp(-delta^(1)) + (0.679757)*delta^(1)*tau^(2.1)*(((1)-(2)*delta^(2))*((1)-1-(2)*delta^(2))-(2)^2*delta^(2))*exp(-delta^(2)) + (-0.652431)*delta^(1)*tau^(4.3)*(((1)-(2)*delta^(2))*((1)-1-(2)*delta^(2))-(2)^2*delta^(2))*exp(-delta^(2)) + (0.0553849)*delta^(4)*tau^(0.25)*(((4)-(2)*delta^(2))*((4)-1-(2)*delta^(2))-(2)^2*delta^(2))*exp(-delta^(2)) + (-0.071097)*delta^(4)*tau^(7)*(((4)-(2)*delta^(2))*((4)-1-(2)*delta^(2))-(2)^2*delta^(2))*exp(-delta^(2)) + (-0.000875332)*delta^(9)*tau^(4.7)*(((9)-(2)*delta^(2))*((9)-1-(2)*delta^(2))-(2)^2*delta^(2))*exp(-delta^(2)) + (0.020076)*delta^(2)*tau^(13)*(((2)-(3)*delta^(3))*((2)-1-(3)*delta^(3))-(3)^2*delta^(3))*exp(-delta^(3)) + (-0.0139761)*delta^(2)*tau^(16)*(((2)-(3)*delta^(3))*((2)-1-(3)*delta^(3))-(3)^2*delta^(3))*exp(-delta^(3)) + (-0.018511)*delta^(4)*tau^(25)*(((4)-(3)*delta^(3))*((4)-1-(3)*delta^(3))-(3)^2*delta^(3))*exp(-delta^(3)) + (0.0171939)*delta^(5)*tau^(17)*(((5)-(3)*delta^(3))*((5)-1-(3)*delta^(3))-(3)^2*delta^(3))*exp(-delta^(3)) + (-0.00482049)*delta^(6)*tau^(7.4)*(((6)-(3)*delta^(3))*((6)-1-(3)*delta^(3))-(3)^2*delta^(3))*exp(-delta^(3));
   annotation(Inline=false,
@@ -222,7 +221,7 @@ package R410a_IIR_P1_48_T233_473_Horner
   end delta2_d2_alpha_r_d_delta2;
 
   redeclare function extends tau_delta_d2_alpha_r_d_tau_d_delta
-  "Short form for tau*delta*(ddalpha_r/(dtau*ddelta))"
+    "Short form for tau*delta*(ddalpha_r/(dtau*ddelta))"
   algorithm
     tau_delta_d2_alpha_r_d_tau_d_delta := (0.987252)*(1)*(0.44)*delta^(1)*tau^(0.44) + (-1.03017)*(1)*(1.2)*delta^(1)*tau^(1.2) + (1.17666)*(1)*(2.97)*delta^(1)*tau^(2.97) + (-0.138991)*(2)*(2.95)*delta^(2)*tau^(2.95) + (0.00302373)*(5)*(0.2)*delta^(5)*tau^(0.2) + (-2.53639)*(1.93)*delta^(1)*tau^(1.93)*((1)-(1)*delta^(1))*exp(-delta^(1)) + (-1.9668)*(1.78)*delta^(2)*tau^(1.78)*((2)-(1)*delta^(1))*exp(-delta^(1)) + (-0.83048)*(3)*delta^(3)*tau^(3)*((3)-(1)*delta^(1))*exp(-delta^(1)) + (0.172477)*(0.2)*delta^(5)*tau^(0.2)*((5)-(1)*delta^(1))*exp(-delta^(1)) + (-0.261116)*(0.74)*delta^(5)*tau^(0.74)*((5)-(1)*delta^(1))*exp(-delta^(1)) + (-0.0745473)*(3)*delta^(5)*tau^(3)*((5)-(1)*delta^(1))*exp(-delta^(1)) + (0.679757)*(2.1)*delta^(1)*tau^(2.1)*((1)-(2)*delta^(2))*exp(-delta^(2)) + (-0.652431)*(4.3)*delta^(1)*tau^(4.3)*((1)-(2)*delta^(2))*exp(-delta^(2)) + (0.0553849)*(0.25)*delta^(4)*tau^(0.25)*((4)-(2)*delta^(2))*exp(-delta^(2)) + (-0.071097)*(7)*delta^(4)*tau^(7)*((4)-(2)*delta^(2))*exp(-delta^(2)) + (-0.000875332)*(4.7)*delta^(9)*tau^(4.7)*((9)-(2)*delta^(2))*exp(-delta^(2)) + (0.020076)*(13)*delta^(2)*tau^(13)*((2)-(3)*delta^(3))*exp(-delta^(3)) + (-0.0139761)*(16)*delta^(2)*tau^(16)*((2)-(3)*delta^(3))*exp(-delta^(3)) + (-0.018511)*(25)*delta^(4)*tau^(25)*((4)-(3)*delta^(3))*exp(-delta^(3)) + (0.0171939)*(17)*delta^(5)*tau^(17)*((5)-(3)*delta^(3))*exp(-delta^(3)) + (-0.00482049)*(7.4)*delta^(6)*tau^(7.4)*((6)-(3)*delta^(3))*exp(-delta^(3));
   annotation(Inline=false,
@@ -233,7 +232,7 @@ package R410a_IIR_P1_48_T233_473_Horner
     Currently, just one fitting approach is implemented.
   */
   redeclare function extends saturationPressure
-  "Saturation pressure of refrigerant (Ancillary equation)"
+    "Saturation pressure of refrigerant (Ancillary equation)"
   protected
     Real OM = (1 - T/fluidConstants[1].criticalTemperature);
 
@@ -250,7 +249,7 @@ package R410a_IIR_P1_48_T233_473_Horner
   end saturationPressure;
 
   redeclare function extends saturationTemperature
-  "Saturation temperature of refrigerant (Ancillary equation)"
+    "Saturation temperature of refrigerant (Ancillary equation)"
   protected
     Real x;
 
@@ -262,7 +261,7 @@ package R410a_IIR_P1_48_T233_473_Horner
   end saturationTemperature;
 
   redeclare function extends bubbleDensity
-  "Boiling curve specific density of refrigerant (Ancillary equation)"
+    "Boiling curve specific density of refrigerant (Ancillary equation)"
   protected
     Real x;
 
@@ -274,7 +273,7 @@ package R410a_IIR_P1_48_T233_473_Horner
   end bubbleDensity;
 
   redeclare function extends dewDensity
-  "Dew curve specific density of refrigerant (Ancillary equation)"
+    "Dew curve specific density of refrigerant (Ancillary equation)"
   protected
     Real x;
 
@@ -286,7 +285,7 @@ package R410a_IIR_P1_48_T233_473_Horner
   end dewDensity;
 
   redeclare function extends bubbleEnthalpy
-  "Boiling curve specific enthalpy of refrigerant (Ancillary equation)"
+    "Boiling curve specific enthalpy of refrigerant (Ancillary equation)"
   protected
     Real x;
 
@@ -298,7 +297,7 @@ package R410a_IIR_P1_48_T233_473_Horner
   end bubbleEnthalpy;
 
   redeclare function extends dewEnthalpy
-  "Dew curve specific enthalpy of refrigerant (Ancillary equation)"
+    "Dew curve specific enthalpy of refrigerant (Ancillary equation)"
   protected
     Real x;
 
@@ -310,7 +309,7 @@ package R410a_IIR_P1_48_T233_473_Horner
   end dewEnthalpy;
 
   redeclare function extends bubbleEntropy
-  "Boiling curve specific entropy of refrigerant (Ancillary equation)"
+    "Boiling curve specific entropy of refrigerant (Ancillary equation)"
   protected
     Real x;
 
@@ -322,7 +321,7 @@ package R410a_IIR_P1_48_T233_473_Horner
   end bubbleEntropy;
 
   redeclare function extends dewEntropy
-  "Dew curve specific entropy of propane (Ancillary equation)"
+    "Dew curve specific entropy of propane (Ancillary equation)"
   protected
     Real x;
 
@@ -337,11 +336,12 @@ package R410a_IIR_P1_48_T233_473_Horner
     EoS.
   */
   redeclare replaceable function temperature_ph
-  "Calculates temperature as function of pressure and specific enthalpy"
+    "Calculates temperature as function of pressure and specific enthalpy"
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";
     input SpecificEnthalpy h "Specific enthalpy";
-    input FixedPhase phase=0 "2 for two-phase, 1 for one-phase, 0 if not known";
+    input FixedPhase phase=0
+      "2 for two-phase, 1 for one-phase, 0 if not known";
     output Temperature T "Temperature";
 
   protected
@@ -390,7 +390,7 @@ package R410a_IIR_P1_48_T233_473_Horner
   end temperature_ph;
 
   redeclare replaceable function temperature_ps
-  "Calculates temperature as function of pressure and specific entroy"
+    "Calculates temperature as function of pressure and specific entroy"
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";
     input SpecificEntropy s "Specific entropy";
@@ -442,7 +442,7 @@ package R410a_IIR_P1_48_T233_473_Horner
   end temperature_ps;
 
   redeclare replaceable partial function density_pT
-  "Computes density as a function of pressure and temperature"
+    "Computes density as a function of pressure and temperature"
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";
     input Temperature T "Temperature";
@@ -491,7 +491,7 @@ package R410a_IIR_P1_48_T233_473_Horner
     dynamic viscosity or thermal conductivity. Also add references.
   */
   redeclare function extends dynamicViscosity
-  "Calculates dynamic viscosity of refrigerant"
+    "Calculates dynamic viscosity of refrigerant"
 
     /*The functional form of the dynamic viscosity is implented as presented in
     Nabizadeh and Mayinger (1999), Viscosity of Gaseous R404A, R407C, R410A, 
@@ -504,7 +504,6 @@ package R410a_IIR_P1_48_T233_473_Horner
     Real eta_hd "Dynamic viscosity for the limit of high density";
 
   algorithm
-
     // Calculate the dynamic visocity near the limit of zero density
     eta_zd := -2.695 + 5.850e-2*state.T - 2.129e-5*state.T^2;
 
@@ -517,7 +516,7 @@ package R410a_IIR_P1_48_T233_473_Horner
   end dynamicViscosity;
 
   redeclare function extends thermalConductivity
-  "Calculates thermal conductivity of refrigerant"
+    "Calculates thermal conductivity of refrigerant"
 
   /*The functional form of the thermal conductify is implented as presented in
     Geller et al. (2001), Thermal Conductivity of the Refrigerant Mixtures R404A,
@@ -530,7 +529,6 @@ package R410a_IIR_P1_48_T233_473_Horner
     Real lambda_r "Thermal conductivity for residual part";
 
   algorithm
-
     // Calculate the thermal conducitvity for the limit of zero density
     lambda_0 := -8.872 + 7.41e-2*state.T;
 
@@ -544,7 +542,7 @@ package R410a_IIR_P1_48_T233_473_Horner
   end thermalConductivity;
 
   redeclare function extends surfaceTension
-  "Surface tension in two phase region of refrigerant"
+    "Surface tension in two phase region of refrigerant"
 
   /*The functional form of the surface tension is implented as presented in
     Fröba and Leipertz (2003), Thermophysical Properties of the Refrigerant 

@@ -1,6 +1,6 @@
-within AixLib.Media.Refrigerants.R1270;
-package R1270_IIR_P05_30_T263_343_Record
-  "Refrigerant model for R1270 using a hybrid approach with recods developed by Sangi et al."
+within AixLib.Media.Refrigerants.R290;
+package R290_IIR_P05_30_T263_343_Record
+  "Refrigerant model for R290 using a hybrid approach with recods developed by Sangi et al."
 
   /*Provide basic definitions of the refrigerant. Therefore, fill constants
     or parameters and may add new constants or parameters if needed. Moreover,
@@ -15,7 +15,7 @@ package R1270_IIR_P05_30_T263_343_Record
      each molarMass = 0.04409562,
      each criticalTemperature = 369.89,
      each criticalPressure = 4.2512e6,
-     each criticalMolarVolume = 5e3,
+     each criticalMolarVolume = 1/(5e3),
      each normalBoilingPoint = 231.036,
      each triplePointTemperature = 85.525,
      each meltingPoint = 85.45,
@@ -29,7 +29,7 @@ package R1270_IIR_P05_30_T263_343_Record
     specific enthalpy, density, absolute pressure and temperature.
   */
   extends
-    AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord(
+    WorkingVersion.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord(
     mediumName="Propane",
     substanceNames={"Propane"},
     singleState=false,
@@ -99,9 +99,9 @@ package R1270_IIR_P05_30_T263_343_Record
     p(stateSelect=StateSelect.prefer)) "Base properties of refrigerant"
 
     Integer phase(min=0, max=2, start=1)
-    "2 for two-phase, 1 for one-phase, 0 if not known";
+      "2 for two-phase, 1 for one-phase, 0 if not known";
     SaturationProperties sat(Tsat(start=300.0), psat(start=1.0e5))
-    "Saturation temperature and pressure";
+      "Saturation temperature and pressure";
 
   equation
     MM = fluidConstants[1].molarMass;
@@ -146,23 +146,20 @@ package R1270_IIR_P05_30_T263_343_Record
   */
   redeclare record EoS
     "Record that contains fitting coefficients of the Helmholtz EoS"
-    extends AixLib.DataBase.Media.Refrigerants.R1270.EoS_IIR_P05_30_T263_343;
+    extends AixLib.DataBase.Media.Refrigerants.R290.EoS_IIR_P05_30_T263_343;
   end EoS;
 
-  redeclare record BDSP
-    "Record that contains fitting coefficients of the state properties at bubble
+  redeclare record BDSP "Record that contains fitting coefficients of the state properties at bubble
     and dew lines"
-    extends AixLib.DataBase.Media.Refrigerants.R1270.BDSP_IIR_P05_30_T263_343;
+    extends AixLib.DataBase.Media.Refrigerants.R290.BDSP_IIR_P05_30_T263_343;
   end BDSP;
 
-  redeclare record TSP
-    "Record that contains fitting coefficients of the state properties
+  redeclare record TSP "Record that contains fitting coefficients of the state properties
     calculated with two independent state properties"
-    extends AixLib.DataBase.Media.Refrigerants.R1270.TSP_IIR_P05_30_T263_343;
+    extends AixLib.DataBase.Media.Refrigerants.R290.TSP_IIR_P05_30_T263_343;
   end TSP;
 
-  redeclare record SmoothTransition
-    "Record that contains ranges to calculate a smooth transition between
+  redeclare record SmoothTransition "Record that contains ranges to calculate a smooth transition between
     different regions"
     SpecificEnthalpy T_ph = 10;
     SpecificEntropy T_ps = 10;
@@ -176,14 +173,14 @@ package R1270_IIR_P05_30_T263_343_Record
     dynamic viscosity or thermal conductivity. Also add references.
   */
   redeclare function extends dynamicViscosity
-  "Calculates dynamic viscosity of refrigerant"
+    "Calculates dynamic viscosity of refrigerant"
 
   protected
     Real tv[:] = {0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 2.0, 2.0, 2.0, 3.0, 4.0, 1.0, 2.0};
     Real dv[:] = {1.0, 2.0, 3.0, 13.0, 12.0, 16.0, 0.0, 18.0, 20.0, 13.0, 4.0, 0.0, 1.0};
     Real nv[:] = {-0.7548580e-1, 0.7607150, -0.1665680, 0.1627612e-5, 0.1443764e-4, -0.2759086e-6, -0.1032756, -0.2498159e-7, 0.4069891e-8, -0.1513434e-5, 0.2591327e-2, 0.5650076, 0.1207253};
 
-    Real d_crit = fluidConstants[1].criticalMolarVolume;
+    Real d_crit = MM/fluidConstants[1].criticalMolarVolume;
     Real MM = fluidConstants[1].molarMass;
 
     ThermodynamicState dewState = setDewState(setSat_T(state.T));
@@ -205,7 +202,7 @@ package R1270_IIR_P05_30_T263_343_Record
   algorithm
     if state.phase==1 or phase_dT==1 then
       eta := 0;
-      dr := state.d/(d_crit*MM);
+      dr := state.d/d_crit;
       for i in 1:11 loop
           eta := eta + nv[i]*Tr^tv[i]*dr^dv[i];
       end for;
@@ -216,8 +213,8 @@ package R1270_IIR_P05_30_T263_343_Record
     elseif state.phase==2 or phase_dT==2 then
       etaL := 0;
       etaG := 0;
-      drG := dewState.d/(d_crit*MM);
-      drL := bubbleState.d/(d_crit*MM);
+      drG := dewState.d/d_crit;
+      drL := bubbleState.d/d_crit;
       quality :=if state.phase == 2 then (bubbleState.d/state.d - 1)/(
       bubbleState.d/dewState.d - 1) else 1;
       for i in 1:11 loop
@@ -235,7 +232,7 @@ package R1270_IIR_P05_30_T263_343_Record
   end dynamicViscosity;
 
   redeclare function extends thermalConductivity
-  "Calculates thermal conductivity of refrigerant"
+    "Calculates thermal conductivity of refrigerant"
 
   protected
     Real B1[:] = {-3.51153e-2,1.70890e-1,-1.47688e-1,5.19283e-2,-6.18662e-3};
@@ -243,7 +240,7 @@ package R1270_IIR_P05_30_T263_343_Record
     Real C[:] = {3.66486e-4,-2.21696e-3,2.64213e+0};
     Real A[:] = {-1.24778e-3,8.16371e-3,1.99374e-2};
 
-    Real d_crit = fluidConstants[1].criticalMolarVolume;
+    Real d_crit = MM/fluidConstants[1].criticalMolarVolume;
     Real MM = fluidConstants[1].molarMass;
 
     Real delta;
@@ -265,7 +262,7 @@ package R1270_IIR_P05_30_T263_343_Record
     Real quality;
 
   algorithm
-    delta :=state.d/(d_crit*MM);
+    delta :=state.d/d_crit;
     if state.phase==1 or phase_dT==1 then
       for i in 1:5 loop
           lambdar := lambdar + (B1[i] + B2[i]/tau)*delta^i;
@@ -273,8 +270,8 @@ package R1270_IIR_P05_30_T263_343_Record
       lambda := (lambda0 + lambdar + (C[1]/(C[2] + abs(1.0/tau - 1.0))*
         exp(-(C[3]*(delta - 1.0))^2)));
     elseif state.phase==2 or phase_dT==2 then
-      deltaL :=bubbleDensity(setSat_T(state.T))/(d_crit*MM);
-      deltaG :=dewDensity(setSat_T(state.T))/(d_crit*MM);
+      deltaL :=bubbleDensity(setSat_T(state.T))/d_crit;
+      deltaG :=dewDensity(setSat_T(state.T))/d_crit;
       quality :=if state.phase == 2 then (bubbleDensity(setSat_T(state.T))/
         state.d - 1)/(bubbleDensity(setSat_T(state.T))/dewDensity(setSat_T(
         state.T)) - 1) else 1;
@@ -291,7 +288,7 @@ package R1270_IIR_P05_30_T263_343_Record
   end thermalConductivity;
 
   redeclare function extends surfaceTension
-  "Surface tension in two phase region of refrigerant"
+    "Surface tension in two phase region of refrigerant"
 
   algorithm
     sigma := 1e-3*55.817*(1-sat.Tsat/369.85)^1.266;
@@ -304,7 +301,7 @@ package R1270_IIR_P05_30_T263_343_Record
   </li>
 </ul>
 </html>", info="<html>
-<p>This package provides a refrigerant model for R1270 using a hybrid approach developed by Sangi et al.. The hybrid approach is implemented in <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord\">AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord</a> and the refrigerant model is implemented by complete the template <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord</a>. The fitting coefficients required in the template are saved in the package <a href=\"modelica://AixLib.DataBase.Media.Refrigerants.R1270\">AixLib.DataBase.Media.Refrigerants.R1270</a>.</p>
+<p>This package provides a refrigerant model for R290 using a hybrid approach developed by Sangi et al.. The hybrid approach is implemented in <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord\">AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord</a> and the refrigerant model is implemented by complete the template <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord</a>. The fitting coefficients required in the template are saved in the package <a href=\"modelica://AixLib.DataBase.Media.Refrigerants.R290\">AixLib.DataBase.Media.Refrigerants.R290</a>.</p>
 <p><b>Assumptions and limitations</b> </p>
 <p>The implemented coefficients are fitted to external data by Sangi et al. and are valid within the following range:<br></p>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"30%\"><tr>
@@ -331,4 +328,4 @@ package R1270_IIR_P05_30_T263_343_Record
 <p>Klasing,Freerk: A New Design for Direct Exchange Geothermal Heat Pumps - Modeling, Simulation and Exergy Analysis. <i>Master thesis</i></p>
 <p>Scalabrin, G.; Marchi, P.; Span, R. (2006): A Reference Multiparameter Viscosity Equation for Propane with an Optimized Functional Form. In: <i>J. Phys. Chem. Ref. Data, Vol. 35, No. 3</i>, S. 1415-1442</p>
 </html>"));
-end R1270_IIR_P05_30_T263_343_Record;
+end R290_IIR_P05_30_T263_343_Record;

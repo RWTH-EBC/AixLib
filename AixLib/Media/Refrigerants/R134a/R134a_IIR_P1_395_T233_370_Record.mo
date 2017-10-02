@@ -15,7 +15,7 @@ package R134a_IIR_P1_395_T233_370_Record
      each molarMass = 0.102032,
      each criticalTemperature = 374.21,
      each criticalPressure = 4059280,
-     each criticalMolarVolume = 511.899952/0.102032,
+     each criticalMolarVolume = 0.102032/511.899952,
      each triplePointTemperature = 169.85,
      each triplePointPressure = 389.563789,
      each normalBoilingPoint = 247.076,
@@ -29,7 +29,7 @@ package R134a_IIR_P1_395_T233_370_Record
     specific enthalpy, density, absolute pressure and temperature.
   */
   extends
-    AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord(
+    WorkingVersion.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord(
     mediumName="R134a",
     substanceNames={"R134a"},
     singleState=false,
@@ -99,9 +99,9 @@ package R134a_IIR_P1_395_T233_370_Record
     p(stateSelect=StateSelect.prefer)) "Base properties of refrigerant"
 
     Integer phase(min=0, max=2, start=1)
-    "2 for two-phase, 1 for one-phase, 0 if not known";
+      "2 for two-phase, 1 for one-phase, 0 if not known";
     SaturationProperties sat(Tsat(start=300.0), psat(start=1.0e5))
-    "Saturation temperature and pressure";
+      "Saturation temperature and pressure";
 
   equation
     MM = fluidConstants[1].molarMass;
@@ -146,23 +146,23 @@ package R134a_IIR_P1_395_T233_370_Record
   */
   redeclare record EoS
     "Record that contains fitting coefficients of the Helmholtz EoS"
-    extends AixLib.DataBase.Media.Refrigerants.R134a.EoS_IIR_P1_395_T233_370;
+    extends
+      AixLib.DataBase.Media.Refrigerants.R134a.EoS_IIR_P1_395_T233_370;
   end EoS;
 
-  redeclare record BDSP
-    "Record that contains fitting coefficients of the state properties at bubble
+  redeclare record BDSP "Record that contains fitting coefficients of the state properties at bubble
     and dew lines"
-    extends AixLib.DataBase.Media.Refrigerants.R134a.BDSP_IIR_P1_395_T233_370;
+    extends
+      AixLib.DataBase.Media.Refrigerants.R134a.BDSP_IIR_P1_395_T233_370;
   end BDSP;
 
-  redeclare record TSP
-    "Record that contains fitting coefficients of the state properties
+  redeclare record TSP "Record that contains fitting coefficients of the state properties
     calculated with two independent state properties"
-    extends AixLib.DataBase.Media.Refrigerants.R134a.TSP_IIR_P1_395_T233_370;
+    extends
+      AixLib.DataBase.Media.Refrigerants.R134a.TSP_IIR_P1_395_T233_370;
   end TSP;
 
-  redeclare record SmoothTransition
-    "Record that contains ranges to calculate a smooth transition between
+  redeclare record SmoothTransition "Record that contains ranges to calculate a smooth transition between
     different regions"
     SpecificEnthalpy T_ph = 5;
     SpecificEntropy T_ps = 5;
@@ -176,7 +176,7 @@ package R134a_IIR_P1_395_T233_370_Record
     dynamic viscosity or thermal conductivity. Also add references.
   */
   redeclare function extends dynamicViscosity
-  "Calculates dynamic viscosity of refrigerant"
+    "Calculates dynamic viscosity of refrigerant"
 
   /*The functional form of the dynamic viscosity is implented as presented in
   Huber et al. (2003), Model for the Viscosity and Thermal Conductivity of 
@@ -185,19 +185,21 @@ package R134a_IIR_P1_395_T233_370_Record
   Afterwards, the coefficients are adapted to the HelmholtzMedia libary.
 */
   protected
-    Real Tred = state.T/299.363 "Reduced temperature for lower density terms"; //valid
+    Real Tred = state.T/299.363
+      "Reduced temperature for lower density terms";                           //valid
     Real omega_eta "Reduced effective collision cross section";
     Real eta_zd "Dynamic viscosity for the limit of zero density";
-    Real B_eta_zd "Second viscosity virial coefficient for the limit of zero density";
+    Real B_eta_zd
+      "Second viscosity virial coefficient for the limit of zero density";
     Real B_eta "Second viscosity virial coefficient";
     Real eta_n "Dynamic viscosity for moderate density limits";
-    Real tau = state.T/374.21 "Reduced temperature for higher density terms"; //valid
+    Real tau = state.T/374.21
+      "Reduced temperature for higher density terms";                         //valid
     Real delta = state.d/511.9 "Reduced density for higher density terms"; //valid
     Real delta_hd "Reduced close-pacled density";
     Real eta_hd "Dynamic viscosity for the limit of high density";
 
   algorithm
-
     // Calculate the dynamic visocity near the limit of zero density
     if abs(Tred)<1E-20 then
       Tred := 1E-20;
@@ -242,7 +244,8 @@ package R134a_IIR_P1_395_T233_370_Record
   */
   protected
     Real lambda_0 "Thermal conductivity for the limit of zero density";
-    Real delta = state.d/515.2499684 "Reduced density for the residual part";
+    Real delta = state.d/515.2499684
+      "Reduced density for the residual part";
     Real lambda_r "Thermal conductivity for residual part";
     ThermodynamicState state_0(
       d=state.d,
@@ -260,7 +263,8 @@ package R134a_IIR_P1_395_T233_370_Record
     Real eta = dynamicViscosity(state) "Dynamic viscosity";
     Real omega "Crossover function";
     Real omega_0 "Crossover function at reference state";
-    Real lambda_c "Thermal conductivity for the region of the critical point";
+    Real lambda_c
+      "Thermal conductivity for the region of the critical point";
   algorithm
 
     // Calculate the thermal conducitvity for the limit of zero density
@@ -297,12 +301,12 @@ package R134a_IIR_P1_395_T233_370_Record
   end thermalConductivity;
 
   redeclare function extends surfaceTension
-  "Surface tension in two phase region of refrigerant"
+    "Surface tension in two phase region of refrigerant"
 
   /*The functional form of the surface tension is implented as presented in
   Mulero and Cachadiña (2012), Recommended Correlations for the Surface Tension 
   of Common Fluids. Journal of Physical and Chemical Reference Data 41,
-*/
+  */
   algorithm
     sigma := 0.05801*(1-sat.Tsat/374.21)^1.241;
   end surfaceTension;

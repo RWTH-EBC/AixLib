@@ -215,7 +215,7 @@ equation
 
   // Calculate and check saturation properties
   //
-  satT = Medium.setSat_T(min(max(243.15,T),Medium.fluidConstants[1].criticalTemperature));
+  satT = Medium.setSat_T(min(max(243.15,T),Medium.fluidConstants[1].criticalTemperature-3));
   satP = Medium.setSat_p(satT.psat);
 
   // Calculate and check state functions

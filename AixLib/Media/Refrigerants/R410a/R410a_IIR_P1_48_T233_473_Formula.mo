@@ -15,7 +15,7 @@ package R410a_IIR_P1_48_T233_473_Formula
      each molarMass = 0.072585414240660,
      each criticalTemperature = 3.444943810810253e+02,
      each criticalPressure = 4.901264589893823e+06,
-     each criticalMolarVolume = 6324,
+     each criticalMolarVolume = 1/6324,
      each normalBoilingPoint = 221.71,
      each triplePointTemperature = 200,
      each meltingPoint = 118.15,
@@ -52,7 +52,7 @@ package R410a_IIR_P1_48_T233_473_Formula
       start=273.15,
       nominal=273.15,
       min=233.15,
-      max=373),
+      max=473.15),
     smoothModel=true,
     onePhase=false,
     ThermoStates=Choices.IndependentVariables.phX,
@@ -99,9 +99,9 @@ package R410a_IIR_P1_48_T233_473_Formula
     p(stateSelect=StateSelect.prefer)) "Base properties of refrigerant"
 
     Integer phase(min=0, max=2, start=1)
-    "2 for two-phase, 1 for one-phase, 0 if not known";
+      "2 for two-phase, 1 for one-phase, 0 if not known";
     SaturationProperties sat(Tsat(start=300.0), psat(start=1.0e5))
-    "Saturation temperature and pressure";
+      "Saturation temperature and pressure";
 
   equation
     MM = fluidConstants[1].molarMass;
@@ -144,8 +144,7 @@ package R410a_IIR_P1_48_T233_473_Formula
   /*Provide records thats contain the coefficients for the smooth transition
     between different regions.
   */
-  redeclare record SmoothTransition
-    "Record that contains ranges to calculate a smooth transition between
+  redeclare record SmoothTransition "Record that contains ranges to calculate a smooth transition between
     different regions"
     SpecificEnthalpy T_ph = 5;
     SpecificEntropy T_ps = 5;
@@ -158,7 +157,7 @@ package R410a_IIR_P1_48_T233_473_Formula
   /*Provide Helmholtz equations of state (EoS) using an explicit formula.
   */
   redeclare function extends alpha_0
-  "Dimensionless Helmholtz energy (Ideal gas contribution alpha_0)"
+    "Dimensionless Helmholtz energy (Ideal gas contribution alpha_0)"
   algorithm
     alpha_0 := log(delta) + (-1) * log(tau^(1)) + (36.8871) * tau^(0) + (7.15807) * tau^(1) + (-46.87575) * tau^(-0.1) + (2.0623) * log(1-exp(-(2.02326)*tau)) + (5.9751) * log(1-exp(-(5.00154)*tau)) + (1.5612) * log(1-exp(-(11.2484)*tau));
   annotation(Inline=false,
@@ -166,7 +165,7 @@ package R410a_IIR_P1_48_T233_473_Formula
   end alpha_0;
 
   redeclare function extends alpha_r
-  "Dimensionless Helmholtz energy (Residual part alpha_r)"
+    "Dimensionless Helmholtz energy (Residual part alpha_r)"
   algorithm
     alpha_r := (0.987252) * delta^(1) * tau^(0.44) + (-1.03017) * delta^(1) * tau^(1.2) + (1.17666) * delta^(1) * tau^(2.97) + (-0.138991) * delta^(2) * tau^(2.95) + (0.00302373) * delta^(5) * tau^(0.2) + (-2.53639) * delta^(1) * tau^(1.93) * exp(-delta^(1)) + (-1.9668) * delta^(2) * tau^(1.78) * exp(-delta^(1)) + (-0.83048) * delta^(3) * tau^(3) * exp(-delta^(1)) + (0.172477) * delta^(5) * tau^(0.2) * exp(-delta^(1)) + (-0.261116) * delta^(5) * tau^(0.74) * exp(-delta^(1)) + (-0.0745473) * delta^(5) * tau^(3) * exp(-delta^(1)) + (0.679757) * delta^(1) * tau^(2.1) * exp(-delta^(2)) + (-0.652431) * delta^(1) * tau^(4.3) * exp(-delta^(2)) + (0.0553849) * delta^(4) * tau^(0.25) * exp(-delta^(2)) + (-0.071097) * delta^(4) * tau^(7) * exp(-delta^(2)) + (-0.000875332) * delta^(9) * tau^(4.7) * exp(-delta^(2)) + (0.020076) * delta^(2) * tau^(13) * exp(-delta^(3)) + (-0.0139761) * delta^(2) * tau^(16) * exp(-delta^(3)) + (-0.018511) * delta^(4) * tau^(25) * exp(-delta^(3)) + (0.0171939) * delta^(5) * tau^(17) * exp(-delta^(3)) + (-0.00482049) * delta^(6) * tau^(7.4) * exp(-delta^(3));
   annotation(Inline=false,
@@ -174,7 +173,7 @@ package R410a_IIR_P1_48_T233_473_Formula
   end alpha_r;
 
   redeclare function extends tau_d_alpha_0_d_tau
-  "Short form for tau*(dalpha_0/dtau)@delta=const"
+    "Short form for tau*(dalpha_0/dtau)@delta=const"
   algorithm
     tau_d_alpha_0_d_tau := (-1)*(1) + (36.8871)*(0)*tau^(0) + (7.15807)*(1)*tau^(1) + (-46.87575)*(-0.1)*tau^(-0.1) + tau*(2.0623)*(2.02326)/(exp((2.02326)*tau)-1) + tau*(5.9751)*(5.00154)/(exp((5.00154)*tau)-1) + tau*(1.5612)*(11.2484)/(exp((11.2484)*tau)-1);
   annotation(Inline=false,
@@ -182,7 +181,7 @@ package R410a_IIR_P1_48_T233_473_Formula
   end tau_d_alpha_0_d_tau;
 
   redeclare function extends tau2_d2_alpha_0_d_tau2
-  "Short form for tau*tau*(ddalpha_0/(dtau*dtau))@delta=const"
+    "Short form for tau*tau*(ddalpha_0/(dtau*dtau))@delta=const"
   algorithm
     tau2_d2_alpha_0_d_tau2 := -(-1)*(1) + (36.8871)*(0)*((0)-1)*tau^(0) + (7.15807)*(1)*((1)-1)*tau^(1) + (-46.87575)*(-0.1)*((-0.1)-1)*tau^(-0.1) -tau^2*(2.0623)*(2.02326)^2*exp((2.02326)*tau)/(exp((2.02326)*tau)-1)^2 -tau^2*(5.9751)*(5.00154)^2*exp((5.00154)*tau)/(exp((5.00154)*tau)-1)^2 -tau^2*(1.5612)*(11.2484)^2*exp((11.2484)*tau)/(exp((11.2484)*tau)-1)^2;
   annotation(Inline=false,
@@ -190,7 +189,7 @@ package R410a_IIR_P1_48_T233_473_Formula
   end tau2_d2_alpha_0_d_tau2;
 
   redeclare function extends tau_d_alpha_r_d_tau
-  "Short form for tau*(dalpha_r/dtau)@delta=const"
+    "Short form for tau*(dalpha_r/dtau)@delta=const"
   algorithm
     tau_d_alpha_r_d_tau := (0.987252)*(0.44)*delta^(1)*tau^(0.44) + (-1.03017)*(1.2)*delta^(1)*tau^(1.2) + (1.17666)*(2.97)*delta^(1)*tau^(2.97) + (-0.138991)*(2.95)*delta^(2)*tau^(2.95) + (0.00302373)*(0.2)*delta^(5)*tau^(0.2) + (-2.53639)*(1.93)*delta^(1)*tau^(1.93)*exp(-delta^(1)) + (-1.9668)*(1.78)*delta^(2)*tau^(1.78)*exp(-delta^(1)) + (-0.83048)*(3)*delta^(3)*tau^(3)*exp(-delta^(1)) + (0.172477)*(0.2)*delta^(5)*tau^(0.2)*exp(-delta^(1)) + (-0.261116)*(0.74)*delta^(5)*tau^(0.74)*exp(-delta^(1)) + (-0.0745473)*(3)*delta^(5)*tau^(3)*exp(-delta^(1)) + (0.679757)*(2.1)*delta^(1)*tau^(2.1)*exp(-delta^(2)) + (-0.652431)*(4.3)*delta^(1)*tau^(4.3)*exp(-delta^(2)) + (0.0553849)*(0.25)*delta^(4)*tau^(0.25)*exp(-delta^(2)) + (-0.071097)*(7)*delta^(4)*tau^(7)*exp(-delta^(2)) + (-0.000875332)*(4.7)*delta^(9)*tau^(4.7)*exp(-delta^(2)) + (0.020076)*(13)*delta^(2)*tau^(13)*exp(-delta^(3)) + (-0.0139761)*(16)*delta^(2)*tau^(16)*exp(-delta^(3)) + (-0.018511)*(25)*delta^(4)*tau^(25)*exp(-delta^(3)) + (0.0171939)*(17)*delta^(5)*tau^(17)*exp(-delta^(3)) + (-0.00482049)*(7.4)*delta^(6)*tau^(7.4)*exp(-delta^(3));
   annotation(Inline=false,
@@ -198,7 +197,7 @@ package R410a_IIR_P1_48_T233_473_Formula
   end tau_d_alpha_r_d_tau;
 
   redeclare function extends tau2_d2_alpha_r_d_tau2
-  "Short form for tau*tau*(ddalpha_r/(dtau*dtau))@delta=const"
+    "Short form for tau*tau*(ddalpha_r/(dtau*dtau))@delta=const"
   algorithm
     tau2_d2_alpha_r_d_tau2 := (0.987252)*(0.44)*((0.44)-1)*delta^(1)*tau^(0.44) + (-1.03017)*(1.2)*((1.2)-1)*delta^(1)*tau^(1.2) + (1.17666)*(2.97)*((2.97)-1)*delta^(1)*tau^(2.97) + (-0.138991)*(2.95)*((2.95)-1)*delta^(2)*tau^(2.95) + (0.00302373)*(0.2)*((0.2)-1)*delta^(5)*tau^(0.2) + (-2.53639)*(1.93)*((1.93)-1)*delta^(1)*tau^(1.93)*exp(-delta^(1)) + (-1.9668)*(1.78)*((1.78)-1)*delta^(2)*tau^(1.78)*exp(-delta^(1)) + (-0.83048)*(3)*((3)-1)*delta^(3)*tau^(3)*exp(-delta^(1)) + (0.172477)*(0.2)*((0.2)-1)*delta^(5)*tau^(0.2)*exp(-delta^(1)) + (-0.261116)*(0.74)*((0.74)-1)*delta^(5)*tau^(0.74)*exp(-delta^(1)) + (-0.0745473)*(3)*((3)-1)*delta^(5)*tau^(3)*exp(-delta^(1)) + (0.679757)*(2.1)*((2.1)-1)*delta^(1)*tau^(2.1)*exp(-delta^(2)) + (-0.652431)*(4.3)*((4.3)-1)*delta^(1)*tau^(4.3)*exp(-delta^(2)) + (0.0553849)*(0.25)*((0.25)-1)*delta^(4)*tau^(0.25)*exp(-delta^(2)) + (-0.071097)*(7)*((7)-1)*delta^(4)*tau^(7)*exp(-delta^(2)) + (-0.000875332)*(4.7)*((4.7)-1)*delta^(9)*tau^(4.7)*exp(-delta^(2)) + (0.020076)*(13)*((13)-1)*delta^(2)*tau^(13)*exp(-delta^(3)) + (-0.0139761)*(16)*((16)-1)*delta^(2)*tau^(16)*exp(-delta^(3)) + (-0.018511)*(25)*((25)-1)*delta^(4)*tau^(25)*exp(-delta^(3)) + (0.0171939)*(17)*((17)-1)*delta^(5)*tau^(17)*exp(-delta^(3)) + (-0.00482049)*(7.4)*((7.4)-1)*delta^(6)*tau^(7.4)*exp(-delta^(3));
   annotation(Inline=false,
@@ -206,7 +205,7 @@ package R410a_IIR_P1_48_T233_473_Formula
   end tau2_d2_alpha_r_d_tau2;
 
   redeclare function extends delta_d_alpha_r_d_delta
-  "Short form for delta*(dalpha_r/(ddelta))@tau=const"
+    "Short form for delta*(dalpha_r/(ddelta))@tau=const"
   algorithm
     delta_d_alpha_r_d_delta := (0.987252)*(1)*delta^(1)*tau^(0.44) + (-1.03017)*(1)*delta^(1)*tau^(1.2) + (1.17666)*(1)*delta^(1)*tau^(2.97) + (-0.138991)*(2)*delta^(2)*tau^(2.95) + (0.00302373)*(5)*delta^(5)*tau^(0.2) + (-2.53639)*delta^(1)*tau^(1.93)*((1)-(1)*delta^(1))*exp(-delta^(1)) + (-1.9668)*delta^(2)*tau^(1.78)*((2)-(1)*delta^(1))*exp(-delta^(1)) + (-0.83048)*delta^(3)*tau^(3)*((3)-(1)*delta^(1))*exp(-delta^(1)) + (0.172477)*delta^(5)*tau^(0.2)*((5)-(1)*delta^(1))*exp(-delta^(1)) + (-0.261116)*delta^(5)*tau^(0.74)*((5)-(1)*delta^(1))*exp(-delta^(1)) + (-0.0745473)*delta^(5)*tau^(3)*((5)-(1)*delta^(1))*exp(-delta^(1)) + (0.679757)*delta^(1)*tau^(2.1)*((1)-(2)*delta^(2))*exp(-delta^(2)) + (-0.652431)*delta^(1)*tau^(4.3)*((1)-(2)*delta^(2))*exp(-delta^(2)) + (0.0553849)*delta^(4)*tau^(0.25)*((4)-(2)*delta^(2))*exp(-delta^(2)) + (-0.071097)*delta^(4)*tau^(7)*((4)-(2)*delta^(2))*exp(-delta^(2)) + (-0.000875332)*delta^(9)*tau^(4.7)*((9)-(2)*delta^(2))*exp(-delta^(2)) + (0.020076)*delta^(2)*tau^(13)*((2)-(3)*delta^(3))*exp(-delta^(3)) + (-0.0139761)*delta^(2)*tau^(16)*((2)-(3)*delta^(3))*exp(-delta^(3)) + (-0.018511)*delta^(4)*tau^(25)*((4)-(3)*delta^(3))*exp(-delta^(3)) + (0.0171939)*delta^(5)*tau^(17)*((5)-(3)*delta^(3))*exp(-delta^(3)) + (-0.00482049)*delta^(6)*tau^(7.4)*((6)-(3)*delta^(3))*exp(-delta^(3));
   annotation(Inline=false,
@@ -214,7 +213,7 @@ package R410a_IIR_P1_48_T233_473_Formula
   end delta_d_alpha_r_d_delta;
 
   redeclare function extends delta2_d2_alpha_r_d_delta2
-  "Short form for delta*delta(ddalpha_r/(ddelta*delta))@tau=const"
+    "Short form for delta*delta(ddalpha_r/(ddelta*delta))@tau=const"
   algorithm
     delta2_d2_alpha_r_d_delta2 := (0.987252)*(1)*((1)-1)*delta^(1)*tau^(0.44) + (-1.03017)*(1)*((1)-1)*delta^(1)*tau^(1.2) + (1.17666)*(1)*((1)-1)*delta^(1)*tau^(2.97) + (-0.138991)*(2)*((2)-1)*delta^(2)*tau^(2.95) + (0.00302373)*(5)*((5)-1)*delta^(5)*tau^(0.2) + (-2.53639)*delta^(1)*tau^(1.93)*(((1)-(1)*delta^(1))*((1)-1-(1)*delta^(1))-(1)^2*delta^(1))*exp(-delta^(1)) + (-1.9668)*delta^(2)*tau^(1.78)*(((2)-(1)*delta^(1))*((2)-1-(1)*delta^(1))-(1)^2*delta^(1))*exp(-delta^(1)) + (-0.83048)*delta^(3)*tau^(3)*(((3)-(1)*delta^(1))*((3)-1-(1)*delta^(1))-(1)^2*delta^(1))*exp(-delta^(1)) + (0.172477)*delta^(5)*tau^(0.2)*(((5)-(1)*delta^(1))*((5)-1-(1)*delta^(1))-(1)^2*delta^(1))*exp(-delta^(1)) + (-0.261116)*delta^(5)*tau^(0.74)*(((5)-(1)*delta^(1))*((5)-1-(1)*delta^(1))-(1)^2*delta^(1))*exp(-delta^(1)) + (-0.0745473)*delta^(5)*tau^(3)*(((5)-(1)*delta^(1))*((5)-1-(1)*delta^(1))-(1)^2*delta^(1))*exp(-delta^(1)) + (0.679757)*delta^(1)*tau^(2.1)*(((1)-(2)*delta^(2))*((1)-1-(2)*delta^(2))-(2)^2*delta^(2))*exp(-delta^(2)) + (-0.652431)*delta^(1)*tau^(4.3)*(((1)-(2)*delta^(2))*((1)-1-(2)*delta^(2))-(2)^2*delta^(2))*exp(-delta^(2)) + (0.0553849)*delta^(4)*tau^(0.25)*(((4)-(2)*delta^(2))*((4)-1-(2)*delta^(2))-(2)^2*delta^(2))*exp(-delta^(2)) + (-0.071097)*delta^(4)*tau^(7)*(((4)-(2)*delta^(2))*((4)-1-(2)*delta^(2))-(2)^2*delta^(2))*exp(-delta^(2)) + (-0.000875332)*delta^(9)*tau^(4.7)*(((9)-(2)*delta^(2))*((9)-1-(2)*delta^(2))-(2)^2*delta^(2))*exp(-delta^(2)) + (0.020076)*delta^(2)*tau^(13)*(((2)-(3)*delta^(3))*((2)-1-(3)*delta^(3))-(3)^2*delta^(3))*exp(-delta^(3)) + (-0.0139761)*delta^(2)*tau^(16)*(((2)-(3)*delta^(3))*((2)-1-(3)*delta^(3))-(3)^2*delta^(3))*exp(-delta^(3)) + (-0.018511)*delta^(4)*tau^(25)*(((4)-(3)*delta^(3))*((4)-1-(3)*delta^(3))-(3)^2*delta^(3))*exp(-delta^(3)) + (0.0171939)*delta^(5)*tau^(17)*(((5)-(3)*delta^(3))*((5)-1-(3)*delta^(3))-(3)^2*delta^(3))*exp(-delta^(3)) + (-0.00482049)*delta^(6)*tau^(7.4)*(((6)-(3)*delta^(3))*((6)-1-(3)*delta^(3))-(3)^2*delta^(3))*exp(-delta^(3));
   annotation(Inline=false,
@@ -222,7 +221,7 @@ package R410a_IIR_P1_48_T233_473_Formula
   end delta2_d2_alpha_r_d_delta2;
 
   redeclare function extends tau_delta_d2_alpha_r_d_tau_d_delta
-  "Short form for tau*delta*(ddalpha_r/(dtau*ddelta))"
+    "Short form for tau*delta*(ddalpha_r/(dtau*ddelta))"
   algorithm
     tau_delta_d2_alpha_r_d_tau_d_delta := (0.987252)*(1)*(0.44)*delta^(1)*tau^(0.44) + (-1.03017)*(1)*(1.2)*delta^(1)*tau^(1.2) + (1.17666)*(1)*(2.97)*delta^(1)*tau^(2.97) + (-0.138991)*(2)*(2.95)*delta^(2)*tau^(2.95) + (0.00302373)*(5)*(0.2)*delta^(5)*tau^(0.2) + (-2.53639)*(1.93)*delta^(1)*tau^(1.93)*((1)-(1)*delta^(1))*exp(-delta^(1)) + (-1.9668)*(1.78)*delta^(2)*tau^(1.78)*((2)-(1)*delta^(1))*exp(-delta^(1)) + (-0.83048)*(3)*delta^(3)*tau^(3)*((3)-(1)*delta^(1))*exp(-delta^(1)) + (0.172477)*(0.2)*delta^(5)*tau^(0.2)*((5)-(1)*delta^(1))*exp(-delta^(1)) + (-0.261116)*(0.74)*delta^(5)*tau^(0.74)*((5)-(1)*delta^(1))*exp(-delta^(1)) + (-0.0745473)*(3)*delta^(5)*tau^(3)*((5)-(1)*delta^(1))*exp(-delta^(1)) + (0.679757)*(2.1)*delta^(1)*tau^(2.1)*((1)-(2)*delta^(2))*exp(-delta^(2)) + (-0.652431)*(4.3)*delta^(1)*tau^(4.3)*((1)-(2)*delta^(2))*exp(-delta^(2)) + (0.0553849)*(0.25)*delta^(4)*tau^(0.25)*((4)-(2)*delta^(2))*exp(-delta^(2)) + (-0.071097)*(7)*delta^(4)*tau^(7)*((4)-(2)*delta^(2))*exp(-delta^(2)) + (-0.000875332)*(4.7)*delta^(9)*tau^(4.7)*((9)-(2)*delta^(2))*exp(-delta^(2)) + (0.020076)*(13)*delta^(2)*tau^(13)*((2)-(3)*delta^(3))*exp(-delta^(3)) + (-0.0139761)*(16)*delta^(2)*tau^(16)*((2)-(3)*delta^(3))*exp(-delta^(3)) + (-0.018511)*(25)*delta^(4)*tau^(25)*((4)-(3)*delta^(3))*exp(-delta^(3)) + (0.0171939)*(17)*delta^(5)*tau^(17)*((5)-(3)*delta^(3))*exp(-delta^(3)) + (-0.00482049)*(7.4)*delta^(6)*tau^(7.4)*((6)-(3)*delta^(3))*exp(-delta^(3));
   annotation(Inline=false,
@@ -233,7 +232,7 @@ package R410a_IIR_P1_48_T233_473_Formula
     Currently, just one fitting approach is implemented.
   */
   redeclare function extends saturationPressure
-  "Saturation pressure of refrigerant (Ancillary equation)"
+    "Saturation pressure of refrigerant (Ancillary equation)"
   protected
     Real OM = (1 - T/fluidConstants[1].criticalTemperature);
 
@@ -250,91 +249,84 @@ package R410a_IIR_P1_48_T233_473_Formula
   end saturationPressure;
 
   redeclare function extends saturationTemperature
-  "Saturation temperature of refrigerant (Ancillary equation)"
+    "Saturation temperature of refrigerant (Ancillary equation)"
   protected
     Real x;
 
   algorithm
     x := (p - (1690546.68662399))/(1337345.61888569);
-    T := 0.99981*((288.8) + (32.1728405128715) * ((0.315625855266007) + (0.928326269698458)*x^1 + (-0.277494430607753)*x^2 + (0.127140300183199)*x^3 + (-0.0529002490944326)*x^4 + (0.0309833589718576)*x^5 + (-0.100893270492692)*x^6 + (0.0860242126577126)*x^7 + (0.134350167076272)*x^8 + (-0.182876490328916)*x^9 + (-0.112689322533039)*x^10 + (0.254757708465645)*x^11 + (-0.0367634254282132)*x^12 + (-0.14074454381608)*x^13 + (0.0856249369531822)*x^14 + (0.0121512184212727)*x^15 + (-0.0315500773133433)*x^16 + (0.0139370674840602)*x^17 + (-0.00274826770400574)*x^18 + (0.000212734358958718)*x^19));
     T := (288.745128) + (32.1667276731741) * (((0.315625855266007) + (0.928326269698458)*x^1 + (-0.277494430607753)*x^2 + (0.127140300183199)*x^3 + (-0.0529002490944326)*x^4 + (0.0309833589718576)*x^5 + (-0.100893270492692)*x^6 + (0.0860242126577126)*x^7 + (0.134350167076272)*x^8 + (-0.182876490328916)*x^9 + (-0.112689322533039)*x^10 + (0.254757708465645)*x^11 + (-0.0367634254282132)*x^12 + (-0.14074454381608)*x^13 + (0.0856249369531822)*x^14 + (0.0121512184212727)*x^15 + (-0.0315500773133433)*x^16 + (0.0139370674840602)*x^17 + (-0.00274826770400574)*x^18 + (0.000212734358958718)*x^19));
     annotation(Inline=false,
           LateInline=true);
   end saturationTemperature;
 
   redeclare function extends bubbleDensity
-  "Boiling curve specific density of refrigerant (Ancillary equation)"
+    "Boiling curve specific density of refrigerant (Ancillary equation)"
   protected
     Real x;
 
   algorithm
     x := (sat.Tsat - (288.8))/(32.1728405128715);
-    dl := 1103.30005733567 -146.230018020942*x^1 -18.6291258539418*x^2 -39.4705581435595*x^3 -189.88292797117*x^4 + 883.68895963431*x^5 + 3553.26510924274*x^6 -11300.2847533843*x^7 -35497.5732400153*x^8 + 82629.6546432032*x^9 + 216126.678937935*x^10 -385938.163587198*x^11 -874144.249122246*x^12 + 1232954.81219775*x^13 + 2483733.27900105*x^14 -2819821.21050958*x^15 -5150368.09268112*x^16 + 4763589.89778695*x^17 + 8003916.94227124*x^18 -6073193.59372745*x^19 -9493407.55362208*x^20 + 5926540.10974656*x^21 + 8696236.64921065*x^22 -4462494.4315702*x^23 -6191424.52123395*x^24 + 2599053.22102125*x^25 + 3430188.48017565*x^26 -1167021.96071837*x^27 -1472497.37440782*x^28 + 399940.695532179*x^29 + 484499.198159567*x^30 -102626.361637478*x^31 -119801.207674824*x^32 + 19078.45309768*x^33 + 21528.66639571*x^34 -2425.45498526778*x^35 -2652.94723562807*x^36 + 188.571236226921*x^37 + 200.407961520649*x^38 -6.7604174117019*x^39 -6.99578865762325*x^40;
     dl := (0) + (1) * (((1103.300057) + (-146.230018)*x^1 + (-18.62912585)*x^2 + (-39.47055814)*x^3 + (-189.882928)*x^4 + (883.68895963431)*x^5 + (3553.26510924274)*x^6 + (-11300.2847533843)*x^7 + (-35497.5732400153)*x^8 + (82629.6546432032)*x^9 + (216126.678937935)*x^10 + (-385938.163587198)*x^11 + (-874144.249122246)*x^12 + (1232954.81219775)*x^13 + (2483733.27900105)*x^14 + (-2819821.21050958)*x^15 + (-5150368.09268112)*x^16 + (4763589.89778695)*x^17 + (8003916.94227124)*x^18 + (-6073193.59372745)*x^19 + (-9493407.55362208)*x^20 + (5926540.10974656)*x^21 + (8696236.64921065)*x^22 + (-4462494.4315702)*x^23 + (-6191424.52123395)*x^24 + (2599053.22102125)*x^25 + (3430188.48017565)*x^26 + (-1167021.96071837)*x^27 + (-1472497.37440782)*x^28 + (399940.695532179)*x^29 + (484499.198159567)*x^30 + (-102626.361637478)*x^31 + (-119801.207674824)*x^32 + (19078.45309768)*x^33 + (21528.66639571)*x^34 + (-2425.45498526778)*x^35 + (-2652.94723562807)*x^36 + (188.571236226921)*x^37 + (200.407961520649)*x^38 + (-6.7604174117019)*x^39 + (-6.99578865762325)*x^40));
     annotation(Inline=false,
           LateInline=true);
   end bubbleDensity;
 
   redeclare function extends dewDensity
-  "Dew curve specific density of refrigerant (Ancillary equation)"
+    "Dew curve specific density of refrigerant (Ancillary equation)"
   protected
     Real x;
 
   algorithm
     x := (sat.Tsat - (288.8))/(32.1728405128715);
     dv := (81.1402553535331) + (81.8525665515266) * (((-0.38258005733403) + (0.594247698000419)*x^1 + (0.262992182086301)*x^2 + (0.0865129026480271)*x^3 + (0.0370242887570731)*x^4 + (0.0112261211991694)*x^5 + (-0.0125489243448401)*x^6 + (0.0012382068787828)*x^7 + (0.0157317419040667)*x^8 + (0.00434299894514524)*x^9 + (0.00214921036271588)*x^10 + (0.00289539863035636)*x^11 + (-0.00158538480741269)*x^12 + (-0.00088860171586863)*x^13 + (-0.00166768829541246)*x^14 + (-0.00283896802944253)*x^15 + (-0.000901075042193254)*x^16 + (-0.00196695410352135)*x^17 + (-5.92221614138573e-07)*x^18 + (0.00214762507546025)*x^19 + (0.000495543657457393)*x^20 + (0.0011568545426888)*x^21 + (0.000423297560316714)*x^22 + (-0.000561479744368981)*x^23 + (3.80080621897099e-05)*x^24 + (-0.000431298226628196)*x^25 + (-0.000238334815888865)*x^26 + (4.36249648285315e-05)*x^27 + (-0.000136388992345257)*x^28 + (0.000178769740095248)*x^29 + (0.000190760055223262)*x^30 + (-7.37407932198282e-05)*x^31 + (-6.20269693625927e-05)*x^32 + (8.61462899584184e-06)*x^33 + (6.58978478503912e-06)*x^34));
-    dv := (81.1402553535331) + (81.8525665515266) * (((-0.38258005733403) + (0.594247698000419)*x^1 + (0.262992182086301)*x^2 + (0.0865129026480271)*x^3 + (0.0370242887570731)*x^4 + (0.0112261211991694)*x^5 + (-0.0125489243448401)*x^6 + (0.0012382068787828)*x^7 + (0.0157317419040667)*x^8 + (0.00434299894514524)*x^9 + (0.00214921036271588)*x^10 + (0.00289539863035636)*x^11 + (-0.00158538480741269)*x^12 + (-0.00088860171586863)*x^13 + (-0.00166768829541246)*x^14 + (-0.00283896802944253)*x^15 + (-0.000901075042193254)*x^16 + (-0.00196695410352135)*x^17 + (-5.92221614138573e-07)*x^18 + (0.00214762507546025)*x^19 + (0.000495543657457393)*x^20 + (0.0011568545426888)*x^21 + (0.000423297560316714)*x^22 + (-0.000561479744368981)*x^23 + (3.80080621897099e-05)*x^24 + (-0.000431298226628196)*x^25 + (-0.000238334815888865)*x^26 + (4.36249648285315e-05)*x^27 + (-0.000136388992345257)*x^28 + (0.000178769740095248)*x^29 + (0.000190760055223262)*x^30 + (-7.37407932198282e-05)*x^31 + (-6.20269693625927e-05)*x^32 + (8.61462899584184e-06)*x^33 + (6.58978478503912e-06)*x^34));
     annotation(Inline=false,
           LateInline=true);
   end dewDensity;
 
   redeclare function extends bubbleEnthalpy
-  "Boiling curve specific enthalpy of refrigerant (Ancillary equation)"
+    "Boiling curve specific enthalpy of refrigerant (Ancillary equation)"
   protected
     Real x;
 
   algorithm
     x := (sat.psat - (1690546.68662399))/(1337345.61888569);
-    hl := 241130.487439737 + 50536.1142524471*x^1 -10395.4314481771*x^2 + 6700.78180055371*x^3 -14352.0238351*x^4 -8896.04419964822*x^5 + 92213.8523639965*x^6 + 36248.009362927*x^7 -394215.457107193*x^8 + 11186.9638591466*x^9 + 952332.78180563*x^10 -343473.199502079*x^11 -1352382.65503727*x^12 + 917249.096544049*x^13 + 1049080.17122333*x^14 -1164737.86099266*x^15 -282765.448706001*x^16 + 771955.520997377*x^17 -169961.413579647*x^18 -225871.839384057*x^19 + 142145.874373996*x^20 -2430.18903333571*x^21 -25735.7403798769*x^22 + 10873.0680837202*x^23 -1944.58002467352*x^24 + 135.494256329739*x^25;
     hl := (-1300) + (1) * (((242430.487439737) + (50536.1142524471)*x^1 + (-10395.4314481771)*x^2 + (6700.78180055371)*x^3 + (-14352.0238351)*x^4 + (-8896.04419964822)*x^5 + (92213.8523639965)*x^6 + (36248.009362927)*x^7 + (-394215.457107193)*x^8 + (11186.9638591466)*x^9 + (952332.78180563)*x^10 + (-343473.199502079)*x^11 + (-1352382.65503727)*x^12 + (917249.096544049)*x^13 + (1049080.17122333)*x^14 + (-1164737.86099266)*x^15 + (-282765.448706001)*x^16 + (771955.520997377)*x^17 + (-169961.413579647)*x^18 + (-225871.839384057)*x^19 + (142145.874373996)*x^20 + (-2430.18903333571)*x^21 + (-25735.7403798769)*x^22 + (10873.0680837202)*x^23 + (-1944.58002467352)*x^24 + (135.494256329739)*x^25));
     annotation(Inline=false,
           LateInline=true);
   end bubbleEnthalpy;
 
   redeclare function extends dewEnthalpy
-  "Dew curve specific enthalpy of refrigerant (Ancillary equation)"
+    "Dew curve specific enthalpy of refrigerant (Ancillary equation)"
   protected
     Real x;
 
   algorithm
     x := (sat.psat - (1690546.68662399))/(1337345.61888569);
-    hv := (419045.765501892-1100) + (8545.487483279) * (((0.983520185682028) + (0.173961838358794)*x^1 + (-0.777842402746969)*x^2 + (0.197032758310628)*x^3 + (-0.215325369147047)*x^4 + (0.17524027979117)*x^5 + (0.163409334532178)*x^6 + (-0.10365771583044)*x^7 + (-0.298358086862518)*x^8 + (0.063900536295213)*x^9 + (0.0755533366303853)*x^10 + (0.095321629007505)*x^11 + (0.0502647244559176)*x^12 + (-0.0605463077241532)*x^13 + (-0.0386765421186988)*x^14 + (-0.0360136736458006)*x^15 + (0.0136472460889214)*x^16 + (0.0308964007853627)*x^17 + (0.0115258430193761)*x^18 + (0.000390283122980614)*x^19 + (-0.0331179314189472)*x^20 + (0.0144702747235008)*x^21 + (0.00833845606213506)*x^22 + (-0.00799014541436163)*x^23 + (0.0022323353175877)*x^24 + (-0.000218029221261958)*x^25));
     hv := (417945.765501892) + (8545.487483279) * (((0.983520185682028) + (0.173961838358794)*x^1 + (-0.777842402746969)*x^2 + (0.197032758310628)*x^3 + (-0.215325369147047)*x^4 + (0.17524027979117)*x^5 + (0.163409334532178)*x^6 + (-0.10365771583044)*x^7 + (-0.298358086862518)*x^8 + (0.063900536295213)*x^9 + (0.0755533366303853)*x^10 + (0.095321629007505)*x^11 + (0.0502647244559176)*x^12 + (-0.0605463077241532)*x^13 + (-0.0386765421186988)*x^14 + (-0.0360136736458006)*x^15 + (0.0136472460889214)*x^16 + (0.0308964007853627)*x^17 + (0.0115258430193761)*x^18 + (0.000390283122980614)*x^19 + (-0.0331179314189472)*x^20 + (0.0144702747235008)*x^21 + (0.00833845606213506)*x^22 + (-0.00799014541436163)*x^23 + (0.0022323353175877)*x^24 + (-0.000218029221261958)*x^25));
     annotation(Inline=false,
           LateInline=true);
   end dewEnthalpy;
 
   redeclare function extends bubbleEntropy
-  "Boiling curve specific entropy of refrigerant (Ancillary equation)"
+    "Boiling curve specific entropy of refrigerant (Ancillary equation)"
   protected
     Real x;
 
   algorithm
     x := (sat.psat - (1690546.68662399))/(1337345.61888569);
-    sl := (1160.97331866083-71) + (185.695651493037) * (((0.274891927776532) + (0.888482458507174)*x^1 + (-0.245671669378254)*x^2 + (0.113902422370081)*x^3 + (-0.0471292444744683)*x^4 + (0.122020592620146)*x^5 + (-0.0976178186610381)*x^6 + (-0.184232949517685)*x^7 + (0.0779323618368683)*x^8 + (0.255290714023843)*x^9 + (0.00592212772109565)*x^10 + (-0.12141201709424)*x^11 + (-0.197892691158687)*x^12 + (-0.00660210880306234)*x^13 + (0.290832433096577)*x^14 + (0.0199708486352523)*x^15 + (-0.233747525374593)*x^16 + (0.0336400125229364)*x^17 + (0.101032460509914)*x^18 + (-0.0416403990009039)*x^19 + (-0.0145766678299393)*x^20 + (0.014209075443824)*x^21 + (-0.00370309827636681)*x^22 + (0.00033828165088767)*x^23));
     sl := (1089.97331866083) + (185.695651493037) * (((0.274891927776532) + (0.888482458507174)*x^1 + (-0.245671669378254)*x^2 + (0.113902422370081)*x^3 + (-0.0471292444744683)*x^4 + (0.122020592620146)*x^5 + (-0.0976178186610381)*x^6 + (-0.184232949517685)*x^7 + (0.0779323618368683)*x^8 + (0.255290714023843)*x^9 + (0.00592212772109565)*x^10 + (-0.12141201709424)*x^11 + (-0.197892691158687)*x^12 + (-0.00660210880306234)*x^13 + (0.290832433096577)*x^14 + (0.0199708486352523)*x^15 + (-0.233747525374593)*x^16 + (0.0336400125229364)*x^17 + (0.101032460509914)*x^18 + (-0.0416403990009039)*x^19 + (-0.0145766678299393)*x^20 + (0.014209075443824)*x^21 + (-0.00370309827636681)*x^22 + (0.00033828165088767)*x^23));
     annotation(Inline=false,
           LateInline=true);
   end bubbleEntropy;
 
   redeclare function extends dewEntropy
-  "Dew curve specific entropy of propane (Ancillary equation)"
+    "Dew curve specific entropy of propane (Ancillary equation)"
   protected
     Real x;
 
   algorithm
     x := (sat.psat - (1690546.68662399))/(1337345.61888569);
-    sv := (1842.94582896195-70.6) + (79.2403170328169) * (((-0.150479610948503) + (-0.773757700736367)*x^1 + (0.132564781752192)*x^2 + (-0.0847856959955504)*x^3 + (0.0270489376466083)*x^4 + (-0.308151297008007)*x^5 + (0.136507017005217)*x^6 + (0.808894385214169)*x^7 + (-0.122700813082128)*x^8 + (-1.47492388142783)*x^9 + (0.15442682704994)*x^10 + (1.51293677931511)*x^11 + (-0.161232661224616)*x^12 + (-0.899619588503897)*x^13 + (0.0817324388473164)*x^14 + (0.256674014689244)*x^15 + (0.0790325658994048)*x^16 + (-0.0497700161113581)*x^17 + (-0.0983005227940781)*x^18 + (0.0473507418719607)*x^19 + (0.0223518186558442)*x^20 + (-0.0215691827119022)*x^21 + (0.00581168717069958)*x^22 + (-0.000546560772734549)*x^23));
     sv := (1772.34582896195) + (79.2403170328169) * (((-0.150479610948503) + (-0.773757700736367)*x^1 + (0.132564781752192)*x^2 + (-0.0847856959955504)*x^3 + (0.0270489376466083)*x^4 + (-0.308151297008007)*x^5 + (0.136507017005217)*x^6 + (0.808894385214169)*x^7 + (-0.122700813082128)*x^8 + (-1.47492388142783)*x^9 + (0.15442682704994)*x^10 + (1.51293677931511)*x^11 + (-0.161232661224616)*x^12 + (-0.899619588503897)*x^13 + (0.0817324388473164)*x^14 + (0.256674014689244)*x^15 + (0.0790325658994048)*x^16 + (-0.0497700161113581)*x^17 + (-0.0983005227940781)*x^18 + (0.0473507418719607)*x^19 + (0.0223518186558442)*x^20 + (-0.0215691827119022)*x^21 + (0.00581168717069958)*x^22 + (-0.000546560772734549)*x^23));
     annotation(Inline=false,
           LateInline=true);
@@ -344,11 +336,12 @@ package R410a_IIR_P1_48_T233_473_Formula
     EoS.
   */
   redeclare replaceable function temperature_ph
-  "Calculates temperature as function of pressure and specific enthalpy"
+    "Calculates temperature as function of pressure and specific enthalpy"
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";
     input SpecificEnthalpy h "Specific enthalpy";
-    input FixedPhase phase=0 "2 for two-phase, 1 for one-phase, 0 if not known";
+    input FixedPhase phase=0
+      "2 for two-phase, 1 for one-phase, 0 if not known";
     output Temperature T "Temperature";
 
   protected
@@ -436,7 +429,7 @@ package R410a_IIR_P1_48_T233_473_Formula
   end temperature_ph;
 
   redeclare replaceable function temperature_ps
-  "Calculates temperature as function of pressure and specific entroy"
+    "Calculates temperature as function of pressure and specific entroy"
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";
     input SpecificEntropy s "Specific entropy";
@@ -528,7 +521,7 @@ package R410a_IIR_P1_48_T233_473_Formula
   end temperature_ps;
 
   redeclare replaceable partial function density_pT
-  "Computes density as a function of pressure and temperature"
+    "Computes density as a function of pressure and temperature"
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";
     input Temperature T "Temperature";
@@ -638,7 +631,7 @@ package R410a_IIR_P1_48_T233_473_Formula
     dynamic viscosity or thermal conductivity. Also add references.
   */
   redeclare function extends dynamicViscosity
-  "Calculates dynamic viscosity of refrigerant"
+    "Calculates dynamic viscosity of refrigerant"
 
     /*The functional form of the dynamic viscosity is implented as presented in
     Nabizadeh and Mayinger (1999), Viscosity of Gaseous R404A, R407C, R410A, 
@@ -651,7 +644,6 @@ package R410a_IIR_P1_48_T233_473_Formula
     Real eta_hd "Dynamic viscosity for the limit of high density";
 
   algorithm
-
     // Calculate the dynamic visocity near the limit of zero density
     eta_zd := -2.695 + 5.850e-2*state.T - 2.129e-5*state.T^2;
 
@@ -664,7 +656,7 @@ package R410a_IIR_P1_48_T233_473_Formula
   end dynamicViscosity;
 
   redeclare function extends thermalConductivity
-  "Calculates thermal conductivity of refrigerant"
+    "Calculates thermal conductivity of refrigerant"
 
   /*The functional form of the thermal conductify is implented as presented in
     Geller et al. (2001), Thermal Conductivity of the Refrigerant Mixtures R404A,
@@ -677,7 +669,6 @@ package R410a_IIR_P1_48_T233_473_Formula
     Real lambda_r "Thermal conductivity for residual part";
 
   algorithm
-
     // Calculate the thermal conducitvity for the limit of zero density
     lambda_0 := -8.872 + 7.41e-2*state.T;
 
@@ -691,7 +682,7 @@ package R410a_IIR_P1_48_T233_473_Formula
   end thermalConductivity;
 
   redeclare function extends surfaceTension
-  "Surface tension in two phase region of refrigerant"
+    "Surface tension in two phase region of refrigerant"
 
   /*The functional form of the surface tension is implented as presented in
     Fröba and Leipertz (2003), Thermophysical Properties of the Refrigerant 

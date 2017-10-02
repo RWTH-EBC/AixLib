@@ -186,7 +186,7 @@ equation
   // Calculate dimensionless thermydynamic state properties acording to time
   //
   tauInt = MediumInt.fluidConstants[1].criticalTemperature/T;
-  deltaInt = d/(MediumInt.fluidConstants[1].molarMass*
+  deltaInt = d/(MediumInt.fluidConstants[1].molarMass/
     MediumInt.fluidConstants[1].criticalMolarVolume);
 
   // Calculate state properties for calculating saturation properties acording to time

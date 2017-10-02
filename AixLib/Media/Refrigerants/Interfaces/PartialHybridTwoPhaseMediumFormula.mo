@@ -18,8 +18,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   /*Provide records thats contain the coefficients for the smooth transition
     between different regions.
   */
-  replaceable record SmoothTransition
-    "Record that contains ranges to calculate a smooth transition between
+  replaceable record SmoothTransition "Record that contains ranges to calculate a smooth transition between
     different regions"
     SpecificEnthalpy T_ph = 10;
     SpecificEntropy T_ps = 10;
@@ -34,7 +33,7 @@ partial package PartialHybridTwoPhaseMediumFormula
     provided within the template.
   */
   replaceable partial function alpha_0
-  "Dimensionless Helmholtz energy (Ideal gas contribution alpha_0)"
+    "Dimensionless Helmholtz energy (Ideal gas contribution alpha_0)"
     input Real delta "Temperature";
     input Real tau "Density";
     output Real alpha_0 = 0 "Dimensionless ideal gas Helmholz energy";
@@ -43,7 +42,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   end alpha_0;
 
   replaceable partial function alpha_r
-  "Dimensionless Helmholtz energy (Residual part alpha_r)"
+    "Dimensionless Helmholtz energy (Residual part alpha_r)"
       input Real delta "Temperature";
       input Real tau "Density";
       output Real alpha_r = 0 "Dimensionless residual Helmholz energy";
@@ -52,7 +51,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   end alpha_r;
 
   replaceable partial function tau_d_alpha_0_d_tau
-  "Short form for tau*(dalpha_0/dtau)@delta=const"
+    "Short form for tau*(dalpha_0/dtau)@delta=const"
     input Real tau "Density";
     output Real tau_d_alpha_0_d_tau = 0 "Tau*(dalpha_0/dtau)@delta=const";
     annotation(Inline=false,
@@ -60,7 +59,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   end tau_d_alpha_0_d_tau;
 
   replaceable partial function tau2_d2_alpha_0_d_tau2
-  "Short form for tau*tau*(ddalpha_0/(dtau*dtau))@delta=const"
+    "Short form for tau*tau*(ddalpha_0/(dtau*dtau))@delta=const"
       input Real tau "Density";
       output Real tau2_d2_alpha_0_d_tau2 = 0
       "Tau*tau*(ddalpha_0/(dtau*dtau))@delta=const";
@@ -69,7 +68,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   end tau2_d2_alpha_0_d_tau2;
 
   replaceable partial function tau_d_alpha_r_d_tau
-  "Short form for tau*(dalpha_r/dtau)@delta=const"
+    "Short form for tau*(dalpha_r/dtau)@delta=const"
     input Real delta "Temperature";
     input Real tau "Density";
     output Real tau_d_alpha_r_d_tau = 0 "Tau*(dalpha_r/dtau)@delta=const";
@@ -78,7 +77,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   end tau_d_alpha_r_d_tau;
 
   replaceable partial function tau2_d2_alpha_r_d_tau2
-  "Short form for tau*tau*(ddalpha_r/(dtau*dtau))@delta=const"
+    "Short form for tau*tau*(ddalpha_r/(dtau*dtau))@delta=const"
       input Real delta "Temperature";
       input Real tau "Density";
       output Real tau2_d2_alpha_r_d_tau2 = 0
@@ -88,7 +87,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   end tau2_d2_alpha_r_d_tau2;
 
   replaceable partial function delta_d_alpha_r_d_delta
-  "Short form for delta*(dalpha_r/(ddelta))@tau=const"
+    "Short form for delta*(dalpha_r/(ddelta))@tau=const"
     input Real delta "Temperature";
     input Real tau "Density";
     output Real delta_d_alpha_r_d_delta = 0
@@ -98,21 +97,21 @@ partial package PartialHybridTwoPhaseMediumFormula
   end delta_d_alpha_r_d_delta;
 
   replaceable partial function delta2_d2_alpha_r_d_delta2
-  "Short form for delta*delta(ddalpha_r/(ddelta*delta))@tau=const"
+    "Short form for delta*delta(ddalpha_r/(ddelta*delta))@tau=const"
     input Real delta "Temperature";
     input Real tau "Density";
     output Real delta2_d2_alpha_r_d_delta2 = 0
-    "Delta*delta(ddalpha_r/(ddelta*delta))@tau=const";
+      "Delta*delta(ddalpha_r/(ddelta*delta))@tau=const";
     annotation(Inline=false,
           LateInline=true);
   end delta2_d2_alpha_r_d_delta2;
 
   replaceable partial function tau_delta_d2_alpha_r_d_tau_d_delta
-  "Short form for tau*delta*(ddalpha_r/(dtau*ddelta))"
+    "Short form for tau*delta*(ddalpha_r/(dtau*ddelta))"
     input Real delta "Temperature";
     input Real tau "Density";
     output Real tau_delta_d2_alpha_r_d_tau_d_delta = 0
-    "Tau*delta*(ddalpha_r/(dtau*ddelta))";
+      "Tau*delta*(ddalpha_r/(dtau*ddelta))";
     annotation(Inline=false,
           LateInline=true);
   end tau_delta_d2_alpha_r_d_tau_d_delta;
@@ -122,7 +121,7 @@ partial package PartialHybridTwoPhaseMediumFormula
     Just change these functions if needed.
   */
   redeclare function extends setDewState
-  "Return thermodynamic state of refrigerant  on the dew line"
+    "Return thermodynamic state of refrigerant  on the dew line"
   algorithm
     state := ThermodynamicState(
        phase = phase,
@@ -137,7 +136,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   end setDewState;
 
   redeclare function extends setBubbleState
-  "Return thermodynamic state of refrigerant on the bubble line"
+    "Return thermodynamic state of refrigerant on the bubble line"
   algorithm
     state := ThermodynamicState(
        phase = phase,
@@ -152,7 +151,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   end setBubbleState;
 
   redeclare function extends setState_dTX
-  "Return thermodynamic state of refrigerant as function of d and T"
+    "Return thermodynamic state of refrigerant as function of d and T"
   algorithm
     state := ThermodynamicState(
       d = d,
@@ -167,7 +166,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   end setState_dTX;
 
   redeclare function extends setState_pTX
-  "Return thermodynamic state of refrigerant as function of p and T"
+    "Return thermodynamic state of refrigerant as function of p and T"
   algorithm
     state := ThermodynamicState(
       d = density_pT(p=p,T=T,phase=phase),
@@ -182,7 +181,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   end setState_pTX;
 
   redeclare function extends setState_phX
-  "Return thermodynamic state of refrigerant as function of p and h"
+    "Return thermodynamic state of refrigerant as function of p and h"
   algorithm
     state:= ThermodynamicState(
       d = density_ph(p=p,h=h,phase=phase),
@@ -197,7 +196,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   end setState_phX;
 
   redeclare function extends setState_psX
-  "Return thermodynamic state of refrigerant as function of p and s"
+    "Return thermodynamic state of refrigerant as function of p and s"
   algorithm
     state := ThermodynamicState(
       d = density_ps(p=p,s=s,phase=phase),
@@ -213,8 +212,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   /*Provide functions to calculate thermodynamic properties using the EoS.
     Just change these functions if needed.
   */
-  redeclare function extends pressure
-  "Pressure of refrigerant"
+  redeclare function extends pressure "Pressure of refrigerant"
   algorithm
     p := state.p;
     annotation(Inline=true,
@@ -223,8 +221,7 @@ partial package PartialHybridTwoPhaseMediumFormula
           efficient=true);
   end pressure;
 
-  redeclare function extends temperature
-  "Temperature of refrigerant"
+  redeclare function extends temperature "Temperature of refrigerant"
   algorithm
     T := state.T;
     annotation(Inline=true,
@@ -233,8 +230,7 @@ partial package PartialHybridTwoPhaseMediumFormula
           efficient=true);
   end temperature;
 
-  redeclare function extends density
-  "Density of refrigerant"
+  redeclare function extends density "Density of refrigerant"
   algorithm
     d := state.d;
     annotation(Inline=true,
@@ -244,7 +240,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   end density;
 
   redeclare function extends specificEnthalpy
-  "Specific enthalpy of refrigerant"
+    "Specific enthalpy of refrigerant"
   algorithm
     h := state.h;
     annotation(Inline=true,
@@ -254,7 +250,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   end specificEnthalpy;
 
   redeclare function extends specificInternalEnergy
-  "Specific internal energy of refrigerant"
+    "Specific internal energy of refrigerant"
   algorithm
     u := specificEnthalpy(state)  - pressure(state)/state.d;
     annotation(Inline=true,
@@ -264,7 +260,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   end specificInternalEnergy;
 
   redeclare function extends specificGibbsEnergy
-  "Specific Gibbs energy of refrigerant"
+    "Specific Gibbs energy of refrigerant"
   algorithm
     g := specificEnthalpy(state) - state.T*specificEntropy(state);
     annotation(Inline=true,
@@ -274,7 +270,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   end specificGibbsEnergy;
 
   redeclare function extends specificHelmholtzEnergy
-  "Specific Helmholtz energy of refrigerant"
+    "Specific Helmholtz energy of refrigerant"
   algorithm
     f := specificEnthalpy(state) - pressure(state)/state.d -
       state.T*specificEntropy(state);
@@ -285,13 +281,13 @@ partial package PartialHybridTwoPhaseMediumFormula
   end specificHelmholtzEnergy;
 
   redeclare function extends specificEntropy
-  "Specific entropy of refrigerant"
+    "Specific entropy of refrigerant"
   protected
     SpecificEntropy sl;
     SpecificEntropy sv;
     SaturationProperties sat = setSat_T(state.T);
 
-    Real d_crit = fluidConstants[1].criticalMolarVolume*MM;
+    Real d_crit = MM/fluidConstants[1].criticalMolarVolume;
     Real MM = fluidConstants[1].molarMass;
     Real R = Modelica.Constants.R/MM;
     Real tau = fluidConstants[1].criticalTemperature/state.T;
@@ -325,13 +321,13 @@ partial package PartialHybridTwoPhaseMediumFormula
   end specificEntropy;
 
   redeclare function extends specificHeatCapacityCp
-  "Specific heat capacity at constant pressure of refrigerant"
+    "Specific heat capacity at constant pressure of refrigerant"
   protected
     SpecificHeatCapacity cpl;
     SpecificHeatCapacity cpv;
     SaturationProperties sat = setSat_T(state.T);
 
-    Real d_crit = fluidConstants[1].criticalMolarVolume*MM;
+    Real d_crit = MM/fluidConstants[1].criticalMolarVolume;
     Real MM = fluidConstants[1].molarMass;
     Real R = Modelica.Constants.R/MM;
     Real tau = fluidConstants[1].criticalTemperature/state.T;
@@ -381,7 +377,7 @@ partial package PartialHybridTwoPhaseMediumFormula
     SpecificHeatCapacity cvv;
     SaturationProperties sat = setSat_T(state.T);
 
-    Real d_crit = fluidConstants[1].criticalMolarVolume*MM;
+    Real d_crit = MM/fluidConstants[1].criticalMolarVolume;
     Real MM = fluidConstants[1].molarMass;
     Real R = Modelica.Constants.R/MM;
     Real tau = fluidConstants[1].criticalTemperature/state.T;
@@ -421,7 +417,7 @@ partial package PartialHybridTwoPhaseMediumFormula
     VelocityOfSound aG;
     SaturationProperties sat = setSat_T(state.T);
 
-    Real d_crit = fluidConstants[1].criticalMolarVolume*MM;
+    Real d_crit = MM/fluidConstants[1].criticalMolarVolume;
     Real MM = fluidConstants[1].molarMass;
     Real R = Modelica.Constants.R/MM;
     Real tau = fluidConstants[1].criticalTemperature/state.T;
@@ -464,7 +460,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   end velocityOfSound;
 
   redeclare function extends isobaricExpansionCoefficient
-  "Isobaric expansion coefficient beta of refrigerant"
+    "Isobaric expansion coefficient beta of refrigerant"
   protected
     SaturationProperties sat = setSat_T(state.T);
     Real phase_dT = if not ((state.d < bubbleDensity(sat) and state.d >
@@ -482,7 +478,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   end isobaricExpansionCoefficient;
 
   redeclare function extends isothermalCompressibility
-  "Isothermal compressibility factor of refrigerant"
+    "Isothermal compressibility factor of refrigerant"
   protected
     SaturationProperties sat = setSat_T(state.T);
     Real phase_dT = if not ((state.d < bubbleDensity(sat) and state.d >
@@ -500,9 +496,10 @@ partial package PartialHybridTwoPhaseMediumFormula
   end isothermalCompressibility;
 
   replaceable function isothermalThrottlingCoefficient
-  "Isothermal throttling coefficient of refrigerant"
+    "Isothermal throttling coefficient of refrigerant"
     input ThermodynamicState state "Thermodynamic state";
-    output Real delta_T(unit="J/(Pa.kg)") "Isothermal throttling coefficient";
+    output Real delta_T(unit="J/(Pa.kg)")
+      "Isothermal throttling coefficient";
 
   protected
     SaturationProperties sat = setSat_T(state.T);
@@ -521,7 +518,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   end isothermalThrottlingCoefficient;
 
   replaceable function jouleThomsonCoefficient
-  "Joule-Thomson coefficient of refrigerant"
+    "Joule-Thomson coefficient of refrigerant"
     input ThermodynamicState state "Thermodynamic state";
     output Real my(unit="K/Pa") "Isothermal throttling coefficient";
 
@@ -546,11 +543,12 @@ partial package PartialHybridTwoPhaseMediumFormula
     EoS. Just change these functions if needed.
   */
   redeclare replaceable function pressure_dT
-  "Computes pressure as a function of density and temperature"
+    "Computes pressure as a function of density and temperature"
     extends Modelica.Icons.Function;
     input Density d "Density";
     input Temperature T "Temperature";
-    input FixedPhase phase "2 for two-phase, 1 for one-phase, 0 if not known";
+    input FixedPhase phase
+      "2 for two-phase, 1 for one-phase, 0 if not known";
     output AbsolutePressure p "Pressure";
 
   protected
@@ -561,8 +559,8 @@ partial package PartialHybridTwoPhaseMediumFormula
   algorithm
     if phase_dT == 1 or phase == 1 then
       p := d*Modelica.Constants.R/fluidConstants[1].molarMass*T*
-        (1+delta_d_alpha_r_d_delta(delta = d/(
-        fluidConstants[1].criticalMolarVolume*fluidConstants[1].molarMass),
+        (1+delta_d_alpha_r_d_delta(delta = d/
+        (fluidConstants[1].molarMass/fluidConstants[1].criticalMolarVolume),
         tau = fluidConstants[1].criticalTemperature/T));
     elseif phase_dT == 2 or phase == 2 then
       p := saturationPressure(T);
@@ -576,7 +574,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   end pressure_dT;
 
   redeclare replaceable function density_ph
-  "Computes density as a function of pressure and enthalpy"
+    "Computes density as a function of pressure and enthalpy"
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";
     input SpecificEnthalpy h "Specific enthalpy";
@@ -619,7 +617,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   end density_ph;
 
   redeclare replaceable function density_ps
-  "Computes density as a function of pressure and entropy"
+    "Computes density as a function of pressure and entropy"
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";
     input SpecificEntropy s "Specific entropy";
@@ -663,7 +661,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   end density_ps;
 
   redeclare function specificEnthalpy_pT
-  "Computes specific enthalpy as a function of pressure and temperature"
+    "Computes specific enthalpy as a function of pressure and temperature"
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";
     input Temperature T "Temperature";
@@ -685,14 +683,15 @@ partial package PartialHybridTwoPhaseMediumFormula
     extends Modelica.Icons.Function;
     input Density d "Density";
     input Temperature T "Temperature";
-    input FixedPhase phase "2 for two-phase, 1 for one-phase, 0 if not known";
+    input FixedPhase phase
+      "2 for two-phase, 1 for one-phase, 0 if not known";
     output SpecificEnthalpy h "Specific enthalpy";
 
   protected
     Real hl=0;
     Real hv=0;
 
-    Real d_crit = fluidConstants[1].criticalMolarVolume*MM;
+    Real d_crit = MM/fluidConstants[1].criticalMolarVolume;
     Real MM = fluidConstants[1].molarMass;
     Real R = Modelica.Constants.R/MM;
     Real tau = fluidConstants[1].criticalTemperature/T;
@@ -730,7 +729,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   end specificEnthalpy_dT;
 
   redeclare replaceable function specificEnthalpy_ps
-  "Computes specific enthalpy as a function of pressure and entropy"
+    "Computes specific enthalpy as a function of pressure and entropy"
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";
     input SpecificEntropy s "Specific entropy";
@@ -781,7 +780,7 @@ partial package PartialHybridTwoPhaseMediumFormula
     Just change these functions if needed.
   */
   replaceable function pressure_dT_der
-  "Calculates time derivative of pressure_dT"
+    "Calculates time derivative of pressure_dT"
     input Density d "Density";
     input Temperature T "Temperature";
     input FixedPhase phase = 0
@@ -808,8 +807,7 @@ partial package PartialHybridTwoPhaseMediumFormula
     output Real dpdT "Pressure derivative (dp/dd)@T=const";
 
   protected
-    Real delta = state.d/(fluidConstants[1].criticalMolarVolume*
-      fluidConstants[1].molarMass);
+    Real delta = state.d/(fluidConstants[1].molarMass/fluidConstants[1].criticalMolarVolume);
     Real tau = fluidConstants[1].criticalTemperature/state.T;
 
     SaturationProperties sat = setSat_p(state.p);
@@ -837,8 +835,7 @@ partial package PartialHybridTwoPhaseMediumFormula
     output Real dpTd "Pressure derivative (dp/dT)@d=const";
 
   protected
-    Real delta = state.d/(fluidConstants[1].criticalMolarVolume*
-      fluidConstants[1].molarMass);
+    Real delta = state.d/(fluidConstants[1].molarMass/fluidConstants[1].criticalMolarVolume);
     Real tau = fluidConstants[1].criticalTemperature/state.T;
 
     SaturationProperties sat = setSat_p(state.p);
@@ -861,7 +858,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   end pressure_derT_d;
 
   replaceable function temperature_ph_der
-  "Calculates time derivative of temperature_ph"
+    "Calculates time derivative of temperature_ph"
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";
     input SpecificEnthalpy h "Specific enthalpy";
@@ -982,7 +979,7 @@ partial package PartialHybridTwoPhaseMediumFormula
           efficient=true);
   end density_derh_p;
 
-  redeclare function extends density_derp_h
+  redeclare replaceable function extends density_derp_h
     "Calculates density derivative (dd/dp)@h=const"
 
   algorithm
@@ -1038,7 +1035,8 @@ partial package PartialHybridTwoPhaseMediumFormula
     "Calculates time derivative of specificEnthalpy_dT"
     input Density d "Density";
     input Temperature T "Temperature";
-    input FixedPhase phase=0 "2 for two-phase, 1 for one-phase, 0 if not known";
+    input FixedPhase phase=0
+      "2 for two-phase, 1 for one-phase, 0 if not known";
     input Real der_d "Time derivative of density";
     input Real der_T "Time derivative of temperature";
     output Real der_h "Time derivative of specific enthalpy";
@@ -1056,13 +1054,12 @@ partial package PartialHybridTwoPhaseMediumFormula
   end specificEnthalpy_dT_der;
 
   replaceable function specificEnthalpy_derT_d
-  "Calculates enthalpy derivative (dh/dT)@d=const"
+    "Calculates enthalpy derivative (dh/dT)@d=const"
     input ThermodynamicState state "Thermodynamic state";
     output Real dhTd "Enthalpy derivative (dh/dT)@d=const";
 
   protected
-    Real delta = state.d/(fluidConstants[1].criticalMolarVolume*
-      fluidConstants[1].molarMass);
+    Real delta = state.d/(fluidConstants[1].molarMass/fluidConstants[1].criticalMolarVolume);
     Real tau = fluidConstants[1].criticalTemperature/state.T;
 
     SaturationProperties sat = setSat_p(state.p);
@@ -1087,13 +1084,12 @@ partial package PartialHybridTwoPhaseMediumFormula
   end specificEnthalpy_derT_d;
 
   replaceable function specificEnthalpy_derd_T
-  "Calculates enthalpy derivative (dh/dd)@T=const"
+    "Calculates enthalpy derivative (dh/dd)@T=const"
     input ThermodynamicState state "Thermodynamic state";
     output Real dhdT "Enthalpy derivative (dh/dd)@T=const";
 
   protected
-    Real delta = state.d/(fluidConstants[1].criticalMolarVolume*
-      fluidConstants[1].molarMass);
+    Real delta = state.d/(fluidConstants[1].molarMass/fluidConstants[1].criticalMolarVolume);
     Real tau = fluidConstants[1].criticalTemperature/state.T;
 
     SaturationProperties sat = setSat_p(state.p);
@@ -1118,7 +1114,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   end specificEnthalpy_derd_T;
 
   redeclare function extends dBubbleEnthalpy_dPressure
-  "Calculates bubble point enthalpy derivative"
+    "Calculates bubble point enthalpy derivative"
 
   protected
     ThermodynamicState state_l = setBubbleState(sat);
@@ -1138,7 +1134,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   end dBubbleEnthalpy_dPressure;
 
   redeclare function extends dDewEnthalpy_dPressure
-  "Calculates dew point enthalpy derivative"
+    "Calculates dew point enthalpy derivative"
 
   protected
     ThermodynamicState state_l = setBubbleState(sat);

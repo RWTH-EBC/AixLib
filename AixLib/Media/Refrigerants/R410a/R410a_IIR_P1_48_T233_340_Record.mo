@@ -15,7 +15,7 @@ package R410a_IIR_P1_48_T233_340_Record
      each molarMass = 0.072585414240660,
      each criticalTemperature = 3.444943810810253e+02,
      each criticalPressure = 4.901264589893823e+06,
-     each criticalMolarVolume = 6324,
+     each criticalMolarVolume = 1/6324,
      each normalBoilingPoint = 221.71,
      each triplePointTemperature = 200,
      each meltingPoint = 118.15,
@@ -29,7 +29,7 @@ package R410a_IIR_P1_48_T233_340_Record
     specific enthalpy, density, absolute pressure and temperature.
   */
   extends
-    AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord(
+    WorkingVersion.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord(
     mediumName="R410a",
     substanceNames={"R410a"},
     singleState=false,
@@ -99,9 +99,9 @@ package R410a_IIR_P1_48_T233_340_Record
     p(stateSelect=StateSelect.prefer)) "Base properties of refrigerant"
 
     Integer phase(min=0, max=2, start=1)
-    "2 for two-phase, 1 for one-phase, 0 if not known";
+      "2 for two-phase, 1 for one-phase, 0 if not known";
     SaturationProperties sat(Tsat(start=300.0), psat(start=1.0e5))
-    "Saturation temperature and pressure";
+      "Saturation temperature and pressure";
 
   equation
     MM = fluidConstants[1].molarMass;
@@ -146,23 +146,23 @@ package R410a_IIR_P1_48_T233_340_Record
   */
   redeclare record EoS
     "Record that contains fitting coefficients of the Helmholtz EoS"
-    extends AixLib.DataBase.Media.Refrigerants.R410a.EoS_IIR_P1_48_T233_340;
+    extends
+      AixLib.DataBase.Media.Refrigerants.R410a.EoS_IIR_P1_48_T233_340;
   end EoS;
 
-  redeclare record BDSP
-    "Record that contains fitting coefficients of the state properties at bubble
+  redeclare record BDSP "Record that contains fitting coefficients of the state properties at bubble
     and dew lines"
-    extends AixLib.DataBase.Media.Refrigerants.R410a.BDSP_IIR_P1_48_T233_340;
+    extends
+      AixLib.DataBase.Media.Refrigerants.R410a.BDSP_IIR_P1_48_T233_340;
   end BDSP;
 
-  redeclare record TSP
-    "Record that contains fitting coefficients of the state properties
+  redeclare record TSP "Record that contains fitting coefficients of the state properties
     calculated with two independent state properties"
-    extends AixLib.DataBase.Media.Refrigerants.R410a.TSP_IIR_P1_48_T233_340;
+    extends
+      AixLib.DataBase.Media.Refrigerants.R410a.TSP_IIR_P1_48_T233_340;
   end TSP;
 
-  redeclare record SmoothTransition
-    "Record that contains ranges to calculate a smooth transition between
+  redeclare record SmoothTransition "Record that contains ranges to calculate a smooth transition between
     different regions"
     SpecificEnthalpy T_ph = 5;
     SpecificEntropy T_ps = 5;
@@ -176,7 +176,7 @@ package R410a_IIR_P1_48_T233_340_Record
     dynamic viscosity or thermal conductivity. Also add references.
   */
   redeclare function extends dynamicViscosity
-  "Calculates dynamic viscosity of refrigerant"
+    "Calculates dynamic viscosity of refrigerant"
 
   /*The functional form of the dynamic viscosity is implented as presented in
     Geller et al. (2000), Viscosity of Mixed Refrigerants, R404A, R407C, R410A, 
@@ -190,7 +190,6 @@ package R410a_IIR_P1_48_T233_340_Record
     Real eta_hd "Dynamic viscosity for the limit of high density";
 
   algorithm
-
     // Calculate the dynamic visocity near the limit of zero density
     eta_zd := -2.695 + 5.850e-2*state.T - 2.129e-5*state.T^2;
 
@@ -203,7 +202,7 @@ package R410a_IIR_P1_48_T233_340_Record
   end dynamicViscosity;
 
   redeclare function extends thermalConductivity
-  "Calculates thermal conductivity of refrigerant"
+    "Calculates thermal conductivity of refrigerant"
 
   /*The functional form of the thermal conductify is implented as presented in
     Geller et al. (2001), Thermal Conductivity of the Refrigerant Mixtures R404A,
@@ -216,7 +215,6 @@ package R410a_IIR_P1_48_T233_340_Record
     Real lambda_r "Thermal conductivity for residual part";
 
   algorithm
-
     // Calculate the thermal conducitvity for the limit of zero density
     lambda_0 := -8.872 + 7.41e-2*state.T;
 
@@ -230,7 +228,7 @@ package R410a_IIR_P1_48_T233_340_Record
   end thermalConductivity;
 
   redeclare function extends surfaceTension
-  "Surface tension in two phase region of refrigerant"
+    "Surface tension in two phase region of refrigerant"
 
   /*The functional form of the surface tension is implented as presented in
     Fröba and Leipertz (2003), Thermophysical Properties of the Refrigerant 

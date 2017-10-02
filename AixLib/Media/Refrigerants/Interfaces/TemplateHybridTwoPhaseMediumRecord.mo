@@ -22,14 +22,15 @@ partial package TemplateHybridTwoPhaseMediumRecord
       each acentricFactor = 1,
       each triplePointPressure = 1,
       each dipoleMoment = 1,
-      each hasCriticalData=true) "Thermodynamic constants for refrigerant";
+      each hasCriticalData=true)
+    "Thermodynamic constants for refrigerant";
 
   /*Provide basic information about the refrigerant. These basic information
     are the refrigerant name as well as the valid refrigerant limits in terms of
     specific enthalpy, density, absolute pressure and temperature.
   */
   extends
-    AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord(
+    WorkingVersion.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord(
     mediumName="Name",
     substanceNames={"Name"},
     singleState=false,
@@ -87,9 +88,9 @@ partial package TemplateHybridTwoPhaseMediumRecord
     p(stateSelect=StateSelect.prefer)) "Base properties of refrigerant"
 
     Integer phase(min=0, max=2, start=1)
-    "2 for two-phase, 1 for one-phase, 0 if not known";
+      "2 for two-phase, 1 for one-phase, 0 if not known";
     SaturationProperties sat(Tsat(start=300.0), psat(start=1.0e5))
-    "Saturation temperature and pressure";
+      "Saturation temperature and pressure";
 
   equation
     MM = fluidConstants[1].molarMass;
@@ -134,23 +135,23 @@ partial package TemplateHybridTwoPhaseMediumRecord
   */
   redeclare record EoS
     "Record that contains fitting coefficients of the Helmholtz EoS"
-    extends AixLib.DataBase.Media.Refrigerants.R290.EoS_IIR_P05_30_T263_343;
+    extends
+      AixLib.DataBase.Media.Refrigerants.R290.EoS_IIR_P05_30_T263_343;
   end EoS;
 
-  redeclare record BDSP
-    "Record that contains fitting coefficients of the state properties at bubble
+  redeclare record BDSP "Record that contains fitting coefficients of the state properties at bubble
     and dew lines"
-    extends AixLib.DataBase.Media.Refrigerants.R290.BDSP_IIR_P05_30_T263_343;
+    extends
+      AixLib.DataBase.Media.Refrigerants.R290.BDSP_IIR_P05_30_T263_343;
   end BDSP;
 
-  redeclare record TSP
-    "Record that contains fitting coefficients of the state properties
+  redeclare record TSP "Record that contains fitting coefficients of the state properties
     calculated with two independent state properties"
-    extends AixLib.DataBase.Media.Refrigerants.R290.TSP_IIR_P05_30_T263_343;
+    extends
+      AixLib.DataBase.Media.Refrigerants.R290.TSP_IIR_P05_30_T263_343;
   end TSP;
 
-  redeclare record SmoothTransition
-    "Record that contains ranges to calculate a smooth transition between
+  redeclare record SmoothTransition "Record that contains ranges to calculate a smooth transition between
     different regions"
     SpecificEnthalpy T_ph = 10;
     SpecificEntropy T_ps = 10;
@@ -164,24 +165,21 @@ partial package TemplateHybridTwoPhaseMediumRecord
     dynamic viscosity or thermal conductivity. Also add references.
   */
   redeclare function extends dynamicViscosity
-  "Calculates dynamic viscosity of refrigerant"
+    "Calculates dynamic viscosity of refrigerant"
 
   algorithm
-
   end dynamicViscosity;
 
   redeclare function extends thermalConductivity
-  "Calculates thermal conductivity of refrigerant"
+    "Calculates thermal conductivity of refrigerant"
 
   algorithm
-
   end thermalConductivity;
 
   redeclare function extends surfaceTension
-  "Surface tension in two phase region of refrigerant"
+    "Surface tension in two phase region of refrigerant"
 
   algorithm
-
   end surfaceTension;
   annotation (Documentation(revisions="<html>
 <ul>

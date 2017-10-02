@@ -14,15 +14,13 @@ partial package PartialHybridTwoPhaseMediumRecord
       AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition;
   end EoS;
 
-  replaceable record BDSP
-    "Record that contains fitting coefficients of the state properties at bubble
+  replaceable record BDSP "Record that contains fitting coefficients of the state properties at bubble
     and dew lines"
     extends
       AixLib.DataBase.Media.Refrigerants.BubbleDewStatePropertiesBaseDataDefinition;
   end BDSP;
 
-  replaceable record TSP
-    "Record that contains fitting coefficients of the state properties
+  replaceable record TSP "Record that contains fitting coefficients of the state properties
     calculated with two independent state properties"
     extends
       AixLib.DataBase.Media.Refrigerants.ThermodynamicStatePropertiesBaseDataDefinition;
@@ -35,7 +33,7 @@ partial package PartialHybridTwoPhaseMediumRecord
     Just change if needed.
   */
   redeclare replaceable function extends alpha_0
-  "Dimensionless Helmholtz energy (Ideal gas contribution alpha_0)"
+    "Dimensionless Helmholtz energy (Ideal gas contribution alpha_0)"
   protected
     EoS cf;
 
@@ -64,7 +62,7 @@ partial package PartialHybridTwoPhaseMediumRecord
   end alpha_0;
 
   redeclare replaceable function extends alpha_r
-  "Dimensionless Helmholtz energy (Residual part alpha_r)"
+    "Dimensionless Helmholtz energy (Residual part alpha_r)"
   protected
     EoS cf;
 
@@ -95,7 +93,7 @@ partial package PartialHybridTwoPhaseMediumRecord
   end alpha_r;
 
   redeclare replaceable function extends tau_d_alpha_0_d_tau
-  "Short form for tau*(dalpha_0/dtau)@delta=const"
+    "Short form for tau*(dalpha_0/dtau)@delta=const"
   protected
     EoS cf;
 
@@ -123,7 +121,7 @@ partial package PartialHybridTwoPhaseMediumRecord
   end tau_d_alpha_0_d_tau;
 
   redeclare replaceable function extends tau2_d2_alpha_0_d_tau2
-  "Short form for tau*tau*(ddalpha_0/(dtau*dtau))@delta=const"
+    "Short form for tau*tau*(ddalpha_0/(dtau*dtau))@delta=const"
   protected
     EoS cf;
 
@@ -152,7 +150,7 @@ partial package PartialHybridTwoPhaseMediumRecord
   end tau2_d2_alpha_0_d_tau2;
 
   redeclare replaceable function extends tau_d_alpha_r_d_tau
-  "Short form for tau*(dalpha_r/dtau)@delta=const"
+    "Short form for tau*(dalpha_r/dtau)@delta=const"
   protected
     EoS cf;
 
@@ -185,7 +183,7 @@ partial package PartialHybridTwoPhaseMediumRecord
   end tau_d_alpha_r_d_tau;
 
   redeclare replaceable function extends tau2_d2_alpha_r_d_tau2
-  "Short form for tau*tau*(ddalpha_r/(dtau*dtau))@delta=const"
+    "Short form for tau*tau*(ddalpha_r/(dtau*dtau))@delta=const"
   protected
     EoS cf;
 
@@ -218,7 +216,7 @@ partial package PartialHybridTwoPhaseMediumRecord
   end tau2_d2_alpha_r_d_tau2;
 
   redeclare replaceable function extends delta_d_alpha_r_d_delta
-  "Short form for delta*(dalpha_r/(ddelta))@tau=const"
+    "Short form for delta*(dalpha_r/(ddelta))@tau=const"
   protected
     EoS cf;
 
@@ -252,7 +250,7 @@ partial package PartialHybridTwoPhaseMediumRecord
   end delta_d_alpha_r_d_delta;
 
   redeclare replaceable function extends delta2_d2_alpha_r_d_delta2
-  "Short form for delta*delta(ddalpha_r/(ddelta*delta))@tau=const"
+    "Short form for delta*delta(ddalpha_r/(ddelta*delta))@tau=const"
   protected
     EoS cf;
 
@@ -288,7 +286,7 @@ partial package PartialHybridTwoPhaseMediumRecord
   end delta2_d2_alpha_r_d_delta2;
 
   redeclare replaceable function extends tau_delta_d2_alpha_r_d_tau_d_delta
-  "Short form for tau*delta*(ddalpha_r/(dtau*ddelta))"
+    "Short form for tau*delta*(ddalpha_r/(dtau*ddelta))"
   protected
     EoS cf;
 
@@ -328,7 +326,7 @@ partial package PartialHybridTwoPhaseMediumRecord
      by records.
   */
   redeclare replaceable function extends saturationPressure
-  "Saturation pressure of refrigerant (Ancillary equation)"
+    "Saturation pressure of refrigerant (Ancillary equation)"
   protected
     BDSP cf;
     Real OM = (1 - T/fluidConstants[1].criticalTemperature);
@@ -351,7 +349,7 @@ partial package PartialHybridTwoPhaseMediumRecord
   end saturationPressure;
 
   redeclare replaceable function extends saturationTemperature
-  "Saturation temperature of refrigerant (Ancillary equation)"
+    "Saturation temperature of refrigerant (Ancillary equation)"
   protected
     BDSP cf;
     Real T_1 = 0;
@@ -370,7 +368,7 @@ partial package PartialHybridTwoPhaseMediumRecord
   end saturationTemperature;
 
   redeclare replaceable function extends bubbleDensity
-  "Boiling curve specific density of refrigerant (Ancillary equation)"
+    "Boiling curve specific density of refrigerant (Ancillary equation)"
   protected
     BDSP cf;
     Real dl_1 = 0;
@@ -388,7 +386,7 @@ partial package PartialHybridTwoPhaseMediumRecord
   end bubbleDensity;
 
   redeclare replaceable function extends dewDensity
-  "Dew curve specific density of refrigerant (Ancillary equation)"
+    "Dew curve specific density of refrigerant (Ancillary equation)"
   protected
     BDSP cf;
     Real dv_1 = 0;
@@ -406,7 +404,7 @@ partial package PartialHybridTwoPhaseMediumRecord
   end dewDensity;
 
   redeclare replaceable function extends bubbleEnthalpy
-  "Boiling curve specific enthalpy of refrigerant (Ancillary equation)"
+    "Boiling curve specific enthalpy of refrigerant (Ancillary equation)"
   protected
     BDSP cf;
     Real hl_1 = 0;
@@ -424,7 +422,7 @@ partial package PartialHybridTwoPhaseMediumRecord
   end bubbleEnthalpy;
 
   redeclare replaceable function extends dewEnthalpy
-  "Dew curve specific enthalpy of refrigerant (Ancillary equation)"
+    "Dew curve specific enthalpy of refrigerant (Ancillary equation)"
   protected
     BDSP cf;
     Real hv_1 = 0;
@@ -442,7 +440,7 @@ partial package PartialHybridTwoPhaseMediumRecord
   end dewEnthalpy;
 
   redeclare replaceable function extends bubbleEntropy
-  "Boiling curve specific entropy of refrigerant (Ancillary equation)"
+    "Boiling curve specific entropy of refrigerant (Ancillary equation)"
   protected
     BDSP cf;
     Real sl_1 = 0;
@@ -460,7 +458,7 @@ partial package PartialHybridTwoPhaseMediumRecord
   end bubbleEntropy;
 
   redeclare replaceable function extends dewEntropy
-  "Dew curve specific entropy of propane (Ancillary equation)"
+    "Dew curve specific entropy of propane (Ancillary equation)"
   protected
     BDSP cf;
     Real sv_1 = 0;
@@ -481,11 +479,12 @@ partial package PartialHybridTwoPhaseMediumRecord
     EoS. Just change these functions if needed.
   */
   redeclare replaceable function temperature_ph
-  "Calculates temperature as function of pressure and specific enthalpy"
+    "Calculates temperature as function of pressure and specific enthalpy"
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";
     input SpecificEnthalpy h "Specific enthalpy";
-    input FixedPhase phase=0 "2 for two-phase, 1 for one-phase, 0 if not known";
+    input FixedPhase phase=0
+      "2 for two-phase, 1 for one-phase, 0 if not known";
     output Temperature T "Temperature";
 
   protected
@@ -628,7 +627,7 @@ partial package PartialHybridTwoPhaseMediumRecord
   end temperature_ph;
 
   redeclare replaceable function temperature_ps
-  "Calculates temperature as function of pressure and specific entroy"
+    "Calculates temperature as function of pressure and specific entroy"
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";
     input SpecificEntropy s "Specific entropy";
@@ -775,7 +774,7 @@ partial package PartialHybridTwoPhaseMediumRecord
   end temperature_ps;
 
   redeclare replaceable partial function density_pT
-  "Computes density as a function of pressure and temperature"
+    "Computes density as a function of pressure and temperature"
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";
     input Temperature T "Temperature";
