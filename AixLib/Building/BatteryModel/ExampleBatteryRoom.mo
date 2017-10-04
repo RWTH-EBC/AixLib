@@ -90,10 +90,12 @@ model ExampleBatteryRoom "Example Battery"
     duration=500)
     annotation (Placement(transformation(extent={{-80,-40},{-60,-20}})));
 equation
-  connect(ramp.y, batteryRoom.Battery1_Loss) annotation (Line(points={{-59,0},{
-          -40,0},{-40,8},{-16,8}}, color={0,0,127}));
-  connect(ramp1.y, batteryRoom.Battery2_Loss) annotation (Line(points={{-59,-30},
-          {-40,-30},{-40,-8},{-16,-8}}, color={0,0,127}));
+  connect(ramp.y, batteryRoom.Battery1_Loss)
+    annotation (Line(points={{-59,0},{-40,0},{-40,8},{-16,8}},
+                color={0,0,127}));
+  connect(ramp1.y, batteryRoom.Battery2_Loss)
+    annotation (Line(points={{-59,-30},{-40,-30},{-40,-8},{-16,-8}},
+                color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Ellipse(lineColor = {75,138,73},
                 fillColor={255,255,255},

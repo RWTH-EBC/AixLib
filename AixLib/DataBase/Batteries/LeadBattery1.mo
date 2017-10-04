@@ -10,7 +10,8 @@ record LeadBattery1 "Lead Battery 1"
     radiationArea=12,
     eps=0.95);
 
-  annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}), graphics={
+  annotation (Icon(coordinateSystem(preserveAspectRatio=true,
+        extent={{-100,-100},{100,100}}), graphics={
         Text(
           lineColor={0,0,255},
           extent={{-150,60},{150,100}},
@@ -32,7 +33,7 @@ record LeadBattery1 "Lead Battery 1"
         Line(
           origin={0.0,-25.0},
           points={{0.0,75.0},{0.0,-75.0}},
-          color={64,64,64})}),                        Documentation(info="<html>
+          color={64,64,64})}), Documentation(info="<html>
 <p>
 This icon is indicates a record.
 </p>
