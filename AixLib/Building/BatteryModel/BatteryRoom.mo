@@ -189,23 +189,23 @@ protected
      "List of the fraction factors for the racks";
 
 public
-  Modelica.Blocks.Interfaces.RealInput Battery1_Loss
+  Modelica.Blocks.Interfaces.RealInput ThermalLossBat1
     "Thermal Loss of the first battery type - from external file"
     annotation (Placement(transformation(extent={{-254,64},{-182,136}}),
         iconTransformation(extent={{-200,40},{-120,120}})));
-  Modelica.Blocks.Interfaces.RealInput Battery2_Loss if nBatTypes == 2
+  Modelica.Blocks.Interfaces.RealInput ThermalLossBat2 if nBatTypes == 2
     "Thermal Loss of the second battery type - from external file"
     annotation (Placement(transformation(extent={{-254,-136},{-182,-64}}),
         iconTransformation(extent={{-200,-120},{-120,-40}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_conv
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b PortConv
     "Port for the output of convection heat"
     annotation (Placement(transformation(extent={{172,-88},{228,-32}}),
         iconTransformation(extent={{162,-58},{198,-22}})));
-  Utilities.Interfaces.Star star
+  Utilities.Interfaces.Star Star
     "Port for the output of radiation heat"
     annotation (Placement(transformation(extent={{178,40},{224,80}}),
         iconTransformation(extent={{160,20},{200,60}})));
-  Modelica.Blocks.Interfaces.RealOutput temperatureBat1(
+  Modelica.Blocks.Interfaces.RealOutput TemperatureBat1(
       quantity="ThermodynamicTemperature",
       unit="K",
       displayUnit="degC")
@@ -218,7 +218,7 @@ public
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={60,180})));
-  Modelica.Blocks.Interfaces.RealOutput temperatureBat2(
+  Modelica.Blocks.Interfaces.RealOutput TemperatureBat2(
       quantity="ThermodynamicTemperature",
       unit="K",
       displayUnit="degC") if nBatTypes == 2
@@ -231,7 +231,7 @@ public
         rotation=90,
         origin={120,180})));
 
-  BatteryRack batteryRack_1(
+  BatteryRack BatteryRack1(
     batType=rackParameters[1].batType,
     nParallels=rackParameters[1].nParallels,
     nSeries=rackParameters[1].nSeries,
@@ -240,7 +240,7 @@ public
     batArrangement=rackParameters[1].batArrangement,
     areaStandingAtWall=rackParameters[1].areaStandingAtWall)
     annotation (Placement(transformation(extent={{20,180},{40,200}})));
-  BatteryRack batteryRack_2(
+  BatteryRack BatteryRack2(
     batType=rackParameters[2].batType,
     nParallels=rackParameters[2].nParallels,
     nSeries=rackParameters[2].nSeries,
@@ -249,7 +249,7 @@ public
     batArrangement=rackParameters[2].batArrangement,
     areaStandingAtWall=rackParameters[2].areaStandingAtWall) if nBatRacks > 1
     annotation (Placement(transformation(extent={{20,140},{40,160}})));
-  BatteryRack batteryRack_3(
+  BatteryRack BatteryRack3(
     batType=rackParameters[3].batType,
     nParallels=rackParameters[3].nParallels,
     nSeries=rackParameters[3].nSeries,
@@ -258,7 +258,7 @@ public
     batArrangement=rackParameters[3].batArrangement,
     areaStandingAtWall=rackParameters[3].areaStandingAtWall) if nBatRacks > 2
     annotation (Placement(transformation(extent={{20,100},{40,120}})));
-  BatteryRack batteryRack_4(
+  BatteryRack BatteryRack4(
     batType=rackParameters[4].batType,
     nParallels=rackParameters[4].nParallels,
     nSeries=rackParameters[4].nSeries,
@@ -267,7 +267,7 @@ public
     batArrangement=rackParameters[4].batArrangement,
     areaStandingAtWall=rackParameters[4].areaStandingAtWall) if nBatRacks > 3
     annotation (Placement(transformation(extent={{20,60},{40,80}})));
-  BatteryRack batteryRack_5(
+  BatteryRack BatteryRack5(
     batType=rackParameters[5].batType,
     nParallels=rackParameters[5].nParallels,
     nSeries=rackParameters[5].nSeries,
@@ -276,7 +276,7 @@ public
     batArrangement=rackParameters[5].batArrangement,
     areaStandingAtWall=rackParameters[5].areaStandingAtWall) if nBatRacks > 4
     annotation (Placement(transformation(extent={{20,20},{40,40}})));
-  BatteryRack batteryRack_6(
+  BatteryRack BatteryRack6(
     batType=rackParameters[6].batType,
     nParallels=rackParameters[6].nParallels,
     nSeries=rackParameters[6].nSeries,
@@ -285,7 +285,7 @@ public
     batArrangement=rackParameters[6].batArrangement,
     areaStandingAtWall=rackParameters[6].areaStandingAtWall) if nBatRacks > 5
     annotation (Placement(transformation(extent={{20,-40},{40,-20}})));
-  BatteryRack batteryRack_7(
+  BatteryRack BatteryRack7(
     batType=rackParameters[7].batType,
     nParallels=rackParameters[7].nParallels,
     nSeries=rackParameters[7].nSeries,
@@ -294,7 +294,7 @@ public
     batArrangement=rackParameters[7].batArrangement,
     areaStandingAtWall=rackParameters[7].areaStandingAtWall) if nBatRacks > 6
     annotation (Placement(transformation(extent={{20,-80},{40,-60}})));
-  BatteryRack batteryRack_8(
+  BatteryRack BatteryRack8(
     batType=rackParameters[8].batType,
     nParallels=rackParameters[8].nParallels,
     nSeries=rackParameters[8].nSeries,
@@ -303,7 +303,7 @@ public
     batArrangement=rackParameters[8].batArrangement,
     areaStandingAtWall=rackParameters[8].areaStandingAtWall) if nBatRacks > 7
     annotation (Placement(transformation(extent={{20,-120},{40,-100}})));
-  BatteryRack batteryRack_9(
+  BatteryRack BatteryRack9(
     batType=rackParameters[9].batType,
     nParallels=rackParameters[9].nParallels,
     nSeries=rackParameters[9].nSeries,
@@ -312,7 +312,7 @@ public
     batArrangement=rackParameters[9].batArrangement,
     areaStandingAtWall=rackParameters[9].areaStandingAtWall) if nBatRacks > 8
     annotation (Placement(transformation(extent={{20,-160},{40,-140}})));
-  BatteryRack batteryRack_10(
+  BatteryRack BatteryRack10(
     batType=rackParameters[10].batType,
     nParallels=rackParameters[10].nParallels,
     nSeries=rackParameters[10].nSeries,
@@ -322,61 +322,61 @@ public
     areaStandingAtWall=rackParameters[10].areaStandingAtWall) if nBatRacks > 9
     annotation (Placement(transformation(extent={{20,-200},{40,-180}})));
 
-  Modelica.Blocks.Math.Gain lossFraction1(final k=listFractionFactors[1])
+  Modelica.Blocks.Math.Gain LossFraction1(final k=listFractionFactors[1])
     annotation (Placement(transformation(extent={{-40,180},{-20,200}})));
-  Modelica.Blocks.Math.Gain lossFraction2(final k=listFractionFactors[2]) if
+  Modelica.Blocks.Math.Gain LossFraction2(final k=listFractionFactors[2]) if
        nBatRacks > 1
     annotation (Placement(transformation(extent={{-40,140},{-20,160}})));
-  Modelica.Blocks.Math.Gain lossFraction3(final k=listFractionFactors[3]) if
+  Modelica.Blocks.Math.Gain LossFraction3(final k=listFractionFactors[3]) if
        nBatRacks > 2
     annotation (Placement(transformation(extent={{-40,100},{-20,120}})));
-  Modelica.Blocks.Math.Gain lossFraction4(final k=listFractionFactors[4]) if
+  Modelica.Blocks.Math.Gain LossFraction4(final k=listFractionFactors[4]) if
        nBatRacks > 3
     annotation (Placement(transformation(extent={{-40,60},{-20,80}})));
-  Modelica.Blocks.Math.Gain lossFraction5(final k=listFractionFactors[5]) if
+  Modelica.Blocks.Math.Gain LossFraction5(final k=listFractionFactors[5]) if
        nBatRacks > 4
     annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
-  Modelica.Blocks.Math.Gain lossFraction6(final k=listFractionFactors[6]) if
+  Modelica.Blocks.Math.Gain LossFraction6(final k=listFractionFactors[6]) if
        nBatRacks > 5
     annotation (Placement(transformation(extent={{-40,-40},{-20,-20}})));
-  Modelica.Blocks.Math.Gain lossFraction7(final k=listFractionFactors[7]) if
+  Modelica.Blocks.Math.Gain LossFraction7(final k=listFractionFactors[7]) if
        nBatRacks > 6
     annotation (Placement(transformation(extent={{-40,-80},{-20,-60}})));
-  Modelica.Blocks.Math.Gain lossFraction8(final k=listFractionFactors[8]) if
+  Modelica.Blocks.Math.Gain LossFraction8(final k=listFractionFactors[8]) if
        nBatRacks > 7
     annotation (Placement(transformation(extent={{-40,-120},{-20,-100}})));
-  Modelica.Blocks.Math.Gain lossFraction9(final k=listFractionFactors[9]) if
+  Modelica.Blocks.Math.Gain LossFraction9(final k=listFractionFactors[9]) if
        nBatRacks > 8
     annotation (Placement(transformation(extent={{-40,-160},{-20,-140}})));
-  Modelica.Blocks.Math.Gain lossFraction10(final k=listFractionFactors[10]) if
+  Modelica.Blocks.Math.Gain LossFraction10(final k=listFractionFactors[10]) if
        nBatRacks > 9
     annotation (Placement(transformation(extent={{-40,-200},{-20,-180}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalCollector convCollector(
+  Modelica.Thermal.HeatTransfer.Components.ThermalCollector ConvCollector(
      final m=nBatRacks)
     "Collects the convection heat of the different racks"
     annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={114,-60})));
-  Modelica.Blocks.Logical.Switch lossSwitch1
+  Modelica.Blocks.Logical.Switch LossSwitch1
     annotation (Placement(transformation(extent={{-80,180},{-60,200}})));
-  Modelica.Blocks.Logical.Switch lossSwitch2 if nBatRacks > 1
+  Modelica.Blocks.Logical.Switch LossSwitch2 if nBatRacks > 1
     annotation (Placement(transformation(extent={{-80,140},{-60,160}})));
-  Modelica.Blocks.Logical.Switch lossSwitch3 if nBatRacks > 2
+  Modelica.Blocks.Logical.Switch LossSwitch3 if nBatRacks > 2
     annotation (Placement(transformation(extent={{-80,100},{-60,120}})));
-  Modelica.Blocks.Logical.Switch lossSwitch4 if nBatRacks > 3
+  Modelica.Blocks.Logical.Switch LossSwitch4 if nBatRacks > 3
     annotation (Placement(transformation(extent={{-78,60},{-58,80}})));
-  Modelica.Blocks.Logical.Switch lossSwitch5 if nBatRacks > 4
+  Modelica.Blocks.Logical.Switch LossSwitch5 if nBatRacks > 4
     annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
-  Modelica.Blocks.Logical.Switch lossSwitch6 if nBatRacks > 5
+  Modelica.Blocks.Logical.Switch LossSwitch6 if nBatRacks > 5
     annotation (Placement(transformation(extent={{-80,-40},{-60,-20}})));
-  Modelica.Blocks.Logical.Switch lossSwitch7 if nBatRacks > 6
+  Modelica.Blocks.Logical.Switch LossSwitch7 if nBatRacks > 6
     annotation (Placement(transformation(extent={{-78,-80},{-58,-60}})));
-  Modelica.Blocks.Logical.Switch lossSwitch8 if nBatRacks > 7
+  Modelica.Blocks.Logical.Switch LossSwitch8 if nBatRacks > 7
     annotation (Placement(transformation(extent={{-80,-120},{-60,-100}})));
-  Modelica.Blocks.Logical.Switch lossSwitch9 if nBatRacks > 8
+  Modelica.Blocks.Logical.Switch LossSwitch9 if nBatRacks > 8
     annotation (Placement(transformation(extent={{-80,-160},{-60,-140}})));
-  Modelica.Blocks.Logical.Switch lossSwitch10 if nBatRacks > 9
+  Modelica.Blocks.Logical.Switch LossSwitch10 if nBatRacks > 9
     annotation (Placement(transformation(extent={{-80,-200},{-60,-180}})));
   Modelica.Blocks.Sources.RealExpression Zero1(y=0) if
        nBatTypes == 1
@@ -409,37 +409,37 @@ public
        nBatTypes == 1 and nBatRacks > 9
     annotation (Placement(transformation(extent={{-94,-212},{-88,-196}})));
 
-  Modelica.Blocks.Sources.BooleanExpression batteryType1(y=batType1)
+  Modelica.Blocks.Sources.BooleanExpression BatteryType1(y=batType1)
     annotation (Placement(transformation(extent={{-128,180},{-104,200}})));
-  Modelica.Blocks.Sources.BooleanExpression batteryType2(y=batType2) if
+  Modelica.Blocks.Sources.BooleanExpression BatteryType2(y=batType2) if
        nBatRacks > 1
     annotation (Placement(transformation(extent={{-128,140},{-104,160}})));
-  Modelica.Blocks.Sources.BooleanExpression batteryType3(y=batType3) if
+  Modelica.Blocks.Sources.BooleanExpression BatteryType3(y=batType3) if
        nBatRacks > 2
     annotation (Placement(transformation(extent={{-128,100},{-104,120}})));
-  Modelica.Blocks.Sources.BooleanExpression batteryType4(y=batType4) if
+  Modelica.Blocks.Sources.BooleanExpression BatteryType4(y=batType4) if
        nBatRacks > 3
     annotation (Placement(transformation(extent={{-128,60},{-104,80}})));
-  Modelica.Blocks.Sources.BooleanExpression batteryType5(y=batType5) if
+  Modelica.Blocks.Sources.BooleanExpression BatteryType5(y=batType5) if
        nBatRacks > 4
     annotation (Placement(transformation(extent={{-130,20},{-106,40}})));
-  Modelica.Blocks.Sources.BooleanExpression batteryType6(y=batType6) if
+  Modelica.Blocks.Sources.BooleanExpression BatteryType6(y=batType6) if
        nBatRacks > 5
     annotation (Placement(transformation(extent={{-130,-40},{-106,-20}})));
-  Modelica.Blocks.Sources.BooleanExpression batteryType7(y=batType7) if
+  Modelica.Blocks.Sources.BooleanExpression BatteryType7(y=batType7) if
        nBatRacks > 6
     annotation (Placement(transformation(extent={{-130,-80},{-106,-60}})));
-  Modelica.Blocks.Sources.BooleanExpression batteryType8(y=batType8) if
+  Modelica.Blocks.Sources.BooleanExpression BatteryType8(y=batType8) if
        nBatRacks > 7
     annotation (Placement(transformation(extent={{-130,-120},{-106,-100}})));
-  Modelica.Blocks.Sources.BooleanExpression batteryType9(y=batType9) if
+  Modelica.Blocks.Sources.BooleanExpression BatteryType9(y=batType9) if
        nBatRacks > 8
     annotation (Placement(transformation(extent={{-132,-160},{-108,-140}})));
-  Modelica.Blocks.Sources.BooleanExpression batteryType10(y=batType10) if
+  Modelica.Blocks.Sources.BooleanExpression BatteryType10(y=batType10) if
        nBatRacks > 9
     annotation (Placement(transformation(extent={{-132,-200},{-108,-180}})));
 
-  Utilities.Interfaces.ThermalRadiationCollector radCollector(
+  Utilities.Interfaces.ThermalRadiationCollector RadCollector(
      final m=nBatRacks)
     annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
@@ -448,213 +448,213 @@ public
 
 equation
 
-  connect(lossFraction1.y, batteryRack_1.thermalLoss)
+  connect(LossFraction1.y, BatteryRack1.ThermalLoss)
     annotation (Line(points={{-19,190},{20,190}}, color={0,0,127}));
-  connect(lossFraction2.y, batteryRack_2.thermalLoss)
+  connect(LossFraction2.y, BatteryRack2.ThermalLoss)
     annotation (Line(points={{-19,150},{20,150}}, color={0,0,127}));
-  connect(lossFraction3.y, batteryRack_3.thermalLoss)
+  connect(LossFraction3.y, BatteryRack3.ThermalLoss)
     annotation (Line(points={{-19,110},{20,110}}, color={0,0,127}));
-  connect(lossFraction4.y, batteryRack_4.thermalLoss)
+  connect(LossFraction4.y, BatteryRack4.ThermalLoss)
     annotation (Line(points={{-19,70},{20,70}}, color={0,0,127}));
-  connect(lossFraction5.y, batteryRack_5.thermalLoss)
+  connect(LossFraction5.y, BatteryRack5.ThermalLoss)
     annotation (Line(points={{-19,30},{20,30}}, color={0,0,127}));
-  connect(lossFraction6.y, batteryRack_6.thermalLoss)
+  connect(LossFraction6.y, BatteryRack6.ThermalLoss)
     annotation (Line(points={{-19,-30},{20,-30}}, color={0,0,127}));
-  connect(lossFraction7.y, batteryRack_7.thermalLoss)
+  connect(LossFraction7.y, BatteryRack7.ThermalLoss)
     annotation (Line(points={{-19,-70},{20,-70}}, color={0,0,127}));
-  connect(lossFraction8.y, batteryRack_8.thermalLoss)
+  connect(LossFraction8.y, BatteryRack8.ThermalLoss)
     annotation (Line(points={{-19,-110},{20,-110}}, color={0,0,127}));
-  connect(lossFraction9.y, batteryRack_9.thermalLoss)
+  connect(LossFraction9.y, BatteryRack9.ThermalLoss)
     annotation (Line(points={{-19,-150},{20,-150}}, color={0,0,127}));
-  connect(lossFraction10.y, batteryRack_10.thermalLoss)
+  connect(LossFraction10.y, BatteryRack10.ThermalLoss)
     annotation (Line(points={{-19,-190},{20,-190}}, color={0,0,127}));
-  connect(batteryRack_1.port_conv, convCollector.port_a[1]) annotation (Line(
+  connect(BatteryRack1.PortConv, ConvCollector.port_a[1]) annotation (Line(
         points={{40,186},{60,186},{60,-60},{94,-60}}, color={191,0,0}));
-  connect(batteryRack_2.port_conv, convCollector.port_a[2]) annotation (Line(
+  connect(BatteryRack2.PortConv, ConvCollector.port_a[2]) annotation (Line(
         points={{40,146},{60,146},{60,-60},{94,-60}}, color={191,0,0}));
-  connect(batteryRack_3.port_conv, convCollector.port_a[3]) annotation (Line(
+  connect(BatteryRack3.PortConv, ConvCollector.port_a[3]) annotation (Line(
         points={{40,106},{60,106},{60,-60},{94,-60}}, color={191,0,0}));
-  connect(batteryRack_4.port_conv, convCollector.port_a[4]) annotation (Line(
+  connect(BatteryRack4.PortConv, ConvCollector.port_a[4]) annotation (Line(
         points={{40,66},{60,66},{60,-60},{94,-60}}, color={191,0,0}));
-  connect(batteryRack_5.port_conv, convCollector.port_a[5]) annotation (Line(
+  connect(BatteryRack5.PortConv, ConvCollector.port_a[5]) annotation (Line(
         points={{40,26},{60,26},{60,-60},{94,-60}}, color={191,0,0}));
-  connect(batteryRack_6.port_conv, convCollector.port_a[6]) annotation (Line(
+  connect(BatteryRack6.PortConv, ConvCollector.port_a[6]) annotation (Line(
         points={{40,-34},{60,-34},{60,-60},{94,-60}}, color={191,0,0}));
-  connect(batteryRack_7.port_conv, convCollector.port_a[7]) annotation (Line(
+  connect(BatteryRack7.PortConv, ConvCollector.port_a[7]) annotation (Line(
         points={{40,-74},{60,-74},{60,-60},{94,-60}}, color={191,0,0}));
-  connect(batteryRack_8.port_conv, convCollector.port_a[8]) annotation (Line(
+  connect(BatteryRack8.PortConv, ConvCollector.port_a[8]) annotation (Line(
         points={{40,-114},{60,-114},{60,-60},{94,-60}}, color={191,0,0}));
-  connect(batteryRack_9.port_conv, convCollector.port_a[9]) annotation (Line(
+  connect(BatteryRack9.PortConv, ConvCollector.port_a[9]) annotation (Line(
         points={{40,-154},{60,-154},{60,-60},{94,-60}}, color={191,0,0}));
-  connect(batteryRack_10.port_conv, convCollector.port_a[10]) annotation (Line(
+  connect(BatteryRack10.PortConv, ConvCollector.port_a[10]) annotation (Line(
         points={{40,-194},{60,-194},{60,-60},{94,-60}}, color={191,0,0}));
-  connect(lossSwitch1.y, lossFraction1.u)
+  connect(LossSwitch1.y, LossFraction1.u)
     annotation (Line(points={{-59,190},{-42,190}}, color={0,0,127}));
-  connect(lossSwitch2.y, lossFraction2.u)
+  connect(LossSwitch2.y, LossFraction2.u)
     annotation (Line(points={{-59,150},{-42,150}}, color={0,0,127}));
-  connect(lossSwitch3.y, lossFraction3.u)
+  connect(LossSwitch3.y, LossFraction3.u)
     annotation (Line(points={{-59,110},{-42,110}}, color={0,0,127}));
-  connect(lossSwitch4.y, lossFraction4.u)
+  connect(LossSwitch4.y, LossFraction4.u)
     annotation (Line(points={{-57,70},{-42,70}}, color={0,0,127}));
-  connect(lossSwitch5.y, lossFraction5.u)
+  connect(LossSwitch5.y, LossFraction5.u)
     annotation (Line(points={{-59,30},{-42,30}}, color={0,0,127}));
-  connect(lossSwitch6.y, lossFraction6.u)
+  connect(LossSwitch6.y, LossFraction6.u)
     annotation (Line(points={{-59,-30},{-42,-30}}, color={0,0,127}));
-  connect(lossSwitch7.y, lossFraction7.u)
+  connect(LossSwitch7.y, LossFraction7.u)
     annotation (Line(points={{-57,-70},{-42,-70}}, color={0,0,127}));
-  connect(lossSwitch8.y, lossFraction8.u)
+  connect(LossSwitch8.y, LossFraction8.u)
     annotation (Line(points={{-59,-110},{-42,-110}}, color={0,0,127}));
-  connect(lossSwitch9.y, lossFraction9.u)
+  connect(LossSwitch9.y, LossFraction9.u)
     annotation (Line(points={{-59,-150},{-42,-150}}, color={0,0,127}));
-  connect(lossSwitch10.y, lossFraction10.u)
+  connect(LossSwitch10.y, LossFraction10.u)
     annotation (Line(points={{-59,-190},{-42,-190}}, color={0,0,127}));
-  connect(Zero2.y, lossSwitch2.u3)
+  connect(Zero2.y, LossSwitch2.u3)
     annotation (Line(points={{-87.7,134},{-82,134},{-82,142}},
                 color={0,0,127}));
-  connect(Zero3.y, lossSwitch3.u3)
+  connect(Zero3.y, LossSwitch3.u3)
     annotation (Line(points={{-87.7,94},{-82,94},{-82,102}}, color={0,0,127}));
-  connect(Zero4.y, lossSwitch4.u3)
+  connect(Zero4.y, LossSwitch4.u3)
     annotation (Line(points={{-87.7,52},{-80,52},{-80,62}}, color={0,0,127}));
-  connect(Zero5.y, lossSwitch5.u3)
+  connect(Zero5.y, LossSwitch5.u3)
     annotation (Line(points={{-87.7,12},{-82,12},{-82,22}}, color={0,0,127}));
-  connect(Zero6.y, lossSwitch6.u3)
+  connect(Zero6.y, LossSwitch6.u3)
     annotation (Line(points={{-87.7,-46},{-82,-46},{-82,-38}},
                 color={0,0,127}));
-  connect(Zero7.y, lossSwitch7.u3)
+  connect(Zero7.y, LossSwitch7.u3)
     annotation (Line(points={{-87.7,-86},{-80,-86},{-80,-78}},
                 color={0,0,127}));
-  connect(Zero8.y, lossSwitch8.u3)
+  connect(Zero8.y, LossSwitch8.u3)
     annotation (Line(points={{-87.7,-126},{-82,-126},{-82,-118}},
                 color={0,0,127}));
-  connect(Zero1.y, lossSwitch1.u3)
+  connect(Zero1.y, LossSwitch1.u3)
     annotation (Line(points={{-87.7,174},{-82,174},{-82,182}},
                 color={0,0,127}));
-  connect(Zero9.y, lossSwitch9.u3)
+  connect(Zero9.y, LossSwitch9.u3)
     annotation (Line(points={{-87.7,-168},{-82,-168},{-82,-158}},
                 color={0,0,127}));
-  connect(Zero10.y, lossSwitch10.u3)
+  connect(Zero10.y, LossSwitch10.u3)
     annotation (Line(points={{-87.7,-204},{-82,-204},{-82,-198}},
                 color={0,0,127}));
-  connect(batteryType1.y, lossSwitch1.u2)
+  connect(BatteryType1.y, LossSwitch1.u2)
     annotation (Line(points={{-102.8,190},{-82,190}}, color={255,0,255}));
-  connect(batteryType2.y, lossSwitch2.u2)
+  connect(BatteryType2.y, LossSwitch2.u2)
     annotation (Line(points={{-102.8,150},{-82,150}}, color={255,0,255}));
-  connect(batteryType3.y, lossSwitch3.u2)
+  connect(BatteryType3.y, LossSwitch3.u2)
     annotation (Line(points={{-102.8,110},{-92,110},{-92,110},{-82,110}},
                 color={255,0,255}));
-  connect(batteryType4.y, lossSwitch4.u2)
+  connect(BatteryType4.y, LossSwitch4.u2)
     annotation (Line(points={{-102.8,70},{-80,70}}, color={255,0,255}));
-  connect(batteryType5.y, lossSwitch5.u2)
+  connect(BatteryType5.y, LossSwitch5.u2)
     annotation (Line(points={{-104.8,30},{-82,30}}, color={255,0,255}));
-  connect(batteryType6.y, lossSwitch6.u2)
+  connect(BatteryType6.y, LossSwitch6.u2)
     annotation (Line(points={{-104.8,-30},{-82,-30}}, color={255,0,255}));
-  connect(batteryType7.y, lossSwitch7.u2)
+  connect(BatteryType7.y, LossSwitch7.u2)
     annotation (Line(points={{-104.8,-70},{-80,-70}}, color={255,0,255}));
-  connect(batteryType8.y, lossSwitch8.u2)
+  connect(BatteryType8.y, LossSwitch8.u2)
     annotation (Line(points={{-104.8,-110},{-82,-110}}, color={255,0,255}));
-  connect(batteryType9.y, lossSwitch9.u2)
+  connect(BatteryType9.y, LossSwitch9.u2)
     annotation (Line(points={{-106.8,-150},{-82,-150}}, color={255,0,255}));
-  connect(batteryType10.y, lossSwitch10.u2)
+  connect(BatteryType10.y, LossSwitch10.u2)
     annotation (Line(points={{-106.8,-190},{-82,-190}}, color={255,0,255}));
-  connect(Battery1_Loss, lossSwitch1.u1)
+  connect(ThermalLossBat1, LossSwitch1.u1)
     annotation (Line(points={{-218,100},{-140,100},{-140,198},{-82,198}},
                 color={0,0,127}));
-  connect(Battery1_Loss, lossSwitch2.u1)
+  connect(ThermalLossBat1, LossSwitch2.u1)
     annotation (Line(points={{-218,100},{-140,100},{-140,158},{-82,158}},
                 color={0,0,127}));
-  connect(Battery1_Loss, lossSwitch3.u1)
+  connect(ThermalLossBat1, LossSwitch3.u1)
     annotation (Line(points={{-218,100},{-140,100},{-140,118},{-82,118}},
                 color={0,0,127}));
-  connect(Battery1_Loss, lossSwitch4.u1)
+  connect(ThermalLossBat1, LossSwitch4.u1)
     annotation (Line(points={{-218,100},{-140,100},{-140,78},{-80,78}},
                 color={0,0,127}));
-  connect(Battery1_Loss, lossSwitch5.u1)
+  connect(ThermalLossBat1, LossSwitch5.u1)
     annotation (Line(points={{-218,100},{-140,100},{-140,38},{-82,38}},
                 color={0,0,127}));
-  connect(Battery1_Loss, lossSwitch6.u1)
+  connect(ThermalLossBat1, LossSwitch6.u1)
     annotation (Line(points={{-218,100},{-140,100},{-140,-22},{-82,-22}},
                 color={0,0,127}));
-  connect(Battery1_Loss, lossSwitch7.u1)
+  connect(ThermalLossBat1, LossSwitch7.u1)
     annotation (Line(points={{-218,100},{-140,100},{-140,-62},{-80,-62}},
                 color={0,0,127}));
-  connect(Battery1_Loss, lossSwitch8.u1)
+  connect(ThermalLossBat1, LossSwitch8.u1)
     annotation (Line(points={{-218,100},{-140,100},{-140,-102},{-82,-102}},
                 color={0,0,127}));
-  connect(Battery1_Loss, lossSwitch9.u1)
+  connect(ThermalLossBat1, LossSwitch9.u1)
     annotation (Line(points={{-218,100},{-140,100},{-140,-142},{-82,-142}},
                 color={0,0,127}));
-  connect(Battery1_Loss, lossSwitch10.u1)
+  connect(ThermalLossBat1, LossSwitch10.u1)
     annotation (Line(points={{-218,100},{-140,100},{-140,-182},{-82,-182}},
                 color={0,0,127}));
-  connect(Battery2_Loss, lossSwitch1.u3)
+  connect(ThermalLossBat2, LossSwitch1.u3)
     annotation (Line(points={{-218,-100},{-160,-100},{-160,182},{-82,182}},
                 color={0,0,127}));
-  connect(Battery2_Loss, lossSwitch2.u3)
+  connect(ThermalLossBat2, LossSwitch2.u3)
     annotation (Line(points={{-218,-100},{-160,-100},{-160,142},{-82,142}},
                 color={0,0,127}));
-  connect(Battery2_Loss, lossSwitch3.u3)
+  connect(ThermalLossBat2, LossSwitch3.u3)
     annotation (Line(points={{-218,-100},{-160,-100},{-160,102},{-82,102}},
                 color={0,0,127}));
-  connect(Battery2_Loss, lossSwitch4.u3)
+  connect(ThermalLossBat2, LossSwitch4.u3)
     annotation (Line(points={{-218,-100},{-160,-100},{-160,62},{-80,62}},
                 color={0,0,127}));
-  connect(Battery2_Loss, lossSwitch5.u3)
+  connect(ThermalLossBat2, LossSwitch5.u3)
     annotation (Line(points={{-218,-100},{-160,-100},{-160,22},{-82,22}},
                 color={0,0,127}));
-  connect(Battery2_Loss, lossSwitch6.u3)
+  connect(ThermalLossBat2, LossSwitch6.u3)
     annotation (Line(points={{-218,-100},{-160,-100},{-160,-38},{-82,-38}},
                 color={0,0,127}));
-  connect(Battery2_Loss, lossSwitch7.u3)
+  connect(ThermalLossBat2, LossSwitch7.u3)
     annotation (Line(points={{-218,-100},{-160,-100},{-160,-78},{-80,-78}},
                 color={0,0,127}));
-  connect(Battery2_Loss, lossSwitch8.u3)
+  connect(ThermalLossBat2, LossSwitch8.u3)
     annotation (Line(points={{-218,-100},{-160,-100},{-160,-118},{-82,-118}},
                 color={0,0,127}));
-  connect(Battery2_Loss, lossSwitch9.u3)
+  connect(ThermalLossBat2, LossSwitch9.u3)
     annotation (Line(points={{-218,-100},{-160,-100},{-160,-158},{-82,-158}},
                 color={0,0,127}));
-  connect(Battery2_Loss, lossSwitch10.u3)
+  connect(ThermalLossBat2, LossSwitch10.u3)
     annotation (Line(points={{-218,-100},{-160,-100},{-160,-198},{-82,-198}},
                 color={0,0,127}));
-  connect(convCollector.port_b, port_conv)
+  connect(ConvCollector.port_b, PortConv)
     annotation (Line(points={{134,-60},{200,-60}}, color={191,0,0}));
-  connect(batteryRack_1.temperatureBat, temperatureBat1)
+  connect(BatteryRack1.TemperatureBat, TemperatureBat1)
     annotation (
       Line(points={{36,200},{36,210},{92,210},{92,160},{120,160},{120,210}},
         color={0,0,127}));
-  connect(batteryRack_10.temperatureBat, temperatureBat2)
+  connect(BatteryRack10.TemperatureBat, TemperatureBat2)
     annotation (
      Line(points={{36,-180},{36,-168},{160,-168},{160,210}}, color={0,0,127}));
-  connect(radCollector.Star_b, star)
+  connect(RadCollector.Star_b, Star)
     annotation (Line(points={{133.6,60},{201,60}}, color={95,95,95}));
-  connect(batteryRack_1.star, radCollector.Star_a[1])
+  connect(BatteryRack1.Star, RadCollector.Star_a[1])
     annotation (Line(points={{
           40,192},{80,192},{80,60},{94,60}}, color={95,95,95}));
-  connect(batteryRack_2.star, radCollector.Star_a[2])
+  connect(BatteryRack2.Star, RadCollector.Star_a[2])
     annotation (Line(points={{
           40,152},{80,152},{80,60},{94,60}}, color={95,95,95}));
-  connect(batteryRack_3.star, radCollector.Star_a[3])
+  connect(BatteryRack3.Star, RadCollector.Star_a[3])
     annotation (Line(points={{
           40,112},{80,112},{80,60},{94,60}}, color={95,95,95}));
-  connect(batteryRack_4.star, radCollector.Star_a[4])
+  connect(BatteryRack4.Star, RadCollector.Star_a[4])
     annotation (Line(points={{
           40,72},{80,72},{80,60},{94,60}}, color={95,95,95}));
-  connect(batteryRack_5.star, radCollector.Star_a[5])
+  connect(BatteryRack5.Star, RadCollector.Star_a[5])
     annotation (Line(points={{
           40,32},{80,32},{80,60},{94,60}}, color={95,95,95}));
-  connect(batteryRack_6.star, radCollector.Star_a[6])
+  connect(BatteryRack6.Star, RadCollector.Star_a[6])
     annotation (Line(points={{
           40,-28},{80,-28},{80,60},{94,60}}, color={95,95,95}));
-  connect(batteryRack_7.star, radCollector.Star_a[7])
+  connect(BatteryRack7.Star, RadCollector.Star_a[7])
     annotation (Line(points={{
           40,-68},{80,-68},{80,60},{94,60}}, color={95,95,95}));
-  connect(batteryRack_8.star, radCollector.Star_a[8])
+  connect(BatteryRack8.Star, RadCollector.Star_a[8])
     annotation (Line(points={{
           40,-108},{80,-108},{80,60},{94,60}}, color={95,95,95}));
-  connect(batteryRack_9.star, radCollector.Star_a[9])
+  connect(BatteryRack9.Star, RadCollector.Star_a[9])
     annotation (Line(points={{
           40,-148},{80,-148},{80,60},{94,60}}, color={95,95,95}));
-  connect(batteryRack_10.star, radCollector.Star_a[10])
+  connect(BatteryRack10.Star, RadCollector.Star_a[10])
     annotation (Line(points=
          {{40,-188},{80,-188},{80,60},{94,60}}, color={95,95,95}));
   annotation (

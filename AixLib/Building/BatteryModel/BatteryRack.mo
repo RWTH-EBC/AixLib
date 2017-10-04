@@ -23,21 +23,21 @@ model BatteryRack
      "default=0, area of the rack, which is placed at the wall,
      so there is no vertical heat convection.";
 
-  Modelica.Blocks.Interfaces.RealInput thermalLoss
+  Modelica.Blocks.Interfaces.RealInput ThermalLoss
     "Thermal loss of the battery - from external file"
     annotation (Placement(transformation(extent={{-120,-20},{-80,20}}),
         iconTransformation(extent={{-120,-20},{-80,20}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow PrescribedHeatFlow
     "Converts the real heat input to heat"
     annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapBat(
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor HeatCapBat(
     final C=nParallels*nSeries*nStacked*batType.cp*batType.massBat)
     "Heat capacity of the battery (C=nBats*cp_Bat*mass_Bat)"
     annotation (Placement(transformation(extent={{-10,70},{10,90}})));
-  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor TemperatureSensor
     "Temperature of the battery"
     annotation (Placement(transformation(extent={{30,30},{50,50}})));
-  Modelica.Blocks.Interfaces.RealOutput temperatureBat(
+  Modelica.Blocks.Interfaces.RealOutput TemperatureBat(
       quantity="ThermodynamicTemperature",
       unit="K",
       displayUnit="degC") "Output of the battery's temperature"
@@ -48,7 +48,7 @@ model BatteryRack
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={60,100})));
-  AixLib.Utilities.HeatTransfer.HeatConv_inside heatConv_fluidOnTop(
+  AixLib.Utilities.HeatTransfer.HeatConv_inside HeatConvFluidOnTop(
       final surfaceOrientation=2,
       final A= (if airBetweenStacks==true
                 then nStacked*nParallels*nSeries*batType.width*batType.length
@@ -56,7 +56,7 @@ model BatteryRack
     "Block which calculates the horizontal
     heat convection on top of the battery"
     annotation (Placement(transformation(extent={{50,-50},{30,-30}})));
-  AixLib.Utilities.HeatTransfer.HeatConv_inside heatConv_Vertical(
+  AixLib.Utilities.HeatTransfer.HeatConv_inside HeatConvVertical(
       final surfaceOrientation=1,
       final A= (if batArrangement==true
                 then 2*nStacked*nParallels*batType.width*batType.height
@@ -67,56 +67,56 @@ model BatteryRack
                      - areaStandingAtWall))
     "Block which calculates the vertical heat convection of the battery"
     annotation (Placement(transformation(extent={{50,-30},{30,-10}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_conv
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b PortConv
     "Port for the output of convection heat"                    annotation (
       Placement(transformation(extent={{90,-50},{110,-30}}),
                 iconTransformation(extent={{90,-50},{110,-30}})));
-  AixLib.Utilities.Interfaces.Star star "Port for the output of radiation heat"
+  AixLib.Utilities.Interfaces.Star Star "Port for the output of radiation heat"
     annotation (Placement(transformation(extent={{90,10},{110,30}}),
         iconTransformation(extent={{90,10},{110,30}})));
 
-  AixLib.Utilities.HeatTransfer.HeatConv_inside heatConv_horizontalFacingDown(
+  AixLib.Utilities.HeatTransfer.HeatConv_inside HeatConvHorizontalFacingDown(
       final surfaceOrientation=3,
       final A=(nStacked - 1)*nParallels*nSeries*batType.width*batType.length) if
          airBetweenStacks and nStacked > 1
     "Block which calculates the horizontal
     heat convection at the bottom of the battery"
     annotation (Placement(transformation(extent={{50,-70},{30,-50}})));
-  Utilities.HeatTransfer.HeatToStar heatToStar(
+  Utilities.HeatTransfer.HeatToStar HeatToStar(
       final A=batType.radiationArea,
       final eps=batType.eps) "Converts the heat to the radiation heat"
     annotation (Placement(transformation(extent={{30,10},{50,30}})));
 equation
-  connect(thermalLoss, prescribedHeatFlow.Q_flow)
+  connect(ThermalLoss, PrescribedHeatFlow.Q_flow)
     annotation (Line(points={{-100,0},{-50,0}}, color={0,0,127}));
-  connect(prescribedHeatFlow.port, heatCapBat.port)
+  connect(PrescribedHeatFlow.port, HeatCapBat.port)
     annotation (Line(points={{-30,0},{0,0},{0,70}}, color={191,0,0}));
-  connect(prescribedHeatFlow.port, temperatureSensor.port)
+  connect(PrescribedHeatFlow.port, TemperatureSensor.port)
     annotation (Line(points={{-30,0},{0,0},{0,40},{30,40}},
                 color={191,0,0}));
-  connect(temperatureSensor.T, temperatureBat)
+  connect(TemperatureSensor.T, TemperatureBat)
     annotation (Line(points={{50,40},{60,40},{60,100}},
                 color={0,0,127}));
-  connect(prescribedHeatFlow.port, heatToStar.Therm)
+  connect(PrescribedHeatFlow.port, HeatToStar.Therm)
     annotation (Line(points={{-30,0},{0,0},{0,20},{30.8,20}},
                 color={191,0,0}));
-  connect(heatToStar.Star, star)
+  connect(HeatToStar.Star, Star)
     annotation (Line(points={{49.1,20},{100,20}}, color={95,95,95}));
-  connect(heatConv_Vertical.port_a, port_conv)
+  connect(HeatConvVertical.port_a, PortConv)
     annotation (Line(points={{50,-20}, {80,-20},{80,-40},{100,-40}},
                 color={191,0,0}));
-  connect(prescribedHeatFlow.port, heatConv_Vertical.port_b)
+  connect(PrescribedHeatFlow.port, HeatConvVertical.port_b)
     annotation (Line(points={{-30,0},{0,0},{0,-20},{30,-20}},
                 color={191,0,0}));
-  connect(heatConv_fluidOnTop.port_a, port_conv)
+  connect(HeatConvFluidOnTop.port_a, PortConv)
     annotation (Line(points={{50,-40},{100,-40}}, color={191,0,0}));
-  connect(prescribedHeatFlow.port, heatConv_fluidOnTop.port_b)
+  connect(PrescribedHeatFlow.port, HeatConvFluidOnTop.port_b)
     annotation (Line(points={{-30,0},{0,0},{0,-40},{30,-40}},
                 color={191,0,0}));
-  connect(prescribedHeatFlow.port, heatConv_horizontalFacingDown.port_b)
+  connect(PrescribedHeatFlow.port, HeatConvHorizontalFacingDown.port_b)
     annotation (Line(points={{-30,0},{0,0},{0,-60},{30,-60}},
                 color={191,0,0}));
-  connect(heatConv_horizontalFacingDown.port_a, port_conv)
+  connect(HeatConvHorizontalFacingDown.port_a, PortConv)
     annotation (Line(points={{50,-60},{80,-60},{80,-40},{100,-40}},
                 color={191,0,0}));
   annotation (

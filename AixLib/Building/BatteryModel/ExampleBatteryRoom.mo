@@ -1,12 +1,12 @@
 within AixLib.Building.BatteryModel;
 model ExampleBatteryRoom "Example Battery"
-  Modelica.Blocks.Sources.Ramp ramp(
+  Modelica.Blocks.Sources.Ramp Ramp(
     offset=0,
     startTime=2,
     height=1000000,
     duration=500)
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
-  BatteryRoom batteryRoom(
+  BatteryRoom BatRoom(
     batType3=false,
     batType4=false,
     nBatTypes=2,
@@ -83,17 +83,17 @@ model ExampleBatteryRoom "Example Battery"
         batArrangement=true,
         areaStandingAtWall=0)})
     annotation (Placement(transformation(extent={{-20,-20},{20,20}})));
-  Modelica.Blocks.Sources.Ramp ramp1(
+  Modelica.Blocks.Sources.Ramp Ramp1(
     offset=0,
     startTime=2,
     height=1000000,
     duration=500)
     annotation (Placement(transformation(extent={{-80,-40},{-60,-20}})));
 equation
-  connect(ramp.y, batteryRoom.Battery1_Loss)
+  connect(Ramp.y, BatRoom.ThermalLossBat1)
     annotation (Line(points={{-59,0},{-40,0},{-40,8},{-16,8}},
                 color={0,0,127}));
-  connect(ramp1.y, batteryRoom.Battery2_Loss)
+  connect(Ramp1.y, BatRoom.ThermalLossBat2)
     annotation (Line(points={{-59,-30},{-40,-30},{-40,-8},{-16,-8}},
                 color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
