@@ -303,7 +303,6 @@ public
     batArrangement=rackParameters[8].batArrangement,
     areaStandingAtWall=rackParameters[8].areaStandingAtWall) if nBatRacks > 7
     annotation (Placement(transformation(extent={{20,-120},{40,-100}})));
-
   BatteryRack batteryRack_9(
     batType=rackParameters[9].batType,
     nParallels=rackParameters[9].nParallels,
@@ -323,37 +322,37 @@ public
     areaStandingAtWall=rackParameters[10].areaStandingAtWall) if nBatRacks > 9
     annotation (Placement(transformation(extent={{20,-200},{40,-180}})));
 
-  Modelica.Blocks.Math.Gain lossFraction1(k=listFractionFactors[1])
+  Modelica.Blocks.Math.Gain lossFraction1(final k=listFractionFactors[1])
     annotation (Placement(transformation(extent={{-40,180},{-20,200}})));
-  Modelica.Blocks.Math.Gain lossFraction2(k=listFractionFactors[2]) if
+  Modelica.Blocks.Math.Gain lossFraction2(final k=listFractionFactors[2]) if
        nBatRacks > 1
     annotation (Placement(transformation(extent={{-40,140},{-20,160}})));
-  Modelica.Blocks.Math.Gain lossFraction3(k=listFractionFactors[3]) if
+  Modelica.Blocks.Math.Gain lossFraction3(final k=listFractionFactors[3]) if
        nBatRacks > 2
     annotation (Placement(transformation(extent={{-40,100},{-20,120}})));
-  Modelica.Blocks.Math.Gain lossFraction4(k=listFractionFactors[4]) if
+  Modelica.Blocks.Math.Gain lossFraction4(final k=listFractionFactors[4]) if
        nBatRacks > 3
     annotation (Placement(transformation(extent={{-40,60},{-20,80}})));
-  Modelica.Blocks.Math.Gain lossFraction5(k=listFractionFactors[5]) if
+  Modelica.Blocks.Math.Gain lossFraction5(final k=listFractionFactors[5]) if
        nBatRacks > 4
     annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
-  Modelica.Blocks.Math.Gain lossFraction6(k=listFractionFactors[6]) if
+  Modelica.Blocks.Math.Gain lossFraction6(final k=listFractionFactors[6]) if
        nBatRacks > 5
     annotation (Placement(transformation(extent={{-40,-40},{-20,-20}})));
-  Modelica.Blocks.Math.Gain lossFraction7(k=listFractionFactors[7]) if
+  Modelica.Blocks.Math.Gain lossFraction7(final k=listFractionFactors[7]) if
        nBatRacks > 6
     annotation (Placement(transformation(extent={{-40,-80},{-20,-60}})));
-  Modelica.Blocks.Math.Gain lossFraction8(k=listFractionFactors[8]) if
+  Modelica.Blocks.Math.Gain lossFraction8(final k=listFractionFactors[8]) if
        nBatRacks > 7
     annotation (Placement(transformation(extent={{-40,-120},{-20,-100}})));
-  Modelica.Blocks.Math.Gain lossFraction9(k=listFractionFactors[9]) if
+  Modelica.Blocks.Math.Gain lossFraction9(final k=listFractionFactors[9]) if
        nBatRacks > 8
     annotation (Placement(transformation(extent={{-40,-160},{-20,-140}})));
-  Modelica.Blocks.Math.Gain lossFraction10(k=listFractionFactors[10]) if
+  Modelica.Blocks.Math.Gain lossFraction10(final k=listFractionFactors[10]) if
        nBatRacks > 9
     annotation (Placement(transformation(extent={{-40,-200},{-20,-180}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalCollector convCollector(
-     m=nBatRacks)
+     final m=nBatRacks)
     "Collects the convection heat of the different racks"
     annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
@@ -440,7 +439,8 @@ public
        nBatRacks > 9
     annotation (Placement(transformation(extent={{-132,-200},{-108,-180}})));
 
-  Utilities.Interfaces.ThermalRadiationCollector radCollector(m=nBatRacks)
+  Utilities.Interfaces.ThermalRadiationCollector radCollector(
+     final m=nBatRacks)
     annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,

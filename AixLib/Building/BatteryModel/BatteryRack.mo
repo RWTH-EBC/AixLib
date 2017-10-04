@@ -49,22 +49,22 @@ model BatteryRack
         rotation=90,
         origin={60,100})));
   AixLib.Utilities.HeatTransfer.HeatConv_inside heatConv_fluidOnTop(
-      surfaceOrientation=2,
-      A= (if airBetweenStacks==true
-          then nStacked*nParallels*nSeries*batType.width*batType.length
-          else nParallels*nSeries*batType.width*batType.length))
+      final surfaceOrientation=2,
+      final A= (if airBetweenStacks==true
+                then nStacked*nParallels*nSeries*batType.width*batType.length
+                else nParallels*nSeries*batType.width*batType.length))
     "Block which calculates the horizontal
     heat convection on top of the battery"
     annotation (Placement(transformation(extent={{50,-50},{30,-30}})));
   AixLib.Utilities.HeatTransfer.HeatConv_inside heatConv_Vertical(
-      surfaceOrientation=1,
-      A= (if batArrangement==true
-          then 2*nStacked*nParallels*batType.width*batType.height
-               + 2*nStacked*nSeries*batType.length*batType.height
-               - areaStandingAtWall
-          else 2*nStacked*nParallels*batType.length*batType.height
-               + 2*nStacked*nSeries*batType.width*batType.height
-               - areaStandingAtWall))
+      final surfaceOrientation=1,
+      final A= (if batArrangement==true
+                then 2*nStacked*nParallels*batType.width*batType.height
+                     + 2*nStacked*nSeries*batType.length*batType.height
+                     - areaStandingAtWall
+                else 2*nStacked*nParallels*batType.length*batType.height
+                     + 2*nStacked*nSeries*batType.width*batType.height
+                     - areaStandingAtWall))
     "Block which calculates the vertical heat convection of the battery"
     annotation (Placement(transformation(extent={{50,-30},{30,-10}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_conv
@@ -76,13 +76,15 @@ model BatteryRack
         iconTransformation(extent={{90,10},{110,30}})));
 
   AixLib.Utilities.HeatTransfer.HeatConv_inside heatConv_horizontalFacingDown(
-      surfaceOrientation=3, A=(nStacked - 1)*nParallels*nSeries*batType.width*
-        batType.length) if     airBetweenStacks and nStacked > 1
+      final surfaceOrientation=3,
+      final A=(nStacked - 1)*nParallels*nSeries*batType.width*batType.length) if
+         airBetweenStacks and nStacked > 1
     "Block which calculates the horizontal
     heat convection at the bottom of the battery"
     annotation (Placement(transformation(extent={{50,-70},{30,-50}})));
-  Utilities.HeatTransfer.HeatToStar heatToStar(A=batType.radiationArea, eps=
-        batType.eps) "Converts the heat to the radiation heat"
+  Utilities.HeatTransfer.HeatToStar heatToStar(
+      final A=batType.radiationArea,
+      final eps=batType.eps) "Converts the heat to the radiation heat"
     annotation (Placement(transformation(extent={{30,10},{50,30}})));
 equation
   connect(thermalLoss, prescribedHeatFlow.Q_flow)
