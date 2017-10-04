@@ -1,6 +1,6 @@
 within AixLib.DataBase.Batteries;
 record BatteryBaseDataDefinition
-  "Base Data Definition for the different battery models"
+  "Base data definition for the different battery models"
 
   extends Modelica.Icons.Record;
 ///////////input parameters////////////
@@ -11,7 +11,7 @@ record BatteryBaseDataDefinition
   parameter SI.Length length
     "Length of the battery (should be shorter than the width)";
   parameter SI.SpecificHeatCapacity cp
-    "Specific Heat Capacity of the battery";
+    "Specific heat capacity of the battery";
   parameter SI.Mass massBat "Mass of the battery";
   parameter SI.Area radiationArea "Battery's area for the radiation";
   parameter SI.Emissivity eps "Battery's emissivity coefficient";

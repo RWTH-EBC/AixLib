@@ -3,8 +3,8 @@ model BatteryRack
   "Rack Model of batteries which simulates the heat loss of a rack of 
   batteries"
   inner parameter DataBase.Batteries.BatteryBaseDataDefinition batType
-    "Used Battery Type";
-   parameter Integer nParallels "Number of batteries placed in one Series";
+    "Used battery type";
+   parameter Integer nParallels "Number of batteries placed in one series";
    parameter Integer nSeries "Number of battery series";
    parameter Integer nStacked "Number of batteries stacked on another";
    parameter Integer nBats=nParallels*nSeries*nStacked
@@ -24,11 +24,11 @@ model BatteryRack
      so there is no vertical heat convection.";
 
   Modelica.Blocks.Interfaces.RealInput Thermal_Loss
-    "Thermal Loss of the Battery - from external file"
+    "Thermal loss of the battery - from external file"
     annotation (Placement(transformation(extent={{-120,-20},{-80,20}}),
         iconTransformation(extent={{-120,-20},{-80,20}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
-    "Converts the Real Heat Input to Heat"
+    "Converts the real heat input to heat"
     annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor HeatCapBat(
     C=nParallels*nSeries*nStacked*batType.cp*batType.massBat)

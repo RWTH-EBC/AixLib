@@ -1,12 +1,12 @@
 within AixLib.DataBase.Batteries;
 record RackBaseDataDefinition
-  "Base Data Definition for the different battery rooms"
+  "Base data definition for the different battery rooms"
   import AixLib;
   extends Modelica.Icons.Record;
   inner parameter AixLib.DataBase.Batteries.BatteryBaseDataDefinition batType
-    "Battery Type in the Rack"
+    "Battery type in the rack"
     annotation (Dialog(tab="Battery Rack Types"), choicesAllMatching);
-  parameter Integer nParallels "Number of batteries placed in one Series";
+  parameter Integer nParallels "Number of batteries placed in one series";
   parameter Integer nSeries "Number of battery series";
   parameter Integer nStacked "Number of batteries stacked on another";
   parameter Boolean airBetweenStacks

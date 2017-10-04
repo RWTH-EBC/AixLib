@@ -16,68 +16,68 @@ model BatteryRoom
       choice=10 "10",
       radioButtons = true), choicesAllMatching = true);
    parameter Integer nBatTypes=1
-   "How many different Battery Types are installed in the room?"
+   "How many different battery types are installed in the room?"
       annotation (Dialog(
       descriptionLabel=true), choices(
       choice=1 "1",
       choice=2 "2",
       radioButtons = true), choicesAllMatching = true);
    parameter Boolean batType1 = true
-   "Battery Type of Rack 1" annotation (Dialog(
+   "Battery type of rack 1" annotation (Dialog(
       tab="Battery Rack Types", descriptionLabel=true), choices(
       choice=true "Type 1",
       choice=false "Type 2",
       radioButtons = true), choicesAllMatching = true);
    parameter Boolean batType2 = true
-   "Battery Type of Rack 2" annotation (Dialog(
+   "Battery type of rack 2" annotation (Dialog(
       tab="Battery Rack Types", descriptionLabel=true), choices(
       choice=true "Type 1",
       choice=false "Type 2",
       radioButtons = true), choicesAllMatching = true);
    parameter Boolean batType3 = true
-   "Battery Type of Rack 3" annotation (Dialog(
+   "Battery type of rack 3" annotation (Dialog(
       tab="Battery Rack Types", descriptionLabel=true), choices(
       choice=true "Type 1",
       choice=false "Type 2",
       radioButtons = true), choicesAllMatching = true);
    parameter Boolean batType4 = true
-   "Battery Type of Rack 4" annotation (Dialog(
+   "Battery type of rack 4" annotation (Dialog(
       tab="Battery Rack Types", descriptionLabel=true), choices(
       choice=true "Type 1",
       choice=false "Type 2",
       radioButtons = true), choicesAllMatching = true);
    parameter Boolean batType5 = true
-   "Battery Type of Rack 5" annotation (Dialog(
+   "Battery type of rack 5" annotation (Dialog(
       tab="Battery Rack Types", descriptionLabel=true), choices(
       choice=true "Type 1",
       choice=false "Type 2",
       radioButtons = true), choicesAllMatching = true);
    parameter Boolean batType6 = true
-   "Battery Type of Rack 6" annotation (Dialog(
+   "Battery type of rack 6" annotation (Dialog(
       tab="Battery Rack Types", descriptionLabel=true), choices(
       choice=true "Type 1",
       choice=false "Type 2",
       radioButtons = true), choicesAllMatching = true);
    parameter Boolean batType7 = true
-   "Battery Type of Rack 7" annotation (Dialog(
+   "Battery type of rack 7" annotation (Dialog(
       tab="Battery Rack Types", descriptionLabel=true), choices(
       choice=true "Type 1",
       choice=false "Type 2",
       radioButtons = true), choicesAllMatching = true);
    parameter Boolean batType8 = true
-   "Battery Type of Rack 8" annotation (Dialog(
+   "Battery type of rack 8" annotation (Dialog(
       tab="Battery Rack Types", descriptionLabel=true), choices(
       choice=true "Type 1",
       choice=false "Type 2",
       radioButtons = true), choicesAllMatching = true);
    parameter Boolean batType9 = true
-   "Battery Type of Rack 9" annotation (Dialog(
+   "Battery type of rack 9" annotation (Dialog(
       tab="Battery Rack Types", descriptionLabel=true), choices(
       choice=true "Type 1",
       choice=false "Type 2",
       radioButtons = true), choicesAllMatching = true);
    parameter Boolean batType10 = true
-   "Battery Type of Rack 10" annotation (Dialog(
+   "Battery type of rack 10" annotation (Dialog(
       tab="Battery Rack Types", descriptionLabel=true), choices(
       choice=true "Type 1",
       choice=false "Type 2",
@@ -161,14 +161,14 @@ protected
   parameter Boolean listBatTypes[10]=
   {batType1, batType2, batType3, batType4, batType5,
    batType6, batType7, batType8, batType9, batType10}
-   "List for the different Battery Types";
+   "List for the different battery types";
   parameter Integer listNBats[nBatRacks]=
     {if nBatRacks >= i
      then rackParameters[i].nParallels * rackParameters[i].nSeries *
           rackParameters[i].nStacked
      else 0
      for i in 1:nBatRacks}
-  "List for the different number of Batteries per rack";
+  "List for the different number of batteries per rack";
   parameter Integer sumBatsType1=
     sum({if listBatTypes[i] == true
          then listNBats[i]
@@ -190,11 +190,11 @@ protected
 
 public
   Modelica.Blocks.Interfaces.RealInput Battery1_Loss
-    "Thermal Loss of the first Battery Type - from external file"
+    "Thermal Loss of the first battery type - from external file"
     annotation (Placement(transformation(extent={{-254,64},{-182,136}}),
         iconTransformation(extent={{-200,40},{-120,120}})));
   Modelica.Blocks.Interfaces.RealInput Battery2_Loss if nBatTypes == 2
-    "Thermal Loss of the second Battery Type - from external file"
+    "Thermal Loss of the second battery type - from external file"
     annotation (Placement(transformation(extent={{-254,-136},{-182,-64}}),
         iconTransformation(extent={{-200,-120},{-120,-40}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_conv
