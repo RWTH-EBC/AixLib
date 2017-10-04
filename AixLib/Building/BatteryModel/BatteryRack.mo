@@ -1,7 +1,7 @@
 within AixLib.Building.BatteryModel;
 model BatteryRack
   "Rack Model of batteries which simulates the heat loss of a rack of batteries"
-  inner parameter DataBase.Batteries.BatteryBaseDataDefinition BatType
+  inner parameter DataBase.Batteries.BatteryBaseDataDefinition batType
     "Used Battery Type";
    parameter Integer nParallels "Number of batteries placed in one Series";
    parameter Integer nSeries "Number of battery series";
@@ -24,7 +24,7 @@ model BatteryRack
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
     "Converts the Real Heat Input to Heat"
     annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor HeatCapBat(C=nParallels*nSeries*nStacked*BatType.cp*BatType.massBat)
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor HeatCapBat(C=nParallels*nSeries*nStacked*batType.cp*batType.massBat)
     "Heat capacity of the battery (C=nBats*cp_Bat*mass_Bat)"
     annotation (Placement(transformation(extent={{-10,70},{10,90}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
@@ -42,13 +42,13 @@ model BatteryRack
         rotation=90,
         origin={60,100})));
   AixLib.Utilities.HeatTransfer.HeatConv_inside heatConv_fluidOnTop(
-      surfaceOrientation=2, A= (if airBetweenStacks==true then nStacked*nParallels*nSeries*BatType.width*BatType.length
-                                                          else nParallels*nSeries*BatType.width*BatType.length))
+      surfaceOrientation=2, A= (if airBetweenStacks==true then nStacked*nParallels*nSeries*batType.width*batType.length
+                                                          else nParallels*nSeries*batType.width*batType.length))
     "Block which calculates the horizontal heat convection on top of the battery"
     annotation (Placement(transformation(extent={{50,-50},{30,-30}})));
   AixLib.Utilities.HeatTransfer.HeatConv_inside heatConv_Vertical(
-      surfaceOrientation=1, A= (if batArrangement==true then 2*nStacked*nParallels*BatType.width*BatType.height + 2*nStacked*nSeries*BatType.length*BatType.height - areaStandingAtWall
-                                                        else 2*nStacked*nParallels*BatType.length*BatType.height + 2*nStacked*nSeries*BatType.width*BatType.height - areaStandingAtWall))
+      surfaceOrientation=1, A= (if batArrangement==true then 2*nStacked*nParallels*batType.width*batType.height + 2*nStacked*nSeries*batType.length*batType.height - areaStandingAtWall
+                                                        else 2*nStacked*nParallels*batType.length*batType.height + 2*nStacked*nSeries*batType.width*batType.height - areaStandingAtWall))
     "Block which calculates the vertical heat convection of the battery"
     annotation (Placement(transformation(extent={{50,-30},{30,-10}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_conv
@@ -60,12 +60,12 @@ model BatteryRack
         iconTransformation(extent={{90,10},{110,30}})));
 
   AixLib.Utilities.HeatTransfer.HeatConv_inside heatConv_horizontalFacingDown(
-      surfaceOrientation=3, A=(nStacked - 1)*nParallels*nSeries*BatType.width*
-        BatType.length) if     airBetweenStacks and nStacked > 1
+      surfaceOrientation=3, A=(nStacked - 1)*nParallels*nSeries*batType.width*
+        batType.length) if     airBetweenStacks and nStacked > 1
     "Block which calculates the horizontal heat convection at the bottom of the battery"
     annotation (Placement(transformation(extent={{50,-70},{30,-50}})));
-  Utilities.HeatTransfer.HeatToStar heatToStar(A=BatType.radiationArea, eps=
-        BatType.eps) "Converts the heat to the radiation heat"
+  Utilities.HeatTransfer.HeatToStar heatToStar(A=batType.radiationArea, eps=
+        batType.eps) "Converts the heat to the radiation heat"
     annotation (Placement(transformation(extent={{30,10},{50,30}})));
 equation
   connect(Battery_Loss, prescribedHeatFlow.Q_flow)

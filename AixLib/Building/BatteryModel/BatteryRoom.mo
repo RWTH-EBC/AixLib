@@ -193,7 +193,7 @@ public
         origin={120,180})));
 
   BatteryRack batteryRack_1(
-    BatType=rackParameters[1].batType,
+    batType=rackParameters[1].batType,
     nParallels=rackParameters[1].nParallels,
     nSeries=rackParameters[1].nSeries,
     nStacked=rackParameters[1].nStacked,
@@ -202,7 +202,7 @@ public
     areaStandingAtWall=rackParameters[1].areaStandingAtWall)
     annotation (Placement(transformation(extent={{20,180},{40,200}})));
   BatteryRack batteryRack_2(
-    BatType=rackParameters[2].batType,
+    batType=rackParameters[2].batType,
     nParallels=rackParameters[2].nParallels,
     nSeries=rackParameters[2].nSeries,
     nStacked=rackParameters[2].nStacked,
@@ -211,7 +211,7 @@ public
     areaStandingAtWall=rackParameters[2].areaStandingAtWall) if nBatRacks > 1
     annotation (Placement(transformation(extent={{20,140},{40,160}})));
   BatteryRack batteryRack_3(
-    BatType=rackParameters[3].batType,
+    batType=rackParameters[3].batType,
     nParallels=rackParameters[3].nParallels,
     nSeries=rackParameters[3].nSeries,
     nStacked=rackParameters[3].nStacked,
@@ -220,7 +220,7 @@ public
     areaStandingAtWall=rackParameters[3].areaStandingAtWall) if nBatRacks > 2
     annotation (Placement(transformation(extent={{20,100},{40,120}})));
   BatteryRack batteryRack_4(
-    BatType=rackParameters[4].batType,
+    batType=rackParameters[4].batType,
     nParallels=rackParameters[4].nParallels,
     nSeries=rackParameters[4].nSeries,
     nStacked=rackParameters[4].nStacked,
@@ -229,7 +229,7 @@ public
     areaStandingAtWall=rackParameters[4].areaStandingAtWall) if nBatRacks > 3
     annotation (Placement(transformation(extent={{20,60},{40,80}})));
   BatteryRack batteryRack_5(
-    BatType=rackParameters[5].batType,
+    batType=rackParameters[5].batType,
     nParallels=rackParameters[5].nParallels,
     nSeries=rackParameters[5].nSeries,
     nStacked=rackParameters[5].nStacked,
@@ -238,7 +238,7 @@ public
     areaStandingAtWall=rackParameters[5].areaStandingAtWall) if nBatRacks > 4
     annotation (Placement(transformation(extent={{20,20},{40,40}})));
   BatteryRack batteryRack_6(
-    BatType=rackParameters[6].batType,
+    batType=rackParameters[6].batType,
     nParallels=rackParameters[6].nParallels,
     nSeries=rackParameters[6].nSeries,
     nStacked=rackParameters[6].nStacked,
@@ -247,7 +247,7 @@ public
     areaStandingAtWall=rackParameters[6].areaStandingAtWall) if nBatRacks > 5
     annotation (Placement(transformation(extent={{20,-40},{40,-20}})));
   BatteryRack batteryRack_7(
-    BatType=rackParameters[7].batType,
+    batType=rackParameters[7].batType,
     nParallels=rackParameters[7].nParallels,
     nSeries=rackParameters[7].nSeries,
     nStacked=rackParameters[7].nStacked,
@@ -256,7 +256,7 @@ public
     areaStandingAtWall=rackParameters[7].areaStandingAtWall) if nBatRacks > 6
     annotation (Placement(transformation(extent={{20,-80},{40,-60}})));
   BatteryRack batteryRack_8(
-    BatType=rackParameters[8].batType,
+    batType=rackParameters[8].batType,
     nParallels=rackParameters[8].nParallels,
     nSeries=rackParameters[8].nSeries,
     nStacked=rackParameters[8].nStacked,
@@ -266,7 +266,7 @@ public
     annotation (Placement(transformation(extent={{20,-120},{40,-100}})));
 
   BatteryRack batteryRack_9(
-    BatType=rackParameters[9].batType,
+    batType=rackParameters[9].batType,
     nParallels=rackParameters[9].nParallels,
     nSeries=rackParameters[9].nSeries,
     nStacked=rackParameters[9].nStacked,
@@ -275,7 +275,7 @@ public
     areaStandingAtWall=rackParameters[9].areaStandingAtWall) if nBatRacks > 8
     annotation (Placement(transformation(extent={{20,-160},{40,-140}})));
   BatteryRack batteryRack_10(
-    BatType=rackParameters[10].batType,
+    batType=rackParameters[10].batType,
     nParallels=rackParameters[10].nParallels,
     nSeries=rackParameters[10].nSeries,
     nStacked=rackParameters[10].nStacked,
@@ -369,7 +369,7 @@ public
     annotation (Placement(transformation(extent={{-130,-120},{-106,-100}})));
   Modelica.Blocks.Sources.BooleanExpression batteryType9(y=batType9) if nBatRacks > 8
     annotation (Placement(transformation(extent={{-132,-160},{-108,-140}})));
-  Modelica.Blocks.Sources.BooleanExpression batteryType10(y=batType6) if nBatRacks > 9
+  Modelica.Blocks.Sources.BooleanExpression batteryType10(y=batType10) if nBatRacks > 9
     annotation (Placement(transformation(extent={{-132,-200},{-108,-180}})));
 
   Utilities.Interfaces.ThermalRadiationCollector radCollector(m=nBatRacks)
