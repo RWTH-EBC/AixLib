@@ -23,21 +23,21 @@ model BatteryRack
      "default=0, area of the rack, which is placed at the wall,
      so there is no vertical heat convection.";
 
-  Modelica.Blocks.Interfaces.RealInput Thermal_Loss
+  Modelica.Blocks.Interfaces.RealInput thermalLoss
     "Thermal loss of the battery - from external file"
     annotation (Placement(transformation(extent={{-120,-20},{-80,20}}),
         iconTransformation(extent={{-120,-20},{-80,20}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
     "Converts the real heat input to heat"
     annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor HeatCapBat(
-    C=nParallels*nSeries*nStacked*batType.cp*batType.massBat)
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapBat(
+    final C=nParallels*nSeries*nStacked*batType.cp*batType.massBat)
     "Heat capacity of the battery (C=nBats*cp_Bat*mass_Bat)"
     annotation (Placement(transformation(extent={{-10,70},{10,90}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
     "Temperature of the battery"
     annotation (Placement(transformation(extent={{30,30},{50,50}})));
-  Modelica.Blocks.Interfaces.RealOutput battery_temperature(
+  Modelica.Blocks.Interfaces.RealOutput temperatureBat(
       quantity="ThermodynamicTemperature",
       unit="K",
       displayUnit="degC") "Output of the battery's temperature"
@@ -85,14 +85,14 @@ model BatteryRack
         batType.eps) "Converts the heat to the radiation heat"
     annotation (Placement(transformation(extent={{30,10},{50,30}})));
 equation
-  connect(Thermal_Loss, prescribedHeatFlow.Q_flow)
+  connect(thermalLoss, prescribedHeatFlow.Q_flow)
     annotation (Line(points={{-100,0},{-50,0}}, color={0,0,127}));
-  connect(prescribedHeatFlow.port, HeatCapBat.port)
+  connect(prescribedHeatFlow.port, heatCapBat.port)
     annotation (Line(points={{-30,0},{0,0},{0,70}}, color={191,0,0}));
   connect(prescribedHeatFlow.port, temperatureSensor.port)
     annotation (Line(points={{-30,0},{0,0},{0,40},{30,40}},
                 color={191,0,0}));
-  connect(temperatureSensor.T, battery_temperature)
+  connect(temperatureSensor.T, temperatureBat)
     annotation (Line(points={{50,40},{60,40},{60,100}},
                 color={0,0,127}));
   connect(prescribedHeatFlow.port, heatToStar.Therm)

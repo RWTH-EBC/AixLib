@@ -205,7 +205,7 @@ public
     "Port for the output of radiation heat"
     annotation (Placement(transformation(extent={{178,40},{224,80}}),
         iconTransformation(extent={{160,20},{200,60}})));
-  Modelica.Blocks.Interfaces.RealOutput battery1_temperature(
+  Modelica.Blocks.Interfaces.RealOutput temperatureBat1(
       quantity="ThermodynamicTemperature",
       unit="K",
       displayUnit="degC")
@@ -218,7 +218,7 @@ public
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={60,180})));
-  Modelica.Blocks.Interfaces.RealOutput battery2_temperature(
+  Modelica.Blocks.Interfaces.RealOutput temperatureBat2(
       quantity="ThermodynamicTemperature",
       unit="K",
       displayUnit="degC") if nBatTypes == 2
@@ -448,25 +448,25 @@ public
 
 equation
 
-  connect(lossFraction1.y, batteryRack_1.Thermal_Loss)
+  connect(lossFraction1.y, batteryRack_1.thermalLoss)
     annotation (Line(points={{-19,190},{20,190}}, color={0,0,127}));
-  connect(lossFraction2.y, batteryRack_2.Thermal_Loss)
+  connect(lossFraction2.y, batteryRack_2.thermalLoss)
     annotation (Line(points={{-19,150},{20,150}}, color={0,0,127}));
-  connect(lossFraction3.y, batteryRack_3.Thermal_Loss)
+  connect(lossFraction3.y, batteryRack_3.thermalLoss)
     annotation (Line(points={{-19,110},{20,110}}, color={0,0,127}));
-  connect(lossFraction4.y, batteryRack_4.Thermal_Loss)
+  connect(lossFraction4.y, batteryRack_4.thermalLoss)
     annotation (Line(points={{-19,70},{20,70}}, color={0,0,127}));
-  connect(lossFraction5.y, batteryRack_5.Thermal_Loss)
+  connect(lossFraction5.y, batteryRack_5.thermalLoss)
     annotation (Line(points={{-19,30},{20,30}}, color={0,0,127}));
-  connect(lossFraction6.y, batteryRack_6.Thermal_Loss)
+  connect(lossFraction6.y, batteryRack_6.thermalLoss)
     annotation (Line(points={{-19,-30},{20,-30}}, color={0,0,127}));
-  connect(lossFraction7.y, batteryRack_7.Thermal_Loss)
+  connect(lossFraction7.y, batteryRack_7.thermalLoss)
     annotation (Line(points={{-19,-70},{20,-70}}, color={0,0,127}));
-  connect(lossFraction8.y, batteryRack_8.Thermal_Loss)
+  connect(lossFraction8.y, batteryRack_8.thermalLoss)
     annotation (Line(points={{-19,-110},{20,-110}}, color={0,0,127}));
-  connect(lossFraction9.y, batteryRack_9.Thermal_Loss)
+  connect(lossFraction9.y, batteryRack_9.thermalLoss)
     annotation (Line(points={{-19,-150},{20,-150}}, color={0,0,127}));
-  connect(lossFraction10.y, batteryRack_10.Thermal_Loss)
+  connect(lossFraction10.y, batteryRack_10.thermalLoss)
     annotation (Line(points={{-19,-190},{20,-190}}, color={0,0,127}));
   connect(batteryRack_1.port_conv, convCollector.port_a[1]) annotation (Line(
         points={{40,186},{60,186},{60,-60},{94,-60}}, color={191,0,0}));
@@ -618,11 +618,11 @@ equation
                 color={0,0,127}));
   connect(convCollector.port_b, port_conv)
     annotation (Line(points={{134,-60},{200,-60}}, color={191,0,0}));
-  connect(batteryRack_1.battery_temperature, battery1_temperature)
+  connect(batteryRack_1.temperatureBat, temperatureBat1)
     annotation (
       Line(points={{36,200},{36,210},{92,210},{92,160},{120,160},{120,210}},
         color={0,0,127}));
-  connect(batteryRack_10.battery_temperature, battery2_temperature)
+  connect(batteryRack_10.temperatureBat, temperatureBat2)
     annotation (
      Line(points={{36,-180},{36,-168},{160,-168},{160,210}}, color={0,0,127}));
   connect(radCollector.Star_b, star)
