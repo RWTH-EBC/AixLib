@@ -68,7 +68,8 @@ model BatteryRack
     "Block which calculates the vertical heat convection of the battery"
     annotation (Placement(transformation(extent={{50,-30},{30,-10}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b PortConv
-    "Port for the output of convection heat"                    annotation (
+    "Port for the output of convection heat"
+      annotation (
       Placement(transformation(extent={{90,-50},{110,-30}}),
                 iconTransformation(extent={{90,-50},{110,-30}})));
   AixLib.Utilities.Interfaces.Star Star "Port for the output of radiation heat"
