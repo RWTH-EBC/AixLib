@@ -23,7 +23,7 @@ model BatteryRack
      "default=0, area of the rack, which is placed at the wall,
      so there is no vertical heat convection.";
 
-  Modelica.Blocks.Interfaces.RealInput Battery_Loss
+  Modelica.Blocks.Interfaces.RealInput Thermal_Loss
     "Thermal Loss of the Battery - from external file"
     annotation (Placement(transformation(extent={{-120,-20},{-80,20}}),
         iconTransformation(extent={{-120,-20},{-80,20}})));
@@ -85,7 +85,7 @@ model BatteryRack
         batType.eps) "Converts the heat to the radiation heat"
     annotation (Placement(transformation(extent={{30,10},{50,30}})));
 equation
-  connect(Battery_Loss, prescribedHeatFlow.Q_flow)
+  connect(Thermal_Loss, prescribedHeatFlow.Q_flow)
     annotation (Line(points={{-100,0},{-50,0}}, color={0,0,127}));
   connect(prescribedHeatFlow.port, HeatCapBat.port)
     annotation (Line(points={{-30,0},{0,0},{0,70}}, color={191,0,0}));

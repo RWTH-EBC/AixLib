@@ -448,25 +448,25 @@ public
 
 equation
 
-  connect(lossFraction1.y, batteryRack_1.Battery_Loss)
+  connect(lossFraction1.y, batteryRack_1.Thermal_Loss)
     annotation (Line(points={{-19,190},{20,190}}, color={0,0,127}));
-  connect(lossFraction2.y, batteryRack_2.Battery_Loss)
+  connect(lossFraction2.y, batteryRack_2.Thermal_Loss)
     annotation (Line(points={{-19,150},{20,150}}, color={0,0,127}));
-  connect(lossFraction3.y, batteryRack_3.Battery_Loss)
+  connect(lossFraction3.y, batteryRack_3.Thermal_Loss)
     annotation (Line(points={{-19,110},{20,110}}, color={0,0,127}));
-  connect(lossFraction4.y, batteryRack_4.Battery_Loss)
+  connect(lossFraction4.y, batteryRack_4.Thermal_Loss)
     annotation (Line(points={{-19,70},{20,70}}, color={0,0,127}));
-  connect(lossFraction5.y, batteryRack_5.Battery_Loss)
+  connect(lossFraction5.y, batteryRack_5.Thermal_Loss)
     annotation (Line(points={{-19,30},{20,30}}, color={0,0,127}));
-  connect(lossFraction6.y, batteryRack_6.Battery_Loss)
+  connect(lossFraction6.y, batteryRack_6.Thermal_Loss)
     annotation (Line(points={{-19,-30},{20,-30}}, color={0,0,127}));
-  connect(lossFraction7.y, batteryRack_7.Battery_Loss)
+  connect(lossFraction7.y, batteryRack_7.Thermal_Loss)
     annotation (Line(points={{-19,-70},{20,-70}}, color={0,0,127}));
-  connect(lossFraction8.y, batteryRack_8.Battery_Loss)
+  connect(lossFraction8.y, batteryRack_8.Thermal_Loss)
     annotation (Line(points={{-19,-110},{20,-110}}, color={0,0,127}));
-  connect(lossFraction9.y, batteryRack_9.Battery_Loss)
+  connect(lossFraction9.y, batteryRack_9.Thermal_Loss)
     annotation (Line(points={{-19,-150},{20,-150}}, color={0,0,127}));
-  connect(lossFraction10.y, batteryRack_10.Battery_Loss)
+  connect(lossFraction10.y, batteryRack_10.Thermal_Loss)
     annotation (Line(points={{-19,-190},{20,-190}}, color={0,0,127}));
   connect(batteryRack_1.port_conv, convCollector.port_a[1]) annotation (Line(
         points={{40,186},{60,186},{60,-60},{94,-60}}, color={191,0,0}));
