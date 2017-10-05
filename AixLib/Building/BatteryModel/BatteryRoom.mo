@@ -334,6 +334,7 @@ public
         origin={114,-60})));
   Utilities.Interfaces.ThermalRadiationCollector RadCollector(
      final m=nBatRacks)
+    "Collects the radiation heat of the different racks"
     annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
@@ -421,7 +422,6 @@ public
        nBatRacks > 9
     annotation (Placement(transformation(extent={{-132,-200},{-108,-180}})));
 
-
 protected
   parameter Boolean listBatTypes[10]=
     {batType1, batType2, batType3, batType4, batType5,
@@ -475,26 +475,36 @@ equation
     annotation (Line(points={{-19,-150},{20,-150}}, color={0,0,127}));
   connect(LossFraction10.y, BatteryRack10.ThermalLoss)
     annotation (Line(points={{-19,-190},{20,-190}}, color={0,0,127}));
-  connect(BatteryRack1.PortConv, ConvCollector.port_a[1]) annotation (Line(
-        points={{40,186},{60,186},{60,-60},{94,-60}}, color={191,0,0}));
-  connect(BatteryRack2.PortConv, ConvCollector.port_a[2]) annotation (Line(
-        points={{40,146},{60,146},{60,-60},{94,-60}}, color={191,0,0}));
-  connect(BatteryRack3.PortConv, ConvCollector.port_a[3]) annotation (Line(
-        points={{40,106},{60,106},{60,-60},{94,-60}}, color={191,0,0}));
-  connect(BatteryRack4.PortConv, ConvCollector.port_a[4]) annotation (Line(
-        points={{40,66},{60,66},{60,-60},{94,-60}}, color={191,0,0}));
-  connect(BatteryRack5.PortConv, ConvCollector.port_a[5]) annotation (Line(
-        points={{40,26},{60,26},{60,-60},{94,-60}}, color={191,0,0}));
-  connect(BatteryRack6.PortConv, ConvCollector.port_a[6]) annotation (Line(
-        points={{40,-34},{60,-34},{60,-60},{94,-60}}, color={191,0,0}));
-  connect(BatteryRack7.PortConv, ConvCollector.port_a[7]) annotation (Line(
-        points={{40,-74},{60,-74},{60,-60},{94,-60}}, color={191,0,0}));
-  connect(BatteryRack8.PortConv, ConvCollector.port_a[8]) annotation (Line(
-        points={{40,-114},{60,-114},{60,-60},{94,-60}}, color={191,0,0}));
-  connect(BatteryRack9.PortConv, ConvCollector.port_a[9]) annotation (Line(
-        points={{40,-154},{60,-154},{60,-60},{94,-60}}, color={191,0,0}));
-  connect(BatteryRack10.PortConv, ConvCollector.port_a[10]) annotation (Line(
-        points={{40,-194},{60,-194},{60,-60},{94,-60}}, color={191,0,0}));
+  connect(BatteryRack1.PortConv, ConvCollector.port_a[1])
+    annotation (Line(points={{40,186},{60,186},{60,-60},{94,-60}},
+                color={191,0,0}));
+  connect(BatteryRack2.PortConv, ConvCollector.port_a[2])
+    annotation (Line(points={{40,146},{60,146},{60,-60},{94,-60}},
+                color={191,0,0}));
+  connect(BatteryRack3.PortConv, ConvCollector.port_a[3])
+    annotation (Line(points={{40,106},{60,106},{60,-60},{94,-60}},
+                color={191,0,0}));
+  connect(BatteryRack4.PortConv, ConvCollector.port_a[4])
+    annotation (Line(points={{40,66},{60,66},{60,-60},{94,-60}},
+                color={191,0,0}));
+  connect(BatteryRack5.PortConv, ConvCollector.port_a[5])
+    annotation (Line(points={{40,26},{60,26},{60,-60},{94,-60}},
+                color={191,0,0}));
+  connect(BatteryRack6.PortConv, ConvCollector.port_a[6])
+    annotation (Line(points={{40,-34},{60,-34},{60,-60},{94,-60}},
+                color={191,0,0}));
+  connect(BatteryRack7.PortConv, ConvCollector.port_a[7])
+    annotation (Line(points={{40,-74},{60,-74},{60,-60},{94,-60}},
+                color={191,0,0}));
+  connect(BatteryRack8.PortConv, ConvCollector.port_a[8])
+    annotation (Line(points={{40,-114},{60,-114},{60,-60},{94,-60}},
+                color={191,0,0}));
+  connect(BatteryRack9.PortConv, ConvCollector.port_a[9])
+    annotation (Line(points={{40,-154},{60,-154},{60,-60},{94,-60}},
+                color={191,0,0}));
+  connect(BatteryRack10.PortConv, ConvCollector.port_a[10])
+    annotation (Line(points={{40,-194},{60,-194},{60,-60},{94,-60}},
+                color={191,0,0}));
   connect(LossSwitch1.y, LossFraction1.u)
     annotation (Line(points={{-59,190},{-42,190}}, color={0,0,127}));
   connect(LossSwitch2.y, LossFraction2.u)

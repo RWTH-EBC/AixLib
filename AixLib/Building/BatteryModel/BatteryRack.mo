@@ -41,7 +41,7 @@ model BatteryRack
       quantity="ThermodynamicTemperature",
       unit="K",
       displayUnit="degC") "Output of the battery's temperature"
-                                 annotation (Placement(transformation(
+       annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={60,100}), iconTransformation(
@@ -87,7 +87,9 @@ model BatteryRack
       final A=batType.radiationArea,
       final eps=batType.eps) "Converts the heat to the radiation heat"
     annotation (Placement(transformation(extent={{30,10},{50,30}})));
+
 equation
+
   connect(ThermalLoss, PrescribedHeatFlow.Q_flow)
     annotation (Line(points={{-100,0},{-50,0}}, color={0,0,127}));
   connect(PrescribedHeatFlow.port, HeatCapBat.port)
@@ -133,26 +135,26 @@ equation
           textString="%name")}),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
-<p><b><font style=\"color: #008000; \">Overview</font></b> </p>
-<p>The <b>BatteryRack</b> model represents the thermal behaviour of 
-one specific battery rack. </p>
-<p><b><font style=\"color: #008000; \">Concept</font></b> </p>
-<p>The model needs an input of heat loss of the batteries and generates 
-the following outputs:</p>
-<p>- battery's temperature</p>
-<p>- radiation heat</p>
-<p>- convection heat</p>
-<p><b><font style=\"color: #008000; \">Example</font></b> </p>
-<p><a href=\"AixLib.Building.BatteryModel.ExampleBatteryRoom\">
-AixLib.Building.BatteryModel.ExampleBatteryRoom </a></p>
-<p><b><font style=\"color: #008000; \">References</font></b> </p>
-<p>The model uses the record 
-<a href=\"AixLib.DataBase.Batteries.BatteryBaseDataDefinition\">
-AixLib.DataBase.Batteries.BatteryBaseDataDefinition </a>
-to define the battery parameters.</p>
-</html>",  revisions="<html>
-<ul>
-<li><i>July 26, 2017&nbsp;</i> by Paul Thiele:<br/>Implemented. </li>
-</ul>
-</html>"));
+    <p><b><font style=\"color: #008000; \">Overview</font></b> </p>
+    <p>The <b>BatteryRack</b> model represents the thermal behaviour of 
+    one specific battery rack. </p>
+    <p><b><font style=\"color: #008000; \">Concept</font></b> </p>
+    <p>The model needs an input of heat loss of the batteries and generates 
+    the following outputs:</p>
+    <p>- battery's temperature</p>
+    <p>- radiation heat</p>
+    <p>- convection heat</p>
+    <p><b><font style=\"color: #008000; \">Example</font></b> </p>
+    <p><a href=\"AixLib.Building.BatteryModel.ExampleBatteryRoom\">
+    AixLib.Building.BatteryModel.ExampleBatteryRoom </a></p>
+    <p><b><font style=\"color: #008000; \">References</font></b> </p>
+    <p>The model uses the record 
+    <a href=\"AixLib.DataBase.Batteries.BatteryBaseDataDefinition\">
+    AixLib.DataBase.Batteries.BatteryBaseDataDefinition </a>
+    to define the battery parameters.</p>
+    </html>",  revisions="<html>
+    <ul>
+    <li><i>July 26, 2017&nbsp;</i> by Paul Thiele:<br/>Implemented. </li>
+    </ul>
+    </html>"));
 end BatteryRack;

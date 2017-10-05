@@ -39,9 +39,14 @@ record BatteryBaseDataDefinition
         Line(
           origin={0.0,-25.0},
           points={{0.0,75.0},{0.0,-75.0}},
-          color={64,64,64})}), Documentation(info="<html>
-<p>
-This icon is indicates a record.
-</p>
-</html>"));
+          color={64,64,64})}),
+        Documentation(info="<html>
+    <p><b><font style=\"color: #008000; \">Overview</font></b> </p>
+    <p>This record is the base data definition for the parameters of
+    a single battery. </p>
+    </html>",  revisions="<html>
+    <ul>
+    <li><i>July 26, 2017&nbsp;</i> by Paul Thiele:<br/>Implemented. </li>
+    </ul>
+    </html>"));
 end BatteryBaseDataDefinition;

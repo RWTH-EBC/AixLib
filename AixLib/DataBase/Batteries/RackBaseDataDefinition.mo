@@ -1,6 +1,6 @@
 within AixLib.DataBase.Batteries;
 record RackBaseDataDefinition
-  "Base data definition for the different battery rooms"
+  "Base data definition for the different battery racks"
   import AixLib;
   extends Modelica.Icons.Record;
   inner parameter AixLib.DataBase.Batteries.BatteryBaseDataDefinition batType
@@ -25,4 +25,17 @@ record RackBaseDataDefinition
     "default=0, area of the rack, which is placed at the wall, so there 
     is no vertical heat convection.";
 
+annotation (
+    Documentation(info="<html>
+    <p><b><font style=\"color: #008000; \">Overview</font></b> </p>
+    <p>This record is the base data definition for the parameters of
+    a battery rack. </p>
+    <p><b><font style=\"color: #008000; \">References</font></b> </p>
+    <p><a href=\"AixLib.DataBase.Batteries.BatteryBaseDataDefinition\">
+    AixLib.DataBase.Batteries.BatteryBaseDataDefinition</a></p>
+    </html>",  revisions="<html>
+    <ul>
+    <li><i>July 26, 2017&nbsp;</i> by Paul Thiele:<br/>Implemented. </li>
+    </ul>
+    </html>"));
 end RackBaseDataDefinition;
