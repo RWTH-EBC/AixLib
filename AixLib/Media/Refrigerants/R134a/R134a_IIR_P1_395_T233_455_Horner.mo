@@ -85,13 +85,13 @@ package R134a_IIR_P1_395_T233_455_Horner
   */
   redeclare record SmoothTransition "Record that contains ranges to calculate a smooth transition between
     different regions"
-    SpecificEnthalpy T_ph = 5;
-    SpecificEntropy T_ps = 5;
-    AbsolutePressure d_pT = 5;
-    SpecificEnthalpy d_ph = 5;
-    Real d_ps(unit="J/(Pa.K.kg)") =  5/(39.5e5-1e5);
-    Real h_ps(unit="J/(Pa.K.kg)") = 5/(39.5e5-1e5);
-    AbsolutePressure d_derh_p = 0.2;
+      SpecificEnthalpy T_ph = 2.5;
+      SpecificEntropy T_ps = 2.5;
+      AbsolutePressure d_pT = 2.5;
+      SpecificEnthalpy d_ph = 2.5;
+      Real d_ps(unit="J/(Pa.K.kg)") =  5/(39.5e5-1e5);
+      Real h_ps(unit="J/(Pa.K.kg)") = 100/(39.5e5-1e5);
+      AbsolutePressure d_derh_p = 0.2;
   end SmoothTransition;
   /*Provide Helmholtz equations of state (EoS) using an explicit formula.
   */
@@ -166,6 +166,46 @@ package R134a_IIR_P1_395_T233_455_Horner
   annotation(Inline=false,
           LateInline=true);
   end tau_delta_d2_alpha_r_d_tau_d_delta;
+
+  redeclare function extends tau3_d3_alpha_0_d_tau3
+    "Short form for tau*tau*tau*(dddalpha_0/(dtau*dtau*dtau))@delta=const"
+  algorithm
+    tau3_d3_alpha_0_d_tau3 := 2*(-1.629789)*(1) + (-1.02084672674949)*(0)*((0)-1)*((0)-2) *tau^(0) + (9.04757355104757)*(1)*((1)-1)*((1)-2) *tau^(1) + (-9.723916)*(-0.5)*((-0.5)-1)*((-0.5)-2) *tau^(-0.5) + (-3.92717)*(-0.75)*((-0.75)-1)*((-0.75)-2) *tau^(-0.75);
+    annotation(Inline=false,
+          LateInline=true);
+  end tau3_d3_alpha_0_d_tau3;
+
+  redeclare function extends tau3_d3_alpha_r_d_tau3
+    "Short form for tau*tau*tau*(dddalpha_r/(dtau*dtau*dtau))@delta=const"
+  algorithm
+    tau3_d3_alpha_r_d_tau3 := (0.05586817)*(-0.5)*((-0.5)-1)*((-0.5)-2)*delta^(2)*tau^(-0.5) + (0.498223)*(0)*((0)-1)*((0)-2)*delta^(1)*tau^(0) + (0.02458698)*(0)*((0)-1)*((0)-2)*delta^(3)*tau^(0) + (0.0008570145)*(0)*((0)-1)*((0)-2)*delta^(6)*tau^(0) + (0.0004788584)*(1.5)*((1.5)-1)*((1.5)-2)*delta^(6)*tau^(1.5) + (-1.800808)*(1.5)*((1.5)-1)*((1.5)-2)*delta^(1)*tau^(1.5) + (0.2671641)*(2)*((2)-1)*((2)-2)*delta^(1)*tau^(2) + (-0.04781652)*(2)*((2)-1)*((2)-2)*delta^(2)*tau^(2) + (0.01423987)*(1)*((1)-1)*((1)-2)*delta^(5)*tau^(1)*exp(-delta^(1)) + (0.3324062)*(3)*((3)-1)*((3)-2)*delta^(2)*tau^(3)*exp(-delta^(1)) + (-0.007485907)*(5)*((5)-1)*((5)-2)*delta^(2)*tau^(5)*exp(-delta^(1)) + (0.0001017263)*(1)*((1)-1)*((1)-2)*delta^(4)*tau^(1)*exp(-delta^(2)) + (-0.5184567)*(5)*((5)-1)*((5)-2)*delta^(1)*tau^(5)*exp(-delta^(2)) + (-0.08692288)*(5)*((5)-1)*((5)-2)*delta^(4)*tau^(5)*exp(-delta^(2)) + (0.2057144)*(6)*((6)-1)*((6)-2)*delta^(1)*tau^(6)*exp(-delta^(2)) + (-0.005000457)*(10)*((10)-1)*((10)-2)*delta^(2)*tau^(10)*exp(-delta^(2)) + (0.0004603262)*(10)*((10)-1)*((10)-2)*delta^(4)*tau^(10)*exp(-delta^(2)) + (-0.003497836)*(10)*((10)-1)*((10)-2)*delta^(1)*tau^(10)*exp(-delta^(3)) + (0.006995038)*(18)*((18)-1)*((18)-2)*delta^(5)*tau^(18)*exp(-delta^(3)) + (-0.01452184)*(22)*((22)-1)*((22)-2)*delta^(3)*tau^(22)*exp(-delta^(3)) + (-0.0001285458)*(50)*((50)-1)*((50)-2)*delta^(10)*tau^(50)*exp(-delta^(4));
+    annotation(Inline=false,
+          LateInline=true);
+  end tau3_d3_alpha_r_d_tau3;
+
+  redeclare function extends delta3_d3_alpha_r_d_delta3
+    "Short form for delta*delta*delta*(dddalpha_r/(ddelta*ddelta*ddelta))@tau=const"
+  algorithm
+    delta3_d3_alpha_r_d_delta3 := (0.05586817)*(2)*((2)-1)*((2)-2)*delta^(2)*tau^(-0.5) + (0.498223)*(1)*((1)-1)*((1)-2)*delta^(1)*tau^(0) + (0.02458698)*(3)*((3)-1)*((3)-2)*delta^(3)*tau^(0) + (0.0008570145)*(6)*((6)-1)*((6)-2)*delta^(6)*tau^(0) + (0.0004788584)*(6)*((6)-1)*((6)-2)*delta^(6)*tau^(1.5) + (-1.800808)*(1)*((1)-1)*((1)-2)*delta^(1)*tau^(1.5) + (0.2671641)*(1)*((1)-1)*((1)-2)*delta^(1)*tau^(2) + (-0.04781652)*(2)*((2)-1)*((2)-2)*delta^(2)*tau^(2) - (0.01423987)*delta^(5)*tau^(1)*exp(-delta^(1))*((1)*delta^(1)*((1)*(delta^(1)*((1)*(delta^(1)-3)-3*(5)+3)+(1)+3*(5)-3)+3*(5)^2-6*(5)+2)-((5)-2)*((5)-1)*(5)) - (0.3324062)*delta^(2)*tau^(3)*exp(-delta^(1))*((1)*delta^(1)*((1)*(delta^(1)*((1)*(delta^(1)-3)-3*(2)+3)+(1)+3*(2)-3)+3*(2)^2-6*(2)+2)-((2)-2)*((2)-1)*(2)) - (-0.007485907)*delta^(2)*tau^(5)*exp(-delta^(1))*((1)*delta^(1)*((1)*(delta^(1)*((1)*(delta^(1)-3)-3*(2)+3)+(1)+3*(2)-3)+3*(2)^2-6*(2)+2)-((2)-2)*((2)-1)*(2)) - (0.0001017263)*delta^(4)*tau^(1)*exp(-delta^(2))*((2)*delta^(2)*((2)*(delta^(2)*((2)*(delta^(2)-3)-3*(4)+3)+(2)+3*(4)-3)+3*(4)^2-6*(4)+2)-((4)-2)*((4)-1)*(4)) - (-0.5184567)*delta^(1)*tau^(5)*exp(-delta^(2))*((2)*delta^(2)*((2)*(delta^(2)*((2)*(delta^(2)-3)-3*(1)+3)+(2)+3*(1)-3)+3*(1)^2-6*(1)+2)-((1)-2)*((1)-1)*(1)) - (-0.08692288)*delta^(4)*tau^(5)*exp(-delta^(2))*((2)*delta^(2)*((2)*(delta^(2)*((2)*(delta^(2)-3)-3*(4)+3)+(2)+3*(4)-3)+3*(4)^2-6*(4)+2)-((4)-2)*((4)-1)*(4)) - (0.2057144)*delta^(1)*tau^(6)*exp(-delta^(2))*((2)*delta^(2)*((2)*(delta^(2)*((2)*(delta^(2)-3)-3*(1)+3)+(2)+3*(1)-3)+3*(1)^2-6*(1)+2)-((1)-2)*((1)-1)*(1)) - (-0.005000457)*delta^(2)*tau^(10)*exp(-delta^(2))*((2)*delta^(2)*((2)*(delta^(2)*((2)*(delta^(2)-3)-3*(2)+3)+(2)+3*(2)-3)+3*(2)^2-6*(2)+2)-((2)-2)*((2)-1)*(2)) - (0.0004603262)*delta^(4)*tau^(10)*exp(-delta^(2))*((2)*delta^(2)*((2)*(delta^(2)*((2)*(delta^(2)-3)-3*(4)+3)+(2)+3*(4)-3)+3*(4)^2-6*(4)+2)-((4)-2)*((4)-1)*(4)) - (-0.003497836)*delta^(1)*tau^(10)*exp(-delta^(3))*((3)*delta^(3)*((3)*(delta^(3)*((3)*(delta^(3)-3)-3*(1)+3)+(3)+3*(1)-3)+3*(1)^2-6*(1)+2)-((1)-2)*((1)-1)*(1)) - (0.006995038)*delta^(5)*tau^(18)*exp(-delta^(3))*((3)*delta^(3)*((3)*(delta^(3)*((3)*(delta^(3)-3)-3*(5)+3)+(3)+3*(5)-3)+3*(5)^2-6*(5)+2)-((5)-2)*((5)-1)*(5)) - (-0.01452184)*delta^(3)*tau^(22)*exp(-delta^(3))*((3)*delta^(3)*((3)*(delta^(3)*((3)*(delta^(3)-3)-3*(3)+3)+(3)+3*(3)-3)+3*(3)^2-6*(3)+2)-((3)-2)*((3)-1)*(3)) - (-0.0001285458)*delta^(10)*tau^(50)*exp(-delta^(4))*((4)*delta^(4)*((4)*(delta^(4)*((4)*(delta^(4)-3)-3*(10)+3)+(4)+3*(10)-3)+3*(10)^2-6*(10)+2)-((10)-2)*((10)-1)*(10));
+    annotation(Inline=false,
+      LateInline=true);
+  end delta3_d3_alpha_r_d_delta3;
+
+  redeclare function extends tau_delta2_d3_alpha_r_d_tau_d_delta2
+    "Short form for tau*delta*delta*(dddalpha_r/(dtau*ddelta*ddelta))"
+  algorithm
+    tau_delta2_d3_alpha_r_d_tau_d_delta2 := (0.05586817)*(2)*(-0.5)*(2-1)*delta^(2)*tau^(-0.5) + (0.498223)*(1)*(0)*(1-1)*delta^(1)*tau^(0) + (0.02458698)*(3)*(0)*(3-1)*delta^(3)*tau^(0) + (0.0008570145)*(6)*(0)*(6-1)*delta^(6)*tau^(0) + (0.0004788584)*(6)*(1.5)*(6-1)*delta^(6)*tau^(1.5) + (-1.800808)*(1)*(1.5)*(1-1)*delta^(1)*tau^(1.5) + (0.2671641)*(1)*(2)*(1-1)*delta^(1)*tau^(2) + (-0.04781652)*(2)*(2)*(2-1)*delta^(2)*tau^(2) + (0.01423987)*(1)*delta^(5)*tau^(1)*exp(-delta^(1))*((1)*delta^(1)*((1)*(delta^(1)-1)-2*(5)+1)+(5)*((5)-1)) + (0.3324062)*(3)*delta^(2)*tau^(3)*exp(-delta^(1))*((1)*delta^(1)*((1)*(delta^(1)-1)-2*(2)+1)+(2)*((2)-1)) + (-0.007485907)*(5)*delta^(2)*tau^(5)*exp(-delta^(1))*((1)*delta^(1)*((1)*(delta^(1)-1)-2*(2)+1)+(2)*((2)-1)) + (0.0001017263)*(1)*delta^(4)*tau^(1)*exp(-delta^(2))*((2)*delta^(2)*((2)*(delta^(2)-1)-2*(4)+1)+(4)*((4)-1)) + (-0.5184567)*(5)*delta^(1)*tau^(5)*exp(-delta^(2))*((2)*delta^(2)*((2)*(delta^(2)-1)-2*(1)+1)+(1)*((1)-1)) + (-0.08692288)*(5)*delta^(4)*tau^(5)*exp(-delta^(2))*((2)*delta^(2)*((2)*(delta^(2)-1)-2*(4)+1)+(4)*((4)-1)) + (0.2057144)*(6)*delta^(1)*tau^(6)*exp(-delta^(2))*((2)*delta^(2)*((2)*(delta^(2)-1)-2*(1)+1)+(1)*((1)-1)) + (-0.005000457)*(10)*delta^(2)*tau^(10)*exp(-delta^(2))*((2)*delta^(2)*((2)*(delta^(2)-1)-2*(2)+1)+(2)*((2)-1)) + (0.0004603262)*(10)*delta^(4)*tau^(10)*exp(-delta^(2))*((2)*delta^(2)*((2)*(delta^(2)-1)-2*(4)+1)+(4)*((4)-1)) + (-0.003497836)*(10)*delta^(1)*tau^(10)*exp(-delta^(3))*((3)*delta^(3)*((3)*(delta^(3)-1)-2*(1)+1)+(1)*((1)-1)) + (0.006995038)*(18)*delta^(5)*tau^(18)*exp(-delta^(3))*((3)*delta^(3)*((3)*(delta^(3)-1)-2*(5)+1)+(5)*((5)-1)) + (-0.01452184)*(22)*delta^(3)*tau^(22)*exp(-delta^(3))*((3)*delta^(3)*((3)*(delta^(3)-1)-2*(3)+1)+(3)*((3)-1)) + (-0.0001285458)*(50)*delta^(10)*tau^(50)*exp(-delta^(4))*((4)*delta^(4)*((4)*(delta^(4)-1)-2*(10)+1)+(10)*((10)-1));
+    annotation(Inline=false,
+          LateInline=true);
+  end tau_delta2_d3_alpha_r_d_tau_d_delta2;
+
+  redeclare function extends tau2_delta_d3_alpha_r_d_tau2_d_delta
+    "Short form for tau*tau*delta*(dddalpha_r/(dtau*dtau*ddelta))"
+  algorithm
+    tau2_delta_d3_alpha_r_d_tau2_d_delta := (0.05586817)*(2)*(-0.5)*(-0.5-1)*delta^(2)*tau^(-0.5) + (0.498223)*(1)*(0)*(0-1)*delta^(1)*tau^(0) + (0.02458698)*(3)*(0)*(0-1)*delta^(3)*tau^(0) + (0.0008570145)*(6)*(0)*(0-1)*delta^(6)*tau^(0) + (0.0004788584)*(6)*(1.5)*(1.5-1)*delta^(6)*tau^(1.5) + (-1.800808)*(1)*(1.5)*(1.5-1)*delta^(1)*tau^(1.5) + (0.2671641)*(1)*(2)*(2-1)*delta^(1)*tau^(2) + (-0.04781652)*(2)*(2)*(2-1)*delta^(2)*tau^(2) + (0.01423987)*(1)*((1)-1)*delta^(5)*tau^(1)*exp(-delta^(1))*((5)-(1)*delta^(1)) + (0.3324062)*(3)*((3)-1)*delta^(2)*tau^(3)*exp(-delta^(1))*((2)-(1)*delta^(1)) + (-0.007485907)*(5)*((5)-1)*delta^(2)*tau^(5)*exp(-delta^(1))*((2)-(1)*delta^(1)) + (0.0001017263)*(1)*((1)-1)*delta^(4)*tau^(1)*exp(-delta^(2))*((4)-(2)*delta^(2)) + (-0.5184567)*(5)*((5)-1)*delta^(1)*tau^(5)*exp(-delta^(2))*((1)-(2)*delta^(2)) + (-0.08692288)*(5)*((5)-1)*delta^(4)*tau^(5)*exp(-delta^(2))*((4)-(2)*delta^(2)) + (0.2057144)*(6)*((6)-1)*delta^(1)*tau^(6)*exp(-delta^(2))*((1)-(2)*delta^(2)) + (-0.005000457)*(10)*((10)-1)*delta^(2)*tau^(10)*exp(-delta^(2))*((2)-(2)*delta^(2)) + (0.0004603262)*(10)*((10)-1)*delta^(4)*tau^(10)*exp(-delta^(2))*((4)-(2)*delta^(2)) + (-0.003497836)*(10)*((10)-1)*delta^(1)*tau^(10)*exp(-delta^(3))*((1)-(3)*delta^(3)) + (0.006995038)*(18)*((18)-1)*delta^(5)*tau^(18)*exp(-delta^(3))*((5)-(3)*delta^(3)) + (-0.01452184)*(22)*((22)-1)*delta^(3)*tau^(22)*exp(-delta^(3))*((3)-(3)*delta^(3)) + (-0.0001285458)*(50)*((50)-1)*delta^(10)*tau^(50)*exp(-delta^(4))*((10)-(4)*delta^(4));
+    annotation(Inline=false,
+          LateInline=true);
+  end tau2_delta_d3_alpha_r_d_tau2_d_delta;
   /*Provide polynomial functions for saturation properties. These functions are
     fitted to external data (e.g. data extracted from RefProp or FluidProp). 
     Currently, just one fitting approach is implemented.
@@ -323,7 +363,7 @@ package R134a_IIR_P1_395_T233_455_Horner
      end if;
     end if;
     annotation(derivative(noDerivative=phase)=temperature_ph_der,
-      inverse(h=specificEnthalpy_pT(p=p,T=T,phase=phase)),
+          inverse(h=specificEnthalpy_pT(p=p,T=T,phase=phase)),
           Inline=false,
           LateInline=true);
   end temperature_ph;
@@ -376,7 +416,8 @@ package R134a_IIR_P1_395_T233_455_Horner
       T := saturationTemperature(p);
      end if;
     end if;
-    annotation(Inline=false,
+    annotation(derivative(noDerivative=phase)=temperature_ps_der,
+          Inline=false,
           LateInline=true);
   end temperature_ps;
 
@@ -422,7 +463,8 @@ package R134a_IIR_P1_395_T233_455_Horner
       d := dewDensity(sat)*(1 -(p - sat.psat)/dp) + d2*(p - sat.psat)/dp;
      end if;
     end if;
-    annotation(inverse(p=pressure_dT(d=d,T=T,phase=phase)),
+    annotation(derivative(noDerivative=phase)=density_pT_der,
+          inverse(p=pressure_dT(d=d,T=T,phase=phase)),
           Inline=false,
           LateInline=true);
   end density_pT;

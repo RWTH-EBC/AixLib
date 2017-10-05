@@ -1,4 +1,4 @@
-within AixLib.Media.Refrigerants.Examples;
+within AixLib.Media.Refrigerants.Validation;
 model RefrigerantInversions
   "Model to check computation of the main thermodynamic properties and theirs inverses"
   extends Modelica.Icons.Example;

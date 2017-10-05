@@ -167,6 +167,46 @@ partial package TemplateHybridTwoPhaseMediumFormula
   annotation(Inline=false,
           LateInline=true);
   end tau_delta_d2_alpha_r_d_tau_d_delta;
+
+  redeclare function extends tau3_d3_alpha_0_d_tau3
+    "Short form for tau*tau*tau*(dddalpha_0/(dtau*dtau*dtau))@delta=const"
+  algorithm
+
+    annotation(Inline=false,
+          LateInline=true);
+  end tau3_d3_alpha_0_d_tau3;
+
+  redeclare function extends tau3_d3_alpha_r_d_tau3
+    "Short form for tau*tau*tau*(dddalpha_r/(dtau*dtau*dtau))@delta=const"
+  algorithm
+
+    annotation(Inline=false,
+          LateInline=true);
+  end tau3_d3_alpha_r_d_tau3;
+
+  redeclare function extends delta3_d3_alpha_r_d_delta3
+    "Short form for delta*delta*delta*(dddalpha_r/(ddelta*ddelta*ddelta))@tau=const"
+  algorithm
+
+    annotation(Inline=false,
+          LateInline=true);
+  end delta3_d3_alpha_r_d_delta3;
+
+  redeclare function extends tau_delta2_d3_alpha_r_d_tau_d_delta2
+    "Short form for tau*delta*delta*(dddalpha_r/(dtau*ddelta*ddelta))"
+  algorithm
+
+    annotation(Inline=false,
+          LateInline=true);
+  end tau_delta2_d3_alpha_r_d_tau_d_delta2;
+
+  redeclare function extends tau2_delta_d3_alpha_r_d_tau2_d_delta
+    "Short form for tau*tau*delta*(dddalpha_r/(dtau*dtau*ddelta))"
+  algorithm
+
+    annotation(Inline=false,
+          LateInline=true);
+  end tau2_delta_d3_alpha_r_d_tau2_d_delta;
   /*Provide polynomial functions for saturation properties. These functions are
     fitted to external data (e.g. data extracted from RefProp or FluidProp). 
     Currently, just one fitting approach is implemented.
@@ -320,7 +360,8 @@ partial package TemplateHybridTwoPhaseMediumFormula
 
   algorithm
 
-  annotation(Inline=false,
+  annotation(derivative(noDerivative=phase)=temperature_ps_der,
+          Inline=false,
           LateInline=true);
   end temperature_ps;
 
@@ -346,7 +387,8 @@ partial package TemplateHybridTwoPhaseMediumFormula
 
   algorithm
 
-  annotation(inverse(p=pressure_dT(d=d,T=T,phase=phase)),
+  annotation(derivative(noDerivative=phase)=density_pT_der,
+          inverse(p=pressure_dT(d=d,T=T,phase=phase)),
           Inline=false,
           LateInline=true);
   end density_pT;

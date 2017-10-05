@@ -195,14 +195,14 @@ partial package PartialHybridTwoPhaseMediumRecord
           delta^cf.alpha_r_p2[k]*tau^cf.alpha_r_p3[k];
       end for;
     end if;
-    if not cf.alpha_r_nP == 0 then
+    if not cf.alpha_r_nB == 0 then
       for k in 1:cf.alpha_r_nB loop
         tau2_d2_alpha_r_d_tau2 := tau2_d2_alpha_r_d_tau2 +
           cf.alpha_r_b1[k]*cf.alpha_r_b3[k]*(cf.alpha_r_b3[k]-1)*delta^
           cf.alpha_r_b2[k]*tau^cf.alpha_r_b3[k]*exp(-delta^cf.alpha_r_b4[k]);
       end for;
     end if;
-    if not cf.alpha_r_nP == 0 then
+    if not cf.alpha_r_nG == 0 then
       for k in 1:cf.alpha_r_nG loop
         tau2_d2_alpha_r_d_tau2 := tau2_d2_alpha_r_d_tau2 +
           cf.alpha_r_g1[k]*delta^cf.alpha_r_g2[k]*tau^cf.alpha_r_g3[k]*
@@ -228,7 +228,7 @@ partial package PartialHybridTwoPhaseMediumRecord
           cf.alpha_r_p3[k];
       end for;
     end if;
-    if not cf.alpha_r_nP == 0 then
+    if not cf.alpha_r_nB == 0 then
       for k in 1:cf.alpha_r_nB loop
         delta_d_alpha_r_d_delta := delta_d_alpha_r_d_delta +
           cf.alpha_r_b1[k]*delta^cf.alpha_r_b2[k]*tau^cf.alpha_r_b3[k]*
@@ -236,7 +236,7 @@ partial package PartialHybridTwoPhaseMediumRecord
           delta^cf.alpha_r_b4[k]);
       end for;
     end if;
-    if not cf.alpha_r_nP == 0 then
+    if not cf.alpha_r_nG == 0 then
       for k in 1:cf.alpha_r_nG loop
         delta_d_alpha_r_d_delta := delta_d_alpha_r_d_delta +
           cf.alpha_r_g1[k]*delta^cf.alpha_r_g2[k]*tau^cf.alpha_r_g3[k]*
@@ -319,6 +319,192 @@ partial package PartialHybridTwoPhaseMediumRecord
   annotation(Inline=false,
           LateInline=true);
   end tau_delta_d2_alpha_r_d_tau_d_delta;
+
+  redeclare replaceable function extends tau3_d3_alpha_0_d_tau3
+    "Short form for tau*tau*tau*(dddalpha_0/(dtau*dtau*dtau))@delta=const"
+  protected
+    EoS cf;
+
+  algorithm
+    if not cf.alpha_0_nL == 0 then
+      for k in 1:cf.alpha_0_nL loop
+        tau3_d3_alpha_0_d_tau3 := tau3_d3_alpha_0_d_tau3 +
+          2*cf.alpha_0_l1[k]*cf.alpha_0_l2[k];
+      end for;
+    end if;
+    if not cf.alpha_0_nP == 0 then
+      for k in 1:cf.alpha_0_nP loop
+        tau3_d3_alpha_0_d_tau3 := tau3_d3_alpha_0_d_tau3 +
+          cf.alpha_0_p1[k]*cf.alpha_0_p2[k]*(cf.alpha_0_p2[k]-1)*
+          (cf.alpha_0_p2[k]-2)*tau^cf.alpha_0_p2[k];
+      end for;
+    end if;
+    if not cf.alpha_0_nE == 0 then
+      for k in 1:cf.alpha_0_nE loop
+        tau3_d3_alpha_0_d_tau3 := tau3_d3_alpha_0_d_tau3 +
+          tau^3*cf.alpha_0_e1[k]*cf.alpha_0_e2[k]^3*exp(cf.alpha_0_e2[k]*tau)*
+          (exp(cf.alpha_0_e2[k]*tau)+1)/((exp(cf.alpha_0_e2[k]*tau)-1)^3);
+      end for;
+    end if;
+    annotation(Inline=false,
+          LateInline=true);
+  end tau3_d3_alpha_0_d_tau3;
+
+  redeclare replaceable function extends tau3_d3_alpha_r_d_tau3
+    "Short form for tau*tau*tau*(dddalpha_r/(dtau*dtau*dtau))@delta=const"
+  protected
+    EoS cf;
+
+  algorithm
+    if not cf.alpha_r_nP == 0 then
+      for k in 1:cf.alpha_r_nP loop
+        tau3_d3_alpha_r_d_tau3 := tau3_d3_alpha_r_d_tau3 +
+          cf.alpha_r_p1[k]*cf.alpha_r_p3[k]*(cf.alpha_r_p3[k]-1)*
+          (cf.alpha_r_p3[k]-2)*delta^cf.alpha_r_p2[k]*tau^cf.alpha_r_p3[k];
+      end for;
+    end if;
+    if not cf.alpha_r_nB == 0 then
+      for k in 1:cf.alpha_r_nB loop
+        tau3_d3_alpha_r_d_tau3 := tau3_d3_alpha_r_d_tau3 +
+          cf.alpha_r_b1[k]*cf.alpha_r_b3[k]*(cf.alpha_r_b3[k]-1)*
+          (cf.alpha_r_b3[k]-2)*delta^cf.alpha_r_b2[k]*tau^cf.alpha_r_b3[k]*
+          exp(-delta^cf.alpha_r_b4[k]);
+      end for;
+    end if;
+    if not cf.alpha_r_nP == 0 then
+      for k in 1:cf.alpha_r_nG loop
+        tau3_d3_alpha_r_d_tau3 := tau3_d3_alpha_r_d_tau3 -
+        cf.alpha_r_g1[k]*delta^cf.alpha_r_g2[k]*tau^cf.alpha_r_g3[k]*
+        (8*cf.alpha_r_g6[k]^3*tau^6-24*cf.alpha_r_g6[k]^3*cf.alpha_r_g7[k]*
+        tau^5+12*cf.alpha_r_g6[k]^2*(2*cf.alpha_r_g6[k]*cf.alpha_r_g7[k]^2-
+        cf.alpha_r_g3[k]-1)*tau^4-4*cf.alpha_r_g6[k]^2*cf.alpha_r_g7[k]*(2*
+        cf.alpha_r_g6[k]*cf.alpha_r_g7[k]^2-6*cf.alpha_r_g3[k]-3)*tau^3-6*
+        cf.alpha_r_g3[k]*cf.alpha_r_g6[k]*(2*cf.alpha_r_g6[k]*cf.alpha_r_g7[k]^2-
+        cf.alpha_r_g3[k])*tau^2-6*(cf.alpha_r_g3[k]-1)*cf.alpha_r_g3[k]*
+        cf.alpha_r_g6[k]*cf.alpha_r_g7[k]*tau-cf.alpha_r_g3[k]^3+3*
+        cf.alpha_r_g3[k]^2-2*cf.alpha_r_g3[k])*exp(-cf.alpha_r_g6[k]*
+        (tau-cf.alpha_r_g7[k])^2-cf.alpha_r_g4[k]*(delta-cf.alpha_r_g5[k])^2);
+      end for;
+    end if;
+    annotation(Inline=false,
+          LateInline=true);
+  end tau3_d3_alpha_r_d_tau3;
+
+  redeclare replaceable function extends delta3_d3_alpha_r_d_delta3
+    "Short form for delta*delta*delta*(dddalpha_r/(ddelta*ddelta*ddelta))@tau=const"
+  protected
+    EoS cf;
+
+  algorithm
+    if not cf.alpha_r_nP == 0 then
+      for k in 1:cf.alpha_r_nP loop
+        delta3_d3_alpha_r_d_delta3 := delta3_d3_alpha_r_d_delta3 +
+          cf.alpha_r_p1[k]*cf.alpha_r_p2[k]*(cf.alpha_r_p2[k]-1)*
+          (cf.alpha_r_p2[k]-2)*delta^cf.alpha_r_p2[k]*tau^cf.alpha_r_p3[k];
+      end for;
+    end if;
+    if not cf.alpha_r_nB == 0 then
+      for k in 1:cf.alpha_r_nB loop
+        delta3_d3_alpha_r_d_delta3 := delta3_d3_alpha_r_d_delta3 -
+          cf.alpha_r_b1[k]*delta^cf.alpha_r_b2[k]*tau^cf.alpha_r_b3[k]*
+          exp(-delta^cf.alpha_r_b4[k])*(cf.alpha_r_b4[k]*delta^cf.alpha_r_b4[k]*
+          (cf.alpha_r_b4[k]*(delta^cf.alpha_r_b4[k]*(cf.alpha_r_b4[k]*
+          (delta^cf.alpha_r_b4[k]-3)-3*cf.alpha_r_b2[k]+3)+cf.alpha_r_b4[k]+
+          3*cf.alpha_r_b2[k]-3)+3*cf.alpha_r_b2[k]^2-6*cf.alpha_r_b2[k]+2)-
+          (cf.alpha_r_b2[k]-2)*(cf.alpha_r_b2[k]-1)*cf.alpha_r_b2[k]);
+      end for;
+    end if;
+    if not cf.alpha_r_nG == 0 then
+      for k in 1:cf.alpha_r_nG loop
+        delta3_d3_alpha_r_d_delta3 := delta3_d3_alpha_r_d_delta3 -
+          cf.alpha_r_g1[k]*tau^cf.alpha_r_g3[k]*delta^cf.alpha_r_g2[k]*
+          (8*cf.alpha_r_g4[k]^3*delta^6-24*cf.alpha_r_g4[k]^3*cf.alpha_r_g5[k]*
+          delta^5+12*cf.alpha_r_g4[k]^2*(2*cf.alpha_r_g4[k]*cf.alpha_r_g5[k]^2-
+          cf.alpha_r_g2[k]-1)*delta^4-4*cf.alpha_r_g4[k]^2*cf.alpha_r_g5[k]*(2*
+          cf.alpha_r_g4[k]*cf.alpha_r_g5[k]^2-6*cf.alpha_r_g2[k]-3)*delta^3-6*
+          cf.alpha_r_g2[k]*cf.alpha_r_g4[k]*(2*cf.alpha_r_g4[k]*
+          cf.alpha_r_g5[k]^2-cf.alpha_r_g2[k])*delta^2-6*(cf.alpha_r_g2[k]-1)*
+          cf.alpha_r_g2[k]*cf.alpha_r_g4[k]*cf.alpha_r_g5[k]*delta-
+          cf.alpha_r_g2[k]^3+3*cf.alpha_r_g2[k]^2-2*cf.alpha_r_g2[k])*
+          exp(-cf.alpha_r_g4[k]*(delta-cf.alpha_r_g5[k])^2-cf.alpha_r_g6[k]*
+          (tau-cf.alpha_r_g7[k])^2);
+      end for;
+    end if;
+    annotation(Inline=false,
+          LateInline=true);
+  end delta3_d3_alpha_r_d_delta3;
+
+  redeclare replaceable function extends tau_delta2_d3_alpha_r_d_tau_d_delta2
+    "Short form for tau*delta*delta*(dddalpha_r/(dtau*ddelta*ddelta))"
+  protected
+    EoS cf;
+
+  algorithm
+    if not cf.alpha_r_nP == 0 then
+      for k in 1:cf.alpha_r_nP loop
+        tau_delta2_d3_alpha_r_d_tau_d_delta2 := tau_delta2_d3_alpha_r_d_tau_d_delta2 +
+          cf.alpha_r_p1[k]*cf.alpha_r_p2[k]*(cf.alpha_r_p2[k]-1)*cf.alpha_r_p3[k]*
+          delta^cf.alpha_r_p2[k]*tau^cf.alpha_r_p3[k];
+      end for;
+    end if;
+    if not cf.alpha_r_nB == 0 then
+      for k in 1:cf.alpha_r_nB loop
+        tau_delta2_d3_alpha_r_d_tau_d_delta2 := tau_delta2_d3_alpha_r_d_tau_d_delta2 +
+          cf.alpha_r_b1[k]*cf.alpha_r_b3[k]*delta^cf.alpha_r_b2[k]*tau^
+          cf.alpha_r_b3[k]*exp(-delta^cf.alpha_r_b4[k])*(cf.alpha_r_b4[k]*
+          delta^cf.alpha_r_b4[k]*(cf.alpha_r_b4[k]*(delta^cf.alpha_r_b4[k]-1)-
+          2*cf.alpha_r_b2[k]+1)+cf.alpha_r_b2[k]*(cf.alpha_r_b2[k]-1));
+      end for;
+    end if;
+    if not cf.alpha_r_nG == 0 then
+      for k in 1:cf.alpha_r_nG loop
+        tau_delta2_d3_alpha_r_d_tau_d_delta2 := tau_delta2_d3_alpha_r_d_tau_d_delta2 +
+          cf.alpha_r_g1[k]*delta^cf.alpha_r_g2[k]*tau^cf.alpha_r_g3[k]*
+          exp(-cf.alpha_r_g4[k]*(delta - cf.alpha_r_g5[k])^2 - cf.alpha_r_g6[k]*
+          (tau - cf.alpha_r_g7[k])^2)*(cf.alpha_r_g3[k]-2*cf.alpha_r_g6[k]*tau*
+          (tau-cf.alpha_r_g7[k]))*((cf.alpha_r_g2[k]-2*cf.alpha_r_g4[k]*
+          delta*(delta-cf.alpha_r_g5[k]))^2-cf.alpha_r_g2[k]-2*cf.alpha_r_g4[k]*
+          delta^2);
+      end for;
+    end if;
+    annotation(Inline=false,
+          LateInline=true);
+  end tau_delta2_d3_alpha_r_d_tau_d_delta2;
+
+  redeclare replaceable function extends tau2_delta_d3_alpha_r_d_tau2_d_delta
+    "Short form for tau*tau*delta*(dddalpha_r/(dtau*dtau*ddelta))"
+  protected
+    EoS cf;
+
+  algorithm
+    if not cf.alpha_r_nP == 0 then
+      for k in 1:cf.alpha_r_nP loop
+        tau2_delta_d3_alpha_r_d_tau2_d_delta := tau2_delta_d3_alpha_r_d_tau2_d_delta +
+          cf.alpha_r_p1[k]*cf.alpha_r_p2[k]*cf.alpha_r_p3[k]*(cf.alpha_r_p3[k]-1)*
+          delta^cf.alpha_r_p2[k]*tau^cf.alpha_r_p3[k];
+      end for;
+    end if;
+    if not cf.alpha_r_nB == 0 then
+      for k in 1:cf.alpha_r_nB loop
+        tau2_delta_d3_alpha_r_d_tau2_d_delta := tau2_delta_d3_alpha_r_d_tau2_d_delta +
+          cf.alpha_r_b1[k]*cf.alpha_r_b3[k]*(cf.alpha_r_b3[k]-1)*delta^
+          cf.alpha_r_b2[k]*tau^cf.alpha_r_b3[k]*exp(-delta^cf.alpha_r_b4[k])*
+          (cf.alpha_r_b2[k]-cf.alpha_r_b4[k]*delta^cf.alpha_r_b4[k]);
+      end for;
+    end if;
+    if not cf.alpha_r_nG == 0 then
+      for k in 1:cf.alpha_r_nG loop
+        tau2_delta_d3_alpha_r_d_tau2_d_delta := tau2_delta_d3_alpha_r_d_tau2_d_delta +
+          cf.alpha_r_g1[k]*delta^cf.alpha_r_g2[k]*tau^cf.alpha_r_g3[k]*
+          exp(-cf.alpha_r_g4[k]*(delta - cf.alpha_r_g5[k])^2 - cf.alpha_r_g6[k]*
+          (tau - cf.alpha_r_g7[k])^2)*(cf.alpha_r_g2[k]-2*cf.alpha_r_g4[k]*delta*
+          (delta-cf.alpha_r_g5[k]))*((cf.alpha_r_g3[k]-2*cf.alpha_r_g6[k]*tau*
+          (tau-cf.alpha_r_g7[k]))^2-cf.alpha_r_g3[k]-2*cf.alpha_r_g6[k]*tau^2);
+      end for;
+    end if;
+    annotation(Inline=false,
+          LateInline=true);
+  end tau2_delta_d3_alpha_r_d_tau2_d_delta;
   /*Provide polynomial functions for saturation properties. These functions are
     fitted to external data (e.g. data extracted from RefProp or FluidProp). 
     Currently, just one fitting approach is implemented. Therefore, the 
@@ -769,7 +955,8 @@ partial package PartialHybridTwoPhaseMediumRecord
         T := saturationTemperature(p);
       end if;
     end if;
-    annotation(Inline=false,
+    annotation(derivative(noDerivative=phase)=temperature_ps_der,
+          Inline=false,
           LateInline=true);
   end temperature_ps;
 
@@ -907,7 +1094,8 @@ partial package PartialHybridTwoPhaseMediumRecord
         d := dewDensity(sat)*(1 -(p - sat.psat)/dp) + d2*(p - sat.psat)/dp;
       end if;
     end if;
-    annotation(inverse(p=pressure_dT(d=d,T=T,phase=phase)),
+    annotation(derivative(noDerivative=phase)=density_pT_der,
+          inverse(p=pressure_dT(d=d,T=T,phase=phase)),
           Inline=false,
           LateInline=true);
   end density_pT;

@@ -1,4 +1,4 @@
-﻿within AixLib.Media.Refrigerants.Examples;
+﻿within AixLib.Media.Refrigerants.Validation;
 model RefrigerantsFittedFormulas
   "Model that checks the fitted formulas by comparing the results to external media models"
   extends Modelica.Icons.Example;
@@ -6,14 +6,14 @@ model RefrigerantsFittedFormulas
   // Define the refrigerant that shall be tested
   //
   package MediumInt =
-    AixLib.Media.Refrigerants.R134a.R134a_IIR_P1_395_T233_455_Formula
+    AixLib.Media.Refrigerants.R134a.R134a_IIR_P1_395_T233_455_Horner
     "Internal medium model";
   package MediumExt =
     HelmholtzMedia.HelmholtzFluids.R134a "External medium model";
 
   // Define parameters that define the range for calculating the fitted formulas
   //
-  parameter Modelica.SIunits.SpecificEnthalpy h_min = 150e3
+  parameter Modelica.SIunits.SpecificEnthalpy h_min = 180e3
     "Fluid limit: Minimum specific enthalpy"
     annotation (Dialog(group="Fluid limits"));
   parameter Modelica.SIunits.SpecificEnthalpy h_max = 550e3
@@ -80,25 +80,40 @@ model RefrigerantsFittedFormulas
     Real f_itExt "Derivative di/dt of the external Helmholtz energy";
     Real f_ittInt "Derivative ddi/dtt of the internal Helmholtz energy";
     Real f_ittExt "Derivative ddi/dtt of the external Helmholtz energy";
+    Real f_itttInt "Derivative dddi/dttt of the internal Helmholtz energy";
+    Real f_itttExt "Derivative dddi/dttt of the external Helmholtz energy";
     Real f_rtInt "Derivative dr/dt of the internal Helmholtz energy";
     Real f_rtExt "Derivative dr/dt of the external Helmholtz energy";
     Real f_rttInt "Derivative ddr/dtt of the internal Helmholtz energy";
     Real f_rttExt "Derivative ddr/dtt of the external Helmholtz energy";
+    Real f_rtttInt "Derivative dddr/dttt of the internal Helmholtz energy";
+    Real f_rtttExt "Derivative dddr/dttt of the external Helmholtz energy";
     Real f_rdInt "Derivative dr/dd of the internal Helmholtz energy";
     Real f_rdExt "Derivative dr/dd of the external Helmholtz energy";
     Real f_rddInt "Derivative ddr/ddd of the internal Helmholtz energy";
     Real f_rddExt "Derivative ddr/ddd of the external Helmholtz energy";
+    Real f_rdddInt "Derivative dddr/dddd of the internal Helmholtz energy";
+    Real f_rdddExt "Derivative dddr/dddd of the external Helmholtz energy";
     Real f_rtdInt "Derivative ddr/dtd of the internal Helmholtz energy";
     Real f_rtdExt "Derivative ddr/dtd of the external Helmholtz energy";
+    Real f_rtddInt "Derivative dddr/dtdd of the internal Helmholtz energy";
+    Real f_rtddExt "Derivative dddr/dtdd of the external Helmholtz energy";
+    Real f_rttdInt "Derivative dddr/dttd of the internal Helmholtz energy";
+    Real f_rttdExt "Derivative dddr/dttd of the external Helmholtz energy";
     Real df_i "Difference of iddeal part of Helmholtz energy";
     Real df_r "Difference of residual part of Helmholtz energy";
     Real df_it "Difference of derivative di/dt of Helmholtz energy";
     Real df_itt "Difference of derivative ddi/dtt of Helmholtz energy";
+    Real df_ittt "Difference of derivative dddi/dttt of Helmholtz energy";
     Real df_rt "Difference of derivative dr/dt of Helmholtz energy";
     Real df_rtt "Difference of derivative ddr/dtt of Helmholtz energy";
+    Real df_rttt "Difference of derivative dddr/dttt of Helmholtz energy";
     Real df_rd "Difference of derivative dr/dd of Helmholtz energy";
     Real df_rdd "Difference of derivative ddr/ddd of Helmholtz energy";
+    Real df_rddd "Difference of derivative dddr/dddd of Helmholtz energy";
     Real df_rtd "Difference of derivative ddr/dtd of Helmholtz energy";
+    Real df_rtdd "Difference of derivative dddr/dtdd of Helmholtz energy";
+    Real df_rttd "Difference of derivative dddr/dttd of Helmholtz energy";
   end EoS;
 
   record Saturation
@@ -191,9 +206,9 @@ equation
 
   // Calculate state properties for calculating saturation properties acording to time
   //
-  T_sat = T_min + (min(MediumInt.fluidConstants[1].criticalTemperature,
+  T_sat = T_min + (min(MediumInt.fluidConstants[1].criticalTemperature-2,
     T_max)-T_min)/(80*80) * time;
-  p_sat = p_min + (min(MediumInt.fluidConstants[1].criticalPressure,
+  p_sat = p_min + (min(MediumInt.fluidConstants[1].criticalPressure-1000,
     p_max)-p_min)/(80*80) * time;
 
   // Calculate derivatives of the EoS
@@ -208,31 +223,51 @@ equation
   eos.f_ittInt = MediumInt.tau2_d2_alpha_0_d_tau2(tauInt)
       /tauInt^2;
   eos.f_ittExt = MediumExt.EoS.f_itt(deltaInt,tauInt);
+  eos.f_itttInt = MediumInt.tau3_d3_alpha_0_d_tau3(tauInt)
+      /tauInt^3;
+  eos.f_itttExt = MediumExt.EoS.f_ittt(deltaInt,tauInt);
   eos.f_rtInt = MediumInt.tau_d_alpha_r_d_tau(deltaInt,tauInt)
       /tauInt;
   eos.f_rtExt = MediumExt.EoS.f_rt(deltaInt,tauInt);
   eos.f_rttInt = MediumInt.tau2_d2_alpha_r_d_tau2(deltaInt,tauInt)
       /tauInt^2;
   eos.f_rttExt = MediumExt.EoS.f_rtt(deltaInt,tauInt);
+  eos.f_rtttInt = MediumInt.tau3_d3_alpha_r_d_tau3(deltaInt,tauInt)
+      /tauInt^3;
+  eos.f_rtttExt = MediumExt.EoS.f_rttt(deltaInt,tauInt);
   eos.f_rdInt = MediumInt.delta_d_alpha_r_d_delta(deltaInt,tauInt)
       /deltaInt;
   eos.f_rdExt = MediumExt.EoS.f_rd(deltaInt,tauInt);
   eos.f_rddInt = MediumInt.delta2_d2_alpha_r_d_delta2(deltaInt,tauInt)
       /deltaInt^2;
   eos.f_rddExt = MediumExt.EoS.f_rdd(deltaInt,tauInt);
+  eos.f_rdddInt = MediumInt.delta3_d3_alpha_r_d_delta3(deltaInt,tauInt)
+      /deltaInt^3;
+  eos.f_rdddExt = MediumExt.EoS.f_rddd(deltaInt,tauInt);
   eos.f_rtdInt = MediumInt.tau_delta_d2_alpha_r_d_tau_d_delta(deltaInt,tauInt)
       /tauInt/deltaInt;
   eos.f_rtdExt = MediumExt.EoS.f_rtd(deltaInt,tauInt);
+  eos.f_rtddInt = MediumInt.tau_delta2_d3_alpha_r_d_tau_d_delta2(deltaInt,tauInt)
+      /tauInt/deltaInt^2;
+  eos.f_rtddExt = MediumExt.EoS.f_rtdd(deltaInt,tauInt);
+  eos.f_rttdInt = MediumInt.tau2_delta_d3_alpha_r_d_tau2_d_delta(deltaInt,tauInt)
+      /tauInt^2/deltaInt;
+  eos.f_rttdExt = MediumExt.EoS.f_rttd(deltaInt,tauInt);
 
   eos.df_i = (eos.f_iInt-eos.f_iExt);
   eos.df_r = (eos.f_rInt-eos.f_rExt);
   eos.df_it = (eos.f_itInt-eos.f_itExt);
   eos.df_itt = (eos.f_ittInt-eos.f_ittExt);
+  eos.df_ittt = (eos.f_itttInt-eos.f_itttExt);
   eos.df_rt = (eos.f_rtInt-eos.f_rtExt);
   eos.df_rtt = (eos.f_rttInt-eos.f_rttExt);
+  eos.df_rttt = (eos.f_rtttInt-eos.f_rtttExt);
   eos.df_rd = (eos.f_rdInt-eos.f_rdExt);
   eos.df_rdd = (eos.f_rddInt-eos.f_rddExt);
+  eos.df_rddd = (eos.f_rdddInt-eos.f_rdddExt);
   eos.df_rtd = (eos.f_rtdInt-eos.f_rtdExt);
+  eos.df_rtdd = (eos.f_rtddInt-eos.f_rtddExt);
+  eos.df_rttd = (eos.f_rttdInt-eos.f_rttdExt);
 
   // Calculate saturation properties
   //

@@ -103,13 +103,13 @@ package R410a_IIR_P1_48_T233_340_Record
 
   redeclare record SmoothTransition "Record that contains ranges to calculate a smooth transition between
     different regions"
-    SpecificEnthalpy T_ph = 5;
-    SpecificEntropy T_ps = 5;
-    AbsolutePressure d_pT = 5;
-    SpecificEnthalpy d_ph = 5;
-    Real d_ps(unit="J/(Pa.K.kg)") =  1/(48e5-0.5e5);
-    Real h_ps(unit="J/(Pa.K.kg)") = 1/(48e5-0.5e5);
-    AbsolutePressure d_derh_p = 0.2;
+      SpecificEnthalpy T_ph = 2.5;
+      SpecificEntropy T_ps = 2.5;
+      AbsolutePressure d_pT = 2.5;
+      SpecificEnthalpy d_ph = 2.5;
+      Real d_ps(unit="J/(Pa.K.kg)") =  5/(48e5-1e5);
+      Real h_ps(unit="J/(Pa.K.kg)") = 50/(48e5-1e5);
+      AbsolutePressure d_derh_p = 0.25;
   end SmoothTransition;
   /*Provide functions to calculate further thermodynamic properties like the
     dynamic viscosity or thermal conductivity. Also add references.

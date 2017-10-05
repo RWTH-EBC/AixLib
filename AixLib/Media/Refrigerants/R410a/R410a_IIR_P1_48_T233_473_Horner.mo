@@ -85,13 +85,13 @@ package R410a_IIR_P1_48_T233_473_Horner
   */
   redeclare record SmoothTransition "Record that contains ranges to calculate a smooth transition between
     different regions"
-    SpecificEnthalpy T_ph = 5;
-    SpecificEntropy T_ps = 5;
-    AbsolutePressure d_pT = 5;
-    SpecificEnthalpy d_ph = 5;
-    Real d_ps(unit="J/(Pa.K.kg)") =  1/(48e5-0.5e5);
-    Real h_ps(unit="J/(Pa.K.kg)") = 1/(48e5-0.5e5);
-    AbsolutePressure d_derh_p = 0.2;
+    SpecificEnthalpy T_ph = 2.5;
+    SpecificEntropy T_ps = 2.5;
+    AbsolutePressure d_pT = 2.5;
+    SpecificEnthalpy d_ph = 2.5;
+    Real d_ps(unit="J/(Pa.K.kg)") =  5/(48e5-1e5);
+    Real h_ps(unit="J/(Pa.K.kg)") = 50/(48e5-1e5);
+    AbsolutePressure d_derh_p = 0.25;
   end SmoothTransition;
   /*Provide Helmholtz equations of state (EoS) using an explicit formula.
   */
@@ -166,6 +166,46 @@ package R410a_IIR_P1_48_T233_473_Horner
   annotation(Inline=false,
           LateInline=true);
   end tau_delta_d2_alpha_r_d_tau_d_delta;
+
+  redeclare function extends tau3_d3_alpha_0_d_tau3
+    "Short form for tau*tau*tau*(dddalpha_0/(dtau*dtau*dtau))@delta=const"
+  algorithm
+    tau3_d3_alpha_0_d_tau3 := 2*(-1)*(1) + (36.8871)*(0)*((0)-1)*((0)-2) *tau^(0) + (7.15807)*(1)*((1)-1)*((1)-2) *tau^(1) + (-46.87575)*(-0.1)*((-0.1)-1)*((-0.1)-2) *tau^(-0.1) + tau^3*(2.0623)*(2.02326)^3*exp((2.02326)*tau)*(exp((2.02326)*tau)+1)/(exp((2.02326)*tau)-1)^3 + tau^3*(5.9751)*(5.00154)^3*exp((5.00154)*tau)*(exp((5.00154)*tau)+1)/(exp((5.00154)*tau)-1)^3 + tau^3*(1.5612)*(11.2484)^3*exp((11.2484)*tau)*(exp((11.2484)*tau)+1)/(exp((11.2484)*tau)-1)^3;
+    annotation(Inline=false,
+          LateInline=true);
+  end tau3_d3_alpha_0_d_tau3;
+
+  redeclare function extends tau3_d3_alpha_r_d_tau3
+    "Short form for tau*tau*tau*(dddalpha_r/(dtau*dtau*dtau))@delta=const"
+  algorithm
+    tau3_d3_alpha_r_d_tau3 := (0.987252)*(0.44)*((0.44)-1)*((0.44)-2)*delta^(1)*tau^(0.44) + (-1.03017)*(1.2)*((1.2)-1)*((1.2)-2)*delta^(1)*tau^(1.2) + (1.17666)*(2.97)*((2.97)-1)*((2.97)-2)*delta^(1)*tau^(2.97) + (-0.138991)*(2.95)*((2.95)-1)*((2.95)-2)*delta^(2)*tau^(2.95) + (0.00302373)*(0.2)*((0.2)-1)*((0.2)-2)*delta^(5)*tau^(0.2) + (-2.53639)*(1.93)*((1.93)-1)*((1.93)-2)*delta^(1)*tau^(1.93)*exp(-delta^(1)) + (-1.9668)*(1.78)*((1.78)-1)*((1.78)-2)*delta^(2)*tau^(1.78)*exp(-delta^(1)) + (-0.83048)*(3)*((3)-1)*((3)-2)*delta^(3)*tau^(3)*exp(-delta^(1)) + (0.172477)*(0.2)*((0.2)-1)*((0.2)-2)*delta^(5)*tau^(0.2)*exp(-delta^(1)) + (-0.261116)*(0.74)*((0.74)-1)*((0.74)-2)*delta^(5)*tau^(0.74)*exp(-delta^(1)) + (-0.0745473)*(3)*((3)-1)*((3)-2)*delta^(5)*tau^(3)*exp(-delta^(1)) + (0.679757)*(2.1)*((2.1)-1)*((2.1)-2)*delta^(1)*tau^(2.1)*exp(-delta^(2)) + (-0.652431)*(4.3)*((4.3)-1)*((4.3)-2)*delta^(1)*tau^(4.3)*exp(-delta^(2)) + (0.0553849)*(0.25)*((0.25)-1)*((0.25)-2)*delta^(4)*tau^(0.25)*exp(-delta^(2)) + (-0.071097)*(7)*((7)-1)*((7)-2)*delta^(4)*tau^(7)*exp(-delta^(2)) + (-0.000875332)*(4.7)*((4.7)-1)*((4.7)-2)*delta^(9)*tau^(4.7)*exp(-delta^(2)) + (0.020076)*(13)*((13)-1)*((13)-2)*delta^(2)*tau^(13)*exp(-delta^(3)) + (-0.0139761)*(16)*((16)-1)*((16)-2)*delta^(2)*tau^(16)*exp(-delta^(3)) + (-0.018511)*(25)*((25)-1)*((25)-2)*delta^(4)*tau^(25)*exp(-delta^(3)) + (0.0171939)*(17)*((17)-1)*((17)-2)*delta^(5)*tau^(17)*exp(-delta^(3)) + (-0.00482049)*(7.4)*((7.4)-1)*((7.4)-2)*delta^(6)*tau^(7.4)*exp(-delta^(3));
+    annotation(Inline=false,
+          LateInline=true);
+  end tau3_d3_alpha_r_d_tau3;
+
+  redeclare function extends delta3_d3_alpha_r_d_delta3
+    "Short form for delta*delta*delta*(dddalpha_r/(ddelta*ddelta*ddelta))@tau=const"
+  algorithm
+    delta3_d3_alpha_r_d_delta3 := (0.987252)*(1)*((1)-1)*((1)-2)*delta^(1)*tau^(0.44) + (-1.03017)*(1)*((1)-1)*((1)-2)*delta^(1)*tau^(1.2) + (1.17666)*(1)*((1)-1)*((1)-2)*delta^(1)*tau^(2.97) + (-0.138991)*(2)*((2)-1)*((2)-2)*delta^(2)*tau^(2.95) + (0.00302373)*(5)*((5)-1)*((5)-2)*delta^(5)*tau^(0.2) - (-2.53639)*delta^(1)*tau^(1.93)*exp(-delta^(1))*((1)*delta^(1)*((1)*(delta^(1)*((1)*(delta^(1)-3)-3*(1)+3)+(1)+3*(1)-3)+3*(1)^2-6*(1)+2)-((1)-2)*((1)-1)*(1)) - (-1.9668)*delta^(2)*tau^(1.78)*exp(-delta^(1))*((1)*delta^(1)*((1)*(delta^(1)*((1)*(delta^(1)-3)-3*(2)+3)+(1)+3*(2)-3)+3*(2)^2-6*(2)+2)-((2)-2)*((2)-1)*(2)) - (-0.83048)*delta^(3)*tau^(3)*exp(-delta^(1))*((1)*delta^(1)*((1)*(delta^(1)*((1)*(delta^(1)-3)-3*(3)+3)+(1)+3*(3)-3)+3*(3)^2-6*(3)+2)-((3)-2)*((3)-1)*(3)) - (0.172477)*delta^(5)*tau^(0.2)*exp(-delta^(1))*((1)*delta^(1)*((1)*(delta^(1)*((1)*(delta^(1)-3)-3*(5)+3)+(1)+3*(5)-3)+3*(5)^2-6*(5)+2)-((5)-2)*((5)-1)*(5)) - (-0.261116)*delta^(5)*tau^(0.74)*exp(-delta^(1))*((1)*delta^(1)*((1)*(delta^(1)*((1)*(delta^(1)-3)-3*(5)+3)+(1)+3*(5)-3)+3*(5)^2-6*(5)+2)-((5)-2)*((5)-1)*(5)) - (-0.0745473)*delta^(5)*tau^(3)*exp(-delta^(1))*((1)*delta^(1)*((1)*(delta^(1)*((1)*(delta^(1)-3)-3*(5)+3)+(1)+3*(5)-3)+3*(5)^2-6*(5)+2)-((5)-2)*((5)-1)*(5)) - (0.679757)*delta^(1)*tau^(2.1)*exp(-delta^(2))*((2)*delta^(2)*((2)*(delta^(2)*((2)*(delta^(2)-3)-3*(1)+3)+(2)+3*(1)-3)+3*(1)^2-6*(1)+2)-((1)-2)*((1)-1)*(1)) - (-0.652431)*delta^(1)*tau^(4.3)*exp(-delta^(2))*((2)*delta^(2)*((2)*(delta^(2)*((2)*(delta^(2)-3)-3*(1)+3)+(2)+3*(1)-3)+3*(1)^2-6*(1)+2)-((1)-2)*((1)-1)*(1)) - (0.0553849)*delta^(4)*tau^(0.25)*exp(-delta^(2))*((2)*delta^(2)*((2)*(delta^(2)*((2)*(delta^(2)-3)-3*(4)+3)+(2)+3*(4)-3)+3*(4)^2-6*(4)+2)-((4)-2)*((4)-1)*(4)) - (-0.071097)*delta^(4)*tau^(7)*exp(-delta^(2))*((2)*delta^(2)*((2)*(delta^(2)*((2)*(delta^(2)-3)-3*(4)+3)+(2)+3*(4)-3)+3*(4)^2-6*(4)+2)-((4)-2)*((4)-1)*(4)) - (-0.000875332)*delta^(9)*tau^(4.7)*exp(-delta^(2))*((2)*delta^(2)*((2)*(delta^(2)*((2)*(delta^(2)-3)-3*(9)+3)+(2)+3*(9)-3)+3*(9)^2-6*(9)+2)-((9)-2)*((9)-1)*(9)) - (0.020076)*delta^(2)*tau^(13)*exp(-delta^(3))*((3)*delta^(3)*((3)*(delta^(3)*((3)*(delta^(3)-3)-3*(2)+3)+(3)+3*(2)-3)+3*(2)^2-6*(2)+2)-((2)-2)*((2)-1)*(2)) - (-0.0139761)*delta^(2)*tau^(16)*exp(-delta^(3))*((3)*delta^(3)*((3)*(delta^(3)*((3)*(delta^(3)-3)-3*(2)+3)+(3)+3*(2)-3)+3*(2)^2-6*(2)+2)-((2)-2)*((2)-1)*(2)) - (-0.018511)*delta^(4)*tau^(25)*exp(-delta^(3))*((3)*delta^(3)*((3)*(delta^(3)*((3)*(delta^(3)-3)-3*(4)+3)+(3)+3*(4)-3)+3*(4)^2-6*(4)+2)-((4)-2)*((4)-1)*(4)) - (0.0171939)*delta^(5)*tau^(17)*exp(-delta^(3))*((3)*delta^(3)*((3)*(delta^(3)*((3)*(delta^(3)-3)-3*(5)+3)+(3)+3*(5)-3)+3*(5)^2-6*(5)+2)-((5)-2)*((5)-1)*(5)) - (-0.00482049)*delta^(6)*tau^(7.4)*exp(-delta^(3))*((3)*delta^(3)*((3)*(delta^(3)*((3)*(delta^(3)-3)-3*(6)+3)+(3)+3*(6)-3)+3*(6)^2-6*(6)+2)-((6)-2)*((6)-1)*(6));
+    annotation(Inline=false,
+      LateInline=true);
+  end delta3_d3_alpha_r_d_delta3;
+
+  redeclare function extends tau_delta2_d3_alpha_r_d_tau_d_delta2
+    "Short form for tau*delta*delta*(dddalpha_r/(dtau*ddelta*ddelta))"
+  algorithm
+    tau_delta2_d3_alpha_r_d_tau_d_delta2 := (0.987252)*(1)*(0.44)*(1-1)*delta^(1)*tau^(0.44) + (-1.03017)*(1)*(1.2)*(1-1)*delta^(1)*tau^(1.2) + (1.17666)*(1)*(2.97)*(1-1)*delta^(1)*tau^(2.97) + (-0.138991)*(2)*(2.95)*(2-1)*delta^(2)*tau^(2.95) + (0.00302373)*(5)*(0.2)*(5-1)*delta^(5)*tau^(0.2) + (-2.53639)*(1.93)*delta^(1)*tau^(1.93)*exp(-delta^(1))*((1)*delta^(1)*((1)*(delta^(1)-1)-2*(1)+1)+(1)*((1)-1)) + (-1.9668)*(1.78)*delta^(2)*tau^(1.78)*exp(-delta^(1))*((1)*delta^(1)*((1)*(delta^(1)-1)-2*(2)+1)+(2)*((2)-1)) + (-0.83048)*(3)*delta^(3)*tau^(3)*exp(-delta^(1))*((1)*delta^(1)*((1)*(delta^(1)-1)-2*(3)+1)+(3)*((3)-1)) + (0.172477)*(0.2)*delta^(5)*tau^(0.2)*exp(-delta^(1))*((1)*delta^(1)*((1)*(delta^(1)-1)-2*(5)+1)+(5)*((5)-1)) + (-0.261116)*(0.74)*delta^(5)*tau^(0.74)*exp(-delta^(1))*((1)*delta^(1)*((1)*(delta^(1)-1)-2*(5)+1)+(5)*((5)-1)) + (-0.0745473)*(3)*delta^(5)*tau^(3)*exp(-delta^(1))*((1)*delta^(1)*((1)*(delta^(1)-1)-2*(5)+1)+(5)*((5)-1)) + (0.679757)*(2.1)*delta^(1)*tau^(2.1)*exp(-delta^(2))*((2)*delta^(2)*((2)*(delta^(2)-1)-2*(1)+1)+(1)*((1)-1)) + (-0.652431)*(4.3)*delta^(1)*tau^(4.3)*exp(-delta^(2))*((2)*delta^(2)*((2)*(delta^(2)-1)-2*(1)+1)+(1)*((1)-1)) + (0.0553849)*(0.25)*delta^(4)*tau^(0.25)*exp(-delta^(2))*((2)*delta^(2)*((2)*(delta^(2)-1)-2*(4)+1)+(4)*((4)-1)) + (-0.071097)*(7)*delta^(4)*tau^(7)*exp(-delta^(2))*((2)*delta^(2)*((2)*(delta^(2)-1)-2*(4)+1)+(4)*((4)-1)) + (-0.000875332)*(4.7)*delta^(9)*tau^(4.7)*exp(-delta^(2))*((2)*delta^(2)*((2)*(delta^(2)-1)-2*(9)+1)+(9)*((9)-1)) + (0.020076)*(13)*delta^(2)*tau^(13)*exp(-delta^(3))*((3)*delta^(3)*((3)*(delta^(3)-1)-2*(2)+1)+(2)*((2)-1)) + (-0.0139761)*(16)*delta^(2)*tau^(16)*exp(-delta^(3))*((3)*delta^(3)*((3)*(delta^(3)-1)-2*(2)+1)+(2)*((2)-1)) + (-0.018511)*(25)*delta^(4)*tau^(25)*exp(-delta^(3))*((3)*delta^(3)*((3)*(delta^(3)-1)-2*(4)+1)+(4)*((4)-1)) + (0.0171939)*(17)*delta^(5)*tau^(17)*exp(-delta^(3))*((3)*delta^(3)*((3)*(delta^(3)-1)-2*(5)+1)+(5)*((5)-1)) + (-0.00482049)*(7.4)*delta^(6)*tau^(7.4)*exp(-delta^(3))*((3)*delta^(3)*((3)*(delta^(3)-1)-2*(6)+1)+(6)*((6)-1));
+    annotation(Inline=false,
+          LateInline=true);
+  end tau_delta2_d3_alpha_r_d_tau_d_delta2;
+
+  redeclare function extends tau2_delta_d3_alpha_r_d_tau2_d_delta
+    "Short form for tau*tau*delta*(dddalpha_r/(dtau*dtau*ddelta))"
+  algorithm
+    tau2_delta_d3_alpha_r_d_tau2_d_delta := (0.987252)*(1)*(0.44)*(0.44-1)*delta^(1)*tau^(0.44) + (-1.03017)*(1)*(1.2)*(1.2-1)*delta^(1)*tau^(1.2) + (1.17666)*(1)*(2.97)*(2.97-1)*delta^(1)*tau^(2.97) + (-0.138991)*(2)*(2.95)*(2.95-1)*delta^(2)*tau^(2.95) + (0.00302373)*(5)*(0.2)*(0.2-1)*delta^(5)*tau^(0.2) + (-2.53639)*(1.93)*((1.93)-1)*delta^(1)*tau^(1.93)*exp(-delta^(1))*((1)-(1)*delta^(1)) + (-1.9668)*(1.78)*((1.78)-1)*delta^(2)*tau^(1.78)*exp(-delta^(1))*((2)-(1)*delta^(1)) + (-0.83048)*(3)*((3)-1)*delta^(3)*tau^(3)*exp(-delta^(1))*((3)-(1)*delta^(1)) + (0.172477)*(0.2)*((0.2)-1)*delta^(5)*tau^(0.2)*exp(-delta^(1))*((5)-(1)*delta^(1)) + (-0.261116)*(0.74)*((0.74)-1)*delta^(5)*tau^(0.74)*exp(-delta^(1))*((5)-(1)*delta^(1)) + (-0.0745473)*(3)*((3)-1)*delta^(5)*tau^(3)*exp(-delta^(1))*((5)-(1)*delta^(1)) + (0.679757)*(2.1)*((2.1)-1)*delta^(1)*tau^(2.1)*exp(-delta^(2))*((1)-(2)*delta^(2)) + (-0.652431)*(4.3)*((4.3)-1)*delta^(1)*tau^(4.3)*exp(-delta^(2))*((1)-(2)*delta^(2)) + (0.0553849)*(0.25)*((0.25)-1)*delta^(4)*tau^(0.25)*exp(-delta^(2))*((4)-(2)*delta^(2)) + (-0.071097)*(7)*((7)-1)*delta^(4)*tau^(7)*exp(-delta^(2))*((4)-(2)*delta^(2)) + (-0.000875332)*(4.7)*((4.7)-1)*delta^(9)*tau^(4.7)*exp(-delta^(2))*((9)-(2)*delta^(2)) + (0.020076)*(13)*((13)-1)*delta^(2)*tau^(13)*exp(-delta^(3))*((2)-(3)*delta^(3)) + (-0.0139761)*(16)*((16)-1)*delta^(2)*tau^(16)*exp(-delta^(3))*((2)-(3)*delta^(3)) + (-0.018511)*(25)*((25)-1)*delta^(4)*tau^(25)*exp(-delta^(3))*((4)-(3)*delta^(3)) + (0.0171939)*(17)*((17)-1)*delta^(5)*tau^(17)*exp(-delta^(3))*((5)-(3)*delta^(3)) + (-0.00482049)*(7.4)*((7.4)-1)*delta^(6)*tau^(7.4)*exp(-delta^(3))*((6)-(3)*delta^(3));
+    annotation(Inline=false,
+          LateInline=true);
+  end tau2_delta_d3_alpha_r_d_tau2_d_delta;
   /*Provide polynomial functions for saturation properties. These functions are
     fitted to external data (e.g. data extracted from RefProp or FluidProp). 
     Currently, just one fitting approach is implemented.
@@ -323,7 +363,7 @@ package R410a_IIR_P1_48_T233_473_Horner
      end if;
     end if;
     annotation(derivative(noDerivative=phase)=temperature_ph_der,
-      inverse(h=specificEnthalpy_pT(p=p,T=T,phase=phase)),
+          inverse(h=specificEnthalpy_pT(p=p,T=T,phase=phase)),
           Inline=false,
           LateInline=true);
   end temperature_ph;
@@ -376,7 +416,8 @@ package R410a_IIR_P1_48_T233_473_Horner
       T := saturationTemperature(p);
      end if;
     end if;
-    annotation(Inline=false,
+    annotation(derivative(noDerivative=phase)=temperature_ps_der,
+          Inline=false,
           LateInline=true);
   end temperature_ps;
 
@@ -422,7 +463,8 @@ package R410a_IIR_P1_48_T233_473_Horner
       d := dewDensity(sat)*(1 -(p - sat.psat)/dp) + d2*(p - sat.psat)/dp;
      end if;
     end if;
-   annotation(inverse(p=pressure_dT(d=d,T=T,phase=phase)),
+   annotation(derivative(noDerivative=phase)=density_pT_der,
+          inverse(p=pressure_dT(d=d,T=T,phase=phase)),
           Inline=false,
           LateInline=true);
   end density_pT;
