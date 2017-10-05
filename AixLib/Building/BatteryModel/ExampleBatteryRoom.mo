@@ -6,6 +6,12 @@ model ExampleBatteryRoom "Example Battery"
     height=1000000,
     duration=500)
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
+  Modelica.Blocks.Sources.Ramp Ramp1(
+    offset=0,
+    startTime=2,
+    height=1000000,
+    duration=500)
+    annotation (Placement(transformation(extent={{-80,-40},{-60,-20}})));
   BatteryRoom BatRoom(
     batType3=false,
     batType4=false,
@@ -83,12 +89,7 @@ model ExampleBatteryRoom "Example Battery"
         batArrangement=true,
         areaStandingAtWall=0)})
     annotation (Placement(transformation(extent={{-20,-20},{20,20}})));
-  Modelica.Blocks.Sources.Ramp Ramp1(
-    offset=0,
-    startTime=2,
-    height=1000000,
-    duration=500)
-    annotation (Placement(transformation(extent={{-80,-40},{-60,-20}})));
+
 equation
   connect(Ramp.y, BatRoom.ThermalLossBat1)
     annotation (Line(points={{-59,0},{-40,0},{-40,8},{-16,8}},

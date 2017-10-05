@@ -1,6 +1,8 @@
 within AixLib.Building.BatteryModel;
 model BatteryRoom
   "Thermal model of a room, which contains racks of (different) battery types"
+
+public
    parameter Integer nBatRacks=6
    "Number of battery racks installed in the battery room" annotation (Dialog(
       descriptionLabel=true), choices(
@@ -22,6 +24,7 @@ model BatteryRoom
       choice=1 "1",
       choice=2 "2",
       radioButtons = true), choicesAllMatching = true);
+
    parameter Boolean batType1 = true
    "Battery type of rack 1" annotation (Dialog(
       tab="Battery Rack Types", descriptionLabel=true), choices(
@@ -83,8 +86,8 @@ model BatteryRoom
       choice=false "Type 2",
       radioButtons = true), choicesAllMatching = true);
 
-  parameter AixLib.DataBase.Batteries.RackBaseDataDefinition
-  rackParameters[10]=
+   parameter AixLib.DataBase.Batteries.RackBaseDataDefinition
+    rackParameters[10]=
      {AixLib.DataBase.Batteries.RackBaseDataDefinition(
       batType=AixLib.DataBase.Batteries.LeadBattery1(),
       nParallels=0,
@@ -157,38 +160,6 @@ model BatteryRoom
       batArrangement=true,
       areaStandingAtWall=0)} "Parameters for the different battery racks";
 
-protected
-  parameter Boolean listBatTypes[10]=
-  {batType1, batType2, batType3, batType4, batType5,
-   batType6, batType7, batType8, batType9, batType10}
-   "List for the different battery types";
-  parameter Integer listNBats[nBatRacks]=
-    {if nBatRacks >= i
-     then rackParameters[i].nParallels * rackParameters[i].nSeries *
-          rackParameters[i].nStacked
-     else 0
-     for i in 1:nBatRacks}
-  "List for the different number of batteries per rack";
-  parameter Integer sumBatsType1=
-    sum({if listBatTypes[i] == true
-         then listNBats[i]
-         else 0
-         for i in 1:nBatRacks})
-  "Sum of installed batteries from type 1";
-  parameter Integer sumBatsType2=
-    sum({if listBatTypes[i] == false
-         then listNBats[i]
-         else 0
-         for i in 1:nBatRacks})
-  "Sum of installed batteries from type 2";
-  parameter Real listFractionFactors[nBatRacks]=
-    {if listBatTypes[i] == true
-     then listNBats[i] / sumBatsType1
-     else listNBats[i] / sumBatsType2
-     for i in 1:nBatRacks}
-     "List of the fraction factors for the racks";
-
-public
   Modelica.Blocks.Interfaces.RealInput ThermalLossBat1
     "Thermal Loss of the first battery type - from external file"
     annotation (Placement(transformation(extent={{-254,64},{-182,136}}),
@@ -197,6 +168,7 @@ public
     "Thermal Loss of the second battery type - from external file"
     annotation (Placement(transformation(extent={{-254,-136},{-182,-64}}),
         iconTransformation(extent={{-200,-120},{-120,-40}})));
+
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b PortConv
     "Port for the output of convection heat"
     annotation (Placement(transformation(extent={{172,-88},{228,-32}}),
@@ -205,6 +177,7 @@ public
     "Port for the output of radiation heat"
     annotation (Placement(transformation(extent={{178,40},{224,80}}),
         iconTransformation(extent={{160,20},{200,60}})));
+
   Modelica.Blocks.Interfaces.RealOutput TemperatureBat1(
       quantity="ThermodynamicTemperature",
       unit="K",
@@ -351,6 +324,7 @@ public
   Modelica.Blocks.Math.Gain LossFraction10(final k=listFractionFactors[10]) if
        nBatRacks > 9
     annotation (Placement(transformation(extent={{-40,-200},{-20,-180}})));
+
   Modelica.Thermal.HeatTransfer.Components.ThermalCollector ConvCollector(
      final m=nBatRacks)
     "Collects the convection heat of the different racks"
@@ -358,6 +332,13 @@ public
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={114,-60})));
+  Utilities.Interfaces.ThermalRadiationCollector RadCollector(
+     final m=nBatRacks)
+    annotation (Placement(transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=90,
+        origin={114,60})));
+
   Modelica.Blocks.Logical.Switch LossSwitch1
     annotation (Placement(transformation(extent={{-80,180},{-60,200}})));
   Modelica.Blocks.Logical.Switch LossSwitch2 if nBatRacks > 1
@@ -378,6 +359,7 @@ public
     annotation (Placement(transformation(extent={{-80,-160},{-60,-140}})));
   Modelica.Blocks.Logical.Switch LossSwitch10 if nBatRacks > 9
     annotation (Placement(transformation(extent={{-80,-200},{-60,-180}})));
+
   Modelica.Blocks.Sources.RealExpression Zero1(y=0) if
        nBatTypes == 1
     annotation (Placement(transformation(extent={{-94,166},{-88,182}})));
@@ -439,12 +421,37 @@ public
        nBatRacks > 9
     annotation (Placement(transformation(extent={{-132,-200},{-108,-180}})));
 
-  Utilities.Interfaces.ThermalRadiationCollector RadCollector(
-     final m=nBatRacks)
-    annotation (Placement(transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=90,
-        origin={114,60})));
+
+protected
+  parameter Boolean listBatTypes[10]=
+    {batType1, batType2, batType3, batType4, batType5,
+     batType6, batType7, batType8, batType9, batType10}
+     "List for the different battery types";
+  parameter Integer listNBats[nBatRacks]=
+    {if nBatRacks >= i
+     then rackParameters[i].nParallels * rackParameters[i].nSeries *
+          rackParameters[i].nStacked
+     else 0
+     for i in 1:nBatRacks}
+    "List for the different number of batteries per rack";
+  parameter Integer sumBatsType1=
+    sum({if listBatTypes[i] == true
+         then listNBats[i]
+         else 0
+         for i in 1:nBatRacks})
+    "Sum of installed batteries from type 1";
+  parameter Integer sumBatsType2=
+    sum({if listBatTypes[i] == false
+         then listNBats[i]
+         else 0
+         for i in 1:nBatRacks})
+    "Sum of installed batteries from type 2";
+  parameter Real listFractionFactors[nBatRacks]=
+    {if listBatTypes[i] == true
+     then listNBats[i] / sumBatsType1
+     else listNBats[i] / sumBatsType2
+     for i in 1:nBatRacks}
+     "List of the fraction factors for the racks";
 
 equation
 
