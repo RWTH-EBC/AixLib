@@ -96,8 +96,9 @@ equation
     </span><span style=\" font-family:'Courier New,courier';\">dp_nominal=8*zeta*...</span>
     in the model 
     <a href=\"AixLib.Fluid.FixedResistances.HydraulicResistance\">HydraulicResistance</a>.</p>
-    <p><br>Change parameter<code> HR.from_dp </code>to<code> false </code>and the 
-    simulation time will increase by about 25 &percnt;. </p>
+    <p><br/>
+    Change parameter<code> HR.from_dp </code>to<code> false </code>and the 
+    simulation time will increase by about 25 &#37;. </p>
     <p>Choosing this parameter depending whether you are using a mass flow source 
     or a pressure source might improve the stability of the simulation. </p>
     <p>Using a mass flow source and<code> HR.from_dp = false </code>shows similiar 

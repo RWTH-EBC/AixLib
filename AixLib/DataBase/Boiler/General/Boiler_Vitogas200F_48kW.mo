@@ -15,10 +15,10 @@ conventions</li>
 </ul>
 </html>", info="<html>
 <p>Source:</p>
-<p><ul>
+<ul>
 <li>Product: Vitogas 200-F</li>
 <li>Manufacturer: Viessmann</li>
 <li>Broschure: Vitogas 200-F; 5/2010</li>
-</ul></p>
+</ul>
 </html>"));
 end Boiler_Vitogas200F_48kW;

@@ -9,9 +9,6 @@ record ClearPine
   annotation (Documentation(info="<html>
 <h4><font color=\"#008000\">Overview</font></h4>
 <p>Material: Clear pine </p>
-<h4><font color=\"#008000\">Level of Development</font></h4>
-<p><img src=\"modelica://AixLib/Resources/Images/Stars/stars5.png\"
-      alt=\"stars: 5 out of 5\"/></p>
 <h4><font color=\"#008000\">References</font></h4>
 <p>Record is used in model <a href=\"AixLib.Utilities.HeatTransfer.HeatConv_outside\">AixLib.Utilities.HeatTransfer.HeatConv_outside</a></p>
  <p>Source</p>

@@ -24,7 +24,7 @@ equation
 <p>The pressure drop is calculated according to the following equation [1].</p>
 <p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/equation-8xFaklFH.png\" alt=\"Delta_P = K*m_flow^2\"/></p>
 <p>In order to determine <i>K, </i>manufacturer data is used and : </p>
-<p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/PressureDrop.bmp\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/PressureDrop.bmp\" alt=\"Pressure Drop\"/></p>
 <p>With the help of the Matlab Curve Fit Toolbox a curve y = K*x^2 is fitted
 through several selected points. </p>
 <h4><font color=\"#008000\">References</font></h4>
