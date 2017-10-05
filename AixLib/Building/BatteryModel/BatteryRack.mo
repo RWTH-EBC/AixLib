@@ -77,9 +77,9 @@ model BatteryRack
         iconTransformation(extent={{90,10},{110,30}})));
 
   AixLib.Utilities.HeatTransfer.HeatConv_inside HeatConvHorizontalFacingDown(
-      final surfaceOrientation=3,
-      final A=(nStacked - 1)*nParallels*nSeries*batType.width*batType.length) if
-         airBetweenStacks and nStacked > 1
+     final surfaceOrientation=3,
+     final A=(nStacked - 1)*nParallels*nSeries*batType.width*batType.length) if
+       airBetweenStacks and nStacked > 1
     "Block which calculates the horizontal
     heat convection at the bottom of the battery"
     annotation (Placement(transformation(extent={{50,-70},{30,-50}})));
