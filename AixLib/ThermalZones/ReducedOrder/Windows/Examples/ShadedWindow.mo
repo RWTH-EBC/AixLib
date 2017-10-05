@@ -56,7 +56,7 @@ equation
   <h4>References</h4>
   <p>VDI. German Association of Engineers Guideline VDI 6007-3
   June 2015. Calculation of transient thermal response of rooms
-  and buildings - modelling of solar radiation.</p>
+  and buildings - Modelling of solar radiation.</p>
 </html>",
       revisions="<html>
 <ul>

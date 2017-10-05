@@ -101,6 +101,6 @@ In the example above it should be set {false,false,true,false,false} for the
 <p><b>References</b> </p>
 <p>VDI. German Association of Engineers Guideline VDI 6007-3 June 2015.
  Calculation of transient thermal response of rooms and buildings -
- modelling of solar radiation.</p>
+ Modelling of solar radiation.</p>
 </html>"));
 end SkylineShadowing;

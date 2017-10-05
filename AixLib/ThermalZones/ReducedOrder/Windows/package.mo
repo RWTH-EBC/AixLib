@@ -47,18 +47,21 @@ tested with parts of test case 1 and parts of test case 3 of VDI2078.
 <ul>
 <li>
 VDI 6007-1: <br/>
-Berechnung des instationären thermischen Verhaltens von Räumen und Gebäuden - Raummodell.<br/>
-Düsseldorf : VDI-Gesellschaft Bauen und Gebäudetechnik. 2015.
+VDI. German Association of Engineers Guideline VDI 6007-3
+June 2015. Calculation of transient thermal response of rooms
+and buildings - Modelling of rooms.
 </li>
 <li>
 VDI 6007-2: <br/>
-Berechnung des instationären thermischen Verhaltens von Räumen und Gebäuden - Fenstermodell.<br/>
-Düsseldorf : VDI-Gesellschaft Bauen und Gebäudetechnik. 2015.
+VDI. German Association of Engineers Guideline VDI 6007-2
+March 2012. Calculation of transient thermal response of rooms
+and buildings - Modelling of windows.
 </li>
 <li>
 VDI 6007-3: <br/>
-Berechnung des instationären thermischen Verhaltens von Räumen und Gebäuden - Modell der solaren Einstrahlung.<br/>
-Düsseldorf : VDI-Gesellschaft Bauen und Gebäudetechnik. 2015.
+VDI. German Association of Engineers Guideline VDI 6007-3
+June 2015. Calculation of transient thermal response of rooms
+and buildings - Modelling of solar radiation.
 </li>
 </ul>
 </html>", revisions="<html>
