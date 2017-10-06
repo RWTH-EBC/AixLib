@@ -165,7 +165,7 @@ FastHVAC.Interfaces.EnthalpyPort_b enthalpyPort_outEv annotation (Placement(
     N_max=N_max,
     N_min=N_min,
     N_nom=N_nom,
-    Corr_icing=corr_icing,
+    redeclare function Corr_icing=corr_icing,
     eta_ele=eta_el,
     factorScale=factor_scale,
     P_eleAdd=Pel_add,
