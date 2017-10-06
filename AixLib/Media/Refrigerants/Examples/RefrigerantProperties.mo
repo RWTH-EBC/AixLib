@@ -300,10 +300,10 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Media/Example
 <ol>
 <li>Calculation of basic properties like the specific enthalpy or density using pressure and temperature.</li>
 <li>Calculation of saturation properties using both pressure and temperature. The results of both calculations are compared to each other.</li>
-<li>Calculation of the &QUOT;setState&QUOT;-functions and comparing the results to the &QUOT;setState_pT&QUOT;-results.</li>
+<li>Calculation of the &quot;setState&quot;-functions and comparing the results to the &quot;setState_pT&quot;-results.</li>
 <li>Calculation of furhter properties like the thermal conductivity or isothermal compressbility.</li>
 </ol>
-<p>Additionally, the &QUOT;setState&QUOT;-functions&apos; <b>absolute and relative errors</b> compared to the &QUOT;setState_pT&QUOT;-results are calculated.</p>
+<p>Additionally, the &quot;setState&quot;-functions&apos; <b>absolute and relative errors</b> compared to the &quot;setState_pT&quot;-results are calculated.</p>
 </html>",
 revisions="<html>
 <ul>

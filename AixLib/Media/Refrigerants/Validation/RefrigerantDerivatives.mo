@@ -15,9 +15,10 @@ model RefrigerantDerivatives
 
   // Definition of parameters and constants
   //
-  parameter MediumInt.AbsolutePressure p = 20e5
-    "Fixed pressure for calculations";
-  parameter MediumInt.Density d = 75 "Fixed density for calculations";
+  parameter MediumInt.AbsolutePressure p0 = 20e5
+    "Fixed pressure for calculations at intizialization";
+  parameter MediumInt.Density d0 = 75
+    "Fixed density for calculations at intizialization";
 
   constant Real convT(unit="K/s3") = 125
     "Conversion factor to satisfy derivative check";
@@ -28,8 +29,12 @@ model RefrigerantDerivatives
 
   // Definition of variables used for calculations
   //
+  MediumInt.AbsolutePressure p = p0 + 10e5*time^3
+    "Pressure used for calculations";
   MediumInt.Temperature T = 273.15 + convT*time^3
     "Temperature used for calculations";
+  MediumInt.Density d = d0 + 125*time^3
+    "Density used for calculations";
   MediumInt.SpecificEnthalpy h = 200e3 + convH*time^3
     "Specific enthalpy used for calculations";
   MediumInt.SpecificEntropy s = 1e3 + convS*time^3
@@ -148,10 +153,10 @@ model RefrigerantDerivatives
   //
   record ExplDer
     "Record that contains derivatives depending on derivatives of the EoS only"
-    parameter MediumExt.AbsolutePressure p = 20e5
-      "Fixed pressure used for calculations";
     parameter Real convH(unit="J/(kg.s3)") = 300e3
     "Conversion factor to satisfy derivative check";
+    MediumExt.AbsolutePressure p
+      "Pressure used for calculations";
 
     MediumExt.ThermodynamicState state = MediumExt.setState_phX(
       p=p, h=200e3 + convH*time^3)
@@ -313,10 +318,10 @@ model RefrigerantDerivatives
   // Definition of derivates at bubble and dew state
   //
   record SatDer "Record that contains derivatives at bubble and dew state"
-    parameter MediumExt.Density d = 75
-      "Fixed density used for calculations";
     parameter Real convT(unit="K/(s3)") = 125
     "Conversion factor to satisfy derivative check";
+    MediumExt.Density d = 75
+      "Density used for calculations";
 
     MediumExt.ThermodynamicState state = MediumExt.setState_dTX(
       d=d, T=273.15 + convT*time^3)
@@ -515,7 +520,7 @@ algorithm
   furDer.dddh_p_Int := MediumInt.density_derh_p(states.ph_Int);
   furDer.dddh_p_Ext := MediumExt.density_derh_p(states.ph_Ext);
   furDer.dddp_s_Int := MediumInt.density_derp_s(states.ph_Int);
-  furDer.dddp_s_Ext := 1/(MediumExt.pressure_derd_T(states.ph_Ext)-MediumExt.pressure_derT_d(states.ph_Ext)*explDer.dsdd_T_Ext/explDer.dsdT_d_Ext);
+  furDer.dddp_s_Ext := 1/(MediumExt.pressure_derd_T(states.ph_Ext)-MediumExt.pressure_derT_d(states.ph_Ext)*explDer.dsdd_T_Ext/explDer.dsdT_d_Ext); // no two-phase region
   furDer.ddds_p_Int := MediumInt.density_ders_p(states.ph_Int);
   furDer.ddds_p_Ext := (MediumExt.density_derh_p(states.ph_Ext)*MediumExt.temperature(states.ph_Ext));
 
@@ -591,8 +596,5 @@ algorithm
 <li>Partial derivatives at bubble and dew line.</li>
 </ol>
 <p> Furthermore, the derivatives are compared with the associated derivatives calculated by an external medium model (i.e. HelmholtzMediaLibrary).</p>
-<p><b>Assumptions and limitations</b> </p>
-<p>Currently, the following darivatives are not correct: Some derivatives depending on specific entropy.</p>
-
 </html>"));
 end RefrigerantDerivatives;

@@ -85,13 +85,12 @@ package R410a_IIR_P1_48_T233_473_Horner
   */
   redeclare record SmoothTransition "Record that contains ranges to calculate a smooth transition between
     different regions"
-    SpecificEnthalpy T_ph = 2.5;
-    SpecificEntropy T_ps = 2.5;
-    AbsolutePressure d_pT = 2.5;
-    SpecificEnthalpy d_ph = 2.5;
-    Real d_ps(unit="J/(Pa.K.kg)") =  5/(48e5-1e5);
-    Real h_ps(unit="J/(Pa.K.kg)") = 50/(48e5-1e5);
-    AbsolutePressure d_derh_p = 0.25;
+      SpecificEnthalpy T_ph = 2.5;
+      SpecificEntropy T_ps = 2.5;
+      AbsolutePressure d_pT = 2.5;
+      SpecificEnthalpy d_ph = 2.5;
+      Real d_ps(unit="J/(Pa.K.kg)") =  50/(48e5-1e5);
+      Real h_ps(unit="J/(Pa.K.kg)") = 50/(48e5-1e5);
   end SmoothTransition;
   /*Provide Helmholtz equations of state (EoS) using an explicit formula.
   */
@@ -545,9 +544,11 @@ package R410a_IIR_P1_48_T233_473_Horner
 </ul>
 </html>", info="<html>
 <p>This package provides a refrigerant model for R410a using a hybrid approach developed by Sangi et al.. The hybrid approach is implemented in <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMedium\">AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMedium</a> and the refrigerant model is implemented by complete the template <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord</a>. The fitting coefficients required in the template are saved in the package <a href=\"modelica://AixLib.DataBase.Media.Refrigerants.R410a\">AixLib.DataBase.Media.Refrigerants.R410a</a>.</p>
-<p><b>Assumptions and limitations</b> </p>
-<p>The implemented coefficients are fitted to external data by Engelpracht and are valid within the following range:<br></p>
-<table cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"30%\"><tr>
+<h4>Assumptions and limitations</h4>
+<p>The implemented coefficients are fitted to external data by Engelpracht and are valid within the following range:</p>
+<p>
+<table summary=\"Range of validiry\" cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"30%\" style=\"border-collapse:collapse;\">
+<tr>
 <td><p>Parameter</p></td>
 <td><p>Minimum Value</p></td>
 <td><p>Maximum Value</p></td>
@@ -564,9 +565,11 @@ package R410a_IIR_P1_48_T233_473_Horner
 </tr>
 </table>
 <p>The reference point is defined as 200 kJ/kg and 1 kJ/kg/K, respectively, for enthalpy and entropy for the saturated liquid at 273.15 K.</p>
-<p><b>Validation</b> </p>
-<p> The model is validated by comparing results obtained from the example model <a href=\"modelica://AixLib.Media.Refrigerants.Examples.RefrigerantProperties\">AixLib.Media.Refrigerants.Examples.RefrigerantProperties</a> to external data (i.e. NIST RefProp 9.1).</p>
-<p><b>References</b> </p>
+<h4>Assumptions and limitations</h4>
+<p>R410a is calculated as pseudo-pure fluid and, hence, only roughly valid withing the two-phase region.</p>
+<h4>Validation</h4>
+<p> The model is validated by comparing results obtained from the example model <a href=\"modelica://AixLib.Media.Refrigerants.Examples.RefrigerantProperties\">AixLib.Media.Refrigerants.Examples.RefrigerantProperties</a> to external data (e.g. obtained from measurements or external media libraries).</p>
+<h4>References</h4>
 <p>Lemmon, E. W. (2003): Pseudo-Pure Fluid Equations of State for the Refrigerant Blends R-410A, R-404A, R-507A, and R-407C. In: <i>International Journal ofThermophysics 24 (4)</i>, S. 991–1006. DOI: 10.1023/A:1025048800563.</p>
 <p>Geller, V. Z.; Bivens, D.; Yokozeki, A. (2000): Viscosity of Mixed Refrigerants, R404A, R407C, R410A, and R507C. In: <i>International refrigeration and air conditioning conference</i>. USA, S. 399–406. Online available at http://docs.lib.purdue.edu/iracc/508.</p>
 <p>Nabizadeh, H.; Mayinger, F. (1999): Viscosity of Gaseous R404A, R407C, R410A, and R507. In: <i>International Journal of Thermophysics 20 (3)</i>, S. 777–790. DOI: 10.1007/978-1-4615-4777-8_1.</p>

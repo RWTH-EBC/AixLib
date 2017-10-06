@@ -12,15 +12,15 @@ package Refrigerants "Package with models for different refrigerants"
 <p>Currently, the <b>following refrigerants are implemented</b>:</p>
 <ol>
 <li>R134a</li>
-<li>R410a</li>
 <li>R290</li>
+<li>R410a calculated as pseudo-pure fluid</li>
 </ol>
-<p>For further information of <b>the EoS and its partial derivatives</b>, please read the paper &QUOT;<a href=\"http://www.ep.liu.se/ecp/076/006/ecp12076006.pdf\">HelmholtzMedia - A fluid properties library</a>&QUOT; by Thorade and Saadat as well as the paper &QUOT;<a href=\"http://gfzpublic.gfz-potsdam.de/pubman/item/escidoc:247373:5/component/escidoc:306833/247373.pdf\">Partial derivatives of thermodynamic state properties for dynamic simulation</a>&QUOT; by Thorade and Saadat. For further information of <b>the hybrid approach</b>, please read the paper &QUOT;<a href=\"http://dx.doi.org/10.3384/ecp14096\">A Medium Model for the Refrigerant Propane for Fast and Accurate Dynamic Simulations</a>&QUOT; by Sangi et al..</p>
-<p><b>Assumptions and limitations</b> </p>
+<p>For further information of <b>the EoS and its partial derivatives</b>, please read the paper &quot;<a href=\"http://www.ep.liu.se/ecp/076/006/ecp12076006.pdf\">HelmholtzMedia - A fluid properties library</a>&quot; by Thorade and Saadat as well as the paper &quot;<a href=\"http://gfzpublic.gfz-potsdam.de/pubman/item/escidoc:247373:5/component/escidoc:306833/247373.pdf\">Partial derivatives of thermodynamic state properties for dynamic simulation</a>&quot; by Thorade and Saadat. For further information of <b>the hybrid approach</b>, please read the paper &quot;<a href=\"http://dx.doi.org/10.3384/ecp14096\">A Medium Model for the Refrigerant Propane for Fast and Accurate Dynamic Simulations</a>&quot; by Sangi et al..</p>
+<h4>Assumptions and limitations</h4>
 <p>The refrigerant models in this package are using a hybrid approach and, therefore, are based on the Helmholtz equation of state as well as on fitted formula. Hence, the refrigerant models are just valid within the valid range of the fitted formula. To find out the valid range of each refrigerant model, please checkout its information.</p>
-<p><b>Typical use and important parameters</b> </p>
+<h4>Typical use and important parameters</h4>
 <p>The refrigerant models provided in this package are typically used for heat pumps and refrigerating machines.</p>
-<p><b>References</b> </p>
+<h4>References</h4>
 <p>Thorade, Matthis; Saadat, Ali (2012): <a href=\"http://www.ep.liu.se/ecp/076/006/ecp12076006.pdf\">HelmholtzMedia - A fluid properties library</a>. In: <i>Proceedings of the 9th International Modelica Conference</i>; September 3-5; 2012; Munich; Germany. Link&ouml;ping University Electronic Press, S. 63&ndash;70.</p>
 <p>Thorade, Matthis; Saadat, Ali (2013): <a href=\"http://gfzpublic.gfz-potsdam.de/pubman/item/escidoc:247373:5/component/escidoc:306833/247373.pdf\">Partial derivatives of thermodynamic state properties for dynamic simulation</a>. In:<i> Environmental earth sciences 70 (8)</i>, S. 3497&ndash;3503.</p>
 <p>Sangi, Roozbeh; Jahangiri, Pooyan; Klasing, Freerk; Streblow, Rita; M&uuml;ller, Dirk (2014): <a href=\"http://dx.doi.org/10.3384/ecp14096\">A Medium Model for the Refrigerant Propane for Fast and Accurate Dynamic Simulations</a>. In: <i>The 10th International Modelica Conference</i>. Lund, Sweden, March 10-12, 2014: Link&ouml;ping University Electronic Press (Link&ouml;ping Electronic Conference Proceedings), S. 1271&ndash;1275</p>

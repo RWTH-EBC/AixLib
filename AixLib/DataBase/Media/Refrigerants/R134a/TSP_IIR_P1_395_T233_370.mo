@@ -44,9 +44,11 @@ record TSP_IIR_P1_395_T233_370
 </ul>
 </html>", info="<html>
 <p>In this record, fitting coefficients are provided for thermodynamic properties calculated from two independent state variables. For detailed information of these thermodynamic properties as well as the fitting coefficients, please checkout <a href=\"modelica://AixLib.DataBase.Media.Refrigerants.ThermodynamicStatePropertiesBaseDataDefinition\">AixLib.DataBase.Media.Refrigerants.ThermodynamicStatePropertiesBaseDataDefinition</a>. The fitting coefficients are used in a hybrid refrigerant model provided in <a href=\"modelica://AixLib.Media.Refrigerants\">AixLib.Media.Refrigerants</a>. For detailed information, please checkout <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord</a>.</p>
-<p><b>Assumptions and limitations</b></p>
-<p>The provided coefficients are fitted to external data by Engelpracht and are valid within the following range:<br></p>
-<table cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"30%\"><tr>
+<h4>Assumptions and limitations</h4>
+<p>The provided coefficients are fitted to external data by Engelpracht and are valid within the following range:</p>
+<p>
+<table summary=\"Range of validiry\" cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"30%\" style=\"border-collapse:collapse;\">
+<tr>
 <td><p>Parameter</p></td>
 <td><p>Minimum Value</p></td>
 <td><p>Maximum Value</p></td>
@@ -62,8 +64,9 @@ record TSP_IIR_P1_395_T233_370
 <td><p>370.15</p></td>
 </tr>
 </table>
+</p>
 <p>The reference point is defined as 200 kJ/kg and 1 kJ/kg/K, respectively, for enthalpy and entropy for the saturated liquid at 273.15 K.</p>
-<p><b>References</b></p>
+<h4>References</h4>
 <p>Engelpracht, Mirko (2017): Development of modular and scalable simulation models for heat pumps and chillers considering various refrigerants. <i>Master Thesis</i></p>
 </html>"));
 end TSP_IIR_P1_395_T233_370;

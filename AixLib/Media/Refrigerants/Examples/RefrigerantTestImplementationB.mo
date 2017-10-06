@@ -15,7 +15,7 @@ model RefrigerantTestImplementationB
   __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Media/Examples/WaterTestImplementation.mos"
           "Simulate and plot"),
       Documentation(info="<html>
-<p>This is a simple test for the refrigerant mode that uses test model described in <a href=\"modelica://Modelica.Media.UsersGuide.MediumDefinition.TestOfMedium\">Modelica.Media.UsersGuide.MediumDefinition.TestOfMedium</a>. </p>
+<p>This is a simple test for the refrigerant models. This model uses the test model described in <a href=\"modelica://Modelica.Media.UsersGuide.MediumDefinition.TestOfMedium\">Modelica.Media.UsersGuide.MediumDefinition.TestOfMedium</a>.</p>
 </html>",     revisions="<html>
 <ul>
   <li>

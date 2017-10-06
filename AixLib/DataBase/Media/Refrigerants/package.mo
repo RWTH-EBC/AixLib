@@ -156,7 +156,7 @@ package Refrigerants "Package provides records describing properties of differen
 <li><i>Base data definitions: </i>All base data definitions are saved as separate records.</li>
 <li><i>Refrigerant packages:</i> For the different refrigerant media, records inherited from the base data definitions are saved within one refrigerant package.</li>
 </ol>
-<p><b>Assumptions and limitations</b> </p>
+<h4>Assumptions and limitations</h4>
 <p>Currently, there is implemented just one approach (i.e. the hybrid approach) to model refrigerant media (for detailed information, please see <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord</a>). Hence, the base data definitions support just the hybrid approach.</p>
 </html>", revisions="<html>
 <ul>

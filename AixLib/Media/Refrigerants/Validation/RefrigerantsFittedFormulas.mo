@@ -337,9 +337,9 @@ equation
 <ol>
 <li>Calculation of the Helmholtz equation of state.</li>
 <li>Calculation of the saturation properties.</li>
-<li>Calculation of further state propetues like the density depending on the pressure and temperature.</li>
+<li>Calculation of further state propeties like the density depending on pressure and temperature.</li>
 </ol>
-<p>Additionally, the the fitted formulas are also calculated with an external media libary (i.e. HelmholtzMedia) and the errors between the external and internal medium are calculated.</p>
+<p>Additionally, the fitted formulas are also calculated with an external media libary (i.e. HelmholtzMedia) and errors between the external and internal medium are calculated.</p>
 </html>", revisions="<html>
 <ul>
   <li>

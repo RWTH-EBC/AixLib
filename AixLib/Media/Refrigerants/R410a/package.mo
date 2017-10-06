@@ -4,6 +4,8 @@ package R410a "Package with models for refrigerant R410a"
 
   annotation (Documentation(info="<html>
 <p>This package contains different refrigerant models for the refrigerant R410a. The medium models are developed using the approaches provided in <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces\">AixLib.Media.Refrigerants.Interfaces</a>.</p>
+<p>The <b>naming of the models</b> follows the guidline presented below:</p>
+<p style=\"margin-left: 30px;\"><i>Refrigerant</i> _ <i>Reference Point</i> _ <i>Range of validity for pressure</i> _ <i>Range of validity for temperature</i> _ <i>Approach of calculating fitted formulas</i></p>
 </html>",
         revisions="<html>
 <ul>

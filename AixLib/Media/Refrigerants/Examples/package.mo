@@ -20,7 +20,7 @@ package Examples "Packages with example models for testing refrigerent models"
   </li>
 </ul>
 </html>", info="<html>
-<p>This is a simple test for the refrigerant mode that uses test model described in <a href=\"modelica://Modelica.Fluid.Examples.BranchingDynamicPipes \"> Modelica.Fluid.Examples.BranchingDynamicPipes </a>. However, the discrete change in pressure leads to numerical instability and, therefore, the duration of pressure change is set to t = 1e-12 s. </p>
+<p>This is a simple test for the refrigerant models. This test uses the test model described in <a href=\"modelica://Modelica.Fluid.Examples.BranchingDynamicPipes \"> Modelica.Fluid.Examples.BranchingDynamicPipes </a>. However, the discrete change in pressure leads to numerical instability and, therefore, the duration of pressure change is set to t = 1e-12 s.</p>
 </html>"));
   end BranchingDynamicPipes;
 

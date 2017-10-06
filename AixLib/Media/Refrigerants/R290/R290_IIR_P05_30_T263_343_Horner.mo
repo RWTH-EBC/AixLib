@@ -89,9 +89,8 @@ package R290_IIR_P05_30_T263_343_Horner
       SpecificEntropy T_ps = 2.5;
       AbsolutePressure d_pT = 2.5;
       SpecificEnthalpy d_ph = 2.5;
-      Real d_ps(unit="J/(Pa.K.kg)") =  1/(30e5-0.5e5);
-      Real h_ps(unit="J/(Pa.K.kg)") = 100/(30e5-0.5e5);
-      AbsolutePressure d_derh_p = 0.2;
+      Real d_ps(unit="J/(Pa.K.kg)") =  25/(30e5-0.5e5);
+      Real h_ps(unit="J/(Pa.K.kg)") = 50/(30e5-0.5e5);
   end SmoothTransition;
   /*Provide Helmholtz equations of state (EoS) using an explicit formula.
   */
@@ -601,9 +600,11 @@ package R290_IIR_P05_30_T263_343_Horner
 </ul>
 </html>", info="<html>
 <p>This package provides a refrigerant model for R290 using a hybrid approach developed by Sangi et al.. The hybrid approach is implemented in <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord\">AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord</a> and the refrigerant model is implemented by complete the template <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord</a>.</p>
-<p><b>Assumptions and limitations</b> </p>
-<p>The implemented coefficients are fitted to external data by Sangi et al. and are valid within the following range:<br></p>
-<table cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"30%\"><tr>
+<h4>Assumptions and limitations</h4>
+<p>The implemented coefficients are fitted to external data by Sangi et al. and are valid within the following range:</p>
+<p>
+<table summary=\"Range of validiry\" cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"30%\" style=\"border-collapse:collapse;\">
+<tr>
 <td><p>Parameter</p></td>
 <td><p>Minimum Value</p></td>
 <td><p>Maximum Value</p></td>
@@ -619,9 +620,10 @@ package R290_IIR_P05_30_T263_343_Horner
 <td><p>343.15</p></td>
 </tr>
 </table>
-<p><b>Validation</b> </p>
+</p>
+<h4>Validation</h4>
 <p>Sangi et al. validated their model by comparing it to results obtained from the Helmholtz equation of state. They found out that relative error of the refrigerant model compared to HelmholtzMedia (Thorade and Saadat, 2012) is close to zero.</p>
-<p><b>References</b> </p>
+<h4>References</h4>
 <p>Thorade, Matthis; Saadat, Ali (2012): <a href=\"http://www.ep.liu.se/ecp/076/006/ecp12076006.pdf\">HelmholtzMedia - A fluid properties library</a>. In: <i>Proceedings of the 9th International Modelica Conference</i>; September 3-5; 2012; Munich; Germany. Link&ouml;ping University Electronic Press, S. 63&ndash;70.</p>
 <p>Sangi, Roozbeh; Jahangiri, Pooyan; Klasing, Freerk; Streblow, Rita; M&uuml;ller, Dirk (2014): <a href=\"http://dx.doi.org/10.3384/ecp14096\">A Medium Model for the Refrigerant Propane for Fast and Accurate Dynamic Simulations</a>. In: <i>The 10th International Modelica Conference</i>. Lund, Sweden, March 10-12, 2014: Link&ouml;ping University Electronic Press (Link&ouml;ping Electronic Conference Proceedings), S. 1271&ndash;1275</p>
 <p>Klasing,Freerk: A New Design for Direct Exchange Geothermal Heat Pumps - Modeling, Simulation and Exergy Analysis. <i>Master thesis</i></p>

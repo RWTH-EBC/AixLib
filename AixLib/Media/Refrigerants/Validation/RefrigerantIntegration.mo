@@ -222,14 +222,12 @@ equation
 <p>This example models checks the implementation of the<b> refrigerant&apos;s main derivatives</b> wrt. to time. Therefore, the user has first to introduce some information about the refrigerant and afterwards the derivatives are calculated. The following <b>refrigerant&apos;s information</b> is required:</p>
 <ol>
 <li>The <i>refrigerant package</i> that shall be tested.</li>
-<li>The <i>independent variables</i> i.e. independents variables' alteration with time.</li>
+<li>The <i>independent variables</i> (i.e. independents variables' alteration with time).</li>
 </ol>
 <p>The following <b>refrigerant&apos;s derivatives </b> are calculated and checked:</p>
 <ol>
 <li>Calculation of state variables depending on the independent state variables (e.g. pressure depending on density and temperature).</li>
 <li>Calculation of variables of the Helmholtz equation of state.</li>
 </ol>
-<p><b>Assumptions and limitations</b> </p>
-<p>Currently, the following darivatives are not correct: Density depending on pressure and specific entropy. The error occurs due to the partial derivative of density wrt. specific entropy.</p>
 </html>"));
 end RefrigerantIntegration;
