@@ -56,7 +56,7 @@ partial package TemplateHybridTwoPhaseMediumFormula
       max=423.15),
     smoothModel=true,
     onePhase=false,
-    ThermoStates=Choices.IndependentVariables.phX,
+    ThermoStates=.Modelica.Media.Interfaces.PartialMedium.Choices.IndependentVariables.phX,
     fluidConstants=refrigerantConstants);
     /*The vector substanceNames is mandatory, as the number of
       substances is determined based on its size. Here we assume
@@ -224,7 +224,8 @@ partial package TemplateHybridTwoPhaseMediumFormula
     else
 
     end if;
-    annotation(Inline=false,
+    annotation(smoothOrder = 2,
+          Inline=false,
           LateInline=true);
   end saturationPressure;
 
@@ -235,7 +236,8 @@ partial package TemplateHybridTwoPhaseMediumFormula
 
   algorithm
 
-    annotation(Inline=false,
+    annotation(smoothOrder = 2,
+          Inline=false,
           LateInline=true);
   end saturationTemperature;
 
@@ -246,7 +248,8 @@ partial package TemplateHybridTwoPhaseMediumFormula
 
   algorithm
 
-    annotation(Inline=false,
+    annotation(smoothOrder = 2,
+          Inline=false,
           LateInline=true);
   end bubbleDensity;
 
@@ -257,7 +260,8 @@ partial package TemplateHybridTwoPhaseMediumFormula
 
   algorithm
 
-    annotation(Inline=false,
+    annotation(smoothOrder = 2,
+          Inline=false,
           LateInline=true);
   end dewDensity;
 
@@ -268,7 +272,8 @@ partial package TemplateHybridTwoPhaseMediumFormula
 
   algorithm
 
-    annotation(Inline=false,
+    annotation(smoothOrder = 2,
+          Inline=false,
           LateInline=true);
   end bubbleEnthalpy;
 
@@ -279,7 +284,8 @@ partial package TemplateHybridTwoPhaseMediumFormula
 
   algorithm
 
-    annotation(Inline=false,
+    annotation(smoothOrder = 2,
+          Inline=false,
           LateInline=true);
   end dewEnthalpy;
 
@@ -290,7 +296,8 @@ partial package TemplateHybridTwoPhaseMediumFormula
 
   algorithm
 
-    annotation(Inline=false,
+    annotation(smoothOrder = 2,
+          Inline=false,
           LateInline=true);
   end bubbleEntropy;
 
@@ -301,8 +308,9 @@ partial package TemplateHybridTwoPhaseMediumFormula
 
   algorithm
 
-    annotation(Inline=false,
-            LateInline=true);
+    annotation(smoothOrder = 2,
+          Inline=false,
+          LateInline=true);
   end dewEntropy;
   /*Provide functions to calculate thermodynamic properties depending on the
     independent variables. Moreover, these functions may depend on the Helmholtz

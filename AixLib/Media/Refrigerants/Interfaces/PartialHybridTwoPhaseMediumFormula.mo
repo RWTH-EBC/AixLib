@@ -2,36 +2,83 @@ within AixLib.Media.Refrigerants.Interfaces;
 partial package PartialHybridTwoPhaseMediumFormula
   "Base class for two phase medium using a hybrid approach without records"
   extends Modelica.Media.Interfaces.PartialTwoPhaseMedium;
+  extends AixLib.Media.Refrigerants.Interfaces.Choices;
+  extends AixLib.Media.Refrigerants.Interfaces.Types;
 
   redeclare replaceable model extends BaseProperties(
-    h(stateSelect=StateSelect.prefer),
-    d(stateSelect=StateSelect.default),
-    T(stateSelect=StateSelect.default),
-    p(stateSelect=StateSelect.prefer)) "Base properties of refrigerant"
+    p(stateSelect = if preferredMediumStates and
+                       (componentInputChoice == InputChoice.pT or
+                        componentInputChoice == InputChoice.ph or
+                        componentInputChoice == InputChoice.ps) then
+                        StateSelect.prefer else StateSelect.default),
+    T(stateSelect = if preferredMediumStates and
+                       (componentInputChoice == InputChoice.pT or
+                        componentInputChoice == InputChoice.dT) then
+                        StateSelect.prefer else StateSelect.default),
+    d(stateSelect = if preferredMediumStates and
+                       (componentInputChoice == InputChoice.dT) then
+                        StateSelect.prefer else StateSelect.default),
+    h(stateSelect = if preferredMediumStates and
+                        (componentInputChoice == InputChoice.ph) then
+                        StateSelect.prefer else StateSelect.default))
+    "Base properties of refrigerant"
 
-    Integer phase(min=0, max=2, start=1)
+    // Definition of parameters
+    //
+    parameter InputChoice componentInputChoice = InputChoice.ph
+      "Input varibles for property calculations; p and h are default input choices";
+
+    // Defition of further variables to be computed
+    //
+    SpecificEntropy s
+      "Specific entropy of the refrigerant";
+    FixedPhase phase(min=0, max=2, start=1)
       "2 for two-phase, 1 for one-phase, 0 if not known";
     SaturationProperties sat(Tsat(start=300.0), psat(start=1.0e5))
       "Saturation temperature and pressure";
 
   equation
+    // Calculation of basic constants
+    //
+    R = Modelica.Constants.R/MM;
     MM = fluidConstants[1].molarMass;
+
+    // Calculations of thermodynamic states
+    //
+    if (componentInputChoice == InputChoice.pT) then
+      d = density_pT(p=p,T=T);
+      h = specificEnthalpy_pT(p=p,T=T);
+    elseif (componentInputChoice == InputChoice.dT) then
+      p = pressure_dT(d=d,T=T);
+      h = specificEnthalpy_dT(d=d,T=T);
+    elseif (componentInputChoice == InputChoice.ph) then
+      T = temperature_ph(p=p,h=h);
+      d = density_ph(p=p,h=h);
+    elseif (componentInputChoice == InputChoice.ps) then
+      T = temperature_ps(p=p,s=s);
+      d = density_ps(p=p,s=s);
+      h = specificEnthalpy_ps(p=p,s=s);
+    else
+      assert(false, "Invalid choice of input variables for property calculations");
+    end if;
+
+    s = specificEntropy(state);
+    u = h - p/d;
+
+    // Calculation of saturation state
+    //
     phase = if ((h < bubbleEnthalpy(sat) or h > dewEnthalpy(sat)) or p >
           fluidConstants[1].criticalPressure) then 1 else 2;
+    sat = setSat_p(p=p);
+
+    // Connecting thermodynamic state record with calculated states
+    //
+    p = state.p;
+    T = state.T;
+    d = state.d;
+    h = state.h;
     phase = state.phase;
 
-    d = state.d;
-    T = state.T;
-    d = density_ph(p=p,h=h,phase=phase);
-    T = temperature_ph(p=p,h=h,phase=phase);
-    p = state.p;
-    h = state.h;
-
-    sat.Tsat = saturationTemperature(p=p);
-    sat.psat = p;
-
-    u = h - p/d;
-    R = Modelica.Constants.R/MM;
   end BaseProperties;
   /*Provide an implementation of model BaseProperties,
     that is defined in PartialMedium. Select two independent
@@ -223,6 +270,22 @@ partial package PartialHybridTwoPhaseMediumFormula
     are needed.  
     Just change these functions if needed.
   */
+  redeclare function extends setSmoothState
+    "Return thermodynamic state so that it smoothly approximates: if x > 0 then state_a else state_b"
+    import Modelica.Media.Common.smoothStep;
+
+  algorithm
+    state := ThermodynamicState(
+              p = smoothStep(x, state_a.p, state_b.p, x_small),
+              T = temperature_ph(p = smoothStep(x, state_a.p, state_b.p, x_small),
+                                 h = smoothStep(x, state_a.h, state_b.h, x_small)),
+              d = density_ph(p = smoothStep(x, state_a.p, state_b.p, x_small),
+                             h = smoothStep(x, state_a.h, state_b.h, x_small)),
+              h = smoothStep(x, state_a.h, state_b.h, x_small),
+              phase = 0);
+    annotation (Inline=true);
+  end setSmoothState;
+
   redeclare function extends setDewState
     "Return thermodynamic state of refrigerant  on the dew line"
   algorithm
@@ -232,7 +295,7 @@ partial package PartialHybridTwoPhaseMediumFormula
        d = dewDensity(sat),
        p = saturationPressure(sat.Tsat),
        h = dewEnthalpy(sat));
-    annotation(Inline=true,
+    annotation(Inline=false,
           LateInline=true);
   end setDewState;
 
@@ -245,7 +308,7 @@ partial package PartialHybridTwoPhaseMediumFormula
        d = bubbleDensity(sat),
        p = saturationPressure(sat.Tsat),
        h = bubbleEnthalpy(sat));
-    annotation(Inline=true,
+    annotation(Inline=false,
           LateInline=true);
   end setBubbleState;
 
@@ -259,7 +322,7 @@ partial package PartialHybridTwoPhaseMediumFormula
       h = specificEnthalpy_dT(d=d,T=T,phase=phase),
       phase = phase);
     annotation(derivative(noDerivative=phase)=setState_dTX_der,
-          Inline=true,
+          Inline=false,
           LateInline=true);
   end setState_dTX;
 
@@ -273,7 +336,7 @@ partial package PartialHybridTwoPhaseMediumFormula
       h = specificEnthalpy_pT(p=p,T=T,phase=phase),
       phase = phase);
     annotation(derivative(noDerivative=phase)=setState_pTX_der,
-          Inline=true,
+          Inline=false,
           LateInline=true);
   end setState_pTX;
 
@@ -287,7 +350,7 @@ partial package PartialHybridTwoPhaseMediumFormula
       h = h,
       phase = phase);
     annotation(derivative(noDerivative=phase)=setState_phX_der,
-          Inline=true,
+          Inline=false,
           LateInline=true);
   end setState_phX;
 
@@ -301,7 +364,7 @@ partial package PartialHybridTwoPhaseMediumFormula
       h = specificEnthalpy_ps(p=p,s=s,phase=phase),
       phase = phase);
     annotation(derivative(noDerivative=phase)=setState_psX_der,
-          Inline=true,
+          Inline=false,
           LateInline=true);
   end setState_psX;
   /*Provide functions to calculate thermodynamic properties using the EoS.
@@ -587,7 +650,7 @@ partial package PartialHybridTwoPhaseMediumFormula
     extends Modelica.Icons.Function;
     input Density d "Density";
     input Temperature T "Temperature";
-    input FixedPhase phase "2 for two-phase, 1 for one-phase, 0 if not known";
+    input FixedPhase phase=0 "2 for two-phase, 1 for one-phase, 0 if not known";
     output AbsolutePressure p "Pressure";
 
   protected
@@ -722,7 +785,7 @@ partial package PartialHybridTwoPhaseMediumFormula
     extends Modelica.Icons.Function;
     input Density d "Density";
     input Temperature T "Temperature";
-    input FixedPhase phase "2 for two-phase, 1 for one-phase, 0 if not known";
+    input FixedPhase phase=0 "2 for two-phase, 1 for one-phase, 0 if not known";
     output SpecificEnthalpy h "Specific enthalpy";
 
   protected
@@ -1075,9 +1138,6 @@ partial package PartialHybridTwoPhaseMediumFormula
 
   algorithm
     dsTd := 1/state.T*specificHeatCapacityCv(state);
-    //dsTd := -Modelica.Constants.R/fluidConstants[1].molarMass/state.T*
-    //  (tau2_d2_alpha_0_d_tau2(tau=tau) + tau2_d2_alpha_r_d_tau2(tau=tau,
-    //  delta=delta));
     annotation(Inline=true,
           LateInline=true);
   end specificEntropy_derT_d;

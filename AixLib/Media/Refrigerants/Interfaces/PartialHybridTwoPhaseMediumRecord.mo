@@ -530,7 +530,8 @@ partial package PartialHybridTwoPhaseMediumRecord
       p := fluidConstants[1].criticalPressure *
         exp(fluidConstants[1].criticalTemperature/T * p_1);
     end if;
-    annotation(Inline=false,
+    annotation(smoothOrder = 2,
+          Inline=false,
           LateInline=true);
   end saturationPressure;
 
@@ -549,7 +550,8 @@ partial package PartialHybridTwoPhaseMediumRecord
     end for;
     T_1 := T_1 + cf.saturationTemperature_n[cf.saturationTemperature_nT];
     T := T_1*cf.saturationTemperature_iO[4] + cf.saturationTemperature_iO[3];
-    annotation(Inline=false,
+    annotation(smoothOrder = 2,
+          Inline=false,
           LateInline=true);
   end saturationTemperature;
 
@@ -567,7 +569,8 @@ partial package PartialHybridTwoPhaseMediumRecord
     end for;
     dl_1 := dl_1 + cf.bubbleDensity_n[cf.bubbleDensity_nT];
     dl := dl_1*cf.bubbleDensity_iO[4] + cf.bubbleDensity_iO[3];
-    annotation(Inline=false,
+    annotation(smoothOrder = 2,
+          Inline=false,
           LateInline=true);
   end bubbleDensity;
 
@@ -585,7 +588,8 @@ partial package PartialHybridTwoPhaseMediumRecord
     end for;
     dv_1 := dv_1 + cf.dewDensity_n[cf.dewDensity_nT];
     dv := dv_1*cf.dewDensity_iO[4] + cf.dewDensity_iO[3];
-    annotation(Inline=false,
+    annotation(smoothOrder = 2,
+          Inline=false,
           LateInline=true);
   end dewDensity;
 
@@ -603,7 +607,8 @@ partial package PartialHybridTwoPhaseMediumRecord
     end for;
     hl_1 := hl_1 + cf.bubbleEnthalpy_n[cf.bubbleEnthalpy_nT];
     hl := hl_1*cf.bubbleEnthalpy_iO[4] + cf.bubbleEnthalpy_iO[3];
-    annotation(Inline=false,
+    annotation(smoothOrder = 2,
+          Inline=false,
           LateInline=true);
   end bubbleEnthalpy;
 
@@ -621,7 +626,8 @@ partial package PartialHybridTwoPhaseMediumRecord
     end for;
     hv_1 := hv_1 + cf.dewEnthalpy_n[cf.dewEnthalpy_nT];
     hv := hv_1*cf.dewEnthalpy_iO[4] + cf.dewEnthalpy_iO[3];
-    annotation(Inline=false,
+    annotation(smoothOrder = 2,
+          Inline=false,
           LateInline=true);
   end dewEnthalpy;
 
@@ -639,7 +645,8 @@ partial package PartialHybridTwoPhaseMediumRecord
     end for;
     sl_1 := sl_1 + cf.bubbleEntropy_n[cf.bubbleEntropy_nT];
     sl := sl_1*cf.bubbleEntropy_iO[4] + cf.bubbleEntropy_iO[3];
-    annotation(Inline=false,
+    annotation(smoothOrder = 2,
+          Inline=false,
           LateInline=true);
   end bubbleEntropy;
 
@@ -657,7 +664,8 @@ partial package PartialHybridTwoPhaseMediumRecord
     end for;
     sv_1 := sv_1 + cf.dewEntropy_n[cf.dewEntropy_nT];
     sv := sv_1*cf.dewEntropy_iO[4] + cf.dewEntropy_iO[3];
-    annotation(Inline=false,
+    annotation(smoothOrder = 2,
+          Inline=false,
           LateInline=true);
   end dewEntropy;
   /*Provide functions to calculate thermodynamic properties depending on the

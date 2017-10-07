@@ -21,7 +21,7 @@ model RefrigerantProperties
   parameter Modelica.SIunits.SpecificEnthalpy h_min = 145e3
     "Fluid limit: Minimum specific enthalpy"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.SpecificEnthalpy h_max = 600e3
+  parameter Modelica.SIunits.SpecificEnthalpy h_max = 480e3
     "Fluid limit: Maximum specific enthalpy"
     annotation (Dialog(group="Fluid limits"));
   parameter Modelica.SIunits.Density d_min = 2

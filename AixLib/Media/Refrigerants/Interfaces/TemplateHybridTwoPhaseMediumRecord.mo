@@ -56,7 +56,7 @@ partial package TemplateHybridTwoPhaseMediumRecord
       max=423.15),
     smoothModel=true,
     onePhase=false,
-    ThermoStates=Choices.IndependentVariables.phX,
+    ThermoStates=.Modelica.Media.Interfaces.PartialMedium.Choices.IndependentVariables.phX,
     fluidConstants=refrigerantConstants);
     /*The vector substanceNames is mandatory, as the number of
       substances is determined based on its size. Here we assume
