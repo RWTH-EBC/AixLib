@@ -66,12 +66,12 @@ partial package PartialHybridTwoPhaseMediumFormula
   */
   replaceable record SmoothTransition "Record that contains ranges to calculate a smooth transition between
     different regions"
-    SpecificEnthalpy T_ph = 10;
-    SpecificEntropy T_ps = 10;
-    AbsolutePressure d_pT = 10;
-    SpecificEnthalpy d_ph = 10;
-    Real d_ps(unit="J/(Pa.K.kg)") =  50/(30e5-0.5e5);
-    Real h_ps(unit="J/(Pa.K.kg)") = 100/(30e5-0.5e5);
+    SpecificEnthalpy T_ph = 2.5;
+    SpecificEntropy T_ps = 2.5;
+    AbsolutePressure d_pT = 2.5;
+    SpecificEnthalpy d_ph = 2.5;
+    Real d_ps(unit="J/(Pa.K.kg)") =  25/(30e5-0.5e5);
+    Real h_ps(unit="J/(Pa.K.kg)") = 50/(30e5-0.5e5);
   end SmoothTransition;
   /*Provide Helmholtz equations of state (EoS). These EoS must be fitted to
     different refrigerants and the explicit formulas have to be 
@@ -882,7 +882,7 @@ partial package PartialHybridTwoPhaseMediumFormula
         (1 + delta_d_alpha_r_d_delta(delta=delta,tau=tau) -
         tau_delta_d2_alpha_r_d_tau_d_delta(delta=delta,tau=tau));
     elseif state.phase==2 or phase_dT==2 then
-      dpTd := 1/saturationTemperature_derp(sat.psat);
+      dpTd := saturationPressure_derT(sat.Tsat);
     end if;
     annotation(Inline=true,
           LateInline=true);
@@ -1074,9 +1074,10 @@ partial package PartialHybridTwoPhaseMediumFormula
       Real tau = fluidConstants[1].criticalTemperature/state.T;
 
   algorithm
-    dsTd := -Modelica.Constants.R/fluidConstants[1].molarMass/state.T*
-      (tau2_d2_alpha_0_d_tau2(tau=tau) + tau2_d2_alpha_r_d_tau2(tau=tau,
-      delta=delta));
+    dsTd := 1/state.T*specificHeatCapacityCv(state);
+    //dsTd := -Modelica.Constants.R/fluidConstants[1].molarMass/state.T*
+    //  (tau2_d2_alpha_0_d_tau2(tau=tau) + tau2_d2_alpha_r_d_tau2(tau=tau,
+    //  delta=delta));
     annotation(Inline=true,
           LateInline=true);
   end specificEntropy_derT_d;
@@ -1085,6 +1086,57 @@ partial package PartialHybridTwoPhaseMediumFormula
     "Calculated derivative (du/dT)@d=const."
     input ThermodynamicState state "Thermodynamic state";
     output Real duTd "Derivative (du/dT)@d=const.";
+
+  protected
+    SaturationProperties sat = setSat_p(state.p);
+    Real phase_dT;
+
+    Real delta;
+    Real tau;
+
+    Real quality;
+    Real dulT;
+    Real duvT;
+    Real dvlT;
+    Real dvvT;
+    Real dqualitydTv;
+
+  algorithm
+    if state.phase == 0 then
+      phase_dT := if not ((state.d < bubbleDensity(sat) and state.d >
+        dewDensity(sat)) and state.T < fluidConstants[1].criticalTemperature)
+        then 1 else 2;
+    else
+      phase_dT := state.phase;
+    end if;
+    if state.phase == 1 or phase_dT == 1 then
+      delta :=state.d/(fluidConstants[1].molarMass/fluidConstants[1].criticalMolarVolume);
+      tau :=fluidConstants[1].criticalTemperature/state.T;
+
+      duTd := -Modelica.Constants.R/fluidConstants[1].molarMass*
+        (tau2_d2_alpha_0_d_tau2(tau=tau) + tau2_d2_alpha_r_d_tau2(delta=delta,
+        tau=tau));
+    else
+       quality := if state.phase==2 or phase_dT==2 then (bubbleDensity(sat)/
+         state.d - 1)/(bubbleDensity(sat)/dewDensity(sat) - 1) else 1;
+       dulT := dBubbleInternalEnergy_dTemperature(sat);
+       duvT := dDewInternalEnergy_dTemperature(sat);
+       dvlT := -1/(bubbleDensity(sat)^2)*dBubbleDensity_dTemperature(sat);
+       dvvT := -1/(dewDensity(sat)^2)*dDewDensity_dTemperature(sat);
+       dqualitydTv := (quality*dvvT + (1-quality)*dvlT)/
+         (1/bubbleDensity(sat)-1/dewDensity(sat));
+
+       duTd := dulT + dqualitydTv*((dewEnthalpy(sat)-sat.psat/dewDensity(sat))-
+        (bubbleEnthalpy(sat)-sat.psat/bubbleDensity(sat))) + quality*(duvT-dulT);
+    end if;
+    annotation(Inline=true,
+          LateInline=true);
+  end specificInternalEnergy_derT_d;
+
+  replaceable function specificInternalEnergy_derd_T
+    "Calculated derivative (du/dd)@T=const."
+    input ThermodynamicState state "Thermodynamic state";
+    output Real dudT "Derivative (du/dd)@T=const.";
 
   protected
     SaturationProperties sat = setSat_p(state.p);
@@ -1104,29 +1156,13 @@ partial package PartialHybridTwoPhaseMediumFormula
     if state.phase == 1 or phase_dT == 1 then
       delta :=state.d/(fluidConstants[1].molarMass/fluidConstants[1].criticalMolarVolume);
       tau :=fluidConstants[1].criticalTemperature/state.T;
-
-      duTd := -Modelica.Constants.R/fluidConstants[1].molarMass*
-        (tau2_d2_alpha_0_d_tau2(tau=tau) + tau2_d2_alpha_r_d_tau2(delta=delta,
-        tau=tau));
+      dudT := Modelica.Constants.R/fluidConstants[1].molarMass*state.T/state.d
+        *tau_delta_d2_alpha_r_d_tau_d_delta(tau=tau, delta=delta);
     else
-      duTd := specificHeatCapacityCv(state);
+      dudT := -1/state.d^2*((bubbleEnthalpy(sat)-sat.psat/bubbleDensity(sat))-
+        (dewEnthalpy(sat)-sat.psat/dewDensity(sat)))/
+        (1/bubbleDensity(sat)-1/dewDensity(sat));
     end if;
-    annotation(Inline=true,
-          LateInline=true);
-  end specificInternalEnergy_derT_d;
-
-  replaceable function specificInternalEnergy_derd_T
-    "Calculated derivative (du/dd)@T=const."
-    input ThermodynamicState state "Thermodynamic state";
-    output Real dudT "Derivative (du/dd)@T=const.";
-
-  protected
-      Real delta = state.d/(fluidConstants[1].molarMass/fluidConstants[1].criticalMolarVolume);
-      Real tau = fluidConstants[1].criticalTemperature/state.T;
-
-  algorithm
-    dudT := Modelica.Constants.R/fluidConstants[1].molarMass*state.T/state.d
-      *tau_delta_d2_alpha_r_d_tau_d_delta(tau=tau, delta=delta);
     annotation(Inline=true,
           LateInline=true);
   end specificInternalEnergy_derd_T;
