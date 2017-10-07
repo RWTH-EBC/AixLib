@@ -116,8 +116,7 @@ record ThermodynamicStatePropertiesBaseDataDefinition
 </html>",
         info="<html>
 <p>This record is a base data definition for fitting coefficients of the thermodynamic state properties depending on two independent state variables. These thermodynamic state properties are given as fitted formulas in order to reduce the overall computing time of the refrigerant model. Therefore, the fitting approach is based on &quot;Fast_Propane&quot; model developed by Sangi et al..</p>
-<p>Sangi et al. used the <b>following fitting approaches</b>, which are also implemented within <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord</a>:</p>
-<p>
+<p>Sangi et al. used the <b>following fitting approaches</b>, which are also implemented within <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord</a>:<br /></p>
 <table summary=\"Formulas for calculating thermodynamic properties at superheated and supercooled regime\" cellspacing=\"0\" cellpadding=\"3\" border=\"1\" width=\"80%\" style=\"border-collapse:collapse;\">
 <tr>
 <td valign=\"middle\" rowspan=\"2\"><p><i>Temperature_ph</i></p></td>
@@ -148,10 +147,9 @@ record ThermodynamicStatePropertiesBaseDataDefinition
 </tr>
 <tr>
 <td valign=\"middle\"><p><i>Functional approach</i></p></td>
-<td valign=\"middle\" colspan=\"2\"><p><img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/StateProperties_Approach.png\"/></p></td>
+<td valign=\"middle\" colspan=\"2\"><p><img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/StateProperties_Approach.png\" alt=\"Functional approach of calculating supercooled and superheated region\"/></p></td>
 </tr>
 </table>
-</p>
 <p>As it can be seen, the fitted formulas consist basically of the coefficient c<sub>i</sub> as well as of the parameters Mean<sub>i</sub> and Std<sub>i</sub>. These coefficients are the fitting coefficients and must be obtained during a fitting procedure. While the fitting procedure, the formulas presented above are fitted to external data (e.g. obtained from measurements or external media libraries) and the fitting coefficients are determined.</p>
 <h4>Assumptions and limitations</h4>
 <p>The fitting procedure is performed for a<b> predefined range of the external data</b> that is given in terms of, for example, temperature and pressure. As a consequence, the fitting coefficients are also just valid within the predefined range of external data.</p>

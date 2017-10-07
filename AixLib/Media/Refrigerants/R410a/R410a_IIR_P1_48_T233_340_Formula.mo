@@ -598,8 +598,7 @@ package R410a_IIR_P1_48_T233_340_Formula
 </html>", info="<html>
 <p>This package provides a refrigerant model for R410a using a hybrid approach developed by Sangi et al.. The hybrid approach is implemented in <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMedium\">AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMedium</a> and the refrigerant model is implemented by complete the template <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord</a>. The fitting coefficients required in the template are saved in the package <a href=\"modelica://AixLib.DataBase.Media.Refrigerants.R410a\">AixLib.DataBase.Media.Refrigerants.R410a</a>.</p>
 <h4>Assumptions and limitations</h4>
-<p>The implemented coefficients are fitted to external data by Engelpracht and are valid within the following range:</p>
-<p>
+<p>The implemented coefficients are fitted to external data by Engelpracht and are valid within the following range:<br /></p>
 <table summary=\"Range of validiry\" cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"30%\" style=\"border-collapse:collapse;\">
 <tr>
 <td><p>Parameter</p></td>

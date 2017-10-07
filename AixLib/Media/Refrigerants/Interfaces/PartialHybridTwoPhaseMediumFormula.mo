@@ -2243,8 +2243,7 @@ partial package PartialHybridTwoPhaseMediumFormula
 <p>Both, the ideal gas part and the residual part can be divided in three subparts (i.e. the summations) that contain different coefficients (e.g. nL, l<sub>i</sub>, p<sub>i</sub> or e<sub>i</sub>). These coefficients are fitting coefficients and must be obtained during a fitting procedure. While the fitting procedure, the general formula of the EoS is fitted to external data (e.g. obtained from measurements or external media libraries) and the fitting coefficients are determined. Finally, the formulas obtained during the fitting procedure are implemented in an explicit form.</p>
 <p>For further information of <b>the EoS and its partial derivatives</b>, please read the paper &quot;<a href=\"http://www.ep.liu.se/ecp/076/006/ecp12076006.pdf\">HelmholtzMedia - A fluid properties library</a>&quot; by Thorade and Saadat as well as the paper &quot;<a href=\"http://gfzpublic.gfz-potsdam.de/pubman/item/escidoc:247373:5/component/escidoc:306833/247373.pdf\">Partial derivatives of thermodynamic state properties for dynamic simulation</a>&quot; by Thorade and Saadat.</p>
 <p><b>Fitted formulas</b></p>
-<p>Fitted formulas allow to reduce the overall computing time of the refrigerant model. Therefore, both thermodynamic state properties at bubble and dew line and thermodynamic state properties depending on two independent state properties are expresses as fitted formulas. The fitted formulas&apos; approaches implemented in this package are developed by Sangi et al. within their &quot;Fast_Propane&quot; model and given below:</p>
-<p>
+<p>Fitted formulas allow to reduce the overall computing time of the refrigerant model. Therefore, both thermodynamic state properties at bubble and dew line and thermodynamic state properties depending on two independent state properties are expresses as fitted formulas. The fitted formulas&apos; approaches implemented in this package are developed by Sangi et al. within their &quot;Fast_Propane&quot; model and given below:<br /></p>
 <table summary=\"Formulas for calculating saturation properties\" cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"80%\" style=\"border-collapse:collapse;\">
 <tr>
 <td valign=\"middle\"><p><i>Saturation pressure</i></p></td>
@@ -2279,8 +2278,6 @@ partial package PartialHybridTwoPhaseMediumFormula
 <td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/DewEntropy.png\" alt=\"Formula to calculate dew entropy\"/></p></td>
 </tr>
 </table>
-</p>
-<p>
 <table summary=\"Formulas for calculating thermodynamic properties at superheated and supercooled regime\" cellspacing=\"0\" cellpadding=\"3\" border=\"1\" width=\"80%\" style=\"border-collapse:collapse;\">
 <tr>
 <td valign=\"middle\" rowspan=\"2\"><p><i>Temperature_ph</i></p></td>
@@ -2311,15 +2308,13 @@ partial package PartialHybridTwoPhaseMediumFormula
 </tr>
 <tr>
 <td valign=\"middle\"><p><i>Functional approach</i></p></td>
-<td valign=\"middle\" colspan=\"2\"><p><img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/StateProperties_Approach.png\"/></p></td>
+<td valign=\"middle\" colspan=\"2\"><p><img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/StateProperties_Approach.png\" alt=\"Calculation procedure for supercooled and superheated region\"/></p></td>
 </tr>
 </table>
-</p>
 <p>As it can be seen, the fitted formulas consist basically of the coefficients e<sub>i</sub>, c<sub>i</sub> as well as of the parameters Mean<sub>i</sub> and Std<sub>i</sub>. These coefficients are the fitting coefficients and must be obtained during a fitting procedure. While the fitting procedure, the formulas presented above are fitted to external data (e.g. obtained from measurements or external media libraries) and the fitting coefficients are determined. Finally, the formulas obtained during the fitting procedure are implemented in an explicit form.</p>
 <p>For further information of <b>the hybrid approach</b>, please read the paper &quot;<a href=\"http://dx.doi.org/10.3384/ecp14096\">A Medium Model for the Refrigerant Propane for Fast and Accurate Dynamic Simulations</a>&quot; by Sangi et al..</p>
 <p><b>Smooth transition</b></p>
-<p>To ensure a smooth transition between different regions (e.g. from supercooled region to two-phase region) and, therefore, to avoid discontinuities as far as possible, Sangi et al. implemented functions for a smooth transition between the regions. An example (i.e. specificEnthalpy_ps) of these functions is given below:</p>
-<p>
+<p>To ensure a smooth transition between different regions (e.g. from supercooled region to two-phase region) and, therefore, to avoid discontinuities as far as possible, Sangi et al. implemented functions for a smooth transition between the regions. An example (i.e. specificEnthalpy_ps) of these functions is given below:<br /></p>
 <table summary=\"Calculation procedures to avoid numerical instability at phase change\" cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"80%\" style=\"border-collapse:collapse;\">
 <tr>
 <td valign=\"middle\"><p><i>From supercooled region to bubble line and vice versa</i></p></td>
@@ -2333,7 +2328,6 @@ partial package PartialHybridTwoPhaseMediumFormula
 <td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/SaturationToTwoPhase.png\" alt=\"Calculation procedure for change from saturation to two-phase\"/></p></td>
 </tr>
 </table>
-</p>
 <h4>Assumptions and limitations</h4>
 <p>Three limitations are known for this package:</p>
 <ol>

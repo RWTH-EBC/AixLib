@@ -95,8 +95,7 @@ record BubbleDewStatePropertiesBaseDataDefinition
 </ul>
 </html>", info="<html>
 <p>This record is a base data definition for fitting coefficients of the thermodynamic state properties at bubble and dew line. If these state properties are not expressed as fitted formula, the state properties at vapour-liquid equilibrium will be identified iteratively and, as a consequence, the computing time will rise (Thorade and Matthias, 2012). In order to reduce the computing time, the thermodynamic state properties are expressed as fitted formula based on the approach presented by Sangi et al. within their &quot;Fast_Propane&quot; model.</p>
-<p>Sangi et al. used the <b>following fitting approaches</b>, which are also implemented within <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord</a>:</p>
-<p>
+<p>Sangi et al. used the <b>following fitting approaches</b>, which are also implemented within <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord</a>:<br /></p>
 <table summary=\"Formulas for calculating saturation properties\" cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"80%\" style=\"border-collapse:collapse;\">
 <tr>
 <td valign=\"middle\"><p><i>Saturation pressure</i></p></td>
@@ -131,7 +130,6 @@ record BubbleDewStatePropertiesBaseDataDefinition
 <td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/DewEntropy.png\" alt=\"Formula to calculate dew entropy\"/></p></td>
 </tr>
 </table>
-</p>
 <p>As it can be seen, the fitted formulas consist basically of the coefficient e<sub>i</sub> as well as of the parameters Mean<sub>i</sub> and Std<sub>i</sub>. These coefficients are the fitting coefficients and must be obtained during a fitting procedure. While the fitting procedure, the formulas presented above are fitted to external data (e.g. obtained from measurements or external media libraries) and the fitting coefficients are determined.</p>
 <h4>Assumptions and limitations</h4>
 <p>The fitting procedure is performed for a<b> predefined range of the external data</b> that is given in terms of, for example, temperature and pressure. As a consequence, the fitting coefficients are also just valid within the predefined range of external data.</p>

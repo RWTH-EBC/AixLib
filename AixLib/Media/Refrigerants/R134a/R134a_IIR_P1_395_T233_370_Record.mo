@@ -258,8 +258,7 @@ package R134a_IIR_P1_395_T233_370_Record
 </html>", info="<html>
 <p>This package provides a refrigerant model for R134a using a hybrid approach developed by Sangi et al.. The hybrid approach is implemented in <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord\">AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord</a> and the refrigerant model is implemented by complete the template <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord</a>. The fitting coefficients required in the template are saved in the package <a href=\"modelica://AixLib.DataBase.Media.Refrigerants.R134a\">AixLib.DataBase.Media.Refrigerants.R134a</a>.</p>
 <h4>Assumptions and limitations</h4>
-<p>The implemented coefficients are fitted to external data by Engelpracht and are valid within the following range:</p>
-<p>
+<p>The implemented coefficients are fitted to external data by Engelpracht and are valid within the following range:<br /></p>
 <table summary=\"Range of validiry\" cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"30%\" style=\"border-collapse:collapse;\">
 <tr>
 <td><p>Parameter</p></td>
@@ -277,7 +276,6 @@ package R134a_IIR_P1_395_T233_370_Record
 <td><p>370.15</p></td>
 </tr>
 </table>
-</p>
 <p>The reference point is defined as 200 kJ/kg and 1 kJ/kg/K, respectively, for enthalpy and entropy for the saturated liquid at 273.15 K.</p>
 <h4>Validation</h4>
 <p> The model is validated by comparing results obtained from the example model <a href=\"modelica://AixLib.Media.Refrigerants.Examples.RefrigerantProperties\">AixLib.Media.Refrigerants.Examples.RefrigerantProperties</a> to external data (e.g. obtained from measurements or external media libraries).</p>

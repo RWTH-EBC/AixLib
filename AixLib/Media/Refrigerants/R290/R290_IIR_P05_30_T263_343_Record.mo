@@ -244,8 +244,7 @@ package R290_IIR_P05_30_T263_343_Record
 </html>", info="<html>
 <p>This package provides a refrigerant model for R290 using a hybrid approach developed by Sangi et al.. The hybrid approach is implemented in <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord\">AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord</a> and the refrigerant model is implemented by complete the template <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord</a>. The fitting coefficients required in the template are saved in the package <a href=\"modelica://AixLib.DataBase.Media.Refrigerants.R290\">AixLib.DataBase.Media.Refrigerants.R290</a>.</p>
 <h4>Assumptions and limitations</h4>
-<p>The implemented coefficients are fitted to external data by Sangi et al. and are valid within the following range:</p>
-<p>
+<p>The implemented coefficients are fitted to external data by Sangi et al. and are valid within the following range:<br /></p>
 <table summary=\"Range of validiry\" cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"30%\" style=\"border-collapse:collapse;\">
 <tr>
 <td><p>Parameter</p></td>
@@ -263,7 +262,6 @@ package R290_IIR_P05_30_T263_343_Record
 <td><p>343.15</p></td>
 </tr>
 </table>
-</p>
 <h4>Validation</h4>
 <p>Sangi et al. validated their model by comparing it to results obtained from the Helmholtz equation of state. They found out that relative error of the refrigerant model compared to HelmholtzMedia (Thorade and Saadat, 2012) is close to zero.</p>
 <h4>References</h4>
