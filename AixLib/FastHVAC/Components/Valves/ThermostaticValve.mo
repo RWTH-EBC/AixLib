@@ -2,9 +2,9 @@ within AixLib.FastHVAC.Components.Valves;
 model ThermostaticValve
 
   replaceable function valveCharacteristic =
-      HVAC.Components.Valves.BaseClasses.ValveCharacteristics.linear
+      Modelica.Fluid.Valves.BaseClasses.ValveCharacteristics.linear
     constrainedby
-    HVAC.Components.Valves.BaseClasses.ValveCharacteristics.baseFun
+    Modelica.Fluid.Valves.BaseClasses.ValveCharacteristics.baseFun
     "Inherent flow characteristic"
     annotation(choicesAllMatching=true);
 
