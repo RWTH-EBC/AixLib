@@ -158,7 +158,7 @@ equation
     There is no air between the stacks and the rack is not standing 
     at a wall.</p>
     <p><img src=\"modelica://AixLib/Resources/Images/Building/BatteryModel/batRackExample.png\"
-    > </p>
+    alt=\"schema of battery rack\"/></p>
     </html>",  revisions="<html>
     <ul>
     <li><i>July 26, 2017&nbsp;</i> by Paul Thiele:<br/>Implemented. </li>
