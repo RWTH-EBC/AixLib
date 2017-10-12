@@ -1,6 +1,6 @@
 within AixLib.Utilities.Interfaces;
-model ThermalRadiationCollector "Collects m radiation heat flows"
-  parameter Integer m(min=1)=3 "Number of collected heat flows";
+model ThermalRadiationCollector "Collects m radiation heat flow phenomenas"
+  parameter Integer m(min=1)=3 "Number of collected heat flow phenomenas";
 
   Utilities.Interfaces.Star Star_a[m]
     "The input connector: m different radiation heat flows can be put in
@@ -52,5 +52,9 @@ equation
     <a href=\"Modelica.Thermal.HeatTransfer.Components.ThermalCollector\">
     Modelica.Thermal.HeatTransfer.Components.ThermalCollector </a> model
     and works in the same way.</p>
+    </html>",  revisions="<html>
+    <ul>
+    <li><i>July 26, 2017&nbsp;</i> by Paul Thiele:<br/>Implemented. </li>
+    </ul>
     </html>"));
 end ThermalRadiationCollector;

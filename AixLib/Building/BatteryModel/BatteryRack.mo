@@ -4,10 +4,10 @@ model BatteryRack
   batteries"
   inner parameter DataBase.Batteries.BatteryBaseDataDefinition batType
     "Used battery type";
-   parameter Integer nParallels "Number of batteries placed in one series";
+   parameter Integer nParallel "Number of batteries placed in one series";
    parameter Integer nSeries "Number of battery series";
    parameter Integer nStacked "Number of batteries stacked on another";
-   parameter Integer nBats=nParallels*nSeries*nStacked
+   parameter Integer nBat=nParallel*nSeries*nStacked
      "Number of batteries in the rack";
    parameter Boolean airBetweenStacks=false
       "Is there a gap between the stacks (nStacked>1)?" annotation (Dialog(
@@ -31,8 +31,8 @@ model BatteryRack
     "Converts the real heat input to heat"
     annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor HeatCapBat(
-    final C=nParallels*nSeries*nStacked*batType.cp*batType.massBat)
-    "Heat capacity of the battery (C=nBats*cp_Bat*mass_Bat)"
+    final C=nParallel*nSeries*nStacked*batType.cp*batType.massBat)
+    "Heat capacity of the battery (C=nBat*cp_Bat*mass_Bat)"
     annotation (Placement(transformation(extent={{-10,70},{10,90}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor TemperatureSensor
     "Temperature of the battery"
@@ -51,18 +51,18 @@ model BatteryRack
   AixLib.Utilities.HeatTransfer.HeatConv_inside HeatConvFluidOnTop(
       final surfaceOrientation=2,
       final A= (if airBetweenStacks==true
-                then nStacked*nParallels*nSeries*batType.width*batType.length
-                else nParallels*nSeries*batType.width*batType.length))
+                then nStacked*nParallel*nSeries*batType.width*batType.length
+                else nParallel*nSeries*batType.width*batType.length))
     "Block which calculates the horizontal
     heat convection on top of the battery"
     annotation (Placement(transformation(extent={{50,-50},{30,-30}})));
   AixLib.Utilities.HeatTransfer.HeatConv_inside HeatConvVertical(
       final surfaceOrientation=1,
       final A= (if batArrangement==true
-                then 2*nStacked*nParallels*batType.width*batType.height
+                then 2*nStacked*nParallel*batType.width*batType.height
                      + 2*nStacked*nSeries*batType.length*batType.height
                      - areaStandingAtWall
-                else 2*nStacked*nParallels*batType.length*batType.height
+                else 2*nStacked*nParallel*batType.length*batType.height
                      + 2*nStacked*nSeries*batType.width*batType.height
                      - areaStandingAtWall))
     "Block which calculates the vertical heat convection of the battery"
@@ -78,7 +78,7 @@ model BatteryRack
 
   AixLib.Utilities.HeatTransfer.HeatConv_inside HeatConvHorizontalFacingDown(
      final surfaceOrientation=3,
-     final A=(nStacked - 1)*nParallels*nSeries*batType.width*batType.length) if
+     final A=(nStacked - 1)*nParallel*nSeries*batType.width*batType.length) if
        airBetweenStacks and nStacked > 1
     "Block which calculates the horizontal
     heat convection at the bottom of the battery"
@@ -152,6 +152,12 @@ equation
     <a href=\"AixLib.DataBase.Batteries.BatteryBaseDataDefinition\">
     AixLib.DataBase.Batteries.BatteryBaseDataDefinition </a>
     to define the battery parameters.</p>
+    <p><b><font style=\"color: #008000; \">Figure</font></b> </p>
+    <p><br/>Example of a battery rack with nParallel = 6, nSeries = 3,
+    nStacked = 2. There is no air between the stacks and the rack is not
+    standing at a wall.</p>
+    <p><img src=\"modelica://AixLib/Resources/Images/Building/BatteryModel/batRackExample.png\"
+    > </p>
     </html>",  revisions="<html>
     <ul>
     <li><i>July 26, 2017&nbsp;</i> by Paul Thiele:<br/>Implemented. </li>

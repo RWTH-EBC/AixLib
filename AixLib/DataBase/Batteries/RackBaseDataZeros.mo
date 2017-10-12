@@ -4,7 +4,7 @@ record RackBaseDataZeros
   import AixLib;
   extends AixLib.DataBase.Batteries.RackBaseDataDefinition(
     batType=AixLib.DataBase.Batteries.LeadBattery1(),
-    nParallels=0,
+    nParallel=0,
     nSeries=0,
     nStacked=0,
     airBetweenStacks=false,
