@@ -1,7 +1,7 @@
 within AixLib.DataBase.Walls.EnEV2002.Floor;
 record FLground_EnEV2002_SML
   "Floor towards ground after EnEV 2002, for building of type S (schwer), M (mittel) and L (leicht)"
-  extends WallBaseDataDefinition(n(min = 1) = 4 "Number of wall layers", d = {0.4, 0.25, 0.04, 0.06}
+  extends WallBaseDataDefinition(n(min = 1) = 4 "Number of wall layers", d = {0.04, 0.25, 0.04, 0.06}
       "Thickness of wall layers",                                                                                                rho = {100, 2300, 120, 2000}
       "Density of wall layers",                                                                                                    lambda = {0.055, 2.3, 0.04, 1.4}
       "Thermal conductivity of wall layers",                                                                                                    c = {1000, 1000, 1030, 1000}
