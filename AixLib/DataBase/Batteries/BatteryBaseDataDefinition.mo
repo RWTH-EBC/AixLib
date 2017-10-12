@@ -11,7 +11,7 @@ record BatteryBaseDataDefinition
   parameter SI.Length length
     "Length of the battery (should be shorter than the width)";
   parameter SI.SpecificHeatCapacity cp
-    "Specific heat capacity of the battery";
+    "Average specific heat capacity of the battery unit";
   parameter SI.Mass massBat "Mass of the battery";
   parameter SI.Area radiationArea "Battery's area for the radiation";
   parameter SI.Emissivity eps "Battery's emissivity coefficient";
