@@ -154,7 +154,7 @@ equation
     to define the battery parameters.</p>
     <p><b><font style=\"color: #008000; \">Figure</font></b> </p>
     <p><br/>Example of a battery rack with the following properties: 
-    nParallel = 6, nSeries = 3, nStacked = 2.
+    nParallel = 6, nSeries = 3 and nStacked = 2.
     There is no air between the stacks and the rack is not standing 
     at a wall.</p>
     <p><img src=\"modelica://AixLib/Resources/Images/Building/BatteryModel/batRackExample.png\"
