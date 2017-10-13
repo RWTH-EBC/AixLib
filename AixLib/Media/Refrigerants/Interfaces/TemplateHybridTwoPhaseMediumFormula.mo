@@ -26,8 +26,8 @@ partial package TemplateHybridTwoPhaseMediumFormula
     "Thermodynamic constants for refrigerant";
 
   /*Provide basic information about the refrigerant. These basic information
-    are the refrigerant name as well as the valid refrigerant limits in terms of
-    specific enthalpy, density, absolute pressure and temperature.
+    are the refrigerant name as well as the valid refrigerant limits in terms
+    of specific enthalpy, density, absolute pressure and temperature.
   */
   extends
     AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumFormula(
@@ -56,7 +56,8 @@ partial package TemplateHybridTwoPhaseMediumFormula
       max=423.15),
     smoothModel=true,
     onePhase=false,
-    ThermoStates=.Modelica.Media.Interfaces.PartialMedium.Choices.IndependentVariables.phX,
+    ThermoStates=
+      .Modelica.Media.Interfaces.PartialMedium.Choices.IndependentVariables.phX,
     fluidConstants=refrigerantConstants);
     /*The vector substanceNames is mandatory, as the number of
       substances is determined based on its size. Here we assume
@@ -72,7 +73,7 @@ partial package TemplateHybridTwoPhaseMediumFormula
       If a mixture has a fixed composition set fixedX=true, otherwise false.
       The modifiers for reducedX and fixedX should normally be final
       since the other equations are based on these values.
-      
+
       It is also possible to redeclare the min, max, and start attributes of
       Medium types, defined in the base class Interfaces.PartialMedium
       (the example of Temperature is shown here). Min and max attributes
@@ -84,15 +85,15 @@ partial package TemplateHybridTwoPhaseMediumFormula
   /*Provide records thats contain the coefficients for the smooth transition
     between different regions.
   */
-  redeclare record SmoothTransition "Record that contains ranges to calculate a smooth transition between
+  redeclare record SmoothTransition
+    "Record that contains ranges to calculate a smooth transition between
     different regions"
-    SpecificEnthalpy T_ph = 10;
-    SpecificEntropy T_ps = 10;
-    AbsolutePressure d_pT = 10;
-    SpecificEnthalpy d_ph = 10;
-    Real d_ps(unit="J/(Pa.K.kg)") =  50/(30e5-0.5e5);
-    Real h_ps(unit="J/(Pa.K.kg)") = 100/(30e5-0.5e5);
-    AbsolutePressure d_derh_p = 0.2;
+    SpecificEnthalpy T_ph = 2.5;
+    SpecificEntropy T_ps = 2.5;
+    AbsolutePressure d_pT = 2.5;
+    SpecificEnthalpy d_ph = 2.5;
+    Real d_ps(unit="J/(Pa.K.kg)") =  25/(30e5-0.5e5);
+    Real h_ps(unit="J/(Pa.K.kg)") = 50/(30e5-0.5e5);
   end SmoothTransition;
   /*Provide Helmholtz equations of state (EoS) using an explicit formula.
   */
@@ -113,7 +114,7 @@ partial package TemplateHybridTwoPhaseMediumFormula
   end alpha_r;
 
   redeclare function extends tau_d_alpha_0_d_tau
-    "Short form for tau*(dalpha_0/dtau)@delta=const"
+    "Short form for tau*(dalpha_0/dtau)_delta=const"
   algorithm
 
   annotation(Inline=false,
@@ -121,7 +122,7 @@ partial package TemplateHybridTwoPhaseMediumFormula
   end tau_d_alpha_0_d_tau;
 
   redeclare function extends tau2_d2_alpha_0_d_tau2
-    "Short form for tau*tau*(ddalpha_0/(dtau*dtau))@delta=const"
+    "Short form for tau*tau*(ddalpha_0/(dtau*dtau))_delta=const"
   algorithm
 
   annotation(Inline=false,
@@ -129,7 +130,7 @@ partial package TemplateHybridTwoPhaseMediumFormula
   end tau2_d2_alpha_0_d_tau2;
 
   redeclare function extends tau_d_alpha_r_d_tau
-    "Short form for tau*(dalpha_r/dtau)@delta=const"
+    "Short form for tau*(dalpha_r/dtau)_delta=const"
   algorithm
 
   annotation(Inline=false,
@@ -137,7 +138,7 @@ partial package TemplateHybridTwoPhaseMediumFormula
   end tau_d_alpha_r_d_tau;
 
   redeclare function extends tau2_d2_alpha_r_d_tau2
-    "Short form for tau*tau*(ddalpha_r/(dtau*dtau))@delta=const"
+    "Short form for tau*tau*(ddalpha_r/(dtau*dtau))_delta=const"
   algorithm
 
   annotation(Inline=false,
@@ -145,7 +146,7 @@ partial package TemplateHybridTwoPhaseMediumFormula
   end tau2_d2_alpha_r_d_tau2;
 
   redeclare function extends delta_d_alpha_r_d_delta
-    "Short form for delta*(dalpha_r/(ddelta))@tau=const"
+    "Short form for delta*(dalpha_r/(ddelta))_tau=const"
   algorithm
 
   annotation(Inline=false,
@@ -153,7 +154,7 @@ partial package TemplateHybridTwoPhaseMediumFormula
   end delta_d_alpha_r_d_delta;
 
   redeclare function extends delta2_d2_alpha_r_d_delta2
-    "Short form for delta*delta(ddalpha_r/(ddelta*delta))@tau=const"
+    "Short form for delta*delta(ddalpha_r/(ddelta*delta))_tau=const"
   algorithm
 
   annotation(Inline=false,
@@ -169,7 +170,7 @@ partial package TemplateHybridTwoPhaseMediumFormula
   end tau_delta_d2_alpha_r_d_tau_d_delta;
 
   redeclare function extends tau3_d3_alpha_0_d_tau3
-    "Short form for tau*tau*tau*(dddalpha_0/(dtau*dtau*dtau))@delta=const"
+    "Short form for tau*tau*tau*(dddalpha_0/(dtau*dtau*dtau))_delta=const"
   algorithm
 
     annotation(Inline=false,
@@ -177,7 +178,7 @@ partial package TemplateHybridTwoPhaseMediumFormula
   end tau3_d3_alpha_0_d_tau3;
 
   redeclare function extends tau3_d3_alpha_r_d_tau3
-    "Short form for tau*tau*tau*(dddalpha_r/(dtau*dtau*dtau))@delta=const"
+    "Short form for tau*tau*tau*(dddalpha_r/(dtau*dtau*dtau))_delta=const"
   algorithm
 
     annotation(Inline=false,
@@ -185,7 +186,8 @@ partial package TemplateHybridTwoPhaseMediumFormula
   end tau3_d3_alpha_r_d_tau3;
 
   redeclare function extends delta3_d3_alpha_r_d_delta3
-    "Short form for delta*delta*delta*(dddalpha_r/(ddelta*ddelta*ddelta))@tau=const"
+    "Short form for delta*delta*delta*
+    (dddalpha_r/(ddelta*ddelta*ddelta))_tau=const"
   algorithm
 
     annotation(Inline=false,
@@ -208,7 +210,7 @@ partial package TemplateHybridTwoPhaseMediumFormula
           LateInline=true);
   end tau2_delta_d3_alpha_r_d_tau2_d_delta;
   /*Provide polynomial functions for saturation properties. These functions are
-    fitted to external data (e.g. data extracted from RefProp or FluidProp). 
+    fitted to external data (e.g. experimental data).
     Currently, just one fitting approach is implemented.
   */
   redeclare function extends saturationPressure
@@ -313,8 +315,8 @@ partial package TemplateHybridTwoPhaseMediumFormula
           LateInline=true);
   end dewEntropy;
   /*Provide functions to calculate thermodynamic properties depending on the
-    independent variables. Moreover, these functions may depend on the Helmholtz
-    EoS.
+    independent variables. Moreover, these functions may depend on the
+    Helmholtz EoS.
   */
   redeclare replaceable function temperature_ph
     "Calculates temperature as function of pressure and specific enthalpy"
@@ -420,27 +422,63 @@ partial package TemplateHybridTwoPhaseMediumFormula
 
   algorithm
   end surfaceTension;
+
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
   June 6, 2017, by Mirko Engelpracht:<br/>
-  First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
+  First implementation
+  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
 </ul>
 </html>",
         info="<html>
-<p>This package is a <b>template</b> for <b>new refrigerant</b> models using a hybrid approach based on the &quot;Fast_Propane&quot; model developed by Sangi et al. (for detailed information, please checkout <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumFormula\">AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumFormula</a>). For a new refrigerant model just make a copy of this package, remove the &quot;partial&quot; keyword from the package and provide the information that is requested in the comments of the Modelica code. The following <b>information is requested</b>:</p>
+<p>
+This package is a <b>template</b> for <b>new refrigerant</b> models using a
+hybrid approach based on the &quot;Fast_Propane&quot; model developed by
+Sangi et al. (for detailed information, please checkout
+<a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumFormula\">
+AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumFormula
+</a>
+). For a new refrigerant model just make a copy of this package, remove the
+&quot;partial&quot; keyword from the package and provide the information that
+is requested in the comments of the Modelica code. The following
+<b>information is requested</b>:
+</p>
 <ol>
-<li><u>Fluid constants:</u> Provide basic information of the refrigerant and add the reference.</li>
-<li><u>Basic information:</u> Provide basic information like the refrigerant name and its valid fluid limits in terms of different thermodynamic state properties.</li>
-<li><u>Base properties:</u> Provide information about the refrigerant&apos;s base properties like the relation between specific enthalpy, specific internal energy, pressure and density.</li>
-<li><u>Helmholtz EoS:</u> Provide the formulas of the Helmholtz equation of state.</li>
-<li><u>Saturation state properties:</u> Provide the formulas of the saturation properties.</li>
-<li><u>Further thermodynamic properties:</u> Provide formulas for further thermodynamic properties like the thermal conductivity or surface tension.</li>
-<li><u>Fitted state properties:</u> Provide the formulas of ther further state properties.</li>
+<li><u>Fluid constants:</u> Provide basic information of the refrigerant and
+add the reference.</li>
+<li><u>Basic information:</u> Provide basic information like the refrigerant
+name and its valid fluid limits in terms of different thermodynamic state
+properties.</li>
+<li><u>Base properties:</u> Provide information about the refrigerant&apos;s
+base properties like the relation between specific enthalpy, specific internal
+energy, pressure and density.</li>
+<li><u>Helmholtz EoS:</u> Provide the formulas of the Helmholtz equation
+of state.</li>
+<li><u>Saturation state properties:</u> Provide the formulas of the
+saturation properties.</li>
+<li><u>Further thermodynamic properties:</u> Provide formulas for further
+thermodynamic properties like the thermal conductivity or surface tension.</li>
+<li><u>Fitted state properties:</u> Provide the formulas of ther further
+state properties.</li>
 </ol>
-<p>A refrigerant package inherits from <b>PartialHybridTwoPhaseMediumFormula</b> and provides the equations for the refrigerant. Moreover, the PartialHybridTwoPhaseMedium package inherits from <b>PartialMedium</b> and, therefore, the details of this package are described in <a href=\"modelica://Modelica.Media.UsersGuide\">Modelica.Media.UsersGuide</a>.</p>
+<p>
+A refrigerant package inherits from <b>PartialHybridTwoPhaseMediumFormula</b>
+and provides the equations for the refrigerant. Moreover, the
+PartialHybridTwoPhaseMedium package inherits from <b>PartialMedium</b> and,
+therefore, the details of this package are described in
+<a href=\"modelica://Modelica.Media.UsersGuide\">Modelica.Media.UsersGuide
+</a>.
+</p>
 <h4>References</h4>
-<p>Sangi, Roozbeh; Jahangiri, Pooyan; Klasing, Freerk; Streblow, Rita; M&uuml;ller, Dirk (2014): <a href=\"http://dx.doi.org/10.3384/ecp14096\">A Medium Model for the Refrigerant Propane for Fast and Accurate Dynamic Simulations</a>. In: <i>The 10th International Modelica Conference</i>. Lund, Sweden, March 10-12, 2014: Link&ouml;ping University Electronic Press (Link&ouml;ping Electronic Conference Proceedings), S. 1271&ndash;1275</p>
+<p>
+Sangi, Roozbeh; Jahangiri, Pooyan; Klasing, Freerk; Streblow, Rita;
+M&uuml;ller, Dirk (2014): <a href=\"http://dx.doi.org/10.3384/ecp14096\">
+A Medium Model for the Refrigerant Propane for Fast and Accurate Dynamic
+Simulations</a>. In: <i>The 10th International Modelica Conference</i>. Lund,
+Sweden, March 10-12, 2014: Link&ouml;ping University Electronic Press
+(Link&ouml;ping Electronic Conference Proceedings), S. 1271&ndash;1275
+</p>
 </html>"));
 end TemplateHybridTwoPhaseMediumFormula;

@@ -95,33 +95,35 @@ model RefrigerantIntegration
     Real alpha_0_Sym
       "Dimensionless ideal gas Helmholz energy calculated by derivative";
     Real alpha_0_t_Calc
-      "Tau*(dalpha_0/dtau)@delta=const calculated by medium model";
+      "Tau*(dalpha_0/dtau)_delta=const calculated by medium model";
     Real alpha_0_t_Sym
-      "Tau*(dalpha_0/dtau)@delta=const calculated by derivative";
+      "Tau*(dalpha_0/dtau)_delta=const calculated by derivative";
     Real alpha_0_tt_Calc
-      "Tau*tau*(ddalpha_0/(dtau*dtau))@delta=const calculated by medium model";
+      "Tau*tau*(ddalpha_0/(dtau*dtau))_delta=const calculated by medium model";
     Real alpha_0_tt_Sym
-      "Tau*tau*(ddalpha_0/(dtau*dtau))@delta=const calculated by derivative";
+      "Tau*tau*(ddalpha_0/(dtau*dtau))_delta=const calculated by derivative";
     Real alpha_r_Calc
       "Dimensionless residual Helmholz energy calculated by medium model";
     Real alpha_r_Sym
       "Dimensionless residual Helmholz energy calculated by derivative";
     Real alpha_r_t_Calc
-      "Tau*(dalpha_r/dtau)@delta=const calculated by medium model";
+      "Tau*(dalpha_r/dtau)_delta=const calculated by medium model";
     Real alpha_r_t_Sym
-      "Tau*(dalpha_r/dtau)@delta=const energy calculated by derivative";
+      "Tau*(dalpha_r/dtau)_delta=const energy calculated by derivative";
     Real alpha_r_tt_Calc
-      "Tau*tau*(ddalpha_r/(dtau*dtau))@delta=const calculated by medium model";
+      "Tau*tau*(ddalpha_r/(dtau*dtau))_delta=const calculated by medium model";
     Real alpha_r_tt_Sym
-      "Tau*tau*(ddalpha_r/(dtau*dtau))@delta=const calculated by derivative";
+      "Tau*tau*(ddalpha_r/(dtau*dtau))_delta=const calculated by derivative";
     Real alpha_r_d_Calc
-      "Delta*(dalpha_r/(ddelta))@tau=const calculated by medium model";
+      "Delta*(dalpha_r/(ddelta))_tau=const calculated by medium model";
     Real alpha_r_d_Sym
-      "Delta*(dalpha_r/(ddelta))@tau=const calculated by derivative";
+      "Delta*(dalpha_r/(ddelta))_tau=const calculated by derivative";
     Real alpha_r_dd_Calc
-      "Delta*delta(ddalpha_r/(ddelta*delta))@tau=const calculated by medium model";
+      "Delta*delta(ddalpha_r/(ddelta*delta))_tau=const calculated
+      by medium model";
     Real alpha_r_dd_Sym
-      "Delta*delta(ddalpha_r/(ddelta*delta))@tau=const calculated by derivative";
+      "Delta*delta(ddalpha_r/(ddelta*delta))_tau=const
+      calculated by derivative";
     Real alpha_r_td_Calc
       "Tau*delta*(ddalpha_r/(dtau*ddelta)) calculated by medium model";
     Real alpha_r_td_Sym
@@ -176,7 +178,8 @@ equation
   stateVariables.Tps_Calc = Medium.temperature_ps(p=p,s=s);
   der(stateVariables.Tps_Sym) = der(stateVariables.Tps_Calc);
 
-  stateVariables.dpT_Calc = Medium.density_pT(p=p,T= if T >= 303.15 then 303.15 else T);
+  stateVariables.dpT_Calc = Medium.density_pT(p=p,T= if T
+    >= 303.15 then 303.15 else T);
   der(stateVariables.dpT_Sym) = der(stateVariables.dpT_Calc);
   stateVariables.dph_Calc = Medium.density_ph(p=p,h=h);
   der(stateVariables.dph_Sym) = der(stateVariables.dph_Calc);
@@ -185,7 +188,8 @@ equation
 
   stateVariables.hdT_Calc = Medium.specificEnthalpy_dT(d=d,T=T,phase=0);
   der(stateVariables.hdT_Sym) = der(stateVariables.hdT_Calc);
-  stateVariables.hpT_Calc = Medium.specificEnthalpy_pT(p=p,T= if T >= 303.15 then 303.15 else T);
+  stateVariables.hpT_Calc = Medium.specificEnthalpy_pT(p=p,T= if T
+    >= 303.15 then 303.15 else T);
   der(stateVariables.hpT_Sym) = der(stateVariables.hpT_Calc);
   stateVariables.hps_Calc = Medium.specificEnthalpy_ps(p=p,s=s);
   der(stateVariables.hps_Sym) = der(stateVariables.hps_Calc);
@@ -208,26 +212,41 @@ equation
   der(eoS.alpha_r_d_Sym) = der(eoS.alpha_r_d_Calc);
   eoS.alpha_r_dd_Calc = Medium.delta2_d2_alpha_r_d_delta2(delta=delta,tau=tau);
   der(eoS.alpha_r_dd_Sym) = der(eoS.alpha_r_dd_Calc);
-  eoS.alpha_r_td_Calc = Medium.tau_delta_d2_alpha_r_d_tau_d_delta(delta=delta,tau=tau);
+  eoS.alpha_r_td_Calc = Medium.tau_delta_d2_alpha_r_d_tau_d_delta(
+    delta=delta,tau=tau);
   der(eoS.alpha_r_td_Sym) = der(eoS.alpha_r_td_Calc);
 
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
   August 13, 2017, by Mirko Engelpracht:<br/>
-  First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
+  First implementation
+  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
 </ul>
 </html>", info="<html>
-<p>This example models checks the implementation of the<b> refrigerant&apos;s main derivatives</b> wrt. to time. Therefore, the user has first to introduce some information about the refrigerant and afterwards the derivatives are calculated. The following <b>refrigerant&apos;s information</b> is required:</p>
+<p>
+This example models checks the implementation of the<b> refrigerant&apos;s
+main derivatives</b> wrt. to time. Therefore, the user has first to
+introduce some information about the refrigerant and afterwards the
+derivatives are calculated. The following <b>refrigerant&apos;s
+information</b> is required:
+</p>
 <ol>
-<li>The <i>refrigerant package</i> that shall be tested.</li>
-<li>The <i>independent variables</i> (i.e. independents variables' alteration with time).</li>
+<li>The <i>refrigerant package</i> that
+shall be tested.</li>
+<li>The <i>independent variables</i> (i.e. independents
+variables' alteration with time).</li>
 </ol>
-<p>The following <b>refrigerant&apos;s derivatives </b> are calculated and checked:</p>
+<p>
+The following <b>refrigerant&apos;s derivatives </b> are c
+alculated and checked:
+</p>
 <ol>
-<li>Calculation of state variables depending on the independent state variables (e.g. pressure depending on density and temperature).</li>
-<li>Calculation of variables of the Helmholtz equation of state.</li>
+<li>Calculation of state variables depending on the independent
+state variables (e.g. pressure depending on density and temperature).</li>
+<li>Calculation of variables of the Helmholtz
+equation of state.</li>
 </ol>
 </html>"));
 end RefrigerantIntegration;

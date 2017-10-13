@@ -1,6 +1,7 @@
 within AixLib.Media.Refrigerants.Validation;
 model RefrigerantInversions
-  "Model to check computation of the main thermodynamic properties and theirs inverses"
+  "Model to check computation of the main thermodynamic properties
+  and theirs inverses"
   extends Modelica.Icons.Example;
 
   // Define the refrigerant that shall be tested
@@ -83,15 +84,23 @@ equation
 
   annotation (
 experiment(StopTime=80, Tolerance=1e-006),
-__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Media/Examples/WaterTemperatureEnthalpyInversion.mos"
-        "Simulate and plot"),
     Documentation(info="<html>
-<p>This example models checks the calculation of the <b>refrigerant&apos;s main inversions</b> depending on the independent variables pressure and temperature. Therefore, the user has first to introduce some information about the refrigerant and afterwards the different inversions are calculated. The following <b>refrigerant&apos;s information</b> is required:</p>
+<p>
+This example models checks the calculation of the <b>refrigerant&apos;s main
+inversions</b> depending on the independent variables pressure and
+temperature. Therefore, the user has first to introduce some information
+about the refrigerant and afterwards the different inversions are calculated.
+The following <b>refrigerant&apos;s information</b> is required:
+</p>
 <ol>
-<li>The <i>refrigerant package</i> that shall be tested.</li>
-<li>The <i>refrigerant&apos;s fluid limits</i> that are determined by the fitting procedure.</li>
+<li>The <i>refrigerant package</i> that
+shall be tested.</li>
+<li>The <i>refrigerant&apos;s fluid limits</i> that are
+determined by the fitting procedure.</li>
 </ol>
-<p>The following <b>inversions</b> are calculated and checked:</p>
+<p>
+The following <b>inversions</b> are calculated and checked:
+</p>
 <ol>
 <li>Temperature calculated with pressure and specific enthalpy.</li>
 <li>Temperature calculated with pressure and specific entropy.</li>
@@ -101,11 +110,13 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Media/Example
 <li>Specific enthalpy calculated with density and temperature.</li>
 <li>Specific enthalpy calculated with pressure and specific entropy.</li>
 </ol>
-</html>",     revisions="<html>
+</html>",
+revisions="<html>
 <ul>
   <li>
   June 14, 2017, by Mirko Engelpracht:<br/>
-  First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
+  First implementation
+  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
 </ul>
 </html>"),

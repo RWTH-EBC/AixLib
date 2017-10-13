@@ -1,6 +1,7 @@
 within AixLib.Media.Refrigerants.R290;
 package R290_IIR_P05_30_T263_343_Record
-  "Refrigerant model for R290 using a hybrid approach with recods developed by Sangi et al."
+  "Refrigerant model for R290 using a hybrid approach with recods developed
+  by Sangi et al."
 
   /*Provide basic definitions of the refrigerant. Therefore, fill constants
     or parameters and may add new constants or parameters if needed. Moreover,
@@ -25,8 +26,8 @@ package R290_IIR_P05_30_T263_343_Record
      each hasCriticalData=true) "Thermodynamic constants for Propane";
 
   /*Provide basic information about the refrigerant. These basic information
-    are the refrigerant name as well as the valid refrigerant limits in terms of
-    specific enthalpy, density, absolute pressure and temperature.
+    are the refrigerant name as well as the valid refrigerant limits in terms
+    of specific enthalpy, density, absolute pressure and temperature.
   */
   extends
     AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord(
@@ -71,7 +72,7 @@ package R290_IIR_P05_30_T263_343_Record
       If a mixture has a fixed composition set fixedX=true, otherwise false.
       The modifiers for reducedX and fixedX should normally be final
       since the other equations are based on these values.
-      
+
       It is also possible to redeclare the min, max, and start attributes of
       Medium types, defined in the base class Interfaces.PartialMedium
       (the example of Temperature is shown here). Min and max attributes
@@ -89,19 +90,22 @@ package R290_IIR_P05_30_T263_343_Record
       AixLib.DataBase.Media.Refrigerants.R290.EoS_IIR_P05_30_T263_343;
   end EoS;
 
-  redeclare record BDSP "Record that contains fitting coefficients of the state properties at bubble
-    and dew lines"
+  redeclare record BDSP
+    "Record that contains fitting coefficients of the state properties at
+    bubble and dew lines"
     extends
       AixLib.DataBase.Media.Refrigerants.R290.BDSP_IIR_P05_30_T263_343;
   end BDSP;
 
-  redeclare record TSP "Record that contains fitting coefficients of the state properties
+  redeclare record TSP
+    "Record that contains fitting coefficients of the state properties
     calculated with two independent state properties"
     extends
       AixLib.DataBase.Media.Refrigerants.R290.TSP_IIR_P05_30_T263_343;
   end TSP;
 
-  redeclare record SmoothTransition "Record that contains ranges to calculate a smooth transition between
+  redeclare record SmoothTransition
+    "Record that contains ranges to calculate a smooth transition between
     different regions"
       SpecificEnthalpy T_ph = 2.5;
       SpecificEntropy T_ps = 2.5;
@@ -117,9 +121,14 @@ package R290_IIR_P05_30_T263_343_Record
     "Calculates dynamic viscosity of refrigerant"
 
   protected
-    Real tv[:] = {0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 2.0, 2.0, 2.0, 3.0, 4.0, 1.0, 2.0};
-    Real dv[:] = {1.0, 2.0, 3.0, 13.0, 12.0, 16.0, 0.0, 18.0, 20.0, 13.0, 4.0, 0.0, 1.0};
-    Real nv[:] = {-0.7548580e-1, 0.7607150, -0.1665680, 0.1627612e-5, 0.1443764e-4, -0.2759086e-6, -0.1032756, -0.2498159e-7, 0.4069891e-8, -0.1513434e-5, 0.2591327e-2, 0.5650076, 0.1207253};
+    Real tv[:] = {0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 2.0, 2.0,
+                  2.0, 3.0, 4.0, 1.0, 2.0};
+    Real dv[:] = {1.0, 2.0, 3.0, 13.0, 12.0, 16.0, 0.0, 18.0,
+                  20.0, 13.0, 4.0, 0.0, 1.0};
+    Real nv[:] = {-0.7548580e-1, 0.7607150, -0.1665680, 0.1627612e-5,
+                  0.1443764e-4, -0.2759086e-6, -0.1032756, -0.2498159e-7,
+                  0.4069891e-8, -0.1513434e-5, 0.2591327e-2, 0.5650076,
+                  0.1207253};
 
     Real d_crit = MM/fluidConstants[1].criticalMolarVolume;
     Real MM = fluidConstants[1].molarMass;
@@ -234,40 +243,84 @@ package R290_IIR_P05_30_T263_343_Record
   algorithm
     sigma := 1e-3*55.817*(1-sat.Tsat/369.85)^1.266;
   end surfaceTension;
+
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
   June 12, 2017, by Mirko Engelpracht:<br/>
-  First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
+  First implementation
+  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
 </ul>
 </html>", info="<html>
-<p>This package provides a refrigerant model for R290 using a hybrid approach developed by Sangi et al.. The hybrid approach is implemented in <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord\">AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord</a> and the refrigerant model is implemented by complete the template <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord</a>. The fitting coefficients required in the template are saved in the package <a href=\"modelica://AixLib.DataBase.Media.Refrigerants.R290\">AixLib.DataBase.Media.Refrigerants.R290</a>.</p>
+<p>
+This package provides a refrigerant model for R290 using a hybrid approach
+developed by Sangi et al.. The hybrid approach is implemented in
+<a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord\">
+AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord
+</a>
+and the refrigerant model is implemented by complete the template
+<a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord\">
+AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord
+</a>.
+The fitting coefficients required in the template are saved in the package
+<a href=\"modelica://AixLib.DataBase.Media.Refrigerants.R290\">
+AixLib.DataBase.Media.Refrigerants.R290</a>.
+</p>
 <h4>Assumptions and limitations</h4>
-<p>The implemented coefficients are fitted to external data by Sangi et al. and are valid within the following range:<br /></p>
-<table summary=\"Range of validiry\" cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"30%\" style=\"border-collapse:collapse;\">
+<p>
+The implemented coefficients are fitted to external data by Sangi et al. and
+are valid within the following range:<br />
+</p>
+<table summary=\"Range of validiry\" cellspacing=\"0\" cellpadding=\"2\"
+border=\"1\" width=\"30%\" style=\"border-collapse:collapse;\">
 <tr>
-<td><p>Parameter</p></td>
-<td><p>Minimum Value</p></td>
-<td><p>Maximum Value</p></td>
+  <td><p>Parameter</p></td>
+  <td><p>Minimum Value</p></td>
+  <td><p>Maximum Value</p></td>
 </tr>
 <tr>
-<td><p>Pressure (p) in bar</p></td>
-<td><p>0.5</p></td>
-<td><p>30</p></td>
+  <td><p>Pressure (p) in bar</p></td>
+  <td><p>0.5</p></td>
+  <td><p>30</p></td>
 </tr>
 <tr>
-<td><p>Temperature (T) in K</p></td>
-<td><p>263.15</p></td>
-<td><p>343.15</p></td>
+  <td><p>Temperature (T) in K</p></td>
+  <td><p>263.15</p></td>
+  <td><p>343.15</p></td>
 </tr>
 </table>
 <h4>Validation</h4>
-<p>Sangi et al. validated their model by comparing it to results obtained from the Helmholtz equation of state. They found out that relative error of the refrigerant model compared to HelmholtzMedia (Thorade and Saadat, 2012) is close to zero.</p>
+<p>
+Sangi et al. validated their model by comparing it to results obtained from
+the Helmholtz equation of state. They found out that relative error of the
+refrigerant model compared to HelmholtzMedia (Thorade and Saadat, 2012) is
+close to zero.
+</p>
 <h4>References</h4>
-<p>Thorade, Matthis; Saadat, Ali (2012): <a href=\"http://www.ep.liu.se/ecp/076/006/ecp12076006.pdf\">HelmholtzMedia - A fluid properties library</a>. In: <i>Proceedings of the 9th International Modelica Conference</i>; September 3-5; 2012; Munich; Germany. Link&ouml;ping University Electronic Press, S. 63&ndash;70.</p>
-<p>Sangi, Roozbeh; Jahangiri, Pooyan; Klasing, Freerk; Streblow, Rita; M&uuml;ller, Dirk (2014): <a href=\"http://dx.doi.org/10.3384/ecp14096\">A Medium Model for the Refrigerant Propane for Fast and Accurate Dynamic Simulations</a>. In: <i>The 10th International Modelica Conference</i>. Lund, Sweden, March 10-12, 2014: Link&ouml;ping University Electronic Press (Link&ouml;ping Electronic Conference Proceedings), S. 1271&ndash;1275</p>
-<p>Klasing,Freerk: A New Design for Direct Exchange Geothermal Heat Pumps - Modeling, Simulation and Exergy Analysis. <i>Master thesis</i></p>
-<p>Scalabrin, G.; Marchi, P.; Span, R. (2006): A Reference Multiparameter Viscosity Equation for Propane with an Optimized Functional Form. In: <i>J. Phys. Chem. Ref. Data, Vol. 35, No. 3</i>, S. 1415-1442</p>
+<p>
+Thorade, Matthis; Saadat, Ali (2012):
+<a href=\"http://www.ep.liu.se/ecp/076/006/ecp12076006.pdf\">
+HelmholtzMedia - A fluid properties library</a>. In: <i>Proceedings of the
+9th International Modelica Conference</i>; September 3-5; 2012; Munich;
+Germany. Link&ouml;ping University Electronic Press, S. 63&ndash;70.
+</p>
+<p>
+Sangi, Roozbeh; Jahangiri, Pooyan; Klasing, Freerk; Streblow, Rita;
+M&uuml;ller, Dirk (2014): <a href=\"http://dx.doi.org/10.3384/ecp14096\">
+A Medium Model for the Refrigerant Propane for Fast and Accurate Dynamic
+Simulations</a>. In: <i>The 10th International Modelica Conference</i>. Lund,
+Sweden, March 10-12, 2014: Link&ouml;ping University Electronic Press
+(Link&ouml;ping Electronic Conference Proceedings), S. 1271&ndash;1275
+</p>
+<p>
+Klasing,Freerk: A New Design for Direct Exchange Geothermal Heat Pumps -
+Modeling, Simulation and Exergy Analysis. <i>Master thesis</i>
+</p>
+<p>
+Scalabrin, G.; Marchi, P.; Span, R. (2006): A Reference Multiparameter
+Viscosity Equation for Propane with an Optimized Functional Form. In: <i>J.
+Phys. Chem. Ref. Data, Vol. 35, No. 3</i>, S. 1415-1442
+</p>
 </html>"));
 end R290_IIR_P05_30_T263_343_Record;

@@ -26,7 +26,7 @@ partial package PartialHybridTwoPhaseMediumFormula
     // Definition of parameters
     //
     parameter InputChoice componentInputChoice = InputChoice.ph
-      "Input varibles for property calculations; p and h are default input choices";
+      "Input varibles for property calculations; p and h are default choices";
 
     // Defition of further variables to be computed
     //
@@ -59,7 +59,7 @@ partial package PartialHybridTwoPhaseMediumFormula
       d = density_ps(p=p,s=s);
       h = specificEnthalpy_ps(p=p,s=s);
     else
-      assert(false, "Invalid choice of input variables for property calculations");
+      assert(false, "Invalid choice of input variables for calculations");
     end if;
 
     s = specificEntropy(state);
@@ -111,7 +111,8 @@ partial package PartialHybridTwoPhaseMediumFormula
   /*Provide records thats contain the coefficients for the smooth transition
     between different regions.
   */
-  replaceable record SmoothTransition "Record that contains ranges to calculate a smooth transition between
+  replaceable record SmoothTransition
+    "Record that contains ranges to calculate a smooth transition between
     different regions"
     SpecificEnthalpy T_ph = 2.5;
     SpecificEntropy T_ps = 2.5;
@@ -121,7 +122,7 @@ partial package PartialHybridTwoPhaseMediumFormula
     Real h_ps(unit="J/(Pa.K.kg)") = 50/(30e5-0.5e5);
   end SmoothTransition;
   /*Provide Helmholtz equations of state (EoS). These EoS must be fitted to
-    different refrigerants and the explicit formulas have to be 
+    different refrigerants and the explicit formulas have to be
     provided within the template.
   */
   replaceable partial function alpha_0
@@ -145,62 +146,62 @@ partial package PartialHybridTwoPhaseMediumFormula
   end alpha_r;
 
   replaceable partial function tau_d_alpha_0_d_tau
-    "Short form for tau*(dalpha_0/dtau)@delta=const"
+    "Short form for tau*(dalpha_0/dtau)_delta=const"
     input Real tau "Temperature";
-    output Real tau_d_alpha_0_d_tau = 0 "Tau*(dalpha_0/dtau)@delta=const";
+    output Real tau_d_alpha_0_d_tau = 0 "Tau*(dalpha_0/dtau)_delta=const";
     annotation(derivative=tau_d_alpha_0_d_tau_der,
           Inline=false,
           LateInline=true);
   end tau_d_alpha_0_d_tau;
 
   replaceable partial function tau2_d2_alpha_0_d_tau2
-    "Short form for tau*tau*(ddalpha_0/(dtau*dtau))@delta=const"
+    "Short form for tau*tau*(ddalpha_0/(dtau*dtau))_delta=const"
     input Real tau "Temperature";
     output Real tau2_d2_alpha_0_d_tau2 = 0
-      "Tau*tau*(ddalpha_0/(dtau*dtau))@delta=const";
+      "Tau*tau*(ddalpha_0/(dtau*dtau))_delta=const";
     annotation(derivative=tau2_d2_alpha_0_d_tau2_der,
           Inline=false,
           LateInline=true);
   end tau2_d2_alpha_0_d_tau2;
 
   replaceable partial function tau_d_alpha_r_d_tau
-    "Short form for tau*(dalpha_r/dtau)@delta=const"
+    "Short form for tau*(dalpha_r/dtau)_delta=const"
     input Real delta "Density";
     input Real tau "Temperature";
-    output Real tau_d_alpha_r_d_tau = 0 "Tau*(dalpha_r/dtau)@delta=const";
+    output Real tau_d_alpha_r_d_tau = 0 "Tau*(dalpha_r/dtau)_delta=const";
     annotation(derivative=tau_d_alpha_r_d_tau_der,
           Inline=false,
           LateInline=true);
   end tau_d_alpha_r_d_tau;
 
   replaceable partial function tau2_d2_alpha_r_d_tau2
-    "Short form for tau*tau*(ddalpha_r/(dtau*dtau))@delta=const"
+    "Short form for tau*tau*(ddalpha_r/(dtau*dtau))_delta=const"
     input Real delta "Density";
     input Real tau "Temperature";
     output Real tau2_d2_alpha_r_d_tau2 = 0
-      "Tau*tau*(ddalpha_r/(dtau*dtau))@delta=const";
+      "Tau*tau*(ddalpha_r/(dtau*dtau))_delta=const";
     annotation(derivative=tau2_d2_alpha_r_d_tau2_der,
           Inline=false,
           LateInline=true);
   end tau2_d2_alpha_r_d_tau2;
 
   replaceable partial function delta_d_alpha_r_d_delta
-    "Short form for delta*(dalpha_r/(ddelta))@tau=const"
+    "Short form for delta*(dalpha_r/(ddelta))_tau=const"
     input Real delta "Density";
     input Real tau "Temperature";
     output Real delta_d_alpha_r_d_delta = 0
-      "Delta*(dalpha_r/(ddelta))@tau=const";
+      "Delta*(dalpha_r/(ddelta))_tau=const";
     annotation(derivative=delta_d_alpha_r_d_delta_der,
           Inline=false,
           LateInline=true);
   end delta_d_alpha_r_d_delta;
 
   replaceable partial function delta2_d2_alpha_r_d_delta2
-    "Short form for delta*delta(ddalpha_r/(ddelta*delta))@tau=const"
+    "Short form for delta*delta(ddalpha_r/(ddelta*delta))_tau=const"
     input Real delta "Density";
     input Real tau "Temperature";
     output Real delta2_d2_alpha_r_d_delta2 = 0
-      "Delta*delta(ddalpha_r/(ddelta*delta))@tau=const";
+      "Delta*delta(ddalpha_r/(ddelta*delta))_tau=const";
     annotation(derivative=delta2_d2_alpha_r_d_delta2_der,
           Inline=false,
           LateInline=true);
@@ -218,30 +219,31 @@ partial package PartialHybridTwoPhaseMediumFormula
   end tau_delta_d2_alpha_r_d_tau_d_delta;
 
   replaceable partial function tau3_d3_alpha_0_d_tau3
-    "Short form for tau*tau*tau*(dddalpha_0/(dtau*dtau*dtau))@delta=const"
+    "Short form for tau*tau*tau*(dddalpha_0/(dtau*dtau*dtau))_delta=const"
     input Real tau "Temperature";
     output Real tau3_d3_alpha_0_d_tau3 = 0
-      "Tau*tau*tau(ddalpha_0/(dtau*dtau*dtau))@delta=const";
+      "Tau*tau*tau(ddalpha_0/(dtau*dtau*dtau))_delta=const";
     annotation(Inline=false,
           LateInline=true);
   end tau3_d3_alpha_0_d_tau3;
 
   replaceable partial function tau3_d3_alpha_r_d_tau3
-    "Short form for tau*tau*tau*(dddalpha_r/(dtau*dtau*dtau))@delta=const"
+    "Short form for tau*tau*tau*(dddalpha_r/(dtau*dtau*dtau))_delta=const"
     input Real delta "Density";
     input Real tau "Temperature";
     output Real tau3_d3_alpha_r_d_tau3 = 0
-      "Tau*tau*tau*(ddalpha_r/(dtau*dtau*dtau))@delta=const";
+      "Tau*tau*tau*(ddalpha_r/(dtau*dtau*dtau))_delta=const";
     annotation(Inline=false,
           LateInline=true);
   end tau3_d3_alpha_r_d_tau3;
 
   replaceable partial function delta3_d3_alpha_r_d_delta3
-    "Short form for delta*delta*delta*(dddalpha_r/(ddelta*ddelta*ddelta))@tau=const"
+    "Short form for delta*delta*delta*
+    (dddalpha_r/(ddelta*ddelta*ddelta))_tau=const"
     input Real delta "Density";
     input Real tau "Temperature";
     output Real delta3_d3_alpha_r_d_delta3 = 0
-      "Delta*delta*delta*(dddalpha_r/(ddelta*ddelta*ddelta))@tau=const";
+      "Delta*delta*delta*(dddalpha_r/(ddelta*ddelta*ddelta))_tau=const";
     annotation(Inline=false,
           LateInline=true);
   end delta3_d3_alpha_r_d_delta3;
@@ -266,23 +268,24 @@ partial package PartialHybridTwoPhaseMediumFormula
           LateInline=true);
   end tau2_delta_d3_alpha_r_d_tau2_d_delta;
   /*Provide functions that set the actual state depending on the given input
-    parameters. Additionally, state functions for the two-phase region 
-    are needed.  
+    parameters. Additionally, state functions for the two-phase region
+    are needed.
     Just change these functions if needed.
   */
   redeclare function extends setSmoothState
-    "Return thermodynamic state so that it smoothly approximates: if x > 0 then state_a else state_b"
+    "Return thermodynamic state so that it smoothly approximates:
+    if x > 0 then state_a else state_b"
     import Modelica.Media.Common.smoothStep;
 
   algorithm
     state := ThermodynamicState(
-              p = smoothStep(x, state_a.p, state_b.p, x_small),
-              T = temperature_ph(p = smoothStep(x, state_a.p, state_b.p, x_small),
-                                 h = smoothStep(x, state_a.h, state_b.h, x_small)),
-              d = density_ph(p = smoothStep(x, state_a.p, state_b.p, x_small),
-                             h = smoothStep(x, state_a.h, state_b.h, x_small)),
-              h = smoothStep(x, state_a.h, state_b.h, x_small),
-              phase = 0);
+        p = smoothStep(x, state_a.p, state_b.p, x_small),
+        T = temperature_ph(p = smoothStep(x, state_a.p, state_b.p, x_small),
+                           h = smoothStep(x, state_a.h, state_b.h, x_small)),
+        d = density_ph(p = smoothStep(x, state_a.p, state_b.p, x_small),
+                       h = smoothStep(x, state_a.h, state_b.h, x_small)),
+        h = smoothStep(x, state_a.h, state_b.h, x_small),
+        phase = 0);
     annotation (Inline=true);
   end setSmoothState;
 
@@ -459,8 +462,8 @@ partial package PartialHybridTwoPhaseMediumFormula
     elseif state.phase==2 or phase_dT==2 then
       deltaL := bubbleDensity(sat)/d_crit;
       deltaG := dewDensity(sat)/d_crit;
-      quality := (bubbleDensity(sat)/state.d - 1)/(bubbleDensity(sat)/dewDensity(
-        sat) - 1);
+      quality := (bubbleDensity(sat)/state.d - 1)/(bubbleDensity(sat)/
+        dewDensity(sat) - 1);
       sl := R*(tau_d_alpha_0_d_tau(tau) + tau_d_alpha_r_d_tau(deltaL, tau) -
         alpha_0(deltaL, tau) - alpha_r(deltaL, tau));
       sv := R*(tau_d_alpha_0_d_tau(tau) + tau_d_alpha_r_d_tau(deltaG, tau) -
@@ -512,7 +515,8 @@ partial package PartialHybridTwoPhaseMediumFormula
          (1/bubbleDensity(sat)-1/dewDensity(sat));
 
        cv := dulT + dqualitydTv*((dewEnthalpy(sat)-sat.psat/dewDensity(sat))-
-        (bubbleEnthalpy(sat)-sat.psat/bubbleDensity(sat))) + quality*(duvT-dulT);
+        (bubbleEnthalpy(sat)-sat.psat/bubbleDensity(sat))) +
+        quality*(duvT-dulT);
     end if;
     annotation(Inline=false,
           LateInline=true);
@@ -592,7 +596,8 @@ partial package PartialHybridTwoPhaseMediumFormula
   redeclare function extends isentropicEnthalpy
     "Isentropic enthalpy calculated by downstream pressure and reference state"
   algorithm
-    h_is := specificEnthalpy(setState_ps(p=p_downstream, s=specificEntropy(refState)));
+    h_is := specificEnthalpy(setState_ps(p=p_downstream,
+      s=specificEntropy(refState)));
     annotation(Inline=false,
           LateInline=true);
   end isentropicEnthalpy;
@@ -642,15 +647,16 @@ partial package PartialHybridTwoPhaseMediumFormula
           LateInline=true);
   end jouleThomsonCoefficient;
   /*Provide functions to calculate thermodynamic properties depending on the
-    independent variables. Moreover, these functions may depend on the Helmholtz
-    EoS. Just change these functions if needed.
+    independent variables. Moreover, these functions may depend on the
+    Helmholtz EoS. Just change these functions if needed.
   */
   redeclare replaceable function pressure_dT
     "Computes pressure as a function of density and temperature"
     extends Modelica.Icons.Function;
     input Density d "Density";
     input Temperature T "Temperature";
-    input FixedPhase phase=0 "2 for two-phase, 1 for one-phase, 0 if not known";
+    input FixedPhase phase=0
+      "2 for two-phase, 1 for one-phase, 0 if not known";
     output AbsolutePressure p "Pressure";
 
   protected
@@ -785,7 +791,8 @@ partial package PartialHybridTwoPhaseMediumFormula
     extends Modelica.Icons.Function;
     input Density d "Density";
     input Temperature T "Temperature";
-    input FixedPhase phase=0 "2 for two-phase, 1 for one-phase, 0 if not known";
+    input FixedPhase phase=0
+      "2 for two-phase, 1 for one-phase, 0 if not known";
     output SpecificEnthalpy h "Specific enthalpy";
 
   protected
@@ -824,8 +831,8 @@ partial package PartialHybridTwoPhaseMediumFormula
       hl := R*T*(tau_d_alpha_0_d_tau(tau) +
         tau_d_alpha_r_d_tau(bubbleDelta, tau) + delta_d_alpha_r_d_delta(
         bubbleDelta, tau) + 1);
-      hv := R*T*(tau_d_alpha_0_d_tau(tau) + tau_d_alpha_r_d_tau(dewDelta, tau) +
-        delta_d_alpha_r_d_delta(dewDelta, tau) + 1);
+      hv := R*T*(tau_d_alpha_0_d_tau(tau) + tau_d_alpha_r_d_tau(dewDelta, tau)
+        + delta_d_alpha_r_d_delta(dewDelta, tau) + 1);
       h := hl + quality*(hv-hl);
     end if;
     annotation(derivative(noDerivative=phase)=specificEnthalpy_dT_der,
@@ -880,13 +887,13 @@ partial package PartialHybridTwoPhaseMediumFormula
           LateInline=true);
   end specificEnthalpy_ps;
   /*Provide partial derivatives in terms of density and temperature.
-    These derivatives can be formulated in terms of partial derivatives of the 
+    These derivatives can be formulated in terms of partial derivatives of the
     Helmholtz EoS and are used to define further derivatives.
   */
   replaceable function pressure_derd_T
-    "Calculates pressure derivative (dp/dd)@T=const"
+    "Calculates pressure derivative (dp/dd)_T=const"
     input ThermodynamicState state "Thermodynamic state";
-    output Real dpdT "Pressure derivative (dp/dd)@T=const";
+    output Real dpdT "Pressure derivative (dp/dd)_T=const";
 
   protected
     SaturationProperties sat = setSat_p(state.p);
@@ -904,7 +911,8 @@ partial package PartialHybridTwoPhaseMediumFormula
       phase_dT := state.phase;
     end if;
     if state.phase==1 or phase_dT==1 then
-      delta :=state.d/(fluidConstants[1].molarMass/fluidConstants[1].criticalMolarVolume);
+      delta :=state.d/(fluidConstants[1].molarMass/
+        fluidConstants[1].criticalMolarVolume);
       tau :=fluidConstants[1].criticalTemperature/state.T;
 
       dpdT := Modelica.Constants.R/fluidConstants[1].molarMass*
@@ -918,9 +926,9 @@ partial package PartialHybridTwoPhaseMediumFormula
   end pressure_derd_T;
 
   replaceable function pressure_derT_d
-    "Calculates pressure derivative (dp/dT)@d=const"
+    "Calculates pressure derivative (dp/dT)_d=const"
     input ThermodynamicState state "Thermodynamic state";
-    output Real dpTd "Pressure derivative (dp/dT)@d=const";
+    output Real dpTd "Pressure derivative (dp/dT)_d=const";
 
   protected
     SaturationProperties sat = setSat_p(state.p);
@@ -938,7 +946,8 @@ partial package PartialHybridTwoPhaseMediumFormula
       phase_dT := state.phase;
     end if;
     if state.phase==1 or phase_dT==1 then
-      delta :=state.d/(fluidConstants[1].molarMass/fluidConstants[1].criticalMolarVolume);
+      delta :=state.d/(fluidConstants[1].molarMass/
+        fluidConstants[1].criticalMolarVolume);
       tau :=fluidConstants[1].criticalTemperature/state.T;
 
       dpTd:=Modelica.Constants.R/fluidConstants[1].molarMass*state.d*
@@ -952,9 +961,9 @@ partial package PartialHybridTwoPhaseMediumFormula
   end pressure_derT_d;
 
   replaceable function specificEnthalpy_derT_d
-    "Calculates enthalpy derivative (dh/dT)@d=const"
+    "Calculates enthalpy derivative (dh/dT)_d=const"
     input ThermodynamicState state "Thermodynamic state";
-    output Real dhTd "Enthalpy derivative (dh/dT)@d=const";
+    output Real dhTd "Enthalpy derivative (dh/dT)_d=const";
 
   protected
     SaturationProperties sat = setSat_p(state.p);
@@ -979,7 +988,8 @@ partial package PartialHybridTwoPhaseMediumFormula
       phase_dT := state.phase;
     end if;
     if state.phase==1 or phase_dT==1 then
-      delta :=state.d/(fluidConstants[1].molarMass/fluidConstants[1].criticalMolarVolume);
+      delta :=state.d/(fluidConstants[1].molarMass/
+        fluidConstants[1].criticalMolarVolume);
       tau :=fluidConstants[1].criticalTemperature/state.T;
 
       dhTd := Modelica.Constants.R/fluidConstants[1].molarMass*
@@ -1005,9 +1015,9 @@ partial package PartialHybridTwoPhaseMediumFormula
   end specificEnthalpy_derT_d;
 
   replaceable function specificEnthalpy_derd_T
-    "Calculates enthalpy derivative (dh/dd)@T=const"
+    "Calculates enthalpy derivative (dh/dd)_T=const"
     input ThermodynamicState state "Thermodynamic state";
-    output Real dhdT "Enthalpy derivative (dh/dd)@T=const";
+    output Real dhdT "Enthalpy derivative (dh/dd)_T=const";
 
   protected
     SaturationProperties sat = setSat_p(state.p);
@@ -1025,7 +1035,8 @@ partial package PartialHybridTwoPhaseMediumFormula
       phase_dT := state.phase;
     end if;
     if state.phase==1 or phase_dT==1 then
-      delta :=state.d/(fluidConstants[1].molarMass/fluidConstants[1].criticalMolarVolume);
+      delta :=state.d/(fluidConstants[1].molarMass/
+        fluidConstants[1].criticalMolarVolume);
       tau :=fluidConstants[1].criticalTemperature/state.T;
 
       dhdT := Modelica.Constants.R/fluidConstants[1].molarMass*
@@ -1041,9 +1052,9 @@ partial package PartialHybridTwoPhaseMediumFormula
   end specificEnthalpy_derd_T;
 
   replaceable function specificEntropy_derd_T
-    "Calculates derivative (ds/dd)@T=const."
+    "Calculates derivative (ds/dd)_T=const."
     input ThermodynamicState state "Thermodynamic state";
-    output Real dsdT "Derivative (ds/dd)@T=const.";
+    output Real dsdT "Derivative (ds/dd)_T=const.";
 
   protected
     SaturationProperties sat = setSat_p(state.p);
@@ -1085,7 +1096,8 @@ partial package PartialHybridTwoPhaseMediumFormula
       phase_dT := state.phase;
     end if;
     if state.phase == 1 or phase_dT == 1 then
-      delta :=state.d/(fluidConstants[1].molarMass/fluidConstants[1].criticalMolarVolume);
+      delta :=state.d/(fluidConstants[1].molarMass/
+        fluidConstants[1].criticalMolarVolume);
       tau :=fluidConstants[1].criticalTemperature/state.T;
 
       dsdT := -R/state.d*
@@ -1094,30 +1106,40 @@ partial package PartialHybridTwoPhaseMediumFormula
     else
        state_l := setBubbleState(sat);
        state_v := setDewState(sat);
-       delta_l := state_l.d/(fluidConstants[1].molarMass/fluidConstants[1].criticalMolarVolume);
+       delta_l := state_l.d/(fluidConstants[1].molarMass/
+        fluidConstants[1].criticalMolarVolume);
        tau_l := fluidConstants[1].criticalTemperature/state_l.T;
-       delta_v := state_v.d/(fluidConstants[1].molarMass/fluidConstants[1].criticalMolarVolume);
+       delta_v := state_v.d/(fluidConstants[1].molarMass/
+        fluidConstants[1].criticalMolarVolume);
        tau_v := fluidConstants[1].criticalTemperature/state_v.T;
 
        dslTd := specificEntropy_derd_T(state_l);
        dsvTd := specificEntropy_derd_T(state_v);
-       dsldT := R/state_l.d*(-(1 + delta_d_alpha_r_d_delta(tau=tau_l, delta=delta_l))
-        + (0 + tau_delta_d2_alpha_r_d_tau_d_delta(tau=tau_l, delta=delta_l)));
-       dsvdT := R/state_v.d*(-(1 + delta_d_alpha_r_d_delta(tau=tau_v, delta=delta_v))
-        + (0 + tau_delta_d2_alpha_r_d_tau_d_delta(tau=tau_v, delta=delta_v)));
-       dslTp := dslTd - dsldT*pressure_derT_d(state_l)/pressure_derd_T(state_l);
-       dsvTp := dsvTd - dsvdT*pressure_derT_d(state_v)/pressure_derd_T(state_v);
+       dsldT := R/state_l.d*(-(1 + delta_d_alpha_r_d_delta(tau=tau_l,
+        delta=delta_l)) + (0 + tau_delta_d2_alpha_r_d_tau_d_delta(tau=tau_l,
+        delta=delta_l)));
+       dsvdT := R/state_v.d*(-(1 + delta_d_alpha_r_d_delta(tau=tau_v,
+        delta=delta_v)) + (0 + tau_delta_d2_alpha_r_d_tau_d_delta(tau=tau_v,
+        delta=delta_v)));
+       dslTp := dslTd - dsldT*pressure_derT_d(state_l)/
+        pressure_derd_T(state_l);
+       dsvTp := dsvTd - dsvdT*pressure_derT_d(state_v)/
+        pressure_derd_T(state_v);
        dslpT := dslpT/pressure_derd_T(state_l);
        dsvpT := dsvpT/pressure_derd_T(state_v);
        dpT := saturationPressure_derT(sat.Tsat);
        dsvT := dsvTp + dsvpT*dpT;
        dslT := dslTp + dslpT*dpT;
 
-       quality := (bubbleDensity(sat)/state.d-1)/(bubbleDensity(sat)/dewDensity(sat)-1);
-       dvT_liq :=-1/state_l.d^2*(density_derT_p(state_l) + density_derp_T(state_l)*dpT);
-       dvT_vap :=-1/state_v.d^2*(density_derT_p(state_v) + density_derp_T(state_v)*dpT);
-       dqualityTv :=(-dvT_liq*(1/state_v.d - 1/state_l.d) - (1/state.d - 1/state_l.d)
-        *(dvT_vap - dvT_liq))/(1/state_v.d - 1/state_l.d)^2;
+       quality := (bubbleDensity(sat)/state.d-1)/(bubbleDensity(sat)/
+        dewDensity(sat)-1);
+       dvT_liq :=-1/state_l.d^2*(density_derT_p(state_l) +
+        density_derp_T(state_l)*dpT);
+       dvT_vap :=-1/state_v.d^2*(density_derT_p(state_v) +
+        density_derp_T(state_v)*dpT);
+       dqualityTv :=(-dvT_liq*(1/state_v.d - 1/state_l.d) -
+        (1/state.d - 1/state_l.d)*(dvT_vap - dvT_liq))/
+        (1/state_v.d - 1/state_l.d)^2;
 
        dsdT := dslT + quality*(dsvT - dslT) + dqualityTv*
         (dewEntropy(sat)-bubbleEntropy(sat));
@@ -1128,12 +1150,13 @@ partial package PartialHybridTwoPhaseMediumFormula
   end specificEntropy_derd_T;
 
   replaceable function specificEntropy_derT_d
-    "Calculates derivative (ds/dT)@d=const."
+    "Calculates derivative (ds/dT)_d=const."
     input ThermodynamicState state "Thermodynamic state";
-    output Real dsTd "Derivative (ds/dT)@d=const.";
+    output Real dsTd "Derivative (ds/dT)_d=const.";
 
   protected
-      Real delta = state.d/(fluidConstants[1].molarMass/fluidConstants[1].criticalMolarVolume);
+      Real delta = state.d/(fluidConstants[1].molarMass/
+        fluidConstants[1].criticalMolarVolume);
       Real tau = fluidConstants[1].criticalTemperature/state.T;
 
   algorithm
@@ -1143,9 +1166,9 @@ partial package PartialHybridTwoPhaseMediumFormula
   end specificEntropy_derT_d;
 
   replaceable function specificInternalEnergy_derT_d
-    "Calculated derivative (du/dT)@d=const."
+    "Calculated derivative (du/dT)_d=const."
     input ThermodynamicState state "Thermodynamic state";
-    output Real duTd "Derivative (du/dT)@d=const.";
+    output Real duTd "Derivative (du/dT)_d=const.";
 
   protected
     SaturationProperties sat = setSat_p(state.p);
@@ -1170,7 +1193,8 @@ partial package PartialHybridTwoPhaseMediumFormula
       phase_dT := state.phase;
     end if;
     if state.phase == 1 or phase_dT == 1 then
-      delta :=state.d/(fluidConstants[1].molarMass/fluidConstants[1].criticalMolarVolume);
+      delta :=state.d/(fluidConstants[1].molarMass/
+        fluidConstants[1].criticalMolarVolume);
       tau :=fluidConstants[1].criticalTemperature/state.T;
 
       duTd := -Modelica.Constants.R/fluidConstants[1].molarMass*
@@ -1187,16 +1211,17 @@ partial package PartialHybridTwoPhaseMediumFormula
          (1/bubbleDensity(sat)-1/dewDensity(sat));
 
        duTd := dulT + dqualitydTv*((dewEnthalpy(sat)-sat.psat/dewDensity(sat))-
-        (bubbleEnthalpy(sat)-sat.psat/bubbleDensity(sat))) + quality*(duvT-dulT);
+        (bubbleEnthalpy(sat)-sat.psat/bubbleDensity(sat))) +
+        quality*(duvT-dulT);
     end if;
     annotation(Inline=true,
           LateInline=true);
   end specificInternalEnergy_derT_d;
 
   replaceable function specificInternalEnergy_derd_T
-    "Calculated derivative (du/dd)@T=const."
+    "Calculated derivative (du/dd)_T=const."
     input ThermodynamicState state "Thermodynamic state";
-    output Real dudT "Derivative (du/dd)@T=const.";
+    output Real dudT "Derivative (du/dd)_T=const.";
 
   protected
     SaturationProperties sat = setSat_p(state.p);
@@ -1214,7 +1239,8 @@ partial package PartialHybridTwoPhaseMediumFormula
       phase_dT := state.phase;
     end if;
     if state.phase == 1 or phase_dT == 1 then
-      delta :=state.d/(fluidConstants[1].molarMass/fluidConstants[1].criticalMolarVolume);
+      delta :=state.d/(fluidConstants[1].molarMass/
+        fluidConstants[1].criticalMolarVolume);
       tau :=fluidConstants[1].criticalTemperature/state.T;
       dudT := Modelica.Constants.R/fluidConstants[1].molarMass*state.T/state.d
         *tau_delta_d2_alpha_r_d_tau_d_delta(tau=tau, delta=delta);
@@ -1226,11 +1252,11 @@ partial package PartialHybridTwoPhaseMediumFormula
     annotation(Inline=true,
           LateInline=true);
   end specificInternalEnergy_derd_T;
-  /*Provide fruther partial derivatives that can be formulated using the partial
-    derivatives defined above.
+  /*Provide fruther partial derivatives that can be formulated
+    using the partial derivatives defined above.
   */
   redeclare function extends density_derp_T
-    "Calculates the derivative (dd/dp)@T=const."
+    "Calculates the derivative (dd/dp)_T=const."
 
   protected
     SaturationProperties sat = setSat_p(state.p);
@@ -1254,7 +1280,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   end density_derp_T;
 
   redeclare function extends density_derT_p
-    "Calculates the derivative (dd/dT)@p=const."
+    "Calculates the derivative (dd/dT)_p=const."
 
   protected
     SaturationProperties sat = setSat_p(state.p);
@@ -1278,9 +1304,9 @@ partial package PartialHybridTwoPhaseMediumFormula
   end density_derT_p;
 
   replaceable function temperature_derp_h
-    "Calculates temperature derivative (dT/dp)@h=const."
+    "Calculates temperature derivative (dT/dp)_h=const."
     input ThermodynamicState state "Thermodynamic state";
-    output Real dTph "Temperature derivative (dT/dp)@h=const.";
+    output Real dTph "Temperature derivative (dT/dp)_h=const.";
 
   protected
     SaturationProperties sat = setSat_T(state.T);
@@ -1305,9 +1331,9 @@ partial package PartialHybridTwoPhaseMediumFormula
   end temperature_derp_h;
 
   replaceable function temperature_derp_s
-    "Calculates temperature derivative (dT/dp)@s=const."
+    "Calculates temperature derivative (dT/dp)_s=const."
     input ThermodynamicState state "Thermodynamic state";
-    output Real dTps "Temperature derivative (dT/dp)@s=const.";
+    output Real dTps "Temperature derivative (dT/dp)_s=const.";
 
   protected
     Real dspT;
@@ -1335,9 +1361,9 @@ partial package PartialHybridTwoPhaseMediumFormula
   end temperature_ders_p;
 
   replaceable function temperature_derh_p
-    "Calculates temperature derivative (dT/dh)@p=const."
+    "Calculates temperature derivative (dT/dh)_p=const."
     input ThermodynamicState state "Thermodynamic state";
-    output Real dThp "Temperature derivative (dT/dh)@p=const.";
+    output Real dThp "Temperature derivative (dT/dh)_p=const.";
 
   algorithm
     dThp := 1/specificEnthalpy_derT_p(state);
@@ -1346,7 +1372,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   end temperature_derh_p;
 
   redeclare replaceable function extends density_derp_h
-    "Calculates density derivative (dd/dp)@h=const."
+    "Calculates density derivative (dd/dp)_h=const."
 
   protected
     SaturationProperties sat = setSat_p(state.p);
@@ -1387,7 +1413,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   end density_derp_h;
 
   redeclare replaceable function extends density_derh_p
-    "Calculates density derivative (dd/dh)@p=const."
+    "Calculates density derivative (dd/dh)_p=const."
 
   protected
     SaturationProperties sat = setSat_p(state.p);
@@ -1414,21 +1440,22 @@ partial package PartialHybridTwoPhaseMediumFormula
   end density_derh_p;
 
   replaceable function density_derp_s
-    "Calculates density derivative (dd/dp)@s=const."
+    "Calculates density derivative (dd/dp)_s=const."
     input ThermodynamicState state "Thermodynamic state";
-    output Real ddps "Derivative (dd/dp)@s=const.";
+    output Real ddps "Derivative (dd/dp)_s=const.";
 
   algorithm
       ddps := 1/(pressure_derd_T(state=state)-pressure_derT_d(state=state)*
-        specificEntropy_derd_T(state=state)/specificEntropy_derT_d(state=state));
+        specificEntropy_derd_T(state=state)/
+        specificEntropy_derT_d(state=state));
     annotation(Inline=true,
           LateInline=true);
   end density_derp_s;
 
   replaceable function density_ders_p
-    "Calculates density derivative (dd/ds)@p=const."
+    "Calculates density derivative (dd/ds)_p=const."
     input ThermodynamicState state "Thermodynamic state";
-    output Real ddsp "Derivative (dd/ds)@p=const.";
+    output Real ddsp "Derivative (dd/ds)_p=const.";
 
   algorithm
       ddsp := density_derh_p(state=state)*state.T;
@@ -1437,9 +1464,9 @@ partial package PartialHybridTwoPhaseMediumFormula
   end density_ders_p;
 
   replaceable function specificEnthalpy_derp_T
-    "Calculates derivative (dh/dp)@T=const."
+    "Calculates derivative (dh/dp)_T=const."
     input ThermodynamicState state "Thermodynamic state";
-    output Real dhpT "Specific enthalpy derivative (dh/dp)@T=const.";
+    output Real dhpT "Specific enthalpy derivative (dh/dp)_T=const.";
 
   protected
     SaturationProperties sat = setSat_T(state.T);
@@ -1463,9 +1490,9 @@ partial package PartialHybridTwoPhaseMediumFormula
   end specificEnthalpy_derp_T;
 
   replaceable function specificEnthalpy_derT_p
-    "Calculates derivative (dh/dT)@p=const."
+    "Calculates derivative (dh/dT)_p=const."
     input ThermodynamicState state "Thermodynamic state";
-    output Real dhTp "Specific enthalpy derivative (dh/dT)@p=const.";
+    output Real dhTp "Specific enthalpy derivative (dh/dT)_p=const.";
 
   protected
     SaturationProperties sat = setSat_T(state.T);
@@ -1490,9 +1517,9 @@ partial package PartialHybridTwoPhaseMediumFormula
   end specificEnthalpy_derT_p;
 
   replaceable function specificEnthalpy_ders_p
-    "Calculates derivative (dh/ds)@p=const."
+    "Calculates derivative (dh/ds)_p=const."
     input ThermodynamicState state "Thermodynamic state";
-    output Real dhsp "Specific enthalpy derivative (dh/dT)@p=const.";
+    output Real dhsp "Specific enthalpy derivative (dh/dT)_p=const.";
 
   algorithm
     dhsp := state.T;
@@ -1501,9 +1528,9 @@ partial package PartialHybridTwoPhaseMediumFormula
   end specificEnthalpy_ders_p;
 
   replaceable function specificEnthalpy_derp_s
-    "Calculates derivative (dh/dp)@s=const."
+    "Calculates derivative (dh/dp)_s=const."
     input ThermodynamicState state "Thermodynamic state";
-    output Real dhps "Specific enthalpy derivative (dh/dp)@s=const.";
+    output Real dhps "Specific enthalpy derivative (dh/dp)_s=const.";
 
   algorithm
     dhps := 1/state.d;
@@ -1514,9 +1541,9 @@ partial package PartialHybridTwoPhaseMediumFormula
     or dew line.
   */
   replaceable function saturationPressure_derT
-    "Calculates derivative (dp/dT)@saturation"
+    "Calculates derivative (dp/dT)_saturation"
     input Temperature T "Temperature";
-    output Real dpT "Saturation temperature derivative dp/dT)@saturation";
+    output Real dpT "Saturation temperature derivative dp/dT)_saturation";
 
   protected
     SaturationProperties sat = setSat_T(T=T);
@@ -1528,7 +1555,7 @@ partial package PartialHybridTwoPhaseMediumFormula
   end saturationPressure_derT;
 
   redeclare function extends saturationTemperature_derp
-    "Calculates derivative (dT/dp)@saturation"
+    "Calculates derivative (dT/dp)_saturation"
   protected
     SaturationProperties sat = setSat_p(p=p);
 
@@ -1599,7 +1626,8 @@ partial package PartialHybridTwoPhaseMediumFormula
   replaceable function dBubbleEntropy_dPressure
     "Calculates bubble point entropy derivative"
     input SaturationProperties sat "Saturation properties";
-    output Real dsldp "Bubble point entropy derivative at constant Temperature";
+    output Real dsldp
+      "Bubble point entropy derivative at constant Temperature";
 
   protected
     ThermodynamicState state = setBubbleState(sat);
@@ -1701,7 +1729,8 @@ partial package PartialHybridTwoPhaseMediumFormula
 
   algorithm
     dpT := saturationPressure_derT(sat.Tsat);
-    dhlT := specificEnthalpy_derT_p(state) + specificEnthalpy_derp_T(state)*dpT;
+    dhlT := specificEnthalpy_derT_p(state) +
+      specificEnthalpy_derp_T(state)*dpT;
     annotation(Inline=false,
           LateInline=true);
   end dBubbleEnthalpy_dTemperature;
@@ -1717,7 +1746,8 @@ partial package PartialHybridTwoPhaseMediumFormula
 
   algorithm
     dpT := saturationPressure_derT(sat.Tsat);
-    dhvT := specificEnthalpy_derT_p(state) + specificEnthalpy_derp_T(state)*dpT;
+    dhvT := specificEnthalpy_derT_p(state) +
+      specificEnthalpy_derp_T(state)*dpT;
     annotation(Inline=false,
           LateInline=true);
   end dDewEnthalpy_dTemperature;
@@ -1725,7 +1755,8 @@ partial package PartialHybridTwoPhaseMediumFormula
   replaceable function dBubbleInternalEnergy_dTemperature
     "Calculates bubble point internal energy derivative"
     input SaturationProperties sat "Saturation properties";
-    output Real dulT "Bubble point internal energy derivative wrt. temperature";
+    output Real dulT
+      "Bubble point internal energy derivative wrt. temperature";
 
   protected
     ThermodynamicState state = setBubbleState(sat);
@@ -1771,8 +1802,8 @@ partial package PartialHybridTwoPhaseMediumFormula
     annotation(Inline=false,
           LateInline=true);
   end dDewInternalEnergy_dTemperature;
-  /*Provide total darivatives with respect to simulation time. These derivatives
-    can be formulated using the derivatives defined above.
+  /*Provide total darivatives with respect to simulation time. These
+    derivatives can be formulated using the derivatives defined above.
   */
   replaceable function alpha_0_der "Calculates time derivative of alpha_0"
     input Real delta "Reduced density";
@@ -1795,8 +1826,8 @@ partial package PartialHybridTwoPhaseMediumFormula
     output Real der_alpha_r "Time derivative of alpha_r";
 
   algorithm
-    der_alpha_r := der_delta*delta_d_alpha_r_d_delta(delta=delta,tau=tau)/delta +
-      der_tau*tau_d_alpha_r_d_tau(delta=delta,tau=tau)/tau;
+    der_alpha_r := der_delta*delta_d_alpha_r_d_delta(delta=delta,
+      tau=tau)/delta + der_tau*tau_d_alpha_r_d_tau(delta=delta,tau=tau)/tau;
     annotation(Inline=true,
           LateInline=true);
   end alpha_r_der;
@@ -1839,8 +1870,8 @@ partial package PartialHybridTwoPhaseMediumFormula
       "Time derivative of tau_d_alpha_r_d_tau";
 
   algorithm
-    der_tau_d_alpha_r_d_tau := der_tau*(tau_d_alpha_r_d_tau(delta=delta,tau=tau)+
-      tau2_d2_alpha_r_d_tau2(delta=delta,tau=tau))/tau + der_delta*
+    der_tau_d_alpha_r_d_tau := der_tau*(tau_d_alpha_r_d_tau(delta=delta,
+      tau=tau) + tau2_d2_alpha_r_d_tau2(delta=delta,tau=tau))/tau + der_delta*
       tau_delta_d2_alpha_r_d_tau_d_delta(delta=delta,tau=tau)/delta;
     annotation(Inline=true,
           LateInline=true);
@@ -1856,9 +1887,10 @@ partial package PartialHybridTwoPhaseMediumFormula
       "Time derivative of tau2_d2_alpha_r_d_tau2";
 
   algorithm
-    der_tau2_d2_alpha_r_d_tau2 := der_tau*(2*tau2_d2_alpha_r_d_tau2(delta=delta,
-      tau=tau)+tau3_d3_alpha_r_d_tau3(delta=delta,tau=tau))/tau +
-      der_delta*tau2_delta_d3_alpha_r_d_tau2_d_delta(delta=delta,tau=tau)/delta;
+    der_tau2_d2_alpha_r_d_tau2 := der_tau*(2*tau2_d2_alpha_r_d_tau2(
+      delta=delta,tau=tau)+tau3_d3_alpha_r_d_tau3(delta=delta,tau=tau))/tau +
+      der_delta*tau2_delta_d3_alpha_r_d_tau2_d_delta(delta=delta,tau=tau)/
+      delta;
     annotation(Inline=true,
           LateInline=true);
   end tau2_d2_alpha_r_d_tau2_der;
@@ -1890,9 +1922,10 @@ partial package PartialHybridTwoPhaseMediumFormula
       "Time derivative of delta2_d2_alpha_r_d_delta2";
 
   algorithm
-    der_delta2_d2_alpha_r_d_delta2 := der_tau*tau_delta2_d3_alpha_r_d_tau_d_delta2(
-      delta=delta,tau=tau)/tau + der_delta*(2*delta2_d2_alpha_r_d_delta2(delta=
-      delta,tau=tau)+delta3_d3_alpha_r_d_delta3(delta=delta,tau=tau))/delta;
+    der_delta2_d2_alpha_r_d_delta2 := der_tau*
+      tau_delta2_d3_alpha_r_d_tau_d_delta2(delta=delta,tau=tau)/tau +
+      der_delta*(2*delta2_d2_alpha_r_d_delta2(delta=delta,tau=tau)+
+      delta3_d3_alpha_r_d_delta3(delta=delta,tau=tau))/delta;
     annotation(Inline=true,
           LateInline=true);
   end delta2_d2_alpha_r_d_delta2_der;
@@ -1907,8 +1940,9 @@ partial package PartialHybridTwoPhaseMediumFormula
       "Time derivative of tau_delta_d2_alpha_r_d_tau_d_delta";
 
   algorithm
-    der_tau_delta_d2_alpha_r_d_tau_d_delta := der_tau*(tau_delta_d2_alpha_r_d_tau_d_delta(
-    delta=delta,tau=tau)+tau2_delta_d3_alpha_r_d_tau2_d_delta(delta=delta,tau=tau))/tau
+    der_tau_delta_d2_alpha_r_d_tau_d_delta := der_tau*(
+    tau_delta_d2_alpha_r_d_tau_d_delta(delta=delta,tau=tau)+
+    tau2_delta_d3_alpha_r_d_tau2_d_delta(delta=delta,tau=tau))/tau
     + der_delta*(tau_delta_d2_alpha_r_d_tau_d_delta(delta=delta,tau=tau) +
     tau_delta2_d3_alpha_r_d_tau_d_delta2(delta=delta,tau=tau))/delta;
     annotation(Inline=true,
@@ -1916,15 +1950,18 @@ partial package PartialHybridTwoPhaseMediumFormula
   end tau_delta_d2_alpha_r_d_tau_d_delta_der;
 
   replaceable function setState_dTX_der
-    "Calculates time derivative of the thermodynamic state record calculated by d and T"
+    "Calculates time derivative of the thermodynamic state record
+    calculated by d and T"
     input Density d "Density";
     input Temperature T "Temperature";
     input MassFraction X[:]=reference_X "Mass fractions";
-    input FixedPhase phase = 0  "2 for two-phase, 1 for one-phase, 0 if not known";
+    input FixedPhase phase = 0
+      "2 for two-phase, 1 for one-phase, 0 if not known";
     input Real der_d "Time derivative of density";
     input Real der_T "Time derivative of temperature";
     input Real der_X[:] "Time derivative of mass fractions";
-    output ThermodynamicState der_state "Time derivative of thermodynamic state";
+    output ThermodynamicState der_state
+      "Time derivative of thermodynamic state";
 
   algorithm
     der_state := ThermodynamicState(
@@ -1938,15 +1975,18 @@ partial package PartialHybridTwoPhaseMediumFormula
   end setState_dTX_der;
 
   replaceable function setState_pTX_der
-    "Calculates time derivative of the thermodynamic state record calculated by p and T"
+    "Calculates time derivative of the thermodynamic state record
+    calculated by p and T"
     input AbsolutePressure p "Pressure";
     input Temperature T "Temperature";
     input MassFraction X[:]=reference_X "Mass fractions";
-    input FixedPhase phase = 0  "2 for two-phase, 1 for one-phase, 0 if not known";
+    input FixedPhase phase = 0
+      "2 for two-phase, 1 for one-phase, 0 if not known";
     input Real der_p "Time derivative of pressure";
     input Real der_T "Time derivative of temperature";
     input Real der_X[:] "Time derivative of mass fractions";
-    output ThermodynamicState der_state "Time derivative of thermodynamic state";
+    output ThermodynamicState der_state
+      "Time derivative of thermodynamic state";
 
   algorithm
     der_state := ThermodynamicState(
@@ -1960,15 +2000,18 @@ partial package PartialHybridTwoPhaseMediumFormula
   end setState_pTX_der;
 
   replaceable function setState_phX_der
-    "Calculates time derivative of the thermodynamic state record calculated by p and h"
+    "Calculates time derivative of the thermodynamic state record
+    calculated by p and h"
     input AbsolutePressure p "Pressure";
     input SpecificEnthalpy h "Specific enthalpy";
     input MassFraction X[:]=reference_X "Mass fractions";
-    input FixedPhase phase = 0  "2 for two-phase, 1 for one-phase, 0 if not known";
+    input FixedPhase phase = 0
+      "2 for two-phase, 1 for one-phase, 0 if not known";
     input Real der_p "Time derivative of pressure";
     input Real der_h "Time derivative of specific enthalpy";
     input Real der_X[:] "Time derivative of mass fractions";
-    output ThermodynamicState der_state "Time derivative of thermodynamic state";
+    output ThermodynamicState der_state
+      "Time derivative of thermodynamic state";
 
   algorithm
     der_state := ThermodynamicState(
@@ -1982,15 +2025,18 @@ partial package PartialHybridTwoPhaseMediumFormula
   end setState_phX_der;
 
   replaceable function setState_psX_der
-    "Calculates time derivative of the thermodynamic state record calculated by p and s"
+    "Calculates time derivative of the thermodynamic state record
+    calculated by p and s"
     input AbsolutePressure p "Pressure";
     input SpecificEntropy s "Specific entropy";
     input MassFraction X[:]=reference_X "Mass fractions";
-    input FixedPhase phase = 0  "2 for two-phase, 1 for one-phase, 0 if not known";
+    input FixedPhase phase = 0
+      "2 for two-phase, 1 for one-phase, 0 if not known";
     input Real der_p "Time derivative of pressure";
     input Real der_s "Time derivative of specific entropy";
     input Real der_X[:] "Time derivative of mass fractions";
-    output ThermodynamicState der_state "Time derivative of thermodynamic state";
+    output ThermodynamicState der_state
+      "Time derivative of thermodynamic state";
 
   algorithm
     der_state := ThermodynamicState(
@@ -2004,9 +2050,11 @@ partial package PartialHybridTwoPhaseMediumFormula
   end setState_psX_der;
 
   replaceable function pressure_der
-    "Calculates time derivative of pressure calculated by thermodynamic state record"
+    "Calculates time derivative of pressure calculated by thermodynamic
+    state record"
     input ThermodynamicState state "Thermodynamic state";
-    input ThermodynamicState der_state "Time derivative of thermodynamic state";
+    input ThermodynamicState der_state
+      "Time derivative of thermodynamic state";
     output Real der_p "Time derivative of pressure";
   algorithm
     der_p := der_state.p;
@@ -2015,9 +2063,11 @@ partial package PartialHybridTwoPhaseMediumFormula
   end pressure_der;
 
   replaceable function temperature_der
-    "Calculates time derivative of temperature calculated by thermodynamic state record"
+    "Calculates time derivative of temperature calculated by thermodynamic
+    state record"
     input ThermodynamicState state "Thermodynamic state";
-    input ThermodynamicState der_state "Time derivative of thermodynamic state";
+    input ThermodynamicState der_state
+      "Time derivative of thermodynamic state";
     output Real der_T "Time derivative of temperature";
   algorithm
     der_T := der_state.T;
@@ -2026,9 +2076,11 @@ partial package PartialHybridTwoPhaseMediumFormula
   end temperature_der;
 
   replaceable function density_der
-    "Calculates time derivative of density calculated by thermodynamic state record"
+    "Calculates time derivative of density calculated by thermodynamic
+    state record"
     input ThermodynamicState state "Thermodynamic state";
-    input ThermodynamicState der_state "Time derivative of thermodynamic state";
+    input ThermodynamicState der_state
+      "Time derivative of thermodynamic state";
     output Real der_d "Time derivative of density";
   algorithm
     der_d := der_state.d;
@@ -2037,9 +2089,11 @@ partial package PartialHybridTwoPhaseMediumFormula
   end density_der;
 
   replaceable function specificEnthalpy_der
-    "Calculates time derivative of specific enthalpy calculated by thermodynamic state record"
+    "Calculates time derivative of specific enthalpy calculated by
+    thermodynamic state record"
     input ThermodynamicState state "Thermodynamic state";
-    input ThermodynamicState der_state "Time derivative of thermodynamic state";
+    input ThermodynamicState der_state
+      "Time derivative of thermodynamic state";
     output Real der_h "Time derivative of specific enthalpy";
   algorithm
     der_h := der_state.h;
@@ -2173,7 +2227,8 @@ partial package PartialHybridTwoPhaseMediumFormula
     "Calculates time derivative of specificEnthalpy_pT"
     input AbsolutePressure p "Pressure";
     input Temperature T "Temperature";
-    input FixedPhase phase=0 "2 for two-phase, 1 for one-phase, 0 if not known";
+    input FixedPhase phase=0
+      "2 for two-phase, 1 for one-phase, 0 if not known";
     input Real der_p "Time derivative of pressure";
     input Real der_T "Time derivative of temperature";
     output Real der_h "Time derivative of specific enthalpy";
@@ -2192,7 +2247,8 @@ partial package PartialHybridTwoPhaseMediumFormula
     "Calculates time derivative of specificEnthalpy_dT"
     input Density d "Density";
     input Temperature T "Temperature";
-    input FixedPhase phase=0 "2 for two-phase, 1 for one-phase, 0 if not known";
+    input FixedPhase phase=0
+      "2 for two-phase, 1 for one-phase, 0 if not known";
     input Real der_d "Time derivative of density";
     input Real der_T "Time derivative of temperature";
     output Real der_h "Time derivative of specific enthalpy";
@@ -2211,7 +2267,8 @@ partial package PartialHybridTwoPhaseMediumFormula
     "Calculates time derivative of specificEnthalpy_ps"
     input AbsolutePressure p "Pressure";
     input SpecificEntropy s "Specific entropy";
-    input FixedPhase phase=0 "2 for two-phase, 1 for one-phase, 0 if not known";
+    input FixedPhase phase=0
+      "2 for two-phase, 1 for one-phase, 0 if not known";
     input Real der_p "Time derivative of pressure";
     input Real der_s "Time derivative of specific entropy";
     output Real der_h "Time derivative of specific enthalpy";
@@ -2229,117 +2286,338 @@ partial package PartialHybridTwoPhaseMediumFormula
 <ul>
   <li>
   June 6, 2017, by Mirko Engelpracht:<br/>
-  First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
+  First implementation
+  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
 </ul>
 </html>", info="<html>
-<p>This package provides the implementation of a refrigerant modelling approach using a hybrid approach. The hybrid approach is developed by Sangi et al. and consists of both the Helmholtz equation of state and fitted formula for thermodynamic state properties at bubble or dew line (e.g. p<sub>sat</sub> or h<sub>l,sat</sub>) and thermodynamic state properties depending on two independent state properties (e.g. T_ph or T_ps). In the following, the basic formulas of the hybrid approach are given.</p>
-<p><b>The Helmholtz equation of state</b></p>
-<p>The Helmholtz equation of state (EoS) allows the accurate description of fluids&apos; thermodynamic behaviour and uses the Helmholtz energy as fundamental thermodynamic relation with temperature and density as independent variables. Furthermore, the EoS allows determining all thermodynamic state properties from its partial derivatives and its<b> general formula</b> is given below:</p>
-<p align=\"center\"><img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/Helmholtz_EoS.png\" alt=\"Calculation procedure of dimensionless Helmholtz energy\"/></p>
-<p>As it can be seen, the general formula of the EoS can be divided in two part: The <b>ideal gas part (left summand) </b>and the <b>residual part (right summand)</b>. Both parts&apos; formulas are given below:</p>
-<p align=\"center\"><img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/Helmholtz_IdealGasPart.png\" alt=\"Calculation procedure of dimensionless ideal gas Helmholtz energy\"/></p>
-<p align=\"center\"><img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/Helmholtz_ResidualPart.png\" alt=\"Calculation procedure of dimensionless residual Helmholtz energy\"/></p>
-<p>Both, the ideal gas part and the residual part can be divided in three subparts (i.e. the summations) that contain different coefficients (e.g. nL, l<sub>i</sub>, p<sub>i</sub> or e<sub>i</sub>). These coefficients are fitting coefficients and must be obtained during a fitting procedure. While the fitting procedure, the general formula of the EoS is fitted to external data (e.g. obtained from measurements or external media libraries) and the fitting coefficients are determined. Finally, the formulas obtained during the fitting procedure are implemented in an explicit form.</p>
-<p>For further information of <b>the EoS and its partial derivatives</b>, please read the paper &quot;<a href=\"http://www.ep.liu.se/ecp/076/006/ecp12076006.pdf\">HelmholtzMedia - A fluid properties library</a>&quot; by Thorade and Saadat as well as the paper &quot;<a href=\"http://gfzpublic.gfz-potsdam.de/pubman/item/escidoc:247373:5/component/escidoc:306833/247373.pdf\">Partial derivatives of thermodynamic state properties for dynamic simulation</a>&quot; by Thorade and Saadat.</p>
-<p><b>Fitted formulas</b></p>
-<p>Fitted formulas allow to reduce the overall computing time of the refrigerant model. Therefore, both thermodynamic state properties at bubble and dew line and thermodynamic state properties depending on two independent state properties are expresses as fitted formulas. The fitted formulas&apos; approaches implemented in this package are developed by Sangi et al. within their &quot;Fast_Propane&quot; model and given below:<br /></p>
-<table summary=\"Formulas for calculating saturation properties\" cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"80%\" style=\"border-collapse:collapse;\">
+<p>
+This package provides the implementation of a refrigerant modelling approach
+using a hybrid approach. The hybrid approach is developed by Sangi et al.
+and consists of both the Helmholtz equation of state and fitted formula for
+thermodynamic state properties at bubble or dew line (e.g. p<sub>sat</sub>
+or h<sub>l,sat</sub>) and thermodynamic state properties depending on two
+independent state properties (e.g. T_ph or T_ps). In the following, the basic
+formulas of the hybrid approach are given.
+</p>
+<p>
+<b>The Helmholtz equation of state</b>
+</p>
+<p>
+The Helmholtz equation of state (EoS) allows the accurate description of
+fluids&apos; thermodynamic behaviour and uses the Helmholtz energy as
+fundamental thermodynamic relation with temperature and density as independent
+variables. Furthermore, the EoS allows determining all thermodynamic state
+properties from its partial derivatives and its<b> general formula</b> is
+given below:
+</p>
+<p align=\"center\">
+<img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/Helmholtz_EoS.png\"
+alt=\"Calculation procedure of dimensionless Helmholtz energy\"/></p>
+<p>
+As it can be seen, the general formula of the EoS can be divided in two part:
+The <b>ideal gas part (left summand) </b>and the <b>residual part (right
+summand)</b>. Both parts&apos; formulas are given below:</p>
+<p align=\"center\">
+<img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/Helmholtz_IdealGasPart.png\"
+alt=\"Calculation procedure of dimensionless ideal gas Helmholtz energy\"/></p>
+<p align=\"center\">
+<img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/Helmholtz_ResidualPart.png\"
+alt=\"Calculation procedure of dimensionless residual Helmholtz energy\"/></p>
+<p>
+Both, the ideal gas part and the residual part can be divided in three
+subparts (i.e. the summations) that contain different coefficients (e.g. nL,
+l<sub>i</sub>, p<sub>i</sub> or e<sub>i</sub>). These coefficients are
+fitting coefficients and must be obtained during a fitting procedure. While
+the fitting procedure, the general formula of the EoS is fitted to external
+data (e.g. obtained from measurements or external media libraries) and the
+fitting coefficients are determined. Finally, the formulas obtained during
+the fitting procedure are implemented in an explicit form.
+</p>
+<p>
+For further information of <b>the EoS and its partial derivatives</b>, please
+read the paper &quot;
+<a href=\"http://www.ep.liu.se/ecp/076/006/ecp12076006.pdf\">HelmholtzMedia -
+A fluid properties library</a>&quot; by Thorade and Saadat as well as the
+paper &quot;
+<a href=\"http://gfzpublic.gfz-potsdam.de/pubman/item/escidoc:247373:5/component/escidoc:306833/247373.pdf\">
+Partial derivatives of thermodynamic state properties for dynamic
+simulation</a>&quot; by Thorade and Saadat.
+</p>
+<p>
+<b>Fitted formulas</b>
+</p>
+<p>
+Fitted formulas allow to reduce the overall computing time of the refrigerant
+model. Therefore, both thermodynamic state properties at bubble and dew line
+and thermodynamic state properties depending on two independent state
+properties are expresses as fitted formulas. The fitted formulas&apos;
+approaches implemented in this package are developed by Sangi et al. within
+their &quot;Fast_Propane&quot; model and given below:<br />
+</p>
+<table summary=\"Formulas for calculating saturation properties\"
+cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"80%\"
+style=\"border-collapse:collapse;\">
 <tr>
-<td valign=\"middle\"><p><i>Saturation pressure</i></p></td>
-<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/SaturationPressure.png\" alt=\"Formula to calculate saturation pressure\"/></p></td>
+<td valign=\"middle\"><p>
+  <i>Saturation pressure</i>
+</p></td>
+<td valign=\"middle\"><p>
+  <img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/SaturationPressure.png\"
+  alt=\"Formula to calculate saturation pressure\"/>
+</p></td>
 </tr>
 <tr>
-<td valign=\"middle\"><p><i>Saturation temperature</i></p></td>
-<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/SaturationTemperature.png\" alt=\"Formula to calculate saturation temperature\"/></p></td>
+<td valign=\"middle\"><p>
+  <i>Saturation temperature</i>
+</p></td>
+<td valign=\"middle\"><p>
+  <img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/SaturationTemperature.png\"
+  alt=\"Formula to calculate saturation temperature\"/>
+</p></td>
 </tr>
 <tr>
-<td valign=\"middle\"><p><i>Bubble density</i></p></td>
-<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/BubbleDensity.png\" alt=\"Formula to calculate bubble density\"/></p></td>
+<td valign=\"middle\"><p>
+  <i>Bubble density</i>
+</p></td>
+<td valign=\"middle\"><p>
+  <img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/BubbleDensity.png\"
+  alt=\"Formula to calculate bubble density\"/>
+</p></td>
 </tr>
 <tr>
-<td valign=\"middle\"><p><i>Dew density</i></p></td>
-<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/DewDensity.png\" alt=\"Formula to calculate dew density\"/></p></td>
+<td valign=\"middle\"><p>
+  <i>Dew density</i>
+</p></td>
+<td valign=\"middle\"><p>
+  <img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/DewDensity.png\"
+  alt=\"Formula to calculate dew density\"/>
+</p></td>
 </tr>
 <tr>
-<td valign=\"middle\"><p><i>Bubble Enthalpy</i></p></td>
-<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/BubbleEnthalpy.png\" alt=\"Formula to calculate bubble enthalpy\"/></p></td>
+<td valign=\"middle\"><p>
+  <i>Bubble Enthalpy</i>
+</p></td>
+<td valign=\"middle\"><p>
+  <img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/BubbleEnthalpy.png\"
+  alt=\"Formula to calculate bubble enthalpy\"/>
+</p></td>
 </tr>
 <tr>
-<td valign=\"middle\"><p><i>Dew Enthalpy</i></p></td>
-<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/DewEnthalpy.png\" alt=\"Formula to calculate dew enthalpy\"/></p></td>
+<td valign=\"middle\"><p>
+  <i>Dew Enthalpy</i>
+</p></td>
+<td valign=\"middle\"><p>
+  <img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/DewEnthalpy.png\"
+  alt=\"Formula to calculate dew enthalpy\"/>
+</p></td>
 </tr>
 <tr>
-<td valign=\"middle\"><p><i>Bubble Entropy</i></p></td>
-<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/BubbleEntropy.png\" alt=\"Formula to calculate bubble entropy\"/></p></td>
+<td valign=\"middle\"><p>
+  <i>Bubble Entropy</i>
+</p></td>
+<td valign=\"middle\"><p>
+  <img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/BubbleEntropy.png\"
+  alt=\"Formula to calculate bubble entropy\"/>
+</p></td>
 </tr>
 <tr>
-<td valign=\"middle\"><p><i>Dew Entropy</i></p></td>
-<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/DewEntropy.png\" alt=\"Formula to calculate dew entropy\"/></p></td>
+<td valign=\"middle\"><p>
+  <i>Dew Entropy</i>
+</p></td>
+<td valign=\"middle\"><p>
+  <img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/DewEntropy.png\"
+  alt=\"Formula to calculate dew entropy\"/>
+</p></td>
 </tr>
 </table>
-<table summary=\"Formulas for calculating thermodynamic properties at superheated and supercooled regime\" cellspacing=\"0\" cellpadding=\"3\" border=\"1\" width=\"80%\" style=\"border-collapse:collapse;\">
+<table summary=\"Formulas for calculating thermodynamic properties at
+superheated and supercooled regime\" cellspacing=\"0\" cellpadding=\"3\"
+border=\"1\" width=\"80%\" style=\"border-collapse:collapse;\">
 <tr>
-<td valign=\"middle\" rowspan=\"2\"><p><i>Temperature_ph</i></p></td>
-<td valign=\"middle\"><p>First Input</p></td>
-<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Temperature_ph_Input1.png\" alt=\"First input required to calculate temperature by pressure and specific enthalpy\"/></p></td>
+<td valign=\"middle\" rowspan=\"2\"><p>
+  <i>Temperature_ph</i>
+</p></td>
+<td valign=\"middle\"><p>
+  First Input
+</p></td>
+<td valign=\"middle\"><p>
+  <img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Temperature_ph_Input1.png\"
+  alt=\"First input required to calculate temperature by pressure and specific
+  enthalpy\"/>
+</p></td>
 </tr>
 <tr>
-<td valign=\"middle\"><p>Second Input</p></td>
-<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Temperature_ph_Input2.png\" alt=\"Second input required to calculate temperature by pressure and specific enthalpy\"/></p></td>
+<td valign=\"middle\"><p>
+  Second Input
+</p></td>
+<td valign=\"middle\"><p>
+  <img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Temperature_ph_Input2.png\"
+  alt=\"Second input required to calculate temperature by pressure and
+  specific enthalpy\"/>
+</p></td>
 </tr>
 <tr>
-<td valign=\"middle\" rowspan=\"2\"><p><i>Temperature_ps</i></p></td>
-<td valign=\"middle\"><p>First Input</p></td>
-<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Temperature_ps_Input1.png\" alt=\"First input required to calculate temperature by pressure and specific entropy\"/></p></td>
+<td valign=\"middle\" rowspan=\"2\"><p>
+  <i>Temperature_ps</i>
+</p></td>
+<td valign=\"middle\"><p>
+  First Input
+</p></td>
+<td valign=\"middle\"><p>
+  <img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Temperature_ps_Input1.png\"
+  alt=\"First input required to calculate temperature by pressure and
+  specific entropy\"/>
+</p></td>
 </tr>
 <tr>
-<td valign=\"middle\"><p>Second Input</p></td>
-<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Temperature_ps_Input2.png\" alt=\"Second input required to calculate temperature by pressure and specific entropy\"/></p></td>
+<td valign=\"middle\"><p>
+  Second Input
+</p></td>
+<td valign=\"middle\"><p>
+  <img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Temperature_ps_Input2.png\"
+  alt=\"Second input required to calculate temperature by pressure and
+  specific entropy\"/>
+</p></td>
 </tr>
 <tr>
-<td valign=\"middle\" rowspan=\"2\"><p><i>Density_pT</i></p></td>
-<td valign=\"middle\"><p>First Input</p></td>
-<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Density_pT_Input1.png\" alt=\"First input required to calculate density by pressure and temperature\"/></p></td>
+<td valign=\"middle\" rowspan=\"2\"><p>
+  <i>Density_pT</i>
+</p></td>
+<td valign=\"middle\"><p>
+  First Input
+</p></td>
+<td valign=\"middle\"><p>
+  <img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Density_pT_Input1.png\"
+  alt=\"First input required to calculate density by pressure and temperature\"/>
+</p></td>
 </tr>
 <tr>
-<td valign=\"middle\"><p>Second Input</p></td>
-<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Density_pT_Input2.png\" alt=\"Second input required to calculate density by pressure and temperature\"/></p></td>
+<td valign=\"middle\"><p>
+  Second Input
+</p></td>
+<td valign=\"middle\"><p>
+  <img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Density_pT_Input2.png\"
+  alt=\"Second input required to calculate density by pressure and
+  temperature\"/>
+</p></td>
 </tr>
 <tr>
-<td valign=\"middle\"><p><i>Functional approach</i></p></td>
-<td valign=\"middle\" colspan=\"2\"><p><img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/StateProperties_Approach.png\" alt=\"Calculation procedure for supercooled and superheated region\"/></p></td>
+<td valign=\"middle\"><p>
+  <i>Functional approach
+</i></p></td>
+<td valign=\"middle\" colspan=\"2\"><p>
+  <img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/StateProperties_Approach.png\"
+  alt=\"Calculation procedure for supercooled and superheated region\"/>
+</p></td>
 </tr>
 </table>
-<p>As it can be seen, the fitted formulas consist basically of the coefficients e<sub>i</sub>, c<sub>i</sub> as well as of the parameters Mean<sub>i</sub> and Std<sub>i</sub>. These coefficients are the fitting coefficients and must be obtained during a fitting procedure. While the fitting procedure, the formulas presented above are fitted to external data (e.g. obtained from measurements or external media libraries) and the fitting coefficients are determined. Finally, the formulas obtained during the fitting procedure are implemented in an explicit form.</p>
-<p>For further information of <b>the hybrid approach</b>, please read the paper &quot;<a href=\"http://dx.doi.org/10.3384/ecp14096\">A Medium Model for the Refrigerant Propane for Fast and Accurate Dynamic Simulations</a>&quot; by Sangi et al..</p>
-<p><b>Smooth transition</b></p>
-<p>To ensure a smooth transition between different regions (e.g. from supercooled region to two-phase region) and, therefore, to avoid discontinuities as far as possible, Sangi et al. implemented functions for a smooth transition between the regions. An example (i.e. specificEnthalpy_ps) of these functions is given below:<br /></p>
-<table summary=\"Calculation procedures to avoid numerical instability at phase change\" cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"80%\" style=\"border-collapse:collapse;\">
+<p>
+As it can be seen, the fitted formulas consist basically of the coefficients
+e<sub>i</sub>, c<sub>i</sub> as well as of the parameters Mean<sub>i</sub>
+and Std<sub>i</sub>. These coefficients are the fitting coefficients and must
+be obtained during a fitting procedure. While the fitting procedure, the
+formulas presented above are fitted to external data (e.g. obtained from
+measurements or external media libraries) and the fitting coefficients are
+determined. Finally, the formulas obtained during the fitting procedure are
+implemented in an explicit form.
+</p>
+<p>
+For further information of <b>the hybrid approach</b>, please read the paper
+&quot;<a href=\"http://dx.doi.org/10.3384/ecp14096\">A Medium Model for the
+Refrigerant Propane for Fast and Accurate Dynamic Simulations</a>&quot;
+by Sangi et al..
+</p>
+<p>
+<b>Smooth transition</b>
+</p>
+<p>
+To ensure a smooth transition between different regions (e.g. from supercooled
+region to two-phase region) and, therefore, to avoid discontinuities as far as
+possible, Sangi et al. implemented functions for a smooth transition between
+the regions. An example (i.e. specificEnthalpy_ps) of these functions is
+given below:<br />
+</p>
+<table summary=\"Calculation procedures to avoid numerical instability at
+phase change\" cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"80%\"
+style=\"border-collapse:collapse;\">
 <tr>
-<td valign=\"middle\"><p><i>From supercooled region to bubble line and vice versa</i></p></td>
-<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/SupercooledToTwoPhase.png\" alt=\"Calculation procedure for change from supercooled to two-phase\"/></p></td>
+<td valign=\"middle\"><p>
+  <i>From supercooled region to bubble line and vice versa</i>
+</p></td>
+<td valign=\"middle\"><p>
+  <img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/SupercooledToTwoPhase.png\"
+  alt=\"Calculation procedure for change from supercooled to two-phase\"/>
+</p></td>
 <tr>
-<td valign=\"middle\"><p><i>From dew line to superheated region and vice versa</i></p></td>
-<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/TwoPhaseToSuperheated.png\" alt=\"Calculation procedure for change from superheated to two-phase\"/></p></td>
+<td valign=\"middle\"><p>
+  <i>From dew line to superheated region and vice versa</i>
+</p></td>
+<td valign=\"middle\"><p>
+  <img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/TwoPhaseToSuperheated.png\"
+  alt=\"Calculation procedure for change from superheated to two-phase\"/>
+</p></td>
 </tr>
 <tr>
-<td valign=\"middle\"><p><i>From bubble or dew line to two-phase region and vice versa</i></p></td>
-<td valign=\"middle\"><p><img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/SaturationToTwoPhase.png\" alt=\"Calculation procedure for change from saturation to two-phase\"/></p></td>
+<td valign=\"middle\"><p>
+  <i>From bubble or dew line to two-phase region and vice versa</i>
+</p></td>
+<td valign=\"middle\"><p>
+  <img src=\"modelica://AixLib/Resources/Images/Media/Refrigerants/Interfaces/SaturationToTwoPhase.png\"
+  alt=\"Calculation procedure for change from saturation to two-phase\"/>
+</p></td>
 </tr>
 </table>
 <h4>Assumptions and limitations</h4>
-<p>Three limitations are known for this package:</p>
+<p>
+Three limitations are known for this package:
+</p>
 <ol>
-<li>The modelling approach implemented in this package is a hybrid approach and, therefore, is based on the Helmholtz equation of state as well as on fitted formula. Hence, the refrigerant model is just valid within the valid range of the fitted formula.</li>
-<li>It may be possible to have discontinuities when moving from one region to another (e.g. from supercooled region to two-phase region). However, functions are implemented to reach a smooth transition between the regions and to avoid these discontinuities as far as possible. (Sangi et al., 2014)</li>
+<li>The modelling approach implemented in this package is a hybrid approach
+and, therefore, is based on the Helmholtz equation of state as well as on
+fitted formula. Hence, the refrigerant model is just valid within the valid
+range of the fitted formula.</li>
+<li>It may be possible to have discontinuities when moving from one region
+to another (e.g. from supercooled region to two-phase region). However,
+functions are implemented to reach a smooth transition between the regions
+and to avoid these discontinuities as far as possible.
+(Sangi et al., 2014)</li>
 </ol>
 <h4>Typical use and important parameters</h4>
-<p>The refrigerant models provided in this package are typically used for heat pumps and refrigerating machines. However, it is just a partial package and, hence, it must be completed before usage. In order to allow an easy completion of the package, a template is provided in <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumFormula\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumFormula</a>.</p>
+<p>
+The refrigerant models provided in this package are typically used for heat
+pumps and refrigerating machines. However, it is just a partial package and,
+hence, it must be completed before usage. In order to allow an easy
+completion of the package, a template is provided in
+<a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumFormula\">
+AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumFormula</a>.
+</p>
 <h4>References</h4>
-<p>Thorade, Matthis; Saadat, Ali (2012): <a href=\"http://www.ep.liu.se/ecp/076/006/ecp12076006.pdf\">HelmholtzMedia - A fluid properties library</a>. In: <i>Proceedings of the 9th International Modelica Conference</i>; September 3-5; 2012; Munich; Germany. Link&ouml;ping University Electronic Press, S. 63&ndash;70.</p>
-<p>Thorade, Matthis; Saadat, Ali (2013): <a href=\"http://gfzpublic.gfz-potsdam.de/pubman/item/escidoc:247373:5/component/escidoc:306833/247373.pdf\">Partial derivatives of thermodynamic state properties for dynamic simulation</a>. In:<i> Environmental earth sciences 70 (8)</i>, S. 3497&ndash;3503.</p>
-<p>Sangi, Roozbeh; Jahangiri, Pooyan; Klasing, Freerk; Streblow, Rita; M&uuml;ller, Dirk (2014): <a href=\"http://dx.doi.org/10.3384/ecp14096\">A Medium Model for the Refrigerant Propane for Fast and Accurate Dynamic Simulations</a>. In: <i>The 10th International Modelica Conference</i>. Lund, Sweden, March 10-12, 2014: Link&ouml;ping University Electronic Press (Link&ouml;ping Electronic Conference Proceedings), S. 1271&ndash;1275</p>
-<p>Klasing,Freerk: A New Design for Direct Exchange Geothermal Heat Pumps - Modeling, Simulation and Exergy Analysis. <i>Master thesis</i></p>
+<p>
+Thorade, Matthis; Saadat, Ali (2012):
+<a href=\"http://www.ep.liu.se/ecp/076/006/ecp12076006.pdf\">HelmholtzMedia -
+A fluid properties library</a>. In: <i>Proceedings of the 9th International
+Modelica Conference</i>; September 3-5; 2012; Munich; Germany.
+Link&ouml;ping University Electronic Press, S. 63&ndash;70.
+</p>
+<p>
+Thorade, Matthis; Saadat, Ali (2013):
+<a href=\"http://gfzpublic.gfz-potsdam.de/pubman/item/escidoc:247373:5/component/escidoc:306833/247373.pdf\">
+Partial derivatives of thermodynamic state properties for dynamic
+simulation</a>. In:<i> Environmental earth sciences 70 (8)</i>,
+S. 3497&ndash;3503.
+</p>
+<p>
+Sangi, Roozbeh; Jahangiri, Pooyan; Klasing, Freerk; Streblow, Rita;
+M&uuml;ller, Dirk (2014): <a href=\"http://dx.doi.org/10.3384/ecp14096\">
+A Medium Model for the Refrigerant Propane for Fast and Accurate Dynamic
+Simulations</a>. In: <i>The 10th International Modelica Conference</i>. Lund,
+Sweden, March 10-12, 2014: Link&ouml;ping University Electronic Press
+(Link&ouml;ping Electronic Conference Proceedings), S. 1271&ndash;1275
+</p>
+<p>
+Klasing,Freerk: A New Design for Direct Exchange Geothermal Heat Pumps -
+Modeling, Simulation and Exergy Analysis. <i>Master thesis</i>
+</p>
 </html>"));
 end PartialHybridTwoPhaseMediumFormula;

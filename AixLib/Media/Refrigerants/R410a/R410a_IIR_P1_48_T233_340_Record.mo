@@ -25,8 +25,8 @@ package R410a_IIR_P1_48_T233_340_Record
      each hasCriticalData=true) "Thermodynamic constants for R410a";
 
   /*Provide basic information about the refrigerant. These basic information
-    are the refrigerant name as well as the valid refrigerant limits in terms of
-    specific enthalpy, density, absolute pressure and temperature.
+    are the refrigerant name as well as the valid refrigerant limits in terms
+    of specific enthalpy, density, absolute pressure and temperature.
   */
   extends
     AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord(
@@ -71,7 +71,7 @@ package R410a_IIR_P1_48_T233_340_Record
       If a mixture has a fixed composition set fixedX=true, otherwise false.
       The modifiers for reducedX and fixedX should normally be final
       since the other equations are based on these values.
-      
+
       It is also possible to redeclare the min, max, and start attributes of
       Medium types, defined in the base class Interfaces.PartialMedium
       (the example of Temperature is shown here). Min and max attributes
@@ -89,19 +89,22 @@ package R410a_IIR_P1_48_T233_340_Record
       AixLib.DataBase.Media.Refrigerants.R410a.EoS_IIR_P1_48_T233_340;
   end EoS;
 
-  redeclare record BDSP "Record that contains fitting coefficients of the state properties at bubble
-    and dew lines"
+  redeclare record BDSP
+    "Record that contains fitting coefficients of the state properties at
+    bubble and dew lines"
     extends
       AixLib.DataBase.Media.Refrigerants.R410a.BDSP_IIR_P1_48_T233_340;
   end BDSP;
 
-  redeclare record TSP "Record that contains fitting coefficients of the state properties
+  redeclare record TSP
+    "Record that contains fitting coefficients of the state properties
     calculated with two independent state properties"
     extends
       AixLib.DataBase.Media.Refrigerants.R410a.TSP_IIR_P1_48_T233_340;
   end TSP;
 
-  redeclare record SmoothTransition "Record that contains ranges to calculate a smooth transition between
+  redeclare record SmoothTransition
+    "Record that contains ranges to calculate a smooth transition between
     different regions"
       SpecificEnthalpy T_ph = 2.5;
       SpecificEntropy T_ps = 2.5;
@@ -117,9 +120,9 @@ package R410a_IIR_P1_48_T233_340_Record
     "Calculates dynamic viscosity of refrigerant"
 
   /*The functional form of the dynamic viscosity is implented as presented in
-    Geller et al. (2000), Viscosity of Mixed Refrigerants, R404A, R407C, R410A, 
+    Geller et al. (2000), Viscosity of Mixed Refrigerants, R404A, R407C, R410A,
     and R507C. Eighth International Refrigeration Conference.
-    Afterwards, the coefficients are adapted to the results obtained by the 
+    Afterwards, the coefficients are adapted to the results obtained by the
     ExternalMedia libaray (i.e. CoolProp)
   */
 
@@ -143,10 +146,10 @@ package R410a_IIR_P1_48_T233_340_Record
     "Calculates thermal conductivity of refrigerant"
 
   /*The functional form of the thermal conductify is implented as presented in
-    Geller et al. (2001), Thermal Conductivity of the Refrigerant Mixtures R404A,
-    R407C, R410A, and R507A. International Journal of Thermophysics, Vol. 22, No. 4.
-    Afterwards, the coefficients are adapted to the results obtained by the 
-    ExternalMedia libaray (i.e. CoolProp)
+    Geller et al. (2001), Thermal Conductivity of the Refrigerant Mixtures
+    R404A, R407C, R410A, and R507A. International Journal of Thermophysics,
+    Vol. 22, No. 4. Afterwards, the coefficients are adapted to the results
+    obtained by the ExternalMedia libaray (i.e. CoolProp)
   */
   protected
     Real lambda_0 "Thermal conductivity for the limit of zero density";
@@ -169,7 +172,7 @@ package R410a_IIR_P1_48_T233_340_Record
     "Surface tension in two phase region of refrigerant"
 
   /*The functional form of the surface tension is implented as presented in
-    Fröba and Leipertz (2003), Thermophysical Properties of the Refrigerant 
+    Fröba and Leipertz (2003), Thermophysical Properties of the Refrigerant
     Mixtures R410A and R407C from Dynamic Light Scattering (DLS).
     International Journal ofThermophysics, Vol. 24, No. 5.
   */
@@ -177,47 +180,107 @@ package R410a_IIR_P1_48_T233_340_Record
     Real tau = sat.Tsat/343.16 "Dimensionless temperature";
 
   algorithm
-    sigma := (67.468*(1-tau)^1.26 * (1 - 0.051*(1-tau)^0.5 - 0.193*(1-tau)))*1e-3;
+    sigma := (67.468*(1-tau)^1.26 * (1 - 0.051*(1-tau)^0.5 -
+      0.193*(1-tau)))*1e-3;
   end surfaceTension;
+
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
   June 20, 2017, by Mirko Engelpracht:<br/>
-  First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
+  First implementation
+  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
 </ul>
 </html>", info="<html>
-<p>This package provides a refrigerant model for R410a using a hybrid approach developed by Sangi et al.. The hybrid approach is implemented in <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMedium\">AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMedium</a> and the refrigerant model is implemented by complete the template <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord\">AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord</a>. The fitting coefficients required in the template are saved in the package <a href=\"modelica://AixLib.DataBase.Media.Refrigerants.R410a\">AixLib.DataBase.Media.Refrigerants.R410a</a>.</p>
+<p>
+This package provides a refrigerant model for R410a using a hybrid approach
+developed by Sangi et al.. The hybrid approach is implemented in
+<a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMedium\">
+AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMedium
+</a>
+and the refrigerant model is implemented by complete the template
+<a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord\">
+AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumRecord
+</a>.
+The fitting coefficients required in the template are saved in the package
+<a href=\"modelica://AixLib.DataBase.Media.Refrigerants.R410a\">
+AixLib.DataBase.Media.Refrigerants.R410a
+</a>.
+</p>
 <h4>Assumptions and limitations</h4>
-<p>The implemented coefficients are fitted to external data by Engelpracht and are valid within the following range:<br /></p>
-<table summary=\"Range of validiry\" cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"30%\" style=\"border-collapse:collapse;\">
+<p>
+The implemented coefficients are fitted to external data by Engelpracht and
+are valid within the following range:<br />
+</p>
+<table summary=\"Range of validiry\" cellspacing=\"0\" cellpadding=\"2\"
+border=\"1\" width=\"30%\" style=\"border-collapse:collapse;\">
 <tr>
-<td><p>Parameter</p></td>
-<td><p>Minimum Value</p></td>
-<td><p>Maximum Value</p></td>
+  <td><p>Parameter</p></td>
+  <td><p>Minimum Value</p></td>
+  <td><p>Maximum Value</p></td>
 </tr>
 <tr>
-<td><p>Pressure (p) in bar</p></td>
-<td><p>1</p></td>
-<td><p>48</p></td>
+  <td><p>Pressure (p) in bar</p></td>
+  <td><p>1</p></td>
+  <td><p>48</p></td>
 </tr>
 <tr>
-<td><p>Temperature (T) in K</p></td>
-<td><p>233.15</p></td>
-<td><p>340.15</p></td>
+  <td><p>Temperature (T) in K</p></td>
+  <td><p>233.15</p></td>
+  <td><p>340.15</p></td>
 </tr>
 </table>
-<p>The reference point is defined as 200 kJ/kg and 1 kJ/kg/K, respectively, for enthalpy and entropy for the saturated liquid at 273.15 K.</p>
+<p>
+The reference point is defined as 200 kJ/kg and 1 kJ/kg/K, respectively, for
+enthalpy and entropy for the saturated liquid at 273.15 K.
+</p>
 <h4>Assumptions and limitations</h4>
-<p>R410a is calculated as pseudo-pure fluid and, hence, only roughly valid withing the two-phase region.</p>
+<p>
+R410a is calculated as pseudo-pure fluid and, hence, only roughly valid
+withing the two-phase region.
+</p>
 <h4>Validation</h4>
-<p> The model is validated by comparing results obtained from the example model <a href=\"modelica://AixLib.Media.Refrigerants.Examples.RefrigerantProperties\">AixLib.Media.Refrigerants.Examples.RefrigerantProperties</a> to external data (e.g. obtained from measurements or external media libraries).</p>
+<p>
+The model is validated by comparing results obtained from the example model
+<a href=\"modelica://AixLib.Media.Refrigerants.Examples.RefrigerantProperties\">
+AixLib.Media.Refrigerants.Examples.RefrigerantProperties
+</a>
+to external data (e.g. obtained from measurements or external media libraries).
+</p>
 <h4>References</h4>
-<p>Lemmon, E. W. (2003): Pseudo-Pure Fluid Equations of State for the Refrigerant Blends R-410A, R-404A, R-507A, and R-407C. In: <i>International Journal ofThermophysics 24 (4)</i>, S. 991–1006. DOI: 10.1023/A:1025048800563.</p>
-<p>Geller, V. Z.; Bivens, D.; Yokozeki, A. (2000): Viscosity of Mixed Refrigerants, R404A, R407C, R410A, and R507C. In: <i>International refrigeration and air conditioning conference</i>. USA, S. 399–406. Online available at http://docs.lib.purdue.edu/iracc/508.</p>
-<p>Nabizadeh, H.; Mayinger, F. (1999): Viscosity of Gaseous R404A, R407C, R410A, and R507. In: <i>International Journal of Thermophysics 20 (3)</i>, S. 777–790. DOI: 10.1007/978-1-4615-4777-8_1.</p>
-<p>Geller, V. Z.; Nemzer, B. V.; Cheremnykh, U. V. (2001): Thermal Conductivity of the Refrigerant Mixtures R404A, R407C, R410A, and R507A. In: <i>International Journal of Thermophysics 22 (4)</i>, 1035–1043. DOI: 10.1023/A:1010691504352.</p>
-<p>Fröba, A. P.; Leipertz, A. (2003): Thermophysical Properties of the Refrigerant Mixtures R410A and R407C from Dynamic Light Scattering (DLS). In: <i>International Journal ofThermophysics 24 (5)</i>, S. 1185–1206. DOI: 10.1023/A:1026152331710.</p>
-<p>Engelpracht, Mirko (2017): Development of modular and scalable simulation models for heat pumps and chillers considering various refrigerants. <i>Master Thesis</i></p>
+<p>
+Lemmon, E. W. (2003): Pseudo-Pure Fluid Equations of State for the Refrigerant
+Blends R-410A, R-404A, R-507A, and R-407C. In: <i>International Journal of
+Thermophysics 24 (4)</i>, S. 991–1006. DOI: 10.1023/A:1025048800563.
+</p>
+<p>
+Geller, V. Z.; Bivens, D.; Yokozeki, A. (2000): Viscosity of Mixed
+Refrigerants, R404A, R407C, R410A, and R507C. In: <i>International
+refrigeration and air conditioning conference</i>. USA, S. 399–406. Online
+available at http://docs.lib.purdue.edu/iracc/508.
+</p>
+<p>
+Nabizadeh, H.; Mayinger, F. (1999): Viscosity of Gaseous R404A, R407C, R410A,
+and R507. In: <i>International Journal of Thermophysics 20 (3)</i>, S.
+777–790. DOI: 10.1007/978-1-4615-4777-8_1.
+</p>
+<p>
+Geller, V. Z.; Nemzer, B. V.; Cheremnykh, U. V. (2001): Thermal Conductivity
+of the Refrigerant Mixtures R404A, R407C, R410A, and R507A. In:
+<i>International Journal of Thermophysics 22 (4)</i>, 1035–1043. DOI:
+10.1023/A:1010691504352.
+</p>
+<p>
+Fröba, A. P.; Leipertz, A. (2003): Thermophysical Properties of the
+Refrigerant Mixtures R410A and R407C from Dynamic Light Scattering (DLS).
+In: <i>International Journal ofThermophysics 24 (5)</i>, S. 1185–1206.
+DOI: 10.1023/A:1026152331710.
+</p>
+<p>
+Engelpracht, Mirko (2017): Development of modular and scalable simulation
+models for heat pumps and chillers considering various refrigerants.
+<i>Master Thesis</i>
+</p>
 </html>"));
 end R410a_IIR_P1_48_T233_340_Record;

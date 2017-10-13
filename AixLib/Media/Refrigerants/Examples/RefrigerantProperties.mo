@@ -187,11 +187,13 @@ algorithm
   if wayOfCalc then
     convT := (T_max - T_min)/80;
     convP := (p_max - p_min)/(80*80);
-    convChange := if noEvent(delay(T,1)) >= T_max-convT then time else convChangeTmp;
+    convChange := if noEvent(delay(T,1)) >=
+      T_max-convT then time else convChangeTmp;
   else
     convT := (T_max - T_min)/(80*80);
     convP := (p_max - p_min)/80;
-    convChange := if noEvent(delay(p,1)) >= p_max-convP then time else convChangeTmp;
+    convChange := if noEvent(delay(p,1)) >=
+      p_max-convP then time else convChangeTmp;
   end if;
 
 equation
@@ -221,7 +223,8 @@ equation
 
   // Calculate and check saturation properties
   //
-  satT = Medium.setSat_T(min(max(243.15,T),Medium.fluidConstants[1].criticalTemperature-3));
+  satT = Medium.setSat_T(min(max(243.15,T),
+    Medium.fluidConstants[1].criticalTemperature-3));
   satP = Medium.setSat_p(satT.psat);
 
   // Calculate and check state functions
@@ -238,10 +241,12 @@ equation
   thermodynamicProperties.cp = Medium.specificHeatCapacityCp(state_pT);
   thermodynamicProperties.cv = Medium.specificHeatCapacityCv(state_pT);
   thermodynamicProperties.w = Medium.velocityOfSound(state_pT);
-  thermodynamicProperties.betta = Medium.isobaricExpansionCoefficient(state_pT);
+  thermodynamicProperties.betta =
+    Medium.isobaricExpansionCoefficient(state_pT);
   thermodynamicProperties.kappa = Medium.isothermalCompressibility(state_pT);
   thermodynamicProperties.gamma = Medium.isentropicExponent(state_pT);
-  thermodynamicProperties.delta_T = Medium.isothermalThrottlingCoefficient(state_pT);
+  thermodynamicProperties.delta_T =
+    Medium.isothermalThrottlingCoefficient(state_pT);
   thermodynamicProperties.my = Medium.jouleThomsonCoefficient(state_pT);
   thermodynamicProperties.eta = Medium.dynamicViscosity(state_pT);
   thermodynamicProperties.lambda = Medium.thermalConductivity(state_pT);
@@ -286,30 +291,61 @@ equation
     abs(state_pT.d)*100;
   stateErros.relErrorSpecificEnthalpy_psMax = abs(state_ps.h - state_pT.h) /
     abs(state_pT.h)*100;
+
    annotation(experiment(StopTime=6400, Tolerance=1e-006),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Media/Examples/WaterProperties.mos"
         "Simulate and plot"),
       Documentation(info="<html>
-<p>This example models checks the implementation of the<b> refrigerant&apos;s thermophysical properties</b> depending on the independent variables pressure and temperature. Therefore, the user has first to introduce some information about the refrigerant and afterwards the thermophysical properties are calculated. The following <b>refrigerant&apos;s information</b> is required:</p>
+<p>
+This example models checks the implementation of the<b> refrigerant&apos;s
+thermophysical properties</b> depending on the independent variables pressure
+and temperature. Therefore, the user has first to introduce some information
+about the refrigerant and afterwards the thermophysical properties are
+calculated. The following <b>refrigerant&apos;s information</b> is required:
+</p>
 <ol>
-<li>The <i>refrigerant package</i> that shall be tested.</li>
-<li>The <i>way of calculating</i> the thermophysical properties. Therefore, the user can choose between either (wayOfCalc = true) a slowly raising pressure from p<sub>min</sub> to p<sub>max</sub> and a fast pulsating temperature from T<sub>min</sub> to T<sub>max</sub> or (wayOfCalc = false) a fast pulsating pressure from p<sub>min</sub> to p<sub>max</sub> and a slowly raising temperature from T<sub>min</sub> to T<sub>max</sub>. In both modes, the overall simulating time is set to 6400 s and, hence, the slowly raising property will reach its maximum value after 6400 s. The fast pulsating property will reach its maximum value after 80 s.</li>
-<li>The <i>refrigerant&apos;s fluid limits</i> that are determined by the fitting procedure.</li>
+<li>The <i>refrigerant package</i> that shall be tested.
+</li>
+<li>The <i>way of calculating</i> the thermophysical properties. Therefore,
+the user can choose between either (wayOfCalc = true) a slowly raising
+pressure from p<sub>min</sub> to p<sub>max</sub> and a fast pulsating
+temperature from T<sub>min</sub> to T<sub>max</sub> or (wayOfCalc = false) a
+fast pulsating pressure from p<sub>min</sub> to p<sub>max</sub> and a slowly
+raising temperature from T<sub>min</sub> to T<sub>max</sub>. In both modes,
+the overall simulating time is set to 6400 s and, hence, the slowly raising
+property will reach its maximum value after 6400 s. The fast pulsating
+property will reach its maximum value after 80 s.
+</li>
+<li>The <i>refrigerant&apos;s fluid limits</i> that are determined by the
+fitting procedure.
+</li>
 </ol>
-<p>The following <b>refrigerant&apos;s thermophysical properties</b> are calculated and checked:</p>
+<p>
+The following <b>refrigerant&apos;s thermophysical properties</b> are
+calculated and checked:
+</p>
 <ol>
-<li>Calculation of basic properties like the specific enthalpy or density using pressure and temperature.</li>
-<li>Calculation of saturation properties using both pressure and temperature. The results of both calculations are compared to each other.</li>
-<li>Calculation of the &quot;setState&quot;-functions and comparing the results to the &quot;setState_pT&quot;-results.</li>
-<li>Calculation of furhter properties like the thermal conductivity or isothermal compressbility.</li>
+<li>Calculation of basic properties like the specific enthalpy or density
+using pressure and temperature.</li>
+<li>Calculation of saturation properties using both pressure and temperature.
+The results of both calculations are compared to each other.</li>
+<li>Calculation of the &quot;setState&quot;-functions and comparing the
+results to the &quot;setState_pT&quot;-results.</li>
+<li>Calculation of furhter properties like the thermal conductivity or
+isothermal compressbility.</li>
 </ol>
-<p>Additionally, the &quot;setState&quot;-functions&apos; <b>absolute and relative errors</b> compared to the &quot;setState_pT&quot;-results are calculated.</p>
+<p>
+Additionally, the &quot;setState&quot;-functions&apos; <b>absolute and
+relative errors</b> compared to the &quot;setState_pT&quot;-results are
+calculated.
+</p>
 </html>",
 revisions="<html>
 <ul>
   <li>
   June 13, 2017, by Mirko Engelpracht:<br/>
-  First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
+  First implementation
+  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
 </ul>
 </html>"),

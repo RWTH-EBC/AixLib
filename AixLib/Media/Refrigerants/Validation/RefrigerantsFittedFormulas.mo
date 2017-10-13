@@ -1,6 +1,7 @@
 ﻿within AixLib.Media.Refrigerants.Validation;
 model RefrigerantsFittedFormulas
-  "Model that checks the fitted formulas by comparing the results to external media models"
+  "Model that checks the fitted formulas by comparing the
+  results to external media models"
   extends Modelica.Icons.Example;
 
   // Define the refrigerant that shall be tested
@@ -183,7 +184,8 @@ algorithm
     convH := (h_max - h_min)/80;
     convS := (s_max - s_min)/80;
     convD := (d_max - d_min)/(80*80);
-    convChange := if noEvent(delay(T,1)) >= T_max-convT then time else convChangeTmp;
+    convChange := if noEvent(delay(T,1)) >= T_max-convT then
+      time else convChangeTmp;
 
 equation
 
@@ -191,20 +193,20 @@ equation
   //
   convChangeTmp = convChange;
 
-  // Change independent thermodynamic state properties acording to time
+  // Change independent thermodynamic state properties
   //
   T =  T_min + convT * (time - convChange);
   h =  h_min + convH * (time - convChange);
   s =  s_min + convS * (time - convChange);
   d =  d_min + convD * time;
 
-  // Calculate dimensionless thermydynamic state properties acording to time
+  // Calculate dimensionless thermydynamic state properties
   //
   tauInt = MediumInt.fluidConstants[1].criticalTemperature/T;
   deltaInt = d/(MediumInt.fluidConstants[1].molarMass/
     MediumInt.fluidConstants[1].criticalMolarVolume);
 
-  // Calculate state properties for calculating saturation properties acording to time
+  // Calculate state properties for calculating saturation properties
   //
   T_sat = T_min + (min(MediumInt.fluidConstants[1].criticalTemperature-2,
     T_max)-T_min)/(80*80) * time;
@@ -247,11 +249,11 @@ equation
   eos.f_rtdInt = MediumInt.tau_delta_d2_alpha_r_d_tau_d_delta(deltaInt,tauInt)
       /tauInt/deltaInt;
   eos.f_rtdExt = MediumExt.EoS.f_rtd(deltaInt,tauInt);
-  eos.f_rtddInt = MediumInt.tau_delta2_d3_alpha_r_d_tau_d_delta2(deltaInt,tauInt)
-      /tauInt/deltaInt^2;
+  eos.f_rtddInt = MediumInt.tau_delta2_d3_alpha_r_d_tau_d_delta2(
+    deltaInt,tauInt)/tauInt/deltaInt^2;
   eos.f_rtddExt = MediumExt.EoS.f_rtdd(deltaInt,tauInt);
-  eos.f_rttdInt = MediumInt.tau2_delta_d3_alpha_r_d_tau2_d_delta(deltaInt,tauInt)
-      /tauInt^2/deltaInt;
+  eos.f_rttdInt = MediumInt.tau2_delta_d3_alpha_r_d_tau2_d_delta(
+    deltaInt,tauInt)/tauInt^2/deltaInt;
   eos.f_rttdExt = MediumExt.EoS.f_rttd(deltaInt,tauInt);
 
   eos.df_i = (eos.f_iInt-eos.f_iExt);
@@ -272,9 +274,11 @@ equation
   // Calculate saturation properties
   //
   saturation.p_satInt = MediumInt.saturationPressure(T_sat);
-  saturation.p_satExt = MediumExt.saturationPressure_sat(MediumExt.setSat_T(T_sat));
+  saturation.p_satExt = MediumExt.saturationPressure_sat(
+    MediumExt.setSat_T(T_sat));
   saturation.T_satInt = MediumInt.saturationTemperature(p_sat);
-  saturation.T_satExt = MediumExt.saturationTemperature_sat(MediumExt.setSat_p(p_sat));
+  saturation.T_satExt = MediumExt.saturationTemperature_sat(
+    MediumExt.setSat_p(p_sat));
   saturation.d_lInt = MediumInt.bubbleDensity(MediumInt.setSat_T(T_sat));
   saturation.d_lExt = MediumExt.bubbleDensity(MediumExt.setSat_T(T_sat));
   saturation.d_vInt = MediumInt.dewDensity(MediumInt.setSat_T(T_sat));
@@ -328,23 +332,40 @@ equation
       OutputCPUtime=true,
       OutputFlatModelica=false),
     Documentation(info="<html>
-<p>This example models checks the implementation of the<b> refrigerant&apos;s fitted formulas</b> depending on the independent variables density and temperature. Therefore, the user has first to introduce some information about the refrigerant and afterwards the fitted formulas are calculated. The following <b>refrigerant&apos;s information</b> is required:</p>
+<p>
+This example models checks the implementation of the<b> refrigerant&apos;s
+fitted formulas</b> depending on the independent variables density and
+temperature. Therefore, the user has first to introduce some information
+about the refrigerant and afterwards the fitted formulas are calculated.
+The following <b>refrigerant&apos;s information</b> is required:
+</p>
 <ol>
-<li>The <i>refrigerant package</i> that shall be tested.</li>
-<li>The <i>refrigerant&apos;s fluid limits</i> that are determined by the fitting procedure.</li>
+<li>The <i>refrigerant package</i> that
+shall be tested.</li>
+<li>The <i>refrigerant&apos;s fluid limits</i> that are
+determined by the fitting procedure.</li>
 </ol>
-<p>The following <b>refrigerant&apos;s fitted formulas </b> are calculated and checked:</p>
+<p>
+The following <b>refrigerant&apos;s fitted formulas </b> are
+calculated and checked:
+</p>
 <ol>
 <li>Calculation of the Helmholtz equation of state.</li>
 <li>Calculation of the saturation properties.</li>
-<li>Calculation of further state propeties like the density depending on pressure and temperature.</li>
+<li>Calculation of further state propeties like the density
+depending on pressure and temperature.</li>
 </ol>
-<p>Additionally, the fitted formulas are also calculated with an external media libary (i.e. HelmholtzMedia) and errors between the external and internal medium are calculated.</p>
+<p>
+Additionally, the fitted formulas are also calculated with an external
+media libary (i.e. HelmholtzMedia) and errors between the external and
+internal medium are calculated.
+</p>
 </html>", revisions="<html>
 <ul>
   <li>
   August 13, 2017, by Mirko Engelpracht:<br/>
-  First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
+  First implementation
+  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
 </ul>
 </html>"));
