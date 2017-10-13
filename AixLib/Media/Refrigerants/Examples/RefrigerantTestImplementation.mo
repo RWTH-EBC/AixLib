@@ -1,5 +1,5 @@
 within AixLib.Media.Refrigerants.Examples;
-model RefrigerantTestImplementationB
+model RefrigerantTestImplementation
   "Model to test the refrigerant implementation"
   extends Modelica.Icons.Example;
   extends Modelica.Media.Examples.Tests.Components.PartialTestModel2(
@@ -37,4 +37,4 @@ revisions="<html>
       OutputCPUtime=true,
       OutputFlatModelica=false),
     __Dymola_experimentSetupOutput);
-end RefrigerantTestImplementationB;
+end RefrigerantTestImplementation;

@@ -4,7 +4,8 @@ model BranchingDynamicPipes
   extends Modelica.Fluid.Examples.BranchingDynamicPipes(
     redeclare package Medium =
         AixLib.Media.Refrigerants.R134a.R134a_IIR_P1_395_T233_455_Horner,
-        system(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial));
+        system(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial),
+        ramp1(duration=1e-12));
 
 annotation (Documentation(revisions="<html>
 <ul>
@@ -22,6 +23,8 @@ model described in
 <a href=\"modelica://Modelica.Fluid.Examples.BranchingDynamicPipes \">
 Modelica.Fluid.Examples.BranchingDynamicPipes
 </a>.
+However, the discrete change in pressure leads to numerical instability and,
+therefore, the duration of pressure change is set to t = 1e-12 s.
 </p>
-</html>"), experiment(StopTime=5));
+</html>"));
 end BranchingDynamicPipes;
