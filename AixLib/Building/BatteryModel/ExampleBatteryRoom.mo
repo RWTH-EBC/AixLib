@@ -98,13 +98,12 @@ model ExampleBatteryRoom "Example for a battery room with the thermal loss
     type 1 batteries."
     annotation (Placement(transformation(extent={{-20,-20},{20,20}})));
 
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b ConvHeatSink
-    "Sink of the convection heat flow" annotation (Placement(transformation(
-          extent={{92,-28},{108,-12}}), iconTransformation(extent={{92,-28},{
-            108,-12}})));
-  Utilities.Interfaces.Star RadHeatSink "Sink of the radiation heat flow"
-    annotation (Placement(transformation(extent={{92,14},{106,26}}),
-        iconTransformation(extent={{98,6},{124,32}})));
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature radTemp(T=293.15)
+    "Radiative heat"
+    annotation (Placement(transformation(extent={{100,0},{80,20}})));
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature convTemp(T=293.15)
+    "Convetive heat"
+    annotation (Placement(transformation(extent={{100,-32},{80,-12}})));
 equation
   connect(ThermalLoss1.y, BatRoom.ThermalLossBat1)
     annotation (Line(points={{-59,0},{-40,0},{-40,8},{-16,8}},
@@ -112,12 +111,10 @@ equation
   connect(ThermalLoss2.y, BatRoom.ThermalLossBat2)
     annotation (Line(points={{-59,-30},{-40,-30},{-40,-8},{-16,-8}},
                 color={0,0,127}));
-  connect(BatRoom.PortConv, ConvHeatSink) annotation (Line(points={{18,-4},{26,
-          -4},{26,-20},{100,-20}}, color={191,0,0}));
-  connect(BatRoom.Star, RadHeatSink) annotation (Line(points={{18,4},{26,4},{26,
-          20},{99,20}}, color={95,95,95}));
-  connect(ConvHeatSink, ConvHeatSink)
-    annotation (Line(points={{100,-20},{100,-20}}, color={191,0,0}));
+  connect(BatRoom.Star, radTemp.port) annotation (Line(points={{18,4},{50,4},{
+          50,10},{80,10}}, color={95,95,95}));
+  connect(BatRoom.PortConv, convTemp.port) annotation (Line(points={{18,-4},{50,
+          -4},{50,-22},{80,-22}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Ellipse(lineColor = {75,138,73},
                 fillColor={255,255,255},

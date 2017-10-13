@@ -1,0 +1,8 @@
+ 
+Compiling and linking the model (Visual C++). 
+ 
+dsmodel.c
+   Creating library dymosim.lib and object dymosim.exp
+ 
+Successful generation of Dymosim. 
+ 

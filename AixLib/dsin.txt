@@ -1,0 +1,2079 @@
+#1
+char Aclass(3,24)
+Adymosim
+1.4
+Modelica experiment file
+
+
+#    Experiment parameters
+double experiment(7,1)
+       0                   # StartTime    Time at which integration starts
+                           #              (and linearization and trimming time)
+    1000                   # StopTime     Time at which integration stops
+       0                   # Increment    Communication step size, if > 0
+     500                   # nInterval    Number of communication intervals, if > 0
+ 1.0000000000000000E-004   # Tolerance    Relative precision of signals for
+                           #              simulation, linearization and trimming
+       0                   # MaxFixedStep Maximum step size of fixed step size
+                           #              integrators, if > 0.0
+       8                   # Algorithm    Integration algorithm as integer (1...28)
+                           #
+                           #             | model|       |        | dense | state |
+                           # Algorithm   | typ  | stiff | order  | output| event |
+                           # ------------+------+-------+--------+-------+-------+
+                           #  1 | deabm  |  ode |   no  |  1-12  |  yes  |   no  |
+                           #  2 | lsode1 |  ode |   no  |  1-12  |  yes  |   no  |
+                           #  3 | lsode2 |  ode |  yes  |  1-5   |  yes  |   no  |
+                           #  4 | lsodar |  ode |  both |1-12,1-5|  yes  |  yes  |
+                           #  5 | dopri5 |  ode |   no  |   5    |   no  |   no  |
+                           #  6 | dopri8 |  ode |   no  |   8    |   no  |   no  |
+                           #  7 | grk4t  |  ode |  yes  |   4    |   no  |   no  |
+                           #  8 | dassl  |  dae |  yes  |  1-5   |  yes  |  yes  |
+                           #  9 | odassl | hdae |  yes  |  1-5   |  yes  |  yes  |
+                           # 10 | mexx   | hdae |   no  |  2-24  |   no  |   no  |
+                           # 11 | euler  |  ode |   no  |   1    |   no  |  yes  |
+                           # 12 | rkfix2 |  ode |   no  |   2    |   no  |  yes  |
+                           # 13 | rkfix3 |  ode |   no  |   3    |   no  |  yes  |
+                           # 14 | rkfix4 |  ode |   no  |   4    |   no  |  yes  |
+                           #>=14| others |  ode |yes/no |  2-5   |   yes |  yes  |
+                           # ---+--------+------+-------+--------+-------+-------+
+                           # euler and rkfix have fixed stepsize.
+
+
+#    Method tuning parameters
+double method(27,1)
+       1                   # grid     type of communication time grid, defined by
+                           #          = 1: equidistant points ("Increment/nInterval")
+                           #          = 2: vector of grid points ("tgrid")
+                           #          = 3: variable step integrator (automatically)
+                           #          = 4: model (call of "increment" in Dymola, e.g.
+                           #                      incr=Time > 2 then 0 else 0.1
+                           #                      dummy=increment(incr))
+                           #          grid = 1,3 is stopped by "StopTime"
+                           #          grid = 2   is stopped by "tgrid(last)"
+                           #          grid = 4   runs forever (stopped by model)
+       1                   # nt       Use every NT time instant, if grid = 3
+       3                   # dense    1/2/3 restart/step/interpolate GRID points
+       1                   # evgrid   0/1 do not/save event points in comm. time grid
+       1                   # evu      0/1 U-discontinuity does not/trigger events
+       0                   # evuord       U-discontinuity order to consider (0,1,...)
+       0                   # error    0/1/2 One message/warning/error messages
+       0                   # jac      0/1 Compute jacobian numerically/by BLOCKJ
+       0                   # xd0c     0/1 Compute/set XD0
+       0                   # f3       0/1 Ignore/use F3 of HDAE (= index 1)
+       0                   # f4       0/1 Ignore/use F4 of HDAE (= index 2)
+       0                   # f5       0/1 Ignore/use F5 of HDAE (= invar.)
+       0                   # debug    flags for debug information (1<<0 uses pdebug) 
+     100                   # pdebug       priority of debug information (1...100)
+       0                   # fmax     Maximum number of evaluations of BLOCKF, if > 0
+       0                   # ordmax   Maximum allowed integration order, if > 0
+       0                   # hmax     Maximum absolute stepsize, if > 0
+       0                   # hmin     Minimum absolute stepsize, if > 0 (use with care!)
+       0                   # h0       Stepsize to be attempted on first step, if > 0
+ 2.0000000000000000E-014   # teps     Bound to check, if 2 equal time instants
+ 1.0000000000000000E-010   # eveps    Hysteresis epsilon at event points
+      20                   # eviter   Maximum number of event iterations
+ 9.9999999999999995E-007   # delaym   Minimum time increment in delay buffers
+       1                   # fexcep   0/1 floating exception crashes/stops dymosim
+       1                   # tscale   clock-time = tscale*simulation-time, if grid = 5
+                           #          > 1: simulation too slow
+                           #          = 1: simulation-time = real-time
+                           #          < 1: simulation too fast
+       1                   # shared   (not used)
+    2473                   # memkey   (not used)
+
+
+#    Output parameters
+int settings(13,1)
+ 0                         # lprec    0/1 do not/store result data in double
+ 1                         # lx       0/1 do not/store x  (state variables)
+ 1                         # lxd      0/1 do not/store xd (derivative of states)
+ 1                         # lu       0/1 do not/store u  (input     signals)
+ 1                         # ly       0/1 do not/store y  (output    signals)
+ 0                         # lz       0/1 do not/store z  (indicator signals)
+ 1                         # lw       0/1 do not/store w  (auxiliary signals)
+ 1                         # la       0/1 do not/store a  (alias     signals)
+ 0                         # lperf    0/1 do not/store performance indicators
+ 0                         # levent   0/1 do not/store event point
+ 1                         # lres     0/1 do not/store results on result file
+ 0                         # lshare   0/1 do not/store info data for shared memory on dsshare.txt
+ 1                         # lform    0/1 ASCII/Matlab-binary storage format of results
+                           #              (for simulation/linearization; not for trimming)
+
+
+#    Names of initial variables
+char initialName(640,55)
+ThermalLoss1.height
+ThermalLoss1.duration
+ThermalLoss1.offset
+ThermalLoss1.startTime
+ThermalLoss1.y
+ThermalLoss2.height
+ThermalLoss2.duration
+ThermalLoss2.offset
+ThermalLoss2.startTime
+ThermalLoss2.y
+BatRoom.nBatRack
+BatRoom.nBatType
+BatRoom.batType01
+BatRoom.batType02
+BatRoom.batType03
+BatRoom.batType04
+BatRoom.batType05
+BatRoom.batType06
+BatRoom.batType07
+BatRoom.batType08
+BatRoom.batType09
+BatRoom.batType10
+BatRoom.rackParameters[1].batType.height
+BatRoom.rackParameters[1].batType.width
+BatRoom.rackParameters[1].batType.length
+BatRoom.rackParameters[1].batType.cp
+BatRoom.rackParameters[1].batType.massBat
+BatRoom.rackParameters[1].batType.radiationArea
+BatRoom.rackParameters[1].batType.eps
+BatRoom.rackParameters[1].nParallel
+BatRoom.rackParameters[1].nSeries
+BatRoom.rackParameters[1].nStacked
+BatRoom.rackParameters[1].airBetweenStacks
+BatRoom.rackParameters[1].batArrangement
+BatRoom.rackParameters[1].areaStandingAtWall
+BatRoom.rackParameters[2].batType.height
+BatRoom.rackParameters[2].batType.width
+BatRoom.rackParameters[2].batType.length
+BatRoom.rackParameters[2].batType.cp
+BatRoom.rackParameters[2].batType.massBat
+BatRoom.rackParameters[2].batType.radiationArea
+BatRoom.rackParameters[2].batType.eps
+BatRoom.rackParameters[2].nParallel
+BatRoom.rackParameters[2].nSeries
+BatRoom.rackParameters[2].nStacked
+BatRoom.rackParameters[2].airBetweenStacks
+BatRoom.rackParameters[2].batArrangement
+BatRoom.rackParameters[2].areaStandingAtWall
+BatRoom.rackParameters[3].batType.height
+BatRoom.rackParameters[3].batType.width
+BatRoom.rackParameters[3].batType.length
+BatRoom.rackParameters[3].batType.cp
+BatRoom.rackParameters[3].batType.massBat
+BatRoom.rackParameters[3].batType.radiationArea
+BatRoom.rackParameters[3].batType.eps
+BatRoom.rackParameters[3].nParallel
+BatRoom.rackParameters[3].nSeries
+BatRoom.rackParameters[3].nStacked
+BatRoom.rackParameters[3].airBetweenStacks
+BatRoom.rackParameters[3].batArrangement
+BatRoom.rackParameters[3].areaStandingAtWall
+BatRoom.rackParameters[4].batType.height
+BatRoom.rackParameters[4].batType.width
+BatRoom.rackParameters[4].batType.length
+BatRoom.rackParameters[4].batType.cp
+BatRoom.rackParameters[4].batType.massBat
+BatRoom.rackParameters[4].batType.radiationArea
+BatRoom.rackParameters[4].batType.eps
+BatRoom.rackParameters[4].nParallel
+BatRoom.rackParameters[4].nSeries
+BatRoom.rackParameters[4].nStacked
+BatRoom.rackParameters[4].airBetweenStacks
+BatRoom.rackParameters[4].batArrangement
+BatRoom.rackParameters[4].areaStandingAtWall
+BatRoom.rackParameters[5].batType.height
+BatRoom.rackParameters[5].batType.width
+BatRoom.rackParameters[5].batType.length
+BatRoom.rackParameters[5].batType.cp
+BatRoom.rackParameters[5].batType.massBat
+BatRoom.rackParameters[5].batType.radiationArea
+BatRoom.rackParameters[5].batType.eps
+BatRoom.rackParameters[5].nParallel
+BatRoom.rackParameters[5].nSeries
+BatRoom.rackParameters[5].nStacked
+BatRoom.rackParameters[5].airBetweenStacks
+BatRoom.rackParameters[5].batArrangement
+BatRoom.rackParameters[5].areaStandingAtWall
+BatRoom.rackParameters[6].batType.height
+BatRoom.rackParameters[6].batType.width
+BatRoom.rackParameters[6].batType.length
+BatRoom.rackParameters[6].batType.cp
+BatRoom.rackParameters[6].batType.massBat
+BatRoom.rackParameters[6].batType.radiationArea
+BatRoom.rackParameters[6].batType.eps
+BatRoom.rackParameters[6].nParallel
+BatRoom.rackParameters[6].nSeries
+BatRoom.rackParameters[6].nStacked
+BatRoom.rackParameters[6].airBetweenStacks
+BatRoom.rackParameters[6].batArrangement
+BatRoom.rackParameters[6].areaStandingAtWall
+BatRoom.rackParameters[7].batType.height
+BatRoom.rackParameters[7].batType.width
+BatRoom.rackParameters[7].batType.length
+BatRoom.rackParameters[7].batType.cp
+BatRoom.rackParameters[7].batType.massBat
+BatRoom.rackParameters[7].batType.radiationArea
+BatRoom.rackParameters[7].batType.eps
+BatRoom.rackParameters[7].nParallel
+BatRoom.rackParameters[7].nSeries
+BatRoom.rackParameters[7].nStacked
+BatRoom.rackParameters[7].airBetweenStacks
+BatRoom.rackParameters[7].batArrangement
+BatRoom.rackParameters[7].areaStandingAtWall
+BatRoom.rackParameters[8].batType.height
+BatRoom.rackParameters[8].batType.width
+BatRoom.rackParameters[8].batType.length
+BatRoom.rackParameters[8].batType.cp
+BatRoom.rackParameters[8].batType.massBat
+BatRoom.rackParameters[8].batType.radiationArea
+BatRoom.rackParameters[8].batType.eps
+BatRoom.rackParameters[8].nParallel
+BatRoom.rackParameters[8].nSeries
+BatRoom.rackParameters[8].nStacked
+BatRoom.rackParameters[8].airBetweenStacks
+BatRoom.rackParameters[8].batArrangement
+BatRoom.rackParameters[8].areaStandingAtWall
+BatRoom.rackParameters[9].batType.height
+BatRoom.rackParameters[9].batType.width
+BatRoom.rackParameters[9].batType.length
+BatRoom.rackParameters[9].batType.cp
+BatRoom.rackParameters[9].batType.massBat
+BatRoom.rackParameters[9].batType.radiationArea
+BatRoom.rackParameters[9].batType.eps
+BatRoom.rackParameters[9].nParallel
+BatRoom.rackParameters[9].nSeries
+BatRoom.rackParameters[9].nStacked
+BatRoom.rackParameters[9].airBetweenStacks
+BatRoom.rackParameters[9].batArrangement
+BatRoom.rackParameters[9].areaStandingAtWall
+BatRoom.rackParameters[10].batType.height
+BatRoom.rackParameters[10].batType.width
+BatRoom.rackParameters[10].batType.length
+BatRoom.rackParameters[10].batType.cp
+BatRoom.rackParameters[10].batType.massBat
+BatRoom.rackParameters[10].batType.radiationArea
+BatRoom.rackParameters[10].batType.eps
+BatRoom.rackParameters[10].nParallel
+BatRoom.rackParameters[10].nSeries
+BatRoom.rackParameters[10].nStacked
+BatRoom.rackParameters[10].airBetweenStacks
+BatRoom.rackParameters[10].batArrangement
+BatRoom.rackParameters[10].areaStandingAtWall
+BatRoom.PortConv.Q_flow
+BatRoom.Star.Q_flow
+BatRoom.BatRack01.batType.height
+BatRoom.BatRack01.batType.width
+BatRoom.BatRack01.batType.length
+BatRoom.BatRack01.batType.cp
+BatRoom.BatRack01.batType.massBat
+BatRoom.BatRack01.batType.radiationArea
+BatRoom.BatRack01.batType.eps
+BatRoom.BatRack01.nParallel
+BatRoom.BatRack01.nSeries
+BatRoom.BatRack01.nStacked
+BatRoom.BatRack01.nBat
+BatRoom.BatRack01.airBetweenStacks
+BatRoom.BatRack01.batArrangement
+BatRoom.BatRack01.areaStandingAtWall
+BatRoom.BatRack01.ThermalLoss
+BatRoom.BatRack01.PrescribedHeatFlow.T_ref
+BatRoom.BatRack01.PrescribedHeatFlow.alpha
+BatRoom.BatRack01.PrescribedHeatFlow.port.Q_flow
+BatRoom.BatRack01.HeatCapBat.C
+BatRoom.BatRack01.HeatCapBat.T
+BatRoom.BatRack01.HeatCapBat.der(T)
+BatRoom.BatRack01.HeatCapBat.port.Q_flow
+BatRoom.BatRack01.TemperatureSensor.port.Q_flow
+BatRoom.BatRack01.HeatConvFluidOnTop.Q_flow
+BatRoom.BatRack01.HeatConvFluidOnTop.dT
+BatRoom.BatRack01.HeatConvFluidOnTop.calcMethod
+BatRoom.BatRack01.HeatConvFluidOnTop.alpha_custom
+BatRoom.BatRack01.HeatConvFluidOnTop.surfaceOrientation
+BatRoom.BatRack01.HeatConvFluidOnTop.A
+BatRoom.BatRack01.HeatConvFluidOnTop.alpha
+BatRoom.BatRack01.HeatConvFluidOnTop.posDiff
+BatRoom.BatRack01.HeatConvVertical.Q_flow
+BatRoom.BatRack01.HeatConvVertical.dT
+BatRoom.BatRack01.HeatConvVertical.calcMethod
+BatRoom.BatRack01.HeatConvVertical.alpha_custom
+BatRoom.BatRack01.HeatConvVertical.surfaceOrientation
+BatRoom.BatRack01.HeatConvVertical.A
+BatRoom.BatRack01.HeatConvVertical.alpha
+BatRoom.BatRack01.HeatConvVertical.posDiff
+BatRoom.BatRack01.PortConv.Q_flow
+BatRoom.BatRack01.Star.Q_flow
+BatRoom.BatRack01.HeatToStar.A
+BatRoom.BatRack01.HeatToStar.eps
+BatRoom.BatRack02.batType.height
+BatRoom.BatRack02.batType.width
+BatRoom.BatRack02.batType.length
+BatRoom.BatRack02.batType.cp
+BatRoom.BatRack02.batType.massBat
+BatRoom.BatRack02.batType.radiationArea
+BatRoom.BatRack02.batType.eps
+BatRoom.BatRack02.nParallel
+BatRoom.BatRack02.nSeries
+BatRoom.BatRack02.nStacked
+BatRoom.BatRack02.nBat
+BatRoom.BatRack02.airBetweenStacks
+BatRoom.BatRack02.batArrangement
+BatRoom.BatRack02.areaStandingAtWall
+BatRoom.BatRack02.ThermalLoss
+BatRoom.BatRack02.PrescribedHeatFlow.T_ref
+BatRoom.BatRack02.PrescribedHeatFlow.alpha
+BatRoom.BatRack02.PrescribedHeatFlow.port.Q_flow
+BatRoom.BatRack02.HeatCapBat.C
+BatRoom.BatRack02.HeatCapBat.T
+BatRoom.BatRack02.HeatCapBat.der(T)
+BatRoom.BatRack02.HeatCapBat.port.Q_flow
+BatRoom.BatRack02.TemperatureSensor.port.Q_flow
+BatRoom.BatRack02.HeatConvFluidOnTop.Q_flow
+BatRoom.BatRack02.HeatConvFluidOnTop.dT
+BatRoom.BatRack02.HeatConvFluidOnTop.calcMethod
+BatRoom.BatRack02.HeatConvFluidOnTop.alpha_custom
+BatRoom.BatRack02.HeatConvFluidOnTop.surfaceOrientation
+BatRoom.BatRack02.HeatConvFluidOnTop.A
+BatRoom.BatRack02.HeatConvFluidOnTop.alpha
+BatRoom.BatRack02.HeatConvFluidOnTop.posDiff
+BatRoom.BatRack02.HeatConvVertical.Q_flow
+BatRoom.BatRack02.HeatConvVertical.dT
+BatRoom.BatRack02.HeatConvVertical.calcMethod
+BatRoom.BatRack02.HeatConvVertical.alpha_custom
+BatRoom.BatRack02.HeatConvVertical.surfaceOrientation
+BatRoom.BatRack02.HeatConvVertical.A
+BatRoom.BatRack02.HeatConvVertical.alpha
+BatRoom.BatRack02.HeatConvVertical.posDiff
+BatRoom.BatRack02.HeatToStar.A
+BatRoom.BatRack02.HeatToStar.eps
+BatRoom.BatRack03.batType.height
+BatRoom.BatRack03.batType.width
+BatRoom.BatRack03.batType.length
+BatRoom.BatRack03.batType.cp
+BatRoom.BatRack03.batType.massBat
+BatRoom.BatRack03.batType.radiationArea
+BatRoom.BatRack03.batType.eps
+BatRoom.BatRack03.nParallel
+BatRoom.BatRack03.nSeries
+BatRoom.BatRack03.nStacked
+BatRoom.BatRack03.nBat
+BatRoom.BatRack03.airBetweenStacks
+BatRoom.BatRack03.batArrangement
+BatRoom.BatRack03.areaStandingAtWall
+BatRoom.BatRack03.ThermalLoss
+BatRoom.BatRack03.PrescribedHeatFlow.T_ref
+BatRoom.BatRack03.PrescribedHeatFlow.alpha
+BatRoom.BatRack03.PrescribedHeatFlow.port.Q_flow
+BatRoom.BatRack03.HeatCapBat.C
+BatRoom.BatRack03.HeatCapBat.T
+BatRoom.BatRack03.HeatCapBat.der(T)
+BatRoom.BatRack03.HeatCapBat.port.Q_flow
+BatRoom.BatRack03.TemperatureSensor.port.Q_flow
+BatRoom.BatRack03.HeatConvFluidOnTop.Q_flow
+BatRoom.BatRack03.HeatConvFluidOnTop.dT
+BatRoom.BatRack03.HeatConvFluidOnTop.calcMethod
+BatRoom.BatRack03.HeatConvFluidOnTop.alpha_custom
+BatRoom.BatRack03.HeatConvFluidOnTop.surfaceOrientation
+BatRoom.BatRack03.HeatConvFluidOnTop.A
+BatRoom.BatRack03.HeatConvFluidOnTop.alpha
+BatRoom.BatRack03.HeatConvFluidOnTop.posDiff
+BatRoom.BatRack03.HeatConvVertical.Q_flow
+BatRoom.BatRack03.HeatConvVertical.dT
+BatRoom.BatRack03.HeatConvVertical.calcMethod
+BatRoom.BatRack03.HeatConvVertical.alpha_custom
+BatRoom.BatRack03.HeatConvVertical.surfaceOrientation
+BatRoom.BatRack03.HeatConvVertical.A
+BatRoom.BatRack03.HeatConvVertical.alpha
+BatRoom.BatRack03.HeatConvVertical.posDiff
+BatRoom.BatRack03.HeatToStar.A
+BatRoom.BatRack03.HeatToStar.eps
+BatRoom.BatRack04.batType.height
+BatRoom.BatRack04.batType.width
+BatRoom.BatRack04.batType.length
+BatRoom.BatRack04.batType.cp
+BatRoom.BatRack04.batType.massBat
+BatRoom.BatRack04.batType.radiationArea
+BatRoom.BatRack04.batType.eps
+BatRoom.BatRack04.nParallel
+BatRoom.BatRack04.nSeries
+BatRoom.BatRack04.nStacked
+BatRoom.BatRack04.nBat
+BatRoom.BatRack04.airBetweenStacks
+BatRoom.BatRack04.batArrangement
+BatRoom.BatRack04.areaStandingAtWall
+BatRoom.BatRack04.ThermalLoss
+BatRoom.BatRack04.PrescribedHeatFlow.T_ref
+BatRoom.BatRack04.PrescribedHeatFlow.alpha
+BatRoom.BatRack04.PrescribedHeatFlow.port.Q_flow
+BatRoom.BatRack04.HeatCapBat.C
+BatRoom.BatRack04.HeatCapBat.T
+BatRoom.BatRack04.HeatCapBat.der(T)
+BatRoom.BatRack04.HeatCapBat.port.Q_flow
+BatRoom.BatRack04.TemperatureSensor.port.Q_flow
+BatRoom.BatRack04.HeatConvFluidOnTop.Q_flow
+BatRoom.BatRack04.HeatConvFluidOnTop.dT
+BatRoom.BatRack04.HeatConvFluidOnTop.calcMethod
+BatRoom.BatRack04.HeatConvFluidOnTop.alpha_custom
+BatRoom.BatRack04.HeatConvFluidOnTop.surfaceOrientation
+BatRoom.BatRack04.HeatConvFluidOnTop.A
+BatRoom.BatRack04.HeatConvFluidOnTop.alpha
+BatRoom.BatRack04.HeatConvFluidOnTop.posDiff
+BatRoom.BatRack04.HeatConvVertical.Q_flow
+BatRoom.BatRack04.HeatConvVertical.dT
+BatRoom.BatRack04.HeatConvVertical.calcMethod
+BatRoom.BatRack04.HeatConvVertical.alpha_custom
+BatRoom.BatRack04.HeatConvVertical.surfaceOrientation
+BatRoom.BatRack04.HeatConvVertical.A
+BatRoom.BatRack04.HeatConvVertical.alpha
+BatRoom.BatRack04.HeatConvVertical.posDiff
+BatRoom.BatRack04.HeatToStar.A
+BatRoom.BatRack04.HeatToStar.eps
+BatRoom.BatRack05.batType.height
+BatRoom.BatRack05.batType.width
+BatRoom.BatRack05.batType.length
+BatRoom.BatRack05.batType.cp
+BatRoom.BatRack05.batType.massBat
+BatRoom.BatRack05.batType.radiationArea
+BatRoom.BatRack05.batType.eps
+BatRoom.BatRack05.nParallel
+BatRoom.BatRack05.nSeries
+BatRoom.BatRack05.nStacked
+BatRoom.BatRack05.nBat
+BatRoom.BatRack05.airBetweenStacks
+BatRoom.BatRack05.batArrangement
+BatRoom.BatRack05.areaStandingAtWall
+BatRoom.BatRack05.ThermalLoss
+BatRoom.BatRack05.PrescribedHeatFlow.T_ref
+BatRoom.BatRack05.PrescribedHeatFlow.alpha
+BatRoom.BatRack05.PrescribedHeatFlow.port.Q_flow
+BatRoom.BatRack05.HeatCapBat.C
+BatRoom.BatRack05.HeatCapBat.T
+BatRoom.BatRack05.HeatCapBat.der(T)
+BatRoom.BatRack05.HeatCapBat.port.Q_flow
+BatRoom.BatRack05.TemperatureSensor.port.Q_flow
+BatRoom.BatRack05.HeatConvFluidOnTop.Q_flow
+BatRoom.BatRack05.HeatConvFluidOnTop.dT
+BatRoom.BatRack05.HeatConvFluidOnTop.calcMethod
+BatRoom.BatRack05.HeatConvFluidOnTop.alpha_custom
+BatRoom.BatRack05.HeatConvFluidOnTop.surfaceOrientation
+BatRoom.BatRack05.HeatConvFluidOnTop.A
+BatRoom.BatRack05.HeatConvFluidOnTop.alpha
+BatRoom.BatRack05.HeatConvFluidOnTop.posDiff
+BatRoom.BatRack05.HeatConvVertical.Q_flow
+BatRoom.BatRack05.HeatConvVertical.dT
+BatRoom.BatRack05.HeatConvVertical.calcMethod
+BatRoom.BatRack05.HeatConvVertical.alpha_custom
+BatRoom.BatRack05.HeatConvVertical.surfaceOrientation
+BatRoom.BatRack05.HeatConvVertical.A
+BatRoom.BatRack05.HeatConvVertical.alpha
+BatRoom.BatRack05.HeatConvVertical.posDiff
+BatRoom.BatRack05.HeatToStar.A
+BatRoom.BatRack05.HeatToStar.eps
+BatRoom.BatRack06.batType.height
+BatRoom.BatRack06.batType.width
+BatRoom.BatRack06.batType.length
+BatRoom.BatRack06.batType.cp
+BatRoom.BatRack06.batType.massBat
+BatRoom.BatRack06.batType.radiationArea
+BatRoom.BatRack06.batType.eps
+BatRoom.BatRack06.nParallel
+BatRoom.BatRack06.nSeries
+BatRoom.BatRack06.nStacked
+BatRoom.BatRack06.nBat
+BatRoom.BatRack06.airBetweenStacks
+BatRoom.BatRack06.batArrangement
+BatRoom.BatRack06.areaStandingAtWall
+BatRoom.BatRack06.ThermalLoss
+BatRoom.BatRack06.PrescribedHeatFlow.T_ref
+BatRoom.BatRack06.PrescribedHeatFlow.alpha
+BatRoom.BatRack06.PrescribedHeatFlow.port.Q_flow
+BatRoom.BatRack06.HeatCapBat.C
+BatRoom.BatRack06.HeatCapBat.T
+BatRoom.BatRack06.HeatCapBat.der(T)
+BatRoom.BatRack06.HeatCapBat.port.Q_flow
+BatRoom.BatRack06.TemperatureSensor.port.Q_flow
+BatRoom.BatRack06.HeatConvFluidOnTop.Q_flow
+BatRoom.BatRack06.HeatConvFluidOnTop.dT
+BatRoom.BatRack06.HeatConvFluidOnTop.calcMethod
+BatRoom.BatRack06.HeatConvFluidOnTop.alpha_custom
+BatRoom.BatRack06.HeatConvFluidOnTop.surfaceOrientation
+BatRoom.BatRack06.HeatConvFluidOnTop.A
+BatRoom.BatRack06.HeatConvFluidOnTop.alpha
+BatRoom.BatRack06.HeatConvFluidOnTop.posDiff
+BatRoom.BatRack06.HeatConvVertical.Q_flow
+BatRoom.BatRack06.HeatConvVertical.dT
+BatRoom.BatRack06.HeatConvVertical.calcMethod
+BatRoom.BatRack06.HeatConvVertical.alpha_custom
+BatRoom.BatRack06.HeatConvVertical.surfaceOrientation
+BatRoom.BatRack06.HeatConvVertical.A
+BatRoom.BatRack06.HeatConvVertical.alpha
+BatRoom.BatRack06.HeatConvVertical.posDiff
+BatRoom.BatRack06.HeatToStar.A
+BatRoom.BatRack06.HeatToStar.eps
+BatRoom.BatRack07.batType.height
+BatRoom.BatRack07.batType.width
+BatRoom.BatRack07.batType.length
+BatRoom.BatRack07.batType.cp
+BatRoom.BatRack07.batType.massBat
+BatRoom.BatRack07.batType.radiationArea
+BatRoom.BatRack07.batType.eps
+BatRoom.BatRack07.nParallel
+BatRoom.BatRack07.nSeries
+BatRoom.BatRack07.nStacked
+BatRoom.BatRack07.nBat
+BatRoom.BatRack07.airBetweenStacks
+BatRoom.BatRack07.batArrangement
+BatRoom.BatRack07.areaStandingAtWall
+BatRoom.BatRack07.ThermalLoss
+BatRoom.BatRack07.PrescribedHeatFlow.T_ref
+BatRoom.BatRack07.PrescribedHeatFlow.alpha
+BatRoom.BatRack07.PrescribedHeatFlow.port.Q_flow
+BatRoom.BatRack07.HeatCapBat.C
+BatRoom.BatRack07.HeatCapBat.T
+BatRoom.BatRack07.HeatCapBat.der(T)
+BatRoom.BatRack07.HeatCapBat.port.Q_flow
+BatRoom.BatRack07.TemperatureSensor.port.Q_flow
+BatRoom.BatRack07.HeatConvFluidOnTop.Q_flow
+BatRoom.BatRack07.HeatConvFluidOnTop.dT
+BatRoom.BatRack07.HeatConvFluidOnTop.calcMethod
+BatRoom.BatRack07.HeatConvFluidOnTop.alpha_custom
+BatRoom.BatRack07.HeatConvFluidOnTop.surfaceOrientation
+BatRoom.BatRack07.HeatConvFluidOnTop.A
+BatRoom.BatRack07.HeatConvFluidOnTop.alpha
+BatRoom.BatRack07.HeatConvFluidOnTop.posDiff
+BatRoom.BatRack07.HeatConvVertical.Q_flow
+BatRoom.BatRack07.HeatConvVertical.dT
+BatRoom.BatRack07.HeatConvVertical.calcMethod
+BatRoom.BatRack07.HeatConvVertical.alpha_custom
+BatRoom.BatRack07.HeatConvVertical.surfaceOrientation
+BatRoom.BatRack07.HeatConvVertical.A
+BatRoom.BatRack07.HeatConvVertical.alpha
+BatRoom.BatRack07.HeatConvVertical.posDiff
+BatRoom.BatRack07.HeatToStar.A
+BatRoom.BatRack07.HeatToStar.eps
+BatRoom.BatRack08.batType.height
+BatRoom.BatRack08.batType.width
+BatRoom.BatRack08.batType.length
+BatRoom.BatRack08.batType.cp
+BatRoom.BatRack08.batType.massBat
+BatRoom.BatRack08.batType.radiationArea
+BatRoom.BatRack08.batType.eps
+BatRoom.BatRack08.nParallel
+BatRoom.BatRack08.nSeries
+BatRoom.BatRack08.nStacked
+BatRoom.BatRack08.nBat
+BatRoom.BatRack08.airBetweenStacks
+BatRoom.BatRack08.batArrangement
+BatRoom.BatRack08.areaStandingAtWall
+BatRoom.BatRack08.ThermalLoss
+BatRoom.BatRack08.PrescribedHeatFlow.T_ref
+BatRoom.BatRack08.PrescribedHeatFlow.alpha
+BatRoom.BatRack08.PrescribedHeatFlow.port.Q_flow
+BatRoom.BatRack08.HeatCapBat.C
+BatRoom.BatRack08.HeatCapBat.T
+BatRoom.BatRack08.HeatCapBat.der(T)
+BatRoom.BatRack08.HeatCapBat.port.Q_flow
+BatRoom.BatRack08.TemperatureSensor.port.Q_flow
+BatRoom.BatRack08.HeatConvFluidOnTop.Q_flow
+BatRoom.BatRack08.HeatConvFluidOnTop.dT
+BatRoom.BatRack08.HeatConvFluidOnTop.calcMethod
+BatRoom.BatRack08.HeatConvFluidOnTop.alpha_custom
+BatRoom.BatRack08.HeatConvFluidOnTop.surfaceOrientation
+BatRoom.BatRack08.HeatConvFluidOnTop.A
+BatRoom.BatRack08.HeatConvFluidOnTop.alpha
+BatRoom.BatRack08.HeatConvFluidOnTop.posDiff
+BatRoom.BatRack08.HeatConvVertical.Q_flow
+BatRoom.BatRack08.HeatConvVertical.dT
+BatRoom.BatRack08.HeatConvVertical.calcMethod
+BatRoom.BatRack08.HeatConvVertical.alpha_custom
+BatRoom.BatRack08.HeatConvVertical.surfaceOrientation
+BatRoom.BatRack08.HeatConvVertical.A
+BatRoom.BatRack08.HeatConvVertical.alpha
+BatRoom.BatRack08.HeatConvVertical.posDiff
+BatRoom.BatRack08.HeatToStar.A
+BatRoom.BatRack08.HeatToStar.eps
+BatRoom.BatRack09.batType.height
+BatRoom.BatRack09.batType.width
+BatRoom.BatRack09.batType.length
+BatRoom.BatRack09.batType.cp
+BatRoom.BatRack09.batType.massBat
+BatRoom.BatRack09.batType.radiationArea
+BatRoom.BatRack09.batType.eps
+BatRoom.BatRack09.nParallel
+BatRoom.BatRack09.nSeries
+BatRoom.BatRack09.nStacked
+BatRoom.BatRack09.nBat
+BatRoom.BatRack09.airBetweenStacks
+BatRoom.BatRack09.batArrangement
+BatRoom.BatRack09.areaStandingAtWall
+BatRoom.BatRack09.ThermalLoss
+BatRoom.BatRack09.PrescribedHeatFlow.T_ref
+BatRoom.BatRack09.PrescribedHeatFlow.alpha
+BatRoom.BatRack09.PrescribedHeatFlow.port.Q_flow
+BatRoom.BatRack09.HeatCapBat.C
+BatRoom.BatRack09.HeatCapBat.T
+BatRoom.BatRack09.HeatCapBat.der(T)
+BatRoom.BatRack09.HeatCapBat.port.Q_flow
+BatRoom.BatRack09.TemperatureSensor.port.Q_flow
+BatRoom.BatRack09.HeatConvFluidOnTop.Q_flow
+BatRoom.BatRack09.HeatConvFluidOnTop.dT
+BatRoom.BatRack09.HeatConvFluidOnTop.calcMethod
+BatRoom.BatRack09.HeatConvFluidOnTop.alpha_custom
+BatRoom.BatRack09.HeatConvFluidOnTop.surfaceOrientation
+BatRoom.BatRack09.HeatConvFluidOnTop.A
+BatRoom.BatRack09.HeatConvFluidOnTop.alpha
+BatRoom.BatRack09.HeatConvFluidOnTop.posDiff
+BatRoom.BatRack09.HeatConvVertical.Q_flow
+BatRoom.BatRack09.HeatConvVertical.dT
+BatRoom.BatRack09.HeatConvVertical.calcMethod
+BatRoom.BatRack09.HeatConvVertical.alpha_custom
+BatRoom.BatRack09.HeatConvVertical.surfaceOrientation
+BatRoom.BatRack09.HeatConvVertical.A
+BatRoom.BatRack09.HeatConvVertical.alpha
+BatRoom.BatRack09.HeatConvVertical.posDiff
+BatRoom.BatRack09.HeatToStar.A
+BatRoom.BatRack09.HeatToStar.eps
+BatRoom.BatRack10.batType.height
+BatRoom.BatRack10.batType.width
+BatRoom.BatRack10.batType.length
+BatRoom.BatRack10.batType.cp
+BatRoom.BatRack10.batType.massBat
+BatRoom.BatRack10.batType.radiationArea
+BatRoom.BatRack10.batType.eps
+BatRoom.BatRack10.nParallel
+BatRoom.BatRack10.nSeries
+BatRoom.BatRack10.nStacked
+BatRoom.BatRack10.nBat
+BatRoom.BatRack10.airBetweenStacks
+BatRoom.BatRack10.batArrangement
+BatRoom.BatRack10.areaStandingAtWall
+BatRoom.BatRack10.ThermalLoss
+BatRoom.BatRack10.PrescribedHeatFlow.T_ref
+BatRoom.BatRack10.PrescribedHeatFlow.alpha
+BatRoom.BatRack10.PrescribedHeatFlow.port.Q_flow
+BatRoom.BatRack10.HeatCapBat.C
+BatRoom.BatRack10.HeatCapBat.T
+BatRoom.BatRack10.HeatCapBat.der(T)
+BatRoom.BatRack10.HeatCapBat.port.Q_flow
+BatRoom.BatRack10.TemperatureSensor.port.Q_flow
+BatRoom.BatRack10.HeatConvFluidOnTop.Q_flow
+BatRoom.BatRack10.HeatConvFluidOnTop.dT
+BatRoom.BatRack10.HeatConvFluidOnTop.calcMethod
+BatRoom.BatRack10.HeatConvFluidOnTop.alpha_custom
+BatRoom.BatRack10.HeatConvFluidOnTop.surfaceOrientation
+BatRoom.BatRack10.HeatConvFluidOnTop.A
+BatRoom.BatRack10.HeatConvFluidOnTop.alpha
+BatRoom.BatRack10.HeatConvFluidOnTop.posDiff
+BatRoom.BatRack10.HeatConvVertical.Q_flow
+BatRoom.BatRack10.HeatConvVertical.dT
+BatRoom.BatRack10.HeatConvVertical.calcMethod
+BatRoom.BatRack10.HeatConvVertical.alpha_custom
+BatRoom.BatRack10.HeatConvVertical.surfaceOrientation
+BatRoom.BatRack10.HeatConvVertical.A
+BatRoom.BatRack10.HeatConvVertical.alpha
+BatRoom.BatRack10.HeatConvVertical.posDiff
+BatRoom.BatRack10.HeatToStar.A
+BatRoom.BatRack10.HeatToStar.eps
+BatRoom.LossFraction01.k
+BatRoom.LossFraction01.u
+BatRoom.LossFraction02.k
+BatRoom.LossFraction02.u
+BatRoom.LossFraction03.k
+BatRoom.LossFraction03.u
+BatRoom.LossFraction04.k
+BatRoom.LossFraction04.u
+BatRoom.LossFraction05.k
+BatRoom.LossFraction05.u
+BatRoom.LossFraction06.k
+BatRoom.LossFraction06.u
+BatRoom.LossFraction07.k
+BatRoom.LossFraction07.u
+BatRoom.LossFraction08.k
+BatRoom.LossFraction08.u
+BatRoom.LossFraction09.k
+BatRoom.LossFraction09.u
+BatRoom.LossFraction10.k
+BatRoom.LossFraction10.u
+BatRoom.ConvCollector.m
+BatRoom.ConvCollector.port_a[2].Q_flow
+BatRoom.ConvCollector.port_a[3].Q_flow
+BatRoom.ConvCollector.port_a[4].Q_flow
+BatRoom.ConvCollector.port_a[5].Q_flow
+BatRoom.ConvCollector.port_a[6].Q_flow
+BatRoom.ConvCollector.port_a[7].Q_flow
+BatRoom.ConvCollector.port_a[8].Q_flow
+BatRoom.ConvCollector.port_a[9].Q_flow
+BatRoom.ConvCollector.port_a[10].Q_flow
+BatRoom.RadCollector.m
+BatRoom.RadCollector.Star_a[2].Q_flow
+BatRoom.RadCollector.Star_a[3].Q_flow
+BatRoom.RadCollector.Star_a[4].Q_flow
+BatRoom.RadCollector.Star_a[5].Q_flow
+BatRoom.RadCollector.Star_a[6].Q_flow
+BatRoom.RadCollector.Star_a[7].Q_flow
+BatRoom.RadCollector.Star_a[8].Q_flow
+BatRoom.RadCollector.Star_a[9].Q_flow
+BatRoom.RadCollector.Star_a[10].Q_flow
+BatRoom.listBatType[1]
+BatRoom.listBatType[2]
+BatRoom.listBatType[3]
+BatRoom.listBatType[4]
+BatRoom.listBatType[5]
+BatRoom.listBatType[6]
+BatRoom.listBatType[7]
+BatRoom.listBatType[8]
+BatRoom.listBatType[9]
+BatRoom.listBatType[10]
+BatRoom.listNBat[1]
+BatRoom.listNBat[2]
+BatRoom.listNBat[3]
+BatRoom.listNBat[4]
+BatRoom.listNBat[5]
+BatRoom.listNBat[6]
+BatRoom.listNBat[7]
+BatRoom.listNBat[8]
+BatRoom.listNBat[9]
+BatRoom.listNBat[10]
+BatRoom.sumBatType1
+BatRoom.sumBatType2
+BatRoom.listFractionFactors[1]
+BatRoom.listFractionFactors[2]
+BatRoom.listFractionFactors[3]
+BatRoom.listFractionFactors[4]
+BatRoom.listFractionFactors[5]
+BatRoom.listFractionFactors[6]
+BatRoom.listFractionFactors[7]
+BatRoom.listFractionFactors[8]
+BatRoom.listFractionFactors[9]
+BatRoom.listFractionFactors[10]
+radTemp.T
+convTemp.T
+
+double initialValue(640,6)
+ -1 1.0000000000000000E+006  0       0                  1   280   # ThermalLoss1.height
+ -1     500                  0 1.0000000000000000E+100  1   280   # ThermalLoss1.duration
+ -1       0                  0       0                  1   280   # ThermalLoss1.offset
+ -1       2                  0       0                  1   280   # ThermalLoss1.startTime
+  0       0                  0       0                  6   256   # ThermalLoss1.y
+ -1 1.0000000000000000E+006  0       0                  1   280   # ThermalLoss2.height
+ -1     500                  0 1.0000000000000000E+100  1   280   # ThermalLoss2.duration
+ -1       0                  0       0                  1   280   # ThermalLoss2.offset
+ -1       2                  0       0                  1   280   # ThermalLoss2.startTime
+  0       0                  0       0                  6   256   # ThermalLoss2.y
+  0      10                  0       0                  6   258   # BatRoom.nBatRack
+  0       2                  0       0                  6   258   # BatRoom.nBatType
+ -1       1                  0       0                  1   281   # BatRoom.batType01
+ -1       1                  0       0                  1   281   # BatRoom.batType02
+ -1       0                  0       0                  1   281   # BatRoom.batType03
+ -1       0                  0       0                  1   281   # BatRoom.batType04
+ -1       1                  0       0                  1   281   # BatRoom.batType05
+ -1       1                  0       0                  1   281   # BatRoom.batType06
+ -1       1                  0       0                  1   281   # BatRoom.batType07
+ -1       1                  0       0                  1   281   # BatRoom.batType08
+ -1       1                  0       0                  1   281   # BatRoom.batType09
+ -1       1                  0       0                  1   281   # BatRoom.batType10
+ -1       1                  0 1.0000000000000000E+100  1   280   # BatRoom.rackParameters[1].batType.height
+ -1 5.0000000000000000E-001  0       0                  1   280   # BatRoom.rackParameters[1].batType.width
+ -1 2.0000000000000001E-001  0       0                  1   280   # BatRoom.rackParameters[1].batType.length
+ -1    1100                  0       0                  1   280   # BatRoom.rackParameters[1].batType.cp
+ -1     130                  0 1.0000000000000000E+100  1   280   # BatRoom.rackParameters[1].batType.massBat
+ -1      12                  0       0                  1   280   # BatRoom.rackParameters[1].batType.radiationArea
+ -1 9.4999999999999996E-001  0       0                  1   280   # BatRoom.rackParameters[1].batType.eps
+ -1       5                  0       0                  1   282   # BatRoom.rackParameters[1].nParallel
+ -1       2                  0       0                  1   282   # BatRoom.rackParameters[1].nSeries
+  0       2                  0       0                  6   258   # BatRoom.rackParameters[1].nStacked
+  0       0                  0       0                  6   257   # BatRoom.rackParameters[1].airBetweenStacks
+ -1       1                  0       0                  1   281   # BatRoom.rackParameters[1].batArrangement
+ -1       0                  0       0                  1   280   # BatRoom.rackParameters[1].areaStandingAtWall
+ -1       1                  0 1.0000000000000000E+100  1   280   # BatRoom.rackParameters[2].batType.height
+ -1 5.0000000000000000E-001  0       0                  1   280   # BatRoom.rackParameters[2].batType.width
+ -1 2.0000000000000001E-001  0       0                  1   280   # BatRoom.rackParameters[2].batType.length
+ -1    1100                  0       0                  1   280   # BatRoom.rackParameters[2].batType.cp
+ -1     130                  0 1.0000000000000000E+100  1   280   # BatRoom.rackParameters[2].batType.massBat
+ -1      12                  0       0                  1   280   # BatRoom.rackParameters[2].batType.radiationArea
+ -1 9.4999999999999996E-001  0       0                  1   280   # BatRoom.rackParameters[2].batType.eps
+ -1       6                  0       0                  1   282   # BatRoom.rackParameters[2].nParallel
+ -1       3                  0       0                  1   282   # BatRoom.rackParameters[2].nSeries
+  0       1                  0       0                  6   258   # BatRoom.rackParameters[2].nStacked
+  0       0                  0       0                  6   257   # BatRoom.rackParameters[2].airBetweenStacks
+ -1       1                  0       0                  1   281   # BatRoom.rackParameters[2].batArrangement
+ -1       0                  0       0                  1   280   # BatRoom.rackParameters[2].areaStandingAtWall
+ -1       1                  0 1.0000000000000000E+100  1   280   # BatRoom.rackParameters[3].batType.height
+ -1 5.0000000000000000E-001  0       0                  1   280   # BatRoom.rackParameters[3].batType.width
+ -1 2.0000000000000001E-001  0       0                  1   280   # BatRoom.rackParameters[3].batType.length
+ -1    1100                  0       0                  1   280   # BatRoom.rackParameters[3].batType.cp
+ -1     130                  0 1.0000000000000000E+100  1   280   # BatRoom.rackParameters[3].batType.massBat
+ -1      12                  0       0                  1   280   # BatRoom.rackParameters[3].batType.radiationArea
+ -1 9.4999999999999996E-001  0       0                  1   280   # BatRoom.rackParameters[3].batType.eps
+ -1      10                  0       0                  1   282   # BatRoom.rackParameters[3].nParallel
+ -1       3                  0       0                  1   282   # BatRoom.rackParameters[3].nSeries
+  0       3                  0       0                  6   258   # BatRoom.rackParameters[3].nStacked
+  0       0                  0       0                  6   257   # BatRoom.rackParameters[3].airBetweenStacks
+ -1       1                  0       0                  1   281   # BatRoom.rackParameters[3].batArrangement
+ -1       0                  0       0                  1   280   # BatRoom.rackParameters[3].areaStandingAtWall
+ -1       1                  0 1.0000000000000000E+100  1   280   # BatRoom.rackParameters[4].batType.height
+ -1 5.0000000000000000E-001  0       0                  1   280   # BatRoom.rackParameters[4].batType.width
+ -1 2.0000000000000001E-001  0       0                  1   280   # BatRoom.rackParameters[4].batType.length
+ -1    1100                  0       0                  1   280   # BatRoom.rackParameters[4].batType.cp
+ -1     130                  0 1.0000000000000000E+100  1   280   # BatRoom.rackParameters[4].batType.massBat
+ -1      12                  0       0                  1   280   # BatRoom.rackParameters[4].batType.radiationArea
+ -1 9.4999999999999996E-001  0       0                  1   280   # BatRoom.rackParameters[4].batType.eps
+ -1       4                  0       0                  1   282   # BatRoom.rackParameters[4].nParallel
+ -1       5                  0       0                  1   282   # BatRoom.rackParameters[4].nSeries
+  0       1                  0       0                  6   258   # BatRoom.rackParameters[4].nStacked
+  0       0                  0       0                  6   257   # BatRoom.rackParameters[4].airBetweenStacks
+ -1       1                  0       0                  1   281   # BatRoom.rackParameters[4].batArrangement
+ -1       0                  0       0                  1   280   # BatRoom.rackParameters[4].areaStandingAtWall
+ -1       1                  0 1.0000000000000000E+100  1   280   # BatRoom.rackParameters[5].batType.height
+ -1 5.0000000000000000E-001  0       0                  1   280   # BatRoom.rackParameters[5].batType.width
+ -1 2.0000000000000001E-001  0       0                  1   280   # BatRoom.rackParameters[5].batType.length
+ -1    1100                  0       0                  1   280   # BatRoom.rackParameters[5].batType.cp
+ -1     130                  0 1.0000000000000000E+100  1   280   # BatRoom.rackParameters[5].batType.massBat
+ -1      12                  0       0                  1   280   # BatRoom.rackParameters[5].batType.radiationArea
+ -1 9.4999999999999996E-001  0       0                  1   280   # BatRoom.rackParameters[5].batType.eps
+ -1       3                  0       0                  1   282   # BatRoom.rackParameters[5].nParallel
+ -1       2                  0       0                  1   282   # BatRoom.rackParameters[5].nSeries
+  0       2                  0       0                  6   258   # BatRoom.rackParameters[5].nStacked
+  0       0                  0       0                  6   257   # BatRoom.rackParameters[5].airBetweenStacks
+ -1       1                  0       0                  1   281   # BatRoom.rackParameters[5].batArrangement
+ -1       0                  0       0                  1   280   # BatRoom.rackParameters[5].areaStandingAtWall
+ -1       1                  0 1.0000000000000000E+100  1   280   # BatRoom.rackParameters[6].batType.height
+ -1 5.0000000000000000E-001  0       0                  1   280   # BatRoom.rackParameters[6].batType.width
+ -1 2.0000000000000001E-001  0       0                  1   280   # BatRoom.rackParameters[6].batType.length
+ -1    1100                  0       0                  1   280   # BatRoom.rackParameters[6].batType.cp
+ -1     130                  0 1.0000000000000000E+100  1   280   # BatRoom.rackParameters[6].batType.massBat
+ -1      12                  0       0                  1   280   # BatRoom.rackParameters[6].batType.radiationArea
+ -1 9.4999999999999996E-001  0       0                  1   280   # BatRoom.rackParameters[6].batType.eps
+ -1      10                  0       0                  1   282   # BatRoom.rackParameters[6].nParallel
+ -1       5                  0       0                  1   282   # BatRoom.rackParameters[6].nSeries
+  0       8                  0       0                  6   258   # BatRoom.rackParameters[6].nStacked
+  0       0                  0       0                  6   257   # BatRoom.rackParameters[6].airBetweenStacks
+ -1       1                  0       0                  1   281   # BatRoom.rackParameters[6].batArrangement
+ -1       0                  0       0                  1   280   # BatRoom.rackParameters[6].areaStandingAtWall
+ -1       1                  0 1.0000000000000000E+100  1   280   # BatRoom.rackParameters[7].batType.height
+ -1 5.0000000000000000E-001  0       0                  1   280   # BatRoom.rackParameters[7].batType.width
+ -1 2.0000000000000001E-001  0       0                  1   280   # BatRoom.rackParameters[7].batType.length
+ -1    1100                  0       0                  1   280   # BatRoom.rackParameters[7].batType.cp
+ -1     130                  0 1.0000000000000000E+100  1   280   # BatRoom.rackParameters[7].batType.massBat
+ -1      12                  0       0                  1   280   # BatRoom.rackParameters[7].batType.radiationArea
+ -1 9.4999999999999996E-001  0       0                  1   280   # BatRoom.rackParameters[7].batType.eps
+ -1       7                  0       0                  1   282   # BatRoom.rackParameters[7].nParallel
+ -1       5                  0       0                  1   282   # BatRoom.rackParameters[7].nSeries
+  0       1                  0       0                  6   258   # BatRoom.rackParameters[7].nStacked
+  0       0                  0       0                  6   257   # BatRoom.rackParameters[7].airBetweenStacks
+ -1       1                  0       0                  1   281   # BatRoom.rackParameters[7].batArrangement
+ -1       0                  0       0                  1   280   # BatRoom.rackParameters[7].areaStandingAtWall
+ -1       1                  0 1.0000000000000000E+100  1   280   # BatRoom.rackParameters[8].batType.height
+ -1 5.0000000000000000E-001  0       0                  1   280   # BatRoom.rackParameters[8].batType.width
+ -1 2.0000000000000001E-001  0       0                  1   280   # BatRoom.rackParameters[8].batType.length
+ -1    1100                  0       0                  1   280   # BatRoom.rackParameters[8].batType.cp
+ -1     130                  0 1.0000000000000000E+100  1   280   # BatRoom.rackParameters[8].batType.massBat
+ -1      12                  0       0                  1   280   # BatRoom.rackParameters[8].batType.radiationArea
+ -1 9.4999999999999996E-001  0       0                  1   280   # BatRoom.rackParameters[8].batType.eps
+ -1      12                  0       0                  1   282   # BatRoom.rackParameters[8].nParallel
+ -1       4                  0       0                  1   282   # BatRoom.rackParameters[8].nSeries
+  0       1                  0       0                  6   258   # BatRoom.rackParameters[8].nStacked
+  0       0                  0       0                  6   257   # BatRoom.rackParameters[8].airBetweenStacks
+ -1       1                  0       0                  1   281   # BatRoom.rackParameters[8].batArrangement
+ -1       0                  0       0                  1   280   # BatRoom.rackParameters[8].areaStandingAtWall
+ -1       1                  0 1.0000000000000000E+100  1   280   # BatRoom.rackParameters[9].batType.height
+ -1 5.0000000000000000E-001  0       0                  1   280   # BatRoom.rackParameters[9].batType.width
+ -1 2.0000000000000001E-001  0       0                  1   280   # BatRoom.rackParameters[9].batType.length
+ -1    1100                  0       0                  1   280   # BatRoom.rackParameters[9].batType.cp
+ -1     130                  0 1.0000000000000000E+100  1   280   # BatRoom.rackParameters[9].batType.massBat
+ -1      12                  0       0                  1   280   # BatRoom.rackParameters[9].batType.radiationArea
+ -1 9.4999999999999996E-001  0       0                  1   280   # BatRoom.rackParameters[9].batType.eps
+ -1       5                  0       0                  1   282   # BatRoom.rackParameters[9].nParallel
+ -1       4                  0       0                  1   282   # BatRoom.rackParameters[9].nSeries
+  0       2                  0       0                  6   258   # BatRoom.rackParameters[9].nStacked
+  0       0                  0       0                  6   257   # BatRoom.rackParameters[9].airBetweenStacks
+ -1       1                  0       0                  1   281   # BatRoom.rackParameters[9].batArrangement
+ -1       0                  0       0                  1   280   # BatRoom.rackParameters[9].areaStandingAtWall
+ -1       1                  0 1.0000000000000000E+100  1   280   # BatRoom.rackParameters[10].batType.height
+ -1 5.0000000000000000E-001  0       0                  1   280   # BatRoom.rackParameters[10].batType.width
+ -1 2.0000000000000001E-001  0       0                  1   280   # BatRoom.rackParameters[10].batType.length
+ -1    1100                  0       0                  1   280   # BatRoom.rackParameters[10].batType.cp
+ -1     130                  0 1.0000000000000000E+100  1   280   # BatRoom.rackParameters[10].batType.massBat
+ -1      12                  0       0                  1   280   # BatRoom.rackParameters[10].batType.radiationArea
+ -1 9.4999999999999996E-001  0       0                  1   280   # BatRoom.rackParameters[10].batType.eps
+ -1      30                  0       0                  1   282   # BatRoom.rackParameters[10].nParallel
+ -1       2                  0       0                  1   282   # BatRoom.rackParameters[10].nSeries
+  0       1                  0       0                  6   258   # BatRoom.rackParameters[10].nStacked
+  0       0                  0       0                  6   257   # BatRoom.rackParameters[10].airBetweenStacks
+ -1       1                  0       0                  1   281   # BatRoom.rackParameters[10].batArrangement
+ -1       0                  0       0                  1   280   # BatRoom.rackParameters[10].areaStandingAtWall
+  0       0                  0       0                  6   388   # BatRoom.PortConv.Q_flow
+  0       0                  0       0                  6   388   # BatRoom.Star.Q_flow
+  0       0                  0 1.0000000000000000E+100  6   256   # BatRoom.BatRack01.batType.height
+  0       0                  0       0                  6   256   # BatRoom.BatRack01.batType.width
+  0       0                  0       0                  6   256   # BatRoom.BatRack01.batType.length
+  0       0                  0       0                  6   256   # BatRoom.BatRack01.batType.cp
+  0       0                  0 1.0000000000000000E+100  6   256   # BatRoom.BatRack01.batType.massBat
+  0       0                  0       0                  6   256   # BatRoom.BatRack01.batType.radiationArea
+  0       0                  0       0                  6   256   # BatRoom.BatRack01.batType.eps
+  0       0                  0       0                  6   258   # BatRoom.BatRack01.nParallel
+  0       0                  0       0                  6   258   # BatRoom.BatRack01.nSeries
+  0       2                  0       0                  6   258   # BatRoom.BatRack01.nStacked
+  0       0                  0       0                  6   258   # BatRoom.BatRack01.nBat
+  0       0                  0       0                  6   257   # BatRoom.BatRack01.airBetweenStacks
+  0       0                  0       0                  6   257   # BatRoom.BatRack01.batArrangement
+  0       0                  0       0                  6   256   # BatRoom.BatRack01.areaStandingAtWall
+  0       0                  0       0                  6   256   # BatRoom.BatRack01.ThermalLoss
+ -1 2.9314999999999998E+002  0 1.0000000000000000E+100  1   280   # BatRoom.BatRack01.PrescribedHeatFlow.T_ref
+ -1       0                  0       0                  1   280   # BatRoom.BatRack01.PrescribedHeatFlow.alpha
+  0       0                  0       0                  6   388   # BatRoom.BatRack01.PrescribedHeatFlow.port.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack01.HeatCapBat.C
+ -1 2.9314999999999998E+002  0 1.0000000000000000E+100  2   280   # BatRoom.BatRack01.HeatCapBat.T
+  0       0                  0       0                  3   256   # BatRoom.BatRack01.HeatCapBat.der(T)
+  0       0                  0       0                  6   388   # BatRoom.BatRack01.HeatCapBat.port.Q_flow
+  0       0                  0       0                  6   388   # BatRoom.BatRack01.TemperatureSensor.port.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack01.HeatConvFluidOnTop.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack01.HeatConvFluidOnTop.dT
+  0       1                  0       0                  6   258   # BatRoom.BatRack01.HeatConvFluidOnTop.calcMethod
+ -1 2.5000000000000000E+000  0       0                  1   280   # BatRoom.BatRack01.HeatConvFluidOnTop.alpha_custom
+  0       2                  0       0                  6   258   # BatRoom.BatRack01.HeatConvFluidOnTop.surfaceOrientation
+  0       0                  0       0                  6   256   # BatRoom.BatRack01.HeatConvFluidOnTop.A
+  0       0                  0       0                  6   320   # BatRoom.BatRack01.HeatConvFluidOnTop.alpha
+  0       0                  0       0                  6  1280   # BatRoom.BatRack01.HeatConvFluidOnTop.posDiff
+  0       0                  0       0                  6   256   # BatRoom.BatRack01.HeatConvVertical.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack01.HeatConvVertical.dT
+  0       1                  0       0                  6   258   # BatRoom.BatRack01.HeatConvVertical.calcMethod
+ -1 2.5000000000000000E+000  0       0                  1   280   # BatRoom.BatRack01.HeatConvVertical.alpha_custom
+  0       1                  0       0                  6   258   # BatRoom.BatRack01.HeatConvVertical.surfaceOrientation
+  0       0                  0       0                  6   256   # BatRoom.BatRack01.HeatConvVertical.A
+  0 2.5000000000000000E+000  0       0                  6   256   # BatRoom.BatRack01.HeatConvVertical.alpha
+  0       0                  0       0                  6  1280   # BatRoom.BatRack01.HeatConvVertical.posDiff
+  0       0                  0       0                  6   388   # BatRoom.BatRack01.PortConv.Q_flow
+  0       0                  0       0                  6   388   # BatRoom.BatRack01.Star.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack01.HeatToStar.A
+  0       0                  0       0                  6   256   # BatRoom.BatRack01.HeatToStar.eps
+  0       0                  0 1.0000000000000000E+100  6   256   # BatRoom.BatRack02.batType.height
+  0       0                  0       0                  6   256   # BatRoom.BatRack02.batType.width
+  0       0                  0       0                  6   256   # BatRoom.BatRack02.batType.length
+  0       0                  0       0                  6   256   # BatRoom.BatRack02.batType.cp
+  0       0                  0 1.0000000000000000E+100  6   256   # BatRoom.BatRack02.batType.massBat
+  0       0                  0       0                  6   256   # BatRoom.BatRack02.batType.radiationArea
+  0       0                  0       0                  6   256   # BatRoom.BatRack02.batType.eps
+  0       0                  0       0                  6   258   # BatRoom.BatRack02.nParallel
+  0       0                  0       0                  6   258   # BatRoom.BatRack02.nSeries
+  0       1                  0       0                  6   258   # BatRoom.BatRack02.nStacked
+  0       0                  0       0                  6   258   # BatRoom.BatRack02.nBat
+  0       0                  0       0                  6   257   # BatRoom.BatRack02.airBetweenStacks
+  0       0                  0       0                  6   257   # BatRoom.BatRack02.batArrangement
+  0       0                  0       0                  6   256   # BatRoom.BatRack02.areaStandingAtWall
+  0       0                  0       0                  6   256   # BatRoom.BatRack02.ThermalLoss
+ -1 2.9314999999999998E+002  0 1.0000000000000000E+100  1   280   # BatRoom.BatRack02.PrescribedHeatFlow.T_ref
+ -1       0                  0       0                  1   280   # BatRoom.BatRack02.PrescribedHeatFlow.alpha
+  0       0                  0       0                  6   388   # BatRoom.BatRack02.PrescribedHeatFlow.port.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack02.HeatCapBat.C
+ -1 2.9314999999999998E+002  0 1.0000000000000000E+100  2   280   # BatRoom.BatRack02.HeatCapBat.T
+  0       0                  0       0                  3   256   # BatRoom.BatRack02.HeatCapBat.der(T)
+  0       0                  0       0                  6   388   # BatRoom.BatRack02.HeatCapBat.port.Q_flow
+  0       0                  0       0                  6   388   # BatRoom.BatRack02.TemperatureSensor.port.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack02.HeatConvFluidOnTop.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack02.HeatConvFluidOnTop.dT
+  0       1                  0       0                  6   258   # BatRoom.BatRack02.HeatConvFluidOnTop.calcMethod
+ -1 2.5000000000000000E+000  0       0                  1   280   # BatRoom.BatRack02.HeatConvFluidOnTop.alpha_custom
+  0       2                  0       0                  6   258   # BatRoom.BatRack02.HeatConvFluidOnTop.surfaceOrientation
+  0       0                  0       0                  6   256   # BatRoom.BatRack02.HeatConvFluidOnTop.A
+  0       0                  0       0                  6   320   # BatRoom.BatRack02.HeatConvFluidOnTop.alpha
+  0       0                  0       0                  6  1280   # BatRoom.BatRack02.HeatConvFluidOnTop.posDiff
+  0       0                  0       0                  6   256   # BatRoom.BatRack02.HeatConvVertical.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack02.HeatConvVertical.dT
+  0       1                  0       0                  6   258   # BatRoom.BatRack02.HeatConvVertical.calcMethod
+ -1 2.5000000000000000E+000  0       0                  1   280   # BatRoom.BatRack02.HeatConvVertical.alpha_custom
+  0       1                  0       0                  6   258   # BatRoom.BatRack02.HeatConvVertical.surfaceOrientation
+  0       0                  0       0                  6   256   # BatRoom.BatRack02.HeatConvVertical.A
+  0 2.5000000000000000E+000  0       0                  6   256   # BatRoom.BatRack02.HeatConvVertical.alpha
+  0       0                  0       0                  6  1280   # BatRoom.BatRack02.HeatConvVertical.posDiff
+  0       0                  0       0                  6   256   # BatRoom.BatRack02.HeatToStar.A
+  0       0                  0       0                  6   256   # BatRoom.BatRack02.HeatToStar.eps
+  0       0                  0 1.0000000000000000E+100  6   256   # BatRoom.BatRack03.batType.height
+  0       0                  0       0                  6   256   # BatRoom.BatRack03.batType.width
+  0       0                  0       0                  6   256   # BatRoom.BatRack03.batType.length
+  0       0                  0       0                  6   256   # BatRoom.BatRack03.batType.cp
+  0       0                  0 1.0000000000000000E+100  6   256   # BatRoom.BatRack03.batType.massBat
+  0       0                  0       0                  6   256   # BatRoom.BatRack03.batType.radiationArea
+  0       0                  0       0                  6   256   # BatRoom.BatRack03.batType.eps
+  0       0                  0       0                  6   258   # BatRoom.BatRack03.nParallel
+  0       0                  0       0                  6   258   # BatRoom.BatRack03.nSeries
+  0       3                  0       0                  6   258   # BatRoom.BatRack03.nStacked
+  0       0                  0       0                  6   258   # BatRoom.BatRack03.nBat
+  0       0                  0       0                  6   257   # BatRoom.BatRack03.airBetweenStacks
+  0       0                  0       0                  6   257   # BatRoom.BatRack03.batArrangement
+  0       0                  0       0                  6   256   # BatRoom.BatRack03.areaStandingAtWall
+  0       0                  0       0                  6   256   # BatRoom.BatRack03.ThermalLoss
+ -1 2.9314999999999998E+002  0 1.0000000000000000E+100  1   280   # BatRoom.BatRack03.PrescribedHeatFlow.T_ref
+ -1       0                  0       0                  1   280   # BatRoom.BatRack03.PrescribedHeatFlow.alpha
+  0       0                  0       0                  6   388   # BatRoom.BatRack03.PrescribedHeatFlow.port.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack03.HeatCapBat.C
+ -1 2.9314999999999998E+002  0 1.0000000000000000E+100  2   280   # BatRoom.BatRack03.HeatCapBat.T
+  0       0                  0       0                  3   256   # BatRoom.BatRack03.HeatCapBat.der(T)
+  0       0                  0       0                  6   388   # BatRoom.BatRack03.HeatCapBat.port.Q_flow
+  0       0                  0       0                  6   388   # BatRoom.BatRack03.TemperatureSensor.port.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack03.HeatConvFluidOnTop.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack03.HeatConvFluidOnTop.dT
+  0       1                  0       0                  6   258   # BatRoom.BatRack03.HeatConvFluidOnTop.calcMethod
+ -1 2.5000000000000000E+000  0       0                  1   280   # BatRoom.BatRack03.HeatConvFluidOnTop.alpha_custom
+  0       2                  0       0                  6   258   # BatRoom.BatRack03.HeatConvFluidOnTop.surfaceOrientation
+  0       0                  0       0                  6   256   # BatRoom.BatRack03.HeatConvFluidOnTop.A
+  0       0                  0       0                  6   320   # BatRoom.BatRack03.HeatConvFluidOnTop.alpha
+  0       0                  0       0                  6  1280   # BatRoom.BatRack03.HeatConvFluidOnTop.posDiff
+  0       0                  0       0                  6   256   # BatRoom.BatRack03.HeatConvVertical.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack03.HeatConvVertical.dT
+  0       1                  0       0                  6   258   # BatRoom.BatRack03.HeatConvVertical.calcMethod
+ -1 2.5000000000000000E+000  0       0                  1   280   # BatRoom.BatRack03.HeatConvVertical.alpha_custom
+  0       1                  0       0                  6   258   # BatRoom.BatRack03.HeatConvVertical.surfaceOrientation
+  0       0                  0       0                  6   256   # BatRoom.BatRack03.HeatConvVertical.A
+  0 2.5000000000000000E+000  0       0                  6   256   # BatRoom.BatRack03.HeatConvVertical.alpha
+  0       0                  0       0                  6  1280   # BatRoom.BatRack03.HeatConvVertical.posDiff
+  0       0                  0       0                  6   256   # BatRoom.BatRack03.HeatToStar.A
+  0       0                  0       0                  6   256   # BatRoom.BatRack03.HeatToStar.eps
+  0       0                  0 1.0000000000000000E+100  6   256   # BatRoom.BatRack04.batType.height
+  0       0                  0       0                  6   256   # BatRoom.BatRack04.batType.width
+  0       0                  0       0                  6   256   # BatRoom.BatRack04.batType.length
+  0       0                  0       0                  6   256   # BatRoom.BatRack04.batType.cp
+  0       0                  0 1.0000000000000000E+100  6   256   # BatRoom.BatRack04.batType.massBat
+  0       0                  0       0                  6   256   # BatRoom.BatRack04.batType.radiationArea
+  0       0                  0       0                  6   256   # BatRoom.BatRack04.batType.eps
+  0       0                  0       0                  6   258   # BatRoom.BatRack04.nParallel
+  0       0                  0       0                  6   258   # BatRoom.BatRack04.nSeries
+  0       1                  0       0                  6   258   # BatRoom.BatRack04.nStacked
+  0       0                  0       0                  6   258   # BatRoom.BatRack04.nBat
+  0       0                  0       0                  6   257   # BatRoom.BatRack04.airBetweenStacks
+  0       0                  0       0                  6   257   # BatRoom.BatRack04.batArrangement
+  0       0                  0       0                  6   256   # BatRoom.BatRack04.areaStandingAtWall
+  0       0                  0       0                  6   256   # BatRoom.BatRack04.ThermalLoss
+ -1 2.9314999999999998E+002  0 1.0000000000000000E+100  1   280   # BatRoom.BatRack04.PrescribedHeatFlow.T_ref
+ -1       0                  0       0                  1   280   # BatRoom.BatRack04.PrescribedHeatFlow.alpha
+  0       0                  0       0                  6   388   # BatRoom.BatRack04.PrescribedHeatFlow.port.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack04.HeatCapBat.C
+ -1 2.9314999999999998E+002  0 1.0000000000000000E+100  2   280   # BatRoom.BatRack04.HeatCapBat.T
+  0       0                  0       0                  3   256   # BatRoom.BatRack04.HeatCapBat.der(T)
+  0       0                  0       0                  6   388   # BatRoom.BatRack04.HeatCapBat.port.Q_flow
+  0       0                  0       0                  6   388   # BatRoom.BatRack04.TemperatureSensor.port.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack04.HeatConvFluidOnTop.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack04.HeatConvFluidOnTop.dT
+  0       1                  0       0                  6   258   # BatRoom.BatRack04.HeatConvFluidOnTop.calcMethod
+ -1 2.5000000000000000E+000  0       0                  1   280   # BatRoom.BatRack04.HeatConvFluidOnTop.alpha_custom
+  0       2                  0       0                  6   258   # BatRoom.BatRack04.HeatConvFluidOnTop.surfaceOrientation
+  0       0                  0       0                  6   256   # BatRoom.BatRack04.HeatConvFluidOnTop.A
+  0       0                  0       0                  6   320   # BatRoom.BatRack04.HeatConvFluidOnTop.alpha
+  0       0                  0       0                  6  1280   # BatRoom.BatRack04.HeatConvFluidOnTop.posDiff
+  0       0                  0       0                  6   256   # BatRoom.BatRack04.HeatConvVertical.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack04.HeatConvVertical.dT
+  0       1                  0       0                  6   258   # BatRoom.BatRack04.HeatConvVertical.calcMethod
+ -1 2.5000000000000000E+000  0       0                  1   280   # BatRoom.BatRack04.HeatConvVertical.alpha_custom
+  0       1                  0       0                  6   258   # BatRoom.BatRack04.HeatConvVertical.surfaceOrientation
+  0       0                  0       0                  6   256   # BatRoom.BatRack04.HeatConvVertical.A
+  0 2.5000000000000000E+000  0       0                  6   256   # BatRoom.BatRack04.HeatConvVertical.alpha
+  0       0                  0       0                  6  1280   # BatRoom.BatRack04.HeatConvVertical.posDiff
+  0       0                  0       0                  6   256   # BatRoom.BatRack04.HeatToStar.A
+  0       0                  0       0                  6   256   # BatRoom.BatRack04.HeatToStar.eps
+  0       0                  0 1.0000000000000000E+100  6   256   # BatRoom.BatRack05.batType.height
+  0       0                  0       0                  6   256   # BatRoom.BatRack05.batType.width
+  0       0                  0       0                  6   256   # BatRoom.BatRack05.batType.length
+  0       0                  0       0                  6   256   # BatRoom.BatRack05.batType.cp
+  0       0                  0 1.0000000000000000E+100  6   256   # BatRoom.BatRack05.batType.massBat
+  0       0                  0       0                  6   256   # BatRoom.BatRack05.batType.radiationArea
+  0       0                  0       0                  6   256   # BatRoom.BatRack05.batType.eps
+  0       0                  0       0                  6   258   # BatRoom.BatRack05.nParallel
+  0       0                  0       0                  6   258   # BatRoom.BatRack05.nSeries
+  0       2                  0       0                  6   258   # BatRoom.BatRack05.nStacked
+  0       0                  0       0                  6   258   # BatRoom.BatRack05.nBat
+  0       0                  0       0                  6   257   # BatRoom.BatRack05.airBetweenStacks
+  0       0                  0       0                  6   257   # BatRoom.BatRack05.batArrangement
+  0       0                  0       0                  6   256   # BatRoom.BatRack05.areaStandingAtWall
+  0       0                  0       0                  6   256   # BatRoom.BatRack05.ThermalLoss
+ -1 2.9314999999999998E+002  0 1.0000000000000000E+100  1   280   # BatRoom.BatRack05.PrescribedHeatFlow.T_ref
+ -1       0                  0       0                  1   280   # BatRoom.BatRack05.PrescribedHeatFlow.alpha
+  0       0                  0       0                  6   388   # BatRoom.BatRack05.PrescribedHeatFlow.port.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack05.HeatCapBat.C
+ -1 2.9314999999999998E+002  0 1.0000000000000000E+100  2   280   # BatRoom.BatRack05.HeatCapBat.T
+  0       0                  0       0                  3   256   # BatRoom.BatRack05.HeatCapBat.der(T)
+  0       0                  0       0                  6   388   # BatRoom.BatRack05.HeatCapBat.port.Q_flow
+  0       0                  0       0                  6   388   # BatRoom.BatRack05.TemperatureSensor.port.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack05.HeatConvFluidOnTop.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack05.HeatConvFluidOnTop.dT
+  0       1                  0       0                  6   258   # BatRoom.BatRack05.HeatConvFluidOnTop.calcMethod
+ -1 2.5000000000000000E+000  0       0                  1   280   # BatRoom.BatRack05.HeatConvFluidOnTop.alpha_custom
+  0       2                  0       0                  6   258   # BatRoom.BatRack05.HeatConvFluidOnTop.surfaceOrientation
+  0       0                  0       0                  6   256   # BatRoom.BatRack05.HeatConvFluidOnTop.A
+  0       0                  0       0                  6   320   # BatRoom.BatRack05.HeatConvFluidOnTop.alpha
+  0       0                  0       0                  6  1280   # BatRoom.BatRack05.HeatConvFluidOnTop.posDiff
+  0       0                  0       0                  6   256   # BatRoom.BatRack05.HeatConvVertical.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack05.HeatConvVertical.dT
+  0       1                  0       0                  6   258   # BatRoom.BatRack05.HeatConvVertical.calcMethod
+ -1 2.5000000000000000E+000  0       0                  1   280   # BatRoom.BatRack05.HeatConvVertical.alpha_custom
+  0       1                  0       0                  6   258   # BatRoom.BatRack05.HeatConvVertical.surfaceOrientation
+  0       0                  0       0                  6   256   # BatRoom.BatRack05.HeatConvVertical.A
+  0 2.5000000000000000E+000  0       0                  6   256   # BatRoom.BatRack05.HeatConvVertical.alpha
+  0       0                  0       0                  6  1280   # BatRoom.BatRack05.HeatConvVertical.posDiff
+  0       0                  0       0                  6   256   # BatRoom.BatRack05.HeatToStar.A
+  0       0                  0       0                  6   256   # BatRoom.BatRack05.HeatToStar.eps
+  0       0                  0 1.0000000000000000E+100  6   256   # BatRoom.BatRack06.batType.height
+  0       0                  0       0                  6   256   # BatRoom.BatRack06.batType.width
+  0       0                  0       0                  6   256   # BatRoom.BatRack06.batType.length
+  0       0                  0       0                  6   256   # BatRoom.BatRack06.batType.cp
+  0       0                  0 1.0000000000000000E+100  6   256   # BatRoom.BatRack06.batType.massBat
+  0       0                  0       0                  6   256   # BatRoom.BatRack06.batType.radiationArea
+  0       0                  0       0                  6   256   # BatRoom.BatRack06.batType.eps
+  0       0                  0       0                  6   258   # BatRoom.BatRack06.nParallel
+  0       0                  0       0                  6   258   # BatRoom.BatRack06.nSeries
+  0       8                  0       0                  6   258   # BatRoom.BatRack06.nStacked
+  0       0                  0       0                  6   258   # BatRoom.BatRack06.nBat
+  0       0                  0       0                  6   257   # BatRoom.BatRack06.airBetweenStacks
+  0       0                  0       0                  6   257   # BatRoom.BatRack06.batArrangement
+  0       0                  0       0                  6   256   # BatRoom.BatRack06.areaStandingAtWall
+  0       0                  0       0                  6   256   # BatRoom.BatRack06.ThermalLoss
+ -1 2.9314999999999998E+002  0 1.0000000000000000E+100  1   280   # BatRoom.BatRack06.PrescribedHeatFlow.T_ref
+ -1       0                  0       0                  1   280   # BatRoom.BatRack06.PrescribedHeatFlow.alpha
+  0       0                  0       0                  6   388   # BatRoom.BatRack06.PrescribedHeatFlow.port.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack06.HeatCapBat.C
+ -1 2.9314999999999998E+002  0 1.0000000000000000E+100  2   280   # BatRoom.BatRack06.HeatCapBat.T
+  0       0                  0       0                  3   256   # BatRoom.BatRack06.HeatCapBat.der(T)
+  0       0                  0       0                  6   388   # BatRoom.BatRack06.HeatCapBat.port.Q_flow
+  0       0                  0       0                  6   388   # BatRoom.BatRack06.TemperatureSensor.port.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack06.HeatConvFluidOnTop.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack06.HeatConvFluidOnTop.dT
+  0       1                  0       0                  6   258   # BatRoom.BatRack06.HeatConvFluidOnTop.calcMethod
+ -1 2.5000000000000000E+000  0       0                  1   280   # BatRoom.BatRack06.HeatConvFluidOnTop.alpha_custom
+  0       2                  0       0                  6   258   # BatRoom.BatRack06.HeatConvFluidOnTop.surfaceOrientation
+  0       0                  0       0                  6   256   # BatRoom.BatRack06.HeatConvFluidOnTop.A
+  0       0                  0       0                  6   320   # BatRoom.BatRack06.HeatConvFluidOnTop.alpha
+  0       0                  0       0                  6  1280   # BatRoom.BatRack06.HeatConvFluidOnTop.posDiff
+  0       0                  0       0                  6   256   # BatRoom.BatRack06.HeatConvVertical.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack06.HeatConvVertical.dT
+  0       1                  0       0                  6   258   # BatRoom.BatRack06.HeatConvVertical.calcMethod
+ -1 2.5000000000000000E+000  0       0                  1   280   # BatRoom.BatRack06.HeatConvVertical.alpha_custom
+  0       1                  0       0                  6   258   # BatRoom.BatRack06.HeatConvVertical.surfaceOrientation
+  0       0                  0       0                  6   256   # BatRoom.BatRack06.HeatConvVertical.A
+  0 2.5000000000000000E+000  0       0                  6   256   # BatRoom.BatRack06.HeatConvVertical.alpha
+  0       0                  0       0                  6  1280   # BatRoom.BatRack06.HeatConvVertical.posDiff
+  0       0                  0       0                  6   256   # BatRoom.BatRack06.HeatToStar.A
+  0       0                  0       0                  6   256   # BatRoom.BatRack06.HeatToStar.eps
+  0       0                  0 1.0000000000000000E+100  6   256   # BatRoom.BatRack07.batType.height
+  0       0                  0       0                  6   256   # BatRoom.BatRack07.batType.width
+  0       0                  0       0                  6   256   # BatRoom.BatRack07.batType.length
+  0       0                  0       0                  6   256   # BatRoom.BatRack07.batType.cp
+  0       0                  0 1.0000000000000000E+100  6   256   # BatRoom.BatRack07.batType.massBat
+  0       0                  0       0                  6   256   # BatRoom.BatRack07.batType.radiationArea
+  0       0                  0       0                  6   256   # BatRoom.BatRack07.batType.eps
+  0       0                  0       0                  6   258   # BatRoom.BatRack07.nParallel
+  0       0                  0       0                  6   258   # BatRoom.BatRack07.nSeries
+  0       1                  0       0                  6   258   # BatRoom.BatRack07.nStacked
+  0       0                  0       0                  6   258   # BatRoom.BatRack07.nBat
+  0       0                  0       0                  6   257   # BatRoom.BatRack07.airBetweenStacks
+  0       0                  0       0                  6   257   # BatRoom.BatRack07.batArrangement
+  0       0                  0       0                  6   256   # BatRoom.BatRack07.areaStandingAtWall
+  0       0                  0       0                  6   256   # BatRoom.BatRack07.ThermalLoss
+ -1 2.9314999999999998E+002  0 1.0000000000000000E+100  1   280   # BatRoom.BatRack07.PrescribedHeatFlow.T_ref
+ -1       0                  0       0                  1   280   # BatRoom.BatRack07.PrescribedHeatFlow.alpha
+  0       0                  0       0                  6   388   # BatRoom.BatRack07.PrescribedHeatFlow.port.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack07.HeatCapBat.C
+ -1 2.9314999999999998E+002  0 1.0000000000000000E+100  2   280   # BatRoom.BatRack07.HeatCapBat.T
+  0       0                  0       0                  3   256   # BatRoom.BatRack07.HeatCapBat.der(T)
+  0       0                  0       0                  6   388   # BatRoom.BatRack07.HeatCapBat.port.Q_flow
+  0       0                  0       0                  6   388   # BatRoom.BatRack07.TemperatureSensor.port.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack07.HeatConvFluidOnTop.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack07.HeatConvFluidOnTop.dT
+  0       1                  0       0                  6   258   # BatRoom.BatRack07.HeatConvFluidOnTop.calcMethod
+ -1 2.5000000000000000E+000  0       0                  1   280   # BatRoom.BatRack07.HeatConvFluidOnTop.alpha_custom
+  0       2                  0       0                  6   258   # BatRoom.BatRack07.HeatConvFluidOnTop.surfaceOrientation
+  0       0                  0       0                  6   256   # BatRoom.BatRack07.HeatConvFluidOnTop.A
+  0       0                  0       0                  6   320   # BatRoom.BatRack07.HeatConvFluidOnTop.alpha
+  0       0                  0       0                  6  1280   # BatRoom.BatRack07.HeatConvFluidOnTop.posDiff
+  0       0                  0       0                  6   256   # BatRoom.BatRack07.HeatConvVertical.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack07.HeatConvVertical.dT
+  0       1                  0       0                  6   258   # BatRoom.BatRack07.HeatConvVertical.calcMethod
+ -1 2.5000000000000000E+000  0       0                  1   280   # BatRoom.BatRack07.HeatConvVertical.alpha_custom
+  0       1                  0       0                  6   258   # BatRoom.BatRack07.HeatConvVertical.surfaceOrientation
+  0       0                  0       0                  6   256   # BatRoom.BatRack07.HeatConvVertical.A
+  0 2.5000000000000000E+000  0       0                  6   256   # BatRoom.BatRack07.HeatConvVertical.alpha
+  0       0                  0       0                  6  1280   # BatRoom.BatRack07.HeatConvVertical.posDiff
+  0       0                  0       0                  6   256   # BatRoom.BatRack07.HeatToStar.A
+  0       0                  0       0                  6   256   # BatRoom.BatRack07.HeatToStar.eps
+  0       0                  0 1.0000000000000000E+100  6   256   # BatRoom.BatRack08.batType.height
+  0       0                  0       0                  6   256   # BatRoom.BatRack08.batType.width
+  0       0                  0       0                  6   256   # BatRoom.BatRack08.batType.length
+  0       0                  0       0                  6   256   # BatRoom.BatRack08.batType.cp
+  0       0                  0 1.0000000000000000E+100  6   256   # BatRoom.BatRack08.batType.massBat
+  0       0                  0       0                  6   256   # BatRoom.BatRack08.batType.radiationArea
+  0       0                  0       0                  6   256   # BatRoom.BatRack08.batType.eps
+  0       0                  0       0                  6   258   # BatRoom.BatRack08.nParallel
+  0       0                  0       0                  6   258   # BatRoom.BatRack08.nSeries
+  0       1                  0       0                  6   258   # BatRoom.BatRack08.nStacked
+  0       0                  0       0                  6   258   # BatRoom.BatRack08.nBat
+  0       0                  0       0                  6   257   # BatRoom.BatRack08.airBetweenStacks
+  0       0                  0       0                  6   257   # BatRoom.BatRack08.batArrangement
+  0       0                  0       0                  6   256   # BatRoom.BatRack08.areaStandingAtWall
+  0       0                  0       0                  6   256   # BatRoom.BatRack08.ThermalLoss
+ -1 2.9314999999999998E+002  0 1.0000000000000000E+100  1   280   # BatRoom.BatRack08.PrescribedHeatFlow.T_ref
+ -1       0                  0       0                  1   280   # BatRoom.BatRack08.PrescribedHeatFlow.alpha
+  0       0                  0       0                  6   388   # BatRoom.BatRack08.PrescribedHeatFlow.port.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack08.HeatCapBat.C
+ -1 2.9314999999999998E+002  0 1.0000000000000000E+100  2   280   # BatRoom.BatRack08.HeatCapBat.T
+  0       0                  0       0                  3   256   # BatRoom.BatRack08.HeatCapBat.der(T)
+  0       0                  0       0                  6   388   # BatRoom.BatRack08.HeatCapBat.port.Q_flow
+  0       0                  0       0                  6   388   # BatRoom.BatRack08.TemperatureSensor.port.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack08.HeatConvFluidOnTop.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack08.HeatConvFluidOnTop.dT
+  0       1                  0       0                  6   258   # BatRoom.BatRack08.HeatConvFluidOnTop.calcMethod
+ -1 2.5000000000000000E+000  0       0                  1   280   # BatRoom.BatRack08.HeatConvFluidOnTop.alpha_custom
+  0       2                  0       0                  6   258   # BatRoom.BatRack08.HeatConvFluidOnTop.surfaceOrientation
+  0       0                  0       0                  6   256   # BatRoom.BatRack08.HeatConvFluidOnTop.A
+  0       0                  0       0                  6   320   # BatRoom.BatRack08.HeatConvFluidOnTop.alpha
+  0       0                  0       0                  6  1280   # BatRoom.BatRack08.HeatConvFluidOnTop.posDiff
+  0       0                  0       0                  6   256   # BatRoom.BatRack08.HeatConvVertical.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack08.HeatConvVertical.dT
+  0       1                  0       0                  6   258   # BatRoom.BatRack08.HeatConvVertical.calcMethod
+ -1 2.5000000000000000E+000  0       0                  1   280   # BatRoom.BatRack08.HeatConvVertical.alpha_custom
+  0       1                  0       0                  6   258   # BatRoom.BatRack08.HeatConvVertical.surfaceOrientation
+  0       0                  0       0                  6   256   # BatRoom.BatRack08.HeatConvVertical.A
+  0 2.5000000000000000E+000  0       0                  6   256   # BatRoom.BatRack08.HeatConvVertical.alpha
+  0       0                  0       0                  6  1280   # BatRoom.BatRack08.HeatConvVertical.posDiff
+  0       0                  0       0                  6   256   # BatRoom.BatRack08.HeatToStar.A
+  0       0                  0       0                  6   256   # BatRoom.BatRack08.HeatToStar.eps
+  0       0                  0 1.0000000000000000E+100  6   256   # BatRoom.BatRack09.batType.height
+  0       0                  0       0                  6   256   # BatRoom.BatRack09.batType.width
+  0       0                  0       0                  6   256   # BatRoom.BatRack09.batType.length
+  0       0                  0       0                  6   256   # BatRoom.BatRack09.batType.cp
+  0       0                  0 1.0000000000000000E+100  6   256   # BatRoom.BatRack09.batType.massBat
+  0       0                  0       0                  6   256   # BatRoom.BatRack09.batType.radiationArea
+  0       0                  0       0                  6   256   # BatRoom.BatRack09.batType.eps
+  0       0                  0       0                  6   258   # BatRoom.BatRack09.nParallel
+  0       0                  0       0                  6   258   # BatRoom.BatRack09.nSeries
+  0       2                  0       0                  6   258   # BatRoom.BatRack09.nStacked
+  0       0                  0       0                  6   258   # BatRoom.BatRack09.nBat
+  0       0                  0       0                  6   257   # BatRoom.BatRack09.airBetweenStacks
+  0       0                  0       0                  6   257   # BatRoom.BatRack09.batArrangement
+  0       0                  0       0                  6   256   # BatRoom.BatRack09.areaStandingAtWall
+  0       0                  0       0                  6   256   # BatRoom.BatRack09.ThermalLoss
+ -1 2.9314999999999998E+002  0 1.0000000000000000E+100  1   280   # BatRoom.BatRack09.PrescribedHeatFlow.T_ref
+ -1       0                  0       0                  1   280   # BatRoom.BatRack09.PrescribedHeatFlow.alpha
+  0       0                  0       0                  6   388   # BatRoom.BatRack09.PrescribedHeatFlow.port.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack09.HeatCapBat.C
+ -1 2.9314999999999998E+002  0 1.0000000000000000E+100  2   280   # BatRoom.BatRack09.HeatCapBat.T
+  0       0                  0       0                  3   256   # BatRoom.BatRack09.HeatCapBat.der(T)
+  0       0                  0       0                  6   388   # BatRoom.BatRack09.HeatCapBat.port.Q_flow
+  0       0                  0       0                  6   388   # BatRoom.BatRack09.TemperatureSensor.port.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack09.HeatConvFluidOnTop.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack09.HeatConvFluidOnTop.dT
+  0       1                  0       0                  6   258   # BatRoom.BatRack09.HeatConvFluidOnTop.calcMethod
+ -1 2.5000000000000000E+000  0       0                  1   280   # BatRoom.BatRack09.HeatConvFluidOnTop.alpha_custom
+  0       2                  0       0                  6   258   # BatRoom.BatRack09.HeatConvFluidOnTop.surfaceOrientation
+  0       0                  0       0                  6   256   # BatRoom.BatRack09.HeatConvFluidOnTop.A
+  0       0                  0       0                  6   320   # BatRoom.BatRack09.HeatConvFluidOnTop.alpha
+  0       0                  0       0                  6  1280   # BatRoom.BatRack09.HeatConvFluidOnTop.posDiff
+  0       0                  0       0                  6   256   # BatRoom.BatRack09.HeatConvVertical.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack09.HeatConvVertical.dT
+  0       1                  0       0                  6   258   # BatRoom.BatRack09.HeatConvVertical.calcMethod
+ -1 2.5000000000000000E+000  0       0                  1   280   # BatRoom.BatRack09.HeatConvVertical.alpha_custom
+  0       1                  0       0                  6   258   # BatRoom.BatRack09.HeatConvVertical.surfaceOrientation
+  0       0                  0       0                  6   256   # BatRoom.BatRack09.HeatConvVertical.A
+  0 2.5000000000000000E+000  0       0                  6   256   # BatRoom.BatRack09.HeatConvVertical.alpha
+  0       0                  0       0                  6  1280   # BatRoom.BatRack09.HeatConvVertical.posDiff
+  0       0                  0       0                  6   256   # BatRoom.BatRack09.HeatToStar.A
+  0       0                  0       0                  6   256   # BatRoom.BatRack09.HeatToStar.eps
+  0       0                  0 1.0000000000000000E+100  6   256   # BatRoom.BatRack10.batType.height
+  0       0                  0       0                  6   256   # BatRoom.BatRack10.batType.width
+  0       0                  0       0                  6   256   # BatRoom.BatRack10.batType.length
+  0       0                  0       0                  6   256   # BatRoom.BatRack10.batType.cp
+  0       0                  0 1.0000000000000000E+100  6   256   # BatRoom.BatRack10.batType.massBat
+  0       0                  0       0                  6   256   # BatRoom.BatRack10.batType.radiationArea
+  0       0                  0       0                  6   256   # BatRoom.BatRack10.batType.eps
+  0       0                  0       0                  6   258   # BatRoom.BatRack10.nParallel
+  0       0                  0       0                  6   258   # BatRoom.BatRack10.nSeries
+  0       1                  0       0                  6   258   # BatRoom.BatRack10.nStacked
+  0       0                  0       0                  6   258   # BatRoom.BatRack10.nBat
+  0       0                  0       0                  6   257   # BatRoom.BatRack10.airBetweenStacks
+  0       0                  0       0                  6   257   # BatRoom.BatRack10.batArrangement
+  0       0                  0       0                  6   256   # BatRoom.BatRack10.areaStandingAtWall
+  0       0                  0       0                  6   256   # BatRoom.BatRack10.ThermalLoss
+ -1 2.9314999999999998E+002  0 1.0000000000000000E+100  1   280   # BatRoom.BatRack10.PrescribedHeatFlow.T_ref
+ -1       0                  0       0                  1   280   # BatRoom.BatRack10.PrescribedHeatFlow.alpha
+  0       0                  0       0                  6   388   # BatRoom.BatRack10.PrescribedHeatFlow.port.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack10.HeatCapBat.C
+ -1 2.9314999999999998E+002  0 1.0000000000000000E+100  2   280   # BatRoom.BatRack10.HeatCapBat.T
+  0       0                  0       0                  3   256   # BatRoom.BatRack10.HeatCapBat.der(T)
+  0       0                  0       0                  6   388   # BatRoom.BatRack10.HeatCapBat.port.Q_flow
+  0       0                  0       0                  6   388   # BatRoom.BatRack10.TemperatureSensor.port.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack10.HeatConvFluidOnTop.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack10.HeatConvFluidOnTop.dT
+  0       1                  0       0                  6   258   # BatRoom.BatRack10.HeatConvFluidOnTop.calcMethod
+ -1 2.5000000000000000E+000  0       0                  1   280   # BatRoom.BatRack10.HeatConvFluidOnTop.alpha_custom
+  0       2                  0       0                  6   258   # BatRoom.BatRack10.HeatConvFluidOnTop.surfaceOrientation
+  0       0                  0       0                  6   256   # BatRoom.BatRack10.HeatConvFluidOnTop.A
+  0       0                  0       0                  6   320   # BatRoom.BatRack10.HeatConvFluidOnTop.alpha
+  0       0                  0       0                  6  1280   # BatRoom.BatRack10.HeatConvFluidOnTop.posDiff
+  0       0                  0       0                  6   256   # BatRoom.BatRack10.HeatConvVertical.Q_flow
+  0       0                  0       0                  6   256   # BatRoom.BatRack10.HeatConvVertical.dT
+  0       1                  0       0                  6   258   # BatRoom.BatRack10.HeatConvVertical.calcMethod
+ -1 2.5000000000000000E+000  0       0                  1   280   # BatRoom.BatRack10.HeatConvVertical.alpha_custom
+  0       1                  0       0                  6   258   # BatRoom.BatRack10.HeatConvVertical.surfaceOrientation
+  0       0                  0       0                  6   256   # BatRoom.BatRack10.HeatConvVertical.A
+  0 2.5000000000000000E+000  0       0                  6   256   # BatRoom.BatRack10.HeatConvVertical.alpha
+  0       0                  0       0                  6  1280   # BatRoom.BatRack10.HeatConvVertical.posDiff
+  0       0                  0       0                  6   256   # BatRoom.BatRack10.HeatToStar.A
+  0       0                  0       0                  6   256   # BatRoom.BatRack10.HeatToStar.eps
+  0       1                  0       0                  6   256   # BatRoom.LossFraction01.k
+  0       0                  0       0                  6   256   # BatRoom.LossFraction01.u
+  0       1                  0       0                  6   256   # BatRoom.LossFraction02.k
+  0       0                  0       0                  6   256   # BatRoom.LossFraction02.u
+  0       1                  0       0                  6   256   # BatRoom.LossFraction03.k
+  0       0                  0       0                  6   256   # BatRoom.LossFraction03.u
+  0       1                  0       0                  6   256   # BatRoom.LossFraction04.k
+  0       0                  0       0                  6   256   # BatRoom.LossFraction04.u
+  0       1                  0       0                  6   256   # BatRoom.LossFraction05.k
+  0       0                  0       0                  6   256   # BatRoom.LossFraction05.u
+  0       1                  0       0                  6   256   # BatRoom.LossFraction06.k
+  0       0                  0       0                  6   256   # BatRoom.LossFraction06.u
+  0       1                  0       0                  6   256   # BatRoom.LossFraction07.k
+  0       0                  0       0                  6   256   # BatRoom.LossFraction07.u
+  0       1                  0       0                  6   256   # BatRoom.LossFraction08.k
+  0       0                  0       0                  6   256   # BatRoom.LossFraction08.u
+  0       1                  0       0                  6   256   # BatRoom.LossFraction09.k
+  0       0                  0       0                  6   256   # BatRoom.LossFraction09.u
+  0       1                  0       0                  6   256   # BatRoom.LossFraction10.k
+  0       0                  0       0                  6   256   # BatRoom.LossFraction10.u
+  0      10                  1 1.0000000000000000E+100  6   258   # BatRoom.ConvCollector.m
+  0       0                  0       0                  6   388   # BatRoom.ConvCollector.port_a[2].Q_flow
+  0       0                  0       0                  6   388   # BatRoom.ConvCollector.port_a[3].Q_flow
+  0       0                  0       0                  6   388   # BatRoom.ConvCollector.port_a[4].Q_flow
+  0       0                  0       0                  6   388   # BatRoom.ConvCollector.port_a[5].Q_flow
+  0       0                  0       0                  6   388   # BatRoom.ConvCollector.port_a[6].Q_flow
+  0       0                  0       0                  6   388   # BatRoom.ConvCollector.port_a[7].Q_flow
+  0       0                  0       0                  6   388   # BatRoom.ConvCollector.port_a[8].Q_flow
+  0       0                  0       0                  6   388   # BatRoom.ConvCollector.port_a[9].Q_flow
+  0       0                  0       0                  6   388   # BatRoom.ConvCollector.port_a[10].Q_flow
+  0      10                  1 1.0000000000000000E+100  6   258   # BatRoom.RadCollector.m
+  0       0                  0       0                  6   388   # BatRoom.RadCollector.Star_a[2].Q_flow
+  0       0                  0       0                  6   388   # BatRoom.RadCollector.Star_a[3].Q_flow
+  0       0                  0       0                  6   388   # BatRoom.RadCollector.Star_a[4].Q_flow
+  0       0                  0       0                  6   388   # BatRoom.RadCollector.Star_a[5].Q_flow
+  0       0                  0       0                  6   388   # BatRoom.RadCollector.Star_a[6].Q_flow
+  0       0                  0       0                  6   388   # BatRoom.RadCollector.Star_a[7].Q_flow
+  0       0                  0       0                  6   388   # BatRoom.RadCollector.Star_a[8].Q_flow
+  0       0                  0       0                  6   388   # BatRoom.RadCollector.Star_a[9].Q_flow
+  0       0                  0       0                  6   388   # BatRoom.RadCollector.Star_a[10].Q_flow
+  0       0                  0       0                  6  1281   # BatRoom.listBatType[1]
+  0       0                  0       0                  6  1281   # BatRoom.listBatType[2]
+  0       0                  0       0                  6  1281   # BatRoom.listBatType[3]
+  0       0                  0       0                  6  1281   # BatRoom.listBatType[4]
+  0       0                  0       0                  6  1281   # BatRoom.listBatType[5]
+  0       0                  0       0                  6  1281   # BatRoom.listBatType[6]
+  0       0                  0       0                  6  1281   # BatRoom.listBatType[7]
+  0       0                  0       0                  6  1281   # BatRoom.listBatType[8]
+  0       0                  0       0                  6  1281   # BatRoom.listBatType[9]
+  0       0                  0       0                  6  1281   # BatRoom.listBatType[10]
+  0       0                  0       0                  6  1282   # BatRoom.listNBat[1]
+  0       0                  0       0                  6  1282   # BatRoom.listNBat[2]
+  0       0                  0       0                  6  1282   # BatRoom.listNBat[3]
+  0       0                  0       0                  6  1282   # BatRoom.listNBat[4]
+  0       0                  0       0                  6  1282   # BatRoom.listNBat[5]
+  0       0                  0       0                  6  1282   # BatRoom.listNBat[6]
+  0       0                  0       0                  6  1282   # BatRoom.listNBat[7]
+  0       0                  0       0                  6  1282   # BatRoom.listNBat[8]
+  0       0                  0       0                  6  1282   # BatRoom.listNBat[9]
+  0       0                  0       0                  6  1282   # BatRoom.listNBat[10]
+  0       0                  0       0                  6  1282   # BatRoom.sumBatType1
+  0       0                  0       0                  6  1282   # BatRoom.sumBatType2
+  0       0                  0       0                  6  1280   # BatRoom.listFractionFactors[1]
+  0       0                  0       0                  6  1280   # BatRoom.listFractionFactors[2]
+  0       0                  0       0                  6  1280   # BatRoom.listFractionFactors[3]
+  0       0                  0       0                  6  1280   # BatRoom.listFractionFactors[4]
+  0       0                  0       0                  6  1280   # BatRoom.listFractionFactors[5]
+  0       0                  0       0                  6  1280   # BatRoom.listFractionFactors[6]
+  0       0                  0       0                  6  1280   # BatRoom.listFractionFactors[7]
+  0       0                  0       0                  6  1280   # BatRoom.listFractionFactors[8]
+  0       0                  0       0                  6  1280   # BatRoom.listFractionFactors[9]
+  0       0                  0       0                  6  1280   # BatRoom.listFractionFactors[10]
+ -1 2.9314999999999998E+002  0 1.0000000000000000E+100  1   280   # radTemp.T
+ -1 2.9314999999999998E+002  0 1.0000000000000000E+100  1   280   # convTemp.T
+
+
+# Matrix with 6 columns defining the initial value calculation
+# (columns 5 and 6 are not utilized for the calculation but are
+#  reported by dymosim via dymosim -i for user convenience):
+#
+# column 1: Type of initial value
+#           = -2: special case: for continuing simulation (column 2 = value)
+#           = -1: fixed value (column 2 = fixed value)
+#           =  0: free value, i.e., no restriction (column 2 = initial value)
+#           >  0: desired value (column 1 = weight for optimization
+#                                column 2 = desired value)
+#                 use weight=1, since automatic scaling usually
+#                 leads to equally weighted terms
+# column 2: fixed, free or desired value according to column 1.
+# column 3: Minimum value (ignored, if Minimum >= Maximum).
+# column 4: Maximum value (ignored, if Minimum >= Maximum).
+#           Minimum and maximum restrict the search range in initial
+#           value calculation. They might also be used for scaling.
+# column 5: Category of variable.
+#           = 1: parameter.
+#           = 2: state.
+#           = 3: state derivative.
+#           = 4: output.
+#           = 5: input.
+#           = 6: auxiliary variable.
+# column 6: Data type of variable and flags according to dsBaseType
+#  <value>&3= 0: real.
+#  <value>&3= 1: boolean.
+#  <value>&3= 2: integer.
+#
+# Initial values are calculated according to the following procedure:
+#
+# - If parameters, states and inputs are FIXED, and other variables
+#   are FREE, no special action takes place (default setting).
+#
+# - If there are only FIXED and FREE variables and the number of
+#   FREE parameters, states and inputs is IDENTICAL to the number of
+#   FIXED state derivatives, outputs and auxiliary variables, a non-linear
+#   equation is solved to determine a consistent set of initial conditions.
+#
+# - In all other cases the following optimization problem is solved:
+#      min( sum( weight(i)*( (value(i) - DESIRED(i))/scale(i) )^2 ) )
+#   under the constraint that the differential equation is fulfilled
+#   at the initial time. In most cases weight(i)=1 is sufficient, due
+#   to the automatic scaling (if DESIRED(i) is not close to zero,
+#   scale(i) = DESIRED(i). Otherwise, the scaling is based on the
+#   nominal value (and maybe minimum and maximum values given in 
+#   column 3 and 4). If these values are zero, scale(i)=1 is used).
+#
+char initialDescription(640,107)
+Height of ramps
+Duration of ramp (= 0.0 gives a Step) [s]
+Offset of output signal
+Output = offset for time < startTime [s]
+Connector of Real output signal
+Height of ramps
+Duration of ramp (= 0.0 gives a Step) [s]
+Offset of output signal
+Output = offset for time < startTime [s]
+Connector of Real output signal
+Number of battery racks installed in the battery room [:#(type=Integer)]
+How many different battery types are installed in the room? [:#(type=Integer)]
+Battery type of rack 1 [:#(type=Boolean)]
+Battery type of rack 2 [:#(type=Boolean)]
+Battery type of rack 3 [:#(type=Boolean)]
+Battery type of rack 4 [:#(type=Boolean)]
+Battery type of rack 5 [:#(type=Boolean)]
+Battery type of rack 6 [:#(type=Boolean)]
+Battery type of rack 7 [:#(type=Boolean)]
+Battery type of rack 8 [:#(type=Boolean)]
+Battery type of rack 9 [:#(type=Boolean)]
+Battery type of rack 10 [:#(type=Boolean)]
+Height of the battery [m]
+Width of the battery (should be longer than the length) [m]
+Length of the battery (should be shorter than the width) [m]
+Average specific heat capacity of the battery unit [J/(kg.K)]
+Mass of the battery [kg]
+Battery's area for the radiation [m2]
+Battery's emissivity coefficient [1]
+Number of batteries placed in one series [:#(type=Integer)]
+Number of battery series [:#(type=Integer)]
+Number of batteries stacked on another [:#(type=Integer)]
+Is there a gap between the stacks (nStacked>1)? [:#(type=Boolean)]
+How are the batteries touching each other? [:#(type=Boolean)]
+default=0, area of the rack, which is placed at the wall, so there     is no vertical heat convection. [m2]
+Height of the battery [m]
+Width of the battery (should be longer than the length) [m]
+Length of the battery (should be shorter than the width) [m]
+Average specific heat capacity of the battery unit [J/(kg.K)]
+Mass of the battery [kg]
+Battery's area for the radiation [m2]
+Battery's emissivity coefficient [1]
+Number of batteries placed in one series [:#(type=Integer)]
+Number of battery series [:#(type=Integer)]
+Number of batteries stacked on another [:#(type=Integer)]
+Is there a gap between the stacks (nStacked>1)? [:#(type=Boolean)]
+How are the batteries touching each other? [:#(type=Boolean)]
+default=0, area of the rack, which is placed at the wall, so there     is no vertical heat convection. [m2]
+Height of the battery [m]
+Width of the battery (should be longer than the length) [m]
+Length of the battery (should be shorter than the width) [m]
+Average specific heat capacity of the battery unit [J/(kg.K)]
+Mass of the battery [kg]
+Battery's area for the radiation [m2]
+Battery's emissivity coefficient [1]
+Number of batteries placed in one series [:#(type=Integer)]
+Number of battery series [:#(type=Integer)]
+Number of batteries stacked on another [:#(type=Integer)]
+Is there a gap between the stacks (nStacked>1)? [:#(type=Boolean)]
+How are the batteries touching each other? [:#(type=Boolean)]
+default=0, area of the rack, which is placed at the wall, so there     is no vertical heat convection. [m2]
+Height of the battery [m]
+Width of the battery (should be longer than the length) [m]
+Length of the battery (should be shorter than the width) [m]
+Average specific heat capacity of the battery unit [J/(kg.K)]
+Mass of the battery [kg]
+Battery's area for the radiation [m2]
+Battery's emissivity coefficient [1]
+Number of batteries placed in one series [:#(type=Integer)]
+Number of battery series [:#(type=Integer)]
+Number of batteries stacked on another [:#(type=Integer)]
+Is there a gap between the stacks (nStacked>1)? [:#(type=Boolean)]
+How are the batteries touching each other? [:#(type=Boolean)]
+default=0, area of the rack, which is placed at the wall, so there     is no vertical heat convection. [m2]
+Height of the battery [m]
+Width of the battery (should be longer than the length) [m]
+Length of the battery (should be shorter than the width) [m]
+Average specific heat capacity of the battery unit [J/(kg.K)]
+Mass of the battery [kg]
+Battery's area for the radiation [m2]
+Battery's emissivity coefficient [1]
+Number of batteries placed in one series [:#(type=Integer)]
+Number of battery series [:#(type=Integer)]
+Number of batteries stacked on another [:#(type=Integer)]
+Is there a gap between the stacks (nStacked>1)? [:#(type=Boolean)]
+How are the batteries touching each other? [:#(type=Boolean)]
+default=0, area of the rack, which is placed at the wall, so there     is no vertical heat convection. [m2]
+Height of the battery [m]
+Width of the battery (should be longer than the length) [m]
+Length of the battery (should be shorter than the width) [m]
+Average specific heat capacity of the battery unit [J/(kg.K)]
+Mass of the battery [kg]
+Battery's area for the radiation [m2]
+Battery's emissivity coefficient [1]
+Number of batteries placed in one series [:#(type=Integer)]
+Number of battery series [:#(type=Integer)]
+Number of batteries stacked on another [:#(type=Integer)]
+Is there a gap between the stacks (nStacked>1)? [:#(type=Boolean)]
+How are the batteries touching each other? [:#(type=Boolean)]
+default=0, area of the rack, which is placed at the wall, so there     is no vertical heat convection. [m2]
+Height of the battery [m]
+Width of the battery (should be longer than the length) [m]
+Length of the battery (should be shorter than the width) [m]
+Average specific heat capacity of the battery unit [J/(kg.K)]
+Mass of the battery [kg]
+Battery's area for the radiation [m2]
+Battery's emissivity coefficient [1]
+Number of batteries placed in one series [:#(type=Integer)]
+Number of battery series [:#(type=Integer)]
+Number of batteries stacked on another [:#(type=Integer)]
+Is there a gap between the stacks (nStacked>1)? [:#(type=Boolean)]
+How are the batteries touching each other? [:#(type=Boolean)]
+default=0, area of the rack, which is placed at the wall, so there     is no vertical heat convection. [m2]
+Height of the battery [m]
+Width of the battery (should be longer than the length) [m]
+Length of the battery (should be shorter than the width) [m]
+Average specific heat capacity of the battery unit [J/(kg.K)]
+Mass of the battery [kg]
+Battery's area for the radiation [m2]
+Battery's emissivity coefficient [1]
+Number of batteries placed in one series [:#(type=Integer)]
+Number of battery series [:#(type=Integer)]
+Number of batteries stacked on another [:#(type=Integer)]
+Is there a gap between the stacks (nStacked>1)? [:#(type=Boolean)]
+How are the batteries touching each other? [:#(type=Boolean)]
+default=0, area of the rack, which is placed at the wall, so there     is no vertical heat convection. [m2]
+Height of the battery [m]
+Width of the battery (should be longer than the length) [m]
+Length of the battery (should be shorter than the width) [m]
+Average specific heat capacity of the battery unit [J/(kg.K)]
+Mass of the battery [kg]
+Battery's area for the radiation [m2]
+Battery's emissivity coefficient [1]
+Number of batteries placed in one series [:#(type=Integer)]
+Number of battery series [:#(type=Integer)]
+Number of batteries stacked on another [:#(type=Integer)]
+Is there a gap between the stacks (nStacked>1)? [:#(type=Boolean)]
+How are the batteries touching each other? [:#(type=Boolean)]
+default=0, area of the rack, which is placed at the wall, so there     is no vertical heat convection. [m2]
+Height of the battery [m]
+Width of the battery (should be longer than the length) [m]
+Length of the battery (should be shorter than the width) [m]
+Average specific heat capacity of the battery unit [J/(kg.K)]
+Mass of the battery [kg]
+Battery's area for the radiation [m2]
+Battery's emissivity coefficient [1]
+Number of batteries placed in one series [:#(type=Integer)]
+Number of battery series [:#(type=Integer)]
+Number of batteries stacked on another [:#(type=Integer)]
+Is there a gap between the stacks (nStacked>1)? [:#(type=Boolean)]
+How are the batteries touching each other? [:#(type=Boolean)]
+default=0, area of the rack, which is placed at the wall, so there     is no vertical heat convection. [m2]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Height of the battery [m]
+Width of the battery (should be longer than the length) [m]
+Length of the battery (should be shorter than the width) [m]
+Average specific heat capacity of the battery unit [J/(kg.K)]
+Mass of the battery [kg]
+Battery's area for the radiation [m2]
+Battery's emissivity coefficient [1]
+Number of batteries placed in one series [:#(type=Integer)]
+Number of battery series [:#(type=Integer)]
+Number of batteries stacked on another [:#(type=Integer)]
+Number of batteries in the rack [:#(type=Integer)]
+Is there a gap between the stacks (nStacked>1)? [:#(type=Boolean)]
+How are the batteries touching each other? [:#(type=Boolean)]
+default=0, area of the rack, which is placed at the wall,     so there is no vertical heat convection. [m2]
+Thermal loss of the battery - from external file [W]
+Reference temperature [K|degC]
+Temperature coefficient of heat flow rate [1/K]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat capacity of element (= cp*m) [J/K]
+Temperature of element [K|degC]
+der(Temperature of element) [K/s]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate from port_a -> port_b [W]
+port_a.T - port_b.T [K,]
+Calculation Method [:#(type=Integer)]
+Constant heat transfer coefficient [W/(m2.K)]
+Surface orientation [:#(type=Integer)]
+Area of surface [m2]
+variable heat transfer coefficient [W/(m2.K)]
+Positive temperature difference [degC]
+Heat flow rate from port_a -> port_b [W]
+port_a.T - port_b.T [K,]
+Calculation Method [:#(type=Integer)]
+Constant heat transfer coefficient [W/(m2.K)]
+Surface orientation [:#(type=Integer)]
+Area of surface [m2]
+variable heat transfer coefficient [W/(m2.K)]
+Positive temperature difference [degC]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Area of radiation exchange [m2]
+Emissivity [1]
+Height of the battery [m]
+Width of the battery (should be longer than the length) [m]
+Length of the battery (should be shorter than the width) [m]
+Average specific heat capacity of the battery unit [J/(kg.K)]
+Mass of the battery [kg]
+Battery's area for the radiation [m2]
+Battery's emissivity coefficient [1]
+Number of batteries placed in one series [:#(type=Integer)]
+Number of battery series [:#(type=Integer)]
+Number of batteries stacked on another [:#(type=Integer)]
+Number of batteries in the rack [:#(type=Integer)]
+Is there a gap between the stacks (nStacked>1)? [:#(type=Boolean)]
+How are the batteries touching each other? [:#(type=Boolean)]
+default=0, area of the rack, which is placed at the wall,     so there is no vertical heat convection. [m2]
+Thermal loss of the battery - from external file [W]
+Reference temperature [K|degC]
+Temperature coefficient of heat flow rate [1/K]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat capacity of element (= cp*m) [J/K]
+Temperature of element [K|degC]
+der(Temperature of element) [K/s]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate from port_a -> port_b [W]
+port_a.T - port_b.T [K,]
+Calculation Method [:#(type=Integer)]
+Constant heat transfer coefficient [W/(m2.K)]
+Surface orientation [:#(type=Integer)]
+Area of surface [m2]
+variable heat transfer coefficient [W/(m2.K)]
+Positive temperature difference [degC]
+Heat flow rate from port_a -> port_b [W]
+port_a.T - port_b.T [K,]
+Calculation Method [:#(type=Integer)]
+Constant heat transfer coefficient [W/(m2.K)]
+Surface orientation [:#(type=Integer)]
+Area of surface [m2]
+variable heat transfer coefficient [W/(m2.K)]
+Positive temperature difference [degC]
+Area of radiation exchange [m2]
+Emissivity [1]
+Height of the battery [m]
+Width of the battery (should be longer than the length) [m]
+Length of the battery (should be shorter than the width) [m]
+Average specific heat capacity of the battery unit [J/(kg.K)]
+Mass of the battery [kg]
+Battery's area for the radiation [m2]
+Battery's emissivity coefficient [1]
+Number of batteries placed in one series [:#(type=Integer)]
+Number of battery series [:#(type=Integer)]
+Number of batteries stacked on another [:#(type=Integer)]
+Number of batteries in the rack [:#(type=Integer)]
+Is there a gap between the stacks (nStacked>1)? [:#(type=Boolean)]
+How are the batteries touching each other? [:#(type=Boolean)]
+default=0, area of the rack, which is placed at the wall,     so there is no vertical heat convection. [m2]
+Thermal loss of the battery - from external file [W]
+Reference temperature [K|degC]
+Temperature coefficient of heat flow rate [1/K]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat capacity of element (= cp*m) [J/K]
+Temperature of element [K|degC]
+der(Temperature of element) [K/s]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate from port_a -> port_b [W]
+port_a.T - port_b.T [K,]
+Calculation Method [:#(type=Integer)]
+Constant heat transfer coefficient [W/(m2.K)]
+Surface orientation [:#(type=Integer)]
+Area of surface [m2]
+variable heat transfer coefficient [W/(m2.K)]
+Positive temperature difference [degC]
+Heat flow rate from port_a -> port_b [W]
+port_a.T - port_b.T [K,]
+Calculation Method [:#(type=Integer)]
+Constant heat transfer coefficient [W/(m2.K)]
+Surface orientation [:#(type=Integer)]
+Area of surface [m2]
+variable heat transfer coefficient [W/(m2.K)]
+Positive temperature difference [degC]
+Area of radiation exchange [m2]
+Emissivity [1]
+Height of the battery [m]
+Width of the battery (should be longer than the length) [m]
+Length of the battery (should be shorter than the width) [m]
+Average specific heat capacity of the battery unit [J/(kg.K)]
+Mass of the battery [kg]
+Battery's area for the radiation [m2]
+Battery's emissivity coefficient [1]
+Number of batteries placed in one series [:#(type=Integer)]
+Number of battery series [:#(type=Integer)]
+Number of batteries stacked on another [:#(type=Integer)]
+Number of batteries in the rack [:#(type=Integer)]
+Is there a gap between the stacks (nStacked>1)? [:#(type=Boolean)]
+How are the batteries touching each other? [:#(type=Boolean)]
+default=0, area of the rack, which is placed at the wall,     so there is no vertical heat convection. [m2]
+Thermal loss of the battery - from external file [W]
+Reference temperature [K|degC]
+Temperature coefficient of heat flow rate [1/K]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat capacity of element (= cp*m) [J/K]
+Temperature of element [K|degC]
+der(Temperature of element) [K/s]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate from port_a -> port_b [W]
+port_a.T - port_b.T [K,]
+Calculation Method [:#(type=Integer)]
+Constant heat transfer coefficient [W/(m2.K)]
+Surface orientation [:#(type=Integer)]
+Area of surface [m2]
+variable heat transfer coefficient [W/(m2.K)]
+Positive temperature difference [degC]
+Heat flow rate from port_a -> port_b [W]
+port_a.T - port_b.T [K,]
+Calculation Method [:#(type=Integer)]
+Constant heat transfer coefficient [W/(m2.K)]
+Surface orientation [:#(type=Integer)]
+Area of surface [m2]
+variable heat transfer coefficient [W/(m2.K)]
+Positive temperature difference [degC]
+Area of radiation exchange [m2]
+Emissivity [1]
+Height of the battery [m]
+Width of the battery (should be longer than the length) [m]
+Length of the battery (should be shorter than the width) [m]
+Average specific heat capacity of the battery unit [J/(kg.K)]
+Mass of the battery [kg]
+Battery's area for the radiation [m2]
+Battery's emissivity coefficient [1]
+Number of batteries placed in one series [:#(type=Integer)]
+Number of battery series [:#(type=Integer)]
+Number of batteries stacked on another [:#(type=Integer)]
+Number of batteries in the rack [:#(type=Integer)]
+Is there a gap between the stacks (nStacked>1)? [:#(type=Boolean)]
+How are the batteries touching each other? [:#(type=Boolean)]
+default=0, area of the rack, which is placed at the wall,     so there is no vertical heat convection. [m2]
+Thermal loss of the battery - from external file [W]
+Reference temperature [K|degC]
+Temperature coefficient of heat flow rate [1/K]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat capacity of element (= cp*m) [J/K]
+Temperature of element [K|degC]
+der(Temperature of element) [K/s]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate from port_a -> port_b [W]
+port_a.T - port_b.T [K,]
+Calculation Method [:#(type=Integer)]
+Constant heat transfer coefficient [W/(m2.K)]
+Surface orientation [:#(type=Integer)]
+Area of surface [m2]
+variable heat transfer coefficient [W/(m2.K)]
+Positive temperature difference [degC]
+Heat flow rate from port_a -> port_b [W]
+port_a.T - port_b.T [K,]
+Calculation Method [:#(type=Integer)]
+Constant heat transfer coefficient [W/(m2.K)]
+Surface orientation [:#(type=Integer)]
+Area of surface [m2]
+variable heat transfer coefficient [W/(m2.K)]
+Positive temperature difference [degC]
+Area of radiation exchange [m2]
+Emissivity [1]
+Height of the battery [m]
+Width of the battery (should be longer than the length) [m]
+Length of the battery (should be shorter than the width) [m]
+Average specific heat capacity of the battery unit [J/(kg.K)]
+Mass of the battery [kg]
+Battery's area for the radiation [m2]
+Battery's emissivity coefficient [1]
+Number of batteries placed in one series [:#(type=Integer)]
+Number of battery series [:#(type=Integer)]
+Number of batteries stacked on another [:#(type=Integer)]
+Number of batteries in the rack [:#(type=Integer)]
+Is there a gap between the stacks (nStacked>1)? [:#(type=Boolean)]
+How are the batteries touching each other? [:#(type=Boolean)]
+default=0, area of the rack, which is placed at the wall,     so there is no vertical heat convection. [m2]
+Thermal loss of the battery - from external file [W]
+Reference temperature [K|degC]
+Temperature coefficient of heat flow rate [1/K]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat capacity of element (= cp*m) [J/K]
+Temperature of element [K|degC]
+der(Temperature of element) [K/s]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate from port_a -> port_b [W]
+port_a.T - port_b.T [K,]
+Calculation Method [:#(type=Integer)]
+Constant heat transfer coefficient [W/(m2.K)]
+Surface orientation [:#(type=Integer)]
+Area of surface [m2]
+variable heat transfer coefficient [W/(m2.K)]
+Positive temperature difference [degC]
+Heat flow rate from port_a -> port_b [W]
+port_a.T - port_b.T [K,]
+Calculation Method [:#(type=Integer)]
+Constant heat transfer coefficient [W/(m2.K)]
+Surface orientation [:#(type=Integer)]
+Area of surface [m2]
+variable heat transfer coefficient [W/(m2.K)]
+Positive temperature difference [degC]
+Area of radiation exchange [m2]
+Emissivity [1]
+Height of the battery [m]
+Width of the battery (should be longer than the length) [m]
+Length of the battery (should be shorter than the width) [m]
+Average specific heat capacity of the battery unit [J/(kg.K)]
+Mass of the battery [kg]
+Battery's area for the radiation [m2]
+Battery's emissivity coefficient [1]
+Number of batteries placed in one series [:#(type=Integer)]
+Number of battery series [:#(type=Integer)]
+Number of batteries stacked on another [:#(type=Integer)]
+Number of batteries in the rack [:#(type=Integer)]
+Is there a gap between the stacks (nStacked>1)? [:#(type=Boolean)]
+How are the batteries touching each other? [:#(type=Boolean)]
+default=0, area of the rack, which is placed at the wall,     so there is no vertical heat convection. [m2]
+Thermal loss of the battery - from external file [W]
+Reference temperature [K|degC]
+Temperature coefficient of heat flow rate [1/K]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat capacity of element (= cp*m) [J/K]
+Temperature of element [K|degC]
+der(Temperature of element) [K/s]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate from port_a -> port_b [W]
+port_a.T - port_b.T [K,]
+Calculation Method [:#(type=Integer)]
+Constant heat transfer coefficient [W/(m2.K)]
+Surface orientation [:#(type=Integer)]
+Area of surface [m2]
+variable heat transfer coefficient [W/(m2.K)]
+Positive temperature difference [degC]
+Heat flow rate from port_a -> port_b [W]
+port_a.T - port_b.T [K,]
+Calculation Method [:#(type=Integer)]
+Constant heat transfer coefficient [W/(m2.K)]
+Surface orientation [:#(type=Integer)]
+Area of surface [m2]
+variable heat transfer coefficient [W/(m2.K)]
+Positive temperature difference [degC]
+Area of radiation exchange [m2]
+Emissivity [1]
+Height of the battery [m]
+Width of the battery (should be longer than the length) [m]
+Length of the battery (should be shorter than the width) [m]
+Average specific heat capacity of the battery unit [J/(kg.K)]
+Mass of the battery [kg]
+Battery's area for the radiation [m2]
+Battery's emissivity coefficient [1]
+Number of batteries placed in one series [:#(type=Integer)]
+Number of battery series [:#(type=Integer)]
+Number of batteries stacked on another [:#(type=Integer)]
+Number of batteries in the rack [:#(type=Integer)]
+Is there a gap between the stacks (nStacked>1)? [:#(type=Boolean)]
+How are the batteries touching each other? [:#(type=Boolean)]
+default=0, area of the rack, which is placed at the wall,     so there is no vertical heat convection. [m2]
+Thermal loss of the battery - from external file [W]
+Reference temperature [K|degC]
+Temperature coefficient of heat flow rate [1/K]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat capacity of element (= cp*m) [J/K]
+Temperature of element [K|degC]
+der(Temperature of element) [K/s]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate from port_a -> port_b [W]
+port_a.T - port_b.T [K,]
+Calculation Method [:#(type=Integer)]
+Constant heat transfer coefficient [W/(m2.K)]
+Surface orientation [:#(type=Integer)]
+Area of surface [m2]
+variable heat transfer coefficient [W/(m2.K)]
+Positive temperature difference [degC]
+Heat flow rate from port_a -> port_b [W]
+port_a.T - port_b.T [K,]
+Calculation Method [:#(type=Integer)]
+Constant heat transfer coefficient [W/(m2.K)]
+Surface orientation [:#(type=Integer)]
+Area of surface [m2]
+variable heat transfer coefficient [W/(m2.K)]
+Positive temperature difference [degC]
+Area of radiation exchange [m2]
+Emissivity [1]
+Height of the battery [m]
+Width of the battery (should be longer than the length) [m]
+Length of the battery (should be shorter than the width) [m]
+Average specific heat capacity of the battery unit [J/(kg.K)]
+Mass of the battery [kg]
+Battery's area for the radiation [m2]
+Battery's emissivity coefficient [1]
+Number of batteries placed in one series [:#(type=Integer)]
+Number of battery series [:#(type=Integer)]
+Number of batteries stacked on another [:#(type=Integer)]
+Number of batteries in the rack [:#(type=Integer)]
+Is there a gap between the stacks (nStacked>1)? [:#(type=Boolean)]
+How are the batteries touching each other? [:#(type=Boolean)]
+default=0, area of the rack, which is placed at the wall,     so there is no vertical heat convection. [m2]
+Thermal loss of the battery - from external file [W]
+Reference temperature [K|degC]
+Temperature coefficient of heat flow rate [1/K]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat capacity of element (= cp*m) [J/K]
+Temperature of element [K|degC]
+der(Temperature of element) [K/s]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate from port_a -> port_b [W]
+port_a.T - port_b.T [K,]
+Calculation Method [:#(type=Integer)]
+Constant heat transfer coefficient [W/(m2.K)]
+Surface orientation [:#(type=Integer)]
+Area of surface [m2]
+variable heat transfer coefficient [W/(m2.K)]
+Positive temperature difference [degC]
+Heat flow rate from port_a -> port_b [W]
+port_a.T - port_b.T [K,]
+Calculation Method [:#(type=Integer)]
+Constant heat transfer coefficient [W/(m2.K)]
+Surface orientation [:#(type=Integer)]
+Area of surface [m2]
+variable heat transfer coefficient [W/(m2.K)]
+Positive temperature difference [degC]
+Area of radiation exchange [m2]
+Emissivity [1]
+Height of the battery [m]
+Width of the battery (should be longer than the length) [m]
+Length of the battery (should be shorter than the width) [m]
+Average specific heat capacity of the battery unit [J/(kg.K)]
+Mass of the battery [kg]
+Battery's area for the radiation [m2]
+Battery's emissivity coefficient [1]
+Number of batteries placed in one series [:#(type=Integer)]
+Number of battery series [:#(type=Integer)]
+Number of batteries stacked on another [:#(type=Integer)]
+Number of batteries in the rack [:#(type=Integer)]
+Is there a gap between the stacks (nStacked>1)? [:#(type=Boolean)]
+How are the batteries touching each other? [:#(type=Boolean)]
+default=0, area of the rack, which is placed at the wall,     so there is no vertical heat convection. [m2]
+Thermal loss of the battery - from external file [W]
+Reference temperature [K|degC]
+Temperature coefficient of heat flow rate [1/K]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat capacity of element (= cp*m) [J/K]
+Temperature of element [K|degC]
+der(Temperature of element) [K/s]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate from port_a -> port_b [W]
+port_a.T - port_b.T [K,]
+Calculation Method [:#(type=Integer)]
+Constant heat transfer coefficient [W/(m2.K)]
+Surface orientation [:#(type=Integer)]
+Area of surface [m2]
+variable heat transfer coefficient [W/(m2.K)]
+Positive temperature difference [degC]
+Heat flow rate from port_a -> port_b [W]
+port_a.T - port_b.T [K,]
+Calculation Method [:#(type=Integer)]
+Constant heat transfer coefficient [W/(m2.K)]
+Surface orientation [:#(type=Integer)]
+Area of surface [m2]
+variable heat transfer coefficient [W/(m2.K)]
+Positive temperature difference [degC]
+Area of radiation exchange [m2]
+Emissivity [1]
+Gain value multiplied with input signal [1]
+Input signal connector
+Gain value multiplied with input signal [1]
+Input signal connector
+Gain value multiplied with input signal [1]
+Input signal connector
+Gain value multiplied with input signal [1]
+Input signal connector
+Gain value multiplied with input signal [1]
+Input signal connector
+Gain value multiplied with input signal [1]
+Input signal connector
+Gain value multiplied with input signal [1]
+Input signal connector
+Gain value multiplied with input signal [1]
+Input signal connector
+Gain value multiplied with input signal [1]
+Input signal connector
+Gain value multiplied with input signal [1]
+Input signal connector
+Number of collected heat flows [:#(type=Integer)]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Number of collected heat flow phenomenas [:#(type=Integer)]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate (positive if flowing from outside into the component) [W]
+Heat flow rate (positive if flowing from outside into the component) [W]
+List for the different battery types [:#(type=Boolean)]
+List for the different battery types [:#(type=Boolean)]
+List for the different battery types [:#(type=Boolean)]
+List for the different battery types [:#(type=Boolean)]
+List for the different battery types [:#(type=Boolean)]
+List for the different battery types [:#(type=Boolean)]
+List for the different battery types [:#(type=Boolean)]
+List for the different battery types [:#(type=Boolean)]
+List for the different battery types [:#(type=Boolean)]
+List for the different battery types [:#(type=Boolean)]
+List for the different number of batteries per rack [:#(type=Integer)]
+List for the different number of batteries per rack [:#(type=Integer)]
+List for the different number of batteries per rack [:#(type=Integer)]
+List for the different number of batteries per rack [:#(type=Integer)]
+List for the different number of batteries per rack [:#(type=Integer)]
+List for the different number of batteries per rack [:#(type=Integer)]
+List for the different number of batteries per rack [:#(type=Integer)]
+List for the different number of batteries per rack [:#(type=Integer)]
+List for the different number of batteries per rack [:#(type=Integer)]
+List for the different number of batteries per rack [:#(type=Integer)]
+Sum of installed batteries from type 1 [:#(type=Integer)]
+Sum of installed batteries from type 2 [:#(type=Integer)]
+List of the fraction factors for the racks
+List of the fraction factors for the racks
+List of the fraction factors for the racks
+List of the fraction factors for the racks
+List of the fraction factors for the racks
+List of the fraction factors for the racks
+List of the fraction factors for the racks
+List of the fraction factors for the racks
+List of the fraction factors for the racks
+List of the fraction factors for the racks
+Fixed temperature at port [K|degC]
+Fixed temperature at port [K|degC]
+
