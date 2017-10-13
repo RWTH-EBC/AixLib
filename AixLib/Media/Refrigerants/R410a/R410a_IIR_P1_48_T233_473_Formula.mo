@@ -1183,19 +1183,64 @@ package R410a_IIR_P1_48_T233_473_Formula
   */
 
   protected
-    Real eta_zd "Dynamic viscosity for the limit of zero density";
-    Real eta_hd "Dynamic viscosity for the limit of high density";
+    SaturationProperties sat = setSat_T(state.T) "Saturation properties";
+    Real phase_dT "Phase calculated by density and temperature";
+
+    ThermodynamicState bubbleState "Thermodynamic state at bubble line";
+    ThermodynamicState dewState "Thermodynamic state at dew line";
+    Real quality "Vapour quality";
+
+    Real etaZd "Dynamic viscosity for the limit of zero density";
+    Real etaHd "Dynamic viscosity for the limit of high density";
+    Real etaHdL "Dynamic viscosity for the limit of high density at bubble line";
+    Real etaHdG "Dynamic viscosity for the limit of high density at dew line";
+    Real etaL "Dynamic viscosity at dew line";
+    Real etaG "Dynamic viscosity at bubble line";
 
   algorithm
-    // Calculate the dynamic visocity near the limit of zero density
-    eta_zd := -2.695 + 5.850e-2*state.T - 2.129e-5*state.T^2;
+    // Check phase
+    if state.phase == 0 then
+      phase_dT :=if not ((state.d < bubbleDensity(sat) and state.d > dewDensity(
+        sat)) and state.T < fluidConstants[1].criticalTemperature) then 1 else 2;
+    else
+      phase_dT :=state.phase;
+    end if;
 
-    // Calculate the dynamic viscosity for limits of higher densities
-    eta_hd := 9.047e-3 + 5.784e-5*state.d^2 + 1.309e-7*state.d^3 -
-      2.422e-10*state.d^4 + 9.424e-14*state.d^5 + 3.933e-17*state.d^6;
+    if (state.phase == 1 or phase_dT == 1) then
+      // Calculate the dynamic visocity near the limit of zero density
+      etaZd := -2.695 + 5.850e-2*state.T - 2.129e-5*state.T^2;
 
-    // Calculate the final dynamic visocity
-    eta := (1.003684953*eta_zd + 1.055260736*eta_hd)*1e-6;
+      // Calculate the dynamic viscosity for limits of higher densities
+      etaHd := 9.047e-3 + 5.784e-5*state.d^2 + 1.309e-7*state.d^3 -
+        2.422e-10*state.d^4 + 9.424e-14*state.d^5 + 3.933e-17*state.d^6;
+
+      // Calculate the final dynamic visocity
+      eta := (1.003684953*etaZd + 1.055260736*etaHd)*1e-6;
+    else
+      // Calculate properties at bubble and dew line
+      bubbleState := setBubbleState(setSat_T(state.T));
+      dewState := setDewState(setSat_T(state.T));
+      quality := (bubbleState.d/state.d - 1)/(bubbleState.d/dewState.d - 1);
+
+      // Calculate the dynamic visocity near the limit of zero density
+      etaZd := -2.695 + 5.850e-2*state.T - 2.129e-5*state.T^2;
+
+      // Calculate the dynamic viscosity for limits of higher densities
+      etaHdL := 9.047e-3 + 5.784e-5*bubbleState.d^2 + 1.309e-7*bubbleState.d^3 -
+        2.422e-10*bubbleState.d^4 + 9.424e-14*bubbleState.d^5 +
+        3.933e-17*bubbleState.d^6;
+      etaHdG := 9.047e-3 + 5.784e-5*dewState.d^2 + 1.309e-7*dewState.d^3 -
+        2.422e-10*dewState.d^4 + 9.424e-14*dewState.d^5 +
+        3.933e-17*dewState.d^6;
+
+      // Calculate the dynamic visocity at bubble and dew line
+      etaL := (1.003684953*etaZd + 1.055260736*etaHdL)*1e-6;
+      etaG := (1.003684953*etaZd + 1.055260736*etaHdG)*1e-6;
+
+      // Calculate the final dynamic visocity
+      eta := (quality/etaG + (1 - quality)/etaL)^(-1);
+    end if;
+
   end dynamicViscosity;
 
   redeclare function extends thermalConductivity
@@ -1208,19 +1253,61 @@ package R410a_IIR_P1_48_T233_473_Formula
     obtained by the ExternalMedia libaray (i.e. CoolProp)
   */
   protected
-    Real lambda_0 "Thermal conductivity for the limit of zero density";
-    Real lambda_r "Thermal conductivity for residual part";
+    SaturationProperties sat = setSat_T(state.T) "Saturation properties";
+    Real phase_dT "Phase calculated by density and temperature";
+
+    ThermodynamicState bubbleState "Thermodynamic state at bubble line";
+    ThermodynamicState dewState "Thermodynamic state at dew line";
+    Real quality "Vapour quality";
+
+    Real lambdaIdg "Thermal conductivity for the limit of zero density";
+    Real lambdaRes "Thermal conductivity for residual part";
+    Real lambdaResL "Thermal conductivity for residual part at bubble line";
+    Real lambdaResG "Thermal conductivity for residual part at dew line";
+    Real lambdaL "Thermal conductivity at dew line";
+    Real lambdaG "Thermal conductivity at bubble line";
 
   algorithm
-    // Calculate the thermal conducitvity for the limit of zero density
-    lambda_0 := -8.872 + 7.41e-2*state.T;
+    // Check phase
+    if state.phase == 0 then
+      phase_dT :=if not ((state.d < bubbleDensity(sat) and state.d > dewDensity(
+        sat)) and state.T < fluidConstants[1].criticalTemperature) then 1 else 2;
+    else
+      phase_dT :=state.phase;
+    end if;
 
-    // Calculate the thermal conductivity for the residual part
-    lambda_r := 3.576e-2*state.d - 9.045e-6*state.d^2 + 4.343e-8*state.d^3
-      - 3.705e-12*state.d^4;
+    if (state.phase == 1 or phase_dT == 1) then
+      // Calculate the thermal conducitvity for the limit of zero density
+      lambdaIdg := -8.872 + 7.41e-2*state.T;
 
-    // Calculate the final thermal conductivity
-    lambda := (lambda_0 + 0.9994549202*lambda_r)*1e-3;
+      // Calculate the thermal conductivity for the residual part
+      lambdaRes := 3.576e-2*state.d - 9.045e-6*state.d^2 + 4.343e-8*state.d^3
+        - 3.705e-12*state.d^4;
+
+      // Calculate the final thermal conductivity
+      lambda := (lambdaIdg + 0.9994549202*lambdaRes)*1e-3;
+    else
+      // Calculate properties at bubble and dew line
+      bubbleState := setBubbleState(setSat_T(state.T));
+      dewState := setDewState(setSat_T(state.T));
+      quality := (bubbleState.d/state.d - 1)/(bubbleState.d/dewState.d - 1);
+
+      // Calculate the thermal conducitvity for the limit of zero density
+      lambdaIdg := -8.872 + 7.41e-2*state.T;
+
+      // Calculate the thermal conductivity for the residual part
+      lambdaResL := 3.576e-2*bubbleState.d - 9.045e-6*bubbleState.d^2 +
+        4.343e-8*bubbleState.d^3 - 3.705e-12*bubbleState.d^4;
+      lambdaResG := 3.576e-2*dewState.d - 9.045e-6*dewState.d^2 +
+        4.343e-8*dewState.d^3 - 3.705e-12*dewState.d^4;
+
+      // Calculate the thermal conductivity at bubble and dew line
+      lambdaL := (lambdaIdg + 0.9994549202*lambdaResL)*1e-3;
+      lambdaG := (lambdaIdg + 0.9994549202*lambdaResG)*1e-3;
+
+      // Calculate the final thermal conductivity
+      lambda := (quality/lambdaG + (1 - quality)/lambdaL)^(-1);
+    end if;
 
   end thermalConductivity;
 

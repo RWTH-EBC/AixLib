@@ -1175,52 +1175,132 @@ package R134a_IIR_P1_395_T233_455_Formula
   Afterwards, the coefficients are adapted to the HelmholtzMedia libary.
 */
   protected
-    Real Tred = state.T/299.363
-      "Reduced temperature for lower density terms";
-    Real omega_eta "Reduced effective collision cross section";
-    Real eta_zd "Dynamic viscosity for the limit of zero density";
-    Real B_eta_zd
-      "Second viscosity virial coefficient for the limit of zero density";
-    Real B_eta "Second viscosity virial coefficient";
-    Real eta_n "Dynamic viscosity for moderate density limits";
-    Real tau = state.T/374.21
-      "Reduced temperature for higher density terms";
-    Real delta = state.d/511.9 "Reduced density for higher density terms";
-    Real delta_hd "Reduced close-pacled density";
-    Real eta_hd "Dynamic viscosity for the limit of high density";
+    SaturationProperties sat = setSat_T(state.T) "Saturation properties";
+    Real phase_dT "Phase calculated by density and temperature";
+
+    ThermodynamicState bubbleState "Thermodynamic state at bubble line";
+    ThermodynamicState dewState "Thermodynamic state at dew line";
+    Real quality "Vapour quality";
+
+    Real Tred = state.T/299.363 "Reduced temperature for lower density terms";
+    Real tau = state.T/374.21 "Reduced temperature for higher density terms";
+    Real omegaEta "Reduced effective collision cross section";
+    Real etaZd "Dynamic viscosity for the limit of zero density";
+    Real BEtaZd "Second viscosity virial coefficient for limits of zero density";
+    Real BEta "Second viscosity virial coefficient";
+    Real etaN "Dynamic viscosity for moderate density limits";
+    Real etaNL "Dynamic viscosity for moderate density limits at bubble line";
+    Real etaNG "Dynamic viscosity for moderate density limits at dew line";
+    Real delta "Reduced density for higher density terms";
+    Real deltaL "Reduced density for higher density terms";
+    Real deltaG "Reduced density for higher density terms";
+    Real deltaHd "Reduced close-pacled density";
+    Real etaL "Dynamic viscosity for the limit of high density at bubble line";
+    Real etaG "Dynamic viscosity for the limit of high density at dew line";
+    Real etaHd "Dynamic viscosity for the limit of high density";
+    Real etaHdL "Dynamic viscosity for the limit of high density at bubble line";
+    Real etaHdG "Dynamic viscosity for the limit of high density at dew line";
 
   algorithm
-    // Calculate the dynamic visocity near the limit of zero density
-    if abs(Tred)<1E-20 then
-      Tred := 1E-20;
+    // Check phase
+    if state.phase == 0 then
+      phase_dT :=if not ((state.d < bubbleDensity(sat) and state.d > dewDensity(
+        sat)) and state.T < fluidConstants[1].criticalTemperature) then 1 else 2;
+    else
+      phase_dT :=state.phase;
     end if;
-    omega_eta := exp(0.355404 - 0.464337*Tred + 0.257353E-1*Tred^2);
-    eta_zd := 0.1399787595 * sqrt(state.T) / (0.468932^2*omega_eta);
 
-    // Calculate the second viscosity virial coefficient
-    B_eta_zd := -0.19572881E+2 + 0.21973999E+3*Tred^(-0.25) -
-      0.10153226E+4*Tred^(-0.50) + 0.24710125E+4*Tred^(-0.75) -
-      0.33751717E+4*Tred^(-1.00) + 0.24916597E+4*Tred^(-1.25) -
-      0.78726086E+3*Tred^(-1.50) + 0.14085455E+2*Tred^(-2.50) -
-      0.34664158E+0*Tred^(-5.50);
-    B_eta_zd := B_eta_zd*0.6022137*0.468932^3;
-    eta_n := eta_zd*B_eta_zd*(state.d/(1000*fluidConstants[1].molarMass));
+    if (state.phase == 1 or phase_dT == 1) then
+      // Calculate properties
+      delta :=state.d/511.9 "Reduced density for higher density terms";
 
-    // Calculate the dynamic viscosity for limits of higher densities
-    delta_hd := 3.163695635587490/(1 - 0.8901733752064137E-1*tau +
-      0.1000352946668359*tau^2);
-    eta_hd :=   -0.2069007192080741E-1*delta +
-      0.3560295489828222E-3*tau^(-6.00)*delta^(2.00) +
-      0.2111018162451597E-2*tau^(-2.00)*delta^(2.00) +
-      0.1396014148308975E-1*tau^(-0.50)*delta^(2.00) -
-      0.4564350196734897E-2*tau^(2.00)*delta^(2.00) -
-      0.3515932745836890E-2*delta^(3.00) -
-      0.2147633195397038*delta_hd^(-1) + (0.2147633195397038/
-      (delta_hd - delta));
-    eta_hd := eta_hd*1e3;
+      // Calculate the dynamic visocity near the limit of zero density
+      if abs(Tred)<1E-20 then
+        Tred := 1E-20;
+      end if;
+      omegaEta := exp(0.355404 - 0.464337*Tred + 0.257353E-1*Tred^2);
+      etaZd := 0.1399787595 * sqrt(state.T) / (0.468932^2*omegaEta);
 
-    // Calculate the final dynamic visocity
-    eta := (eta_zd + eta_n + eta_hd)*1e-6;
+      // Calculate the second viscosity virial coefficient
+      BEtaZd := -0.19572881E+2 + 0.21973999E+3*Tred^(-0.25) -
+        0.10153226E+4*Tred^(-0.50) + 0.24710125E+4*Tred^(-0.75) -
+        0.33751717E+4*Tred^(-1.00) + 0.24916597E+4*Tred^(-1.25) -
+        0.78726086E+3*Tred^(-1.50) + 0.14085455E+2*Tred^(-2.50) -
+        0.34664158E+0*Tred^(-5.50);
+      BEta := BEtaZd*0.6022137*0.468932^3;
+      etaN := etaZd*BEta*(state.d/(1000*fluidConstants[1].molarMass));
+
+      // Calculate the dynamic viscosity for limits of higher densities
+      deltaHd := 3.163695635587490/(1 - 0.8901733752064137E-1*tau +
+        0.1000352946668359*tau^2);
+      etaHd :=   -0.2069007192080741E-1*delta +
+        0.3560295489828222E-3*tau^(-6.00)*delta^(2.00) +
+        0.2111018162451597E-2*tau^(-2.00)*delta^(2.00) +
+        0.1396014148308975E-1*tau^(-0.50)*delta^(2.00) -
+        0.4564350196734897E-2*tau^(2.00)*delta^(2.00) -
+        0.3515932745836890E-2*delta^(3.00) -
+        0.2147633195397038*deltaHd^(-1) + (0.2147633195397038/
+        (deltaHd - delta));
+      etaHd := etaHd*1e3;
+
+      // Calculate the final dynamic visocity
+      eta := (etaZd + etaN + etaHd)*1e-6;
+    else
+      // Calculate properties at bubble and dew line
+      bubbleState := setBubbleState(setSat_T(state.T));
+      dewState := setDewState(setSat_T(state.T));
+      quality := (bubbleState.d/state.d - 1)/(bubbleState.d/dewState.d - 1);
+      deltaL :=bubbleState.d/511.9
+        "Reduced density for higher density terms at bubble line";
+      deltaG :=dewState.d/511.9
+        "Reduced density for higher density terms at dew line";
+
+      // Calculate the dynamic visocity near the limit of zero density
+      if abs(Tred)<1E-20 then
+        Tred := 1E-20;
+      end if;
+      omegaEta := exp(0.355404 - 0.464337*Tred + 0.257353E-1*Tred^2);
+      etaZd := 0.1399787595 * sqrt(state.T) / (0.468932^2*omegaEta);
+
+      // Calculate the second viscosity virial coefficient
+      BEtaZd := -0.19572881E+2 + 0.21973999E+3*Tred^(-0.25) -
+        0.10153226E+4*Tred^(-0.50) + 0.24710125E+4*Tred^(-0.75) -
+        0.33751717E+4*Tred^(-1.00) + 0.24916597E+4*Tred^(-1.25) -
+        0.78726086E+3*Tred^(-1.50) + 0.14085455E+2*Tred^(-2.50) -
+        0.34664158E+0*Tred^(-5.50);
+      BEta := BEtaZd*0.6022137*0.468932^3;
+      etaNL := etaZd*BEta*(bubbleState.d/(1000*fluidConstants[1].molarMass));
+      etaNG := etaZd*BEta*(dewState.d/(1000*fluidConstants[1].molarMass));
+
+      // Calculate the dynamic viscosity for limits of higher densities
+      deltaHd := 3.163695635587490/(1 - 0.8901733752064137E-1*tau +
+        0.1000352946668359*tau^2);
+      etaHdL :=   -0.2069007192080741E-1*deltaL +
+        0.3560295489828222E-3*tau^(-6.00)*deltaL^(2.00) +
+        0.2111018162451597E-2*tau^(-2.00)*deltaL^(2.00) +
+        0.1396014148308975E-1*tau^(-0.50)*deltaL^(2.00) -
+        0.4564350196734897E-2*tau^(2.00)*deltaL^(2.00) -
+        0.3515932745836890E-2*deltaL^(3.00) -
+        0.2147633195397038*deltaHd^(-1) + (0.2147633195397038/
+        (deltaHd - deltaL));
+      etaHdG :=   -0.2069007192080741E-1*deltaG +
+        0.3560295489828222E-3*tau^(-6.00)*deltaG^(2.00) +
+        0.2111018162451597E-2*tau^(-2.00)*deltaG^(2.00) +
+        0.1396014148308975E-1*tau^(-0.50)*deltaG^(2.00) -
+        0.4564350196734897E-2*tau^(2.00)*deltaG^(2.00) -
+        0.3515932745836890E-2*deltaG^(3.00) -
+        0.2147633195397038*deltaHd^(-1) + (0.2147633195397038/
+        (deltaHd - deltaG));
+      etaHdL := etaHdL*1e3;
+      etaHdG := etaHdG*1e3;
+
+      // Calculate the dynamic visocity at bubble and dew state
+      etaL := (etaZd + etaNL + etaHdL)*1e-6;
+      etaG := (etaZd + etaNG + etaHdG)*1e-6;
+
+      // Calculate the final dynamic visocity
+      eta := (quality/etaG + (1 - quality)/etaL)^(-1);
+    end if;
 
   end dynamicViscosity;
 
@@ -1234,61 +1314,192 @@ package R134a_IIR_P1_395_T233_455_Formula
   Afterwards, the coefficients are adapted to the HelmholtzMedia libary.
   */
   protected
-    Real lambda_0 "Thermal conductivity for the limit of zero density";
-    Real delta = state.d/515.2499684
-      "Reduced density for the residual part";
-    Real lambda_r "Thermal conductivity for residual part";
-    ThermodynamicState state_0(
-      d=state.d,
-      T=561.411,
-      p=pressure_dT(d=state.d,T=561.411,phase=state.phase),
-      h = specificEnthalpy_dT(d=state.d,T=561.411,phase=state.phase),
-      phase = state.phase) "Reference state for crossover function";
+    SaturationProperties sat = setSat_T(state.T) "Saturation properties";
+    Integer phase_dT "Phase calculated by density and temperature";
+
+    ThermodynamicState bubbleState "Thermodynamic state at bubble line";
+    ThermodynamicState dewState "Thermodynamic state at dew line";
+    Real quality "Vapour quality";
+
+    Real lambdaIdg "Thermal conductivity for the limit of zero density";
+    Real delta "Reduced density for the residual part";
+    Real deltaL "Reduced density for the residual part at bubble line";
+    Real deltaG "Reduced density for the residual part at dew line";
+    Real lambdaRes "Thermal conductivity for residual part";
+    Real lambdaResL "Thermal conductivity for residual part at bubble line";
+    Real lambdaResG "Thermal conductivity for residual part at dew line";
+    ThermodynamicState stateRef "Reference state for crossover function";
+    ThermodynamicState stateRefL
+      "Reference state for crossover function at bubble line";
+    ThermodynamicState stateRefG
+      "Reference state for crossover function at dew line";
     Real chi "Dimensionless susceptibility";
+    Real chiL "Dimensionless susceptibility at bubble line";
+    Real chiG "Dimensionless susceptibility at dew line";
     Real xi "Correlation length";
-    Real chi_0 "Dimensionless susceptibility at reference state";
-    Real cp = specificHeatCapacityCp(state)
-      "Specific heat capacity at constant pressure";
-    Real cv = specificHeatCapacityCv(state)
-      "Specific heat capacity at constant volume";
-    Real eta = dynamicViscosity(state) "Dynamic viscosity";
+    Real xiL "Correlation length";
+    Real xiG "Correlation length";
+    Real chiRef "Dimensionless susceptibility at reference state";
+    Real chiRefL "Dimensionless susceptibility at reference state at bubble line";
+    Real chiRefG "Dimensionless susceptibility at reference state at dew line";
+    Real cp "Specific heat capacity at constant pressure";
+    Real cpL "Specific heat capacity at constant pressure at bubble line";
+    Real cpG "Specific heat capacity at constant pressure at dew line";
+    Real cv "Specific heat capacity at constant volume";
+    Real cvL "Specific heat capacity at constant volume at dew line";
+    Real cvG "Specific heat capacity at constant volume at bubble line";
+    Real eta "Dynamic viscosity";
+    Real etaL "Dynamic viscosity at bubble line";
+    Real etaG "Dynamic viscosity at dew line";
     Real omega "Crossover function";
-    Real omega_0 "Crossover function at reference state";
-    Real lambda_c
+    Real omegaL "Crossover functio at bubble line";
+    Real omegaG "Crossover function at dew line";
+    Real omegaRef "Crossover function at reference state";
+    Real omegaRefL "Crossover function at reference state at bubble line";
+    Real omegaRefG "Crossover function at reference state at dew line";
+    Real lambdaCri
       "Thermal conductivity for the region of the critical point";
+    Real lambdaCriL
+      "Thermal conductivity for the region of the critical point at bubble line";
+    Real lambdaCriG
+      "Thermal conductivity for the region of the critical point at dew line";
+    Real lambdaL "Thermal conductivity at bubble line";
+    Real lambdaG "Thermal conductivity at dew line";
+
   algorithm
-
-    // Calculate the thermal conducitvity for the limit of zero density
-    lambda_0 := -0.0105248 + 0.0000800982*state.T;
-
-    // Calculate the thermal conductivity for the residual part
-    lambda_r := 1.836526E+0*delta + 5.126143E+0*delta^2 -
-      1.436883E+0*delta^3 + 6.261441E-1*delta^4;
-    lambda_r := lambda_r*2.055E-3;
-
-    // Calculate the thermal conductivity for the regition of the critical point
-    if state.d < 511.899952/100 then
-      lambda_c := 0;
+    // Check phase
+    if state.phase == 0 then
+      phase_dT :=if not ((state.d < bubbleDensity(sat) and state.d > dewDensity(
+        sat)) and state.T < fluidConstants[1].criticalTemperature) then 1 else 2;
     else
-      chi := 4059280/511.899952^2*state.d/pressure_derd_T(state);
-      chi_0 := 4059280/511.899952^2*state.d/pressure_derd_T(state_0)*
-        561.411/state.T;
-      if ((chi - chi_0) < 0) then
-        lambda_c := 0;
-      else
-        xi := 1.94E-10*((chi - chi_0)/0.0496)^(0.63/1.239);
-        omega := 2/Modelica.Constants.pi*((cp - cv)/cp*
-          atan((1/5.285356E-10)*xi) + cv/cp*(1/5.285356E-10)*xi);
-        omega_0 := 2/Modelica.Constants.pi*(1 - exp(-1/(1/((1/5.285356E-10)*xi)
-          + (((1/5.285356E-10)*xi*511.899952/state.d)^2)/3)));
-        lambda_c := (state.d*cp*1.03*Modelica.Constants.k*state.T)/
-          (6*Modelica.Constants.pi*eta*xi)*(omega - omega_0);
-        lambda_c := max(0, lambda_c);
-      end if;
+      phase_dT :=state.phase;
     end if;
 
-    // Calculate the final thermal conductivity
-    lambda := lambda_0 + lambda_r + lambda_c;
+    if (state.phase == 1 or phase_dT == 1) then
+      // Calculate properties
+      delta :=state.d/515.2499684;
+      stateRef :=setState_dTX(d=state.d,T=561.411,phase=phase_dT);
+
+      // Calculate the thermal conducitvity for the limit of zero density
+      lambdaIdg := -0.0105248 + 0.0000800982*state.T;
+
+      // Calculate the thermal conductivity for the residual part
+      lambdaRes := 1.836526E+0*delta + 5.126143E+0*delta^2 -
+        1.436883E+0*delta^3 + 6.261441E-1*delta^4;
+      lambdaRes := lambdaRes*2.055E-3;
+
+      // Calculate the thermal conductivity for the region of the critical point
+      if state.d < 511.899952/100 then
+        lambdaCri := 0;
+      else
+        chi := 4059280/511.899952^2*state.d/pressure_derd_T(state);
+        chiRef := 4059280/511.899952^2*state.d/pressure_derd_T(stateRef)*
+          561.411/state.T;
+        if ((chi - chiRef) < 0) then
+          lambdaCri := 0;
+        else
+          cp :=specificHeatCapacityCp(state);
+          cv :=specificHeatCapacityCv(state);
+          eta :=dynamicViscosity(state);
+
+          xi := 1.94E-10*((chi - chiRef)/0.0496)^(0.63/1.239);
+          omega := 2/Modelica.Constants.pi*((cp - cv)/cp*
+            atan((1/5.285356E-10)*xi) + cv/cp*(1/5.285356E-10)*xi);
+          omegaRef := 2/Modelica.Constants.pi*(1 - exp(-1/(1/((1/5.285356E-10)*
+            xi) + (((1/5.285356E-10)*xi*511.899952/state.d)^2)/3)));
+          lambdaCri := (state.d*cp*1.03*Modelica.Constants.k*state.T)/
+            (6*Modelica.Constants.pi*eta*xi)*(omega - omegaRef);
+          lambdaCri := max(0, lambdaCri);
+        end if;
+      end if;
+
+      // Calculate the final thermal conductivity
+      lambda := lambdaIdg + lambdaRes + lambdaCri;
+    else
+      // Calculate properties
+      bubbleState := setBubbleState(setSat_T(state.T));
+      dewState := setDewState(setSat_T(state.T));
+      quality := (bubbleState.d/state.d - 1)/(bubbleState.d/dewState.d - 1);
+      deltaL :=bubbleState.d/515.2499684;
+      deltaG :=dewState.d/515.2499684;
+      stateRefL :=setState_dTX(d=bubbleState.d,T=561.411,phase=phase_dT);
+      stateRefG :=setState_dTX(d=dewState.d,T=561.411,phase=phase_dT);
+
+      // Calculate the thermal conducitvity for the limit of zero density
+      lambdaIdg := -0.0105248 + 0.0000800982*state.T;
+
+      // Calculate the thermal conductivity for the residual part
+      lambdaResL := 1.836526E+0*deltaL + 5.126143E+0*deltaL^2 -
+        1.436883E+0*deltaL^3 + 6.261441E-1*deltaL^4;
+      lambdaResG := 1.836526E+0*deltaG + 5.126143E+0*deltaG^2 -
+        1.436883E+0*deltaG^3 + 6.261441E-1*deltaG^4;
+      lambdaResL := lambdaResL*2.055E-3;
+      lambdaResG := lambdaResG*2.055E-3;
+
+      // Calculate the thermal conductivity for the region of the critical point
+      if bubbleState.d < 511.899952/100 then
+        lambdaCriL := 0;
+      else
+        chiL := 4059280/511.899952^2*bubbleState.d/pressure_derd_T(
+          setState_dTX(d=bubbleState.d,T=state.T,phase=1));
+        chiRefL := 4059280/511.899952^2*bubbleState.d/pressure_derd_T(stateRefL)*
+          561.411/state.T;
+        if ((chiL - chiRefL) < 0) then
+          lambdaCriL := 0;
+        else
+          cpL :=specificHeatCapacityCp(setState_dTX(
+            d=bubbleState.d,T=state.T,phase=1));
+          cvL :=specificHeatCapacityCv(setState_dTX(
+            d=bubbleState.d,T=state.T,phase=1));
+          etaL :=dynamicViscosity(setState_dTX(
+            d=bubbleState.d,T=state.T,phase=1));
+
+          xiL := 1.94E-10*((chiL - chiRefL)/0.0496)^(0.63/1.239);
+          omegaL := 2/Modelica.Constants.pi*((cpL - cvL)/cpL*
+            atan((1/5.285356E-10)*xiL) + cvL/cpL*(1/5.285356E-10)*xiL);
+          omegaRefL := 2/Modelica.Constants.pi*(1 - exp(-1/(1/((1/5.285356E-10)*
+            xiL) + (((1/5.285356E-10)*xiL*511.899952/bubbleState.d)^2)/3)));
+          lambdaCriL := (bubbleState.d*cpL*1.03*Modelica.Constants.k*state.T)/
+            (6*Modelica.Constants.pi*etaL*xiL)*(omegaL - omegaRefL);
+          lambdaCriL := max(0, lambdaCriL);
+        end if;
+      end if;
+
+      if dewState.d < 511.899952/100 then
+        lambdaCriG := 0;
+      else
+        chiG := 4059280/511.899952^2*dewState.d/pressure_derd_T(
+          setState_dTX(d=dewState.d,T=state.T,phase=1));
+        chiRefG := 4059280/511.899952^2*dewState.d/pressure_derd_T(stateRefG)*
+          561.411/state.T;
+        if ((chiG - chiRefG) < 0) then
+          lambdaCriG := 0;
+        else
+          cpG :=specificHeatCapacityCp(setState_dTX(
+            d=dewState.d,T=state.T,phase=1));
+          cvG :=specificHeatCapacityCv(setState_dTX(
+            d=dewState.d,T=state.T,phase=1));
+          etaG :=dynamicViscosity(setState_dTX(
+            d=dewState.d,T=state.T,phase=1));
+
+          xiG := 1.94E-10*((chiG - chiRefG)/0.0496)^(0.63/1.239);
+          omegaG := 2/Modelica.Constants.pi*((cpG - cvG)/cpG*
+            atan((1/5.285356E-10)*xiG) + cvG/cpG*(1/5.285356E-10)*xiG);
+          omegaRefG := 2/Modelica.Constants.pi*(1 - exp(-1/(1/((1/5.285356E-10)*
+            xiG) + (((1/5.285356E-10)*xiG*511.899952/dewState.d)^2)/3)));
+          lambdaCriG := (dewState.d*cpG*1.03*Modelica.Constants.k*state.T)/
+            (6*Modelica.Constants.pi*etaG*xiG)*(omegaG - omegaRefG);
+          lambdaCriG := max(0, lambdaCriG);
+        end if;
+      end if;
+
+      // Calculate the final thermal conductivity at bubble and dew line
+      lambdaL := lambdaIdg + lambdaResL + lambdaCriL;
+      lambdaG := lambdaIdg + lambdaResG + lambdaCriG;
+
+      // Calculate the final dynamic visocity
+      lambda := (quality/lambdaG + (1 - quality)/lambdaL)^(-1);
+    end if;
 
   end thermalConductivity;
 
