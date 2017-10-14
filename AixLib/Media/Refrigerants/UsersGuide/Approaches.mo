@@ -16,15 +16,15 @@ class Approaches "Approaches implemented in refrigerant library"
 </html>",
         info="<html>
 <p>
-The hybrid approach is developed by Sangi et al. and consists of both 
-the Helmholtz equation of state and fitted formula for thermodynamic 
-state properties at bubble or dew line (e.g. p<sub>sat</sub> or 
-h<sub>l,sat</sub>) and thermodynamic state properties depending on two
+The hybrid approach is developed by Sangi et al.
+and consists of both the Helmholtz equation of state and fitted formula for
+thermodynamic state properties at bubble or dew line (e.g. p<sub>sat</sub>
+or h<sub>l,sat</sub>) and thermodynamic state properties depending on two
 independent state properties (e.g. T_ph or T_ps). In the following, the basic
 formulas of the hybrid approach are given.
 </p>
 <p>
-<h4>The Helmholtz equation of state</h4>
+<b>The Helmholtz equation of state</b>
 </p>
 <p>
 The Helmholtz equation of state (EoS) allows the accurate description of
@@ -68,7 +68,7 @@ Partial derivatives of thermodynamic state properties for dynamic
 simulation</a>&quot; by Thorade and Saadat.
 </p>
 <p>
-<h4>Fitted formulas</h4>
+<b>Fitted formulas</b>
 </p>
 <p>
 Fitted formulas allow to reduce the overall computing time of the refrigerant
@@ -82,72 +82,72 @@ their &quot;Fast_Propane&quot; model and given below:<br />
 cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"80%\"
 style=\"border-collapse:collapse;\">
 <tr>
-<td valign=\"middle\">
-  <p><i>Saturation pressure</i></p>
-</td>
+<td valign=\"middle\"><p>
+  <i>Saturation pressure</i>
+</p></td>
 <td valign=\"middle\"><p>
   <img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/SaturationPressure.png\"
   alt=\"Formula to calculate saturation pressure\"/>
 </p></td>
 </tr>
 <tr>
-<td valign=\"middle\">
-  <p><i>Saturation temperature</i></p>
-</td>
+<td valign=\"middle\"><p>
+  <i>Saturation temperature</i>
+</p></td>
 <td valign=\"middle\"><p>
   <img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/SaturationTemperature.png\"
   alt=\"Formula to calculate saturation temperature\"/>
 </p></td>
 </tr>
 <tr>
-<td valign=\"middle\">
-  <p><i>Bubble density</i></p>
-</td>
+<td valign=\"middle\"><p>
+  <i>Bubble density</i>
+</p></td>
 <td valign=\"middle\"><p>
   <img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/BubbleDensity.png\"
   alt=\"Formula to calculate bubble density\"/>
 </p></td>
 </tr>
 <tr>
-<td valign=\"middle\">
-  <p><i>Dew density</i></p>
-</td>
+<td valign=\"middle\"><p>
+  <i>Dew density</i>
+</p></td>
 <td valign=\"middle\"><p>
   <img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/DewDensity.png\"
   alt=\"Formula to calculate dew density\"/>
 </p></td>
 </tr>
 <tr>
-<td valign=\"middle\">
-  <p><i>Bubble Enthalpy</i></p>
-</td>
+<td valign=\"middle\"><p>
+  <i>Bubble Enthalpy</i>
+</p></td>
 <td valign=\"middle\"><p>
   <img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/BubbleEnthalpy.png\"
   alt=\"Formula to calculate bubble enthalpy\"/>
 </p></td>
 </tr>
 <tr>
-<td valign=\"middle\">
-  <p><i>Dew Enthalpy</i></p>
-</td>
+<td valign=\"middle\"><p>
+  <i>Dew Enthalpy</i>
+</p></td>
 <td valign=\"middle\"><p>
   <img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/DewEnthalpy.png\"
   alt=\"Formula to calculate dew enthalpy\"/>
 </p></td>
 </tr>
 <tr>
-<td valign=\"middle\">
-  <p><i>Bubble Entropy</i></p>
-</td>
+<td valign=\"middle\"><p>
+  <i>Bubble Entropy</i>
+</p></td>
 <td valign=\"middle\"><p>
   <img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/BubbleEntropy.png\"
   alt=\"Formula to calculate bubble entropy\"/>
 </p></td>
 </tr>
 <tr>
-<td valign=\"middle\">
-  <p><i>Dew Entropy</i></p>
-</td>
+<td valign=\"middle\"><p>
+  <i>Dew Entropy</i>
+</p></td>
 <td valign=\"middle\"><p>
   <img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/DewEntropy.png\"
   alt=\"Formula to calculate dew entropy\"/>
@@ -158,12 +158,12 @@ style=\"border-collapse:collapse;\">
 superheated and supercooled regime\" cellspacing=\"0\" cellpadding=\"3\"
 border=\"1\" width=\"80%\" style=\"border-collapse:collapse;\">
 <tr>
-<td valign=\"middle\" rowspan=\"2\">
-  <p><i>Temperature_ph</i></p>
-</td>
-<td valign=\"middle\">
-  <p>First Input</p>
-</td>
+<td valign=\"middle\" rowspan=\"2\"><p>
+  <i>Temperature_ph</i>
+</p></td>
+<td valign=\"middle\"><p>
+  First Input
+</p></td>
 <td valign=\"middle\"><p>
   <img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Temperature_ph_Input1.png\"
   alt=\"First input required to calculate temperature by pressure and specific
@@ -171,9 +171,9 @@ border=\"1\" width=\"80%\" style=\"border-collapse:collapse;\">
 </p></td>
 </tr>
 <tr>
-<td valign=\"middle\">
-  <p>Second Input</p>
-</td>
+<td valign=\"middle\"><p>
+  Second Input
+</p></td>
 <td valign=\"middle\"><p>
   <img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Temperature_ph_Input2.png\"
   alt=\"Second input required to calculate temperature by pressure and
@@ -181,12 +181,12 @@ border=\"1\" width=\"80%\" style=\"border-collapse:collapse;\">
 </p></td>
 </tr>
 <tr>
-<td valign=\"middle\" rowspan=\"2\">
-  <p><i>Temperature_ps</i></p>
-</td>
-<td valign=\"middle\">
-  <p>First Input</p>
-</td>
+<td valign=\"middle\" rowspan=\"2\"><p>
+  <i>Temperature_ps</i>
+</p></td>
+<td valign=\"middle\"><p>
+  First Input
+</p></td>
 <td valign=\"middle\"><p>
   <img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Temperature_ps_Input1.png\"
   alt=\"First input required to calculate temperature by pressure and
@@ -194,9 +194,9 @@ border=\"1\" width=\"80%\" style=\"border-collapse:collapse;\">
 </p></td>
 </tr>
 <tr>
-<td valign=\"middle\">
-  <p>Second Input</p>
-</td>
+<td valign=\"middle\"><p>
+  Second Input
+</p></td>
 <td valign=\"middle\"><p>
   <img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Temperature_ps_Input2.png\"
   alt=\"Second input required to calculate temperature by pressure and
@@ -204,21 +204,21 @@ border=\"1\" width=\"80%\" style=\"border-collapse:collapse;\">
 </p></td>
 </tr>
 <tr>
-<td valign=\"middle\" rowspan=\"2\">
-  <p><i>Density_pT</i></p>
-</td>
-<td valign=\"middle\">
-  <p>First Input</p>
-</td>
+<td valign=\"middle\" rowspan=\"2\"><p>
+  <i>Density_pT</i>
+</p></td>
+<td valign=\"middle\"><p>
+  First Input
+</p></td>
 <td valign=\"middle\"><p>
   <img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Density_pT_Input1.png\"
   alt=\"First input required to calculate density by pressure and temperature\"/>
 </p></td>
 </tr>
 <tr>
-<td valign=\"middle\">
-  <p>Second Input</p>
-</td>
+<td valign=\"middle\"><p>
+  Second Input
+</p></td>
 <td valign=\"middle\"><p>
   <img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/Density_pT_Input2.png\"
   alt=\"Second input required to calculate density by pressure and
@@ -226,9 +226,9 @@ border=\"1\" width=\"80%\" style=\"border-collapse:collapse;\">
 </p></td>
 </tr>
 <tr>
-<td valign=\"middle\">
-  <p><i>Functional approach</i></p>
-</td>
+<td valign=\"middle\"><p>
+  <i>Functional approach
+</i></p></td>
 <td valign=\"middle\" colspan=\"2\"><p>
   <img src=\"modelica://AixLib/Resources/Images/DataBase/Media/Refrigerants/StateProperties_Approach.png\"
   alt=\"Calculation procedure for supercooled and superheated region\"/>
@@ -252,7 +252,7 @@ Refrigerant Propane for Fast and Accurate Dynamic Simulations</a>&quot;
 by Sangi et al..
 </p>
 <p>
-<h4>Smooth transition</h4>
+<b>Smooth transition</b>
 </p>
 <p>
 To ensure a smooth transition between different regions (e.g. from supercooled
@@ -319,22 +319,22 @@ and to avoid these discontinuities as far as possible.
 </ul>
 </html>", info="<html>
 <p>
-Currently, one modeling approach is implemented in the refrigerants&apos; 
+Currently, one modeling approach is implemented in the refrigerants&apos;
 library:
 </p>
 <ol>
 <li>
 <a href=\"modelica://AixLib.Media.Refrigerants.Interfaces.TemplateHybridTwoPhaseMediumFormula\">
-Hybrid Approach:</a> The hybrid approach uses the both the Helmholtz equation 
-of state (EoS) and polynomial functions. The polynomial functions are used to 
-avoid iterations that normally occur while using modeling approaches only 
+Hybrid Approach:</a> The hybrid approach uses the both the Helmholtz equation
+of state (EoS) and polynomial functions. The polynomial functions are used to
+avoid iterations that normally occur while using modeling approaches only
 based on the EoS.</li>
 </ol>
 <h4>Assumptions and limitations:</h4>
 <p>
-Up to this point, the modeling approaches implemented in the library are only 
-valid for pure and pseudo-pure refrigerants. Consequently, calculation 
-procedures of pseudo-pure refrigerants are only roughly valid within the 
+Up to this point, the modeling approaches implemented in the library are only
+valid for pure and pseudo-pure refrigerants. Consequently, calculation
+procedures of pseudo-pure refrigerants are only roughly valid within the
 two-phase region.
 </p>
 </html>"));
