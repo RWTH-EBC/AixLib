@@ -5,6 +5,11 @@ package Interfaces "Package with interfaces for refrigerant models"
 
 
 
+
+
+
+
+
   annotation (Documentation(info="<html>
 <p>
 This package provides basic interfaces for the definition of new refrigerant

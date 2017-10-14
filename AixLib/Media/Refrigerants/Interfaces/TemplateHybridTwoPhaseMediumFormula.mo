@@ -97,118 +97,90 @@ partial package TemplateHybridTwoPhaseMediumFormula
   end SmoothTransition;
   /*Provide Helmholtz equations of state (EoS) using an explicit formula.
   */
-  redeclare function extends alpha_0
-    "Dimensionless Helmholtz energy (Ideal gas contribution alpha_0)"
+  redeclare function extends f_Idg
+    "Dimensionless Helmholtz energy (Ideal gas contribution f_Idg)"
   algorithm
 
-  annotation(Inline=false,
-          LateInline=true);
-  end alpha_0;
+  end f_Idg;
 
-  redeclare function extends alpha_r
+  redeclare function extends f_Res
     "Dimensionless Helmholtz energy (Residual part alpha_r)"
   algorithm
 
-  annotation(Inline=false,
-          LateInline=true);
-  end alpha_r;
+  end f_Res;
 
-  redeclare function extends tau_d_alpha_0_d_tau
+  redeclare function extends t_fIdg_t
     "Short form for tau*(dalpha_0/dtau)_delta=const"
   algorithm
 
-  annotation(Inline=false,
-          LateInline=true);
-  end tau_d_alpha_0_d_tau;
+  end t_fIdg_t;
 
-  redeclare function extends tau2_d2_alpha_0_d_tau2
+  redeclare function extends tt_fIdg_tt
     "Short form for tau*tau*(ddalpha_0/(dtau*dtau))_delta=const"
   algorithm
 
-  annotation(Inline=false,
-          LateInline=true);
-  end tau2_d2_alpha_0_d_tau2;
+  end tt_fIdg_tt;
 
-  redeclare function extends tau_d_alpha_r_d_tau
+  redeclare function extends t_fRes_t
     "Short form for tau*(dalpha_r/dtau)_delta=const"
   algorithm
 
-  annotation(Inline=false,
-          LateInline=true);
-  end tau_d_alpha_r_d_tau;
+  end t_fRes_t;
 
-  redeclare function extends tau2_d2_alpha_r_d_tau2
+  redeclare function extends tt_fRes_tt
     "Short form for tau*tau*(ddalpha_r/(dtau*dtau))_delta=const"
   algorithm
 
-  annotation(Inline=false,
-          LateInline=true);
-  end tau2_d2_alpha_r_d_tau2;
+  end tt_fRes_tt;
 
-  redeclare function extends delta_d_alpha_r_d_delta
+  redeclare function extends d_fRes_d
     "Short form for delta*(dalpha_r/(ddelta))_tau=const"
   algorithm
 
-  annotation(Inline=false,
-          LateInline=true);
-  end delta_d_alpha_r_d_delta;
+  end d_fRes_d;
 
-  redeclare function extends delta2_d2_alpha_r_d_delta2
+  redeclare function extends dd_fRes_dd
     "Short form for delta*delta(ddalpha_r/(ddelta*delta))_tau=const"
   algorithm
 
-  annotation(Inline=false,
-          LateInline=true);
-  end delta2_d2_alpha_r_d_delta2;
+  end dd_fRes_dd;
 
-  redeclare function extends tau_delta_d2_alpha_r_d_tau_d_delta
+  redeclare function extends td_fRes_td
     "Short form for tau*delta*(ddalpha_r/(dtau*ddelta))"
   algorithm
 
-  annotation(Inline=false,
-          LateInline=true);
-  end tau_delta_d2_alpha_r_d_tau_d_delta;
+  end td_fRes_td;
 
-  redeclare function extends tau3_d3_alpha_0_d_tau3
+  redeclare function extends ttt_fIdg_ttt
     "Short form for tau*tau*tau*(dddalpha_0/(dtau*dtau*dtau))_delta=const"
   algorithm
 
-    annotation(Inline=false,
-          LateInline=true);
-  end tau3_d3_alpha_0_d_tau3;
+  end ttt_fIdg_ttt;
 
-  redeclare function extends tau3_d3_alpha_r_d_tau3
+  redeclare function extends ttt_fRes_ttt
     "Short form for tau*tau*tau*(dddalpha_r/(dtau*dtau*dtau))_delta=const"
   algorithm
 
-    annotation(Inline=false,
-          LateInline=true);
-  end tau3_d3_alpha_r_d_tau3;
+  end ttt_fRes_ttt;
 
-  redeclare function extends delta3_d3_alpha_r_d_delta3
+  redeclare function extends ddd_fRes_ddd
     "Short form for delta*delta*delta*
     (dddalpha_r/(ddelta*ddelta*ddelta))_tau=const"
   algorithm
 
-    annotation(Inline=false,
-          LateInline=true);
-  end delta3_d3_alpha_r_d_delta3;
+  end ddd_fRes_ddd;
 
-  redeclare function extends tau_delta2_d3_alpha_r_d_tau_d_delta2
+  redeclare function extends tdd_fRes_tdd
     "Short form for tau*delta*delta*(dddalpha_r/(dtau*ddelta*ddelta))"
   algorithm
 
-    annotation(Inline=false,
-          LateInline=true);
-  end tau_delta2_d3_alpha_r_d_tau_d_delta2;
+  end tdd_fRes_tdd;
 
-  redeclare function extends tau2_delta_d3_alpha_r_d_tau2_d_delta
+  redeclare function extends ttd_fRes_ttd
     "Short form for tau*tau*delta*(dddalpha_r/(dtau*dtau*ddelta))"
   algorithm
 
-    annotation(Inline=false,
-          LateInline=true);
-  end tau2_delta_d3_alpha_r_d_tau2_d_delta;
+  end ttd_fRes_ttd;
   /*Provide polynomial functions for saturation properties. These functions are
     fitted to external data (e.g. experimental data).
     Currently, just one fitting approach is implemented.
@@ -226,128 +198,127 @@ partial package TemplateHybridTwoPhaseMediumFormula
     else
 
     end if;
+
     annotation(smoothOrder = 2,
-          Inline=false,
-          LateInline=true);
+               Inline=false,
+               LateInline=true);
   end saturationPressure;
 
   redeclare function extends saturationTemperature
     "Saturation temperature of refrigerant (Ancillary equation)"
   protected
-    Real x;
+    Real x = 0;
 
   algorithm
 
     annotation(smoothOrder = 2,
-          Inline=false,
-          LateInline=true);
+               Inline=false,
+               LateInline=true);
   end saturationTemperature;
 
   redeclare replaceable function extends bubbleDensity
     "Boiling curve specific density of refrigerant (Ancillary equation)"
   protected
-    Real x;
+    Real x = 0;
 
   algorithm
 
     annotation(smoothOrder = 2,
-          Inline=false,
-          LateInline=true);
+               Inline=false,
+               LateInline=true);
   end bubbleDensity;
 
   redeclare function extends dewDensity
     "Dew curve specific density of refrigerant (Ancillary equation)"
   protected
-    Real x;
+    Real x = 0;
 
   algorithm
 
     annotation(smoothOrder = 2,
-          Inline=false,
-          LateInline=true);
+               Inline=false,
+               LateInline=true);
   end dewDensity;
 
   redeclare function extends bubbleEnthalpy
     "Boiling curve specific enthalpy of refrigerant (Ancillary equation)"
   protected
-    Real x;
+    Real x = 0;
 
   algorithm
 
     annotation(smoothOrder = 2,
-          Inline=false,
-          LateInline=true);
+               Inline=false,
+               LateInline=true);
   end bubbleEnthalpy;
 
   redeclare function extends dewEnthalpy
     "Dew curve specific enthalpy of refrigerant (Ancillary equation)"
   protected
-    Real x;
+    Real x = 0;
 
   algorithm
 
     annotation(smoothOrder = 2,
-          Inline=false,
-          LateInline=true);
+               Inline=false,
+               LateInline=true);
   end dewEnthalpy;
 
   redeclare function extends bubbleEntropy
     "Boiling curve specific entropy of refrigerant (Ancillary equation)"
   protected
-    Real x;
+    Real x = 0;
 
   algorithm
 
     annotation(smoothOrder = 2,
-          Inline=false,
-          LateInline=true);
+               Inline=false,
+               LateInline=true);
   end bubbleEntropy;
 
   redeclare function extends dewEntropy
     "Dew curve specific entropy of propane (Ancillary equation)"
   protected
-    Real x;
+    Real x = 0;
 
   algorithm
 
     annotation(smoothOrder = 2,
-          Inline=false,
-          LateInline=true);
+               Inline=false,
+               LateInline=true);
   end dewEntropy;
   /*Provide functions to calculate thermodynamic properties depending on the
     independent variables. Moreover, these functions may depend on the
     Helmholtz EoS.
   */
-  redeclare replaceable function temperature_ph
+  redeclare function temperature_ph
     "Calculates temperature as function of pressure and specific enthalpy"
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";
     input SpecificEnthalpy h "Specific enthalpy";
-    input FixedPhase phase=0
+    input FixedPhase phase = 0
       "2 for two-phase, 1 for one-phase, 0 if not known";
     output Temperature T "Temperature";
 
   protected
     SmoothTransition st;
     SpecificEnthalpy dh = st.T_ph;
-    SpecificEnthalpy h_dew;
-    SpecificEnthalpy h_bubble;
-    Real x1;
-    Real y1;
-    Real T1;
-    Real x2;
-    Real y2;
-    Real T2;
+    SpecificEnthalpy h_dew = 0;
+    SpecificEnthalpy h_bubble = 0;
+    Real x1 = 0;
+    Real y1 = 0;
+    Real T1 = 0;
+    Real x2 = 0;
+    Real y2 = 0;
+    Real T2 = 0;
 
   algorithm
 
   annotation(derivative(noDerivative=phase)=temperature_ph_der,
-      inverse(h=specificEnthalpy_pT(p=p,T=T,phase=phase)),
-          Inline=false,
-          LateInline=true);
+             inverse(h=specificEnthalpy_pT(p=p,T=T,phase=phase)));
   end temperature_ph;
 
-  redeclare replaceable function temperature_ps
+  redeclare function temperature_ps
     "Calculates temperature as function of pressure and specific entroy"
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";
@@ -359,23 +330,21 @@ partial package TemplateHybridTwoPhaseMediumFormula
   protected
     SmoothTransition st;
     SpecificEntropy ds = st.T_ps;
-    SpecificEntropy s_dew;
-    SpecificEntropy s_bubble;
-    Real x1;
-    Real y1;
-    Real T1;
-    Real x2;
-    Real y2;
-    Real T2;
+    SpecificEntropy s_dew = 0;
+    SpecificEntropy s_bubble = 0;
+    Real x1 = 0;
+    Real y1 = 0;
+    Real T1 = 0;
+    Real x2 = 0;
+    Real y2 = 0;
+    Real T2 = 0;
 
   algorithm
 
-  annotation(derivative(noDerivative=phase)=temperature_ps_der,
-          Inline=false,
-          LateInline=true);
+  annotation(derivative(noDerivative=phase)=temperature_ps_der);
   end temperature_ps;
 
-  redeclare replaceable partial function density_pT
+  redeclare function density_pT
     "Computes density as a function of pressure and temperature"
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";
@@ -388,19 +357,17 @@ partial package TemplateHybridTwoPhaseMediumFormula
     SmoothTransition st;
     AbsolutePressure dp = st.d_pT;
     SaturationProperties sat = setSat_T(T=T);
-    Real x1;
-    Real y1;
-    Real d1;
-    Real x2;
-    Real y2;
-    Real d2;
+    Real x1 = 0;
+    Real y1 = 0;
+    Real d1 = 0;
+    Real x2 = 0;
+    Real y2 = 0;
+    Real d2 = 0;
 
   algorithm
 
   annotation(derivative(noDerivative=phase)=density_pT_der,
-          inverse(p=pressure_dT(d=d,T=T,phase=phase)),
-          Inline=false,
-          LateInline=true);
+             inverse(p=pressure_dT(d=d,T=T,phase=phase)));
   end density_pT;
   /*Provide functions to calculate further thermodynamic properties like the
     dynamic viscosity or thermal conductivity. Also add references.
@@ -409,18 +376,21 @@ partial package TemplateHybridTwoPhaseMediumFormula
     "Calculates dynamic viscosity of refrigerant"
 
   algorithm
+
   end dynamicViscosity;
 
   redeclare function extends thermalConductivity
     "Calculates thermal conductivity of refrigerant"
 
   algorithm
+
   end thermalConductivity;
 
   redeclare function extends surfaceTension
     "Surface tension in two phase region of refrigerant"
 
   algorithm
+
   end surfaceTension;
 
   annotation (Documentation(revisions="<html>

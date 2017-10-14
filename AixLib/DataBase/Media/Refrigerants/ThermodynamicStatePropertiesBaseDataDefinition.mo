@@ -8,104 +8,104 @@ record ThermodynamicStatePropertiesBaseDataDefinition
   "Short description of the record"
   annotation (Dialog(group="General"));
 
-  parameter Integer temperature_ph_nT[:]
+  parameter Integer T_phNt[:]
   "Polynomial order for p (SC) | Polynomial order for h (SC) |
    Total number of terms (SC) | Polynomial order for p (SH) |
    Polynomial order for h (SH) | Total number of terms (SH)"
   annotation (Dialog(group="Temperature_ph"));
-  parameter Real temperature_ph_sc_a[:]
+  parameter Real Tl_phA[:]
   "Coefficients a for supercooled regime"
   annotation (Dialog(group="Temperature_ph"));
-  parameter Real temperature_ph_sc_b[:]
+  parameter Real Tl_phB[:]
   "Coefficients b for supercooled regime"
   annotation (Dialog(group="Temperature_ph"));
-  parameter Real temperature_ph_sc_c[:]
+  parameter Real Tl_phC[:]
   "Coefficients c for supercooled regime"
   annotation (Dialog(group="Temperature_ph"));
-  parameter Real temperature_ph_sc_d[:]
+  parameter Real Tl_phD[:]
   "Coefficient d for supercooled regime"
   annotation (Dialog(group="Temperature_ph"));
-  parameter Real temperature_ph_sh_a[:]
+  parameter Real Tv_phA[:]
   "Coefficients a for superheated regime"
   annotation (Dialog(group="Temperature_ph"));
-  parameter Real temperature_ph_sh_b[:]
+  parameter Real Tv_phB[:]
   "Coefficients b for superheated regime"
   annotation (Dialog(group="Temperature_ph"));
-  parameter Real temperature_ph_sh_c[:]
+  parameter Real Tv_phC[:]
   "Coefficients c for superheated regime"
   annotation (Dialog(group="Temperature_ph"));
-  parameter Real temperature_ph_sh_d[:]
+  parameter Real Tv_phD[:]
   "Coefficient d for superheated regime"
   annotation (Dialog(group="Temperature_ph"));
-  parameter Real temperature_ph_iO[:]
+  parameter Real T_phIO[:]
   "Mean SC p | Std SC p | Mean SC h | Std SC h | Mean SC T | Std SC T |
    Mean SH p | Std SH p | Mean SH h | Std SH h | Mean SH T | Std SH T"
   annotation (Dialog(group="Temperature_ph"));
 
-  parameter Integer temperature_ps_nT[:]
+  parameter Integer T_psNt[:]
   "Polynomial order for p (SC) | Polynomial order for s (SC) |
    Total number of terms (SC) | Polynomial order for p (SH) |
    Polynomial order for s (SH) | Total number of terms (SH)"
   annotation (Dialog(group="Temperature_ps"));
-  parameter Real temperature_ps_sc_a[:]
+  parameter Real Tl_psA[:]
   "Coefficients a for supercooled regime"
   annotation (Dialog(group="Temperature_ps"));
-  parameter Real temperature_ps_sc_b[:]
+  parameter Real Tl_psB[:]
   "Coefficients b for supercooled regime"
   annotation (Dialog(group="Temperature_ps"));
-  parameter Real temperature_ps_sc_c[:]
+  parameter Real Tl_psC[:]
   "Coefficients c for supercooled regime"
   annotation (Dialog(group="Temperature_ps"));
-  parameter Real temperature_ps_sc_d[:]
+  parameter Real Tl_psD[:]
   "Coefficient d for supercooled regime"
   annotation (Dialog(group="Temperature_ps"));
-  parameter Real temperature_ps_sh_a[:]
+  parameter Real Tv_psA[:]
   "Coefficients a for superheated regime"
   annotation (Dialog(group="Temperature_ps"));
-  parameter Real temperature_ps_sh_b[:]
+  parameter Real Tv_psB[:]
   "Coefficients b for superheated regime"
   annotation (Dialog(group="Temperature_ps"));
-  parameter Real temperature_ps_sh_c[:]
+  parameter Real Tv_psC[:]
   "Coefficients c for superheated regime"
   annotation (Dialog(group="Temperature_ps"));
-  parameter Real temperature_ps_sh_d[:]
+  parameter Real Tv_psD[:]
   "Coefficient d for superheated regime"
   annotation (Dialog(group="Temperature_ps"));
-  parameter Real temperature_ps_iO[:]
+  parameter Real T_psIO[:]
   "Mean SC p | Std SC p | Mean SC s | Std SC s | Mean SC T | Std SC T |
    Mean SH p | Std SH p | Mean SH s | Std SH s | Mean SH T | Std SH T"
   annotation (Dialog(group="Temperature_ps"));
 
-  parameter Integer density_pT_nT[:]
+  parameter Integer d_pTNt[:]
   "Polynomial order for p (SC) | Polynomial order for T (SC) |
    Total number of terms (SC) | Polynomial order for p (SH) |
    Polynomial order for T (SH) | Total number of terms (SH)"
   annotation (Dialog(group="Density_pT"));
-  parameter Real density_pT_sc_a[:]
+  parameter Real dl_pTA[:]
   "Coefficients a for supercooled regime"
   annotation (Dialog(group="Density_pT"));
-  parameter Real density_pT_sc_b[:]
+  parameter Real dl_pTB[:]
   "Coefficients b for supercooled regime"
   annotation (Dialog(group="Density_pT"));
-  parameter Real density_pT_sc_c[:]
+  parameter Real dl_pTC[:]
   "Coefficients c for supercooled regime"
   annotation (Dialog(group="Density_pT"));
-  parameter Real density_pT_sc_d[:]
+  parameter Real dl_pTD[:]
   "Coefficient d for supercooled regime"
   annotation (Dialog(group="Density_pT"));
-  parameter Real density_pT_sh_a[:]
+  parameter Real dv_pTA[:]
   "Coefficients a for superheated regime"
   annotation (Dialog(group="Density_pT"));
-  parameter Real density_pT_sh_b[:]
+  parameter Real dv_pTB[:]
   "Coefficients b for superheated regime"
   annotation (Dialog(group="Density_pT"));
-  parameter Real density_pT_sh_c[:]
+  parameter Real dv_pTC[:]
   "Coefficients c for superheated regime"
   annotation (Dialog(group="Density_pT"));
-  parameter Real density_pT_sh_d[:]
+  parameter Real dv_pTD[:]
   "Coefficient d for superheated regime"
   annotation (Dialog(group="Density_pT"));
-  parameter Real density_pT_iO[:]
+  parameter Real d_pTIO[:]
   "Mean SC p | Std SC p | Mean SC T | Std SC T | Mean SC d | Std SC d |
    Mean SH p | Std SH p | Mean SH T | Std SH T | Mean SH d | Std SH d"
   annotation (Dialog(group="Density_pT"));
@@ -118,8 +118,7 @@ record ThermodynamicStatePropertiesBaseDataDefinition
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
 </ul>
-</html>",
-              info="<html>
+</html>",     info="<html>
 <p>
 This record is a base data definition for fitting coefficients of the
 thermodynamic state properties depending on two independent state variables.

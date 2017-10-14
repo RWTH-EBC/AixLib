@@ -196,23 +196,23 @@ equation
 
   // Calculation of Helmholtz equations of state
   //
-  eoS.alpha_0_Calc = Medium.alpha_0(delta=delta,tau=tau);
+  eoS.alpha_0_Calc = Medium.f_Idg(delta=delta,tau=tau);
   der(eoS.alpha_0_Sym) = der(eoS.alpha_0_Calc);
-  eoS.alpha_0_t_Calc = Medium.tau_d_alpha_0_d_tau(tau=tau);
+  eoS.alpha_0_t_Calc = Medium.t_fIdg_t(tau=tau);
   der(eoS.alpha_0_t_Sym) = der(eoS.alpha_0_t_Calc);
-  eoS.alpha_0_tt_Calc = Medium.tau2_d2_alpha_0_d_tau2(tau=tau);
+  eoS.alpha_0_tt_Calc = Medium.tt_fIdg_tt(tau=tau);
   der(eoS.alpha_0_tt_Sym) = der(eoS.alpha_0_tt_Calc);
-  eoS.alpha_r_Calc = Medium.alpha_r(delta=delta,tau=tau);
+  eoS.alpha_r_Calc = Medium.f_Res(delta=delta,tau=tau);
   der(eoS.alpha_r_Sym) = der(eoS.alpha_r_Calc);
-  eoS.alpha_r_t_Calc = Medium.tau_d_alpha_r_d_tau(delta=delta,tau=tau);
+  eoS.alpha_r_t_Calc = Medium.t_fRes_t(delta=delta,tau=tau);
   der(eoS.alpha_r_t_Sym) = der(eoS.alpha_r_t_Calc);
-  eoS.alpha_r_tt_Calc = Medium.tau2_d2_alpha_r_d_tau2(delta=delta,tau=tau);
+  eoS.alpha_r_tt_Calc = Medium.tt_fRes_tt(delta=delta,tau=tau);
   der(eoS.alpha_r_tt_Sym) = der(eoS.alpha_r_tt_Calc);
-  eoS.alpha_r_d_Calc = Medium.delta_d_alpha_r_d_delta(delta=delta,tau=tau);
+  eoS.alpha_r_d_Calc = Medium.d_fRes_d(delta=delta,tau=tau);
   der(eoS.alpha_r_d_Sym) = der(eoS.alpha_r_d_Calc);
-  eoS.alpha_r_dd_Calc = Medium.delta2_d2_alpha_r_d_delta2(delta=delta,tau=tau);
+  eoS.alpha_r_dd_Calc = Medium.dd_fRes_dd(delta=delta,tau=tau);
   der(eoS.alpha_r_dd_Sym) = der(eoS.alpha_r_dd_Calc);
-  eoS.alpha_r_td_Calc = Medium.tau_delta_d2_alpha_r_d_tau_d_delta(
+  eoS.alpha_r_td_Calc = Medium.td_fRes_td(
     delta=delta,tau=tau);
   der(eoS.alpha_r_td_Sym) = der(eoS.alpha_r_td_Calc);
 

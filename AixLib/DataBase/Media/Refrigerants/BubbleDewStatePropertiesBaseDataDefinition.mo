@@ -8,83 +8,83 @@ record BubbleDewStatePropertiesBaseDataDefinition
   "Short description of the record"
   annotation (Dialog(group="General"));
 
-  parameter Integer saturationPressure_nT
+  parameter Integer psat_Nt
   "Number of terms for saturation pressure"
   annotation (Dialog(group="Saturation pressure"));
-  parameter Real saturationPressure_n[:]
+  parameter Real psat_N[:]
   "First coefficient for saturation pressure"
   annotation (Dialog(group="Saturation pressure"));
-  parameter Real saturationPressure_e[:]
+  parameter Real psat_E[:]
   "Second coefficient for saturation pressure"
   annotation (Dialog(group="Saturation pressure"));
 
-  parameter Integer saturationTemperature_nT
+  parameter Integer Tsat_Nt
   "Number of terms for saturation temperature"
   annotation (Dialog(group="Saturation temperature"));
-  parameter Real saturationTemperature_n[:]
+  parameter Real Tsat_N[:]
   "Fitting coefficients for saturation temperature"
   annotation (Dialog(group="Saturation temperature"));
-  parameter Real saturationTemperature_iO[:]
+  parameter Real Tsat_IO[:]
   "Mean input (p) | Std input (p) | Mean output (T) | Std output (T)"
   annotation (Dialog(group="Saturation temperature"));
 
-  parameter Integer bubbleDensity_nT
+  parameter Integer dl_Nt
   "Number of terms for bubble density"
   annotation (Dialog(group="Bubble density"));
-  parameter Real bubbleDensity_n[:]
+  parameter Real dl_N[:]
   "Fitting coefficients for bubble density"
   annotation (Dialog(group="Bubble density"));
-  parameter Real bubbleDensity_iO[:]
+  parameter Real dl_IO[:]
   "Mean input (T) | Std input (T) | Mean output (dl) | Std output (dl)"
   annotation (Dialog(group="Bubble density"));
 
-  parameter Integer dewDensity_nT
+  parameter Integer dv_Nt
   "Number of terms for dew density"
   annotation (Dialog(group="Dew density"));
-  parameter Real dewDensity_n[:]
+  parameter Real dv_N[:]
   "Fitting coefficients for dew density"
   annotation (Dialog(group="Dew density"));
-  parameter Real dewDensity_iO[:]
+  parameter Real dv_IO[:]
   "Mean input (T) | Std input (T) | Mean output (dv) | Std output (dv)"
   annotation (Dialog(group="Dew density"));
 
-  parameter Integer bubbleEnthalpy_nT
+  parameter Integer hl_Nt
   "Number of terms for bubble enthalpy"
   annotation (Dialog(group="Bubble Enthalpy"));
-  parameter Real bubbleEnthalpy_n[:]
+  parameter Real hl_N[:]
   "Fitting coefficients for bubble enthalpy"
   annotation (Dialog(group="Bubble Enthalpy"));
-  parameter Real bubbleEnthalpy_iO[:]
+  parameter Real hl_IO[:]
   "Mean input (p) | Std input (p) | Mean output (hl) | Std output (hl)"
   annotation (Dialog(group="Bubble Enthalpy"));
 
-  parameter Integer dewEnthalpy_nT
+  parameter Integer hv_Nt
   "Number of terms for dew enthalpy"
   annotation (Dialog(group="Dew Enthalpy"));
-  parameter Real dewEnthalpy_n[:]
+  parameter Real hv_N[:]
   "Fitting coefficients for dew enthalpy"
   annotation (Dialog(group="Dew Enthalpy"));
-  parameter Real dewEnthalpy_iO[:]
+  parameter Real hv_IO[:]
   "Mean input (p) | Std input (p) | Mean output (hv) | Std output (hv)"
   annotation (Dialog(group="Dew Enthalpy"));
 
-  parameter Integer bubbleEntropy_nT
+  parameter Integer sl_Nt
   "Number of terms for bubble entropy"
   annotation (Dialog(group="Bubble Entropy"));
-  parameter Real bubbleEntropy_n[:]
+  parameter Real sl_N[:]
   "Fitting coefficients for bubble entropy"
   annotation (Dialog(group="Bubble Entropy"));
-  parameter Real bubbleEntropy_iO[:]
+  parameter Real sl_IO[:]
   "Mean input (p) | Std input (p) | Mean output (sl) | Std output (sl)"
   annotation (Dialog(group="Bubble Entropy"));
 
-  parameter Integer dewEntropy_nT
+  parameter Integer sv_Nt
   "Number of terms for dew entropy"
   annotation (Dialog(group="Dew Entropy"));
-  parameter Real dewEntropy_n[:]
+  parameter Real sv_N[:]
   "Fitting coefficients for dew entropy"
   annotation (Dialog(group="Dew Entropy"));
-  parameter Real dewEntropy_iO[:]
+  parameter Real sv_IO[:]
   "Mean input (p) | Std input (p) | Mean output (sv) | Std output (sv)"
   annotation (Dialog(group="Dew Entropy"));
 

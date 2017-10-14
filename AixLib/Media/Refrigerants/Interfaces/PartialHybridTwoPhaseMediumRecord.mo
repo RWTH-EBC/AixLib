@@ -33,501 +33,475 @@ partial package PartialHybridTwoPhaseMediumRecord
     provided within the template.
     Just change if needed.
   */
-  redeclare replaceable function extends alpha_0
-    "Dimensionless Helmholtz energy (Ideal gas contribution alpha_0)"
+  redeclare function extends f_Idg
+    "Dimensionless Helmholtz energy (Ideal gas contribution f_Idg)"
   protected
     EoS cf;
 
   algorithm
-    alpha_0 := log(delta);
-    if not cf.alpha_0_nL == 0 then
-      for k in 1:cf.alpha_0_nL loop
-        alpha_0 := alpha_0 +
-          cf.alpha_0_l1[k]*log(tau^cf.alpha_0_l2[k]);
+    f_Idg := log(delta);
+    if not cf.f_IdgNl == 0 then
+      for k in 1:cf.f_IdgNl loop
+        f_Idg := f_Idg + cf.f_IdgL1[k]*log(tau^cf.f_IdgL2[k]);
       end for;
     end if;
-    if not cf.alpha_0_nP == 0 then
-      for k in 1:cf.alpha_0_nP loop
-        alpha_0 := alpha_0 +
-          cf.alpha_0_p1[k]*tau^cf.alpha_0_p2[k];
+    if not cf.f_IdgNp == 0 then
+      for k in 1:cf.f_IdgNp loop
+        f_Idg := f_Idg + cf.f_IdgP1[k]*tau^cf.f_IdgP2[k];
       end for;
     end if;
-    if not cf.alpha_0_nE == 0 then
-      for k in 1:cf.alpha_0_nE loop
-        alpha_0 := alpha_0 +
-          cf.alpha_0_e1[k]*log(1-exp(-cf.alpha_0_e2[k]*tau));
+    if not cf.f_IdgNe == 0 then
+      for k in 1:cf.f_IdgNe loop
+        f_Idg := f_Idg + cf.f_IdgE1[k]*log(1-exp(-cf.f_IdgE2[k]*tau));
       end for;
     end if;
+
   annotation(Inline=false,
-          LateInline=true);
-  end alpha_0;
+             LateInline=true);
+  end f_Idg;
 
-  redeclare replaceable function extends alpha_r
-    "Dimensionless Helmholtz energy (Residual part alpha_r)"
+  redeclare function extends f_Res
+    "Dimensionless Helmholtz energy (Residual part f_Res)"
   protected
     EoS cf;
 
   algorithm
-    if not cf.alpha_r_nP == 0 then
-      for k in 1:cf.alpha_r_nP loop
-        alpha_r := alpha_r +
-          cf.alpha_r_p1[k]*delta^cf.alpha_r_p2[k]*tau^cf.alpha_r_p3[k];
+    if not cf.f_ResNp == 0 then
+      for k in 1:cf.f_ResNp loop
+          f_Res := f_Res + cf.f_ResP1[k]*delta^cf.f_ResP2[k]*tau^cf.f_ResP3[k];
       end for;
     end if;
-    if not cf.alpha_r_nB == 0 then
-      for k in 1:cf.alpha_r_nB loop
-      alpha_r := alpha_r +
-        cf.alpha_r_b1[k]*delta^cf.alpha_r_b2[k]*tau^cf.alpha_r_b3[k]*
-        exp(-delta^cf.alpha_r_b4[k]);
+    if not cf.f_ResNb == 0 then
+      for k in 1:cf.f_ResNb loop
+        f_Res := f_Res + cf.f_ResB1[k]*delta^cf.f_ResB2[k]*tau^cf.f_ResB3[k]*
+                 exp(-delta^cf.f_ResB4[k]);
       end for;
     end if;
-    if not cf.alpha_r_nG == 0 then
-      for k in 1:cf.alpha_r_nG loop
-        alpha_r := alpha_r +
-          cf.alpha_r_g1[k]*delta^cf.alpha_r_g2[k]*tau^cf.alpha_r_g3[k]*
-          exp(-cf.alpha_r_g4[k]*(delta - cf.alpha_r_g5[k])^2 -
-          cf.alpha_r_g6[k]*(tau - cf.alpha_r_g7[k])^2);
+    if not cf.f_ResNG == 0 then
+      for k in 1:cf.f_ResNG loop
+        f_Res := f_Res + cf.f_ResG1[k]*delta^cf.f_ResG2[k]*tau^cf.f_ResG3[k]*
+                 exp(-cf.f_ResG4[k]*(delta - cf.f_ResG5[k])^2 -
+                 cf.f_ResG6[k]*(tau - cf.f_ResG7[k])^2);
       end for;
     end if;
-    annotation(Inline=false,
-        LateInline=true);
-  end alpha_r;
 
-  redeclare replaceable function extends tau_d_alpha_0_d_tau
+    annotation(Inline=false,
+               LateInline=true);
+  end f_Res;
+
+  redeclare function extends t_fIdg_t
     "Short form for tau*(dalpha_0/dtau)_delta=const"
   protected
     EoS cf;
 
   algorithm
-    if not cf.alpha_0_nL == 0 then
-      for k in 1:cf.alpha_0_nL loop
-        tau_d_alpha_0_d_tau := tau_d_alpha_0_d_tau +
-          cf.alpha_0_l1[k]*cf.alpha_0_l2[k];
+    if not cf.f_IdgNl == 0 then
+      for k in 1:cf.f_IdgNl loop
+        t_fIdg_t := t_fIdg_t + cf.f_IdgL1[k]*cf.f_IdgL2[k];
       end for;
     end if;
-    if not cf.alpha_0_nP == 0 then
-      for k in 1:cf.alpha_0_nP loop
-        tau_d_alpha_0_d_tau := tau_d_alpha_0_d_tau +
-          cf.alpha_0_p1[k]*cf.alpha_0_p2[k]*tau^cf.alpha_0_p2[k];
+    if not cf.f_IdgNp == 0 then
+      for k in 1:cf.f_IdgNp loop
+        t_fIdg_t := t_fIdg_t + cf.f_IdgP1[k]*cf.f_IdgP2[k]*tau^cf.f_IdgP2[k];
       end for;
     end if;
-    if not cf.alpha_0_nE == 0 then
-      for k in 1:cf.alpha_0_nE loop
-        tau_d_alpha_0_d_tau := tau_d_alpha_0_d_tau +
-          tau*cf.alpha_0_e1[k]*cf.alpha_0_e2[k]/(exp(cf.alpha_0_e2[k]*tau)-1);
+    if not cf.f_IdgNe == 0 then
+      for k in 1:cf.f_IdgNe loop
+        t_fIdg_t := t_fIdg_t + tau*cf.f_IdgE1[k]*cf.f_IdgE2[k]/
+                    (exp(cf.f_IdgE2[k]*tau)-1);
       end for;
     end if;
-  annotation(Inline=false,
-          LateInline=true);
-  end tau_d_alpha_0_d_tau;
 
-  redeclare replaceable function extends tau2_d2_alpha_0_d_tau2
+  annotation(Inline=false,
+             LateInline=true);
+  end t_fIdg_t;
+
+  redeclare function extends tt_fIdg_tt
     "Short form for tau*tau*(ddalpha_0/(dtau*dtau))_delta=const"
   protected
     EoS cf;
 
   algorithm
-    if not cf.alpha_0_nL == 0 then
-      for k in 1:cf.alpha_0_nL loop
-        tau2_d2_alpha_0_d_tau2 := tau2_d2_alpha_0_d_tau2 -
-          cf.alpha_0_l1[k]*cf.alpha_0_l2[k];
+    if not cf.f_IdgNl == 0 then
+      for k in 1:cf.f_IdgNl loop
+        tt_fIdg_tt := tt_fIdg_tt - cf.f_IdgL1[k]*cf.f_IdgL2[k];
       end for;
     end if;
-    if not cf.alpha_0_nP == 0 then
-      for k in 1:cf.alpha_0_nP loop
-        tau2_d2_alpha_0_d_tau2 := tau2_d2_alpha_0_d_tau2 +
-          cf.alpha_0_p1[k]*cf.alpha_0_p2[k]*(cf.alpha_0_p2[k]-1)*
-          tau^cf.alpha_0_p2[k];
+    if not cf.f_IdgNp == 0 then
+      for k in 1:cf.f_IdgNp loop
+        tt_fIdg_tt := tt_fIdg_tt + cf.f_IdgP1[k]*cf.f_IdgP2[k]*
+                      (cf.f_IdgP2[k]-1)*tau^cf.f_IdgP2[k];
       end for;
     end if;
-    if not cf.alpha_0_nE == 0 then
-      for k in 1:cf.alpha_0_nE loop
-        tau2_d2_alpha_0_d_tau2 := tau2_d2_alpha_0_d_tau2 -
-          tau^2*cf.alpha_0_e1[k]*cf.alpha_0_e2[k]^2*
-          exp(-cf.alpha_0_e2[k]*tau)/((1-exp(-cf.alpha_0_e2[k]*tau))^2);
+    if not cf.f_IdgNe == 0 then
+      for k in 1:cf.f_IdgNe loop
+        tt_fIdg_tt := tt_fIdg_tt - tau^2*cf.f_IdgE1[k]*cf.f_IdgE2[k]^2*
+                      exp(-cf.f_IdgE2[k]*tau)/((1-exp(-cf.f_IdgE2[k]*tau))^2);
       end for;
     end if;
-  annotation(Inline=false,
-          LateInline=true);
-  end tau2_d2_alpha_0_d_tau2;
 
-  redeclare replaceable function extends tau_d_alpha_r_d_tau
+  annotation(Inline=false,
+             LateInline=true);
+  end tt_fIdg_tt;
+
+  redeclare function extends t_fRes_t
     "Short form for tau*(dalpha_r/dtau)_delta=const"
   protected
     EoS cf;
 
   algorithm
-    if not cf.alpha_r_nP == 0 then
-      for k in 1:cf.alpha_r_nP loop
-        tau_d_alpha_r_d_tau := tau_d_alpha_r_d_tau +
-          cf.alpha_r_p1[k]*cf.alpha_r_p3[k]*delta^cf.alpha_r_p2[k]*
-          tau^cf.alpha_r_p3[k];
+    if not cf.f_ResNp == 0 then
+      for k in 1:cf.f_ResNp loop
+        t_fRes_t := t_fRes_t + cf.f_ResP1[k]*cf.f_ResP3[k]*delta^cf.f_ResP2[k]*
+                    tau^cf.f_ResP3[k];
       end for;
     end if;
-    if not cf.alpha_r_nB == 0 then
-      for k in 1:cf.alpha_r_nB loop
-        tau_d_alpha_r_d_tau := tau_d_alpha_r_d_tau +
-          cf.alpha_r_b1[k]*cf.alpha_r_b3[k]*delta^cf.alpha_r_b2[k]*
-          tau^cf.alpha_r_b3[k]*exp(-delta^cf.alpha_r_b4[k]);
+    if not cf.f_ResNb == 0 then
+      for k in 1:cf.f_ResNb loop
+        t_fRes_t := t_fRes_t + cf.f_ResB1[k]*cf.f_ResB3[k]*delta^cf.f_ResB2[k]*
+                    tau^cf.f_ResB3[k]*exp(-delta^cf.f_ResB4[k]);
       end for;
     end if;
-    if not cf.alpha_r_nG == 0 then
-      for k in 1:cf.alpha_r_nG loop
-        tau_d_alpha_r_d_tau := tau_d_alpha_r_d_tau +
-          cf.alpha_r_g1[k]*delta^cf.alpha_r_g2[k]*tau^cf.alpha_r_g3[k]*
-          exp(-cf.alpha_r_g4[k]*(delta - cf.alpha_r_g5[k])^2 -
-          cf.alpha_r_g6[k]*(tau - cf.alpha_r_g7[k])^2)*(cf.alpha_r_g3[k]-2*
-          cf.alpha_r_g6[k]*tau*(tau-cf.alpha_r_g7[k]));
+    if not cf.f_ResNG == 0 then
+      for k in 1:cf.f_ResNG loop
+        t_fRes_t := t_fRes_t + cf.f_ResG1[k]*delta^cf.f_ResG2[k]*tau^
+                    cf.f_ResG3[k]*exp(-cf.f_ResG4[k]*(delta - cf.f_ResG5[k])^2 -
+                    cf.f_ResG6[k]*(tau - cf.f_ResG7[k])^2)*(cf.f_ResG3[k]-2*
+                    cf.f_ResG6[k]*tau*(tau-cf.f_ResG7[k]));
       end for;
     end if;
-  annotation(Inline=false,
-          LateInline=true);
-  end tau_d_alpha_r_d_tau;
 
-  redeclare replaceable function extends tau2_d2_alpha_r_d_tau2
+  annotation(Inline=false,
+             LateInline=true);
+  end t_fRes_t;
+
+  redeclare function extends tt_fRes_tt
     "Short form for tau*tau*(ddalpha_r/(dtau*dtau))_delta=const"
   protected
     EoS cf;
 
   algorithm
-    if not cf.alpha_r_nP == 0 then
-      for k in 1:cf.alpha_r_nP loop
-        tau2_d2_alpha_r_d_tau2 := tau2_d2_alpha_r_d_tau2 +
-          cf.alpha_r_p1[k]*cf.alpha_r_p3[k]*(cf.alpha_r_p3[k]-1)*
-          delta^cf.alpha_r_p2[k]*tau^cf.alpha_r_p3[k];
+    if not cf.f_ResNp == 0 then
+      for k in 1:cf.f_ResNp loop
+        tt_fRes_tt := tt_fRes_tt + cf.f_ResP1[k]*cf.f_ResP3[k]*(cf.f_ResP3[k]-1)*
+                      delta^cf.f_ResP2[k]*tau^cf.f_ResP3[k];
       end for;
     end if;
-    if not cf.alpha_r_nB == 0 then
-      for k in 1:cf.alpha_r_nB loop
-        tau2_d2_alpha_r_d_tau2 := tau2_d2_alpha_r_d_tau2 +
-          cf.alpha_r_b1[k]*cf.alpha_r_b3[k]*(cf.alpha_r_b3[k]-1)*delta^
-          cf.alpha_r_b2[k]*tau^cf.alpha_r_b3[k]*exp(-delta^cf.alpha_r_b4[k]);
+    if not cf.f_ResNb == 0 then
+      for k in 1:cf.f_ResNb loop
+        tt_fRes_tt := tt_fRes_tt + cf.f_ResB1[k]*cf.f_ResB3[k]*(cf.f_ResB3[k]-1)*
+                      delta^cf.f_ResB2[k]*tau^cf.f_ResB3[k]*
+                      exp(-delta^cf.f_ResB4[k]);
       end for;
     end if;
-    if not cf.alpha_r_nG == 0 then
-      for k in 1:cf.alpha_r_nG loop
-        tau2_d2_alpha_r_d_tau2 := tau2_d2_alpha_r_d_tau2 +
-          cf.alpha_r_g1[k]*delta^cf.alpha_r_g2[k]*tau^cf.alpha_r_g3[k]*
-          exp(-cf.alpha_r_g4[k]*(delta - cf.alpha_r_g5[k])^2 -
-          cf.alpha_r_g6[k]*(tau - cf.alpha_r_g7[k])^2)*((cf.alpha_r_g3[k]-2*
-          cf.alpha_r_g6[k]*tau*(tau-cf.alpha_r_g7[k]))^2-cf.alpha_r_g3[k]-2*
-          cf.alpha_r_g6[k]*tau^2);
+    if not cf.f_ResNG == 0 then
+      for k in 1:cf.f_ResNG loop
+        tt_fRes_tt := tt_fRes_tt + cf.f_ResG1[k]*delta^cf.f_ResG2[k]*tau^
+                      cf.f_ResG3[k]*exp(-cf.f_ResG4[k]*(delta - cf.f_ResG5[k])^
+                      2 - cf.f_ResG6[k]*(tau - cf.f_ResG7[k])^2)*
+                      ((cf.f_ResG3[k]-2*cf.f_ResG6[k]*tau*(tau-cf.f_ResG7[k]))^
+                      2-cf.f_ResG3[k]-2*
+          cf.f_ResG6[k]*tau^2);
       end for;
     end if;
-  annotation(Inline=false,
-          LateInline=true);
-  end tau2_d2_alpha_r_d_tau2;
 
-  redeclare replaceable function extends delta_d_alpha_r_d_delta
+  annotation(Inline=false,
+             LateInline=true);
+  end tt_fRes_tt;
+
+  redeclare function extends d_fRes_d
     "Short form for delta*(dalpha_r/(ddelta))_tau=const"
   protected
     EoS cf;
 
   algorithm
-    if not cf.alpha_r_nP == 0 then
-      for k in 1:cf.alpha_r_nP loop
-        delta_d_alpha_r_d_delta := delta_d_alpha_r_d_delta +
-          cf.alpha_r_p1[k]*cf.alpha_r_p2[k]*delta^cf.alpha_r_p2[k]*tau^
-          cf.alpha_r_p3[k];
+    if not cf.f_ResNp == 0 then
+      for k in 1:cf.f_ResNp loop
+        d_fRes_d := d_fRes_d + cf.f_ResP1[k]*cf.f_ResP2[k]*delta^cf.f_ResP2[k]*
+                    tau^cf.f_ResP3[k];
       end for;
     end if;
-    if not cf.alpha_r_nB == 0 then
-      for k in 1:cf.alpha_r_nB loop
-        delta_d_alpha_r_d_delta := delta_d_alpha_r_d_delta +
-          cf.alpha_r_b1[k]*delta^cf.alpha_r_b2[k]*tau^cf.alpha_r_b3[k]*
-          exp(-delta^cf.alpha_r_b4[k])*(cf.alpha_r_b2[k]-cf.alpha_r_b4[k]*
-          delta^cf.alpha_r_b4[k]);
+    if not cf.f_ResNb == 0 then
+      for k in 1:cf.f_ResNb loop
+        d_fRes_d := d_fRes_d + cf.f_ResB1[k]*delta^cf.f_ResB2[k]*tau^
+                    cf.f_ResB3[k]*exp(-delta^cf.f_ResB4[k])*(cf.f_ResB2[k]-
+                    cf.f_ResB4[k]*delta^cf.f_ResB4[k]);
       end for;
     end if;
-    if not cf.alpha_r_nG == 0 then
-      for k in 1:cf.alpha_r_nG loop
-        delta_d_alpha_r_d_delta := delta_d_alpha_r_d_delta +
-          cf.alpha_r_g1[k]*delta^cf.alpha_r_g2[k]*tau^cf.alpha_r_g3[k]*
-          exp(-cf.alpha_r_g4[k]*(delta - cf.alpha_r_g5[k])^2 -
-          cf.alpha_r_g6[k]*(tau - cf.alpha_r_g7[k])^2)*(cf.alpha_r_g2[k]-2*
-          cf.alpha_r_g4[k]*delta*(delta-cf.alpha_r_g5[k]));
+    if not cf.f_ResNG == 0 then
+      for k in 1:cf.f_ResNG loop
+        d_fRes_d := d_fRes_d + cf.f_ResG1[k]*delta^cf.f_ResG2[k]*tau^
+                    cf.f_ResG3[k]*exp(-cf.f_ResG4[k]*(delta - cf.f_ResG5[k])^2 -
+                    cf.f_ResG6[k]*(tau - cf.f_ResG7[k])^2)*(cf.f_ResG2[k]-2*
+                    cf.f_ResG4[k]*delta*(delta-cf.f_ResG5[k]));
       end for;
     end if;
-  annotation(Inline=false,
-          LateInline=true);
-  end delta_d_alpha_r_d_delta;
 
-  redeclare replaceable function extends delta2_d2_alpha_r_d_delta2
+  annotation(Inline=false,
+             LateInline=true);
+  end d_fRes_d;
+
+  redeclare function extends dd_fRes_dd
     "Short form for delta*delta(ddalpha_r/(ddelta*delta))_tau=const"
   protected
     EoS cf;
 
   algorithm
-    if not cf.alpha_r_nP == 0 then
-      for k in 1:cf.alpha_r_nP loop
-        delta2_d2_alpha_r_d_delta2 := delta2_d2_alpha_r_d_delta2 +
-          cf.alpha_r_p1[k]*cf.alpha_r_p2[k]*(cf.alpha_r_p2[k]-1)*
-          delta^cf.alpha_r_p2[k]*tau^cf.alpha_r_p3[k];
+    if not cf.f_ResNp == 0 then
+      for k in 1:cf.f_ResNp loop
+        dd_fRes_dd := dd_fRes_dd + cf.f_ResP1[k]*cf.f_ResP2[k]*(cf.f_ResP2[k]-1)*
+                      delta^cf.f_ResP2[k]*tau^cf.f_ResP3[k];
       end for;
     end if;
-    if not cf.alpha_r_nB == 0 then
-      for k in 1:cf.alpha_r_nB loop
-        delta2_d2_alpha_r_d_delta2 := delta2_d2_alpha_r_d_delta2 +
-          cf.alpha_r_b1[k]*delta^cf.alpha_r_b2[k]*tau^cf.alpha_r_b3[k]*
-          exp(-delta^cf.alpha_r_b4[k])*((cf.alpha_r_b2[k]-1-cf.alpha_r_b4[k]*
-          delta^cf.alpha_r_b4[k])*(cf.alpha_r_b2[k]-cf.alpha_r_b4[k]*
-          delta^cf.alpha_r_b4[k])-cf.alpha_r_b4[k]^2*delta^cf.alpha_r_b4[k]);
+    if not cf.f_ResNb == 0 then
+      for k in 1:cf.f_ResNb loop
+        dd_fRes_dd := dd_fRes_dd + cf.f_ResB1[k]*delta^cf.f_ResB2[k]*tau^
+                      cf.f_ResB3[k]*exp(-delta^cf.f_ResB4[k])*((cf.f_ResB2[k]-1-
+                      cf.f_ResB4[k]*delta^cf.f_ResB4[k])*(cf.f_ResB2[k]-
+                      cf.f_ResB4[k]*delta^cf.f_ResB4[k])-cf.f_ResB4[k]^2*
+                      delta^cf.f_ResB4[k]);
       end for;
     end if;
-    if not cf.alpha_r_nG == 0 then
-      for k in 1:cf.alpha_r_nG loop
-        delta2_d2_alpha_r_d_delta2 := delta2_d2_alpha_r_d_delta2 +
-          cf.alpha_r_g1[k]*delta^cf.alpha_r_g2[k]*tau^cf.alpha_r_g3[k]*
-          exp(-cf.alpha_r_g4[k]*(delta - cf.alpha_r_g5[k])^2 -
-          cf.alpha_r_g6[k]*(tau - cf.alpha_r_g7[k])^2)*((cf.alpha_r_g2[k]-2*
-          cf.alpha_r_g4[k]*delta*(delta-cf.alpha_r_g5[k]))^2-cf.alpha_r_g2[k]-
-          2*cf.alpha_r_g4[k]*
-          delta^2);
+    if not cf.f_ResNG == 0 then
+      for k in 1:cf.f_ResNG loop
+        dd_fRes_dd := dd_fRes_dd + cf.f_ResG1[k]*delta^cf.f_ResG2[k]*tau^
+                      cf.f_ResG3[k]*exp(-cf.f_ResG4[k]*(delta - cf.f_ResG5[k])^
+                      2 - cf.f_ResG6[k]*(tau - cf.f_ResG7[k])^2)*((cf.f_ResG2[k]-
+                      2*cf.f_ResG4[k]*delta*(delta-cf.f_ResG5[k]))^2-
+                      cf.f_ResG2[k]-2*cf.f_ResG4[k]*delta^2);
       end for;
     end if;
-  annotation(Inline=false,
-          LateInline=true);
-  end delta2_d2_alpha_r_d_delta2;
 
-  redeclare replaceable function extends tau_delta_d2_alpha_r_d_tau_d_delta
+  annotation(Inline=false,
+             LateInline=true);
+  end dd_fRes_dd;
+
+  redeclare function extends td_fRes_td
     "Short form for tau*delta*(ddalpha_r/(dtau*ddelta))"
   protected
     EoS cf;
 
   algorithm
-    if not cf.alpha_r_nP == 0 then
-      for k in 1:cf.alpha_r_nP loop
-        tau_delta_d2_alpha_r_d_tau_d_delta :=
-          tau_delta_d2_alpha_r_d_tau_d_delta +
-          cf.alpha_r_p1[k]*cf.alpha_r_p2[k]*cf.alpha_r_p3[k]*
-          delta^cf.alpha_r_p2[k]*tau^cf.alpha_r_p3[k];
+    if not cf.f_ResNp == 0 then
+      for k in 1:cf.f_ResNp loop
+        td_fRes_td := td_fRes_td + cf.f_ResP1[k]*cf.f_ResP2[k]*cf.f_ResP3[k]*
+                      delta^cf.f_ResP2[k]*tau^cf.f_ResP3[k];
       end for;
     end if;
-    if not cf.alpha_r_nB == 0 then
-      for k in 1:cf.alpha_r_nB loop
-        tau_delta_d2_alpha_r_d_tau_d_delta :=
-          tau_delta_d2_alpha_r_d_tau_d_delta +
-          cf.alpha_r_b1[k]*cf.alpha_r_b3[k]*delta^cf.alpha_r_b2[k]*tau^
-          cf.alpha_r_b3[k]*exp(-delta^cf.alpha_r_b4[k])*(cf.alpha_r_b2[k]-
-          cf.alpha_r_b4[k]*delta^cf.alpha_r_b4[k]);
+    if not cf.f_ResNb == 0 then
+      for k in 1:cf.f_ResNb loop
+        td_fRes_td := td_fRes_td + cf.f_ResB1[k]*cf.f_ResB3[k]*delta^
+                      cf.f_ResB2[k]*tau^cf.f_ResB3[k]*exp(-delta^cf.f_ResB4[k])*
+                      (cf.f_ResB2[k]-cf.f_ResB4[k]*delta^cf.f_ResB4[k]);
       end for;
     end if;
-    if not cf.alpha_r_nG == 0 then
-      for k in 1:cf.alpha_r_nG loop
-        tau_delta_d2_alpha_r_d_tau_d_delta :=
-          tau_delta_d2_alpha_r_d_tau_d_delta +
-          cf.alpha_r_g1[k]*delta^cf.alpha_r_g2[k]*tau^cf.alpha_r_g3[k]*
-          exp(-cf.alpha_r_g4[k]*(delta - cf.alpha_r_g5[k])^2 -
-          cf.alpha_r_g6[k]*(tau - cf.alpha_r_g7[k])^2)*(cf.alpha_r_g3[k]-2*
-          cf.alpha_r_g6[k]*tau*(tau-cf.alpha_r_g7[k]))*(cf.alpha_r_g2[k]-2*
-          cf.alpha_r_g4[k]*delta*(delta-cf.alpha_r_g5[k]));
+    if not cf.f_ResNG == 0 then
+      for k in 1:cf.f_ResNG loop
+        td_fRes_td := td_fRes_td + cf.f_ResG1[k]*delta^cf.f_ResG2[k]*tau^
+                      cf.f_ResG3[k]*exp(-cf.f_ResG4[k]*(delta - cf.f_ResG5[k])^
+                      2 - cf.f_ResG6[k]*(tau - cf.f_ResG7[k])^2)*(cf.f_ResG3[k]-
+                      2*cf.f_ResG6[k]*tau*(tau-cf.f_ResG7[k]))*(cf.f_ResG2[k]-2*
+                      cf.f_ResG4[k]*delta*(delta-cf.f_ResG5[k]));
       end for;
     end if;
-  annotation(Inline=false,
-          LateInline=true);
-  end tau_delta_d2_alpha_r_d_tau_d_delta;
 
-  redeclare replaceable function extends tau3_d3_alpha_0_d_tau3
+  annotation(Inline=false,
+             LateInline=true);
+  end td_fRes_td;
+
+  redeclare function extends ttt_fIdg_ttt
     "Short form for tau*tau*tau*(dddalpha_0/(dtau*dtau*dtau))_delta=const"
   protected
     EoS cf;
 
   algorithm
-    if not cf.alpha_0_nL == 0 then
-      for k in 1:cf.alpha_0_nL loop
-        tau3_d3_alpha_0_d_tau3 := tau3_d3_alpha_0_d_tau3 +
-          2*cf.alpha_0_l1[k]*cf.alpha_0_l2[k];
+    if not cf.f_IdgNl == 0 then
+      for k in 1:cf.f_IdgNl loop
+        ttt_fIdg_ttt := ttt_fIdg_ttt + 2*cf.f_IdgL1[k]*cf.f_IdgL2[k];
       end for;
     end if;
-    if not cf.alpha_0_nP == 0 then
-      for k in 1:cf.alpha_0_nP loop
-        tau3_d3_alpha_0_d_tau3 := tau3_d3_alpha_0_d_tau3 +
-          cf.alpha_0_p1[k]*cf.alpha_0_p2[k]*(cf.alpha_0_p2[k]-1)*
-          (cf.alpha_0_p2[k]-2)*tau^cf.alpha_0_p2[k];
+    if not cf.f_IdgNp == 0 then
+      for k in 1:cf.f_IdgNp loop
+        ttt_fIdg_ttt := ttt_fIdg_ttt + cf.f_IdgP1[k]*cf.f_IdgP2[k]*
+                        (cf.f_IdgP2[k]-1)*(cf.f_IdgP2[k]-2)*tau^cf.f_IdgP2[k];
       end for;
     end if;
-    if not cf.alpha_0_nE == 0 then
-      for k in 1:cf.alpha_0_nE loop
-        tau3_d3_alpha_0_d_tau3 := tau3_d3_alpha_0_d_tau3 +
-          tau^3*cf.alpha_0_e1[k]*cf.alpha_0_e2[k]^3*exp(cf.alpha_0_e2[k]*tau)*
-          (exp(cf.alpha_0_e2[k]*tau)+1)/((exp(cf.alpha_0_e2[k]*tau)-1)^3);
+    if not cf.f_IdgNe == 0 then
+      for k in 1:cf.f_IdgNe loop
+        ttt_fIdg_ttt := ttt_fIdg_ttt + tau^3*cf.f_IdgE1[k]*cf.f_IdgE2[k]^3*
+                        exp(cf.f_IdgE2[k]*tau)*(exp(cf.f_IdgE2[k]*tau)+1)/
+                        ((exp(cf.f_IdgE2[k]*tau)-1)^3);
       end for;
     end if;
-    annotation(Inline=false,
-          LateInline=true);
-  end tau3_d3_alpha_0_d_tau3;
 
-  redeclare replaceable function extends tau3_d3_alpha_r_d_tau3
+    annotation(Inline=false,
+               LateInline=true);
+  end ttt_fIdg_ttt;
+
+  redeclare function extends ttt_fRes_ttt
     "Short form for tau*tau*tau*(dddalpha_r/(dtau*dtau*dtau))_delta=const"
   protected
     EoS cf;
 
   algorithm
-    if not cf.alpha_r_nP == 0 then
-      for k in 1:cf.alpha_r_nP loop
-        tau3_d3_alpha_r_d_tau3 := tau3_d3_alpha_r_d_tau3 +
-          cf.alpha_r_p1[k]*cf.alpha_r_p3[k]*(cf.alpha_r_p3[k]-1)*
-          (cf.alpha_r_p3[k]-2)*delta^cf.alpha_r_p2[k]*tau^cf.alpha_r_p3[k];
+    if not cf.f_ResNp == 0 then
+      for k in 1:cf.f_ResNp loop
+        ttt_fRes_ttt := ttt_fRes_ttt + cf.f_ResP1[k]*cf.f_ResP3[k]*
+                        (cf.f_ResP3[k]-1)*(cf.f_ResP3[k]-2)*delta^cf.f_ResP2[k]*
+                        tau^cf.f_ResP3[k];
       end for;
     end if;
-    if not cf.alpha_r_nB == 0 then
-      for k in 1:cf.alpha_r_nB loop
-        tau3_d3_alpha_r_d_tau3 := tau3_d3_alpha_r_d_tau3 +
-          cf.alpha_r_b1[k]*cf.alpha_r_b3[k]*(cf.alpha_r_b3[k]-1)*
-          (cf.alpha_r_b3[k]-2)*delta^cf.alpha_r_b2[k]*tau^cf.alpha_r_b3[k]*
-          exp(-delta^cf.alpha_r_b4[k]);
+    if not cf.f_ResNb == 0 then
+      for k in 1:cf.f_ResNb loop
+        ttt_fRes_ttt := ttt_fRes_ttt + cf.f_ResB1[k]*cf.f_ResB3[k]*
+                        (cf.f_ResB3[k]-1)*(cf.f_ResB3[k]-2)*delta^cf.f_ResB2[k]*
+                        tau^cf.f_ResB3[k]*exp(-delta^cf.f_ResB4[k]);
       end for;
     end if;
-    if not cf.alpha_r_nP == 0 then
-      for k in 1:cf.alpha_r_nG loop
-        tau3_d3_alpha_r_d_tau3 := tau3_d3_alpha_r_d_tau3 -
-        cf.alpha_r_g1[k]*delta^cf.alpha_r_g2[k]*tau^cf.alpha_r_g3[k]*
-        (8*cf.alpha_r_g6[k]^3*tau^6-24*cf.alpha_r_g6[k]^3*cf.alpha_r_g7[k]*
-        tau^5+12*cf.alpha_r_g6[k]^2*(2*cf.alpha_r_g6[k]*cf.alpha_r_g7[k]^2-
-        cf.alpha_r_g3[k]-1)*tau^4-4*cf.alpha_r_g6[k]^2*cf.alpha_r_g7[k]*(2*
-        cf.alpha_r_g6[k]*cf.alpha_r_g7[k]^2-6*cf.alpha_r_g3[k]-3)*tau^3-6*
-        cf.alpha_r_g3[k]*cf.alpha_r_g6[k]*(2*cf.alpha_r_g6[k]*
-        cf.alpha_r_g7[k]^2-cf.alpha_r_g3[k])*tau^2-6*(cf.alpha_r_g3[k]-1)*
-        cf.alpha_r_g3[k]*cf.alpha_r_g6[k]*cf.alpha_r_g7[k]*
-        tau-cf.alpha_r_g3[k]^3+3*cf.alpha_r_g3[k]^2-2*cf.alpha_r_g3[k])*
-        exp(-cf.alpha_r_g6[k]*(tau-cf.alpha_r_g7[k])^2-cf.alpha_r_g4[k]*
-        (delta-cf.alpha_r_g5[k])^2);
+    if not cf.f_ResNp == 0 then
+      for k in 1:cf.f_ResNG loop
+        ttt_fRes_ttt := ttt_fRes_ttt - cf.f_ResG1[k]*delta^cf.f_ResG2[k]*tau^
+                        cf.f_ResG3[k]*(8*cf.f_ResG6[k]^3*tau^6-24*cf.f_ResG6[k]^
+                        3*cf.f_ResG7[k]*tau^5+12*cf.f_ResG6[k]^2*(2*
+                        cf.f_ResG6[k]*cf.f_ResG7[k]^2-cf.f_ResG3[k]-1)*tau^4-4*
+                        cf.f_ResG6[k]^2*cf.f_ResG7[k]*(2*cf.f_ResG6[k]*
+                        cf.f_ResG7[k]^2-6*cf.f_ResG3[k]-3)*tau^3-6*cf.f_ResG3[k]*
+                        cf.f_ResG6[k]*(2*cf.f_ResG6[k]*cf.f_ResG7[k]^2-
+                        cf.f_ResG3[k])*tau^2-6*(cf.f_ResG3[k]-1)*cf.f_ResG3[k]*
+                        cf.f_ResG6[k]*cf.f_ResG7[k]*tau-cf.f_ResG3[k]^3+3*
+                        cf.f_ResG3[k]^2-2*cf.f_ResG3[k])*exp(-cf.f_ResG6[k]*
+                        (tau-cf.f_ResG7[k])^2-cf.f_ResG4[k]*(delta-
+                        cf.f_ResG5[k])^2);
       end for;
     end if;
     annotation(Inline=false,
           LateInline=true);
-  end tau3_d3_alpha_r_d_tau3;
+  end ttt_fRes_ttt;
 
-  redeclare replaceable function extends delta3_d3_alpha_r_d_delta3
+  redeclare function extends ddd_fRes_ddd
     "Short form for delta*delta*delta*
-    (dddalpha_r/(ddelta*ddelta*ddelta))_tau=const"
+  (dddalpha_r/(ddelta*ddelta*ddelta))_tau=const"
   protected
     EoS cf;
 
   algorithm
-    if not cf.alpha_r_nP == 0 then
-      for k in 1:cf.alpha_r_nP loop
-        delta3_d3_alpha_r_d_delta3 := delta3_d3_alpha_r_d_delta3 +
-          cf.alpha_r_p1[k]*cf.alpha_r_p2[k]*(cf.alpha_r_p2[k]-1)*
-          (cf.alpha_r_p2[k]-2)*delta^cf.alpha_r_p2[k]*tau^cf.alpha_r_p3[k];
+    if not cf.f_ResNp == 0 then
+      for k in 1:cf.f_ResNp loop
+        ddd_fRes_ddd := ddd_fRes_ddd + cf.f_ResP1[k]*cf.f_ResP2[k]*
+                        (cf.f_ResP2[k]-1)*(cf.f_ResP2[k]-2)*delta^cf.f_ResP2[k]*
+                        tau^cf.f_ResP3[k];
       end for;
     end if;
-    if not cf.alpha_r_nB == 0 then
-      for k in 1:cf.alpha_r_nB loop
-        delta3_d3_alpha_r_d_delta3 := delta3_d3_alpha_r_d_delta3 -
-          cf.alpha_r_b1[k]*delta^cf.alpha_r_b2[k]*tau^cf.alpha_r_b3[k]*
-          exp(-delta^cf.alpha_r_b4[k])*(cf.alpha_r_b4[k]*delta^
-          cf.alpha_r_b4[k]*(cf.alpha_r_b4[k]*(delta^cf.alpha_r_b4[k]*
-          (cf.alpha_r_b4[k]*(delta^cf.alpha_r_b4[k]-3)-3*cf.alpha_r_b2[k]+3)+
-          cf.alpha_r_b4[k]+3*cf.alpha_r_b2[k]-3)+3*cf.alpha_r_b2[k]^2-6*
-          cf.alpha_r_b2[k]+2)-(cf.alpha_r_b2[k]-2)*(cf.alpha_r_b2[k]-1)*
-          cf.alpha_r_b2[k]);
+    if not cf.f_ResNb == 0 then
+      for k in 1:cf.f_ResNb loop
+        ddd_fRes_ddd := ddd_fRes_ddd - cf.f_ResB1[k]*delta^cf.f_ResB2[k]*tau^
+                        cf.f_ResB3[k]*exp(-delta^cf.f_ResB4[k])*(cf.f_ResB4[k]*
+                        delta^cf.f_ResB4[k]*(cf.f_ResB4[k]*(delta^cf.f_ResB4[k]*
+                        (cf.f_ResB4[k]*(delta^cf.f_ResB4[k]-3)-3*cf.f_ResB2[k]+3)+
+                        cf.f_ResB4[k]+3*cf.f_ResB2[k]-3)+3*cf.f_ResB2[k]^2-6*
+                        cf.f_ResB2[k]+2)-(cf.f_ResB2[k]-2)*(cf.f_ResB2[k]-1)*
+                        cf.f_ResB2[k]);
       end for;
     end if;
-    if not cf.alpha_r_nG == 0 then
-      for k in 1:cf.alpha_r_nG loop
-        delta3_d3_alpha_r_d_delta3 := delta3_d3_alpha_r_d_delta3 -
-          cf.alpha_r_g1[k]*tau^cf.alpha_r_g3[k]*delta^cf.alpha_r_g2[k]*
-          (8*cf.alpha_r_g4[k]^3*delta^6-24*cf.alpha_r_g4[k]^3*cf.alpha_r_g5[k]*
-          delta^5+12*cf.alpha_r_g4[k]^2*(2*cf.alpha_r_g4[k]*cf.alpha_r_g5[k]^2-
-          cf.alpha_r_g2[k]-1)*delta^4-4*cf.alpha_r_g4[k]^2*cf.alpha_r_g5[k]*(2*
-          cf.alpha_r_g4[k]*cf.alpha_r_g5[k]^2-6*cf.alpha_r_g2[k]-3)*delta^3-6*
-          cf.alpha_r_g2[k]*cf.alpha_r_g4[k]*(2*cf.alpha_r_g4[k]*
-          cf.alpha_r_g5[k]^2-cf.alpha_r_g2[k])*delta^2-6*(cf.alpha_r_g2[k]-1)*
-          cf.alpha_r_g2[k]*cf.alpha_r_g4[k]*cf.alpha_r_g5[k]*delta-
-          cf.alpha_r_g2[k]^3+3*cf.alpha_r_g2[k]^2-2*cf.alpha_r_g2[k])*
-          exp(-cf.alpha_r_g4[k]*(delta-cf.alpha_r_g5[k])^2-cf.alpha_r_g6[k]*
-          (tau-cf.alpha_r_g7[k])^2);
+    if not cf.f_ResNG == 0 then
+      for k in 1:cf.f_ResNG loop
+        ddd_fRes_ddd := ddd_fRes_ddd - cf.f_ResG1[k]*tau^cf.f_ResG3[k]*delta^
+                        cf.f_ResG2[k]*(8*cf.f_ResG4[k]^3*delta^6-24*cf.f_ResG4[k]^
+                        3*cf.f_ResG5[k]*delta^5+12*cf.f_ResG4[k]^2*(2*
+                        cf.f_ResG4[k]*cf.f_ResG5[k]^2-cf.f_ResG2[k]-1)*delta^4-4*
+                        cf.f_ResG4[k]^2*cf.f_ResG5[k]*(2*cf.f_ResG4[k]*
+                        cf.f_ResG5[k]^2-6*cf.f_ResG2[k]-3)*delta^3-6*
+                        cf.f_ResG2[k]*cf.f_ResG4[k]*(2*cf.f_ResG4[k]*
+                        cf.f_ResG5[k]^2-cf.f_ResG2[k])*delta^2-6*(cf.f_ResG2[k]-1)
+                        *cf.f_ResG2[k]*cf.f_ResG4[k]*cf.f_ResG5[k]*delta-
+                        cf.f_ResG2[k]^3+3*cf.f_ResG2[k]^2-2*cf.f_ResG2[k])*
+                        exp(-cf.f_ResG4[k]*(delta-cf.f_ResG5[k])^2-cf.f_ResG6[k]*
+                        (tau-cf.f_ResG7[k])^2);
       end for;
     end if;
-    annotation(Inline=false,
-          LateInline=true);
-  end delta3_d3_alpha_r_d_delta3;
 
-  redeclare replaceable function extends tau_delta2_d3_alpha_r_d_tau_d_delta2
+    annotation(Inline=false,
+               LateInline=true);
+  end ddd_fRes_ddd;
+
+  redeclare function extends tdd_fRes_tdd
     "Short form for tau*delta*delta*(dddalpha_r/(dtau*ddelta*ddelta))"
   protected
     EoS cf;
 
   algorithm
-    if not cf.alpha_r_nP == 0 then
-      for k in 1:cf.alpha_r_nP loop
-        tau_delta2_d3_alpha_r_d_tau_d_delta2 :=
-          tau_delta2_d3_alpha_r_d_tau_d_delta2 + cf.alpha_r_p1[k]*
-          cf.alpha_r_p2[k]*(cf.alpha_r_p2[k]-1)*cf.alpha_r_p3[k]*
-          delta^cf.alpha_r_p2[k]*tau^cf.alpha_r_p3[k];
+    if not cf.f_ResNp == 0 then
+      for k in 1:cf.f_ResNp loop
+        tdd_fRes_tdd := tdd_fRes_tdd + cf.f_ResP1[k]*cf.f_ResP2[k]*(
+                        cf.f_ResP2[k]-1)*cf.f_ResP3[k]*delta^cf.f_ResP2[k]*tau^
+                        cf.f_ResP3[k];
       end for;
     end if;
-    if not cf.alpha_r_nB == 0 then
-      for k in 1:cf.alpha_r_nB loop
-        tau_delta2_d3_alpha_r_d_tau_d_delta2 :=
-          tau_delta2_d3_alpha_r_d_tau_d_delta2 +
-          cf.alpha_r_b1[k]*cf.alpha_r_b3[k]*delta^cf.alpha_r_b2[k]*tau^
-          cf.alpha_r_b3[k]*exp(-delta^cf.alpha_r_b4[k])*(cf.alpha_r_b4[k]*
-          delta^cf.alpha_r_b4[k]*(cf.alpha_r_b4[k]*(delta^cf.alpha_r_b4[k]-1)-
-          2*cf.alpha_r_b2[k]+1)+cf.alpha_r_b2[k]*(cf.alpha_r_b2[k]-1));
+    if not cf.f_ResNb == 0 then
+      for k in 1:cf.f_ResNb loop
+        tdd_fRes_tdd := tdd_fRes_tdd + cf.f_ResB1[k]*cf.f_ResB3[k]*delta^
+                        cf.f_ResB2[k]*tau^cf.f_ResB3[k]*exp(-delta^cf.f_ResB4[k])*
+                        (cf.f_ResB4[k]*delta^cf.f_ResB4[k]*(cf.f_ResB4[k]*(delta^
+                        cf.f_ResB4[k]-1)-2*cf.f_ResB2[k]+1)+cf.f_ResB2[k]*
+                        (cf.f_ResB2[k]-1));
       end for;
     end if;
-    if not cf.alpha_r_nG == 0 then
-      for k in 1:cf.alpha_r_nG loop
-        tau_delta2_d3_alpha_r_d_tau_d_delta2 :=
-          tau_delta2_d3_alpha_r_d_tau_d_delta2 +
-          cf.alpha_r_g1[k]*delta^cf.alpha_r_g2[k]*tau^cf.alpha_r_g3[k]*
-          exp(-cf.alpha_r_g4[k]*(delta-cf.alpha_r_g5[k])^2 - cf.alpha_r_g6[k]*
-          (tau - cf.alpha_r_g7[k])^2)*(cf.alpha_r_g3[k]-2*cf.alpha_r_g6[k]*tau*
-          (tau-cf.alpha_r_g7[k]))*((cf.alpha_r_g2[k]-2*cf.alpha_r_g4[k]*
-          delta*(delta-cf.alpha_r_g5[k]))^2-cf.alpha_r_g2[k]-2*
-          cf.alpha_r_g4[k]*delta^2);
+    if not cf.f_ResNG == 0 then
+      for k in 1:cf.f_ResNG loop
+        tdd_fRes_tdd := tdd_fRes_tdd + cf.f_ResG1[k]*delta^cf.f_ResG2[k]*tau^
+                        cf.f_ResG3[k]*exp(-cf.f_ResG4[k]*(delta-cf.f_ResG5[k])^
+                        2 - cf.f_ResG6[k]*(tau - cf.f_ResG7[k])^2)*
+                        (cf.f_ResG3[k]-2*cf.f_ResG6[k]*tau*(tau-cf.f_ResG7[k]))*
+                        ((cf.f_ResG2[k]-2*cf.f_ResG4[k]*delta*(delta-
+                        cf.f_ResG5[k]))^2-cf.f_ResG2[k]-2*cf.f_ResG4[k]*delta^2);
       end for;
     end if;
-    annotation(Inline=false,
-          LateInline=true);
-  end tau_delta2_d3_alpha_r_d_tau_d_delta2;
 
-  redeclare replaceable function extends tau2_delta_d3_alpha_r_d_tau2_d_delta
+    annotation(Inline=false,
+               LateInline=true);
+  end tdd_fRes_tdd;
+
+  redeclare function extends ttd_fRes_ttd
     "Short form for tau*tau*delta*(dddalpha_r/(dtau*dtau*ddelta))"
   protected
     EoS cf;
 
   algorithm
-    if not cf.alpha_r_nP == 0 then
-      for k in 1:cf.alpha_r_nP loop
-        tau2_delta_d3_alpha_r_d_tau2_d_delta :=
-          tau2_delta_d3_alpha_r_d_tau2_d_delta +
-          cf.alpha_r_p1[k]*cf.alpha_r_p2[k]*cf.alpha_r_p3[k]*
-          (cf.alpha_r_p3[k]-1)*delta^cf.alpha_r_p2[k]*tau^cf.alpha_r_p3[k];
+    if not cf.f_ResNp == 0 then
+      for k in 1:cf.f_ResNp loop
+        ttd_fRes_ttd := ttd_fRes_ttd + cf.f_ResP1[k]*cf.f_ResP2[k]*cf.f_ResP3[k]*
+                        (cf.f_ResP3[k]-1)*delta^cf.f_ResP2[k]*tau^cf.f_ResP3[k];
       end for;
     end if;
-    if not cf.alpha_r_nB == 0 then
-      for k in 1:cf.alpha_r_nB loop
-        tau2_delta_d3_alpha_r_d_tau2_d_delta :=
-          tau2_delta_d3_alpha_r_d_tau2_d_delta +
-          cf.alpha_r_b1[k]*cf.alpha_r_b3[k]*(cf.alpha_r_b3[k]-1)*delta^
-          cf.alpha_r_b2[k]*tau^cf.alpha_r_b3[k]*exp(-delta^cf.alpha_r_b4[k])*
-          (cf.alpha_r_b2[k]-cf.alpha_r_b4[k]*delta^cf.alpha_r_b4[k]);
+    if not cf.f_ResNb == 0 then
+      for k in 1:cf.f_ResNb loop
+        ttd_fRes_ttd := ttd_fRes_ttd + cf.f_ResB1[k]*cf.f_ResB3[k]*(
+                        cf.f_ResB3[k]-1)*delta^cf.f_ResB2[k]*tau^cf.f_ResB3[k]*
+                        exp(-delta^cf.f_ResB4[k])*(cf.f_ResB2[k]-cf.f_ResB4[k]*
+                        delta^cf.f_ResB4[k]);
       end for;
     end if;
-    if not cf.alpha_r_nG == 0 then
-      for k in 1:cf.alpha_r_nG loop
-        tau2_delta_d3_alpha_r_d_tau2_d_delta :=
-          tau2_delta_d3_alpha_r_d_tau2_d_delta +
-          cf.alpha_r_g1[k]*delta^cf.alpha_r_g2[k]*tau^cf.alpha_r_g3[k]*
-          exp(-cf.alpha_r_g4[k]*(delta-cf.alpha_r_g5[k])^2 - cf.alpha_r_g6[k]*
-          (tau-cf.alpha_r_g7[k])^2)*(cf.alpha_r_g2[k]-2*cf.alpha_r_g4[k]*delta*
-          (delta-cf.alpha_r_g5[k]))*((cf.alpha_r_g3[k]-2*cf.alpha_r_g6[k]*tau*
-          (tau-cf.alpha_r_g7[k]))^2-cf.alpha_r_g3[k]-2*cf.alpha_r_g6[k]*tau^2);
+    if not cf.f_ResNG == 0 then
+      for k in 1:cf.f_ResNG loop
+        ttd_fRes_ttd := ttd_fRes_ttd + cf.f_ResG1[k]*delta^cf.f_ResG2[k]*tau^
+                        cf.f_ResG3[k]*exp(-cf.f_ResG4[k]*(delta-cf.f_ResG5[k])^
+                        2 - cf.f_ResG6[k]*(tau-cf.f_ResG7[k])^2)*(cf.f_ResG2[k]-
+                        2*cf.f_ResG4[k]*delta*(delta-cf.f_ResG5[k]))*((
+                        cf.f_ResG3[k]-2*cf.f_ResG6[k]*tau*(tau-cf.f_ResG7[k]))^
+                        2-cf.f_ResG3[k]-2*cf.f_ResG6[k]*tau^2);
       end for;
     end if;
+
     annotation(Inline=false,
-          LateInline=true);
-  end tau2_delta_d3_alpha_r_d_tau2_d_delta;
+               LateInline=true);
+  end ttd_fRes_ttd;
   /*Provide polynomial functions for saturation properties. These functions are
     fitted to external data (e.g. data extracted from RefProp or FluidProp).
     Currently, just one fitting approach is implemented. Therefore, the
     coefficients, which are obtained during the fitting procedure, are provided
      by records.
   */
-  redeclare replaceable function extends saturationPressure
+  redeclare function extends saturationPressure
     "Saturation pressure of refrigerant (Ancillary equation)"
   protected
     BDSP cf;
@@ -540,155 +514,162 @@ partial package PartialHybridTwoPhaseMediumRecord
     elseif T<fluidConstants[1].triplePointTemperature then
      p := fluidConstants[1].triplePointPressure;
     else
-      for k in 1:cf.saturationPressure_nT loop
-        p_1 :=p_1 + cf.saturationPressure_n[k]*OM^cf.saturationPressure_e[k];
+      for k in 1:cf.psat_Nt loop
+        p_1 :=p_1 + cf.psat_N[k]*OM^cf.psat_E[k];
       end for;
       p := fluidConstants[1].criticalPressure *
-        exp(fluidConstants[1].criticalTemperature/T * p_1);
+           exp(fluidConstants[1].criticalTemperature/T * p_1);
     end if;
+
     annotation(smoothOrder = 2,
-          Inline=false,
-          LateInline=true);
+               Inline=false,
+               LateInline=true);
   end saturationPressure;
 
-  redeclare replaceable function extends saturationTemperature
+  redeclare function extends saturationTemperature
     "Saturation temperature of refrigerant (Ancillary equation)"
   protected
     BDSP cf;
     Real T_1 = 0;
-    Real x;
+    Real x = 0;
 
   algorithm
-    x := (p - cf.saturationTemperature_iO[1])/cf.saturationTemperature_iO[2];
-    for k in 1:cf.saturationTemperature_nT-1 loop
-      T_1 := T_1 + cf.saturationTemperature_n[k]*x^
-        (cf.saturationTemperature_nT - k);
+    x := (p - cf.Tsat_IO[1])/cf.Tsat_IO[2];
+    for k in 1:cf.Tsat_Nt-1 loop
+      T_1 := T_1 + cf.Tsat_N[k]*x^(cf.Tsat_Nt - k);
     end for;
-    T_1 := T_1 + cf.saturationTemperature_n[cf.saturationTemperature_nT];
-    T := T_1*cf.saturationTemperature_iO[4] + cf.saturationTemperature_iO[3];
+    T_1 := T_1 + cf.Tsat_N[cf.Tsat_Nt];
+    T := T_1*cf.Tsat_IO[4] + cf.Tsat_IO[3];
+
     annotation(smoothOrder = 2,
-          Inline=false,
-          LateInline=true);
+               Inline=false,
+               LateInline=true);
   end saturationTemperature;
 
-  redeclare replaceable function extends bubbleDensity
+  redeclare function extends bubbleDensity
     "Boiling curve specific density of refrigerant (Ancillary equation)"
   protected
     BDSP cf;
     Real dl_1 = 0;
-    Real x;
+    Real x = 0;
 
   algorithm
-    x := (sat.Tsat - cf.bubbleDensity_iO[1])/cf.bubbleDensity_iO[2];
-    for k in 1:cf.bubbleDensity_nT-1 loop
-      dl_1 := dl_1 + cf.bubbleDensity_n[k]*x^(cf.bubbleDensity_nT - k);
+    x := (sat.Tsat - cf.dl_IO[1])/cf.dl_IO[2];
+    for k in 1:cf.dl_Nt-1 loop
+      dl_1 := dl_1 + cf.dl_N[k]*x^(cf.dl_Nt - k);
     end for;
-    dl_1 := dl_1 + cf.bubbleDensity_n[cf.bubbleDensity_nT];
-    dl := dl_1*cf.bubbleDensity_iO[4] + cf.bubbleDensity_iO[3];
+    dl_1 := dl_1 + cf.dl_N[cf.dl_Nt];
+    dl := dl_1*cf.dl_IO[4] + cf.dl_IO[3];
+
     annotation(smoothOrder = 2,
-          Inline=false,
-          LateInline=true);
+               Inline=false,
+               LateInline=true);
   end bubbleDensity;
 
-  redeclare replaceable function extends dewDensity
+  redeclare function extends dewDensity
     "Dew curve specific density of refrigerant (Ancillary equation)"
   protected
     BDSP cf;
     Real dv_1 = 0;
-    Real x;
+    Real x = 0;
 
   algorithm
-    x := (sat.Tsat - cf.dewDensity_iO[1])/cf.dewDensity_iO[2];
-    for k in 1:cf.dewDensity_nT-1 loop
-      dv_1 := dv_1 + cf.dewDensity_n[k]*x^(cf.dewDensity_nT - k);
+    x := (sat.Tsat - cf.dv_IO[1])/cf.dv_IO[2];
+    for k in 1:cf.dv_Nt-1 loop
+      dv_1 := dv_1 + cf.dv_N[k]*x^(cf.dv_Nt - k);
     end for;
-    dv_1 := dv_1 + cf.dewDensity_n[cf.dewDensity_nT];
-    dv := dv_1*cf.dewDensity_iO[4] + cf.dewDensity_iO[3];
+    dv_1 := dv_1 + cf.dv_N[cf.dv_Nt];
+    dv := dv_1*cf.dv_IO[4] + cf.dv_IO[3];
+
     annotation(smoothOrder = 2,
-          Inline=false,
-          LateInline=true);
+               Inline=false,
+               LateInline=true);
   end dewDensity;
 
-  redeclare replaceable function extends bubbleEnthalpy
+  redeclare function extends bubbleEnthalpy
     "Boiling curve specific enthalpy of refrigerant (Ancillary equation)"
   protected
     BDSP cf;
     Real hl_1 = 0;
-    Real x;
+    Real x = 0;
 
   algorithm
-    x := (sat.psat - cf.bubbleEnthalpy_iO[1])/cf.bubbleEnthalpy_iO[2];
-    for k in 1:cf.bubbleEnthalpy_nT-1 loop
-      hl_1 := hl_1 + cf.bubbleEnthalpy_n[k]*x^(cf.bubbleEnthalpy_nT - k);
+    x := (sat.psat - cf.hl_IO[1])/cf.hl_IO[2];
+    for k in 1:cf.hl_Nt-1 loop
+      hl_1 := hl_1 + cf.hl_N[k]*x^(cf.hl_Nt - k);
     end for;
-    hl_1 := hl_1 + cf.bubbleEnthalpy_n[cf.bubbleEnthalpy_nT];
-    hl := hl_1*cf.bubbleEnthalpy_iO[4] + cf.bubbleEnthalpy_iO[3];
+    hl_1 := hl_1 + cf.hl_N[cf.hl_Nt];
+    hl := hl_1*cf.hl_IO[4] + cf.hl_IO[3];
+
     annotation(smoothOrder = 2,
-          Inline=false,
-          LateInline=true);
+               Inline=false,
+               LateInline=true);
   end bubbleEnthalpy;
 
-  redeclare replaceable function extends dewEnthalpy
+  redeclare function extends dewEnthalpy
     "Dew curve specific enthalpy of refrigerant (Ancillary equation)"
   protected
     BDSP cf;
     Real hv_1 = 0;
-    Real x;
+    Real x = 0;
 
   algorithm
-    x := (sat.psat - cf.dewEnthalpy_iO[1])/cf.dewEnthalpy_iO[2];
-    for k in 1:cf.dewEnthalpy_nT-1 loop
-      hv_1 := hv_1 + cf.dewEnthalpy_n[k]*x^(cf.dewEnthalpy_nT - k);
+    x := (sat.psat - cf.hv_IO[1])/cf.hv_IO[2];
+    for k in 1:cf.hv_Nt-1 loop
+      hv_1 := hv_1 + cf.hv_N[k]*x^(cf.hv_Nt - k);
     end for;
-    hv_1 := hv_1 + cf.dewEnthalpy_n[cf.dewEnthalpy_nT];
-    hv := hv_1*cf.dewEnthalpy_iO[4] + cf.dewEnthalpy_iO[3];
+    hv_1 := hv_1 + cf.hv_N[cf.hv_Nt];
+    hv := hv_1*cf.hv_IO[4] + cf.hv_IO[3];
+
     annotation(smoothOrder = 2,
-          Inline=false,
-          LateInline=true);
+               Inline=false,
+               LateInline=true);
   end dewEnthalpy;
 
-  redeclare replaceable function extends bubbleEntropy
+  redeclare function extends bubbleEntropy
     "Boiling curve specific entropy of refrigerant (Ancillary equation)"
   protected
     BDSP cf;
     Real sl_1 = 0;
-    Real x;
+    Real x = 0;
 
   algorithm
-    x := (sat.psat - cf.bubbleEntropy_iO[1])/cf.bubbleEntropy_iO[2];
-    for k in 1:cf.bubbleEntropy_nT-1 loop
-      sl_1 := sl_1 + cf.bubbleEntropy_n[k]*x^(cf.bubbleEntropy_nT - k);
+    x := (sat.psat - cf.sl_IO[1])/cf.sl_IO[2];
+    for k in 1:cf.sl_Nt-1 loop
+      sl_1 := sl_1 + cf.sl_N[k]*x^(cf.sl_Nt - k);
     end for;
-    sl_1 := sl_1 + cf.bubbleEntropy_n[cf.bubbleEntropy_nT];
-    sl := sl_1*cf.bubbleEntropy_iO[4] + cf.bubbleEntropy_iO[3];
+    sl_1 := sl_1 + cf.sl_N[cf.sl_Nt];
+    sl := sl_1*cf.sl_IO[4] + cf.sl_IO[3];
+
     annotation(smoothOrder = 2,
-          Inline=false,
-          LateInline=true);
+               Inline=false,
+               LateInline=true);
   end bubbleEntropy;
 
-  redeclare replaceable function extends dewEntropy
+  redeclare function extends dewEntropy
     "Dew curve specific entropy of propane (Ancillary equation)"
   protected
     BDSP cf;
     Real sv_1 = 0;
-    Real x;
+    Real x = 0;
 
   algorithm
-    x := (sat.psat - cf.dewEntropy_iO[1])/cf.dewEntropy_iO[2];
-    for k in 1:cf.dewEntropy_nT-1 loop
-      sv_1 := sv_1 + cf.dewEntropy_n[k]*x^(cf.dewEntropy_nT - k);
+    x := (sat.psat - cf.sv_IO[1])/cf.sv_IO[2];
+    for k in 1:cf.sv_Nt-1 loop
+      sv_1 := sv_1 + cf.sv_N[k]*x^(cf.sv_Nt - k);
     end for;
-    sv_1 := sv_1 + cf.dewEntropy_n[cf.dewEntropy_nT];
-    sv := sv_1*cf.dewEntropy_iO[4] + cf.dewEntropy_iO[3];
+    sv_1 := sv_1 + cf.sv_N[cf.sv_Nt];
+    sv := sv_1*cf.sv_IO[4] + cf.sv_IO[3];
+
     annotation(smoothOrder = 2,
-          Inline=false,
-          LateInline=true);
+               Inline=false,
+               LateInline=true);
   end dewEntropy;
   /*Provide functions to calculate thermodynamic properties depending on the
     independent variables. Moreover, these functions may depend on the
     Helmholtz EoS. Just change these functions if needed.
   */
-  redeclare replaceable function temperature_ph
+  redeclare function temperature_ph
     "Calculates temperature as function of pressure and specific enthalpy"
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";
@@ -702,149 +683,150 @@ partial package PartialHybridTwoPhaseMediumRecord
     SmoothTransition st;
 
     SpecificEnthalpy dh = st.T_ph;
-    SpecificEnthalpy h_dew;
-    SpecificEnthalpy h_bubble;
+    SpecificEnthalpy h_dew = 0;
+    SpecificEnthalpy h_bubble = 0;
 
-    Real x1;
-    Real y1;
-    Real T1;
-    Real x2;
-    Real y2;
-    Real T2;
-    Integer count;
+    Real x1 = 0;
+    Real y1 = 0;
+    Real T1 = 0;
+    Real x2 = 0;
+    Real y2 = 0;
+    Real T2 = 0;
+    Integer count = 0;
 
   algorithm
     h_dew := dewEnthalpy(sat = setSat_p(p=p));
     h_bubble := bubbleEnthalpy(sat = setSat_p(p=p));
 
     if h<h_bubble-dh then
-      x1 := (p-cf.temperature_ph_iO[1])/cf.temperature_ph_iO[2];
-      y1 := (h-cf.temperature_ph_iO[3])/cf.temperature_ph_iO[4];
-      T1 := cf.temperature_ph_sc_d[1];
-      for i in 1:cf.temperature_ph_nT[1] loop
-        T1 := T1 + cf.temperature_ph_sc_a[i]*x1^i;
+      x1 := (p-cf.T_phIO[1])/cf.T_phIO[2];
+      y1 := (h-cf.T_phIO[3])/cf.T_phIO[4];
+      T1 := cf.Tl_phD[1];
+      for i in 1:cf.T_phNt[1] loop
+        T1 := T1 + cf.Tl_phA[i]*x1^i;
       end for;
-      for j in 1:cf.temperature_ph_nT[2] loop
-        T1 := T1 + cf.temperature_ph_sc_b[j]*y1^j;
+      for j in 1:cf.T_phNt[2] loop
+        T1 := T1 + cf.Tl_phB[j]*y1^j;
       end for;
-      if cf.temperature_ph_nT[1] >= cf.temperature_ph_nT[2] then
-        for i in 1:cf.temperature_ph_nT[1]-1 loop
-          for j in 1:min(i,cf.temperature_ph_nT[2]) loop
+      if cf.T_phNt[1] >= cf.T_phNt[2] then
+        for i in 1:cf.T_phNt[1]-1 loop
+          for j in 1:min(i,cf.T_phNt[2]) loop
             count :=count + 1;
-            T1 := T1 + cf.temperature_ph_sc_c[count]*
-              x1^(cf.temperature_ph_nT[1] - i)*y1^j;
+            T1 := T1 + cf.Tl_phC[count]*
+                  x1^(cf.T_phNt[1] - i)*y1^j;
           end for;
         end for;
       else
-        for j in 1:cf.temperature_ph_nT[2]-1 loop
-          for i in 1:min(j,cf.temperature_ph_nT[1]) loop
+        for j in 1:cf.T_phNt[2]-1 loop
+          for i in 1:min(j,cf.T_phNt[1]) loop
             count :=count + 1;
-            T1 := T1 + cf.temperature_ph_sc_c[count]*
-              y1^(cf.temperature_ph_nT[2] - j)*x1^i;
+            T1 := T1 + cf.Tl_phC[count]*
+                  y1^(cf.T_phNt[2] - j)*x1^i;
           end for;
         end for;
       end if;
-      T := T1*cf.temperature_ph_iO[6]+cf.temperature_ph_iO[5];
+      T := T1*cf.T_phIO[6]+cf.T_phIO[5];
     elseif h>h_dew+dh then
-       x2 := (p-cf.temperature_ph_iO[7])/cf.temperature_ph_iO[8];
-       y2 := (h-cf.temperature_ph_iO[9])/cf.temperature_ph_iO[10];
-       T2 := cf.temperature_ph_sh_d[1];
-       for i in 1:cf.temperature_ph_nT[4] loop
-         T2:= T2 + cf.temperature_ph_sh_a[i]*x2^i;
+       x2 := (p-cf.T_phIO[7])/cf.T_phIO[8];
+       y2 := (h-cf.T_phIO[9])/cf.T_phIO[10];
+       T2 := cf.Tv_phD[1];
+       for i in 1:cf.T_phNt[4] loop
+         T2:= T2 + cf.Tv_phA[i]*x2^i;
        end for;
-       for j in 1:cf.temperature_ph_nT[5] loop
-         T2:= T2 + cf.temperature_ph_sh_b[j]*y2^j;
+       for j in 1:cf.T_phNt[5] loop
+         T2:= T2 + cf.Tv_phB[j]*y2^j;
        end for;
-       if cf.temperature_ph_nT[4] >= cf.temperature_ph_nT[5] then
-         for i in 1:cf.temperature_ph_nT[4]-1 loop
-           for j in 1:min(i, cf.temperature_ph_nT[5]) loop
+       if cf.T_phNt[4] >= cf.T_phNt[5] then
+         for i in 1:cf.T_phNt[4]-1 loop
+           for j in 1:min(i, cf.T_phNt[5]) loop
              count :=count + 1;
-             T2 := T2 + cf.temperature_ph_sh_c[count]*
-              x2^(cf.temperature_ph_nT[4] - i)*y2^j;
+             T2 := T2 + cf.Tv_phC[count]*
+                   x2^(cf.T_phNt[4] - i)*y2^j;
            end for;
          end for;
        else
-         for j in 1:cf.temperature_ph_nT[5]-1 loop
-           for i in 1:min(j,cf.temperature_ph_nT[4]) loop
+         for j in 1:cf.T_phNt[5]-1 loop
+           for i in 1:min(j,cf.T_phNt[4]) loop
              count :=count + 1;
-             T2 := T2 + cf.temperature_ph_sh_c[count]*
-              y2^(cf.temperature_ph_nT[5] - j)*x2^i;
+             T2 := T2 + cf.Tv_phC[count]*
+                   y2^(cf.T_phNt[5] - j)*x2^i;
            end for;
          end for;
        end if;
-       T := T2*cf.temperature_ph_iO[12]+cf.temperature_ph_iO[11];
+       T := T2*cf.T_phIO[12]+cf.T_phIO[11];
     else
       if h<h_bubble then
-        x1 := (p-cf.temperature_ph_iO[1])/cf.temperature_ph_iO[2];
-        y1 := (h-cf.temperature_ph_iO[3])/cf.temperature_ph_iO[4];
-        T1 := cf.temperature_ph_sc_d[1];
-        for i in 1:cf.temperature_ph_nT[1] loop
-          T1 := T1 + cf.temperature_ph_sc_a[i]*x1^i;
+        x1 := (p-cf.T_phIO[1])/cf.T_phIO[2];
+        y1 := (h-cf.T_phIO[3])/cf.T_phIO[4];
+        T1 := cf.Tl_phD[1];
+        for i in 1:cf.T_phNt[1] loop
+          T1 := T1 + cf.Tl_phA[i]*x1^i;
         end for;
-        for j in 1:cf.temperature_ph_nT[2] loop
-          T1 := T1 + cf.temperature_ph_sc_b[j]*y1^j;
+        for j in 1:cf.T_phNt[2] loop
+          T1 := T1 + cf.Tl_phB[j]*y1^j;
         end for;
-        if cf.temperature_ph_nT[1] >= cf.temperature_ph_nT[2] then
-          for i in 1:cf.temperature_ph_nT[1]-1 loop
-            for j in 1:min(i, cf.temperature_ph_nT[2]) loop
+        if cf.T_phNt[1] >= cf.T_phNt[2] then
+          for i in 1:cf.T_phNt[1]-1 loop
+            for j in 1:min(i, cf.T_phNt[2]) loop
               count :=count + 1;
-              T1 := T1 + cf.temperature_ph_sc_c[count]*
-                x1^(cf.temperature_ph_nT[1] - i)*y1^j;
+              T1 := T1 + cf.Tl_phC[count]*
+                    x1^(cf.T_phNt[1] - i)*y1^j;
             end for;
           end for;
         else
-          for j in 1:cf.temperature_ph_nT[2]-1 loop
-            for i in 1:min(j,cf.temperature_ph_nT[1]) loop
+          for j in 1:cf.T_phNt[2]-1 loop
+            for i in 1:min(j,cf.T_phNt[1]) loop
               count :=count + 1;
-              T1 := T1 + cf.temperature_ph_sc_c[count]*
-                y1^(cf.temperature_ph_nT[2] - j)*x1^i;
+              T1 := T1 + cf.Tl_phC[count]*
+                    y1^(cf.T_phNt[2] - j)*x1^i;
             end for;
           end for;
         end if;
-        T1 := T1*cf.temperature_ph_iO[6]+cf.temperature_ph_iO[5];
+        T1 := T1*cf.T_phIO[6]+cf.T_phIO[5];
         T := saturationTemperature(p)*(1 - (h_bubble - h)/dh) +
           T1*(h_bubble - h)/dh;
       elseif h>h_dew then
-        x2 := (p-cf.temperature_ph_iO[7])/cf.temperature_ph_iO[8];
-        y2 := (h-cf.temperature_ph_iO[9])/cf.temperature_ph_iO[10];
-        T2 := cf.temperature_ph_sh_d[1];
-        for i in 1:cf.temperature_ph_nT[4] loop
-          T2:= T2 + cf.temperature_ph_sh_a[i]*x2^i;
+        x2 := (p-cf.T_phIO[7])/cf.T_phIO[8];
+        y2 := (h-cf.T_phIO[9])/cf.T_phIO[10];
+        T2 := cf.Tv_phD[1];
+        for i in 1:cf.T_phNt[4] loop
+          T2:= T2 + cf.Tv_phA[i]*x2^i;
         end for;
-        for j in 1:cf.temperature_ph_nT[5] loop
-          T2:= T2 + cf.temperature_ph_sh_b[j]*y2^j;
+        for j in 1:cf.T_phNt[5] loop
+          T2:= T2 + cf.Tv_phB[j]*y2^j;
         end for;
-        if cf.temperature_ph_nT[4] >= cf.temperature_ph_nT[5] then
-          for i in 1:cf.temperature_ph_nT[4]-1 loop
-            for j in 1:min(i, cf.temperature_ph_nT[5]) loop
+        if cf.T_phNt[4] >= cf.T_phNt[5] then
+          for i in 1:cf.T_phNt[4]-1 loop
+            for j in 1:min(i, cf.T_phNt[5]) loop
               count :=count + 1;
-              T2 := T2 + cf.temperature_ph_sh_c[count]*
-                x2^(cf.temperature_ph_nT[4] - i)*y2^j;
+              T2 := T2 + cf.Tv_phC[count]*
+                    x2^(cf.T_phNt[4] - i)*y2^j;
             end for;
           end for;
         else
-          for j in 1:cf.temperature_ph_nT[5]-1 loop
-            for i in 1:min(j,cf.temperature_ph_nT[4]) loop
+          for j in 1:cf.T_phNt[5]-1 loop
+            for i in 1:min(j,cf.T_phNt[4]) loop
               count :=count + 1;
-              T2 := T2 + cf.temperature_ph_sh_c[count]*
-                y2^(cf.temperature_ph_nT[5] - j)*x2^i;
+              T2 := T2 + cf.Tv_phC[count]*
+                    y2^(cf.T_phNt[5] - j)*x2^i;
             end for;
           end for;
         end if;
-        T2 := T2*cf.temperature_ph_iO[12]+cf.temperature_ph_iO[11];
+        T2 := T2*cf.T_phIO[12]+cf.T_phIO[11];
         T := saturationTemperature(p)*(1 - (h - h_dew)/dh) +
-          T2*(h - h_dew)/dh;
+             T2*(h - h_dew)/dh;
       else
         T := saturationTemperature(p);
       end if;
     end if;
+
     annotation(derivative(noDerivative=phase)=temperature_ph_der,
-      inverse(h=specificEnthalpy_pT(p=p,T=T,phase=phase)),
-          Inline=false,
-          LateInline=true);
+               inverse(h=specificEnthalpy_pT(p=p,T=T,phase=phase)),
+               Inline=false,
+               LateInline=false);
   end temperature_ph;
 
-  redeclare replaceable function temperature_ps
+  redeclare function temperature_ps
     "Calculates temperature as function of pressure and specific entroy"
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";
@@ -858,15 +840,15 @@ partial package PartialHybridTwoPhaseMediumRecord
     SmoothTransition st;
 
     SpecificEntropy ds = st.T_ps;
-    SpecificEntropy s_dew;
-    SpecificEntropy s_bubble;
+    SpecificEntropy s_dew = 0;
+    SpecificEntropy s_bubble = 0;
 
-    Real x1;
-    Real y1;
-    Real T1;
-    Real x2;
-    Real y2;
-    Real T2;
+    Real x1 = 0;
+    Real y1 = 0;
+    Real T1 = 0;
+    Real x2 = 0;
+    Real y2 = 0;
+    Real T2 = 0;
     Integer count = 0;
 
   algorithm
@@ -874,133 +856,132 @@ partial package PartialHybridTwoPhaseMediumRecord
     s_bubble := bubbleEntropy(sat = setSat_p(p=p));
 
     if s<s_bubble-ds then
-      x1 := (log(p)-cf.temperature_ps_iO[1])/cf.temperature_ps_iO[2];
-      y1 := (s-cf.temperature_ps_iO[3])/cf.temperature_ps_iO[4];
-      T1 := cf.temperature_ps_sc_d[1];
-      for i in 1:cf.temperature_ps_nT[1] loop
-        T1:= T1 + cf.temperature_ps_sc_a[i]*x1^i;
+      x1 := (log(p)-cf.T_psIO[1])/cf.T_psIO[2];
+      y1 := (s-cf.T_psIO[3])/cf.T_psIO[4];
+      T1 := cf.Tl_psD[1];
+      for i in 1:cf.T_psNt[1] loop
+        T1:= T1 + cf.Tl_psA[i]*x1^i;
       end for;
-      for j in 1:cf.temperature_ps_nT[2] loop
-        T1:= T1 + cf.temperature_ps_sc_b[j]*y1^j;
+      for j in 1:cf.T_psNt[2] loop
+        T1:= T1 + cf.Tl_psB[j]*y1^j;
       end for;
-      if cf.temperature_ps_nT[1] >= cf.temperature_ps_nT[2] then
-        for i in 1:cf.temperature_ps_nT[1]-1 loop
-          for j in 1:min(i,cf.temperature_ps_nT[2]) loop
+      if cf.T_psNt[1] >= cf.T_psNt[2] then
+        for i in 1:cf.T_psNt[1]-1 loop
+          for j in 1:min(i,cf.T_psNt[2]) loop
             count :=count + 1;
-            T1 :=T1 + cf.temperature_ps_sc_c[count]*
-              x1^(cf.temperature_ps_nT[1] - i)*y1^j;
+            T1 := T1 + cf.Tl_psC[count]*
+                  x1^(cf.T_psNt[1] - i)*y1^j;
           end for;
         end for;
       else
-        for j in 1:cf.temperature_ps_nT[2]-1 loop
-          for i in 1:min(j,cf.temperature_ps_nT[1]) loop
+        for j in 1:cf.T_psNt[2]-1 loop
+          for i in 1:min(j,cf.T_psNt[1]) loop
             count :=count + 1;
-            T1 :=T1 + cf.temperature_ps_sc_c[count]*
-              y1^(cf.temperature_ps_nT[2] - j)*x1^i;
+            T1 := T1 + cf.Tl_psC[count]*
+                  y1^(cf.T_psNt[2] - j)*x1^i;
           end for;
         end for;
       end if;
       T := T1;
-      T := T1*cf.temperature_ps_iO[6]+cf.temperature_ps_iO[5];
+      T := T1*cf.T_psIO[6]+cf.T_psIO[5];
     elseif s>s_dew+ds then
-        x2 := (log(p)-cf.temperature_ps_iO[7])/cf.temperature_ps_iO[8];
-        y2 := (s-cf.temperature_ps_iO[9])/cf.temperature_ps_iO[10];
-        T2 := cf.temperature_ps_sh_d[1];
-        for i in 1:cf.temperature_ps_nT[4] loop
-          T2:= T2 + cf.temperature_ps_sh_a[i]*x2^i;
+        x2 := (log(p)-cf.T_psIO[7])/cf.T_psIO[8];
+        y2 := (s-cf.T_psIO[9])/cf.T_psIO[10];
+        T2 := cf.Tv_psD[1];
+        for i in 1:cf.T_psNt[4] loop
+          T2:= T2 + cf.Tv_psA[i]*x2^i;
         end for;
-        for j in 1:cf.temperature_ps_nT[5] loop
-          T2:= T2 + cf.temperature_ps_sh_b[j]*y2^j;
+        for j in 1:cf.T_psNt[5] loop
+          T2:= T2 + cf.Tv_psB[j]*y2^j;
         end for;
-        if cf.temperature_ps_nT[4] >= cf.temperature_ps_nT[5] then
-          for i in 1:cf.temperature_ps_nT[4]-1 loop
-            for j in 1:min(i,cf.temperature_ps_nT[5]) loop
+        if cf.T_psNt[4] >= cf.T_psNt[5] then
+          for i in 1:cf.T_psNt[4]-1 loop
+            for j in 1:min(i,cf.T_psNt[5]) loop
               count :=count + 1;
-              T2 :=T2 + cf.temperature_ps_sh_c[count]*
-                x2^(cf.temperature_ps_nT[4] - i)*y2^j;
+              T2 := T2 + cf.Tv_psC[count]*
+                    x2^(cf.T_psNt[4] - i)*y2^j;
             end for;
           end for;
         else
-          for j in 1:cf.temperature_ps_nT[5]-1 loop
-            for i in 1:min(j,cf.temperature_ps_nT[4]) loop
+          for j in 1:cf.T_psNt[5]-1 loop
+            for i in 1:min(j,cf.T_psNt[4]) loop
               count :=count + 1;
-              T2 := T2 + cf.temperature_ps_sh_c[count]*
-                y2^(cf.temperature_ps_nT[5] - j)*x2^i;
+              T2 := T2 + cf.Tv_psC[count]*
+                    y2^(cf.T_psNt[5] - j)*x2^i;
             end for;
           end for;
         end if;
-        T := T2*cf.temperature_ps_iO[12]+cf.temperature_ps_iO[11];
+        T := T2*cf.T_psIO[12]+cf.T_psIO[11];
     else
       if s<s_bubble then
-        x1 := (log(p)-cf.temperature_ps_iO[1])/cf.temperature_ps_iO[2];
-        y1 := (s-cf.temperature_ps_iO[3])/cf.temperature_ps_iO[4];
-        T1 := cf.temperature_ps_sc_d[1];
-        for i in 1:cf.temperature_ps_nT[1] loop
-          T1:= T1 + cf.temperature_ps_sc_a[i]*x1^i;
+        x1 := (log(p)-cf.T_psIO[1])/cf.T_psIO[2];
+        y1 := (s-cf.T_psIO[3])/cf.T_psIO[4];
+        T1 := cf.Tl_psD[1];
+        for i in 1:cf.T_psNt[1] loop
+          T1:= T1 + cf.Tl_psA[i]*x1^i;
         end for;
-        for j in 1:cf.temperature_ps_nT[2] loop
-          T1:= T1 + cf.temperature_ps_sc_b[j]*y1^j;
+        for j in 1:cf.T_psNt[2] loop
+          T1:= T1 + cf.Tl_psB[j]*y1^j;
         end for;
-        if cf.temperature_ps_nT[1] >= cf.temperature_ps_nT[2] then
-          for i in 1:cf.temperature_ps_nT[1]-1 loop
-            for j in 1:min(i,cf.temperature_ps_nT[2]) loop
+        if cf.T_psNt[1] >= cf.T_psNt[2] then
+          for i in 1:cf.T_psNt[1]-1 loop
+            for j in 1:min(i,cf.T_psNt[2]) loop
               count :=count + 1;
-              T1 :=T1 + cf.temperature_ps_sc_c[count]*
-                x1^(cf.temperature_ps_nT[1] - i)*y1^j;
+              T1 := T1 + cf.Tl_psC[count]*
+                    x1^(cf.T_psNt[1] - i)*y1^j;
             end for;
           end for;
         else
-          for j in 1:cf.temperature_ps_nT[2]-1 loop
-            for i in 1:min(j,cf.temperature_ps_nT[1]) loop
+          for j in 1:cf.T_psNt[2]-1 loop
+            for i in 1:min(j,cf.T_psNt[1]) loop
               count :=count + 1;
-              T1 :=T1 + cf.temperature_ps_sc_c[count]*
-                y1^(cf.temperature_ps_nT[2] - j)*x1^i;
+              T1 := T1 + cf.Tl_psC[count]*
+                    y1^(cf.T_psNt[2] - j)*x1^i;
             end for;
           end for;
         end if;
-        T1 := T1*cf.temperature_ps_iO[6]+cf.temperature_ps_iO[5];
+        T1 := T1*cf.T_psIO[6]+cf.T_psIO[5];
         T := saturationTemperature(p)*(1 - (s_bubble - s)/ds) +
-          T1*(s_bubble - s)/ds;
+             T1*(s_bubble - s)/ds;
       elseif s>s_dew then
-        x2 := (log(p)-cf.temperature_ps_iO[7])/cf.temperature_ps_iO[8];
-        y2 := (s-cf.temperature_ps_iO[9])/cf.temperature_ps_iO[10];
-        T2 := cf.temperature_ps_sh_d[1];
-        for i in 1:cf.temperature_ps_nT[4] loop
-          T2:= T2 + cf.temperature_ps_sh_a[i]*x2^i;
+        x2 := (log(p)-cf.T_psIO[7])/cf.T_psIO[8];
+        y2 := (s-cf.T_psIO[9])/cf.T_psIO[10];
+        T2 := cf.Tv_psD[1];
+        for i in 1:cf.T_psNt[4] loop
+          T2:= T2 + cf.Tv_psA[i]*x2^i;
         end for;
-        for j in 1:cf.temperature_ps_nT[5] loop
-          T2:= T2 + cf.temperature_ps_sh_b[j]*y2^j;
+        for j in 1:cf.T_psNt[5] loop
+          T2:= T2 + cf.Tv_psB[j]*y2^j;
         end for;
-        if cf.temperature_ps_nT[4] >= cf.temperature_ps_nT[5] then
-          for i in 1:cf.temperature_ps_nT[4]-1 loop
-            for j in 1:min(i,cf.temperature_ps_nT[5]) loop
+        if cf.T_psNt[4] >= cf.T_psNt[5] then
+          for i in 1:cf.T_psNt[4]-1 loop
+            for j in 1:min(i,cf.T_psNt[5]) loop
               count :=count + 1;
-              T2 :=T2 + cf.temperature_ps_sh_c[count]*
-                x2^(cf.temperature_ps_nT[4] - i)*y2^j;
+              T2 := T2 + cf.Tv_psC[count]*
+                    x2^(cf.T_psNt[4] - i)*y2^j;
             end for;
           end for;
         else
-          for j in 1:cf.temperature_ps_nT[5]-1 loop
-            for i in 1:min(j,cf.temperature_ps_nT[4]) loop
+          for j in 1:cf.T_psNt[5]-1 loop
+            for i in 1:min(j,cf.T_psNt[4]) loop
               count :=count + 1;
-              T2 := T2 + cf.temperature_ps_sh_c[count]*
-                y2^(cf.temperature_ps_nT[5] - j)*x2^i;
+              T2 := T2 + cf.Tv_psC[count]*
+                    y2^(cf.T_psNt[5] - j)*x2^i;
             end for;
           end for;
         end if;
-        T2 := T2*cf.temperature_ps_iO[12]+cf.temperature_ps_iO[11];
+        T2 := T2*cf.T_psIO[12]+cf.T_psIO[11];
         T := saturationTemperature(p)*(1 - (s - s_dew)/ds) +
-          T2*(s - s_dew)/ ds;
+             T2*(s - s_dew)/ ds;
       else
         T := saturationTemperature(p);
       end if;
     end if;
-    annotation(derivative(noDerivative=phase)=temperature_ps_der,
-          Inline=false,
-          LateInline=true);
+
+    annotation(derivative(noDerivative=phase)=temperature_ps_der);
   end temperature_ps;
 
-  redeclare replaceable partial function density_pT
+  redeclare partial function density_pT
     "Computes density as a function of pressure and temperature"
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";
@@ -1016,136 +997,135 @@ partial package PartialHybridTwoPhaseMediumRecord
     AbsolutePressure dp = st.d_pT;
     SaturationProperties sat = setSat_T(T=T);
 
-    Real x1;
-    Real y1;
-    Real d1;
-    Real x2;
-    Real y2;
-    Real d2;
+    Real x1 = 0;
+    Real y1 = 0;
+    Real d1 = 0;
+    Real x2 = 0;
+    Real y2 = 0;
+    Real d2 = 0;
     Integer count = 0;
 
   algorithm
     if p<sat.psat-dp then
-      x1 := (p-cf.density_pT_iO[7])/cf.density_pT_iO[8];
-      y1 := (T-cf.density_pT_iO[9])/cf.density_pT_iO[10];
-      d1 := cf.density_pT_sh_d[1];
-      for i in 1:cf.density_pT_nT[4] loop
-        d1:= d1 + cf.density_pT_sh_a[i]*x1^i;
+      x1 := (p-cf.d_pTIO[7])/cf.d_pTIO[8];
+      y1 := (T-cf.d_pTIO[9])/cf.d_pTIO[10];
+      d1 := cf.dv_pTD[1];
+      for i in 1:cf.d_pTNt[4] loop
+        d1:= d1 + cf.dv_pTA[i]*x1^i;
       end for;
-      for j in 1:cf.density_pT_nT[5] loop
-        d1:= d1 + cf.density_pT_sh_b[j]*y1^j;
+      for j in 1:cf.d_pTNt[5] loop
+        d1:= d1 + cf.dv_pTB[j]*y1^j;
       end for;
-      if cf.density_pT_nT[4] >= cf.density_pT_nT[5] then
-        for i in 1:cf.density_pT_nT[4]-1 loop
-          for j in 1:min(i,cf.density_pT_nT[5]) loop
+      if cf.d_pTNt[4] >= cf.d_pTNt[5] then
+        for i in 1:cf.d_pTNt[4]-1 loop
+          for j in 1:min(i,cf.d_pTNt[5]) loop
             count :=count + 1;
-            d1 :=d1 + cf.density_pT_sh_c[count]*
-              x1^(cf.density_pT_nT[4] - i)*y1^j;
+            d1 := d1 + cf.dv_pTC[count]*
+                  x1^(cf.d_pTNt[4] - i)*y1^j;
           end for;
         end for;
       else
-        for j in 1:cf.density_pT_nT[5]-1 loop
-          for i in 1:min(j,cf.density_pT_nT[4]) loop
+        for j in 1:cf.d_pTNt[5]-1 loop
+          for i in 1:min(j,cf.d_pTNt[4]) loop
             count :=count + 1;
-            d1 :=d1 + cf.density_pT_sh_c[count]*
-              y1^(cf.density_pT_nT[5] - j)*x1^i;
+            d1 := d1 + cf.dv_pTC[count]*
+                  y1^(cf.d_pTNt[5] - j)*x1^i;
           end for;
         end for;
       end if;
-      d := d1*cf.density_pT_iO[12]+cf.density_pT_iO[11];
+      d := d1*cf.d_pTIO[12]+cf.d_pTIO[11];
     elseif p>sat.psat+dp then
-      x2 := (p-cf.density_pT_iO[1])/cf.density_pT_iO[2];
-      y2 := (T-cf.density_pT_iO[3])/cf.density_pT_iO[4];
-      d2 := cf.density_pT_sc_d[1];
-      for i in 1:cf.density_pT_nT[1] loop
-        d2:= d2 + cf.density_pT_sc_a[i]*x2^i;
+      x2 := (p-cf.d_pTIO[1])/cf.d_pTIO[2];
+      y2 := (T-cf.d_pTIO[3])/cf.d_pTIO[4];
+      d2 := cf.dl_pTD[1];
+      for i in 1:cf.d_pTNt[1] loop
+        d2:= d2 + cf.dl_pTA[i]*x2^i;
       end for;
-      for j in 1:cf.density_pT_nT[2] loop
-        d2:= d2 + cf.density_pT_sc_b[j]*y2^j;
+      for j in 1:cf.d_pTNt[2] loop
+        d2:= d2 + cf.dl_pTB[j]*y2^j;
       end for;
-      if cf.density_pT_nT[1] >= cf.density_pT_nT[2] then
-        for i in 1:cf.density_pT_nT[1]-1 loop
-          for j in 1:min(i,cf.density_pT_nT[2]) loop
+      if cf.d_pTNt[1] >= cf.d_pTNt[2] then
+        for i in 1:cf.d_pTNt[1]-1 loop
+          for j in 1:min(i,cf.d_pTNt[2]) loop
             count :=count + 1;
-            d2 :=d2 + cf.density_pT_sc_c[count]*
-              x2^(cf.density_pT_nT[1] - i)*y2^j;
+            d2 := d2 + cf.dl_pTC[count]*
+                  x2^(cf.d_pTNt[1] - i)*y2^j;
           end for;
         end for;
       else
-        for j in 1:cf.density_pT_nT[2]-1 loop
-          for i in 1:min(j,cf.density_pT_nT[1]) loop
+        for j in 1:cf.d_pTNt[2]-1 loop
+          for i in 1:min(j,cf.d_pTNt[1]) loop
             count :=count + 1;
-            d2 := d2 + cf.density_pT_sc_c[count]*
-              y2^(cf.density_pT_nT[2] - j)*x2^i;
+            d2 := d2 + cf.dl_pTC[count]*
+                  y2^(cf.d_pTNt[2] - j)*x2^i;
           end for;
         end for;
       end if;
-      d := d2*cf.density_pT_iO[6]+cf.density_pT_iO[5];
+      d := d2*cf.d_pTIO[6]+cf.d_pTIO[5];
     else
       if p<sat.psat then
-        x1 := (p-cf.density_pT_iO[7])/cf.density_pT_iO[8];
-        y1 := (T-cf.density_pT_iO[9])/cf.density_pT_iO[10];
-        d1 := cf.density_pT_sh_d[1];
-        for i in 1:cf.density_pT_nT[4] loop
-          d1:= d1 + cf.density_pT_sh_a[i]*x1^i;
+        x1 := (p-cf.d_pTIO[7])/cf.d_pTIO[8];
+        y1 := (T-cf.d_pTIO[9])/cf.d_pTIO[10];
+        d1 := cf.dv_pTD[1];
+        for i in 1:cf.d_pTNt[4] loop
+          d1:= d1 + cf.dv_pTA[i]*x1^i;
         end for;
-        for j in 1:cf.density_pT_nT[5] loop
-          d1:= d1 + cf.density_pT_sh_b[j]*y1^j;
+        for j in 1:cf.d_pTNt[5] loop
+          d1:= d1 + cf.dv_pTB[j]*y1^j;
         end for;
-        if cf.density_pT_nT[4] >= cf.density_pT_nT[5] then
-          for i in 1:cf.density_pT_nT[4]-1 loop
-            for j in 1:min(i,cf.density_pT_nT[5]) loop
+        if cf.d_pTNt[4] >= cf.d_pTNt[5] then
+          for i in 1:cf.d_pTNt[4]-1 loop
+            for j in 1:min(i,cf.d_pTNt[5]) loop
               count :=count + 1;
-              d1 :=d1 + cf.density_pT_sh_c[count]*
-                x1^(cf.density_pT_nT[4] - i)*y1^j;
+              d1 := d1 + cf.dv_pTC[count]*
+                    x1^(cf.d_pTNt[4] - i)*y1^j;
             end for;
           end for;
         else
-          for j in 1:cf.density_pT_nT[5]-1 loop
-            for i in 1:min(j,cf.density_pT_nT[4]) loop
+          for j in 1:cf.d_pTNt[5]-1 loop
+            for i in 1:min(j,cf.d_pTNt[4]) loop
               count :=count + 1;
-              d1 :=d1 + cf.density_pT_sh_c[count]*
-                y1^(cf.density_pT_nT[5] - j)*x1^i;
+              d1 := d1 + cf.dv_pTC[count]*
+                    y1^(cf.d_pTNt[5] - j)*x1^i;
             end for;
           end for;
         end if;
-        d1 := d1*cf.density_pT_iO[12]+cf.density_pT_iO[11];
+        d1 := d1*cf.d_pTIO[12]+cf.d_pTIO[11];
         d := bubbleDensity(sat)*(1 -(sat.psat - p)/dp) + d1*(sat.psat - p)/dp;
       elseif p>=sat.psat then
-        x2 := (p-cf.density_pT_iO[1])/cf.density_pT_iO[2];
-        y2 := (T-cf.density_pT_iO[3])/cf.density_pT_iO[4];
-        d2 := cf.density_pT_sc_d[1];
-        for i in 1:cf.density_pT_nT[1] loop
-          d2:= d2 + cf.density_pT_sc_a[i]*x2^i;
+        x2 := (p-cf.d_pTIO[1])/cf.d_pTIO[2];
+        y2 := (T-cf.d_pTIO[3])/cf.d_pTIO[4];
+        d2 := cf.dl_pTD[1];
+        for i in 1:cf.d_pTNt[1] loop
+          d2:= d2 + cf.dl_pTA[i]*x2^i;
         end for;
-        for j in 1:cf.density_pT_nT[2] loop
-          d2:= d2 + cf.density_pT_sc_b[j]*y2^j;
+        for j in 1:cf.d_pTNt[2] loop
+          d2:= d2 + cf.dl_pTB[j]*y2^j;
         end for;
-        if cf.density_pT_nT[1] >= cf.density_pT_nT[2] then
-          for i in 1:cf.density_pT_nT[1]-1 loop
-            for j in 1:min(i,cf.density_pT_nT[2]) loop
+        if cf.d_pTNt[1] >= cf.d_pTNt[2] then
+          for i in 1:cf.d_pTNt[1]-1 loop
+            for j in 1:min(i,cf.d_pTNt[2]) loop
               count :=count + 1;
-              d2 :=d2 + cf.density_pT_sc_c[count]*
-                x2^(cf.density_pT_nT[1] - i)*y2^j;
+              d2 := d2 + cf.dl_pTC[count]*
+                    x2^(cf.d_pTNt[1] - i)*y2^j;
             end for;
           end for;
         else
-          for j in 1:cf.density_pT_nT[2]-1 loop
-            for i in 1:min(j,cf.density_pT_nT[1]) loop
+          for j in 1:cf.d_pTNt[2]-1 loop
+            for i in 1:min(j,cf.d_pTNt[1]) loop
               count :=count + 1;
-              d2 := d2 + cf.density_pT_sc_c[count]*
-                y2^(cf.density_pT_nT[2] - j)*x2^i;
+              d2 := d2 + cf.dl_pTC[count]*
+                    y2^(cf.d_pTNt[2] - j)*x2^i;
             end for;
           end for;
         end if;
-        d2 := d2*cf.density_pT_iO[6]+cf.density_pT_iO[5];
+        d2 := d2*cf.d_pTIO[6]+cf.d_pTIO[5];
         d := dewDensity(sat)*(1 -(p - sat.psat)/dp) + d2*(p - sat.psat)/dp;
       end if;
     end if;
+
     annotation(derivative(noDerivative=phase)=density_pT_der,
-          inverse(p=pressure_dT(d=d,T=T,phase=phase)),
-          Inline=false,
-          LateInline=true);
+          inverse(p=pressure_dT(d=d,T=T,phase=phase)));
   end density_pT;
   annotation (Documentation(revisions="<html>
 <ul>
@@ -1451,7 +1431,7 @@ style=\"border-collapse:collapse;\">
 </table>
 <h4>Assumptions and limitations</h4>
 <p>
-Three limitations are known for this package:
+Two limitations are known for this package:
 </p>
 <ol>
 <li>The modelling approach implemented in this package is a hybrid approach

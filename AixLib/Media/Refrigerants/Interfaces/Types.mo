@@ -14,6 +14,8 @@ package Types "Types to be used in fluid models"
 <p>
 This package contains types to be used in the media models. Therefore, unit
 checks are possible.
+
+However, no types are implemented yet.
 </p>
 </html>"));
 end Types;

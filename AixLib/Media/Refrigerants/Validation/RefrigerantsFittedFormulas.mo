@@ -215,45 +215,33 @@ equation
 
   // Calculate derivatives of the EoS
   //
-  eos.f_iInt = MediumInt.alpha_0(deltaInt,tauInt);
+  eos.f_iInt = MediumInt.f_Idg(deltaInt,tauInt);
   eos.f_iExt = MediumExt.EoS.f_i(deltaInt,tauInt);
-  eos.f_rInt = MediumInt.alpha_r(deltaInt,tauInt);
+  eos.f_rInt = MediumInt.f_Res(deltaInt,tauInt);
   eos.f_rExt = MediumExt.EoS.f_r(deltaInt,tauInt);
-  eos.f_itInt = MediumInt.tau_d_alpha_0_d_tau(tauInt)
-      /tauInt;
+  eos.f_itInt = MediumInt.t_fIdg_t(tauInt)/tauInt;
   eos.f_itExt = MediumExt.EoS.f_it(deltaInt,tauInt);
-  eos.f_ittInt = MediumInt.tau2_d2_alpha_0_d_tau2(tauInt)
-      /tauInt^2;
+  eos.f_ittInt = MediumInt.tt_fIdg_tt(tauInt)/tauInt^2;
   eos.f_ittExt = MediumExt.EoS.f_itt(deltaInt,tauInt);
-  eos.f_itttInt = MediumInt.tau3_d3_alpha_0_d_tau3(tauInt)
-      /tauInt^3;
+  eos.f_itttInt = MediumInt.ttt_fIdg_ttt(tauInt)/tauInt^3;
   eos.f_itttExt = MediumExt.EoS.f_ittt(deltaInt,tauInt);
-  eos.f_rtInt = MediumInt.tau_d_alpha_r_d_tau(deltaInt,tauInt)
-      /tauInt;
+  eos.f_rtInt = MediumInt.t_fRes_t(deltaInt,tauInt)/tauInt;
   eos.f_rtExt = MediumExt.EoS.f_rt(deltaInt,tauInt);
-  eos.f_rttInt = MediumInt.tau2_d2_alpha_r_d_tau2(deltaInt,tauInt)
-      /tauInt^2;
+  eos.f_rttInt = MediumInt.tt_fRes_tt(deltaInt,tauInt)/tauInt^2;
   eos.f_rttExt = MediumExt.EoS.f_rtt(deltaInt,tauInt);
-  eos.f_rtttInt = MediumInt.tau3_d3_alpha_r_d_tau3(deltaInt,tauInt)
-      /tauInt^3;
+  eos.f_rtttInt = MediumInt.ttt_fRes_ttt(deltaInt,tauInt)/tauInt^3;
   eos.f_rtttExt = MediumExt.EoS.f_rttt(deltaInt,tauInt);
-  eos.f_rdInt = MediumInt.delta_d_alpha_r_d_delta(deltaInt,tauInt)
-      /deltaInt;
+  eos.f_rdInt = MediumInt.d_fRes_d(deltaInt,tauInt)/deltaInt;
   eos.f_rdExt = MediumExt.EoS.f_rd(deltaInt,tauInt);
-  eos.f_rddInt = MediumInt.delta2_d2_alpha_r_d_delta2(deltaInt,tauInt)
-      /deltaInt^2;
+  eos.f_rddInt = MediumInt.dd_fRes_dd(deltaInt,tauInt)/deltaInt^2;
   eos.f_rddExt = MediumExt.EoS.f_rdd(deltaInt,tauInt);
-  eos.f_rdddInt = MediumInt.delta3_d3_alpha_r_d_delta3(deltaInt,tauInt)
-      /deltaInt^3;
+  eos.f_rdddInt = MediumInt.ddd_fRes_ddd(deltaInt,tauInt)/deltaInt^3;
   eos.f_rdddExt = MediumExt.EoS.f_rddd(deltaInt,tauInt);
-  eos.f_rtdInt = MediumInt.tau_delta_d2_alpha_r_d_tau_d_delta(deltaInt,tauInt)
-      /tauInt/deltaInt;
+  eos.f_rtdInt = MediumInt.td_fRes_td(deltaInt,tauInt)/tauInt/deltaInt;
   eos.f_rtdExt = MediumExt.EoS.f_rtd(deltaInt,tauInt);
-  eos.f_rtddInt = MediumInt.tau_delta2_d3_alpha_r_d_tau_d_delta2(
-    deltaInt,tauInt)/tauInt/deltaInt^2;
+  eos.f_rtddInt = MediumInt.tdd_fRes_tdd(deltaInt,tauInt)/tauInt/deltaInt^2;
   eos.f_rtddExt = MediumExt.EoS.f_rtdd(deltaInt,tauInt);
-  eos.f_rttdInt = MediumInt.tau2_delta_d3_alpha_r_d_tau2_d_delta(
-    deltaInt,tauInt)/tauInt^2/deltaInt;
+  eos.f_rttdInt = MediumInt.ttd_fRes_ttd(deltaInt,tauInt)/tauInt^2/deltaInt;
   eos.f_rttdExt = MediumExt.EoS.f_rttd(deltaInt,tauInt);
 
   eos.df_i = (eos.f_iInt-eos.f_iExt);

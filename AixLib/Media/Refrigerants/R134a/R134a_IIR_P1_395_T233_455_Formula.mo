@@ -95,20 +95,18 @@ package R134a_IIR_P1_395_T233_455_Formula
   end SmoothTransition;
   /*Provide Helmholtz equations of state (EoS) using an explicit formula.
   */
-  redeclare function extends alpha_0
+  redeclare function extends f_Idg
     "Dimensionless Helmholtz energy (Ideal gas contribution alpha_0)"
   algorithm
-    alpha_0 := log(delta) + (-1.629789) * log(tau^(1)) + (-1.02084672674949) *
+    f_Idg := log(delta) + (-1.629789) * log(tau^(1)) + (-1.02084672674949) *
       tau^(0) + (9.04757355104757) * tau^(1) + (-9.723916) * tau^(-0.5) +
       (-3.92717) * tau^(-0.75);
-  annotation(Inline=false,
-          LateInline=true);
-  end alpha_0;
+  end f_Idg;
 
-  redeclare function extends alpha_r
+  redeclare function extends f_Res
     "Dimensionless Helmholtz energy (Residual part alpha_r)"
   algorithm
-    alpha_r := (0.05586817) * delta^(2) * tau^(-0.5) + (0.498223) *
+    f_Res := (0.05586817) * delta^(2) * tau^(-0.5) + (0.498223) *
       delta^(1) * tau^(0) + (0.02458698) * delta^(3) * tau^(0) +
       (0.0008570145) * delta^(6) * tau^(0) + (0.0004788584) * delta^(6) *
       tau^(1.5) + (-1.800808) * delta^(1) * tau^(1.5) + (0.2671641) *
@@ -124,35 +122,29 @@ package R134a_IIR_P1_395_T233_455_Formula
       exp(-delta^(3)) + (0.006995038) * delta^(5) * tau^(18) * exp(-delta^(3))
       + (-0.01452184) * delta^(3) * tau^(22) * exp(-delta^(3)) +
       (-0.0001285458) * delta^(10) * tau^(50) * exp(-delta^(4));
-  annotation(Inline=false,
-          LateInline=true);
-  end alpha_r;
+  end f_Res;
 
-  redeclare function extends tau_d_alpha_0_d_tau
+  redeclare function extends t_fIdg_t
     "Short form for tau*(dalpha_0/dtau)_delta=const"
   algorithm
-    tau_d_alpha_0_d_tau := (-1.629789)*(1) + (-1.02084672674949)*(0)*tau^(0)
+    t_fIdg_t := (-1.629789)*(1) + (-1.02084672674949)*(0)*tau^(0)
       + (9.04757355104757)*(1)*tau^(1) + (-9.723916)*(-0.5)*tau^(-0.5) +
       (-3.92717)*(-0.75)*tau^(-0.75);
-  annotation(Inline=false,
-          LateInline=true);
-  end tau_d_alpha_0_d_tau;
+  end t_fIdg_t;
 
-  redeclare function extends tau2_d2_alpha_0_d_tau2
+  redeclare function extends tt_fIdg_tt
     "Short form for tau*tau*(ddalpha_0/(dtau*dtau))_delta=const"
   algorithm
-    tau2_d2_alpha_0_d_tau2 := -(-1.629789)*(1) + (-1.02084672674949)*(0)*
+    tt_fIdg_tt := -(-1.629789)*(1) + (-1.02084672674949)*(0)*
       ((0)-1)*tau^(0) + (9.04757355104757)*(1)*((1)-1)*tau^(1) + (-9.723916)*
       (-0.5)*((-0.5)-1)*tau^(-0.5) + (-3.92717)*(-0.75)*((-0.75)-1)*
       tau^(-0.75);
-  annotation(Inline=false,
-          LateInline=true);
-  end tau2_d2_alpha_0_d_tau2;
+  end tt_fIdg_tt;
 
-  redeclare function extends tau_d_alpha_r_d_tau
+  redeclare function extends t_fRes_t
     "Short form for tau*(dalpha_r/dtau)_delta=const"
   algorithm
-    tau_d_alpha_r_d_tau := (0.05586817)*(-0.5)*delta^(2)*tau^(-0.5) +
+    t_fRes_t := (0.05586817)*(-0.5)*delta^(2)*tau^(-0.5) +
       (0.498223)*(0)*delta^(1)*tau^(0) + (0.02458698)*(0)*delta^(3)*tau^(0) +
       (0.0008570145)*(0)*delta^(6)*tau^(0) + (0.0004788584)*(1.5)*delta^(6)*
       tau^(1.5) + (-1.800808)*(1.5)*delta^(1)*tau^(1.5) + (0.2671641)*(2)*
@@ -168,14 +160,12 @@ package R134a_IIR_P1_395_T233_455_Formula
       (0.006995038)*(18)*delta^(5)*tau^(18)*exp(-delta^(3)) +
       (-0.01452184)*(22)*delta^(3)*tau^(22)*exp(-delta^(3)) +
       (-0.0001285458)*(50)*delta^(10)*tau^(50)*exp(-delta^(4));
-  annotation(Inline=false,
-          LateInline=true);
-  end tau_d_alpha_r_d_tau;
+  end t_fRes_t;
 
-  redeclare function extends tau2_d2_alpha_r_d_tau2
+  redeclare function extends tt_fRes_tt
     "Short form for tau*tau*(ddalpha_r/(dtau*dtau))_delta=const"
   algorithm
-    tau2_d2_alpha_r_d_tau2 := (0.05586817)*(-0.5)*((-0.5)-1)*delta^(2)*
+    tt_fRes_tt := (0.05586817)*(-0.5)*((-0.5)-1)*delta^(2)*
       tau^(-0.5) + (0.498223)*(0)*((0)-1)*delta^(1)*tau^(0) + (0.02458698)*
       (0)*((0)-1)*delta^(3)*tau^(0) + (0.0008570145)*(0)*((0)-1)*delta^(6)*
       tau^(0) + (0.0004788584)*(1.5)*((1.5)-1)*delta^(6)*tau^(1.5) +
@@ -194,14 +184,12 @@ package R134a_IIR_P1_395_T233_455_Formula
       (0.006995038)*(18)*((18)-1)*delta^(5)*tau^(18)*exp(-delta^(3)) +
       (-0.01452184)*(22)*((22)-1)*delta^(3)*tau^(22)*exp(-delta^(3)) +
       (-0.0001285458)*(50)*((50)-1)*delta^(10)*tau^(50)*exp(-delta^(4));
-  annotation(Inline=false,
-          LateInline=true);
-  end tau2_d2_alpha_r_d_tau2;
+  end tt_fRes_tt;
 
-  redeclare function extends delta_d_alpha_r_d_delta
+  redeclare function extends d_fRes_d
     "Short form for delta*(dalpha_r/(ddelta))_tau=const"
   algorithm
-    delta_d_alpha_r_d_delta := (0.05586817)*(2)*delta^(2)*tau^(-0.5) +
+    d_fRes_d := (0.05586817)*(2)*delta^(2)*tau^(-0.5) +
       (0.498223)*(1)*delta^(1)*tau^(0) + (0.02458698)*(3)*delta^(3)*tau^(0) +
       (0.0008570145)*(6)*delta^(6)*tau^(0) + (0.0004788584)*(6)*delta^(6)*
       tau^(1.5) + (-1.800808)*(1)*delta^(1)*tau^(1.5) + (0.2671641)*(1)*
@@ -219,14 +207,12 @@ package R134a_IIR_P1_395_T233_455_Formula
       delta^(5)*tau^(18)*((5)-(3)*delta^(3))*exp(-delta^(3)) + (-0.01452184)*
       delta^(3)*tau^(22)*((3)-(3)*delta^(3))*exp(-delta^(3)) + (-0.0001285458)*
       delta^(10)*tau^(50)*((10)-(4)*delta^(4))*exp(-delta^(4));
-  annotation(Inline=false,
-          LateInline=true);
-  end delta_d_alpha_r_d_delta;
+  end d_fRes_d;
 
-  redeclare function extends delta2_d2_alpha_r_d_delta2
+  redeclare function extends dd_fRes_dd
     "Short form for delta*delta(ddalpha_r/(ddelta*delta))_tau=const"
   algorithm
-    delta2_d2_alpha_r_d_delta2 := (0.05586817)*(2)*((2)-1)*delta^(2)*
+    dd_fRes_dd := (0.05586817)*(2)*((2)-1)*delta^(2)*
       tau^(-0.5) + (0.498223)*(1)*((1)-1)*delta^(1)*tau^(0) + (0.02458698)*
       (3)*((3)-1)*delta^(3)*tau^(0) + (0.0008570145)*(6)*((6)-1)*delta^(6)*
       tau^(0) + (0.0004788584)*(6)*((6)-1)*delta^(6)*tau^(1.5) + (-1.800808)*
@@ -253,14 +239,12 @@ package R134a_IIR_P1_395_T233_455_Formula
       (3)*delta^(3))*((3)-1-(3)*delta^(3))-(3)^2*delta^(3))*exp(-delta^(3)) +
       (-0.0001285458)*delta^(10)*tau^(50)*(((10)-(4)*delta^(4))*((10)-1-(4)*
       delta^(4))-(4)^2*delta^(4))*exp(-delta^(4));
-  annotation(Inline=false,
-          LateInline=true);
-  end delta2_d2_alpha_r_d_delta2;
+  end dd_fRes_dd;
 
-  redeclare function extends tau_delta_d2_alpha_r_d_tau_d_delta
+  redeclare function extends td_fRes_td
     "Short form for tau*delta*(ddalpha_r/(dtau*ddelta))"
   algorithm
-    tau_delta_d2_alpha_r_d_tau_d_delta := (0.05586817)*(2)*(-0.5)*delta^(2)*
+    td_fRes_td := (0.05586817)*(2)*(-0.5)*delta^(2)*
       tau^(-0.5) + (0.498223)*(1)*(0)*delta^(1)*tau^(0) + (0.02458698)*(3)*(0)
       *delta^(3)*tau^(0) + (0.0008570145)*(6)*(0)*delta^(6)*tau^(0) +
       (0.0004788584)*(6)*(1.5)*delta^(6)*tau^(1.5) + (-1.800808)*(1)*(1.5)*
@@ -280,25 +264,21 @@ package R134a_IIR_P1_395_T233_455_Formula
       tau^(18)*((5)-(3)*delta^(3))*exp(-delta^(3)) + (-0.01452184)*(22)*
       delta^(3)*tau^(22)*((3)-(3)*delta^(3))*exp(-delta^(3)) + (-0.0001285458)
       *(50)*delta^(10)*tau^(50)*((10)-(4)*delta^(4))*exp(-delta^(4));
-  annotation(Inline=false,
-          LateInline=true);
-  end tau_delta_d2_alpha_r_d_tau_d_delta;
+  end td_fRes_td;
 
-  redeclare function extends tau3_d3_alpha_0_d_tau3
+  redeclare function extends ttt_fIdg_ttt
     "Short form for tau*tau*tau*(dddalpha_0/(dtau*dtau*dtau))_delta=const"
   algorithm
-    tau3_d3_alpha_0_d_tau3 := 2*(-1.629789)*(1) + (-1.02084672674949)*(0)*
+    ttt_fIdg_ttt := 2*(-1.629789)*(1) + (-1.02084672674949)*(0)*
       ((0)-1)*((0)-2) *tau^(0) + (9.04757355104757)*(1)*((1)-1)*((1)-2) *
       tau^(1) + (-9.723916)*(-0.5)*((-0.5)-1)*((-0.5)-2) *tau^(-0.5) +
       (-3.92717)*(-0.75)*((-0.75)-1)*((-0.75)-2) *tau^(-0.75);
-    annotation(Inline=false,
-          LateInline=true);
-  end tau3_d3_alpha_0_d_tau3;
+  end ttt_fIdg_ttt;
 
-  redeclare function extends tau3_d3_alpha_r_d_tau3
+  redeclare function extends ttt_fRes_ttt
     "Short form for tau*tau*tau*(dddalpha_r/(dtau*dtau*dtau))_delta=const"
   algorithm
-    tau3_d3_alpha_r_d_tau3 := (0.05586817)*(-0.5)*((-0.5)-1)*((-0.5)-2)*
+    ttt_fRes_ttt := (0.05586817)*(-0.5)*((-0.5)-1)*((-0.5)-2)*
       delta^(2)*tau^(-0.5) + (0.498223)*(0)*((0)-1)*((0)-2)*delta^(1)*tau^(0)
       + (0.02458698)*(0)*((0)-1)*((0)-2)*delta^(3)*tau^(0) + (0.0008570145)*
       (0)*((0)-1)*((0)-2)*delta^(6)*tau^(0) + (0.0004788584)*(1.5)*((1.5)-1)*
@@ -319,15 +299,13 @@ package R134a_IIR_P1_395_T233_455_Formula
       + (-0.01452184)*(22)*((22)-1)*((22)-2)*delta^(3)*tau^(22)*exp(-delta^(3))
       + (-0.0001285458)*(50)*((50)-1)*((50)-2)*delta^(10)*tau^(50)*
       exp(-delta^(4));
-    annotation(Inline=false,
-          LateInline=true);
-  end tau3_d3_alpha_r_d_tau3;
+  end ttt_fRes_ttt;
 
-  redeclare function extends delta3_d3_alpha_r_d_delta3
+  redeclare function extends ddd_fRes_ddd
     "Short form for delta*delta*delta*
     (dddalpha_r/(ddelta*ddelta*ddelta))_tau=const"
   algorithm
-    delta3_d3_alpha_r_d_delta3 := (0.05586817)*(2)*((2)-1)*((2)-2)*delta^(2)*
+    ddd_fRes_ddd := (0.05586817)*(2)*((2)-1)*((2)-2)*delta^(2)*
       tau^(-0.5) + (0.498223)*(1)*((1)-1)*((1)-2)*delta^(1)*tau^(0) +
       (0.02458698)*(3)*((3)-1)*((3)-2)*delta^(3)*tau^(0) + (0.0008570145)*
       (6)*((6)-1)*((6)-2)*delta^(6)*tau^(0) + (0.0004788584)*(6)*((6)-1)*
@@ -365,14 +343,12 @@ package R134a_IIR_P1_395_T233_455_Formula
       (3)) - (-0.0001285458)*delta^(10)*tau^(50)*exp(-delta^(4))*((4)*
       delta^(4)*((4)*(delta^(4)*((4)*(delta^(4)-3)-3*(10)+3)+(4)+3*(10)-3)+3*
       (10)^2-6*(10)+2)-((10)-2)*((10)-1)*(10));
-    annotation(Inline=false,
-      LateInline=true);
-  end delta3_d3_alpha_r_d_delta3;
+  end ddd_fRes_ddd;
 
-  redeclare function extends tau_delta2_d3_alpha_r_d_tau_d_delta2
+  redeclare function extends tdd_fRes_tdd
     "Short form for tau*delta*delta*(dddalpha_r/(dtau*ddelta*ddelta))"
   algorithm
-    tau_delta2_d3_alpha_r_d_tau_d_delta2 := (0.05586817)*(2)*(-0.5)*(2-1)*
+    tdd_fRes_tdd := (0.05586817)*(2)*(-0.5)*(2-1)*
       delta^(2)*tau^(-0.5) + (0.498223)*(1)*(0)*(1-1)*delta^(1)*tau^(0) +
       (0.02458698)*(3)*(0)*(3-1)*delta^(3)*tau^(0) + (0.0008570145)*(6)*(0)*
       (6-1)*delta^(6)*tau^(0) + (0.0004788584)*(6)*(1.5)*(6-1)*delta^(6)*
@@ -400,14 +376,12 @@ package R134a_IIR_P1_395_T233_455_Formula
       ((3)*delta^(3)*((3)*(delta^(3)-1)-2*(3)+1)+(3)*((3)-1)) +
       (-0.0001285458)*(50)*delta^(10)*tau^(50)*exp(-delta^(4))*((4)*delta^(4)*
       ((4)*(delta^(4)-1)-2*(10)+1)+(10)*((10)-1));
-    annotation(Inline=false,
-          LateInline=true);
-  end tau_delta2_d3_alpha_r_d_tau_d_delta2;
+  end tdd_fRes_tdd;
 
-  redeclare function extends tau2_delta_d3_alpha_r_d_tau2_d_delta
+  redeclare function extends ttd_fRes_ttd
     "Short form for tau*tau*delta*(dddalpha_r/(dtau*dtau*ddelta))"
   algorithm
-    tau2_delta_d3_alpha_r_d_tau2_d_delta := (0.05586817)*(2)*(-0.5)*(-0.5-1)*
+    ttd_fRes_ttd := (0.05586817)*(2)*(-0.5)*(-0.5-1)*
       delta^(2)*tau^(-0.5) + (0.498223)*(1)*(0)*(0-1)*delta^(1)*tau^(0) +
       (0.02458698)*(3)*(0)*(0-1)*delta^(3)*tau^(0) + (0.0008570145)*(6)*(0)*
       (0-1)*delta^(6)*tau^(0) + (0.0004788584)*(6)*(1.5)*(1.5-1)*delta^(6)*
@@ -429,9 +403,7 @@ package R134a_IIR_P1_395_T233_455_Formula
       exp(-delta^(3))*((5)-(3)*delta^(3)) + (-0.01452184)*(22)*((22)-1)*
       delta^(3)*tau^(22)*exp(-delta^(3))*((3)-(3)*delta^(3)) + (-0.0001285458)*
       (50)*((50)-1)*delta^(10)*tau^(50)*exp(-delta^(4))*((10)-(4)*delta^(4));
-    annotation(Inline=false,
-          LateInline=true);
-  end tau2_delta_d3_alpha_r_d_tau2_d_delta;
+  end ttd_fRes_ttd;
   /*Provide polynomial functions for saturation properties. These functions are
     fitted to external data (e.g. data extracted from RefProp or FluidProp).
     Currently, just one fitting approach is implemented.
