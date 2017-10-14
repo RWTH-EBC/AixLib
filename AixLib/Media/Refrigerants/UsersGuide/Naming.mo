@@ -19,7 +19,6 @@ The naming of the models follows the guideline presented below:
 <i>Range of validity for temperature</i> _
 <i>Approach of calculating fitted formulas</i>
 </p>
-<p>
 <ol>
 <li><u>Refrigerant:</u> Name of the refrigerant,
 e.g. R134a or R410a.</li>
@@ -33,8 +32,6 @@ Caution: No digits are presented.</li>
 <li><u>Approach:</u> Approach of calculating fitted formulas.
 Currently, three different calculating rules are implemented.</li>
 </ol>
-</p>
-<p>
 <ul>
 <li><i>Record:</i> The fitting coefficients used for the fitted formulas
 are stored in records.</li>
@@ -45,7 +42,6 @@ directly stored in the models.</li>
 using the Horner pattern due to simulation speed and, therefore, all fitting
 coefficients are directly stored in the models.</li>
 </ul>
-</p>
 <h4>Abbreviations of parameters, constants, variables and functions</h4>
 <p>
 Some special abbreviations are introduced for functions and variables related
