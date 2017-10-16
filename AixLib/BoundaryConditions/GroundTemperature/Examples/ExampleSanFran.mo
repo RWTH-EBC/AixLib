@@ -29,7 +29,7 @@ model ExampleSanFran
   to prevent division by 0 at time=0"
     annotation (Placement(transformation(extent={{-40,4},{-20,24}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3    weaDat(
-      computeWetBulbTemperature=false, filNam="modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
+      computeWetBulbTemperature=false, filNam="modelica://AixLib/Resources/WeatherData/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
                                        "File reader that reads weather data"
     annotation (Placement(transformation(extent={{-40,78},{-20,98}})));
   GroundTemperatureKusuda groundTemperatureKasuda(
