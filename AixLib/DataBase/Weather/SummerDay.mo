@@ -7,8 +7,6 @@ record SummerDay
   annotation(Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Very simple source to output weather conditions in the form of outdoor air temperature and solar irraditation. This record includes outdoor conditions for a hot summer day, taken from German Test Reference Year region 1 (TRY 2010_01_Somm.dat) for July 20 2010.</p>
- <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars5.png\" alt=\"stars: 5 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Assumptions</span></h4>
  <p>Values at a certain timestamp represent the average temperature for the time between this timestamp and the timestampt before. E.g. a value with timestamp 3600 expresses the average value for t = [0; 3600]</p>
  <h4><span style=\"color:#008000\">Known Limitations</span></h4>
