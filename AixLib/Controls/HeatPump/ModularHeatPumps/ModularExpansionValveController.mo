@@ -8,7 +8,7 @@ model ModularExpansionValveController
     freqHz=1,
     offset=0.5)
     "Input signal to prediscribe expansion valve's opening"
-    annotation (Placement(transformation(extent={{-80,40},{-60,60}})));
+    annotation (Placement(transformation(extent={{0,60},{20,80}})));
 
 
 equation

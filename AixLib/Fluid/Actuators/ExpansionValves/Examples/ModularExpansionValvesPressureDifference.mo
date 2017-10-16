@@ -31,13 +31,6 @@ model ModularExpansionValvesPressureDifference
       expansionValves,
     redeclare Controls.HeatPump.ModularHeatPumps.ModularExpansionValveController
       expansionValveController,
-    AVal={2e-6,1.5e-6,1e-6},
-    useInpFil={false,true,true},
-    risTim={0.5,0.5,0.75},
-    calcProc={Utilities.Choices.CalcProc.flowCoefficient,
-              Utilities.Choices.CalcProc.flowCoefficient,
-              Utilities.Choices.CalcProc.flowCoefficient},
-    dpNom={150000000000,10000000000,10000000000},
     redeclare model FlowCoefficient =
       Utilities.FlowCoefficient.R134a.R134a_EEV_15)
     annotation (Placement(transformation(

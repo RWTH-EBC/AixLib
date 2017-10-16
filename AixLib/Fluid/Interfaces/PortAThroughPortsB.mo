@@ -1,6 +1,6 @@
 within AixLib.Fluid.Interfaces;
-model PortsAThroughPortB
-  "Model to conenct fluid port bus ports_a to single port port_b"
+model PortAThroughPortsB
+  "Model to conenct single port port_a to fluid port bus ports_b"
 
   // Definition of parameters describing the modular approach in general
   //
@@ -10,7 +10,7 @@ model PortsAThroughPortB
 
   // Extends base port model and set base parameters
   //
-  extends PartialModularPort_a(
+  extends PartialModularPort_b(
     final nPorts=nVal,
     final allowFlowReversal=true,
     final dp_start,
@@ -23,24 +23,24 @@ equation
   // Connect port_a with inlet ports of expansion valves
   //
   for i in 1:nVal loop
-    connect(ports_a[i],port_b);
+    connect(port_a,ports_b[i]);
   end for;
 
   annotation (Icon(graphics={
         Polygon(
-          points={{-110,40},{0,40},{100,10},{110,10},{110,-10},{100,-10},{0,-40},
-              {-110,-40},{-110,40}},
+          points={{110,40},{0,40},{-100,10},{-110,10},{-110,-10},{-100,-10},{0,
+              -40},{110,-40},{110,40}},
           lineColor={0,0,0},
           lineThickness=0.5,
           fillPattern=FillPattern.CrossDiag,
           fillColor={34,141,255}),
         Line(
-          points={{-100,26},{100,0}},
+          points={{-100,0},{100,26}},
           color={0,0,0},
           thickness=0.5,
           arrow={Arrow.None,Arrow.Filled}),
         Line(
-          points={{-100,-26},{100,0}},
+          points={{-100,0},{100,-26}},
           color={0,0,0},
           thickness=0.5,
           arrow={Arrow.None,Arrow.Filled}),
@@ -50,8 +50,8 @@ equation
           thickness=0.5,
           arrow={Arrow.None,Arrow.Filled}),
         Line(
-          points={{-90,40},{0,40},{100,10},{110,10},{110,-10},{100,-10},{0,-40},
-              {-110,-40},{-110,40},{-90,40}},
+          points={{90,40},{0,40},{-100,10},{-110,10},{-110,-10},{-100,-10},{0,
+              -40},{110,-40},{110,40},{90,40}},
           color={0,0,0},
           thickness=1)}));
-end PortsAThroughPortB;
+end PortAThroughPortsB;

@@ -1,6 +1,6 @@
 within AixLib.Controls.Interfaces;
-expandable connector PartialModularHeatPumpBus
-  "Base connector used for modular heat pump controller"
+expandable connector ModularHeatPumpControlBus
+  "Connector used for modular heat pump controller"
 
   // Definition of parameters describing modular approach in general
   //
@@ -10,45 +10,36 @@ expandable connector PartialModularHeatPumpBus
 
   // Definition of parameters describing controlling system in general
   //
-  Boolean manCon = false
-    "= true, if set signal is set manually and no controller is used"
+  parameter Boolean extCon = false
+    "= true, if external signal is used"
     annotation(Dialog(tab="General",group="Controller"));
-  Boolean extCon = false
-    "= true, if external controller is used"
-    annotation(Dialog(tab="General",group="Controller"));
-  Choices.heatPumpMode mode=Choices.heatPumpMode.heatPump
+  parameter Choices.heatPumpMode mode=Choices.heatPumpMode.heatPump
     "Choose between heat pump or chiller mode"
     annotation (Dialog(tab="General", group="Controller"));
 
-  // Definition of parameters describing the internal controller
-  //
-
-  // Definition of inputs, e.g. signals flowing into the model
+  // Definition of inputs for expansion valves (signals flowing into the model)
   //
   Boolean active[nComp]
-    "= true, if evaporator is used and expansion valve not closed"
-    annotation(Dialog(tab="Input signals",group="General"));
+    "= true, if component is active"
+    annotation(Dialog(tab="Input - Valve",group="General"));
 
-  Choices.ControlVariableValve controlVariableValve=
+  parameter Choices.ControlVariableValve controlVariableValve=
     Choices.ControlVariableValve.TSupHea
-    "Choose between different control variables"
-    annotation (Dialog(tab="Input signals", group="Control variable"));
+    "Choose between different control variables for expansion valve"
+    annotation (Dialog(tab="Input - Valve", group="Control variable"));
   Real actConVar[nComp]
-    "Array of controlled variable actuals values"
-    annotation(Dialog(tab="Input signals",group="Control variable"));
+    "Array of measured values of controlled variables"
+    annotation(Dialog(tab="Input - Valve",group="Control variable"));
 
-  Real manSetSig[nComp]
-    "Array of set signals manually given by user"
-    annotation(Dialog(tab="Input signals",group="Set signals"));
   Real extSetSig[nComp]
-    "Array of set signals given by external user"
-    annotation(Dialog(tab="Input signals",group="Set signals"));
+    "Array of set signals given externally"
+    annotation(Dialog(tab="Input - Valve",group="Set signals"));
 
-  // Definition of outputs, e.g. signals flowing out of the model
+  // Definition of outputs for expansion valves (signals flowing out of the model)
   //
-  Real actManSig[nComp]
-    "Array of actual manipulated signal"
-    annotation(Dialog(tab="Output signals",group="Set signals"));
+  Real actSetSig[nComp]
+    "Array of actual set signals"
+    annotation(Dialog(tab="Output - Valve",group="Set signals"));
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false),
         graphics={
@@ -79,4 +70,4 @@ expandable connector PartialModularHeatPumpBus
             extent={{25.0,-25.0},{35.0,-15.0}})}),
         Diagram(
           coordinateSystem(preserveAspectRatio=false)));
-end PartialModularHeatPumpBus;
+end ModularHeatPumpControlBus;

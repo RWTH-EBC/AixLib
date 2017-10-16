@@ -101,10 +101,10 @@ partial model PartialModularExpansionVavles
 
   // Definition of connectors
   //
-  Controls.Interfaces.ModularExpansionValveBus dataBus(final
-      nComp=nVal)
-      annotation(Placement(transformation(extent={{-10,-110},{10,-90}}),
-                 iconTransformation(extent={{-10,-110},{10,-90}})));
+  Controls.Interfaces.ModularHeatPumpControlBus dataBus(
+    final nComp=nVal)
+    annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
+
 
 equation
   // Connect port_a with inlet ports of expansion valves
@@ -119,10 +119,11 @@ equation
     expansionValveController.opeSet[i] = expansionValves[i].opeSet;
     expansionValves[i].opeAct =expansionValveController.opeAct[i];
   end for;
-  connect(expansionValveController.dataBus, dataBus)
-    annotation(Line(points={{0,-78},{0,-100}},
-               color={0,0,0},
-               thickness=0.5));
+  connect(dataBus, expansionValveController.dataBus)
+    annotation (Line(
+      points={{0,-100},{0,-78}},
+      color={255,204,51},
+      thickness=0.5));
 
   annotation (Icon(graphics={
         Polygon(
