@@ -98,8 +98,8 @@ AixLib.Fluid.MixingVolumes.BaseClasses.PartialMixingVolume</a>.
 For simple models that uses this model, see
 <a href=\"modelica://AixLib.Fluid.HeatExchangers.HeaterCooler_u\">
 AixLib.Fluid.HeatExchangers.HeaterCooler_u</a> and
-<a href=\"modelica://AixLib.Fluid.MassExchangers.Humidifier_u\">
-AixLib.Fluid.MassExchangers.Humidifier_u</a>.
+<a href=\"modelica://AixLib.Fluid.Humidifiers.Humidifier_u\">
+AixLib.Fluid.Humidifiers.Humidifier_u</a>.
 </p>
 
 </html>", revisions="<html>

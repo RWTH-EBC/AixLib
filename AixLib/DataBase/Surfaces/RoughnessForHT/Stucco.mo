@@ -11,9 +11,6 @@ record Stucco
 <p>
 Material: Stucco
 </p>
-<h4><font color=\"#008000\">Level of Development</font></h4>
-<p><img src=\"modelica://AixLib/Resources/Images/Stars/stars5.png\"
-    alt=\"stars: 5 out of 5\"/></p>
 <h4><font color=\"#008000\">References</font></h4>
 <p>Record is used in model
   <a href=\"AixLib.Utilities.HeatTransfer.HeatConv_outside\">

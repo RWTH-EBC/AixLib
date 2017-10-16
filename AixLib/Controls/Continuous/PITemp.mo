@@ -15,7 +15,8 @@ model PITemp "PI controller that can switch the output range of the controller"
   parameter Modelica.SIunits.Time TN = 1 "Time Constant (T>0 required)" annotation(Dialog(group = "Control"));
   Modelica.Blocks.Interfaces.RealOutput y annotation(Placement(transformation(extent = {{80, -10}, {100, 10}}), iconTransformation(extent = {{80, -10}, {100, 10}})));
   parameter Boolean rangeSwitch = false "Switch controller output range";
-  Modelica.Blocks.Interfaces.BooleanInput onOff "Switches Controler on and off" annotation(Placement(transformation(extent = {{-120, -80}, {-80, -40}}), iconTransformation(extent = {{-100, -60}, {-80, -40}})));
+  Modelica.Blocks.Interfaces.BooleanInput onOff "Switches Controler on and off"
+                                                                                annotation(Placement(transformation(extent = {{-120, -80}, {-80, -40}}), iconTransformation(extent = {{-100, -60}, {-80, -40}})));
   Modelica.Blocks.Logical.Switch switch1 annotation(Placement(transformation(extent = {{-40, 6}, {-20, -14}})));
   Modelica.Blocks.Logical.Switch switch2 annotation(Placement(transformation(extent = {{56, -18}, {76, 2}})));
   Modelica.Blocks.Logical.TriggeredTrapezoid triggeredTrapezoid(rising = 0, falling = 60) annotation(Placement(transformation(extent = {{-40, -60}, {-20, -40}})));
@@ -44,8 +45,6 @@ equation
  <p>
  Based on a model by Alexander Hoh with some modifications and the Modelica-Standard PI controller. If set to &quot;on&quot; it will controll the thermal port temperature to the target value (soll). If set to &quot;off&quot; the controller error will become zero and therefore the current output level of the PI controller will remain constant. When this switching occurs the TriggeredTrapezoid will level the current controller output down to zero in a selectable period of time.
  </p>
- <h4><font color=\"#008000\">Level of Development</font></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars2.png\" alt=\"stars: 2 out of 5\"/></p>
  </html>", revisions = "<html>
  <ul>
    <li><i>April, 2016&nbsp;</i>

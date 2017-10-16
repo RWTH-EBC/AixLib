@@ -6,8 +6,6 @@ package HighOrder "Standard house models"
   annotation(conversion(noneFromVersion = "", noneFromVersion = "1.0", noneFromVersion = "1.1", noneFromVersion = "1.2", from(version = "1.3", script = "Conversions/ConvertFromHouse_Models_1.3.mos"), from(version = "2.0", script = "Conversions/ConvertFromHouse_Models_2.0_To_2.1"), from(version = "2.1", script = "Conversions/ConvertFromHouse_Models_2.1_To_2.2")), Documentation(revisions = "", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Package for standard house models, derived form the EBC-Library HouseModels.</p>
- <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The H library aims to provide standard models for one family dwellings (stand alone house), single apartments and multi-family dwellings consisting of several apartments. The particularity of this library lies in providing ready to use models for the dynamic simulation of building energy systems, while allowing for a degree of flexibility in adapting or extending these models to ones needs.</p>
  <p>A library with models for standard houses as such does not yet exist. While at the moment the standard house models are tailor-made for the German market, it is possible to adapt them to other markets.</p>

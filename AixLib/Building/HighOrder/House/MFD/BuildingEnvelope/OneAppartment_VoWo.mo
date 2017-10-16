@@ -133,8 +133,6 @@ equation
             fillPattern =                                                                                                   FillPattern.Solid,  pattern=LinePattern.None), Text(extent = {{0, -54}, {74, -66}}, lineColor = {0, 0, 0}, textString = "Kitchen")}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Complete model appartment</p>
- <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  </html>", revisions = "<html>
  <ul>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
