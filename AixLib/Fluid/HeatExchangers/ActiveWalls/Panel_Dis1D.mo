@@ -352,19 +352,19 @@ annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,
           smooth=Smooth.None,
           arrow={Arrow.Filled,Arrow.None})}),
       Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
+<h4><span style=\"color: #008000\">Overview</span></h4>
 <p>Modification of Panelheating_1D_Dis.</p>
 <p>Panels are connected in parallel in sets of x.</p>
 <p>The discretisation is the number of parallel connections.</p>
 <p>The set of x gives the tube length and the volume of water for every discretisation.</p>
 <p>The model can work for only heating, only cooling, or heating and cooling, both as floor or ceiling. The combination of floor and cooling wouldn&apos;t make too much sense.</p>
-<p>The temperature of the surface is calculated according to Bernd&nbsp;Glueck,&nbsp;Bauteilaktivierung&nbsp;1999 (equations&nbsp;7.91&nbsp;(forr&nbsp;heat&nbsp;flow&nbsp;up)&nbsp;and&nbsp;7.93&nbsp;(for&nbsp;heat&nbsp;flow&nbsp;down)&nbsp;from&nbsp;page&nbsp;41).</p>
+<p>The temperature of the surface is calculated according to Bernd&nbsp;Glueck,&nbsp;Bauteilaktivierung&nbsp;1999 (equations&nbsp;7.91&nbsp;(for&nbsp;heat&nbsp;flow&nbsp;up)&nbsp;and&nbsp;7.93&nbsp;(for&nbsp;heat&nbsp;flow&nbsp;down)&nbsp;from&nbsp;page&nbsp;41).</p>
 <p>Using the surface temperature and a logarithmic calculation of the heating fluid overtemperature a heat transfer coefficient for the heat flow through the layers to the room side is calculated. This algorithm is still under review.</p>
-<h4><span style=\"color:#008000\">Assumptions</span></h4>
+<h4><span style=\"color: #008000\">Assumptions</span></h4>
 <p>The model is a greybox model: half physical model, half empirical formula. </p>
-<p><b><font style=\"color: #ff0000; \">Attention:</font></b> When switching from cooling to heating mode the values for heat transfer coefficients don&apos;t change smoothly. So if the switch is not some type of step change for the flow temperature (see example) the model can become stuck constantly switching between hetaing and cooling mode. Realistically a change should be sudden, because there is supposed to be a certain temperature difference between room temperature and mean temperature of heating system. However a chnage can be gradual, when feeding the model with measurement data. As a solution please think about making the chnage more step like, or of introducing a a tolerance interval around the switching point, where the model is only cooling, or heating, or not doing anything. </p>
-<h4><span style=\"color:#008000\">Example</span></h4>
-<a href=\"AixLib.Fluid.HeatExchangers.Examples.ActiveWalls.Panel_CoolingAndHeating\">AixLib.Fluid.HeatExchangers.Examples.ActiveWalls.Panel_CoolingAndHeating</a>
+<p><b><span style=\"color: #ff0000;\">Attention:</span></b> When switching from cooling to heating mode the values for heat transfer coefficients don&apos;t change smoothly. So if the switch is not some type of step change for the flow temperature (see example) the model can become stuck constantly switching between hetaing and cooling mode. Realistically a change should be sudden, because there is supposed to be a certain temperature difference between room temperature and mean temperature of heating system. However a chnage can be gradual, when feeding the model with measurement data. As a solution please think about making the chnage more step like, or of introducing a a tolerance interval around the switching point, where the model is only cooling, or heating, or not doing anything. </p>
+<h4><span style=\"color: #008000\">Example</span></h4>
+<p><a href=\"AixLib.Fluid.HeatExchangers.Examples.ActiveWalls.Panel_CoolingAndHeating\">AixLib.Fluid.HeatExchangers.Examples.ActiveWalls.Panel_CoolingAndHeating</a> </p>
 </html>", revisions="<html>
 <ul>
 <li><i>June 15, 2017&nbsp;</i> by Tobias Blacha:<br/>
