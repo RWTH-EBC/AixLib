@@ -309,18 +309,6 @@ equation
         connect(heatPorts_Star, thermalCollector_Star.port_a);
         connect(thermalCollector_Star.port_b, Star);
 
-
-//        elseif withInsulation then
-//        connect(PipeWall.port_b,Insulation.port_a);
-//        connect(Insulation.port_b,  heatPorts);
-//        elseif Heat_Loss_To_Ambient then
-//       connect(PipeWall.port_b,  heatConv.port_b);
-//       connect( heatConv.port_a, heatPorts);
-//       connect( heatConv.port_b, twoStar_RadEx.Therm);
-//       connect( twoStar_RadEx.Star, heatPorts_Star);
-//        connect( heatPorts_Star, thermalCollector_Star.port_a);
-//        connect( thermalCollector_Star.port_b, Star);
-
         else
         connect(PipeWall.port_b,  heatPorts);
         end if;
