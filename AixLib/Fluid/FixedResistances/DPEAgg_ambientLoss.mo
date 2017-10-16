@@ -276,13 +276,16 @@ equation
 
         //Connect pipe wall or insulation to the outside.
 
+        //Pipe: embedded, with heat losses, without insulation
         if (isEmbedded and Heat_Loss_To_Ambient and not withInsulation) then
         connect(PipeWall.port_b,heatPorts);
 
+        //Pipe: embedded, with heat losses, with insulation
         elseif (isEmbedded and Heat_Loss_To_Ambient and withInsulation) then
         connect(PipeWall.port_b,Insulation.port_a);
         connect(Insulation.port_b,  heatPorts);
 
+        //Pipe: not embedded, with heat losses, with insulation
         elseif (withInsulation and Heat_Loss_To_Ambient and not isEmbedded) then
         connect(PipeWall.port_b,Insulation.port_a);
         connect(Insulation.port_b,  heatConv_withInsulation.port_b);
@@ -294,6 +297,7 @@ equation
         connect(heatPorts_Star, thermalCollector_Star.port_a);
         connect(thermalCollector_Star.port_b, Star);
 
+        //Pipe: not embedded, with heat losses, without insulation
         elseif
               (Heat_Loss_To_Ambient and not withInsulation and not isEmbedded) then
         connect(PipeWall.port_b,heatConv.port_b);
@@ -352,11 +356,11 @@ equation
 <h4><span style=\"color: #008000\">Overview</span></h4>
 <p>Dynamic Pipe with pipe wall and insulation wall which allows discretisation of pipe wall and pipe insulation. This model considers heat loss through radiation and convection if pipe is not embedded in wall. In case that the pipe is embedded in the wall, heat transfer between the pipe wall / insulation and the surrounding material is based on heat conduction.</p>
 <h4><span style=\"color: #008000\">Concept</span></h4>
-<p>Developed by using the <a href=\"HVAC.Components.Pipes.DynamicPipeEBCAggregated\">DynamicPipeEBCAggregated</a> model from the EBC HVAC library. The model already includes heat-transfer by convection and by radiation. Instead of modeling these phenomena outside the pipe, an ambient temperature can be prescribed at the heat-port and the star of the pipe, so the loss to ambient will be calculated within the pipe model. The purpose is to clean up bigger models and to simplify modeling systems with pipes outside building-walls. </p>
-<p>Differently from <a href=\"HVAC.Components.Pipes.DPE_ambientLoss\">DPE_ambientLoss</a> for each discretisation of the pipe, there is a connector to the corresponding element of the discretized pipe wall. Each element of the discretised pipe wall is connected to a corresponding element of the discretized insulation wall. The heat-ports and stars of all nodes are then collected to form two single ports, which can be connected to an ambient temperature. </p>
-<p>It is possible to choose no insulation, if used for example for CCA ( concrete core activation). </p>
+<p>Dynamic pipe model with heat losses for various applications. It is possible to choose whether the pipe is embedded in a wall or not. In addition, no insulation can be selected, if used for example for CCA ( concrete core activation).</p>
+<p>The model already includes heat-transfer by convection and by radiation. Instead of modeling these phenomena outside the pipe, an ambient temperature can be prescribed at the heat-port and the star of the pipe, so the loss to ambient will be calculated within the pipe model.</p>
+<p>For each discretisation of the pipe, there is a connector to the corresponding element of the discretized pipe wall. Each element of the discretised pipe wall is connected to a corresponding element of the discretized insulation wall. The heat-ports and stars of all nodes are then collected to form two single ports, which can be connected to an ambient temperature.</p>
 <h4><span style=\"color: #008000\">Example Results</span></h4>
-<p><a href=\"HVAC.Examples.Pipes.DPEAgg_ambientLoss\">HVAC.Examples.Pipes.DPEAgg_ambientLoss</a></p>
+<p><a href=\"AixLib.Fluid.FixedResistances.Examples.DPEAgg_ambientLoss\">AixLib.Fluid.FixedResistances.Examples.DPEAgg_ambientLoss</a></p>
 </html>",
         revisions="<html>
 <ul>

@@ -42,11 +42,11 @@ model DPEAgg_ambientLoss
     parameterPipe=DataBase.Pipes.Copper.Copper_6x1(),
     parameterIso=DataBase.Pipes.Isolation.Iso100pc(),
     diameter=dynamicPipeEBCAggregated_Ambient_Loss_UC.parameterPipe.d_i,
-    use_HeatTransferConvective=false,
     nNodes=5,
     Heat_Loss_To_Ambient=true,
-    isEmbedded=true,
-    withInsulation=false)
+    isEmbedded=false,
+    withInsulation=true,
+    use_HeatTransferConvective=true)
     annotation (Placement(transformation(extent={{-14,-10},{6,10}})));
 equation
   connect(ramp.y, Source.T_in) annotation (Line(
