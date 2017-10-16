@@ -3,16 +3,16 @@ model ModularExpansionValveController
   "Model of an internal controller for modular expansion valves"
   extends BaseClasses.PartialModularController;
 
-  Modelica.Blocks.Sources.Sine valveOpening(
-    amplitude=0.45,
-    freqHz=1,
-    offset=0.5)
-    "Input signal to prediscribe expansion valve's opening"
-    annotation (Placement(transformation(extent={{0,60},{20,80}})));
-
-
 equation
-  opeSet = fill(valveOpening.y,nVal);
+  // Connect input signals - check if manual input is used
+  //
+  if useExt == true then
+    connect(opeSet, dataBus.extSetSig);
+  else
+    connect(internalController.u_m, dataBus.actConVar);
+    connect(internalController.u_s, dataBus.intSetSig);
+    connect(opeSet, internalController.y);
+  end if;
 
   annotation (Icon(graphics={
         Polygon(

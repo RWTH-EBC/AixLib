@@ -26,10 +26,10 @@ partial model PartialModularPort_b
   //
   parameter Modelica.SIunits.PressureDifference dp_start = 1e5
     "Guess value of pressure difference for subcomponents"
-    annotation(Dialog(tab = "Advanced",group="Initialisation"));
+    annotation(Dialog(tab = "Advanced",group="Initialisation medium"));
   parameter Medium.MassFlowRate m_flow_start = 0.5*m_flow_nominal
     "Guess value of m_flow = port_a.m_flow"
-    annotation(Dialog(tab = "Advanced",group="Initialisation"));
+    annotation(Dialog(tab = "Advanced",group="Initialisation medium"));
   parameter Modelica.SIunits.PressureDifference dp_nominal = 7.5e5
     "Pressure drop at nominal conditions"
     annotation(Dialog(tab = "Advanced",group="Numeric limitations"));

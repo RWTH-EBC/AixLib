@@ -10,36 +10,54 @@ expandable connector ModularHeatPumpControlBus
 
   // Definition of parameters describing controlling system in general
   //
-  parameter Boolean extCon = false
-    "= true, if external signal is used"
+  parameter Boolean extConCom = false
+    "= true, if external signal is used for compressors"
+    annotation(Dialog(tab="General",group="Controller"));
+  parameter Boolean extConVal = false
+    "= true, if external signal is used for expansion valves"
     annotation(Dialog(tab="General",group="Controller"));
   parameter Choices.heatPumpMode mode=Choices.heatPumpMode.heatPump
     "Choose between heat pump or chiller mode"
     annotation (Dialog(tab="General", group="Controller"));
 
-  // Definition of inputs for expansion valves (signals flowing into the model)
+  // Definition of variables describing expansion valves
   //
-  Boolean active[nComp]
-    "= true, if component is active"
-    annotation(Dialog(tab="Input - Valve",group="General"));
-
   parameter Choices.ControlVariableValve controlVariableValve=
     Choices.ControlVariableValve.TSupHea
     "Choose between different control variables for expansion valve"
-    annotation (Dialog(tab="Input - Valve", group="Control variable"));
+    annotation (Dialog(tab="Expansion Valves", group="Control variable"));
   Real actConVar[nComp]
-    "Array of measured values of controlled variables"
-    annotation(Dialog(tab="Input - Valve",group="Control variable"));
+    "Array of measured values of expansion valves' controlled variables"
+    annotation(Dialog(tab="Expansion Valves",group="Control variable"));
 
+  Real intSetSig[nComp]
+    "Array of expansion valves' set signals given internally"
+    annotation(Dialog(tab="Expansion Valves",group="Set signals"));
   Real extSetSig[nComp]
-    "Array of set signals given externally"
-    annotation(Dialog(tab="Input - Valve",group="Set signals"));
-
-  // Definition of outputs for expansion valves (signals flowing out of the model)
-  //
+    "Array of expansion valves' set signals given externally"
+    annotation(Dialog(tab="Expansion Valves",group="Set signals"));
   Real actSetSig[nComp]
-    "Array of actual set signals"
-    annotation(Dialog(tab="Output - Valve",group="Set signals"));
+    "Array of expansion valves' actual set signals"
+    annotation(Dialog(tab="Expansion Valves",group="Set signals"));
+
+  Modelica.SIunits.AbsolutePressure senPre[nComp]
+    "Array of measured pressures at expansion valves' outlets"
+    annotation(Dialog(tab="Expansion Valves",group="Measurements"));
+  Modelica.SIunits.Temperature senTem[nComp]
+    "Array of measured temperatures at expansion valves' outlets"
+    annotation(Dialog(tab="Expansion Valves",group="Measurements"));
+  Modelica.SIunits.MassFlowRate senMasFlo[nComp]
+    "Array of measured mass flows at expansion valves' outlets"
+    annotation(Dialog(tab="Expansion Valves",group="Measurements"));
+  Real senPha[nComp](unit="1")
+    "Array of measured phases at expansion valves' outlets"
+    annotation(Dialog(tab="Expansion Valves",group="Measurements"));
+
+  // Definition of variables describing compressors
+  //
+
+  // Definition of variables describing measurements
+  //
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false),
         graphics={

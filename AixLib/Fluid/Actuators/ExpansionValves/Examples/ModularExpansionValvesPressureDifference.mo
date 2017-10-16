@@ -32,7 +32,8 @@ model ModularExpansionValvesPressureDifference
     redeclare Controls.HeatPump.ModularHeatPumps.ModularExpansionValveController
       expansionValveController,
     redeclare model FlowCoefficient =
-      Utilities.FlowCoefficient.R134a.R134a_EEV_15)
+      Utilities.FlowCoefficient.R134a.R134a_EEV_15,
+    useExt=false)
     annotation (Placement(transformation(
         extent={{-18,18},{18,-18}},
         rotation=-90,
@@ -64,6 +65,30 @@ model ModularExpansionValvesPressureDifference
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={-40,-70})));
+  Modelica.Blocks.Routing.Replicator replicatorValveOpening(nout=nVal)
+    "Replicating the valves' opening signal"
+    annotation (Placement(transformation(extent={{40,40},{20,60}})));
+  Controls.Interfaces.ModularHeatPumpControlBus modularHeatPumpControlBus(nComp
+      =nVal) "Data bus used to enable communication with dummy signals"
+    annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={0,0})));
+  Modelica.Blocks.Sources.Sine valveOpening(
+    freqHz=1,
+    amplitude=0.45,
+    offset=0.5)
+    "Input signal to prediscribe expansion valve's opening"
+    annotation (Placement(transformation(extent={{80,16},{60,36}})));
+  Modelica.Blocks.Routing.Replicator replicatorInternal(nout=nVal)
+    "Replicating the internal set signal"
+    annotation (Placement(transformation(extent={{40,-10},{20,10}})));
+  Modelica.Blocks.Routing.Replicator replicatorActual(nout=nVal)
+    "Replicating the actual value of the controlled variables"
+    annotation (Placement(transformation(extent={{40,-60},{20,-40}})));
+  Modelica.Blocks.Sources.Ramp rampActual(height=0.5, offset=0.3)
+    "Ramp to fake actual value of the controlled variables"
+    annotation (Placement(transformation(extent={{80,-60},{60,-40}})));
 equation
   connect(Source.ports[1], modularValves.port_a)
     annotation (Line(points={{-40,60},{-40,18}}, color={0,127,255}));
@@ -72,4 +97,26 @@ equation
   connect(portsAThroughPortB.port_b, Sink.ports[1])
     annotation (Line(points={{-40,-50},{-40,-60}}, color={0,127,255}));
 
+  connect(modularValves.dataBus, modularHeatPumpControlBus) annotation (Line(
+      points={{-22,0},{0,0}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(replicatorValveOpening.y, modularHeatPumpControlBus.extSetSig)
+    annotation (Line(points={{19,50},{10,50},{10,0.05},{-0.05,0.05}}, color={0,
+          0,127}));
+  connect(valveOpening.y, replicatorValveOpening.u) annotation (Line(points={{
+          59,26},{50,26},{50,50},{42,50}}, color={0,0,127}));
+  connect(valveOpening.y, replicatorInternal.u)
+    annotation (Line(points={{59,26},{50,26},{50,0},{42,0}}, color={0,0,127}));
+  connect(replicatorInternal.y, modularHeatPumpControlBus.intSetSig)
+    annotation (Line(points={{19,0},{-0.05,0},{-0.05,0.05}}, color={0,0,127}));
+  connect(replicatorActual.y, modularHeatPumpControlBus.actSetSig) annotation (
+      Line(points={{19,-50},{10,-50},{10,0.05},{-0.05,0.05}}, color={0,0,127}));
+  connect(rampActual.y, replicatorActual.u)
+    annotation (Line(points={{59,-50},{50,-50},{42,-50}}, color={0,0,127}));
+  annotation (Diagram(graphics={Text(
+          extent={{12,86},{88,74}},
+          lineColor={28,108,200},
+          textString="Provide dummy signals"), Rectangle(extent={{10,90},{90,70}},
+            lineColor={28,108,200})}));
 end ModularExpansionValvesPressureDifference;
