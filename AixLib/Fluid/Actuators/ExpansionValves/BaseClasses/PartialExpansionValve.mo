@@ -20,7 +20,8 @@ partial model PartialExpansionValve
       enable = useInpFil,
       group="Transient behaviour"));
 
-  parameter Utilities.Choices.CalcProc calcProc=Utilities.Choices.CalcProc.nominal
+  parameter Utilities.Choices.CalcProc calcProc=
+    Utilities.Choices.CalcProc.nominal
     "Chose predefined calculation method for flow coefficient"
     annotation (Dialog(tab="Flow Coefficient"));
   parameter Modelica.SIunits.MassFlowRate mFlowNom = m_flow_nominal

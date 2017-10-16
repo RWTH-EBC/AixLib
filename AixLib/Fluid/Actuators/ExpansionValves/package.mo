@@ -7,6 +7,11 @@ package ExpansionValves "Package that contains models of expansion valves"
 
 
 
+
+
+
+
+
   annotation (Icon(graphics={
         Polygon(
           points={{0,18},{-40,48},{-40,-12},{0,18}},

@@ -1,6 +1,8 @@
 within AixLib.Fluid.Actuators.ExpansionValves;
-package SimpleExpansionValves
-  "Package that contains simple expansion valves"
+package SimpleExpansionValves "Package that contains simple expansion valves"
   extends Modelica.Icons.VariantsPackage;
+
+
+
 
 end SimpleExpansionValves;
