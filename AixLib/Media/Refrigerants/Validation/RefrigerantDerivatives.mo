@@ -327,7 +327,8 @@ model RefrigerantDerivatives
       "Density used for calculations";
 
     MediumExt.ThermodynamicState state = MediumExt.setState_dTX(
-      d=d, T=273.15 + convT*time^3)
+      d=d, T=min(273.15 + convT*time^3,
+      MediumExt.fluidConstants[1].criticalTemperature-3))
       "Thermodynamic state calculated by d and T for further calculations";
     MediumExt.ThermodynamicState sat_l=
       MediumExt.setBubbleState(MediumExt.setSat_p(state.p))
@@ -440,8 +441,10 @@ model RefrigerantDerivatives
 equation
   // Calculation of states
   //
-  states.dT_Int = MediumInt.setState_dTX(d=d,T=T);
-  states.pT_Int = MediumInt.setState_pTX(p=p,T=T);
+  states.dT_Int = MediumInt.setState_dTX(d=d,T=
+    min(T,MediumInt.fluidConstants[1].criticalTemperature-3));
+  states.pT_Int = MediumInt.setState_pTX(p=p,T=
+    min(T,MediumExt.fluidConstants[1].criticalTemperature-3));
   states.ph_Int = MediumInt.setState_phX(p=p,h=h);
   states.ps_Int = MediumInt.setState_psX(p=p,s=s);
   states.dT_Ext = MediumExt.setState_dTX(d=d,T=T);
@@ -558,9 +561,11 @@ algorithm
   // Calculate derivatives at bubble and dew line
   //
   satDer.dpdT_Int := MediumInt.saturationPressure_derT(min(
-    MediumInt.temperature(states.ph_Int),373.15));
+    MediumInt.temperature(states.ph_Int),
+    MediumInt.fluidConstants[1].criticalTemperature-3));
   satDer.dpdT_Ext := MediumExt.saturationPressure_derT(min(
-    MediumExt.temperature(states.ph_Ext),373.15));
+    MediumExt.temperature(states.ph_Ext),
+    MediumExt.fluidConstants[1].criticalTemperature-3));
   satDer.dTdp_Int := MediumInt.saturationTemperature_derp(
     MediumInt.pressure(states.dT_Int));
   satDer.dTdp_Ext := MediumExt.saturationTemperature_derp(
