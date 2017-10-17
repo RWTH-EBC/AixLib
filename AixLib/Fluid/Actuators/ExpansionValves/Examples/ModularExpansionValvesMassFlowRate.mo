@@ -1,7 +1,7 @@
 within AixLib.Fluid.Actuators.ExpansionValves.Examples;
-model ModularExpansionValvesPressureDifference
-  "Simple model to check modular expansion valves models with fixed inlet 
-   and outlet states"
+model ModularExpansionValvesMassFlowRate
+  "Simple model to check modular expansion valves models with fixed mass 
+  flow rate"
   extends Modelica.Icons.Example;
 
   // Definition of medium and parameters
@@ -25,16 +25,14 @@ model ModularExpansionValvesPressureDifference
 
   // Definition of models
   //
-  Sources.FixedBoundary Source(
+  Sources.MassFlowSource_T Source(
     redeclare package Medium = Medium,
-    use_p=true,
-    use_T=true,
+    T=TInl,
     nPorts=1,
-    p=pInl,
-    T=TInl)
-    "Source of constant pressure and temperature"
+    m_flow=0.5)
+    "Source of constant mass flow and temperature"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=-90,
+        rotation=270,
         origin={-40,70})));
   replaceable ModularExpansionValves.ModularExpansionValves modularValves(
     redeclare package Medium = Medium,
@@ -50,7 +48,10 @@ model ModularExpansionValvesPressureDifference
     useExt=false,
     useInpFil={true,true,true},
     AVal={2e-6,1.5e-6,1e-6},
-    risTim={0.25,0.25,0.5})
+    risTim={0.25,0.25,0.5},
+    controllerType={Modelica.Blocks.Types.SimpleController.P,
+                    Modelica.Blocks.Types.SimpleController.P,
+                    Modelica.Blocks.Types.SimpleController.P})
     annotation (Placement(transformation(
         extent={{-18,18},{18,-18}},
         rotation=-90,
@@ -102,7 +103,7 @@ model ModularExpansionValvesPressureDifference
 
 equation
   connect(Source.ports[1], modularValves.port_a)
-    annotation(Line(points={{-40,60},{-40,18}}, color={0,127,255}));
+    annotation (Line(points={{-40,60},{-40,18}}, color={0,127,255}));
   connect(modularValves.ports_b, portsAThroughPortB.ports_a)
     annotation(Line(points={{-40,-18},{-40,-30}}, color={0,127,255}));
   connect(portsAThroughPortB.port_b, Sink.ports[1])
@@ -133,4 +134,4 @@ equation
           lineColor={28,108,200},
           textString="Provide dummy signals"), Rectangle(extent={{10,90},{90,70}},
             lineColor={28,108,200})}));
-end ModularExpansionValvesPressureDifference;
+end ModularExpansionValvesMassFlowRate;

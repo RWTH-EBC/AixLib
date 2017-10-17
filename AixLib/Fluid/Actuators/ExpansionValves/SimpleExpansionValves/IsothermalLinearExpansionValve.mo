@@ -1,8 +1,7 @@
 within AixLib.Fluid.Actuators.ExpansionValves.SimpleExpansionValves;
 model IsothermalLinearExpansionValve
   "Model of a simple isothermal linear expansion valve"
-  extends BaseClasses.PartialIsothermalExpansionValve(
-     final calcProc=Utilities.Choices.CalcProc.linear);
+  extends BaseClasses.PartialIsothermalExpansionValve(final calcProc=Utilities.Choices.CalcProc.linear);
 
 equation
   // Calculation of mass flow and pressure drop

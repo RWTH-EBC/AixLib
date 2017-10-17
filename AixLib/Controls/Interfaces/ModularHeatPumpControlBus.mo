@@ -26,30 +26,30 @@ expandable connector ModularHeatPumpControlBus
     Choices.ControlVariableValve.TSupHea
     "Choose between different control variables for expansion valve"
     annotation (Dialog(tab="Expansion Valves", group="Control variable"));
-  Real actConVar[nComp]
+  Real actConVarValve[nComp]
     "Array of measured values of expansion valves' controlled variables"
     annotation(Dialog(tab="Expansion Valves",group="Control variable"));
 
-  Real intSetSig[nComp]
+  Real intSetSigValve[nComp]
     "Array of expansion valves' set signals given internally"
     annotation(Dialog(tab="Expansion Valves",group="Set signals"));
-  Real extSetSig[nComp]
+  Real extSetSigValve[nComp]
     "Array of expansion valves' set signals given externally"
     annotation(Dialog(tab="Expansion Valves",group="Set signals"));
-  Real actSetSig[nComp]
+  Real actSetSigValve[nComp]
     "Array of expansion valves' actual set signals"
     annotation(Dialog(tab="Expansion Valves",group="Set signals"));
 
-  Modelica.SIunits.AbsolutePressure senPre[nComp]
+  Modelica.SIunits.AbsolutePressure senPreValve[nComp]
     "Array of measured pressures at expansion valves' outlets"
     annotation(Dialog(tab="Expansion Valves",group="Measurements"));
-  Modelica.SIunits.Temperature senTem[nComp]
+  Modelica.SIunits.Temperature senTemValve[nComp]
     "Array of measured temperatures at expansion valves' outlets"
     annotation(Dialog(tab="Expansion Valves",group="Measurements"));
-  Modelica.SIunits.MassFlowRate senMasFlo[nComp]
+  Modelica.SIunits.MassFlowRate senMasFloValve[nComp]
     "Array of measured mass flows at expansion valves' outlets"
     annotation(Dialog(tab="Expansion Valves",group="Measurements"));
-  Real senPha[nComp](unit="1")
+  Real senPhaValve[nComp](unit="1")
     "Array of measured phases at expansion valves' outlets"
     annotation(Dialog(tab="Expansion Valves",group="Measurements"));
 

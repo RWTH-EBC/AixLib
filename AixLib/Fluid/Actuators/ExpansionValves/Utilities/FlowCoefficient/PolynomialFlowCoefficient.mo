@@ -23,12 +23,12 @@ model PolynomialFlowCoefficient
     "Clearance diameter dCle = d_inner - d_needle"
     annotation(Dialog(group="Further geometry data",
                enable=if (polyMod == Choices.PolynomialModels.ShanweiEtAl2005)
-               then true else false));
+           then true else false));
   parameter Real pDifRat = 0.84
     "Pressure differential ratio factor depending on valve moddeld"
     annotation(Dialog(group="Further geometry data",
-               enable=if (polyMod == Choices.PolynomialModels.Li2013)
-               then true else false));
+               enable=if (polyMod == Choices.PolynomialModels.Li2013) then true
+           else false));
 
   // Definition of coefficients
   //
