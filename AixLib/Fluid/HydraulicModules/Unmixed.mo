@@ -185,7 +185,7 @@ equation
           fillPattern=FillPattern.Solid,
           pattern=LinePattern.Dash),
         Text(
-          extent={{-60,-80},{60,-120}},
+          extent={{-60,-80},{60,-100}},
           lineColor={95,95,95},
           lineThickness=0.5,
           fillColor={255,255,255},

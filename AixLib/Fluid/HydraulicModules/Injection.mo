@@ -96,7 +96,8 @@ public
     Kv=10.0,
     m_flow_nominal=8*996/3600,
     dpFixed_nominal={8000,8000},
-    redeclare package Medium = Medium) annotation (Dialog(enable=true), Placement(transformation(
+    redeclare package Medium = Medium,
+    tau=0.2)                           annotation (Dialog(enable=true), Placement(transformation(
         extent={{8,8},{-8,-8}},
         rotation=0,
         origin={-24,-60})));

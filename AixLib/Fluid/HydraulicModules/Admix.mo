@@ -26,7 +26,8 @@ model Admix "Admix circuit with three way valve and pump"
     rhoStd=Medium.density_pTX(
         system.p_start,
         Tinit,
-        Medium.X_default))             annotation (Dialog(enable=true),
+        Medium.X_default),
+    tau=0.2)                           annotation (Dialog(enable=true),
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
@@ -306,7 +307,7 @@ equation
           fillPattern=FillPattern.Solid,
           pattern=LinePattern.Dash),
         Text(
-          extent={{-60,-80},{60,-120}},
+          extent={{-60,-80},{56,-102}},
           lineColor={95,95,95},
           lineThickness=0.5,
           fillColor={255,255,255},
