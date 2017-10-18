@@ -101,5 +101,28 @@ equation
       lineColor={0,0,0},
       extent={{-96,95},{97,-97}},
            textString="PV")}),                                   Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(info="<html>
+<h4><span style=\"color: #008000\">Overview</span></h4>
+<p>PV model is based on manufactory data and performance factor including the
+NOC</p>
+<p><br/>
+<b><span style=\"color: #008000;\">Assumptions</span></b></p>
+<p>PV model is based on manufactory data and performance factor.</p>
+<h4><span style=\"color: #008000\">References</span></h4>
+<p>PV system data (DataBase Records) can be found: </p>
+<ul>
+<li><a href=\"http://www.eks-solar.de/pdfs/aleo_s24.pdf\">eks-solar</a></li>
+<li><a href=\"http://soehn-net.de/fileadmin/user_upload/pdf/module/canadian_solar/CS6P220-250P_engl..pdf\">soehn-net</a></li>
+<li><a href=\"http://www.abc-wagner.de/uploads/media/Datenblatt_Kid_SME-1_Serie_DE.pdf\">abc-wagner</a></li>
+<li><a href=\"http://www.renugen.co.uk/content/Solar_Panel_Brochures_part_4/Solar&amp;percnt;20Panel&amp;percnt;20Brochures&amp;percnt;20part&amp;percnt;204/symphony_brochure/symphony_energy_se-m225.pdf\">Renugen</a></li>
+<li><a href=\"http://sunelec.com/datasheet-library/download/SMA-SunnyBoy-3000_3800_4000.pdf\">sunelec</a></li>
+</ul>
+<p><br/>
+Source of literature for the calculation of the pv cell efficiency: </p>
+<p><q>Thermal modelling to analyze the effect of cell temperature on PV
+modules energy efficiency</q> by Romary, Florian et al.</p>
+<h4><span style=\"color: #008000\">Example Results</span></h4>
+<p><a href=\"AixLib.Fluid.Solar.Electric.Examples.ExamplePV_TMY3\">AixLib.Fluid.Solar.Electric.Examples.ExamplePV_TMY3</a></p>
+</html>"));
 end PVSystemTMY3;

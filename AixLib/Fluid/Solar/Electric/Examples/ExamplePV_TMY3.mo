@@ -34,7 +34,7 @@ equation
     __Dymola_experimentSetupOutput,
     Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
-<p>Simulation to test the <a href=\"HVAC.Components.Solar_UC.Electric.PVsystem\">PVsystem</a> model.</p>
+<p>Simulation to test the <a href=\"AixLib.Fluid.Solar.Electric.PVSystemTMY3\">PVsystemTMY3</a> model.</p>
 </html>",
       revisions="<html>
 <p><ul>

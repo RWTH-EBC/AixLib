@@ -87,7 +87,7 @@ Source of literature for the calculation of the pv cell efficiency: </p>
 <p><q>Thermal modelling to analyze the effect of cell temperature on PV
 modules energy efficiency</q> by Romary, Florian et al.</p>
 <h4><span style=\"color: #008000\">Example Results</span></h4>
-<p><a href=\"HVAC.Examples.Solar_UC.Electric.Testing_PV\">AixLib.Fluid.Solar.Electric.Examples.Testing_PV</a></p>
+<p><a href=\"AixLib.Fluid.Solar.Electric.Examples.ExamplePV\">AixLib.Fluid.Solar.Electric.Examples.ExamplePV</a></p>
 </html>",revisions="<html>
 <ul>
 <li><i>October 11, 2016 </i> by Tobias Blacha:<br/>
