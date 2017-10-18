@@ -54,10 +54,10 @@ model TwoPhaseTank
 
 equation
   connect(Source.ports[1], twoPhaseTank.port_a)
-    annotation (Line(points={{0,40},{0,20},{0,10},{0,10}},
+    annotation (Line(points={{0,40},{0,20},{0,10}},
                                              color={0,127,255}));
   connect(Sink.ports[1], twoPhaseTank.port_b)
-    annotation (Line(points={{0,-40},{0,-20},{0,-10},{0,-10}},
+    annotation (Line(points={{0,-40},{0,-20},{0,-10}},
                                                color={0,127,255}));
 
 end TwoPhaseTank;

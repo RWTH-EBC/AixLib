@@ -10,24 +10,24 @@ model TwoPhaseTank
 
   // Parameters describing the geometry of the tank
   //
-  parameter Modelica.SIunits.Volume VTanInl = 2e-3
-    "Inler total volume of the tank"
+  parameter Modelica.SIunits.Volume VTanInn = 2e-3
+    "Inner total volume of the tank"
     annotation(Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Area ATanInl = VTanInl/hTanInl
-    "Inler cross-sectional area of the tank"
+  parameter Modelica.SIunits.Area ATanInn = VTanInn/hTanInn
+    "Inner cross-sectional area of the tank"
     annotation(Dialog(group="Geometry",
                enable=false));
-  parameter Modelica.SIunits.Area ASheInl=
-    Modelica.Constants.pi*dTanInl*hTanInl
-    "Inler area of the tank's sheat"
+  parameter Modelica.SIunits.Area ASheInn=
+    Modelica.Constants.pi*dTanInn*hTanInn
+    "Inner area of the tank's sheat"
     annotation(Dialog(group="Geometry",
                enable=false));
-  parameter Modelica.SIunits.Length hTanInl = 0.5
-    "Inler height of the tank"
+  parameter Modelica.SIunits.Length hTanInn = 0.5
+    "Inner height of the tank"
     annotation(Dialog(group = "Geometry"));
-  parameter Modelica.SIunits.Diameter dTanInl=
-    sqrt(4*ATanInl/Modelica.Constants.pi)
-    "Inler diameter of the tank"
+  parameter Modelica.SIunits.Diameter dTanInn=
+    sqrt(4*ATanInn/Modelica.Constants.pi)
+    "Inner diameter of the tank"
     annotation(Dialog(group="Geometry",
                enable=false));
 
@@ -55,11 +55,11 @@ model TwoPhaseTank
     "Outer area of the tank's sheat"
     annotation(Dialog(tab="Heat losses",group="Geometry",
                enable=false));
-  parameter Modelica.SIunits.Length hTanOut = hTanInl+2*sIns
+  parameter Modelica.SIunits.Length hTanOut = hTanInn+2*sIns
     "Outer height of the tank"
     annotation(Dialog(tab="Heat losses",group="Geometry",
                enable=false));
-  parameter Modelica.SIunits.Diameter dTanOut = dTanInl+2*sIns
+  parameter Modelica.SIunits.Diameter dTanOut = dTanInn+2*sIns
     "Outer diameter of the tank"
     annotation(Dialog(tab="Heat losses",group="Geometry",
                enable=false));
@@ -68,8 +68,8 @@ model TwoPhaseTank
     "Thermal conductivity of the insulation"
     annotation(Dialog(tab="Heat losses",group="Properties",
                enable=useHeatLoss));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpInl = 100
-    "Inler mean heat transfer coefficient"
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpInn = 100
+    "Inner mean heat transfer coefficient"
     annotation(Dialog(tab="Heat losses",group="Properties",
                enable=useHeatLoss));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alpOut = 10
@@ -104,15 +104,25 @@ model TwoPhaseTank
 
   // Definitions of parameters describing diagnostics
   //
-  parameter Boolean show_T = true
+  parameter Boolean show_T = false
     "= true, if temperatures at port_a and port_b are computed"
     annotation(Dialog(tab="Advanced",group="Diagnostics"));
-  parameter Boolean show_V_flow = true
+  parameter Boolean show_V_flow = false
     "= true, if volume flow rate at port_a and port_b are computed"
     annotation(Dialog(tab="Advanced",group="Diagnostics"));
 
   // Definition of variables
   //
+  Modelica.SIunits.Mass mXi[Medium.nXi]
+    "Masses of independent components in the fluid";
+  Modelica.SIunits.Mass mC[Medium.nC]
+    "Masses of trace substances in the fluid";
+
+  Modelica.SIunits.AbsolutePressure pTot
+    "Total pressure of the tank";
+
+
+
   Medium.ThermodynamicState staTan
     "Thermodynamic state of the medium in the tank";
   Medium.SaturationProperties satTan
@@ -126,15 +136,13 @@ model TwoPhaseTank
     "Volume of the vapour phase";
   Modelica.SIunits.Mass mTan
     "Mass of the medium in the tank";
-  Modelica.SIunits.Mass mLiq
-    "Mass of the liquid phase";
-  Modelica.SIunits.Mass mVap
-    "Mass of the vapour phase";
+ // Modelica.SIunits.Mass mLiq
+ //   "Mass of the liquid phase";
+ // Modelica.SIunits.Mass mVap
+ //   "Mass of the vapour phase";
 
-  Modelica.SIunits.AbsolutePressure pTot(start=20e5)
-    "Total pressure of the tank";
-  Modelica.SIunits.Density dTan
-    "Density of the medium in the tank";
+ // Modelica.SIunits.Density dTan
+ //   "Density of the medium in the tank";
   Modelica.SIunits.Density dLiq
     "Density of the liquid phase";
   Modelica.SIunits.Density dVap
@@ -142,10 +150,10 @@ model TwoPhaseTank
 
   Modelica.SIunits.SpecificEnthalpy hTan
     "Specific enthalpy of the medium in the tank";
-  Modelica.SIunits.SpecificEnthalpy hInl
-    "Specific enthalpy at tank's inlet";
-  Modelica.SIunits.SpecificEnthalpy hOut
-    "Specific enthalpy at tank's outlet";
+ // Modelica.SIunits.SpecificEnthalpy hInn
+ //   "Specific enthalpy at tank's Innet";
+ // Modelica.SIunits.SpecificEnthalpy hOut
+ //   "Specific enthalpy at tank's outlet";
   Modelica.SIunits.SpecificEnthalpy hLiq
     "Specific enthalpy of the liquid phase";
   Modelica.SIunits.SpecificEnthalpy hVap
@@ -165,12 +173,12 @@ model TwoPhaseTank
      h_outflow(start = Medium.h_default))
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{10,-110},{-10,-90}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort if useHeatLoss
-    "Heat port for heat losses if losses are computed"
-    annotation(Placement(transformation(extent={{72,-10},{92,10}}),
-               iconTransformation(extent={{-10,-10},{10,10}},
-        rotation=0,
-        origin={82,0})));
+  //Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort if useHeatLoss
+  //  "Heat port for heat losses if losses are computed"
+  //  annotation(Placement(transformation(extent={{72,-10},{92,10}}),
+  //             iconTransformation(extent={{-10,-10},{10,10}},
+  //      rotation=0,
+  //      origin={82,0})));
 
   // Calculating diagnostic values
   //
@@ -189,7 +197,7 @@ model TwoPhaseTank
                   m_flow_small) if show_V_flow
     "Volume flow rate at port_a (positive when flow from port_a to port_b)";
   Modelica.SIunits.VolumeFlowRate port_b_V_flow=
-      port_b.m_flow/Modelica.Fluid.Utilities.regStep(port_a.m_flow,
+      port_b.m_flow/Modelica.Fluid.Utilities.regStep(port_b.m_flow,
                   Medium.density(
                     Medium.setState_phX(
                       p = port_b.p,
@@ -232,33 +240,41 @@ model TwoPhaseTank
                   m_flow_small) if show_T
     "Temperature close to port_b, if show_T = true";
 
+initial equation
+  der(mTan) = 0;
+
 equation
   // Calculation of basic properties assuming thermodynamic equilibrium
   //
-  VTanInl = VLiq + VVap "Geometric condition";
+  VTanInn = VLiq + VVap "Geometric condition";
 
-  mTan = dTan*VTanInl "Basic relationship";
-  mTan = mLiq + mVap "Converstion of mass";
-  mLiq = VLiq*dLiq "Mass of liquid phase";
-  mVap = VVap*dVap "Mass of vapour phase";
+  //mTan = dTan*VTanInn "Basic relationship";
+  mTan = VLiq*dLiq + VVap*dVap "Converstion of mass";
+  mTan = VTanInn*Medium.density(staTan);
+  //mLiq = VLiq*dLiq "Mass of liquid phase";
+  //mVap = VVap*dVap "Mass of vapour phase";
 
-  levTan = VLiq/VTanInl "Relative level of the tank";
+  levTan = VLiq/VTanInn "Relative level of the tank";
 
   // Calculation of boundaries and add equations for flow reversal
   //
   pTot = port_a.p "Assuming thermodynamic equilibrium";
   pTot = port_b.p "Assuming thermodynamic equilibrium";
 
-  port_a.h_outflow = hInl "Usage of auxilarry variable";
-  hInl = semiLinear(port_a.m_flow,inStream(port_a.h_outflow),hLiq)
-    "Check flow direction and set specific enthalpy at tank's inlet";
-  /*If flow direction identical to design direction, the inlet specific
-    enthalpy is identical to the specific enthalpy at the inlet port. Otherwise,
+  port_a.h_outflow = hVap;
+  port_b.h_outflow = hLiq;
+
+
+  //port_a.h_outflow = hInn "Usage of auxilarry variable";
+  //hInn = semiLinear(port_a.m_flow,inStream(port_a.h_outflow),hLiq)
+  //  "Check flow direction and set specific enthalpy at tank's Innet";
+  /*If flow direction identical to design direction, the Innet specific
+    enthalpy is identical to the specific enthalpy at the Innet port. Otherwise,
     liquid state is forced.
   */
-  port_b.h_outflow = hOut "Usage of auxilarry variable";
-  hOut = semiLinear(port_a.m_flow,hLiq,inStream(port_b.h_outflow))
-    "Check flow direction and set specific enthalpy aat tank's outlet";
+  //port_b.h_outflow = hOut "Usage of auxilarry variable";
+  //hOut = semiLinear(port_a.m_flow,hLiq,inStream(port_b.h_outflow))
+  //  "Check flow direction and set specific enthalpy aat tank's outlet";
   /*If flow direction identical to design direction, the outlet specific
     enthalpy is identical to the liquid phase specific enthalpy. Otherwise,
     the specific enthalpy is identical to the specific enthalpy at 
@@ -272,7 +288,7 @@ equation
   staTan = Medium.setState_ph(pTot,hTan)
     "Mean thermodynamic state of the medium";
 
-  dTan = Medium.density(staTan) "Density of the fluid";
+  //dTan = Medium.density(staTan) "Density of the fluid";
   dLiq = Medium.bubbleDensity(satTan) "Liquid density";
   dVap = Medium.dewDensity(satTan) "Vapour density";
   hLiq = Medium.bubbleEnthalpy(satTan) "Liquid enthalpy";
@@ -280,23 +296,30 @@ equation
 
   // Calculation of conversation equations
   //
-  port_a.m_flow + port_b.m_flow = VTanInl*(Medium.density_derh_p(staTan)*
-    der(hTan)+Medium.density_derp_h(staTan)*der(pTot))
-    "Mass balance";
+  der(mTan) = port_a.m_flow + port_b.m_flow;
+  der(mTan)*hTan + mTan*der(hTan) - VTanInn*der(pTot) =
+    port_a.m_flow + port_b.m_flow*(hLiq-hTan);
 
-  VTanInl*(dTan*der(hTan) - der(pTot)) =
-    port_a.m_flow*(hInl-hTan) + port_b.m_flow*(hOut-hTan)
-    "Energy balance";
+  //port_a.m_flow + port_b.m_flow = VTanInn*(Medium.density_derh_p(staTan)*
+  //  der(hTan)+Medium.density_derp_h(staTan)*der(pTot))
+  //  "Mass balance";
+  //VTanInn*(dTan*der(hTan) - der(pTot)) =
+  //  port_a.m_flow*(hInn-hTan) + port_b.m_flow*(hOut-hTan)
+  //  "Energy balance";
 
-  // Calculation of transported substances
+  // Calculation of conservation equations of transported substances
   //
-  port_a.Xi_outflow = if allowFlowReversal then
-    inStream(port_b.Xi_outflow) else Medium.X_default[1:Medium.nXi];
-  port_b.Xi_outflow = inStream(port_a.Xi_outflow);
+  der(mXi) = port_a.m_flow*actualStream(port_a.Xi_outflow) +
+    port_b.m_flow*actualStream(port_b.Xi_outflow);
+  der(mC) = port_a.m_flow*actualStream(port_a.C_outflow) +
+    port_b.m_flow*actualStream(port_b.C_outflow);
 
-  port_a.C_outflow = if allowFlowReversal then
-    inStream(port_b.C_outflow) else zeros(Medium.nC);
-  port_b.C_outflow = inStream(port_a.C_outflow);
+  //port_a.Xi_outflow = if allowFlowReversal then
+  //  inStream(port_b.Xi_outflow) else Medium.X_default[1:Medium.nXi];
+  //port_b.Xi_outflow = inStream(port_a.Xi_outflow);
+  //port_a.C_outflow = if allowFlowReversal then
+  //  inStream(port_b.C_outflow) else zeros(Medium.nC);
+  //port_b.C_outflow = inStream(port_a.C_outflow);
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
