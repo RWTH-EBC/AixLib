@@ -293,7 +293,7 @@ equation
           lineThickness=0.5,
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
-          textString="BCIC"),
+          textString="Injection"),
                           Rectangle(
           extent={{-80,80},{80,-80}},
           lineColor={175,175,175},
