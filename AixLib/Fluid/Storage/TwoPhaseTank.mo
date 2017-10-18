@@ -5,7 +5,8 @@ model TwoPhaseTank
   // Define medium
   //
   replaceable package Medium =
-      Modelica.Media.Interfaces.PartialTwoPhaseMedium "Medium in the component"
+      Modelica.Media.Interfaces.PartialTwoPhaseMedium
+      "Medium in the component"
       annotation (choicesAllMatching = true);
 
   // Parameters describing the geometry of the tank
@@ -15,11 +16,6 @@ model TwoPhaseTank
     annotation(Dialog(group = "Geometry"));
   parameter Modelica.SIunits.Area ATanInn = VTanInn/hTanInn
     "Inner cross-sectional area of the tank"
-    annotation(Dialog(group="Geometry",
-               enable=false));
-  parameter Modelica.SIunits.Area ASheInn=
-    Modelica.Constants.pi*dTanInn*hTanInn
-    "Inner area of the tank's sheat"
     annotation(Dialog(group="Geometry",
                enable=false));
   parameter Modelica.SIunits.Length hTanInn = 0.5
@@ -33,7 +29,7 @@ model TwoPhaseTank
 
   // Parameters describing the heat loss of the tank if considered
   //
-  parameter Boolean useHeatLoss = true
+  parameter Boolean useHeatLoss = false
     "= true, if heat losses are computed"
     annotation(Dialog(tab="Heat losses",group="General"));
 
@@ -41,28 +37,6 @@ model TwoPhaseTank
     "Thickness of insulation"
     annotation(Dialog(tab="Heat losses",group="Geometry",
                enable=useHeatLoss));
-  parameter Modelica.SIunits.Volume VTanOut = ATanOut*hTanOut
-    "Outer total volume of the tank"
-    annotation(Dialog(tab="Heat losses",group="Geometry",
-               enable=false));
-  parameter Modelica.SIunits.Area ATanOut=
-    Modelica.Constants.pi*dTanOut^2/4
-    "Outer cross-sectional area of the tank"
-    annotation(Dialog(tab="Heat losses",group="Geometry",
-               enable=false));
-  parameter Modelica.SIunits.Area ASheOut=
-    Modelica.Constants.pi*dTanOut*hTanOut
-    "Outer area of the tank's sheat"
-    annotation(Dialog(tab="Heat losses",group="Geometry",
-               enable=false));
-  parameter Modelica.SIunits.Length hTanOut = hTanInn+2*sIns
-    "Outer height of the tank"
-    annotation(Dialog(tab="Heat losses",group="Geometry",
-               enable=false));
-  parameter Modelica.SIunits.Diameter dTanOut = dTanInn+2*sIns
-    "Outer diameter of the tank"
-    annotation(Dialog(tab="Heat losses",group="Geometry",
-               enable=false));
 
   parameter Modelica.SIunits.ThermalConductivity lamIns = 0.04
     "Thermal conductivity of the insulation"
@@ -94,6 +68,20 @@ model TwoPhaseTank
   parameter Medium.MassFlowRate m_flow_start_b = 0.1
     "Guess value of port_b.m_flow"
     annotation(Dialog(tab="Advanced",group="Medium Initialisation"));
+
+  parameter Boolean steSta = true
+    "= true, if tank is initialised steady state"
+    annotation(Dialog(tab="Advanced",group="Tank Initialisation"));
+  parameter Modelica.SIunits.Volume VLiq0 = 0.2*VTanInn
+    "Volume of the liquid phase at initialisation"
+    annotation(Dialog(tab="Advanced",group="Tank Initialisation"));
+  parameter Modelica.SIunits.AbsolutePressure pTan0 = 10e5
+    "Mean pressure of the medium in the tank at initialisation"
+    annotation(Dialog(tab="Advanced",group="Tank Initialisation"));
+  parameter Modelica.SIunits.SpecificEnthalpy hTan0 = 300e3
+    "Mean specific enthalpy of the medium in the tank at initialisation"
+    annotation(Dialog(tab="Advanced",group="Tank Initialisation",
+               enable= not steSta));
 
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.1
     "Nominal mass flow rate"
@@ -191,6 +179,20 @@ model TwoPhaseTank
       "Quality of the tank's medium at outlet";
   end TankPropertiesDetailed;
 
+  record HeatLosses
+    "Record that contains properties of calculated heat losses"
+    Modelica.SIunits.ThermalConductance G
+      "Thermal conductance of the tank's sheat";
+    Modelica.SIunits.ThermalConductance GShe
+      "Thermal conductance of the tank's sheat";
+    Modelica.SIunits.ThermalConductance GTopBot
+      "Thermal conductance of the tank's top and bottom";
+    Modelica.SIunits.TemperatureDifference dTHeaLos
+      "Temperature difference between tank and ambient";
+    Modelica.SIunits.Power Q_flow_loss
+      "Heat losses to ambient";
+  end HeatLosses;
+
   // Definition of records that summarise variables computed in the model
   //
   TankProperties tankProperties(
@@ -212,17 +214,23 @@ model TwoPhaseTank
     levTan=levTan,
     quaTan=quaTan) if show_tankProperties
     "Record that summarises basic tank properties";
-
   TankPropertiesDetailed tankPropertiesDetailed(
-      mXi = mXi,
-      mC = mC,
-      dMTan = dMTan,
-      dUTan = dUTan,
-      ddhp = ddhp,
-      ddph = ddph,
-      quaInn = quaInn,
-      quaOut = quaOut) if show_tankPropertiesDetailed
+      mXi=mXi,
+      mC=mC,
+      dMTan=dMTan,
+      dUTan=dUTan,
+      ddhp=ddhp,
+      ddph=ddph,
+      quaInn=quaInn,
+      quaOut=quaOut) if show_tankPropertiesDetailed
     "Record that summarises detailed tank properties";
+  HeatLosses heatLosses(
+    G=G,
+    GShe=GShe,
+    GTopBot=GTopBot,
+    dTHeaLos=heatPort.T-TTan,
+    Q_flow_loss=heaFloSen.Q_flow) if (show_heatLosses and useHeatLoss)
+    "Record that contains properties of calculated heat losses";
 
   // Definition of connectors and models
   //
@@ -240,10 +248,10 @@ model TwoPhaseTank
     annotation (Placement(transformation(extent={{10,-110},{-10,-90}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort if useHeatLoss
     "Heat port for heat losses if losses are computed"
-    annotation(Placement(transformation(extent={{90,-10},{110,10}}),
+    annotation(Placement(transformation(extent={{72,-10},{92,10}}),
                iconTransformation(extent={{-10,-10},{10,10}},
-        rotation=0,
-        origin={100,0})));
+               rotation=0,
+               origin={82,0})));
 
   // Calculating diagnostic values
   //
@@ -307,7 +315,21 @@ model TwoPhaseTank
 
 
 protected
-  parameter Modelica.SIunits.ThermalConductance G = 0;
+  parameter Modelica.SIunits.ThermalConductance G = GShe + 2*GTopBot
+    "Thermal conductance of the tank's sheat"
+    annotation(Dialog(tab="Heat losses",group="Properties",
+               enable=false));
+  parameter Modelica.SIunits.ThermalConductance GShe = 2*Modelica.Constants.pi*
+    hTanInn / (1/(alpInn*(dTanInn/2)) + 1/lamIns*log(1+sIns/(dTanInn/2)) +
+    1/(alpOut*(dTanInn/2+sIns)))
+    "Thermal conductance of the tank's sheat"
+    annotation(Dialog(tab="Heat losses",group="Properties",
+               enable=false));
+  parameter Modelica.SIunits.ThermalConductance GTopBot=
+    ATanInn / (1/alpInn + sIns/lamIns + 1/alpOut)
+    "Thermal conductance of the tank's top and bottom"
+    annotation(Dialog(tab="Heat losses",group="Properties",
+               enable=false));
 
   Modelica.SIunits.AbsolutePressure pTan(start=10e5)
     "Mean pressure of the medium in the tank";
@@ -315,7 +337,7 @@ protected
     "Mean temperature of the medium in the tank";
   Modelica.SIunits.Density dTan
     "Mean density of the medium in the tank";
-  Modelica.SIunits.SpecificEnthalpy hTan(start=230e3)
+  Modelica.SIunits.SpecificEnthalpy hTan
     "Mean specific enthalpy of the medium in the tank";
 
   Modelica.SIunits.Density dLiq
@@ -347,7 +369,6 @@ protected
   Modelica.SIunits.Mass mC[Medium.nC]
     "Masses of trace substances in the fluid";
 
-
   Modelica.SIunits.MassFlowRate dMTan
     "Change in tank's mass wrt. time";
   Modelica.SIunits.Power dUTan
@@ -365,25 +386,35 @@ protected
     "Quality of the tank's medium at inlet";
   Real quaOut(unit="1")
     "Quality of the tank's medium at outlet";
-public
-  Modelica.SIunits.TemperatureDifference dTLos = heatPort.T - TTan if useHeatLoss;
-  Modelica.Blocks.Interfaces.RealInput Q_flow_loss = G*dTLos if useHeatLoss;
-
-  Modelica.Blocks.Interfaces.RealInput QLosInt
-    "Dummy output to ensure functionality of conditional heat port" annotation (
-     Placement(transformation(extent={{72,-10},{92,10}}), iconTransformation(
-          extent={{72,-10},{92,10}})));
-
-
 
   Real eps = Modelica.Constants.eps
     "Bigest number such that 1.0 + eps = 1.0";
   Real pTriCri
     "Trigger to check if tank's medium exceeds critical pressure";
 
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor
+    heaTran(G=G) if useHeatLoss
+    "Model to calculate heat losses"
+    annotation (Placement(transformation(extent={{20,-10},{40,10}})));
+  Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heaFloSen
+    "Sensor measuring heat losses in order to use measured value for calculations"
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTem
+    "Convert input temperature to heat port temperature"
+    annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
+  Modelica.Blocks.Sources.RealExpression porTem(y=TTan)
+    "Source block to set temperature to calculate heat losses"
+    annotation (Placement(transformation(extent={{-90,-10},{-70,10}})));
+
 
 initial equation
-   //der(hTan) = 0;
+  if steSta then
+   der(hTan) = 0;
+  else
+    hTan = hTan0;
+  end if;
+  pTan = pTan0;
+  VLiq = VLiq0;
 
 
 equation
@@ -478,8 +509,8 @@ equation
   dUTan = port_a.m_flow*actualStream(port_a.h_outflow) + port_b.m_flow*
     actualStream(port_b.h_outflow)
     "Energy balance: Port's side";
-  dUTan = VTanInn*(hTan*(ddph*der(pTan) + ddhp*der(hTan)) +
-    dTan*der(hTan) - der(pTan)) + QLosInt
+  dUTan =VTanInn*(hTan*(ddph*der(pTan) + ddhp*der(hTan)) + dTan*der(hTan) -
+    der(pTan)) + heaFloSen.Q_flow
     "Energy balance: Tank's side";
 
   // Calculation of conservation equations of transported substances
@@ -489,13 +520,16 @@ equation
   der(mC) = port_a.m_flow*actualStream(port_a.C_outflow) +
     port_b.m_flow*actualStream(port_b.C_outflow);
 
-  // Connections to ensure functionality if heat port is removed
+  // Connections describing heat losses if computed
   //
-  connect(heatPort.Q_flow,QLosInt);
-  connect(QLosInt, Q_flow_loss);
-  if not useHeatLoss then
-    QLosInt = 0;
-  end if;
+  connect(porTem.y, preTem.T)
+    annotation (Line(points={{-69,0},{-69,0},{-42,0}}, color={0,0,127}));
+  connect(preTem.port, heaFloSen.port_a)
+    annotation (Line(points={{-20,0},{-20,0},{-10,0}}, color={191,0,0}));
+  connect(heaFloSen.port_b, heaTran.port_a)
+    annotation (Line(points={{10,0},{16,0},{20,0}}, color={191,0,0}));
+  connect(heaTran.port_b, heatPort)
+    annotation (Line(points={{40,0},{82,0}}, color={191,0,0}));
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(

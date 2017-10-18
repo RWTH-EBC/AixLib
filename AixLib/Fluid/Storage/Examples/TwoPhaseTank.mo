@@ -39,7 +39,8 @@ model TwoPhaseTank
     redeclare package Medium = Medium,
     show_T=false,
     show_V_flow=false,
-    useHeatLoss=false) "Model of a two-phase tank loacted after condenser"
+    useHeatLoss=false,
+    steSta=true)       "Model of a two-phase tank loacted after condenser"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Ramp rampTInl(
     duration=1,
