@@ -91,4 +91,13 @@ equation
                 {0.05,-90},{0.05,-99.95}},
                 color={0,0,127}));
 
+  annotation (Documentation(revisions="<html>
+<ul>
+  <li>
+  October 17, 2017, by Mirko Engelpracht:<br/>
+  First implementation
+  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
+  </li>
+</ul>
+</html>"));
 end ModularExpansionValvesSensors;
