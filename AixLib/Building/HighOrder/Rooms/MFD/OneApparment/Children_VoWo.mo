@@ -1,9 +1,11 @@
 within AixLib.Building.HighOrder.Rooms.MFD.OneApparment;
+
+
 model Children_VoWo "Children room from the VoWo appartment"
   import AixLib;
   ///////// construction parameters
   parameter Integer TMC = 1 "Thermal Mass Class" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1 "Heavy", choice = 2 "Medium", choice = 3 "Light", radioButtons = true));
-  parameter Integer TIR = 4 "Thermal Insulation Regulation" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1
+  parameter Integer TIR = 4 "Thermal Insulation Regulation" annotation(Dialog(groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/VoWo_Children.png", group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1
         "EnEV_2009",                                                                                                    choice = 2
         "EnEV_2002",                                                                                                    choice = 3
         "WSchV_1995",                                                                                                    choice = 4
@@ -95,7 +97,7 @@ equation
   connect(NaturalVentilation.port_b, airload.port) annotation(Line(points = {{-16, -81}, {0, -81}, {0, -36}, {-32, -36}, {-32, 24}, {-39, 24}}, color = {191, 0, 0}));
   connect(outsideWall.port_outside, thermOutside) annotation(Line(points = {{-12, 60.45}, {-12, 98}, {-60, 98}}, color = {191, 0, 0}));
   connect(thermOutside, thermOutside) annotation(Line(points = {{-60, 98}, {-86, 98}, {-86, 98}, {-60, 98}}, color = {191, 0, 0}));
-  annotation(__Dymola_Images(Parameters(source = "AixLib/Resources/Images/Building/HighOrder/VoWo_Children.png")), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Rectangle(extent = {{-54, 68}, {116, -108}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
+  annotation(DDiagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Rectangle(extent = {{-54, 68}, {116, -108}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                   FillPattern.Forward), Text(extent = {{-36, -20}, {98, -54}}, lineColor = {0, 0, 0}, fillColor = {255, 0, 0},
             fillPattern =                                                                                                   FillPattern.Forward, textString = "Children"), Rectangle(extent = {{-10, 80}, {12, 60}}, lineColor = {0, 0, 0}, fillColor = {85, 255, 255},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-8, 78}, {10, 62}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255},
@@ -123,8 +125,6 @@ equation
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for a second bedroom: the childrens&apos; room. </p>
- <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The following figure presents the room&apos;s layout:</p>
  <p><img src=\"modelica://AixLib/Resources/Images/Building/HighOrder/VoWo_Children.png\"

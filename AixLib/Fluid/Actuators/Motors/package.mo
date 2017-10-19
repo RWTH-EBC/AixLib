@@ -3,7 +3,7 @@ package Motors "Package with motor models for valves and dampers"
   extends Modelica.Icons.VariantsPackage;
 
 annotation (preferredView="info", Documentation(info="<html>
-This package contains components models for motors that may be
+This package contains component models for motors that may be
 used with the actuator models in
 <a href=\"modelica://AixLib.Fluid.Actuators.Dampers\">AixLib.Fluid.Actuators.Dampers</a>
 or

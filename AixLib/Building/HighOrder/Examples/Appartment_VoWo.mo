@@ -65,10 +65,8 @@ model Appartment_VoWo "Simulation of 1 apartment "
   output Real radPowerKiRad = -VoWoWSchV1984.Hydraulic.radKi.Q_flow;
   output Real travelHVKi = VoWoWSchV1984.Hydraulic.valveKi.opening;
   output Real massFlowKi = VoWoWSchV1984.Hydraulic.valveKi.port_a.m_flow;
-  AixLib.Fluid.HeatExchangers.HeaterCooler_T hea(
+  Fluid.HeatExchangers.Heater_T              hea(
     redeclare package Medium = Medium,
-    Q_flow_maxHeat=20000,
-    Q_flow_maxCool=0,
     m_flow_nominal=0.01,
     dp_nominal=0)
     annotation (Placement(transformation(extent={{-38,-82},{-58,-62}})));
@@ -109,7 +107,7 @@ equation
   connect(Pump.port_a, tank.ports[2]) annotation (Line(points={{4,-72},{14,-72},
           {14,-84},{26.4,-84},{26.4,-72}}, color={0,127,255}));
   connect(Source_TseBoiler.y, hea.TSet) annotation (Line(points={{-71.3,-105},{
-          -28,-105},{-28,-66},{-36,-66}}, color={0,0,127}));
+          -28,-105},{-28,-64},{-36,-64}}, color={0,0,127}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
             -140},{100,100}}),                                                                           graphics={  Text(extent = {{-48, -82}, {90, -168}}, lineColor = {0, 0, 255}, textString = "Set initial values for iteration variables (list given by translate, usually pressure drops). Rule of thumb: valves 1000 Pa, pipes 100 Pa. Simulation may still work without some of them, but  it gives warning of division by zero at initialization.
  ")}), experiment(StopTime = 86400, Interval = 60, __Dymola_Algorithm = "Lsodar"), experimentSetupOutput(states = false, derivatives = false, auxiliaries = false, events = false), Documentation(info = "<html>

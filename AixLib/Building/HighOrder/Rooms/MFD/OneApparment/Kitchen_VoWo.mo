@@ -3,7 +3,7 @@ model Kitchen_VoWo "Kitchen from the VoWo appartment"
   import AixLib;
   ///////// construction parameters
   parameter Integer TMC = 1 "Thermal Mass Class" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1 "Heavy", choice = 2 "Medium", choice = 3 "Light", radioButtons = true));
-  parameter Integer TIR = 4 "Thermal Insulation Regulation" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1
+  parameter Integer TIR = 4 "Thermal Insulation Regulation" annotation(Dialog(groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/VoWo_Kitchen.png", group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1
         "EnEV_2009",                                                                                                    choice = 2
         "EnEV_2002",                                                                                                    choice = 3
         "WSchV_1995",                                                                                                    choice = 4
@@ -99,7 +99,7 @@ equation
   connect(NaturalVentilation.port_b, airload.port) annotation(Line(points = {{22, 84}, {24, 84}, {24, 60}, {-56, 60}, {-56, 10}, {-40, 10}, {-40, -8}, {-35, -8}}, color = {191, 0, 0}));
   connect(outsideWall.port_outside, thermOutside) annotation(Line(points = {{5, -106.35}, {5, -120}, {-80, -120}, {-80, 60}, {-98, 60}, {-98, 90}}, color = {191, 0, 0}));
   connect(ThermRoom, airload.port) annotation(Line(points = {{8, -8}, {-10, -8}, {-10, -20}, {-40, -20}, {-40, -8}, {-35, -8}}, color = {191, 0, 0}));
-  annotation(__Dymola_Images(Parameters(source = "AixLib/Resources/Images/Building/HighOrder/VoWo_Kitchen.png")), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Polygon(points = {{-60, 58}, {-60, -62}, {-18, -62}, {-18, -122}, {100, -122}, {100, 58}, {-60, 58}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Polygon(points = {{-60, 58}, {-60, -62}, {-18, -62}, {-18, -122}, {100, -122}, {100, 58}, {-60, 58}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                   FillPattern.Forward), Text(extent = {{-32, 38}, {84, 4}}, lineColor = {0, 0, 0}, fillColor = {255, 0, 0},
             fillPattern =                                                                                                   FillPattern.Forward, textString = "Kitchen"), Rectangle(extent = {{-18, -114}, {4, -134}}, lineColor = {0, 0, 0}, fillColor = {85, 255, 255},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-16, -116}, {2, -132}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255},
@@ -126,8 +126,6 @@ equation
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for the kitchen.</p>
- <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The following figure presents the room&apos;s layout:</p>
  <p><img src=\"modelica://AixLib/Resources/Images/Building/HighOrder/VoWo_Kitchen.png\"

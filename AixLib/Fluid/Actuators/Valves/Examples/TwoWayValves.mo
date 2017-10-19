@@ -7,9 +7,9 @@ model TwoWayValves "Two way valves with different opening characteristics"
     redeclare package Medium = Medium,
     l=0.05,
     m_flow_nominal=2,
-    filteredOpening=false,
+    use_inputFilter=false,
     dpValve_nominal=6000) "Valve model, linear opening characteristics"
-         annotation (Placement(transformation(extent={{0,50},{20,70}})));
+    annotation (Placement(transformation(extent={{0,50},{20,70}})));
     Modelica.Blocks.Sources.Ramp y(
     height=1,
     duration=1,
@@ -32,26 +32,26 @@ model TwoWayValves "Two way valves with different opening characteristics"
     redeclare package Medium = Medium,
     l=0.05,
     m_flow_nominal=2,
-    filteredOpening=false,
+    use_inputFilter=false,
     dpValve_nominal=6000) "Valve model, quick opening characteristics"
-         annotation (Placement(transformation(extent={{0,10},{20,30}})));
+    annotation (Placement(transformation(extent={{0,10},{20,30}})));
   AixLib.Fluid.Actuators.Valves.TwoWayEqualPercentage valEqu(
     redeclare package Medium = Medium,
     l=0.05,
     R=10,
     delta0=0.1,
     m_flow_nominal=2,
-    filteredOpening=false,
+    use_inputFilter=false,
     dpValve_nominal=6000)
     "Valve model, equal percentage opening characteristics"
-         annotation (Placement(transformation(extent={{0,-30},{20,-10}})));
+    annotation (Placement(transformation(extent={{0,-30},{20,-10}})));
 
   TwoWayPressureIndependent valInd(
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
     dpValve_nominal=10000,
-    filteredOpening=false,
+    use_inputFilter=false,
     l=0.05,
     l2=0.01) annotation (Placement(transformation(extent={{0,-70},{20,-50}})));
 equation
@@ -91,7 +91,7 @@ equation
   connect(valInd.port_a, sou.ports[4]) annotation (Line(
       points={{0,-60},{-28,-60},{-28,-3},{-50,-3}},
       color={0,127,255}));
-    annotation (experiment(StopTime=1.0),
+    annotation (experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Actuators/Valves/Examples/TwoWayValves.mos"
         "Simulate and plot"),
     Documentation(info="<html>

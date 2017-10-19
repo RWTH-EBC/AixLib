@@ -2,7 +2,7 @@ within AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
 model UpperFloorBuildingEnvelope
   ///////// construction parameters
   parameter Integer TMC = 1 "Thermal Mass Class" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1 "Heavy", choice = 2 "Medium", choice = 3 "Light", radioButtons = true));
-  parameter Integer TIR = 1 "Thermal Insulation Regulation" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1
+  parameter Integer TIR = 1 "Thermal Insulation Regulation" annotation(Dialog(groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/Upperfloor_5Rooms.png", group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1
         "EnEV_2009",                                                                                                    choice = 2
         "EnEV_2002",                                                                                                    choice = 3
         "WSchV_1995",                                                                                                    choice = 4
@@ -147,7 +147,7 @@ equation
   connect(Children1.thermFloor1, ThermFloor[2]) annotation(Line(points = {{67.18, 46.24}, {90, 46.24}, {90, 20}, {0, 20}, {0, -1.5}}, color = {191, 0, 0}, pattern = LinePattern.Dash));
   connect(Bath.thermRoom, ThermFloor[3]) annotation(Line(points = {{68.8, -64.8}, {90, -64.8}, {90, 20}, {0, 20}, {0, 1.5}}, color = {191, 0, 0}, pattern = LinePattern.Dash));
   connect(Children2.thermRoom, ThermFloor[4]) annotation(Line(points = {{-68, -58.4}, {-90, -58.4}, {-90, -4}, {0, -4}, {0, 4.5}}, color = {191, 0, 0}, pattern = LinePattern.Dash));
-  annotation(__Dymola_Images(Parameters(source = "AixLib/Resources/Images/Building/HighOrder/Upperfloor_5Rooms.png")), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Bitmap(extent = {{-96, 90}, {100, -106}}, fileName = "modelica://AixLib/Resources/Images/Building/HighOrder/Upperfloor_icon.png"), Text(extent = {{-56, 74}, {-4, 60}}, lineColor = {0, 0, 0}, textString = "Bedroom"), Text(extent = {{16, 76}, {62, 66}}, lineColor = {0, 0, 0}, textString = "Children1"), Text(extent = {{22, 28}, {64, 14}}, lineColor = {0, 0, 0}, textString = "Corridor"), Text(extent = {{22, -42}, {58, -56}}, lineColor = {0, 0, 0}, textString = "Bath"), Text(extent = {{-62, -2}, {-6, -16}}, lineColor = {0, 0, 0}, textString = "Children2")}), Documentation(revisions = "<html>
+  annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Bitmap(extent = {{-96, 90}, {100, -106}}, fileName = "modelica://AixLib/Resources/Images/Building/HighOrder/Upperfloor_icon.png"), Text(extent = {{-56, 74}, {-4, 60}}, lineColor = {0, 0, 0}, textString = "Bedroom"), Text(extent = {{16, 76}, {62, 66}}, lineColor = {0, 0, 0}, textString = "Children1"), Text(extent = {{22, 28}, {64, 14}}, lineColor = {0, 0, 0}, textString = "Corridor"), Text(extent = {{22, -42}, {58, -56}}, lineColor = {0, 0, 0}, textString = "Bath"), Text(extent = {{-62, -2}, {-6, -16}}, lineColor = {0, 0, 0}, textString = "Children2")}), Documentation(revisions = "<html>
 
  <ul>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
@@ -158,7 +158,5 @@ equation
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for the envelope of the upper floor.</p>
- <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  </html>"));
 end UpperFloorBuildingEnvelope;

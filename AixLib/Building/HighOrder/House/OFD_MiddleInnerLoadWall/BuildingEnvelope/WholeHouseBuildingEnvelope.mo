@@ -8,7 +8,7 @@ model WholeHouseBuildingEnvelope
         "EnEV_2002",                                                                                                    choice = 3
         "WSchV_1995",                                                                                                    choice = 4
         "WSchV_1984",                                                                                                    radioButtons = true));
-  parameter Integer TRY = 1 "Region according to TRY" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1 "TRY01", choice = 2 "TRY02", choice = 3 "TRY03", choice = 4 "TRY04", choice = 5 "TRY05", choice = 6 "TRY06", choice = 7 "TRY07", choice = 8 "TRY08", choice = 9 "TRY09", choice = 10 "TRY10", choice = 11 "TRY11", choice = 12 "TRY12", choice = 13 "TRY13", choice = 14 "TRY14", choice = 15 "TRY15", radioButtons = true));
+  parameter Integer TRY = 1 "Region according to TRY" annotation(Dialog(groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/Grundriss.png", group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1 "TRY01", choice = 2 "TRY02", choice = 3 "TRY03", choice = 4 "TRY04", choice = 5 "TRY05", choice = 6 "TRY06", choice = 7 "TRY07", choice = 8 "TRY08", choice = 9 "TRY09", choice = 10 "TRY10", choice = 11 "TRY11", choice = 12 "TRY12", choice = 13 "TRY13", choice = 14 "TRY14", choice = 15 "TRY15", radioButtons = true));
   parameter Boolean withFloorHeating = false
     "If true, that floor has different connectors"                                          annotation(Dialog(group = "Construction parameters"), choices(checkBox = true));
   replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater
@@ -79,11 +79,9 @@ equation
   connect(attic_2Ro_5Rooms.SolarRadiationPort_OW1, East) annotation (Line(
       points={{-27.38,62},{-74,62},{-74,90},{60,90},{60,-18},{90,-18}},
       color={255,128,0}));
-  annotation(__Dymola_Images(Parameters(source = "AixLib/Resources/Images/Building/HighOrder/Grundriss.png")), Icon(graphics={  Bitmap(extent = {{-78, 74}, {72, -68}}, fileName = "modelica://AixLib/Resources/Images/Building/HighOrder/Grundriss.PNG")}), Documentation(info = "<html>
+  annotation(Icon(graphics={  Bitmap(extent = {{-78, 74}, {72, -68}}, fileName = "modelica://AixLib/Resources/Images/Building/HighOrder/Grundriss.PNG")}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for the envelope of the whole one family dwelling.</p>
- <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  </html>", revisions="<html>
 
  <ul>

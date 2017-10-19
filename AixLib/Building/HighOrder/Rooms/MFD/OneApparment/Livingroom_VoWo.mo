@@ -3,7 +3,7 @@ model Livingroom_VoWo "Livingroom from the VoWo appartment"
   import AixLib;
   ///////// construction parameters
   parameter Integer TMC = 1 "Thermal Mass Class" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1 "Heavy", choice = 2 "Medium", choice = 3 "Light", radioButtons = true));
-  parameter Integer TIR = 4 "Thermal Insulation Regulation" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1
+  parameter Integer TIR = 4 "Thermal Insulation Regulation" annotation(Dialog(groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/VoWo_Livingroom.png", group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1
         "EnEV_2009",                                                                                                    choice = 2
         "EnEV_2002",                                                                                                    choice = 3
         "WSchV_1995",                                                                                                    choice = 4
@@ -101,7 +101,7 @@ equation
   connect(airload.port, ThermRoom) annotation(Line(points = {{-29, 8}, {-20, 8}, {-20, 14}, {-2, 14}}, color = {191, 0, 0}));
   connect(NaturalVentilation.port_b, airload.port) annotation(Line(points = {{-46, -99}, {-20, -99}, {-20, 8}, {-29, 8}}, color = {191, 0, 0}));
   connect(outsideWall.port_outside, thermOutside) annotation(Line(points = {{-4, 84.6}, {-4, 100}, {-86, 100}, {-86, 130}, {-150, 130}}, color = {191, 0, 0}));
-  annotation(__Dymola_Images(Parameters(source = "AixLib/Resources/Images/Building/HighOrder/VoWo_Livingroom.png")), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-170, -150}, {170, 150}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-170, -150}, {170, 150}}), graphics={  Rectangle(extent = {{-62, 60}, {112, -92}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-170, -150}, {170, 150}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-170, -150}, {170, 150}}), graphics={  Rectangle(extent = {{-62, 60}, {112, -92}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                   FillPattern.Forward), Rectangle(extent = {{38, 72}, {60, 52}}, lineColor = {0, 0, 0}, fillColor = {85, 255, 255},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{40, 70}, {58, 54}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255},
             fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-56, -14}, {104, -32}}, lineColor = {0, 0, 0}, fillColor = {255, 0, 0},
@@ -133,8 +133,6 @@ equation
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for the livingroom. </p>
- <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The following figure presents the room&apos;s layout:</p>
  <p><img src=\"modelica://AixLib/Resources/Images/Building/HighOrder/VoWo_Livingroom.png\"

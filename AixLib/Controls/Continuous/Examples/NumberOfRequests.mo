@@ -8,18 +8,24 @@ model NumberOfRequests
     kind=0) annotation (Placement(transformation(extent={{0,20},{20,40}})));
   Modelica.Blocks.Sources.Sine sine(freqHz=2)
     annotation (Placement(transformation(extent={{-60,-20},{-40,0}})));
-  Modelica.Blocks.Sources.Pulse pulse(period=0.25)
+  Modelica.Blocks.Sources.Pulse pulse(period=0.35)
     annotation (Placement(transformation(extent={{-60,20},{-40,40}})));
 equation
   connect(sine.y, numReq.u[1]) annotation (Line(points={{-39,-10},{-19.5,-10},{
           -19.5,29},{-2,29}}, color={0,0,127}));
   connect(pulse.y, numReq.u[2]) annotation (Line(points={{-39,30},{-20,30},{-20,
           31},{-2,31}}, color={0,0,127}));
- annotation (experiment(StopTime=1.0),
+ annotation (experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Controls/Continuous/Examples/NumberOfRequests.mos"
         "Simulate and plot"),
     Documentation(revisions="<html>
 <ul>
+<li>
+January 12, 2017, by Thierry S. Nouidui:<br/>
+Modified example to prevent simultaneous events
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/646\">#646</a>.
+</li>
 <li>
 November 21, 2011, by Michael Wetter:<br/>
 Added documentation.

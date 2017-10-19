@@ -32,6 +32,7 @@ class Acknowledgements "Acknowledgements"
 <li>Thomas Beutlich</li>
 <li>Matthis Thorade</li>
 </ul>
-<p><br>Parts of AixLib have been developed within public projects and with financial support by BMWi (German Federal Ministry for Economic Affairs and Energy).</p>
+<p><br/>
+Parts of AixLib have been developed within public projects and with financial support by BMWi (German Federal Ministry for Economic Affairs and Energy).</p>
 </html>"));
 end Acknowledgements;

@@ -27,13 +27,13 @@ model TwoWayValvePressureIndependent
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
-    filteredOpening=false,
+    use_inputFilter=false,
     l=0.05,
     from_dp=true,
     dpFixed_nominal=0,
     l2=0.1,
     dpValve_nominal=10000) "Pressure independent valve"
-             annotation (Placement(transformation(extent={{-10,30},{10,50}})));
+    annotation (Placement(transformation(extent={{-10,30},{10,50}})));
     Modelica.Blocks.Sources.Ramp dp(
     duration=1,
     startTime=1,
@@ -44,7 +44,7 @@ model TwoWayValvePressureIndependent
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
-    filteredOpening=false,
+    use_inputFilter=false,
     l=0.05,
     dpFixed_nominal=5000,
     from_dp=true,
@@ -55,7 +55,7 @@ model TwoWayValvePressureIndependent
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
-    filteredOpening=false,
+    use_inputFilter=false,
     l=0.05,
     from_dp=false,
     dpFixed_nominal=0,
@@ -93,7 +93,7 @@ equation
   connect(y.y, valIndFromMflow.y) annotation (Line(
       points={{-39,80},{-20,80},{-20,-20},{0,-20},{0,-28}},
       color={0,0,127}));
-    annotation (experiment(StopTime=2),
+    annotation (experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Actuators/Valves/Examples/TwoWayValvePressureIndependent.mos"
         "Simulate and plot"),

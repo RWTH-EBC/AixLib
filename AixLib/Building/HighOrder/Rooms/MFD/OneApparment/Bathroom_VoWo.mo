@@ -1,9 +1,11 @@
 within AixLib.Building.HighOrder.Rooms.MFD.OneApparment;
+
+
 model Bathroom_VoWo "Bathroom from the VoWo appartment"
   import AixLib;
   ///////// construction parameters
   parameter Integer TMC = 1 "Thermal Mass Class" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1 "Heavy", choice = 2 "Medium", choice = 3 "Light", radioButtons = true));
-  parameter Integer TIR = 4 "Thermal Insulation Regulation" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1
+  parameter Integer TIR = 4 "Thermal Insulation Regulation" annotation(Dialog(groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/VoWo_Bath.png", group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1
         "EnEV_2009",                                                                                                    choice = 2
         "EnEV_2002",                                                                                                    choice = 3
         "WSchV_1995",                                                                                                    choice = 4
@@ -93,7 +95,7 @@ equation
   connect(thermOutside, NaturalVentilation.port_a) annotation(Line(points = {{-100, 90}, {-80, 90}, {-80, 60}, {4, 60}, {4, 81}, {16, 81}}, color = {191, 0, 0}));
   connect(airload.port, NaturalVentilation.port_b) annotation(Line(points = {{-11, -18}, {-36, -18}, {-36, 16}, {94, 16}, {94, 60}, {48, 60}, {48, 81}, {44, 81}}, color = {191, 0, 0}));
   connect(outsideWall.port_outside, thermOutside) annotation(Line(points = {{8, -116.55}, {8, -140}, {-80, -140}, {-80, 90}, {-100, 90}}, color = {191, 0, 0}));
-  annotation(__Dymola_Images(Parameters(source = "AixLib/Resources/Images/Building/HighOrder/VoWo_Bath.png")), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Polygon(points = {{-58, 62}, {-58, -118}, {104, -118}, {104, -58}, {42, -58}, {42, 62}, {-58, 62}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
+  annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Polygon(points = {{-58, 62}, {-58, -118}, {104, -118}, {104, -58}, {42, -58}, {42, 62}, {-58, 62}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                   FillPattern.Forward), Text(extent = {{-44, -108}, {82, -58}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
             fillPattern =                                                                                                   FillPattern.Forward, textString = "Bath"), Rectangle(extent = {{-30, -108}, {-8, -128}}, lineColor = {0, 0, 0}, fillColor = {85, 255, 255},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-28, -110}, {-10, -126}}, lineColor = {0, 0, 0}, fillColor = {170, 213, 255},
@@ -120,8 +122,6 @@ equation
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for the bathroom.</p>
- <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The following figure presents the room&apos;s layout:</p>
  <p><img src=\"modelica://AixLib/Resources/Images/Building/HighOrder/VoWo_Bath.png\"

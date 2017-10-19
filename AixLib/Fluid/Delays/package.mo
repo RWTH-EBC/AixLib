@@ -4,7 +4,7 @@ package Delays "Package with delay models"
 
 annotation (preferredView="info", Documentation(info="<html>
 <p>
-This package contains components models for transport delays in
+This package contains component models for transport delays in
 piping networks.
 </p>
 <p>
