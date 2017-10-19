@@ -1,4 +1,4 @@
-within AixLib.Fluid.Actuators;
+within AixLib.Fluid.Actuators.Valves;
 package ExpansionValves "Package that contains models of expansion valves"
   extends Modelica.Icons.Package;
 
