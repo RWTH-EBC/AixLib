@@ -447,11 +447,11 @@ equation
   //
   states.dT_Int = MediumInt.setState_dTX(d=d,T=
     min(T,MediumInt.fluidConstants[1].criticalTemperature-3));
-  states.pT_Int = MediumInt.setState_pTX(p=p,T=
-    min(T,MediumExt.fluidConstants[1].criticalTemperature-3));
+  states.pT_Int = MediumInt.setState_pTX(p=p,T=T);
   states.ph_Int = MediumInt.setState_phX(p=p,h=h);
   states.ps_Int = MediumInt.setState_psX(p=p,s=s);
-  states.dT_Ext = MediumExt.setState_dTX(d=d,T=T);
+  states.dT_Ext = MediumExt.setState_dTX(d=d,T=
+    min(T,MediumExt.fluidConstants[1].criticalTemperature-3));
   states.pT_Ext = MediumExt.setState_pTX(p=p,T=T);
   states.ph_Ext = MediumExt.setState_phX(p=p,h=h);
   states.ps_Ext = MediumExt.setState_psX(p=p,s=s);
