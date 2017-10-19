@@ -5,7 +5,8 @@ model TwoPhaseTank
   // Define medium
   //
   replaceable package Medium =
-      Modelica.Media.Interfaces.PartialTwoPhaseMedium
+      WorkingVersion.Media.Refrigerants.R134a.R134a_IIR_P1_395_T233_455_Horner
+      constrainedby Modelica.Media.Interfaces.PartialTwoPhaseMedium
       "Medium in the component"
       annotation (choicesAllMatching = true);
 
