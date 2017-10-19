@@ -1,16 +1,17 @@
 within AixLib.Fluid.Solar.Electric.BaseClasses;
-model PVModuleDC "PV module with temperature dependent efficiency"
+model PVModuleDCTMY3
+  "PV module with temperature dependent efficiency"
   extends Electric.BaseClasses.PartialPVModuleDC;
 
- AixLib.Utilities.Interfaces.SolarRad_in SolarIrradationPerSquareMeter
-    "Solar radiation per square meter" annotation (Placement(transformation(
-          extent={{-141,-79},{-101,-39}}), iconTransformation(extent={{-140,
-            -76},{-100,-36}})));
+ Modelica.Blocks.Interfaces.RealInput SolarIrradiationPerSquareMeter
+   annotation (Placement(
+        transformation(extent={{-140,-80},{-100,-40}}), iconTransformation(
+          extent={{-132,-72},{-100,-40}})));
 
 equation
   TCell=AmbientTemperature+(NoctTempCell-NoctTemp)*
-  SolarIrradationPerSquareMeter.I/NoctRadiation;
-  PowerPV=SolarIrradationPerSquareMeter.I*Area*EtaVar;
+  SolarIrradiationPerSquareMeter/NoctRadiation;
+  PowerPV=SolarIrradiationPerSquareMeter*Area*EtaVar;
 
   annotation (
    Icon(
@@ -31,9 +32,10 @@ equation
 <p>PV moduleDC has a temperature&nbsp;dependency&nbsp;for&nbsp;efficiency.</p>
 </html>",
      revisions="<html>
-<ul>
+<p><ul>
 <li><i>October 11, 2016 </i> by Tobias Blacha:<br/>Moved into AixLib</li>
 <li><i>Februar 21, 2013  </i>by Corinna Leonhardt:<br/>Implemented</li>
-</ul>
-</html>"));
-end PVModuleDC;
+</ul></p>
+</html>"),   Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+        coordinateSystem(preserveAspectRatio=false)));
+end PVModuleDCTMY3;

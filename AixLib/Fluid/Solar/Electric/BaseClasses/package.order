@@ -1,3 +1,5 @@
 PVInverterRMS
 PVModuleDC
-PVModuleDC_TMY3
+PartialPVSystem
+PartialPVModuleDC
+PVModuleDCTMY3

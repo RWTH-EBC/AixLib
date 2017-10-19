@@ -1,26 +1,17 @@
 within AixLib.Fluid.Solar.Electric;
 model PVSystem "PVSystem"
+  extends Electric.BaseClasses.PartialPVSystem;
 
-  parameter Integer NumberOfPanels = 1
-    "Number of panels";
-  parameter AixLib.DataBase.SolarElectric.PVBaseRecord data
-    "PV data set"
-    annotation (choicesAllMatching=true);
-  parameter Modelica.SIunits.Power MaxOutputPower
-    "Maximum output power for inverter";
-  Modelica.Blocks.Interfaces.RealOutput PVPowerW(
-    final quantity="Power",
-    final unit="W")
-    "Output Power of the PV system including the inverter"
-     annotation (Placement(transformation(extent={{80,0},{100,20}})));
   Modelica.Blocks.Interfaces.RealInput TempOutside(
     final quantity="ThermodynamicTemperature",
     final unit="K")
     "Ambient temperature"
-     annotation (Placement(transformation(extent={{-126,50},{-86,90}})));
+     annotation (Placement(transformation(extent={{-140,56},{-100,96}}),
+        iconTransformation(extent={{-140,56},{-100,96}})));
   AixLib.Utilities.Interfaces.SolarRad_in IcTotalRad
     "Solar radiation in W/m2"
-    annotation (Placement(transformation(extent={{-122,-20},{-98,6}})));
+    annotation (Placement(transformation(extent={{-124,-12},{-100,14}}),
+        iconTransformation(extent={{-136,-24},{-100,14}})));
   BaseClasses.PVModuleDC pVmoduleDC1(
       final Eta0=data.Eta0,
       final NoctTemp=data.NoctTemp,
@@ -29,27 +20,20 @@ model PVSystem "PVSystem"
       final TempCoeff=data.TempCoeff,
       final Area=NumberOfPanels*data.Area)
       "PV module with temperature dependent efficiency"
-      annotation (Placement(transformation(extent={{-15,60},{5,80}})));
-  BaseClasses.PVInverterRMS pVinverterRMS(final uMax2=MaxOutputPower)
-    "Inverter model including system management"
-    annotation (Placement(transformation(extent={{44,0},{64,20}})));
+      annotation (Placement(transformation(extent={{-9,60},{11,80}})));
 
 equation
   connect(pVmoduleDC1.DCOutputPower, pVinverterRMS.DCPowerInput)
     annotation (Line(
-      points={{6,70},{22,70},{22,66},{36,66},{36,10.2},{43.8,10.2}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  connect(pVinverterRMS.PVPowerRmsW, PVPowerW) annotation (Line(
-      points={{64,10},{90,10}},
+      points={{12,70},{38,70},{38,10.2},{43.8,10.2}},
       color={0,0,127},
       smooth=Smooth.None));
 
   connect(TempOutside, pVmoduleDC1.AmbientTemperature)
-      annotation (Line(points={{-106,70},
-          {-62,70},{-62,65.2},{-17,65.2}},             color={0,0,127}));
+      annotation (Line(points={{-120,76},{-90,76},{-11,76},{-11,76}},
+                                                       color={0,0,127}));
   connect(IcTotalRad, pVmoduleDC1.SolarIrradationPerSquareMeter) annotation (
-      Line(points={{-110,-7},{-32,-7},{-32,75.4},{-17,75.4}},
+      Line(points={{-112,1},{-32,1},{-32,64.4},{-11,64.4}},
        color={255,128,0}));
   annotation (
    Icon(

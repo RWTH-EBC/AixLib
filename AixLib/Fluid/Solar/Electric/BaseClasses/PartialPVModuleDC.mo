@@ -1,5 +1,5 @@
 within AixLib.Fluid.Solar.Electric.BaseClasses;
-model PVModuleDC_TMY3 "PV module with temperature dependent efficiency"
+partial model PartialPVModuleDC "partial model for PV module"
 
  parameter Modelica.SIunits.Area Area
   "Area of one Panel";
@@ -19,13 +19,7 @@ model PVModuleDC_TMY3 "PV module with temperature dependent efficiency"
   "Efficiency of PV cell";
  Modelica.SIunits.Temp_K TCell
   "Cell temperature";
- Modelica.Blocks.Interfaces.RealInput AmbientTemperature(
-  final quantity="ThermodynamicTemperature",
-  final unit="K")
-  "Ambient temperature"
-  annotation(Placement(
-  transformation(extent={{-139,54},{-99,94}}),
-  iconTransformation(extent={{-140,62},{-100,102}})));
+
  Modelica.Blocks.Interfaces.RealOutput DCOutputPower(
   final quantity="Power",
   final unit="W")
@@ -33,22 +27,17 @@ model PVModuleDC_TMY3 "PV module with temperature dependent efficiency"
   annotation(Placement(
   transformation(extent={{100,70},{120,90}}),
   iconTransformation(extent={{100,-10},{120,10}})));
-
-  Real SolarIrradiationPerSquareMeter( final unit = "W/m2")= HGloHor
-  "Total solar irradiation per square meter";
-
-  Modelica.Blocks.Interfaces.RealInput HGloHor
-    "diffuse horizintal for TRY; ground horizontal for TMY"
-                                               annotation (Placement(
-        transformation(extent={{-140,-52},{-100,-12}}), iconTransformation(
-          extent={{-132,-34},{-100,-2}})));
+ Modelica.Blocks.Interfaces.RealInput AmbientTemperature(
+  final quantity="ThermodynamicTemperature",
+  final unit="K")
+  "Ambient temperature"
+  annotation(Placement(
+  transformation(extent={{-139,40},{-99,80}}),
+  iconTransformation(extent={{-140,40},{-100,80}})));
 
 equation
 
-  TCell=AmbientTemperature+(NoctTempCell-NoctTemp)*
-  SolarIrradiationPerSquareMeter/NoctRadiation;
   EtaVar=Eta0-TempCoeff*(TCell-NoctTemp)*Eta0;
-  PowerPV=SolarIrradiationPerSquareMeter*Area*EtaVar;
   DCOutputPower=PowerPV;
 
   annotation (
@@ -78,4 +67,4 @@ Implemented</li>
 </ul>
 </html>"),   Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
-end PVModuleDC_TMY3;
+end PartialPVModuleDC;
