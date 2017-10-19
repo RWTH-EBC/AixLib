@@ -4,26 +4,31 @@ model ModularExpansionValvesSensorsPipes
   of an evaporator, combined with sensors and simple pipes"
   extends BaseClasses.PartialModularExpansionVavles;
 
-  // Definition of parameters
+   // Definition of parameters
   //
   parameter Modelica.SIunits.Time tau = 1
     "Time constant at nominal flow rate"
-    annotation(Dialog(tab="Sensors",group="General"),
+    annotation(Dialog(tab="General",group="Sensors"),
                HideResult=not show_parSen);
 
   parameter Boolean transferHeat = false
     "if true, temperature T converges towards TAmb when no flow"
-    annotation(Dialog(tab="Sensors",group="General"),
+    annotation(Dialog(tab="General",group="Sensors"),
                HideResult=not show_parSen);
   parameter Modelica.SIunits.Temperature TAmb = Medium.T_default
     "Fixed ambient temperature for heat transfer"
-    annotation(Dialog(tab="Sensors",group="Temperature sensors"),
+    annotation(Dialog(tab="General",group="Sensors"),
                HideResult=not show_parSen);
   parameter Modelica.SIunits.Time tauHeaTra = 1200
     "Time constant for heat transfer, default 20 minutes"
-    annotation(Dialog(tab="Sensors",group="Temperature sensors"),
+    annotation(Dialog(tab="General",group="Sensors"),
                HideResult=not show_parSen);
 
+  parameter Modelica.Blocks.Types.Init initTypeSen=
+    Modelica.Blocks.Types.Init.InitialState
+    "Type of initialization (InitialState and InitialOutput are identical)"
+    annotation(Dialog(tab="Advanced",group="Initialisation Sensors"),
+               HideResult=not show_parSen);
   parameter Modelica.SIunits.Temperature T_start = Medium.T_default
     "Initial or guess value of output (= state)"
     annotation(Dialog(tab="Advanced",group="Initialisation Sensors"),
@@ -34,11 +39,6 @@ model ModularExpansionValvesSensorsPipes
       T=Medium.T_default,
       X=Medium.X_default)
       "Initial or guess value of output (= state)"
-    annotation(Dialog(tab="Advanced",group="Initialisation Sensors"),
-               HideResult=not show_parSen);
-  parameter Modelica.Blocks.Types.Init initTypeSen=
-    Modelica.Blocks.Types.Init.InitialState
-    "Type of initialization (InitialState and InitialOutput are identical)"
     annotation(Dialog(tab="Advanced",group="Initialisation Sensors"),
                HideResult=not show_parSen);
 

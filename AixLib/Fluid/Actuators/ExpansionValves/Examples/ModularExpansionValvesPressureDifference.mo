@@ -36,7 +36,8 @@ model ModularExpansionValvesPressureDifference
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-40,70})));
-  replaceable ModularExpansionValves.ModularExpansionValves modularValves(
+  replaceable ModularExpansionValves.ModularExpansionValvesSensorsPipes
+    modularValves(
     redeclare package Medium = Medium,
     nVal=nVal,
     redeclare SimpleExpansionValves.IsothermalExpansionValve
@@ -47,10 +48,10 @@ model ModularExpansionValvesPressureDifference
       Utilities.FlowCoefficient.R134a.R134a_EEV_15,
     show_parVal=false,
     show_parCon=false,
-    useExt=false,
     useInpFil={true,true,true},
     AVal={2e-6,1.5e-6,1e-6},
-    risTim={0.25,0.25,0.5})
+    risTim={0.25,0.25,0.5},
+    useExt=false)
     annotation (Placement(transformation(
         extent={{-18,18},{18,-18}},
         rotation=-90,

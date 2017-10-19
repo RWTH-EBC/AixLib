@@ -94,10 +94,10 @@ equation
       Caution with units - In the following, none S.I units are presented:
         Pressure:        in kPa
     */
-    P[1] = (pInl-pOut)*1e-3*sqrt(opening*AVal)/
+    P[1] = (pInl-pOut)*1e-3*sqrt(abs(opening*AVal))/
       Medium.surfaceTension(satInl)
       "Surface tension at valve's inlet";
-    P[2] = dInlPip*sqrt(Medium.density(staInl)*pInl*1e-3)/
+    P[2] = dInlPip*sqrt(abs(Medium.density(staInl)*pInl*1e-3))/
       Medium.dynamicViscosity(staInl)
       "Dynamic viscosity at valve's inlet";
 

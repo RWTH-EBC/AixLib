@@ -80,8 +80,7 @@ model TwoPhaseTank
     annotation(Dialog(tab="Advanced",group="Tank Initialisation"));
   parameter Modelica.SIunits.SpecificEnthalpy hTan0 = 300e3
     "Mean specific enthalpy of the medium in the tank at initialisation"
-    annotation(Dialog(tab="Advanced",group="Tank Initialisation",
-               enable= not steSta));
+    annotation(Dialog(tab="Advanced",group="Tank Initialisation"));
 
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.1
     "Nominal mass flow rate"
@@ -101,10 +100,10 @@ model TwoPhaseTank
   parameter Boolean show_tankProperties = true
     "= true, if tank properties are included as summary record"
     annotation(Dialog(tab="Advanced",group="Diagnostics"));
-  parameter Boolean show_tankPropertiesDetailed = true
+  parameter Boolean show_tankPropertiesDetailed = false
     "= true, if more detailed tank properties are included as summary record"
     annotation(Dialog(tab="Advanced",group="Diagnostics"));
-  parameter Boolean show_heatLosses = true
+  parameter Boolean show_heatLosses = false
     "= true, if heat losses are included as summary record"
     annotation(Dialog(tab="Advanced",group="Diagnostics"));
 
@@ -190,7 +189,7 @@ model TwoPhaseTank
     Modelica.SIunits.TemperatureDifference dTHeaLos
       "Temperature difference between tank and ambient";
     Modelica.SIunits.Power Q_flow_loss
-      "Heat losses to ambient";
+      "Heat losses from tank to ambient";
   end HeatLosses;
 
   // Definition of records that summarise variables computed in the model
@@ -228,7 +227,7 @@ model TwoPhaseTank
     G=G,
     GShe=GShe,
     GTopBot=GTopBot,
-    dTHeaLos=heatPort.T-TTan,
+    dTHeaLos=TTan-heatPort.T,
     Q_flow_loss=heaFloSen.Q_flow) if (show_heatLosses and useHeatLoss)
     "Record that contains properties of calculated heat losses";
 
@@ -331,13 +330,13 @@ protected
     annotation(Dialog(tab="Heat losses",group="Properties",
                enable=false));
 
-  Modelica.SIunits.AbsolutePressure pTan(start=10e5)
+  Modelica.SIunits.AbsolutePressure pTan(start=pTan0)
     "Mean pressure of the medium in the tank";
   Modelica.SIunits.Temperature TTan
     "Mean temperature of the medium in the tank";
   Modelica.SIunits.Density dTan
     "Mean density of the medium in the tank";
-  Modelica.SIunits.SpecificEnthalpy hTan
+  Modelica.SIunits.SpecificEnthalpy hTan(start=hTan0)
     "Mean specific enthalpy of the medium in the tank";
 
   Modelica.SIunits.Density dLiq
@@ -354,7 +353,7 @@ protected
   Modelica.SIunits.SpecificEnthalpy hOut
     "Specific enthalpy at tank's outlet";
 
-  Modelica.SIunits.Volume VLiq(start=0.2*VTanInn)
+  Modelica.SIunits.Volume VLiq(start=VLiq0)
     "Volume of the liquid phase";
   Modelica.SIunits.Volume VVap
     "Volume of the vapour phase";
@@ -413,9 +412,6 @@ initial equation
   else
     hTan = hTan0;
   end if;
-  pTan = pTan0;
-  VLiq = VLiq0;
-
 
 equation
   // Introduction of assertion to check model's boundaries
@@ -507,10 +503,10 @@ equation
     "Mass balance: Tank's side";
 
   dUTan = port_a.m_flow*actualStream(port_a.h_outflow) + port_b.m_flow*
-    actualStream(port_b.h_outflow)
+    actualStream(port_b.h_outflow) - heaFloSen.Q_flow
     "Energy balance: Port's side";
   dUTan =VTanInn*(hTan*(ddph*der(pTan) + ddhp*der(hTan)) + dTan*der(hTan) -
-    der(pTan)) + heaFloSen.Q_flow
+    der(pTan))
     "Energy balance: Tank's side";
 
   // Calculation of conservation equations of transported substances
@@ -527,7 +523,7 @@ equation
   connect(preTem.port, heaFloSen.port_a)
     annotation (Line(points={{-20,0},{-20,0},{-10,0}}, color={191,0,0}));
   connect(heaFloSen.port_b, heaTran.port_a)
-    annotation (Line(points={{10,0},{16,0},{20,0}}, color={191,0,0}));
+    annotation (Line(points={{10,0},{20,0}}, color={191,0,0}));
   connect(heaTran.port_b, heatPort)
     annotation (Line(points={{40,0},{82,0}}, color={191,0,0}));
 

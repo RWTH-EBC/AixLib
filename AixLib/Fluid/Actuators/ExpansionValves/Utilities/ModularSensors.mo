@@ -51,9 +51,6 @@ model ModularSensors
   Real pTriCri[nPorts]
     "Trigger to check if medium exceeds critical pressure";
 
-  Modelica.Blocks.Interfaces.RealInput senQua[nPorts]
-    "Preassure measured by sensors";
-
   // Definition of models
   //
   Sensors.MassFlowRate senMasFlo[nPorts](
@@ -142,9 +139,9 @@ equation
 
   // Connection of outputs
   //
-  connect(temMea,senPre.p);
-  connect(masFloMea,senTem.T);
-  connect(preMea,senMasFlo.m_flow);
+  connect(preMea,senPre.p);
+  connect(temMea,senTem.T);
+  connect(masFloMea,senMasFlo.m_flow);
 
   annotation (Icon(graphics={
         Ellipse(

@@ -23,8 +23,11 @@ model TwoPhaseTank
 
   // Definition of models
   //
-
-
+  Modelica.Blocks.Sources.Ramp rampTInl(
+    duration=1,
+    height=TInl - TOut,
+    offset=TOut) "Ramp to provide temperature at tank's inlet"
+    annotation (Placement(transformation(extent={{-88,72},{-68,92}})));
   Sources.MassFlowSource_T source(
     redeclare package Medium = Medium,
     T=TInl,
@@ -39,14 +42,9 @@ model TwoPhaseTank
     redeclare package Medium = Medium,
     show_T=false,
     show_V_flow=false,
-    useHeatLoss=false,
-    steSta=true)       "Model of a two-phase tank loacted after condenser"
+    steSta=true,
+    useHeatLoss=false) "Model of a two-phase tank loacted after condenser"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-  Modelica.Blocks.Sources.Ramp rampTInl(
-    duration=1,
-    height=TInl - TOut,
-    offset=TOut) "Ramp to provide temperature at tank's inlet"
-    annotation (Placement(transformation(extent={{-88,72},{-68,92}})));
   AixLib.Fluid.Sources.Boundary_pT Sink(
     redeclare package Medium = Medium,
     use_p_in=true,
@@ -61,14 +59,25 @@ model TwoPhaseTank
     height=pOut - pInl,
     offset=pInl) "Ramp to provide pressure at tank's outlet"
     annotation (Placement(transformation(extent={{90,-90},{70,-70}})));
-equation
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=258.15)
+    "Fixed ambient temperature to simulate heat losses to ambient"
+    annotation (Placement(transformation(extent={{90,-10},{70,10}})));
 
+
+equation
+  // Connections of the models
+  //
   connect(source.ports[1], twoPhaseTank.port_a)
     annotation (Line(points={{-20,50},{0,50},{0,10}}, color={0,127,255}));
   connect(twoPhaseTank.port_b, Sink.ports[1])
     annotation (Line(points={{0,-10},{0,-50},{20,-50}}, color={0,127,255}));
-  connect(rampTInl.y, source.T_in) annotation (Line(points={{-67,82},{-60,82},{
-          -60,54},{-42,54}}, color={0,0,127}));
-  connect(rampPOut.y, Sink.p_in) annotation (Line(points={{69,-80},{50,-80},{50,
-          -42},{42,-42}}, color={0,0,127}));
+  connect(rampTInl.y, source.T_in)
+    annotation (Line(points={{-67,82},{-60,82},{-60,54},{-42,54}},
+                color={0,0,127}));
+  connect(rampPOut.y, Sink.p_in)
+    annotation (Line(points={{69,-80},{50,-80},{50,-42},{42,-42}},
+                color={0,0,127}));
+  connect(fixedTemperature.port, twoPhaseTank.heatPort)
+    annotation (Line(points={{70,0},{8.2,0}}, color={191,0,0}));
+
 end TwoPhaseTank;
