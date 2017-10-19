@@ -116,7 +116,7 @@ model RefrigerantProperties
   end ThermodynamicProperties;
 
   record StateErrors
-    "Record that contains the the errors occuring using the different
+    "Record that contains errors occuring using the different
     setState functions"
     extends Modelica.Icons.Record;
 
@@ -174,7 +174,7 @@ model RefrigerantProperties
     "Record that contains further thermodynamic properties calculated during
     the test";
   StateErrors stateErros
-    "Record that contains the the errors occuring using the different
+    "Record that contains errors occuring using the different
     setState functions";
 
 protected

@@ -922,7 +922,7 @@ package R290_IIR_P05_30_T263_343_Horner
           LateInline=true);
   end temperature_ps;
 
-  redeclare replaceable partial function density_pT
+  redeclare replaceable function density_pT
     "Computes density as a function of pressure and temperature"
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";

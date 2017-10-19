@@ -160,9 +160,11 @@ model RefrigerantDerivatives
     "Conversion factor to satisfy derivative check";
     MediumExt.AbsolutePressure p
       "Pressure used for calculations";
+    MediumExt.SpecificEnthalpy h
+      "Specific enthalpy used for calculations";
 
     MediumExt.ThermodynamicState state = MediumExt.setState_phX(
-      p=p, h=200e3 + convH*time^3)
+      p=p, h=h)
       "Thermodynamic state used for caculationg derivatives of the EoS";
     MediumExt.EoS.HelmholtzDerivs f =  MediumExt.EoS.setHelmholtzDerivsThird(
       T=state.T, d=state.d, phase=1)
@@ -221,7 +223,7 @@ model RefrigerantDerivatives
     Real d_dudd_T =  dudd_T_Int-dudd_T_Ext
       "Difference of the derivative (du/dd)_T=const.";
   end ExplDer;
-  ExplDer explDer(p=p,convH=convH)
+  ExplDer explDer(p=p,h=h,convH=convH)
     "Record that contains partial derivatives wrt. density and temperature";
 
   // Definition of further derivatives
@@ -323,11 +325,13 @@ model RefrigerantDerivatives
   record SatDer "Record that contains derivatives at bubble and dew state"
     parameter Real convT(unit="K/(s3)") = 125
     "Conversion factor to satisfy derivative check";
+    Modelica.SIunits.Temperature T
+      "Temperature used for calculations";
     MediumExt.Density d = 75
       "Density used for calculations";
 
     MediumExt.ThermodynamicState state = MediumExt.setState_dTX(
-      d=d, T=min(273.15 + convT*time^3,
+      d=d, T=min(T,
       MediumExt.fluidConstants[1].criticalTemperature-3))
       "Thermodynamic state calculated by d and T for further calculations";
     MediumExt.ThermodynamicState sat_l=
@@ -435,7 +439,7 @@ model RefrigerantDerivatives
     Real d_dudT_v = dudT_v_Int - dudT_v_Ext
       "Difference of the derivative (du_v/dT)_saturation";
   end SatDer;
-  SatDer satDer(d=d,convT=convT)
+  SatDer satDer(T=T,d=d,convT=convT)
     "Record that contains derivates at bubble and dew state";
 
 equation

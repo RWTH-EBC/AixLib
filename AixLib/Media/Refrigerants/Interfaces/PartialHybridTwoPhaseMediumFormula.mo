@@ -1702,10 +1702,10 @@ partial package PartialHybridTwoPhaseMediumFormula
     dspT := dsdT/pressure_derd_T(state);
     dTp := saturationTemperature_derp(sat.psat);
 
-    dsldp := dspT + dsTp * dTp
+    dsldp := dspT + dsTp * dTp;
+
     annotation(Inline=false,
                LateInline=true);
-
   end dBubbleEntropy_dPressure;
 
   function dDewEntropy_dPressure
@@ -1730,10 +1730,10 @@ partial package PartialHybridTwoPhaseMediumFormula
     dspT := dsdT/pressure_derd_T(state);
     dTp := saturationTemperature_derp(sat.psat);
 
-    dsvdp := dspT + dsTp * dTp
+    dsvdp := dspT + dsTp * dTp;
+
     annotation(Inline=false,
                LateInline=true);
-
   end dDewEntropy_dPressure;
 
   function dBubbleDensity_dTemperature
@@ -2034,7 +2034,7 @@ partial package PartialHybridTwoPhaseMediumFormula
       h = specificEnthalpy_dT_der(d=d,T=T,der_d=der_d,der_T=der_T,phase=phase),
       phase = 0);
 
-    annotation(Inlinetrue);
+    annotation(Inline=true);
   end setState_dTX_der;
 
   function setState_pTX_der

@@ -981,7 +981,7 @@ partial package PartialHybridTwoPhaseMediumRecord
     annotation(derivative(noDerivative=phase)=temperature_ps_der);
   end temperature_ps;
 
-  redeclare partial function density_pT
+  redeclare function density_pT
     "Computes density as a function of pressure and temperature"
     extends Modelica.Icons.Function;
     input AbsolutePressure p "Pressure";
