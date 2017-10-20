@@ -1,7 +1,7 @@
 within AixLib.FastHVAC.Components.Storage.BaseClasses;
-package buoyancy_ditribution
+package buoyancyDitribution
 
-  partial function buoyancy_dist
+  partial function buoyancyDist
     input Integer i
                    "position of the layer emitting buoyant mass flow";
     input Integer j
@@ -12,10 +12,10 @@ package buoyancy_ditribution
                                            "Temperature of layers";
     output Real[n] y           "mass fraction of buoyant current received (-1 for emitting layer)";
 
-  end buoyancy_dist;
+  end buoyancyDist;
 
-  function buoyancy_dist_lin
-    extends buoyancy_dist;
+  function buoyancyDistLin
+    extends buoyancyDist;
   protected
     Real[ j-i] p;
 
@@ -30,10 +30,10 @@ package buoyancy_ditribution
     end for;
     y[i+1:j]:=p/sum(p[:]);
 
-  end buoyancy_dist_lin;
+  end buoyancyDistLin;
 
-  function buoyancy_dist_quad
-    extends buoyancy_dist;
+  function buoyancyDistQuad
+    extends buoyancyDist;
   protected
     Real[ j-i] p;
 
@@ -48,10 +48,10 @@ package buoyancy_ditribution
     end for;
     y[i+1:j]:=p/sum(p[:]);
 
-  end buoyancy_dist_quad;
+  end buoyancyDistQuad;
 
-  function buoyancy_dist_cub
-    extends buoyancy_dist;
+  function buoyancyDistCub
+    extends buoyancyDist;
   protected
     Real[ j-i] p;
 
@@ -66,10 +66,10 @@ package buoyancy_ditribution
     end for;
     y[i+1:j]:=p/sum(p[:]);
 
-  end buoyancy_dist_cub;
+  end buoyancyDistCub;
 
-  function buoyancy_dist_inv
-    extends buoyancy_dist;
+  function buoyancyDistInv
+    extends buoyancyDist;
 
   protected
     Real[ j-i] p;
@@ -84,10 +84,10 @@ package buoyancy_ditribution
 
     end for;
     y[i+1:j]:=p/sum(p[:]);
-  end buoyancy_dist_inv;
+  end buoyancyDistInv;
 
-  function buoyancy_dist_inv2
-    extends buoyancy_dist;
+  function buoyancyDistInv2
+    extends buoyancyDist;
 
   protected
     Real[ j-i] p;
@@ -102,5 +102,5 @@ package buoyancy_ditribution
 
     end for;
     y[i+1:j]:=p/sum(p[:]);
-  end buoyancy_dist_inv2;
-end buoyancy_ditribution;
+  end buoyancyDistInv2;
+end buoyancyDitribution;

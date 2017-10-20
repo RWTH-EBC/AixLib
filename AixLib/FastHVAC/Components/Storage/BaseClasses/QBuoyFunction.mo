@@ -12,9 +12,9 @@ function QBuoyFunction
   output Modelica.SIunits.HeatFlowRate[n] Q_buoy_abs
   "Cumulative heat flow rate into the layer due to buoyancy";
   replaceable function fDist =
-      AixLib.FastHVAC.Components.Storage.BaseClasses.buoyancy_ditribution.buoyancy_dist_inv2
+      AixLib.FastHVAC.Components.Storage.BaseClasses.buoyancyDitribution.buoyancyDistInv2
     constrainedby
-    AixLib.FastHVAC.Components.Storage.BaseClasses.buoyancy_ditribution.buoyancy_dist;
+    AixLib.FastHVAC.Components.Storage.BaseClasses.buoyancyDitribution.buoyancyDist;
 
 protected
   Modelica.SIunits.HeatFlowRate Q_buoy  "Heat flow rate from layer i to all above layers with lower temperature";

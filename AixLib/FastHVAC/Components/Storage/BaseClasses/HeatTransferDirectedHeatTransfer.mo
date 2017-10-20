@@ -14,7 +14,7 @@ model HeatTransferDirectedHeatTransfer
 
   parameter Modelica.SIunits.Time tau=100;
   parameter Modelica.SIunits.TemperatureDifference dTref=1;
-  function f_Qbuoy =
+  function fQbuoy =
       AixLib.FastHVAC.Components.Storage.BaseClasses.QBuoyFunction;
 
 protected
@@ -31,7 +31,7 @@ protected
 
 equation
   //buoyancy heat distribution
-  Q_buoy_abs = f_Qbuoy(
+  Q_buoy_abs =fQbuoy(
     n,
     height,
     A,

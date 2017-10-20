@@ -1,9 +1,9 @@
 PartialHeatTransferLayers
-buoyancy_ditribution
 HeatTransferDirectedHeatTransfer
+QBuoyFunction
+buoyancyDitribution
 HeatTransferQbuoy
 HeatTransferQbuoyTimer
-QBuoyFunction
 QbuoyFunctions
 HeatTransferOnlyConduction
 HeatTransferLambdaSimple
