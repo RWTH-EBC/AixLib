@@ -1,5 +1,5 @@
 within AixLib.FastHVAC.Components.Storage;
-model Storage_simpleWall
+model HeatStorageVariablePorts "Simple model of a heat storage"
 
   /* *******************************************************************
       Medium
@@ -22,8 +22,11 @@ public
     annotation(Dialog(group="Medium"),choicesAllMatching);
 
   parameter Modelica.SIunits.Temperature T_start=323.15
-    "Start temperature of medium";
-
+    "Start temperature of medium" annotation(Dialog(tab="Initialisation"));
+  parameter Modelica.SIunits.Temperature T_start_wall=293.15
+    "Starting Temperature of wall in K" annotation(Dialog(tab="Initialisation"));
+  parameter Modelica.SIunits.Temperature T_start_ins=293.15
+    "Starting Temperature of insulation in K" annotation(Dialog(tab="Initialisation"));
   /* *******************************************************************
       HeatStorage Parameters
      ******************************************************************* */
@@ -86,27 +89,6 @@ public
  final parameter Integer dis_HC1 = n_HC1_up-n_HC1_low+1;
  final parameter Integer dis_HC2 = n_HC2_up-n_HC2_low+1;
 
-protected
-  parameter Real k_zyl(final unit="W/K") = 2*Modelica.Constants.pi
-    *data.hTank/n/(1/(alpha_in*data.dTank/2) + 1/data.lambdaIns*log(
-    (data.dTank/2 + data.sIns)/(data.dTank/2)) + 1/(alpha_out*(data.dTank
-    /2 + data.sIns)));
-    parameter Modelica.SIunits.Area A_cov = data.dTank^2/4*Modelica.Constants.pi
-    "Area cop/bottom cover";
-    parameter Modelica.SIunits.Area A_wall = (data.dTank+data.sIns+data.sWall)*Modelica.Constants.pi * data.hTank
-    "Area mantle";
-
-    //parameter Real k_cov(final unit="W/(m2.K)") =  {data.lambdaIns/data.sIns*Modelica.Constants.pi*(data.dTank /2)^2 ;
-
-protected
-  parameter Real k_wall[n](final unit="W/(m2.K)") = cat(
-            1,
-            {data.lambdaIns/data.sIns*Modelica.Constants.pi*(data.dTank
-      /2)^2 + k_zyl},
-            {k_zyl for k in 2:n - 1},
-            {data.lambdaIns/data.sIns*Modelica.Constants.pi*(data.dTank
-      /2)^2 + k_zyl});
-
   /* *******************************************************************
       Components
      ******************************************************************* */
@@ -118,9 +100,6 @@ protected
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-30,50})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor
-                                                        heatTrans[n]( G=(k_wall))
-    annotation (Placement(transformation(extent={{20,38},{40,58}})));
 public
   FastHVAC.Interfaces.EnthalpyPort_a LoadingCycle_In[n_load_cycles] annotation (
      Placement(transformation(extent={{-30,90},{-10,110}}), iconTransformation(
@@ -140,17 +119,18 @@ public
     annotation (Placement(transformation(
         extent={{-20,-19},{20,19}},
         rotation=270,
-        origin={-59,0})));
+        origin={-39,0})));
 
   FastHVAC.BaseClasses.EnergyBalance   energyBalance_unload[n,n_unload_cycles]
     annotation (Placement(transformation(
         extent={{-20,20},{20,-20}},
         rotation=270,
-        origin={60,0})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTemp_load[n_load_cycles,2]
-    annotation (Placement(transformation(extent={{98,24},{120,44}})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow dummy_load[n_load_cycles,2](
-      each Q_flow=0)
+        origin={40,0})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTemp_load[
+    n_load_cycles,2]
+    annotation (Placement(transformation(extent={{100,14},{122,34}})));
+  Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow dummy_load[n_load_cycles,
+    2](each Q_flow=0)
     annotation (Placement(transformation(extent={{98,44},{118,64}})));
 
   FastHVAC.Interfaces.EnthalpyPort_a port_HC1_in if use_heatingCoil1
@@ -171,10 +151,11 @@ public
     annotation (Placement(transformation(extent={{-110,-90},{-90,-70}}),
         iconTransformation(extent={{-90,-66},{-76,-52}})));
 
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTemp_unload[n_unload_cycles,2]
-    annotation (Placement(transformation(extent={{98,-56},{120,-36}})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow dummy_unload[n_unload_cycles,2](
-      each Q_flow=0)
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTemp_unload[
+    n_unload_cycles,2]
+    annotation (Placement(transformation(extent={{98,-60},{120,-40}})));
+  Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow dummy_unload[
+    n_unload_cycles,2](each Q_flow=0)
     annotation (Placement(transformation(extent={{98,-36},{118,-16}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatingRod if use_heatingRod annotation (Placement(transformation(
           extent={{-110,90},{-90,110}}),iconTransformation(extent={{-70,70},{-50,
@@ -212,15 +193,27 @@ public
         extent={{-14,-12},{14,12}},
         rotation=270,
         origin={-72,-60})));
-//   Modelica.Thermal.HeatTransfer.Components.ThermalConductor heatTransCover[2]
-//     annotation (Placement(transformation(extent={{20,-40},{40,-20}})));
+  Fluid.Storage.BaseClasses.StorageCover                  top_cover(
+    D1=data.dTank)   annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=90,
+        origin={2,70})));
+  Fluid.Storage.BaseClasses.StorageMantle                  storage_mantle[n](
+    each height=data.hTank/n,
+    each D1=data.dTank)
+    annotation (Placement(transformation(extent={{60,-10},{80,10}})));
+  Fluid.Storage.BaseClasses.StorageCover                  bottom_cover(
+    D1=data.dTank)   annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=270,
+        origin={0,-38})));
 
-HeatTransfer heatTransfer annotation (Placement(transformation(extent={{-10,-10},
-            {10,10}},  rotation=0)));
+        HeatTransfer heatTransfer annotation (Placement(transformation(extent={{-8,18},
+            {12,38}},  rotation=0)));
 
  replaceable model HeatTransfer =
-     BaseClasses.HeatTransfer_OnlyConduction constrainedby
-    BaseClasses.Partial_HeatTransfer_Layers
+     BaseClasses.HeatTransferOnlyConduction constrainedby
+    BaseClasses.PartialHeatTransferLayers
     "Heat Transfer Model between fluid layers" annotation (choicesAllMatching=true,
       Documentation(info =                             "<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>
@@ -237,8 +230,8 @@ Heat transfer model for heat transfer between two fluid layers.
 </ul></p>
 </html>
 "));
-
 equation
+
   if use_heatingRod then
 
 connect(heatingRod, layer[n_HR].port);
@@ -247,8 +240,8 @@ connect(heatingRod, layer[n_HR].port);
   der(Heat_loss) = out.Q_flow/(1000*3600);
 
   for k in 1:n loop
-    connect(layer[k].port, heatTrans[k].port_a);
-    connect(heatTrans[k].port_b, out);
+    connect(layer[k].port, storage_mantle[k].heatportInner);
+    connect(storage_mantle[k].heatportOuter, out);
   end for;
 
   /* ***************Loading Cycles********************************/
@@ -262,28 +255,28 @@ connect(heatingRod, layer[n_HR].port);
 
      for m in 1:n loop
        if m<=load_cycles[k,1] and m>=load_cycles[k,2] then
-         connect(energyBalance_load[m, k].therm,layer[m].port);
+         connect(energyBalance_load[m, k].heatPort_a,layer[m].port);
        elseif m>load_cycles[k,1] then
-         connect(energyBalance_load[m, k].therm,varTemp_load[k,2].port);
+        connect(energyBalance_load[m, k].heatPort_a, varTemp_load[k, 2].port);
        else
-         connect(energyBalance_load[m,k].therm,varTemp_load[k,1].port);
+        connect(energyBalance_load[m, k].heatPort_a, varTemp_load[k, 1].port);
        end if;
      end for;
 
   /* *************Setting of the lower temperature********************************/
      if load_cycles[k,2]==1 then
        //just a dummy value, because the dummy varTemp_load is not connected to any energyBalance
-       varTemp_load[k,1].T=323.15;
+      varTemp_load[k, 1].T = 323.15;
      else
-       varTemp_load[k,1].T=layer[load_cycles[k,2]].T;
+      varTemp_load[k, 1].T = layer[load_cycles[k, 2]].T;
      end if;
 
   /* *************Setting of the upper temperature********************************/
      if load_cycles[k,1]==n then
        //just a dummy value, because the dummy varTemp_load is not connected to any energyBalance
-       varTemp_load[k,2].T=323.15;
+      varTemp_load[k, 2].T = 323.15;
      else
-       varTemp_load[k,2].T=LoadingCycle_In[k].T;
+      varTemp_load[k, 2].T = LoadingCycle_In[k].T;
      end if;
 
   end for;
@@ -299,28 +292,28 @@ connect(heatingRod, layer[n_HR].port);
 
      for m in 1:n loop
        if m>=unload_cycles[k,1] and m<=unload_cycles[k,2] then
-         connect(energyBalance_unload[m, k].therm,layer[m].port);
+         connect(energyBalance_unload[m, k].heatPort_a,layer[m].port);
        elseif m>unload_cycles[k,2] then
-         connect(energyBalance_unload[m, k].therm,varTemp_unload[k,2].port);
+        connect(energyBalance_unload[m, k].heatPort_a, varTemp_unload[k, 2].port);
        else
-         connect(energyBalance_unload[m,k].therm,varTemp_unload[k,1].port);
+        connect(energyBalance_unload[m, k].heatPort_a, varTemp_unload[k, 1].port);
        end if;
      end for;
 
   /* *************Setting of the lower temperature********************************/
      if unload_cycles[k, 1]==1 then
        //just a dummy value, because the dummy varTemp_load is not connected to any energyBalance
-       varTemp_unload[k,1].T=323.15;
+      varTemp_unload[k, 1].T = 323.15;
      else
-       varTemp_unload[k,1].T=UnloadingCycle_In[k].T;
+      varTemp_unload[k, 1].T = UnloadingCycle_In[k].T;
      end if;
 
   /* *************Setting of the upper temperature********************************/
      if unload_cycles[k, 2]==n then
        //just a dummy value, because the dummy varTemp_load is not connected to any energyBalance
-       varTemp_unload[k,2].T=323.15;
+      varTemp_unload[k, 2].T = 323.15;
      else
-       varTemp_unload[k,2].T=layer[unload_cycles[k, 2]].T;
+      varTemp_unload[k, 2].T = layer[unload_cycles[k, 2]].T;
      end if;
 
    end for;
@@ -356,15 +349,13 @@ end for;
 //   T_Top = layer[n].T;
 //   T_Mid = layer[integer(BaseLib.Utilities.Round(n/2 + 0.5,0))].T;
 //   T_Bottom = layer[1].T;
-
 connect(heatTransfer.therm, layer.port);
-
-   connect(varTemp_load.port, dummy_load.port) annotation (Line(
-       points={{120,34},{94,34},{94,54},{118,54}},
-       color={191,0,0},
-       smooth=Smooth.None));
+  connect(varTemp_load.port, dummy_load.port) annotation (Line(
+      points={{122,24},{94,24},{94,54},{118,54}},
+      color={191,0,0},
+      smooth=Smooth.None));
   connect(varTemp_unload.port, dummy_unload.port) annotation (Line(
-      points={{120,-46},{96,-46},{96,-26},{118,-26}},
+      points={{120,-50},{96,-50},{96,-26},{118,-26}},
       color={191,0,0},
       smooth=Smooth.None));
   connect(port_HC1_in, heatingCoil1.enthalpyPort_a1) annotation (Line(
@@ -656,6 +647,7 @@ revisions="<html>
 <li><i>December 20, 2016&nbsp; </i> Tobias Blacha:<br/>Moved into AixLib</li>
 <li><i>January 27, 2015&nbsp;</i> by Konstantin Finkbeiner:<br/>Added documentation.</li>
 <li><i>December 16, 2014</i> by Sebastian Stinner:<br/>Implemented.</li>
+
 </ul></p>
 </html>"));
-end Storage_simpleWall;
+end HeatStorageVariablePorts;

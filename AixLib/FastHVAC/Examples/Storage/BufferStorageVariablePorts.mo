@@ -1,5 +1,5 @@
 within AixLib.FastHVAC.Examples.Storage;
-model BufferStorage_variablePorts
+model BufferStorageVariablePorts
 
   extends Modelica.Icons.Example;
 
@@ -17,7 +17,7 @@ model BufferStorage_variablePorts
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-42,28})));
-  Components.Storage.HeatStorage_variablePorts                      heatStorage_variablePorts(
+  Components.Storage.HeatStorageVariablePorts heatStorageVariablePorts(
     n=10,
     load_cycles=[10,4; 6,1],
     n_HC1_up=10,
@@ -26,7 +26,9 @@ model BufferStorage_variablePorts
     n_HR=10,
     unload_cycles=[1,10; 4,10],
     T_start_wall=323.15,
-    T_start_ins=323.15)
+    T_start_ins=323.15,
+    redeclare model HeatTransfer =
+        Components.Storage.BaseClasses.HeatTransferQbuoyTimer)
     annotation (Placement(transformation(extent={{-6,-40},{48,20}})));
   FastHVAC.Components.Pumps.FluidSource fluidSource
     annotation (Placement(transformation(extent={{-70,50},{-50,70}})));
@@ -153,44 +155,44 @@ equation
       points={{-79,84},{-68,84},{-68,64.2}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(fluidSource5.enthalpyPort_b, heatStorage_variablePorts.port_HC2_in)
-    annotation (Line(points={{-48,-69},{-46,-69},{-46,-18},{-46,-15.7},{-1.41,
-          -15.7}}, color={176,0,0}));
-  connect(heatStorage_variablePorts.out, ambient.port) annotation (Line(points=
-          {{37.2,14},{56,14},{56,16},{76,16}}, color={191,0,0}));
+  connect(fluidSource5.enthalpyPort_b, heatStorageVariablePorts.port_HC2_in)
+    annotation (Line(points={{-48,-69},{-46,-69},{-46,-18},{-46,-15.7},{-1.41,-15.7}},
+        color={176,0,0}));
+  connect(heatStorageVariablePorts.out, ambient.port) annotation (Line(points={
+          {37.2,14},{56,14},{56,16},{76,16}}, color={191,0,0}));
   connect(dotmLoad2.y, fluidSource3.dotm) annotation (Line(points={{-24,79},{
           -24,79},{-24,72},{-24,72},{-4.6,72},{-4.6,68}}, color={0,0,127}));
-  connect(vessel4.enthalpyPort_a, heatStorage_variablePorts.port_HC1_out)
+  connect(vessel4.enthalpyPort_a, heatStorageVariablePorts.port_HC1_out)
     annotation (Line(points={{-16.6,-4},{-1.14,-4}}, color={176,0,0}));
-  connect(vessel5.enthalpyPort_a, heatStorage_variablePorts.port_HC2_out)
+  connect(vessel5.enthalpyPort_a, heatStorageVariablePorts.port_HC2_out)
     annotation (Line(points={{-16.6,-28},{-1.41,-28},{-1.41,-27.7}}, color={176,
           0,0}));
-  connect(heatingRod.port, heatStorage_variablePorts.heatingRod) annotation (
+  connect(heatingRod.port, heatStorageVariablePorts.heatingRod) annotation (
       Line(points={{-52,28},{-24,28},{4.8,28},{4.8,14}}, color={191,0,0}));
-  connect(fluidSource4.enthalpyPort_b, heatStorage_variablePorts.port_HC1_in)
+  connect(fluidSource4.enthalpyPort_b, heatStorageVariablePorts.port_HC1_in)
     annotation (Line(points={{-48,3},{-48,8},{-0.6,8}}, color={176,0,0}));
-  connect(vessel3.enthalpyPort_a, heatStorage_variablePorts.UnloadingCycle_Out[
-    1]) annotation (Line(points={{57,73.6},{57,56},{26,56},{26,38},{26,22},{26,
-          20},{26.4,20}}, color={176,0,0}));
-  connect(vessel2.enthalpyPort_a, heatStorage_variablePorts.UnloadingCycle_Out[
-    2]) annotation (Line(points={{67,73.6},{67,56},{58,56},{26.4,56},{26.4,20}},
+  connect(vessel3.enthalpyPort_a, heatStorageVariablePorts.UnloadingCycle_Out[1])
+    annotation (Line(points={{57,73.6},{57,56},{26,56},{26,38},{26,22},{26,20},
+          {26.4,20}}, color={176,0,0}));
+  connect(vessel2.enthalpyPort_a, heatStorageVariablePorts.UnloadingCycle_Out[2])
+    annotation (Line(points={{67,73.6},{67,56},{58,56},{26.4,56},{26.4,20}},
         color={176,0,0}));
-  connect(vessel.enthalpyPort_a, heatStorage_variablePorts.LoadingCycle_Out[2])
+  connect(vessel.enthalpyPort_a, heatStorageVariablePorts.LoadingCycle_Out[2])
     annotation (Line(points={{-19,-73.6},{-19,-52},{15.6,-52},{15.6,-40}},
         color={176,0,0}));
-  connect(vessel1.enthalpyPort_a, heatStorage_variablePorts.LoadingCycle_Out[1])
+  connect(vessel1.enthalpyPort_a, heatStorageVariablePorts.LoadingCycle_Out[1])
     annotation (Line(points={{-29,-73.6},{-29,-52},{16,-52},{16,-46},{15.6,-46},
           {15.6,-40}}, color={176,0,0}));
-  connect(fluidSource.enthalpyPort_b, heatStorage_variablePorts.LoadingCycle_In[
+  connect(fluidSource.enthalpyPort_b, heatStorageVariablePorts.LoadingCycle_In[
     1]) annotation (Line(points={{-50,61},{-40,61},{-40,40},{15.6,40},{15.6,20}},
         color={176,0,0}));
-  connect(fluidSource3.enthalpyPort_b, heatStorage_variablePorts.LoadingCycle_In[
+  connect(fluidSource3.enthalpyPort_b, heatStorageVariablePorts.LoadingCycle_In[
     2]) annotation (Line(points={{-1,50},{-1,40},{16,40},{16,30},{15.6,30},{
           15.6,20}}, color={176,0,0}));
-  connect(heatStorage_variablePorts.UnloadingCycle_In[1], fluidSource1.enthalpyPort_b)
+  connect(heatStorageVariablePorts.UnloadingCycle_In[1], fluidSource1.enthalpyPort_b)
     annotation (Line(points={{26.4,-40},{26,-40},{26,-45},{48,-45}}, color={176,
           0,0}));
-  connect(fluidSource2.enthalpyPort_b, heatStorage_variablePorts.UnloadingCycle_In[
+  connect(fluidSource2.enthalpyPort_b, heatStorageVariablePorts.UnloadingCycle_In[
     2]) annotation (Line(points={{27,-52},{26.4,-52},{26.4,-40}}, color={176,0,
           0}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
@@ -202,4 +204,4 @@ equation
 <li><i>December 20, 2016&nbsp; </i> Tobias Blacha:<br/>Moved into AixLib</li>
 </ul></p>
 </html>"));
-end BufferStorage_variablePorts;
+end BufferStorageVariablePorts;

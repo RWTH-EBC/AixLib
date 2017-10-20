@@ -1,8 +1,7 @@
 within AixLib.FastHVAC.Components.Storage.BaseClasses;
-model HeatTransfer_buoyancy_Wetter
+model HeatTransferBuoyancyWetter
 
-
-  extends Partial_HeatTransfer_Layers;
+  extends PartialHeatTransferLayers;
     parameter Modelica.SIunits.Time tau(min=0)=100 "Time constant for mixing";
   Modelica.SIunits.HeatFlowRate[n-1] Q_flow
     "Heat flow rate from segment i+1 to i";
@@ -48,4 +47,4 @@ equation
 <li><i>October 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately </li>
 </ul></p>
 </html>"));
-end HeatTransfer_buoyancy_Wetter;
+end HeatTransferBuoyancyWetter;
