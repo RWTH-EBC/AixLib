@@ -3,6 +3,12 @@ partial model PartialEngineEfficiency
   "Based model used by all models describing engine efficiencies"
   extends BaseClasses.PartialEfficiency;
 
+  // Definition of parameters
+  //
+  parameter Boolean useIseWor = false
+    "= true, if isentropic work is used to compute compressor's power 
+    consumption";
+
   // Definition of outputs
   //
   output Modelica.SIunits.Efficiency etaEng(min=0, max=1, nominal= 0.9)

@@ -24,7 +24,6 @@ various compressor models"
     annotation(Dialog(tab="General",group="Compressor's characterisitcs"),
                HideResult=true);
 
-
   // Definition of models describing efficiencies
   //
   replaceable model EngineEfficiency =
@@ -60,12 +59,12 @@ various compressor models"
 
   // Definition of parameters describing the efficiencies
   //
-  parameter Boolean useIseWor = false
+  parameter Boolean useIseWor = oveEngEff.useIseWor
     "= true, if overal machanic efficiency is related to isentropic compressor 
     work"
     annotation(Dialog(tab="Efficiencies and similitude theory",
-               group="Engine efficiency"),
-               choices(checkBox=true),
+               group="Engine efficiency",
+               enable=false),
                HideResult=true);
 
   // Extensions and parameter propagation

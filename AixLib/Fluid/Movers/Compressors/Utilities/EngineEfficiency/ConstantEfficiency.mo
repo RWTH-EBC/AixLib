@@ -1,7 +1,8 @@
 within AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency;
 model ConstantEfficiency
   "General model that describes a constant overall engine efficiency"
-  extends PartialEngineEfficiency;
+  extends PartialEngineEfficiency(
+    final useIseWor=false);
 
   // Definition of parameters
   //
