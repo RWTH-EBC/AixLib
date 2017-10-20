@@ -202,13 +202,12 @@ public
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,-46})));
-   BaseClasses.HeatTransfer_OnlyConduction
-                heatTransfer annotation (Placement(transformation(extent={{-8,18},
-            {12,38}},  rotation=0)));
+  BaseClasses.HeatTransferOnlyConduction heatTransfer annotation (Placement(
+        transformation(extent={{-8,18},{12,38}}, rotation=0)));
 
     replaceable model HeatTransfer =
-     BaseClasses.HeatTransfer_OnlyConduction constrainedby
-    BaseClasses.Partial_HeatTransfer_Layers
+     BaseClasses.HeatTransferOnlyConduction  constrainedby
+    BaseClasses.PartialHeatTransferLayers
     "Heat Transfer Model between fluid layers" annotation (choicesAllMatching=true,
       Documentation(info =                             "<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>

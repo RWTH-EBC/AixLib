@@ -1,7 +1,7 @@
 within AixLib.FastHVAC.Components.Storage.BaseClasses;
-package qbuoy_functions
+package QbuoyFunctions
 
-  function dTover_eff
+  function dToverEff
     input Modelica.SIunits.TemperatureDifference dTover;
     input Real h_rel;
     output Modelica.SIunits.TemperatureDifference dTover_eff;
@@ -13,7 +13,7 @@ package qbuoy_functions
   algorithm
     dTover_eff:=a*dTover*exp(-b*h_rel);
 
-  end dTover_eff;
+  end dToverEff;
 
   function qbuoy0
     input Modelica.SIunits.TemperatureDifference dTover;
@@ -27,11 +27,9 @@ package qbuoy_functions
   algorithm
     qbuoy0:=a*dTover*(1-exp(-b*dh_gap));
 
-
-
   end qbuoy0;
 
-  function xdown
+  function xDown
     input Modelica.SIunits.TemperatureDifference dTover;
     input Real dh_gap;
     output Real xdown;
@@ -45,11 +43,9 @@ package qbuoy_functions
 
   xdown:=a + b*(1 - exp(-c*dTover))*exp(-d*dh_gap);
 
+  end xDown;
 
-
-  end xdown;
-
-  function dhdown
+  function dhDown
     input Modelica.SIunits.TemperatureDifference dTover;
     input Real dh_gap;
     output Real dhdown;
@@ -59,14 +55,13 @@ package qbuoy_functions
     parameter Real c(unit="1/K")=0.087;
     parameter Real d=0.1257;
 
-
   algorithm
 
     dhdown:=a + b*(1 - exp(-c*dTover))*(1 - exp(-d*dh_gap));
 
-  end dhdown;
+  end dhDown;
 
-  function c_qup
+  function cQup
 
     input Real dh_gap;
     output Real c_qup;
@@ -77,9 +72,9 @@ package qbuoy_functions
   algorithm
     c_qup:=p1*dh_gap + p2;
 
-  end c_qup;
+  end cQup;
 
-  function q_freebuoy
+  function qFreebuoy
     input Integer n;
     input Integer nbuoy;
     input Integer nstop;
@@ -98,20 +93,15 @@ package qbuoy_functions
     q_freebuoy:=zeros(n);
     dh_gap:=nstop - nbuoy - 1;
     qb0:=qbuoy0(dTover,dh_gap);
-    dhdwn:=dhdown(dTover,dh_gap);
-    c_qu:=c_qup(dh_gap);
+    dhdwn:=dhDown(dTover,dh_gap);
+    c_qu:=cQup(dh_gap);
     //xdwn:=xdown(dTover, dh_gap);
-
-
-
 
     for i in 1:(nbuoy-1) loop
       q_freebuoy[i]:=max(0, 1 + (i - nbuoy)/dhdwn);
     end for;
 
   //   q_freebuoy[1:nbuoy-1]:=q_freebuoy[1:nbuoy - 1]/sum(q_freebuoy[1:nbuoy - 1])*qb0*xdwn;
-
-
 
     for i in (nbuoy+1):nstop-1 loop
       q_freebuoy[i]:= 1 + (i - nbuoy)*(max(c_qu-1,0.01))/dh_gap;
@@ -124,8 +114,7 @@ package qbuoy_functions
 
     q_freebuoy[nbuoy]:=-qb0;
 
-
-  end q_freebuoy;
+  end qFreebuoy;
 
   function qtop
 
@@ -144,11 +133,9 @@ package qbuoy_functions
   algorithm
     qtop:=a*(1 - exp(-b*dTover))*dTborder*(1 - exp(-c*exp(-d*dn_gap)));
 
-
-
   end qtop;
 
-  function c_top_down
+  function cTopDown
     input Modelica.SIunits.TemperatureDifference dTover;
     input Modelica.SIunits.TemperatureDifference dTborder;
     input Integer dn_gap;
@@ -165,10 +152,9 @@ package qbuoy_functions
   algorithm
     c_top_down:=a*exp(-b*dTover)*(1 - exp(-c*dTborder))*(d + e*dn_gap);
 
+  end cTopDown;
 
-  end c_top_down;
-
-  function c_top_up
+  function cTopUp
     input Modelica.SIunits.TemperatureDifference dTover;
     input Modelica.SIunits.TemperatureDifference dTborder;
     input Integer dn_gap;
@@ -185,10 +171,9 @@ package qbuoy_functions
   algorithm
     c_top_up:=a*exp(-b*dTover)*(1 - exp(-c*dTborder))*(d - e*dn_gap);
 
+  end cTopUp;
 
-  end c_top_up;
-
-  function q_topmix
+  function qTopmix
     input Integer n;
     input Integer nbuoy;
     input Integer nstop;
@@ -196,7 +181,6 @@ package qbuoy_functions
     input Modelica.SIunits.TemperatureDifference dTborder;
 
     output Modelica.SIunits.SpecificEnergy q_topmix[n];
-
 
   protected
     Integer dn_gap;
@@ -217,8 +201,14 @@ package qbuoy_functions
 
     //heat distribution downwards of border, where i is the distance to the border
 
-      c_td:=c_top_down(dTover,dTborder,dn_gap);
-      c_tu:=c_top_up(dTover,dTborder,dn_gap);
+      c_td:=cTopDown(
+          dTover,
+          dTborder,
+          dn_gap);
+      c_tu:=cTopUp(
+          dTover,
+          dTborder,
+          dn_gap);
 
       ftopdown_sum:=0;
       for i in 1:(nstop-1) loop
@@ -232,7 +222,6 @@ package qbuoy_functions
 
       q_topmix[1:nstop-1]:=q_topmix[1:nstop-1]/sum(q_topmix[1:nstop-1])*qt0;
 
-
       ftopup_sum:=0;
       for i in 1:(n-nstop+1) loop
         if exp(-i*c_tu)<0.05*ftopup_sum then
@@ -244,12 +233,9 @@ package qbuoy_functions
 
       q_topmix[nstop:n]:=q_topmix[nstop:n]/sum(q_topmix[nstop:n])*(-qt0);
 
-
     end if;
 
-
-
-  end q_topmix;
+  end qTopmix;
 
   function qbot
     input Modelica.SIunits.TemperatureDifference dTover;
@@ -264,7 +250,7 @@ package qbuoy_functions
 
   end qbot;
 
-  function c_bot_down
+  function cBotDown
     input Modelica.SIunits.TemperatureDifference dTover;
     input Modelica.SIunits.TemperatureDifference dT13;
 
@@ -277,9 +263,9 @@ package qbuoy_functions
   algorithm
     c_bot_down:=a*exp(-b*dTover)*(1 - exp(-c*dT13));
 
-  end c_bot_down;
+  end cBotDown;
 
-  function c_bot_up
+  function cBotUp
     input Modelica.SIunits.TemperatureDifference dTover;
     input Modelica.SIunits.TemperatureDifference dT13;
 
@@ -292,10 +278,9 @@ package qbuoy_functions
   algorithm
     c_bot_up:=a*exp(-b*dTover)*exp(c*dT13);
 
+  end cBotUp;
 
-  end c_bot_up;
-
-  function q_botmix
+  function qBotmix
     input Integer n;
     input Integer nbuoy;
     input Modelica.SIunits.TemperatureDifference dTover;
@@ -315,10 +300,9 @@ package qbuoy_functions
     q_botmix:=zeros(n);
 
     if dT13>0 then
-      c_bd:=c_bot_down(dTover,dT13);
-      c_bu:=c_bot_up(dTover,dT13);
+      c_bd:=cBotDown(dTover, dT13);
+      c_bu:=cBotUp(dTover, dT13);
       qb0:=qbot(dTover,dT13);
-
 
       fbotdown_sum:=0;
       for i in 1:(nbuoy-1) loop
@@ -331,8 +315,6 @@ package qbuoy_functions
       end for;
 
       q_botmix[1:nbuoy-1]:=q_botmix[1:nbuoy-1]/sum(q_botmix[1:nbuoy-1])*qb0;
-
-
 
       fbotup_sum:=0;
 
@@ -348,10 +330,9 @@ package qbuoy_functions
 
     end if;
 
+  end qBotmix;
 
-  end q_botmix;
-
-  function qbuoy_single
+  function qbuoySingle
     input Integer n;
     input Integer nbuoy;
     input Integer nstop;
@@ -362,15 +343,27 @@ package qbuoy_functions
     output Modelica.SIunits.SpecificEnergy q_buoy_single[n];
 
   algorithm
-    q_buoy_single:=q_freebuoy(n,nbuoy,nstop,dTover) + q_topmix(n,nbuoy,nstop,dTover,dTborder) + q_botmix(n,nbuoy,dTover,dT13);
+    q_buoy_single:=qFreebuoy(
+        n,
+        nbuoy,
+        nstop,
+        dTover) + qTopmix(
+        n,
+        nbuoy,
+        nstop,
+        dTover,
+        dTborder) + qBotmix(
+        n,
+        nbuoy,
+        dTover,
+        dT13);
 
-  end qbuoy_single;
+  end qbuoySingle;
 
-  function qbuoy_total
+  function qbuoyTotal
     input Integer n;
     input Modelica.SIunits.Temperature T[n];
     output Modelica.SIunits.SpecificEnergy q_total[n];
-
 
   protected
     Modelica.SIunits.TemperatureDifference dTover;
@@ -380,10 +373,8 @@ package qbuoy_functions
     Integer dngap;
     Integer nstop;
 
-
   algorithm
     q_total:=zeros(n);
-
 
     for i in 1:n-1 loop
 
@@ -399,12 +390,11 @@ package qbuoy_functions
         nstop:=n+1;
         for j in nbuoy+2:n loop
 
-             if (T[j]-T[nbuoy+1])>dTover_eff(dTover,j-nbuoy-1) then
+          if (T[j] - T[nbuoy + 1]) > dToverEff(dTover, j - nbuoy - 1) then
 
                nstop:=j;
                break;
              end if;
-
 
   //               if T[j]>T[nbuoy] then
   //                 nstop:=j;
@@ -415,20 +405,19 @@ package qbuoy_functions
 
         dTborder:=if (nstop == n + 1) then 0 else T[nstop] - T[nstop - 1];
 
-
-        q_total:=q_total + qbuoy_single(n,nbuoy,nstop,dTover,dT13,dTborder);
-
-
-
-
+        q_total:=q_total + qbuoySingle(
+            n,
+            nbuoy,
+            nstop,
+            dTover,
+            dT13,
+            dTborder);
 
       end if;
 
     end for;
 
-
-
-  end qbuoy_total;
+  end qbuoyTotal;
 
   function isBuoy
       input Integer n;
@@ -438,7 +427,6 @@ package qbuoy_functions
 
   algorithm
 
-
     isBuoy:=false;
 
     for i in 1:n-1 loop
@@ -446,15 +434,9 @@ package qbuoy_functions
       if T[i]>T[i+1] then
         isBuoy:=true;
 
-
-
-
-
-
       end if;
 
     end for;
 
-
   end isBuoy;
-end qbuoy_functions;
+end QbuoyFunctions;

@@ -1,8 +1,8 @@
 within AixLib.FastHVAC.Components.Storage.BaseClasses;
-model HeatTransfer_qbuoy_timer
+model HeatTransferQbuoyTimer
 
 //  import BufferStorage = BufferStorage2;
-  extends Partial_HeatTransfer_Layers;
+  extends PartialHeatTransferLayers;
   Modelica.SIunits.HeatFlowRate[n-1] Q_flow
     "Heat flow rate from segment i+1 to i";
 
@@ -24,12 +24,12 @@ protected
       Modelica.SIunits.HeatFlowRate Q_buoy[n](start=zeros(n));
       Modelica.SIunits.SpecificEnergy q_buoy[n];
       function isBuoy =
-      AixLib.FastHVAC.Components.Storage.BaseClasses.qbuoy_functions.isBuoy;
-
+      AixLib.FastHVAC.Components.Storage.BaseClasses.QbuoyFunctions.isBuoy;
 
 equation
-  q_buoy= AixLib.FastHVAC.Components.Storage.BaseClasses.qbuoy_functions.qbuoy_total(n, therm.T);
-
+  q_buoy=
+    AixLib.FastHVAC.Components.Storage.BaseClasses.QbuoyFunctions.qbuoyTotal(n,
+    therm.T);
 
 der(timer)=-1;
 der(Q_buoy)=zeros(n);
@@ -44,7 +44,6 @@ when timer<0 then
     reinit(Q_buoy,zeros(n));
   end if;
 
-
 end when;
 
 //   if isBuoy(n, therm.T) and timer<0 then
@@ -52,7 +51,6 @@ end when;
 //     Q_buoy= q_buoy*A*rho*height/tau;
 //   else
 //     Q_buoy=zeros(n);
-
 
 //   end if;
 
@@ -92,4 +90,4 @@ end when;
           extent={{-100,-60},{100,-100}},
           lineColor={0,0,255},
           textString="%name")}));
-end HeatTransfer_qbuoy_timer;
+end HeatTransferQbuoyTimer;

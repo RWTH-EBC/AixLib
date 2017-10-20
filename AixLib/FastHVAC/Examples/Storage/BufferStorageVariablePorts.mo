@@ -1,5 +1,5 @@
 within AixLib.FastHVAC.Examples.Storage;
-model BufferStorage_variablePorts
+model BufferStorageVariablePorts
 
   extends Modelica.Icons.Example;
 
@@ -28,7 +28,7 @@ model BufferStorage_variablePorts
     T_start_wall=323.15,
     T_start_ins=323.15,
     redeclare model HeatTransfer =
-        Components.Storage.BaseClasses.HeatTransfer_directed_heat_transfer_f)
+        Components.Storage.BaseClasses.HeatTransferDirectedHeatTransfer)
     annotation (Placement(transformation(extent={{-6,-40},{48,20}})));
   FastHVAC.Components.Pumps.FluidSource fluidSource
     annotation (Placement(transformation(extent={{-70,50},{-50,70}})));
@@ -204,4 +204,4 @@ equation
 <li><i>December 20, 2016&nbsp; </i> Tobias Blacha:<br/>Moved into AixLib</li>
 </ul></p>
 </html>"));
-end BufferStorage_variablePorts;
+end BufferStorageVariablePorts;

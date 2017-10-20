@@ -1,5 +1,5 @@
 within AixLib.FastHVAC.Components.Storage.BaseClasses;
-partial model Partial_HeatTransfer_Layers
+partial model PartialHeatTransferLayers
 
   final outer parameter Integer n(min=2)=3;
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a[n] therm annotation (
@@ -76,4 +76,4 @@ final outer replaceable parameter
   //Modelica.Blocks.Interfaces.RealInput[n+1] H_flow
   //  "Enthalpy flow between the volumes" annotation 6;
 
-end Partial_HeatTransfer_Layers;
+end PartialHeatTransferLayers;

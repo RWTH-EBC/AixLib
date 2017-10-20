@@ -1,5 +1,5 @@
 within AixLib.FastHVAC.Components.Storage.BaseClasses;
-function Q_buoy_function
+function QBuoyFunction
 
   input Integer n;
   input Modelica.SIunits.Length height;
@@ -11,7 +11,7 @@ function Q_buoy_function
   input Modelica.SIunits.TemperatureDifference dTref;
   output Modelica.SIunits.HeatFlowRate[n] Q_buoy_abs
   "Cumulative heat flow rate into the layer due to buoyancy";
-  replaceable function f_dist =
+  replaceable function fDist =
       AixLib.FastHVAC.Components.Storage.BaseClasses.buoyancy_ditribution.buoyancy_dist_inv2
     constrainedby
     AixLib.FastHVAC.Components.Storage.BaseClasses.buoyancy_ditribution.buoyancy_dist;
@@ -47,11 +47,11 @@ algorithm
       j:=k;
     end for;
 
-    m_buoy_in:=
-        f_dist(
+    m_buoy_in:=fDist(
         i,
         j,
-        n,T)*m_buoy;
+        n,
+        T)*m_buoy;
     Q_buoy_step:=zeros(n);
     Q_buoy_step[i]:=-Q_buoy;
     for k in i+1:j-1 loop
@@ -75,4 +75,4 @@ algorithm
     end if;
   end for;
 
-end Q_buoy_function;
+end QBuoyFunction;

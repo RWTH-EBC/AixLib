@@ -1,8 +1,8 @@
 within AixLib.FastHVAC.Components.Storage.BaseClasses;
-model HeatTransfer_lambda_eff_tanh
+model HeatTransferLambdaEffTanh
 
 //  import BufferStorage = BufferStorage2;
-  extends Partial_HeatTransfer_Layers;
+  extends PartialHeatTransferLayers;
   Modelica.SIunits.HeatFlowRate[n-1] Q_flow
     "Heat flow rate from segment i+1 to i";
   //Modelica.Thermal.HeatTransfer.TemperatureSensor[n] temperatureSensor
@@ -70,4 +70,4 @@ equation
           extent={{-100,-60},{100,-100}},
           lineColor={0,0,255},
           textString="%name")}));
-end HeatTransfer_lambda_eff_tanh;
+end HeatTransferLambdaEffTanh;

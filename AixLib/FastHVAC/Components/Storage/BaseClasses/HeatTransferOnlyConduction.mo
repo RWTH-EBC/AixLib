@@ -1,13 +1,13 @@
 within AixLib.FastHVAC.Components.Storage.BaseClasses;
-model HeatTransfer_lambda_simple
+model HeatTransferOnlyConduction
 
 //  import BufferStorage = BufferStorage2;
-  extends Partial_HeatTransfer_Layers;
+  extends
+    AixLib.FastHVAC.Components.Storage.BaseClasses.PartialHeatTransferLayers;
   Modelica.SIunits.HeatFlowRate[n-1] Q_flow
     "Heat flow rate from segment i+1 to i";
   //Modelica.Thermal.HeatTransfer.TemperatureSensor[n] temperatureSensor
    // annotation 2;
-  parameter Modelica.SIunits.ThermalConductivity const_lambda_eff=100;
 
 protected
   parameter Modelica.SIunits.Length height=data.hTank/n
@@ -16,25 +16,12 @@ protected
     "Area of heat transfer between layers";
   Modelica.SIunits.TemperatureDifference dT[n-1]
     "Temperature difference between adjoining volumes";
-  Real[n-1] k(unit="W/K") "effective heat transfer coefficient";
-  Real[n-1] lambda(unit="W/mK") "effective heat conductivity";
   parameter Modelica.SIunits.ThermalConductivity lambda_water=0.64;
-public
-  Modelica.Blocks.Logical.TriggeredTrapezoid triggeredTrapezoid[n - 1](
-    u(start=false),
-    rising=100,
-    falling=10,
-    amplitude=const_lambda_eff,
-    offset=lambda_water)
-                annotation (Placement(transformation(extent={{-20,0},{0,20}},
-                   rotation=0)));
 equation
 
   for i in 1:n-1 loop
     dT[i] = therm[i].T-therm[i+1].T;
-    triggeredTrapezoid[i].u=dT[i]>0;
-    k[i]=triggeredTrapezoid[i].y*A/height;
-    Q_flow[i] = k[i]*dT[i];
+    Q_flow[i] = lambda_water*A/height*dT[i];
   end for;
 
 //positiv heat flows here mean negativ heat flows for the fluid layers
@@ -47,9 +34,11 @@ equation
             -100},{100,100}}),
                       graphics), Documentation(info="<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>
-<p>Model for heat transfer between buffer storage layers. Models conductance of water and additional effective conductivity (in case the above layer is colder than the lower layer). Used in BufferStorage model.</p>
+<p>Model for heat transfer between buffer storage layers. Models conductance of water. An effective heat conductivity is therefore calculated. Used in BufferStorage model.</p>
 <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
 <p><img src=\"modelica://HVAC/Images/stars2.png\"/> </p>
+<p><h4><font color=\"#008000\">Sources</font></h4></p>
+<p>R. Viskanta, A. KaraIds: Interferometric observations of the temperature structure in water cooled or heated from above. <i>Advances in Water Resources,</i> volume 1, 1977, pages 57-69. Bibtex-Key [R.VISKANTA1977]</p>
 </html>",
    revisions="<html>
 <p><ul>
@@ -62,4 +51,4 @@ equation
           extent={{-100,-60},{100,-100}},
           lineColor={0,0,255},
           textString="%name")}));
-end HeatTransfer_lambda_simple;
+end HeatTransferOnlyConduction;
