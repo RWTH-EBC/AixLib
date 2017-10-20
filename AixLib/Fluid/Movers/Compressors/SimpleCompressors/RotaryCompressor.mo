@@ -4,11 +4,13 @@ model RotaryCompressor
   extends BaseClasses.PartialCompressor;
 
 equation
-  // Connection defined in inherited models
+  // Pressures meet pressures at ports
   //
   pInl = port_a.p "Pressure at inlet";
   pOut = port_b.p "Pressure at outlet";
 
+  // Calculate specific enthalpies
+  //
   hInl = actualStream(port_a.h_outflow) "Specific enthalpy at inlet";
   hOut = actualStream(port_b.h_outflow) "Specific enthalpy at outlet";
 

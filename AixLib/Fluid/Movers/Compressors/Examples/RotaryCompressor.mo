@@ -35,12 +35,14 @@ model RotaryCompressor
     annotation (Placement(transformation(extent={{-82,-10},{-62,10}})));
   Modelica.Blocks.Sources.Sine rotationalSpeed(
     offset=75,
-    amplitude=45,
-    freqHz=1)
+    freqHz=1,
+    amplitude=75)
     "Prescribed compressor's rotational speed"
     annotation (Placement(transformation(extent={{-80,30},{-60,50}})));
   SimpleCompressors.RotaryCompressor rotaryCompressor(
-    redeclare package Medium = Medium)
+    redeclare package Medium = Medium,
+    show_staEff=true,
+    show_qua=true)
     "Model of a rotary compressor"
     annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
   Modelica.Blocks.Sources.Sine valveOpening(

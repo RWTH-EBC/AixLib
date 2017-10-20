@@ -6,21 +6,23 @@ various compressor models"
   // Definition of parameters describing the geometry
   //
   parameter Modelica.SIunits.Volume
-    VDis(min = 0) = 13e-6
+    VDis(min=0) = 13e-6
     "Displacement volume of the compressor"
     annotation(Dialog(tab="General",group="Geometry"));
   parameter Modelica.SIunits.Efficiency
-    epsRef(min = 0, max = 1, nominal = 0.05) = 0.04
+    epsRef(min=0, max=1, nominal=0.05) = 0.04
     "Ratio of the real and the ideal displacement volume"
     annotation(Dialog(tab="General",group="Geometry"));
   parameter Modelica.SIunits.Frequency
     rotSpeMax(min=0) = 120
     "Maximal rotational speed executable by the compressor"
-    annotation(Dialog(tab="General",group="Compressor's characterisitcs"));
+    annotation(Dialog(tab="General",group="Compressor's characterisitcs"),
+               HideResult=true);
   parameter Real
     piPreMax(min=1, unit="1") = 15
     "Maximal pressure ratio executable by the compressor"
-    annotation(Dialog(tab="General",group="Compressor's characterisitcs"));
+    annotation(Dialog(tab="General",group="Compressor's characterisitcs"),
+               HideResult=true);
 
 
   // Definition of models describing efficiencies
@@ -63,7 +65,8 @@ various compressor models"
     work"
     annotation(Dialog(tab="Efficiencies and similitude theory",
                group="Engine efficiency"),
-               choices(checkBox=true));
+               choices(checkBox=true),
+               HideResult=true);
 
   // Extensions and parameter propagation
   //
@@ -80,34 +83,50 @@ various compressor models"
   //
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.1
     "Nominal mass flow rate"
-    annotation(Dialog(tab="Advanced"));
+    annotation(Dialog(tab="Advanced"),
+               HideResult=true);
   parameter Modelica.SIunits.MassFlowRate m_flow_lea = 1e-8
     "Leackage mass flow rate used for compressor shut-down"
-    annotation(Dialog(tab="Advanced"));
+    annotation(Dialog(tab="Advanced"),
+               HideResult=true);
 
   // Definition of parameters describing diagnostics
   //
-  parameter Boolean show_staInl = true
-    "= true, if thermodynamic state at compressor's inlet is computed"
-    annotation(Dialog(tab="Advanced",group="Diagnostics"));
-  parameter Boolean show_staOut = true
-    "= true, if thermodynamic state at compressor's outlet is computed"
-    annotation(Dialog(tab="Advanced",group="Diagnostics"));
-  parameter Boolean show_eff = true
-    "= true, if compressor's efficiencies are computed"
-    annotation(Dialog(tab="Advanced",group="Diagnostics"));
+  parameter Boolean show_staEff = false
+    "= true, if thermodynamic states and efficiencies are computed"
+    annotation(Dialog(tab="Advanced",group="Diagnostics"),
+               HideResult=true);
+  parameter Boolean show_qua = false
+    "= true, if vapour qualities are computed"
+    annotation(Dialog(tab="Advanced",group="Diagnostics"),
+               HideResult=true);
 
   // Definition of parameters used for initialisation
   //
   parameter Modelica.SIunits.Frequency rotSpe0 = 60
     "Compressor's rotational spped at initialisation"
-    annotation(Dialog(tab="Advanced",group="Initialisation"));
+    annotation(Dialog(tab="Advanced",group="Initialisation"),
+               HideResult=true);
   parameter Modelica.SIunits.AbsolutePressure pInl0 = 3e5
     "Pressure at compressor's inlet at initialisation"
-    annotation(Dialog(tab="Advanced",group="Initialisation"));
+    annotation(Dialog(tab="Advanced",group="Initialisation"),
+               HideResult=true);
   parameter Modelica.SIunits.Temperature TInl0 = 283.15
     "Temperature at compressor's inlet at initialisation"
-    annotation(Dialog(tab="Advanced",group="Initialisation"));
+    annotation(Dialog(tab="Advanced",group="Initialisation"),
+               HideResult=true);
+  parameter Modelica.SIunits.Density dInl0=
+    Medium.density(Medium.setState_pTX(p=pInl0,T=TInl0))
+    "Density at compressor's inlet at initialisation"
+    annotation(Dialog(tab="Advanced",group="Initialisation",
+               enable=false),
+               HideResult=true);
+  parameter Modelica.SIunits.SpecificEnthalpy hInl0=
+    Medium.specificEnthalpy(Medium.setState_pTX(p=pInl0,T=TInl0))
+    "Specific enthalpy at compressor's inlet at initialisation"
+    annotation(Dialog(tab="Advanced",group="Initialisation",
+               enable=false),
+               HideResult=true);
 
   // Definition of connectors
   //
@@ -118,65 +137,11 @@ various compressor models"
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=-90,
-        origin={0,100})));
+        origin={0,100})),
+        HideResult=true);
 
-  // Definition of variables
+  // Definition of models
   //
-  Medium.ThermodynamicState staInl
-    "Thermodynamic state at inlet conditions";
-  Medium.ThermodynamicState staOut
-    "Thermodynamic state at outlet conditions";
-  Medium.SaturationProperties satProInl
-    "Saturation properties at inlet conditions";
-  Medium.SaturationProperties satProOut
-    "Saturation properties at outlet conditions";
-
-  Modelica.SIunits.AbsolutePressure pInl(start=pInl0)
-    "Pressure at inlet conditions";
-  Modelica.SIunits.Temperature TInl(start=TInl0)
-    "Temperature at inlet conditions";
-  Modelica.SIunits.SpecificEnthalpy hInl
-    "Specific enthalpy at inlet conditions";
-  Modelica.SIunits.Density dInl
-    "Density at inlet conditions";
-  Modelica.SIunits.SpecificEntropy sInl
-    "Specific entropy at inlet conditions";
-  Real quaInl(min=0, max=1, unit="1")
-    "Vapour quality at inlet conditions";
-
-  Modelica.SIunits.AbsolutePressure pOut(start=pInl0-dp_start)
-    "Pressure at outlet conditions";
-  Modelica.SIunits.Temperature TOut
-    "Temperature at outlet conditions";
-  Modelica.SIunits.Density dOut "
-    Density at outlet conditions";
-  Modelica.SIunits.SpecificEnthalpy hOut
-    "Specific enthalpy at outlet conditions";
-  Modelica.SIunits.SpecificEntropy sOut
-    "Specific entropy at outlet conditions";
-  Real quaOut(min=0, max=1, unit="1")
-    "Vapour quality at outlet conditions";
-
-  Real pTriCriInl(min=0)
-    "Trigger to check medium exceeds critical pressure at inlet";
-  Real pTriCriOut(min=0)
-    "Trigger to check medium exceeds critical pressure at inlet";
-  Modelica.SIunits.SpecificEnthalpy hLiqInl
-    "Liquid enthalpy at inlet";
-  Modelica.SIunits.SpecificEnthalpy hVapInl
-    "Vapour enthalpy at inlet";
-  Modelica.SIunits.SpecificEnthalpy hLiqOut
-    "Liquid enthalpy at outlet";
-  Modelica.SIunits.SpecificEnthalpy hVapOut
-    "Vapour enthalpy at outlet";
-
-  Modelica.SIunits.SpecificEnthalpy hOutIse
-    "Specific isentropic enthalpy at outlet conditions";
-  Modelica.SIunits.SpecificEnthalpy dh
-    "Specific enthalpy difference: hOut - hInl";
-  Modelica.SIunits.SpecificEnthalpy dhIse
-    "Specific isentropic enthalpy difference: hOutIse - hInl";
-
   EngineEfficiency oveEngEff(
     Medium=Medium,
     rotSpe=rotSpe,
@@ -199,6 +164,95 @@ various compressor models"
     staOut=staOut)
     "Instance of model 'isentropic efficiency'";
 
+  // Definition of records containing detailed results if computed
+  //
+  record CompressorStates
+    "Record that contains compressor's thermodynamic states at inlet and outlet"
+    Medium.ThermodynamicState staInl
+      "Thermodynamic state at inlet conditions";
+    Medium.ThermodynamicState staOut
+      "Thermodynamic state at outlet conditions";
+
+    Modelica.SIunits.SpecificEntropy sInl
+      "Specific entropy at inlet conditions";
+    Modelica.SIunits.SpecificEntropy sOut
+      "Specific entropy at outlet conditions";
+
+    Modelica.SIunits.Efficiency etaEng
+      "Overall engine efficiency";
+    Modelica.SIunits.Efficiency etaVol
+      "Overall volumetric efficiency";
+    Modelica.SIunits.Efficiency etaIse
+      "Overall isentropic efficiency";
+  end CompressorStates;
+
+  record CompressorQualities
+    "Record that contains compressor's qualities at inlet and outlet"
+     Medium.SaturationProperties satProInl
+      "Saturation properties at inlet conditions";
+     Medium.SaturationProperties satProOut
+      "Saturation properties at outlet conditions";
+
+    Real pTriCriInl(min=0)
+      "Trigger to check medium exceeds critical pressure at inlet";
+    Real pTriCriOut(min=0)
+      "Trigger to check medium exceeds critical pressure at inlet";
+    Real quaInl(min=0, max=1, unit="1")
+      "Vapour quality at inlet conditions";
+    Real quaOut(min=0, max=1, unit="1")
+      "Vapour quality at outlet conditions";
+
+
+    Modelica.SIunits.SpecificEnthalpy hLiqInl
+      "Liquid enthalpy at inlet";
+    Modelica.SIunits.SpecificEnthalpy hVapInl
+      "Vapour enthalpy at inlet";
+    Modelica.SIunits.SpecificEnthalpy hLiqOut
+      "Liquid enthalpy at outlet";
+    Modelica.SIunits.SpecificEnthalpy hVapOut
+      "Vapour enthalpy at outlet";
+  end CompressorQualities;
+
+  CompressorStates comSta(
+    staInl=staInl,
+    staOut=staOut,
+    sInl=Medium.specificEntropy(staInl),
+    sOut=Medium.specificEntropy(staOut),
+    etaEng=oveEngEff.etaEng,
+    etaVol=oveVolEff.lamH,
+    etaIse=oveIseEff.etaIse) if show_staEff
+    "Record containing compressor's thermodynamic states and efficiencies";
+
+  CompressorQualities comQua(
+    satProInl=Medium.setSat_p(pInl),
+    satProOut=Medium.setSat_p(pOut),
+    pTriCriInl=pInl/Medium.fluidConstants[1].criticalPressure,
+    pTriCriOut=pOut/Medium.fluidConstants[1].criticalPressure,
+    hLiqInl=Medium.bubbleEnthalpy(Medium.setSat_p(pInl)),
+    hVapInl=Medium.dewEnthalpy(Medium.setSat_p(pInl)),
+    hLiqOut=Medium.bubbleEnthalpy(Medium.setSat_p(pOut)),
+    hVapOut=Medium.dewEnthalpy(Medium.setSat_p(pOut)),
+    quaInl=noEvent(if ((pInl/Medium.fluidConstants[1].criticalPressure)<1 and
+             hInl<Medium.bubbleEnthalpy(Medium.setSat_p(pInl))) then 0
+             else if ((pInl/Medium.fluidConstants[1].criticalPressure)<1 and
+             hInl>Medium.bubbleEnthalpy(Medium.setSat_p(pInl)) and
+             hInl<Medium.dewEnthalpy(Medium.setSat_p(pInl))) then
+             (hInl - Medium.bubbleEnthalpy(Medium.setSat_p(pInl)))/
+             max(Medium.dewEnthalpy(Medium.setSat_p(pInl)) -
+             Medium.bubbleEnthalpy(Medium.setSat_p(pInl)), 1e-6) else 1.0),
+    quaOut=noEvent(if ((pOut/Medium.fluidConstants[1].criticalPressure)<1 and
+             hOut<Medium.bubbleEnthalpy(Medium.setSat_p(pOut))) then 0
+             else if ((pOut/Medium.fluidConstants[1].criticalPressure)<1 and
+             hOut>Medium.bubbleEnthalpy(Medium.setSat_p(pOut)) and
+             hOut<Medium.dewEnthalpy(Medium.setSat_p(pOut))) then
+             (hOut - Medium.bubbleEnthalpy(Medium.setSat_p(pOut)))/
+             max(Medium.dewEnthalpy(Medium.setSat_p(pOut)) -
+             Medium.bubbleEnthalpy(Medium.setSat_p(pOut)), 1e-6) else 1.0)) if
+    show_qua
+    "Record containing compressor's vapour qualities";
+
+  // Definition of variables
+  //
   Modelica.SIunits.Power PEle
     "Compressor's actual electrical power consumption";
   Modelica.SIunits.Power Q_flow_ref
@@ -209,59 +263,53 @@ various compressor models"
   Real piPre(min=0, max=piPreMax, unit="1")
     "Ratio of compressor's outlet and inlet pressure";
 
+
 protected
-  Medium.ThermodynamicState staInl0=
-    Medium.setState_pTX(p=pInl0,T=TInl0)
-    "Thermodynamic state at inlet conditions at initialisation";
+  Medium.ThermodynamicState staInl
+    "Thermodynamic state at inlet conditions";
+  Medium.ThermodynamicState staOut
+    "Thermodynamic state at outlet conditions";
+
+  Modelica.SIunits.AbsolutePressure pInl(start=pInl0)
+    "Pressure at inlet conditions";
+  Modelica.SIunits.SpecificEnthalpy hInl(start=hInl0)
+    "Specific enthalpy at inlet conditions";
+  Modelica.SIunits.Density dInl
+    "Density at inlet conditions";
+
+  Modelica.SIunits.AbsolutePressure pOut(start=pInl0-dp_start)
+    "Pressure at outlet conditions";
+  Modelica.SIunits.SpecificEnthalpy hOut
+    "Specific enthalpy at outlet conditions";
+
+  Modelica.SIunits.SpecificEnthalpy hOutIse
+    "Specific isentropic enthalpy at outlet conditions";
+  Modelica.SIunits.SpecificEnthalpy dh
+    "Specific enthalpy difference: hOut - hInl";
+  Modelica.SIunits.SpecificEnthalpy dhIse
+    "Specific isentropic enthalpy difference: hOutIse - hInl";
 
 
 equation
   // Calculation of thermodynamic state at inlet conditions
   //
   staInl = Medium.setState_phX(p=pInl,h=hInl) "Thermodynamic state at inlet";
-  satProInl = Medium.setSat_p(pInl) "Saturation properties at inlet";
-
-  TInl = Medium.temperature(staInl) "Temperature at inlet";
   dInl = Medium.density(staInl) "Temperature at inlet";
-  sInl = Medium.specificEntropy(staInl) "Specific entropy at inlet";
-
-  pTriCriInl = pInl/Medium.fluidConstants[1].criticalPressure
-    ">= 1, if pressure at inlet exceeds critical pressure";
-  hLiqInl = Medium.bubbleEnthalpy(satProInl) "Liquid enthalpy at inlet";
-  hVapInl = Medium.dewEnthalpy(satProInl) "Vapour enthalpy at inlet";
-  quaInl = noEvent(if (pTriCriInl<1 and hInl<hLiqInl) then 0
-    else if (pTriCriInl<1 and hInl>hLiqInl and hInl<hVapInl) then
-    (hInl - hLiqInl)/max(hVapInl - hLiqInl, 1e-6) else 1.0)
-    "Vapour quality at inlet";
 
   // Calculation of thermodynamic state at outlet conditions
   //
   staOut = Medium.setState_phX(p=pOut,h=hOut) "Thermodynamic state at outlet";
-  satProOut = Medium.setSat_p(pOut) "Saturation properties at outlet";
-
-  TOut = Medium.temperature(staOut) "Temperature at outlet";
-  dOut = Medium.density(staOut) "Temperature at outlet";
-  sOut = Medium.specificEntropy(staOut) "Specific entropy at outlet";
-
-  pTriCriOut = pOut/Medium.fluidConstants[1].criticalPressure
-    ">= 1, if pressure at outlet exceeds critical pressure";
-  hLiqOut = Medium.bubbleEnthalpy(satProOut) "Liquid enthalpy at outlet";
-  hVapOut = Medium.dewEnthalpy(satProOut) "Vapour enthalpy at outlet";
-  quaOut = noEvent(if (pTriCriOut<1 and hOut<hLiqOut) then 0
-    else if (pTriCriOut<1 and hOut>hLiqOut and hOut<hVapOut) then
-    (hOut - hLiqOut)/max(hVapOut - hLiqOut, 1e-6) else 1.0)
-    "Vapour quality at outlet";
 
   // Calculation of compressors characteristics
   //
-  piPre = pInl/pOut "Ratio between inlet and outlet pressure";
+  piPre = pOut/pInl "Ratio between outlet and inlet pressure";
   rotSpe = preRotSpe "Prescriped rotational speed";
 
   // Calculation of mass flow
   //
   m_flow = homotopy(smooth(1, noEvent(if rotSpe>0 then
                            rotSpe*oveVolEff.lamH*VDis*dInl else m_flow_lea)),
-                    rotSpe*oveVolEff.lamH*VDis*Medium.density(staInl0))
+                    rotSpe*oveVolEff.lamH*VDis*dInl0)
     "Cover initialisation case as well as shut-down case";
 
   // Calculation of energy balances
@@ -272,11 +320,14 @@ equation
   dhIse = (hOutIse - hInl) "Isentropic specific enthalpy difference";
 
   Q_flow_ref = m_flow *dh "Power absorbed by refrigerant";
-  if useIseWor then
+  if not useIseWor then
     oveEngEff.etaEng*PEle = Q_flow_ref "Compressor's power consumption";
   else
     oveEngEff.etaEng*PEle = m_flow *dhIse "Compressor's power consumption";
   end if;
+  /*Some efficiency models calculate the compressor's power consumptions based
+    on the compressors isentropic work. Therefore, a distinction is made above.
+  */
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false),
               graphics={
