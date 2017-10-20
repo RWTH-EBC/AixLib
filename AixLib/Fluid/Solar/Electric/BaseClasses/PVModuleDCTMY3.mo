@@ -32,10 +32,10 @@ equation
 <p>PV moduleDC has a temperature&nbsp;dependency&nbsp;for&nbsp;efficiency.</p>
 </html>",
      revisions="<html>
-<p><ul>
+<ul>
 <li><i>October 11, 2016 </i> by Tobias Blacha:<br/>Moved into AixLib</li>
 <li><i>Februar 21, 2013  </i>by Corinna Leonhardt:<br/>Implemented</li>
-</ul></p>
+</ul>
 </html>"),   Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end PVModuleDCTMY3;
