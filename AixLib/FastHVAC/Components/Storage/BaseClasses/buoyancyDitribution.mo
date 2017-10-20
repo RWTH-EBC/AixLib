@@ -2,6 +2,7 @@ within AixLib.FastHVAC.Components.Storage.BaseClasses;
 package buoyancyDitribution
 
   partial function buoyancyDist
+                                //Distribution of massflow over the layers i set by a predefined profile (linear,square, cubic, inv ...)
     input Integer i
                    "position of the layer emitting buoyant mass flow";
     input Integer j
@@ -15,11 +16,13 @@ package buoyancyDitribution
   end buoyancyDist;
 
   function buoyancyDistLin
+
     extends buoyancyDist;
   protected
     Real[ j-i] p;
 
   algorithm
+    // massflowfractions below layer i and above layer j are zero, massflowfraction of layer i is -1
     y[1:i-1]:=zeros(i-1);
     y[j+1:n]:=zeros(n-j);
     y[i]:=-1;

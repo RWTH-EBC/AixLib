@@ -25,7 +25,7 @@ protected
 equation
 
   Q_buoy=
-    AixLib.FastHVAC.Components.Storage.BaseClasses.QbuoyFunctions.qbuoyTotal(n,
+    AixLib.FastHVAC.Components.Storage.BaseClasses.QBuoyFunctions.qbuoyTotal(n,
     therm.T)*A*rho*height/tau;
 
   for i in 1:n-1 loop
@@ -45,19 +45,21 @@ equation
             -100},{100,100}}),
                       graphics), Documentation(info="<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>
-<p>Model for heat transfer between buffer storage layers. </p>
-<p><h4><font color=\"#008000\">Concept</font></h4></p>
-<p>Models conductance of water and buoyancy according to Viskanta et al., 1997. An effective heat conductivity is therefore calculated. Used in BufferStorage model. In addition, the <i>smooth()</i> expression is used for the transition of the buoyancy model.</p>
+<p>Model for heat transfer between buffer storage layers. Models conductance of water. Buoyancy and conduction are considered individually</p>
 <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
 <p><img src=\"modelica://HVAC/Images/stars2.png\"/> </p>
 <p><h4><font color=\"#008000\">Sources</font></h4></p>
-<p>R. Viskanta, A. KaraIds: Interferometric observations of the temperature structure in water cooled or heated from above. <i>Advances in Water Resources,</i> volume 1, 1977, pages 57-69. Bibtex-Key [R.VISKANTA1977]</p>
+<p>Equations and parameters for calculating the buoyancy heatflow are empirically and derived by CFD simulations. The buoyancy is split up into three parts: Freebuoy, Botmix, Topmix. </p>
+<p><ul>
+<li>Freebuoy: Desribes the heatflow which is transfered directly by the upflowing mass to the overlying layers.</li>
+<li>Botmix and Topmix: Describes the heat that is transfered due to the mixing of the layers above and below the buoyancy layer that is induced by the upflowing mass</li>
+</ul></p>
+<p>Model was developed by Christian Grozescu in his master thesis <i> Extension of Thermal Storage Models for Energy System Simulations</i>, 2017 </p>
 </html>",
    revisions="<html>
 <p><ul>
-<li><i>December 20, 2016&nbsp; </i> Tobias Blacha:<br/>Moved into AixLib</li>
-<li><i>December 10, 2013</i> by Kristian Huchtemann:<br/>New implementation in source code. Documentation.</li>
-<li><i>October 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately </li>
+<li><i>October 19, 2017&nbsp; </i> David Jansen:<br/>Added informations and commentations to source code and changed names according to AixLib regulations</li>
+<li><i>March , 2017&nbsp; </i> Christian Grozescu :<br/>Developed model </li>
 </ul></p>
 </html>"),
     Icon(graphics={Text(
