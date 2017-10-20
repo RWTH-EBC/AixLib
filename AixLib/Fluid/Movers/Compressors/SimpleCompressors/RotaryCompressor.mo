@@ -1,6 +1,26 @@
 within AixLib.Fluid.Movers.Compressors.SimpleCompressors;
-model RotaryCompressor "Model that describes a simple rotary compressor"
-  extends Compressors.BaseClasses.PartialCompressor;
+model RotaryCompressor
+  "Model that describes a simple rotary compressor"
+  extends BaseClasses.PartialCompressor;
+
+equation
+  // Connection defined in inherited models
+  //
+  pInl = port_a.p "Pressure at inlet";
+  pOut = port_b.p "Pressure at outlet";
+
+  hInl = actualStream(port_a.h_outflow) "Specific enthalpy at inlet";
+  hOut = actualStream(port_b.h_outflow) "Specific enthalpy at outlet";
+
+  port_a.h_outflow = inStream(port_a.h_outflow)
+    "Compressor behaves as perfect valve if flow is reserved";
+  port_b.h_outflow = smooth(0,noEvent(if m_flow > 0
+    then hInl + dh else inStream(port_a.h_outflow)))
+    "Compressor behaves as perfect valve if flow is reserved";
+  /*It is assumed that the compressor works as perfectly closed valve if the 
+    mass flow is reserved. Hence, specific enthalpies flowing out of the system
+    will meet the specific enthalpies flowing into the system.
+  */
 
   annotation (Icon(graphics={
         Ellipse(
@@ -25,7 +45,7 @@ model RotaryCompressor "Model that describes a simple rotary compressor"
           fillPattern=FillPattern.Solid)}), Documentation(revisions="<html>
 <ul>
   <li>
-  October 19, 2017, by Mirko Engelpracht:<br/>
+  October 20, 2017, by Mirko Engelpracht:<br/>
   First implementation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
