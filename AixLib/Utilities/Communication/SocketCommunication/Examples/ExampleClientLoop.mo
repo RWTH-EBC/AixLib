@@ -1,4 +1,4 @@
-within AixLib.Utilities.Communication.SocketCommunication.Examples;
+﻿within AixLib.Utilities.Communication.SocketCommunication.Examples;
 model ExampleClientLoop
   "Example to include TCP Communication to simple test server in the control loop"
 extends Modelica.Icons.Example;
@@ -87,7 +87,7 @@ unaltered back to the client.</p>
 
 <p>A server to test <code>ExampleClientLoop</code> is provided both as a source code <a href=\"modelica://AixLib/Resources/SocketCommunicationServer/ExampleServer.cpp\">*.cpp-file</a> and as an executable <a href=\"modelica://AixLib/Resources/SocketCommunicationServer/ExampleServer.exe\">*.exe-file</a>. The server simply echoes the received character message and sends it back
 to the sender (i.e. client). The code may be compiled and executed from the console. This code
-is taken from Microsoft�s Winsock documentation pages: <a href=\"http://msdn.microsoft.com/de-de/library/windows/desktop/ms737591%28v=vs.85%29.aspx\">Link to MSDN</a> </p>
+is taken from Microsoft´s Winsock documentation pages: <a href=\"http://msdn.microsoft.com/de-de/library/windows/desktop/ms737591%28v=vs.85%29.aspx\">Link to MSDN</a> </p>
 The server performs the following tasks:
 <ul>
 <li>Initialise Winsock;</li>

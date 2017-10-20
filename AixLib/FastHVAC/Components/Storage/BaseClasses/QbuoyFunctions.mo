@@ -1,5 +1,5 @@
 within AixLib.FastHVAC.Components.Storage.BaseClasses;
-package QbuoyFunctions
+package QBuoyFunctions
 
   function dToverEff
     input Modelica.SIunits.TemperatureDifference dTover;
@@ -439,4 +439,4 @@ package QbuoyFunctions
     end for;
 
   end isBuoy;
-end QbuoyFunctions;
+end QBuoyFunctions;

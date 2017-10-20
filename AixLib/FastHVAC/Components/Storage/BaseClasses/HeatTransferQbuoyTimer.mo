@@ -2,7 +2,8 @@ within AixLib.FastHVAC.Components.Storage.BaseClasses;
 model HeatTransferQbuoyTimer
 
 //  import BufferStorage = BufferStorage2;
-  extends PartialHeatTransferLayers;
+   extends
+    AixLib.FastHVAC.Components.Storage.BaseClasses.PartialHeatTransferLayers;
   Modelica.SIunits.HeatFlowRate[n-1] Q_flow
     "Heat flow rate from segment i+1 to i";
 

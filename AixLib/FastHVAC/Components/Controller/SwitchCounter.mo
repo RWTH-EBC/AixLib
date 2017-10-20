@@ -1,4 +1,4 @@
-within AixLib.FastHVAC.Components.Controller;
+﻿within AixLib.FastHVAC.Components.Controller;
 model SwitchCounter "Counts the number of switching events"
 
   Integer n_switch(start=0) "number of switching events";
@@ -24,7 +24,7 @@ algorithm
 
 <dl>
 <dt><b>Main Author: </b>
-<dd>Nicol�s Chang (ssi-nch) <br>
+<dd>Nicolás Chang (ssi-nch) <br>
     E.ON Energy Research Center <br>
     Institute for Energy Efficient Buildings and Indoor Climate <br>
     D-52066 Aachen <br>

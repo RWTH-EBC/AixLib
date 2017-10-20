@@ -1,6 +1,6 @@
-within AixLib.FastHVAC.Data.Boiler.DayNightMode;
-record HeatingCurves_Vitotronic_Day25_Night10
-  "Heating Curves for Vitotronic Controller, TsetDay = 25°C, TsetNight = 10°C "
+ï»¿within AixLib.FastHVAC.Data.Boiler.DayNightMode;
+record HeatingCurvesVitotronicDay25Night10
+  "Heating Curves for Vitotronic Controller, TsetDay = 25Â°C, TsetNight = 10Â°C "
   extends HeatingCurvesDayNightBaseDataDefinition(
     name="HC_Vitoronic_Day25_Night10",
     varFlowTempDay=[0,1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8; -20,67,71,75,79.5,84,
@@ -41,4 +41,4 @@ record HeatingCurves_Vitotronic_Day25_Night10
 <li><i>July 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
 </ul></p>
 </html>"));
-end HeatingCurves_Vitotronic_Day25_Night10;
+end HeatingCurvesVitotronicDay25Night10;
