@@ -2,15 +2,17 @@ within AixLib.Fluid.Solar.Electric;
 model PVSystemTMY3
   extends Electric.BaseClasses.PartialPVSystem;
 
-  BaseClasses.PVModuleDCTMY3 pVmoduleDC1(
-    final Area=NumberOfPanels*data.Area,
-    final Eta0=data.Eta0,
-    final NoctTemp=data.NoctTemp,
-    final NoctTempCell=data.NoctTempCell,
-    final NoctRadiation=data.NoctRadiation,
-    final TempCoeff=data.TempCoeff)
-    "PV module with temperature dependent efficiency"
-    annotation (Placement(transformation(extent={{-9,60},{11,80}})));
+    parameter  Modelica.SIunits.Angle Latitude = 0.65798912800186
+  "Location's Latitude"
+       annotation (Dialog(group="Location"));
+
+  parameter Modelica.SIunits.Angle til = 0.34906585039887
+  "Surface's tilt angle (0:flat)"
+       annotation (Dialog(group="Geometry"));
+
+  parameter Modelica.SIunits.Angle azi = -0.78539816339745
+  "Surface's azimut angle (0:South)"
+         annotation (Dialog(group="Geometry"));
 
   AixLib.BoundaryConditions.WeatherData.Bus weaBus annotation (Placement(
         transformation(extent={{-120,-20},{-80,20}}),iconTransformation(extent={{-110,
@@ -19,19 +21,16 @@ model PVSystemTMY3
     annotation (Placement(transformation(extent={{-28,12},{-8,32}})));
   AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez    HDifTil(
     til=til,
-    lat=lat,
+    lat=Latitude,
     azi=azi)               "Diffuse irradiation on tilted surface"
     annotation (Placement(transformation(extent={{-62,18},{-42,38}})));
   AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface    HDirTil(
     til=til,
-    lat=lat,
+    lat=Latitude,
     azi=azi)               "Direct irradiation on tilted surface"
     annotation (Placement(transformation(extent={{-62,-10},{-42,10}})));
 equation
 
-  connect(pVmoduleDC1.AmbientTemperature, weaBus.TDryBul) annotation (Line(
-        points={{-11,76},{-80,76},{-80,12},{-80,0},{-100,0}},        color={0,
-          0,127}));
   connect(weaBus, HDifTil.weaBus) annotation (Line(
       points={{-100,0},{-70,0},{-70,28},{-62,28}},
       color={255,204,51},
@@ -51,11 +50,11 @@ equation
   connect(HDirTil.H, G.u2) annotation (Line(points={{-41,0},{-36,0},{-36,16},
           {-30,16}},
                 color={0,0,127}));
-  connect(pVinverterRMS.DCPowerInput, pVmoduleDC1.DCOutputPower) annotation (
-      Line(points={{43.8,10.2},{34,10.2},{34,70},{12,70}}, color={0,0,127}));
-  connect(G.y, pVmoduleDC1.SolarIrradiationPerSquareMeter) annotation (Line(
-        points={{-7,22},{4,22},{4,44},{-30,44},{-30,64.4},{-10.6,64.4}}, color=
-          {0,0,127}));
+  connect(PVModuleDC.T_amb, weaBus.TDryBul) annotation (Line(points={{-15,66},{
+          -88,66},{-88,4},{-88,0},{-100,0}}, color={0,0,127}));
+  connect(G.y, PVModuleDC.SolarIrradiationPerSquareMeter) annotation (Line(
+        points={{-7,22},{-4,22},{-4,48},{-24,48},{-24,54.4},{-14.6,54.4}},
+        color={0,0,127}));
  annotation (Placement(transformation(extent={{100,-10},{120,10}}),
         iconTransformation(extent={{100,-10},{120,10}})),
               Icon(coordinateSystem(preserveAspectRatio=false), graphics={
@@ -91,5 +90,7 @@ Source of literature for the calculation of the pv cell efficiency: </p>
 modules energy efficiency</q> by Romary, Florian et al.</p>
 <h4><span style=\"color: #008000\">Example Results</span></h4>
 <p><a href=\"AixLib.Fluid.Solar.Electric.Examples.ExamplePV_TMY3\">AixLib.Fluid.Solar.Electric.Examples.ExamplePV_TMY3</a></p>
+</html>", revisions="<html>
+<li><i>October 20, 2017 </i>by Larissa K&uuml;hn:<br>First implementation</li>
 </html>"));
 end PVSystemTMY3;

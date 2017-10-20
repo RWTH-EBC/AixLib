@@ -1,17 +1,6 @@
 within AixLib.Fluid.Solar.Electric.BaseClasses;
 partial model PartialPVSystem "Partial model for PV System"
 
-  parameter  Modelica.SIunits.Angle lat = 0.65798912800186
-  "Location's Latitude"
-       annotation (Dialog(group="Location"));
-
-  parameter Modelica.SIunits.Angle til = 0.34906585039887
-  "Surface's tilt angle (0:flat)"
-       annotation (Dialog(group="Geometry"));
-
-  parameter Modelica.SIunits.Angle azi = -0.78539816339745
-  "Surface's azimut angle (0:South)"
-         annotation (Dialog(group="Geometry"));
 
   parameter Integer NumberOfPanels = 1
     "Number of panels";
@@ -26,17 +15,25 @@ partial model PartialPVSystem "Partial model for PV System"
     "Output Power of the PV system including the inverter"
      annotation (Placement(transformation(extent={{100,-10},{120,10}}),
         iconTransformation(extent={{100,-10},{120,10}})));
-  Electric.BaseClasses.PVInverterRMS pVinverterRMS(final uMax2=
-        MaxOutputPower) "Inverter model including system management"
-    annotation (Placement(transformation(extent={{44,0},{64,20}})));
 
+  BaseClasses.PVModuleDC PVModuleDC(
+      final Eta0=data.Eta0,
+      final NoctTemp=data.NoctTemp,
+      final NoctTempCell=data.NoctTempCell,
+      final NoctRadiation=data.NoctRadiation,
+      final TempCoeff=data.TempCoeff,
+      final Area=NumberOfPanels*data.Area)
+      "PV module with temperature dependent efficiency"
+annotation (Placement(transformation(extent={{-13,50},{7,70}})));
+  BaseClasses.PVInverterRMS PVInverterRMS(final uMax2=MaxOutputPower)
+"Inverter model including system management"
+    annotation (Placement(transformation(extent={{40,0},{60,20}})));
 equation
 
-  connect(pVinverterRMS.PVPowerRmsW, PVPowerW) annotation (Line(
-      points={{64,10},{88,10},{88,0},{110,0}},
-      color={0,0,127},
-      smooth=Smooth.None));
-
+  connect(PVModuleDC.DCOutputPower, PVInverterRMS.DCPowerInput) annotation (
+      Line(points={{8,60},{28,60},{28,10.2},{39.8,10.2}}, color={0,0,127}));
+  connect(PVInverterRMS.PVPowerRmsW, PVPowerW) annotation (Line(points={{60,10},
+          {82,10},{82,0},{110,0}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
      Rectangle(
       lineColor={0,0,0},
@@ -47,5 +44,8 @@ equation
       lineColor={0,0,0},
       extent={{-96,95},{97,-97}},
            textString="PV")}),                                   Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(revisions="<html>
+<li><i>October 20, 2017 </i>by Larissa K&uuml;hn:<br>First implementation</li>
+</html>"));
 end PartialPVSystem;

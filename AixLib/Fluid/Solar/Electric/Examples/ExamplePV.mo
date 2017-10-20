@@ -21,7 +21,7 @@ model ExamplePV
         "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt"))
     "Weather data input for simulation of PV power "
     annotation (Placement(transformation(extent={{-93,49},{-68,66}})));
-  PVSystem pVsystem(
+  PVSystem PVsystem(
     MaxOutputPower=4000,
     NumberOfPanels=5,
     data=AixLib.DataBase.SolarElectric.SymphonyEnergySE6M181())
@@ -29,17 +29,17 @@ model ExamplePV
     annotation (Placement(transformation(extent={{-14,30},{6,50}})));
 
 equation
-  connect(Weather.SolarRadiation_OrientedSurfaces[6], pVsystem.IcTotalRad)
+  connect(Weather.SolarRadiation_OrientedSurfaces[6], PVsystem.IcTotalRad)
     annotation (Line(
       points={{-87,48.15},{-87,39.5},{-15.8,39.5}},
       color={255,128,0},
       smooth=Smooth.None));
-  connect(Weather.AirTemp, pVsystem.TempOutside) annotation (Line(
+  connect(Weather.AirTemp, PVsystem.TOutside) annotation (Line(
       points={{-67.1667,60.05},{-56,60.05},{-56,47.6},{-16,47.6}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(pVsystem.PVPowerW, Power)
-    annotation (Line(points={{7,40},{82,40},{82,40}}, color={0,0,127}));
+  connect(PVsystem.PVPowerW, Power)
+    annotation (Line(points={{7,40},{82,40}},         color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
             -100,-100},{100,100}})),
     experiment(

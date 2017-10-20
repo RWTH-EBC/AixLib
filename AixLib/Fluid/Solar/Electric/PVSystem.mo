@@ -2,39 +2,24 @@ within AixLib.Fluid.Solar.Electric;
 model PVSystem "PVSystem"
   extends Electric.BaseClasses.PartialPVSystem;
 
-  Modelica.Blocks.Interfaces.RealInput TempOutside(
-    final quantity="ThermodynamicTemperature",
-    final unit="K")
-    "Ambient temperature"
-     annotation (Placement(transformation(extent={{-140,56},{-100,96}}),
+  Modelica.Blocks.Interfaces.RealInput TOutside(final quantity=
+        "ThermodynamicTemperature", final unit="K") "Ambient temperature"
+    annotation (Placement(transformation(extent={{-140,56},{-100,96}}),
         iconTransformation(extent={{-140,56},{-100,96}})));
   AixLib.Utilities.Interfaces.SolarRad_in IcTotalRad
     "Solar radiation in W/m2"
     annotation (Placement(transformation(extent={{-124,-12},{-100,14}}),
         iconTransformation(extent={{-136,-24},{-100,14}})));
-  BaseClasses.PVModuleDC pVmoduleDC1(
-      final Eta0=data.Eta0,
-      final NoctTemp=data.NoctTemp,
-      final NoctTempCell=data.NoctTempCell,
-      final NoctRadiation=data.NoctRadiation,
-      final TempCoeff=data.TempCoeff,
-      final Area=NumberOfPanels*data.Area)
-      "PV module with temperature dependent efficiency"
-      annotation (Placement(transformation(extent={{-9,60},{11,80}})));
 
+  Modelica.Blocks.Sources.RealExpression realExpression(y=IcTotalRad.I)
+    annotation (Placement(transformation(extent={{-96,-10},{-76,10}})));
 equation
-  connect(pVmoduleDC1.DCOutputPower, pVinverterRMS.DCPowerInput)
-    annotation (Line(
-      points={{12,70},{38,70},{38,10.2},{43.8,10.2}},
-      color={0,0,127},
-      smooth=Smooth.None));
 
-  connect(TempOutside, pVmoduleDC1.AmbientTemperature)
-      annotation (Line(points={{-120,76},{-90,76},{-11,76},{-11,76}},
-                                                       color={0,0,127}));
-  connect(IcTotalRad, pVmoduleDC1.SolarIrradationPerSquareMeter) annotation (
-      Line(points={{-112,1},{-32,1},{-32,64.4},{-11,64.4}},
-       color={255,128,0}));
+  connect(TOutside, PVModuleDC.T_amb) annotation (Line(points={{-120,76},{-62,
+          76},{-62,66},{-15,66}}, color={0,0,127}));
+  connect(realExpression.y, PVModuleDC.SolarIrradiationPerSquareMeter)
+    annotation (Line(points={{-75,0},{-48,0},{-48,54.4},{-14.6,54.4}}, color={0,
+          0,127}));
   annotation (
    Icon(
     coordinateSystem(extent={{-100,-100},{100,100}}),
@@ -47,7 +32,9 @@ equation
      Text(
       lineColor={0,0,0},
       extent={{-96,95},{97,-97}},
-           textString="PV")}),
+           textString="PV")},
+           textString="%name",
+          lineColor={0,0,255}),
      Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
              {100,100}})),
      Documentation(info="<html>
@@ -74,10 +61,9 @@ modules energy efficiency</q> by Romary, Florian et al.</p>
 <p><a href=\"AixLib.Fluid.Solar.Electric.Examples.ExamplePV\">AixLib.Fluid.Solar.Electric.Examples.ExamplePV</a></p>
 </html>",revisions="<html>
 <ul>
-<li><i>October 11, 2016 </i> by Tobias Blacha:<br/>
-Moved into AixLib</li>
-<li><i>Februar 21, 2013 </i> by Corinna Leonhardt:<br/>
-Implemented</li>
+<li><i>October 20, 2017 </i>by Larissa K&uuml;hn:<br>Implementation of PartialPVSystem</li>
+<li><i>October 11, 2016 </i>by Tobias Blacha:<br>Moved into AixLib</li>
+<li><i>Februar 21, 2013 </i>by Corinna Leonhardt:<br>Implemented</li>
 </ul>
 </html>"));
 end PVSystem;
