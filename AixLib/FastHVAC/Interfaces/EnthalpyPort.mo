@@ -2,7 +2,7 @@ within AixLib.FastHVAC.Interfaces;
 partial connector EnthalpyPort "Enthalpy port for 1-dim. enthalpy transfer"
 
   Modelica.SIunits.Temperature T "Port temperature";
-  Modelica.SIunits.MassFlowRate m_flow
+  flow Modelica.SIunits.MassFlowRate m_flow
     "Mass flow rate(positive if flowing from outside into the component)";
   Modelica.SIunits.SpecificEnthalpy h "Specific enthalpy of fluid";
   Modelica.SIunits.SpecificHeatCapacity c "Constant specific heat capacity";

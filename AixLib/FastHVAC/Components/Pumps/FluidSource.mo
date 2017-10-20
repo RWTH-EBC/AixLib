@@ -29,7 +29,7 @@ public
     annotation (Placement(transformation(extent={{-100,-46},{-60,-6}})));
 equation
   // balances
-  enthalpyPort_b.m_flow = dotm " set value of outlet port ";
+  enthalpyPort_b.m_flow = -dotm " set value of outlet port ";
   enthalpyPort_b.c = cp " set value of outlet port ";
   enthalpyPort_b.T = T_fluid " set value of outlet port ";
   enthalpyPort_b.h = cp*T_fluid " set value of outlet port ";
