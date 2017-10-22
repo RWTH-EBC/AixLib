@@ -193,11 +193,6 @@ model ExergyMeters
     mass=1)
     "Outputs the exergy content and rate of change of the consumer volume"
     annotation (Placement(transformation(extent={{-50,-56},{-30,-36}})));
-  Modelica.Blocks.Sources.RealExpression consumerTemperature(y=consumer.heatPort.T)
-    "Outlet temperature of consumer" annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=180,
-        origin={2,-62})));
   ExergyMeter.StoredExergyMeter exergyStorageMeterHeater(
     redeclare package Medium = Medium,
     T_ref_start=T_ref.k,
@@ -207,11 +202,12 @@ model ExergyMeters
     mass=1)
     "Outputs the exergy content and rate of change of the heater volume"
     annotation (Placement(transformation(extent={{-42,-94},{-22,-74}})));
-  Modelica.Blocks.Sources.RealExpression heaterTemperature(y=heater.heatPort.T)
-    "Outlet temperature of heater" annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=180,
-        origin={2,-98})));
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor heaterTemperature
+    "Measure the temperature in the heater volume "
+    annotation (Placement(transformation(extent={{-80,42},{-68,54}})));
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor consumerTemperature
+    "Measure the temperature in the consumer volume "
+    annotation (Placement(transformation(extent={{76,36},{64,48}})));
 equation
   connect(T_ref.y, exergyStorageMeterMedium.T_ref) annotation (Line(points={{-79,-10},
           {-72,-10},{-72,-9},{-44,-9}},
@@ -263,7 +259,7 @@ equation
   connect(consumerHeatFlow.port, exHeatSec.port_a) annotation (Line(points={{68,
           24},{71,24},{71,24.2},{74,24.2}}, color={191,0,0}));
   connect(exHeatSec.port_b, consumer.heatPort)
-    annotation (Line(points={{94,24.2},{94,42},{94,60},{96,60}},
+    annotation (Line(points={{94,24.2},{94,24},{96,24},{96,24},{96,60},{96,60}},
                                                  color={191,0,0}));
   connect(heaterHeatFlow.port, exHeatPrim.port_a) annotation (Line(points={{-38,
           24},{-48,24},{-48,24.2},{-58,24.2}}, color={191,0,0}));
@@ -348,8 +344,6 @@ equation
           -79,-90},{-70,-90},{-70,-53},{-50,-53}}, color={0,127,0}));
   connect(X_ref.y, exergyStorageMeterConsumer.X) annotation (Line(points={{-79,
           -90},{-70,-90},{-70,-66},{-35,-66},{-35,-56.8}}, color={0,0,127}));
-  connect(consumerTemperature.y, exergyStorageMeterConsumer.T[1])
-    annotation (Line(points={{-9,-62},{-40,-62},{-40,-56}}, color={0,0,127}));
   connect(T_ref.y, exergyStorageMeterConsumer.T_ref) annotation (Line(points={{
           -79,-10},{-72,-10},{-72,-39},{-50,-39}}, color={255,0,0}));
   connect(exergyStorageMeterConsumer.exergyChangeRate,
@@ -376,8 +370,16 @@ equation
   connect(exergyStorageMeterHeater.exergyChangeRate,
     calcExergyDestructionLoss_1.u[7]) annotation (Line(points={{-21.4,-90.2},{
           38,-90.2},{38,-28.2857},{58,-28.2857}}, color={0,0,127}));
-  connect(exergyStorageMeterHeater.T[1], heaterTemperature.y) annotation (Line(
-        points={{-32,-94},{-32,-98},{-12,-98},{-9,-98}}, color={0,0,127}));
+  connect(heaterTemperature.port, heater.heatPort)
+    annotation (Line(points={{-80,48},{-84,48},{-84,60}}, color={191,0,0}));
+  connect(heaterTemperature.T, exergyStorageMeterHeater.T[1]) annotation (Line(
+        points={{-68,48},{-62,48},{-62,34},{-100,34},{-100,-70},{-16,-70},{-16,
+          -98},{-32,-98},{-32,-94}}, color={0,0,127}));
+  connect(consumerTemperature.port, consumer.heatPort) annotation (Line(points=
+          {{76,42},{88,42},{96,42},{96,60}}, color={191,0,0}));
+  connect(consumerTemperature.T, exergyStorageMeterConsumer.T[1]) annotation (
+      Line(points={{64,42},{60,42},{60,36},{22,36},{22,-62},{-40,-62},{-40,-56}},
+        color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=7200, Interval=10),
