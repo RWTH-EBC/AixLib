@@ -24,6 +24,15 @@ various compressor models"
     annotation(Dialog(tab="General",group="Compressor's characterisitcs"),
                HideResult=true);
 
+  parameter Boolean useInpFil = true
+    "= true, if transient behaviour of valve opening or closing is computed"
+    annotation(Dialog(group="Transient behaviour"));
+  parameter Modelica.SIunits.Time risTim = 0.5
+    "Time until valve opening reaches 99.6 % of its set value"
+    annotation(Dialog(
+      enable = useInpFil,
+      group="Transient behaviour"));
+
   // Definition of models describing efficiencies
   //
   replaceable model EngineEfficiency =
@@ -127,7 +136,7 @@ various compressor models"
                enable=false),
                HideResult=true);
 
-  // Definition of connectors
+  // Definition of connectors and submodels
   //
   Modelica.Blocks.Interfaces.RealInput
     preRotSpe(start=rotSpe0, quantity = "Velocity", unit = ("1/s"))
@@ -136,8 +145,27 @@ various compressor models"
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=-90,
-        origin={0,100})),
+        origin={-60,100})),
         HideResult=true);
+  Modelica.Blocks.Interfaces.RealOutput
+    actRotSpe(quantity = "Velocity", unit = ("1/s"))
+    "Actual compressor's rotational speed"
+    annotation (Placement(transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=90,
+        origin={60,100})),
+        HideResult=true);
+  Modelica.Blocks.Continuous.Filter filterRotSpe(
+    final analogFilter=Modelica.Blocks.Types.AnalogFilter.CriticalDamping,
+    final filterType=Modelica.Blocks.Types.FilterType.LowPass,
+    order=2,
+    f_cut=5/(2*Modelica.Constants.pi*risTim),
+    x(each stateSelect=StateSelect.always)) if useInpFil
+    "Second order filter to approximate change of compressor's rotational speed"
+    annotation (Placement(transformation(extent={{-30,59},{-10,80}})));
+  Modelica.Blocks.Routing.RealPassThrough rotSpeThrough
+    "Dummy passing through of compressor's rotational speed to allow usage of filter"
+    annotation (Placement(transformation(extent={{10,60},{30,80}})));
 
   // Definition of models
   //
@@ -299,10 +327,22 @@ equation
   //
   staOut = Medium.setState_phX(p=pOut,h=hOut) "Thermodynamic state at outlet";
 
-  // Calculation of compressors characteristics
+  // Calculation of compressor'ss characteristics
   //
   piPre = pOut/pInl "Ratio between outlet and inlet pressure";
-  rotSpe = preRotSpe "Prescriped rotational speed";
+
+  // Calculation of compressor's rotational speed
+  //
+  connect(filterRotSpe.u, preRotSpe);
+  if useInpFil then
+    connect(rotSpeThrough.u, filterRotSpe.y)
+      "Transient behaviour of change of rotational speed";
+  else
+    connect(rotSpeThrough.u, preRotSpe)
+      "No transient behaiviour of change of rotational speed";
+  end if;
+  rotSpe = rotSpeThrough.y "Passing thorugh internal variable";
+  actRotSpe = rotSpe "Actual rotational speed";
 
   // Calculation of mass flow
   //

@@ -77,7 +77,7 @@ equation
   connect(simpleValve.port_b, sink.ports[1])
     annotation (Line(points={{40,0},{50,0},{60,0}}, color={0,127,255}));
   connect(rotationalSpeed.y, rotaryCompressor.preRotSpe)
-    annotation (Line(points={{-59,40},{-20,40},{-20,10}}, color={0,0,127}));
+    annotation (Line(points={{-59,40},{-26,40},{-26,10}}, color={0,0,127}));
   connect(valveOpening.y, simpleValve.opening)
     annotation (Line(points={{-59,80},{30,80},{30,8}}, color={0,0,127}));
 
