@@ -59,11 +59,17 @@ Source of literature for the calculation of the pv cell efficiency: </p>
 modules energy efficiency</q> by Romary, Florian et al.</p>
 <h4><span style=\"color: #008000\">Example Results</span></h4>
 <p><a href=\"AixLib.Fluid.Solar.Electric.Examples.ExamplePV\">AixLib.Fluid.Solar.Electric.Examples.ExamplePV</a></p>
-</html>",revisions="<html>
+</html>",revisions="
+<html>
 <ul>
-<li><i>October 20, 2017 </i>by Larissa K&uuml;hn:<br>Implementation of PartialPVSystem</li>
-<li><i>October 11, 2016 </i>by Tobias Blacha:<br>Moved into AixLib</li>
-<li><i>Februar 21, 2013 </i>by Corinna Leonhardt:<br>Implemented</li>
+<li><i>October 20, 2017</i> ,by Larissa Kuehn:<br/>
+Implementation of PartialPVSystem.</li>
+<li><i>October 11, 2016</i> ,by Tobias Blacha:<br/>
+Moved into AixLib</li>
+<li><i>Februar 21, 2013</i> ,by Corinna Leonhardt:<br/>
+Implemented </li>
 </ul>
-</html>"));
+</html>
+
+"));
 end PVSystem;

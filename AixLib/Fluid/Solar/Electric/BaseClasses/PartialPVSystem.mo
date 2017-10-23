@@ -46,6 +46,8 @@ equation
            textString="PV")}),                                   Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>
-<li><i>October 20, 2017 </i>by Larissa K&uuml;hn:<br>First implementation</li>
+<ul>
+<li><i>October 20, 2017 </i> ,by Larissa Kuehn<br/>First implementation</li>
+<ul/>
 </html>"));
 end PartialPVSystem;

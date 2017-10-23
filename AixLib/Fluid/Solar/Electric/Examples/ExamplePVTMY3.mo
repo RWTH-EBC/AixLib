@@ -37,6 +37,8 @@ equation
 <p>Simulation to test the <a href=\"AixLib.Fluid.Solar.Electric.PVSystemTMY3\">PVsystemTMY3</a> model.</p>
 </html>",
       revisions="<html>
-<li><i>October 20, 2017 </i>by Larissa K&uuml;hn:<br>First implementation</li>
+<ul>
+<li><i>October 20, 2017 </i> ,by Larissa Kuehn:<br/>First implementation</li>
+</ul>
 </html>"));
 end ExamplePVTMY3;

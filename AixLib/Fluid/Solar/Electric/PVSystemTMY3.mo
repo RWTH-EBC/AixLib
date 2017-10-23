@@ -91,6 +91,8 @@ modules energy efficiency</q> by Romary, Florian et al.</p>
 <h4><span style=\"color: #008000\">Example Results</span></h4>
 <p><a href=\"AixLib.Fluid.Solar.Electric.Examples.ExamplePV_TMY3\">AixLib.Fluid.Solar.Electric.Examples.ExamplePV_TMY3</a></p>
 </html>", revisions="<html>
-<li><i>October 20, 2017 </i>by Larissa K&uuml;hn:<br>First implementation</li>
+<ul>
+<li><i>October 20, 2017</i> ,by Larissa Kuehn:<br/>First implementation</li>
+<ul>
 </html>"));
 end PVSystemTMY3;
