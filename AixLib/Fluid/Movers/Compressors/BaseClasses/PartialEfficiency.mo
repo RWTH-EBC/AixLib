@@ -11,6 +11,8 @@ partial model PartialEfficiency
 
   // Definition of inputs
   //
+  input Modelica.SIunits.Volume VDis(min=0)
+    "Displacement volume";
   input Real piPre(min=0, unit="1")
     "Ratio of compressor's outlet and inlet pressure";
   input Modelica.SIunits.Frequency rotSpe(min=0)
@@ -19,6 +21,8 @@ partial model PartialEfficiency
     "Thermodynamic state at compressor's inlet";
   input Medium.ThermodynamicState staOut
     "Thermodynamic state at compressor's outlet";
+  input Modelica.SIunits.Temperature TOut
+    "Outdoor temperature";
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false),
               graphics={

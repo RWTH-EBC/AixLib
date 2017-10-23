@@ -166,29 +166,38 @@ various compressor models"
   Modelica.Blocks.Routing.RealPassThrough rotSpeThrough
     "Dummy passing through of compressor's rotational speed to allow usage of filter"
     annotation (Placement(transformation(extent={{10,60},{30,80}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort
+    "Heat port connector to calculate heat losses to ambient"
+    annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
 
   // Definition of models
   //
   EngineEfficiency oveEngEff(
-    Medium=Medium,
+    redeclare package Medium=Medium,
+    VDis=VDis,
     rotSpe=rotSpe,
     piPre=piPre,
     staInl=staInl,
-    staOut=staOut)
+    staOut=staOut,
+    TOut=heatPort.T)
     "Instance of model 'engine efficiency'";
   VolumetricEfficiency oveVolEff(
-    Medium=Medium,
+    redeclare package Medium=Medium,
+    VDis=VDis,
     rotSpe=rotSpe,
     piPre=piPre,
     staInl=staInl,
-    staOut=staOut)
+    staOut=staOut,
+    TOut=heatPort.T)
     "Instance of model 'volumetric efficiency'";
   IsentropicEfficiency oveIseEff(
-    Medium=Medium,
+    redeclare package Medium=Medium,
+    VDis=VDis,
     rotSpe=rotSpe,
     piPre=piPre,
     staInl=staInl,
-    staOut=staOut)
+    staOut=staOut,
+    TOut=heatPort.T)
     "Instance of model 'isentropic efficiency'";
 
   // Definition of records containing detailed results if computed

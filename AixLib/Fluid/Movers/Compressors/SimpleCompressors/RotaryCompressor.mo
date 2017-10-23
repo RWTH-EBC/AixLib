@@ -24,6 +24,10 @@ equation
     will meet the specific enthalpies flowing into the system.
   */
 
+  // Connect heat port with internal variables
+  //
+  heatPort.Q_flow = Q_flow_ref-PEle;
+
   annotation (Icon(graphics={
         Ellipse(
           extent={{-60,40},{20,-40}},

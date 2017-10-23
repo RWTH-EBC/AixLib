@@ -34,15 +34,22 @@ model RotaryCompressor
     T=TOut) "Source with constant pressure and temperature"
     annotation (Placement(transformation(extent={{-82,-10},{-62,10}})));
   Modelica.Blocks.Sources.Sine rotationalSpeed(
-    offset=75,
     freqHz=1,
-    amplitude=75)
+    amplitude=40,
+    offset=80)
     "Prescribed compressor's rotational speed"
     annotation (Placement(transformation(extent={{-80,30},{-60,50}})));
   SimpleCompressors.RotaryCompressor rotaryCompressor(
     redeclare package Medium = Medium,
     show_staEff=true,
-    show_qua=true)
+    show_qua=true,
+    useInpFil=true,
+    redeclare model VolumetricEfficiency =
+        Utilities.VolumetricEfficiency.ReciporatingCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_Reciporating,
+    redeclare model EngineEfficiency =
+        Utilities.EngineEfficiency.ReciporatingCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_Reciporating,
+    redeclare model IsentropicEfficiency =
+        Utilities.IsentropicEfficiency.ReciporatingCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_Reciporating)
     "Model of a rotary compressor"
     annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
   Modelica.Blocks.Sources.Sine valveOpening(
@@ -65,6 +72,9 @@ model RotaryCompressor
     p=pInl,
     T=TInl) "Sink with constant pressure and temperature"
     annotation (Placement(transformation(extent={{80,-10},{60,10}})));
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=556.15)
+    "Fixed ambient temperature"
+    annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
 
 
 equation
@@ -80,6 +90,8 @@ equation
     annotation (Line(points={{-59,40},{-26,40},{-26,10}}, color={0,0,127}));
   connect(valveOpening.y, simpleValve.opening)
     annotation (Line(points={{-59,80},{30,80},{30,8}}, color={0,0,127}));
+  connect(fixedTemperature.port, rotaryCompressor.heatPort)
+    annotation (Line(points={{-60,-50},{-20,-50},{-20,-10}}, color={191,0,0}));
 
   annotation (Documentation(revisions="<html>
 <ul>
