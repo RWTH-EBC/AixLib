@@ -3,34 +3,41 @@ model HeatPumpDetailed
   "Example for the detailed heat pump model in order to compare to simple one."
 
  extends Modelica.Icons.Example;
+  Modelica.Blocks.Sources.BooleanPulse booleanPulse(period=1000)
+    "Pulse signal for the on/off input of the heat pump"
+    annotation (Placement(transformation(extent={{-80,40},{-60,60}})));
   Sources.MassFlowSource_T                sourceSideMassFlowSource(
     use_T_in=true,
     redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
     m_flow=1,
-    T=275.15,
-    nPorts=1) annotation (Placement(transformation(extent={{-44,4},{-24,24}})));
+    nPorts=1,
+    T=275.15) "Ideal mass flow source at the inlet of the source side"
+              annotation (Placement(transformation(extent={{-44,4},{-24,24}})));
 
   Sources.FixedBoundary                sourceSideFixedBoundary(redeclare
       package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-      nPorts=1)
+      nPorts=1) "Fixed boundary at the outlet of the source side"
           annotation (Placement(transformation(extent={{-46,-18},{-26,2}})));
   Sources.FixedBoundary                sinkSideFixedBoundary(redeclare package
       Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, nPorts=1)
+    "Fixed boundary at the outlet of the sink side"
     annotation (Placement(transformation(extent={{96,4},{76,24}})));
   Sources.MassFlowSource_T                sinkSideMassFlowSource(
     redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
     m_flow=0.5,
     use_m_flow_in=true,
-    T=308.15,
-    nPorts=1) annotation (Placement(transformation(extent={{20,-58},{40,-38}})));
+    nPorts=1,
+    T=308.15) "Ideal mass flow source at the inlet of the sink side"
+              annotation (Placement(transformation(extent={{20,-58},{40,-38}})));
 
   Modelica.Blocks.Sources.Ramp TsuSourceRamp(
     duration=1000,
     startTime=1000,
     height=25,
     offset=278)
+    "Ramp signal for the temperature input of the source side's ideal mass flow source"
     annotation (Placement(transformation(extent={{-80,0},{-60,20}})));
   Modelica.Blocks.Sources.Pulse massFlowPulse(
     amplitude=0.5,
@@ -38,15 +45,18 @@ model HeatPumpDetailed
     offset=0,
     startTime=0,
     width=51)
+    "Pulse signal for the mass flow input of the sink side's ideal mass flow source"
     annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
   Sensors.TemperatureTwoPort                temperature(redeclare package
       Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, m_flow_nominal=
        heatPump.mFlow_conNominal)
+    "Temperature sensor at the outlet of the sink side"
     annotation (Placement(transformation(extent={{42,4},{62,24}})));
   Modelica.Blocks.Interfaces.RealOutput Pel
+    "Power consumption of the heat pump"
     annotation (Placement(transformation(extent={{100,-20},{120,0}})));
   Modelica.Blocks.Interfaces.RealOutput T_Co_out
-    "Temperature of the passing fluid"
+    "Temperature at the outlet of the sink side of the heat pump"
     annotation (Placement(transformation(extent={{100,40},{120,60}})));
   .AixLib.Fluid.HeatPumps.HeatPumpDetailed heatPump(
     redeclare package Medium_con =
@@ -62,6 +72,7 @@ model HeatPumpDetailed
         tableP_ele=[0,0,10; 35,1100,1150; 55,1600,1750],
         mFlow_conNom=0.01,
         mFlow_evaNom=0.01))
+    "Detailed heat pump mainly based on manufacturing data"
     annotation (Placement(transformation(extent={{-6,0},{24,20}})));
   BaseClasses.Controls.HPControllerExample hPControllerExample
     annotation (Placement(transformation(extent={{-40,60},{-20,80}})));
@@ -117,13 +128,20 @@ equation
     __Dymola_experimentSetupOutput,
     Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
-<p>Simple test set-up for the HeatPump model. The heat pump is turned on and off while the source temperature increases linearly. Outputs are the electric power consumptiion of the heat pump and the supply temperature. </p>
+<p>Simple test set-up for the HeatPumpDetailed model. The heat pump is turned on and off while the source temperature increases linearly. Outputs are the electric power consumption of the heat pump and the supply temperature. </p>
 <p>Besides using the default simple table data, the user should also test tabulated data from <a href=\"modelica://AixLib.DataBase.HeatPump\">AixLib.DataBase.HeatPump</a> or polynomial functions.</p>
 </html>",
       revisions="<html>
-<ul>
-<li><i>October 17, 2016&nbsp;</i> by Philipp Mehrfeld:<br/>Implemented especially for comparison to simple heat pump model.</li>
-</ul>
+ <ul>
+  <li>
+  May 19, 2017, by Mirko Engelpracht:<br/>
+  Added missing documentation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/391\">issue 391</a>).
+  </li>
+  <li>
+  October 17, 2016, by Philipp Mehrfeld:<br/>
+  Implemented especially for comparison to simple heat pump model.
+  </li>
+ </ul>
 </html>
 "));
 end HeatPumpDetailed;

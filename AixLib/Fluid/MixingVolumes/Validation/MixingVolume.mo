@@ -64,8 +64,9 @@ model MixingVolume "Test model for mixing volumes"
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
          annotation (Placement(transformation(extent={{0,60},{22,80}})));
-  Modelica.Blocks.Math.Add cheEqu1(k2=-1) "Check for equality of results"
-    annotation (Placement(transformation(extent={{156,72},{176,92}})));
+  AixLib.Utilities.Diagnostics.CheckEquality cheEqu1
+    "Check for equality of results"
+    annotation (Placement(transformation(extent={{156,70},{176,90}})));
   AixLib.Fluid.Sensors.EnthalpyFlowRate entFloRat(
     redeclare package Medium = Medium,
     m_flow_nominal=2) "Enthalpy flow rate"
@@ -96,7 +97,8 @@ model MixingVolume "Test model for mixing volumes"
     m_flow_nominal=2,
     dp_nominal=2.5)
     annotation (Placement(transformation(extent={{80,-92},{100,-72}})));
-  Modelica.Blocks.Math.Add cheEqu2(k2=-1) "Check for equality of results"
+  AixLib.Utilities.Diagnostics.CheckEquality cheEqu2
+    "Check for equality of results"
     annotation (Placement(transformation(extent={{156,10},{176,30}})));
   AixLib.Fluid.Sensors.EnthalpyFlowRate entFloRat2(
     redeclare package Medium = Medium,
@@ -104,8 +106,6 @@ model MixingVolume "Test model for mixing volumes"
     annotation (Placement(transformation(extent={{40,-92},{60,-72}})));
     Modelica.Blocks.Sources.Constant zero(k=0)
       annotation (Placement(transformation(extent={{-40,-30},{-20,-10}})));
-    Modelica.Blocks.Sources.Constant TLiq(k=283.15)
-      annotation (Placement(transformation(extent={{-40,-60},{-20,-40}})));
 
   inner Modelica.Fluid.System system
     annotation (Placement(transformation(extent={{-60,80},{-40,100}})));
@@ -118,9 +118,6 @@ equation
           {140,-24},{140,14},{154,14}}, color={0,0,127}));
   connect(zero.y, vol2.mWat_flow) annotation (Line(points={{-19,-20},{-12,-20},
           {-12,-64},{-2,-64}}, color={0,0,127}));
-  connect(TLiq.y, vol2.TWat) annotation (Line(points={{-19,-50},{-14,-50},{-14,
-          -67.2},{-2,-67.2}},
-                          color={0,0,127}));
   connect(sou.ports[1], res1.port_a) annotation (Line(
       points={{-50,60.6667},{-43,60.6667},{-43,60},{-36,60}},
       color={0,127,255}));
@@ -164,37 +161,49 @@ equation
       points={{60,10},{80,10}},
       color={0,127,255}));
   connect(entFloRat.H_flow, cheEqu1.u1)
-    annotation (Line(points={{50,71},{50,88},{154,88}}, color={0,0,127}));
-  connect(entFloRat.H_flow, cheEqu2.u1) annotation (Line(points={{50,71},{50,88},
-          {140,88},{140,26},{154,26}}, color={0,0,127}));
-  connect(entFloRat1.H_flow, cheEqu1.u2) annotation (Line(points={{50,21},{50,40},
-          {146,40},{146,76},{154,76}}, color={0,0,127}));
+    annotation (Line(points={{50,71},{50,86},{154,86}}, color={0,0,127}));
+  connect(entFloRat.H_flow, cheEqu2.u1) annotation (Line(points={{50,71},{50,86},
+          {140,86},{140,26},{154,26}}, color={0,0,127}));
+  connect(entFloRat1.H_flow, cheEqu1.u2) annotation (Line(points={{50,21},{50,
+          40},{146,40},{146,74},{154,74}},
+                                       color={0,0,127}));
     annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
             -100},{180,100}}),      graphics),
-experiment(StopTime=2),
+experiment(Tolerance=1E-9, StopTime=2),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/MixingVolume.mos"
         "Simulate and plot"),
     Documentation(info="<html>
 <p>
 This model tests the implementation of the mixing volumes.
 It compares the results from the mixing volume of the Modelica
-Standard Library with the implementation in the <code>AixLib</code>
+Standard Library with the implementation in the <code>Buildings</code>
 library.
 </p>
 </html>", revisions="<html>
 <ul>
 <li>
+April 12, 2017, by Michael Wetter:<br/>
+Removed temperature connection that is no longer needed.<br/>
+This is for issue
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/704\">Buildings #704</a>.
+</li>
+<li>
+January 12, 2017, by Thierry S. Nouidui:<br/>
+Refactored difference blocks for checking integration errors.
+This is needed for the JModelica verification tests.
+</li>
+<li>
 November 4, 2016, by Michael Wetter:<br/>
 Removed wrong use of <code>each</code> keyword.<br/>
 This is for
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/575\">issue 575</a>.
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/575\">issue 575</a>.
 </li>
 <li>
 November 2, 2016, by Michael Wetter:<br/>
 Changed assertions to blocks that compute the difference,
 and added the difference to the regression results.<br/>
 This is for
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/564\">issue 564</a>.
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/564\">issue 564</a>.
 </li>
 <li>
 October 24, 2013, by Michael Wetter:<br/>

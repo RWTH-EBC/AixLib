@@ -43,10 +43,11 @@ transfer.</li>
 <li>Two enthalpy ports describe the input and output condition of the fluid
 (temperature, specific enthalpy, specific heat capacity, mass flow).</li>
 <li>One thermal port depicts the heat flow, which is transfered on the fluid</li>
+</ul>
 </html>", revisions="<html>
 <ul>
 <li>
-April 25, 2017, by Michael Mans:<br/>
+<br/>April 25, 2017, by Michael Mans:<br/>
 Moved to AixLib
 </li>
 </ul>

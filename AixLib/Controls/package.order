@@ -1,7 +1,8 @@
 Continuous
 Discrete
+HVACAgentBasedControl
+HeatPump
 SetPoints
 VentilationController
-HeatPump
 Interfaces
 Types

@@ -1,9 +1,7 @@
 within AixLib.Building.Components.Examples.Weather;
-
-
 model WeatherModels
   extends Modelica.Icons.Example;
-  Components.Weather.Weather weather(Cloud_cover = true, Wind_dir = true, Wind_speed = true, Air_temp = true, Air_press = true, Mass_frac = true, Rel_hum = true, Sky_rad = true, Ter_rad = true, fileName = "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt") annotation(Placement(transformation(extent = {{-60, 16}, {6, 60}})));
+  Components.Weather.Weather weather(Cloud_cover = true, Wind_dir = true, Wind_speed = true, Air_temp = true, Air_press = true, Mass_frac = true, Rel_hum = true, Sky_rad = true, Ter_rad = true)                                                                                            annotation(Placement(transformation(extent = {{-60, 16}, {6, 60}})));
 equation
 
   annotation(experiment(StopTime = 3.1536e+007, Interval = 3600, Algorithm = "Lsodar"),Documentation(info = "<html>
