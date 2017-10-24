@@ -1,6 +1,6 @@
 ﻿within AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency.ScrollCompressors.R134a;
 model R134a_Scroll_54
-  "Polynomial - R22 - Scroll Compressor - 54.25 cm³"
+  "Polynomial - R134a - Scroll Compressor - 54.25 cm³"
   extends PolynomialIsentropicEfficiency(
     final polyMod=Choices.IsentropicPolynomialModels.Li2013,
     final rotSpeRef=50,

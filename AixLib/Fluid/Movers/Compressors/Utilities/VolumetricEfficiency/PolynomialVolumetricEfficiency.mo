@@ -37,25 +37,13 @@ model PolynomialVolumetricEfficiency
     "Array of correction factors used if efficiency model proposed in literature
     differs from efficiency model defined in PartialCompressor model";
 
-protected
-  Medium.SaturationProperties satInl
-    "Saturation properties at valve's inlet conditions";
-  Medium.SaturationProperties satOut
-    "Saturation properties at valve's outlet conditions";
 
 equation
-  // Calculation of protected variables
-  //
-  satInl = Medium.setSat_p(Medium.pressure(staInl))
-    "Saturation properties at valve's inlet conditions";
-  satOut = Medium.setSat_p(Medium.pressure(staOut))
-    "Saturation properties at valve's outlet conditions";
-
   // Calculation of coefficients
   //
   if (polyMod == Choices.VolumetricPolynomialModels.DarrAndCrawford1992) then
     /*Polynomial approach presented by Dar and Crawford (1992):
-      lamH = a1 + a2*rotSpe + a3*epsRef*(dInlIse/dInl-1) + 
+      lamH = a1 + a2*rotSpe - a3*epsRef*(dInlIse/dInl-1) - 
       a4*rotSpe*(dInlIse/dInl-1)
       
       Caution with units - In the following, none S.I units are presented:
@@ -65,19 +53,15 @@ equation
     */
     p[1] = 1
       "Dummy value for usage of simple coefficcient";
-    p[2] = rotSpe/60
+    p[2] = rotSpe*60
       "Rotational speed";
-    p[3] = (epsRef)*(Medium.density(Medium.setState_psX(p=Medium.pressure(
-      staOut),s=Medium.specificEntropy(staInl)))/Medium.density(staInl)-1)
+    p[3] = -(epsRef)*(Medium.density(staOutIse)/Medium.density(staInl)-1)
       "Effect of clearance";
-    p[4] = rotSpe/60*(Medium.density(Medium.setState_psX(p=Medium.pressure(
-      staOut),s=Medium.specificEntropy(staInl)))/Medium.density(staInl)-1)
+    p[4] = -rotSpe*60*(Medium.density(staOutIse)/Medium.density(staInl)-1)
       "Effect of clearance";
 
-    corFac[1] = 0.3048^3/60
-      "Convert ft^3/min in m^3/s";
-    corFac[2] = 1
-      "No correction factor is needed";
+    corFac = {1,1}
+      "No correction factors are needed";
 
   elseif (polyMod == Choices.VolumetricPolynomialModels.Karlsson2007) then
     /*Polynomial approach presented by Karlsson (2007):
@@ -102,6 +86,33 @@ equation
     corFac = {1,1}
       "No correction factors are needed";
 
+  elseif (polyMod == Choices.VolumetricPolynomialModels.KinarbEtAl2010) then
+    /*Polynomial approach presented by Kinab et al. (2010):
+      etaEng = a1 + a2*piPre
+    */
+    p[1] = 1
+      "Dummy value for usage of simple coefficient";
+    p[2] = piPre
+      "Pressure ratio";
+
+    corFac = {1,1}
+      "No correction factors are needed";
+
+  elseif (polyMod == Choices.VolumetricPolynomialModels.ZhouEtAl2010) then
+    /*Polynomial approach presented by Zhou et al. (2010):
+    etaEng = 1 + a1 - a2*piPre^(1/kapMean)
+    */
+    p[1] = 1
+      "Dummy value for usage of simple coefficient";
+    p[2] = 1
+      "Dummy value for usage of simple coefficient";
+    p[3] = -piPre^(2/(Medium.isentropicExponent(staInl)+
+      Medium.isentropicExponent(staOut)))
+      "Pressure ratio";
+
+    corFac = {1,1}
+      "No correction factors are needed";
+
   elseif (polyMod == Choices.VolumetricPolynomialModels.Li2013) then
     /*Polynomial approach presented by Li (2013):
       lamH = lamHRef * (a1 + a2*(rotSpe/rotSpeRef) + a3*(rotSpe/rotSpeRef)^2)
@@ -121,7 +132,7 @@ equation
       "Quadratic rotational speed";
 
     corFac[1] = c[1] + c[2]*((Medium.pressure(staOut)/(Medium.pressure(staInl)*
-      (1-c[3])*1e-3))^(2/(Medium.isentropicExponent(staInl)+
+      (1-c[3]*1e-3)))^(2/(Medium.isentropicExponent(staInl)+
       Medium.isentropicExponent(staOut))))
       "Reference volumetric efficiency";
     corFac[2] = 1
@@ -218,9 +229,9 @@ equation
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
-  October 16, 2017, by Mirko Engelpracht:<br/>
+  October 20, 2017, by Mirko Engelpracht:<br/>
   First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
+  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
 </html>"));

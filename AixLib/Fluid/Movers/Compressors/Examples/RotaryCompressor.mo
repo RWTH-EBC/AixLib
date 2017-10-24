@@ -20,9 +20,6 @@ model RotaryCompressor
   parameter Modelica.SIunits.Temperature TOut = 333.15
     "Actual temperature at outlet conditions";
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.1
-    "Nominal mass flow rate";
-
   // Definition of models
   //
   Sources.FixedBoundary source(
@@ -35,9 +32,9 @@ model RotaryCompressor
     "Source with constant pressure and temperature"
     annotation (Placement(transformation(extent={{-82,-10},{-62,10}})));
   Modelica.Blocks.Sources.Sine rotationalSpeed(
-    freqHz=1,
     amplitude=40,
-    offset=80)
+    offset=80,
+    freqHz=1)
     "Prescribed compressor's rotational speed"
     annotation (Placement(transformation(extent={{-80,30},{-60,50}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature
@@ -50,16 +47,17 @@ model RotaryCompressor
     show_qua=true,
     useInpFil=true,
     redeclare model VolumetricEfficiency =
-        Utilities.VolumetricEfficiency.ReciporatingCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_Reciporating,
-    redeclare model EngineEfficiency =
-        Utilities.EngineEfficiency.ReciporatingCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_Reciporating,
+        Utilities.VolumetricEfficiency.ConstantEfficiency,
     redeclare model IsentropicEfficiency =
-        Utilities.IsentropicEfficiency.ReciporatingCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_Reciporating)
+        Utilities.IsentropicEfficiency.ConstantEfficiency,
+    redeclare model EngineEfficiency =
+        Utilities.EngineEfficiency.ConstantEfficiency)
     "Model of a rotary compressor"
     annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
+
   Modelica.Blocks.Sources.Sine valveOpening(
     offset=0.5,
-    amplitude=0,
+    amplitude=0.3,
     freqHz=1)
     "Prescribed valve's opening"
     annotation (Placement(transformation(extent={{-80,70},{-60,90}})));
@@ -105,5 +103,6 @@ equation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
-</html>"));
+</html>"),
+experiment(StopTime=1));
 end RotaryCompressor;

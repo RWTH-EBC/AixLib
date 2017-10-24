@@ -51,9 +51,7 @@ equation
       "Pressure ratio";
     p[2] = rotSpeRef/rotSpe
       "Rotational Speed";
-    p[3] = 1/abs((Medium.temperature(staInl)+Medium.temperature(
-      Medium.setState_psX(p=Medium.pressure(staOut),
-      s=Medium.specificEntropy(staInl))))/2-TOut)
+    p[3] = 1/((Medium.temperature(staInl)+Medium.temperature(staOutIse))/2-TOut)
       "Temperature difference isentropic compression and ambient";
     p[4] = MRef/Medium.fluidConstants[1].molarMass
       "Molar Mass";
@@ -70,4 +68,13 @@ equation
   etaEng = corFac[1] * a * product(p[i]^b[i] for i in 1:nT)^corFac[2]
     "Calculation procedure of generic power approach";
 
+  annotation (Documentation(revisions="<html>
+<ul>
+  <li>
+  October 20, 2017, by Mirko Engelpracht:<br/>
+  First implementation
+  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
+  </li>
+</ul>
+</html>"));
 end PowerEngineEfficiency;

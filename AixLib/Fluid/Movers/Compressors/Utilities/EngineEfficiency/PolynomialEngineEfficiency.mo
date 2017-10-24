@@ -20,9 +20,6 @@ model PolynomialEngineEfficiency
     annotation(Dialog(group="Modelling approach",
                       enable=false));
 
-  // Definition of parameters describing specific approaches
-  //
-
   // Definition of coefficients
   //
   Real p[nT]
@@ -30,6 +27,7 @@ model PolynomialEngineEfficiency
   Real corFac[2]
     "Array of correction factors used if efficiency model proposed in literature
     differs from efficiency model defined in PartialCompressor model";
+
 
 equation
   // Calculation of coefficients
@@ -62,6 +60,20 @@ equation
       "Quintic pressure ratio";
     p[7] = piPre^6
       "Bicubic pressure ratio";
+
+    corFac = {1,1}
+      "No correction factors are needed";
+
+  elseif (polyMod == Choices.EnginePolynomialModels.KinarbEtAl2010) then
+    /*Polynomial approach presented by Kinab et al. (2010):
+      etaEng = a1 + a2*piPre + a3*piPre^2
+    */
+    p[1] = 1
+      "Dummy value for usage of simple coefficient";
+    p[2] = piPre
+      "Pressure ratio";
+    p[3] = piPre^3
+      "Quadratic pressure ratio";
 
     corFac = {1,1}
       "No correction factors are needed";
@@ -127,9 +139,9 @@ equation
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
-  October 16, 2017, by Mirko Engelpracht:<br/>
+  October 20, 2017, by Mirko Engelpracht:<br/>
   First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
+  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
 </html>"));

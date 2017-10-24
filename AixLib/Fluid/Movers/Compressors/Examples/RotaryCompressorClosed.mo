@@ -20,9 +20,6 @@ model RotaryCompressorClosed
   parameter Modelica.SIunits.Temperature TOut = 333.15
     "Actual temperature at outlet conditions";
 
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.1
-    "Nominal mass flow rate";
-
   // Definition of models
   //
   Sources.FixedBoundary source(
@@ -32,7 +29,7 @@ model RotaryCompressorClosed
     p=pInl,
     T=TOut,
     nPorts=1)
-            "Source with constant pressure and temperature"
+    "Source with constant pressure and temperature"
     annotation (Placement(transformation(extent={{-82,-10},{-62,10}})));
   Modelica.Blocks.Sources.Sine rotationalSpeed(
     offset=75,
@@ -40,10 +37,20 @@ model RotaryCompressorClosed
     amplitude=75)
     "Prescribed compressor's rotational speed"
     annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature
+    fixedTemperature(T=283.15)
+    "Fixed ambient temperature"
+    annotation (Placement(transformation(extent={{-80,-40},{-60,-20}})));
   SimpleCompressors.RotaryCompressor rotaryCompressor(
     redeclare package Medium = Medium,
     show_staEff=true,
-    show_qua=true)
+    show_qua=true,
+    redeclare model EngineEfficiency =
+        Utilities.EngineEfficiency.ConstantEfficiency,
+    redeclare model VolumetricEfficiency =
+        Utilities.VolumetricEfficiency.ConstantEfficiency,
+    redeclare model IsentropicEfficiency =
+        Utilities.IsentropicEfficiency.ConstantEfficiency)
     "Model of a rotary compressor"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Sine valveOpening(
@@ -73,7 +80,8 @@ equation
   connect(rotaryCompressor.port_b, twoPhaseTank.port_a)
     annotation (Line(points={{10,0},{60,0},{60,-12}}, color={0,127,255}));
   connect(rotationalSpeed.y, rotaryCompressor.preRotSpe)
-    annotation (Line(points={{-59,70},{0,70},{0,10}}, color={0,0,127}));
+    annotation (Line(points={{-59,70},{-6,70},{-6,10}},
+                                                      color={0,0,127}));
   connect(valveOpening.y, simpleValve.opening)
     annotation (Line(points={{-59,-70},{0,-70},{0,-48}}, color={0,0,127}));
   connect(twoPhaseTank.port_b, simpleValve.port_a)
@@ -81,6 +89,8 @@ equation
   connect(simpleValve.port_b, rotaryCompressor.port_a)
     annotation (Line(points={{-10,-40},{-40,-40},{-40,0},{-10,0}},
                 color={0,127,255}));
+  connect(fixedTemperature.port, rotaryCompressor.heatPort)
+    annotation (Line(points={{-60,-30},{0,-30},{0,-10}}, color={191,0,0}));
 
   annotation (Documentation(revisions="<html>
 <ul>

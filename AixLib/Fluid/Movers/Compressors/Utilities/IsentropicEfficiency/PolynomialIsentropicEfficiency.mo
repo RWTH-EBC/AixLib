@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency;
+within AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency;
 model PolynomialIsentropicEfficiency
   "Model describing isentropic efficiency based on polynomial approach"
   extends PartialIsentropicEfficiency;
@@ -37,20 +37,8 @@ model PolynomialIsentropicEfficiency
     "Array of correction factors used if efficiency model proposed in literature
     differs from efficiency model defined in PartialCompressor model";
 
-protected
-  Medium.SaturationProperties satInl
-    "Saturation properties at valve's inlet conditions";
-  Medium.SaturationProperties satOut
-    "Saturation properties at valve's outlet conditions";
 
 equation
-  // Calculation of protected variables
-  //
-  satInl = Medium.setSat_p(Medium.pressure(staInl))
-    "Saturation properties at valve's inlet conditions";
-  satOut = Medium.setSat_p(Medium.pressure(staOut))
-    "Saturation properties at valve's outlet conditions";
-
   // Calculation of coefficients
   //
   if (polyMod == Choices.IsentropicPolynomialModels.DarrAndCrawford1992) then
@@ -64,7 +52,7 @@ equation
     */
     p[1] = 1
       "Dummy value for usage of simple coefficcient";
-    p[2] = rotSpe/60
+    p[2] = rotSpe*60
       "Rotational speed";
     p[3] = 1/(Medium.density(staInl)*0.3048^3/0.453592)
       "Effect of clearance";
@@ -74,7 +62,7 @@ equation
 
   elseif (polyMod == Choices.IsentropicPolynomialModels.Karlsson2007) then
     /*Polynomial approach presented by Karlsson (2007):
-      etaIse = a1 + a2*piPre + a3*piPre^2 + aa4*rotSpe + a5*rotSpe^2
+      etaIse = a1 + a2*piPre + a3*piPre^2 + a4*rotSpe + a5*rotSpe^2
       
       Caution with units - In the following, none S.I units are presented:
       Pressure:            in bar
@@ -93,36 +81,6 @@ equation
     corFac = {1,1}
       "No correction factors are needed";
 
-  elseif (polyMod == Choices.IsentropicPolynomialModels.Li2013) then
-    /*Polynomial approach presented by Li (2013):
-      etaIse = etaIseRef / (a1 + a2*(rotSpe/rotSpeRef) + a3*(rotSpe/rotSpeRef)^2)
-        with  etaIseRef = (dInl*dhIse)/(c1*pInl*(piPre^(c2+1-1/kapMea)+c3/pOut)+
-                          c[4]/V_flow_inlRef)
-      
-      Caution with units - In the following, none S.I units are presented:
-      Pressure:            in kPa
-      Temperature:         in °C
-      Specific enthalpy:   in kJ/kg
-      Rotational speed:    in rpm
-    */
-    p[1] = 1
-      "Dummy value for usage of simple coefficient";
-    p[2] = (rotSpe/rotSpeRef)
-      "Rotational speed";
-    p[3] = (rotSpe/rotSpeRef)^2
-      "Quadratic rotational speed";
-
-    corFac[1] = Medium.density(staInl)*(Medium.isentropicEnthalpy(p_downstream=
-      Medium.pressure(staOut),refState=staInl)-Medium.specificEnthalpy(staInl))*
-      1e-3/(c[1]*Medium.pressure(staInl)*(piPre^(c[2]-1-2/
-      (Medium.isentropicExponent(staInl)+Medium.isentropicExponent(staOut)))+
-      c[3]/Medium.pressure(staOut))+c[4]/(rotSpe*VDis*(c[5] + c[6]*
-      ((Medium.pressure(staOut)/(Medium.pressure(staInl)*(1-c[7])*1e-3))^(2/
-      (Medium.isentropicExponent(staInl)+Medium.isentropicExponent(staOut)))))))
-      "Reference volumetric efficiency";
-    corFac[2] = -1
-      "Invert sum";
-
   else
     assert(false, "Invalid choice of polynomial approach");
   end if;
@@ -135,9 +93,9 @@ equation
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
-  October 16, 2017, by Mirko Engelpracht:<br/>
+  October 20, 2017, by Mirko Engelpracht:<br/>
   First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
+  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
 </html>"));

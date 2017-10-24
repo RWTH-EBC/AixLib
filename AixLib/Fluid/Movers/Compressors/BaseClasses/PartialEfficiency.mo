@@ -23,6 +23,8 @@ partial model PartialEfficiency
     "Thermodynamic state at compressor's inlet";
   input Medium.ThermodynamicState staOut
     "Thermodynamic state at compressor's outlet";
+  input Medium.ThermodynamicState staOutIse
+    "Isentropic thermodynamic state at compressor's outlet";
   input Modelica.SIunits.Temperature TOut
     "Outdoor temperature";
 

@@ -5,6 +5,8 @@ package Choices "Types, constants to define menu choices"
   type EnginePolynomialModels = enumeration(
       JahningEtAl2000
       "JahningEtAl2000 - Function of inlet pressure",
+      KinarbEtAl2010
+      "KinarbEtAl2010 - Function of pressure ratio",
       DurprezEtAl2007
       "DurprezEtAl2007 - Function of pressure ratio",
       Engelpracht2017
@@ -21,6 +23,10 @@ package Choices "Types, constants to define menu choices"
       "DarrAndCrawford1992 - Function of rotational speed and densities",
       Karlsson2007
       "Karlsson2007 - Function of pressure ratio and rotational speed",
+      KinarbEtAl2010
+      "KinarbEtAl2010 - Function of pressure ratio",
+      ZhouEtAl2010
+      "ZhouEtAl2010 - Function of pressure ratio and isentropic exponent",
       Li2013
       "Li2013 - Function of rotational speed and reference rotational speed",
       HongtaoLaughmannEtAl2017
@@ -38,9 +44,7 @@ package Choices "Types, constants to define menu choices"
       DarrAndCrawford1992
       "DarrAndCrawford1992 - Function of rotational speed and densities",
       Karlsson2007
-      "Karlsson2007 - Function of pressure ratio and rotational speed",
-      Li2013
-      "Li2013 - Function of rotational speed and reference rotational speed")
+      "Karlsson2007 - Function of pressure ratio and rotational speed")
     "Enumeration to define polynomial models for calculating flow coefficient"
     annotation (Evaluate=true);
   type IsentropicPowerModels = enumeration(
@@ -48,7 +52,6 @@ package Choices "Types, constants to define menu choices"
       "MendozaMirandaEtAl2016 - Function of various properties")
     "Enumeration to define polynomial models for calculating flow coefficient"
     annotation (Evaluate=true);
-
   annotation (Documentation(revisions="<html>
 <ul>
   <li>

@@ -37,20 +37,8 @@ model PowerVolumetricEfficiency
     "Array of correction factors used if efficiency model proposed in literature
     differs from efficiency model defined in PartialCompressor model";
 
-protected
-  Medium.SaturationProperties satInl
-    "Saturation properties at valve's inlet conditions";
-  Medium.SaturationProperties satOut
-    "Saturation properties at valve's outlet conditions";
 
 equation
-  // Calculation of protected variables
-  //
-  satInl = Medium.setSat_p(Medium.pressure(staInl))
-    "Saturation properties at valve's inlet conditions";
-  satOut = Medium.setSat_p(Medium.pressure(staOut))
-    "Saturation properties at valve's outlet conditions";
-
   // Calculation of coefficients
   //
   if (powMod == Choices.VolumetricPowerModels.MendozaMirandaEtAl2016) then
@@ -76,4 +64,13 @@ equation
   lamH = corFac[1] * a * product(p[i]^b[i] for i in 1:nT)^corFac[2]
     "Calculation procedure of generic power approach";
 
+  annotation (Documentation(revisions="<html>
+<ul>
+  <li>
+  October 20, 2017, by Mirko Engelpracht:<br/>
+  First implementation
+  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
+  </li>
+</ul>
+</html>"));
 end PowerVolumetricEfficiency;

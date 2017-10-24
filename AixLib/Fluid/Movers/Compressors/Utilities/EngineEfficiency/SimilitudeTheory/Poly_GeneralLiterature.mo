@@ -1,6 +1,6 @@
 within AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency.SimilitudeTheory;
 model Poly_GeneralLiterature
-  "Polynomial - Various refrigerants - Various compressors - Various displacemetn volumes"
+  "Generic overall engine efficiency based on literature review for various compressors"
   extends PolynomialEngineEfficiency(
     final useIseWor=false,
     final polyMod=Choices.EnginePolynomialModels.Engelpracht2017,
@@ -13,4 +13,13 @@ model Poly_GeneralLiterature
     final b={1,1,1,1,1,1,1,1,1,
              1,1,1,1,1,1,1,1,1});
 
+  annotation (Documentation(revisions="<html>
+<ul>
+  <li>
+  October 23, 2017, by Mirko Engelpracht:<br/>
+  First implementation
+  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
+  </li>
+</ul>
+</html>"));
 end Poly_GeneralLiterature;

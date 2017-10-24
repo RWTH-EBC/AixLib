@@ -25,10 +25,10 @@ various compressor models"
                HideResult=true);
 
   parameter Boolean useInpFil = true
-    "= true, if transient behaviour of valve opening or closing is computed"
+    "= true, if transient behaviour of rotational speed is computed"
     annotation(Dialog(group="Transient behaviour"));
   parameter Modelica.SIunits.Time risTim = 0.5
-    "Time until valve opening reaches 99.6 % of its set value"
+    "Time until rotational speed reaches 99.6 % of its set value"
     annotation(Dialog(
       enable = useInpFil,
       group="Transient behaviour"));
@@ -180,6 +180,7 @@ various compressor models"
     piPre=piPre,
     staInl=staInl,
     staOut=staOut,
+    staOutIse=Medium.setState_psX(s=Medium.specificEntropy(staInl),p=pOut),
     TOut=heatPort.T)
     "Instance of model 'engine efficiency'";
   VolumetricEfficiency oveVolEff(
@@ -190,6 +191,7 @@ various compressor models"
     piPre=piPre,
     staInl=staInl,
     staOut=staOut,
+    staOutIse=Medium.setState_psX(s=Medium.specificEntropy(staInl),p=pOut),
     TOut=heatPort.T)
     "Instance of model 'volumetric efficiency'";
   IsentropicEfficiency oveIseEff(
@@ -200,6 +202,7 @@ various compressor models"
     piPre=piPre,
     staInl=staInl,
     staOut=staOut,
+    staOutIse=Medium.setState_psX(s=Medium.specificEntropy(staInl),p=pOut),
     TOut=heatPort.T)
     "Instance of model 'isentropic efficiency'";
 
@@ -330,6 +333,24 @@ protected
 
 
 equation
+  // Provide assertions to check physical correctness
+  //
+  assert(piPre<=piPreMax, "Pressure ratio is greater than maximum pressure
+    ratio allowed! Please check boundary condtions!",
+    level = AssertionLevel.warning);
+  assert(actRotSpe<=rotSpeMax, "Rotational speed is greater than maximum 
+  rotational speed allowed! Please check boundary condtions!",
+    level = AssertionLevel.warning);
+  assert(oveEngEff.etaEng<=1, "Overall engine efficiency is greater than one! 
+    Please check efficiency model!",
+    level = AssertionLevel.warning);
+  assert(oveVolEff.lamH<=1, "Overall volumetric efficiency is greater than one! 
+    Please check efficiency model!",
+    level = AssertionLevel.warning);
+  assert(oveIseEff.etaIse<=1, "Overall isentropic efficiency is greater than one! 
+    Please check efficiency model!",
+    level = AssertionLevel.warning);
+
   // Calculation of thermodynamic state at inlet conditions
   //
   staInl = Medium.setState_phX(p=pInl,h=hInl) "Thermodynamic state at inlet";
@@ -341,7 +362,7 @@ equation
 
   // Calculation of compressor'ss characteristics
   //
-  piPre = pOut/pInl "Ratio between outlet and inlet pressure";
+  piPre = abs(pOut/pInl) "Ratio between outlet and inlet pressure";
 
   // Calculation of compressor's rotational speed
   //
