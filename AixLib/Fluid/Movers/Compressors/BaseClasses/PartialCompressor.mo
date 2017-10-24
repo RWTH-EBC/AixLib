@@ -174,6 +174,7 @@ various compressor models"
   //
   EngineEfficiency oveEngEff(
     redeclare package Medium=Medium,
+    epsRef=epsRef,
     VDis=VDis,
     rotSpe=rotSpe,
     piPre=piPre,
@@ -183,6 +184,7 @@ various compressor models"
     "Instance of model 'engine efficiency'";
   VolumetricEfficiency oveVolEff(
     redeclare package Medium=Medium,
+    epsRef=epsRef,
     VDis=VDis,
     rotSpe=rotSpe,
     piPre=piPre,
@@ -192,6 +194,7 @@ various compressor models"
     "Instance of model 'volumetric efficiency'";
   IsentropicEfficiency oveIseEff(
     redeclare package Medium=Medium,
+    epsRef=epsRef,
     VDis=VDis,
     rotSpe=rotSpe,
     piPre=piPre,

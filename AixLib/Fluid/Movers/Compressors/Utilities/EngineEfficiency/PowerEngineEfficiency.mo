@@ -23,18 +23,21 @@ model PowerEngineEfficiency
   // Definition of further parameters required for special approaches
   //
   parameter Modelica.SIunits.MolarMass MRef=0.1
-    "Reference molar wheight";
+    "Reference molar wheight"
+    annotation(Dialog(group="Reference properties"));
   parameter Modelica.SIunits.Frequency rotSpeRef = 9.334
-    "Reference rotational speed";
+    "Reference rotational speed"
+    annotation(Dialog(group="Reference properties"));
 
   // Definition of coefficients
   //
-  Real P[nT]
+  Real p[nT]
     "Array that contains all coefficients used for the calculation procedure";
-
+  Real corFac[2]
+    "Array of correction factors used if efficiency model proposed in literature
+    differs from efficiency model defined in PartialCompressor model";
 
 equation
-
   // Calculation of coefficients
   //
   if (powMod == Choices.EnginePowerModels.MendozaMirandaEtAl2016) then
@@ -44,16 +47,19 @@ equation
 
       Caution with parameters - Uses isentropic specific enthalpy difference      
     */
-    P[1] = piPre
+    p[1] = piPre
       "Pressure ratio";
-    P[2] = rotSpeRef/rotSpe
+    p[2] = rotSpeRef/rotSpe
       "Rotational Speed";
-    P[3] = 1/abs((Medium.temperature(staInl)+Medium.temperature(
+    p[3] = 1/abs((Medium.temperature(staInl)+Medium.temperature(
       Medium.setState_psX(p=Medium.pressure(staOut),
       s=Medium.specificEntropy(staInl))))/2-TOut)
       "Temperature difference isentropic compression and ambient";
-    P[4] = MRef/Medium.fluidConstants[1].molarMass
+    p[4] = MRef/Medium.fluidConstants[1].molarMass
       "Molar Mass";
+
+    corFac = {1,1}
+      "No correction factors are needed";
 
   else
     assert(false, "Invalid choice of power approach");
@@ -61,7 +67,7 @@ equation
 
   // Calculationg of flow coefficient
   //
-  etaEng = a * product(P[i]^b[i] for i in 1:nT)
+  etaEng = corFac[1] * a * product(p[i]^b[i] for i in 1:nT)^corFac[2]
     "Calculation procedure of generic power approach";
 
 end PowerEngineEfficiency;

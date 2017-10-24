@@ -11,6 +11,8 @@ partial model PartialEfficiency
 
   // Definition of inputs
   //
+  input Modelica.SIunits.Efficiency epsRef(min=0, max=1, nominal=0.05)
+    "Ratio of the real and the ideal displacement volume";
   input Modelica.SIunits.Volume VDis(min=0)
     "Displacement volume";
   input Real piPre(min=0, unit="1")

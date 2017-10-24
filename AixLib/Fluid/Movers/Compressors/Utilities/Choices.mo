@@ -3,8 +3,12 @@ package Choices "Types, constants to define menu choices"
   extends Modelica.Icons.Package;
 
   type EnginePolynomialModels = enumeration(
-      t
-      "t")
+      JahningEtAl2000
+      "JahningEtAl2000 - Function of inlet pressure",
+      DurprezEtAl2007
+      "DurprezEtAl2007 - Function of pressure ratio",
+      Engelpracht2017
+      "Engelpracht2017 - Function of pressure ratio and rotational speed")
     "Enumeration to define polynomial models for calculating flow coefficient"
     annotation (Evaluate=true);
   type EnginePowerModels = enumeration(
@@ -13,8 +17,16 @@ package Choices "Types, constants to define menu choices"
     "Enumeration to define polynomial models for calculating flow coefficient"
     annotation (Evaluate=true);
   type VolumetricPolynomialModels = enumeration(
+      DarrAndCrawford1992
+      "DarrAndCrawford1992 - Function of rotational speed and densities",
       Karlsson2007
-      "Karlsson2007 - Function of pressure ratio and rotational speed")
+      "Karlsson2007 - Function of pressure ratio and rotational speed",
+      Li2013
+      "Li2013 - Function of rotational speed and reference rotational speed",
+      HongtaoLaughmannEtAl2017
+      "HongtaoLaughmannEtAl2017 - Function of pressures and rotational speed",
+      Koerner2017
+      "Koerner2017 - Function of pressure ratio")
     "Enumeration to define polynomial models for calculating flow coefficient"
     annotation (Evaluate=true);
   type VolumetricPowerModels = enumeration(
@@ -23,8 +35,12 @@ package Choices "Types, constants to define menu choices"
     "Enumeration to define polynomial models for calculating flow coefficient"
     annotation (Evaluate=true);
   type IsentropicPolynomialModels = enumeration(
+      DarrAndCrawford1992
+      "DarrAndCrawford1992 - Function of rotational speed and densities",
       Karlsson2007
-      "Karlsson2007 - Function of pressure ratio and rotational speed")
+      "Karlsson2007 - Function of pressure ratio and rotational speed",
+      Li2013
+      "Li2013 - Function of rotational speed and reference rotational speed")
     "Enumeration to define polynomial models for calculating flow coefficient"
     annotation (Evaluate=true);
   type IsentropicPowerModels = enumeration(
@@ -32,6 +48,7 @@ package Choices "Types, constants to define menu choices"
       "MendozaMirandaEtAl2016 - Function of various properties")
     "Enumeration to define polynomial models for calculating flow coefficient"
     annotation (Evaluate=true);
+
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
