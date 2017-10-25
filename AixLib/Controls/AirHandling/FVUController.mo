@@ -1,28 +1,36 @@
 within AixLib.Controls.AirHandling;
 model FVUController "Rule-based controller of a facade ventilation unit"
 
-  parameter Real minimumSupTemp=273.15 + 17 "Minimum supply air temperature";
+  parameter Modelica.SIunits.Temperature minimumSupTemp=273.15 + 17
+  "Minimum supply air temperature";
 
-  parameter Real co2SetConcentration=600 "Set point for CO2 concentration";
+  parameter Real co2SetConcentration=600 "Set point for CO2 concentration in ppm";
 
-  parameter Real maxSupFanPower=0.6 "Maximum relative supply air fan power (0..1)";
+  parameter Real maxSupFanPower=1 "Maximum relative supply air fan power (0..1)";
 
-  parameter Real maxExFanPower=0.6 "Maximum relative exhaust air fan power (0..1)";
+  parameter Real maxExFanPower=1 "Maximum relative exhaust air fan power (0..1)";
 
 
-  parameter Real deltaTemp=100 "Added to the set temperature in cooling mode";
+  parameter Real deltaTemp=1 "Added to the set 
+  temperature in cooling mode";
 
   Modelica.Blocks.Logical.OnOffController roomToBeCooled(bandwidth=2)
+    "Detects cooling demand"
     annotation (Placement(transformation(extent={{-58,110},{-38,130}})));
   Modelica.Blocks.Logical.OnOffController roomToBeHeated(bandwidth=2)
+    "Detects heating demand"
     annotation (Placement(transformation(extent={{-60,80},{-40,100}})));
   Modelica.Blocks.Logical.OnOffController roomToBeVentilated(bandwidth=200)
+    "Detects ventilation demand"
     annotation (Placement(transformation(extent={{-60,50},{-40,70}})));
   Modelica.Blocks.Logical.OnOffController freeCoolingPossible(bandwidth=2)
+    "Detects if free cooling is possible"
     annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
   Modelica.Blocks.Logical.OnOffController coldRecoveryPossible(bandwidth=2)
+    "Detects if cold recovery is possible"
     annotation (Placement(transformation(extent={{-40,-40},{-20,-20}})));
   Modelica.Blocks.Logical.OnOffController heatRecoveryPossible(bandwidth=2)
+    "Detects if heat recovery is possible"
     annotation (Placement(transformation(extent={{-40,-70},{-20,-50}})));
   Modelica.Blocks.Sources.Constant co2SeetConcentrationSource(k=
         co2SetConcentration) annotation (Placement(transformation(
@@ -125,7 +133,9 @@ model FVUController "Rule-based controller of a facade ventilation unit"
         origin={-86,84})));
   Modelica.Blocks.Math.Add add2
     annotation (Placement(transformation(extent={{-92,94},{-80,106}})));
-  Interfaces.FVUControlBus fVUControlBus annotation (Placement(transformation(
+  Interfaces.FVUControlBus fVUControlBus
+    "Bus connector containing all inputs and outputs of the controller"
+                                         annotation (Placement(transformation(
         extent={{-32,-32},{32,32}},
         rotation=90,
         origin={220,38})));

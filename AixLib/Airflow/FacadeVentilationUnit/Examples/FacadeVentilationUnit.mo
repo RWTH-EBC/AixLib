@@ -7,20 +7,21 @@ model FacadeVentilationUnit "Example showing the use of facade ventilation
   package Medium1 = AixLib.Media.Air;
   package Medium2 = AixLib.Media.Water;
 
-  AixLib.Controls.AirHandling.FVUController          FVUController
+  AixLib.Controls.AirHandling.FVUController          FVUController(
+      maxSupFanPower=0.6, maxExFanPower=0.6)
     "Comprehensive rule-based controller for the facade ventilation unit"
     annotation (Placement(transformation(extent={{-46,-30},{-6,10}})));
   AixLib.Airflow.FacadeVentilationUnit.FacadeVentilationUnit FVU(redeclare
       package Air = Medium1, redeclare package Water = Medium2)
     "The facade ventilation unit to be tested in this example"
     annotation (Placement(transformation(extent={{70,-56},{106,-36}})));
-  AixLib.Fluid.Sources.Boundary_pT exhaustAirSink(
+  AixLib.Fluid.Sources.Boundary_pT freshAirSource(
     nPorts=1,
     redeclare package Medium = Medium1,
     use_T_in=true,
     p(displayUnit="Pa") = 101300) "Sink of the exhaust air"
     annotation (Placement(transformation(extent={{6,-84},{26,-64}})));
-  AixLib.Fluid.Sources.Boundary_pT freshAirSource(
+  AixLib.Fluid.Sources.Boundary_pT exhaustAirSink(
     nPorts=1,
     redeclare package Medium = Medium1,
     p(displayUnit="Pa") = 101300) "Source of freah air"
@@ -85,10 +86,18 @@ model FacadeVentilationUnit "Example showing the use of facade ventilation
       package Medium = Medium1, m_flow_nominal=0.1)
     "Measures the supply air temperature"
     annotation (Placement(transformation(extent={{120,-54},{140,-34}})));
-  Modelica.Blocks.Sources.Constant roomTemperature(k=273.15 + 20)
+  Modelica.Blocks.Sources.Sine     roomTemperature(
+    amplitude=5,
+    freqHz=1/86400,
+    phase=3.1415926535898,
+    offset=273.15 + 20)
     "Provides a test value of the room temperature"
     annotation (Placement(transformation(extent={{-100,40},{-80,60}})));
-  Modelica.Blocks.Sources.Constant roomSetTemperature(k=273.15 + 22)
+  Modelica.Blocks.Sources.Sine     roomSetTemperature(
+    amplitude=5,
+    freqHz=1/86400,
+    phase=1.5707963267949,
+    offset=273.15 + 20)
     "Provides a test value of the room set temperature"
     annotation (Placement(transformation(extent={{-100,-36},{-80,-16}})));
   Modelica.Blocks.Sources.Constant co2Concentration(k=1000)
@@ -123,9 +132,9 @@ equation
   connect(heatingSource.ports[1], FVU.heaterFlowConnector) annotation (Line(
         points={{54,22},{54,22},{54,10},{98.2,10},{98.2,-36}},
         color={0,127,255}));
-  connect(freshAirSource.ports[1], FVU.exhaustAirConnector) annotation (Line(
+  connect(exhaustAirSink.ports[1], FVU.exhaustAirConnector) annotation (Line(
         points={{24,-37},{42,-37},{42,-43.4},{70,-43.4}}, color={0,127,255}));
-  connect(exhaustAirSink.ports[1], FVU.freshAirConnector) annotation (Line(
+  connect(freshAirSource.ports[1], FVU.freshAirConnector) annotation (Line(
         points={{26,-74},{26,-70},{42,-70},{42,-52.8},{70.2,-52.8}},
         color={0,127,
           255}));
@@ -146,7 +155,7 @@ equation
   connect(roomTemperature.y, extractAirSource.T_in) annotation (
    Line(points={{-79,50},{46,50},{192,50},{192,-70},{180,-70}},
   color={0,0,127}));
-  connect(outdoorTemperature.y, exhaustAirSink.T_in) annotation (
+  connect(outdoorTemperature.y,freshAirSource. T_in) annotation (
    Line(points={{-79,16},{-64,16},{-64,-70},{4,-70}}, color={0,0,127}));
   connect(roomTemperature.y, fVUControlBus1.roomTemperature) annotation (Line(
         points={{-79,50},{-62,50},{-46,50},{-46,27.95},{-25.95,27.95}}, color={
@@ -177,7 +186,7 @@ equation
             100}})),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             200,100}})),
-    experiment(StopTime=10000),
+    experiment(StopTime=86400),
     Documentation(revisions="<html>
 <ul>
 <li>
@@ -186,6 +195,14 @@ First implementation.
 </li>
 </ul>
 </html>", info="<html>
-<p>This model demonstrates the usage of the facade ventilation unit connected to the standard controller. The user can select the </p>
+<p>This model demonstrates the usage of the facade ventilation unit connected
+to the standard controller. The inputs are the room and the outdoor temperaure.
+Those temperatures and the room temperature set point are sine waves with a 
+period of one day, which all have a different phase. The simulation result 
+depicted in the following figure shows the behavior of the two-point controller
+that opens the heating valve fully for heating. For cooling, it closes the
+heating valve and bypasses the heat recovery unit so that the supply air
+temperature is equal to the outdoor temperature.</p>
+<p><img src=\"modelica://AixLib/Resources/Images/Airflow/FacadeVentilationUnit/FacadeVentilationUnitExample.png\"/></p>
 </html>"));
 end FacadeVentilationUnit;

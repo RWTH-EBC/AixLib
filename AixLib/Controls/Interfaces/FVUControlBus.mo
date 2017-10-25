@@ -3,19 +3,26 @@ expandable connector FVUControlBus
   "Standard data bus for facade ventilation units"
   extends Modelica.Icons.SignalBus;
 
- Real coolingValveOpening "Relative opening of the cooling valve (0..1)";
+ Real coolingValveOpening(min=0,max=1)
+  "Relative opening of the cooling valve (0..1)";
 
- Real heatingValveOpening "Relative opening of the cooling valve (0..1)";
+ Real heatingValveOpening(min=0,max=1)
+  "Relative opening of the cooling valve (0..1)";
 
- Real fanExhaustAirPower "Relative speed of the exhaust air fan (0..1)";
+ Real fanExhaustAirPower(min=0,max=1)
+  "Relative speed of the exhaust air fan (0..1)";
 
- Real fanSupplyAirPower "Relative speed of the supply air fan (0..1)";
+ Real fanSupplyAirPower(min=0,max=1)
+  "Relative speed of the supply air fan (0..1)";
 
- Real circulationDamperOpening "Relative opening of the circulation damper (0..1)";
+ Real circulationDamperOpening(min=0,max=1)
+  "Relative opening of the circulation damper (0..1)";
 
- Real hRCDamperOpening "Relative opening of the heat recovery damper (0..1)";
+ Real hRCDamperOpening(min=0,max=1)
+  "Relative opening of the heat recovery damper (0..1)";
 
- Real freshAirDamperOpening "Relative opening of thefresh air damper (0..1)";
+ Real freshAirDamperOpening(min=0,max=1)
+  "Relative opening of thefresh air damper (0..1)";
 
  Modelica.SIunits.ThermodynamicTemperature roomTemperature
  "Room air temperature measurement";
