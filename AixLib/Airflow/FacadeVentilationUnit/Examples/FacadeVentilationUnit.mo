@@ -203,6 +203,7 @@ depicted in the following figure shows the behavior of the two-point controller
 that opens the heating valve fully for heating. For cooling, it closes the
 heating valve and bypasses the heat recovery unit so that the supply air
 temperature is equal to the outdoor temperature.</p>
-<p><img src=\"modelica://AixLib/Resources/Images/Airflow/FacadeVentilationUnit/FacadeVentilationUnitExample.png\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/Airflow/FacadeVentilationUnit/FacadeVentilationUnitExample.png\"
+alt=\"Example result of facade ventilation unit example\"/></p>
 </html>"));
 end FacadeVentilationUnit;

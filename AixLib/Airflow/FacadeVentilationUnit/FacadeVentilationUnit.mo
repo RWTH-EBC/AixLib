@@ -94,8 +94,8 @@ public
         extent={{-8,-6},{8,6}},
         rotation=0,
         origin={-134,44})));
-  Modelica.Fluid.Sensors.Temperature coolerTemperature(redeclare package Medium
-      =    Air) "Temperature of the supply air stream behind the cooler"
+  Modelica.Fluid.Sensors.Temperature coolerTemperature(redeclare package Medium =
+           Air) "Temperature of the supply air stream behind the cooler"
     annotation (Placement(transformation(
         extent={{-8,-6},{8,6}},
         rotation=180,
@@ -112,8 +112,8 @@ public
         extent={{-5,-5},{5,5}},
         rotation=180,
         origin={-61,27})));
-  Modelica.Fluid.Sensors.Temperature mixAirTemperature(redeclare package Medium
-      =    Air) "Temperature of the mixed circulation and fresh air streams"
+  Modelica.Fluid.Sensors.Temperature mixAirTemperature(redeclare package Medium =
+           Air) "Temperature of the mixed circulation and fresh air streams"
     annotation (Placement(transformation(extent={{32,42},{48,54}})));
   inner Modelica.Fluid.System system
     annotation (Placement(transformation(extent={{180,-100},{200,-80}})));
@@ -147,8 +147,8 @@ public
         extent={{-9,-9},{9,9}},
         rotation=0,
         origin={-82,-68})));
-  Modelica.Fluid.Sensors.Temperature heaterTemperature(redeclare package Medium
-      =         Air) "Temperature of the supply air stream behind the heater"
+  Modelica.Fluid.Sensors.Temperature heaterTemperature(redeclare package Medium =
+                Air) "Temperature of the supply air stream behind the heater"
     annotation (Placement(transformation(
         extent={{-8,-6},{8,6}},
         rotation=180,
@@ -379,7 +379,8 @@ equation
 <p>The portion of fresh air flowing through the recuperator is controlled by means of a bypass damper. The portion of extract air that is recirculated and mixed with the fresh air stream is controlled by means of a circulation damper. The mixed air stream is either heated or cooled in the air-water heat exchangers. The water flow in these heat exchangers is controlled by two-way-valves. </p>
 <h4><span style=\"color: #008000\">Actuators</span></h4>
 <p>All actuators receive normailized signals (0-1). The supply and exhaust air fans are table-based. A relative input signal is transformed into a mass-flow set point for a flow-controlled mover. If the exhaust air fan is not in operation, the entire air flow should be recirculated. Thus, the circulation damper should be fully opened. In that case, the fresh air flap should be closed so that no fresh air can enter the unit. The exhaust air fan has a minimum mass flow rate of 1 m&sup3;/h to make the model more stable. </p>
-<p><img src=\"modelica://AixLib/Resources/Images/Airflow/FacadeVentilationUnit/FacadeVentilationUnitScheme.PNG\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/Airflow/FacadeVentilationUnit/FacadeVentilationUnitScheme.PNG\" 
+alt=\"Scheme of the facade ventilation unit\"/></p>
 <h4><span style=\"color: #008000\">References</span></h4>
 <p>Baranski, M., Sangi, R., Fuetterer, J., Mueller, D. (2016). An Algorithm for Stepwise Exergy-based Model Predictive Control of Building HVAC Supply Chains. <i>29th international conference on Efficiency, Cost, Optimisation, Simulation and Environmental Impact of Energy Systems</i>. </p>
 </html>", revisions="<html>
