@@ -1,6 +1,5 @@
 within AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
 model WholeHouseBuildingEnvelope
-  import AixLib;
   ///////// construction parameters
   parameter Integer TMC=1 "Thermal Mass Class" annotation (Dialog(
       group="Construction parameters",
@@ -45,7 +44,7 @@ model WholeHouseBuildingEnvelope
       group="Dynamic ventilation",
       descriptionLabel=true,
       enable=if withDynamicVentilation then true else false));
-  GroundFloorBuildingEnvelope groundFloor_Building(
+  AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.GroundFloorBuildingEnvelope groundFloor_Building(
     TMC=TMC,
     TIR=TIR,
     withDynamicVentilation=withDynamicVentilation,
@@ -64,7 +63,7 @@ model WholeHouseBuildingEnvelope
     withDynamicVentilation=withDynamicVentilation,
     withFloorHeating=withFloorHeating)
     annotation (Placement(transformation(extent={{-26,-22},{20,30}})));
-  Rooms.OFD.Attic_Ro2Lf5 attic_2Ro_5Rooms(
+  AixLib.Building.HighOrder.Rooms.OFD.Attic_Ro2Lf5 attic_2Ro_5Rooms(
     length=10.64,
     room1_length=5.875,
     room2_length=3.215,
