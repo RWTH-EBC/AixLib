@@ -2,12 +2,12 @@ within AixLib.Controls.HVACAgentBasedControl.Agents;
 model IntermediateAgent
   extends BaseClasses.PartialAgent;
   parameter Integer broker = 10003 "Name of the corresponding broker-agent";
-  parameter Real maxCapacity = 10000;
-  Integer currentClient(start=0);
-  Real currentCost( start= 0);
-  Real setCapacity(start=0);
-  Real newCost(start=0);
-  Real ownCost(start=0);
+  parameter Real maxCapacity = 10000 "maximum capacity";
+  Integer currentClient(start=0) "Integer variable to define currentClient";
+  Real currentCost( start= 0) "Real variable to define currentCost";
+  Real setCapacity(start=0) "Real variable to define setCapacity";
+  Real newCost(start=0) "Real variable to define newCost";
+  Real ownCost(start=0) "Real variable to define ownCost";
 
 // CostFunction related components
 

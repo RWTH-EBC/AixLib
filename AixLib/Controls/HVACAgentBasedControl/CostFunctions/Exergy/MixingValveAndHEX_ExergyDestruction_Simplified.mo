@@ -2,8 +2,8 @@ within AixLib.Controls.HVACAgentBasedControl.CostFunctions.Exergy;
 model MixingValveAndHEX_ExergyDestruction_Simplified
   extends HVACAgentBasedControl.BaseClasses.PartialCostFunction;
   parameter Real T_0 = 298.15 "Exergy reference temperature";
-  Real T_hot(start=273.15+90);
-  Real T_cold(start=273.15+50);
+  Real T_hot(start=273.15+90) "Hot temperature";
+  Real T_cold(start=273.15+50) "Cold temperature";
 
   Modelica.Blocks.Interfaces.RealInput T_cold_in annotation (Placement(
         transformation(
