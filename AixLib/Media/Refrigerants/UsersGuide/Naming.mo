@@ -23,7 +23,7 @@ The naming of the models follows the guideline presented below:
 <li><u>Refrigerant:</u> Name of the refrigerant,
 e.g. R134a or R410a.</li>
 <li><u>Reference Point:</u> Reference point chosen for the model,
-e.g. IIR (h = 200 kJ/lkg and s = 1 kJ/kg/K at 273.15 K at
+e.g. IIR (h = 200 kJ/kg and s = 1 kJ/kg/K at 273.15 K at
 saturated liquid line).</li>
 <li><u>Validity pressure:</u> Range of validity for pressure given in bar.
 Caution: 0.5 bar is written as 05 or 39.5 bar is written as 395.</li>
