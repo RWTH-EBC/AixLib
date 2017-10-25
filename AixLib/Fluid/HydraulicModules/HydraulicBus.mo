@@ -24,7 +24,7 @@ particular module type.
 </p>
 </html>", revisions="<html>
 <ul>
-<li>October 25, 2017, by Alexander K&uuml;mpel:<br>Adaption for hydraulic modules in AixLib.</li>
+<li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Adaption for hydraulic modules in AixLib.</li>
 <li>February 6, 2016, by Peter Matthes:<br>First implementation. </li>
 </ul>
 </html>"));

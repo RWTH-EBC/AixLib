@@ -84,10 +84,10 @@ equation
     __Dymola_Commands,
     Documentation(revisions="<html>
 <ul>
-<li><i>2017-03-08 &nbsp;</i> by Peter Matthes:<br>Renamed and updated plot script 'pump test'. Solves Issue #28</li>
-<li><i>2017-03-07 &nbsp;</i> by Peter Matthes:<br>Renamed and updated plot script.</li>
-<li><i>2017-03-07 &nbsp;</i> by Peter Matthes:<br>Renamed model instances after renaming of modules.</li>
-<li><i>2017-02-09 &nbsp;</i> by Peter Matthes:<br>implemented</li>
+<li>October 25,2017, by Alexander K&uuml;mpel:<br>Transfered to AixLib from ZUGABE.</li>
+<li>March 7,2017, by Peter Matthes:<br>Renamed and updated plot script.</li>
+<li>March 7,2017, by Peter Matthes:<br>Renamed model instances after renaming of modules.</li>
+<li>February 2,2017, by Peter Matthes:<br>implemented</li>
 </ul>
 </html>", info="<html>
 <p>Model that demonstrates the use of the admix circuit. The inlet mass flow (port_a1) increases when the three-way-valve opens whereas the outlet massflow varies less. </p>
