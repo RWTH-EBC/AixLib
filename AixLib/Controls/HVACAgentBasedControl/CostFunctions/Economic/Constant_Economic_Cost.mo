@@ -1,5 +1,5 @@
 within AixLib.Controls.HVACAgentBasedControl.CostFunctions.Economic;
-model ConstantFactor
+model Constant_Economic_Cost
   extends HVACAgentBasedControl.BaseClasses.PartialCostFunction;
   parameter Real p = 0.30 "Price per kWh of fuel";
   parameter Real eta = 0.95 "thermal efficiency of the device";
@@ -38,4 +38,4 @@ equation
 <li><span style=\"font-family: MS Shell Dlg 2;\">This model calculates the economic cost based on the capacity and a constact factor.</span></li>
 </ul>
 </html>"));
-end ConstantFactor;
+end Constant_Economic_Cost;

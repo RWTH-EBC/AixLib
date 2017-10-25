@@ -276,7 +276,7 @@ equation
       Line(points={{-119,-132},{-110,-132},{-110,-148},{-26,-148},{-26,-131.4},{
           -18,-131.4}},  color={255,0,255}));
   connect(massFlowRate.y, fan.m_flow_in) annotation (Line(points={{138.7,-21},{
-          148,-21},{148,-50.2},{112,-50.2}}, color={0,0,127}));
+          148,-21},{148,-50},{112,-50}},     color={0,0,127}));
   connect(volume.ports[1], hea.port_a) annotation (Line(points={{-72,-6},{-72,-6},
           {-72,-10},{-114,-10},{-114,-80},{-60,-80}}, color={0,127,255}));
   connect(volume1.ports[1], hea.port_a) annotation (Line(points={{20,-6},{20,-6},

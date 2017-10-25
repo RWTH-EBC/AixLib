@@ -1,5 +1,5 @@
 ﻿within AixLib.Controls.HVACAgentBasedControl.CostFunctions.Economic;
-model PV_varCost
+model PV_Variable_Economic_Cost
   extends HVACAgentBasedControl.BaseClasses.PartialCostFunction;
   parameter Real p = 0.30 "Price per kWh of fuel";
   parameter Real eta = 0.95 "thermal efficiency of the device";
@@ -96,4 +96,4 @@ equation
 <li><span style=\"font-family: MS Shell Dlg 2;\">This model </span>calculates the economic cost for PV systems based on the capacity and the variable solar radiation input.</li>
 </ul>
 </html>"));
-end PV_varCost;
+end PV_Variable_Economic_Cost;

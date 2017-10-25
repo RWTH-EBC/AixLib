@@ -4,7 +4,7 @@ model Boiler_ExergyDestruction
   parameter Real T_0 = 298.15 "Exergy reference temperature";
   parameter Real eta = 0.84 "Overall efficiency of the boiler";
 
-  Real m_flow;
+  Real m_flow "mass flow";
 
   Modelica.Blocks.Interfaces.RealInput T_in annotation (Placement(
         transformation(
