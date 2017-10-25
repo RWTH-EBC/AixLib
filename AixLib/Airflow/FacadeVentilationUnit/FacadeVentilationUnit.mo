@@ -93,8 +93,8 @@ public
         extent={{-8,-6},{8,6}},
         rotation=0,
         origin={-134,44})));
-  Modelica.Fluid.Sensors.Temperature coolerTemperature(redeclare package Medium =
-        Air) "Temperature of the supply air stream behind the cooler"
+  Modelica.Fluid.Sensors.Temperature coolerTemperature(redeclare package
+  Medium = Air) "Temperature of the supply air stream behind the cooler"
     annotation (Placement(transformation(
         extent={{-8,-6},{8,6}},
         rotation=180,
@@ -104,15 +104,15 @@ public
     annotation (Placement(transformation(extent={{-28,-10},{-12,2}})));
 
   Modelica.Blocks.Math.Add oppositeOpening(k1=-1)
-    "Provides the relative opening of the complementary damper of the recuperator"
-    annotation (Placement(transformation(extent={{-65,47},{-55,57}})));
+    "Provides the relative opening of the complementary damper of the 
+    recuperator" annotation (Placement(transformation(extent={{-65,47},{-55,57}})));
   Modelica.Blocks.Sources.RealExpression realExpression1(y=1) annotation (
       Placement(transformation(
         extent={{-6.5,-8},{6.5,8}},
         rotation=180,
         origin={-59.5,30})));
-  Modelica.Fluid.Sensors.Temperature mixAirTemperature(redeclare package Medium =
-        Air) "Temperature of the mixed circulation and fresh air streams"
+  Modelica.Fluid.Sensors.Temperature mixAirTemperature(redeclare package
+  Medium = Air) "Temperature of the mixed circulation and fresh air streams"
     annotation (Placement(transformation(extent={{32,42},{48,54}})));
   inner Modelica.Fluid.System system
     annotation (Placement(transformation(extent={{180,-100},{200,-80}})));
@@ -131,8 +131,8 @@ public
     dpValve_nominal=500,
     redeclare package Medium = Air,
     riseTime=fVUParam.damperRiseTimeLong)
-    "The second of two dampers that control the air flow through the recuperator"
-                 annotation (Placement(transformation(
+    "The second of two dampers that control the air flow through the 
+    recuperator"             annotation (Placement(transformation(
         extent={{-9,-9},{9,9}},
         rotation=0,
         origin={-27,36})));
@@ -146,8 +146,8 @@ public
         extent={{-9,-9},{9,9}},
         rotation=0,
         origin={-82,-68})));
-  Modelica.Fluid.Sensors.Temperature heaterTemperature(redeclare package Medium =
-        Air) "Temperature of the supply air stream behind the heater"
+  Modelica.Fluid.Sensors.Temperature heaterTemperature(redeclare package
+  Medium =      Air) "Temperature of the supply air stream behind the heater"
     annotation (Placement(transformation(
         extent={{-8,-6},{8,6}},
         rotation=180,
@@ -170,8 +170,8 @@ public
     m2_flow_nominal=fVUParam.m2_flow_nominal_heater,
     dp1_nominal=fVUParam.dp2_nominal_heater,
     dp2_nominal=fVUParam.dp2_nominal_heater)
-    "The heat exchanger used for recovering heat or cold from extract air stream"
-    annotation (Placement(transformation(extent={{-44,-42},{-24,-22}})));
+    "The heat exchanger used for recovering heat or cold from extract air 
+    stream" annotation (Placement(transformation(extent={{-44,-42},{-24,-22}})));
   Modelica.Fluid.Vessels.ClosedVolume volume(
     nPorts=4,
     use_portsData=false,

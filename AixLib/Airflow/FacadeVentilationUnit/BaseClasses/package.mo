@@ -1,4 +1,4 @@
 within AixLib.Airflow.FacadeVentilationUnit;
-package BaseClasses 
+package BaseClasses
   extends Modelica.Icons.BasesPackage;
 end BaseClasses;

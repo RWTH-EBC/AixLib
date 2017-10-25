@@ -5,9 +5,11 @@ record FVUBaseRecord
 
   parameter Integer noUnits=1 "Number of identical FVUs";
   parameter Modelica.SIunits.ThermalConductance UA_heater=120
-    "Thermal conductance of heater at nominal flow, used to compute heat capacity";
+    "Thermal conductance of heater at nominal flow, used to compute heat 
+    capacity";
   parameter Modelica.SIunits.ThermalConductance UA_cooler=65
-    "Thermal conductance of cooler at nominal flow, used to compute heat capacity";
+    "Thermal conductance of cooler at nominal flow, used to compute heat 
+    capacity";
   parameter Modelica.SIunits.MassFlowRate m1_flow_nominal_heater=0.1
     "Nominal mass flow rate on water side of heater";
   parameter Modelica.SIunits.MassFlowRate m2_flow_nominal_heater=0.1
@@ -33,7 +35,9 @@ record FVUBaseRecord
 
   annotation (Documentation(info="<html>
 <p><b><span style=\"color: #008000;\">Overview</span></b> </p>
-<p>This is the base definition of the paramter record that can be used for the <a href=\"AixLib.Airflow.FacadeVentilationUnit.FacadeVentilationUnit\">AixLib.Airflow.FacadeVentilationUnit.FacadeVentilationUnit</a>.</p>
+<p>This is the base definition of the paramter record that can be used for the
+<a href=\"AixLib.Airflow.FacadeVentilationUnit.FacadeVentilationUnit\">
+AixLib.Airflow.FacadeVentilationUnit.FacadeVentilationUnit</a>.</p>
 </html>",  revisions="<html>
 <ul>
 <li>

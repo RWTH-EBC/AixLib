@@ -1,6 +1,7 @@
 within AixLib.Airflow.FacadeVentilationUnit.BaseClasses;
 model SetPower
-  "This model defines a specific mass flow rate based on the input power share"
+  "This model defines a specific mass flow rate based on the input power 
+    share"
 
   extends Modelica.Fluid.Interfaces.PartialTwoPort;
 
@@ -8,7 +9,7 @@ model SetPower
     "Nominal mass flow rate of fan";
   parameter Medium.AbsolutePressure p_start=Medium.p_default
     "Start value of pressure";
-  parameter Real noUnits=1 "Number of identical FVU units";
+  parameter Integer noUnits=1 "Number of identical FVU units";
   parameter Modelica.SIunits.PressureDifference dp_nominal=500
     "Initial pressure difference";
   parameter Medium.Temperature T_start=Medium.T_default
@@ -41,12 +42,12 @@ model SetPower
     p_start=p_start,
     riseTime=120,
     nominalValuesDefineDefaultPressureCurve=true)
-    "Mass-flow-controlled mover that sets the mass flow rate according to the table output"
-    annotation (Placement(transformation(extent={{-10,10},{10,-10}})));
-  Modelica.Blocks.Math.Gain gain(k=1.2/3600*noUnits)
+    "Mass-flow-controlled mover setting mass flow rate from table"
+    annotation (Placement(transformation(extent=
+    {{-10,10},{10,-10}})));
+  Modelica.Blocks.Math.Gain transforMassFlow(k=1.2/3600*noUnits)
     "Used to transform the volume flow rate in m3/h into a mass flow rate in kg/s"
-                                                     annotation (Placement(
-        transformation(
+    annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=90,
         origin={0,-28})));
@@ -58,11 +59,12 @@ equation
     annotation (Line(points={{10,0},{56,0},{100,0}}, color={0,127,255}));
   connect(powerShare, volumeFlow.u[1]) annotation (Line(points={{0,-100},{0,-80},
           {-6.66134e-016,-80},{-6.66134e-016,-68}}, color={0,0,127}));
-  connect(gain.u, volumeFlow.y[1]) annotation (Line(points={{-4.44089e-016,-35.2},
-          {-4.44089e-016,-46},{8.88178e-016,-46},{8.88178e-016,-45}}, color={0,
-          0,127}));
-  connect(gain.y, fan.m_flow_in) annotation (Line(points={{4.44089e-016,-21.4},
-          {4.44089e-016,-24},{-0.2,-24},{-0.2,-12}}, color={0,0,127}));
+  connect(transforMassFlow.u, volumeFlow.y[1]) annotation (Line(points={{-4.44089e-016,
+          -35.2},{-4.44089e-016,-46},{8.88178e-016,-46},{8.88178e-016,-45}},
+        color={0,0,127}));
+  connect(transforMassFlow.y, fan.m_flow_in) annotation (Line(points={{
+          4.44089e-016,-21.4},{4.44089e-016,-24},{0,-24},{0,-12}}, color={0,0,
+          127}));
   annotation (
     choicesAllMatching=true,
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
@@ -110,7 +112,9 @@ equation
           color={170,213,255},
           arrow={Arrow.None,Arrow.Filled})}),
     Documentation(info="<html>
-<p>This model sets the mass flow rate of the air flow through a facade ventilation unit based on the input value, which is the power share set point of the fan.</p>
+      <p>This model sets the mass flow rate of the air flow through a facade 
+      ventilation unit based on the input value, which is the power share set 
+      point of the fan.</p>
 </html>", revisions="<html>
 <ul>
 <li>
