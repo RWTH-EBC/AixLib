@@ -19,6 +19,11 @@ model SolarThermal "Model of a solar thermal panel"
   Modelica.Blocks.Math.Max max1 annotation(Placement(transformation(extent = {{-46, 40}, {-26, 60}})));
   Modelica.Blocks.Sources.Constant const(k = 0) annotation(Placement(transformation(extent = {{-66, 30}, {-58, 38}})));
   Modelica.Blocks.Math.Gain gain(k = A) annotation(Placement(transformation(extent = {{-16, 44}, {-4, 56}})));
+  Modelica.Blocks.Math.Add calcTempMean(k1=0.5, k2=0.5) annotation (Placement(
+        transformation(
+        extent={{-5,-5},{5,5}},
+        rotation=90,
+        origin={-51,3})));
 equation
   connect(T_air, solarThermalEfficiency.T_air) annotation(Line(points = {{-60, 108}, {-60, 78}, {-71, 78}, {-71, 68.6}}, color = {0, 0, 127}));
   connect(solarThermalEfficiency.G, Irradiation) annotation(Line(points = {{-65, 68.6}, {-65, 74}, {10, 74}, {10, 108}}, color = {0, 0, 127}));
@@ -27,6 +32,12 @@ equation
   connect(max1.y, gain.u) annotation(Line(points = {{-25, 50}, {-17.2, 50}}, color = {0, 0, 127}));
   connect(gain.y, heater.Q_flow) annotation (Line(points={{-3.4,50},{12,50},{12,
           -30},{-60,-30},{-60,-40}}, color={0,0,127}));
+  connect(senTCold.T, calcTempMean.u1) annotation (Line(points={{-70,-69},{-70,
+          -66},{-78,-66},{-78,-10},{-54,-10},{-54,-3}}, color={0,0,127}));
+  connect(senTHot.T, calcTempMean.u2) annotation (Line(points={{40,-69},{32,-69},
+          {32,-10},{-48,-10},{-48,-3}}, color={0,0,127}));
+  connect(calcTempMean.y, solarThermalEfficiency.T_col) annotation (Line(points
+        ={{-51,8.5},{-51,18},{-71,18},{-71,47.4}}, color={0,0,127}));
   annotation (Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p><br/>Model of a solar thermal collector. Inputs are outdoor air temperature and solar irradiation. Based on these values and the collector properties from database, this model creates a heat flow to the fluid circuit.</p>
