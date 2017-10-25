@@ -2,20 +2,28 @@ within AixLib.Fluid.Solar.Thermal.BaseClasses;
 model SolarThermalEfficiency
   "Calculates the efficiency of a solar thermal collector"
   import AixLib;
-  parameter AixLib.DataBase.SolarThermal.SolarThermalBaseDataDefinition Collector = AixLib.DataBase.SolarThermal.SimpleAbsorber()
-    "Properties of Solar Thermal Collector"                                                                                                     annotation(choicesAllMatching = true);
-  Modelica.Blocks.Interfaces.RealInput T_air(unit="K", displayUnit="degC") "Air temperature" annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 270, origin = {-50, 106})));
-  Modelica.Blocks.Interfaces.RealInput G(unit="W/m2") "Global solar irradiation in W/m2" annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 270, origin = {10, 106})));
-  Modelica.Blocks.Interfaces.RealInput T_col(unit="K", displayUnit="degC") "Collector temperature" annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 90, origin = {-50, -106})));
+  parameter AixLib.DataBase.SolarThermal.SolarThermalBaseDataDefinition
+    Collector = AixLib.DataBase.SolarThermal.SimpleAbsorber()
+    "Properties of Solar Thermal Collector" annotation(choicesAllMatching = true);
+  Modelica.Blocks.Interfaces.RealInput T_air(unit="K", displayUnit="degC")
+    "Air temperature" annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 270, origin = {-50, 106})));
+  Modelica.Blocks.Interfaces.RealInput G(unit="W/m2")
+    "Global solar irradiation in W/m2" annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 270, origin = {10, 106})));
+  Modelica.Blocks.Interfaces.RealInput T_col(unit="K", displayUnit="degC")
+    "Collector temperature" annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 90, origin = {-50, -106})));
   Modelica.Blocks.Interfaces.RealOutput Q_flow(unit="W/m2")
-    "Useful heat flow from solar collector in W/m2"                                            annotation(Placement(transformation(extent = {{98, -10}, {118, 10}})));
+    "Useful heat flow from solar collector in W/m2" annotation(Placement(transformation(extent = {{98, -10}, {118, 10}})));
 protected
   Real eta "Efficiency of solar thermal collector";
   Modelica.SIunits.TemperatureDifference dT
     "Temperature difference between collector and air in K";
 equation
   dT = T_col - T_air;
-  eta = Collector.eta_zero - Collector.c1 * dT / G - Collector.c2 * dT * dT / G;
+  eta = max(0,
+          min(Collector.eta_zero,
+            Collector.eta_zero - Collector.c1 *
+            dT / max(G, Modelica.Constants.eps) -
+            Collector.c2 * dT * dT / max(G, Modelica.Constants.eps)));
   Q_flow = G * eta;
   annotation (Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
