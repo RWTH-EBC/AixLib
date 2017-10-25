@@ -1,20 +1,19 @@
 within AixLib.Fluid.Solar.Thermal.Examples;
 model SolarThermalCollector
   "Example to demonstrate the function of the solar thermal collector model"
-  import AixLib;
   extends Modelica.Icons.Example;
 
-  replaceable package Medium =
-     Modelica.Media.Water.ConstantPropertyLiquidWater
-     constrainedby Modelica.Media.Interfaces.PartialMedium;
-  AixLib.Fluid.Sources.FixedBoundary
-                      boundary_ph(h = 125823,
+  replaceable package Medium = AixLib.Media.Water
+    constrainedby Modelica.Media.Interfaces.PartialMedium "Medium model";
+  AixLib.Fluid.Sources.FixedBoundary source(
+    h=125823,
     nPorts=1,
     redeclare package Medium = Medium,
-    p=101400)                                                               annotation(Placement(transformation(extent = {{-80, -10}, {-60, 10}})));
-  AixLib.Fluid.Sources.FixedBoundary
-                      boundary_ph1(nPorts=1, redeclare package Medium = Medium)
-                                                     annotation(Placement(transformation(extent = {{100, -10}, {80, 10}})));
+    p=101400)
+    annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
+  AixLib.Fluid.Sources.FixedBoundary sink(nPorts=1, redeclare package Medium =
+        Medium)
+    annotation (Placement(transformation(extent={{100,-10},{80,10}})));
   AixLib.Fluid.Sensors.MassFlowRate
                          massFlowSensor(redeclare package Medium = Medium)
                                         annotation(Placement(transformation(extent = {{-54, -10}, {-34, 10}})));
@@ -25,7 +24,8 @@ model SolarThermalCollector
     A=2,
     Collector=AixLib.DataBase.SolarThermal.VacuumCollector(),
     redeclare package Medium = Medium,
-    m_flow_nominal=0.01)
+    m_flow_nominal=0.01,
+    volPip=0.05)
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
   AixLib.Fluid.FixedResistances.PressureDrop pipe(
     redeclare package Medium = Medium,
@@ -50,12 +50,10 @@ equation
   connect(T1.port_b, solarThermal.port_a) annotation(Line(points = {{-8, 0}, {0, 0}}, color = {0, 127, 255}));
   connect(solarThermal.port_b, T2.port_a) annotation(Line(points = {{20, 0}, {28, 0}}, color = {0, 127, 255}));
   connect(T2.port_b, pipe.port_a) annotation(Line(points = {{48, 0}, {54, 0}}, color = {0, 127, 255}));
-  connect(boundary_ph.ports[1], massFlowSensor.port_a) annotation (Line(
-      points={{-60,0},{-54,0}},
-      color={0,127,255}));
-  connect(pipe.port_b, boundary_ph1.ports[1]) annotation (Line(
-      points={{74,0},{80,0}},
-      color={0,127,255}));
+  connect(source.ports[1], massFlowSensor.port_a)
+    annotation (Line(points={{-60,0},{-54,0}}, color={0,127,255}));
+  connect(pipe.port_b, sink.ports[1])
+    annotation (Line(points={{74,0},{80,0}}, color={0,127,255}));
   connect(hotSummerDay.y[1], solarThermal.T_air) annotation (Line(points={{-5,
           72},{-5,72},{4,72},{4,10.8}}, color={0,0,127}));
   connect(hotSummerDay.y[2], solarThermal.Irradiation)

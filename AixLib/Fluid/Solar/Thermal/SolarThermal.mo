@@ -1,11 +1,14 @@
 within AixLib.Fluid.Solar.Thermal;
 model SolarThermal "Model of a solar thermal panel"
-  import AixLib;
-  extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(vol(V=vol));
+  extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(vol(
+    final V=volPip), pressureDrop(a=pressureDropCoeff));
+
   parameter Modelica.SIunits.Area A "Area of solar thermal collector"
     annotation(Dialog(group = "Construction measures"));
-  parameter Modelica.SIunits.Volume volume "Water volume of piping"
+  parameter Modelica.SIunits.Volume volPip "Water volume of piping"
     annotation(Dialog(group = "Construction measures"));
+  parameter Real pressureDropCoeff(unit="(Pa.s2)/m6") = 1e6
+    "Pressure drop coefficient, delta_p[Pa] = PD * Q_flow[m^3/s]^2";
   parameter AixLib.DataBase.SolarThermal.SolarThermalBaseDataDefinition
     Collector = AixLib.DataBase.SolarThermal.SimpleAbsorber()
     "Properties of Solar Thermal Collector"
@@ -16,7 +19,7 @@ model SolarThermal "Model of a solar thermal panel"
   AixLib.Fluid.Solar.Thermal.BaseClasses.SolarThermalEfficiency
     solarThermalEfficiency(Collector=Collector)
     annotation (Placement(transformation(extent={{-76,48},{-56,68}})));
-  Modelica.Blocks.Math.Gain gain(k = A) annotation(Placement(transformation(extent = {{-16, 44}, {-4, 56}})));
+  Modelica.Blocks.Math.Gain gain(final k = A) annotation(Placement(transformation(extent = {{-16, 44}, {-4, 56}})));
   Modelica.Blocks.Math.Add calcTempMean(k1=0.5, k2=0.5) annotation (Placement(
         transformation(
         extent={{-5,-5},{5,5}},
@@ -27,14 +30,14 @@ equation
   connect(solarThermalEfficiency.G, Irradiation) annotation(Line(points = {{-65, 68.6}, {-65, 74}, {10, 74}, {10, 108}}, color = {0, 0, 127}));
   connect(gain.y, heater.Q_flow) annotation (Line(points={{-3.4,50},{12,50},{12,
           -30},{-60,-30},{-60,-40}}, color={0,0,127}));
-  connect(senTCold.T, calcTempMean.u1) annotation (Line(points={{-70,-69},{-70,
-          -66},{-78,-66},{-78,-10},{-54,-10},{-54,-3}}, color={0,0,127}));
+  connect(senTCold.T, calcTempMean.u1) annotation (Line(points={{-70,-69},{-70,-66},
+          {-78,-66},{-78,-10},{-54,-10},{-54,-3}}, color={0,0,127}));
   connect(senTHot.T, calcTempMean.u2) annotation (Line(points={{40,-69},{32,-69},
           {32,-10},{-48,-10},{-48,-3}}, color={0,0,127}));
-  connect(calcTempMean.y, solarThermalEfficiency.T_col) annotation (Line(points
-        ={{-51,8.5},{-51,18},{-71,18},{-71,47.4}}, color={0,0,127}));
-  connect(solarThermalEfficiency.Q_flow, gain.u) annotation (Line(points={{
-          -55.2,58},{-36,58},{-36,50},{-17.2,50}}, color={0,0,127}));
+  connect(calcTempMean.y, solarThermalEfficiency.T_col) annotation (Line(points=
+         {{-51,8.5},{-51,18},{-71,18},{-71,47.4}}, color={0,0,127}));
+  connect(solarThermalEfficiency.Q_flow, gain.u) annotation (Line(points={{-55.2,
+          58},{-36,58},{-36,50},{-17.2,50}}, color={0,0,127}));
   annotation (Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p><br/>Model of a solar thermal collector. Inputs are outdoor air temperature and solar irradiation. Based on these values and the collector properties from database, this model creates a heat flow to the fluid circuit.</p>
