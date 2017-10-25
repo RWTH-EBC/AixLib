@@ -1,18 +1,13 @@
-within AixLib.Media.Refrigerants.Validation;
-model RefrigerantDerivatives
-  "Model that checks the implementation of derivatives by comparing the
-  results to external media models"
+within AixLib.Media.Refrigerants.Validation.RefrigerantsDerivatives;
+model RefrigerantsDerivativesR134a
+  "Model that checks the implementation of derivatives for R134a"
   extends Modelica.Icons.Example;
 
   // Definition of the refrigerant that shall be tested
   //
-  package MediumInt =
+  replaceable package MediumInt =
      AixLib.Media.Refrigerants.R134a.R134a_IIR_P1_395_T233_455_Horner
     "Internal medium model";
-
-  package MediumExt =
-     HelmholtzMedia.HelmholtzFluids.R134a
-     "External medium model";
 
   // Definition of parameters and constants
   //
@@ -41,6 +36,29 @@ model RefrigerantDerivatives
   MediumInt.SpecificEntropy s = 1e3 + convS*time^3
     "Specific entropy used for calculations";
 
+  // Definition of submodels and connectors
+  //
+  Modelica.Blocks.Sources.CombiTimeTable extProp(
+    tableOnFile=true,
+    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+    tableName="External",
+    fileName=Modelica.Utilities.Files.loadResource(
+      "modelica://AixLib/Resources/Media/Refrigerants/ValidationDerivativesR134a.txt"),
+    columns=2:72)
+    "Table that contains the results of the external media library"
+    annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
+
+  // Definition of thermodynamic state record for external medium model
+  //
+  record TheStaExt
+    "Record that contains thermodynamic state properties for external medium"
+    Real phase "Phase of the refrigerant";
+    Modelica.SIunits.Density d "Density of the refrigerant";
+    Modelica.SIunits.Temperature T "Temperature of the refrigerant";
+    Modelica.SIunits.AbsolutePressure p "Pressure of the refrigerant";
+    Modelica.SIunits.SpecificEnthalpy h "Specific enthalpy of the refrigerant";
+  end TheStaExt;
+
   // Definition of states that include both one-phase and two-phase regions
   //
   record States
@@ -53,41 +71,37 @@ model RefrigerantDerivatives
       "Thermodynamic state calculated by p and h by the internal medium model";
     MediumInt.ThermodynamicState ps_Int
       "Thermodynamic state calculated by p and s by the internal medium model";
-    MediumExt.ThermodynamicState dT_Ext
+    TheStaExt dT_Ext
       "Thermodynamic state calculated by d and T by the external medium model";
-    MediumExt.ThermodynamicState pT_Ext
+    TheStaExt pT_Ext
       "Thermodynamic state calculated by p and T by the external medium model";
-    MediumExt.ThermodynamicState ph_Ext
+    TheStaExt ph_Ext
       "Thermodynamic state calculated by p and h by the external medium model";
-    MediumExt.ThermodynamicState ps_Ext
+    TheStaExt ps_Ext
       "Thermodynamic state calculated by p and s by the external medium model";
 
     MediumInt.SpecificEntropy s_dT_Int
       "Specific entropy calculated by d and T by the internal medium model";
-    MediumExt.SpecificEntropy s_dT_Ext
+    MediumInt.SpecificEntropy s_dT_Ext
       "Specific entropy calculated by d and T by the external medium model";
     MediumInt.SpecificEntropy s_pT_Int
       "Specific entropy calculated by p and T by the internal medium model";
-    MediumExt.SpecificEntropy s_pT_Ext
+    MediumInt.SpecificEntropy s_pT_Ext
       "Specific entropy calculated by p and T by the external medium model";
     MediumInt.SpecificEntropy s_ph_Int
       "Specific entropy calculated by p and h by the internal medium model";
-    MediumExt.SpecificEntropy s_ph_Ext
+    MediumInt.SpecificEntropy s_ph_Ext
       "Specific entropy calculated by p and h by the external medium model";
     MediumInt.SpecificEntropy s_ps_Int
       "Specific entropy calculated by p and s by the internal medium model";
-    MediumExt.SpecificEntropy s_ps_Ext
+    MediumInt.SpecificEntropy s_ps_Ext
       "Specific entropy calculated by p and s by the external medium model";
 
-    MediumExt.SaturationProperties sat_T
-      "Saturation properties calculated by temperature";
-    MediumExt.SaturationProperties sat_p
-      "Saturation properties calculated by pressure";
-    MediumExt.FixedPhase phase_dT
+    Real phase_dT
       "Actual phase of thermodynamic state calculated by d and T";
-    MediumExt.FixedPhase phase_ph
+    Real phase_ph
       "Actual phase of thermodynamic state calculated by p and h";
-    MediumExt.FixedPhase phase_ps
+    Real phase_ps
       "Actual phase of thermodynamic state calculated by p and s";
   end States;
   States states
@@ -156,20 +170,6 @@ model RefrigerantDerivatives
   //
   record ExplDer
     "Record that contains derivatives depending on derivatives of the EoS only"
-    parameter Real convH(unit="J/(kg.s3)") = 300e3
-    "Conversion factor to satisfy derivative check";
-    MediumExt.AbsolutePressure p
-      "Pressure used for calculations";
-    MediumExt.SpecificEnthalpy h
-      "Specific enthalpy used for calculations";
-
-    MediumExt.ThermodynamicState state = MediumExt.setState_phX(
-      p=p, h=h)
-      "Thermodynamic state used for caculationg derivatives of the EoS";
-    MediumExt.EoS.HelmholtzDerivs f =  MediumExt.EoS.setHelmholtzDerivsThird(
-      T=state.T, d=state.d, phase=1)
-      "Derivatives of the EoS calculated by the external medium model";
-
     Real dpdd_T_Int
       "Derivative (dp/dd)_T=const. calculated by the internal medium model";
     Real dpdd_T_Ext
@@ -223,7 +223,7 @@ model RefrigerantDerivatives
     Real d_dudd_T =  dudd_T_Int-dudd_T_Ext
       "Difference of the derivative (du/dd)_T=const.";
   end ExplDer;
-  ExplDer explDer(p=p,h=h,convH=convH)
+  ExplDer explDer
     "Record that contains partial derivatives wrt. density and temperature";
 
   // Definition of further derivatives
@@ -323,34 +323,6 @@ model RefrigerantDerivatives
   // Definition of derivates at bubble and dew state
   //
   record SatDer "Record that contains derivatives at bubble and dew state"
-    parameter Real convT(unit="K/(s3)") = 125
-    "Conversion factor to satisfy derivative check";
-    Modelica.SIunits.Temperature T
-      "Temperature used for calculations";
-    MediumExt.Density d = 75
-      "Density used for calculations";
-
-    MediumExt.ThermodynamicState state = MediumExt.setState_dTX(
-      d=d, T=min(T,
-      MediumExt.fluidConstants[1].criticalTemperature-3))
-      "Thermodynamic state calculated by d and T for further calculations";
-    MediumExt.ThermodynamicState sat_l=
-      MediumExt.setBubbleState(MediumExt.setSat_p(state.p))
-      "Bubble state calculated by d and T";
-    MediumExt.ThermodynamicState sat_v=
-      MediumExt.setDewState(MediumExt.setSat_p(state.p))
-      "Dew state calculated by d and T";
-    MediumExt.EoS.HelmholtzDerivs fl=
-      MediumExt.EoS.setHelmholtzDerivsSecond(T=sat_l.T,
-      d=sat_l.d, phase=1)
-      "Derivatives of the EoS calculated by the external medium
-      model at bubble state";
-    MediumExt.EoS.HelmholtzDerivs fv=
-      MediumExt.EoS.setHelmholtzDerivsSecond(T=sat_v.T,
-      d=sat_v.d, phase=1)
-      "Derivatives of the EoS calculated by the external medium
-      model at dew state";
-
     Real dpdT_Int
       "Derivative (dp/dT)_saturation calculated by the internal medium model";
     Real dpdT_Ext
@@ -439,7 +411,7 @@ model RefrigerantDerivatives
     Real d_dudT_v = dudT_v_Int - dudT_v_Ext
       "Difference of the derivative (du_v/dT)_saturation";
   end SatDer;
-  SatDer satDer(T=T,d=d,convT=convT)
+  SatDer satDer
     "Record that contains derivates at bubble and dew state";
 
 equation
@@ -450,238 +422,163 @@ equation
   states.pT_Int = MediumInt.setState_pTX(p=p,T=T);
   states.ph_Int = MediumInt.setState_phX(p=p,h=h);
   states.ps_Int = MediumInt.setState_psX(p=p,s=s);
-  states.dT_Ext = MediumExt.setState_dTX(d=d,T=
-    min(T,MediumExt.fluidConstants[1].criticalTemperature-3));
-  states.pT_Ext = MediumExt.setState_pTX(p=p,T=T);
-  states.ph_Ext = MediumExt.setState_phX(p=p,h=h);
-  states.ps_Ext = MediumExt.setState_psX(p=p,s=s);
+  states.dT_Ext.phase = extProp.y[1];
+  states.dT_Ext.d = extProp.y[2];
+  states.dT_Ext.T = extProp.y[3];
+  states.dT_Ext.p = extProp.y[4];
+  states.dT_Ext.h = extProp.y[5];
+  states.pT_Ext.phase = extProp.y[6];
+  states.pT_Ext.d = extProp.y[7];
+  states.pT_Ext.T = extProp.y[8];
+  states.pT_Ext.p = extProp.y[9];
+  states.pT_Ext.h = extProp.y[10];
+  states.ph_Ext.phase = extProp.y[11];
+  states.ph_Ext.d = extProp.y[12];
+  states.ph_Ext.T = extProp.y[13];
+  states.ph_Ext.p = extProp.y[14];
+  states.ph_Ext.h = extProp.y[15];
+  states.ps_Ext.phase = extProp.y[16];
+  states.ps_Ext.d = extProp.y[17];
+  states.ps_Ext.T = extProp.y[18];
+  states.ps_Ext.p = extProp.y[19];
+  states.ps_Ext.h = extProp.y[20];
 
   states.s_dT_Int = MediumInt.specificEntropy(states.dT_Int);
-  states.s_dT_Ext = MediumExt.specificEntropy(states.dT_Ext);
+  states.s_dT_Ext = extProp.y[21];
   states.s_pT_Int = MediumInt.specificEntropy(states.pT_Int);
-  states.s_pT_Ext = MediumExt.specificEntropy(states.pT_Ext);
+  states.s_pT_Ext = extProp.y[22];
   states.s_ph_Int = MediumInt.specificEntropy(states.ph_Int);
-  states.s_ph_Ext = MediumExt.specificEntropy(states.ph_Ext);
+  states.s_ph_Ext = extProp.y[23];
   states.s_ps_Int = MediumInt.specificEntropy(states.ps_Int);
-  states.s_ps_Ext = MediumExt.specificEntropy(states.ps_Ext);
+  states.s_ps_Ext = extProp.y[24];
 
-  states.sat_T = MediumExt.setSat_T(T);
-  states.sat_p = MediumExt.setSat_p(p);
-  states.phase_dT = if not ((d < MediumExt.bubbleDensity(states.sat_T) and d >
-    MediumExt.dewDensity(states.sat_T)) and T < MediumExt.fluidConstants[1].
-    criticalTemperature) then 1 else 2;
-  states.phase_ph =  if not ((MediumExt.density(states.ph_Ext) <
-    MediumExt.bubbleDensity(states.sat_p) and MediumExt.density(states.ph_Ext) >
-    MediumExt.dewDensity(states.sat_p)) and MediumExt.temperature(states.ph_Ext)
-    < MediumExt.fluidConstants[1].criticalTemperature) then 1 else 2;
-  states.phase_ps =  if not ((MediumExt.density(states.ps_Ext) <
-    MediumExt.bubbleDensity(states.sat_p) and MediumExt.density(states.ps_Ext) >
-    MediumExt.dewDensity(states.sat_p)) and MediumExt.temperature(states.ps_Ext)
-    < MediumExt.fluidConstants[1].criticalTemperature) then 1 else 2;
+  states.phase_dT = extProp.y[25];
+  states.phase_ph = extProp.y[26];
+  states.phase_ps = extProp.y[27];
 
 algorithm
   // Calculation of properties based on derivatives
   //
   derProp.cp_Int := MediumInt.specificHeatCapacityCp(states.ph_Int);
-  derProp.cp_Ext := MediumExt.specificHeatCapacityCp(states.ph_Ext);
+  derProp.cp_Ext := extProp.y[28];
   derProp.cv_Int := MediumInt.specificHeatCapacityCv(states.ph_Int);
-  derProp.cv_Ext := MediumExt.specificHeatCapacityCv(states.ph_Ext);
+  derProp.cv_Ext := extProp.y[29];
   derProp.a_Int := MediumInt.velocityOfSound(states.ph_Int);
-  derProp.a_Ext := MediumExt.velocityOfSound(states.ph_Ext);
+  derProp.a_Ext := extProp.y[30];
   derProp.beta_Int := MediumInt.isobaricExpansionCoefficient(states.ph_Int);
-  derProp.beta_Ext := MediumExt.isobaricExpansionCoefficient(states.ph_Ext);
+  derProp.beta_Ext := extProp.y[31];
   derProp.gamma_Int := MediumInt.isentropicExponent(states.ph_Int);
-  derProp.gamma_Ext := MediumExt.isentropicExponent(states.ph_Ext);
+  derProp.gamma_Ext := extProp.y[32];
   derProp.kappa_Int := MediumInt.isothermalCompressibility(states.ph_Int);
-  derProp.kappa_Ext := MediumExt.isothermalCompressibility(states.ph_Ext);
+  derProp.kappa_Ext :=extProp.y[33];
   derProp.delta_T_Int :=
     MediumInt.isothermalThrottlingCoefficient(states.ph_Int);
-  derProp.delta_T_Ext :=
-    MediumExt.isothermalThrottlingCoefficient(states.ph_Ext);
+  derProp.delta_T_Ext := extProp.y[34];
   derProp.my_Int := MediumInt.jouleThomsonCoefficient(states.ph_Int);
-  derProp.my_Ext := MediumExt.jouleThomsonCoefficient(states.ph_Ext);
+  derProp.my_Ext := extProp.y[35];
 
   // Calculate derivatives that depend on derivatives of the EoS only
   //
   explDer.dpdd_T_Int := MediumInt.pressure_derd_T(states.ph_Int);
-  explDer.dpdd_T_Ext := MediumExt.pressure_derd_T(states.ph_Ext);
+  explDer.dpdd_T_Ext := extProp.y[36];
   explDer.dpdT_d_Int := MediumInt.pressure_derT_d(states.ph_Int);
-  explDer.dpdT_d_Ext := MediumExt.pressure_derT_d(states.ph_Ext);
+  explDer.dpdT_d_Ext := extProp.y[37];
 
   explDer.dhdT_d_Int := MediumInt.specificEnthalpy_derT_d(states.ph_Int);
-  explDer.dhdT_d_Ext := MediumExt.specificEnthalpy_derT_d(states.ph_Ext);
+  explDer.dhdT_d_Ext := extProp.y[38];
   explDer.dhdd_T_Int := MediumInt.specificEnthalpy_derd_T(states.ph_Int);
-  explDer.dhdd_T_Ext := MediumExt.specificEnthalpy_derd_T(states.ph_Ext);
+  explDer.dhdd_T_Ext := extProp.y[39];
 
   explDer.dsdd_T_Int := MediumInt.specificEntropy_derd_T(states.ph_Int);
-  explDer.dsdd_T_Ext := MediumExt.EoS.dsdT(explDer.f); // no two-phase region
+  explDer.dsdd_T_Ext := extProp.y[40]; // no two-phase region
   explDer.dsdT_d_Int := MediumInt.specificEntropy_derT_d(states.ph_Int);
-  explDer.dsdT_d_Ext := MediumExt.EoS.dsTd(explDer.f); // no two-phase region
+  explDer.dsdT_d_Ext := extProp.y[41]; // no two-phase region
 
   explDer.dudT_d_Int := MediumInt.specificInternalEnergy_derT_d(states.ph_Int);
-  explDer.dudT_d_Ext := MediumExt.EoS.duTd(explDer.f); // no two-phase region
+  explDer.dudT_d_Ext := extProp.y[42]; // no two-phase region
   explDer.dudd_T_Int := MediumInt.specificInternalEnergy_derd_T(states.ph_Int);
-  explDer.dudd_T_Ext := MediumExt.EoS.dudT(explDer.f); // no two-phase region
+  explDer.dudd_T_Ext := extProp.y[43]; // no two-phase region
 
   // Calculate further derivatives
   //
   furDer.dddp_T_Int := MediumInt.density_derp_T(states.ph_Int);
-  furDer.dddp_T_Ext := MediumExt.density_derp_T(states.ph_Ext);
+  furDer.dddp_T_Ext := extProp.y[44];
   furDer.dddT_p_Int := MediumInt.density_derT_p(states.ph_Int);
-  furDer.dddT_p_Ext := MediumExt.density_derT_p(states.ph_Ext);
+  furDer.dddT_p_Ext := extProp.y[45];
   furDer.dddp_h_Int := MediumInt.density_derp_h(states.ph_Int);
-  furDer.dddp_h_Ext := MediumExt.density_derp_h(states.ph_Ext);
+  furDer.dddp_h_Ext := extProp.y[46];
   furDer.dddh_p_Int := MediumInt.density_derh_p(states.ph_Int);
-  furDer.dddh_p_Ext := MediumExt.density_derh_p(states.ph_Ext);
+  furDer.dddh_p_Ext := extProp.y[47];
   furDer.dddp_s_Int := MediumInt.density_derp_s(states.ph_Int);
-  furDer.dddp_s_Ext := 1/(MediumExt.pressure_derd_T(states.ph_Ext)-
-    MediumExt.pressure_derT_d(states.ph_Ext)*explDer.dsdd_T_Ext/
-    explDer.dsdT_d_Ext); // no two-phase region
+  furDer.dddp_s_Ext := extProp.y[48]; // no two-phase region
   furDer.ddds_p_Int := MediumInt.density_ders_p(states.ph_Int);
-  furDer.ddds_p_Ext := (MediumExt.density_derh_p(states.ph_Ext)*
-    MediumExt.temperature(states.ph_Ext));
+  furDer.ddds_p_Ext := extProp.y[49];
 
   furDer.dTdp_h_Int := MediumInt.temperature_derp_h(states.ph_Int);
-  furDer.dTdp_h_Ext := MediumExt.jouleThomsonCoefficient(states.ph_Ext);
+  furDer.dTdp_h_Ext := extProp.y[50];
   furDer.dTdh_p_Int := MediumInt.temperature_derh_p(states.ph_Int);
-  furDer.dTdh_p_Ext := 1/MediumExt.specificHeatCapacityCp(states.ph_Ext);
+  furDer.dTdh_p_Ext := extProp.y[51];
   furDer.dTdp_s_Int := MediumInt.temperature_derp_s(states.ph_Int);
-  furDer.dTdp_s_Ext := -(MediumExt.EoS.dsdT(explDer.f)/
-    MediumExt.pressure_derd_T(states.ph_Ext))/(1/furDer.dTds_p_Ext);
+  furDer.dTdp_s_Ext := extProp.y[52];
   furDer.dTds_p_Int := MediumInt.temperature_ders_p(states.ph_Int);
-  furDer.dTds_p_Ext := 1/(MediumExt.EoS.dsTd(explDer.f)-
-    MediumExt.EoS.dsdT(explDer.f)*MediumExt.pressure_derT_d(states.ph_Ext)/
-    MediumExt.pressure_derd_T(states.ph_Ext));
+  furDer.dTds_p_Ext := extProp.y[53];
 
   furDer.dhdp_T_Int := MediumInt.specificEnthalpy_derp_T(states.ph_Int);
-  furDer.dhdp_T_Ext := MediumExt.isothermalThrottlingCoefficient(states.ph_Ext);
+  furDer.dhdp_T_Ext := extProp.y[54];
   furDer.dhdT_p_Int := MediumInt.specificEnthalpy_derT_p(states.ph_Int);
-  furDer.dhdT_p_Ext := MediumExt.specificHeatCapacityCp(states.ph_Ext);
+  furDer.dhdT_p_Ext := extProp.y[55];
   furDer.dhds_p_Int := MediumInt.specificEnthalpy_ders_p(states.ph_Int);
-  furDer.dhds_p_Ext := MediumExt.temperature(states.ph_Ext);
+  furDer.dhds_p_Ext := extProp.y[56];
   furDer.dhdp_s_Int := MediumInt.specificEnthalpy_derp_s(states.ph_Int);
-  furDer.dhdp_s_Ext := 1/MediumExt.density(states.ph_Ext);
+  furDer.dhdp_s_Ext := extProp.y[57];
 
   // Calculate derivatives at bubble and dew line
   //
   satDer.dpdT_Int := MediumInt.saturationPressure_derT(min(
     MediumInt.temperature(states.ph_Int),
     MediumInt.fluidConstants[1].criticalTemperature-3));
-  satDer.dpdT_Ext := MediumExt.saturationPressure_derT(min(
-    MediumExt.temperature(states.ph_Ext),
-    MediumExt.fluidConstants[1].criticalTemperature-3));
+  satDer.dpdT_Ext := extProp.y[58];
   satDer.dTdp_Int := MediumInt.saturationTemperature_derp(
     MediumInt.pressure(states.dT_Int));
-  satDer.dTdp_Ext := MediumExt.saturationTemperature_derp(
-    MediumExt.pressure(states.dT_Ext));
+  satDer.dTdp_Ext := extProp.y[59];
 
   satDer.dddp_l_Int := MediumInt.dBubbleDensity_dPressure(
     MediumInt.setSat_p(MediumInt.pressure(states.dT_Int)));
-  satDer.dddp_l_Ext := MediumExt.dBubbleDensity_dPressure(
-    MediumExt.setSat_p(MediumExt.pressure(states.dT_Ext)));
+  satDer.dddp_l_Ext := extProp.y[60];
   satDer.dddp_v_Int := MediumInt.dDewDensity_dPressure(
     MediumInt.setSat_p(MediumInt.pressure(states.dT_Int)));
-  satDer.dddp_v_Ext := MediumExt.dDewDensity_dPressure(
-    MediumExt.setSat_p(MediumExt.pressure(states.dT_Ext)));
+  satDer.dddp_v_Ext := extProp.y[61];
   satDer.dhdp_l_Int := MediumInt.dBubbleEnthalpy_dPressure(
     MediumInt.setSat_p(MediumInt.pressure(states.dT_Int)));
-  satDer.dhdp_l_Ext := MediumExt.dBubbleEnthalpy_dPressure(
-    MediumExt.setSat_p(MediumExt.pressure(states.dT_Ext)));
+  satDer.dhdp_l_Ext := extProp.y[62];
   satDer.dhdp_v_Int := MediumInt.dDewEnthalpy_dPressure(
     MediumInt.setSat_p(MediumInt.pressure(states.dT_Int)));
-  satDer.dhdp_v_Ext := MediumExt.dDewEnthalpy_dPressure(
-    MediumExt.setSat_p(MediumExt.pressure(states.dT_Ext)));
+  satDer.dhdp_v_Ext := extProp.y[63];
   satDer.dsdp_l_Int := MediumInt.dBubbleEntropy_dPressure(
     MediumInt.setSat_p(MediumInt.pressure(states.dT_Int)));
-  satDer.dsdp_l_Ext := ((satDer.fl.R/MediumExt.density(satDer.sat_l)*
-    (-(1 + satDer.fl.delta*satDer.fl.rd) + (0 + satDer.fl.tau*satDer.fl.delta*
-    satDer.fl.rtd)))/MediumExt.pressure_derd_T(MediumExt.setBubbleState(
-    MediumExt.setSat_p(MediumExt.pressure(satDer.sat_l)))))+((satDer.fl.R/
-    satDer.sat_l.T*(-satDer.fl.tau^2*(satDer.fl.itt + satDer.fl.rtt))) -
-    (satDer.fl.R/MediumExt.density(satDer.sat_l)*(-(1 + satDer.fl.delta*
-    satDer.fl.rd) + (0 + satDer.fl.tau*satDer.fl.delta*satDer.fl.rtd)))*
-    MediumExt.pressure_derT_d(MediumExt.setBubbleState(MediumExt.setSat_p(
-    MediumExt.pressure(satDer.sat_l))))/MediumExt.pressure_derd_T(
-    MediumExt.setBubbleState(MediumExt.setSat_p(
-    MediumExt.pressure(satDer.sat_l)))))*
-    MediumExt.saturationTemperature_derp(MediumExt.pressure(satDer.sat_l));
+  satDer.dsdp_l_Ext := extProp.y[64];
   satDer.dsdp_v_Int := MediumInt.dDewEntropy_dPressure(
     MediumInt.setSat_p(MediumInt.pressure(states.dT_Int)));
-  satDer.dsdp_v_Ext := ((satDer.fv.R/MediumExt.density(satDer.sat_v)*(-(1 +
-    satDer.fv.delta*satDer.fv.rd) + (0 + satDer.fv.tau*satDer.fv.delta*
-    satDer.fv.rtd)))/MediumExt.pressure_derd_T(MediumExt.setDewState(
-    MediumExt.setSat_p(MediumExt.pressure(satDer.sat_v)))))+((satDer.fv.R/
-    satDer.sat_v.T*(-satDer.fv.tau^2*(satDer.fv.itt + satDer.fv.rtt))) -
-    (satDer.fv.R/MediumExt.density(satDer.sat_v)*(-(1 + satDer.fv.delta*
-    satDer.fv.rd) + (0 + satDer.fv.tau*satDer.fv.delta*satDer.fv.rtd)))*
-    MediumExt.pressure_derT_d(MediumExt.setDewState(MediumExt.setSat_p(
-    MediumExt.pressure(satDer.sat_v))))/MediumExt.pressure_derd_T(
-    MediumExt.setDewState(MediumExt.setSat_p(MediumExt.pressure(
-    satDer.sat_v)))))* MediumExt.saturationTemperature_derp(
-    MediumExt.pressure(satDer.sat_v));
+  satDer.dsdp_v_Ext := extProp.y[65];
 
   satDer.dddT_l_Int := MediumInt.dBubbleDensity_dTemperature(
     MediumInt.setSat_p(MediumInt.pressure(states.dT_Int)));
-  satDer.dddT_l_Ext := MediumExt.density_derT_p(MediumExt.setBubbleState(
-    MediumExt.setSat_p(MediumExt.pressure(satDer.sat_l)))) +
-    MediumExt.density_derp_T(MediumExt.setBubbleState(MediumExt.setSat_p(
-    MediumExt.pressure(satDer.sat_l))))* MediumExt.saturationPressure_derT(
-    MediumExt.temperature(satDer.sat_l));
+  satDer.dddT_l_Ext :=extProp.y[66];
   satDer.dddT_v_Int := MediumInt.dDewDensity_dTemperature(MediumInt.setSat_p(
     MediumInt.pressure(states.dT_Int)));
-  satDer.dddT_v_Ext := MediumExt.density_derT_p(MediumExt.setDewState(
-    MediumExt.setSat_p(MediumExt.pressure(satDer.sat_v)))) +
-    MediumExt.density_derp_T(MediumExt.setDewState(MediumExt.setSat_p(
-    MediumExt.pressure(satDer.sat_v))))* MediumExt.saturationPressure_derT(
-    MediumExt.temperature(satDer.sat_v));
+  satDer.dddT_v_Ext :=extProp.y[67];
   satDer.dhdT_l_Int := MediumInt.dBubbleEnthalpy_dTemperature(
     MediumInt.setSat_p(MediumInt.pressure(states.dT_Int)));
-  satDer.dhdT_l_Ext := MediumExt.specificHeatCapacityCp(
-    MediumExt.setBubbleState(MediumExt.setSat_p(MediumExt.pressure(
-    satDer.sat_l)))) + MediumExt.isothermalThrottlingCoefficient(
-    MediumExt.setBubbleState(MediumExt.setSat_p(MediumExt.pressure(
-    satDer.sat_l))))* MediumExt.saturationPressure_derT(
-    MediumExt.temperature(satDer.sat_l));
+  satDer.dhdT_l_Ext := extProp.y[68];
   satDer.dhdT_v_Int := MediumInt.dDewEnthalpy_dTemperature(
     MediumInt.setSat_p(MediumInt.pressure(states.dT_Int)));
-  satDer.dhdT_v_Ext := MediumExt.specificHeatCapacityCp(
-    MediumExt.setDewState(MediumExt.setSat_p(MediumExt.pressure(
-    satDer.sat_v)))) + MediumExt.isothermalThrottlingCoefficient(
-    MediumExt.setDewState(MediumExt.setSat_p(MediumExt.pressure(
-    satDer.sat_v))))* MediumExt.saturationPressure_derT(
-    MediumExt.temperature(satDer.sat_v));
+  satDer.dhdT_v_Ext :=extProp.y[69];
   satDer.dudT_l_Int := MediumInt.dBubbleInternalEnergy_dTemperature(
     MediumInt.setSat_p(MediumInt.pressure(states.dT_Int)));
-  satDer.dudT_l_Ext := (MediumExt.specificHeatCapacityCv(
-    MediumExt.setBubbleState(MediumExt.setSat_p(MediumExt.pressure(
-    satDer.sat_l)))) - (satDer.fl.R*satDer.sat_l.T/MediumExt.density(
-     MediumExt.setBubbleState(MediumExt.setSat_p(MediumExt.pressure(
-    satDer.sat_l))))*satDer.fl.tau*satDer.fl.delta*satDer.fl.rtd)*
-    MediumExt.pressure_derT_d(MediumExt.setBubbleState(MediumExt.setSat_p(
-    MediumExt.pressure(satDer.sat_l))))/MediumExt.pressure_derd_T(
-    MediumExt.setBubbleState(MediumExt.setSat_p(MediumExt.pressure(
-    satDer.sat_l)))))+((satDer.fl.R*satDer.sat_l.T/MediumExt.density(
-    MediumExt.setBubbleState(MediumExt.setSat_p(MediumExt.pressure(
-    satDer.sat_l))))*satDer.fl.tau*satDer.fl.delta*satDer.fl.rtd)/
-    MediumExt.pressure_derd_T(MediumExt.setBubbleState(MediumExt.setSat_p(
-    MediumExt.pressure(satDer.sat_l)))))* MediumExt.saturationPressure_derT(
-    MediumExt.temperature(satDer.sat_l));
+  satDer.dudT_l_Ext := extProp.y[70];
   satDer.dudT_v_Int := MediumInt.dDewInternalEnergy_dTemperature(
     MediumInt.setSat_p(MediumInt.pressure(states.dT_Int)));
-  satDer.dudT_v_Ext := (MediumExt.specificHeatCapacityCv(
-    MediumExt.setDewState(MediumExt.setSat_p(MediumExt.pressure(
-    satDer.sat_v)))) -(satDer.fv.R*satDer.sat_v.T/MediumExt.density(
-    MediumExt.setDewState(MediumExt.setSat_p(MediumExt.pressure(
-    satDer.sat_v))))*satDer.fv.tau*satDer.fv.delta*satDer.fv.rtd)*
-    MediumExt.pressure_derT_d(MediumExt.setDewState(MediumExt.setSat_p(
-    MediumExt.pressure(satDer.sat_v))))/MediumExt.pressure_derd_T(
-    MediumExt.setDewState(MediumExt.setSat_p(MediumExt.pressure(
-    satDer.sat_v)))))+((satDer.fv.R*satDer.sat_v.T/MediumExt.density(
-    MediumExt.setDewState(MediumExt.setSat_p(MediumExt.pressure(
-    satDer.sat_v))))*satDer.fv.tau*satDer.fv.delta*satDer.fv.rtd)/
-    MediumExt.pressure_derd_T(MediumExt.setDewState(MediumExt.setSat_p(
-    MediumExt.pressure(satDer.sat_v)))))* MediumExt.saturationPressure_derT(
-    MediumExt.temperature(satDer.sat_v));
+  satDer.dudT_v_Ext := extProp.y[71];
 
   annotation (Documentation(revisions="<html>
 <ul>
@@ -726,7 +623,8 @@ density and temperature).</li>
 </ol>
 <p>
 Furthermore, the derivatives are compared with the associated derivatives
-calculated by an external medium model (i.e. HelmholtzMediaLibrary).
+calculated by an external medium model (i.e. 
+<a href=\"https://github.com/thorade/HelmholtzMedia\">HelmholtzMedia</a>)
 </p>
 </html>"), experiment);
-end RefrigerantDerivatives;
+end RefrigerantsDerivativesR134a;

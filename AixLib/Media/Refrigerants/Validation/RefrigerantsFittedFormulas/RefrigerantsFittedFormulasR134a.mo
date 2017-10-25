@@ -1,16 +1,13 @@
-﻿within AixLib.Media.Refrigerants.Validation;
-model RefrigerantsFittedFormulas
-  "Model that checks the fitted formulas by comparing the
-  results to external media models"
+﻿within AixLib.Media.Refrigerants.Validation.RefrigerantsFittedFormulas;
+model RefrigerantsFittedFormulasR134a
+  "Model that checks the fitted formulas of R134a"
   extends Modelica.Icons.Example;
 
   // Define the refrigerant that shall be tested
   //
-  package MediumInt =
+  replaceable package MediumInt =
     AixLib.Media.Refrigerants.R134a.R134a_IIR_P1_395_T233_455_Horner
     "Internal medium model";
-  package MediumExt =
-    HelmholtzMedia.HelmholtzFluids.R134a "External medium model";
 
   // Define parameters that define the range for calculating the fitted formulas
   //
@@ -29,7 +26,8 @@ model RefrigerantsFittedFormulas
   parameter Modelica.SIunits.Density d_min = 2.0
     "Fluid limit: Minimum density"
     annotation (Dialog(group="Fluid limits"));
-  parameter Modelica.SIunits.Density d_max = 1425 "Fluid limit: Maximum density"
+  parameter Modelica.SIunits.Density d_max = 1425
+    "Fluid limit: Maximum density"
     annotation (Dialog(group="Fluid limits"));
   parameter Modelica.SIunits.AbsolutePressure p_min = 1e5
     "Fluid limit: Minimum absolute pressure"
@@ -43,6 +41,18 @@ model RefrigerantsFittedFormulas
   parameter Modelica.SIunits.Temperature T_max = 455.15
     "Fluid limit: Maximum temperature"
     annotation (Dialog(group="Fluid limits"));
+
+  // Define submodels and connectors
+  //
+  Modelica.Blocks.Sources.CombiTimeTable extProp(
+    tableOnFile=true,
+    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+    tableName="External",
+    fileName=Modelica.Utilities.Files.loadResource(
+      "modelica://AixLib/Resources/Media/Refrigerants/ValidationFittedFormulasR134a.txt"),
+    columns=2:26)
+    "Table that contains the results of the external media library"
+    annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
 
   // Define the conversion factor for the test
   //
@@ -216,33 +226,33 @@ equation
   // Calculate derivatives of the EoS
   //
   eos.f_iInt = MediumInt.f_Idg(deltaInt,tauInt);
-  eos.f_iExt = MediumExt.EoS.f_i(deltaInt,tauInt);
+  eos.f_iExt = extProp.y[1];
   eos.f_rInt = MediumInt.f_Res(deltaInt,tauInt);
-  eos.f_rExt = MediumExt.EoS.f_r(deltaInt,tauInt);
+  eos.f_rExt = extProp.y[2];
   eos.f_itInt = MediumInt.t_fIdg_t(tauInt)/tauInt;
-  eos.f_itExt = MediumExt.EoS.f_it(deltaInt,tauInt);
+  eos.f_itExt = extProp.y[3];
   eos.f_ittInt = MediumInt.tt_fIdg_tt(tauInt)/tauInt^2;
-  eos.f_ittExt = MediumExt.EoS.f_itt(deltaInt,tauInt);
+  eos.f_ittExt = extProp.y[4];
   eos.f_itttInt = MediumInt.ttt_fIdg_ttt(tauInt)/tauInt^3;
-  eos.f_itttExt = MediumExt.EoS.f_ittt(deltaInt,tauInt);
+  eos.f_itttExt = extProp.y[5];
   eos.f_rtInt = MediumInt.t_fRes_t(deltaInt,tauInt)/tauInt;
-  eos.f_rtExt = MediumExt.EoS.f_rt(deltaInt,tauInt);
+  eos.f_rtExt =extProp.y[6];
   eos.f_rttInt = MediumInt.tt_fRes_tt(deltaInt,tauInt)/tauInt^2;
-  eos.f_rttExt = MediumExt.EoS.f_rtt(deltaInt,tauInt);
+  eos.f_rttExt = extProp.y[7];
   eos.f_rtttInt = MediumInt.ttt_fRes_ttt(deltaInt,tauInt)/tauInt^3;
-  eos.f_rtttExt = MediumExt.EoS.f_rttt(deltaInt,tauInt);
+  eos.f_rtttExt = extProp.y[8];
   eos.f_rdInt = MediumInt.d_fRes_d(deltaInt,tauInt)/deltaInt;
-  eos.f_rdExt = MediumExt.EoS.f_rd(deltaInt,tauInt);
+  eos.f_rdExt = extProp.y[9];
   eos.f_rddInt = MediumInt.dd_fRes_dd(deltaInt,tauInt)/deltaInt^2;
-  eos.f_rddExt = MediumExt.EoS.f_rdd(deltaInt,tauInt);
+  eos.f_rddExt = extProp.y[10];
   eos.f_rdddInt = MediumInt.ddd_fRes_ddd(deltaInt,tauInt)/deltaInt^3;
-  eos.f_rdddExt = MediumExt.EoS.f_rddd(deltaInt,tauInt);
+  eos.f_rdddExt = extProp.y[11];
   eos.f_rtdInt = MediumInt.td_fRes_td(deltaInt,tauInt)/tauInt/deltaInt;
-  eos.f_rtdExt = MediumExt.EoS.f_rtd(deltaInt,tauInt);
+  eos.f_rtdExt = extProp.y[12];
   eos.f_rtddInt = MediumInt.tdd_fRes_tdd(deltaInt,tauInt)/tauInt/deltaInt^2;
-  eos.f_rtddExt = MediumExt.EoS.f_rtdd(deltaInt,tauInt);
+  eos.f_rtddExt = extProp.y[13];
   eos.f_rttdInt = MediumInt.ttd_fRes_ttd(deltaInt,tauInt)/tauInt^2/deltaInt;
-  eos.f_rttdExt = MediumExt.EoS.f_rttd(deltaInt,tauInt);
+  eos.f_rttdExt = extProp.y[14];
 
   eos.df_i = (eos.f_iInt-eos.f_iExt);
   eos.df_r = (eos.f_rInt-eos.f_rExt);
@@ -262,23 +272,21 @@ equation
   // Calculate saturation properties
   //
   saturation.p_satInt = MediumInt.saturationPressure(T_sat);
-  saturation.p_satExt = MediumExt.saturationPressure_sat(
-    MediumExt.setSat_T(T_sat));
+  saturation.p_satExt =extProp.y[15];
   saturation.T_satInt = MediumInt.saturationTemperature(p_sat);
-  saturation.T_satExt = MediumExt.saturationTemperature_sat(
-    MediumExt.setSat_p(p_sat));
+  saturation.T_satExt = extProp.y[16];
   saturation.d_lInt = MediumInt.bubbleDensity(MediumInt.setSat_T(T_sat));
-  saturation.d_lExt = MediumExt.bubbleDensity(MediumExt.setSat_T(T_sat));
+  saturation.d_lExt = extProp.y[17];
   saturation.d_vInt = MediumInt.dewDensity(MediumInt.setSat_T(T_sat));
-  saturation.d_vExt = MediumExt.dewDensity(MediumExt.setSat_T(T_sat));
+  saturation.d_vExt = extProp.y[18];
   saturation.h_lInt = MediumInt.bubbleEnthalpy(MediumInt.setSat_p(p_sat));
-  saturation.h_lExt = MediumExt.bubbleEnthalpy(MediumExt.setSat_p(p_sat));
+  saturation.h_lExt = extProp.y[19];
   saturation.h_vInt = MediumInt.dewEnthalpy(MediumInt.setSat_p(p_sat));
-  saturation.h_vExt = MediumExt.dewEnthalpy(MediumExt.setSat_p(p_sat));
+  saturation.h_vExt = extProp.y[20];
   saturation.s_lInt = MediumInt.bubbleEntropy(MediumInt.setSat_p(p_sat));
-  saturation.s_lExt = MediumExt.bubbleEntropy(MediumExt.setSat_p(p_sat));
+  saturation.s_lExt = extProp.y[21];
   saturation.s_vInt = MediumInt.dewEntropy(MediumInt.setSat_p(p_sat));
-  saturation.s_vExt = MediumExt.dewEntropy(MediumExt.setSat_p(p_sat));
+  saturation.s_vExt = extProp.y[22];
 
   saturation.dp_sat = (saturation.p_satInt-saturation.p_satExt)
       /saturation.p_satExt*100;
@@ -300,11 +308,11 @@ equation
   // Calculate further state properties
   //
   properties.d_ptInt = MediumInt.density_pT(p_sat, T);
-  properties.d_ptExt = MediumExt.density_pT(p_sat, T);
+  properties.d_ptExt = extProp.y[23];
   properties.T_phInt = MediumInt.temperature_ph(p_sat,h);
-  properties.T_phExt = MediumExt.temperature_ph(p_sat,h);
+  properties.T_phExt = extProp.y[24];
   properties.T_psInt = MediumInt.temperature_ps(p_sat,s);
-  properties.T_psExt = MediumExt.temperature_ps(p_sat,s);
+  properties.T_psExt = extProp.y[25];
 
   properties.dd_pt = (properties.d_ptInt-properties.d_ptExt)
     /properties.d_ptExt*100;
@@ -312,6 +320,7 @@ equation
     /properties.T_phExt*100;
   properties.dT_ps = (properties.T_psInt-properties.T_psExt)
     /properties.T_psExt*100;
+
   annotation(experiment(StopTime=6400, Tolerance=1e-006),
     __Dymola_experimentSetupOutput,
     __Dymola_experimentFlags(
@@ -345,7 +354,8 @@ depending on pressure and temperature.</li>
 </ol>
 <p>
 Additionally, the fitted formulas are also calculated with an external
-media libary (i.e. HelmholtzMedia) and errors between the external and
+media libary (i.e. <a href=\"https://github.com/thorade/HelmholtzMedia\">
+HelmholtzMedia</a>) and errors between the external and
 internal medium are calculated.
 </p>
 </html>", revisions="<html>
@@ -357,4 +367,4 @@ internal medium are calculated.
   </li>
 </ul>
 </html>"));
-end RefrigerantsFittedFormulas;
+end RefrigerantsFittedFormulasR134a;

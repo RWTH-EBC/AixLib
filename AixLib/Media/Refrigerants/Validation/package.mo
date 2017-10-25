@@ -1,7 +1,10 @@
 within AixLib.Media.Refrigerants;
 package Validation "Package that contains different models for validating
-  the refrigerant  models"
+  the refrigerant models"
   extends Modelica.Icons.ExamplesPackage;
+
+
+
 
 
 
