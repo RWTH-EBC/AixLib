@@ -8,7 +8,7 @@ model RefrigerantsFittedFormulasR410a
       "modelica://AixLib/Resources/Media/Refrigerants/ValidationFittedFormulasR410a.txt")),
     h_min = 155e3,
     h_max = 600e3,
-    s_min = 0.7e3,
+    s_min = 0.75e3,
     s_max = 2e3,
     d_min = 2.0,
     d_max = 1325,
@@ -17,7 +17,14 @@ model RefrigerantsFittedFormulasR410a
     T_min = 233.15,
     T_max = 473.15);
 
-  annotation (Documentation(revisions="<html>
+  annotation (experiment(StopTime=6400, Tolerance=1e-006),
+    __Dymola_experimentSetupOutput,
+    __Dymola_experimentFlags(
+      Advanced(GenerateVariableDependencies=false, OutputModelicaCode=false),
+      Evaluate=false,
+      OutputCPUtime=true,
+      OutputFlatModelica=false),
+Documentation(revisions="<html>
 <ul>
   <li>
   August 13, 2017, by Mirko Engelpracht:<br/>
@@ -51,9 +58,10 @@ depending on pressure and temperature.</li>
 <p>
 Additionally, the fitted formulas are also calculated with an external
 media libary (i.e. <a href=\"https://github.com/modelica/ExternalMedia\">
-ExternalMedia</a>) and errors between the external and
-internal medium are calculated.
+ExternalMedia</a>).
+</p>
 <h4>Limitations</h4>
+<p>
 Unfortunately, it is not possible to directly call formulas related
 to the Helmholtz equation of state for the ExternalMedia library.
 Thus, these formulas are set to unity and cannot be validated 

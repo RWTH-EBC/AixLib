@@ -626,5 +626,6 @@ Furthermore, the derivatives are compared with the associated derivatives
 calculated by an external medium model (i.e. 
 <a href=\"https://github.com/thorade/HelmholtzMedia\">HelmholtzMedia</a>)
 </p>
-</html>"), experiment);
+</html>"),
+experiment(StopTime=1, Tolerance=1e-006));
 end RefrigerantsDerivativesR134a;

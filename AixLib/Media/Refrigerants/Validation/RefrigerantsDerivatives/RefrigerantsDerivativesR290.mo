@@ -54,5 +54,6 @@ calculated by an external medium model (i.e.
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
 </ul>
-</html>"));
+</html>"),
+experiment(StopTime=1, Tolerance=1e-006));
 end RefrigerantsDerivativesR290;

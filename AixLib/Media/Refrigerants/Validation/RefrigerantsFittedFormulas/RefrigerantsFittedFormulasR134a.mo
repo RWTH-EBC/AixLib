@@ -46,11 +46,13 @@ model RefrigerantsFittedFormulasR134a
   //
   Modelica.Blocks.Sources.CombiTimeTable extProp(
     tableOnFile=true,
-    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     tableName="External",
     fileName=Modelica.Utilities.Files.loadResource(
       "modelica://AixLib/Resources/Media/Refrigerants/ValidationFittedFormulasR134a.txt"),
-    columns=2:26)
+    columns=2:26,
+    extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
+    smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments,
+    startTime=-0.000001)
     "Table that contains the results of the external media library"
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
 
@@ -111,20 +113,6 @@ model RefrigerantsFittedFormulasR134a
     Real f_rtddExt "Derivative dddr/dtdd of the external Helmholtz energy";
     Real f_rttdInt "Derivative dddr/dttd of the internal Helmholtz energy";
     Real f_rttdExt "Derivative dddr/dttd of the external Helmholtz energy";
-    Real df_i "Difference of iddeal part of Helmholtz energy";
-    Real df_r "Difference of residual part of Helmholtz energy";
-    Real df_it "Difference of derivative di/dt of Helmholtz energy";
-    Real df_itt "Difference of derivative ddi/dtt of Helmholtz energy";
-    Real df_ittt "Difference of derivative dddi/dttt of Helmholtz energy";
-    Real df_rt "Difference of derivative dr/dt of Helmholtz energy";
-    Real df_rtt "Difference of derivative ddr/dtt of Helmholtz energy";
-    Real df_rttt "Difference of derivative dddr/dttt of Helmholtz energy";
-    Real df_rd "Difference of derivative dr/dd of Helmholtz energy";
-    Real df_rdd "Difference of derivative ddr/ddd of Helmholtz energy";
-    Real df_rddd "Difference of derivative dddr/dddd of Helmholtz energy";
-    Real df_rtd "Difference of derivative ddr/dtd of Helmholtz energy";
-    Real df_rtdd "Difference of derivative dddr/dtdd of Helmholtz energy";
-    Real df_rttd "Difference of derivative dddr/dttd of Helmholtz energy";
   end EoS;
 
   record Saturation
@@ -174,9 +162,6 @@ model RefrigerantsFittedFormulasR134a
     Real T_phExt "Temperature calculated by p and h of external medium";
     Real T_psInt "Temperature calculated by p and s of internal medium";
     Real T_psExt "Temperature calculated by p and s of external medium";
-    Real dd_pt "Relative difference density";
-    Real dT_ph "Relative difference calculated by p and h temperature";
-    Real dT_ps "Relative difference calculated by p and s temperature";
   end Properties;
 
   EoS eos "Record that contains calculated properties of the EoS";
@@ -254,21 +239,6 @@ equation
   eos.f_rttdInt = MediumInt.ttd_fRes_ttd(deltaInt,tauInt)/tauInt^2/deltaInt;
   eos.f_rttdExt = extProp.y[14];
 
-  eos.df_i = (eos.f_iInt-eos.f_iExt);
-  eos.df_r = (eos.f_rInt-eos.f_rExt);
-  eos.df_it = (eos.f_itInt-eos.f_itExt);
-  eos.df_itt = (eos.f_ittInt-eos.f_ittExt);
-  eos.df_ittt = (eos.f_itttInt-eos.f_itttExt);
-  eos.df_rt = (eos.f_rtInt-eos.f_rtExt);
-  eos.df_rtt = (eos.f_rttInt-eos.f_rttExt);
-  eos.df_rttt = (eos.f_rtttInt-eos.f_rtttExt);
-  eos.df_rd = (eos.f_rdInt-eos.f_rdExt);
-  eos.df_rdd = (eos.f_rddInt-eos.f_rddExt);
-  eos.df_rddd = (eos.f_rdddInt-eos.f_rdddExt);
-  eos.df_rtd = (eos.f_rtdInt-eos.f_rtdExt);
-  eos.df_rtdd = (eos.f_rtddInt-eos.f_rtddExt);
-  eos.df_rttd = (eos.f_rttdInt-eos.f_rttdExt);
-
   // Calculate saturation properties
   //
   saturation.p_satInt = MediumInt.saturationPressure(T_sat);
@@ -314,13 +284,6 @@ equation
   properties.T_psInt = MediumInt.temperature_ps(p_sat,s);
   properties.T_psExt = extProp.y[25];
 
-  properties.dd_pt = (properties.d_ptInt-properties.d_ptExt)
-    /properties.d_ptExt*100;
-  properties.dT_ph = (properties.T_phInt-properties.T_phExt)
-    /properties.T_phExt*100;
-  properties.dT_ps = (properties.T_psInt-properties.T_psExt)
-    /properties.T_psExt*100;
-
   annotation(experiment(StopTime=6400, Tolerance=1e-006),
     __Dymola_experimentSetupOutput,
     __Dymola_experimentFlags(
@@ -355,8 +318,7 @@ depending on pressure and temperature.</li>
 <p>
 Additionally, the fitted formulas are also calculated with an external
 media libary (i.e. <a href=\"https://github.com/thorade/HelmholtzMedia\">
-HelmholtzMedia</a>) and errors between the external and
-internal medium are calculated.
+HelmholtzMedia</a>).
 </p>
 </html>", revisions="<html>
 <ul>

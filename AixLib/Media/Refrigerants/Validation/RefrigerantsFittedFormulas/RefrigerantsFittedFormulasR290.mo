@@ -17,7 +17,14 @@ model RefrigerantsFittedFormulasR290
     T_min = 263.15,
     T_max = 343.15);
 
-  annotation (Documentation(revisions="<html>
+  annotation (experiment(StopTime=6400, Tolerance=1e-006),
+    __Dymola_experimentSetupOutput,
+    __Dymola_experimentFlags(
+      Advanced(GenerateVariableDependencies=false, OutputModelicaCode=false),
+      Evaluate=false,
+      OutputCPUtime=true,
+      OutputFlatModelica=false),
+Documentation(revisions="<html>
 <ul>
   <li>
   August 13, 2017, by Mirko Engelpracht:<br/>
@@ -52,8 +59,7 @@ depending on pressure and temperature.</li>
 <p>
 Additionally, the fitted formulas are also calculated with an external
 media libary (i.e. <a href=\"https://github.com/thorade/HelmholtzMedia\">
-HelmholtzMedia</a>) and errors between the external and
-internal medium are calculated.
+HelmholtzMedia</a>).
 </p>
 </html>"));
 end RefrigerantsFittedFormulasR290;
