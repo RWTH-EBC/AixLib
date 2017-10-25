@@ -1,0 +1,35 @@
+Log-file of program ./dymosim
+(generated: Wed Oct 25 12:31:19 2017)
+
+dymosim started
+... "dsin.txt" loading (dymosim input file)
+... "dsu.txt" loading (input signals u)
+
+... Warning message from dymosim
+The following model input signals are assumed to be at their start-value during
+simulation, since file "dsu.txt" could not be opened
+(No such file or directory):
+   hydraulicBus.Tambient
+
+... "test_Admix.mat" creating (simulation result file)
+
+Integration started at T = 0 using integration method DASSL
+(DAE multi-step solver (dassl/dasslrt of Petzold modified by Dynasim))
+Integration terminated successfully at T = 1000
+   CPU-time for integration      : 0.114 seconds
+   CPU-time for one GRID interval: 0.228 milli-seconds
+   Number of result points       : 504
+   Number of GRID   points       : 501
+   Number of (successful) steps  : 169
+   Number of F-evaluations       : 645
+   Number of H-evaluations       : 669
+   Number of Jacobian-evaluations: 46
+   Number of (model) time events : 2
+   Number of (U) time events     : 0
+   Number of state    events     : 0
+   Number of step     events     : 0
+   Minimum integration stepsize  : 3.34e-005
+   Maximum integration stepsize  : 65.5
+   Maximum integration order     : 5
+Calling terminal section
+... "dsfinal.txt" creating (final states)
