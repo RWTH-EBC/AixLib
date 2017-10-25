@@ -2,16 +2,16 @@ within AixLib.Controls.HVACAgentBasedControl.Agents;
 model HeatProducerAgent
   extends BaseClasses.PartialAgent;
   parameter Real maxCapacity = 100000 "maximum capacity for heatgeneration";
-  parameter Real minCapacity = 0;
-  Real costCurrent(start=40);
-  Real costNew(start=0);
-  Real setCapacity(start=2000);
-  Real costDifference(start=0);
-  Real totalRequest(start=0);
-  Real currentCapacityDiscrete(start=2000);
-  Real maxCapacityInternal;
-  Real calcCapacityInternal(start=1);
-  parameter Boolean maxCapacityExternal=false;
+  parameter Real minCapacity = 0 "minimum capacity for heatgeneration";
+  Real costCurrent(start=40) "Real variable to define costCurrent";
+  Real costNew(start=0) "Real variable to define costNew";
+  Real setCapacity(start=2000) "Real variable to define setCapacity";
+  Real costDifference(start=0) "Real variable to define costDifference";
+  Real totalRequest(start=0) "Real variable to define totalRequest";
+  Real currentCapacityDiscrete(start=2000) "Real variable to define currentCapacityDiscrete";
+  Real maxCapacityInternal "Real variable to define maxCapacityInternal";
+  Real calcCapacityInternal(start=1) "Real variable to define calcCapacityInternal";
+  parameter Boolean maxCapacityExternal=false "Real variable to define maxCapacityExternal";
 
 // CostFunction related components
 

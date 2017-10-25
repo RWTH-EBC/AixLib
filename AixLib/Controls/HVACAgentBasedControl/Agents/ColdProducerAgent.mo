@@ -5,13 +5,13 @@ model ColdProducerAgent
     "Maximum capacity for heat/cold generation (heat positive, cold negative)";
   parameter Real minCapacity = -10000
     "Minimum capacity for heat/cold generation (heat positive, cold negative)";
-  Real minCapacityInternal;
-  Real costCurrent(start=40);
-  Real costNew(start=0);
-  Real setCapacity(start=2000);
-  Real costDifference(start=0);
-  Real totalRequest(start=0);
-  Real currentCapacityDiscrete(start=2000);
+  Real minCapacityInternal "Real variable to define minCapacityInternal";
+  Real costCurrent(start=40) "Real variable to define costCurrent";
+  Real costNew(start=0) "Real variable to define costNew";
+  Real setCapacity(start=2000) "Real variable to define setCapacity";
+  Real costDifference(start=0) "Real variable to define costDifference";
+  Real totalRequest(start=0) "Real variable to define totalRequest";
+  Real currentCapacityDiscrete(start=2000) "Real variable to define currentCapacityDiscrete";
   parameter Boolean maxCapacityExternal=false
     "Use external input for minimal capacity";
 

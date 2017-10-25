@@ -8,7 +8,7 @@ model HeatPump_ExergyDestruction_Heating
   parameter Real tableHeatFlowCondenser[:, :] = fill(0.0, 0, 2)
     "table matrix (grid u1 = first column, grid u2 = first row; e.g., table=[0,0;0,1])";
 
-  Real COP;
+  Real COP "Cooefficient of performance";
 
   Modelica.Blocks.Sources.RealExpression realExpression(y=COP)
     annotation (Placement(transformation(extent={{-84,56},{-64,76}})));
