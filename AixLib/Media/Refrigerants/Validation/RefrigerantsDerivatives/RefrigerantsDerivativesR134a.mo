@@ -590,7 +590,7 @@ algorithm
 </ul>
 </html>", info="<html>
 <p>
-This example models checks the implementation of the<b> refrigerant&apos;s
+This example model checks the implementation of the<b> refrigerant&apos;s
 partial derivatives</b>. Therefore, the user has first to introduce some
 information about the refrigerant and afterwards the partial derivatives
 are calculated. The following <b>refrigerant&apos;s information</b>
