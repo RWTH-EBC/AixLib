@@ -191,6 +191,8 @@ partial model PartialModularExpansionVavles
   // Extends base port model and set base parameters
   //
   extends Fluid.Interfaces.PartialModularPort_b(
+    redeclare replaceable package Medium =
+      WorkingVersion.Media.Refrigerants.R410a.R410a_IIR_P1_48_T233_473_Horner,
     final nPorts=nVal);
 
   // Definition of parameters describing diagnostics
@@ -205,7 +207,7 @@ partial model PartialModularExpansionVavles
   // Definition of connectors
   //
   Controls.Interfaces.ModularHeatPumpControlBus dataBus(
-    final nComp=nVal)
+    final nVal=nVal) "Data bus connector"
     annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
 
 equation
@@ -226,7 +228,6 @@ equation
       points={{0,-100},{0,-78}},
       color={255,204,51},
       thickness=0.5));
-
   annotation (Icon(graphics={
         Polygon(
           points={{0,-50},{-20,-34},{-20,-64},{0,-50}},

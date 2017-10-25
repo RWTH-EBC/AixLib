@@ -131,7 +131,7 @@ package BaseClasses "Package that contains base models used for controllers of m
                   origin={-60,70})));
 
     Interfaces.ModularHeatPumpControlBus dataBus(
-      final nComp=nVal)
+      final nVal=nVal)
       "Data bus with signals to allow control of expansion valves"
       annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
     Modelica.Blocks.Interfaces.RealInput actVal[nVal]
@@ -159,13 +159,13 @@ package BaseClasses "Package that contains base models used for controllers of m
   equation
     // Connect parameters describing if internal or external signal is used
     //
-    connect(useExtBlo, dataBus.extConVal)
+    connect(useExtBlo, dataBus.expValBus.extConVal)
       annotation (Line(points={{-60,0},{-60,-80},{0.05,-80},{0.05,-99.95}},
                   color={255,0,255}));
 
     // Connect output signals
     //
-    connect(actVal, dataBus.actSetSigValve)
+    connect(actVal, dataBus.expValBus.actSetSigValve)
       annotation (Line(points={{60,112},{60,-80},{0.05,-80},{0.05,-99.95}},
                   color={0,0,127}));
 

@@ -1,91 +1,79 @@
 within AixLib.Controls.Interfaces;
 expandable connector ModularHeatPumpControlBus
   "Connector used for modular heat pump controller"
+  extends Modelica.Icons.SignalBus;
 
-  // Definition of parameters describing modular approach in general
+  // Definition of parameters describing the modular approach in general
   //
-  parameter Integer nComp = 1
-    "Number of components that shall be controlled"
+  parameter Integer nVal = 1
+    "Number of expansion valves"
+    annotation(Dialog(tab="General",group="Modular approach"));
+  parameter Integer nEva = nVal
+    "Number of evaporators"
+    annotation(Dialog(tab="General",group="Modular approach",
+               enable=false));
+  parameter Integer nCom = 1
+    "Number of compressors"
+    annotation(Dialog(tab="General",group="Modular approach"));
+  parameter Integer nCon = 1
+    "Number of condensers"
     annotation(Dialog(tab="General",group="Modular approach"));
 
   // Definition of parameters describing controlling system in general
   //
-  parameter Boolean extConCom = false
-    "= true, if external signal is used for compressors"
-    annotation(Dialog(tab="General",group="Controller"));
-  parameter Boolean extConVal = false
-    "= true, if external signal is used for expansion valves"
-    annotation(Dialog(tab="General",group="Controller"));
   parameter Choices.heatPumpMode mode=Choices.heatPumpMode.heatPump
-    "Choose between heat pump or chiller mode"
+    "Choose between heat pump or chiller"
     annotation (Dialog(tab="General", group="Controller"));
 
-  // Definition of variables describing expansion valves
+  // Extensions and propagation of parameters
   //
-  parameter Choices.ControlVariableValve controlVariableValve=
-    Choices.ControlVariableValve.TSupHea
-    "Choose between different control variables for expansion valve"
-    annotation (Dialog(tab="Expansion Valves", group="Control variable"));
-  Real actConVarValve[nComp]
-    "Array of measured values of expansion valves' controlled variables"
-    annotation(Dialog(tab="Expansion Valves",group="Control variable"));
+  ModularExpansionValveControlBus expValBus(
+    final nValCon=nVal)
+    "Bus that contains all relevant connections for modular expansion valves";
+  ModularCompressorControlBus comBus(
+    final nComCon=nCom)
+    "Bus that contains all relevant connections for modular compressors";
+  ModularSensorControlBus senBus(
+    final nValSen=nVal,
+    final nEvaSen=nEva,
+    final nComSen=nCom,
+    final nConSen=nCon)
+    "Bus that contains all relevant connections for modular sensors";
 
-  Real intSetSigValve[nComp]
-    "Array of expansion valves' set signals given internally"
-    annotation(Dialog(tab="Expansion Valves",group="Set signals"));
-  Real extSetSigValve[nComp]
-    "Array of expansion valves' set signals given externally"
-    annotation(Dialog(tab="Expansion Valves",group="Set signals"));
-  Real actSetSigValve[nComp]
-    "Array of expansion valves' actual set signals"
-    annotation(Dialog(tab="Expansion Valves",group="Set signals"));
-
-  Modelica.SIunits.AbsolutePressure senPreValve[nComp]
-    "Array of measured pressures at expansion valves' outlets"
-    annotation(Dialog(tab="Expansion Valves",group="Measurements"));
-  Modelica.SIunits.Temperature senTemValve[nComp]
-    "Array of measured temperatures at expansion valves' outlets"
-    annotation(Dialog(tab="Expansion Valves",group="Measurements"));
-  Modelica.SIunits.MassFlowRate senMasFloValve[nComp]
-    "Array of measured mass flows at expansion valves' outlets"
-    annotation(Dialog(tab="Expansion Valves",group="Measurements"));
-  Real senPhaValve[nComp](unit="1")
-    "Array of measured phases at expansion valves' outlets"
-    annotation(Dialog(tab="Expansion Valves",group="Measurements"));
-
-  // Definition of variables describing compressors
-  //
-
-  // Definition of variables describing measurements
-  //
-
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false),
-        graphics={
-          Rectangle(
-            lineColor={255,204,51},
-            lineThickness=0.5,
-            extent={{-20.0,-2.0},{20.0,2.0}}),
-          Polygon(
-            fillColor={255,215,136},
-            fillPattern=FillPattern.Solid,
-            points={{-80.0,50.0},{80.0,50.0},{100.0,30.0},{80.0,-40.0},
-                    {60.0,-50.0},{-60.0,-50.0},{-80.0,-40.0},{-100.0,30.0}},
-            smooth=Smooth.Bezier),
-          Ellipse(
-            fillPattern=FillPattern.Solid,
-            extent={{-65.0,15.0},{-55.0,25.0}}),
-          Ellipse(
-            fillPattern=FillPattern.Solid,
-            extent={{-5.0,15.0},{5.0,25.0}}),
-          Ellipse(
-            fillPattern=FillPattern.Solid,
-            extent={{55.0,15.0},{65.0,25.0}}),
-          Ellipse(
-            fillPattern=FillPattern.Solid,
-            extent={{-35.0,-25.0},{-25.0,-15.0}}),
-          Ellipse(
-            fillPattern=FillPattern.Solid,
-            extent={{25.0,-25.0},{35.0,-15.0}})}),
-        Diagram(
-          coordinateSystem(preserveAspectRatio=false)));
+  annotation (Documentation(revisions="<html>
+<ul>
+  <li>
+  October 25, 2017, by Mirko Engelpracht:<br/>
+  First implementation
+  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
+  </li>
+</ul>
+</html>", info="<html>
+<p>
+This connector is a base connector used for modular heat pumps and contains 
+typical variables that may be measured in modular heat pumps. Therefore, this
+connector contains three further connectors that are presented below:
+</p>
+<ol>
+<li>
+<a href=\"modelica://AixLib.Controls.Interfaces.ModularExpansionValveControlBus\">
+Modular expansion valves bus</a>: This connector contains variables that
+may be needed for modular expansion valves.
+</li>
+<li>
+<a href=\"modelica://AixLib.Controls.Interfaces.ModularCompressorControlBus\">
+Modular compressors bus</a>: This connector contains variables that
+may be needed for modular compressors.
+</li>
+<li>
+<a href=\"modelica://AixLib.Controls.Interfaces.ModularSensorControlBus\">
+Modular sensors bus</a>: This connector contains variables that
+may be needed for modular sensors.
+</li>
+</ol>
+<p>
+Additionally, the heat pump mode as well as the number of components (e.g.
+expansion valves or compressors) can be selected.
+</p>
+</html>"));
 end ModularHeatPumpControlBus;

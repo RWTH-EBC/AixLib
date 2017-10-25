@@ -75,7 +75,7 @@ model ModularExpansionValvesMassFlowRate
         rotation=-90,
         origin={-40,-70})));
 
-  Controls.Interfaces.ModularHeatPumpControlBus dataBus(nComp=nVal)
+  Controls.Interfaces.ModularHeatPumpControlBus dataBus(nVal=nVal)
     "Data bus used to enable communication with dummy signals" annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -119,13 +119,13 @@ equation
     annotation(Line(points={{-22,0},{0,0}},
                color={255,204,51},
                thickness=0.5));
-  connect(replicatorValveOpening.y, dataBus.extSetSigValve)
+  connect(replicatorValveOpening.y, dataBus.expValBus.extManSigVal)
     annotation(Line(points={{19,50},{10,50},{10,0.05},{-0.05,0.05}},
                color={0,0,127}));
-  connect(replicatorInternal.y, dataBus.intSetSigValve)
+  connect(replicatorInternal.y, dataBus.expValBus.intSetSigVal)
     annotation(Line(points={{19,0},{10,0},{10,0.05},{-0.05,0.05}},
                color={0,0,127}));
-  connect(replicatorActual.y, dataBus.actConVarValve)
+  connect(replicatorActual.y, dataBus.expValBus.actConVarVal)
     annotation(Line(points={{19,-50},{10,-50},{10,0.05},{-0.05,0.05}},
                color={0,0,127}));
 

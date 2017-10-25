@@ -1,2 +1,5 @@
 HeatPumpControlBus
 ModularHeatPumpControlBus
+ModularCompressorControlBus
+ModularExpansionValveControlBus
+ModularSensorControlBus

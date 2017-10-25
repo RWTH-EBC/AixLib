@@ -95,19 +95,19 @@ equation
 
   // Connect sensors with data bus
   //
-  connect(modularSensors.preMea, dataBus.senPreValve)
+  connect(modularSensors.preMea, dataBus.senBus.senPreVal)
     annotation (Line(points={{34,-10},{34,-90},{0.05,-90},{0.05,-99.95}},
                 color={0,0,127}));
-  connect(modularSensors.temMea, dataBus.senTemValve)
+  connect(modularSensors.temMea, dataBus.senBus.senTemVal)
     annotation (Line(points={{38,-10},{38,-90},{0.05,-90},{0.05,-99.95}},
                 color={0,0,127}));
-  connect(modularSensors.masFloMea, dataBus.senMasFloValve)
+  connect(modularSensors.masFloMea, dataBus.senBus.senMasFloVal)
     annotation (Line(points={{42,-10},{42,-90},{0.05,-90},{0.05,-99.95}},
                 color={0,0,127}));
-  connect(modularSensors.quaMea, dataBus.senPhaValve)
-    annotation (Line(points={{46,-10},{46,-10},{46,-20},{46,-90},
-                {0.05,-90},{0.05,-99.95}},
-                color={0,0,127}));
+  connect(modularSensors.quaMea, dataBus.senBus.senPhaVal)
+    annotation (Line(points={{46,-10},{46,-10},{46,-20},{46,-90},{0.05,-90},{0.05,
+          -99.95}},color={0,0,127}));
+
 
   annotation (Documentation(revisions="<html>
 <ul>
@@ -118,4 +118,6 @@ equation
   </li>
 </ul>
 </html>"));
+
+
 end ModularExpansionValvesSensorsPipes;
