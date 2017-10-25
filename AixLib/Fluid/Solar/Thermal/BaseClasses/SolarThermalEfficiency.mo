@@ -13,7 +13,7 @@ model SolarThermalEfficiency
   Modelica.Blocks.Interfaces.RealOutput Q_flow(unit="W/m2")
     "Useful heat flow from solar collector in W/m2" annotation(Placement(transformation(extent = {{98, -10}, {118, 10}})));
 protected
-  Real eta "Efficiency of solar thermal collector";
+  Modelica.SIunits.Efficiency eta(max=Collector.eta_zero) "Efficiency of solar thermal collector";
   Modelica.SIunits.TemperatureDifference dT
     "Temperature difference between collector and air in K";
 equation
