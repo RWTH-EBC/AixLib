@@ -1,6 +1,6 @@
 within AixLib.Fluid.Interfaces;
 model PortAThroughPortsB
-  "Model to conenct single port port_a to fluid port bus ports_b"
+  "Model to connect single port port_a to fluid port bus ports_b"
 
   // Definition of parameters describing the modular approach in general
   //
@@ -53,5 +53,31 @@ equation
           points={{90,40},{0,40},{-100,10},{-110,10},{-110,-10},{-100,-10},{0,
               -40},{110,-40},{110,40},{90,40}},
           color={0,0,0},
-          thickness=1)}));
+          thickness=1)}), Documentation(revisions="<html>
+<ul>
+  <li>
+  October 16, 2017, by Mirko Engelpracht:<br/>
+  First implementation
+  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
+  </li>
+</ul>
+</html>", info="<html>
+<p>
+This component transports fluid between its signle inlet and multiple outlet
+ports, without storing mass or energy. Therefore, all inlet ports
+<code>ports_a</code> are simply connected with the outlet port
+<code>port_b[i]</code>.
+</p>
+<h4>Implementation</h4>
+<p>
+This component is required to connect models extending from
+<code>PartialModularPort_a</code> or <code>PartialModularPort_ab</code> with, 
+for example, boundary models prestended in 
+<a href=\"modelica://AixLib.Fluid.Sources\">AixLib.Fluid.Sources</a>. These
+models are not directly connectable because the models presented in
+AixLib.Fluid.Sources need undefined port sizes and that does not hold for
+models extending from <code>PartialModularPort_a</code> or 
+<code>PartialModularPort_ab</code>.
+</p>
+</html>"));
 end PortAThroughPortsB;

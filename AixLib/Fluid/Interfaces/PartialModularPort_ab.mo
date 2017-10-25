@@ -5,7 +5,7 @@ partial model PartialModularPort_ab
   // Definition of the medium model
   //
   replaceable package Medium =
-    Modelica.Media.Interfaces.PartialTwoPhaseMedium
+    Modelica.Media.R134a.R134a_ph
     constrainedby Modelica.Media.Interfaces.PartialTwoPhaseMedium
     "Medium in the component"
     annotation (choicesAllMatching = true);
@@ -56,5 +56,41 @@ partial model PartialModularPort_ab
     annotation (Placement(transformation(extent={{90,40},{110,-40}})));
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(revisions="<html>
+<ul>
+  <li>
+  October 16, 2017, by Mirko Engelpracht:<br/>
+  First implementation
+  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
+  </li>
+</ul>
+</html>", info="<html>
+<p>
+This component transports fluid between its multiple inlet and outlet
+ports, without storing mass or energy. Energy may be exchanged with the 
+environment though, for example, in the form of work. 
+<code>PartialModularPort_a</code> is intended as base class for devices like 
+modular sensors that are used, for example, in modular heat pumps.
+</p>
+<p>
+Three equations need to be added by an extending class using this component:
+</p>
+<ul>
+<li>The momentum balance specifying the relationship between the pressure drops 
+<code>dp_i</code> and the mass flow rates <code>m_flow_i</code> if these 
+variables are introduced by the modeller</li>
+<li><code>port_b.h_outflow_i</code> for flow in design direction.</li>
+<li><code>port_a.h_outflow_i</code> for flow in reverse direction.</li>
+</ul>
+<p>
+Moreover appropriate values shall be assigned to the following parameters:
+</p>
+<ul>
+<li><code>dp_start</code> for a guess of the pressure drop</li>
+<li><code>m_flow_small</code> for regularization of zero flow.</li>
+<li><code>dp_nominal</code> for nominal pressure drop.</li>
+<li><code>m_flow_nominal</code> for nominal mass flow rate.</li>
+</ul>
+</html>"));
 end PartialModularPort_ab;
