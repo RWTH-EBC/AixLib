@@ -118,6 +118,4 @@ equation
   </li>
 </ul>
 </html>"));
-
-
 end ModularExpansionValvesSensorsPipes;
