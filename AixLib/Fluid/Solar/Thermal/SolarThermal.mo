@@ -57,6 +57,11 @@ equation
  <p><a href=\"AixLib.HVAC.HeatGeneration.Examples.SolarThermalCollector\">AixLib.HVAC.HeatGeneration.Examples.SolarThermalCollector</a></p>
  </html>", revisions="<html>
  <ul>
+ <li><i>October 25, 2016</i> by Philipp Mehrfeld:<br/>Extend now from 
+   <a href=\"modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator\">
+   AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>.
+   <br/>Use mean temperature.
+   <br/>Limiter moved in equation section of efficiency model.</li>
  <li><i>December 15, 2016</i> by Moritz Lauster:<br/>Moved</li>
  <li><i>November 2014&nbsp;</i>
     by Marcus Fuchs:<br/>
