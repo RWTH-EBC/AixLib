@@ -1,18 +1,18 @@
 within AixLib.Fluid.Solar.Thermal;
 model SolarThermal "Model of a solar thermal panel"
   import AixLib;
-  extends AixLib.Fluid.HeatExchangers.BaseClasses.PartialHeatGen(
-    volume(redeclare package Medium = Medium),
-    massFlowSensor(redeclare package Medium = Medium),
-    T_in(redeclare package Medium = Medium));
-  parameter Real A = 1 "Area of solar thermal collector in m2";
+  extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(vol(V=vol));
+  parameter Modelica.SIunits.Area A "Area of solar thermal collector"
+    annotation(Dialog(group = "Construction measures"));
+  parameter Modelica.SIunits.Volume volume "Water volume of piping"
+    annotation(Dialog(group = "Construction measures"));
   parameter AixLib.DataBase.SolarThermal.SolarThermalBaseDataDefinition
     Collector = AixLib.DataBase.SolarThermal.SimpleAbsorber()
-    "Properties of Solar Thermal Collector"                                                                                                     annotation(choicesAllMatching = true);
+    "Properties of Solar Thermal Collector"
+     annotation(Dialog(group = "Efficienc"), choicesAllMatching = true);
   Modelica.Blocks.Interfaces.RealInput T_air "Outdoor air temperature in K" annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 270, origin = {-60, 108})));
   Modelica.Blocks.Interfaces.RealInput Irradiation
     "Solar irradiation on a horizontal plane in W/m2" annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 270, origin = {10, 108})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {0, 34})));
   AixLib.Fluid.Solar.Thermal.BaseClasses.SolarThermalEfficiency
     solarThermalEfficiency(Collector=Collector)
     annotation (Placement(transformation(extent={{-76,48},{-56,68}})));
@@ -22,15 +22,11 @@ model SolarThermal "Model of a solar thermal panel"
 equation
   connect(T_air, solarThermalEfficiency.T_air) annotation(Line(points = {{-60, 108}, {-60, 78}, {-71, 78}, {-71, 68.6}}, color = {0, 0, 127}));
   connect(solarThermalEfficiency.G, Irradiation) annotation(Line(points = {{-65, 68.6}, {-65, 74}, {10, 74}, {10, 108}}, color = {0, 0, 127}));
-  connect(prescribedHeatFlow.port, volume.heatPort) annotation(Line(points={{0,24},{
-          -10,10}},                                                                              color = {191, 0, 0}));
   connect(solarThermalEfficiency.Q_flow, max1.u1) annotation(Line(points = {{-55.2, 58}, {-52, 58}, {-52, 56}, {-48, 56}}, color = {0, 0, 127}));
   connect(const.y, max1.u2) annotation(Line(points = {{-57.6, 34}, {-54, 34}, {-54, 44}, {-48, 44}}, color = {0, 0, 127}));
   connect(max1.y, gain.u) annotation(Line(points = {{-25, 50}, {-17.2, 50}}, color = {0, 0, 127}));
-  connect(gain.y, prescribedHeatFlow.Q_flow) annotation(Line(points = {{-3.4, 50}, {0, 50}, {0, 44}}, color = {0, 0, 127}));
-  connect(T_in.T, solarThermalEfficiency.T_col) annotation (Line(
-      points={{-70,11},{-71,47.4}},
-      color={0,0,127}));
+  connect(gain.y, heater.Q_flow) annotation (Line(points={{-3.4,50},{12,50},{12,
+          -30},{-60,-30},{-60,-40}}, color={0,0,127}));
   annotation (Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p><br/>Model of a solar thermal collector. Inputs are outdoor air temperature and solar irradiation. Based on these values and the collector properties from database, this model creates a heat flow to the fluid circuit.</p>
