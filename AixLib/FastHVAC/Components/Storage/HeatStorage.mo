@@ -5,17 +5,17 @@ model HeatStorage "Simple model of a heat storage"
   /* *******************************************************************
       Medium
      ******************************************************************* */
- parameter AixLib.FastHVAC.Media.BaseClass.MediumSimple medium=
+ parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple medium=
       AixLib.FastHVAC.Media.WaterSimple()
     "Mediums charastics (heat capacity, density, thermal conductivity)"
     annotation(Dialog(group="Medium"),choicesAllMatching);
 
-     parameter AixLib.FastHVAC.Media.BaseClass.MediumSimple mediumHC1=
+     parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple mediumHC1=
       AixLib.FastHVAC.Media.WaterSimple()
     "Mediums charastics for HC1 (heat capacity, density, thermal conductivity)"
     annotation(Dialog(group="Medium"),choicesAllMatching);
 
-     parameter AixLib.FastHVAC.Media.BaseClass.MediumSimple mediumHC2=
+     parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple mediumHC2=
       AixLib.FastHVAC.Media.WaterSimple()
     "Mediums charastics for HC2 (heat capacity, density, thermal conductivity)"
     annotation(Dialog(group="Medium"),choicesAllMatching);
@@ -114,13 +114,13 @@ public
             {10,-110},{30,-90}})));
 
 public
-  FastHVAC.BaseClass.EnergyBalance   energyBalance_load[n]
+  FastHVAC.BaseClasses.EnergyBalance   energyBalance_load[n]
     annotation (Placement(transformation(
         extent={{-20,-19},{20,19}},
         rotation=270,
         origin={-41,0})));
 
-  FastHVAC.BaseClass.EnergyBalance   energyBalance_unload[n]
+  FastHVAC.BaseClasses.EnergyBalance   energyBalance_unload[n]
     annotation (Placement(transformation(
         extent={{-20,20},{20,-20}},
         rotation=270,
@@ -202,13 +202,12 @@ public
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,-46})));
-   BaseClasses.HeatTransfer_OnlyConduction
-                heatTransfer annotation (Placement(transformation(extent={{-8,18},
-            {12,38}},  rotation=0)));
+  BaseClasses.HeatTransferOnlyConduction heatTransfer annotation (Placement(
+        transformation(extent={{-8,18},{12,38}}, rotation=0)));
 
     replaceable model HeatTransfer =
-     BaseClasses.HeatTransfer_OnlyConduction constrainedby
-    BaseClasses.Partial_HeatTransfer_Layers
+     BaseClasses.HeatTransferOnlyConduction  constrainedby
+    BaseClasses.PartialHeatTransferLayers
     "Heat Transfer Model between fluid layers" annotation (choicesAllMatching=true,
       Documentation(info =                             "<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>

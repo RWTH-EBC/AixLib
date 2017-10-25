@@ -18,7 +18,7 @@ model CHP_PT1 "Simple general CHP model"
     "CHP's thermal efficiency "
     annotation (Dialog(group = "Unit properties",enable=not selectable));
 
-    parameter FastHVAC.Media.BaseClass.MediumSimple medium=
+    parameter FastHVAC.Media.BaseClasses.MediumSimple medium=
       FastHVAC.Media.WaterSimple()
     "Standard flow charastics for water (heat capacity, density, thermal conductivity)"    annotation (choicesAllMatching);
     constant Real LHV(unit="J/kg")=47300000 "Lower heating value [J/kg]";
@@ -56,7 +56,7 @@ public
     initType=Modelica.Blocks.Types.Init.SteadyState)
     "dynamic behavior of electrical power output [W]"
     annotation (Placement(transformation(extent={{0,16},{20,36}})));
-    FastHVAC.BaseClass.WorkingFluid fluidCHP(
+    FastHVAC.BaseClasses.WorkingFluid fluidCHP(
     medium=medium,
     m_fluid=V_water*medium.rho,
     T0=T0)

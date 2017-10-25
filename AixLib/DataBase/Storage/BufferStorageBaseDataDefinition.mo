@@ -36,8 +36,8 @@ record BufferStorageBaseDataDefinition
   parameter DataBase.Pipes.PipeBaseDataDefinition pipeHC2
     "Type of Pipe for HR2";
 
-  parameter Modelica.SIunits.Length lengthHC1 "Length of Pipe for HR1";
-  parameter Modelica.SIunits.Length lengthHC2 "Length of Pipe for HR2";
+  parameter Modelica.SIunits.Length lengthHC1 "Length of Pipe for HC1";
+  parameter Modelica.SIunits.Length lengthHC2 "Length of Pipe for HC2";
 
   annotation (Icon(graphics),               Documentation(info="<html>
 <h4><font color=\"#008000\">Overview</font></h4>
