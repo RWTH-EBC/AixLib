@@ -205,7 +205,7 @@ equation
           fillPattern=FillPattern.Solid,
           textString="ExergyIn"),
         Text(
-          extent={{42,76},{90,68}},
+          extent={{40,82},{94,68}},
           lineColor={0,0,0},
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid,

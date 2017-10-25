@@ -11,7 +11,7 @@ model HeatingRod_ExergyDestruction_Simplified
   Modelica.Blocks.Math.Division division1
     annotation (Placement(transformation(extent={{-66,-22},{-46,-2}})));
   Modelica.Blocks.Sources.RealExpression realExpression1(y=T_0)
-    annotation (Placement(transformation(extent={{-96,-12},{-76,8}})));
+    annotation (Placement(transformation(extent={{-96,-2},{-76,18}})));
   Modelica.Blocks.Math.Add add(k2=-1)
     annotation (Placement(transformation(extent={{-32,-4},{-12,16}})));
   Modelica.Blocks.Sources.RealExpression realExpression3(y=1)
@@ -26,21 +26,21 @@ model HeatingRod_ExergyDestruction_Simplified
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=0,
-        origin={-100,-68}), iconTransformation(
+        origin={-118,-30}), iconTransformation(
         extent={{-20,-20},{20,20}},
         rotation=0,
         origin={-80,-26})));
   Modelica.Blocks.Math.Max min
     annotation (Placement(transformation(extent={{-84,-32},{-74,-22}})));
   Modelica.Blocks.Sources.RealExpression realExpression2(y=274.15)
-    annotation (Placement(transformation(extent={{-96,-22},{-76,-2}})));
+    annotation (Placement(transformation(extent={{-96,-20},{-76,0}})));
 equation
   connect(division.u2, realExpression.y) annotation (Line(
       points={{-28,60},{-59,60}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(division1.u1, realExpression1.y) annotation (Line(
-      points={{-68,-6},{-72,-6},{-72,-2},{-75,-2}},
+      points={{-68,-6},{-72,-6},{-72,8},{-75,8}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(division1.y, add.u2) annotation (Line(
@@ -56,7 +56,7 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(capacity, product.u2) annotation (Line(
-      points={{-40,-100},{-40,-34},{-10,-34},{-10,-6},{2,-6}},
+      points={{-40,-100},{-40,-34},{-8,-34},{-8,-6},{2,-6}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(division.u1, product.u2) annotation (Line(
@@ -77,10 +77,10 @@ equation
           44}}, color={0,0,127}));
   connect(min.y, division1.u2) annotation (Line(points={{-73.5,-27},{-68,
           -27},{-68,-18}}, color={0,0,127}));
-  connect(min.u1, realExpression2.y) annotation (Line(points={{-85,-24},{
-          -90,-24},{-90,-18},{-75,-18},{-75,-12}}, color={0,0,127}));
-  connect(min.u2, T_circuit) annotation (Line(points={{-85,-30},{-96,-30},{-96,-68},
-          {-100,-68}},           color={0,0,127}));
+  connect(min.u1, realExpression2.y) annotation (Line(points={{-85,-24},{-90,
+          -24},{-90,-18},{-75,-18},{-75,-10}},     color={0,0,127}));
+  connect(min.u2, T_circuit) annotation (Line(points={{-85,-30},{-118,-30}},
+                                 color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),
                          graphics={Rectangle(
@@ -102,7 +102,7 @@ equation
           textString="Heating Rod")}),      Diagram(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={
         Rectangle(
-          extent={{36,86},{96,-32}},
+          extent={{36,86},{94,-50}},
           lineColor={0,0,0},
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid),
@@ -129,7 +129,7 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Exergy Product"),
         Text(
-          extent={{42,76},{90,68}},
+          extent={{40,78},{94,64}},
           lineColor={0,0,0},
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid,
