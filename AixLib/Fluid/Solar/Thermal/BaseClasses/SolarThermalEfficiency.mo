@@ -1,7 +1,6 @@
 within AixLib.Fluid.Solar.Thermal.BaseClasses;
 model SolarThermalEfficiency
   "Calculates the efficiency of a solar thermal collector"
-  import AixLib;
   parameter AixLib.DataBase.SolarThermal.SolarThermalBaseDataDefinition
     Collector = AixLib.DataBase.SolarThermal.SimpleAbsorber()
     "Properties of Solar Thermal Collector" annotation(choicesAllMatching = true);
