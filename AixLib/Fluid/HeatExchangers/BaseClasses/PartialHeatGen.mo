@@ -6,15 +6,22 @@ partial model PartialHeatGen
   parameter Modelica.SIunits.Temperature T_ref = 293.15;
   Fluid.MixingVolumes.MixingVolume
                 volume(
-    m_flow_nominal=0.01,
-    V=0.01,
-    nPorts=2)          annotation(Placement(transformation(extent={{-10,0},{10,20}})));
+    nPorts=2,
+    redeclare package Medium = Medium,
+    final m_flow_nominal=m_flow_nominal,
+    final m_flow_small=m_flow_small,
+    final allowFlowReversal=allowFlowReversal,
+    V=vol)             annotation(Placement(transformation(extent={{-10,0},{10,20}})));
 
   Fluid.Sensors.TemperatureTwoPort
-                            T_in(
-      m_flow_nominal=0.01)                      annotation(Placement(transformation(extent = {{-80, -10}, {-60, 10}})));
+                            T_in(redeclare package Medium = Medium,
+      m_flow_nominal=m_flow_nominal)            annotation(Placement(transformation(extent = {{-80, -10}, {-60, 10}})));
   Fluid.Sensors.MassFlowRate
                          massFlowSensor annotation(Placement(transformation(extent = {{-50, -10}, {-30, 10}})));
+  Fluid.Sensors.TemperatureTwoPort
+                            T_out(redeclare package Medium = Medium,
+      m_flow_nominal=m_flow_nominal)            annotation(Placement(transformation(extent={{30,-10},
+            {50,10}})));
 equation
   connect(port_a, T_in.port_a) annotation (Line(
       points={{-100,0},{-80,0}},
@@ -25,9 +32,10 @@ equation
   connect(massFlowSensor.port_b, volume.ports[1]) annotation (Line(
       points={{-30,0},{-2,0}},
       color={0,127,255}));
-  connect(volume.ports[2], port_b) annotation (Line(
-      points={{2,0},{100,0}},
-      color={0,127,255}));
+  connect(volume.ports[2], T_out.port_a)
+    annotation (Line(points={{2,0},{30,0}}, color={0,127,255}));
+  connect(T_out.port_b, port_b)
+    annotation (Line(points={{50,0},{100,0}}, color={0,127,255}));
   annotation(Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>This partial model is a base class for modelling all heat generation
