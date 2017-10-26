@@ -100,8 +100,8 @@ Implemented</li>
 </ul>
 </html>"),
     experiment(
-      StopTime=400000,
-      Interval=30,
+      StopTime=10800,
+      Interval=60,
       __Dymola_Algorithm="Lsodar"),
     experimentSetupOutput(events=false));
 end DPEAgg_ambientLoss;
