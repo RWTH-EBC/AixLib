@@ -1,38 +1,38 @@
 within AixLib.Controls.Interfaces;
 expandable connector ModularCompressorControlBus
-  "Connector used for modular expansion valve controller"
+  "Connector used for modular compressor controller"
   extends Modelica.Icons.SignalBus;
 
   // Definition of parameters describing modular approach in general
   //
   parameter Integer nComCon = 1
-    "Number of expansion valves that shall be controlled"
+    "Number of compressors valves that shall be controlled"
     annotation(Dialog(tab="Compressors",group="General"));
 
   // Definition of parameters describing controlling system in general
   //
   parameter Boolean extConCom = false
-    "= true, if external signal is used for expansion valves"
+    "= true, if external signal is used for compressors"
     annotation(Dialog(tab="Compressors",group="General"));
 
-  // Definition of variables describing expansion valves
+  // Definition of variables describing compressors
   //
-  parameter WorkingVersion.Controls.Choices.ControlVariable controlVariableCom=
-      WorkingVersion.Controls.Choices.ControlVariable.THea
+  parameter Types.ControlVariable conVarCom=
+      Types.ControlVariable.THea
     "Choose between different control variables for compressors"
     annotation (Dialog(tab="Compressors", group="Control variable"));
-  Real actConVarCom[nComCon]
+  Real meaConVarCom[nComCon]
     "Array of measured values of compressors' controlled variables"
     annotation(Dialog(tab="Compressors",group="Control variable"));
 
-  Real intSetSigCom[nComCon]
-    "Array of compressors' set signals given for internal controllers"
+  Real intSetPoiCom[nComCon]
+    "Array of compressors' set points given for internal controllers"
     annotation(Dialog(tab="Compressors",group="Set signals"));
-  Real extSetSigCom[nComCon]
-    "Array of compressors' manipulated signals (rotational speeds) given externally"
+  Real extManVarCom[nComCon]
+    "Array of compressors' manipulated variables (rotational speeds) given externally"
     annotation(Dialog(tab="Compressors",group="Manipulated signals"));
-  Real actSetSigCom[nComCon]
-    "Array of compressors' actual manipulated signals (rotational speeds)"
+  Real curManVarCom[nComCon]
+    "Array of compressors' current manipulated variables (rotational speeds)"
     annotation(Dialog(tab="Compressors",group="Manipulated signals"));
 
   annotation (Documentation(revisions="<html>

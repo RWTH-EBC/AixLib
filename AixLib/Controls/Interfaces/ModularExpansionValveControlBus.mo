@@ -17,22 +17,22 @@ expandable connector ModularExpansionValveControlBus
 
   // Definition of variables describing expansion valves
   //
-  parameter WorkingVersion.Controls.Choices.ControlVariable controlVariableVal=
-      WorkingVersion.Controls.Choices.ControlVariable.TSupHea
+  parameter Types.ControlVariable conVarVal=
+      Types.ControlVariable.TSupHea
     "Choose between different control variables for expansion valves"
     annotation (Dialog(tab="Expansion Valves", group="Control variable"));
-  Real actConVarVal[nValCon]
+  Real meaConVarVal[nValCon]
     "Array of measured values of expansion valves' controlled variables"
     annotation(Dialog(tab="Expansion Valves",group="Control variable"));
 
-  Real intSetSigVal[nValCon]
-    "Array of expansion valves' set signals given for internal controllers"
+  Real intSetPoiVal[nValCon]
+    "Array of expansion valves' set points given for internal controllers"
     annotation(Dialog(tab="Expansion Valves",group="Set signals"));
-  Real extManSigVal[nValCon]
-    "Array of expansion valves' manipulated signals (openings) given externally"
+  Real extManVarVal[nValCon]
+    "Array of expansion valves' manipulated variables (openings) given externally"
     annotation(Dialog(tab="Expansion Valves",group="Manipulated signals"));
-  Real actManSigVal[nValCon]
-    "Array of expansion valves' actual manipulated signals (openings)"
+  Real curManVarVal[nValCon]
+    "Array of expansion valves' current manipulated variables (openings)"
     annotation(Dialog(tab="Expansion Valves",group="Manipulated signals"));
 
   annotation (Documentation(revisions="<html>

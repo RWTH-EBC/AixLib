@@ -21,19 +21,20 @@ expandable connector ModularHeatPumpControlBus
 
   // Definition of parameters describing controlling system in general
   //
-  parameter WorkingVersion.Controls.Choices.heatPumpMode mode=WorkingVersion.Controls.Choices.heatPumpMode.heatPump
+  parameter Types.heatPumpMode mode=
+    Types.heatPumpMode.heatPump
     "Choose between heat pump or chiller"
     annotation (Dialog(tab="General", group="Controller"));
 
   // Extensions and propagation of parameters
   //
-  WorkingVersion.Controls.Interfaces.ModularExpansionValveControlBus expValBus(final
+  ModularExpansionValveControlBus expValBus(final
       nValCon=nVal)
     "Bus that contains all relevant connections for modular expansion valves";
-  WorkingVersion.Controls.Interfaces.ModularCompressorControlBus comBus(final
+  ModularCompressorControlBus comBus(final
       nComCon=nCom)
     "Bus that contains all relevant connections for modular compressors";
-  WorkingVersion.Controls.Interfaces.ModularSensorControlBus senBus(
+  ModularSensorControlBus senBus(
     final nValSen=nVal,
     final nEvaSen=nEva,
     final nComSen=nCom,

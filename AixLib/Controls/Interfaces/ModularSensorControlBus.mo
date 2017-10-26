@@ -24,91 +24,91 @@ expandable connector ModularSensorControlBus
 
   // Definition of variables describing expansion valves
   //
-  Modelica.SIunits.AbsolutePressure senPreVal[nValSen]
+  Modelica.SIunits.AbsolutePressure meaPreVal[nValSen]
     "Array of measured pressures at expansion valves' outlets"
     annotation(Dialog(tab="Measurements",group="Expansion Valves"));
-  Modelica.SIunits.Temperature senTemVal[nValSen]
+  Modelica.SIunits.Temperature meaTemVal[nValSen]
     "Array of measured temperatures at expansion valves' outlets"
     annotation(Dialog(tab="Measurements",group="Expansion Valves"));
-  Modelica.SIunits.MassFlowRate senMasFloVal[nValSen]
+  Modelica.SIunits.MassFlowRate meaMasFloVal[nValSen]
     "Array of measured mass flow rates at expansion valves' outlets"
     annotation(Dialog(tab="Measurements",group="Expansion Valves"));
-  Real senPhaVal[nValSen](unit="1")
+  Real meaPhaVal[nValSen](unit="1")
     "Array of measured phases at expansion valves' outlets"
     annotation(Dialog(tab="Measurements",group="Expansion Valves"));
 
   // Definition of variables describing evaporators
   //
-  Modelica.SIunits.AbsolutePressure senPreEva[nEvaSen]
+  Modelica.SIunits.AbsolutePressure meaPreEva[nEvaSen]
     "Array of measured pressures at evaporators' outlets"
     annotation(Dialog(tab="Measurements",group="Evaporators"));
-  Modelica.SIunits.Temperature senTemEva[nEvaSen]
+  Modelica.SIunits.Temperature meaTemEva[nEvaSen]
     "Array of measured temperatures at evaporators' outlets"
     annotation(Dialog(tab="Measurements",group="Evaporators"));
-  Modelica.SIunits.MassFlowRate senMasFloEva[nEvaSen]
+  Modelica.SIunits.MassFlowRate meaMasFloEva[nEvaSen]
     "Array of measured mass flow rates at evaporators' outlets"
     annotation(Dialog(tab="Measurements",group="Evaporators"));
-  Real senPhaEva[nEvaSen](unit="1")
+  Real meaPhaEva[nEvaSen](unit="1")
     "Array of measured phases at evaporators' outlets"
     annotation(Dialog(tab="Measurements",group="Evaporators"));
 
   // Definition of variables describing compressors
   //
-  Modelica.SIunits.AbsolutePressure senPreCom[nComSen]
+  Modelica.SIunits.AbsolutePressure meaPreCom[nComSen]
     "Array of measured pressures at compressors' outlets"
     annotation(Dialog(tab="Measurements",group="Compressors"));
-  Modelica.SIunits.Temperature senTemCom[nComSen]
+  Modelica.SIunits.Temperature meaTemCom[nComSen]
     "Array of measured temperatures at compressors' outlets"
     annotation(Dialog(tab="Measurements",group="Compressors"));
-  Modelica.SIunits.MassFlowRate senMasFloCom[nComSen]
+  Modelica.SIunits.MassFlowRate meaMasFloCom[nComSen]
     "Array of measured mass flow rates at compressors' outlets"
     annotation(Dialog(tab="Measurements",group="Compressors"));
-  Real senPhaCom[nComSen](unit="1")
+  Real meaPhaCom[nComSen](unit="1")
     "Array of measured phases at compressors' outlets"
     annotation(Dialog(tab="Measurements",group="Compressors"));
 
   // Definition of variables describing condensers
   //
-  Modelica.SIunits.AbsolutePressure senPreCon[nConSen]
+  Modelica.SIunits.AbsolutePressure meaPreCon[nConSen]
     "Array of measured pressures at expansion valves' outlets"
     annotation(Dialog(tab="Measurements",group="Condensers"));
-  Modelica.SIunits.Temperature senTemCon[nConSen]
+  Modelica.SIunits.Temperature meaTemCon[nConSen]
     "Array of measured temperatures at expansion valves' outlets"
     annotation(Dialog(tab="Measurements",group="Condensers"));
-  Modelica.SIunits.MassFlowRate senMasFloCon[nConSen]
+  Modelica.SIunits.MassFlowRate meaMasFloCon[nConSen]
     "Array of measured mass flow rates at expansion valves' outlets"
     annotation(Dialog(tab="Measurements",group="Condensers"));
-  Real senPhaCon[nConSen](unit="1")
+  Real meaPhaCon[nConSen](unit="1")
     "Array of measured phases at expansion valves' outlets"
     annotation(Dialog(tab="Measurements",group="Condensers"));
 
   // Definition of variables describing heat pumps sources
   //
-  Modelica.SIunits.AbsolutePressure senPreEvaSou[nEvaSen]
+  Modelica.SIunits.AbsolutePressure meaPreEvaSou[nEvaSen]
     "Array of measured pressures at source-sided evaporators' outlets"
     annotation(Dialog(tab="Measurements",group="Sources"));
-  Modelica.SIunits.Temperature senTemEvaSouInl[nEvaSen]
+  Modelica.SIunits.Temperature meaTemEvaSouInl[nEvaSen]
     "Array of measured temperatures at source-sided evaporators' inlets"
     annotation(Dialog(tab="Measurements",group="Sources"));
-  Modelica.SIunits.Temperature senTemEvaSouOut[nEvaSen]
+  Modelica.SIunits.Temperature meaTemEvaSouOut[nEvaSen]
     "Array of measured temperatures at source-sided evaporators' outlet"
     annotation(Dialog(tab="Measurements",group="Sources"));
-  Modelica.SIunits.MassFlowRate senMasFloEvaSou[nEvaSen]
+  Modelica.SIunits.MassFlowRate meaMasFloEvaSou[nEvaSen]
     "Array of measured mass flow rates source-sided at evaporators' outlets"
     annotation(Dialog(tab="Measurements",group="Sources"));
 
   // Definition of variables describing heat pumps sinks
   //
-  Modelica.SIunits.AbsolutePressure senPreConSin[nConSen]
+  Modelica.SIunits.AbsolutePressure meaPreConSin[nConSen]
     "Array of measured pressures at sink-sided expansion valves' outlets"
     annotation(Dialog(tab="Measurements",group="Sinks"));
-  Modelica.SIunits.Temperature senTemConSinInl[nConSen]
+  Modelica.SIunits.Temperature meaTemConSinInl[nConSen]
     "Array of measured temperatures at sink-sided expansion valves' inlets"
     annotation(Dialog(tab="Measurements",group="Sinks"));
-  Modelica.SIunits.Temperature senTemConSinOut[nConSen]
+  Modelica.SIunits.Temperature meaTemConSinOut[nConSen]
     "Array of measured temperatures at sink-sided expansion valves' outlets"
     annotation(Dialog(tab="Measurements",group="Sinks"));
-  Modelica.SIunits.MassFlowRate senMasFloConSin[nConSen]
+  Modelica.SIunits.MassFlowRate meaMasFloConSin[nConSen]
     "Array of measured mass flow rates at sink-sided expansion valves' outlets"
     annotation(Dialog(tab="Measurements",group="Sinks"));
 
