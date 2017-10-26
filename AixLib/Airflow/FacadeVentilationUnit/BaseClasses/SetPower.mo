@@ -24,8 +24,8 @@ model SetPower
         origin={0,-56})));
   Modelica.Blocks.Interfaces.RealInput powerShare(
     min=0,
-    max=100,
-    nominal=60) "power share (percentage) for fan" annotation (Placement(
+    max=1,
+    nominal=0.6) "Power share 0..1 for fan" annotation (Placement(
         transformation(
         origin={0,-100},
         extent={{-20,-20},{20,20}},
@@ -45,7 +45,7 @@ model SetPower
     "Mass-flow-controlled mover setting mass flow rate from table"
     annotation (Placement(transformation(extent=
     {{-10,10},{10,-10}})));
-  Modelica.Blocks.Math.Gain transforMassFlow(k=1.2/3600*noUnits)
+  Modelica.Blocks.Math.Gain transforMassFlow(k=1.2/3600*noUnits, y(unit="kg/s"))
     "Used to transform the volume flow rate in m3/h into a mass flow rate in kg/s"
     annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
