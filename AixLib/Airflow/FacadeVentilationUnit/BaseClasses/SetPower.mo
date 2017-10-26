@@ -92,23 +92,23 @@ equation
           fillPattern=FillPattern.Solid),
         Ellipse(extent={{-30,68},{30,-68}}, lineColor={0,0,0}),
         Line(
-          points={{8,54},{58,54}},
+          points={{8,48},{58,48}},
           color={170,213,255},
           arrow={Arrow.None,Arrow.Filled}),
         Line(
-          points={{8,-44},{60,-44}},
+          points={{0,0},{82,0}},
           color={170,213,255},
           arrow={Arrow.None,Arrow.Filled}),
         Line(
-          points={{-12,-20},{76,-20}},
+          points={{2,24},{72,24}},
           color={170,213,255},
           arrow={Arrow.None,Arrow.Filled}),
         Line(
-          points={{0,8},{82,8}},
+          points={{2,-24},{72,-24}},
           color={170,213,255},
           arrow={Arrow.None,Arrow.Filled}),
         Line(
-          points={{6,32},{76,32}},
+          points={{8,-48},{58,-48}},
           color={170,213,255},
           arrow={Arrow.None,Arrow.Filled})}),
     Documentation(info="<html>
