@@ -1,5 +1,5 @@
 within AixLib.Fluid.FixedResistances.Examples;
-model DPEAgg_ambientLoss
+model Pipe
 
   extends Modelica.Icons.Example;
 
@@ -30,14 +30,13 @@ model DPEAgg_ambientLoss
         origin={79,1})));
   inner Modelica.Fluid.System system
     annotation (Placement(transformation(extent={{80,80},{100,100}})));
-  Modelica.Fluid.Sensors.Temperature temperatureAfter(redeclare package Medium =
-        Medium)
+  Modelica.Fluid.Sensors.Temperature temperatureAfter(redeclare package Medium
+      = Medium)
     annotation (Placement(transformation(extent={{14,-40},{34,-20}})));
-  Modelica.Fluid.Sensors.Temperature temperatureBefore(redeclare package Medium =
-        Medium)
+  Modelica.Fluid.Sensors.Temperature temperatureBefore(redeclare package Medium
+      = Medium)
     annotation (Placement(transformation(extent={{-52,-40},{-32,-20}})));
-  AixLib.Fluid.FixedResistances.DPEAgg_ambientLoss
-    dynamicPipeEBCAggregated_Ambient_Loss_UC(
+  AixLib.Fluid.FixedResistances.Pipe dynamicPipeEBCAggregated_Ambient_Loss_UC(
     length=2,
     redeclare package Medium = Medium,
     parameterPipe=DataBase.Pipes.Copper.Copper_6x1(),
@@ -104,4 +103,4 @@ Implemented</li>
       Interval=60,
       __Dymola_Algorithm="Lsodar"),
     experimentSetupOutput(events=false));
-end DPEAgg_ambientLoss;
+end Pipe;

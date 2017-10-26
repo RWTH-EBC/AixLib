@@ -1,12 +1,9 @@
 within AixLib.Fluid.FixedResistances;
-model DPEAgg_ambientLoss
-  "Discretized DynamicPipe with heat loss to ambient"
-
+model Pipe "Discretized DynamicPipe with heat loss to ambient"
 
   import Modelica.Fluid.Types.ModelStructure;
 
   outer Modelica.Fluid.System system "System wide properties";
-
 
    // Parameters Tab "General"
     replaceable package Medium =
@@ -38,7 +35,6 @@ model DPEAgg_ambientLoss
     "Wall friction, gravity, momentum flow"
       annotation(Dialog(group="Pressure loss"), choicesAllMatching=true);
 
-
     // Parameter Tab "Assumptions"
     parameter Boolean allowFlowReversal = system.allowFlowReversal
     "= true to allow flow reversal, false restricts to design direction (port_a -> port_b)"
@@ -50,8 +46,6 @@ model DPEAgg_ambientLoss
     "Formulation of mass balances"                                                             annotation(Dialog(tab="Assumptions", group = "Dynamics"));
     parameter Modelica.Fluid.Types.Dynamics momentumDynamics = system.momentumDynamics
     "Formulation of momentum balances"                                                                     annotation(Dialog(tab="Assumptions", group = "Dynamics"));
-
-
 
     //Parameter Tab "HeatTransfer"
     parameter Boolean Heat_Loss_To_Ambient = false
@@ -145,7 +139,6 @@ model DPEAgg_ambientLoss
     annotation (Placement(transformation(extent={{-114,-46},{-94,-26}}),
         iconTransformation(extent={{-114,-10},{-94,10}})));
 
-
     // Parameter Tab "Initialisation"
    parameter Medium.AbsolutePressure p_a_start=system.p_start
     "Start value of pressure at port a"
@@ -178,8 +171,6 @@ model DPEAgg_ambientLoss
   parameter Medium.MassFlowRate m_flow_start = system.m_flow_start
     "Start value for mass flow rate"
        annotation(Evaluate=true, Dialog(tab = "Initialization"));
-
-
 
     // Parameter Tab "Advanced"
     parameter Integer nNodes(min=2)=2 "Number of discrete flow volumes"
@@ -367,4 +358,4 @@ Formatted documentation appropriately</li>
 Implemented</li>
 </ul>
 </html>"));
-end DPEAgg_ambientLoss;
+end Pipe;
