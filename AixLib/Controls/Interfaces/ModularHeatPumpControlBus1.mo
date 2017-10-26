@@ -1,5 +1,5 @@
 within AixLib.Controls.Interfaces;
-expandable connector ModularHeatPumpControlBus
+expandable connector ModularHeatPumpControlBus1
   "Connector used for modular heat pump controller"
   extends Modelica.Icons.SignalBus;
 
@@ -27,13 +27,11 @@ expandable connector ModularHeatPumpControlBus
 
   // Extensions and propagation of parameters
   //
-  ModularExpansionValveControlBus expValBus(
-    final nValCon=nVal)
+  ModularExpansionValveControlBus1 expValBus(final nValCon=nVal)
     "Bus that contains all relevant connections for modular expansion valves";
-  ModularCompressorControlBus comBus(
-    final nComCon=nCom)
+  ModularCompressorControlBus1 comBus(final nComCon=nCom)
     "Bus that contains all relevant connections for modular compressors";
-  ModularSensorControlBus senBus(
+  ModularSensorControlBus1 senBus(
     final nValSen=nVal,
     final nEvaSen=nEva,
     final nComSen=nCom,
@@ -76,4 +74,4 @@ Additionally, the heat pump mode as well as the number of components (e.g.
 expansion valves or compressors) can be selected.
 </p>
 </html>"));
-end ModularHeatPumpControlBus;
+end ModularHeatPumpControlBus1;

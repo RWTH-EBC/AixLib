@@ -1,5 +1,5 @@
 within AixLib.Controls.Interfaces;
-expandable connector ModularSensorControlBus
+expandable connector ModularSensorControlBus1
   "Connector used for modular sensors"
   extends Modelica.Icons.SignalBus;
 
@@ -160,4 +160,4 @@ Three different sensors are proposed at source's and sink's sides:
 <li>Mass flow rate</li>
 </ol>
 </html>"));
-end ModularSensorControlBus;
+end ModularSensorControlBus1;

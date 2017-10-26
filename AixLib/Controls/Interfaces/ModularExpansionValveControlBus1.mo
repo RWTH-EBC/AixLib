@@ -1,5 +1,5 @@
 within AixLib.Controls.Interfaces;
-expandable connector ModularExpansionValveControlBus
+expandable connector ModularExpansionValveControlBus1
   "Connector used for modular expansion valve controller"
   extends Modelica.Icons.SignalBus;
 
@@ -49,4 +49,4 @@ This connector is a base connector used for modular expansion valves and
 contains typical variables that may be needed in modular expansion valves.
 </p>
 </html>"));
-end ModularExpansionValveControlBus;
+end ModularExpansionValveControlBus1;
