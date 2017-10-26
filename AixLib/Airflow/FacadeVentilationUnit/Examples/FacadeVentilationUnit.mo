@@ -1,7 +1,6 @@
 within AixLib.Airflow.FacadeVentilationUnit.Examples;
-model FacadeVentilationUnit "Example showing the use of facade ventilation 
-    unit and controller"
-  import AixLib;
+model FacadeVentilationUnit
+  "Example showing the use of facade ventilation unit and controller"
   extends Modelica.Icons.Example;
 
   package Medium1 = AixLib.Media.Air;
@@ -108,8 +107,8 @@ model FacadeVentilationUnit "Example showing the use of facade ventilation
     freqHz=1/86400,
     offset=273.15 + 10) "Provides a test value of the outdoor temperature"
     annotation (Placement(transformation(extent={{-100,6},{-80,26}})));
-  AixLib.Controls.Interfaces.FVUControlBus fVUControlBus1 annotation (
-   Placement(transformation(
+  AixLib.Controls.Interfaces.FVUControlBus fVUControlBus annotation (Placement(
+        transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-26,28})));
@@ -145,7 +144,7 @@ equation
   connect(FVU.fVUControlBus, FVUController.fVUControlBus) annotation (Line(
       points={{86,-35.9},{86,-35.9},{86,-12},{86,-10},{86,-8.76923},{-6,
           -8.76923}},color={255,204,51},thickness=0.5));
-  connect(FVUController.fVUControlBus, fVUControlBus1) annotation (Line(
+  connect(FVUController.fVUControlBus, fVUControlBus) annotation (Line(
       points={{-6,-8.76923},{2,-8.76923},{2,28},{-26,28}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -157,26 +156,26 @@ equation
   color={0,0,127}));
   connect(outdoorTemperature.y,freshAirSource. T_in) annotation (
    Line(points={{-79,16},{-64,16},{-64,-70},{4,-70}}, color={0,0,127}));
-  connect(roomTemperature.y, fVUControlBus1.roomTemperature) annotation (Line(
+  connect(roomTemperature.y, fVUControlBus.roomTemperature) annotation (Line(
         points={{-79,50},{-62,50},{-46,50},{-46,27.95},{-25.95,27.95}}, color={
           0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(outdoorTemperature.y, fVUControlBus1.outdoorTemperature) annotation (
+  connect(outdoorTemperature.y, fVUControlBus.outdoorTemperature) annotation (
       Line(points={{-79,16},{-64,16},{-64,27.95},{-25.95,27.95}}, color={0,0,
           127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(roomSetTemperature.y, fVUControlBus1.roomSetTemperature) annotation (
+  connect(roomSetTemperature.y, fVUControlBus.roomSetTemperature) annotation (
       Line(points={{-79,-26},{-74,-26},{-74,27.95},{-25.95,27.95}}, color={0,0,
           127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(co2Concentration.y, fVUControlBus1.co2Concentration) annotation (
-   Line(points={{-79,-70},{-79,-70},{-74,-70},{-74,27.95},{-25.95,27.95}},
+  connect(co2Concentration.y, fVUControlBus.co2Concentration) annotation (Line(
+        points={{-79,-70},{-79,-70},{-74,-70},{-74,27.95},{-25.95,27.95}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
