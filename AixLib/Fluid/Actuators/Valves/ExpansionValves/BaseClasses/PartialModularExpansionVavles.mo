@@ -48,8 +48,9 @@ partial model PartialModularExpansionVavles
     annotation(Dialog(tab="Expansion valves",group="Transient behaviour"),
                HideResult=not show_parVal);
 
-  parameter Utilities.Choices.CalcProc calcProc[nVal]=fill(Utilities.Choices.CalcProc.flowCoefficient,
-      nVal) "Chose predefined calculation method for flow coefficients"
+  parameter Utilities.Choices.CalcProc calcProc[nVal]=
+    fill(Utilities.Choices.CalcProc.flowCoefficient,nVal)
+    "Chose predefined calculation method for flow coefficients"
     annotation (Dialog(tab="Expansion valves", group="Flow Coefficient"),
       HideResult=not show_parVal);
   parameter Modelica.SIunits.MassFlowRate mFlowNom[nVal]=
@@ -82,7 +83,7 @@ partial model PartialModularExpansionVavles
   replaceable
     Controls.HeatPump.ModularHeatPumps.BaseClasses.PartialModularController
     expansionValveController(
-    final nVal=nVal,
+    final nCom=nVal,
     final useExt=useExt,
     final controllerType=controllerType,
     final reverseAction=reverseAction,
@@ -99,11 +100,10 @@ partial model PartialModularExpansionVavles
     final initType=initType,
     final xi_start=xi_start,
     final xd_start=xd_start,
-    final y_start=y_start)
-    "Model of internal controller"
-    annotation (Placement(transformation(extent={{-10,-78},{10,-58}})),
-                choicesAllMatching=true,
-                Dialog(tab="Controller", group="General"));
+    final y_start=y_start) "Model of internal controller" annotation (
+    Placement(transformation(extent={{-10,-78},{10,-58}})),
+    choicesAllMatching=true,
+    Dialog(tab="Controller", group="General"));
 
   // Definition of parameters describing the expansion valve controller
   //
@@ -192,7 +192,7 @@ partial model PartialModularExpansionVavles
   //
   extends Fluid.Interfaces.PartialModularPort_b(
     redeclare replaceable package Medium =
-      WorkingVersion.Media.Refrigerants.R410a.R410a_IIR_P1_48_T233_473_Horner,
+      Modelica.Media.R134a.R134a_ph,
     final nPorts=nVal);
 
   // Definition of parameters describing diagnostics
@@ -209,6 +209,7 @@ partial model PartialModularExpansionVavles
   Controls.Interfaces.ModularHeatPumpControlBus dataBus(
     final nVal=nVal) "Data bus connector"
     annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
+
 
 equation
   // Connect port_a with inlet ports of expansion valves
@@ -228,6 +229,7 @@ equation
       points={{0,-100},{0,-78}},
       color={255,204,51},
       thickness=0.5));
+
   annotation (Icon(graphics={
         Polygon(
           points={{0,-50},{-20,-34},{-20,-64},{0,-50}},
@@ -440,6 +442,40 @@ equation
   First implementation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
+</ul>
+</html>", info="<html>
+<p>
+This is a base model for modular expansion valves that are used, for example, 
+in close-loop systems like heat pumps or chillers.
+</p>
+<h4>Definitions needed for completion</h4>
+<p>
+Three definitions need to be added by an extending class using this component:
+</p>
+<ul>
+<li>Redecleration of the model <code>expansionValves</code>.</li>
+<li>Redecleration of the model <code>expansionValveController</code>.</li>
+<li>Connection of <code>expansionValves[i]</code> with <code>ports_b[i]</code>.</li>
+</ul>
+<p>
+The latter provides the possibility to add further components (e.g. sensors or
+pipes) located at the expansion valves' outlets.
+</p>
+<h4>Modeling approaches</h4>
+<p>
+This base model mainly consists of two sub-models and, therefore, please 
+checkout these models for further information of underlying modeling
+approaches:
+</p>
+<ul>
+<li>
+<a href=\"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialExpansionValve\">
+AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialExpansionValve</a>.
+</li>
+<li>
+<a href=\"modelica://AixLib.Controls.HeatPump.ModularHeatPumps.BaseClasses.PartialModularController\">
+AixLib.Controls.HeatPump.ModularHeatPumps.BaseClasses.PartialModularController</a>.
+</li>
 </ul>
 </html>"));
 end PartialModularExpansionVavles;
