@@ -389,7 +389,9 @@ protected
       AixLib.DataBase.Walls.WSchV1984.IW.IWload_WSchV1984_L_half()
     annotation (Dialog(tab="Types"));
   // Floor to lower floor type
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_FL=if TIR == 1
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_FL=
+  if withFloorHeating==true then AixLib.DataBase.Walls.Dummys.FloorForFloorHeating2()
+  else if TIR == 1
        then if TMC == 1 or TMC == 2 then
       AixLib.DataBase.Walls.EnEV2009.Floor.FLpartition_EnEV2009_SM_upHalf()
        else AixLib.DataBase.Walls.EnEV2009.Floor.FLpartition_EnEV2009_L_upHalf()
@@ -406,7 +408,8 @@ protected
       AixLib.DataBase.Walls.WSchV1984.Floor.FLpartition_WSchV1984_L_upHalf()
     annotation (Dialog(tab="Types"));
   // Ceiling to attic type
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_CE=if TIR == 1
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_CE=
+  if TIR == 1
        then AixLib.DataBase.Walls.EnEV2009.Ceiling.CEattic_EnEV2009_SML_loHalf()
        else if TIR == 2 then
       AixLib.DataBase.Walls.EnEV2002.Ceiling.CEattic_EnEV2002_SML_loHalf()

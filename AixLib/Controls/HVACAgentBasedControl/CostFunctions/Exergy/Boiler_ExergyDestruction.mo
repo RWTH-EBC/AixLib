@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HVACAgentBasedControl.CostFunctions.Exergy;
+within AixLib.Controls.HVACAgentBasedControl.CostFunctions.Exergy;
 model Boiler_ExergyDestruction
   extends HVACAgentBasedControl.BaseClasses.PartialCostFunction;
   parameter Real T_0 = 298.15 "Exergy reference temperature";
@@ -61,7 +61,7 @@ equation
 </ul>
 </html>", revisions="<html>
 <ul>
-<li>October 2015, by Felix Bünning: Developed and implemented</li>
+<li>October 2015, by Felix B�nning: Developed and implemented</li>
 </ul>
 </html>"));
 end Boiler_ExergyDestruction;

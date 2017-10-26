@@ -372,7 +372,9 @@ protected
       AixLib.DataBase.Walls.WSchV1984.IW.IWload_WSchV1984_L_half()
     annotation (Dialog(tab="Types"));
   // Floor to lower floor type
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_FL=if TIR == 1
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_FL=
+  if withFloorHeating==true then AixLib.DataBase.Walls.Dummys.FloorForFloorHeating2()
+  else if TIR == 1
        then if TMC == 1 or TMC == 2 then
       AixLib.DataBase.Walls.EnEV2009.Floor.FLpartition_EnEV2009_SM_upHalf()
        else AixLib.DataBase.Walls.EnEV2009.Floor.FLpartition_EnEV2009_L_upHalf()

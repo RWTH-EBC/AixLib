@@ -3,7 +3,11 @@ model Panelheating_1D_Dis
 
   extends Modelica.Fluid.Interfaces.PartialTwoPort;
 
-  parameter DataBase.ActiveWalls.ActiveWallBaseDataDefinition Floorheatingtype=
+//  parameter DataBase.ActiveWalls.ActiveWallBaseDataDefinition Floorheatingtype=
+//      DataBase.ActiveWalls.JocoKlimaBodenTOP2000_Parkett()
+//    annotation (Dialog(group="Type"), choicesAllMatching=true);
+
+     parameter sim_models.PanelRecords.ActiveWallBaseDataDefinition2 Floorheatingtype=
       DataBase.ActiveWalls.JocoKlimaBodenTOP2000_Parkett()
     annotation (Dialog(group="Type"), choicesAllMatching=true);
 
@@ -16,9 +20,6 @@ model Panelheating_1D_Dis
 
   final parameter Modelica.SIunits.Emissivity eps=Floorheatingtype.eps
     "Emissivity";
-
-  final parameter Modelica.SIunits.CoefficientOfHeatTransfer k_isolation=Floorheatingtype.k_isolation
-    "k through layer";
 
   final parameter Real c_top_ratio(min=0,max=1)= Floorheatingtype.c_top_ratio;
 
@@ -52,11 +53,10 @@ model Panelheating_1D_Dis
       1],Floorheatingtype.Temp_nom[2],T_Floor_nom});
 
   final parameter Modelica.SIunits.CoefficientOfHeatTransfer
-    k_nom_top=
-      Floorheatingtype.q_dot_nom/nomDT;
+    k_nom_top=Floorheatingtype.k_top;
 
   final parameter Modelica.SIunits.CoefficientOfHeatTransfer
-    k_nom_down = (Floorheatingtype.k_isolation^(-1) -  k_nom_top^(-1))^(-1);
+    k_nom_down = Floorheatingtype.k_down;
 
 Modelica.Fluid.Sensors.TemperatureTwoPort t_flow(redeclare package Medium =
       Medium)
