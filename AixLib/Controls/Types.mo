@@ -1,11 +1,7 @@
 within AixLib.Controls;
-package Choices "Types, constants to define menu choices"
-  extends Modelica.Icons.Package;
+package Types "Types, constants to define menu choices"
+  extends Modelica.Icons.TypesPackage;
 
-  // Types describing the mode of a heat pump
-  //
-  // Types describing control variables
-  //
   type heatPumpMode = enumeration(
       heatPump
       "Heat pump is used as heat pump",
@@ -49,4 +45,4 @@ package Choices "Types, constants to define menu choices"
 This package contains types and constants to define menue choices.
 </p>
 </html>"));
-end Choices;
+end Types;
