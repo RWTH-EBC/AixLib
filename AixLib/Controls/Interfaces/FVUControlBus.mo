@@ -4,42 +4,43 @@ expandable connector FVUControlBus
   extends Modelica.Icons.SignalBus;
 
  Real coolingValveOpening(min=0,max=1)
-  "Relative opening of the cooling valve (0..1)";
+   "Relative opening of the cooling valve (0..1)";
 
  Real heatingValveOpening(min=0,max=1)
-  "Relative opening of the cooling valve (0..1)";
+   "Relative opening of the cooling valve (0..1)";
 
  Real fanExhaustAirPower(min=0,max=1)
-  "Relative speed of the exhaust air fan (0..1)";
+   "Relative speed of the exhaust air fan (0..1)";
 
  Real fanSupplyAirPower(min=0,max=1)
-  "Relative speed of the supply air fan (0..1)";
+   "Relative speed of the supply air fan (0..1)";
 
  Real circulationDamperOpening(min=0,max=1)
-  "Relative opening of the circulation damper (0..1)";
+   "Relative opening of the circulation damper (0..1)";
 
  Real hRCDamperOpening(min=0,max=1)
-  "Relative opening of the heat recovery damper (0..1)";
+   "Relative opening of the heat recovery damper (0..1)";
 
  Real freshAirDamperOpening(min=0,max=1)
-  "Relative opening of thefresh air damper (0..1)";
+   "Relative opening of thefresh air damper (0..1)";
 
  Modelica.SIunits.ThermodynamicTemperature roomTemperature
- "Room air temperature measurement";
+   "Room air temperature measurement";
 
  Modelica.SIunits.ThermodynamicTemperature outdoorTemperature
- "Outdoor air temperature measurement";
+   "Outdoor air temperature measurement";
 
   Modelica.SIunits.ThermodynamicTemperature roomSetTemperature
- "Room air set temperature measurement";
+   "Room air set temperature measurement";
 
- Modelica.SIunits.Concentration co2Concentration "CO2 concentration measurement";
+ Modelica.SIunits.Concentration co2Concentration(min=0)
+   "CO2 concentration measurement";
 
  Modelica.SIunits.ThermodynamicTemperature mixTemperature
- "Temperature measurement of the mixed circulation and fresh air streams";
+   "Temperature measurement of the mixed circulation and fresh air streams";
 
  Modelica.SIunits.ThermodynamicTemperature supplyTemperature
- "Temperature measurement of the supply air streams";
+   "Temperature measurement of the supply air streams";
 
 
 
