@@ -9,7 +9,7 @@ model HeatPump_PrimaryExergyDestruction_Heating
     "table matrix (grid u1 = first column, grid u2 = first row; e.g., table=[0,0;0,1])";
   parameter Real PEF = 1.8 "Primary energy factor of the fuel";
 
-  Real COP;
+  Real COP "Cooefficient of performance";
 
   Modelica.Blocks.Sources.RealExpression realExpression(y=COP)
     annotation (Placement(transformation(extent={{-84,56},{-64,76}})));
@@ -181,7 +181,7 @@ equation
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{36,86},{96,-32}},
+          extent={{34,96},{96,-32}},
           lineColor={0,0,0},
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid),
@@ -208,7 +208,7 @@ equation
           fillPattern=FillPattern.Solid,
           textString="ExergyIn"),
         Text(
-          extent={{42,76},{90,68}},
+          extent={{42,90},{92,76}},
           lineColor={0,0,0},
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid,
