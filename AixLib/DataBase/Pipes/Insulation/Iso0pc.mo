@@ -12,7 +12,7 @@ record Iso0pc "Coating, no insulation"
 <h4><span style=\"color: #008000\">Overview</span></h4>
 <p>0 &percnt;; insulation. </p>
 <h4><span style=\"color: #008000\">References</span></h4>
-<p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
+<p>Record is used with <a href=\"AixLib.Fluid.FixedResistances.Pipe\">AixLib.Fluid.FixedResistances.Pipe</a></p>
 </html>",
       revisions="<html>
 <ul>

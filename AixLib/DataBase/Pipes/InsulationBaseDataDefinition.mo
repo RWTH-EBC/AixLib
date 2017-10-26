@@ -16,7 +16,7 @@ record InsulationBaseDataDefinition
 <h4><span style=\"color: #008000\">Overview</span></h4>
 <p>Base data definition for insulation record </p>
 <h4><span style=\"color: #008000\">References</span></h4>
-<p>Base data definition for record used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
+<p>Base data definition for record used with <a href=\"AixLib.Fluid.FixedResistances.Pipe\">AixLib.Fluid.FixedResistances.Pipe</a></p>
 </html>",
         revisions="<html>
 <ul>

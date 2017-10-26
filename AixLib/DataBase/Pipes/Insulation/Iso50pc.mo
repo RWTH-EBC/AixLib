@@ -11,7 +11,7 @@ record Iso50pc "50% Insulation (thickness insulation = 0.5 x d_o)"
 <h4><span style=\"color: #008000\">Overview</span></h4>
 <p>50 &percnt;; insulation. Calculated according to: <i>thickness insulation = 0.5 x d_o</i></p>
 <h4><span style=\"color: #008000\">References</span></h4>
-<p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
+<p>Record is used with <a href=\"AixLib.Fluid.FixedResistances.Pipe\">AixLib.Fluid.FixedResistances.Pipe</a></p>
 </html>",
       revisions="<html>
 <ul>

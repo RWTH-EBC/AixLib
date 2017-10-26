@@ -15,7 +15,7 @@ record DIN_16893_SDR11_d32 "PE-X Pipe, d_o=32mm, SDR11"
 <p>SDR is the diameter to wall thickness ratio. </p>
 <p>d is the diameter in mm.  </p>
 <h4><font color=\"#008000\">References</font></h4>
-<p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a> </p>
+<p>Record is used with <a href=\"AixLib.Fluid.FixedResistances.Pipe\">AixLib.Fluid.FixedResistances.Pipe</a> </p>
 <p>Source: </p>
 <ul>
 <li>DIN 16983:2000-09</li>
