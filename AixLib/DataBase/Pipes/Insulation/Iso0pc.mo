@@ -1,16 +1,17 @@
-within AixLib.DataBase.Pipes.Isolation;
-record Iso100pc "100% Isolation (thickness isolation = 1 x d_o)"
-  extends DataBase.Pipes.IsolationBaseDataDefinition(
-    factor=1,
-    d=30,
-    lambda=0.04,
-    c=1400);
+within AixLib.DataBase.Pipes.Insulation;
+record Iso0pc "Coating, no insulation"
+  extends InsulationBaseDataDefinition(
+    factor=0.04,
+    d=1000,
+    lambda=0.5,
+    c=1600);
   // Constant chemical Values assumed
+  // would yield ~1mm coating for a DN25 pipe
 
   annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
-<p>100 %; isolation. Calculated according to: <i>thickness isolation = 1 x d_o</i></p>
-<h4><font color=\"#008000\">References</font></h4>
+<h4><span style=\"color: #008000\">Overview</span></h4>
+<p>0 &percnt;; insulation. </p>
+<h4><span style=\"color: #008000\">References</span></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 </html>",
       revisions="<html>
@@ -20,4 +21,4 @@ Moved into AixLib</li>
 <li><i>July 9, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
 </ul>
 </html>"));
-end Iso100pc;
+end Iso0pc;

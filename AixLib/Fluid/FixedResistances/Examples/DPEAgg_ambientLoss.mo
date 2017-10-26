@@ -36,11 +36,12 @@ model DPEAgg_ambientLoss
   Modelica.Fluid.Sensors.Temperature temperatureBefore(redeclare package Medium =
         Medium)
     annotation (Placement(transformation(extent={{-52,-40},{-32,-20}})));
-  AixLib.Fluid.FixedResistances.DPEAgg_ambientLoss dynamicPipeEBCAggregated_Ambient_Loss_UC(
+  AixLib.Fluid.FixedResistances.DPEAgg_ambientLoss
+    dynamicPipeEBCAggregated_Ambient_Loss_UC(
     length=2,
     redeclare package Medium = Medium,
     parameterPipe=DataBase.Pipes.Copper.Copper_6x1(),
-    parameterIso=DataBase.Pipes.Isolation.Iso100pc(),
+    parameterIso=DataBase.Pipes.Insulation.Iso100pc(),
     diameter=dynamicPipeEBCAggregated_Ambient_Loss_UC.parameterPipe.d_i,
     nNodes=5,
     Heat_Loss_To_Ambient=true,

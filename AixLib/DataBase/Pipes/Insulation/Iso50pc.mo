@@ -1,6 +1,6 @@
-within AixLib.DataBase.Pipes.Isolation;
-record Iso50pc "50% Isolation (thickness isolation = 0.5 x d_o)"
-  extends DataBase.Pipes.IsolationBaseDataDefinition(
+within AixLib.DataBase.Pipes.Insulation;
+record Iso50pc "50% Insulation (thickness insulation = 0.5 x d_o)"
+  extends InsulationBaseDataDefinition(
     factor=0.5,
     d=30,
     lambda=0.04,
@@ -8,9 +8,9 @@ record Iso50pc "50% Isolation (thickness isolation = 0.5 x d_o)"
   // Constant chemical Values assumed
 
   annotation (Documentation(info="<html>
-<h4><font color=\"#008000\">Overview</font></h4>
-<p>50 %; isolation.  Calculated according to: <i>thickness isolation = 0.5 x d_o</i></p>
-<h4><font color=\"#008000\">References</font></h4>
+<h4><span style=\"color: #008000\">Overview</span></h4>
+<p>50 &percnt;; insulation. Calculated according to: <i>thickness insulation = 0.5 x d_o</i></p>
+<h4><span style=\"color: #008000\">References</span></h4>
 <p>Record is used with <a href=\"HVAC.Components.Pipes.DynamicPipeEBC1\">HVAC.Components.Pipes.DynamicPipeEBC1</a></p>
 </html>",
       revisions="<html>

@@ -1,5 +1,5 @@
 within AixLib.DataBase.Pipes;
-package Isolation 
+package Insulation 
       extends Modelica.Icons.Package;
 
-end Isolation;
+end Insulation;

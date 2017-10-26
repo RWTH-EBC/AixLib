@@ -75,10 +75,9 @@ model DPEAgg_ambientLoss
     parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition parameterPipe=
       AixLib.DataBase.Pipes.Copper.Copper_6x1() "Pipe type"
     annotation (choicesAllMatching=true, Dialog(tab="Heat transfer"));
-    parameter AixLib.DataBase.Pipes.IsolationBaseDataDefinition
-                                                   parameterIso=
-                 AixLib.DataBase.Pipes.Isolation.Iso0pc() "Isolation Type"
-          annotation (choicesAllMatching=true, Dialog(tab="Heat transfer"));
+  parameter AixLib.DataBase.Pipes.InsulationBaseDataDefinition parameterIso=
+      AixLib.DataBase.Pipes.Insulation.Iso0pc() "Insulation Type"
+    annotation (choicesAllMatching=true, Dialog(tab="Heat transfer"));
 
     parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha=8
     "Heat transfer coefficient to ambient"                      annotation (Dialog(tab="Heat transfer", enable = Heat_Loss_To_Ambient));
