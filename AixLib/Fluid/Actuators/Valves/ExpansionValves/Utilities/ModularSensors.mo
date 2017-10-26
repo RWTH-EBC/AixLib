@@ -1,7 +1,7 @@
 within AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities;
 model ModularSensors
   "Model that contains mass flow, pressure, temperature and quality sensors 
-  for modular expansion valves"
+  for modular heat pump models"
 
   // Definition of parameters
   //
@@ -166,17 +166,27 @@ equation
           fillColor={64,64,64},
           pattern=LinePattern.None,
           fillPattern=FillPattern.Solid,
-          extent={{-7.0,-7.0},{7.0,7.0}}),
-        Text(
-          extent={{-100,100},{100,70}},
-          lineColor={28,108,200},
-          textString="%name")}), Documentation(revisions="<html>
+          extent={{-7.0,-7.0},{7.0,7.0}})}),
+                                 Documentation(revisions="<html>
 <ul>
   <li>
   October 17, 2017, by Mirko Engelpracht:<br/>
   First implementation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
+</ul>
+</html>", info="<html>
+<p>
+This is a model of modular sensors that is used, for example, for components 
+of modular heat pumps like modular expansion valves or modular compressors.<br \\>
+It consists of four types of sensors that are introduced as vectors and that 
+are mainly used in heat pumps:
+</p>
+<ul>
+<li>Absolute pressure.</li>
+<li>Temperature.</li>
+<li>Mass flow rate.</li>
+<li>Steam quality.</li>
 </ul>
 </html>"));
 end ModularSensors;

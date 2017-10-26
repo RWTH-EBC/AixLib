@@ -128,7 +128,7 @@ partial model PartialModularController
                 origin={-60,70})));
 
   Interfaces.ModularHeatPumpControlBus dataBus(
-    final nCom=nCom)
+    final nVal=nCom)
     "Data bus with signals to allow control of expansion valves"
     annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
   Modelica.Blocks.Interfaces.RealInput actVal[nCom]

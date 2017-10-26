@@ -48,9 +48,8 @@ partial model PartialModularExpansionVavles
     annotation(Dialog(tab="Expansion valves",group="Transient behaviour"),
                HideResult=not show_parVal);
 
-  parameter Utilities.Choices.CalcProc calcProc[nVal]=
-    fill(Utilities.Choices.CalcProc.flowCoefficient,nVal)
-    "Chose predefined calculation method for flow coefficients"
+  parameter Utilities.Choices.CalcProc calcProc[nVal]=fill(Utilities.Choices.CalcProc.flowCoefficient,
+      nVal) "Chose predefined calculation method for flow coefficients"
     annotation (Dialog(tab="Expansion valves", group="Flow Coefficient"),
       HideResult=not show_parVal);
   parameter Modelica.SIunits.MassFlowRate mFlowNom[nVal]=

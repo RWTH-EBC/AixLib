@@ -1,13 +1,10 @@
 within AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities;
-package Choices "Types, constants to define menu choices"
+package Choices
+  "Types, constants to define menu choices"
   extends Modelica.Icons.Package;
 
   // Types describing calculation procedures of mass flow and pressure drop
   //
-
-  // Types describing calculation procedures of flow coefficients
-  //
-
   type CalcProc = enumeration(
       linear
       "Usage of linear behaviour: m_flow = A * f(dp)",
@@ -17,6 +14,8 @@ package Choices "Types, constants to define menu choices"
       "Usage of flow coefficient: m_flow = C * f(dp)")
     "Enumeration to define calculation procedure of mass flow and pressure drop"
     annotation (Evaluate=true);
+  // Types describing calculation procedures of flow coefficients
+  //
   type PolynomialModels = enumeration(
       ShanweiEtAl2005
       "ShanweiEtAl2005 - Function of area, pressures, subcooling and densities",

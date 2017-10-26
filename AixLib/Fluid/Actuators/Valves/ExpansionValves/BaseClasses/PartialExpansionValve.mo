@@ -20,8 +20,7 @@ partial model PartialExpansionValve
       enable = useInpFil,
       group="Transient behaviour"));
 
-  parameter Utilities.Choices.CalcProc calcProc=
-    Utilities.Choices.CalcProc.nominal
+  parameter Utilities.Choices.CalcProc calcProc=Utilities.Choices.CalcProc.nominal
     "Chose predefined calculation method for flow coefficient"
     annotation (Dialog(tab="Flow Coefficient"));
   parameter Modelica.SIunits.MassFlowRate mFlowNom = m_flow_nominal
@@ -59,7 +58,7 @@ partial model PartialExpansionValve
   //
   extends AixLib.Fluid.Interfaces.PartialTwoPortTransport(
     redeclare replaceable package Medium =
-        Modelica.Media.Interfaces.PartialTwoPhaseMedium,
+        Modelica.Media.R134a.R134a_ph,
     show_T = false,
     show_V_flow = false,
     dp_start = 1e6,
@@ -347,12 +346,13 @@ to the modelling approaches presented in the literature:
 </p>
 <p>
 Li, W. (2013): <a href=\"http://dx.doi.org/10.1016/j.applthermaleng.2012.12.035\">
-implified modeling analysis ofmass flow characteristics in electronic expansion 
+Simplified modeling analysis ofmass flow characteristics in electronic expansion 
 valve</a>. In: <i>Applied Thermal Engineering 53(1)</i>, S. 8&ndash;12
+</p>
 <p>
 X. Cao, Z.-Y. Li, L.-L. Shao and C.-L. Zhang (2016): 
 <a href=\"http://dx.doi.org/10.1016/j.applthermaleng.2015.09.062\">
-efrigerant flow through electronic expansion valve: Experiment and 
+Refrigerant flow through electronic expansion valve: Experiment and 
 neural network modeling</a>. In: <i>Applied Thermal Engineering 92</i>, 
 S. 210&ndash;218
 </p>

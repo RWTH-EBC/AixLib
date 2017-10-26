@@ -114,7 +114,8 @@ equation
     annotation (Line(points={{59,26},{50,26},{50,0},{42,0}}, color={0,0,127}));
   connect(ramAct.y, repAct.u)
     annotation (Line(points={{59,-50},{50,-50},{42,-50}}, color={0,0,127}));
-  connect(modVal.dataBus, dataBus) annotation (Line(
+  connect(modVal.dataBus, dataBus)
+    annotation (Line(
       points={{-22,0},{0,0}},
       color={255,204,51},
       thickness=0.5));

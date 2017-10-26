@@ -21,5 +21,14 @@ equation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
 </ul>
+</html>", info="<html>
+<p>
+This model contains a simple calculation procedure for flow coefficients (for 
+more information, please check out 
+<a href=\"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialExpansionValve\">
+AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialExpansionValve</a>). 
+The model provides a constant flow coefficient and is the most basic flow 
+coefficient model.
+</p>
 </html>"));
 end ConstantFlowCoefficient;

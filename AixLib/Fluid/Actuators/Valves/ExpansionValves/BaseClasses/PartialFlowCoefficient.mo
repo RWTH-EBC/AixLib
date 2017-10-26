@@ -5,7 +5,7 @@ partial model PartialFlowCoefficient
   // Definition of inputs
   //
   replaceable package Medium =
-      Modelica.Media.Interfaces.PartialTwoPhaseMedium
+    Modelica.Media.R134a.R134a_ph
     constrainedby Modelica.Media.Interfaces.PartialTwoPhaseMedium
     "Definition of two-phase medium";
 
