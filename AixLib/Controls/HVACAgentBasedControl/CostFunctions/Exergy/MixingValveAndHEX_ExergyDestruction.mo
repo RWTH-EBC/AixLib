@@ -6,10 +6,10 @@ model MixingValveAndHEX_ExergyDestruction
     "Temperature of the hot water circuit";
   parameter Real m_flow_hot = 0.2 "Mass flow in the hot temperature circuit";
 
-  Real T1(start=271.15+40);
-  Real T2(start=273.15+40, fixed=true);
-  Real T3(start=273.15+40);
-  Real T4(start=273.15+40);
+  Real T1(start=271.15+40) "Inlet cold temperature";
+  Real T2(start=273.15+40, fixed=true) "Outlet cold temperature";
+  Real T3(start=273.15+40) "Inlet hot temperature";
+  Real T4(start=273.15+40) "Outlet hot temperature";
   Real m_flow_hot_actual(start=0.2);
 
   Modelica.Blocks.Interfaces.RealInput T_cold_in annotation (Placement(

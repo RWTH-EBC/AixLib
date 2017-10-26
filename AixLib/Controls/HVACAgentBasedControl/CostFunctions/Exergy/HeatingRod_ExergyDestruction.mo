@@ -4,7 +4,7 @@ model HeatingRod_ExergyDestruction
   parameter Real T_0 = 298.15 "Exergy reference temperature";
   parameter Real eta = 0.97 "Overall efficiency of the boiler";
 
-  Real T_in;
+  Real T_in "Inlet temperature";
 
   Modelica.Blocks.Interfaces.RealInput T_below
     "Temperature of the storage water layer below the heating rod"                                            annotation (Placement(
