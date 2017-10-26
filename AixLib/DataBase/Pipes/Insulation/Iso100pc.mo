@@ -9,7 +9,7 @@ record Iso100pc "100% Insulation (thickness insulation = 1 x d_o)"
 
   annotation (Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
-<p>100 &percnt;; insulation. Calculated according to: <i>thickness insulation = 1 x d_o</i></p>
+<p>100 % insulation. Calculated according to: <i>thickness insulation = 1 x d_o</i></p>
 <h4><span style=\"color: #008000\">References</span></h4>
 <p>Record is used with <a href=\"AixLib.Fluid.FixedResistances.Pipe\">AixLib.Fluid.FixedResistances.Pipe</a></p>
 </html>",
