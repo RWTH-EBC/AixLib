@@ -11,7 +11,7 @@ model Boiler_ExergyDestruction_Simplified
   Modelica.Blocks.Math.Division division1
     annotation (Placement(transformation(extent={{-66,-22},{-46,-2}})));
   Modelica.Blocks.Sources.RealExpression realExpression1(y=T_0)
-    annotation (Placement(transformation(extent={{-96,-12},{-76,8}})));
+    annotation (Placement(transformation(extent={{-96,-6},{-76,14}})));
   Modelica.Blocks.Math.Add add(k2=-1)
     annotation (Placement(transformation(extent={{-32,-4},{-12,16}})));
   Modelica.Blocks.Sources.RealExpression realExpression3(y=1)
@@ -26,7 +26,7 @@ model Boiler_ExergyDestruction_Simplified
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=0,
-        origin={-122,-16}), iconTransformation(
+        origin={-120,-30}), iconTransformation(
         extent={{-20,-20},{20,20}},
         rotation=0,
         origin={-80,-26})));
@@ -40,7 +40,7 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(division1.u1, realExpression1.y) annotation (Line(
-      points={{-68,-6},{-72,-6},{-72,-2},{-75,-2}},
+      points={{-68,-6},{-72,-6},{-72,4},{-75,4}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(division1.y, add.u2) annotation (Line(
@@ -56,7 +56,7 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(capacity, product.u2) annotation (Line(
-      points={{-40,-100},{-40,-34},{-10,-34},{-10,-6},{2,-6}},
+      points={{-40,-100},{-40,-34},{-8,-34},{-8,-6},{2,-6}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(division.u1, product.u2) annotation (Line(
@@ -64,7 +64,7 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(product.y, add1.u2) annotation (Line(
-      points={{25,0},{34,0},{34,32},{58,32}},
+      points={{25,0},{46,0},{46,32},{58,32}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(add1.y, cost) annotation (Line(
@@ -79,8 +79,8 @@ equation
           -27},{-68,-18}}, color={0,0,127}));
   connect(min.u1, realExpression2.y) annotation (Line(points={{-85,-24},{
           -90,-24},{-90,-18},{-75,-18},{-75,-12}}, color={0,0,127}));
-  connect(min.u2, T_circuit) annotation (Line(points={{-85,-30},{-96,-30},
-          {-96,-16},{-122,-16}}, color={0,0,127}));
+  connect(min.u2, T_circuit) annotation (Line(points={{-85,-30},{-120,-30}},
+                                 color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),
                          graphics={Rectangle(
@@ -102,7 +102,7 @@ equation
           textString="Boiler")}),           Diagram(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={
         Rectangle(
-          extent={{36,86},{96,-32}},
+          extent={{36,86},{96,-50}},
           lineColor={0,0,0},
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid),
@@ -129,7 +129,7 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Exergy Product"),
         Text(
-          extent={{42,76},{90,68}},
+          extent={{42,76},{92,64}},
           lineColor={0,0,0},
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid,
