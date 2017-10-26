@@ -46,7 +46,8 @@ expandable connector ModularExpansionValveControlBus
 </html>", info="<html>
 <p>
 This connector is a base connector used for modular expansion valves and 
-contains typical variables that may be needed in modular expansion valves.
+contains typical variables that may be needed in the modular expansion 
+valve models.
 </p>
 </html>"));
 end ModularExpansionValveControlBus;

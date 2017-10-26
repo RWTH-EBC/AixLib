@@ -46,7 +46,8 @@ expandable connector ModularCompressorControlBus
 </html>", info="<html>
 <p>
 This connector is a base connector used for modular compressors and 
-contains typical variables that may be needed in modular compressors.
+contains typical variables that may be needed in the modular 
+compressor models.
 </p>
 </html>"));
 end ModularCompressorControlBus;

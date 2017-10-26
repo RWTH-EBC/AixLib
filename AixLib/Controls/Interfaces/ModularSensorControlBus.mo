@@ -123,15 +123,15 @@ expandable connector ModularSensorControlBus
 </html>", info="<html>
 <p>
 This connector is a base connector used for modular heat pumps and contains 
-typical variables that may be measured in modular heat pumps.
+typical variables that may be measured in the modular heat pump models.
 </p>
-<h4>Overview of sensors' installation sites</h4>
+<h4>Overview of sensors' positions</h4>
 <p>
 Typically, a heat pump consists of four main components: A compressor, a
 condenser, an expansion valve and an evaporator. Furthermore, considering the 
-viewpoint of the refrigerant used in the heat pump, the evaporator is the 
+perspective of the refrigerant used in the heat pump, the evaporator is the 
 source and the condenser is the sink. Therefore, it is assumed that the heat 
-pump has six installation sites for sensors:
+pump has six sensor positions:
 </p>
 <ol>
 <li>Compressor's outlet</li>

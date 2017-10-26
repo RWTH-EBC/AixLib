@@ -52,8 +52,9 @@ expandable connector ModularHeatPumpControlBus
 </html>", info="<html>
 <p>
 This connector is a base connector used for modular heat pumps and contains 
-typical variables that may be measured in modular heat pumps. Therefore, this
-connector contains three further connectors that are presented below:
+typical variables that may be measured in the modular heat pump models. 
+Therefore, this connector contains three further connectors that are 
+presented below:
 </p>
 <ol>
 <li>
