@@ -9,7 +9,7 @@ model HeatPump_PrimaryExergyDestruction_Cooling
     "table matrix (grid u1 = first column, grid u2 = first row; e.g., table=[0,0;0,1])";
   parameter Real PEF = 1.8 "Primary energy factor of the fuel";
 
-  Real COP;
+  Real COP "Cooefficient of performance";
 
   Modelica.Blocks.Sources.RealExpression realExpression(y=1 - (1/COP))
     annotation (Placement(transformation(extent={{-90,-44},{-70,-24}})));
