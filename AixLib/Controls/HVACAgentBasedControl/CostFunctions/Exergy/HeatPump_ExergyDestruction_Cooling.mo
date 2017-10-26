@@ -8,7 +8,7 @@ model HeatPump_ExergyDestruction_Cooling
   parameter Real tableHeatFlowCondenser[:, :] = fill(0.0, 0, 2)
     "table matrix (grid u1 = first column, grid u2 = first row; e.g., table=[0,0;0,1])";
 
-  Real COP;
+  Real COP "Cooefficient of performance";
 
   Modelica.Blocks.Sources.RealExpression realExpression(y=1 - (1/COP))
     annotation (Placement(transformation(extent={{-90,-44},{-70,-24}})));
@@ -115,8 +115,8 @@ equation
           -64},{84,2},{81,2}}, color={0,0,127}));
   connect(product1.y, add1.u1) annotation (Line(points={{21,-40},{32,-40},
           {32,44},{58,44}}, color={0,0,127}));
-  connect(division3.u2, realExpression.y) annotation (Line(points={{-36,
-          -40},{-36,-40},{-58,-40},{-58,-34},{-69,-34}}, color={0,0,127}));
+  connect(division3.u2, realExpression.y) annotation (Line(points={{-36,-40},{
+          -58,-40},{-58,-34},{-69,-34}},                 color={0,0,127}));
   connect(product1.u1, division3.y)
     annotation (Line(points={{-2,-34},{-13,-34}}, color={0,0,127}));
   connect(capacity, division3.u1) annotation (Line(points={{-40,-100},{-40,
@@ -197,7 +197,7 @@ equation
           fillPattern=FillPattern.Solid,
           textString="ExergyIn"),
         Text(
-          extent={{42,76},{90,68}},
+          extent={{40,82},{92,68}},
           lineColor={0,0,0},
           fillColor={255,255,170},
           fillPattern=FillPattern.Solid,

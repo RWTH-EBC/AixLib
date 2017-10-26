@@ -1,5 +1,5 @@
 within AixLib.Fluid.Solar.Electric.BaseClasses;
-model PVModuleDC "PV module with temperature dependent efficiency"
+model PVModuleDC "partial model for PV module"
 
  parameter Modelica.SIunits.Area Area
   "Area of one Panel";
@@ -19,18 +19,7 @@ model PVModuleDC "PV module with temperature dependent efficiency"
   "Efficiency of PV cell";
  Modelica.SIunits.Temp_K TCell
   "Cell temperature";
- Utilities.Interfaces.SolarRad_in SolarIrradationPerSquareMeter
-  "Solar radiation per square meter"
-  annotation(Placement(
-  transformation(extent={{-141,45},{-101,85}}),
-  iconTransformation(extent={{-140,34},{-100,74}})));
- Modelica.Blocks.Interfaces.RealInput AmbientTemperature(
-  final quantity="ThermodynamicTemperature",
-  final unit="K")
-  "Ambient temperature"
-  annotation(Placement(
-  transformation(extent={{-139,-70},{-99,-30}}),
-  iconTransformation(extent={{-140,-68},{-100,-28}})));
+
  Modelica.Blocks.Interfaces.RealOutput DCOutputPower(
   final quantity="Power",
   final unit="W")
@@ -38,13 +27,23 @@ model PVModuleDC "PV module with temperature dependent efficiency"
   annotation(Placement(
   transformation(extent={{100,70},{120,90}}),
   iconTransformation(extent={{100,-10},{120,10}})));
+ Modelica.Blocks.Interfaces.RealInput T_amb(final quantity=
+        "ThermodynamicTemperature", final unit="K") "Ambient temperature"
+    annotation (Placement(transformation(extent={{-139,40},{-99,80}}),
+        iconTransformation(extent={{-140,40},{-100,80}})));
+
+  Modelica.Blocks.Interfaces.RealInput SolarIrradiationPerSquareMeter
+   annotation (Placement(
+        transformation(extent={{-140,-80},{-100,-40}}), iconTransformation(
+          extent={{-132,-72},{-100,-40}})));
 
 equation
-  TCell=AmbientTemperature+(NoctTempCell-NoctTemp)*
-  SolarIrradationPerSquareMeter.I/NoctRadiation;
+  TCell=T_amb + (NoctTempCell - NoctTemp)*SolarIrradiationPerSquareMeter/
+    NoctRadiation;
+  PowerPV=SolarIrradiationPerSquareMeter*Area*EtaVar;
   EtaVar=Eta0-TempCoeff*(TCell-NoctTemp)*Eta0;
-  PowerPV=SolarIrradationPerSquareMeter.I*Area*EtaVar;
   DCOutputPower=PowerPV;
+
   annotation (
    Icon(
     coordinateSystem(extent={{-100,-100},{100,100}}),
@@ -59,14 +58,16 @@ equation
       color={0,0,0})}),
      Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
-<p>The <b>PVmoduleDC</b> model represents a simple PV cell. </p>
+<p>The <b>PVmoduleDC_TMY3</b> model represents a simple PV cell. </p>
 <h4><span style=\"color: #008000\">Concept</span></h4>
 <p>PV moduleDC has a temperature&nbsp;dependency&nbsp;for&nbsp;efficiency.</p>
 </html>",
      revisions="<html>
 <ul>
-<li><i>October 11, 2016 </i> by Tobias Blacha:<br/>Moved into AixLib</li>
-<li><i>Februar 21, 2013  </i>by Corinna Leonhardt:<br/>Implemented</li>
+<li><i>October 20, 2017 </i>by Larissa K&uuml;hn:<br/>Modification of Input to make the model compatible with diffent weather models</li>
+<li><i>October 11, 2016 </i>by Tobias Blacha:<br/>Moved into AixLib</li>
+<li><i>Februar 21, 2013 </i>by Corinna Leonhardt:<br/>Implemented</li>
 </ul>
-</html>"));
+</html>"),   Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+        coordinateSystem(preserveAspectRatio=false)));
 end PVModuleDC;
