@@ -1,4 +1,6 @@
 within AixLib.DataBase.Walls.WSchV1984.Floor;
+
+
 record FLcellar_WSchV1984_SML_upHalf
   "Floor towards cellar after WSchV1984, for building of type S (schwer), M (mittel) and L (leicht), upper half."
   extends WallBaseDataDefinition(n(min = 1) = 2 "Number of wall layers", d = {0.02, 0.06}
@@ -25,5 +27,3 @@ record FLcellar_WSchV1984_SML_upHalf
  </ul>
  </html>"));
 end FLcellar_WSchV1984_SML_upHalf;
-
-

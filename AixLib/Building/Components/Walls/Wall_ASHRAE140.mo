@@ -57,7 +57,8 @@ model Wall_ASHRAE140
    parameter Boolean withSunblind = false "enable support of sunblinding?" annotation(Dialog( tab="Window", enable = outside and withWindow));
    parameter Real Blinding=0 "blinding factor <=1" annotation(Dialog( tab="Window", enable = withWindow and outside and withSunblind));
    parameter Real Limit=180
-    "minimum specific total solar radiation in W/m2 for blinding becoming active"  annotation(Dialog( tab="Window", enable = withWindow and outside and withSunblind));
+    "minimum specific total solar radiation in W/m2 for blinding becoming active"
+                                                                                   annotation(Dialog( tab="Window", enable = withWindow and outside and withSunblind));
 
    // door parameters
    parameter Boolean withDoor = false "Choose if the wall has got a door"  annotation(Dialog(tab="Door"));

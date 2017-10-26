@@ -1,4 +1,4 @@
-within AixLib.Controls.HVACAgentBasedControl.Agents;
+﻿within AixLib.Controls.HVACAgentBasedControl.Agents;
 model MessageNotification
 
   parameter Integer n=1
@@ -57,7 +57,7 @@ equation
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>
 <ul>
-<li>November 2016, by Felix B�nning: Developed and implemented</li>
+<li>November 2016, by Felix Bünning: Developed and implemented</li>
 </ul>
 </html>", info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>

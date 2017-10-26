@@ -20,7 +20,7 @@ equation
   connect(machines_SensibleHeat_DIN18599.RadHeat, fixedTemp.port) annotation(Line(points = {{12.8, 0.3}, {38, 0.3}, {38, 56}, {42, 56}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
   connect(lights.ConvHeat, fixedTemp.port) annotation(Line(points = {{11, -26.8}, {38, -26.8}, {38, 56}, {42, 56}}, color = {191, 0, 0}));
   connect(lights.RadHeat, fixedTemp.port) annotation(Line(points = {{11, -40.96}, {38, -40.96}, {38, 56}, {42, 56}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
-  annotation (experiment(StopTime = 86400, Interval = 60, __Dymola_Algorithm = "Lsodar"), experimentSetupOutput(events = false), Documentation(info = "<html>
+  annotation( experiment(StopTime = 86400, Interval = 60, __Dymola_Algorithm = "Lsodar"), experimentSetupOutput(events = false), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Simulation to test the functionalty of the internal gains in a modelled room. </p>
  </html>", revisions = "<html>

@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.ReducedOrder;
+﻿within AixLib.ThermalZones.ReducedOrder;
 package Windows "This Package calculates solar gain through windows"
   extends Modelica.Icons.VariantsPackage;
 

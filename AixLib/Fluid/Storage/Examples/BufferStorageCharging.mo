@@ -21,7 +21,8 @@ model BufferStorageCharging
     redeclare package MediumHC2 = Medium,
     TStart=303.15)
     annotation (Placement(transformation(extent={{0,0},{-20,24}})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=283.15)   annotation(Placement(transformation(extent={{-58,4},
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=283.15)
+                                                                                      annotation(Placement(transformation(extent={{-58,4},
             {-38,24}})));
   AixLib.Fluid.Sources.MassFlowSource_T boundary(
     m_flow=0.2,
