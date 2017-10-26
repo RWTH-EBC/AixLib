@@ -140,7 +140,7 @@ equation
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
-  October 16, 2017, by Mirko Engelpracht:<br/>
+  October 16, 2017, by Mirko Engelpracht:<br />
   First implementation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
@@ -160,14 +160,14 @@ Actually, three power approaches are implemented in this package.
 To add further calculation procedures, just add its name in
 <a href=\"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Choices\">
 AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Choices</a>
-and expand the <code>if-structure</code>.<br \\>
+and expand the <code>if-structure</code>.<br />
 </p>
 <table summary=\"Power approaches\" border=\"1\" cellspacing=\"0\" 
 cellpadding=\"2\" style=\"border-collapse:collapse;\">
 <tr>
 <th>Reference</th>
 <th>Formula</th> 
-<th>Refrigerants</code></th> 
+<th>Refrigerants</th> 
 <th>Validity <code>T<sub>condensing</sub></code></th> 
 <th>Validity <code>T<sub>evaporating</sub></code></th> 
 <th>Validity <code>T<sub>subcooling</sub></code></th> 
@@ -178,7 +178,7 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
 ((p<sub>inlet</sub>-p<sub>outlet</sub>)/p<sub>crit</sub>)^b2 * 
 (T<sub>crit</sub>/T<sub>subcooling</sub>)^b3 * 
 (rho<sub>inlet</sub>/rho<sub>outlet</sub>)^b4 * 
-(quality)^b5</td> 
+(quality)^b5</code></td> 
 <td><code>R22, R407C, R410A</code></td> 
 <td><code>40 - 50 &deg;C</code></td> 
 <td><code>0 - 10 &deg;C</code></td> 

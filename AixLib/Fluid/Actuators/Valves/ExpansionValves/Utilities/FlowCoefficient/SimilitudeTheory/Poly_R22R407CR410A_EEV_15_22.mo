@@ -10,7 +10,7 @@ model Poly_R22R407CR410A_EEV_15_22
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
-  October 16, 2017, by Mirko Engelpracht:<br/>
+  October 16, 2017, by Mirko Engelpracht:<br />
   First implementation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
@@ -18,14 +18,14 @@ model Poly_R22R407CR410A_EEV_15_22
 </html>", info="<html>
 <p>
 This model contains a calculation procedure for flow coefficients presented by 
-Shanwei et al. (2005).<br \\>
+Shanwei et al. (2005).<br />
 </p>
 <table summary=\"Power approaches\" border=\"1\" cellspacing=\"0\" 
 cellpadding=\"2\" style=\"border-collapse:collapse;\">
 <tr>
 <th>Reference</th>
 <th>Formula</th> 
-<th>Refrigerants</code></th> 
+<th>Refrigerants</th> 
 <th>Validity <code>T<sub>condensing</sub></code></th> 
 <th>Validity <code>T<sub>evaporating</sub></code></th> 
 <th>Validity <code>T<sub>subcooling</sub></code></th> 

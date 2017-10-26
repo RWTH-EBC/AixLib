@@ -29,12 +29,11 @@ model ModularExpansionValvesMassFlowRate
     redeclare package Medium = Medium,
     T=TInl,
     nPorts=1,
-    m_flow=0.5)
-    "Source of constant mass flow and temperature"
+    m_flow=0.5) "Source of constant mass flow and temperature"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-40,70})));
-  replaceable ModularExpansionValves.ModularExpansionValvesSensorsPipes modVal(
+  replaceable ModularExpansionValves.ModularExpansionValvesSensors modVal(
     redeclare package Medium = Medium,
     nVal=nVal,
     redeclare SimpleExpansionValves.IsothermalExpansionValve expansionValves,
@@ -50,8 +49,8 @@ model ModularExpansionValvesMassFlowRate
         Modelica.Blocks.Types.SimpleController.P},
     useExt=true,
     redeclare model FlowCoefficient =
-        Utilities.FlowCoefficient.ConstantFlowCoefficient)
-                 "Modular expansion valves in parallel" annotation (Placement(
+        Utilities.FlowCoefficient.R134a.R134a_EEV_15)
+    "Modular expansion valves in parallel"              annotation (Placement(
         transformation(
         extent={{-18,18},{18,-18}},
         rotation=-90,

@@ -269,7 +269,6 @@ Moreover, appropriate values shall be assigned to the following parameters:
 <li><code>dp_nominal</code> for nominal pressure drop.</li>
 <li><code>m_flow_nominal</code> for nominal mass flow rate.</li>
 </ul>
-</p>
 <h4>Modeling approaches</h4>
 <p>
 Actually, three different modelling approaches are suggested and saved as

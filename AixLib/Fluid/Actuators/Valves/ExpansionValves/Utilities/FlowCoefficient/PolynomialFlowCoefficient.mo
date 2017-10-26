@@ -133,7 +133,7 @@ equation
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
-  October 16, 2017, by Mirko Engelpracht:<br/>
+  October 16, 2017, by Mirko Engelpracht:<br />
   First implementation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
@@ -154,14 +154,14 @@ Actually, two polynomial approaches are implemented in this package.
 To add further calculation procedures, just add its name in
 <a href=\"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Choices\">
 AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Choices</a>
-and expand the <code>if-structure</code>.<br \\>
+and expand the <code>if-structure</code>.<br />
 </p>
 <table summary=\"Polynomial approaches\" border=\"1\" cellspacing=\"0\" 
 cellpadding=\"2\" style=\"border-collapse:collapse;\">
 <tr>
 <th>Reference</th>
 <th>Formula</th> 
-<th>Refrigerants</code></th> 
+<th>Refrigerants</th> 
 <th>Validity <code>T<sub>condensing</sub></code></th> 
 <th>Validity <code>T<sub>evaporating</sub></code></th> 
 <th>Validity <code>T<sub>subcooling</sub></code></th> 

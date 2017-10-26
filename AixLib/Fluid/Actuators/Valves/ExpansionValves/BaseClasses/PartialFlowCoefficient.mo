@@ -49,7 +49,7 @@ partial model PartialFlowCoefficient
     Documentation(revisions="<html>
 <ul>
   <li>
-  October 16, 2017, by Mirko Engelpracht:<br/>
+  October 16, 2017, by Mirko Engelpracht:<br />
   First implementation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
@@ -61,7 +61,7 @@ expansion valves. It defines some basic inputs and outputs that are
 commonly used by flow coefficient models presented in
 <a href=\"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient\">
 AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient</a>.
-These inputs and outputs are summarised below:<br \\>
+These inputs and outputs are summarised below:<br />
 </p>
 <table summary=\"Inputs and outputs\" border=\"1\" cellspacing=\"0\" 
 cellpadding=\"2\" style=\"border-collapse:collapse;\">
