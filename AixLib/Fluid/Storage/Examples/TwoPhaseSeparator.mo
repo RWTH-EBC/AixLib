@@ -12,19 +12,19 @@ model TwoPhaseSeparator
   parameter Modelica.SIunits.AbsolutePressure pInl=
     Medium.pressure(Medium.setBubbleState(Medium.setSat_T(TInl+5)))
     "Actual pressure at inlet conditions";
-  parameter Modelica.SIunits.Temperature TInl = 373.15
+  parameter Modelica.SIunits.Temperature TInl = 303.15
     "Actual temperature at inlet conditions";
   parameter Modelica.SIunits.AbsolutePressure pOut=
     Medium.pressure(Medium.setDewState(Medium.setSat_T(TOut)))
     "Actual set point of the compressor's outlet pressure";
-  parameter Modelica.SIunits.Temperature TOut = 353.15
+  parameter Modelica.SIunits.Temperature TOut = 293.15
     "Actual temperature at outlet conditions";
 
   // Definition of models
   //
   Modelica.Blocks.Sources.Ramp rampTInl(
     duration=1,
-    height=TInl - TOut,
+    height=0,
     offset=TOut)
     "Ramp to provide temperature at tank's inlet"
     annotation (Placement(transformation(extent={{-88,72},{-68,92}})));
@@ -44,8 +44,10 @@ model TwoPhaseSeparator
     show_T=false,
     show_V_flow=false,
     useHeatLoss=false,
+    show_tankPropertiesDetailed=true,
     steSta=false,
-    show_tankPropertiesDetailed=true)
+    show_heatLosses=true,
+    VTanInn=10e-3)
     "Model of a two-phase tank loacted after condenser"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   AixLib.Fluid.Sources.Boundary_pT sink(
@@ -64,9 +66,11 @@ model TwoPhaseSeparator
     offset=pInl)
     "Ramp to provide pressure at tank's outlet"
     annotation (Placement(transformation(extent={{90,-90},{70,-70}})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=258.15)
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature
+    fixedTemperature(T=258.15)
     "Fixed ambient temperature to simulate heat losses to ambient"
     annotation (Placement(transformation(extent={{90,-10},{70,10}})));
+
 
 equation
   // Connections of the models

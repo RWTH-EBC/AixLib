@@ -459,7 +459,9 @@ equation
 
   mTan = dTan*VTanInn "Basic relationship";
   mTan = mLiq + mVap  "Converstion of mass";
-  mLiq = VLiq*dLiq "Mass of liquid phase";
+  VLiq = smooth(0, noEvent(if (quaTan > 0.0 and quaTan < 1.0) then
+    mTan*(1-quaTan)/dLiq else if (quaTan >= 1.0) then 0 else VTanInn))
+    "Volume of liquid phase depending on tank's actual quality";
   mVap = smooth(0, noEvent(if (quaTan > 0.0 and quaTan < 1.0) then
     mTan*quaTan else if (quaTan >= 1.0) then mTan else 0.0))
     "Mass of vapour phase depending on tank's actual quality";
