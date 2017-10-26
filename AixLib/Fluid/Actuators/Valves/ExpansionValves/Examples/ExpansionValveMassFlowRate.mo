@@ -10,7 +10,7 @@ model ExpansionValveMassFlowRate
    Modelica.Media.R134a.R134a_ph
    "Actual medium of the compressor";
 
-  parameter Modelica.SIunits.Temperature TInl = 318.15
+  parameter Modelica.SIunits.Temperature TInl = 343.15
     "Actual temperature at inlet conditions";
   parameter Modelica.SIunits.AbsolutePressure pOut=
     Medium.pressure(Medium.setDewState(Medium.setSat_T(TOut)))
@@ -44,13 +44,14 @@ model ExpansionValveMassFlowRate
     show_flow_coefficient=false,
     show_staInl=false,
     show_staOut=false,
-    useInpFil=false,
     dp_start=1e6,
-    redeclare model FlowCoefficient =
-        Utilities.FlowCoefficient.R410a.R410a_EEV_18,
     AVal=2.55e-5,
     calcProc=Utilities.Choices.CalcProc.flowCoefficient,
-    dpNom=1000000)
+    useInpFil=true,
+    risTim=0.25,
+    dpNom=1000000,
+    redeclare model FlowCoefficient =
+        Utilities.FlowCoefficient.R407c.R407c_EEV_18)
     "Simple isothermal valve"
     annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
   AixLib.Fluid.FixedResistances.PressureDrop simplePipe(

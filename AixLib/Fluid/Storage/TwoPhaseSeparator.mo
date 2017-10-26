@@ -618,6 +618,14 @@ alt=\"Calculation procedure of specific enthalpy at inlet\"/>
 <img src=\"modelica://AixLib/Resources/Images/Fluid/Storage/separatorSpecificEnthalpyOutlet.png\"
 alt=\"Calculation procedure of specific enthalpy at outlet\"/>
 </p>
+<h4>Implementation</h4>
+<p>
+If the two-phase separator is connected with respect
+to design direction, it will behave like a liquid receiver.
+If the two-phase separator is connected aggainst design
+direction or flow reversal occurs, it will behave like a
+mist eliminator.
+</p>
 <h4>References</h4>
 <p>
 Quoilin, Sylvain; Desideri, Adriano; Wronski, Jorrit;

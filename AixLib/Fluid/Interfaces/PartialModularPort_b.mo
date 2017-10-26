@@ -82,7 +82,7 @@ variables are introduced by the modeller</li>
 <li><code>port_a.h_outflow</code> for flow in reverse direction.</li>
 </ul>
 <p>
-Moreover appropriate values shall be assigned to the following parameters:
+Moreover, appropriate values shall be assigned to the following parameters:
 </p>
 <ul>
 <li><code>dp_start</code> for a guess of the pressure drop</li>
@@ -90,5 +90,8 @@ Moreover appropriate values shall be assigned to the following parameters:
 <li><code>dp_nominal</code> for nominal pressure drop.</li>
 <li><code>m_flow_nominal</code> for nominal mass flow rate.</li>
 </ul>
-</html>"));
+</html>"), Icon(graphics={Text(
+          extent={{-100,140},{100,100}},
+          lineColor={28,108,200},
+          textString="%name")}));
 end PartialModularPort_b;

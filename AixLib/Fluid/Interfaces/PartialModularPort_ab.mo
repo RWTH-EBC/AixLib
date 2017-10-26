@@ -55,7 +55,10 @@ partial model PartialModularPort_ab
     "Fluid connectors b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,40},{110,-40}})));
 
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Text(
+          extent={{-100,140},{100,100}},
+          lineColor={28,108,200},
+          textString="%name")}),                                 Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>
 <ul>
@@ -84,7 +87,7 @@ variables are introduced by the modeller</li>
 <li><code>port_a.h_outflow_i</code> for flow in reverse direction.</li>
 </ul>
 <p>
-Moreover appropriate values shall be assigned to the following parameters:
+Moreover, appropriate values shall be assigned to the following parameters:
 </p>
 <ul>
 <li><code>dp_start</code> for a guess of the pressure drop</li>
