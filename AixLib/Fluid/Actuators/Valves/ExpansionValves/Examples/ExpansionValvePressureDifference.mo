@@ -7,7 +7,7 @@ model ExpansionValvePressureDifference
   // Define medium and parameters
   //
   package Medium =
-   WorkingVersion.Media.Refrigerants.R134a.R134a_IIR_P1_395_T233_455_Horner
+   Modelica.Media.R134a.R134a_ph
    "Actual medium of the compressor";
 
   parameter Modelica.SIunits.AbsolutePressure pInl=
@@ -26,7 +26,7 @@ model ExpansionValvePressureDifference
 
   // Define components
   //
-  AixLib.Fluid.Sources.FixedBoundary Source(
+  AixLib.Fluid.Sources.FixedBoundary source(
     redeclare package Medium = Medium,
     use_p=true,
     use_T=true,
@@ -35,7 +35,7 @@ model ExpansionValvePressureDifference
     T=TInl)
     "Source of constant pressure and temperature"
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
-  Modelica.Blocks.Sources.Sine valveOpening(
+  Modelica.Blocks.Sources.Sine valOpe(
     amplitude=0.45,
     freqHz=1,
     offset=0.5)
@@ -56,8 +56,7 @@ model ExpansionValvePressureDifference
       Utilities.FlowCoefficient.R134a.R134a_EEV_15)
     "Simple isothermal valve"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-
-  AixLib.Fluid.Sources.FixedBoundary Sink(
+  AixLib.Fluid.Sources.FixedBoundary sink(
     redeclare package Medium = Medium,
     p=pOut,
     T=TOut,
@@ -65,14 +64,15 @@ model ExpansionValvePressureDifference
     "Sink of constant pressure and temperature"
     annotation (Placement(transformation(extent={{80,-10},{60,10}})));
 
+
 equation
   // Define connections of components
   //
-  connect(Source.ports[1], linearValve.port_a)
+  connect(source.ports[1], linearValve.port_a)
     annotation (Line(points={{-60,0},{-10,0}}, color={0,127,255}));
-  connect(valveOpening.y, linearValve.opeSet)
+  connect(valOpe.y, linearValve.opeSet)
     annotation (Line(points={{-59,50},{-5,50},{-5,10.6}}, color={0,0,127}));
-  connect(linearValve.port_b, Sink.ports[1])
+  connect(linearValve.port_b,sink. ports[1])
     annotation (Line(points={{10,0},{60,0}}, color={0,127,255}));
 
   annotation (Documentation(revisions="<html>
@@ -83,5 +83,13 @@ equation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
 </ul>
+</html>", info="<html>
+<p>
+This is a simple example model to test expansion valves presented in
+<a href=\"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.SimpleExpansionValves\">
+AixLib.Fluid.Actuators.Valves.ExpansionValves.SimpleExpansionValves</a>. 
+Therefore, both the valve's inlet and outlet conditions are prescribed
+in terms of pressure and temperature.
+</p>
 </html>"));
 end ExpansionValvePressureDifference;

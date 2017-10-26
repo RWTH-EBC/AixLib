@@ -5,6 +5,8 @@ package SimpleExpansionValves "Package that contains simple expansion valves"
 
 
 
+
+
 annotation (Documentation(revisions="<html>
 <ul>
   <li>
@@ -13,5 +15,9 @@ annotation (Documentation(revisions="<html>
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
 </ul>
+</html>", info="<html>
+<p>
+This package contains models describing simple expanion valves.
+</p> 
 </html>"));
 end SimpleExpansionValves;

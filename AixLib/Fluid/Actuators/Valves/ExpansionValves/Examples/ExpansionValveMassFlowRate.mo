@@ -7,7 +7,7 @@ model ExpansionValveMassFlowRate
   // Define medium and parameters
   //
   package Medium =
-   WorkingVersion.Media.Refrigerants.R410a.R410a_IIR_P1_48_T233_473_Horner
+   Modelica.Media.R134a.R134a_ph
    "Actual medium of the compressor";
 
   parameter Modelica.SIunits.Temperature TInl = 318.15
@@ -23,14 +23,14 @@ model ExpansionValveMassFlowRate
 
   // Define components
   //
-  AixLib.Fluid.Sources.MassFlowSource_T Source(
+  AixLib.Fluid.Sources.MassFlowSource_T source(
     redeclare package Medium = Medium,
     T=TInl,
     nPorts=1,
     m_flow=0.5*m_flow_nominal)
     "Source of constant mass flow and temperature"
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
-  Modelica.Blocks.Sources.Sine valveOpening(
+  Modelica.Blocks.Sources.Sine valOpe(
     freqHz=1,
     amplitude=0.3,
     offset=0.7)
@@ -50,16 +50,16 @@ model ExpansionValveMassFlowRate
         Utilities.FlowCoefficient.R410a.R410a_EEV_18,
     AVal=2.55e-5,
     calcProc=Utilities.Choices.CalcProc.flowCoefficient,
-    dpNom=1000000) "Simple isothermal valve"
+    dpNom=1000000)
+    "Simple isothermal valve"
     annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
-
   AixLib.Fluid.FixedResistances.PressureDrop simplePipe(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     dp_nominal=7.5e5)
     " Simple pipe to provide pressure loss"
     annotation (Placement(transformation(extent={{10,-10},{30,10}})));
-  AixLib.Fluid.Sources.FixedBoundary Sink(
+  AixLib.Fluid.Sources.FixedBoundary sink(
     redeclare package Medium = Medium,
     p=pOut,
     T=TOut,
@@ -67,18 +67,19 @@ model ExpansionValveMassFlowRate
     "Sink of constant pressure and temperature"
     annotation (Placement(transformation(extent={{80,-10},{60,10}})));
 
+
 equation
   // Define connections of components
   //
-  connect(valveOpening.y, linearValve.opeSet)
+  connect(valOpe.y, linearValve.opeSet)
     annotation (Line(points={{-59,50},{-25,50},{-25,10.6}}, color={0,0,127}));
   connect(linearValve.port_b, simplePipe.port_a)
     annotation (Line(points={{-10,0},{10,0}},
                 color={0,127,255}));
-  connect(simplePipe.port_b, Sink.ports[1])
+  connect(simplePipe.port_b,sink. ports[1])
     annotation (Line(points={{30,0},{46,0},{60,0}},
                 color={0,127,255}));
-  connect(Source.ports[1], linearValve.port_a)
+  connect(source.ports[1], linearValve.port_a)
     annotation (Line(points={{-60,0},{-30,0}},
                 color={0,127,255}));
 
@@ -90,5 +91,15 @@ equation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
 </ul>
+</html>", info="<html>
+<p>
+This is a simple example model to test expansion valves presented in
+<a href=\"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.SimpleExpansionValves\">
+AixLib.Fluid.Actuators.Valves.ExpansionValves.SimpleExpansionValves</a>. 
+Therefore, both the valve's inlet and outlet conditions are prescribed.
+The inlet conditions are prescribed in terms of mass flow rate and 
+temperature; the outlet conditions are prescribed in terms of pressure 
+and temperature.
+</p>
 </html>"));
 end ExpansionValveMassFlowRate;
