@@ -117,5 +117,39 @@ equation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
 </ul>
+</html>", info="<html>
+<p>
+This is a model of modular expansion valves that are used, for example, 
+in close-loop systems like heat pumps or chillers.<br />
+It consists of <code>nVal</code> expansion valves in parallel and also 
+<code>nVal</code> PID conrollers if no external controller is used.
+Additionally, four different sensors (i.e. absolute pressure, temperature,
+mass flow rate, steam quality) are located at each expansion valve's outlet 
+as well as simple pipes to compute pressure losses.
+</p>
+<h4>Modeling approaches</h4>
+<p>
+This base model mainly consists of four sub-models. Therefore, please 
+checkout these sub-models for further information of underlying modeling
+approaches and parameterisation:
+</p>
+<ul>
+<li>
+<a href=\"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.SimpleExpansionValves.IsothermalExpansionValve\">
+AixLib.Fluid.Actuators.Valves.ExpansionValves.SimpleExpansionValves.IsothermalExpansionValve</a>.
+</li>
+<li>
+<a href=\"modelica://AixLib.Controls.HeatPump.ModularHeatPumps.ModularExpansionValveController\">
+AixLib.Controls.HeatPump.ModularHeatPumps.ModularExpansionValveController</a>.
+</li>
+<li>
+<a href=\"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.ModularSensors\">
+AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.ModularSensors</a>.
+</li>
+<li>
+<a href=\"modelica://AixLib.Fluid.FixedResistances.PressureDrop\">
+AixLib.Fluid.FixedResistances.PressureDrop</a>.
+</li>
+</ul>
 </html>"));
 end ModularExpansionValvesSensorsPipes;
