@@ -10,7 +10,7 @@ partial model PartialFlowCoefficient
     "Definition of two-phase medium";
 
   input Real opening(unit="1")
-    "Actual valve's opening";
+    "Current valve's opening";
   input Modelica.SIunits.Area AVal
     "Cross-sectional area of the expansion valve";
   input Modelica.SIunits.Diameter dInlPip

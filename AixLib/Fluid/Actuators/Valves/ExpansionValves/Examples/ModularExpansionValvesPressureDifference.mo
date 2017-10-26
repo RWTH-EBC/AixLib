@@ -8,20 +8,20 @@ model ModularExpansionValvesPressureDifference
   //
   package Medium =
    Modelica.Media.R134a.R134a_ph
-   "Actual medium of the compressor";
+   "Current medium of the compressor";
 
   parameter Integer nVal = 3
     "Number of valves - each valve will be connected to an individual port_b";
   parameter Modelica.SIunits.AbsolutePressure pInl=
     Medium.pressure(Medium.setBubbleState(Medium.setSat_T(TInl+5)))
-    "Actual pressure at inlet conditions";
+    "Current pressure at inlet conditions";
   parameter Modelica.SIunits.Temperature TInl = 348.15
-    "Actual temperature at inlet conditions";
+    "Current temperature at inlet conditions";
   parameter Modelica.SIunits.AbsolutePressure pOut=
     Medium.pressure(Medium.setDewState(Medium.setSat_T(TOut)))
-    "Actual set point of the compressor's outlet pressure";
+    "Current set point of the compressor's outlet pressure";
   parameter Modelica.SIunits.Temperature TOut = 278.15
-    "Actual temperature at outlet conditions";
+    "Current temperature at outlet conditions";
 
   // Definition of models
   //
@@ -31,7 +31,8 @@ model ModularExpansionValvesPressureDifference
     use_T=true,
     nPorts=1,
     p=pInl,
-    T=TInl) "Source of constant pressure and temperature"
+    T=TInl)
+    "Source of constant pressure and temperature"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-40,70})));
@@ -50,7 +51,8 @@ model ModularExpansionValvesPressureDifference
     useExt=true,
     redeclare model FlowCoefficient =
         Utilities.FlowCoefficient.ConstantFlowCoefficient)
-                  "Modular expansion valves in parallel" annotation (Placement(
+    "Modular expansion valves in parallel"
+    annotation (Placement(
         transformation(
         extent={{-18,18},{18,-18}},
         rotation=-90,
@@ -90,14 +92,14 @@ model ModularExpansionValvesPressureDifference
   Modelica.Blocks.Routing.Replicator repInt(nout=nVal)
     "Replicating the internal set signal"
     annotation (Placement(transformation(extent={{40,-10},{20,10}})));
-  Modelica.Blocks.Routing.Replicator repAct(nout=nVal)
-    "Replicating the actual value of the manipulated variables"
+  Modelica.Blocks.Routing.Replicator repCur(nout=nVal)
+    "Replicating the current value of the manipulated variables"
     annotation (Placement(transformation(extent={{40,-60},{20,-40}})));
-  Modelica.Blocks.Sources.Ramp ramAct(
+  Modelica.Blocks.Sources.Ramp ramCur(
     height=0.5,
     offset=0.3,
     duration=1)
-    "Ramp to fake actual value of the controlled variables"
+    "Ramp to fake current value of the controlled variables"
     annotation (Placement(transformation(extent={{80,-60},{60,-40}})));
 
 
@@ -112,20 +114,20 @@ equation
     annotation (Line(points={{59,26},{50,26},{50,50},{42,50}}, color={0,0,127}));
   connect(valOpe.y, repInt.u)
     annotation (Line(points={{59,26},{50,26},{50,0},{42,0}}, color={0,0,127}));
-  connect(ramAct.y, repAct.u)
+  connect(ramCur.y,repCur. u)
     annotation (Line(points={{59,-50},{50,-50},{42,-50}}, color={0,0,127}));
   connect(modVal.dataBus, dataBus)
     annotation (Line(
       points={{-22,0},{0,0}},
       color={255,204,51},
       thickness=0.5));
-  connect(repValOpe.y, dataBus.expValBus.extManSigVal)
+  connect(repValOpe.y, dataBus.expValBus.extManVarVal)
     annotation (Line(points={{19,50},{10,50},{10,0.05},{-0.05,0.05}},
                 color={0,0,127}));
-  connect(repInt.y, dataBus.expValBus.intSetSigVal)
+  connect(repInt.y, dataBus.expValBus.intSetPoiVal)
     annotation (Line(points={{19,0},{10,0},{10,0.05},{-0.05,0.05}},
                 color={0,0,127}));
-  connect(repAct.y, dataBus.expValBus.actConVarVal)
+  connect(repCur.y, dataBus.expValBus.meaConVarVal)
     annotation (Line(points={{19,-50},{10,-50},{10,0.05},{-0.05,0.05}},
                 color={0,0,127}));
 

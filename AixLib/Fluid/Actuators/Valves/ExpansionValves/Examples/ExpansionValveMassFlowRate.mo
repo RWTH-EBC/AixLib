@@ -50,7 +50,8 @@ model ExpansionValveMassFlowRate
     risTim=0.25,
     dpNom=1000000,
     redeclare model FlowCoefficient =
-        Utilities.FlowCoefficient.R407c.R407c_EEV_18) "Simple isothermal valve"
+        Utilities.FlowCoefficient.R407c.R407c_EEV_18)
+    "Simple isothermal valve"
     annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
   AixLib.Fluid.FixedResistances.PressureDrop simplePipe(
     redeclare package Medium = Medium,
@@ -70,7 +71,7 @@ model ExpansionValveMassFlowRate
 equation
   // Define connections of components
   //
-  connect(valOpe.y, linearValve.opeSet)
+  connect(valOpe.y, linearValve.manVarVal)
     annotation (Line(points={{-59,50},{-25,50},{-25,10.6}}, color={0,0,127}));
   connect(linearValve.port_b, simplePipe.port_a)
     annotation (Line(points={{-10,0},{10,0}},

@@ -1,6 +1,6 @@
 within AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses;
 partial model PartialIsothermalExpansionValve
-  "Base model for alls isothermal expansion valves"
+  "Base model for all isothermal expansion valves"
   extends BaseClasses.PartialExpansionValve;
 
 equation
@@ -25,8 +25,7 @@ chillers. This model inherits from
 <a href=\"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialExpansionValve\">
 AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialExpansionValve</a>
 and, hence, please check out the PartialExpansionValve model if
-detailed information is required about the modelling approach
-of the expansion valves.
+detailed information is required about the modelling approach.
 </p>
 <p>
 Within this base model, the following two equations

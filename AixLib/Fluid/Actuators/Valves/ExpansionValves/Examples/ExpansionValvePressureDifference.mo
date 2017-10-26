@@ -50,10 +50,10 @@ model ExpansionValvePressureDifference
     AVal=2.01e-6,
     m_flow_nominal=m_flow_nominal,
     calcProc=AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Choices.CalcProc.flowCoefficient,
-
     dpNom=1000000,
     redeclare model FlowCoefficient =
-        Utilities.FlowCoefficient.R134a.R134a_EEV_15) "Simple isothermal valve"
+        Utilities.FlowCoefficient.R134a.R134a_EEV_15)
+    "Simple isothermal valve"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
   AixLib.Fluid.Sources.FixedBoundary sink(
@@ -70,7 +70,7 @@ equation
   //
   connect(source.ports[1], linearValve.port_a)
     annotation (Line(points={{-60,0},{-10,0}}, color={0,127,255}));
-  connect(valOpe.y, linearValve.opeSet)
+  connect(valOpe.y, linearValve.manVarVal)
     annotation (Line(points={{-59,50},{-5,50},{-5,10.6}}, color={0,0,127}));
   connect(linearValve.port_b,sink. ports[1])
     annotation (Line(points={{10,0},{60,0}}, color={0,127,255}));

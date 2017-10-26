@@ -109,13 +109,13 @@ partial model PartialExpansionValve
 
   // Definition of connectors and submodels
   //
-  Modelica.Blocks.Interfaces.RealInput opeSet(min=0, max=1)
+  Modelica.Blocks.Interfaces.RealInput manVarVal(min=0, max=1)
     "Prescribed expansion valve's opening" annotation (Placement(transformation(
         extent={{16,-16},{-16,16}},
         rotation=90,
         origin={-50,106})));
-  Modelica.Blocks.Interfaces.RealOutput opeAct(min=0, max=1)
-    "Actual expansion valve's opening" annotation (Placement(transformation(
+  Modelica.Blocks.Interfaces.RealOutput curManVarVal(min=0, max=1)
+    "Current expansion valve's opening" annotation (Placement(transformation(
         extent={{-15,-15},{15,15}},
         rotation=90,
         origin={51,105})));
@@ -137,9 +137,9 @@ partial model PartialExpansionValve
 
 protected
   Modelica.SIunits.Area AThr
-    "Actual cross-sectional area of the valve";
+    "Current cross-sectional area of the valve";
   Real opening(unit="1")
-    "Actual valve's opening";
+    "Current valve's opening";
 
   Modelica.SIunits.Density dInl = Medium.density(staInl)
     "Density at valves's inlet conditions";
@@ -153,31 +153,31 @@ equation
   // Calculation of thermodynamic states
   //
   staInl = Medium.setState_phX(port_a.p,
-    inStream(port_a.h_outflow), inStream(port_a.Xi_outflow))
+    actualStream(port_a.h_outflow), actualStream(port_a.Xi_outflow))
     "Thermodynamic state of the fluid at inlet condtions";
   staOut = Medium.setState_phX(port_b.p,
-    port_b.h_outflow, port_b.Xi_outflow)
+    actualStream(port_b.h_outflow), actualStream(port_b.Xi_outflow))
     "Thermodynamic state of the fluid at outlet condtions";
 
   // Calculation of valve's opening degree
   //
-  connect(filterOpening.u, opeSet);
+  connect(filterOpening.u, manVarVal);
   if useInpFil then
     connect(openingThrough.u, filterOpening.y)
-      "Transient behaviour of valve opening";
+      "Transient behaviour of valve's opening";
   else
-    connect(openingThrough.u, opeSet)
-      "No transient behaiviour of valve opnening";
+    connect(openingThrough.u, manVarVal)
+      "No transient behaiviour of valve's opnening";
   end if;
-  opening = openingThrough.y "Actual valve's opening";
+  opening = openingThrough.y "Current valve's opening";
 
   // Calculation of active cross-sectional flow area
   //
-  AThr = opening * AVal "Actual cross-sectional area of the valve";
+  AThr = opening * AVal "Current cross-sectional area of the valve";
 
   // Calculation of outputs
   //
-  opeAct = opening "No delay to change the valve opening";
+  curManVarVal = opening "Current valve's opening";
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Polygon(

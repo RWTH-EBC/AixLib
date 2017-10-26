@@ -78,11 +78,12 @@ model ModularExpansionValvesSensorsPipes
     "Model that contains different sensors located behind expansion valves"
     annotation (Placement(transformation(extent={{30,-10},{50,10}})));
   FixedResistances.PressureDrop modularPipes[nVal](
-    redeclare package Medium = Medium,
+    redeclare final package Medium = Medium,
     each final m_flow_nominal=m_flow_nominal,
     dp_nominal=dpNomPip,
     deltaM=deltaM) "Models of simple pipes to consider pressure losses"
     annotation (Placement(transformation(extent={{60,-10},{80,10}})));
+
 
 equation
   // Connect expansion valves with sensors and sensors with ports_b
@@ -95,19 +96,18 @@ equation
 
   // Connect sensors with data bus
   //
-  connect(modularSensors.preMea, dataBus.senBus.senPreVal)
+  connect(modularSensors.preMea, dataBus.senBus.meaPreVal)
     annotation (Line(points={{34,-10},{34,-90},{0.05,-90},{0.05,-99.95}},
                 color={0,0,127}));
-  connect(modularSensors.temMea, dataBus.senBus.senTemVal)
+  connect(modularSensors.temMea, dataBus.senBus.meaTemVal)
     annotation (Line(points={{38,-10},{38,-90},{0.05,-90},{0.05,-99.95}},
                 color={0,0,127}));
-  connect(modularSensors.masFloMea, dataBus.senBus.senMasFloVal)
+  connect(modularSensors.masFloMea, dataBus.senBus.meaMasFloVal)
     annotation (Line(points={{42,-10},{42,-90},{0.05,-90},{0.05,-99.95}},
                 color={0,0,127}));
-  connect(modularSensors.quaMea, dataBus.senBus.senPhaVal)
+  connect(modularSensors.quaMea, dataBus.senBus.meaPhaVal)
     annotation (Line(points={{46,-10},{46,-10},{46,-20},{46,-90},{0.05,-90},{0.05,
           -99.95}},color={0,0,127}));
-
 
   annotation (Documentation(revisions="<html>
 <ul>

@@ -20,7 +20,7 @@ partial model PartialModularExpansionVavles
     final mFlowNom=mFlowNom,
     final dpNom=dpNom,
     redeclare final model FlowCoefficient = FlowCoefficient,
-    each allowFlowReversal=allowFlowReversal,
+    each final allowFlowReversal=allowFlowReversal,
     each final dp_start=dp_start,
     final m_flow_nominal=mFlowNom)
     "Array of expansion valves"
@@ -48,8 +48,9 @@ partial model PartialModularExpansionVavles
     annotation(Dialog(tab="Expansion valves",group="Transient behaviour"),
                HideResult=not show_parVal);
 
-  parameter Utilities.Choices.CalcProc calcProc[nVal]=fill(Utilities.Choices.CalcProc.flowCoefficient,
-      nVal) "Chose predefined calculation method for flow coefficients"
+  parameter Utilities.Choices.CalcProc calcProc[nVal]=
+    fill(Utilities.Choices.CalcProc.flowCoefficient,nVal)
+    "Chose predefined calculation method for flow coefficients"
     annotation (Dialog(tab="Expansion valves", group="Flow Coefficient"),
       HideResult=not show_parVal);
   parameter Modelica.SIunits.MassFlowRate mFlowNom[nVal]=
@@ -99,10 +100,11 @@ partial model PartialModularExpansionVavles
     final initType=initType,
     final xi_start=xi_start,
     final xd_start=xd_start,
-    final y_start=y_start) "Model of internal controller" annotation (
-    Placement(transformation(extent={{-10,-78},{10,-58}})),
-    choicesAllMatching=true,
-    Dialog(tab="Controller", group="General"));
+    final y_start=y_start)
+    "Model of internal controller"
+    annotation (Placement(transformation(extent={{-10,-78},{10,-58}})),
+      choicesAllMatching=true,
+      Dialog(tab="Controller", group="General"));
 
   // Definition of parameters describing the expansion valve controller
   //
@@ -206,7 +208,8 @@ partial model PartialModularExpansionVavles
   // Definition of connectors
   //
   Controls.Interfaces.ModularHeatPumpControlBus dataBus(
-    final nVal=nVal) "Data bus connector"
+    final nVal=nVal)
+    "Data bus connector"
     annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
 
 
@@ -220,8 +223,8 @@ equation
   // Connect data bus and further control signals
   //
   for i in 1:nVal loop
-    expansionValveController.setVal[i] = expansionValves[i].opeSet;
-    expansionValves[i].opeAct =expansionValveController.actVal[i];
+    expansionValveController.manVarVal[i] = expansionValves[i].manVarVal;
+    expansionValves[i].curManVarVal = expansionValveController.curManVarVal[i];
   end for;
   connect(dataBus, expansionValveController.dataBus)
     annotation (Line(

@@ -581,8 +581,6 @@ equation
 <p>This is a model of a ideally working two-phase separator. 
 The separator separates a vapor mixture into its liquid and 
 vapour parts until the tank is either empty or full.
-Consequently, the two-phase separator works as a liquid
-receiver.
 </p>
 <h4>Assumptions</h4>
 <p>
@@ -602,11 +600,11 @@ must be given a priori.</li>
 <p>
 Moreover, the thermodynamic model is generally based on the 
 tank model presented by Quoilin et al. (2014) in their
-ThermoCacle library.
+ThermoCycle library.
 </p>
 <h4>Calculation of specific enthalpies</h4>
 <p>
-The specific enthalpies at tank's inlet and outlet depend
+The specific enthalpies at the tank's inlet and outlet depend
 on the relative tank level. The calculation procedures
 are presented below:
 </p>

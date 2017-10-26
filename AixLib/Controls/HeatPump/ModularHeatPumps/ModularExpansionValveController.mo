@@ -20,15 +20,15 @@ equation
   //
   connect(internalController.u_m,  dataBus.expValBus.actConVarVal);
   connect(internalController.u_s,  dataBus.expValBus.intSetSigVal);
-  connect(internalController.y,  setSig);
+  connect(internalController.y,  manVar);
 
   if useExt then
-    connect(setSig, dataBus.expValBus.extManSigVal);
+    connect(manVarVal, dataBus.expValBus.extManSigVal);
   end if;
-  setVal = setSig;
+  manVarVal = manVar;
 
-  /*The output block 'setSig' is mandantory since the internal controller is 
-    conditional. Therefore, the connection 'connect(internalController.y,setSig)'
+  /*The output block 'manVar' is mandantory since the internal controller is 
+    conditional. Therefore, the connection 'connect(internalController.y,manVar)'
     is required to prevent errors that would occur otherwise if the internal
     controller is removed conditionally.
   */

@@ -15,8 +15,8 @@ partial model PartialModularController
 
   // Definition of parameters describing the controller
   //
-  parameter Modelica.Blocks.Types.SimpleController
-    controllerType[nCom] = fill(Modelica.Blocks.Types.SimpleController.PID,nCom)
+  parameter Modelica.Blocks.Types.SimpleController controllerType[nCom]=
+    fill(Modelica.Blocks.Types.SimpleController.PID,nCom)
     "Type of controller"
     annotation(Dialog(tab="Controller",group="General"),
                HideResult=true);
@@ -24,7 +24,8 @@ partial model PartialModularController
     "= true, if medium flow rate is throttled through cooling coil controller"
     annotation(Dialog(tab="Controller",group="General"),
                HideResult=true);
-  parameter Types.Reset reset[nCom] = fill(AixLib.Types.Reset.Disabled,nCom)
+  parameter AixLib.Types.Reset reset[nCom]=
+    fill(AixLib.Types.Reset.Disabled,nCom)
     "Type of controller output reset"
     annotation(Dialog(tab="Controller",group="General"),
                HideResult=true);
@@ -119,7 +120,7 @@ partial model PartialModularController
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-60,0})));
-  Modelica.Blocks.Interfaces.RealOutput setSig[nCom]
+  Modelica.Blocks.Interfaces.RealOutput manVar[nCom]
     "Input connector to pass controller's manipualted signals through if activated"
     annotation (Placement(
                 transformation(
@@ -131,8 +132,8 @@ partial model PartialModularController
     final nVal=nCom)
     "Data bus with signals to allow control of expansion valves"
     annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
-  Modelica.Blocks.Interfaces.RealInput actVal[nCom]
-    "Array of signals with actual manipulated values of controlled components"
+  Modelica.Blocks.Interfaces.RealInput curManVarVal[nCom]
+    "Array of signals with current manipulated variables of controlled components"
     annotation (
       Placement(transformation(
         extent={{-20,-20},{20,20}},
@@ -141,8 +142,8 @@ partial model PartialModularController
         extent={{-20,-20},{20,20}},
         rotation=270,
         origin={60,112})));
-  Modelica.Blocks.Interfaces.RealOutput setVal[nCom]
-    "Array of manipulated signals for controlled components"
+  Modelica.Blocks.Interfaces.RealOutput manVarVal[nCom]
+    "Array of manipulated variables for controlled components"
     annotation (
       Placement(transformation(
         extent={{-20,-20},{20,20}},
@@ -156,7 +157,7 @@ partial model PartialModularController
 equation
   // Connect output signals
   //
-  connect(actVal, dataBus.expValBus.actManSigVal)
+  connect(curManVarVal, dataBus.expValBus.curManVarVal)
     annotation (Line(points={{60,112},{60,-80},{0.05,-80},{0.05,-99.95}},
                 color={0,0,127}));
 
@@ -229,8 +230,8 @@ inputs, outputs, parameters and sub-models.
 The main inputs and outputs are the modular heat pump control bus 
 <a href=\"modelica://AixLib.Controls.Interfaces.ModularHeatPumpControlBus\">
 AixLib.Controls.Interfaces.ModularHeatPumpControlBus</a>, the manipulated
-signals passed to the controlled components and the actual manipulated signals.
-The main sub-model is a PID controller presented in 
+signals passed to the controlled components and the current manipulated 
+signals. The main sub-model is a PID controller presented in 
 <a href=\"modelica://AixLib.Controls.Continuous.LimPID\">
 AixLib.Controls.Continuous.LimPID</a> that is initialised if no external
 controller is used. Furthermore, all parameters with respect to the PID
