@@ -64,7 +64,8 @@ equation
 
   // Calculationg of flow coefficient
   //
-  etaIse = corFac[1] * a * product(p[i]^b[i] for i in 1:nT)^corFac[2]
+  etaIse = min(1, corFac[1] * a *
+    product(p[i]^b[i] for i in 1:nT)^corFac[2])
     "Calculation procedure of generic power approach";
 
   annotation (Documentation(revisions="<html>

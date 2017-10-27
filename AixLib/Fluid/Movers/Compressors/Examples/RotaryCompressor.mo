@@ -28,8 +28,7 @@ model RotaryCompressor
     use_T=true,
     nPorts=1,
     p=pInl,
-    T=TOut)
-    "Source with constant pressure and temperature"
+    T=TOut) "Source with constant pressure and temperature"
     annotation (Placement(transformation(extent={{-82,-10},{-62,10}})));
   Modelica.Blocks.Sources.Sine rotSpe(
     amplitude=40,
@@ -40,7 +39,7 @@ model RotaryCompressor
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixTem(T=283.15)
     "Fixed ambient temperature"
     annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
-  SimpleCompressors.RotaryCompressor rotCom(
+  SimpleCompressors.RotaryCompressorSimple rotCom(
     redeclare package Medium = Medium,
     show_staEff=true,
     show_qua=true,
@@ -63,8 +62,7 @@ model RotaryCompressor
     redeclare package Medium = Medium,
     m_flow_start=0.025,
     m_flow_small=1e-6,
-    Kvs=1.4)
-    "Model of a simple valve to simulate pressure losses"
+    Kvs=1.4) "Model of a simple valve to simulate pressure losses"
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
   Sources.FixedBoundary sink(
     redeclare package Medium = Medium,
@@ -72,8 +70,7 @@ model RotaryCompressor
     use_T=true,
     nPorts=1,
     p=pInl,
-    T=TInl)
-    "Sink with constant pressure and temperature"
+    T=TInl) "Sink with constant pressure and temperature"
     annotation (Placement(transformation(extent={{80,-10},{60,10}})));
 
 

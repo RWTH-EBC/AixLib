@@ -1,6 +1,7 @@
 within AixLib.Fluid.Movers.Compressors.Utilities;
-package Types "Types, constants to define menu choices"
-  extends Modelica.Icons.Package;
+package Types
+  "Types, constants to define menu choices"
+  extends Modelica.Icons.TypesPackage;
 
   type EnginePolynomialModels = enumeration(
       JahningEtAl2000

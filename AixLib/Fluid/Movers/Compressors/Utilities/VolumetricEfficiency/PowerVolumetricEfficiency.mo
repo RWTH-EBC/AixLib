@@ -60,7 +60,8 @@ equation
 
   // Calculationg of flow coefficient
   //
-  lamH = corFac[1] * a * product(abs(p[i])^b[i] for i in 1:nT)^corFac[2]
+  lamH = min(1, corFac[1] * a *
+    product(abs(p[i])^b[i] for i in 1:nT)^corFac[2])
     "Calculation procedure of generic power approach";
 
   annotation (Documentation(revisions="<html>

@@ -132,7 +132,8 @@ equation
 
   // Calculationg of flow coefficient
   //
-  etaEng = corFac[1] * sum(a[i]*p[i]^b[i] for i in 1:nT)^corFac[2]
+  etaEng = min(1, corFac[1] *
+    sum(a[i]*p[i]^b[i] for i in 1:nT)^corFac[2])
     "Calculation procedure of generic polynomial";
 
   annotation (Documentation(revisions="<html>

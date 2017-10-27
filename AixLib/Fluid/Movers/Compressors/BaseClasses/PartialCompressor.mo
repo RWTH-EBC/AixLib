@@ -340,13 +340,16 @@ equation
     "Rotational speed is greater than maximum 
   rotational speed allowed! Please check boundary condtions!",
     level=AssertionLevel.warning);
-  assert(oveEngEff.etaEng<=1, "Overall engine efficiency is greater than one! 
+  assert(oveEngEff.etaEng<0.9999,
+    "Overall engine efficiency is greater than one! 
     Please check efficiency model!",
     level = AssertionLevel.warning);
-  assert(oveVolEff.lamH<=1, "Overall volumetric efficiency is greater than one! 
+  assert(oveVolEff.lamH<0.9999,
+    "Overall volumetric efficiency is greater than one! 
     Please check efficiency model!",
     level = AssertionLevel.warning);
-  assert(oveIseEff.etaIse<=1, "Overall isentropic efficiency is greater than one! 
+  assert(oveIseEff.etaIse<0.9999,
+    "Overall isentropic efficiency is greater than one! 
     Please check efficiency model!",
     level = AssertionLevel.warning);
 
@@ -373,13 +376,14 @@ equation
     connect(rotSpeThr.u, manVarCom)
       "No transient behaiviour of change of rotational speed";
   end if;
-  rotSpe = rotSpeThr.y "Passing thorugh internal variable";
+  rotSpe = smooth(1, noEvent(if rotSpeThr.y>0 then
+                  rotSpeThr.y else 1e-12))
+    "Passing thorugh internal variable";
   curManVarCom = rotSpe "Current rotational speed";
 
   // Calculation of mass flow
   //
-  m_flow = homotopy(smooth(1, noEvent(if rotSpe>0 then
-                           rotSpe*oveVolEff.lamH*VDis*dInl else m_flow_lea)),
+  m_flow = homotopy(rotSpe*oveVolEff.lamH*VDis*dInl,
                     rotSpe*oveVolEff.lamH*VDis*dInl0)
     "This covers initialisation case as well as shut-down case";
 

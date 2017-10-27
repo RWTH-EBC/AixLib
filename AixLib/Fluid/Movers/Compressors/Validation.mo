@@ -51,18 +51,19 @@ package Validation
       redeclare package Medium = Medium,
       nPorts=1,
       use_T_in=true,
-      use_p_in=true)
-      "Source of constant pressure and temperature"
+      use_p_in=true) "Source of constant pressure and temperature"
       annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
-    SimpleCompressors.RotaryCompressor rotcom(
+    SimpleCompressors.RotaryCompressorSimple rotCom(
       redeclare package Medium = Medium,
       show_staEff=true,
       show_qua=true,
       useInpFil=false,
       redeclare model VolumetricEfficiency =
           Utilities.VolumetricEfficiency.ScrollCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_Reciporating,
+
       redeclare model IsentropicEfficiency =
           Utilities.IsentropicEfficiency.ScrollCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_Scroll,
+
       redeclare model EngineEfficiency =
           Utilities.EngineEfficiency.ScrollCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_Scroll)
       "Model of a rotary compressor"
@@ -71,19 +72,18 @@ package Validation
       redeclare package Medium = Medium,
       use_T_in=true,
       use_p_in=true,
-      nPorts=1)
-      "Sink with constant pressure and temperature"
+      nPorts=1) "Sink with constant pressure and temperature"
       annotation (Placement(transformation(extent={{50,-10},{30,10}})));
 
 
   equation
     // Connection of components
     //
-    connect(source.ports[1], rotcom.port_a)
+    connect(source.ports[1],rotCom. port_a)
       annotation (Line(points={{-10,0},{0,0}}, color={0,127,255}));
-    connect(fixTem.port, rotcom.heatPort)
+    connect(fixTem.port,rotCom. heatPort)
       annotation (Line(points={{-10,-40},{10,-40},{10,-10}}, color={191,0,0}));
-    connect(rotcom.port_b, sink.ports[1])
+    connect(rotCom.port_b, sink.ports[1])
       annotation (Line(points={{20,0},{30,0}}, color={0,127,255}));
     connect(preInp.y[1], fixTem.T)
       annotation (Line(points={{-69,80},{-50,80},{-50,-40},{-32,-40}},
@@ -94,7 +94,7 @@ package Validation
     connect(preInp.y[3], sink.T_in)
       annotation (Line(points={{-69,80},{-50,80},{-50,-60},{70,-60},{70,4},{52,4}},
                                            color={0,0,127}));
-    connect(preInp.y[4], rotcom.manVarCom)
+    connect(preInp.y[4],rotCom. manVarCom)
       annotation (Line(points={{-69,80},{-50, 80},{-50,60},{4,60},{4,10}},
                   color={0,0,127}));
     connect(pOutDum.y, sink.p_in)

@@ -1,6 +1,5 @@
 within AixLib.Fluid.Movers.Compressors.SimpleCompressors;
-model RotaryCompressor
-  "Model that describes a simple rotary compressor"
+model RotaryCompressorSimple "Model that describes a simple rotary compressor"
   extends BaseClasses.PartialCompressor;
 
 equation
@@ -57,4 +56,4 @@ equation
   </li>
 </ul>
 </html>"));
-end RotaryCompressor;
+end RotaryCompressorSimple;

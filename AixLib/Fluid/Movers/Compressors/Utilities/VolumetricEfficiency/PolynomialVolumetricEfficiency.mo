@@ -141,8 +141,7 @@ equation
     corFac[2] = 1
       "No correction factor is needed";
 
-  elseif (polyMod == Types.VolumetricPolynomialModels.HongtaoLaughmannEtAl2017)
-       then
+  elseif (polyMod == Types.VolumetricPolynomialModels.HongtaoLaughmannEtAl2017) then
     /*Polynomial approach presented by Hongtao et al. (2013):
       lamH = a1 + a2*omega + a3*omega^2 +
              a4*piPre + a5*omega*piPre + a6*omega^2*piPre + 
@@ -226,7 +225,8 @@ equation
 
   // Calculationg of flow coefficient
   //
-  lamH = corFac[1] * sum(a[i]*p[i]^b[i] for i in 1:nT)^corFac[2]
+  lamH = min(1, corFac[1] *
+    sum(a[i]*p[i]^b[i] for i in 1:nT)^corFac[2])
     "Calculation procedure of general polynomial";
 
   annotation (Documentation(revisions="<html>
