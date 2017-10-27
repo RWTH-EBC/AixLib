@@ -2,9 +2,9 @@ within AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency.ScrollComp
 model R407C_Scroll_XXXX
   "Scroll Compressor - R407C - Unknown displacement volume - Polynomial"
   extends PolynomialVolumetricEfficiency(
-    final polyMod=Choices.VolumetricPolynomialModels.Karlsson2007,
-    final a = {0.0012, -0.088, 1.1262, -0.0045, 0.0039, -0.000025},
-    final b = {1,1,1,1,1,1});
+    final polyMod=Types.VolumetricPolynomialModels.Karlsson2007,
+    final a={0.0012,-0.088,1.1262,-0.0045,0.0039,-0.000025},
+    final b={1,1,1,1,1,1});
 
   annotation (Documentation(revisions="<html>
 <ul>

@@ -5,8 +5,7 @@ model PowerIsentropicEfficiency
 
   // Definition of parameters
   //
-  parameter Choices.IsentropicPowerModels
-    powMod=Choices.IsentropicPowerModels.MendozaMirandaEtAl2016
+  parameter Types.IsentropicPowerModels powMod=Types.IsentropicPowerModels.MendozaMirandaEtAl2016
     "Chose predefined power model for flow coefficient"
     annotation (Dialog(group="Modelling approach"));
   parameter Real a
@@ -41,7 +40,7 @@ model PowerIsentropicEfficiency
 equation
   // Calculation of coefficients
   //
-  if (powMod == Choices.IsentropicPowerModels.MendozaMirandaEtAl2016) then
+  if (powMod == Types.IsentropicPowerModels.MendozaMirandaEtAl2016) then
     /*Power approach presented by Mendoza et al. (2005):
       etaIse = piPre^b1 * (rotSpeRef/rotSpe)^b2 * (rotSpe^3*VDis/dhISe^1.5)^b3
                * (1/((TInl+TOutISe)/2-TOut))^b4     
@@ -50,7 +49,8 @@ equation
       "Pressure ratio";
     p[2] = rotSpeRef/rotSpe
       "Rotational Speed";
-    p[3] = rotSpe^3*VDis/(Medium.specificEnthalpy(staOutIse))^1.5
+    p[3] = rotSpe^3*VDis/(Medium.specificEnthalpy(Medium.setState_psX(s=
+      Medium.specificEntropy(staInl),p=Medium.pressure(staOut))))^1.5
       "Isentropic specific enthalpy difference";
     p[4] = MRef/Medium.fluidConstants[1].molarMass
       "Molar Mass";

@@ -2,7 +2,7 @@ within AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency.ScrollComp
 model R407C_Scroll_XXXX
   "Scroll Compressor - R407C - Unknown displacement volume - Polynomial"
   extends PolynomialIsentropicEfficiency(
-    final polyMod=Choices.IsentropicPolynomialModels.Karlsson2007,
+    final polyMod=Types.IsentropicPolynomialModels.Karlsson2007,
     final a={0.926,-0.0823,0.00352,0.00294,-0.000022},
     final b={1,1,1,1,1});
 

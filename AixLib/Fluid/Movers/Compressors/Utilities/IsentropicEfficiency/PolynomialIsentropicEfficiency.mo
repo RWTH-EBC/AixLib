@@ -5,8 +5,7 @@ model PolynomialIsentropicEfficiency
 
   // Definition of parameters describing polynomial approaches in general
   //
-  parameter Choices.IsentropicPolynomialModels
-    polyMod=Choices.IsentropicPolynomialModels.Karlsson2007
+  parameter Types.IsentropicPolynomialModels polyMod=Types.IsentropicPolynomialModels.Karlsson2007
     "Chose predefined polynomial model for flow coefficient"
     annotation (Dialog(group="Modelling approach"));
   parameter Real a[:]
@@ -41,7 +40,7 @@ model PolynomialIsentropicEfficiency
 equation
   // Calculation of coefficients
   //
-  if (polyMod == Choices.IsentropicPolynomialModels.DarrAndCrawford1992) then
+  if (polyMod == Types.IsentropicPolynomialModels.DarrAndCrawford1992) then
     /*Polynomial approach presented by Dar and Crawford (1992):
       etaIse = a1 + a2*rotSpe +a3/dInl
       
@@ -60,7 +59,7 @@ equation
     corFac = {1,1}
       "No correction factors are needed";
 
-  elseif (polyMod == Choices.IsentropicPolynomialModels.Karlsson2007) then
+  elseif (polyMod == Types.IsentropicPolynomialModels.Karlsson2007) then
     /*Polynomial approach presented by Karlsson (2007):
       etaIse = a1 + a2*piPre + a3*piPre^2 + a4*rotSpe + a5*rotSpe^2
       

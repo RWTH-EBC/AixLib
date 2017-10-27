@@ -5,8 +5,7 @@ model PowerVolumetricEfficiency
 
   // Definition of parameters
   //
-  parameter Choices.VolumetricPowerModels
-    powMod=Choices.VolumetricPowerModels.MendozaMirandaEtAl2016
+  parameter Types.VolumetricPowerModels powMod=Types.VolumetricPowerModels.MendozaMirandaEtAl2016
     "Chose predefined power model for flow coefficient"
     annotation (Dialog(group="Modelling approach"));
   parameter Real a
@@ -41,7 +40,7 @@ model PowerVolumetricEfficiency
 equation
   // Calculation of coefficients
   //
-  if (powMod == Choices.VolumetricPowerModels.MendozaMirandaEtAl2016) then
+  if (powMod == Types.VolumetricPowerModels.MendozaMirandaEtAl2016) then
     /*Power approach presented by Mendoza et al. (2005):
       lamH = piPre^b1 * (piPre^1.5*rotSpe^3*VDis)^b2 * (MRef/M)^b3     
     */
@@ -61,7 +60,7 @@ equation
 
   // Calculationg of flow coefficient
   //
-  lamH = corFac[1] * a * product(p[i]^b[i] for i in 1:nT)^corFac[2]
+  lamH = corFac[1] * a * product(abs(p[i])^b[i] for i in 1:nT)^corFac[2]
     "Calculation procedure of generic power approach";
 
   annotation (Documentation(revisions="<html>

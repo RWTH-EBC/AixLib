@@ -5,8 +5,7 @@ model PolynomialEngineEfficiency
 
   // Definition of parameters describing polynomial approaches in general
   //
-  parameter Choices.EnginePolynomialModels
-    polyMod=Choices.EnginePolynomialModels.DurprezEtAl2007
+  parameter Types.EnginePolynomialModels polyMod=Types.EnginePolynomialModels.DurprezEtAl2007
     "Chose predefined polynomial model for flow coefficient"
     annotation (Dialog(group="Modelling approach"));
   parameter Real a[:]
@@ -32,7 +31,7 @@ model PolynomialEngineEfficiency
 equation
   // Calculation of coefficients
   //
-  if (polyMod == Choices.EnginePolynomialModels.JahningEtAl2000) then
+  if (polyMod == Types.EnginePolynomialModels.JahningEtAl2000) then
     /*Polynomial approach presented by Jahning et al. (2000):
       etaEng = a1 + a2*exp(pInl)^b2
     */
@@ -41,7 +40,7 @@ equation
     p[2] = exp(Medium.pressure(staInl))
       "Inlet pressure";
 
-  elseif (polyMod == Choices.EnginePolynomialModels.DurprezEtAl2007) then
+  elseif (polyMod == Types.EnginePolynomialModels.DurprezEtAl2007) then
     /*Polynomial approach presented by Durprez et al. (2007):
       etaEng = a1 + a2*piPre + a3*piPre^2 + a4*piPre^3 + a5*piPre^4 + 
                a6*piPre^5 + a7*piPre^6
@@ -64,7 +63,7 @@ equation
     corFac = {1,1}
       "No correction factors are needed";
 
-  elseif (polyMod == Choices.EnginePolynomialModels.KinarbEtAl2010) then
+  elseif (polyMod == Types.EnginePolynomialModels.KinarbEtAl2010) then
     /*Polynomial approach presented by Kinab et al. (2010):
       etaEng = a1 + a2*piPre + a3*piPre^2
     */
@@ -78,7 +77,7 @@ equation
     corFac = {1,1}
       "No correction factors are needed";
 
-  elseif (polyMod == Choices.EnginePolynomialModels.Engelpracht2017) then
+  elseif (polyMod == Types.EnginePolynomialModels.Engelpracht2017) then
     /*Polynomial approach presented by Engelpracht (2017):
       etaEng = a1 + a2*piPre + a3*piPre^2 + a4*piPre^3 + 
                a5*rotSpe + a6*rotSpe^2 + a7*rotSpe^3 + a8*rotSpe^4 + a9*rotSpe^5 + 

@@ -10,7 +10,7 @@ package Validation
     // Define medium and parameters
     //
     package Medium =
-     WorkingVersion.Media.Refrigerants.R134a.R134a_IIR_P1_395_T233_455_Horner
+     Modelica.Media.R134a.R134a_ph
      "Actual medium of the compressor";
 
     parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.1
@@ -37,8 +37,7 @@ package Validation
       smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative)
       "Prescribed inputs to check efficiencies calculated by efficiency models"
       annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
-    Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
-      fixedTemperature
+    Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature fixTem
       "Fixed ambient temperature"
       annotation (Placement(transformation(extent={{-30,-50},{-10,-30}})));
     Modelica.Blocks.Sources.RealExpression pInlDum(y=pInl)
@@ -55,7 +54,7 @@ package Validation
       use_p_in=true)
       "Source of constant pressure and temperature"
       annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
-    SimpleCompressors.RotaryCompressor rotaryCompressor(
+    SimpleCompressors.RotaryCompressor rotcom(
       redeclare package Medium = Medium,
       show_staEff=true,
       show_qua=true,
@@ -80,13 +79,13 @@ package Validation
   equation
     // Connection of components
     //
-    connect(source.ports[1], rotaryCompressor.port_a)
-      annotation (Line(points={{-10,0},{0,0}},           color={0,127,255}));
-    connect(fixedTemperature.port, rotaryCompressor.heatPort)
-      annotation (Line(points={{-10,-40},{10,-40},{10,-10}},   color={191,0,0}));
-    connect(rotaryCompressor.port_b, sink.ports[1])
+    connect(source.ports[1], rotcom.port_a)
+      annotation (Line(points={{-10,0},{0,0}}, color={0,127,255}));
+    connect(fixTem.port, rotcom.heatPort)
+      annotation (Line(points={{-10,-40},{10,-40},{10,-10}}, color={191,0,0}));
+    connect(rotcom.port_b, sink.ports[1])
       annotation (Line(points={{20,0},{30,0}}, color={0,127,255}));
-    connect(preInp.y[1], fixedTemperature.T)
+    connect(preInp.y[1], fixTem.T)
       annotation (Line(points={{-69,80},{-50,80},{-50,-40},{-32,-40}},
                   color={0,0,127}));
     connect(preInp.y[2], source.T_in)
@@ -95,8 +94,8 @@ package Validation
     connect(preInp.y[3], sink.T_in)
       annotation (Line(points={{-69,80},{-50,80},{-50,-60},{70,-60},{70,4},{52,4}},
                                            color={0,0,127}));
-    connect(preInp.y[4], rotaryCompressor.preRotSpe)
-      annotation (Line(points={{-69,80},{-50,80},{-50,60},{4,60},{4,10}},
+    connect(preInp.y[4], rotcom.manVarCom)
+      annotation (Line(points={{-69,80},{-50, 80},{-50,60},{4,60},{4,10}},
                   color={0,0,127}));
     connect(pOutDum.y, sink.p_in)
       annotation (Line(points={{57.6,8},{52,8}},

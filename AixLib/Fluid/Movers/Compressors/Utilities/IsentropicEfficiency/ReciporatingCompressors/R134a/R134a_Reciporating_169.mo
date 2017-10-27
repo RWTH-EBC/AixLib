@@ -2,7 +2,7 @@
 model R134a_Reciporating_169
   "Reciporating Compressor - R134a - 169 cm³ - Polynomial"
   extends PolynomialIsentropicEfficiency(
-    final polyMod=Choices.IsentropicPolynomialModels.DarrAndCrawford1992,
+    final polyMod=Types.IsentropicPolynomialModels.DarrAndCrawford1992,
     final a={0.8405,-4.8711*1e-5,-0.1105},
     final b={1,1,1});
 

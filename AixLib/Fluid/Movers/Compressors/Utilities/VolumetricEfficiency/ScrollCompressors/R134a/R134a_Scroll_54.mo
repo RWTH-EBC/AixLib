@@ -2,11 +2,11 @@
 model R134a_Scroll_54
   "Scroll Compressor - R134a - 54.24 cm³ - Polynomial "
   extends PolynomialVolumetricEfficiency(
-    final polyMod=Choices.VolumetricPolynomialModels.Li2013,
-    final rotSpeRef = 50,
-    final a = {0.693,0.543,-0.236},
-    final b = {1,1,1},
-    final c = {1.047,-0.051,0});
+    final polyMod=Types.VolumetricPolynomialModels.Li2013,
+    final rotSpeRef=50,
+    final a={0.693,0.543,-0.236},
+    final b={1,1,1},
+    final c={1.047,-0.051,0});
 
   annotation (Documentation(revisions="<html>
 <ul>

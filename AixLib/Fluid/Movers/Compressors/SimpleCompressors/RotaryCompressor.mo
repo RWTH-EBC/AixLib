@@ -4,7 +4,7 @@ model RotaryCompressor
   extends BaseClasses.PartialCompressor;
 
 equation
-  // Pressures meet pressures at ports
+  // Calculate pressures at inlet and outlet of compressor
   //
   pInl = port_a.p "Pressure at inlet";
   pOut = port_b.p "Pressure at outlet";

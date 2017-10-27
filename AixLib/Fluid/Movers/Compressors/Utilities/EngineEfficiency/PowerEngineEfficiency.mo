@@ -5,8 +5,7 @@ model PowerEngineEfficiency
 
   // Definition of parameters
   //
-  parameter Choices.EnginePowerModels
-    powMod=Choices.EnginePowerModels.MendozaMirandaEtAl2016
+  parameter Types.EnginePowerModels powMod=Types.EnginePowerModels.MendozaMirandaEtAl2016
     "Chose predefined power model for flow coefficient"
     annotation (Dialog(group="Modelling approach"));
   parameter Real a
@@ -40,7 +39,7 @@ model PowerEngineEfficiency
 equation
   // Calculation of coefficients
   //
-  if (powMod == Choices.EnginePowerModels.MendozaMirandaEtAl2016) then
+  if (powMod == Types.EnginePowerModels.MendozaMirandaEtAl2016) then
     /*Power approach presented by Mendoza et al. (2005):
       etaEng = piPre^b1 * (rotSpeRef/rotSpe)^b2 * (1/((TInl+TOutISe)/2-TOut))^b3
                * (MRef/M)^b4
@@ -51,7 +50,9 @@ equation
       "Pressure ratio";
     p[2] = rotSpeRef/rotSpe
       "Rotational Speed";
-    p[3] = 1/((Medium.temperature(staInl)+Medium.temperature(staOutIse))/2-TOut)
+    p[3] = 1/((Medium.temperature(staInl)+Medium.temperature(
+      Medium.setState_psX(s=Medium.specificEntropy(staInl),
+      p=Medium.pressure(staOut))))/2-TAmb)
       "Temperature difference isentropic compression and ambient";
     p[4] = MRef/Medium.fluidConstants[1].molarMass
       "Molar Mass";
@@ -65,7 +66,7 @@ equation
 
   // Calculationg of flow coefficient
   //
-  etaEng = corFac[1] * a * product(p[i]^b[i] for i in 1:nT)^corFac[2]
+  etaEng = corFac[1] * a * product(abs(p[i])^b[i] for i in 1:nT)^corFac[2]
     "Calculation procedure of generic power approach";
 
   annotation (Documentation(revisions="<html>

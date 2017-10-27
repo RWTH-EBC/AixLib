@@ -2,9 +2,9 @@
 model R410a_Rotary_130
   "Rotary Compressor - R410a - 130 cm³ - Polynomial"
   extends PolynomialVolumetricEfficiency(
-    final polyMod=Choices.VolumetricPolynomialModels.Koerner2017,
-    final a = {1.108},
-    final b = {-0.165});
+    final polyMod=Types.VolumetricPolynomialModels.Koerner2017,
+    final a={1.108},
+    final b={-0.165});
 
   annotation (Documentation(revisions="<html>
 <ul>

@@ -2,11 +2,11 @@
 model R134a_Reciporating_170
   "Reciporating Compressor - R134a - 170 cm³ - Polynomial"
   extends PolynomialVolumetricEfficiency(
-    final polyMod=Choices.VolumetricPolynomialModels.Li2013,
-    final rotSpeRef = 2000/60,
-    final a = {1.223,-0.206,-0.017},
-    final b = {1,1,1},
-    final c = {0.779,-0.036,0});
+    final polyMod=Types.VolumetricPolynomialModels.Li2013,
+    final rotSpeRef=2000/60,
+    final a={1.223,-0.206,-0.017},
+    final b={1,1,1},
+    final c={0.779,-0.036,0});
 
   annotation (Documentation(revisions="<html>
 <ul>

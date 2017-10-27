@@ -5,7 +5,7 @@ partial model PartialEfficiency
   // Definition of the medium used for calculations
   //
   replaceable package Medium =
-    WorkingVersion.Media.Refrigerants.R134a.R134a_IIR_P1_395_T233_455_Horner
+    Modelica.Media.R134a.R134a_ph
     constrainedby Modelica.Media.Interfaces.PartialTwoPhaseMedium
     "Medium of the model";
 
@@ -18,15 +18,13 @@ partial model PartialEfficiency
   input Real piPre(min=0, unit="1")
     "Ratio of compressor's outlet and inlet pressure";
   input Modelica.SIunits.Frequency rotSpe(min=0)
-    "Compressor's actual rotational speed";
+    "Compressor's current rotational speed";
   input Medium.ThermodynamicState staInl
     "Thermodynamic state at compressor's inlet";
   input Medium.ThermodynamicState staOut
     "Thermodynamic state at compressor's outlet";
-  input Medium.ThermodynamicState staOutIse
-    "Isentropic thermodynamic state at compressor's outlet";
-  input Modelica.SIunits.Temperature TOut
-    "Outdoor temperature";
+  input Modelica.SIunits.Temperature TAmb
+    "Ambient temperature";
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false),
               graphics={

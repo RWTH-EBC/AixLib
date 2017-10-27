@@ -5,8 +5,7 @@ model PolynomialVolumetricEfficiency
 
   // Definition of parameters describing polynomial approaches in general
   //
-  parameter Choices.VolumetricPolynomialModels
-    polyMod=Choices.VolumetricPolynomialModels.Karlsson2007
+  parameter Types.VolumetricPolynomialModels polyMod=Types.VolumetricPolynomialModels.Karlsson2007
     "Chose predefined polynomial model for flow coefficient"
     annotation (Dialog(group="Modelling approach"));
   parameter Real a[:]
@@ -41,7 +40,7 @@ model PolynomialVolumetricEfficiency
 equation
   // Calculation of coefficients
   //
-  if (polyMod == Choices.VolumetricPolynomialModels.DarrAndCrawford1992) then
+  if (polyMod == Types.VolumetricPolynomialModels.DarrAndCrawford1992) then
     /*Polynomial approach presented by Dar and Crawford (1992):
       lamH = a1 + a2*rotSpe - a3*epsRef*(dInlIse/dInl-1) - 
       a4*rotSpe*(dInlIse/dInl-1)
@@ -55,15 +54,19 @@ equation
       "Dummy value for usage of simple coefficcient";
     p[2] = rotSpe*60
       "Rotational speed";
-    p[3] = -(epsRef)*(Medium.density(staOutIse)/Medium.density(staInl)-1)
+    p[3] = -(epsRef)*(Medium.density(Medium.setState_psX(s=
+      Medium.specificEntropy(staInl),p=Medium.pressure(staOut)))/
+      Medium.density(staInl)-1)
       "Effect of clearance";
-    p[4] = -rotSpe*60*(Medium.density(staOutIse)/Medium.density(staInl)-1)
+    p[4] = -rotSpe*60*(Medium.density(Medium.setState_psX(s=
+      Medium.specificEntropy(staInl),p=Medium.pressure(staOut)))/
+      Medium.density(staInl)-1)
       "Effect of clearance";
 
     corFac = {1,1}
       "No correction factors are needed";
 
-  elseif (polyMod == Choices.VolumetricPolynomialModels.Karlsson2007) then
+  elseif (polyMod == Types.VolumetricPolynomialModels.Karlsson2007) then
     /*Polynomial approach presented by Karlsson (2007):
       lamH = a1*TInl*piPre + a2*piPre + a3 + a4*TInl + a5*rotSpe + a6*rotSpe^2
       
@@ -86,7 +89,7 @@ equation
     corFac = {1,1}
       "No correction factors are needed";
 
-  elseif (polyMod == Choices.VolumetricPolynomialModels.KinarbEtAl2010) then
+  elseif (polyMod == Types.VolumetricPolynomialModels.KinarbEtAl2010) then
     /*Polynomial approach presented by Kinab et al. (2010):
       etaEng = a1 + a2*piPre
     */
@@ -98,7 +101,7 @@ equation
     corFac = {1,1}
       "No correction factors are needed";
 
-  elseif (polyMod == Choices.VolumetricPolynomialModels.ZhouEtAl2010) then
+  elseif (polyMod == Types.VolumetricPolynomialModels.ZhouEtAl2010) then
     /*Polynomial approach presented by Zhou et al. (2010):
     etaEng = 1 + a1 - a2*piPre^(1/kapMean)
     */
@@ -113,7 +116,7 @@ equation
     corFac = {1,1}
       "No correction factors are needed";
 
-  elseif (polyMod == Choices.VolumetricPolynomialModels.Li2013) then
+  elseif (polyMod == Types.VolumetricPolynomialModels.Li2013) then
     /*Polynomial approach presented by Li (2013):
       lamH = lamHRef * (a1 + a2*(rotSpe/rotSpeRef) + a3*(rotSpe/rotSpeRef)^2)
         with  lamHRef = c1 + c2*((pOut/(pInl*(1-c3))^(1/kapMea))
@@ -138,8 +141,8 @@ equation
     corFac[2] = 1
       "No correction factor is needed";
 
-  elseif (polyMod ==
-    Choices.VolumetricPolynomialModels.HongtaoLaughmannEtAl2017) then
+  elseif (polyMod == Types.VolumetricPolynomialModels.HongtaoLaughmannEtAl2017)
+       then
     /*Polynomial approach presented by Hongtao et al. (2013):
       lamH = a1 + a2*omega + a3*omega^2 +
              a4*piPre + a5*omega*piPre + a6*omega^2*piPre + 
@@ -207,7 +210,7 @@ equation
     corFac = {1,1}
       "No correction factors are needed";
 
-  elseif (polyMod == Choices.VolumetricPolynomialModels.Koerner2017) then
+  elseif (polyMod == Types.VolumetricPolynomialModels.Koerner2017) then
     /*Polynomial approach presented by Körner et al.(2017):
       lamH = a1*piPre^b1
     */

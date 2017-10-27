@@ -1,7 +1,7 @@
 within AixLib.Fluid.Movers.Compressors.BaseClasses;
 partial model PartialCompressor
   "Partial model for compressors that contains basic definitions used in 
-various compressor models"
+  various compressor models"
 
   // Definition of parameters describing the geometry
   //
@@ -13,6 +13,7 @@ various compressor models"
     epsRef(min=0, max=1, nominal=0.05) = 0.04
     "Ratio of the real and the ideal displacement volume"
     annotation(Dialog(tab="General",group="Geometry"));
+
   parameter Modelica.SIunits.Frequency
     rotSpeMax(min=0) = 120
     "Maximal rotational speed executable by the compressor"
@@ -29,9 +30,8 @@ various compressor models"
     annotation(Dialog(group="Transient behaviour"));
   parameter Modelica.SIunits.Time risTim = 0.5
     "Time until rotational speed reaches 99.6 % of its set value"
-    annotation(Dialog(
-      enable = useInpFil,
-      group="Transient behaviour"));
+    annotation(Dialog(enable = useInpFil,
+               group="Transient behaviour"));
 
   // Definition of models describing efficiencies
   //
@@ -80,7 +80,7 @@ various compressor models"
   //
   extends AixLib.Fluid.Interfaces.PartialTwoPortTransport(
     redeclare replaceable package Medium =
-        WorkingVersion.Media.Refrigerants.R134a.R134a_IIR_P1_395_T233_455_Horner,
+        Modelica.Media.R134a.R134a_ph,
     dp_start=-20e5,
     m_flow_start=0.5*m_flow_nominal,
     m_flow_small=1e-6*m_flow_nominal,
@@ -139,7 +139,7 @@ various compressor models"
   // Definition of connectors and submodels
   //
   Modelica.Blocks.Interfaces.RealInput
-    preRotSpe(start=rotSpe0, quantity = "Velocity", unit = ("1/s"))
+    manVarCom(start=rotSpe0, quantity = "Velocity", unit = ("1/s"))
     "Prescribed compressor's rotational speed"
     annotation (Placement(
         transformation(
@@ -148,22 +148,22 @@ various compressor models"
         origin={-60,100})),
         HideResult=true);
   Modelica.Blocks.Interfaces.RealOutput
-    actRotSpe(quantity = "Velocity", unit = ("1/s"))
-    "Actual compressor's rotational speed"
-    annotation (Placement(transformation(
+    curManVarCom(quantity="Velocity", unit=("1/s"))
+    "Current compressor's rotational speed"
+    annotation (Placement(
+        transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
-        origin={60,100})),
-        HideResult=true);
-  Modelica.Blocks.Continuous.Filter filterRotSpe(
+        origin={60,100})), HideResult=true);
+  Modelica.Blocks.Continuous.Filter filRotSpe(
     final analogFilter=Modelica.Blocks.Types.AnalogFilter.CriticalDamping,
     final filterType=Modelica.Blocks.Types.FilterType.LowPass,
-    order=2,
-    f_cut=5/(2*Modelica.Constants.pi*risTim),
-    x(each stateSelect=StateSelect.always)) if useInpFil
+    final order=2,
+    final f_cut=5/(2*Modelica.Constants.pi*risTim),
+    final x(each stateSelect=StateSelect.always)) if useInpFil
     "Second order filter to approximate change of compressor's rotational speed"
     annotation (Placement(transformation(extent={{-30,59},{-10,80}})));
-  Modelica.Blocks.Routing.RealPassThrough rotSpeThrough
+  Modelica.Blocks.Routing.RealPassThrough rotSpeThr
     "Dummy passing through of compressor's rotational speed to allow usage of filter"
     annotation (Placement(transformation(extent={{10,60},{30,80}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort
@@ -180,8 +180,7 @@ various compressor models"
     piPre=piPre,
     staInl=staInl,
     staOut=staOut,
-    staOutIse=Medium.setState_psX(s=Medium.specificEntropy(staInl),p=pOut),
-    TOut=heatPort.T)
+    TAmb=heatPort.T)
     "Instance of model 'engine efficiency'";
   VolumetricEfficiency oveVolEff(
     redeclare package Medium=Medium,
@@ -191,8 +190,7 @@ various compressor models"
     piPre=piPre,
     staInl=staInl,
     staOut=staOut,
-    staOutIse=Medium.setState_psX(s=Medium.specificEntropy(staInl),p=pOut),
-    TOut=heatPort.T)
+    TAmb=heatPort.T)
     "Instance of model 'volumetric efficiency'";
   IsentropicEfficiency oveIseEff(
     redeclare package Medium=Medium,
@@ -202,8 +200,7 @@ various compressor models"
     piPre=piPre,
     staInl=staInl,
     staOut=staOut,
-    staOutIse=Medium.setState_psX(s=Medium.specificEntropy(staInl),p=pOut),
-    TOut=heatPort.T)
+    TAmb=heatPort.T)
     "Instance of model 'isentropic efficiency'";
 
   // Definition of records containing detailed results if computed
@@ -296,12 +293,12 @@ various compressor models"
   // Definition of variables
   //
   Modelica.SIunits.Power PEle
-    "Compressor's actual electrical power consumption";
+    "Compressor's current electrical power consumption";
   Modelica.SIunits.Power Q_flow_ref
-    "Actual power transferred to reffrigerant";
+    "Current power transferred to reffrigerant";
 
   Modelica.SIunits.Frequency rotSpe(min=0, max=rotSpeMax)
-    "Compressor's actual rotational speed";
+    "Compressor's current rotational speed";
   Real piPre(min=0, max=piPreMax, unit="1")
     "Ratio of compressor's outlet and inlet pressure";
 
@@ -338,9 +335,11 @@ equation
   assert(piPre<=piPreMax, "Pressure ratio is greater than maximum pressure
     ratio allowed! Please check boundary condtions!",
     level = AssertionLevel.warning);
-  assert(actRotSpe<=rotSpeMax, "Rotational speed is greater than maximum 
+  assert(
+    curManVarCom <= rotSpeMax,
+    "Rotational speed is greater than maximum 
   rotational speed allowed! Please check boundary condtions!",
-    level = AssertionLevel.warning);
+    level=AssertionLevel.warning);
   assert(oveEngEff.etaEng<=1, "Overall engine efficiency is greater than one! 
     Please check efficiency model!",
     level = AssertionLevel.warning);
@@ -354,35 +353,35 @@ equation
   // Calculation of thermodynamic state at inlet conditions
   //
   staInl = Medium.setState_phX(p=pInl,h=hInl) "Thermodynamic state at inlet";
-  dInl = Medium.density(staInl) "Temperature at inlet";
+  dInl = Medium.density(staInl) "Density at inlet";
 
   // Calculation of thermodynamic state at outlet conditions
   //
   staOut = Medium.setState_phX(p=pOut,h=hOut) "Thermodynamic state at outlet";
 
-  // Calculation of compressor'ss characteristics
+  // Calculation of characteristics of the compressor
   //
   piPre = abs(pOut/pInl) "Ratio between outlet and inlet pressure";
 
   // Calculation of compressor's rotational speed
   //
-  connect(filterRotSpe.u, preRotSpe);
+  connect(filRotSpe.u, manVarCom);
   if useInpFil then
-    connect(rotSpeThrough.u, filterRotSpe.y)
+    connect(rotSpeThr.u, filRotSpe.y)
       "Transient behaviour of change of rotational speed";
   else
-    connect(rotSpeThrough.u, preRotSpe)
+    connect(rotSpeThr.u, manVarCom)
       "No transient behaiviour of change of rotational speed";
   end if;
-  rotSpe = rotSpeThrough.y "Passing thorugh internal variable";
-  actRotSpe = rotSpe "Actual rotational speed";
+  rotSpe = rotSpeThr.y "Passing thorugh internal variable";
+  curManVarCom = rotSpe "Current rotational speed";
 
   // Calculation of mass flow
   //
   m_flow = homotopy(smooth(1, noEvent(if rotSpe>0 then
                            rotSpe*oveVolEff.lamH*VDis*dInl else m_flow_lea)),
                     rotSpe*oveVolEff.lamH*VDis*dInl0)
-    "Cover initialisation case as well as shut-down case";
+    "This covers initialisation case as well as shut-down case";
 
   // Calculation of energy balances
   //

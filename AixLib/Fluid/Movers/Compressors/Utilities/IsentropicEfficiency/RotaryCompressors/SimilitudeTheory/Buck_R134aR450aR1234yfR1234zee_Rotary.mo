@@ -4,7 +4,7 @@ model Buck_R134aR450aR1234yfR1234zee_Rotary
   extends PowerIsentropicEfficiency(
     final MRef=0.102032,
     final rotSpeRef=9.334,
-    final powMod=Choices.IsentropicPowerModels.MendozaMirandaEtAl2016,
+    final powMod=Types.IsentropicPowerModels.MendozaMirandaEtAl2016,
     final a=0.85,
     final b={0.0753,0.2183,0.0015,0.0972});
 
