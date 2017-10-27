@@ -169,7 +169,9 @@ equation
     connect(openingThrough.u, manVarVal)
       "No transient behaiviour of valve's opnening";
   end if;
-  opening = openingThrough.y "Current valve's opening";
+  opening = smooth(1, noEvent(if openingThrough.y>0 then
+                              openingThrough.y else 1e-15))
+    "Current valve's opening";
 
   // Calculation of active cross-sectional flow area
   //

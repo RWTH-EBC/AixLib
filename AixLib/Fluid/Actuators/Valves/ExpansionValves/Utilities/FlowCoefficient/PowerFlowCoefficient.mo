@@ -134,7 +134,7 @@ equation
 
   // Calculationg of flow coefficient
   //
-  C = corFact * a * product(P[i]^b[i] for i in 1:nT)
+  C = corFact * a * product(abs(P[i])^b[i] for i in 1:nT)
     "Calculation procedure of generic power approach";
 
   annotation (Documentation(revisions="<html>

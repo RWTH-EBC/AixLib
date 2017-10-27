@@ -159,7 +159,7 @@ partial model PartialModularExpansionVavles
     "Upper limit of output"
     annotation(Dialog(tab="Controller", group="Weighting and limits"),
                HideResult=not show_parCon);
-  parameter Real yMin[nVal] = fill(1e-5*m_flow_small,nVal)
+  parameter Real yMin[nVal] = fill(0,nVal)
     "Lower limit of output"
     annotation(Dialog(tab="Controller", group="Weighting and limits"),
                HideResult=not show_parCon);

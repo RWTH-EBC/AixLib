@@ -18,7 +18,7 @@ equation
 
   elseif (calcProc == Utilities.Types.CalcProc.flowCoefficient) then
     C = flowCoefficient.C "Flow coefficient model";
-    m_flow = homotopy(C * AThr * sqrt(2*dInl*dp),
+    m_flow = homotopy(C * AThr * sqrt(abs(2*dInl*dp)),
                       mFlowNom/dpNom * AThr * dp)
     "Usage of flow coefficient model";
 

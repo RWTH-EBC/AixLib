@@ -127,5 +127,33 @@ AixLib.Controls.HeatPump.ModularHeatPumps.ModularExpansionValveController</a>.
 AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.ModularSensors</a>.
 </li>
 </ul>
-</html>"));
+</html>"), Icon(graphics={
+        Rectangle(
+          extent={{38,34},{82,-34}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          fillColor={245,245,245},
+          fillPattern=FillPattern.Solid,
+          extent={{40,-20},{80,20}}),
+        Line(points={{60,20},{60,12}}),
+        Line(points={{66,10},{70.2,17.3}}),
+        Line(points={{54,10},{49.8,17.3}}),
+        Line(points={{70,4},{77.8,7.9}}),
+        Line(points={{50,4},{42.2,7.9}}),
+        Ellipse(
+          lineColor={64,64,64},
+          fillColor={255,255,255},
+          extent={{54,-6},{66,6}}),
+        Ellipse(
+          fillColor={64,64,64},
+          pattern=LinePattern.None,
+          fillPattern=FillPattern.Solid,
+          extent={{56,-4},{64,4}}),
+        Polygon(
+          points={{60,2},{62,0},{68,6},{70,10},{66,8},{60,2}},
+          lineColor={0,0,0},
+          fillColor={0,0,0},
+          fillPattern=FillPattern.Solid)}));
 end ModularExpansionValvesSensors;

@@ -29,7 +29,7 @@ model ModularExpansionValvesMassFlowRate
     redeclare package Medium = Medium,
     T=TInl,
     nPorts=1,
-    m_flow=0.5) "Source of constant mass flow and temperature"
+    m_flow=1) "Source of constant mass flow and temperature"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-40,70})));

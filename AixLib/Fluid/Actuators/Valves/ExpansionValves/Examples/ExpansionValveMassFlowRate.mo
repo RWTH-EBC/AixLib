@@ -27,7 +27,7 @@ model ExpansionValveMassFlowRate
     redeclare package Medium = Medium,
     T=TInl,
     nPorts=1,
-    m_flow=0.5*m_flow_nominal)
+    m_flow=1)
     "Source of constant mass flow and temperature"
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
   Modelica.Blocks.Sources.Sine valOpe(
