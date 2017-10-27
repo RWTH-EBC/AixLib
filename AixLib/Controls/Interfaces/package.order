@@ -1,2 +1,6 @@
-HeatPumpControlBus
 FVUControlBus
+HeatPumpControlBus
+ModularHeatPumpControlBus
+ModularCompressorControlBus
+ModularExpansionValveControlBus
+ModularSensorControlBus
