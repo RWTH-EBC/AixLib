@@ -247,8 +247,8 @@ equation
           -6}}, color={0,0,127}));
   connect(PID1.y, val.y) annotation (Line(points={{161,38},{170,38},{170,-6},{46,
           -6}}, color={0,0,127}));
-  connect(fan.m_flow_in, zero2.y) annotation (Line(points={{84,-96.2},{92,-96.2},
-          {92,-96},{99,-96}}, color={0,0,127}));
+  connect(fan.m_flow_in, zero2.y) annotation (Line(points={{84,-96},{92,-96},{
+          92,-96},{99,-96}},  color={0,0,127}));
   connect(fixedHeatFlow.port, fan.heatPort) annotation (Line(points={{-78,128},{
           -74,128},{-68,128},{-68,100},{60,100},{60,-96},{65.2,-96}},
         color={191,0,0}));
