@@ -5,8 +5,7 @@ model PolynomialFlowCoefficient
 
   // Definition of parameters
   //
-  parameter Choices.PolynomialModels polyMod=
-    Choices.PolynomialModels.ShanweiEtAl2005
+  parameter Types.PolynomialModels polyMod=Types.PolynomialModels.ShanweiEtAl2005
     "Chose predefined polynomial model for flow coefficient"
     annotation (Dialog(group="Modelling approach"));
   parameter Real a[:]
@@ -23,12 +22,12 @@ model PolynomialFlowCoefficient
   parameter Modelica.SIunits.Diameter dCle = 0.02e-3
     "Clearance diameter dCle = d_inner - d_needle"
     annotation(Dialog(group="Further geometry data",
-               enable=if (polyMod == Choices.PolynomialModels.ShanweiEtAl2005)
+               enable=if (polyMod == Types.PolynomialModels.ShanweiEtAl2005)
            then true else false));
   parameter Real pDifRat = 0.84
     "Pressure differential ratio factor depending on valve moddeld"
     annotation(Dialog(group="Further geometry data",
-               enable=if (polyMod == Choices.PolynomialModels.Li2013) then true
+               enable=if (polyMod == Types.PolynomialModels.Li2013) then true
            else false));
 
   // Definition of coefficients
@@ -59,7 +58,7 @@ equation
 
   // Calculation of coefficients
   //
-  if (polyMod == Choices.PolynomialModels.ShanweiEtAl2005) then
+  if (polyMod == Types.PolynomialModels.ShanweiEtAl2005) then
     /*Polynomial approach presented by Shanwei et al. (2005):
       C_D = a1*AVal + a2*rho_inlet + a3*rho_outlet + a4*T_subcooling +
       a5*dCle + a6*(pInl-pOut)
@@ -86,7 +85,7 @@ equation
     corFact = 1
       "No correction factor is needed";
 
-  elseif (polyMod == Choices.PolynomialModels.Li2013) then
+  elseif (polyMod == Types.PolynomialModels.Li2013) then
     /*Polynomial approach presented by Li (2013):
       C_D = a1 + a2*opening + a3*opening^2 + a4*opening*(T_subcooling/T_crit) +
       a5*(T_subcooling/T_crit) + a6*(T_subcooling/T_crit)^2

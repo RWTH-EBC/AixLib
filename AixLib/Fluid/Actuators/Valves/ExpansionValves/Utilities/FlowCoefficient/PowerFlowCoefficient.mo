@@ -5,7 +5,7 @@ model PowerFlowCoefficient
 
   // Definition of parameters
   //
-  parameter Choices.PowerModels powMod=Choices.PowerModels.ShanweiEtAl2005
+  parameter Types.PowerModels powMod=Types.PowerModels.ShanweiEtAl2005
     "Chose predefined power model for flow coefficient"
     annotation (Dialog(group="Modelling approach"));
   parameter Real a
@@ -22,12 +22,12 @@ model PowerFlowCoefficient
   parameter Modelica.SIunits.Diameter dCle = 0.02e-3
     "Clearance diameter dCle = d_inner - d_needle"
     annotation(Dialog(group="Further geometry data",
-               enable=if (powMod == Choices.PowerModels.ShanweiEtAl2005) then
+               enable=if (powMod == Types.PowerModels.ShanweiEtAl2005) then
           true else false));
   parameter Real pDifRat = 0.84
     "Pressure differential ratio factor depending on valve moddeld"
     annotation(Dialog(group="Further geometry data",
-               enable=if (powMod == Choices.PowerModels.Li2013) then true else
+               enable=if (powMod == Types.PowerModels.Li2013) then true else
           false));
 
   // Definition of coefficients
@@ -58,7 +58,7 @@ equation
 
   // Calculation of coefficients
   //
-  if (powMod == Choices.PowerModels.ShanweiEtAl2005) then
+  if (powMod == Types.PowerModels.ShanweiEtAl2005) then
     /*Polynomial approach presented by Shanwei et al. (2005):
       C_D = C * (AVal/dCle^2)^b1 * ((pInl-pOut)/p_crit)^b2 *
       (T_crit/T_supercooled)^b3 * (rho_inlet/rho_outlet)^b4 *
@@ -86,7 +86,7 @@ equation
     corFact = 1
       "No correction factor is needed";
 
-  elseif (powMod == Choices.PowerModels.ZhifangAndOu2008) then
+  elseif (powMod == Types.PowerModels.ZhifangAndOu2008) then
     /*Polynomial approach presented by Zhifang and Ou (2008):
       C_D = C * ((pInl-pOut)*sqrt(AVal)/sigma_inlet)^b1 * 
       (dInlPip*sqrt(rho_inlet*pInl)/eta_inlet)^b2
@@ -104,7 +104,7 @@ equation
     corFact = 1
       "No correction factor is needed";
 
-  elseif (powMod == Choices.PowerModels.Li2013) then
+  elseif (powMod == Types.PowerModels.Li2013) then
     /*Polynomial approach presented by Li (2013):
       C_D = C * (opening)^b1 * (T_supercooled/T_crit)^b2
       

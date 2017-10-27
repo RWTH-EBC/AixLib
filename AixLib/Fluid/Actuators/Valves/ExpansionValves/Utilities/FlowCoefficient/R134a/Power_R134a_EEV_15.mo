@@ -1,8 +1,7 @@
 within AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient.R134a;
-model R134a_EEV_15
-  "Polynomial - R134a - EEV - 1.5 mm"
+model Power_R134a_EEV_15 "Power - R134a - EEV - 1.5 mm"
   extends PowerFlowCoefficient(
-    final powMod=Choices.PowerModels.ZhifangAndOu2008,
+    final powMod=Types.PowerModels.ZhifangAndOu2008,
     final a=1.1868e-13,
     final b={-1.4347,3.6426});
 
@@ -51,4 +50,4 @@ valve based on thermodynamic analysis and experiment</a>. In:
 S. 2381&ndash;243
 </p>
 </html>"));
-end R134a_EEV_15;
+end Power_R134a_EEV_15;

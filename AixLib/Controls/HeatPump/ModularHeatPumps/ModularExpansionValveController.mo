@@ -18,12 +18,12 @@ model ModularExpansionValveController
 equation
   // Connect internal controller with inputs and outputs
   //
-  connect(internalController.u_m,  dataBus.expValBus.actConVarVal);
-  connect(internalController.u_s,  dataBus.expValBus.intSetSigVal);
+  connect(internalController.u_m,  dataBus.expValBus.meaConVarVal);
+  connect(internalController.u_s,  dataBus.expValBus.intSetPoiVal);
   connect(internalController.y,  manVar);
 
   if useExt then
-    connect(manVarVal, dataBus.expValBus.extManSigVal);
+    connect(manVarVal, dataBus.expValBus.extManVarVal);
   end if;
   manVarVal = manVar;
 

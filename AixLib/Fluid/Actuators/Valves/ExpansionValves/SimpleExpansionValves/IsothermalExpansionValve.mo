@@ -6,17 +6,17 @@ model IsothermalExpansionValve
 equation
   // Calculation of mass flow and pressure drop
   //
-  if (calcProc == Utilities.Choices.CalcProc.linear) then
+  if (calcProc == Utilities.Types.CalcProc.linear) then
     C = 1  "Linear relationship";
     m_flow = C * AThr * dp
     "Simple linear relationship between mass flow and pressure drop";
 
-  elseif (calcProc == Utilities.Choices.CalcProc.nominal) then
+  elseif (calcProc == Utilities.Types.CalcProc.nominal) then
     C * dpNom = mFlowNom "Nominal relationship";
     m_flow = C * AThr * dp
     "Simple nominal relationship between mass flow and pressure drop";
 
-  elseif (calcProc == Utilities.Choices.CalcProc.flowCoefficient) then
+  elseif (calcProc == Utilities.Types.CalcProc.flowCoefficient) then
     C = flowCoefficient.C "Flow coefficient model";
     m_flow = homotopy(C * AThr * sqrt(2*dInl*dp),
                       mFlowNom/dpNom * AThr * dp)

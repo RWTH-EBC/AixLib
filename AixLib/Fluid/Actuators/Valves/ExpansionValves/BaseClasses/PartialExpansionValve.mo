@@ -20,7 +20,7 @@ partial model PartialExpansionValve
       enable = useInpFil,
       group="Transient behaviour"));
 
-  parameter Utilities.Choices.CalcProc calcProc=Utilities.Choices.CalcProc.nominal
+  parameter Utilities.Types.CalcProc calcProc=Utilities.Types.CalcProc.nominal
     "Chose predefined calculation method for flow coefficient"
     annotation (Dialog(tab="Flow Coefficient"));
   parameter Modelica.SIunits.MassFlowRate mFlowNom = m_flow_nominal
@@ -28,16 +28,16 @@ partial model PartialExpansionValve
     annotation(Dialog(
                tab="Flow Coefficient",
                group="Nominal calculation",
-               enable=if ((calcProc == Utilities.Choices.CalcProc.nominal) or (
-          calcProc == Utilities.Choices.CalcProc.flowCoefficient)) then true
+               enable=if ((calcProc == Utilities.Types.CalcProc.nominal) or (
+          calcProc == Utilities.Types.CalcProc.flowCoefficient)) then true
            else false));
   parameter Modelica.SIunits.PressureDifference dpNom = 15e5
     "Pressure drop at nominal conditions"
     annotation(Dialog(
                tab="Flow Coefficient",
                group="Nominal calculation",
-               enable=if ((calcProc == Utilities.Choices.CalcProc.nominal) or (
-          calcProc == Utilities.Choices.CalcProc.flowCoefficient)) then true
+               enable=if ((calcProc == Utilities.Types.CalcProc.nominal) or (
+          calcProc == Utilities.Types.CalcProc.flowCoefficient)) then true
            else false));
 
   // Definition of model describing flow coefficient

@@ -1,7 +1,6 @@
 within AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities;
-package Choices
-  "Types, constants to define menu choices"
-  extends Modelica.Icons.Package;
+package Types "Types, constants to define menu choices"
+  extends Modelica.Icons.TypesPackage;
 
   // Types describing calculation procedures of mass flow and pressure drop
   //
@@ -43,4 +42,4 @@ package Choices
 </html>",   info="<html>
 <p>This package contains types and constants to define menue choices.</p>
 </html>"));
-end Choices;
+end Types;

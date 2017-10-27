@@ -45,12 +45,12 @@ model ExpansionValveMassFlowRate
     show_staOut=false,
     dp_start=1e6,
     AVal=2.55e-5,
-    calcProc=Utilities.Choices.CalcProc.flowCoefficient,
+    calcProc=Utilities.Types.CalcProc.flowCoefficient,
     useInpFil=true,
     risTim=0.25,
     dpNom=1000000,
     redeclare model FlowCoefficient =
-        Utilities.FlowCoefficient.R407c.R407c_EEV_18)
+        Utilities.FlowCoefficient.R407c.Poly_R407c_EEV_18)
     "Simple isothermal valve"
     annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
   AixLib.Fluid.FixedResistances.PressureDrop simplePipe(

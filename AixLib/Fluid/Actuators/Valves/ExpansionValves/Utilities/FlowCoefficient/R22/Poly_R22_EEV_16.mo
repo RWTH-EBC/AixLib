@@ -1,8 +1,7 @@
 within AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient.R22;
-model R22_EEV_16
-  "Polynomial - R22 - EEV - 1.6 mm"
+model Poly_R22_EEV_16 "Polynomial - R22 - EEV - 1.6 mm"
   extends PolynomialFlowCoefficient(
-    final polyMod=Choices.PolynomialModels.Li2013,
+    final polyMod=Types.PolynomialModels.Li2013,
     final a={-0.03469,1.64866,-0.84227,1.19513,0,0},
     final b={1,1,1,1,1,1},
     final pDifRat=0.84);
@@ -49,4 +48,4 @@ Simplified modeling analysis ofmass flow characteristics in electronic expansion
 valve</a>. In: <i>Applied Thermal Engineering 53(1)</i>, S. 8&ndash;12
 </p>
 </html>"));
-end R22_EEV_16;
+end Poly_R22_EEV_16;

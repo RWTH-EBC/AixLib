@@ -49,7 +49,7 @@ model ModularExpansionValvesMassFlowRate
         Modelica.Blocks.Types.SimpleController.P},
     useExt=true,
     redeclare model FlowCoefficient =
-        Utilities.FlowCoefficient.R134a.R134a_EEV_15)
+        Utilities.FlowCoefficient.R134a.Power_R134a_EEV_15)
     "Modular expansion valves in parallel"
     annotation (Placement(
         transformation(
