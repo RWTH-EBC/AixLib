@@ -119,11 +119,5 @@ revisions="<html>
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
 </ul>
-</html>"),
-    __Dymola_experimentFlags(
-      Advanced(GenerateVariableDependencies=false, OutputModelicaCode=false),
-      Evaluate=false,
-      OutputCPUtime=true,
-      OutputFlatModelica=false),
-    __Dymola_experimentSetupOutput);
+</html>"));
 end RefrigerantInversions;

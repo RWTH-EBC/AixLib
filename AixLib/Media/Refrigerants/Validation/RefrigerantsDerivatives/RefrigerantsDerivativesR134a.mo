@@ -624,7 +624,9 @@ density and temperature).</li>
 <p>
 Furthermore, the derivatives are compared with the associated derivatives
 calculated by an external medium model (i.e. 
-<a href=\"https://github.com/thorade/HelmholtzMedia\">HelmholtzMedia</a>)
+<a href=\"https://github.com/thorade/HelmholtzMedia\">HelmholtzMedia</a>) 
+Therefore, the parameters are not allowed to change (except for the medium 
+package). 
 </p>
 </html>"),
 experiment(StopTime=1, Tolerance=1e-006));

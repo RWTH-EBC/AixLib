@@ -293,8 +293,6 @@ equation
     abs(state_pT.h)*100;
 
    annotation(experiment(StopTime=6400, Tolerance=1e-006),
-__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Media/Examples/WaterProperties.mos"
-        "Simulate and plot"),
       Documentation(info="<html>
 <p>
 This example models checks the implementation of the<b> refrigerant&apos;s
@@ -348,11 +346,5 @@ revisions="<html>
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
 </ul>
-</html>"),
-    __Dymola_experimentFlags(
-      Advanced(GenerateVariableDependencies=false, OutputModelicaCode=false),
-      Evaluate=false,
-      OutputCPUtime=true,
-      OutputFlatModelica=false),
-    __Dymola_experimentSetupOutput);
+</html>"));
 end RefrigerantProperties;

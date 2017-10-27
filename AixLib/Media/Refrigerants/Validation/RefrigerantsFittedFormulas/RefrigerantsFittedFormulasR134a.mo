@@ -285,12 +285,6 @@ equation
   properties.T_psExt = extProp.y[25];
 
   annotation(experiment(StopTime=6400, Tolerance=1e-006),
-    __Dymola_experimentSetupOutput,
-    __Dymola_experimentFlags(
-      Advanced(GenerateVariableDependencies=false, OutputModelicaCode=false),
-      Evaluate=false,
-      OutputCPUtime=true,
-      OutputFlatModelica=false),
     Documentation(info="<html>
 <p>
 This example models checks the implementation of the<b> refrigerant&apos;s
@@ -318,7 +312,8 @@ depending on pressure and temperature.</li>
 <p>
 Additionally, the fitted formulas are also calculated with an external
 media libary (i.e. <a href=\"https://github.com/thorade/HelmholtzMedia\">
-HelmholtzMedia</a>).
+HelmholtzMedia</a>). Therefore, the parameters are not allowed to change
+(except for the medium package).
 </p>
 </html>", revisions="<html>
 <ul>

@@ -18,12 +18,6 @@ model RefrigerantsFittedFormulasR410a
     T_max = 473.15);
 
   annotation (experiment(StopTime=6400, Tolerance=1e-006),
-    __Dymola_experimentSetupOutput,
-    __Dymola_experimentFlags(
-      Advanced(GenerateVariableDependencies=false, OutputModelicaCode=false),
-      Evaluate=false,
-      OutputCPUtime=true,
-      OutputFlatModelica=false),
 Documentation(revisions="<html>
 <ul>
   <li>
@@ -65,7 +59,8 @@ ExternalMedia</a>).
 Unfortunately, it is not possible to directly call formulas related
 to the Helmholtz equation of state for the ExternalMedia library.
 Thus, these formulas are set to unity and cannot be validated 
-directly in Modelica.
+directly in Modelica. Therefore, the parameters are not allowed to change 
+(except for the medium package). 
 </p>
 </html>"));
 end RefrigerantsFittedFormulasR410a;
