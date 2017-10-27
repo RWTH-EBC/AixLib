@@ -4,8 +4,8 @@ model FVUController "Rule-based controller of a facade ventilation unit"
   parameter Modelica.SIunits.Temperature minimumSupTemp=273.15 + 17
     "Minimum supply air temperature";
 
-  parameter Modelica.SIunits.Concentration co2SetConcentration(min=0) = 600
-    "Set point for CO2 concentration in ppm (more exactly in mol/m3)";
+  parameter Real co2SetConcentration(min=0) = 600
+    "Set point for CO2 concentration in ppm";
 
   parameter Real maxSupFanPower(min=0, max=0) = 1
     "Maximum relative supply air fan power (0..1)";

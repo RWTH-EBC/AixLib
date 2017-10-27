@@ -33,8 +33,8 @@ expandable connector FVUControlBus
   Modelica.SIunits.ThermodynamicTemperature roomSetTemperature
    "Room air set temperature measurement";
 
- Modelica.SIunits.Concentration co2Concentration(min=0)
-   "CO2 concentration measurement";
+ Real co2Concentration(min=0)
+   "CO2 concentration measurement in ppm";
 
  Modelica.SIunits.ThermodynamicTemperature mixTemperature
    "Temperature measurement of the mixed circulation and fresh air streams";
