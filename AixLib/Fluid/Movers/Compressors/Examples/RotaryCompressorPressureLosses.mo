@@ -1,6 +1,6 @@
 within AixLib.Fluid.Movers.Compressors.Examples;
-model RotaryCompressor
-  "Example model to test simple rotary compressors"
+model RotaryCompressorPressureLosses
+  "Example model to test simple rotary compressors with pressure losses"
   extends Modelica.Icons.Example;
 
   // Define medium and parameters
@@ -28,8 +28,7 @@ model RotaryCompressor
     use_T=true,
     nPorts=1,
     p=pInl,
-    T=TOut)
-    "Source with constant pressure and temperature"
+    T=TOut) "Source with constant pressure and temperature"
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
   Modelica.Blocks.Sources.Sine rotSpe(
     amplitude=40,
@@ -40,7 +39,7 @@ model RotaryCompressor
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixTem(T=283.15)
     "Fixed ambient temperature"
     annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
-  SimpleCompressors.RotaryCompressor rotCom(
+  SimpleCompressors.RotaryCompressorPressureLosses rotCom(
     redeclare package Medium = Medium,
     show_staEff=true,
     show_qua=true,
@@ -103,4 +102,4 @@ equation
 </ul>
 </html>"),
 experiment(StopTime=1));
-end RotaryCompressor;
+end RotaryCompressorPressureLosses;

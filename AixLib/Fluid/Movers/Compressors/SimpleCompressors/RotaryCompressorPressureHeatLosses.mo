@@ -1,6 +1,6 @@
 within AixLib.Fluid.Movers.Compressors.SimpleCompressors;
-model RotaryCompressorPressure
-  "Model that describes a simple rotary compressor with pressure losses"
+model RotaryCompressorPressureHeatLosses
+  "Model that describes a simple rotary compressor with pressure and heat losses"
 
   // Definition of the medium
   //
@@ -21,11 +21,11 @@ model RotaryCompressorPressure
     "Ratio of the real and the ideal displacement volume"
     annotation(Dialog(tab="General",group="Geometry"));
   parameter Modelica.SIunits.Diameter
-    diameterInl(min=0) = 13e-6
+    diameterInl(min=0) = 12e-3
     "Diameter of the pipe at compressor's inlet"
     annotation(Dialog(tab="General",group="Geometry"));
   parameter Modelica.SIunits.Diameter
-    diameterOut(min=0) = 13e-6
+    diameterOut(min=0) = 8e-3
     "Diameter of the pipe at compressor's outlet"
     annotation(Dialog(tab="General",group="Geometry"));
 
@@ -83,10 +83,12 @@ model RotaryCompressorPressure
 
   // Definition of parameters describing pressure losses
   //
-  parameter Real zetInl=10
+  parameter Real zetInl=
+    ((1/0.59-1)^2+(1-(diameterInl/0.066)^2))*(1-(diameterInl/0.066)^2)
     "Pressure loss factor at compressor's inlet for flow of port_a -> port_b"
     annotation(Dialog(tab = "Pressure losses",group="General"));
-  parameter Real zetOut=10
+  parameter Real zetOut=
+    ((1/0.59-1)^2+(1-(diameterOut/0.1122)^2))*(1-(diameterOut/0.1122)^2)
     "Pressure loss factor at compressor's outlet for flow of port_a -> port_b"
     annotation(Dialog(tab = "Pressure losses",group="General"));
 
@@ -99,6 +101,35 @@ model RotaryCompressorPressure
   parameter Boolean linearized=false
     "= true, use linear relation between m_flow and dp for any flow rate"
     annotation(Dialog(tab = "Pressure losses",group="Advanced"));
+
+  // Definition of parameters describing heat losses
+  //
+  parameter Utilities.Types.HeatTransferModels
+    heaTraMod=Utilities.Types.HeatTransferModels.Simplified
+    "Choose heat transfer model for heat losses at compressor's inlet 
+    and outlet"
+    annotation(Dialog(tab = "Heat losses",group="General"));
+  parameter Modelica.SIunits.Mass mWal=2.5
+    "Mass of the fictitious wall"
+    annotation(Dialog(tab = "Heat losses",group="Geometry"));
+  parameter Modelica.SIunits.SpecificHeatCapacity cpWal=450
+    "Specific heat capacity of the fictitious wall"
+    annotation(Dialog(tab = "Heat losses",group="Geometry"));
+  parameter Modelica.SIunits.ThermalConductance kAMeaInl=25
+    "Effective mean thermal conductance between medium and fictitious wall 
+    at inlet"
+    annotation(Dialog(tab = "Heat losses",group="Thermal conductances"));
+  parameter Modelica.SIunits.ThermalConductance kAMeaOut=35
+    "Effective mean thermal conductance between medium and fictitious wall 
+    at outlet"
+    annotation(Dialog(tab = "Heat losses",group="Thermal conductances"));
+  parameter Modelica.SIunits.ThermalConductance kAMeaAmb=10
+    "Effective mean thermal conductance coefficient between fictitious wall 
+    and ambient"
+    annotation(Dialog(tab = "Heat losses",group="Thermal conductances"));
+  parameter Modelica.SIunits.Temperature TWal0=293.15
+    "Temperature of wall at initialisation"
+    annotation(Dialog(tab = "Heat losses",group="Initialisation"));
 
   // Definition of parameters deschribing assumptions
   //
@@ -189,8 +220,18 @@ model RotaryCompressorPressure
     final m_flow_start=m_flow_start)
     "Calculation of pressure drop at inlet of compressor"
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
+  Utilities.HeatTransfer.SimpleHeatTransfer heaTraInl(
+    redeclare final package Medium=Medium,
+    final allowFlowReversal=allowFlowReversal,
+    final show_T=show_T,
+    final show_V_flow=show_V_flow,
+    final heaTraMod=heaTraMod,
+    final kAMea=kAMeaInl,
+    final m_flow_nominal=m_flow_nominal)
+    "Model to calculate heat transfer at inlet of compressor"
+    annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
   RotaryCompressor rotCom(
-    redeclare final replaceable package Medium=Medium,
+    redeclare final package Medium=Medium,
     final VDis=VDis,
     final epsRef=epsRef,
     final rotSpeMax=rotSpeMax,
@@ -214,6 +255,16 @@ model RotaryCompressorPressure
     final TInl0=TInl0)
     "Model of a simple rotary compressor to calculate compression of the medium"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+  Utilities.HeatTransfer.SimpleHeatTransfer heaTraOut(
+    redeclare final package Medium=Medium,
+    final allowFlowReversal=allowFlowReversal,
+    final show_T=show_T,
+    final show_V_flow=show_V_flow,
+    final heaTraMod=heaTraMod,
+    final kAMea=kAMeaOut,
+    final m_flow_nominal=m_flow_nominal)
+    "Model to calculate heat transfer at outlet of compressor"
+    annotation (Placement(transformation(extent={{30,-10},{50,10}})));
   FixedResistances.HydraulicResistance hydResOut(
     redeclare final package Medium=Medium,
     final zeta=zetOut,
@@ -234,7 +285,15 @@ model RotaryCompressorPressure
      h_outflow(start = Medium.h_default))
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
 
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort
+  Utilities.HeatTransfer.SimpleFictitiousWall ficWal(
+    final mWal=mWal,
+    final cpWal=cpWal,
+    final kAMeaAmb=kAMeaAmb,
+    final TWal0=TWal0)
+    "Simple fictitious wall to calculate heat losses at compressor's inlet
+    and outlet"
+    annotation (Placement(transformation(extent={{-40,-90},{40,-10}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heatPort
     "Heat port connector to calculate heat losses to ambient"
     annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
   Modelica.Blocks.Interfaces.RealInput
@@ -261,12 +320,30 @@ equation
   //
   connect(port_a, hydResInl.port_a)
     annotation (Line(points={{-100,0},{-80,0}}, color={0,127,255}));
-  connect(hydResInl.port_b, rotCom.port_a)
-    annotation (Line(points={{-60,0},{-10,0}}, color={0,127,255}));
-  connect(rotCom.port_b, hydResOut.port_a)
-    annotation (Line(points={{10,0},{60,0}}, color={0,127,255}));
+  connect(hydResInl.port_b, heaTraInl.port_a)
+    annotation (Line(points={{-60,0},{-55,0},{-50,0}}, color={0,127,255}));
+  connect(heaTraInl.port_b, rotCom.port_a)
+    annotation (Line(points={{-30,0},{-20,0},{-10,0}}, color={0,127,255}));
+  connect(rotCom.port_b, heaTraOut.port_a)
+    annotation (Line(points={{10,0},{20,0},{30,0}}, color={0,127,255}));
+  connect(heaTraOut.port_b, hydResOut.port_a)
+    annotation (Line(points={{50,0},{55,0},{60,0}}, color={0,127,255}));
   connect(hydResOut.port_b, port_b)
     annotation (Line(points={{80,0},{100,0}}, color={0,127,255}));
+
+  // Connection of heat ports
+  //
+  connect(heaTraInl.heatPort, ficWal.heaPorComInl)
+    annotation (Line(points={{-40,-10},{-40,-10},{-40,-30},
+                {-20,-30},{-20,-42}}, color={191,0,0}));
+  connect(rotCom.heatPort, ficWal.heaPorCom)
+    annotation (Line(points={{0,-10},{0,-26},{0,-42},{0,-42}},
+                color={191,0,0}));
+  connect(heaTraOut.heatPort, ficWal.heaPorComOut)
+    annotation (Line(points={{40,-10},{40,-30},{20,-30},{20,-42}},
+                color={191,0,0}));
+  connect(ficWal.heaPorAmb, heatPort)
+    annotation (Line(points={{0,-58},{0,-100}}, color={191,0,0}));
 
   // Connection of further components
   //
@@ -276,8 +353,6 @@ equation
   connect(rotCom.curManVarCom, curManVarCom)
     annotation (Line(points={{6,10},{6,30},{60,30},{60,100}},
                 color={0,0,127}));
-  connect(rotCom.heatPort, heatPort)
-    annotation (Line(points={{0,-10},{0,-100}}, color={191,0,0}));
 
   annotation (Icon(graphics={
         Ellipse(
@@ -388,13 +463,24 @@ equation
           points={{78,6},{72,2},{74,-2},{72,-6},{78,-2},{76,2},{78,6}},
           lineColor={0,0,0},
           fillColor={255,0,0},
-          fillPattern=FillPattern.Solid)}), Documentation(revisions="<html>
+          fillPattern=FillPattern.Solid),
+        Line(
+          points={{-76,-8},{-76,-82},{0,-82},{0,-90}},
+          color={255,0,0},
+          thickness=0.5,
+          arrow={Arrow.Filled,Arrow.Filled}),
+        Line(
+          points={{76,-8},{76,-82},{0,-82},{0,-90}},
+          color={255,0,0},
+          thickness=0.5,
+          arrow={Arrow.Filled,Arrow.Filled})}),
+                                            Documentation(revisions="<html>
 <ul>
   <li>
-  October 20, 2017, by Mirko Engelpracht:<br/>
+  October 28, 2017, by Mirko Engelpracht:<br/>
   First implementation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
 </html>"));
-end RotaryCompressorPressure;
+end RotaryCompressorPressureHeatLosses;

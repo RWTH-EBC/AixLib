@@ -1,6 +1,6 @@
-within AixLib.Fluid.Movers.Compressors.Examples;
-model RotaryCompressor
-  "Example model to test simple rotary compressors"
+within AixLib.Fluid.Movers.Compressors.Validation;
+model ReverseMassFlowRate
+  "Valdiation model to check reverse mass flow rate"
   extends Modelica.Icons.Example;
 
   // Define medium and parameters
@@ -32,9 +32,9 @@ model RotaryCompressor
     "Source with constant pressure and temperature"
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
   Modelica.Blocks.Sources.Sine rotSpe(
-    amplitude=40,
-    offset=80,
-    freqHz=1)
+    freqHz=1,
+    amplitude=0,
+    offset=0)
     "Prescribed compressor's rotational speed"
     annotation (Placement(transformation(extent={{-80,30},{-60,50}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixTem(T=283.15)
@@ -52,47 +52,28 @@ model RotaryCompressor
     redeclare model IsentropicEfficiency =
         Utilities.IsentropicEfficiency.RotaryCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_Rotary)
     "Model of a rotary compressor"
-    annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
-  Modelica.Blocks.Sources.Sine valOpe(
-    offset=0.5,
-    amplitude=0.3,
-    freqHz=1)
-    "Prescribed valve's opening"
-    annotation (Placement(transformation(extent={{-80,70},{-60,90}})));
-  Actuators.Valves.SimpleValve simVal(
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+  Sources.MassFlowSource_T sink(
     redeclare package Medium = Medium,
-    m_flow_start=0.025,
-    m_flow_small=1e-6,
-    Kvs=1.4)
-    "Model of a simple valve to simulate pressure losses"
-    annotation (Placement(transformation(extent={{20,-10},{40,10}})));
-  Sources.FixedBoundary sink(
-    redeclare package Medium = Medium,
-    use_p=true,
-    use_T=true,
     nPorts=1,
-    p=pInl,
-    T=TInl)
-    "Sink with constant pressure and temperature"
-    annotation (Placement(transformation(extent={{80,-10},{60,10}})));
+    m_flow=0.1,
+    T=TOut)
+    "Sink of constant temperature and mass flow"
+    annotation (Placement(transformation(extent={{60,-10},{40,10}})));
 
 
 equation
   // Connection of components
   //
   connect(source.ports[1], rotCom.port_a)
-    annotation (Line(points={{-60,0},{-60,0},{-30,0}}, color={0,127,255}));
-  connect(rotCom.port_b, simVal.port_a)
-    annotation (Line(points={{-10,0},{6,0},{20,0}}, color={0,127,255}));
-  connect(simVal.port_b, sink.ports[1])
-    annotation (Line(points={{40,0},{50,0},{60,0}}, color={0,127,255}));
+    annotation (Line(points={{-60,0},{-10,0}},         color={0,127,255}));
   connect(rotSpe.y, rotCom.manVarCom)
-    annotation (Line(points={{-59,40},{-26,40},{-26,10}}, color={0,0,127}));
-  connect(valOpe.y, simVal.opening)
-    annotation (Line(points={{-59,80},{30,80},{30,8}}, color={0,0,127}));
+    annotation (Line(points={{-59,40},{-6,40},{-6,10}},   color={0,0,127}));
   connect(fixTem.port, rotCom.heatPort)
-    annotation (Line(points={{-60,-50},{-20,-50},{-20,-10}}, color={191,0,0}));
+    annotation (Line(points={{-60,-50},{0,-50},{0,-10}},     color={191,0,0}));
 
+  connect(sink.ports[1], rotCom.port_b)
+    annotation (Line(points={{40,0},{25,0},{10,0}}, color={0,127,255}));
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
@@ -103,4 +84,4 @@ equation
 </ul>
 </html>"),
 experiment(StopTime=1));
-end RotaryCompressor;
+end ReverseMassFlowRate;

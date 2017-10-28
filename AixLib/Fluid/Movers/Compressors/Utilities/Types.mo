@@ -19,6 +19,18 @@ package Types
       "MendozaMirandaEtAl2016 - Function of various properties")
     "Enumeration to define polynomial models for calculating flow coefficient"
     annotation (Evaluate=true);
+  type IsentropicPolynomialModels = enumeration(
+      DarrAndCrawford1992
+      "DarrAndCrawford1992 - Function of rotational speed and densities",
+      Karlsson2007
+      "Karlsson2007 - Function of pressure ratio and rotational speed")
+    "Enumeration to define polynomial models for calculating flow coefficient"
+    annotation (Evaluate=true);
+  type IsentropicPowerModels = enumeration(
+      MendozaMirandaEtAl2016
+      "MendozaMirandaEtAl2016 - Function of various properties")
+    "Enumeration to define polynomial models for calculating flow coefficient"
+    annotation (Evaluate=true);
   type VolumetricPolynomialModels = enumeration(
       DarrAndCrawford1992
       "DarrAndCrawford1992 - Function of rotational speed and densities",
@@ -41,18 +53,12 @@ package Types
       "MendozaMirandaEtAl2016 - Function of various properties")
     "Enumeration to define polynomial models for calculating flow coefficient"
     annotation (Evaluate=true);
-  type IsentropicPolynomialModels = enumeration(
-      DarrAndCrawford1992
-      "DarrAndCrawford1992 - Function of rotational speed and densities",
-      Karlsson2007
-      "Karlsson2007 - Function of pressure ratio and rotational speed")
-    "Enumeration to define polynomial models for calculating flow coefficient"
+  type HeatTransferModels = enumeration(
+      Simplified
+      "Calculation of heat transfer using logarithmic temperature difference")
+    "Enumeration to define heat transfer models for calculations of heat losses"
     annotation (Evaluate=true);
-  type IsentropicPowerModels = enumeration(
-      MendozaMirandaEtAl2016
-      "MendozaMirandaEtAl2016 - Function of various properties")
-    "Enumeration to define polynomial models for calculating flow coefficient"
-    annotation (Evaluate=true);
+
   annotation (Documentation(revisions="<html>
 <ul>
   <li>

@@ -162,7 +162,7 @@ partial model PartialCompressor
   Modelica.Blocks.Routing.RealPassThrough rotSpeThr
     "Dummy passing through of compressor's rotational speed to allow usage of filter"
     annotation (Placement(transformation(extent={{10,60},{30,80}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heatPort
     "Heat port connector to calculate heat losses to ambient"
     annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
 

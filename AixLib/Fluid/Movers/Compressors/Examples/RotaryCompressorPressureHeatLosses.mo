@@ -1,6 +1,6 @@
 within AixLib.Fluid.Movers.Compressors.Examples;
-model RotaryCompressor
-  "Example model to test simple rotary compressors"
+model RotaryCompressorPressureHeatLosses
+  "Example model to test simple rotary compressors with pressure and heat losses"
   extends Modelica.Icons.Example;
 
   // Define medium and parameters
@@ -40,7 +40,7 @@ model RotaryCompressor
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixTem(T=283.15)
     "Fixed ambient temperature"
     annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
-  SimpleCompressors.RotaryCompressor rotCom(
+  SimpleCompressors.RotaryCompressorPressureHeatLosses rotCom(
     redeclare package Medium = Medium,
     show_staEff=true,
     show_qua=true,
@@ -49,6 +49,7 @@ model RotaryCompressor
         Utilities.EngineEfficiency.SimilitudeTheory.Poly_GeneralLiterature,
     redeclare model VolumetricEfficiency =
         Utilities.VolumetricEfficiency.RotaryCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_Rotary,
+
     redeclare model IsentropicEfficiency =
         Utilities.IsentropicEfficiency.RotaryCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_Rotary)
     "Model of a rotary compressor"
@@ -103,4 +104,4 @@ equation
 </ul>
 </html>"),
 experiment(StopTime=1));
-end RotaryCompressor;
+end RotaryCompressorPressureHeatLosses;
