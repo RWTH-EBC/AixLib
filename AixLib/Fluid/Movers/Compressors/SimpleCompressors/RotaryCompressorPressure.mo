@@ -1,5 +1,5 @@
 within AixLib.Fluid.Movers.Compressors.SimpleCompressors;
-model RotaryCompressorSimplePressure
+model RotaryCompressorPressure
   "Model that describes a simple rotary compressor with pressure losses"
 
   // Definition of the medium
@@ -10,31 +10,7 @@ model RotaryCompressorSimplePressure
     "Medium in the component"
     annotation (choicesAllMatching = true);
 
-  parameter Boolean allowFlowReversal = true
-    "= false to simplify equations, assuming, but not enforcing, no flow reversal"
-    annotation(Dialog(tab="Assumptions"), Evaluate=true);
-
-  parameter Modelica.SIunits.PressureDifference dp_start(displayUnit="Pa") = 0
-    "Guess value of dp = port_a.p - port_b.p"
-    annotation(Dialog(tab = "Advanced"));
-  parameter Medium.MassFlowRate m_flow_start = 0
-    "Guess value of m_flow = port_a.m_flow"
-    annotation(Dialog(tab = "Advanced"));
-  // Note: value of m_flow_small shall be refined by derived model,
-  // based on local m_flow_nominal
-  parameter Medium.MassFlowRate m_flow_small
-    "Small mass flow rate for regularization of zero flow"
-    annotation(Dialog(tab = "Advanced"));
-
-  parameter Boolean show_T = true
-    "= true, if temperatures at port_a and port_b are computed"
-    annotation(Dialog(tab="Advanced",group="Diagnostics"));
-  parameter Boolean show_V_flow = true
-    "= true, if volume flow rate at inflowing port is computed"
-    annotation(Dialog(tab="Advanced",group="Diagnostics"));
-
-
-  // Definition of parameters describing the geometry
+  // Definition of parameters describing general options
   //
   parameter Modelica.SIunits.Volume
     VDis(min=0) = 13e-6
@@ -43,6 +19,14 @@ model RotaryCompressorSimplePressure
   parameter Modelica.SIunits.Efficiency
     epsRef(min=0, max=1, nominal=0.05) = 0.04
     "Ratio of the real and the ideal displacement volume"
+    annotation(Dialog(tab="General",group="Geometry"));
+  parameter Modelica.SIunits.Diameter
+    diameterInl(min=0) = 13e-6
+    "Diameter of the pipe at compressor's inlet"
+    annotation(Dialog(tab="General",group="Geometry"));
+  parameter Modelica.SIunits.Diameter
+    diameterOut(min=0) = 13e-6
+    "Diameter of the pipe at compressor's outlet"
     annotation(Dialog(tab="General",group="Geometry"));
 
   parameter Modelica.SIunits.Frequency
@@ -97,30 +81,56 @@ model RotaryCompressorSimplePressure
       Dialog(
       tab = "Efficiencies and similitude theory", group="Isentropic efficiency"));
 
-  // Extensions and parameter propagation
+  // Definition of parameters describing pressure losses
   //
-//   extends AixLib.Fluid.Interfaces.PartialTwoPortTransport(
-//     redeclare replaceable package Medium =
-//         Modelica.Media.R134a.R134a_ph,
-//     dp_start=-20e5,
-//     m_flow_start=0.5*m_flow_nominal,
-//     m_flow_small=1e-6*m_flow_nominal,
-//     show_T=false,
-//     show_V_flow=false);
+  parameter Real zetInl=10
+    "Pressure loss factor at compressor's inlet for flow of port_a -> port_b"
+    annotation(Dialog(tab = "Pressure losses",group="General"));
+  parameter Real zetOut=10
+    "Pressure loss factor at compressor's outlet for flow of port_a -> port_b"
+    annotation(Dialog(tab = "Pressure losses",group="General"));
 
-  // Definition of parameters describing nominal conditions
+  parameter Boolean from_dp=false
+    "= true, use m_flow = f(dp) else dp = f(m_flow)"
+    annotation(Dialog(tab = "Pressure losses",group="Advanced"));
+  parameter Boolean homotopyInitialization=true
+    "= true, use homotopy method  for initialisation"
+    annotation(Dialog(tab = "Pressure losses",group="Advanced"));
+  parameter Boolean linearized=false
+    "= true, use linear relation between m_flow and dp for any flow rate"
+    annotation(Dialog(tab = "Pressure losses",group="Advanced"));
+
+  // Definition of parameters deschribing assumptions
   //
+  parameter Boolean allowFlowReversal = true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal"
+    annotation(Dialog(tab="Assumptions"), Evaluate=true);
+
+  // Definition of parameters describing advanced options
+  //
+  parameter Modelica.SIunits.PressureDifference
+    dp_start(displayUnit="Pa") = -20e5
+    "Guess value of compressor's dp = port_a.p - port_b.p"
+    annotation(Dialog(tab = "Advanced",group="General"));
+  parameter Medium.MassFlowRate m_flow_start = 0.5*m_flow_nominal
+    "Guess value of compressor's m_flow = port_a.m_flowr"
+    annotation(Dialog(tab = "Advanced",group="General"));
+  parameter Medium.MassFlowRate m_flow_small = 1e-6*m_flow_nominal
+    "Small mass flow rate for regularization of compressor's zero flow"
+    annotation(Dialog(tab = "Advanced",group="General"));
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.1
     "Nominal mass flow rate"
-    annotation(Dialog(tab="Advanced"),
-               HideResult=true);
-  parameter Modelica.SIunits.MassFlowRate m_flow_lea = 1e-8
-    "Leackage mass flow rate used for compressor shut-down"
-    annotation(Dialog(tab="Advanced"),
+    annotation(Dialog(tab="Advanced",group="General"),
                HideResult=true);
 
   // Definition of parameters describing diagnostics
   //
+  parameter Boolean show_T = false
+    "= true, if compressor's temperatures at port_a and port_b are computed"
+    annotation(Dialog(tab="Advanced",group="Diagnostics"));
+  parameter Boolean show_V_flow = false
+    "= true, if compressor's volume flow rate at inflowing port is computed"
+    annotation(Dialog(tab="Advanced",group="Diagnostics"));
   parameter Boolean show_staEff = false
     "= true, if thermodynamic states and efficiencies are computed"
     annotation(Dialog(tab="Advanced",group="Diagnostics"),
@@ -157,67 +167,73 @@ model RotaryCompressorSimplePressure
                enable=false),
                HideResult=true);
 
-
-
-
-
-
-
-
-
-
-
-  RotaryCompressorSimple rotCom(
-    redeclare replaceable package Medium = Medium,
-    VDis=VDis,
-    epsRef=epsRef,
-    rotSpeMax=rotSpeMax,
-    piPreMax=piPreMax,
-    useInpFil=useInpFil,
-    risTim=risTim,
-    redeclare model EngineEfficiency = EngineEfficiency,
-    redeclare model VolumetricEfficiency = VolumetricEfficiency,
-    redeclare model IsentropicEfficiency = IsentropicEfficiency,
-    allowFlowReversal=allowFlowReversal,
-    dp_start=dp_start,
-    m_flow_start=m_flow_start,
-    m_flow_small=m_flow_small,
-    show_T=show_T,
-    show_V_flow=show_V_flow,
-    m_flow_nominal=m_flow_nominal,
-    m_flow_lea=m_flow_lea,
-    show_staEff=show_staEff,
-    show_qua=show_qua,
-    rotSpe0=rotSpe0,
-    pInl0=pInl0,
-    TInl0=TInl0)                                   "Model of a simple rotary compressor"
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-  FixedResistances.HydraulicResistance hydraulicResistance(
-    m_flow_nominal=m_flow_nominal,
-    redeclare final replaceable package Medium = Medium,
-    allowFlowReversal=allowFlowReversal,
-    final show_T=false,
-    from_dp=from_dp,
-    homotopyInitialization=homotopyInitialization,
-    linearized=linearized,
-    zeta=zetInl,
-    diameter=diameterInl,
-    dp_start=dp_start,
-    m_flow_start=m_flow_start)
-    annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
-  FixedResistances.HydraulicResistance hydraulicResistance1(
-    redeclare final replaceable package Medium = Medium,
-    final allowFlowReversal=allowFlowReversal,
+  // Definition of submodels and connectors
+  //
+  Modelica.Fluid.Interfaces.FluidPort_a port_a(
+    redeclare final package Medium=Medium,
+     m_flow(min=if allowFlowReversal then -Modelica.Constants.inf else 0),
+     h_outflow(start=Medium.h_default))
+    "Fluid connector a (positive design flow direction is from port_a to port_b)"
+    annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
+  FixedResistances.HydraulicResistance hydResInl(
+    redeclare final package Medium=Medium,
+    final zeta=zetInl,
+    final diameter=diameterInl,
     final m_flow_nominal=m_flow_nominal,
+    final allowFlowReversal=allowFlowReversal,
     final show_T=false,
     final from_dp=from_dp,
     final homotopyInitialization=homotopyInitialization,
     final linearized=linearized,
-    zeta=zetOut,
-    diameter=diameterOut,
-    final dp_start=dp_start,
+    final dp_start=(1/40)*dp_start,
     final m_flow_start=m_flow_start)
-    annotation (Placement(transformation(extent={{30,-10},{50,10}})));
+    "Calculation of pressure drop at inlet of compressor"
+    annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
+  RotaryCompressor rotCom(
+    redeclare final replaceable package Medium=Medium,
+    final VDis=VDis,
+    final epsRef=epsRef,
+    final rotSpeMax=rotSpeMax,
+    final piPreMax=piPreMax,
+    final useInpFil=useInpFil,
+    final risTim=risTim,
+    redeclare final model EngineEfficiency=EngineEfficiency,
+    redeclare final model VolumetricEfficiency=VolumetricEfficiency,
+    redeclare final model IsentropicEfficiency=IsentropicEfficiency,
+    final allowFlowReversal=allowFlowReversal,
+    final dp_start=dp_start,
+    final m_flow_start=m_flow_start,
+    final m_flow_small=m_flow_small,
+    final m_flow_nominal=m_flow_nominal,
+    final show_T=show_T,
+    final show_V_flow=show_V_flow,
+    final show_staEff=show_staEff,
+    final show_qua=show_qua,
+    final rotSpe0=rotSpe0,
+    final pInl0=pInl0,
+    final TInl0=TInl0)
+    "Model of a simple rotary compressor to calculate compression of the medium"
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+  FixedResistances.HydraulicResistance hydResOut(
+    redeclare final package Medium=Medium,
+    final zeta=zetOut,
+    final diameter=diameterOut,
+    final m_flow_nominal=m_flow_nominal,
+    final allowFlowReversal=allowFlowReversal,
+    final show_T=false,
+    final from_dp=from_dp,
+    final homotopyInitialization=homotopyInitialization,
+    final linearized=linearized,
+    final dp_start=(1/40)*dp_start,
+    final m_flow_start=m_flow_start)
+    "Calculation of pressure drop at outlet of compressor"
+    annotation (Placement(transformation(extent={{60,-10},{80,10}})));
+  Modelica.Fluid.Interfaces.FluidPort_b port_b(
+    redeclare final package Medium=Medium,
+    m_flow(max=if allowFlowReversal then +Modelica.Constants.inf else 0),
+     h_outflow(start = Medium.h_default))
+    annotation (Placement(transformation(extent={{90,-10},{110,10}})));
+
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort
     "Heat port connector to calculate heat losses to ambient"
     annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
@@ -238,46 +254,31 @@ model RotaryCompressorSimplePressure
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={60,100})), HideResult=true);
-  Modelica.Fluid.Interfaces.FluidPort_a port_a(
-    redeclare final package Medium = Medium,
-     m_flow(min=if allowFlowReversal then -Modelica.Constants.inf else 0),
-     h_outflow(start = Medium.h_default))
-    "Fluid connector a (positive design flow direction is from port_a to port_b)"
-    annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_b(
-    redeclare final package Medium = Medium,
-    m_flow(max=if allowFlowReversal then +Modelica.Constants.inf else 0),
-     h_outflow(start = Medium.h_default))
-    annotation (Placement(transformation(extent={{90,-10},{110,10}})));
-  final parameter Real zetInl=10
-    "Pressure loss factor for flow of port_a -> port_b";
-  final parameter Modelica.SIunits.Diameter diameterInl=1
-    "Diameter of component";
-  parameter Boolean from_dp=false
-    "= true, use m_flow = f(dp) else dp = f(m_flow)";
-  parameter Boolean homotopyInitialization=true "= true, use homotopy method";
-  parameter Boolean linearized=false
-    "= true, use linear relation between m_flow and dp for any flow rate";
-  final parameter Real zetOut=10
-    "Pressure loss factor for flow of port_a -> port_b";
-  final parameter Modelica.SIunits.Diameter diameterOut=0.1
-    "Diameter of component";
-equation
 
-  connect(port_a, hydraulicResistance.port_a)
-    annotation (Line(points={{-100,0},{-50,0}}, color={0,127,255}));
-  connect(hydraulicResistance.port_b, rotCom.port_a)
-    annotation (Line(points={{-30,0},{-10,0}}, color={0,127,255}));
-  connect(rotCom.port_b, hydraulicResistance1.port_a)
-    annotation (Line(points={{10,0},{30,0}}, color={0,127,255}));
-  connect(hydraulicResistance1.port_b, port_b)
-    annotation (Line(points={{50,0},{100,0}}, color={0,127,255}));
-  connect(manVarCom, rotCom.manVarCom) annotation (Line(points={{-60,100},{-60,30},
-          {-6,30},{-6,10}}, color={0,0,127}));
-  connect(rotCom.curManVarCom, curManVarCom) annotation (Line(points={{6,10},{6,
-          30},{60,30},{60,100}}, color={0,0,127}));
+
+equation
+  // Connection of main components
+  //
+  connect(port_a, hydResInl.port_a)
+    annotation (Line(points={{-100,0},{-80,0}}, color={0,127,255}));
+  connect(hydResInl.port_b, rotCom.port_a)
+    annotation (Line(points={{-60,0},{-10,0}}, color={0,127,255}));
+  connect(rotCom.port_b, hydResOut.port_a)
+    annotation (Line(points={{10,0},{60,0}}, color={0,127,255}));
+  connect(hydResOut.port_b, port_b)
+    annotation (Line(points={{80,0},{100,0}}, color={0,127,255}));
+
+  // Connection of further components
+  //
+  connect(manVarCom, rotCom.manVarCom)
+    annotation (Line(points={{-60,100},{-60,30},{-6,30},{-6,10}},
+                color={0,0,127}));
+  connect(rotCom.curManVarCom, curManVarCom)
+    annotation (Line(points={{6,10},{6,30},{60,30},{60,100}},
+                color={0,0,127}));
   connect(rotCom.heatPort, heatPort)
     annotation (Line(points={{0,-10},{0,-100}}, color={191,0,0}));
+
   annotation (Icon(graphics={
         Ellipse(
           extent={{-60,40},{20,-40}},
@@ -333,6 +334,60 @@ equation
           extent={{-22,46},{-18,26}},
           lineColor={0,0,0},
           fillColor={0,0,0},
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{-100,-110},{100,-150}},
+          lineColor={0,0,255},
+          textString="%name"),
+        Rectangle(
+          extent={{-88,6},{-64,-6}},
+          lineColor={0,0,0},
+          fillColor={0,0,255},
+          fillPattern=FillPattern.Backward),
+        Ellipse(
+          extent={{-86,6},{-66,-6}},
+          lineColor={0,0,255},
+          fillColor={255,255,0},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{-88,6},{-64,8}},
+          lineColor={0,0,0},
+          fillColor={95,95,95},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{-88,-8},{-64,-6}},
+          lineColor={0,0,0},
+          fillColor={95,95,95},
+          fillPattern=FillPattern.Solid),
+        Polygon(
+          points={{-74,6},{-80,2},{-78,-2},{-80,-6},{-74,-2},{-76,2},{-74,6}},
+          lineColor={0,0,0},
+          fillColor={255,0,0},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{64,6},{88,-6}},
+          lineColor={0,0,0},
+          fillColor={0,0,255},
+          fillPattern=FillPattern.Backward),
+        Ellipse(
+          extent={{66,6},{86,-6}},
+          lineColor={0,0,255},
+          fillColor={255,255,0},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{64,6},{88,8}},
+          lineColor={0,0,0},
+          fillColor={95,95,95},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{64,-8},{88,-6}},
+          lineColor={0,0,0},
+          fillColor={95,95,95},
+          fillPattern=FillPattern.Solid),
+        Polygon(
+          points={{78,6},{72,2},{74,-2},{72,-6},{78,-2},{76,2},{78,6}},
+          lineColor={0,0,0},
+          fillColor={255,0,0},
           fillPattern=FillPattern.Solid)}), Documentation(revisions="<html>
 <ul>
   <li>
@@ -342,4 +397,4 @@ equation
   </li>
 </ul>
 </html>"));
-end RotaryCompressorSimplePressure;
+end RotaryCompressorPressure;

@@ -93,10 +93,6 @@ partial model PartialCompressor
     "Nominal mass flow rate"
     annotation(Dialog(tab="Advanced"),
                HideResult=true);
-  parameter Modelica.SIunits.MassFlowRate m_flow_lea = 1e-8
-    "Leackage mass flow rate used for compressor shut-down"
-    annotation(Dialog(tab="Advanced"),
-               HideResult=true);
 
   // Definition of parameters describing diagnostics
   //
@@ -378,7 +374,7 @@ equation
   end if;
   rotSpe = smooth(1, noEvent(if rotSpeThr.y>0 then
                   rotSpeThr.y else 1e-12))
-    "Passing thorugh internal variable";
+    "Passing through internal variable";
   curManVarCom = rotSpe "Current rotational speed";
 
   // Calculation of mass flow

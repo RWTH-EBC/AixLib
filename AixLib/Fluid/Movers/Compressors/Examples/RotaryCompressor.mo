@@ -39,7 +39,7 @@ model RotaryCompressor
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixTem(T=283.15)
     "Fixed ambient temperature"
     annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
-  SimpleCompressors.RotaryCompressorSimple rotCom(
+  SimpleCompressors.RotaryCompressor rotCom(
     redeclare package Medium = Medium,
     show_staEff=true,
     show_qua=true,

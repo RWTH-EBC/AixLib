@@ -53,7 +53,7 @@ package Validation
       use_T_in=true,
       use_p_in=true) "Source of constant pressure and temperature"
       annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
-    SimpleCompressors.RotaryCompressorSimple rotCom(
+    SimpleCompressors.RotaryCompressor rotCom(
       redeclare package Medium = Medium,
       show_staEff=true,
       show_qua=true,
@@ -68,6 +68,7 @@ package Validation
           Utilities.EngineEfficiency.ScrollCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_Scroll)
       "Model of a rotary compressor"
       annotation (Placement(transformation(extent={{0,-10},{20,10}})));
+
     Sources.Boundary_pT sink(
       redeclare package Medium = Medium,
       use_T_in=true,
