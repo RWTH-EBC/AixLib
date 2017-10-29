@@ -36,7 +36,6 @@ model PowerVolumetricEfficiency
     "Array of correction factors used if efficiency model proposed in literature
     differs from efficiency model defined in PartialCompressor model";
 
-
 equation
   // Calculation of coefficients
   //

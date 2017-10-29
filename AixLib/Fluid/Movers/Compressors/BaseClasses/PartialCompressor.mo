@@ -1,9 +1,17 @@
 within AixLib.Fluid.Movers.Compressors.BaseClasses;
 partial model PartialCompressor
-  "Partial model for compressors that contains basic definitions used in 
+  "Partial model for compressor that contains basic definitions used in 
   various compressor models"
 
-  // Definition of parameters describing the geometry
+  // Definition of the medium
+  //
+  replaceable package Medium =
+    Modelica.Media.R134a.R134a_ph
+    constrainedby Modelica.Media.Interfaces.PartialTwoPhaseMedium
+    "Medium in the component"
+    annotation (choicesAllMatching = true);
+
+  // Definition of parameters describing general options
   //
   parameter Modelica.SIunits.Volume
     VDis(min=0) = 13e-6
@@ -12,6 +20,14 @@ partial model PartialCompressor
   parameter Modelica.SIunits.Efficiency
     epsRef(min=0, max=1, nominal=0.05) = 0.04
     "Ratio of the real and the ideal displacement volume"
+    annotation(Dialog(tab="General",group="Geometry"));
+  parameter Modelica.SIunits.Diameter
+    diameterInl(min=0) = 12e-3
+    "Diameter of the pipe at compressor's inlet"
+    annotation(Dialog(tab="General",group="Geometry"));
+  parameter Modelica.SIunits.Diameter
+    diameterOut(min=0) = 8e-3
+    "Diameter of the pipe at compressor's outlet"
     annotation(Dialog(tab="General",group="Geometry"));
 
   parameter Modelica.SIunits.Frequency
@@ -66,36 +82,87 @@ partial model PartialCompressor
       Dialog(
       tab = "Efficiencies and similitude theory", group="Isentropic efficiency"));
 
-  // Definition of parameters describing the efficiencies
+  // Definition of parameters describing pressure losses
   //
-  parameter Boolean useIseWor = oveEngEff.useIseWor
-    "= true, if overal machanic efficiency is related to isentropic compressor 
-    work"
-    annotation(Dialog(tab="Efficiencies and similitude theory",
-               group="Engine efficiency",
-               enable=false),
-               HideResult=true);
+  parameter Real zetInl=
+    ((1/0.59-1)^2+(1-(diameterInl/0.066)^2))*(1-(diameterInl/0.066)^2)
+    "Pressure loss factor at compressor's inlet for flow of port_a -> port_b"
+    annotation(Dialog(tab = "Pressure losses",group="General"));
+  parameter Real zetOut=
+    ((1/0.59-1)^2+(1-(diameterOut/0.1122)^2))*(1-(diameterOut/0.1122)^2)
+    "Pressure loss factor at compressor's outlet for flow of port_a -> port_b"
+    annotation(Dialog(tab = "Pressure losses",group="General"));
 
-  // Extensions and parameter propagation
-  //
-  extends AixLib.Fluid.Interfaces.PartialTwoPortTransport(
-    redeclare replaceable package Medium =
-        Modelica.Media.R134a.R134a_ph,
-    dp_start=-20e5,
-    m_flow_start=0.5*m_flow_nominal,
-    m_flow_small=1e-6*m_flow_nominal,
-    show_T=false,
-    show_V_flow=false);
+  parameter Boolean from_dp=false
+    "= true, use m_flow = f(dp) else dp = f(m_flow)"
+    annotation(Dialog(tab = "Pressure losses",group="Advanced"));
+  parameter Boolean homotopyInitialization=true
+    "= true, use homotopy method  for initialisation"
+    annotation(Dialog(tab = "Pressure losses",group="Advanced"));
+  parameter Boolean linearized=false
+    "= true, use linear relation between m_flow and dp for any flow rate"
+    annotation(Dialog(tab = "Pressure losses",group="Advanced"));
 
-  // Definition of parameters describing nominal conditions
+  // Definition of parameters describing heat losses
   //
+  parameter Utilities.Types.HeatTransferModels
+    heaTraMod=Utilities.Types.HeatTransferModels.Simplified
+    "Choose heat transfer model for heat losses at compressor's inlet 
+    and outlet"
+    annotation(Dialog(tab = "Heat losses",group="General"));
+  parameter Modelica.SIunits.Mass mWal=2.5
+    "Mass of the fictitious wall"
+    annotation(Dialog(tab = "Heat losses",group="Geometry"));
+  parameter Modelica.SIunits.SpecificHeatCapacity cpWal=450
+    "Specific heat capacity of the fictitious wall"
+    annotation(Dialog(tab = "Heat losses",group="Geometry"));
+  parameter Modelica.SIunits.ThermalConductance kAMeaInl=25
+    "Effective mean thermal conductance between medium and fictitious wall 
+    at inlet"
+    annotation(Dialog(tab = "Heat losses",group="Thermal conductances"));
+  parameter Modelica.SIunits.ThermalConductance kAMeaOut=35
+    "Effective mean thermal conductance between medium and fictitious wall 
+    at outlet"
+    annotation(Dialog(tab = "Heat losses",group="Thermal conductances"));
+  parameter Modelica.SIunits.ThermalConductance kAMeaAmb=10
+    "Effective mean thermal conductance coefficient between fictitious wall 
+    and ambient"
+    annotation(Dialog(tab = "Heat losses",group="Thermal conductances"));
+  parameter Modelica.SIunits.Temperature TWal0=293.15
+    "Temperature of wall at initialisation"
+    annotation(Dialog(tab = "Heat losses",group="Initialisation"));
+
+  // Definition of parameters deschribing assumptions
+  //
+  parameter Boolean allowFlowReversal = true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal"
+    annotation(Dialog(tab="Assumptions"), Evaluate=true);
+
+  // Definition of parameters describing advanced options
+  //
+  parameter Modelica.SIunits.PressureDifference
+    dp_start(displayUnit="Pa") = -20e5
+    "Guess value of compressor's dp = port_a.p - port_b.p"
+    annotation(Dialog(tab = "Advanced",group="General"));
+  parameter Medium.MassFlowRate m_flow_start = 0.5*m_flow_nominal
+    "Guess value of compressor's m_flow = port_a.m_flowr"
+    annotation(Dialog(tab = "Advanced",group="General"));
+  parameter Medium.MassFlowRate m_flow_small = 1e-6*m_flow_nominal
+    "Small mass flow rate for regularization of compressor's zero flow"
+    annotation(Dialog(tab = "Advanced",group="General"));
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.1
     "Nominal mass flow rate"
-    annotation(Dialog(tab="Advanced"),
+    annotation(Dialog(tab="Advanced",group="General"),
                HideResult=true);
 
   // Definition of parameters describing diagnostics
   //
+  parameter Boolean show_T = false
+    "= true, if compressor's temperatures at port_a and port_b are computed"
+    annotation(Dialog(tab="Advanced",group="Diagnostics"));
+  parameter Boolean show_V_flow = false
+    "= true, if compressor's volume flow rate at inflowing port is computed"
+    annotation(Dialog(tab="Advanced",group="Diagnostics"));
   parameter Boolean show_staEff = false
     "= true, if thermodynamic states and efficiencies are computed"
     annotation(Dialog(tab="Advanced",group="Diagnostics"),
@@ -119,21 +186,50 @@ partial model PartialCompressor
     "Temperature at compressor's inlet at initialisation"
     annotation(Dialog(tab="Advanced",group="Initialisation"),
                HideResult=true);
-  parameter Modelica.SIunits.Density dInl0=
-    Medium.density(Medium.setState_pTX(p=pInl0,T=TInl0))
-    "Density at compressor's inlet at initialisation"
-    annotation(Dialog(tab="Advanced",group="Initialisation",
-               enable=false),
-               HideResult=true);
-  parameter Modelica.SIunits.SpecificEnthalpy hInl0=
-    Medium.specificEnthalpy(Medium.setState_pTX(p=pInl0,T=TInl0))
-    "Specific enthalpy at compressor's inlet at initialisation"
-    annotation(Dialog(tab="Advanced",group="Initialisation",
-               enable=false),
-               HideResult=true);
 
-  // Definition of connectors and submodels
+  // Definition of submodels and connectors
   //
+  Modelica.Fluid.Interfaces.FluidPort_a port_a(
+    redeclare final package Medium=Medium,
+     m_flow(min=if allowFlowReversal then -Modelica.Constants.inf else 0),
+     h_outflow(start=Medium.h_default))
+    "Fluid connector a (positive design flow direction is from port_a to port_b)"
+    annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
+  replaceable PartialCompression parCom(
+    redeclare final package Medium = Medium,
+    final VDis=VDis,
+    final epsRef=epsRef,
+    final rotSpeMax=rotSpeMax,
+    final piPreMax=piPreMax,
+    final useInpFil=useInpFil,
+    final risTim=risTim,
+    redeclare final model EngineEfficiency = EngineEfficiency,
+    redeclare final model VolumetricEfficiency = VolumetricEfficiency,
+    redeclare final model IsentropicEfficiency = IsentropicEfficiency,
+    final allowFlowReversal=allowFlowReversal,
+    final dp_start=dp_start,
+    final m_flow_start=m_flow_start,
+    final m_flow_small=m_flow_small,
+    final show_T=show_T,
+    final show_V_flow=show_V_flow,
+    final m_flow_nominal=m_flow_nominal,
+    final show_staEff=show_staEff,
+    final show_qua=show_qua,
+    final rotSpe0=rotSpe0,
+    final pInl0=pInl0,
+    final TInl0=TInl0)
+    "Model describing compression process"
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}})),
+                choicesAllMatching = true);
+  Modelica.Fluid.Interfaces.FluidPort_b port_b(
+    redeclare final package Medium=Medium,
+    m_flow(max=if allowFlowReversal then +Modelica.Constants.inf else 0),
+     h_outflow(start = Medium.h_default))
+    annotation (Placement(transformation(extent={{90,-10},{110,10}})));
+
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heatPort
+    "Heat port connector to calculate heat losses to ambient"
+    annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
   Modelica.Blocks.Interfaces.RealInput
     manVarCom(start=rotSpe0, quantity = "Velocity", unit = ("1/s"))
     "Prescribed compressor's rotational speed"
@@ -151,257 +247,18 @@ partial model PartialCompressor
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={60,100})), HideResult=true);
-  Modelica.Blocks.Continuous.Filter filRotSpe(
-    final analogFilter=Modelica.Blocks.Types.AnalogFilter.CriticalDamping,
-    final filterType=Modelica.Blocks.Types.FilterType.LowPass,
-    final order=2,
-    final f_cut=5/(2*Modelica.Constants.pi*risTim),
-    final x(each stateSelect=StateSelect.always)) if useInpFil
-    "Second order filter to approximate change of compressor's rotational speed"
-    annotation (Placement(transformation(extent={{-30,59},{-10,80}})));
-  Modelica.Blocks.Routing.RealPassThrough rotSpeThr
-    "Dummy passing through of compressor's rotational speed to allow usage of filter"
-    annotation (Placement(transformation(extent={{10,60},{30,80}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heatPort
-    "Heat port connector to calculate heat losses to ambient"
-    annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
-
-  // Definition of models
-  //
-  EngineEfficiency oveEngEff(
-    redeclare package Medium=Medium,
-    epsRef=epsRef,
-    VDis=VDis,
-    rotSpe=rotSpe,
-    piPre=piPre,
-    staInl=staInl,
-    staOut=staOut,
-    TAmb=heatPort.T)
-    "Instance of model 'engine efficiency'";
-  VolumetricEfficiency oveVolEff(
-    redeclare package Medium=Medium,
-    epsRef=epsRef,
-    VDis=VDis,
-    rotSpe=rotSpe,
-    piPre=piPre,
-    staInl=staInl,
-    staOut=staOut,
-    TAmb=heatPort.T)
-    "Instance of model 'volumetric efficiency'";
-  IsentropicEfficiency oveIseEff(
-    redeclare package Medium=Medium,
-    epsRef=epsRef,
-    VDis=VDis,
-    rotSpe=rotSpe,
-    piPre=piPre,
-    staInl=staInl,
-    staOut=staOut,
-    TAmb=heatPort.T)
-    "Instance of model 'isentropic efficiency'";
-
-  // Definition of records containing detailed results if computed
-  //
-  record CompressorStates
-    "Record that contains compressor's thermodynamic states at inlet and outlet"
-    Medium.ThermodynamicState staInl
-      "Thermodynamic state at inlet conditions";
-    Medium.ThermodynamicState staOut
-      "Thermodynamic state at outlet conditions";
-
-    Modelica.SIunits.SpecificEntropy sInl
-      "Specific entropy at inlet conditions";
-    Modelica.SIunits.SpecificEntropy sOut
-      "Specific entropy at outlet conditions";
-
-    Modelica.SIunits.Efficiency etaEng
-      "Overall engine efficiency";
-    Modelica.SIunits.Efficiency etaVol
-      "Overall volumetric efficiency";
-    Modelica.SIunits.Efficiency etaIse
-      "Overall isentropic efficiency";
-  end CompressorStates;
-
-  record CompressorQualities
-    "Record that contains compressor's qualities at inlet and outlet"
-     Medium.SaturationProperties satProInl
-      "Saturation properties at inlet conditions";
-     Medium.SaturationProperties satProOut
-      "Saturation properties at outlet conditions";
-
-    Real pTriCriInl(min=0)
-      "Trigger to check medium exceeds critical pressure at inlet";
-    Real pTriCriOut(min=0)
-      "Trigger to check medium exceeds critical pressure at inlet";
-    Real quaInl(min=0, max=1, unit="1")
-      "Vapour quality at inlet conditions";
-    Real quaOut(min=0, max=1, unit="1")
-      "Vapour quality at outlet conditions";
-
-
-    Modelica.SIunits.SpecificEnthalpy hLiqInl
-      "Liquid enthalpy at inlet";
-    Modelica.SIunits.SpecificEnthalpy hVapInl
-      "Vapour enthalpy at inlet";
-    Modelica.SIunits.SpecificEnthalpy hLiqOut
-      "Liquid enthalpy at outlet";
-    Modelica.SIunits.SpecificEnthalpy hVapOut
-      "Vapour enthalpy at outlet";
-  end CompressorQualities;
-
-  CompressorStates comSta(
-    staInl=staInl,
-    staOut=staOut,
-    sInl=Medium.specificEntropy(staInl),
-    sOut=Medium.specificEntropy(staOut),
-    etaEng=oveEngEff.etaEng,
-    etaVol=oveVolEff.lamH,
-    etaIse=oveIseEff.etaIse) if show_staEff
-    "Record containing compressor's thermodynamic states and efficiencies";
-
-  CompressorQualities comQua(
-    satProInl=Medium.setSat_p(pInl),
-    satProOut=Medium.setSat_p(pOut),
-    pTriCriInl=pInl/Medium.fluidConstants[1].criticalPressure,
-    pTriCriOut=pOut/Medium.fluidConstants[1].criticalPressure,
-    hLiqInl=Medium.bubbleEnthalpy(Medium.setSat_p(pInl)),
-    hVapInl=Medium.dewEnthalpy(Medium.setSat_p(pInl)),
-    hLiqOut=Medium.bubbleEnthalpy(Medium.setSat_p(pOut)),
-    hVapOut=Medium.dewEnthalpy(Medium.setSat_p(pOut)),
-    quaInl=noEvent(if ((pInl/Medium.fluidConstants[1].criticalPressure)<1 and
-             hInl<Medium.bubbleEnthalpy(Medium.setSat_p(pInl))) then 0
-             else if ((pInl/Medium.fluidConstants[1].criticalPressure)<1 and
-             hInl>Medium.bubbleEnthalpy(Medium.setSat_p(pInl)) and
-             hInl<Medium.dewEnthalpy(Medium.setSat_p(pInl))) then
-             (hInl - Medium.bubbleEnthalpy(Medium.setSat_p(pInl)))/
-             max(Medium.dewEnthalpy(Medium.setSat_p(pInl)) -
-             Medium.bubbleEnthalpy(Medium.setSat_p(pInl)), 1e-6) else 1.0),
-    quaOut=noEvent(if ((pOut/Medium.fluidConstants[1].criticalPressure)<1 and
-             hOut<Medium.bubbleEnthalpy(Medium.setSat_p(pOut))) then 0
-             else if ((pOut/Medium.fluidConstants[1].criticalPressure)<1 and
-             hOut>Medium.bubbleEnthalpy(Medium.setSat_p(pOut)) and
-             hOut<Medium.dewEnthalpy(Medium.setSat_p(pOut))) then
-             (hOut - Medium.bubbleEnthalpy(Medium.setSat_p(pOut)))/
-             max(Medium.dewEnthalpy(Medium.setSat_p(pOut)) -
-             Medium.bubbleEnthalpy(Medium.setSat_p(pOut)), 1e-6) else 1.0)) if
-    show_qua
-    "Record containing compressor's vapour qualities";
-
-  // Definition of variables
-  //
-  Modelica.SIunits.Power PEle
-    "Compressor's current electrical power consumption";
-  Modelica.SIunits.Power Q_flow_ref
-    "Current power transferred to reffrigerant";
-
-  Modelica.SIunits.Frequency rotSpe(min=0, max=rotSpeMax)
-    "Compressor's current rotational speed";
-  Real piPre(min=0, max=piPreMax, unit="1")
-    "Ratio of compressor's outlet and inlet pressure";
-
-
-protected
-  Medium.ThermodynamicState staInl
-    "Thermodynamic state at inlet conditions";
-  Medium.ThermodynamicState staOut
-    "Thermodynamic state at outlet conditions";
-
-  Modelica.SIunits.AbsolutePressure pInl(start=pInl0)
-    "Pressure at inlet conditions";
-  Modelica.SIunits.SpecificEnthalpy hInl(start=hInl0)
-    "Specific enthalpy at inlet conditions";
-  Modelica.SIunits.Density dInl
-    "Density at inlet conditions";
-
-  Modelica.SIunits.AbsolutePressure pOut(start=pInl0-dp_start)
-    "Pressure at outlet conditions";
-  Modelica.SIunits.SpecificEnthalpy hOut
-    "Specific enthalpy at outlet conditions";
-
-  Modelica.SIunits.SpecificEnthalpy hOutIse
-    "Specific isentropic enthalpy at outlet conditions";
-  Modelica.SIunits.SpecificEnthalpy dh
-    "Specific enthalpy difference: hOut - hInl";
-  Modelica.SIunits.SpecificEnthalpy dhIse
-    "Specific isentropic enthalpy difference: hOutIse - hInl";
-
 
 equation
-  // Provide assertions to check physical correctness
+  // Connection of control signals
   //
-  assert(piPre<=piPreMax, "Pressure ratio is greater than maximum pressure
-    ratio allowed! Please check boundary condtions!",
-    level = AssertionLevel.warning);
-  assert(
-    curManVarCom <= rotSpeMax,
-    "Rotational speed is greater than maximum 
-  rotational speed allowed! Please check boundary condtions!",
-    level=AssertionLevel.warning);
-  assert(oveEngEff.etaEng<0.9999,
-    "Overall engine efficiency is greater than one! 
-    Please check efficiency model!",
-    level = AssertionLevel.warning);
-  assert(oveVolEff.lamH<0.9999,
-    "Overall volumetric efficiency is greater than one! 
-    Please check efficiency model!",
-    level = AssertionLevel.warning);
-  assert(oveIseEff.etaIse<0.9999,
-    "Overall isentropic efficiency is greater than one! 
-    Please check efficiency model!",
-    level = AssertionLevel.warning);
+  connect(manVarCom, parCom.manVarCom)
+    annotation (Line(points={{-60,100},{-60,40},{-6,40},{-6,10}},
+                color={0,0,127}));
+  connect(parCom.curManVarCom, curManVarCom)
+    annotation (Line(points={{6,10},{6,40},{60,40},{60,100}},
+                color={0,0,127}));
 
-  // Calculation of thermodynamic state at inlet conditions
-  //
-  staInl = Medium.setState_phX(p=pInl,h=hInl) "Thermodynamic state at inlet";
-  dInl = Medium.density(staInl) "Density at inlet";
-
-  // Calculation of thermodynamic state at outlet conditions
-  //
-  staOut = Medium.setState_phX(p=pOut,h=hOut) "Thermodynamic state at outlet";
-
-  // Calculation of characteristics of the compressor
-  //
-  piPre = abs(pOut/pInl) "Ratio between outlet and inlet pressure";
-
-  // Calculation of compressor's rotational speed
-  //
-  connect(filRotSpe.u, manVarCom);
-  if useInpFil then
-    connect(rotSpeThr.u, filRotSpe.y)
-      "Transient behaviour of change of rotational speed";
-  else
-    connect(rotSpeThr.u, manVarCom)
-      "No transient behaiviour of change of rotational speed";
-  end if;
-  rotSpe = smooth(1, noEvent(if rotSpeThr.y>0 then
-                  rotSpeThr.y else 1e-12))
-    "Passing through internal variable";
-  curManVarCom = rotSpe "Current rotational speed";
-
-  // Calculation of mass flow
-  //
-  m_flow = homotopy(rotSpe*oveVolEff.lamH*VDis*dInl,
-                    rotSpe*oveVolEff.lamH*VDis*dInl0)
-    "This covers initialisation case as well as shut-down case";
-
-  // Calculation of energy balances
-  //
-  hOutIse = Medium.isentropicEnthalpy(p_downstream=pOut, refState=staInl)
-    "Isentropic specific enthalpy at outlet";
-  oveIseEff.etaIse*dh = dhIse "Specific enthalpy difference";
-  dhIse = (hOutIse - hInl) "Isentropic specific enthalpy difference";
-
-  Q_flow_ref = m_flow *dh "Power absorbed by refrigerant";
-  if not useIseWor then
-    oveEngEff.etaEng*PEle = Q_flow_ref "Compressor's power consumption";
-  else
-    oveEngEff.etaEng*PEle = m_flow *dhIse "Compressor's power consumption";
-  end if;
-  /*Some efficiency models calculate the compressor's power consumptions based
-    on the compressors isentropic work. Therefore, a distinction is made above.
-  */
-
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false),
-              graphics={
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                 Ellipse(
                   extent={{80,80},{-80,-80}},
                   lineColor={0,0,0},
@@ -416,8 +273,12 @@ equation
                 Line(
                   points={{74,30},{-58,54}},
                   color={0,0,0},
-                  thickness=0.5)}),
-                Diagram(coordinateSystem(preserveAspectRatio=false)),
+                  thickness=0.5),
+        Text(
+          extent={{-100,-130},{100,-150}},
+          lineColor={28,108,200},
+          textString="%name")}),    Diagram(coordinateSystem(
+          preserveAspectRatio=false)),
     Documentation(revisions="<html>
 <ul>
   <li>

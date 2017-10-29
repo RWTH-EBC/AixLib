@@ -128,10 +128,6 @@ partial model PartialModularController
                 rotation=90,
                 origin={-60,70})));
 
-  Interfaces.ModularHeatPumpControlBus dataBus(
-    final nVal=nCom)
-    "Data bus with signals to allow control of expansion valves"
-    annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
   Modelica.Blocks.Interfaces.RealInput curManVarVal[nCom]
     "Array of signals with current manipulated variables of controlled components"
     annotation (
@@ -153,13 +149,9 @@ partial model PartialModularController
         rotation=90,
         origin={-60,112})));
 
-
-equation
-  // Connect output signals
-  //
-  connect(curManVarVal, dataBus.expValBus.curManVarVal)
-    annotation (Line(points={{60,112},{60,-80},{0.05,-80},{0.05,-99.95}},
-                color={0,0,127}));
+  Interfaces.ModularHeatPumpControlBus dataBus
+    "Data bus with signals to allow control of expansion valves"
+    annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(

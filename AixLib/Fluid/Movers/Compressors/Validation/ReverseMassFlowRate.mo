@@ -40,7 +40,7 @@ model ReverseMassFlowRate
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixTem(T=283.15)
     "Fixed ambient temperature"
     annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
-  SimpleCompressors.RotaryCompressor rotCom(
+  SimpleCompressors.RotaryCompressors.RotaryCompressor rotCom(
     redeclare package Medium = Medium,
     show_staEff=true,
     show_qua=true,
@@ -49,6 +49,7 @@ model ReverseMassFlowRate
         Utilities.EngineEfficiency.SimilitudeTheory.Poly_GeneralLiterature,
     redeclare model VolumetricEfficiency =
         Utilities.VolumetricEfficiency.RotaryCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_Rotary,
+
     redeclare model IsentropicEfficiency =
         Utilities.IsentropicEfficiency.RotaryCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_Rotary)
     "Model of a rotary compressor"
@@ -60,7 +61,6 @@ model ReverseMassFlowRate
     T=TOut)
     "Sink of constant temperature and mass flow"
     annotation (Placement(transformation(extent={{60,-10},{40,10}})));
-
 
 equation
   // Connection of components

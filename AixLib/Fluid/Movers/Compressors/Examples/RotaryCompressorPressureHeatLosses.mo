@@ -40,7 +40,7 @@ model RotaryCompressorPressureHeatLosses
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixTem(T=283.15)
     "Fixed ambient temperature"
     annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
-  SimpleCompressors.RotaryCompressorPressureHeatLosses rotCom(
+  SimpleCompressors.RotaryCompressors.RotaryCompressorPressureHeatLosses rotCom(
     redeclare package Medium = Medium,
     show_staEff=true,
     show_qua=true,
@@ -54,6 +54,7 @@ model RotaryCompressorPressureHeatLosses
         Utilities.IsentropicEfficiency.RotaryCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_Rotary)
     "Model of a rotary compressor"
     annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
+
   Modelica.Blocks.Sources.Sine valOpe(
     offset=0.5,
     amplitude=0.3,
@@ -76,7 +77,6 @@ model RotaryCompressorPressureHeatLosses
     T=TInl)
     "Sink with constant pressure and temperature"
     annotation (Placement(transformation(extent={{80,-10},{60,10}})));
-
 
 equation
   // Connection of components

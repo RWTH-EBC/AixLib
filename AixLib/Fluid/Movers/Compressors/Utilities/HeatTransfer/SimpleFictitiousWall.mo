@@ -40,13 +40,11 @@ model SimpleFictitiousWall
      annotation (Placement(transformation(extent={{-10,-32},{10,-12}}),
                  iconTransformation(extent={{-6,-26},{6,-14}})));
 
-
 protected
   Modelica.SIunits.Temperature TWal(start=TWal0)
     "Temperature of fictitious wall";
   Modelica.SIunits.Power Q_flow_amb
     "Heat flow between ambient and fictitious wall";
-
 
 equation
   // Calculation of energy balance

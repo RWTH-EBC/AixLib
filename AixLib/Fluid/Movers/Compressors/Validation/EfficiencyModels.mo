@@ -50,7 +50,7 @@ model EfficiencyModels
     use_T_in=true,
     use_p_in=true) "Source of constant pressure and temperature"
     annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
-  SimpleCompressors.RotaryCompressor rotCom(
+  SimpleCompressors.RotaryCompressors.RotaryCompressor rotCom(
     redeclare package Medium = Medium,
     show_staEff=true,
     show_qua=true,

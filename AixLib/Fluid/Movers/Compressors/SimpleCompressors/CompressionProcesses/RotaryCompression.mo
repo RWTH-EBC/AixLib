@@ -1,8 +1,26 @@
-within AixLib.Fluid.Movers.Compressors.SimpleCompressors;
-model RotaryCompressor "Model that describes a simple rotary compressor"
-  extends BaseClasses.PartialCompressor;
+within AixLib.Fluid.Movers.Compressors.SimpleCompressors.CompressionProcesses;
+model RotaryCompression
+  "Model that describes the compression process of a rotary compressor"
+  extends BaseClasses.PartialCompression;
 
 equation
+  // Calculation of energy balances
+  //
+  hOutIse = Medium.isentropicEnthalpy(p_downstream=pOut, refState=staInl)
+    "Isentropic specific enthalpy at outlet";
+  oveIseEff.etaIse*dh = dhIse "Specific enthalpy difference";
+  dhIse = (hOutIse - hInl) "Isentropic specific enthalpy difference";
+
+  Q_flow_ref = m_flow *dh "Power absorbed by refrigerant";
+  if not useIseWor then
+    oveEngEff.etaEng*PEle = Q_flow_ref "Compressor's power consumption";
+  else
+    oveEngEff.etaEng*PEle = m_flow *dhIse "Compressor's power consumption";
+  end if;
+  /*Some efficiency models calculate the compressor's power consumptions based
+    on the compressors isentropic work. Therefore, a distinction is made above.
+  */
+
   // Calculate pressures at inlet and outlet of compressor
   //
   pInl = port_a.p "Pressure at inlet";
@@ -27,7 +45,15 @@ equation
   //
   heatPort.Q_flow = Q_flow_ref-PEle;
 
-  annotation (Icon(graphics={
+  annotation (Documentation(revisions="<html>
+<ul>
+  <li>
+  October 20, 2017, by Mirko Engelpracht:<br/>
+  First implementation
+  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
+  </li>
+</ul>
+</html>"), Icon(graphics={
         Ellipse(
           extent={{-60,40},{20,-40}},
           lineColor={0,0,0},
@@ -47,13 +73,5 @@ equation
           extent={{-22,46},{-18,26}},
           lineColor={0,0,0},
           fillColor={0,0,0},
-          fillPattern=FillPattern.Solid)}), Documentation(revisions="<html>
-<ul>
-  <li>
-  October 20, 2017, by Mirko Engelpracht:<br/>
-  First implementation
-  (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
-  </li>
-</ul>
-</html>"));
-end RotaryCompressor;
+          fillPattern=FillPattern.Solid)}));
+end RotaryCompression;
