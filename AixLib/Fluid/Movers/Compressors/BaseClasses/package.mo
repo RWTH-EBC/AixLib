@@ -10,5 +10,10 @@ annotation (Documentation(revisions="<html>
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
+</html>", info="<html>
+<p>
+This package contains base models used for simple 
+and modular compressor models.
+</p>
 </html>"));
 end BaseClasses;

@@ -4,6 +4,12 @@ model RotaryCompression
   extends BaseClasses.PartialCompression;
 
 equation
+  // Calculation of mass flow
+  //
+  m_flow = homotopy(rotSpe*oveVolEff.lamH*VDis*dInl,
+                    rotSpe*oveVolEff.lamH*VDis*dInl0)
+    "This covers initialisation case as well as shut-down case";
+
   // Calculation of energy balances
   //
   hOutIse = Medium.isentropicEnthalpy(p_downstream=pOut, refState=staInl)
