@@ -46,7 +46,7 @@ model ReverseMassFlowRate
     show_qua=true,
     useInpFil=true,
     redeclare model EngineEfficiency =
-        Utilities.EngineEfficiency.SimilitudeTheory.Poly_GeneralLiterature,
+        Utilities.EngineEfficiency.Generic.Poly_GeneralLiterature,
     redeclare model VolumetricEfficiency =
         Utilities.VolumetricEfficiency.RotaryCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_Rotary,
     redeclare model IsentropicEfficiency =

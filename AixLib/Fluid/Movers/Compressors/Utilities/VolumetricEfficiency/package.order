@@ -2,6 +2,7 @@ PartialVolumetricEfficiency
 PolynomialVolumetricEfficiency
 PowerVolumetricEfficiency
 ConstantEfficiency
+Generic
 ReciporatingCompressors
 RotaryCompressors
 ScrollCompressors

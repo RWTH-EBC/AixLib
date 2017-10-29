@@ -5,6 +5,13 @@ package IsentropicEfficiency "Package that contains models describing different 
 
 
 
+
+
+
+
+
+
+
 annotation (Icon(coordinateSystem(preserveAspectRatio=false),
               graphics={
                 Ellipse(

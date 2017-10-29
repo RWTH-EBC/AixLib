@@ -2,6 +2,7 @@ PartialIsentropicEfficiency
 PolynomialIsentropicEfficiency
 PowerIsentropicEfficiency
 ConstantEfficiency
+Generic
 ReciporatingCompressors
 RotaryCompressors
 ScrollCompressors

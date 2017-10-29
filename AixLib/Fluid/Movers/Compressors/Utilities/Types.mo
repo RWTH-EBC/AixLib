@@ -23,7 +23,9 @@ package Types
       DarrAndCrawford1992
       "DarrAndCrawford1992 - Function of rotational speed and densities",
       Karlsson2007
-      "Karlsson2007 - Function of pressure ratio and rotational speed")
+      "Karlsson2007 - Function of pressure ratio and rotational speed",
+      Engelpracht2017
+      "Engelpracht2017 - Function of pressure ratio and rotational speed")
     "Enumeration to define polynomial models for calculating flow coefficient"
     annotation (Evaluate=true);
   type IsentropicPowerModels = enumeration(
@@ -45,7 +47,9 @@ package Types
       HongtaoLaughmannEtAl2017
       "HongtaoLaughmannEtAl2017 - Function of pressures and rotational speed",
       Koerner2017
-      "Koerner2017 - Function of pressure ratio")
+      "Koerner2017 - Function of pressure ratio",
+      Engelpracht2017
+      "Engelpracht2017 - Function of pressure ratio and rotational speed")
     "Enumeration to define polynomial models for calculating flow coefficient"
     annotation (Evaluate=true);
   type VolumetricPowerModels = enumeration(

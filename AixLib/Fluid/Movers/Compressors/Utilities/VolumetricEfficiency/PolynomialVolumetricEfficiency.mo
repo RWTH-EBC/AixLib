@@ -218,6 +218,27 @@ equation
     corFac = {1,1}
       "No correction factors are needed";
 
+  elseif (polyMod == Types.VolumetricPolynomialModels.Engelpracht2017) then
+    /*Polynomial approach presented by Engelpracht (2017):
+      lamH = a1 + a2*((piPre-c1)/c2) + a3*((TInl-c3)/c4)*((piPre-c1)/c2) + 
+             a4*((TInl-c3)/c4) + a5*((rotSpe-c5)/c6) + a6*((rotSpe-c5)/c6)^2
+    */
+    p[1] = 1
+      "Dummy value for usage of simple coefficient";
+    p[2] = ((piPre-c[1])/c[2])
+      "Pressure ratio";
+    p[3] = ((Medium.temperature(staInl)-c[3])/c[4])*((piPre-c[1])/c[2])
+      "Pressure ratio times inlet temperature";
+    p[4] = ((Medium.temperature(staInl)-c[3])/c[4])
+      "Inlet temperature";
+    p[5] = ((rotSpe-c[5])/c[6])
+      "Rotational speed";
+    p[6] = ((rotSpe-c[5])/c[6])^2
+      "Quadratic rotational speed";
+
+    corFac = {1,1}
+      "No correction factors are needed";
+
   else
     assert(false, "Invalid choice of polynomial approach");
   end if;

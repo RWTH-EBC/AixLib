@@ -1,6 +1,5 @@
-within AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency;
-package SimilitudeTheory "Package that contains general engine efficiency models based on 
-  similitude theory"
+within AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency;
+package Generic "Package that contains general volumetric efficiency models"
   extends Modelica.Icons.VariantsPackage;
 
 annotation (Documentation(revisions="<html>
@@ -12,4 +11,4 @@ annotation (Documentation(revisions="<html>
   </li>
 </ul>
 </html>"));
-end SimilitudeTheory;
+end Generic;

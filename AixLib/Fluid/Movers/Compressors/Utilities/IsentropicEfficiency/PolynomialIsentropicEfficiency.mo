@@ -79,6 +79,22 @@ equation
     corFac = {1,1}
       "No correction factors are needed";
 
+  elseif (polyMod == Types.IsentropicPolynomialModels.Engelpracht2017) then
+    /*Polynomial approach presented by Engelpracht (2017):
+      etaIse = a1 + a2*rotSpe + a3*rotSpe^3 + piPre*y^2 
+    */
+    p[1] = 1
+      "Dummy value for usage of simple coefficient";
+    p[2] = rotSpe
+      "Rotational speed";
+    p[3] = rotSpe^3
+      "Cubic rotational speed";
+    p[4] = piPre^2
+      "Quadratic pressure ratio";
+
+    corFac = {1,1}
+      "No correction factors are needed";
+
   else
     assert(false, "Invalid choice of polynomial approach");
   end if;
