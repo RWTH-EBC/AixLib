@@ -49,7 +49,6 @@ model RotaryCompressorPressureHeatLosses
         Utilities.EngineEfficiency.SimilitudeTheory.Poly_GeneralLiterature,
     redeclare model VolumetricEfficiency =
         Utilities.VolumetricEfficiency.RotaryCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_Rotary,
-
     redeclare model IsentropicEfficiency =
         Utilities.IsentropicEfficiency.RotaryCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_Rotary)
     "Model of a rotary compressor"

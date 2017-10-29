@@ -57,10 +57,8 @@ model EfficiencyModels
     useInpFil=false,
     redeclare model VolumetricEfficiency =
         Utilities.VolumetricEfficiency.ScrollCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_Reciporating,
-
     redeclare model IsentropicEfficiency =
         Utilities.IsentropicEfficiency.ScrollCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_Scroll,
-
     redeclare model EngineEfficiency =
         Utilities.EngineEfficiency.ScrollCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_Scroll)
     "Model of a rotary compressor"

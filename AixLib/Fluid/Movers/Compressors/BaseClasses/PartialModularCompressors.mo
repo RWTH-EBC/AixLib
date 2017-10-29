@@ -404,9 +404,9 @@ equation
   connect(modCon.dataBus, dataBus)
     annotation (Line(points={{0,-78},{0,-78},{0,-100}},color={255,204,51},
                 thickness=0.5));
-  connect(modCon.manVarVal, modCom.manVarCom)
-    annotation (Line(points={{-6,-56.8},{-6,-33.4},{-6,-10}}, color={0,0,127}));
-  connect(modCom.curManVarCom, modCon.curManVarVal)
+  connect(modCon.manVar, modCom.manVarCom) annotation (Line(points={{-6,-56.8},
+          {-6,-33.4},{-6,-10}}, color={0,0,127}));
+  connect(modCom.curManVarCom, modCon.curManVar)
     annotation (Line(points={{6,-10},{6,-10},{6,-56.8}}, color={0,0,127}));
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
