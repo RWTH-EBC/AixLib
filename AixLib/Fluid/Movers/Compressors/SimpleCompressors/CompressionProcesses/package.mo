@@ -10,5 +10,13 @@ annotation (Documentation(revisions="<html>
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
+</html>", info="<html>
+<p>
+This package contains models describing compression processes. These models 
+inherit from 
+<a href=\"modelica://AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression\">
+AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression</a> and 
+add the missing definitions for completition.
+</p> 
 </html>"));
 end CompressionProcesses;

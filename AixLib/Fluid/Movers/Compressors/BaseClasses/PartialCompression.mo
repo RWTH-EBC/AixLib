@@ -502,15 +502,15 @@ of <i>0.4%</i>.
 </ol>
 <h4>References</h4>
 <p>
+In the following, some general references are given for information about
+modelling compressors. The modelling approach presented here is alligned
+to the modelling approaches presented in the literature:
+</p>
+<p>
 W. Eifler, E. Schlücker, U. Spicher and G. Will (2009): 
 <a href=\"http://dx.doi.org/10.1007/978-3-8348-9302-4\">
 Küttner Kolbenmaschinen: Kolbenpumpen, Kolbenverdichter, Brennkraftmaschinen
 (in German)</a>. Publisher: <i>Vieweg + Teubner</i>
-</p>
-<p>
-In the following, some general references are given for information about
-modelling compressors. The modelling approach presented here is alligned
-to the modelling approaches presented in the literature:
 </p>
 <p>
 H. Qiao, R. Radermacher and V. Aute (2010): 

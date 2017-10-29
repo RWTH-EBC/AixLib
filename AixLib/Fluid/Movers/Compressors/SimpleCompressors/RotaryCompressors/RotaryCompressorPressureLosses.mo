@@ -171,5 +171,28 @@ equation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
+</html>", info="<html>
+<p>
+This is a model of a simple rotary compressor that is used, for example, 
+in close-loop systems like heat pumps or chillers. It inherits from
+PartialCompressor which inherits from PartialCompression. Therefore, please 
+checkout these sub-models for further information of underlying modeling 
+approaches and parameterisation:
+</p>
+<ul>
+<li>
+<a href=\"modelica://AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompressor\">
+AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompressor</a>.
+</li>
+<li>
+<a href=\"modelica://AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression\">
+AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression</a>.
+</li>
+</ul>
+<p>
+For this model, pressure losses are assumed at inlet and outlet of
+the compressor. These pressure losses may occur due to reduction or
+enlargement of the cross-section.
+</p>
 </html>"));
 end RotaryCompressorPressureLosses;
