@@ -71,7 +71,7 @@ equation
   // Connect expansion valves with sensors and sensors with ports_b
   //
   for i in 1:nVal loop
-    connect(expansionValves[i].port_b,modularSensors.ports_a[i]);
+    connect(modExpVal[i].port_b, modularSensors.ports_a[i]);
     connect(modularSensors.ports_b[i],ports_b[i]);
   end for;
 

@@ -8,7 +8,7 @@ equation
   // Connect ports_b with outlet ports of expansion valves
   //
   for i in 1:nVal loop
-    connect(expansionValves[i].port_b,ports_b[i]);
+    connect(modExpVal[i].port_b, ports_b[i]);
   end for;
 
   annotation (Documentation(revisions="<html>

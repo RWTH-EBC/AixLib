@@ -36,10 +36,7 @@ model ModularExpansionValvesMassFlowRate
   replaceable ModularExpansionValves.ModularExpansionValvesSensors modVal(
     redeclare package Medium = Medium,
     nVal=nVal,
-    redeclare SimpleExpansionValves.IsothermalExpansionValve expansionValves,
-    redeclare
-      Controls.HeatPump.ModularHeatPumps.ModularExpansionValveController
-      expansionValveController,
+    redeclare SimpleExpansionValves.IsothermalExpansionValve modExpVal,
     show_parVal=false,
     show_parCon=false,
     useInpFil={true,true,true},
@@ -50,9 +47,7 @@ model ModularExpansionValvesMassFlowRate
     useExt=true,
     redeclare model FlowCoefficient =
         Utilities.FlowCoefficient.R134a.Power_R134a_EEV_15)
-    "Modular expansion valves in parallel"
-    annotation (Placement(
-        transformation(
+    "Modular expansion valves in parallel" annotation (Placement(transformation(
         extent={{-18,18},{18,-18}},
         rotation=-90,
         origin={-40,0})));
