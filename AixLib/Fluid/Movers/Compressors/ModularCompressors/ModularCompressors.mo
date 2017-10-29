@@ -18,5 +18,34 @@ equation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
+</html>", info="<html>
+<p>
+This is a model of modular compressors that are used, for example, 
+in close-loop systems like heat pumps or chillers.<br />
+It consists of <code>nCom</code> compressors in parallel and also 
+<code>nCom</code> PID conrollers if no external controller is used.
+</p>
+<h4>Modeling approaches</h4>
+<p>
+This base model mainly consists of two sub-models. Therefore, please 
+checkout these sub-models for further information of underlying modeling
+approaches and parameterisation:
+</p>
+<ul>
+<li>
+<a href=\"modelica://AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompressor\">
+AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompressor</a>.
+</li>
+<li>
+<a href=\"modelica://AixLib.Controls.HeatPump.ModularHeatPumps.ModularCompressorController\">
+AixLib.Controls.HeatPump.ModularHeatPumps.ModularCompressorController</a>.
+</li>
+</ul>
+<p>
+The first sub-model describes a simple compressor that is defined in 
+<a href=\"modelica://AixLib.Fluid.Movers.Compressors.SimpleCompressors\">
+AixLib.Fluid.Movers.Compressors.SimpleCompressors</a>; the second 
+sub-model describes the internal controller model.
+</p>
 </html>"));
 end ModularCompressors;

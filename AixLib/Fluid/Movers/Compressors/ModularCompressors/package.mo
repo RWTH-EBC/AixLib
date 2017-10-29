@@ -10,5 +10,9 @@ package ModularCompressors "Package that contains modular compressor models base
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
+</html>", info="<html>
+<p>
+This package contains models describing modular compressors.
+</p> 
 </html>"));
 end ModularCompressors;
