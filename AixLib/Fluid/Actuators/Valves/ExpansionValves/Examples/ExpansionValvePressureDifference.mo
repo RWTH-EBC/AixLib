@@ -50,7 +50,6 @@ model ExpansionValvePressureDifference
     AVal=2.01e-6,
     m_flow_nominal=m_flow_nominal,
     calcProc=AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Types.CalcProc.flowCoefficient,
-
     dpNom=1000000,
     redeclare model FlowCoefficient =
         Utilities.FlowCoefficient.R134a.Power_R134a_EEV_15)

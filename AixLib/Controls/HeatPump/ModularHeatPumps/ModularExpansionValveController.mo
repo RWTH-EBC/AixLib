@@ -1,7 +1,8 @@
 within AixLib.Controls.HeatPump.ModularHeatPumps;
 model ModularExpansionValveController
   "Model of an internal controller for modular expansion valves"
-  extends BaseClasses.PartialModularController;
+  extends BaseClasses.PartialModularController(
+    dataBus(final nVal=nCom));
 
   // Definition of dummy signals for controllers' rest inputs
   //
@@ -18,33 +19,41 @@ model ModularExpansionValveController
 equation
   // Connect internal controller with inputs and outputs
   //
-  connect(internalController.u_m,  dataBus.expValBus.meaConVarVal);
-  connect(internalController.u_s,  dataBus.expValBus.intSetPoiVal);
-  connect(internalController.y,  manVar);
+  connect(intCon.u_m, dataBus.expValBus.meaConVarVal);
+  connect(intCon.u_s, dataBus.expValBus.intSetPoiVal);
+  connect(intCon.y, manVarThr);
 
   if useExt then
-    connect(manVarVal, dataBus.expValBus.extManVarVal);
+    connect(manVar, dataBus.expValBus.extManVarVal);
   end if;
-  manVarVal = manVar;
+  manVar = manVarThr;
 
-  /*The output block 'manVar' is mandantory since the internal controller is 
-    conditional. Therefore, the connection 'connect(internalController.y,manVar)'
-    is required to prevent errors that would occur otherwise if the internal
-    controller is removed conditionally.
+  /*The output block 'manVarThr' is mandantory since the internal controller is 
+    conditional. Therefore, the connection 'connect(internalController.y,
+    manVarThr)' is required to prevent errors that would occur otherwise if the 
+    internal controller is removed conditionally.
   */
 
   // Connect dummy signals to controllers' rest inputs
   //
-  connect(tri.y, internalController.trigger) annotation (Line(points={{-83.4,10},
-          {-68,10},{-68,28}}, color={255,0,255}));
-  connect(triVal.y, internalController.y_reset_in) annotation (Line(points={{-83.4,
-          30},{-80,30},{-80,32},{-72,32}}, color={0,0,127}));
+  connect(tri.y, intCon.trigger)
+    annotation (Line(points={{-83.4,10},{-68,10},{-68,28}},
+                color={255,0,255}));
+  connect(triVal.y, intCon.y_reset_in)
+    annotation (Line(points={{-83.4,30},{-80,30},{-80,32},{-72,32}},
+                color={0,0,127}));
 
   // Connect parameters describing if internal or external signal is used
   //
   connect(useExtBlo, dataBus.expValBus.extConVal)
     annotation (Line(points={{-60,0},{-60,-80},{0.05,-80},{0.05,-99.95}},
                 color={255,0,255}));
+
+  // Connect output signals
+  //
+  connect(curManVar, dataBus.expValBus.curManVarVal)
+    annotation (Line(points={{60,112},{60,-80},{0.05,-80},{0.05,-99.95}},
+                color={0,0,127}));
 
   annotation (Icon(graphics={
         Polygon(

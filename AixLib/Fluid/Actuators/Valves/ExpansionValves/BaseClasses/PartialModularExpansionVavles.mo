@@ -222,8 +222,8 @@ equation
   // Connect data bus and further control signals
   //
   for i in 1:nVal loop
-    expansionValveController.manVarVal[i] = expansionValves[i].manVarVal;
-    expansionValves[i].curManVarVal = expansionValveController.curManVarVal[i];
+    expansionValveController.manVar[i] = expansionValves[i].manVarVal;
+    expansionValves[i].curManVarVal =expansionValveController.curManVar[i];
   end for;
   connect(dataBus, expansionValveController.dataBus)
     annotation (Line(

@@ -91,7 +91,7 @@ partial model PartialModularController
 
   // Definition of models
   //
-  Continuous.LimPID internalController[nCom](
+  Continuous.LimPID intCon[nCom](
     final controllerType=controllerType,
     final k=k,
     final Ti=Ti,
@@ -109,7 +109,7 @@ partial model PartialModularController
     final reverseAction=reverseAction,
     final reset=reset) if not useExt
     "Internal controller if internal controller is required"
-    annotation(Placement(transformation(extent={{-70,30},{-50,50}})));
+    annotation (Placement(transformation(extent={{-70,30},{-50,50}})));
 
   // Definition of connectors and inputs and outputs
   //
@@ -120,31 +120,24 @@ partial model PartialModularController
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-60,0})));
-  Modelica.Blocks.Interfaces.RealOutput manVar[nCom]
+  Modelica.Blocks.Interfaces.RealOutput manVarThr[nCom]
     "Input connector to pass controller's manipualted signals through if activated"
-    annotation (Placement(
-                transformation(
-                extent={{-10,10},{10,-10}},
-                rotation=90,
-                origin={-60,70})));
+    annotation (Placement(transformation(
+        extent={{-10,10},{10,-10}},
+        rotation=90,
+        origin={-60,70})));
 
-  Interfaces.ModularHeatPumpControlBus dataBus(
-    final nVal=nCom)
-    "Data bus with signals to allow control of expansion valves"
-    annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
-  Modelica.Blocks.Interfaces.RealInput curManVarVal[nCom]
+  Modelica.Blocks.Interfaces.RealInput curManVar[nCom]
     "Array of signals with current manipulated variables of controlled components"
-    annotation (
-      Placement(transformation(
+    annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=270,
         origin={60,112}), iconTransformation(
         extent={{-20,-20},{20,20}},
         rotation=270,
         origin={60,112})));
-  Modelica.Blocks.Interfaces.RealOutput manVarVal[nCom]
-    "Array of manipulated variables for controlled components"
-    annotation (
+  Modelica.Blocks.Interfaces.RealOutput manVar[nCom]
+    "Array of manipulated variables for controlled components" annotation (
       Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
@@ -153,13 +146,8 @@ partial model PartialModularController
         rotation=90,
         origin={-60,112})));
 
-
-equation
-  // Connect output signals
-  //
-  connect(curManVarVal, dataBus.expValBus.curManVarVal)
-    annotation (Line(points={{60,112},{60,-80},{0.05,-80},{0.05,-99.95}},
-                color={0,0,127}));
+  Interfaces.ModularHeatPumpControlBus dataBus "Data bus with control signals"
+    annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
