@@ -1,6 +1,6 @@
 within AixLib.Fluid.Movers.Compressors.Validation;
 model ReverseMassFlowRate
-  "Valdiation model to check reverse mass flow rate"
+  "Valdiation model to check reversed mass flow rate"
   extends Modelica.Icons.Example;
 
   // Define medium and parameters
@@ -77,11 +77,21 @@ equation
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
-  October 20, 2017, by Mirko Engelpracht:<br/>
+  October 24, 2017, by Mirko Engelpracht:<br/>
   First implementation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
+</html>", info="<html>
+<p>
+This is a validation model to test the impact of reversed
+mass flow rate on compressor models presented in 
+<a href=\"modelica://AixLib.Fluid.Movers.Compressors.SimpleCompressors\">
+AixLib.Fluid.Movers.Compressors.SimpleCompressors</a>. 
+Therefore, both the compressor's rotational speed is set
+to zero (i.e. the compressor is shut-down) and a reversed
+mass flow rate is forced by a mass flow source.
+</p>
 </html>"),
 experiment(StopTime=1));
 end ReverseMassFlowRate;

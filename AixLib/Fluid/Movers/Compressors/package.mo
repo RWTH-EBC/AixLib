@@ -24,5 +24,11 @@ annotation (Icon(graphics={
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
+</html>", info="<html>
+<p>
+This package contains component models for simple and modular compressors.
+These compressors are used for, for example, simple or modular heat pumps 
+that model the refrigerant circuit.
+</p>
 </html>"));
 end Compressors;

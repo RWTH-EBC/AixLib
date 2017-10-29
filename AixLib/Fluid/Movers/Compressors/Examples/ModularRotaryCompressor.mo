@@ -160,11 +160,26 @@ equation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
+</html>", info="<html>
+<p>
+This is a example model to test different modular rotary compressor 
+presented in
+<a href=\"modelica://AixLib.Fluid.Movers.Compressors.ModularCompressors\">
+AixLib.Fluid.Movers.Compressors.ModularCompressors</a>, whereby the 
+thermodynamic states at inlet and outlet of the compressor are 
+prescribed in terms of pressure and temperature.
+Therefore, the User can select both different modular modelling approaches (e.g.
+<a href=\"modelica://AixLib.Fluid.Movers.Compressors.ModularCompressors.ModularCompressors\">
+AixLib.Fluid.Movers.Compressors.ModularCompressors.ModularCompressors</a> or
+<a href=\"modelica://AixLib.Fluid.Movers.Compressors.ModularCompressors.ModularCompressorsSensors\">
+AixLib.Fluid.Movers.Compressors.ModularCompressors.ModularCompressorsSensors</a>)
+and various efficiency models byusing the dialog menu.
+</p>
 </html>"),
 experiment(StopTime=1),
-    Diagram(graphics={          Text(
-          extent={{-88,86},{-12,74}},
+Diagram(graphics={Text(extent={{-88,86},{-12,74}},
           lineColor={28,108,200},
-          textString="Provide dummy signals"), Rectangle(extent={{-90,90},{-10,70}},
+          textString="Provide dummy signals"),
+          Rectangle(extent={{-90,90},{-10,70}},
             lineColor={28,108,200})}));
 end ModularRotaryCompressor;

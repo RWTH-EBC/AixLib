@@ -144,16 +144,21 @@ equation
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
-  October 20, 2017, by Mirko Engelpracht:<br/>
+  October 24, 2017, by Mirko Engelpracht:<br/>
   First implementation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
+</html>", info="<html>
+<p>
+This is a validation model to test three compressors in parallel
+if at least one compressor is shut-down.
+</p>
 </html>"),
 experiment(StopTime=1),
-    Diagram(graphics={          Text(
-          extent={{-88,86},{-12,74}},
-          lineColor={28,108,200},
-          textString="Provide dummy signals"), Rectangle(extent={{-90,90},{-10,70}},
-            lineColor={28,108,200})}));
+Diagram(graphics={Text(extent={{-88,86},{-12,74}},
+      lineColor={28,108,200},
+      textString="Provide dummy signals"),
+      Rectangle(extent={{-90,90},{-10,70}},
+        lineColor={28,108,200})}));
 end ModularInactiveCompressors;

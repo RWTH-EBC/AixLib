@@ -1,7 +1,7 @@
-within AixLib.Fluid.Movers.Compressors.Validation;
+﻿within AixLib.Fluid.Movers.Compressors.Validation;
 model EfficiencyModels
-  "Validation model to check efficiencies calculated for different prescribed 
-  conditions"
+  "Validation model to check efficiencies calculated with respect to different 
+  prescribed conditions"
   extends Modelica.Icons.Example;
 
   // Define medium and parameters
@@ -48,9 +48,10 @@ model EfficiencyModels
     redeclare package Medium = Medium,
     nPorts=1,
     use_T_in=true,
-    use_p_in=true) "Source of constant pressure and temperature"
+    use_p_in=true)
+    "Source of constant pressure and temperature"
     annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
-  SimpleCompressors.RotaryCompressors.RotaryCompressor rotCom(
+  replaceable SimpleCompressors.RotaryCompressors.RotaryCompressor rotCom(
     redeclare package Medium = Medium,
     show_staEff=true,
     show_qua=true,
@@ -63,13 +64,14 @@ model EfficiencyModels
         Utilities.EngineEfficiency.ScrollCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_Scroll)
     "Model of a rotary compressor"
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
-
   Sources.Boundary_pT sink(
     redeclare package Medium = Medium,
     use_T_in=true,
     use_p_in=true,
-    nPorts=1) "Sink with constant pressure and temperature"
+    nPorts=1)
+    "Sink with constant pressure and temperature"
     annotation (Placement(transformation(extent={{50,-10},{30,10}})));
+
 
 equation
   // Connection of components
@@ -107,5 +109,34 @@ equation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
+</html>", info="<html>
+<p>
+This is a validation model to test various efficiency models 
+presented in 
+<a href=\"modelica://AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency\">
+AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency</a>,
+<a href=\"modelica://AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency\">
+AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency</a> and
+<a href=\"modelica://AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency\">
+AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency</a>. 
+Therefore, both the compressor's inlet and outlet conditions are 
+prescribed in terms of pressure and temperature; additionally, 
+the ambient temperature as well as the rotational speed of the 
+compressor are prescribed. These four variables are varied in
+the following range:
+</p>
+<ul>
+<li>Ambient temperature: -20 - 20 °C</li>
+<li>Inlet temperature: -20 - 20 °C</li>
+<li>Outlet temperature: 40 - 70 °C</li>
+<li>Rotational speed: 40 - 120 Hz</li>
+</ul>
+<p>
+The pressures at inlet and outlet of the compressor depend on
+the temperatures at inlet and outlet of the compressor. Thus,
+it is possible to check if the efficiency models provide efficiencies
+that are physically correct (i.e. to check if the efficiencies are
+smaller than unity).
+</p>
 </html>"));
 end EfficiencyModels;
