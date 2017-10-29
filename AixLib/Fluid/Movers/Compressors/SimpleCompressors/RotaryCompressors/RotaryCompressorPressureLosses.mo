@@ -2,7 +2,8 @@ within AixLib.Fluid.Movers.Compressors.SimpleCompressors.RotaryCompressors;
 model RotaryCompressorPressureLosses
   "Model that describes a simple rotary compressor with pressure losses"
   extends BaseClasses.PartialCompressor(
-    redeclare final CompressionProcesses.RotaryCompression parCom);
+    redeclare final CompressionProcesses.RotaryCompression parCom,
+    final simCom = Utilities.Types.SimpleCompressor.RotaryCompressorPressureLosses);
 
   // Definition of submodels and connectors
   //

@@ -1,10 +1,10 @@
-within AixLib.Fluid.Movers.Compressors.ModularCompressors.RotaryCompressors;
-model ModularRotaryCompressors
-  "Model of simple rotary compressors in parallel"
+within AixLib.Fluid.Movers.Compressors.ModularCompressors;
+model ModularCompressors
+  "Model of simple modular compressors"
   extends BaseClasses.PartialModularCompressors;
 
 equation
-  // Connect port_a with inlet ports of expansion valves and connect heat ports
+  // Connect port_b with compressors' port_b
   //
   for i in 1:nCom loop
     connect(modCom[i].port_b,port_b);
@@ -19,4 +19,4 @@ equation
   </li>
 </ul>
 </html>"));
-end ModularRotaryCompressors;
+end ModularCompressors;

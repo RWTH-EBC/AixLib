@@ -2,7 +2,9 @@ within AixLib.Fluid.Movers.Compressors.SimpleCompressors.RotaryCompressors;
 model RotaryCompressor
   "Model that describes a simple rotary compressor"
   extends BaseClasses.PartialCompressor(
-    redeclare final CompressionProcesses.RotaryCompression parCom);
+    redeclare final CompressionProcesses.RotaryCompression parCom,
+    final simCom = Utilities.Types.SimpleCompressor.RotaryCompressor);
+
 
 equation
   // Conncections of main components

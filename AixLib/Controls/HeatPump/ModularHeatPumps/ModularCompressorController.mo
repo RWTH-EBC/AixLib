@@ -36,18 +36,21 @@ equation
 
   // Connect dummy signals to controllers' rest inputs
   //
-  connect(trigger.y, intCon.trigger) annotation (Line(points={{-83.4,10},{-68,10},
-          {-68,28}}, color={255,0,255}));
-  connect(triggerVal.y, intCon.y_reset_in) annotation (Line(points={{-83.4,30},{
-          -80,30},{-80,32},{-72,32}}, color={0,0,127}));
+  connect(trigger.y, intCon.trigger)
+    annotation (Line(points={{-83.4,10},{-68,10},
+                {-68,28}}, color={255,0,255}));
+  connect(triggerVal.y, intCon.y_reset_in)
+    annotation (Line(points={{-83.4,30},{
+                -80,30},{-80,32},{-72,32}}, color={0,0,127}));
 
   // Connect output signals
   //
   connect(useExtBlo, dataBus.comBus.extConCom)
     annotation (Line(points={{-60,0},{-60,-80},{0.05,-80},{0.05,-99.95}},
                 color={255,0,255}));
-  connect(curManVar, dataBus.comBus.curManVarVal) annotation (Line(points={{60,112},
-          {60,-80},{0.05,-80},{0.05,-99.95}}, color={0,0,127}));
+  connect(curManVar, dataBus.comBus.curManVarVal)
+    annotation (Line(points={{60,112},
+                {60,-80},{0.05,-80},{0.05,-99.95}}, color={0,0,127}));
 
   annotation (Icon(graphics={
                 Ellipse(

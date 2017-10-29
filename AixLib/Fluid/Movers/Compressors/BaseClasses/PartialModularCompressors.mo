@@ -65,19 +65,23 @@ partial model PartialModularCompressors
   parameter Modelica.SIunits.Volume
     VDis[nCom](min=0) = fill(13e-6, nCom)
     "Displacement volume of the compressor"
-    annotation(Dialog(tab="Compressors",group="Geometry"));
+    annotation(Dialog(tab="Compressors",group="Geometry"),
+               HideResult=not show_parCom);
   parameter Modelica.SIunits.Efficiency
     epsRef[nCom](min=0, max=1, nominal=0.05) = fill(0.04, nCom)
     "Ratio of the real and the ideal displacement volume"
-    annotation(Dialog(tab="Compressors",group="Geometry"));
+    annotation(Dialog(tab="Compressors",group="Geometry"),
+               HideResult=not show_parCom);
   parameter Modelica.SIunits.Diameter
     diameterInl[nCom](min=0) = fill(12e-3, nCom)
     "Diameter of the pipe at compressor's inlet"
-    annotation(Dialog(tab="Compressors",group="Geometry"));
+    annotation(Dialog(tab="Compressors",group="Geometry"),
+               HideResult=not show_parCom);
   parameter Modelica.SIunits.Diameter
     diameterOut[nCom](min=0) = fill(8e-3, nCom)
     "Diameter of the pipe at compressor's outlet"
-    annotation(Dialog(tab="Compressors",group="Geometry"));
+    annotation(Dialog(tab="Compressors",group="Geometry"),
+               HideResult=not show_parCom);
 
   parameter Modelica.SIunits.Frequency
     rotSpeMax[nCom](min=0) = fill(120, nCom)
@@ -92,11 +96,13 @@ partial model PartialModularCompressors
 
   parameter Boolean useInpFil[nCom] = fill(true, nCom)
     "= true, if transient behaviour of rotational speed is computed"
-    annotation(Dialog(tab="Compressors",group="Transient behaviour"));
+    annotation(Dialog(tab="Compressors",group="Transient behaviour"),
+               HideResult=not show_parCom);
   parameter Modelica.SIunits.Time risTim[nCom] = fill(0.5, nCom)
     "Time until rotational speed reaches 99.6 % of its set value"
     annotation(Dialog(enable = useInpFil,
-               tab="Compressors",group="Transient behaviour"));
+               tab="Compressors",group="Transient behaviour"),
+               HideResult=not show_parCom);
 
   // Definition of models describing efficiencies
   //
@@ -109,7 +115,8 @@ partial model PartialModularCompressors
       extent={{-36,-40},{-16,-20}})),
       choicesAllMatching=true,
       Dialog(
-      tab = "Compressors", group="Efficiencies"));
+      tab = "Compressors", group="Efficiencies"),
+      HideResult=not show_parCom);
   replaceable model VolumetricEfficiency =
     Utilities.VolumetricEfficiency.ConstantEfficiency
     constrainedby Utilities.VolumetricEfficiency.PartialVolumetricEfficiency
@@ -119,7 +126,8 @@ partial model PartialModularCompressors
       extent={{-36,-40},{-16,-20}})),
       choicesAllMatching=true,
       Dialog(
-      tab = "Compressors", group="Efficiencies"));
+      tab = "Compressors", group="Efficiencies"),
+      HideResult=not show_parCom);
   replaceable model IsentropicEfficiency =
     Utilities.IsentropicEfficiency.ConstantEfficiency
     constrainedby Utilities.IsentropicEfficiency.PartialIsentropicEfficiency
@@ -129,12 +137,13 @@ partial model PartialModularCompressors
       extent={{-36,-40},{-16,-20}})),
       choicesAllMatching=true,
       Dialog(
-      tab = "Compressors", group="Efficiencies"));
+      tab = "Compressors", group="Efficiencies"),
+      HideResult=not show_parCom);
 
   // Definition of replaceable controller model
   //
   replaceable
-    Controls.HeatPump.ModularHeatPumps.BaseClasses.PartialModularController
+    Controls.HeatPump.ModularHeatPumps.ModularCompressorController
     modCon(
     final nCom=nCom,
     final useExt=useExt,
@@ -233,26 +242,31 @@ partial model PartialModularCompressors
     for i in 1:nCom}
     "Pressure loss factor at compressor's inlet for flow of port_a -> port_b"
     annotation(Dialog(tab = "Pressure and heat losses",
-               group="Pressure losses - General"));
+               group="Pressure losses - General"),
+               HideResult=not show_parCom);
   parameter Real zetOut[nCom]=
     {((1/0.59-1)^2+(1-(diameterOut[i]/0.1122)^2))*(1-(diameterOut[i]/0.1122)^2)
     for i in 1:nCom}
     "Pressure loss factor at compressor's outlet for flow of port_a -> port_b"
     annotation(Dialog(tab = "Pressure and heat losses",
-               group="Pressure losses - General"));
+               group="Pressure losses - General"),
+               HideResult=not show_parCom);
 
   parameter Boolean from_dp[nCom] = fill(false, nCom)
     "= true, use m_flow = f(dp) else dp = f(m_flow)"
     annotation(Dialog(tab = "Pressure and heat losses",
-               group="Pressure losses - Advanced"));
+               group="Pressure losses - Advanced"),
+               HideResult=not show_parCom);
   parameter Boolean homotopyInitialization[nCom] = fill(true, nCom)
     "= true, use homotopy method  for initialisation"
     annotation(Dialog(tab = "Pressure and heat losses",
-               group="Pressure losses - Advanced"));
+               group="Pressure losses - Advanced"),
+               HideResult=not show_parCom);
   parameter Boolean linearized[nCom] = fill(false, nCom)
     "= true, use linear relation between m_flow and dp for any flow rate"
     annotation(Dialog(tab = "Pressure and heat losses",
-               group="Pressure losses - Advanced"));
+               group="Pressure losses - Advanced"),
+               HideResult=not show_parCom);
 
   // Definition of parameters describing heat losses
   //
@@ -261,51 +275,61 @@ partial model PartialModularCompressors
     "Choose heat transfer model for heat losses at compressor's inlet 
     and outlet"
     annotation(Dialog(tab = "Pressure and heat losses",
-               group="Heat losses - General"));
+               group="Heat losses - General"),
+               HideResult=not show_parCom);
   parameter Modelica.SIunits.Mass mWal[nCom] = fill(2.5, nCom)
     "Mass of the fictitious wall"
     annotation(Dialog(tab = "Pressure and heat losses",
-               group="Heat losses - Geometry"));
+               group="Heat losses - Geometry"),
+               HideResult=not show_parCom);
   parameter Modelica.SIunits.SpecificHeatCapacity cpWal[nCom] = fill(450, nCom)
     "Specific heat capacity of the fictitious wall"
     annotation(Dialog(tab = "Pressure and heat losses",
-               group="Heat losses - Geometry"));
+               group="Heat losses - Geometry"),
+               HideResult=not show_parCom);
   parameter Modelica.SIunits.ThermalConductance kAMeaInl[nCom] = fill(25, nCom)
     "Effective mean thermal conductance between medium and fictitious wall 
     at inlet"
     annotation(Dialog(tab = "Pressure and heat losses",
-               group="Heat losses - Thermal conductances"));
+               group="Heat losses - Thermal conductances"),
+               HideResult=not show_parCom);
   parameter Modelica.SIunits.ThermalConductance kAMeaOut[nCom] = fill(35, nCom)
     "Effective mean thermal conductance between medium and fictitious wall 
     at outlet"
     annotation(Dialog(tab = "Pressure and heat losses",
-               group="Heat losses - Thermal conductances"));
+               group="Heat losses - Thermal conductances"),
+               HideResult=not show_parCom);
   parameter Modelica.SIunits.ThermalConductance kAMeaAmb[nCom] = fill(10, nCom)
     "Effective mean thermal conductance coefficient between fictitious wall 
     and ambient"
     annotation(Dialog(tab = "Pressure and heat losses",
-               group="Heat losses - Thermal conductances"));
+               group="Heat losses - Thermal conductances"),
+               HideResult=not show_parCom);
   parameter Modelica.SIunits.Temperature TWal0[nCom] = fill(293.15, nCom)
     "Temperature of wall at initialisation"
     annotation(Dialog(tab = "Pressure and heat losses",
-               group="Heat losses - Initialisation"));
+               group="Heat losses - Initialisation"),
+               HideResult=not show_parCom);
 
   // Definition of parameters describing advanced options
   //
   parameter Modelica.SIunits.PressureDifference
     dp_start(displayUnit="Pa") = -20e5
     "Guess value of compressor's dp = port_a.p - port_b.p"
-    annotation(Dialog(tab = "Advanced",group="General"));
+    annotation(Dialog(tab = "Advanced",group="General"),
+               HideResult=not show_parCom);
   parameter Medium.MassFlowRate m_flow_start = 0.5*m_flow_nominal
     "Guess value of compressor's m_flow = port_a.m_flowr"
-    annotation(Dialog(tab = "Advanced",group="General"));
+    annotation(Dialog(tab = "Advanced",group="General"),
+               HideResult=not show_parCom);
   parameter Medium.MassFlowRate m_flow_small = 1e-6*m_flow_nominal
     "Small mass flow rate for regularization of compressor's zero flow"
-    annotation(Dialog(tab = "Advanced",group="General"));
+    annotation(Dialog(tab = "Advanced",group="General"),
+               HideResult=not show_parCom);
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal = 0.1
     "Nominal mass flow rate"
     annotation(Dialog(tab="Advanced",group="General"),
-               HideResult=true);
+               HideResult=not show_parCom);
 
   // Definition of parameters describing diagnostics
   //
@@ -323,10 +347,10 @@ partial model PartialModularCompressors
     "= true, if vapour qualities are computed"
     annotation(Dialog(tab="Advanced",group="Diagnostics"),
                HideResult=true);
-  parameter Boolean show_parCom[nCom] = fill(false, nCom)
+  parameter Boolean show_parCom = false
     "= true, if compressors' input parameters are shown in results"
     annotation(Dialog(tab="Advanced",group="Diagnostics"));
-  parameter Boolean show_parCon[nCom] = fill(false, nCom)
+  parameter Boolean show_parCon = false
     "= true, if controller's input parameters are shown in results"
     annotation(Dialog(tab="Advanced",group="Diagnostics"));
 
@@ -382,7 +406,7 @@ partial model PartialModularCompressors
      h_outflow(start = Medium.h_default))
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{110,-10},{90,10}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heatPort
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heatPort[nCom]
     "Heat port for compressors' heat losses"
     annotation (Placement(transformation(extent={{-10,90},{10,110}})));
   Controls.Interfaces.ModularHeatPumpControlBus dataBus(
@@ -391,21 +415,27 @@ partial model PartialModularCompressors
     annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
 
 
+protected
+  parameter Utilities.Types.SimpleCompressor simCom = modCom[1].simCom
+    "Parameter used to activate or deactivate menue choices";
+
+
 equation
   // Connect port_a with inlet ports of expansion valves and connect heat ports
   //
   for i in 1:nCom loop
     connect(port_a,modCom[i].port_a);
-    connect(heatPort,modCom[i].heatPort);
   end for;
+  connect(heatPort,modCom.heatPort);
 
   // Connect data bus and further control signals
   //
   connect(modCon.dataBus, dataBus)
     annotation (Line(points={{0,-78},{0,-78},{0,-100}},color={255,204,51},
                 thickness=0.5));
-  connect(modCon.manVar, modCom.manVarCom) annotation (Line(points={{-6,-56.8},
-          {-6,-33.4},{-6,-10}}, color={0,0,127}));
+  connect(modCon.manVar, modCom.manVarCom)
+    annotation (Line(points={{-6,-56.8},{-6,-33.4},{-6,-10}},
+                color={0,0,127}));
   connect(modCom.curManVarCom, modCon.curManVar)
     annotation (Line(points={{6,-10},{6,-10},{6,-56.8}}, color={0,0,127}));
 
@@ -566,7 +596,11 @@ equation
         Line(
           points={{-30,-24},{0,-24}},
           color={255,0,0},
-          thickness=0.5)}),                                      Diagram(
+          thickness=0.5),
+        Text(
+          extent={{-100,140},{100,110}},
+          lineColor={28,108,200},
+          textString="%name")}),                                 Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>
 <ul>

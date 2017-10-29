@@ -6,6 +6,7 @@ PartialFourPortInterface
 PartialTwoPort
 PartialTwoPortInterface
 PartialTwoPortTransport
+PartialModularPort_ab
 PrescribedOutlet
 StaticFourPortHeatMassExchanger
 StaticTwoPortConservationEquation

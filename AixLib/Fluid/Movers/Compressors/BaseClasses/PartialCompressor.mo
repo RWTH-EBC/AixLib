@@ -137,6 +137,11 @@ partial model PartialCompressor
   parameter Boolean allowFlowReversal = true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal"
     annotation(Dialog(tab="Assumptions"), Evaluate=true);
+  parameter Utilities.Types.SimpleCompressor simCom=
+    Utilities.Types.SimpleCompressor.Default
+    "Parameter used to activate or deactivate menue choices"
+    annotation(Dialog(tab="Assumptions",enable=false), Evaluate=true,
+               HideResult=true);
 
   // Definition of parameters describing advanced options
   //
@@ -247,6 +252,7 @@ partial model PartialCompressor
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={60,100})), HideResult=true);
+
 
 equation
   // Connection of control signals
