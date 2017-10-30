@@ -98,6 +98,11 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
 </tr> 
 <tr>
 <td><b>input</b></td> 
+<td><code>rotSpe</code></td> 
+<td>Rotational speed</td> 
+</tr> 
+<tr>
+<td><b>input</b></td> 
 <td><code>staInl</code></td> 
 <td>Thermodynamic state at compressor's inlet conditions</td> 
 </tr> 

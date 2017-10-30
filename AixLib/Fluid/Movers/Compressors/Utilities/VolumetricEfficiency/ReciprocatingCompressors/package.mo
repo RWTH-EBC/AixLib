@@ -1,5 +1,5 @@
-within AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency;
-package ReciporatingCompressors "Package that contains efficiency models for reciporating compressors"
+within AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency;
+package ReciprocatingCompressors "Package that contains efficiency models for reciprocating compressors"
   extends Modelica.Icons.VariantsPackage;
 
 annotation (Documentation(revisions="<html>
@@ -11,4 +11,4 @@ annotation (Documentation(revisions="<html>
   </li>
 </ul>
 </html>"));
-end ReciporatingCompressors;
+end ReciprocatingCompressors;

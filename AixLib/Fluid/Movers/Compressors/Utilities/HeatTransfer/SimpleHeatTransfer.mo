@@ -69,11 +69,13 @@ equation
 
   // Calculation of boundary conditions
   //
-  port_a.h_outflow = inStream(port_b.h_outflow);
-  port_b.h_outflow = inStream(port_a.h_outflow);
+  port_a.h_outflow = inStream(port_b.h_outflow)-Q_flow/port_a.m_flow
+    "Heat exchange with fictitious wall";
+  port_b.h_outflow = inStream(port_a.h_outflow)-Q_flow/port_a.m_flow
+    "Heat exchange with fictitious wall";
   dp = 0 "Assuming no pressure loss";
 
-  heatPort.Q_flow = Q_flow "Connect heat flow with heat port";
+  heatPort.Q_flow = -Q_flow "Connect heat flow with heat port";
 
   annotation (Documentation(revisions="<html>
 <ul>
@@ -82,6 +84,18 @@ equation
   First implementation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
+</ul>
+</html>", info="<html>
+<p>
+This is a model of a simple one-directional heat transfer without storage of
+energy or mass. Therefore, some assumptions are made:
+</p>
+<ul>
+<li>No storage of energy or mass.</li>
+<li>No pressure losses.</li>
+<li>Calculation of the heat flow between fluid and fictitious wall using a 
+logarithmic temperature difference and time invariante effective thermal
+conductance.</li>
 </ul>
 </html>"), Icon(graphics={
         Rectangle(

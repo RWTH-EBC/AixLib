@@ -22,5 +22,14 @@ equation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
+</html>", info="<html>
+<p>
+This model contains a simple calculation procedure for engine efficiency
+models (for more information, please check out 
+<a href=\"modelica://AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression\">
+AixLib.Fluid.Movers.Compressors.BaseClasses.PartialCompression</a>). 
+The model provides a constant overall engine efficiency and is the most 
+basic engine efficiency model.
+</p>
 </html>"));
 end ConstantEfficiency;

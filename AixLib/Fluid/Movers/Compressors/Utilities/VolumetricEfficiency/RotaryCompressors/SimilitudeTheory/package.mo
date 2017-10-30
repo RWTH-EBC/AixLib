@@ -10,5 +10,11 @@ annotation (Documentation(revisions="<html>
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
+</html>", info="<html>
+<p>
+This package contains models describing calculations 
+procedures of the overall volumetric efficiency of
+rotary compressors based on similitude theory.
+</p> 
 </html>"));
 end SimilitudeTheory;

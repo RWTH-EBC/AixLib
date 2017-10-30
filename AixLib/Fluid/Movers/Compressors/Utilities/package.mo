@@ -12,5 +12,10 @@ annotation (Documentation(revisions="<html>
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
+</html>", info="<html>
+<p>
+This package contains utility models such as for efficiency calculation, 
+sensor models and further functions that are used throughout the library. 
+</p>
 </html>"));
 end Utilities;

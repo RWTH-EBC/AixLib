@@ -14,5 +14,34 @@ model R410a_Rotary_130
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
+</html>", info="<html>
+<p>
+This model contains a calculation procedure for the isentropic 
+efficiency presented by Körner (2017).<br />
+</p>
+<table summary=\"Power approaches\" border=\"1\" cellspacing=\"0\" 
+cellpadding=\"2\" style=\"border-collapse:collapse;\">
+<tr>
+<th>Reference</th>
+<th>Formula</th> 
+<th>Refrigerants</th> 
+<th>Validity <code>n<sub>compressor</sub></code></th> 
+<th>Validity <code>&Pi;<sub>pressure</sub></code></th> 
+</tr> 
+<tr>
+<td>Koerner2017</td> 
+<td><code>&eta;<sub>vol</sub> = 
+a1*&pi;^b1</code></td> 
+<td>R410a</td> 
+<td><code>50 - 120</code></td> 
+<td><code>1 - 10</code></td> 
+</tr> 
+</table>
+<h4>References</h4>
+<p>
+D. Körner (2017): Development of dynamic compression heat pump models 
+to evaluate promising refrigerants considering legal regulations.
+<i>Master Thesis</i>
+</p>
 </html>"));
 end R410a_Rotary_130;

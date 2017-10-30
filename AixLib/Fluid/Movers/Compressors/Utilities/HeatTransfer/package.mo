@@ -48,5 +48,10 @@ package HeatTransfer "Package that contains models to compute heat transfers"
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
+</html>", info="<html>
+<p>
+This package contains models to compute heat transfers such as at the
+inlet and outlet of a compressor.
+</p>
 </html>"));
 end HeatTransfer;

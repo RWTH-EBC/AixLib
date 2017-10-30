@@ -12,12 +12,12 @@ package Types
       "DurprezEtAl2007 - Function of pressure ratio",
       Engelpracht2017
       "Engelpracht2017 - Function of pressure ratio and rotational speed")
-    "Enumeration to define polynomial models for calculating flow coefficient"
+    "Enumeration to define polynomial models for calculating engine efficiency"
     annotation (Evaluate=true);
   type EnginePowerModels = enumeration(
       MendozaMirandaEtAl2016
       "MendozaMirandaEtAl2016 - Function of various properties")
-    "Enumeration to define polynomial models for calculating flow coefficient"
+    "Enumeration to define polynomial models for calculating engine efficiency"
     annotation (Evaluate=true);
   type IsentropicPolynomialModels = enumeration(
       DarrAndCrawford1992
@@ -26,12 +26,12 @@ package Types
       "Karlsson2007 - Function of pressure ratio and rotational speed",
       Engelpracht2017
       "Engelpracht2017 - Function of pressure ratio and rotational speed")
-    "Enumeration to define polynomial models for calculating flow coefficient"
+    "Enumeration to define polynomial models for calculating isentropic efficiency"
     annotation (Evaluate=true);
   type IsentropicPowerModels = enumeration(
       MendozaMirandaEtAl2016
       "MendozaMirandaEtAl2016 - Function of various properties")
-    "Enumeration to define polynomial models for calculating flow coefficient"
+    "Enumeration to define polynomial models for calculating isentropic efficiency"
     annotation (Evaluate=true);
   type VolumetricPolynomialModels = enumeration(
       DarrAndCrawford1992
@@ -50,12 +50,12 @@ package Types
       "Koerner2017 - Function of pressure ratio",
       Engelpracht2017
       "Engelpracht2017 - Function of pressure ratio and rotational speed")
-    "Enumeration to define polynomial models for calculating flow coefficient"
+    "Enumeration to define polynomial models for calculating volumetric efficiency"
     annotation (Evaluate=true);
   type VolumetricPowerModels = enumeration(
       MendozaMirandaEtAl2016
       "MendozaMirandaEtAl2016 - Function of various properties")
-    "Enumeration to define polynomial models for calculating flow coefficient"
+    "Enumeration to define polynomial models for calculating volumetric efficiency"
     annotation (Evaluate=true);
   type HeatTransferModels = enumeration(
       Simplified
