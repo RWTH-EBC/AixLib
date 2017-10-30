@@ -102,7 +102,7 @@ equation
 This is a model of modular compressors that are used, for example, 
 in close-loop systems like heat pumps or chillers.<br />
 It consists of <code>nCom</code> compressors in parallel and also 
-<code>nCom</code> PID conrollers if no external controller is used.
+<code>nCom</code> PID conrollers if no external controller is used. 
 Additionally, four different sensors (i.e. absolute pressure, temperature,
 mass flow rate, steam quality) are located at each compressor's outlet.
 </p>

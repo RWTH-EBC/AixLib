@@ -9,7 +9,7 @@ package UsersGuide "User's Guide"
   annotation(DocumentationClass = true, Documentation(info="<html>
 <p>
 This library provides different compressor models that are used, for
-example, for heat pumps or chillers.In the following User's Guide, a short 
+example, for heat pumps or chillers. In the following User's Guide, a short 
 summary of the compressor's library is given to allow the User 
 an easy use of the compressor models.
 </p>

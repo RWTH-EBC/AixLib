@@ -192,7 +192,7 @@ on a literature review. Therefore, the variable <code>corFact</code>
 allows a correction of the volumetric efficiency if the general modelling 
 approach presented in the litarature differs from
 <code>&eta;<sub>vol</sub> = V&#775;<sub>ide</sub> / 
-V&#775;<sub>rea</sub></code></code>.
+V&#775;<sub>rea</sub></code>.
 </p>
 <h4>Common model variables</h4>
 <p>
@@ -404,7 +404,7 @@ on a literature review. Therefore, the variable <code>corFact</code>
 allows a correction of the isentropic efficiency if the general modelling 
 approach presented in the litarature differs from
 <code>&eta;<sub>ise</sub> = (h<sub>outIse</sub> - h<sub>inl</sub>) /
-(h<sub>out</sub> - h<sub>inl</sub>)</code></code>.
+(h<sub>out</sub> - h<sub>inl</sub>)</code>.
 </p>
 <h4>Common model variables</h4>
 <p>
