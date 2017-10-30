@@ -1,6 +1,5 @@
 within AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency.Generic;
-model Poly_GeneralLiterature
-  "Generic overall isentropic efficiency based on literature review for 
+model Poly_VarRef_VarDisVol_RotaryScroll "Generic overall isentropic efficiency based on literature review for 
   various compressors"
   extends PolynomialIsentropicEfficiency(
     final polyMod=Types.IsentropicPolynomialModels.Engelpracht2017,
@@ -48,4 +47,4 @@ models for heat pumps and chillers considering various refrigerants.
 <i>Master Thesis</i>
 </p>
 </html>"));
-end Poly_GeneralLiterature;
+end Poly_VarRef_VarDisVol_RotaryScroll;

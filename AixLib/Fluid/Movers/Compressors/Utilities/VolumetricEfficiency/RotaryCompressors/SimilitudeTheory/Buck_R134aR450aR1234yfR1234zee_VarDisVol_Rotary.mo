@@ -1,13 +1,12 @@
-within AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency.RotaryCompressors.SimilitudeTheory;
-model Buck_R134aR450aR1234yfR1234zee_Rotary
+within AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency.RotaryCompressors.SimilitudeTheory;
+model Buck_R134aR450aR1234yfR1234zee_VarDisVol_Rotary
   "Rotary Compressor - R134a, R450a, R1234yf, R1234ze(e) - Similitude - Power"
-  extends PowerEngineEfficiency(
-    final useIseWor=true,
+  extends PowerVolumetricEfficiency(
     final MRef=0.102032,
     final rotSpeRef=9.334,
-    final powMod=Types.EnginePowerModels.MendozaMirandaEtAl2016,
-    final a=1,
-    final b={-0.1642,0.2050,0.0659,07669});
+    final powMod=Types.VolumetricPowerModels.MendozaMirandaEtAl2016,
+    final a=1.2,
+    final b={-0.2678,-0.0106,0.7195});
 
   annotation (Documentation(revisions="<html>
 <ul>
@@ -19,8 +18,8 @@ model Buck_R134aR450aR1234yfR1234zee_Rotary
 </ul>
 </html>", info="<html>
 <p>
-This model contains a calculation procedure for the engine efficiency
-presented by Mendoza-Miranda et al. (2016).<br />
+This model contains a calculation procedure for the isentropic 
+efficiency presented by Mendoza-Miranda et al. (2016).<br />
 </p>
 <table summary=\"Power approaches\" border=\"1\" cellspacing=\"0\" 
 cellpadding=\"2\" style=\"border-collapse:collapse;\">
@@ -33,9 +32,9 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
 </tr> 
 <tr>
 <td>MendozaMirandaEtAl2016</td> 
-<td><code>&eta;<sub>eng</sub> = &pi;^b1 * (n<sub>ref</sub>/n)^b2 * 
-(1/((T<sub>Inl</sub>+T<sub>OutIse</sub>)/2-T<sub>Out</sub>))^b3 * 
-(M<sub>ref</sub>/M)^b4</code></td> 
+<td><code>&eta;<sub>vol</sub> = a1 * &pi;^b1 * 
+(&pi;^1.5*n^3*V<sub>dis</sub>)^b2 * (M<sub>ref</sub>/M)^b3 
+</code></td> 
 <td>R134a,R450a,R1324yf,R1234ze(E)</td> 
 <td><code>0 - 50</code></td> 
 <td><code>1 - 6</code></td> 
@@ -52,4 +51,4 @@ alternatives to R134a in a variable speed reciprocating
 compressor</a>. In: <i>Energy 114</i>, S. 753&ndash;766
 </p>
 </html>"));
-end Buck_R134aR450aR1234yfR1234zee_Rotary;
+end Buck_R134aR450aR1234yfR1234zee_VarDisVol_Rotary;

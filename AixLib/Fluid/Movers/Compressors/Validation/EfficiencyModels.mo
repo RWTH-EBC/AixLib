@@ -57,11 +57,11 @@ model EfficiencyModels
     show_qua=true,
     useInpFil=false,
     redeclare model VolumetricEfficiency =
-        Utilities.VolumetricEfficiency.ScrollCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_Reciporating,
+        Utilities.VolumetricEfficiency.ScrollCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_VarDisVol_Reciprocating,
     redeclare model IsentropicEfficiency =
-        Utilities.IsentropicEfficiency.ScrollCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_Scroll,
+        Utilities.IsentropicEfficiency.ScrollCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_VarDisVol_Scroll,
     redeclare model EngineEfficiency =
-        Utilities.EngineEfficiency.ScrollCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_Scroll)
+        Utilities.EngineEfficiency.ScrollCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_VarDisVol_Scroll)
     "Model of a rotary compressor"
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
   Sources.Boundary_pT sink(

@@ -1,12 +1,11 @@
-﻿within AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency.ReciprocatingCompressors.R134a;
-model R134a_Reciporating_170
-  "Reciporating Compressor - R134a - 170 cm³ - Polynomial"
+﻿within AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency.RotaryCompressors.R22;
+model Poly_R22_20_Rotary "Rotary Compressor - R22 - 20.7 cm³ - Polynomial"
   extends PolynomialVolumetricEfficiency(
     final polyMod=Types.VolumetricPolynomialModels.Li2013,
-    final rotSpeRef=2000/60,
-    final a={1.223,-0.206,-0.017},
+    final rotSpeRef=60,
+    final a={0.709,0.416,-0.125},
     final b={1,1,1},
-    final c={0.779,-0.036,0});
+    final c={1.083,-0.077,0});
 
   annotation (Documentation(revisions="<html>
 <ul>
@@ -48,4 +47,4 @@ Simplified steady-state modeling for variable speed compressor</a>.
 In: <i>Applied Thermal Engineering 50(1)</i>, S. 318&ndash;326
 </p>
 </html>"));
-end R134a_Reciporating_170;
+end Poly_R22_20_Rotary;

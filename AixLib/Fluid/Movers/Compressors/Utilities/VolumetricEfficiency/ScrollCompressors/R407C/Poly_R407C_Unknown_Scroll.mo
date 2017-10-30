@@ -1,10 +1,10 @@
-within AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency.ScrollCompressors.R407C;
-model R407C_Scroll_XXXX
+within AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency.ScrollCompressors.R407C;
+model Poly_R407C_Unknown_Scroll
   "Scroll Compressor - R407C - Unknown displacement volume - Polynomial"
-  extends PolynomialIsentropicEfficiency(
-    final polyMod=Types.IsentropicPolynomialModels.Karlsson2007,
-    final a={0.926,-0.0823,0.00352,0.00294,-0.000022},
-    final b={1,1,1,1,1});
+  extends PolynomialVolumetricEfficiency(
+    final polyMod=Types.VolumetricPolynomialModels.Karlsson2007,
+    final a={0.0012,-0.088,1.1262,-0.0045,0.0039,-0.000025},
+    final b={1,1,1,1,1,1});
 
   annotation (Documentation(revisions="<html>
 <ul>
@@ -17,7 +17,7 @@ model R407C_Scroll_XXXX
 </html>", info="<html>
 <p>
 This model contains a calculation procedure for the isentropic 
-efficiency presented by Karlsson (2007).<br />
+efficiency presented by Karlsson (2017).<br />
 </p>
 <table summary=\"Power approaches\" border=\"1\" cellspacing=\"0\" 
 cellpadding=\"2\" style=\"border-collapse:collapse;\">
@@ -30,8 +30,9 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
 </tr> 
 <tr>
 <td>Karlsson2007</td> 
-<td><code>&eta;<sub>ise</sub> = a1 + a2*&pi; + 
-a3*&pi;^2 + a4*n + a5*n^2</code></td> 
+<td><code>&eta;<sub>vol</sub> = a1*T<sub>inl</sub>*&pi; + 
+a2*&pi; + a3 + a4*T<sub>inl</sub> + 
+a5*n + a6*n^2</code></td> 
 <td>R407c</td> 
 <td><code>No information</code></td> 
 <td><code>No information</code></td> 
@@ -44,4 +45,4 @@ F. Karlsson (2007):
 Capacity Control of Residential Heat Pump Heating Systems</a>. In: <i>PhD thesis</i>
 </p>
 </html>"));
-end R407C_Scroll_XXXX;
+end Poly_R407C_Unknown_Scroll;

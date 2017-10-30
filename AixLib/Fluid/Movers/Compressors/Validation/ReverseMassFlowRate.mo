@@ -46,11 +46,11 @@ model ReverseMassFlowRate
     show_qua=true,
     useInpFil=true,
     redeclare model EngineEfficiency =
-        Utilities.EngineEfficiency.Generic.Poly_GeneralLiterature,
+        Utilities.EngineEfficiency.Generic.Poly_VarRef_VarDisVol_RotaryScroll,
     redeclare model VolumetricEfficiency =
-        Utilities.VolumetricEfficiency.RotaryCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_Rotary,
+        Utilities.VolumetricEfficiency.RotaryCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_VarDisVol_Rotary,
     redeclare model IsentropicEfficiency =
-        Utilities.IsentropicEfficiency.RotaryCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_Rotary)
+        Utilities.IsentropicEfficiency.RotaryCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_VarDisVol_Rotary)
     "Model of a rotary compressor"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 

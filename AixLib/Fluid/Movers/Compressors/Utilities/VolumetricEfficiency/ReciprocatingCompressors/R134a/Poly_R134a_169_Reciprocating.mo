@@ -1,10 +1,10 @@
-﻿within AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency.ReciprocatingCompressors.R134a;
-model R134a_Reciporating_169
+﻿within AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency.ReciprocatingCompressors.R134a;
+model Poly_R134a_169_Reciprocating
   "Reciporating Compressor - R134a - 169 cm³ - Polynomial"
-  extends PolynomialIsentropicEfficiency(
-    final polyMod=Types.IsentropicPolynomialModels.DarrAndCrawford1992,
-    final a={0.8405,-4.8711*1e-5,-0.1105},
-    final b={1,1,1});
+  extends PolynomialVolumetricEfficiency(
+    final polyMod=Types.VolumetricPolynomialModels.DarrAndCrawford1992,
+    final a={0.8889,-1.0025*1e-4,0.8889,-1.0025*1e-4},
+    final b={1,1,1,1});
 
   annotation (Documentation(revisions="<html>
 <ul>
@@ -30,12 +30,13 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
 </tr> 
 <tr>
 <td>DarrAndCrawford1992</td> 
-<td><code>&eta;<sub>ise</sub> = a1 + 
-a2*n + a3/&rho;<sub>inlet</sub></code></td> 
+<td><code>&eta;<sub>vol</sub> = a1 + a2*n - 
+a3*epsRef*(&rho;<sub>inlIse</sub>/&rho;<sub>inl</sub>-1) - 
+a4*n*(&rho;<sub>inlIse</sub>/&rho;<sub>inl</sub>-1)</code></td> 
 <td>R134a</td> 
 <td><code>40 - 75</code></td> 
 <td><code>3 - 10</code></td> 
-</tr> 
+</tr>
 </table>
 <h4>References</h4>
 <p>
@@ -48,4 +49,4 @@ College of Engineering. University of Illinois at
 Urbana-Champaign.</i>
 </p>
 </html>"));
-end R134a_Reciporating_169;
+end Poly_R134a_169_Reciprocating;

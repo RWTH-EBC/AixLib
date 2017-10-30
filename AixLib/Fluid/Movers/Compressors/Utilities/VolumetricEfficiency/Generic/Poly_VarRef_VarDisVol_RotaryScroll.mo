@@ -1,5 +1,5 @@
 within AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency.Generic;
-model Poly_GeneralLiterature
+model Poly_VarRef_VarDisVol_RotaryScroll
   "Generic overall volumetric efficiency based on literature review for various compressors"
   extends PolynomialVolumetricEfficiency(
     final polyMod=Types.VolumetricPolynomialModels.Engelpracht2017,
@@ -51,4 +51,4 @@ models for heat pumps and chillers considering various refrigerants.
 <i>Master Thesis</i>
 </p>
 </html>"));
-end Poly_GeneralLiterature;
+end Poly_VarRef_VarDisVol_RotaryScroll;

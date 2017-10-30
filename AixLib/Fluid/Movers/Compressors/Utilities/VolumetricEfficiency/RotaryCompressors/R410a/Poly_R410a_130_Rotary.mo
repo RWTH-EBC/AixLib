@@ -1,6 +1,5 @@
 ﻿within AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency.RotaryCompressors.R410a;
-model R410a_Rotary_130
-  "Rotary Compressor - R410a - 130 cm³ - Polynomial"
+model Poly_R410a_130_Rotary "Rotary Compressor - R410a - 130 cm³ - Polynomial"
   extends PolynomialVolumetricEfficiency(
     final polyMod=Types.VolumetricPolynomialModels.Koerner2017,
     final a={1.108},
@@ -44,4 +43,4 @@ to evaluate promising refrigerants considering legal regulations.
 <i>Master Thesis</i>
 </p>
 </html>"));
-end R410a_Rotary_130;
+end Poly_R410a_130_Rotary;

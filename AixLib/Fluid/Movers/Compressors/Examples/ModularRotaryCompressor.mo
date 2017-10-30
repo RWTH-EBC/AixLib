@@ -45,11 +45,11 @@ model ModularRotaryCompressor
       SimpleCompressors.RotaryCompressors.RotaryCompressor modCom,
     redeclare package Medium = Medium,
     redeclare model EngineEfficiency =
-        Utilities.EngineEfficiency.Generic.Poly_GeneralLiterature,
+        Utilities.EngineEfficiency.Generic.Poly_VarRef_VarDisVol_RotaryScroll,
     redeclare model VolumetricEfficiency =
-        Utilities.VolumetricEfficiency.RotaryCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_Rotary,
+        Utilities.VolumetricEfficiency.RotaryCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_VarDisVol_Rotary,
     redeclare model IsentropicEfficiency =
-        Utilities.IsentropicEfficiency.RotaryCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_Rotary,
+        Utilities.IsentropicEfficiency.RotaryCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_VarDisVol_Rotary,
     show_parCom=false,
     show_parCon=false,
     useExt=false)

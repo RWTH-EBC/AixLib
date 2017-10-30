@@ -1,6 +1,5 @@
 within AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency.Generic;
-model Poly_GeneralLiterature
-  "Generic overall engine efficiency based on literature review for 
+model Poly_VarRef_VarDisVol_RotaryScroll "Generic overall engine efficiency based on literature review for 
   various compressors"
   extends PolynomialEngineEfficiency(
     final useIseWor=false,
@@ -54,4 +53,4 @@ models for heat pumps and chillers considering various refrigerants.
 <i>Master Thesis</i>
 </p>
 </html>"));
-end Poly_GeneralLiterature;
+end Poly_VarRef_VarDisVol_RotaryScroll;

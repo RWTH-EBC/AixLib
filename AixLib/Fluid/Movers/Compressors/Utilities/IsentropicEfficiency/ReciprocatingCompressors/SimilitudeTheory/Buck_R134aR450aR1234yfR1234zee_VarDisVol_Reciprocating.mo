@@ -1,12 +1,12 @@
-within AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency.ScrollCompressors.SimilitudeTheory;
-model Buck_R134aR450aR1234yfR1234zee_Reciporating
-  "Scroll Compressor - R134a, R450a, R1234yf, R1234ze(e) - Similitude - Power"
-  extends PowerVolumetricEfficiency(
+within AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency.ReciprocatingCompressors.SimilitudeTheory;
+model Buck_R134aR450aR1234yfR1234zee_VarDisVol_Reciprocating
+  "Reciporating Compressor - R134a, R450a, R1234yf, R1234ze(e) - Similitude - Power"
+  extends PowerIsentropicEfficiency(
     final MRef=0.102032,
     final rotSpeRef=9.334,
-    final powMod=Types.VolumetricPowerModels.MendozaMirandaEtAl2016,
-    final a=1.35,
-    final b={-0.2678,-0.0106,0.7195});
+    final powMod=Types.IsentropicPowerModels.MendozaMirandaEtAl2016,
+    final a=1,
+    final b={0.0753,0.2183,0.0015,0.0972});
 
   annotation (Documentation(revisions="<html>
 <ul>
@@ -32,8 +32,10 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
 </tr> 
 <tr>
 <td>MendozaMirandaEtAl2016</td> 
-<td><code>&eta;<sub>vol</sub> = a1 * &pi;^b1 * 
-(&pi;^1.5*n^3*V<sub>dis</sub>)^b2 * (M<sub>ref</sub>/M)^b3 
+<td><code>&eta;<sub>ise</sub> = a1 * &pi;^b1 * 
+(n<sub>ref</sub>/n)^b2 * 
+(n^3*V<sub>dis</sub>/dh<sub>ise</sub>^1.5)^b3 * 
+(1/((T<sub>inl</sub>+T<sub>outIse</sub>)/2-T<sub>out</sub>))^b4
 </code></td> 
 <td>R134a,R450a,R1324yf,R1234ze(E)</td> 
 <td><code>0 - 50</code></td> 
@@ -51,4 +53,4 @@ alternatives to R134a in a variable speed reciprocating
 compressor</a>. In: <i>Energy 114</i>, S. 753&ndash;766
 </p>
 </html>"));
-end Buck_R134aR450aR1234yfR1234zee_Reciporating;
+end Buck_R134aR450aR1234yfR1234zee_VarDisVol_Reciprocating;
