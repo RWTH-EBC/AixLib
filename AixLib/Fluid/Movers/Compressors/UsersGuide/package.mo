@@ -7,6 +7,27 @@ package UsersGuide "User's Guide"
 
 
   annotation(DocumentationClass = true, Documentation(info="<html>
+<p>
+This library provides different compressor models that are used, for
+example, for heat pumps or chillers.In the following User's Guide, a short 
+summary of the compressor's library is given to allow the User 
+an easy use of the compressor models.
+</p>
+<ol>
+<li>
+<a href=\"modelica://AixLib.Fluid.Movers.Compressors.UsersGuide.Composition\">
+Composition of the library</a></li>
+<li>
+<a href=\"modelica://AixLib.Fluid.Movers.Compressors.UsersGuide.Approaches\">
+Approaches implemented</a></li>
+<li>
+<a href=\"modelica://AixLib.Fluid.Movers.Compressors.UsersGuide.References\">
+References</a></li>
+</ol>
+<p>
+Additionally, descriptions of all models are provided in each models
+information section.
+</p>
 </html>", revisions="<html>
 <ul>
   <li>

@@ -462,8 +462,7 @@ V&#775;<sub>rea</sub></code></td>
 </tr> 
 </table>
 <p>
-For the third approach (i.e. flow coefficient), different calculation
-models are stored in
+These efficiency models are stored in
 <a href=\"modelica://AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency\">
 AixLib.Fluid.Movers.Compressors.Utilities.EngineEfficiency</a>, 
 <a href=\"modelica://AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency\">

@@ -250,5 +250,16 @@ enlargement of the cross-section and these heat losses may occure due to
 heat exchange with a fictitious wall that describes the shell of the
 compressor.
 </p>
+<h4>References</h4>
+<p>
+The modelling approach presented here is alligned to the modelling approaches 
+presented in the literature:
+</p>
+<p>
+P. Byrne, R. Ghoubali and J. Miriel (2012): 
+<a href=\"https://hal.archives-ouvertes.fr/hal-00719934/document\"> 
+Development of a scroll compressor model for propane
+</a>. In: <i>The 10th Gustav Lorentzen Conference</i>
+</p>
 </html>"));
 end RotaryCompressorPressureHeatLosses;
