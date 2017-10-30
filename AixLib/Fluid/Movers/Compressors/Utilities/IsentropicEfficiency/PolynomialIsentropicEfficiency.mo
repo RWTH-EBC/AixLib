@@ -142,7 +142,7 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
 <tr>
 <td>DarrAndCrawford1992</td> 
 <td><code>&eta;<sub>ise</sub> = a1 + 
-a2*n + a3/&rho;<sub>inlet</inlet></code></td> 
+a2*n + a3/&rho;<sub>inlet</sub></code></td> 
 <td>R134a</td> 
 <td><code>40 - 75</code></td> 
 <td><code>3 - 10</code></td> 
