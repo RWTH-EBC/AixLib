@@ -10,7 +10,14 @@ partial model PartialModularExpansionVavles
 
   // Definition of replaceable expansion valve models
   //
-  replaceable BaseClasses.PartialExpansionValve modExpVal[nVal](
+  replaceable model SimpleExpansionValve =
+    SimpleExpansionValves.IsothermalExpansionValve
+    constrainedby PartialExpansionValve
+    "Model of simple expansion valve"
+    annotation (choicesAllMatching=true,
+                Dialog(tab="Expansion valves", group="General"));
+
+  SimpleExpansionValve modExpVal[nVal](
     redeclare each final package Medium = Medium,
     final AVal=AVal,
     final dInlPip=dInlPip,
@@ -22,10 +29,9 @@ partial model PartialModularExpansionVavles
     redeclare final model FlowCoefficient = FlowCoefficient,
     each final allowFlowReversal=allowFlowReversal,
     each final dp_start=dp_start,
-    final m_flow_nominal=mFlowNom) "Array of expansion valves" annotation (
-    Placement(transformation(extent={{-10,10},{10,-10}})),
-    choicesAllMatching=true,
-    Dialog(tab="Expansion valves", group="General"));
+    final m_flow_nominal=mFlowNom)
+    "Array of expansion valves"
+    annotation (Placement(transformation(extent={{-10,10},{10,-10}})));
 
   // Definition of parameters describing the expansion valves
   //
@@ -78,9 +84,15 @@ partial model PartialModularExpansionVavles
 
   // Definition of replaceable controller model
   //
-  replaceable
+  replaceable model ModularController =
     Controls.HeatPump.ModularHeatPumps.ModularExpansionValveController
-    expValCon(
+    constrainedby
+    Controls.HeatPump.ModularHeatPumps.BaseClasses.PartialModularController
+    "Model of the modular controller"
+    annotation (choicesAllMatching=true,
+                Dialog(tab="Controller", group="General"));
+
+  ModularController expValCon(
     final nCom=nVal,
     final useExt=useExt,
     final controllerType=controllerType,
@@ -99,13 +111,9 @@ partial model PartialModularExpansionVavles
     final xi_start=xi_start,
     final xd_start=xd_start,
     final y_start=y_start)
-    constrainedby
-    Controls.HeatPump.ModularHeatPumps.BaseClasses.PartialModularController
     "Model of internal controller"
     annotation (
-    Placement(transformation(extent={{-10,-78},{10,-58}})),
-    choicesAllMatching=true,
-    Dialog(tab="Controller", group="General"));
+    Placement(transformation(extent={{-10,-78},{10,-58}})));
 
   // Definition of parameters describing the expansion valve controller
   //
@@ -455,8 +463,8 @@ in close-loop systems like heat pumps or chillers.
 Three definitions need to be added by an extending class using this component:
 </p>
 <ul>
-<li>Redecleration of the model <code>expansionValves</code>.</li>
-<li>Redecleration of the model <code>expansionValveController</code>.</li>
+<li>Redecleration of the model <code>SimpleExpansionValve</code>.</li>
+<li>Redecleration of the model <code>ModularController</code>.</li>
 <li>Connection of <code>expansionValves[i]</code> with <code>ports_b[i]</code>.</li>
 </ul>
 <p>

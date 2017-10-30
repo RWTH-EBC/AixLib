@@ -39,7 +39,8 @@ model ModularExpansionValvesPressureDifference
   replaceable ModularExpansionValves.ModularExpansionValvesSensors modVal(
     redeclare package Medium = Medium,
     nVal=nVal,
-    redeclare SimpleExpansionValves.IsothermalExpansionValve modExpVal,
+    redeclare model SimpleExpansionValve =
+        SimpleExpansionValves.IsothermalExpansionValve,
     show_parVal=false,
     show_parCon=false,
     useInpFil={true,true,true},
@@ -47,7 +48,9 @@ model ModularExpansionValvesPressureDifference
     risTim={0.25,0.25,0.5},
     useExt=true,
     redeclare model FlowCoefficient =
-        Utilities.FlowCoefficient.ConstantFlowCoefficient)
+        Utilities.FlowCoefficient.ConstantFlowCoefficient,
+    redeclare model ModularController =
+        Controls.HeatPump.ModularHeatPumps.ModularExpansionValveController)
     "Modular expansion valves in parallel" annotation (Placement(transformation(
         extent={{-18,18},{18,-18}},
         rotation=-90,

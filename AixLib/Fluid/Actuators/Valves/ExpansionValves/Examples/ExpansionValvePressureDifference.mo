@@ -55,7 +55,6 @@ model ExpansionValvePressureDifference
         Utilities.FlowCoefficient.R134a.Power_R134a_EEV_15)
     "Simple isothermal valve"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-
   AixLib.Fluid.Sources.FixedBoundary sink(
     redeclare package Medium = Medium,
     p=pOut,
