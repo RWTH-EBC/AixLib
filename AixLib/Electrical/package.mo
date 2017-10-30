@@ -1,5 +1,5 @@
 within AixLib;
-package Electric "This package contains models for electric components such as Photovoltaics or Batteries"
+package Electrical "This package contains models for electric components such as Photovoltaics or Batteries"
   extends Modelica.Icons.Package;
 
   annotation (
@@ -36,4 +36,4 @@ especially three phase induction machines such as an asynchronous motor.
     Line(
       origin={6.2593,48.0},
       points={{53.7407,-58.0},{53.7407,-93.0},{-66.2593,-93.0},{-66.2593,-58.0}})}));
-end Electric;
+end Electrical;
