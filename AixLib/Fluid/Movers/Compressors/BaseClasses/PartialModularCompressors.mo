@@ -17,7 +17,14 @@ partial model PartialModularCompressors
 
   // Definition of replaceable compressor models
   //
-  replaceable PartialCompressor modCom[nCom](
+  replaceable model SimpleCompressor =
+    SimpleCompressors.RotaryCompressors.RotaryCompressor
+    constrainedby PartialCompressor
+    "Model of the simple compressor in parallel"
+    annotation (choicesAllMatching=true,
+                Dialog(tab="Compressors", group="General"));
+
+  SimpleCompressor modCom[nCom](
     redeclare final package Medium=Medium,
     final VDis=VDis,
     final epsRef=epsRef,
@@ -47,18 +54,20 @@ partial model PartialModularCompressors
     each final m_flow_start=m_flow_start,
     each final m_flow_small=m_flow_small,
     each final m_flow_nominal=m_flow_nominal,
-    final show_T=show_T,
-    final show_V_flow=show_V_flow,
-    final show_staEff=show_staEff,
-    final show_qua=show_qua,
+    each final show_T=show_T,
+    each final show_V_flow=show_V_flow,
+    each final show_staEff=show_staEff,
+    each final show_qua=show_qua,
     final rotSpe0=rotSpe0,
     final pInl0=pInl0,
     final TInl0=TInl0)
-    constrainedby PartialCompressor
     "Array of compressor models in parallel"
-    annotation (Placement(transformation(extent={{-10,10},{10,-10}})),
-                choicesAllMatching=true,
-                Dialog(tab="Compressors", group="General"));
+    annotation (Placement(transformation(extent={{-10,10},{10,-10}})));
+
+  /*To enable propagation of parameters, the simple compressor is introduced
+    as a replaceable model and its instance propagates all parameters
+    required.
+  */
 
   // Definition of parameters describing general options
   //
@@ -142,9 +151,15 @@ partial model PartialModularCompressors
 
   // Definition of replaceable controller model
   //
-  replaceable
+  replaceable model ModularController =
     Controls.HeatPump.ModularHeatPumps.ModularCompressorController
-    modCon(
+    constrainedby
+    Controls.HeatPump.ModularHeatPumps.BaseClasses.PartialModularController
+    "Model of the modular controller"
+    annotation (choicesAllMatching=true,
+                Dialog(tab="Controller", group="General"));
+
+  ModularController modCon(
     final nCom=nCom,
     final useExt=useExt,
     final controllerType=controllerType,
@@ -163,12 +178,13 @@ partial model PartialModularCompressors
     final xi_start=xi_start,
     final xd_start=xd_start,
     final y_start=y_start)
-    constrainedby
-    Controls.HeatPump.ModularHeatPumps.BaseClasses.PartialModularController
     "Model of internal controller"
-    annotation (Placement(transformation(extent={{-10,-78},{10,-58}})),
-                choicesAllMatching = true,
-                Dialog(tab="Controller", group="General"));
+    annotation (Placement(transformation(extent={{-10,-78},{10,-58}})));
+
+  /*To enable propagation of parameters, the modular compressor is introduced
+    as a replaceable model and its instance propagates all parameters
+    required.
+  */
 
   // Definition of parameters describing the expansion valve controller
   //
@@ -333,24 +349,24 @@ partial model PartialModularCompressors
 
   // Definition of parameters describing diagnostics
   //
-  parameter Boolean show_T[nCom] = fill(false, nCom)
+  parameter Boolean show_T = false
     "= true, if compressor's temperatures at port_a and port_b are computed"
     annotation(Dialog(tab="Advanced",group="Diagnostics"));
-  parameter Boolean show_V_flow[nCom] = fill(false, nCom)
+  parameter Boolean show_V_flow = false
     "= true, if compressor's volume flow rate at inflowing port is computed"
     annotation(Dialog(tab="Advanced",group="Diagnostics"));
-  parameter Boolean show_staEff[nCom] = fill(false, nCom)
+  parameter Boolean show_staEff = false
     "= true, if thermodynamic states and efficiencies are computed"
     annotation(Dialog(tab="Advanced",group="Diagnostics"),
                HideResult=true);
-  parameter Boolean show_qua[nCom] = fill(false, nCom)
+  parameter Boolean show_qua = false
     "= true, if vapour qualities are computed"
     annotation(Dialog(tab="Advanced",group="Diagnostics"),
                HideResult=true);
-  parameter Boolean show_parCom = false
+  parameter Boolean show_parCom = true
     "= true, if compressors' input parameters are shown in results"
     annotation(Dialog(tab="Advanced",group="Diagnostics"));
-  parameter Boolean show_parCon = false
+  parameter Boolean show_parCon = true
     "= true, if controller's input parameters are shown in results"
     annotation(Dialog(tab="Advanced",group="Diagnostics"));
 

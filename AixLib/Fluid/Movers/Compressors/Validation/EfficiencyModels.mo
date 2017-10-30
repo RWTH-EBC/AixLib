@@ -48,28 +48,26 @@ model EfficiencyModels
     redeclare package Medium = Medium,
     nPorts=1,
     use_T_in=true,
-    use_p_in=true)
-    "Source of constant pressure and temperature"
+    use_p_in=true) "Source of constant pressure and temperature"
     annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
   replaceable SimpleCompressors.RotaryCompressors.RotaryCompressor rotCom(
     redeclare package Medium = Medium,
     show_staEff=true,
     show_qua=true,
     useInpFil=false,
-    redeclare model VolumetricEfficiency =
-        Utilities.VolumetricEfficiency.ScrollCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_VarDisVol_Reciprocating,
-    redeclare model IsentropicEfficiency =
-        Utilities.IsentropicEfficiency.ScrollCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_VarDisVol_Scroll,
     redeclare model EngineEfficiency =
-        Utilities.EngineEfficiency.ScrollCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_VarDisVol_Scroll)
+        Utilities.EngineEfficiency.Generic.Poly_VarRef_VarDisVol_RotaryScroll,
+    redeclare model VolumetricEfficiency =
+        Utilities.VolumetricEfficiency.Generic.Poly_VarRef_VarDisVol_RotaryScroll,
+    redeclare model IsentropicEfficiency =
+        Utilities.IsentropicEfficiency.Generic.Poly_VarRef_VarDisVol_RotaryScroll)
     "Model of a rotary compressor"
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
   Sources.Boundary_pT sink(
     redeclare package Medium = Medium,
     use_T_in=true,
     use_p_in=true,
-    nPorts=1)
-    "Sink with constant pressure and temperature"
+    nPorts=1) "Sink with constant pressure and temperature"
     annotation (Placement(transformation(extent={{50,-10},{30,10}})));
 
 

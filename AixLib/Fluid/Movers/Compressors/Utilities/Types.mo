@@ -59,7 +59,7 @@ package Types
     annotation (Evaluate=true);
   type HeatTransferModels = enumeration(
       Simplified
-      "Calculation of heat transfer using logarithmic temperature difference")
+      "Calculation of heat transfer using simplified temperature difference")
     "Enumeration to define heat transfer models for calculations of heat losses"
     annotation (Evaluate=true);
   type SimpleCompressor = enumeration(
@@ -73,7 +73,6 @@ package Types
       "Simple rotary compressor with pressure and heat losses")
     "Enumeration to define simple compressor model"
     annotation (Evaluate=true);
-
   annotation (Documentation(revisions="<html>
 <ul>
   <li>

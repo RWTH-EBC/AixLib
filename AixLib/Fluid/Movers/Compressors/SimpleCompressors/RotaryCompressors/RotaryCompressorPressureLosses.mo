@@ -2,7 +2,8 @@ within AixLib.Fluid.Movers.Compressors.SimpleCompressors.RotaryCompressors;
 model RotaryCompressorPressureLosses
   "Model that describes a simple rotary compressor with pressure losses"
   extends BaseClasses.PartialCompressor(
-    redeclare final CompressionProcesses.RotaryCompression parCom,
+    redeclare final model CompressionProcess =
+    SimpleCompressors.CompressionProcesses.RotaryCompression,
     final simCom = Utilities.Types.SimpleCompressor.RotaryCompressorPressureLosses);
 
   // Definition of submodels and connectors
@@ -42,16 +43,16 @@ equation
   //
   connect(port_a, hydResInl.port_a)
     annotation (Line(points={{-100,0},{-80,0}}, color={0,127,255}));
-  connect(hydResInl.port_b, parCom.port_a)
+  connect(hydResInl.port_b,comPro.port_a)
     annotation (Line(points={{-60,0},{-10,0}}, color={0,127,255}));
-  connect(parCom.port_b, hydResOut.port_a)
+  connect(comPro.port_b, hydResOut.port_a)
     annotation (Line(points={{10,0},{60,0}}, color={0,127,255}));
   connect(hydResOut.port_b, port_b)
     annotation (Line(points={{80,0},{100,0}}, color={0,127,255}));
 
   // Connection of further components
   //
-  connect(parCom.heatPort, heatPort)
+  connect(comPro.heatPort, heatPort)
     annotation (Line(points={{0,-10},{0,-100}}, color={191,0,0}));
 
   annotation (Icon(graphics={
@@ -110,10 +111,6 @@ equation
           lineColor={0,0,0},
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid),
-        Text(
-          extent={{-100,-110},{100,-150}},
-          lineColor={0,0,255},
-          textString="%name"),
         Rectangle(
           extent={{-88,6},{-64,-6}},
           lineColor={0,0,0},

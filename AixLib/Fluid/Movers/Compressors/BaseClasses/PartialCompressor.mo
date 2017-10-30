@@ -124,7 +124,7 @@ partial model PartialCompressor
     "Effective mean thermal conductance between medium and fictitious wall 
     at outlet"
     annotation(Dialog(tab = "Heat losses",group="Thermal conductances"));
-  parameter Modelica.SIunits.ThermalConductance kAMeaAmb=10
+  parameter Modelica.SIunits.ThermalConductance kAMeaAmb=5
     "Effective mean thermal conductance coefficient between fictitious wall 
     and ambient"
     annotation(Dialog(tab = "Heat losses",group="Thermal conductances"));
@@ -192,15 +192,15 @@ partial model PartialCompressor
     annotation(Dialog(tab="Advanced",group="Initialisation"),
                HideResult=true);
 
-  // Definition of submodels and connectors
+  // Definition of submodels
   //
-  Modelica.Fluid.Interfaces.FluidPort_a port_a(
-    redeclare final package Medium=Medium,
-     m_flow(min=if allowFlowReversal then -Modelica.Constants.inf else 0),
-     h_outflow(start=Medium.h_default))
-    "Fluid connector a (positive design flow direction is from port_a to port_b)"
-    annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-  replaceable PartialCompression parCom(
+  replaceable model CompressionProcess =
+    SimpleCompressors.CompressionProcesses.RotaryCompression
+    constrainedby PartialCompression
+    "Model of the compression process"
+    annotation (choicesAllMatching=true);
+
+  CompressionProcess comPro(
     redeclare final package Medium = Medium,
     final VDis=VDis,
     final epsRef=epsRef,
@@ -224,8 +224,21 @@ partial model PartialCompressor
     final pInl0=pInl0,
     final TInl0=TInl0)
     "Model describing compression process"
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}})),
-                choicesAllMatching = true);
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+  /*To enable propagation of parameters, the compression process is introduced
+    as a replaceable model and its instance propagates all parameters
+    required.
+    */
+
+  // Definition of connectors
+  //
+  Modelica.Fluid.Interfaces.FluidPort_a port_a(
+    redeclare final package Medium=Medium,
+     m_flow(min=if allowFlowReversal then -Modelica.Constants.inf else 0),
+     h_outflow(start=Medium.h_default))
+    "Fluid connector a (positive design flow direction is from port_a to port_b)"
+    annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
   Modelica.Fluid.Interfaces.FluidPort_b port_b(
     redeclare final package Medium=Medium,
     m_flow(max=if allowFlowReversal then +Modelica.Constants.inf else 0),
@@ -257,10 +270,10 @@ partial model PartialCompressor
 equation
   // Connection of control signals
   //
-  connect(manVarCom, parCom.manVarCom)
+  connect(manVarCom,comPro. manVarCom)
     annotation (Line(points={{-60,100},{-60,40},{-6,40},{-6,10}},
                 color={0,0,127}));
-  connect(parCom.curManVarCom, curManVarCom)
+  connect(comPro.curManVarCom, curManVarCom)
     annotation (Line(points={{6,10},{6,40},{60,40},{60,100}},
                 color={0,0,127}));
 

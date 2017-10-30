@@ -17,7 +17,7 @@ model SimpleFictitiousWall
 
   // Definition of parameters describing advanced options
   //
-  parameter Modelica.SIunits.Temperature TWal0 = 293.15
+  parameter Modelica.SIunits.Temperature TWal0 = 343.15
     "Temperature of wall at initialisation"
     annotation (Dialog(tab="Advanced",group="Initialisation"));
 
@@ -40,17 +40,23 @@ model SimpleFictitiousWall
      annotation (Placement(transformation(extent={{-10,-32},{10,-12}}),
                  iconTransformation(extent={{-6,-26},{6,-14}})));
 
-protected
+  // Definition of parameters
+  //
   Modelica.SIunits.Temperature TWal(start=TWal0)
     "Temperature of fictitious wall";
+
+protected
   Modelica.SIunits.Power Q_flow_amb
     "Heat flow between ambient and fictitious wall";
+
+initial equation
+  der(TWal)=0;
 
 equation
   // Calculation of energy balance
   //
   mWal*cpWal*der(TWal) = heaPorComInl.Q_flow + heaPorCom.Q_flow +
-    heaPorComOut.Q_flow + Q_flow_amb
+    heaPorComOut.Q_flow - Q_flow_amb
     "Energy balance of fictitious wall";
   heaPorComInl.T = TWal "Connect temperature with heat port";
   heaPorCom.T = heaPorAmb.T "Connect temperature with heat port";
@@ -58,9 +64,10 @@ equation
 
   // Calculation of heat flow between ambient and fictious wall
   //
-  Q_flow_amb =kAMeaAmb*(heaPorAmb.T - TWal)
-                                        "Calculation of heat flow";
-  heaPorAmb.Q_flow = Q_flow_amb "Connect heat flow with heat port";
+  Q_flow_amb =kAMeaAmb*(TWal - heaPorAmb.T) "Calculation of heat flow";
+  heaPorAmb.Q_flow = -Q_flow_amb "Connect heat flow with heat port";
+
+  /*It is assumed that the heat flow flows out of the system*/
 
   annotation (Documentation(revisions="<html>
 <ul>

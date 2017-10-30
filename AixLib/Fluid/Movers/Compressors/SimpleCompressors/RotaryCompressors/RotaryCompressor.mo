@@ -2,18 +2,19 @@ within AixLib.Fluid.Movers.Compressors.SimpleCompressors.RotaryCompressors;
 model RotaryCompressor
   "Model that describes a simple rotary compressor"
   extends BaseClasses.PartialCompressor(
-    redeclare final CompressionProcesses.RotaryCompression parCom,
+    redeclare final model CompressionProcess =
+    SimpleCompressors.CompressionProcesses.RotaryCompression,
     final simCom = Utilities.Types.SimpleCompressor.RotaryCompressor);
 
 
 equation
   // Conncections of main components
   //
-  connect(port_a, parCom.port_a)
+  connect(port_a,comPro.port_a)
     annotation (Line(points={{-100,0},{-90,0},{-10,0}}, color={0,127,255}));
-  connect(parCom.port_b, port_b)
+  connect(comPro.port_b, port_b)
     annotation (Line(points={{10,0},{55,0},{100,0}}, color={0,127,255}));
-  connect(heatPort, parCom.heatPort)
+  connect(heatPort,comPro.heatPort)
     annotation (Line(points={{0,-100},{0,-100},{0,-78},{0,-10}},
                 color={191,0,0}));
 

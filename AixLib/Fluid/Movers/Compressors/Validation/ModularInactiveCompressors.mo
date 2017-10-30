@@ -30,8 +30,7 @@ model ModularInactiveCompressors
     use_T=true,
     p=pInl,
     T=TOut,
-    nPorts=1)
-    "Source with constant pressure and temperature"
+    nPorts=1) "Source with constant pressure and temperature"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={40,70})));
@@ -41,8 +40,6 @@ model ModularInactiveCompressors
     annotation (Placement(transformation(extent={{90,-10},{70,10}})));
   replaceable ModularCompressors.ModularCompressors modCom(
     nCom=nCom,
-    redeclare replaceable
-      SimpleCompressors.RotaryCompressors.RotaryCompressor modCom,
     redeclare package Medium = Medium,
     redeclare model EngineEfficiency =
         Utilities.EngineEfficiency.Generic.Poly_VarRef_VarDisVol_RotaryScroll,
@@ -52,7 +49,11 @@ model ModularInactiveCompressors
         Utilities.IsentropicEfficiency.RotaryCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_VarDisVol_Rotary,
     useExt=true,
     show_parCom=false,
-    show_parCon=false)
+    show_parCon=false,
+    redeclare model SimpleCompressor =
+        SimpleCompressors.RotaryCompressors.RotaryCompressor,
+    redeclare model ModularController =
+        Controls.HeatPump.ModularHeatPumps.ModularCompressorController)
     "Model of modular compressors in parallel"
     annotation (Placement(transformation(extent={{-18,-18},{18,18}},
                 rotation=-90,
@@ -67,8 +68,7 @@ model ModularInactiveCompressors
     redeclare package Medium = Medium,
     m_flow_start=0.025,
     m_flow_small=1e-6,
-    Kvs=1.4)
-    "Model of a simple valve to simulate pressure losses"
+    Kvs=1.4) "Model of a simple valve to simulate pressure losses"
     annotation (Placement(transformation(extent={{-10,10},{10,-10}},
                 rotation=-90,
                 origin={40,-40})));
@@ -78,15 +78,13 @@ model ModularInactiveCompressors
     use_T=true,
     nPorts=1,
     p=pInl,
-    T=TInl)
-    "Sink with constant pressure and temperature"
+    T=TInl) "Sink with constant pressure and temperature"
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
                 rotation=-90,
                 origin={40,-72})));
 
   Controls.Interfaces.ModularHeatPumpControlBus dataBus(
-    nCom=nCom)
-    "Connector that contains all control signals"
+    nCom=nCom) "Connector that contains all control signals"
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
                 rotation=-90,
                 origin={0,0})));

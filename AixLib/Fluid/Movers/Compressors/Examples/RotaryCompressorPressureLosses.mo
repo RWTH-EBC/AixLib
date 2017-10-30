@@ -47,9 +47,9 @@ model RotaryCompressorPressureLosses
     redeclare model EngineEfficiency =
         Utilities.EngineEfficiency.Generic.Poly_VarRef_VarDisVol_RotaryScroll,
     redeclare model VolumetricEfficiency =
-        Utilities.VolumetricEfficiency.RotaryCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_VarDisVol_Rotary,
+        Utilities.VolumetricEfficiency.Generic.Poly_VarRef_VarDisVol_RotaryScroll,
     redeclare model IsentropicEfficiency =
-        Utilities.IsentropicEfficiency.RotaryCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_VarDisVol_Rotary)
+        Utilities.IsentropicEfficiency.Generic.Poly_VarRef_VarDisVol_RotaryScroll)
     "Model of a rotary compressor"
     annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
 
@@ -63,8 +63,7 @@ model RotaryCompressorPressureLosses
     redeclare package Medium = Medium,
     m_flow_start=0.025,
     m_flow_small=1e-6,
-    Kvs=1.4)
-    "Model of a simple valve to simulate pressure losses"
+    Kvs=1.4) "Model of a simple valve to simulate pressure losses"
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
   Sources.FixedBoundary sink(
     redeclare package Medium = Medium,
@@ -72,8 +71,7 @@ model RotaryCompressorPressureLosses
     use_T=true,
     nPorts=1,
     p=pInl,
-    T=TInl)
-    "Sink with constant pressure and temperature"
+    T=TInl) "Sink with constant pressure and temperature"
     annotation (Placement(transformation(extent={{80,-10},{60,10}})));
 
 equation

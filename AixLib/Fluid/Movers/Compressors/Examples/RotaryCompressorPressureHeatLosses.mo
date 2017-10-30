@@ -28,8 +28,7 @@ model RotaryCompressorPressureHeatLosses
     use_T=true,
     nPorts=1,
     p=pInl,
-    T=TOut)
-    "Source with constant pressure and temperature"
+    T=TOut) "Source with constant pressure and temperature"
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
   Modelica.Blocks.Sources.Sine rotSpe(
     amplitude=40,
@@ -48,9 +47,12 @@ model RotaryCompressorPressureHeatLosses
     redeclare model EngineEfficiency =
         Utilities.EngineEfficiency.Generic.Poly_VarRef_VarDisVol_RotaryScroll,
     redeclare model VolumetricEfficiency =
-        Utilities.VolumetricEfficiency.RotaryCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_VarDisVol_Rotary,
+        Utilities.VolumetricEfficiency.Generic.Poly_VarRef_VarDisVol_RotaryScroll,
     redeclare model IsentropicEfficiency =
-        Utilities.IsentropicEfficiency.RotaryCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_VarDisVol_Rotary)
+        Utilities.IsentropicEfficiency.Generic.Poly_VarRef_VarDisVol_RotaryScroll,
+    kAMeaInl=5,
+    kAMeaOut=15,
+    kAMeaAmb=3)
     "Model of a rotary compressor"
     annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
 
@@ -64,18 +66,18 @@ model RotaryCompressorPressureHeatLosses
     redeclare package Medium = Medium,
     m_flow_start=0.025,
     m_flow_small=1e-6,
-    Kvs=1.4)
-    "Model of a simple valve to simulate pressure losses"
+    Kvs=1.4) "Model of a simple valve to simulate pressure losses"
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
-  Sources.FixedBoundary sink(
+  MixingVolumes.MixingVolume sink(
     redeclare package Medium = Medium,
-    use_p=true,
-    use_T=true,
-    nPorts=1,
-    p=pInl,
-    T=TInl)
-    "Sink with constant pressure and temperature"
-    annotation (Placement(transformation(extent={{80,-10},{60,10}})));
+    V=10e-3,
+    m_flow_nominal=0.1,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
+    massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
+    nPorts=1) "Sink with constant pressure and temperature"
+    annotation (Placement(transformation(extent={{10,-10},{-10,10}},
+        rotation=-90,
+        origin={70,0})));
 
 equation
   // Connection of components
@@ -85,7 +87,8 @@ equation
   connect(rotCom.port_b, simVal.port_a)
     annotation (Line(points={{-10,0},{6,0},{20,0}}, color={0,127,255}));
   connect(simVal.port_b, sink.ports[1])
-    annotation (Line(points={{40,0},{50,0},{60,0}}, color={0,127,255}));
+    annotation (Line(points={{40,0},{60,0},{60,1.77636e-015}},
+                                                    color={0,127,255}));
   connect(rotSpe.y, rotCom.manVarCom)
     annotation (Line(points={{-59,40},{-26,40},{-26,10}}, color={0,0,127}));
   connect(valOpe.y, simVal.opening)

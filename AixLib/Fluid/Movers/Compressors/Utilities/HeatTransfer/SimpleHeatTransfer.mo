@@ -42,8 +42,8 @@ protected
   Medium.ThermodynamicState staOut
     "Thermodynamic state at outlet";
 
-  Modelica.SIunits.TemperatureDifference logTemDif
-    "Logarithmic temperature difference between medium and wall";
+  Modelica.SIunits.TemperatureDifference effTemDif
+    "Effective temperature difference between medium and wall";
   Modelica.SIunits.Power Q_flow
     "Heat flow exchanged between medium and heat port";
 
@@ -57,12 +57,15 @@ equation
 
   // Calculation of heat flow
   //
-  logTemDif = (Medium.temperature(staOut)-Medium.temperature(staInl))/
-    log(max((Medium.temperature(staOut)-heatPort.T)/
-    (Medium.temperature(staInl)-heatPort.T),1e-6))
-    "Logarithmic temperature difference between medium and fictitious wall";
   if heaTraMod == Types.HeatTransferModels.Simplified then
-    Q_flow = kAMea*logTemDif "Simplified calculation of heat transfer";
+    effTemDif = (Medium.temperature(staOut)+Medium.temperature(staInl))/2-
+      heatPort.T
+      "Effective temperature difference between medium and fictitious wall";
+    Q_flow = kAMea*effTemDif "Simplified calculation of heat transfer";
+
+    /*It is assumed that the heat flow flows out of the system and, thus, a 
+      heat flow flowing out of the system has a positive algebraic sign.
+    */
   else
     assert(false, "Invalid choice of heat transfer model");
   end if;
