@@ -41,12 +41,10 @@ model PumpRadiatorValve
   Modelica.Blocks.Sources.Constant Source_Temp(k = 273.15 + 20) annotation(Placement(transformation(extent = {{60, 80}, {80, 100}})));
   Modelica.Blocks.Sources.Sine Source_opening(freqHz = 1 / 86400, offset = 0.5, startTime = -21600, amplitude = 0.49) annotation(Placement(transformation(extent = {{10, 60}, {30, 80}})));
   Modelica.Blocks.Sources.Constant Source_TempSet_Boiler(k = 273.15 + 75) annotation(Placement(transformation(extent = {{0, 60}, {-20, 80}})));
-  AixLib.Fluid.HeatExchangers.HeaterCooler_T hea(
+  AixLib.Fluid.HeatExchangers.Heater_T       hea(
     redeclare package Medium = Medium,
     m_flow_nominal=0.01,
-    dp_nominal=0,
-    Q_flow_maxHeat=20000,
-    Q_flow_maxCool=0)
+    dp_nominal=0)
     annotation (Placement(transformation(extent={{-26,10},{-6,30}})));
 equation
   connect(pipe1.port_b, pump.port_a) annotation(Line(points = {{-30, -20}, {-60, -20}, {-60, 20}, {-54, 20}}, color = {0, 127, 255}));
@@ -66,8 +64,8 @@ equation
     annotation (Line(points={{4,20},{-2,20},{-6,20}}, color={0,127,255}));
   connect(pump.port_b, hea.port_a)
     annotation (Line(points={{-34,20},{-30,20},{-26,20}}, color={0,127,255}));
-  connect(hea.TSet, Source_TempSet_Boiler.y) annotation (Line(points={{-28,26},
-          {-32,26},{-32,70},{-21,70}}, color={0,0,127}));
+  connect(hea.TSet, Source_TempSet_Boiler.y) annotation (Line(points={{-28,28},
+          {-32,28},{-32,70},{-21,70}}, color={0,0,127}));
   connect(AirTemp.port, radiator.ConvectiveHeat) annotation (Line(points={{112,64},
           {118,64},{118,22},{120.8,22}}, color={191,0,0}));
   connect(radiator.RadiativeHeat, RadTemp.port) annotation (Line(points={{127.4,

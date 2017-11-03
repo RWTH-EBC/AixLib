@@ -47,12 +47,10 @@ model RoomGFOw2_DayNightMode
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor annotation(Placement(transformation(extent = {{-5, -5}, {5, 5}}, rotation = 270, origin = {23, -5})));
   Modelica.Blocks.Interfaces.RealOutput TRoom
     "Absolute temperature as output signal"                                           annotation(Placement(transformation(extent = {{90, -20}, {110, 0}})));
-  AixLib.Fluid.HeatExchangers.HeaterCooler_T hea(
+  AixLib.Fluid.HeatExchangers.Heater_T       hea(
     redeclare package Medium = Medium,
     m_flow_nominal=0.01,
-    dp_nominal=0,
-    Q_flow_maxHeat=20000,
-    Q_flow_maxCool=0)
+    dp_nominal=0)
     annotation (Placement(transformation(extent={{-50,-36},{-30,-16}})));
 equation
   connect(varTemp.port, room_GF_2OW.thermOutside) annotation(Line(points = {{-38, 48}, {17.8, 48}, {17.8, 42.2}}, color = {191, 0, 0}));
@@ -93,7 +91,7 @@ equation
           {-50,-26}}, color={0,127,255}));
 
   connect(Tset_flowTemperature.y, hea.TSet) annotation (Line(points={{-61.5,-1},
-          {-58,-1},{-58,-20},{-52,-20}}, color={0,0,127}));
+          {-58,-1},{-58,-18},{-52,-18}}, color={0,0,127}));
   annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
             -100},{100,100}}),                                                                           graphics={  Text(extent = {{-56, -44}, {82, -130}}, lineColor = {0, 0, 255}, textString = "Set initial values for iteration variables (list given by translate, usually pressure drops). Rule of thumb: valves 1000 Pa, pipes 100 Pa. Simulation may still work without some of them, but  it gives warning of division by zero at initialization.
  ")}), experiment(StopTime = 86400, Interval = 60, __Dymola_Algorithm = "Lsodar"), experimentSetupOutput(events = false), Documentation(info = "<html>

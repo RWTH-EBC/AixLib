@@ -180,8 +180,6 @@ equation
     Documentation(info="<html>
 <h4><font color=\"#008000\">Overview</font></h4>
 <p>The <b>WindowSimple</b> model represents a window described by the thermal transmission coefficient and the coefficient of solar energy transmission( with correction factors). </p>
-<p><br/><h4><font color=\"#008000\">Level of Development</font></h4>
-<p><img src=\"modelica://AixLib/Resources/Images/Stars/stars5.png\" alt=\"stars: 5 out of 5\"/></p>
 <h4><font color=\"#008000\">Concept</font></h4>
 <p>Phenomena being simulated: </p>
 <ul>

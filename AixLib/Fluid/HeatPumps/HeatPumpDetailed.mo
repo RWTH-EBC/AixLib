@@ -344,11 +344,13 @@ equation
 
   if heatLosses_con then
     connect(T_ambInternal, T_amb);
+    connect(heatConv.port_b, condenser.heatPort);
   else
-    connect(varTemp.T, dummyZero.y);
+    connect(T_ambInternal, dummyZero.y);
   end if;
   connect(varTemp.T, T_ambInternal);
-  connect(varTemp.port, heatConv.port_a);
+  connect(varTemp.port, heatConv.port_a) annotation (Line(points={{100,86},{104,
+        86},{104,74},{74,74},{74,62},{80,62}}, color={191,0,0}));
 
   //fluid connections evaporator
   connect(T_evaOut.port_b, port_evaOut) annotation (Line(
@@ -488,9 +490,6 @@ equation
 <li>Polynom<br/>a) depending on evaporator input temperature, condenser output temperature and variable speed (via conditional speed connector) for capacity controlled heat pumps <br/>b) depending on evaporator input temperature, condenser output temperature and nominal speed for on/off-controlled heat pump </li>
 <li>Table data according for on/off-controlled heat pump, depending on evaporator input temperature, condenser output temperature </li>
 </ol>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\"
-    alt=\"stars: 3 out of 5\"/></p>
 <h4><span style=\"color:#008000\">Assumptions</span></h4>
 <p>Correction models of the calculation can be activated that effect the efficiency or the start-up and shut-off behavior of the heat pump. </p>
 <ol>
