@@ -36,7 +36,7 @@ public
         iconTransformation(extent={{76,-20},{116,20}})));
 equation
   // balances
-  enthalpyPort_b.m_flow = -dotm_setValue " set value of outlet port ";
+  enthalpyPort_b.m_flow = dotm_setValue " set value of outlet port ";
   enthalpyPort_b.c = cp " set value of outlet port ";
 
   // constant values
