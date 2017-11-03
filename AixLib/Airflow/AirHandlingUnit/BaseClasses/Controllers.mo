@@ -270,7 +270,7 @@ model")}),                                                         Diagram(
         annotation (Placement(transformation(extent={{-296,-184},{-276,-164}})));
       Modelica.Blocks.Sources.Constant mFlowAirNom(k=5.1)
         "nominal mass flow rate of air in supply air vent in kg/s" annotation (
-          Placement(transformation(extent={{-354,-196},{-334,-176}})));
+          Placement(transformation(extent={{-362,-190},{-342,-170}})));
       Modelica.Blocks.Sources.Constant valOpeningY02(k=0) "opening of Y02"
         annotation (Placement(transformation(extent={{-222,202},{-202,222}})));
       Modelica.Blocks.Continuous.LimPID PID(
@@ -383,8 +383,8 @@ model")}),                                                         Diagram(
           string="%second",
           index=1,
           extent={{6,3},{6,3}}));
-      connect(mFlowAirNom.y, mFlowAbsPart.u2) annotation (Line(points={{-333,
-              -186},{-316,-186},{-316,-180},{-298,-180}}, color={0,0,127}));
+      connect(mFlowAirNom.y, mFlowAbsPart.u2) annotation (Line(points={{-341,
+              -180},{-298,-180}},                         color={0,0,127}));
       connect(gainAbs.y, busActors.mWatAbsorber) annotation (Line(points={{-197,
               -148},{-197,-148},{-68,-148},{-68,-69.64},{101.375,-69.64}},
             color={0,0,127}), Text(
@@ -422,6 +422,12 @@ model")}),                                                         Diagram(
       connect(absHumSet1.absHum, busActors.mWatSteamHumid) annotation (Line(
             points={{-113.4,-118},{-68,-118},{-68,-69.64},{101.375,-69.64}},
             color={0,0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(absHumSet1.p_In, busSensors.P01) annotation (Line(points={{-134.6,
+              -124.8},{-336,-124.8},{-336,-63.61},{-388.575,-63.61}}, color={0,
+              0,127}), Text(
           string="%second",
           index=1,
           extent={{6,3},{6,3}}));

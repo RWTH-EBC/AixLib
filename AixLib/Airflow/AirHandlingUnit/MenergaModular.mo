@@ -217,7 +217,7 @@ model MenergaModular "A modular model of the Menerga SorpSolair"
     m1_flow_nominal=5.1,
     m2_flow_nominal=0.1)
     annotation (Placement(transformation(extent={{-430,10},{-450,30}})));
-  ComponentsAHU.RecuperatorSimple recuperator(
+  ComponentsAHU.Recuperator       recuperator(
     redeclare package Medium1 = MediumAir,
     redeclare package Medium2 = MediumAir,
     m1_flow_nominal=5.1,
@@ -226,6 +226,8 @@ model MenergaModular "A modular model of the Menerga SorpSolair"
   ComponentsAHU.sorptionDehumidification sorptionDehumidification(redeclare
       package Medium1 = MediumAir, redeclare package Medium2 = MediumAir)
     annotation (Placement(transformation(extent={{48,132},{82,216}})));
+  Modelica.Blocks.Sources.BooleanExpression booleanExpression
+    annotation (Placement(transformation(extent={{-220,164},{-240,184}})));
 equation
   connect(exhaustAir, T02_senTemExh.port_a) annotation (Line(points={{-640,302},
           {-598,302}},            color={162,29,33}));
@@ -454,12 +456,8 @@ equation
     annotation (Line(points={{-450,26},{-486,26}}, color={0,127,255}));
   connect(watOutHeaCoi, watOutHeaCoi)
     annotation (Line(points={{-428,-100},{-428,-100}}, color={0,127,255}));
-  connect(recuperator.mWat_evaporator, busActors.mWatEvaporator) annotation (
-      Line(points={{-380.4,204.1},{-380.4,364.1},{-186.1,364.1}}, color={0,0,
-          127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
+  connect(booleanExpression.y, recuperator.adiCoo) annotation (Line(points={{
+          -241,174},{-276,174},{-276,172.6},{-309.72,172.6}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-640,-100},
             {360,360}}), graphics={Rectangle(
           extent={{-638,358},{360,-100}},
@@ -474,5 +472,9 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Menerga 
 SorpSolair")}),                                                  Diagram(
-        coordinateSystem(preserveAspectRatio=false, extent={{-640,-100},{360,360}})));
+        coordinateSystem(preserveAspectRatio=false, extent={{-640,-100},{360,360}}),
+        graphics={Text(
+          extent={{-260,224},{-106,168}},
+          lineColor={28,108,200},
+          textString="Boole in den Bus integrieren")}));
 end MenergaModular;

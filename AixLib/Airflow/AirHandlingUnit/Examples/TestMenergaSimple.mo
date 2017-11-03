@@ -27,9 +27,10 @@ model TestMenergaSimple
   Fluid.Sources.Boundary_pT exhaustAir(
     redeclare package Medium = MediumAir,
     nPorts=1,
-    X={0.03,0.97},
     p=100000,
-    T=296.15) "Source for exhaust air"
+    T=296.15,
+    X={0.02,0.98})
+              "Source for exhaust air"
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
   Fluid.Sources.Boundary_pT exitAir(
     redeclare package Medium = MediumAir,
