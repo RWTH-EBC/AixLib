@@ -62,7 +62,5 @@ algorithm
  </html>", info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>Determines the position of the given input(s) in the weather vector of the <a href=\"Building.Components.Weather.Weather\">weather</a> model. </p>
- <h4><font color=\"#008000\">Level of Development</font></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  </html>"));
 end DeterminePositionsInWeatherVector;

@@ -48,8 +48,6 @@ equation
           thickness=1)}),    Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Simple light heat source model.</p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://AixLib/Resources/Images/Stars/stars2.png\" alt=\"stars: 2 out of 5\"/></p>
 <h4><span style=\"color:#008000\">Known limitation</span></h4>
 <p>The parameter <b>A</b> cannot be set by default since other models must be able to implement their own equations for <b>A</b>. For a model with variable area <b>A</b> refer to <a href=\"Building.Components.Sources.InternalGains.Lights.Lights_Avar\">Lights_Avar</a>.</p>
 <p>The input signal can take values from 0 to an arbitrary maximum value. </p>
