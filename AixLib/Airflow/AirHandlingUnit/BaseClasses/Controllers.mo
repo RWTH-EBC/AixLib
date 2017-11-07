@@ -21,8 +21,8 @@ package Controllers "contains all the control models"
       annotation (Placement(transformation(extent={{-26,-36},{24,14}})));
   equation
     if true then
-      //connect(pN_intern_optimal.busActors, busActors);
-      connect(development.busActors, busActors);
+      connect(pN_intern_optimal.busActors, busActors);
+      //connect(development.busActors, busActors);
     end if;
 
     connect(busSensors, development.busSensors) annotation (Line(
@@ -338,13 +338,13 @@ model")}),                                                         Diagram(
           index=1,
           extent={{6,3},{6,3}}));
       connect(InletFlow_mflow3.y, busActors.mWatEvaporator) annotation (Line(
-            points={{-199,-214},{-68,-214},{-68,-69.64},{101.375,-69.64}},
+            points={{-199,-214},{-68,-214},{-68,-70},{101,-70}},
             color={0,0,127}), Text(
           string="%second",
           index=1,
           extent={{6,3},{6,3}}));
       connect(InletFlow_mflowDes.y, busActors.mWatDesorber) annotation (Line(
-            points={{-199,-180},{-68,-180},{-68,-69.64},{101.375,-69.64}},
+            points={{-199,-180},{-68,-180},{-68,-70},{101,-70}},
             color={0,0,127}), Text(
           string="%second",
           index=1,
@@ -370,7 +370,7 @@ model")}),                                                         Diagram(
       connect(T01_Set.y, valOpeHeaCoi.u_s) annotation (Line(points={{-477,-248},
               {-477,-248},{-222,-248}}, color={0,0,127}));
       connect(valOpeHeaCoi.y, busActors.openValveHeatCoil) annotation (Line(
-            points={{-199,-248},{101.375,-248},{101.375,-69.64}}, color={0,0,
+            points={{-199,-248},{101,-248},{101,-70}},            color={0,0,
               127}), Text(
           string="%second",
           index=1,
@@ -386,7 +386,7 @@ model")}),                                                         Diagram(
       connect(mFlowAirNom.y, mFlowAbsPart.u2) annotation (Line(points={{-341,
               -180},{-298,-180}},                         color={0,0,127}));
       connect(gainAbs.y, busActors.mWatAbsorber) annotation (Line(points={{-197,
-              -148},{-197,-148},{-68,-148},{-68,-69.64},{101.375,-69.64}},
+              -148},{-197,-148},{-68,-148},{-68,-70},{101,-70}},
             color={0,0,127}), Text(
           string="%second",
           index=1,
@@ -414,7 +414,7 @@ model")}),                                                         Diagram(
           index=1,
           extent={{6,3},{6,3}}));
       connect(absHumSet1.Tem, busSensors.T01) annotation (Line(points={{-134.6,
-              -112.2},{-336,-112.2},{-336,-63.61},{-388.575,-63.61}}, color={0,
+              -112},{-336,-112},{-336,-63.61},{-388.575,-63.61}},     color={0,
               0,127}), Text(
           string="%second",
           index=1,
@@ -426,7 +426,7 @@ model")}),                                                         Diagram(
           index=1,
           extent={{6,3},{6,3}}));
       connect(absHumSet1.p_In, busSensors.P01) annotation (Line(points={{-134.6,
-              -124.8},{-336,-124.8},{-336,-63.61},{-388.575,-63.61}}, color={0,
+              -124},{-336,-124},{-336,-63.61},{-388.575,-63.61}},     color={0,
               0,127}), Text(
           string="%second",
           index=1,
@@ -470,12 +470,8 @@ model")}),                                                         Diagram(
         annotation (Placement(transformation(extent={{-80,-134},{-60,-114}})));
       PN_Steuerung.Ebene2.KE kE
         annotation (Placement(transformation(extent={{-80,-164},{-60,-144}})));
-      Modelica.Blocks.Sources.Constant Hilfskonstante(k=0.5)
-        annotation (Placement(transformation(extent={{-150,-84},{-130,-64}})));
-      Modelica.Blocks.Sources.Constant Hilfskonstante1(k=0.5)
-        annotation (Placement(transformation(extent={{-186,172},{-166,192}})));
       Modelica.Blocks.Sources.Constant valOpeningY01(k=1) "opening of Y01"
-        annotation (Placement(transformation(extent={{152,232},{172,252}})));
+        annotation (Placement(transformation(extent={{136,232},{156,252}})));
       Modelica.Blocks.Sources.Constant valOpeningY03(k=0) "opening of damper Y03"
         annotation (Placement(transformation(extent={{148,170},{168,190}})));
       Modelica.Blocks.Sources.Constant valOpeningY04(k=1) "opening of damper Y04"
@@ -486,7 +482,8 @@ model")}),                                                         Diagram(
         annotation (Placement(transformation(extent={{144,66},{164,86}})));
       Modelica.Blocks.Sources.Constant valOpeningY07(k=1) "opening of damper Y07"
         annotation (Placement(transformation(extent={{148,30},{168,50}})));
-      Modelica.Blocks.Sources.Constant valOpeningY08(k=1) "opening of damper Y08"
+      Modelica.Blocks.Sources.Constant valOpeningY08(k=1)
+        "opening of damper Y08"
         annotation (Placement(transformation(extent={{146,-8},{166,12}})));
       Modelica.Blocks.Sources.Constant InletFlow_mflow(k=5.1)
         "nominal mass flow rate in outside air fan"
@@ -497,32 +494,27 @@ model")}),                                                         Diagram(
       Modelica.Blocks.Sources.Constant exhaust_mflow(k=5.1)
         "nominal mass flow for exhaust air fan"
         annotation (Placement(transformation(extent={{144,-126},{164,-106}})));
-      Modelica.Blocks.Sources.Constant InletFlow_mflow3(k=0.2)
-        "water mass flow in absorber"
-        annotation (Placement(transformation(extent={{144,-264},{164,-244}})));
-      Modelica.Blocks.Sources.Constant InletFlow_mflowDes(k=0.1)
-        "water mass flow in desorber"
-        annotation (Placement(transformation(extent={{144,-228},{164,-208}})));
-      Modelica.Blocks.Continuous.LimPID valOpeHeaCoi( yMax=1, yMin=0,
-        Td=10,
-        controllerType=Modelica.Blocks.Types.SimpleController.PI,
-        Ti=80,
-        k=0.06) "opening of the three way valve in the heating coil circuit"
-        annotation (Placement(transformation(extent={{142,-300},{162,-280}})));
-      Modelica.Blocks.Sources.Constant SteamHumid_Xw(k=9)
-        "nominal mass flow for exhaust air fan"
-        annotation (Placement(transformation(extent={{144,-164},{164,-144}})));
-      Modelica.Blocks.Math.Gain gainAbs(k=0.1)
-        "gain for absorber water mass flow" annotation (Placement(
-            transformation(extent={{144,-198},{164,-178}})));
-      Modelica.Blocks.Math.Division mFlowAbsPart
-        "gives the part of the mass flow rate that goes through the absorber"
-        annotation (Placement(transformation(extent={{92,-198},{112,-178}})));
-      Modelica.Blocks.Sources.Constant mFlowAirNom(k=5.1)
-        "nominal mass flow rate of air in supply air vent in kg/s" annotation (
-          Placement(transformation(extent={{58,-220},{78,-200}})));
-      Modelica.Blocks.Sources.Constant T_Set_T01(k=T_Set) "Setpoint for T01"
-        annotation (Placement(transformation(extent={{50,-300},{70,-280}})));
+      Modelica.Blocks.Sources.Constant valOpeningY9( k=1)
+        "opening of damper Y09"
+        annotation (Placement(transformation(extent={{190,-148},{210,-128}})));
+      Modelica.Blocks.Sources.Constant valOpeningY10(k=1)
+        "opening of damper Y10"
+        annotation (Placement(transformation(extent={{192,-182},{212,-162}})));
+      Modelica.Blocks.Sources.Constant valOpeningY11(k=1)
+        "opening of damper Y11"
+        annotation (Placement(transformation(extent={{192,-214},{212,-194}})));
+      Modelica.Blocks.Sources.Constant pumpN04(k=1)
+        "heating coil pump supply air"
+        annotation (Placement(transformation(extent={{192,-250},{212,-230}})));
+      Modelica.Blocks.Sources.Constant pumpN05(k=1)
+        "heating coil pump regeneration air"
+        annotation (Placement(transformation(extent={{192,-284},{212,-264}})));
+      Modelica.Blocks.Sources.BooleanExpression pumpN06
+        annotation (Placement(transformation(extent={{192,-316},{212,-296}})));
+      Modelica.Blocks.Sources.BooleanExpression pumpN07
+        annotation (Placement(transformation(extent={{192,-344},{212,-324}})));
+      Modelica.Blocks.Sources.BooleanExpression pumpN08
+        annotation (Placement(transformation(extent={{192,-372},{212,-352}})));
     equation
       connect(dD.RegAnf, regAnforderung.RegAnf) annotation (Line(points={{-80.6,
               86},{-100,86},{-100,132},{-125.4,132}},
@@ -531,7 +523,7 @@ model")}),                                                         Diagram(
               10.5714},{100,10.5714},{100,210},{149.2,210}},          color={
               255,127,0}));
       connect(valve_Y02.T_measure, busSensors.T01) annotation (Line(points={{149.2,
-              202.2},{118,202.2},{118,228},{-227.78,228},{-227.78,-7.75}},
+              202.2},{120,202.2},{120,202},{-227.78,202},{-227.78,-7.75}},
             color={0,0,127}), Text(
           string="%second",
           index=1,
@@ -581,26 +573,6 @@ model")}),                                                         Diagram(
               34,-154},{34,-8.28571},{38.9444,-8.28571}}, color={255,127,0}));
       connect(dD.DD_Out, modeSwitch.DD) annotation (Line(points={{-59.4,86},{8,
               86},{8,25.3143},{38.9444,25.3143}}, color={255,127,0}));
-      connect(hD.Y02_signal, Hilfskonstante.y) annotation (Line(points={{-80.6,
-              4.2},{-120,4.2},{-120,-74},{-129,-74}}, color={0,0,127}));
-      connect(hD.Y09_signal, Hilfskonstante.y) annotation (Line(points={{-80.6,
-              0.2},{-120,0.2},{-120,-74},{-129,-74}},     color={0,0,127}));
-      connect(hB.Y02_signal, Hilfskonstante.y) annotation (Line(points={{-80.6,
-              -25.8},{-120,-25.8},{-120,-74},{-129,-74}},     color={0,0,127}));
-      connect(hB.Y09_signal, Hilfskonstante.y) annotation (Line(points={{-80.6,
-              -29.8},{-120,-29.8},{-120,-74},{-129,-74}},     color={0,0,127}));
-      connect(pN_Steuerung_Ebene1_1.T_CoolIn, Hilfskonstante1.y) annotation (
-          Line(points={{-142.6,187},{-153.3,187},{-153.3,182},{-165,182}},
-            color={0,0,127}));
-      connect(pN_Steuerung_Ebene1_1.phi_03, Hilfskonstante1.y) annotation (Line(
-            points={{-142.6,183},{-153.3,183},{-153.3,182},{-165,182}}, color={
-              0,0,127}));
-      connect(pN_Steuerung_Ebene1_1.phi_01, Hilfskonstante1.y) annotation (Line(
-            points={{-142.6,179},{-154.3,179},{-154.3,182},{-165,182}}, color={
-              0,0,127}));
-      connect(pN_Steuerung_Ebene1_1.signal_Y06, Hilfskonstante1.y) annotation (
-          Line(points={{-142.6,175},{-154.3,175},{-154.3,182},{-165,182}},
-            color={0,0,127}));
       connect(valOpeningY03.y, busActors.openingY03) annotation (Line(points={{169,180},
               {230,180},{230,2.2},{283.185,2.2}},                 color={0,0,
               127}), Text(
@@ -655,58 +627,102 @@ model")}),                                                         Diagram(
           string="%second",
           index=1,
           extent={{6,3},{6,3}}));
-      connect(InletFlow_mflow3.y, busActors.mWatEvaporator) annotation (Line(
-            points={{165,-254},{230,-254},{230,2.2},{283.185,2.2}},
+      connect(valOpeningY01.y, busActors.openingY01) annotation (Line(points={{157,242},
+              {157,240},{230,240},{230,2.2},{283.185,2.2}},
             color={0,0,127}), Text(
           string="%second",
           index=1,
           extent={{6,3},{6,3}}));
-      connect(InletFlow_mflowDes.y, busActors.mWatDesorber) annotation (Line(
-            points={{165,-218},{230,-218},{230,2.2},{283.185,2.2}},
-            color={0,0,127}), Text(
+      connect(valOpeningY9.y, busActors.openingY09) annotation (Line(points={{
+              211,-138},{230,-138},{230,2.2},{283.185,2.2}}, color={0,0,127}),
+          Text(
           string="%second",
           index=1,
           extent={{6,3},{6,3}}));
-      connect(valOpeningY01.y, busActors.openingY01) annotation (Line(points={{173,242},
-              {173,240},{230,240},{230,2.2},{283.185,2.2}},
-            color={0,0,127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(valOpeHeaCoi.y, busActors.openValveHeatCoil) annotation (Line(
-            points={{163,-290},{230,-290},{230,2.2},{283.185,2.2}},
-                                                                  color={0,0,
-              127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(SteamHumid_Xw.y, busActors.mWatSteamHumid) annotation (Line(
-            points={{165,-154},{230,-154},{230,2.2},{283.185,2.2}}, color={0,0,
-              127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(mFlowAbsPart.y,gainAbs. u) annotation (Line(points={{113,-188},{
-              142,-188}},                          color={0,0,127}));
-      connect(mFlowAbsPart.u1, busSensors.mFlowAbs) annotation (Line(points={{90,-182},
-              {-228,-182},{-228,-7.75},{-227.78,-7.75}},               color={0,
+      connect(valOpeningY10.y, busActors.openingY10) annotation (Line(points={{
+              213,-172},{230,-172},{230,2},{283.185,2},{283.185,2.2}}, color={0,
               0,127}), Text(
           string="%second",
           index=1,
           extent={{6,3},{6,3}}));
-      connect(mFlowAirNom.y,mFlowAbsPart. u2) annotation (Line(points={{79,-210},
-              {86,-210},{86,-194},{90,-194}},             color={0,0,127}));
-      connect(gainAbs.y, busActors.mWatAbsorber) annotation (Line(points={{165,
-              -188},{230,-188},{230,2.2},{283.185,2.2}},
+      connect(valOpeningY11.y, busActors.openingY11) annotation (Line(points={{
+              213,-204},{230,-204},{230,2},{283.185,2},{283.185,2.2}}, color={0,
+              0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(pumpN04.y, busActors.pumpN04) annotation (Line(points={{213,-240},
+              {224,-240},{224,-238},{230,-238},{230,2.2},{283.185,2.2}}, color=
+              {0,0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(pumpN05.y, busActors.pumpN05) annotation (Line(points={{213,-274},
+              {230,-274},{230,2},{283.185,2},{283.185,2.2}}, color={0,0,127}),
+          Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(pumpN06.y, busActors.pumpN06) annotation (Line(points={{213,-306},
+              {230,-306},{230,2.2},{283.185,2.2}}, color={255,0,255}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(pumpN07.y, busActors.pumpN07) annotation (Line(points={{213,-334},
+              {230,-334},{230,2.2},{283.185,2.2}}, color={255,0,255}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(pumpN08.y, busActors.pumpN08) annotation (Line(points={{213,-362},
+              {230,-362},{230,2.2},{283.185,2.2}}, color={255,0,255}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(hD.Y02_signal, busSensors.Y02_actual) annotation (Line(points={{
+              -80.6,4.2},{-151.3,4.2},{-151.3,-7.75},{-227.78,-7.75}}, color={0,
+              0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(hD.Y09_signal, busSensors.Y09_actual) annotation (Line(points={{
+              -80.6,0.2},{-151.3,0.2},{-151.3,-7.75},{-227.78,-7.75}}, color={0,
+              0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(hB.Y02_signal, busSensors.Y02_actual) annotation (Line(points={{
+              -80.6,-25.8},{-151.3,-25.8},{-151.3,-7.75},{-227.78,-7.75}},
             color={0,0,127}), Text(
           string="%second",
           index=1,
           extent={{6,3},{6,3}}));
-      connect(T_Set_T01.y, valOpeHeaCoi.u_s)
-        annotation (Line(points={{71,-290},{140,-290}}, color={0,0,127}));
-      connect(valOpeHeaCoi.u_m, busSensors.T01) annotation (Line(points={{152,
-              -302},{152,-326},{-227.78,-326},{-227.78,-7.75}}, color={0,0,127}),
-          Text(
+      connect(hB.Y09_signal, busSensors.Y09_actual) annotation (Line(points={{
+              -80.6,-29.8},{-151.3,-29.8},{-151.3,-7.75},{-227.78,-7.75}},
+            color={0,0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(pN_Steuerung_Ebene1_1.T_Rek, busSensors.T_Rek) annotation (Line(
+            points={{-142.6,187},{-142.6,188},{-227.78,188},{-227.78,-7.75}},
+            color={0,0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(pN_Steuerung_Ebene1_1.phi_03, busSensors.T03_RelHum) annotation (
+          Line(points={{-142.6,183},{-142.6,183.5},{-227.78,183.5},{-227.78,
+              -7.75}}, color={0,0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(pN_Steuerung_Ebene1_1.phi_01, busSensors.T01_RelHum) annotation (
+          Line(points={{-142.6,179},{-142.6,180},{-227.78,180},{-227.78,-7.75}},
+            color={0,0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(pN_Steuerung_Ebene1_1.signal_Y06, busSensors.Y06_actual)
+        annotation (Line(points={{-142.6,175},{-227.78,175},{-227.78,-7.75}},
+            color={0,0,127}), Text(
           string="%second",
           index=1,
           extent={{6,3},{6,3}}));
@@ -750,21 +766,29 @@ model")}),                                                         Diagram(
               extent={{-10,-10},{10,10}},
               rotation=-90,
               origin={0,64})));
-        PNlib.TD Heizen_aus(nIn=1, nOut=1,
-          firingCon=T_CoolIn >= T_Soll + 1/3*T_h)
-                                           "Transition zum Ausschalten der Heizung"
+        PNlib.TD Heizen_aus(
+          nIn=1,
+          nOut=1,
+          firingCon=T_Rek >= T_Soll + 1/3*T_h)
+          "Transition zum Ausschalten der Heizung"
           annotation (Placement(transformation(extent={{-40,74},{-20,94}})));
-        PNlib.TD Heizen_an(nOut=1, nIn=1,
-          firingCon=T_CoolIn <= T_Soll - 2/3*T_h)
-                                          "Transition zum Anschalten der Heizung"
+        PNlib.TD Heizen_an(
+          nOut=1,
+          nIn=1,
+          firingCon=T_Rek <= T_Soll - 2/3*T_h)
+          "Transition zum Anschalten der Heizung"
           annotation (Placement(transformation(extent={{-20,34},{-40,54}})));
-        PNlib.TD Kuehlen_an(nIn=1, nOut=1,
-          firingCon=T_CoolIn >= T_Soll + 2/3*T_h)
-                                           "Transition zum Anschalten der Kühlung"
+        PNlib.TD Kuehlen_an(
+          nIn=1,
+          nOut=1,
+          firingCon=T_Rek >= T_Soll + 2/3*T_h)
+          "Transition zum Anschalten der Kühlung"
           annotation (Placement(transformation(extent={{20,34},{40,54}})));
-        PNlib.TD Kuehlen_aus(nOut=1, nIn=1,
-          firingCon=T_CoolIn <= T_Soll - 1/3*T_h)
-                                            "Transition zum Ausschalten der Kühlung"
+        PNlib.TD Kuehlen_aus(
+          nOut=1,
+          nIn=1,
+          firingCon=T_Rek <= T_Soll - 1/3*T_h)
+          "Transition zum Ausschalten der Kühlung"
           annotation (Placement(transformation(extent={{40,74},{20,94}})));
         PNlib.PDBool
                  Befeuchten(nIn=1, nOut=1,
@@ -807,8 +831,8 @@ model")}),                                                         Diagram(
           firingCon=phi_01 <= 0.4 or signal_Y06 >= 1)
           "Transition zum Abschalten der Entfeuchtung"
           annotation (Placement(transformation(extent={{40,2},{20,22}})));
-        Modelica.Blocks.Interfaces.RealInput T_CoolIn
-          "Temperature Input of Temperature after Absorber, i.e. T_CoolIn"
+        Modelica.Blocks.Interfaces.RealInput T_Rek
+          "Temperature Input of Temperature before recuperator after absorber, i.e. T_Rek"
           annotation (Placement(transformation(extent={{-126,50},{-86,90}})));
         Modelica.Blocks.Interfaces.RealInput phi_03
           "relative humidity before steamhumidifier"

@@ -51,8 +51,6 @@ model TestMenergaModular "Example model to test the MenergaModular model"
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-14,-86})));
-  MenergaModular menergaModular
-    annotation (Placement(transformation(extent={{-48,-36},{52,10}})));
 equation
   connect(outsideAir.ports[1], menergaModular.outsideAir) annotation (Line(
         points={{80,-14},{52,-14},{52,-23.4}}, color={0,127,255}));

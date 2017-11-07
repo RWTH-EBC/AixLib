@@ -225,23 +225,11 @@ package ComponentsAHU "contains different components for the AHU"
       redeclare package Medium = Medium2)
                "damper at bypass of absorber"
       annotation (Placement(transformation(extent={{14,-310},{-6,-330}})));
-    Modelica.Blocks.Interfaces.RealInput desInput
-      "input value for humidification of desorber" annotation (Placement(
-          transformation(
-          extent={{20,-20},{-20,20}},
-          rotation=90,
-          origin={40,426})));
-    Modelica.Blocks.Interfaces.RealInput absInput
-      "input for dehumidification of absorber" annotation (Placement(
-          transformation(
-          extent={{20,-20},{-20,20}},
-          rotation=90,
-          origin={-40,426})));
     Modelica.Blocks.Interfaces.RealInput Y06_opening
       "valve Input for Y06 opening" annotation (Placement(transformation(
-          extent={{20,-20},{-20,20}},
+          extent={{36,-36},{-36,36}},
           rotation=90,
-          origin={-150,426})));
+          origin={-138,426})));
     Modelica.Fluid.Interfaces.FluidPort_a port_a1(
     redeclare final package Medium = Medium1,
                        m_flow(min=if allowFlowReversal1 then -Modelica.Constants.inf else 0),
@@ -270,15 +258,20 @@ package ComponentsAHU "contains different components for the AHU"
     Modelica.Blocks.Interfaces.RealOutput senMasFloAbs
       "sensor signal of mass flow through absorber"
       annotation (Placement(transformation(extent={{194,-10},{214,10}})));
+    Modelica.Blocks.Sources.Constant InletFlow_mflowDes(k=0)
+      "water mass flow in desorber"
+      annotation (Placement(transformation(extent={{58,324},{38,344}})));
+    Modelica.Blocks.Sources.Constant InletFlow_mflowAbs(k=0)
+      "water mass flow in absorber"
+      annotation (Placement(transformation(extent={{6,-194},{-14,-174}})));
+    Modelica.Blocks.Interfaces.RealOutput Y06_actual
+      "actual value of valve opening Y06"
+      annotation (Placement(transformation(extent={{194,-60},{214,-40}})));
   equation
-    connect(Y06_opening, Y06.y) annotation (Line(points={{-150,426},{-150,-332},
+    connect(Y06_opening, Y06.y) annotation (Line(points={{-138,426},{-138,-332},
             {4,-332}},      color={0,0,127}));
     connect(senMasFlo.port_b, Absorber.port_a)
       annotation (Line(points={{46,-228},{-48,-228}},color={0,127,255}));
-    connect(desInput, Desorber.u)
-      annotation (Line(points={{40,426},{40,286},{11,286}},color={0,0,127}));
-    connect(absInput, Absorber.u) annotation (Line(points={{-40,426},{-40,-222},
-            {-47,-222}},                 color={0,0,127}));
     connect(senMasFlo.m_flow, senMasFloAbs)
       annotation (Line(points={{56,-217},{56,0},{204,0}}, color={0,0,127}));
     connect(port_a1, Desorber.port_a)
@@ -293,6 +286,12 @@ package ComponentsAHU "contains different components for the AHU"
             -228},{-104,-280},{-200,-280}}, color={0,127,255}));
     connect(Y06.port_b, port_b2) annotation (Line(points={{-6,-320},{-104,-320},
             {-104,-280},{-200,-280}}, color={0,127,255}));
+    connect(InletFlow_mflowDes.y, Desorber.u) annotation (Line(points={{37,334},
+            {26,334},{26,286},{11,286}}, color={0,0,127}));
+    connect(InletFlow_mflowAbs.y, Absorber.u) annotation (Line(points={{-15,
+            -184},{-30,-184},{-30,-222},{-47,-222}}, color={0,0,127}));
+    connect(Y06.y_actual, Y06_actual) annotation (Line(points={{-1,-327},{-6,
+            -327},{-6,-338},{160,-338},{160,-50},{204,-50}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-200,-420},
               {200,420}}), graphics={Rectangle(
             extent={{-200,420},{200,-420}},
@@ -315,19 +314,16 @@ package ComponentsAHU "contains different components for the AHU"
       redeclare package Medium2 = Medium2)
       "Heating Coil after Recuperator for additional Heating"
       annotation (Placement(transformation(extent={{-10,44},{10,64}})));
-    Fluid.Movers.Pump pump(
-      MinMaxCharacteristics=DataBase.Pumps.Pump1(),
+    Fluid.Movers.SpeedControlled_y
+                      pump(
       m_flow_small=m2_flow_small,
-      Head(start=0.4),
-      ControlStrategy=1,
-      redeclare package Medium = Medium2)             annotation (Placement(
+      redeclare package Medium = Medium2,
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per,
+      addPowerToMedium=false)                         annotation (Placement(
           transformation(
           extent={{-10,10},{10,-10}},
           rotation=90,
           origin={30,20})));
-    Modelica.Blocks.Sources.BooleanConstant isNight(final k=false)
-      "boolean to activate the night modus for the pump"
-      annotation (Placement(transformation(extent={{76,16},{66,26}})));
     Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear threeWayValveHeaCoi(
       m_flow_nominal=1,
       dpValve_nominal=500,
@@ -363,9 +359,15 @@ package ComponentsAHU "contains different components for the AHU"
           extent={{-10,-10},{10,10}},
           rotation=90,
           origin={50,106})));
+    Modelica.Blocks.Interfaces.RealInput pumpN04
+      "input value (0 or 1) for on/off pump"
+      annotation (Placement(transformation(extent={{128,0},{88,40}})));
+    Modelica.Blocks.Interfaces.RealOutput y09_actual
+      "value of valve opening of Y09" annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=90,
+          origin={70,106})));
   equation
-    connect(isNight.y, pump.IsNight) annotation (Line(points={{65.5,21},{58,21},
-            {58,20},{40.2,20}},      color={255,0,255}));
     connect(port_a1, HeatingCoil.port_a1)
       annotation (Line(points={{-100,60},{-10,60}}, color={0,127,255}));
     connect(HeatingCoil.port_b2, vol.ports[1]) annotation (Line(points={{-10,48},
@@ -390,6 +392,10 @@ package ComponentsAHU "contains different components for the AHU"
       annotation (Line(points={{60,60},{100,60}}, color={0,127,255}));
     connect(T03_senTemHea.T, T03_senTemHeaCoi)
       annotation (Line(points={{50,71},{50,106}}, color={0,0,127}));
+    connect(pump.y, pumpN04)
+      annotation (Line(points={{42,20},{108,20}}, color={0,0,127}));
+    connect(threeWayValveHeaCoi.y_actual, y09_actual) annotation (Line(points={
+            {37,-11},{37,2},{70,2},{70,106}}, color={0,0,127}));
    annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
             Rectangle(
             extent={{-100,100},{100,-100}},
@@ -768,19 +774,19 @@ package ComponentsAHU "contains different components for the AHU"
       annotation (Placement(transformation(extent={{10,-70},{-10,-50}})));
     Modelica.Blocks.Interfaces.RealInput Y03_opening
       "valve Input for Y03 opening" annotation (Placement(transformation(
-          extent={{20,-20},{-20,20}},
+          extent={{15,-15},{-15,15}},
           rotation=90,
-          origin={30,106})));
+          origin={31,103})));
     Modelica.Blocks.Interfaces.RealInput Y01_opening "valve Input for valve Y01"
       annotation (Placement(transformation(
-          extent={{20,-20},{-20,20}},
+          extent={{15,-15},{-15,15}},
           rotation=90,
-          origin={80,106})));
+          origin={71,103})));
     Modelica.Blocks.Interfaces.RealInput Y02_opening "valve Input for Y02"
       annotation (Placement(transformation(
-          extent={{20,-20},{-20,20}},
+          extent={{15,-15},{-15,15}},
           rotation=90,
-          origin={-30,106})));
+          origin={-29,103})));
     recHeaExc recHeaExc1(
       use_eNTU=true,
       redeclare package Medium1 = Medium1,
@@ -793,15 +799,20 @@ package ComponentsAHU "contains different components for the AHU"
           extent={{-20,-20},{20,20}},
           rotation=180,
           origin={106,16})));
+    Modelica.Blocks.Interfaces.RealOutput Y02_actual
+      "actual value of valve opening of Y02" annotation (Placement(
+          transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=180,
+          origin={-106,0})));
   equation
-    connect(Y03_opening, Y03.y) annotation (Line(points={{30,106},{30,78},{0,78},{
-            0,72},{0,72}},
-                     color={0,0,127}));
+    connect(Y03_opening, Y03.y) annotation (Line(points={{31,103},{31,78},{0,78},
+            {0,72}}, color={0,0,127}));
     connect(Y01_opening, Y01.y)
-      annotation (Line(points={{80,106},{80,-36},{62,-36}},
+      annotation (Line(points={{71,103},{71,-36},{62,-36}},
                                                     color={0,0,127}));
-    connect(Y02.y, Y02_opening) annotation (Line(points={{0,-48},{-30,-48},{-30,106}},
-                         color={0,0,127}));
+    connect(Y02.y, Y02_opening) annotation (Line(points={{0,-48},{-29,-48},{-29,
+            103}},       color={0,0,127}));
     connect(Y01.port_b, recHeaExc1.port_a2) annotation (Line(points={{50,-26},{
             48,-26},{48,10},{48,10},{48,10},{10,10},{10,10}}, color={0,127,255}));
     connect(adiCoo, recHeaExc1.adiabaticOn)
@@ -822,6 +833,8 @@ package ComponentsAHU "contains different components for the AHU"
             22},{-54,60},{-100,60}}, color={0,127,255}));
     connect(Y03.port_a, port_a1)
       annotation (Line(points={{-10,60},{-100,60}}, color={0,127,255}));
+    connect(Y02.y_actual, Y02_actual) annotation (Line(points={{-5,-53},{-79.5,
+            -53},{-79.5,0},{-106,0}}, color={0,0,127}));
      annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
             Rectangle(
             extent={{-100,100},{100,-100}},
@@ -1000,11 +1013,11 @@ package ComponentsAHU "contains different components for the AHU"
     parameter Real m2Y =  -0.906  "parameter m2 for alpha";
     parameter Real m2H =  -0.365  "parameter m2 for beta";
 
-    Real aY = k1Y * gammaL_C + m1Y  "exponent for L/G in alpha";
-    Real aH = k1H * gammaL_C + m1H  "exponent for L/G in beta";
+    Real aY = k1Y * gammaS_C + m1Y  "exponent for L/G in alpha";
+    Real aH = k1H * gammaS_C + m1H  "exponent for L/G in beta";
 
-    Real cY = k2Y * gammaL_C + m2Y  "exponent for a_t*Z in alpha";
-    Real cH = k2H * gammaL_C + m2H  "exponent for a_t*Z in beta";
+    Real cY = k2Y * gammaS_C + m2Y  "exponent for a_t*Z in alpha";
+    Real cH = k2H * gammaS_C + m2H  "exponent for a_t*Z in beta";
 
     final parameter Real s[Medium1.nXi] = {if Modelica.Utilities.Strings.isEqual(string1=Medium1.substanceNames[i],
                                               string2="Water",
@@ -1024,33 +1037,33 @@ package ComponentsAHU "contains different components for the AHU"
     parameter Real eps_HE =            0.8 "Heat exchanger effectiveness (absorber as a HE)";
 
     parameter SI.HeatCapacity lambda = 2430000 "latent heat of condensation in J/kg";
-    parameter SI.SpecificHeatCapacity c_pl = 2700 "specific heat capacity of desiccant solution in J/kgK";
+    parameter SI.SpecificHeatCapacity c_ps = 2700 "specific heat capacity of desiccant solution in J/kgK";
     parameter SI.SpecificHeatCapacity c_pa = 1005 "specific heat capacity of airflow in J/kgK";
     parameter SI.SpecificHeatCapacity c_pw = 4181.8 "specific heat capacity of water in J/kgK at 20°C";
-    parameter SI.Density rho_l = 1220 "in kg/m^3, density of solution with x= 0,36 kg/kg and 30 °C";
+    parameter SI.Density rho_s = 1220 "in kg/m^3, density of solution with x= 0,36 kg/kg and 30 °C";
     parameter SI.Density rho_a = 1.17 "in kg/m^3, density of air at 25°C and 50% relative humidity";
-    parameter SI.SurfaceTension gamma_l = 88/1000 "Surface tension in N/m at 26°C and x = 0,375 kg/kg";
+    parameter SI.SurfaceTension gamma_s = 88/1000 "Surface tension in N/m at 26°C and x = 0,375 kg/kg";
     parameter SI.SurfaceTension gamma_c = 29/1000 "critical surface tension of 15 mm PP Pall rings (martin, goswani, 2000)";
     parameter SI.Area A_a = 1.9367 "1810*1070, Area air of absorber in m^2";
-    parameter SI.Area A_l = 0.8145 "1810*450, Area liquid of absorber in m^2";
+    parameter SI.Area A_s = 0.8145 "1810*450, Area liquid of absorber in m^2";
     parameter SI.Area A_reg = 0.763 "1810*350Area of desorber in m^2";
 
 
-    Real gammaL_C = gamma_l/gamma_c "quotient of surface tension of liquid by critical surface tension in Range 0,8-3,2";
+    Real gammaS_C = gamma_s/gamma_c "quotient of surface tension of liquid by critical surface tension in Range 0,8-3,2";
     Real L_G "dimensionless quotient of mass flux (flow rate per area)
      of desiccant solution by Airflow in kg/m^2s in Range 3,5-15,4";
     Real atZ = a_t* Z "specific surface area * bed height in range 84 - 262";
 
-    SI.MassFlowRate L = 15.2/3600*rho_l "original as mass flux, mass flow of desiccant solution in kg/s";
+    SI.MassFlowRate L = 15.2/3600*rho_s "original as mass flux, mass flow of desiccant solution in kg/s";
     //liegt hier eine andere Fläche vor als A?
 
     SI.MassFlowRate G = m1_flow "original as mass flux, mass flow of Air in kg/s";
     //SI.MassFlowRate R = m2_flow "mass flux (flow rate per area) of Airflow in regeneration in kg/m^2s";
 
-    Real C_l "heat capacity flow of desiccant solution in kW/°C";
+    Real C_s "heat capacity flow of desiccant solution in kW/°C";
     Real C_a "heat capacity flow of airflow in kW/°C";
 
-    Real Hai_Hli "temperature ratio of air inlet by desiccant inlet in °C in range 0,4-1,9";
+    Real Hai_Hsi "temperature ratio of air inlet by desiccant inlet in °C in range 0,4-1,9";
 
     Real alpha "humidity effectiveness, defined with absolute humidities, in this case simplified with water pressure";
     Real beta "enthalpy effectiveness, defined over enthalpy, here simplified with temperatures";
@@ -1061,8 +1074,8 @@ package ComponentsAHU "contains different components for the AHU"
 
     SI.Temperature t_ai = Medium1.temperature(state_a1_inflow)  "temperature of air at inlet";
     SI.Temperature t_ao  "temperature of air at outlet";
-    SI.Temperature t_li( start=t_sol)  "temperature of desiccant solution at inlet";
-    SI.Temperature t_lo  "temperature of desiccant solution at outlet";
+    SI.Temperature t_si( start=t_sol)  "temperature of desiccant solution at inlet";
+    SI.Temperature t_so  "temperature of desiccant solution at outlet";
 
     SI.MassFlowRate m "water vapor mass flow per area in kg/s going from desiccant to air flow";
     //Real m_reg "water vapor mass flow per area in kg/sm^2 in desorber going from air flow to desiccant";
@@ -1081,8 +1094,8 @@ package ComponentsAHU "contains different components for the AHU"
     Real x_i( start=x_sol) "inlet concentration of desiccant solution";
     Real x_o "outlet concentration of desiccant solution";
 
-    SI.Temperature t_l1( start=t_sol) "temperature of absorber solution tank";
-    //SI.Temperature t_l2 "temperature of desorber solution tank";
+    SI.Temperature t_s1( start=t_sol) "temperature of absorber solution tank";
+    //SI.Temperature t_s2 "temperature of desorber solution tank";
 
     SI.Mass m_1 "mass of desiccant solution in absorber tank";
     SI.Mass m_2 "mass of desiccant solution in desorber tank";
@@ -1182,44 +1195,46 @@ package ComponentsAHU "contains different components for the AHU"
     port_b3.h_outflow  =  inStream(port_a3.h_outflow);
 
       //storage
-    m_1 * der(t_l1)  =  L * (t_lo - t_l1);
-    //m_2 * der(t_l2)  =  R * (t_l1 - t_l2);
+    m_1 * der(t_s1)  =  L * (t_so - t_s1);
+    //m_2 * der(t_s2)  =  R * (t_s1 - t_s2);
 
     //particles
     port_b1.C_outflow  =  inStream(port_a1.C_outflow);
     port_b2.C_outflow  =  inStream(port_a2.C_outflow);
 
-    t_lo  =  t_ao  "Annahme: Ausgang der Sole hat die selbe Temperatur wie die Luft";
+    t_so  =  t_ao  "Annahme: Ausgang der Sole hat die selbe Temperatur wie die Luft";
 
     //Hier Koeffizienten abbilden
-    L_G      =  (L/A_l) / (G/A_a);
-    Hai_Hli  =  c_pa*(t_ai-t_ref) / (c_pl*(t_li-t_ref));
+    L_G      =  (L/A_s) / (G/A_a);
+    Hai_Hsi  =  c_pa*(t_ai-t_ref) / (c_ps*(t_si-t_ref));
 
     //Test:
-    //Hai_Hli  =  (t_ai-t_ref) / (t_li-t_ref);
+    //Hai_Hsi  =  (t_ai-t_ref) / (t_si-t_ref);
 
 
-    alpha    =  1 - C1Y * (L_G)^aY * (Hai_Hli)^bY * (atZ)^cY;
-    beta     =  1 - C1H * (L_G)^aH * (Hai_Hli)^bH * (atZ)^cH;
+    alpha    =  1 - C1Y * (L_G)^aY * (Hai_Hsi)^bY * (atZ)^cY;
+    beta     =  1 - C1H * (L_G)^aH * (Hai_Hsi)^bH * (atZ)^cH;
 
 
     //Capacity Streams
     C_a  =  G * c_pa;
-    C_l  =  L * c_pl;
+    C_s  =  L * c_ps;
 
 
     //alpha   =  (p_ai-p_ao) / (p_ai-p_si);
-    beta    =  c_pa*(t_ai - t_ao) / (c_pa*(t_ai-t_ref) - c_pl*(t_li-t_ref));
+    //beta    =  c_pa*(t_ai - t_ao) / (c_pa*(t_ai-t_ref) - c_ps*(t_si-t_ref));
+    beta  =  (t_ai-t_ao) / (t_ai-t_si);
 
-    //t_lo-t_ref  =  ((t_li-t_ref) - eps_HE * c_pw/c_pl * (t_ci-t_ref)) / (1-eps_HE);
-    //eps_HE  =  c_pl*(t_lo - t_li) / (c_pl*(t_lo-t_ref) - c_pw*(t_ci-t_ref));
-    eps_HE  =  c_pl*(t_l1 - t_li) / (c_pl*(t_l1-t_ref) - c_pw*(t_ci-t_ref));
+    //t_so-t_ref  =  ((t_si-t_ref) - eps_HE * c_pw/c_ps * (t_ci-t_ref)) / (1-eps_HE);
+    //eps_HE  =  c_ps*(t_so - t_si) / (c_ps*(t_so-t_ref) - c_pw*(t_ci-t_ref));
+    //eps_HE  =  c_ps*(t_s1 - t_si) / (c_ps*(t_s1-t_ref) - c_pw*(t_ci-t_ref));
+    eps_HE  =  (t_s1 - t_si) / (t_s1 - t_ci);
 
-    m = 1/lambda*(C_l*eps_HE/(1 - eps_HE)*(t_li - t_ci) - C_a*beta*(t_ai - t_li)) "water exchange in kg/s";
+    m = 1/lambda*(C_s*eps_HE/(1 - eps_HE)*(t_si - t_ci) - C_a*beta*(t_ai - t_si)) "water exchange in kg/s";
 
     // Species flow rate from connector mWat_flow
     m1Xi_flow = m * s;
-    //m_reg = 0.015;  //1/lambda*(C_l*eps_HE/(1 - eps_HE)*(t_li - t_ci) - C_a*beta*(t_ai - t_li)) "water exchange in kg/s";
+    //m_reg = 0.015;  //1/lambda*(C_s*eps_HE/(1 - eps_HE)*(t_si - t_ci) - C_a*beta*(t_ai - t_si)) "water exchange in kg/s";
 
     1/x_o  =  1/x_i * (1 + m/L);
     x_i  =  x_1;
@@ -1227,4 +1242,388 @@ package ComponentsAHU "contains different components for the AHU"
           coordinateSystem(preserveAspectRatio=false)));
   end AbsorberSimple;
 
+  model AbsorberSimpleTest
+    "simple model of an absorber after Gandhisan2004"
+
+    import SI = Modelica.SIunits;
+
+    // Diagnostics
+    parameter Boolean show_T = false
+      "= true, if actual temperature at port is computed"
+      annotation(Dialog(tab="Advanced",group="Diagnostics"));
+
+    // Medien
+    replaceable package Medium1 =
+        Modelica.Media.Interfaces.PartialMedium "Medium 1 in the component, air"
+        annotation (choicesAllMatching = true);
+
+    replaceable package Medium2 =
+        Modelica.Media.Interfaces.PartialMedium "Medium 2 in the component, water"
+        annotation (choicesAllMatching = true);
+
+    // Druckverluste
+    parameter SI.Pressure dp_abs = 300 "Druckverlust im Absorber nominal: 300 Pa";
+    parameter SI.Pressure dp_des = 0 "Druckverlust im Desorber, hier nicht notwendig, global definiert";
+    parameter SI.Pressure dp_wat = 15300 "Druckverlust im Wasserkreislauf, laut Datenblatt. Prüfen, ob notwendig";
+
+    //Port 1
+    parameter Boolean allowFlowReversal1=true
+      "= false to simplify equations, assuming, but not enforcing, no flow reversal for medium 1"
+      annotation (Dialog(tab="Assumptions"), Evaluate=true);
+    parameter Modelica.SIunits.MassFlowRate m1_flow_nominal(min=0)
+      "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
+    parameter Medium1.MassFlowRate m1_flow_small(min=0) = 1E-4*abs(
+      m1_flow_nominal) "Small mass flow rate for regularization of zero flow"
+      annotation (Dialog(tab="Advanced"));
+    Medium1.MassFlowRate m1_flow=port_a1.m_flow
+      "Mass flow rate from port_a1 to port_b1 (m1_flow > 0 is design flow direction)";
+    Modelica.SIunits.PressureDifference dp1(displayUnit="Pa") = port_a1.p -
+      port_b1.p "Pressure difference between port_a1 and port_b1";
+
+    Medium1.ThermodynamicState sta_a1=Medium1.setState_phX(
+        port_a1.p,
+        noEvent(actualStream(port_a1.h_outflow)),
+        noEvent(actualStream(port_a1.Xi_outflow))) if
+           show_T "Medium properties in port_a1";
+    Medium1.ThermodynamicState sta_b1=Medium1.setState_phX(
+        port_b1.p,
+        noEvent(actualStream(port_b1.h_outflow)),
+        noEvent(actualStream(port_b1.Xi_outflow))) if
+           show_T "Medium properties in port_b1";
+  protected
+    Medium1.ThermodynamicState state_a1_inflow=Medium1.setState_phX(
+        port_a1.p,
+        inStream(port_a1.h_outflow),
+        inStream(port_a1.Xi_outflow))
+      "state for medium inflowing through port_a1";
+    Medium1.ThermodynamicState state_b1_inflow=Medium1.setState_phX(
+        port_b1.p,
+        inStream(port_b1.h_outflow),
+        inStream(port_b1.Xi_outflow))
+      "state for medium inflowing through port_b1";
+
+    //Port 2
+  public
+    parameter Boolean allowFlowReversal2=true
+      "= false to simplify equations, assuming, but not enforcing, no flow reversal for medium 1"
+      annotation (Dialog(tab="Assumptions"), Evaluate=true);
+    parameter Modelica.SIunits.MassFlowRate m2_flow_nominal(min=0)
+      "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
+    parameter Medium1.MassFlowRate m2_flow_small(min=0) = 1E-4*abs(
+      m2_flow_nominal) "Small mass flow rate for regularization of zero flow"
+      annotation (Dialog(tab="Advanced"));
+    Medium1.MassFlowRate m2_flow=port_a2.m_flow
+      "Mass flow rate from port_a2 to port_b2 (m2_flow > 0 is design flow direction)";
+    Modelica.SIunits.PressureDifference dp2(displayUnit="Pa") = port_a2.p -
+      port_b2.p "Pressure difference between port_a2 and port_b2";
+
+    Medium1.ThermodynamicState sta_a2=Medium1.setState_phX(
+        port_a2.p,
+        noEvent(actualStream(port_a2.h_outflow)),
+        noEvent(actualStream(port_a2.Xi_outflow))) if
+           show_T "Medium properties in port_a2";
+    Medium1.ThermodynamicState sta_b2=Medium1.setState_phX(
+        port_b2.p,
+        noEvent(actualStream(port_b2.h_outflow)),
+        noEvent(actualStream(port_b2.Xi_outflow))) if
+           show_T "Medium properties in port_b2";
+  protected
+    Medium1.ThermodynamicState state_a2_inflow=Medium1.setState_phX(
+        port_a2.p,
+        inStream(port_a2.h_outflow),
+        inStream(port_a2.Xi_outflow))
+      "state for medium inflowing through port_a2";
+    Medium1.ThermodynamicState state_b2_inflow=Medium1.setState_phX(
+        port_b2.p,
+        inStream(port_b2.h_outflow),
+        inStream(port_b2.Xi_outflow))
+      "state for medium inflowing through port_b2";
+
+    //Port 3
+  public
+    parameter Boolean allowFlowReversal3=true
+      "= false to simplify equations, assuming, but not enforcing, no flow reversal for medium 2"
+      annotation (Dialog(tab="Assumptions"), Evaluate=true);
+    parameter Modelica.SIunits.MassFlowRate m3_flow_nominal(min=0)
+      "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
+    parameter Medium2.MassFlowRate m3_flow_small(min=0) = 1E-4*abs(
+      m3_flow_nominal) "Small mass flow rate for regularization of zero flow"
+      annotation (Dialog(tab="Advanced"));
+    Medium2.MassFlowRate m3_flow=port_a3.m_flow
+      "Mass flow rate from port_a3 to port_b3 (m3_flow > 0 is design flow direction)";
+    Modelica.SIunits.PressureDifference dp3(displayUnit="Pa") = port_a3.p -
+      port_b3.p "Pressure difference between port_a3 and port_b3";
+
+    Medium2.ThermodynamicState sta_a3=Medium2.setState_phX(
+        port_a3.p,
+        noEvent(actualStream(port_a3.h_outflow)),
+        noEvent(actualStream(port_a3.Xi_outflow))) if
+           show_T "Medium properties in port_a3";
+    Medium2.ThermodynamicState sta_b3=Medium2.setState_phX(
+        port_b3.p,
+        noEvent(actualStream(port_b3.h_outflow)),
+        noEvent(actualStream(port_b3.Xi_outflow))) if
+           show_T "Medium properties in port_b3";
+
+    // Parameters for inverseXRegularized.
+    // These are assigned here for efficiency reason.
+    // Otherwise, they would need to be computed each time
+    // the function is invocated.
+
+  protected
+    final parameter Real deltaReg = m1_flow_small/1E3
+      "Smoothing region for inverseXRegularized";
+    final parameter Real deltaInvReg = 1/deltaReg
+      "Inverse value of delta for inverseXRegularized";
+    final parameter Real aReg = -15*deltaInvReg
+      "Polynomial coefficient for inverseXRegularized";
+    final parameter Real bReg = 119*deltaInvReg^2
+      "Polynomial coefficient for inverseXRegularized";
+    final parameter Real cReg = -361*deltaInvReg^3
+      "Polynomial coefficient for inverseXRegularized";
+    final parameter Real dReg = 534*deltaInvReg^4
+      "Polynomial coefficient for inverseXRegularized";
+    final parameter Real eReg = -380*deltaInvReg^5
+      "Polynomial coefficient for inverseXRegularized";
+    final parameter Real fReg = 104*deltaInvReg^6
+      "Polynomial coefficient for inverseXRegularized";
+
+    // parameter description from Martin and Goswami, 2000
+
+    parameter Real C1Y =  48.3    "parameter C1 for alpha";
+    parameter Real C1H =  3.77    "parameter C1 for beta";
+    parameter Real bY =   -0.751  "parameter b for alpha";
+    parameter Real bH =   -0.528  "parameter b for beta";
+    parameter Real k1Y =  0.396   "parameter k1 for alpha";
+    parameter Real k1H =  0.289   "parameter k1 for beta";
+    parameter Real m1Y =  -1.57   "parameter m1 for alpha";
+    parameter Real m1H =  -1.12   "parameter m1 for beta";
+    parameter Real k2Y =  0.0331  "parameter k2 for alpha";
+    parameter Real k2H =  -0.0044 "parameter k2 for beta";
+    parameter Real m2Y =  -0.906  "parameter m2 for alpha";
+    parameter Real m2H =  -0.365  "parameter m2 for beta";
+
+    Real aY = k1Y * gammaS_C + m1Y  "exponent for L/G in alpha";
+    Real aH = k1H * gammaS_C + m1H  "exponent for L/G in beta";
+
+    Real cY = k2Y * gammaS_C + m2Y  "exponent for a_t*Z in alpha";
+    Real cH = k2H * gammaS_C + m2H  "exponent for a_t*Z in beta";
+
+    final parameter Real s[Medium1.nXi] = {if Modelica.Utilities.Strings.isEqual(string1=Medium1.substanceNames[i],
+                                              string2="Water",
+                                              caseSensitive=false)
+                                              then 1 else 0 for i in 1:Medium1.nXi}
+      "Vector with zero everywhere except where species is";
+
+    //influence parameters:
+  public
+    parameter SI.Mass m_ges =          400 "total mass of desiccant solution in the system";
+    parameter Real x_sol =             0.33 "desiccant solution concentration at start";
+    parameter SI.Temperature t_sol =   26+t_ref  "desiccant solution inlet temperature";
+    parameter SI.Temperature t_ci =    22+t_ref "temperature of cooling water at inlet, from Menerga data sheet";
+    parameter SI.Temperature t_ref =   273.15 "reference temperature";
+    parameter Real a_t =               320 "specific surface area of packing in m^2/m^3";
+    parameter Real Z =                 0.35 "packed bed height in m";
+    parameter Real eps_HE =            0.8 "Heat exchanger effectiveness (absorber as a HE)";
+
+    parameter SI.HeatCapacity lambda = 2430000 "latent heat of condensation in J/kg";
+    parameter SI.SpecificHeatCapacity c_ps = 2800 "specific heat capacity of desiccant solution in J/kgK";
+    parameter SI.SpecificHeatCapacity c_pa = 1005 "specific heat capacity of airflow in J/kgK";
+    parameter SI.SpecificHeatCapacity c_pw = 4181.8 "specific heat capacity of water in J/kgK at 20°C";
+    parameter SI.Density rho_s = 1220 "in kg/m^3, density of solution with x= 0,36 kg/kg and 30 °C";
+    parameter SI.Density rho_a = 1.17 "in kg/m^3, density of air at 25°C and 50% relative humidity";
+    parameter SI.SurfaceTension gamma_s = 88/1000 "Surface tension in N/m at 26°C and x = 0,375 kg/kg";
+    parameter SI.SurfaceTension gamma_c = 29/1000 "critical surface tension of 15 mm PP Pall rings (martin, goswani, 2000)";
+    parameter SI.Area A_a = 1.9367 "1810*1070, Area air of absorber in m^2";
+    parameter SI.Area A_s = 0.8145 "1810*450, Area liquid of absorber in m^2";
+    parameter SI.Area A_reg = 0.763 "1810*350Area of desorber in m^2";
+
+    Real gammaS_C = gamma_s/gamma_c "quotient of surface tension of liquid by critical surface tension in Range 0,8-3,2";
+    Real L_G "dimensionless quotient of mass flux (flow rate per area)
+     of desiccant solution by Airflow in kg/m^2s in Range 3,5-15,4";
+    Real atZ = a_t* Z "specific surface area * bed height in range 84 - 262";
+
+    SI.MassFlowRate L = 15.2/3600*rho_s "original as mass flux, mass flow of desiccant solution in kg/s";
+    //liegt hier eine andere Fläche vor als A?
+
+    SI.MassFlowRate G = m1_flow "original as mass flux, mass flow of Air in kg/s";
+    //SI.MassFlowRate R = m2_flow "mass flux (flow rate per area) of Airflow in regeneration in kg/m^2s";
+
+    Real C_s "heat capacity flow of desiccant solution in kW/°C";
+    Real C_a "heat capacity flow of airflow in kW/°C";
+
+    Real Hai_Hsi "temperature ratio of air inlet by desiccant inlet in °C in range 0,4-1,9";
+
+    Real alpha "humidity effectiveness, defined with absolute humidities, in this case simplified with water pressure";
+    Real beta "enthalpy effectiveness, defined over enthalpy, here simplified with temperatures";
+
+    //relevant variables for calculation of m from Gandhisan 2004
+    //SI.Temperature t_ai_reg = t_ai;  //AixLib.Media.Air.temperature(state_a1_inflow)  "temperature of air at inlet";
+    //SI.Temperature t_ao_reg  "temperature of air at outlet";
+
+    //Enthalpien und Temperaturen
+    SI.Enthalpy h_ai = inStream(port_a1.h_outflow)  "inlet air enthalpy";
+
+    SI.Temperature t_ai = Medium1.temperature(state_a1_inflow)  "temperature of air at inlet";
+    SI.Temperature t_ao  "temperature of air at outlet";
+    SI.Temperature t_si( start=t_sol)  "temperature of desiccant solution at inlet";
+    SI.Temperature t_so  "temperature of desiccant solution at outlet";
+
+    SI.MassFlowRate m "water vapor mass flow per area in kg/s going from desiccant to air flow";
+    //Real m_reg "water vapor mass flow per area in kg/sm^2 in desorber going from air flow to desiccant";
+
+    Modelica.SIunits.MassFlowRate m1Xi_flow[Medium1.nXi]
+      "Mass flow rates of independent substances added to the medium";
+
+    Real m1_flowInv(unit="s/kg") "Regularization of 1/m_flow of port_a";
+
+    //Real X1_in[Medium1.nXi] = inStream(port_a1.Xi_outflow) "absolute humidity of outside air at entry in kg/kg";
+    //Real X2_in[2] = inStream(port_a2.Xi_outflow) "absolute humidity of outside air at entry in kg/kg";
+
+    //Real X1_out[Medium1.nXi]  "absolute humidity of supply air after absorber in kg/kg";
+    //Real X2_out[2]  "absolute humidity of regeneration air after desorber in kg/kg";
+
+    Real x_i( start=x_sol) "inlet concentration of desiccant solution";
+    Real x_o "outlet concentration of desiccant solution";
+
+    SI.Temperature t_s1( start=t_sol) "temperature of absorber solution tank";
+    //SI.Temperature t_s2 "temperature of desorber solution tank";
+
+    SI.Mass m_1 "mass of desiccant solution in absorber tank";
+    SI.Mass m_2 "mass of desiccant solution in desorber tank";
+
+    Real x_1( start=x_sol) "concentration of desiccant solution in absorber tank";
+    //Real x_2 "concentration of desiccant solution in desorber tank";
+
+    Modelica.Fluid.Interfaces.FluidPort_a port_a3(
+      m_flow(min=if allowFlowReversal3 then -Modelica.Constants.inf else 0),
+      redeclare final package Medium = Medium2,
+      h_outflow(start=Medium2.h_default))
+      "Fluid connector a3 (positive design flow direction is from port_a3 to port_b3)"
+      annotation (Placement(transformation(extent={{-110,0},{-90,20}})));
+    Modelica.Fluid.Interfaces.FluidPort_b port_b3(
+      m_flow(max=if allowFlowReversal3 then +Modelica.Constants.inf else 0),
+      redeclare final package Medium = Medium2,
+      h_outflow(start=Medium2.h_default))
+      "Fluid connector b3 (positive design flow direction is from port_a3 to port_b3)"
+      annotation (Placement(transformation(extent={{-90,-20},{-110,0}})));
+    Modelica.Fluid.Interfaces.FluidPort_a port_a1(
+      redeclare final package Medium = Medium1,
+      m_flow(min=if allowFlowReversal1 then -Modelica.Constants.inf else 0),
+      h_outflow(start=Medium1.h_default))
+      "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
+      annotation (Placement(transformation(extent={{90,-70},{110,-50}})));
+    Modelica.Fluid.Interfaces.FluidPort_b port_b1(
+      redeclare final package Medium = Medium1,
+      m_flow(max=if allowFlowReversal1 then +Modelica.Constants.inf else 0),
+      h_outflow(start=Medium1.h_default))
+      "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
+      annotation (Placement(transformation(extent={{-90,-70},{-110,-50}})));
+    Modelica.Fluid.Interfaces.FluidPort_a port_a2(
+      redeclare final package Medium = Medium1,
+      m_flow(min=if allowFlowReversal2 then -Modelica.Constants.inf else 0),
+      h_outflow(start=Medium1.h_default))
+      "Fluid connector a2 (positive design flow direction is from port_a2 to port_b2)"
+      annotation (Placement(transformation(extent={{90,50},{110,70}})));
+    Modelica.Fluid.Interfaces.FluidPort_b port_b2(
+      redeclare final package Medium = Medium1,
+      m_flow(max=if allowFlowReversal2 then +Modelica.Constants.inf else 0),
+      h_outflow(start=Medium1.h_default))
+      "Fluid connector b2 (positive design flow direction is from port_a2 to port_b2)"
+      annotation (Placement(transformation(extent={{-90,50},{-110,70}})));
+
+  initial equation
+    // Assert that the substance with name 'water' has been found.
+    assert(Medium1.nXi == 0 or abs(sum(s)-1) < 1e-5,
+        "If Medium1.nXi > 1, then substance 'water' must be present for one component.'"
+           + Medium1.mediumName + "'.\n"
+           + "Check medium model.");
+
+  equation
+
+    m1_flowInv = AixLib.Utilities.Math.Functions.inverseXRegularized(
+                         x=port_a1.m_flow,
+                         delta=deltaReg, deltaInv=deltaInvReg,
+                         a=aReg, b=bReg, c=cReg, d=dReg, e=eReg, f=fReg);
+
+    //pressure loss
+    dp1=dp_abs;
+    dp2=dp_des;
+    dp3=dp_wat;
+
+    //Mass balance Air:
+    port_b1.m_flow  =  m1_flow - m;
+    port_b2.m_flow  =  m2_flow;//  -  m_reg;
+    port_b3.m_flow  =  m3_flow;
+
+    m_2  =  200;
+    m_ges  =  m_1 + m_2;
+
+    //Mass balance Water:
+    port_a1.Xi_outflow  =  inStream(port_b1.Xi_outflow);
+    port_a2.Xi_outflow  =  inStream(port_b2.Xi_outflow);
+
+    port_b1.Xi_outflow  =  inStream(port_a1.Xi_outflow) + m1Xi_flow * m1_flowInv;
+    port_b2.Xi_outflow  =  inStream(port_a2.Xi_outflow);
+
+       //storage
+    m_1 * der(x_1)  =  L * (x_o - x_1);
+    //m_2 * der(x_2)  =  R * (x_1 - x_2) "stimmt so nicht, erst regeneration, dann speicher";
+
+    //Energy balance:
+    port_a1.h_outflow  =  inStream(port_b1.h_outflow);
+    port_a2.h_outflow  =  inStream(port_b2.h_outflow);
+    port_a3.h_outflow  =  inStream(port_b3.h_outflow);
+
+    port_b1.h_outflow  =  c_pa*t_ao "Gleichung bestimmen";    //inStream(port_a1.h_outflow);//
+    port_b2.h_outflow  =  inStream(port_a2.h_outflow);  //c_pa*t_ao_reg "Gleichung bestimmen";
+    port_b3.h_outflow  =  inStream(port_a3.h_outflow);
+
+      //storage
+    m_1 * der(t_s1)  =  L * (t_so - t_s1);
+    //m_2 * der(t_s2)  =  R * (t_s1 - t_s2);
+
+    //particles
+    port_b1.C_outflow  =  inStream(port_a1.C_outflow);
+    port_b2.C_outflow  =  inStream(port_a2.C_outflow);
+
+    t_so  =  t_ao  "Annahme: Ausgang der Sole hat die selbe Temperatur wie die Luft";
+    t_si  =  t_s1  "Inlet entspricht Speichertemperatur";
+
+
+    //Hier Koeffizienten abbilden
+    L_G      =  (L/A_s) / (G/A_a);
+    Hai_Hsi  =  h_ai / (c_ps*(t_si-t_ref));
+
+    //Test:
+    //Hai_Hsi  =  (t_ai-t_ref) / (t_si-t_ref);
+
+    alpha    =  1 - C1Y * (L_G)^aY * (Hai_Hsi)^bY * (atZ)^cY;
+    beta     =  1 - C1H * (L_G)^aH * (Hai_Hsi)^bH * (atZ)^cH;
+
+    //Capacity Streams
+    C_a  =  G * c_pa;
+    C_s  =  L * c_ps;
+
+    //alpha   =  (p_ai-p_ao) / (p_ai-p_si);
+    //beta    =  (h_ai-h_ao) / (h_ai-h_si);
+    beta  =  (t_ai-t_ao) / (t_ai-t_si);
+
+    //t_so-t_ref  =  ((t_si-t_ref) - eps_HE * c_pw/c_ps * (t_ci-t_ref)) / (1-eps_HE);
+    //eps_HE  =  c_ps*(t_so - t_si) / (c_ps*(t_so-t_ref) - c_pw*(t_ci-t_ref));
+    //eps_HE  =  c_ps*(t_s1 - t_si) / (c_ps*(t_s1-t_ref) - c_pw*(t_ci-t_ref));
+    //eps_HE  =  (t_s1 - t_si) / (t_s1 - t_ci);
+
+    //m = 1/lambda*(C_s*eps_HE/(1 - eps_HE)*(t_si - t_ci) - C_a*beta*(t_ai - t_si)) "water exchange in kg/s";
+    m  =  1/lambda*(C_s*(t_so-t_si) - C_a*beta*(t_ai - t_si));
+
+    // Species flow rate from connector mWat_flow
+    m1Xi_flow = m * s;
+    //m_reg = 0.015;  //1/lambda*(C_s*eps_HE/(1 - eps_HE)*(t_si - t_ci) - C_a*beta*(t_ai - t_si)) "water exchange in kg/s";
+
+    1/x_o  =  1/x_i * (1 + m/L);
+    x_i  =  x_1;
+    annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+          coordinateSystem(preserveAspectRatio=false)));
+  end AbsorberSimpleTest;
 end ComponentsAHU;

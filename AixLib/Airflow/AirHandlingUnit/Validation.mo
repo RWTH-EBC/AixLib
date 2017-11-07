@@ -350,7 +350,8 @@ package Validation
     replaceable package MediumAir = AixLib.Media.Air;
     replaceable package MediumWater = AixLib.Media.Water;
 
-    ComponentsAHU.AbsorberSimple absorberSimple(
+    ComponentsAHU.AbsorberSimpleTest
+                                 absorberSimple(
       redeclare package Medium1 = MediumAir,
       m1_flow_nominal=5,
       m2_flow_nominal=1,
@@ -368,7 +369,7 @@ package Validation
       T=305.15)                             annotation (Placement(transformation(
           extent={{10,-10},{-10,10}},
           rotation=270,
-          origin={30,10})));
+          origin={30,16})));
     Fluid.Sources.Boundary_pT bou1(nPorts=1,
       redeclare package Medium = MediumAir,
       T=301.75)                              annotation (Placement(transformation(
@@ -408,7 +409,7 @@ package Validation
     connect(absorberSimple.port_b1, bou1.ports[1])
       annotation (Line(points={{-10,34},{-30,34},{-30,20}}, color={0,127,255}));
     connect(bou.ports[1], absorberSimple.port_a1)
-      annotation (Line(points={{30,20},{30,34},{10,34}}, color={0,127,255}));
+      annotation (Line(points={{30,26},{30,34},{10,34}}, color={0,127,255}));
     connect(bou2.ports[1], absorberSimple.port_a2)
       annotation (Line(points={{30,60},{30,46},{10,46}}, color={0,127,255}));
     connect(bou3.ports[1], absorberSimple.port_b2) annotation (Line(points={{
