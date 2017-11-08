@@ -5,9 +5,9 @@ model IdealSinkHeatInputTemperature
     AixLib.Fluid.DistrictHeatingCooling.BaseClasses.Demands.NoReturn.PartialDemand(
     redeclare AixLib.Fluid.DistrictHeatingCooling.Demands.Substations.SubstationDirectThrough substation);
 
-  parameter Modelica.SIunits.TemperatureDifference dTDesign(
-    displayUnit="K")
-    "Design temperature difference for the substation's heat exchanger";
+  parameter Modelica.SIunits.Temp_C T_return(
+    displayUnit="°C")
+    "Prescribed temperature of return line after substation's heat exchanger";
 
   Modelica.Blocks.Math.Gain changeSign(k=-1)
     "Changes sign of prescribed flow for extraction from network" annotation (
@@ -28,7 +28,7 @@ model IdealSinkHeatInputTemperature
     annotation (Placement(transformation(extent={{20,64},{40,84}})));
   Modelica.Blocks.Math.Gain gain(k=cp_default)
     annotation (Placement(transformation(extent={{-12,58},{8,78}})));
-  Modelica.Blocks.Sources.Constant temperatureReturn(k=50)
+  Modelica.Blocks.Sources.Constant temperatureReturn(k=T_return)
     "Temperature of return line in °C"
     annotation (Placement(transformation(extent={{20,20},{0,40}})));
   Modelica.Blocks.Interfaces.RealOutput p_out
@@ -50,9 +50,8 @@ equation
     annotation (Line(points={{41,74},{58,74}}, color={0,0,127}));
   connect(temperatureReturn.y, deltaT.u2)
     annotation (Line(points={{-1,30},{-24,30},{-24,38}}, color={0,0,127}));
-  connect(senPre_supply.p, p_out) annotation (Line(points={{-69,20},{-66,20},{
-          -66,90},{90,90}},
-                          color={0,0,127}));
+  connect(senPre_supply.p, p_out) annotation (Line(points={{-69,20},{-66,20},{-66,
+          90},{90,90}},   color={0,0,127}));
   annotation (Icon(graphics={
           Rectangle(
           extent={{-100,100},{100,-100}},
