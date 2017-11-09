@@ -1,8 +1,8 @@
 within AixLib.FastHVAC.Components.Storage.BaseClasses;
-model HeatTransfer_lambda_eff_smooth
+model HeatTransferLambdaEff
 
 //  import BufferStorage = BufferStorage2;
-  extends Partial_HeatTransfer_Layers;
+  extends PartialHeatTransferLayers;
   Modelica.SIunits.HeatFlowRate[n-1] Q_flow
     "Heat flow rate from segment i+1 to i";
   //Modelica.Thermal.HeatTransfer.TemperatureSensor[n] temperatureSensor
@@ -30,7 +30,7 @@ equation
   for i in 1:n-1 loop
     dT[i] = therm[i].T-therm[i+1].T;
     lambda[i]^2=noEvent(max((9.81*beta*dT[i]/height)*(2/3*rho*c_p*kappa*height^2)^2,0));
-    k[i]=(noEvent(smooth(1,if dT[i]>0 then lambda[i] else 0))+lambda_water)*A/height;
+    k[i]=(noEvent(if dT[i]>0 then lambda[i] else 0)+lambda_water)*A/height;
     Q_flow[i] = k[i]*dT[i];
   end for;
 
@@ -44,9 +44,7 @@ equation
             -100},{100,100}}),
                       graphics), Documentation(info="<html>
 <p><h4><font color=\"#008000\">Overview</font></h4></p>
-<p>Model for heat transfer between buffer storage layers. </p>
-<p><h4><font color=\"#008000\">Concept</font></h4></p>
-<p>Models conductance of water and buoyancy according to Viskanta et al., 1997. An effective heat conductivity is therefore calculated. Used in BufferStorage model. In addition, the <i>smooth()</i> expression is used for the transition of the buoyancy model.</p>
+<p>Model for heat transfer between buffer storage layers. Models conductance of water and buoyancy according to Viskanta et al., 1997. An effective heat conductivity is therefore calculated. Used in BufferStorage model.</p>
 <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
 <p><img src=\"modelica://HVAC/Images/stars2.png\"/> </p>
 <p><h4><font color=\"#008000\">Sources</font></h4></p>
@@ -63,4 +61,4 @@ equation
           extent={{-100,-60},{100,-100}},
           lineColor={0,0,255},
           textString="%name")}));
-end HeatTransfer_lambda_eff_smooth;
+end HeatTransferLambdaEff;
