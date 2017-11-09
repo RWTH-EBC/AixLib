@@ -2,7 +2,7 @@ within AixLib.Utilities.HeatTransfer;
 model HeatConvPipeInside
   "Model for Heat Transfer through convection inside a pipe, based on Nussel Correlations"
   extends Modelica.Thermal.HeatTransfer.Interfaces.Element1D;
-  parameter Modelica.SIunits.Length length= 1 "length of total pipe";
+  parameter Modelica.SIunits.Length length = 1 "length of total pipe";
   parameter Modelica.SIunits.Length d_i = 0.02 "inner diameter of pipe";
   parameter Modelica.SIunits.Length d_a = 0.025 "outer diameter of pipe";
   parameter Modelica.SIunits.Area A_sur = 2 "surfuce for heat transfer";
@@ -25,16 +25,16 @@ model HeatConvPipeInside
         rotation=-90,
         origin={-4,108})));
 equation
-  v      =      4*m_flow/(Modelica.Constants.pi * d_i^2 * medium.rho);
-  Re     =      medium.rho * v * d_i / medium.eta;
-  Pr     =      medium.eta *medium.c /medium.lambda;
-  zeta   =      (1.8*log10(max(1e-10,Re))-1.5)^(-2);
-  Nu_lam_1 =    3.66;
-  Nu_lam_2 =    1.615 * (Re*Pr*d_i/length)^(1/3);
-  Nu_lam   =    (Nu_lam_1^3 + 0.7^3 + (Nu_lam_2 - 0.7)^3)^(1/3);
-  Nu_tur   =    (zeta/8*Re*Pr)/(1+12.7*(zeta/8)^0.5*(Pr^(2/3)-1))*(1+(d_i/length)^(2/3));
-  Nu       =    smooth(0,if Re<=2300 then Nu_lam else Nu_tur);
-  alpha    =    Nu * medium.lambda /d_i;
+  v      =        4*m_flow/(Modelica.Constants.pi * d_i^2 * medium.rho);
+  Re     =        medium.rho * v * d_i / medium.eta;
+  Pr     =        medium.eta *medium.c /medium.lambda;
+  zeta   =        (1.8*log10(max(1e-10,Re))-1.5)^(-2);
+  Nu_lam_1 =      3.66;
+  Nu_lam_2 =      1.615 * (Re*Pr*d_i/length)^(1/3);
+  Nu_lam   =      (Nu_lam_1^3 + 0.7^3 + (Nu_lam_2 - 0.7)^3)^(1/3);
+  Nu_tur   =      (zeta/8*Re*Pr)/(1+12.7*(zeta/8)^0.5*(Pr^(2/3)-1))*(1+(d_i/length)^(2/3));
+  Nu       =      smooth(0,if Re<=2300 then Nu_lam else Nu_tur);
+  alpha    =      Nu * medium.lambda /d_i;
   port_a.Q_flow = alpha * A_sur * (port_a.T - port_b.T);
 
   annotation (Diagram(coordinateSystem(preserveAspectRatio=true,   extent={{-100,
@@ -46,7 +46,7 @@ equation
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{4, 80}, {24, -80}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {156, 156, 156},
             fillPattern =                                                                                                   FillPattern.Solid)}), Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
- <p>The <b>HeatConv</b> model represents the phenomenon of heat convection inside a pipe by a flowin medium.</p>
+ <p>The <b>HeatConv</b> model represents the phenomenon of heat convection inside a pipe by a flowing medium.</p>
  <h4><font color=\"#008000\">Level of Development</font></h4>
  <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><font color=\"#008000\">Example Results</font></h4>

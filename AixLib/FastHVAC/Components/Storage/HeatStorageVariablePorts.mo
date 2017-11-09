@@ -176,8 +176,8 @@ public
     dis_HC=dis_HC1,
     alpha_HC=alpha_HC1,
     medium_HC=mediumHC1,
-    length_HC=data.lengthHC1,
-    pipe_HC=data.pipeHC1) if use_heatingCoil1 annotation (Placement(
+    lengthHC=data.lengthHC1,
+    pipeRecordHC=data.pipeHC1) if   use_heatingCoil1 annotation (Placement(
         transformation(
         extent={{-15,-12},{15,12}},
         rotation=270,
@@ -187,8 +187,8 @@ public
     dis_HC=dis_HC2,
     alpha_HC=alpha_HC2,
     medium_HC=mediumHC2,
-    length_HC=data.lengthHC2,
-    pipe_HC=data.pipeHC2) if use_heatingCoil2 annotation (Placement(
+    lengthHC=data.lengthHC2,
+    pipeRecordHC=data.pipeHC2) if   use_heatingCoil2 annotation (Placement(
         transformation(
         extent={{-14,-12},{14,12}},
         rotation=270,
@@ -376,7 +376,7 @@ connect(heatTransfer.therm, layer.port);
       smooth=Smooth.None));
   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}}),            graphics),
+            100}})),
     experiment(StopTime=3.1536e+007, Interval=600),
     __Dymola_experimentSetupOutput(events=false),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),

@@ -6,22 +6,22 @@ model HeatingCoil
   parameter Media.BaseClasses.MediumSimple medium_HC=Media.WaterSimple()
     "Mediums charastics  (heat capacity, density, thermal conductivity)";
 
- parameter Modelica.SIunits.Length length_HC = 3 "Length of Pipe for HC";
+ parameter Modelica.SIunits.Length lengthHC = 3 "Length of Pipe for HC";
 
  parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_HC=20
     "Model assumptions Coefficient of Heat Transfer HC <-> Heating Water";
 
   parameter Modelica.SIunits.Temperature T_start "Start Temperature of fluid";
 
- parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition pipe_HC=
+ parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition pipeRecordHC=
       AixLib.DataBase.Pipes.Copper.Copper_28x1() "Type of Pipe for HR1";
 
 
   FastHVAC.Components.Pipes.BaseClasses.PipeBase pipeHC(
     medium=medium_HC,
-    parameterPipe=pipe_HC,
+    parameterPipe=pipeRecordHC,
     T_0=T_start,
-    length=length_HC,
+    length=lengthHC,
     nNodes=dis_HC) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
@@ -29,17 +29,17 @@ model HeatingCoil
 
     Utilities.HeatTransfer.CylindricHeatTransfer                       PipeWall_HC1[dis_HC](
     each T0=T_start,
-    rho=fill(pipe_HC.d, dis_HC),
-    c=fill(pipe_HC.c, dis_HC),
-    d_out=fill(pipe_HC.d_o, dis_HC),
-    d_in=fill(pipe_HC.d_i, dis_HC),
-    length=fill(length_HC/dis_HC, dis_HC),
-    lambda=fill(pipe_HC.lambda, dis_HC)) annotation (Placement(transformation(
+    rho=fill(pipeRecordHC.d, dis_HC),
+    c=fill(pipeRecordHC.c, dis_HC),
+    d_out=fill(pipeRecordHC.d_o, dis_HC),
+    d_in=fill(pipeRecordHC.d_i, dis_HC),
+    length=fill(lengthHC/dis_HC, dis_HC),
+    lambda=fill(pipeRecordHC.lambda, dis_HC)) annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=0,
         origin={-4,50})));
   AixLib.Utilities.HeatTransfer.HeatConv conv_HC1_Outside[dis_HC](each alpha=
-        alpha_HC, A=fill(pipe_HC.d_o*Modelica.Constants.pi*length_HC/dis_HC,
+        alpha_HC, A=fill(pipeRecordHC.d_o*Modelica.Constants.pi*lengthHC/dis_HC,
         dis_HC)) annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=270,
@@ -52,7 +52,12 @@ model HeatingCoil
     annotation (Placement(transformation(extent={{-106,-10},{-86,10}})));
   Sensors.MassFlowSensor m_flow
     annotation (Placement(transformation(extent={{30,-10},{50,10}})));
-  Utilities.HeatTransfer.HeatConvPipeInside conv_HC1_Inside[dis_HC] annotation (
+  Utilities.HeatTransfer.HeatConvPipeInside conv_HC1_Inside[dis_HC](
+    length=fill(lengthHC, dis_HC),
+    d_i=fill(pipeRecordHC.d_i, dis_HC),
+    d_a=fill(pipeRecordHC.d_o, dis_HC),
+    A_sur=fill(pipeRecordHC.d_o*Modelica.Constants.pi*lengthHC/dis_HC, dis_HC))
+                                                                    annotation (
      Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
