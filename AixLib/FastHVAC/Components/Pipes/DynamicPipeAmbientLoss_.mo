@@ -55,9 +55,9 @@ public
     annotation (Dialog(enable=selectable), choicesAllMatching=true);
     parameter Boolean withInsulation = true
     "Option to add insulation of the pipe";
-    parameter AixLib.DataBase.Pipes.IsolationBaseDataDefinition
+    parameter AixLib.DataBase.Pipes.InsulationBaseDataDefinition
                                                    parameterIso=
-                 AixLib.DataBase.Pipes.Isolation.Iso100pc() "Type of Insulation"
+                 AixLib.DataBase.Pipes.Insulation.Iso100pc() "Type of Insulation"
                    annotation (choicesAllMatching=true, Dialog( enable = withInsulation));
     parameter Boolean withConvection = true
     "= true to internally simulate heat loss to ambient by convection ";

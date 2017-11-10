@@ -57,9 +57,9 @@ public
     parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaInside = 30 "Fix value for heat transfer coeffiecient inside pipe" annotation(Dialog(enable = not calculateAlpha));
     parameter Boolean withInsulation = false
     "Option to add insulation of the pipe";
-    parameter AixLib.DataBase.Pipes.IsolationBaseDataDefinition
+    parameter AixLib.DataBase.Pipes.InsulationBaseDataDefinition
                                                    parameterIso=
-                 AixLib.DataBase.Pipes.Isolation.Iso100pc() "Type of Insulation"
+                 AixLib.DataBase.Pipes.Insulation.Iso100pc() "Type of Insulation"
                    annotation (choicesAllMatching=true, Dialog( enable = withInsulation));
 
   /* *******************************************************************
