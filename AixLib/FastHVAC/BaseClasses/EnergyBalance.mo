@@ -17,11 +17,11 @@ model EnergyBalance "Base class depicts energy and mass balances"
 
 equation
   // Mass and energy balances
-  enthalpyPort_a.m_flow + enthalpyPort_b.m_flow = 0;
+  enthalpyPort_a.m_flow - enthalpyPort_b.m_flow = 0;
   enthalpyPort_b.T = heatPort_a.T;
   enthalpyPort_b.h = enthalpyPort_a.c*heatPort_a.T;
   enthalpyPort_b.c = enthalpyPort_a.c;
-  heatPort_a.Q_flow = -(enthalpyPort_a.h*enthalpyPort_a.m_flow + enthalpyPort_b.h*enthalpyPort_b.m_flow);
+  heatPort_a.Q_flow = -(enthalpyPort_a.h*enthalpyPort_a.m_flow - enthalpyPort_b.h*enthalpyPort_b.m_flow);
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={Rectangle(
