@@ -3,7 +3,7 @@ package Examples
   extends Modelica.Icons.ExamplesPackage;
   model Pipes
     extends Modelica.Icons.Example;
-    Components.Pipes.DynamicPipe dynamicPipeAmbientLoss(
+    Components.Pipes.DynamicPipe PipeInsulationAndConvectionandRadiation(
       withInsulation=true,
       withConvection=true,
       withRadiation=true)
@@ -25,7 +25,7 @@ package Examples
     Modelica.Thermal.HeatTransfer.Sources.FixedTemperature
       fixedTemperatureSurroundingAir3(T=288.15)
       annotation (Placement(transformation(extent={{-32,-76},{-16,-60}})));
-    Components.Pipes.DynamicPipe dynamicPipeAmbientLoss1(
+    Components.Pipes.DynamicPipe PipeInsulationAndConvection(
       withInsulation=true,
       withConvection=true,
       withRadiation=false)
@@ -51,7 +51,7 @@ package Examples
       annotation (Placement(transformation(extent={{-96,38},{-82,52}})));
     Components.Pumps.FluidSource fluidSource3
       annotation (Placement(transformation(extent={{-74,36},{-54,56}})));
-    Components.Pipes.DynamicPipe dynamicPipeAmbientLoss2(
+    Components.Pipes.DynamicPipe PipeInsulation(
       withInsulation=true,
       withRadiation=false,
       withConvection=false)
@@ -66,39 +66,40 @@ package Examples
             {-74,-65},{-74,-81.8}}, color={0,0,127}));
     connect(mFlow1.y, fluidSource1.m_flow) annotation (Line(points={{-83.3,-87},
             {-75.65,-87},{-75.65,-88.6},{-74,-88.6}}, color={0,0,127}));
-    connect(fixedTemperatureSurroundingAir2.port, dynamicPipeAmbientLoss.star)
-      annotation (Line(points={{4,-68},{4,-80.8},{4.8,-80.8}}, color={191,0,0}));
-    connect(fixedTemperatureSurroundingAir3.port, dynamicPipeAmbientLoss.heatPort_outside)
-      annotation (Line(points={{-16,-68},{-16,-80.8},{-12.8,-80.8}}, color={191,
-            0,0}));
+    connect(fixedTemperatureSurroundingAir2.port,
+      PipeInsulationAndConvectionandRadiation.star) annotation (Line(points={{4,
+            -68},{4,-80.8},{4.8,-80.8}}, color={191,0,0}));
+    connect(fixedTemperatureSurroundingAir3.port,
+      PipeInsulationAndConvectionandRadiation.heatPort_outside) annotation (
+        Line(points={{-16,-68},{-16,-80.8},{-12.8,-80.8}}, color={191,0,0}));
     connect(TFlow2.y, fluidSource2.T_fluid) annotation (Line(points={{-81.2,5},
             {-72,5},{-72,-13.8}}, color={0,0,127}));
     connect(mFlow2.y, fluidSource2.m_flow) annotation (Line(points={{-81.3,-19},
             {-83.65,-19},{-83.65,-20.6},{-72,-20.6}}, color={0,0,127}));
-    connect(fixedTemperatureSurroundingAir5.port, dynamicPipeAmbientLoss1.heatPort_outside)
+    connect(fixedTemperatureSurroundingAir5.port, PipeInsulationAndConvection.heatPort_outside)
       annotation (Line(points={{-16,-2},{-16,-12.8},{-14.8,-12.8}}, color={191,
             0,0}));
-    connect(fluidSource2.enthalpyPort_b, dynamicPipeAmbientLoss1.enthalpyPort_a1)
+    connect(fluidSource2.enthalpyPort_b, PipeInsulationAndConvection.enthalpyPort_a1)
       annotation (Line(points={{-54,-17},{-43,-17},{-43,-18},{-15.8,-18}},
           color={176,0,0}));
-    connect(fixedTemperatureSurroundingAir1.port, dynamicPipeAmbientLoss2.heatPort_outside)
+    connect(fixedTemperatureSurroundingAir1.port, PipeInsulation.heatPort_outside)
       annotation (Line(points={{-16,62},{-16,47.2},{-14.8,47.2}}, color={191,0,
             0}));
     connect(TFlow3.y, fluidSource3.T_fluid) annotation (Line(points={{-81.2,69},
             {-81.2,59.5},{-72,59.5},{-72,50.2}}, color={0,0,127}));
     connect(mFlow3.y, fluidSource3.m_flow) annotation (Line(points={{-81.3,45},
             {-76.65,45},{-76.65,43.4},{-72,43.4}}, color={0,0,127}));
-    connect(fluidSource3.enthalpyPort_b, dynamicPipeAmbientLoss2.enthalpyPort_a1)
+    connect(fluidSource3.enthalpyPort_b, PipeInsulation.enthalpyPort_a1)
       annotation (Line(points={{-54,47},{-36,47},{-36,42},{-15.8,42}}, color={
             176,0,0}));
-    connect(dynamicPipeAmbientLoss2.enthalpyPort_b1, vessel3.enthalpyPort_a)
+    connect(PipeInsulation.enthalpyPort_b1, vessel3.enthalpyPort_a)
       annotation (Line(points={{3.8,42},{71,42}}, color={176,0,0}));
-    connect(dynamicPipeAmbientLoss1.enthalpyPort_b1, vessel2.enthalpyPort_a)
+    connect(PipeInsulationAndConvection.enthalpyPort_b1, vessel2.enthalpyPort_a)
       annotation (Line(points={{3.8,-18},{71,-18}}, color={176,0,0}));
-    connect(fluidSource1.enthalpyPort_b, dynamicPipeAmbientLoss.enthalpyPort_a1)
-      annotation (Line(points={{-56,-85},{-34,-85},{-34,-86},{-13.8,-86}},
-          color={176,0,0}));
-    connect(dynamicPipeAmbientLoss.enthalpyPort_b1, vessel1.enthalpyPort_a)
+    connect(fluidSource1.enthalpyPort_b,
+      PipeInsulationAndConvectionandRadiation.enthalpyPort_a1) annotation (Line(
+          points={{-56,-85},{-34,-85},{-34,-86},{-13.8,-86}}, color={176,0,0}));
+    connect(PipeInsulationAndConvectionandRadiation.enthalpyPort_b1, vessel1.enthalpyPort_a)
       annotation (Line(points={{5.8,-86},{36,-86},{36,-84},{69,-84}}, color={
             176,0,0}));
     annotation (experiment(StopTime=5000), Diagram(graphics={
