@@ -238,8 +238,6 @@ equation
 <h4>DynamicPipe with heat loss to ambient</h4>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>This model is based on  <a href=\"FastHVAC.Components.Pipes.BaseClasses.PipeBase\">pipeBase</a>. The pipes parameter can be chosen from  <a href=\"DataBase\">DataBase</a> or entered manually . This model takes into account the heat loss due to convection and / or radiation and  insulation can also be chosen.</p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars3.png\"/></p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <p>The fluid inside the pipe is represented by the model  <a href=\"modelica:/Modelica.Thermal.HeatTransfer.Components.HeatCapacitor\">HeatCapacitor</a>. Two cilindrical layers with <a href=\"HVAC.Components.Pipes.BaseClasses.Insulation.CylindricHeatConduction\">heat conduction</a> and <a href=\"HVAC.Components.Pipes.BaseClasses.Insulation.CylindricLoad\">heat storage</a> where added for the pipe wall and pipe insulation each.</p>
 <p>The model directly calculates radiation and convection instead of modeling these phenomena outside the pipe, an ambient temperature can be prescribed at the heat-port and the star of the pipe and the loss to ambient will be calculated within the pipe model. The purpose is to clean up bigger models and to simplify modeling systems with pipes outside building-walls.</p> 
