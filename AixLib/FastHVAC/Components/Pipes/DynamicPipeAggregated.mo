@@ -264,6 +264,8 @@ equation
 <h4>DynamicPipe with heat loss to ambient</h4>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>This model is based on  <a href=\"FastHVAC.Components.Pipes.DynamicPipe\">DynamicPipe</a>. The difference is that the aggregated pipe has pipe wall and insulation wall which allows discretisation of pipe wall and pipe insulation.</p>
+<h4><span style=\"color:#008000\">Level of Development</span></h4>
+<p><img src=\"modelica://HVAC/Images/stars3.png\"/></p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <p>Differently from <a href=\"FastHVAC.Components.Pipes.DynamicPipe\">DynamicPipe</a> for each discretisation of the pipe, there is a connector to the corresponding element of the discretized pipe wall. Each element of the discretised pipe wall is connected to a corresponding element of the discretized insulation wall. The heat-ports and stars of all nodes are then collected to form two single ports, which can be connected to an ambient temperature. </p>
 
