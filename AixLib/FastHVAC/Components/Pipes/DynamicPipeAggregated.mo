@@ -176,22 +176,22 @@ equation
          end if;
          // only convection
          if (withConvection and not withRadiationParam and not withInsulation) then
-           connect(pipeWall.port_b,heatConv.port_a);
-           connect(heatConv.port_b, heatPorts);
+           connect(pipeWall.port_b,heatConv.port_b);
+           connect(heatConv.port_a, heatPorts);
 
          end if;
          //convection and radiation
          if (withConvection and withRadiationParam and not withInsulation) then
-             connect(pipeWall.port_b,heatConv.port_a);
-             connect(heatConv.port_b, heatPorts);
+             connect(pipeWall.port_b,heatConv.port_b);
+             connect(heatConv.port_a, heatPorts);
              connect(pipeWall.port_b, twoStar_RadEx.Therm);
 
          end if;
          //convection and insulation
          if (withConvection and withInsulation and not withRadiationParam) then
              connect(pipeWall.port_b,insulation.port_a);
-             connect(insulation.port_b,  heatConv.port_a);
-             connect(heatConv.port_b, heatPorts);
+             connect(insulation.port_b,  heatConv.port_b);
+             connect(heatConv.port_a, heatPorts);
 
          end if;
          // radiation and insulation (doesn't work)
@@ -204,8 +204,8 @@ equation
          //radiation, insulation and convection
          if (withRadiationParam and withInsulation and withConvection) then
              connect(pipeWall.port_b,insulation.port_a);
-             connect(insulation.port_b,  heatConv.port_a);
-             connect(heatConv.port_b, heatPorts);
+             connect(insulation.port_b,  heatConv.port_b);
+             connect(heatConv.port_a, heatPorts);
              connect(insulation.port_b, twoStar_RadEx.Therm);
 
          end if;
@@ -264,16 +264,14 @@ equation
 <h4>DynamicPipe with heat loss to ambient</h4>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>This model is based on  <a href=\"FastHVAC.Components.Pipes.DynamicPipe\">DynamicPipe</a>. The difference is that the aggregated pipe has pipe wall and insulation wall which allows discretisation of pipe wall and pipe insulation.</p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars3.png\"/></p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
-<p>Differently from <a href=\"FastHVAC.Components.Pipes.DynamicPipe\">DynamicPipe</a> for each discretisation of the pipe, there is a connector to the corresponding element of the discretized pipe wall. Each element of the discretised pipe wall is connected to a corresponding element of the discretized insulation wall. The heat-ports and stars of all nodes are then collected to form two single ports, which can be connected to an ambient temperature. </p>
-
+<p>Differently from <a> href=\"FastHVAC.Components.Pipes.DynamicPipe\">DynamicPipe</a> for each discretisation of the pipe, there is a connector to the corresponding element of the discretized pipe wall. Each element of the discretised pipe wall is connected to a corresponding element of the discretized insulation wall. The heat-ports and stars of all nodes are then collected to form two single ports, which can be connected to an ambient temperature. </p>
 <h4><span style=\"color:#008000\">Example Results</span></h4>
-<p><a href=\"FastHVAC.Examples.Pipes.DynamicPipe_ambientLoss\">DynamicPipe_ambientLoss</a></p>
+<p><a> href=\"FastHVAC.Examples.Pipes.DynamicPipe_ambientLoss\">DynamicPipe_ambientLoss</a></p>
 </html>",
 revisions="<html>
 <p><ul>
+<li><i>November 17, 2017&nbsp; </i> David Jansen:<br />Reduced pipe models to two versions and moved to development</li>
 <li><i>December 20, 2016&nbsp; </i> Tobias Blacha:<br />Moved into AixLib</li>
 <li><i>January 27, 2015 </i> by Konstantin Finkbeiner:<br />Addapted to FastHVAC</li>
 <li><i>November 26, 2014&nbsp;</i> by Roozbeh Sangi:<br />Updated connectors to EBC Library 2.2, Updated documentation, Added example</li>

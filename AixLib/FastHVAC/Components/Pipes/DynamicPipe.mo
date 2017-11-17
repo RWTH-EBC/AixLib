@@ -158,22 +158,22 @@ equation
          end if;
          // only convection
          if (withConvection and not withRadiationParam and not withInsulation) then
-           connect(pipeWall.port_b,heatConv.port_a);
-           connect(heatConv.port_b, heatPort_outside);
+           connect(pipeWall.port_b,heatConv.port_b);
+           connect(heatConv.port_a, heatPort_outside);
 
          end if;
          //convection and radiation
          if (withConvection and withRadiationParam and not withInsulation) then
-             connect(pipeWall.port_b,heatConv.port_a);
-             connect(heatConv.port_b, heatPort_outside);
+             connect(pipeWall.port_b,heatConv.port_b);
+             connect(heatConv.port_a, heatPort_outside);
              connect(pipeWall.port_b, twoStar_RadEx.Therm);
 
          end if;
          //convection and insulation
          if (withConvection and withInsulation and not withRadiationParam) then
              connect(pipeWall.port_b,insulation.port_a);
-             connect(insulation.port_b,  heatConv.port_a);
-             connect(heatConv.port_b, heatPort_outside);
+             connect(insulation.port_b,  heatConv.port_b);
+             connect(heatConv.port_a, heatPort_outside);
 
          end if;
          // radiation and insulation (doesn't work)
@@ -186,8 +186,8 @@ equation
          //radiation, insulation and convection
          if (withRadiationParam and withInsulation and withConvection) then
              connect(pipeWall.port_b,insulation.port_a);
-             connect(insulation.port_b,  heatConv.port_a);
-             connect(heatConv.port_b, heatPort_outside);
+             connect(insulation.port_b,  heatConv.port_b);
+             connect(heatConv.port_a, heatPort_outside);
              connect(insulation.port_b, twoStar_RadEx.Therm);
 
          end if;
@@ -237,20 +237,18 @@ equation
 <html>
 <h4>DynamicPipe with heat loss to ambient</h4>
 <h4><span style=\"color:#008000\">Overview</span></h4>
-<p>This model is based on  <a href=\"FastHVAC.Components.Pipes.BaseClasses.PipeBase\">pipeBase</a>. The pipes parameter can be chosen from  <a href=\"DataBase\">DataBase</a> or entered manually . This model takes into account the heat loss due to convection and / or radiation and  insulation can also be chosen.</p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars3.png\"/></p>
+<p>This model is based on  <a> href=\"FastHVAC.Components.Pipes.BaseClasses.PipeBase\">pipeBase</a>. The pipes parameter can be chosen from  <a href=\"DataBase\">DataBase</a> or entered manually . This model takes into account the heat loss due to convection and / or radiation and  insulation can also be chosen.</p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <p>The fluid inside the pipe is represented by the model  <a href=\"modelica:/Modelica.Thermal.HeatTransfer.Components.HeatCapacitor\">HeatCapacitor</a>. Two cilindrical layers with <a href=\"HVAC.Components.Pipes.BaseClasses.Insulation.CylindricHeatConduction\">heat conduction</a> and <a href=\"HVAC.Components.Pipes.BaseClasses.Insulation.CylindricLoad\">heat storage</a> where added for the pipe wall and pipe insulation each.</p>
 <p>The model directly calculates radiation and convection instead of modeling these phenomena outside the pipe, an ambient temperature can be prescribed at the heat-port and the star of the pipe and the loss to ambient will be calculated within the pipe model. The purpose is to clean up bigger models and to simplify modeling systems with pipes outside building-walls.</p> 
 <p>Please note that it's not possible to consider radiation without considering convection.</p>
 <p>Also, be careful when using neither isolation nor convection, as this will result in ideal heat transfer to the outside of the pipe and so to a significant heat loss. Might be useful if used for example for CCA (concrete core activation).</p>
-
 <h4><span style=\"color:#008000\">Example Results</span></h4>
-<p><a href=\"FastHVAC.Examples.Pipes.DynamicPipe_ambientLoss\">DynamicPipe_ambientLoss</a></p>
+<p><a> href=\"FastHVAC.Examples.Pipes.DynamicPipe_ambientLoss\">DynamicPipe_ambientLoss</a></p>
 </html>",
 revisions="<html>
 <p><ul>
+<li><i>November 17, 2017&nbsp; </i> David Jansen:<br />Reduced pipe models to two versions and moved to development</li>
 <li><i>December 20, 2016&nbsp; </i> Tobias Blacha:<br />Moved into AixLib</li>
 <li><i>January 27, 2015 </i> by Konstantin Finkbeiner:<br />Addapted to FastHVAC</li>
 <li><i>November 26, 2014&nbsp;</i> by Roozbeh Sangi:<br />Updated connectors to EBC Library 2.2, Updated documentation, Added example</li>
