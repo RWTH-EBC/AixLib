@@ -8,11 +8,9 @@ extends AixLib.FastHVAC.Media.BaseClasses.MediumSimple(
   annotation (Documentation(info="<html>
 <p>
 This record declares parameters for the solar fluid with 50%-vol DC20.
-
-Media properties can be found in:
-<li>
+Media properties can be found in:</p>
+<p>
 http://www.wagnersolarshop.com/files//db3431d4-a9ac-4f0b-99ed-a11700e12772/EN-XX_DC20_TI-091110-11207500[1].pdf
-</li>
 </p>
 </html>", revisions="<html>
 <ul>
