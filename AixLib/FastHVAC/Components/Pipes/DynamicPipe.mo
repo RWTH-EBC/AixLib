@@ -1,5 +1,5 @@
 within AixLib.FastHVAC.Components.Pipes;
-model DynamicPipe
+model DynamicPipe "DynamicPipe with heat loss to ambient"
 
   /* *******************************************************************
       Medium
@@ -235,19 +235,18 @@ equation
     
     
 <html>
-<h4>DynamicPipe with heat loss to ambient</h4>
 <h4><span style=\"color:#008000\">Overview</span></h4>
-<p>This model is based on  <a> href=\"FastHVAC.Components.Pipes.BaseClasses.PipeBase\">pipeBase</a>. The pipes parameter can be chosen from  <a href=\"DataBase\">DataBase</a> or entered manually . This model takes into account the heat loss due to convection and / or radiation and  insulation can also be chosen.</p>
+<p>This model is based on  <a href=\"FastHVAC.Components.Pipes.BaseClasses.PipeBase\">pipeBase</a>. The pipes parameter can be chosen from  <a href=\"DataBase\">DataBase</a> or entered manually . This model takes into account the heat loss due to convection and / or radiation and  insulation can also be chosen.</p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <p>The fluid inside the pipe is represented by the model  <a href=\"modelica:/Modelica.Thermal.HeatTransfer.Components.HeatCapacitor\">HeatCapacitor</a>. Two cilindrical layers with <a href=\"HVAC.Components.Pipes.BaseClasses.Insulation.CylindricHeatConduction\">heat conduction</a> and <a href=\"HVAC.Components.Pipes.BaseClasses.Insulation.CylindricLoad\">heat storage</a> where added for the pipe wall and pipe insulation each.</p>
 <p>The model directly calculates radiation and convection instead of modeling these phenomena outside the pipe, an ambient temperature can be prescribed at the heat-port and the star of the pipe and the loss to ambient will be calculated within the pipe model. The purpose is to clean up bigger models and to simplify modeling systems with pipes outside building-walls.</p> 
 <p>Please note that it's not possible to consider radiation without considering convection.</p>
 <p>Also, be careful when using neither isolation nor convection, as this will result in ideal heat transfer to the outside of the pipe and so to a significant heat loss. Might be useful if used for example for CCA (concrete core activation).</p>
 <h4><span style=\"color:#008000\">Example Results</span></h4>
-<p><a> href=\"FastHVAC.Examples.Pipes.DynamicPipe_ambientLoss\">DynamicPipe_ambientLoss</a></p>
+<p><a href=\"FastHVAC.Examples.Pipes\">Pipes</a></p>
 </html>",
 revisions="<html>
-<p><ul>
+<ul>
 <li><i>November 17, 2017&nbsp; </i> David Jansen:<br />Reduced pipe models to two versions and moved to development</li>
 <li><i>December 20, 2016&nbsp; </i> Tobias Blacha:<br />Moved into AixLib</li>
 <li><i>January 27, 2015 </i> by Konstantin Finkbeiner:<br />Addapted to FastHVAC</li>
@@ -256,7 +255,7 @@ revisions="<html>
 <li><i>November 13, 2013&nbsp;</i> by Ole Odendahl:<br />Formatted documentation appropriately</li>
 <li><i>August 9, 2011</i> by Ana Constantin:<br />Introduced the possibility of neglecting the insulation wall</li>
 <li><i>April 11, 2011</i> by Ana Constantin:<br />Implemented</li>
-</ul></p>
+</ul>
 </html>
 
 
