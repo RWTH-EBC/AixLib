@@ -10,7 +10,7 @@ model UDPSend_adapted "A block for sending UDP datagrams"
   //  "Sample time for update";
   parameter Boolean autoBufferSize = true
     "true, buffer size is deduced automatically, otherwise set it manually."
-    annotation(Dialog(group="Outgoing data"), choices(__Dymola_checkBox=true));
+    annotation(Dialog(group="Outgoing data"), choices(checkBox=true));
   parameter Integer userBufferSize=16*1024
     "Buffer size of message data in bytes (if not deduced automatically)." annotation(Dialog(enable=not autoBufferSize, group="Outgoing data"));
   parameter String IPAddress="127.0.0.1" "IP address of remote UDP server"
