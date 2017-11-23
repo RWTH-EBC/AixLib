@@ -12,14 +12,14 @@ operatingRange={0.2,1});
 <p><h4><font color=\"#008000\">References</font></h4></p>
 <p>Record is not currently used in any model.</p>
 <p>Source:</p>
-<p><ul>
+<ul>
 <li>Buderus &QUOT;Planungsunterlage Logano plus GB202&QUOT; p. 20</li>
 <li>BibTexKey: BuderusLoganoPlusGB202</li>
-</ul></p>
+</ul>
 </html>",
       revisions="<html>
-<p><ul>
+<ul>
 <li><i>June 27, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately, reference added</li>
-</ul></p>
+</ul>
 </html>"));
 end BuderusGB202_40_30;
