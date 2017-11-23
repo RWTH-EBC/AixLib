@@ -24,12 +24,12 @@ public
   Modelica.Blocks.Interfaces.RealInput T_fluid( unit="K")
     "External real input to set the temperature of the fluid"
     annotation (Placement(transformation(extent={{-100,22},{-60,62}})));
-  Modelica.Blocks.Interfaces.RealInput m_flow( unit="kg/s")
+  Modelica.Blocks.Interfaces.RealInput dotm( unit="kg/s")
     "External real input to set the mass flow rate"
     annotation (Placement(transformation(extent={{-100,-46},{-60,-6}})));
 equation
   // balances
-  enthalpyPort_b.m_flow = m_flow " set value of outlet port ";
+  enthalpyPort_b.m_flow = dotm " set value of outlet port ";
   enthalpyPort_b.c = cp " set value of outlet port ";
   enthalpyPort_b.T = T_fluid " set value of outlet port ";
   enthalpyPort_b.h = cp*T_fluid " set value of outlet port ";
