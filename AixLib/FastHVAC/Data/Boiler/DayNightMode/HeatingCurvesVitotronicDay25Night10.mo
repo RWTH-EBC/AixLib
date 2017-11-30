@@ -18,9 +18,8 @@ record HeatingCurvesVitotronicDay25Night10
         10,10,10,10,10,10,10,10; 20,10,10,10,10,10,10,10,10,10]);
 
   annotation (Documentation(info="<html>
-
 <h4>
-  <font color=#008000>Overview</font>
+  <font color=\"#008000\">Overview</font>
 </h4>
 <p>
   Collection of Heating Curves for Viessmann Vitotronic Controller
@@ -32,17 +31,17 @@ record HeatingCurvesVitotronicDay25Night10
   </li>
 </ul>
 <h4>
-  <font color=#008000>Level of Development</font>
+  <font color=\"#008000\">Level of Development</font>
 </h4>
 <p>
-  <img src=modelica://HVAC/Images/stars5.png/ alt="
-                                                   "></img>
+  <img src=\"modelica://HVAC/Images/stars5.png/\" alt="
+                                                       ">
 </p>
 <h4>
-  <font color=#008000>References</font>
+  <font color=\"#008000\">References</font>
 </h4>
 <p>
-  Record is used with <a href=HVAC.Components.HeatGenerators.Boiler.BoilerWithController>HVAC.Components.HeatG$
+  Record is used with <a href=\"HVAC.Components.HeatGenerators.Boiler.BoilerWithController\">HVAC.Components.HeatGenerators.Boiler.BoilerWithController</a>
 </p>
 <p>
   Source:
@@ -52,22 +51,15 @@ record HeatingCurvesVitotronicDay25Night10
   </li>
   <li>Manufacturer: Viessmann
   </li>
-  <li>Borschure: VITOTRONIC 200 - Heizungsanlage mit witterungsgefuehrter, digitaler Kessel- und Heizkreisregelung$
+  <li>Borschure: VITOTRONIC 200 - Heizungsanlage mit witterungsgefuehrter, digitaler Kessel- und Heizkreisregelung; 7/2002
   </li>
   <li>Bibtexkey: Viessmann2002
   </li>
 </ul>
-
 </html>",
       revisions="<html>
-
-<ul>
-  <li>
-    <i>July 2, 2013&nbsp;</i> by Ole Odendahl:<br>
-    Added documentation and formatted appropriately
-  </li>
-</ul>
-
-
+<p><ul>
+<li><i>July 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
+</ul></p>
 </html>"));
 end HeatingCurvesVitotronicDay25Night10;
