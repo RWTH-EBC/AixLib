@@ -34,8 +34,7 @@ record HeatingCurvesVitotronicDay25Night10
   <font color=\"#008000\">Level of Development</font>
 </h4>
 <p>
-  <img src=\"modelica://HVAC/Images/stars5.png/\" alt="
-                                                       "></img>
+  <img src=\"modelica://HVAC/Images/stars5.png/\" alt=""></img>
 </p>
 <h4>
   <font color=\"#008000\">References</font>
@@ -46,6 +45,7 @@ record HeatingCurvesVitotronicDay25Night10
 <p>
   Source:
 </p>
+<p>
 <ul>
   <li>Product: Vitotronic 200
   </li>
@@ -56,6 +56,7 @@ record HeatingCurvesVitotronicDay25Night10
   <li>Bibtexkey: Viessmann2002
   </li>
 </ul>
+</p>
 </html>",
       revisions="<html>
 <p><ul>
