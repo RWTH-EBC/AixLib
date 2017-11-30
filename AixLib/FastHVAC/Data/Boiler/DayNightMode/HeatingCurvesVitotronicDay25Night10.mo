@@ -18,23 +18,46 @@ record HeatingCurvesVitotronicDay25Night10
         10,10,10,10,10,10,10,10; 20,10,10,10,10,10,10,10,10,10]);
 
   annotation (Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
-<p>Collection of Heating Curves for Viessmann Vitotronic Controller</p>
-<p><ul>
-<li>Set temperature day: 25&deg;C</li>
-<li>Set temperature night: 10&deg;C</li>
-</ul></p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
-<p>Record is used with <a href=\"HVAC.Components.HeatGenerators.Boiler.BoilerWithController\">HVAC.Components.HeatGenerators.Boiler.BoilerWithController</a></p>
-<p>Source:</p>
-<p><ul>
-<li>Product: Vitotronic 200</li>
-<li>Manufacturer: Viessmann</li>
-<li>Borschure: VITOTRONIC 200 - Heizungsanlage mit witterungsgefuehrter, digitaler Kessel- und Heizkreisregelung; 7/2002</li>
-<li>Bibtexkey: Viessmann2002</li>
-</ul></p>
+
+<h4>
+  <font color=\"#008000\">Overview</font>
+</h4>
+<p>
+  Collection of Heating Curves for Viessmann Vitotronic Controller
+</p>
+<ul>
+  <li>Set temperature day: 25&deg;C
+  </li>
+  <li>Set temperature night: 10&deg;C
+  </li>
+</ul>
+<h4>
+  <font color=\"#008000\">Level of Development</font>
+</h4>
+<p>
+  <img src=\"modelica://HVAC/Images/stars5.png/\" alt="
+                                                       ">
+</p>
+<h4>
+  <font color=\"#008000\">References</font>
+</h4>
+<p>
+  Record is used with <a href=\"HVAC.Components.HeatGenerators.Boiler.BoilerWithController\">HVAC.Components.HeatG$
+</p>
+<p>
+  Source:
+</p>
+<ul>
+  <li>Product: Vitotronic 200
+  </li>
+  <li>Manufacturer: Viessmann
+  </li>
+  <li>Borschure: VITOTRONIC 200 - Heizungsanlage mit witterungsgefuehrter, digitaler Kessel- und Heizkreisregelung$
+  </li>
+  <li>Bibtexkey: Viessmann2002
+  </li>
+</ul>
+
 </html>",
       revisions="<html>
 <p><ul>
