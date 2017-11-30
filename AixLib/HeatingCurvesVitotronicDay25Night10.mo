@@ -47,7 +47,7 @@ record HeatingCurvesVitotronicDay25Night10
 </p>
 <p>
 <ul>
-  <li>Product: Vitotronic 200
+  <li>Product: Vitotronic 200TESTTEST
   </li>
   <li>Manufacturer: Viessmann
   </li>
