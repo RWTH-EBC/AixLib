@@ -35,7 +35,7 @@ record HeatingCurvesVitotronicDay25Night10
 </h4>
 <p>
   <img src=\"modelica://HVAC/Images/stars5.png/\" alt="
-                                                       ">
+                                                       "></img>
 </p>
 <h4>
   <font color=\"#008000\">References</font>
