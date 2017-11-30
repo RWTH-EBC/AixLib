@@ -60,8 +60,14 @@ record HeatingCurvesVitotronicDay25Night10
 
 </html>",
       revisions="<html>
-<p><ul>
-<li><i>July 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
-</ul></p>
+
+<ul>
+  <li>
+    <i>July 2, 2013&nbsp;</i> by Ole Odendahl:<br>
+    Added documentation and formatted appropriately
+  </li>
+</ul>
+
+
 </html>"));
 end HeatingCurvesVitotronicDay25Night10;
