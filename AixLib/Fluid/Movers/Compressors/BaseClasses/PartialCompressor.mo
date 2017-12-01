@@ -2,6 +2,7 @@ within AixLib.Fluid.Movers.Compressors.BaseClasses;
 partial model PartialCompressor
   "Partial model for compressor that contains basic definitions used in 
   various compressor models"
+  import AixLib;
 
   // Definition of the medium
   //
@@ -52,7 +53,7 @@ partial model PartialCompressor
   // Definition of models describing efficiencies
   //
   replaceable model EngineEfficiency =
-    Utilities.EngineEfficiency.ConstantEfficiency
+    Utilities.EngineEfficiency.SpecifiedEfficiencies.ConstantEfficiency
     constrainedby Utilities.EngineEfficiency.PartialEngineEfficiency
     "Model that describes the calculation of the overall mechanic efficiency"
     annotation (Placement(
@@ -62,7 +63,7 @@ partial model PartialCompressor
       Dialog(
       tab = "Efficiencies and similitude theory", group="Engine efficiency"));
   replaceable model VolumetricEfficiency =
-    Utilities.VolumetricEfficiency.ConstantEfficiency
+    Utilities.VolumetricEfficiency.SpecifiedEfficiencies.ConstantEfficiency
     constrainedby Utilities.VolumetricEfficiency.PartialVolumetricEfficiency
     "Model that describes the calculation of the overall volumetric efficiency"
     annotation (Placement(
@@ -72,7 +73,7 @@ partial model PartialCompressor
       Dialog(
       tab = "Efficiencies and similitude theory", group="Volumetric efficiency"));
   replaceable model IsentropicEfficiency =
-    Utilities.IsentropicEfficiency.ConstantEfficiency
+    AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency.SpecifiedEfficiencies.ConstantEfficiency
     constrainedby Utilities.IsentropicEfficiency.PartialIsentropicEfficiency
     "Model that describes the calculation of the overall isentropic efficiency"
     annotation (Placement(

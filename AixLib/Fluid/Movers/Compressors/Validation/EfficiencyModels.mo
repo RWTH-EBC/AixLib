@@ -2,6 +2,7 @@
 model EfficiencyModels
   "Validation model to check efficiencies calculated with respect to different 
   prescribed conditions"
+  import AixLib;
   extends Modelica.Icons.Example;
 
   // Define medium and parameters
@@ -56,11 +57,11 @@ model EfficiencyModels
     show_qua=true,
     useInpFil=false,
     redeclare model EngineEfficiency =
-        Utilities.EngineEfficiency.Generic.Poly_VarRef_VarDisVol_RotaryScroll,
+        Utilities.EngineEfficiency.SpecifiedEfficiencies.Generic_VarRef_VarDisVol_RotaryScroll,
     redeclare model VolumetricEfficiency =
-        Utilities.VolumetricEfficiency.Generic.Poly_VarRef_VarDisVol_RotaryScroll,
+        Utilities.VolumetricEfficiency.SpecifiedEfficiencies.Generic_VarRef_VarDisVol_RotaryScroll,
     redeclare model IsentropicEfficiency =
-        Utilities.IsentropicEfficiency.Generic.Poly_VarRef_VarDisVol_RotaryScroll)
+        AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency.SpecifiedEfficiencies.Generic_VarRef_VarDisVol_RotaryScroll)
     "Model of a rotary compressor"
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
   Sources.Boundary_pT sink(

@@ -125,10 +125,9 @@ a3*&pi;^2</code></td>
 </tr> 
 <tr>
 <td>Engelpracht2017</td> 
-<td><code>&eta;<sub>eng</sub> = a1 + a2*&pi; + a3*&pi;^2 + a4*&pi;^3 + 
-a5*n + a6*n^2 + a7*n^3 + a8*n^4 + a9*n^5 + a10*n*&pi; + a11*n*&pi;^2 + 
-a12*n*&pi;^3 + a13*n^2*&pi; + a14*n^2*&pi;^2 + a15*n^2*&pi;^3 + 
-a16*n^3*&pi; + a17*n^3*&pi;^2 + a18*n^4*&pi;</code></td> 
+<td><code>&eta;<sub>eng</sub> = a1 + a2*&pi; + a3*&pi;^2 + a4*n*&pi; + 
+a5*n^2 + a6*&pi;^2*n + a7*&pi;*n^2 + a8*n^3 + a9*&pi;^2n^2 + a10*&pi;*&pi;^3 
++ a11*n^4</code></td> 
 <td>Generic model</td> 
 <td><code>0 - 120</code></td> 
 <td><code>1 - 10</code></td> 

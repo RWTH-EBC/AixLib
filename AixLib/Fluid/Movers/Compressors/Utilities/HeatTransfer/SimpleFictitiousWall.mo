@@ -98,5 +98,10 @@ also time invariante.
           lineColor={0,0,0},
           fillColor={0,0,255},
           fillPattern=FillPattern.Solid,
-          textString="Fictitious Wall")}));
+          textString="Fictitious Wall")}),
+    Diagram(graphics={Rectangle(
+          extent={{-70,20},{70,-22}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Forward)}));
 end SimpleFictitiousWall;

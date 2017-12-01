@@ -1,6 +1,7 @@
 within AixLib.Fluid.Movers.Compressors.Validation;
 model ModularInactiveCompressors
   "Validation model to test modular compressors if not all compressors are active"
+  import AixLib;
   extends Modelica.Icons.Example;
 
   // Define medium and parameters
@@ -42,11 +43,11 @@ model ModularInactiveCompressors
     nCom=nCom,
     redeclare package Medium = Medium,
     redeclare model EngineEfficiency =
-        Utilities.EngineEfficiency.Generic.Poly_VarRef_VarDisVol_RotaryScroll,
+        Utilities.EngineEfficiency.SpecifiedEfficiencies.Generic_VarRef_VarDisVol_RotaryScroll,
     redeclare model VolumetricEfficiency =
-        Utilities.VolumetricEfficiency.RotaryCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_VarDisVol_Rotary,
+        Utilities.VolumetricEfficiency.SpecifiedEfficiencies.Buck_R134aR450aR1234yfR1234zee_VarDisVol_Rotary,
     redeclare model IsentropicEfficiency =
-        Utilities.IsentropicEfficiency.RotaryCompressors.SimilitudeTheory.Buck_R134aR450aR1234yfR1234zee_VarDisVol_Rotary,
+        AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency.SpecifiedEfficiencies.Buck_R134aR450aR1234yfR1234zee_VarDisVol_Rotary,
     useExt=true,
     show_parCom=false,
     show_parCon=false,
