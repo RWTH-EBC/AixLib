@@ -1,5 +1,6 @@
 within AixLib.Fluid.Sensors;
-model ModularSensors "Model that contains mass flow, pressure, temperature and quality sensors 
+model ModularSensors
+  "Model that contains mass flow, pressure, temperature and quality sensors 
   for modular compressors"
 
   // Definition of parameters

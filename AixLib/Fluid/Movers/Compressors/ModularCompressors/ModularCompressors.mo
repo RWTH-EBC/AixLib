@@ -47,5 +47,10 @@ The first sub-model describes a simple compressor that is defined in
 AixLib.Fluid.Movers.Compressors.SimpleCompressors</a>; the second 
 sub-model describes the internal controller model.
 </p>
-</html>"));
+</html>"),  Diagram(graphics={Line(points={{-100,0},{-10,0}},
+                    color={0,127,255}),
+                              Line(points={{10,0},{100,0}},
+                    color={0,127,255}),
+                              Line(points={{0,10},{0,100}},
+                    color={191,0,0})}));
 end ModularCompressors;

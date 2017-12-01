@@ -156,5 +156,21 @@ sub-model describes the internal controller model.
           points={{60,2},{62,0},{68,6},{70,10},{66,8},{60,2}},
           lineColor={0,0,0},
           fillColor={0,0,0},
-          fillPattern=FillPattern.Solid)}));
+          fillPattern=FillPattern.Solid)}),
+        Diagram(graphics={        Line(points={{-100,0},{-10,0}},
+                        color={0,127,255}),
+                                  Line(points={{0,10},{0,100}},
+                        color={191,0,0}),
+                                  Line(points={{10,0},{28,4}},
+                        color={0,127,255}),
+                                  Line(points={{10,0},{28,-4}},
+                        color={0,127,255}),
+                                  Line(points={{10,0},{28,0}},
+                        color={0,127,255}),
+                                  Line(points={{48,4},{100,0}},
+                        color={0,127,255}),
+                                  Line(points={{48,-4},{100,0}},
+                        color={0,127,255}),
+                                  Line(points={{48,0},{100,0}},
+                        color={0,127,255})}));
 end ModularCompressorsSensors;
