@@ -57,9 +57,6 @@ model ModularCompressorsSensors
     final initType=initTypeSen,
     final T_start=T_start,
     final h_out_start=h_out_start,
-    each final dp_start=0,
-    final m_flow_start=m_flow_start,
-    each final dp_nominal=0,
     final m_flow_nominal=m_flow_nominal,
     final m_flow_small=1e-6*m_flow_nominal)
     "Model that contains different sensors located behind compressors"
