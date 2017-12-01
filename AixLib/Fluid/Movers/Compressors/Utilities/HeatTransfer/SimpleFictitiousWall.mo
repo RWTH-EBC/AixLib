@@ -17,6 +17,9 @@ model SimpleFictitiousWall
 
   // Definition of parameters describing advanced options
   //
+  parameter Boolean iniTWal0 = true
+    "= true, if wall is initialised at fixed temperature. Otherwise, steady state
+    initialisation";
   parameter Modelica.SIunits.Temperature TWal0 = 343.15
     "Temperature of wall at initialisation"
     annotation (Dialog(tab="Advanced",group="Initialisation"));
@@ -42,7 +45,7 @@ model SimpleFictitiousWall
 
   // Definition of parameters
   //
-  Modelica.SIunits.Temperature TWal(start=TWal0)
+  Modelica.SIunits.Temperature TWal
     "Temperature of fictitious wall";
 
 protected
@@ -50,7 +53,11 @@ protected
     "Heat flow between ambient and fictitious wall";
 
 initial equation
-  der(TWal)=0;
+  if iniTWal0 then
+    TWal=TWal0;
+  else
+    der(TWal)=0;
+  end if;
 
 equation
   // Calculation of energy balance
