@@ -47,7 +47,7 @@ model ModularCompressorsSensors
 
   // Definition of submodels and connectors
   //
-  Utilities.ModularSensors modSen(
+  Sensors.ModularSensors modSen(
     redeclare final package Medium = Medium,
     final nPorts=nCom,
     final tau=tau,

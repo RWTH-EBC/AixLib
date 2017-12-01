@@ -1,6 +1,5 @@
-within AixLib.Fluid.Movers.Compressors.Utilities;
-model ModularSensors
-  "Model that contains mass flow, pressure, temperature and quality sensors 
+within AixLib.Fluid.Sensors;
+model ModularSensors "Model that contains mass flow, pressure, temperature and quality sensors 
   for modular compressors"
 
   // Definition of parameters
@@ -105,7 +104,6 @@ model ModularSensors
                 extent={{-10,-10},{10,10}},
                 rotation=-90,
                 origin={60,-100})));
-
 
 equation
   // Calculating vapour qualities
