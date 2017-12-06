@@ -1,7 +1,6 @@
 within AixLib.Fluid.Actuators.Valves.ExpansionValves.SimpleExpansionValves;
-model IsothermalExpansionValve
-  "Model of a simple isothermal expansion valve"
-  extends BaseClasses.PartialIsothermalExpansionValve;
+model IsenthalpicExpansionValve "Model of a simple isenthalpic expansion valve"
+  extends BaseClasses.PartialIsenthalpicExpansionValve;
 
 equation
   // Calculation of mass flow and pressure drop
@@ -38,15 +37,15 @@ equation
 <p>
 This is a model of a simple expansion valve that is used, for example, 
 in close-loop systems like heat pumps or chillers. It inherits from
-PartialIsothermalExpansionValve which inherits from 
+PartialIsenthalpicExpansionValve which inherits from 
 PartialExpansionValve. Therefore, please checkout these sub-models for 
 further information of underlying modeling approaches and 
 parameterisation:
 </p>
 <ul>
 <li>
-<a href=\"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialIsothermalExpansionValve\">
-AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialIsothermalExpansionValve</a>.
+<a href=\"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialIsenthalpicExpansionValve\">
+AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialIsenthalpicExpansionValve</a>.
 </li>
 <li>
 <a href=\"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialExpansionValve\">
@@ -54,4 +53,4 @@ AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialExpansionValve<
 </li>
 </ul>
 </html>"));
-end IsothermalExpansionValve;
+end IsenthalpicExpansionValve;

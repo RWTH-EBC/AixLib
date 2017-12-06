@@ -41,7 +41,7 @@ model ExpansionValvePressureDifference
     offset=0.5)
     "Input signal to prediscribe expansion valve's opening"
     annotation (Placement(transformation(extent={{-80,40},{-60,60}})));
-  SimpleExpansionValves.IsothermalExpansionValve linearValve(
+  SimpleExpansionValves.IsenthalpicExpansionValve linearValve(
     redeclare package Medium = Medium,
     show_flow_coefficient=true,
     show_staInl=true,
@@ -50,6 +50,7 @@ model ExpansionValvePressureDifference
     AVal=2.01e-6,
     m_flow_nominal=m_flow_nominal,
     calcProc=AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Types.CalcProc.flowCoefficient,
+
     dpNom=1000000,
     redeclare model FlowCoefficient =
         Utilities.FlowCoefficient.SpecifiedFlowCoefficients.Power_R134a_EEV_15)

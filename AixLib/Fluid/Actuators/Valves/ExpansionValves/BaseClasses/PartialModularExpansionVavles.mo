@@ -11,7 +11,7 @@ partial model PartialModularExpansionVavles
   // Definition of replaceable expansion valve models
   //
   replaceable model SimpleExpansionValve =
-    SimpleExpansionValves.IsothermalExpansionValve
+    SimpleExpansionValves.IsenthalpicExpansionValve
     constrainedby PartialExpansionValve
     "Model of simple expansion valve"
     annotation (choicesAllMatching=true,

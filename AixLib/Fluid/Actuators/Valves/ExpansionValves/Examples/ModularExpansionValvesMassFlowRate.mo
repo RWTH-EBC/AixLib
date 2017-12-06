@@ -37,7 +37,7 @@ model ModularExpansionValvesMassFlowRate
     redeclare package Medium = Medium,
     nVal=nVal,
     redeclare model SimpleExpansionValve =
-        SimpleExpansionValves.IsothermalExpansionValve,
+        SimpleExpansionValves.IsenthalpicExpansionValve,
     show_parVal=false,
     show_parCon=false,
     useInpFil={true,true,true},

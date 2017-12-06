@@ -1,6 +1,6 @@
 within AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses;
-partial model PartialIsothermalExpansionValve
-  "Base model for all isothermal expansion valves"
+partial model PartialIsenthalpicExpansionValve
+  "Base model for all isenthalpic expansion valves"
   extends BaseClasses.PartialExpansionValve;
 
 equation
@@ -19,7 +19,7 @@ equation
 </ul>
 </html>", info="<html>
 <p>
-This is a base model for simple isothermal expansion valves that 
+This is a base model for simple isenthalpic expansion valves that 
 are used, for example, in close-loop systems like heat pumps or 
 chillers. This model inherits from 
 <a href=\"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.BaseClasses.PartialExpansionValve\">
@@ -36,4 +36,4 @@ are implemented:
 <li><code>port_a.h_outflow = inStrem(port_b.h_outflow)</code> for flow in reverse direction.</li>
 </ul>
 </html>"));
-end PartialIsothermalExpansionValve;
+end PartialIsenthalpicExpansionValve;

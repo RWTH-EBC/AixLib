@@ -36,7 +36,7 @@ model ExpansionValveMassFlowRate
     offset=0.7)
     "Input signal to prediscribe expansion valve's opening"
     annotation (Placement(transformation(extent={{-80,40},{-60,60}})));
-  SimpleExpansionValves.IsothermalExpansionValve linearValve(
+  SimpleExpansionValves.IsenthalpicExpansionValve linearValve(
     redeclare package Medium = Medium,
     m_flow_small=1e-6,
     m_flow_nominal=m_flow_nominal,

@@ -112,8 +112,8 @@ approaches and parameterisation:
 </p>
 <ul>
 <li>
-<a href=\"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.SimpleExpansionValves.IsothermalExpansionValve\">
-AixLib.Fluid.Actuators.Valves.ExpansionValves.SimpleExpansionValves.IsothermalExpansionValve</a>.
+<a href=\"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.SimpleExpansionValves.IsenthalpicExpansionValve\">
+AixLib.Fluid.Actuators.Valves.ExpansionValves.SimpleExpansionValves.IsenthalpicExpansionValve</a>.
 </li>
 <li>
 <a href=\"modelica://AixLib.Controls.HeatPump.ModularHeatPumps.ModularExpansionValveController\">
