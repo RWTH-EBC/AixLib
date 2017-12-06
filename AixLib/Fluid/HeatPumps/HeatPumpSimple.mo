@@ -113,14 +113,12 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 255}, fillColor = {249, 249, 249},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-80, 80}, {-60, -80}}, lineColor = {0, 0, 255}, fillColor = {170, 213, 255},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{60, 80}, {80, -80}}, lineColor = {0, 0, 255}, fillColor = {255, 170, 213},
-            fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-100, 20}, {100, -20}}, lineColor = {0, 0, 255}, textString = "%name")}), Documentation(info = "<html>
+            fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-100, 20}, {100, -20}}, lineColor = {0, 0, 255}, textString = "%name")}), Documentation(info="<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Simple model of an on/off-controlled heat pump. The refrigerant circuit is a black-box model represented by tables which calculate the electric power and heat flows of the condenser depending on the source and sink temperature. </p>
- <h4><span style=\"color:#008000\">Example Results</span></h4>
- <p><a href=\"AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem\">
-    AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem</a></p>
- <p><a href=\"AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem2\">
-    AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem2</a></p>
+ <h4><span style=\"color:#008000\">Example</span></h4>
+ <p><a href=\"AixLib.Fluid.HeatPumps.Examples.HeatPumpSimple\">
+    AixLib.Fluid.HeatPumps.Examples.HeatPumpSimple</a></p>
  </html>", revisions="<html>
  <ul>
    <li>
