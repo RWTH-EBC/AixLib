@@ -1,5 +1,5 @@
 within AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency.SpecifiedEfficiencies;
-model Poly_R407C_Unknown_Scrol
+model Poly_R407C_Unknown_Scroll
   "Scroll Compressor - R407C - Unknown displacement volume - Polynomial"
   extends PolynomialIsentropicEfficiency(
     final polyMod=Types.IsentropicPolynomialModels.Karlsson2007,
@@ -44,4 +44,4 @@ F. Karlsson (2007):
 Capacity Control of Residential Heat Pump Heating Systems</a>. In: <i>PhD thesis</i>
 </p>
 </html>"));
-end Poly_R407C_Unknown_Scrol;
+end Poly_R407C_Unknown_Scroll;

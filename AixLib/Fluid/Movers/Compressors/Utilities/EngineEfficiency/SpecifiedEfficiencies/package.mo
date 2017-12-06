@@ -32,6 +32,6 @@ summarised:
 Moreover, the modeles are saved in a specific order. First, generic 
 models are saved and then models based on the similitude theory are 
 saved. Last, models of specific compressors are saved.
-<p>
+</p>
 </html>"));
 end SpecifiedEfficiencies;
