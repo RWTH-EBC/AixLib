@@ -48,6 +48,7 @@ partial model PartialModularCompressors
     final kAMeaInl=kAMeaInl,
     final kAMeaOut=kAMeaOut,
     final kAMeaAmb=kAMeaAmb,
+    final iniTWal0=iniTWal0,
     final TWal0=TWal0,
     each final allowFlowReversal=allowFlowReversal,
     each final dp_start=dp_start,
@@ -320,6 +321,12 @@ partial model PartialModularCompressors
     and ambient"
     annotation(Dialog(tab = "Pressure and heat losses",
                group="Heat losses - Thermal conductances"),
+               HideResult=not show_parCom);
+  parameter Boolean iniTWal0[nCom] = fill(true, nCom)
+    "= true, if wall is initialised at fixed temperature; Otherwise, steady state
+    initialisation"
+    annotation(Dialog(tab = "Pressure and heat losses",
+               group="Heat losses - Initialisation"),
                HideResult=not show_parCom);
   parameter Modelica.SIunits.Temperature TWal0[nCom] = fill(293.15, nCom)
     "Temperature of wall at initialisation"

@@ -12,7 +12,8 @@ equation
 
   // Calculation of energy balances
   //
-  hOutIse = Medium.isentropicEnthalpy(p_downstream=pOut, refState=staInl)
+  hOutIse = Medium.specificEnthalpy(Medium.setState_psX(p=pOut,
+    s=Medium.specificEntropy(staInl)))
     "Isentropic specific enthalpy at outlet";
   oveIseEff.etaIse*dh = dhIse "Specific enthalpy difference";
   dhIse = (hOutIse - hInl) "Isentropic specific enthalpy difference";
