@@ -52,7 +52,7 @@ model ExpansionValvePressureDifference
     calcProc=AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Types.CalcProc.flowCoefficient,
     dpNom=1000000,
     redeclare model FlowCoefficient =
-        Utilities.FlowCoefficient.R134a.Power_R134a_EEV_15)
+        Utilities.FlowCoefficient.SpecifiedFlowCoefficients.Power_R134a_EEV_15)
     "Simple isothermal valve"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   AixLib.Fluid.Sources.FixedBoundary sink(

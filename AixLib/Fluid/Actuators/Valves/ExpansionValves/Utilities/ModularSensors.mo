@@ -54,12 +54,10 @@ model ModularSensors
   // Definition of models
   //
   Sensors.MassFlowRate senMasFlo[nPorts](
-    redeclare each final package Medium = Medium)
-    "Mass flow sensors"
+    redeclare each final package Medium = Medium) "Mass flow sensors"
     annotation (Placement(transformation(extent={{-70,10},{-50,-10}})));
   Sensors.Pressure senPre[nPorts](
-    redeclare each final package Medium = Medium)
-    "Pressure sensors"
+    redeclare each final package Medium = Medium) "Pressure sensors"
     annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
   Sensors.TemperatureTwoPort senTem[nPorts](
     redeclare each final package Medium = Medium,
@@ -70,8 +68,7 @@ model ModularSensors
     each final T_start=T_start,
     each final transferHeat=transferHeat,
     each final TAmb=TAmb,
-    each final tauHeaTra=tauHeaTra)
-    "Temperature sensors"
+    each final tauHeaTra=tauHeaTra) "Temperature sensors"
     annotation (Placement(transformation(extent={{10,10},{30,-10}})));
   Sensors.SpecificEnthalpyTwoPort senSpeEnt[nPorts](
     redeclare each final package Medium = Medium,
@@ -79,8 +76,7 @@ model ModularSensors
     each final m_flow_small=m_flow_small,
     each final tau=tau,
     each final initType=initType,
-    each final h_out_start=h_out_start)
-    "Specific enthalpy sensors"
+    each final h_out_start=h_out_start) "Specific enthalpy sensors"
     annotation (Placement(transformation(extent={{50,10},{70,-10}})));
 
   // Definition of connectors

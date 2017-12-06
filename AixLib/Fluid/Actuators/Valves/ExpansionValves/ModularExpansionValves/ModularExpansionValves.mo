@@ -42,5 +42,9 @@ AixLib.Fluid.Actuators.Valves.ExpansionValves.SimpleExpansionValves.IsothermalEx
 AixLib.Controls.HeatPump.ModularHeatPumps.ModularExpansionValveController</a>.
 </li>
 </ul>
-</html>"));
+</html>"),
+  Diagram(graphics={Line(points={{-100,0},{-10,0}},color={0,127,255}),
+                    Line(points={{10,0},{100,14}}, color={0,127,255}),
+                    Line(points={{10,0},{100,-14}},color={0,127,255}),
+                    Line(points={{10,0},{100,0}},  color={0,127,255})}));
 end ModularExpansionValves;

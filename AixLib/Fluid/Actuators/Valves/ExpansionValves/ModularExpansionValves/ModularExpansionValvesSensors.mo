@@ -51,9 +51,6 @@ model ModularExpansionValvesSensors
   Utilities.ModularSensors modularSensors(
     redeclare final package Medium = Medium,
     final nPorts=nVal,
-    final dp_start=dp_start,
-    final m_flow_start=m_flow_start,
-    final dp_nominal=dp_nominal,
     final m_flow_nominal=m_flow_nominal,
     final m_flow_small=1e-6*m_flow_nominal,
     final tau=tau,
@@ -155,5 +152,13 @@ AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.ModularSensors</a>.
           points={{60,2},{62,0},{68,6},{70,10},{66,8},{60,2}},
           lineColor={0,0,0},
           fillColor={0,0,0},
-          fillPattern=FillPattern.Solid)}));
+          fillPattern=FillPattern.Solid)}),
+    Diagram(graphics={
+                    Line(points={{-100,0},{-10,0}},color={0,127,255}),
+                    Line(points={{50,2},{100,14}}, color={0,127,255}),
+                    Line(points={{50,0},{100,0}},  color={0,127,255}),
+                    Line(points={{50,-2},{100,-14}},color={0,127,255}),
+                    Line(points={{10,0},{30,4}},   color={0,127,255}),
+                    Line(points={{10,0},{30,-4}},  color={0,127,255}),
+                    Line(points={{10,0},{30,0}},   color={0,127,255})}));
 end ModularExpansionValvesSensors;
