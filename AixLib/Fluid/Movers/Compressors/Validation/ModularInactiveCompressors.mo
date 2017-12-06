@@ -1,7 +1,6 @@
 within AixLib.Fluid.Movers.Compressors.Validation;
 model ModularInactiveCompressors
   "Validation model to test modular compressors if not all compressors are active"
-  import AixLib;
   extends Modelica.Icons.Example;
 
   // Define medium and parameters

@@ -2,7 +2,6 @@
 partial model PartialCompression
   "Partial model for compression that contains basic definitions used in 
   various compressor models"
-  import AixLib;
 
   // Definition of parameters describing the geometry
   //

@@ -2,7 +2,6 @@
 model EfficiencyModels
   "Validation model to check efficiencies calculated with respect to different 
   prescribed conditions"
-  import AixLib;
   extends Modelica.Icons.Example;
 
   // Define medium and parameters

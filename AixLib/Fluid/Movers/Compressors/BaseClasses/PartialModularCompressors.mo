@@ -1,7 +1,6 @@
 within AixLib.Fluid.Movers.Compressors.BaseClasses;
 partial model PartialModularCompressors
   "Base model for all modular compressor models"
-  import AixLib;
 
   // Definition of the medium
   //

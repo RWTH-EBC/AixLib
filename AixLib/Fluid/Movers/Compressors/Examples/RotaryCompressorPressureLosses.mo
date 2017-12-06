@@ -1,7 +1,6 @@
 within AixLib.Fluid.Movers.Compressors.Examples;
 model RotaryCompressorPressureLosses
   "Example model to test simple rotary compressors with pressure losses"
-  import AixLib;
   extends Modelica.Icons.Example;
 
   // Define medium and parameters

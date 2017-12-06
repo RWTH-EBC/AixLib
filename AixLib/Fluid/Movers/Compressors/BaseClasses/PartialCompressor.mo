@@ -2,7 +2,6 @@ within AixLib.Fluid.Movers.Compressors.BaseClasses;
 partial model PartialCompressor
   "Partial model for compressor that contains basic definitions used in 
   various compressor models"
-  import AixLib;
 
   // Definition of the medium
   //
@@ -266,6 +265,7 @@ partial model PartialCompressor
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={60,100})), HideResult=true);
+
 
 
 equation

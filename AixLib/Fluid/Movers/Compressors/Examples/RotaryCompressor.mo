@@ -1,7 +1,6 @@
 within AixLib.Fluid.Movers.Compressors.Examples;
 model RotaryCompressor
   "Example model to test simple rotary compressors"
-  import AixLib;
   extends Modelica.Icons.Example;
 
   // Define medium and parameters
