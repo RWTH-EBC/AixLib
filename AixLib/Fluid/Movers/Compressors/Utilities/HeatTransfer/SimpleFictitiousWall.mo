@@ -18,8 +18,9 @@ model SimpleFictitiousWall
   // Definition of parameters describing advanced options
   //
   parameter Boolean iniTWal0 = true
-    "= true, if wall is initialised at fixed temperature. Otherwise, steady state
-    initialisation";
+    "= true, if wall is initialised at fixed temperature; Otherwise, steady state
+    initialisation"
+    annotation (Dialog(tab="Advanced",group="Initialisation"));
   parameter Modelica.SIunits.Temperature TWal0 = 343.15
     "Temperature of wall at initialisation"
     annotation (Dialog(tab="Advanced",group="Initialisation"));

@@ -62,7 +62,8 @@ model RotaryCompressorPressureHeatLosses
     final mWal=mWal,
     final cpWal=cpWal,
     final kAMeaAmb=kAMeaAmb,
-    final TWal0=TWal0)
+    final TWal0=TWal0,
+    final iniTWal0=iniTWal0)
     "Simple fictitious wall to calculate heat losses at compressor's inlet
     and outlet"
     annotation (Placement(transformation(extent={{-40,-90},{40,-10}})));

@@ -56,7 +56,7 @@ partial model PartialCompression
       Dialog(
       tab = "Efficiencies and similitude theory", group="Volumetric efficiency"));
   replaceable model IsentropicEfficiency =
-    AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency.SpecifiedEfficiencies.ConstantEfficiency
+    Utilities.IsentropicEfficiency.SpecifiedEfficiencies.ConstantEfficiency
     constrainedby Utilities.IsentropicEfficiency.PartialIsentropicEfficiency
     "Model that describes the calculation of the overall isentropic efficiency"
     annotation (Placement(

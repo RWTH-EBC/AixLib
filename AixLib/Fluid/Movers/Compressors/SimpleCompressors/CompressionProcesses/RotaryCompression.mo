@@ -39,7 +39,7 @@ equation
 
   port_a.h_outflow = inStream(port_a.h_outflow)
     "Compressor behaves as perfect valve if flow is reserved";
-  port_b.h_outflow = smooth(0,noEvent(if m_flow > 0
+  port_b.h_outflow = smooth(1,noEvent(if m_flow > 0
     then hInl + dh else inStream(port_a.h_outflow)))
     "Compressor behaves as perfect valve if flow is reserved";
   /*It is assumed that the compressor works as perfectly closed valve if the 
