@@ -91,7 +91,7 @@ equation
       "Third coefficient";
     p[4] = piPre^2
       "Fourth coefficient";
-    p[5] = rotSpe*rotSpe
+    p[5] = rotSpe*piPre
       "Fifth coefficient";
     p[6] = rotSpe^2
       "Sixth coefficient";
