@@ -48,12 +48,15 @@ partial package PartialHybridTwoPhaseMediumFormula
     if (componentInputChoice == InputChoice.pT) then
       d = density_pT(p=p,T=T);
       h = specificEnthalpy_pT(p=p,T=T);
+      s = specificEntropy(state);
     elseif (componentInputChoice == InputChoice.dT) then
       p = pressure_dT(d=d,T=T);
       h = specificEnthalpy_dT(d=d,T=T);
+      s = specificEntropy(state);
     elseif (componentInputChoice == InputChoice.ph) then
       T = temperature_ph(p=p,h=h);
       d = density_ph(p=p,h=h);
+      s = specificEntropy(state);
     elseif (componentInputChoice == InputChoice.ps) then
       T = temperature_ps(p=p,s=s);
       d = density_ps(p=p,s=s);
@@ -62,7 +65,6 @@ partial package PartialHybridTwoPhaseMediumFormula
       assert(false, "Invalid choice of input variables for calculations");
     end if;
 
-    s = specificEntropy(state);
     u = h - p/d;
 
     // Calculation of saturation state
