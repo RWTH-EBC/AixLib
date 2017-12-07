@@ -5,12 +5,12 @@ model MassFlowSource_WeatherData
   package Medium = AixLib.Media.Air "Medium model for air";
 
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=
-        "modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")
+        Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"))
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
   AixLib.Fluid.Sources.MassFlowSource_WeatherData sin_with_h(
     redeclare package Medium = Medium,
     m_flow=-1,
-    nPorts=1) "Mass flow source model receiving h and X from weather data through 
+    nPorts=1) "Mass flow source model receiving h and X from weather data through
      weather bus"
     annotation (Placement(transformation(extent={{96,-10},{76,10}})));
   AixLib.Fluid.Sources.Outside bou(redeclare package Medium = Medium, nPorts=1)
