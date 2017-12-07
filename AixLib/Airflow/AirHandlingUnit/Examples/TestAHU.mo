@@ -60,43 +60,43 @@ model TestAHU
 equation
 
   connect(desiredT_sup.y, ahu.T_supplyAir) annotation (Line(
-      points={{41,-16},{34,-16},{34,-4.5},{18.48,-4.5}},
+      points={{41,-16},{34,-16},{34,-6.3},{18.48,-6.3}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(tempOutside.y, ahu.T_outdoorAir) annotation (Line(
-      points={{-79,-6},{-74,-6},{-74,-6.3},{-62.36,-6.3}},
+      points={{-79,-6},{-74,-6},{-74,-7.2},{-62.36,-7.2}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(Vflow_in.y, ahu.Vflow_in) annotation (Line(
-      points={{-79,34},{-76,34},{-76,-3.6},{-66.12,-3.6}},
+      points={{-79,34},{-76,34},{-76,-4.5},{-66.12,-4.5}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(phi_roomMin.y, ahu.phi_supplyAir[1]) annotation (Line(
-      points={{47,-46},{32,-46},{32,-8.1},{18.48,-8.1}},
+      points={{47,-46},{32,-46},{32,-9.9},{18.48,-9.9}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(waterLoadOutside.y, ahu.X_outdoorAir) annotation (Line(
-      points={{-79,-40},{-72,-40},{-72,-10.8},{-62.36,-10.8}},
+      points={{-79,-40},{-72,-40},{-72,-11.7},{-62.36,-11.7}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(phi_RoomExtractAir.y, ahu.phi_extractAir) annotation (Line(
-      points={{77,-14},{66,-14},{66,0},{30,0},{30,8.1},{18.48,8.1}},
+      points={{77,-14},{66,-14},{66,0},{30,0},{30,5.4},{18.48,5.4}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(phi_roomMax.y, ahu.phi_supplyAir[2]) annotation (Line(points={{77,-46},
-          {72,-46},{72,-66},{28,-66},{28,-9.9},{18.48,-9.9}},         color={0,0,
+          {72,-46},{72,-66},{28,-66},{28,-11.7},{18.48,-11.7}},       color={0,0,
           127}));
   connect(ahu.T_extractAir, addToExtractTemp.y) annotation (Line(points={{18.48,
-          12.6},{27.92,12.6},{27.92,18},{33.4,18}},       color={0,0,127}));
+          9.9},{27.92,9.9},{27.92,18},{33.4,18}},         color={0,0,127}));
   connect(tempAddInRoom.y, addToExtractTemp.u1) annotation (Line(points={{77,30},
           {66,30},{56,30},{56,21.6},{47.2,21.6}}, color={0,0,127}));
   connect(desiredT_sup.y, addToExtractTemp.u2) annotation (Line(points={{41,-16},
           {38,-16},{38,6},{56,6},{56,14.4},{47.2,14.4}}, color={0,0,127}));
-  connect(ahu.QflowC, QFlowCool) annotation (Line(points={{-22.41,-14.85},{
-          -22.41,-46.425},{-26,-46.425},{-26,-86}}, color={0,0,127}));
-  connect(ahu.QflowH, QFlowHeat) annotation (Line(points={{-1.73,-14.85},{-1.73,
+  connect(ahu.QflowC, QFlowCool) annotation (Line(points={{-26.17,-15.75},{
+          -26.17,-46.425},{-26,-46.425},{-26,-86}}, color={0,0,127}));
+  connect(ahu.QflowH, QFlowHeat) annotation (Line(points={{-7.37,-15.75},{-7.37,
           -47.425},{0,-47.425},{0,-86}}, color={0,0,127}));
-  connect(ahu.Pel, PEl) annotation (Line(points={{8.61,-14.85},{8.61,-47.425},{
+  connect(ahu.Pel, PEl) annotation (Line(points={{2.03,-15.75},{2.03,-47.425},{
           26,-47.425},{26,-86}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={

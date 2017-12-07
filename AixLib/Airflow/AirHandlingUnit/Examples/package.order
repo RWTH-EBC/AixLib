@@ -2,3 +2,11 @@ TestAHU
 TestMenergaSimple
 TestMenergaModular
 TestRecuperator
+TestSteamHumid
+TestAbsorberSimple
+TestHeatingCoil
+TestAbsorberdp
+TestDesorber
+TestSorption
+TestSorptionBlock
+SorptionControl

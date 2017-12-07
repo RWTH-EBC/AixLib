@@ -9,7 +9,8 @@ expandable connector BusActors
     "opening of damper Y02, bypass recuperator supply air";
   Real openingY03(min=0, max=1)
     "opening of damper Y03, bypass recuperator exhaust air";
-  Real openingY04(min=0, max=1) "opening of damper Y04, exit air recuperator";
+  Real openingY04(min=0, max=1)
+    "opening of damper Y04, exit air recuperator";
   Real openingY05(min=0, max=1)
     "opening of damper Y05, outside air on supply side";
   Real openingY06(min=0, max=1)
@@ -24,25 +25,25 @@ expandable connector BusActors
     "opening of three-way-valve Y10, heating coil for regeneration";
   Real openingY11(min=0, max=1)
     "input for the humidifier to imitate the evaporation at the recuperator";
+  Real openingY15(min=0, max=1)
+    "absorber control valve";
+  Real openingY16(min=0, max=1)
+    "desorber control valve";
 
-  Real outsideFan "real input m_flow for outsideAirFan in kg/s";
-  Real exhaustFan "real input m_flow for exhaustAirFan in kg/s";
-  Real regenerationFan "real input m_flow for regenerationAirFan in kg/s";
-  //eigentlich müsste eine Drehzahl vorgegeben werden!
+  //Real outsideFan "real input m_flow for outsideAirFan in kg/s";
+  //Real exhaustFan "real input m_flow for exhaustAirFan in kg/s";
+  //Real regenerationFan "real input m_flow for regenerationAirFan in kg/s";
+  //eigentlich müsste eine Drehzahl/Druckdifferenz vorgegeben werden!
 
-  Real pumpN04(min=0, max=1) "pump signal for heating coil pump for supply";
-  Real pumpN05(min=0, max=1)
-    "pump signal for heating coil pump for regeneration";
+  Real outsideFan_dp "real input dp for outsideAirFan in Pa";
+  Real exhaustFan_dp "real input dp for exhaustAirFan in Pa";
+  Real regenerationFan_dp "real input dp for regenerationAirFan in Pa";
+
+  Real pumpN04(min=0, max=1)
+    "pump signal for heating coil pump for supply";
+  Boolean pumpN05 "pump signal for heating coil pump for regeneration";
   Boolean pumpN06 "adiabaticOn signal to activate adiabatic cooling";
   Boolean pumpN07 "absorption On";
   Boolean pumpN08 "desorption/ regeneration On";
-
-  //Real mWatSteamHumid( min=0, max=0.02)
-  //                    "setpoint for absolute humidity
-  //                      for steam humidifier between 0 and 0.02";
-  //Real mWatAbsorber( min=0, max=1)
-  //                    "input for dehumidification in absorber";
-  //Real mWatDesorber( min=0, max=1)
-  //                    "input for humidification in desorber";
 
 end BusActors;

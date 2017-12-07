@@ -598,7 +598,7 @@ equation
   connect(HeatingCoil.port_b2, threeWayValveHeaCoi.port_3) annotation (Line(
         points={{-400,14},{-400,14},{-400,-54},{-410,-54}}, color={0,127,255}));
   connect(threeWayValveHeaCoi.y, busActors.openValveHeatCoil) annotation (Line(
-        points={{-432,-54},{-538,-54},{-646,-54},{-646,364.1},{-186.1,364.1}},
+        points={{-432,-54},{-538,-54},{-646,-54},{-646,364},{-186,364}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -624,7 +624,7 @@ equation
   connect(steamHumidifier.port_b, T01_senTemSup.port_a)
     annotation (Line(points={{-534,26},{-558,26}}, color={0,127,255}));
   connect(steamHumidifier.X_w, busActors.mWatSteamHumid) annotation (Line(
-        points={{-512,32},{-512,50},{-646,50},{-646,364.1},{-186.1,364.1}},
+        points={{-512,32},{-512,50},{-646,50},{-646,364},{-186,364}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -635,8 +635,8 @@ equation
     annotation (Line(points={{-430,266},{-412,266}}, color={0,127,255}));
   connect(evaporationHeatModel.port_a, evaporator.heatPort) annotation (Line(
         points={{-472.2,254},{-462,254},{-462,260},{-450,260}}, color={191,0,0}));
-  connect(evaporator.u, busActors.mWatEvaporator) annotation (Line(points={{
-          -451,272},{-646,272},{-646,364.1},{-186.1,364.1}}, color={0,0,127}),
+  connect(evaporator.u, busActors.mWatEvaporator) annotation (Line(points={{-451,
+          272},{-646,272},{-646,364},{-186,364}},            color={0,0,127}),
       Text(
       string="%second",
       index=1,
@@ -646,12 +646,12 @@ equation
   connect(Desorber.port_b, Y08.port_a)
     annotation (Line(points={{56,304},{-16,304}}, color={0,127,255}));
   connect(Absorber.u, busActors.mWatAbsorber) annotation (Line(points={{-81,32},
-          {-81,56},{364,56},{364,364.1},{-186.1,364.1}}, color={0,0,127}), Text(
+          {-81,56},{364,56},{364,364},{-186,364}},       color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
   connect(Desorber.u, busActors.mWatDesorber) annotation (Line(points={{77,310},
-          {78,310},{78,364.1},{-186.1,364.1}}, color={0,0,127}), Text(
+          {78,310},{78,364},{-186,364}},       color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));

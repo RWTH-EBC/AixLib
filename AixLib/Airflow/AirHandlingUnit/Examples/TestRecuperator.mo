@@ -1,11 +1,12 @@
 ﻿within AixLib.Airflow.AirHandlingUnit.Examples;
 model TestRecuperator "Example model to test the MenergaModular model"
+  extends Modelica.Icons.Example;
 
     //Medium models
   replaceable package MediumAir = AixLib.Media.Air;
   replaceable package MediumWater = AixLib.Media.Water;
 
-  extends Modelica.Icons.Example;
+
   Fluid.Sources.Boundary_pT supplyAir(
     redeclare package Medium = MediumAir,
     X={0.02,0.98},
@@ -200,12 +201,13 @@ equation
     annotation (Line(points={{60,28},{82,28}}, color={0,127,255}));
   connect(booleanExpression.y, recuperator.adiCoo) annotation (Line(points={{33,
           0},{22,0},{22,-0.4},{12.6,-0.4}}, color={255,0,255}));
-  connect(openingValueY02.y, recuperator.Y02_opening) annotation (Line(points={
-          {-10,59},{-10,40},{0,40},{0,8.6},{-1,8.6}}, color={0,0,127}));
+  connect(openingValueY02.y, recuperator.Y02_opening) annotation (Line(points={{-10,59},
+          {-10,40},{0,40},{0,8.3},{-0.9,8.3}},        color={0,0,127}));
   connect(openingValueY03.y, recuperator.Y03_opening)
-    annotation (Line(points={{4,59},{4,40},{5,40},{5,8.6}}, color={0,0,127}));
-  connect(openingValueY01.y, recuperator.Y01_opening) annotation (Line(points={
-          {18,59},{18,40},{10,40},{10,8.6}}, color={0,0,127}));
+    annotation (Line(points={{4,59},{4,40},{5.1,40},{5.1,8.3}},
+                                                            color={0,0,127}));
+  connect(openingValueY01.y, recuperator.Y01_opening) annotation (Line(points={{18,59},
+          {18,40},{9.1,40},{9.1,8.3}},       color={0,0,127}));
   connect(exhaustAir.ports[1], sen_rh_exhaust.port_a)
     annotation (Line(points={{-100,28},{-76,28}}, color={0,127,255}));
   connect(outsideAir.ports[1], sen_rh_Cool_In.port_a)

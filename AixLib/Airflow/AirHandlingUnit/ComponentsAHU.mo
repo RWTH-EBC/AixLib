@@ -183,8 +183,8 @@ package ComponentsAHU "contains different components for the AHU"
           coordinateSystem(preserveAspectRatio=false)));
   end RecuperatorSimple;
 
-  model sorptionDehumidification
-    "model of the sorption process to dehumidify the air"
+  model sorptionSimple
+    "simple model of the sorption process to dehumidify the air"
 
     replaceable package Medium1 =
         Modelica.Media.Interfaces.PartialMedium "Medium 1 in the component"
@@ -200,19 +200,22 @@ package ComponentsAHU "contains different components for the AHU"
       "= false to simplify equations, assuming, but not enforcing, no flow reversal for medium 2"
       annotation(Dialog(tab="Assumptions"), Evaluate=true);
 
+    parameter Modelica.SIunits.Temperature T_init = 293.15 "initialisation temperature";
 
     Fluid.Humidifiers.Humidifier_u Desorber(
       m_flow_nominal=1,
       dp_nominal=0,
       mWat_flow_nominal=0.01522,
-      redeclare package Medium = Medium1)
+      redeclare package Medium = Medium1,
+      T_start=T_init)
       "humidifier to imitate the effect of the desorber module"
       annotation (Placement(transformation(extent={{10,270},{-10,290}})));
     Fluid.Humidifiers.Humidifier_u Absorber(
       m_flow_nominal=5.1,
       dp_nominal=300,
       mWat_flow_nominal=-0.012806,
-      redeclare package Medium = Medium2)
+      redeclare package Medium = Medium2,
+      T_start=T_init)
       "dehumidifier to imitate the effect of the absorber module"
       annotation (Placement(transformation(extent={{-48,-238},{-68,-218}})));
     Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium2)
@@ -299,35 +302,40 @@ package ComponentsAHU "contains different components for the AHU"
             fillColor={28,108,200},
             fillPattern=FillPattern.HorizontalCylinder)}),         Diagram(
           coordinateSystem(preserveAspectRatio=false, extent={{-200,-420},{200,420}})));
-  end sorptionDehumidification;
+  end sorptionSimple;
 
   model heatingRegister
     "model for a heating register with a pump and a three way valve"
    extends AixLib.Fluid.Interfaces.PartialFourPortInterface;
 
+   parameter Modelica.SIunits.Temperature T_init = 293.15 "initialisation temperature";
+
     Fluid.HeatExchangers.ConstantEffectiveness HeatingCoil(
-      m1_flow_nominal=5.1,
-      m2_flow_nominal=0.1,
-      dp2_nominal=20,
       dp1_nominal=0,
       redeclare package Medium1 = Medium1,
-      redeclare package Medium2 = Medium2)
+      redeclare package Medium2 = Medium2,
+      dp2_nominal=10000,
+      m1_flow_nominal=m1_flow_nominal,
+      m2_flow_nominal=m2_flow_nominal)
       "Heating Coil after Recuperator for additional Heating"
       annotation (Placement(transformation(extent={{-10,44},{10,64}})));
     Fluid.Movers.SpeedControlled_y
                       pump(
       m_flow_small=m2_flow_small,
       redeclare package Medium = Medium2,
-      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per,
-      addPowerToMedium=false)                         annotation (Placement(
+      addPowerToMedium=false,
+      T_start=T_init,
+      redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per)
+                                                      annotation (Placement(
           transformation(
           extent={{-10,10},{10,-10}},
           rotation=90,
-          origin={30,20})));
+          origin={30,10})));
     Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear threeWayValveHeaCoi(
-      m_flow_nominal=1,
+      redeclare package Medium = Medium2,
+      y_start=0,
       dpValve_nominal=500,
-      redeclare package Medium = Medium2)
+      m_flow_nominal=m2_flow_nominal)
                            "Three way valve in the heating coil water circuit"
       annotation (Placement(transformation(
           extent={{-10,10},{10,-10}},
@@ -336,8 +344,9 @@ package ComponentsAHU "contains different components for the AHU"
     Fluid.MixingVolumes.MixingVolume vol(
       V=0.01,
       nPorts=3,
-      m_flow_nominal=0.1,
-      redeclare package Medium = Medium2)
+      redeclare package Medium = Medium2,
+      T_start=T_init,
+      m_flow_nominal=m2_flow_nominal)
                 "mixing volume" annotation (Placement(transformation(
           extent={{-10,10},{10,-10}},
           rotation=270,
@@ -350,7 +359,9 @@ package ComponentsAHU "contains different components for the AHU"
 
 
     Fluid.Sensors.TemperatureTwoPort T03_senTemHea(
-                     m_flow_nominal=5.1, redeclare package Medium = Medium1)
+                                         redeclare package Medium = Medium1,
+                     T_start=T_init,
+      m_flow_nominal=m1_flow_nominal)
       "Temperature of supply air after heating coil"
       annotation (Placement(transformation(extent={{40,50},{60,70}})));
     Modelica.Blocks.Interfaces.RealOutput T03_senTemHeaCoi
@@ -367,6 +378,15 @@ package ComponentsAHU "contains different components for the AHU"
           extent={{-10,-10},{10,10}},
           rotation=90,
           origin={70,106})));
+    Fluid.Sensors.TemperatureTwoPort T_Mixing(
+      T_start=T_init,
+      redeclare package Medium = Medium2,
+      m_flow_nominal=m2_flow_nominal)
+                                "Mixing Temperature after three way valve"
+      annotation (Placement(transformation(
+          extent={{10,-10},{-10,10}},
+          rotation=270,
+          origin={30,38})));
   equation
     connect(port_a1, HeatingCoil.port_a1)
       annotation (Line(points={{-100,60},{-10,60}}, color={0,127,255}));
@@ -383,9 +403,7 @@ package ComponentsAHU "contains different components for the AHU"
     connect(port_a2, threeWayValveHeaCoi.port_1) annotation (Line(points={{100,
             -60},{30,-60},{30,-26}}, color={0,127,255}));
     connect(threeWayValveHeaCoi.port_2, pump.port_a)
-      annotation (Line(points={{30,-6},{30,10}}, color={0,127,255}));
-    connect(pump.port_b, HeatingCoil.port_a2)
-      annotation (Line(points={{30,30},{30,48},{10,48}}, color={0,127,255}));
+      annotation (Line(points={{30,-6},{30,0}},  color={0,127,255}));
     connect(HeatingCoil.port_b1, T03_senTemHea.port_a)
       annotation (Line(points={{10,60},{40,60}}, color={0,127,255}));
     connect(T03_senTemHea.port_b, port_b1)
@@ -393,9 +411,14 @@ package ComponentsAHU "contains different components for the AHU"
     connect(T03_senTemHea.T, T03_senTemHeaCoi)
       annotation (Line(points={{50,71},{50,106}}, color={0,0,127}));
     connect(pump.y, pumpN04)
-      annotation (Line(points={{42,20},{108,20}}, color={0,0,127}));
+      annotation (Line(points={{42,10},{76,10},{76,20},{108,20}},
+                                                  color={0,0,127}));
     connect(threeWayValveHeaCoi.y_actual, y09_actual) annotation (Line(points={
             {37,-11},{37,2},{70,2},{70,106}}, color={0,0,127}));
+    connect(pump.port_b, T_Mixing.port_a)
+      annotation (Line(points={{30,20},{30,28}}, color={0,127,255}));
+    connect(T_Mixing.port_b, HeatingCoil.port_a2)
+      annotation (Line(points={{30,48},{10,48}}, color={0,127,255}));
    annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
             Rectangle(
             extent={{-100,100},{100,-100}},
@@ -426,10 +449,10 @@ package ComponentsAHU "contains different components for the AHU"
       annotation(Evaluate=true);
     parameter SI.Time tau = 60
       "Thermal time constant of the heat exchanger";
-    parameter Real UA_adia_on= 12000
+    parameter Real UA_adia_on= 8300
       "UA value when using evaporative cooling, used when use_eNTU = true"
       annotation(Dialog(enable=use_eNTU));
-    parameter Real UA_adia_off= 17500
+    parameter Real UA_adia_off= 14500
       "UA value when not using evaporative cooling, used when use_eNTU = true"
       annotation(Dialog(enable=use_eNTU));
     parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
@@ -556,7 +579,7 @@ package ComponentsAHU "contains different components for the AHU"
     Real Xw_in_bot = Xi_bot_in[1] "Water mass fraction of bottom stream";
 
     Real Xw_80_Tout_top = if simplifiedMassBalance
-                          then AixLib.Utilities.Psychrometrics.Functions.X_pSatpphi(pSat=AixLib.Media.Air.saturationPressure(volTop.heatPort.T), p=port_a1.p, phi=0.9374)
+                          then AixLib.Utilities.Psychrometrics.Functions.X_pSatpphi(pSat=AixLib.Media.Air.saturationPressure(volTop.heatPort.T), p=port_a1.p, phi=0.8)
                           else Xw_in_top + (Xw_sat_Tout_top-Xw_in_top)*eps_NTU
         "Absolute humidity of top outlet air with a relative humidity of former 80%, now 93.74%.";
     Real Xw_sat_Tin_top=AixLib.Utilities.Psychrometrics.Functions.X_pSatpphi(
@@ -646,25 +669,25 @@ package ComponentsAHU "contains different components for the AHU"
 
 
     Modelica.Blocks.Sources.RealExpression hLiq(y=
-          AixLib.Media.Air.enthalpyOfLiquid(273.15 + 17))
+          AixLib.Media.Water.enthalpyOfLiquid(273.15 + 17))
       "Enthalpy of water at the given temperature"
       annotation (Placement(transformation(extent={{134,12},{94,36}})));
-    Modelica.Blocks.Math.Product QLat_flow
-      "Latent heat flow rate added to the fluid stream"
+    Modelica.Blocks.Math.Product Q_flow
+      "enthalpy added to the air from the water flow rate"
       annotation (Placement(transformation(extent={{70,26},{50,6}})));
     Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow preHeaFloTop1(
                                                                           final
         alpha=0) "Prescribed heat flow rate for top volume"
       annotation (Placement(transformation(extent={{36,6},{16,26}})));
-    Modelica.Blocks.Math.Product QLat_flow1
-      "Latent heat flow rate added to the fluid stream"
+    Modelica.Blocks.Math.Product Q_flow1
+      "heat flow rate added to the air from the water flow rate"
       annotation (Placement(transformation(extent={{70,-4},{50,-24}})));
     Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow preHeaFloTop2(
                                                                           final
         alpha=0) "Prescribed heat flow rate for top volume"
       annotation (Placement(transformation(extent={{38,-36},{18,-16}})));
     Modelica.Blocks.Sources.RealExpression hLiq1(y=
-          AixLib.Media.Air.enthalpyOfLiquid(273.15 + 17))
+          AixLib.Media.Water.enthalpyOfLiquid(273.15 + 17))
       "Enthalpy of water at the given temperature"
       annotation (Placement(transformation(extent={{136,-38},{96,-14}})));
   equation
@@ -717,21 +740,21 @@ package ComponentsAHU "contains different components for the AHU"
       annotation (Line(points={{38.6,42},{12,42}}, color={0,0,127}));
     connect(mFloAdiBot.y, volBot.mWat_flow)
       annotation (Line(points={{38.6,-42},{12,-42}}, color={0,0,127}));
-    connect(hLiq.y, QLat_flow.u1) annotation (Line(points={{92,24},{82,24},{82,10},
+    connect(hLiq.y, Q_flow.u1) annotation (Line(points={{92,24},{82,24},{82,10},
             {72,10}}, color={0,0,127}));
-    connect(mFloAdiTop.y, QLat_flow.u2) annotation (Line(points={{38.6,42},{36,42},
+    connect(mFloAdiTop.y, Q_flow.u2) annotation (Line(points={{38.6,42},{36,42},
             {36,32},{76,32},{76,22},{72,22}}, color={0,0,127}));
-    connect(QLat_flow.y, preHeaFloTop1.Q_flow)
+    connect(Q_flow.y, preHeaFloTop1.Q_flow)
       annotation (Line(points={{49,16},{36,16}}, color={0,0,127}));
     connect(preHeaFloTop1.port, volTop.heatPort) annotation (Line(points={{16,16},
             {10,16},{10,34},{10,34},{10,50},{10,50}}, color={191,0,0}));
-    connect(mFloAdiBot.y, QLat_flow1.u1) annotation (Line(points={{38.6,-42},{38,-42},
+    connect(mFloAdiBot.y, Q_flow1.u1) annotation (Line(points={{38.6,-42},{38,-42},
             {38,-32},{86,-32},{86,-20},{72,-20}}, color={0,0,127}));
-    connect(QLat_flow1.y, preHeaFloTop2.Q_flow) annotation (Line(points={{49,-14},
+    connect(Q_flow1.y, preHeaFloTop2.Q_flow) annotation (Line(points={{49,-14},
             {44,-14},{44,-26},{38,-26}}, color={0,0,127}));
     connect(preHeaFloTop2.port, volBot.heatPort)
       annotation (Line(points={{18,-26},{10,-26},{10,-50}}, color={191,0,0}));
-    connect(hLiq1.y, QLat_flow1.u2) annotation (Line(points={{94,-26},{90,-26},{90,
+    connect(hLiq1.y, Q_flow1.u2) annotation (Line(points={{94,-26},{90,-26},{90,
             -8},{72,-8}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
@@ -746,18 +769,18 @@ package ComponentsAHU "contains different components for the AHU"
     Fluid.Actuators.Valves.TwoWayEqualPercentage
                              Y03(
       l=0.001,
-      m_flow_nominal=5.1,
       dpValve_nominal=10,
       y_start=0,
-      redeclare package Medium = Medium1)
+      redeclare package Medium = Medium1,
+      m_flow_nominal=m1_flow_nominal)
                "damper at bypass of recuperator on exhaust air side"
       annotation (Placement(transformation(extent={{-10,50},{10,70}})));
     Fluid.Actuators.Valves.TwoWayEqualPercentage
                              Y01(
       l=0.001,
-      m_flow_nominal=5.1,
       dpValve_nominal=10,
-      redeclare package Medium = Medium2)
+      redeclare package Medium = Medium2,
+      m_flow_nominal=m2_flow_nominal)
                "damper at entry of recuperator of supply air side" annotation (
         Placement(transformation(
           extent={{10,-10},{-10,10}},
@@ -766,10 +789,10 @@ package ComponentsAHU "contains different components for the AHU"
     Fluid.Actuators.Valves.TwoWayEqualPercentage
                              Y02(
       l=0.001,
-      m_flow_nominal=5.1,
       dpValve_nominal=10,
       y_start=0,
-      redeclare package Medium = Medium2)
+      redeclare package Medium = Medium2,
+      m_flow_nominal=m2_flow_nominal)
                "damper at bypass of recuperator"
       annotation (Placement(transformation(extent={{10,-70},{-10,-50}})));
     Modelica.Blocks.Interfaces.RealInput Y03_opening
@@ -805,6 +828,21 @@ package ComponentsAHU "contains different components for the AHU"
           extent={{-10,-10},{10,10}},
           rotation=180,
           origin={-106,0})));
+    Fluid.FixedResistances.PressureDrop resSupAir(
+      redeclare package Medium = Medium2,
+      dp_nominal=132,
+      m_flow_nominal=m2_flow_nominal)
+                       "combined pressure loss of supply air side"
+      annotation (Placement(transformation(extent={{10,-10},{-10,10}},
+          rotation=90,
+          origin={-52,-18})));
+    Fluid.FixedResistances.PressureDrop resSupAir1(
+      redeclare package Medium = Medium1,
+      m_flow_nominal=m1_flow_nominal,
+      dp_nominal=127)  "combined pressure loss of supply air side"
+      annotation (Placement(transformation(extent={{10,-10},{-10,10}},
+          rotation=270,
+          origin={48,38})));
   equation
     connect(Y03_opening, Y03.y) annotation (Line(points={{31,103},{31,78},{0,78},
             {0,72}}, color={0,0,127}));
@@ -821,12 +859,8 @@ package ComponentsAHU "contains different components for the AHU"
             50,-46}}, color={0,127,255}));
     connect(port_a2, Y02.port_a)
       annotation (Line(points={{100,-60},{10,-60}}, color={0,127,255}));
-    connect(recHeaExc1.port_b1, port_b1) annotation (Line(points={{10,22},{54,
-            22},{54,60},{100,60}}, color={0,127,255}));
     connect(Y03.port_b, port_b1)
       annotation (Line(points={{10,60},{100,60}}, color={0,127,255}));
-    connect(recHeaExc1.port_b2, port_b2) annotation (Line(points={{-10,10},{-54,
-            10},{-54,-60},{-100,-60}}, color={0,127,255}));
     connect(Y02.port_b, port_b2)
       annotation (Line(points={{-10,-60},{-100,-60}}, color={0,127,255}));
     connect(recHeaExc1.port_a1, port_a1) annotation (Line(points={{-10,22},{-54,
@@ -835,6 +869,14 @@ package ComponentsAHU "contains different components for the AHU"
       annotation (Line(points={{-10,60},{-100,60}}, color={0,127,255}));
     connect(Y02.y_actual, Y02_actual) annotation (Line(points={{-5,-53},{-79.5,
             -53},{-79.5,0},{-106,0}}, color={0,0,127}));
+    connect(recHeaExc1.port_b2, resSupAir.port_a) annotation (Line(points={{-10,
+            10},{-52,10},{-52,-8}}, color={0,127,255}));
+    connect(resSupAir.port_b, port_b2) annotation (Line(points={{-52,-28},{-52,
+            -60},{-100,-60}}, color={0,127,255}));
+    connect(recHeaExc1.port_b1, resSupAir1.port_a)
+      annotation (Line(points={{10,22},{48,22},{48,28}}, color={0,127,255}));
+    connect(resSupAir1.port_b, port_b1)
+      annotation (Line(points={{48,48},{48,60},{100,60}}, color={0,127,255}));
      annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
             Rectangle(
             extent={{-100,100},{100,-100}},
@@ -1242,8 +1284,8 @@ package ComponentsAHU "contains different components for the AHU"
           coordinateSystem(preserveAspectRatio=false)));
   end AbsorberSimple;
 
-  model AbsorberSimpleTest
-    "simple model of an absorber after Gandhisan2004"
+  model AbsorberSimpleTank
+    "simple model of an absorber after Gandhisan2004 without cooling heat exchanger and eps_HE model"
 
     import SI = Modelica.SIunits;
 
@@ -1590,7 +1632,6 @@ package ComponentsAHU "contains different components for the AHU"
     t_so  =  t_ao  "Annahme: Ausgang der Sole hat die selbe Temperatur wie die Luft";
     t_si  =  t_s1  "Inlet entspricht Speichertemperatur";
 
-
     //Hier Koeffizienten abbilden
     L_G      =  (L/A_s) / (G/A_a);
     Hai_Hsi  =  h_ai / (c_ps*(t_si-t_ref));
@@ -1625,5 +1666,1757 @@ package ComponentsAHU "contains different components for the AHU"
     x_i  =  x_1;
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)));
-  end AbsorberSimpleTest;
+  end AbsorberSimpleTank;
+
+  model Absorber
+    "model of an absorber using partial vapor pressure of water"
+
+    extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
+    import SI = Modelica.SIunits;
+
+    // Diagnostics
+    parameter Boolean show_T=false "= true, if actual temperature at port is computed"
+      annotation (Dialog(tab="Advanced", group="Diagnostics"));
+
+    // Druckverluste
+    parameter SI.Pressure dp_abs=0 "Druckverlust im Absorber nominal: 300 Pa";
+
+  protected
+    final parameter Real deltaReg=m_flow_small/1E3
+      "Smoothing region for inverseXRegularized";
+    final parameter Real deltaInvReg=1/deltaReg
+      "Inverse value of delta for inverseXRegularized";
+    final parameter Real aReg=-15*deltaInvReg
+      "Polynomial coefficient for inverseXRegularized";
+    final parameter Real bReg=119*deltaInvReg^2
+      "Polynomial coefficient for inverseXRegularized";
+    final parameter Real cReg=-361*deltaInvReg^3
+      "Polynomial coefficient for inverseXRegularized";
+    final parameter Real dReg=534*deltaInvReg^4
+      "Polynomial coefficient for inverseXRegularized";
+    final parameter Real eReg=-380*deltaInvReg^5
+      "Polynomial coefficient for inverseXRegularized";
+    final parameter Real fReg=104*deltaInvReg^6
+      "Polynomial coefficient for inverseXRegularized";
+
+    final parameter SI.Temperature T_cH2O=647.096
+      "in K, temperature of water at critical point";
+
+    final parameter Real s[Medium.nXi]={if Modelica.Utilities.Strings.isEqual(
+        string1=Medium.substanceNames[i],
+        string2="Water",
+        caseSensitive=false) then 1 else 0 for i in 1:Medium.nXi}
+      "Vector with zero everywhere except where species is";
+
+    SI.MassFlowRate m1Xi_flow[Medium.nXi]
+      "Mass flow rates of independent substances added to the medium";
+    Real m_flowInv(unit="s/kg") "Regularization of 1/m_flow of port_a";
+    //Real L_flowInv(unit="s/kg") "Regularization of 1/L_i";
+    Real X1_in[Medium.nXi]=inStream(port_a.Xi_outflow)
+      "absolute humidity of outside air at entry in kg/kg";
+    parameter SI.Temperature t_ref=273.15 "reference temperature";
+
+    //influence parameters:
+  public
+    parameter Real x_sol=0.33 "desiccant solution concentration at start";
+    //parameter SI.Temperature t_sol =   26+273.15  "desiccant solution inlet temperature";
+    parameter SI.Temperature t_sol=299.15 "desiccant solution inlet temperature";
+    parameter Real a_t=320 "specific surface area of packing in m^2/m^3";
+    parameter Real Z=0.35 "packed bed height in m";
+    parameter Real V=0.871515 "in m^3, 1810*1070*450 mm";
+    parameter Real eps=16/15  "0.85 for desorber, parameter for heat exchange in absorber / desorber unit";
+
+    parameter Real beta=1.22345*10^(-7) "mass transfer coefficient with partial pressure as driving potential, 
+  fitting parameter for mass transfer equation";
+    //with inlet parameters: 6.0995*10^(-8)
+
+    parameter SI.SpecificEnergy lambda=2430000 "latent heat of condensation in J/kg";
+    //parameter SI.Area A_a = 1.9367 "1810*1070, Area air of absorber in m^2";
+    //parameter SI.Area A_s = 0.8145 "1810*450, Area liquid of absorber in m^2";
+
+    //thermodynamic states
+    Media.Air.ThermodynamicState state_a=Media.Air.setState_phX(
+        port_a.p,
+        inStream(port_a.h_outflow),
+        inStream(port_a.Xi_outflow)) "state for medium inflowing through port_a";
+
+    Media.Air.ThermodynamicState state_b=Media.Air.setState_phX(
+        port_b.p,
+        port_b.h_outflow,
+        port_b.Xi_outflow) "state for medium inflowing through port_b";
+
+    //specific heat capacities
+    SI.SpecificHeatCapacity c_pa_in=Media.Air.specificHeatCapacityCp(state_a)
+      "specific heat capacity of airflow in J/kgK";
+    SI.SpecificHeatCapacity c_pa_out=Media.Air.specificHeatCapacityCp(state_b)
+      "in J/kgK, specific heat capacity of airflow at outlet";
+    SI.SpecificHeatCapacity c_pw=Media.Water.specificHeatCapacityCp(state_a)
+      "specific heat capacity of airflow in J/kgK";
+    SI.SpecificHeatCapacity c_ps_in=BaseClasses.Utilities.specificHeatCapacityCpLiCl(t_si, x_i)
+      "specific heat capacity of desiccant solution at inlet in J/kgK";
+    SI.SpecificHeatCapacity c_ps_out=BaseClasses.Utilities.specificHeatCapacityCpLiCl(t_so, x_o)  "specific heat capacity of desiccant solution at inlet in J/kgK";
+
+    //densities
+    //SI.Density rho_a=Media.Air.density(state_a) "in kg/m^3, density of air";
+    //SI.Density rho_s=BaseClasses.Utilities.densityLiCl(t_si, x_i) "in kg/m^3, density of LiCl solution";
+
+    //mass flows
+    SI.MassFlowRate L_o "outlet mass flow of desiccant solution in kg/s";
+    //liegt hier eine andere Fläche vor als A?
+    SI.MassFlowRate G_i=m_flow "original as mass flux, inlet mass flow of Air in kg/s";
+    SI.MassFlowRate G_o "outlet mass flow of Air in kg/s";
+    SI.MassFlowRate m
+      "water vapor mass flow per area in kg/s going from air to desiccant flow";
+    SI.MassFlowRate m_star
+      "water vapor mass flow per area in kg/s going from air to desiccant flow without physical control of boundaries";
+
+    //temperatures
+    SI.Temperature t_ai=Media.Air.temperature(state_a) "temperature of air at inlet";
+    SI.Temperature t_ao "temperature of air at outlet";
+    SI.Temperature t_a = (t_ai+t_ao)/2 "average temperature of air ";
+    SI.Temperature t_si(start=t_sol) "temperature of desiccant solution at inlet";
+    SI.Temperature t_so  "(start=t_sol) temperature of desiccant solution at outlet";
+    SI.Temperature t_s = (t_si + t_so)/2 "average temperature of brine";
+
+    SI.HeatFlowRate Q "heat transfer between solution and air";
+
+    //enthalpies
+    SI.SpecificEnthalpy h_ai;
+    SI.SpecificEnthalpy h_ao;
+    SI.SpecificEnthalpy h_si;
+    SI.SpecificEnthalpy h_so;
+
+    //humidity
+    Real X_iDry = inStream(port_a.Xi_outflow[1])/(1 - inStream(port_a.Xi_outflow[1]))
+      "absolute humidity to dry air at inlet";
+    Real X_oDry = port_b.Xi_outflow[1]/(1 - port_b.Xi_outflow[1])
+      "absolute humidity to dry air at outlet";
+    Real X_i = inStream(port_a.Xi_outflow[1])
+      "absolute humidity to humid air at inlet";
+    Real X_o = port_b.Xi_outflow[1]
+      "absolute humidity to humid air at outlet";
+    Real Xout_max[Medium.nXi]=
+        AixLib.Utilities.Psychrometrics.Functions.X_pSatpphi(
+        pSat=AixLib.Media.Air.saturationPressure(t_ao),
+        p=port_a.p,
+        phi=1)*s "maximum relative humidity at outlet (rh=1)";
+    Real rh=Utilities.Psychrometrics.Functions.phi_pTX(
+        port_a.p,
+        t_ai,
+        inStream(port_a.Xi_outflow[1])) "relative humidity of inlet air";
+
+    //water mass flows
+    SI.MassFlowRate w_in  "actual water mass flow at air inlet";
+    //SI.MassFlowRate w_outmax  "maximum water mass flow at air outlet, negative";
+
+    //salt mass flow
+    SI.MassFlowRate ms_in = L_i * x_i;
+    SI.MassFlowRate ms_out = L_o * x_o;
+
+    //solution concentrations
+    Real x_i(start=x_sol) "inlet concentration of desiccant solution";
+    Real x_o(start=x_sol) "outlet concentration of desiccant solution";
+    Real x = (x_i+x_o)/2 "average concentration of desiccant solution";
+
+    //partial pressures
+    SI.PartialPressure pw_s "average partial vapor pressure of desiccant solution";
+    SI.PartialPressure pw_a "average partial vapor pressure of air flow";
+    SI.PartialPressure pw_w "average partial vapor pressure of water";
+    Real theta "average reduced temperature of desiccant solution T/ T_c,H20";
+    Real pi "relative partial pressure of solution: pw_s / pw_a";
+    //Integer PumpOn "1 if pump is on, 0 if not";
+
+    Modelica.Blocks.Interfaces.RealInput x_in "Connector of Real input signal 1" annotation (
+        Placement(transformation(extent={{-126,20},{-86,60}}), iconTransformation(extent={{-126,
+              20},{-86,60}})));
+    Modelica.Blocks.Interfaces.RealInput Ts_in "Connector of Real input signal 1" annotation (
+        Placement(transformation(extent={{-126,60},{-86,100}}), iconTransformation(extent={{-126,
+              60},{-86,100}})));
+    Modelica.Blocks.Interfaces.RealOutput x_out "Connector of Real input signal 1" annotation (
+       Placement(transformation(extent={{92,20},{132,60}}), iconTransformation(extent={{92,20},
+              {112,40}})));
+    Modelica.Blocks.Interfaces.RealOutput Ts_out "Connector of Real input signal 1"
+      annotation (Placement(transformation(extent={{92,60},{132,100}}), iconTransformation(
+            extent={{92,60},{112,80}})));
+    Modelica.Blocks.Interfaces.RealOutput L_out "Connector of Real input signal 1" annotation (
+       Placement(transformation(extent={{92,-90},{132,-50}}), iconTransformation(extent={{92,-80},
+              {112,-60}})));
+    Modelica.Blocks.Interfaces.RealInput L_i "Connector of Real input signal 1" annotation (
+        Placement(transformation(extent={{-126,-80},{-86,-40}}), iconTransformation(extent={{-126,
+              -70},{-86,-30}})));
+    Modelica.Blocks.Interfaces.BooleanInput Pump(start=false) "Connector of Real input signal 1"
+      annotation (Placement(transformation(
+          extent={{-20,-20},{20,20}},
+          rotation=90,
+          origin={0,-110}), iconTransformation(
+          extent={{20,-20},{-20,20}},
+          rotation=270,
+          origin={0,-100})));
+    Modelica.Blocks.Interfaces.RealInput Y06 "Connector of Real input signal 1"
+      annotation (Placement(transformation(
+          extent={{-20,-20},{20,20}},
+          rotation=90,
+          origin={-50,-106}), iconTransformation(
+          extent={{-20,-20},{20,20}},
+          rotation=90,
+          origin={-56,-88})));
+  initial equation
+    // Assert that the substance with name 'water' has been found.
+    assert(Medium.nXi == 0 or abs(sum(s) - 1) < 1e-5,
+    "If Medium.nXi > 1, then substance 'water' must be present for one component.'"
+       + Medium.mediumName + "'.\n" + "Check medium model.");
+
+  equation
+
+    if Pump then
+      //PumpOn = 1;
+      //Mass balance Air:
+      G_o = G_i - m;
+      //mass balance solution:
+      L_o = L_i + m;
+      //Mass balance Water:
+      G_o * port_b.Xi_outflow = G_i * inStream(port_a.Xi_outflow) - m1Xi_flow;
+      //mass transfer equation
+      m_star = (1-Y06)*beta*a_t*V*(pw_a - pw_s);
+      //equation for m considering physical boundaries:
+      //m = m_star;
+      m = min( m_star, w_in);
+      //m = min( min(m_star, w_in),max(m_star, w_outmax));
+      //concentration of desiccant solution
+      L_i * x_i = L_o * x_o;
+      //1/x_o = 1/x_i*(1 + m*L_flowInv);
+      //1/x_o = 1/x_i *(1+m/L_i);
+
+    else
+      //PumpOn = 0;
+      G_o = G_i;
+      L_o = L_i;
+      port_b.Xi_outflow = inStream(port_a.Xi_outflow);
+      m_star = 0;
+      m=0;
+      x_o = x_i;
+
+    end if;
+
+    //water mass flow equations:
+    w_in = X1_in[1] * G_i;
+    //w_outmax = - Xout_max[1] * G_i  "not completely exact, should be outlet mass flow (G_o), use dry air alternatively";
+
+
+    m_flowInv = AixLib.Utilities.Math.Functions.inverseXRegularized(
+      x=port_a.m_flow,
+      delta=deltaReg,
+      deltaInv=deltaInvReg,
+      a=aReg,
+      b=bReg,
+      c=cReg,
+      d=dReg,
+      e=eReg,
+      f=fReg);
+
+    //L_flowInv = AixLib.Utilities.Math.Functions.inverseXRegularized(x=L_i,delta=deltaReg,deltaInv=deltaInvReg, a=aReg,b=bReg,c=cReg,d=dReg,e=eReg,f=fReg);
+
+    //pressure loss
+    dp = dp_abs;
+
+    //Mass balance Air:
+    port_b.m_flow = - G_o  "Vorsicht: negatives Vorzeichen!";
+
+    //mass balance solution:
+    L_out = L_o;
+
+    //Mass balance Water:
+    port_a.Xi_outflow = inStream(port_b.Xi_outflow);
+
+    //Energy balance:
+    port_a.h_outflow = inStream(port_b.h_outflow);
+    port_b.h_outflow = h_ao;
+
+    h_ai = (1-X_i)*c_pa_in*(t_ai - t_ref) + X_i*(c_pw*(t_ai - t_ref) + lambda);
+    h_ao = (1-X_o)*c_pa_out*(t_ao - t_ref) + X_o*(c_pw*(t_ao - t_ref) + lambda);
+    h_si = c_ps_in*(t_si - t_ref);
+    h_so = c_ps_out*(t_so - t_ref);
+
+    L_i*h_si = L_o*h_so - Q;
+    G_i*h_ai = G_o*h_ao + Q;
+
+    //temperatures
+    t_si = Ts_in;
+    Ts_out = t_so;
+    //t_so - t_ao  =  0  "Annahme: Ausgang der Sole hat die selbe Temperatur wie die Luft";
+    t_so - t_ao = (1 - eps)*(t_si - t_ai) "Abweichung von t_ao=t_so in der Wärmeübertragung";
+
+    //vapor pressure
+    theta = t_s/T_cH2O "reduced temperature T/T_c,H20";
+
+    pw_w = BaseClasses.Utilities.partialPressureWater(t_s);
+    //welches T?
+    pi = BaseClasses.Utilities.relativePartialPressureLiCl(theta, x_i);
+    // ist x_i die mass fraction of solute?
+    pw_s = pi*pw_w;
+
+    pw_a = Utilities.Psychrometrics.Functions.pW_X((inStream(port_a.Xi_outflow[1])+port_b.Xi_outflow[1])/2);
+
+    // Species flow rate from m
+    m1Xi_flow = m*s;
+
+    //concentration of desiccant solution
+    x_i = x_in;
+    x_out = x_o;
+    annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Rectangle(extent={{
+                -100,100},{100,-100}}, lineColor={28,108,200}), Text(
+            extent={{-80,80},{80,-80}},
+            lineColor={28,108,200},
+            textString="Absorber")}), Diagram(coordinateSystem(preserveAspectRatio=false)));
+  end Absorber;
+
+  model solutionTank "storage tank for desiccant solution"
+
+    import SI = Modelica.SIunits;
+
+  protected
+    parameter SI.Temperature t_ref=273.15 "reference temperature";
+
+  public
+    parameter SI.Temperature t_sol=26 + 273.15 "starting temperature of absorber storage tank";
+    parameter Real x_sol=0.4 "starting concentration of desiccant solution in absorber tank";
+    parameter SI.Mass m_salt = 200 "starting salt mass of tank";
+    parameter SI.VolumeFlowRate L_V =  15.2/3600 "Volume flow of desiccant solution in m^3/s";
+
+    SI.Mass m(min=100, max=1000, nominal = m_salt/x_sol) "mass of desiccant solution in absorber tank";
+    SI.Mass m_s( min=100, max=1000, start=m_salt) "mass of salt in absorber tank";
+    SI.Mass m_w( min=100, max=1000) "mass of water in absorber tank";
+    SI.Temperature t(start=t_sol) "temperature of absorber solution tank";
+    Real x(min = 0.25, max = 0.45, start=x_sol) "concentration of desiccant solution in absorber tank";
+
+    SI.SpecificHeatCapacity cp_in=BaseClasses.Utilities.specificHeatCapacityCpLiCl(T_in, x_in)
+      "specific heat capacity of desiccant solution at inlet in J/kgK";
+    SI.SpecificHeatCapacity cp_out=BaseClasses.Utilities.specificHeatCapacityCpLiCl(T_out, x_out)
+      "specific heat capacity of desiccant solution at inlet in J/kgK";
+    SI.SpecificHeatCapacity cp_reg=BaseClasses.Utilities.specificHeatCapacityCpLiCl(T_reg, x_reg)
+      "specific heat capacity of desiccant solution at inlet in J/kgK";
+
+    SI.Density rho = BaseClasses.Utilities.densityLiCl(t, x) "in kg/m^3, density of LiCl solution";
+    SI.MassFlowRate L_o = L_V*rho "mass flow rate of desiccant solution in kg/s";
+
+    Modelica.Blocks.Interfaces.RealInput T_in "Connector of Real input signal 1"
+      annotation (Placement(transformation(extent={{-126,60},{-86,100}})));
+    Modelica.Blocks.Interfaces.RealInput x_in "Connector of Real input signal 1"
+      annotation (Placement(transformation(extent={{-126,30},{-86,70}})));
+    Modelica.Blocks.Interfaces.RealOutput T_out
+                                               "Connector of Real input signal 1"
+      annotation (Placement(transformation(extent={{90,50},{130,90}}), iconTransformation(extent={{94,50},
+              {114,70}})));
+    Modelica.Blocks.Interfaces.RealOutput x_out
+      "Connector of Real input signal 1"
+      annotation (Placement(transformation(extent={{90,10},{130,50}}),   iconTransformation(extent={{94,-10},
+              {114,10}})));
+    Modelica.Blocks.Interfaces.RealInput L "Connector of Real input signal 1"
+      annotation (Placement(transformation(extent={{-126,0},{-86,40}})));
+
+    Modelica.Blocks.Interfaces.RealInput m_reg "Connector of Real input signal 1"
+      annotation (Placement(transformation(extent={{-126,-100},{-86,-60}})));
+    Modelica.Blocks.Interfaces.RealOutput L_out
+      "Connector of Real input signal 1" annotation (Placement(transformation(
+            extent={{94,-72},{134,-32}}), iconTransformation(extent={{94,-70},{114,
+              -50}})));
+    Modelica.Blocks.Interfaces.RealInput T_reg "Connector of Real input signal 1"
+      annotation (Placement(transformation(extent={{-126,-40},{-86,0}})));
+    Modelica.Blocks.Interfaces.RealInput x_reg "Connector of Real input signal 1"
+      annotation (Placement(transformation(extent={{-126,-70},{-86,-30}})));
+    Modelica.Blocks.Interfaces.BooleanInput Pump "Connector of Real input signal 1" annotation (
+        Placement(transformation(
+          extent={{-20,-20},{20,20}},
+          rotation=270,
+          origin={-70,110}), iconTransformation(
+          extent={{-20,-20},{20,20}},
+          rotation=270,
+          origin={0,100})));
+    Modelica.Blocks.Interfaces.RealOutput m_storage
+      "Connector of Real input signal 1" annotation (Placement(transformation(
+            extent={{94,-110},{134,-70}}), iconTransformation(extent={{94,-100},{114,
+              -80}})));
+  equation
+    if Pump then
+    L_out = L_o;
+    else
+    L_out = 0;
+    end if;
+
+    der(m) = L - L_out + m_reg;
+    x_out = x;
+    T_out = t;
+
+    der(m_s)  =  x_reg * m_reg + L * x_in - L_out * x_out;
+    m_w  =  m - m_s;
+    m_s  =  m * x;
+    //m*der(x) = L*(x_in - x) + m_reg*(x_reg - x) - L_out*(x_out - x);
+
+    //m*cp_out*der(t)  =  L * cp_in * (T_in - t_ref) - L_out * cp_out * (T_out - t_ref) + m_reg * cp_reg * (T_reg-t_ref);
+
+    m * cp_out * der(t) = L * (cp_in * (T_in - t_ref) - cp_out * (t - t_ref))
+      + m_reg * (cp_reg * (T_reg - t_ref) - cp_out * (t - t_ref))
+      - L_out * cp_out * (T_out - t);
+    m_storage = m;
+    annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+          coordinateSystem(preserveAspectRatio=false)));
+  end solutionTank;
+
+  model sorptionExchange
+    "model for exchange of mass between absorber and desorber"
+
+    import SI = Modelica.SIunits;
+
+    parameter Real eps = 0.8  "epsilon for heat exchange at hot (and cold) heat exchanger";
+    parameter SI.MassFlowRate mAbs_max = 2  "0.6944, maximum mass flow rate through Y15 in kg/s";
+    parameter SI.MassFlowRate mReg_max = 2  "0.6944, maximum mass flow rate through Y16 in kg/s";
+    parameter SI.MassFlowRate mWat_max = 2.4716 "maximum water mass flow rate in regeneration coil in kg/s";
+    parameter SI.Temperature t_sol =   299.15  "desiccant solution inlet temperature";
+    parameter SI.Temperature t_ref =   273.15  "reference temperature";
+    parameter SI.Temperature t_hot =   70+273.15  "temperature of hot water to regenerate brine";
+
+
+
+    SI.SpecificHeatCapacity cpDes=BaseClasses.Utilities.specificHeatCapacityCpLiCl(TDes_in, xDes)
+      "specific heat capacity of desiccant solution at inlet in J/kgK";
+    SI.SpecificHeatCapacity cpAbs=BaseClasses.Utilities.specificHeatCapacityCpLiCl(TAbs_in, xAbs)
+      "specific heat capacity of desiccant solution at inlet in J/kgK";
+    SI.SpecificHeatCapacity cpSol=BaseClasses.Utilities.specificHeatCapacityCpLiCl(t_sol, xAbs)
+      "specific heat capacity of desiccant solution at inlet in J/kgK";
+    //SI.SpecificHeatCapacity cpWat=Modelica.Media.Water.WaterIF97_pT.specificHeatCapacityCp(Modelica.Media.Water.WaterIF97_pT.setState_pTX(101325, TWat));
+    //Media.Water.specificHeatCapacityCp(Modelica.Media.Water.WaterIF97_pT.setState_pTX(101325, TWat)) "specific heat capacity of hot water in J/kgK";
+    //Modelica.Media.Water.StandardWaterOnePhase.specificHeatCapacityCp(Modelica.Media.Water.StandardWaterOnePhase.setState_pTX(      121325,      TWat,      phase=1)) "specific heat capacity of hot water in J/kgK";
+    SI.SpecificHeatCapacity cpWat=4187  "specific heat capacity at 70°C in J/kgK";
+    SI.HeatFlowRate QAbs(start=0) "cooling of the brine before absorber";
+    SI.HeatFlowRate QReg "heating of the brine before desorber";
+    SI.HeatFlowRate QMix "heat exchange between abs and des brine";
+    SI.HeatFlowRate QMax "maximum heat exchange between absorption and desorption brine";
+
+    SI.HeatFlowRate QMax_reg "maximum heat flow from regeneration coil";
+    Real CAbs "heat capacity flow of absorption flow inlet in kW/°C";
+    Real CDes "heat capacity flow of desorption flow inlet in kW/°C";
+    Real CReg "heat capacity flow of regenerated flow inlet in kW/°C";
+    Real CMin "minimum heat capacity flow in kW/°C";
+
+    Real CMin_reg "minimum heat capacity flow at regeneration coil in kW/°C";
+    Real CWat "heat capacity flow of hot water in kW/°C";
+
+    SI.MassFlowRate mWat(start=0)
+                        " water mass flow rate in regeneration coil in kg/s";
+    SI.MassFlowRate mHot
+                        "(start=0) hot water mass flow rate in regeneration coil in kg/s";
+    SI.MassFlowRate mMix(start=0)
+                        " mixing water mass flow rate in regeneration coil in kg/s";
+
+    SI.Temperature TWat(start=343.15) "temperature of mixed water in regeneration coil";
+    SI.Temperature TWat_out "temperature of outlet water in regeneration coil";
+
+    Boolean ABS "Boolean variable, only absorption is active";
+    Boolean DES "Boolean variable, only regeneration is active";
+    Boolean ABSDES "Boolean, absorption and desorption active";
+    Boolean NONE "sorption is shut off";
+
+    Modelica.Blocks.Interfaces.RealInput TAbs_in
+      "Connector of Real input signal 1" annotation (Placement(transformation(
+            extent={{-220,120},{-180,160}}),
+                                           iconTransformation(extent={{-220,120},{-180,160}})));
+    Modelica.Blocks.Interfaces.RealInput xAbs_in
+      "Connector of Real input signal 1" annotation (Placement(transformation(
+            extent={{-220,60},{-180,100}}),
+                                          iconTransformation(extent={{-220,60},{-180,100}})));
+    Modelica.Blocks.Interfaces.RealInput LAbs_in
+      "Connector of Real input signal 1" annotation (Placement(transformation(
+            extent={{-220,0},{-180,40}}),  iconTransformation(extent={{-220,0},{-180,40}})));
+    Modelica.Blocks.Interfaces.RealInput Y15(min=0, max=1)
+      "Connector of Real input signal 1" annotation (Placement(transformation(
+            extent={{-220,-60},{-180,-20}}),iconTransformation(extent={{-220,-60},{-180,-20}})));
+    Modelica.Blocks.Interfaces.RealInput TDes_in "Connector of Real input signal 1"
+                                         annotation (Placement(transformation(
+          extent={{-20,-20},{20,20}},
+          rotation=270,
+          origin={-90,208}), iconTransformation(
+          extent={{-20,-20},{20,20}},
+          rotation=270,
+          origin={-60,200})));
+    Modelica.Blocks.Interfaces.RealInput xDes_in
+      "Connector of Real input signal 1" annotation (Placement(transformation(
+          extent={{-20,-20},{20,20}},
+          rotation=270,
+          origin={-50,208}), iconTransformation(
+          extent={{-20,-20},{20,20}},
+          rotation=270,
+          origin={0,200})));
+    Modelica.Blocks.Interfaces.RealInput Y16(min=0, max=1)
+      "Connector of Real input signal 1" annotation (Placement(transformation(
+          extent={{-20,-20},{20,20}},
+          rotation=270,
+          origin={90,208}), iconTransformation(
+          extent={{-20,-20},{20,20}},
+          rotation=270,
+          origin={120,200})));
+    Modelica.Blocks.Interfaces.RealInput LDes_in
+      "Connector of Real input signal 1" annotation (Placement(transformation(
+          extent={{-20,-20},{20,20}},
+          rotation=270,
+          origin={-10,208}),
+                           iconTransformation(
+          extent={{-20,-20},{20,20}},
+          rotation=270,
+          origin={60,200})));
+    Modelica.Blocks.Interfaces.RealOutput TAbs_reg
+      "Connector of Real input signal 1" annotation (Placement(transformation(
+            extent={{210,110},{250,150}}),
+                                         iconTransformation(extent={{214,120},{234,140}})));
+    Modelica.Blocks.Interfaces.RealOutput mAbs_reg(min=0)
+      "Connector of Real input signal 1" annotation (Placement(transformation(
+            extent={{194,60},{234,100}}),
+                                        iconTransformation(extent={{214,80},{234,100}})));
+    Modelica.Blocks.Interfaces.RealOutput TAbs "Connector of Real input signal 1"
+      annotation (Placement(transformation(extent={{212,-50},{252,-10}}),
+          iconTransformation(extent={{212,-60},{232,-40}})));
+    Modelica.Blocks.Interfaces.RealOutput xAbs "Connector of Real input signal 1"
+      annotation (Placement(transformation(extent={{212,-150},{252,-110}}),
+          iconTransformation(extent={{212,-160},{232,-140}})));
+    Modelica.Blocks.Interfaces.RealOutput LAbs(min=0)
+      "Connector of Real input signal 1" annotation (Placement(transformation(
+            extent={{212,-90},{252,-50}}),iconTransformation(extent={{212,-110},{232,-90}})));
+    Modelica.Blocks.Interfaces.RealOutput TDes "Connector of Real input signal 1"
+      annotation (Placement(transformation(
+          extent={{-20,-20},{20,20}},
+          rotation=270,
+          origin={-130,-214}),iconTransformation(
+          extent={{-10,-10},{10,10}},
+          rotation=270,
+          origin={-170,-202})));
+    Modelica.Blocks.Interfaces.RealOutput xDes "Connector of Real input signal 1"
+      annotation (Placement(transformation(
+          extent={{-20,-20},{20,20}},
+          rotation=270,
+          origin={0,-212}),   iconTransformation(
+          extent={{-10,-10},{10,10}},
+          rotation=270,
+          origin={-48,-204})));
+    Modelica.Blocks.Interfaces.RealOutput LDes(min=0)
+      "Connector of Real input signal 1" annotation (Placement(transformation(
+          extent={{-20,-20},{20,20}},
+          rotation=270,
+          origin={-80,-212}), iconTransformation(
+          extent={{-10,-10},{10,10}},
+          rotation=270,
+          origin={-110,-204})));
+    Modelica.Blocks.Interfaces.RealOutput TReg "Connector of Real input signal 1"
+      annotation (Placement(transformation(
+          extent={{-20,-20},{20,20}},
+          rotation=270,
+          origin={70,-212}), iconTransformation(
+          extent={{-10,-10},{10,10}},
+          rotation=270,
+          origin={30,-202})));
+    Modelica.Blocks.Interfaces.RealOutput mReg(min=0)
+      "Connector of Real input signal 1" annotation (Placement(transformation(
+          extent={{-20,-20},{20,20}},
+          rotation=270,
+          origin={130,-212}),iconTransformation(
+          extent={{-10,-10},{10,10}},
+          rotation=270,
+          origin={92,-202})));
+    Modelica.Blocks.Interfaces.BooleanInput P05 "Connector of Real input signal 1" annotation (
+        Placement(transformation(
+          extent={{-20,-20},{20,20}},
+          rotation=270,
+          origin={-180,208}),
+                            iconTransformation(
+          extent={{-20,-20},{20,20}},
+          rotation=270,
+          origin={-180,200})));
+    Modelica.Blocks.Interfaces.RealInput Y10 "Connector of Real input signal 1" annotation (Placement(
+          transformation(
+          extent={{-20,-20},{20,20}},
+          rotation=270,
+          origin={-140,208}),
+                          iconTransformation(
+          extent={{-20,-20},{20,20}},
+          rotation=270,
+          origin={-120,200})));
+    Modelica.Blocks.Interfaces.BooleanInput P07 "Connector of Real input signal 1" annotation (
+        Placement(transformation(
+          extent={{-20,-20},{20,20}},
+          rotation=0,
+          origin={-200,-120}),
+                             iconTransformation(
+          extent={{-20,-20},{20,20}},
+          rotation=0,
+          origin={-200,-140})));
+    Modelica.Blocks.Interfaces.BooleanInput P08 "Connector of Real input signal 1" annotation (
+        Placement(transformation(
+          extent={{-20,-20},{20,20}},
+          rotation=270,
+          origin={170,208}),   iconTransformation(
+          extent={{-20,-20},{20,20}},
+          rotation=270,
+          origin={180,200})));
+
+  equation
+
+    //modi
+
+    if (P07 and P08) then
+      ABSDES = true;
+      ABS = false;
+      DES = false;
+      NONE = false;
+    elseif (P07 and not P08) then
+      ABS = true;
+      ABSDES = false;
+      DES = false;
+      NONE = false;
+    elseif (not P07 and P08) then
+      DES = true;
+      ABS = false;
+      ABSDES = false;
+      NONE = false;
+    else
+      NONE = true;
+      ABSDES = false;
+      ABS = false;
+      DES = false;
+    end if;
+
+
+    //mass balance
+    LAbs_in  =  LAbs + mAbs_reg  "setting LAbs";
+    LDes_in  =  LDes + mReg  "setting LDes";
+
+    //concentrations
+    xAbs = xAbs_in  "setting xAbs";
+    xDes = xDes_in  "setting xDes";
+
+    if ABSDES then  //absorbation and desorbation active
+
+    assert(P05, "Regeneration Pump must be active", AssertionLevel.warning);
+
+    mAbs_reg  =  mAbs_max*Y15  "setting mAbs_reg";
+    mReg  =  mReg_max*Y16  "setting mReg";
+
+    //cooling of absorbtion brine
+    0  =  LAbs*(cpAbs*(TAbs_in - t_ref) - cpSol*(t_sol - t_ref)) - QAbs  "setting QAbs";
+    0  =  LAbs*(cpAbs*(TAbs_in - t_ref) - cpSol*(TAbs - t_ref)) - QAbs  "setting TAbs";
+
+    //heating of regeneration brine
+    mWat  =  mWat_max  "setting mWat";
+    mWat  =  mHot + mMix  "setting mMix";
+    mHot  =  Y10 * mWat  "setting mHot";
+    CWat  =  mWat * cpWat  "setting CWat";
+    CDes  =  LDes * cpDes  "setting CDes";
+    CMin_reg  =  min(CWat, CDes)  "setting CMin_reg";
+    QMax_reg  =  CMin_reg * (TWat - TDes_in)  "setting QMax_reg";
+    QReg  =  eps * QMax_reg  "setting QReg";
+
+    CWat * (TWat-TWat_out) = QReg  "setting TWat_out";
+    CDes * (TDes_in-TDes) = -QReg  "setting TDes";
+
+    //mixing balance in regeneration coil threewayvalve
+    mWat*TWat  =  mHot*t_hot + mMix * TWat_out  "setting TWat";
+
+    //heat exchange between absorption and desorption brine
+    QMax  =  CMin * (TDes_in - TAbs_in)  "setting QMax";
+    QMix  =  eps * QMax  "setting QMix";
+
+    CAbs  =  mAbs_reg  *  cpAbs  "setting CAbs";
+    CReg  =  mReg  *  cpDes  "setting CReg";
+    CMin  =  min(CAbs,CReg)  "setting CMin";
+    CAbs * (TAbs_in-TAbs_reg)  =  -QMix  "setting TAbs_reg";
+    CReg * (TDes_in-TReg)  =  QMix  "setting TReg";
+
+    elseif ABS then //only absorbation, no heat exchange between desorption and absorption
+
+    assert(not P05, "Regeneration Pump must be switched off", AssertionLevel.warning);
+
+    mAbs_reg  =  mAbs_max*Y15  "setting mAbs_reg";
+    mReg  =  0   "mReg_max*Y16  setting mReg";
+
+    mWat  =  0  "setting mWat";
+    mMix  =  0  "setting mMix";
+    mHot  =  0  "setting mHot";
+
+    //cooling of absorbtion brine
+    0  =  LAbs*(cpAbs*(TAbs_in - t_ref) - cpSol*(t_sol - t_ref)) - QAbs  "setting QAbs";
+    0  =  LAbs*(cpAbs*(TAbs_in - t_ref) - cpSol*(TAbs - t_ref)) - QAbs  "setting TAbs";
+
+    //heating of regeneration brine
+    CWat = 0;
+    CDes  =  0  "setting CDes";
+    CMin_reg = 0;
+    QMax_reg = 0;
+    QReg = 0;
+    TDes = TDes_in;
+    TWat_out = t_hot;
+    TWat = t_hot;
+
+    //heat exchange between absorption and desorption brine
+    QMax  =  0  "setting QMax";
+    QMix  =  0  "setting QMix";
+
+    CAbs  =  mAbs_reg  *  cpAbs  "setting CAbs";
+    CReg  =  0  "setting CReg";
+    CMin  =  min(CAbs,CReg)  "setting CMin";
+    TAbs_reg  =  TAbs_in  "setting TAbs_reg";
+    TReg  =  TDes_in  "setting TReg";
+
+    elseif DES then  //only desorption active
+
+    assert(P05, "Regeneration Pump must be active", AssertionLevel.warning);
+
+    mAbs_reg  =  0  "mAbs_max*Y15  setting mAbs_reg";
+    mReg  =  mReg_max*Y16  "setting mReg";
+
+    mWat  =  mHot + mMix  "setting mMix";
+    mHot  =  Y10 * mWat  "setting mHot";
+
+    //cooling of absorbtion brine
+    QAbs  =  0  "setting QAbs";
+    TAbs  =  TAbs_in  "setting TAbs";
+
+    //heating of regeneration brine
+    mWat  =  mWat_max  "setting mWat";
+    CWat  =  mWat * cpWat  "setting CWat";
+    CDes  =  LDes  *  cpDes  "setting CDes";
+    CMin_reg  =  min(CWat, CDes)  "setting CMin_reg";
+    QMax_reg  =  CMin_reg * (TWat - TDes_in)  "setting QMax_reg";
+    QReg  =  eps * QMax_reg  "setting QReg";
+
+    CWat * (TWat-TWat_out) = QReg  "setting TWat_out";
+    CDes * (TDes_in-TDes) = -QReg  "setting TDes";
+
+    //mixing balance in regeneration coil threewayvalve
+    mWat*TWat  =  mHot*t_hot + mMix * TWat_out  "setting TWat";
+
+    //heat exchange between absorption and desorption brine
+    QMax  =  0  "setting QMax";
+    QMix  =  0  "setting QMix";
+    CAbs  =  0  "setting CAbs";
+    CReg  =  mReg  *  cpDes  "setting CReg";
+    CMin  =  min(CAbs,CReg)  "setting CMin";
+    TAbs_reg  =  TAbs_in  "setting TAbs_reg";
+    TReg  =  TDes_in  "setting TReg";
+
+    elseif NONE then
+
+        assert(not P05, "Regeneration Pump must be switched off", AssertionLevel.warning);
+
+    mAbs_reg  =  0  "mAbs_max*Y15  setting mAbs_reg";
+    mReg  =  0    "mReg_max*Y16  setting mReg";
+
+    mWat = 0;
+    mMix  =  0  "setting mMix";
+    mHot  =  0  "setting mHot";
+
+    //cooling of absorbtion brine
+    QAbs  =  0  "setting QAbs";
+    TAbs  =  TAbs_in  "setting TAbs";
+
+    //heating of regeneration brine
+    CWat = 0;
+    CDes =  0;
+    CMin_reg = 0;
+    QMax_reg = 0;
+    QReg = 0;
+    TDes = TDes_in;
+    TWat_out = t_hot;
+    TWat = t_hot;
+
+
+    //heat exchange between absorption and desorption brine
+    QMax  =  0  "setting QMax";
+    QMix  =  0  "setting QMix";
+
+    CAbs  =  0  "setting CAbs";
+    CReg  =  0  "setting CReg";
+    CMin  =  min(CAbs,CReg)  "setting CMin";
+    TAbs_reg  =  TAbs_in  "setting TAbs_reg";
+    TReg  =  TDes_in  "setting TReg";
+
+    else
+      assert(ABSDES or ABS or DES or NONE, "no absorption mode active", AssertionLevel.error);
+
+    mAbs_reg  = 0   "  mAbs_max*Y15  setting mAbs_reg";
+    mReg  =  0    "mReg_max*Y16  setting mReg";
+
+    mWat = 0;
+    mMix  =  0  "setting mMix";
+    mHot  =  0  "setting mHot";
+
+    //cooling of absorbtion brine
+    QAbs  =  0  "setting QAbs";
+    TAbs  =  TAbs_in  "setting TAbs";
+
+    //heating of regeneration brine
+    CWat = 0;
+    CDes = 0;
+    CMin_reg = 0;
+    QMax_reg = 0;
+    QReg = 0;
+    TDes = TDes_in;
+    TWat_out = t_hot;
+    TWat = t_hot;
+
+
+    //heat exchange between absorption and desorption brine
+    QMax  =  0  "setting QMax";
+    QMix  =  0  "setting QMix";
+
+    CAbs  =  0  "setting CAbs";
+    CReg  =  0  "setting CReg";
+    CMin  =  min(CAbs,CReg)  "setting CMin";
+    TAbs_reg  =  TAbs_in  "setting TAbs_reg";
+    TReg  =  TDes_in  "setting TReg";
+
+    end if;
+
+    annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-200,-200},{220,200}})),
+                                                                   Diagram(
+          coordinateSystem(preserveAspectRatio=false, extent={{-200,-200},{220,200}})));
+  end sorptionExchange;
+
+  model sorptionPartialPressure "physical model of the sorption process"
+    import AixLib;
+
+    replaceable package Medium1 =
+        Modelica.Media.Interfaces.PartialMedium "Medium 1 in the component"
+        annotation (choicesAllMatching = true);
+    replaceable package Medium2 =
+        Modelica.Media.Interfaces.PartialMedium "Medium 2 in the component"
+        annotation (choicesAllMatching = true);
+
+    parameter Boolean allowFlowReversal1 = true
+      "= false to simplify equations, assuming, but not enforcing, no flow reversal for medium 1"
+      annotation(Dialog(tab="Assumptions"), Evaluate=true);
+    parameter Boolean allowFlowReversal2 = true
+      "= false to simplify equations, assuming, but not enforcing, no flow reversal for medium 2"
+      annotation(Dialog(tab="Assumptions"), Evaluate=true);
+
+    parameter Modelica.SIunits.Temperature T_init = 293.15 "initialisation temperature";
+    parameter Real x_init = 0.4 "initialization concentration";
+
+    Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium2)
+      annotation (Placement(transformation(extent={{70,-240},{50,-220}})));
+    Modelica.Blocks.Interfaces.RealInput Y06_opening "valve Input for Y06 opening"
+                                    annotation (Placement(transformation(
+          extent={{20,-20},{-20,20}},
+          rotation=90,
+          origin={-150,428}), iconTransformation(
+          extent={{18,-18},{-18,18}},
+          rotation=90,
+          origin={-180,428})));
+    Modelica.Fluid.Interfaces.FluidPort_a port_a1(
+    redeclare final package Medium = Medium1,
+                       m_flow(min=if allowFlowReversal1 then -Modelica.Constants.inf else 0),
+                       h_outflow(start = Medium1.h_default))
+      "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
+      annotation (Placement(transformation(extent={{190,270},{210,290}})));
+
+    Modelica.Fluid.Interfaces.FluidPort_b port_b1(
+                       redeclare final package Medium = Medium1,
+                       m_flow(max=if allowFlowReversal1 then +Modelica.Constants.inf else 0),
+                       h_outflow(start = Medium1.h_default))
+      "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
+      annotation (Placement(transformation(extent={{-210,270},{-190,290}})));
+    Modelica.Fluid.Interfaces.FluidPort_a port_a2(
+                       redeclare final package Medium = Medium2,
+                       m_flow(min=if allowFlowReversal2 then -Modelica.Constants.inf else 0),
+                       h_outflow(start = Medium2.h_default))
+      "Fluid connector a2 (positive design flow direction is from port_a2 to port_b2)"
+      annotation (Placement(transformation(extent={{190,-290},{210,-270}})));
+    Modelica.Fluid.Interfaces.FluidPort_b port_b2(
+                       redeclare final package Medium = Medium2,
+                       m_flow(max=if allowFlowReversal2 then +Modelica.Constants.inf else 0),
+                       h_outflow(start = Medium2.h_default))
+      "Fluid connector b2 (positive design flow direction is from port_a2 to port_b2)"
+      annotation (Placement(transformation(extent={{-210,-290},{-190,-270}})));
+    Modelica.Blocks.Interfaces.RealOutput senMasFloAbs
+      "sensor signal of mass flow through absorber"
+      annotation (Placement(transformation(extent={{194,-10},{222,18}})));
+    Modelica.Blocks.Interfaces.RealOutput Y06_actual
+      "actual value of valve opening Y06"
+      annotation (Placement(transformation(extent={{194,-54},{222,-26}})));
+    AixLib.Airflow.AirHandlingUnit.ComponentsAHU.Desorber desorber(
+      redeclare package Medium = Medium1,
+      x_sol=x_init,
+      m_flow_nominal=1)
+                    annotation (Placement(transformation(extent={{10,270},{-10,290}})));
+    solutionTank               desorberTank(
+      t_sol=64 + 273.15,
+      x_sol=x_init)
+                 annotation (Placement(transformation(extent={{-40,218},{-60,238}})));
+    AixLib.Airflow.AirHandlingUnit.ComponentsAHU.Absorber absorber(m_flow_nominal=5,
+        redeclare package Medium = Medium2,
+      x_sol=x_init,
+      allowFlowReversal=false)
+      annotation (Placement(transformation(extent={{12,-240},{-8,-220}})));
+    solutionTank               absorberTank(
+      x_sol=x_init)
+      annotation (Placement(transformation(extent={{-22,-190},{-42,-170}})));
+    AixLib.Airflow.AirHandlingUnit.ComponentsAHU.sorptionExchange
+                                   sorptionExchange
+      annotation (Placement(transformation(extent={{-90,-14},{-64,12}})));
+    Modelica.Blocks.Interfaces.RealInput Y10_opening "valve Input for Y10 opening" annotation (
+       Placement(transformation(
+          extent={{18,-18},{-18,18}},
+          rotation=90,
+          origin={-110,428}), iconTransformation(
+          extent={{18,-18},{-18,18}},
+          rotation=90,
+          origin={-128,428})));
+    Modelica.Blocks.Interfaces.RealInput Y15_opening "valve Input for Y15 opening" annotation (
+       Placement(transformation(
+          extent={{18,-18},{-18,18}},
+          rotation=90,
+          origin={-76,428}), iconTransformation(
+          extent={{18,-18},{-18,18}},
+          rotation=90,
+          origin={-76,428})));
+    Modelica.Blocks.Interfaces.RealInput Y16_opening "valve Input for Y16 opening" annotation (
+       Placement(transformation(
+          extent={{19,-19},{-19,19}},
+          rotation=90,
+          origin={-17,431}), iconTransformation(
+          extent={{18,-18},{-18,18}},
+          rotation=90,
+          origin={-20,428})));
+    Modelica.Blocks.Interfaces.BooleanInput P05 "Connector of Real input signal 1" annotation (
+        Placement(transformation(
+          extent={{-20,-20},{20,20}},
+          rotation=270,
+          origin={30,428}), iconTransformation(
+          extent={{-18,-18},{18,18}},
+          rotation=270,
+          origin={40,428})));
+    Modelica.Blocks.Interfaces.BooleanInput P07 "Connector of Real input signal 1" annotation (
+        Placement(transformation(
+          extent={{-20,-20},{20,20}},
+          rotation=270,
+          origin={90,428}),  iconTransformation(
+          extent={{-18,-18},{18,18}},
+          rotation=270,
+          origin={110,428})));
+    Modelica.Blocks.Interfaces.BooleanInput P08 "Connector of Real input signal 1" annotation (
+        Placement(transformation(
+          extent={{-20,-20},{20,20}},
+          rotation=270,
+          origin={150,428}),   iconTransformation(
+          extent={{-18,-18},{18,18}},
+          rotation=270,
+          origin={180,428})));
+    Modelica.Blocks.Interfaces.RealOutput massAbsorberTank
+      "sensor signal of mass in the absorber tank"
+      annotation (Placement(transformation(extent={{194,36},{222,64}})));
+    Modelica.Blocks.Interfaces.RealOutput massDesorberTank
+      "sensor signal of mass in the desorber tank"
+      annotation (Placement(transformation(extent={{194,78},{222,106}})));
+    Modelica.Blocks.Interfaces.RealOutput xDes
+      "sensor signal of concentration in the desorber tank"
+      annotation (Placement(transformation(extent={{194,178},{222,206}})));
+    Modelica.Blocks.Interfaces.RealOutput TDes
+      "sensor signal of temperature after regeneration heating"
+      annotation (Placement(transformation(extent={{194,226},{222,254}})));
+    Modelica.Blocks.Interfaces.RealOutput xAbs
+      "sensor signal of concentration in the absorber tank"
+      annotation (Placement(transformation(extent={{194,130},{222,158}})));
+    AixLib.Fluid.Actuators.Valves.TwoWayEqualPercentage
+                             Y06(
+      dpValve_nominal=10,
+      redeclare package Medium = Medium2,
+      m_flow_nominal=5) "damper at entry to supply air stream"
+               annotation (Placement(transformation(extent={{58,-270},{38,-290}})));
+    AixLib.Fluid.Actuators.Valves.TwoWayEqualPercentage Y_help(
+      dpValve_nominal=10,
+      redeclare package Medium = Medium2,
+      m_flow_nominal=5) "virtual damper to realise pressure loss in absorber"
+      annotation (Placement(transformation(extent={{118,-220},{98,-240}})));
+    Modelica.Blocks.Math.Feedback feedback
+      annotation (Placement(transformation(extent={{82,-266},{102,-246}})));
+    Modelica.Blocks.Sources.RealExpression valveMax(y=1)
+      annotation (Placement(transformation(extent={{38,-266},{58,-246}})));
+  equation
+    connect(senMasFlo.m_flow, senMasFloAbs)
+      annotation (Line(points={{60,-219},{60,-196},{160,-196},{160,4},{208,4}},
+                                                          color={0,0,127}));
+    connect(port_a1, desorber.port_a)
+      annotation (Line(points={{200,280},{10,280}}, color={0,127,255}));
+    connect(desorber.port_b, port_b1)
+      annotation (Line(points={{-10,280},{-200,280}}, color={0,127,255}));
+    connect(senMasFlo.port_b, absorber.port_a)
+      annotation (Line(points={{50,-230},{12,-230}}, color={0,127,255}));
+    connect(absorber.Ts_out, absorberTank.T_in) annotation (Line(points={{-8.2,
+            -223},{-12,-223},{-12,-172},{-21.4,-172}},
+                                      color={0,0,127}));
+    connect(absorber.x_out, absorberTank.x_in) annotation (Line(points={{-8.2,
+            -227},{-14,-227},{-14,-175},{-21.4,-175}},
+                                      color={0,0,127}));
+    connect(absorber.L_out, absorberTank.L) annotation (Line(points={{-8.2,-237},
+            {-16,-237},{-16,-178},{-21.4,-178}},
+                                 color={0,0,127}));
+    connect(absorberTank.T_out, sorptionExchange.TAbs_in) annotation (Line(points={{-42.4,-174},
+            {-110,-174},{-110,8.1},{-90,8.1}}, color={0,0,127}));
+    connect(absorberTank.x_out, sorptionExchange.xAbs_in) annotation (Line(points={{-42.4,-180},
+            {-106,-180},{-106,4.2},{-90,4.2}}, color={0,0,127}));
+    connect(absorberTank.L_out, sorptionExchange.LAbs_in) annotation (Line(points={{-42.4,-186},
+            {-102,-186},{-102,0.3},{-90,0.3}}, color={0,0,127}));
+    connect(sorptionExchange.TDes, TDes) annotation (Line(points={{-88.1429,
+            -14.13},{-88.1429,-42},{36,-42},{36,240},{208,240}},
+                                          color={0,0,127}));
+    connect(desorberTank.x_out, xDes) annotation (Line(points={{-60.4,228},{-78,228},{-78,192},
+            {208,192}}, color={0,0,127}));
+    connect(absorberTank.m_storage, massAbsorberTank) annotation (Line(points={{-42.4,-189},{-50,
+            -189},{-50,-196},{160,-196},{160,50},{208,50}}, color={0,0,127}));
+    connect(desorberTank.m_storage, massDesorberTank) annotation (Line(points={{-60.4,219},{-69.2,
+            219},{-69.2,92},{208,92}}, color={0,0,127}));
+    connect(sorptionExchange.TAbs, absorber.Ts_in) annotation (Line(points={{
+            -63.8762,-4.25},{24,-4.25},{24,-222},{12.6,-222}},
+                                           color={0,0,127}));
+    connect(sorptionExchange.LAbs, absorber.L_i) annotation (Line(points={{
+            -63.8762,-7.5},{20,-7.5},{20,-235},{12.6,-235}},
+                                    color={0,0,127}));
+    connect(sorptionExchange.xAbs, absorber.x_in) annotation (Line(points={{
+            -63.8762,-10.75},{16,-10.75},{16,-226},{12.6,-226}},
+                                            color={0,0,127}));
+    connect(sorptionExchange.TReg, absorberTank.T_reg) annotation (Line(points={{-75.7619,-14.13},
+            {-75.7619,-156},{-6,-156},{-6,-182},{-21.4,-182}}, color={0,0,127}));
+    connect(sorptionExchange.mReg, absorberTank.m_reg) annotation (Line(points={{-71.9238,-14.13},
+            {-71.9238,-152},{-4,-152},{-4,-188},{-21.4,-188}}, color={0,0,127}));
+    connect(sorptionExchange.xDes, absorberTank.x_reg) annotation (Line(points={{
+            -80.5905,-14.26},{-80.5905,-160},{-8,-160},{-8,-185},{-21.4,-185}},
+                                                               color={0,0,127}));
+    connect(desorber.Ts_out, desorberTank.T_in) annotation (Line(points={{-10.2,287},{-30,287},
+            {-30,236},{-39.4,236}}, color={0,0,127}));
+    connect(desorber.x_out, desorberTank.x_in) annotation (Line(points={{-10.2,283},{-26,283},{
+            -26,233},{-39.4,233}}, color={0,0,127}));
+    connect(desorber.L_out, desorberTank.L) annotation (Line(points={{-10.2,273},{-22,273},{-22,
+            230},{-39.4,230}}, color={0,0,127}));
+    connect(desorberTank.T_out, sorptionExchange.TDes_in) annotation (Line(points={{-60.4,
+            234},{-81.3333,234},{-81.3333,12}},
+                                           color={0,0,127}));
+    connect(desorberTank.x_out, sorptionExchange.xDes_in) annotation (Line(points={{-60.4,
+            228},{-77.619,228},{-77.619,12}},
+                                         color={0,0,127}));
+    connect(desorberTank.L_out, sorptionExchange.LDes_in) annotation (Line(points={{-60.4,
+            222},{-73.9048,222},{-73.9048,12},{-73.9048,12}},
+                                                         color={0,0,127}));
+    connect(sorptionExchange.TDes, desorber.Ts_in) annotation (Line(points={{
+            -88.1429,-14.13},{-88.1429,-42},{36,-42},{36,288},{10.6,288}},
+                                                         color={0,0,127}));
+    connect(sorptionExchange.LDes, desorber.L_i) annotation (Line(points={{
+            -84.4286,-14.26},{-84.4286,-38},{32,-38},{32,275},{10.6,275}},
+                                                color={0,0,127}));
+    connect(sorptionExchange.xDes, desorber.x_in) annotation (Line(points={{
+            -80.5905,-14.26},{-80.5905,-40},{34,-40},{34,284},{10.6,284}},
+                                                color={0,0,127}));
+    connect(sorptionExchange.TAbs_reg, desorberTank.T_reg) annotation (Line(points={{
+            -63.7524,7.45},{-6,7.45},{-6,226},{-39.4,226}},
+                                             color={0,0,127}));
+    connect(sorptionExchange.mAbs_reg, desorberTank.m_reg) annotation (Line(points={{
+            -63.7524,4.85},{-14,4.85},{-14,220},{-39.4,220}},
+                                               color={0,0,127}));
+    connect(sorptionExchange.xAbs, desorberTank.x_reg) annotation (Line(points={{-63.8762,-10.75},
+            {-10,-10.75},{-10,223},{-39.4,223}}, color={0,0,127}));
+    connect(Y10_opening, sorptionExchange.Y10) annotation (Line(points={{-110,
+            428},{-110,396},{-150,396},{-150,22},{-85.0476,22},{-85.0476,12}},
+                                                              color={0,0,127}));
+    connect(Y15_opening, sorptionExchange.Y15) annotation (Line(points={{-76,428},{-76,396},{-150,
+            396},{-150,-3.6},{-90,-3.6}}, color={0,0,127}));
+    connect(Y16_opening, sorptionExchange.Y16) annotation (Line(points={{-17,431},
+            {-17,396},{-150,396},{-150,22},{-70.1905,22},{-70.1905,12}},
+                                                         color={0,0,127}));
+    connect(P05, sorptionExchange.P05) annotation (Line(points={{30,428},{30,396},{-150,396},{-150,
+            22},{-88.7619,22},{-88.7619,12}}, color={255,0,255}));
+    connect(P07, sorptionExchange.P07) annotation (Line(points={{90,428},{90,396},{-150,396},{-150,
+            -10.1},{-90,-10.1}}, color={255,0,255}));
+    connect(P08, sorptionExchange.P08) annotation (Line(points={{150,428},{150,396},{-150,396},
+            {-150,22},{-66.4762,22},{-66.4762,18},{-66.4762,12}}, color={255,0,255}));
+    connect(P08, desorberTank.Pump) annotation (Line(points={{150,428},{150,396},{-50,396},{-50,
+            238}}, color={255,0,255}));
+    connect(P08, desorber.Pump) annotation (Line(points={{150,428},{150,396},{-50,396},{-50,256},
+            {0,256},{0,270}}, color={255,0,255}));
+    connect(P07, absorberTank.Pump) annotation (Line(points={{90,428},{90,396},{-174,396},{-174,
+            -166},{-32,-166},{-32,-170}}, color={255,0,255}));
+    connect(P07, absorber.Pump) annotation (Line(points={{90,428},{90,396},{
+            -174,396},{-174,-248},{2,-248},{2,-240}},
+                                color={255,0,255}));
+    connect(absorberTank.x_out, xAbs) annotation (Line(points={{-42.4,-180},{-50,-180},{-50,-196},
+            {160,-196},{160,144},{208,144}}, color={0,0,127}));
+    connect(absorber.port_b, port_b2) annotation (Line(points={{-8,-230},{-106,
+            -230},{-106,-280},{-200,-280}}, color={0,127,255}));
+    connect(Y06_opening, absorber.Y06) annotation (Line(points={{-150,428},{
+            -150,-338},{8,-338},{8,-288},{7.6,-288},{7.6,-238.8}}, color={0,0,
+            127}));
+    connect(port_a2, Y06.port_a)
+      annotation (Line(points={{200,-280},{58,-280}}, color={0,127,255}));
+    connect(Y06.port_b, port_b2)
+      annotation (Line(points={{38,-280},{-200,-280}}, color={0,127,255}));
+    connect(Y06_opening, Y06.y) annotation (Line(points={{-150,428},{-150,-338},
+            {48,-338},{48,-292}}, color={0,0,127}));
+    connect(Y06.y_actual, Y06_actual) annotation (Line(points={{43,-287},{31,
+            -287},{31,-338},{180,-338},{180,-40},{208,-40}}, color={0,0,127}));
+    connect(port_a2, Y_help.port_a) annotation (Line(points={{200,-280},{160,
+            -280},{160,-230},{118,-230}}, color={0,127,255}));
+    connect(Y_help.port_b, senMasFlo.port_a)
+      annotation (Line(points={{98,-230},{70,-230}}, color={0,127,255}));
+    connect(valveMax.y, feedback.u1)
+      annotation (Line(points={{59,-256},{84,-256}}, color={0,0,127}));
+    connect(feedback.y, Y_help.y) annotation (Line(points={{101,-256},{108,-256},
+            {108,-242}}, color={0,0,127}));
+    connect(Y06_opening, feedback.u2) annotation (Line(points={{-150,428},{-150,
+            -338},{92,-338},{92,-264}}, color={0,0,127}));
+    annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-200,-420},
+              {200,420}}), graphics={Rectangle(
+            extent={{-200,420},{200,-420}},
+            lineColor={28,108,200},
+            fillColor={28,108,200},
+            fillPattern=FillPattern.HorizontalCylinder)}),         Diagram(
+          coordinateSystem(preserveAspectRatio=false, extent={{-200,-420},{200,420}}),
+          graphics={
+          Rectangle(
+            extent={{-200,0},{200,-266}},
+            lineColor={28,108,200},
+            fillColor={170,255,213},
+            fillPattern=FillPattern.Solid),
+          Rectangle(
+            extent={{-200,334},{200,0}},
+            lineColor={28,108,200},
+            fillColor={170,213,255},
+            fillPattern=FillPattern.Solid),
+          Rectangle(
+            extent={{-200,-266},{200,-420}},
+            lineColor={28,108,200},
+            fillColor={215,215,215},
+            fillPattern=FillPattern.Solid),
+          Text(
+            extent={{-54,-358},{54,-400}},
+            lineColor={0,0,0},
+            fillColor={215,215,215},
+            fillPattern=FillPattern.Solid,
+            textString="Bypass"),
+          Text(
+            extent={{36,-86},{154,-156}},
+            lineColor={0,0,0},
+            fillColor={215,215,215},
+            fillPattern=FillPattern.Solid,
+            textString="Absorption"),
+          Text(
+            extent={{58,256},{176,186}},
+            lineColor={0,0,0},
+            fillColor={215,215,215},
+            fillPattern=FillPattern.Solid,
+            textString="Desorption")}));
+  end sorptionPartialPressure;
+
+  model sorptionNoValve
+    "physical model of the sorption process without bypass valve"
+    import AixLib;
+
+    replaceable package Medium1 =
+        Modelica.Media.Interfaces.PartialMedium "Medium 1 in the component"
+        annotation (choicesAllMatching = true);
+    replaceable package Medium2 =
+        Modelica.Media.Interfaces.PartialMedium "Medium 2 in the component"
+        annotation (choicesAllMatching = true);
+
+    parameter Boolean allowFlowReversal1 = true
+      "= false to simplify equations, assuming, but not enforcing, no flow reversal for medium 1"
+      annotation(Dialog(tab="Assumptions"), Evaluate=true);
+    parameter Boolean allowFlowReversal2 = true
+      "= false to simplify equations, assuming, but not enforcing, no flow reversal for medium 2"
+      annotation(Dialog(tab="Assumptions"), Evaluate=true);
+
+    parameter Modelica.SIunits.Temperature T_init = 293.15 "initialisation temperature";
+    parameter Real x_init = 0.4 "initialization concentration";
+
+    Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium = Medium2)
+      annotation (Placement(transformation(extent={{70,-240},{50,-220}})));
+    Modelica.Blocks.Interfaces.RealInput Y06_opening "valve Input for Y06 opening"
+                                    annotation (Placement(transformation(
+          extent={{20,-20},{-20,20}},
+          rotation=90,
+          origin={-150,428}), iconTransformation(
+          extent={{18,-18},{-18,18}},
+          rotation=90,
+          origin={-180,428})));
+    Modelica.Fluid.Interfaces.FluidPort_a port_a1(
+    redeclare final package Medium = Medium1,
+                       m_flow(min=if allowFlowReversal1 then -Modelica.Constants.inf else 0),
+                       h_outflow(start = Medium1.h_default))
+      "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
+      annotation (Placement(transformation(extent={{190,270},{210,290}})));
+
+    Modelica.Fluid.Interfaces.FluidPort_b port_b1(
+                       redeclare final package Medium = Medium1,
+                       m_flow(max=if allowFlowReversal1 then +Modelica.Constants.inf else 0),
+                       h_outflow(start = Medium1.h_default))
+      "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
+      annotation (Placement(transformation(extent={{-210,270},{-190,290}})));
+    Modelica.Fluid.Interfaces.FluidPort_a port_a2(
+                       redeclare final package Medium = Medium2,
+                       m_flow(min=if allowFlowReversal2 then -Modelica.Constants.inf else 0),
+                       h_outflow(start = Medium2.h_default))
+      "Fluid connector a2 (positive design flow direction is from port_a2 to port_b2)"
+      annotation (Placement(transformation(extent={{190,-290},{210,-270}})));
+    Modelica.Fluid.Interfaces.FluidPort_b port_b2(
+                       redeclare final package Medium = Medium2,
+                       m_flow(max=if allowFlowReversal2 then +Modelica.Constants.inf else 0),
+                       h_outflow(start = Medium2.h_default))
+      "Fluid connector b2 (positive design flow direction is from port_a2 to port_b2)"
+      annotation (Placement(transformation(extent={{-210,-290},{-190,-270}})));
+    Modelica.Blocks.Interfaces.RealOutput senMasFloAbs
+      "sensor signal of mass flow through absorber"
+      annotation (Placement(transformation(extent={{194,-10},{222,18}})));
+    Modelica.Blocks.Interfaces.RealOutput Y06_actual
+      "actual value of valve opening Y06"
+      annotation (Placement(transformation(extent={{194,-54},{222,-26}})));
+    AixLib.Airflow.AirHandlingUnit.ComponentsAHU.Absorber desorber(
+      m_flow_nominal=5,
+      V=0.285075,
+      eps=0.85,
+      redeclare package Medium = Medium1,
+      dp_abs=0,
+      x_sol=x_init,
+      beta=8.41355*10^(-8),
+      t_sol=337.15) annotation (Placement(transformation(extent={{10,270},{-10,290}})));
+    solutionTank               desorberTank(
+      t_sol=64 + 273.15,
+      m_start=100,
+      x_sol=x_init)
+                 annotation (Placement(transformation(extent={{-40,218},{-60,238}})));
+    AixLib.Airflow.AirHandlingUnit.ComponentsAHU.Absorber absorber(m_flow_nominal=5,
+        redeclare package Medium = Medium2,
+      x_sol=x_init,
+      dp_abs=0)
+      annotation (Placement(transformation(extent={{12,-240},{-8,-220}})));
+    solutionTank               absorberTank(
+      m_start=900, x_sol=x_init)
+      annotation (Placement(transformation(extent={{-22,-190},{-42,-170}})));
+    AixLib.Airflow.AirHandlingUnit.ComponentsAHU.sorptionExchange
+                                   sorptionExchange
+      annotation (Placement(transformation(extent={{-90,-14},{-64,12}})));
+    Modelica.Blocks.Interfaces.RealInput Y10_opening "valve Input for Y10 opening" annotation (
+       Placement(transformation(
+          extent={{18,-18},{-18,18}},
+          rotation=90,
+          origin={-110,428}), iconTransformation(
+          extent={{18,-18},{-18,18}},
+          rotation=90,
+          origin={-128,428})));
+    Modelica.Blocks.Interfaces.RealInput Y15_opening "valve Input for Y15 opening" annotation (
+       Placement(transformation(
+          extent={{18,-18},{-18,18}},
+          rotation=90,
+          origin={-76,428}), iconTransformation(
+          extent={{18,-18},{-18,18}},
+          rotation=90,
+          origin={-76,428})));
+    Modelica.Blocks.Interfaces.RealInput Y16_opening "valve Input for Y16 opening" annotation (
+       Placement(transformation(
+          extent={{19,-19},{-19,19}},
+          rotation=90,
+          origin={-17,431}), iconTransformation(
+          extent={{18,-18},{-18,18}},
+          rotation=90,
+          origin={-20,428})));
+    Modelica.Blocks.Interfaces.BooleanInput P05 "Connector of Real input signal 1" annotation (
+        Placement(transformation(
+          extent={{-20,-20},{20,20}},
+          rotation=270,
+          origin={30,428}), iconTransformation(
+          extent={{-18,-18},{18,18}},
+          rotation=270,
+          origin={40,428})));
+    Modelica.Blocks.Interfaces.BooleanInput P07 "Connector of Real input signal 1" annotation (
+        Placement(transformation(
+          extent={{-20,-20},{20,20}},
+          rotation=270,
+          origin={90,428}),  iconTransformation(
+          extent={{-18,-18},{18,18}},
+          rotation=270,
+          origin={110,428})));
+    Modelica.Blocks.Interfaces.BooleanInput P08 "Connector of Real input signal 1" annotation (
+        Placement(transformation(
+          extent={{-20,-20},{20,20}},
+          rotation=270,
+          origin={150,428}),   iconTransformation(
+          extent={{-18,-18},{18,18}},
+          rotation=270,
+          origin={180,428})));
+    Modelica.Blocks.Interfaces.RealOutput massAbsorberTank
+      "sensor signal of mass in the absorber tank"
+      annotation (Placement(transformation(extent={{194,36},{222,64}})));
+    Modelica.Blocks.Interfaces.RealOutput massDesorberTank
+      "sensor signal of mass in the desorber tank"
+      annotation (Placement(transformation(extent={{194,78},{222,106}})));
+    Modelica.Blocks.Interfaces.RealOutput xDes
+      "sensor signal of concentration in the desorber tank"
+      annotation (Placement(transformation(extent={{194,178},{222,206}})));
+    Modelica.Blocks.Interfaces.RealOutput TDes
+      "sensor signal of temperature after regeneration heating"
+      annotation (Placement(transformation(extent={{194,226},{222,254}})));
+    Modelica.Blocks.Interfaces.RealOutput xAbs
+      "sensor signal of concentration in the absorber tank"
+      annotation (Placement(transformation(extent={{194,130},{222,158}})));
+    Modelica.Blocks.Sources.RealExpression no_bypass(y=0)
+      "the desorber has no bypass valve, i.e. the bypass is closed" annotation (
+       Placement(transformation(
+          extent={{10,10},{-10,-10}},
+          rotation=270,
+          origin={6,236})));
+  equation
+    connect(senMasFlo.m_flow, senMasFloAbs)
+      annotation (Line(points={{60,-219},{60,-196},{160,-196},{160,4},{208,4}},
+                                                          color={0,0,127}));
+    connect(port_a1, desorber.port_a)
+      annotation (Line(points={{200,280},{10,280}}, color={0,127,255}));
+    connect(desorber.port_b, port_b1)
+      annotation (Line(points={{-10,280},{-200,280}}, color={0,127,255}));
+    connect(senMasFlo.port_b, absorber.port_a)
+      annotation (Line(points={{50,-230},{12,-230}}, color={0,127,255}));
+    connect(absorber.Ts_out, absorberTank.T_in) annotation (Line(points={{-8.2,
+            -223},{-12,-223},{-12,-172},{-21.4,-172}},
+                                      color={0,0,127}));
+    connect(absorber.x_out, absorberTank.x_in) annotation (Line(points={{-8.2,
+            -227},{-14,-227},{-14,-175},{-21.4,-175}},
+                                      color={0,0,127}));
+    connect(absorber.L_out, absorberTank.L) annotation (Line(points={{-8.2,-237},
+            {-16,-237},{-16,-178},{-21.4,-178}},
+                                 color={0,0,127}));
+    connect(absorberTank.T_out, sorptionExchange.TAbs_in) annotation (Line(points={{-42.4,-174},
+            {-110,-174},{-110,8.1},{-90,8.1}}, color={0,0,127}));
+    connect(absorberTank.x_out, sorptionExchange.xAbs_in) annotation (Line(points={{-42.4,-180},
+            {-106,-180},{-106,4.2},{-90,4.2}}, color={0,0,127}));
+    connect(absorberTank.L_out, sorptionExchange.LAbs_in) annotation (Line(points={{-42.4,-186},
+            {-102,-186},{-102,0.3},{-90,0.3}}, color={0,0,127}));
+    connect(sorptionExchange.TDes, TDes) annotation (Line(points={{-88.1429,
+            -14.13},{-88.1429,-42},{36,-42},{36,240},{208,240}},
+                                          color={0,0,127}));
+    connect(desorberTank.x_out, xDes) annotation (Line(points={{-60.4,228},{-78,228},{-78,192},
+            {208,192}}, color={0,0,127}));
+    connect(absorberTank.m_storage, massAbsorberTank) annotation (Line(points={{-42.4,-189},{-50,
+            -189},{-50,-196},{160,-196},{160,50},{208,50}}, color={0,0,127}));
+    connect(desorberTank.m_storage, massDesorberTank) annotation (Line(points={{-60.4,219},{-69.2,
+            219},{-69.2,92},{208,92}}, color={0,0,127}));
+    connect(sorptionExchange.TAbs, absorber.Ts_in) annotation (Line(points={{
+            -63.8762,-4.25},{24,-4.25},{24,-222},{12.6,-222}},
+                                           color={0,0,127}));
+    connect(sorptionExchange.LAbs, absorber.L_i) annotation (Line(points={{
+            -63.8762,-7.5},{20,-7.5},{20,-235},{12.6,-235}},
+                                    color={0,0,127}));
+    connect(sorptionExchange.xAbs, absorber.x_in) annotation (Line(points={{
+            -63.8762,-10.75},{16,-10.75},{16,-226},{12.6,-226}},
+                                            color={0,0,127}));
+    connect(sorptionExchange.TReg, absorberTank.T_reg) annotation (Line(points={{-75.7619,-14.13},
+            {-75.7619,-156},{-6,-156},{-6,-182},{-21.4,-182}}, color={0,0,127}));
+    connect(sorptionExchange.mReg, absorberTank.m_reg) annotation (Line(points={{-71.9238,-14.13},
+            {-71.9238,-152},{-4,-152},{-4,-188},{-21.4,-188}}, color={0,0,127}));
+    connect(sorptionExchange.xDes, absorberTank.x_reg) annotation (Line(points={{
+            -80.5905,-14.26},{-80.5905,-160},{-8,-160},{-8,-185},{-21.4,-185}},
+                                                               color={0,0,127}));
+    connect(desorber.Ts_out, desorberTank.T_in) annotation (Line(points={{-10.2,287},{-30,287},
+            {-30,236},{-39.4,236}}, color={0,0,127}));
+    connect(desorber.x_out, desorberTank.x_in) annotation (Line(points={{-10.2,283},{-26,283},{
+            -26,233},{-39.4,233}}, color={0,0,127}));
+    connect(desorber.L_out, desorberTank.L) annotation (Line(points={{-10.2,273},{-22,273},{-22,
+            230},{-39.4,230}}, color={0,0,127}));
+    connect(desorberTank.T_out, sorptionExchange.TDes_in) annotation (Line(points={{-60.4,
+            234},{-81.3333,234},{-81.3333,12}},
+                                           color={0,0,127}));
+    connect(desorberTank.x_out, sorptionExchange.xDes_in) annotation (Line(points={{-60.4,
+            228},{-77.619,228},{-77.619,12}},
+                                         color={0,0,127}));
+    connect(desorberTank.L_out, sorptionExchange.LDes_in) annotation (Line(points={{-60.4,
+            222},{-73.9048,222},{-73.9048,12},{-73.9048,12}},
+                                                         color={0,0,127}));
+    connect(sorptionExchange.TDes, desorber.Ts_in) annotation (Line(points={{
+            -88.1429,-14.13},{-88.1429,-42},{36,-42},{36,288},{10.6,288}},
+                                                         color={0,0,127}));
+    connect(sorptionExchange.LDes, desorber.L_i) annotation (Line(points={{
+            -84.4286,-14.26},{-84.4286,-38},{32,-38},{32,275},{10.6,275}},
+                                                color={0,0,127}));
+    connect(sorptionExchange.xDes, desorber.x_in) annotation (Line(points={{
+            -80.5905,-14.26},{-80.5905,-40},{34,-40},{34,284},{10.6,284}},
+                                                color={0,0,127}));
+    connect(sorptionExchange.TAbs_reg, desorberTank.T_reg) annotation (Line(points={{
+            -63.7524,7.45},{-6,7.45},{-6,226},{-39.4,226}},
+                                             color={0,0,127}));
+    connect(sorptionExchange.mAbs_reg, desorberTank.m_reg) annotation (Line(points={{
+            -63.7524,4.85},{-14,4.85},{-14,220},{-39.4,220}},
+                                               color={0,0,127}));
+    connect(sorptionExchange.xAbs, desorberTank.x_reg) annotation (Line(points={{-63.8762,-10.75},
+            {-10,-10.75},{-10,223},{-39.4,223}}, color={0,0,127}));
+    connect(Y10_opening, sorptionExchange.Y10) annotation (Line(points={{-110,
+            428},{-110,396},{-150,396},{-150,22},{-85.0476,22},{-85.0476,12}},
+                                                              color={0,0,127}));
+    connect(Y15_opening, sorptionExchange.Y15) annotation (Line(points={{-76,428},{-76,396},{-150,
+            396},{-150,-3.6},{-90,-3.6}}, color={0,0,127}));
+    connect(Y16_opening, sorptionExchange.Y16) annotation (Line(points={{-17,431},
+            {-17,396},{-150,396},{-150,22},{-70.1905,22},{-70.1905,12}},
+                                                         color={0,0,127}));
+    connect(P05, sorptionExchange.P05) annotation (Line(points={{30,428},{30,396},{-150,396},{-150,
+            22},{-88.7619,22},{-88.7619,12}}, color={255,0,255}));
+    connect(P07, sorptionExchange.P07) annotation (Line(points={{90,428},{90,396},{-150,396},{-150,
+            -10.1},{-90,-10.1}}, color={255,0,255}));
+    connect(P08, sorptionExchange.P08) annotation (Line(points={{150,428},{150,396},{-150,396},
+            {-150,22},{-66.4762,22},{-66.4762,18},{-66.4762,12}}, color={255,0,255}));
+    connect(P08, desorberTank.Pump) annotation (Line(points={{150,428},{150,396},{-50,396},{-50,
+            238}}, color={255,0,255}));
+    connect(P08, desorber.Pump) annotation (Line(points={{150,428},{150,396},{-50,396},{-50,256},
+            {0,256},{0,270}}, color={255,0,255}));
+    connect(P07, absorberTank.Pump) annotation (Line(points={{90,428},{90,396},{-174,396},{-174,
+            -166},{-32,-166},{-32,-170}}, color={255,0,255}));
+    connect(P07, absorber.Pump) annotation (Line(points={{90,428},{90,396},{
+            -174,396},{-174,-248},{2,-248},{2,-240}},
+                                color={255,0,255}));
+    connect(absorberTank.x_out, xAbs) annotation (Line(points={{-42.4,-180},{-50,-180},{-50,-196},
+            {160,-196},{160,144},{208,144}}, color={0,0,127}));
+    connect(absorber.port_b, port_b2) annotation (Line(points={{-8,-230},{-106,
+            -230},{-106,-280},{-200,-280}}, color={0,127,255}));
+    connect(Y06_opening, absorber.Y06) annotation (Line(points={{-150,428},{
+            -150,-338},{8,-338},{8,-288},{7.6,-288},{7.6,-238.8}}, color={0,0,
+            127}));
+    connect(no_bypass.y, desorber.Y06) annotation (Line(points={{6,247},{6,
+            271.2},{5.6,271.2}}, color={0,0,127}));
+    connect(port_a2, senMasFlo.port_a) annotation (Line(points={{200,-280},{136,
+            -280},{136,-230},{70,-230}}, color={0,127,255}));
+    connect(Y06_opening, Y06_actual) annotation (Line(points={{-150,428},{-150,
+            428},{-150,-40},{208,-40},{208,-40}}, color={0,0,127}));
+    annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-200,-420},
+              {200,420}}), graphics={Rectangle(
+            extent={{-200,420},{200,-420}},
+            lineColor={28,108,200},
+            fillColor={28,108,200},
+            fillPattern=FillPattern.HorizontalCylinder)}),         Diagram(
+          coordinateSystem(preserveAspectRatio=false, extent={{-200,-420},{200,420}}),
+          graphics={
+          Rectangle(
+            extent={{-200,0},{200,-266}},
+            lineColor={28,108,200},
+            fillColor={170,255,213},
+            fillPattern=FillPattern.Solid),
+          Rectangle(
+            extent={{-200,334},{200,0}},
+            lineColor={28,108,200},
+            fillColor={170,213,255},
+            fillPattern=FillPattern.Solid),
+          Rectangle(
+            extent={{-200,-266},{200,-420}},
+            lineColor={28,108,200},
+            fillColor={215,215,215},
+            fillPattern=FillPattern.Solid),
+          Text(
+            extent={{-54,-358},{54,-400}},
+            lineColor={0,0,0},
+            fillColor={215,215,215},
+            fillPattern=FillPattern.Solid,
+            textString="Bypass"),
+          Text(
+            extent={{36,-86},{154,-156}},
+            lineColor={0,0,0},
+            fillColor={215,215,215},
+            fillPattern=FillPattern.Solid,
+            textString="Absorption"),
+          Text(
+            extent={{58,256},{176,186}},
+            lineColor={0,0,0},
+            fillColor={215,215,215},
+            fillPattern=FillPattern.Solid,
+            textString="Desorption")}));
+  end sorptionNoValve;
+
+  model Desorber
+    "model of an absorber using partial vapor pressure of water"
+
+    extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
+    import SI = Modelica.SIunits;
+
+    // Diagnostics
+    parameter Boolean show_T=false "= true, if actual temperature at port is computed"
+      annotation (Dialog(tab="Advanced", group="Diagnostics"));
+
+    // Druckverluste
+    parameter SI.Pressure dp_abs=0 "Druckverlust im Absorber nominal: 300 Pa";
+
+  protected
+    final parameter Real deltaReg=m_flow_small/1E3
+      "Smoothing region for inverseXRegularized";
+    final parameter Real deltaInvReg=1/deltaReg
+      "Inverse value of delta for inverseXRegularized";
+    final parameter Real aReg=-15*deltaInvReg
+      "Polynomial coefficient for inverseXRegularized";
+    final parameter Real bReg=119*deltaInvReg^2
+      "Polynomial coefficient for inverseXRegularized";
+    final parameter Real cReg=-361*deltaInvReg^3
+      "Polynomial coefficient for inverseXRegularized";
+    final parameter Real dReg=534*deltaInvReg^4
+      "Polynomial coefficient for inverseXRegularized";
+    final parameter Real eReg=-380*deltaInvReg^5
+      "Polynomial coefficient for inverseXRegularized";
+    final parameter Real fReg=104*deltaInvReg^6
+      "Polynomial coefficient for inverseXRegularized";
+
+    final parameter SI.Temperature T_cH2O=647.096
+      "in K, temperature of water at critical point";
+
+    final parameter Real s[Medium.nXi]={if Modelica.Utilities.Strings.isEqual(
+        string1=Medium.substanceNames[i],
+        string2="Water",
+        caseSensitive=false) then 1 else 0 for i in 1:Medium.nXi}
+      "Vector with zero everywhere except where species is";
+
+    SI.MassFlowRate m1Xi_flow[Medium.nXi]
+      "Mass flow rates of independent substances added to the medium";
+    Real m_flowInv(unit="s/kg") "Regularization of 1/m_flow of port_a";
+    //Real L_flowInv(unit="s/kg") "Regularization of 1/L_i";
+    Real X1_in[Medium.nXi]=inStream(port_a.Xi_outflow)
+      "absolute humidity of outside air at entry in kg/kg";
+    parameter SI.Temperature t_ref=273.15 "reference temperature";
+
+    //influence parameters:
+  public
+    parameter Real x_sol=0.33 "desiccant solution concentration at start";
+    //parameter SI.Temperature t_sol =   26+273.15  "desiccant solution inlet temperature";
+    parameter SI.Temperature t_sol=337.15 "desiccant solution inlet temperature";
+    parameter Real a_t=320 "specific surface area of packing in m^2/m^3";
+    parameter Real Z=0.35 "packed bed height in m";
+    parameter Real V=0.285075 "in m^3, 1810*350*450 mm";
+    parameter Real eps=0.85  "parameter for heat exchange in absorber / desorber unit";
+
+    parameter Real beta=8.41355*10^(-8) "mass transfer coefficient with partial pressure as driving potential, 
+  fitting parameter for mass transfer equation";
+    //with inlet parameters: 6.0995*10^(-8)
+
+    parameter SI.SpecificEnergy lambda=2430000 "latent heat of condensation in J/kg";
+    //parameter SI.Area A_a = 1.9367 "1810*1070, Area air of absorber in m^2";
+    //parameter SI.Area A_s = 0.8145 "1810*450, Area liquid of absorber in m^2";
+
+    //thermodynamic states
+    Media.Air.ThermodynamicState state_a=Media.Air.setState_phX(
+        port_a.p,
+        inStream(port_a.h_outflow),
+        inStream(port_a.Xi_outflow)) "state for medium inflowing through port_a";
+
+    Media.Air.ThermodynamicState state_b=Media.Air.setState_phX(
+        port_b.p,
+        port_b.h_outflow,
+        port_b.Xi_outflow) "state for medium inflowing through port_b";
+
+    //specific heat capacities
+    SI.SpecificHeatCapacity c_pa_in=Media.Air.specificHeatCapacityCp(state_a)
+      "specific heat capacity of airflow in J/kgK";
+    SI.SpecificHeatCapacity c_pa_out=Media.Air.specificHeatCapacityCp(state_b)
+      "in J/kgK, specific heat capacity of airflow at outlet";
+    SI.SpecificHeatCapacity c_pw=Media.Water.specificHeatCapacityCp(state_a)
+      "specific heat capacity of airflow in J/kgK";
+    SI.SpecificHeatCapacity c_ps_in=BaseClasses.Utilities.specificHeatCapacityCpLiCl(t_si, x_i)
+      "specific heat capacity of desiccant solution at inlet in J/kgK";
+    SI.SpecificHeatCapacity c_ps_out=BaseClasses.Utilities.specificHeatCapacityCpLiCl(t_so, x_o)  "specific heat capacity of desiccant solution at inlet in J/kgK";
+
+    //densities
+    //SI.Density rho_a=Media.Air.density(state_a) "in kg/m^3, density of air";
+    //SI.Density rho_s=BaseClasses.Utilities.densityLiCl(t_si, x_i) "in kg/m^3, density of LiCl solution";
+
+    //mass flows
+    SI.MassFlowRate L_o "outlet mass flow of desiccant solution in kg/s";
+    //liegt hier eine andere Fläche vor als A?
+    SI.MassFlowRate G_i=m_flow "original as mass flux, inlet mass flow of Air in kg/s";
+    SI.MassFlowRate G_o "outlet mass flow of Air in kg/s";
+    SI.MassFlowRate m
+      "water vapor mass flow per area in kg/s going from air to desiccant flow";
+    SI.MassFlowRate m_star
+      "water vapor mass flow per area in kg/s going from air to desiccant flow without physical control of boundaries";
+
+    //temperatures
+    SI.Temperature t_ai=Media.Air.temperature(state_a) "temperature of air at inlet";
+    SI.Temperature t_ao "temperature of air at outlet";
+    SI.Temperature t_a = (t_ai+t_ao)/2 "average temperature of air ";
+    SI.Temperature t_si(start=t_sol) "temperature of desiccant solution at inlet";
+    SI.Temperature t_so  "(start=t_sol) temperature of desiccant solution at outlet";
+    SI.Temperature t_s = (t_si + t_so)/2 "average temperature of brine";
+
+    SI.HeatFlowRate Q "heat transfer between solution and air";
+
+    //enthalpies
+    SI.SpecificEnthalpy h_ai;
+    SI.SpecificEnthalpy h_ao;
+    SI.SpecificEnthalpy h_si;
+    SI.SpecificEnthalpy h_so;
+
+    //humidity
+    Real X_iDry = inStream(port_a.Xi_outflow[1])/(1 - inStream(port_a.Xi_outflow[1]))
+      "absolute humidity to dry air at inlet";
+    Real X_oDry = port_b.Xi_outflow[1]/(1 - port_b.Xi_outflow[1])
+      "absolute humidity to dry air at outlet";
+    Real X_i = inStream(port_a.Xi_outflow[1])
+      "absolute humidity to humid air at inlet";
+    Real X_o = port_b.Xi_outflow[1]
+      "absolute humidity to humid air at outlet";
+    Real Xout_max[Medium.nXi]=
+        AixLib.Utilities.Psychrometrics.Functions.X_pSatpphi(
+        pSat=AixLib.Media.Air.saturationPressure(t_ao),
+        p=port_a.p,
+        phi=1)*s "maximum relative humidity at outlet (rh=1)";
+    Real rh=Utilities.Psychrometrics.Functions.phi_pTX(
+        port_a.p,
+        t_ai,
+        inStream(port_a.Xi_outflow[1])) "relative humidity of inlet air";
+
+    //water mass flows
+    //SI.MassFlowRate w_in  "actual water mass flow at air inlet";
+    SI.MassFlowRate w_outmax  "maximum water mass flow at air outlet, negative";
+
+    //salt mass flow
+    SI.MassFlowRate ms_in = L_i * x_i;
+    SI.MassFlowRate ms_out = L_o * x_o;
+
+    //solution concentrations
+    Real x_i(start=x_sol) "inlet concentration of desiccant solution";
+    Real x_o(start=x_sol) "outlet concentration of desiccant solution";
+    Real x = (x_i+x_o)/2 "average concentration of desiccant solution";
+
+    //partial pressures
+    SI.PartialPressure pw_s "average partial vapor pressure of desiccant solution";
+    SI.PartialPressure pw_a "average partial vapor pressure of air flow";
+    SI.PartialPressure pw_w "average partial vapor pressure of water";
+    Real theta "average reduced temperature of desiccant solution T/ T_c,H20";
+    Real pi "relative partial pressure of solution: pw_s / pw_a";
+    //Integer PumpOn "1 if pump is on, 0 if not";
+
+    Modelica.Blocks.Interfaces.RealInput x_in "Connector of Real input signal 1" annotation (
+        Placement(transformation(extent={{-126,20},{-86,60}}), iconTransformation(extent={{-126,
+              20},{-86,60}})));
+    Modelica.Blocks.Interfaces.RealInput Ts_in "Connector of Real input signal 1" annotation (
+        Placement(transformation(extent={{-126,60},{-86,100}}), iconTransformation(extent={{-126,
+              60},{-86,100}})));
+    Modelica.Blocks.Interfaces.RealOutput x_out "Connector of Real input signal 1" annotation (
+       Placement(transformation(extent={{92,20},{132,60}}), iconTransformation(extent={{92,20},
+              {112,40}})));
+    Modelica.Blocks.Interfaces.RealOutput Ts_out "Connector of Real input signal 1"
+      annotation (Placement(transformation(extent={{92,60},{132,100}}), iconTransformation(
+            extent={{92,60},{112,80}})));
+    Modelica.Blocks.Interfaces.RealOutput L_out "Connector of Real input signal 1" annotation (
+       Placement(transformation(extent={{92,-90},{132,-50}}), iconTransformation(extent={{92,-80},
+              {112,-60}})));
+    Modelica.Blocks.Interfaces.RealInput L_i "Connector of Real input signal 1" annotation (
+        Placement(transformation(extent={{-126,-80},{-86,-40}}), iconTransformation(extent={{-126,
+              -70},{-86,-30}})));
+    Modelica.Blocks.Interfaces.BooleanInput Pump(start=false) "Connector of Real input signal 1"
+      annotation (Placement(transformation(
+          extent={{-20,-20},{20,20}},
+          rotation=90,
+          origin={0,-110}), iconTransformation(
+          extent={{20,-20},{-20,20}},
+          rotation=270,
+          origin={0,-100})));
+  initial equation
+    // Assert that the substance with name 'water' has been found.
+    assert(Medium.nXi == 0 or abs(sum(s) - 1) < 1e-5,
+    "If Medium.nXi > 1, then substance 'water' must be present for one component.'"
+       + Medium.mediumName + "'.\n" + "Check medium model.");
+
+  equation
+
+    if Pump then
+      //PumpOn = 1;
+      //Mass balance Air:
+      G_o = G_i - m;
+      //mass balance solution:
+      L_o = L_i + m;
+      //Mass balance Water:
+      G_o * port_b.Xi_outflow = G_i * inStream(port_a.Xi_outflow) - m1Xi_flow;
+      //mass transfer equation
+      m_star = beta*a_t*V*(pw_a - pw_s);
+      //equation for m considering physical boundaries:
+      m = m_star;
+      //m = min( m_star, w_in);
+      //m = min( min(m_star, w_in),max(m_star, w_outmax));
+      //concentration of desiccant solution
+      L_i * x_i = L_o * x_o;
+      //1/x_o = 1/x_i*(1 + m*L_flowInv);
+      //1/x_o = 1/x_i *(1+m/L_i);
+
+    else
+      //PumpOn = 0;
+      G_o = G_i;
+      L_o = L_i;
+      port_b.Xi_outflow = inStream(port_a.Xi_outflow);
+      m_star = 0;
+      m=0;
+      x_o = x_i;
+
+    end if;
+
+    //water mass flow equations:
+    //w_in = X1_in[1] * G_i;
+    w_outmax = - Xout_max[1] * G_i  "not completely exact, should be outlet mass flow (G_o), use dry air alternatively";
+
+    m_flowInv = AixLib.Utilities.Math.Functions.inverseXRegularized(
+      x=port_a.m_flow,
+      delta=deltaReg,
+      deltaInv=deltaInvReg,
+      a=aReg,
+      b=bReg,
+      c=cReg,
+      d=dReg,
+      e=eReg,
+      f=fReg);
+
+    //L_flowInv = AixLib.Utilities.Math.Functions.inverseXRegularized(x=L_i,delta=deltaReg,deltaInv=deltaInvReg, a=aReg,b=bReg,c=cReg,d=dReg,e=eReg,f=fReg);
+
+    //pressure loss
+    dp = dp_abs;
+
+    //Mass balance Air:
+    port_b.m_flow = - G_o  "Vorsicht: negatives Vorzeichen!";
+
+    //mass balance solution:
+    L_out = L_o;
+
+    //Mass balance Water:
+    port_a.Xi_outflow = inStream(port_b.Xi_outflow);
+
+    //Energy balance:
+    port_a.h_outflow = inStream(port_b.h_outflow);
+    port_b.h_outflow = h_ao;
+
+    h_ai = (1-X_i)*c_pa_in*(t_ai - t_ref) + X_i*(c_pw*(t_ai - t_ref) + lambda);
+    h_ao = (1-X_o)*c_pa_out*(t_ao - t_ref) + X_o*(c_pw*(t_ao - t_ref) + lambda);
+    h_si = c_ps_in*(t_si - t_ref);
+    h_so = c_ps_out*(t_so - t_ref);
+
+    L_i*h_si = L_o*h_so - Q;
+    G_i*h_ai = G_o*h_ao + Q;
+
+    //temperatures
+    t_si = Ts_in;
+    Ts_out = t_so;
+    //t_so - t_ao  =  0  "Annahme: Ausgang der Sole hat die selbe Temperatur wie die Luft";
+    t_so - t_ao = (1 - eps)*(t_si - t_ai) "Abweichung von t_ao=t_so in der Wärmeübertragung";
+
+    //vapor pressure
+    theta = t_s/T_cH2O "reduced temperature T/T_c,H20";
+
+    pw_w = BaseClasses.Utilities.partialPressureWater(t_s);
+    //welches T?
+    pi = BaseClasses.Utilities.relativePartialPressureLiCl(theta, x_i);
+    // ist x_i die mass fraction of solute?
+    pw_s = pi*pw_w;
+
+    pw_a = Utilities.Psychrometrics.Functions.pW_X((inStream(port_a.Xi_outflow[1])+port_b.Xi_outflow[1])/2);
+
+    // Species flow rate from m
+    m1Xi_flow = m*s;
+
+    //concentration of desiccant solution
+    x_i = x_in;
+    x_out = x_o;
+    annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={Rectangle(extent={{
+                -100,100},{100,-100}}, lineColor={28,108,200}), Text(
+            extent={{-80,80},{80,-80}},
+            lineColor={28,108,200},
+            textString="Absorber")}), Diagram(coordinateSystem(preserveAspectRatio=false)));
+  end Desorber;
 end ComponentsAHU;
