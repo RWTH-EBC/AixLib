@@ -16,8 +16,6 @@ equation
             fillPattern =                                                                                                   FillPattern.Solid)}), Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>The <b>VarAirExchange</b> model describes heat transfer by air exchange (e.g. due to opening a window). It needs the air exchange rate (in <img src=\"modelica://AixLib/Resources/Images/Building/Components/DryAir/VarAirExchange/equation-fHlz87wz.png\" alt=\"h^(-1)\"/>) as input value. </p>
- <h4><font color=\"#008000\">Level of Development</font></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><font color=\"#008000\">Example Results</font></h4>
  <p><a href=\"AixLib.Building.Components.Examples.DryAir.DryAir_test\">AixLib.Building.Components.Examples.DryAir.DryAir_test</a> </p>
  </html>", revisions = "<html>

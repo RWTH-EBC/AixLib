@@ -62,11 +62,11 @@ the controller is modelled outside the heat generator.
 </p>
 </html>",
         revisions="<html>
-<p><ul>
+<ul>
 <li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
 conventions</li>
 <li><i>October 11, 2016&nbsp;</i> by Pooyan Jahangiri:<br/>First
 implementation</li>
-</ul></p>
+</ul>
 </html>"));
 end HeatGeneratorNoControl;
