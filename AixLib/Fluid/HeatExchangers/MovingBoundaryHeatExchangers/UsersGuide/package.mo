@@ -1,6 +1,7 @@
 within AixLib.Fluid.HeatExchangers.MovingBoundaryHeatExchangers;
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
+
   annotation (DocumentationClass = true, Documentation(revisions="<html>
 <ul>
   <li>

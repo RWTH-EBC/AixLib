@@ -2,6 +2,14 @@ within AixLib.Fluid.HeatExchangers.MovingBoundaryHeatExchangers.Utilities;
 package Types "Types, constants to define menu choices"
   extends Modelica.Icons.TypesPackage;
 
+  type TypeHX = enumeration(
+    DirectCurrent
+      "Direct-current heat exchanger",
+    CounterCurrent
+      "Counter-current heat exchanger")
+    "Enumeration to define types of heat exchangers"
+    annotation (Evaluate=true);
+
   type GeometryCV = enumeration(
     Circular
       "Cross-sectional geometry - Circular heat exchanger",
@@ -24,6 +32,22 @@ package Types "Types, constants to define menu choices"
     SCTPSH
       "Supercooled - Two-phase - Superheated")
     "Enumeration to define different kinds of control volumes"
+    annotation (Evaluate=true);
+
+  type CalculationHeatFlow = enumeration(
+    Simplified
+      "Simplified - Mean temperature differece",
+    LMTD
+      "LMTD - Logarithmic mean temperature difference",
+    E_NTU
+      "Epsilon-NTU - Method of number of transfer units")
+    "Enumeration to define methods of calculating heat flows"
+    annotation (Evaluate=true);
+
+  type CalculationHeatTransferCoefficient = enumeration(
+    Constant
+      "Constant - Simple model of a constant heat transfer coefficient")
+    "Enumeration to define methods of calculating coefficient of heat transfer"
     annotation (Evaluate=true);
 
     annotation (Documentation(revisions="<html>

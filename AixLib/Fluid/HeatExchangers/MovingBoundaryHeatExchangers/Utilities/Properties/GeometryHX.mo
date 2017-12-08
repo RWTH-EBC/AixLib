@@ -33,6 +33,9 @@ record GeometryHX
 
   // Definition if implicit parameters
   //
+  final parameter Modelica.SIunits.Length l=
+    nFloCha*lFloCha
+    "Length of all flow channels";
   final parameter Modelica.SIunits.Diameter dFloCha=
     if (CroSecGeo == Types.GeometryCV.Circular)
       then dFloChaCir
@@ -129,6 +132,10 @@ cellpadding=\"2\" style=\"border-collapse:collapse;\">
 <tr>
 <th>Name</th> 
 <th>Comment</th> 
+</tr> 
+<tr>
+<td><code>l</code></td> 
+<td>Length of all flow channels.</td> 
 </tr> 
 <tr>
 <td><code>dFloCha</code></td> 
