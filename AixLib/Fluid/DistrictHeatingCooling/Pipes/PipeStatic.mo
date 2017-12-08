@@ -1,19 +1,41 @@
 within AixLib.Fluid.DistrictHeatingCooling.Pipes;
 model PipeStatic "Static pipe implementation"
   extends BaseClasses.PartialPipe;
-  IBPSA.Experimental.Pipe.PipeCoreStatic pipeCoreStatic(
+  BaseClassesStatic.StaticCore           pipeCoreStatic(
     redeclare package Medium = Medium,
-    diameter=diameter,
     length=length,
     m_flow_nominal=m_flow_nominal,
     roughness=roughness,
-    thicknessIns=thicknessIns,
-    lambdaI=lambdaIns,
-    res(fac=2))
+    R=1/(lambdaIns*2*Modelica.Constants.pi/
+      Modelica.Math.log((diameter/2 + thicknessIns)/(diameter/2))),
+    C=rho_default*Modelica.Constants.pi*(
+      diameter/2)^2*cp_default,
+    v_nominal=0.5,
+    thickness=0.0032,
+    fac=2,
+    dh=diameter)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T(
         displayUnit="K") = T_ground)
     annotation (Placement(transformation(extent={{-40,40},{-20,60}})));
+
+protected
+  parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX(
+      T=Medium.T_default,
+      p=Medium.p_default,
+      X=Medium.X_default) "Default medium state";
+
+  parameter Modelica.SIunits.Density rho_default=Medium.density_pTX(
+      p=Medium.p_default,
+      T=Medium.T_default,
+      X=Medium.X_default)
+    "Default density (e.g., rho_liquidWater = 995, rho_air = 1.2)"
+    annotation (Dialog(group="Advanced", enable=use_rho_nominal));
+
+  parameter Modelica.SIunits.SpecificHeatCapacity cp_default=
+      Medium.specificHeatCapacityCp(state=sta_default)
+    "Heat capacity of medium";
+
 equation
   connect(port_a, pipeCoreStatic.port_a)
     annotation (Line(points={{-100,0},{-10,0}}, color={0,127,255}));
