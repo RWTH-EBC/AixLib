@@ -56,15 +56,18 @@ equation
           fillPattern=FillPattern.Solid)}), Documentation(revisions="<html>
 <ul>
 <li>
+Dec 8, 2017, by Marcus Fuchs:<br/>
+Restore this model to work for supporting legacy tests.
+</li>
+<li>
 Jun 21, 2017, by Marcus Fuchs:<br/>
 First implementation for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
 </li>
 </ul>
 </html>", info="<html>
-<p>A wrapper around the static pipe model proposed in 
+<p>A wrapper around the static pipe model originally proposed in 
 <a href=\"https://github.com/bramvdh91/modelica-ibpsa/issues/76\">issue 76 of the IBPSA pipe model developement</a></<p>
-<p>Note that this pipe currently uses a factor of 2 on the nominal pressure loss to account for bends etc.</p>
-<p>Currently, this pipe requires loading the fork of the Modelica IBPSA library from https://github.com/bramvdh91/modelica-ibpsa
-and using branch <code>pipe_issue76_static</code>.</p>
+<p>Note that this pipe uses a factor of 2 on the nominal pressure loss to account for bends etc.</p>
+<p>This pipe is not meant for further development, but we had to include it in order to support some legacy tests.</p>
 </html>"));
 end PipeStatic;

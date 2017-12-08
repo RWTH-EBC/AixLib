@@ -82,56 +82,13 @@ equation
           textString="%name")}),
     Documentation(info="<html>
 <p>
-Calculates time delay at both sides of the pipe as the difference between the
-current simulation time and the inlet time of the fluid at both ends of the pipe.
-</p>
-<h4>Main equation</h4>
-<p align=\"center\">
-<i>&part;z(x,t)/&part;t + v(t) &part;z(x,t)/&part;x = 0,</i>
-</p>
-<p>
-where <i>z(x,t)</i> is the spatial distribution as a function of time of any
-property <i>z</i> of the fluid. For the inlet time propagation, <i>z</i> will
-be replaced by the inlet time of the fluid <i>t<sub>in</sub></i>.
-</p>
-<h4>Implementation</h4>
-<p>
-The inlet time is approached as a fluid property and its propagation follows
-the one-dimensional wave equation, implemented using the spatialDistribution
-function. This components requires the mass flow through the pipe and the pipe
-dimensions in order to derive information about the fluid propagation.
-</p>
-<p>
-The component calculates the delay time at both in/outlet ports of the pipe
-and therefore has two outlets. During forward flow, only the forward
-<a href=\"modelica://AixLib.Fluid.PlugFlowPipes.BaseClasses.HeatLossPipeDelay\">
-AixLib.Fluid.PlugFlowPipes.BaseClasses.HeatLossPipeDelay</a> component in
-<a href=\"modelica://AixLib.Fluid.PlugFlowPipes.BaseClasses.PipeCore\">
-AixLib.Fluid.PlugFlowPipes.BaseClasses.PipeCore</a>
-will be active and uses the forward output of PlugFlowTransportDelay.
-During reverse, the opposite is true and only the reverse output is used.
-</p>
-<h4>Assumption</h4>
-<p>It is assumed that no axial mixing takes place in the pipe. </p>
+This is a copy of the PlugFlowTransportDelay modified to react directly on the current velocity. This gives a static behavior similar to quasi-static DHC models for comparison.
+Note that this is only included for some legacy testing. </p>
 </html>", revisions="<html>
 <ul>
 <li>
-September 9, 2016 by Bram van der Heijde:<br/>
-Rename from PDETime_massFlowMod to PlugFlowTransportDelayMod</li>
-<li>
-December 2015 by Carles Ribas Tugores:<br/>
-Modification in delay calculation to fix issues.</li>
-<li>
-November 6, 2015 by Bram van der Heijde:<br/>
-Adapted flow parameter to mass flow rate instead of velocity.
-This change should also fix the reverse and zero flow issues.</li>
-<li>
-October 13, 2015 by Marcus Fuchs:<br/>
-Use <code>abs()</code> of normalized velocity input in order to avoid negative
-delay times. </li>
-<li>
-July 2015 by Arnout Aertgeerts:<br/>
-First implementation.
+Dec 8, 2017 by Marcus Fuchs:<br/>
+Temporarily re-introducing the static pipe model
 </li>
 </ul>
 </html>"));
