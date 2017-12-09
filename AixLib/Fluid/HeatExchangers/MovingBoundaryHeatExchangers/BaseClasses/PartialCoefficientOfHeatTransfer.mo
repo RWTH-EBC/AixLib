@@ -47,7 +47,6 @@ calculation methods of the coefficient of heat transfer.
 Therefore, this base class defines basic parameters
 required by all models of coefficient of heat transfers.<br />
 These parameters are listed below:
-<p>
 </p>
 <ul>
 <li>

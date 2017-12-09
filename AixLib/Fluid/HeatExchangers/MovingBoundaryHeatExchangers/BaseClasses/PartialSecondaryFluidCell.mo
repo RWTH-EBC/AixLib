@@ -23,42 +23,26 @@ partial model PartialSecondaryFluidCell
   parameter Boolean useHeaCoeMod = false
     "= true, if model is used to calculate coefficients of heat transfers"
     annotation (Dialog(tab="Heat transfer",group="Heat transfer coefficient"));
-  replaceable model CoefficientOfHeatTransferSC =
+  replaceable model CoefficientOfHeatTransfer =
     Utilities.HeatTransfers.ConstantCoefficientOfHeatTransfer
     constrainedby PartialCoefficientOfHeatTransfer
-    "Model describing the calculation method of the coefficient of heat 
-    transfer of the supercooled region"
-    annotation (Dialog(tab="Heat transfer",group="Heat transfer coefficient",
-                enable = useHeaCoeMod),
-                choicesAllMatching=true);
-  replaceable model CoefficientOfHeatTransferTP =
-    Utilities.HeatTransfers.ConstantCoefficientOfHeatTransfer
-    constrainedby PartialCoefficientOfHeatTransfer
-    "Model describing the calculation method of the coefficient of heat 
-    transfer of the two-phase region"
-    annotation (Dialog(tab="Heat transfer",group="Heat transfer coefficient",
-                enable = useHeaCoeMod),
-                choicesAllMatching=true);
-  replaceable model CoefficientOfHeatTransferSH =
-    Utilities.HeatTransfers.ConstantCoefficientOfHeatTransfer
-    constrainedby PartialCoefficientOfHeatTransfer
-    "Model describing the calculation method of the coefficient of heat 
-    transfer of the superheated region"
+    "Model describing the calculation methods of the coefficients of heat 
+    transfer"
     annotation (Dialog(tab="Heat transfer",group="Heat transfer coefficient",
                 enable = useHeaCoeMod),
                 choicesAllMatching=true);
 
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer AlpSC = 2000
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer AlpSC = 100
     "Effective coefficient of heat transfer between the wall and fluid of the
     supercooled regime"
     annotation (Dialog(tab="Heat transfer",group="Heat transfer coefficient",
                 enable = not useHeaCoeMod));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer AlpTP = 7500
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer AlpTP = 100
     "Effective coefficient of heat transfer between the wall and fluid of the
     two-phase regime"
     annotation (Dialog(tab="Heat transfer",group="Heat transfer coefficient",
                 enable = not useHeaCoeMod));
-  parameter Modelica.SIunits.CoefficientOfHeatTransfer AlpSH = 2500
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer AlpSH = 100
     "Effective coefficient of heat transfer between the wall and fluid of the
     superheated regime"
     annotation (Dialog(tab="Heat transfer",group="Heat transfer coefficient",
@@ -73,6 +57,25 @@ partial model PartialSecondaryFluidCell
   //
   extends AixLib.Fluid.Interfaces.PartialTwoPort(
     redeclare replaceable package Medium = AixLib.Media.Water);
+
+  // Definition of parameters describing advanced options
+  //
+  parameter Boolean iniSteSta = false
+    "=true, if temperatures of different regimes are initialised steady state"
+    annotation(Dialog(tab="Advanced",group="Initialisation"));
+
+  parameter Modelica.SIunits.Temperature TSCIni = 293.15
+    "Temperature of supercooled regime at initialisation"
+    annotation(Dialog(tab="Advanced",group="Initialisation",
+               enable=not iniSteSta));
+  parameter Modelica.SIunits.Temperature TTPIni = 293.15
+    "Temperature of two-phase regime at initialisation"
+    annotation(Dialog(tab="Advanced",group="Initialisation",
+               enable=not iniSteSta));
+  parameter Modelica.SIunits.Temperature TSHIni = 293.15
+    "Temperature of superheated regime at initialisation"
+    annotation(Dialog(tab="Advanced",group="Initialisation",
+               enable=not iniSteSta));
 
   // Definition of subcomponents and connectors
   //
@@ -199,8 +202,7 @@ Definition of fluid and heat ports.
 </li>
 </ul>
 <p>
-Models that inherits from this base class are stored
-in
+Models that inherits from this base class are stored in
 <a href=\"modelica://AixLib.Fluid.HeatExchangers.MovingBoundaryHeatExchangers.Utilities.FluidCells\">
 AixLib.Fluid.HeatExchangers.MovingBoundaryHeatExchangers.Utilities.GeometryHX.</a>
 </p>
