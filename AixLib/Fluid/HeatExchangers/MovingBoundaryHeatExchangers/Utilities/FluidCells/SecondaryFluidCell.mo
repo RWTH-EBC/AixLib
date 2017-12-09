@@ -130,6 +130,7 @@ initial equation
     TSH = TSHIni;
   end if;
 
+
 equation
   // Connect variables with connectors
   //
@@ -190,8 +191,8 @@ equation
     dSC*geoCV.ACroSecFloCha*geoCV.l*der(lenInl[1])
     "Mass flow rate flowing out of the supercooled regime and into the two-phase
     regime";
-  m_flow_TPSH = m_flow +
-    dSH*geoCV.ACroSecFloCha*geoCV.l*der(lenInl[3])
+  m_flow_TPSH = m_flow -
+    dSH*geoCV.ACroSecFloCha*geoCV.l*(der(lenInl[1])+der(lenInl[2]))
     "Mass flow rate flowing out of the two-phase regime and into the superheated
     regime";
 
@@ -327,7 +328,7 @@ It supports two types of heat exchanger, i.e. direct-current and counter-current
 heat exchangers. A direct-current heat exchanger is modelled by using the fluid
 ports in design direction and a counter-current heat exchanger is modelled by
 usign the fluid poirt against design direction.<br/><br/>
-Some validation models are stored in
+Validation models are stored in
 <a href=\"modelica://AixLib.Fluid.HeatExchangers.MovingBoundaryHeatExchangers.Validation.SecondaryFluidCells\">
 AixLib.Fluid.HeatExchangers.MovingBoundaryHeatExchangers.Validation.SecondaryFluidCells.</a>
 </p>

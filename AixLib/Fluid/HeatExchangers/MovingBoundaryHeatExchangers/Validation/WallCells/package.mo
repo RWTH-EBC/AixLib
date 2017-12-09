@@ -10,5 +10,13 @@ package WallCells "Package that contains wall models of the wall cells"
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/516\">issue 516</a>).
   </li>
 </ul>
+</html>", info="<html>
+<p>
+This package contains different models to validate the
+wall cell models of a moving boundary heat
+exchanger. These models are stored in
+<a href=\"modelica://AixLib.Fluid.HeatExchangers.MovingBoundaryHeatExchangers.Utilities.WallCells\">
+AixLib.Fluid.HeatExchangers.MovingBoundaryHeatExchangers.Utilities.WallCells.</a>
+</p>
 </html>"));
 end WallCells;

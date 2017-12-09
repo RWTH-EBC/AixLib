@@ -44,7 +44,7 @@ package Types "Types, constants to define menu choices"
     "Enumeration to define methods of calculating heat flows"
     annotation (Evaluate=true);
 
-  type CalculationHeatTransferCoefficient = enumeration(
+  type CalculationCoefficientOfHeatTransfer = enumeration(
     Constant
       "Constant - Simple model of a constant heat transfer coefficient")
     "Enumeration to define methods of calculating coefficient of heat transfer"

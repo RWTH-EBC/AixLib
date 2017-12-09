@@ -47,12 +47,12 @@ model CounterCurrentHeatExchanger "Validation model of a secondary fluid cell wo
     AlpSH=100,
     iniSteSta=false,
     heaFloCal=AixLib.Fluid.HeatExchangers.MovingBoundaryHeatExchangers.Utilities.Types.CalculationHeatFlow.E_NTU,
-
     TSCIni=298.15,
     TTPIni=298.15,
     TSHIni=298.15)
     "Secondary fluid cell of a moving boundary heat exchanger"
     annotation (Placement(transformation(extent={{-10,30},{10,50}})));
+
   AixLib.Fluid.Sources.Boundary_ph sin(
     redeclare package Medium = Medium,
     use_p_in=false,
