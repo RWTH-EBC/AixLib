@@ -16,7 +16,6 @@ This package contains different modellling approaches of the void fraction of
 the two-phase regime of a moving boundary heat exchanger. Currently, the
 following approaches are implemented within this package:
 </p>
-</p>
 <ul>
 <li>
 <a href=\"modelica://AixLib.Fluid.HeatExchangers.MovingBoundaryHeatExchangers.Utilities.VoidFractions.Graeber2013\">

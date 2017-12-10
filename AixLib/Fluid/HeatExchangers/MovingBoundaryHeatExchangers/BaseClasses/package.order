@@ -1,3 +1,5 @@
 PartialCoefficientOfHeatTransfer
+PartialMovingBoundaryCell
 PartialSecondaryFluidCell
+PartialVoidFraction
 PartialWallCell

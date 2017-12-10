@@ -204,7 +204,7 @@ Definition of fluid and heat ports.
 <p>
 Models that inherits from this base class are stored in
 <a href=\"modelica://AixLib.Fluid.HeatExchangers.MovingBoundaryHeatExchangers.Utilities.FluidCells\">
-AixLib.Fluid.HeatExchangers.MovingBoundaryHeatExchangers.Utilities.GeometryHX.</a>
+AixLib.Fluid.HeatExchangers.MovingBoundaryHeatExchangers.Utilities.FluidCells.</a>
 </p>
 </html>"));
 end PartialSecondaryFluidCell;

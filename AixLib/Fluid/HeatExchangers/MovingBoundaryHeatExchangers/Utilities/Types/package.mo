@@ -2,6 +2,14 @@ within AixLib.Fluid.HeatExchangers.MovingBoundaryHeatExchangers.Utilities;
 package Types "Types, constants to define menu choices"
   extends Modelica.Icons.TypesPackage;
 
+  type ApplicationHX = enumeration(
+    Evaporator
+      "Evaporator",
+    Condenser
+      "Condenser")
+    "Enumeration to define the application of the heat exchanger"
+    annotation (Evaluate=true);
+
   type TypeHX = enumeration(
     DirectCurrent
       "Direct-current heat exchanger",

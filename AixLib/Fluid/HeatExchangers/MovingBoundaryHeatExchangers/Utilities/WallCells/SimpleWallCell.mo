@@ -117,7 +117,7 @@ equation
     /* Supercooled regime */
 
     Q_flow_SCSec + Q_flow_SCPri =  matHX.cpWal*matHX.dWal * geoCV.l*
-      geoCV.ACroSecWalFloCha * (lenInl[1]*der(TSC) + (TSC-TSCTP)*der(lenInl[1]))
+      geoCV.ACroSecWal * (lenInl[1]*der(TSC) + (TSC-TSCTP)*der(lenInl[1]))
       "Energy balance of the supercooled regime";
     der(TTP) = tauTem*(TSC-TTP)
       "Energy balance of the two-phase regime";
@@ -128,10 +128,10 @@ equation
     /* Supercooled regime - Two-phase regime*/
 
     Q_flow_SCSec + Q_flow_SCPri =  matHX.cpWal*matHX.dWal * geoCV.l*
-      geoCV.ACroSecWalFloCha * (lenInl[1]*der(TSC) + (TSC-TSCTP)*der(lenInl[1]))
+      geoCV.ACroSecWal * (lenInl[1]*der(TSC) + (TSC-TSCTP)*der(lenInl[1]))
       "Energy balance of the supercooled regime";
     Q_flow_TPSec+Q_flow_TPPri =  matHX.cpWal*matHX.dWal * geoCV.l*
-      geoCV.ACroSecWalFloCha * (lenInl[2]*der(TTP) + (TSCTP-TTP)*der(lenInl[1]) +
+      geoCV.ACroSecWal * (lenInl[2]*der(TTP) + (TSCTP-TTP)*der(lenInl[1]) +
       (TTP-TTPSH)*(der(lenInl[1])+der(lenInl[2])))
       "Energy balance of the two-phase regime";
     der(TSH) = tauTem*(TTP-TSH)
@@ -143,7 +143,7 @@ equation
     der(TSC) = tauTem*(TTP-TSC)
       "Energy balance of the supercooled regime";
     Q_flow_TPSec+Q_flow_TPPri =  matHX.cpWal*matHX.dWal * geoCV.l*
-      geoCV.ACroSecWalFloCha * (lenInl[2]*der(TTP) + (TSCTP-TTP)*der(lenInl[1]) +
+      geoCV.ACroSecWal * (lenInl[2]*der(TTP) + (TSCTP-TTP)*der(lenInl[1]) +
       (TTP-TTPSH)*(der(lenInl[1])+der(lenInl[2])))
       "Energy balance of the two-phase regime";
     der(TSH) = tauTem*(TTP-TSH)
@@ -155,11 +155,11 @@ equation
     der(TSC) = tauTem*(TTP-TSC)
       "Energy balance of the supercooled regime";
     Q_flow_TPSec+Q_flow_TPPri =  matHX.cpWal*matHX.dWal * geoCV.l*
-      geoCV.ACroSecWalFloCha * (lenInl[2]*der(TTP) + (TSCTP-TTP)*der(lenInl[1]) +
+      geoCV.ACroSecWal * (lenInl[2]*der(TTP) + (TSCTP-TTP)*der(lenInl[1]) +
       (TTP-TTPSH)*(der(lenInl[1])+der(lenInl[2])))
       "Energy balance of the two-phase regime";
     Q_flow_SHSec+Q_flow_SHPri =  matHX.cpWal*matHX.dWal * geoCV.l*
-      geoCV.ACroSecWalFloCha * (lenInl[3]*der(TSH) +
+      geoCV.ACroSecWal * (lenInl[3]*der(TSH) +
       (TTPSH-TSH)*(der(lenInl[1])+der(lenInl[2])))
       "Energy balance of the superheated regime";
 
@@ -171,7 +171,7 @@ equation
     der(TTP) = tauTem*(TSH-TTP)
       "Energy balance of the two-phase regime";
     Q_flow_SHSec+Q_flow_SHPri =  matHX.cpWal*matHX.dWal * geoCV.l*
-      geoCV.ACroSecWalFloCha * (lenInl[3]*der(TSH) +
+      geoCV.ACroSecWal * (lenInl[3]*der(TSH) +
       (TTPSH-TSH)*(der(lenInl[1])+der(lenInl[2])))
       "Energy balance of the superheated regime";
 
@@ -179,14 +179,14 @@ equation
     /* Supercooled regime - Two-phase regime - Superheated regime*/
 
     Q_flow_SCSec + Q_flow_SCPri =  matHX.cpWal*matHX.dWal * geoCV.l*
-      geoCV.ACroSecWalFloCha * (lenInl[1]*der(TSC) + (TSC-TSCTP)*der(lenInl[1]))
+      geoCV.ACroSecWal * (lenInl[1]*der(TSC) + (TSC-TSCTP)*der(lenInl[1]))
       "Energy balance of the supercooled regime";
     Q_flow_TPSec+Q_flow_TPPri =  matHX.cpWal*matHX.dWal * geoCV.l*
-      geoCV.ACroSecWalFloCha * (lenInl[2]*der(TTP) + (TSCTP-TTP)*der(lenInl[1]) +
+      geoCV.ACroSecWal * (lenInl[2]*der(TTP) + (TSCTP-TTP)*der(lenInl[1]) +
       (TTP-TTPSH)*(der(lenInl[1])+der(lenInl[2])))
       "Energy balance of the two-phase regime";
     Q_flow_SHSec+Q_flow_SHPri =  matHX.cpWal*matHX.dWal * geoCV.l*
-      geoCV.ACroSecWalFloCha * (lenInl[3]*der(TSH) +
+      geoCV.ACroSecWal * (lenInl[3]*der(TSH) +
       (TTPSH-TSH)*(der(lenInl[1])+der(lenInl[2])))
       "Energy balance of the superheated regime";
 
@@ -200,7 +200,7 @@ equation
 
   // Calculation of conservation of energy used for diagnostics
   //
-  engWal = matHX.cpWal*matHX.dWal * geoCV.l*geoCV.ACroSecWalFloCha *
+  engWal = matHX.cpWal*matHX.dWal * geoCV.l*geoCV.ACroSecWal *
     (lenInl[1]*TSC + lenInl[2]*TTP + lenInl[3]*TSH)
     "Current energy of the wall";
   dEngWaldt = der(engWal)

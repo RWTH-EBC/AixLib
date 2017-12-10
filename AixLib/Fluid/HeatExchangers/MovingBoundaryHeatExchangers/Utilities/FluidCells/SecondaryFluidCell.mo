@@ -180,19 +180,19 @@ equation
 
   // Calculationg of mass balances
   //
-  mSC = dSC * geoCV.ACroSecFloCha*geoCV.l*lenInl[1]
+  mSC = dSC * geoCV.ACroSec*geoCV.l*lenInl[1]
     "Mass of the supercooled regime";
-  mTP = dTP * geoCV.ACroSecFloCha*geoCV.l*lenInl[2]
+  mTP = dTP * geoCV.ACroSec*geoCV.l*lenInl[2]
     "Mass of the two-phase regime";
-  mSH = dSH * geoCV.ACroSecFloCha*geoCV.l*lenInl[3]
+  mSH = dSH * geoCV.ACroSec*geoCV.l*lenInl[3]
     "Mass of the superheated regime";
 
   m_flow_SCTP = m_flow -
-    dSC*geoCV.ACroSecFloCha*geoCV.l*der(lenInl[1])
+    dSC*geoCV.ACroSec*geoCV.l*der(lenInl[1])
     "Mass flow rate flowing out of the supercooled regime and into the two-phase
     regime";
   m_flow_TPSH = m_flow -
-    dSH*geoCV.ACroSecFloCha*geoCV.l*(der(lenInl[1])+der(lenInl[2]))
+    dSH*geoCV.ACroSec*geoCV.l*(der(lenInl[1])+der(lenInl[2]))
     "Mass flow rate flowing out of the two-phase regime and into the superheated
     regime";
 
@@ -230,11 +230,11 @@ equation
   if heaFloCal==Utilities.Types.CalculationHeatFlow.Simplified then
     /* Simplified - Mean temperature differece */
 
-    kASC = AlpThrSC * geoCV.dFloCha*Modelica.Constants.pi*geoCV.l*lenInl[1]
+    kASC = AlpThrSC * geoCV.AHeaTra*lenInl[1]
       "Effective thermal conductance of th supercooled regime";
-    kATP = AlpThrTP * geoCV.dFloCha*Modelica.Constants.pi*geoCV.l*lenInl[2]
+    kATP = AlpThrTP * geoCV.AHeaTra*lenInl[2]
       "Effective thermal conductance of th two-phase regime";
-    kASH = AlpThrSH * geoCV.dFloCha*Modelica.Constants.pi*geoCV.l*lenInl[3]
+    kASH = AlpThrSH * geoCV.AHeaTra*lenInl[3]
       "Effective thermal conductance of th superheated regime";
 
     dTSC = heatPortSC.T-TSC
@@ -249,13 +249,13 @@ equation
     /* Epsilon-NTU - Method of number of transfer units */
 
     kASC = abs(m_flow)*cpSC * (1 - exp(-AlpThrSC *
-      geoCV.dFloCha*Modelica.Constants.pi*geoCV.l*lenInl[1]/(abs(m_flow)*cpSC)))
+      geoCV.AHeaTra*lenInl[1]/(abs(m_flow)*cpSC)))
       "Effective thermal conductance of th supercooled regime";
     kATP = abs(m_flow)*cpTP * (1 - exp(-AlpThrTP *
-      geoCV.dFloCha*Modelica.Constants.pi*geoCV.l*lenInl[2]/(abs(m_flow)*cpTP)))
+      geoCV.AHeaTra*lenInl[2]/(abs(m_flow)*cpTP)))
       "Effective thermal conductance of th two-phase regime";
     kASH = abs(m_flow)*cpSH * (1 - exp(-AlpThrSH *
-      geoCV.dFloCha*Modelica.Constants.pi*geoCV.l*lenInl[3]/(abs(m_flow)*cpSH)))
+      geoCV.AHeaTra*lenInl[3]/(abs(m_flow)*cpSH)))
       "Effective thermal conductance of th superheated regime";
 
     if m_flow>0 then

@@ -82,7 +82,11 @@ partial model PartialVoidFraction
           lineColor={0,0,0},
           fontName="SWGrekc",
           textStyle={TextStyle.Bold},
-          textString="g")}),                                     Diagram(
+          textString="g"),
+        Text(
+          lineColor={0,0,255},
+          extent={{-100,-130},{100,-90}},
+          textString="%name")}),                                 Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>
 <ul>
