@@ -187,5 +187,5 @@ equation
         lineColor={215,215,215},
         fillColor={215,215,215},
         fillPattern=FillPattern.Solid,
-        rotation=45)}));
+        rotation=45)}), experiment(StopTime=6400));
 end BaseExample;

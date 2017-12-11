@@ -178,6 +178,22 @@ protected
   Modelica.SIunits.HeatFlowRate Q_flow_SH
     "Heat flow rate from between the wall and the superheated regime";
 
+  // Definition of variables describing conservation of mass and energy
+  //
+public
+  Modelica.SIunits.Energy engMed
+    "Current energy of the medium";
+  Modelica.SIunits.Power dEngMeddt
+    "Change of energy of the medium wrt. time";
+  Modelica.SIunits.Power Q_flow_tot
+    "Total heat flow rate between the medium and wall";
+  Modelica.SIunits.Mass masMed
+    "Current mass of medium";
+  Modelica.SIunits.MassFlowRate dMasMeddt
+    "Change of mass of the medium wrt. time";
+  Modelica.SIunits.MassFlowRate m_flow_tot
+    "Total mass flow rate between medium and surroundings";
+
   // Definition of models calculating the coefficients of heat transfer
   //
 public
@@ -686,6 +702,26 @@ equation
       supported! Please change calculation method!");
 
   end if;
+
+
+  // Calculation of conservation of mass and energy
+  //
+  engMed = geoCV.ACroSec*geoCV.l*(lenSC*(hSC-p/dSC)+lenTP*(hTP-p/dTP)+lenSH*(hSH-p/dSH))
+    "Current energy of the medium";
+  dEngMeddt = 0
+    "Change of energy of the medium wrt. time";
+               //der(engMed)
+  Q_flow_tot = m_flow_inl*hInlDes - m_flow_out*hOutDes +
+    Q_flow_SC + Q_flow_TP + Q_flow_SH
+    "Total heat flow rate between the medium and wall";
+
+  masMed= geoCV.ACroSec*geoCV.l*(lenSC*dSC+lenTP*dTP+lenSH*dSH)
+    "Current mass of medium";
+  dMasMeddt = 0
+    "Change of mass of the medium wrt. time";
+               //der(masMed)
+  m_flow_tot = m_flow_inl - m_flow_out
+    "Total mass flow rate between medium and surroundings";
 
   annotation (Diagram(graphics={
         Line(
