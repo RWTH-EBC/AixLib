@@ -33,14 +33,14 @@ model Graeber2013
 
 
 equation
-  // Calculation of void fraction
+  // Calculation of void fraction used internally
   //
-  voiFra = (auxThe^(2/3) * (2/3 * log(auxThe) - 1) + 1) / (1 - auxThe^(2/3))^2
+  voiFraInt = (auxThe^(2/3) * (2/3 * log(auxThe) - 1) + 1) / (1 - auxThe^(2/3))^2
     "Void fraction";
 
-  // Calculation of the derivative of the void fraction wrt. time
+  // Calculation of the derivative of the void fraction used internally wrt. time
   //
-  voiFra_der = dvoiFradauxThe*dauxThedp*dpdt
+  voiFraInt_der = dvoiFradauxThe*dauxThedp*dpdt
     "Derivative of the void fraction wrt. time";
 
   dvoiFradauxThe = (-(4*((auxThe^(2/3) + 1)*log(auxThe) - 3*auxThe^(2/3) + 3))/
@@ -48,6 +48,30 @@ equation
     "Partial derivative of voiFra wrt. auxThe";
   dauxThedp = 1/dLiq*ddVapdp - dVap/dLiq^2*ddLiqdp
     "Partial derivative of auxThe wrt. p";
+
+  // Calculation of void fraction and its total derivative used for output
+  //
+  der(voiFra) = voiFra_der "Integrate derivative of void fraction";
+
+  if modCV==Types.ModeCV.SC then
+    /* Supercooled */
+    voiFra_der = (0-voiFra)/tauVoiFra "Mean void fraction";
+  elseif modCV==Types.ModeCV.SCTP then
+    /* Supercooled - Two-phase */
+    voiFra_der = (voiFraInt-voiFra)/tauVoiFra "Mean void fraction";
+  elseif modCV==Types.ModeCV.TP then
+    /* Two-phase */
+    voiFra_der = (voiFraInt-voiFra)/tauVoiFra "Mean void fraction";
+  elseif modCV==Types.ModeCV.TPSH then
+    /* Two-phase - Superheated */
+    voiFra_der = (voiFraInt-voiFra)/tauVoiFra "Mean void fraction";
+  elseif modCV==Types.ModeCV.SH then
+    /* Superheated */
+    voiFra_der = (1-voiFra)/tauVoiFra "Mean void fraction";
+  else
+    /* Supercooled - Two-phase - Superheated*/
+    voiFra_der = (voiFraInt-voiFra)/tauVoiFra "Mean void fraction";
+  end if;
 
   annotation (Documentation(revisions="<html>
 <ul>

@@ -28,7 +28,7 @@ partial model PartialMovingBoundaryCell
     annotation (Dialog(tab="General",group="Void fraction",
                 enable = not useVoiFraMod));
   replaceable model VoidFractionModel =
-    Utilities.VoidFractions.Graeber2013
+    Utilities.VoidFractions.Sangi2015
     constrainedby BaseClasses.PartialVoidFraction
     "Model describing calculation of void fraction"
     annotation (Dialog(tab="General",group="Void fraction",
@@ -103,18 +103,46 @@ partial model PartialMovingBoundaryCell
   parameter Modelica.SIunits.AbsolutePressure pIni = 2e5
     "Start value of absolute pressure"
     annotation (Dialog(tab="Advanced",group="Initialisation"));
-  parameter Modelica.SIunits.SpecificEnthalpy dhIni = 0
+  parameter Modelica.SIunits.SpecificEnthalpy dhIni = 10
     "Difference between inlet and outlet enthalpies 
     (hInl = hOut+dh0 | hOut=hInl+dh0) at initialisation"
     annotation (Dialog(tab="Advanced",group="Initialisation"));
+
+  parameter Boolean useFixStaVal = false
+    "= true, if start values are fixed"
+    annotation (Dialog(tab="Advanced",group="Start values iteration"));
+  parameter Real dhSCTPdtIni(unit="J/(kg.s)") = 1e-5
+    "Guess value of dhSCTPdt"
+    annotation(Dialog(tab="Advanced",group="Start values iteration"));
+  parameter Real dhTPSHtIni(unit="J/(kg.s)") = 1e-5
+    "Guess value of dhTPSHdt"
+    annotation(Dialog(tab="Advanced",group="Start values iteration"));
+  parameter Real dhOutDesdtIni(unit="J/(kg.s)") = 1e-5
+    "Guess value of dhOutDesdt"
+    annotation(Dialog(tab="Advanced",group="Start values iteration"));
+  parameter Real dlenSCdtIni(unit="1/s") = 1e-5
+    "Guess value of dtlenSCdt"
+    annotation(Dialog(tab="Advanced",group="Start values iteration"));
+  parameter Real dlenTPdtIni(unit="1/s") = 1e-5
+    "Guess value of dlenTPdt"
+    annotation(Dialog(tab="Advanced",group="Start values iteration"));
   parameter Medium.MassFlowRate m_flow_startInl = 0.5*m_flow_nominal
-    "Guess value of m_flow_inl = port_a.m_flow"
-    annotation(Dialog(tab="Advanced",group="Initialisation"));
+    "Guess value of m_flow_startInl"
+    annotation(Dialog(tab="Advanced",group="Start values iteration"));
+  parameter Medium.MassFlowRate m_flow_startSCTP = 0.5*m_flow_nominal
+    "Guess value of m_flow_startSCTP"
+    annotation(Dialog(tab="Advanced",group="Start values iteration"));
+  parameter Medium.MassFlowRate m_flow_startTPSH = 0.5*m_flow_nominal
+    "Guess value of m_flow_startTPSH"
+    annotation(Dialog(tab="Advanced",group="Start values iteration"));
+  parameter Medium.MassFlowRate m_flow_startOut = 0.5*m_flow_nominal
+    "Guess value of m_flow_startOut"
+    annotation(Dialog(tab="Advanced",group="Start values iteration"));
 
   parameter Real lenMin(unit="1") = 1e-5
     "Minimum length of a control volume required to keep it activated"
     annotation(Dialog(tab="Advanced",group="Convergence"));
-  parameter Real tauVoiFra(unit="s") = 15
+  parameter Real tauVoiFra(unit="s") = 125
     "Time constant to describe convergence of void fraction if flow state 
     changes"
     annotation(Dialog(tab="Advanced",group="Convergence"));
@@ -161,6 +189,10 @@ partial model PartialMovingBoundaryCell
   Modelica.Blocks.Interfaces.RealOutput AlpThrSH(unit = "W/(m2.K)")
     "Dummy block used for transmission of coefficient of heat transfer of the
     superheated regime if its model is conditionally removed";
+
+  Modelica.Blocks.Interfaces.RealOutput VoiFraIntThr(unit = "1")
+    "Dummy block used for transmission of total void fraction of the
+    two-phase regime if its model is conditionally removed";
 
   Modelica.Blocks.Interfaces.RealOutput VoiFraThr(unit = "1")
     "Dummy block used for transmission of void fraction of the

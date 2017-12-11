@@ -11,22 +11,44 @@ partial model PartialVoidFraction
    annotation(Dialog(tab="General",group="General"),
               choicesAllMatching=true);
 
+  // Definition of parameters
+  //
+  parameter Real tauVoiFra(unit="s") = 125
+    "Time constant to describe convergence of void fraction if flow state 
+    changes"
+    annotation(Dialog(tab="General",group="General"));
+
   // Definition of variables describing thermodynamic states
   //
+  Utilities.Interfaces.ModeCVInput modCV
+    "Current mode of the control volumes"
+    annotation(Dialog(tab="General",group="Inputs"));
+
   input Modelica.SIunits.AbsolutePressure p
-    "Current pressure";
+    "Current pressure"
+    annotation(Dialog(tab="General",group="Inputs"));
   input Modelica.SIunits.SpecificEnthalpy hSCTP
     "Current specific enthalpy at the boundary between the supercooled and
-    two-phase regime";
+    two-phase regime"
+    annotation(Dialog(tab="General",group="Inputs"));
   input Modelica.SIunits.SpecificEnthalpy hTPSH
     "Current specific enthalpy at the boundary between the two-phase and 
-    superheated regime";
+    superheated regime"
+    annotation(Dialog(tab="General",group="Inputs"));
 
   // Definition of outputs
   //
-  Modelica.Blocks.Interfaces.RealOutput voiFra(unit="1")
+  Modelica.Blocks.Interfaces.RealOutput voiFraInt(unit="1")
     "Current void fraction calculated by the model";
+
+  Modelica.Blocks.Interfaces.RealOutput voiFra(unit="1")
+    "Current void fraction calculated by integration";
   Modelica.Blocks.Interfaces.RealOutput voiFra_der(unit="1/s")
+    "Current derivative of the void fraction wrt. time calculated by the model";
+
+  // Definition of variables used internally
+  //
+  Real voiFraInt_der(unit="1/s")
     "Current derivative of the void fraction wrt. time calculated by the model";
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={

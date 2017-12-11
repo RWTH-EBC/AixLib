@@ -208,25 +208,25 @@ equation
   SCTPSH_TPSH = (hInlDes>hLiq+dhMin_SCTPSH_TPSH) or (lenCV[1]<lenMin_SCTPSH_TPSH)
     "Boolean checking condition of switiching from SCTPSH to TPSH";
 
-  SCTP_SCTPSH = (hOutDes>hVap+dhMin_SCTP_SCTPSH)
-    "Boolean checking condition of switiching from SCTP to SCTPSH";
-  SCTP_SC = (hOutDes<hLiq-dhMin_SCTP_SC) or (lenCV[2]<lenMin_SCTP_SC)
+  SCTP_SCTPSH = (hOutDes>hVap-dhMin_SCTP_SCTPSH)
+    "Boolean checking condition of switiching from SCTP to SCTPSH";                //valid
+  SCTP_SC = (hOutDes<hLiq+dhMin_SCTP_SC) or (lenCV[2]<lenMin_SCTP_SC)
     "Boolean checking condition of switiching from SCTP to SC";
   SCTP_TP = (hInlDes>hLiq+dhMin_SCTP_TP) or (lenCV[1]<lenMin_SCTP_TP)
     "Boolean checking condition of switiching from SCTP to TP";
 
   TPSH_SCTPSH = (hInlDes<hLiq-dhMin_TPSH_SCTPSH)
     "Boolean checking condition of switiching from TPSH to SCTPSH";
-  TPSH_TP = (hOutDes<hVap-dhMin_TPSH_TP) or (lenCV[3]<lenMin_TPSH_TP)
+  TPSH_TP = (hOutDes<hVap+dhMin_TPSH_TP) or (lenCV[3]<lenMin_TPSH_TP)
     "Boolean checking condition of switiching from TPSH to TP";
   TPSH_SH = (hInlDes>hVap+dhMin_TPSH_SH) or (lenCV[2]<lenMin_TPSH_SH)
     "Boolean checking condition of switiching from TPSH to SH";
 
   SC_SCTP = (hOutDes>hLiq+dhMin_SC_SCTP)
-    "Boolean checking condition of switiching from SC to SCTP";
+    "Boolean checking condition of switiching from SC to SCTP";                    //valid
   TP_SCTP = (hInlDes<hLiq-dhMin_TP_SCTP)
     "Boolean checking condition of switiching from TP to SCTP";
-  TP_TPSH = (hOutDes>hVap+dhMin_TP_TPSH)
+  TP_TPSH = (hOutDes>hVap-dhMin_TP_TPSH)
     "Boolean checking condition of switiching from TP to TPSH";
   SH_TPSH = (hInlDes<hVap-dhMin_SH_TPSH)
     "Boolean checking condition of switiching from SH to TPSH";
@@ -288,8 +288,8 @@ equation
         /* Switching from SCTP to SC*/
         modCVInt = Types.ModeCV.SC;
         hInlDesIni = hInlDes;
-        hOutDesIni = hLiq-dhMin_SCTP_SC;
-        hSCTPIni = hOutDesIni;
+        hOutDesIni = hLiq-2*dhMin_SCTP_SC;
+        hSCTPIni = hLiq;
         hTPSHIni = hOutDesIni;
         TWalTPIni = TWalTP;
         lenSCIni = 1-2*lenMin_SCTP_SC;
@@ -298,9 +298,9 @@ equation
 
       else
         /* Switching from SCTP to SCTPSH*/
-        modCVInt = Types.ModeCV.SCTPSH;
+        modCVInt = Types.ModeCV.SCTPSH;                                          //valid
         hInlDesIni = hInlDes;
-        hOutDesIni = hVap+dhMin_SCTP_SCTPSH;
+        hOutDesIni = hVap+2*dhMin_SCTP_SCTPSH;
         hSCTPIni = hLiq;
         hTPSHIni = hVap;
         TWalTPIni = TWalTP;
@@ -375,6 +375,7 @@ equation
        end if;
     elseif pre(modCVInt)==Types.ModeCV.SC then
         /* Switching from SC to SCTP*/
+                                                                                //valid
       modCVInt = Types.ModeCV.SCTP;
       hInlDesIni = hInlDes;
       hOutDesIni = hLiq+dhMin_SC_SCTP;

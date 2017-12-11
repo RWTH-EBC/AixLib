@@ -1,16 +1,18 @@
 within AixLib.Fluid.HeatExchangers.MovingBoundaryHeatExchangers.Validation.MovingBoundaryCells.SingleStates;
-model EvaporatorSC
+model EvaporatorSCTP
   "Validation model to check a moving boundary cell of an evaporator"
   extends BaseExample(
     redeclare package Medium =
         Modelica.Media.R134a.R134a_ph,
-    gua(modCVPar=Utilities.Types.ModeCV.SC,
+    gua(modCVPar=Utilities.Types.ModeCV.TP,
         useFixModCV=false),
     sin(use_p_in=true),
     movBouCel(tauVoiFra=125,
-      useVoiFraMod=true),
+      useVoiFraMod=true,
+      dhIni=50e3),
     trapTemp(amplitude=5,
-      offset=263.15));
+      offset=263.15),
+    ramEnt(offset=275e3));
 
   extends Modelica.Icons.Example;
   // WorkingVersion.Media.Refrigerants.R134a.R134a_IIR_P1_395_T233_455_Horner
@@ -23,4 +25,4 @@ model EvaporatorSC
   </li>
 </ul>
 </html>"));
-end EvaporatorSC;
+end EvaporatorSCTP;
