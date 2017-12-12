@@ -31,8 +31,7 @@ model ModularExpansionValvesPressureDifference
     use_T=true,
     nPorts=1,
     p=pInl,
-    T=TInl)
-    "Source of constant pressure and temperature"
+    T=TInl) "Source of constant pressure and temperature"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-40,70})));
@@ -40,7 +39,7 @@ model ModularExpansionValvesPressureDifference
     redeclare package Medium = Medium,
     nVal=nVal,
     redeclare model SimpleExpansionValve =
-        SimpleExpansionValves.IsothermalExpansionValve,
+        SimpleExpansionValves.IsenthalpicExpansionValve,
     show_parVal=false,
     show_parCon=false,
     useInpFil={true,true,true},
@@ -48,7 +47,7 @@ model ModularExpansionValvesPressureDifference
     risTim={0.25,0.25,0.5},
     useExt=true,
     redeclare model FlowCoefficient =
-        Utilities.FlowCoefficient.ConstantFlowCoefficient,
+        Utilities.FlowCoefficient.SpecifiedFlowCoefficients.ConstantFlowCoefficient,
     redeclare model ModularController =
         Controls.HeatPump.ModularHeatPumps.ModularExpansionValveController)
     "Modular expansion valves in parallel" annotation (Placement(transformation(

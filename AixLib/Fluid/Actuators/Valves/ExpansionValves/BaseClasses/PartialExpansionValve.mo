@@ -43,7 +43,8 @@ partial model PartialExpansionValve
   // Definition of model describing flow coefficient
   //
   replaceable model FlowCoefficient =
-    Utilities.FlowCoefficient.ConstantFlowCoefficient constrainedby
+    Utilities.FlowCoefficient.SpecifiedFlowCoefficients.ConstantFlowCoefficient
+                                                      constrainedby
     PartialFlowCoefficient
     "Model that describes the calculation of the flow coefficient"
     annotation(choicesAllMatching=true,

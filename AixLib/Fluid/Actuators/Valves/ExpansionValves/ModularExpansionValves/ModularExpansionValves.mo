@@ -34,13 +34,17 @@ approaches and parameterisation:
 </p>
 <ul>
 <li>
-<a href=\"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.SimpleExpansionValves.IsothermalExpansionValve\">
-AixLib.Fluid.Actuators.Valves.ExpansionValves.SimpleExpansionValves.IsothermalExpansionValve</a>.
+<a href=\"modelica://AixLib.Fluid.Actuators.Valves.ExpansionValves.SimpleExpansionValves.IsenthalpicExpansionValve\">
+AixLib.Fluid.Actuators.Valves.ExpansionValves.SimpleExpansionValves.IsenthalpicExpansionValve</a>.
 </li>
 <li>
 <a href=\"modelica://AixLib.Controls.HeatPump.ModularHeatPumps.ModularExpansionValveController\">
 AixLib.Controls.HeatPump.ModularHeatPumps.ModularExpansionValveController</a>.
 </li>
 </ul>
-</html>"));
+</html>"),
+  Diagram(graphics={Line(points={{-100,0},{-10,0}},color={0,127,255}),
+                    Line(points={{10,0},{100,14}}, color={0,127,255}),
+                    Line(points={{10,0},{100,-14}},color={0,127,255}),
+                    Line(points={{10,0},{100,0}},  color={0,127,255})}));
 end ModularExpansionValves;

@@ -36,7 +36,7 @@ model ExpansionValveMassFlowRate
     offset=0.7)
     "Input signal to prediscribe expansion valve's opening"
     annotation (Placement(transformation(extent={{-80,40},{-60,60}})));
-  SimpleExpansionValves.IsothermalExpansionValve linearValve(
+  SimpleExpansionValves.IsenthalpicExpansionValve linearValve(
     redeclare package Medium = Medium,
     m_flow_small=1e-6,
     m_flow_nominal=m_flow_nominal,
@@ -50,7 +50,7 @@ model ExpansionValveMassFlowRate
     risTim=0.25,
     dpNom=1000000,
     redeclare model FlowCoefficient =
-        Utilities.FlowCoefficient.R407c.Poly_R407c_EEV_18)
+        Utilities.FlowCoefficient.SpecifiedFlowCoefficients.Poly_R407c_EEV_18)
     "Simple isothermal valve"
     annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
   AixLib.Fluid.FixedResistances.PressureDrop simplePipe(

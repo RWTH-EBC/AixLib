@@ -459,10 +459,10 @@ equation
 
   mTan = dTan*VTanInn "Basic relationship";
   mTan = mLiq + mVap  "Converstion of mass";
-  VLiq = smooth(0, noEvent(if (quaTan > 0.0 and quaTan < 1.0) then
+  VLiq = smooth(1, noEvent(if (quaTan > 0.0 and quaTan < 1.0) then
     mTan*(1-quaTan)/dLiq else if (quaTan >= 1.0) then 0 else VTanInn))
     "Volume of liquid phase depending on tank's actual quality";
-  mVap = smooth(0, noEvent(if (quaTan > 0.0 and quaTan < 1.0) then
+  mVap = smooth(1, noEvent(if (quaTan > 0.0 and quaTan < 1.0) then
     mTan*quaTan else if (quaTan >= 1.0) then mTan else 0.0))
     "Mass of vapour phase depending on tank's actual quality";
   /*The calculation procedure of the phases' masses is conducted as presented
@@ -479,7 +479,7 @@ equation
   0 = port_a.p - port_b.p "Assuming thermodynamic equilibrium";
 
   hInn = actualStream(port_a.h_outflow);
-  port_a.h_outflow = smooth(0,noEvent(if (levTan >= 1-eps) or (levTan <= eps)
+  port_a.h_outflow = smooth(1,noEvent(if (levTan >= 1-eps) or (levTan <= eps)
     or (pTriCri>=1) then hTan else hVap))
     "Check relative tank level and set specific enthalpy at tank's inlet";
   /*If flow direction identical to design direction, the inlet specific
@@ -487,7 +487,7 @@ equation
     vapour state or mean enthalpy is forced.
   */
   hOut = actualStream(port_b.h_outflow);
-  port_b.h_outflow = smooth(0,noEvent(if (levTan >= 1-eps) or (levTan <= eps)
+  port_b.h_outflow = smooth(1,noEvent(if (levTan >= 1-eps) or (levTan <= eps)
     or (pTriCri>=1) then hTan else hLiq))
     "Check relative tank level and set specific enthalpy at tank's outlet";
   /*If flow direction identical to design direction, the outlet specific

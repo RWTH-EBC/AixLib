@@ -11,7 +11,7 @@ partial model PartialModularExpansionVavles
   // Definition of replaceable expansion valve models
   //
   replaceable model SimpleExpansionValve =
-    SimpleExpansionValves.IsothermalExpansionValve
+    SimpleExpansionValves.IsenthalpicExpansionValve
     constrainedby PartialExpansionValve
     "Model of simple expansion valve"
     annotation (choicesAllMatching=true,
@@ -69,7 +69,7 @@ partial model PartialModularExpansionVavles
                HideResult=not show_parVal);
 
   replaceable model FlowCoefficient =
-    Utilities.FlowCoefficient.ConstantFlowCoefficient
+    Utilities.FlowCoefficient.SpecifiedFlowCoefficients.ConstantFlowCoefficient
     constrainedby BaseClasses.PartialFlowCoefficient
     "Model that describes the calculation of the flow coefficient"
     annotation(choicesAllMatching=true,
@@ -217,8 +217,7 @@ partial model PartialModularExpansionVavles
   // Definition of connectors
   //
   Controls.Interfaces.ModularHeatPumpControlBus dataBus(
-    final nVal=nVal)
-    "Data bus connector"
+    final nVal=nVal) "Data bus connector"
     annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
 
 
@@ -231,14 +230,16 @@ equation
 
   // Connect data bus and further control signals
   //
-  for i in 1:nVal loop
-    expValCon.manVar[i] = modExpVal[i].manVarVal;
-    modExpVal[i].curManVarVal = expValCon.curManVar[i];
-  end for;
-  connect(dataBus, expValCon.dataBus) annotation (Line(
-      points={{0,-100},{0,-78}},
-      color={255,204,51},
-      thickness=0.5));
+  connect(expValCon.manVar, modExpVal.manVarVal)
+    annotation (Line(points={{-6,-56.8},{-6,-14},
+                {-5,-14},{-5,-10.6}}, color={0,0,127}));
+  connect(modExpVal.curManVarVal, expValCon.curManVar)
+    annotation (Line(points={{5.1,-10.5},{5.1,-13.25},
+                {6,-13.25},{6,-56.8}}, color={0,0,127}));
+  connect(dataBus, expValCon.dataBus)
+    annotation (Line(points={{0,-100},{0,-78}},
+                color={255,204,51},
+                thickness=0.5));
 
   annotation (Icon(graphics={
         Polygon(

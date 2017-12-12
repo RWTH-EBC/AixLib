@@ -77,7 +77,7 @@ equation
     P[3] = (Medium.fluidConstants[1].criticalTemperature-273.15)/
       max((satInl.Tsat - Medium.temperature(staInl)),0.01)
       "Degree of subooling";
-    P[4] = Medium.density(staInl)/Medium.density(staOut)
+    P[4] = Medium.bubbleDensity(satInl)/Medium.density(staOut)
       "Density at valve's inlet and at valve's outlet";
     P[5] = (Medium.bubbleDensity(satOut)/Medium.density(staOut)- 1)/
       (Medium.bubbleDensity(satOut)/Medium.dewDensity(satOut) - 1)

@@ -71,7 +71,7 @@ equation
     */
     P[1] = opening*AVal
       "Actual coss-sectional flow area";
-    P[2] = Medium.density(staInl)
+    P[2] = Medium.bubbleDensity(satInl)
       "Density at valve's inlet";
     P[3] = Medium.density(staOut)
       "Density at valve's outlet";
