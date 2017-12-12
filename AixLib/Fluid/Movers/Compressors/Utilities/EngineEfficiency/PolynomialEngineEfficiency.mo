@@ -78,49 +78,35 @@ equation
 
   elseif (polyMod == Types.EnginePolynomialModels.Engelpracht2017) then
     /*Polynomial approach presented by Engelpracht (2017):
-      etaEng = a1 + a2*piPre + a3*piPre^2 + a4*piPre^3 + 
-               a5*rotSpe + a6*rotSpe^2 + a7*rotSpe^3 + a8*rotSpe^4 + a9*rotSpe^5 + 
-               a10*rotSpe*piPre + a11*rotSpe*piPre^2 + a12*rotSpe*piPre^3 + 
-               a13*rotSpe^2*piPre + a14*rotSpe^2*piPre^2 + a15*rotSpe^2*piPre^3 + 
-               a16*rotSpe^3*piPre + a17*rotSpe^3*piPre^2 + 
-               a18*rotSpe^4*piPre
+      etaEng = a1 + a2*piPre + a3*rotSpe + a4*piPre^2 + 
+               a5*rotSpe*piPre + a6*rotSpe^2 + a7*piPre^2*rotSpe + 
+               a8*piPre*rotSpe^2 + a9*rotSpe^3 + a10*rotSpe^2*piPre^2 + 
+               a11*rotSpe^3*piPre + a12*rotSpe^4
     */
     p[1] = 1
       "First coefficient";
     p[2] = piPre
       "Second coefficient";
-    p[3] = piPre^2
+    p[3] = rotSpe
       "Third coefficient";
-    p[4] = piPre^3
+    p[4] = piPre^2
       "Fourth coefficient";
-    p[5] = rotSpe
+    p[5] = rotSpe*piPre
       "Fifth coefficient";
     p[6] = rotSpe^2
       "Sixth coefficient";
-    p[7] = rotSpe^3
+    p[7] = piPre^2*rotSpe
       "Seventh coefficient";
-    p[8] = rotSpe^4
+    p[8] = piPre*rotSpe^2
       "Eighth coefficient";
-    p[9] = rotSpe^5
+    p[9] = rotSpe^3
       "Ninth coefficient";
-    p[10] = rotSpe*piPre
+    p[10] = rotSpe^2*piPre^2
       "Tenth coefficient";
-    p[11] = rotSpe*piPre^2
+    p[11] = rotSpe^3*piPre
       "Eleventh coefficient";
-    p[12] = rotSpe*piPre^3
+    p[12] = rotSpe^4
       "Twelfth coefficient";
-    p[13] = rotSpe^2*piPre
-      "Thirteenth coefficient";
-    p[14] = rotSpe^2*piPre^2
-      "Fourteenth coefficient";
-    p[15] = rotSpe^2*piPre^3
-      "Fifteenth coefficient";
-    p[16] = rotSpe^3*piPre
-      "Sixteenth coefficient";
-    p[17] = rotSpe^3*piPre^2
-      "Seventeenth coefficient";
-    p[18] = rotSpe^4*piPre
-      "Eighteenth coefficient";
 
     corFac = {1,1}
       "No correction factors are needed";
@@ -195,10 +181,9 @@ a3*&pi;^2</code></td>
 </tr> 
 <tr>
 <td>Engelpracht2017</td> 
-<td><code>&eta;<sub>eng</sub> = a1 + a2*&pi; + a3*&pi;^2 + a4*&pi;^3 + 
-a5*n + a6*n^2 + a7*n^3 + a8*n^4 + a9*n^5 + a10*n*&pi; + a11*n*&pi;^2 + 
-a12*n*&pi;^3 + a13*n^2*&pi; + a14*n^2*&pi;^2 + a15*n^2*&pi;^3 + 
-a16*n^3*&pi; + a17*n^3*&pi;^2 + a18*n^4*&pi;</code></td> 
+<td><code>&eta;<sub>eng</sub> = a1 + a2*&pi; + a3*&pi;^2 + a4*n*&pi; + 
+a5*n^2 + a6*&pi;^2*n + a7*&pi;*n^2 + a8*n^3 + a9*&pi;^2n^2 + a10*&pi;*&pi;^3 
++ a11*n^4</code></td> 
 <td>Generic model</td> 
 <td><code>0 - 120</code></td> 
 <td><code>1 - 10</code></td> 

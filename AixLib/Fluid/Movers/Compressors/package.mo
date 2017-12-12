@@ -1,5 +1,6 @@
 within AixLib.Fluid.Movers;
 package Compressors "Package that contains models of different compressor types"
+  extends Modelica.Icons.Package;
 
 annotation (Icon(graphics={
         Ellipse(

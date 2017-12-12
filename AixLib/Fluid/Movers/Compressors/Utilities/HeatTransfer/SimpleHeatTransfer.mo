@@ -36,6 +36,7 @@ model SimpleHeatTransfer
     "Heat port to calculate heat losses"
     annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
 
+
 protected
   Medium.ThermodynamicState staInl
     "Thermodynamic state at inlet";
@@ -46,6 +47,7 @@ protected
     "Effective temperature difference between medium and wall";
   Modelica.SIunits.Power Q_flow
     "Heat flow exchanged between medium and heat port";
+
 
 equation
   // Calculation of thermodynamic states

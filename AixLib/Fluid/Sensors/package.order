@@ -7,6 +7,7 @@ LatentEnthalpyFlowRate
 MassFlowRate
 MassFraction
 MassFractionTwoPort
+ModularSensors
 PPM
 PPMTwoPort
 Pressure

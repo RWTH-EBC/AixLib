@@ -2,10 +2,6 @@ within AixLib.Fluid.Movers.Compressors;
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
 
-
-
-
-
   annotation(DocumentationClass = true, Documentation(info="<html>
 <p>
 This library provides different compressor models that are used, for

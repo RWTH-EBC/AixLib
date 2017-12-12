@@ -48,6 +48,7 @@ partial model PartialModularCompressors
     final kAMeaInl=kAMeaInl,
     final kAMeaOut=kAMeaOut,
     final kAMeaAmb=kAMeaAmb,
+    final iniTWal0=iniTWal0,
     final TWal0=TWal0,
     each final allowFlowReversal=allowFlowReversal,
     each final dp_start=dp_start,
@@ -116,7 +117,7 @@ partial model PartialModularCompressors
   // Definition of models describing efficiencies
   //
   replaceable model EngineEfficiency =
-    Utilities.EngineEfficiency.ConstantEfficiency
+    Utilities.EngineEfficiency.SpecifiedEfficiencies.ConstantEfficiency
     constrainedby Utilities.EngineEfficiency.PartialEngineEfficiency
     "Model that describes the calculation of the overall mechanic efficiency"
     annotation (Placement(
@@ -127,7 +128,7 @@ partial model PartialModularCompressors
       tab = "Compressors", group="Efficiencies"),
       HideResult=not show_parCom);
   replaceable model VolumetricEfficiency =
-    Utilities.VolumetricEfficiency.ConstantEfficiency
+    Utilities.VolumetricEfficiency.SpecifiedEfficiencies.ConstantEfficiency
     constrainedby Utilities.VolumetricEfficiency.PartialVolumetricEfficiency
     "Model that describes the calculation of the overall volumetric efficiency"
     annotation (Placement(
@@ -138,7 +139,7 @@ partial model PartialModularCompressors
       tab = "Compressors", group="Efficiencies"),
       HideResult=not show_parCom);
   replaceable model IsentropicEfficiency =
-    Utilities.IsentropicEfficiency.ConstantEfficiency
+    AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency.SpecifiedEfficiencies.ConstantEfficiency
     constrainedby Utilities.IsentropicEfficiency.PartialIsentropicEfficiency
     "Model that describes the calculation of the overall isentropic efficiency"
     annotation (Placement(
@@ -320,6 +321,12 @@ partial model PartialModularCompressors
     and ambient"
     annotation(Dialog(tab = "Pressure and heat losses",
                group="Heat losses - Thermal conductances"),
+               HideResult=not show_parCom);
+  parameter Boolean iniTWal0[nCom] = fill(true, nCom)
+    "= true, if wall is initialised at fixed temperature; Otherwise, steady state
+    initialisation"
+    annotation(Dialog(tab = "Pressure and heat losses",
+               group="Heat losses - Initialisation"),
                HideResult=not show_parCom);
   parameter Modelica.SIunits.Temperature TWal0[nCom] = fill(293.15, nCom)
     "Temperature of wall at initialisation"

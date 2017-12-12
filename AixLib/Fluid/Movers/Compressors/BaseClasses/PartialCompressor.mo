@@ -52,7 +52,7 @@ partial model PartialCompressor
   // Definition of models describing efficiencies
   //
   replaceable model EngineEfficiency =
-    Utilities.EngineEfficiency.ConstantEfficiency
+    Utilities.EngineEfficiency.SpecifiedEfficiencies.ConstantEfficiency
     constrainedby Utilities.EngineEfficiency.PartialEngineEfficiency
     "Model that describes the calculation of the overall mechanic efficiency"
     annotation (Placement(
@@ -62,7 +62,7 @@ partial model PartialCompressor
       Dialog(
       tab = "Efficiencies and similitude theory", group="Engine efficiency"));
   replaceable model VolumetricEfficiency =
-    Utilities.VolumetricEfficiency.ConstantEfficiency
+    Utilities.VolumetricEfficiency.SpecifiedEfficiencies.ConstantEfficiency
     constrainedby Utilities.VolumetricEfficiency.PartialVolumetricEfficiency
     "Model that describes the calculation of the overall volumetric efficiency"
     annotation (Placement(
@@ -72,7 +72,7 @@ partial model PartialCompressor
       Dialog(
       tab = "Efficiencies and similitude theory", group="Volumetric efficiency"));
   replaceable model IsentropicEfficiency =
-    Utilities.IsentropicEfficiency.ConstantEfficiency
+    AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency.SpecifiedEfficiencies.ConstantEfficiency
     constrainedby Utilities.IsentropicEfficiency.PartialIsentropicEfficiency
     "Model that describes the calculation of the overall isentropic efficiency"
     annotation (Placement(
@@ -87,21 +87,36 @@ partial model PartialCompressor
   parameter Real zetInl=
     ((1/0.59-1)^2+(1-(diameterInl/0.066)^2))*(1-(diameterInl/0.066)^2)
     "Pressure loss factor at compressor's inlet for flow of port_a -> port_b"
-    annotation(Dialog(tab = "Pressure losses",group="General"));
+    annotation(Dialog(tab = "Pressure losses",group="General",
+               enable = if (simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureLosses
+                        or simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureHeatLosses)
+                        then true else false));
   parameter Real zetOut=
     ((1/0.59-1)^2+(1-(diameterOut/0.1122)^2))*(1-(diameterOut/0.1122)^2)
     "Pressure loss factor at compressor's outlet for flow of port_a -> port_b"
-    annotation(Dialog(tab = "Pressure losses",group="General"));
+    annotation(Dialog(tab = "Pressure losses",group="General",
+               enable = if (simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureLosses
+                        or simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureHeatLosses)
+                        then true else false));
 
   parameter Boolean from_dp=false
     "= true, use m_flow = f(dp) else dp = f(m_flow)"
-    annotation(Dialog(tab = "Pressure losses",group="Advanced"));
+    annotation(Dialog(tab = "Pressure losses",group="Advanced",
+               enable = if (simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureLosses
+                        or simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureHeatLosses)
+                        then true else false));
   parameter Boolean homotopyInitialization=true
     "= true, use homotopy method  for initialisation"
-    annotation(Dialog(tab = "Pressure losses",group="Advanced"));
+    annotation(Dialog(tab = "Pressure losses",group="Advanced",
+               enable = if (simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureLosses
+                        or simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureHeatLosses)
+                        then true else false));
   parameter Boolean linearized=false
     "= true, use linear relation between m_flow and dp for any flow rate"
-    annotation(Dialog(tab = "Pressure losses",group="Advanced"));
+    annotation(Dialog(tab = "Pressure losses",group="Advanced",
+               enable = if (simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureLosses
+                        or simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureHeatLosses)
+                        then true else false));
 
   // Definition of parameters describing heat losses
   //
@@ -109,28 +124,48 @@ partial model PartialCompressor
     heaTraMod=Utilities.Types.HeatTransferModels.Simplified
     "Choose heat transfer model for heat losses at compressor's inlet 
     and outlet"
-    annotation(Dialog(tab = "Heat losses",group="General"));
+    annotation(Dialog(tab = "Heat losses",group="General",
+               enable = if (simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureHeatLosses)
+                        then true else false));
   parameter Modelica.SIunits.Mass mWal=2.5
     "Mass of the fictitious wall"
-    annotation(Dialog(tab = "Heat losses",group="Geometry"));
+    annotation(Dialog(tab = "Heat losses",group="Geometry",
+               enable = if (simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureHeatLosses)
+                        then true else false));
   parameter Modelica.SIunits.SpecificHeatCapacity cpWal=450
     "Specific heat capacity of the fictitious wall"
-    annotation(Dialog(tab = "Heat losses",group="Geometry"));
+    annotation(Dialog(tab = "Heat losses",group="Geometry",
+               enable = if (simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureHeatLosses)
+                        then true else false));
   parameter Modelica.SIunits.ThermalConductance kAMeaInl=25
     "Effective mean thermal conductance between medium and fictitious wall 
     at inlet"
-    annotation(Dialog(tab = "Heat losses",group="Thermal conductances"));
+    annotation(Dialog(tab = "Heat losses",group="Thermal conductances",
+               enable = if (simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureHeatLosses)
+                        then true else false));
   parameter Modelica.SIunits.ThermalConductance kAMeaOut=35
     "Effective mean thermal conductance between medium and fictitious wall 
     at outlet"
-    annotation(Dialog(tab = "Heat losses",group="Thermal conductances"));
+    annotation(Dialog(tab = "Heat losses",group="Thermal conductances",
+               enable = if (simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureHeatLosses)
+                        then true else false));
   parameter Modelica.SIunits.ThermalConductance kAMeaAmb=5
     "Effective mean thermal conductance coefficient between fictitious wall 
     and ambient"
-    annotation(Dialog(tab = "Heat losses",group="Thermal conductances"));
+    annotation(Dialog(tab = "Heat losses",group="Thermal conductances",
+               enable = if (simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureHeatLosses)
+                        then true else false));
+  parameter Boolean iniTWal0=true
+    "= true, if wall is initialised at fixed temperature; Otherwise, steady state
+    initialisation"
+    annotation(Dialog(tab = "Heat losses",group="Initialisation",
+               enable = if (simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureHeatLosses)
+                        then true else false));
   parameter Modelica.SIunits.Temperature TWal0=293.15
     "Temperature of wall at initialisation"
-    annotation(Dialog(tab = "Heat losses",group="Initialisation"));
+    annotation(Dialog(tab = "Heat losses",group="Initialisation",
+               enable = if (simCom == Utilities.Types.SimpleCompressor.RotaryCompressorPressureHeatLosses)
+                        then true else false));
 
   // Definition of parameters deschribing assumptions
   //
@@ -229,7 +264,7 @@ partial model PartialCompressor
   /*To enable propagation of parameters, the compression process is introduced
     as a replaceable model and its instance propagates all parameters
     required.
-    */
+  */
 
   // Definition of connectors
   //

@@ -65,35 +65,6 @@ M. Engelpracht (2017): Development of modular and scalable simulation
 models for heat pumps and chillers considering various refrigerants.
 <i>Master Thesis</i>
 </p>
-<h4>References regarding isentropic efficiencies</h4>
-<p>
-J.H. Darr and R.R. Crawford (1992): 
-<a href=\"https://www.researchgate.net/publication/288676460_Semi-empirical_method_for_representing_domestic_refrigeratorfreezer_compressor_calorimeter_test_data\">
-Modeling of an Automotive Air Conditioning Compressor 
-Based on Experimental Data: ACRC Technical Report 14</a>. 
-Publisher: <i>Air Conditioning and Refrigeration Center. 
-College of Engineering. University of Illinois at 
-Urbana-Champaign.</i>
-</p>
-<p>
-F. Karlsson (2007): 
-<a href=\"https://www.sp.se/sv/units/risebuilt/energy/Documents/ETk/Karlsson_Capacity_control_residential_HP_heating_systems.pdf\">
-Capacity Control of Residential Heat Pump Heating Systems</a>. In: <i>PhD thesis</i>
-</p>
-<p>
-J.M. Mendoza-Miranda, A. Mota-Babiloni, J.J. Ram&iacute;rez-Minguela, 
-V.D. Mu&ntilde;oz-Carpio, M. Carrera-Rodr&iacute;guez, 
-J. Navarro-Esbr&iacute; and C. Salazar-Hern&aacute;ndez (2016): 
-<a href=\"http://www.sciencedirect.com/science/article/pii/S036054421631163X\">
-Comparative evaluation of R1234yf, R1234ze(E) and R450A as 
-alternatives to R134a in a variable speed reciprocating 
-compressor</a>. In: <i>Energy 114</i>, S. 753&ndash;766
-</p>
-<p>
-M. Engelpracht (2017): Development of modular and scalable simulation
-models for heat pumps and chillers considering various refrigerants.
-<i>Master Thesis</i>
-</p>
 <h4>References regarding volumetric efficiencies</h4>
 <p>
 J.H. Darr and R.R. Crawford (1992): 
@@ -148,6 +119,36 @@ Flow Air-conditioning System</a>. In: <i>IEA Heat Pump Conference 2017</i>
 D. Körner (2017): Development of dynamic compression heat pump models 
 to evaluate promising refrigerants considering legal regulations.
 <i>Master Thesis</i>
+</p>
+<p>
+M. Engelpracht (2017): Development of modular and scalable simulation
+models for heat pumps and chillers considering various refrigerants.
+<i>Master Thesis</i>
+</p>
+
+<h4>References regarding isentropic efficiencies</h4>
+<p>
+J.H. Darr and R.R. Crawford (1992): 
+<a href=\"https://www.researchgate.net/publication/288676460_Semi-empirical_method_for_representing_domestic_refrigeratorfreezer_compressor_calorimeter_test_data\">
+Modeling of an Automotive Air Conditioning Compressor 
+Based on Experimental Data: ACRC Technical Report 14</a>. 
+Publisher: <i>Air Conditioning and Refrigeration Center. 
+College of Engineering. University of Illinois at 
+Urbana-Champaign.</i>
+</p>
+<p>
+F. Karlsson (2007): 
+<a href=\"https://www.sp.se/sv/units/risebuilt/energy/Documents/ETk/Karlsson_Capacity_control_residential_HP_heating_systems.pdf\">
+Capacity Control of Residential Heat Pump Heating Systems</a>. In: <i>PhD thesis</i>
+</p>
+<p>
+J.M. Mendoza-Miranda, A. Mota-Babiloni, J.J. Ram&iacute;rez-Minguela, 
+V.D. Mu&ntilde;oz-Carpio, M. Carrera-Rodr&iacute;guez, 
+J. Navarro-Esbr&iacute; and C. Salazar-Hern&aacute;ndez (2016): 
+<a href=\"http://www.sciencedirect.com/science/article/pii/S036054421631163X\">
+Comparative evaluation of R1234yf, R1234ze(E) and R450A as 
+alternatives to R134a in a variable speed reciprocating 
+compressor</a>. In: <i>Energy 114</i>, S. 753&ndash;766
 </p>
 <p>
 M. Engelpracht (2017): Development of modular and scalable simulation

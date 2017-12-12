@@ -44,11 +44,11 @@ model ModularRotaryCompressor
     redeclare model SimpleCompressor =
         SimpleCompressors.RotaryCompressors.RotaryCompressor,
     redeclare model EngineEfficiency =
-        Utilities.EngineEfficiency.Generic.Poly_VarRef_VarDisVol_RotaryScroll,
+        Utilities.EngineEfficiency.SpecifiedEfficiencies.Generic_VarRef_VarDisVol_RotaryScroll,
     redeclare model VolumetricEfficiency =
-        Utilities.VolumetricEfficiency.Generic.Poly_VarRef_VarDisVol_RotaryScroll,
+        Utilities.VolumetricEfficiency.SpecifiedEfficiencies.Generic_VarRef_VarDisVol_RotaryScroll,
     redeclare model IsentropicEfficiency =
-        Utilities.IsentropicEfficiency.Generic.Poly_VarRef_VarDisVol_RotaryScroll,
+        AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency.SpecifiedEfficiencies.Generic_VarRef_VarDisVol_RotaryScroll,
     redeclare model ModularController =
         Controls.HeatPump.ModularHeatPumps.ModularCompressorController,
     useExt=false,

@@ -47,7 +47,7 @@ model ModularCompressorsSensors
 
   // Definition of submodels and connectors
   //
-  Utilities.ModularSensors modSen(
+  Sensors.ModularSensors modSen(
     redeclare final package Medium = Medium,
     final nPorts=nCom,
     final tau=tau,
@@ -57,9 +57,6 @@ model ModularCompressorsSensors
     final initType=initTypeSen,
     final T_start=T_start,
     final h_out_start=h_out_start,
-    each final dp_start=0,
-    final m_flow_start=m_flow_start,
-    each final dp_nominal=0,
     final m_flow_nominal=m_flow_nominal,
     final m_flow_small=1e-6*m_flow_nominal)
     "Model that contains different sensors located behind compressors"
@@ -156,5 +153,21 @@ sub-model describes the internal controller model.
           points={{60,2},{62,0},{68,6},{70,10},{66,8},{60,2}},
           lineColor={0,0,0},
           fillColor={0,0,0},
-          fillPattern=FillPattern.Solid)}));
+          fillPattern=FillPattern.Solid)}),
+        Diagram(graphics={        Line(points={{-100,0},{-10,0}},
+                        color={0,127,255}),
+                                  Line(points={{0,10},{0,100}},
+                        color={191,0,0}),
+                                  Line(points={{10,0},{28,4}},
+                        color={0,127,255}),
+                                  Line(points={{10,0},{28,-4}},
+                        color={0,127,255}),
+                                  Line(points={{10,0},{28,0}},
+                        color={0,127,255}),
+                                  Line(points={{48,4},{100,0}},
+                        color={0,127,255}),
+                                  Line(points={{48,-4},{100,0}},
+                        color={0,127,255}),
+                                  Line(points={{48,0},{100,0}},
+                        color={0,127,255})}));
 end ModularCompressorsSensors;

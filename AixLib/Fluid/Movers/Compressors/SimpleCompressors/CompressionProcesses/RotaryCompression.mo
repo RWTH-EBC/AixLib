@@ -12,7 +12,8 @@ equation
 
   // Calculation of energy balances
   //
-  hOutIse = Medium.isentropicEnthalpy(p_downstream=pOut, refState=staInl)
+  hOutIse = Medium.specificEnthalpy(Medium.setState_psX(p=pOut,
+    s=Medium.specificEntropy(staInl)))
     "Isentropic specific enthalpy at outlet";
   oveIseEff.etaIse*dh = dhIse "Specific enthalpy difference";
   dhIse = (hOutIse - hInl) "Isentropic specific enthalpy difference";
@@ -39,7 +40,7 @@ equation
 
   port_a.h_outflow = inStream(port_a.h_outflow)
     "Compressor behaves as perfect valve if flow is reserved";
-  port_b.h_outflow = smooth(0,noEvent(if m_flow > 0
+  port_b.h_outflow = smooth(1,noEvent(if m_flow > 0
     then hInl + dh else inStream(port_a.h_outflow)))
     "Compressor behaves as perfect valve if flow is reserved";
   /*It is assumed that the compressor works as perfectly closed valve if the 

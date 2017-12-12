@@ -36,7 +36,7 @@ partial model PartialCompression
   // Definition of models describing efficiencies
   //
   replaceable model EngineEfficiency =
-    Utilities.EngineEfficiency.ConstantEfficiency
+    Utilities.EngineEfficiency.SpecifiedEfficiencies.ConstantEfficiency
     constrainedby Utilities.EngineEfficiency.PartialEngineEfficiency
     "Model that describes the calculation of the overall mechanic efficiency"
     annotation (Placement(
@@ -46,7 +46,7 @@ partial model PartialCompression
       Dialog(
       tab = "Efficiencies and similitude theory", group="Engine efficiency"));
   replaceable model VolumetricEfficiency =
-    Utilities.VolumetricEfficiency.ConstantEfficiency
+    Utilities.VolumetricEfficiency.SpecifiedEfficiencies.ConstantEfficiency
     constrainedby Utilities.VolumetricEfficiency.PartialVolumetricEfficiency
     "Model that describes the calculation of the overall volumetric efficiency"
     annotation (Placement(
@@ -56,7 +56,7 @@ partial model PartialCompression
       Dialog(
       tab = "Efficiencies and similitude theory", group="Volumetric efficiency"));
   replaceable model IsentropicEfficiency =
-    Utilities.IsentropicEfficiency.ConstantEfficiency
+    Utilities.IsentropicEfficiency.SpecifiedEfficiencies.ConstantEfficiency
     constrainedby Utilities.IsentropicEfficiency.PartialIsentropicEfficiency
     "Model that describes the calculation of the overall isentropic efficiency"
     annotation (Placement(

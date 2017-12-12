@@ -1,8 +1,4 @@
 PartialVolumetricEfficiency
 PolynomialVolumetricEfficiency
 PowerVolumetricEfficiency
-ConstantEfficiency
-Generic
-ReciprocatingCompressors
-RotaryCompressors
-ScrollCompressors
+SpecifiedEfficiencies

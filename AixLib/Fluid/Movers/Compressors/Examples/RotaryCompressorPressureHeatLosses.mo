@@ -45,11 +45,11 @@ model RotaryCompressorPressureHeatLosses
     show_qua=true,
     useInpFil=true,
     redeclare model EngineEfficiency =
-        Utilities.EngineEfficiency.Generic.Poly_VarRef_VarDisVol_RotaryScroll,
+        Utilities.EngineEfficiency.SpecifiedEfficiencies.Generic_VarRef_VarDisVol_RotaryScroll,
     redeclare model VolumetricEfficiency =
-        Utilities.VolumetricEfficiency.Generic.Poly_VarRef_VarDisVol_RotaryScroll,
+        Utilities.VolumetricEfficiency.SpecifiedEfficiencies.Generic_VarRef_VarDisVol_RotaryScroll,
     redeclare model IsentropicEfficiency =
-        Utilities.IsentropicEfficiency.Generic.Poly_VarRef_VarDisVol_RotaryScroll,
+        AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency.SpecifiedEfficiencies.Generic_VarRef_VarDisVol_RotaryScroll,
     kAMeaInl=5,
     kAMeaOut=15,
     kAMeaAmb=3)
