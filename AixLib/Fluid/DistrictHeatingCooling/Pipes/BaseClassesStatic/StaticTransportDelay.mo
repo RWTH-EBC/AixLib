@@ -39,10 +39,10 @@ model StaticTransportDelay "Delay time for given current velocity"
 equation
   velocity = m_flow/(rho*(dh^2)/4*Modelica.Constants.pi);
 
-  tau = Modelica.Math.exp(length*(
+  tau = length*(
     AixLib.Utilities.Math.Functions.inverseXRegularized(
        x=velocity,
-       delta=0.01)));
+       delta=0.01));
   tauRev = tau;
 
   annotation (
