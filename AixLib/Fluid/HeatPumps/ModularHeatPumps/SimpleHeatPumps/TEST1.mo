@@ -15,7 +15,6 @@ model TEST1
     redeclare package Medium =
         Media.Refrigerants.R134a.R134a_IIR_P1_395_T233_455_Horner,
     calcProc=AixLib.Fluid.Actuators.Valves.ExpansionValves.Utilities.Types.CalcProc.flowCoefficient,
-
     redeclare model FlowCoefficient =
         Actuators.Valves.ExpansionValves.Utilities.FlowCoefficient.ConstantFlowCoefficient)
           annotation (Placement(transformation(
