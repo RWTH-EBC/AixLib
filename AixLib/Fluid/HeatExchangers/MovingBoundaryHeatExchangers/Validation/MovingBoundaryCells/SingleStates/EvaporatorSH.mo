@@ -1,7 +1,7 @@
 within AixLib.Fluid.HeatExchangers.MovingBoundaryHeatExchangers.Validation.MovingBoundaryCells.SingleStates;
 model EvaporatorSH
   "Validation model to check a moving boundary cell of an evaporator"
-  extends BaseExample(
+  extends BaseExampleEvaporator(
     redeclare package Medium =
         Modelica.Media.R134a.R134a_ph,
     gua(modCVPar=Utilities.Types.ModeCV.SH,
@@ -14,7 +14,7 @@ model EvaporatorSH
     ramEnt(offset=425e3));
 
   extends Modelica.Icons.Example;
-  // WorkingVersion.Media.Refrigerants.R134a.R134a_IIR_P1_395_T233_455_Horner
+
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
@@ -23,5 +23,5 @@ model EvaporatorSH
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/516\">issue 516</a>).
   </li>
 </ul>
-</html>"));
+</html>"), experiment(StopTime=6400));
 end EvaporatorSH;

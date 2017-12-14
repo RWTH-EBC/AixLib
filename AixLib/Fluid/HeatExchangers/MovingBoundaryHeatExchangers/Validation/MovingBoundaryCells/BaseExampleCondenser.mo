@@ -1,5 +1,5 @@
 within AixLib.Fluid.HeatExchangers.MovingBoundaryHeatExchangers.Validation.MovingBoundaryCells;
-model BaseExample
+model BaseExampleCondenser
   "This model is a base model for all example models of moving boundary cells"
 
   // Definition of the medium
@@ -33,9 +33,8 @@ model BaseExample
     nPorts=1)
     "Source that provides a constant mass flow rate with a prescribed specific
     enthalpy"
-    annotation (Placement(transformation(extent={{-60,-40},{-40,-20}})));
+    annotation (Placement(transformation(extent={{60,-40},{40,-20}})));
   Utilities.FluidCells.MovingBoundaryCell movBouCel(
-    appHX=Utilities.Types.ApplicationHX.Evaporator,
     geoCV(
       CroSecGeo=Utilities.Types.GeometryCV.Circular,
       nFloCha=50,
@@ -47,17 +46,18 @@ model BaseExample
     AlpTP=7500,
     AlpSH=2500,
     heaFloCal=Utilities.Types.CalculationHeatFlow.E_NTU,
-    pIni=pOut)
+    pIni=pOut,
+    appHX=AixLib.Fluid.HeatExchangers.MovingBoundaryHeatExchangers.Utilities.Types.ApplicationHX.Condenser)
     "Moving boundary cell of the working fluid"
     annotation (Placement(transformation(extent={{-10,-40},{10,-20}})));
   Sources.Boundary_ph sin(
     redeclare package Medium = Medium,
-    nPorts=1,
     use_p_in=true,
-    p=pOut)
+    p=pOut,
+    nPorts=1)
     "Sink that provides a constant pressure"
-    annotation (Placement(transformation(extent={{-10,10},{10,-10}},
-                rotation=180,origin={50,-30})));
+    annotation (Placement(transformation(extent={{10,10},{-10,-10}},
+                rotation=180,origin={-48,-30})));
   Utilities.Guard gua(
     useFixModCV=true,
     lenCV = movBouCel.lenOut,
@@ -76,19 +76,19 @@ model BaseExample
     offset=m_flow_nominal,
     height=m_flow_nominal/15)
     "Ramp to provide dummy signal formass flow rate at inlet"
-    annotation (Placement(transformation(extent={{-100,-20},{-80,0}})));
+    annotation (Placement(transformation(extent={{100,-20},{80,0}})));
    Modelica.Blocks.Sources.Ramp ramEnt(
     duration=6400,
     offset=175e3,
     height=-100e1)
     "Ramp to provide dummy signal for specific enthalpy at inlet"
-    annotation (Placement(transformation(extent={{-100,-50},{-80,-30}})));
+    annotation (Placement(transformation(extent={{100,-50},{80,-30}})));
    Modelica.Blocks.Sources.Ramp ramPre(
     duration=6400,
     height=-100e3,
     offset=pOut)
     "Ramp to provide dummy signal for pressure at outlet"
-    annotation (Placement(transformation(extent={{100,-20},{80,0}})));
+    annotation (Placement(transformation(extent={{-100,-20},{-80,0}})));
 
   Modelica.Blocks.Sources.Trapezoid trapTemp(
     amplitude=45,
@@ -103,7 +103,6 @@ model BaseExample
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature preTem
     "Dummy signal of temperature"
     annotation (Placement(transformation(extent={{-60,20},{-40,40}})));
-
 
 equation
   // Check if reinitialisation is necessary
@@ -132,20 +131,10 @@ equation
 
   // Connection of main components
   //
-  connect(sou.ports[1], movBouCel.port_a)
-    annotation (Line(points={{-40,-30},{-10,-30}},           color={0,127,255}));
-  connect(movBouCel.port_b, sin.ports[1])
-    annotation (Line(points={{10,-30},{40,-30}},          color={0,127,255}));
-
-  connect(ramMFlow.y, sou.m_flow_in)
-    annotation (Line(points={{-79,-10},{-72,-10},{-72,-22},{-60,-22}},
-                color={0,0,127}));
-  connect(ramEnt.y, sou.h_in)
-    annotation (Line(points={{-79,-40},{-72,-40},{-72,-26},{-62,-26}},
-                            color={0,0,127}));
-  connect(ramPre.y, sin.p_in)
-    annotation (Line(points={{79,-10},{74,-10},{74,-22},{62,-22}},
-                color={0,0,127}));
+  connect(sin.ports[1], movBouCel.port_a)
+    annotation (Line(points={{-38,-30},{-10,-30}}, color={0,127,255}));
+  connect(movBouCel.port_b, sou.ports[1])
+    annotation (Line(points={{10,-30},{40,-30}}, color={0,127,255}));
 
   // Connection of further components
   //
@@ -162,6 +151,15 @@ equation
   connect(preTem.port, movBouCel.heatPortTP)
     annotation (Line(points={{-40,30},{0,30},{0,-20}}, color={191,0,0}));
 
+  connect(ramMFlow.y, sou.m_flow_in)
+    annotation (Line(points={{79,-10},{71,-10},{71,-22},{60,-22}},
+                color={0,0,127}));
+  connect(ramEnt.y, sou.h_in)
+    annotation (Line(points={{79,-40},{71,-40},{71,-26},{62,-26}},
+                            color={0,0,127}));
+  connect(ramPre.y, sin.p_in)
+    annotation (Line(points={{-79,-10},{-72,-10},{-72,-22},{-60,-22}},
+                color={0,0,127}));
 
   annotation (Documentation(revisions="<html>
 <ul>
@@ -188,4 +186,4 @@ equation
         fillColor={215,215,215},
         fillPattern=FillPattern.Solid,
         rotation=45)}), experiment(StopTime=6400));
-end BaseExample;
+end BaseExampleCondenser;

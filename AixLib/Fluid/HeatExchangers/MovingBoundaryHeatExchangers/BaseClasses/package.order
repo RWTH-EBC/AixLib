@@ -3,3 +3,4 @@ PartialMovingBoundaryCell
 PartialSecondaryFluidCell
 PartialVoidFraction
 PartialWallCell
+PartialSimpleHeatExchanger

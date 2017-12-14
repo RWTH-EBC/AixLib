@@ -180,19 +180,19 @@ equation
 
   // Calculationg of mass balances
   //
-  mSC = dSC * geoCV.ACroSec*geoCV.l*lenInl[1]
+  mSC = dSC * geoCV.ACroSecFloCha*geoCV.l*lenInl[1]
     "Mass of the supercooled regime";
-  mTP = dTP * geoCV.ACroSec*geoCV.l*lenInl[2]
+  mTP = dTP * geoCV.ACroSecFloCha*geoCV.l*lenInl[2]
     "Mass of the two-phase regime";
-  mSH = dSH * geoCV.ACroSec*geoCV.l*lenInl[3]
+  mSH = dSH * geoCV.ACroSecFloCha*geoCV.l*lenInl[3]
     "Mass of the superheated regime";
 
   m_flow_SCTP = m_flow -
-    dSC*geoCV.ACroSec*geoCV.l*der(lenInl[1])
+    dSC*geoCV.ACroSecFloCha*geoCV.l*der(lenInl[1])
     "Mass flow rate flowing out of the supercooled regime and into the two-phase
     regime";
   m_flow_TPSH = m_flow -
-    dSH*geoCV.ACroSec*geoCV.l*(der(lenInl[1])+der(lenInl[2]))
+    dSH*geoCV.ACroSecFloCha*geoCV.l*(der(lenInl[1])+der(lenInl[2]))
     "Mass flow rate flowing out of the two-phase regime and into the superheated
     regime";
 

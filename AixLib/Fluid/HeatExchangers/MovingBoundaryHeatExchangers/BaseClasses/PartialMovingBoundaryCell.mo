@@ -147,6 +147,10 @@ partial model PartialMovingBoundaryCell
     changes"
     annotation(Dialog(tab="Advanced",group="Convergence"));
 
+  parameter Boolean calBalEqu = true
+    "= true, if balance equations are computed"
+    annotation (Dialog(tab="Advanced",group="Diagnostics"));
+
   // Definition of subcomponents and connectors
   //
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPortSC

@@ -15,7 +15,7 @@ model ChangingControlVolumes "Validation model to test the wall's energy balance
       dWal=8000,
       cpWal=485),
     tauTem=0.1,
-    iniSteSta=false,
+    iniSteSta=true,
     TSCIni=288.15,
     TTPIni=288.15,
     TSHIni=288.15)

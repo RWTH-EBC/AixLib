@@ -13,62 +13,62 @@ model Guard
     annotation (Dialog(tab="General",group="Void fraction",
                 enable = useFixModCV));
 
-  parameter Modelica.SIunits.SpecificEnthalpy dhMin_SCTPSH_SCTP = 10
+  parameter Modelica.SIunits.SpecificEnthalpy dhMin_SCTPSH_SCTP = 5
     "Threshold specific enthalpy of switching condition SCTPSH to SCTP"
     annotation (Dialog(tab="Convergence",group="Specific enthalpy"));
-  parameter Modelica.SIunits.SpecificEnthalpy dhMin_SCTPSH_TPSH = 10
+  parameter Modelica.SIunits.SpecificEnthalpy dhMin_SCTPSH_TPSH = 5
     "Threshold specific enthalpy of switching condition SCTPSH to TPSH"
     annotation (Dialog(tab="Convergence",group="Specific enthalpy"));
   parameter Modelica.SIunits.SpecificEnthalpy dhMin_SCTP_SCTPSH = 5
     "Threshold specific enthalpy of switching condition SCTP to SCTPSH"
     annotation (Dialog(tab="Convergence",group="Specific enthalpy"));
-  parameter Modelica.SIunits.SpecificEnthalpy dhMin_SCTP_SC = 10
+  parameter Modelica.SIunits.SpecificEnthalpy dhMin_SCTP_SC = 5
     "Threshold specific enthalpy of switching condition SCTP to SC"
     annotation (Dialog(tab="Convergence",group="Specific enthalpy"));
-  parameter Modelica.SIunits.SpecificEnthalpy dhMin_SCTP_TP = 10
+  parameter Modelica.SIunits.SpecificEnthalpy dhMin_SCTP_TP = 5
     "Threshold specific enthalpy of switching condition SCTP to TP"
     annotation (Dialog(tab="Convergence",group="Specific enthalpy"));
-  parameter Modelica.SIunits.SpecificEnthalpy dhMin_TPSH_SCTPSH = 10
+ parameter Modelica.SIunits.SpecificEnthalpy dhMin_TPSH_SCTPSH = 5
     "Threshold specific enthalpy of switching condition TPSH to SCTPSH"
     annotation (Dialog(tab="Convergence",group="Specific enthalpy"));
-  parameter Modelica.SIunits.SpecificEnthalpy dhMin_TPSH_TP = 10
+  parameter Modelica.SIunits.SpecificEnthalpy dhMin_TPSH_TP = 5
     "Threshold specific enthalpy of switching condition TPSH to TP"
     annotation (Dialog(tab="Convergence",group="Specific enthalpy"));
-  parameter Modelica.SIunits.SpecificEnthalpy dhMin_TPSH_SH = 10
+  parameter Modelica.SIunits.SpecificEnthalpy dhMin_TPSH_SH = 5
     "Threshold specific enthalpy of switching condition TPSH to SH"
     annotation (Dialog(tab="Convergence",group="Specific enthalpy"));
-  parameter Modelica.SIunits.SpecificEnthalpy dhMin_SC_SCTP = 0.1
+  parameter Modelica.SIunits.SpecificEnthalpy dhMin_SC_SCTP = 5
     "Threshold specific enthalpy of switching condition SC to SCTP"
     annotation (Dialog(tab="Convergence",group="Specific enthalpy"));
-  parameter Modelica.SIunits.SpecificEnthalpy dhMin_TP_SCTP = 10
+  parameter Modelica.SIunits.SpecificEnthalpy dhMin_TP_SCTP = 5
     "Threshold specific enthalpy of switching condition TP to SCTP"
     annotation (Dialog(tab="Convergence",group="Specific enthalpy"));
-  parameter Modelica.SIunits.SpecificEnthalpy dhMin_TP_TPSH = 10
+  parameter Modelica.SIunits.SpecificEnthalpy dhMin_TP_TPSH = 5
     "Threshold specific enthalpy of switching condition TP to TPSH"
     annotation (Dialog(tab="Convergence",group="Specific enthalpy"));
-  parameter Modelica.SIunits.SpecificEnthalpy dhMin_SH_TPSH = 10
+  parameter Modelica.SIunits.SpecificEnthalpy dhMin_SH_TPSH = 5
     "Threshold specific enthalpy of switching condition SH to TPSH"
     annotation (Dialog(tab="Convergence",group="Specific enthalpy"));
 
-  parameter Real lenMin = 1e-4
+  parameter Real lenMin = 1e-3
     "Threshold length of switching condition"
     annotation (Dialog(tab="Convergence",group="Length"));
   parameter Real lenMin_SCTPSH_SCTP = 1e-3
     "Threshold length of switching condition SCTPSH to SCTP"
     annotation (Dialog(tab="Convergence",group="Length"));
-  parameter Real lenMin_SCTPSH_TPSH = 1e-4
+  parameter Real lenMin_SCTPSH_TPSH = 1e-3
     "Threshold length of switching condition SCTPSH to TPSH"
     annotation (Dialog(tab="Convergence",group="Length"));
-  parameter Real lenMin_SCTP_SC = 1e-4
+  parameter Real lenMin_SCTP_SC = 1e-3
     "Threshold length of switching condition SCTP to SC"
     annotation (Dialog(tab="Convergence",group="Length"));
-  parameter Real lenMin_SCTP_TP = 1e-4
+  parameter Real lenMin_SCTP_TP = 1e-3
     "Threshold length of switching condition SCTP to TP"
     annotation (Dialog(tab="Convergence",group="Length"));
-  parameter Real lenMin_TPSH_TP = 1e-4
+  parameter Real lenMin_TPSH_TP = 1e-3
     "Threshold length of switching condition TPSH to TP"
     annotation (Dialog(tab="Convergence",group="Length"));
-  parameter Real lenMin_TPSH_SH = 1e-4
+  parameter Real lenMin_TPSH_SH = 1e-3
     "Threshold length of switching condition TPSH to SH"
     annotation (Dialog(tab="Convergence",group="Length"));
 
@@ -203,32 +203,32 @@ equation
 
   // Check if change of flow state is necessary
   //
-  SCTPSH_SCTP = (hOutDes<hVap-dhMin_SCTPSH_SCTP) or (lenCV[3]<lenMin_SCTPSH_SCTP)
+  SCTPSH_SCTP = (hOutDes<hVap+dhMin_SCTPSH_SCTP) or (lenCV[3]<lenMin_SCTPSH_SCTP)
     "Boolean checking condition of switiching from SCTPSH to SCTP";
-  SCTPSH_TPSH = (hInlDes>hLiq+dhMin_SCTPSH_TPSH) or (lenCV[1]<lenMin_SCTPSH_TPSH)
+  SCTPSH_TPSH = (hInlDes>hLiq-dhMin_SCTPSH_TPSH) or (lenCV[1]<lenMin_SCTPSH_TPSH)
     "Boolean checking condition of switiching from SCTPSH to TPSH";
 
   SCTP_SCTPSH = (hOutDes>hVap-dhMin_SCTP_SCTPSH)
-    "Boolean checking condition of switiching from SCTP to SCTPSH";                //valid
+    "Boolean checking condition of switiching from SCTP to SCTPSH";
   SCTP_SC = (hOutDes<hLiq+dhMin_SCTP_SC) or (lenCV[2]<lenMin_SCTP_SC)
     "Boolean checking condition of switiching from SCTP to SC";
-  SCTP_TP = (hInlDes>hLiq+dhMin_SCTP_TP) or (lenCV[1]<lenMin_SCTP_TP)
+  SCTP_TP = (hInlDes>hLiq-dhMin_SCTP_TP) or (lenCV[1]<lenMin_SCTP_TP)
     "Boolean checking condition of switiching from SCTP to TP";
 
-  TPSH_SCTPSH = (hInlDes<hLiq-dhMin_TPSH_SCTPSH)
+  TPSH_SCTPSH = (hInlDes<hLiq+dhMin_TPSH_SCTPSH)
     "Boolean checking condition of switiching from TPSH to SCTPSH";
   TPSH_TP = (hOutDes<hVap+dhMin_TPSH_TP) or (lenCV[3]<lenMin_TPSH_TP)
     "Boolean checking condition of switiching from TPSH to TP";
-  TPSH_SH = (hInlDes>hVap+dhMin_TPSH_SH) or (lenCV[2]<lenMin_TPSH_SH)
+  TPSH_SH = (hInlDes>hVap-dhMin_TPSH_SH) or (lenCV[2]<lenMin_TPSH_SH)
     "Boolean checking condition of switiching from TPSH to SH";
 
-  SC_SCTP = (hOutDes>hLiq+dhMin_SC_SCTP)
-    "Boolean checking condition of switiching from SC to SCTP";                    //valid
-  TP_SCTP = (hInlDes<hLiq-dhMin_TP_SCTP)
+  SC_SCTP = (hOutDes>hLiq-dhMin_SC_SCTP)
+    "Boolean checking condition of switiching from SC to SCTP";
+  TP_SCTP = (hInlDes<hLiq+dhMin_TP_SCTP)
     "Boolean checking condition of switiching from TP to SCTP";
   TP_TPSH = (hOutDes>hVap-dhMin_TP_TPSH)
     "Boolean checking condition of switiching from TP to TPSH";
-  SH_TPSH = (hInlDes<hVap-dhMin_SH_TPSH)
+  SH_TPSH = (hInlDes<hVap+dhMin_SH_TPSH)
     "Boolean checking condition of switiching from SH to TPSH";
 
   swiInt = (pre(modCVInt)==Types.ModeCV.SCTPSH and
@@ -250,7 +250,7 @@ equation
         /* Switching from SCTPSH to SCTP*/
         modCVInt = Types.ModeCV.SCTP;
         hInlDesIni = hInlDes;
-        hOutDesIni = hVap-dhMin_SCTPSH_SCTP;
+        hOutDesIni = hVap+dhMin_SCTPSH_SCTP;
         hSCTPIni = hLiq;
         hTPSHIni = hOutDesIni;
         TWalTPIni = TWalTP;
@@ -261,7 +261,7 @@ equation
       else
         /* Switching from SCTPSH to TPSH*/
         modCVInt = Types.ModeCV.TPSH;
-        hInlDesIni = hLiq+dhMin_SCTPSH_TPSH;
+        hInlDesIni = hLiq-dhMin_SCTPSH_TPSH;
         hOutDesIni = hOutDes;
         hSCTPIni = hInlDesIni;
         hTPSHIni = hVap;
@@ -275,7 +275,7 @@ equation
       if SCTP_TP then
         /* Switching from SCTP to TP*/
         modCVInt = Types.ModeCV.TP;
-        hInlDesIni = hLiq+dhMin_SCTP_TP;
+        hInlDesIni = hLiq-dhMin_SCTP_TP;
         hOutDesIni = hOutDes;
         hSCTPIni = hInlDesIni;
         hTPSHIni = hOutDesIni;
@@ -288,7 +288,7 @@ equation
         /* Switching from SCTP to SC*/
         modCVInt = Types.ModeCV.SC;
         hInlDesIni = hInlDes;
-        hOutDesIni = hLiq-2*dhMin_SCTP_SC;
+        hOutDesIni = hLiq+dhMin_SCTP_SC;
         hSCTPIni = hLiq;
         hTPSHIni = hOutDesIni;
         TWalTPIni = TWalTP;
@@ -298,9 +298,9 @@ equation
 
       else
         /* Switching from SCTP to SCTPSH*/
-        modCVInt = Types.ModeCV.SCTPSH;                                          //valid
+        modCVInt = Types.ModeCV.SCTPSH;
         hInlDesIni = hInlDes;
-        hOutDesIni = hVap+2*dhMin_SCTP_SCTPSH;
+        hOutDesIni = hVap-dhMin_SCTP_SCTPSH;
         hSCTPIni = hLiq;
         hTPSHIni = hVap;
         TWalTPIni = TWalTP;
@@ -314,7 +314,7 @@ equation
         /* Switching from TPSH to TP*/
         modCVInt = Types.ModeCV.TP;
         hInlDesIni = hInlDes;
-        hOutDesIni = hVap-dhMin_TPSH_TP;
+        hOutDesIni = hVap+dhMin_TPSH_TP;
         hSCTPIni = hInlDesIni;
         hTPSHIni = hOutDesIni;
         TWalTPIni = TWalTP;
@@ -325,7 +325,7 @@ equation
       elseif TPSH_SH then
         /* Switching from TPSH to SH*/
         modCVInt = Types.ModeCV.SH;
-        hInlDesIni = hVap+dhMin_TPSH_SH;
+        hInlDesIni = hVap-dhMin_TPSH_SH;
         hOutDesIni = hOutDes;
         hSCTPIni = hInlDesIni;
         hTPSHIni = hInlDesIni;
@@ -337,7 +337,7 @@ equation
       else
         /* Switching from TPSH to SCTPSH*/
         modCVInt = Types.ModeCV.SCTPSH;
-        hInlDesIni = hInlDes-dhMin_TPSH_SCTPSH;
+        hInlDesIni = hInlDes+dhMin_TPSH_SCTPSH;
         hOutDesIni = hOutDes;
         hSCTPIni = hLiq;
         hTPSHIni = hVap;
@@ -352,7 +352,7 @@ equation
         /* Switching from TP to TPSH*/
         modCVInt = Types.ModeCV.TPSH;
         hInlDesIni = hInlDes;
-        hOutDesIni = hVap+dhMin_TP_TPSH;
+        hOutDesIni = hVap-dhMin_TP_TPSH;
         hSCTPIni = hInlDesIni;
         hTPSHIni = hVap;
         TWalTPIni = TWalTP;
@@ -363,7 +363,7 @@ equation
       else
         /* Switching from TP to SCTP*/
         modCVInt = Types.ModeCV.SCTP;
-        hInlDesIni = hLiq-dhMin_TP_SCTP;
+        hInlDesIni = hLiq+dhMin_TP_SCTP;
         hOutDesIni = hOutDes;
         hSCTPIni = hLiq;
         hTPSHIni = hOutDesIni;
@@ -374,11 +374,10 @@ equation
 
        end if;
     elseif pre(modCVInt)==Types.ModeCV.SC then
-        /* Switching from SC to SCTP*/
-                                                                                //valid
+      /* Switching from SC to SCTP*/
       modCVInt = Types.ModeCV.SCTP;
       hInlDesIni = hInlDes;
-      hOutDesIni = hLiq+dhMin_SC_SCTP;
+      hOutDesIni = hLiq-dhMin_SC_SCTP;
       hSCTPIni = hLiq;
       hTPSHIni = hOutDesIni;
       TWalTPIni = TWalTP;
@@ -389,7 +388,7 @@ equation
     else
       /* Switching from SH to TPSH*/
       modCVInt = Types.ModeCV.TPSH;
-      hInlDesIni = hVap-dhMin_SH_TPSH;
+      hInlDesIni = hVap+dhMin_SH_TPSH;
       hOutDesIni = hOutDes;
       hSCTPIni = hInlDesIni;
       hTPSHIni = hVap;
