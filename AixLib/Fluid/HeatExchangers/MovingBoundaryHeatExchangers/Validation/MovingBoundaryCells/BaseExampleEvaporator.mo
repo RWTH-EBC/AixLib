@@ -34,7 +34,7 @@ model BaseExampleEvaporator
     "Source that provides a constant mass flow rate with a prescribed specific
     enthalpy"
     annotation (Placement(transformation(extent={{-60,-40},{-40,-20}})));
-  Utilities.FluidCells.MovingBoundaryCell movBouCel(
+  Utilities.FluidCells.EvaporatorCell movBouCel(
     appHX=Utilities.Types.ApplicationHX.Evaporator,
     geoCV(
       CroSecGeo=Utilities.Types.GeometryCV.Circular,
@@ -47,8 +47,10 @@ model BaseExampleEvaporator
     AlpTP=7500,
     AlpSH=2500,
     heaFloCal=Utilities.Types.CalculationHeatFlow.E_NTU,
-    pIni=pOut)
-    "Moving boundary cell of the working fluid"
+    pIni=pOut,
+    useVoiFra=false,
+    calBalEqu=false)
+               "Moving boundary cell of the working fluid"
     annotation (Placement(transformation(extent={{-10,-40},{10,-20}})));
   Sources.Boundary_ph sin(
     redeclare package Medium = Medium,
@@ -58,17 +60,16 @@ model BaseExampleEvaporator
     "Sink that provides a constant pressure"
     annotation (Placement(transformation(extent={{-10,10},{10,-10}},
                 rotation=180,origin={50,-30})));
-  Utilities.Guard gua(
+  Utilities.Guards.EvaporatorGuard gua(
     useFixModCV=true,
-    lenCV = movBouCel.lenOut,
-    hInlDes = movBouCel.hInlDes,
-    hOutDes = movBouCel.hOutDes,
-    hLiq = movBouCel.hLiq,
-    hVap = movBouCel.hVap,
-    voiFra = movBouCel.VoiFraThr,
+    lenCV=movBouCel.lenOut,
+    hInlDes=movBouCel.hInl,
+    hOutDes=movBouCel.hOut,
+    hLiq=movBouCel.hLiq,
+    hVap=movBouCel.hVap,
+    voiFra=movBouCel.VoiFraThr,
     modCVPar=Utilities.Types.ModeCV.SC,
-    TWalTP=273.15)
-    "Guard that prescribes current flow state"
+    TWalTP=273.15) "Guard that prescribes current flow state"
     annotation (Placement(transformation(extent={{100,20},{80,40}})));
 
    Modelica.Blocks.Sources.Ramp ramMFlow(
@@ -110,11 +111,11 @@ equation
   when gua.swi then
     if movBouCel.appHX==Utilities.Types.ApplicationHX.Evaporator then
       /* Evaporator - Design direction */
-      reinit(movBouCel.hOutDes,gua.hOutDesIni)
+      reinit(movBouCel.hOut,gua.hOutDesIni)
         "Reinitialisation of hOutDesDes";
     else
       /* Condenser - Reverse direction */
-      reinit(movBouCel.hInlDes,gua.hInlDesIni)
+      reinit(movBouCel.hInl,gua.hInlDesIni)
         "Reinitialisation of hInlDesDes";
     end if;
     reinit(movBouCel.hSCTP,gua.hSCTPIni)

@@ -1,20 +1,20 @@
-within AixLib.Fluid.HeatExchangers.MovingBoundaryHeatExchangers.Validation.MovingBoundaryCells.SingleStates;
-model EvaporatorSCTP
+within AixLib.Fluid.HeatExchangers.MovingBoundaryHeatExchangers.Validation.MovingBoundaryCells.SwitchingStates;
+model EvaporatorSC_SCTP_SCTPSC_SCTP_SC
   "Validation model to check a moving boundary cell of an evaporator"
   extends BaseExampleEvaporator(
     redeclare package Medium =
-      Modelica.Media.R134a.R134a_ph,
-    gua(modCVPar=Utilities.Types.ModeCV.SCTP,
-        useFixModCV=false),
+       Modelica.Media.R134a.R134a_ph,
+    gua(modCVPar=Utilities.Types.ModeCV.SC,
+      useFixModCV=false),
     sin(use_p_in=true),
     movBouCel(tauVoiFra=125,
-      dhIni=75e3,
-      calBalEqu=false,
-      useVoiFra=true,
-      useVoiFraMod=true),
-    trapTemp(offset=273.15, amplitude=1),
-    ramEnt(offset=175e3));
+      useVoiFra=false,
+      useVoiFraMod=false,
+      calBalEqu=false),
+    trapTemp(
+      offset=263.15, amplitude=45));
   extends Modelica.Icons.Example;
+  extends Modelica.Icons.UnderConstruction;
 
   annotation (Documentation(revisions="<html>
 <ul>
@@ -25,4 +25,4 @@ model EvaporatorSCTP
   </li>
 </ul>
 </html>"), experiment(StopTime=6400));
-end EvaporatorSCTP;
+end EvaporatorSC_SCTP_SCTPSC_SCTP_SC;

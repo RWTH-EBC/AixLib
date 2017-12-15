@@ -8,10 +8,10 @@ model CondenserSH
         useFixModCV=false),
     sin(use_p_in=true),
     movBouCel(tauVoiFra=125,
-      useVoiFraMod=true),
+      useVoiFraMod=true,
+      appHX=Utilities.Types.ApplicationHX.Condenser),
     trapTemp(amplitude=-25, offset=320.15),
     ramEnt(offset=425e3));
-
   extends Modelica.Icons.Example;
 
   annotation (Documentation(revisions="<html>

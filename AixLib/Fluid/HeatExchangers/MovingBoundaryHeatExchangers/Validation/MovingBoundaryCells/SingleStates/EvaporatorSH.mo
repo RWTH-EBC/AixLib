@@ -8,11 +8,11 @@ model EvaporatorSH
         useFixModCV=false),
     sin(use_p_in=true),
     movBouCel(tauVoiFra=125,
+      useVoiFra=true,
       useVoiFraMod=true),
     trapTemp(amplitude=25,
       offset=303.15),
     ramEnt(offset=425e3));
-
   extends Modelica.Icons.Example;
 
   annotation (Documentation(revisions="<html>

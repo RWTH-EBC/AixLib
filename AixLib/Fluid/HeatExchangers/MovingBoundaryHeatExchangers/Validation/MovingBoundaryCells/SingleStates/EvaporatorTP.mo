@@ -3,16 +3,16 @@ model EvaporatorTP
   "Validation model to check a moving boundary cell of an evaporator"
   extends BaseExampleEvaporator(
     redeclare package Medium =
-        Modelica.Media.R134a.R134a_ph,
+      Modelica.Media.R134a.R134a_ph,
     gua(modCVPar=Utilities.Types.ModeCV.TP,
         useFixModCV=false),
     sin(use_p_in=true),
     movBouCel(tauVoiFra=125,
-      useVoiFraMod=true,
-      dhIni=50e3),
+      dhIni=50e3,
+      useVoiFra=true,
+      useVoiFraMod=true),
     trapTemp(amplitude=5, offset=273.15),
     ramEnt(offset=275e3));
-
   extends Modelica.Icons.Example;
   extends  Modelica.Icons.UnderConstruction;
 

@@ -12,7 +12,6 @@ model CondenserSHTP
       dhIni=-150e3),
     trapTemp(amplitude=-25, offset=320.15),
     ramEnt(offset=425e3));
-
   extends Modelica.Icons.Example;
 
   annotation (Documentation(revisions="<html>

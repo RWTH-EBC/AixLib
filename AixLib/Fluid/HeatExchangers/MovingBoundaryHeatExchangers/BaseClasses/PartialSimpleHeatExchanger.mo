@@ -19,7 +19,7 @@ partial model PartialSimpleHeatExchanger
   // Definition of submodels describing cells
   //
   replaceable model MovingBoundaryCell =
-    Utilities.FluidCells.MovingBoundaryCell
+    Utilities.FluidCells.EvaporatorCell
     constrainedby PartialMovingBoundaryCell;
 
   replaceable model WallCell =
@@ -29,7 +29,7 @@ partial model PartialSimpleHeatExchanger
   replaceable model SecondaryFluidCell =
     Utilities.FluidCells.SecondaryFluidCell
     constrainedby PartialSecondaryFluidCell;
-  Utilities.Guard gua
+  Utilities.Guards.EvaporatorGuard gua
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
 
 
@@ -129,8 +129,8 @@ partial model PartialSimpleHeatExchanger
     "Choose the way of calculating the heat flow between the wall and medium";
   parameter Boolean allowFlowReversal=true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal";
-  parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate m_flow_nominal
-    =0.1 "Nominal mass flow rate";
+  parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate m_flow_nominal=
+     0.1 "Nominal mass flow rate";
   parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate m_flow_small=
       1e-6*movBouCell.m_flow_nominal
     "Small mass flow rate for regularization of zero flow";

@@ -4,14 +4,13 @@ model CondenserSC
   extends BaseExampleCondenser(
     redeclare package Medium =
         Modelica.Media.R134a.R134a_ph,
-    gua(useFixModCV=true, modCVPar=AixLib.Fluid.HeatExchangers.MovingBoundaryHeatExchangers.Utilities.Types.ModeCV.SC),
+    gua(useFixModCV=false, modCVPar=Utilities.Types.ModeCV.SC),
     sin(use_p_in=true),
     movBouCel(tauVoiFra=125,
       useVoiFraMod=true,
       dhIni=-150e3),
     trapTemp(amplitude=-25, offset=273.15),
     ramEnt(offset=195e3));
-
   extends Modelica.Icons.Example;
 
   annotation (Documentation(revisions="<html>

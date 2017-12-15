@@ -20,19 +20,23 @@ partial model PartialMovingBoundaryCell
 
   // Definition of parameters describing the void fraction
   //
-  parameter Boolean useVoiFraMod = true
-    "= true, if model is used to calculate void fraction"
+  parameter Boolean useVoiFra = false
+    "= true, if properties of two-phase regime are computed by void fraction"
     annotation (Dialog(tab="General",group="Void fraction"));
+  parameter Boolean useVoiFraMod = false
+    "= true, if model is used to calculate void fraction"
+    annotation (Dialog(tab="General",group="Void fraction",
+                enable = useVoiFra));
   parameter Real voiFraPar = 0.85
     "Constant void fraction if not calculated by model"
     annotation (Dialog(tab="General",group="Void fraction",
-                enable = not useVoiFraMod));
+                enable = (not useVoiFraMod) or (useVoiFra)));
   replaceable model VoidFractionModel =
     Utilities.VoidFractions.Sangi2015
     constrainedby BaseClasses.PartialVoidFraction
     "Model describing calculation of void fraction"
     annotation (Dialog(tab="General",group="Void fraction",
-                enable = useVoiFraMod),
+                enable = (not useVoiFraMod) or (useVoiFra)),
                 choicesAllMatching=true);
 
   // Definition of parameters describing the heat transfer calculations
@@ -117,7 +121,7 @@ partial model PartialMovingBoundaryCell
   parameter Real dhTPSHtIni(unit="J/(kg.s)") = 1e-5
     "Guess value of dhTPSHdt"
     annotation(Dialog(tab="Advanced",group="Start values iteration"));
-  parameter Real dhOutDesdtIni(unit="J/(kg.s)") = 1e-5
+  parameter Real dhOutdtIni(unit="J/(kg.s)") = 1e-5
     "Guess value of dhOutDesdt"
     annotation(Dialog(tab="Advanced",group="Start values iteration"));
   parameter Real dlenSCdtIni(unit="1/s") = 1e-5
@@ -125,6 +129,9 @@ partial model PartialMovingBoundaryCell
     annotation(Dialog(tab="Advanced",group="Start values iteration"));
   parameter Real dlenTPdtIni(unit="1/s") = 1e-5
     "Guess value of dlenTPdt"
+    annotation(Dialog(tab="Advanced",group="Start values iteration"));
+  parameter Real dlenSHdtIni(unit="1/s") = 1e-5
+    "Guess value of dlenSHdt"
     annotation(Dialog(tab="Advanced",group="Start values iteration"));
   parameter Medium.MassFlowRate m_flow_startInl = 0.5*m_flow_nominal
     "Guess value of m_flow_startInl"
@@ -204,6 +211,420 @@ partial model PartialMovingBoundaryCell
   Modelica.Blocks.Interfaces.RealOutput VoiFraDerThr(unit = "1/s")
     "Dummy block used for transmission of the derivative of void fraction of the
     two-phase regime if its model is conditionally removed";
+
+
+  // Definition of records describing thermodynamic states
+  //
+public
+  Medium.ThermodynamicState SC = Medium.setState_phX(p=p,h=hSC)
+    "Thermodynamic state of the supercooled regime"
+    annotation (Placement(transformation(extent={{-50,-8},{-30,12}})));
+  Medium.ThermodynamicState TP=Medium.setState_phX(p=p, h=hTP)
+    "Thermodynamic state of the two-phase regime"
+    annotation (Placement(transformation(extent={{-10,-8},{10,12}})));
+  Medium.ThermodynamicState SH = Medium.setState_phX(p=p,h=hSH)
+    "Thermodynamic state of the superheated regime"
+    annotation (Placement(transformation(extent={{30,-8},{50,12}})));
+  Medium.SaturationProperties TPSat=Medium.setSat_p(p=p)
+    "Thermodynamic state of the two-phase regime"
+    annotation (Placement(transformation(extent={{-10,-40},{10,-20}})));
+
+  // Definition of variables describing thermodynamic states
+  //
+public
+  Modelica.SIunits.AbsolutePressure p(stateSelect=StateSelect.prefer)
+    "Pressure of the working fluid (assumed to be constant)";
+
+  Modelica.SIunits.Temperature TInl = Medium.temperature_ph(p=p,h=hInl)
+    "Temperature at the inlet of design direction";
+  Modelica.SIunits.Temperature TSC = Medium.temperature(state=SC)
+    "Temperature of the supercooled regime";
+  Modelica.SIunits.Temperature TSCTP = Medium.temperature_ph(p=p,h=hSCTP)
+    "Temperature at the boundary between the supercooled and two-phase 
+    regime";
+  Modelica.SIunits.Temperature TTP = Medium.temperature(state=TP)
+    "Temperature of the two-phase regime";
+  Modelica.SIunits.Temperature TTPSH = Medium.temperature_ph(p=p,h=hTPSH)
+    "Temperature at the boundary between the two-phase and superheated 
+    regime";
+  Modelica.SIunits.Temperature TSH = Medium.temperature(state=SH)
+    "Temperature of the superheated regime";
+  Modelica.SIunits.Temperature TOut = Medium.temperature_ph(p=p,h=hOut)
+    "Temperature at the outlet of design direction";
+
+  Modelica.SIunits.Density dInlDes = Medium.density_ph(p=p,h=hInl)
+    "Density at the inlet of design direction";
+  Modelica.SIunits.Density dSC = Medium.density(state=SC)
+    "Density of the supercooled regime";
+  Modelica.SIunits.Density dSCTP = Medium.density_ph(p=p,h=hSCTP)
+    "Density at the boundary between the supercooled and two-phase 
+    regime";
+  Modelica.SIunits.Density dTP = Medium.density(state=TP)
+    "Density of the two-phase regime";
+  Modelica.SIunits.Density dTPSH = Medium.density_ph(p=p,h=hTPSH)
+    "Density at the boundary between the two-phase and superheated 
+    regime";
+  Modelica.SIunits.Density dSH = Medium.density(state=SH)
+    "Density of the superheated regime";
+  Modelica.SIunits.Density dOutDes = Medium.density_ph(p=p,h=hOut)
+    "Density at the outlet of design direction";
+
+  Modelica.SIunits.SpecificEnthalpy hInl(
+     stateSelect=if appHX==Utilities.Types.ApplicationHX.Evaporator then
+    StateSelect.avoid else StateSelect.prefer)
+    "Specific enthalpy at the inlet of design direction";
+  Modelica.SIunits.SpecificEnthalpy hSC
+    "Specific enthalpy of the supercooled regime";
+  Modelica.SIunits.SpecificEnthalpy hSCTP(stateSelect=StateSelect.prefer)
+    "Specific enthalpy at the boundary between the supercooled and two-phase 
+    regime";
+  Modelica.SIunits.SpecificEnthalpy hTP
+    "Specific enthalpy of the two-phase regime";
+  Modelica.SIunits.SpecificEnthalpy hTPSH(stateSelect=StateSelect.prefer)
+    "Specific enthalpy at the boundary between the two-phase and superheated 
+    regime";
+  Modelica.SIunits.SpecificEnthalpy hSH
+    "Specific enthalpy of the superheated regime";
+  Modelica.SIunits.SpecificEnthalpy hOut(
+     stateSelect=if appHX==Utilities.Types.ApplicationHX.Evaporator then
+    StateSelect.prefer else StateSelect.avoid)
+    "Specific enthalpy at the outlet of design direction";
+
+  Modelica.SIunits.Density dLiq = Medium.bubbleDensity(sat=TPSat)
+    "Density at bubble line";
+  Modelica.SIunits.Density dVap = Medium.dewDensity(sat=TPSat)
+    "Density at dew line";
+  Modelica.SIunits.SpecificEnthalpy hLiq = Medium.bubbleEnthalpy(sat=TPSat)
+    "Specific enthalpy at bubble line";
+  Modelica.SIunits.SpecificEnthalpy hVap = Medium.dewEnthalpy(sat=TPSat)
+    "Specific enthalpy at dew line";
+
+  // Definition of variables describing the geometry of the control volumes
+  //
+public
+  Real lenSC(stateSelect=if appHX==Utilities.Types.ApplicationHX.Evaporator then
+    StateSelect.prefer else StateSelect.avoid)
+    "Length of the supercooled control volume";
+  Real lenTP(stateSelect=StateSelect.prefer)
+    "Length of the two-phase control volume";
+  Real lenSH(stateSelect=if appHX==Utilities.Types.ApplicationHX.Evaporator then
+    StateSelect.never else StateSelect.prefer)
+    "Length oft the superheated control volume";
+
+  // Definition of variables describing mass and energy balances
+  //
+public
+  Modelica.SIunits.MassFlowRate m_flow_inl(start=m_flow_startInl,
+    fixed=useFixStaVal)
+    "Mass flow rate flowing into the system";
+  Modelica.SIunits.MassFlowRate m_flow_SCTP(start=m_flow_startSCTP,
+    fixed=useFixStaVal)
+    "Mass flow rate flowing out of the supercooled regime and into the two-phase
+    regime";
+  Modelica.SIunits.MassFlowRate m_flow_TPSH(start=m_flow_startTPSH,
+    fixed=useFixStaVal)
+    "Mass flow rate flowing out of the two-phase regime and into the superheated
+    regime";
+  Modelica.SIunits.MassFlowRate m_flow_out(start=m_flow_startOut,
+    fixed=useFixStaVal)
+    "Mass flow rate flowing out of the system";
+
+  Real dlenSCdt(unit="1/s",start=dlenSCdtIni,fixed=useFixStaVal)
+    "Derivative of length of control volume of supercooled regime wrt. time";
+  Real dlenTPdt(unit="1/s",start=dlenTPdtIni,fixed=useFixStaVal)
+    "Derivative of length of control volume of two-phase regime wrt. time";
+  Real dlenSHdt(unit="1/s",start=dlenSHdtIni,fixed=useFixStaVal)
+    "Derivative of length of control volume of superheated regime wrt. time";
+
+  Real dhInldt(unit="J/(kg.s)",start=dhOutdtIni,fixed=useFixStaVal)
+    "Derivative of specific enthalpy at inlet of design direction wrt. time";
+  Real dhSCTPdt(unit="J/(kg.s)",start=dhSCTPdtIni,fixed=useFixStaVal)
+    "Derivative of specific enthalpy at boundary between supercooled and 
+    two-phase regime wrt. time";
+  Real dhTPSHdt(unit="J/(kg.s)",start=dhTPSHtIni,fixed=useFixStaVal)
+    "Derivative of specific enthalpy at boundary between two-phase and 
+    superheated regime wrt. time";
+  Real dhOutdt(unit="J/(kg.s)",start=dhOutdtIni,fixed=useFixStaVal)
+    "Derivative of specific enthalpy at outlet of design direction wrt. time";
+
+  Real ddSCdp(unit="kg/(m3.Pa)") = Medium.density_derp_h(state=SC)
+    "Derivative of average density of supercooled regime wrt. pressure";
+  Real ddSCdh(unit="kg2/(m3.J)") = Medium.density_derh_p(state=SC)
+    "Derivative of average density of supercooled regime wrt. specific enthalpy";
+  Real ddTPdp(unit="kg/(m3.Pa)") = Medium.density_derp_h(state=TP)
+    "Derivative of average density of two-phase regime wrt. pressure";
+  Real ddTPdh(unit="kg2/(m3.J)") = Medium.density_derh_p(state=TP)
+    "Derivative of average density of two-phase regime wrt. specific enthalpy";
+  Real ddSHdp(unit="kg/(m3.Pa)") = Medium.density_derp_h(state=SH)
+    "Derivative of average density of superheated regime wrt. pressure";
+  Real ddSHdh(unit="kg2/(m3.J)") = Medium.density_derh_p(state=SH)
+    "Derivative of average density of superheated regime wrt. specific enthalpy";
+
+  Real ddLiqdp(unit="kg/(m3.Pa)") = Medium.dBubbleDensity_dPressure(sat=TPSat)
+    "Derivative of bubble density wrt. saturation pressure";
+  Real ddVapdp(unit="kg/(m3.Pa)") = Medium.dDewDensity_dPressure(sat=TPSat)
+    "Derivative of dew density wrt. saturation pressure";
+  Real dhLiqdp(unit="J/(kg.Pa)") = Medium.dBubbleEnthalpy_dPressure(sat=TPSat)
+    "Derivative of bubble enthalpy wrt. saturation pressure";
+  Real dhVapdp(unit="J/(kg.Pa)") = Medium.dDewEnthalpy_dPressure(sat=TPSat)
+    "Derivative of dew enthalpy wrt. saturation pressure";
+
+  // Definition of variables describing the calculation of heat transfers
+  //
+public
+  Modelica.SIunits.SpecificHeatCapacity cpSC = Medium.specificHeatCapacityCp(SC)
+    "Density of the supercooled regime";
+  Modelica.SIunits.SpecificHeatCapacity cpSH = Medium.specificHeatCapacityCp(SH)
+    "Density of the superheated regime";
+
+  Modelica.SIunits.ThermalConductance kASC
+    "Effective thermal conductance of th supercooled regime";
+  Modelica.SIunits.ThermalConductance kATP
+    "Effective thermal conductance of th two-phase regime";
+  Modelica.SIunits.ThermalConductance kASH
+    "Effective thermal conductance of th superheated regime";
+
+  Modelica.SIunits.TemperatureDifference dTSC
+    "Temperature difference between the wall and the supercooled regime";
+  Modelica.SIunits.TemperatureDifference dTTP
+    "Temperature difference between the wall and the two-phase regime";
+  Modelica.SIunits.TemperatureDifference dTSH
+    "Temperature difference between the wall and the superheated regime";
+
+protected
+  Modelica.SIunits.HeatFlowRate Q_flow_SC
+    "Heat flow rate from between the wall and the supercooled regime";
+  Modelica.SIunits.HeatFlowRate Q_flow_TP
+    "Heat flow rate from between the wall and the two-pahse regime";
+  Modelica.SIunits.HeatFlowRate Q_flow_SH
+    "Heat flow rate from between the wall and the superheated regime";
+
+  // Definition of variables describing conservation of mass and energy
+  //
+public
+  Utilities.Balances.MovingBoundary balEqu(
+    mSC = geoCV.ACroSec*lenSC*dSC,
+    mTP = geoCV.ACroSec*lenTP*dTP,
+    mSH = geoCV.ACroSec*lenSH*dSH,
+    dmSCdt = m_flow_inl - m_flow_SCTP,
+    dmTPdt = m_flow_SCTP - m_flow_TPSH,
+    dmSHdt = m_flow_TPSH - m_flow_out,
+    USC = geoCV.ACroSec*lenSC*(dSC*hSC-p),
+    UTP = geoCV.ACroSec*lenTP*(dTP*hTP-p),
+    USH = geoCV.ACroSec*lenSH*(dSH*hSH-p),
+    dUSCdt = m_flow_inl*hInl - m_flow_SCTP*hSCTP + Q_flow_SC +
+      der(p)*geoCV.ACroSec*lenSC + p*geoCV.ACroSec*der(lenSC),
+    dUTPdt = m_flow_SCTP*hSCTP - m_flow_TPSH*hTPSH + Q_flow_TP +
+      der(p)*geoCV.ACroSec*lenTP + p*geoCV.ACroSec*der(lenTP),
+    dUSHdt = m_flow_TPSH*hTPSH - m_flow_out*hOut + Q_flow_SH +
+      der(p)*geoCV.ACroSec*lenSH - p*geoCV.ACroSec*(der(lenSC)+der(lenTP))) if
+       calBalEqu
+    "Model that computes mass and energy balances of the working fluid";
+
+  // Definition of models calculating the coefficients of heat transfer
+  //
+public
+  CoefficientOfHeatTransferSC coefficientOfHeatTransferSC(
+    geoCV=geoCV) if useHeaCoeMod
+    "Coefficient of heat transfer of the supercooled regime"
+    annotation (Placement(transformation(extent={{-50,20},{-30,40}})));
+  CoefficientOfHeatTransferTP coefficientOfHeatTransferTP(
+    geoCV=geoCV) if useHeaCoeMod
+    "Coefficient of heat transfer of the two-phase regime"
+    annotation (Placement(transformation(extent={{-10,20},{10,40}})));
+  CoefficientOfHeatTransferSH coefficientOfHeatTransferSH(
+    geoCV=geoCV) if useHeaCoeMod
+    "Coefficient of heat transfer of the superheated regime"
+    annotation (Placement(transformation(extent={{30,20},{50,40}})));
+
+  // Definition of model calculating the voidFraction
+  //
+public
+  VoidFractionModel voidFractionModel(
+    redeclare replaceable package Medium = Medium,
+    tauVoiFra = tauVoiFra,
+    modCV = modCV,
+    p = p,
+    hSCTP = hSCTP,
+    hTPSH = hTPSH) if useVoiFraMod
+    "Void fraction of the two-phase regime"
+    annotation (Placement(transformation(extent={{-10,60},{10,80}})));
+
+
+initial equation
+
+  /*In the following, initial values are computed for state variables. 
+    These variables are:
+
+    lenSC:      Length of supercooled regime
+    lenTP:      Length of two-phase regime
+    hInl|hOut:  Specific enthalpy at inlet|outlet of design direction
+    hSCTP:      Specific enthalpy at boundary between SC and TP
+    hTPSH:      Specific enthalpy at boundary between TP and SH
+    voiFra:     Mean void fraction
+  */
+
+  if appHX==Utilities.Types.ApplicationHX.Evaporator then
+    /* Evaporator - Design direction */
+    hOut = hInl + dhIni "Specific enthalpy at outlet of design direction";
+  else
+    /* Condenser - Reverse direction */
+    hInl = hOut + dhIni "Specific enthalpy at inlet of design direction";
+  end if;
+
+  if modCV==Utilities.Types.ModeCV.SC then
+    /* Supercooled */
+    lenSC = 1-2*lenMin "Length of supercooled regime";
+    lenTP = lenMin "Length of two-phase regime";
+    hSCTP = hTPSH "Specific enthalpy at boundary between SC and TP";
+    hTPSH = hOut "Specific enthalpy at boundary between TP and SH";
+    if useVoiFraMod then
+      VoiFraThr   = 0 "Mean void fraction";
+    end if;
+
+  elseif modCV==Utilities.Types.ModeCV.SCTP then
+    /* Supercooled - Two-phase */
+    lenTP = lenSC-lenMin "Length of two-phase regime";
+    if appHX==Utilities.Types.ApplicationHX.Evaporator then
+      lenSC = (hLiq-hInl)/(hOut-hInl) "Length of supercooled regime";
+      hSCTP = hLiq "Specific enthalpy at boundary between SC and TP";
+      hTPSH = hOut "Specific enthalpy at boundary between TP and SH";
+    else
+      lenTP = lenMin "Length of supercooled regime";
+      hSCTP = hLiq "Specific enthalpy at boundary between SC and TP";
+      hTPSH = hOut "Specific enthalpy at boundary between TP and SH";
+    end if;
+    if useVoiFraMod then
+      VoiFraThr   = 0.85;//VoiFraIntThr "Mean void fraction";
+    end if;
+
+  elseif modCV==Utilities.Types.ModeCV.TP then
+    /* Two-phase */
+    lenSC = lenMin "Length of supercooled regime";
+    lenTP = 1-2*lenMin "Length of two-phase regime";
+    hSCTP = hInl "Specific enthalpy at boundary between SC and TP";
+    hTPSH = hOut "Specific enthalpy at boundary between TP and SH";
+    if useVoiFraMod then
+      VoiFraThr   = 0.85;//VoiFraIntThr "Mean void fraction";
+    end if;
+
+  elseif modCV==Utilities.Types.ModeCV.TPSH then
+    /* Two-phase - Superheated */
+    lenSC = lenMin "Length of supercooled regime";
+    lenTP = (hVap-hInl)/(hOut-hInl) "Length of two-phase regime";
+    hSCTP = hInl "Specific enthalpy at boundary between SC and TP";
+    hTPSH = hVap "Specific enthalpy at boundary between TP and SH";
+    if useVoiFraMod then
+      VoiFraThr   = 0.85;//VoiFraIntThr "Mean void fraction";
+    end if;
+
+  elseif modCV==Utilities.Types.ModeCV.SH then
+    /* Superheated */
+    lenSC = lenMin "Length of supercooled regime";
+    lenTP = lenMin "Length of two-phase regime";
+    hSCTP = hInl "Specific enthalpy at boundary between SC and TP";
+    hTPSH = hSCTP "Specific enthalpy at boundary between TP and SH";
+    if useVoiFraMod then
+      VoiFraThr   = 1 "Mean void fraction";
+    end if;
+
+  else
+    /* Supercooled - Two-phase - Superheated*/
+    lenSC = (hLiq-hInl)/(hOut-hInl) "Length of supercooled regime";
+    lenTP = (hVap-hLiq)/(hOut-hInl) "Length of two-phase regime";
+    hSCTP = hLiq "Specific enthalpy at boundary between SC and TP";
+    hTPSH = hVap "Specific enthalpy at boundary between TP and SH";
+    if useVoiFraMod then
+      VoiFraThr   = 0.85;//VoiFraIntThr "Mean void fraction";
+    end if;
+  end if;
+
+
+equation
+  // Calculation of geometric constraints
+  //
+  1 = lenSC + lenTP + lenSH
+    "Geometric constraint";
+
+  // Connect variables with connectors
+  //
+  port_a.p = p
+    "Pressure at port_a - Assuming no pressure losses";
+  port_b.p = p
+    "Pressure at port_b - Assuming no pressure losses";
+
+  heatPortSC.Q_flow = Q_flow_SC
+    "Heat flow rate between the wall and the supercooled regime";
+  heatPortTP.Q_flow = Q_flow_TP
+    "Heat flow rate between the wall and the two-phase regime";
+  heatPortSH.Q_flow = Q_flow_SH
+    "Heat flow rate between the wall and the superheated regime";
+
+  lenOut = {lenSC,lenTP,lenSH}
+    "Lengths of the control volumes";
+
+  // Connect coefficients of heat transfers
+  //
+  if not useHeaCoeMod then
+    AlpThrSC = AlpSC
+      "Connect coefficient of heat transfer of supercooled regime given by
+      parameter";
+    AlpThrTP = AlpTP
+      "Connect coefficient of heat transfer of two-phase regime given by
+      parameter";
+    AlpThrSH = AlpSH
+      "Connect coefficient of heat transfer of superheated regime given by
+      parameter";
+  end if;
+
+  connect(AlpThrSC,coefficientOfHeatTransferSC.Alp)
+    "Connect coefficient of heat transfer of supercooled regime calculated by
+    model";
+  connect(AlpThrTP,coefficientOfHeatTransferTP.Alp)
+    "Connect coefficient of heat transfer of two-phase regime calculated by
+    model";
+  connect(AlpThrSH,coefficientOfHeatTransferSH.Alp)
+    "Connect coefficient of heat transfer of superheated regime calculated by
+    model";
+
+  // Connect void fraction
+  //
+  if not useVoiFraMod then
+    VoiFraIntThr = voiFraPar
+      "Connect total void fraction of two-phase regime given by parameter";
+    VoiFraThr = voiFraPar
+      "Connect void fraction of two-phase regime given by parameter";
+    VoiFraDerThr = Modelica.Constants.small
+      "Connect derivative of void fraction of two-phase regime given by 
+      parameter";
+  end if;
+
+  connect(VoiFraIntThr,voidFractionModel.voiFraInt)
+    "Connect total void fraction of two-phase regime given by model";
+  connect(VoiFraThr,voidFractionModel.voiFra)
+    "Connect void fraction of two-phase regime given by model";
+  connect(VoiFraDerThr,voidFractionModel.voiFra_der)
+    "Connect derivative of void fraction of two-phase regime given by model";
+
+  // Calculation of state variables
+  //
+  der(hInl) = dhInldt
+    "Derivative of specific enthalpy at inlet at design dircetion wrt. time";
+  der(hSCTP) = dhSCTPdt
+    "Derivative of specific enthalpy at boundary between supercooled and
+    two-phase regime wrt. time";
+  der(hTPSH) = dhTPSHdt
+    "Derivative of specific enthalpy at boundary between two-phase and
+    superheated regime wrt. time";
+  der(hOut) = dhOutdt
+    "Derivative of specific enthalpy at outlet at design dircetion wrt. time";
+
+  dlenSCdt = der(lenSC)
+    "Derivative of length of control volume of supercooled regime wrt. time";
+  dlenTPdt = der(lenTP)
+    "Derivative of length of control volume of two-phase regime wrt. time";
+  dlenSHdt = der(lenSH)
+    "Derivative of length of control volume of superheated regime wrt. time";
 
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false), graphics={

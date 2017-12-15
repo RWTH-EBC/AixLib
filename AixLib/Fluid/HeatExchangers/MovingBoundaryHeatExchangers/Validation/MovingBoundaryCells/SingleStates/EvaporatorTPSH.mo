@@ -8,11 +8,11 @@ model EvaporatorTPSH
         useFixModCV=false),
     sin(use_p_in=true),
     movBouCel(tauVoiFra=125,
-      useVoiFraMod=true,
-      dhIni=150e3),
+      dhIni=150e3,
+      useVoiFra=true,
+      useVoiFraMod=true),
     trapTemp(amplitude=5, offset=273.15),
     ramEnt(offset=275e3));
-
   extends Modelica.Icons.Example;
   extends Modelica.Icons.UnderConstruction;
 
