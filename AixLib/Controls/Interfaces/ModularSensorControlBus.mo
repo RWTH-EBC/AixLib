@@ -84,7 +84,8 @@ expandable connector ModularSensorControlBus
 
   // Definition of variables describing heat pumps sources
   //
-  Modelica.SIunits.AbsolutePressure meaPreEvaSou[nEvaSen]
+  Real meaPreEvaSoup[nEvaSen](
+     final quantity="AbsolutePressure",final unit="Pa",min=0)
     "Array of measured pressures at source-sided evaporators' outlets"
     annotation(Dialog(tab="Measurements",group="Sources"));
   Modelica.SIunits.Temperature meaTemEvaSouInl[nEvaSen]
@@ -94,22 +95,23 @@ expandable connector ModularSensorControlBus
     "Array of measured temperatures at source-sided evaporators' outlet"
     annotation(Dialog(tab="Measurements",group="Sources"));
   Modelica.SIunits.MassFlowRate meaMasFloEvaSou[nEvaSen]
-    "Array of measured mass flow rates source-sided at evaporators' outlets"
+    "Array of measured mass flow rates at source-sided at evaporators' outlets"
     annotation(Dialog(tab="Measurements",group="Sources"));
 
   // Definition of variables describing heat pumps sinks
   //
-  Modelica.SIunits.AbsolutePressure meaPreConSin[nConSen]
-    "Array of measured pressures at sink-sided expansion valves' outlets"
+  Real meaPreConSin[nConSen](
+     final quantity="AbsolutePressure",final unit="Pa",min=0)
+    "Array of measured pressures at sink-sided condensers' outlets"
     annotation(Dialog(tab="Measurements",group="Sinks"));
   Modelica.SIunits.Temperature meaTemConSinInl[nConSen]
-    "Array of measured temperatures at sink-sided expansion valves' inlets"
+    "Array of measured temperatures at sink-sided condensers' inlets"
     annotation(Dialog(tab="Measurements",group="Sinks"));
   Modelica.SIunits.Temperature meaTemConSinOut[nConSen]
-    "Array of measured temperatures at sink-sided expansion valves' outlets"
+    "Array of measured temperatures at sink-sided condensers' outlets"
     annotation(Dialog(tab="Measurements",group="Sinks"));
   Modelica.SIunits.MassFlowRate meaMasFloConSin[nConSen]
-    "Array of measured mass flow rates at sink-sided expansion valves' outlets"
+    "Array of measured mass flow rates at sink-sided condensers' outlets"
     annotation(Dialog(tab="Measurements",group="Sinks"));
 
   annotation (Documentation(revisions="<html>

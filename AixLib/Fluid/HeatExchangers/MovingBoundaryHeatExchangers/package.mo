@@ -1,5 +1,5 @@
 within AixLib.Fluid.HeatExchangers;
-package MovingBoundaryHeatExchangers "This package contains models of moving boundary heat exchangers"
+package MovingBoundaryHeatExchangers "This package contains models describing moving boundary heat exchangers"
   extends Modelica.Icons.Package;
 
 

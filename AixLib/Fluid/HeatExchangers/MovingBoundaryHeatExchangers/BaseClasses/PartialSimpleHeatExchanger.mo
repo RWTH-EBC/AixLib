@@ -236,7 +236,7 @@ partial model PartialSimpleHeatExchanger
     "Nominal mass flow rate of the primary fluid"
     annotation (Dialog(tab="Advanced", group="Nominal conditions"));
   parameter Medium2.MassFlowRate m_flow_smallPri=1e-6
-    *movBouCel.m_flow_nominal
+    *m_flow_nominalPri
     "Small mass flow rate  of the primary fluid for regularization of zero flow"
     annotation (Dialog(tab="Advanced", group="Nominal conditions"));
 
@@ -269,19 +269,19 @@ partial model PartialSimpleHeatExchanger
     "Guess value of dlenSHdt"
     annotation (Dialog(tab="Advanced", group="Initialisation moving boundary"));
   parameter Medium2.MassFlowRate
-    m_flow_startInl=0.5*movBouCel.m_flow_nominal
+    m_flow_startInl=0.5*m_flow_nominalPri
     "Guess value of m_flow_startInl"
     annotation (Dialog(tab="Advanced", group="Initialisation moving boundary"));
   parameter Medium2.MassFlowRate
-    m_flow_startSCTP=0.5*movBouCel.m_flow_nominal
+    m_flow_startSCTP=0.5*m_flow_nominalPri
     "Guess value of m_flow_startSCTP"
     annotation (Dialog(tab="Advanced", group="Initialisation moving boundary"));
   parameter Medium2.MassFlowRate
-    m_flow_startTPSH=0.5*movBouCel.m_flow_nominal
+    m_flow_startTPSH=0.5*m_flow_nominalPri
     "Guess value of m_flow_startTPSH"
     annotation (Dialog(tab="Advanced", group="Initialisation moving boundary"));
   parameter Medium2.MassFlowRate
-    m_flow_startOut=0.5*movBouCel.m_flow_nominal
+    m_flow_startOut=0.5*m_flow_nominalPri
     "Guess value of m_flow_startOut"
     annotation (Dialog(tab="Advanced", group="Initialisation moving boundary"));
 
