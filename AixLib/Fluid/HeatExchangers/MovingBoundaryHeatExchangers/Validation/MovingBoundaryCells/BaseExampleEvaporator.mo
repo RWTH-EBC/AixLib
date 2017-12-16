@@ -60,11 +60,11 @@ model BaseExampleEvaporator
     "Sink that provides a constant pressure"
     annotation (Placement(transformation(extent={{-10,10},{10,-10}},
                 rotation=180,origin={50,-30})));
-  Utilities.Guards.EvaporatorGuard gua(
-    useFixModCV=true,
+  Utilities.Guards.GeneralGuard gua(
+    useFixModCV=false,
     lenCV=movBouCel.lenOut,
-    hInlDes=movBouCel.hInl,
-    hOutDes=movBouCel.hOut,
+    hOutCon=movBouCel.hInl,
+    hOutEva=movBouCel.hOut,
     hLiq=movBouCel.hLiq,
     hVap=movBouCel.hVap,
     voiFra=movBouCel.VoiFraThr,
@@ -109,19 +109,12 @@ equation
   // Check if reinitialisation is necessary
   //
   when gua.swi then
-    if movBouCel.appHX==Utilities.Types.ApplicationHX.Evaporator then
-      /* Evaporator - Design direction */
-      reinit(movBouCel.hOut,gua.hOutDesIni)
-        "Reinitialisation of hOutDesDes";
-    else
-      /* Condenser - Reverse direction */
-      reinit(movBouCel.hInl,gua.hInlDesIni)
-        "Reinitialisation of hInlDesDes";
-    end if;
     reinit(movBouCel.hSCTP,gua.hSCTPIni)
       "Reinitialisation of hSCTP";
     reinit(movBouCel.hTPSH,gua.hTPSHIni)
       "Reinitialisation of hTPSH";
+    reinit(movBouCel.hOut,gua.hOutEvaIni)
+      "Reinitialisation of hOutDesDes";
     reinit(movBouCel.lenSC,gua.lenSCIni)
       "Reinitialisation of lenCV[1]";
     reinit(movBouCel.lenTP,gua.lenTPIni)

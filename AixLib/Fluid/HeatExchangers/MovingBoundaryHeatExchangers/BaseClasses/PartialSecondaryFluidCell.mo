@@ -110,6 +110,133 @@ partial model PartialSecondaryFluidCell
     "Dummy block used for transmission of coefficient of heat transfer of the
     superheated regime if its model is conditionally removed";
 
+  // Definition of records describing thermodynamic states
+  //
+public
+  Medium.ThermodynamicState InlDes=
+    Medium.setState_ph(p=p,h=inStream(port_a.h_outflow))
+    "Thermodynamic state at the inlet of design direction"
+    annotation (Placement(transformation(extent={{-80,-8},{-60,12}})));
+  Medium.ThermodynamicState SC = Medium.setState_pT(p=p,T=TSC)
+    "Thermodynamic state of the supercooled regime"
+    annotation (Placement(transformation(extent={{-50,-8},{-30,12}})));
+  Medium.ThermodynamicState TP = Medium.setState_pT(p=p,T=TTP)
+    "Thermodynamic state of the two-phase regime"
+    annotation (Placement(transformation(extent={{-10,-8},{10,12}})));
+  Medium.ThermodynamicState SH = Medium.setState_pT(p=p,T=TSH)
+    "Thermodynamic state of the superheated regime"
+    annotation (Placement(transformation(extent={{30,-8},{50,12}})));
+  Medium.ThermodynamicState InlRev=
+    Medium.setState_ph(p=p,h=inStream(port_b.h_outflow))
+    "Thermodynamic state at the inlet of reverse direction"
+    annotation (Placement(transformation(extent={{60,-8},{80,12}})));
+
+  // Definition of variables describing thermodynamic states
+  //
+protected
+  Modelica.SIunits.AbsolutePressure p
+    "Pressure of the secondary fluid (assumed to be constant)";
+  Modelica.SIunits.Temperature TInlDes = Medium.temperature(InlDes)
+    "Temperature at the inlet of design direction";
+  Modelica.SIunits.Temperature TSC
+    "Temperature of the supercooled regime";
+  Modelica.SIunits.Temperature TTP
+    "Temperature of the two-phase regime";
+  Modelica.SIunits.Temperature TSH
+    "Temperature of the superheated regime";
+  Modelica.SIunits.Temperature TInlRev = Medium.temperature(InlRev)
+    "Temperature at the inlet of reverse direction";
+  Modelica.SIunits.SpecificEnthalpy hSC = Medium.specificEnthalpy(SC)
+    "Specific enthalpy of the supercooled regime";
+  Modelica.SIunits.SpecificEnthalpy hTP = Medium.specificEnthalpy(TP)
+    "Specific enthalpy of the two-phase regime";
+  Modelica.SIunits.SpecificEnthalpy hSH = Medium.specificEnthalpy(SH)
+    "Specific enthalpy of the superheated regime";
+  Modelica.SIunits.Density dSC = Medium.density(SC)
+    "Density of the supercooled regime";
+  Modelica.SIunits.Density dTP = Medium.density(TP)
+    "Density of the two-phase regime";
+  Modelica.SIunits.Density dSH = Medium.density(SH)
+    "Density of the superheated regime";
+
+  // Definition of models describing the calculation of heat transfers
+  //
+public
+  Modelica.SIunits.MassFlowRate m_flow
+    "Mass flow rate flowing into and out of the system";
+  Modelica.SIunits.MassFlowRate m_flow_SCTP
+    "Mass flow rate flowing out of the supercooled regime and into the two-phase
+    regime";
+  Modelica.SIunits.MassFlowRate m_flow_TPSH
+    "Mass flow rate flowing out of the two-phase regime and into the superheated
+    regime";
+
+  Modelica.SIunits.Mass mSC
+    "Mass of the supercooled regime";
+  Modelica.SIunits.Mass mTP
+    "Mass of the two-phase regime";
+  Modelica.SIunits.Mass mSH
+    "Mass of the superheated regime";
+
+  Modelica.SIunits.SpecificHeatCapacity cpSC = Medium.specificHeatCapacityCp(SC)
+    "Density of the supercooled regime";
+  Modelica.SIunits.SpecificHeatCapacity cpTP = Medium.specificHeatCapacityCp(TP)
+    "Density of the two-phase regime";
+  Modelica.SIunits.SpecificHeatCapacity cpSH = Medium.specificHeatCapacityCp(SH)
+    "Density of the superheated regime";
+
+  Modelica.SIunits.ThermalConductance kASC
+    "Effective thermal conductance of th supercooled regime";
+  Modelica.SIunits.ThermalConductance kATP
+    "Effective thermal conductance of th two-phase regime";
+  Modelica.SIunits.ThermalConductance kASH
+    "Effective thermal conductance of th superheated regime";
+
+  Modelica.SIunits.TemperatureDifference dTSC
+    "Temperature difference between the wall and the supercooled regime";
+  Modelica.SIunits.TemperatureDifference dTTP
+    "Temperature difference between the wall and the two-phase regime";
+  Modelica.SIunits.TemperatureDifference dTSH
+    "Temperature difference between the wall and the superheated regime";
+
+protected
+  Modelica.SIunits.HeatFlowRate Q_flow_SC
+    "Heat flow rate from between the wall and the supercooled regime";
+  Modelica.SIunits.HeatFlowRate Q_flow_TP
+    "Heat flow rate from between the wall and the two-pahse regime";
+  Modelica.SIunits.HeatFlowRate Q_flow_SH
+    "Heat flow rate from between the wall and the superheated regime";
+
+  // Definition of models calculating the coefficients of heat transfer
+  //
+public
+  CoefficientOfHeatTransfer coefficientOfHeatTransferSC(
+    geoCV=geoCV) if useHeaCoeMod
+    "Coefficient of heat transfer of the supercooled regime"
+    annotation (Placement(transformation(extent={{-50,-40},{-30,-20}})));
+  CoefficientOfHeatTransfer coefficientOfHeatTransferTP(
+    geoCV=geoCV) if useHeaCoeMod
+    "Coefficient of heat transfer of the two-phase regime"
+    annotation (Placement(transformation(extent={{-10,-40},{10,-20}})));
+  CoefficientOfHeatTransfer coefficientOfHeatTransferSH(
+    geoCV=geoCV) if useHeaCoeMod
+    "Coefficient of heat transfer of the superheated regime"
+    annotation (Placement(transformation(extent={{30,-40},{50,-20}})));
+
+
+initial equation
+  if iniSteSta then
+    /* Steady state initialisation */
+    der(TSC) = 0;
+    der(TTP) = 0;
+    der(TSH) = 0;
+  else
+    /* Fixed temperature initisalisation */
+    TSC = TSCIni;
+    TTP = TTPIni;
+    TSH = TSHIni;
+  end if;
+
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(

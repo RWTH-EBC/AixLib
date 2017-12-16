@@ -1,73 +1,7 @@
 ﻿within AixLib.Fluid.HeatExchangers.MovingBoundaryHeatExchangers.Utilities.WallCells;
 model SimpleWallCell
-  "Model of a wall cell of a moving boundary heat exchanger"
+  "Model of a cell of a moving boundary heat exchanger's wall"
   extends BaseClasses.PartialWallCell;
-
-  // Definition of variables describing thermodynamic states
-  //
-  Modelica.SIunits.Temperature TSC
-    "Average temperature of the wall of the supercooled regime";
-  Modelica.SIunits.Temperature TSCTP
-    "Temperature of the wall at the boundary between supercooled and 
-    two-phase regime";
-  Modelica.SIunits.Temperature TTP
-    "Average temperature of the wall of the two-phase regime";
-  Modelica.SIunits.Temperature TTPSH
-    "Temperature of the wall at the boundary between two-phase and 
-    superheated regime";
-  Modelica.SIunits.Temperature TSH
-    "Average temperature of the wall of the superheated regime";
-
-  // Defitinion of variables describing heat flows
-  //
-  Modelica.SIunits.HeatFlowRate Q_flow_SCPri
-    "Heat flow rate between the supercooled regime and the wall of the 
-    primary fluid";
-  Modelica.SIunits.HeatFlowRate Q_flow_TPPri
-    "Heat flow rate between the two-phase regime and the wall of the 
-    primary fluid";
-  Modelica.SIunits.HeatFlowRate Q_flow_SHPri
-    "Heat flow rate between the superheated regime and the wall of the 
-    primary fluid";
-
-  Modelica.SIunits.HeatFlowRate Q_flow_SCSec
-    "Heat flow rate between the supercooled regime and the wall of the 
-    secondary fluid";
-  Modelica.SIunits.HeatFlowRate Q_flow_TPSec
-    "Heat flow rate between the two-phase regime and the wall of the 
-    secondary fluid";
-  Modelica.SIunits.HeatFlowRate Q_flow_SHSec
-    "Heat flow rate between the uperheated regime and the wall of the 
-    secondary fluid";
-
-  // Definition of variables describing conservation of energy
-  //
-  Modelica.SIunits.Energy engWal
-    "Current energy of the wall";
-  Modelica.SIunits.Energy engWalInt
-    "Current energy of the wall calculated by integration";
-  Modelica.SIunits.Power Q_flow_tot
-    "Total heat flow rate between the wall and surroundings";
-
-
-initial equation
-  if iniSteSta then
-    /* Steady state initialisation */
-    der(TSC) = 0;
-    der(TTP) = 0;
-    der(TSH) = 0;
-  else
-    /* Fixed temperature initisalisation */
-    TSC = TSCIni;
-    TTP = TTPIni;
-    TSH = TSHIni;
-  end if;
-
-  // Initial equations of state variables describing conservation of energy
-  //
-  engWalInt = matHX.cpWal*matHX.dWal * geoCV.l*geoCV.ACroSecWalFloCha *
-    (lenInl[1]*TSC + lenInl[2]*TTP + lenInl[3]*TSH)
-    "Current energy of the wall calculated by integration";
 
 equation
   // Connect variables with connectors
@@ -202,17 +136,6 @@ equation
     TSH = TSHIni "Dummy value to succeed index reduction";
 
   end if;
-
-  // Calculation of conservation of energy used for diagnostics
-  //
-  engWal = matHX.cpWal*matHX.dWal * geoCV.l*geoCV.ACroSecWalFloCha *
-    (lenInl[1]*TSC + lenInl[2]*TTP + lenInl[3]*TSH)
-    "Current energy of the wall";
-  der(engWalInt) = Q_flow_tot
-    "Current energy of the wall calculated by integration";
-  Q_flow_tot =  Q_flow_SCPri + Q_flow_TPPri + Q_flow_SHPri +
-    Q_flow_SCSec + Q_flow_TPSec + Q_flow_SHSec
-    "Total heat flow rate between the wall and surroundings";
 
   annotation (Documentation(revisions="<html>
 <ul>

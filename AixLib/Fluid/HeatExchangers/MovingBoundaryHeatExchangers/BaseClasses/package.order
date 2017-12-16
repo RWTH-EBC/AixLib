@@ -1,7 +1,7 @@
 PartialCoefficientOfHeatTransfer
 PartialGuard
 PartialMovingBoundaryCell
+PartialSimpleHeatExchanger
 PartialSecondaryFluidCell
 PartialVoidFraction
 PartialWallCell
-PartialSimpleHeatExchanger

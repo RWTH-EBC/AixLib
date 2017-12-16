@@ -1,6 +1,6 @@
 within AixLib.Fluid.HeatExchangers.MovingBoundaryHeatExchangers.Validation.MovingBoundaryCells.SingleStates;
-model CondenserSHTP
-  "Validation model to check a moving boundary cell of an evaporator"
+model CondenserTP
+  "Validation model to check a moving boundary cell of a condenser"
   extends BaseExampleCondenser(
     redeclare package Medium =
         Modelica.Media.R134a.R134a_ph,
@@ -9,10 +9,12 @@ model CondenserSHTP
     sin(use_p_in=true),
     movBouCel(tauVoiFra=125,
       useVoiFraMod=true,
-      dhIni=-150e3),
-    trapTemp(amplitude=-25, offset=320.15),
-    ramEnt(offset=425e3));
+      useVoiFra=true,
+      dhIni=-10),
+    trapTemp(amplitude=0, offset=TOut + 5),
+    ramEnt(offset=325e3));
   extends Modelica.Icons.Example;
+  extends Modelica.Icons.UnderConstruction;
 
   annotation (Documentation(revisions="<html>
 <ul>
@@ -23,4 +25,4 @@ model CondenserSHTP
   </li>
 </ul>
 </html>"), experiment(StopTime=6400));
-end CondenserSHTP;
+end CondenserTP;

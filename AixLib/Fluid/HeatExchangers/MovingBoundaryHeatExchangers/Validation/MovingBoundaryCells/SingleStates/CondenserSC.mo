@@ -8,9 +8,9 @@ model CondenserSC
     sin(use_p_in=true),
     movBouCel(tauVoiFra=125,
       useVoiFraMod=true,
-      dhIni=-150e3),
-    trapTemp(amplitude=-25, offset=273.15),
-    ramEnt(offset=195e3));
+      dhIni=-10),
+    trapTemp(amplitude=-25, offset=263.15),
+    ramEnt(offset=175e3, height=10e3));
   extends Modelica.Icons.Example;
 
   annotation (Documentation(revisions="<html>

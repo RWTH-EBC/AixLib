@@ -1,6 +1,6 @@
 ﻿within AixLib.Fluid.HeatExchangers.MovingBoundaryHeatExchangers.Utilities.FluidCells;
 model EvaporatorCell
-  "Model of a general evaporator boundary cell of the working fluid"
+  "Model of a cell of a moving boundary evaporator's primary fluid"
   extends BaseClasses.PartialMovingBoundaryCell;
 
 equation
@@ -39,7 +39,7 @@ equation
     // Boundary conditions
     //
     dlenTPdt = 0   "No change in length of TP regime";
-    der(lenSH) = 0 "No change in length of TP regime";
+    dlenSHdt = 0   "No change in length of SH regime";
 
     // Mass and energy balances of SC regime
     //
@@ -48,10 +48,10 @@ equation
       lenSC*(ddSCdp*der(p) + 0.5*ddSCdh*(dhInldt+dhSCTPdt)))
       "Mass balance of supercooled regime";
     m_flow_inl*hInl - m_flow_SCTP*hSCTP + Q_flow_SC =
-    geoCV.ACroSecFloCha*geoCV.l*((dSC*hSC-dSCTP*hSCTP)*dlenSCdt - lenSC*der(p) +
-       0.5*lenSC*dSC*(dhInldt + dhSCTPdt) +
-       lenSC*hSC*(ddSCdp*der(p) + 0.5*ddSCdh*(dhInldt+dhSCTPdt)))
-       "Energy balance of supercooled regime";
+      geoCV.ACroSecFloCha*geoCV.l*((dSC*hSC-dSCTP*hSCTP)*dlenSCdt - lenSC*der(p) +
+      0.5*lenSC*dSC*(dhInldt + dhSCTPdt) +
+      lenSC*hSC*(ddSCdp*der(p) + 0.5*ddSCdh*(dhInldt+dhSCTPdt)))
+      "Energy balance of supercooled regime";
 
     // Mass and energy balances of TP and SH regime
     //
@@ -79,7 +79,7 @@ equation
     // Boundary conditions
     //
     dhSCTPdt = dhLiqdp*der(p) "Bubble enthalpy";
-    der(lenSH) = 0            "No change in length of SH regime";
+    dlenSHdt = 0              "No change in length of SH regime";
 
     // Mass and energy balances of TP and SH regime"
     //
@@ -88,10 +88,10 @@ equation
       lenSC*(ddSCdp*der(p) + 0.5*ddSCdh*(dhInldt+dhSCTPdt)))
       "Mass balance of supercooled regime";
     m_flow_inl*hInl - m_flow_SCTP*hSCTP + Q_flow_SC =
-    geoCV.ACroSecFloCha*geoCV.l*((dSC*hSC-dSCTP*hSCTP)*dlenSCdt - lenSC*der(p) +
-       0.5*lenSC*dSC*(dhInldt + dhSCTPdt) +
-       lenSC*hSC*(ddSCdp*der(p) + 0.5*ddSCdh*(dhInldt+dhSCTPdt)))
-       "Energy balance of supercooled regime";
+      geoCV.ACroSecFloCha*geoCV.l*((dSC*hSC-dSCTP*hSCTP)*dlenSCdt - lenSC*der(p) +
+      0.5*lenSC*dSC*(dhInldt + dhSCTPdt) +
+      lenSC*hSC*(ddSCdp*der(p) + 0.5*ddSCdh*(dhInldt+dhSCTPdt)))
+      "Energy balance of supercooled regime";
 
     // Mass and energy balances of TP regime"
     //
@@ -155,10 +155,10 @@ equation
       lenSC*(ddSCdp*der(p) + 0.5*ddSCdh*(dhInldt+dhSCTPdt)))
       "Mass balance of supercooled regime";
     m_flow_inl*hInl - m_flow_SCTP*hSCTP + Q_flow_SC =
-    geoCV.ACroSecFloCha*geoCV.l*((dSC*hSC-dSCTP*hSCTP)*dlenSCdt - lenSC*der(p) +
-       0.5*lenSC*dSC*(dhInldt + dhSCTPdt) +
-       lenSC*hSC*(ddSCdp*der(p) + 0.5*ddSCdh*(dhInldt+dhSCTPdt)))
-       "Energy balance of supercooled regime";
+      geoCV.ACroSecFloCha*geoCV.l*((dSC*hSC-dSCTP*hSCTP)*dlenSCdt - lenSC*der(p) +
+      0.5*lenSC*dSC*(dhInldt + dhSCTPdt) +
+      lenSC*hSC*(ddSCdp*der(p) + 0.5*ddSCdh*(dhInldt+dhSCTPdt)))
+      "Energy balance of supercooled regime";
 
     // Mass and energy balances of TP regime"
     //
@@ -283,8 +283,8 @@ equation
 
     // Boundary conditions
     //
-    dlenSCdt = 0 "No change in length of supercooled regime";
-    dlenTPdt = 0 "No change in length of two-phase regime";
+    dlenSCdt = 0 "No change in length of SC regime";
+    dlenTPdt = 0 "No change in length of SH regime";
 
     // Mass and energy balances of SH regime"
     //
@@ -323,8 +323,8 @@ equation
 
     // Boundary conditions
     //
-    dlenSCdt = 0   "No change in length of supercooled regime";
-    der(lenSH) = 0 "No change in length of superheated regime";
+    dlenSCdt = 0   "No change in length of SC regime";
+    dlenSHdt = 0   "No change in length of SH regime";
 
     // Mass and energy balances of TP regime"
     //
@@ -401,6 +401,25 @@ equation
 
   elseif heaFloCal==Utilities.Types.CalculationHeatFlow.E_NTU then
     /* Epsilon-NTU - Method of number of transfer units */
+
+    kASC =  max(abs(m_flow_SCTP)*cpSC,1e-8) * (1 - exp(-AlpThrSC *
+      geoCV.AHeaTra*lenSC/max(abs(m_flow_SCTP)*cpSC,1e-8)))
+      "Effective thermal conductance of th supercooled regime";
+    kATP = AlpThrTP * geoCV.AHeaTra*lenTP
+      "Effective thermal conductance of th two-phase regime";
+    kASH = max(abs(m_flow_out)*cpSH,1e-8) * (1 - exp(-AlpThrSH *
+      geoCV.AHeaTra*lenSH/max(abs(m_flow_out)*cpSH,1e-8)))
+      "Effective thermal conductance of th superheated regime";
+
+    dTSC = heatPortSC.T-TSCTP
+      "Temperature difference between the wall and the supercooled regime";
+    dTTP = heatPortTP.T-TTP
+      "Temperature difference between the wall and the two-phase regime";
+    dTSH = heatPortSH.T-TOut
+      "Temperature difference between the wall and the superheated regime";
+
+  elseif heaFloCal==Utilities.Types.CalculationHeatFlow.E_NTU_Graeber then
+    /* Epsilon-NTU-Gräber - Method of number of transfer units (simplified) */
 
     kASC = AlpThrSC * geoCV.AHeaTra*lenSC
       "Effective thermal conductance of th supercooled regime";

@@ -3,14 +3,15 @@ model EvaporatorSC_SCTP_SCTPSC_SCTP_SC
   "Validation model to check a moving boundary cell of an evaporator"
   extends BaseExampleEvaporator(
     redeclare package Medium =
-       Modelica.Media.R134a.R134a_ph,
+      Modelica.Media.R134a.R134a_ph,
     gua(modCVPar=Utilities.Types.ModeCV.SC,
       useFixModCV=false),
     sin(use_p_in=true),
     movBouCel(tauVoiFra=125,
-      useVoiFra=false,
-      useVoiFraMod=false,
-      calBalEqu=false),
+      calBalEqu=false,
+      heaFloCal=Utilities.Types.CalculationHeatFlow.E_NTU,
+      useVoiFra=true,
+      useVoiFraMod=true),
     trapTemp(
       offset=263.15, amplitude=45));
   extends Modelica.Icons.Example;

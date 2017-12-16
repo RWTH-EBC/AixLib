@@ -11,7 +11,8 @@ model EvaporatorSCTP
       dhIni=75e3,
       calBalEqu=false,
       useVoiFra=true,
-      useVoiFraMod=true),
+      useVoiFraMod=true,
+      heaFloCal=Utilities.Types.CalculationHeatFlow.E_NTU),
     trapTemp(offset=273.15, amplitude=1),
     ramEnt(offset=175e3));
   extends Modelica.Icons.Example;

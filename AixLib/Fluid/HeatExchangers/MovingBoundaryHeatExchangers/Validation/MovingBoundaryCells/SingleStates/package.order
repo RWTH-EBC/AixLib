@@ -5,5 +5,8 @@ EvaporatorTPSH
 EvaporatorSH
 EvaporatorSCTPSH
 CondenserSH
-CondenserSHTP
+CondenserTPSH
+CondenserTP
+CondenserSCTP
 CondenserSC
+CondenserSCTPSH

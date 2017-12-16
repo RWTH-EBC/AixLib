@@ -1,5 +1,5 @@
 within AixLib.Fluid.HeatExchangers.MovingBoundaryHeatExchangers.Validation.VoidFractions;
-model Graeber2013
+model Sangi2015
   "Validation model to check the derivative of the void fraction model"
   extends Modelica.Icons.Example;
 
@@ -14,11 +14,11 @@ model Graeber2013
 
   // Definition of the void fraction model
   //
-  Utilities.VoidFractions.Graeber2013 voiFraMod(
+  Utilities.VoidFractions.Sangi2015 voiFraMod(
     redeclare package Medium = Modelica.Media.R134a.R134a_ph,
     p = ramPre.y,
     hSCTP = 250e3,
-    hTPSH = 250e3,
+    hTPSH = 450e3,
     modCV=Utilities.Interfaces.ModeCVInput.TP)
     "Model that computes the void fraction"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -44,4 +44,4 @@ the sudden change of void fraction that may occur while
 switching flow states within a moving boundary heat exchanger.
 </p>
 </html>"), experiment(StopTime=750));
-end Graeber2013;
+end Sangi2015;

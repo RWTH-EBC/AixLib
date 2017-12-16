@@ -1,15 +1,16 @@
 ﻿within AixLib.Fluid.HeatExchangers.MovingBoundaryHeatExchangers.Utilities.FluidCells;
 model CondenserCell
-  "Model of a general moving boundary cell of the working fluid"
+  "Model of a cell of a moving boundary condenser's primary fluid"
   extends BaseClasses.PartialMovingBoundaryCell;
 
 equation
   // Calculation of geometric constraints
   //
   port_a.m_flow = -m_flow_out
-    "Mass flow rate at port_a";
+    "Mass flow rate at port_a (equations are written wrt. design direction)";
   port_b.m_flow = m_flow_inl
-    "Mass flow rate at port_b (equations are written wrt. design direction)";
+    "Mass flow rate at port_b";
+
 
   port_a.h_outflow = hOut
     "Specific enthalpy flowing out of system at port_a - Condenser";
@@ -22,13 +23,13 @@ equation
   hInl = inStream(port_b.h_outflow)
     "Specific enthalpy at the inlet of design direction";
 
-  hSC = (hSCTP+hInl)/2
-    "Specific enthalpy of the supercooled regime";
+  hSH = (hInl+hTPSH)/2
+    "Specific enthalpy of the superheated regime";
   hTP = if useVoiFra then VoiFraThr*hVap + (1-VoiFraThr)*hLiq else
     (hTPSH+hSCTP)/2
     "Specific enthalpy of the two-phase regime";
-  hSH = (hInl+hTPSH)/2
-    "Specific enthalpy of the superheated regime";
+  hSC = (hSCTP+hOut)/2
+    "Specific enthalpy of the supercooled regime";
 
 
   // Calculation of mass and energy balances as well as boundary conditions
@@ -38,20 +39,21 @@ equation
 
     // Boundary conditions
     //
-    dlenTPdt = 0   "No change in length of TP regime";
-    der(lenSH) = 0 "No change in length of TP regime";
+    dlenTPdt = 0 "No change in length of TP regime";
+    dlenSHdt = 0 "No change in length of TP regime";
 
     // Mass and energy balances of SC regime
     //
-    m_flow_inl - m_flow_SCTP =
-      geoCV.ACroSecFloCha*geoCV.l*((dSC-dSCTP)*dlenSCdt +
-      lenSC*(ddSCdp*der(p) + 0.5*ddSCdh*(dhInldt+dhSCTPdt)))
+    m_flow_SCTP - m_flow_out =
+      geoCV.ACroSecFloCha*geoCV.l*((dSCTP-dSC)*(dlenTPdt+dlenSHdt) +
+      lenSC*(ddSCdp*der(p) + 0.5*ddSCdh*(dhSCTPdt+dhOutdt)))
       "Mass balance of supercooled regime";
-    m_flow_inl*hInl - m_flow_SCTP*hSCTP + Q_flow_SC =
-    geoCV.ACroSecFloCha*geoCV.l*((dSC*hSC-dSCTP*hSCTP)*dlenSCdt - lenSC*der(p) +
-       0.5*lenSC*dSC*(dhInldt + dhSCTPdt) +
-       lenSC*hSC*(ddSCdp*der(p) + 0.5*ddSCdh*(dhInldt+dhSCTPdt)))
-       "Energy balance of supercooled regime";
+    m_flow_SCTP*hSCTP - m_flow_out*hOut + Q_flow_SC =
+      geoCV.ACroSecFloCha*geoCV.l*((dSCTP*hSCTP-dSC*hSC)*(dlenTPdt+dlenSHdt) -
+      lenSC*der(p) +
+      0.5*lenSC*dSC*(dhSCTPdt + dhOutdt) +
+      lenSC*hSC*(ddSCdp*der(p) + 0.5*ddSCdh*(dhSCTPdt+dhOutdt)))
+      "Energy balance of supercooled regime";
 
     // Mass and energy balances of TP and SH regime
     //
@@ -59,9 +61,9 @@ equation
       "Mass valance of two-phase regime - no change";
     dhSCTPdt = dhTPSHdt
       "Energy balance of two-phase regime - no change";
-    m_flow_TPSH = m_flow_out
+    m_flow_TPSH = m_flow_inl
       "Mass balance of superheated regime - no change";
-    dhTPSHdt = dhOutdt
+    dhTPSHdt = dhInldt
       "Energy balance of superheated regime - no change";
 
     // Calculation of heat flow rates
@@ -79,56 +81,56 @@ equation
     // Boundary conditions
     //
     dhSCTPdt = dhLiqdp*der(p) "Bubble enthalpy";
-    der(lenSH) = 0            "No change in length of SH regime";
+    dlenSHdt = 0              "No change in length of SH regime";
 
     // Mass and energy balances of TP and SH regime"
     //
-    m_flow_inl - m_flow_SCTP =
-      geoCV.ACroSecFloCha*geoCV.l*((dSC-dSCTP)*dlenSCdt +
-      lenSC*(ddSCdp*der(p) + 0.5*ddSCdh*(dhInldt+dhSCTPdt)))
+    m_flow_SCTP - m_flow_out =
+      geoCV.ACroSecFloCha*geoCV.l*((dSCTP-dSC)*(dlenTPdt+dlenSHdt) +
+      lenSC*(ddSCdp*der(p) + 0.5*ddSCdh*(dhSCTPdt+dhOutdt)))
       "Mass balance of supercooled regime";
-    m_flow_inl*hInl - m_flow_SCTP*hSCTP + Q_flow_SC =
-    geoCV.ACroSecFloCha*geoCV.l*((dSC*hSC-dSCTP*hSCTP)*dlenSCdt - lenSC*der(p) +
-       0.5*lenSC*dSC*(dhInldt + dhSCTPdt) +
-       lenSC*hSC*(ddSCdp*der(p) + 0.5*ddSCdh*(dhInldt+dhSCTPdt)))
-       "Energy balance of supercooled regime";
+    m_flow_SCTP*hSCTP - m_flow_out*hOut + Q_flow_SC =
+      geoCV.ACroSecFloCha*geoCV.l*((dSCTP*hSCTP-dSC*hSC)*(dlenTPdt+dlenSHdt) -
+      lenSC*der(p) +
+      0.5*lenSC*dSC*(dhSCTPdt + dhOutdt) +
+      lenSC*hSC*(ddSCdp*der(p) + 0.5*ddSCdh*(dhSCTPdt+dhOutdt)))
+      "Energy balance of supercooled regime";
 
     // Mass and energy balances of TP regime"
     //
     if useVoiFra then
-      m_flow_SCTP - m_flow_TPSH =
-        geoCV.ACroSecFloCha*geoCV.l*(dSCTP*dlenSCdt-dTPSH*(dlenSCdt+dlenTPdt) +
+      m_flow_TPSH - m_flow_SCTP =
+        geoCV.ACroSecFloCha*geoCV.l*(dTPSH*dlenSHdt-dSCTP*(dlenSHdt+dlenTPdt) +
         ((1-VoiFraThr)*dLiq + VoiFraThr*dVap)*dlenTPdt +
         lenTP*((dVap-dLiq)*VoiFraDerThr + (VoiFraThr*ddVapdp +
         (1-VoiFraThr)*ddLiqdp)*der(p)))
         "Mass balance of two-phase regime";
-      m_flow_SCTP*hSCTP - m_flow_TPSH*hTPSH + Q_flow_TP =
-        geoCV.ACroSecFloCha*geoCV.l*(dSCTP*hSCTP*dlenSCdt -
-        dTPSH*hTPSH*(dlenSCdt+dlenTPdt) - lenTP*der(p) +
+      m_flow_TPSH*hTPSH - m_flow_SCTP*hSCTP + Q_flow_TP =
+        geoCV.ACroSecFloCha*geoCV.l*(dTPSH*hTPSH*dlenSHdt -
+        dSCTP*hSCTP*(dlenSHdt+dlenTPdt) - lenTP*der(p) +
         (VoiFraThr*dVap*hVap + (1-VoiFraThr)*dLiq*hLiq)*dlenTPdt +
         lenTP*((dVap*hVap-dLiq*hLiq)*VoiFraDerThr +
-        VoiFraThr*hVap*ddVapdp*der(p) +
-        (1-VoiFraThr)*hLiq*ddLiqdp*der(p) + VoiFraThr*dVap*dhVapdp*der(p) +
-        (1-VoiFraThr)*dLiq*dhLiqdp*der(p)))
+        VoiFraThr*hVap*ddVapdp*der(p) + (1-VoiFraThr)*hLiq*ddLiqdp*der(p) +
+        VoiFraThr*dVap*dhVapdp*der(p) + (1-VoiFraThr)*dLiq*dhLiqdp*der(p)))
         "Energy balance of two-phase regime";
     else
-      m_flow_SCTP - m_flow_TPSH =
-        geoCV.ACroSecFloCha*geoCV.l*(dSCTP*dlenSCdt-dTPSH*(dlenSCdt+dlenTPdt) +
-        lenTP*(ddTPdp*der(p) + 0.5*ddTPdh*(dhSCTPdt+dhTPSHdt)) + dTP*dlenTPdt)
+      m_flow_TPSH - m_flow_SCTP =
+        geoCV.ACroSecFloCha*geoCV.l*(dTPSH*dlenSHdt-dSCTP*(dlenSHdt+dlenTPdt) +
+        lenTP*(ddTPdp*der(p) + 0.5*ddTPdh*(dhTPSHdt+dhSCTPdt)) + dTP*dlenTPdt)
         "Mass balance of two-phase regime";
-      m_flow_SCTP*hSCTP - m_flow_TPSH*hTPSH + Q_flow_TP =
-        geoCV.ACroSecFloCha*geoCV.l*(dSCTP*hSCTP*dlenSCdt-
-        dTPSH*hTPSH*(dlenSCdt+dlenTPdt) - lenTP*der(p) +
-        0.5*lenTP*dTP*(dhSCTPdt+dhTPSHdt) + lenTP*hTP*(ddTPdp*der(p) +
-        0.5*ddTPdh*(dhSCTPdt+dhTPSHdt)) + hTP*dTP*dlenTPdt)
+      m_flow_TPSH*hTPSH - m_flow_SCTP*hSCTP + Q_flow_TP =
+        geoCV.ACroSecFloCha*geoCV.l*(dTPSH*hTPSH*dlenSHdt-
+        dSCTP*hSCTP*(dlenSHdt+dlenTPdt) - lenTP*der(p) +
+        0.5*lenTP*dTP*(dhTPSHdt+dhSCTPdt) + lenTP*hTP*(ddTPdp*der(p) +
+        0.5*ddTPdh*(dhTPSHdt+dhSCTPdt)) + hTP*dTP*dlenTPdt)
         "Energy balance of two-phase regime";
     end if;
 
     // Mass and energy balance of SH regime
     //
-    m_flow_TPSH = m_flow_out
+    m_flow_TPSH = m_flow_inl
       "Mass balance of superheated regime - no change";
-    dhTPSHdt = dhOutdt
+    dhTPSHdt = dhInldt
       "Energy balance of superheated regime - no change";
 
     // Calculation of heat flow rates
@@ -150,56 +152,57 @@ equation
 
     // Mass and energy balances of SC regime"
     //
-    m_flow_inl - m_flow_SCTP =
-      geoCV.ACroSecFloCha*geoCV.l*((dSC-dSCTP)*dlenSCdt +
-      lenSC*(ddSCdp*der(p) + 0.5*ddSCdh*(dhInldt+dhSCTPdt)))
+    m_flow_SCTP - m_flow_out =
+      geoCV.ACroSecFloCha*geoCV.l*((dSCTP-dSC)*(dlenTPdt+dlenSHdt) +
+      lenSC*(ddSCdp*der(p) + 0.5*ddSCdh*(dhSCTPdt+dhOutdt)))
       "Mass balance of supercooled regime";
-    m_flow_inl*hInl - m_flow_SCTP*hSCTP + Q_flow_SC =
-    geoCV.ACroSecFloCha*geoCV.l*((dSC*hSC-dSCTP*hSCTP)*dlenSCdt - lenSC*der(p) +
-       0.5*lenSC*dSC*(dhInldt + dhSCTPdt) +
-       lenSC*hSC*(ddSCdp*der(p) + 0.5*ddSCdh*(dhInldt+dhSCTPdt)))
-       "Energy balance of supercooled regime";
+    m_flow_SCTP*hSCTP - m_flow_out*hOut + Q_flow_SC =
+      geoCV.ACroSecFloCha*geoCV.l*((dSCTP*hSCTP-dSC*hSC)*(dlenTPdt+dlenSHdt) -
+      lenSC*der(p) +
+      0.5*lenSC*dSC*(dhSCTPdt + dhOutdt) +
+      lenSC*hSC*(ddSCdp*der(p) + 0.5*ddSCdh*(dhSCTPdt+dhOutdt)))
+      "Energy balance of supercooled regime";
 
     // Mass and energy balances of TP regime"
     //
     if useVoiFra then
-      m_flow_SCTP - m_flow_TPSH =
-        geoCV.ACroSecFloCha*geoCV.l*(dSCTP*dlenSCdt-dTPSH*(dlenSCdt+dlenTPdt) +
+      m_flow_TPSH - m_flow_SCTP =
+        geoCV.ACroSecFloCha*geoCV.l*(dTPSH*dlenSHdt-dSCTP*(dlenSHdt+dlenTPdt) +
         ((1-VoiFraThr)*dLiq + VoiFraThr*dVap)*dlenTPdt +
         lenTP*((dVap-dLiq)*VoiFraDerThr + (VoiFraThr*ddVapdp +
         (1-VoiFraThr)*ddLiqdp)*der(p)))
         "Mass balance of two-phase regime";
-      m_flow_SCTP*hSCTP - m_flow_TPSH*hTPSH + Q_flow_TP =
-        geoCV.ACroSecFloCha*geoCV.l*(dSCTP*hSCTP*dlenSCdt -
-        dTPSH*hTPSH*(dlenSCdt+dlenTPdt) - lenTP*der(p) +
+      m_flow_TPSH*hTPSH - m_flow_SCTP*hSCTP + Q_flow_TP =
+        geoCV.ACroSecFloCha*geoCV.l*(dTPSH*hTPSH*dlenSHdt -
+        dSCTP*hSCTP*(dlenSHdt+dlenTPdt) - lenTP*der(p) +
         (VoiFraThr*dVap*hVap + (1-VoiFraThr)*dLiq*hLiq)*dlenTPdt +
         lenTP*((dVap*hVap-dLiq*hLiq)*VoiFraDerThr +
-        VoiFraThr*hVap*ddVapdp*der(p) +
-        (1-VoiFraThr)*hLiq*ddLiqdp*der(p) + VoiFraThr*dVap*dhVapdp*der(p) +
-        (1-VoiFraThr)*dLiq*dhLiqdp*der(p)))
+        VoiFraThr*hVap*ddVapdp*der(p) + (1-VoiFraThr)*hLiq*ddLiqdp*der(p) +
+        VoiFraThr*dVap*dhVapdp*der(p) + (1-VoiFraThr)*dLiq*dhLiqdp*der(p)))
         "Energy balance of two-phase regime";
     else
-      m_flow_SCTP - m_flow_TPSH =
-        geoCV.ACroSecFloCha*geoCV.l*(dSCTP*dlenSCdt-dTPSH*(dlenSCdt+dlenTPdt) +
-        lenTP*(ddTPdp*der(p) + 0.5*ddTPdh*(dhSCTPdt+dhTPSHdt)) + dTP*dlenTPdt)
+      m_flow_TPSH - m_flow_SCTP =
+        geoCV.ACroSecFloCha*geoCV.l*(dTPSH*dlenSHdt-dSCTP*(dlenSHdt+dlenTPdt) +
+        lenTP*(ddTPdp*der(p) + 0.5*ddTPdh*(dhTPSHdt+dhSCTPdt)) + dTP*dlenTPdt)
         "Mass balance of two-phase regime";
-      m_flow_SCTP*hSCTP - m_flow_TPSH*hTPSH + Q_flow_TP =
-        geoCV.ACroSecFloCha*geoCV.l*(dSCTP*hSCTP*dlenSCdt-
-        dTPSH*hTPSH*(dlenSCdt+dlenTPdt) - lenTP*der(p) +
-        0.5*lenTP*dTP*(dhSCTPdt+dhTPSHdt) + lenTP*hTP*(ddTPdp*der(p) +
-        0.5*ddTPdh*(dhSCTPdt+dhTPSHdt)) + hTP*dTP*dlenTPdt)
+      m_flow_TPSH*hTPSH - m_flow_SCTP*hSCTP + Q_flow_TP =
+        geoCV.ACroSecFloCha*geoCV.l*(dTPSH*hTPSH*dlenSHdt-
+        dSCTP*hSCTP*(dlenSHdt+dlenTPdt) - lenTP*der(p) +
+        0.5*lenTP*dTP*(dhTPSHdt+dhSCTPdt) + lenTP*hTP*(ddTPdp*der(p) +
+        0.5*ddTPdh*(dhTPSHdt+dhSCTPdt)) + hTP*dTP*dlenTPdt)
         "Energy balance of two-phase regime";
     end if;
+
     // Mass and energy balances of SH regime"
     //
-    m_flow_TPSH - m_flow_out =
-      geoCV.ACroSecFloCha*geoCV.l*((dTPSH-dSH)*(dlenSCdt+dlenTPdt) +
-      lenSH*(ddSHdp*der(p) + 0.5*ddSHdh*(dhTPSHdt+dhOutdt)))
+    m_flow_inl - m_flow_TPSH =
+      geoCV.ACroSecFloCha*geoCV.l*((dSH-dTPSH)*dlenSHdt +
+      lenSH*(ddSHdp*der(p) + 0.5*ddSHdh*(dhInldt+dhTPSHdt)))
       "Mass balance of superheated regime";
-    m_flow_TPSH*hTPSH - m_flow_out*hOut + Q_flow_SH =
-      geoCV.ACroSecFloCha*geoCV.l*((dTPSH*hTPSH-dSH*hSH)*(dlenSCdt+dlenTPdt) -
-      lenSH*der(p) + 0.5*dSH*lenSH*(dhTPSHdt + dhOutdt) +
-      lenSH*hSH*(ddSHdp*der(p) + 0.5*ddSHdh*(dhTPSHdt+dhOutdt)))
+    m_flow_inl*hInl - m_flow_TPSH*hTPSH + Q_flow_SH =
+      geoCV.ACroSecFloCha*geoCV.l*((dSH*hSH-dTPSH*hTPSH)*dlenSHdt - lenSH*der(p) +
+      0.5*dSH*lenSH*(dhInldt + dhTPSHdt) +
+      lenSH*hSH*(ddSHdp*der(p) + 0.5*ddSHdh*(dhInldt+dhTPSHdt)))
       "Energy balance of superheated regime";
 
     // Calculation of heat flow rates
@@ -222,51 +225,50 @@ equation
     // Mass and energy balances of TP regime"
     //
     if useVoiFra then
-      m_flow_SCTP - m_flow_TPSH =
-        geoCV.ACroSecFloCha*geoCV.l*(dSCTP*dlenSCdt-dTPSH*(dlenSCdt+dlenTPdt) +
+      m_flow_TPSH - m_flow_SCTP =
+        geoCV.ACroSecFloCha*geoCV.l*(dTPSH*dlenSHdt-dSCTP*(dlenSHdt+dlenTPdt) +
         ((1-VoiFraThr)*dLiq + VoiFraThr*dVap)*dlenTPdt +
         lenTP*((dVap-dLiq)*VoiFraDerThr + (VoiFraThr*ddVapdp +
         (1-VoiFraThr)*ddLiqdp)*der(p)))
         "Mass balance of two-phase regime";
-      m_flow_SCTP*hSCTP - m_flow_TPSH*hTPSH + Q_flow_TP =
-        geoCV.ACroSecFloCha*geoCV.l*(dSCTP*hSCTP*dlenSCdt -
-        dTPSH*hTPSH*(dlenSCdt+dlenTPdt) - lenTP*der(p) +
+      m_flow_TPSH*hTPSH - m_flow_SCTP*hSCTP + Q_flow_TP =
+        geoCV.ACroSecFloCha*geoCV.l*(dTPSH*hTPSH*dlenSHdt -
+        dSCTP*hSCTP*(dlenSHdt+dlenTPdt) - lenTP*der(p) +
         (VoiFraThr*dVap*hVap + (1-VoiFraThr)*dLiq*hLiq)*dlenTPdt +
         lenTP*((dVap*hVap-dLiq*hLiq)*VoiFraDerThr +
-        VoiFraThr*hVap*ddVapdp*der(p) +
-        (1-VoiFraThr)*hLiq*ddLiqdp*der(p) + VoiFraThr*dVap*dhVapdp*der(p) +
-        (1-VoiFraThr)*dLiq*dhLiqdp*der(p)))
+        VoiFraThr*hVap*ddVapdp*der(p) + (1-VoiFraThr)*hLiq*ddLiqdp*der(p) +
+        VoiFraThr*dVap*dhVapdp*der(p) + (1-VoiFraThr)*dLiq*dhLiqdp*der(p)))
         "Energy balance of two-phase regime";
     else
-      m_flow_SCTP - m_flow_TPSH =
-        geoCV.ACroSecFloCha*geoCV.l*(dSCTP*dlenSCdt-dTPSH*(dlenSCdt+dlenTPdt) +
-        lenTP*(ddTPdp*der(p) + 0.5*ddTPdh*(dhSCTPdt+dhTPSHdt)) + dTP*dlenTPdt)
+      m_flow_TPSH - m_flow_SCTP =
+        geoCV.ACroSecFloCha*geoCV.l*(dTPSH*dlenSHdt-dSCTP*(dlenSHdt+dlenTPdt) +
+        lenTP*(ddTPdp*der(p) + 0.5*ddTPdh*(dhTPSHdt+dhSCTPdt)) + dTP*dlenTPdt)
         "Mass balance of two-phase regime";
-      m_flow_SCTP*hSCTP - m_flow_TPSH*hTPSH + Q_flow_TP =
-        geoCV.ACroSecFloCha*geoCV.l*(dSCTP*hSCTP*dlenSCdt-
-        dTPSH*hTPSH*(dlenSCdt+dlenTPdt) - lenTP*der(p) +
-        0.5*lenTP*dTP*(dhSCTPdt+dhTPSHdt) + lenTP*hTP*(ddTPdp*der(p) +
-        0.5*ddTPdh*(dhSCTPdt+dhTPSHdt)) + hTP*dTP*dlenTPdt)
+      m_flow_TPSH*hTPSH - m_flow_SCTP*hSCTP + Q_flow_TP =
+        geoCV.ACroSecFloCha*geoCV.l*(dTPSH*hTPSH*dlenSHdt-
+        dSCTP*hSCTP*(dlenSHdt+dlenTPdt) - lenTP*der(p) +
+        0.5*lenTP*dTP*(dhTPSHdt+dhSCTPdt) + lenTP*hTP*(ddTPdp*der(p) +
+        0.5*ddTPdh*(dhTPSHdt+dhSCTPdt)) + hTP*dTP*dlenTPdt)
         "Energy balance of two-phase regime";
     end if;
 
     // Mass and energy balances of SH regime"
     //
-    m_flow_TPSH - m_flow_out =
-      geoCV.ACroSecFloCha*geoCV.l*((dTPSH-dSH)*(dlenSCdt+dlenTPdt) +
-      lenSH*(ddSHdp*der(p) + 0.5*ddSHdh*(dhTPSHdt+dhOutdt)))
+    m_flow_inl - m_flow_TPSH =
+      geoCV.ACroSecFloCha*geoCV.l*((dSH-dTPSH)*dlenSHdt +
+      lenSH*(ddSHdp*der(p) + 0.5*ddSHdh*(dhInldt+dhTPSHdt)))
       "Mass balance of superheated regime";
-    m_flow_TPSH*hTPSH - m_flow_out*hOut + Q_flow_SH =
-      geoCV.ACroSecFloCha*geoCV.l*((dTPSH*hTPSH-dSH*hSH)*(dlenSCdt+dlenTPdt) -
-      lenSH*der(p) + 0.5*dSH*lenSH*(dhTPSHdt + dhOutdt) +
-      lenSH*hSH*(ddSHdp*der(p) + 0.5*ddSHdh*(dhTPSHdt+dhOutdt)))
+    m_flow_inl*hInl - m_flow_TPSH*hTPSH + Q_flow_SH =
+      geoCV.ACroSecFloCha*geoCV.l*((dSH*hSH-dTPSH*hTPSH)*dlenSHdt - lenSH*der(p) +
+      0.5*dSH*lenSH*(dhInldt + dhTPSHdt) +
+      lenSH*hSH*(ddSHdp*der(p) + 0.5*ddSHdh*(dhInldt+dhTPSHdt)))
       "Energy balance of superheated regime";
 
-    // Mass and energy balances of SC and TP regimes"
+    // Mass and energy balances of SC regime
     //
-    m_flow_inl = m_flow_SCTP
+    m_flow_out = m_flow_SCTP
       "Mass balance of supercooled regime - no chance";
-    dhInldt = dhSCTPdt
+    dhOutdt = dhSCTPdt
       "Energy balance of supercooled regime - no change";
 
     // Calculation of heat flow rates
@@ -288,21 +290,21 @@ equation
 
     // Mass and energy balances of SH regime"
     //
-    m_flow_TPSH - m_flow_out =
-      geoCV.ACroSecFloCha*geoCV.l*((dTPSH-dSH)*(dlenSCdt+dlenTPdt) +
-      lenSH*(ddSHdp*der(p) + 0.5*ddSHdh*(dhTPSHdt+dhOutdt)))
+    m_flow_inl - m_flow_TPSH =
+      geoCV.ACroSecFloCha*geoCV.l*((dSH-dTPSH)*dlenSHdt +
+      lenSH*(ddSHdp*der(p) + 0.5*ddSHdh*(dhInldt+dhTPSHdt)))
       "Mass balance of superheated regime";
-    m_flow_TPSH*hTPSH - m_flow_out*hOut + Q_flow_SH =
-      geoCV.ACroSecFloCha*geoCV.l*((dTPSH*hTPSH-dSH*hSH)*(dlenSCdt+dlenTPdt) -
-      lenSH*der(p) + 0.5*dSH*lenSH*(dhTPSHdt + dhOutdt) +
-      lenSH*hSH*(ddSHdp*der(p) + 0.5*ddSHdh*(dhTPSHdt+dhOutdt)))
+    m_flow_inl*hInl - m_flow_TPSH*hTPSH + Q_flow_SH =
+      geoCV.ACroSecFloCha*geoCV.l*((dSH*hSH-dTPSH*hTPSH)*dlenSHdt - lenSH*der(p) +
+      0.5*dSH*lenSH*(dhInldt + dhTPSHdt) +
+      lenSH*hSH*(ddSHdp*der(p) + 0.5*ddSHdh*(dhInldt+dhTPSHdt)))
       "Energy balance of superheated regime";
 
     // Mass and energy balances of SC and TP regimes"
     //
-    m_flow_inl = m_flow_SCTP
+    m_flow_out = m_flow_SCTP
       "Mass balance of supercooled regime - no chance";
-    dhInldt = dhSCTPdt
+    dhOutdt = dhSCTPdt
       "Energy balance of supercooled regime - no change";
     m_flow_SCTP = m_flow_TPSH
       "Mass valance of two-phase regime - no change";
@@ -324,48 +326,47 @@ equation
     // Boundary conditions
     //
     dlenSCdt = 0   "No change in length of supercooled regime";
-    der(lenSH) = 0 "No change in length of superheated regime";
+    dlenSHdt = 0   "No change in length of superheated regime";
 
     // Mass and energy balances of TP regime"
     //
     if useVoiFra then
-      m_flow_SCTP - m_flow_TPSH =
-        geoCV.ACroSecFloCha*geoCV.l*(dSCTP*dlenSCdt-dTPSH*(dlenSCdt+dlenTPdt) +
+      m_flow_TPSH - m_flow_SCTP =
+        geoCV.ACroSecFloCha*geoCV.l*(dTPSH*dlenSHdt-dSCTP*(dlenSHdt+dlenTPdt) +
         ((1-VoiFraThr)*dLiq + VoiFraThr*dVap)*dlenTPdt +
         lenTP*((dVap-dLiq)*VoiFraDerThr + (VoiFraThr*ddVapdp +
         (1-VoiFraThr)*ddLiqdp)*der(p)))
         "Mass balance of two-phase regime";
-      m_flow_SCTP*hSCTP - m_flow_TPSH*hTPSH + Q_flow_TP =
-        geoCV.ACroSecFloCha*geoCV.l*(dSCTP*hSCTP*dlenSCdt -
-        dTPSH*hTPSH*(dlenSCdt+dlenTPdt) - lenTP*der(p) +
+      m_flow_TPSH*hTPSH - m_flow_SCTP*hSCTP + Q_flow_TP =
+        geoCV.ACroSecFloCha*geoCV.l*(dTPSH*hTPSH*dlenSHdt -
+        dSCTP*hSCTP*(dlenSHdt+dlenTPdt) - lenTP*der(p) +
         (VoiFraThr*dVap*hVap + (1-VoiFraThr)*dLiq*hLiq)*dlenTPdt +
         lenTP*((dVap*hVap-dLiq*hLiq)*VoiFraDerThr +
-        VoiFraThr*hVap*ddVapdp*der(p) +
-        (1-VoiFraThr)*hLiq*ddLiqdp*der(p) + VoiFraThr*dVap*dhVapdp*der(p) +
-        (1-VoiFraThr)*dLiq*dhLiqdp*der(p)))
+        VoiFraThr*hVap*ddVapdp*der(p) + (1-VoiFraThr)*hLiq*ddLiqdp*der(p) +
+        VoiFraThr*dVap*dhVapdp*der(p) + (1-VoiFraThr)*dLiq*dhLiqdp*der(p)))
         "Energy balance of two-phase regime";
     else
-      m_flow_SCTP - m_flow_TPSH =
-        geoCV.ACroSecFloCha*geoCV.l*(dSCTP*dlenSCdt-dTPSH*(dlenSCdt+dlenTPdt) +
-        lenTP*(ddTPdp*der(p) + 0.5*ddTPdh*(dhSCTPdt+dhTPSHdt)) + dTP*dlenTPdt)
+      m_flow_TPSH - m_flow_SCTP =
+        geoCV.ACroSecFloCha*geoCV.l*(dTPSH*dlenSHdt-dSCTP*(dlenSHdt+dlenTPdt) +
+        lenTP*(ddTPdp*der(p) + 0.5*ddTPdh*(dhTPSHdt+dhSCTPdt)) + dTP*dlenTPdt)
         "Mass balance of two-phase regime";
-      m_flow_SCTP*hSCTP - m_flow_TPSH*hTPSH + Q_flow_TP =
-        geoCV.ACroSecFloCha*geoCV.l*(dSCTP*hSCTP*dlenSCdt-
-        dTPSH*hTPSH*(dlenSCdt+dlenTPdt) - lenTP*der(p) +
-        0.5*lenTP*dTP*(dhSCTPdt+dhTPSHdt) + lenTP*hTP*(ddTPdp*der(p) +
-        0.5*ddTPdh*(dhSCTPdt+dhTPSHdt)) + hTP*dTP*dlenTPdt)
+      m_flow_TPSH*hTPSH - m_flow_SCTP*hSCTP + Q_flow_TP =
+        geoCV.ACroSecFloCha*geoCV.l*(dTPSH*hTPSH*dlenSHdt-
+        dSCTP*hSCTP*(dlenSHdt+dlenTPdt) - lenTP*der(p) +
+        0.5*lenTP*dTP*(dhTPSHdt+dhSCTPdt) + lenTP*hTP*(ddTPdp*der(p) +
+        0.5*ddTPdh*(dhTPSHdt+dhSCTPdt)) + hTP*dTP*dlenTPdt)
         "Energy balance of two-phase regime";
     end if;
 
     // Mass and energy balances of SC and SH regimes"
     //
-    m_flow_inl = m_flow_SCTP
+    m_flow_out = m_flow_SCTP
       "Mass balance of supercooled regime - no chance";
-    dhInldt = dhSCTPdt
+    dhOutdt = dhSCTPdt
       "Energy balance of supercooled regime - no change";
-    m_flow_TPSH = m_flow_out
+    m_flow_TPSH = m_flow_inl
       "Mass balance of superheated regime - no change";
-    dhTPSHdt = dhOutdt
+    dhTPSHdt = dhInldt
       "Energy balance of superheated regime - no change";
 
     // Calculation of heat flow rates
@@ -400,6 +401,25 @@ equation
 
   elseif heaFloCal==Utilities.Types.CalculationHeatFlow.E_NTU then
     /* Epsilon-NTU - Method of number of transfer units */
+
+    kASC = max(abs(m_flow_out)*cpSC,1e-8) * (1 - exp(-AlpThrSC *
+      geoCV.AHeaTra*lenSC/max(abs(m_flow_out)*cpSC,1e-8)))
+      "Effective thermal conductance of th supercooled regime";
+    kATP = AlpThrTP * geoCV.AHeaTra*lenTP
+      "Effective thermal conductance of th two-phase regime";
+    kASH = max(abs(m_flow_TPSH)*cpSH,1e-8) * (1 - exp(-AlpThrSH *
+      geoCV.AHeaTra*lenSH/max(abs(m_flow_TPSH)*cpSH,1e-8)))
+      "Effective thermal conductance of th superheated regime";
+
+    dTSC = heatPortSC.T-TOut
+      "Temperature difference between the wall and the supercooled regime";
+    dTTP = heatPortTP.T-TTP
+      "Temperature difference between the wall and the two-phase regime";
+    dTSH = heatPortSH.T-TTPSH
+      "Temperature difference between the wall and the superheated regime";
+
+  elseif heaFloCal==Utilities.Types.CalculationHeatFlow.E_NTU_Graeber then
+    /* Epsilon-NTU-Gräber - Method of number of transfer units (simplified)*/
 
     kASC = max(abs(m_flow_out)*cpSC,1e-8) * (1 - exp(-AlpThrSC *
       geoCV.AHeaTra*lenSC/max(abs(m_flow_out)*cpSC,1e-8)))

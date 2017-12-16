@@ -20,10 +20,10 @@ partial model PartialMovingBoundaryCell
 
   // Definition of parameters describing the void fraction
   //
-  parameter Boolean useVoiFra = false
+  parameter Boolean useVoiFra = true
     "= true, if properties of two-phase regime are computed by void fraction"
     annotation (Dialog(tab="General",group="Void fraction"));
-  parameter Boolean useVoiFraMod = false
+  parameter Boolean useVoiFraMod = true
     "= true, if model is used to calculate void fraction"
     annotation (Dialog(tab="General",group="Void fraction",
                 enable = useVoiFra));
@@ -86,7 +86,7 @@ partial model PartialMovingBoundaryCell
                 enable = not useHeaCoeMod));
 
   parameter Utilities.Types.CalculationHeatFlow
-    heaFloCal = Utilities.Types.CalculationHeatFlow.E_NTU
+    heaFloCal = Utilities.Types.CalculationHeatFlow.E_NTU_Graeber
     "Choose the way of calculating the heat flow between the wall and medium"
     annotation (Dialog(tab="Heat transfer",group="Heat flow calculation"));
 
@@ -109,7 +109,7 @@ partial model PartialMovingBoundaryCell
     annotation (Dialog(tab="Advanced",group="Initialisation"));
   parameter Modelica.SIunits.SpecificEnthalpy dhIni = 10
     "Difference between inlet and outlet enthalpies 
-    (hInl = hOut+dh0 | hOut=hInl+dh0) at initialisation"
+    (hInl = hOut+dh0) at initialisation"
     annotation (Dialog(tab="Advanced",group="Initialisation"));
 
   parameter Boolean useFixStaVal = false
@@ -212,7 +212,6 @@ partial model PartialMovingBoundaryCell
     "Dummy block used for transmission of the derivative of void fraction of the
     two-phase regime if its model is conditionally removed";
 
-
   // Definition of records describing thermodynamic states
   //
 public
@@ -269,9 +268,7 @@ public
   Modelica.SIunits.Density dOutDes = Medium.density_ph(p=p,h=hOut)
     "Density at the outlet of design direction";
 
-  Modelica.SIunits.SpecificEnthalpy hInl(
-     stateSelect=if appHX==Utilities.Types.ApplicationHX.Evaporator then
-    StateSelect.avoid else StateSelect.prefer)
+  Modelica.SIunits.SpecificEnthalpy hInl
     "Specific enthalpy at the inlet of design direction";
   Modelica.SIunits.SpecificEnthalpy hSC
     "Specific enthalpy of the supercooled regime";
@@ -285,9 +282,7 @@ public
     regime";
   Modelica.SIunits.SpecificEnthalpy hSH
     "Specific enthalpy of the superheated regime";
-  Modelica.SIunits.SpecificEnthalpy hOut(
-     stateSelect=if appHX==Utilities.Types.ApplicationHX.Evaporator then
-    StateSelect.prefer else StateSelect.avoid)
+  Modelica.SIunits.SpecificEnthalpy hOut(stateSelect=StateSelect.prefer)
     "Specific enthalpy at the outlet of design direction";
 
   Modelica.SIunits.Density dLiq = Medium.bubbleDensity(sat=TPSat)
@@ -402,22 +397,22 @@ protected
   // Definition of variables describing conservation of mass and energy
   //
 public
-  Utilities.Balances.MovingBoundary balEqu(
-    mSC = geoCV.ACroSec*lenSC*dSC,
-    mTP = geoCV.ACroSec*lenTP*dTP,
-    mSH = geoCV.ACroSec*lenSH*dSH,
-    dmSCdt = m_flow_inl - m_flow_SCTP,
-    dmTPdt = m_flow_SCTP - m_flow_TPSH,
-    dmSHdt = m_flow_TPSH - m_flow_out,
-    USC = geoCV.ACroSec*lenSC*(dSC*hSC-p),
-    UTP = geoCV.ACroSec*lenTP*(dTP*hTP-p),
-    USH = geoCV.ACroSec*lenSH*(dSH*hSH-p),
-    dUSCdt = m_flow_inl*hInl - m_flow_SCTP*hSCTP + Q_flow_SC +
-      der(p)*geoCV.ACroSec*lenSC + p*geoCV.ACroSec*der(lenSC),
-    dUTPdt = m_flow_SCTP*hSCTP - m_flow_TPSH*hTPSH + Q_flow_TP +
-      der(p)*geoCV.ACroSec*lenTP + p*geoCV.ACroSec*der(lenTP),
-    dUSHdt = m_flow_TPSH*hTPSH - m_flow_out*hOut + Q_flow_SH +
-      der(p)*geoCV.ACroSec*lenSH - p*geoCV.ACroSec*(der(lenSC)+der(lenTP))) if
+  Utilities.Balances.MovingBoundaryConservation balEqu(
+    mSC=geoCV.ACroSec*lenSC*dSC,
+    mTP=geoCV.ACroSec*lenTP*dTP,
+    mSH=geoCV.ACroSec*lenSH*dSH,
+    dmSCdt=m_flow_inl - m_flow_SCTP,
+    dmTPdt=m_flow_SCTP - m_flow_TPSH,
+    dmSHdt=m_flow_TPSH - m_flow_out,
+    USC=geoCV.ACroSec*lenSC*(dSC*hSC - p),
+    UTP=geoCV.ACroSec*lenTP*(dTP*hTP - p),
+    USH=geoCV.ACroSec*lenSH*(dSH*hSH - p),
+    dUSCdt=m_flow_inl*hInl - m_flow_SCTP*hSCTP + Q_flow_SC + der(p)*geoCV.ACroSec
+        *lenSC + p*geoCV.ACroSec*der(lenSC),
+    dUTPdt=m_flow_SCTP*hSCTP - m_flow_TPSH*hTPSH + Q_flow_TP + der(p)*geoCV.ACroSec
+        *lenTP + p*geoCV.ACroSec*der(lenTP),
+    dUSHdt=m_flow_TPSH*hTPSH - m_flow_out*hOut + Q_flow_SH + der(p)*geoCV.ACroSec
+        *lenSH - p*geoCV.ACroSec*(der(lenSC) + der(lenTP))) if
        calBalEqu
     "Model that computes mass and energy balances of the working fluid";
 
@@ -458,84 +453,115 @@ initial equation
 
     lenSC:      Length of supercooled regime
     lenTP:      Length of two-phase regime
-    hInl|hOut:  Specific enthalpy at inlet|outlet of design direction
+    lenSH:      Length of superheated regime
+    hOut:       Specific enthalpy at inlet|outlet of design direction
     hSCTP:      Specific enthalpy at boundary between SC and TP
     hTPSH:      Specific enthalpy at boundary between TP and SH
     voiFra:     Mean void fraction
   */
 
-  if appHX==Utilities.Types.ApplicationHX.Evaporator then
-    /* Evaporator - Design direction */
-    hOut = hInl + dhIni "Specific enthalpy at outlet of design direction";
-  else
-    /* Condenser - Reverse direction */
-    hInl = hOut + dhIni "Specific enthalpy at inlet of design direction";
-  end if;
+  hOut = hInl + dhIni "Specific enthalpy at outlet of design direction";
 
   if modCV==Utilities.Types.ModeCV.SC then
     /* Supercooled */
-    lenSC = 1-2*lenMin "Length of supercooled regime";
-    lenTP = lenMin "Length of two-phase regime";
-    hSCTP = hTPSH "Specific enthalpy at boundary between SC and TP";
-    hTPSH = hOut "Specific enthalpy at boundary between TP and SH";
+    if appHX==Utilities.Types.ApplicationHX.Evaporator then
+      lenSC = 1-2*lenMin "Length of supercooled regime";
+      lenTP = lenMin "Length of two-phase regime";
+      hSCTP = hTPSH "Specific enthalpy at boundary between SC and TP";
+      hTPSH = hOut "Specific enthalpy at boundary between TP and SH";
+    else
+      lenTP = lenMin "Length of two-phase regime";
+      lenSH = lenMin "Length of superheated regime";
+      hSCTP = hTPSH "Specific enthalpy at boundary between SC and TP";
+      hTPSH = hInl "Specific enthalpy at boundary between TP and SH";
+    end if;
     if useVoiFraMod then
       VoiFraThr   = 0 "Mean void fraction";
     end if;
 
   elseif modCV==Utilities.Types.ModeCV.SCTP then
     /* Supercooled - Two-phase */
-    lenTP = lenSC-lenMin "Length of two-phase regime";
     if appHX==Utilities.Types.ApplicationHX.Evaporator then
       lenSC = (hLiq-hInl)/(hOut-hInl) "Length of supercooled regime";
+      lenTP = 1-lenSC-lenMin "Length of two-phase regime";
       hSCTP = hLiq "Specific enthalpy at boundary between SC and TP";
       hTPSH = hOut "Specific enthalpy at boundary between TP and SH";
     else
-      lenTP = lenMin "Length of supercooled regime";
+      lenTP = 1-lenSH-lenMin "Length of two-phase regime";
+      lenSH = lenMin "Length of superheated regime";
       hSCTP = hLiq "Specific enthalpy at boundary between SC and TP";
-      hTPSH = hOut "Specific enthalpy at boundary between TP and SH";
+      hTPSH = hInl "Specific enthalpy at boundary between TP and SH";
     end if;
     if useVoiFraMod then
-      VoiFraThr   = 0.85;//VoiFraIntThr "Mean void fraction";
+      VoiFraThr = VoiFraIntThr "Mean void fraction";
     end if;
 
   elseif modCV==Utilities.Types.ModeCV.TP then
     /* Two-phase */
-    lenSC = lenMin "Length of supercooled regime";
-    lenTP = 1-2*lenMin "Length of two-phase regime";
-    hSCTP = hInl "Specific enthalpy at boundary between SC and TP";
-    hTPSH = hOut "Specific enthalpy at boundary between TP and SH";
+    if appHX==Utilities.Types.ApplicationHX.Evaporator then
+      lenSC = lenMin "Length of supercooled regime";
+      lenTP = 1-2*lenMin "Length of two-phase regime";
+      hSCTP = hInl "Specific enthalpy at boundary between SC and TP";
+      hTPSH = hOut "Specific enthalpy at boundary between TP and SH";
+    else
+      lenTP = 1-2*lenMin "Length of two-phase regime";
+      lenSH = lenMin "Length of superheated regime";
+      hSCTP = hOut "Specific enthalpy at boundary between SC and TP";
+      hTPSH = hInl "Specific enthalpy at boundary between TP and SH";
+    end if;
     if useVoiFraMod then
-      VoiFraThr   = 0.85;//VoiFraIntThr "Mean void fraction";
+      VoiFraThr = VoiFraIntThr "Mean void fraction";
     end if;
 
   elseif modCV==Utilities.Types.ModeCV.TPSH then
     /* Two-phase - Superheated */
-    lenSC = lenMin "Length of supercooled regime";
-    lenTP = (hVap-hInl)/(hOut-hInl) "Length of two-phase regime";
-    hSCTP = hInl "Specific enthalpy at boundary between SC and TP";
-    hTPSH = hVap "Specific enthalpy at boundary between TP and SH";
+    if appHX==Utilities.Types.ApplicationHX.Evaporator then
+      lenSC = lenMin "Length of supercooled regime";
+      lenTP = (hVap-hSCTP)/(hOut-hInl) "Length of two-phase regime";
+      hSCTP = hInl "Specific enthalpy at boundary between SC and TP";
+      hTPSH = hVap "Specific enthalpy at boundary between TP and SH";
+    else
+      lenTP = (hVap-hSCTP)/(hOut-hInl) "Length of two-phase regime";
+      lenSH = 1-lenTP-lenMin "Length of superheated regime";
+      hSCTP = hOut "Specific enthalpy at boundary between SC and TP";
+      hTPSH = hVap "Specific enthalpy at boundary between TP and SH";
+    end if;
     if useVoiFraMod then
-      VoiFraThr   = 0.85;//VoiFraIntThr "Mean void fraction";
+      VoiFraThr = VoiFraIntThr "Mean void fraction";
     end if;
 
   elseif modCV==Utilities.Types.ModeCV.SH then
     /* Superheated */
-    lenSC = lenMin "Length of supercooled regime";
-    lenTP = lenMin "Length of two-phase regime";
-    hSCTP = hInl "Specific enthalpy at boundary between SC and TP";
-    hTPSH = hSCTP "Specific enthalpy at boundary between TP and SH";
+    if appHX==Utilities.Types.ApplicationHX.Evaporator then
+      lenSC = lenMin "Length of supercooled regime";
+      lenTP = lenMin "Length of two-phase regime";
+      hSCTP = hInl "Specific enthalpy at boundary between SC and TP";
+      hTPSH = hSCTP "Specific enthalpy at boundary between TP and SH";
+    else
+      lenTP = lenMin "Length of two-phase regime";
+      lenSH = 1-2*lenMin "Length of superheated regime";
+      hSCTP = hOut "Specific enthalpy at boundary between SC and TP";
+      hTPSH = hSCTP "Specific enthalpy at boundary between TP and SH";
+    end if;
     if useVoiFraMod then
       VoiFraThr   = 1 "Mean void fraction";
     end if;
 
   else
     /* Supercooled - Two-phase - Superheated*/
-    lenSC = (hLiq-hInl)/(hOut-hInl) "Length of supercooled regime";
-    lenTP = (hVap-hLiq)/(hOut-hInl) "Length of two-phase regime";
-    hSCTP = hLiq "Specific enthalpy at boundary between SC and TP";
-    hTPSH = hVap "Specific enthalpy at boundary between TP and SH";
+    if appHX==Utilities.Types.ApplicationHX.Evaporator then
+      lenSC = (hLiq-hInl)/(hOut-hInl) "Length of supercooled regime";
+      lenTP = (hVap-hLiq)/(hOut-hInl) "Length of two-phase regime";
+      hSCTP = hLiq "Specific enthalpy at boundary between SC and TP";
+      hTPSH = hVap "Specific enthalpy at boundary between TP and SH";
+    else
+      lenSH = (hInl-hVap)/(hInl-hOut) "Length of superheated regime";
+      lenTP = (hVap-hLiq)/(hInl-hOut) "Length of two-phase regime";
+      hSCTP = hLiq "Specific enthalpy at boundary between SC and TP";
+      hTPSH = hVap "Specific enthalpy at boundary between TP and SH";
+    end if;
     if useVoiFraMod then
-      VoiFraThr   = 0.85;//VoiFraIntThr "Mean void fraction";
+      VoiFraThr = VoiFraIntThr "Mean void fraction";
     end if;
   end if;
 

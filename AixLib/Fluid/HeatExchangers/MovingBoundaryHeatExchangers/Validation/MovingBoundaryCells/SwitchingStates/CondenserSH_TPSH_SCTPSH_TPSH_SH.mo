@@ -1,5 +1,5 @@
-within AixLib.Fluid.HeatExchangers.MovingBoundaryHeatExchangers.Validation.MovingBoundaryCells.SingleStates;
-model CondenserSH
+within AixLib.Fluid.HeatExchangers.MovingBoundaryHeatExchangers.Validation.MovingBoundaryCells.SwitchingStates;
+model CondenserSH_TPSH_SCTPSH_TPSH_SH
   "Validation model to check a moving boundary cell of a condenser"
   extends BaseExampleCondenser(
     redeclare package Medium =
@@ -10,8 +10,8 @@ model CondenserSH
     movBouCel(tauVoiFra=125,
       useVoiFraMod=true,
       appHX=Utilities.Types.ApplicationHX.Condenser),
-    trapTemp(amplitude=-5, offset=293.15),
-    ramEnt(offset=425e3));
+    trapTemp(              offset=293.15, amplitude=-60),
+    ramEnt(offset=425e3, height=25e3));
   extends Modelica.Icons.Example;
 
   annotation (Documentation(revisions="<html>
@@ -23,4 +23,4 @@ model CondenserSH
   </li>
 </ul>
 </html>"), experiment(StopTime=6400));
-end CondenserSH;
+end CondenserSH_TPSH_SCTPSH_TPSH_SH;

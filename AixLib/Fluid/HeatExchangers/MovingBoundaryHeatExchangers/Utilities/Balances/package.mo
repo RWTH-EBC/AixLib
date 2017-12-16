@@ -1,4 +1,5 @@
 within AixLib.Fluid.HeatExchangers.MovingBoundaryHeatExchangers.Utilities;
-package Balances
-extends Modelica.Icons.VariantsPackage;
+package Balances "Package that contains models containg belance equations"
+  extends Modelica.Icons.VariantsPackage;
+
 end Balances;

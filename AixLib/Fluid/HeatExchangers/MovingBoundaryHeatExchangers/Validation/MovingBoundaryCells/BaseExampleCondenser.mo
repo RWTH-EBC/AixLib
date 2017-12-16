@@ -34,7 +34,7 @@ model BaseExampleCondenser
     "Source that provides a constant mass flow rate with a prescribed specific
     enthalpy"
     annotation (Placement(transformation(extent={{60,-40},{40,-20}})));
-  Utilities.FluidCells.EvaporatorCell movBouCel(
+  Utilities.FluidCells.CondenserCell movBouCel(
     geoCV(
       CroSecGeo=Utilities.Types.GeometryCV.Circular,
       nFloCha=50,
@@ -47,13 +47,13 @@ model BaseExampleCondenser
     AlpSH=2500,
     heaFloCal=Utilities.Types.CalculationHeatFlow.E_NTU,
     pIni=pOut,
-    appHX=AixLib.Fluid.HeatExchangers.MovingBoundaryHeatExchangers.Utilities.Types.ApplicationHX.Condenser,
-
+    appHX=Utilities.Types.ApplicationHX.Condenser,
     useVoiFra=true,
     useVoiFraMod=true,
     calBalEqu=false,
     useFixStaVal=false) "Moving boundary cell of the working fluid"
     annotation (Placement(transformation(extent={{-10,-40},{10,-20}})));
+
   Sources.Boundary_ph sin(
     redeclare package Medium = Medium,
     use_p_in=true,
@@ -62,18 +62,17 @@ model BaseExampleCondenser
     "Sink that provides a constant pressure"
     annotation (Placement(transformation(extent={{10,10},{-10,-10}},
                 rotation=180,origin={-48,-30})));
-  Utilities.Guards.EvaporatorGuard gua(
-    useFixModCV=true,
+  Utilities.Guards.GeneralGuard gua(
+    useFixModCV=false,
     lenCV=movBouCel.lenOut,
-    hInlDes=movBouCel.hInlDes,
-    hOutDes=movBouCel.hOutDes,
+    hOutEva=movBouCel.hInl,
+    hOutCon=movBouCel.hOut,
     hLiq=movBouCel.hLiq,
     hVap=movBouCel.hVap,
     voiFra=movBouCel.VoiFraThr,
     modCVPar=Utilities.Types.ModeCV.SC,
     TWalTP=273.15) "Guard that prescribes current flow state"
     annotation (Placement(transformation(extent={{100,20},{80,40}})));
-
    Modelica.Blocks.Sources.Ramp ramMFlow(
     duration=6400,
     offset=m_flow_nominal,
@@ -83,7 +82,7 @@ model BaseExampleCondenser
    Modelica.Blocks.Sources.Ramp ramEnt(
     duration=6400,
     offset=175e3,
-    height=-100e1)
+    height=100e3)
     "Ramp to provide dummy signal for specific enthalpy at inlet"
     annotation (Placement(transformation(extent={{100,-50},{80,-30}})));
    Modelica.Blocks.Sources.Ramp ramPre(
@@ -94,12 +93,12 @@ model BaseExampleCondenser
     annotation (Placement(transformation(extent={{-100,-20},{-80,0}})));
 
   Modelica.Blocks.Sources.Trapezoid trapTemp(
-    amplitude=45,
     rising=2750,
     width=450,
     falling=2750,
     period=6400,
-    offset=278.15)
+    offset=278.15,
+    amplitude=-45)
     "Trapezoid to provide dummy signal for temperature"
     annotation (Placement(transformation(extent={{-100,20},{-80,40}})));
 
@@ -111,23 +110,16 @@ equation
   // Check if reinitialisation is necessary
   //
   when gua.swi then
-    if movBouCel.appHX==Utilities.Types.ApplicationHX.Evaporator then
-      /* Evaporator - Design direction */
-      reinit(movBouCel.hOutDes,gua.hOutDesIni)
-        "Reinitialisation of hOutDesDes";
-    else
-      /* Condenser - Reverse direction */
-      reinit(movBouCel.hInlDes,gua.hInlDesIni)
-        "Reinitialisation of hInlDesDes";
-    end if;
     reinit(movBouCel.hSCTP,gua.hSCTPIni)
       "Reinitialisation of hSCTP";
     reinit(movBouCel.hTPSH,gua.hTPSHIni)
       "Reinitialisation of hTPSH";
-    reinit(movBouCel.lenSC,gua.lenSCIni)
-      "Reinitialisation of lenCV[1]";
+    reinit(movBouCel.hOut,gua.hOutConIni)
+      "Reinitialisation of hOutDesDes";
     reinit(movBouCel.lenTP,gua.lenTPIni)
       "Reinitialisation of lenTP[2]";
+    reinit(movBouCel.lenSH,1-gua.lenSCIni-gua.lenTPIni)
+      "Reinitialisation of lenCV[3]";
     reinit(movBouCel.VoiFraThr,gua.voiFraIni)
       "Reinitialisation of voiFra";
     end when;
