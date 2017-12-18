@@ -1,5 +1,5 @@
 within AixLib.Fluid.Movers.Compressors.Validation.StaticHeatPumpBoundaries;
-model BaseModelStaticHeatPump
+model BaseModelStaticHeatPumpController
   "Base model to test compressors using static heat pump boundaries"
 
   // Definition of medium
@@ -114,6 +114,11 @@ model BaseModelStaticHeatPump
     "Model that describes a simple static evaporator"
     annotation (Placement(transformation(extent={{-30,-20},{-10,0}})));
 
+  Modelica.Blocks.Continuous.LimPID PID(
+    controllerType=Modelica.Blocks.Types.SimpleController.P,
+    yMax=30,
+    yMin=120) "Controller of the compressor's rotational speeds"
+    annotation (Placement(transformation(extent={{-90,40},{-70,20}})));
   Modelica.Blocks.Routing.Replicator repMea(nout=nCom)
     "Replicating the current value of the manipulated variables"
     annotation (Placement(transformation(extent={{-60,20},{-40,40}})));
@@ -405,6 +410,13 @@ protected
           extent={{-10,-10},{10,10}},
           rotation=-90,
           origin={-20,100})));
+    Modelica.Blocks.Interfaces.RealOutput outQFlo
+      "Heat capacity"
+      annotation (Placement(
+          transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=-90,
+          origin={0,-100})));
 
     // Definition of variables describing condenser
     //
@@ -434,7 +446,6 @@ protected
     Modelica.SIunits.Temperature TRetFlo
       "Temperature return flow at heat capacity";
 
-
   equation
     // Connection of ports
     //
@@ -448,8 +459,10 @@ protected
     hInl = inStream(port_a.h_outflow)
       "Specific enthalpy at condenser's inlet";
 
-    TRetFlo =inpTRetFlo
+    TRetFlo = inpTRetFlo
       "Temperature return flow at heat capacity";
+    outQFlo = Q_flow
+      "Heat capacity";
 
     // Secondary side
     //
@@ -474,7 +487,6 @@ protected
 
     TInl = Medium.temperature_ph(p=pSat,h=hInl)
       "Temperature at condenser's inlet";
-
 
     annotation (Icon(graphics={
           Rectangle(
@@ -562,9 +574,6 @@ equation
   connect(inpAmbTemp.y, ambTemp.T)
     annotation (Line(points={{-69,-28},{86,-28},{86,30},{82,30}},
                 color={0,0,127}));
-  connect(inpRotSpe.y, repMea.u)
-    annotation (Line(points={{-69,-14},{-66,-14},{-66,30},{-62,30}},
-                color={0,0,127}));
   connect(repMea.y, dataBus.comBus.extManVarCom)
     annotation (Line(points={{-39,30},{-29.95,30},{-29.95,29.95}},
                 color={0,0,127}));
@@ -574,6 +583,15 @@ equation
   connect(inpTRetFlo.y, con.inpTRetFlo)
     annotation (Line(points={{-69,-56},{-69,
           -56},{94,-56},{94,94},{-22,94},{-22,80}}, color={0,0,127}));
+  connect(PID.y, repMea.u)
+    annotation (Line(points={{-69,30},{-62,30}}, color={0,0,127}));
+  connect(con.outQFlo, PID.u_m)
+    annotation (Line(points={{-20,60},{-20,50},{-80,50},{-80,42}},
+                color={0,0,127}));
+  connect(PID.u_s, inpHeaCap.y)
+    annotation (Line(points={{-92,30},{-96,30},{-96,8},{-60,8},{-60,-42},
+                {-69,-42}}, color={0,0,127}));
+
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
       Ellipse(
@@ -606,4 +624,4 @@ I still need to add the documentation!
 </p>
 </html>"),
     experiment(StopTime=16.999));
-end BaseModelStaticHeatPump;
+end BaseModelStaticHeatPumpController;

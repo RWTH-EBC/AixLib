@@ -64,7 +64,8 @@ model BaseModelStaticBoundaries
         12,55.1,18.5,80.1,3.731,0.211; 44,75,12,52.4,24.8,91.6,4.982,0.21; 45,75,
         11.7,50.4,30.5,103.6,6.248,0.199; 46,75,8.4,38.8,24.1,94.2,5.035,0.142;
         47,75,5.4,26.3,21.5,100.2,4.692,0.087],
-    columns=2:8)
+    columns=2:8,
+    smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments)
     "Static boundaries of compressor model"
     annotation (Placement(transformation(extent={{-90,20},{-70,40}})));
 
@@ -132,13 +133,7 @@ model BaseModelStaticBoundaries
     m_flow_start=0.05,
     h_out_start=400e3,
     VDis=fill(5.24444e-5,nCom),
-    useInpFil=fill(false, nCom),
-    redeclare model EngineEfficiency =
-        Utilities.EngineEfficiency.SpecifiedEfficiencies.Generic_VarRef_VarDisVol_RotaryScroll,
-    redeclare model IsentropicEfficiency =
-        Utilities.IsentropicEfficiency.SpecifiedEfficiencies.Generic_VarRef_VarDisVol_RotaryScroll,
-    redeclare model VolumetricEfficiency =
-        Utilities.VolumetricEfficiency.SpecifiedEfficiencies.Generic_VarRef_VarDisVol_RotaryScroll)
+    useInpFil=fill(false, nCom))
     "Model that describes modular compressors in parallel"
     annotation (Placement(transformation( extent={{-20,20},{20,-20}},
                 rotation=90,origin={0,-50})));
@@ -166,7 +161,7 @@ model BaseModelStaticBoundaries
   Real inpPEle = inpDat.y[6]*1000
     "Power consumption of the compressor";
   Real inpTime = time
-    "Power consumption of the compressor";
+    "Simulation time";
 
 
 equation
@@ -234,12 +229,13 @@ equation
 Compressor type: Scroll-Compressur
 Refrigerant: R134a",
           textStyle={TextStyle.Bold}), Text(
-          extent={{0,72},{100,64}},
+          extent={{0,80},{100,60}},
           lineColor={0,0,0},
           textString="Difference | Relative Difference
 --------------------------------------
 Power Consumption
-Mass Flow Rate")}),
+Mass Flow Rate",
+          textStyle={TextStyle.Bold})}),
     Documentation(revisions="<html>
 <ul>
   <li>
