@@ -147,7 +147,8 @@ model BaseModelStaticBoundaries
     redeclare package Medium = Medium,
     use_p_in=true,
     use_T_in=true,
-    nPorts=1)      "Sink with prescribed pressure and temperature"
+    nPorts=1)
+    "Sink with prescribed pressure and temperature"
     annotation (Placement(transformation(extent={{-40,-30},{-20,-10}})));
 
   Controls.Interfaces.ModularHeatPumpControlBus dataBus(
@@ -159,6 +160,13 @@ model BaseModelStaticBoundaries
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-98,0})));
+
+  // Definition of further variables
+  //
+  Real inpPEle = inpDat.y[6]*1000
+    "Power consumption of the compressor";
+  Real inpTime = time
+    "Power consumption of the compressor";
 
 
 equation
