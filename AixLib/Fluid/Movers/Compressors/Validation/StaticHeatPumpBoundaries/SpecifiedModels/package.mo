@@ -1,6 +1,5 @@
-within AixLib.Fluid.Movers.Compressors.Validation;
-package StaticHeatPumpBoundaries "This package contains models to validate the comprosser models using 
-  static heat pump boundary conditions"
+within AixLib.Fluid.Movers.Compressors.Validation.StaticHeatPumpBoundaries;
+package SpecifiedModels "Package that contains validation models of different static boundary models"
   extends Modelica.Icons.ExamplesPackage;
 
 annotation (Documentation(revisions="<html>
@@ -12,4 +11,4 @@ annotation (Documentation(revisions="<html>
   </li>
 </ul>
 </html>"));
-end StaticHeatPumpBoundaries;
+end SpecifiedModels;
