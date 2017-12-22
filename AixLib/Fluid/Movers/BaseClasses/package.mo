@@ -1,11 +1,17 @@
-within AixLib.Fluid.Movers;
+﻿within AixLib.Fluid.Movers;
+
 package BaseClasses "Package with base classes for AixLib.Fluid.Movers"
+
   extends Modelica.Icons.BasesPackage;
 
+
+
 annotation (preferredView="info", Documentation(info="<html>
-<p>
-This package contains base classes that are used to construct the models in
-<a href=\"modelica://AixLib.Fluid.Movers\">AixLib.Fluid.Movers</a>.
-</p>
+<p>
+  This package contains base classes that are used to construct the models in <a href=\"modelica://AixLib.Fluid.Movers\">AixLib.Fluid.Movers</a>.
+</p></html>",revisions="<html>
+
 </html>"));
+
 end BaseClasses;
+

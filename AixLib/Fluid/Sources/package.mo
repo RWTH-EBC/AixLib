@@ -1,13 +1,21 @@
-within AixLib.Fluid;
+﻿within AixLib.Fluid;
+
 package Sources "Package with boundary condition models"
+
   extends Modelica.Icons.SourcesPackage;
 
 
+
+
+
 annotation (preferredView="info",
+
 Documentation(info="<html>
-<p>
-Package <b>Sources</b> contains generic sources for fluid connectors
-to define fixed or prescribed ambient conditions.
-</p>
+<p>
+  Package <b>Sources</b> contains generic sources for fluid connectors to define fixed or prescribed ambient conditions.
+</p></html>",revisions="<html>
+
 </html>"));
+
 end Sources;
+

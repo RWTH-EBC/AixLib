@@ -1,10 +1,17 @@
-within AixLib.Fluid;
+﻿within AixLib.Fluid;
+
 package HeatPumps 
+
   extends Modelica.Icons.VariantsPackage;
+
 annotation (preferredView="info", Documentation(info="<html>
-<p>
-This package contains components models for heat pumps.
-</p>
+<p>
+  This package contains components models for heat pumps.
+</p></html>",revisions="<html>
+
 </html>"));
 
+
+
 end HeatPumps;
+

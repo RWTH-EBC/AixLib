@@ -1,11 +1,15 @@
-within AixLib.Controls.SetPoints;
+﻿within AixLib.Controls.SetPoints;
+
 package Examples "Collection of models that illustrate model use and test models"
+
   extends Modelica.Icons.ExamplesPackage;
+
 annotation (preferredView="info", Documentation(info="<html>
-<p>
-This package contains examples for the use of models that can be found in
-<a href=\"modelica://AixLib.Controls.SetPoints\">
-AixLib.Controls.SetPoints</a>.
-</p>
+<p>
+  This package contains examples for the use of models that can be found in <a href=\"modelica://AixLib.Controls.SetPoints\">AixLib.Controls.SetPoints</a>.
+</p></html>",revisions="<html>
+
 </html>"));
+
 end Examples;
+

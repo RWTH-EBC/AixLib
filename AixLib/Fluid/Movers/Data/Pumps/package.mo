@@ -1,15 +1,20 @@
-within AixLib.Fluid.Movers.Data;
+﻿within AixLib.Fluid.Movers.Data;
+
 package Pumps "Package containing data for pumps"
+
   extends Modelica.Icons.Package;
 
+
+
 annotation (preferredView="info", Documentation(info="<html>
-<p>
-This package contains data for pumps.
-</p>
-<p>
-See the
-<a href=\"modelica://AixLib.Fluid.Movers.UsersGuide\">
-User's Guide</a> for more information.
-</p>
+<p>
+  This package contains data for pumps.
+</p>
+<p>
+  See the <a href=\"modelica://AixLib.Fluid.Movers.UsersGuide\">User's Guide</a> for more information.
+</p></html>",revisions="<html>
+
 </html>"));
+
 end Pumps;
+

@@ -1,13 +1,19 @@
-within AixLib.Fluid.HeatExchangers.ActiveBeams.BaseClasses;
+﻿within AixLib.Fluid.HeatExchangers.ActiveBeams.BaseClasses;
+
 package Examples
+
   extends Modelica.Icons.ExamplesPackage;
 
 
+
+
+
 annotation (Documentation(info="<html>
-<p>
-This package contains examples for the use of models that can be found in
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.ActiveBeams.BaseClasses\">
-AixLib.Fluid.HeatExchangers.ActiveBeams.BaseClasses</a>.
-</p>
+<p>
+  This package contains examples for the use of models that can be found in <a href=\"modelica://AixLib.Fluid.HeatExchangers.ActiveBeams.BaseClasses\">AixLib.Fluid.HeatExchangers.ActiveBeams.BaseClasses</a>.
+</p></html>",revisions="<html>
+
 </html>"));
+
 end Examples;
+
