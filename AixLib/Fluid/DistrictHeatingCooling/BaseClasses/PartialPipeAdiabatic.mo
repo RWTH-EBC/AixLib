@@ -3,59 +3,96 @@ partial model PartialPipeAdiabatic
   "Base class for an adiabatic pipe connection in DHC systems"
   extends AixLib.Fluid.Interfaces.PartialTwoPort;
 
-  replaceable package Medium =
-      Modelica.Media.Interfaces.PartialMedium "Medium in the component"
-      annotation (choicesAllMatching = true);
+  parameter Boolean from_dp=false
+    "= true, use m_flow = f(dp) else dp = f(m_flow)"
+    annotation (Dialog(tab="Advanced"));
+
+  parameter Modelica.SIunits.Length dh=sqrt(4*m_flow_nominal/rho_default/v_nominal/Modelica.Constants.pi)
+    "Hydraulic diameter (assuming a round cross section area)"
+    annotation (Dialog(group="Material"));
+
+  parameter Modelica.SIunits.Velocity v_nominal = 1.5
+    "Velocity at m_flow_nominal (used to compute default value for hydraulic diameter dh)"
+    annotation(Dialog(group="Nominal condition"));
+
+  parameter Real ReC=4000
+    "Reynolds number where transition to turbulent starts";
+
+  parameter Modelica.SIunits.Height roughness=2.5e-5
+    "Average height of surface asperities (default: smooth steel pipe)"
+    annotation (Dialog(group="Material"));
+
+  parameter Modelica.SIunits.Length length "Pipe length"
+    annotation (Dialog(group="Material"));
 
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal
     "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
 
-  parameter Modelica.SIunits.Height roughness=2.5e-5
-    "Average height of surface asperities (default: smooth steel pipe)"
-    annotation (Dialog(group="Geometry"));
+  parameter Modelica.SIunits.MassFlowRate m_flow_small = 1E-4*abs(
+    m_flow_nominal) "Small mass flow rate for regularization of zero flow"
+    annotation (Dialog(tab="Advanced"));
 
-  parameter Modelica.SIunits.Pressure dp_nominal(displayUnit="Pa")=
-    dpStraightPipe_nominal "Pressure drop at nominal mass flow rate"
-    annotation (Dialog(group="Nominal condition"));
+  parameter Modelica.SIunits.SpecificHeatCapacity cPip=2300
+    "Specific heat of pipe wall material. 2300 for PE, 500 for steel"
+    annotation (Dialog(group="Material"));
 
-  final parameter Modelica.SIunits.Pressure dpStraightPipe_nominal=
-      Modelica.Fluid.Pipes.BaseClasses.WallFriction.Detailed.pressureLoss_m_flow(
-      m_flow=m_flow_nominal,
-      rho_a=rho_default,
-      rho_b=rho_default,
-      mu_a=mu_default,
-      mu_b=mu_default,
-      length=length,
-      diameter=diameter,
-      roughness=roughness,
-      m_flow_small=1e-4)
-    "Pressure loss of a straight pipe at m_flow_nominal";
+  parameter Modelica.SIunits.Density rhoPip(displayUnit="kg/m3")=930
+    "Density of pipe wall material. 930 for PE, 8000 for steel"
+    annotation (Dialog(group="Material"));
 
-  parameter Modelica.SIunits.Length length "Length of the pipe";
+  parameter Modelica.SIunits.Length thickness = 0.0035
+    "Pipe wall thickness"
+    annotation (Dialog(group="Material"));
 
-  parameter Modelica.SIunits.Diameter diameter "Diameter of the pipe";
+  parameter Modelica.SIunits.Temperature T_start_in(start=Medium.T_default)=
+    Medium.T_default "Initialization temperature at pipe inlet"
+    annotation (Dialog(tab="Initialization"));
+  parameter Modelica.SIunits.Temperature T_start_out(start=Medium.T_default)=
+    T_start_in "Initialization temperature at pipe outlet"
+    annotation (Dialog(tab="Initialization"));
+  parameter Boolean initDelay(start=false) = false
+    "Initialize delay for a constant mass flow rate if true, otherwise start from 0"
+    annotation (Dialog(tab="Initialization"));
+  parameter Modelica.SIunits.MassFlowRate m_flow_start=0 "Initial value of mass flow rate through pipe"
+    annotation (Dialog(tab="Initialization", enable=initDelay));
+
+  parameter Real fac=1
+    "Factor to take into account flow resistance of bends etc., fac=dp_nominal/dpStraightPipe_nominal";
+
+  parameter Boolean homotopyInitialization = true "= true, use homotopy method"
+    annotation(Evaluate=true, Dialog(tab="Advanced"));
+
+  parameter Boolean linearized = false
+    "= true, use linear relation between m_flow and dp for any flow rate"
+    annotation(Evaluate=true, Dialog(tab="Advanced"));
+
 
 protected
+  parameter Modelica.SIunits.HeatCapacity CPip=
+    length*((dh + 2*thickness)^2 - dh^2)*Modelica.Constants.pi/4*cPip*rhoPip "Heat capacity of pipe wall";
+
+  final parameter Modelica.SIunits.Volume VEqu=CPip/(rho_default*cp_default)
+    "Equivalent water volume to represent pipe wall thermal inertia";
+
   parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX(
       T=Medium.T_default,
       p=Medium.p_default,
       X=Medium.X_default) "Default medium state";
+
+  parameter Modelica.SIunits.SpecificHeatCapacity cp_default=
+      Medium.specificHeatCapacityCp(state=sta_default)
+    "Heat capacity of medium";
+
+  parameter Real C(unit="J/(K.m)")=
+    rho_default*Modelica.Constants.pi*(dh/2)^2*cp_default
+    "Thermal capacity per unit length of water in pipe";
 
   parameter Modelica.SIunits.Density rho_default=Medium.density_pTX(
       p=Medium.p_default,
       T=Medium.T_default,
       X=Medium.X_default)
     "Default density (e.g., rho_liquidWater = 995, rho_air = 1.2)"
-    annotation (Dialog(group="Advanced", enable=use_rho_nominal));
-
-  parameter Modelica.SIunits.DynamicViscosity mu_default=
-      Medium.dynamicViscosity(Medium.setState_pTX(
-      p=Medium.p_default,
-      T=Medium.T_default,
-      X=Medium.X_default))
-    "Default dynamic viscosity (e.g., mu_liquidWater = 1e-3, mu_air = 1.8e-5)"
-    annotation (Dialog(group="Advanced", enable=use_mu_default));
-
+    annotation (Dialog(group="Advanced"));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Rectangle(
           extent={{-100,60},{100,-60}},

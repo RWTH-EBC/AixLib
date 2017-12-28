@@ -3,17 +3,16 @@ model PipeStatic "Static pipe implementation"
   extends BaseClasses.PartialPipe;
   BaseClassesStatic.StaticCore           pipeCoreStatic(
     redeclare package Medium = Medium,
-    length=length,
-    m_flow_nominal=m_flow_nominal,
-    roughness=roughness,
-    R=1/(lambdaIns*2*Modelica.Constants.pi/
-      Modelica.Math.log((diameter/2 + thicknessIns)/(diameter/2))),
-    C=rho_default*Modelica.Constants.pi*(
-      diameter/2)^2*cp_default,
-    v_nominal=0.5,
-    thickness=0.0032,
-    fac=2,
-    dh=diameter)
+    final m_flow_nominal=m_flow_nominal,
+    final dh=dh,
+    final length=length,
+    final roughness=roughness,
+    final ReC=ReC,
+    final fac=fac,
+    final v_nominal=v_nominal,
+    final R=R,
+    final C=C,
+    final thickness=thickness)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T(
         displayUnit="K") = T_ground)
