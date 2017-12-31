@@ -5,32 +5,13 @@ model BaseModelStaticHeatPump
   // Definition of medium
   //
   replaceable package Medium =
-    ExternalMedia.Examples.R134aCoolProp
+    Modelica.Media.R134a.R134a_ph
     constrainedby Modelica.Media.Interfaces.PartialTwoPhaseMedium
     "Medium of the compressor"
     annotation(Dialog(tab="General",group="General"),
                choicesAllMatching=true,
     Documentation(revisions="<html>
 </html>"));
-
-  // Further media models
-  // R134a
-  //
-  // Modelica.Media.R134a.R134a_ph
-  // HelmholtzMedia.HelmholtzFluids.R134a
-  // ExternalMedia.Examples.R134aCoolProp
-  // WorkingVersion.Media.Refrigerants.R134a.R134a_IIR_P1_395_T233_455_Horner
-  //
-  // R290
-  //
-  // HelmholtzMedia.HelmholtzFluids.Propane
-  // ExternalMedia.Examples.PropaneCoolProp
-  // WorkingVersion.Media.Refrigerants.R290.R290_IIR_P05_30_T263_343_Horner
-  //
-  // R410a
-  //
-  // ExternalMedia.Examples.R410aCoolProp
-  // WorkingVersion.Media.Refrigerants.R410a.R410a_IIR_P1_48_T233_473_Horner
 
   // Definition of parameters describing compressors
   //
@@ -602,7 +583,44 @@ equation
 </ul>
 </html>", info="<html>
 <p>
-I still need to add the documentation!
+This model prescribes inlet and outlet conditions of a simplified
+static heat pump model (i.e. boundary conditions of the secondary
+sides of the evaporator and condenser). Furhtermore, it prescribes 
+the rotational speed of the compressor. 
+The model is used to validate the compressor model in general
+as well as to identify effects of different static boundary 
+conditions (e.g. pinch temperature of the evaporator).
+</p>
+<h4>Required information</h4>
+<p>
+The User needs to define the following information in order to
+complete the model:
+</p>
+<ol>
+<li>Basic definitions of the compressor. For example, the
+displacement volume.</li>
+<li>Calculation approaches of the three efficiencies of the
+compressor.</li>
+<li>Static boundaries of the heat pump obtained, for example,
+by experimental data.</li>
+</ol>
+<p>
+To add static boundary conditions, a combi time table is included
+within the model. The columns are defined as follows:
+</p>
+<ol>
+<li>Time steps (0,1,2,3,...).</li>
+<li>Rotational speed in <code>Hz</code>.</li>
+<li>Ambient temperature in <code>&#176;C</code>.</li>
+<li>Heat capacity in <code>W</code>.</li>
+<li>Temperature at inlet of condenser's secondary fluid in <code>&#176;C</code>.</li>
+<li>Power consumption in <code>kW</code>.</li>
+<li>COP.</li>
+</ol>
+<p>
+Moreover, the User needs to define further parameters describing
+static condtions of the heat pump. These parameters are listed
+below.
 </p>
 </html>"),
     experiment(StopTime=16.999));

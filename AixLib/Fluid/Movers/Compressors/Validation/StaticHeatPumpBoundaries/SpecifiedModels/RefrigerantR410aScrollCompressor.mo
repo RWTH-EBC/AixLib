@@ -1,6 +1,6 @@
 within AixLib.Fluid.Movers.Compressors.Validation.StaticHeatPumpBoundaries.SpecifiedModels;
 model RefrigerantR410aScrollCompressor
-  "Static boundaries of a scroll-compressor using R410a"
+  "Static heat pump boundaries of a scroll-compressor using R410a"
   extends BaseModelStaticHeatPump(
     nCom = 1,
     replaceable package Medium =
@@ -23,5 +23,12 @@ model RefrigerantR410aScrollCompressor
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
 </ul>
+</html>", info="<html>
+<p>
+This model specifies the base model
+<a href=\"modelica://AixLib.Fluid.Movers.Compressors.Validation.StaticHeatPumpBoundaries.BaseModelStaticHeatPump\">
+BaseModelStaticHeatPump</a>. Therefore, a fictious data
+set is used.
+</p>
 </html>"));
 end RefrigerantR410aScrollCompressor;

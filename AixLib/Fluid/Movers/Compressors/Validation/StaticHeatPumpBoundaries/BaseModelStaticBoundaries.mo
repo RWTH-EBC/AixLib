@@ -11,25 +11,6 @@ model BaseModelStaticBoundaries
     annotation(Dialog(tab="General",group="General"),
                choicesAllMatching=true);
 
-  // Further media models
-  // R134a
-  //
-  // Modelica.Media.R134a.R134a_ph
-  // HelmholtzMedia.HelmholtzFluids.R134a
-  // ExternalMedia.Examples.R134aCoolProp
-  // WorkingVersion.Media.Refrigerants.R134a.R134a_IIR_P1_395_T233_455_Horner
-  //
-  // R290
-  //
-  // HelmholtzMedia.HelmholtzFluids.Propane
-  // ExternalMedia.Examples.PropaneCoolProp
-  // WorkingVersion.Media.Refrigerants.R290.R290_IIR_P05_30_T263_343_Horner
-  //
-  // R410a
-  //
-  // ExternalMedia.Examples.R410aCoolProp
-  // WorkingVersion.Media.Refrigerants.R410a.R410a_IIR_P1_48_T233_473_Horner
-
   // Definition of parameters describing compressors
   //
   parameter Integer nCom = 1
@@ -87,19 +68,23 @@ model BaseModelStaticBoundaries
 
   // Definition of further components
   //
-  Modelica.Blocks.Interaction.Show.RealValue dfPowEle(use_numberPort=false, number=
-        inpDat.y[6]*1000 - modCom.modCom[1].comPro.PEle)
+  Modelica.Blocks.Interaction.Show.RealValue dfPowEle(
+    use_numberPort=false,
+    number=inpDat.y[6]*1000 - modCom.modCom[1].comPro.PEle)
     "Difference between power consumptions that are measured and calculated"
     annotation (Placement(transformation(extent={{20,26},{40,46}})));
-  Modelica.Blocks.Interaction.Show.RealValue dMasFlo(use_numberPort=false,
+  Modelica.Blocks.Interaction.Show.RealValue dMasFlo(
+    use_numberPort=false,
     number=inpDat.y[7] - modCom.modCom[1].comPro.m_flow)
     "Difference between mass flow rates that are measured and calculated"
     annotation (Placement(transformation(extent={{20,12},{40,32}})));
-  Modelica.Blocks.Interaction.Show.RealValue dPowEleRel(use_numberPort=false, number=
-        dfPowEle.number/(inpDat.y[6]*1000)*100)
+  Modelica.Blocks.Interaction.Show.RealValue dPowEleRel(
+    use_numberPort=false,
+    number=dfPowEle.number/(inpDat.y[6]*1000)*100)
     "Relative difference between power consumptions that are measured and calculated"
     annotation (Placement(transformation(extent={{60,26},{80,46}})));
-  Modelica.Blocks.Interaction.Show.RealValue dMasFloRel(use_numberPort=false,
+  Modelica.Blocks.Interaction.Show.RealValue dMasFloRel(
+    use_numberPort=false,
     number=dMasFlo.number/inpDat.y[7]*100)
     "Relative difference between mass flow rates that are measured and calculated"
     annotation (Placement(transformation(extent={{60,12},{80,32}})));
@@ -221,21 +206,22 @@ equation
         fillColor={215,215,215},
         fillPattern=FillPattern.Solid,
         rotation=45)}), Diagram(coordinateSystem(preserveAspectRatio=false),
-        graphics={Text(
-          extent={{-100,80},{0,60}},
-          lineColor={0,0,0},
-          textString="Experimental data by C. Cuevas and J. Lebrun
-
-Compressor type: Scroll-Compressur
-Refrigerant: R134a",
-          textStyle={TextStyle.Bold}), Text(
+        graphics={                     Text(
           extent={{0,80},{100,60}},
           lineColor={0,0,0},
           textString="Difference | Relative Difference
 --------------------------------------
 Power Consumption
 Mass Flow Rate",
-          textStyle={TextStyle.Bold})}),
+          textStyle={TextStyle.Bold}),
+        Rectangle(
+          extent={{0,100},{100,0}},
+          lineColor={0,0,0},
+          lineThickness=0.5),
+        Rectangle(
+          extent={{-100,100},{0,0}},
+          lineColor={0,0,0},
+          lineThickness=0.5)}),
     Documentation(revisions="<html>
 <ul>
   <li>
@@ -246,8 +232,41 @@ Mass Flow Rate",
 </ul>
 </html>", info="<html>
 <p>
-I stell need to add the documentation!
+This model prescribes static inlet and outlet conditions of the
+compressor. Furhtermore, it prescribes the rotational speed. 
+The model is used to validate the compressor model in general
+as well as to identify efficiencies that describes the compressor's
+behaiviour in a suitable way. Therefore, both calculated mass
+flow rate and calculated power consumption are compared with
+the corresponding experimental data.
 </p>
+<h4>Required information</h4>
+<p>
+The User needs to define the following information in order to
+complete the model:
+</p>
+<ol>
+<li>Basic definitions of the compressor. For example, the
+displacement volume.</li>
+<li>Calculation approaches of the three efficiencies of the
+compressor.</li>
+<li>Static boundaries of the compressor obtained, for example,
+by experimental data.</li>
+</ol>
+<p>
+To add static boundary conditions, a combi time table is included
+within the model. The columns are defined as follows:
+</p>
+<ol>
+<li>Time steps (0,1,2,3,...).</li>
+<li>Rotational speed in <code>Hz</code>.</li>
+<li>Pressure at inlet in <code>bar</code>.</li>
+<li>Temperature at inlet in <code>&#176;C</code>.</li>
+<li>Pressure at outlet in <code>bar</code>.</li>
+<li>Temperature at outlet in <code>&#176;C</code>.</li>
+<li>Power consumption in <code>kW</code>.</li>
+<li>Mass flow rate in <code>kg/s</code>.</li>
+</ol>
 <h4>References</h4>
 <p>
 C. Cuevas und J. Lebrun. (2009): 
