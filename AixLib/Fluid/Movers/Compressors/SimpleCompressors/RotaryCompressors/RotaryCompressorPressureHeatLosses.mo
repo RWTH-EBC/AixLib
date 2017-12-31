@@ -5,6 +5,7 @@ model RotaryCompressorPressureHeatLosses
     redeclare final model CompressionProcess =
     SimpleCompressors.CompressionProcesses.RotaryCompression,
     final simCom = Utilities.Types.SimpleCompressor.RotaryCompressorPressureHeatLosses);
+  extends Modelica.Icons.UnderConstruction;
 
   // Definition of submodels and connectors
   //
@@ -68,7 +69,6 @@ model RotaryCompressorPressureHeatLosses
     and outlet"
     annotation (Placement(transformation(extent={{-40,-90},{40,-10}})));
 
-
 equation
   // Connection of main components
   //
@@ -100,6 +100,13 @@ equation
     annotation (Line(points={{0,-58},{0,-100}}, color={191,0,0}));
 
   annotation (Icon(graphics={
+                Ellipse(
+                  extent={{80,80},{-80,-80}},
+                  lineColor={0,0,0},
+                  startAngle=0,
+                  endAngle=360,
+                  fillPattern=FillPattern.Sphere,
+                  fillColor={214,214,214}),
         Ellipse(
           extent={{-60,40},{20,-40}},
           lineColor={0,0,0},
@@ -120,13 +127,6 @@ equation
           lineColor={0,0,0},
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid),
-                Ellipse(
-                  extent={{80,80},{-80,-80}},
-                  lineColor={0,0,0},
-                  startAngle=0,
-                  endAngle=360,
-                  fillPattern=FillPattern.Sphere,
-                  fillColor={214,214,214}),
                 Line(
                   points={{74,-30},{-60,-52}},
                   color={0,0,0},

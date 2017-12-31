@@ -2,6 +2,7 @@ within AixLib.Fluid.Movers.Compressors.Examples;
 model RotaryCompressorPressureHeatLosses
   "Example model to test simple rotary compressors with pressure and heat losses"
   extends Modelica.Icons.Example;
+  extends Modelica.Icons.UnderConstruction;
 
   // Define medium and parameters
   //
@@ -52,8 +53,7 @@ model RotaryCompressorPressureHeatLosses
         AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency.SpecifiedEfficiencies.Generic_VarRef_VarDisVol_RotaryScroll,
     kAMeaInl=5,
     kAMeaOut=15,
-    kAMeaAmb=3)
-    "Model of a rotary compressor"
+    kAMeaAmb=3) "Model of a rotary compressor"
     annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
 
   Modelica.Blocks.Sources.Sine valOpe(
