@@ -25,8 +25,8 @@ Approaches implemented</a></li>
 References</a></li>
 </ol>
 <p>
-Additionally, descriptions of all models are provided in each models
-information section.
+Additionally, detailed descriptions of the models are provided in each
+model's information section.
 </p>
 </html>", revisions="<html>
 <ul>

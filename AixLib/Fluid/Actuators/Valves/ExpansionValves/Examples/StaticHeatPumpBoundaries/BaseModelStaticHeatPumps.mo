@@ -1,36 +1,18 @@
 within AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.StaticHeatPumpBoundaries;
 model BaseModelStaticHeatPumps
   "Base model to test compressors using static heat pump boundaries"
+  extends Modelica.Icons.Example;
 
   // Definition of medium
   //
   replaceable package Medium =
-    Modelica.Media.R134a.R134a_ph
+    Modelica
     constrainedby Modelica.Media.Interfaces.PartialTwoPhaseMedium
     "Medium of the compressor"
     annotation(Dialog(tab="General",group="General"),
                choicesAllMatching=true,
     Documentation(revisions="<html>
 </html>"));
-
-  // Further media models
-  // R134a
-  //
-  // Modelica.Media.R134a.R134a_ph
-  // HelmholtzMedia.HelmholtzFluids.R134a
-  // ExternalMedia.Examples.R134aCoolProp
-  // WorkingVersion.Media.Refrigerants.R134a.R134a_IIR_P1_395_T233_455_Horner
-  //
-  // R290
-  //
-  // HelmholtzMedia.HelmholtzFluids.Propane
-  // ExternalMedia.Examples.PropaneCoolProp
-  // WorkingVersion.Media.Refrigerants.R290.R290_IIR_P05_30_T263_343_Horner
-  //
-  // R410a
-  //
-  // ExternalMedia.Examples.R410aCoolProp
-  // WorkingVersion.Media.Refrigerants.R410a.R410a_IIR_P1_48_T233_473_Horner
 
   // Definition of parameters describing compressors
   //
@@ -649,33 +631,18 @@ equation
   connect(inpAmbTemp.y, eva.inpTAmb)
     annotation (Line(points={{-69,-14},{-50,-14},{-50,-28},{-24,-28},
                 {-24,-20}}, color={0,0,127}));
-
   connect(inpCurSpeEnt.y, conPID.u_m)
     annotation (Line(points={{-69,0},{-50,0},{-50,18}}, color={0,0,127}));
   connect(inpSetSpeEnt.y, conPID.u_s)
     annotation (Line(points={{-69,30},{-66,30},{-62,30}}, color={0,0,127}));
   connect(conPID.y, repMea.u)
     annotation (Line(points={{-39,30},{-35.5,30},{-32,30}}, color={0,0,127}));
-
-  connect(eva.ports_b, modExpVal.ports_b) annotation (Line(points={{-10,-10},{2,
+  connect(eva.ports_b, modExpVal.ports_b)
+    annotation (Line(points={{-10,-10},{2,
           -10},{50,-10},{50,10}}, color={0,127,255}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-      Ellipse(
-        extent={{-80,80},{80,-80}},
-        lineColor={215,215,215},
-        fillColor={215,215,215},
-        fillPattern=FillPattern.Solid),
-      Ellipse(
-        extent={{-55,55},{55,-55}},
-        lineColor={255,255,255},
-        fillColor={255,255,255},
-        fillPattern=FillPattern.Solid),
-      Rectangle(
-        extent={{-60,14},{60,-14}},
-        lineColor={215,215,215},
-        fillColor={215,215,215},
-        fillPattern=FillPattern.Solid,
-        rotation=45)}), Diagram(coordinateSystem(preserveAspectRatio=false)),
+
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false)),
+                        Diagram(coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>
 <ul>
   <li>

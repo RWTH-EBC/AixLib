@@ -1,36 +1,18 @@
-within AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples.StaticHeatPumpBoundaries;
-model BaseModelStaticHeatPump
-  "Base model to test compressors using static heat pump boundaries"
+within AixLib.Fluid.Actuators.Valves.ExpansionValves.Examples;
+model StaticHeatPumpBoundaries
+  "Base model to test expansion valve using static heat pump boundaries"
+  extends Modelica.Icons.Example;
 
   // Definition of medium
   //
   replaceable package Medium =
-    WorkingVersion.Media.Refrigerants.R134a.R134a_IIR_P1_395_T233_455_Horner
+    Modelica.Media.R134a.R134a_ph
     constrainedby Modelica.Media.Interfaces.PartialTwoPhaseMedium
     "Medium of the compressor"
     annotation(Dialog(tab="General",group="General"),
                choicesAllMatching=true,
     Documentation(revisions="<html>
 </html>"));
-
-  // Further media models
-  // R134a
-  //
-  // Modelica.Media.R134a.R134a_ph
-  // HelmholtzMedia.HelmholtzFluids.R134a
-  // ExternalMedia.Examples.R134aCoolProp
-  // WorkingVersion.Media.Refrigerants.R134a.R134a_IIR_P1_395_T233_455_Horner
-  //
-  // R290
-  //
-  // HelmholtzMedia.HelmholtzFluids.Propane
-  // ExternalMedia.Examples.PropaneCoolProp
-  // WorkingVersion.Media.Refrigerants.R290.R290_IIR_P05_30_T263_343_Horner
-  //
-  // R410a
-  //
-  // ExternalMedia.Examples.R410aCoolProp
-  // WorkingVersion.Media.Refrigerants.R410a.R410a_IIR_P1_48_T233_473_Horner
 
   // Definition of parameters describing compressors
   //
@@ -105,7 +87,8 @@ model BaseModelStaticHeatPump
   StaticEvaporator eva(
     redeclare final package Medium = Medium,
     final dTPin=dTPinEva,
-    final dTSupHea=dTSupHea)
+    final dTSupHea=dTSupHea,
+    nPorts=nVal)
     "Model that describes a simple static evaporator"
     annotation (Placement(transformation(extent={{-30,-20},{-10,0}})));
 
@@ -141,11 +124,6 @@ model BaseModelStaticHeatPump
         rotation=90,
         origin={50,30})));
 
-  Interfaces.PortsAThroughPortB outVal(
-    redeclare package Medium = Medium,
-    nVal=nVal)
-    "Model that combines the outputs of modular expansion valves"
-    annotation (Placement(transformation(extent={{40,-20},{20,0}})));
   StaticCondenser con(
     redeclare package Medium = Medium,
     dTSubCool=dTSubCool,
@@ -166,7 +144,6 @@ model BaseModelStaticHeatPump
         rotation=-90,
         origin={-98,0})));
 
-
 protected
   model StaticEvaporator
     "Static evaporator assuming constant pinch point at evaporator's outlet"
@@ -181,6 +158,8 @@ protected
 
     // Definition of parameters describing evaporator
     //
+    parameter Integer nPorts = 1;
+
     parameter Modelica.SIunits.TemperatureDifference dTPin = 5
       "Pinch temperature at evaporator's outlet"
       annotation(Dialog(tab="General",group="Evaporator"));
@@ -196,12 +175,12 @@ protected
 
     // Definition of connecotrs
     //
-    Modelica.Fluid.Interfaces.FluidPort_a port_a(
-      redeclare final package Medium = Medium,
-      m_flow(max=if allowFlowReversal then -Modelica.Constants.inf else 0),
-       h_outflow(start = Medium.h_default))
-      "Fluid connector a (positive design flow direction is from port_a to port_b)"
-      annotation (Placement(transformation(extent={{110,-10},{90,10}})));
+    Modelica.Fluid.Interfaces.FluidPorts_b ports_b[nPorts](
+      redeclare each final package Medium = Medium,
+      h_outflow(each start = Medium.h_default),
+      m_flow(each max=Modelica.Constants.inf))
+      "Fluid connectors b (positive design flow direction is from port_a to port_b)"
+      annotation (Placement(transformation(extent={{90,40},{110,-40}})));
     Modelica.Blocks.Interfaces.RealInput inpTAmb
       "Input of ambient temperature"
       annotation (Placement(transformation(
@@ -226,10 +205,10 @@ protected
     //
     Modelica.Blocks.Sources.RealExpression inlPEva(y=pSat)
       "Expressions describing saturation pressure at evaporator's inlet"
-      annotation (Placement(transformation(extent={{-30,-4},{-10,16}})));
+      annotation (Placement(transformation(extent={{-48,-4},{-28,16}})));
     Modelica.Blocks.Sources.RealExpression inlhEva(y=hInl)
       "Expressions describing specific enthalpy at evaporator's inlet"
-      annotation (Placement(transformation(extent={{-30,-18},{-10,2}})));
+      annotation (Placement(transformation(extent={{-48,-18},{-28,2}})));
 
     AixLib.Fluid.Sources.Boundary_ph source(
       redeclare package Medium = Medium,
@@ -241,27 +220,30 @@ protected
         Placement(transformation(
           extent={{-10,-10},{10,10}},
           rotation=0,
-          origin={20,0})));
-    Sensors.SpecificEnthalpyTwoPort senSpeEnt(
+          origin={0,0})));
+    Interfaces.PortsAThroughPortB outVal(
+      redeclare package Medium = Medium, nVal=nPorts)
+      "Model that combines the outputs of modular expansion valves"
+      annotation (Placement(transformation(extent={{40,-10},{20,10}})));
+    Sensors.SpecificEnthalpyTwoPort senSpeEnt[nPorts](
       redeclare package Medium = Medium,
-      m_flow_nominal=0.05,
-      initType=Modelica.Blocks.Types.Init.NoInit,
-      tau=0,
-      h_out_start=275e3) "Sensor that measures current specific enthalpy"
+      each m_flow_nominal=0.05,
+      each initType=Modelica.Blocks.Types.Init.NoInit,
+      each tau=0,
+      each h_out_start=275e3) "Sensor that measures current specific enthalpy"
       annotation (Placement(transformation(extent={{90,-10},{70,10}})));
-    Sensors.MassFlowRate senMasFlo(
-      redeclare package Medium = Medium)
+    Sensors.MassFlowRate senMasFlo[nPorts](redeclare package Medium = Medium)
       "Sensor that measures current mas flow rate"
-      annotation (Placement(transformation(extent={{60,-10},{40,10}})));
+      annotation (Placement(transformation(extent={{66,-10},{46,10}})));
 
     // Definition of variables describing evaporator
     //
     Medium.SaturationProperties satEva
       "Saturation properties of the evaporator's working fluid"
-      annotation (Placement(transformation(extent={{-60,-8},{-40,12}})));
+      annotation (Placement(transformation(extent={{-72,-8},{-52,12}})));
     Medium.ThermodynamicState staOut
       "Thermodynamic state of the working fluid  at evaporator's outlet"
-      annotation (Placement(transformation(extent={{-90,-8},{-70,12}})));
+      annotation (Placement(transformation(extent={{-96,-8},{-76,12}})));
 
   public
     Modelica.SIunits.AbsolutePressure pSat
@@ -284,24 +266,27 @@ protected
     Modelica.SIunits.HeatFlowRate Q_flow
       "Cooling capacity";
 
-
   equation
     // Connection of ports
     //
     connect(inlPEva.y, source.p_in)
-      annotation (Line(points={{-9,6},{-4,6},{-4,8},{8,8}},  color={0,0,127}));
+      annotation (Line(points={{-27,6},{-22,6},{-22,8},{-12,8}},
+                                                             color={0,0,127}));
     connect(inlhEva.y, source.h_in)
-      annotation (Line(points={{-9,-8},{-6,-8},{-2,-8},{-2,4},{8,4}}, color={0,0,127}));
-    connect(source.ports[1], senMasFlo.port_b)
-      annotation (Line(points={{30,0},{40,0}}, color={0,127,255}));
-    connect(senMasFlo.port_a, senSpeEnt.port_b)
-      annotation (Line(points={{60,0},{70,0}}, color={0,127,255}));
-    connect(senSpeEnt.port_a, port_a)
-      annotation (Line(points={{90,0},{100,0}}, color={0,127,255}));
+      annotation (Line(points={{-27,-8},{-24,-8},{-20,-8},{-20,4},{-12,4}},
+                               color={0,0,127}));
+    connect(ports_b, senSpeEnt.port_a)
+      annotation (Line(points={{100,0},{95,0},{90,0}}, color={0,127,255}));
+    connect(senSpeEnt.port_b, senMasFlo.port_a)
+      annotation (Line(points={{70,0},{66,0}},        color={0,127,255}));
+    connect(source.ports[1], outVal.port_b)
+      annotation (Line(points={{10,0},{20,0}},      color={0,127,255}));
+    connect(senMasFlo.port_b, outVal.ports_a)
+      annotation (Line(points={{46,0},{46,0},{40,0}}, color={0,127,255}));
 
     TAmb = inpTAmb
       "Temperature of ambient";
-    m_flow = senMasFlo.m_flow
+    m_flow = senMasFlo[1].m_flow
       "Mass flow rate";
     Q_flow = inpQ_flow
       "Cooling capacity";
@@ -325,7 +310,6 @@ protected
       "Temperature at evaporator's outlet";
     hOut = Medium.specificEnthalpy(staOut)
       "Specific enthalpy at evaporator's outlet";
-
 
     annotation (Icon(graphics={
           Rectangle(
@@ -618,16 +602,11 @@ protected
             textString="SH")}));
   end StaticCondenser;
 
-
 equation
   // Connection of main components
   //
   connect(con.port_b, modExpVal.port_a)
     annotation (Line(points={{-10,70},{50,70},{50,50}}, color={0,127,255}));
-  connect(modExpVal.ports_b, outVal.ports_a)
-    annotation (Line(points={{50,10},{50,-10},{40,-10}}, color={0,127,255}));
-  connect(outVal.port_b, eva.port_a)
-    annotation (Line(points={{20,-10},{5,-10},{-10,-10}}, color={0,127,255}));
 
   // Connection of signals
   //
@@ -650,32 +629,18 @@ equation
   connect(inpAmbTemp.y, eva.inpTAmb)
     annotation (Line(points={{-69,-14},{-50,-14},{-50,-28},{-24,-28},
                 {-24,-20}}, color={0,0,127}));
-
   connect(inpCurSpeEnt.y, conPID.u_m)
     annotation (Line(points={{-69,0},{-50,0},{-50,18}}, color={0,0,127}));
   connect(inpSetSpeEnt.y, conPID.u_s)
     annotation (Line(points={{-69,30},{-66,30},{-62,30}}, color={0,0,127}));
   connect(conPID.y, repMea.u)
     annotation (Line(points={{-39,30},{-35.5,30},{-32,30}}, color={0,0,127}));
+  connect(eva.ports_b, modExpVal.ports_b)
+    annotation (Line(points={{-10,-10},{2,
+          -10},{50,-10},{50,10}}, color={0,127,255}));
 
-
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-      Ellipse(
-        extent={{-80,80},{80,-80}},
-        lineColor={215,215,215},
-        fillColor={215,215,215},
-        fillPattern=FillPattern.Solid),
-      Ellipse(
-        extent={{-55,55},{55,-55}},
-        lineColor={255,255,255},
-        fillColor={255,255,255},
-        fillPattern=FillPattern.Solid),
-      Rectangle(
-        extent={{-60,14},{60,-14}},
-        lineColor={215,215,215},
-        fillColor={215,215,215},
-        fillPattern=FillPattern.Solid,
-        rotation=45)}), Diagram(coordinateSystem(preserveAspectRatio=false)),
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false)),
+                        Diagram(coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>
 <ul>
   <li>
@@ -686,8 +651,44 @@ equation
 </ul>
 </html>", info="<html>
 <p>
-I still need to add the documentation!
+This model prescribes inlet and outlet conditions of a simplified
+static heat pump model (i.e. boundary conditions of the secondary
+sides of the evaporator and condenser). Furhtermore, it controlls
+the degrees of opening of the expension valves in such a way that
+the prescribed outlet condtions of the expansion valves are meet
+the calculated outlet condtions of the expansion valves.
+The model is used to validate the expansion valve model in general.
+</p>
+<h4>Required information</h4>
+<p>
+The User needs to define the following information in order to
+complete the model:
+</p>
+<ol>
+<li>Basic definitions of the expansion valve. For example, the
+cross-sectional area of the expansion valve.</li>
+<li>Calculation approache of the flow coefficient.</li>
+<li>Static boundaries of the heat pump obtained, for example,
+by experimental data.</li>
+</ol>
+<p>
+To add static boundary conditions, a combi time table is included
+within the model. The columns are defined as follows:
+</p>
+<ol>
+<li>Time steps (0,1,2,3,...).</li>
+<li>Rotational speed in <code>Hz</code>.</li>
+<li>Ambient temperature in <code>&#176;C</code>.</li>
+<li>Heat capacity in <code>W</code>.</li>
+<li>Temperature at inlet of condenser's secondary fluid in <code>&#176;C</code>.</li>
+<li>Power consumption in <code>kW</code>.</li>
+<li>COP.</li>
+</ol>
+<p>
+Moreover, the User needs to define further parameters describing
+static condtions of the heat pump. These parameters are listed
+below.
 </p>
 </html>"),
     experiment(StopTime=16.999));
-end BaseModelStaticHeatPump;
+end StaticHeatPumpBoundaries;
