@@ -12,11 +12,11 @@ model CHP "Table based CHP model"
   parameter Boolean electricityDriven = false
     "If the CHP is controlled by electricity demand (external table required)"
     annotation(Dialog(group="Control system"),Evaluate=true, HideResult=true,
-    choices(__Dymola_checkBox=true));
+    choices(checkBox=true));
   parameter Boolean TSetIn = true
     "Input temperature setpoint from outside (Otherwise max temp in database)"
     annotation(Dialog(group="Control system"),Evaluate=true, HideResult=true,
-    choices(__Dymola_checkBox=true));
+    choices(checkBox=true));
   parameter Boolean ctrlStrategy = true
     "True for flow-, false for return- temperature control strategy"
     annotation(Dialog(group="Control system"));
