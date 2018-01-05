@@ -1,19 +1,40 @@
 within AixLib.Fluid.DistrictHeatingCooling.Pipes;
 model PipeStatic "Static pipe implementation"
   extends BaseClasses.PartialPipe;
-  IBPSA.Experimental.Pipe.PipeCoreStatic pipeCoreStatic(
+  BaseClassesStatic.StaticCore           pipeCoreStatic(
     redeclare package Medium = Medium,
-    diameter=diameter,
-    length=length,
-    m_flow_nominal=m_flow_nominal,
-    roughness=roughness,
-    thicknessIns=thicknessIns,
-    lambdaI=lambdaIns,
-    res(fac=2))
+    final m_flow_nominal=m_flow_nominal,
+    final dh=dh,
+    final length=length,
+    final roughness=roughness,
+    final ReC=ReC,
+    final fac=fac,
+    final v_nominal=v_nominal,
+    final R=R,
+    final C=C,
+    final thickness=thickness)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T(
         displayUnit="K") = T_ground)
     annotation (Placement(transformation(extent={{-40,40},{-20,60}})));
+
+protected
+  parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX(
+      T=Medium.T_default,
+      p=Medium.p_default,
+      X=Medium.X_default) "Default medium state";
+
+  parameter Modelica.SIunits.Density rho_default=Medium.density_pTX(
+      p=Medium.p_default,
+      T=Medium.T_default,
+      X=Medium.X_default)
+    "Default density (e.g., rho_liquidWater = 995, rho_air = 1.2)"
+    annotation (Dialog(group="Advanced", enable=use_rho_nominal));
+
+  parameter Modelica.SIunits.SpecificHeatCapacity cp_default=
+      Medium.specificHeatCapacityCp(state=sta_default)
+    "Heat capacity of medium";
+
 equation
   connect(port_a, pipeCoreStatic.port_a)
     annotation (Line(points={{-100,0},{-10,0}}, color={0,127,255}));
@@ -34,15 +55,18 @@ equation
           fillPattern=FillPattern.Solid)}), Documentation(revisions="<html>
 <ul>
 <li>
+Dec 8, 2017, by Marcus Fuchs:<br/>
+Restore this model to work for supporting legacy tests.
+</li>
+<li>
 Jun 21, 2017, by Marcus Fuchs:<br/>
 First implementation for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
 </li>
 </ul>
 </html>", info="<html>
-<p>A wrapper around the static pipe model proposed in 
+<p>A wrapper around the static pipe model originally proposed in 
 <a href=\"https://github.com/bramvdh91/modelica-ibpsa/issues/76\">issue 76 of the IBPSA pipe model developement</a></<p>
-<p>Note that this pipe currently uses a factor of 2 on the nominal pressure loss to account for bends etc.</p>
-<p>Currently, this pipe requires loading the fork of the Modelica IBPSA library from https://github.com/bramvdh91/modelica-ibpsa
-and using branch <code>pipe_issue76_static</code>.</p>
+<p>Note that this pipe uses a factor of 2 on the nominal pressure loss to account for bends etc.</p>
+<p>This pipe is not meant for further development, but we had to include it in order to support some legacy tests.</p>
 </html>"));
 end PipeStatic;

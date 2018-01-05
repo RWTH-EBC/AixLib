@@ -3,11 +3,15 @@ model FlowResistance
   "Simple adiabatic pipe model using the HydraulicDiameter flow resistance"
   extends BaseClasses.PartialPipeAdiabatic;
   FixedResistances.HydraulicDiameter res(
-    redeclare package Medium = Medium,
-    m_flow_nominal=m_flow_nominal,
-    dh=diameter,
-    length=length,
-    roughness=roughness) "Flow resistance"
+      redeclare final package Medium = Medium,
+      final m_flow_nominal=m_flow_nominal,
+      final dh=dh,
+      final length=length,
+      final roughness=roughness,
+      final ReC=ReC,
+      final fac=fac,
+      final v_nominal=v_nominal)
+      "Flow resistance"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 equation
   connect(port_a, res.port_a)
