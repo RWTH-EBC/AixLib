@@ -1,5 +1,6 @@
 within AixLib.Fluid.DistrictHeatingCooling.Supplies.NoReturn;
-model IdealSourcePump
+model SourcePump
+  "Source node with pump model and prescribed supply temperature"
   extends BaseClasses.Supplies.NoReturn.PartialSupply(redeclare
       Controllers.Temperature.ControllerTPrescribed controllerT);
   Movers.FlowControlled_dp              gridPump(
@@ -44,4 +45,4 @@ equation
           -50,70},{-50,30},{-80,30},{-80,4},{-62,4}}, color={0,0,127}));
   connect(gridPump.port_b, senT_supply.port_a)
     annotation (Line(points={{10,0},{40,0}}, color={0,127,255}));
-end IdealSourcePump;
+end SourcePump;
