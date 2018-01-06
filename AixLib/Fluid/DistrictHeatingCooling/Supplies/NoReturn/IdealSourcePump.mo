@@ -34,8 +34,6 @@ equation
                                                            color={0,0,127}));
   connect(gridPump.P, P_gridPump) annotation (Line(points={{11,9},{20,9},{20,60},
           {100,60}}, color={0,0,127}));
-  connect(gridPump.port_b, flowTemperature.port_a)
-    annotation (Line(points={{10,0},{40,0}}, color={0,127,255}));
   connect(p_NSP_set.y, PID.u_s) annotation (Line(points={{-77,-78},{-68,-78},{
           -68,-58},{-58,-58}}, color={0,0,127}));
   connect(PID.y, gridPump.dp_in) annotation (Line(points={{-35,-58},{-22,-58},{
@@ -44,4 +42,6 @@ equation
     annotation (Line(points={{-106,70},{-80.6,70}}, color={0,0,127}));
   connect(controllerT.y, heaterSource.T_in) annotation (Line(points={{-59,70},{
           -50,70},{-50,30},{-80,30},{-80,4},{-62,4}}, color={0,0,127}));
+  connect(gridPump.port_b, senT_supply.port_a)
+    annotation (Line(points={{10,0},{40,0}}, color={0,127,255}));
 end IdealSourcePump;
