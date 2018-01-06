@@ -14,16 +14,16 @@ model IdealSourceTPrescribed
         rotation=270,
         origin={0,40})));
 
-  Modelica.Blocks.Interfaces.RealInput T_heater
-    "Flow temperature in Celsius (70/110)" annotation (Placement(transformation(
-          extent={{-126,50},{-86,90}}),  iconTransformation(extent={{-126,50},{
-            -86,90}})));
+  Modelica.Blocks.Interfaces.RealInput TIn(unit="K")
+    "Prescribed supply temperature)" annotation (Placement(transformation(
+          extent={{-126,50},{-86,90}}), iconTransformation(extent={{-126,50},{-86,
+            90}})));
 equation
   connect(source.ports[1], senT_supply.port_a)
     annotation (Line(points={{0,30},{0,0},{40,0}}, color={0,127,255}));
   connect(controllerT.y, source.T_in)
     annotation (Line(points={{-59,70},{4,70},{4,52}}, color={0,0,127}));
-  connect(T_heater, controllerT.T)
+  connect(TIn, controllerT.T)
     annotation (Line(points={{-106,70},{-80.6,70}}, color={0,0,127}));
   annotation (Icon(graphics={Ellipse(
           extent={{-78,40},{2,-40}},
@@ -39,7 +39,7 @@ Implemented for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/402\">issue 
 </html>", info="<html>
 <p>
 This model represents the supply node with an ideal pressure source. It provides
-a constant supply pressure and a constant supply temperature to the network.
+a constant supply pressure and a prescribed supply temperature to the network.
 </p>
 </html>"));
 end IdealSourceTPrescribed;
