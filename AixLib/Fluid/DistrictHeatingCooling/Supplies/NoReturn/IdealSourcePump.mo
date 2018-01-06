@@ -1,7 +1,7 @@
 within AixLib.Fluid.DistrictHeatingCooling.Supplies.NoReturn;
 model IdealSourcePump
   extends BaseClasses.Supplies.NoReturn.PartialSupply(redeclare
-      Controllers.Temperature.InputTemperature controllerT);
+      Controllers.Temperature.ControllerTPrescribed controllerT);
   Movers.FlowControlled_dp              gridPump(
     redeclare package Medium = Medium,
     m_flow_nominal=3)

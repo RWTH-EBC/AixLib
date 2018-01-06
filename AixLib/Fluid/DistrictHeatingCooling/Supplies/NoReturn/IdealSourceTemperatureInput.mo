@@ -1,8 +1,8 @@
 within AixLib.Fluid.DistrictHeatingCooling.Supplies.NoReturn;
 model IdealSourceTemperatureInput
   "Simple supply node model with ideal flow source and no return port with variable input temperature"
-  extends BaseClasses.Supplies.NoReturn.PartialSupply(
-    redeclare Controllers.Temperature.InputTemperature                                              controllerT);
+  extends BaseClasses.Supplies.NoReturn.PartialSupply(redeclare
+      Controllers.Temperature.ControllerTPrescribed controllerT);
   AixLib.Fluid.Sources.Boundary_pT source(          redeclare package Medium =
         Medium,
     p=p_supply,
