@@ -131,8 +131,7 @@ network. For this validation example, the values have been converted to SI
 units.</p>
 <p>The supply pressures of S1 and S2 are originally given in feet of pressure
 head and have been converted to pressure in bar: </p>
-<p></p>
-<table cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"50%\"><tr>
+<table cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"50%\" summary=\"Supply pressures\"><tr>
 <td></td>
 <td><p>S1</p></td>
 <td><p>S2</p></td>
@@ -148,12 +147,10 @@ head and have been converted to pressure in bar: </p>
 <td><p>2.6902 bar</p></td>
 </tr>
 </table>
-<p></p>
 <p>The discharges at the demand nodes B1, B2, and B3 were originally given in
 ft**3/s and have been converted to mass flow rates in kg/s using the density of
 995.586 kg/m**3: </p>
-<p></p>
-<table cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"50%\"><tr>
+<table cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"50%\" summary=\"Discharges\"><tr>
 <td></td>
 <td><p>B1</p></td>
 <td><p>B2</p></td>
@@ -172,13 +169,11 @@ ft**3/s and have been converted to mass flow rates in kg/s using the density of
 <td><p>22.600 kg/s</p></td>
 </tr>
 </table>
-<p></p>
 <p>For the pipes, Larock et al. [2000] give an exponential equation to calculate
 the pressure losses as a function of the mass flow rate. This model
 implementation uses the reference results&apos; mass flow rates and pressure
 losses as nominal values in the Pressure Drop model: </p>
-<p></p>
-<table cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"50%\"><tr>
+<table cellspacing=\"0\" cellpadding=\"2\" border=\"1\" width=\"50%\" summary=\"Nominal values\"><tr>
 <td></td>
 <td><p>1</p></td>
 <td><p>2</p></td>
@@ -203,7 +198,6 @@ losses as nominal values in the Pressure Drop model: </p>
 <td><p>0.6804</p></td>
 </tr>
 </table>
-<p></p>
 <p>The outputs compare the relative deviations between the calculated pressures
 at the demand nodes B1, B2, and B3 with the reference results given in Larock et
 al. [2000]. The results show deviations below 0.3 percent.</p>
