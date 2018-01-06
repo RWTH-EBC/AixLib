@@ -1,5 +1,5 @@
 within AixLib.Fluid.DistrictHeatingCooling.Supplies.NoReturn;
-model IdealSourceTemperatureInput
+model IdealSourceTPrescribed
   "Simple supply node model with ideal flow source and no return port with variable input temperature"
   extends BaseClasses.Supplies.NoReturn.PartialSupply(redeclare
       Controllers.Temperature.ControllerTPrescribed controllerT);
@@ -42,4 +42,4 @@ This model represents the supply node with an ideal pressure source. It provides
 a constant supply pressure and a constant supply temperature to the network.
 </p>
 </html>"));
-end IdealSourceTemperatureInput;
+end IdealSourceTPrescribed;
