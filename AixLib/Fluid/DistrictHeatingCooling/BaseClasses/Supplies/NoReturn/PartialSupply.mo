@@ -6,12 +6,6 @@ partial model PartialSupply
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium model" annotation (choicesAllMatching=true);
 
-  parameter Modelica.SIunits.Pressure p_supply = Medium.p_default
-    "Supply pressure for the network";
-
-  parameter Medium.Temperature T_supply = Medium.T_default
-    "Fixed value of temperature";
-
   Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
         Medium)                                "Outlet of supply node"
     annotation (Placement(transformation(extent={{90,-10},{110,10}})));
@@ -21,10 +15,13 @@ partial model PartialSupply
   AixLib.Fluid.Sensors.MassFlowRate senMasFlo(redeclare package Medium =
         Medium) "Mass flow rate sensor"
     annotation (Placement(transformation(extent={{70,-10},{90,10}})));
-  replaceable
-    AixLib.Fluid.DistrictHeatingCooling.Supplies.Controllers.Temperature.PartialControllerT
-    controllerT
-    annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
+  Modelica.Blocks.Interfaces.RealInput TIn(unit="K")
+    "Prescribed supply temperature"  annotation (Placement(transformation(
+          extent={{-126,50},{-86,90}}), iconTransformation(extent={{-126,50},{-86,
+            90}})));
+  Modelica.Blocks.Interfaces.RealInput dpIn(unit="Pa")
+    "Prescribed pressure rise" annotation (Placement(transformation(extent={{-126,
+            -90},{-86,-50}}), iconTransformation(extent={{-126,-90},{-86,-50}})));
 equation
   connect(port_b, senMasFlo.port_b)
     annotation (Line(points={{100,0},{90,0}}, color={0,127,255}));
@@ -48,6 +45,10 @@ represent the return flow back from the network.
 </p>
 </html>", revisions="<html>
 <ul>
+<li>
+January 8, 2018, by Marcus Fuchs:<br/>
+Replace parameters by inputs.
+</li>
 <li>
 May 27, 2017, by Marcus Fuchs:<br/>
 First implementation for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
