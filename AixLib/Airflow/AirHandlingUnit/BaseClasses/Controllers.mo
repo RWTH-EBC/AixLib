@@ -3,7 +3,6 @@ package Controllers "contains all the control models"
   extends Modelica.Icons.VariantsPackage;
   model MenergaController
     "contains the control modes for the menerga model"
-    parameter Modelica.SIunits.Temperature T_Set = 293.15 "setpoint temperature";
     parameter Boolean RLT21 = true "if true, RLT 21 is simulated, else RLT 22";
 
     BusActors busActors "Bus Connector for actor signals"
@@ -11,18 +10,28 @@ package Controllers "contains all the control models"
           transformation(
           extent={{-20,-20},{20,20}},
           rotation=0,
-          origin={98,-58}), iconTransformation(extent={{80,-56},{120,-16}})));
-    OperatingModes.FixedValues fixedValues1
-      annotation (Placement(transformation(extent={{-12,64},{8,84}})));
+          origin={100,0}),  iconTransformation(extent={{80,-56},{120,-16}})));
+    OperatingModes.FixedValues fixedValues
+      annotation (Placement(transformation(extent={{-20,-56},{20,-24}})));
     BusSensors busSensors "Bus connector between controllers and sensor signals"
-      annotation (Placement(transformation(extent={{-120,-54},{-80,-14}}),
-          iconTransformation(extent={{-120,-54},{-80,-14}})));
+      annotation (Placement(transformation(extent={{-120,-20},{-80,20}}),
+          iconTransformation(extent={{-120,-20},{-80,20}})));
     OperatingModes.development development
-      annotation (Placement(transformation(extent={{-12,30},{8,50}})));
-    Modelica.Blocks.Interfaces.BooleanInput OnSignal "On signal of device"
-      annotation (Placement(transformation(extent={{-126,4},{-86,44}})));
-    OperatingModes.PNControl22 controlTest
-      annotation (Placement(transformation(extent={{-24,-54},{26,-12}})));
+      annotation (Placement(transformation(extent={{-20,24},{20,56}})));
+    OperatingModes.ControlTest controlTest
+      annotation (Placement(transformation(extent={{-32,-20},{28,20}})));
+    Modelica.Blocks.Sources.BooleanTable OnSignal(
+        startValue=true) "delivers time variable on signal of device"
+      annotation (Placement(transformation(extent={{-100,60},{-80,80}})));
+    Modelica.Blocks.Sources.TimeTable T_Set_Mess(table=[0,21; 1764000,21;
+          1765800,22; 11287800,22; 11289600,20; 11982600,20; 11984400,22;
+          15067800,22; 15069600,21; 27772200,21; 27774000,22; 27790200,22;
+          27792000,21; 28395000,21; 28396800,23; 28405800,23; 28407600,21;
+          31622400,21], offset=273.15) "Time-variable Setpoint for device"
+      annotation (Placement(transformation(extent={{-100,34},{-80,54}})));
+    Modelica.Blocks.Sources.RealExpression T_Set_Fix(y=293.15)
+      "fix set point for temperature: 20 °C"
+      annotation (Placement(transformation(extent={{-100,10},{-80,30}})));
   equation
 
     //if RLT21 then
@@ -35,23 +44,25 @@ package Controllers "contains all the control models"
     //end if;
 
     connect(busSensors, development.busSensors) annotation (Line(
-        points={{-100,-34},{-56,-34},{-56,37.04},{-11.56,37.04}},
+        points={{-100,0},{-54,0},{-54,35.264},{-19.12,35.264}},
         color={255,204,51},
         thickness=0.5), Text(
         string="%first",
         index=-1,
         extent={{-6,3},{-6,3}}));
 
-    connect(OnSignal, controlTest.OnSignal) annotation (Line(points={{-106,24},
-            {-66,24},{-66,-17},{-24.6,-17}},
-                                        color={255,0,255}));
     connect(busSensors, controlTest.busSensors) annotation (Line(
-        points={{-100,-34},{-62,-34},{-62,-34.4},{-24,-34.4}},
+        points={{-100,0},{-30,0},{-30,-1.33333},{-32,-1.33333}},
         color={255,204,51},
         thickness=0.5), Text(
         string="%first",
         index=-1,
         extent={{-6,3},{-6,3}}));
+    connect(OnSignal.y, controlTest.OnSignal) annotation (Line(points={{-79,70},
+            {-56,70},{-56,15.2381},{-32.72,15.2381}},
+                                                 color={255,0,255}));
+    connect(T_Set_Fix.y, controlTest.TSet) annotation (Line(points={{-79,20},{
+            -62,20},{-62,-9.52381},{-32.48,-9.52381}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Rectangle(
             extent={{-100,100},{100,-100}},
@@ -489,7 +500,7 @@ model")}),                                                         Diagram(
         annotation (Placement(transformation(extent={{-264,-54},{-176,46}})));
       BusActors busActors "Bus connector for actor signals"
         annotation (Placement(transformation(extent={{244,-40},{318,40}})));
-      PN_Steuerung.PN_Main1_RLT22      pN_Steuerung_Ebene1_1(d=d)
+      PN_Steuerung.PN_Main1_RLT22 Ebene1(d=d)
         annotation (Placement(transformation(extent={{-78,140},{-58,160}})));
       PN_Steuerung.regDem regAnforderung
         "True, when there is need for regeneration"
@@ -542,10 +553,10 @@ model")}),                                                         Diagram(
               7,8,9,10,11,14,15,16,17,18,19,22,23}), Y_Control(n=4, modes={12,13,20,
               21})) "controlValve"
         annotation (Placement(transformation(extent={{106,40},{126,60}})));
-      PN_Steuerung.Auswertemodule.heaCoiEva y09_evaluation(
+      PN_Steuerung.Auswertemodule.Y09_evaluation
+                                            y09_evaluation(
         k=k_y09,
-        Ti=Ti_y09,
-        Setpoint=T_Set)
+        Ti=Ti_y09)
         annotation (Placement(transformation(extent={{140,40},{160,60}})));
       PN_Steuerung.Aktoren.controlvalve2 valve_Y10(Y_Close(n=12, modes={1,2,3,4,8,9,
               10,11,12,13,14,15}), Y_Control(n=11, modes={5,6,7,16,17,18,19,20,21,22,
@@ -609,7 +620,7 @@ model")}),                                                         Diagram(
               12,13,14,15}), Pump_On(n=11, modes={5,6,7,16,17,18,19,20,21,22,23}))
         "on off signal for pump N08, regeneration pump for desiccant solution"
         annotation (Placement(transformation(extent={{140,-200},{160,-180}})));
-      PN_Steuerung.Auswertemodule.Y02_evaluation y02_evaluation(T_Set=T_Set,
+      PN_Steuerung.Auswertemodule.Y02_evaluation y02_evaluation(
         k=k_y02,
         Ti=Ti_y02,
         k_cool=k_y02,
@@ -641,6 +652,8 @@ model")}),                                                         Diagram(
               8,9,10,11,12,13,16,17,18,19,20,21}), Y_Control(n=6, modes={4,7,14,
               15,22,23}))
         annotation (Placement(transformation(extent={{106,100},{126,120}})));
+      Modelica.Blocks.Interfaces.RealInput TSet "Setpoint for Temperature"
+        annotation (Placement(transformation(extent={{-244,-110},{-204,-70}})));
     equation
       connect(dD.RegAnf, regAnforderung.RegAnf) annotation (Line(points={{-80.6,86},
               {-100,86},{-100,70},{-159.4,70}},   color={255,0,255}));
@@ -713,27 +726,23 @@ model")}),                                                         Diagram(
           string="%second",
           index=1,
           extent={{6,3},{6,3}}));
-      connect(pN_Steuerung_Ebene1_1.T_Rek, busSensors.T_Rek) annotation (Line(
-            points={{-78.6,159},{-219.78,159},{-219.78,-3.75}},
-            color={0,0,127}), Text(
+      connect(Ebene1.T_Rek, busSensors.T_Rek) annotation (Line(points={{-78,159},
+              {-219.78,159},{-219.78,-3.75}}, color={0,0,127}), Text(
           string="%second",
           index=1,
           extent={{6,3},{6,3}}));
-      connect(pN_Steuerung_Ebene1_1.phi_03, busSensors.T03_RelHum) annotation (
-          Line(points={{-78.6,156},{-219.78,156},{-219.78,-3.75}},
-                       color={0,0,127}), Text(
+      connect(Ebene1.phi_03, busSensors.T03_RelHum) annotation (Line(points={{-78,
+              156},{-219.78,156},{-219.78,-3.75}}, color={0,0,127}), Text(
           string="%second",
           index=1,
           extent={{6,3},{6,3}}));
-      connect(pN_Steuerung_Ebene1_1.phi_01, busSensors.T01_RelHum) annotation (
-          Line(points={{-78.6,153},{-219.78,153},{-219.78,-3.75}},
-            color={0,0,127}), Text(
+      connect(Ebene1.phi_01, busSensors.T01_RelHum) annotation (Line(points={{-78,
+              153},{-219.78,153},{-219.78,-3.75}}, color={0,0,127}), Text(
           string="%second",
           index=1,
           extent={{6,3},{6,3}}));
-      connect(pN_Steuerung_Ebene1_1.signal_Y06, busSensors.Y06_actual)
-        annotation (Line(points={{-78.6,150},{-219.78,150},{-219.78,-3.75}},
-            color={0,0,127}), Text(
+      connect(Ebene1.signal_Y06, busSensors.Y06_actual) annotation (Line(points=
+             {{-78,150},{-219.78,150},{-219.78,-3.75}}, color={0,0,127}), Text(
           string="%second",
           index=1,
           extent={{6,3},{6,3}}));
@@ -796,7 +805,7 @@ model")}),                                                         Diagram(
       connect(valve_Y09.Control, y09_evaluation.Y_control)
         annotation (Line(points={{126.6,50},{139.4,50}}, color={255,0,255}));
       connect(y09_evaluation.MeasuredValue, busSensors.T01) annotation (Line(
-            points={{139.4,43},{88,43},{88,118},{-219.78,118},{-219.78,-3.75}},
+            points={{139.4,46},{88,46},{88,118},{-219.78,118},{-219.78,-3.75}},
             color={0,0,127}), Text(
           string="%second",
           index=1,
@@ -827,8 +836,8 @@ model")}),                                                         Diagram(
           string="%second",
           index=1,
           extent={{6,3},{6,3}}));
-      connect(pN_Steuerung_Ebene1_1.y, modeSwitch.Mode_Index) annotation (Line(
-            points={{-57.4,150},{5,150},{5,24.8571}},    color={255,127,0}));
+      connect(Ebene1.y, modeSwitch.Mode_Index) annotation (Line(points={{-57.4,
+              150},{5,150},{5,24.8571}}, color={255,127,0}));
       connect(modeSwitch.CurrentMode,outsideFan. M_in) annotation (Line(points={{24.6333,
               8.57143},{100,8.57143},{100,-50},{139.2,-50}}, color={255,127,0}));
       connect(modeSwitch.CurrentMode, exhaustFan.M_in) annotation (Line(points={{24.6333,
@@ -874,7 +883,7 @@ model")}),                                                         Diagram(
       connect(modeSwitch.CurrentMode, valve_Y02.M_in) annotation (Line(points={{24.6333,
               8.57143},{100,8.57143},{100,190},{105.2,190}}, color={255,127,0}));
       connect(y02_evaluation.T_measure, busSensors.T01) annotation (Line(points={{139.2,
-              183},{88,183},{88,118},{-219.78,118},{-219.78,-3.75}}, color={0,0,127}),
+              185},{88,185},{88,118},{-219.78,118},{-219.78,-3.75}}, color={0,0,127}),
           Text(
           string="%second",
           index=1,
@@ -886,9 +895,8 @@ model")}),                                                         Diagram(
           extent={{6,3},{6,3}}));
       connect(pumpN06.signal_pump, y02_evaluation.adiabaticOn) annotation (Line(
             points={{160.8,-150},{230,-150},{230,182},{160.8,182}}, color={255,0,255}));
-      connect(pN_Steuerung_Ebene1_1.signal_Y02, busSensors.Y02_actual)
-        annotation (Line(points={{-78.6,147},{-219.78,147},{-219.78,-3.75}},
-            color={0,0,127}), Text(
+      connect(Ebene1.signal_Y02, busSensors.Y02_actual) annotation (Line(points=
+             {{-78,147},{-219.78,147},{-219.78,-3.75}}, color={0,0,127}), Text(
           string="%second",
           index=1,
           extent={{6,3},{6,3}}));
@@ -999,14 +1007,14 @@ model")}),                                                         Diagram(
         annotation (Line(points={{126.6,116},{139.4,116}}, color={255,0,255}));
       connect(valve_Y06.Control, y06_evaluation.Y_control)
         annotation (Line(points={{126.6,110},{139.4,110}}, color={255,0,255}));
-      connect(hD.T_out, busSensors.T04) annotation (Line(points={{-80.6,-11},{
-              -100.3,-11},{-100.3,-3.75},{-219.78,-3.75}}, color={0,0,127}),
+      connect(hD.T_out, busSensors.T04) annotation (Line(points={{-80.6,-8},{
+              -100.3,-8},{-100.3,-3.75},{-219.78,-3.75}},  color={0,0,127}),
           Text(
           string="%second",
           index=1,
           extent={{6,3},{6,3}}));
-      connect(hB.T_out, busSensors.T04) annotation (Line(points={{-80.6,-41},{
-              -100.3,-41},{-100.3,-3.75},{-219.78,-3.75}}, color={0,0,127}),
+      connect(hB.T_out, busSensors.T04) annotation (Line(points={{-80.6,-38},{
+              -100.3,-38},{-100.3,-3.75},{-219.78,-3.75}}, color={0,0,127}),
           Text(
           string="%second",
           index=1,
@@ -1032,6 +1040,18 @@ model")}),                                                         Diagram(
       connect(valve_Y16.Control, evaY16.Y_AbsDesControl) annotation (Line(
             points={{126.6,-30},{134,-30},{134,-30},{139.4,-30}}, color={255,0,
               255}));
+      connect(Ebene1.T_Soll, TSet) annotation (Line(points={{-78.6,143},{-220,
+              143},{-220,-90},{-224,-90},{-224,-90}}, color={0,0,127}));
+      connect(y02_evaluation.T_Set, TSet) annotation (Line(points={{139.2,182},
+              {88,182},{88,118},{-220,118},{-220,-90},{-224,-90}}, color={0,0,
+              127}));
+      connect(y09_evaluation.T_Set, TSet) annotation (Line(points={{139.4,43},{
+              114,43},{88,43},{88,118},{-220,118},{-220,-90},{-224,-90}}, color=
+             {0,0,127}));
+      connect(hD.T_Set, TSet) annotation (Line(points={{-80.6,-11},{-220.3,-11},
+              {-220.3,-90},{-224,-90}}, color={0,0,127}));
+      connect(hB.T_Set, TSet) annotation (Line(points={{-80.6,-41},{-150,-41},{
+              -220,-41},{-220,-90},{-224,-90}}, color={0,0,127}));
       annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-220,-200},
                 {280,220}})),            Diagram(coordinateSystem(
               preserveAspectRatio=false, extent={{-220,-200},{280,220}}),
@@ -1047,7 +1067,7 @@ model")}),                                                         Diagram(
               fillColor={85,170,255},
               fillPattern=FillPattern.Solid),
             Rectangle(
-              extent={{44,220},{240,-230}},
+              extent={{44,220},{240,-200}},
               lineColor={0,0,0},
               fillColor={170,255,170},
               fillPattern=FillPattern.Solid),
@@ -1064,12 +1084,615 @@ model")}),                                                         Diagram(
               fillPattern=FillPattern.Solid,
               textString="Aktorsatz"),
             Text(
-              extent={{70,-200},{224,-226}},
+              extent={{-77,13},{77,-13}},
               lineColor={0,0,0},
               fillColor={170,255,170},
               fillPattern=FillPattern.Solid,
-              textString="Aktorregelung")}));
+              textString="Aktorregelung",
+              origin={65,-83},
+              rotation=-90)}));
     end PNControl22;
+
+    model ControlTest "test version of controller for sorption"
+
+      parameter Real leak = 0.0001 "leakage before the valve switches";
+      parameter Real d = 300 "delay for mode switching in s";
+      //parameter Modelica.SIunits.Temperature T_Set = 20+273.15 "set value for T01";
+      parameter Modelica.SIunits.Temperature THot_Set = 64+273.15 "set value for regeneration temperature";
+      parameter Real phi_Set = 0.5  "set value for phi (relative humidity) at T01";
+
+      parameter Real mFlowNom_outFan = 5  "set value for outside air fan";
+      parameter Real mFlowNom_exhFan = 5  "set value for exhaust air fan";
+      parameter Real mFlowNom_regFan = 1  "set value for regeneration air fan";
+
+      parameter Real dP_outFan = 1356 "or 1300, set value for dP of outside air fan";
+      parameter Real dP_exhFan = 665  "set value for dP of exhaust air fan";
+      parameter Real dP_regFan = 543  "set value for dP of regeneration air fan";
+
+      parameter Real k_y02 = 0.03;  //0.15;
+      parameter Real Ti_y02 = 240;  //0.5;
+      parameter Real k_y09 = 0.05;  //0.01//0.06 aus Einzelanalyse;
+      parameter Real Ti_y09 = 180;  //180
+      parameter Real k_phi = 0.28;  //80;  //0.08;
+      parameter Real Ti_phi = 27;  //0.7;
+      //parameter Real k_Fan = 100;  //250
+      //parameter Real Ti_Fan = 120;  //30
+      //parameter Real k_x = 0.15;
+      //parameter Real Ti_x = 300;
+      parameter Real k_m = 0.005;
+      parameter Real Ti_m = 300;
+
+      BusSensors busSensors
+        annotation (Placement(transformation(extent={{-264,-54},{-176,46}})));
+      BusActors busActors "Bus connector for actor signals"
+        annotation (Placement(transformation(extent={{244,-40},{318,40}})));
+      PN_Steuerung.PN_Main1_RLT21 Ebene1(d=d)
+        annotation (Placement(transformation(extent={{-78,140},{-58,160}})));
+      PN_Steuerung.regDem regAnforderung
+        "True, when there is need for regeneration"
+        annotation (Placement(transformation(extent={{-180,60},{-160,80}})));
+      PN_Steuerung.Ebene2.DD dD
+        annotation (Placement(transformation(extent={{-80,76},{-60,96}})));
+      PN_Steuerung.ModeSwitch modeSwitch
+        annotation (Placement(transformation(extent={{-14,-12},{24,24}})));
+      PN_Steuerung.Ebene2.DB dB
+        annotation (Placement(transformation(extent={{-80,46},{-60,66}})));
+      PN_Steuerung.Ebene2.DE dE
+        annotation (Placement(transformation(extent={{-80,16},{-60,36}})));
+      PN_Steuerung.Ebene2.HD hD(d=d, leak=leak)
+        annotation (Placement(transformation(extent={{-80,-14},{-60,6}})));
+      PN_Steuerung.Ebene2.HB hB(d=d, leak=leak)
+        annotation (Placement(transformation(extent={{-80,-44},{-60,-24}})));
+      PN_Steuerung.Ebene2.HE hE
+        annotation (Placement(transformation(extent={{-80,-74},{-60,-54}})));
+      PN_Steuerung.Ebene2.KD kD
+        annotation (Placement(transformation(extent={{-80,-104},{-60,-84}})));
+      PN_Steuerung.Ebene2.KB kB
+        annotation (Placement(transformation(extent={{-80,-134},{-60,-114}})));
+      PN_Steuerung.Ebene2.KE kE
+        annotation (Placement(transformation(extent={{-80,-164},{-60,-144}})));
+      PN_Steuerung.Aktoren.Y_On_Off valve_Y01(Y_Close(n=7, modes={1,2,3,4,5,6,7}),
+          Y_Open(n=16, modes={8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23}))
+        "On_Off valve Y01"
+        annotation (Placement(transformation(extent={{140,200},{160,220}})));
+      PN_Steuerung.Aktoren.Y_On_Off valve_Y03(Y_Close(n=16, modes={8,9,10,11,12,
+              13,14,15,16,17,18,19,20,21,22,23}), Y_Open(n=7, modes={1,2,3,4,5,
+              6,7})) "On Off valve Y03"
+        annotation (Placement(transformation(extent={{140,160},{160,180}})));
+      PN_Steuerung.Aktoren.Y_On_Off valve_Y04(Y_Close(n=1, modes={1}), Y_Open(n=
+             22, modes={2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,
+              23}))
+        annotation (Placement(transformation(extent={{140,140},{160,160}})));
+      PN_Steuerung.Aktoren.Y_On_Off valve_Y05(Y_Close(n=1, modes={1}), Y_Open(n=
+             22, modes={2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,
+              23}))
+        annotation (Placement(transformation(extent={{140,120},{160,140}})));
+      PN_Steuerung.Aktoren.Y_On_Off valve_Y07(Y_Close(n=12, modes={1,2,3,4,8,9,
+              10,11,12,13,14,15}), Y_Open(n=11, modes={5,6,7,16,17,18,19,20,21,
+              22,23}))
+        annotation (Placement(transformation(extent={{140,80},{160,100}})));
+      PN_Steuerung.Aktoren.Y_On_Off valve_Y08(Y_Close(n=12, modes={1,2,3,4,8,9,
+              10,11,12,13,14,15}), Y_Open(n=11, modes={5,6,7,16,17,18,19,20,21,
+              22,23}))
+        annotation (Placement(transformation(extent={{140,60},{160,80}})));
+      PN_Steuerung.Aktoren.controlvalve2 valve_Y09(Y_Close(n=19, modes={1,2,3,4,5,6,
+              7,8,9,10,11,14,15,16,17,18,19,22,23}), Y_Control(n=4, modes={12,13,20,
+              21})) "controlValve"
+        annotation (Placement(transformation(extent={{106,40},{126,60}})));
+      PN_Steuerung.Auswertemodule.Y09_evaluation
+                                            y09_evaluation(
+        k=k_y09,
+        Ti=Ti_y09)
+        annotation (Placement(transformation(extent={{140,40},{160,60}})));
+      PN_Steuerung.Aktoren.controlvalve2 valve_Y10(Y_Close(n=12, modes={1,2,3,4,8,9,
+              10,11,12,13,14,15}), Y_Control(n=11, modes={5,6,7,16,17,18,19,20,21,22,
+              23})) "controlValve"
+        annotation (Placement(transformation(extent={{106,20},{126,40}})));
+      PN_Steuerung.Auswertemodule.heaCoiEva y10_evaluation(
+        k=k_y09,
+        Ti=Ti_y09,
+        Setpoint=THot_Set)
+        annotation (Placement(transformation(extent={{140,20},{160,40}})));
+      PN_Steuerung.Aktoren.controlvalve2 valve_Y11(
+                                            Y_Control(n=8, modes={3,6,9,11,13,17,19,
+              21}), Y_Close(n=15, modes={1,2,4,5,7,8,10,12,14,15,16,18,20,22,23}))
+                    "controlValve"
+        annotation (Placement(transformation(extent={{106,0},{126,20}})));
+      PN_Steuerung.Auswertemodule.heaCoiEva      y11_evaluation(
+        k=k_phi,
+        Ti=Ti_phi,
+        Setpoint=phi_Set)
+        annotation (Placement(transformation(extent={{140,0},{160,20}})));
+      PN_Steuerung.Aktoren.Fan_On_Off_fix exhaustFan(
+        Fan_Off(n=1, modes={1}),
+        Fan_On(n=22, modes={2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23}),
+        mFlow_Set=mFlowNom_exhFan,
+        dP_Set=dP_exhFan) "mass flow set point value for exhaust fan"
+        annotation (Placement(transformation(extent={{140,-80},{160,-60}})));
+
+      PN_Steuerung.Aktoren.Fan_On_Off_fix regFan(
+        Fan_Off(n=12, modes={1,2,3,4,8,9,10,11,12,13,14,15}),
+        Fan_On(n=11, modes={5,6,7,16,17,18,19,20,21,22,23}),
+        dP_Set=dP_regFan,
+        mFlow_Set=mFlowNom_regFan) "mass flow signal for regeneration fan"
+        annotation (Placement(transformation(extent={{140,-100},{160,-80}})));
+      PN_Steuerung.Aktoren.Pump_On_Off pumpN04(Pump_Off(n=19, modes={1,2,3,4,5,6,7,8,
+              9,10,11,14,15,16,17,18,19,22,23}), Pump_On(n=4, modes={12,13,20,21}))
+        "on off signal of pump N04 for heating coil circuit for supply air"
+        annotation (Placement(transformation(extent={{140,-120},{160,-100}})));
+      PN_Steuerung.Aktoren.Pump_Bool   pumpN05(Pump_Off(n=12, modes={1,2,3,4,8,9,10,
+              11,12,13,14,15}), Pump_On(n=11, modes={5,6,7,16,17,18,19,20,21,22,23}))
+        "on off signal for pump N05, regeneration heating coil"
+        annotation (Placement(transformation(extent={{140,-140},{160,-120}})));
+      PN_Steuerung.Aktoren.Pump_Bool pumpN06(Pump_Off(n=17, modes={1,2,3,4,5,6,7,8,9,
+              12,13,14,16,17,20,21,22}), Pump_On(n=6, modes={10,11,15,18,19,23}))
+        "pump signal for N06 to activate adiabatic cooling"
+        annotation (Placement(transformation(extent={{140,-160},{160,-140}})));
+      PN_Steuerung.Aktoren.Pump_Bool pumpN07(Pump_Off(n=17, modes={1,2,3,5,6,8,9,10,
+              11,12,13,16,17,18,19,20,21}), Pump_On(n=6, modes={4,7,14,15,22,23}))
+        "absorber pump signal"
+        annotation (Placement(transformation(extent={{140,-180},{160,-160}})));
+      PN_Steuerung.Aktoren.Pump_Bool pumpN08(Pump_Off(n=12, modes={1,2,3,4,8,9,10,11,
+              12,13,14,15}), Pump_On(n=11, modes={5,6,7,16,17,18,19,20,21,22,23}))
+        "on off signal for pump N08, regeneration pump for desiccant solution"
+        annotation (Placement(transformation(extent={{140,-200},{160,-180}})));
+      PN_Steuerung.Auswertemodule.Y02_evaluation y02_evaluation(k=k_y02,
+        Ti=Ti_y02,
+        k_cool=k_y02,
+        Ti_cool=Ti_y02)
+        annotation (Placement(transformation(extent={{140,180},{160,200}})));
+      PN_Steuerung.Aktoren.controlvalve3 valve_Y02(
+        Y_Close(n=4, modes={12,13,20,21}),
+        Y_Open(n=7, modes={1,2,3,4,5,6,7}),
+        Y_Control(n=12, modes={8,9,10,11,14,15,16,17,18,19,22,23}))
+        annotation (Placement(transformation(extent={{106,180},{126,200}})));
+      Modelica.Blocks.Interfaces.BooleanInput OnSignal
+        "Delivers signal to switch on or off the device"
+        annotation (Placement(transformation(extent={{-246,150},{-206,190}})));
+      PN_Steuerung.Aktoren.controlvalve2   valve_Y15(Y_Close(n=20, modes={1,2,3,4,5,
+              6,8,9,10,11,12,13,14,15,16,17,18,19,20,21}), Y_Control(n=3, modes={7,22,
+              23}))
+        annotation (Placement(transformation(extent={{106,-20},{126,0}})));
+      PN_Steuerung.Aktoren.controlvalve2   valve_Y16(Y_Close(n=20, modes={1,2,3,4,5,
+              6,8,9,10,11,12,13,14,15,16,17,18,19,20,21}), Y_Control(n=3, modes={7,22,
+              23}))
+        annotation (Placement(transformation(extent={{106,-40},{126,-20}})));
+      PN_Steuerung.Auswertemodule.Y15_evaluation eva_Y15(k=k_m, Ti=Ti_m)
+        annotation (Placement(transformation(extent={{140,-20},{160,0}})));
+      PN_Steuerung.Auswertemodule.Y16_evaluationSimple
+                                                 evaY16    annotation (Placement(transformation(extent={{140,-40},{160,-20}})));
+      PN_Steuerung.Auswertemodule.bypassEva y06_evaluation(k=k_phi, Ti=Ti_phi,
+        phi_Set=phi_Set)
+        annotation (Placement(transformation(extent={{140,100},{160,120}})));
+      PN_Steuerung.Aktoren.bypassValve valve_Y06(Y_Open(n=17, modes={1,2,3,5,6,
+              8,9,10,11,12,13,16,17,18,19,20,21}), Y_Control(n=6, modes={4,7,14,
+              15,22,23}))
+        annotation (Placement(transformation(extent={{106,100},{126,120}})));
+      PN_Steuerung.Aktoren.Fan_On_Off_fix outsideFan(
+        mFlow_Set=mFlowNom_outFan,
+        Fan_Off(n=1, modes={1}),
+        Fan_On(n=22, modes={2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23}),
+        dP_Set=dP_outFan)
+        annotation (Placement(transformation(extent={{140,-60},{160,-40}})));
+
+      Modelica.Blocks.Interfaces.RealInput TSet "Setpoint for Temperature"
+        annotation (Placement(transformation(extent={{-244,-110},{-204,-70}})));
+    equation
+      connect(dD.RegAnf, regAnforderung.RegAnf) annotation (Line(points={{-80.6,86},
+              {-100,86},{-100,70},{-159.4,70}},   color={255,0,255}));
+      connect(regAnforderung.RegAnf, dB.RegAnf) annotation (Line(points={{-159.4,70},
+              {-100,70},{-100,56},{-80.6,56}},              color={255,0,255}));
+      connect(regAnforderung.RegAnf, dE.RegAnf) annotation (Line(points={{-159.4,70},
+              {-100,70},{-100,26},{-80.6,26}},              color={255,0,255}));
+      connect(regAnforderung.RegAnf, hD.RegAnf) annotation (Line(points={{-159.4,70},{
+              -100,70},{-100,-4},{-80.6,-4}},               color={255,0,255}));
+      connect(regAnforderung.RegAnf, hB.RegAnf) annotation (Line(points={{-159.4,70},
+              {-100,70},{-100,-34},{-80.6,-34}},              color={255,0,255}));
+      connect(regAnforderung.RegAnf, hE.RegAnf) annotation (Line(points={{-159.4,70},
+              {-100,70},{-100,-64},{-80.6,-64}},              color={255,0,255}));
+      connect(regAnforderung.RegAnf, kD.RegAnf) annotation (Line(points={{-159.4,70},
+              {-100,70},{-100,-94},{-80.6,-94}},              color={255,0,255}));
+      connect(regAnforderung.RegAnf, kB.RegAnf) annotation (Line(points={{-159.4,70},
+              {-100,70},{-100,-124},{-80.6,-124}},              color={255,0,
+              255}));
+      connect(regAnforderung.RegAnf, kE.RegAnf) annotation (Line(points={{-159.4,70},
+              {-100,70},{-100,-154},{-80.6,-154}},              color={255,0,
+              255}));
+      connect(dB.DB_Out, modeSwitch.DB) annotation (Line(points={{-59.4,56},{
+              -26,56},{-26,19.2},{-15.0556,19.2}},
+                                             color={255,127,0}));
+      connect(dE.DE_Out, modeSwitch.DE) annotation (Line(points={{-59.4,26},{
+              -40,26},{-40,14.9143},{-15.0556,14.9143}},
+                                                   color={255,127,0}));
+      connect(hD.HD_Out, modeSwitch.HD) annotation (Line(points={{-59.4,-4},{
+              -34,-4},{-34,10.8},{-15.0556,10.8}},
+                                             color={255,127,0}));
+      connect(hB.HB_Out, modeSwitch.HB) annotation (Line(points={{-59.4,-34},{
+              -30,-34},{-30,6.85714},{-15.0556,6.85714}},
+                                                       color={255,127,0}));
+      connect(hE.HE_Out, modeSwitch.HE) annotation (Line(points={{-59.4,-64},{
+              -26,-64},{-26,2.4},{-15.0556,2.4}},
+                                               color={255,127,0}));
+      connect(kD.KD_Out, modeSwitch.KD) annotation (Line(points={{-59.4,-94},{
+              -22,-94},{-22,-1.54286},{-15.0556,-1.54286}},
+                                                         color={255,127,0}));
+      connect(kB.KB_Out, modeSwitch.KB) annotation (Line(points={{-59.4,-124},{
+              -18,-124},{-18,-5.82857},{-15.0556,-5.82857}},
+                                                          color={255,127,0}));
+      connect(kE.KE_Out, modeSwitch.KE) annotation (Line(points={{-59.4,-154},{
+              -16,-154},{-16,-10.2857},{-15.0556,-10.2857}},
+                                                          color={255,127,0}));
+      connect(dD.DD_Out, modeSwitch.DD) annotation (Line(points={{-59.4,86},{
+              -22,86},{-22,23.3143},{-15.0556,23.3143}},
+                                                  color={255,127,0}));
+      connect(modeSwitch.CurrentMode, valve_Y01.M_in) annotation (Line(points={{24.6333,
+              8.57143},{100,8.57143},{100,210},{139.2,210}},
+                                                         color={255,127,0}));
+      connect(valve_Y01.setValue_Y, busActors.openingY01) annotation (Line(
+            points={{160.6,210},{230,210},{230,0.2},{281.185,0.2}}, color={0,0,
+              127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(modeSwitch.CurrentMode, valve_Y03.M_in) annotation (Line(points={{24.6333,
+              8.57143},{100,8.57143},{100,170},{139.2,170}},
+                                     color={255,127,0}));
+      connect(valve_Y03.setValue_Y, busActors.openingY03) annotation (Line(
+            points={{160.6,170},{230,170},{230,0.2},{281.185,0.2}}, color={0,0,
+              127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(modeSwitch.CurrentMode, valve_Y04.M_in) annotation (Line(points={{24.6333,
+              8.57143},{100,8.57143},{100,150},{139.2,150}},
+            color={255,127,0}));
+      connect(valve_Y04.setValue_Y, busActors.openingY04) annotation (Line(
+            points={{160.6,150},{230,150},{230,0.2},{281.185,0.2}}, color={0,0,
+              127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(modeSwitch.CurrentMode, valve_Y05.M_in) annotation (Line(points={{24.6333,
+              8.57143},{100,8.57143},{100,130},{139.2,130}},
+                                     color={255,127,0}));
+      connect(valve_Y05.setValue_Y, busActors.openingY05) annotation (Line(
+            points={{160.6,130},{230,130},{230,0.2},{281.185,0.2}}, color={0,0,
+              127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(modeSwitch.CurrentMode, valve_Y07.M_in) annotation (Line(points={{24.6333,
+              8.57143},{100,8.57143},{100,90},{139.2,90}},            color={
+              255,127,0}));
+      connect(valve_Y07.setValue_Y, busActors.openingY07) annotation (Line(
+            points={{160.6,90},{230,90},{230,0.2},{281.185,0.2}},   color={0,0,
+              127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(modeSwitch.CurrentMode, valve_Y08.M_in) annotation (Line(points={{24.6333,
+              8.57143},{100,8.57143},{100,70},{139.2,70}},            color={
+              255,127,0}));
+      connect(valve_Y08.setValue_Y, busActors.openingY08) annotation (Line(
+            points={{160.6,70},{230,70},{230,0.2},{281.185,0.2}},   color={0,0,
+              127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(valve_Y09.Close, y09_evaluation.Y_closed)
+        annotation (Line(points={{126.8,56},{139.4,56}}, color={255,0,255}));
+      connect(valve_Y09.Control, y09_evaluation.Y_control)
+        annotation (Line(points={{126.6,50},{139.4,50}}, color={255,0,255}));
+      connect(modeSwitch.CurrentMode, valve_Y09.M_in) annotation (Line(points={{24.6333,
+              8.57143},{100,8.57143},{100,50},{105.2,50}}, color={255,127,0}));
+      connect(y09_evaluation.y, busActors.openingY09) annotation (Line(points={{160.6,
+              50},{230,50},{230,0.2},{281.185,0.2}},        color={0,0,127}),
+          Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(modeSwitch.CurrentMode, valve_Y10.M_in) annotation (Line(points={{24.6333,
+              8.57143},{100,8.57143},{100,30},{105.2,30}}, color={255,127,0}));
+      connect(valve_Y10.Close, y10_evaluation.Y_closed)
+        annotation (Line(points={{126.8,36},{139.4,36}}, color={255,0,255}));
+      connect(valve_Y10.Control, y10_evaluation.Y_control)
+        annotation (Line(points={{126.6,30},{139.4,30}}, color={255,0,255}));
+      connect(y10_evaluation.y, busActors.openingY10) annotation (Line(points={{160.6,
+              30},{230,30},{230,0.2},{281.185,0.2}}, color={0,0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(modeSwitch.CurrentMode, valve_Y11.M_in) annotation (Line(points={{24.6333,
+              8.57143},{100,8.57143},{100,10},{105.2,10}}, color={255,127,0}));
+      connect(y11_evaluation.y, busActors.openingY11) annotation (Line(points={{160.6,
+              10},{230,10},{230,0.2},{281.185,0.2}}, color={0,0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(Ebene1.y, modeSwitch.Mode_Index) annotation (Line(points={{-57.4,
+              150},{5,150},{5,24.8571}}, color={255,127,0}));
+      connect(modeSwitch.CurrentMode, exhaustFan.M_in) annotation (Line(points={{24.6333,
+              8.57143},{100,8.57143},{100,-70},{139.2,-70}}, color={255,127,0}));
+      connect(modeSwitch.CurrentMode, regFan.M_in) annotation (Line(points={{24.6333,
+              8.57143},{100,8.57143},{100,-90},{139.2,-90}}, color={255,127,0}));
+      connect(modeSwitch.CurrentMode, pumpN05.M_in) annotation (Line(points={{24.6333,
+              8.57143},{100,8.57143},{100,-130},{139.2,-130}}, color={255,127,0}));
+      connect(modeSwitch.CurrentMode, pumpN08.M_in) annotation (Line(points={{24.6333,
+              8.57143},{100,8.57143},{100,-190},{139.2,-190}}, color={255,127,0}));
+      connect(pumpN08.signal_pump, busActors.pumpN08) annotation (Line(points={{160.8,
+              -190},{230,-190},{230,0.2},{281.185,0.2}}, color={255,0,255}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(modeSwitch.CurrentMode, pumpN04.M_in) annotation (Line(points={{24.6333,
+              8.57143},{100,8.57143},{100,-110},{139.2,-110}}, color={255,127,0}));
+      connect(pumpN04.signal_Pump, busActors.pumpN04) annotation (Line(points={{160.6,
+              -110},{230,-110},{230,0.2},{281.185,0.2}}, color={0,0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(modeSwitch.CurrentMode, pumpN06.M_in) annotation (Line(points={{24.6333,
+              8.57143},{100,8.57143},{100,-150},{139.2,-150}}, color={255,127,0}));
+      connect(pumpN06.signal_pump, busActors.pumpN06) annotation (Line(points={{160.8,
+              -150},{230,-150},{230,0.2},{281.185,0.2}}, color={255,0,255}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(modeSwitch.CurrentMode, pumpN07.M_in) annotation (Line(points={{24.6333,
+              8.57143},{100,8.57143},{100,-170},{139.2,-170}}, color={255,127,0}));
+      connect(pumpN07.signal_pump, busActors.pumpN07) annotation (Line(points={{160.8,
+              -170},{230,-170},{230,0.2},{281.185,0.2}}, color={255,0,255}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(valve_Y02.valve_closed, y02_evaluation.Y02_closed) annotation (Line(
+            points={{126.6,195},{132,195},{132,199},{139.2,199}}, color={255,0,255}));
+      connect(valve_Y02.valve_open, y02_evaluation.Y02_open) annotation (Line(
+            points={{126.6,190},{132,190},{132,194},{139.2,194}}, color={255,0,255}));
+      connect(valve_Y02.valve_controlled, y02_evaluation.Y02_control) annotation (
+          Line(points={{126.6,185},{132,185},{132,189},{139.2,189}}, color={255,0,255}));
+      connect(modeSwitch.CurrentMode, valve_Y02.M_in) annotation (Line(points={{24.6333,
+              8.57143},{100,8.57143},{100,190},{105.2,190}}, color={255,127,0}));
+      connect(y02_evaluation.y, busActors.openingY02) annotation (Line(points={{160.6,
+              190},{230,190},{230,0.2},{281.185,0.2}}, color={0,0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(pumpN06.signal_pump, y02_evaluation.adiabaticOn) annotation (Line(
+            points={{160.8,-150},{230,-150},{230,182},{160.8,182}}, color={255,0,255}));
+      connect(valve_Y11.Close, y11_evaluation.Y_closed)
+        annotation (Line(points={{126.8,16},{139.4,16}}, color={255,0,255}));
+      connect(valve_Y11.Control, y11_evaluation.Y_control)
+        annotation (Line(points={{126.6,10},{139.4,10}}, color={255,0,255}));
+      connect(OnSignal, modeSwitch.OnSignal) annotation (Line(points={{-226,170},
+              {-4,170},{-4,24.8571},{-4.28889,24.8571}},
+                                                     color={255,0,255}));
+      connect(pumpN05.signal_pump, busActors.pumpN05) annotation (Line(points={
+              {160.8,-130},{230,-130},{230,0.2},{281.185,0.2}}, color={255,0,
+              255}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(modeSwitch.CurrentMode, valve_Y15.M_in) annotation (Line(points={{24.6333,
+              8.57143},{100,8.57143},{100,-10},{105.2,-10}},          color={
+              255,127,0}));
+      connect(modeSwitch.CurrentMode, valve_Y16.M_in) annotation (Line(points={{24.6333,
+              8.57143},{100,8.57143},{100,-30},{105.2,-30}},          color={
+              255,127,0}));
+      connect(eva_Y15.y, busActors.openingY15) annotation (Line(points={{160.6,
+              -10},{230,-10},{230,0.2},{281.185,0.2}}, color={0,0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(evaY16.y, busActors.openingY16) annotation (Line(points={{160.6,-30},{
+              230,-30},{230,0.2},{281.185,0.2}},       color={0,0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(modeSwitch.CurrentMode, valve_Y06.M_in) annotation (Line(points={{24.6333,
+              8.57143},{100,8.57143},{100,110},{105.2,110}},          color={
+              255,127,0}));
+      connect(valve_Y06.Open, y06_evaluation.Y_open)
+        annotation (Line(points={{126.6,116},{139.4,116}}, color={255,0,255}));
+      connect(valve_Y06.Control, y06_evaluation.Y_control)
+        annotation (Line(points={{126.6,110},{139.4,110}}, color={255,0,255}));
+      connect(regAnforderung.xDes, busSensors.xDes) annotation (Line(points={{-180.8,
+              66},{-219.78,66},{-219.78,-3.75}},                  color={0,0,
+              127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(regAnforderung.xAbs, busSensors.xAbs) annotation (Line(points={{-180.8,
+              74},{-220,74},{-219.78,-3.75}},                     color={0,0,
+              127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(hD.Y02_signal, busSensors.Y02_actual) annotation (Line(points={{
+              -80.6,4.2},{-108,4.2},{-108,-3.75},{-219.78,-3.75}}, color={0,0,
+              127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(hD.Y09_signal, busSensors.Y09_actual) annotation (Line(points={{
+              -80.6,0.2},{-107.3,0.2},{-107.3,-3.75},{-219.78,-3.75}}, color={0,
+              0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(hD.T_out, busSensors.T04) annotation (Line(points={{-80.6,-8},{-108.3,
+              -8},{-108.3,-3.75},{-219.78,-3.75}},         color={0,0,127}),
+          Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(hB.Y02_signal, busSensors.Y02_actual) annotation (Line(points={{
+              -80.6,-25.8},{-107.3,-25.8},{-107.3,-3.75},{-219.78,-3.75}},
+            color={0,0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(hB.Y09_signal, busSensors.Y09_actual) annotation (Line(points={{
+              -80.6,-29.8},{-108.3,-29.8},{-108.3,-3.75},{-219.78,-3.75}},
+            color={0,0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(hB.T_out, busSensors.T04) annotation (Line(points={{-80.6,-38},{-108.3,
+              -38},{-108.3,-3.75},{-219.78,-3.75}},        color={0,0,127}),
+          Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(Ebene1.T_Rek, busSensors.T_Rek) annotation (Line(points={{-78.6,
+              159},{-220,159},{-219.78,-3.75}}, color={0,0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(Ebene1.phi_03, busSensors.T03_RelHum) annotation (Line(points={{-78.6,
+              156},{-220,156},{-219.78,-3.75}}, color={0,0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(Ebene1.phi_01, busSensors.T01_RelHum) annotation (Line(points={{-78.6,
+              153},{-220,153},{-219.78,-3.75}}, color={0,0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(Ebene1.signal_Y06, busSensors.Y06_actual) annotation (Line(points=
+             {{-78.6,150},{-220,150},{-219.78,-3.75}}, color={0,0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(Ebene1.signal_Y02, busSensors.Y02_actual) annotation (Line(points=
+             {{-78.6,147},{-220,147},{-219.78,-3.75}}, color={0,0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(y02_evaluation.T_measure, busSensors.T01) annotation (Line(points={{139.2,
+              185},{90,185},{90,122},{-219.78,122},{-219.78,-3.75}},     color=
+              {0,0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(y06_evaluation.phi_zu, busSensors.T01_RelHum) annotation (Line(
+            points={{139.4,103},{90,103},{90,122},{-220,122},{-219.78,-3.75}},
+            color={0,0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(y06_evaluation.y, busActors.openingY06) annotation (Line(points={
+              {160.6,110},{230,110},{230,0.2},{281.185,0.2}}, color={0,0,127}),
+          Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(y09_evaluation.MeasuredValue, busSensors.T01) annotation (Line(
+            points={{139.4,46},{90,46},{90,122},{-219.78,122},{-219.78,-3.75}},
+            color={0,0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(y10_evaluation.MeasuredValue, busSensors.TDes) annotation (Line(
+            points={{139.4,23},{90,23},{90,122},{-220,122},{-219.78,-3.75}},
+            color={0,0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(y11_evaluation.MeasuredValue, busSensors.T01_RelHum) annotation (
+          Line(points={{139.4,3},{90,3},{90,122},{-219.78,122},{-219.78,-3.75}},
+            color={0,0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(valve_Y15.Close, eva_Y15.Y_closed)
+        annotation (Line(points={{126.8,-4},{139.4,-4}}, color={255,0,255}));
+      connect(valve_Y15.Control, eva_Y15.Y_AbsDesControl)
+        annotation (Line(points={{126.6,-10},{139.4,-10}}, color={255,0,255}));
+      connect(valve_Y16.Close, evaY16.Y_closed) annotation (Line(points={{126.8,-24},
+              {132,-24},{132,-24},{139.4,-24}}, color={255,0,255}));
+      connect(valve_Y16.Control, evaY16.Y_AbsDesControl) annotation (Line(points={{126.6,
+              -30},{132,-30},{132,-30},{139.4,-30}}, color={255,0,255}));
+      connect(eva_Y15.tankMassAbs, busSensors.mTankAbs) annotation (Line(points={{139.4,
+              -17},{90,-17},{90,122},{-219.78,122},{-219.78,-3.75}}, color={0,0,127}),
+          Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(evaY16.tankMassDes, busSensors.mTankDes) annotation (Line(points={{139.4,
+              -37},{90,-37},{90,122},{-220,122},{-219.78,-3.75}},    color={0,0,127}),
+          Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(outsideFan.dp_Fan, busActors.outsideFan_dp) annotation (Line(points={{
+              160.6,-50},{230,-50},{230,0.2},{281.185,0.2}}, color={0,0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(exhaustFan.dp_Fan, busActors.exhaustFan_dp) annotation (Line(points={{
+              160.6,-70},{230,-70},{230,0.2},{281.185,0.2}}, color={0,0,127}), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(regFan.dp_Fan, busActors.regenerationFan_dp) annotation (Line(points={
+              {160.6,-90},{230,-90},{230,0.2},{281.185,0.2}}, color={0,0,127}),
+          Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+      connect(outsideFan.M_in, modeSwitch.CurrentMode) annotation (Line(points={{139.2,
+              -50},{100,-50},{100,8.57143},{24.6333,8.57143}}, color={255,127,0}));
+      connect(TSet, Ebene1.T_Soll) annotation (Line(points={{-224,-90},{-220,-90},
+              {-220,143},{-78.6,143}}, color={0,0,127}));
+      connect(TSet, y02_evaluation.T_Set) annotation (Line(points={{-224,-90},{-220,
+              -90},{-220,122},{90,122},{90,182},{139.2,182}}, color={0,0,127}));
+      connect(TSet, y09_evaluation.T_Set) annotation (Line(points={{-224,-90},{-220,
+              -90},{-220,122},{90,122},{90,43},{139.4,43}}, color={0,0,127}));
+      connect(TSet, hD.T_Set) annotation (Line(points={{-224,-90},{-220,-90},{
+              -220,-11},{-80.6,-11}}, color={0,0,127}));
+      connect(TSet, hB.T_Set) annotation (Line(points={{-224,-90},{-224,-90},{
+              -220,-90},{-220,-41},{-80.6,-41}}, color={0,0,127}));
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-220,-200},
+                {280,220}})),            Diagram(coordinateSystem(
+              preserveAspectRatio=false, extent={{-220,-200},{280,220}}),
+            graphics={
+            Rectangle(
+              extent={{-180,220},{44,104}},
+              lineColor={0,0,0},
+              fillColor={200,88,88},
+              fillPattern=FillPattern.Solid),
+            Rectangle(
+              extent={{-180,104},{44,-200}},
+              lineColor={0,0,0},
+              fillColor={85,170,255},
+              fillPattern=FillPattern.Solid),
+            Rectangle(
+              extent={{44,220},{240,-200}},
+              lineColor={0,0,0},
+              fillColor={170,255,170},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{-144,210},{10,184}},
+              lineColor={0,0,0},
+              fillColor={170,255,170},
+              fillPattern=FillPattern.Solid,
+              textString="Modiauswahl"),
+            Text(
+              extent={{-150,-168},{4,-194}},
+              lineColor={0,0,0},
+              fillColor={170,255,170},
+              fillPattern=FillPattern.Solid,
+              textString="Aktorsatz"),
+            Text(
+              extent={{-77,13},{77,-13}},
+              lineColor={0,0,0},
+              fillColor={170,255,170},
+              fillPattern=FillPattern.Solid,
+              textString="Aktorregelung",
+              origin={65,-83},
+              rotation=-90)}));
+    end ControlTest;
 
     package PN_Steuerung
       extends Modelica.Icons.BasesPackage;
@@ -1078,7 +1701,7 @@ model")}),                                                         Diagram(
 
         parameter Real d = 300 "delay in s";
 
-        parameter Modelica.SIunits.Temperature T_Soll = 20+273.15  "Sollwert der Zuluft";
+        //parameter Modelica.SIunits.Temperature T_Soll = 20+273.15  "Sollwert der Zuluft";
         parameter Real T_h = 3      "Temperaturhysterese der Heiz- und Kuehlschaltung";
         parameter Real phi_min = 0.3   "Minimalwert der relativen Luftfeuchte";
         parameter Real phi_max = 0.7  "Maximalwert der relativen Luftfeuchte";
@@ -1162,8 +1785,8 @@ model")}),                                                         Diagram(
               rotation=-90,
               origin={0,-8})));
         PNlib.TD Befeuchten_aus(nIn=1, nOut=1,
-          firingCon=phi_03 >= 0.35,
-          delay=d)
+          delay=d,
+          firingCon=phi_03 >= phi_min + 0.05)
           "Transition zum Ausschalten der Befeuchtung"
           annotation (Placement(transformation(extent={{-40,2},{-20,22}})));
         PNlib.TD Befeuchten_an(nOut=1, nIn=1,
@@ -1206,6 +1829,8 @@ model")}),                                                         Diagram(
         Modelica.Blocks.Interfaces.RealInput signal_Y02
           "actual valve signal of Y02"
           annotation (Placement(transformation(extent={{-126,-50},{-86,-10}})));
+        Modelica.Blocks.Interfaces.RealInput T_Soll "Setpoint for Temperature"
+          annotation (Placement(transformation(extent={{-126,-90},{-86,-50}})));
       equation
 
         connect(Heizen_an.outPlaces[1], Heizen.inTransition[1])
@@ -1269,7 +1894,7 @@ model")}),                                                         Diagram(
 
         parameter Real d = 300 "delay in s";
 
-        parameter Modelica.SIunits.Temperature T_Soll = 20+273.15  "Sollwert der Zuluft";
+        // parameter Modelica.SIunits.Temperature T_Soll = 20+273.15  "Sollwert der Zuluft";
         parameter Real T_h = 3      "Temperaturhysterese der Heiz- und Kuehlschaltung";
         parameter Real phi_min = 0.3   "Minimalwert der relativen Luftfeuchte";
         parameter Real phi_max = 0.7  "Maximalwert der relativen Luftfeuchte";
@@ -1353,8 +1978,8 @@ model")}),                                                         Diagram(
               rotation=-90,
               origin={0,-8})));
         PNlib.TD Befeuchten_aus(nIn=1, nOut=1,
-          firingCon=phi_03 >= 0.35,
-          delay=d)
+          delay=d,
+          firingCon=phi_03 >= phi_min + 0.05)
           "Transition zum Ausschalten der Befeuchtung"
           annotation (Placement(transformation(extent={{-40,2},{-20,22}})));
         PNlib.TD Befeuchten_an(nOut=1, nIn=1,
@@ -1374,16 +1999,16 @@ model")}),                                                         Diagram(
           annotation (Placement(transformation(extent={{40,2},{20,22}})));
         Modelica.Blocks.Interfaces.RealInput T_Rek
           "Temperature Input of Temperature before recuperator after absorber, i.e. T_Rek"
-          annotation (Placement(transformation(extent={{-126,70},{-86,110}})));
+          annotation (Placement(transformation(extent={{-120,70},{-80,110}})));
         Modelica.Blocks.Interfaces.RealInput phi_03
           "relative humidity before steamhumidifier"
-          annotation (Placement(transformation(extent={{-126,40},{-86,80}})));
+          annotation (Placement(transformation(extent={{-120,40},{-80,80}})));
         Modelica.Blocks.Interfaces.RealInput phi_01
           "relative humidity of the supply air after steamhumidifier"
-          annotation (Placement(transformation(extent={{-126,10},{-86,50}})));
+          annotation (Placement(transformation(extent={{-120,10},{-80,50}})));
         Modelica.Blocks.Interfaces.RealInput signal_Y06
           "actual valve signal of Y06"
-          annotation (Placement(transformation(extent={{-126,-20},{-86,20}})));
+          annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
         Selector_global selector_global
           annotation (Placement(transformation(extent={{-18,-80},{2,-60}})));
         Modelica.Blocks.MathInteger.MultiSwitch multiSwitch1(
@@ -1396,7 +2021,9 @@ model")}),                                                         Diagram(
           annotation (Placement(transformation(extent={{96,-10},{116,10}})));
         Modelica.Blocks.Interfaces.RealInput signal_Y02
           "actual valve signal of Y02"
-          annotation (Placement(transformation(extent={{-126,-50},{-86,-10}})));
+          annotation (Placement(transformation(extent={{-120,-50},{-80,-10}})));
+        Modelica.Blocks.Interfaces.RealInput T_Soll "Setpoint for Temperature"
+          annotation (Placement(transformation(extent={{-126,-90},{-86,-50}})));
       equation
 
         connect(Heizen_an.outPlaces[1], Heizen.inTransition[1])
@@ -1452,8 +2079,12 @@ model")}),                                                         Diagram(
               points={{2.6,-70},{20,-70},{20,-72.6667},{34,-72.6667}}, color={255,0,255}));
         connect(multiSwitch1.y, y) annotation (Line(points={{75,-70},{88,-70},{88,0},{
                 106,0}}, color={255,127,0}));
-        annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-              coordinateSystem(preserveAspectRatio=false)));
+        annotation (Icon(coordinateSystem(preserveAspectRatio=false,
+              initialScale=0.1,
+              grid={100,100})),                                        Diagram(
+              coordinateSystem(preserveAspectRatio=false,
+              initialScale=0.1,
+              grid={100,100})));
       end PN_Main1_RLT22;
 
       package Ebene2
@@ -1674,6 +2305,7 @@ model")}),                                                         Diagram(
 
           parameter Real leak = 0.001 "leakage before the valve switches";
           parameter Real d = 300 "delay in s";
+          //parameter Modelica.SIunits.Temperature T_Set = 293.15 "Setpoint in K";
 
           PNlib.PDBool
                    M8(
@@ -1755,7 +2387,7 @@ model")}),                                                         Diagram(
             nIn=1,
             nOut=1,
             delay=d,
-            firingCon=Y02_signal <= leak and T_out <= 293.15)
+            firingCon=Y02_signal <= leak and T_out <= T_Set)
                                        "activates Heating Coil" annotation (
               Placement(transformation(
                 extent={{-10,-10},{10,10}},
@@ -1775,7 +2407,7 @@ model")}),                                                         Diagram(
             nIn=1,
             nOut=1,
             delay=d,
-            firingCon=Y02_signal <= leak and T_out <= 293.15)
+            firingCon=Y02_signal <= leak and T_out <= T_Set)
                                        "activates Heating Coil" annotation (
               Placement(transformation(
                 extent={{-10,-10},{10,10}},
@@ -1798,6 +2430,8 @@ model")}),                                                         Diagram(
             "actual position of valve Y09"
             annotation (Placement(transformation(extent={{-126,22},{-86,62}})));
           Modelica.Blocks.Interfaces.RealInput T_out "outside temperature"
+            annotation (Placement(transformation(extent={{-126,-60},{-86,-20}})));
+          Modelica.Blocks.Interfaces.RealInput T_Set "setpoint temperature"
             annotation (Placement(transformation(extent={{-126,-90},{-86,-50}})));
         equation
 
@@ -1876,14 +2510,19 @@ model")}),                                                         Diagram(
           connect(M20.pd_b, multiSwitch1.u[4]) annotation (Line(points={{62,-31},
                   {62,-72},{-46,-72},{-46,-94.25},{-20,-94.25}}, color={255,0,
                   255}));
-          annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-                coordinateSystem(preserveAspectRatio=false)));
+          annotation (Icon(coordinateSystem(preserveAspectRatio=false,
+                grid={2,2},
+                initialScale=0.1)),                                      Diagram(
+                coordinateSystem(preserveAspectRatio=false,
+                grid={2,2},
+                initialScale=0.1)));
         end HD;
 
         model HB "heating and humidification"
 
           parameter Real leak = 0.001 "leakage before the valve switches";
           parameter Real d = 300 "delay in s";
+          //parameter Modelica.SIunits.Temperature T_Set = 293.15 "Setpoint in K";
 
           PNlib.PDBool
                    M9(
@@ -1969,7 +2608,7 @@ model")}),                                                         Diagram(
             nIn=1,
             nOut=1,
             delay=d,
-            firingCon=Y02_signal <= leak and T_out <= 293.15)
+            firingCon=Y02_signal <= leak and T_out <= T_Set)
                                        "activates Heating Coil" annotation (
               Placement(transformation(
                 extent={{-10,-10},{10,10}},
@@ -1989,7 +2628,7 @@ model")}),                                                         Diagram(
             nIn=1,
             nOut=1,
             delay=d,
-            firingCon=Y02_signal <= leak and T_out <= 293.15)
+            firingCon=Y02_signal <= leak and T_out <= T_Set)
                                        "activates Heating Coil" annotation (
               Placement(transformation(
                 extent={{-10,-10},{10,10}},
@@ -2012,6 +2651,8 @@ model")}),                                                         Diagram(
             "actual position of valve Y09"
             annotation (Placement(transformation(extent={{-126,22},{-86,62}})));
           Modelica.Blocks.Interfaces.RealInput T_out "outside temperature"
+            annotation (Placement(transformation(extent={{-126,-60},{-86,-20}})));
+          Modelica.Blocks.Interfaces.RealInput T_Set "setpoint temperature"
             annotation (Placement(transformation(extent={{-126,-90},{-86,-50}})));
         equation
 
@@ -2378,7 +3019,7 @@ model")}),                                                         Diagram(
         extends Modelica.Icons.UtilitiesPackage;
         model Y02_evaluation "evaluates the PN of Y02 and gives output value"
 
-          parameter Real T_Set = 20;
+          //parameter Real T_Set = 20;
           parameter Real k = 0.2;
           parameter Real Ti = 300;
           parameter Real k_cool = 0.2;
@@ -2415,14 +3056,11 @@ model")}),                                                         Diagram(
             initType=Modelica.Blocks.Types.InitPID.InitialOutput,
             y_start=1)
             annotation (Placement(transformation(extent={{-20,-20},{0,0}})));
-          Modelica.Blocks.Sources.Constant T_Soll(k=T_Set)
-            "Set value for the measurement for Y02"
-            annotation (Placement(transformation(extent={{-74,-6},{-54,14}})));
           Modelica.Blocks.Interfaces.RealInput T_measure
             "Measured value for T01" annotation (Placement(transformation(
                 extent={{-20,-20},{20,20}},
                 rotation=0,
-                origin={-108,-70})));
+                origin={-108,-50})));
           Modelica.Blocks.Sources.Constant security_closed(k=0)
             "valve is closed when there is no token in the PN"
             annotation (Placement(transformation(extent={{66,54},{46,74}})));
@@ -2452,6 +3090,11 @@ model")}),                                                         Diagram(
           Modelica.Blocks.Logical.Switch adiabaticSwitch1
             "validates, if adiabatic is on (then the signal for Y02 is proportional, else anti-proportional)"
             annotation (Placement(transformation(extent={{-52,-78},{-32,-58}})));
+          Modelica.Blocks.Interfaces.RealInput T_Set "setpoint temperature"
+            annotation (Placement(transformation(
+                extent={{-20,-20},{20,20}},
+                rotation=0,
+                origin={-108,-80})));
         equation
           connect(closed.y, switch1.u1) annotation (Line(points={{-43,86},{-18,86}},
                                  color={0,0,127}));
@@ -2474,9 +3117,6 @@ model")}),                                                         Diagram(
           connect(Y02_control, switch3.u2)
             annotation (Line(points={{-108,-10},{-80,-10},{-80,20},{68,20}},
                                                            color={255,0,255}));
-          connect(T_Soll.y, PID.u_s)
-            annotation (Line(points={{-53,4},{-46,4},{-46,-10},{-22,-10}},
-                                                           color={0,0,127}));
           connect(adiabaticOn, adiabaticSwitch.u2) annotation (Line(points={{108,-80},{62,
                   -80},{62,-28},{68,-28}},              color={255,0,255}));
           connect(adiabaticSwitch.y, switch3.u1) annotation (Line(points={{91,-28},{94,-28},
@@ -2488,27 +3128,30 @@ model")}),                                                         Diagram(
           connect(Y02_control, switch4.u2) annotation (Line(points={{-108,-10},{-80,-10},
                   {-80,-34},{-74,-34}},           color={255,0,255}));
           connect(T_measure, switch4.u1)
-            annotation (Line(points={{-108,-70},{-82,-70},{-82,-26},{-74,-26}},
+            annotation (Line(points={{-108,-50},{-82,-50},{-82,-26},{-74,-26}},
                                                             color={0,0,127}));
-          connect(T_Soll.y, switch4.u3) annotation (Line(points={{-53,4},{-46,4},{-46,-50},
-                  {-78,-50},{-78,-44},{-74,-44},{-74,-42}},      color={0,0,127}));
           connect(maxSignal.y, add.u1)
             annotation (Line(points={{36.4,-36},{45.6,-36}},
                                                            color={0,0,127}));
           connect(PID.y, add.u2) annotation (Line(points={{1,-10},{52,-10},{52,-29.6}},
                          color={0,0,127}));
-          connect(T_measure, adiabaticSwitch1.u1) annotation (Line(points={{-108,-70},{-82,
-                  -70},{-82,-60},{-54,-60}}, color={0,0,127}));
-          connect(adiabaticOn, adiabaticSwitch1.u2) annotation (Line(points={{108,-80},{
-                  -66,-80},{-66,-68},{-54,-68}}, color={255,0,255}));
-          connect(T_Soll.y, adiabaticSwitch1.u3) annotation (Line(points={{-53,4},{-46,4},
-                  {-46,-50},{-64,-50},{-64,-76},{-54,-76}}, color={0,0,127}));
+          connect(T_measure, adiabaticSwitch1.u1) annotation (Line(points={{-108,
+                  -50},{-82,-50},{-82,-60},{-54,-60}},
+                                             color={0,0,127}));
+          connect(adiabaticOn, adiabaticSwitch1.u2) annotation (Line(points={{108,-80},
+                  {-64,-80},{-64,-68},{-54,-68}},color={255,0,255}));
           connect(adiabaticSwitch1.y, PID_cool.u_m)
             annotation (Line(points={{-31,-68},{-10,-68},{-10,-62}}, color={0,0,127}));
-          connect(T_Soll.y, PID_cool.u_s) annotation (Line(points={{-53,4},{-46,4},{-46,
-                  -50},{-22,-50}}, color={0,0,127}));
           connect(PID_cool.y, adiabaticSwitch.u1) annotation (Line(points={{1,-50},{20,-50},
                   {20,-20},{68,-20}}, color={0,0,127}));
+          connect(T_Set, PID.u_s) annotation (Line(points={{-108,-80},{-80,-80},
+                  {-80,-50},{-40,-50},{-40,-10},{-22,-10}}, color={0,0,127}));
+          connect(T_Set, PID_cool.u_s) annotation (Line(points={{-108,-80},{-80,
+                  -80},{-80,-50},{-22,-50}}, color={0,0,127}));
+          connect(T_Set, adiabaticSwitch1.u3) annotation (Line(points={{-108,
+                  -80},{-80,-80},{-80,-76},{-54,-76}}, color={0,0,127}));
+          connect(T_Set, switch4.u3) annotation (Line(points={{-108,-80},{-80,
+                  -80},{-80,-42},{-74,-42}}, color={0,0,127}));
           annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
                 coordinateSystem(preserveAspectRatio=false), graphics={
                   Rectangle(
@@ -3192,6 +3835,81 @@ when cooling is active")}));
           annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
                 coordinateSystem(preserveAspectRatio=false)));
         end Y16_evaluationSimple;
+
+        model Y09_evaluation
+          "evaluates the PN of Y09 with variable Temperature setpoint"
+
+          //parameter Real Setpoint = 1;
+          parameter Real k = 0.2;
+          parameter Real Ti = 300;
+
+          Modelica.Blocks.Interfaces.BooleanInput Y_closed
+            "Token value of Y_closed"
+            annotation (Placement(transformation(extent={{-126,40},{-86,80}})));
+          Modelica.Blocks.Interfaces.BooleanInput Y_control
+            "Token value of Y_control" annotation (Placement(transformation(
+                  extent={{-126,-20},{-86,20}})));
+          Modelica.Blocks.Interfaces.RealOutput y
+            annotation (Placement(transformation(extent={{96,-10},{116,10}})));
+          Modelica.Blocks.Logical.Switch switch1
+            annotation (Placement(transformation(extent={{-30,50},{-10,70}})));
+          Modelica.Blocks.Logical.Switch switch3
+            annotation (Placement(transformation(extent={{68,-10},{88,10}})));
+          Modelica.Blocks.Sources.Constant closed(k=0)
+            "valve value for closed valve"
+            annotation (Placement(transformation(extent={{-76,70},{-56,90}})));
+          Modelica.Blocks.Continuous.LimPID PID(yMax=1, yMin=0,
+            k=k,
+            Ti=Ti,
+            controllerType=Modelica.Blocks.Types.SimpleController.PI)
+            annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
+          Modelica.Blocks.Interfaces.RealInput MeasuredValue
+            "Measured value for PI_Control" annotation (Placement(
+                transformation(
+                extent={{-20,-20},{20,20}},
+                rotation=0,
+                origin={-106,-40})));
+          Modelica.Blocks.Sources.Constant security_closed(k=0)
+            "valve is closed when there is no token in the PN"
+            annotation (Placement(transformation(extent={{-76,30},{-56,50}})));
+          Modelica.Blocks.Logical.Switch switch2
+            annotation (Placement(transformation(extent={{-14,-88},{6,-68}})));
+          Modelica.Blocks.Interfaces.RealInput T_Set "temperature setpoint" annotation (
+             Placement(transformation(
+                extent={{-20,-20},{20,20}},
+                rotation=0,
+                origin={-106,-70})));
+        equation
+          connect(closed.y, switch1.u1) annotation (Line(points={{-55,80},{-46,
+                  80},{-46,68},{-32,68}},
+                                 color={0,0,127}));
+          connect(PID.y, switch3.u1) annotation (Line(points={{21,-30},{38,-30},
+                  {38,8},{66,8}},     color={0,0,127}));
+          connect(switch3.y, y) annotation (Line(points={{89,0},{106,0}},
+                               color={0,0,127}));
+          connect(security_closed.y, switch1.u3) annotation (Line(points={{-55,40},
+                  {-46,40},{-46,52},{-32,52}},     color={0,0,127}));
+          connect(Y_closed, switch1.u2)
+            annotation (Line(points={{-106,60},{-32,60}}, color={255,0,255}));
+          connect(Y_control, switch3.u2)
+            annotation (Line(points={{-106,0},{66,0}}, color={255,0,255}));
+          connect(switch1.y, switch3.u3) annotation (Line(points={{-9,60},{30,
+                  60},{30,-8},{66,-8}}, color={0,0,127}));
+          connect(switch2.y, PID.u_m)
+            annotation (Line(points={{7,-78},{10,-78},{10,-42}}, color={0,0,127}));
+          connect(Y_control, switch2.u2) annotation (Line(points={{-106,0},{-70,
+                  0},{-70,-78},{-16,-78}}, color={255,0,255}));
+          connect(MeasuredValue, switch2.u1)
+            annotation (Line(points={{-106,-40},{-24,-40},{-24,-70},{-16,-70}},
+                                                            color={0,0,127}));
+          connect(T_Set, PID.u_s) annotation (Line(points={{-106,-70},{-52,-70},
+                  {-52,-30},{-2,-30}},
+                            color={0,0,127}));
+          connect(T_Set, switch2.u3) annotation (Line(points={{-106,-70},{-52,-70},{-52,
+                  -86},{-16,-86}}, color={0,0,127}));
+          annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+                coordinateSystem(preserveAspectRatio=false)));
+        end Y09_evaluation;
       end Auswertemodule;
 
       package Aktoren
@@ -4225,7 +4943,7 @@ when cooling is active")}));
           nIn=1,
           nOut=1,
           delay=300,
-          firingCon=xAbs >= 0.30 and xDes >= 0.4)
+          firingCon=xAbs > 0.30 and xDes >= 0.4)
           "Transition zum Ausschalten der Regeneration"
           annotation (Placement(transformation(extent={{8,20},{-12,40}})));
         PNlib.TD RegAn(
@@ -4252,603 +4970,13 @@ when cooling is active")}));
               points={{-50,-10.8},{-50,-30},{-4.8,-30}}, color={0,0,0}));
         connect(RegAn.outPlaces[1], RegOn.inTransition[1]) annotation (Line(
               points={{4.8,-30},{50,-30},{50,-10.8}}, color={0,0,0}));
-        annotation (Icon(coordinateSystem(preserveAspectRatio=false)),
-                                     Diagram(coordinateSystem(preserveAspectRatio=
-                 false)));
+        annotation (Icon(coordinateSystem(preserveAspectRatio=false,
+              grid={100,100},
+              initialScale=0.1)),    Diagram(coordinateSystem(preserveAspectRatio=false,
+              grid={100,100},
+              initialScale=0.1)));
       end regDem;
     end PN_Steuerung;
-
-    model ControlTest "test version of controller for sorption"
-
-      parameter Real leak = 0.0001 "leakage before the valve switches";
-      parameter Real d = 300 "delay for mode switching in s";
-      parameter Modelica.SIunits.Temperature T_Set = 20+273.15 "set value for T01";
-      parameter Modelica.SIunits.Temperature THot_Set = 64+273.15 "set value for regeneration temperature";
-      parameter Real phi_Set = 0.5  "set value for phi (relative humidity) at T01";
-
-      parameter Real mFlowNom_outFan = 5  "set value for outside air fan";
-      parameter Real mFlowNom_exhFan = 5  "set value for exhaust air fan";
-      parameter Real mFlowNom_regFan = 1  "set value for regeneration air fan";
-
-      parameter Real dP_outFan = 1356 "or 1300, set value for dP of outside air fan";
-      parameter Real dP_exhFan = 665  "set value for dP of exhaust air fan";
-      parameter Real dP_regFan = 543  "set value for dP of regeneration air fan";
-
-      parameter Real k_y02 = 0.03;  //0.15;
-      parameter Real Ti_y02 = 240;  //0.5;
-      parameter Real k_y09 = 0.05;  //0.01//0.06 aus Einzelanalyse;
-      parameter Real Ti_y09 = 180;  //180
-      parameter Real k_phi = 0.28;  //80;  //0.08;
-      parameter Real Ti_phi = 27;  //0.7;
-      //parameter Real k_Fan = 100;  //250
-      //parameter Real Ti_Fan = 120;  //30
-      //parameter Real k_x = 0.15;
-      //parameter Real Ti_x = 300;
-      parameter Real k_m = 0.005;
-      parameter Real Ti_m = 300;
-
-      BusSensors busSensors
-        annotation (Placement(transformation(extent={{-264,-54},{-176,46}})));
-      BusActors busActors "Bus connector for actor signals"
-        annotation (Placement(transformation(extent={{244,-40},{318,40}})));
-      PN_Steuerung.PN_Main1_RLT21      pN_Steuerung_Ebene1_1(d=d)
-        annotation (Placement(transformation(extent={{-78,140},{-58,160}})));
-      PN_Steuerung.regDem regAnforderung
-        "True, when there is need for regeneration"
-        annotation (Placement(transformation(extent={{-180,60},{-160,80}})));
-      PN_Steuerung.Ebene2.DD dD
-        annotation (Placement(transformation(extent={{-80,76},{-60,96}})));
-      PN_Steuerung.ModeSwitch modeSwitch
-        annotation (Placement(transformation(extent={{-14,-12},{24,24}})));
-      PN_Steuerung.Ebene2.DB dB
-        annotation (Placement(transformation(extent={{-80,46},{-60,66}})));
-      PN_Steuerung.Ebene2.DE dE
-        annotation (Placement(transformation(extent={{-80,16},{-60,36}})));
-      PN_Steuerung.Ebene2.HD hD(d=d, leak=leak)
-        annotation (Placement(transformation(extent={{-80,-14},{-60,6}})));
-      PN_Steuerung.Ebene2.HB hB(d=d, leak=leak)
-        annotation (Placement(transformation(extent={{-80,-44},{-60,-24}})));
-      PN_Steuerung.Ebene2.HE hE
-        annotation (Placement(transformation(extent={{-80,-74},{-60,-54}})));
-      PN_Steuerung.Ebene2.KD kD
-        annotation (Placement(transformation(extent={{-80,-104},{-60,-84}})));
-      PN_Steuerung.Ebene2.KB kB
-        annotation (Placement(transformation(extent={{-80,-134},{-60,-114}})));
-      PN_Steuerung.Ebene2.KE kE
-        annotation (Placement(transformation(extent={{-80,-164},{-60,-144}})));
-      PN_Steuerung.Aktoren.Y_On_Off valve_Y01(Y_Close(n=7, modes={1,2,3,4,5,6,7}),
-          Y_Open(n=16, modes={8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23}))
-        "On_Off valve Y01"
-        annotation (Placement(transformation(extent={{140,200},{160,220}})));
-      PN_Steuerung.Aktoren.Y_On_Off valve_Y03(Y_Close(n=16, modes={8,9,10,11,12,
-              13,14,15,16,17,18,19,20,21,22,23}), Y_Open(n=7, modes={1,2,3,4,5,
-              6,7})) "On Off valve Y03"
-        annotation (Placement(transformation(extent={{140,160},{160,180}})));
-      PN_Steuerung.Aktoren.Y_On_Off valve_Y04(Y_Close(n=1, modes={1}), Y_Open(n=
-             22, modes={2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,
-              23}))
-        annotation (Placement(transformation(extent={{140,140},{160,160}})));
-      PN_Steuerung.Aktoren.Y_On_Off valve_Y05(Y_Close(n=1, modes={1}), Y_Open(n=
-             22, modes={2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,
-              23}))
-        annotation (Placement(transformation(extent={{140,120},{160,140}})));
-      PN_Steuerung.Aktoren.Y_On_Off valve_Y07(Y_Close(n=12, modes={1,2,3,4,8,9,
-              10,11,12,13,14,15}), Y_Open(n=11, modes={5,6,7,16,17,18,19,20,21,
-              22,23}))
-        annotation (Placement(transformation(extent={{140,80},{160,100}})));
-      PN_Steuerung.Aktoren.Y_On_Off valve_Y08(Y_Close(n=12, modes={1,2,3,4,8,9,
-              10,11,12,13,14,15}), Y_Open(n=11, modes={5,6,7,16,17,18,19,20,21,
-              22,23}))
-        annotation (Placement(transformation(extent={{140,60},{160,80}})));
-      PN_Steuerung.Aktoren.controlvalve2 valve_Y09(Y_Close(n=19, modes={1,2,3,4,5,6,
-              7,8,9,10,11,14,15,16,17,18,19,22,23}), Y_Control(n=4, modes={12,13,20,
-              21})) "controlValve"
-        annotation (Placement(transformation(extent={{106,40},{126,60}})));
-      PN_Steuerung.Auswertemodule.heaCoiEva y09_evaluation(
-        k=k_y09,
-        Ti=Ti_y09,
-        Setpoint=T_Set)
-        annotation (Placement(transformation(extent={{140,40},{160,60}})));
-      PN_Steuerung.Aktoren.controlvalve2 valve_Y10(Y_Close(n=12, modes={1,2,3,4,8,9,
-              10,11,12,13,14,15}), Y_Control(n=11, modes={5,6,7,16,17,18,19,20,21,22,
-              23})) "controlValve"
-        annotation (Placement(transformation(extent={{106,20},{126,40}})));
-      PN_Steuerung.Auswertemodule.heaCoiEva y10_evaluation(
-        k=k_y09,
-        Ti=Ti_y09,
-        Setpoint=THot_Set)
-        annotation (Placement(transformation(extent={{140,20},{160,40}})));
-      PN_Steuerung.Aktoren.controlvalve2 valve_Y11(
-                                            Y_Control(n=8, modes={3,6,9,11,13,17,19,
-              21}), Y_Close(n=15, modes={1,2,4,5,7,8,10,12,14,15,16,18,20,22,23}))
-                    "controlValve"
-        annotation (Placement(transformation(extent={{106,0},{126,20}})));
-      PN_Steuerung.Auswertemodule.heaCoiEva      y11_evaluation(
-        k=k_phi,
-        Ti=Ti_phi,
-        Setpoint=phi_Set)
-        annotation (Placement(transformation(extent={{140,0},{160,20}})));
-      PN_Steuerung.Aktoren.Fan_On_Off_fix exhaustFan(
-        Fan_Off(n=1, modes={1}),
-        Fan_On(n=22, modes={2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23}),
-        mFlow_Set=mFlowNom_exhFan,
-        dP_Set=dP_exhFan) "mass flow set point value for exhaust fan"
-        annotation (Placement(transformation(extent={{140,-80},{160,-60}})));
-
-      PN_Steuerung.Aktoren.Fan_On_Off_fix regFan(
-        Fan_Off(n=12, modes={1,2,3,4,8,9,10,11,12,13,14,15}),
-        Fan_On(n=11, modes={5,6,7,16,17,18,19,20,21,22,23}),
-        dP_Set=dP_regFan,
-        mFlow_Set=mFlowNom_regFan) "mass flow signal for regeneration fan"
-        annotation (Placement(transformation(extent={{140,-100},{160,-80}})));
-      PN_Steuerung.Aktoren.Pump_On_Off pumpN04(Pump_Off(n=19, modes={1,2,3,4,5,6,7,8,
-              9,10,11,14,15,16,17,18,19,22,23}), Pump_On(n=4, modes={12,13,20,21}))
-        "on off signal of pump N04 for heating coil circuit for supply air"
-        annotation (Placement(transformation(extent={{140,-120},{160,-100}})));
-      PN_Steuerung.Aktoren.Pump_Bool   pumpN05(Pump_Off(n=12, modes={1,2,3,4,8,9,10,
-              11,12,13,14,15}), Pump_On(n=11, modes={5,6,7,16,17,18,19,20,21,22,23}))
-        "on off signal for pump N05, regeneration heating coil"
-        annotation (Placement(transformation(extent={{140,-140},{160,-120}})));
-      PN_Steuerung.Aktoren.Pump_Bool pumpN06(Pump_Off(n=17, modes={1,2,3,4,5,6,7,8,9,
-              12,13,14,16,17,20,21,22}), Pump_On(n=6, modes={10,11,15,18,19,23}))
-        "pump signal for N06 to activate adiabatic cooling"
-        annotation (Placement(transformation(extent={{140,-160},{160,-140}})));
-      PN_Steuerung.Aktoren.Pump_Bool pumpN07(Pump_Off(n=17, modes={1,2,3,5,6,8,9,10,
-              11,12,13,16,17,18,19,20,21}), Pump_On(n=6, modes={4,7,14,15,22,23}))
-        "absorber pump signal"
-        annotation (Placement(transformation(extent={{140,-180},{160,-160}})));
-      PN_Steuerung.Aktoren.Pump_Bool pumpN08(Pump_Off(n=12, modes={1,2,3,4,8,9,10,11,
-              12,13,14,15}), Pump_On(n=11, modes={5,6,7,16,17,18,19,20,21,22,23}))
-        "on off signal for pump N08, regeneration pump for desiccant solution"
-        annotation (Placement(transformation(extent={{140,-200},{160,-180}})));
-      PN_Steuerung.Auswertemodule.Y02_evaluation y02_evaluation(T_Set=T_Set,
-        k=k_y02,
-        Ti=Ti_y02,
-        k_cool=k_y02,
-        Ti_cool=Ti_y02)
-        annotation (Placement(transformation(extent={{140,180},{160,200}})));
-      PN_Steuerung.Aktoren.controlvalve3 valve_Y02(
-        Y_Close(n=4, modes={12,13,20,21}),
-        Y_Open(n=7, modes={1,2,3,4,5,6,7}),
-        Y_Control(n=12, modes={8,9,10,11,14,15,16,17,18,19,22,23}))
-        annotation (Placement(transformation(extent={{106,180},{126,200}})));
-      Modelica.Blocks.Interfaces.BooleanInput OnSignal
-        "Delivers signal to switch on or off the device"
-        annotation (Placement(transformation(extent={{-246,150},{-206,190}})));
-      PN_Steuerung.Aktoren.controlvalve2   valve_Y15(Y_Close(n=20, modes={1,2,3,4,5,
-              6,8,9,10,11,12,13,14,15,16,17,18,19,20,21}), Y_Control(n=3, modes={7,22,
-              23}))
-        annotation (Placement(transformation(extent={{106,-20},{126,0}})));
-      PN_Steuerung.Aktoren.controlvalve2   valve_Y16(Y_Close(n=20, modes={1,2,3,4,5,
-              6,8,9,10,11,12,13,14,15,16,17,18,19,20,21}), Y_Control(n=3, modes={7,22,
-              23}))
-        annotation (Placement(transformation(extent={{106,-40},{126,-20}})));
-      PN_Steuerung.Auswertemodule.Y15_evaluation eva_Y15(k=k_m, Ti=Ti_m)
-        annotation (Placement(transformation(extent={{140,-20},{160,0}})));
-      PN_Steuerung.Auswertemodule.Y16_evaluationSimple
-                                                 evaY16    annotation (Placement(transformation(extent={{140,-40},{160,-20}})));
-      PN_Steuerung.Auswertemodule.bypassEva y06_evaluation(k=k_phi, Ti=Ti_phi)
-        annotation (Placement(transformation(extent={{140,100},{160,120}})));
-      PN_Steuerung.Aktoren.bypassValve valve_Y06(Y_Open(n=17, modes={1,2,3,5,6,
-              8,9,10,11,12,13,16,17,18,19,20,21}), Y_Control(n=6, modes={4,7,14,
-              15,22,23}))
-        annotation (Placement(transformation(extent={{106,100},{126,120}})));
-      PN_Steuerung.Aktoren.Fan_On_Off_fix outsideFan(
-        mFlow_Set=mFlowNom_outFan,
-        Fan_Off(n=1, modes={1}),
-        Fan_On(n=22, modes={2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23}),
-        dP_Set=dP_outFan)
-        annotation (Placement(transformation(extent={{140,-60},{160,-40}})));
-
-    equation
-      connect(dD.RegAnf, regAnforderung.RegAnf) annotation (Line(points={{-80.6,86},
-              {-100,86},{-100,70},{-159.4,70}},   color={255,0,255}));
-      connect(regAnforderung.RegAnf, dB.RegAnf) annotation (Line(points={{-159.4,70},
-              {-100,70},{-100,56},{-80.6,56}},              color={255,0,255}));
-      connect(regAnforderung.RegAnf, dE.RegAnf) annotation (Line(points={{-159.4,70},
-              {-100,70},{-100,26},{-80.6,26}},              color={255,0,255}));
-      connect(regAnforderung.RegAnf, hD.RegAnf) annotation (Line(points={{-159.4,70},{
-              -100,70},{-100,-4},{-80.6,-4}},               color={255,0,255}));
-      connect(regAnforderung.RegAnf, hB.RegAnf) annotation (Line(points={{-159.4,70},
-              {-100,70},{-100,-34},{-80.6,-34}},              color={255,0,255}));
-      connect(regAnforderung.RegAnf, hE.RegAnf) annotation (Line(points={{-159.4,70},
-              {-100,70},{-100,-64},{-80.6,-64}},              color={255,0,255}));
-      connect(regAnforderung.RegAnf, kD.RegAnf) annotation (Line(points={{-159.4,70},
-              {-100,70},{-100,-94},{-80.6,-94}},              color={255,0,255}));
-      connect(regAnforderung.RegAnf, kB.RegAnf) annotation (Line(points={{-159.4,70},
-              {-100,70},{-100,-124},{-80.6,-124}},              color={255,0,
-              255}));
-      connect(regAnforderung.RegAnf, kE.RegAnf) annotation (Line(points={{-159.4,70},
-              {-100,70},{-100,-154},{-80.6,-154}},              color={255,0,
-              255}));
-      connect(dB.DB_Out, modeSwitch.DB) annotation (Line(points={{-59.4,56},{
-              -26,56},{-26,19.2},{-15.0556,19.2}},
-                                             color={255,127,0}));
-      connect(dE.DE_Out, modeSwitch.DE) annotation (Line(points={{-59.4,26},{
-              -40,26},{-40,14.9143},{-15.0556,14.9143}},
-                                                   color={255,127,0}));
-      connect(hD.HD_Out, modeSwitch.HD) annotation (Line(points={{-59.4,-4},{
-              -34,-4},{-34,10.8},{-15.0556,10.8}},
-                                             color={255,127,0}));
-      connect(hB.HB_Out, modeSwitch.HB) annotation (Line(points={{-59.4,-34},{
-              -30,-34},{-30,6.85714},{-15.0556,6.85714}},
-                                                       color={255,127,0}));
-      connect(hE.HE_Out, modeSwitch.HE) annotation (Line(points={{-59.4,-64},{
-              -26,-64},{-26,2.4},{-15.0556,2.4}},
-                                               color={255,127,0}));
-      connect(kD.KD_Out, modeSwitch.KD) annotation (Line(points={{-59.4,-94},{
-              -22,-94},{-22,-1.54286},{-15.0556,-1.54286}},
-                                                         color={255,127,0}));
-      connect(kB.KB_Out, modeSwitch.KB) annotation (Line(points={{-59.4,-124},{
-              -18,-124},{-18,-5.82857},{-15.0556,-5.82857}},
-                                                          color={255,127,0}));
-      connect(kE.KE_Out, modeSwitch.KE) annotation (Line(points={{-59.4,-154},{
-              -16,-154},{-16,-10.2857},{-15.0556,-10.2857}},
-                                                          color={255,127,0}));
-      connect(dD.DD_Out, modeSwitch.DD) annotation (Line(points={{-59.4,86},{
-              -22,86},{-22,23.3143},{-15.0556,23.3143}},
-                                                  color={255,127,0}));
-      connect(modeSwitch.CurrentMode, valve_Y01.M_in) annotation (Line(points={{24.6333,
-              8.57143},{100,8.57143},{100,210},{139.2,210}},
-                                                         color={255,127,0}));
-      connect(valve_Y01.setValue_Y, busActors.openingY01) annotation (Line(
-            points={{160.6,210},{230,210},{230,0.2},{281.185,0.2}}, color={0,0,
-              127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(modeSwitch.CurrentMode, valve_Y03.M_in) annotation (Line(points={{24.6333,
-              8.57143},{100,8.57143},{100,170},{139.2,170}},
-                                     color={255,127,0}));
-      connect(valve_Y03.setValue_Y, busActors.openingY03) annotation (Line(
-            points={{160.6,170},{230,170},{230,0.2},{281.185,0.2}}, color={0,0,
-              127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(modeSwitch.CurrentMode, valve_Y04.M_in) annotation (Line(points={{24.6333,
-              8.57143},{100,8.57143},{100,150},{139.2,150}},
-            color={255,127,0}));
-      connect(valve_Y04.setValue_Y, busActors.openingY04) annotation (Line(
-            points={{160.6,150},{230,150},{230,0.2},{281.185,0.2}}, color={0,0,
-              127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(modeSwitch.CurrentMode, valve_Y05.M_in) annotation (Line(points={{24.6333,
-              8.57143},{100,8.57143},{100,130},{139.2,130}},
-                                     color={255,127,0}));
-      connect(valve_Y05.setValue_Y, busActors.openingY05) annotation (Line(
-            points={{160.6,130},{230,130},{230,0.2},{281.185,0.2}}, color={0,0,
-              127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(modeSwitch.CurrentMode, valve_Y07.M_in) annotation (Line(points={{24.6333,
-              8.57143},{100,8.57143},{100,90},{139.2,90}},            color={
-              255,127,0}));
-      connect(valve_Y07.setValue_Y, busActors.openingY07) annotation (Line(
-            points={{160.6,90},{230,90},{230,0.2},{281.185,0.2}},   color={0,0,
-              127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(modeSwitch.CurrentMode, valve_Y08.M_in) annotation (Line(points={{24.6333,
-              8.57143},{100,8.57143},{100,70},{139.2,70}},            color={
-              255,127,0}));
-      connect(valve_Y08.setValue_Y, busActors.openingY08) annotation (Line(
-            points={{160.6,70},{230,70},{230,0.2},{281.185,0.2}},   color={0,0,
-              127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(valve_Y09.Close, y09_evaluation.Y_closed)
-        annotation (Line(points={{126.8,56},{139.4,56}}, color={255,0,255}));
-      connect(valve_Y09.Control, y09_evaluation.Y_control)
-        annotation (Line(points={{126.6,50},{139.4,50}}, color={255,0,255}));
-      connect(modeSwitch.CurrentMode, valve_Y09.M_in) annotation (Line(points={{24.6333,
-              8.57143},{100,8.57143},{100,50},{105.2,50}}, color={255,127,0}));
-      connect(y09_evaluation.y, busActors.openingY09) annotation (Line(points={{160.6,
-              50},{230,50},{230,0.2},{281.185,0.2}},        color={0,0,127}),
-          Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(modeSwitch.CurrentMode, valve_Y10.M_in) annotation (Line(points={{24.6333,
-              8.57143},{100,8.57143},{100,30},{105.2,30}}, color={255,127,0}));
-      connect(valve_Y10.Close, y10_evaluation.Y_closed)
-        annotation (Line(points={{126.8,36},{139.4,36}}, color={255,0,255}));
-      connect(valve_Y10.Control, y10_evaluation.Y_control)
-        annotation (Line(points={{126.6,30},{139.4,30}}, color={255,0,255}));
-      connect(y10_evaluation.y, busActors.openingY10) annotation (Line(points={{160.6,
-              30},{230,30},{230,0.2},{281.185,0.2}}, color={0,0,127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(modeSwitch.CurrentMode, valve_Y11.M_in) annotation (Line(points={{24.6333,
-              8.57143},{100,8.57143},{100,10},{105.2,10}}, color={255,127,0}));
-      connect(y11_evaluation.y, busActors.openingY11) annotation (Line(points={{160.6,
-              10},{230,10},{230,0.2},{281.185,0.2}}, color={0,0,127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(pN_Steuerung_Ebene1_1.y, modeSwitch.Mode_Index) annotation (Line(
-            points={{-57.4,150},{5,150},{5,24.8571}},    color={255,127,0}));
-      connect(modeSwitch.CurrentMode, exhaustFan.M_in) annotation (Line(points={{24.6333,
-              8.57143},{100,8.57143},{100,-70},{139.2,-70}}, color={255,127,0}));
-      connect(modeSwitch.CurrentMode, regFan.M_in) annotation (Line(points={{24.6333,
-              8.57143},{100,8.57143},{100,-90},{139.2,-90}}, color={255,127,0}));
-      connect(modeSwitch.CurrentMode, pumpN05.M_in) annotation (Line(points={{24.6333,
-              8.57143},{100,8.57143},{100,-130},{139.2,-130}}, color={255,127,0}));
-      connect(modeSwitch.CurrentMode, pumpN08.M_in) annotation (Line(points={{24.6333,
-              8.57143},{100,8.57143},{100,-190},{139.2,-190}}, color={255,127,0}));
-      connect(pumpN08.signal_pump, busActors.pumpN08) annotation (Line(points={{160.8,
-              -190},{230,-190},{230,0.2},{281.185,0.2}}, color={255,0,255}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(modeSwitch.CurrentMode, pumpN04.M_in) annotation (Line(points={{24.6333,
-              8.57143},{100,8.57143},{100,-110},{139.2,-110}}, color={255,127,0}));
-      connect(pumpN04.signal_Pump, busActors.pumpN04) annotation (Line(points={{160.6,
-              -110},{230,-110},{230,0.2},{281.185,0.2}}, color={0,0,127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(modeSwitch.CurrentMode, pumpN06.M_in) annotation (Line(points={{24.6333,
-              8.57143},{100,8.57143},{100,-150},{139.2,-150}}, color={255,127,0}));
-      connect(pumpN06.signal_pump, busActors.pumpN06) annotation (Line(points={{160.8,
-              -150},{230,-150},{230,0.2},{281.185,0.2}}, color={255,0,255}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(modeSwitch.CurrentMode, pumpN07.M_in) annotation (Line(points={{24.6333,
-              8.57143},{100,8.57143},{100,-170},{139.2,-170}}, color={255,127,0}));
-      connect(pumpN07.signal_pump, busActors.pumpN07) annotation (Line(points={{160.8,
-              -170},{230,-170},{230,0.2},{281.185,0.2}}, color={255,0,255}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(valve_Y02.valve_closed, y02_evaluation.Y02_closed) annotation (Line(
-            points={{126.6,195},{132,195},{132,199},{139.2,199}}, color={255,0,255}));
-      connect(valve_Y02.valve_open, y02_evaluation.Y02_open) annotation (Line(
-            points={{126.6,190},{132,190},{132,194},{139.2,194}}, color={255,0,255}));
-      connect(valve_Y02.valve_controlled, y02_evaluation.Y02_control) annotation (
-          Line(points={{126.6,185},{132,185},{132,189},{139.2,189}}, color={255,0,255}));
-      connect(modeSwitch.CurrentMode, valve_Y02.M_in) annotation (Line(points={{24.6333,
-              8.57143},{100,8.57143},{100,190},{105.2,190}}, color={255,127,0}));
-      connect(y02_evaluation.y, busActors.openingY02) annotation (Line(points={{160.6,
-              190},{230,190},{230,0.2},{281.185,0.2}}, color={0,0,127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(pumpN06.signal_pump, y02_evaluation.adiabaticOn) annotation (Line(
-            points={{160.8,-150},{230,-150},{230,182},{160.8,182}}, color={255,0,255}));
-      connect(valve_Y11.Close, y11_evaluation.Y_closed)
-        annotation (Line(points={{126.8,16},{139.4,16}}, color={255,0,255}));
-      connect(valve_Y11.Control, y11_evaluation.Y_control)
-        annotation (Line(points={{126.6,10},{139.4,10}}, color={255,0,255}));
-      connect(OnSignal, modeSwitch.OnSignal) annotation (Line(points={{-226,170},
-              {-4,170},{-4,24.8571},{-4.28889,24.8571}},
-                                                     color={255,0,255}));
-      connect(pumpN05.signal_pump, busActors.pumpN05) annotation (Line(points={
-              {160.8,-130},{230,-130},{230,0.2},{281.185,0.2}}, color={255,0,
-              255}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(modeSwitch.CurrentMode, valve_Y15.M_in) annotation (Line(points={{24.6333,
-              8.57143},{100,8.57143},{100,-10},{105.2,-10}},          color={
-              255,127,0}));
-      connect(modeSwitch.CurrentMode, valve_Y16.M_in) annotation (Line(points={{24.6333,
-              8.57143},{100,8.57143},{100,-30},{105.2,-30}},          color={
-              255,127,0}));
-      connect(eva_Y15.y, busActors.openingY15) annotation (Line(points={{160.6,
-              -10},{230,-10},{230,0.2},{281.185,0.2}}, color={0,0,127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(evaY16.y, busActors.openingY16) annotation (Line(points={{160.6,-30},{
-              230,-30},{230,0.2},{281.185,0.2}},       color={0,0,127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(modeSwitch.CurrentMode, valve_Y06.M_in) annotation (Line(points={{24.6333,
-              8.57143},{100,8.57143},{100,110},{105.2,110}},          color={
-              255,127,0}));
-      connect(valve_Y06.Open, y06_evaluation.Y_open)
-        annotation (Line(points={{126.6,116},{139.4,116}}, color={255,0,255}));
-      connect(valve_Y06.Control, y06_evaluation.Y_control)
-        annotation (Line(points={{126.6,110},{139.4,110}}, color={255,0,255}));
-      connect(regAnforderung.xDes, busSensors.xDes) annotation (Line(points={{-180.8,
-              66},{-219.78,66},{-219.78,-3.75}},                  color={0,0,
-              127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(regAnforderung.xAbs, busSensors.xAbs) annotation (Line(points={{-180.8,
-              74},{-220,74},{-219.78,-3.75}},                     color={0,0,
-              127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(hD.Y02_signal, busSensors.Y02_actual) annotation (Line(points={{
-              -80.6,4.2},{-108,4.2},{-108,-3.75},{-219.78,-3.75}}, color={0,0,
-              127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(hD.Y09_signal, busSensors.Y09_actual) annotation (Line(points={{
-              -80.6,0.2},{-107.3,0.2},{-107.3,-3.75},{-219.78,-3.75}}, color={0,
-              0,127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(hD.T_out, busSensors.T04) annotation (Line(points={{-80.6,-11},{
-              -108.3,-11},{-108.3,-3.75},{-219.78,-3.75}}, color={0,0,127}),
-          Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(hB.Y02_signal, busSensors.Y02_actual) annotation (Line(points={{
-              -80.6,-25.8},{-107.3,-25.8},{-107.3,-3.75},{-219.78,-3.75}},
-            color={0,0,127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(hB.Y09_signal, busSensors.Y09_actual) annotation (Line(points={{
-              -80.6,-29.8},{-108.3,-29.8},{-108.3,-3.75},{-219.78,-3.75}},
-            color={0,0,127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(hB.T_out, busSensors.T04) annotation (Line(points={{-80.6,-41},{
-              -108.3,-41},{-108.3,-3.75},{-219.78,-3.75}}, color={0,0,127}),
-          Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(pN_Steuerung_Ebene1_1.T_Rek, busSensors.T_Rek) annotation (Line(
-            points={{-78.6,159},{-220,159},{-219.78,-3.75}}, color={0,0,127}),
-          Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(pN_Steuerung_Ebene1_1.phi_03, busSensors.T03_RelHum) annotation (
-          Line(points={{-78.6,156},{-220,156},{-219.78,-3.75}},
-            color={0,0,127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(pN_Steuerung_Ebene1_1.phi_01, busSensors.T01_RelHum) annotation (
-          Line(points={{-78.6,153},{-220,153},{-219.78,-3.75}}, color={0,0,127}),
-          Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(pN_Steuerung_Ebene1_1.signal_Y06, busSensors.Y06_actual)
-        annotation (Line(points={{-78.6,150},{-220,150},{-219.78,-3.75}}, color=
-             {0,0,127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(pN_Steuerung_Ebene1_1.signal_Y02, busSensors.Y02_actual)
-        annotation (Line(points={{-78.6,147},{-220,147},{-219.78,-3.75}}, color=
-             {0,0,127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(y02_evaluation.T_measure, busSensors.T01) annotation (Line(points=
-             {{139.2,183},{90,183},{90,122},{-220,122},{-219.78,-3.75}}, color=
-              {0,0,127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(y06_evaluation.phi_zu, busSensors.T01_RelHum) annotation (Line(
-            points={{139.4,103},{90,103},{90,122},{-220,122},{-219.78,-3.75}},
-            color={0,0,127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(y06_evaluation.y, busActors.openingY06) annotation (Line(points={
-              {160.6,110},{230,110},{230,0.2},{281.185,0.2}}, color={0,0,127}),
-          Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(y09_evaluation.MeasuredValue, busSensors.T01) annotation (Line(
-            points={{139.4,43},{90,43},{90,122},{-220,122},{-219.78,-3.75}},
-            color={0,0,127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(y10_evaluation.MeasuredValue, busSensors.TDes) annotation (Line(
-            points={{139.4,23},{90,23},{90,122},{-220,122},{-219.78,-3.75}},
-            color={0,0,127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(y11_evaluation.MeasuredValue, busSensors.T01_RelHum) annotation (
-          Line(points={{139.4,3},{90,3},{90,122},{-219.78,122},{-219.78,-3.75}},
-            color={0,0,127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(valve_Y15.Close, eva_Y15.Y_closed)
-        annotation (Line(points={{126.8,-4},{139.4,-4}}, color={255,0,255}));
-      connect(valve_Y15.Control, eva_Y15.Y_AbsDesControl)
-        annotation (Line(points={{126.6,-10},{139.4,-10}}, color={255,0,255}));
-      connect(valve_Y16.Close, evaY16.Y_closed) annotation (Line(points={{126.8,-24},
-              {132,-24},{132,-24},{139.4,-24}}, color={255,0,255}));
-      connect(valve_Y16.Control, evaY16.Y_AbsDesControl) annotation (Line(points={{126.6,
-              -30},{132,-30},{132,-30},{139.4,-30}}, color={255,0,255}));
-      connect(eva_Y15.tankMassAbs, busSensors.mTankAbs) annotation (Line(points={{139.4,
-              -17},{90,-17},{90,122},{-219.78,122},{-219.78,-3.75}}, color={0,0,127}),
-          Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(evaY16.tankMassDes, busSensors.mTankDes) annotation (Line(points={{139.4,
-              -37},{90,-37},{90,122},{-220,122},{-219.78,-3.75}},    color={0,0,127}),
-          Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(outsideFan.dp_Fan, busActors.outsideFan_dp) annotation (Line(points={{
-              160.6,-50},{230,-50},{230,0.2},{281.185,0.2}}, color={0,0,127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(exhaustFan.dp_Fan, busActors.exhaustFan_dp) annotation (Line(points={{
-              160.6,-70},{230,-70},{230,0.2},{281.185,0.2}}, color={0,0,127}), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(regFan.dp_Fan, busActors.regenerationFan_dp) annotation (Line(points={
-              {160.6,-90},{230,-90},{230,0.2},{281.185,0.2}}, color={0,0,127}),
-          Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(outsideFan.M_in, modeSwitch.CurrentMode) annotation (Line(points={{139.2,
-              -50},{100,-50},{100,8.57143},{24.6333,8.57143}}, color={255,127,0}));
-      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-220,-200},
-                {280,220}})),            Diagram(coordinateSystem(
-              preserveAspectRatio=false, extent={{-220,-200},{280,220}}),
-            graphics={
-            Rectangle(
-              extent={{-180,220},{44,104}},
-              lineColor={0,0,0},
-              fillColor={200,88,88},
-              fillPattern=FillPattern.Solid),
-            Rectangle(
-              extent={{-180,104},{44,-200}},
-              lineColor={0,0,0},
-              fillColor={85,170,255},
-              fillPattern=FillPattern.Solid),
-            Rectangle(
-              extent={{44,220},{240,-230}},
-              lineColor={0,0,0},
-              fillColor={170,255,170},
-              fillPattern=FillPattern.Solid),
-            Text(
-              extent={{-144,210},{10,184}},
-              lineColor={0,0,0},
-              fillColor={170,255,170},
-              fillPattern=FillPattern.Solid,
-              textString="Modiauswahl"),
-            Text(
-              extent={{-150,-168},{4,-194}},
-              lineColor={0,0,0},
-              fillColor={170,255,170},
-              fillPattern=FillPattern.Solid,
-              textString="Aktorsatz"),
-            Text(
-              extent={{70,-200},{224,-226}},
-              lineColor={0,0,0},
-              fillColor={170,255,170},
-              fillPattern=FillPattern.Solid,
-              textString="Aktorregelung")}));
-    end ControlTest;
 
     model PNControl21 "PetriNet based control of RLT 21"
 

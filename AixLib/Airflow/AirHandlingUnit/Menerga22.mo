@@ -273,7 +273,7 @@ model Menerga22 "A modular model of the Menerga SorpSolair"
     mWat_flow_nominal=0.0167)
     "simple model for steam humidifier to create valve signal between 0 and 1"
     annotation (Placement(transformation(extent={{-526,16},{-546,36}})));
-  BaseClasses.steamHumidHeatModel steamHumidHeatModel
+  BaseClasses.steamHumidHeatModel steamHumidHeatModel(T_wat=100 + 273.15)
     annotation (Placement(transformation(extent={{-550,74},{-530,94}})));
   Fluid.Sensors.MassFlowRate outMasFlo(redeclare package Medium = MediumAir)
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},

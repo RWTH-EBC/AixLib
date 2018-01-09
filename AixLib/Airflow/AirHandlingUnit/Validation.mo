@@ -50,7 +50,7 @@ package Validation
           extent={{-10,-10},{10,10}},
           rotation=-90,
           origin={82,38})));
-    Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=false)
+    Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=true)
       annotation (Placement(transformation(extent={{54,-10},{34,10}})));
     Modelica.Blocks.Sources.RealExpression openingValueY01(y=1) annotation (
         Placement(transformation(
@@ -217,7 +217,7 @@ package Validation
       annotation (Placement(transformation(extent={{4,76},{-16,96}})));
     Modelica.Blocks.Continuous.Filter filter(f_cut=0.01)
       annotation (Placement(transformation(extent={{-138,-102},{-118,-82}})));
-    BaseClasses.DataBase.BouConRecAdiaOff_nominal bouCon
+    BaseClasses.DataBase.BouConRecAdiaOn_07Jul17  bouCon
       "Boundary Conditions for the recuperator for different time series"
       annotation (Placement(transformation(extent={{-156,8},{-136,28}})));
     Modelica.Blocks.Sources.CombiTimeTable combiTimeTable2(table=bouCon.Profile,
@@ -415,7 +415,7 @@ package Validation
           origin={-82,20})));
     Modelica.Blocks.Sources.CombiTimeTable combiTimeTable2(table=bouCon.Profile,
         extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic)
-      annotation (Placement(transformation(extent={{42,76},{22,96}})));
+      annotation (Placement(transformation(extent={{84,76},{64,96}})));
     BaseClasses.DataBase.BouConRLT22_T_phi_variation bouCon
       annotation (Placement(transformation(extent={{78,-44},{98,-24}})));
     Modelica.Blocks.Math.Add add3 annotation (Placement(transformation(
@@ -446,11 +446,6 @@ package Validation
           extent={{10,10},{-10,-10}},
           rotation=90,
           origin={-88,60})));
-    Modelica.Blocks.Sources.BooleanConstant OnSig(k=true) annotation (Placement(
-          transformation(
-          extent={{-3,-3},{3,3}},
-          rotation=0,
-          origin={-33,71})));
     Building.Components.Weather.Weather        combinedWeather(Latitude = 49.5, Longitude = 8.5, Wind_dir = false,                                     SOD = AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_NE_SE_SW_NW_Hor(),
       Rel_hum=true,
       Wind_speed=false,
@@ -477,7 +472,7 @@ package Validation
         thickness=0.5));
     connect(menergaModular.busSensors, menergaController.busSensors) annotation (
         Line(
-        points={{-9.74,18},{-9.74,70.6},{-8,70.6}},
+        points={{-9.74,18},{-9.74,74},{-8,74}},
         color={255,204,51},
         thickness=0.5));
     connect(WatSou.ports[1], menergaModular.watInlHeaCoi) annotation (Line(points={{-30,-62},
@@ -499,30 +494,27 @@ package Validation
       annotation (Line(points={{-88,49},{-88,32}}, color={0,0,127}));
     connect(add1.y, exhaustAir.T_in)
       annotation (Line(points={{-66,49},{-66,18},{-60,18}}, color={0,0,127}));
-    connect(combiTimeTable2.y[1], add3.u1) annotation (Line(points={{21,86},{56,
+    connect(combiTimeTable2.y[1], add3.u1) annotation (Line(points={{63,86},{56,
             86},{56,46},{66,46},{66,38}}, color={0,0,127}));
-    connect(combiTimeTable2.y[2], division1.u1) annotation (Line(points={{21,86},
+    connect(combiTimeTable2.y[2], division1.u1) annotation (Line(points={{63,86},
             {56,86},{56,46},{108,46},{108,40}},
                                               color={0,0,127}));
-    connect(combiTimeTable2.y[3], add1.u1) annotation (Line(points={{21,86},{48,
-            86},{48,92},{-60,92},{-60,72}}, color={0,0,127}));
-    connect(combiTimeTable2.y[4], division2.u1) annotation (Line(points={{21,86},
-            {48,86},{48,92},{-82,92},{-82,72}}, color={0,0,127}));
+    connect(combiTimeTable2.y[3], add1.u1) annotation (Line(points={{63,86},{52,
+            86},{52,92},{-60,92},{-60,72}}, color={0,0,127}));
+    connect(combiTimeTable2.y[4], division2.u1) annotation (Line(points={{63,86},
+            {52,86},{52,92},{-82,92},{-82,72}}, color={0,0,127}));
     connect(rh_default1.y, division2.u2) annotation (Line(points={{110,45},{110,
             46},{52,46},{52,92},{-94,92},{-94,72}}, color={0,0,127}));
     connect(T_default1.y, add1.u2) annotation (Line(points={{51,44},{52,44},{52,
             92},{-72,92},{-72,72}}, color={0,0,127}));
-    connect(OnSig.y, menergaController.OnSignal) annotation (Line(points={{-29.7,
-            71},{-21.85,71},{-21.85,76.4},{-8.6,76.4}},       color={255,0,255}));
-    connect(combinedWeather.RelHumidity, x_pTphi1.phi) annotation (Line(points={{94.9333,
-            80.4},{90,80.4},{90,8}},           color={0,0,127}));
+    connect(menergaModular.ExitAir1, exitAir.ports[2]) annotation (Line(points={{10.84,
+            18},{12,18},{12,22},{6,22},{6,26}},         color={0,127,255}));
     connect(combinedWeather.AirTemp, x_pTphi1.T) annotation (Line(points={{94.9333,
             90.3},{84,90.3},{84,8}},         color={0,0,127}));
     connect(combinedWeather.AirTemp, outsideAir.T_in) annotation (Line(points={{94.9333,
-            90.3},{84,90.3},{84,12},{68,12},{68,-2},{64,-2}},          color={0,
-            0,127}));
-    connect(menergaModular.ExitAir1, exitAir.ports[2]) annotation (Line(points=
-            {{10.84,18},{12,18},{12,22},{6,22},{6,26}}, color={0,127,255}));
+            90.3},{84,90.3},{84,12},{64,12},{64,-2}},          color={0,0,127}));
+    connect(combinedWeather.RelHumidity, x_pTphi1.phi) annotation (Line(points={{94.9333,
+            80.4},{90,80.4},{90,8}},           color={0,0,127}));
     annotation (experiment(
         StopTime=31536000,
         Interval=180,
@@ -708,7 +700,7 @@ package Validation
           origin={-82,20})));
     Modelica.Blocks.Sources.CombiTimeTable combiTimeTable2(table=bouCon.Profile,
         extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic)
-      annotation (Placement(transformation(extent={{42,76},{22,96}})));
+      annotation (Placement(transformation(extent={{82,76},{62,96}})));
     BaseClasses.DataBase.BouConRLT22_T_phi_variation bouCon
       annotation (Placement(transformation(extent={{78,-44},{98,-24}})));
     Modelica.Blocks.Math.Add add3 annotation (Placement(transformation(
@@ -739,11 +731,6 @@ package Validation
           extent={{10,10},{-10,-10}},
           rotation=90,
           origin={-88,60})));
-    Modelica.Blocks.Sources.BooleanConstant OnSig(k=true) annotation (Placement(
-          transformation(
-          extent={{-3,-3},{3,3}},
-          rotation=0,
-          origin={-33,71})));
     Building.Components.Weather.Weather        combinedWeather(Latitude = 49.5, Longitude = 8.5, Wind_dir = false,                                     SOD = AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_NE_SE_SW_NW_Hor(),
       Rel_hum=true,
       Wind_speed=false,
@@ -770,7 +757,7 @@ package Validation
         thickness=0.5));
     connect(menergaModular.busSensors, menergaController.busSensors) annotation (
         Line(
-        points={{-9.74,18},{-9.74,70.6},{-8,70.6}},
+        points={{-9.74,18},{-9.74,74},{-8,74}},
         color={255,204,51},
         thickness=0.5));
     connect(WatSou.ports[1], menergaModular.watInlHeaCoi) annotation (Line(points={{-30,-62},
@@ -792,30 +779,27 @@ package Validation
       annotation (Line(points={{-88,49},{-88,32}}, color={0,0,127}));
     connect(add1.y, exhaustAir.T_in)
       annotation (Line(points={{-66,49},{-66,18},{-60,18}}, color={0,0,127}));
-    connect(combiTimeTable2.y[1], add3.u1) annotation (Line(points={{21,86},{56,
+    connect(combiTimeTable2.y[1], add3.u1) annotation (Line(points={{61,86},{56,
             86},{56,46},{66,46},{66,38}}, color={0,0,127}));
-    connect(combiTimeTable2.y[2], division1.u1) annotation (Line(points={{21,86},
+    connect(combiTimeTable2.y[2], division1.u1) annotation (Line(points={{61,86},
             {56,86},{56,46},{108,46},{108,40}},
                                               color={0,0,127}));
-    connect(combiTimeTable2.y[3], add1.u1) annotation (Line(points={{21,86},{48,
-            86},{48,92},{-60,92},{-60,72}}, color={0,0,127}));
-    connect(combiTimeTable2.y[4], division2.u1) annotation (Line(points={{21,86},
-            {48,86},{48,92},{-82,92},{-82,72}}, color={0,0,127}));
+    connect(combiTimeTable2.y[3], add1.u1) annotation (Line(points={{61,86},{52,
+            86},{52,92},{-60,92},{-60,72}}, color={0,0,127}));
+    connect(combiTimeTable2.y[4], division2.u1) annotation (Line(points={{61,86},
+            {52,86},{52,92},{-82,92},{-82,72}}, color={0,0,127}));
     connect(rh_default1.y, division2.u2) annotation (Line(points={{110,45},{110,
             46},{52,46},{52,92},{-94,92},{-94,72}}, color={0,0,127}));
     connect(T_default1.y, add1.u2) annotation (Line(points={{51,44},{52,44},{52,
             92},{-72,92},{-72,72}}, color={0,0,127}));
-    connect(OnSig.y, menergaController.OnSignal) annotation (Line(points={{-29.7,
-            71},{-21.85,71},{-21.85,76.4},{-8.6,76.4}},       color={255,0,255}));
-    connect(combinedWeather.RelHumidity, x_pTphi1.phi) annotation (Line(points={{94.9333,
-            80.4},{90,80.4},{90,8}},           color={0,0,127}));
+    connect(menergaModular.ExitAir1, exitAir.ports[2]) annotation (Line(points=
+            {{10.84,18},{12,18},{12,22},{6,22},{6,26}}, color={0,127,255}));
     connect(combinedWeather.AirTemp, x_pTphi1.T) annotation (Line(points={{94.9333,
             90.3},{84,90.3},{84,8}},         color={0,0,127}));
     connect(combinedWeather.AirTemp, outsideAir.T_in) annotation (Line(points={{94.9333,
-            90.3},{84,90.3},{84,12},{68,12},{68,-2},{64,-2}},          color={0,
-            0,127}));
-    connect(menergaModular.ExitAir1, exitAir.ports[2]) annotation (Line(points=
-            {{10.84,18},{12,18},{12,22},{6,22},{6,26}}, color={0,127,255}));
+            90.3},{84,90.3},{84,10},{64,10},{64,-2}},          color={0,0,127}));
+    connect(combinedWeather.RelHumidity, x_pTphi1.phi) annotation (Line(points={{94.9333,
+            80.4},{90,80.4},{90,8}},           color={0,0,127}));
     annotation (experiment(StopTime=31536000, Interval=180));
   end ValidationRLT22;
 end Validation;
