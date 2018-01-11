@@ -62,7 +62,7 @@ package Controllers "contains all the control models"
             {-56,70},{-56,15.2381},{-32.72,15.2381}},
                                                  color={255,0,255}));
     connect(T_Set_Fix.y, controlTest.TSet) annotation (Line(points={{-79,20},{
-            -62,20},{-62,-9.52381},{-32.48,-9.52381}}, color={0,0,127}));
+            -56,20},{-56,-9.52381},{-32.48,-9.52381}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
           Rectangle(
             extent={{-100,100},{100,-100}},
@@ -489,8 +489,8 @@ model")}),                                                         Diagram(
 
       parameter Real k_y02 = 0.03;  //0.15;
       parameter Real Ti_y02 = 240;  //0.5;
-      parameter Real k_y09 = 0.05;  //0.01//0.06 aus Einzelanalyse;
-      parameter Real Ti_y09 = 180;  //180
+      parameter Real k_y09 = 0.03;  //0.01//0.06 aus Einzelanalyse;
+      parameter Real Ti_y09 = 300;  //180
       parameter Real k_phi = 0.28;  //80;  //0.08;
       parameter Real Ti_phi = 27;  //0.7;
       parameter Real k_Fan = 250;
@@ -1111,8 +1111,8 @@ model")}),                                                         Diagram(
 
       parameter Real k_y02 = 0.03;  //0.15;
       parameter Real Ti_y02 = 240;  //0.5;
-      parameter Real k_y09 = 0.05;  //0.01//0.06 aus Einzelanalyse;
-      parameter Real Ti_y09 = 180;  //180
+      parameter Real k_y09 = 0.03;  //0.01//0.06 aus Einzelanalyse;
+      parameter Real Ti_y09 = 300;  //180
       parameter Real k_phi = 0.28;  //80;  //0.08;
       parameter Real Ti_phi = 27;  //0.7;
       //parameter Real k_Fan = 100;  //250

@@ -416,7 +416,7 @@ package Validation
     Modelica.Blocks.Sources.CombiTimeTable combiTimeTable2(table=bouCon.Profile,
         extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic)
       annotation (Placement(transformation(extent={{84,76},{64,96}})));
-    BaseClasses.DataBase.BouConRLT22_T_phi_variation bouCon
+    BaseClasses.DataBase.BouConRLT21_MeasureData     bouCon
       annotation (Placement(transformation(extent={{78,-44},{98,-24}})));
     Modelica.Blocks.Math.Add add3 annotation (Placement(transformation(
           extent={{10,10},{-10,-10}},
@@ -509,12 +509,12 @@ package Validation
             92},{-72,92},{-72,72}}, color={0,0,127}));
     connect(menergaModular.ExitAir1, exitAir.ports[2]) annotation (Line(points={{10.84,
             18},{12,18},{12,22},{6,22},{6,26}},         color={0,127,255}));
+    connect(combinedWeather.RelHumidity, x_pTphi1.phi) annotation (Line(points={{94.9333,
+            80.4},{90,80.4},{90,8}},           color={0,0,127}));
     connect(combinedWeather.AirTemp, x_pTphi1.T) annotation (Line(points={{94.9333,
             90.3},{84,90.3},{84,8}},         color={0,0,127}));
     connect(combinedWeather.AirTemp, outsideAir.T_in) annotation (Line(points={{94.9333,
             90.3},{84,90.3},{84,12},{64,12},{64,-2}},          color={0,0,127}));
-    connect(combinedWeather.RelHumidity, x_pTphi1.phi) annotation (Line(points={{94.9333,
-            80.4},{90,80.4},{90,8}},           color={0,0,127}));
     annotation (experiment(
         StopTime=31536000,
         Interval=180,
