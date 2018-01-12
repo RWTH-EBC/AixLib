@@ -203,7 +203,7 @@ equation
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <p>The boilers parameterization is based on records from the <a href=\"DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition\">DataBase</a>  library. In the range of minimal and nominal heat power a modulating operation is possible.  </p>
 <p>The control strategy is pretended from an external controller. There is an ON/OFF switch for the boiler and also a possibility to control the modulating operation, boilers capacity.</p>
-<p>Both, actually and intigrated gas consumption can be taken from boilers outputs. </p>
+<p>Both, actually and integrated gas consumption can be taken from boilers outputs. </p>
 <h4><span style=\"color:#008000\">Example Results</span></h4>
 <p><a href=\"FastHVAC.Examples.HeatGenerators.Boiler.Boiler\">Boiler</a></p>
 </html>",
