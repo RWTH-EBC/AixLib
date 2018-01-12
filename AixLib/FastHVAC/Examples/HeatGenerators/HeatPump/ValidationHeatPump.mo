@@ -213,11 +213,9 @@ equation
           textString="HVAC")}),
     experiment(StopTime=72000, Interval=60),
     __Dymola_experimentSetupOutput,
-    Documentation(revisions="<html><ul>
-  <li>
-    <i>November 28, 2016&#160;</i> Tobias Blacha:<br/>
-    Moved into AixLib
-  </li>
-</ul>
+    Documentation(revisions="<html>
+<p><ul>
+<li><i>November 28, 2016&nbsp; </i> Tobias Blacha:<br/>Moved into AixLib</li>
+</ul></p>
 </html>"));
 end ValidationHeatPump;

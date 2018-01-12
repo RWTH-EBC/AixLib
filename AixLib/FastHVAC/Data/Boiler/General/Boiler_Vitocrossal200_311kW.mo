@@ -16,12 +16,12 @@ record Boiler_Vitocrossal200_311kW
            0.9, (0.872+0.953)/2;
            1.0, (0.857+0.952)/2]);
                                   annotation (preferredView="text",
-              Documentation(revisions="<html><ul>
-  <li>
-    <i>September 28, 2013&#160;</i> by Peter Matthes:<br/>
-    implemented.
-  </li>
-</ul>
+              Documentation(revisions="<html>
+<ul>
+  <li><i>September 28, 2013&nbsp;</i>
+         by Peter Matthes:<br>
+         implemented.</li>
+</ul>
 </html>", info="<html>
 <p><h4><font color=\"#008000\">Level of Development</font></h4></p>
 <p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>

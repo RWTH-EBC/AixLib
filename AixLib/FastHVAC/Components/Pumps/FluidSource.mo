@@ -37,49 +37,32 @@ equation
 
     annotation (
     defaultComponentName="fluidSource",
-    choicesAllMatching, Documentation(info="<html><h4>
-  <span style=\"color:#008000\">Overview</span>
-</h4>
-<p>
-  Model for an ideal fluid source with real input connectors to set the mass flow and the temperature of the fluid.
-</p>
-<h4>
-  <span style=\"color:#008000\">Concept</span>
-</h4>
-<p>
-  The output of the fluid source includes following values:
-</p>
-<ul>
-  <li>mass flow rate
-  </li>
-  <li>temperature
-  </li>
-  <li>specific enthalpy
-  </li>
-  <li>specific heat capacity
-  </li>
-</ul>
-<p>
-  <br/>
-  The fluid source uses the real input to set the flow mass rate and the temperature of the fluid. The specific heat capacity of the medium is referred to the record SimpleMedium. The specific enthalpy is a dependent variable (h=T*cp).
-</p>
-<h4>
-  <span style=\"color:#008000\">Example Results</span>
-</h4>
-<p>
-  Examples can be found in <a href=\"modelica:/FastHVAC.Examples.Pumps.TestFluidSource\">FastHVAC.Examples.Pumps.TestFluidSource</a>
-</p>
+    choicesAllMatching, Documentation(info="<html>
+
+
+<h4><span style=\"color:#008000\">Overview</span></h4>
+<p>Model for an ideal fluid source with real input connectors to set the mass flow and the temperature of the fluid.</p>
+<h4><span style=\"color:#008000\">Concept</span></h4>
+<p>The output of the fluid source includes following values:</p>
+<ul>
+<li>mass flow rate</li>
+<li>temperature</li>
+<li>specific enthalpy</li>
+<li>specific heat capacity</li>
+</ul>
+<p><br/>
+The fluid source uses the real input to set the flow mass rate and the temperature of the fluid. The specific heat capacity of the medium is referred to the record SimpleMedium. The specific enthalpy is a dependent variable (h=T*cp).</p>
+
+<h4><span style=\"color:#008000\">Example Results</span></h4>
+<p>Examples can be found in <a href=\"modelica:/FastHVAC.Examples.Pumps.TestFluidSource\">FastHVAC.Examples.Pumps.TestFluidSource </a></p>
 </html>",
-revisions="<html><ul>
-  <li>
-    <i>April 25, 2017&#160;</i> by Tobias Blacha:<br/>
-    Moved into AixLib
-  </li>
-  <li>
-    <i>December 16, 2014&#160;</i> by Konstantin Finkbeiner:<br/>
-    Implemented
-  </li>
-</ul>
+revisions="<html>
+<ul>
+<li><i>April 25, 2017&nbsp;</i> by Tobias Blacha:<br/>
+Moved into AixLib</li>
+<li><i>December 16, 2014&nbsp;</i> by Konstantin Finkbeiner:<br/>
+Implemented</li>
+</ul>
 </html> "),
   Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
                                       graphics={

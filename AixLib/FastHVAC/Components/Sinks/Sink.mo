@@ -245,35 +245,22 @@ equation
           extent={{-150,-72},{150,-112}},
           textString="%name",
           lineColor={0,0,255})}),
-    Documentation(info="<html><h4>
-  <span style=\"color:#008000\">Overview</span>
-</h4>
-<p>
-  Sink model for variable heat flow. Can also be used as a source for variable heat flow
-</p>
-<h4>
-  <span style=\"color:#008000\">Concept</span>
-</h4>
-<p>
-  The Sink model represents a variable heat flow sink, controlled by a real input port. This model possesses sink function as default, a source function can be chosen.
-</p>
-<h4>
-  <span style=\"color:#008000\">Example Results</span>
-</h4>
-<p>
-  Examples can be found in <a href=\"modelica:/FastHVAC.Examples.Sinks.TestSinks\">TestSinks</a>
-</p>
+    Documentation(info="<html>
+<h4><span style=\"color:#008000\">Overview</span></h4>
+<p>Sink model for variable heat flow. Can also be used as a source for variable heat flow </p>
+<h4><span style=\"color:#008000\">Concept</span></h4>
+<p>The Sink model represents a variable heat flow sink, controlled by a real input port. This model possesses sink function as default, a source function can be chosen.
+</p>
+<h4><span style=\"color:#008000\">Example Results</span></h4>
+<p>Examples can be found in <a href=\"modelica:/FastHVAC.Examples.Sinks.TestSinks\">TestSinks </a></p>
 </html>",
-  revisions="<html><ul>
-  <li>
-    <i>November 28, 2016&#160;</i> Tobias Blacha:<br/>
-    Moved into AixLib
-  </li>
-  <li>
-    <i>December 16, 2014&#160;</i> Konstantin Finkbeiner:<br/>
-    Implemented
-  </li>
-</ul>
+  revisions="<html>
+<ul>
+<li><i>November 28, 2016&nbsp; </i> Tobias Blacha:<br/>
+Moved into AixLib</li>
+<li><i>December 16, 2014&nbsp; </i> Konstantin Finkbeiner:<br/>
+Implemented</li>
+</ul>
 </html>
 
 

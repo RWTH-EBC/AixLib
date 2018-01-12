@@ -412,112 +412,55 @@ equation
           extent={{-78,12},{78,-10}},
           lineColor={0,0,255},
           textString="%name")}),
-             Documentation(info="<html><h4>
-  <span style=\"color:#008000\">Overview</span>
-</h4>
-<p>
-  Heat pump black box model with two simple heat exchangers, no controllers included.
-</p>
-<p>
-  Works as on/off-controlled heat pump or heat pump with capacity control. The type of capacity and electrical power calculation can be chosen:
-</p>
-<ol>
-  <li>Polynom<br/>
-    a) depending on evaporator input temperature, condenser output temperature and variable speed (via conditional speed connector) for capacity controlled heat pumps<br/>
-    b) depending on evaporator input temperature, condenser output temperature and nominal speed for on/off-controlled heat pump
-  </li>
-  <li>Table data according for on/off-controlled heat pump, depending on evaporator input temperature, condenser output temperature
-  </li>
-</ol>
-<h4>
-  <span style=\"color:#008000\">Level of Development</span>
-</h4>
-<p>
-  <img src=\"modelica://HVAC/Images/stars2.png\">
-</p>
-<h4>
-  <span style=\"color:#008000\">Assumptions</span>
-</h4>
-<p>
-  Correction models of the calculation can be activated that effect the efficiency or the start-up and shut-off behavior of the heat pump.
-</p>
-<ol>
-  <li>Icing and Defrosting: Simple model that use the evaporator inlet temperature and calculates a factor for CoP correction (according to Wetter and Afjei, 1996). Not enabled for table data, as usually already included (data according EN255 and EN14511).
-  </li>
-  <li>Mass flow in condenser/evaporator: Model according to Pahud and Lachal, 2004, that corrects the temperatures used within table and polynomial.
-  </li>
-  <li>First order behavior of heat pump capacity: Start-up and shut-off of heat pump can be modeled with a first order behavior.
-  </li>
-  <li>Delay of heat pump capacity: Start-up and shut-off of heat pump can be modeled with a delay time.
-  </li>
-  <li>Electric efficiency: The electric efficiency of the electric drive is implemented to calculate the evaporator heat flow
-  </li>
-  <li>Scaling factor: A scaling facor is implemented for scaling of the heat pump power and capacity without effecting the heat pump efficiency which might not be physically correct but may be helpful for rough calculation.
-  </li>
-  <li>Additional electric power: This is a constant value that is added to the power consumption. This may be helpful if e.g. an electric drive operates together with the compressor and shall be included in overall electric power and CoP calculation.
-  </li>
-  <li>The smoothness of table interpolation can be chosen.
-  </li>
-</ol>
-<h4>
-  <span style=\"color:#008000\">Known Limitations</span>
-</h4>
-<ul>
-  <li>Allowed source temperature: No limits for source temperature is implemented. Though, usually this is not a problem if the heat pump is properly integrated into a system model.
-  </li>
-  <li>Allowed sink temperature: No limits for sink temperature is implemented. Be careful when setting up the heat pump control.
-  </li>
-  <li>Defrost: No direct implementation of dynamic defrost behavior.
-  </li>
-</ul>
-<h4>
-  <span style=\"color:#008000\">Concept</span>
-</h4>
-<p>
-  The heat pump speed is helt between the boundaries N_min and N_max even if the input speed is higher or lower. But no further controlling is implemented. The control logic is conciously not integrated into this model.
-</p>
-<p>
-  The calculation of the capacity and electric power does not represent any dynamic behavior of the refrigerant cycle as it occurs in real heat pumps. Therefor two possibilities exist, to add dynamic behavior:
-</p>
-<ol>
-  <li>The condenser and evaporator can be parametized with a certain external fluid volume to represent their thermal inertia in the tab Evaporator/Condenser
-  </li>
-  <li>A first order element can be added to the calculation in the tab Advanced if the check box PT1_cycle is enabled (see: <i>Correction models)</i>
-  </li>
-</ol>
-<h4>
-  <span style=\"color:#008000\">References</span>
-</h4>
-<ul>
-  <li>Pahud, D. and Lachal, B.: <i>Mesure des performances thermiques d?une pompe à chaleur couplée sur des sondes géothermiques à Lugano (TI)</i>. Office fédéral de l'energie, Bern, Switzerland. 2004.
-  </li>
-  <li>Wetter, M. and Afjei, T.: <i>TRNSYS TYPE 401 - Kompressionswärmepumpe inklusiv Frost- und Taktverluste</i>. Zentralschweizerisches Technikum Luzern - Ingenieruschule HTL, Switzerland. 1996.
-  </li>
-</ul>
-<h4>
-  <span style=\"color:#008000\">Example Results</span>
-</h4>
-<p>
-  See <a href=\"FastHVAC.Examples.HeatGenerators.HeatPump.ValidationHeatPump\">ValidationHeatPump</a>
-</p>
+             Documentation(info="<html>
+<h4><span style=\"color:#008000\">Overview</span></h4>
+<p>Heat pump black box model with two simple heat exchangers, no controllers included. </p>
+<p>Works as on/off-controlled heat pump or heat pump with capacity control. The type of capacity and electrical power calculation can be chosen: </p>
+<ol>
+<li>Polynom<br>a) depending on evaporator input temperature, condenser output temperature and variable speed (via conditional speed connector) for capacity controlled heat pumps <br>b) depending on evaporator input temperature, condenser output temperature and nominal speed for on/off-controlled heat pump </li>
+<li>Table data according for on/off-controlled heat pump, depending on evaporator input temperature, condenser output temperature </li>
+</ol>
+<h4><span style=\"color:#008000\">Level of Development</span></h4>
+<p><img src=\"modelica://HVAC/Images/stars2.png\"/></p>
+<h4><span style=\"color:#008000\">Assumptions</span></h4>
+<p>Correction models of the calculation can be activated that effect the efficiency or the start-up and shut-off behavior of the heat pump. </p>
+<ol>
+<li>Icing and Defrosting: Simple model that use the evaporator inlet temperature and calculates a factor for CoP correction (according to Wetter and Afjei, 1996). Not enabled for table data, as usually already included (data according EN255 and EN14511). </li>
+<li>Mass flow in condenser/evaporator: Model according to Pahud and Lachal, 2004, that corrects the temperatures used within table and polynomial. </li>
+<li>First order behavior of heat pump capacity: Start-up and shut-off of heat pump can be modeled with a first order behavior. </li>
+<li>Delay of heat pump capacity: Start-up and shut-off of heat pump can be modeled with a delay time. </li>
+<li>Electric efficiency: The electric efficiency of the electric drive is implemented to calculate the evaporator heat flow </li>
+<li>Scaling factor: A scaling facor is implemented for scaling of the heat pump power and capacity without effecting the heat pump efficiency which might not be physically correct but may be helpful for rough calculation.</li>
+<li>Additional electric power: This is a constant value that is added to the power consumption. This may be helpful if e.g. an electric drive operates together with the compressor and shall be included in overall electric power and CoP calculation.</li>
+<li>The smoothness of table interpolation can be chosen.</li>
+</ol>
+<h4><span style=\"color:#008000\">Known Limitations</span></h4>
+<ul>
+<li>Allowed source temperature: No limits for source temperature is implemented. Though, usually this is not a problem if the heat pump is properly integrated into a system model. </li>
+<li>Allowed sink temperature: No limits for sink temperature is implemented. Be careful when setting up the heat pump control. </li>
+<li>Defrost: No direct implementation of dynamic defrost behavior. </li>
+</ul>
+<h4><span style=\"color:#008000\">Concept</span></h4>
+<p>The heat pump speed is helt between the boundaries N_min and N_max even if the input speed is higher or lower. But no further controlling is implemented. The control logic is conciously not integrated into this model.</p>
+<p>The calculation of the capacity and electric power does not represent any dynamic behavior of the refrigerant cycle as it occurs in real heat pumps. Therefor two possibilities exist, to add dynamic behavior: </p>
+<ol>
+<li>The condenser and evaporator can be parametized with a certain external fluid volume to represent their thermal inertia in the tab Evaporator/Condenser</li>
+<li>A first order element can be added to the calculation in the tab Advanced if the check box PT1_cycle is enabled (see: <i>Correction models)</i></li>
+</ol>
+<h4><span style=\"color:#008000\">References</span></h4>
+<ul>
+<li>Pahud, D. and Lachal, B.: <i>Mesure des performances thermiques d?une pompe &agrave; chaleur coupl&eacute;e sur des sondes g&eacute;othermiques &agrave; Lugano (TI)</i>. Office f&eacute;d&eacute;ral de l&apos;energie, Bern, Switzerland. 2004. </li>
+<li>Wetter, M. and Afjei, T.: <i>TRNSYS TYPE 401 - Kompressionsw&auml;rmepumpe inklusiv Frost- und Taktverluste</i>. Zentralschweizerisches Technikum Luzern - Ingenieruschule HTL, Switzerland. 1996. </li>
+</ul>
+<h4><span style=\"color:#008000\">Example Results</span></h4>
+<p>See <a href=\"FastHVAC.Examples.HeatGenerators.HeatPump.ValidationHeatPump\">ValidationHeatPump</a> </p>
 </html>",
-      revisions="<html><ul>
-  <li>
-    <i>November 28, 2016&#160;</i> Tobias Blacha:<br/>
-    Moved into AixLib
-  </li>
-  <li>
-    <i>January 12, 2015&#160;</i> by Konstantin Finkbeiner:<br/>
-    Addapted to FastHVAC.
-  </li>
-  <li>
-    <i>December 10, 2013&#160;</i> by Ole Odendahl:<br/>
-    Formatted documentation appropriately
-  </li>
-  <li>
-    <i>April 23, 2013&#160;</i>by Kristian Huchtemann:<br/>
-    implemented
-  </li>
-</ul>
+      revisions="<html>
+<ul>
+<li><i>November 28, 2016&nbsp; </i> Tobias Blacha:<br/>Moved into AixLib</li>
+<li><i>January 12, 2015&nbsp;</i> by Konstantin Finkbeiner:<br>Addapted to FastHVAC.</li>
+<li><i>December 10, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
+<li><i>April 23, 2013&nbsp;</i>by Kristian Huchtemann:<br>implemented</li>
+</ul>
 </html>"));
 end HeatPump;

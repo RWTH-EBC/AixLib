@@ -260,59 +260,26 @@ equation
           extent={{-68,-70},{76,-90}},
           lineColor={0,0,255},
           textString="%name")}),
-    Documentation(info="<html><h4>
-  <span style=\"color:#008000\">Overview</span>
-</h4>
-<p>
-  This model is based on <a href=\"FastHVAC.Components.Pipes.DynamicPipe\">DynamicPipe</a>. The difference is that the aggregated pipe has pipe wall and insulation wall which allows discretisation of pipe wall and pipe insulation.
-</p>
-<h4>
-  <span style=\"color:#008000\">Concept</span>
-</h4>
-<p>
-  Differently from <a href=\"FastHVAC.Components.Pipes.DynamicPipe\">DynamicPipe</a> for each discretisation of the pipe, there is a connector to the corresponding element of the discretized pipe wall. Each element of the discretised pipe wall is connected to a corresponding element of the discretized insulation wall. The heat-ports and stars of all nodes are then collected to form two single ports, which can be connected to an ambient temperature.
-</p>
-<h4>
-  <span style=\"color:#008000\">Example Results</span>
-</h4>
-<p>
-  <a href=\"FastHVAC.Examples.Pipes\">Pipes</a>
-</p>
+    Documentation(info="<html>
+
+<h4><span style=\"color:#008000\">Overview</span></h4>
+<p>This model is based on  <a href=\"FastHVAC.Components.Pipes.DynamicPipe\">DynamicPipe</a>. The difference is that the aggregated pipe has pipe wall and insulation wall which allows discretisation of pipe wall and pipe insulation.</p>
+<h4><span style=\"color:#008000\">Concept</span></h4>
+<p>Differently from <a href=\"FastHVAC.Components.Pipes.DynamicPipe\">DynamicPipe</a> for each discretisation of the pipe, there is a connector to the corresponding element of the discretized pipe wall. Each element of the discretised pipe wall is connected to a corresponding element of the discretized insulation wall. The heat-ports and stars of all nodes are then collected to form two single ports, which can be connected to an ambient temperature. </p>
+<h4><span style=\"color:#008000\">Example Results</span></h4>
+<p><a href=\"FastHVAC.Examples.Pipes\">Pipes</a></p>
 </html>",
-revisions="<html><ul>
-  <li>
-    <i>November 17, 2017&#160;</i> David Jansen:<br/>
-    Reduced pipe models to two versions and moved to development
-  </li>
-  <li>
-    <i>December 20, 2016&#160;</i> Tobias Blacha:<br/>
-    Moved into AixLib
-  </li>
-  <li>
-    <i>January 27, 2015</i> by Konstantin Finkbeiner:<br/>
-    Addapted to FastHVAC
-  </li>
-  <li>
-    <i>November 26, 2014&#160;</i> by Roozbeh Sangi:<br/>
-    Updated connectors to EBC Library 2.2, Updated documentation, Added example
-  </li>
-  <li>
-    <i>May 19, 2014&#160;</i> by Roozbeh Sangi:<br/>
-    Added to the HVAC library
-  </li>
-  <li>
-    <i>November 13, 2013&#160;</i> by Ole Odendahl:<br/>
-    Formatted documentation appropriately
-  </li>
-  <li>
-    <i>August 9, 2011</i> by Ana Constantin:<br/>
-    Introduced the possibility of neglecting the insulation wall
-  </li>
-  <li>
-    <i>April 11, 2011</i> by Ana Constantin:<br/>
-    Implemented
-  </li>
-</ul>
+revisions="<html>
+<ul>
+<li><i>November 17, 2017&nbsp; </i> David Jansen:<br />Reduced pipe models to two versions and moved to development</li>
+<li><i>December 20, 2016&nbsp; </i> Tobias Blacha:<br />Moved into AixLib</li>
+<li><i>January 27, 2015 </i> by Konstantin Finkbeiner:<br />Addapted to FastHVAC</li>
+<li><i>November 26, 2014&nbsp;</i> by Roozbeh Sangi:<br />Updated connectors to EBC Library 2.2, Updated documentation, Added example</li>
+<li><i>May 19, 2014&nbsp;</i> by Roozbeh Sangi:<br />Added to the HVAC library</li>
+<li><i>November 13, 2013&nbsp;</i> by Ole Odendahl:<br />Formatted documentation appropriately</li>
+<li><i>August 9, 2011</i> by Ana Constantin:<br />Introduced the possibility of neglecting the insulation wall</li>
+<li><i>April 11, 2011</i> by Ana Constantin:<br />Implemented</li>
+</ul>
 </html>"),
     experiment(
       StopTime=14000,

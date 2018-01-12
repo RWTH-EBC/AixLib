@@ -89,22 +89,16 @@ equation
           lineColor={0,0,255})}),
                              Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}})),
-    Documentation(info="<html><h4>
-  <span style=\"color:#008000\">Overview</span>
-</h4>
-<p>
-  Temperature sensor measures the absolute temperature.
-</p>
+    Documentation(info="<html>
+<h4><span style=\"color:#008000\">Overview</span></h4>
+<p> Temperature sensor measures the absolute temperature.</p>
 </html>",
-revisions="<html><ul>
-  <li>
-    <i>April 15, 2017&#160;</i> by Tobias Blacha:<br/>
-    Moved into AixLib
-  </li>
-  <li>
-    <i>December 16, 2014&#160;</i> by Konstantin Finkbeiner:<br/>
-    Implemented
-  </li>
-</ul>
+revisions="<html>
+<ul>
+<li><i>April 15, 2017&nbsp;</i> by Tobias Blacha:<br/>
+Moved into AixLib</li>
+<li><i>December 16, 2014&nbsp;</i> by Konstantin Finkbeiner:<br/>
+Implemented</li>
+</ul>
 </html> "));
 end TemperatureSensor;
