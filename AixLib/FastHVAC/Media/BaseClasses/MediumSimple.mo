@@ -7,11 +7,9 @@ parameter Modelica.SIunits.ThermalConductivity lambda
     "Thermal conductivity of considered medium";
 parameter Modelica.SIunits.DynamicViscosity eta
     "Dynamic viscosity of considered medium";
-  annotation (Documentation(info="<html>
-<p>
-This record declares parameters that are used by models within
-the FastHVAC Package.
-</p>
+  annotation (Documentation(info="<html><p>
+  This record declares parameters that are used by models within the FastHVAC Package.
+</p>
 </html>", revisions="<html>
 <ul>
 <li>

@@ -1,4 +1,4 @@
-﻿within AixLib.FastHVAC.Data.Boiler.DayNightMode;
+within AixLib.FastHVAC.Data.Boiler.DayNightMode;
 record HeatingCurvesVitotronicDay23Night10
   "Heating Curves for Vitotronic Controller, TsetDay = 23°C, TsetNight = 10°C "
   extends HeatingCurvesDayNightBaseDataDefinition(
@@ -17,28 +17,49 @@ record HeatingCurvesVitotronicDay23Night10
         5,15,16.5,18,19,20,20.5,21,22,23; 10,10,10,10,10,10,10,10,10,10; 15,10,
         10,10,10,10,10,10,10,10; 20,10,10,10,10,10,10,10,10,10]);
 
-  annotation (Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
-<p>Collection of Heating Curves for Viessmann Vitotronic Controller</p>
-<p><ul>
-<li>Set temperature day: 23&deg;C</li>
-<li>Set temperature night: 10&deg;C</li>
-</ul></p>
-<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
-<p><img src=\"modelica://HVAC/Images/stars5.png\"/></p>
-<p><h4><font color=\"#008000\">References</font></h4></p>
-<p>Record is used with <a href=\"HVAC.Components.HeatGenerators.Boiler.BoilerWithController\">HVAC.Components.HeatGenerators.Boiler.BoilerWithController</a></p>
-<p>Source:</p>
-<p><ul>
-<li>Product: Vitotronic 200</li>
-<li>Manufacturer: Viessmann</li>
-<li>Borschure: VITOTRONIC 200 - Heizungsanlage mit witterungsgefuehrter, digitaler Kessel- und Heizkreisregelung; 7/2002</li>
-<li>Bibtexkey: Viessmann2002</li>
-</ul></p>
+  annotation (Documentation(info="<html><h4>
+  <font color=\"green\">Overview</font>
+</h4>
+<p>
+  Collection of Heating Curves for Viessmann Vitotronic Controller
+</p>
+<ul>
+  <li>Set temperature day: 23°C
+  </li>
+  <li>Set temperature night: 10°C
+  </li>
+</ul>
+<h4>
+  <font color=\"green\">Level of Development</font>
+</h4>
+<p>
+  <img src=\"modelica://HVAC/Images/stars5.png\">
+</p>
+<h4>
+  <font color=\"green\">References</font>
+</h4>
+<p>
+  Record is used with <a href=\"HVAC.Components.HeatGenerators.Boiler.BoilerWithController\">HVAC.Components.HeatGenerators.Boiler.BoilerWithController</a>
+</p>
+<p>
+  Source:
+</p>
+<ul>
+  <li>Product: Vitotronic 200
+  </li>
+  <li>Manufacturer: Viessmann
+  </li>
+  <li>Borschure: VITOTRONIC 200 - Heizungsanlage mit witterungsgefuehrter, digitaler Kessel- und Heizkreisregelung; 7/2002
+  </li>
+  <li>Bibtexkey: Viessmann2002
+  </li>
+</ul>
 </html>",
-      revisions="<html>
-<p><ul>
-<li><i>July 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
-</ul></p>
+      revisions="<html><ul>
+  <li>
+    <i>July 2, 2013&#160;</i> by Ole Odendahl:<br/>
+    Added documentation and formatted appropriately
+  </li>
+</ul>
 </html>"));
 end HeatingCurvesVitotronicDay23Night10;

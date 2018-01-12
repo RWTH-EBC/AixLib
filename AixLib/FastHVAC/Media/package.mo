@@ -4,12 +4,9 @@ package Media
 
 
 
-annotation (preferredView="info", Documentation(info="<html>
-<p>
-This package contains media models for water and water mixtures.
-The media models in this package are mainly developed for the use with the FastHVAC
-library. The models are simpler then the oder media models in this library.
-</p>
+annotation (preferredView="info", Documentation(info="<html><p>
+  This package contains media models for water and water mixtures. The media models in this package are mainly developed for the use with the FastHVAC library. The models are simpler then the oder media models in this library.
+</p>
 </html>"),
 Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
         graphics={
