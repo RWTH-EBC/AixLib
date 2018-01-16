@@ -20,12 +20,6 @@ algorithm
   Documentation(info="<html>
 <h4>Description of the Switch Counter: </h4>
 <p> This model counts the number of times that the logical input <b>u</b> switches from 0 to 1 during the simulation time.</p><br/> 
-<b>Main Author: </b>
-<p>Nicolas Chang (ssi-nch) <\\p><br/>
-    E.ON Energy Research Center <br/>
-    Institute for Energy Efficient Buildings and Indoor Climate <br/>
-    D-52066 Aachen <br/>
-    e-mail: <a href=\"mailto:nicolas.chang@eonerc.rwth-aachen.de\">nicolas.chang@eonerc.rwth-aachen.de</a>
 </html>", revisions="<html>
 <ul>
 <li><i>November 28, 2016&nbsp; </i> Tobias Blacha:<br/>
