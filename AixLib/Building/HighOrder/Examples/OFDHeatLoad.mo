@@ -11,7 +11,7 @@ model OFDHeatLoad "Test environment to determine OFD's nominal heat load"
               annotation (Placement(transformation(extent={{-70,6},{-50,26}})));
   Modelica.Blocks.Sources.Constant constWind(k=0)
     annotation (Placement(transformation(extent={{-70,36},{-50,56}})));
-  Modelica.Blocks.Sources.Constant constAmb(k=271.15)
+  Modelica.Blocks.Sources.Constant constAmb(k=261.15)
     annotation (Placement(transformation(extent={{-70,70},{-50,90}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature groundTemp[5](T=fill(
         273.15 + 8.5, 5))
