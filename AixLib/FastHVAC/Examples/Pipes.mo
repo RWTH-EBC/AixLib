@@ -64,8 +64,6 @@ package Pipes
   equation
     connect(TFlow1.y, fluidSource1.T_fluid) annotation (Line(points={{-83.2,-65},
             {-74,-65},{-74,-81.8}}, color={0,0,127}));
-    connect(mFlow1.y, fluidSource1.m_flow) annotation (Line(points={{-83.3,-87},
-            {-75.65,-87},{-75.65,-88.6},{-74,-88.6}}, color={0,0,127}));
     connect(fixedTemperatureSurroundingAir2.port,
       PipeInsulationAndConvectionandRadiation.star) annotation (Line(points={{4,
             -68},{4,-80.8},{4.8,-80.8}}, color={191,0,0}));
@@ -74,8 +72,6 @@ package Pipes
         Line(points={{-16,-68},{-16,-80.8},{-12.8,-80.8}}, color={191,0,0}));
     connect(TFlow2.y, fluidSource2.T_fluid) annotation (Line(points={{-81.2,5},
             {-72,5},{-72,-13.8}}, color={0,0,127}));
-    connect(mFlow2.y, fluidSource2.m_flow) annotation (Line(points={{-81.3,-19},
-            {-83.65,-19},{-83.65,-20.6},{-72,-20.6}}, color={0,0,127}));
     connect(fixedTemperatureSurroundingAir5.port, PipeInsulationAndConvection.heatPort_outside)
       annotation (Line(points={{-16,-2},{-16,-12.8},{-14.8,-12.8}}, color={191,
             0,0}));
@@ -87,8 +83,6 @@ package Pipes
             0}));
     connect(TFlow3.y, fluidSource3.T_fluid) annotation (Line(points={{-81.2,69},
             {-81.2,59.5},{-72,59.5},{-72,50.2}}, color={0,0,127}));
-    connect(mFlow3.y, fluidSource3.m_flow) annotation (Line(points={{-81.3,45},
-            {-76.65,45},{-76.65,43.4},{-72,43.4}}, color={0,0,127}));
     connect(fluidSource3.enthalpyPort_b, PipeInsulation.enthalpyPort_a1)
       annotation (Line(points={{-54,47},{-36,47},{-36,42},{-15.8,42}}, color={
             176,0,0}));
@@ -102,6 +96,12 @@ package Pipes
     connect(PipeInsulationAndConvectionandRadiation.enthalpyPort_b1, vessel1.enthalpyPort_a)
       annotation (Line(points={{5.8,-86},{36,-86},{36,-84},{69,-84}}, color={
             176,0,0}));
+    connect(mFlow3.y, fluidSource3.dotm) annotation (Line(points={{-81.3,45},{
+            -77.65,45},{-77.65,43.4},{-72,43.4}}, color={0,0,127}));
+    connect(mFlow2.y, fluidSource2.dotm) annotation (Line(points={{-81.3,-19},{
+            -77.65,-19},{-77.65,-20.6},{-72,-20.6}}, color={0,0,127}));
+    connect(mFlow1.y, fluidSource1.dotm) annotation (Line(points={{-83.3,-87},{
+            -78.65,-87},{-78.65,-88.6},{-74,-88.6}}, color={0,0,127}));
     annotation (experiment(StopTime=5000), Diagram(graphics={
           Rectangle(
             extent={{-100,100},{100,-100}},
