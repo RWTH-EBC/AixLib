@@ -45,31 +45,54 @@ equation
 
     annotation (
     defaultComponentName="pump",
-    choicesAllMatching, Documentation(info="<html>
-
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>Model for an ideal pump.</p>
-
-
-<h4><span style=\"color:#008000\">Assumptions</span></h4>
-<p>Ideal pump</p>
-<h4><span style=\"color:#008000\">Concept</span></h4>
-<p>The input and output of the pump include respectively following values:</p>
+    choicesAllMatching, Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Model for an ideal pump.
+</p>
+<h4>
+  <span style=\"color:#008000\">Assumptions</span>
+</h4>
+<p>
+  Ideal pump
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  The input and output of the pump include respectively following
+  values:
+</p>
 <ul>
-<li>mass flow rate</li>
-<li>temperature</li>
-<li>specific enthalpy</li>
-<li>specific heat capacity</li>
+  <li>mass flow rate
+  </li>
+  <li>temperature
+  </li>
+  <li>specific enthalpy
+  </li>
+  <li>specific heat capacity
+  </li>
 </ul>
-<p>The pump uses the real input to set the mass flow rate. The specific heat capacity of the medium can be set as a parameter, default value is referred to the record SimpleMedium. The temperature and the specific enthalpy remain constant.</p>
-
-<h4><span style=\"color:#008000\">Example Results</span></h4>
-<p>Examples can be found in <a href=\"modelica:/FastHVAC.Examples.Pumps.TestPump\">FastHVAC.Examples.Pumps.TestPump </a></p>
+<p>
+  The pump uses the real input to set the mass flow rate. The specific
+  heat capacity of the medium can be set as a parameter, default value
+  is referred to the record SimpleMedium. The temperature and the
+  specific enthalpy remain constant.
+</p>
+<h4>
+  <span style=\"color:#008000\">Example Results</span>
+</h4>
+<p>
+  Examples can be found in <a href=
+  \"modelica:/FastHVAC.Examples.Pumps.TestPump\">FastHVAC.Examples.Pumps.TestPump</a>
+</p>
 </html>",
-    revisions="<html>
-<ul>
-<li><i>December 16, 2014&nbsp;</i> by Konstantin Finkbeiner:<br/>
-Implemented</li>
+    revisions="<html><ul>
+  <li>
+    <i>December 16, 2014&#160;</i> by Konstantin Finkbeiner:<br/>
+    Implemented
+  </li>
 </ul>
 </html> "),
     Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,

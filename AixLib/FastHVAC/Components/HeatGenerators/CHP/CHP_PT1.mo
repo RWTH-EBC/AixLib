@@ -329,25 +329,57 @@ equation
           thickness=1,
           smooth=Smooth.None,
           color={0,0,0})}),
-    Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p><br>Simple model for a electricity driven CHP. using record </p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars2.png\"/></p>
-<h4><span style=\"color:#008000\">Concept</span></h4>
-<p>There are two possibilities for parameterization. The first is based on records for CHP characteristics from the <a href=\"FastHVAC.Data.CHP.BaseDataDefinition\">FastHVAC.DataBase</a>.
-In this case the electrical and thermal efficiency of the CHP is a function of return temperature, water mass flow rate and electrical power.  </p>
-<p>The second possibility is to set the parameters manually (compare: Parameters-Unit properties). In this case the set values are constant.</p>
-<p> The electrical and thermal behavior of the CHP is represented by PT1 transfer function. 
-The control strategy is pretended from an external controller. There is an ON/OFF switch for the boiler and also a possibility to control the modulating operation, CHPs electrical capacity.
-Furthermore a switch counter is implemented.</p>
-<h4><span style=\"color:#008000\">Example Results</span></h4>
-<p><a href=\"FastHVAC.Examples.HeatGenerators.CHP.Examples.CHP\">CHP</a></p>
+    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  <br/>
+  Simple model for a electricity driven CHP. using record
+</p>
+<h4>
+  <span style=\"color:#008000\">Level of Development</span>
+</h4>
+<p>
+  <img src=\"modelica://HVAC/Images/stars2.png\" alt="" />
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  There are two possibilities for parameterization. The first is based
+  on records for CHP characteristics from the <a href=
+  \"FastHVAC.Data.CHP.BaseDataDefinition\">FastHVAC.DataBase</a>. In this
+  case the electrical and thermal efficiency of the CHP is a function
+  of return temperature, water mass flow rate and electrical power.
+</p>
+<p>
+  The second possibility is to set the parameters manually (compare:
+  Parameters-Unit properties). In this case the set values are
+  constant.
+</p>
+<p>
+  The electrical and thermal behavior of the CHP is represented by PT1
+  transfer function. The control strategy is pretended from an external
+  controller. There is an ON/OFF switch for the boiler and also a
+  possibility to control the modulating operation, CHPs electrical
+  capacity. Furthermore a switch counter is implemented.
+</p>
+<h4>
+  <span style=\"color:#008000\">Example Results</span>
+</h4>
+<p>
+  <a href=\"FastHVAC.Examples.HeatGenerators.CHP.Examples.CHP\">CHP</a>
+</p>
 </html>",
-  revisions="<html>
-<p><ul>
-<li><i>November 28, 2016&nbsp; </i> Tobias Blacha:<br/>Moved into AixLib</li>
-<li><i>February 09, 2015&nbsp; </i> Konstantin Finkbeiner:<br/>Implemented</li>
-</ul></p>
+  revisions="<html><ul>
+  <li>
+    <i>November 28, 2016&#160;</i> Tobias Blacha:<br/>
+    Moved into AixLib
+  </li>
+  <li>
+    <i>February 09, 2015&#160;</i> Konstantin Finkbeiner:<br/>
+    Implemented
+  </li>
+</ul>
 </html>"));
 end CHP_PT1;

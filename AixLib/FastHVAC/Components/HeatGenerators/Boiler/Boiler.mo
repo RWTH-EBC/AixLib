@@ -195,22 +195,52 @@ equation
           extent={{-152,-72},{148,-112}},
           textString="%name",
           lineColor={0,0,255})}),
-    Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>Boiler model without an internal controller.</p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars2.png\"/></p>
-<h4><span style=\"color:#008000\">Concept</span></h4>
-<p>The boilers parameterization is based on records from the <a href=\"DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition\">DataBase</a>  library. In the range of minimal and nominal heat power a modulating operation is possible.  </p>
-<p>The control strategy is pretended from an external controller. There is an ON/OFF switch for the boiler and also a possibility to control the modulating operation, boilers capacity.</p>
-<p>Both, actually and intigrated gas consumption can be taken from boilers outputs. </p>
-<h4><span style=\"color:#008000\">Example Results</span></h4>
-<p><a href=\"FastHVAC.Examples.HeatGenerators.Boiler.Boiler\">Boiler</a></p>
+    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Boiler model without an internal controller.
+</p>
+<h4>
+  <span style=\"color:#008000\">Level of Development</span>
+</h4>
+<p>
+  <img src=\"modelica://HVAC/Images/stars2.png\" alt="" />
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  The boilers parameterization is based on records from the <a href=
+  \"DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition\">DataBase</a>
+  library. In the range of minimal and nominal heat power a modulating
+  operation is possible.
+</p>
+<p>
+  The control strategy is pretended from an external controller. There
+  is an ON/OFF switch for the boiler and also a possibility to control
+  the modulating operation, boilers capacity.
+</p>
+<p>
+  Both, actually and intigrated gas consumption can be taken from
+  boilers outputs.
+</p>
+<h4>
+  <span style=\"color:#008000\">Example Results</span>
+</h4>
+<p>
+  <a href=\"FastHVAC.Examples.HeatGenerators.Boiler.Boiler\">Boiler</a>
+</p>
 </html>",
-  revisions="<html>
-<p><ul>
-<li><i>November 28, 2016&nbsp; </i> Tobias Blacha:<br/>Moved into AixLib</li>
-<li><i>February 09, 2015&nbsp; </i> Konstantin Finkbeiner:<br/>Implemented</li>
-</ul></p>
+  revisions="<html><ul>
+  <li>
+    <i>November 28, 2016&#160;</i> Tobias Blacha:<br/>
+    Moved into AixLib
+  </li>
+  <li>
+    <i>February 09, 2015&#160;</i> Konstantin Finkbeiner:<br/>
+    Implemented
+  </li>
+</ul>
 </html>"));
 end Boiler;
