@@ -3,9 +3,10 @@ partial model PartialBasisAirload
   replaceable package AirMedium = Modelica.Media.Air.SimpleAir constrainedby
     Modelica.Media.Interfaces.PartialMedium                                                                       "Medium in the room" annotation (choicesAllMatching = true);
   parameter Modelica.SIunits.Volume V = 48.0 "Volume of the room";
-  parameter Modelica.SIunits.Temperature T = 293.15 "Initial temperature of the room";
-  parameter Modelica.SIunits.Pressure p = 1e5 "Initial pressure of the room"
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+  parameter Modelica.SIunits.Temperature T = system.T_ambient "Initial temperature of the room";
+  parameter Modelica.SIunits.Pressure p = system.p_ambient "Initial pressure of the room";
+  inner Modelica.Fluid.System system;
+   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
   annotation (Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>

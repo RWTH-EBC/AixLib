@@ -6,13 +6,11 @@ model BasisAirloadconstTemp "constant temperature"
                                                                                                     annotation (Placement(transformation(extent={{-40,-110},{40,-90}})));
 
   Modelica.SIunits.Pressure pvar(start = p, fixed = true) "Current pressure of the room";
-
   Modelica.SIunits.Mass m "Mass of air";
 protected
   Modelica.SIunits.SpecificHeatCapacity cp_const;
   Modelica.SIunits.SpecificHeatCapacity cv_const;
   AirMedium.ThermodynamicState state = AirMedium.setState_pTX(pvar, T);
-
 initial equation
   cp_const = AirMedium.specificHeatCapacityCp(state);
   cv_const = AirMedium.specificHeatCapacityCv(state);
@@ -24,8 +22,8 @@ equation
   der(m) = ports.m_flow;
   ports.h_outflow = cp_const * T;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
-  annotation (Documentation(info = "<html>
+        coordinateSystem(preserveAspectRatio=false)),
+              Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>The <b>BasisAirloadconstTemp</b> model represents a room airload with a constant temperature, that has variable pressure and density conditions.</p>
  <h4><font color=\"#008000\">Concept</font></h4>

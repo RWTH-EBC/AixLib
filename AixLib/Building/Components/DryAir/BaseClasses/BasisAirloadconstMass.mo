@@ -17,8 +17,8 @@ equation
   der(cp_const)=0;
   d * V * cp_const * der(Tvar) = port.Q_flow;
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
-  annotation (Documentation(info = "<html>
+        coordinateSystem(preserveAspectRatio=false)),
+              Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>The <b>BasisAirloadconstMass</b> model represents a room airload with a constant mass, that has a specific heat capacity.</p>
  <h4><font color=\"#008000\">Concept</font></h4>
