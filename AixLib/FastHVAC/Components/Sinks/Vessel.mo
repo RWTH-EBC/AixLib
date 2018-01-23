@@ -20,20 +20,36 @@ model Vessel "Vessel model"
           extent={{-40,66},{84,-52}},
           textString="%name",
           lineColor={0,0,255})}),
-    Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p>Sink model vessel.</p>
-<h4><span style=\"color:#008000\">Concept</span></h4>
-<p>Sink model for in stream variables mass flow and specific enthalpy flow.</p>
-<h4><span style=\"color:#008000\">Example Results</span></h4>
-<p>Examples can be found in <a href=\"modelica:/FastHVAC.Examples.Sinks.TestSinks\">TestSinks </a></p>
+    Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Sink model vessel.
+</p>
+<h4>
+  <span style=\"color:#008000\">Concept</span>
+</h4>
+<p>
+  Sink model for in stream variables mass flow and specific enthalpy
+  flow.
+</p>
+<h4>
+  <span style=\"color:#008000\">Example Results</span>
+</h4>
+<p>
+  Examples can be found in <a href=
+  \"modelica:/FastHVAC.Examples.Sinks.TestSinks\">TestSinks</a>
+</p>
 </html>",
-  revisions="<html>
-<ul>
-<li><i>November 28, 2016&nbsp; </i> Tobias Blacha:<br/>
-Moved into AixLib</li>
-<li><i>December 16, 2014&nbsp; </i> Konstantin Finkbeiner:<br/>
-Implemented</li>
+  revisions="<html><ul>
+  <li>
+    <i>November 28, 2016&#160;</i> Tobias Blacha:<br/>
+    Moved into AixLib
+  </li>
+  <li>
+    <i>December 16, 2014&#160;</i> Konstantin Finkbeiner:<br/>
+    Implemented
+  </li>
 </ul>
 </html>"));
 end Vessel;
