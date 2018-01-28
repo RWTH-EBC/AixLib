@@ -13,7 +13,7 @@ partial model PartialEffectiveness
     "Minimum heat capacity flow rate";
   Modelica.SIunits.HeatFlowRate QMax_flow
     "Maximum heat flow rate into medium 1";
-protected
+public
   parameter Real delta=1E-3 "Parameter used for smoothing";
 
   parameter Modelica.SIunits.SpecificHeatCapacity cp1_default(fixed=false)

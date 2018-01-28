@@ -108,5 +108,33 @@ equation
           points={{60,2},{62,0},{68,6},{70,10},{66,8},{60,2}},
           lineColor={0,0,0},
           fillColor={0,0,0},
-          fillPattern=FillPattern.Solid)}));
+          fillPattern=FillPattern.Solid),
+        Text(
+          extent={{-100,150},{100,120}},
+          lineColor={28,108,200},
+          textString="%name"),
+        Line(
+          points={{0,-80},{34,-80}},
+          color={244,125,35},
+          thickness=0.5),
+        Line(
+          points={{34,-80},{34,50}},
+          color={244,125,35},
+          thickness=0.5),
+        Line(
+          points={{0,-80},{0,-100}},
+          color={244,125,35},
+          thickness=0.5),
+        Line(
+          points={{34,-50},{20,-50}},
+          color={244,125,35},
+          thickness=0.5),
+        Line(
+          points={{38,0},{20,0}},
+          color={244,125,35},
+          thickness=0.5),
+        Line(
+          points={{34,50},{20,50}},
+          color={244,125,35},
+          thickness=0.5)}));
 end ModularHeatExchangersSensors;

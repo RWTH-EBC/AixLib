@@ -143,10 +143,10 @@ equation
     m_flowInv = 0;
   end if;
 
-  if prescribedHeatFlowRate then
-    assert(noEvent( abs(Q_flow) < 200*cp_default*max(m_flow_small/1E3, abs(m_flow))),
-   "Energy may not be conserved for small mass flow rates. The implementation may require prescribedHeatFlowRate = false.");
-  end if;
+   if prescribedHeatFlowRate then
+     assert(noEvent( abs(Q_flow) < 200*cp_default*max(m_flow_small/1E3, abs(m_flow))),
+    "Energy may not be conserved for small mass flow rates. The implementation may require prescribedHeatFlowRate = false.");
+   end if;
 
   if allowFlowReversal then
     // Formulate hOut using spliceFunction. This avoids an event iteration.
