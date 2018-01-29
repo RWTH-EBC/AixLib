@@ -98,17 +98,16 @@ model Wall
             {13,4}})));
   Utilities.HeatTransfer.HeatConv_outside heatTransfer_Outside(A = wall_length * wall_height - clearance, Model = Model, surfaceType = surfaceType, alpha_custom = alpha_custom) if outside and heatflow annotation(Placement(transformation(extent = {{-47, 48}, {-27, 68}})));
   Utilities.Interfaces.Adaptors.HeatStarToComb heatStarToComb if heatflow annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 180, origin={69,11})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatBridgeHor(
-    port_b(each T(start=T0)),
-    port_a(each T(start=T0)),
-    G=psiHor*wall_length) if withHeatBridge and heatflow
-    annotation (Placement(transformation(extent={{0,82},{20,102}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatBridgeVer(
-    port_b(each T(start=T0)),
-    port_a(each T(start=T0)),
-    G=psiVer*wall_height) if withHeatBridge and heatflow
-    annotation (Placement(transformation(extent={{0,60},{20,80}})));
+    replaceable model HeatBridge =
+      AixLib.Building.Components.Walls.BaseClasses.HeatBridgeLinear
+    constrainedby
+    AixLib.Building.Components.Walls.BaseClasses.PartialHeatBridgeWalls
+    "Heat Bridge Model" annotation (choicesAllMatching=
+        true);
 
+      HeatBridge heatBridge(wallHeight=wall_height, wallLength=wall_length) if
+                               withHeatBridge and heatflow "Heat bridge model" annotation (Placement(transformation(extent={{0,48},{
+            20,68}},   rotation=0)));
     // massflow
   Ventilation.Aeration aeration(redeclare package Medium = Medium, q50=q50, DV_flowDp=DV_flowDp, V_flow_nom=V_flow_nom, wall_length=wall_length, wall_height=wall_height,
     withInfiltration=false,
@@ -196,14 +195,10 @@ equation
   end if;
 
   if withHeatBridge then
-  connect(port_outside, HeatBridgeHor.port_a) annotation (Line(points={{-100,10},
-            {-56,10},{-56,74},{-12,74},{-12,92},{0,92}},                                                                            color={191,0,0}));
-  connect(port_outside, HeatBridgeVer.port_a) annotation (Line(points={{-100,10},
-            {-56,10},{-56,70},{0,70}},                                                                   color={191,0,0}));
-  connect(HeatBridgeHor.port_b, heatStarToComb.therm) annotation (Line(points={{20,92},
-            {48,92},{48,5.9},{58.9,5.9}},                                                                              color={191,0,0}));
-  connect(HeatBridgeVer.port_b, heatStarToComb.therm) annotation (Line(points={{20,70},
-            {48,70},{48,5.9},{58.9,5.9}},                                                                              color={191,0,0}));
+  connect(heatBridge.port_b, heatStarToComb.therm) annotation (Line(points={{19.4,
+          58.6},{48,58.6},{48,5.9},{58.9,5.9}}, color={191,0,0}));
+  connect(heatBridge.port_a, port_outside) annotation (Line(points={{0.4,58.6},{
+          -18,58.6},{-18,30},{-56,30},{-56,10},{-100,10}}, color={191,0,0}));
   end if;
   end if;
 
@@ -227,6 +222,10 @@ equation
               {-80,-90},{-80,-70},{-99.5,-70}}, color={0,127,255}));
     end if;
   end if;
+  connect(heatBridge.port_b, heatStarToComb.therm) annotation (Line(points={{19.4,
+          58.6},{48,58.6},{48,5.9},{58.9,5.9}}, color={191,0,0}));
+  connect(heatBridge.port_a, port_outside) annotation (Line(points={{0.4,58.6},{
+          -18,58.6},{-18,30},{-56,30},{-56,10},{-100,10}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-20, -120}, {20, 120}}, grid = {1, 1}), graphics={  Rectangle(extent = {{-16, 120}, {15, -60}}, fillColor = {215, 215, 215},
             fillPattern = FillPattern.Backward,  pattern=LinePattern.None, lineColor = {0, 0, 0}), Rectangle(extent = {{-16, -90}, {15, -120}},  pattern=LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
             fillPattern = FillPattern.Backward), Rectangle(extent = {{-16, -51}, {15, -92}}, lineColor = {0, 0, 0},  pattern=LinePattern.None, fillColor = {215, 215, 215},
