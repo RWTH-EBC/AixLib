@@ -5,11 +5,14 @@ model IdealSinkHeatInput
     AixLib.Fluid.DistrictHeatingCooling.BaseClasses.Demands.NoReturn.PartialDemand(
     redeclare AixLib.Fluid.DistrictHeatingCooling.Demands.Substations.SubstationDirectThrough substation);
 
+  parameter Boolean isHeating = true
+    "Set to true for heating substation, false for cooling";
+
   parameter Modelica.SIunits.TemperatureDifference dTDesign(
     displayUnit="K")
     "Design temperature difference for the substation's heat exchanger";
 
-  Modelica.Blocks.Math.Gain changeSign(k=-1)
+  Modelica.Blocks.Math.Gain changeSign(k=if isHeating then -1 else 1)
     "Changes sign of prescribed flow for extraction from network" annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -59,6 +62,10 @@ rate to be extracted from the network into the ideal sink depending on the desig
 temperature difference over the heat exchanger of the substation. </p>
 </html>", revisions="<html>
 <ul>
+<li>
+January 29, 2018, by Marcus Fuchs:<br/>
+Add parameter <code>isHeating</code>.
+</li>
 <li>
 June 18, 2017, by Marcus Fuchs:<br/>
 First implementation for <a href=\"https://github.com/RWTH-EBC/AixLib/issues/403\">issue 403</a>).
