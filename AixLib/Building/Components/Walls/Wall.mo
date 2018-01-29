@@ -103,7 +103,7 @@ model Wall
     constrainedby
     AixLib.Building.Components.Walls.BaseClasses.PartialHeatBridgeWalls
     "Heat Bridge Model" annotation (choicesAllMatching=
-        true);
+        true,Dialog(tab = "Heat bridges", enable = withHeatBridge and heatflow));
 
       HeatBridge heatBridge(wallHeight=wall_height, wallLength=wall_length) if
                                withHeatBridge and heatflow "Heat bridge model" annotation (Placement(transformation(extent={{0,48},{
