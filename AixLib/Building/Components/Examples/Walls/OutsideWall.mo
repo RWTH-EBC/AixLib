@@ -1,9 +1,14 @@
 within AixLib.Building.Components.Examples.Walls;
 model OutsideWall
+  import AixLib;
   extends Modelica.Icons.Example;
   Components.Walls.Wall wall_simple(wall_length = 5, wall_height = 2, withWindow = true, WindowType = DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(), withSunblind = true,                                                          outside = true,
     WallType=AixLib.DataBase.Walls.WSchV1984.OW.OW_WSchV1984_S(),
     Model=2,
+    redeclare model HeatBridge =
+        AixLib.Building.Components.Walls.BaseClasses.HeatBridgeLinear,
+    redeclare package Medium = Modelica.Media.Air.SimpleAir,
+    withHeatBridge=false,
     T0=289.15)                                                                                                     annotation(Placement(transformation(extent = {{-6, 57}, {6, -57}}, rotation = 180, origin = {-30, 25})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature Tinside1(T = 293.15) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin = {-90, 44})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature Tinside2(T = 293.15) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin = {-90, 10})));
