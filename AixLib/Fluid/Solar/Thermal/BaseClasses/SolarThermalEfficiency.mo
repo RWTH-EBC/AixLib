@@ -1,4 +1,4 @@
-within AixLib.Fluid.Solar.Thermal.BaseClasses;
+﻿within AixLib.Fluid.Solar.Thermal.BaseClasses;
 model SolarThermalEfficiency
   "Calculates the efficiency of a solar thermal collector"
   import AixLib;
@@ -15,7 +15,11 @@ protected
     "Temperature difference between collector and air in K";
 equation
   dT = T_col - T_air;
-  eta = Collector.eta_zero - Collector.c1 * dT / G - Collector.c2 * dT * dT / G;
+  eta = max(0,
+    min(Collector.eta_zero,
+      Collector.eta_zero - Collector.c1 * dT / max(Modelica.Constants.eps, G) -
+      Collector.c2 * dT * dT / max(Modelica.Constants.eps, G)))
+    "eta must be between 0 and eta_zero optical efficiency";
   Q_flow = G * eta;
   annotation (Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
@@ -25,7 +29,16 @@ equation
  to the fluid circuit. We assume that the fluid temperature is equal to the
  collector temperature.</p>
  </html>", revisions="<html>
- <p>15.12.2016, Moritz Lauster: moved</p>
- <p>19.11.2013, Marcus Fuchs: implemented</p>
+<ul>
+ <li><i>February 1, 2018&nbsp;</i>
+    by Philipp Mehrfeld:<br/>
+    eta must be between 0 and eta_zero optical efficiency</li>
+ <li><i>December 15, 2016&nbsp;</i>
+    by Moritz Lauster:<br/>
+    moved</li>
+ <li><i>November 11, 2013&nbsp;</i>
+    by Marcus Fuchs:<br/>
+    implemented</li>
+</ul>
  </html>"));
 end SolarThermalEfficiency;
