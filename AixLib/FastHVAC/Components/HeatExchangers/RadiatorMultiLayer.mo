@@ -19,7 +19,7 @@ model RadiatorMultiLayer "Simple radiator multilayer model"
   parameter
     AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.RadiatorTypes.RadiatorType
     Type=(if selectable then
-      radiatorType.Type else BaseClasses.RadiatorTypes.PanelRadiator10)
+      radiatorType.Type else AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.RadiatorTypes.PanelRadiator10)
     "Type of radiator" annotation (choicesAllMatching=true, Dialog(
       tab="Geometry and Material",
       group="Geometry",

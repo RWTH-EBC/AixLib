@@ -15,9 +15,9 @@ model ML_thermal_delta "Multi layers of heat exchanger"
   parameter Modelica.SIunits.Mass m_radiator=20;
   parameter calcT.Temp calc_dT
     "Select calculation method of excess temperature";
-  parameter RadiatorTypes.RadiatorType Type=RadiatorTypes.PanelRadiator10
-    "Type of radiator" annotation (choicesAllMatching=true, Dialog(tab=
-          "Geometry and Material", group="Geometry"));
+  parameter AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.RadiatorTypes.RadiatorType
+  Type
+  "Type of radiator" annotation (choicesAllMatching=true, Dialog(tab="Geometry and Material", group="Geometry"));
   parameter Real n=1.3  annotation (Dialog(tab="Geometry and Material", group="Geometry"));
   parameter Modelica.SIunits.Density densitySteel=densitySteel
     "Specific density of steel, in kg/m3"
