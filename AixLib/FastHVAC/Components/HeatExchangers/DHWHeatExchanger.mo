@@ -143,12 +143,6 @@ equation
   instance this heat exchanger is used to warm domestic hot water.
 </p>
 <h4>
-  <span style=\"color:#008000\">Level of Development</span>
-</h4>
-<p>
-  <img src=\"modelica://HVAC/Images/stars3.png\" alt=\"\">
-</p>
-<h4>
   <span style=\"color:#008000\">Concept</span>
 </h4>
 <p>

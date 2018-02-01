@@ -24,9 +24,7 @@ protected
       ******************************************************************* */
 
 public
-  Radiator_ML                                   radiator(
-    selectable=true,
-    radiatorType=radiatorType)
+  RadiatorMultiLayer radiator(selectable=true, radiatorType=radiatorType)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Interfaces.EnthalpyPort_a enthalpyPort_a "Port for input heat medium flow"
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}}),
@@ -106,12 +104,6 @@ equation
   <li>This model emulates the behavour of n identical radiators.
   </li>
 </ul>
-<h4>
-  <span style=\"color:#008000\">Level of Development</span>
-</h4>
-<p>
-  <img src=\"modelica://HVAC/Images/stars3.png\" alt=\"\">
-</p>
 <h4>
   <span style=\"color:#008000\">Concept</span>
 </h4>

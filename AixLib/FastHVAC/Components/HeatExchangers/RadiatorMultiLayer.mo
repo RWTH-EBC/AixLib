@@ -1,8 +1,8 @@
 within AixLib.FastHVAC.Components.HeatExchangers;
-model Radiator_ML "Simple radiator multilayer model"
+model RadiatorMultiLayer "Simple radiator multilayer model"
   import Modelica.SIunits;
   import calcT =
-    AixLib.FastHVAC.Components.HeatExchangers.BaseClasses.Calc_Excess_Temp;
+    AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp;
 
   parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple medium= AixLib.FastHVAC.Media.WaterSimple()
     "Standard charastics for water (heat capacity, density, thermal conductivity)"
@@ -16,8 +16,10 @@ model Radiator_ML "Simple radiator multilayer model"
   parameter AixLib.DataBase.Radiators.RadiatorBaseDataDefinition radiatorType
     "Choose a radiator" annotation (Dialog(group="Radiator Data", enable=
           selectable), choicesAllMatching=true);
-  parameter BaseClasses.RadiatorTypes.RadiatorType Type=(if selectable then
-      radiatorType.Type else AixLib.FastHVAC.Components.HeatExchangers.BaseClasses.RadiatorTypes.PanelRadiator10)
+  parameter
+    AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.RadiatorTypes.RadiatorType
+    Type=(if selectable then
+      radiatorType.Type else BaseClasses.RadiatorTypes.PanelRadiator10)
     "Type of radiator" annotation (choicesAllMatching=true, Dialog(
       tab="Geometry and Material",
       group="Geometry",
@@ -61,11 +63,15 @@ model Radiator_ML "Simple radiator multilayer model"
   parameter SIunits.Temperature T0=Modelica.SIunits.Conversions.from_degC(20)
     "Initial temperature, in degrees Celsius"
     annotation (Dialog(group="Miscellaneous"));
-  parameter SIunits.Temperature rT_nom[3]=(if selectable then Modelica.SIunits.Conversions.from_degC(radiatorType.RT_nom) else Modelica.SIunits.Conversions.from_degC({75,65,20}))
-    "Nominal temperatures (Tin, Tout, Tair) according to DIN-EN 442."
-     annotation (Dialog(group="Miscellaneous",enable=not selectable));
+  parameter SIunits.Temperature RT_nom[3]=
+    (if selectable then Modelica.SIunits.Conversions.from_degC(radiatorType.RT_nom)
+    else Modelica.SIunits.Conversions.from_degC({75,65,20}))
+    "Nominal temperatures (TIn, TOut, TAir) according to DIN-EN 442."
+    annotation (Dialog(group="Miscellaneous",enable=not selectable));
   parameter Integer N=16 "Number of discretisation layers";
-  parameter calcT.Temp calc_dT=calcT.exp;
+  parameter AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp.Temp
+    calc_dT=calcT.exp
+    "Select calculation method";
   /* *********Select calculation method**********************************/
 //
 // protected
@@ -87,9 +93,9 @@ protected
   parameter SIunits.Length d2=2*((vol_water+vol_steel)/Modelica.Constants.pi/length)^0.5
     "outer diameter of single layer";
 
-  parameter Modelica.SIunits.TemperatureDifference dT_V_nom=rT_nom[1]-rT_nom[3]
+  parameter Modelica.SIunits.TemperatureDifference dT_V_nom=RT_nom[1]-RT_nom[3]
     "Temperature difference between the nominal temperatures Tin and Tair";
-  parameter Modelica.SIunits.TemperatureDifference dT_R_nom=rT_nom[2]-rT_nom[3]
+  parameter Modelica.SIunits.TemperatureDifference dT_R_nom=RT_nom[2]-RT_nom[3]
     "Temperature difference between the nominal temperatures Tout and Tair";
 
   /* *********Calculation of convective excess temperature, according to the chosen calculation method**********************************/
@@ -99,7 +105,7 @@ protected
     "Convective excess temperature";
 
   /* *********Calculation of nominal radiation excess temperature**********************************/
-  parameter SIunits.Temperature delta_nom=(dT_nom+rT_nom[3])*(dT_nom+rT_nom[3])*(dT_nom+rT_nom[3])*(dT_nom+rT_nom[3])-rT_nom[3]*rT_nom[3]*rT_nom[3]*rT_nom[3]
+  parameter SIunits.Temperature delta_nom=(dT_nom+RT_nom[3])*(dT_nom+RT_nom[3])*(dT_nom+RT_nom[3])*(dT_nom+RT_nom[3])-RT_nom[3]*RT_nom[3]*RT_nom[3]*RT_nom[3]
     "Nominal radiation excess temperature";
   parameter SIunits.Power dotQ_nomLayer= length * nominalPower/N
     "Nominal heat flow";
@@ -181,8 +187,7 @@ equation
       color={176,0,0},
       smooth=Smooth.None),
               Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}),
-                      graphics), Icon(coordinateSystem(preserveAspectRatio=false,
+            -100},{100,100}})),  Icon(coordinateSystem(preserveAspectRatio=false,
                    extent={{-100,-100},{100,100}}), graphics={
         Polygon(
           points={{14,-60},{54,-75},{14,-90},{14,-60}},
@@ -253,8 +258,6 @@ equation
               Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>The Radiator model represents a heating device. This model also includes the conduction through the radiator wall. </p>
-<h4><span style=\"color:#008000\">Level of Development</span></h4>
-<p><img src=\"modelica://HVAC/Images/stars3.png\"/></p>
 <h4><span style=\"color:#008000\">Concept</span></h4>
 <p>The Radiator model represents a heating device. Heat energy taken from the hot water flow through the device is being emitted via convective and radiative energy transport connectors. The ratio of convective and radiative energy flows depends on the type of the heating device (see table). </p>
 <p>T_source output is relevant for exergy analysis. It describes the&nbsp;logarithmic&nbsp;mean&nbsp;temperature&nbsp;is&nbsp;calculated&nbsp;from&nbsp;the&nbsp;temperatures&nbsp;at&nbsp;in-&nbsp;and&nbsp;outlet&nbsp;of&nbsp;the&nbsp;radiator.</p>
@@ -324,17 +327,31 @@ equation
 <td><p>- no radiative transport -</p></td>
 </tr>
 </table>
-<p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>The total heat emission consists of a convective and a radiative part. </p>
+<p><br/>The Height H of the radiator is discretized in N single Layers, as shown
+in Figure 1 </p>
+<p><br/><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Schichtenmodell.png\" alt=\"Multilayer Model of radiator \"/></p>
+<p>Figure 1: Multilayer Model of radiator </p>
+<p>For every layer the equation (1) is solved. </p>
+<table summary=\"equation for multilayer\" cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
+<td><p><br/><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/DGL_HK.png\" alt=\"Equation for every layer\"/> </p></td>
+<td><p><br/>(1) </p></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</table>
+<p>The total heat emission consists of a convective and a radiative part. </p>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
-<td><p><img src=\"../Images/Q_ab.png\"/> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Q_ab.png\"/> </p></td>
 <td><p><br>(2) </p></td>
 </tr>
 <tr>
-<td><p><img src=\"../Images/Q_K1.png\"/> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Q_K1.png\"/> </p></td>
 <td><p><br>(3) </p></td>
 </tr>
 <tr>
-<td><p><img src=\"../Images/Q_R1.png\"/> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Q_R1.png\"/> </p></td>
 <td><p><br>(4) </p></td>
 </tr>
 <tr>
@@ -342,13 +359,14 @@ equation
 <td></td>
 </tr>
 </table>
-<p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>The convective heat emission is proportional to <img src=\"../Images/deltaT.png\"/>&nbsp;. The radiative heat emission is proportional to <img src=\"../Images/delta.png\"/>&nbsp;=(T_L + DeltaT)^4-TR^4 (T_L: Room Temperature, DeltaT: heater excess temperature, T_R: radiative temperature). </p>
+<p>The convective heat emission is proportional to <img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/deltaT.png\"/>&nbsp;.</p>
+<p>The radiative heat emission is proportional to <img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/delta.png\"/>&nbsp;=(T_L + DeltaT)^4-TR^4 (T_L: Room Temperature, DeltaT: heater excess temperature, T_R: radiative temperature). </p>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
-<td><p><img src=\"../Images/Q_K.png\"/> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Q_K.png\"/> </p></td>
 <td><p><br>(5) </p></td>
 </tr>
 <tr>
-<td><p><img src=\"../Images/Q_R.png\"/> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Q_R.png\"/> </p></td>
 <td><p><br>(6) </p></td>
 </tr>
 <tr>
@@ -356,25 +374,25 @@ equation
 <td></td>
 </tr>
 </table>
-<p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>The heat emission of the radiator depends on the heater excess temperature. In the model it is possible to choose between: </p>
+<p>The heat emission of the radiator depends on the heater excess temperature. In the model it is possible to choose between: </p>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
 <td><h4>Method </h4></td>
 <td><h4>Formula </h4></td>
 <td></td>
 </tr>
 <tr>
-<td><p><br><br><br><br><br><br><br><br><br><br><br>arithmetic heater excess temperature </p></td>
-<td><p><img src=\"../Images/Delta_T_ari.png\"/> </p></td>
+<td><p>arithmetic heater excess temperature </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Delta_T_ari.png\"/> </p></td>
 <td><p><br>(7) </p></td>
 </tr>
 <tr>
 <td><p>logarithmic heater excess temperature </p></td>
-<td><p><img src=\"../Images/Delta_T_log.png\"/> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Delta_T_log.png\"/> </p></td>
 <td><p><br>(8) </p></td>
 </tr>
 <tr>
 <td><p>exponential heater excess temperature according to [2] </p></td>
-<td><p><img src=\"../Images/Delta_T_exp.png\"/> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/Delta_T_exp.png\"/> </p></td>
 <td><p><br>(9) </p></td>
 </tr>
 <tr>
@@ -383,14 +401,14 @@ equation
 <td></td>
 </tr>
 </table>
-<p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>Due to stability reasons and accuracy at small heating medium flow, an exponential calculation of the heater excess temperture is recommended. The function &QUOT;calcHeaterExcessTemp &QUOT; regularize the discontinuities in equation (9). </p>
+<p>Due to stability reasons and accuracy at small heating medium flow, an exponential calculation of the heater excess temperture is recommended. The function &QUOT;calcHeaterExcessTemp &QUOT; regularize the discontinuities in equation (9). </p>
 <p>The radiator exponent according to DIN 442 is valid for the total heat emission. the radiative heat emission part grows larger. This is considered by the following formulas: </p>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
-<td><p><img src=\"../Images/n_K1.png\"/> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/n_K1.png\"/> </p></td>
 <td><p><br>(10) </p></td>
 </tr>
 <tr>
-<td><p><img src=\"../Images/n_K2.png\"/> </p></td>
+<td><p><img src=\"modelica://AixLib/Resources/Images//Fluid/HeatExchanger/Radiator/n_K2.png\"/> </p></td>
 <td><p><br>(11) </p></td>
 </tr>
 <tr>
@@ -398,7 +416,7 @@ equation
 <td></td>
 </tr>
 </table>
-<p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>The modified convective exponent is calculated by (11). The region of discontinuity in eq. (11) has not yet been regulized, so a constant radiator exponent is used for now. </p>
+<p>The modified convective exponent is calculated by (11). The region of discontinuity in eq. (11) has not yet been regulized, so a constant radiator exponent is used for now. </p>
 <p>In the model the heat emission is calculated according to eq. (5), (6) for every layer and the respective power is connected to the romm via the thermal ports. A varHeatSource (inPort=total heat emission) is connected via a thermal port to the enthalpie flow of the heating medium and the stored heat in the radiator mass. </p>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
 
@@ -417,6 +435,7 @@ equation
 </html>",
 revisions="<html>
 <ul>
+<li><i>February, 2 2018&nbsp; </i> David Jansen:<br/>Formatted documentation</li>
 <li><i>April 13, 2017&nbsp; </i> Tobias Blacha:<br/>Moved into AixLib</li>
 <li><i>January 12, 2015&nbsp;</i> by Konstantin Finkbeiner:<br>Addapted to FastHVAC.</li>
 <li><i>November 28, 2014&nbsp;</i> by Roozbeh Sangi:<br>Output for logarithmic mean temperature added</li>
@@ -429,4 +448,4 @@ revisions="<html>
       Interval=30,
       Algorithm="Lsodar"),
     experimentSetupOutput);
-end Radiator_ML;
+end RadiatorMultiLayer;

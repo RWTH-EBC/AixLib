@@ -2,7 +2,7 @@ within AixLib.FastHVAC.Components.HeatExchangers.BaseClasses;
 model ML_thermal_delta "Multi layers of heat exchanger"
 
   import calcT =
-    AixLib.FastHVAC.Components.HeatExchangers.BaseClasses.Calc_Excess_Temp;
+    AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp;
 
   /* *******************************************************************
      Parameters
