@@ -1,4 +1,4 @@
-within AixLib.FastHVAC.Components.HeatExchanger.BaseClasses;
+within AixLib.FastHVAC.Components.HeatExchangers.BaseClasses;
 function calcHeatingApplianceExponent
   input Real delta_T;
   input Real dT_nom;

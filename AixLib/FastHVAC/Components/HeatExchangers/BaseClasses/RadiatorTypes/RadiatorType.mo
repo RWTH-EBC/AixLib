@@ -1,4 +1,4 @@
-within AixLib.FastHVAC.Components.HeatExchanger.BaseClasses.RadiatorTypes;
+within AixLib.FastHVAC.Components.HeatExchangers.BaseClasses.RadiatorTypes;
 type RadiatorType = Real[2] annotation (choices(
     choice=HVAC.Components.HeatExchanger.BaseClasses.RadiatorTypes.SectionalRadiator
       "Simple (vertical) sectional radiator",

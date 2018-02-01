@@ -1,8 +1,8 @@
-within AixLib.FastHVAC.Components.HeatExchanger;
+within AixLib.FastHVAC.Components.HeatExchangers;
 model Radiator_ML "Simple radiator multilayer model"
   import Modelica.SIunits;
   import calcT =
-    AixLib.FastHVAC.Components.HeatExchanger.BaseClasses.Calc_Excess_Temp;
+    AixLib.FastHVAC.Components.HeatExchangers.BaseClasses.Calc_Excess_Temp;
 
   parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple medium= AixLib.FastHVAC.Media.WaterSimple()
     "Standard charastics for water (heat capacity, density, thermal conductivity)"
@@ -16,9 +16,8 @@ model Radiator_ML "Simple radiator multilayer model"
   parameter AixLib.DataBase.Radiators.RadiatorBaseDataDefinition radiatorType
     "Choose a radiator" annotation (Dialog(group="Radiator Data", enable=
           selectable), choicesAllMatching=true);
-  parameter
-    FastHVAC.Components.HeatExchanger.BaseClasses.RadiatorTypes.RadiatorType Type=(if
-      selectable then radiatorType.Type else AixLib.FastHVAC.Components.HeatExchanger.BaseClasses.RadiatorTypes.PanelRadiator10)
+  parameter BaseClasses.RadiatorTypes.RadiatorType Type=(if selectable then
+      radiatorType.Type else AixLib.FastHVAC.Components.HeatExchangers.BaseClasses.RadiatorTypes.PanelRadiator10)
     "Type of radiator" annotation (choicesAllMatching=true, Dialog(
       tab="Geometry and Material",
       group="Geometry",
@@ -66,8 +65,7 @@ model Radiator_ML "Simple radiator multilayer model"
     "Nominal temperatures (Tin, Tout, Tair) according to DIN-EN 442."
      annotation (Dialog(group="Miscellaneous",enable=not selectable));
   parameter Integer N=16 "Number of discretisation layers";
-  parameter FastHVAC.Components.HeatExchanger.BaseClasses.Calc_Excess_Temp.Temp
-                                                                        calc_dT=calcT.exp;
+  parameter calcT.Temp calc_dT=calcT.exp;
   /* *********Select calculation method**********************************/
 //
 // protected

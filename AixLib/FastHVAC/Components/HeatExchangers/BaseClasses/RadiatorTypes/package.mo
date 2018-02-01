@@ -1,4 +1,4 @@
-within AixLib.FastHVAC.Components.HeatExchanger.BaseClasses;
+within AixLib.FastHVAC.Components.HeatExchangers.BaseClasses;
 package RadiatorTypes 
 extends Modelica.Icons.Package;
   // constants: ratio of radiative power as a fraction of total heat emission (taken from DIN EN 442-2, 2003),

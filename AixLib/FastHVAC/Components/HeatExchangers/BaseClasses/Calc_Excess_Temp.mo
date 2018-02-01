@@ -1,4 +1,4 @@
-within AixLib.FastHVAC.Components.HeatExchanger.BaseClasses;
+within AixLib.FastHVAC.Components.HeatExchangers.BaseClasses;
 class Calc_Excess_Temp
   "different choices of calculating the excess temperature of the radiator"
 

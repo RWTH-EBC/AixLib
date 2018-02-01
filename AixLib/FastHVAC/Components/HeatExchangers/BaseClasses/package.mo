@@ -1,4 +1,4 @@
-within AixLib.FastHVAC.Components.HeatExchanger;
+within AixLib.FastHVAC.Components.HeatExchangers;
 package BaseClasses 
 
 

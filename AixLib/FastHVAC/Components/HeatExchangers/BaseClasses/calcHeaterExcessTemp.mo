@@ -1,4 +1,4 @@
-within AixLib.FastHVAC.Components.HeatExchanger.BaseClasses;
+within AixLib.FastHVAC.Components.HeatExchangers.BaseClasses;
 function calcHeaterExcessTemp
   input Real dT_V;
   input Real dT_R;
