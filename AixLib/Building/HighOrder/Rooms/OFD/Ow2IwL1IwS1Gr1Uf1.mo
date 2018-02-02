@@ -1,4 +1,4 @@
-within AixLib.Building.HighOrder.Rooms.OFD;
+﻿within AixLib.Building.HighOrder.Rooms.OFD;
 model Ow2IwL1IwS1Gr1Uf1
   "2 outer walls, 1 inner wall load, 1 inner wall simple, 1 floor towards ground, 1 ceiling towards upper floor"
   import AixLib;
@@ -368,7 +368,7 @@ protected
     annotation (Dialog(tab="Types"));
   // Floor to ground type
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_FL=
-   if withFloorHeating==true then AixLib.DataBase.Walls.Dummys.FloorForFloorHeating4()
+   if withFloorHeating==true then AixLib.DataBase.Walls.Dummys.FloorForFloorHeating4Layers()
   else if TIR == 1
        then AixLib.DataBase.Walls.EnEV2009.Floor.FLground_EnEV2009_SML() else
       if TIR == 2 then
@@ -378,7 +378,7 @@ protected
     annotation (Dialog(tab="Types"));
   // Ceiling to upper floor type
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_CE=
-  if withFloorHeating==true then AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating()
+  if withFloorHeating==true then AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers()
   else if TIR == 1
        then if TMC == 1 or TMC == 2 then
       AixLib.DataBase.Walls.EnEV2009.Ceiling.CEpartition_EnEV2009_SM_loHalf()

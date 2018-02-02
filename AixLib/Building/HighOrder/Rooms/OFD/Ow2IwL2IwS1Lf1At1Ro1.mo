@@ -1,4 +1,4 @@
-within AixLib.Building.HighOrder.Rooms.OFD;
+﻿within AixLib.Building.HighOrder.Rooms.OFD;
 model Ow2IwL2IwS1Lf1At1Ro1
   "2 outer walls, 2 inner walls load, 1 inner wall simple, 1 floor towards lower floor, 1 ceiling towards attic, 1 roof towards outside"
   import AixLib;
@@ -390,7 +390,7 @@ protected
     annotation (Dialog(tab="Types"));
   // Floor to lower floor type
   parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_FL=
-  if withFloorHeating==true then AixLib.DataBase.Walls.Dummys.FloorForFloorHeating2()
+  if withFloorHeating==true then AixLib.DataBase.Walls.Dummys.FloorForFloorHeating2Layers()
   else if TIR == 1
        then if TMC == 1 or TMC == 2 then
       AixLib.DataBase.Walls.EnEV2009.Floor.FLpartition_EnEV2009_SM_upHalf()
