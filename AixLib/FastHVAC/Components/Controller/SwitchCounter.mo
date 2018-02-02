@@ -1,4 +1,4 @@
-﻿within AixLib.FastHVAC.Components.Controller;
+within AixLib.FastHVAC.Components.Controller;
 model SwitchCounter "Counts the number of switching events"
 
   Integer n_switch(start=0) "number of switching events";

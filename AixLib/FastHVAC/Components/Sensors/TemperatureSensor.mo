@@ -94,10 +94,14 @@ equation
 </h4>
 <p>
   Temperature sensor measures the absolute temperature.
-  </p>
-  <h4><span style=\"color:#008000\">Example Results</span></h4>
-<p><a href=\"AixLib.FastHVAC.Examples.Sensors.SensorVerification\">SensorVerification</a></p>
-
+</p>
+<h4>
+  <span style=\"color:#008000\">Example Results</span>
+</h4>
+<p>
+  <a href=
+  \"AixLib.FastHVAC.Examples.Sensors.SensorVerification\">SensorVerification</a>
+</p>
 </html>",
 revisions="<html><ul>
   <li>

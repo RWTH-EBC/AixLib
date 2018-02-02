@@ -58,10 +58,14 @@ equation
 </h4>
 <p>
   Mass flow sensor measures the mass flow rate.
-  </p>
-    <h4><span style=\"color:#008000\">Example Results</span></h4>
-<p><a href=\"AixLib.FastHVAC.Examples.Sensors.SensorVerification\">SensorVerification</a></p>
-
+</p>
+<h4>
+  <span style=\"color:#008000\">Example Results</span>
+</h4>
+<p>
+  <a href=
+  \"AixLib.FastHVAC.Examples.Sensors.SensorVerification\">SensorVerification</a>
+</p>
 </html>",
 revisions="<html><ul>
   <li>

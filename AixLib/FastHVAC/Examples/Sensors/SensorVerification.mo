@@ -118,15 +118,19 @@ equation
           fillColor={213,170,255},
           fillPattern=FillPattern.Solid,
           textString="HVAC")}),
-          Documentation(info="<html>
-<p><h4><span style=\"color:#008000\">Overview</span></h4></p>
-<p> Example of mass flow & temperature sensor. Compare to equivalent Fluid-/HVAC- based models. </p>
-
-<p><ul>
+          Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Example of mass flow & temperature sensor. Compare to equivalent
+  Fluid-/HVAC- based models.
+</p>
 </html>",
-revisions="<html>
-<ul>
-<li><i>December 16, 2014&nbsp;</i> by Konstantin Finkbeiner:<br/>Implemented</li>
-</ul></p>
+revisions="<html><ul>
+  <li>
+    <i>December 16, 2014&#160;</i> by Konstantin Finkbeiner:<br/>
+    Implemented
+  </li>
+</ul>
 </html> "));
 end SensorVerification;

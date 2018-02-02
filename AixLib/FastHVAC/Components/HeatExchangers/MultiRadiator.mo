@@ -1,4 +1,4 @@
-﻿within AixLib.FastHVAC.Components.HeatExchangers;
+within AixLib.FastHVAC.Components.HeatExchangers;
 model MultiRadiator "Simple multi radiator model"
 
   /* *******************************************************************
@@ -130,9 +130,14 @@ equation
   This method reduces the number of state variables and therefore the
   simulation time.
 </p>
-  <h4><span style=\"color:#008000\">Example Results</span></h4>
-<p><a href=\"AixLib.FastHVAC.Examples.HeatExchangers.MultiRadiator.ValidationMultiRadiator\">ValidationMultiRadiator</a></p>
-
+<h4>
+  <span style=\"color:#008000\">Example Results</span>
+</h4>
+<p>
+  <a href=
+  \"AixLib.FastHVAC.Examples.HeatExchangers.MultiRadiator.ValidationMultiRadiator\">
+  ValidationMultiRadiator</a>
+</p>
 </html>",
 revisions="<html><ul>
   <li>

@@ -1,4 +1,4 @@
-﻿within AixLib.FastHVAC.Components.Valves;
+within AixLib.FastHVAC.Components.Valves;
 model Splitter
 
   /* *******************************************************************
