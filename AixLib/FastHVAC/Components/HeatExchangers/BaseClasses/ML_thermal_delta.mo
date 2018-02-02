@@ -313,11 +313,5 @@ dT_R=Tout - Tair;
   Model of the multi layers of heat exchanger. From the water flow is
   the convective and radiative heat output calculated.
 </p>
-<h4>
-  <font color=\"#008000\">Level of Development</font>
-</h4>
-<p>
-  <img src=\"modelica://HVAC/Images/stars2.png\" alt=\"\" />
-</p>l l l l l l l l l l l l l l
 </html>"));
 end ML_thermal_delta;
