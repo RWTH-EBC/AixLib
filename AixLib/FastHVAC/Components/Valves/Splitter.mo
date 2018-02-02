@@ -20,7 +20,7 @@ model Splitter
 equation
   for
   k in 1:n loop
- enthalpyPort_b[k].m_flow = -enthalpyPort_a.m_flow/n;
+ enthalpyPort_b[k].m_flow = enthalpyPort_a.m_flow/n;
  enthalpyPort_b[k].T = enthalpyPort_a.T;
  enthalpyPort_b[k].h = enthalpyPort_a.h;
  enthalpyPort_b[k].c = enthalpyPort_a.c;
