@@ -24,7 +24,7 @@ record Boiler_Virtual_1kW "Boiler virtual 1kW"
   <font color=\"#008000\">Level of Development</font>
 </h4>
 <p>
-  <img src=\"modelica://HVAC/Images/stars3.png\" alt="" />
+  <img src=\"modelica://HVAC/Images/stars3.png\" alt=\"\" />
 </p>
 </html>"));
 end Boiler_Virtual_1kW;

@@ -19,7 +19,7 @@ record Boiler_Vitodens300W_13kW
   <font color=\"#008000\">Level of Development</font>
 </h4>
 <p>
-  <img src=\"modelica://HVAC/Images/stars5.png\" alt="" />
+  <img src=\"modelica://HVAC/Images/stars5.png\" alt=\"\" />
 </p>
 <h4>
   <font color=\"#008000\">References</font>

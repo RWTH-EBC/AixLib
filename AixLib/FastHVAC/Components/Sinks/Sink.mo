@@ -265,7 +265,7 @@ equation
 </h4>
 <p>
   Examples can be found in <a href=
-  \"modelica:/FastHVAC.Examples.Sinks.TestSinks\">TestSinks</a>
+  \"modelica:/AixLib.FastHVAC.Examples.Sinks.SinkSourceVesselTest\">SinkSourceVesselTest</a>
 </p>
 </html>",
   revisions="<html><ul>
