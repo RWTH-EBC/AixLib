@@ -1,18 +1,18 @@
-within AixLib.Fluid.HeatExchangers.ActiveWalls.BaseClasses;
+﻿within AixLib.Fluid.HeatExchangers.ActiveWalls.BaseClasses;
 model PH_Segment
 
 extends Modelica.Fluid.Interfaces.PartialTwoPort;
 
 parameter Boolean Floor = true;
 
-parameter Modelica.SIunits.Area A = 10 "Area of Floor part";
+parameter Modelica.SIunits.Area A "Area of Floor part";
 
 parameter Modelica.SIunits.Emissivity eps=0.95 "Emissivity";
 
 parameter Modelica.SIunits.Temperature T0=Modelica.SIunits.Conversions.from_degC(20)
     "Initial temperature, in degrees Celsius";
 
-parameter Modelica.SIunits.Volume Watervolume = 0.02 "Volume of Water in m^3";
+parameter Modelica.SIunits.Volume Watervolume = "Volume of Water in m^3";
 
 parameter Modelica.SIunits.CoefficientOfHeatTransfer k_top;
 parameter Modelica.SIunits.CoefficientOfHeatTransfer k_down;
@@ -46,7 +46,7 @@ parameter HeatCapacityPerArea C_down;
         rotation=90,
         origin={-30,74})));
   Utilities.HeatTransfer.HeatConv_inside            HeatConv(
-    A=A)                                       annotation (Placement(
+    A=A, surfaceOrientation = if Floor then 2 else 1)                 annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
