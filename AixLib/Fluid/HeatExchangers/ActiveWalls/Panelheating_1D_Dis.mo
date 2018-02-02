@@ -14,6 +14,23 @@ model Panelheating_1D_Dis
 
   parameter Integer Dis(min=1) = 5 "Number of Discreatisation Layers";
 
+  parameter Integer calcMethodConvection = 1
+    "Calculation Method for convection at surface"
+    annotation (Dialog(group = "Heat convection",
+        descriptionLabel=true), choices(
+        choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
+        choice=2 "By Bernd Glueck",
+        choice=3 "Constant alpha",
+        radioButtons=true));
+
+
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer convCoeffCustom = 2.5
+    "Constant heat transfer coefficient"
+    annotation (Dialog(group = "Heat convection",
+    descriptionLabel=true,
+        enable=if calcMethodConvection == 3 then true else false));
+
+
   final parameter Modelica.SIunits.Emissivity eps=Floorheatingtype.eps
     "Emissivity";
 
@@ -28,7 +45,7 @@ model Panelheating_1D_Dis
   final parameter BaseClasses.HeatCapacityPerArea
     C_down=C_Floorheating * (1-c_top_ratio);
 
-  parameter Modelica.SIunits.Area A=10 "Area of Floor part";
+  parameter Modelica.SIunits.Area A "Area of floor / heating panel part";
 
   parameter Modelica.SIunits.Temperature T0=Modelica.SIunits.Conversions.from_degC(20)
     "Initial temperature, in degrees Celsius";
@@ -78,7 +95,8 @@ BaseClasses.PH_Segment
     each C_top=C_top,
     each C_down=C_down,
     each Floor=Floor,
-    HeatConv(calcMethod=1, alpha_custom=2))
+    each final calcMethodConvection = calcMethodConvection,
+    each final convCoeffCustom = convCoeffCustom)
   annotation (Placement(transformation(extent={{-58,1},{-8,51}})));
 public
   BaseClasses.PressureDropPH

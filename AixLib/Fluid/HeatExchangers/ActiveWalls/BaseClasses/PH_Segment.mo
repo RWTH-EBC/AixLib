@@ -12,13 +12,28 @@ parameter Modelica.SIunits.Emissivity eps=0.95 "Emissivity";
 parameter Modelica.SIunits.Temperature T0=Modelica.SIunits.Conversions.from_degC(20)
     "Initial temperature, in degrees Celsius";
 
-parameter Modelica.SIunits.Volume Watervolume = "Volume of Water in m^3";
+parameter Modelica.SIunits.Volume Watervolume "Volume of Water in m^3";
 
 parameter Modelica.SIunits.CoefficientOfHeatTransfer k_top;
 parameter Modelica.SIunits.CoefficientOfHeatTransfer k_down;
 
 parameter HeatCapacityPerArea C_top;
 parameter HeatCapacityPerArea C_down;
+
+  parameter Integer calcMethodConvection = 1
+    "Calculation Method for convection at surface"
+    annotation (Dialog(group = "Heat convection",
+        descriptionLabel=true), choices(
+        choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
+        choice=2 "By Bernd Glueck",
+        choice=3 "Constant alpha",
+        radioButtons=true));
+
+  parameter Modelica.SIunits.CoefficientOfHeatTransfer convCoeffCustom = 2.5
+    "Constant heat transfer coefficient"
+    annotation (Dialog(group = "Heat convection",
+    descriptionLabel=true,
+        enable=if calcMethodConvection == 3 then true else false));
 
   Modelica.Fluid.Vessels.ClosedVolume Volume(
     redeclare package Medium = Medium,
@@ -45,8 +60,11 @@ parameter HeatCapacityPerArea C_down;
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-30,74})));
-  Utilities.HeatTransfer.HeatConv_inside            HeatConv(
-    A=A, surfaceOrientation = if Floor then 2 else 1)                 annotation (Placement(
+  Utilities.HeatTransfer.HeatConv_inside HeatConv(
+    final A = A,
+    final calcMethod = calcMethodConvection,
+    final alpha_custom = convCoeffCustom,
+    surfaceOrientation = if Floor then 2 else 1)                 annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,

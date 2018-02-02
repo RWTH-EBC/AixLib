@@ -1,28 +1,31 @@
-within AixLib.Fluid.HeatExchangers.Examples.ActiveWalls;
+﻿within AixLib.Fluid.HeatExchangers.Examples.ActiveWalls;
 model ActiveWalls_Test
   extends Modelica.Icons.Example;
       replaceable package Medium =
       Modelica.Media.Water.ConstantPropertyLiquidWater "Medium in the system"                annotation(choicesAllMatching = true);
+
+  parameter Modelica.SIunits.Area panelHeatingArea = 10 "Area of heating panels";
+
   HeatExchangers.ActiveWalls.Contributor contributor(redeclare package Medium =
         Medium)
     annotation (Placement(transformation(extent={{-44,-20},{36,20}})));
   HeatExchangers.ActiveWalls.Panelheating_1D_Dis panelheating_1D_Dis1(
-      redeclare package Medium = Medium)
+      redeclare package Medium = Medium, A=panelHeatingArea)
     annotation (Placement(transformation(extent={{56,64},{84,76}})));
   HeatExchangers.ActiveWalls.Panelheating_1D_Dis panelheating_1D_Dis2(
-      redeclare package Medium = Medium)
+      redeclare package Medium = Medium, A=panelHeatingArea)
     annotation (Placement(transformation(extent={{56,34},{84,46}})));
   HeatExchangers.ActiveWalls.Panelheating_1D_Dis panelheating_1D_Dis3(
-      redeclare package Medium = Medium)
+      redeclare package Medium = Medium, A=panelHeatingArea)
     annotation (Placement(transformation(extent={{56,6},{84,18}})));
   HeatExchangers.ActiveWalls.Panelheating_1D_Dis panelheating_1D_Dis4(
-      redeclare package Medium = Medium)
+      redeclare package Medium = Medium, A=panelHeatingArea)
     annotation (Placement(transformation(extent={{56,-22},{84,-10}})));
   HeatExchangers.ActiveWalls.Panelheating_1D_Dis panelheating_1D_Dis5(
-      redeclare package Medium = Medium)
+      redeclare package Medium = Medium, A=panelHeatingArea)
     annotation (Placement(transformation(extent={{56,-52},{84,-40}})));
   HeatExchangers.ActiveWalls.Panelheating_1D_Dis panelheating_1D_Dis6(
-      redeclare package Medium = Medium)
+      redeclare package Medium = Medium, A=panelHeatingArea)
     annotation (Placement(transformation(extent={{56,-80},{84,-68}})));
   Modelica.Fluid.Sources.MassFlowSource_T boundary(
     nPorts=1,
