@@ -430,8 +430,9 @@ in Figure 1 </p>
 <li>[2] Nadler,Norbert: Die W&auml;rmeleistung von Raumheizk&ouml;rpern in expliziter Darstellung, In: HLH L&uuml;ftung/Klima - Heizung/Sanit&auml;r - Geb&auml;udetechnik 11, S.621 - 624, 1991 </li>
 <li>[3] Tritschler, Markus: Bewertung der Genauigkeit von Heizkostenverteilern, Dissertation, Uni Stuttart, 1999 </li>
 </ul>
-<h4><span style=\"color:#008000\">Example Results</span></h4>
-<p><a href=\"FastHVAC.Examples.HeatExchanger.Radiator_ML.Radiator\">FastHVAC.Examples.HeatExchanger.Radiator_ML.Radiator</a></p>
+</p>
+  <h4><span style=\"color:#008000\">Example Results</span></h4>
+<p><a href=\"AixLib.FastHVAC.Examples.HeatExchangers.RadiatorMultiLayer.ValidationRadiator\">ValidationRadiator</a></p>
 </html>",
 revisions="<html>
 <ul>

@@ -72,7 +72,7 @@ equation
 </h4>
 <p>
   Examples can be found in <a href=
-  \"modelica:/FastHVAC.Examples.Pumps.TestFluidSource\">FastHVAC.Examples.Pumps.TestFluidSource</a>
+  \"modelica:/AixLib.FastHVAC.Examples.Pumps.FluidSource\">FluidSource</a>
 </p>
 </html>",
 revisions="<html><ul>

@@ -1,5 +1,5 @@
 within AixLib.FastHVAC.Examples.Sensors;
-model MassflowAndTemperatureVerification
+model SensorVerification
   extends Modelica.Icons.Example;
 
   Components.Sensors.MassFlowSensor massFlowFastHVAC
@@ -129,4 +129,4 @@ revisions="<html>
 <li><i>December 16, 2014&nbsp;</i> by Konstantin Finkbeiner:<br/>Implemented</li>
 </ul></p>
 </html> "));
-end MassflowAndTemperatureVerification;
+end SensorVerification;

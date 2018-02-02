@@ -154,14 +154,8 @@ equation
   \"modelica:/Modelica.Thermal.HeatTransfer.Components.HeatCapacitor\">HeatCapacitor</a>.
 </p>The heat exchanger is discretized in n single layers (min. 3
 layers) towards the flow direction at the heater side.
-<h4>
-  <span style=\"color:#008000\">Example Results</span>
-</h4>
-<p>
-  Examples can be found in <a href=
-  \"modelica:/FastHVAC.Examples.HeatExchanger.DHWHeatExchanger.TestDHWHeatexchanger\">
-  TestDHWHeatexchanger</a>
-</p>
+  <h4><span style=\"color:#008000\">Example Results</span></h4>
+<p><a href=\"AixLib.FastHVAC.Examples.HeatExchangers.DHWHeatExchanger.DHWHeatExchanger\">DHWHeatExchanger</a></p>
 </html>",
     revisions="<html><ul>
   <li>

@@ -1,5 +1,5 @@
 within AixLib.FastHVAC.Examples.HeatExchangers.DHWHeatExchanger;
-model DHWHeatexchanger
+model DHWHeatExchanger
 extends Modelica.Icons.Example;
   Components.HeatGenerators.Boiler.Boiler     boilerBase
     annotation (Placement(transformation(extent={{-72,-30},{-46,-4}})));
@@ -118,4 +118,4 @@ temperature of the fluid. "),
           textString="....")}),
     experiment(StopTime=10000, Interval=60),
     __Dymola_experimentSetupOutput);
-end DHWHeatexchanger;
+end DHWHeatExchanger;
