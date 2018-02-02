@@ -42,10 +42,12 @@ model Panelheating_1D_Dis
 
   // According to equations 7.91 (for heat flow up) and 7.93 (for heat flow down) from page 41
 
-  final parameter Modelica.SIunits.Temperature T_Floor_nom= if Floor then (Floorheatingtype.q_dot_nom/8.92)^(1/1.1) + Floorheatingtype.Temp_nom[3] else Floorheatingtype.q_dot_nom/6.7 + Floorheatingtype.Temp_nom[3];
+  final parameter Modelica.SIunits.Temperature T_Floor_nom= if Floor then
+    (Floorheatingtype.q_dot_nom/8.92)^(1/1.1) + Floorheatingtype.Temp_nom[3]
+    else Floorheatingtype.q_dot_nom/6.7 + Floorheatingtype.Temp_nom[3];
 
-  final parameter Modelica.SIunits.TemperatureDifference nomDT=BaseClasses.logDT(
-                                                                     {Floorheatingtype.Temp_nom[
+  final parameter Modelica.SIunits.TemperatureDifference nomDT=
+    BaseClasses.logDT({Floorheatingtype.Temp_nom[
       1],Floorheatingtype.Temp_nom[2],T_Floor_nom});
 
   final parameter Modelica.SIunits.CoefficientOfHeatTransfer
