@@ -1,13 +1,9 @@
-within AixLib.Fluid.HeatExchangers.ActiveWalls;
+﻿within AixLib.Fluid.HeatExchangers.ActiveWalls;
 model Panelheating_1D_Dis
 
   extends Modelica.Fluid.Interfaces.PartialTwoPort;
 
-//  parameter DataBase.ActiveWalls.ActiveWallBaseDataDefinition Floorheatingtype=
-//      DataBase.ActiveWalls.JocoKlimaBodenTOP2000_Parkett()
-//    annotation (Dialog(group="Type"), choicesAllMatching=true);
-
-     parameter sim_models.PanelRecords.ActiveWallBaseDataDefinition2 Floorheatingtype=
+     parameter AixLib.DataBase.ActiveWalls.ActiveWallBaseDataDefinition Floorheatingtype=
       DataBase.ActiveWalls.JocoKlimaBodenTOP2000_Parkett()
     annotation (Dialog(group="Type"), choicesAllMatching=true);
 
