@@ -1,0 +1,14 @@
+PartialHeatTransferLayers
+HeatTransferDirectedHeatTransfer
+QBuoyFunction
+buoyancyDitribution
+HeatTransferQbuoy
+HeatTransferQbuoyTimer
+QBuoyFunctions
+HeatTransferOnlyConduction
+HeatTransferLambdaSimple
+HeatTransferLambdaEff
+HeatTransferLambdaEffSmooth
+HeatTransferLambdaEffTanh
+HeatTransferBuoyancyWetter
+HeatingCoil

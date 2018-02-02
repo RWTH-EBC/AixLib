@@ -1,4 +1,4 @@
-﻿within AixLib.FastHVAC.Components.HeatExchangers;
+within AixLib.FastHVAC.Components.HeatExchangers;
 model RadiatorMultiLayer "Simple radiator multilayer model"
   import Modelica.SIunits;
   import calcT =
@@ -276,7 +276,8 @@ equation
   T_source output is relevant for exergy analysis. It describes
   the&#160;logarithmic&#160;mean&#160;temperature&#160;is&#160;calculated&#160;from&#160;the&#160;temperatures&#160;at&#160;in-&#160;and&#160;outlet&#160;of&#160;the&#160;radiator.
 </p>
-<table summary=\"equation for multilayer\" cellspacing=\"0\" cellpadding=\"2\" border=\"1\"> 
+<table summary=\"equation for multilayer\" cellspacing=\"0\" cellpadding=
+\"2\" border=\"1\">
   <tr>
     <td>
       <h4>
