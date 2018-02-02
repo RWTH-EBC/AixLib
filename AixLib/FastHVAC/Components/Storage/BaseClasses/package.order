@@ -9,6 +9,5 @@ HeatTransferOnlyConduction
 HeatTransferLambdaSimple
 HeatTransferLambdaEff
 HeatTransferLambdaEffSmooth
-HeatTransferLambdaEffTanh
 HeatTransferBuoyancyWetter
 HeatingCoil
