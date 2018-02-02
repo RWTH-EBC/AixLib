@@ -317,7 +317,7 @@ dT_R=Tout - Tair;
   <font color=\"#008000\">Level of Development</font>
 </h4>
 <p>
-  <img src=\"modelica://HVAC/Images/stars2.png\" alt=\"\">
-</p>l l l l l l l l l l l
+  <img src=\"modelica://HVAC/Images/stars2.png\" alt=\"\" />
+</p>l l l l l l l l l l l l
 </html>"));
 end ML_thermal_delta;
