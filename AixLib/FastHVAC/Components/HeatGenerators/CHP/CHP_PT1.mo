@@ -337,12 +337,6 @@ equation
   Simple model for a electricity driven CHP. using record
 </p>
 <h4>
-  <span style=\"color:#008000\">Level of Development</span>
-</h4>
-<p>
-  <img src=\"modelica://HVAC/Images/stars2.png\" alt="" />
-</p>
-<h4>
   <span style=\"color:#008000\">Concept</span>
 </h4>
 <p>
@@ -368,7 +362,7 @@ equation
   <span style=\"color:#008000\">Example Results</span>
 </h4>
 <p>
-  <a href=\"FastHVAC.Examples.HeatGenerators.CHP.Examples.CHP\">CHP</a>
+  <a href=\"FastHVAC.Examples.HeatGenerators.CHP.CHP\">CHP</a>
 </p>
 </html>",
   revisions="<html><ul>

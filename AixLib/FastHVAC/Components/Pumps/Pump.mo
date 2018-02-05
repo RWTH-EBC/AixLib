@@ -85,7 +85,7 @@ equation
 </h4>
 <p>
   Examples can be found in <a href=
-  \"modelica:/FastHVAC.Examples.Pumps.TestPump\">FastHVAC.Examples.Pumps.TestPump</a>
+  \"modelica:/AixLib.FastHVAC.Examples.Pumps.Pump\">Pump</a>
 </p>
 </html>",
     revisions="<html><ul>

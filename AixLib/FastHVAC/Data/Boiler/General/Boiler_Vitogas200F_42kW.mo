@@ -22,7 +22,7 @@ record Boiler_Vitogas200F_42kW "Gas-fired boiler Viessmann Vitogas200-F 42kW"
   <font color=\"#008000\">Level of Development</font>
 </h4>
 <p>
-  <img src=\"modelica://HVAC/Images/stars5.png\" alt="" />
+  <img src=\"modelica://HVAC/Images/stars5.png\" alt=\"\" />
 </p>
 <h4>
   <font color=\"#008000\">References</font>
