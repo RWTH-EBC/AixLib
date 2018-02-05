@@ -13,7 +13,7 @@ model BrighteningCoefficient "Test model for brightening coeffcients"
   AixLib.BoundaryConditions.SolarIrradiation.BaseClasses.SkyBrightness
     skyBri annotation (Placement(transformation(extent={{40,-40},{60,-20}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=
-        "modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
+        Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
     annotation (Placement(transformation(extent={{-90,60},{-70,80}})));
   AixLib.BoundaryConditions.WeatherData.Bus weaBus annotation (Placement(
         transformation(extent={{-60,60},{-40,80}}),
