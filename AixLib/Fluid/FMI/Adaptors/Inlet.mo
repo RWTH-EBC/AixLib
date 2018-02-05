@@ -151,15 +151,15 @@ equation
 <p>
 Model that is used to connect an input signal to a fluid port.
 The model needs to be used in conjunction with an instance of
-<a href=\"modelica://AixLib.Fluid.FMI.OutletAdaptor\">
-AixLib.Fluid.FMI.OutletAdaptor</a> in order for
+<a href=\"modelica://AixLib.Fluid.FMI.Adaptors.Outlet\">
+AixLib.Fluid.FMI.Adaptors.Outlet</a> in order for
 fluid mass flow rate and pressure to be properly assigned to
 the acausal fluid models.
 </p>
 <p>
 See
-<a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.PartialTwoPortComponent\">
-AixLib.Fluid.FMI.ExportContainers.PartialTwoPortComponent</a>
+<a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.PartialTwoPort\">
+AixLib.Fluid.FMI.ExportContainers.PartialTwoPort</a>
 or
 <a href=\"modelica://AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.ResistanceVolume\">
 AixLib.Fluid.FMI.ExportContainers.Examples.FMUs.ResistanceVolume</a>
