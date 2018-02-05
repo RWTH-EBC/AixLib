@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HeatExchangers.ActiveWalls.BaseClasses;
+within AixLib.Fluid.HeatExchangers.ActiveWalls.BaseClasses;
 model PH_Segment
 
 extends Modelica.Fluid.Interfaces.PartialTwoPort;

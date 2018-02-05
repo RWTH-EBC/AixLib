@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HeatExchangers.ActiveWalls;
+within AixLib.Fluid.HeatExchangers.ActiveWalls;
 model Panelheating_1D_Dis
 
   extends Modelica.Fluid.Interfaces.PartialTwoPort;
