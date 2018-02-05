@@ -2,6 +2,7 @@ CylindricHeatConduction
 CylindricHeatTransfer
 CylindricLoad
 HeatConv
+HeatConvPipeInside
 HeatConv_inside
 HeatConv_outside
 HeatToStar

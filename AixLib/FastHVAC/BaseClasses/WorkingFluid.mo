@@ -52,23 +52,24 @@ equation
           fillPattern=FillPattern.Sphere,
           fillColor={0,0,255},
           textString="workingFluid")}),
-    Documentation(info="<html>
-<p>WorkingFluid is based on the models
-<code>FastHVAC.BaseClasses.EnergyBalance</code>
-and 
-<a href=\"modelica:/Modelica.Thermal.HeatTransfer.Components.HeatCapacitor\">HeatCapacitor</a>.<br/>
-The heat transfer through the heatPort is ideal. It is used for FastHVAC fluid energy
-balances.</p>
+    Documentation(info="<html><p>
+  WorkingFluid is based on the models
+  <code>FastHVAC.BaseClasses.EnergyBalance</code> and <a href=
+  \"modelica:/Modelica.Thermal.HeatTransfer.Components.HeatCapacitor\">HeatCapacitor</a>.<br/>
+
+  The heat transfer through the heatPort is ideal. It is used for
+  FastHVAC fluid energy balances.
+</p>
 </html>", revisions="<html>
 <ul>
-<li>
-<i> April 25, 2017</i>, by Michael Mans:<br/>
-Moved to AixLib
-</li>
-<li>
-<i>February 16, 2015&nbsp;</i> by Konstantin Finkbeiner:<br/>
-Implemented
-</li>
+  <li>
+    <i>April 25, 2017</i>, by Michael Mans:<br/>
+    Moved to AixLib
+  </li>
+  <li>
+    <i>February 16, 2015&#160;</i> by Konstantin Finkbeiner:<br/>
+    Implemented
+  </li>
 </ul>
 </html> "));
 end WorkingFluid;
