@@ -9,11 +9,17 @@ model PanelHeating
     annotation (Dialog(group="Type"), choicesAllMatching=true);
 
   parameter Boolean isFloor =  true "Floor or Ceiling heating"
-    annotation(Dialog(compact = true, descriptionLabel = true), choices(choice=true
-        "Floorheating",                                                                             choice = false
-        "Ceilingheating",                                                                                                  radioButtons = true));
+    annotation(Dialog(compact = true, descriptionLabel = true), choices(
+      choice = true "Floorheating",
+      choice = false "Ceilingheating",
+      radioButtons = true));
 
   parameter Integer dis(min=1) = 5 "Number of Discreatisation Layers";
+
+  parameter Modelica.SIunits.Area A "Area of floor / heating panel part";
+
+  parameter Modelica.SIunits.Temperature T0=Modelica.SIunits.Conversions.from_degC(20)
+    "Initial temperature, in degrees Celsius";
 
   parameter Integer calcMethodConvection = 1
     "Calculation Method for convection at surface"
@@ -30,125 +36,114 @@ model PanelHeating
     descriptionLabel=true,
         enable=if calcMethodConvection == 3 then true else false));
 
-  final parameter Modelica.SIunits.Emissivity eps=Floorheatingtype.eps
+  final parameter Modelica.SIunits.Emissivity eps=floorHeatingType.eps
     "Emissivity";
 
-  final parameter Real c_top_ratio(min=0,max=1)= Floorheatingtype.c_top_ratio;
-
- final parameter BaseClasses.HeatCapacityPerArea
-    C_Floorheating=Floorheatingtype.C_ActivatedElement;
-
- final parameter BaseClasses.HeatCapacityPerArea
-    C_top=C_Floorheating * c_top_ratio;
+  final parameter Real cTopRatio(min=0,max=1)= floorHeatingType.c_top_ratio;
 
   final parameter BaseClasses.HeatCapacityPerArea
-    C_down=C_Floorheating * (1-c_top_ratio);
+    cFloorHeating=floorHeatingType.C_ActivatedElement;
 
-  parameter Modelica.SIunits.Area A "Area of floor / heating panel part";
+  final parameter BaseClasses.HeatCapacityPerArea
+    cTop=cFloorHeating * cTopRatio;
 
-  parameter Modelica.SIunits.Temperature T0=Modelica.SIunits.Conversions.from_degC(20)
-    "Initial temperature, in degrees Celsius";
+  final parameter BaseClasses.HeatCapacityPerArea
+    cDown=cFloorHeating * (1-cTopRatio);
 
-  final parameter Modelica.SIunits.Length Tubelength=A/Floorheatingtype.Spacing;
+  final parameter Modelica.SIunits.Length tubeLength=A/floorHeatingType.Spacing;
 
-  final parameter Modelica.SIunits.Volume Watervolume=Modelica.SIunits.Conversions.from_litre(Floorheatingtype.VolumeWaterPerMeter*Tubelength)
-    "Volume of Water in m^3";
+  final parameter Modelica.SIunits.Volume VWater=
+    Modelica.SIunits.Conversions.from_litre(floorHeatingType.VolumeWaterPerMeter*tubeLength)
+      "Volume of Water";
 
   // ACCORDING TO GLUECK, Bauteilaktivierung 1999
 
   // According to equations 7.91 (for heat flow up) and 7.93 (for heat flow down) from page 41
-//   final parameter Modelica.SIunits.Temperature T_Floor_nom= if Floor then
-//     (Floorheatingtype.q_dot_nom/8.92)^(1/1.1) + Floorheatingtype.Temp_nom[3]
-//     else Floorheatingtype.q_dot_nom/6.7 + Floorheatingtype.Temp_nom[3];
+  //   final parameter Modelica.SIunits.Temperature T_Floor_nom= if Floor then
+  //     (floorHeatingType.q_dot_nom/8.92)^(1/1.1) + floorHeatingType.Temp_nom[3]
+  //     else floorHeatingType.q_dot_nom/6.7 + floorHeatingType.Temp_nom[3];
 
   final parameter Modelica.SIunits.CoefficientOfHeatTransfer
-    k_nom_top=Floorheatingtype.k_top;
+    kTop_nominal=floorHeatingType.k_top;
 
   final parameter Modelica.SIunits.CoefficientOfHeatTransfer
-    k_nom_down = Floorheatingtype.k_down;
+    kDown_nominal = floorHeatingType.k_down;
 
-Modelica.Fluid.Sensors.TemperatureTwoPort t_flow(redeclare package Medium =
-      Medium)
-  annotation (Placement(transformation(extent={{-70,-40},{-50,-20}})));
-Modelica.Fluid.Sensors.TemperatureTwoPort t_return(redeclare package Medium =
-      Medium)
-  annotation (Placement(transformation(extent={{60,-36},{80,-16}})));
+  Modelica.Fluid.Sensors.TemperatureTwoPort TFlow(redeclare package Medium =
+        Medium)
+    annotation (Placement(transformation(extent={{-70,-40},{-50,-20}})));
+  Modelica.Fluid.Sensors.TemperatureTwoPort TReturn(redeclare package Medium =
+        Medium)
+    annotation (Placement(transformation(extent={{60,-36},{80,-16}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermDown annotation (
       Placement(transformation(extent={{-10,-72},{10,-52}}),
         iconTransformation(extent={{-2,-38},{18,-18}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a ThermTop annotation (
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermConv annotation (
       Placement(transformation(extent={{4,48},{24,68}}), iconTransformation(
           extent={{4,30},{24,50}})));
-  AixLib.Utilities.Interfaces.Star StarTop annotation (Placement(transformation(
-          extent={{-26,50},{-6,70}}), iconTransformation(extent={{-22,28},{-2,
-            48}})));
-BaseClasses.PH_Segment
-    fH_Segment[Dis](
+  AixLib.Utilities.Interfaces.Star starRad annotation (Placement(transformation(
+          extent={{-26,50},{-6,70}}), iconTransformation(extent={{-22,28},{-2,48}})));
+  BaseClasses.PanelHeatingSegment panelHeatingSegment[dis](
     redeclare package Medium = Medium,
-    each A=A/Dis,
-    each eps=eps,
-    each T0=T0,
-    each Watervolume=Watervolume/Dis,
-    each k_top=k_nom_top,
-    each k_down=k_nom_down,
-    each C_top=C_top,
-    each C_down=C_down,
-    each Floor=Floor,
-    each final calcMethodConvection = calcMethodConvection,
-    each final convCoeffCustom = convCoeffCustom)
-  annotation (Placement(transformation(extent={{-58,1},{-8,51}})));
-public
-  BaseClasses.PressureDropPH
-    pressureDrop(
+    each final A=A/dis,
+    each final eps=eps,
+    each final T0=T0,
+    each final VWater=VWater/dis,
+    each final kTop=kTop_nominal,
+    each final kDown=kDown_nominal,
+    each final cTop=cTop,
+    each final cDown=cDown,
+    each final isFloor=isFloor,
+    each final calcMethodConvection=calcMethodConvection,
+    each final convCoeffCustom=convCoeffCustom)
+    annotation (Placement(transformation(extent={{-58,1},{-8,51}})));
+
+  BaseClasses.PressureDropPH pressureDrop(
     redeclare package Medium = Medium,
-    Tubelength=Tubelength,
-    n=Floorheatingtype.PressureDropExponent,
-    m=Floorheatingtype.PressureDropCoefficient)
+    final tubeLength=tubeLength,
+    final n=floorHeatingType.PressureDropExponent,
+    final m=floorHeatingType.PressureDropCoefficient)
   annotation (Placement(transformation(extent={{8,0},{54,52}})));
 equation
 
   // HEAT CONNECTIONS
-  for
-  i in 1:Dis loop
-  connect(fH_Segment[i].ThermDown, ThermDown);
-  connect(fH_Segment[i].ThermTop, ThermTop);
-  connect(fH_Segment[i].StarTop, StarTop);
+  for i in 1:dis loop
+    connect(panelHeatingSegment[i].thermConvWall, ThermDown);
+    connect(panelHeatingSegment[i].thermConvRoom, thermConv);
+    connect(panelHeatingSegment[i].starRad, starRad);
   end for;
 
   // FLOW CONNECTIONS
 
   //OUTER CONNECTIONS
 
-  connect(t_flow.port_b, fH_Segment[1].port_a);
-  connect(pressureDrop.port_a, fH_Segment[Dis].port_b);
+  connect(TFlow.port_b, panelHeatingSegment[1].port_a);
+  connect(pressureDrop.port_a, panelHeatingSegment[dis].port_b);
 
   //INNER CONNECTIONS
 
-  if Dis > 1 then
-
- for i in 1:(Dis-1) loop
-  connect(fH_Segment[i].port_b, fH_Segment[i+1].port_a);
- end for;
-
+  if dis > 1 then
+    for i in 1:(dis-1) loop
+      connect(panelHeatingSegment[i].port_b, panelHeatingSegment[i + 1].port_a);
+    end for;
   end if;
 
-connect(port_a, t_flow.port_a) annotation (Line(
-    points={{-100,0},{-88,0},{-88,-30},{-70,-30}},
-    color={0,127,255},
-    smooth=Smooth.None));
+  connect(port_a, TFlow.port_a) annotation (Line(
+      points={{-100,0},{-88,0},{-88,-30},{-70,-30}},
+      color={0,127,255},
+      smooth=Smooth.None));
 
-connect(t_return.port_b, port_b) annotation (Line(
-    points={{80,-26},{84,-26},{84,0},{100,0}},
-    color={0,127,255},
-    smooth=Smooth.None));
-  connect(pressureDrop.port_b, t_return.port_a)           annotation (Line(
-    points={{54,26},{60,26},{60,-26}},
-    color={0,127,255},
-    smooth=Smooth.None));
+  connect(TReturn.port_b, port_b) annotation (Line(
+      points={{80,-26},{84,-26},{84,0},{100,0}},
+      color={0,127,255},
+      smooth=Smooth.None));
+  connect(pressureDrop.port_b, TReturn.port_a) annotation (Line(
+      points={{54,26},{60,26},{60,-26}},
+      color={0,127,255},
+      smooth=Smooth.None));
 
 annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,
-            -60},{100,60}}),
-                    graphics), Icon(coordinateSystem(preserveAspectRatio=false,
+            -60},{100,60}})),  Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-25},{100,35}}),
                                     graphics={
         Rectangle(

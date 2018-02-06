@@ -1,5 +1,5 @@
 within AixLib.Fluid.HeatExchangers.ActiveWalls.Examples;
-model ActiveWalls_Test
+model PanelHeating
   extends Modelica.Icons.Example;
       replaceable package Medium =
       Modelica.Media.Water.ConstantPropertyLiquidWater "Medium in the system"                annotation(choicesAllMatching = true);
@@ -8,22 +8,28 @@ model ActiveWalls_Test
 
   Distributor contributor(redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{-44,-20},{36,20}})));
-  PanelHeating panelheating_1D_Dis1(redeclare package Medium = Medium, A=
+  AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeating panelheating_1D_Dis1(redeclare
+      package Medium =                                                                                 Medium, A=
         panelHeatingArea)
     annotation (Placement(transformation(extent={{56,64},{84,76}})));
-  PanelHeating panelheating_1D_Dis2(redeclare package Medium = Medium, A=
+  AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeating panelheating_1D_Dis2(redeclare
+      package Medium =                                                                                 Medium, A=
         panelHeatingArea)
     annotation (Placement(transformation(extent={{56,34},{84,46}})));
-  PanelHeating panelheating_1D_Dis3(redeclare package Medium = Medium, A=
+  AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeating panelheating_1D_Dis3(redeclare
+      package Medium =                                                                                 Medium, A=
         panelHeatingArea)
     annotation (Placement(transformation(extent={{56,6},{84,18}})));
-  PanelHeating panelheating_1D_Dis4(redeclare package Medium = Medium, A=
+  AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeating panelheating_1D_Dis4(redeclare
+      package Medium =                                                                                 Medium, A=
         panelHeatingArea)
     annotation (Placement(transformation(extent={{56,-22},{84,-10}})));
-  PanelHeating panelheating_1D_Dis5(redeclare package Medium = Medium, A=
+  AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeating panelheating_1D_Dis5(redeclare
+      package Medium =                                                                                 Medium, A=
         panelHeatingArea)
     annotation (Placement(transformation(extent={{56,-52},{84,-40}})));
-  PanelHeating panelheating_1D_Dis6(redeclare package Medium = Medium, A=
+  AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeating panelheating_1D_Dis6(redeclare
+      package Medium =                                                                                 Medium, A=
         panelHeatingArea)
     annotation (Placement(transformation(extent={{56,-80},{84,-68}})));
   Modelica.Fluid.Sources.MassFlowSource_T boundary(
@@ -111,56 +117,56 @@ equation
       points={{31.2,-20.8},{31.2,-88},{94,-88},{94,-75},{84,-75}},
       color={0,127,255},
       smooth=Smooth.None));
-  connect(panelheating_1D_Dis2.ThermTop, FixedTemp.port) annotation (Line(
+  connect(panelheating_1D_Dis2.thermConv, FixedTemp.port) annotation (Line(
       points={{71.96,47},{71.96,52},{50,52},{50,78},{-30,78},{-30,100}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(panelheating_1D_Dis1.ThermTop, FixedTemp.port) annotation (Line(
+  connect(panelheating_1D_Dis1.thermConv, FixedTemp.port) annotation (Line(
       points={{71.96,77},{50,77},{50,78},{-30,78},{-30,100}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(panelheating_1D_Dis3.ThermTop, FixedTemp.port) annotation (Line(
+  connect(panelheating_1D_Dis3.thermConv, FixedTemp.port) annotation (Line(
       points={{71.96,19},{71.96,24},{50,24},{50,78},{-30,78},{-30,100}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(panelheating_1D_Dis4.ThermTop, FixedTemp.port) annotation (Line(
+  connect(panelheating_1D_Dis4.thermConv, FixedTemp.port) annotation (Line(
       points={{71.96,-9},{71.96,-4},{50,-4},{50,78},{-30,78},{-30,100}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(panelheating_1D_Dis5.ThermTop, FixedTemp.port) annotation (Line(
+  connect(panelheating_1D_Dis5.thermConv, FixedTemp.port) annotation (Line(
       points={{71.96,-39},{71.96,-32},{50,-32},{50,78},{-30,78},{-30,100}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(panelheating_1D_Dis6.ThermTop, FixedTemp.port) annotation (Line(
+  connect(panelheating_1D_Dis6.thermConv, FixedTemp.port) annotation (Line(
       points={{71.96,-67},{71.96,-62},{50,-62},{50,78},{-30,78},{-30,100}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(panelheating_1D_Dis1.StarTop, FixedTemp1.port) annotation (Line(
+  connect(panelheating_1D_Dis1.starRad, FixedTemp1.port) annotation (Line(
       points={{68.32,76.6},{68.32,100},{18,100}},
       color={95,95,95},
       pattern=LinePattern.None,
       smooth=Smooth.None));
-  connect(panelheating_1D_Dis2.StarTop, FixedTemp1.port) annotation (Line(
+  connect(panelheating_1D_Dis2.starRad, FixedTemp1.port) annotation (Line(
       points={{68.32,46.6},{52,46.6},{52,100},{18,100}},
       color={95,95,95},
       pattern=LinePattern.None,
       smooth=Smooth.None));
-  connect(panelheating_1D_Dis3.StarTop, FixedTemp1.port) annotation (Line(
+  connect(panelheating_1D_Dis3.starRad, FixedTemp1.port) annotation (Line(
       points={{68.32,18.6},{52,18.6},{52,100},{18,100}},
       color={95,95,95},
       pattern=LinePattern.None,
       smooth=Smooth.None));
-  connect(panelheating_1D_Dis4.StarTop, FixedTemp1.port) annotation (Line(
+  connect(panelheating_1D_Dis4.starRad, FixedTemp1.port) annotation (Line(
       points={{68.32,-9.4},{52,-9.4},{52,100},{18,100}},
       color={95,95,95},
       pattern=LinePattern.None,
       smooth=Smooth.None));
-  connect(panelheating_1D_Dis5.StarTop, FixedTemp1.port) annotation (Line(
+  connect(panelheating_1D_Dis5.starRad, FixedTemp1.port) annotation (Line(
       points={{68.32,-39.4},{52,-39.4},{52,100},{18,100}},
       color={95,95,95},
       pattern=LinePattern.None,
       smooth=Smooth.None));
-  connect(panelheating_1D_Dis6.StarTop, FixedTemp1.port) annotation (Line(
+  connect(panelheating_1D_Dis6.starRad, FixedTemp1.port) annotation (Line(
       points={{68.32,-67.4},{52,-67.4},{52,100},{18,100}},
       color={95,95,95},
       pattern=LinePattern.None,
@@ -208,4 +214,4 @@ Added to the HVAC library.</li>
 </html>"),
     experiment(StopTime=86400, Interval=60),
     __Dymola_experimentSetupOutput);
-end ActiveWalls_Test;
+end PanelHeating;

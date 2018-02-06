@@ -1,5 +1,5 @@
 within AixLib.Fluid.HeatExchangers.ActiveWalls.BaseClasses;
-model Panel_Segment
+model HeatConductionSegment
 
 parameter Modelica.SIunits.ThermalConductance kA
     "Constant thermal conductance of material";
@@ -91,4 +91,4 @@ Uses components from MSL</li>
 Added documentation.</li>
 </ul>
 </html>"));
-end Panel_Segment;
+end HeatConductionSegment;
