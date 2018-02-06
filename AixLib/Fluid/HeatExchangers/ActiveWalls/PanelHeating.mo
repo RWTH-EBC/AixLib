@@ -283,6 +283,8 @@ annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,
 </html>",
         revisions="<html>
 <ul>
+<li><i>February 06, 2017&nbsp;</i> by Philipp Mehrfeld:<br/>
+Use kTop and kDown instead of k_insulation. Naming according to AixLib standards.</li>
 <li><i>June 15, 2017&nbsp;</i> by Tobias Blacha:<br/>
 Moved into AixLib</li>
 <li><i>March 25, 2015&nbsp;</i> by Ana Constantin:<br/>
