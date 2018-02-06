@@ -6,8 +6,7 @@ model ActiveWalls_Test
 
   parameter Modelica.SIunits.Area panelHeatingArea = 10 "Area of heating panels";
 
-  HeatExchangers.ActiveWalls.Contributor contributor(redeclare package Medium
-      = Medium)
+  Distributor contributor(redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{-44,-20},{36,20}})));
   HeatExchangers.ActiveWalls.Panelheating_1D_Dis panelheating_1D_Dis1(
       redeclare package Medium = Medium, A=panelHeatingArea)

@@ -3,6 +3,3 @@ Panel_Segment
 logDT
 PressureDropPH
 HeatCapacityPerArea
-logUnderDT
-HeatTransfer_dynamic
-Segment_dynamic
