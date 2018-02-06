@@ -1,18 +1,19 @@
 within AixLib.Fluid.HeatExchangers.ActiveWalls;
-model Panelheating_1D_Dis
+model PanelHeating
+  "A panel heating for e.g. floor heating with discretization"
 
   extends Modelica.Fluid.Interfaces.PartialTwoPort;
 
-     parameter AixLib.DataBase.ActiveWalls.ActiveWallBaseDataDefinition Floorheatingtype=
+     parameter AixLib.DataBase.ActiveWalls.ActiveWallBaseDataDefinition floorHeatingType=
       DataBase.ActiveWalls.JocoKlimaBodenTOP2000_Parkett()
     annotation (Dialog(group="Type"), choicesAllMatching=true);
 
-  parameter Boolean Floor =  true "Floor or Ceiling heating"
+  parameter Boolean isFloor =  true "Floor or Ceiling heating"
     annotation(Dialog(compact = true, descriptionLabel = true), choices(choice=true
         "Floorheating",                                                                             choice = false
         "Ceilingheating",                                                                                                  radioButtons = true));
 
-  parameter Integer Dis(min=1) = 5 "Number of Discreatisation Layers";
+  parameter Integer dis(min=1) = 5 "Number of Discreatisation Layers";
 
   parameter Integer calcMethodConvection = 1
     "Calculation Method for convection at surface"
@@ -23,13 +24,11 @@ model Panelheating_1D_Dis
         choice=3 "Constant alpha",
         radioButtons=true));
 
-
   parameter Modelica.SIunits.CoefficientOfHeatTransfer convCoeffCustom = 2.5
     "Constant heat transfer coefficient"
     annotation (Dialog(group = "Heat convection",
     descriptionLabel=true,
         enable=if calcMethodConvection == 3 then true else false));
-
 
   final parameter Modelica.SIunits.Emissivity eps=Floorheatingtype.eps
     "Emissivity";
@@ -297,4 +296,4 @@ Uses components from MSL</li>
 Added documentation.</li>
 </ul>
 </html>"));
-end Panelheating_1D_Dis;
+end PanelHeating;

@@ -1,0 +1,4 @@
+﻿convertClass("AixLib.Fluid.HeatExchangers.ActiveWalls.Panelheating_1D_Dis", "AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeating");
+convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeating", "Floorheatingtype", "floorHeatingType");
+convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeating", "Floor", "isFloor");
+convertElement("AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeating", "Dis", "dis");

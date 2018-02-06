@@ -1,7 +1,7 @@
 within AixLib.Fluid.HeatExchangers.ActiveWalls;
 model Distributor
 replaceable package Medium =
-      Modelica.Media.Water.ConstantPropertyLiquidWater
+      Modelica.Media.Interfaces.PartialMedium
     "Medium in the component"                                                                  annotation(Dialog(group="Medium"),choicesAllMatching=true);
 
   Modelica.Fluid.Interfaces.FluidPort_a MAIN_FLOW(redeclare package Medium = Medium)
