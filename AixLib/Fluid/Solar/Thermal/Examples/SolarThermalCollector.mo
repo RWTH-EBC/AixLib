@@ -28,8 +28,7 @@ model SolarThermalCollector
     redeclare package Medium = Medium,
     m_flow_nominal=system.m_flow_nominal,
     volPip=0.05,
-    T_start=system.T_start
-    m_flow_start=system.m_flow_start,
+    T_start=system.T_start,
     p_start=source.p,
     Collector=DataBase.SolarThermal.FlatCollector())
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
