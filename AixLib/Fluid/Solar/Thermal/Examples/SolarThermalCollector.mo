@@ -28,8 +28,7 @@ model SolarThermalCollector
     redeclare package Medium = Medium,
     m_flow_nominal=system.m_flow_nominal,
     volPip=0.05,
-    T_start=system.T_start,
-    dp_start=source.p - sink.p,
+    T_start=system.T_start
     m_flow_start=system.m_flow_start,
     p_start=source.p,
     Collector=DataBase.SolarThermal.FlatCollector())
@@ -82,7 +81,7 @@ equation
 <p>This test demonstrates the solar thermal collector model. Different types of collectors can be tested at fixed boundary conditions.</p>
 </html>",  revisions="<html>
 <ul>
-<li><i>January 7, 2018</i>  by Peter Matthes:<br>Add Modelica.Fluid.System to example.<br>Set proper volume flow rate (3 l/min).<br>Calculate source pressure depending on volume flow rate and pipe pressure loss.<br>Set start values in most components.<br>Add plot script and simulation command.</li>
+<li><i>January 7, 2018</i>  by Peter Matthes:<br>Removes m_flow_nominal parameter.<br>Add Modelica.Fluid.System to example.<br>Set proper volume flow rate (3 l/min).<br>Calculate source pressure depending on volume flow rate and pipe pressure loss.<br>Set start values in most components.<br>Add plot script and simulation command.</li>
 <li><i>October 25, 2017</i> by Philipp Mehrfeld:<br>Use <a href=\"modelica://AixLib.Media.Water\">AixLib.Media.Water</a> </li>
 <li><i>December 15, 2016</i> by Moritz Lauster:<br>Moved </li>
 <li><i>October 11, 2016</i> by Marcus Fuchs:<br>Replace pipe </li>
