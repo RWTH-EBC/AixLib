@@ -1,4 +1,4 @@
-within AixLib.Fluid.Solar.Thermal;
+﻿within AixLib.Fluid.Solar.Thermal;
 model SolarThermal "Model of a solar thermal panel"
   extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(vol(
     final V=volPip), pressureDrop(a=pressureDropCoeff));
@@ -38,6 +38,8 @@ equation
          {{-51,8.5},{-51,18},{-71,18},{-71,47.4}}, color={0,0,127}));
   connect(solarThermalEfficiency.Q_flow, gain.u) annotation (Line(points={{-55.2,
           58},{-36,58},{-36,50},{-17.2,50}}, color={0,0,127}));
+  connect(solarThermalEfficiency.Q_flow, gain.u) annotation (Line(points={{
+          -55.2,58},{-48,58},{-48,52},{-17.2,52},{-17.2,50}}, color={0,0,127}));
   annotation (Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p><br/>Model of a solar thermal collector. Inputs are outdoor air temperature and solar irradiation. Based on these values and the collector properties from database, this model creates a heat flow to the fluid circuit.</p>
@@ -57,7 +59,10 @@ equation
  <p><a href=\"AixLib.HVAC.HeatGeneration.Examples.SolarThermalCollector\">AixLib.HVAC.HeatGeneration.Examples.SolarThermalCollector</a></p>
  </html>", revisions="<html>
  <ul>
- <li><i>October 25, 2016</i> by Philipp Mehrfeld:<br/>Extend now from 
+ <li><i>Febraury 1, 2018&nbsp;</i>
+    by Philipp Mehrfeld:<br/>
+    Delete max block as it is now implemented in the efficiency model</li>
+ <li><i>October 25, 2017</i> by Philipp Mehrfeld:<br/>Extend now from 
    <a href=\"modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator\">
    AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>.
    <br/>Use mean temperature.

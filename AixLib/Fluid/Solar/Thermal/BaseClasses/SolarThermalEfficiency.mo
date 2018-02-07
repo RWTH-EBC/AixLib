@@ -1,4 +1,4 @@
-within AixLib.Fluid.Solar.Thermal.BaseClasses;
+﻿within AixLib.Fluid.Solar.Thermal.BaseClasses;
 model SolarThermalEfficiency
   "Calculates the efficiency of a solar thermal collector"
   parameter AixLib.DataBase.SolarThermal.SolarThermalBaseDataDefinition
@@ -33,11 +33,15 @@ equation
  collector temperature.</p>
  </html>", revisions="<html>
  <ul>
- <li><i>October 25, 2016</i> by Philipp Mehrfeld:<br/>Limit eta to 0 and eta_zero.
+ <li><i>February 1, 2018&nbsp;</i>
+    by Philipp Mehrfeld:<br/>
+    eta must be between 0 and eta_zero optical efficiency</li>
+ <li><i>October 25, 2017</i> by Philipp Mehrfeld:<br/>Limit eta to 0 and eta_zero.
    <br/>Add correct units.
    <br/>Avoid dividing by G=0.</li>
  <li><i>15.12.2016</i>, Moritz Lauster:<br/>moved</li>
  <li><i>19.11.2013</i>, Marcus Fuchs:<br/>implemented</li>
  </ul>
+
  </html>"));
 end SolarThermalEfficiency;

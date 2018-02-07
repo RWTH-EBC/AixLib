@@ -17,33 +17,13 @@ algorithm
   end when;
 
   annotation (
-  Documentation(info="<html><dl>
-  <dt>
-    <b>Description of the Switch Counter:</b><br/>
-    This model counts the number of times that the logical input
-    <b>u</b> switches from 0 to 1 during the simulation time.<br/>
-    <br/>
-  </dt>
-</dl>
-<dl>
-  <dt>
-    <b>Main Author:</b>
-  </dt>
-  <dd>
-    Nicolás Chang (ssi-nch)<br/>
-    E.ON Energy Research Center<br/>
-    Institute for Energy Efficient Buildings and Indoor Climate<br/>
-    D-52066 Aachen<br/>
-    e-mail: <a href=
-    \"mailto:nicolas.chang@eonerc.rwth-aachen.de\">nicolas.chang@eonerc.rwth-aachen.de</a><br/>
-  </dd>
-</dl>
+  Documentation(info="<html>
+<h4>Description of the Switch Counter: </h4>
+<p> This model counts the number of times that the logical input <b>u</b> switches from 0 to 1 during the simulation time.</p><br/> 
 </html>", revisions="<html>
 <ul>
-  <li>
-    <i>November 28, 2016&#160;</i> Tobias Blacha:<br/>
-    Moved into AixLib
-  </li>
+<li><i>November 28, 2016&nbsp; </i> Tobias Blacha:<br/>
+Moved into AixLib</li>
 </ul>
 </html>"),
 Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
