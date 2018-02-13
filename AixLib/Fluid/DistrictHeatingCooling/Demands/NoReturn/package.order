@@ -4,3 +4,4 @@ IdealSinkConstHeat
 IdealSinkHeat
 IdealSinkHeatInput
 IdealSinkHeatInputTemperature
+IdealSinkHeatInputTemperatureFlowControlled
