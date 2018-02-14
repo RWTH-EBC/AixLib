@@ -21,7 +21,7 @@ model IdealSinkHeatInputTemperatureFlowControlled
     annotation (Placement(transformation(extent={{36,64},{56,84}})));
   Modelica.Blocks.Math.Gain gain(k=cp_default)
     annotation (Placement(transformation(extent={{4,58},{24,78}})));
-  Modelica.Blocks.Sources.Constant temperatureReturn(k=T_return)
+  Modelica.Blocks.Sources.Constant temperatureReturn(k=10)
     "Temperature of return line in °C"
     annotation (Placement(transformation(extent={{20,24},{0,44}})));
   Modelica.Blocks.Interfaces.RealOutput p_out
@@ -29,11 +29,16 @@ model IdealSinkHeatInputTemperatureFlowControlled
         iconTransformation(extent={{80,40},{120,80}})));
   Modelica.Blocks.Logical.Switch switch1
     annotation (Placement(transformation(extent={{-46,28},{-36,38}})));
-  Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=time > 10)
+  Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=time > 3600)
     annotation (Placement(transformation(extent={{-64,24},{-54,40}})));
   Modelica.Blocks.Sources.Constant temperatureSupplyInitial(k=T_return + 10)
     "Initial temperature of supply line in °C"
     annotation (Placement(transformation(extent={{-62,48},{-52,58}})));
+  Modelica.Thermal.HeatTransfer.Celsius.FromKelvin fromKelvin annotation (
+      Placement(transformation(
+        extent={{-5,-5},{5,5}},
+        rotation=90,
+        origin={-51,21})));
 equation
 
   connect(deltaT.y, gain.u)
@@ -50,12 +55,14 @@ equation
     annotation (Line(points={{57,74},{60,74},{60,12}}, color={0,0,127}));
   connect(switch1.y, deltaT.u1)
     annotation (Line(points={{-35.5,33},{-32,33},{-32,44}}, color={0,0,127}));
-  connect(senT_supply.T, switch1.u3)
-    annotation (Line(points={{-50,11},{-47,11},{-47,29}}, color={0,0,127}));
   connect(switch1.u2, booleanExpression.y) annotation (Line(points={{-47,33},{
           -54,33},{-54,32},{-53.5,32}}, color={255,0,255}));
-  connect(temperatureSupplyInitial.y, switch1.u1)
-    annotation (Line(points={{-51.5,53},{-47,53},{-47,37}}, color={0,0,127}));
+  connect(senT_supply.T, fromKelvin.Kelvin)
+    annotation (Line(points={{-50,11},{-50,15},{-51,15}}, color={0,0,127}));
+  connect(temperatureSupplyInitial.y, switch1.u3) annotation (Line(points={{
+          -51.5,53},{-50,53},{-50,29},{-47,29}}, color={0,0,127}));
+  connect(fromKelvin.Celsius, switch1.u1)
+    annotation (Line(points={{-51,26.5},{-51,37},{-47,37}}, color={0,0,127}));
   annotation (Icon(graphics={
           Rectangle(
           extent={{-100,100},{100,-100}},
