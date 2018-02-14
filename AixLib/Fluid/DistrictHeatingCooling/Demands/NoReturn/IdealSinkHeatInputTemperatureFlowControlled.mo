@@ -16,36 +16,46 @@ model IdealSinkHeatInputTemperatureFlowControlled
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
-        origin={-30,50})));
+        origin={-26,56})));
   Modelica.Blocks.Math.Division heat2massFlow
-    annotation (Placement(transformation(extent={{20,64},{40,84}})));
+    annotation (Placement(transformation(extent={{36,64},{56,84}})));
   Modelica.Blocks.Math.Gain gain(k=cp_default)
-    annotation (Placement(transformation(extent={{-12,58},{8,78}})));
+    annotation (Placement(transformation(extent={{4,58},{24,78}})));
   Modelica.Blocks.Sources.Constant temperatureReturn(k=T_return)
     "Temperature of return line in °C"
-    annotation (Placement(transformation(extent={{20,20},{0,40}})));
+    annotation (Placement(transformation(extent={{20,24},{0,44}})));
   Modelica.Blocks.Interfaces.RealOutput p_out
     annotation (Placement(transformation(extent={{100,80},{80,100}}),
         iconTransformation(extent={{80,40},{120,80}})));
-  Modelica.Blocks.Interfaces.RealInput T_supply_set
-    "Set supply temperature in °C"
-    annotation (Placement(transformation(extent={{-126,-68},{-86,-28}})));
+  Modelica.Blocks.Logical.Switch switch1
+    annotation (Placement(transformation(extent={{-46,28},{-36,38}})));
+  Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=time > 10)
+    annotation (Placement(transformation(extent={{-64,24},{-54,40}})));
+  Modelica.Blocks.Sources.Constant temperatureSupplyInitial(k=T_return + 10)
+    "Initial temperature of supply line in °C"
+    annotation (Placement(transformation(extent={{-62,48},{-52,58}})));
 equation
 
   connect(deltaT.y, gain.u)
-    annotation (Line(points={{-30,61},{-30,68},{-14,68}}, color={0,0,127}));
+    annotation (Line(points={{-26,67},{-26,68},{2,68}},   color={0,0,127}));
   connect(Q_flow_input, heat2massFlow.u1)
-    annotation (Line(points={{-108,80},{18,80}}, color={0,0,127}));
+    annotation (Line(points={{-108,80},{34,80}}, color={0,0,127}));
   connect(gain.y, heat2massFlow.u2)
-    annotation (Line(points={{9,68},{18,68}}, color={0,0,127}));
+    annotation (Line(points={{25,68},{34,68}},color={0,0,127}));
   connect(temperatureReturn.y, deltaT.u2)
-    annotation (Line(points={{-1,30},{-24,30},{-24,38}}, color={0,0,127}));
+    annotation (Line(points={{-1,34},{-20,34},{-20,44}}, color={0,0,127}));
   connect(senPre_supply.p, p_out) annotation (Line(points={{-69,20},{-66,20},{-66,
           90},{90,90}},   color={0,0,127}));
   connect(heat2massFlow.y, sink.m_flow_in)
-    annotation (Line(points={{41,74},{60,74},{60,12}}, color={0,0,127}));
-  connect(T_supply_set, deltaT.u1)
-    annotation (Line(points={{-106,-48},{-36,-48},{-36,38}}, color={0,0,127}));
+    annotation (Line(points={{57,74},{60,74},{60,12}}, color={0,0,127}));
+  connect(switch1.y, deltaT.u1)
+    annotation (Line(points={{-35.5,33},{-32,33},{-32,44}}, color={0,0,127}));
+  connect(senT_supply.T, switch1.u3)
+    annotation (Line(points={{-50,11},{-47,11},{-47,29}}, color={0,0,127}));
+  connect(switch1.u2, booleanExpression.y) annotation (Line(points={{-47,33},{
+          -54,33},{-54,32},{-53.5,32}}, color={255,0,255}));
+  connect(temperatureSupplyInitial.y, switch1.u1)
+    annotation (Line(points={{-51.5,53},{-47,53},{-47,37}}, color={0,0,127}));
   annotation (Icon(graphics={
           Rectangle(
           extent={{-100,100},{100,-100}},
