@@ -20,5 +20,7 @@ record Ecopower_1_0
     tauQ_th=882.35,
     tauP_el=73.52,
     dotm_max=0.06,
-    dotm_min=0.06);
+    dotm_min=0.06,
+    dotQ_thRated = 1641,
+    dotE_fuelRated = 3802);
 end Ecopower_1_0;

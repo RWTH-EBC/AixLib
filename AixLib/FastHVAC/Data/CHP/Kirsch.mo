@@ -20,5 +20,7 @@ record Kirsch
     tauQ_th=588.23,
     tauP_el=275.73,
     dotm_max=0.1236,
-    dotm_min=0.0819);
+    dotm_min=0.0819,
+    dotQ_thRated = 9275,
+    dotE_fuelRated = 16211);
 end Kirsch;

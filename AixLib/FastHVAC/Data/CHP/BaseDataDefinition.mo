@@ -4,13 +4,21 @@ extends Modelica.Icons.Record;
 
   import SI = Modelica.SIunits;
   import SIconv = Modelica.SIunits.Conversions.NonSIunits;
-Modelica.SIunits.MassFlowRate dotm_max "maximum mass flow rate";
-Modelica.SIunits.MassFlowRate dotm_min "minimum mass flow rate";
+  Modelica.SIunits.MassFlowRate dotm_max "maximum mass flow rate";
+  Modelica.SIunits.MassFlowRate dotm_min "minimum mass flow rate";
   parameter SI.Power P_elRated "rated electrical power (unit=W)";
-    parameter Modelica.SIunits.Time tauQ_th
-    "time constant thermal power start behavior (unit=sec) ";
-    parameter Modelica.SIunits.Time tauP_el
-    "time constant electrical power start behavior (unit=sec)";
+  parameter Modelica.SIunits.Time tauQ_th_start
+  "time constant for thermal start behavior (unit=sec) ";
+  parameter Modelica.SIunits.Time tauQ_th_stop
+  "time constant for stop behaviour (unit=sec)";
+  parameter Modelica.SIunits.Time t_th_start
+  "time until first heat is delivered by system (unit=sec)";
+  parameter Modelica.SIunits.Time t_th_stop
+  "time until thermal output is zero (unit=sec) ";
+  parameter Modelica.SIunits.Time tauP_el
+  "time constant electrical power start behavior (unit=sec)";
+  parameter SI.Power dotQ_thRated "rated thermal power (unit=W)";
+  parameter SI.Power dotE_fuelRated "rated fuel power (unit=W)";
 
   parameter Real a_0;
   parameter Real a_1;

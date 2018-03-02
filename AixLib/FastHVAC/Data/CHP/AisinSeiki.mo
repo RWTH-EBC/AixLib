@@ -17,8 +17,13 @@ record AisinSeiki
     b_5=-0.0000,
     b_6=0.0001,
     P_elRated=5580,
-    tauQ_th=857.84,
+    tauQ_th_start=857.84,
+    t_th_start = 110,
+    tauQ_th_stop = 90,
+    t_th_stop = 331,
     tauP_el=5.41,
     dotm_max=0.18,
-    dotm_min=0.18);
+    dotm_min=0.18,
+    dotQ_thRated = 10983,
+    dotE_fuelRated = 21285);
 end AisinSeiki;

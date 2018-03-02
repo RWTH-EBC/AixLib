@@ -20,5 +20,7 @@ record Dachs
     tauQ_th=147.05,
     tauP_el=73.52,
     dotm_max=0.27778,
-    dotm_min=0.27778);
+    dotm_min=0.27778,
+    dotQ_thRated = 1554,
+    dotE_fuelRated = 12482);
 end Dachs;

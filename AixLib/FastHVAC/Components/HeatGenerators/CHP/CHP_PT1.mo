@@ -8,7 +8,7 @@ model CHP_PT1 "Simple general CHP model"
     parameter Boolean selectable=true "CHP record";
 
     parameter FastHVAC.Data.CHP.BaseDataDefinition param=
-      FastHVAC.Data.CHP.Ecopower() "Paramter contains data from CHP records"
+      FastHVAC.Data.CHP.AisinSeiki() "Paramter contains data from CHP records"
     annotation (Dialog(enable=selectable), choicesAllMatching=true, group="Unit properties");
 
     parameter Modelica.SIunits.Efficiency eta_el= 0.25
@@ -46,9 +46,10 @@ public
       Components
       ******************************************************************* */
 
-    Modelica.Blocks.Continuous.FirstOrder firstOrderQ_th(T=param.tauQ_th,
+    Modelica.Blocks.Continuous.FirstOrder firstOrderQ_th(
     y_start=0,
-    initType=Modelica.Blocks.Types.Init.SteadyState)
+    initType=Modelica.Blocks.Types.Init.SteadyState,
+    T=param.tauQ_th_start)
     "dynamic behavior of thermal power output [W]"
     annotation (Placement(transformation(extent={{0,-24},{20,-4}})));
     Modelica.Blocks.Continuous.FirstOrder firstOrderP_el(T=param.tauP_el,

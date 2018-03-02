@@ -20,5 +20,7 @@ record Xrgi
     tauQ_th=661.76,
     tauP_el=102.94,
     dotm_max=0.3509,
-    dotm_min=0.0586);
+    dotm_min=0.0586,
+    dotQ_thRated = 17044,
+    dotE_fuelRated = 50228);
 end Xrgi;
