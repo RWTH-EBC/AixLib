@@ -49,13 +49,13 @@ extends Modelica.Icons.ExamplesPackage;
     Components.HeatExchangers.RadiatorMultiLayer radiatorMultiLayer(
     selectable=true,
     calc_dT=AixLib.Fluid.HeatExchangers.Radiators.BaseClasses.CalcExcessTemp.log,
-
     radiatorType=
         DataBase.Radiators.Standard_MFD_WSchV1984_OneAppartment.Radiator_Livingroom(
         length=5)) annotation (Placement(transformation(
         extent={{-21,-20},{21,20}},
         rotation=0,
         origin={24,-7})));
+
     Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor roomTemperature
       annotation (Placement(transformation(extent={{54,56},{74,76}})));
     Modelica.Blocks.Interfaces.RealOutput dotm_pump
