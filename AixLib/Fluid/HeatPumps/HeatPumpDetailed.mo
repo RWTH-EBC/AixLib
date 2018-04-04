@@ -241,7 +241,7 @@ public
     CorrFlowEv=CorrFlowEv,
     timeConstantCycle=timeConstantCycle,
     smoothness=smoothness,
-    PT1_cycle=true,
+    PT1_cycle=PT1_cycle,
     mFlow_conNominal=mFlow_conNominal,
     mFlow_evaNominal=mFlow_evaNominal,
     T_conMax=T_conMax) "Heat pump refrigerant circuit black box model"
@@ -520,8 +520,8 @@ equation
 <li>Pahud, D. and Lachal, B.: <i>Mesure des performances thermiques d?une pompe &agrave; chaleur coupl&eacute;e sur des sondes g&eacute;othermiques &agrave; Lugano (TI)</i>. Office f&eacute;d&eacute;ral de l&apos;energie, Bern, Switzerland. 2004. </li>
 <li>Wetter, M. and Afjei, T.: <i>TRNSYS TYPE 401 - Kompressionsw&auml;rmepumpe inklusiv Frost- und Taktverluste</i>. Zentralschweizerisches Technikum Luzern - Ingenieruschule HTL, Switzerland. 1996. </li>
 </ul>
-<h4><span style=\"color:#008000\">Example Results</span></h4>
-<p>See <a href=\"AixLib.Fluid.HeatExchangers.Examples.TestHeatPump\">AixLib.Fluid.HeatExchangers.Examples.TestHeatPump</a> </p>
+<h4><span style=\"color:#008000\">Example</span></h4>
+<p>See <a href=\"AixLib.Fluid.HeatPumps.Examples.HeatPumpDetailed\">AixLib.Fluid.HeatPumps.Examples.HeatPumpDetailed</a> </p>
 </html>", revisions="<html>
 <ul>
 <li><i>June 23, 2015&nbsp;</i> by Kristian Huchtemann:<br/>formatted for use in AixLib</li>

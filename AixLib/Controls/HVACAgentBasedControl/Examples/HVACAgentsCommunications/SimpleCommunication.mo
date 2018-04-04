@@ -174,7 +174,7 @@ Low Temp Circuit"),
 <h4><span style=\"color: #008000\">References</span></h4>
 <ul>
 <li>Felix B&uuml;nning. Development of a Modelica-library for agent-based control of HVAC systems. Bachelor thesis, 2016, RWTH Aachen University, Aachen, Germany. </li>
-<li>Roozbeh Sangi, Felix B&uuml;nning, Marc Baranski, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic.</li>
+<li>Roozbeh Sangi, Felix B&uuml;nning, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic.</li>
 <li>Felix B&uuml;nning, Roozbeh Sangi, Dirk M&uuml;ller. A Modelica library for agent-based control of building HVAC systems. Applied Energy, 193:52-59, 2017. </li>
 </ul>
 <p><b><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Example Results</span></b></p>

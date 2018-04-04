@@ -10,5 +10,5 @@ package TCP "Contains all functions necessary to handle a TCP communication"
     <a href=\"http://msdn.microsoft.com/de-de/library/windows/desktop/ms737591%28v=vs.85%29.aspx\">Link to MSDN</a>.
         <br />
         
-<\html>"));
+</html>"));
 end TCP;

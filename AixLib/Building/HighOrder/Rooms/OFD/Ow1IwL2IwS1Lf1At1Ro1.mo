@@ -1,4 +1,4 @@
-within AixLib.Building.HighOrder.Rooms.OFD;
+﻿within AixLib.Building.HighOrder.Rooms.OFD;
 model Ow1IwL2IwS1Lf1At1Ro1
   "1 outer wall, 2 inner walls load, 2 inner walls simple, 1 floor towards lower floor, 1 ceiling towards attic, 1 roof towards outside"
   import AixLib;
@@ -342,7 +342,9 @@ protected
        else AixLib.DataBase.Walls.WSchV1984.IW.IWload_WSchV1984_L_half()
     annotation (Dialog(tab="Types"));
   // Floor to lower floor type
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_FL=if TIR == 1
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_FL=
+  if withFloorHeating==true then AixLib.DataBase.Walls.Dummys.FloorForFloorHeating2Layers()
+  else if TIR == 1
        then if TMC == 1 or TMC == 2 then
       AixLib.DataBase.Walls.EnEV2009.Floor.FLpartition_EnEV2009_SM_upHalf()
        else AixLib.DataBase.Walls.EnEV2009.Floor.FLpartition_EnEV2009_L_upHalf()
@@ -432,8 +434,9 @@ equation
     annotation (Line(points={{28,58},{28,40},{40,40},{40,-40},{-20.1,-40},{
           -20.1,-35.4}}, color={191,0,0}));
   connect(inner_wall1.thermStarComb_inside, thermStar_Demux.thermStarComb)
-    annotation (Line(points={{-14,54},{-14,40},{40,40},{40,-40},{-20.1,-40},{-20.1,
-          -35.4}}, color={191,0,0}));
+    annotation (Line(points={{-14,54},{-14,40},{40,40},{40,-40},{-20.1,-40},{
+          -20.1,-35.4}},
+                   color={191,0,0}));
   connect(infiltrationRate.port_b, airload.port) annotation (Line(points={{-54,
           56},{-40,56},{-40,-40},{-6,-40},{-6,-12},{1,-12}}, color={191,0,0}));
   connect(outside_wall1.thermStarComb_inside, thermStar_Demux.thermStarComb)

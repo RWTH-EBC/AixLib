@@ -5,21 +5,21 @@ model ExampleSanFran
   Real T_min(start=300) "Keeps track of the minimum air temperature";
 
 
-  AixLib.BoundaryConditions.WeatherData.Bus    weaBus "Component to supply air 
+  AixLib.BoundaryConditions.WeatherData.Bus    weaBus "Component to supply air
   temperature" annotation (Placement(
         transformation(extent={{-90,54},{-50,94}}), iconTransformation(extent={{
             -168,6},{-148,26}})));
   Modelica.Blocks.Interfaces.RealOutput T_air "Output to show air temperature"
     annotation (Placement(transformation(extent={{140,62},{160,82}})));
-  Modelica.Blocks.Continuous.Integrator integrator "Integrates air temperature 
+  Modelica.Blocks.Continuous.Integrator integrator "Integrates air temperature
   to compute average air temperature"
     annotation (Placement(transformation(extent={{0,40},{20,60}})));
   Modelica.Blocks.Math.Division division "Division for average air temperature"
     annotation (Placement(transformation(extent={{40,20},{60,40}})));
-  Modelica.Blocks.Sources.RealExpression timeSource(y=time) "Denominator for 
+  Modelica.Blocks.Sources.RealExpression timeSource(y=time) "Denominator for
   average air temperature"
     annotation (Placement(transformation(extent={{-40,-18},{-20,2}})));
-  Modelica.Blocks.Interfaces.RealOutput T_mean "Output of average air 
+  Modelica.Blocks.Interfaces.RealOutput T_mean "Output of average air
   temperature since beginning of simulation"
     annotation (Placement(transformation(extent={{140,20},{160,40}})));
   Modelica.Blocks.Math.Max denominatorTmean
@@ -29,7 +29,7 @@ model ExampleSanFran
   to prevent division by 0 at time=0"
     annotation (Placement(transformation(extent={{-40,4},{-20,24}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3    weaDat(
-      computeWetBulbTemperature=false, filNam="modelica://AixLib/Resources/WeatherData/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
+      computeWetBulbTemperature=false, filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
                                        "File reader that reads weather data"
     annotation (Placement(transformation(extent={{-40,78},{-20,98}})));
   GroundTemperatureKusuda groundTemperatureKasuda(
@@ -39,7 +39,7 @@ model ExampleSanFran
     T_mean=286.95,
     T_amp=15.49)   "Undisturbed ground temperature model"
     annotation (Placement(transformation(extent={{40,-60},{60,-40}})));
-  Modelica.Blocks.Interfaces.RealOutput T_ground "Output to show ground 
+  Modelica.Blocks.Interfaces.RealOutput T_ground "Output to show ground
   temperature"
     annotation (Placement(transformation(extent={{140,-56},{160,-36}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor "Sensor
@@ -90,7 +90,7 @@ equation
 </html>", info="<html>
 <p>Example to test and tune Kusuda ground temperature model with the weather model from the Modelica Buildings Library.</p>
 
-<p>The outputs T, T<sub>amp</sub> and T<sub>mean</sub> in the top of the model can be used to determine the parameters 
+<p>The outputs T, T<sub>amp</sub> and T<sub>mean</sub> in the top of the model can be used to determine the parameters
 t<sub>shift</sub> (day of the coldest air temperature in the year), T<sub>mean</sub> (average air temperature in the year)
  and T<sub>amp</sub> (amplitude of the air temperature) for the Kusuda ground temperature model. </p>
 

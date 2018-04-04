@@ -2,7 +2,7 @@ within AixLib.FastHVAC.Components.Sensors;
 model MassFlowSensor "Mass flow sensor"
 
 
-  Modelica.Blocks.Interfaces.RealOutput m_flow( unit="kg/s")
+  Modelica.Blocks.Interfaces.RealOutput dotm( unit="kg/s")
     "Output value which contains the measured mass flow of the fluid"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -18,7 +18,7 @@ model MassFlowSensor "Mass flow sensor"
     annotation (Placement(transformation(extent={{80,-12},{102,10}}),
         iconTransformation(extent={{78,-12},{102,10}})));
 equation
-  m_flow = enthalpyPort_a.m_flow;
+  dotm = enthalpyPort_a.m_flow;
 
   connect(enthalpyPort_a, enthalpyPort_b) annotation (Line(
       points={{-89,-1},{91,-1}},
@@ -53,16 +53,29 @@ equation
           lineColor={0,0,255})}),
                              Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}})),
-   Documentation(info="<html>
-<h4><span style=\"color:#008000\">Overview</span></h4>
-<p> Mass flow sensor measures the mass flow rate.</p>
+   Documentation(info="<html><h4>
+  <span style=\"color:#008000\">Overview</span>
+</h4>
+<p>
+  Mass flow sensor measures the mass flow rate.
+</p>
+<h4>
+  <span style=\"color:#008000\">Example Results</span>
+</h4>
+<p>
+  <a href=
+  \"AixLib.FastHVAC.Examples.Sensors.SensorVerification\">SensorVerification</a>
+</p>
 </html>",
-revisions="<html>
-<ul>
-<li><i>April 15, 2017&nbsp;</i> by Tobias Blacha:<br/>
-Moved into AixLib</li>
-<li><i>December 16, 2014&nbsp;</i> by Konstantin Finkbeiner:<br/>
-Implemented</li>
+revisions="<html><ul>
+  <li>
+    <i>April 15, 2017&#160;</i> by Tobias Blacha:<br/>
+    Moved into AixLib
+  </li>
+  <li>
+    <i>December 16, 2014&#160;</i> by Konstantin Finkbeiner:<br/>
+    Implemented
+  </li>
 </ul>
 </html> "));
 end MassFlowSensor;
