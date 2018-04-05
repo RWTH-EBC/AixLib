@@ -1,4 +1,4 @@
-﻿within AixLib.Building.HighOrder.Rooms.OFD;
+within AixLib.Building.HighOrder.Rooms.OFD;
 model Ow2IwL1IwS1Lf1At1Ro1
   "2 outer walls, 1 inner wall load, 1 inner wall simple, 1 floor towards lower floor, 1 ceiling towards attic, 1 roof towards outside"
   import AixLib;
@@ -277,14 +277,13 @@ model Ow2IwL1IwS1Lf1At1Ro1
   AixLib.Building.Components.DryAir.VarAirExchange NaturalVentilation(V=room_V)
     annotation (Placement(transformation(extent={{-70,-42},{-50,-22}})));
   AixLib.Building.Components.Walls.BaseClasses.SimpleNLayer floor_FH(
-    l=room_length,
+    A=room_width_long*room_length,
     n=Type_FL.n,
     d=Type_FL.d,
     rho=Type_FL.rho,
     lambda=Type_FL.lambda,
     c=Type_FL.c,
-    T0=T0_FL,
-    h=room_width_long) if withFloorHeating
+    T0=T0_FL) if withFloorHeating
     "floor component if using Floor heating" annotation (Placement(
         transformation(
         origin={-30,-85},
@@ -494,11 +493,11 @@ equation
           62.1499},{67.4667,70},{-80,70},{-80,-40},{-99.5,-40}},
                                                         color={0,0,127}));
   connect(thermFloorHeatingDownHeatFlow, floor_FH.port_a) annotation (Line(
-      points={{-77,-79},{-77,-80},{-31.6,-80},{-31.6,-82.2999}},
+      points={{-77,-79},{-77,-80},{-30,-80},{-30,-81.9999}},
       color={191,0,0},
       pattern=LinePattern.Dash));
   connect(floor_FH.port_b, thermFloor) annotation (Line(
-      points={{-31.6,-87.7},{-31.6,-94},{-6,-94}},
+      points={{-30,-88},{-30,-94},{-6,-94}},
       color={191,0,0},
       pattern=LinePattern.Dash));
   connect(thermFloor, floor.port_outside) annotation (Line(

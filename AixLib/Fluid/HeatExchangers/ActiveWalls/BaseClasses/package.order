@@ -1,8 +1,5 @@
-PH_Segment
-Panel_Segment
+PanelHeatingSegment
+HeatConductionSegment
 logDT
 PressureDropPH
 HeatCapacityPerArea
-logUnderDT
-HeatTransfer_dynamic
-Segment_dynamic
