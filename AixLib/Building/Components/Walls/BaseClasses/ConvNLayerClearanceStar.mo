@@ -1,4 +1,4 @@
-within AixLib.Building.Components.Walls.BaseClasses;
+﻿within AixLib.Building.Components.Walls.BaseClasses;
 model ConvNLayerClearanceStar
   "Wall consisting of n layers, with convection on one surface and (window) clearance"
   parameter Modelica.SIunits.Height h = 3 "Height" annotation(Dialog(group = "Geometry"));
@@ -47,12 +47,6 @@ model ConvNLayerClearanceStar
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b annotation(Placement(transformation(extent={{90,-10},
             {110,10}}),                                                                                                          iconTransformation(extent={{90,-10},
             {110,10}})));
-protected
-  parameter Modelica.SIunits.Area A = h * l - clearance;
-
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a dummyTherm
-    "This really helps to solve initialisation problems in huge equation systems ..."                   annotation(Placement(transformation(extent = {{49, -41}, {54, -36}})));
-public
   AixLib.Building.Components.Walls.BaseClasses.SimpleNLayer simpleNLayer(
     final A=A,
     final n=n,
@@ -62,11 +56,18 @@ public
     final c=c,
     final T0=T0)
     annotation (Placement(transformation(extent={{-14,-12},{12,12}})));
+
+protected
+  parameter Modelica.SIunits.Area A = h * l - clearance;
+
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a dummyTherm
+    "This really helps to solve initialisation problems in huge equation systems ..."                   annotation(Placement(transformation(extent = {{49, -41}, {54, -36}})));
+
 equation
-  connect(port_a, simpleNLayer.port_a) annotation (Line(points={{-100,0},{-12.7,
-          0}},                      color={191,0,0}));
-  connect(simpleNLayer.port_b, HeatConv1.port_b) annotation (Line(points={{10.7,0},
-          {52,0}},                              color={191,0,0}));
+  connect(port_a, simpleNLayer.port_a) annotation (Line(points={{-100,0},{-14,0}},
+                                    color={191,0,0}));
+  connect(simpleNLayer.port_b, HeatConv1.port_b) annotation (Line(points={{12,0},{
+          52,0}},                               color={191,0,0}));
   // connecting outmost elements to connectors: port_a--HeatCondb[1]...HeatConda[n]--HeatConv1--port_b
   connect(HeatConv1.port_a, port_b) annotation(Line(points={{72,0},{100,0}},                             color = {200, 100, 0}));
   connect(HeatConv1.port_b, twoStar_RadEx.Therm) annotation(Line(points={{52,0},{
