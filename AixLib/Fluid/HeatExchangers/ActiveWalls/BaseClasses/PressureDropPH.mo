@@ -4,10 +4,10 @@ model PressureDropPH
   extends Modelica.Fluid.Interfaces.PartialTwoPortTransport;
 
   parameter Real m = 2131
-    "Pressure drop coefficient, delta_p[Pa] = Tubelength*m*m_flow[kg/s]^n";
+    "Pressure drop coefficient, delta_p[Pa] = tubeLength*m*m_flow[kg/s]^n";
   parameter Real n = 1.7
-    "Pressure drop exponent, delta_p[Pa] = Tubelength*m*m_flow[kg/s]^n";
-  parameter Modelica.SIunits.Length Tubelength = 10 "total length of tube";
+    "Pressure drop exponent, delta_p[Pa] = tubeLength*m*m_flow[kg/s]^n";
+  parameter Modelica.SIunits.Length tubeLength = 10 "total length of tube";
 
 equation
    // Isenthalpic state transformation (no storage and no loss of energy)
@@ -16,7 +16,7 @@ equation
 
   //Hydraulic Part: pressure drop works in both directions now
 
-port_b.p = if noEvent(port_a.m_flow>=0) then port_a.p - Tubelength*m*(port_a.m_flow)^n else  port_a.p + Tubelength*m*(port_b.m_flow)^n;
+port_b.p = if noEvent(port_a.m_flow>=0) then port_a.p - tubeLength*m*(port_a.m_flow)^n else  port_a.p + tubeLength*m*(port_b.m_flow)^n;
 
   annotation (
     Documentation(info="<html>
