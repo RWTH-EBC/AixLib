@@ -22,7 +22,7 @@ model BufferStorage
   parameter SI.Temperature TStart=298.15 "Start Temperature of fluid" annotation (Dialog(tab="Initialisation"));
 
   parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
-    AixLib.DataBase.Storage.Generic_500l()
+    AixLib.DataBase.Storage.Generic_New_2000l()
     "Data record for Storage"
   annotation (choicesAllMatching);
 
