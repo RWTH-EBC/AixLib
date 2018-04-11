@@ -82,7 +82,12 @@ model BufferStorage
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatportOutside "Outer heat port"
     annotation (Placement(transformation(extent={{68,-4},{88,16}},rotation=0),
         iconTransformation(extent={{68,-4},{88,16}})));
-  Modelica.Blocks.Interfaces.RealOutput TTop "Temperature at the top"
+  Modelica.Blocks.Interfaces.RealOutput TTop(
+      final quantity="ThermodynamicTemperature",
+      final unit = "K",
+      min=0,
+      displayUnit = "degC")
+    "Temperature at the top"
     annotation (Placement(transformation(
         origin={-77,81},
         extent={{-5,5},{5,-5}},
@@ -90,7 +95,12 @@ model BufferStorage
         extent={{-5,5},{5,-5}},
         rotation=0,
         origin={-80,88})));
-  Modelica.Blocks.Interfaces.RealOutput TBottom "Temperature at the Bottom"
+  Modelica.Blocks.Interfaces.RealOutput TBottom(
+      final quantity="ThermodynamicTemperature",
+      final unit = "K",
+      min=0,
+      displayUnit = "degC")
+    "Temperature at the Bottom"
     annotation (Placement(transformation(
         origin={-77,-77},
         extent={{-5,5},{5,-5}},
