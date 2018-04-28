@@ -21,7 +21,7 @@ public
     "Mediums charastics HC2 (heat capacity, density, thermal conductivity)"
     annotation(Dialog(group="Medium"),choicesAllMatching);
 
-  parameter Modelica.SIunits.Temperature T_start=323.15
+  parameter Modelica.SIunits.Temperature[n] T_start=fill(293.15, n)
     "Start temperature of medium" annotation(Dialog(tab="Initialisation"));
   parameter Modelica.SIunits.Temperature T_start_wall=293.15
     "Starting Temperature of wall in K" annotation(Dialog(tab="Initialisation"));
@@ -39,7 +39,7 @@ public
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_out=15
     "Coefficient at the outer wall";
   inner parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
-      AixLib.DataBase.Storage.Generic_New_2000l() "Storage data"
+      AixLib.DataBase.Storage.Generic_500l() "Storage data"
     annotation (choicesAllMatching);
   parameter Integer[n_load_cycles, 2] load_cycles= {{n,1},{n,1}}
     "Loading cycle connection pairs (upper position first)"
@@ -95,7 +95,7 @@ public
 
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor layer[n](C=
         fill(data.hTank*Modelica.Constants.pi*(data.dTank/2)^2*medium.rho*medium.c
-        /n, n), T(start=fill(T_start, n))) annotation (Placement(
+        /n, n), T(start=T_start))             annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
@@ -172,7 +172,7 @@ public
                            out
     annotation (Placement(transformation(extent={{90,90},{110,110}}),iconTransformation(extent={{50,70},{70,90}})));
   BaseClasses.HeatingCoil heatingCoil1(
-    T_start=T_start,
+    T_start=T_start[n],
     dis_HC=dis_HC1,
     alpha_HC=alpha_HC1,
     medium_HC=mediumHC1,
@@ -183,7 +183,7 @@ public
         rotation=270,
         origin={-72,59})));
   BaseClasses.HeatingCoil heatingCoil2(
-    T_start=T_start,
+    T_start=T_start[n],
     dis_HC=dis_HC2,
     alpha_HC=alpha_HC2,
     medium_HC=mediumHC2,
@@ -215,26 +215,19 @@ public
      BaseClasses.HeatTransferOnlyConduction constrainedby
     BaseClasses.PartialHeatTransferLayers
     "Heat Transfer Model between fluid layers" annotation (choicesAllMatching=true,
-      Documentation(info =                             "<html><h4>
-  <font color=\"#008000\">Overview</font>
-</h4>
+      Documentation(info =                             "<html>
+<p><h4><font color=\"#008000\">Overview</font></h4></p>
 <p>
-  Heat transfer model for heat transfer between two fluid layers.
+Heat transfer model for heat transfer between two fluid layers.
 </p>
-<h4>
-  <font color=\"#008000\">Level of Development</font>
-</h4>
-<p>
-  <img src=\"modelica://HVAC/Images/stars2.png\" alt=\"\" />
-</p>
+<p><h4><font color=\"#008000\">Level of Development</font></h4></p>
+<p><img src=\"modelica://HVAC/Images/stars2.png\"/></p>
 </html>
 ",
- revisions="<html><ul>
-  <li>
-    <i>October 2, 2013&#160;</i> by Ole Odendahl:<br/>
-    Added documentation and formatted appropriately
-  </li>
-</ul>
+ revisions="<html>
+<p><ul>
+<li><i>October 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and formatted appropriately</li>
+</ul></p>
 </html>
 "));
 equation
@@ -637,59 +630,24 @@ connect(heatTransfer.therm, layer.port);
           lineColor={0,0,255},
           origin={90,-20},
           rotation=90)}),
-   Documentation(info="<html><h4>
-  <span style=\"color:#008000\">Overview</span>
-</h4>
-<p>
-  Buffer storage model with support for heating rod and two heating
-  coils. Model with variable connection pairs for loading and unlouding
-  cycles which are defined by the associated <u>storage layer
-  number</u> of the ports.
-</p>
-<h4>
-  <span style=\"color:#008000\">Concept</span>
-</h4>
-<p>
-  It represents a buffer storage stratified into n layers where 1
-  represents the bottom layer and n represents the top layer. The
-  layers are connected to each other allowing heat and fluid transfer.
-  The conductance, buoyancy and enthalpy flow represent the heat
-  transfer between the layers.
-</p>
-<p>
-  The geometrical data for the storage is read by records in the
-  DataBase package. In this model the number and the position of
-  connection pairs for loading and unlouding cycles is variable. The
-  position for each connection pair is defined by the associated
-  storage layer number of input and output connection (compare
-  connections tab).
-</p>
-<p>
-  The model also includes heat losses over the storage walls (wall, top
-  and bottom).
-</p>
-<p>
-  <br/>
-  <b><font style=\"color: #008000;\">Example Results</font></b>
-</p>
-<p>
-  <a href=
-  \"AixLib.FastHVAC.Examples.Storage.BufferStorageVariablePorts\">BufferStorageVariablePorts</a>
-</p>
+   Documentation(info="<html>
+<h4><span style=\"color:#008000\">Overview</span></h4>
+<p>Buffer storage model with support for heating rod and two heating coils. Model with variable connection pairs for loading and unlouding cycles which are defined by the associated <U>storage layer number </U> of the ports.  </p>
+<h4><span style=\"color:#008000\">Level of Development</span></h4>
+<p><img src=\"modelica://HVAC/Images/stars2.png\"/></p>
+<h4><span style=\"color:#008000\">Concept</span></h4>
+<p>It represents a buffer storage stratified into n layers where 1 represents the bottom layer and n represents the top layer. The layers are connected to each other allowing heat and fluid transfer. The conductance, buoyancy and enthalpy flow represent the heat transfer between the layers.    </p>
+<p>The geometrical data for the storage is read by records in the DataBase package. In this model the number and the position of connection pairs for loading and unlouding cycles is variable. The position for each connection pair is defined by the associated storage layer number of input and output connection (compare connections tab).</p>
+<p>  The model also includes heat losses over the storage walls (wall, top and bottom).   </p>
+<p><br><b><font style=\"color: #008000; \">Example Results</font></b></p>
+<p><a href=\"FastHVAC.Examples.Storage.BufferStorage_variablePorts\">BufferStorage_variablePorts</a></p>
 </html>",
-revisions="<html><ul>
-  <li>
-    <i>December 20, 2016&#160;</i> Tobias Blacha:<br/>
-    Moved into AixLib
-  </li>
-  <li>
-    <i>January 27, 2015&#160;</i> by Konstantin Finkbeiner:<br/>
-    Added documentation.
-  </li>
-  <li>
-    <i>December 16, 2014</i> by Sebastian Stinner:<br/>
-    Implemented.
-  </li>
-</ul>
+revisions="<html>
+<p><ul>
+<li><i>December 20, 2016&nbsp; </i> Tobias Blacha:<br/>Moved into AixLib</li>
+<li><i>January 27, 2015&nbsp;</i> by Konstantin Finkbeiner:<br/>Added documentation.</li>
+<li><i>December 16, 2014</i> by Sebastian Stinner:<br/>Implemented.</li>
+
+</ul></p>
 </html>"));
 end HeatStorageVariablePorts;
