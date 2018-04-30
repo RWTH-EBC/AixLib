@@ -25,7 +25,7 @@ equation
 for Energy Efficient Buildings and Indoor Climate at RWTH Aachen University's
 E.ON Energy Research Center (Mathieustr. 10, 52074 Aachen).</p>
 
-<p>The values are derived from TRY wheather data. With free
+<p>The values are derived from TRY weather data. With free
 registration, the 
 <a href=\"http://www.bbsr.bund.de\">Federal Institute for Research on Building, Urban Affairs and Spatial Development</a>
 and the German weather service <a href=\"https://www.dwd.de/EN/Home/home_node.html\">Deutscher Wetterdienst</a>
