@@ -32,18 +32,18 @@ model ExampleSanFran
       computeWetBulbTemperature=false, filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
                                        "File reader that reads weather data"
     annotation (Placement(transformation(extent={{-40,78},{-20,98}})));
-  GroundTemperatureKusuda groundTemperatureKasuda(
+  GroundTemperatureKusuda groundTemperatureKusuda(
     t_shift=23,
     alpha=0.039,
     D=1,
-    T_mean=286.95,
-    T_amp=15.49)   "Undisturbed ground temperature model"
+    T_amp=15.49,
+    T_mean=286.95) "Undisturbed ground temperature model"
     annotation (Placement(transformation(extent={{40,-60},{60,-40}})));
   Modelica.Blocks.Interfaces.RealOutput T_ground "Output to show ground
   temperature"
     annotation (Placement(transformation(extent={{140,-56},{160,-36}})));
-  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor "Sensor
-  to show ground temperature"
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
+    "Sensor to show ground temperature"
     annotation (Placement(transformation(extent={{74,-60},{94,-40}})));
   Modelica.Blocks.Interfaces.RealOutput T_amp
     "Keeps track of the amplitude of the air temperature"
@@ -78,7 +78,7 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(groundTemperatureKasuda.port_a, temperatureSensor.port) annotation (
+  connect(groundTemperatureKusuda.port_a, temperatureSensor.port) annotation (
       Line(points={{59.4,-55},{70,-55},{70,-50},{74,-50}}, color={191,0,0}));
   connect(temperatureSensor.T, T_ground) annotation (Line(points={{94,-50},{110,
           -50},{110,-46},{150,-46}}, color={0,0,127}));
