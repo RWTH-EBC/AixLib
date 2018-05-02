@@ -10,7 +10,7 @@ model ExampleSanFran
         transformation(extent={{-90,54},{-50,94}}), iconTransformation(extent={{
             -168,6},{-148,26}})));
   Modelica.Blocks.Interfaces.RealOutput T_air "Output to show air temperature"
-    annotation (Placement(transformation(extent={{140,62},{160,82}})));
+    annotation (Placement(transformation(extent={{98,62},{118,82}})));
   Modelica.Blocks.Continuous.Integrator integrator "Integrates air temperature
   to compute average air temperature"
     annotation (Placement(transformation(extent={{0,40},{20,60}})));
@@ -21,7 +21,7 @@ model ExampleSanFran
     annotation (Placement(transformation(extent={{-40,-18},{-20,2}})));
   Modelica.Blocks.Interfaces.RealOutput T_mean "Output of average air
   temperature since beginning of simulation"
-    annotation (Placement(transformation(extent={{140,20},{160,40}})));
+    annotation (Placement(transformation(extent={{98,20},{118,40}})));
   Modelica.Blocks.Math.Max denominatorTmean
     "Max-function to prevent division by 0 at time=0"
     annotation (Placement(transformation(extent={{10,-12},{30,8}})));
@@ -41,30 +41,30 @@ model ExampleSanFran
     annotation (Placement(transformation(extent={{40,-60},{60,-40}})));
   Modelica.Blocks.Interfaces.RealOutput T_ground "Output to show ground
   temperature"
-    annotation (Placement(transformation(extent={{140,-56},{160,-36}})));
+    annotation (Placement(transformation(extent={{98,-60},{118,-40}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
     "Sensor to show ground temperature"
     annotation (Placement(transformation(extent={{74,-60},{94,-40}})));
   Modelica.Blocks.Interfaces.RealOutput T_amp
     "Keeps track of the amplitude of the air temperature"
-    annotation (Placement(transformation(extent={{140,-10},{160,10}})));
+    annotation (Placement(transformation(extent={{98,-10},{118,10}})));
 equation
 
  T_max=max(T_max, T_air);
  T_min=min(T_min, T_air);
  T_amp = (T_max-T_min)/2;
-  connect(T_air, weaBus.TDryBul) annotation (Line(points={{150,72},{-70,72},{-70,
-          74}}, color={0,0,127}), Text(
+  connect(T_air, weaBus.TDryBul) annotation (Line(points={{108,72},{-70,72},{
+          -70,74}},
+                color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
   connect(integrator.u, T_air) annotation (Line(points={{-2,50},{-14,50},{-14,
-          72},{150,72}}, color={0,0,127}));
+          72},{108,72}}, color={0,0,127}));
   connect(integrator.y, division.u1) annotation (Line(points={{21,50},{30,50},{30,
           36},{38,36}}, color={0,0,127}));
   connect(division.y, T_mean)
-    annotation (Line(points={{61,30},{92,30},{150,30}},
-                                                color={0,0,127}));
+    annotation (Line(points={{61,30},{108,30}}, color={0,0,127}));
   connect(division.u2, denominatorTmean.y)
     annotation (Line(points={{38,24},{31,24},{31,-2}}, color={0,0,127}));
   connect(denominatorTmean.u2, timeSource.y)
@@ -80,8 +80,10 @@ equation
       extent={{6,3},{6,3}}));
   connect(groundTemperatureKusuda.port_a, temperatureSensor.port) annotation (
       Line(points={{59.4,-55},{70,-55},{70,-50},{74,-50}}, color={191,0,0}));
-  connect(temperatureSensor.T, T_ground) annotation (Line(points={{94,-50},{110,
-          -50},{110,-46},{150,-46}}, color={0,0,127}));
+  connect(temperatureSensor.T, T_ground) annotation (Line(points={{94,-50},{108,
+          -50}},                     color={0,0,127}));
+  connect(T_mean, T_mean)
+    annotation (Line(points={{108,30},{108,30}}, color={0,0,127}));
   annotation (Documentation(revisions="<html>
 <ul>
 <li><i>May 2017</i>, by Felix Buenning: Updated documentation, added T_amp as output</li>
