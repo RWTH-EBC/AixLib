@@ -17,11 +17,11 @@ model EnergyBalance "Base class depicts energy and mass balances"
 
 equation
   // Mass and energy balances
-  enthalpyPort_a.m_flow + enthalpyPort_b.m_flow = 0;
+  enthalpyPort_a.m_flow - enthalpyPort_b.m_flow = 0;
   enthalpyPort_b.T = heatPort_a.T;
   enthalpyPort_b.h = enthalpyPort_a.c*heatPort_a.T;
   enthalpyPort_b.c = enthalpyPort_a.c;
-  heatPort_a.Q_flow = -(enthalpyPort_a.h*enthalpyPort_a.m_flow + enthalpyPort_b.h*enthalpyPort_b.m_flow);
+  heatPort_a.Q_flow = -(enthalpyPort_a.h*enthalpyPort_a.m_flow - enthalpyPort_b.h*enthalpyPort_b.m_flow);
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={Rectangle(
@@ -36,20 +36,25 @@ equation
           textString="energyBalance")}), Diagram(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
         graphics),
-    Documentation(info="<html>
-<ul>
-<li>Base class EnergyBalance depicts change of condition of the fluid due to heat
-transfer.</li>
-<li>Two enthalpy ports describe the input and output condition of the fluid
-(temperature, specific enthalpy, specific heat capacity, mass flow).</li>
-<li>One thermal port depicts the heat flow, which is transfered on the fluid</li>
+    Documentation(info="<html><ul>
+  <li>Base class EnergyBalance depicts change of condition of the fluid
+  due to heat transfer.
+  </li>
+  <li>Two enthalpy ports describe the input and output condition of the
+  fluid (temperature, specific enthalpy, specific heat capacity, mass
+  flow).
+  </li>
+  <li>One thermal port depicts the heat flow, which is transfered on
+  the fluid
+  </li>
 </ul>
 </html>", revisions="<html>
 <ul>
-<li>
-<br/>April 25, 2017, by Michael Mans:<br/>
-Moved to AixLib
-</li>
+  <li>
+    <br/>
+    April 25, 2017, by Michael Mans:<br/>
+    Moved to AixLib
+  </li>
 </ul>
 </html>"));
 end EnergyBalance;

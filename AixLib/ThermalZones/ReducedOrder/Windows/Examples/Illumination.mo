@@ -42,7 +42,7 @@ model Illumination "Testmodel for Illumination"
     til={1.5707963267949}) "Window facing the south in a wall"
     annotation (Placement(transformation(extent={{-10,24},{10,44}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
-    filNam="modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")
+    filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"))
     annotation (Placement(transformation(extent={{-100,-10},{-80,10}})));
   AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil(
     azi=0,

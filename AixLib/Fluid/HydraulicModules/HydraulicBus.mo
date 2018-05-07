@@ -1,11 +1,11 @@
 within AixLib.Fluid.HydraulicModules;
-expandable connector HydraulicBus "data bus for hydraulic circuits"
+expandable connector HydraulicBus "Data bus for hydraulic circuits"
   extends Modelica.Icons.SignalBus;
   import SI = Modelica.SIunits;
-  Real rpm_Input "pump speed"
+  Real rpm_Input "Pump speed"
     annotation (HideResult=false);
-  SI.Power P "electrical pump power" annotation (HideResult=false);
-  Real valveSet "Opening valve 0-1";
+  SI.Power P "Electrical pump power" annotation (HideResult=false);
+  Real valveSet "Opening valve 0..1";
   SI.Temperature Tambient "Ambient temperature";
   SI.Temperature TfwrdIn "Flow Temperature into forward line";
   SI.Temperature TfwrdOut "Flow Temperature out of forward line";
@@ -24,10 +24,8 @@ particular module type.
 </p>
 </html>", revisions="<html>
 <ul>
-<li>
-2012-02-06, by Peter Matthes:<br/>
-First implementation.
-</li>
+<li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Adaption for hydraulic modules in AixLib.</li>
+<li>February 6, 2016, by Peter Matthes:<br/>First implementation. </li>
 </ul>
 </html>"));
 end HydraulicBus;

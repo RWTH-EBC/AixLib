@@ -3,31 +3,31 @@ model test_Admix "test for admix circuit"
   extends Modelica.Icons.Example;
 
   Admix admix(redeclare package Medium = Medium, pump(redeclare
-        AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per))
-                                                 "hydronic module 1"
+        AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per),
+    pipe6(length=1))                             "hydronic module 1"
     annotation (Placement(transformation(
-        extent={{-20,-20},{20,20}},
+        extent={{-28,-28},{28,28}},
         rotation=90,
-        origin={16,26})));
+        origin={24,18})));
   replaceable package Medium =
       Modelica.Media.Water.ConstantPropertyLiquidWater
     annotation (__Dymola_choicesAllMatching=true);
   Modelica.Fluid.Sources.Boundary_pT boundary(
-    nPorts=1,
     redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
-    T=323.15) annotation (Placement(transformation(
+    T=323.15,
+    nPorts=1) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
-        origin={-6,-24})));
+        origin={8,-36})));
   Modelica.Fluid.Sources.Boundary_pT boundary1(
-    nPorts=1,
     redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
-    T=323.15) annotation (Placement(transformation(
+    T=323.15,
+    nPorts=1) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
-        origin={42,-24})));
+        origin={40,-36})));
 
   AixLib.Fluid.FixedResistances.PressureDrop hydRes(
     m_flow_nominal=8*996/3600,
@@ -40,54 +40,56 @@ model test_Admix "test for admix circuit"
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={16,64})));
+        origin={24,62})));
   Modelica.Blocks.Sources.Ramp valveOpening(              duration=500,
       startTime=180)
-    annotation (Placement(transformation(extent={{-98,6},{-78,26}})));
+    annotation (Placement(transformation(extent={{-96,8},{-76,28}})));
   AixLib.Fluid.HydraulicModules.HydraulicBus hydraulicBus
-    annotation (Placement(transformation(extent={{-52,6},{-32,26}})));
+    annotation (Placement(transformation(extent={{-52,8},{-32,28}})));
   Modelica.Blocks.Sources.Constant RPM(k=2000)
-    annotation (Placement(transformation(extent={{-98,42},{-78,62}})));
+    annotation (Placement(transformation(extent={{-96,42},{-76,62}})));
 equation
 
-  connect(boundary.ports[1], admix.port_fwrdIn) annotation (Line(points={{-6,-14},
-          {-2,-14},{-2,6},{4,6}}, color={0,127,255}));
-  connect(boundary1.ports[1], admix.port_rtrnOut) annotation (Line(points={{42,
-          -14},{34,-14},{34,6},{28,6}}, color={0,127,255}));
-  connect(admix.port_fwrdOut, hydRes.port_a)
-    annotation (Line(points={{4,46},{4,64},{6,64}}, color={0,127,255}));
-  connect(admix.port_rtrnIn, hydRes.port_b) annotation (Line(points={{28,46},
-          {30,46},{30,62},{30,64},{26,64}}, color={0,127,255}));
-  connect(valveOpening.y, hydraulicBus.valveSet) annotation (Line(points={{-77,
-          16},{-58,16},{-58,16.05},{-41.95,16.05}}, color={0,0,127}), Text(
+  connect(valveOpening.y, hydraulicBus.valveSet) annotation (Line(points={{-75,18},
+          {-58,18},{-58,18.05},{-41.95,18.05}},     color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
   connect(hydraulicBus, admix.hydraulicBus) annotation (Line(
-      points={{-42,16},{-24,16},{-24,18},{-4,18}},
+      points={{-42,18},{-4,18}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(RPM.y, hydraulicBus.rpm_Input) annotation (Line(points={{-77,52},
-          {-54,52},{-54,54},{-41.95,54},{-41.95,16.05}}, color={0,0,127}),
+  connect(RPM.y, hydraulicBus.rpm_Input) annotation (Line(points={{-75,52},{-42,
+          52},{-42,36},{-41.95,36},{-41.95,18.05}},      color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
+  connect(boundary.ports[1], admix.port_a1)
+    annotation (Line(points={{8,-26},{7.2,-26},{7.2,-10}}, color={0,127,255}));
+  connect(boundary1.ports[1], admix.port_b2) annotation (Line(points={{40,-26},
+          {40,-10},{40.8,-10}}, color={0,127,255}));
+  connect(admix.port_a2, hydRes.port_b)
+    annotation (Line(points={{40.8,46},{40.8,62},{34,62}}, color={0,127,255}));
+  connect(admix.port_b1, hydRes.port_a) annotation (Line(points={{7.2,46},{8,46},
+          {8,62},{14,62}}, color={0,127,255}));
   annotation (
     Icon(graphics,
          coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
-    experiment(StopTime=86400),
+    experiment(StopTime=1000),
     __Dymola_Commands,
     Documentation(revisions="<html>
 <ul>
-<li><i>2017-03-08 &nbsp;</i> by Peter Matthes:<br>Renamed and updated plot script 'pump test'. Solves Issue #28</li>
-<li><i>2017-03-07 &nbsp;</i> by Peter Matthes:<br>Renamed and updated plot script.</li>
-<li><i>2017-03-07 &nbsp;</i> by Peter Matthes:<br>Renamed model instances after renaming of modules.</li>
-<li><i>2017-02-09 &nbsp;</i> by Peter Matthes:<br>implemented</li>
+<li>October 25,2017, by Alexander K&uuml;mpel:<br/>Transfered to AixLib from ZUGABE.</li>
+<li>March 7,2017, by Peter Matthes:<br/>Renamed and updated plot script.</li>
+<li>March 7,2017, by Peter Matthes:<br/>Renamed model instances after renaming of modules.</li>
+<li>February 2,2017, by Peter Matthes:<br/>implemented</li>
 </ul>
+</html>", info="<html>
+<p>Model that demonstrates the use of the admix circuit. The inlet mass flow (port_a1) increases when the three-way-valve opens whereas the outlet massflow varies less. </p>
 </html>"));
 end test_Admix;
