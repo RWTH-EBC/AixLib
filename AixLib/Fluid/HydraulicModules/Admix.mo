@@ -51,24 +51,24 @@ public
   HydraulicModules.HydraulicBus hydraulicBus
     annotation (Placement(transformation(extent={{-20,80},{20,120}}),
         iconTransformation(extent={{-20,80},{20,120}})));
-  FixedResistances.DPEAgg_ambientLoss pipe1(redeclare package Medium = Medium,
+  FixedResistances.Pipe               pipe1(redeclare package Medium = Medium,
       T_start=Tinit,
     parameterPipe=DataBase.Pipes.Copper.Copper_35x1_5())
                      annotation (Dialog(enable=true), Placement(transformation(
           extent={{-80,26},{-68,14}})));
-  FixedResistances.DPEAgg_ambientLoss                    pipe2(redeclare
+  FixedResistances.Pipe                                  pipe2(redeclare
       package Medium =                                                                    Medium,
       T_start=Tinit,
     parameterPipe=DataBase.Pipes.Copper.Copper_35x1_5())
                      annotation (Dialog(enable=true), Placement(transformation(
           extent={{-6,26},{6,14}})));
-  FixedResistances.DPEAgg_ambientLoss                    pipe3(redeclare
+  FixedResistances.Pipe                                  pipe3(redeclare
       package Medium =                                                                    Medium,
       T_start=Tinit,
     parameterPipe=DataBase.Pipes.Copper.Copper_35x1_5())
                      annotation (Dialog(enable=true), Placement(transformation(
           extent={{66,26},{78,14}})));
-  FixedResistances.DPEAgg_ambientLoss                    pipe4(redeclare
+  FixedResistances.Pipe                                  pipe4(redeclare
       package Medium =                                                                    Medium,
       T_start=Tinit,
     parameterPipe=DataBase.Pipes.Copper.Copper_35x1_5())
@@ -90,7 +90,7 @@ protected
         rotation=180,
         origin={-2,-22})));
 public
-  FixedResistances.DPEAgg_ambientLoss                    pipe5(redeclare
+  FixedResistances.Pipe                                  pipe5(redeclare
       package Medium =                                                                    Medium,
       T_start=Tinit,
     parameterPipe=DataBase.Pipes.Copper.Copper_35x1_5())
@@ -98,7 +98,7 @@ public
         extent={{-6,6},{6,-6}},
         rotation=180,
         origin={-68,-60})));
-  FixedResistances.DPEAgg_ambientLoss                    pipe6(redeclare
+  FixedResistances.Pipe                                  pipe6(redeclare
       package Medium =                                                                    Medium,
       T_start=Tinit,
     parameterPipe=DataBase.Pipes.Copper.Copper_35x1_5())
