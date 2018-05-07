@@ -164,7 +164,7 @@ model BuildingWithPV
   BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
-    filNam="modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
+    filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-60,118},{-40,138}})));
   ThermalZones.ReducedOrder.ThermalZone.ThermalZone
@@ -247,8 +247,8 @@ equation
           -6}}, color={0,0,127}));
   connect(PID1.y, val.y) annotation (Line(points={{161,38},{170,38},{170,-6},{46,
           -6}}, color={0,0,127}));
-  connect(fan.m_flow_in, zero2.y) annotation (Line(points={{84,-96.2},{92,-96.2},
-          {92,-96},{99,-96}}, color={0,0,127}));
+  connect(fan.m_flow_in, zero2.y) annotation (Line(points={{84,-96},{92,-96},{
+          92,-96},{99,-96}},  color={0,0,127}));
   connect(fixedHeatFlow.port, fan.heatPort) annotation (Line(points={{-78,128},{
           -74,128},{-68,128},{-68,100},{60,100},{60,-96},{65.2,-96}},
         color={191,0,0}));
@@ -397,6 +397,6 @@ equation
 </ul>
 <h4><span style=\"color: #008000\">Concept</span></h4>
 <p>The system has two heat sources, which are a boiler and a heating rod. The heating rod is connected to a PV system. During the times the PV panel is able to provide electricity, the cost function of the heating rod considers the electricity free. During all other times the boiler is more cost efficient than the heating rod and is selected for heat generation first.</p>
-<p>This model was used to present the HVACAgentBasedControl library in [Roozbeh Sangi, Felix B&uuml;nning, Marc Baranski, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic]. For detailed information please refer to this source. </p>
+<p>This model was used to present the HVACAgentBasedControl library in [Roozbeh Sangi, Felix B&uuml;nning, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic]. For detailed information please refer to this source. </p>
 </html>"));
 end BuildingWithPV;

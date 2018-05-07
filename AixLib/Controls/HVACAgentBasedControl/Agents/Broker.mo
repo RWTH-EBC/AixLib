@@ -10,37 +10,37 @@ model Broker
   Real[:,7] heatSupplierTable(start=startTable);
   parameter Real[:,7] startTable = [30001,0,0,0,0,0,0; 30002,0,0,0,0,0,0]
     "Initialization table for the negotiation process. Fill first column with ProducerAgents";
-  Integer proposalCounter(start=1);
-  Integer counterReject(start=1);
-  Real lowestPrice(start=0);
-  Integer counter(start=1);
-  Boolean requestsExceedSupply(start=false);
+  Integer proposalCounter(start=1) "Integer variable to describe proposalCounter";
+  Integer counterReject(start=1) "Integer variable to describe counterReject";
+  Real lowestPrice(start=0) "Real variable to define lowestPrice";
+  Integer counter(start=1) "Integer variable to describe counter";
+  Boolean requestsExceedSupply(start=false) "Boolean variable to describe whteher requests exceed supply";
 
   // Tables and variables note the requests by the consumers
-  Real requestTable[10,1](start=[0;0;0;0;0;0;0;0;0;0]);
-  Real requestAddresses[10,1](start=[0;0;0;0;0;0;0;0;0;0]);
-  Real heatingRequestSum(start=0);
-  Integer requestCounter(start=1);
+  Real requestTable[10,1](start=[0;0;0;0;0;0;0;0;0;0]) "Real variable to define requestTable";
+  Real requestAddresses[10,1](start=[0;0;0;0;0;0;0;0;0;0]) "Real variable to define requestAddresses";
+  Real heatingRequestSum(start=0) "Real variable to define the sum of heating requests";
+  Integer requestCounter(start=1) "Real variable to define requestCounter";
 
   // Variables for average price (for storage)
-  Real totalPrice;
-  Real totalHeat;
-  Real averagePrice;
+  Real totalPrice "Real variable to define totalPrice";
+  Real totalHeat "Real variable to define totalHeat";
+  Real averagePrice "Real variable to define averagePrice";
 
   // Variables for finding the lowest price combination
-  Real heatingCalculationSum(start=0);
-  Integer cheapest(start=1);
-  Real heatingPriceSum;
-  Real totalaveragePrice;
-  Real restHeat;
-  Boolean calculationDone( start=false);
+  Real heatingCalculationSum(start=0) "Real variable to define the sum of heatingCalculation";
+  Integer cheapest(start=1) "Integer variable to define the cheapest offer";
+  Real heatingPriceSum "Real variable to define the sum of heatingPrice";
+  Real totalaveragePrice "Real variable to define totalaveragePrice";
+  Real restHeat "Real variable to define restHeat";
+  Boolean calculationDone( start=false) "Boolean variable to annonce calculationDone";
 
   // Variable for composing information
-  Integer informationCounter(start=1);
-  Boolean informationDone(start=false);
+  Integer informationCounter(start=1) "Integer variable to define informationCounter";
+  Boolean informationDone(start=false) "Boolean variable to announce informationDone";
 
   // Variables for requests from producers
-  Boolean finalRequestDone(start=false);
+  Boolean finalRequestDone(start=false) "Boolean variable to announce finalRequestDone";
 
 // This section contains the blocks for the state-machine logic of the agent
 
@@ -962,9 +962,10 @@ equation
 <p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/Broker.png\" alt=\"Broker\"/></p>
 <h4><span style=\"color: #008000\">References</span></h4>
 <ul>
-<li>Roozbeh Sangi, Felix B&uuml;nning, Marc Baranski, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic. </li>
+<li>Roozbeh Sangi, Felix B&uuml;nning, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic. </li>
 <li>FIPA ACL Message Structure Specification</li>
 <li>FIPA Communicative Act Library Specification </li>
+<li>Felix B&uuml;nning, Roozbeh Sangi, Dirk M&uuml;ller<span style=\"font-family: TimesNewRoman,serif;\">. A</span> Modelica library for agent-based control of building HVAC systems. Applied Energy, 193:52-59, 2017. </li>
 </ul>
 <h4><span style=\"color: #008000\">Example Results</span></h4>
 <ul>
