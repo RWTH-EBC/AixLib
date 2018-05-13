@@ -20,8 +20,6 @@ equation
             fillPattern=                                                                                                    FillPattern.Solid, textString=  "DIN 12381")}), Documentation(info="<html>
 <p><b><font style=\"color: #008000; \">Overview</font></b> </p>
 <p>The<b> InfiltrationRate</b> model describes heat and mass transport by infiltration. </p>
-<p><b><font style=\"color: #008000; \">Level of Development</font></b> </p>
-<p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/> </p>
 <p><b><font style=\"color: #008000; \">Concept</font></b> </p>
 <p>Air exchange coefficients at 50 Pa pressure difference between ambience and room air: </p>
 <table summary=\"coefficients\" cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>

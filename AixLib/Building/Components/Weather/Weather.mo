@@ -9,7 +9,7 @@ model Weather "Complex weather model"
   parameter Real GroundReflection = 0.2 "ground reflection coefficient" annotation(Dialog(group = "Location Properties"));
   parameter String tableName = "wetter"
     "table name on file or in function usertab"                                     annotation(Dialog(group = "Properties of Weather Data"));
-  parameter String fileName = "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt"
+  parameter String fileName = Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/TRY2010_12_Jahr_Modelica-Library.txt")
     "file where matrix is stored"                                                                                                     annotation(Dialog(group = "Properties of Weather Data", loadSelector(filter = "Text files (*.txt);;Matlab files (*.mat)", caption = "Open file in which table is present")));
   parameter Real offset[:] = {0} "offsets of output signals" annotation(Dialog(group = "Properties of Weather Data"));
   parameter Modelica.Blocks.Types.Smoothness smoothness = Modelica.Blocks.Types.Smoothness.LinearSegments
@@ -39,8 +39,7 @@ model Weather "Complex weather model"
   parameter Boolean Air_press = false "Air pressure [Pa] (TRY col 11)" annotation(Dialog(tab = "Optional output vector", descriptionLabel = true), choices(checkBox = true));
   parameter Boolean Mass_frac = false
     "Mass fraction of water in dry air [kg/kg] (TRY col 12)"                                   annotation(Dialog(tab = "Optional output vector", descriptionLabel = true), choices(checkBox = true));
-  parameter Boolean Rel_hum = false "Realtive humidity of air [-] (TRY col 13)"
-                                                                                annotation(Dialog(tab = "Optional output vector", descriptionLabel = true), choices(checkBox = true));
+  parameter Boolean Rel_hum = false "Realtive humidity of air [-] (TRY col 13)" annotation(Dialog(tab = "Optional output vector", descriptionLabel = true), choices(checkBox = true));
   parameter Boolean Sky_rad = false
     "Longwave sky radiation on horizontal [W/m2] (TRY col 18)"                                 annotation(Dialog(tab = "Optional output vector", descriptionLabel = true), choices(checkBox = true));
   parameter Boolean Ter_rad = false
@@ -211,8 +210,6 @@ equation
             horizontalAlignment =                                                                                                   TextAlignment.Right, textString = "Terrest. rad.")}), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Supplies weather data using a TRY - data set. </p>
- <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>Input: a TRY data set in an accepted Modelica format (.mat, .txt, with header). The structure should be exactly the one of a TRY, status: TRY 2011.</p>
  <p>Output: </p>

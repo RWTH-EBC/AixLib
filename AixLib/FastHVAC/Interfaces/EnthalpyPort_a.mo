@@ -6,15 +6,16 @@ connector EnthalpyPort_a "Inlet enthalpy connector non-Fluid models"
           extent={{-100,100},{100,-100}},
           lineColor={176,0,0}, thickness={0.5},
           fillPattern=FillPattern.Solid,
-          fillColor={176,0,0})}), Documentation(info="<html>
-          <p>This model defines a inlet enthalpy port used withi the FastHVAC
-          package</p>
+          fillColor={176,0,0})}), Documentation(info="<html><p>
+  This model defines a inlet enthalpy port used withi the FastHVAC
+  package
+</p>
 </html>", revisions="<html>
 <ul>
-<li>
-<i>April 25, 2017</i>, by Michael Mans:<br/>
-Moved to AixLib
-</li>
+  <li>
+    <i>April 25, 2017</i>, by Michael Mans:<br/>
+    Moved to AixLib
+  </li>
 </ul>
 </html>"));
 end EnthalpyPort_a;

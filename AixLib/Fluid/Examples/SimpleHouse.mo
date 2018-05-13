@@ -55,15 +55,13 @@ model SimpleHouse
     use_T_in=true) "Air boundary with constant temperature"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
-        rotation=0,
         origin={-112,140})));
   Sources.Boundary_pT bouWat(redeclare package Medium = MediumWater, nPorts=1)
     "Pressure bound for water circuit" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
-        rotation=0,
         origin={-8,-170})));
   BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
-    filNam="modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")
+    filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-200,-18},{-180,2}})));
   BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
@@ -103,7 +101,6 @@ model SimpleHouse
     m_flow_nominal=mAir_flow_nominal) "Damper" annotation (Placement(
         transformation(
         extent={{-10,10},{10,-10}},
-        rotation=0,
         origin={72,120})));
 
   Movers.FlowControlled_dp fan(
@@ -115,7 +112,6 @@ model SimpleHouse
     m_flow_nominal=mAir_flow_nominal,
     show_T=true) "Constant head fan" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
-        rotation=0,
         origin={-22,120})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow window
     "Very simple window model"
@@ -151,12 +147,11 @@ model SimpleHouse
   Modelica.Blocks.Sources.Constant TSetRoo(k=273.15 + 24)
     "Room temperature set point for air system"
     annotation (Placement(transformation(extent={{-60,60},{-40,80}})));
-  HeatExchangers.HeaterCooler_T cooAir(
+  HeatExchangers.SensibleCooler_T cooAir(
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     allowFlowReversal=allowFlowReversal,
     m_flow_nominal=mAir_flow_nominal,
     dp_nominal=0,
-    Q_flow_maxHeat=0,
     redeclare package Medium = MediumAir) "Cooling for supply air"
     annotation (Placement(transformation(extent={{30,110},{50,130}})));
   Modelica.Blocks.Sources.Constant TSupAirCoo(k=273.15 + 20)
@@ -238,7 +233,7 @@ equation
   connect(cooAir.port_b, vavDam.port_a)
     annotation (Line(points={{50,120},{50,120},{62,120}}, color={0,127,255}));
   connect(TSupAirCoo.y, cooAir.TSet) annotation (Line(points={{9,160},{20,160},{
-          20,126},{28,126}}, color={0,0,127}));
+          20,128},{28,128}}, color={0,0,127}));
   connect(bouAir.T_in, weaBus.TDryBul) annotation (Line(points={{-124,144},{
           -152,144},{-152,-8}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-240,
@@ -290,6 +285,13 @@ equation
     experiment(Tolerance=1e-06, StopTime=3.1536e+07),
     Documentation(revisions="<html>
 <ul>
+<li>
+May 8, 2017, by Michael Wetter:<br/>
+Updated heater model.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/763\">
+AixLib, #763</a>.
+</li>
 <li>
 November 10, 2016, by Michael Wetter:<br/>
 Connected supply air temperature to outdoor air temperature,

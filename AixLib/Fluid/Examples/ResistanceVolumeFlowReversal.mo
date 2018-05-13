@@ -18,11 +18,10 @@ model ResistanceVolumeFlowReversal
     nominalValuesDefineDefaultPressureCurve=true)
     "Pump model with unidirectional flow"
     annotation (Placement(transformation(extent={{20,-30},{40,-10}})));
-  AixLib.Fluid.HeatExchangers.HeaterCooler_T hea(
+  AixLib.Fluid.HeatExchangers.Heater_T hea(
     redeclare package Medium = Medium,
     dp_nominal=1000,
-    Q_flow_maxHeat=1000,
-    Q_flow_maxCool=0,
+    QMax_flow=1000,
     m_flow_nominal=m_flow_nominal,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     allowFlowReversal=allowFlowReversal.k) "Heater"
@@ -47,7 +46,7 @@ model ResistanceVolumeFlowReversal
   AixLib.Fluid.FixedResistances.PressureDrop[nRes.k] res(
     redeclare package Medium = Medium,
     each allowFlowReversal=allowFlowReversal.k,
-    each m_flow_nominal=m_flow_nominal,
+    each m_flow_nominal=m_flow_nominal/nRes.k,
     each dp_nominal=1000) "Fluid resistance for splitting flow"
     annotation (Placement(transformation(extent={{56,-30},{76,-10}})));
   Modelica.Blocks.Sources.IntegerConstant nRes(k=10)
@@ -55,7 +54,7 @@ model ResistanceVolumeFlowReversal
     annotation (Placement(transformation(extent={{-40,70},{-20,90}})));
   Delays.DelayFirstOrder[nRes.k] vol(
     redeclare each package Medium = Medium,
-    each m_flow_nominal=m_flow_nominal,
+    each m_flow_nominal=m_flow_nominal/nRes.k,
     each nPorts=2,
     each energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     each massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
@@ -66,10 +65,10 @@ equation
       points={{-60,-20},{-40,-20}},
       color={0,127,255}));
   connect(pulse.y,hea. TSet) annotation (Line(
-      points={{-59,50},{-50,50},{-50,-14},{-42,-14}},
+      points={{-59,50},{-50,50},{-50,-12},{-42,-12}},
       color={0,0,127}));
   connect(pump.m_flow_in, gain.y) annotation (Line(
-      points={{29.8,-8},{29.8,50},{-19,50}},
+      points={{30,-8},{30,50},{-19,50}},
       color={0,0,127}));
   connect(gain.u,pulse. y) annotation (Line(
       points={{-42,50},{-59,50}},
@@ -154,6 +153,20 @@ Sizes after manipulation of the nonlinear systems: {1, 9, <b>1</b>}
 </p>
 </html>", revisions="<html>
 <ul>
+<li>
+September 21, 2017, by Michael Wetter:<br/>
+Corrected parameterization to be independent of <code>k</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/825\">
+AixLib, #825</a>.
+</li>
+<li>
+May 8, 2017, by Michael Wetter:<br/>
+Updated heater model.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/763\">
+AixLib, #763</a>.
+</li>
 <li>
 April 11, 2016 by Michael Wetter:<br/>
 Corrected wrong hyperlink in documentation for
