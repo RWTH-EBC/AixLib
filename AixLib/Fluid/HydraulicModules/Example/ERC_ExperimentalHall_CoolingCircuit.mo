@@ -20,10 +20,10 @@ model ERC_ExperimentalHall_CoolingCircuit
   Sources.MassFlowSource_T              boundary(
     nPorts=1,
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
     m_flow=4,
     T=280.15)
     annotation (Placement(transformation(extent={{-182,-38},{-162,-18}})));
+
   Admix admix(
     pipe1(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
     pipe2(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
@@ -32,31 +32,31 @@ model ERC_ExperimentalHall_CoolingCircuit
     pipe5(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
     pipe6(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
     pump(redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per),
-
     Tinit=293.15) annotation (Placement(transformation(
         extent={{-25,-25},{25,25}},
         rotation=90,
         origin={-67,11})));
+
   Unmixed unmixed(
     pipe1(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
     pipe2(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
     pipe3(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
     pump(redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per),
-
     Tinit=293.15) annotation (Placement(transformation(
         extent={{-25,-25},{25,25}},
         rotation=90,
         origin={3,11})));
+
   Unmixed unmixed1(
     pipe1(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
     pipe2(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
     pipe3(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
     pump(redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per),
-
     Tinit=293.15) annotation (Placement(transformation(
         extent={{-25,-25},{25,25}},
         rotation=90,
         origin={75,11})));
+
   SimpleConsumer simpleConsumer(
     kA=2000,
     pipe1(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
@@ -122,7 +122,7 @@ equation
   connect(unmixed.port_rtrnOut, unmixed1.port_rtrnOut) annotation (Line(points=
           {{18,-14},{18,-68},{90,-68},{90,-14}}, color={0,127,255}));
   connect(admix.hydraulicBus, ctr_admix.hydraulicBus) annotation (Line(
-      points={{-92,1},{-104,1},{-104,20.46},{-106.98,20.46}},
+      points={{-92,11},{-104,11},{-104,20.46},{-106.98,20.46}},
       color={255,204,51},
       thickness=0.5));
   connect(ctr_unmixed_simple.hydraulicBus, unmixed1.hydraulicBus) annotation (

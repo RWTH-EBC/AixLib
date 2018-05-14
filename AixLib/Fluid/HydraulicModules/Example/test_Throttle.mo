@@ -39,7 +39,7 @@ model test_Throttle "Test for throttle circuit"
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-8,40})));
-  AixLib.Fluid.HydraulicModules.HydraulicBus hydraulicBus
+  AixLib.Fluid.HydraulicModules.BaseClasses.HydraulicBus hydraulicBus
     annotation (Placement(transformation(extent={{-62,-4},{-42,16}})));
   Modelica.Blocks.Sources.Ramp valveOpening(              duration=500,
       startTime=180)

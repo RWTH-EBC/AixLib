@@ -10,7 +10,7 @@ public
       constrainedby Modelica.Media.Interfaces.PartialMedium
     "Medium in the system" annotation (choicesAllMatching=true);
 
-  HydraulicBus hydraulicBus
+  BaseClasses.HydraulicBus hydraulicBus
     annotation (Placement(transformation(extent={{-40,80},{0,118}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_fwrdIn(redeclare package Medium =
         Medium) "forward line inflowing medium" annotation (Placement(
@@ -194,7 +194,7 @@ equation
       visible=false));
 
   connect(prescribedTemperature.T, hydraulicBus.Tambient) annotation (Line(
-        points={{-41.2,116},{-19.9,116},{-19.9,99.095}},color={0,0,127}), Text(
+        points={{-41.2,116},{-20,116},{-20,99}},        color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
@@ -227,7 +227,7 @@ equation
   connect(TfwrdIn.y, Pt1FwrdIn.u)
     annotation (Line(points={{-85.6,14},{-96,14},{-96,20}}, color={0,0,127}));
   connect(Pt1FwrdIn.y, hydraulicBus.TfwrdIn) annotation (Line(
-      points={{-96,43},{-96,99.095},{-19.9,99.095}},
+      points={{-96,43},{-96,99},{-20,99}},
       color={0,0,127},
       visible=false), Text(
       string="%second",
@@ -236,7 +236,7 @@ equation
   connect(TfwrdOut.y, Pt1FwrdOut.u)
     annotation (Line(points={{87.6,14},{94,14},{94,20}}, color={0,0,127}));
   connect(Pt1FwrdOut.y, hydraulicBus.TfwrdOut) annotation (Line(
-      points={{94,43},{94,99.095},{-19.9,99.095}},
+      points={{94,43},{94,99},{-20,99}},
       color={0,0,127},
       visible=false), Text(
       string="%second",
@@ -245,15 +245,15 @@ equation
   connect(TrtrnIn.y, Pt1RtrnIn.u)
     annotation (Line(points={{67.6,-88},{80,-88}}, color={0,0,127}));
   connect(Pt1RtrnIn.y, hydraulicBus.TrtrnIn) annotation (Line(points={{80,-111},
-          {80,-116},{116,-116},{116,99.095},{-19.9,99.095}}, color={0,0,127}),
+          {80,-116},{116,-116},{116,99},{-20,99}},           color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
   connect(TrtrnOut.y, Pt1RtrnOut.u)
     annotation (Line(points={{-67.6,-88},{-80,-88}}, color={0,0,127}));
-  connect(Pt1RtrnOut.y, hydraulicBus.TrtrnOut) annotation (Line(points={{-80,-111},
-          {-80,-118},{-116,-118},{-116,99.095},{-19.9,99.095}}, color={0,0,127}),
+  connect(Pt1RtrnOut.y, hydraulicBus.TrtrnOut) annotation (Line(points={{-80,
+          -111},{-80,-118},{-116,-118},{-116,99},{-20,99}},     color={0,0,127}),
       Text(
       string="%second",
       index=1,

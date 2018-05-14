@@ -14,6 +14,8 @@ model Admix "Admix circuit with three way valve and rpm controlled pump"
     "Time Constant for PT1 behavior of temperature sensors"
                                                            annotation(Dialog(tab="Advanced"));
 
+  replaceable BaseClasses.BasicPumpInterface basicPumpInterface
+    annotation (Placement(transformation(extent={{26,8},{50,32}})));
 
   AixLib.Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear val(
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
@@ -33,13 +35,8 @@ model Admix "Admix circuit with three way valve and rpm controlled pump"
         rotation=0,
         origin={-30,20})));
 
-  Movers.SpeedControlled_Nrpm pump(redeclare final package Medium = Medium)
-    annotation (Dialog(enable=true), Placement(transformation(extent={{18,10},{38,
-            30}})));
-
-  HydraulicModules.HydraulicBus hydraulicBus annotation (Placement(
-        transformation(extent={{-20,80},{20,120}}), iconTransformation(extent={{
-            -20,80},{20,120}})));
+  BaseClasses.HydraulicBus hydraulicBus annotation (Placement(transformation(
+          extent={{-20,80},{20,120}}), iconTransformation(extent={{-20,80},{20,120}})));
   FixedResistances.Pipe pipe1(
     redeclare final package Medium = Medium,
     T_start=T_start) annotation (Dialog(
@@ -147,6 +144,7 @@ protected
         origin={-2,-22})));
 
 
+
 equation
 
   connect(pipe1.port_b, val.port_1)
@@ -244,20 +242,6 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(pump.Nrpm, hydraulicBus.rpm_Input) annotation (Line(points={{28,32},{28,
-          100.1},{0.1,100.1}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
-  connect(pump.P, hydraulicBus.P) annotation (Line(points={{39,29},{39,100.1},{0.1,
-          100.1}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
-  connect(pipe2.port_b, pump.port_a)
-    annotation (Line(points={{6.24,20},{18,20}}, color={0,127,255}));
-  connect(pump.port_b, pipe3.port_a)
-    annotation (Line(points={{38,20},{65.76,20}}, color={0,127,255}));
   connect(VFSen_out.port_a, port_a1)
     annotation (Line(points={{-100,50},{-100,60}}, color={0,127,255}));
   connect(VFSen_in.port_b, port_b1)
@@ -276,9 +260,13 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
+  connect(basicPumpInterface.port_b, pipe3.port_a)
+    annotation (Line(points={{50,20},{65.76,20}}, color={0,127,255}));
+  connect(basicPumpInterface.port_a, pipe2.port_b)
+    annotation (Line(points={{26,20},{6.24,20}}, color={0,127,255}));
   annotation (
     Documentation(info="<html>
-<p>Admix circuit with a rpm controlled pump for the distribution of hot or cold water. All sensor and actor values are connected to the hydraulic bus (not all connections are visible).</p>
+<p>Admix circuit with a replaceable pump model for the distribution of hot or cold water. All sensor and actor values are connected to the hydraulic bus (not all connections are visible).</p>
 <h4>Characteristics</h4>
 <p>There is a connecting pipe between distributer and collector of manifold so that the pressure difference between them becomes insignificant. The main pump only works against the resistance in the main circuit.</p>
 <p>The mass flow in primary and secondary circuits stay constant.</p>

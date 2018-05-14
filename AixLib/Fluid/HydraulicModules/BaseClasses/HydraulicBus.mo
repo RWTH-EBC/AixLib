@@ -1,4 +1,4 @@
-within AixLib.Fluid.HydraulicModules;
+within AixLib.Fluid.HydraulicModules.BaseClasses;
 expandable connector HydraulicBus "Data bus for hydraulic circuits"
   extends Modelica.Icons.SignalBus;
   import SI = Modelica.SIunits;

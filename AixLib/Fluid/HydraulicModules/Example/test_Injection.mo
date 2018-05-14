@@ -46,7 +46,7 @@ model test_Injection "Test for injection circuit"
     annotation (Placement(transformation(extent={{-98,6},{-78,26}})));
   Modelica.Blocks.Sources.Constant RPM(k=2000)
     annotation (Placement(transformation(extent={{-98,44},{-78,64}})));
-  HydraulicBus                               hydraulicBus
+  BaseClasses.HydraulicBus hydraulicBus
     annotation (Placement(transformation(extent={{-52,6},{-32,26}})));
 equation
 

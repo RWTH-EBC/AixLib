@@ -11,7 +11,7 @@ public
     constrainedby Modelica.Media.Interfaces.PartialMedium
     "Medium in the system" annotation (choicesAllMatching=true);
 
-  AixLib.Fluid.HydraulicModules.HydraulicBus hydraulicBus
+  AixLib.Fluid.HydraulicModules.BaseClasses.HydraulicBus hydraulicBus
     annotation (Placement(transformation(extent={{-60,80},{-20,120}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_fwrdIn(redeclare package Medium =
         Medium) "forward line inflowing medium" annotation (Placement(

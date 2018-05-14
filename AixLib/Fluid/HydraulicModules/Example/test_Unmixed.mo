@@ -41,7 +41,7 @@ model test_Unmixed "Test for unmixed circuit"
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-8,40})));
-  AixLib.Fluid.HydraulicModules.HydraulicBus hydraulicBus
+  AixLib.Fluid.HydraulicModules.BaseClasses.HydraulicBus hydraulicBus
     annotation (Placement(transformation(extent={{-62,-4},{-42,16}})));
   Modelica.Blocks.Sources.Ramp RPM_ramp(
     duration=500,
