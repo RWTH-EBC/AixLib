@@ -1,13 +1,14 @@
 within AixLib.Fluid.HydraulicModules.Example;
-model test_Throttle "Test for throttle circuit"
+model Unmixed "Test for unmixed circuit"
   extends Modelica.Icons.Example;
 
-  Throttle     throttle(redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater) annotation (Placement(
-        transformation(
-        extent={{-17,-17},{17,17}},
+  .AixLib.Fluid.HydraulicModules.Unmixed unmixed(redeclare package Medium =
+        Modelica.Media.Water.ConstantPropertyLiquidWater, pump(redeclare
+        AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos30slash1to4 per))
+    annotation (Placement(transformation(
+        extent={{-18,-18},{18,18}},
         rotation=90,
-        origin={-7,7})));
+        origin={-8,14})));
 
   Modelica.Fluid.Sources.Boundary_pT boundary(
     nPorts=1,
@@ -21,19 +22,18 @@ model test_Throttle "Test for throttle circuit"
   inner Modelica.Fluid.System system
     annotation (Placement(transformation(extent={{80,80},{100,100}})));
   Modelica.Fluid.Sources.FixedBoundary boundary1(nPorts=1, redeclare package
-              Medium =
-               Modelica.Media.Water.ConstantPropertyLiquidWater) annotation (
+      Medium = Modelica.Media.Water.ConstantPropertyLiquidWater) annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={10,-30})));
   AixLib.Fluid.FixedResistances.PressureDrop hydRes(
-    m_flow_nominal=8*996/3600,
-    dp_nominal=8000,
     m_flow(start=hydRes.m_flow_nominal),
     dp(start=hydRes.dp_nominal),
     redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater)
+        Modelica.Media.Water.ConstantPropertyLiquidWater,
+    m_flow_nominal=1,
+    dp_nominal=100)
     "hydraulic resitance in distribution cirquit (shortcut pipe)" annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -41,29 +41,31 @@ model test_Throttle "Test for throttle circuit"
         origin={-8,40})));
   AixLib.Fluid.HydraulicModules.BaseClasses.HydraulicBus hydraulicBus
     annotation (Placement(transformation(extent={{-62,-4},{-42,16}})));
-  Modelica.Blocks.Sources.Ramp valveOpening(              duration=500,
-      startTime=180)
+  Modelica.Blocks.Sources.Ramp RPM_ramp(
+    duration=500,
+    startTime=180,
+    height=3000)
     annotation (Placement(transformation(extent={{-98,6},{-78,26}})));
 equation
-  connect(boundary.ports[1], throttle.port_fwrdIn)
-    annotation (Line(points={{-30,-20},{-17.2,-20},{-17.2,-10}},
+  connect(boundary.ports[1], unmixed.port_fwrdIn)
+    annotation (Line(points={{-30,-20},{-18.8,-20},{-18.8,-4}},
                                                            color={0,127,255}));
-  connect(throttle.port_rtrnOut, boundary1.ports[1])
-    annotation (Line(points={{3.2,-10},{3.2,-20},{10,-20}},
+  connect(unmixed.port_rtrnOut, boundary1.ports[1])
+    annotation (Line(points={{2.8,-4},{2.8,-20},{10,-20}},
                                                         color={0,127,255}));
-  connect(throttle.port_fwrdOut, hydRes.port_a) annotation (Line(points={{-17.2,
-          24},{-18,24},{-18,40}},     color={0,127,255}));
-  connect(throttle.port_rtrnIn, hydRes.port_b) annotation (Line(points={{3.2,24},
-          {4,24},{4,40},{2,40}},     color={0,127,255}));
-  connect(throttle.hydraulicBus, hydraulicBus) annotation (Line(
-      points={{-24,0.2},{-36,0.2},{-36,6},{-52,6}},
+  connect(unmixed.port_fwrdOut, hydRes.port_a) annotation (Line(points={{-18.8,
+          32},{-18,32},{-18,40}},     color={0,127,255}));
+  connect(unmixed.port_rtrnIn, hydRes.port_b) annotation (Line(points={{2.8,32},
+          {4,32},{4,40},{2,40}}, color={0,127,255}));
+  connect(unmixed.hydraulicBus, hydraulicBus) annotation (Line(
+      points={{-26,6.8},{-36,6.8},{-36,6},{-52,6}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(valveOpening.y, hydraulicBus.valveSet) annotation (Line(points={{-77,16},
-          {-58,16},{-58,6.05},{-51.95,6.05}},       color={0,0,127}), Text(
+  connect(RPM_ramp.y, hydraulicBus.rpm_Input) annotation (Line(points={{-77,
+          16},{-64,16},{-64,6.05},{-51.95,6.05}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
@@ -74,4 +76,4 @@ equation
             100}})),
     experiment(StopTime=600),
     __Dymola_Commands);
-end test_Throttle;
+end Unmixed;

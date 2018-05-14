@@ -14,8 +14,9 @@ model Admix "Admix circuit with three way valve and rpm controlled pump"
     "Time Constant for PT1 behavior of temperature sensors"
                                                            annotation(Dialog(tab="Advanced"));
 
-  replaceable BaseClasses.BasicPumpInterface basicPumpInterface
-    annotation (Placement(transformation(extent={{26,8},{50,32}})));
+  replaceable BaseClasses.BasicPumpInterface basicPumpInterface(redeclare
+      package                                                                     Medium = Medium)
+    annotation (Dialog(group="Actuators"), choicesAllMatching=true, Placement(transformation(extent={{26,8},{50,32}})));
 
   AixLib.Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear val(
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
@@ -30,7 +31,7 @@ model Admix "Admix circuit with three way valve and rpm controlled pump"
         system.p_start,
         T_start,
         Medium.X_default),
-    tau=0.2) annotation (Dialog(enable=true), Placement(transformation(
+    tau=0.2) annotation (Dialog(enable=true,group="Actuators"), Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-30,20})));
@@ -264,6 +265,13 @@ equation
     annotation (Line(points={{50,20},{65.76,20}}, color={0,127,255}));
   connect(basicPumpInterface.port_a, pipe2.port_b)
     annotation (Line(points={{26,20},{6.24,20}}, color={0,127,255}));
+  connect(basicPumpInterface.pumpBus, hydraulicBus) annotation (Line(
+      points={{38,32},{38,100},{0,100}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
   annotation (
     Documentation(info="<html>
 <p>Admix circuit with a replaceable pump model for the distribution of hot or cold water. All sensor and actor values are connected to the hydraulic bus (not all connections are visible).</p>

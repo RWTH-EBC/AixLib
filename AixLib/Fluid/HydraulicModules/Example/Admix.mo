@@ -1,14 +1,18 @@
 within AixLib.Fluid.HydraulicModules.Example;
-model test_Injection "Test for injection circuit"
+model Admix "Test for admix circuit"
+  import AixLib;
   extends Modelica.Icons.Example;
 
-  Injection injection(redeclare package Medium = Medium, pump(redeclare
-        AixLib.Fluid.Movers.Data.Pumps.Wilo.CronolineIL80slash220dash4slash4
-        per))                                            "hydronic module 1"
-    annotation (Placement(transformation(
-        extent={{-20,-20},{20,20}},
+  AixLib.Fluid.HydraulicModules.Admix Admix(
+    redeclare package Medium = Medium,
+    redeclare
+      AixLib.Fluid.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+      basicPumpInterface(pump(redeclare
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
+    val(Kv=10, m_flow_nominal=0.5)) annotation (Placement(transformation(
+        extent={{-25,-23},{25,23}},
         rotation=90,
-        origin={16,26})));
+        origin={15,27})));
   replaceable package Medium =
       Modelica.Media.Water.ConstantPropertyLiquidWater
     annotation (__Dymola_choicesAllMatching=true);
@@ -19,7 +23,7 @@ model test_Injection "Test for injection circuit"
     T=323.15) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
-        origin={-6,-24})));
+        origin={2,-28})));
   Modelica.Fluid.Sources.Boundary_pT boundary1(
     nPorts=1,
     redeclare package Medium =
@@ -27,7 +31,7 @@ model test_Injection "Test for injection circuit"
     T=323.15) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
-        origin={42,-24})));
+        origin={36,-28})));
 
   AixLib.Fluid.FixedResistances.PressureDrop hydRes(
     m_flow_nominal=8*996/3600,
@@ -50,14 +54,6 @@ model test_Injection "Test for injection circuit"
     annotation (Placement(transformation(extent={{-52,6},{-32,26}})));
 equation
 
-  connect(boundary.ports[1], injection.port_fwrdIn) annotation (Line(points={{-6,
-          -14},{-2,-14},{-2,6},{4,6}}, color={0,127,255}));
-  connect(boundary1.ports[1], injection.port_rtrnOut) annotation (Line(points={
-          {42,-14},{34,-14},{34,6},{28,6}}, color={0,127,255}));
-  connect(injection.port_fwrdOut, hydRes.port_a)
-    annotation (Line(points={{4,46},{4,64},{6,64}}, color={0,127,255}));
-  connect(injection.port_rtrnIn, hydRes.port_b) annotation (Line(points={{28,46},
-          {30,46},{30,62},{30,64},{26,64}}, color={0,127,255}));
   connect(valveOpening.y,hydraulicBus. valveSet) annotation (Line(points={{-77,
           16},{-58,16},{-58,16.05},{-41.95,16.05}}, color={0,0,127}), Text(
       string="%second",
@@ -68,13 +64,21 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(hydraulicBus, injection.hydraulicBus) annotation (Line(
-      points={{-42,16},{-24,16},{-24,22},{-3.8,22}},
+  connect(hydraulicBus, Admix.hydraulicBus) annotation (Line(
+      points={{-42,16},{-24,16},{-24,27},{-8,27}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
+  connect(Admix.port_b1, hydRes.port_a)
+    annotation (Line(points={{2.22222,52},{6,52},{6,64}}, color={0,127,255}));
+  connect(Admix.port_a2, hydRes.port_b) annotation (Line(points={{32.8889,52},{
+          28,52},{28,64},{26,64}}, color={0,127,255}));
+  connect(Admix.port_a1, boundary.ports[1])
+    annotation (Line(points={{2.22222,2},{2,2},{2,-18}}, color={0,127,255}));
+  connect(Admix.port_b2, boundary1.ports[1])
+    annotation (Line(points={{32.8889,2},{36,2},{36,-18}}, color={0,127,255}));
   annotation (
     Icon(graphics,
          coordinateSystem(preserveAspectRatio=false)),
@@ -89,4 +93,4 @@ equation
 <li><i>2017-02-09 &nbsp;</i> by Peter Matthes:<br>implemented</li>
 </ul>
 </html>"));
-end test_Injection;
+end Admix;
