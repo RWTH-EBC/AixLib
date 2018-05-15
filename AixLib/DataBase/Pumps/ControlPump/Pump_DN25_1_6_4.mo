@@ -62,7 +62,7 @@ record Pump_DN25_1_6_4 "DN25 1-6 4.25"
 </html>", info="<html>
 <p>Pump for nominal pipe diameter of 25 mm, pump head range between 1 m and 6 m and maximum volume flow rate of 4.25 m&sup3;/h.</p>
 <h4>Measurement and Regression Data</h4>
-<p><img src=\"modelica://Zugabe/Resources/Images/Zugabe_DB/Pump/Stratos_Pico_25_1-6.png\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/ControlPump/Pump_DN25_1-6_4_HP.png\"/></p>
 <p>cHQN:</p>
 <p><span style=\"font-family: Courier New;\">0.00000e+00, 0.00000e+00, 3.25798e-07;</span></p>
 <p><span style=\"font-family: Courier New;\">0.00000e+00, 2.73726e-05, 0.00000e+00;</span></p>
@@ -73,7 +73,6 @@ record Pump_DN25_1_6_4 "DN25 1-6 4.25"
 <p><span style=\"font-family: Courier New;\">0.00000e+00, -8.47293e-05, 0.00000e+00, 0.00000e+00, 0.00000e+00;</span></p>
 <p><span style=\"font-family: Courier New;\">-2.25479e-01, 0.00000e+00, 0.00000e+00, 0.00000e+00, 0.00000e+00</span></p>
 <h4>Comparison of Measument and Regression</h4>
-<p><img src=\"modelica://Zugabe/Resources/Images/Zugabe_DB/Pump/Stratos_Pico_25_1-6_diff-contour_HP.png\"/></p>
-<p><img src=\"modelica://Zugabe/Resources/Images/Zugabe_DB/Pump/Stratos_Pico_25_1-6_diff-histogram_HP.png\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/ControlPump/Pump_DN25_1-6_4_diff-histogram_HP.png\"/></p>
 </html>"));
 end Pump_DN25_1_6_4;
