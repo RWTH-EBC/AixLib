@@ -1,11 +1,11 @@
 within AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses;
-model BoilerBase
+partial model BoilerBase
   "Base class containing the simple boiler model as peak load device"
   extends Interfaces.PartialTwoPort;
 
-  BoilerCHP.Boiler                   boiler(                                redeclare
-      final package Medium =
-        Medium,                                                               m_flow_nominal=0.5,
+  BoilerCHP.Boiler boiler(
+    redeclare final package Medium = Medium,
+    m_flow_nominal=0.5,
     paramHC=AixLib.DataBase.Boiler.DayNightMode.HeatingCurves_Vitotronic_Day23_Night10(),
     paramBoiler=AixLib.DataBase.Boiler.General.Boiler_Vitogas200F_11kW())
     "Peak load energy conversion unit"
@@ -13,7 +13,8 @@ model BoilerBase
         extent={{10,10},{-10,-10}},
         rotation=180,
         origin={0,0})));
-  Modelica.Blocks.Sources.RealExpression chemicalEnergyFlowRateSource(y=boiler.internalControl.ControlerHeater.y)
+  Modelica.Blocks.Sources.RealExpression chemicalEnergyFlowRateSource(
+    y=boiler.internalControl.ControlerHeater.y)
     "Outputs the chemical energy flow rate of the boiler"
     annotation (Placement(transformation(extent={{-60,-66},{-40,-46}})));
 equation
@@ -22,7 +23,11 @@ equation
   connect(boiler.port_b, port_b)
     annotation (Line(points={{10,0},{100,0}}, color={0,127,255}));
   annotation (Documentation(info="<html>
-<p>Base class containing the <a href=\"modelica://AixLib.Fluid.BoilerCHP.Boiler\">AixLib.Fluid.BoilerCHP.Boiler</a> to be used in the examples of <a href=\"modelica://AixLib.Fluid.Examples.GeothermalHeatPump\">AixLib.Fluid.Examples.GeothermalHeatPump</a>.</p>
+<p>Base class containing the
+<a href=\"modelica://AixLib.Fluid.BoilerCHP.Boiler\">AixLib.Fluid.BoilerCHP.Boiler</a>
+to be used in the examples of
+<a href=\"modelica://AixLib.Fluid.Examples.GeothermalHeatPump\">AixLib.Fluid.Examples.GeothermalHeatPump</a>.
+</p>
 </html>", revisions="<html>
 <ul>
 <li>

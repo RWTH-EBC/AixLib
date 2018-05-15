@@ -37,6 +37,8 @@ First implementation.
 </li>
 </ul>
 </html>", info="<html>
-<p>Model containing the simple boiler model <a href=\"modelica://AixLib.Fluid.BoilerCHP.Boiler\">AixLib.Fluid.BoilerCHP.Boiler</a> and interfaces for external control.</p>
+<p>Model containing the simple boiler model
+<a href=\"modelica://AixLib.Fluid.BoilerCHP.Boiler\">AixLib.Fluid.BoilerCHP.Boiler</a>
+and interfaces for external control.</p>
 </html>"));
 end BoilerExternalControl;

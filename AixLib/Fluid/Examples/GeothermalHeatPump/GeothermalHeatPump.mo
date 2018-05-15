@@ -6,7 +6,7 @@ model GeothermalHeatPump "Example of a geothermal heat pump system"
   extends
     AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpControlledBase(
   redeclare AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone PeakLoadDevice(redeclare
-        package Medium =                                                                                          Medium));
+        package Medium = Medium));
 
   Sources.Boundary_pT coldConsumerFlow(redeclare package Medium = Medium,
       nPorts=1) annotation (Placement(transformation(
@@ -116,14 +116,21 @@ First implementation.
 </li>
 </ul>
 </html>", info="<html>
-<p><b><span style=\"font-family: MS Shell Dlg 2; font-size: 10pt;\">Information</span></b> </p>
-<p><b><span style=\"font-family: MS Shell Dlg 2; color: #008000;\">Overview</span></b> </p>
-<p><span style=\"font-family: MS Shell Dlg 2;\">Simple stand-alone model of a combined heat and cold supply system. The geothermal heat pump can either transport heat </span></p>
-<p><span style=\"font-family: MS Shell Dlg 2;\">- from the cold to the heat storage</span></p>
-<p><span style=\"font-family: MS Shell Dlg 2;\">- from the cold storage to the geothermal field (heat storage disconnected)</span></p>
-<p><span style=\"font-family: MS Shell Dlg 2;\">- from the geothermal field to the heat storage</span></p>
-<p><span style=\"font-family: MS Shell Dlg 2;\">In the flow line of the heating circuit a boiler is connected as a peak load device. </span></p>
-<p><span style=\"font-family: MS Shell Dlg 2;\">Consumers are modeled as sinks are sources with a constant temperature.</span></p>
+<p>Simple stand-alone model of a combined heat and cold supply system.
+The geothermal heat pump can either transport heat </p>
+<ul>
+<li>
+from the cold to the heat storage
+</li>
+<li>
+from the cold storage to the geothermal field (heat storage disconnected)
+</li>
+<li>
+from the geothermal field to the heat storage
+</li>
+</ul>
+<p>In the flow line of the heating circuit a boiler is connected as a peak load device.
+Consumers are modeled as sinks are sources with a constant temperature.</p>
 </html>"),
     Diagram(coordinateSystem(extent={{-160,-120},{160,80}})),
     Icon(coordinateSystem(extent={{-160,-120},{160,80}})));

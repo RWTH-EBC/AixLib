@@ -42,6 +42,8 @@ First implementation.
 </li>
 </ul>
 </html>", info="<html>
-<p>Model containing the simple boiler model <a href=\"modelica://AixLib.Fluid.BoilerCHP.Boiler\">AixLib.Fluid.BoilerCHP.Boiler</a> and dummy inputs.</p>
+<p>Model containing the simple boiler model
+<a href=\"modelica://AixLib.Fluid.BoilerCHP.Boiler\">AixLib.Fluid.BoilerCHP.Boiler</a>
+and dummy inputs.</p>
 </html>"));
 end BoilerStandAlone;

@@ -1,20 +1,25 @@
 within AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses;
-model GeothermalHeatPumpBase
+partial model GeothermalHeatPumpBase
   "Base class of the geothermal heat pump system"
 
 
-  replaceable package Medium = AixLib.Media.Water "Medium model used for hydronic components";
+  replaceable package Medium = AixLib.Media.Water
+    "Medium model used for hydronic components";
 
-  parameter Modelica.SIunits.Temperature T_start_cold[5] = 300*ones(5) "Initial temperature of cold components";
+  parameter Modelica.SIunits.Temperature T_start_cold[5] = 300*ones(5)
+    "Initial temperature of cold components";
 
-  parameter Modelica.SIunits.Temperature T_start_warm[5] = 300*ones(5) "Initial temperature of warm components";
+  parameter Modelica.SIunits.Temperature T_start_warm[5] = 300*ones(5)
+    "Initial temperature of warm components";
 
-  parameter Modelica.SIunits.Temperature T_start_hot = 300 "Initial temperature of high temperature components";
+  parameter Modelica.SIunits.Temperature T_start_hot = 300
+    "Initial temperature of high temperature components";
 
 
-  HeatPumps.HeatPumpSimple         heatPumpTab(volumeEvaporator(T_start = T_start_cold[1]), volumeCondenser(T_start = T_start_warm[5]), redeclare
-      package Medium =
-        Medium,
+  HeatPumps.HeatPumpSimple heatPumpTab(volumeEvaporator(
+      T_start = T_start_cold[1]),
+      volumeCondenser(T_start = T_start_warm[5]),
+      redeclare package Medium = Medium,
     tablePower=[0,266.15,275.15,280.15,283.15,293.15; 308.15,3300,3400,
         3500,3700,3800; 323.15,4500,4400,4600,5000,5100],
     tableHeatFlowCondenser=[0,266.16,275.15,280.15,283.15,293.15; 308.15,
@@ -22,7 +27,8 @@ model GeothermalHeatPumpBase
         17500]) "Base load energy conversion unit"
     annotation (Placement(transformation(extent={{-40,-14},{-4,20}})));
 
-    replaceable AixLib.Fluid.Interfaces.PartialTwoPortTransport PeakLoadDevice constrainedby
+    replaceable AixLib.Fluid.Interfaces.PartialTwoPortTransport PeakLoadDevice(
+      redeclare package Medium = Medium)                                       constrainedby
     AixLib.Fluid.Interfaces.PartialTwoPort
     annotation (Placement(transformation(extent={{108,-56},{120,-44}})));
 
@@ -291,7 +297,9 @@ equation
       inputs=false,
       auxiliaries=false),
     Documentation(info="<html>
-<p>Base class of an example demonstrating the use of a heat pump connected to two storages and a geothermal source. A replaceable model is connected in the flow line of the heating circuit. A peak load device can be added here. </p>
+<p>Base class of an example demonstrating the use of a heat pump connected to
+two storages and a geothermal source. A replaceable model is connected in the
+flow line of the heating circuit. A peak load device can be added here. </p>
 </html>", revisions="<html>
 <ul>
 <li>

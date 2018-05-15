@@ -138,11 +138,20 @@ equation
           extent={{-100,-100},{100,100}},
           lineColor={0,0,255},
           fillColor={255,255,170},
-          fillPattern=FillPattern.Solid),                                                                                                       Text(extent={{
-              -56,28},{64,-24}},                                                                                                                                                      lineColor = {175, 175, 175}, textString = "%name")}),
+          fillPattern=FillPattern.Solid),
+          Text(extent={{
+              -56,28},{64,-24}},
+              lineColor = {175, 175, 175}, textString = "%name")}),
     Documentation(info="<html>
 <p>
-This is a model of a controller, which manipulates the opening of two valves. If the measured temperature drops below the lower thrshold, the first valve is fully closed and the second valve is fully opened. The opposite constellation applies if the temperature exceeds the higher threshold. To avoid zero mass flow rates, the opening is only close 0. Additionally, a delay can be set so that the valves do not react simultaneously (opened valve is closed first). It can be used in <a href=\"modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.GeothermalHeatPump\">
+This is a model of a controller, which manipulates the opening of two valves. If
+the measured temperature drops below the lower thrshold, the first valve is
+fully closed and the second valve is fully opened. The opposite constellation
+applies if the temperature exceeds the higher threshold. To avoid zero mass flow
+rates, the opening is only close 0. Additionally, a delay can be set so that the
+valves do not react simultaneously (opened valve is closed first). It can be
+used in <a
+href=\"modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.GeothermalHeatPump\">
 AixLib.Fluid.Examples.GeothermalHeatPump.Components.GeothermalHeatPump</a>.
 </p>
 </html>", revisions="<html>
