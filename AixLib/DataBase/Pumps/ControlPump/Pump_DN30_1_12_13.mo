@@ -62,13 +62,13 @@ record Pump_DN30_1_12_13 "DN30 1-12 13"
        "coefficients for P = f(Q,N)");
   annotation(preferredView="text", Documentation(revisions="<html>
 <ul>
-<li>2018-02-15 by Peter Matthes:<br>removed &apos;zero&apos; rows maxMinSpeedCurves and maxMinHeight table.</li>
-<li>2018-01-09 by Peter Matthes:<br>Generated</li>
+<li>2018-02-15 by Peter Matthes:<br />removed &apos;zero&apos; rows maxMinSpeedCurves and maxMinHeight table.</li>
+<li>2018-01-09 by Peter Matthes:<br />Generated</li>
 </ul>
 </html>", info="<html>
 <p>Pump for nominal pipe diameter of 30 mm, pump head range between 1 m and 12 m and maximum volume flow rate of 13 m&sup3;/h.</p>
 <h4>Measurement and Regression Data</h4>
-<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/ControlPump/Pump_DN30_1-12_13_HP.png\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/ControlPump/Pump_DN30_1-12_13_HP.png\" alt=\"Pump head and pump power draw\"/></p>
 <p>cHQN:</p>
 <p><span style=\"font-family: Courier New;\">0.00000e+00, 0.00000e+00, 4.88348e-07;</span></p>
 <p><span style=\"font-family: Courier New;\">0.00000e+00, 1.15190e-04, 0.00000e+00;</span></p>
@@ -79,7 +79,7 @@ record Pump_DN30_1_12_13 "DN30 1-12 13"
 <p><span style=\"font-family: Courier New;\">0.00000e+00, 1.16467e-04, 0.00000e+00, 0.00000e+00, 0.00000e+00;</span></p>
 <p><span style=\"font-family: Courier New;\">-9.73911e-02, 0.00000e+00, 0.00000e+00, 0.00000e+00, 0.00000e+00</span></p>
 <h4>Comparison of Measument and Regression</h4>
-<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/ControlPump/Pump_DN30_1-12_13_diff-contour_HP.png\"/></p>
-<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/ControlPump/Pump_DN30_1-12_13_diff-histogram_HP.png\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/ControlPump/Pump_DN30_1-12_13_diff-contour_HP.png\" alt=\"Absolute minimum and maximum differences in pump head and pump power draw\"/></p>
+<p><img src=\"modelica://AixLib/Resources/Images/DataBase/Pumps/ControlPump/Pump_DN30_1-12_13_diff-histogram_HP.png\" alt=\"Historgram of relative differences in pump head and pump power draw\"/></p>
 </html>"));
 end Pump_DN30_1_12_13;

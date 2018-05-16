@@ -35,7 +35,7 @@ algorithm
 <p>&quot;There&rsquo;s a very well known algorithm for calculation powers, that is <i>x to the power of n</i> or simply: <code>x^n</code>. Donald Knuth presents the algorithm in section 4.6.3 <i>Evaluation of Powers</i> of TAOCP.&quot;</p>
 </html>", revisions="<html>
 <ul>
-<li>2017-11-14 by Peter Matthes:<br>Implemented</li>
+<li>2017-11-14 by Peter Matthes:<br />Implemented</li>
 </ul>
 </html>"));
 end powerInt;

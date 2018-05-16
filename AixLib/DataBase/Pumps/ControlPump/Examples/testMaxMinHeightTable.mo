@@ -43,7 +43,7 @@ equation
   annotation (
     Documentation(revisions="<html>
 <ul>
-<li><pre>2017-11-23 by Peter Matthes<br>Implemented.</pre></li>
+<li><pre>2017-11-23 by Peter Matthes<br />Implemented.</pre></li>
 </ul>
 </html>", info="<html>
 <p>This test can be used to display the maximum and minimum pump curves as defined in the maxMinHeight parameter matrix.</p>

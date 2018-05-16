@@ -33,7 +33,7 @@ algorithm
 <p>Dymola seemed to transform the equations in the wrong way. Changing the equation section into an algorithm, thus forcing the ordered calculation, brought a solution.</p>
 </html>", revisions="<html>
 <ul>
-<li>2017-11-17 by Peter Matthes<br>Implemented. Changed equation block into an algorithm block. Otherwise y could end up staying at limit2 all the time even though u would be higher than limit2 (and smaller than limit1).</li>
+<li>2017-11-17 by Peter Matthes<br />Implemented. Changed equation block into an algorithm block. Otherwise y could end up staying at limit2 all the time even though u would be higher than limit2 (and smaller than limit1).</li>
 </ul>
 </html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
