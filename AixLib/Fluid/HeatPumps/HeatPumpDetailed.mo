@@ -365,6 +365,10 @@ equation
       points={{-20,-17},{-18,-17},{-18,-56},{-50,-56},{-50,-90}},
       color={0,0,127},
       smooth=Smooth.None));
+  connect(cycle.onOff_in, onOff_in) annotation (Line(
+      points={{-20,37},{-22,37},{-22,60},{-50,60},{-50,90}},
+      color={255,0,255},
+      smooth=Smooth.None));
   connect(T_evaIn.port_b, evaporator.ports[1]) annotation (Line(points={{-130,16},
           {-130,2.4},{-127.5,2.4}}, color={0,127,255}));
   connect(heatFlowRate_eva.port, evaporator.heatPort) annotation (Line(points={{-106,2},
@@ -382,8 +386,6 @@ equation
           -130,-14},{-130,-14},{-130,-0.4},{-127.5,-0.4}}, color={0,127,255}));
   connect(hydRes_eva.port_b, T_evaOut.port_a) annotation (Line(points={{-130,
           -30},{-130,-33},{-130,-36}}, color={0,127,255}));
-  connect(onOff_in, cycle.onOff_in) annotation (Line(points={{-50,90},{-50,64},
-          {-20,64},{-20,37}}, color={255,0,255}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-150,-100},
             {150,100}})),           Icon(coordinateSystem(preserveAspectRatio=true,
           extent={{-150,-100},{150,100}}), graphics={
