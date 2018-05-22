@@ -378,8 +378,6 @@ end TwoWayEqualPercentageAdd;
     dp_nominal=0,
     mWatMax_flow=0.001) "steam Humdifier outside of Menerga"
     annotation (Placement(transformation(extent={{-514,16},{-534,36}})));
-  Modelica.Blocks.Sources.Constant const(k=1)
-    annotation (Placement(transformation(extent={{-576,244},{-556,264}})));
 equation
   connect(HeatingCoil.port_b1, T03_senTemHea.port_a)
     annotation (Line(points={{-420,26},{-434,26}}, color={0,127,255}));
@@ -453,7 +451,7 @@ equation
       index=1,
       extent={{6,3},{6,3}}));
   connect(exhAirFan_N02.m_flow_in, busActors.exhaustFan) annotation (Line(
-        points={{-360,316},{-358.1,316},{-358.1,364.1},{-186.1,364.1}},   color=
+        points={{-360,316},{-358.1,316},{-358.1,364},{-186,364}},         color=
          {0,0,127}), Text(
       string="%second",
       index=1,
@@ -469,7 +467,7 @@ equation
       index=1,
       extent={{6,3},{6,3}}));
   connect(regenerationAirFan_N03.m_flow_in, busActors.regenerationFan)
-    annotation (Line(points={{178,316},{178,316},{178,364.1},{-186.1,364.1}},
+    annotation (Line(points={{178,316},{178,316},{178,364},{-186,364}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -504,7 +502,7 @@ equation
       index=1,
       extent={{6,3},{6,3}}));
   connect(outsideAirFan.m_flow_in, busActors.outsideFan) annotation (Line(
-        points={{86,38},{86,48},{86,48},{86,56},{364,56},{364,364.1},{-186.1,364.1}},
+        points={{86,38},{86,48},{86,48},{86,56},{364,56},{364,364},{-186,364}},
                                                                           color=
          {0,0,127}), Text(
       string="%second",
@@ -655,8 +653,11 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(const.y, mWat_gain.u)
-    annotation (Line(points={{-555,254},{-526,254}}, color={0,0,127}));
+  connect(mWat_gain.u, busActors.mWatEvaporator) annotation (Line(points={{-526,
+          254},{-654,254},{-654,364},{-186,364}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-640,-100},
             {360,360}}), graphics={Rectangle(
           extent={{-638,358},{360,-100}},
