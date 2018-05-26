@@ -27,10 +27,8 @@ First implementation.
 </li>
 </ul>
 </html>"),
-  experiment(StopTime=1),
+  experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/WeatherData/BaseClasses/Examples/CheckBlackBodySkyTemperature.mos"
-        "Simulate and plot"),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}})));
+        "Simulate and plot"));
 end CheckBlackBodySkyTemperature;

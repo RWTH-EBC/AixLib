@@ -31,11 +31,9 @@ equation
   connect(pump_y.y, ramp.y) annotation (Line(points={{-0.2,-28},{-0.2,-20},{-50,
           -20},{-50,70},{-59,70}}, color={0,0,127}));
   annotation (
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-            100,100}})),
     Documentation(info="<html>
 <p>
-This example demonstrates the use of a <code>RealInput</code> 
+This example demonstrates the use of a <code>RealInput</code>
 connector for a mover model.
 </p>
 </html>", revisions="<html>
@@ -46,7 +44,8 @@ First implementation.
 </li>
 </ul>
 </html>"),
-    __Dymola_Commands(file=
+experiment(Tolerance=1e-06, StopTime=1),
+__Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/Examples/MoverContinuous.mos"
         "Simulate and plot"));
 end MoverContinuous;

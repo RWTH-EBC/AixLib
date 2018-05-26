@@ -7,7 +7,7 @@ extends Modelica.Icons.Example;
     til=1.5707963267949) "solar incidence angle"
     annotation (Placement(transformation(extent={{-20,-40},{0,-20}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=
-        "modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")
+        Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"))
     "Weather data"
     annotation (Placement(transformation(extent={{-100,0},{-80,20}})));
   AixLib.BoundaryConditions.WeatherData.Bus weaBus "Weather bus"
@@ -44,7 +44,7 @@ equation
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  annotation (experiment(StopTime=86400),
+  annotation (experiment(Tolerance=1e-6, StopTime=86400),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarGeometry/BaseClasses/Examples/WallSolarAzimuth.mos"
         "Simulate and plot"),
 Documentation(info="<html>

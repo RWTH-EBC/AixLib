@@ -9,7 +9,7 @@ model SkyClearness "Test model for sky clearness"
     annotation (Placement(transformation(extent={{40,0},{60,20}})));
 
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=
-        "modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")
+        Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"))
     annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
   AixLib.BoundaryConditions.WeatherData.Bus weaBus
     annotation (Placement(transformation(extent={{-2,20},{18,40}})));
@@ -61,7 +61,7 @@ First implementation.
 </li>
 </ul>
 </html>"),
-experiment(StartTime=100000, StopTime=3000000),
+experiment(StartTime=100000, Tolerance=1e-6, StopTime=3000000),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarIrradiation/BaseClasses/Examples/SkyClearness.mos"
         "Simulate and plot"));
 end SkyClearness;

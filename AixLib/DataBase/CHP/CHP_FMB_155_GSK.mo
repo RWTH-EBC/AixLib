@@ -9,12 +9,12 @@ record CHP_FMB_155_GSK "FMB-155-GSK : Schmitt Enertec"
     DPipe=0.13);
 
   annotation (Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>Natural Gas CHP: Schmitt Enertec GmbH FMB-155-GSK </p>
 </html>",
         revisions="<html>
-<p><ul>
+<ul>
 <li><i>July 4, 2013&nbsp;</i> by Ole Odendahl:<br/>Added reference</li>
-</ul></p>
+</ul>
 </html>"));
 end CHP_FMB_155_GSK;

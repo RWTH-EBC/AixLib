@@ -30,14 +30,12 @@ equation
       points={{78,-44},{46,-44},{46,-41}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}}), graphics),
-    experiment(Tolerance=1e-08),
+  annotation (    experiment(Tolerance=1e-6, StopTime=2),
     Documentation(info="<html>
 <p>
-This test checks if the trace substance flow rate is conserved 
+This test checks if the trace substance flow rate is conserved
 when adding moisture to a mixing volume that is configured to steady state.<br/>
-The trace substance flow rate at the inlet and outlet should be equal 
+The trace substance flow rate at the inlet and outlet should be equal
 since the trace substance concentration should not
 be affected by the independent mass fraction concentration.
 </p>
@@ -60,7 +58,7 @@ November 2, 2016, by Michael Wetter:<br/>
 Changed assertions to blocks that compute the difference,
 and added the difference to the regression results.<br/>
 This is for
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/564\">issue 564</a>.
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/564\">issue 564</a>.
 </li>
 <li>
 May 22 2015 by Filip Jorissen:<br/>

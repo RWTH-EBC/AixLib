@@ -56,7 +56,6 @@ model PPM "Test model for the extra property sensor outputting PPM"
     m_flow_nominal=m_flow_nominal) "PPM sensor with flow in reverse direction"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
-        rotation=0,
         origin={50,-50})));
   AixLib.Fluid.Sensors.PPMTwoPort senPPMSta(
     redeclare package Medium = Medium,
@@ -65,7 +64,6 @@ model PPM "Test model for the extra property sensor outputting PPM"
     m_flow_nominal=m_flow_nominal) "Static PPM sensor" annotation (Placement(
         transformation(
         extent={{10,-10},{-10,10}},
-        rotation=0,
         origin={10,-50})));
 protected
      final parameter Medium.ThermodynamicState state_default = Medium.setState_pTX(
@@ -126,7 +124,7 @@ equation
   connect(mSouSta.ports[1], volSte.ports[3]) annotation (Line(points={{-20,120},
           {54,120},{54,80},{86.6667,80}}, color={0,127,255}));
     annotation (
-experiment(StopTime=3),
+experiment(Tolerance=1e-6, StopTime=3),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sensors/Examples/PPM.mos"
         "Simulate and plot"),
     Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{180,
@@ -144,8 +142,8 @@ revisions="<html>
 <li>
 January 12, 2016, by Filip Jorissen:<br/>
 First implementation.
-See issue 
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/372\">#372</a>
+See issue
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/372\">#372</a>
 </li>
 </ul>
 </html>"));

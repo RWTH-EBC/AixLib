@@ -1,9 +1,9 @@
 within AixLib.BoundaryConditions.SkyTemperature;
 block BlackBody "Calculate black body sky temperature"
   extends Modelica.Blocks.Icons.Block;
-  import AixLib.BoundaryConditions.Types.SkyTemperatureCalculation;
+
   parameter AixLib.BoundaryConditions.Types.SkyTemperatureCalculation calTSky=
-    SkyTemperatureCalculation.TemperaturesAndSkyCover
+    AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.TemperaturesAndSkyCover
     "Computation of black-body sky temperature"
     annotation(choicesAllMatching=true,
                Evaluate=true);
@@ -60,10 +60,15 @@ Otherwise, it uses dry buld temperature, dew point temperature and opaque sky co
 </html>", revisions="<html>
 <ul>
 <li>
+November 3, 2017, by Michael Wetter:<br/>
+Removed <code>import</code> statement.<br/>
+This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/852\">#852</a>.
+</li>
+<li>
 January 6, 2016, by Moritz Lauster:<br/>
 Changed unit and comment of input <code>nOpa</code> for correct display of units
 in <code>weaBus</code> and input <code>radHorIR</code> to <code>HHorIR</code>
-for <a href=\"https://github.com/iea-annex60/modelica-annex60/issues/376\">#376</a>.
+for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/376\">#376</a>.
 </li>
 <li>
 May 5, 2015, by Filip Jorissen:<br/>
@@ -124,7 +129,5 @@ First implementation.
         Text(
           extent={{-88,-24},{-64,-36}},
           lineColor={0,0,127},
-          textString="nOpa")}),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-            100,100}})));
+          textString="nOpa")}));
 end BlackBody;

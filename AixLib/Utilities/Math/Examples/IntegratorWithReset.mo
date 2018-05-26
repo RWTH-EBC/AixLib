@@ -52,7 +52,7 @@ equation
                                      color={0,0,127}));
   connect(cons.y, intDef.u) annotation (Line(points={{-39,70},{-26,70},{-26,-80},
           {-14,-80}}, color={0,0,127}));
-annotation (experiment(StopTime=1.0),
+annotation (experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Math/Examples/IntegratorWithReset.mos"
         "Simulate and plot"),
     Documentation(info="<html>
@@ -69,6 +69,7 @@ which becomes true at <i>t=0</i>, while <code>intWitRes2</code> is triggered
 by a boolean pulse with is true at <i>t=0</i>.
 Hence, <code>intWitRes1</code> starts with <code>y(0)=y_reset</code> while
 <code>intWitRes2</code> starts with <code>y(0)=y_start</code>.
+</p>
 </html>", revisions="<html>
 <ul>
 <li>

@@ -2,7 +2,7 @@ within AixLib.Fluid.FMI.Conversion.Validation;
 model InletToAirMoistAirCO2
   "Validation model for inlet to AixLib.Media.Air conversion with C02 trace substances"
   extends AixLib.Fluid.FMI.Conversion.Validation.InletToAirDryAir(
-    redeclare package Medium = AixLib.Media.Air(extraPropertiesNames={"CO2"}));
+    redeclare replaceable package Medium = AixLib.Media.Air(extraPropertiesNames={"CO2"}));
   Modelica.Blocks.Sources.Constant CRev[Medium.nC](each k=0.8)
               "Trace substance for reverse flow"
     annotation (Placement(transformation(extent={{92,-80},{72,-60}})));
@@ -36,5 +36,5 @@ First implementation.
 </html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Conversion/Validation/InletToAirMoistAirCO2.mos"
         "Simulate and plot"),
-    experiment(StopTime=1));
+    experiment(Tolerance=1e-6, StopTime=1.0));
 end InletToAirMoistAirCO2;

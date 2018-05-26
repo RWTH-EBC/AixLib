@@ -11,14 +11,12 @@ model TraceSubstanceConservationDynamicBalance
     initType=Modelica.Blocks.Types.Init.InitialState,
     y_start=0) "Integrator for trace substance inlet"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=0,
         origin={-30,-60})));
   Modelica.Blocks.Continuous.Integrator intTraSubOut(
     k=1,
     initType=Modelica.Blocks.Types.Init.InitialState,
     y_start=0) "Integrator for trace substance outlet"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=0,
         origin={10,-40})));
   Modelica.Blocks.Sources.RealExpression reaExp(y=vol.m*vol.C[1])
     "Mixing volume total species mass"
@@ -62,14 +60,12 @@ equation
           -2,-40}},
       color={0,0,127},
       smooth=Smooth.None));
-  annotation (                   Diagram(coordinateSystem(preserveAspectRatio=false,
-          extent={{-100,-100},{100,100}}), graphics),
-    experiment(Tolerance=1e-08),
+  annotation (    experiment(Tolerance=1e-08, StopTime=1),
     Documentation(info="<html>
 <p>
-This test checks if the trace substance flow rate is 
+This test checks if the trace substance flow rate is
 conserved when adding moisture to a mixing volume that is configured to steady state.<br />
-The trace substance flow rate at the inlet and outlet should be equal 
+The trace substance flow rate at the inlet and outlet should be equal
 since the trace substance concentration should not
 be affected by the independent mass fraction concentration.
 </p>
@@ -91,14 +87,14 @@ for a discussion.
 November 3, 2016, by Michael Wetter:<br/>
 Removed wrong assignment for <code>C_nominal</code>.<br/>
 This is for
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/568\">issue 568</a>.
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/568\">issue 568</a>.
 </li>
 <li>
 November 2, 2016, by Michael Wetter:<br/>
 Changed assertions to blocks that compute the difference,
 and added the difference to the regression results.<br/>
 This is for
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/564\">issue 564</a>.
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/564\">issue 564</a>.
 </li>
 <li>
 May 22 2015 by Filip Jorissen:<br/>
@@ -106,7 +102,6 @@ First implementation.
 </li>
 </ul>
 </html>"),
-    Icon(coordinateSystem(extent={{-100,-100},{100,100}})),
     __Dymola_Commands(file=
           "Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/TraceSubstanceConservationDynamicBalance.mos"
         "Simulate and plot"));

@@ -13,7 +13,7 @@ model IncidenceAngle "Test model for incidence angle"
     lat=0.73268921998722) "Incidence angle"
     annotation (Placement(transformation(extent={{40,-10},{60,10}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
-    filNam="modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")
+    filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"))
     "Weather data"
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
   AixLib.BoundaryConditions.WeatherData.Bus weaBus "Weather bus"
@@ -70,7 +70,7 @@ First implementation.
 </li>
 </ul>
 </html>"),
-  experiment(StopTime=86400),
+  experiment(Tolerance=1e-6, StopTime=86400),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarGeometry/BaseClasses/Examples/IncidenceAngle.mos"
         "Simulate and plot"));
 end IncidenceAngle;

@@ -2,7 +2,7 @@ within AixLib.Fluid.FMI.Conversion.Validation;
 model InletToAirDryAirCO2
   "Validation model for inlet to air with dry air medium and CO2"
   extends AixLib.Fluid.FMI.Conversion.Validation.InletToAirMoistAirCO2(
-    redeclare package Medium = Modelica.Media.Air.SimpleAir(extraPropertiesNames={"CO2"}));
+    redeclare replaceable package Medium = Modelica.Media.Air.SimpleAir(extraPropertiesNames={"CO2"}));
   annotation (Documentation(info="<html>
 <p>
 This validation test is identical to
@@ -21,5 +21,5 @@ First implementation.
 </html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Conversion/Validation/InletToAirDryAirCO2.mos"
         "Simulate and plot"),
-    experiment(StopTime=1));
+    experiment(Tolerance=1e-6, StopTime=1.0));
 end InletToAirDryAirCO2;

@@ -18,7 +18,7 @@ equation
   end if;
   phi = AixLib.Utilities.Psychrometrics.Functions.phi_pTX(p=p, T=T, X_w=X_w);
   annotation (
-experiment(StopTime=1.0),
+experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Psychrometrics/Functions/Examples/phi_pTX.mos"
         "Simulate and plot"));
 end phi_pTX;

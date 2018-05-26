@@ -114,7 +114,7 @@ equation
           30},{70,30}},    color={0,127,255}));
   connect(mEva_flow.y, sou2.m_flow_in)
     annotation (Line(points={{71,2},{60,2}},        color={0,0,127}));
-  annotation (experiment(StopTime=3600),
+  annotation (experiment(Tolerance=1e-6, StopTime=3600),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Chillers/Validation/Carnot_TEva_reverseFlow.mos"
         "Simulate and plot"),
     Documentation(
@@ -137,7 +137,5 @@ November 25, 2015, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}})));
+</html>"));
 end Carnot_TEva_reverseFlow;

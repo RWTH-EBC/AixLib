@@ -8,9 +8,7 @@ model CalendarTime "Example for the calendar time model"
 
 equation
 
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)),
-    __Dymola_Commands(file="Resources/Scripts/Dymola/Utilities/Time/Examples/CalendarTime.mos"
+  annotation (    __Dymola_Commands(file="Resources/Scripts/Dymola/Utilities/Time/Examples/CalendarTime.mos"
         "Simulate and plot"),
     Documentation(revisions="<html>
     <ul>
@@ -27,5 +25,5 @@ AixLib.Utilities.Time.CalendarTime</a>
 block.
 </p>
 </html>"),
-    experiment(StopTime=1e+08));
+    experiment(Tolerance=1e-6, StopTime=1e+08));
 end CalendarTime;

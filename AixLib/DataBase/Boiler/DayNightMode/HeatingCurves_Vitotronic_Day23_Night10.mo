@@ -18,26 +18,26 @@ record HeatingCurves_Vitotronic_Day23_Night10
         10,10; 15,10,10,10,10,10,10,10,10,10; 20,10,10,10,10,10,10,10,10,10]);
 
   annotation (Documentation(info="<html>
-<p><h4><font color=\"#008000\">Overview</font></h4></p>
+<h4><font color=\"#008000\">Overview</font></h4>
 <p>Collection of Heating Curves for Viessmann Vitotronic Controller</p>
-<p><ul>
+<ul>
 <li>Set temperature day: 23&deg;C</li>
 <li>Set temperature night: 10&deg;C</li>
-</ul></p>
+</ul>
 <p>Source:</p>
-<p><ul>
+<ul>
 <li>Product: Vitotronic 200</li>
 <li>Manufacturer: Viessmann</li>
 <li>Broschure: VITOTRONIC 200 - Heizungsanlage mit witterungsgefuehrter,
 digitaler Kessel- und Heizkreisregelung; 7/2002</li>
-</ul></p>
+</ul>
 </html>",
       revisions="<html>
-<p><ul>
+<ul>
 <li><i>December 08, 2016&nbsp;</i> by Moritz Lauster:<br/>Adapted to AixLib
 conventions</li>
 <li><i>July 2, 2013&nbsp;</i> by Ole Odendahl:<br/>Added documentation and
 formatted appropriately</li>
-</ul></p>
+</ul>
 </html>"));
 end HeatingCurves_Vitotronic_Day23_Night10;

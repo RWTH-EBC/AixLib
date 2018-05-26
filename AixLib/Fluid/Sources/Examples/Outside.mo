@@ -8,7 +8,7 @@ model Outside
    nPorts=1) "Model with outside conditions"
     annotation (Placement(transformation(extent={{-50,20},{-30,40}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=
-        "modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")
+        Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"))
     annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
   AixLib.Fluid.Sources.MassFlowSource_T sin(
     redeclare package Medium = Medium,
@@ -50,7 +50,7 @@ equation
       color={0,127,255},
       smooth=Smooth.None));
   annotation (
-experiment(StopTime=3.1536e+07),
+experiment(Tolerance=1e-6, StopTime=3.1536e+07),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sources/Examples/Outside.mos"
         "Simulate and plot"),
     Documentation(info="<html>

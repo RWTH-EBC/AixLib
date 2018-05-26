@@ -23,6 +23,32 @@ model ThermalZoneEquipped
     "Heat flow due to ventilation"
     annotation (Placement(transformation(extent={{-22,-26},{-6,-10}})));
 
+  redeclare Building.Components.Sources.InternalGains.Humans.HumanSensibleHeat_VDI2078
+    humanSenHea(
+    final ActivityType=3,
+    final T0=zoneParam.T_start,
+    final NrPeople=zoneParam.nrPeople,
+    final RatioConvectiveHeat=zoneParam.ratioConvectiveHeatPeople) if ATot > 0
+    "Internal gains from persons"
+    annotation (choicesAllMatching=true,
+      Placement(transformation(extent={{64,-36},{84,-16}})));
+
+  redeclare Building.Components.Sources.InternalGains.Machines.Machines_DIN18599
+    machinesSenHea(
+    final ratioConv=zoneParam.ratioConvectiveHeatMachines,
+    final T0=zoneParam.T_start,
+    final ActivityType=2,
+    final NrPeople=zoneParam.nrPeopleMachines) if ATot > 0
+    "Internal gains from machines"
+    annotation (Placement(transformation(extent={{64,-56},{84,-37}})));
+  redeclare Building.Components.Sources.InternalGains.Lights.Lights_relative lights(
+    final ratioConv=zoneParam.ratioConvectiveHeatLighting,
+    final T0=zoneParam.T_start,
+    final LightingPower=zoneParam.lightingPower,
+    final RoomArea=zoneParam.AZone) if ATot > 0
+    "Internal gains from light"
+    annotation (Placement(transformation(extent={{64,-76},{84,-57}})));
+
 protected
   Modelica.Blocks.Math.Add addInfVen if ATot > 0 or zoneParam.VAir > 0
     "Combines infiltration and ventilation"
@@ -85,7 +111,7 @@ equation
   annotation(Documentation(info="<html>
 <p>Comprehensive ready-to-use model for thermal zones, combining caclulation core, handling of solar radiation, internal gains and in addition to <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone</a> models for infiltration and natural ventilation. Core model is a <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a> model. Conditional removements of the core model are passed-through and related models on thermal zone level are as well conditional. All models for solar radiation are part of Annex60 library. Internal gains are part of AixLib.</p>
 <h4>Typical use and important parameters</h4>
-<p>All parameters are collected in one <a href=\"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a> record. Further parameters for medium, initialization and dynamics originate from <a href=\"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>. A typical use case is a single thermal zone including infiltration and vnetilation connected via heat ports and fluid ports to a heating system. The thermal zone model serves as boundary condition for the heating system and calculates the room&apos;s reaction to external and internal heat sources. The model is used as thermal zone core model in <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone\">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone</a></p></p>
+<p>All parameters are collected in one <a href=\"AixLib.DataBase.ThermalZones.ZoneBaseRecord\">AixLib.DataBase.ThermalZones.ZoneBaseRecord</a> record. Further parameters for medium, initialization and dynamics originate from <a href=\"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>. A typical use case is a single thermal zone including infiltration and vnetilation connected via heat ports and fluid ports to a heating system. The thermal zone model serves as boundary condition for the heating system and calculates the room&apos;s reaction to external and internal heat sources. The model is used as thermal zone core model in <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone\">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone</a></p>
 <h4>References</h4>
 <p>For automatic generation of thermal zone and multizone models as well as for datasets, see <a href=\"https://github.com/RWTH-EBC/TEASER\">https://github.com/RWTH-EBC/TEASER</a></p>
 <ul>

@@ -3,7 +3,7 @@ model Corridor_VoWo "Corridor from the VoWo appartment"
   import AixLib;
   ///////// construction parameters
   parameter Integer TMC = 1 "Thermal Mass Class" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1 "Heavy", choice = 2 "Medium", choice = 3 "Light", radioButtons = true));
-  parameter Integer TIR = 4 "Thermal Insulation Regulation" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1
+  parameter Integer TIR = 4 "Thermal Insulation Regulation" annotation(Dialog(groupImage = "modelica://AixLib/Resources/Images/Building/HighOrder/VoWo_Corridor.png", group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1
         "EnEV_2009",                                                                                                    choice = 2
         "EnEV_2002",                                                                                                    choice = 3
         "WSchV_1995",                                                                                                    choice = 4
@@ -99,21 +99,21 @@ equation
           {118,64},{94,64},{94,-44},{45.9,-44},{45.9,-35.4}},                                                                                                    color = {191, 0, 0}));
   connect(Wall_Ceiling.thermStarComb_inside, thermStar_Demux.thermStarComb) annotation(Line(points = {{117, 78}, {117, 64}, {94, 64}, {94, -44}, {45.9, -44}, {45.9, -35.4}}, color = {191, 0, 0}));
   connect(airload.port, thermStar_Demux.therm) annotation(Line(points = {{-13, -4}, {40.9, -4}, {40.9, -15.9}}, color = {191, 0, 0}));
-  annotation(__Dymola_Images(Parameters(source = "AixLib/Resources/Images/Building/HighOrder/VoWo_Corridor.png")), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Polygon(points=  {{-60, 60}, {120, 60}, {120, -60}, {20, -60}, {20, -100}, {-60, -100}, {-60, -18}, {-60, 60}}, lineColor=  {0, 0, 0}, fillColor=  {255, 255, 255},
-            fillPattern=                                                                                                    FillPattern.Forward), Text(extent=  {{-26, 6}, {82, -26}}, lineColor=  {0, 0, 0}, fillColor=  {255, 0, 0},
-            fillPattern=                                                                                                    FillPattern.Forward, textString=  "Corridor"), Rectangle(extent=  {{-110, -120}, {-90, -140}}, lineColor=  {0, 0, 0},
-            lineThickness=                                                                                                    0.5), Rectangle(extent=  {{-110, -90}, {-90, -110}}, lineColor=  {0, 0, 0},
-            lineThickness=                                                                                                    0.5), Rectangle(extent=  {{-110, -60}, {-90, -80}}, lineColor=  {0, 0, 0},
-            lineThickness=                                                                                                    0.5), Rectangle(extent=  {{-110, -30}, {-90, -50}}, lineColor=  {0, 0, 0},
-            lineThickness=                                                                                                    0.5), Rectangle(extent=  {{-112, 60}, {-92, 40}}, lineColor=  {0, 0, 0},
-            lineThickness=                                                                                                    0.5), Rectangle(extent=  {{-112, 90}, {-92, 70}}, lineColor=  {0, 0, 0},
-            lineThickness=                                                                                                    0.5), Rectangle(extent=  {{108, 12}, {128, -18}}, lineColor=  {0, 0, 0},
-            lineThickness=                                                                                                    1, fillColor=  {127, 0, 0},
-            fillPattern=                                                                                                    FillPattern.Forward), Ellipse(extent=  {{110, 0}, {112, -2}}, lineColor=  {0, 0, 0}, pattern=LinePattern.None,
-            lineThickness=                                                                                                    1,
-            fillPattern=                                                                                                    FillPattern.Sphere, fillColor=  {255, 255, 0}), Text(extent=  {{78, 38}, {164, 18}}, lineColor=  {0, 0, 255}, textString=  "Staircase"), Rectangle(extent=  {{-112, 0}, {-92, -20}}, lineColor=  {0, 0, 0},
-            lineThickness=                                                                                                    0.5), Rectangle(extent=  {{-112, 30}, {-92, 10}}, lineColor=  {0, 0, 0},
-            lineThickness=                                                                                                    0.5)}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics), Documentation(revisions = "<html>
+  annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics={  Polygon(points = {{-60, 60}, {120, 60}, {120, -60}, {20, -60}, {20, -100}, {-60, -100}, {-60, -18}, {-60, 60}}, lineColor = {0, 0, 0}, fillColor = {255, 255, 255},
+            fillPattern =                                                                                                   FillPattern.Forward), Text(extent = {{-26, 6}, {82, -26}}, lineColor = {0, 0, 0}, fillColor = {255, 0, 0},
+            fillPattern =                                                                                                   FillPattern.Forward, textString = "Corridor"), Rectangle(extent = {{-110, -120}, {-90, -140}}, lineColor = {0, 0, 0},
+            lineThickness =                                                                                                   0.5), Rectangle(extent = {{-110, -90}, {-90, -110}}, lineColor = {0, 0, 0},
+            lineThickness =                                                                                                   0.5), Rectangle(extent = {{-110, -60}, {-90, -80}}, lineColor = {0, 0, 0},
+            lineThickness =                                                                                                   0.5), Rectangle(extent = {{-110, -30}, {-90, -50}}, lineColor = {0, 0, 0},
+            lineThickness =                                                                                                   0.5), Rectangle(extent = {{-112, 60}, {-92, 40}}, lineColor = {0, 0, 0},
+            lineThickness =                                                                                                   0.5), Rectangle(extent = {{-112, 90}, {-92, 70}}, lineColor = {0, 0, 0},
+            lineThickness =                                                                                                   0.5), Rectangle(extent = {{108, 12}, {128, -18}}, lineColor = {0, 0, 0},
+            lineThickness =                                                                                                   1, fillColor = {127, 0, 0},
+            fillPattern =                                                                                                   FillPattern.Forward), Ellipse(extent = {{110, 0}, {112, -2}}, lineColor = {0, 0, 0}, pattern=LinePattern.None,
+            lineThickness =                                                                                                   1,
+            fillPattern =                                                                                                   FillPattern.Sphere, fillColor = {255, 255, 0}), Text(extent = {{78, 38}, {164, 18}}, lineColor = {0, 0, 255}, textString = "Staircase"), Rectangle(extent = {{-112, 0}, {-92, -20}}, lineColor = {0, 0, 0},
+            lineThickness =                                                                                                   0.5), Rectangle(extent = {{-112, 30}, {-92, 10}}, lineColor = {0, 0, 0},
+            lineThickness =                                                                                                   0.5)}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -150}, {150, 100}}), graphics), Documentation(revisions = "<html>
  <ul>
  <li><i>April 18, 2014</i> by Ana Constantin:<br/>Added documentation</li>
  <li><i>August 16, 2011</i> by Ana Constantin:<br/>Implemented</li>
@@ -121,8 +121,6 @@ equation
  </html>", info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for the corridor.</p>
- <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  <h4><span style=\"color:#008000\">Concept</span></h4>
  <p>The following figure presents the room&apos;s layout:</p>
  <p><img src=\"modelica://AixLib/Resources/Images/Building/HighOrder/VoWo_Corridor.png\"

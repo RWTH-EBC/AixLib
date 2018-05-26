@@ -10,7 +10,7 @@ model AltitudeAngle "Test model for altitude angle"
   AixLib.BoundaryConditions.SolarGeometry.BaseClasses.SolarHourAngle
     solHouAng "Solar hour angle"
     annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
-  AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam="modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")
+  AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"))
     "Weather data"
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
   AixLib.BoundaryConditions.WeatherData.Bus weaBus "Weather bus"
@@ -51,7 +51,7 @@ equation
       points={{57,6.10623e-16},{59.25,6.10623e-16},{59.25,1.27676e-15},{61.5,
           1.27676e-15},{61.5,6.66134e-16},{66,6.66134e-16}},
       color={0,0,127}));
-  annotation (experiment(StopTime=86400),
+  annotation (experiment(Tolerance=1e-6, StopTime=86400),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarGeometry/BaseClasses/Examples/AltitudeAngle.mos"
         "Simulate and plot"),
 Documentation(info="<html>

@@ -11,7 +11,7 @@ model Carnot_TEva_HighTemperature
 equation
   connect(TEvaEnt.y, sou2.T_in) annotation (Line(points={{-39,80},{24,80},{90,80},
           {90,-2},{82,-2}}, color={0,0,127}));
-  annotation (experiment(StopTime=3600),
+  annotation (experiment(Tolerance=1e-6, StopTime=3600),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Chillers/Validation/Carnot_TEva_HighTemperature.mos"
         "Simulate and plot"),
 Documentation(info="<html>
@@ -20,7 +20,7 @@ This example extends from
 <a href=\"modelica://AixLib.Fluid.Chillers.Examples.Carnot_TEva\">
 AixLib.Fluid.Chillers.Examples.Carnot_TEva</a>
 but increases the set point for the leaving evaporator temperature
-to be above its inlet temperature, in which case the model provide no cooling.
+to be above its inlet temperature, in which case the model provides no cooling.
 Towards the end of the simulation, the inlet temperature of the evaporator is increased
 to be above the condenser temperature. In this domain, the model requires cooling
 again. While this is not a meaningful operating point for the model, the example
@@ -33,7 +33,5 @@ February 10, 2016, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}})));
+</html>"));
 end Carnot_TEva_HighTemperature;

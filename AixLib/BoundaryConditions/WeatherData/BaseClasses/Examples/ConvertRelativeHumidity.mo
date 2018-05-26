@@ -16,7 +16,7 @@ protected
     tableOnFile=true,
     tableName="tab1",
     fileName=Modelica.Utilities.Files.loadResource(
-       "modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"),
+       Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")),
     columns=2:30,
     smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative)
     "Data reader"
@@ -50,7 +50,7 @@ July 14, 2010, by Wangda Zuo:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),experiment(StopTime=8640000),
+</html>"),experiment(Tolerance=1e-6, StartTime=0, StopTime=8640000),
 __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/WeatherData/BaseClasses/Examples/ConvertRelativeHumidity.mos"
         "Simulate and plot"));

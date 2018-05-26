@@ -2,14 +2,14 @@ within AixLib.Fluid.Sensors;
 model PPMTwoPort
   "Ideal two port trace substances sensor outputting in parts per million"
   extends AixLib.Fluid.Sensors.BaseClasses.PartialDynamicFlowSensor(
-     port_a(C_outflow(final quantity="MassFraction",
-                   final unit="1",
-                   min=0,
-                   max=1)),
-     port_b(C_outflow(final quantity="MassFraction",
-                   final unit="1",
-                   min=0,
-                   max=1)));
+     port_a(C_outflow(each final quantity="MassFraction",
+                   each final unit="1",
+                   each min=0,
+                   each max=1)),
+     port_b(C_outflow(each final quantity="MassFraction",
+                   each final unit="1",
+                   each min=0,
+                   each max=1)));
   extends Modelica.Icons.RotationalSensor;
 
   parameter String substanceName = "CO2" "Name of trace substance";
@@ -112,11 +112,9 @@ AixLib.Fluid.Sensors.UsersGuide</a> for an explanation.
 <li>
 January 12, 2016, by Filip Jorissen:<br/>
 First implementation.
-See issue 
-<a href=\"https://github.com/iea-annex60/modelica-annex60/issues/372\">#372</a>
+See issue
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/372\">#372</a>
 </li>
 </ul>
-</html>"),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}})));
+</html>"));
 end PPMTwoPort;

@@ -6,7 +6,7 @@ model DiffusePerez
   parameter Modelica.SIunits.Angle azi=0.3 "Azi angle";
   parameter Modelica.SIunits.Angle til=0.5 "Tilted angle";
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(filNam=
-        "modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
+        Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos"))
     annotation (Placement(transformation(extent={{-40,0},{-20,20}})));
   AixLib.BoundaryConditions.WeatherData.Bus weaBus annotation (Placement(
         transformation(extent={{1,-1},{21,21}}), iconTransformation(extent={{20,
@@ -57,7 +57,7 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}}));
   annotation (
-experiment(StartTime=1.82304e+07, StopTime=1.83168e+07),
+experiment(StartTime=1.82304e+07, Tolerance=1e-6, StopTime=1.83168e+07),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarIrradiation/Examples/DiffusePerez.mos"
         "Simulate and plot"),
     Documentation(info="<html>

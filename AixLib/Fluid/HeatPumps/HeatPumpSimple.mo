@@ -7,42 +7,54 @@ model HeatPumpSimple
 
   Modelica.Fluid.Interfaces.FluidPort_a
                     port_a_source(redeclare package Medium = Medium)
-                                  annotation(Placement(transformation(extent = {{-100, 60}, {-80, 80}})));
+                    "Heat pump inlet on the source side"   annotation(Placement(transformation(extent = {{-100, 60}, {-80, 80}})));
   Modelica.Fluid.Interfaces.FluidPort_b
                     port_b_source(redeclare package Medium = Medium)
-                                  annotation(Placement(transformation(extent = {{-100, -80}, {-80, -60}})));
+                    "Heat pump outlet on the source side"  annotation(Placement(transformation(extent = {{-100, -80}, {-80, -60}})));
   Modelica.Fluid.Interfaces.FluidPort_a
                     port_a_sink(redeclare package Medium = Medium)
-                                annotation(Placement(transformation(extent = {{80, -80}, {100, -60}})));
+                    "Heat pump inlet on the sink side"     annotation(Placement(transformation(extent = {{80, -80}, {100, -60}})));
   Modelica.Fluid.Interfaces.FluidPort_b
                     port_b_sink(redeclare package Medium = Medium)
-                                annotation(Placement(transformation(extent = {{80, 60}, {100, 80}})));
+                    "Heat pump outlet on the sink side"    annotation(Placement(transformation(extent = {{80, 60}, {100, 80}})));
   Fluid.MixingVolumes.MixingVolume
-                volumeEvaporator(V = VolumeEvaporator, nPorts=2,
-    redeclare package Medium = Medium,
-    m_flow_nominal=0.01)                               annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={-70,-60})));
+                    volumeEvaporator(V = VolumeEvaporator, nPorts=2,
+                    redeclare package Medium = Medium, m_flow_nominal=0.01)
+                    "Water volume of the evaporator on the source side"  annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={-70,-60})));
   Fluid.MixingVolumes.MixingVolume
-                volumeCondenser(V = VolumeCondenser, nPorts=2,
-    redeclare package Medium = Medium,
-    m_flow_nominal=0.01)                             annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin={70,-30})));
+                    volumeCondenser(V = VolumeCondenser, nPorts=2,
+                    redeclare package Medium = Medium, m_flow_nominal=0.01)
+                    "Water volume of the condenser on the sink side"  annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin={70,-30})));
   Fluid.Sensors.TemperatureTwoPort
-                            temperatureSinkOut(redeclare package Medium =
-        Medium, m_flow_nominal=0.01)           annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {80, 50})));
-  Modelica.Blocks.Interfaces.BooleanInput OnOff annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 270, origin = {0, 80})));
+                    temperatureSinkOut(redeclare package Medium =
+                    Medium, m_flow_nominal=0.01)
+                    "Temperature sensor at outlet on the sink side"   annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 90, origin = {80, 50})));
+  Modelica.Blocks.Interfaces.BooleanInput OnOff
+                    "On Off input signal of the heat pump"      annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 270, origin = {0, 80})));
   Fluid.Sensors.TemperatureTwoPort
-                            temperatureSourceIn(redeclare package Medium =
-        Medium, m_flow_nominal=0.01)            annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-80, 36})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow HeatFlowCondenser annotation(Placement(transformation(extent={{-4,-4},
+                    temperatureSourceIn(redeclare package Medium =
+                    Medium, m_flow_nominal=0.01)
+                    "Temperature sensor at inlet on the source side"  annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {-80, 36})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow HeatFlowCondenser
+                    "Heat flow on the sink side" annotation(Placement(transformation(extent={{-4,-4},
             {4,4}},                                                                                                    origin={48,-40})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow HeatFlowEvaporator annotation(Placement(transformation(extent={{4,-4},{
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow HeatFlowEvaporator
+                    "Heat flow on the source side" annotation(Placement(transformation(extent={{4,-4},{
             -4,4}},                                                                                                    origin={-46,-50})));
-  Modelica.Blocks.Tables.CombiTable2D PowerTable(table = tablePower) annotation(Placement(transformation(extent = {{-52, 20}, {-32, 40}})));
-  Modelica.Blocks.Tables.CombiTable2D HeatFlowCondenserTable(table = tableHeatFlowCondenser) annotation(Placement(transformation(extent = {{-52, -12}, {-32, 8}})));
-  Modelica.Blocks.Logical.Switch SwitchHeatFlowCondenser annotation(Placement(transformation(extent = {{14, -20}, {34, 0}})));
-  Modelica.Blocks.Sources.Constant constZero2(k = 0) annotation(Placement(transformation(extent = {{-26, -28}, {-6, -8}})));
-  Modelica.Blocks.Logical.Switch SwitchPower annotation(Placement(transformation(extent = {{14, 12}, {34, 32}})));
-  Modelica.Blocks.Sources.Constant constZero1(k = 0) annotation(Placement(transformation(extent = {{-26, 4}, {-6, 24}})));
-  Modelica.Blocks.Math.Feedback feedbackHeatFlowEvaporator annotation(Placement(transformation(extent = {{10, -60}, {-10, -40}})));
+  Modelica.Blocks.Tables.CombiTable2D PowerTable(table = tablePower)
+                    "Calculates electric power based on temperature in source and sink" annotation(Placement(transformation(extent = {{-52, 20}, {-32, 40}})));
+  Modelica.Blocks.Tables.CombiTable2D HeatFlowCondenserTable(table = tableHeatFlowCondenser)
+                    "Calculates heat flow based on temperature in source and sink" annotation(Placement(transformation(extent = {{-52, -12}, {-32, 8}})));
+  Modelica.Blocks.Logical.Switch SwitchHeatFlowCondenser
+                    "Switch to deactivate heat flow when off" annotation(Placement(transformation(extent = {{14, -20}, {34, 0}})));
+  Modelica.Blocks.Sources.Constant constZero2(k = 0)
+                    "Zero heat flow, when heat pump off" annotation(Placement(transformation(extent = {{-26, -28}, {-6, -8}})));
+  Modelica.Blocks.Logical.Switch SwitchPower
+                    "Switch to deactivate Power when off" annotation(Placement(transformation(extent = {{14, 12}, {34, 32}})));
+  Modelica.Blocks.Sources.Constant constZero1(k = 0)
+                    "Zero power, when heat pump off" annotation(Placement(transformation(extent = {{-26, 4}, {-6, 24}})));
+  Modelica.Blocks.Math.Feedback feedbackHeatFlowEvaporator
+                    "Calculates evaporator heat flow with total energy balance" annotation(Placement(transformation(extent = {{10, -60}, {-10, -40}})));
   Modelica.Blocks.Interfaces.RealOutput Power "Connector of Real output signal" annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin = {0, -90})));
   parameter Modelica.SIunits.Volume VolumeEvaporator = 0.01 "Volume im m3";
   parameter Modelica.SIunits.Volume VolumeCondenser = 0.01 "Volume im m3";
@@ -101,25 +113,25 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 255}, fillColor = {249, 249, 249},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-80, 80}, {-60, -80}}, lineColor = {0, 0, 255}, fillColor = {170, 213, 255},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{60, 80}, {80, -80}}, lineColor = {0, 0, 255}, fillColor = {255, 170, 213},
-            fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-100, 20}, {100, -20}}, lineColor = {0, 0, 255}, textString = "%name")}), Documentation(info = "<html>
+            fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-100, 20}, {100, -20}}, lineColor = {0, 0, 255}, textString = "%name")}), Documentation(info="<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Simple model of an on/off-controlled heat pump. The refrigerant circuit is a black-box model represented by tables which calculate the electric power and heat flows of the condenser depending on the source and sink temperature. </p>
- <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\"
-    alt=\"stars: 3 out of 5\"/></p>
- <h4><span style=\"color:#008000\">Example Results</span></h4>
- <p><a href=\"AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem\">
-    AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem</a></p>
- <p><a href=\"AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem2\">
-    AixLib.HVAC.HeatGeneration.Examples.HeatPumpSystem2</a></p>
+ <h4><span style=\"color:#008000\">Example</span></h4>
+ <p><a href=\"AixLib.Fluid.HeatPumps.Examples.HeatPumpSimple\">
+    AixLib.Fluid.HeatPumps.Examples.HeatPumpSimple</a></p>
  </html>", revisions="<html>
  <ul>
- <li><i>November 2014&nbsp;</i>
-    by Marcus Fuchs:<br/>
-    Changed model to use Annex 60 base class</li>
- <li><i>November 25, 2013&nbsp;</i>
-    by Kristian Huchtemann:<br/>
-    Implemented</li>
+   <li>
+   May 15, 2017, by Christian Behm:<br/>
+   Added missing documentation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/373\">issue 373</a>).
+  </li>
+  <li>
+   November, 2014, by Marcus Fuchs:<br/>
+   Changed model to use Annex 60 base class
+  </li>
+  <li>
+   November 25, 2013, by Kristian Huchtemann:<br/>
+   Implemented</li>
  </ul>
  </html>"));
 end HeatPumpSimple;

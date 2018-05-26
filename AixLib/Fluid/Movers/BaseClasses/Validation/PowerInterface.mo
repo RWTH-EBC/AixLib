@@ -37,8 +37,6 @@ equation
   connect(PEle.y, powNonCoo.PEle) annotation (Line(points={{-39,-70},{-20,-70},{
           -20,-30},{-12,-30}}, color={0,0,127}));
   annotation (
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}})),
     Documentation(info="<html>
 <p>
 Simple validation model for the power interface model.
@@ -51,7 +49,7 @@ First implementation.
 </li>
 </ul>
 </html>"),
-experiment(StopTime=1),
+experiment(Tolerance=1e-6, StopTime=1),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/BaseClasses/Validation/PowerInterface.mos"
         "Simulate and plot"));
 end PowerInterface;

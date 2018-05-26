@@ -10,7 +10,7 @@ record SchuecoSME1 "SchuecoSME1"
   annotation (Documentation(info="<html>
 <h4><span style=\"color: #008000\">Overview</span></h4>
 <p>Monocrystalline Solar Module, single Area=1,27664m2 </p>
-<p><br><h4><span style=\"color: #008000\">References</span></h4></p>
+<h4><span style=\"color: #008000\">References</span></h4>
 <p>
 Record for record used with
 <a href=\"modelica://AixLib.Fluid.Solar.Electric.PVsystem\">
@@ -18,9 +18,9 @@ AixLib.Fluid.Solar.Electric.PVsystem</a>
 </p>
 </html>",
       revisions="<html>
-<p><ul>
+<ul>
 <li><i>October 11, 2016 </i> by Tobias Blacha:<br/>Moved into AixLib</li>
 <li><i>September 01, 2014&nbsp;</i> by Xian Wu:<br/>Added documentation and formatted appropriately</li>
-</ul></p>
+</ul>
 </html>"));
 end SchuecoSME1;

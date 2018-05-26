@@ -1,12 +1,16 @@
 within AixLib.Building.HighOrder.House.MFD.BuildingAndEnergySystem;
-
-
 model OneAppartment_Radiators
   "just one appartment (same appartment as in MFD, but hydraulic network fit to this one appartment)"
   import HouseModels = AixLib.Building.HighOrder;
   replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater
     "Medium in the system"                                                                             annotation(Dialog(group = "Medium"), choicesAllMatching = true);
-  HouseModels.House.MFD.EnergySystem.OneAppartment.Radiators Hydraulic annotation(Placement(transformation(extent = {{-22, -72}, {38, -12}})));
+  HouseModels.House.MFD.EnergySystem.OneAppartment.Radiators Hydraulic(
+    hydResRadLi(m_flow_nominal=0.0001),
+    hydResRadBe(m_flow_nominal=0.0001),
+    hydResRadCh(m_flow_nominal=0.0001),
+    hydResRadBa(m_flow_nominal=0.0001),
+    hydResInflow(m_flow_nominal=0.0001),
+    hydResRadKi(m_flow_nominal=0.0001))                                annotation(Placement(transformation(extent = {{-22, -72}, {38, -12}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedHeatFlow6(Q_flow = 0) annotation(Placement(transformation(extent = {{-62, 26}, {-50, 32}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedHeatFlow1(Q_flow = 0) annotation(Placement(transformation(extent = {{-78, 62}, {-66, 68}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedHeatFlow2(Q_flow = 0) annotation(Placement(transformation(extent = {{-78, 26}, {-66, 32}})));
@@ -142,8 +146,7 @@ equation
   connect(Hydraulic.radCh, Appartment.StarChildren) annotation(Line(points={{36,
           -29.4286},{54,-29.4286},{54,0},{14.64,0},{14.64,45.6133}},                                                                                         color = {0, 0, 0}));
   connect(Hydraulic.convCh, Appartment.ThermChildren) annotation(Line(points={{35.7,
-          -36.1429},{54,-36.1429},{54,0},{12,0},{12,22},{10.92,22},{10.92,
-          45.6133}},                                                                                                    color = {191, 0, 0}));
+          -36.1429},{54,-36.1429},{54,0},{12,0},{12,22},{9.68,22},{9.68,46.44}},                                        color = {191, 0, 0}));
   connect(Hydraulic.radBa, Appartment.StarBath) annotation(Line(points={{35.6,
           -51.4286},{54,-51.4286},{54,0},{2.44667,0},{2.44667,34.8667}},                                                                                   color = {0, 0, 0}));
   connect(Hydraulic.convBa, Appartment.ThermBath) annotation(Line(points={{35.7,
@@ -157,8 +160,6 @@ equation
             -120},{100,120}}),                                                                           graphics), Documentation(info = "<html>
  <h4><span style=\"color:#008000\">Overview</span></h4>
  <p>Model for an appartment, considered as a single unit with an energy system based on radiators.</p>
- <h4><span style=\"color:#008000\">Level of Development</span></h4>
- <p><img src=\"modelica://AixLib/Resources/Images/Stars/stars3.png\" alt=\"stars: 3 out of 5\"/></p>
  </html>", revisions = "<html>
  <ul>
  <li><i>June 19, 2014</i> by Ana Constantin:<br/>Implemented</li>
