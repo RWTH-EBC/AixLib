@@ -95,8 +95,8 @@ equation
         points={{-1.6,-54.4},{-1.6,-40},{-72,-40},{-72,40},{51.6,40},{51.6,54.4}},
         color={191,0,0},
       visible=false));
-  connect(VFSen_out.V_flow, hydraulicBus.vFRflowModule) annotation (Line(points={{-80,
-          66.6},{-80,100},{0,100}},                   color={0,0,127}), Text(
+  connect(VFSen_out.V_flow, hydraulicBus.VF_out) annotation (Line(points={{-80,
+          66.6},{-80,100.1},{0.1,100.1}},             color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
@@ -105,7 +105,7 @@ equation
   connect(TfwrdIn.y, Pt1Fwrd_in.u)
     annotation (Line(points={{-77.6,-12},{-90,-12},{-90,-2}},
                                                             color={0,0,127}));
-  connect(Pt1Fwrd_in.y, hydraulicBus.TfwrdIn) annotation (Line(
+  connect(Pt1Fwrd_in.y, hydraulicBus.Tfwrd_in) annotation (Line(
       points={{-90,21},{-90,100},{0,100}},
       color={0,0,127},
       visible=false), Text(
@@ -115,7 +115,7 @@ equation
   connect(TfwrdOut.y, Pt1Fwrd_out.u)
     annotation (Line(points={{77.6,-12},{90,-12},{90,-2}},
                                                          color={0,0,127}));
-  connect(Pt1Fwrd_out.y, hydraulicBus.TfwrdOut) annotation (Line(
+  connect(Pt1Fwrd_out.y, hydraulicBus.Tfwrd_out) annotation (Line(
       points={{90,21},{90,100},{0,100}},
       color={0,0,127},
       visible=false), Text(
@@ -124,12 +124,12 @@ equation
       extent={{6,3},{6,3}}));
   connect(TrtrnOut.y, Pt1Rtrn_out.u)
     annotation (Line(points={{-67.6,-88},{-80,-88}}, color={0,0,127}));
-  connect(Pt1Rtrn_out.y, hydraulicBus.TrtrnOut) annotation (Line(points={{-80,-111},
+  connect(Pt1Rtrn_out.y, hydraulicBus.Trtrn_out) annotation (Line(points={{-80,-111},
           {-80,-118},{-116,-118},{-116,100},{0,100}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(Pt1Rtrn_in.y, hydraulicBus.TrtrnIn) annotation (Line(points={{80,-111},
+  connect(Pt1Rtrn_in.y, hydraulicBus.Trtrn_in) annotation (Line(points={{80,-111},
           {80,-118},{116,-118},{116,100},{0,100}}, color={0,0,127}), Text(
       string="%second",
       index=1,

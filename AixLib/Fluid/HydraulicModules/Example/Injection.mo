@@ -13,10 +13,6 @@ model Injection "Test for injection circuit"
         extent={{-26,-26},{26,26}},
         rotation=90,
         origin={20,20})));
-                           annotation (Placement(transformation(
-        extent={{-24,-24},{24,24}},
-        rotation=90,
-        origin={20,20})));
   replaceable package Medium =
       Modelica.Media.Water.ConstantPropertyLiquidWater
     annotation (__Dymola_choicesAllMatching=true);
@@ -44,7 +40,7 @@ model Injection "Test for injection circuit"
     dp(start=hydRes.dp_nominal),
     redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater)
-    "hydraulic resitance in distribution cirquit (shortcut pipe)" annotation (
+    "Hydraulic resistance in distribution cirquit (shortcut pipe)" annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
@@ -84,7 +80,10 @@ equation
     annotation (Line(points={{30,60},{35.6,60},{35.6,46}}, color={0,127,255}));
   connect(hydRes.port_a, Injection.port_b1)
     annotation (Line(points={{10,60},{4.4,60},{4.4,46}}, color={0,127,255}));
-  annotation (
+                           annotation (Placement(transformation(
+        extent={{-24,-24},{24,24}},
+        rotation=90,
+        origin={20,20})),
     Icon(graphics,
          coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),

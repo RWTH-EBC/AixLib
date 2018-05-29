@@ -5,13 +5,14 @@ model Throttle "Test for throttle circuit"
 
   AixLib.Fluid.HydraulicModules.Throttle Throttle(
     val( Kv=10, m_flow_nominal=0.5), redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater)
-                                     annotation (Placement(
+        Medium) annotation (Placement(
         transformation(
         extent={{-30,-30},{30,30}},
         rotation=90,
         origin={20,0})));
-
+  replaceable package Medium =
+      Modelica.Media.Water.ConstantPropertyLiquidWater
+    annotation (__Dymola_choicesAllMatching=true);
   Modelica.Fluid.Sources.Boundary_pT boundary(
     redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
@@ -37,7 +38,7 @@ model Throttle "Test for throttle circuit"
     dp(start=hydRes.dp_nominal),
     redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater)
-    "hydraulic resitance in distribution cirquit (shortcut pipe)" annotation (Placement(
+    "Hydraulic resistance in distribution cirquit (shortcut pipe)" annotation (Placement(
         transformation(
         extent={{-10,0},{10,20}},
         rotation=0,

@@ -40,7 +40,7 @@ model Admix "Test for admix circuit"
     dp(start=hydRes.dp_nominal),
     redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater)
-    "hydraulic resitance in distribution cirquit (shortcut pipe)" annotation (
+    "Hydraulic resistance in distribution cirquit (shortcut pipe)" annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,

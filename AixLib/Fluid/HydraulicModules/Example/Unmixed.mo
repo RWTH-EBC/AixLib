@@ -24,7 +24,6 @@ model Unmixed "Test for unmixed circuit"
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={0,-50})));
-    annotation (Placement(transformation(extent={{80,80},{100,100}})));
   Modelica.Fluid.Sources.FixedBoundary boundary1(          redeclare package
       Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, nPorts=1)
                                                                  annotation (
@@ -39,7 +38,7 @@ model Unmixed "Test for unmixed circuit"
         Modelica.Media.Water.ConstantPropertyLiquidWater,
     m_flow_nominal=1,
     dp_nominal=100)
-    "hydraulic resitance in distribution cirquit (shortcut pipe)" annotation (
+    "Hydraulic resistance in distribution cirquit (shortcut pipe)" annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
@@ -72,7 +71,8 @@ equation
     annotation (Line(points={{30,50},{35.6,50},{35.6,26}}, color={0,127,255}));
   connect(hydRes.port_a, Unmixed.port_b1)
     annotation (Line(points={{10,50},{4.4,50},{4.4,26}}, color={0,127,255}));
-  annotation (Icon(graphics,
+    annotation (Placement(transformation(extent={{80,80},{100,100}})),
+              Icon(graphics,
                    coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{120,100}})),                                  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,

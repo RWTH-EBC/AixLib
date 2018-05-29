@@ -14,7 +14,7 @@ model Throttle "Throttle circuit with valve"
 
   AixLib.Fluid.Actuators.Valves.TwoWayLinear val(
     redeclare package Medium = Medium,
-    dpValve_nominal=8000) annotation (Dialog(enable=true), Placement(
+    dpValve_nominal=8000) annotation (Dialog(enable=true,group="Actuators"), Placement(
         transformation(extent={{-10,50},{10,70}})));
   AixLib.Fluid.HydraulicModules.BaseClasses.HydraulicBus hydraulicBus
     annotation (Placement(transformation(extent={{-20,80},{20,120}}),
@@ -105,8 +105,8 @@ equation
   connect(pipe3.heatPort_outside, pipe2.heatPort_outside) annotation (Line(
         points={{-1.6,-54.4},{-1.6,-40},{-72,-40},{-72,40},{41.6,40},{41.6,54.4}},
         color={191,0,0},visible=false));
-  connect(VFSen_out.V_flow, hydraulicBus.VFSen_out) annotation (Line(points={{-80,
-          66.6},{-80,100},{0,100}},        color={0,0,127}), Text(
+  connect(VFSen_out.V_flow, hydraulicBus.VF_out) annotation (Line(points={{-80,
+          66.6},{-80,100.1},{0.1,100.1}},  color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
