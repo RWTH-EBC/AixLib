@@ -4,8 +4,8 @@ model Injection "Test for injection circuit"
   extends Modelica.Icons.Example;
 
   AixLib.Fluid.HydraulicModules.Injection Injection(
-  redeclare package Medium = Medium,
-      redeclare
+    redeclare package Medium = Medium,
+    redeclare
       AixLib.Fluid.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       basicPumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),

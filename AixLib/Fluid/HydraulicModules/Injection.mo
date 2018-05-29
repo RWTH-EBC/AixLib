@@ -91,7 +91,7 @@ protected
         rotation=90,
         origin={-96,32})));
   Modelica.Blocks.Sources.RealExpression TfwrdIn(y=pipe1.pipe.mediums[1].T)
-    "Temperature of inflowing medium on forward line."
+    "Temperature of inflowing medium in forward line."
     annotation (Placement(transformation(extent={{-52,4},{-84,24}})));
   Modelica.Blocks.Continuous.FirstOrder Pt1Fwrd_out(
     T=tau,
@@ -101,7 +101,7 @@ protected
         rotation=90,
         origin={94,32})));
   Modelica.Blocks.Sources.RealExpression TfwrdOut(y=pipe2.pipe.mediums[pipe2.nNodes].T)
-    "Temperature of out flowing medium in forward line."
+    "Temperature of outflowing medium in forward line."
     annotation (Placement(transformation(extent={{54,4},{86,24}})));
   Modelica.Blocks.Continuous.FirstOrder Pt1Rtrn_in(
     T=tau,
@@ -121,7 +121,7 @@ protected
         rotation=90,
         origin={-80,-100})));
   Modelica.Blocks.Sources.RealExpression TrtrnOut(y=pipe4.pipe.mediums[pipe4.nNodes].T)
-    "Temperature of out flowing medium in forward line."
+    "Temperature of outflowing medium in return line."
     annotation (Placement(transformation(extent={{-34,-98},{-66,-78}})));
   Modelica.Fluid.Vessels.ClosedVolume junc15j(
     nPorts=4,
