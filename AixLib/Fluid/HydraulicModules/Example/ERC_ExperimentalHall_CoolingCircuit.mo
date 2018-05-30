@@ -32,7 +32,6 @@ model ERC_ExperimentalHall_CoolingCircuit
     pipe5(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
     pipe6(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
     pump(redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per),
-
     Tinit=293.15) annotation (Placement(transformation(
         extent={{-25,-25},{25,25}},
         rotation=90,
@@ -43,7 +42,6 @@ model ERC_ExperimentalHall_CoolingCircuit
     pipe2(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
     pipe3(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
     pump(redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per),
-
     Tinit=293.15) annotation (Placement(transformation(
         extent={{-25,-25},{25,25}},
         rotation=90,
@@ -54,7 +52,6 @@ model ERC_ExperimentalHall_CoolingCircuit
     pipe2(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
     pipe3(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
     pump(redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per),
-
     Tinit=293.15) annotation (Placement(transformation(
         extent={{-25,-25},{25,25}},
         rotation=90,

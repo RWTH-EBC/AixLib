@@ -16,8 +16,9 @@ model Throttle "Test for throttle circuit"
   Modelica.Fluid.Sources.Boundary_pT boundary(
     redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
-    T=323.15,
-    nPorts=1) annotation (Placement(transformation(
+    nPorts=1,
+    p=120000,
+    T=323.15) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={0,-60})));

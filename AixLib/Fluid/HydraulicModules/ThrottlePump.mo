@@ -22,19 +22,23 @@ model ThrottlePump "Throttle circuit with pump and two way valve"
     redeclare package Medium = Medium,
     m_flow_nominal=8*996/3600,
     dpValve_nominal=8000) annotation (Dialog(enable=true,group="Actuators"), Placement(
-        transformation(extent={{-50,50},{-30,70}})));
+        transformation(extent={{-38,50},{-18,70}})));
   AixLib.Fluid.HydraulicModules.BaseClasses.HydraulicBus hydraulicBus
     annotation (Placement(transformation(extent={{-20,80},{20,120}}),
         iconTransformation(extent={{-20,80},{20,120}})));
   FixedResistances.Pipe pipe1(redeclare package Medium = Medium, T_start=T_start)
+    annotation (Dialog(enable=true), Placement(transformation(extent={{-68,70},{
+            -48,50}})));
+
+  FixedResistances.Pipe pipe2(redeclare package Medium = Medium, T_start=T_start)
     annotation (Dialog(enable=true), Placement(transformation(extent={{-10,70},{
             10,50}})));
 
-  FixedResistances.Pipe pipe2(redeclare package Medium = Medium, T_start=
+  FixedResistances.Pipe pipe3(redeclare package Medium = Medium, T_start=
         T_start)
     annotation (Dialog(enable=true), Placement(transformation(extent={{50,70},{70,
             50}})));
-  FixedResistances.Pipe pipe3(redeclare package Medium = Medium, T_start=
+  FixedResistances.Pipe pipe4(redeclare package Medium = Medium, T_start=
         T_start)
     annotation (Dialog(enable=true), Placement(transformation(extent={{10,-70},{
             -10,-50}})));
@@ -45,7 +49,7 @@ protected
         transformation(
         extent={{-6,-6},{6,6}},
         rotation=0,
-        origin={-80,60})));
+        origin={-82,60})));
   Modelica.Blocks.Sources.RealExpression TfwrdIn(y=pipe1.pipe.mediums[1].T)
     "Temperature of inflowing medium in forward line."
     annotation (Placement(transformation(extent={{-48,-20},{-80,0}})));
@@ -56,7 +60,7 @@ protected
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-90,10})));
-  Modelica.Blocks.Sources.RealExpression TfwrdOut(y=pipe2.pipe.mediums[pipe2.nNodes].T)
+  Modelica.Blocks.Sources.RealExpression TfwrdOut(y=pipe3.pipe.mediums[pipe2.nNodes].T)
     "Temperature of outflowing medium in forward line."
     annotation (Placement(transformation(extent={{48,-20},{80,0}})));
   Modelica.Blocks.Continuous.FirstOrder Pt1Fwrd_out(
@@ -66,7 +70,7 @@ protected
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={90,10})));
-  Modelica.Blocks.Sources.RealExpression TrtrnIn(y=pipe3.pipe.mediums[1].T)
+  Modelica.Blocks.Sources.RealExpression TrtrnIn(y=pipe4.pipe.mediums[1].T)
     "Temperature of inflowing medium in return line."
     annotation (Placement(transformation(extent={{34,-98},{66,-78}})));
   Modelica.Blocks.Continuous.FirstOrder Pt1Rtrn_in(
@@ -76,7 +80,7 @@ protected
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={80,-100})));
-  Modelica.Blocks.Sources.RealExpression TrtrnOut(y=pipe3.pipe.mediums[pipe3.nNodes].T)
+  Modelica.Blocks.Sources.RealExpression TrtrnOut(y=pipe4.pipe.mediums[pipe3.nNodes].T)
     "Temperature of outflowing medium in return line."
     annotation (Placement(transformation(extent={{-34,-98},{-66,-78}})));
   Modelica.Blocks.Continuous.FirstOrder Pt1Rtrn_out(
@@ -89,31 +93,29 @@ protected
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
     prescribedTemperature
     annotation (Placement(transformation(extent={{-60,80},{-68,88}})));
+
 equation
-  connect(val.port_b, pipe1.port_a)
-    annotation (Line(points={{-30,60},{-10.4,60}}, color={0,127,255}));
-  connect(val.y, hydraulicBus.valveSet) annotation (Line(points={{-40,72},{-40,100},
-          {0,100},{0,100},{0,100.1},{0.1,100.1}},
-                                         color={0,0,127}), Text(
+  connect(val.port_b,pipe2. port_a)
+    annotation (Line(points={{-18,60},{-10.4,60}}, color={0,127,255}));
+  connect(val.y, hydraulicBus.valveSet) annotation (Line(points={{-28,72},{-28,100},
+          {0,100},{0,100.1},{0.1,100.1}},color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(pipe1.heatPort_outside, pipe2.heatPort_outside) annotation (Line(
+  connect(pipe2.heatPort_outside,pipe3. heatPort_outside) annotation (Line(
         points={{1.6,54.4},{1.6,40},{61.6,40},{61.6,54.4}},
                                                         color={191,0,0},visible=false));
-  connect(prescribedTemperature.port, pipe2.heatPort_outside) annotation (Line(
+  connect(prescribedTemperature.port,pipe3. heatPort_outside) annotation (Line(
         points={{-68,84},{-72,84},{-72,40},{61.6,40},{61.6,54.4}},
                                                                color={191,0,0},visible=false));
-  connect(pipe3.heatPort_outside, pipe2.heatPort_outside) annotation (Line(
+  connect(pipe4.heatPort_outside,pipe3. heatPort_outside) annotation (Line(
         points={{-1.6,-54.4},{-1.6,-40},{-72,-40},{-72,40},{61.6,40},{61.6,54.4}},
         color={191,0,0},visible=false));
-  connect(VFSen_out.V_flow, hydraulicBus.VF_out) annotation (Line(points={{-80,66.6},
-          {-80,100.1},{0.1,100.1}},        color={0,0,127}), Text(
+  connect(VFSen_out.V_flow, hydraulicBus.VF_out) annotation (Line(points={{-82,66.6},
+          {-82,100.1},{0.1,100.1}},        color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(VFSen_out.port_b, val.port_a)
-    annotation (Line(points={{-74,60},{-50,60}}, color={0,127,255}));
   connect(TfwrdIn.y, Pt1Fwrd_in.u) annotation (Line(points={{-81.6,-10},{-90,-10},
           {-90,-2}}, color={0,0,127}));
   connect(Pt1Fwrd_in.y, hydraulicBus.Tfwrd_in) annotation (Line(
@@ -152,16 +154,16 @@ equation
       index=1,
       extent={{6,3},{6,3}}));
   connect(port_a1,VFSen_out.port_a)
-    annotation (Line(points={{-100,60},{-86,60}}, color={0,127,255}));
-  connect(pipe2.port_b, port_b1)
+    annotation (Line(points={{-100,60},{-88,60}}, color={0,127,255}));
+  connect(pipe3.port_b, port_b1)
     annotation (Line(points={{70.4,60},{100,60}}, color={0,127,255}));
-  connect(port_a2, pipe3.port_a)
+  connect(port_a2,pipe4. port_a)
     annotation (Line(points={{100,-60},{10.4,-60}}, color={0,127,255}));
-  connect(pipe3.port_b, port_b2)
+  connect(pipe4.port_b, port_b2)
     annotation (Line(points={{-10.4,-60},{-100,-60}}, color={0,127,255}));
-  connect(basicPumpInterface.port_b, pipe2.port_a)
+  connect(basicPumpInterface.port_b,pipe3. port_a)
     annotation (Line(points={{42,60},{49.6,60}}, color={0,127,255}));
-  connect(pipe1.port_b, basicPumpInterface.port_a)
+  connect(pipe2.port_b, basicPumpInterface.port_a)
     annotation (Line(points={{10.4,60},{18,60}}, color={0,127,255}));
   connect(hydraulicBus, basicPumpInterface.pumpBus) annotation (Line(
       points={{0,100},{30,100},{30,72}},
@@ -170,11 +172,18 @@ equation
       string="%first",
       index=-1,
       extent={{-2,6},{-2,6}}));
-  connect(val.y_actual, hydraulicBus.valveSetAct) annotation (Line(points={{-35,
-          67},{-35,100.1},{0.1,100.1}}, color={0,0,127}), Text(
+  connect(val.y_actual, hydraulicBus.valveSetAct) annotation (Line(points={{-23,67},
+          {-23,100.1},{0.1,100.1}},     color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
+  connect(pipe1.heatPort_outside,pipe3. heatPort_outside) annotation (Line(
+        points={{-56.4,54.4},{-56.4,-4},{61.6,-4},{61.6,54.4}},
+                                                        color={191,0,0},visible=false));
+  connect(pipe1.port_b, val.port_a)
+    annotation (Line(points={{-47.6,60},{-38,60}}, color={0,127,255}));
+  connect(pipe1.port_a, VFSen_out.port_b)
+    annotation (Line(points={{-68.4,60},{-76,60}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(initialScale=0.1),          graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},
@@ -296,34 +305,48 @@ equation
         Line(points={{-70,66},{-70,60}},
                                        color={0,0,0}),
         Text(
-          extent={{-10,60},{6,42}},
+          extent={{-78,60},{-62,42}},
           lineColor={135,135,135},
           textString="1"),
         Text(
-          extent={{48,60},{64,42}},
+          extent={{-6,60},{10,42}},
           lineColor={135,135,135},
           textString="2"),
         Text(
-          extent={{-8,-42},{8,-60}},
+          extent={{52,60},{68,42}},
           lineColor={135,135,135},
-          textString="3")}),Diagram(coordinateSystem(extent={{-120,-120},{120,120}},
+          textString="3"),
+        Text(
+          extent={{-22,-40},{-6,-58}},
+          lineColor={135,135,135},
+          textString="4")}),Diagram(coordinateSystem(extent={{-120,-120},{120,120}},
           initialScale=0.1), graphics={
         Text(
           extent={{-10,70},{10,66}},
           lineColor={28,108,200},
-          textString="Pipe 1"),
+          textString="Pipe 2"),
         Text(
           extent={{50,70},{70,66}},
           lineColor={28,108,200},
-          textString="Pipe 2"),
+          textString="Pipe 3"),
         Text(
           extent={{-10,-66},{10,-70}},
           lineColor={28,108,200},
-          textString="Pipe 3")}),
+          textString="Pipe 4"),
+        Text(
+          extent={{-68,70},{-48,66}},
+          lineColor={28,108,200},
+          textString="Pipe 1")}),
     Documentation(revisions="<html>
 <ul>
+<li>Mai 30, 2018, by Alexander K&uuml;mpel:<br>Transfer from ZUGABE to AixLib</li>
 <li>2017-07-25 by Peter Matthes:<br>Renames sensors and introduces PT1 behavior for temperature sensors. Adds sensors to icon.</li>
-<li>2017-06 by ???:<br>Implemented</li>
+<li>2017-06 by Alexander K&uuml;mpel:<br>Implemented</li>
 </ul>
+</html>", info="<html>
+<p>Throttle circuit with a replaceable pump model and a valve for the distribution of hot or cold water. All sensor and actor values are connected to the hydraulic bus (not all connections are visible).</p>
+<h4><span style=\"color: #008c48\">Characteristics</span></h4>
+<p>The volume flow depends on the valve opening and the pump speed. If the pump is switched of or the valve is completly closed, there is no volume flow (except leackage).</p>
+<p>This model uses a pipe model to include the heat loss and insulation effects.</p>
 </html>"));
 end ThrottlePump;

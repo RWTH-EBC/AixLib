@@ -279,8 +279,14 @@ equation
           textString="Pipe 3")}),
     Documentation(revisions="<html>
 <ul>
+<li>Mai 30, 2018, by Alexander K&uuml;mpel:<br>Transfer from ZUGABE to AixLib</li>
 <li>2017-07-25 by Peter Matthes:<br>Renames sensors and introduces PT1 behavior for temperature sensors. Adds sensors to icon.</li>
-<li>2017-06 by ???:<br>Implemented</li>
+<li>2017-06 byPeter Matthes:<br>Implemented</li>
 </ul>
+</html>", info="<html>
+<p>Simple circuit with a pump for the distribution of hot or cold water. All sensor and actor values are connected to the hydraulic bus (not all connections are visible).</p>
+<h4><span style=\"color: #008c48\">Characteristics</span></h4>
+<p>The volume flow or pressure difference depends on the pump speed. </p>
+<p>This model uses a pipe model to include the heat loss and insulation effects.</p>
 </html>"));
 end Unmixed;

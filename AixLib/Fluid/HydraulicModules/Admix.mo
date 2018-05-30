@@ -281,9 +281,9 @@ equation
 <p>The scondary circuits do not affect each other when switching operational modes.</p>
 </html>", revisions="<html>
 <ul>
-<li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Transfered to AixLib from ZUGABE.</li>
-<li>July 25, 2017 by Peter Matthes:<br/>Renames sensors and introduces PT1 behavior for temperature sensors. Adds sensors to icon.</li>
-<li>February 6, 2016, by Peter Matthes:<br/>implemented bus-connector-C_H_HRMI_01 model for testing (extends from model with standard data ports)</li>
+<li>October 25, 2017, by Alexander K&uuml;mpel:<br>Transfer from ZUGABE to AixLib</li>
+<li>July 25, 2017 by Peter Matthes:<br>Renames sensors and introduces PT1 behavior for temperature sensors. Adds sensors to icon.</li>
+<li>February 6, 2016, by Peter Matthes:<br>implemented bus-connector-C_H_HRMI_01 model for testing (extends from model with standard data ports)</li>
 </ul>
 </html>"),
     __Dymola_Commands,
