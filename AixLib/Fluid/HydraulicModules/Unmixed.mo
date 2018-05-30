@@ -153,13 +153,13 @@ equation
     annotation (Line(points={{12,60},{39.6,60}}, color={0,127,255}));
   connect(pipe1.port_b, basicPumpInterface.port_a)
     annotation (Line(points={{-29.6,60},{-12,60}}, color={0,127,255}));
-  connect(hydraulicBus, basicPumpInterface.pumpBus) annotation (Line(
-      points={{0,100},{0,72}},
+  connect(basicPumpInterface.pumpBus, hydraulicBus.pumpBus) annotation (Line(
+      points={{0,72},{0,86},{0,100.1},{0.1,100.1}},
       color={255,204,51},
       thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-2,6},{-2,6}}));
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
   annotation (Icon(coordinateSystem(initialScale=0.1),          graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},
@@ -169,7 +169,7 @@ equation
           fillPattern=FillPattern.Solid,
           pattern=LinePattern.Dash),
         Text(
-          extent={{-60,-64},{60,-104}},
+          extent={{-60,-64},{52,-90}},
           lineColor={95,95,95},
           lineThickness=0.5,
           fillColor={255,255,255},
@@ -279,9 +279,9 @@ equation
           textString="Pipe 3")}),
     Documentation(revisions="<html>
 <ul>
-<li>Mai 30, 2018, by Alexander K&uuml;mpel:<br>Transfer from ZUGABE to AixLib</li>
-<li>2017-07-25 by Peter Matthes:<br>Renames sensors and introduces PT1 behavior for temperature sensors. Adds sensors to icon.</li>
-<li>2017-06 byPeter Matthes:<br>Implemented</li>
+<li>Mai 30, 2018, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib</li>
+<li>2017-07-25 by Peter Matthes:<br/>Renames sensors and introduces PT1 behavior for temperature sensors. Adds sensors to icon.</li>
+<li>2017-06 byPeter Matthes:<br/>Implemented</li>
 </ul>
 </html>", info="<html>
 <p>Simple circuit with a pump for the distribution of hot or cold water. All sensor and actor values are connected to the hydraulic bus (not all connections are visible).</p>

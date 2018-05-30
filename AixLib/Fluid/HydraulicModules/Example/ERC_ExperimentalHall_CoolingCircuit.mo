@@ -31,8 +31,11 @@ model ERC_ExperimentalHall_CoolingCircuit
     pipe4(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
     pipe5(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
     pipe6(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
-    pump(redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per),
-    Tinit=293.15) annotation (Placement(transformation(
+    val(Kv=6.3, m_flow_nominal=1),
+    T_start=293.15,
+    redeclare BaseClasses.PumpInterface_SpeedControlledNrpm basicPumpInterface(
+        pump(redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos40slash1to12
+          per)))  annotation (Placement(transformation(
         extent={{-25,-25},{25,25}},
         rotation=90,
         origin={-67,11})));
@@ -41,8 +44,10 @@ model ERC_ExperimentalHall_CoolingCircuit
     pipe1(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
     pipe2(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
     pipe3(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
-    pump(redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per),
-    Tinit=293.15) annotation (Placement(transformation(
+    T_start=293.15,
+    redeclare BaseClasses.PumpInterface_SpeedControlledNrpm basicPumpInterface(
+        pump(redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos30slash1to8
+          per)))  annotation (Placement(transformation(
         extent={{-25,-25},{25,25}},
         rotation=90,
         origin={3,11})));
@@ -51,8 +56,10 @@ model ERC_ExperimentalHall_CoolingCircuit
     pipe1(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
     pipe2(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
     pipe3(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
-    pump(redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per),
-    Tinit=293.15) annotation (Placement(transformation(
+    T_start=293.15,
+    redeclare BaseClasses.PumpInterface_SpeedControlledNrpm basicPumpInterface(
+        pump(redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos30slash1to4
+          per)))  annotation (Placement(transformation(
         extent={{-25,-25},{25,25}},
         rotation=90,
         origin={75,11})));
@@ -61,21 +68,21 @@ model ERC_ExperimentalHall_CoolingCircuit
     kA=2000,
     pipe1(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
     pipe2(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
-    Tinit=293.15,
-    Tambient=293.15)
-    annotation (Placement(transformation(extent={{-82,34},{-52,64}})));
+    T_start=293.15,
+    Tamb=293.15)
+    annotation (Placement(transformation(extent={{-78,34},{-48,64}})));
   SimpleConsumer simpleConsumer1(
     kA=20000,
     pipe1(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
     pipe2(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
-    Tinit=293.15,
-    Tambient=293.15)
+    T_start=293.15,
+    Tamb=293.15)
     annotation (Placement(transformation(extent={{-12,34},{18,64}})));
   SimpleConsumer simpleConsumer2(
     kA=10000,
     pipe1(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
     pipe2(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
-    Tinit=293.15)
+    T_start=293.15)
     annotation (Placement(transformation(extent={{60,34},{90,64}})));
   Controls.HydraulicModules.Ctr_admix ctr_admix(
     Td=0,
@@ -97,46 +104,53 @@ equation
           -68}},                         color={0,127,255}));
   connect(boundary.ports[1],hex. port_b1) annotation (Line(points={{-162,-28},{
           -136,-28}},                      color={0,127,255}));
-  connect(simpleConsumer.port_a, admix.port_fwrdOut)
-    annotation (Line(points={{-82,49},{-82,36}}, color={0,127,255}));
-  connect(simpleConsumer.port_b, admix.port_rtrnIn)
-    annotation (Line(points={{-52,49},{-52,36}}, color={0,127,255}));
-  connect(simpleConsumer1.port_a, unmixed.port_fwrdOut)
-    annotation (Line(points={{-12,49},{-12,36}}, color={0,127,255}));
-  connect(simpleConsumer1.port_b, unmixed.port_rtrnIn)
-    annotation (Line(points={{18,49},{18,36}}, color={0,127,255}));
-  connect(simpleConsumer2.port_a, unmixed1.port_fwrdOut)
-    annotation (Line(points={{60,49},{60,36}}, color={0,127,255}));
-  connect(simpleConsumer2.port_b, unmixed1.port_rtrnIn)
-    annotation (Line(points={{90,49},{90,36}}, color={0,127,255}));
-  connect(hex.port_a2, unmixed1.port_fwrdIn) annotation (Line(points={{-106,-28},
-          {60,-28},{60,-14}}, color={0,127,255}));
-  connect(hex.port_b2, unmixed1.port_rtrnOut) annotation (Line(points={{-106,
-          -68},{90,-68},{90,-14}}, color={0,127,255}));
-  connect(admix.port_fwrdIn, unmixed1.port_fwrdIn) annotation (Line(points={{
-          -82,-14},{-82,-28},{60,-28},{60,-14}}, color={0,127,255}));
-  connect(unmixed.port_fwrdIn, unmixed1.port_fwrdIn) annotation (Line(points={{
-          -12,-14},{-12,-28},{60,-28},{60,-14}}, color={0,127,255}));
-  connect(admix.port_rtrnOut, unmixed1.port_rtrnOut) annotation (Line(points={{
-          -52,-14},{-52,-68},{90,-68},{90,-14}}, color={0,127,255}));
-  connect(unmixed.port_rtrnOut, unmixed1.port_rtrnOut) annotation (Line(points=
-          {{18,-14},{18,-68},{90,-68},{90,-14}}, color={0,127,255}));
   connect(admix.hydraulicBus, ctr_admix.hydraulicBus) annotation (Line(
       points={{-92,11},{-104,11},{-104,20.46},{-106.98,20.46}},
       color={255,204,51},
       thickness=0.5));
   connect(ctr_unmixed_simple.hydraulicBus, unmixed1.hydraulicBus) annotation (
       Line(
-      points={{-107.87,91},{50,91},{50,1}},
+      points={{-107.87,91},{50,91},{50,11}},
       color={255,204,51},
       thickness=0.5));
   connect(ctr_unmixed_simple1.hydraulicBus, unmixed.hydraulicBus) annotation (
       Line(
-      points={{-107.87,65},{-22,65},{-22,1}},
+      points={{-107.87,65},{-22,65},{-22,11}},
       color={255,204,51},
       thickness=0.5));
   connect(bou1.ports[1], hex.port_b2)
     annotation (Line(points={{-106,-76},{-106,-68}}, color={0,127,255}));
+  connect(hex.port_a2, admix.port_a1) annotation (Line(points={{-106,-28},{
+          -80.8889,-28},{-80.8889,-14}}, color={0,127,255}));
+  connect(hex.port_a2, unmixed.port_a1) annotation (Line(points={{-106,-28},{
+          -12,-28},{-12,-14}}, color={0,127,255}));
+  connect(hex.port_a2, unmixed1.port_a1) annotation (Line(points={{-106,-28},{
+          60,-28},{60,-14}}, color={0,127,255}));
+  connect(hex.port_b2, unmixed1.port_b2) annotation (Line(points={{-106,-68},{
+          90,-68},{90,-14}}, color={0,127,255}));
+  connect(hex.port_b2, unmixed.port_b2) annotation (Line(points={{-106,-68},{18,
+          -68},{18,-14}}, color={0,127,255}));
+  connect(hex.port_b2, admix.port_b2) annotation (Line(points={{-106,-68},{
+          -47.5556,-68},{-47.5556,-14}}, color={0,127,255}));
+  connect(admix.port_b1, simpleConsumer.port_a) annotation (Line(points={{
+          -80.8889,36},{-80.8889,43},{-78,43},{-78,49}}, color={0,127,255}));
+  connect(admix.port_a2, simpleConsumer.port_b) annotation (Line(points={{
+          -47.5556,36},{-47.5556,42},{-48,42},{-48,49}}, color={0,127,255}));
+  connect(unmixed.port_b1, simpleConsumer1.port_a)
+    annotation (Line(points={{-12,36},{-12,49}}, color={0,127,255}));
+  connect(unmixed.port_a2, simpleConsumer1.port_b)
+    annotation (Line(points={{18,36},{18,49}}, color={0,127,255}));
+  connect(unmixed1.port_b1, simpleConsumer2.port_a)
+    annotation (Line(points={{60,36},{60,49}}, color={0,127,255}));
+  connect(unmixed1.port_a2, simpleConsumer2.port_b)
+    annotation (Line(points={{90,36},{90,49}}, color={0,127,255}));
   annotation (Diagram(coordinateSystem(extent={{-180,-100},{100,100}})), Icon(
-        coordinateSystem(extent={{-180,-100},{100,100}})));
+        coordinateSystem(extent={{-180,-100},{100,100}})),
+    Documentation(revisions="<html>
+<ul>
+<li>October 25, 2017, by Alexander K&uuml;mpel:<br/>First implementation.</li>
+</ul>
+</html>", info="<html>
+<p>This example demonstrates the use of the hydraulic modules. </p>
+</html>"));
 end ERC_ExperimentalHall_CoolingCircuit;

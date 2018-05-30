@@ -59,11 +59,6 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(RPM.y, hydraulicBus.rpm_Input) annotation (Line(points={{-79,50},{
-          -39.95,50},{-39.95,20.05}},  color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
   connect(Admix.port_b1, hydRes.port_a)
     annotation (Line(points={{3.11111,48},{4,48},{4,60},{10,60}},
                                                           color={0,127,255}));
@@ -82,6 +77,11 @@ equation
       string="%second",
       index=1,
       extent={{-25,3},{-25,3}}));
+  connect(RPM.y, hydraulicBus.pumpBus.rpm_Input) annotation (Line(points={{-79,
+          50},{-39.95,50},{-39.95,20.05}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
   annotation (
     Icon(graphics,
          coordinateSystem(preserveAspectRatio=false)),
@@ -90,10 +90,7 @@ equation
     __Dymola_Commands,
     Documentation(revisions="<html>
 <ul>
-<li><i>2017-03-08 &nbsp;</i> by Peter Matthes:<br>Renamed and updated plot script 'pump test'. Solves Issue #28</li>
-<li><i>2017-03-07 &nbsp;</i> by Peter Matthes:<br>Renamed and updated plot script.</li>
-<li><i>2017-03-07 &nbsp;</i> by Peter Matthes:<br>Renamed model instances after renaming of modules.</li>
-<li><i>2017-02-09 &nbsp;</i> by Peter Matthes:<br>implemented</li>
+<li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib.</li>
 </ul>
 </html>"));
 end Admix;

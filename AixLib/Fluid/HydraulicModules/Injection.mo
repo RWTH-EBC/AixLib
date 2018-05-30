@@ -268,13 +268,6 @@ equation
     annotation (Line(points={{46,60},{53.76,60}}, color={0,127,255}));
   connect(juncjp6.ports[3], basicPumpInterface.port_a)
     annotation (Line(points={{14.1333,60},{30,60}}, color={0,127,255}));
-  connect(hydraulicBus, basicPumpInterface.pumpBus) annotation (Line(
-      points={{0,100},{38,100},{38,68}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}}));
   connect(VFSen_injection.V_flow, hydraulicBus.VF_injection) annotation (Line(
         points={{-8,68.8},{-8,100},{0,100}},   color={0,0,127}), Text(
       string="%second",
@@ -305,6 +298,13 @@ equation
     annotation (Line(points={{-34.24,60},{-41.8667,60}}, color={0,127,255}));
   connect(pipe2.port_b, VFSen_injection.port_a)
     annotation (Line(points={{-21.76,60},{-16,60}}, color={0,127,255}));
+  connect(basicPumpInterface.pumpBus, hydraulicBus.pumpBus) annotation (Line(
+      points={{38,68},{38,100.1},{0.1,100.1}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
   annotation (Icon(coordinateSystem(initialScale=0.1),          graphics={
                           Rectangle(
           extent={{-100,100},{100,-100}},
@@ -473,7 +473,7 @@ equation
           fillPattern=FillPattern.Solid,
           textString="Q"),
         Text(
-          extent={{-22,-64},{100,-100}},
+          extent={{-16,-68},{82,-92}},
           lineColor={95,95,95},
           lineThickness=0.5,
           fillColor={255,255,255},
@@ -561,9 +561,9 @@ equation
 <p>This model uses a pipe model to include the heat loss and insulation effects</p>
 </html>", revisions="<html>
 <ul>
-<li>Mai 30, 2018, by Alexander K&uuml;mpel:<br>Transfer from ZUGABE to AixLib</li>
-<li>2017-07-25 by Peter Matthes:<br>Renames sensors and introduces PT1 behavior for temperature sensors. Adds sensors to icon.</li>
-<li><i>March,2016&nbsp;</i> by Rohit Lad:<br>Implemented</li>
+<li>Mai 30, 2018, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib</li>
+<li>2017-07-25 by Peter Matthes:<br/>Renames sensors and introduces PT1 behavior for temperature sensors. Adds sensors to icon.</li>
+<li><i>March,2016&nbsp;</i> by Rohit Lad:<br/>Implemented</li>
 </ul>
 </html>"));
 end Injection;

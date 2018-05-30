@@ -6,23 +6,23 @@ package HydraulicModules "Controller for hydraulic circuits"
     //Boolean choice;
 
     parameter Real rpm_pump(min=0, unit="1") = 2000 "Rpm of the Pump";
-    parameter Modelica.SIunits.Temperature Tambient = 293.15 "ambient temperature";
+    parameter Modelica.SIunits.Temperature Tamb = 293.15 "ambient temperature";
 
     Modelica.Blocks.Sources.RealExpression realExpression(y=rpm_pump)
       annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-    Fluid.HydraulicModules.HydraulicBus hydraulicBus annotation (Placement(
+    Fluid.HydraulicModules.BaseClasses.HydraulicBus hydraulicBus annotation (Placement(
           transformation(extent={{78,-24},{124,24}}), iconTransformation(extent={{
               78,-24},{124,24}})));
-    Modelica.Blocks.Sources.Constant const(k=Tambient)
+    Modelica.Blocks.Sources.Constant const(k=Tamb)
       annotation (Placement(transformation(extent={{22,44},{42,64}})));
   equation
-    connect(realExpression.y, hydraulicBus.rpm_Input) annotation (Line(points={{11,0},{
-            101.115,0},{101.115,0.12}},       color={0,0,127}), Text(
+    connect(realExpression.y, hydraulicBus.pumpBus.rpm_Input) annotation (Line(
+          points={{11,0},{101.115,0},{101.115,0.12}}, color={0,0,127}), Text(
         string="%second",
         index=1,
         extent={{6,3},{6,3}}));
-    connect(const.y, hydraulicBus.Tambient) annotation (Line(points={{43,54},{68,54},
-            {68,50},{101.115,50},{101.115,0.12}}, color={0,0,127}), Text(
+    connect(const.y, hydraulicBus.T_amb) annotation (Line(points={{43,54},{
+            101.115,54},{101.115,0.12}}, color={0,0,127}), Text(
         string="%second",
         index=1,
         extent={{6,3},{6,3}}));
@@ -53,16 +53,15 @@ package HydraulicModules "Controller for hydraulic circuits"
                                   Diagram(coordinateSystem(preserveAspectRatio=
               false)),
       Documentation(revisions="<html>
-<li>
-2012-02-06, by Peter Matthes:<br/>
-First implementation with data busses. Derived from <a href=\"Zugabe.Controls.Modules.Consumer.C_H_HRMI_01\">Modules.Consumer.C_H_HRMI_01</a>
-</li>
+<ul>
+<li>October 25, by Alexander K&uuml;mpel:<br/>First implementation.</li>
 </ul>
+</html>",   info="<html>
+<p>Simple controller for unmixed circuit.</p>
 </html>"));
   end Ctr_unmixed_simple;
 
   block Ctr_admix "controller for mixed cooling circuit "
-    import Zugabe;
     //Boolean choice;
 
     parameter Modelica.SIunits.Temperature TflowSet = 289.15 "Flow temperature set point of consumer";
@@ -70,7 +69,7 @@ First implementation with data busses. Derived from <a href=\"Zugabe.Controls.Mo
     parameter Modelica.SIunits.Time Ti(min=Modelica.Constants.small)=130
       "Time constant of Integrator block";
     parameter Modelica.SIunits.Time Td(min=0)= 4 "Time constant of Derivative block";
-    parameter Modelica.SIunits.Temperature Tambient = 293.15 "ambient temperature";
+    parameter Modelica.SIunits.Temperature Tamb = 293.15 "ambient temperature";
     parameter Real rpm_pump(min=0, unit="1") = 2000 "Rpm of the Pump";
 
     Modelica.Blocks.Continuous.LimPID PID(
@@ -81,7 +80,7 @@ First implementation with data busses. Derived from <a href=\"Zugabe.Controls.Mo
       k=k,
       Ti=Ti,
       Td=Td)  annotation (Placement(transformation(extent={{-16,-60},{4,-40}})));
-    Fluid.HydraulicModules.HydraulicBus  hydraulicBus
+    Fluid.HydraulicModules.BaseClasses.HydraulicBus  hydraulicBus
       annotation (Placement(transformation(extent={{66,-38},{120,16}})));
     Modelica.Blocks.Sources.RealExpression realExpression(y=TflowSet)
       annotation (Placement(transformation(extent={{-84,-60},{-64,-40}})));
@@ -94,7 +93,7 @@ First implementation with data busses. Derived from <a href=\"Zugabe.Controls.Mo
     Modelica.Blocks.Sources.RealExpression realExpression1(
                                                           y=rpm_pump)
       annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-    Modelica.Blocks.Sources.Constant const(k=Tambient)
+    Modelica.Blocks.Sources.Constant const(k=Tamb)
       annotation (Placement(transformation(extent={{22,44},{42,64}})));
   equation
     connect(PID.y, hydraulicBus.valveSet) annotation (Line(points={{5,-50},{48,
@@ -105,23 +104,23 @@ First implementation with data busses. Derived from <a href=\"Zugabe.Controls.Mo
         extent={{6,3},{6,3}}));
     connect(gain1.y, PID.u_m) annotation (Line(points={{-5,-71.5},{-5,-66.75},{-6,
             -66.75},{-6,-62}}, color={0,0,127}));
-    connect(gain1.u, hydraulicBus.TfwrdOut) annotation (Line(points={{-5,-83},{
-            93.135,-83},{93.135,-10.865}},
-                                    color={0,0,127}), Text(
-        string="%second",
-        index=1,
-        extent={{6,3},{6,3}}));
     connect(realExpression.y, gain.u)
       annotation (Line(points={{-63,-50},{-47.2,-50}}, color={0,0,127}));
     connect(gain.y, PID.u_s)
       annotation (Line(points={{-33.4,-50},{-18,-50}}, color={0,0,127}));
-    connect(realExpression1.y, hydraulicBus.rpm_Input) annotation (Line(points={{11,
-            0},{93.135,0},{93.135,-10.865}}, color={0,0,127}), Text(
+    connect(realExpression1.y, hydraulicBus.pumpBus.rpm_Input) annotation (Line(
+          points={{11,0},{52,0},{52,-10.865},{93.135,-10.865}}, color={0,0,127}),
+        Text(
         string="%second",
         index=1,
         extent={{6,3},{6,3}}));
-    connect(const.y, hydraulicBus.Tambient) annotation (Line(points={{43,54},{68,54},
-            {68,50},{93.135,50},{93.135,-10.865}}, color={0,0,127}), Text(
+    connect(const.y, hydraulicBus.T_amb) annotation (Line(points={{43,54},{
+            93.135,54},{93.135,-10.865}}, color={0,0,127}), Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}}));
+    connect(gain1.u, hydraulicBus.TFwrd_out) annotation (Line(points={{-5,-83},
+            {93.135,-83},{93.135,-10.865}}, color={0,0,127}), Text(
         string="%second",
         index=1,
         extent={{6,3},{6,3}}));
@@ -151,11 +150,14 @@ First implementation with data busses. Derived from <a href=\"Zugabe.Controls.Mo
             textString="Admix")}),Diagram(coordinateSystem(preserveAspectRatio=
               false)),
       Documentation(revisions="<html>
-<li>
-2012-02-06, by Peter Matthes:<br/>
-First implementation with data busses. Derived from <a href=\"Zugabe.Controls.Modules.Consumer.C_H_HRMI_01\">Modules.Consumer.C_H_HRMI_01</a>
-</li>
+<ul>
+<li>October 25, by Alexander K&uuml;mpel:<br/>First implementation.</li>
 </ul>
+</html>",   info="<html>
+<p>Simple controller for admix circuit.</p>
 </html>"));
   end Ctr_admix;
+  annotation (Documentation(info="<html>
+</html>", revisions="<html>
+</html>"));
 end HydraulicModules;

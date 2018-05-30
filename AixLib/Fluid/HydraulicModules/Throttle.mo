@@ -170,7 +170,7 @@ equation
           fillPattern=FillPattern.Solid,
           pattern=LinePattern.Dash),
         Text(
-          extent={{-60,-64},{60,-104}},
+          extent={{-60,-64},{48,-92}},
           lineColor={95,95,95},
           lineThickness=0.5,
           fillColor={255,255,255},
@@ -298,9 +298,9 @@ equation
           textString="Pipe 3")}),
     Documentation(revisions="<html>
 <ul>
-<li>Mai 30, 2018, by Alexander K&uuml;mpel:<br>Transfer from ZUGABE to AixLib</li>
-<li>2017-07-25 by Peter Matthes:<br>Renames sensors and introduces PT1 behavior for temperature sensors. Adds sensors to icon.</li>
-<li>2017-06 by Peter Matthes:<br>Implemented</li>
+<li>Mai 30, 2018, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib</li>
+<li>2017-07-25 by Peter Matthes:<br/>Renames sensors and introduces PT1 behavior for temperature sensors. Adds sensors to icon.</li>
+<li>2017-06 by Peter Matthes:<br/>Implemented</li>
 </ul>
 </html>", info="<html>
 <p>Throttle circuit with a valve for the distribution of hot or cold water. All sensor and actor values are connected to the hydraulic bus (not all connections are visible).</p>

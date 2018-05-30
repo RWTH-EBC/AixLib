@@ -60,11 +60,6 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(RPM.y, hydraulicBus.rpm_Input) annotation (Line(points={{-79,50},{-39.95,
-          50},{-39.95,20.05}},         color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
   connect(hydraulicBus,Injection. hydraulicBus) annotation (Line(
       points={{-40,20},{-5.74,20}},
       color={255,204,51},
@@ -80,6 +75,12 @@ equation
     annotation (Line(points={{30,60},{35.6,60},{35.6,46}}, color={0,127,255}));
   connect(hydRes.port_a, Injection.port_b1)
     annotation (Line(points={{10,60},{4.4,60},{4.4,46}}, color={0,127,255}));
+  connect(RPM.y, hydraulicBus.pumpBus.rpm_Input) annotation (Line(points={{-79,
+          50},{-56,50},{-56,46},{-39.95,46},{-39.95,20.05}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
                            annotation (Placement(transformation(
         extent={{-24,-24},{24,24}},
         rotation=90,
@@ -91,10 +92,7 @@ equation
     __Dymola_Commands,
     Documentation(revisions="<html>
 <ul>
-<li><i>2017-03-08 &nbsp;</i> by Peter Matthes:<br>Renamed and updated plot script 'pump test'. Solves Issue #28</li>
-<li><i>2017-03-07 &nbsp;</i> by Peter Matthes:<br>Renamed and updated plot script.</li>
-<li><i>2017-03-07 &nbsp;</i> by Peter Matthes:<br>Renamed model instances after renaming of modules.</li>
-<li><i>2017-02-09 &nbsp;</i> by Peter Matthes:<br>implemented</li>
+<li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib.</li>
 </ul>
 </html>"));
 end Injection;

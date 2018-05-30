@@ -2,9 +2,7 @@ within AixLib.Fluid.HydraulicModules.BaseClasses;
 expandable connector HydraulicBus "Data bus for hydraulic circuits"
   extends Modelica.Icons.SignalBus;
   import SI = Modelica.SIunits;
-  Modelica.SIunits.Conversions.NonSIunits.AngularVelocity_rpm rpm_Input "Pump speed in RPM"
-    annotation (HideResult=false);
-  SI.Power P "Electrical pump power" annotation (HideResult=false);
+  PumpBus pumpBus;
   Real valveSet(min=0, max=1) "Valve opening 0..1";
   Real valveSetAct(min=0, max=1) "Actual valve opening 0..1";
   SI.Temperature T_amb "Ambient temperature";

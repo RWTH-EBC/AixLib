@@ -19,8 +19,8 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(pump.y_actual, pumpBus.rpm_Act) annotation (Line(points={{11,7},{22,7},
-          {22,100.1},{0.1,100.1}}, color={0,0,127}), Text(
+  connect(pump.y_actual, pumpBus.rpm_Act) annotation (Line(points={{11,7},{26,7},
+          {26,100.1},{0.1,100.1}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));

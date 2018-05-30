@@ -9,7 +9,6 @@ expandable connector PumpBus "Standard data bus with pump information"
   SI.Power power "electrical pump power" annotation (HideResult=false);
   SI.Height head "static pump head" annotation (HideResult=false);
   SI.Efficiency efficiency "pump efficiency" annotation (HideResult=false);
-  Boolean NightMode(start=false) "in night mode when true";
   SI.Height dp_Input "pump head in meter water column";
   SI.MassFlowRate MFI_Input "Massflow rate of pump, if MFI_set active [kg/s]";
   Boolean onOff_Input(start=true) "pump on or off";

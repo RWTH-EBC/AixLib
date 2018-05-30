@@ -76,5 +76,10 @@ equation
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),
     experiment(StopTime=600),
-    __Dymola_Commands);
+    __Dymola_Commands,
+    Documentation(revisions="<html>
+<ul>
+<li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib.</li>
+</ul>
+</html>"));
 end Throttle;

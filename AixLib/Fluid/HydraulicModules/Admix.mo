@@ -263,15 +263,15 @@ equation
     annotation (Line(points={{52,20},{63.76,20}}, color={0,127,255}));
   connect(basicPumpInterface.port_a, pipe2.port_b)
     annotation (Line(points={{28,20},{6.24,20}}, color={0,127,255}));
-  connect(basicPumpInterface.pumpBus, hydraulicBus) annotation (Line(
-      points={{40,32},{40,100},{20,100},{20,100},{0,100}},
+  connect(pipe6.port_a, junc456.ports[3]) annotation (Line(points={{-30,-26.24},
+          {-30,-60},{-27.8667,-60}}, color={0,127,255}));
+  connect(basicPumpInterface.pumpBus, hydraulicBus.pumpBus) annotation (Line(
+      points={{40,32},{40,100.1},{0.1,100.1}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(pipe6.port_a, junc456.ports[3]) annotation (Line(points={{-30,-26.24},
-          {-30,-60},{-27.8667,-60}}, color={0,127,255}));
   annotation (
     Documentation(info="<html>
 <p>Admix circuit with a replaceable pump model for the distribution of hot or cold water. All sensor and actor values are connected to the hydraulic bus (not all connections are visible).</p>
@@ -281,9 +281,9 @@ equation
 <p>The scondary circuits do not affect each other when switching operational modes.</p>
 </html>", revisions="<html>
 <ul>
-<li>October 25, 2017, by Alexander K&uuml;mpel:<br>Transfer from ZUGABE to AixLib</li>
-<li>July 25, 2017 by Peter Matthes:<br>Renames sensors and introduces PT1 behavior for temperature sensors. Adds sensors to icon.</li>
-<li>February 6, 2016, by Peter Matthes:<br>implemented bus-connector-C_H_HRMI_01 model for testing (extends from model with standard data ports)</li>
+<li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib</li>
+<li>July 25, 2017 by Peter Matthes:<br/>Renames sensors and introduces PT1 behavior for temperature sensors. Adds sensors to icon.</li>
+<li>February 6, 2016, by Peter Matthes:<br/>implemented bus-connector-C_H_HRMI_01 model for testing (extends from model with standard data ports)</li>
 </ul>
 </html>"),
     __Dymola_Commands,

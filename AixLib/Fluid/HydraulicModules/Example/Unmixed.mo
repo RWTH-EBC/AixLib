@@ -58,11 +58,6 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(RPM_ramp.y, hydraulicBus.rpm_Input) annotation (Line(points={{-59,0},{
-          -64,0},{-64,0.05},{-29.95,0.05}},       color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
   connect(boundary.ports[1], Unmixed.port_a1)
     annotation (Line(points={{0,-40},{0,-26},{4.4,-26}}, color={0,127,255}));
   connect(boundary1.ports[1], Unmixed.port_b2) annotation (Line(points={{40,-40},
@@ -71,6 +66,11 @@ equation
     annotation (Line(points={{30,50},{35.6,50},{35.6,26}}, color={0,127,255}));
   connect(hydRes.port_a, Unmixed.port_b1)
     annotation (Line(points={{10,50},{4.4,50},{4.4,26}}, color={0,127,255}));
+  connect(RPM_ramp.y, hydraulicBus.pumpBus.rpm_Input) annotation (Line(points={
+          {-59,0},{-44,0},{-44,0.05},{-29.95,0.05}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
     annotation (Placement(transformation(extent={{80,80},{100,100}})),
               Icon(graphics,
                    coordinateSystem(preserveAspectRatio=false, extent={{-100,
@@ -78,5 +78,10 @@ equation
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),
     experiment(StopTime=600),
-    __Dymola_Commands);
+    __Dymola_Commands,
+    Documentation(revisions="<html>
+<ul>
+<li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib.</li>
+</ul>
+</html>"));
 end Unmixed;

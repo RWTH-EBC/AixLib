@@ -165,13 +165,6 @@ equation
     annotation (Line(points={{42,60},{49.6,60}}, color={0,127,255}));
   connect(pipe2.port_b, basicPumpInterface.port_a)
     annotation (Line(points={{10.4,60},{18,60}}, color={0,127,255}));
-  connect(hydraulicBus, basicPumpInterface.pumpBus) annotation (Line(
-      points={{0,100},{30,100},{30,72}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-2,6},{-2,6}}));
   connect(val.y_actual, hydraulicBus.valveSetAct) annotation (Line(points={{-23,67},
           {-23,100.1},{0.1,100.1}},     color={0,0,127}), Text(
       string="%second",
@@ -184,6 +177,13 @@ equation
     annotation (Line(points={{-47.6,60},{-38,60}}, color={0,127,255}));
   connect(pipe1.port_a, VFSen_out.port_b)
     annotation (Line(points={{-68.4,60},{-76,60}}, color={0,127,255}));
+  connect(basicPumpInterface.pumpBus, hydraulicBus.pumpBus) annotation (Line(
+      points={{30,72},{30,100.1},{0.1,100.1}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
   annotation (Icon(coordinateSystem(initialScale=0.1),          graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},
@@ -193,7 +193,7 @@ equation
           fillPattern=FillPattern.Solid,
           pattern=LinePattern.Dash),
         Text(
-          extent={{-100,-64},{100,-104}},
+          extent={{-86,-68},{86,-94}},
           lineColor={95,95,95},
           lineThickness=0.5,
           fillColor={255,255,255},
@@ -339,9 +339,9 @@ equation
           textString="Pipe 1")}),
     Documentation(revisions="<html>
 <ul>
-<li>Mai 30, 2018, by Alexander K&uuml;mpel:<br>Transfer from ZUGABE to AixLib</li>
-<li>2017-07-25 by Peter Matthes:<br>Renames sensors and introduces PT1 behavior for temperature sensors. Adds sensors to icon.</li>
-<li>2017-06 by Alexander K&uuml;mpel:<br>Implemented</li>
+<li>Mai 30, 2018, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib</li>
+<li>2017-07-25 by Peter Matthes:<br/>Renames sensors and introduces PT1 behavior for temperature sensors. Adds sensors to icon.</li>
+<li>2017-06 by Alexander K&uuml;mpel:<br/>Implemented</li>
 </ul>
 </html>", info="<html>
 <p>Throttle circuit with a replaceable pump model and a valve for the distribution of hot or cold water. All sensor and actor values are connected to the hydraulic bus (not all connections are visible).</p>

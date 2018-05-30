@@ -6,8 +6,8 @@ model SimpleConsumer "Simple Consumer"
   parameter Real kA(unit="W/K")=1 "Heat transfer coefficient times area [W/K]";
   parameter Modelica.SIunits.Length Pipe_diam=0.0125 "Pipe Diameter";
   parameter Modelica.SIunits.Length len = 1.0 "Average total pipe length";
-  parameter Modelica.SIunits.Temperature Tinit = 303.15 "Initialization temperature";
-  parameter Modelica.SIunits.Temperature Tambient = 303.15 "Ambient temperature for convection";
+  parameter Modelica.SIunits.Temperature T_start = 303.15 "Initialization temperature";
+  parameter Modelica.SIunits.Temperature Tamb = 303.15 "Ambient temperature for convection";
   parameter Modelica.SIunits.HeatCapacity capacity=1 "Capacity of the material";
   parameter Modelica.SIunits.Volume V=0.001 "Volume of water";
   Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
@@ -25,13 +25,13 @@ model SimpleConsumer "Simple Consumer"
     portsData={Modelica.Fluid.Vessels.BaseClasses.VesselPortsData(diameter=0.04)},
     use_portsData=false,
     V=V,
-    T_start=Tinit,
+    T_start=T_start,
     nPorts=2)            annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
         origin={-20,16})));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor(
-                          T(start=Tinit, fixed=true), C=capacity)
+                          T(start=T_start, fixed=true), C=capacity)
     annotation (Placement(transformation(
         origin={8,22},
         extent={{-10,10},{10,-10}},
@@ -51,11 +51,11 @@ model SimpleConsumer "Simple Consumer"
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={34,76})));
-  FixedResistances.DPEAgg_ambientLoss pipe1
+  FixedResistances.Pipe pipe1
     annotation (Dialog(enable=true), Placement(transformation(extent={{-78,-10},{-58,10}})));
-  FixedResistances.DPEAgg_ambientLoss pipe2
+  FixedResistances.Pipe pipe2
     annotation (Dialog(enable=true), Placement(transformation(extent={{38,-10},{58,10}})));
-  Modelica.Blocks.Sources.RealExpression realExpression1(y=Tambient)
+  Modelica.Blocks.Sources.RealExpression realExpression1(y=Tamb)
                                                               annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -101,12 +101,12 @@ equation
           textString="CONSUMER")}),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
-<p>Model with two simple consumers. Can feed in or feed out a specified power (default) or provide a defined return temperature.</p>
-<p>The user must provide the power demand &QUOT;P&QUOT; or the temperature information &QUOT;T&QUOT; via the bus connector. A positive power P will feed energy into the system and a negative value extract from the system. Temperature &QUOT;T&QUOT; must be given in Kelvin.</p>
+<p>Model with a simple consumer. The consumed power depends on the ambient temperature and the convective coefficient kA.</p>
 </html>", revisions="<html>
 <ul>
-<li><i>2016-03-06 &nbsp;</i> by Peter Matthes:<br>added documentation</li>
-<li><i>2016-02-17 &nbsp;</i> by Rohit Lad:<br>implemented simple consumers model</li>
+<li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib</li>
+<li><i>2016-03-06 &nbsp;</i> by Peter Matthes:<br/>added documentation</li>
+<li><i>2016-02-17 &nbsp;</i> by Rohit Lad:<br/>implemented simple consumers model</li>
 </ul>
 </html>"));
 end SimpleConsumer;

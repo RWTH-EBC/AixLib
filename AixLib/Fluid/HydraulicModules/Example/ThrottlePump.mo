@@ -67,12 +67,6 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(RPM.y, hydraulicBus.rpm_Input) annotation (Line(points={{-79,40},{-50,
-          40},{-50,28},{-49.95,28},{-49.95,0.05}},      color={0,0,127}),
-      Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
   connect(ThrottlePump.port_b1, hydRes.port_a) annotation (Line(points={{-14.4,24},
           {-14,24},{-14,50},{-10,50}}, color={0,127,255}));
   connect(ThrottlePump.port_a2, hydRes.port_b)
@@ -81,11 +75,21 @@ equation
           -40},{20,-32},{14.4,-32},{14.4,-24}}, color={0,127,255}));
   connect(boundary.ports[1], ThrottlePump.port_a1) annotation (Line(points={{-20,
           -40},{-20,-32},{-14.4,-32},{-14.4,-24}}, color={0,127,255}));
+  connect(RPM.y, hydraulicBus.pumpBus.rpm_Input) annotation (Line(points={{-79,
+          40},{-49.95,40},{-49.95,0.05}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
   annotation (Icon(graphics,
                    coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{120,100}})),                                  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),
     experiment(StopTime=600),
-    __Dymola_Commands);
+    __Dymola_Commands,
+    Documentation(revisions="<html>
+<ul>
+<li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib.</li>
+</ul>
+</html>"));
 end ThrottlePump;
