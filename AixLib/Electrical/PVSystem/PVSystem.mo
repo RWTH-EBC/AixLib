@@ -1,4 +1,4 @@
-﻿within AixLib.Electrical.PVSystem;
+within AixLib.Electrical.PVSystem;
 model PVSystem "PVSystem"
   extends BaseClasses.PartialPVSystem;
 
@@ -32,9 +32,7 @@ equation
      Text(
       lineColor={0,0,0},
       extent={{-96,95},{97,-97}},
-           textString="PV")},
-           textString="%name",
-          lineColor={0,0,255}),
+           textString="PV")}),
      Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
              {100,100}})),
      Documentation(info="<html>

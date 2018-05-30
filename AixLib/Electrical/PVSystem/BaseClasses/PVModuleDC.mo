@@ -1,4 +1,4 @@
-﻿within AixLib.Electrical.PVSystem.BaseClasses;
+within AixLib.Electrical.PVSystem.BaseClasses;
 model PVModuleDC "partial model for PV module"
 
  parameter Modelica.SIunits.Area Area
@@ -68,6 +68,6 @@ equation
 <li><i>October 11, 2016 </i>by Tobias Blacha:<br/>Moved into AixLib</li>
 <li><i>Februar 21, 2013 </i>by Corinna Leonhardt:<br/>Implemented</li>
 </ul>
-</html>"),   Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+</html>"), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end PVModuleDC;

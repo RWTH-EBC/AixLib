@@ -1,4 +1,4 @@
-﻿within AixLib.Electrical.PVSystem;
+within AixLib.Electrical.PVSystem;
 model PVSystemTMY3
   extends BaseClasses.PartialPVSystem;
 
@@ -55,9 +55,7 @@ equation
   connect(G.y, PVModuleDC.SolarIrradiationPerSquareMeter) annotation (Line(
         points={{-7,22},{-4,22},{-4,48},{-24,48},{-24,54.4},{-14.6,54.4}},
         color={0,0,127}));
- annotation (Placement(transformation(extent={{100,-10},{120,10}}),
-        iconTransformation(extent={{100,-10},{120,10}})),
-              Icon(coordinateSystem(preserveAspectRatio=false), graphics={
+ annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
      Rectangle(
       lineColor={0,0,0},
       fillColor={255,255,255},
