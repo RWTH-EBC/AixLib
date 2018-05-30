@@ -152,5 +152,6 @@ equation
 </ul>
 </html>", info="<html>
 <p>This example demonstrates the use of the hydraulic modules. </p>
-</html>"));
+</html>"),
+    experiment(StopTime=3600));
 end ERC_ExperimentalHall_CoolingCircuit;
