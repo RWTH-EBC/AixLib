@@ -27,7 +27,7 @@ equation
   annotation (Documentation(revisions="<html>
 <ul>
 <li>May 20, 2018, by Alexander K&uuml;mpel:<br/>First implementation.</li>
-<ul>
+</ul>
 </html>", info="<html>
 <p>Pump container for the SpeedControlled_Nrpm pump.</p>
 </html>"));
