@@ -8,7 +8,7 @@ partial model PartialHeatTransferLayers
    //   package Medium =
    //             Medium) annotation 1;
 
-  final outer replaceable package Medium =
+  final outer replaceable record Medium =
        FastHVAC.Media.WaterSimple "Medium model"   annotation(choicesAllMatching);
 
 final outer replaceable parameter
