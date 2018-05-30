@@ -376,7 +376,7 @@ equation
 <p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/RoomAgent.png\" alt=\"Room agent\"/></p>
 <h4><span style=\"color: #008000\">References</span></h4>
 <ul>
-<li>Roozbeh Sangi, Felix B&uuml;nning, Marc Baranski, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic. </li>
+<li>Roozbeh Sangi, Felix B&uuml;nning, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic. </li>
 <li>FIPA ACL Message Structure Specification</li>
 <li>FIPA Communicative Act Library Specification </li>
 <li>Felix B&uuml;nning, Roozbeh Sangi, Dirk M&uuml;ller. A Modelica library for agent-based control of building HVAC systems. Applied Energy, 193:52-59, 2017. </li>

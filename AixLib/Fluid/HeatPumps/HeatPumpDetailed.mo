@@ -241,7 +241,7 @@ public
     CorrFlowEv=CorrFlowEv,
     timeConstantCycle=timeConstantCycle,
     smoothness=smoothness,
-    PT1_cycle=true,
+    PT1_cycle=PT1_cycle,
     mFlow_conNominal=mFlow_conNominal,
     mFlow_evaNominal=mFlow_evaNominal,
     T_conMax=T_conMax) "Heat pump refrigerant circuit black box model"

@@ -492,7 +492,7 @@ equation
   connect(WC_Storage.ground, groundTemp[4]) annotation (Line(points={{66.14,-37.44},
           {66.14,-34},{0,-34},{0,-96},{0,-96}}, color={191,0,0}));
   connect(Kitchen.ground, groundTemp[5]) annotation (Line(points={{-65.2,-21.92},
-          {-65.2,-4},{0,-4},{0,-92},{0,-92}}, color={191,0,0}));
+          {-65.2,-4},{0,-4},{0,-92}},         color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}}), graphics={
         Bitmap(extent={{-100,-100},{100,100}}, fileName=

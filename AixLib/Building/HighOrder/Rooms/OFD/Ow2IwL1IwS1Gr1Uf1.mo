@@ -264,8 +264,7 @@ model Ow2IwL1IwS1Gr1Uf1
   AixLib.Building.Components.DryAir.VarAirExchange NaturalVentilation(V=room_V)
     annotation (Placement(transformation(extent={{-70,-44},{-50,-24}})));
   AixLib.Building.Components.Walls.BaseClasses.SimpleNLayer floor_FH(
-    h=room_width,
-    l=room_length,
+    A=room_width*room_length,
     n=Type_FL.n,
     d=Type_FL.d,
     rho=Type_FL.rho,
@@ -367,7 +366,9 @@ protected
       AixLib.DataBase.Walls.WSchV1984.IW.IWload_WSchV1984_L_half()
     annotation (Dialog(tab="Types"));
   // Floor to ground type
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_FL=if TIR == 1
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_FL=
+   if withFloorHeating==true then AixLib.DataBase.Walls.Dummys.FloorForFloorHeating4Layers()
+  else if TIR == 1
        then AixLib.DataBase.Walls.EnEV2009.Floor.FLground_EnEV2009_SML() else
       if TIR == 2 then
       AixLib.DataBase.Walls.EnEV2002.Floor.FLground_EnEV2002_SML() else if TIR ==
@@ -375,7 +376,9 @@ protected
        else AixLib.DataBase.Walls.WSchV1984.Floor.FLground_WSchV1984_SML()
     annotation (Dialog(tab="Types"));
   // Ceiling to upper floor type
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_CE=if TIR == 1
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_CE=
+  if withFloorHeating==true then AixLib.DataBase.Walls.Dummys.CeilingForFloorHeating3Layers()
+  else if TIR == 1
        then if TMC == 1 or TMC == 2 then
       AixLib.DataBase.Walls.EnEV2009.Ceiling.CEpartition_EnEV2009_SM_loHalf()
        else
@@ -393,6 +396,7 @@ protected
        else
       AixLib.DataBase.Walls.WSchV1984.Ceiling.CEpartition_WSchV1984_L_loHalf()
     annotation (Dialog(tab="Types"));
+
   //Window type
   parameter AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple
     Type_Win=if TIR == 1 then
@@ -469,11 +473,11 @@ equation
   connect(NaturalVentilation.port_b, airload.port) annotation (Line(points={{-50,
           -34},{-40,-34},{-40,-40},{-6,-40},{-6,-12},{1,-12}}, color={191,0,0}));
   connect(ground, floor_FH.port_b) annotation (Line(
-      points={{-6,-94},{-32,-94},{-32,-89.7},{-31.6,-89.7}},
+      points={{-6,-94},{-32,-94},{-32,-90},{-30,-90}},
       color={191,0,0},
       pattern=LinePattern.Dash));
   connect(thermFloorHeatingDownHeatFlow, floor_FH.port_a) annotation (Line(
-      points={{-77,-79},{-77,-80},{-31.6,-80},{-31.6,-84.2999}},
+      points={{-77,-79},{-77,-80},{-30,-80},{-30,-83.9999}},
       color={191,0,0},
       pattern=LinePattern.Dash));
   connect(ground, floor.port_outside) annotation (Line(
