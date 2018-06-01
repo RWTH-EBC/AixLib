@@ -147,9 +147,6 @@ public
 
   Modelica.Blocks.Interfaces.RealOutput Qdot_conOut "Value of Real output"
     annotation (Placement(transformation(extent={{120,0},{140,20}})));
-  Modelica.Blocks.Math.UnitConversions.To_degC t_conIn
-    annotation (extent=[-88,38; -76,50], Placement(transformation(extent={{116,-36},
-            {104,-24}})));
   Modelica.Blocks.Interfaces.RealInput T_conIn
     "Connector of Real input signal to be converted" annotation (Placement(
         transformation(
@@ -311,10 +308,6 @@ end if;
       color={0,0,127},
       smooth=Smooth.None));
 
-  connect(t_conIn.u,T_conIn)  annotation (Line(
-      points={{117.2,-30},{130,-30}},
-      color={0,0,127},
-      smooth=Smooth.None));
   connect(realQdot_eva.y,Qdot_evaOut)  annotation (Line(
       points={{-121,-10},{-130,-10},{-130,10}},
       color={0,0,127},
