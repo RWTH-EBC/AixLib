@@ -25,12 +25,6 @@ public
     "Polynomial heat pump characteristics"
    annotation(choicesAllMatching = true,Dialog(enable=(capCalcType==1),group="Capacity data"));
 
-  replaceable function Corr_icing =
-  AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection.noModel
-                                                                 constrainedby
-    AixLib.Fluid.HeatPumps.BaseClasses.Functions.DefrostCorrection.baseFct
-    "Frost/Defrost model (only air-to-water heat pumps)"
-   annotation(choicesAllMatching = true,Dialog(enable=(capCalcType==1),group="Defrosting/Icing correction",tab="Advanced"));
 parameter SI.Temperature T_conMax=338.15 "Maximum condenser outlet temperature"   annotation(Dialog(group="Heat Pump cycle"));
   parameter Real N_max=4200
     "Maximum speed of compressor in 1/min (only used if used in polynom)"                          annotation(Dialog(enable=not
@@ -72,11 +66,8 @@ parameter SI.Temperature T_conMax=338.15 "Maximum condenser outlet temperature" 
   SI.HeatFlowRate Qdot_eva;
   SI.HeatFlowRate Qdot_con;
   SI.HeatFlowRate Qdot_conChar;
-  Real CoP;
-  Real CoP_corr;
   Real CoP_char;
   Real N;
-  Real factorCoP_icing;
   Real Char[2];
   Real T_conOutCorr;
   Real T_evaInCorr;
@@ -98,10 +89,6 @@ parameter SI.Temperature T_conMax=338.15 "Maximum condenser outlet temperature" 
         origin={-10,90})));
 
 protected
-  Modelica.Blocks.Interfaces.RealInput firstOrder_outInternal
-    "Needed to connect to conditional model";
-  Modelica.Blocks.Interfaces.RealOutput firstOrder_inInternal
-    "Needed to connect to conditional model";
   Modelica.Blocks.Interfaces.RealInput Qdot_conTableInternal
     "Needed to connect to conditional model";
   Modelica.Blocks.Interfaces.RealInput P_eleTableInternal
@@ -147,10 +134,7 @@ public
     annotation (Placement(transformation(extent={{-94,6},{-74,26}}, rotation=0)));
   Modelica.Blocks.Continuous.FirstOrder firstOrder(T=timeConstantCycle) if
                                                                     PT1_cycle
-    annotation (Placement(transformation(extent={{42,-6},{62,14}})));
-public
-  Modelica.Blocks.Math.Product productPelCoP1 annotation (Placement(
-        transformation(extent={{8,-46},{28,-26}}, rotation=0)));
+    annotation (Placement(transformation(extent={{96,4},{110,18}})));
   Modelica.Blocks.Math.UnitConversions.To_degC t_Ev_in
     annotation (extent=[-88,38; -76,50], Placement(transformation(extent={{-68,30},
             {-56,42}})));
@@ -160,9 +144,6 @@ public
 public
   Modelica.Blocks.Sources.RealExpression dummyZero(y=0) annotation (Placement(
         transformation(extent={{40,-86},{60,-66}}, rotation=0)));
-public
-  Modelica.Blocks.Sources.RealExpression realCoP_corr(y=CoP_corr) annotation (
-      Placement(transformation(extent={{-32,-50},{-12,-30}}, rotation=0)));
   parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments
     "smoothness of table interpolation" annotation(Dialog(group = "Assumptions",tab="Advanced", enable=not
                                                                                             (capCalcType==1)));
@@ -284,36 +265,28 @@ end if;
     CoP_char=0;
   end if;
 
-  // determination of CoP-corrections
-  if capCalcType==1 then
-    factorCoP_icing=Corr_icing( T_evaInCorr-273.15);
-  else
-    factorCoP_icing=1;
-  end if;
+  Qdot_con = Qdot_conChar*factorScale;
+  P_ele=P_eleChar*factorScale;
 
-  CoP_corr=CoP_char*factorCoP_icing;//*f_cop_spread;
-
-    P_ele=P_eleChar*factorScale;
-  Qdot_con=firstOrder_outInternal;
   if onOff_in then
     if Qdot_con-P_ele*eta_ele>0 then
       Qdot_eva=Qdot_con-P_ele*eta_ele;
     else
       Qdot_eva=0;
     end if;
-    CoP=Qdot_con/add.y;
   else
     Qdot_eva=0;
-    CoP=0;
   end if;
-  //internal connections for conditional models
 
-  connect(productPelCoP1.y, firstOrder_inInternal);
-  if PT1_cycle then
-    connect(firstOrder_inInternal,firstOrder.u);
-    connect(firstOrder.y,firstOrder_outInternal);
-  else
-     connect(firstOrder_inInternal,firstOrder_outInternal);
+  // use_firstOrder for QDotCon
+  connect(productPelCoP2.y, firstOrder.u) annotation (Line(points={{101,40},{106,
+          40},{106,24},{92,24},{92,11},{94.6,11}}, color={0,0,127},
+          pattern=LinePattern.DashDotDot));
+  connect(firstOrder.y, Qdot_conOut) annotation (Line(points={{110.7,11},{117.35,
+          11},{117.35,10},{130,10}}, color={0,0,127},
+          pattern=LinePattern.DashDotDot));
+  if not PT1_cycle then
+     connect(productPelCoP2.y, Qdot_conOut);
   end if;
 
    if capCalcType==1 then //polynom
@@ -324,20 +297,12 @@ end if;
     connect(P_eleTableInternal, P_eleTable.y);
    end if;
 
-  connect(realPel.y, productPelCoP1.u1) annotation (Line(
-      points={{-71,-30},{6,-30}},
-      color={0,0,127},
-      smooth=Smooth.None));
   connect(realT_evaIn.y, t_Ev_in.u) annotation (Line(
       points={{-73,36},{-69.2,36}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(realT_conOut.y, t_Co_out.u) annotation (Line(
       points={{-73,16},{-69.2,16}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  connect(realCoP_corr.y, productPelCoP1.u2) annotation (Line(
-      points={{-11,-40},{-2,-40},{-2,-42},{6,-42}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(t_Ev_in.y,Qdot_ConTable. u2) annotation (Line(
@@ -388,10 +353,6 @@ end if;
       points={{-45.5,-47},{-40,-47},{-40,-66},{-50,-66},{-50,-90}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(productPelCoP2.y, Qdot_conOut) annotation (Line(
-      points={{101,40},{112,40},{112,10},{130,10}},
-      color={0,0,127},
-      smooth=Smooth.None));
   connect(realQdot_con.y, productPelCoP2.u2) annotation (Line(
       points={{61,34},{78,34}},
       color={0,0,127},
@@ -408,8 +369,13 @@ end if;
       points={{67,62},{70,62},{70,46},{78,46}},
       color={0,0,127},
       smooth=Smooth.None));
+
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-150,-100},
-            {150,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio=true,
+            {150,100}}), graphics={Text(
+          extent={{20,-44},{128,-60}},
+          lineColor={0,0,0},
+          textString="Corr. icing!")}),
+                                    Icon(coordinateSystem(preserveAspectRatio=true,
           extent={{-150,-100},{150,100}}), graphics={
         Rectangle(
           extent={{-130,90},{130,-90}},
