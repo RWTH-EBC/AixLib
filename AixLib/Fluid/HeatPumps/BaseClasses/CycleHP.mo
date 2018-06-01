@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps.BaseClasses;
+﻿within AixLib.Fluid.HeatPumps.BaseClasses;
 model CycleHP
   import SI = Modelica.SIunits;
   parameter Boolean HPctrlType =  true "Capacity control type"
@@ -91,11 +91,6 @@ parameter SI.Temperature T_conMax=338.15 "Maximum condenser outlet temperature" 
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-50,90})));
-  Modelica.Blocks.Interfaces.RealOutput CoP_out annotation (Placement(
-        transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=270,
-        origin={-10,-90})));
   Modelica.Blocks.Interfaces.RealInput N_in  annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
@@ -126,9 +121,6 @@ public
 public
   Modelica.Blocks.Sources.RealExpression realPel(y=P_ele) annotation (Placement(
         transformation(extent={{-92,-40},{-72,-20}}, rotation=0)));
-public
-  Modelica.Blocks.Sources.RealExpression realCoP(y=CoP) annotation (Placement(
-        transformation(extent={{-32,-66},{-12,-46}}, rotation=0)));
 
   Modelica.Blocks.Tables.CombiTable2D Qdot_ConTable(
     tableName="NoName",
@@ -178,17 +170,11 @@ public
   Modelica.Blocks.Logical.TriggeredTrapezoid realP_eleAdd(amplitude=P_eleAdd)
     annotation (Placement(transformation(extent={{-72,-54},{-64,-46}},
           rotation=0)));
-public
   Modelica.Blocks.Logical.GreaterThreshold greaterZero annotation (Placement(
         transformation(extent={{-88,-54},{-80,-46}}, rotation=0)));
   Modelica.Blocks.Math.Add add
     annotation (Placement(transformation(extent={{-56,-52},{-46,-42}})));
 
-public
-  Modelica.Blocks.Sources.RealExpression dummyOne(y=1) annotation (Placement(
-        transformation(extent={{40,-70},{60,-50}}, rotation=0)));
-
-public
   Modelica.Blocks.Interfaces.RealOutput Qdot_conOut "Value of Real output"
     annotation (Placement(transformation(extent={{120,0},{140,20}})));
   Modelica.Blocks.Math.UnitConversions.To_degC t_conIn
@@ -235,10 +221,8 @@ public
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={130,-10})));
-public
   Modelica.Blocks.Sources.RealExpression maxTempCon(y=T_conMax) annotation (
       Placement(transformation(extent={{14,52},{34,72}}, rotation=0)));
-public
   Modelica.Blocks.Math.Product productPelCoP2 annotation (Placement(
         transformation(extent={{80,30},{100,50}}, rotation=0)));
   Modelica.Blocks.Continuous.LimPID PIDmaxHeatFlowCon(
@@ -342,10 +326,6 @@ end if;
 
   connect(realPel.y, productPelCoP1.u1) annotation (Line(
       points={{-71,-30},{6,-30}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  connect(realCoP.y, CoP_out) annotation (Line(
-      points={{-11,-56},{-10,-56},{-10,-90}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(realT_evaIn.y, t_Ev_in.u) annotation (Line(
