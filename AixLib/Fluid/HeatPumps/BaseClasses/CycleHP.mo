@@ -41,9 +41,6 @@ parameter SI.Temperature T_conMax=338.15 "Maximum condenser outlet temperature" 
   parameter Real factorScale=1
     "scaling factor (Attention: not physically correct)"
      annotation(Dialog(group="Assumptions",tab="Advanced"));
-  parameter SI.Power P_eleAdd=0
-    "additional electric power when heat pump is on (not influenced through scaling factor)"
-    annotation(Dialog(group="Assumptions",tab="Advanced"));
 
   parameter Boolean CorrFlowCo=false
     "Correction of mass flow different from nominal flow in condenser (use only if not included in polynom)"
@@ -107,7 +104,7 @@ public
         origin={-110,-10})));
 public
   Modelica.Blocks.Sources.RealExpression realPel(y=P_ele) annotation (Placement(
-        transformation(extent={{-92,-40},{-72,-20}}, rotation=0)));
+        transformation(extent={{-88,-76},{-68,-56}}, rotation=0)));
 
   Modelica.Blocks.Tables.CombiTable2D Qdot_ConTable(
     tableName="NoName",
@@ -147,14 +144,6 @@ public
   parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments
     "smoothness of table interpolation" annotation(Dialog(group = "Assumptions",tab="Advanced", enable=not
                                                                                             (capCalcType==1)));
-public
-  Modelica.Blocks.Logical.TriggeredTrapezoid realP_eleAdd(amplitude=P_eleAdd)
-    annotation (Placement(transformation(extent={{-72,-54},{-64,-46}},
-          rotation=0)));
-  Modelica.Blocks.Logical.GreaterThreshold greaterZero annotation (Placement(
-        transformation(extent={{-88,-54},{-80,-46}}, rotation=0)));
-  Modelica.Blocks.Math.Add add
-    annotation (Placement(transformation(extent={{-56,-52},{-46,-42}})));
 
   Modelica.Blocks.Interfaces.RealOutput Qdot_conOut "Value of Real output"
     annotation (Placement(transformation(extent={{120,0},{140,20}})));
@@ -322,35 +311,12 @@ end if;
       color={0,0,127},
       smooth=Smooth.None));
 
-  connect(greaterZero.y, realP_eleAdd.u) annotation (Line(
-      points={{-79.6,-50},{-78,-50},{-78,-48},{-76,-48},{-76,-50},{-72.8,-50}},
-      color={255,0,255},
-      smooth=Smooth.None));
-
-  connect(realPel.y, greaterZero.u) annotation (Line(
-      points={{-71,-30},{-66,-30},{-66,-40},{-92,-40},{-92,-50},{-88.8,-50}},
-      color={0,0,127},
-      smooth=Smooth.None));
-
-  connect(realP_eleAdd.y, add.u2) annotation (Line(
-      points={{-63.6,-50},{-57,-50}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  connect(realPel.y, add.u1) annotation (Line(
-      points={{-71,-30},{-66,-30},{-66,-40},{-62,-40},{-62,-44},{-57,-44}},
-      color={0,0,127},
-      smooth=Smooth.None));
-
   connect(t_conIn.u,T_conIn)  annotation (Line(
       points={{117.2,-30},{130,-30}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(realQdot_eva.y,Qdot_evaOut)  annotation (Line(
       points={{-121,-10},{-130,-10},{-130,10}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  connect(add.y, P_eleOut) annotation (Line(
-      points={{-45.5,-47},{-40,-47},{-40,-66},{-50,-66},{-50,-90}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(realQdot_con.y, productPelCoP2.u2) annotation (Line(
@@ -370,6 +336,8 @@ end if;
       color={0,0,127},
       smooth=Smooth.None));
 
+  connect(realPel.y, P_eleOut)
+    annotation (Line(points={{-67,-66},{-50,-66},{-50,-90}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-150,-100},
             {150,100}}), graphics={Text(
           extent={{20,-44},{128,-60}},
