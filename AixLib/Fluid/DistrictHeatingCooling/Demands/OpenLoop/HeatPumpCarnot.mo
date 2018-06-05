@@ -115,13 +115,13 @@ public
     "Output signal of pressure difference"
     annotation (Placement(transformation(extent={{98,70},{118,90}})));
   HeatPumps.Carnot_TCon              heaPum(
-    redeclare package Medium1 = Medium,
+    redeclare package Medium1 = MediumBuilding,
     dp1_nominal=dp_nominal,
     dp2_nominal=dp_nominal,
     use_eta_Carnot_nominal=true,
     etaCarnot_nominal=0.3,
     show_T=true,
-    redeclare package Medium2 = MediumBuilding,
+    redeclare package Medium2 = Medium,
     QCon_flow_nominal=Q_flow_nominal)
     annotation (Placement(transformation(extent={{-30,-46},{-50,-66}})));
   Modelica.Blocks.Math.Add Q_con(k2=-1)
