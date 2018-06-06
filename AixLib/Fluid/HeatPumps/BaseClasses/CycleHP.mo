@@ -14,10 +14,7 @@ model CycleHP
     "Look-up table data for on/off heat pump according to EN255/EN14511"
     annotation (choicesAllMatching=true, Dialog(enable=HPctrlType and (
           capCalcType == 2), group="Capacity data"));
-protected
-  final parameter Real tableQdot_con[:,:]=dataTable.tableQdot_con;
-  final parameter Real tableP_ele[:,:]= dataTable.tableP_ele;
-public
+
   replaceable function data_poly =
   AixLib.Fluid.HeatPumps.BaseClasses.Functions.Characteristics.constantQualityGrade
     constrainedby
@@ -25,7 +22,7 @@ public
     "Polynomial heat pump characteristics"
    annotation(choicesAllMatching = true,Dialog(enable=(capCalcType==1),group="Capacity data"));
 
-parameter SI.Temperature T_conMax=338.15 "Maximum condenser outlet temperature"   annotation(Dialog(group="Heat Pump cycle"));
+  parameter SI.Temperature T_conMax=338.15 "Maximum condenser outlet temperature"   annotation(Dialog(group="Heat Pump cycle"));
   parameter Real N_max=4200
     "Maximum speed of compressor in 1/min (only used if used in polynom)"                          annotation(Dialog(enable=not
                                                                                             (HPctrlType),group="Capacity data"));
@@ -58,6 +55,10 @@ parameter SI.Temperature T_conMax=338.15 "Maximum condenser outlet temperature" 
     "Nominal mass flow rate in evaporator"
   annotation(Dialog(group="Mass flow correction",tab="Advanced",enable=(CorrFlowEv and capCalcType==1)));
 
+  parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments
+    "smoothness of table interpolation" annotation(Dialog(group = "Assumptions",tab="Advanced", enable=not
+                                                                                            (capCalcType==1)));
+
   SI.Power P_ele;
   SI.Power P_eleChar;
   SI.HeatFlowRate Qdot_eva;
@@ -84,32 +85,20 @@ parameter SI.Temperature T_conMax=338.15 "Maximum condenser outlet temperature" 
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-10,90})));
-
-protected
-  Modelica.Blocks.Interfaces.RealInput Qdot_conTableInternal
-    "Needed to connect to conditional model";
-  Modelica.Blocks.Interfaces.RealInput P_eleTableInternal
-    "Needed to connect to conditional model";
-  SI.MassFlowRate mFlow_conNom;
-  SI.MassFlowRate mFlow_evaNom;
-
-public
   Modelica.Blocks.Sources.RealExpression realQdot_con(y=Qdot_con)
     annotation (Placement(transformation(extent={{40,24},{60,44}},
           rotation=0)));
-public
   Modelica.Blocks.Sources.RealExpression realQdot_eva(y=Qdot_eva)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
           rotation=180,
         origin={-110,-10})));
-public
   Modelica.Blocks.Sources.RealExpression realPel(y=P_ele) annotation (Placement(
         transformation(extent={{-88,-76},{-68,-56}}, rotation=0)));
 
   Modelica.Blocks.Tables.CombiTable2D Qdot_ConTable(
     tableName="NoName",
     fileName="NoName",
-    table=tableQdot_con,
+    table=dataTable.tableQdot_con,
     smoothness=smoothness) if
                             not (capCalcType == 1)
     annotation (extent=[-60,40; -40,60], Placement(transformation(extent={{-40,20},
@@ -118,15 +107,13 @@ public
   Modelica.Blocks.Tables.CombiTable2D P_eleTable(
     tableName="NoName",
     fileName="NoName",
-    table=tableP_ele,
+    table=dataTable.tableP_ele,
     smoothness=smoothness) if
                         not (capCalcType == 1) "Electrical power table"
     annotation (extent=[-60,-20; -40,0], Placement(transformation(extent={{-40,-10},
             {-20,10}})));
-public
   Modelica.Blocks.Sources.RealExpression realT_evaIn(y=T_evaInCorr)
     annotation (Placement(transformation(extent={{-94,26},{-74,46}}, rotation=0)));
-public
   Modelica.Blocks.Sources.RealExpression realT_conOut(y=T_conOutCorr)
     annotation (Placement(transformation(extent={{-94,6},{-74,26}}, rotation=0)));
   Modelica.Blocks.Continuous.FirstOrder firstOrder(T=timeConstantCycle) if
@@ -138,13 +125,8 @@ public
   Modelica.Blocks.Math.UnitConversions.To_degC t_Co_out
     annotation (extent=[-88,38; -76,50], Placement(transformation(extent={{-68,10},
             {-56,22}})));
-public
   Modelica.Blocks.Sources.RealExpression dummyZero(y=0) annotation (Placement(
         transformation(extent={{40,-86},{60,-66}}, rotation=0)));
-  parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments
-    "smoothness of table interpolation" annotation(Dialog(group = "Assumptions",tab="Advanced", enable=not
-                                                                                            (capCalcType==1)));
-
   Modelica.Blocks.Interfaces.RealOutput Qdot_conOut "Value of Real output"
     annotation (Placement(transformation(extent={{120,0},{140,20}})));
   Modelica.Blocks.Interfaces.RealInput T_conIn
@@ -198,6 +180,15 @@ public
     yMax=1,
     yMin=0,
     y_start=1) annotation (Placement(transformation(extent={{46,52},{66,72}})));
+
+protected
+  Modelica.Blocks.Interfaces.RealInput Qdot_conTableInternal
+    "Needed to connect to conditional model";
+  Modelica.Blocks.Interfaces.RealInput P_eleTableInternal
+    "Needed to connect to conditional model";
+  SI.MassFlowRate mFlow_conNom;
+  SI.MassFlowRate mFlow_evaNom;
+
 equation
   // correction of temperatures used in the table/polynomial
   if capCalcType==1 then
