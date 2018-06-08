@@ -1,18 +1,18 @@
-within AixLib.Fluid.Storage;
+﻿within AixLib.Fluid.Storage;
 model BufferStorage
   "Buffer Storage Model with support for heating rod and two heating coils"
   import SI = Modelica.SIunits;
 
   replaceable package Medium =
-      AixLib.Media.Water "Medium model"
+      Modelica.Media.Interfaces.PartialMedium "Medium model"
                  annotation (Dialog(group="Medium"),choicesAllMatching = true);
 
   replaceable package MediumHC1 =
-      AixLib.Media.Water "Medium model for HC1"
+      Modelica.Media.Interfaces.PartialMedium "Medium model for HC1"
                  annotation (choicesAllMatching = true, Dialog(group="Medium"));
 
   replaceable package MediumHC2 =
-      AixLib.Media.Water "Medium model for HC2"
+      Modelica.Media.Interfaces.PartialMedium "Medium model for HC2"
                  annotation (choicesAllMatching = true, Dialog(group="Medium"));
 
   parameter Boolean useHeatingCoil1=true "Use Heating Coil1?" annotation(Dialog(tab="Heating Coils and Rod"));
@@ -134,8 +134,8 @@ model BufferStorage
         iconTransformation(extent={{14,92},{36,110}})));
 
   HeatTransfer heatTransfer(final n=n,
-      redeclare final package Medium = Medium,
-      final data=data)
+      redeclare final package Medium = Medium, 
+      final data=data) 
       "Heat transfer model" annotation (Placement(transformation(extent={{-34,0},
             {-14,20}}, rotation=0)));
 
