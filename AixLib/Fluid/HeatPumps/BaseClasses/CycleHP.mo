@@ -64,7 +64,6 @@ model CycleHP
   SI.HeatFlowRate Qdot_eva;
   SI.HeatFlowRate Qdot_con;
   SI.HeatFlowRate Qdot_conChar;
-  Real CoP_char;
   Real N;
   Real Char[2];
   Real T_conOutCorr;
@@ -235,11 +234,9 @@ end if;
   if onOff_in then
     Qdot_conChar=Char[2];
     P_eleChar=Char[1];
-    CoP_char=Qdot_conChar/P_eleChar;
   else
     Qdot_conChar=0;
     P_eleChar=0;
-    CoP_char=0;
   end if;
 
   Qdot_con = Qdot_conChar*factorScale;
