@@ -1,12 +1,13 @@
 ﻿within AixLib.Building.Components.WindowsDoors;
 model WindowSimple "Window with radiation and U-Value"
   //  parameter Modelica.SIunits.Area windowarea=2 "Total fenestration area";
-  parameter Real windowarea = 2 "Total fenestration area";
+  parameter Modelica.SIunits.Area windowarea = 2 "Total fenestration area";
   parameter Modelica.SIunits.Temperature T0 = 293.15 "Initial temperature";
   parameter Boolean selectable = true "Select window type" annotation(Dialog(group = "Window type", descriptionLabel = true));
   parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType = DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009()
     "Window type"                                                                                                     annotation(Dialog(group = "Window type", enable = selectable, descriptionLabel = true), choicesAllMatching = true);
-  parameter Real frameFraction(max = 1.0) = if selectable then WindowType.frameFraction else 0.2
+  parameter Real frameFraction(min=0.0, max=1.0)=
+    if selectable then WindowType.frameFraction else 0.2
     "Frame fraction"                                                                                              annotation(Dialog(group = "Window type", enable = not selectable, descriptionLabel = true));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer Uw = if selectable then WindowType.Uw else 1.50
     "Thermal transmission coefficient of whole window"                                                                                                    annotation(Dialog(group = "Window type", enable = not selectable));
@@ -32,7 +33,9 @@ model WindowSimple "Window with radiation and U-Value"
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatTrans(
     final G = windowarea * Uw) annotation(Placement(transformation(extent = {{-10, -20}, {10, 0}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_inside annotation(Placement(transformation(extent = {{80, -20}, {100, 0}})));
-  Modelica.Blocks.Math.Gain Ag(final k=(1 - frameFraction)*windowarea*g)
+  Modelica.Blocks.Math.Gain Ag(final k(
+      unit="m2",
+      min=0.0) = (1 - frameFraction)*windowarea*g)
     annotation (Placement(transformation(extent={{-16,54},{-4,66}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
     annotation (Placement(transformation(extent={{2,50},{22,70}})));
