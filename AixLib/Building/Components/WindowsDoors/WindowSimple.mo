@@ -1,4 +1,4 @@
-within AixLib.Building.Components.WindowsDoors;
+﻿within AixLib.Building.Components.WindowsDoors;
 model WindowSimple "Window with radiation and U-Value"
   //  parameter Modelica.SIunits.Area windowarea=2 "Total fenestration area";
   parameter Real windowarea = 2 "Total fenestration area";
@@ -15,18 +15,22 @@ model WindowSimple "Window with radiation and U-Value"
 
   replaceable model correctionSolarGain =
       BaseClasses.CorrectionSolarGain.NoCorG
-  constrainedby BaseClasses.CorrectionSolarGain.PartialCorG
+  constrainedby BaseClasses.CorrectionSolarGain.PartialCorG(final Uw = Uw)
     "Model for correction of solar gain factor" annotation (Dialog(descriptionLabel = true),choicesAllMatching=true);
   Utilities.Interfaces.SolarRad_in solarRad_in annotation(Placement(transformation(extent={{-100,50},
             {-80,70}})));
   correctionSolarGain      corG annotation(Placement(transformation(extent={{-50,50},
             {-30,70}})));
-  Utilities.HeatTransfer.HeatToStar twoStar_RadEx(Therm(T(start = T0)), Star(T(start = T0)), A = (1 - frameFraction) * windowarea, eps = WindowType.Emissivity) annotation(Placement(transformation(extent = {{30, 50}, {50, 70}})));
+  Utilities.HeatTransfer.HeatToStar twoStar_RadEx(Therm(T(start = T0)),
+    Star(T(start = T0)),
+    final A = (1 - frameFraction) * windowarea,
+    final eps = WindowType.Emissivity) annotation(Placement(transformation(extent = {{30, 50}, {50, 70}})));
   Utilities.Interfaces.Star Star annotation(Placement(transformation(extent = {{80, 50}, {100, 70}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_outside annotation(Placement(transformation(extent = {{-100, -20}, {-80, 0}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatTrans(G = windowarea * Uw) annotation(Placement(transformation(extent = {{-10, -20}, {10, 0}})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatTrans(
+    final G = windowarea * Uw) annotation(Placement(transformation(extent = {{-10, -20}, {10, 0}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_inside annotation(Placement(transformation(extent = {{80, -20}, {100, 0}})));
-  Modelica.Blocks.Math.Gain Ag(k=(1 - frameFraction)*windowarea*g)
+  Modelica.Blocks.Math.Gain Ag(final k=(1 - frameFraction)*windowarea*g)
     annotation (Placement(transformation(extent={{-16,54},{-4,66}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow
     annotation (Placement(transformation(extent={{2,50},{22,70}})));
@@ -81,4 +85,3 @@ equation
  </html>"), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
             -100},{100,100}},                                                                          grid = {2, 2}), graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 0})}));
 end WindowSimple;
-
