@@ -15,11 +15,13 @@ model WindowSimple "Window with radiation and U-Value"
 
   replaceable model correctionSolarGain =
       BaseClasses.CorrectionSolarGain.NoCorG
-  constrainedby BaseClasses.CorrectionSolarGain.PartialCorG(final Uw = Uw)
+  constrainedby BaseClasses.CorrectionSolarGain.PartialCorG
     "Model for correction of solar gain factor" annotation (Dialog(descriptionLabel = true),choicesAllMatching=true);
   Utilities.Interfaces.SolarRad_in solarRad_in annotation(Placement(transformation(extent={{-100,50},
             {-80,70}})));
-  correctionSolarGain      corG annotation(Placement(transformation(extent={{-50,50},
+  correctionSolarGain corG(
+    final Uw = Uw,
+    final n = 1) annotation(Placement(transformation(extent={{-50,50},
             {-30,70}})));
   Utilities.HeatTransfer.HeatToStar twoStar_RadEx(Therm(T(start = T0)),
     Star(T(start = T0)),
