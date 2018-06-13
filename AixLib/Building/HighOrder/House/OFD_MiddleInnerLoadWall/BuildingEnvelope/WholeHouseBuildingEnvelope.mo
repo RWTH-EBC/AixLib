@@ -1,4 +1,4 @@
-within AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
+﻿within AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
 model WholeHouseBuildingEnvelope
   ///////// construction parameters
   parameter Integer TMC=1 "Thermal Mass Class" annotation (Dialog(
@@ -26,7 +26,17 @@ model WholeHouseBuildingEnvelope
     annotation (Dialog(group="Air Exchange Corridors", descriptionLabel=true));
   parameter Real AirExchangeAttic=0 "Air exchange attic in 1/h "
     annotation (Dialog(group="Air Exchange Attic", descriptionLabel=true));
-  // Dynamic Ventilation
+  ///////// Sunblind
+  parameter Boolean use_sunbling = false
+    "Will sunblind become active automatically?"
+    annotation(Dialog(group = "Sunblind"));
+  parameter Real ratioSunblind(min=0.0, max=1.0) = 0.8
+    "Sunblind factor"
+    annotation(Dialog(group = "Sunblind"));
+  parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0) = 350
+    "Threshold for global solar irradiation on this surface to enable sunblinding"
+    annotation(Dialog(group = "Sunblind"));
+  ///////// Dynamic Ventilation
   parameter Boolean withDynamicVentilation=false "Dynamic ventilation"
     annotation (Dialog(group="Dynamic ventilation", descriptionLabel=true),
       choices(checkBox=true));

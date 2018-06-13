@@ -1,4 +1,4 @@
-within AixLib.Building.HighOrder.Rooms.OFD;
+﻿within AixLib.Building.HighOrder.Rooms.OFD;
 model Ow1IwL2IwS1Gr1Uf1
   "1 outer wall, 2 inner walls load, 1 inner wall simple, 1 floor towards ground, 1 ceiling towards upper floor"
   import AixLib;
@@ -85,6 +85,16 @@ model Ow1IwL2IwS1Gr1Uf1
       group="Windows and Doors",
       descriptionLabel=true,
       enable=withDoor1));
+  // Sunblind
+  parameter Boolean use_sunbling = false
+    "Will sunblind become active automatically?"
+    annotation(Dialog(group = "Sunblind"));
+  parameter Real ratioSunblind(min=0.0, max=1.0) = 0.8
+    "Sunblind factor"
+    annotation(Dialog(group = "Sunblind"));
+  parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0) = 350
+    "Threshold for global solar irradiation on this surface to enable sunblinding"
+    annotation(Dialog(group = "Sunblind"));
   // Dynamic Ventilation
   parameter Boolean withDynamicVentilation=false "Dynamic ventilation"
     annotation (Dialog(group="Dynamic ventilation", descriptionLabel=true),
@@ -120,6 +130,9 @@ model Ow1IwL2IwS1Gr1Uf1
     withDoor=withDoor1,
     WallType=Type_OW,
     WindowType=Type_Win,
+    final withSunblind=use_sunbling,
+    final Blinding=ratioSunblind,
+    final Limit=solIrrThreshold,
     U_door=U_door_OD1,
     eps_door=eps_door_OD1)
     annotation (Placement(transformation(extent={{-64,-14},{-54,42}})));
