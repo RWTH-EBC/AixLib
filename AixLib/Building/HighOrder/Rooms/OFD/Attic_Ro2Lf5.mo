@@ -183,6 +183,9 @@ model Attic_Ro2Lf5
     wall_length=room2_length,
     wall_height=room2_width,
     withWindow=false,
+    final withSunblind=use_sunbling,
+    final Blinding=ratioSunblind,
+    final Limit=solIrrThreshold,
     ISOrientation=2,
     outside=false,
     withDoor=false) annotation (Placement(transformation(
@@ -197,6 +200,9 @@ model Attic_Ro2Lf5
     wall_length=room1_length,
     wall_height=room1_width,
     withWindow=false,
+    final withSunblind=use_sunbling,
+    final Blinding=ratioSunblind,
+    final Limit=solIrrThreshold,
     ISOrientation=2,
     outside=false,
     withDoor=false) annotation (Placement(transformation(
@@ -252,6 +258,9 @@ model Attic_Ro2Lf5
     wall_length=room3_length,
     wall_height=room3_width,
     withWindow=false,
+    final withSunblind=use_sunbling,
+    final Blinding=ratioSunblind,
+    final Limit=solIrrThreshold,
     ISOrientation=2,
     outside=false,
     withDoor=false) annotation (Placement(transformation(
@@ -264,6 +273,9 @@ model Attic_Ro2Lf5
     wall_length=room4_length,
     wall_height=room4_width,
     withWindow=false,
+    final withSunblind=use_sunbling,
+    final Blinding=ratioSunblind,
+    final Limit=solIrrThreshold,
     ISOrientation=2,
     outside=false,
     withDoor=false) annotation (Placement(transformation(
@@ -276,6 +288,9 @@ model Attic_Ro2Lf5
     wall_length=room5_length,
     wall_height=room5_width,
     withWindow=false,
+    final withSunblind=use_sunbling,
+    final Blinding=ratioSunblind,
+    final Limit=solIrrThreshold,
     ISOrientation=2,
     outside=false,
     withDoor=false) annotation (Placement(transformation(

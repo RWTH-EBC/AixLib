@@ -145,6 +145,9 @@ model Ow2IwL2IwS1Lf1At1Ro1
     wall_length=room_length,
     wall_height=room_height_short,
     withWindow=false,
+    final withSunblind=use_sunbling,
+    final Blinding=ratioSunblind,
+    final Limit=solIrrThreshold,
     windowarea=0,
     withDoor=false,
     door_height=0,
@@ -179,6 +182,9 @@ model Ow2IwL2IwS1Lf1At1Ro1
     wall_length=room_length - room_lengthb,
     wall_height=room_height_long,
     withWindow=false,
+    final withSunblind=use_sunbling,
+    final Blinding=ratioSunblind,
+    final Limit=solIrrThreshold,
     withDoor=false) annotation (Placement(transformation(
         origin={60,19},
         extent={{-2,-15},{2,15}},
@@ -191,6 +197,9 @@ model Ow2IwL2IwS1Lf1At1Ro1
     wall_height=0.5*(room_height_long + room_height_short + room_width_short/
         room_width_long*(room_height_long - room_height_short)),
     withWindow=false,
+    final withSunblind=use_sunbling,
+    final Blinding=ratioSunblind,
+    final Limit=solIrrThreshold,
     withDoor=false) annotation (Placement(transformation(
         origin={28,-60},
         extent={{-4.00002,-26},{4.00001,26}},
@@ -204,6 +213,9 @@ model Ow2IwL2IwS1Lf1At1Ro1
     wall_length=room_length,
     wall_height=room_width_short,
     withWindow=false,
+    final withSunblind=use_sunbling,
+    final Blinding=ratioSunblind,
+    final Limit=solIrrThreshold,
     withDoor=false,
     ISOrientation=3) annotation (Placement(transformation(
         origin={28,60},
@@ -216,6 +228,9 @@ model Ow2IwL2IwS1Lf1At1Ro1
     wall_length=room_length,
     wall_height=room_width_long,
     withWindow=false,
+    final withSunblind=use_sunbling,
+    final Blinding=ratioSunblind,
+    final Limit=solIrrThreshold,
     withDoor=false,
     ISOrientation=2) if withFloorHeating == false annotation (Placement(
         transformation(
@@ -262,6 +277,9 @@ model Ow2IwL2IwS1Lf1At1Ro1
     door_width=0,
     wall_height=roof_width,
     withWindow=withWindow3,
+    final withSunblind=use_sunbling,
+    final Blinding=ratioSunblind,
+    final Limit=solIrrThreshold,
     windowarea=windowarea_RO,
     WallType=Type_RO,
     WindowType=Type_Win) annotation (Placement(transformation(
@@ -280,6 +298,9 @@ model Ow2IwL2IwS1Lf1At1Ro1
     wall_length=room_lengthb,
     wall_height=room_height_long,
     withWindow=false,
+    final withSunblind=use_sunbling,
+    final Blinding=ratioSunblind,
+    final Limit=solIrrThreshold,
     withDoor=false) annotation (Placement(transformation(
         origin={60,-19},
         extent={{-2,-15},{2,15}},

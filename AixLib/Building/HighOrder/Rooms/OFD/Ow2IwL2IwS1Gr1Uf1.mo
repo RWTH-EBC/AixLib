@@ -189,6 +189,9 @@ model Ow2IwL2IwS1Gr1Uf1
     wall_length=room_length - room_lengthb,
     wall_height=room_height,
     withWindow=false,
+    final withSunblind=use_sunbling,
+    final Blinding=ratioSunblind,
+    final Limit=solIrrThreshold,
     withDoor=false) annotation (Placement(transformation(
         origin={61,24},
         extent={{-2.99999,-16},{2.99999,16}},
@@ -200,6 +203,9 @@ model Ow2IwL2IwS1Gr1Uf1
     wall_length=room_width,
     wall_height=room_height,
     withWindow=false,
+    final withSunblind=use_sunbling,
+    final Blinding=ratioSunblind,
+    final Limit=solIrrThreshold,
     withDoor=false) annotation (Placement(transformation(
         origin={22,-60},
         extent={{-4.00002,-26},{4.00001,26}},
@@ -213,6 +219,9 @@ model Ow2IwL2IwS1Gr1Uf1
     wall_length=room_length,
     wall_height=room_width,
     withWindow=false,
+    final withSunblind=use_sunbling,
+    final Blinding=ratioSunblind,
+    final Limit=solIrrThreshold,
     withDoor=false,
     ISOrientation=3) annotation (Placement(transformation(
         origin={-30,61},
@@ -225,6 +234,9 @@ model Ow2IwL2IwS1Gr1Uf1
     wall_length=room_length,
     wall_height=room_width,
     withWindow=false,
+    final withSunblind=use_sunbling,
+    final Blinding=ratioSunblind,
+    final Limit=solIrrThreshold,
     withDoor=false,
     ISOrientation=2) if withFloorHeating == false annotation (Placement(
         transformation(
@@ -271,6 +283,9 @@ model Ow2IwL2IwS1Gr1Uf1
     wall_length=room_lengthb,
     wall_height=room_height,
     withWindow=false,
+    final withSunblind=use_sunbling,
+    final Blinding=ratioSunblind,
+    final Limit=solIrrThreshold,
     withDoor=false) annotation (Placement(transformation(
         origin={61,-15},
         extent={{-3,-15},{3,15}},
