@@ -147,6 +147,16 @@ model Attic_Ro2Lf5
       naturalWidth=10,
       descriptionLabel=true,
       enable=withWindow2));
+  // Sunblind
+  parameter Boolean use_sunbling = false
+    "Will sunblind become active automatically?"
+    annotation(Dialog(group = "Sunblind"));
+  parameter Real ratioSunblind(min=0.0, max=1.0) = 0.8
+    "Sunblind factor"
+    annotation(Dialog(group = "Sunblind"));
+  parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0) = 350
+    "Threshold for global solar irradiation on this surface to enable sunblinding"
+    annotation(Dialog(group = "Sunblind"));
   // Infiltration rate
   AixLib.Building.Components.Walls.Wall roof1(
     withDoor=false,
@@ -155,6 +165,9 @@ model Attic_Ro2Lf5
     T0=T0_RO1,
     solar_absorptance=solar_absorptance_RO,
     withWindow=withWindow1,
+    final withSunblind=use_sunbling,
+    final Blinding=ratioSunblind,
+    final Limit=solIrrThreshold,
     windowarea=windowarea_RO1,
     wall_length=length,
     wall_height=roof_width1,
@@ -214,6 +227,9 @@ model Attic_Ro2Lf5
     T0=T0_RO2,
     wall_height=roof_width2,
     withWindow=withWindow2,
+    final withSunblind=use_sunbling,
+    final Blinding=ratioSunblind,
+    final Limit=solIrrThreshold,
     windowarea=windowarea_RO2,
     wall_length=length,
     WallType=Type_RO,
@@ -296,6 +312,9 @@ model Attic_Ro2Lf5
     door_width=0,
     windowarea=windowarea_RO1,
     WindowType=Type_Win,
+    final withSunblind=use_sunbling,
+    final Blinding=ratioSunblind,
+    final Limit=solIrrThreshold,
     ISOrientation=1,
     WallType=Type_OW,
     wall_length=sqrt(VerticalWall_Area),
@@ -312,6 +331,9 @@ model Attic_Ro2Lf5
     door_width=0,
     windowarea=windowarea_RO1,
     WindowType=Type_Win,
+    final withSunblind=use_sunbling,
+    final Blinding=ratioSunblind,
+    final Limit=solIrrThreshold,
     ISOrientation=1,
     WallType=Type_OW,
     wall_length=sqrt(VerticalWall_Area),
