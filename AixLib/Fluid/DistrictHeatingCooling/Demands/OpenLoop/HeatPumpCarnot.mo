@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop;
+within AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop;
 model HeatPumpCarnot "Substation with a heat pump carnot model"
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(
     final m_flow(start=0),
@@ -75,12 +75,12 @@ public
       Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=0,
-        origin={-50,50})));
-  Modelica.Blocks.Sources.Constant temperatureReturn(k=TReturn)
-    "Temperature of return line in °C"
+        origin={-40,-10})));
+  Modelica.Blocks.Sources.Constant temperatureDropHP(k=3)
+    "Temperature drop over heat pump in K"
     annotation (Placement(transformation(extent={{10,10},{-10,-10}},
         rotation=180,
-        origin={-90,56})));
+        origin={-90,50})));
   Modelica.Blocks.Math.Gain gain(k=cp_default)
     annotation (Placement(transformation(extent={{-32,40},{-12,60}})));
   Modelica.Blocks.Math.Division heat2massFlow
@@ -106,7 +106,9 @@ public
     redeclare package Medium = Medium,
     use_m_flow_in=true,
     nPorts=1,
-    T=TReturn) "Source sending prescribed flow back to the network" annotation (
+    T=TReturn,
+    use_T_in=true)
+               "Source sending prescribed flow back to the network" annotation (
      Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=0,
@@ -169,12 +171,6 @@ equation
           {-88,-10}},           color={0,127,255}));
   connect(port_b, senT_return.port_b) annotation (Line(points={{100,0},{90,0},{90,
           -10}},          color={0,127,255}));
-  connect(temperatureReturn.y, deltaT.u2)
-    annotation (Line(points={{-79,56},{-62,56}}, color={0,0,127}));
-  connect(senT_supply.T, deltaT.u1)
-    annotation (Line(points={{-77,-20},{-77,44},{-62,44}}, color={0,0,127}));
-  connect(deltaT.y, gain.u)
-    annotation (Line(points={{-39,50},{-34,50}}, color={0,0,127}));
   connect(gain.y, heat2massFlow.u2)
     annotation (Line(points={{-11,50},{18,50},{18,44}}, color={0,0,127}));
   connect(source.ports[1], senT_return.port_a)
@@ -213,6 +209,14 @@ equation
           -62},{-12,-62},{-12,-80},{0,-80}}, color={0,127,255}));
   connect(Q_flow_input, mFlowBuilding.u) annotation (Line(points={{-108,80},{
           -40,80},{-40,94},{60,94},{60,62}}, color={0,0,127}));
+  connect(temperatureDropHP.y, gain.u)
+    annotation (Line(points={{-79,50},{-34,50}}, color={0,0,127}));
+  connect(senT_supply.T, deltaT.u1) annotation (Line(points={{-77,-20},{-58,-20},
+          {-58,-16},{-52,-16}}, color={0,0,127}));
+  connect(temperatureDropHP.y, deltaT.u2) annotation (Line(points={{-79,50},{
+          -58,50},{-58,-4},{-52,-4}}, color={0,0,127}));
+  connect(deltaT.y, source.T_in) annotation (Line(points={{-29,-10},{-12,-10},{
+          -12,-28},{40,-28},{40,-44},{58,-44}}, color={0,0,127}));
   annotation ( Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}}),
                                      graphics={
