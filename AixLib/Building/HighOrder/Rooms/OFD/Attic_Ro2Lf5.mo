@@ -157,6 +157,9 @@ model Attic_Ro2Lf5
   parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0) = 350
     "Threshold for global solar irradiation on this surface to enable sunblinding"
     annotation(Dialog(group = "Sunblind"));
+  parameter Modelica.SIunits.Temperature TOutAirLimit = 273.15 + 22
+    "Temperature at which sunblind closes (see also Imax)"
+    annotation(Dialog(group = "Sunblind"));
   // Infiltration rate
   AixLib.Building.Components.Walls.Wall roof1(
     withDoor=false,
@@ -167,7 +170,7 @@ model Attic_Ro2Lf5
     withWindow=withWindow1,
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
-    final Limit=solIrrThreshold,
+    final LimitSolIrr=solIrrThreshold,
     windowarea=windowarea_RO1,
     wall_length=length,
     wall_height=roof_width1,
@@ -185,7 +188,7 @@ model Attic_Ro2Lf5
     withWindow=false,
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
-    final Limit=solIrrThreshold,
+    final LimitSolIrr=solIrrThreshold,
     ISOrientation=2,
     outside=false,
     withDoor=false) annotation (Placement(transformation(
@@ -202,7 +205,7 @@ model Attic_Ro2Lf5
     withWindow=false,
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
-    final Limit=solIrrThreshold,
+    final LimitSolIrr=solIrrThreshold,
     ISOrientation=2,
     outside=false,
     withDoor=false) annotation (Placement(transformation(
@@ -235,7 +238,7 @@ model Attic_Ro2Lf5
     withWindow=withWindow2,
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
-    final Limit=solIrrThreshold,
+    final LimitSolIrr=solIrrThreshold,
     windowarea=windowarea_RO2,
     wall_length=length,
     WallType=Type_RO,
@@ -260,7 +263,7 @@ model Attic_Ro2Lf5
     withWindow=false,
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
-    final Limit=solIrrThreshold,
+    final LimitSolIrr=solIrrThreshold,
     ISOrientation=2,
     outside=false,
     withDoor=false) annotation (Placement(transformation(
@@ -275,7 +278,7 @@ model Attic_Ro2Lf5
     withWindow=false,
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
-    final Limit=solIrrThreshold,
+    final LimitSolIrr=solIrrThreshold,
     ISOrientation=2,
     outside=false,
     withDoor=false) annotation (Placement(transformation(
@@ -290,7 +293,7 @@ model Attic_Ro2Lf5
     withWindow=false,
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
-    final Limit=solIrrThreshold,
+    final LimitSolIrr=solIrrThreshold,
     ISOrientation=2,
     outside=false,
     withDoor=false) annotation (Placement(transformation(
@@ -329,7 +332,7 @@ model Attic_Ro2Lf5
     WindowType=Type_Win,
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
-    final Limit=solIrrThreshold,
+    final LimitSolIrr=solIrrThreshold,
     ISOrientation=1,
     WallType=Type_OW,
     wall_length=sqrt(VerticalWall_Area),
@@ -348,7 +351,7 @@ model Attic_Ro2Lf5
     WindowType=Type_Win,
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
-    final Limit=solIrrThreshold,
+    final LimitSolIrr=solIrrThreshold,
     ISOrientation=1,
     WallType=Type_OW,
     wall_length=sqrt(VerticalWall_Area),

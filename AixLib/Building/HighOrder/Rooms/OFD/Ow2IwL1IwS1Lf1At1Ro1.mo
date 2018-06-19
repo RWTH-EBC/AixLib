@@ -112,6 +112,9 @@ model Ow2IwL1IwS1Lf1At1Ro1
   parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0) = 350
     "Threshold for global solar irradiation on this surface to enable sunblinding"
     annotation(Dialog(group = "Sunblind"));
+  parameter Modelica.SIunits.Temperature TOutAirLimit = 273.15 + 22
+    "Temperature at which sunblind closes (see also Imax)"
+    annotation(Dialog(group = "Sunblind"));
   // Dynamic Ventilation
   parameter Boolean withDynamicVentilation=false "Dynamic ventilation"
     annotation (Dialog(group="Dynamic ventilation", descriptionLabel=true),
@@ -143,7 +146,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
     withWindow=false,
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
-    final Limit=solIrrThreshold,
+    final LimitSolIrr=solIrrThreshold,
     windowarea=0,
     withDoor=false,
     door_height=0,
@@ -164,7 +167,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
     WindowType=Type_Win,
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
-    final Limit=solIrrThreshold,
+    final LimitSolIrr=solIrrThreshold,
     WallType=Type_OW,
     ISOrientation=1,
     U_door=U_door_OD2,
@@ -181,7 +184,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
     withWindow=false,
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
-    final Limit=solIrrThreshold,
+    final LimitSolIrr=solIrrThreshold,
     withDoor=false) annotation (Placement(transformation(
         origin={61,4.00001},
         extent={{-4.99999,-30},{5,30}},
@@ -196,7 +199,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
     withWindow=false,
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
-    final Limit=solIrrThreshold,
+    final LimitSolIrr=solIrrThreshold,
     withDoor=false) annotation (Placement(transformation(
         origin={32,-59},
         extent={{-4.99998,-28},{4.99998,28}},
@@ -212,7 +215,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
     withWindow=false,
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
-    final Limit=solIrrThreshold,
+    final LimitSolIrr=solIrrThreshold,
     withDoor=false,
     ISOrientation=3) annotation (Placement(transformation(
         origin={22,60},
@@ -227,7 +230,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
     withWindow=false,
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
-    final Limit=solIrrThreshold,
+    final LimitSolIrr=solIrrThreshold,
     withDoor=false,
     ISOrientation=2) if withFloorHeating == false annotation (Placement(
         transformation(
@@ -275,7 +278,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
     withWindow=withWindow3,
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
-    final Limit=solIrrThreshold,
+    final LimitSolIrr=solIrrThreshold,
     windowarea=windowarea_RO,
     WallType=Type_RO,
     WindowType=Type_Win) annotation (Placement(transformation(
