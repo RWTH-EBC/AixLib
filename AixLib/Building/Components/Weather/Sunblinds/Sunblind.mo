@@ -2,6 +2,12 @@
 model Sunblind "Reduces beam at Imax and TOutAirLimit"
   extends BaseClasses.PartialSunblind;
 
+  parameter Modelica.SIunits.Temperature TOutAirLimit = 293.15
+    "Temperature at which sunblind closes (see also Imax)";
+
+  Modelica.Blocks.Interfaces.RealInput TOutAir(unit="K", displayUnit="degC")
+    "Outdoor air (dry bulb) temperature"
+    annotation (Placement(transformation(extent={{-132,-56},{-100,-24}})));
 equation
    for i in 1:n loop
      if (Rad_In[i].I>Imax and TOutAir > TOutAirLimit) then

@@ -7,8 +7,6 @@ partial model PartialSunblind "A Base Class for Sunblindes"
     "Total energy transmittances if sunblind is closed";
   parameter Modelica.SIunits.RadiantEnergyFluenceRate Imax=100
     "Intensity at which the sunblind closes (see also TOutAirLimit)";
-  parameter Modelica.SIunits.Temperature TOutAirLimit = 293.15
-    "Temperature at which sunblind closes (see also Imax)";
 
   Utilities.Interfaces.SolarRad_in
                                  Rad_In[n]
@@ -24,10 +22,6 @@ partial model PartialSunblind "A Base Class for Sunblindes"
   Utilities.Interfaces.SolarRad_out
                                   Rad_Out[n]
     annotation (Placement(transformation(extent={{80,0},{100,20}})));
-
-  Modelica.Blocks.Interfaces.RealInput TOutAir(unit="K", displayUnit="degC")
-    "Outdoor air (dry bulb) temperature"
-    annotation (Placement(transformation(extent={{-132,-56},{-100,-24}})));
 
 initial equation
   assert(n==size(gsunblind,1),"gsunblind has to have n elements");
