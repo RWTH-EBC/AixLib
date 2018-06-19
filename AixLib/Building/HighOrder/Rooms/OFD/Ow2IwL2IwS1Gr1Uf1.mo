@@ -161,6 +161,7 @@ model Ow2IwL2IwS1Gr1Uf1
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     U_door=U_door_OD1,
     eps_door=eps_door_OD1)
     annotation (Placement(transformation(extent={{-64,-14},{-54,44}})));
@@ -180,6 +181,7 @@ model Ow2IwL2IwS1Gr1Uf1
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     U_door=U_door_OD2,
     eps_door=eps_door_OD2) annotation (Placement(transformation(
         origin={23,59},
@@ -195,6 +197,7 @@ model Ow2IwL2IwS1Gr1Uf1
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false) annotation (Placement(transformation(
         origin={61,24},
         extent={{-2.99999,-16},{2.99999,16}},
@@ -209,6 +212,7 @@ model Ow2IwL2IwS1Gr1Uf1
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false) annotation (Placement(transformation(
         origin={22,-60},
         extent={{-4.00002,-26},{4.00001,26}},
@@ -225,6 +229,7 @@ model Ow2IwL2IwS1Gr1Uf1
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false,
     ISOrientation=3) annotation (Placement(transformation(
         origin={-30,61},
@@ -240,6 +245,7 @@ model Ow2IwL2IwS1Gr1Uf1
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false,
     ISOrientation=2) if withFloorHeating == false annotation (Placement(
         transformation(
@@ -289,6 +295,7 @@ model Ow2IwL2IwS1Gr1Uf1
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false) annotation (Placement(transformation(
         origin={61,-15},
         extent={{-3,-15},{3,15}},

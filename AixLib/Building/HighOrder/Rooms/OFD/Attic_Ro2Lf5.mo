@@ -171,6 +171,7 @@ model Attic_Ro2Lf5
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     windowarea=windowarea_RO1,
     wall_length=length,
     wall_height=roof_width1,
@@ -189,6 +190,7 @@ model Attic_Ro2Lf5
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     ISOrientation=2,
     outside=false,
     withDoor=false) annotation (Placement(transformation(
@@ -206,6 +208,7 @@ model Attic_Ro2Lf5
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     ISOrientation=2,
     outside=false,
     withDoor=false) annotation (Placement(transformation(
@@ -239,6 +242,7 @@ model Attic_Ro2Lf5
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     windowarea=windowarea_RO2,
     wall_length=length,
     WallType=Type_RO,
@@ -264,6 +268,7 @@ model Attic_Ro2Lf5
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     ISOrientation=2,
     outside=false,
     withDoor=false) annotation (Placement(transformation(
@@ -279,6 +284,7 @@ model Attic_Ro2Lf5
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     ISOrientation=2,
     outside=false,
     withDoor=false) annotation (Placement(transformation(
@@ -294,6 +300,7 @@ model Attic_Ro2Lf5
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     ISOrientation=2,
     outside=false,
     withDoor=false) annotation (Placement(transformation(
@@ -333,6 +340,7 @@ model Attic_Ro2Lf5
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     ISOrientation=1,
     WallType=Type_OW,
     wall_length=sqrt(VerticalWall_Area),
@@ -352,6 +360,7 @@ model Attic_Ro2Lf5
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     ISOrientation=1,
     WallType=Type_OW,
     wall_length=sqrt(VerticalWall_Area),

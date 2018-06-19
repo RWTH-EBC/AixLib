@@ -147,6 +147,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     windowarea=0,
     withDoor=false,
     door_height=0,
@@ -168,6 +169,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     WallType=Type_OW,
     ISOrientation=1,
     U_door=U_door_OD2,
@@ -185,6 +187,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false) annotation (Placement(transformation(
         origin={61,4.00001},
         extent={{-4.99999,-30},{5,30}},
@@ -200,6 +203,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false) annotation (Placement(transformation(
         origin={32,-59},
         extent={{-4.99998,-28},{4.99998,28}},
@@ -216,6 +220,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false,
     ISOrientation=3) annotation (Placement(transformation(
         origin={22,60},
@@ -231,6 +236,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false,
     ISOrientation=2) if withFloorHeating == false annotation (Placement(
         transformation(
@@ -279,6 +285,7 @@ model Ow2IwL1IwS1Lf1At1Ro1
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     windowarea=windowarea_RO,
     WallType=Type_RO,
     WindowType=Type_Win) annotation (Placement(transformation(

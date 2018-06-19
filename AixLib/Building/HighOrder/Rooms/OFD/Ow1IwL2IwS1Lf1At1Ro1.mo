@@ -128,6 +128,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     windowarea=0,
     withDoor=false,
     door_height=0,
@@ -145,6 +146,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false) annotation (Placement(transformation(
         origin={-14,58},
         extent={{-3.99997,-22},{3.99999,22}},
@@ -159,6 +161,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false) annotation (Placement(transformation(
         origin={61,19},
         extent={{-3,-15},{3,15}},
@@ -174,6 +177,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false) annotation (Placement(transformation(
         origin={20,-60},
         extent={{-4,-24},{4,24}},
@@ -190,6 +194,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false,
     ISOrientation=3) annotation (Placement(transformation(
         origin={28,60},
@@ -205,6 +210,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false,
     ISOrientation=2) if withFloorHeating == false annotation (Placement(
         transformation(
@@ -249,6 +255,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     ISOrientation=1) annotation (Placement(transformation(
         origin={58,59},
         extent={{-2.99997,-16},{2.99999,16}},
@@ -268,6 +275,7 @@ model Ow1IwL2IwS1Lf1At1Ro1
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false) annotation (Placement(transformation(
         origin={61,-20},
         extent={{-2.99998,-16},{2.99998,16}},

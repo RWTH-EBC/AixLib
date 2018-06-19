@@ -158,6 +158,7 @@ model Ow2IwL1IwS1Gr1Uf1
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     U_door=U_door_OD1,
     eps_door=eps_door_OD1)
     annotation (Placement(transformation(extent={{-66,-22},{-56,42}})));
@@ -177,6 +178,7 @@ model Ow2IwL1IwS1Gr1Uf1
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     U_door=U_door_OD2,
     eps_door=eps_door_OD2) annotation (Placement(transformation(
         origin={19,57},
@@ -191,6 +193,7 @@ model Ow2IwL1IwS1Gr1Uf1
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false,
     WallType=Type_IWload) annotation (Placement(transformation(
         origin={58,5},
@@ -206,6 +209,7 @@ model Ow2IwL1IwS1Gr1Uf1
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false) annotation (Placement(transformation(
         origin={16,-60},
         extent={{-4,-24},{4,24}},
@@ -222,6 +226,7 @@ model Ow2IwL1IwS1Gr1Uf1
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false,
     ISOrientation=3) annotation (Placement(transformation(
         origin={-30,59},
@@ -236,6 +241,7 @@ model Ow2IwL1IwS1Gr1Uf1
     final withSunblind=use_sunbling,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     outside=false,
     withDoor=false,
     ISOrientation=2) if withFloorHeating == false annotation (Placement(
