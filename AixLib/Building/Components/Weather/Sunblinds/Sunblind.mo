@@ -1,10 +1,10 @@
-within AixLib.Building.Components.Weather.Sunblinds;
-model Sunblind "Reduces beam at Imax"
+﻿within AixLib.Building.Components.Weather.Sunblinds;
+model Sunblind "Reduces beam at Imax and TOutAirLimit"
   extends BaseClasses.PartialSunblind;
 
 equation
    for i in 1:n loop
-     if (Rad_In[i].I>Imax) then
+     if (Rad_In[i].I>Imax and TOutAir > TOutAirLimit) then
        Rad_Out[i].I=Rad_In[i].I*gsunblind[i];
        Rad_Out[i].I_dir=Rad_In[i].I_dir*gsunblind[i];
        Rad_Out[i].I_diff=Rad_In[i].I_diff*gsunblind[i];
