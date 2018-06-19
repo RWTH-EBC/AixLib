@@ -7,7 +7,7 @@ partial model PartialSunblind "A Base Class for Sunblindes"
     "Total energy transmittances if sunblind is closed";
   parameter Modelica.SIunits.RadiantEnergyFluenceRate Imax=100
     "Intensity at which the sunblind closes (see also TOutAirLimit)";
-  parameter Modelica.SIunits.Temperature TOutAirLimit = 273.15 + 22
+  parameter Modelica.SIunits.Temperature TOutAirLimit = 293.15
     "Temperature at which sunblind closes (see also Imax)";
 
   Utilities.Interfaces.SolarRad_in

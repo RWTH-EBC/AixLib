@@ -50,7 +50,7 @@ model Wall
     "Minimum specific total solar radiation in W/m2 for blinding becoming active (see also TOutAirLimit)"
     annotation(Dialog(tab="Window",   enable=withWindow and outside and
           withSunblind));
-  parameter Modelica.SIunits.Temperature TOutAirLimit = 273.15 + 22
+  parameter Modelica.SIunits.Temperature TOutAirLimit = 293.15
     "Temperature at which sunblind closes (see also LimitSolIrr)"
     annotation(Dialog(tab = "Window", enable = withWindow and outside and withSunblind));
   // door parameters

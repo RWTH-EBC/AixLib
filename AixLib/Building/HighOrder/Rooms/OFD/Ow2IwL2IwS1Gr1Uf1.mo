@@ -111,18 +111,18 @@ model Ow2IwL2IwS1Gr1Uf1
       descriptionLabel=true,
       enable=withDoor2));
   // Sunblind
-  parameter Boolean use_sunbling = false
+  parameter Boolean use_sunblind = false
     "Will sunblind become active automatically?"
     annotation(Dialog(group = "Sunblind"));
   parameter Real ratioSunblind(min=0.0, max=1.0) = 0.8
     "Sunblind factor"
-    annotation(Dialog(group = "Sunblind"));
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
   parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0) = 350
     "Threshold for global solar irradiation on this surface to enable sunblinding (see also TOutAirLimit)"
-    annotation(Dialog(group = "Sunblind"));
-  parameter Modelica.SIunits.Temperature TOutAirLimit = 273.15 + 22
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+  parameter Modelica.SIunits.Temperature TOutAirLimit = 293.15
     "Temperature at which sunblind closes (see also solIrrThreshold)"
-    annotation(Dialog(group = "Sunblind"));
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
   // Dynamic Ventilation
   parameter Boolean withDynamicVentilation=false "Dynamic ventilation"
     annotation (Dialog(group="Dynamic ventilation", descriptionLabel=true),
@@ -158,7 +158,7 @@ model Ow2IwL2IwS1Gr1Uf1
     withDoor=withDoor1,
     WallType=Type_OW,
     WindowType=Type_Win,
-    final withSunblind=use_sunbling,
+    final withSunblind=use_sunblind,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
@@ -178,7 +178,7 @@ model Ow2IwL2IwS1Gr1Uf1
     withDoor=withDoor2,
     WallType=Type_OW,
     WindowType=Type_Win,
-    final withSunblind=use_sunbling,
+    final withSunblind=use_sunblind,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
@@ -194,7 +194,7 @@ model Ow2IwL2IwS1Gr1Uf1
     wall_length=room_length - room_lengthb,
     wall_height=room_height,
     withWindow=false,
-    final withSunblind=use_sunbling,
+    final withSunblind=use_sunblind,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
@@ -209,7 +209,7 @@ model Ow2IwL2IwS1Gr1Uf1
     wall_length=room_width,
     wall_height=room_height,
     withWindow=false,
-    final withSunblind=use_sunbling,
+    final withSunblind=use_sunblind,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
@@ -226,7 +226,7 @@ model Ow2IwL2IwS1Gr1Uf1
     wall_length=room_length,
     wall_height=room_width,
     withWindow=false,
-    final withSunblind=use_sunbling,
+    final withSunblind=use_sunblind,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
@@ -242,7 +242,7 @@ model Ow2IwL2IwS1Gr1Uf1
     wall_length=room_length,
     wall_height=room_width,
     withWindow=false,
-    final withSunblind=use_sunbling,
+    final withSunblind=use_sunblind,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,
@@ -292,7 +292,7 @@ model Ow2IwL2IwS1Gr1Uf1
     wall_length=room_lengthb,
     wall_height=room_height,
     withWindow=false,
-    final withSunblind=use_sunbling,
+    final withSunblind=use_sunblind,
     final Blinding=ratioSunblind,
     final LimitSolIrr=solIrrThreshold,
     final TOutAirLimit=TOutAirLimit,

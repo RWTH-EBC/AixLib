@@ -27,15 +27,18 @@ model WholeHouseBuildingEnvelope
   parameter Real AirExchangeAttic=0 "Air exchange attic in 1/h "
     annotation (Dialog(group="Air Exchange Attic", descriptionLabel=true));
   ///////// Sunblind
-  parameter Boolean use_sunbling = false
+  parameter Boolean use_sunblind = false
     "Will sunblind become active automatically?"
     annotation(Dialog(group = "Sunblind"));
   parameter Real ratioSunblind(min=0.0, max=1.0) = 0.8
     "Sunblind factor"
-    annotation(Dialog(group = "Sunblind"));
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
   parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0) = 350
-    "Threshold for global solar irradiation on this surface to enable sunblinding"
-    annotation(Dialog(group = "Sunblind"));
+    "Threshold for global solar irradiation on this surface to enable sunblinding (see also TOutAirLimit)"
+    annotation(Dialog(group = "Sunblind, enable=use_sunblind"));
+  parameter Modelica.SIunits.Temperature TOutAirLimit = 293.15
+    "Temperature at which sunblind closes (see also solIrrThreshold)"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
   ///////// Dynamic Ventilation
   parameter Boolean withDynamicVentilation=false "Dynamic ventilation"
     annotation (Dialog(group="Dynamic ventilation", descriptionLabel=true),
@@ -57,9 +60,10 @@ model WholeHouseBuildingEnvelope
   AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.GroundFloorBuildingEnvelope groundFloor_Building(
     TMC=TMC,
     TIR=TIR,
-    final use_sunbling=use_sunbling,
+    final use_sunblind=use_sunblind,
     final ratioSunblind=ratioSunblind,
     final solIrrThreshold=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDynamicVentilation=withDynamicVentilation,
     HeatingLimit=HeatingLimit,
     Max_VR=Max_VR,
@@ -70,9 +74,10 @@ model WholeHouseBuildingEnvelope
     upperFloor_Building(
     TMC=TMC,
     TIR=TIR,
-    final use_sunbling=use_sunbling,
+    final use_sunblind=use_sunblind,
     final ratioSunblind=ratioSunblind,
     final solIrrThreshold=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     HeatingLimit=HeatingLimit,
     Max_VR=Max_VR,
     Diff_toTempset=Diff_toTempset,
@@ -92,9 +97,10 @@ model WholeHouseBuildingEnvelope
     width=4.75,
     TMC=TMC,
     TIR=TIR,
-    final use_sunbling=use_sunbling,
+    final use_sunblind=use_sunblind,
     final ratioSunblind=ratioSunblind,
     final solIrrThreshold=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     room1_width=2.28,
     room2_width=2.28,
     room3_width=2.28,
