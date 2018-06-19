@@ -155,10 +155,10 @@ model Attic_Ro2Lf5
     "Sunblind factor"
     annotation(Dialog(group = "Sunblind"));
   parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0) = 350
-    "Threshold for global solar irradiation on this surface to enable sunblinding"
+    "Threshold for global solar irradiation on this surface to enable sunblinding (see also TOutAirLimit)"
     annotation(Dialog(group = "Sunblind"));
   parameter Modelica.SIunits.Temperature TOutAirLimit = 273.15 + 22
-    "Temperature at which sunblind closes (see also Imax)"
+    "Temperature at which sunblind closes (see also solIrrThreshold)"
     annotation(Dialog(group = "Sunblind"));
   // Infiltration rate
   AixLib.Building.Components.Walls.Wall roof1(
