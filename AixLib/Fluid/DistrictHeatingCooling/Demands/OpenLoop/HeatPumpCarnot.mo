@@ -60,13 +60,13 @@ protected
 public
   Modelica.Blocks.Interfaces.RealInput Q_flow_input "Prescribed heat flow"
     annotation (Placement(transformation(extent={{-128,60},{-88,100}})));
-  Sensors.TemperatureTwoPort              senT_supply(redeclare package Medium =
-        Medium, m_flow_nominal=m_flow_nominal) "Supply flow temperature sensor"
+  Sensors.TemperatureTwoPort              senT_supply(redeclare package Medium
+      = Medium, m_flow_nominal=m_flow_nominal) "Supply flow temperature sensor"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-88,-20})));
-  Sensors.TemperatureTwoPort              senT_return(redeclare package Medium =
-        Medium, m_flow_nominal=m_flow_nominal) "Return flow temperature sensor"
+  Sensors.TemperatureTwoPort              senT_return(redeclare package Medium
+      = Medium, m_flow_nominal=m_flow_nominal) "Return flow temperature sensor"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
         origin={90,-20})));
@@ -163,6 +163,8 @@ public
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={42,-76})));
+  Modelica.Blocks.Math.Gain gainInput(k=1) "Optional gain on the input"
+    annotation (Placement(transformation(extent={{-60,70},{-40,90}})));
 equation
 
   dpOut = dp;
@@ -186,8 +188,6 @@ equation
           {-88,-50},{-50,-50}}, color={0,127,255}));
   connect(sink.ports[1], heaPum.port_b2)
     annotation (Line(points={{0,-50},{-30,-50}}, color={0,127,255}));
-  connect(Q_flow_input, Q_con.u1)
-    annotation (Line(points={{-108,80},{-2,80}}, color={0,0,127}));
   connect(Q_con.y, heat2massFlow.u1)
     annotation (Line(points={{21,74},{30,74},{30,44}}, color={0,0,127}));
   connect(heaPum.P, Q_con.u2) annotation (Line(points={{-51,-56},{-70,-56},{-70,
@@ -207,8 +207,6 @@ equation
           -80},{-60,-80},{-60,-62},{-50,-62}}, color={0,127,255}));
   connect(heaPum.port_a1, sourceHeating.ports[1]) annotation (Line(points={{-30,
           -62},{-12,-62},{-12,-80},{0,-80}}, color={0,127,255}));
-  connect(Q_flow_input, mFlowBuilding.u) annotation (Line(points={{-108,80},{
-          -40,80},{-40,94},{60,94},{60,62}}, color={0,0,127}));
   connect(temperatureDropHP.y, gain.u)
     annotation (Line(points={{-79,50},{-34,50}}, color={0,0,127}));
   connect(senT_supply.T, deltaT.u1) annotation (Line(points={{-77,-20},{-58,-20},
@@ -217,6 +215,12 @@ equation
           -58,50},{-58,-4},{-52,-4}}, color={0,0,127}));
   connect(deltaT.y, source.T_in) annotation (Line(points={{-29,-10},{-12,-10},{
           -12,-28},{40,-28},{40,-44},{58,-44}}, color={0,0,127}));
+  connect(Q_flow_input, gainInput.u)
+    annotation (Line(points={{-108,80},{-62,80}}, color={0,0,127}));
+  connect(Q_con.u1, gainInput.y)
+    annotation (Line(points={{-2,80},{-39,80}}, color={0,0,127}));
+  connect(gainInput.y, mFlowBuilding.u) annotation (Line(points={{-39,80},{-20,
+          80},{-20,94},{60,94},{60,62}}, color={0,0,127}));
   annotation ( Icon(coordinateSystem(preserveAspectRatio=false,
           extent={{-100,-100},{100,100}}),
                                      graphics={
