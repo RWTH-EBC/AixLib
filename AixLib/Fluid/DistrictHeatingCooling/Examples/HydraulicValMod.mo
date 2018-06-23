@@ -14,32 +14,6 @@ model HydraulicValMod
   parameter Modelica.SIunits.Pressure pressureReference3 = 200612.4
     "Reference result for pressure at demand node B3";
 
-  Pipes.FlowResistance          pipe2(
-    redeclare package Medium = Medium,
-    m_flow_nominal=29.8378,
-    length=100,
-    diameter=0.15)          "Pipe 2"
-    annotation (Placement(transformation(extent={{-20,20},{0,40}})));
-  Pipes.FlowResistance          pipe1(
-    redeclare package Medium = Medium,
-    m_flow_nominal=59.7352,
-    length=355,
-    diameter=0.2)           "Pipe 1" annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={-40,52})));
-  Pipes.FlowResistance          pipe4(
-    redeclare package Medium = Medium,
-    m_flow_nominal=1.7144,
-    length=45,
-    diameter=0.11)                            "Pipe 4"
-    annotation (Placement(transformation(extent={{0,-38},{20,-18}})));
-  Pipes.FlowResistance          pipe5(
-    redeclare package Medium = Medium,
-    m_flow_nominal=33.2923,
-    length=175,
-    diameter=0.15)                              "Pipe 5"
-    annotation (Placement(transformation(extent={{50,-70},{70,-50}})));
   Supplies.NoReturn.IdealSource
                       S1(
     redeclare package Medium = Medium, p_supply=298900)
@@ -85,42 +59,6 @@ model HydraulicValMod
     "Relative deviation of pressure at demand node B3"
     annotation (Placement(transformation(extent={{100,10},{120,30}})));
 
-  Pipes.FlowResistance               pipe3(
-    redeclare package Medium = Medium,
-    m_flow_nominal=12.4528,
-    length=70,
-    diameter=0.1)
-               "Pipe 3" annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={40,4})));
-  Pipes.FlowResistance          pipe6(
-    redeclare package Medium = Medium,
-    length=15,
-    diameter=0.15,
-    m_flow_nominal=28.175)
-                   "Pipe 6"          annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=180,
-        origin={-60,30})));
-  Pipes.FlowResistance          pipe7(
-    redeclare package Medium = Medium,
-    length=15,
-    diameter=0.15,
-    m_flow_nominal=42.213)
-                   "Pipe 7"          annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={20,50})));
-  Pipes.FlowResistance          pipe8(
-    redeclare package Medium = Medium,
-    length=15,
-    diameter=0.15,
-    m_flow_nominal=22.6)
-                   "Pipe 8"          annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=180,
-        origin={22,-60})));
 equation
 
   deviationPressure1 = (B1.port_a.p - pressureReference1)/pressureReference1;
