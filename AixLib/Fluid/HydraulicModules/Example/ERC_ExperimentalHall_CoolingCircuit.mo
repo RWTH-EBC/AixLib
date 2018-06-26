@@ -1,4 +1,4 @@
-within AixLib.Fluid.HydraulicModules.Example;
+﻿within AixLib.Fluid.HydraulicModules.Example;
 model ERC_ExperimentalHall_CoolingCircuit
   "Cooling circuit of the new ERC experimental hall"
   extends Modelica.Icons.Example;
@@ -84,13 +84,13 @@ model ERC_ExperimentalHall_CoolingCircuit
     pipe2(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
     T_start=293.15)
     annotation (Placement(transformation(extent={{60,34},{90,64}})));
-  Controls.HydraulicModules.Ctr_admix ctr_admix(
+  Controls.HydraulicModules.CtrAdmix ctr_admix(
     Td=0,
     Ti=180,
     k=0.12) annotation (Placement(transformation(extent={{-134,8},{-106,36}})));
-  Controls.HydraulicModules.Ctr_unmixed_simple ctr_unmixed_simple
+  Controls.HydraulicModules.CtrUnmixed ctr_unmixed_simple
     annotation (Placement(transformation(extent={{-134,78},{-108,104}})));
-  Controls.HydraulicModules.Ctr_unmixed_simple ctr_unmixed_simple1
+  Controls.HydraulicModules.CtrUnmixed ctr_unmixed_simple1
     annotation (Placement(transformation(extent={{-134,52},{-108,78}})));
   Sources.Boundary_pT              bou1(
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,

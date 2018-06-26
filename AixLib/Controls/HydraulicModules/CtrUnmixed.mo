@@ -1,5 +1,5 @@
 ﻿within AixLib.Controls.HydraulicModules;
-block Ctr_unmixed_simple "controller for unmixed circuit"
+block CtrUnmixed "controller for unmixed circuit"
   import Zugabe;
   //Boolean choice;
 
@@ -57,4 +57,4 @@ equation
 </html>", info="<html>
 <p>Simple controller for unmixed circuit.</p>
 </html>"));
-end Ctr_unmixed_simple;
+end CtrUnmixed;

@@ -1,5 +1,5 @@
 ﻿within AixLib.Controls.HydraulicModules;
-block Ctr_admix "controller for mixed cooling circuit "
+block CtrAdmix "controller for mixed cooling circuit "
   //Boolean choice;
 
   parameter Modelica.SIunits.Temperature TflowSet = 289.15 "Flow temperature set point of consumer";
@@ -94,4 +94,4 @@ equation
 </html>", info="<html>
 <p>Simple controller for admix circuit.</p>
 </html>"));
-end Ctr_admix;
+end CtrAdmix;
