@@ -1,9 +1,8 @@
-within AixLib.Fluid.HydraulicModules;
+﻿within AixLib.Fluid.HydraulicModules;
 model Admix "Admix circuit with three way valve and rpm controlled pump"
   extends AixLib.Fluid.Interfaces.PartialFourPort(redeclare package Medium1 =
         Medium, redeclare package Medium2 = Medium);
-  replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater
-    constrainedby Modelica.Media.Interfaces.PartialMedium
+  replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium in the system" annotation (choicesAllMatching=true);
 
   inner Modelica.Fluid.System system;
@@ -286,7 +285,6 @@ equation
 <li>February 6, 2016, by Peter Matthes:<br/>implemented bus-connector-C_H_HRMI_01 model for testing (extends from model with standard data ports)</li>
 </ul>
 </html>"),
-    __Dymola_Commands,
     experiment(StopTime=86400),
     Icon(coordinateSystem(extent={{-100,-80},{100,100}}),
          graphics={

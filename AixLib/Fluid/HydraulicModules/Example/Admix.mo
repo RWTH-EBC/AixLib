@@ -1,4 +1,4 @@
-within AixLib.Fluid.HydraulicModules.Example;
+﻿within AixLib.Fluid.HydraulicModules.Example;
 model Admix "Test for admix circuit"
   import AixLib;
   extends Modelica.Icons.Example;
@@ -13,9 +13,9 @@ model Admix "Test for admix circuit"
         extent={{-28,-25},{28,25}},
         rotation=90,
         origin={17,20})));
-  replaceable package Medium =
+  package Medium =
       Modelica.Media.Water.ConstantPropertyLiquidWater
-    annotation (__Dymola_choicesAllMatching=true);
+    annotation (choicesAllMatching=true);
   Modelica.Fluid.Sources.Boundary_pT boundary(
     nPorts=1,
     redeclare package Medium =
@@ -87,7 +87,6 @@ equation
          coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=800),
-    __Dymola_Commands,
     Documentation(revisions="<html>
 <ul>
 <li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib.</li>

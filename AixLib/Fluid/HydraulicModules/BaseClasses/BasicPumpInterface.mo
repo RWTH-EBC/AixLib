@@ -1,7 +1,7 @@
-within AixLib.Fluid.HydraulicModules.BaseClasses;
+﻿within AixLib.Fluid.HydraulicModules.BaseClasses;
 partial model BasicPumpInterface "Pump interface for different pump types"
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
-    annotation (__Dymola_choicesAllMatching=true);
+    annotation (choicesAllMatching=true);
 
   Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
         Medium)

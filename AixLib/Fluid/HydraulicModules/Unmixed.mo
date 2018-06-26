@@ -1,10 +1,8 @@
-within AixLib.Fluid.HydraulicModules;
+﻿within AixLib.Fluid.HydraulicModules;
 model Unmixed "Unmixed circuit with pump"
   extends AixLib.Fluid.Interfaces.PartialFourPort(redeclare package Medium1 =
         Medium, redeclare package Medium2 = Medium);
-  replaceable package Medium =
-      Modelica.Media.Water.ConstantPropertyLiquidWater
-    constrainedby Modelica.Media.Interfaces.PartialMedium
+  replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium in the system" annotation (choicesAllMatching=true);
   parameter Modelica.SIunits.Time tau=15
     "Time constant for PT1 behavior of temperature sensors" annotation(Dialog(tab="Advanced"));

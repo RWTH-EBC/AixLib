@@ -1,4 +1,4 @@
-within AixLib.Fluid.HydraulicModules.Example;
+﻿within AixLib.Fluid.HydraulicModules.Example;
 model ThrottlePump "Test for throttle circuit"
   import AixLib;
   extends Modelica.Icons.Example;
@@ -14,9 +14,9 @@ model ThrottlePump "Test for throttle circuit"
         extent={{-24,-24},{24,24}},
         rotation=90,
         origin={0,0})));
-  replaceable package Medium =
+  package Medium =
       Modelica.Media.Water.ConstantPropertyLiquidWater
-    annotation (__Dymola_choicesAllMatching=true);
+    annotation (choicesAllMatching=true);
   Modelica.Fluid.Sources.Boundary_pT boundary(
     redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
@@ -86,7 +86,6 @@ equation
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}})),
     experiment(StopTime=600),
-    __Dymola_Commands,
     Documentation(revisions="<html>
 <ul>
 <li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib.</li>
