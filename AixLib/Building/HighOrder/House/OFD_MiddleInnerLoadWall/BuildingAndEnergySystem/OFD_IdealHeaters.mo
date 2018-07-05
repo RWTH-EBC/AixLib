@@ -1,6 +1,4 @@
 within AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingAndEnergySystem;
-
-
 model OFD_IdealHeaters
   parameter Real ratioRadHeat = 0.3
     "ratio of radiative heat from total heat generated";
