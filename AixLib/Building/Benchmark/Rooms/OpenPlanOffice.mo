@@ -177,11 +177,11 @@ equation
   connect(NorthWall.SolarRadiationPort, SolarRadiationPort_NorthWall)
     annotation (Line(points={{-30,65.2},{-30,80},{10,80},{10,110}}, color={255,
           128,0}));
-  connect(EastWall.SolarRadiationPort, SolarRadiationPort_EastWall) annotation
-    (Line(points={{65.2,-22},{80,-22},{80,-50},{110,-50}}, color={255,128,0}));
+  connect(EastWall.SolarRadiationPort, SolarRadiationPort_EastWall) annotation (
+     Line(points={{65.2,-22},{80,-22},{80,-50},{110,-50}}, color={255,128,0}));
   connect(SouthWall.SolarRadiationPort, SolarRadiationPort_SouthWall)
-    annotation (Line(points={{-74,-67.2},{-74,-80},{-24,-80},{-24,-110}}, color
-        ={255,128,0}));
+    annotation (Line(points={{-74,-67.2},{-74,-80},{-24,-80},{-24,-110}}, color=
+         {255,128,0}));
   connect(SouthWall.thermStarComb_inside, thermStar_Demux.thermStarComb)
     annotation (Line(points={{-52,-58},{-52,-52},{-20.1,-52},{-20.1,-35.4}},
         color={191,0,0}));
@@ -205,8 +205,8 @@ equation
         color={191,0,0}));
   connect(thermStar_Demux.therm, airload.port)
     annotation (Line(points={{-25.1,-15.9},{-25.1,0},{3,0}}, color={191,0,0}));
-  connect(SouthWall.port_outside, HeatPort_OutdoorTemp) annotation (Line(points
-        ={{-52,-66.2},{-52,-80},{-90,-80},{-90,80},{-52,80},{-52,100}}, color={
+  connect(SouthWall.port_outside, HeatPort_OutdoorTemp) annotation (Line(points=
+         {{-52,-66.2},{-52,-80},{-90,-80},{-90,80},{-52,80},{-52,100}}, color={
           191,0,0}));
   connect(EastWall.port_outside, HeatPort_OutdoorTemp) annotation (Line(points=
           {{64.2,0},{80,0},{80,80},{-52,80},{-52,100}}, color={191,0,0}));
