@@ -5,12 +5,12 @@ model OpenPlanOffice
     wall_height=3,
     solar_absorptance=0.48,
     withWindow=true,
-    redeclare model Window = Components.WindowsDoors.Window_ASHRAE140,
-    WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
     windowarea=60,
     withSunblind=false,
     withDoor=false,
-    T0=293.15) annotation (Placement(transformation(
+    WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
+    T0(displayUnit="degC") = 293.15)
+               annotation (Placement(transformation(
         extent={{-3.99999,-24},{4.00002,24}},
         rotation=-90,
         origin={-52,60})));
@@ -19,7 +19,6 @@ model OpenPlanOffice
     wall_height=3,
     solar_absorptance=0.48,
     withWindow=true,
-    redeclare model Window = Components.WindowsDoors.Window_ASHRAE140,
     WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
     windowarea=60,
     withSunblind=false,
@@ -50,7 +49,6 @@ model OpenPlanOffice
     wall_height=3,
     solar_absorptance=0.48,
     withWindow=true,
-    redeclare model Window = Components.WindowsDoors.Window_ASHRAE140,
     WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
     withSunblind=false,
     withDoor=false,
@@ -153,7 +151,8 @@ model OpenPlanOffice
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-24,-110})));
-  Components.DryAir.Airload                 airload(V=3600, T(start=20))           annotation(Placement(transformation(extent={{2,-8},{
+  Components.DryAir.Airload                 airload(V=3600, T(start=293.15,
+        displayUnit="degC"))                                                       annotation(Placement(transformation(extent={{2,-8},{
             22,12}})));
   Utilities.Interfaces.Adaptors.HeatStarToComb thermStar_Demux annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 90, origin = {-20, -26})));
 equation
@@ -168,8 +167,6 @@ equation
     annotation (Line(points={{-80.2,28},{-100,28}}, color={191,0,0}));
   connect(NorthWall.port_outside, HeatPort_OutdoorTemp)
     annotation (Line(points={{-52,64.2},{-52,100}}, color={191,0,0}));
-  connect(NorthWall.WindSpeedPort, WindSpeedPort_NorthWall) annotation (Line(
-        points={{-34.4,64.2},{-34.4,80},{-20,80},{-20,104}}, color={0,0,127}));
   connect(SouthWall.WindSpeedPort, WindSpeedPort_SouthWall) annotation (Line(
         points={{-69.6,-66.2},{-69.6,-80},{-82,-80},{-82,-106}}, color={0,0,127}));
   connect(EastWall.WindSpeedPort, WindSpeedPort_EastWall) annotation (Line(
@@ -210,6 +207,8 @@ equation
           191,0,0}));
   connect(EastWall.port_outside, HeatPort_OutdoorTemp) annotation (Line(points=
           {{64.2,0},{80,0},{80,80},{-52,80},{-52,100}}, color={191,0,0}));
+  connect(NorthWall.WindSpeedPort, WindSpeedPort_NorthWall) annotation (Line(
+        points={{-34.4,64.2},{-34.4,80},{-20,80},{-20,104}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{48,78},{138,54}},

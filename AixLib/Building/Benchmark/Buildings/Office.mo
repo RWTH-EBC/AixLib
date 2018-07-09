@@ -13,13 +13,13 @@ model Office
                                                         y=250)
     annotation (Placement(transformation(extent={{-72,-82},{-52,-62}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort_North
-    annotation (Placement(transformation(extent={{120,60},{80,100}})));
+    annotation (Placement(transformation(extent={{110,70},{90,90}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort_East
-    annotation (Placement(transformation(extent={{120,32},{80,72}})));
+    annotation (Placement(transformation(extent={{110,40},{90,60}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort_South
-    annotation (Placement(transformation(extent={{120,4},{80,44}})));
+    annotation (Placement(transformation(extent={{110,10},{90,30}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort_West
-    annotation (Placement(transformation(extent={{120,-24},{80,16}})));
+    annotation (Placement(transformation(extent={{110,-20},{90,0}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_OutdoorTemp
     annotation (Placement(transformation(extent={{-10,90},{10,110}})));
   Utilities.Interfaces.SolarRad_in SolarRadiationPort_North
@@ -45,11 +45,11 @@ equation
     WindSpeedPort_North) annotation (Line(points={{22,51.8},{60,51.8},{60,80},{
           100,80}}, color={0,0,127}));
   connect(firstFloor.WindSpeedPort_EastWall_OpenPlanOffice, WindSpeedPort_East)
-    annotation (Line(points={{22,42.56},{60,42.56},{60,52},{100,52}}, color={0,
+    annotation (Line(points={{22,42.56},{60,42.56},{60,50},{100,50}}, color={0,
           0,127}));
   connect(firstFloor.WindSpeedPort_SouthWall_OpenPlanOffice,
-    WindSpeedPort_South) annotation (Line(points={{22,32.06},{60,32.06},{60,24},
-          {100,24}}, color={0,0,127}));
+    WindSpeedPort_South) annotation (Line(points={{22,32.06},{60,32.06},{60,20},
+          {100,20}}, color={0,0,127}));
   connect(firstFloor.HeatPort_OutdoorTemp, HeatPort_OutdoorTemp) annotation (
       Line(points={{6.88,56},{6,56},{6,80},{0,80},{0,100}}, color={191,0,0}));
   connect(firstFloor.SolarRadiationPort_North, SolarRadiationPort_North)

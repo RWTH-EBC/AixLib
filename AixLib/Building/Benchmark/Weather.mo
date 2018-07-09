@@ -4,10 +4,12 @@ model Weather
     Wind_dir=true,
     Wind_speed=true,
     Air_temp=true,
-    Air_press=true,
     Mass_frac=false,
     Rel_hum=false,
-    SOD=DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor())
+    SOD=DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor(),
+    Air_press=false,
+    fileName=
+        "D:/aku-bga/AixLib/AixLib/Resources/weatherdata/TRY2010_12_Jahr_Modelica-Library.txt")
     annotation (Placement(transformation(extent={{-50,14},{-20,34}})));
   Utilities.Interfaces.SolarRad_out solarRad_out_North
     annotation (Placement(transformation(extent={{-96,70},{-116,90}})));
@@ -49,6 +51,13 @@ model Weather
   Modelica.Blocks.Tables.CombiTable1D combiTable1D3(table=[0,1; 0.01,0; 0.49,0;
         0.5,1; 1,1])
     annotation (Placement(transformation(extent={{46,-78},{56,-68}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
+    prescribedTemperature annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=-90,
+        origin={0,-14})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b AirTemp
+    annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
 equation
   connect(solarRad_out_South, solarRad_out_South)
     annotation (Line(points={{-106,0},{-106,0}}, color={255,128,0}));
@@ -100,6 +109,10 @@ equation
     annotation (Line(points={{76.4,-60},{100,-60}}, color={0,0,127}));
   connect(product.y, WindSpeed_North)
     annotation (Line(points={{76.4,60},{100,60}}, color={0,0,127}));
+  connect(weather.AirTemp, prescribedTemperature.T) annotation (Line(points={{
+          -19,27},{2.22045e-015,27},{2.22045e-015,-2}}, color={0,0,127}));
+  connect(prescribedTemperature.port, AirTemp)
+    annotation (Line(points={{0,-24},{0,-100}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Weather;
