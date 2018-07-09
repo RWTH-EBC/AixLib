@@ -1,4 +1,5 @@
 Wall
 Wall_ASHRAE140
-ActiveWall
 BaseClasses
+ActiveWall
+ActiveWallPipeBased

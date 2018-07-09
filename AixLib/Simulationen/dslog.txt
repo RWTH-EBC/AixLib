@@ -1,28 +1,27 @@
 Log-file of program ./dymosim
-(generated: Mon Jul 09 11:03:44 2018)
+(generated: Mon Jul 09 16:16:22 2018)
 
 dymosim started
 ... "dsin.txt" loading (dymosim input file)
-... loading "wetter" from "D:/aku-bga/AixLib/AixLib/Resources/weatherdata/TRY2010_12_Jahr_Modelica-Library.txt"
-... "FullModel.mat" creating (simulation result file)
+... "TestTBA.mat" creating (simulation result file)
 
 Integration started at T = 0 using integration method DASSL
 (DAE multi-step solver (dassl/dasslrt of Petzold modified by Dynasim))
-Integration terminated successfully at T = 10000
-   CPU-time for integration      : 0.827 seconds
-   CPU-time for one GRID interval: 0.0827 milli-seconds
-   Number of result points       : 10006
-   Number of GRID   points       : 10001
-   Number of (successful) steps  : 78
-   Number of F-evaluations       : 695
-   Number of H-evaluations       : 10094
-   Number of Jacobian-evaluations: 59
+Integration terminated successfully at T = 100000
+   CPU-time for integration      : 3.89 seconds
+   CPU-time for one GRID interval: 0.0389 milli-seconds
+   Number of result points       : 100002
+   Number of GRID   points       : 100001
+   Number of (successful) steps  : 61
+   Number of F-evaluations       : 215
+   Number of H-evaluations       : 100061
+   Number of Jacobian-evaluations: 21
    Number of (model) time events : 0
    Number of (U) time events     : 0
-   Number of state    events     : 2
+   Number of state    events     : 0
    Number of step     events     : 0
-   Minimum integration stepsize  : 0.000372
-   Maximum integration stepsize  : 2.48e+003
+   Minimum integration stepsize  : 0.001
+   Maximum integration stepsize  : 1.08e+004
    Maximum integration order     : 4
 Calling terminal section
 ... "dsfinal.txt" creating (final states)

@@ -1,11 +1,13 @@
 within AixLib.Building.Benchmark.Test;
 model TestTBA
-  Test.ActiveWall activeWall(
+  Components.Walls.ActiveWallPipeBased activeWall(
     outside=false,
     WallType=AixLib.DataBase.Walls.EnEV2009.OW.OW_EnEV2009_S(),
     wall_length=10,
     wall_height=3,
-    connActiveLayer={3,4})
+    connActiveLayer={3,4},
+    pipe_diameter=0.02,
+    pipe_thermal_resistance=0)
     annotation (Placement(transformation(extent={{-32,-34},{-18,46}})));
   AixLib.Utilities.Interfaces.Adaptors.HeatStarToComb
                                                thermStar_Demux annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 90, origin={48,-68})));
@@ -47,7 +49,7 @@ model TestTBA
         Modelica.Media.Water.ConstantPropertyLiquidWater)
     annotation (Placement(transformation(extent={{14,68},{34,88}})));
   inner Modelica.Fluid.System system
-    annotation (Placement(transformation(extent={{78,80},{98,100}})));
+    annotation (Placement(transformation(extent={{80,80},{100,100}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=true)
     annotation (Placement(transformation(extent={{-44,50},{-24,70}})));
   Modelica.Fluid.Sensors.Temperature temperature1(redeclare package Medium =
@@ -64,7 +66,7 @@ equation
   connect(realExpression.y, tempOutside.T) annotation (Line(points={{-97,8},{
           -86,8},{-86,7},{-75.45,7}}, color={0,0,127}));
   connect(pump.port_b, activeWall.port_a1) annotation (Line(points={{40,22},{26,
-          22},{26,21.3333},{10.7,21.3333}}, color={0,127,255}));
+          22},{26,24.3333},{-18,24.3333}},  color={0,127,255}));
   connect(boundary.ports[1], pump.port_a) annotation (Line(points={{90,24},{76,
           24},{76,22},{60,22}}, color={0,127,255}));
   connect(realExpression1.y, boundary.T_in)
@@ -72,15 +74,17 @@ equation
   connect(pipe.port_b, boundary1.ports[1]) annotation (Line(points={{48,50},{56,
           50},{56,48},{66,48}}, color={0,127,255}));
   connect(pipe.port_a, activeWall.port_b1) annotation (Line(points={{28,50},{18,
-          50},{18,36},{10.7,36}}, color={0,127,255}));
+          50},{18,40.3333},{-18.35,40.3333}},
+                                  color={0,127,255}));
   connect(temperature.port, activeWall.port_b1) annotation (Line(points={{24,68},
-          {24,50},{18,50},{18,36},{10.7,36}}, color={0,127,255}));
+          {24,50},{18,50},{18,40.3333},{-18.35,40.3333}},
+                                              color={0,127,255}));
   connect(temperature.T, boundary1.T_in) annotation (Line(points={{31,78},{68,
           78},{68,76},{88,76},{88,52}}, color={0,0,127}));
   connect(booleanExpression.y, pump.IsNight) annotation (Line(points={{-23,60},
           {14,60},{14,32.2},{50,32.2}}, color={255,0,255}));
   connect(temperature1.port, activeWall.port_a1) annotation (Line(points={{-4,-26},
-          {16,-26},{16,-28},{34,-28},{34,22},{26,22},{26,21.3333},{10.7,21.3333}},
+          {16,-26},{16,-28},{34,-28},{34,22},{26,22},{26,24.3333},{-18,24.3333}},
                      color={0,127,255}));
   annotation ();
 end TestTBA;
