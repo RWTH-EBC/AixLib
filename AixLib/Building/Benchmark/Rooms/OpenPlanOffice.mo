@@ -176,14 +176,8 @@ model OpenPlanOffice
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={70,110})));
-  Modelica.Fluid.Interfaces.FluidPort_b TBA_out(redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater)
-    "Fluid connector b (positive design flow direction is from port_a to port_b)"
-    annotation (Placement(transformation(extent={{90,42},{110,62}})));
-  Modelica.Fluid.Interfaces.FluidPort_a TBA_in(redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater)
-    "Fluid connector a (positive design flow direction is from port_a to port_b)"
-    annotation (Placement(transformation(extent={{90,26},{110,46}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b Heatport_TBA
+    annotation (Placement(transformation(extent={{90,38},{110,58}})));
 equation
   connect(FloorToKitchen1.port_outside, HeatPort_ToKitchen)
     annotation (Line(points={{70,-66.2},{70,-100}}, color={191,0,0}));
@@ -248,10 +242,8 @@ equation
   connect(activeWallPipeBased.SolarRadiationPort, SolarRadiationPort_Hor)
     annotation (Line(points={{42,65.2},{42,70},{70,70},{70,110}}, color={255,
           128,0}));
-  connect(activeWallPipeBased.port_b1, TBA_out) annotation (Line(points={{40.6,
-          56.2},{40.6,52},{100,52}}, color={0,127,255}));
-  connect(activeWallPipeBased.port_a1, TBA_in)
-    annotation (Line(points={{31,56},{31,36},{100,36}}, color={0,127,255}));
+  connect(activeWallPipeBased.Heatport_TBA, Heatport_TBA) annotation (Line(
+        points={{37.6,55.8},{37.6,48},{100,48}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-30,24},{18,14}},
