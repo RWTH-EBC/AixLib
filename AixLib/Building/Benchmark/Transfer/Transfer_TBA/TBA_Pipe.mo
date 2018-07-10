@@ -3,11 +3,11 @@ model TBA_Pipe
   import BaseLib = AixLib.Utilities;
   Modelica.Fluid.Pipes.DynamicPipe pipe(use_HeatTransfer=true,
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
     length=wall_length*wall_height*5.8,
     diameter=pipe_diameter,
     nNodes=2)
     annotation (Placement(transformation(extent={{-16,34},{16,66}})));
+
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_TBA_OpenPlanOffice
     annotation (Placement(transformation(extent={{-10,90},{10,110}})));
   parameter Modelica.SIunits.Length pipe_diameter = 0.02 annotation(Dialog(tab = "General"));

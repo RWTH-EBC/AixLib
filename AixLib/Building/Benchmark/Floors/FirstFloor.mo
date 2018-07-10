@@ -92,8 +92,8 @@ equation
   connect(HeatPort_ToKitchen_OpenPlanOffice, HeatPort_ToKitchen_OpenPlanOffice)
     annotation (Line(points={{40,-102},{40,-97},{40,-97},{40,-102}}, color={191,
           0,0}));
-  connect(openPlanOffice.Heatport_TBA, Heatport_TBA_openPlanOffice) annotation
-    (Line(points={{54,9.16},{80,9.16},{80,-10},{100,-10}}, color={191,0,0}));
+  connect(openPlanOffice.Heatport_TBA, Heatport_TBA_openPlanOffice) annotation (
+     Line(points={{54,9.16},{80,9.16},{80,-10},{100,-10}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-68,52},{-6,32}},

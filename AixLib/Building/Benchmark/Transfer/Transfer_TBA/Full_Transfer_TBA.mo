@@ -2,12 +2,12 @@ within AixLib.Building.Benchmark.Transfer.Transfer_TBA;
 model Full_Transfer_TBA
   TBA_Pipe OpenPlanOffice(wall_length=40, wall_height=30)
     annotation (Placement(transformation(extent={{70,40},{90,60}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_warm_in(redeclare package Medium
-      = Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_warm_in(redeclare package Medium =
+        Modelica.Media.Water.ConstantPropertyLiquidWater)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_warm_out(redeclare package Medium
-      = Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_warm_out(redeclare package Medium =
+        Modelica.Media.Water.ConstantPropertyLiquidWater)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,-90},{-90,-70}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a
