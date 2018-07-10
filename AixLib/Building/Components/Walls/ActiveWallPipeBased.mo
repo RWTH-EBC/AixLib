@@ -66,7 +66,6 @@ model ActiveWallPipeBased
   parameter Boolean withActiveLayer = true "With an active layer" annotation (Dialog(tab = "Active layer",descriptionLabel = true), choices(__Dymola_checkBox=true));
   parameter Integer[2] connActiveLayer = {2,3} "Active layer to come between layers" annotation (Dialog(tab = "Active layer",descriptionLabel = true, enable = withActiveLayer), choices(__Dymola_checkBox=true));
   // Parameter einfügen
-  parameter Modelica.SIunits.Length pipe_diameter = 0.02 annotation(Dialog(tab = "Active layer", enable = withActiveLayer));
   parameter Real pipe_thermal_resistance = 0 annotation(Dialog(tab = "Active layer", enable = withActiveLayer));
   // Initial temperature
   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(20)
@@ -114,35 +113,12 @@ model ActiveWallPipeBased
         transformation(extent={{92,-10},{112,10}}), iconTransformation(extent={{
             10,-10},{30,10}})));
 
-  Modelica.Fluid.Interfaces.FluidPort_b port_b1(redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater)
-    "Fluid connector b (positive design flow direction is from port_a to port_b)"
-    annotation (Placement(transformation(extent={{9,93},{29,113}}),
-        iconTransformation(extent={{9,93},{29,113}})));
-  Modelica.Fluid.Interfaces.FluidPort_a port_a1(redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater)
-    "Fluid connector a (positive design flow direction is from port_a to port_b)"
-    annotation (Placement(transformation(extent={{10,45},{30,65}}),
-        iconTransformation(extent={{10,45},{30,65}})));
-  Modelica.Fluid.Pipes.DynamicPipe pipe(
-    use_HeatTransfer=true,
-    redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater,
-    diameter=pipe_diameter,
-    redeclare model HeatTransfer =
-        Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.IdealFlowHeatTransfer,
-    length=wall_length*wall_height*5.8,
-    nNodes=2)
-    annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={40,68})));
-
   Modelica.Thermal.HeatTransfer.Components.ThermalResistor thermalResistor(R=
         pipe_thermal_resistance)
     annotation (Placement(transformation(extent={{6,58},{26,78}})));
-  inner Modelica.Fluid.System system
-    annotation (Placement(transformation(extent={{80,60},{100,80}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b Heatport_TBA annotation (
+      Placement(transformation(extent={{11,78},{31,98}}), iconTransformation(
+          extent={{11,78},{31,98}})));
 equation
   //   if outside and cardinality(WindSpeedPort) < 2 then
   //     WindSpeedPort = 3;
@@ -203,20 +179,12 @@ equation
   end if;
   connect(heatStarToComb.thermStarComb, thermStarComb_inside) annotation(Line(points = {{78.4, -1.1}, {78.4, -1.05}, {102, -1.05}, {102, 0}}, color = {191, 0, 0}));
   connect(port_outside, port_outside) annotation(Line(points = {{-98, 4}, {-98, 4}}, color = {191, 0, 0}, pattern = LinePattern.Solid));
-  connect(port_a1, pipe.port_a)
-    annotation (Line(points={{20,55},{40,55},{40,58}},  color={0,127,255}));
-  connect(pipe.port_b, port_b1)
-    annotation (Line(points={{40,78},{40,103},{19,103}},color={0,127,255}));
-  connect(thermalResistor.port_b, pipe.heatPorts[1]) annotation (Line(points={{26,68},
-          {28,68},{28,66.55},{35.6,66.55}},   color={191,0,0}));
   connect(thermalResistor.port_a, Wall.portActiveLayer_b)
     annotation (Line(points={{6,68},{-5.26,68},{-5.26,33}}, color={191,0,0}));
   connect(Wall.portActiveLayer_a, thermalResistor.port_a) annotation (Line(
         points={{-12.74,33},{-12.74,68},{6,68}}, color={191,0,0}));
-  connect(thermalResistor.port_b, pipe.heatPorts[2]) annotation (Line(points={{
-          26,68},{30,68},{30,69.65},{35.6,69.65}}, color={191,0,0}));
-  connect(port_b1, port_b1) annotation (Line(points={{19,103},{98.5,103},{98.5,
-          103},{19,103}}, color={0,127,255}));
+  connect(thermalResistor.port_b, Heatport_TBA)
+    annotation (Line(points={{26,68},{21,68},{21,88}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-20, -120}, {20, 120}}, grid = {1, 1}), graphics={  Rectangle(extent = {{-16, 120}, {15, -60}}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Backward,  pattern=LinePattern.None, lineColor = {0, 0, 0}), Rectangle(extent = {{-16, -90}, {15, -120}},  pattern=LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Backward), Rectangle(extent = {{-16, -51}, {15, -92}}, lineColor = {0, 0, 0},  pattern=LinePattern.None, fillColor = {215, 215, 215},

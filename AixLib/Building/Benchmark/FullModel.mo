@@ -4,6 +4,10 @@ model FullModel
     annotation (Placement(transformation(extent={{50,82},{70,102}})));
   Buildings.Office office
     annotation (Placement(transformation(extent={{30,0},{92,60}})));
+  Generation.Generation generation
+    annotation (Placement(transformation(extent={{-80,-62},{-60,-42}})));
+  Transfer.Transfer_TBA.Full_Transfer_TBA full_Transfer_TBA
+    annotation (Placement(transformation(extent={{-20,-60},{0,-40}})));
 equation
   connect(weather.solarRad_out_North, office.SolarRadiationPort_North)
     annotation (Line(points={{49.4,100},{24,100},{24,54},{30,54}},  color={255,
@@ -32,6 +36,15 @@ equation
       Line(points={{40.54,60},{40,60},{40,84},{49.4,84}}, color={255,128,0}));
   connect(office.WindSpeedPort_Hor, weather.WindSpeed_Hor) annotation (Line(
         points={{85.8,60},{86,60},{86,84},{70,84}}, color={0,0,127}));
+  connect(full_Transfer_TBA.HeatPort_TBA_OpenPlanOffice, office.Heatport_TBA_openPlanOffice)
+    annotation (Line(points={{-2,-40},{-2,-20},{85.8,-20},{85.8,0}}, color={191,
+          0,0}));
+  connect(generation.Fluid_out_hot, full_Transfer_TBA.Fluid_warm_in)
+    annotation (Line(points={{-60,-46},{-40,-46},{-40,-56},{-20,-56}}, color={0,
+          127,255}));
+  connect(generation.Fluid_in_hot, full_Transfer_TBA.Fluid_warm_out)
+    annotation (Line(points={{-60,-53.4},{-40,-53.4},{-40,-58},{-20,-58}},
+        color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end FullModel;

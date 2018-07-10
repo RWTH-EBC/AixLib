@@ -169,7 +169,7 @@ model TestWarmwasser
     T_start=293.15,
     use_portsData=false,
     nPorts=4)
-    annotation (Placement(transformation(extent={{-84,56},{-70,70}})));
+    annotation (Placement(transformation(extent={{-88,52},{-74,66}})));
 
   Modelica.Blocks.Sources.Constant const1(k=0)
     annotation (Placement(transformation(extent={{-86,94},{-66,114}})));
@@ -228,15 +228,15 @@ equation
           -40,84},{-52,84},{-52,88},{-58,88},{-58,62},{10,62},{10,49.55},{
           6.3,49.55}}, color={0,127,255}));
   connect(tank1.ports[1], bufferStorage.fluidportTop2) annotation (Line(
-        points={{-79.1,56},{-44,56},{-44,56.15},{-9.75,56.15}}, color={0,
+        points={{-83.1,52},{-44,52},{-44,56.15},{-9.75,56.15}}, color={0,
           127,255}));
   connect(bufferStorage.fluidportBottom2, tank1.ports[2]) annotation (Line(
-        points={{-9.45,25.85},{-43.725,25.85},{-43.725,56},{-77.7,56}},
+        points={{-9.45,25.85},{-43.725,25.85},{-43.725,52},{-81.7,52}},
         color={0,127,255}));
   connect(bufferStorage.fluidportTop1, tank1.ports[3]) annotation (Line(
-        points={{-1.8,56.15},{-1.8,56},{-76.3,56}}, color={0,127,255}));
+        points={{-1.8,56.15},{-1.8,52},{-80.3,52}}, color={0,127,255}));
   connect(bufferStorage.fluidportBottom1, tank1.ports[4]) annotation (Line(
-        points={{-1.95,25.7},{-1.95,56},{-74.9,56}}, color={0,127,255}));
+        points={{-1.95,25.7},{-1.95,52},{-78.9,52}}, color={0,127,255}));
   connect(const1.y, fan1.y) annotation (Line(points={{-65,104},{-30,104},{
           -30,96}}, color={0,0,127}));
   connect(temperature1.port, teeJunctionIdeal.port_2) annotation (Line(

@@ -8,7 +8,7 @@ model TBA_Pipe
     diameter=pipe_diameter,
     nNodes=2)
     annotation (Placement(transformation(extent={{-16,34},{16,66}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_OutdoorTemp
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_TBA_OpenPlanOffice
     annotation (Placement(transformation(extent={{-10,90},{10,110}})));
   parameter Modelica.SIunits.Length pipe_diameter = 0.02 annotation(Dialog(tab = "General"));
   parameter Modelica.SIunits.Length wall_length = 0 annotation(Dialog(tab = "General"));
@@ -22,9 +22,9 @@ model TBA_Pipe
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{50,-110},{70,-90}})));
 equation
-  connect(pipe.heatPorts[1], HeatPort_OutdoorTemp) annotation (Line(points={{-2.32,
-          57.04},{-2.32,71.36},{0,71.36},{0,100}},color={127,0,0}));
-  connect(pipe.heatPorts[2], HeatPort_OutdoorTemp)
+  connect(pipe.heatPorts[1], HeatPort_TBA_OpenPlanOffice) annotation (Line(
+        points={{-2.32,57.04},{-2.32,71.36},{0,71.36},{0,100}}, color={127,0,0}));
+  connect(pipe.heatPorts[2], HeatPort_TBA_OpenPlanOffice)
     annotation (Line(points={{2.64,57.04},{0,100}}, color={127,0,0}));
   connect(pipe.port_a, Fluid_in) annotation (Line(points={{-16,50},{-60,50},{
           -60,-100}}, color={0,127,255}));
