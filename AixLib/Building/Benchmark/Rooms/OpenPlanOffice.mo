@@ -155,6 +155,35 @@ model OpenPlanOffice
         displayUnit="degC"))                                                       annotation(Placement(transformation(extent={{2,-8},{
             22,12}})));
   Utilities.Interfaces.Adaptors.HeatStarToComb thermStar_Demux annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 90, origin = {-20, -26})));
+  Components.Walls.ActiveWallPipeBased activeWallPipeBased(
+    wall_length=40,
+    wall_height=30,
+    withDoor=false,
+    ISOrientation=3,
+    outside=true,
+    WallType=DataBase.Walls.EnEV2009.Ceiling.CE_RO_EnEV2009_SM_loHalf_TBA())
+    annotation (Placement(transformation(
+        extent={{-4,-24},{4,24}},
+        rotation=-90,
+        origin={20,60})));
+  Modelica.Blocks.Interfaces.RealInput WindSpeedPort_Roof annotation (Placement(
+        transformation(
+        extent={{-12,-12},{12,12}},
+        rotation=-90,
+        origin={40,104})));
+  Utilities.Interfaces.SolarRad_in SolarRadiationPort_Hor annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=-90,
+        origin={70,110})));
+  Modelica.Fluid.Interfaces.FluidPort_b TBA_out(redeclare package Medium =
+        Modelica.Media.Water.ConstantPropertyLiquidWater)
+    "Fluid connector b (positive design flow direction is from port_a to port_b)"
+    annotation (Placement(transformation(extent={{90,42},{110,62}})));
+  Modelica.Fluid.Interfaces.FluidPort_a TBA_in(redeclare package Medium =
+        Modelica.Media.Water.ConstantPropertyLiquidWater)
+    "Fluid connector a (positive design flow direction is from port_a to port_b)"
+    annotation (Placement(transformation(extent={{90,26},{110,46}})));
 equation
   connect(FloorToKitchen1.port_outside, HeatPort_ToKitchen)
     annotation (Line(points={{70,-66.2},{70,-100}}, color={191,0,0}));
@@ -209,10 +238,28 @@ equation
           {{64.2,0},{80,0},{80,80},{-52,80},{-52,100}}, color={191,0,0}));
   connect(NorthWall.WindSpeedPort, WindSpeedPort_NorthWall) annotation (Line(
         points={{-34.4,64.2},{-34.4,80},{-20,80},{-20,104}}, color={0,0,127}));
+  connect(activeWallPipeBased.thermStarComb_inside, thermStar_Demux.thermStarComb)
+    annotation (Line(points={{20,56},{20,48},{-60,48},{-60,-52},{-20.1,-52},{
+          -20.1,-35.4}}, color={191,0,0}));
+  connect(activeWallPipeBased.port_outside, HeatPort_OutdoorTemp) annotation (
+      Line(points={{20,64.2},{20,80},{-52,80},{-52,100}}, color={191,0,0}));
+  connect(WindSpeedPort_Roof, activeWallPipeBased.WindSpeedPort) annotation (
+      Line(points={{40,104},{40,80},{37.6,80},{37.6,64.2}}, color={0,0,127}));
+  connect(activeWallPipeBased.SolarRadiationPort, SolarRadiationPort_Hor)
+    annotation (Line(points={{42,65.2},{42,70},{70,70},{70,110}}, color={255,
+          128,0}));
+  connect(activeWallPipeBased.port_b1, TBA_out) annotation (Line(points={{40.6,
+          56.2},{40.6,52},{100,52}}, color={0,127,255}));
+  connect(activeWallPipeBased.port_a1, TBA_in)
+    annotation (Line(points={{31,56},{31,36},{100,36}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
-          extent={{48,78},{138,54}},
+          extent={{-30,24},{18,14}},
           lineColor={28,108,200},
-          textString="Decke fehlt, Wenn TBA fertig dann einsetzen
-Lüftung fehlt komplett")}));
+          textString="Lüftung fehlt komplett"),               Text(
+          extent={{-4,46},{44,36}},
+          lineColor={28,108,200},
+          textString="Solar absorptance ist noch nicht richtig,
+gucken wie das mit PV Anlage ist
+")}));
 end OpenPlanOffice;
