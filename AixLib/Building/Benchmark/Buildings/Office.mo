@@ -4,13 +4,12 @@ model Office
     annotation (Placement(transformation(extent={{-20,20},{20,60}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature tempOutside annotation(Placement(transformation(extent={{-28,-50},
             {-8,-30}})));
-  Modelica.Blocks.Sources.RealExpression realExpression(y=250)
+  Modelica.Blocks.Sources.RealExpression realExpression(y=273)
     annotation (Placement(transformation(extent={{-72,-50},{-52,-30}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature tempOutside1
                                                                           annotation(Placement(transformation(extent={{-28,-82},
             {-8,-62}})));
-  Modelica.Blocks.Sources.RealExpression realExpression1(
-                                                        y=250)
+  Modelica.Blocks.Sources.RealExpression realExpression1(y=273)
     annotation (Placement(transformation(extent={{-72,-82},{-52,-62}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort_North
     annotation (Placement(transformation(extent={{110,70},{90,90}})));

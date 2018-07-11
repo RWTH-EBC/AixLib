@@ -41,9 +41,16 @@ model Boiler_Benchmark "Boiler with internal and external control"
     final riseTime=riseTime) "Internal control"
     annotation (Placement(transformation(extent={{-50,-10},{-70,10}})));
 
+  Modelica.Blocks.Logical.Hysteresis hysteresis(
+    pre_y_start=true,
+    uLow=237.15 + 85,
+    uHigh=273.15 + 99)
+    annotation (Placement(transformation(extent={{36,12},{16,32}})));
+  Modelica.Blocks.Logical.LogicalSwitch logicalSwitch
+    annotation (Placement(transformation(extent={{-8,12},{-28,32}})));
+  Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=false)
+    annotation (Placement(transformation(extent={{24,54},{4,74}})));
 equation
-  connect(internalControl.QflowHeater, heater.Q_flow) annotation (Line(points={
-          {-49.95,3.9},{-40,3.9},{-40,-20},{-60,-20},{-60,-40}}, color={0,0,127}));
   connect(senTCold.T, internalControl.TFlowCold) annotation (Line(points={{-70,
           -69},{-70,-69},{-70,-20},{-80,-20},{-80,-1.625},{-70.075,-1.625}},
         color={0,0,127}));
@@ -54,8 +61,18 @@ equation
         color={0,0,127}));
   connect(TSet, internalControl.Tflow_set) annotation (Line(points={{-80,60},{-54,
           60},{-54,24},{-62.0375,24},{-62.0375,10.1125}}, color={0,0,127}));
-  connect(internalControl.isOn, isOn) annotation (Line(points={{-57.525,10.275},
-          {-57.525,50},{30,50},{30,100}}, color={255,0,255}));
+  connect(internalControl.QflowHeater, heater.Q_flow) annotation (Line(points={
+          {-49.95,3.9},{-36,3.9},{-36,-32},{-60,-32},{-60,-40}}, color={0,0,127}));
+  connect(hysteresis.y, logicalSwitch.u2)
+    annotation (Line(points={{15,22},{-6,22}}, color={255,0,255}));
+  connect(hysteresis.u, internalControl.TFlowHot) annotation (Line(points={{38,
+          22},{48,22},{48,-18},{-82,-18},{-82,1.6},{-70,1.6}}, color={0,0,127}));
+  connect(logicalSwitch.y, internalControl.isOn) annotation (Line(points={{-29,
+          22},{-57.525,22},{-57.525,10.275}}, color={255,0,255}));
+  connect(isOn, logicalSwitch.u3) annotation (Line(points={{30,100},{30,46},{6,
+          46},{6,14},{-6,14}}, color={255,0,255}));
+  connect(booleanExpression.y, logicalSwitch.u1) annotation (Line(points={{3,64},
+          {-2,64},{-2,30},{-6,30}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Polygon(
           points={{-18.5,-23.5},{-26.5,-7.5},{-4.5,36.5},{3.5,10.5},{25.5,14.5},

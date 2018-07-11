@@ -16,13 +16,12 @@ model FirstFloor
     annotation (Placement(transformation(extent={{-102,34},{-90,46}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature tempOutside annotation(Placement(transformation(extent={{-26,6},
             {-6,26}})));
-  Modelica.Blocks.Sources.RealExpression realExpression(y=250)
+  Modelica.Blocks.Sources.RealExpression realExpression(y=273)
     annotation (Placement(transformation(extent={{-70,6},{-50,26}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature tempOutside1
                                                                           annotation(Placement(transformation(extent={{-26,-26},
             {-6,-6}})));
-  Modelica.Blocks.Sources.RealExpression realExpression1(
-                                                        y=250)
+  Modelica.Blocks.Sources.RealExpression realExpression1(y=273)
     annotation (Placement(transformation(extent={{-70,-26},{-50,-6}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_OutdoorTemp
     annotation (Placement(transformation(extent={{-10,90},{10,110}})));
