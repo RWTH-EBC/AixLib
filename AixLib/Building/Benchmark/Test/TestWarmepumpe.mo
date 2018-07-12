@@ -19,42 +19,42 @@ model TestWarmepumpe
     use_p=true,
     nPorts=1,
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
     p=1000,
     T=283.15)
     annotation (Placement(transformation(extent={{-88,-30},{-68,-10}})));
+
   AixLib.Fluid.Movers.SpeedControlled_y fan1(
     m_flow_small=0.01,
     redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos30slash1to8 per,
     addPowerToMedium=false,
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
     T_start=283.15)
     annotation (Placement(transformation(extent={{-48,8},{-28,28}})));
+
   Modelica.Fluid.Sources.FixedBoundary boundary3(
     use_p=true,
     nPorts=1,
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
     p=1000,
     T=278.15)
     annotation (Placement(transformation(extent={{100,36},{80,56}})));
+
   AixLib.Fluid.Movers.SpeedControlled_y fan2(
     m_flow_small=0.01,
     redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos30slash1to8 per,
     addPowerToMedium=false,
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
     T_start=313.15)
     annotation (Placement(transformation(extent={{82,-18},{62,2}})));
+
   Modelica.Fluid.Sources.FixedBoundary boundary4(
     use_p=true,
     nPorts=1,
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
     p=10000,
     T=323.15)
     annotation (Placement(transformation(extent={{104,-26},{84,-6}})));
+
   Modelica.Fluid.Sensors.MassFlowRate massFlowRate(redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater)
     annotation (Placement(transformation(extent={{36,6},{56,26}})));
@@ -69,7 +69,6 @@ model TestWarmepumpe
     use_T_in=true,
     nPorts=1,
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
     p=10000)
     annotation (Placement(transformation(extent={{-90,8},{-70,28}})));
 

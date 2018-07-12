@@ -18,12 +18,12 @@ model Generation
 
   inner Modelica.Fluid.System system
     annotation (Placement(transformation(extent={{80,80},{100,100}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_hot(redeclare package Medium
-      = Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_hot(redeclare package Medium =
+        Modelica.Media.Water.ConstantPropertyLiquidWater)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,50},{110,70}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_hot(redeclare package Medium
-      = Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_hot(redeclare package Medium =
+        Modelica.Media.Water.ConstantPropertyLiquidWater)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{92,16},{112,36}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=true)
@@ -68,17 +68,17 @@ model Generation
     use_p=true,
     nPorts=1,
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
     p=1000,
     T=283.15)
     annotation (Placement(transformation(extent={{-114,-84},{-94,-64}})));
+
   Modelica.Fluid.Sources.Boundary_pT boundary2(
     use_T_in=true,
     nPorts=1,
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
     p=10000)
     annotation (Placement(transformation(extent={{-116,-46},{-96,-26}})));
+
   Modelica.Blocks.Sources.Constant const3(k=280)
     annotation (Placement(transformation(extent={{-154,-42},{-134,-22}})));
 equation
