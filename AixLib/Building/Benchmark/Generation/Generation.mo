@@ -76,8 +76,9 @@ model Generation
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
     height=0.1,
     crossArea=0.1,
-    T_start=293.15,
-    nPorts=2)
+    nPorts=2,
+    level_start=0.07,
+    T_start=293.15)
     annotation (Placement(transformation(extent={{26,76},{40,90}})));
   Fluid.Movers.Pump pump1(
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
@@ -89,9 +90,19 @@ model Generation
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
     height=0.1,
     crossArea=0.1,
-    T_start=293.15,
-    nPorts=2)
+    nPorts=2,
+    level_start=0.07,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
+    T_start=293.15)
     annotation (Placement(transformation(extent={{14,-24},{28,-10}})));
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium
+      = Modelica.Media.Water.ConstantPropertyLiquidWater)
+    "Fluid connector b (positive design flow direction is from port_a to port_b)"
+    annotation (Placement(transformation(extent={{90,-34},{110,-14}})));
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium
+      = Modelica.Media.Water.ConstantPropertyLiquidWater)
+    "Fluid connector a (positive design flow direction is from port_a to port_b)"
+    annotation (Placement(transformation(extent={{90,-104},{110,-84}})));
 equation
   connect(generation_Hot.Fluid_out_Hot, HotWater.portHC1In) annotation (Line(
         points={{-60,61.4},{-32,61.4},{-32,62.69},{-4.35,62.69}}, color={0,127,
@@ -149,12 +160,13 @@ equation
     annotation (Line(points={{34,-24},{19.6,-24}}, color={0,127,255}));
   connect(tank1.ports[2], ColdWater.fluidportTop2) annotation (Line(points={{
           22.4,-24},{14.375,-24},{14.375,-49.83}}, color={0,127,255}));
-  connect(pump1.port_b, ColdWater.fluidportBottom2) annotation (Line(points={{
-          54,-24},{74,-24},{74,-96},{14.025,-96},{14.025,-84.17}}, color={0,127,
-          255}));
   connect(generation_heatPump1.onOff_in1, generation_Hot.isOn_boiler)
     annotation (Line(points={{-70.4,-20},{-88,60},{-88,86},{-74,86},{-74,70}},
         color={255,0,255}));
+  connect(pump1.port_b, Fluid_out_cold)
+    annotation (Line(points={{54,-24},{100,-24}}, color={0,127,255}));
+  connect(ColdWater.fluidportBottom2, Fluid_in_cold) annotation (Line(points={{
+          14.025,-84.17},{14.025,-94},{100,-94}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-60,32},{2,12}},
