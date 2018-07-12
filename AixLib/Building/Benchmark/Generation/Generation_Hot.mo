@@ -27,15 +27,6 @@ model Generation_Hot
         rotation=-90,
         origin={-20,100})));
 
-  Modelica.Fluid.Sensors.Temperature temperature(redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater)
-    annotation (Placement(transformation(extent={{64,16},{84,36}})));
-  Modelica.Fluid.Sensors.Temperature temperature1(redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater)
-    annotation (Placement(transformation(extent={{66,-20},{86,0}})));
-  Modelica.Fluid.Sensors.Temperature temperature2(redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater)
-    annotation (Placement(transformation(extent={{10,16},{30,36}})));
   Modelica.Fluid.Vessels.OpenTank tank1(
     use_portsData=false,
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
@@ -79,9 +70,6 @@ model Generation_Hot
     minCapacity=50)
     annotation (Placement(transformation(extent={{-86,6},{-66,26}})));
 
-  Modelica.Fluid.Sensors.Temperature temperature4(redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater)
-    annotation (Placement(transformation(extent={{-62,16},{-42,36}})));
   Modelica.Blocks.Interfaces.RealInput TSet_chp annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
@@ -102,43 +90,19 @@ model Generation_Hot
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-100,-40})));
-  Modelica.Fluid.Sensors.Temperature temperature5(redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater)
-    annotation (Placement(transformation(extent={{-20,54},{0,74}})));
-  Fluid.Sensors.Temperature senTem(redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater)
-    annotation (Placement(transformation(extent={{52,56},{72,76}})));
-  Modelica.Fluid.Sensors.Temperature temperature3(redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater)
-    annotation (Placement(transformation(extent={{72,54},{92,74}})));
-  Fluid.Sensors.TemperatureTwoPort senTem1(redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater, m_flow_nominal=0.1)
-    annotation (Placement(transformation(extent={{34,46},{50,66}})));
 equation
-  connect(Fluid_in_Hot, temperature1.port)
-    annotation (Line(points={{100,-20},{76,-20}}, color={0,127,255}));
-  connect(temperature.port, Fluid_out_Hot) annotation (Line(points={{74,16},{88,
-          16},{88,14},{100,14}}, color={0,127,255}));
   connect(dp_in1, fan.dp_in) annotation (Line(points={{-20,100},{-20,63},{-30,
           63},{-30,28}}, color={0,0,127}));
-  connect(teeJunctionIdeal.port_2, temperature.port)
-    annotation (Line(points={{56,16},{74,16}}, color={0,127,255}));
-  connect(tank1.ports[1], temperature1.port)
-    annotation (Line(points={{35.6,-20},{76,-20}}, color={0,127,255}));
   connect(val.port_1, teeJunctionIdeal.port_1)
     annotation (Line(points={{8,16},{36,16}}, color={0,127,255}));
   connect(val.port_3, boiler_Benchmark.port_a)
     annotation (Line(points={{-2,26},{-2,56},{10,56}}, color={0,127,255}));
   connect(fan.port_b, val.port_2)
     annotation (Line(points={{-20,16},{-12,16}}, color={0,127,255}));
-  connect(val.port_1, temperature2.port)
-    annotation (Line(points={{8,16},{20,16}}, color={0,127,255}));
   connect(cHP.port_b, fan.port_a)
     annotation (Line(points={{-66,16},{-40,16}}, color={0,127,255}));
-  connect(cHP.port_a, tank1.ports[2]) annotation (Line(points={{-86,16},{-86,
-          -20},{38.4,-20}}, color={0,127,255}));
-  connect(cHP.port_b, temperature4.port)
-    annotation (Line(points={{-66,16},{-52,16}}, color={0,127,255}));
+  connect(cHP.port_a, tank1.ports[1]) annotation (Line(points={{-86,16},{-86,
+          -20},{35.6,-20}}, color={0,127,255}));
   connect(isOn_chp, cHP.on) annotation (Line(points={{-60,100},{-60,0},{-72,0},
           {-72,7},{-73,7}}, color={255,0,255}));
   connect(isOn_boiler, boiler_Benchmark.isOn) annotation (Line(points={{-40,100},
@@ -151,16 +115,12 @@ equation
           80},{-80,80},{-80,100}}, color={0,0,127}));
   connect(val.y, Valve_boiler)
     annotation (Line(points={{-2,4},{-2,-40},{-100,-40}}, color={0,0,127}));
-  connect(val.port_3, temperature5.port)
-    annotation (Line(points={{-2,26},{-2,54},{-10,54}}, color={0,127,255}));
-  connect(senTem1.port_b, senTem.port)
-    annotation (Line(points={{50,56},{62,56}}, color={0,127,255}));
-  connect(senTem1.port_b, teeJunctionIdeal.port_3) annotation (Line(points={{50,
-          56},{48,56},{48,26},{46,26}}, color={0,127,255}));
-  connect(senTem1.port_a, boiler_Benchmark.port_b)
-    annotation (Line(points={{34,56},{30,56}}, color={0,127,255}));
-  connect(senTem1.port_b, temperature3.port) annotation (Line(points={{50,56},{
-          62,56},{62,54},{82,54}}, color={0,127,255}));
+  connect(boiler_Benchmark.port_b, teeJunctionIdeal.port_3)
+    annotation (Line(points={{30,56},{46,56},{46,26}}, color={0,127,255}));
+  connect(teeJunctionIdeal.port_2, Fluid_out_Hot) annotation (Line(points={{56,
+          16},{80,16},{80,14},{100,14}}, color={0,127,255}));
+  connect(tank1.ports[2], Fluid_in_Hot)
+    annotation (Line(points={{38.4,-20},{100,-20}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{90,52},{152,32}},

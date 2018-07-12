@@ -36,14 +36,14 @@ model Generation_heatPump
         origin={-48,100})));
   Fluid.HeatPumps.HeatPumpDetailed        heatPumpDetailed(
     capCalcType=2,
-    dataTable=AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113(),
     P_eleOutput=true,
     redeclare package Medium_con =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
-    dp_conNominal=10000,
     redeclare package Medium_eva =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
+    dp_conNominal=10000,
     dp_evaNominal=10000,
+    dataTable=DataBase.HeatPump.EN14511.Vaillant_VWL_101(),
     T_startEva=283.15,
     T_startCon=313.15)
     annotation (Placement(transformation(extent={{-14,-10},{16,10}})));
@@ -53,7 +53,8 @@ model Generation_heatPump
     addPowerToMedium=true,
     tau=1,
     dp_nominal=700,
-    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per)
+    p_start=100000,
+    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12 per)
     annotation (Placement(transformation(extent={{42,8},{62,28}})));
   Fluid.Movers.FlowControlled_dp fan1(
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
@@ -61,16 +62,30 @@ model Generation_heatPump
     addPowerToMedium=true,
     tau=1,
     dp_nominal=700,
-    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per)
+    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12 per)
     annotation (Placement(transformation(extent={{-72,6},{-52,26}})));
   Modelica.Fluid.Vessels.OpenTank tank1(
     use_portsData=false,
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
     height=0.1,
     crossArea=0.1,
+    nPorts=2,
+    T_start=278.15)
+    annotation (Placement(transformation(extent={{44,-18},{58,-4}})));
+  Modelica.Fluid.Vessels.OpenTank tank2(
+    use_portsData=false,
+    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+    height=0.1,
+    crossArea=0.1,
     T_start=293.15,
     nPorts=2)
-    annotation (Placement(transformation(extent={{44,-18},{58,-4}})));
+    annotation (Placement(transformation(extent={{-80,-20},{-66,-6}})));
+  Fluid.MixingVolumes.MixingVolume vol(
+    nPorts=2,
+    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+
+    m_flow_nominal=1,
+    V=0.001) annotation (Placement(transformation(extent={{-50,-22},{-30,-2}})));
 equation
   connect(heatPumpDetailed.port_conOut, fan.port_a) annotation (Line(points={{
           14,7},{28,7},{28,18},{42,18}}, color={0,127,255}));
@@ -86,13 +101,16 @@ equation
     annotation (Line(points={{-4,100},{-4,9}}, color={255,0,255}));
   connect(dp_in2, fan1.dp_in) annotation (Line(points={{-48,100},{-56,100},{-56,
           28},{-62,28}}, color={0,0,127}));
-  connect(heatPumpDetailed.port_evaOut, Fluid_out_cold) annotation (Line(points=
-         {{-12,-7},{-36,-7},{-36,-6},{-52,-6},{-52,-20},{-100,-20}}, color={0,
-          127,255}));
+  connect(tank2.ports[1], Fluid_out_cold)
+    annotation (Line(points={{-74.4,-20},{-100,-20}}, color={0,127,255}));
   connect(heatPumpDetailed.port_conIn, tank1.ports[1]) annotation (Line(points=
-          {{14,-7},{49.6,-7},{49.6,-18}}, color={0,127,255}));
+          {{14,-7},{32,-7},{32,-18},{49.6,-18}}, color={0,127,255}));
   connect(tank1.ports[2], Fluid_in_warm) annotation (Line(points={{52.4,-18},{
-          74,-18},{74,-12},{100,-12}}, color={0,127,255}));
+          76,-18},{76,-12},{100,-12}}, color={0,127,255}));
+  connect(vol.ports[1], heatPumpDetailed.port_evaOut) annotation (Line(points={
+          {-42,-22},{-26,-22},{-26,-7},{-12,-7}}, color={0,127,255}));
+  connect(vol.ports[2], tank2.ports[2]) annotation (Line(points={{-38,-22},{-58,
+          -22},{-58,-20},{-71.6,-20}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Generation_heatPump;
