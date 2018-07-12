@@ -53,32 +53,32 @@ model Generation_Hot
 
   Fluid.Movers.FlowControlled_dp fan(
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
     m_flow_nominal=1,
     addPowerToMedium=true,
     tau=1,
     dp_nominal=700,
     redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per)
     annotation (Placement(transformation(extent={{-40,6},{-20,26}})));
+
   Modelica.Fluid.Fittings.TeeJunctionIdeal teeJunctionIdeal(redeclare package
       Medium = Modelica.Media.Water.ConstantPropertyLiquidWater)
     annotation (Placement(transformation(extent={{36,6},{56,26}})));
   Fluid.Actuators.Valves.ThreeWayLinear val(
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
     m_flow_nominal=0.2,
     dpValve_nominal=2,
     y_start=1) annotation (Placement(transformation(extent={{8,26},{-12,6}})));
+
   Fluid.BoilerCHP.CHP cHP(
     electricityDriven=true,
     TSetIn=true,
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
     m_flow_nominal=0.2,
     param=DataBase.CHP.CHP_FMB_31_GSK(),
     m_flow_small=0.01,
     minCapacity=50)
     annotation (Placement(transformation(extent={{-86,6},{-66,26}})));
+
   Modelica.Fluid.Sensors.Temperature temperature4(redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater)
     annotation (Placement(transformation(extent={{-62,16},{-42,36}})));

@@ -13,7 +13,7 @@ model Generation
     n=5,
     redeclare model HeatTransfer =
         Fluid.Storage.BaseClasses.HeatTransferLambdaEff,
-    useHeatingCoil2=false)
+    useHeatingCoil2=true)
     annotation (Placement(transformation(extent={{-4,36},{24,70}})));
 
   inner Modelica.Fluid.System system
@@ -54,9 +54,33 @@ model Generation
   Modelica.Fluid.Sources.FixedBoundary boundary(
     nPorts=2,
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
     p=1000,
     T=293.15) annotation (Placement(transformation(extent={{10,82},{30,102}})));
+
+  Generation_heatPump generation_heatPump1
+    annotation (Placement(transformation(extent={{-80,-40},{-60,-20}})));
+  Modelica.Blocks.Sources.BooleanExpression booleanExpression2(
+                                                              y=true)
+    annotation (Placement(transformation(extent={{-100,-8},{-80,12}})));
+  Modelica.Blocks.Sources.RealExpression realExpression4(y=20000)
+    annotation (Placement(transformation(extent={{-108,-22},{-88,-2}})));
+  Modelica.Fluid.Sources.FixedBoundary boundary1(
+    use_p=true,
+    nPorts=1,
+    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+
+    p=1000,
+    T=283.15)
+    annotation (Placement(transformation(extent={{-114,-84},{-94,-64}})));
+  Modelica.Fluid.Sources.Boundary_pT boundary2(
+    use_T_in=true,
+    nPorts=1,
+    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+
+    p=10000)
+    annotation (Placement(transformation(extent={{-116,-46},{-96,-26}})));
+  Modelica.Blocks.Sources.Constant const3(k=280)
+    annotation (Placement(transformation(extent={{-154,-42},{-134,-22}})));
 equation
   connect(generation_Hot.Fluid_out_Hot, HotWater.portHC1In) annotation (Line(
         points={{-60,61.4},{-32,61.4},{-32,62.69},{-4.35,62.69}}, color={0,127,
@@ -89,10 +113,28 @@ equation
     annotation (Line(points={{-70,70},{-70,76},{-85,76}}, color={0,0,127}));
   connect(generation_Hot.TSet_boiler, realExpression1.y) annotation (Line(
         points={{-68,70},{-70,70},{-70,76},{-85,76}}, color={0,0,127}));
+  connect(generation_heatPump1.onOff_in1, booleanExpression2.y) annotation (
+      Line(points={{-70.4,-20},{-70,-20},{-70,2},{-79,2}}, color={255,0,255}));
+  connect(generation_heatPump1.dp_in1, realExpression4.y) annotation (Line(
+        points={{-65.6,-20},{-66,-20},{-66,-12},{-87,-12}}, color={0,0,127}));
+  connect(generation_heatPump1.dp_in2, realExpression4.y) annotation (Line(
+        points={{-74.8,-20},{-76,-12},{-87,-12}}, color={0,0,127}));
+  connect(const3.y, boundary2.T_in)
+    annotation (Line(points={{-133,-32},{-118,-32}}, color={0,0,127}));
+  connect(boundary2.ports[1], generation_heatPump1.Fluid_in_cold) annotation (
+      Line(points={{-96,-36},{-88,-36},{-88,-28},{-80,-28}}, color={0,127,255}));
+  connect(boundary1.ports[1], generation_heatPump1.Fluid_out_cold) annotation (
+      Line(points={{-94,-74},{-88,-74},{-88,-32},{-80,-32}}, color={0,127,255}));
+  connect(generation_heatPump1.Fluid_out_warm, HotWater.portHC2In) annotation (
+      Line(points={{-60,-24},{-32,-24},{-32,48.75},{-4.175,48.75}}, color={0,
+          127,255}));
+  connect(HotWater.portHC2Out, generation_heatPump1.Fluid_in_warm) annotation (
+      Line(points={{-4.175,43.31},{-26,43.31},{-26,-31.2},{-60,-31.2}}, color={
+          0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-60,32},{2,12}},
           lineColor={28,108,200},
-          textString="Pumpen müssen angepasst werden
+          textString="Parameter müssen angepasst werden
 ")}));
 end Generation;

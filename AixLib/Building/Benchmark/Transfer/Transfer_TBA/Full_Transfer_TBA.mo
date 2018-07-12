@@ -5,7 +5,7 @@ model Full_Transfer_TBA
   Modelica.Fluid.Interfaces.FluidPort_a Fluid_warm_in(redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
-    annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
+    annotation (Placement(transformation(extent={{-110,-50},{-90,-30}})));
   Modelica.Fluid.Interfaces.FluidPort_b Fluid_warm_out(redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
@@ -17,7 +17,7 @@ model Full_Transfer_TBA
     annotation (Placement(transformation(extent={{80,-100},{100,-80}})));
 equation
   connect(OpenPlanOffice.Fluid_in, Fluid_warm_in)
-    annotation (Line(points={{74,40},{74,-60},{-100,-60}}, color={0,127,255}));
+    annotation (Line(points={{74,40},{74,-40},{-100,-40}}, color={0,127,255}));
   connect(OpenPlanOffice.Fluid_out, Fluid_warm_out)
     annotation (Line(points={{86,40},{86,-80},{-100,-80}}, color={0,127,255}));
   connect(OpenPlanOffice.HeatPort_TBA_OpenPlanOffice,

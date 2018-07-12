@@ -3,79 +3,73 @@ model TestWarmepumpe
 
   AixLib.Fluid.HeatPumps.HeatPumpDetailed heatPumpDetailed(
     capCalcType=2,
-    redeclare package Medium_con =
-        HVAC.Components.HeatExchanger.SubStation.Components.ConstantPropertyLiquidWater_TMax_HS,
-    redeclare package Medium_eva =
-        HVAC.Components.HeatExchanger.SubStation.Components.ConstantPropertyLiquidWater_TMax_HS,
     dataTable=AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113(),
     P_eleOutput=true,
+    redeclare package Medium_con =
+        Modelica.Media.Water.ConstantPropertyLiquidWater,
     dp_conNominal=10000,
+    redeclare package Medium_eva =
+        Modelica.Media.Water.ConstantPropertyLiquidWater,
     dp_evaNominal=10000,
     T_startEva=283.15,
     T_startCon=313.15)
     annotation (Placement(transformation(extent={{-14,-10},{16,10}})));
 
   Modelica.Fluid.Sources.FixedBoundary boundary1(
-    redeclare package Medium =
-        HVAC.Components.HeatExchanger.SubStation.Components.ConstantPropertyLiquidWater_TMax_HS,
     use_p=true,
     nPorts=1,
+    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+
     p=1000,
     T=283.15)
     annotation (Placement(transformation(extent={{-88,-30},{-68,-10}})));
   AixLib.Fluid.Movers.SpeedControlled_y fan1(
-    redeclare package Medium =
-        HVAC.Components.HeatExchanger.SubStation.Components.ConstantPropertyLiquidWater_TMax_HS,
     m_flow_small=0.01,
     redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos30slash1to8 per,
     addPowerToMedium=false,
+    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+
     T_start=283.15)
     annotation (Placement(transformation(extent={{-48,8},{-28,28}})));
   Modelica.Fluid.Sources.FixedBoundary boundary3(
-    redeclare package Medium =
-        HVAC.Components.HeatExchanger.SubStation.Components.ConstantPropertyLiquidWater_TMax_HS,
     use_p=true,
     nPorts=1,
+    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+
     p=1000,
     T=278.15)
     annotation (Placement(transformation(extent={{100,36},{80,56}})));
   AixLib.Fluid.Movers.SpeedControlled_y fan2(
-    redeclare package Medium =
-        HVAC.Components.HeatExchanger.SubStation.Components.ConstantPropertyLiquidWater_TMax_HS,
     m_flow_small=0.01,
     redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos30slash1to8 per,
     addPowerToMedium=false,
+    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+
     T_start=313.15)
     annotation (Placement(transformation(extent={{82,-18},{62,2}})));
   Modelica.Fluid.Sources.FixedBoundary boundary4(
-    redeclare package Medium =
-        HVAC.Components.HeatExchanger.SubStation.Components.ConstantPropertyLiquidWater_TMax_HS,
     use_p=true,
     nPorts=1,
+    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+
     p=10000,
     T=323.15)
     annotation (Placement(transformation(extent={{104,-26},{84,-6}})));
-  Modelica.Fluid.Sensors.Temperature temperature(redeclare package Medium =
-        HVAC.Components.HeatExchanger.SubStation.Components.ConstantPropertyLiquidWater_TMax_HS)
-    annotation (Placement(transformation(extent={{-2,-46},{18,-26}})));
-  Modelica.Fluid.Sensors.Temperature temperature1(redeclare package Medium =
-        HVAC.Components.HeatExchanger.SubStation.Components.ConstantPropertyLiquidWater_TMax_HS)
-    annotation (Placement(transformation(extent={{8,30},{28,50}})));
   Modelica.Fluid.Sensors.MassFlowRate massFlowRate(redeclare package Medium =
-        HVAC.Components.HeatExchanger.SubStation.Components.ConstantPropertyLiquidWater_TMax_HS)
+        Modelica.Media.Water.ConstantPropertyLiquidWater)
     annotation (Placement(transformation(extent={{36,6},{56,26}})));
   Modelica.Fluid.Sensors.MassFlowRate massFlowRate1(redeclare package Medium =
-        HVAC.Components.HeatExchanger.SubStation.Components.ConstantPropertyLiquidWater_TMax_HS)
+        Modelica.Media.Water.ConstantPropertyLiquidWater)
     annotation (Placement(transformation(extent={{-30,-30},{-50,-10}})));
   inner Modelica.Fluid.System system
     annotation (Placement(transformation(extent={{80,80},{100,100}})));
   Modelica.Blocks.Sources.BooleanStep booleanStep(startTime=20)
     annotation (Placement(transformation(extent={{-58,54},{-38,74}})));
   Modelica.Fluid.Sources.Boundary_pT boundary(
-    redeclare package Medium =
-        HVAC.Components.HeatExchanger.SubStation.Components.ConstantPropertyLiquidWater_TMax_HS,
     use_T_in=true,
     nPorts=1,
+    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+
     p=10000)
     annotation (Placement(transformation(extent={{-90,8},{-70,28}})));
 
@@ -103,16 +97,10 @@ equation
       Line(points={{36,16},{26,16},{26,7},{14,7}}, color={0,127,255}));
   connect(massFlowRate.port_b, boundary3.ports[1]) annotation (Line(points=
           {{56,16},{68,16},{68,46},{80,46}}, color={0,127,255}));
-  connect(temperature1.port, heatPumpDetailed.port_conOut) annotation (Line(
-        points={{18,30},{22,30},{22,16},{26,16},{26,7},{14,7}}, color={0,
-          127,255}));
   connect(massFlowRate1.port_b, boundary1.ports[1])
     annotation (Line(points={{-50,-20},{-68,-20}}, color={0,127,255}));
   connect(massFlowRate1.port_a, heatPumpDetailed.port_evaOut) annotation (
       Line(points={{-30,-20},{-22,-20},{-22,-7},{-12,-7}}, color={0,127,255}));
-  connect(temperature.port, heatPumpDetailed.port_evaOut) annotation (Line(
-        points={{8,-46},{-8,-46},{-8,-20},{-22,-20},{-22,-7},{-12,-7}},
-        color={0,127,255}));
   connect(booleanStep.y, heatPumpDetailed.onOff_in)
     annotation (Line(points={{-37,64},{-4,64},{-4,9}}, color={255,0,255}));
   connect(boundary.ports[1], fan1.port_a)
