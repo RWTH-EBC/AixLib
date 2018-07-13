@@ -42,8 +42,6 @@ model Generation
     height=-0.5,
     offset=1)
     annotation (Placement(transformation(extent={{-112,18},{-92,38}})));
-  Modelica.Blocks.Sources.BooleanStep booleanStep(startTime=750)
-    annotation (Placement(transformation(extent={{-150,-8},{-130,12}})));
 
   Generation_heatPump generation_heatPump1
     annotation (Placement(transformation(extent={{-80,-40},{-60,-20}})));
@@ -109,6 +107,23 @@ model Generation
     annotation (Placement(transformation(extent={{46,-34},{66,-14}})));
   Modelica.Blocks.Sources.RealExpression realExpression5(y=20000)
     annotation (Placement(transformation(extent={{22,-2},{42,18}})));
+  Generation_AirCooling generation_AirCooling
+    annotation (Placement(transformation(extent={{-80,-88},{-60,-68}})));
+  Modelica.Blocks.Sources.RealExpression realExpression6(y=273.15)
+    annotation (Placement(transformation(extent={{-130,-92},{-110,-72}})));
+  Modelica.Blocks.Sources.RealExpression realExpression7(y=363)
+    annotation (Placement(transformation(extent={{-130,-74},{-110,-54}})));
+  Fluid.Actuators.Valves.ThreeWayLinear val(
+    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+
+    m_flow_nominal=3,
+    dpValve_nominal=10)
+    annotation (Placement(transformation(extent={{-46,-64},{-26,-44}})));
+  Modelica.Blocks.Sources.BooleanExpression booleanExpression1(
+                                                              y=false)
+    annotation (Placement(transformation(extent={{-132,-8},{-112,12}})));
+  Modelica.Blocks.Sources.RealExpression realExpression8(y=0)
+    annotation (Placement(transformation(extent={{-62,-14},{-42,6}})));
 equation
   connect(generation_Hot.Fluid_out_Hot, HotWater.portHC1In) annotation (Line(
         points={{-60,61.4},{-32,61.4},{-32,62.69},{-4.35,62.69}}, color={0,127,
@@ -133,9 +148,6 @@ equation
         points={{-68,70},{-70,70},{-70,76},{-85,76}}, color={0,0,127}));
   connect(generation_heatPump1.dp_in1, realExpression4.y) annotation (Line(
         points={{-65.6,-20},{-66,-20},{-66,-12},{-87,-12}}, color={0,0,127}));
-  connect(generation_heatPump1.dp_in2, realExpression4.y) annotation (Line(
-        points={{-74.8,-20},{-74.8,-12},{-87,-12}},
-                                                  color={0,0,127}));
   connect(generation_heatPump1.Fluid_out_warm, HotWater.portHC2In) annotation (
       Line(points={{-60,-24},{-32,-24},{-32,48.75},{-4.175,48.75}}, color={0,
           127,255}));
@@ -144,12 +156,6 @@ equation
           0,127,255}));
   connect(ColdWater.heatportOutside, fixedTemperature.port) annotation (Line(
         points={{23.65,-65.98},{62,-65.98},{62,26},{44,26}}, color={191,0,0}));
-  connect(generation_heatPump1.Fluid_out_cold, ColdWater.portHC1In) annotation (
-     Line(points={{-80,-32},{-88,-32},{-88,-57.31},{-4.35,-57.31}}, color={0,
-          127,255}));
-  connect(ColdWater.portHC1Out, generation_heatPump1.Fluid_in_cold) annotation (
-     Line(points={{-4.175,-62.58},{-94,-62.58},{-94,-28},{-80,-28}}, color={0,
-          127,255}));
   connect(tank2.ports[1], HotWater.fluidportTop2) annotation (Line(points={{31.6,76},
           {14.375,76},{14.375,70.17}},          color={0,127,255}));
   connect(tank1.ports[1], ColdWater.fluidportTop2) annotation (Line(points={{19.6,
@@ -168,13 +174,33 @@ equation
     annotation (Line(points={{43,8},{56,8},{56,-12}}, color={0,0,127}));
   connect(fan1.dp_in, fan2.dp_in) annotation (Line(points={{62,88},{62,96},{50,
           96},{50,8},{56,8},{56,-12}}, color={0,0,127}));
-  connect(booleanStep.y, generation_heatPump1.onOff_in1) annotation (Line(
-        points={{-129,2},{-70.4,2},{-70.4,-20}}, color={255,0,255}));
   connect(generation_Hot.isOn_boiler, generation_Hot.isOn_chp) annotation (Line(
         points={{-74,70},{-74,94},{-76,94},{-76,70}}, color={255,0,255}));
+  connect(realExpression6.y, generation_AirCooling.T_in1)
+    annotation (Line(points={{-109,-82},{-80.8,-82}}, color={0,0,127}));
+  connect(realExpression7.y, generation_AirCooling.m_flow_in) annotation (Line(
+        points={{-109,-64},{-94,-64},{-94,-76},{-80.4,-76}}, color={0,0,127}));
+  connect(val.port_2, ColdWater.portHC1In) annotation (Line(points={{-26,-54},{
+          -16,-54},{-16,-57.31},{-4.35,-57.31}}, color={0,127,255}));
+  connect(ColdWater.portHC1Out, generation_heatPump1.Fluid_out_cold)
+    annotation (Line(points={{-4.175,-62.58},{-90,-62.58},{-90,-32},{-80,-32}},
+        color={0,127,255}));
+  connect(generation_AirCooling.Fluid_out_airCooler, generation_heatPump1.Fluid_out_cold)
+    annotation (Line(points={{-60,-74},{-48,-74},{-48,-66},{-90,-66},{-90,-32},
+          {-80,-32}}, color={0,127,255}));
+  connect(val.port_3, generation_AirCooling.Fluid_in_airCooler) annotation (
+      Line(points={{-36,-64},{-36,-72},{-60,-72}}, color={0,127,255}));
+  connect(val.port_1, generation_heatPump1.Fluid_in_cold) annotation (Line(
+        points={{-46,-54},{-88,-54},{-88,-28},{-80,-28}}, color={0,127,255}));
+  connect(booleanExpression1.y, generation_heatPump1.onOff_in1) annotation (
+      Line(points={{-111,2},{-70.4,2},{-70.4,-20}}, color={255,0,255}));
+  connect(realExpression8.y, val.y)
+    annotation (Line(points={{-41,-4},{-36,-4},{-36,-42}}, color={0,0,127}));
+  connect(generation_heatPump1.dp_in2, realExpression4.y) annotation (Line(
+        points={{-74.8,-20},{-76,-20},{-76,-12},{-87,-12}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
-          extent={{-60,32},{2,12}},
+          extent={{-66,44},{-4,24}},
           lineColor={28,108,200},
           textString="Parameter müssen angepasst werden
 ")}));
