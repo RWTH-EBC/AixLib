@@ -41,9 +41,9 @@ model Generation_heatPump
         Modelica.Media.Water.ConstantPropertyLiquidWater,
     redeclare package Medium_eva =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
-    dp_conNominal=10000,
-    dp_evaNominal=10000,
     dataTable=DataBase.HeatPump.EN14511.Vaillant_VWL_101(),
+    dp_conNominal=1000,
+    dp_evaNominal=10000,
     T_startEva=283.15,
     T_startCon=313.15)
     annotation (Placement(transformation(extent={{-14,-10},{16,10}})));
@@ -83,9 +83,9 @@ model Generation_heatPump
   Fluid.MixingVolumes.MixingVolume vol(
     nPorts=2,
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
     m_flow_nominal=1,
     V=0.001) annotation (Placement(transformation(extent={{-50,-22},{-30,-2}})));
+
 equation
   connect(heatPumpDetailed.port_conOut, fan.port_a) annotation (Line(points={{
           14,7},{28,7},{28,18},{42,18}}, color={0,127,255}));

@@ -18,10 +18,10 @@ model TBA_Pipe
   Fluid.MixingVolumes.MixingVolume vol(
     nPorts=2,
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
     m_flow_nominal=1,
     V=wall_length*wall_height*5.8*3.14159*(pipe_diameter/2)^2)
     annotation (Placement(transformation(extent={{-8,46},{12,66}})));
+
 equation
   connect(vol.ports[1], Fluid_out)
     annotation (Line(points={{0,46},{60,46},{60,-100}}, color={0,127,255}));
