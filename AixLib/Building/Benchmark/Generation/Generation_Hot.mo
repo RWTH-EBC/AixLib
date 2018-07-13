@@ -3,12 +3,12 @@ model Generation_Hot
 
   inner Modelica.Fluid.System system
     annotation (Placement(transformation(extent={{80,80},{100,100}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_Hot(redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_Hot(redeclare package Medium
+      = Modelica.Media.Water.ConstantPropertyLiquidWater)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
-    annotation (Placement(transformation(extent={{90,4},{110,24}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_Hot(redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater)
+    annotation (Placement(transformation(extent={{90,28},{110,48}})));
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_Hot(redeclare package Medium
+      = Modelica.Media.Water.ConstantPropertyLiquidWater)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,-30},{110,-10}})));
   Modelica.Blocks.Interfaces.RealInput TSet_boiler annotation (Placement(
@@ -117,13 +117,13 @@ equation
     annotation (Line(points={{-2,4},{-2,-40},{-100,-40}}, color={0,0,127}));
   connect(boiler_Benchmark.port_b, teeJunctionIdeal.port_3)
     annotation (Line(points={{30,56},{46,56},{46,26}}, color={0,127,255}));
-  connect(teeJunctionIdeal.port_2, Fluid_out_Hot) annotation (Line(points={{56,
-          16},{80,16},{80,14},{100,14}}, color={0,127,255}));
+  connect(teeJunctionIdeal.port_2, Fluid_out_Hot) annotation (Line(points={{56,16},
+          {80,16},{80,38},{100,38}},     color={0,127,255}));
   connect(tank1.ports[2], Fluid_in_Hot)
     annotation (Line(points={{38.4,-20},{100,-20}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
-          extent={{90,52},{152,32}},
+          extent={{28,80},{90,60}},
           lineColor={28,108,200},
           textString="Parameter passen nicht")}));
 end Generation_Hot;
