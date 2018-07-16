@@ -1,5 +1,5 @@
 within AixLib.DataBase.Profiles;
-record Profile_BaseDataDefinition "Ventilation profiles"
+record ProfileBaseDataDefinition "Base record for one-value time-series profiles"
   extends Modelica.Icons.Record;
   parameter Real[:, :] Profile "First column time";
   annotation(Documentation(info = "<html>
@@ -19,5 +19,4 @@ record Profile_BaseDataDefinition "Ventilation profiles"
  <li><i>July 3, 2012&nbsp;</i> by Ana Constantin:<br/>Implemented.</li>
  </ul>
  </html>"));
-end Profile_BaseDataDefinition;
-
+end ProfileBaseDataDefinition;
