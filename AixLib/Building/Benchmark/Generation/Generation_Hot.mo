@@ -90,8 +90,6 @@ model Generation_Hot
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-100,-40})));
-  Fluid.Sources.Boundary_pT bou
-    annotation (Placement(transformation(extent={{40,-54},{60,-34}})));
 equation
   connect(dp_in1, fan.dp_in) annotation (Line(points={{-20,100},{-20,63},{-30,
           63},{-30,28}}, color={0,0,127}));
