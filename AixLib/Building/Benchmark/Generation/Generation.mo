@@ -18,12 +18,12 @@ model Generation
 
   inner Modelica.Fluid.System system
     annotation (Placement(transformation(extent={{-40,80},{-20,100}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_hot(redeclare package Medium
-      = Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_hot(redeclare package Medium =
+        Modelica.Media.Water.ConstantPropertyLiquidWater)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,70},{110,90}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_hot(redeclare package Medium
-      = Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_hot(redeclare package Medium =
+        Modelica.Media.Water.ConstantPropertyLiquidWater)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,30},{110,50}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=false)
@@ -81,12 +81,12 @@ model Generation
     energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     T_start=293.15)
     annotation (Placement(transformation(extent={{42,-46},{56,-32}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium
-      = Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium =
+        Modelica.Media.Water.ConstantPropertyLiquidWater)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,-50},{110,-30}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium
-      = Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium =
+        Modelica.Media.Water.ConstantPropertyLiquidWater)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,-90},{110,-70}})));
   Fluid.Movers.FlowControlled_dp fan1(
@@ -143,8 +143,7 @@ model Generation
     m_flow_nominal=3,
     dpValve_nominal=10)
     annotation (Placement(transformation(extent={{-26,-64},{-42,-80}})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature1(T=343.15)
-                                                                                      annotation(Placement(transformation(extent={{154,-72},
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature1(T=343.15)  annotation(Placement(transformation(extent={{154,-72},
             {146,-64}})));
   Modelica.Blocks.Tables.CombiTable1D combiTable1D(smoothness=Modelica.Blocks.Types.Smoothness.ConstantSegments,
       table=[1,0,0,0,0; 2,0,1,1,0; 3,0,0,1,0; 4,1,1,1,1])

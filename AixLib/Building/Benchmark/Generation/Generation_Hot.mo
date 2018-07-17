@@ -3,12 +3,12 @@ model Generation_Hot
 
   inner Modelica.Fluid.System system
     annotation (Placement(transformation(extent={{80,80},{100,100}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_Hot(redeclare package Medium
-      = Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_Hot(redeclare package Medium =
+        Modelica.Media.Water.ConstantPropertyLiquidWater)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,28},{110,48}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_Hot(redeclare package Medium
-      = Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_Hot(redeclare package Medium =
+        Modelica.Media.Water.ConstantPropertyLiquidWater)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,-30},{110,-10}})));
   Modelica.Blocks.Interfaces.RealInput TSet_boiler annotation (Placement(
@@ -90,6 +90,8 @@ model Generation_Hot
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-100,-40})));
+  Fluid.Sources.Boundary_pT bou
+    annotation (Placement(transformation(extent={{40,-54},{60,-34}})));
 equation
   connect(dp_in1, fan.dp_in) annotation (Line(points={{-20,100},{-20,63},{-30,
           63},{-30,28}}, color={0,0,127}));
