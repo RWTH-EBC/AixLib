@@ -151,9 +151,6 @@ model OpenPlanOffice
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-24,-110})));
-  Components.DryAir.Airload                 airload(V=3600, T(start=293.15,
-        displayUnit="degC"))                                                       annotation(Placement(transformation(extent={{2,-8},{
-            22,12}})));
   Utilities.Interfaces.Adaptors.HeatStarToComb thermStar_Demux annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 90, origin = {-20, -26})));
   Components.Walls.ActiveWallPipeBased activeWallPipeBased(
     wall_length=40,
@@ -178,6 +175,17 @@ model OpenPlanOffice
         origin={70,110})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b Heatport_TBA
     annotation (Placement(transformation(extent={{90,38},{110,58}})));
+  Fluid.MixingVolumes.MixingVolumeMoistAir vol(redeclare package Medium =
+        Modelica.Media.Air.MoistAir, nPorts=2)
+    annotation (Placement(transformation(extent={{6,-12},{26,8}})));
+  Modelica.Fluid.Interfaces.FluidPort_a Air_in(redeclare package Medium =
+        Modelica.Media.Air.MoistAir)
+    "Fluid connector a (positive design flow direction is from port_a to port_b)"
+    annotation (Placement(transformation(extent={{90,-4},{110,16}})));
+  Modelica.Fluid.Interfaces.FluidPort_b Air_out(redeclare package Medium =
+        Modelica.Media.Air.MoistAir)
+    "Fluid connector b (positive design flow direction is from port_a to port_b)"
+    annotation (Placement(transformation(extent={{90,18},{110,38}})));
 equation
   connect(FloorToKitchen1.port_outside, HeatPort_ToKitchen)
     annotation (Line(points={{70,-66.2},{70,-100}}, color={191,0,0}));
@@ -223,8 +231,6 @@ equation
   connect(EastWall.thermStarComb_inside, thermStar_Demux.thermStarComb)
     annotation (Line(points={{56,0},{50,0},{50,-52},{-20.1,-52},{-20.1,-35.4}},
         color={191,0,0}));
-  connect(thermStar_Demux.therm, airload.port)
-    annotation (Line(points={{-25.1,-15.9},{-25.1,0},{3,0}}, color={191,0,0}));
   connect(SouthWall.port_outside, HeatPort_OutdoorTemp) annotation (Line(points=
          {{-52,-66.2},{-52,-80},{-90,-80},{-90,80},{-52,80},{-52,100}}, color={
           191,0,0}));
@@ -244,9 +250,15 @@ equation
           128,0}));
   connect(activeWallPipeBased.Heatport_TBA, Heatport_TBA) annotation (Line(
         points={{37.6,55.8},{37.6,48},{100,48}}, color={191,0,0}));
+  connect(vol.heatPort, thermStar_Demux.therm) annotation (Line(points={{6,-2},
+          {-25.1,-2},{-25.1,-15.9}}, color={191,0,0}));
+  connect(Air_in, vol.ports[1]) annotation (Line(points={{100,6},{80,6},{80,28},
+          {40,28},{40,-20},{14,-20},{14,-12}}, color={0,127,255}));
+  connect(Air_out, vol.ports[2]) annotation (Line(points={{100,28},{40,28},{40,
+          -20},{18,-20},{18,-12}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
-          extent={{-30,24},{18,14}},
+          extent={{-30,36},{18,26}},
           lineColor={28,108,200},
           textString="Lüftung fehlt komplett"),               Text(
           extent={{-4,46},{44,36}},

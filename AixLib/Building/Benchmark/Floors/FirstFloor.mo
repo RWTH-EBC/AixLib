@@ -45,9 +45,16 @@ model FirstFloor
         extent={{12,-12},{-12,12}},
         rotation=90,
         origin={80,100})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b
-    Heatport_TBA_openPlanOffice
-    annotation (Placement(transformation(extent={{90,-20},{110,0}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b Heatport_TBA[n]
+    annotation (Placement(transformation(extent={{90,-70},{110,-50}})));
+  Modelica.Fluid.Interfaces.FluidPort_a Air_in[n](redeclare package Medium =
+        Modelica.Media.Air.MoistAir)
+    "Fluid connector a (positive design flow direction is from port_a to port_b)"
+    annotation (Placement(transformation(extent={{-110,-90},{-90,-70}})));
+  Modelica.Fluid.Interfaces.FluidPort_b Air_out[n](redeclare package Medium =
+        Modelica.Media.Air.MoistAir)
+    "Fluid connector b (positive design flow direction is from port_a to port_b)"
+    annotation (Placement(transformation(extent={{-110,-50},{-90,-30}})));
 equation
   connect(openPlanOffice.WindSpeedPort_NorthWall, WindSpeedPort_North)
     annotation (Line(points={{32.4,18.68},{32.4,80},{100,80}}, color={0,0,127}));
@@ -63,7 +70,7 @@ equation
     annotation (Line(points={{31.68,-17.7},{31.68,-80},{-80,-80},{-80,40},{-96,
           40}},  color={255,128,0}));
   connect(openPlanOffice.SolarRadiationPort_EastWall, SolarRadiationPort_East)
-    annotation (Line(points={{55.8,-7.5},{76,-7.5},{76,-80},{-80,-80},{-80,60},
+    annotation (Line(points={{55.8,-7.5},{80,-7.5},{80,-80},{-80,-80},{-80,60},
           {-96,60}}, color={255,128,0}));
   connect(realExpression.y,tempOutside. T) annotation (Line(points={{-49,16},{
           -28,16}},                   color={0,0,127}));
@@ -91,8 +98,13 @@ equation
   connect(HeatPort_ToKitchen_OpenPlanOffice, HeatPort_ToKitchen_OpenPlanOffice)
     annotation (Line(points={{40,-102},{40,-97},{40,-97},{40,-102}}, color={191,
           0,0}));
-  connect(openPlanOffice.Heatport_TBA, Heatport_TBA_openPlanOffice) annotation (
-     Line(points={{54,9.16},{80,9.16},{80,-10},{100,-10}}, color={191,0,0}));
+  connect(openPlanOffice.Air_out, Air_out[1]) annotation (Line(points={{54,5.76},
+          {68,5.76},{68,6},{80,6},{80,-80},{-80,-80},{-80,-80},{-80,-40},{-100,
+          -40}}, color={0,127,255}));
+  connect(openPlanOffice.Air_in, Air_in[1]) annotation (Line(points={{54,2.02},
+          {70,2.02},{70,2},{80,2},{80,-80},{-100,-80}}, color={0,127,255}));
+  connect(openPlanOffice.Heatport_TBA, Heatport_TBA[1]) annotation (Line(points
+        ={{54,9.16},{68,9.16},{68,8},{80,8},{80,-60},{100,-60}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-68,52},{-6,32}},

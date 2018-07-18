@@ -39,9 +39,16 @@ model Office
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={80,100})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b
-    Heatport_TBA_openPlanOffice
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b Heatport_TBA[n]
     annotation (Placement(transformation(extent={{70,-110},{90,-90}})));
+  Modelica.Fluid.Interfaces.FluidPort_a Air_in[n](redeclare package Medium =
+        Modelica.Media.Air.MoistAir)
+    "Fluid connector a (positive design flow direction is from port_a to port_b)"
+    annotation (Placement(transformation(extent={{-50,-110},{-30,-90}})));
+  Modelica.Fluid.Interfaces.FluidPort_b Air_out[n](redeclare package Medium =
+        Modelica.Media.Air.MoistAir)
+    "Fluid connector b (positive design flow direction is from port_a to port_b)"
+    annotation (Placement(transformation(extent={{-90,-110},{-70,-90}})));
 equation
   connect(realExpression.y,tempOutside. T) annotation (Line(points={{-51,-40},{
           -30,-40}},                  color={0,0,127}));
@@ -77,8 +84,12 @@ equation
         points={{16,60},{16,80},{80,80},{80,100}}, color={0,0,127}));
   connect(firstFloor.WindSpeedPort_West, WindSpeedPort_West) annotation (Line(
         points={{20,44},{80,44},{80,-10},{100,-10}}, color={0,0,127}));
-  connect(firstFloor.Heatport_TBA_openPlanOffice, Heatport_TBA_openPlanOffice)
-    annotation (Line(points={{20,38},{80,38},{80,-100}}, color={191,0,0}));
+  connect(firstFloor.Heatport_TBA[1], Heatport_TBA[1])
+    annotation (Line(points={{20,28},{80,28},{80,-100}}, color={191,0,0}));
+  connect(Air_out[1], firstFloor.Air_out[1]) annotation (Line(points={{-80,-100},
+          {-80,32},{-20,32}}, color={0,127,255}));
+  connect(firstFloor.Air_in[1], Air_in[1]) annotation (Line(points={{-20,24},{
+          -80,24},{-80,-80},{-40,-80},{-40,-100}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-72,-2},{-10,-22}},

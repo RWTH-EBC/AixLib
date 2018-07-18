@@ -5,9 +5,11 @@ model FullModel
   Buildings.Office office
     annotation (Placement(transformation(extent={{30,0},{92,60}})));
   Generation.Generation generation
-    annotation (Placement(transformation(extent={{-80,-62},{-60,-42}})));
+    annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
   Transfer.Transfer_TBA.Full_Transfer_TBA full_Transfer_TBA
-    annotation (Placement(transformation(extent={{-10,-62},{10,-42}})));
+    annotation (Placement(transformation(extent={{60,-60},{80,-40}})));
+  Transfer.Transfer_RLT.Full_Transfer_RLT full_Transfer_RLT
+    annotation (Placement(transformation(extent={{0,-60},{20,-40}})));
 equation
   connect(weather.solarRad_out_North, office.SolarRadiationPort_North)
     annotation (Line(points={{49.4,100},{24,100},{24,54},{30,54}},  color={255,
@@ -36,22 +38,28 @@ equation
       Line(points={{40.54,60},{40,60},{40,84},{49.4,84}}, color={255,128,0}));
   connect(office.WindSpeedPort_Hor, weather.WindSpeed_Hor) annotation (Line(
         points={{85.8,60},{86,60},{86,84},{70,84}}, color={0,0,127}));
-  connect(full_Transfer_TBA.HeatPort_TBA_OpenPlanOffice, office.Heatport_TBA_openPlanOffice)
-    annotation (Line(points={{8,-42},{8,-20},{85.8,-20},{85.8,0}},   color={191,
-          0,0}));
   connect(generation.Fluid_out_hot,full_Transfer_TBA.Fluid_in_warm)
-    annotation (Line(points={{-60,-44},{-36,-44},{-36,-49.4},{-10,-49.4}},
-                                                                       color={0,
+    annotation (Line(points={{-60,-42},{-40,-42},{-40,-80},{40,-80},{40,-47.4},
+          {60,-47.4}},                                                 color={0,
           127,255}));
   connect(generation.Fluid_in_hot,full_Transfer_TBA.Fluid_out_warm)
-    annotation (Line(points={{-60,-48},{-40,-48},{-40,-53.4},{-10,-53.4}},
+    annotation (Line(points={{-60,-46},{-40,-46},{-40,-80},{40,-80},{40,-51.4},
+          {60,-51.4}},
         color={0,127,255}));
   connect(generation.Fluid_out_cold, full_Transfer_TBA.Fluid_in_cold)
-    annotation (Line(points={{-60,-56},{-36,-56},{-36,-56},{-10,-56}},
+    annotation (Line(points={{-60,-54},{-40,-54},{-40,-80},{40,-80},{40,-80},{
+          40,-54},{60,-54}},
         color={0,127,255}));
   connect(generation.Fluid_in_cold, full_Transfer_TBA.Fluid_out_cold)
-    annotation (Line(points={{-60,-60},{-36,-60},{-36,-60},{-10,-60}},
+    annotation (Line(points={{-60,-58},{-40,-58},{-40,-80},{40,-80},{40,-58},{
+          60,-58}},
         color={0,127,255}));
+  connect(full_Transfer_TBA.HeatPort_TBA, office.Heatport_TBA) annotation (Line(
+        points={{70,-40},{70,-20},{85.8,-20},{85.8,0}}, color={191,0,0}));
+  connect(office.Air_out, full_Transfer_RLT.Air_in) annotation (Line(points={{
+          36.2,0},{36,0},{36,-20},{6,-20},{6,-40}}, color={0,127,255}));
+  connect(full_Transfer_RLT.Air_out, office.Air_in) annotation (Line(points={{
+          14,-40},{14,-20},{48.6,-20},{48.6,0}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=5000, Interval=1));
