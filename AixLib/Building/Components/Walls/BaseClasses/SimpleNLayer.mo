@@ -44,11 +44,6 @@ equation
       pattern=LinePattern.DashDotDot));
   end for;
   // connecting outmost elements to connectors: port_a--HeatCondb[1]...HeatConda[n]--port_b
-<<<<<<< HEAD
-  connect(HeatConda[1].port_a, port_a);
-  connect(HeatCondb[n].port_b, port_b);
-  annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0})}), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-32, 60}, {32, -100}}, lineColor = {166, 166, 166}, pattern = LinePattern.None, fillColor = {190, 190, 190},
-=======
   connect(HeatConda[1].port_a, port_a) annotation (Line(
       points={{-52,0},{-100,0}},
       color={191,0,0},
@@ -59,7 +54,6 @@ equation
       color={191,0,0},
       pattern=LinePattern.DashDotDot));
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}})),                                                                                  Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {0, 0, 0}), Rectangle(extent = {{-32, 60}, {32, -100}}, lineColor = {166, 166, 166}, pattern = LinePattern.None, fillColor = {190, 190, 190},
->>>>>>> development
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-80, 60}, {80, -100}}, lineColor = {135, 135, 135}), Rectangle(extent = {{-48, 60}, {-32, -100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {208, 208, 208},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-64, 60}, {-48, -100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {190, 190, 190},
             fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-80, 60}, {-64, -100}}, lineColor = {0, 0, 255}, pattern = LinePattern.None, fillColor = {156, 156, 156},
