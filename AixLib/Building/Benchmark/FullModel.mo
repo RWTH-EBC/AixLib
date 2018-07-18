@@ -40,18 +40,19 @@ equation
     annotation (Line(points={{8,-42},{8,-20},{85.8,-20},{85.8,0}},   color={191,
           0,0}));
   connect(generation.Fluid_out_hot,full_Transfer_TBA.Fluid_in_warm)
-    annotation (Line(points={{-60,-46},{-36,-46},{-36,-49.4},{-10,-49.4}},
+    annotation (Line(points={{-60,-44},{-36,-44},{-36,-49.4},{-10,-49.4}},
                                                                        color={0,
           127,255}));
   connect(generation.Fluid_in_hot,full_Transfer_TBA.Fluid_out_warm)
-    annotation (Line(points={{-59.8,-49.4},{-40,-49.4},{-40,-53.4},{-10,-53.4}},
+    annotation (Line(points={{-60,-48},{-40,-48},{-40,-53.4},{-10,-53.4}},
         color={0,127,255}));
   connect(generation.Fluid_out_cold, full_Transfer_TBA.Fluid_in_cold)
-    annotation (Line(points={{-60,-54.4},{-36,-54.4},{-36,-56},{-10,-56}},
+    annotation (Line(points={{-60,-56},{-36,-56},{-36,-56},{-10,-56}},
         color={0,127,255}));
   connect(generation.Fluid_in_cold, full_Transfer_TBA.Fluid_out_cold)
-    annotation (Line(points={{-60,-61.4},{-36,-61.4},{-36,-60},{-10,-60}},
+    annotation (Line(points={{-60,-60},{-36,-60},{-36,-60},{-10,-60}},
         color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    experiment(StopTime=5000, Interval=1));
 end FullModel;
