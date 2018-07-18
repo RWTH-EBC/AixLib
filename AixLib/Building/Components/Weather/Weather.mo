@@ -9,7 +9,7 @@ model Weather "Complex weather model"
   parameter Real GroundReflection = 0.2 "ground reflection coefficient" annotation(Dialog(group = "Location Properties"));
   parameter String tableName = "wetter"
     "table name on file or in function usertab"                                     annotation(Dialog(group = "Properties of Weather Data"));
-  parameter String fileName = "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt"
+  parameter String fileName = Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/TRY2010_12_Jahr_Modelica-Library.txt")
     "file where matrix is stored"                                                                                                     annotation(Dialog(group = "Properties of Weather Data", loadSelector(filter = "Text files (*.txt);;Matlab files (*.mat)", caption = "Open file in which table is present")));
   parameter Real offset[:] = {0} "offsets of output signals" annotation(Dialog(group = "Properties of Weather Data"));
   parameter Modelica.Blocks.Types.Smoothness smoothness = Modelica.Blocks.Types.Smoothness.LinearSegments

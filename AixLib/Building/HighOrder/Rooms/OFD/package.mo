@@ -1,4 +1,4 @@
-within AixLib.Building.HighOrder.Rooms;
+﻿within AixLib.Building.HighOrder.Rooms;
 package OFD "One Family Dwelling"
   extends Modelica.Icons.Package;
 

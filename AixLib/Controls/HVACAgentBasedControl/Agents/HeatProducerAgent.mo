@@ -2,16 +2,16 @@ within AixLib.Controls.HVACAgentBasedControl.Agents;
 model HeatProducerAgent
   extends BaseClasses.PartialAgent;
   parameter Real maxCapacity = 100000 "maximum capacity for heatgeneration";
-  parameter Real minCapacity = 0;
-  Real costCurrent(start=40);
-  Real costNew(start=0);
-  Real setCapacity(start=2000);
-  Real costDifference(start=0);
-  Real totalRequest(start=0);
-  Real currentCapacityDiscrete(start=2000);
-  Real maxCapacityInternal;
-  Real calcCapacityInternal(start=1);
-  parameter Boolean maxCapacityExternal=false;
+  parameter Real minCapacity = 0 "minimum capacity for heatgeneration";
+  Real costCurrent(start=40) "Real variable to define costCurrent";
+  Real costNew(start=0) "Real variable to define costNew";
+  Real setCapacity(start=2000) "Real variable to define setCapacity";
+  Real costDifference(start=0) "Real variable to define costDifference";
+  Real totalRequest(start=0) "Real variable to define totalRequest";
+  Real currentCapacityDiscrete(start=2000) "Real variable to define currentCapacityDiscrete";
+  Real maxCapacityInternal "Real variable to define maxCapacityInternal";
+  Real calcCapacityInternal(start=1) "Real variable to define calcCapacityInternal";
+  parameter Boolean maxCapacityExternal=false "Real variable to define maxCapacityExternal";
 
 // CostFunction related components
 
@@ -640,9 +640,10 @@ equation
 <p><img src=\"modelica://AixLib/Resources/Images/Controls/HVACAgentBasedControl/ProducerAgent.png\" alt=\"Producer agent\"/></p>
 <h4><span style=\"color: #008000\">References</span></h4>
 <ul>
-<li>Roozbeh Sangi, Felix B&uuml;nning, Marc Baranski, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic.</li>
+<li>Roozbeh Sangi, Felix B&uuml;nning, Johannes F&uuml;tterer, Dirk M&uuml;ller. A Platform for the Agent-based Control of HVAC Systems. Modelica Conference, 2017, Prague, Czech Republic.</li>
 <li>FIPA ACL Message Structure Specification</li>
 <li>FIPA Communicative Act Library Specification </li>
+<li>Felix B&uuml;nning, Roozbeh Sangi, Dirk M&uuml;ller. A Modelica library for agent-based control of building HVAC systems. Applied Energy, 193:52-59, 2017. </li>
 </ul>
 <h4><span style=\"color: #008000\">Example Results</span></h4>
 <ul>

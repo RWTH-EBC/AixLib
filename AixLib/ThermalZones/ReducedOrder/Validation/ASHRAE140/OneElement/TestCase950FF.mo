@@ -11,7 +11,7 @@ model TestCase950FF "Test case 950 free float"
     TDryBulSou=AixLib.BoundaryConditions.Types.DataSource.Input,
     HInfHorSou=AixLib.BoundaryConditions.Types.DataSource.Input,
     HSou=AixLib.BoundaryConditions.Types.RadiationDataSource.Input_HDirNor_HGloHor,
-    filNam="modelica://AixLib/Resources/WeatherData/ASHRAE140.mos")
+    filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/WeatherData/ASHRAE140.mos"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-98,68},{-78,88}})));
   AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[5](
