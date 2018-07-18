@@ -150,10 +150,6 @@ equation
  <li><i>May 02, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
  <li><i>March 30, 2012&nbsp;</i> by Ana Constantin and Corinna Leonhardt:<br/>Implemented.</li>
  </ul>
-<<<<<<< HEAD
- </html>"), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-            -100},{100,100}},                                                                          grid = {2, 2}), graphics={  Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {0, 0, 0})}));
-=======
  </html>"),
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
@@ -161,5 +157,4 @@ equation
         grid={2,2}), graphics={Rectangle(extent={{-80,80},{80,-80}}, lineColor={
               0,0,0})}));
 
->>>>>>> development
 end WindowSimple;
