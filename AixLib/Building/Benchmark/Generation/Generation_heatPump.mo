@@ -1,22 +1,20 @@
 within AixLib.Building.Benchmark.Generation;
 model Generation_heatPump
-  inner Modelica.Fluid.System system
-    annotation (Placement(transformation(extent={{80,80},{100,100}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_warm(redeclare package Medium
-      = Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_warm(redeclare package Medium =
+        Modelica.Media.Water.ConstantPropertyLiquidWater)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,50},{110,70}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_warm(redeclare package Medium
-      = Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_warm(redeclare package Medium =
+        Modelica.Media.Water.ConstantPropertyLiquidWater)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,-70},{110,-50}})));
 
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium
-      = Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium =
+        Modelica.Media.Water.ConstantPropertyLiquidWater)
     "Evaporator fluid input port"
     annotation (Placement(transformation(extent={{-110,50},{-90,70}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium
-      = Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium =
+        Modelica.Media.Water.ConstantPropertyLiquidWater)
     "Evaporator fluid output port"
     annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
   Modelica.Blocks.Interfaces.BooleanInput onOff_in1
@@ -68,8 +66,8 @@ equation
           {14,-7},{58,-7},{58,-60},{100,-60}}, color={0,127,255}));
   connect(bou1.ports[1], Fluid_in_warm) annotation (Line(points={{84,-2},{84,
           -12},{58,-12},{58,-60},{100,-60}}, color={0,127,255}));
-  connect(Fluid_out_cold, heatPumpDetailed.port_evaOut) annotation (Line(points
-        ={{-100,-60},{-24,-60},{-24,-7},{-12,-7}}, color={0,127,255}));
+  connect(Fluid_out_cold, heatPumpDetailed.port_evaOut) annotation (Line(points=
+         {{-100,-60},{-24,-60},{-24,-7},{-12,-7}}, color={0,127,255}));
   connect(Fluid_in_cold, heatPumpDetailed.port_evaIn) annotation (Line(points={
           {-100,60},{-24,60},{-24,7},{-12,7}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(

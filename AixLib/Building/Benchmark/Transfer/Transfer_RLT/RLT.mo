@@ -23,20 +23,20 @@ model RLT
     m_flow_nominal=20,
     dp_nominal=20)
     annotation (Placement(transformation(extent={{62,-76},{82,-56}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium
-      = Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium =
+        Modelica.Media.Water.ConstantPropertyLiquidWater)
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{70,90},{90,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium
-      = Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium =
+        Modelica.Media.Water.ConstantPropertyLiquidWater)
     "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{30,90},{50,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_warm(redeclare package Medium
-      = Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_warm(redeclare package Medium =
+        Modelica.Media.Water.ConstantPropertyLiquidWater)
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{-50,90},{-30,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_warm(redeclare package Medium
-      = Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_warm(redeclare package Medium =
+        Modelica.Media.Water.ConstantPropertyLiquidWater)
     "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{-90,90},{-70,110}})));
   Modelica.Fluid.Interfaces.FluidPort_a Air_in(redeclare package Medium =

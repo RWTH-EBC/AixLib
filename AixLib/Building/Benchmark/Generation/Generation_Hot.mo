@@ -27,15 +27,6 @@ model Generation_Hot
         rotation=-90,
         origin={-20,100})));
 
-  Modelica.Fluid.Vessels.OpenTank tank1(
-    use_portsData=false,
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-    height=0.1,
-    crossArea=0.1,
-    T_start=293.15,
-    nPorts=2)
-    annotation (Placement(transformation(extent={{30,-20},{44,-6}})));
-
   Test.Boiler_Benchmark boiler_Benchmark(
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
     m_flow_nominal=1,
@@ -51,9 +42,6 @@ model Generation_Hot
     redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per)
     annotation (Placement(transformation(extent={{-40,6},{-20,26}})));
 
-  Modelica.Fluid.Fittings.TeeJunctionIdeal teeJunctionIdeal(redeclare package
-      Medium = Modelica.Media.Water.ConstantPropertyLiquidWater)
-    annotation (Placement(transformation(extent={{36,6},{56,26}})));
   Fluid.Actuators.Valves.ThreeWayLinear val(
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
     m_flow_nominal=0.2,
@@ -90,19 +78,22 @@ model Generation_Hot
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-100,-40})));
+  Fluid.Sources.Boundary_pT bou3(
+    nPorts=1,
+    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+    p=100000) annotation (Placement(transformation(
+        extent={{-4,-4},{4,4}},
+        rotation=-90,
+        origin={26,-8})));
 equation
   connect(dp_in1, fan.dp_in) annotation (Line(points={{-20,100},{-20,63},{-30,
           63},{-30,28}}, color={0,0,127}));
-  connect(val.port_1, teeJunctionIdeal.port_1)
-    annotation (Line(points={{8,16},{36,16}}, color={0,127,255}));
   connect(val.port_3, boiler_Benchmark.port_a)
     annotation (Line(points={{-2,26},{-2,56},{10,56}}, color={0,127,255}));
   connect(fan.port_b, val.port_2)
     annotation (Line(points={{-20,16},{-12,16}}, color={0,127,255}));
   connect(cHP.port_b, fan.port_a)
     annotation (Line(points={{-66,16},{-40,16}}, color={0,127,255}));
-  connect(cHP.port_a, tank1.ports[1]) annotation (Line(points={{-86,16},{-86,
-          -20},{35.6,-20}}, color={0,127,255}));
   connect(isOn_chp, cHP.on) annotation (Line(points={{-60,100},{-60,0},{-72,0},
           {-72,7},{-73,7}}, color={255,0,255}));
   connect(isOn_boiler, boiler_Benchmark.isOn) annotation (Line(points={{-40,100},
@@ -115,12 +106,14 @@ equation
           80},{-80,80},{-80,100}}, color={0,0,127}));
   connect(val.y, Valve_boiler)
     annotation (Line(points={{-2,4},{-2,-40},{-100,-40}}, color={0,0,127}));
-  connect(boiler_Benchmark.port_b, teeJunctionIdeal.port_3)
-    annotation (Line(points={{30,56},{46,56},{46,26}}, color={0,127,255}));
-  connect(teeJunctionIdeal.port_2, Fluid_out_Hot) annotation (Line(points={{56,16},
-          {80,16},{80,38},{100,38}},     color={0,127,255}));
-  connect(tank1.ports[2], Fluid_in_Hot)
-    annotation (Line(points={{38.4,-20},{100,-20}}, color={0,127,255}));
+  connect(val.port_1, Fluid_out_Hot) annotation (Line(points={{8,16},{70,16},{
+          70,38},{100,38}}, color={0,127,255}));
+  connect(boiler_Benchmark.port_b, Fluid_out_Hot) annotation (Line(points={{30,
+          56},{70,56},{70,38},{100,38}}, color={0,127,255}));
+  connect(cHP.port_a, Fluid_in_Hot) annotation (Line(points={{-86,16},{-90,16},
+          {-90,-20},{100,-20}}, color={0,127,255}));
+  connect(bou3.ports[1], Fluid_in_Hot)
+    annotation (Line(points={{26,-12},{26,-20},{100,-20}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{28,80},{90,60}},

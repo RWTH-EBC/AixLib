@@ -176,7 +176,16 @@ model OpenPlanOffice
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b Heatport_TBA
     annotation (Placement(transformation(extent={{90,38},{110,58}})));
   Fluid.MixingVolumes.MixingVolumeMoistAir vol(redeclare package Medium =
-        Modelica.Media.Air.MoistAir, nPorts=2)
+        Modelica.Media.Air.MoistAir, nPorts=2,
+    m_flow_nominal=10,
+    V=3600,
+    m_flow_small=0.001,
+    allowFlowReversal=true,
+    X_start={0.01,0.99},
+    energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
+    massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
+    p_start=100000,
+    T_start=293.15)
     annotation (Placement(transformation(extent={{6,-12},{26,8}})));
   Modelica.Fluid.Interfaces.FluidPort_a Air_in(redeclare package Medium =
         Modelica.Media.Air.MoistAir)
@@ -186,6 +195,8 @@ model OpenPlanOffice
         Modelica.Media.Air.MoistAir)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,18},{110,38}})));
+  Modelica.Blocks.Sources.RealExpression realExpression(y=0)
+    annotation (Placement(transformation(extent={{-46,-2},{-26,18}})));
 equation
   connect(FloorToKitchen1.port_outside, HeatPort_ToKitchen)
     annotation (Line(points={{70,-66.2},{70,-100}}, color={191,0,0}));
@@ -250,12 +261,14 @@ equation
           128,0}));
   connect(activeWallPipeBased.Heatport_TBA, Heatport_TBA) annotation (Line(
         points={{37.6,55.8},{37.6,48},{100,48}}, color={191,0,0}));
-  connect(vol.heatPort, thermStar_Demux.therm) annotation (Line(points={{6,-2},
-          {-25.1,-2},{-25.1,-15.9}}, color={191,0,0}));
   connect(Air_in, vol.ports[1]) annotation (Line(points={{100,6},{80,6},{80,28},
           {40,28},{40,-20},{14,-20},{14,-12}}, color={0,127,255}));
   connect(Air_out, vol.ports[2]) annotation (Line(points={{100,28},{40,28},{40,
           -20},{18,-20},{18,-12}}, color={0,127,255}));
+  connect(realExpression.y, vol.mWat_flow)
+    annotation (Line(points={{-25,8},{-12,8},{-12,6},{4,6}}, color={0,0,127}));
+  connect(vol.heatPort, thermStar_Demux.therm) annotation (Line(points={{6,-2},
+          {-25.1,-2},{-25.1,-15.9}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-30,36},{18,26}},

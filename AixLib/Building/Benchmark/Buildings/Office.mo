@@ -21,31 +21,20 @@ model Office
     annotation (Placement(transformation(extent={{110,-20},{90,0}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_OutdoorTemp
     annotation (Placement(transformation(extent={{-10,90},{10,110}})));
-  Utilities.Interfaces.SolarRad_in SolarRadiationPort_North
+  Utilities.Interfaces.SolarRad_in SolarRadiationPort_North[5]
     annotation (Placement(transformation(extent={{-110,70},{-90,90}})));
-  Utilities.Interfaces.SolarRad_in SolarRadiationPort_East
-    annotation (Placement(transformation(extent={{-110,40},{-90,60}})));
-  Utilities.Interfaces.SolarRad_in SolarRadiationPort_South
-    annotation (Placement(transformation(extent={{-110,10},{-90,30}})));
-  Utilities.Interfaces.SolarRad_in SolarRadiationPort_West
-    annotation (Placement(transformation(extent={{-110,-20},{-90,0}})));
-  Utilities.Interfaces.SolarRad_in SolarRadiationPort_Hor annotation (Placement(
-        transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=-90,
-        origin={-66,100})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort_Hor annotation (Placement(
         transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={80,100})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b Heatport_TBA[n]
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b Heatport_TBA
     annotation (Placement(transformation(extent={{70,-110},{90,-90}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Air_in[n](redeclare package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_a Air_in(redeclare package Medium =
         Modelica.Media.Air.MoistAir)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-50,-110},{-30,-90}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Air_out[n](redeclare package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_b Air_out(redeclare package Medium =
         Modelica.Media.Air.MoistAir)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-90,-110},{-70,-90}})));
@@ -68,28 +57,30 @@ equation
         points={{20,48},{80,48},{80,20},{100,20}}, color={0,0,127}));
   connect(firstFloor.HeatPort_OutdoorTemp, HeatPort_OutdoorTemp) annotation (
       Line(points={{0,60},{0,100}},                         color={191,0,0}));
-  connect(firstFloor.SolarRadiationPort_North, SolarRadiationPort_North)
-    annotation (Line(points={{-19.2,56},{-80,56},{-80,80},{-100,80}},
-        color={255,128,0}));
-  connect(firstFloor.SolarRadiationPort_East, SolarRadiationPort_East)
-    annotation (Line(points={{-19.2,52},{-80,52},{-80,50},{-100,50}},
-        color={255,128,0}));
-  connect(firstFloor.SolarRadiationPort_South, SolarRadiationPort_West)
-    annotation (Line(points={{-19.2,48},{-80,48},{-80,-10},{-100,-10}},
-        color={255,128,0}));
-  connect(firstFloor.SolarRadiationPort_Hor, SolarRadiationPort_Hor)
-    annotation (Line(points={{-16,59.2},{-16,80},{-66,80},{-66,100}}, color={
-          255,128,0}));
   connect(firstFloor.WindSpeedPort_Hor, WindSpeedPort_Hor) annotation (Line(
         points={{16,60},{16,80},{80,80},{80,100}}, color={0,0,127}));
   connect(firstFloor.WindSpeedPort_West, WindSpeedPort_West) annotation (Line(
         points={{20,44},{80,44},{80,-10},{100,-10}}, color={0,0,127}));
-  connect(firstFloor.Heatport_TBA[1], Heatport_TBA[1])
+  connect(firstFloor.SolarRadiationPort_Hor, SolarRadiationPort_North[5])
+    annotation (Line(points={{-16,59.2},{-16,88},{-100,88}}, color={255,128,0}));
+  connect(firstFloor.SolarRadiationPort_North, SolarRadiationPort_North[1])
+    annotation (Line(points={{-19.2,56},{-40,56},{-40,72},{-100,72}}, color={
+          255,128,0}));
+  connect(firstFloor.SolarRadiationPort_East, SolarRadiationPort_North[2])
+    annotation (Line(points={{-19.2,52},{-40,52},{-40,76},{-100,76}}, color={
+          255,128,0}));
+  connect(firstFloor.SolarRadiationPort_South, SolarRadiationPort_North[3])
+    annotation (Line(points={{-19.2,48},{-40,48},{-40,80},{-100,80}}, color={
+          255,128,0}));
+  connect(firstFloor.SolarRadiationPort_West, SolarRadiationPort_North[4])
+    annotation (Line(points={{-19.2,44},{-40,44},{-40,84},{-100,84}}, color={
+          255,128,0}));
+  connect(firstFloor.Air_out, Air_out) annotation (Line(points={{-20,32},{-80,
+          32},{-80,-100}}, color={0,127,255}));
+  connect(firstFloor.Air_in, Air_in) annotation (Line(points={{-20,24},{-40,24},
+          {-40,-100}}, color={0,127,255}));
+  connect(firstFloor.Heatport_TBA, Heatport_TBA)
     annotation (Line(points={{20,28},{80,28},{80,-100}}, color={191,0,0}));
-  connect(Air_out[1], firstFloor.Air_out[1]) annotation (Line(points={{-80,-100},
-          {-80,32},{-20,32}}, color={0,127,255}));
-  connect(firstFloor.Air_in[1], Air_in[1]) annotation (Line(points={{-20,24},{
-          -80,24},{-80,-80},{-40,-80},{-40,-100}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-72,-2},{-10,-22}},

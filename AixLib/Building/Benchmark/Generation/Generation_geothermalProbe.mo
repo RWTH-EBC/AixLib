@@ -1,19 +1,5 @@
 within AixLib.Building.Benchmark.Generation;
 model Generation_geothermalProbe
-  inner Modelica.Fluid.System system
-    annotation (Placement(transformation(extent={{80,80},{100,100}})));
-  Modelica.Fluid.Pipes.DynamicPipe pipe(
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-    isCircular=true,
-    diameter=0.02,
-    height_ab=0,
-    use_HeatTransfer=true,
-    length=240,
-    nNodes=8,
-    redeclare model HeatTransfer =
-        Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.ConstantFlowHeatTransfer
-        (alpha0=100))
-    annotation (Placement(transformation(extent={{-10,-14},{10,6}})));
 
   Modelica.Fluid.Interfaces.FluidPort_b Fulid_out_Geothermal(redeclare package
       Medium = Modelica.Media.Water.ConstantPropertyLiquidWater)
@@ -31,28 +17,62 @@ model Generation_geothermalProbe
             {-74,52}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature3(T=287.15)  annotation(Placement(transformation(extent={{-82,62},
             {-74,70}})));
+  Modelica.Fluid.Pipes.DynamicPipe pipe2(
+    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+
+    allowFlowReversal=true,
+    nParallel=1,
+    length=240,
+    isCircular=true,
+    diameter=0.02,
+    roughness=2.5e-5,
+    height_ab=0,
+    redeclare model FlowModel =
+        Modelica.Fluid.Pipes.BaseClasses.FlowModels.DetailedPipeFlow,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
+    massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
+    use_T_start=true,
+    h_start=100,
+    momentumDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
+    m_flow_start=0,
+    nNodes=8,
+    use_HeatTransfer=true,
+    useLumpedPressure=false,
+    useInnerPortProperties=false,
+    modelStructure=Modelica.Fluid.Types.ModelStructure.av_vb,
+    redeclare model HeatTransfer =
+        Modelica.Fluid.Pipes.BaseClasses.HeatTransfer.IdealFlowHeatTransfer (
+          T_ambient=293.15),
+    crossArea=1,
+    perimeter=0.5,
+    C_start=fill(0, 0),
+    p_a_start=100000,
+    p_b_start=100000,
+    T_start=293.15,
+    X_start={0})
+    annotation (Placement(transformation(extent={{-30,-26},{6,10}})));
 equation
-  connect(pipe.port_b, Fulid_out_Geothermal)
-    annotation (Line(points={{10,-4},{56,-4},{56,60},{100,60}},
-                                                color={0,127,255}));
-  connect(fixedTemperature.port, pipe.heatPorts[1]) annotation (Line(points={{
-          -74,10},{-2.6125,10},{-2.6125,0.4}}, color={191,0,0}));
-  connect(pipe.heatPorts[8], fixedTemperature.port) annotation (Line(points={{
-          2.8125,0.4},{2.8125,10},{-74,10}}, color={127,0,0}));
-  connect(fixedTemperature1.port, pipe.heatPorts[2]) annotation (Line(points={{
-          -74,30},{-1.8375,30},{-1.8375,0.4}}, color={191,0,0}));
-  connect(pipe.heatPorts[7], fixedTemperature1.port) annotation (Line(points={{
-          2.0375,0.4},{2.0375,30},{-74,30}}, color={127,0,0}));
-  connect(fixedTemperature2.port, pipe.heatPorts[3]) annotation (Line(points={{
-          -74,48},{-1.0625,48},{-1.0625,0.4}}, color={191,0,0}));
-  connect(pipe.heatPorts[6], fixedTemperature2.port) annotation (Line(points={{
-          1.2625,0.4},{1.2625,48},{-74,48}}, color={127,0,0}));
-  connect(fixedTemperature3.port, pipe.heatPorts[4]) annotation (Line(points={{
-          -74,66},{-0.2875,66},{-0.2875,0.4}}, color={191,0,0}));
-  connect(pipe.heatPorts[5], fixedTemperature3.port) annotation (Line(points={{
-          0.4875,0.4},{0.4875,66},{-74,66}}, color={127,0,0}));
-  connect(Fluid_in_Geothermal, pipe.port_a) annotation (Line(points={{100,-60},
-          {-40,-60},{-40,-4},{-10,-4}}, color={0,127,255}));
+  connect(pipe2.port_b, Fulid_out_Geothermal) annotation (Line(points={{6,-8},{
+          46,-8},{46,60},{100,60}}, color={0,127,255}));
+  connect(pipe2.port_a, Fluid_in_Geothermal) annotation (Line(points={{-30,-8},
+          {-62,-8},{-62,-60},{100,-60}}, color={0,127,255}));
+  connect(fixedTemperature.port, pipe2.heatPorts[1]) annotation (Line(points={{
+          -74,10},{-16.7025,10},{-16.7025,-0.08}}, color={191,0,0}));
+  connect(fixedTemperature.port, pipe2.heatPorts[8]) annotation (Line(points={{
+          -74,10},{-6.9375,10},{-6.9375,-0.08}}, color={191,0,0}));
+  connect(fixedTemperature1.port, pipe2.heatPorts[2]) annotation (Line(points={
+          {-74,30},{-15.3075,30},{-15.3075,-0.08}}, color={191,0,0}));
+  connect(fixedTemperature1.port, pipe2.heatPorts[7]) annotation (Line(points={
+          {-74,30},{-8.3325,30},{-8.3325,-0.08}}, color={191,0,0}));
+  connect(fixedTemperature2.port, pipe2.heatPorts[3]) annotation (Line(points={
+          {-74,48},{-44,48},{-44,48},{-13.9125,48},{-13.9125,-0.08}}, color={
+          191,0,0}));
+  connect(fixedTemperature2.port, pipe2.heatPorts[6]) annotation (Line(points={
+          {-74,48},{-9.7275,48},{-9.7275,-0.08}}, color={191,0,0}));
+  connect(fixedTemperature3.port, pipe2.heatPorts[4]) annotation (Line(points={
+          {-74,66},{-12.5175,66},{-12.5175,-0.08}}, color={191,0,0}));
+  connect(fixedTemperature3.port, pipe2.heatPorts[5]) annotation (Line(points={
+          {-74,66},{-11.1225,66},{-11.1225,-0.08}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Generation_geothermalProbe;

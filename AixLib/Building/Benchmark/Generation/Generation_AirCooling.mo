@@ -14,8 +14,6 @@ model Generation_AirCooling
         extent={{10,-10},{-10,10}},
         rotation=0,
         origin={44,-42})));
-  inner Modelica.Fluid.System system
-    annotation (Placement(transformation(extent={{80,80},{100,100}})));
   Modelica.Blocks.Interfaces.RealInput m_flow_in "Prescribed mass flow rate"
     annotation (Placement(transformation(extent={{-116,-32},{-92,-8}})));
   Modelica.Blocks.Interfaces.RealInput T_in1
@@ -103,11 +101,11 @@ model Generation_AirCooling
   Fluid.Sources.Boundary_pT bou1(
     nPorts=1,
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
     p=300000) annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=-90,
         origin={-32,-8})));
+
 equation
   connect(boundary.m_flow_in, m_flow_in) annotation (Line(points={{-46,-34},{
           -74,-34},{-74,-20},{-104,-20}},

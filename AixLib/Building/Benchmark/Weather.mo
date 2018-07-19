@@ -4,23 +4,13 @@ model Weather
     Wind_dir=true,
     Wind_speed=true,
     Air_temp=true,
-    Mass_frac=false,
     Rel_hum=false,
     SOD=DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor(),
-    Air_press=false,
     fileName=
-        "D:/aku-bga/AixLib/AixLib/Resources/weatherdata/TRY2010_12_Jahr_Modelica-Library.txt")
+        "D:/aku-bga/AixLib/AixLib/Resources/weatherdata/TRY2010_12_Jahr_Modelica-Library.txt",
+    Mass_frac=true,
+    Air_press=false)
     annotation (Placement(transformation(extent={{-50,14},{-20,34}})));
-  Utilities.Interfaces.SolarRad_out solarRad_out_North
-    annotation (Placement(transformation(extent={{-96,70},{-116,90}})));
-  Utilities.Interfaces.SolarRad_out solarRad_out_East
-    annotation (Placement(transformation(extent={{-96,30},{-116,50}})));
-  Utilities.Interfaces.SolarRad_out solarRad_out_South
-    annotation (Placement(transformation(extent={{-96,-10},{-116,10}})));
-  Utilities.Interfaces.SolarRad_out solarRad_out_West
-    annotation (Placement(transformation(extent={{-96,-50},{-116,-30}})));
-  Utilities.Interfaces.SolarRad_out solarRad_out_Hor
-    annotation (Placement(transformation(extent={{-96,-90},{-116,-70}})));
   Modelica.Blocks.Interfaces.RealOutput WindSpeed_East "in m/s"
     annotation (Placement(transformation(extent={{90,30},{110,50}})));
   Modelica.Blocks.Interfaces.RealOutput WindSpeed_South "in m/s"
@@ -62,23 +52,42 @@ model Weather
     annotation (Placement(transformation(extent={{90,-90},{110,-70}})));
   Modelica.Blocks.Math.Gain gain1(k=0)
     annotation (Placement(transformation(extent={{52,-86},{64,-74}})));
+  Utilities.Interfaces.SolarRad_out SolarRadiation_OrientedSurfaces1[size(
+    weather.SolarRadiation_OrientedSurfaces, 1)]
+    annotation (Placement(transformation(extent={{-100,60},{-80,80}})));
+  Fluid.Sources.Boundary_pT Air_in_bou(
+    redeclare package Medium = Modelica.Media.Air.MoistAir,
+    p=100000,
+    T=293.15,
+    nPorts=1) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=180,
+        origin={-52,-60})));
+  Modelica.Fluid.Interfaces.FluidPort_b Air_out(redeclare package Medium =
+        Modelica.Media.Air.MoistAir)
+    "Fluid connector b (positive design flow direction is from port_a to port_b)"
+    annotation (Placement(transformation(extent={{-110,-30},{-90,-10}})));
+  Modelica.Fluid.Interfaces.FluidPort_a Air_in(redeclare package Medium =
+        Modelica.Media.Air.MoistAir)
+    "Fluid connector a (positive design flow direction is from port_a to port_b)"
+    annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
+  Fluid.Sources.MassFlowSource_T boundary(
+    redeclare package Medium = Modelica.Media.Air.MoistAir,
+    use_m_flow_in=true,
+    use_T_in=true,
+    use_X_in=true,
+    nPorts=1)
+    annotation (Placement(transformation(extent={{-44,-30},{-64,-10}})));
+  Modelica.Blocks.Interfaces.RealInput m_flow_in1
+    "Prescribed mass flow rate" annotation (Placement(transformation(
+        extent={{20,-20},{-20,20}},
+        rotation=-90,
+        origin={-50,-100})));
+  Modelica.Blocks.Math.Feedback feedback
+    annotation (Placement(transformation(extent={{-14,-30},{-34,-50}})));
+  Modelica.Blocks.Sources.RealExpression realExpression(y=1)
+    annotation (Placement(transformation(extent={{22,-48},{10,-32}})));
 equation
-  connect(solarRad_out_South, solarRad_out_South)
-    annotation (Line(points={{-106,0},{-106,0}}, color={255,128,0}));
-  connect(solarRad_out_North, weather.SolarRadiation_OrientedSurfaces[1])
-    annotation (Line(points={{-106,80},{-80,80},{-80,0},{-42.8,0},{-42.8,13}},
-        color={255,128,0}));
-  connect(solarRad_out_East, weather.SolarRadiation_OrientedSurfaces[2])
-    annotation (Line(points={{-106,40},{-80,40},{-80,0},{-42.8,0},{-42.8,13}},
-        color={255,128,0}));
-  connect(solarRad_out_South, weather.SolarRadiation_OrientedSurfaces[3])
-    annotation (Line(points={{-106,0},{-42.8,0},{-42.8,13}}, color={255,128,0}));
-  connect(solarRad_out_West, weather.SolarRadiation_OrientedSurfaces[4])
-    annotation (Line(points={{-106,-40},{-80,-40},{-80,0},{-42.8,0},{-42.8,13}},
-        color={255,128,0}));
-  connect(solarRad_out_Hor, weather.SolarRadiation_OrientedSurfaces[5])
-    annotation (Line(points={{-106,-80},{-80,-80},{-80,0},{-42.8,0},{-42.8,13}},
-        color={255,128,0}));
   connect(weather.WindDirection, gain.u)
     annotation (Line(points={{-19,33},{0,33},{0,41},{9,41}}, color={0,0,127}));
   connect(weather.WindSpeed, product1.u1) annotation (Line(points={{-19,30},{40,
@@ -121,6 +130,26 @@ equation
     annotation (Line(points={{64.6,-80},{100,-80}}, color={0,0,127}));
   connect(gain1.u, product1.u1) annotation (Line(points={{50.8,-80},{40,-80},{
           40,42.4},{67.2,42.4}}, color={0,0,127}));
+  connect(weather.SolarRadiation_OrientedSurfaces,
+    SolarRadiation_OrientedSurfaces1) annotation (Line(points={{-42.8,13},{
+          -42.8,0},{-80,0},{-80,0},{-80,70},{-90,70}}, color={255,128,0}));
+  connect(boundary.m_flow_in, m_flow_in1) annotation (Line(points={{-44,-12},{
+          -44,-10},{-20,-10},{-20,-100},{-50,-100}}, color={0,0,127}));
+  connect(boundary.T_in, prescribedTemperature.T) annotation (Line(points={{-42,
+          -16},{-30,-16},{-30,10},{2.22045e-015,10},{2.22045e-015,-2}}, color={
+          0,0,127}));
+  connect(boundary.X_in[1], weather.WaterInAir) annotation (Line(points={{-42,
+          -24},{-24,-24},{-24,16},{-10,16},{-10,21},{-19,21}}, color={0,0,127}));
+  connect(boundary.ports[1], Air_out)
+    annotation (Line(points={{-64,-20},{-100,-20}}, color={0,127,255}));
+  connect(feedback.u2, weather.WaterInAir) annotation (Line(points={{-24,-32},{
+          -24,16},{-10,16},{-10,21},{-19,21}}, color={0,0,127}));
+  connect(feedback.y, boundary.X_in[2]) annotation (Line(points={{-33,-40},{-36,
+          -40},{-36,-24},{-42,-24}}, color={0,0,127}));
+  connect(realExpression.y, feedback.u1)
+    annotation (Line(points={{9.4,-40},{-16,-40}}, color={0,0,127}));
+  connect(Air_in, Air_in_bou.ports[1])
+    annotation (Line(points={{-100,-60},{-62,-60}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Weather;
