@@ -1,5 +1,7 @@
 within AixLib.Building.Benchmark;
 model Weather
+  replaceable package Medium_Air =
+    AixLib.Media.Air "Medium in the component";
   Components.Weather.Weather weather(
     Wind_dir=true,
     Wind_speed=true,
@@ -56,27 +58,27 @@ model Weather
     weather.SolarRadiation_OrientedSurfaces, 1)]
     annotation (Placement(transformation(extent={{-100,60},{-80,80}})));
   Fluid.Sources.Boundary_pT Air_in_bou(
-    redeclare package Medium = Modelica.Media.Air.MoistAir,
+    nPorts=1,
+    redeclare package Medium = Medium_Air,
     p=100000,
-    T=293.15,
-    nPorts=1) annotation (Placement(transformation(
+    T=293.15) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-52,-60})));
   Modelica.Fluid.Interfaces.FluidPort_b Air_out(redeclare package Medium =
-        Modelica.Media.Air.MoistAir)
+        Medium_Air)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,-30},{-90,-10}})));
   Modelica.Fluid.Interfaces.FluidPort_a Air_in(redeclare package Medium =
-        Modelica.Media.Air.MoistAir)
+        Medium_Air)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
   Fluid.Sources.MassFlowSource_T boundary(
-    redeclare package Medium = Modelica.Media.Air.MoistAir,
     use_m_flow_in=true,
     use_T_in=true,
     use_X_in=true,
-    nPorts=1)
+    nPorts=1,
+    redeclare package Medium = Medium_Air)
     annotation (Placement(transformation(extent={{-44,-30},{-64,-10}})));
   Modelica.Blocks.Interfaces.RealInput m_flow_in1
     "Prescribed mass flow rate" annotation (Placement(transformation(

@@ -36,10 +36,10 @@ equation
         color={0,127,255}));
   connect(full_Transfer_TBA.HeatPort_TBA, office.Heatport_TBA) annotation (Line(
         points={{70,-40},{70,-20},{85.8,-20},{85.8,0}}, color={191,0,0}));
-  connect(generation.Fluid_out_hot, full_Transfer_RLT.Fluid_in_hot) annotation
-    (Line(points={{-60,-42},{-6,-42},{-6,-42},{0,-42}}, color={0,127,255}));
-  connect(generation.Fluid_in_hot, full_Transfer_RLT.Fluid_out_hot) annotation
-    (Line(points={{-60,-46},{-8,-46},{-8,-46},{0,-46}}, color={0,127,255}));
+  connect(generation.Fluid_out_hot, full_Transfer_RLT.Fluid_in_hot) annotation (
+     Line(points={{-60,-42},{-6,-42},{-6,-42},{0,-42}}, color={0,127,255}));
+  connect(generation.Fluid_in_hot, full_Transfer_RLT.Fluid_out_hot) annotation (
+     Line(points={{-60,-46},{-8,-46},{-8,-46},{0,-46}}, color={0,127,255}));
   connect(full_Transfer_RLT.Fluid_in_cold, generation.Fluid_out_cold)
     annotation (Line(points={{0,-54},{-60,-54}}, color={0,127,255}));
   connect(full_Transfer_RLT.Fluid_out_cold, generation.Fluid_in_cold)

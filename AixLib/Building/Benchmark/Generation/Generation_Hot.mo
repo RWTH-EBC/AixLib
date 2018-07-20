@@ -1,14 +1,14 @@
 within AixLib.Building.Benchmark.Generation;
 model Generation_Hot
+  replaceable package Medium_Water =
+    AixLib.Media.Water "Medium in the component";
 
-  inner Modelica.Fluid.System system
-    annotation (Placement(transformation(extent={{80,80},{100,100}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_Hot(redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_Hot(redeclare package Medium
+      = Medium_Water)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,28},{110,48}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_Hot(redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_Hot(redeclare package Medium
+      = Medium_Water)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,-30},{110,-10}})));
   Modelica.Blocks.Interfaces.RealInput TSet_boiler annotation (Placement(
@@ -28,34 +28,35 @@ model Generation_Hot
         origin={-20,100})));
 
   Test.Boiler_Benchmark boiler_Benchmark(
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
     m_flow_nominal=1,
-    paramBoiler=DataBase.Boiler.General.Boiler_Vitogas200F_11kW())
+    paramBoiler=DataBase.Boiler.General.Boiler_Vitogas200F_11kW(),
+    redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(extent={{10,46},{30,66}})));
 
   Fluid.Movers.FlowControlled_dp fan(
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
     m_flow_nominal=1,
     addPowerToMedium=true,
     tau=1,
     dp_nominal=700,
-    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per)
+    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per,
+    redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(extent={{-40,6},{-20,26}})));
 
   Fluid.Actuators.Valves.ThreeWayLinear val(
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
     m_flow_nominal=0.2,
     dpValve_nominal=2,
-    y_start=1) annotation (Placement(transformation(extent={{8,26},{-12,6}})));
+    y_start=1,
+    redeclare package Medium = Medium_Water)
+               annotation (Placement(transformation(extent={{8,26},{-12,6}})));
 
   Fluid.BoilerCHP.CHP cHP(
     electricityDriven=true,
     TSetIn=true,
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
     m_flow_nominal=0.2,
     param=DataBase.CHP.CHP_FMB_31_GSK(),
     m_flow_small=0.01,
-    minCapacity=50)
+    minCapacity=50,
+    redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(extent={{-86,6},{-66,26}})));
 
   Modelica.Blocks.Interfaces.RealInput TSet_chp annotation (Placement(
@@ -80,8 +81,9 @@ model Generation_Hot
         origin={-100,-40})));
   Fluid.Sources.Boundary_pT bou3(
     nPorts=1,
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-    p=100000) annotation (Placement(transformation(
+    p=100000,
+    redeclare package Medium = Medium_Water)
+              annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=-90,
         origin={26,-8})));

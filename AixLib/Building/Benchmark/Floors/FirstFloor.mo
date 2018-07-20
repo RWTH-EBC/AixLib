@@ -1,5 +1,7 @@
 ﻿within AixLib.Building.Benchmark.Floors;
 model FirstFloor
+  replaceable package Medium =
+    AixLib.Media.Air "Medium in the component";
   Rooms.OpenPlanOffice openPlanOffice
     annotation (Placement(transformation(extent={{18,-16},{54,18}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort_North
@@ -48,11 +50,11 @@ model FirstFloor
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b Heatport_TBA
     annotation (Placement(transformation(extent={{90,-70},{110,-50}})));
   Modelica.Fluid.Interfaces.FluidPort_a Air_in(redeclare package Medium =
-        Modelica.Media.Air.MoistAir)
+        Medium)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,-90},{-90,-70}})));
   Modelica.Fluid.Interfaces.FluidPort_b Air_out(redeclare package Medium =
-        Modelica.Media.Air.MoistAir)
+        Medium)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,-50},{-90,-30}})));
 equation

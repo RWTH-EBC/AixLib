@@ -1,12 +1,14 @@
 within AixLib.Building.Benchmark.Generation;
 model Generation_geothermalProbe
+  replaceable package Medium_Water =
+    AixLib.Media.Water "Medium in the component";
 
   Modelica.Fluid.Interfaces.FluidPort_b Fulid_out_Geothermal(redeclare package
-      Medium = Modelica.Media.Water.ConstantPropertyLiquidWater)
+      Medium = Medium_Water)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,50},{110,70}})));
   Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_Geothermal(redeclare package
-      Medium = Modelica.Media.Water.ConstantPropertyLiquidWater)
+      Medium = Medium_Water)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,-70},{110,-50}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=284.15)   annotation(Placement(transformation(extent={{-82,6},
@@ -18,8 +20,6 @@ model Generation_geothermalProbe
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature3(T=287.15)  annotation(Placement(transformation(extent={{-82,62},
             {-74,70}})));
   Modelica.Fluid.Pipes.DynamicPipe pipe2(
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
     allowFlowReversal=true,
     nParallel=1,
     length=240,
@@ -49,8 +49,10 @@ model Generation_geothermalProbe
     p_a_start=100000,
     p_b_start=100000,
     T_start=293.15,
-    X_start={0})
+    X_start={0},
+    redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(extent={{-30,-26},{6,10}})));
+
 equation
   connect(pipe2.port_b, Fulid_out_Geothermal) annotation (Line(points={{6,-8},{
           46,-8},{46,60},{100,60}}, color={0,127,255}));

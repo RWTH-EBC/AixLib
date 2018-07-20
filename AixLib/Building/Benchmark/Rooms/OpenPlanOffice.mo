@@ -1,5 +1,8 @@
 ﻿within AixLib.Building.Benchmark.Rooms;
 model OpenPlanOffice
+replaceable package Medium_Air =
+    AixLib.Media.Air "Medium in the component";
+
   Components.Walls.Wall NorthWall(
     wall_length=40,
     wall_height=3,
@@ -175,8 +178,8 @@ model OpenPlanOffice
         origin={70,110})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b Heatport_TBA
     annotation (Placement(transformation(extent={{90,38},{110,58}})));
-  Fluid.MixingVolumes.MixingVolumeMoistAir vol(redeclare package Medium =
-        Modelica.Media.Air.MoistAir, nPorts=2,
+  Fluid.MixingVolumes.MixingVolumeMoistAir vol(
+                                     nPorts=2,
     m_flow_nominal=10,
     V=3600,
     m_flow_small=0.001,
@@ -184,15 +187,16 @@ model OpenPlanOffice
     X_start={0.01,0.99},
     energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
+    redeclare package Medium = Medium_Air,
     p_start=100000,
     T_start=293.15)
     annotation (Placement(transformation(extent={{6,-12},{26,8}})));
   Modelica.Fluid.Interfaces.FluidPort_a Air_in(redeclare package Medium =
-        Modelica.Media.Air.MoistAir)
+        Medium_Air)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,-4},{110,16}})));
   Modelica.Fluid.Interfaces.FluidPort_b Air_out(redeclare package Medium =
-        Modelica.Media.Air.MoistAir)
+        Medium_Air)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,18},{110,38}})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=0)

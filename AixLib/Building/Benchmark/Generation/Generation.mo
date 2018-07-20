@@ -1,27 +1,28 @@
 ﻿within AixLib.Building.Benchmark.Generation;
 model Generation
+  replaceable package Medium_Water =
+    AixLib.Media.Water "Medium in the component";
+
   Generation_Hot generation_Hot
     annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
   Fluid.Storage.BufferStorage HotWater(
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-    redeclare package MediumHC1 =
-        Modelica.Media.Water.ConstantPropertyLiquidWater,
-    redeclare package MediumHC2 =
-        Modelica.Media.Water.ConstantPropertyLiquidWater,
     useHeatingRod=false,
     data=DataBase.Storage.Generic_New_2000l(),
     n=5,
     useHeatingCoil2=true,
     redeclare model HeatTransfer =
-        Fluid.Storage.BaseClasses.HeatTransferLambdaEff)
+        Fluid.Storage.BaseClasses.HeatTransferLambdaEff,
+    redeclare package Medium = Medium_Water,
+    redeclare package MediumHC1 = Medium_Water,
+    redeclare package MediumHC2 = Medium_Water)
     annotation (Placement(transformation(extent={{18,44},{48,82}})));
 
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_hot(redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_hot(redeclare package Medium
+      = Medium_Water)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,70},{110,90}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_hot(redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_hot(redeclare package Medium
+      = Medium_Water)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,30},{110,50}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=false)
@@ -38,11 +39,6 @@ model Generation
     annotation (Placement(transformation(extent={{-60,0},{-40,20}})));
 
   Fluid.Storage.BufferStorage ColdWater(
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-    redeclare package MediumHC1 =
-        Modelica.Media.Water.ConstantPropertyLiquidWater,
-    redeclare package MediumHC2 =
-        Modelica.Media.Water.ConstantPropertyLiquidWater,
     useHeatingRod=false,
     n=5,
     useHeatingCoil2=false,
@@ -50,31 +46,34 @@ model Generation
     data=DataBase.Storage.Generic_New_2000l(lengthHC1=200),
     useHeatingCoil1=true,
     redeclare model HeatTransfer =
-        Fluid.Storage.BaseClasses.HeatTransferLambdaEff)
+        Fluid.Storage.BaseClasses.HeatTransferLambdaEff,
+    redeclare package Medium = Medium_Water,
+    redeclare package MediumHC1 = Medium_Water,
+    redeclare package MediumHC2 = Medium_Water)
     annotation (Placement(transformation(extent={{18,-88},{48,-50}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium
+      = Medium_Water)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,-50},{110,-30}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium
+      = Medium_Water)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,-90},{110,-70}})));
   Fluid.Movers.FlowControlled_dp fan1(
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
     m_flow_nominal=1,
     addPowerToMedium=true,
     tau=1,
     dp_nominal=700,
-    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per)
+    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per,
+    redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(extent={{60,80},{80,100}})));
   Fluid.Movers.FlowControlled_dp fan2(
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
     m_flow_nominal=1,
     addPowerToMedium=true,
     tau=1,
     dp_nominal=700,
-    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per)
+    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per,
+    redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(extent={{64,-56},{84,-36}})));
   Modelica.Blocks.Sources.RealExpression realExpression5(y=0)
     annotation (Placement(transformation(extent={{168,-10},{148,10}})));
@@ -82,16 +81,16 @@ model Generation
     annotation (Placement(transformation(extent={{-60,-40},{-40,-20}})));
 
   Fluid.Actuators.Valves.ThreeWayLinear val4(
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
     m_flow_nominal=3,
     dpValve_nominal=10,
-    y_start=0)
+    y_start=0,
+    redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(extent={{-20,8},{-36,24}})));
   Modelica.Blocks.Sources.RealExpression realExpression7(y=0)
     annotation (Placement(transformation(extent={{-134,12},{-114,32}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpression2(y=false)
     annotation (Placement(transformation(extent={{-134,-4},{-114,16}})));
-  Modelica.Blocks.Sources.RealExpression realExpression10(y=200)
+  Modelica.Blocks.Sources.RealExpression realExpression10(y=0)
     annotation (Placement(transformation(extent={{-150,-44},{-130,-24}})));
   Modelica.Blocks.Sources.RealExpression realExpression11(y=273.15 + 5)
     annotation (Placement(transformation(extent={{-150,-60},{-130,-40}})));
@@ -103,36 +102,39 @@ model Generation
         rotation=90,
         origin={-50,-90})));
   Fluid.Actuators.Valves.ThreeWayLinear Valve1(
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
     m_flow_nominal=1,
-    dpValve_nominal=10) annotation (Placement(transformation(
+    dpValve_nominal=10,
+    redeclare package Medium = Medium_Water)
+                        annotation (Placement(transformation(
         extent={{7,-7},{-7,7}},
         rotation=90,
         origin={-85,-9})));
 
   Fluid.Actuators.Valves.ThreeWayLinear Valve3(
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
     m_flow_nominal=1,
-    dpValve_nominal=10) annotation (Placement(transformation(
+    dpValve_nominal=10,
+    redeclare package Medium = Medium_Water)
+                        annotation (Placement(transformation(
         extent={{-7,-7},{7,7}},
         rotation=90,
         origin={-85,-67})));
 
   Fluid.Actuators.Valves.ThreeWayLinear Valve2(
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
     m_flow_nominal=1,
-    dpValve_nominal=10) annotation (Placement(transformation(
+    dpValve_nominal=10,
+    redeclare package Medium = Medium_Water)
+                        annotation (Placement(transformation(
         extent={{-7,-7},{7,7}},
         rotation=90,
         origin={-85,-45})));
 
   Fluid.Movers.FlowControlled_dp fan3(
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
     m_flow_nominal=1,
     addPowerToMedium=true,
     tau=1,
     dp_nominal=700,
-    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per)
+    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per,
+    redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=90,
         origin={-68,-56})));
@@ -142,77 +144,73 @@ model Generation
     annotation (Placement(transformation(extent={{-150,-94},{-130,-74}})));
   Fluid.Sources.Boundary_pT bou1(
     nPorts=1,
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+    redeclare package Medium = Medium_Water,
     p=100000) annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=-90,
         origin={-50,-56})));
   Fluid.Movers.FlowControlled_dp fan4(
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
     m_flow_nominal=1,
     addPowerToMedium=true,
     tau=1,
     dp_nominal=700,
-    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per)
+    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per,
+    redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=90,
         origin={-68,-22})));
   Modelica.Blocks.Sources.RealExpression realExpression12(y=0)
     annotation (Placement(transformation(extent={{-150,-110},{-130,-90}})));
   Modelica.Blocks.Sources.Step step(
-    height=-80000,
-    offset=80000,
-    startTime=10000)
+    startTime=10000,
+    height=0,
+    offset=0)
     annotation (Placement(transformation(extent={{-178,-76},{-158,-56}})));
   Fluid.Storage.BufferStorage HotWater2(
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-    redeclare package MediumHC1 =
-        Modelica.Media.Water.ConstantPropertyLiquidWater,
-    redeclare package MediumHC2 =
-        Modelica.Media.Water.ConstantPropertyLiquidWater,
     useHeatingRod=false,
     data=DataBase.Storage.Generic_New_2000l(),
     n=5,
     useHeatingCoil2=true,
     redeclare model HeatTransfer =
-        Fluid.Storage.BaseClasses.HeatTransferLambdaEff)
+        Fluid.Storage.BaseClasses.HeatTransferLambdaEff,
+    redeclare package Medium = Medium_Water,
+    redeclare package MediumHC1 = Medium_Water,
+    redeclare package MediumHC2 = Medium_Water)
     annotation (Placement(transformation(extent={{16,-18},{46,20}})));
   Fluid.Movers.FlowControlled_dp fan5(
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
     m_flow_nominal=1,
     addPowerToMedium=true,
     tau=1,
     dp_nominal=700,
-    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per)
+    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per,
+    redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(extent={{58,14},{78,34}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_warm(
-                                                      redeclare package Medium
-      = Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_warm(redeclare package Medium
+      = Medium_Water)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,10},{110,30}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_warm(
-                                                     redeclare package Medium
-      = Modelica.Media.Water.ConstantPropertyLiquidWater)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_warm(redeclare package Medium
+      = Medium_Water)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,-30},{110,-10}})));
   Fluid.Sources.Boundary_pT bou4(
     nPorts=1,
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+    redeclare package Medium = Medium_Water,
     p=100000) annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=-90,
         origin={42,98})));
   Fluid.Actuators.Valves.ThreeWayLinear val1(
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
     m_flow_nominal=3,
     dpValve_nominal=10,
-    y_start=0)
+    y_start=0,
+    redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(extent={{-6,66},{-22,82}})));
   Fluid.Actuators.Valves.ThreeWayLinear val2(
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
     m_flow_nominal=3,
     dpValve_nominal=10,
-    y_start=0)
+    y_start=0,
+    redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(extent={{2,8},{-14,24}})));
 equation
   connect(generation_Hot.Fluid_in_Hot, HotWater.portHC1Out) annotation (Line(
@@ -341,8 +339,8 @@ equation
           58.25},{17.8125,58.25}}, color={0,127,255}));
   connect(val2.port_3, HotWater2.portHC2In) annotation (Line(points={{-6,8},{-2,
           8},{-2,-3.75},{15.8125,-3.75}}, color={0,127,255}));
-  connect(HotWater2.portHC2Out, generation_heatPump1.Fluid_in_warm) annotation
-    (Line(points={{15.8125,-9.83},{-12,-10},{-12,4},{-40,4}}, color={0,127,255}));
+  connect(HotWater2.portHC2Out, generation_heatPump1.Fluid_in_warm) annotation (
+     Line(points={{15.8125,-9.83},{-12,-10},{-12,4},{-40,4}}, color={0,127,255}));
   connect(val1.y, val4.y) annotation (Line(points={{-14,83.6},{-14,90},{-28,90},
           {-28,25.6}}, color={0,0,127}));
   connect(val2.y, realExpression7.y) annotation (Line(points={{-6,25.6},{-8,

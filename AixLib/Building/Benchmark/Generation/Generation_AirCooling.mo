@@ -1,15 +1,20 @@
 within AixLib.Building.Benchmark.Generation;
 model Generation_AirCooling
+  replaceable package Medium_Water =
+    AixLib.Media.Water "Medium in the component";
+  replaceable package Medium_Air =
+    AixLib.Media.Air "Medium in the component";
   Fluid.Sources.MassFlowSource_T boundary(
-    redeclare package Medium = Modelica.Media.Air.DryAirNasa,
     use_m_flow_in=true,
     use_T_in=true,
-    nPorts=1) annotation (Placement(transformation(extent={{-46,-52},{-26,-32}})));
+    nPorts=1,
+    redeclare package Medium = Medium_Air)
+              annotation (Placement(transformation(extent={{-46,-52},{-26,-32}})));
   Fluid.Sources.Boundary_pT bou(
     use_p_in=false,
     use_T_in=true,
-    redeclare package Medium = Modelica.Media.Air.DryAirNasa,
-    nPorts=1)                                                 annotation (
+    nPorts=1,
+    redeclare package Medium = Medium_Air)                    annotation (
       Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=0,
@@ -34,55 +39,51 @@ model Generation_AirCooling
     redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12 per,
     m_flow_nominal=5,
     energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater)
+    redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(extent={{10,10},{-10,-10}},
         rotation=90,
         origin={16,8})));
-  Modelica.Blocks.Sources.RealExpression realExpression5(y=20000)
+  Modelica.Blocks.Sources.RealExpression realExpression5(y=0)
     annotation (Placement(transformation(extent={{28,50},{48,70}})));
   Fluid.HeatExchangers.ConstantEffectiveness hex(
-    redeclare package Medium2 = Modelica.Media.Air.DryAirNasa,
     allowFlowReversal1=false,
     allowFlowReversal2=false,
     m1_flow_nominal=10,
     m2_flow_nominal=100,
     dp1_nominal=10,
     dp2_nominal=10,
-    redeclare package Medium1 =
-        Modelica.Media.Water.ConstantPropertyLiquidWater)
+    redeclare package Medium1 = Medium_Water,
+    redeclare package Medium2 = Medium_Air)
     annotation (Placement(transformation(extent={{8,-46},{-12,-26}})));
   Fluid.MixingVolumes.MixingVolume vol(
     nPorts=2,
-    redeclare package Medium = Modelica.Media.Air.DryAirNasa,
     m_flow_nominal=200,
-    V=1) annotation (Placement(transformation(extent={{16,-42},{26,-32}})));
+    V=1,
+    redeclare package Medium = Medium_Air)
+         annotation (Placement(transformation(extent={{16,-42},{26,-32}})));
   Fluid.Actuators.Valves.ThreeWayLinear Valve1(
     m_flow_nominal=1,
     dpValve_nominal=10,
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater)
+    redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={-16,30})));
   Fluid.HeatExchangers.ConstantEffectiveness hex1(
-    redeclare package Medium1 =
-        Modelica.Media.Water.ConstantPropertyLiquidWater,
     m1_flow_nominal=1,
     m2_flow_nominal=10,
     dp1_nominal=10,
     dp2_nominal=10,
-    redeclare package Medium2 =
-        Modelica.Media.Water.ConstantPropertyLiquidWater)
+    redeclare package Medium1 = Medium_Water,
+    redeclare package Medium2 = Medium_Water)
     annotation (Placement(transformation(extent={{-12,72},{8,92}})));
   Fluid.HeatExchangers.ConstantEffectiveness hex2(
     m1_flow_nominal=1,
     m2_flow_nominal=10,
     dp1_nominal=10,
     dp2_nominal=10,
-    redeclare package Medium1 =
-        Modelica.Media.Water.ConstantPropertyLiquidWater,
-    redeclare package Medium2 =
-        Modelica.Media.Water.ConstantPropertyLiquidWater) annotation (Placement(
+    redeclare package Medium1 = Medium_Water,
+    redeclare package Medium2 = Medium_Water)             annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
@@ -100,8 +101,9 @@ model Generation_AirCooling
     annotation (Placement(transformation(extent={{-116,18},{-92,42}})));
   Fluid.Sources.Boundary_pT bou1(
     nPorts=1,
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-    p=300000) annotation (Placement(transformation(
+    p=300000,
+    redeclare package Medium = Medium_Water)
+              annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=-90,
         origin={-32,-8})));

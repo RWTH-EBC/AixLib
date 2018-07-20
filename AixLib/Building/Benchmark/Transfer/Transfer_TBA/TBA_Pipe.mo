@@ -1,5 +1,7 @@
 ﻿within AixLib.Building.Benchmark.Transfer.Transfer_TBA;
 model TBA_Pipe
+  replaceable package Medium_Water =
+    AixLib.Media.Water "Medium in the component";
   import BaseLib = AixLib.Utilities;
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_TBA_OpenPlanOffice
@@ -8,18 +10,18 @@ model TBA_Pipe
   parameter Modelica.SIunits.Length wall_length = 0 annotation(Dialog(tab = "General"));
   parameter Modelica.SIunits.Length wall_height = 0 annotation(Dialog(tab = "General"));
   Modelica.Fluid.Interfaces.FluidPort_a Fluid_in(redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater)
+        Medium_Water)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-70,-110},{-50,-90}})));
   Modelica.Fluid.Interfaces.FluidPort_b Fluid_out(redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater)
+        Medium_Water)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{50,-110},{70,-90}})));
   Fluid.MixingVolumes.MixingVolume vol(
     nPorts=2,
-    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
     m_flow_nominal=1,
-    V=wall_length*wall_height*5.8*3.14159*(pipe_diameter/2)^2)
+    V=wall_length*wall_height*5.8*3.14159*(pipe_diameter/2)^2,
+    redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(extent={{-8,46},{12,66}})));
 
 equation
