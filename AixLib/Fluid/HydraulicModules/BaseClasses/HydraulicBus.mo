@@ -3,9 +3,8 @@ expandable connector HydraulicBus "Data bus for hydraulic circuits"
   extends Modelica.Icons.SignalBus;
   import SI = Modelica.SIunits;
   PumpBus pumpBus;
-  Real valveSet(min=0, max=1) "Valve opening 0..1";
-  Real valveSetAct(min=0, max=1) "Actual valve opening 0..1";
-  SI.Temperature T_amb "Ambient temperature";
+  Real valSet(min=0, max=1) "Valve opening 0..1";
+  Real valSetAct(min=0, max=1) "Actual valve opening 0..1";
   SI.Temperature TFwrd_in "Flow Temperature into forward line";
   SI.Temperature TFwrd_out "Flow Temperature out of forward line";
   SI.Temperature TRtrn_in "Temperature into return line";

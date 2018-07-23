@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HydraulicModules.Example;
+within AixLib.Fluid.HydraulicModules.Example;
 model Admix "Test for admix circuit"
   import AixLib;
   extends Modelica.Icons.Example;
@@ -9,7 +9,33 @@ model Admix "Test for admix circuit"
       AixLib.Fluid.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       basicPumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
-    val(Kv=10, m_flow_nominal=0.5)) annotation (Placement(transformation(
+    val(Kv=10, m_flow_nominal=0.5),
+    m_flow_nominal=1,
+    pipe1(
+      dIns=0.001,
+      length=1,
+      kIns=0.028),
+    pipe2(
+      length=1,
+      dIns=0.01,
+      kIns=0.028),
+    pipe3(
+      length=1,
+      dIns=0.01,
+      kIns=0.028),
+    pipe4(
+      length=1,
+      dIns=0.01,
+      kIns=0.028),
+    pipe5(
+      length=1,
+      dIns=0.01,
+      kIns=0.028),
+    pipe6(
+      length=1,
+      dIns=0.01,
+      kIns=0.028),
+    T_amb=293.15)                   annotation (Placement(transformation(
         extent={{-28,-25},{28,25}},
         rotation=90,
         origin={17,20})));
@@ -18,17 +44,17 @@ model Admix "Test for admix circuit"
     annotation (choicesAllMatching=true);
   Modelica.Fluid.Sources.Boundary_pT boundary(
     nPorts=1,
-    redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater,
-    T=323.15) annotation (Placement(transformation(
+    T=323.15,
+    redeclare package Medium = Medium)
+              annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={0,-30})));
   Modelica.Fluid.Sources.Boundary_pT boundary1(
     nPorts=1,
-    redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater,
-    T=323.15) annotation (Placement(transformation(
+    T=323.15,
+    redeclare package Medium = Medium)
+              annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={40,-30})));
@@ -38,8 +64,7 @@ model Admix "Test for admix circuit"
     dp_nominal=8000,
     m_flow(start=hydRes.m_flow_nominal),
     dp(start=hydRes.dp_nominal),
-    redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater)
+    redeclare package Medium = Medium)
     "Hydraulic resistance in distribution cirquit (shortcut pipe)" annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
