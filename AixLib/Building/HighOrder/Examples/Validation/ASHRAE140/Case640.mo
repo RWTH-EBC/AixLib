@@ -2,7 +2,7 @@ within AixLib.Building.HighOrder.Examples.Validation.ASHRAE140;
 model Case640
   extends Modelica.Icons.Example;
 
-  parameter AixLib.DataBase.Profiles.Profile_BaseDataDefinition SetTempProfile = AixLib.DataBase.Profiles.ASHRAE140.SetTemp_caseX40();
+  parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition SetTempProfile = AixLib.DataBase.Profiles.ASHRAE140.SetTemp_caseX40();
   Components.Weather.BaseClasses.Sun sun(
     TimeCorrection=0,
     Latitude=39.76,

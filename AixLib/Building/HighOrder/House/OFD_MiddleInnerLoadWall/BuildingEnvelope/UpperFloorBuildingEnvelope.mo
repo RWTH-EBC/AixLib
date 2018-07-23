@@ -1,4 +1,4 @@
-within AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
+﻿within AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
 model UpperFloorBuildingEnvelope
   ///////// construction parameters
   parameter Integer TMC=1 "Thermal Mass Class" annotation (Dialog(
@@ -77,6 +77,19 @@ model UpperFloorBuildingEnvelope
     annotation (Dialog(group="Windows and Doors", descriptionLabel=true));
   parameter Real AirExchangeCorridor=2 "Air exchange corridors in 1/h "
     annotation (Dialog(group="Air Exchange Corridors", descriptionLabel=true));
+  // Sunblind
+  parameter Boolean use_sunblind = false
+    "Will sunblind become active automatically?"
+    annotation(Dialog(group = "Sunblind"));
+  parameter Real ratioSunblind(min=0.0, max=1.0) = 0.8
+    "Sunblind factor"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+  parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0) = 350
+    "Threshold for global solar irradiation on this surface to enable sunblinding (see also TOutAirLimit)"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+  parameter Modelica.SIunits.Temperature TOutAirLimit = 293.15
+    "Temperature at which sunblind closes (see also solIrrThreshold)"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
   // Dynamic Ventilation
   parameter Boolean withDynamicVentilation=true "Dynamic ventilation"
     annotation (Dialog(group="Dynamic ventilation", descriptionLabel=true),
@@ -152,6 +165,10 @@ model UpperFloorBuildingEnvelope
     withWindow3=true,
     windowarea_RO=windowarea_63,
     withDoor2=false,
+    final use_sunblind=use_sunblind,
+    final ratioSunblind=ratioSunblind,
+    final solIrrThreshold=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDynamicVentilation=withDynamicVentilation,
     HeatingLimit=HeatingLimit,
     Max_VR=Max_VR,
@@ -184,6 +201,10 @@ model UpperFloorBuildingEnvelope
     withWindow3=true,
     windowarea_RO=windowarea_73,
     withDoor2=false,
+    final use_sunblind=use_sunblind,
+    final ratioSunblind=ratioSunblind,
+    final solIrrThreshold=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDynamicVentilation=withDynamicVentilation,
     HeatingLimit=HeatingLimit,
     Max_VR=Max_VR,
@@ -216,6 +237,10 @@ model UpperFloorBuildingEnvelope
     door_height_OD2=0,
     withWindow2=true,
     withWindow3=false,
+    final use_sunblind=use_sunblind,
+    final ratioSunblind=ratioSunblind,
+    final solIrrThreshold=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDynamicVentilation=withDynamicVentilation,
     HeatingLimit=HeatingLimit,
     Max_VR=Max_VR,
@@ -248,6 +273,10 @@ model UpperFloorBuildingEnvelope
     windowarea_RO=windowarea_103,
     room_lengthb=length7,
     withDoor2=false,
+    final use_sunblind=use_sunblind,
+    final ratioSunblind=ratioSunblind,
+    final solIrrThreshold=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDynamicVentilation=withDynamicVentilation,
     HeatingLimit=HeatingLimit,
     Max_VR=Max_VR,
@@ -277,6 +306,10 @@ model UpperFloorBuildingEnvelope
     roof_width=roof_width,
     solar_absorptance_RO=solar_absorptance_RO,
     withWindow3=false,
+    final use_sunblind=use_sunblind,
+    final ratioSunblind=ratioSunblind,
+    final solIrrThreshold=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withFloorHeating=withFloorHeating,
     T0_air=291.11,
     T0_OW1=291.15,
