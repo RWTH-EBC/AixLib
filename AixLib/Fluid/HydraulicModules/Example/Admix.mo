@@ -9,7 +9,6 @@ model Admix "Test for admix circuit"
       AixLib.Fluid.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       basicPumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
-    val(Kv=10, m_flow_nominal=0.5),
     m_flow_nominal=1,
     pipe1(
       dIns=0.001,
@@ -35,7 +34,8 @@ model Admix "Test for admix circuit"
       length=1,
       dIns=0.01,
       kIns=0.028),
-    T_amb=293.15)                   annotation (Placement(transformation(
+    T_amb=293.15,
+    val(Kv=10))                     annotation (Placement(transformation(
         extent={{-28,-25},{28,25}},
         rotation=90,
         origin={17,20})));
@@ -80,7 +80,7 @@ model Admix "Test for admix circuit"
 equation
 
   connect(valveOpening.y,hydraulicBus. valveSet) annotation (Line(points={{-79,10},
-          {-60,10},{-60,20.05},{-39.95,20.05}},     color={0,0,127}), Text(
+          {-60,10},{-60,20},{-40,20}},              color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));

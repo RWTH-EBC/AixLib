@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HydraulicModules.BaseClasses;
+within AixLib.Fluid.HydraulicModules.BaseClasses;
 partial model BasicPumpInterface "Pump interface for different pump types"
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     annotation (choicesAllMatching=true);

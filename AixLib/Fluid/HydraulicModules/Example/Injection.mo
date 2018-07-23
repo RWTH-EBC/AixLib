@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HydraulicModules.Example;
+within AixLib.Fluid.HydraulicModules.Example;
 model Injection "Test for injection circuit"
   import AixLib;
   extends Modelica.Icons.Example;
@@ -9,10 +9,44 @@ model Injection "Test for injection circuit"
       AixLib.Fluid.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       basicPumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
-    val(Kv=10, m_flow_nominal=0.5)) annotation (Placement(transformation(
+    m_flow_nominal=1,
+    val(Kv=10),
+    pipe1(
+      length=1,
+      dIns=0.01,
+      kIns=0.028),
+    pipe3(
+      dIns=0.01,
+      kIns=0.028,
+      length=1),
+    pipe4(
+      dIns=0.01,
+      kIns=0.028,
+      length=1),
+    pipe6(
+      length=0.5,
+      dIns=0.01,
+      kIns=0.028),
+    pipe7(
+      length=1,
+      dIns=0.01,
+      kIns=0.028),
+    pipe8(
+      length=1,
+      dIns=0.01,
+      kIns=0.028),
+    pipe5(
+      length=1,
+      dIns=0.01,
+      kIns=0.028),
+    pipe2(
+      length=1,
+      dIns=0.01,
+      kIns=0.028),
+    T_amb=293.15)                   annotation (Placement(transformation(
         extent={{-26,-26},{26,26}},
         rotation=90,
-        origin={20,20})));
+        origin={22,20})));
   package Medium =
       Modelica.Media.Water.ConstantPropertyLiquidWater
     annotation (choicesAllMatching=true);
@@ -55,28 +89,28 @@ model Injection "Test for injection circuit"
 equation
 
   connect(valveOpening.y,hydraulicBus. valveSet) annotation (Line(points={{-79,10},
-          {-60,10},{-60,20},{-50,20},{-50,20.05},{-39.95,20.05}},
+          {-60,10},{-60,20},{-50,20},{-50,20},{-40,20}},
                                                     color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
   connect(hydraulicBus,Injection. hydraulicBus) annotation (Line(
-      points={{-40,20},{-5.74,20}},
+      points={{-40,20},{-3.74,20}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-12,3},{-12,3}}));
   connect(boundary.ports[1], Injection.port_a1) annotation (Line(points={{0,-20},
-          {0,-12},{6,-12},{6,-6},{4.4,-6}},                      color={0,127,255}));
+          {0,-12},{6,-12},{6,-6},{6.4,-6}},                      color={0,127,255}));
   connect(boundary1.ports[1], Injection.port_b2) annotation (Line(points={{40,-20},
-          {40,-12},{35.6,-12},{35.6,-6}}, color={0,127,255}));
+          {40,-12},{37.6,-12},{37.6,-6}}, color={0,127,255}));
   connect(hydRes.port_b, Injection.port_a2)
-    annotation (Line(points={{30,60},{35.6,60},{35.6,46}}, color={0,127,255}));
+    annotation (Line(points={{30,60},{37.6,60},{37.6,46}}, color={0,127,255}));
   connect(hydRes.port_a, Injection.port_b1)
-    annotation (Line(points={{10,60},{4.4,60},{4.4,46}}, color={0,127,255}));
-  connect(RPM.y, hydraulicBus.pumpBus.rpm_Input) annotation (Line(points={{-79,
-          50},{-56,50},{-56,46},{-39.95,46},{-39.95,20.05}}, color={0,0,127}),
+    annotation (Line(points={{10,60},{6.4,60},{6.4,46}}, color={0,127,255}));
+  connect(RPM.y, hydraulicBus.pumpBus.rpm_Input) annotation (Line(points={{-79,50},
+          {-56,50},{-56,46},{-39.95,46},{-39.95,20.05}},     color={0,0,127}),
       Text(
       string="%second",
       index=1,

@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HydraulicModules;
+within AixLib.Fluid.HydraulicModules;
 model ThrottlePump "Throttle circuit with pump and two way valve"
   extends AixLib.Fluid.Interfaces.PartialFourPort(redeclare package Medium1 =
         Medium, redeclare package Medium2 = Medium);

@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HydraulicModules.Example;
+within AixLib.Fluid.HydraulicModules.Example;
 model ThrottlePump "Test for throttle circuit"
   import AixLib;
   extends Modelica.Icons.Example;
