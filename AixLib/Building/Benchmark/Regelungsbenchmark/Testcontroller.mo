@@ -4,47 +4,47 @@ model Testcontroller
     annotation (Placement(transformation(extent={{80,-20},{120,20}})));
   Modelica.Blocks.Sources.RealExpression TSet_Boiler(y=273.15 + 95)
     annotation (Placement(transformation(extent={{-40,-78},{-60,-58}})));
-  Modelica.Blocks.Sources.BooleanExpression Heatpump
+  Modelica.Blocks.Sources.BooleanExpression Heatpump(y=true)
     annotation (Placement(transformation(extent={{-100,-106},{-80,-86}})));
-  Modelica.Blocks.Sources.BooleanExpression CHP
+  Modelica.Blocks.Sources.BooleanExpression CHP(y=false)
     annotation (Placement(transformation(extent={{-100,-92},{-80,-72}})));
-  Modelica.Blocks.Sources.BooleanExpression Boiler
+  Modelica.Blocks.Sources.BooleanExpression Boiler(y=false)
     annotation (Placement(transformation(extent={{-100,-78},{-80,-58}})));
-  Modelica.Blocks.Sources.RealExpression ElSet_CHP(y=11)
+  Modelica.Blocks.Sources.RealExpression ElSet_CHP(y=26)
     annotation (Placement(transformation(extent={{-40,-92},{-60,-72}})));
-  Modelica.Blocks.Sources.RealExpression TSet_CHP(y=273.15 + 90)
+  Modelica.Blocks.Sources.RealExpression TSet_CHP(y=273.15 + 80)
     annotation (Placement(transformation(extent={{-40,-106},{-60,-86}})));
-  Modelica.Blocks.Sources.RealExpression Pump_Coldwater(y=20000)
+  Modelica.Blocks.Sources.RealExpression Pump_Coldwater(y=0)
     annotation (Placement(transformation(extent={{20,-106},{0,-86}})));
-  Modelica.Blocks.Sources.RealExpression Pump_Heatpump_Cold(y=20000)
+  Modelica.Blocks.Sources.RealExpression Pump_Heatpump_Cold(y=80000)
     annotation (Placement(transformation(extent={{-40,-106},{-20,-86}})));
   Modelica.Blocks.Sources.RealExpression Pump_Heatpump_warm(y=20000)
     annotation (Placement(transformation(extent={{-40,-92},{-20,-72}})));
-  Modelica.Blocks.Sources.RealExpression Pump_CHP(y=20000)
+  Modelica.Blocks.Sources.RealExpression Pump_CHP(y=0)
     annotation (Placement(transformation(extent={{-40,-78},{-20,-58}})));
-  Modelica.Blocks.Sources.RealExpression Pump_Warmwater(y=20000)
+  Modelica.Blocks.Sources.RealExpression Pump_Warmwater(y=0)
     annotation (Placement(transformation(extent={{20,-92},{0,-72}})));
-  Modelica.Blocks.Sources.RealExpression Pump_Hotwater(y=20000)
+  Modelica.Blocks.Sources.RealExpression Pump_Hotwater(y=0)
     annotation (Placement(transformation(extent={{20,-78},{0,-58}})));
-  Modelica.Blocks.Sources.RealExpression Pump_Aircooler(y=20000)
+  Modelica.Blocks.Sources.RealExpression Pump_Aircooler(y=0)
     annotation (Placement(transformation(extent={{-40,-64},{-20,-44}})));
-  Modelica.Blocks.Sources.RealExpression Fan_RLT(y=100)
+  Modelica.Blocks.Sources.RealExpression Fan_RLT(y=0)
     annotation (Placement(transformation(extent={{20,-106},{40,-86}})));
-  Modelica.Blocks.Sources.RealExpression Fan_Aircooler(y=100)
+  Modelica.Blocks.Sources.RealExpression Fan_Aircooler(y=0)
     annotation (Placement(transformation(extent={{80,-106},{60,-86}})));
-  Modelica.Blocks.Sources.RealExpression Valve1
+  Modelica.Blocks.Sources.RealExpression Valve1(y=1)
     annotation (Placement(transformation(extent={{-100,86},{-80,106}})));
   Modelica.Blocks.Sources.RealExpression Valve2
     annotation (Placement(transformation(extent={{-100,72},{-80,92}})));
-  Modelica.Blocks.Sources.RealExpression Valve3
+  Modelica.Blocks.Sources.RealExpression Valve3(y=1)
     annotation (Placement(transformation(extent={{-100,58},{-80,78}})));
-  Modelica.Blocks.Sources.RealExpression Valve4
+  Modelica.Blocks.Sources.RealExpression Valve4(y=1)
     annotation (Placement(transformation(extent={{-100,44},{-80,64}})));
   Modelica.Blocks.Sources.RealExpression Valve5
     annotation (Placement(transformation(extent={{-40,86},{-60,106}})));
-  Modelica.Blocks.Sources.RealExpression Valve6
+  Modelica.Blocks.Sources.RealExpression Valve6(y=0)
     annotation (Placement(transformation(extent={{-40,72},{-60,92}})));
-  Modelica.Blocks.Sources.RealExpression Valve7
+  Modelica.Blocks.Sources.RealExpression Valve7(y=0)
     annotation (Placement(transformation(extent={{-40,58},{-60,78}})));
   Modelica.Blocks.Sources.RealExpression Valve8
     annotation (Placement(transformation(extent={{-40,44},{-60,64}})));
@@ -57,8 +57,6 @@ model Testcontroller
 equation
   connect(Boiler.y, controlBus.OnOff_boiler) annotation (Line(points={{-79,-68},
           {-70,-68},{-70,0.1},{100.1,0.1}}, color={255,0,255}));
-  connect(CHP.y, controlBus.OnOff_CHP) annotation (Line(points={{-79,-82},{-70,
-          -82},{-70,0.1},{100.1,0.1}}, color={255,0,255}));
   connect(Heatpump.y, controlBus.OnOff_heatpump) annotation (Line(points={{-79,
           -96},{-70,-96},{-70,0.1},{100.1,0.1}}, color={255,0,255}));
   connect(TSet_Boiler.y, controlBus.TSet_boiler) annotation (Line(points={{-61,
@@ -111,6 +109,8 @@ equation
           0,127}));
   connect(X_OPO.y, controlBus.X_OpenPlanOffice) annotation (Line(points={{41,96},
           {50,96},{50,0.1},{100.1,0.1}}, color={0,0,127}));
+  connect(CHP.y, controlBus.OnOff_CHP) annotation (Line(points={{-79,-82},{-70,
+          -82},{-70,0.1},{100.1,0.1}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Testcontroller;

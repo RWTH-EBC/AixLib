@@ -30,7 +30,8 @@ model Generation_heatPump
     dp_conNominal=20000,
     dp_evaNominal=100,
     T_startEva=283.15,
-    T_startCon=313.15)
+    T_startCon=313.15,
+    CoP_output=true)
     annotation (Placement(transformation(extent={{-14,-10},{16,10}})));
 
   Fluid.Sources.Boundary_pT bou1(

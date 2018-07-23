@@ -23,8 +23,8 @@ model Generation_Hot
     addPowerToMedium=true,
     tau=1,
     dp_nominal=700,
-    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per,
-    redeclare package Medium = Medium_Water)
+    redeclare package Medium = Medium_Water,
+    redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos80slash1to12 per)
     annotation (Placement(transformation(extent={{-40,6},{-20,26}})));
 
   Fluid.Actuators.Valves.ThreeWayLinear Valve6(
@@ -38,10 +38,10 @@ model Generation_Hot
     electricityDriven=true,
     TSetIn=true,
     m_flow_nominal=0.2,
-    param=DataBase.CHP.CHP_FMB_31_GSK(),
     m_flow_small=0.01,
-    minCapacity=50,
-    redeclare package Medium = Medium_Water)
+    redeclare package Medium = Medium_Water,
+    param=DataBase.CHP.CHP_Cleanergy_C9G(),
+    minCapacity=24)
     annotation (Placement(transformation(extent={{-86,6},{-66,26}})));
 
   Fluid.Sources.Boundary_pT bou3(

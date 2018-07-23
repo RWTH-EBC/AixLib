@@ -43,8 +43,8 @@ model Boiler_Benchmark "Boiler with internal and external control"
 
   Modelica.Blocks.Logical.Hysteresis hysteresis(
     pre_y_start=true,
-    uLow=237.15 + 85,
-    uHigh=273.15 + 99)
+    uHigh=273.15 + 99,
+    uLow=273.15 + 90)
     annotation (Placement(transformation(extent={{36,12},{16,32}})));
   Modelica.Blocks.Logical.LogicalSwitch logicalSwitch
     annotation (Placement(transformation(extent={{-8,12},{-28,32}})));

@@ -7,14 +7,14 @@ model Generation
     annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
   Fluid.Storage.BufferStorage HotWater(
     useHeatingRod=false,
-    data=DataBase.Storage.Generic_New_2000l(),
     n=5,
     useHeatingCoil2=true,
     redeclare model HeatTransfer =
         Fluid.Storage.BaseClasses.HeatTransferLambdaEff,
     redeclare package Medium = Medium_Water,
     redeclare package MediumHC1 = Medium_Water,
-    redeclare package MediumHC2 = Medium_Water)
+    redeclare package MediumHC2 = Medium_Water,
+    data=DataBase.Storage.Generic_New_2000l(dTank=2))
     annotation (Placement(transformation(extent={{18,44},{48,82}})));
 
   Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_hot(redeclare package Medium =
@@ -125,7 +125,7 @@ model Generation
         extent={{-4,-4},{4,4}},
         rotation=-90,
         origin={-50,-56})));
-  Fluid.Storage.BufferStorage HotWater2(
+  Fluid.Storage.BufferStorage WarmWater(
     useHeatingRod=false,
     data=DataBase.Storage.Generic_New_2000l(),
     n=5,
@@ -198,9 +198,6 @@ equation
           -16},{-85,-38}}, color={0,127,255}));
   connect(Valve2.port_1,Valve1. port_2) annotation (Line(points={{-85,-52},{-85,
           -52},{-85,-60}}, color={0,127,255}));
-  connect(Valve1.port_1, generation_geothermalProbe.Fluid_in_Geothermal)
-    annotation (Line(points={{-85,-74},{-84,-74},{-84,-76},{-56,-76},{-56,-80}},
-        color={0,127,255}));
   connect(Valve2.port_3, ColdWater.portHC1In) annotation (Line(points={{-78,-45},
           {-38,-45},{-38,-46},{12,-46},{12,-58},{14,-58},{14,-58.17},{17.625,
           -58.17}},                                                color={0,127,
@@ -216,9 +213,6 @@ equation
   connect(generation_AirCooling.Fluid_out_warm_airCooler, generation_heatPump1.Fluid_in_warm)
     annotation (Line(points={{-40,-36},{-6,-36},{-6,4},{-40,4}},   color={0,127,
           255}));
-  connect(Valve1.port_3, pump_coldwater_heatpump.port_a) annotation (Line(
-        points={{-78,-67},{-74,-67},{-74,-68},{-68,-68},{-68,-62}}, color={0,
-          127,255}));
   connect(generation_geothermalProbe.Fulid_out_Geothermal,
     pump_coldwater_heatpump.port_a) annotation (Line(points={{-44,-80},{-44,-68},
           {-68,-68},{-68,-62}}, color={0,127,255}));
@@ -229,13 +223,13 @@ equation
           -58},{-85,-60}}, color={0,127,255}));
   connect(Fluid_in_cold, ColdWater.fluidportTop1) annotation (Line(points={{100,-80},
           {56,-80},{56,-46},{27.75,-46},{27.75,-49.81}},      color={0,127,255}));
-  connect(HotWater2.fluidportBottom2, Fluid_in_warm) annotation (Line(points={{
+  connect(WarmWater.fluidportBottom2, Fluid_in_warm) annotation (Line(points={{
           35.3125,-18.19},{35.3125,-20},{100,-20}}, color={0,127,255}));
   connect(pump_warmwater.port_b, Fluid_out_warm) annotation (Line(points={{78,
           24},{90,24},{90,20},{100,20}}, color={0,127,255}));
   connect(HotWater.fluidportTop2, pump_hotwater.port_a) annotation (Line(points=
          {{37.6875,82.19},{37.6875,90},{60,90}}, color={0,127,255}));
-  connect(HotWater2.fluidportTop2, pump_warmwater.port_a) annotation (Line(
+  connect(WarmWater.fluidportTop2, pump_warmwater.port_a) annotation (Line(
         points={{35.6875,20.19},{36,20.19},{36,24},{58,24}}, color={0,127,255}));
   connect(pump_coldwater.port_a, ColdWater.fluidportBottom1) annotation (Line(
         points={{64,-46},{56,-46},{56,-90},{27.9375,-90},{27.9375,-88.38}},
@@ -246,26 +240,26 @@ equation
           {{-60,73.8},{-42,73.8},{-42,74},{-22,74}}, color={0,127,255}));
   connect(Valve7.port_1, HotWater.portHC1In) annotation (Line(points={{-6,74},{
           6,74},{6,73.83},{17.625,73.83}}, color={0,127,255}));
-  connect(Valve7.port_3, HotWater2.portHC1In) annotation (Line(points={{-14,66},
+  connect(Valve7.port_3,WarmWater. portHC1In) annotation (Line(points={{-14,66},
           {-14,30},{12,30},{12,11.83},{15.625,11.83}}, color={0,127,255}));
-  connect(HotWater2.portHC1Out, HotWater.portHC1Out) annotation (Line(points={{15.8125,
+  connect(WarmWater.portHC1Out, HotWater.portHC1Out) annotation (Line(points={{15.8125,
           5.94},{12,5.94},{12,67.94},{17.8125,67.94}},      color={0,127,255}));
   connect(Valve4.port_1, Valve5.port_2)
     annotation (Line(points={{-20,16},{-14,16}}, color={0,127,255}));
   connect(Valve5.port_1, HotWater.portHC2In) annotation (Line(points={{2,16},{2,
           58.25},{17.8125,58.25}}, color={0,127,255}));
-  connect(Valve5.port_3, HotWater2.portHC2In) annotation (Line(points={{-6,8},{
+  connect(Valve5.port_3,WarmWater. portHC2In) annotation (Line(points={{-6,8},{
           -6,-3.75},{15.8125,-3.75}}, color={0,127,255}));
-  connect(HotWater2.portHC2Out, generation_heatPump1.Fluid_in_warm) annotation (
+  connect(WarmWater.portHC2Out, generation_heatPump1.Fluid_in_warm) annotation (
      Line(points={{15.8125,-9.83},{-6,-9.83},{-6,4},{-40,4}}, color={0,127,255}));
   connect(HotWater.TTop, controlBus.HotWater_TTop) annotation (Line(points={{18,
           79.72},{10,79.72},{10,80},{4.1,80},{4.1,100.1}}, color={0,0,127}));
   connect(HotWater.TBottom, controlBus.HotWater_TBottom) annotation (Line(
         points={{18,47.8},{12,47.8},{12,48},{4.1,48},{4.1,100.1}}, color={0,0,
           127}));
-  connect(HotWater2.TTop, controlBus.WarmWater_TTop) annotation (Line(points={{
+  connect(WarmWater.TTop, controlBus.WarmWater_TTop) annotation (Line(points={{
           16,17.72},{12,17.72},{12,18},{4.1,18},{4.1,100.1}}, color={0,0,127}));
-  connect(HotWater2.TBottom, controlBus.WarmWater_TBottom) annotation (Line(
+  connect(WarmWater.TBottom, controlBus.WarmWater_TBottom) annotation (Line(
         points={{16,-14.2},{4,-14.2},{4,100.1},{4.1,100.1}}, color={0,0,127}));
   connect(ColdWater.TTop, controlBus.ColdWater_TTop) annotation (Line(points={{
           18,-52.28},{4.1,-52.28},{4.1,100.1}}, color={0,0,127}));
@@ -311,6 +305,11 @@ equation
       points={{-70,80},{-70,88},{4,88},{4,100}},
       color={255,204,51},
       thickness=0.5));
+  connect(Valve1.port_3, generation_geothermalProbe.Fluid_in_Geothermal)
+    annotation (Line(points={{-78,-67},{-74,-67},{-74,-80},{-56,-80}}, color={0,
+          127,255}));
+  connect(Valve1.port_1, pump_coldwater_heatpump.port_a) annotation (Line(
+        points={{-85,-74},{-85,-76},{-68,-76},{-68,-62}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-190,56},{-128,36}},
