@@ -25,20 +25,20 @@ model RLT
     dp_nominal=20,
     redeclare package Medium = Medium_Air)
     annotation (Placement(transformation(extent={{62,-76},{82,-56}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium =
+        Medium_Water)
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{70,90},{90,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium =
+        Medium_Water)
     "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{30,90},{50,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_warm(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_warm(redeclare package Medium =
+        Medium_Water)
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{-50,90},{-30,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_warm(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_warm(redeclare package Medium =
+        Medium_Water)
     "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{-90,90},{-70,110}})));
   Modelica.Fluid.Interfaces.FluidPort_a Air_in(redeclare package Medium =
@@ -49,12 +49,8 @@ model RLT
         Medium_Air)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,-76},{110,-56}})));
-  Modelica.Blocks.Interfaces.RealInput X_w1
-    "Set point for water vapor mass fraction in kg/kg total air of the fluid that leaves port_b"
-    annotation (Placement(transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=90,
-        origin={0,-100})));
+  BusSystem.ControlBus controlBus
+    annotation (Placement(transformation(extent={{-20,-120},{20,-80}})));
 equation
   connect(Ext_Warm.port_b2, Ext_Cold.port_a2)
     annotation (Line(points={{-52,-66},{8,-66}}, color={0,127,255}));
@@ -72,8 +68,8 @@ equation
     annotation (Line(points={{-72,-66},{-98,-66}}, color={0,127,255}));
   connect(hum.port_b, Air_out)
     annotation (Line(points={{82,-66},{100,-66}}, color={0,127,255}));
-  connect(hum.X_w, X_w1) annotation (Line(points={{60,-60},{44,-60},{44,-88},{0,
-          -88},{0,-100}}, color={0,0,127}));
+  connect(hum.X_w, controlBus.X_OpenPlanOffice) annotation (Line(points={{60,
+          -60},{40,-60},{40,-80},{0.1,-80},{0.1,-99.9}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end RLT;

@@ -43,13 +43,6 @@ model Weather
   Modelica.Blocks.Tables.CombiTable1D combiTable1D3(table=[0,1; 0.01,0; 0.49,0;
         0.5,1; 1,1])
     annotation (Placement(transformation(extent={{46,-58},{56,-48}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
-    prescribedTemperature annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=-90,
-        origin={0,-14})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b AirTemp
-    annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
   Modelica.Blocks.Interfaces.RealOutput WindSpeed_Hor "in m/s"
     annotation (Placement(transformation(extent={{90,-90},{110,-70}})));
   Modelica.Blocks.Math.Gain gain1(k=0)
@@ -80,15 +73,18 @@ model Weather
     nPorts=1,
     redeclare package Medium = Medium_Air)
     annotation (Placement(transformation(extent={{-44,-30},{-64,-10}})));
-  Modelica.Blocks.Interfaces.RealInput m_flow_in1
-    "Prescribed mass flow rate" annotation (Placement(transformation(
-        extent={{20,-20},{-20,20}},
-        rotation=-90,
-        origin={-50,-100})));
   Modelica.Blocks.Math.Feedback feedback
     annotation (Placement(transformation(extent={{-14,-30},{-34,-50}})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=1)
     annotation (Placement(transformation(extent={{22,-48},{10,-32}})));
+  Modelica.Blocks.Interfaces.RealOutput Airtemp "in K" annotation (Placement(
+        transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=-90,
+        origin={0,-100})));
+  BusSystem.ControlBus controlBus annotation (Placement(transformation(extent={
+            {-70,-122},{-30,-82}}), iconTransformation(extent={{-68,-110},{-48,
+            -90}})));
 equation
   connect(weather.WindDirection, gain.u)
     annotation (Line(points={{-19,33},{0,33},{0,41},{9,41}}, color={0,0,127}));
@@ -124,10 +120,6 @@ equation
     annotation (Line(points={{76.4,-40},{100,-40}}, color={0,0,127}));
   connect(product.y, WindSpeed_North)
     annotation (Line(points={{76.4,80},{100,80}}, color={0,0,127}));
-  connect(weather.AirTemp, prescribedTemperature.T) annotation (Line(points={{
-          -19,27},{2.22045e-015,27},{2.22045e-015,-2}}, color={0,0,127}));
-  connect(prescribedTemperature.port, AirTemp)
-    annotation (Line(points={{0,-24},{0,-100}}, color={191,0,0}));
   connect(gain1.y, WindSpeed_Hor)
     annotation (Line(points={{64.6,-80},{100,-80}}, color={0,0,127}));
   connect(gain1.u, product1.u1) annotation (Line(points={{50.8,-80},{40,-80},{
@@ -135,11 +127,6 @@ equation
   connect(weather.SolarRadiation_OrientedSurfaces,
     SolarRadiation_OrientedSurfaces1) annotation (Line(points={{-42.8,13},{
           -42.8,0},{-80,0},{-80,0},{-80,70},{-90,70}}, color={255,128,0}));
-  connect(boundary.m_flow_in, m_flow_in1) annotation (Line(points={{-44,-12},{
-          -44,-10},{-20,-10},{-20,-100},{-50,-100}}, color={0,0,127}));
-  connect(boundary.T_in, prescribedTemperature.T) annotation (Line(points={{-42,
-          -16},{-30,-16},{-30,10},{2.22045e-015,10},{2.22045e-015,-2}}, color={
-          0,0,127}));
   connect(boundary.X_in[1], weather.WaterInAir) annotation (Line(points={{-42,
           -24},{-24,-24},{-24,16},{-10,16},{-10,21},{-19,21}}, color={0,0,127}));
   connect(boundary.ports[1], Air_out)
@@ -152,6 +139,12 @@ equation
     annotation (Line(points={{9.4,-40},{-16,-40}}, color={0,0,127}));
   connect(Air_in, Air_in_bou.ports[1])
     annotation (Line(points={{-100,-60},{-62,-60}}, color={0,127,255}));
+  connect(Airtemp, weather.AirTemp)
+    annotation (Line(points={{0,-100},{0,27},{-19,27}}, color={0,0,127}));
+  connect(boundary.T_in, weather.AirTemp) annotation (Line(points={{-42,-16},{0,
+          -16},{0,27},{-19,27}}, color={0,0,127}));
+  connect(boundary.m_flow_in, controlBus.Fan_RLT) annotation (Line(points={{-44,
+          -12},{-6,-12},{-6,-80},{-49.9,-80},{-49.9,-101.9}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Weather;

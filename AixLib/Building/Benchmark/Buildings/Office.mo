@@ -21,8 +21,6 @@ model Office
     annotation (Placement(transformation(extent={{110,10},{90,30}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort_West
     annotation (Placement(transformation(extent={{110,-20},{90,0}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_OutdoorTemp
-    annotation (Placement(transformation(extent={{-10,90},{10,110}})));
   Utilities.Interfaces.SolarRad_in SolarRadiationPort_North[5]
     annotation (Placement(transformation(extent={{-110,70},{-90,90}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort_Hor annotation (Placement(
@@ -40,6 +38,19 @@ model Office
         Medium_Air)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-90,-110},{-70,-90}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature
+    prescribedTemperature annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=-90,
+        origin={0,78})));
+  Modelica.Blocks.Interfaces.RealInput AirTemp annotation (Placement(
+        transformation(
+        extent={{10,-10},{-10,10}},
+        rotation=90,
+        origin={0,100}), iconTransformation(
+        extent={{10,-10},{-10,10}},
+        rotation=90,
+        origin={-2,98})));
 equation
   connect(realExpression.y,tempOutside. T) annotation (Line(points={{-51,-40},{
           -30,-40}},                  color={0,0,127}));
@@ -57,8 +68,6 @@ equation
         points={{20,52},{80,52},{80,50},{100,50}}, color={0,0,127}));
   connect(firstFloor.WindSpeedPort_South, WindSpeedPort_South) annotation (Line(
         points={{20,48},{80,48},{80,20},{100,20}}, color={0,0,127}));
-  connect(firstFloor.HeatPort_OutdoorTemp, HeatPort_OutdoorTemp) annotation (
-      Line(points={{0,60},{0,100}},                         color={191,0,0}));
   connect(firstFloor.WindSpeedPort_Hor, WindSpeedPort_Hor) annotation (Line(
         points={{16,60},{16,80},{80,80},{80,100}}, color={0,0,127}));
   connect(firstFloor.WindSpeedPort_West, WindSpeedPort_West) annotation (Line(
@@ -83,6 +92,11 @@ equation
           {-40,-100}}, color={0,127,255}));
   connect(firstFloor.Heatport_TBA, Heatport_TBA)
     annotation (Line(points={{20,28},{80,28},{80,-100}}, color={191,0,0}));
+  connect(prescribedTemperature.port, firstFloor.HeatPort_OutdoorTemp)
+    annotation (Line(points={{-1.11022e-015,72},{-1.11022e-015,64},{0,64},{0,60}},
+        color={191,0,0}));
+  connect(AirTemp, prescribedTemperature.T)
+    annotation (Line(points={{0,100},{0,85.2}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-72,-2},{-10,-22}},

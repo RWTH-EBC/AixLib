@@ -1,4 +1,4 @@
-﻿within AixLib.Building.Benchmark.Rooms;
+within AixLib.Building.Benchmark.Rooms;
 model OpenPlanOffice
 replaceable package Medium_Air =
     AixLib.Media.Air "Medium in the component";
@@ -275,9 +275,6 @@ equation
           {-25.1,-2},{-25.1,-15.9}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
-          extent={{-30,36},{18,26}},
-          lineColor={28,108,200},
-          textString="Lüftung fehlt komplett"),               Text(
           extent={{-4,46},{44,36}},
           lineColor={28,108,200},
           textString="Solar absorptance ist noch nicht richtig,

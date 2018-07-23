@@ -10,11 +10,9 @@ model FullModel
     annotation (Placement(transformation(extent={{60,-60},{80,-40}})));
   Transfer.Transfer_RLT.Full_Transfer_RLT full_Transfer_RLT
     annotation (Placement(transformation(extent={{0,-60},{20,-40}})));
-  Modelica.Blocks.Sources.RealExpression realExpression(y=10)
-    annotation (Placement(transformation(extent={{-34,62},{-14,82}})));
+  BusSystem.ControlBus controlBus annotation (Placement(transformation(extent={
+            {-120,60},{-80,100}}), iconTransformation(extent={{-116,34},{-96,54}})));
 equation
-  connect(weather.AirTemp, office.HeatPort_OutdoorTemp) annotation (Line(points={{60,82},
-          {60,60},{61,60}},                   color={191,0,0}));
   connect(weather.WindSpeed_North, office.WindSpeedPort_North) annotation (Line(
         points={{70,100},{100,100},{100,54},{92,54}},
                                                     color={0,0,127}));
@@ -56,12 +54,31 @@ equation
     annotation (Line(points={{51,99},{22,99},{22,54},{30,54}}, color={255,128,0}));
   connect(full_Transfer_RLT.Air_in, weather.Air_out)
     annotation (Line(points={{6,-40},{6,90},{50,90}}, color={0,127,255}));
-  connect(realExpression.y, weather.m_flow_in1)
-    annotation (Line(points={{-13,72},{55,72},{55,82}}, color={0,0,127}));
   connect(office.Air_out, weather.Air_in) annotation (Line(points={{36.2,0},{36,
           0},{36,-6},{14,-6},{14,86},{50,86}}, color={0,127,255}));
-  connect(office.Air_in, full_Transfer_RLT.Air_out) annotation (Line(points={{
-          48.6,0},{48.6,-20},{14,-20},{14,-40}}, color={0,127,255}));
+  connect(office.Air_in, full_Transfer_RLT.Air_out) annotation (Line(points={{48.6,0},
+          {48.6,-20},{14,-20},{14,-40}},         color={0,127,255}));
+  connect(weather.Airtemp, office.AirTemp) annotation (Line(points={{60,82},{60,
+          59.4},{60.38,59.4}}, color={0,0,127}));
+  connect(generation.AirTemp, office.AirTemp) annotation (Line(points={{-74,
+          -39.4},{-74,-32},{20,-32},{20,68},{60,68},{60,59.4},{60.38,59.4}},
+        color={0,0,127}));
+  connect(weather.controlBus, controlBus) annotation (Line(
+      points={{54.2,82},{54,82},{54,80},{-100,80}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(generation.controlBus, controlBus) annotation (Line(
+      points={{-66,-40},{-66,80},{-100,80}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(full_Transfer_RLT.controlBus, controlBus) annotation (Line(
+      points={{20.2,-50},{28,-50},{28,-36},{-66,-36},{-66,80},{-100,80}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(full_Transfer_TBA.controlBus, controlBus) annotation (Line(
+      points={{80.2,-50},{84,-50},{84,-36},{-66,-36},{-66,80},{-100,80}},
+      color={255,204,51},
+      thickness=0.5));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=5000, Interval=1));
