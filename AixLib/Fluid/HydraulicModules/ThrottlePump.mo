@@ -390,7 +390,7 @@ equation
 <li>2017-06 by Alexander K&uuml;mpel:<br/>Implemented</li>
 </ul>
 </html>", info="<html>
-<p>Throttle circuit with a replaceable pump model and a valve for the distribution of hot or cold water. All sensor and actor values are connected to the hydraulic bus (not all connections are visible).</p>
+<p>Throttle circuit with a replaceable pump model and a valve for the distribution of hot or cold water. All sensor and actor values are connected to the hydraulic bus.</p>
 <h4><span style=\"color: #008c48\">Characteristics</span></h4>
 <p>The volume flow depends on the valve opening and the pump speed. If the pump is switched of or the valve is completly closed, there is no volume flow (except leackage).</p>
 <p>This model uses a pipe model to include the heat loss and insulation effects.</p>

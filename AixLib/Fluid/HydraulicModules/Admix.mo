@@ -340,7 +340,7 @@ equation
     annotation (Line(points={{-78,-60},{-66,-60}}, color={0,127,255}));
   annotation (
     Documentation(info="<html>
-<p>Admix circuit with a replaceable pump model for the distribution of hot or cold water. All sensor and actor values are connected to the hydraulic bus (not all connections are visible).</p>
+<p>Admix circuit with a replaceable pump model for the distribution of hot or cold water. All sensor and actor values are connected to the hydraulic bus.</p>
 <h4>Characteristics</h4>
 <p>There is a connecting pipe between distributer and collector of manifold so that the pressure difference between them becomes insignificant. The main pump only works against the resistance in the main circuit.</p>
 <p>The mass flow in primary and secondary circuits stay constant.</p>
