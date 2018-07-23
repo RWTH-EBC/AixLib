@@ -17,12 +17,12 @@ model Generation
     redeclare package MediumHC2 = Medium_Water)
     annotation (Placement(transformation(extent={{18,44},{48,82}})));
 
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_hot(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_hot(redeclare package Medium =
+        Medium_Water)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,70},{110,90}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_hot(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_hot(redeclare package Medium =
+        Medium_Water)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,30},{110,50}})));
 
@@ -42,12 +42,12 @@ model Generation
     redeclare package MediumHC1 = Medium_Water,
     redeclare package MediumHC2 = Medium_Water)
     annotation (Placement(transformation(extent={{18,-88},{48,-50}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium =
+        Medium_Water)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,-50},{110,-30}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium =
+        Medium_Water)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,-90},{110,-70}})));
   Fluid.Movers.FlowControlled_dp pump_hotwater(
@@ -144,12 +144,12 @@ model Generation
     redeclare Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per,
     redeclare package Medium = Medium_Water)
     annotation (Placement(transformation(extent={{58,14},{78,34}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_warm(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_warm(redeclare package Medium =
+        Medium_Water)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,10},{110,30}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_warm(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_warm(redeclare package Medium =
+        Medium_Water)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,-30},{110,-10}})));
   Fluid.Sources.Boundary_pT bou4(
@@ -187,8 +187,6 @@ equation
     annotation (Line(points={{80,90},{80,80},{100,80}}, color={0,127,255}));
   connect(pump_coldwater.port_b, Fluid_out_cold) annotation (Line(points={{84,-46},
           {92,-46},{92,-40},{100,-40}}, color={0,127,255}));
-  connect(generation_Hot.isOn_boiler, generation_Hot.isOn_chp) annotation (Line(
-        points={{-74,80},{-76,80}},                   color={255,0,255}));
   connect(HotWater.portHC2Out, generation_heatPump1.Fluid_in_warm) annotation (
       Line(points={{17.8125,52.17},{12,52.17},{12,4},{-40,4}},          color={
           0,127,255}));
@@ -235,8 +233,8 @@ equation
           35.3125,-18.19},{35.3125,-20},{100,-20}}, color={0,127,255}));
   connect(pump_warmwater.port_b, Fluid_out_warm) annotation (Line(points={{78,
           24},{90,24},{90,20},{100,20}}, color={0,127,255}));
-  connect(HotWater.fluidportTop2, pump_hotwater.port_a) annotation (Line(points
-        ={{37.6875,82.19},{37.6875,90},{60,90}}, color={0,127,255}));
+  connect(HotWater.fluidportTop2, pump_hotwater.port_a) annotation (Line(points=
+         {{37.6875,82.19},{37.6875,90},{60,90}}, color={0,127,255}));
   connect(HotWater2.fluidportTop2, pump_warmwater.port_a) annotation (Line(
         points={{35.6875,20.19},{36,20.19},{36,24},{58,24}}, color={0,127,255}));
   connect(pump_coldwater.port_a, ColdWater.fluidportBottom1) annotation (Line(
@@ -302,10 +300,6 @@ equation
       points={{-50,20},{-50,34},{4,34},{4,100}},
       color={255,204,51},
       thickness=0.5));
-  connect(generation_Hot.controlBus, controlBus) annotation (Line(
-      points={{-70,80},{-70,88},{4,88},{4,100}},
-      color={255,204,51},
-      thickness=0.5));
   connect(generation_AirCooling.controlBus, controlBus) annotation (Line(
       points={{-60,-30},{-98,-30},{-98,34},{4,34},{4,100}},
       color={255,204,51},
@@ -313,6 +307,10 @@ equation
   connect(generation_AirCooling.T_in1, AirTemp) annotation (Line(points={{-60.8,
           -38},{-72,-38},{-72,-30},{-98,-30},{-98,88},{-40,88},{-40,106}},
         color={0,0,127}));
+  connect(generation_Hot.controlBus, controlBus) annotation (Line(
+      points={{-70,80},{-70,88},{4,88},{4,100}},
+      color={255,204,51},
+      thickness=0.5));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-190,56},{-128,36}},

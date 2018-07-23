@@ -1,5 +1,7 @@
 within AixLib.Building.Benchmark.Generation;
 model Generation_heatPump
+  replaceable package Medium_Water =
+    AixLib.Media.Water "Medium in the component";
   Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_warm(redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
