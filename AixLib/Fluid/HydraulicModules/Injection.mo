@@ -49,7 +49,10 @@ model Injection "Injection circuit with pump and three way valve"
     T_start_in=T_start,
     T_start_out=T_start,
     dh=0.032,
-    nPorts=1)          annotation (Dialog(enable=true, group="Pipes"), Placement(
+    nPorts=1,
+    final v_nominal=1.5,
+    dIns=0.01,
+    kIns=0.028)        annotation (Dialog(enable=true, group="Pipes"), Placement(
         transformation(extent={{-88,28},{-72,12}})));
   FixedResistances.PlugFlowPipe
                         pipe3(redeclare package Medium = Medium,
@@ -57,7 +60,10 @@ model Injection "Injection circuit with pump and three way valve"
     T_start_in=T_start,
     T_start_out=T_start,
     dh=0.032,
-    nPorts=1)          annotation (Dialog(enable=true, group="Pipes"), Placement(
+    nPorts=1,
+    final v_nominal=1.5,
+    dIns=0.01,
+    kIns=0.028)        annotation (Dialog(enable=true, group="Pipes"), Placement(
         transformation(extent={{68,28},{84,12}})));
   FixedResistances.PlugFlowPipe
                         pipe4(redeclare package Medium = Medium,
@@ -65,7 +71,10 @@ model Injection "Injection circuit with pump and three way valve"
     T_start_in=T_start,
     T_start_out=T_start,
     dh=0.032,
-    nPorts=1)          annotation (Dialog(enable=true, group="Pipes"), Placement(
+    nPorts=1,
+    final v_nominal=1.5,
+    dIns=0.01,
+    kIns=0.028)        annotation (Dialog(enable=true, group="Pipes"), Placement(
         transformation(extent={{70,-68},{54,-52}})));
   FixedResistances.PlugFlowPipe
                         pipe6(redeclare package Medium = Medium,
@@ -73,7 +82,10 @@ model Injection "Injection circuit with pump and three way valve"
     T_start_in=T_start,
     T_start_out=T_start,
     dh=0.032,
-    nPorts=1)          annotation (Dialog(enable=true, group="Pipes"), Placement(
+    nPorts=1,
+    final v_nominal=1.5,
+    dIns=0.01,
+    kIns=0.028)        annotation (Dialog(enable=true, group="Pipes"), Placement(
         transformation(extent={{-60,-68},{-76,-52}})));
   FixedResistances.PlugFlowPipe
                         pipe7(redeclare package Medium = Medium,
@@ -81,7 +93,10 @@ model Injection "Injection circuit with pump and three way valve"
     T_start_in=T_start,
     T_start_out=T_start,
     dh=0.032,
-    nPorts=1)          annotation (Dialog(enable=true, group="Pipes"), Placement(
+    nPorts=1,
+    final v_nominal=1.5,
+    dIns=0.01,
+    kIns=0.028)        annotation (Dialog(enable=true, group="Pipes"), Placement(
         transformation(
         extent={{-8,-8},{8,8}},
         rotation=-90,
@@ -92,7 +107,10 @@ model Injection "Injection circuit with pump and three way valve"
     T_start_in=T_start,
     T_start_out=T_start,
     dh=0.032,
-    nPorts=1)          annotation (Dialog(enable=true, group="Pipes"), Placement(
+    nPorts=1,
+    final v_nominal=1.5,
+    dIns=0.01,
+    kIns=0.028)        annotation (Dialog(enable=true, group="Pipes"), Placement(
         transformation(
         extent={{-8,-8},{8,8}},
         rotation=-90,
@@ -103,7 +121,10 @@ model Injection "Injection circuit with pump and three way valve"
     T_start_in=T_start,
     T_start_out=T_start,
     dh=0.032,
-    nPorts=1)    annotation (Dialog(enable=true, group="Pipes"), Placement(
+    nPorts=1,
+    final v_nominal=1.5,
+    dIns=0.01,
+    kIns=0.028)  annotation (Dialog(enable=true, group="Pipes"), Placement(
         transformation(extent={{0,-68},{-16,-52}})));
   FixedResistances.PlugFlowPipe
                         pipe2(redeclare package Medium = Medium,
@@ -111,7 +132,10 @@ model Injection "Injection circuit with pump and three way valve"
     T_start_in=T_start,
     T_start_out=T_start,
     dh=0.032,
-    nPorts=1)    annotation (Dialog(enable=true, group="Pipes"), Placement(
+    nPorts=1,
+    final v_nominal=1.5,
+    dIns=0.01,
+    kIns=0.028)  annotation (Dialog(enable=true, group="Pipes"), Placement(
         transformation(
         extent={{8,-8},{-8,8}},
         rotation=180,
@@ -124,12 +148,14 @@ model Injection "Injection circuit with pump and three way valve"
     final m_flow_nominal=m_flow_nominal,
     nPorts=3)
            annotation (Placement(transformation(extent={{14,-60},{26,-72}})));
-
+  Modelica.Blocks.Sources.Constant const(k=T_amb)
+    annotation (Placement(transformation(extent={{76,-20},{60,-4}})));
 
   // -------------------------------------------------
   // Sensors
   // -------------------------------------------------
 
+protected
   Modelica.Fluid.Sensors.VolumeFlowRate VFSen_out(redeclare package Medium =
         Medium) "Inflow into admix module" annotation (Placement(transformation(
         extent={{-8,8},{8,-8}},
@@ -228,8 +254,7 @@ model Injection "Injection circuit with pump and three way valve"
         origin={46,-12})));
 
 
-  Modelica.Blocks.Sources.Constant const(k=T_amb)
-    annotation (Placement(transformation(extent={{76,-20},{60,-4}})));
+
 equation
   connect(pipe6.port_a, val.port_2) annotation (Line(points={{-60,-60},{-48,-60}},
                            color={0,127,255}));
@@ -241,7 +266,7 @@ equation
       index=1,
       extent={{6,3},{6,3}}));
   connect(VFSen_out.V_flow, hydraulicBus.VF_in) annotation (Line(points={{-108.8,
-          40},{-120,40},{-120,100},{-66,100},{-66,100.1},{0.1,100.1}},
+          40},{-122,40},{-122,100},{-68,100},{-68,100.1},{0.1,100.1}},
                                         color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -264,7 +289,7 @@ equation
       index=1,
       extent={{6,3},{6,3}}));
   connect(val.y_actual, hydraulicBus.valveSetAct) annotation (Line(
-      points={{-44,-65.6},{-44,-92},{-122,-92},{-122,100},{0,100}},
+      points={{-44,-65.6},{-44,-106},{-122,-106},{-122,100},{0,100}},
       color={0,0,127},
       visible=true), Text(
       string="%second",

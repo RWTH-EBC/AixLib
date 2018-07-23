@@ -32,8 +32,7 @@ model Admix "Admix circuit with three way valve and rpm controlled pump"
     init=Modelica.Blocks.Types.Init.NoInit,
     y_start=0.5,
     tau=0.2,
-    final m_flow_nominal=m_flow_nominal,
-    rhoStd=Medium.rho_default)
+    final m_flow_nominal=m_flow_nominal)
              annotation (Dialog(enable=true,group="Actuators"), Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
@@ -48,8 +47,10 @@ model Admix "Admix circuit with three way valve and rpm controlled pump"
     dh=0.032,
     T_start_in=T_start,
     T_start_out=T_start,
-    final m_flow_nominal=m_flow_nominal)
-                     annotation (Dialog(
+    final m_flow_nominal=m_flow_nominal,
+    final v_nominal=1,
+    dIns=0.01,
+    kIns=0.028)      annotation (Dialog(
         enable=true, group="Pipes"), Placement(transformation(extent={{-80,28},{
             -64,12}})));
   FixedResistances.PlugFlowPipe
@@ -59,8 +60,10 @@ model Admix "Admix circuit with three way valve and rpm controlled pump"
     dh=0.032,
     T_start_in=T_start,
     T_start_out=T_start,
-    final m_flow_nominal=m_flow_nominal)
-                     annotation (Dialog(
+    final m_flow_nominal=m_flow_nominal,
+    final v_nominal=1,
+    dIns=0.01,
+    kIns=0.028)      annotation (Dialog(
         enable=true, group="Pipes"), Placement(transformation(extent={{-8,28},{8,
             12}})));
   FixedResistances.PlugFlowPipe
@@ -70,8 +73,10 @@ model Admix "Admix circuit with three way valve and rpm controlled pump"
     T_start_out=T_start,
     nPorts=1,
     dh=0.032,
-    final m_flow_nominal=m_flow_nominal)
-                     annotation (Dialog(
+    final m_flow_nominal=m_flow_nominal,
+    final v_nominal=1,
+    dIns=0.01,
+    kIns=0.028)      annotation (Dialog(
         enable=true, group="Pipes"), Placement(transformation(extent={{60,28},{76,
             12}})));
   FixedResistances.PlugFlowPipe
@@ -80,8 +85,12 @@ model Admix "Admix circuit with three way valve and rpm controlled pump"
     dh=0.032,
     T_start_in=T_start,
     T_start_out=T_start,
-    m_flow_nominal=m_flow_nominal,
-    nPorts=1)        annotation (Dialog(
+    nPorts=1,
+    final v_nominal=1,
+    dIns=0.01,
+    kIns=0.028,
+    final m_flow_nominal=m_flow_nominal)
+                     annotation (Dialog(
         enable=true, group="Pipes"), Placement(transformation(
         extent={{-8,8},{8,-8}},
         rotation=180,
@@ -92,8 +101,12 @@ model Admix "Admix circuit with three way valve and rpm controlled pump"
     T_start_in=T_start,
     T_start_out=T_start,
     dh=0.032,
-    m_flow_nominal=m_flow_nominal,
-    nPorts=1)        annotation (Dialog(
+    nPorts=1,
+    final v_nominal=1,
+    dIns=0.01,
+    kIns=0.028,
+    final m_flow_nominal=m_flow_nominal)
+                     annotation (Dialog(
         enable=true, group="Pipes"), Placement(transformation(
         extent={{-8,8},{8,-8}},
         rotation=180,
@@ -105,7 +118,8 @@ model Admix "Admix circuit with three way valve and rpm controlled pump"
     T_start_in=T_start,
     T_start_out=T_start,
     nPorts=1,
-    final m_flow_nominal=m_flow_nominal)
+    final m_flow_nominal=m_flow_nominal,
+    final v_nominal=1)
                      annotation (Dialog(
         enable=true, group="Pipes"), Placement(transformation(
         extent={{-8,8},{8,-8}},
@@ -124,10 +138,13 @@ model Admix "Admix circuit with three way valve and rpm controlled pump"
         rotation=180,
         origin={8,-20})));
 
+  Modelica.Blocks.Sources.Constant const(k=T_amb)
+    annotation (Placement(transformation(extent={{40,-28},{24,-12}})));
 
   // -------------------------------------------------
   // Sensors
   // -------------------------------------------------
+protected
   Sensors.VolumeFlowRate                VFSen_out(redeclare package Medium =
         Medium,
     T_start=T_start,
@@ -207,8 +224,7 @@ model Admix "Admix circuit with three way valve and rpm controlled pump"
         origin={110,-30})));
 
 
-  Modelica.Blocks.Sources.Constant const(k=T_amb)
-    annotation (Placement(transformation(extent={{40,-28},{24,-12}})));
+
 equation
 
   connect(val.port_2, pipe2.port_a)
@@ -337,17 +353,17 @@ equation
 </ul>
 </html>"),
     experiment(StopTime=86400),
-    Icon(coordinateSystem(extent={{-100,-80},{100,100}}),
+    Icon(coordinateSystem(extent={{-100,-100},{100,100}}),
          graphics={
         Rectangle(
-          extent={{-100,100},{100,-80}},
+          extent={{-100,100},{100,-100}},
           lineColor={175,175,175},
           lineThickness=0.5,
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
           pattern=LinePattern.Dash),
         Text(
-          extent={{-60,-60},{56,-82}},
+          extent={{-70,-64},{60,-94}},
           lineColor={95,95,95},
           lineThickness=0.5,
           fillColor={255,255,255},

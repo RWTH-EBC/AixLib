@@ -34,11 +34,11 @@ model Admix "Test for admix circuit"
       length=1,
       dIns=0.01,
       kIns=0.028),
-    T_amb=293.15,
-    val(Kv=10))                     annotation (Placement(transformation(
-        extent={{-28,-25},{28,25}},
+    val(Kv=10),
+    T_amb=293.15)                   annotation (Placement(transformation(
+        extent={{-30,-30},{30,30}},
         rotation=90,
-        origin={17,20})));
+        origin={10,10})));
   package Medium =
       Modelica.Media.Water.ConstantPropertyLiquidWater
     annotation (choicesAllMatching=true);
@@ -49,7 +49,7 @@ model Admix "Test for admix circuit"
               annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
-        origin={0,-30})));
+        origin={-8,-50})));
   Modelica.Fluid.Sources.Boundary_pT boundary1(
     nPorts=1,
     T=323.15,
@@ -57,7 +57,7 @@ model Admix "Test for admix circuit"
               annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
-        origin={40,-30})));
+        origin={28,-50})));
 
   AixLib.Fluid.FixedResistances.PressureDrop hydRes(
     m_flow_nominal=8*996/3600,
@@ -69,7 +69,7 @@ model Admix "Test for admix circuit"
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={20,60})));
+        origin={10,60})));
   Modelica.Blocks.Sources.Ramp valveOpening(              duration=500,
       startTime=180)
     annotation (Placement(transformation(extent={{-100,0},{-80,20}})));
@@ -85,18 +85,15 @@ equation
       index=1,
       extent={{6,3},{6,3}}));
   connect(Admix.port_b1, hydRes.port_a)
-    annotation (Line(points={{3.11111,48},{4,48},{4,60},{10,60}},
-                                                          color={0,127,255}));
-  connect(Admix.port_a2, hydRes.port_b) annotation (Line(points={{36.4444,48},{
-          36,48},{36,60},{30,60}}, color={0,127,255}));
+    annotation (Line(points={{-8,40},{-8,60},{0,60}},     color={0,127,255}));
+  connect(Admix.port_a2, hydRes.port_b) annotation (Line(points={{28,40},{28,60},
+          {20,60}},                color={0,127,255}));
   connect(Admix.port_a1, boundary.ports[1])
-    annotation (Line(points={{3.11111,-8},{1.9984e-015,-8},{1.9984e-015,-20}},
-                                                         color={0,127,255}));
+    annotation (Line(points={{-8,-20},{-8,-40}},         color={0,127,255}));
   connect(Admix.port_b2, boundary1.ports[1])
-    annotation (Line(points={{36.4444,-8},{40,-8},{40,-20}},
-                                                           color={0,127,255}));
+    annotation (Line(points={{28,-20},{28,-40}},           color={0,127,255}));
   connect(Admix.hydraulicBus, hydraulicBus) annotation (Line(
-      points={{-8,20},{-40,20}},
+      points={{-20,10},{-24,10},{-24,20},{-40,20}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%second",
