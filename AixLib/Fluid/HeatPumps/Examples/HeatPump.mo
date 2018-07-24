@@ -4,6 +4,8 @@ model HeatPump
 
  extends Modelica.Icons.Example;
 
+  AixLib.Fluid.HeatPumps.HeatPump heatPump
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 equation
 
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
