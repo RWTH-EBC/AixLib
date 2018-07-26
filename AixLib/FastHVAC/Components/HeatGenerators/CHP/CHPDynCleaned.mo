@@ -128,7 +128,7 @@ public
         extent={{-14,-14},{14,14}},
         rotation=270,
         origin={-14,98})));
-  Modelica.Blocks.Continuous.FirstOrder firstOrderP(T=2)
+  Modelica.Blocks.Continuous.FirstOrder firstOrderP(T=param.tauP_el/3)
     annotation (Placement(transformation(extent={{-20,76},{0,96}})));
 
   Modelica.Blocks.Nonlinear.SlewRateLimiter LimiterEFuel(Rising=2554.2, Falling=-2554.2)
