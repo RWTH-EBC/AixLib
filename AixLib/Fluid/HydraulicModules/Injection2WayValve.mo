@@ -2,15 +2,19 @@ within AixLib.Fluid.HydraulicModules;
 model Injection2WayValve
   "Injection circuit with pump and two way valve"
   extends AixLib.Fluid.Interfaces.PartialFourPort(redeclare package Medium1 =
-        Medium, redeclare package Medium2 = Medium);
+        Medium, redeclare package Medium2 = Medium, final allowFlowReversal1 = allowFlowReversal, final allowFlowReversal2 = allowFlowReversal);
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium in the system" annotation (choicesAllMatching=true);
 
       replaceable BaseClasses.BasicPumpInterface basicPumpInterface(redeclare
-      package Medium = Medium)
+      package Medium = Medium,
+    final allowFlowReversal=allowFlowReversal,
+    final m_flow_nominal=m_flow_nominal)
     annotation (Dialog(group="Actuators"), choicesAllMatching=true, Placement(transformation(extent={{42,12},
             {58,28}})));
-
+  parameter Boolean allowFlowReversal=true
+    "= true to allow flow reversal, false restricts to design direction (port_a -> port_b)"
+    annotation (Dialog(tab="Assumptions"), Evaluate=true);
   parameter  Modelica.SIunits.Temperature T_amb "Ambient temperature";
 
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min=0)
@@ -28,7 +32,8 @@ model Injection2WayValve
     init=Modelica.Blocks.Types.Init.NoInit,
     y_start=0.5,
     Kv=10,
-    final m_flow_nominal=m_flow_nominal)
+    final m_flow_nominal=m_flow_nominal,
+    final allowFlowReversal=allowFlowReversal)
                                        annotation (Dialog(enable=true,group="Actuators"), Placement(transformation(
         extent={{8,8},{-8,-8}},
         rotation=0,
@@ -46,7 +51,9 @@ model Injection2WayValve
     final v_nominal=1.5,
     dIns=0.01,
     kIns=0.028,
-    nPorts=1)          annotation (Dialog(enable=true, group="Pipes"), Placement(
+    nPorts=1,
+    final allowFlowReversal=allowFlowReversal)
+                       annotation (Dialog(enable=true, group="Pipes"), Placement(
         transformation(extent={{-40,28},{-24,12}})));
   FixedResistances.PlugFlowPipe
                         pipe2(redeclare package Medium = Medium,
@@ -57,7 +64,9 @@ model Injection2WayValve
     nPorts=1,
     final v_nominal=1.5,
     dIns=0.01,
-    kIns=0.028)        annotation (Dialog(enable=true, group="Pipes"), Placement(
+    kIns=0.028,
+    final allowFlowReversal=allowFlowReversal)
+                       annotation (Dialog(enable=true, group="Pipes"), Placement(
         transformation(extent={{68,28},{84,12}})));
   FixedResistances.PlugFlowPipe
                         pipe3(redeclare package Medium = Medium,
@@ -68,7 +77,9 @@ model Injection2WayValve
     nPorts=1,
     final v_nominal=1.5,
     dIns=0.01,
-    kIns=0.028)        annotation (Dialog(enable=true, group="Pipes"), Placement(
+    kIns=0.028,
+    final allowFlowReversal=allowFlowReversal)
+                       annotation (Dialog(enable=true, group="Pipes"), Placement(
         transformation(extent={{70,-68},{54,-52}})));
   FixedResistances.PlugFlowPipe
                         pipe5(redeclare package Medium = Medium,
@@ -79,7 +90,9 @@ model Injection2WayValve
     nPorts=1,
     final v_nominal=1.5,
     dIns=0.01,
-    kIns=0.028)        annotation (Dialog(enable=true, group="Pipes"), Placement(
+    kIns=0.028,
+    final allowFlowReversal=allowFlowReversal)
+                       annotation (Dialog(enable=true, group="Pipes"), Placement(
         transformation(extent={{-60,-68},{-76,-52}})));
   FixedResistances.PlugFlowPipe
                         pipe6(redeclare package Medium = Medium,
@@ -90,7 +103,9 @@ model Injection2WayValve
     nPorts=1,
     final v_nominal=1.5,
     dIns=0.01,
-    kIns=0.028)        annotation (Dialog(enable=true, group="Pipes"), Placement(
+    kIns=0.028,
+    final allowFlowReversal=allowFlowReversal)
+                       annotation (Dialog(enable=true, group="Pipes"), Placement(
         transformation(
         extent={{-8,8},{8,-8}},
         rotation=-90,
@@ -104,7 +119,9 @@ model Injection2WayValve
     nPorts=1,
     final v_nominal=1.5,
     dIns=0.01,
-    kIns=0.028)  annotation (Dialog(enable=true, group="Pipes"), Placement(
+    kIns=0.028,
+    final allowFlowReversal=allowFlowReversal)
+                 annotation (Dialog(enable=true, group="Pipes"), Placement(
         transformation(extent={{-4,-68},{-20,-52}})));
 
    MixingVolumes.MixingVolume          junc3v6(
@@ -112,7 +129,8 @@ model Injection2WayValve
     T_start=T_start,
     final V=vol,
     final m_flow_nominal=m_flow_nominal,
-    nPorts=3)
+    nPorts=3,
+    final allowFlowReversal=allowFlowReversal)
            annotation (Placement(transformation(extent={{6,-60},{18,-72}})));
   Modelica.Blocks.Sources.Constant const(k=T_amb)
     annotation (Placement(transformation(extent={{-52,-20},{-36,-4}})));
@@ -123,12 +141,14 @@ model Injection2WayValve
 
 protected
   Modelica.Fluid.Sensors.VolumeFlowRate VFSen_out(redeclare package Medium =
-        Medium) "Inflow into admix module" annotation (Placement(transformation(
+        Medium, final allowFlowReversal=allowFlowReversal)
+                "Inflow into admix module" annotation (Placement(transformation(
         extent={{-8,8},{8,-8}},
         rotation=270,
         origin={-100,40})));
   Modelica.Fluid.Sensors.VolumeFlowRate VFSen_in(redeclare package Medium =
-        Medium) "Inflow into consumer (out of module)" annotation (Placement(
+        Medium, final allowFlowReversal=allowFlowReversal)
+                "Inflow into consumer (out of module)" annotation (Placement(
         transformation(
         extent={{-8,8},{8,-8}},
         rotation=90,
@@ -138,7 +158,8 @@ protected
     final V=vol,
     T_start=T_start,
     final m_flow_nominal=m_flow_nominal,
-    nPorts=3)
+    nPorts=3,
+    final allowFlowReversal=allowFlowReversal)
     annotation (Placement(transformation(extent={{6,20},{18,32}})));
 
   Sensors.TemperatureTwoPort senT_a1(
@@ -146,28 +167,32 @@ protected
     redeclare package Medium = Medium,
     transferHeat=true,
     final TAmb=T_amb,
-    final m_flow_nominal=m_flow_nominal)
+    final m_flow_nominal=m_flow_nominal,
+    final allowFlowReversal=allowFlowReversal)
     annotation (Placement(transformation(extent={{-100,14},{-88,26}})));
   Sensors.TemperatureTwoPort senT_b1(
     m_flow_nominal=m_flow_nominal,
     T_start=T_start,
     redeclare package Medium = Medium,
     transferHeat=true,
-    final TAmb=T_amb)
+    final TAmb=T_amb,
+    final allowFlowReversal=allowFlowReversal)
     annotation (Placement(transformation(extent={{88,14},{100,26}})));
   Sensors.TemperatureTwoPort senT_b2(
     T_start=T_start,
     redeclare package Medium = Medium,
     transferHeat=true,
     final TAmb=T_amb,
-    final m_flow_nominal=m_flow_nominal)
+    final m_flow_nominal=m_flow_nominal,
+    final allowFlowReversal=allowFlowReversal)
     annotation (Placement(transformation(extent={{-80,-66},{-92,-54}})));
   Sensors.TemperatureTwoPort senT_a2(
     redeclare package Medium = Medium,
     transferHeat=true,
     final TAmb=T_amb,
     final m_flow_nominal=m_flow_nominal,
-    final T_start=T_start)
+    final T_start=T_start,
+    final allowFlowReversal=allowFlowReversal)
     annotation (Placement(transformation(extent={{86,-66},{74,-54}})));
 
   Modelica.Blocks.Continuous.FirstOrder PT1_a1(

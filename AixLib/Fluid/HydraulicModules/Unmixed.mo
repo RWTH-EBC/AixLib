@@ -1,10 +1,12 @@
 within AixLib.Fluid.HydraulicModules;
 model Unmixed "Unmixed circuit with pump"
   extends AixLib.Fluid.Interfaces.PartialFourPort(redeclare package Medium1 =
-        Medium, redeclare package Medium2 = Medium);
+        Medium, redeclare package Medium2 = Medium, final allowFlowReversal1 = allowFlowReversal, final allowFlowReversal2 = allowFlowReversal);
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium in the system" annotation (choicesAllMatching=true);
-
+  parameter Boolean allowFlowReversal=true
+    "= true to allow flow reversal, false restricts to design direction (port_a -> port_b)"
+    annotation (Dialog(tab="Assumptions"), Evaluate=true);
   parameter  Modelica.SIunits.Temperature T_amb "Ambient temperature";
 
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min=0)
@@ -16,7 +18,9 @@ model Unmixed "Unmixed circuit with pump"
     "Time Constant for PT1 behavior of temperature sensors" annotation(Dialog(tab="Advanced"));
 
   replaceable BaseClasses.BasicPumpInterface basicPumpInterface(redeclare
-      package Medium = Medium)
+      package Medium = Medium,
+    final allowFlowReversal=allowFlowReversal,
+    final m_flow_nominal=m_flow_nominal)
     annotation (Dialog(group="Actuators"), choicesAllMatching=true, Placement(transformation(extent={{-8,12},
             {8,28}})));
   AixLib.Fluid.HydraulicModules.BaseClasses.HydraulicBus hydraulicBus
@@ -31,7 +35,8 @@ model Unmixed "Unmixed circuit with pump"
     nPorts=1,
     final v_nominal=1.5,
     dIns=0.01,
-    kIns=0.028)
+    kIns=0.028,
+    final allowFlowReversal=allowFlowReversal)
     annotation (Dialog(enable=true), Placement(transformation(extent={{-60,30},{
             -40,10}})));
 
@@ -44,7 +49,8 @@ model Unmixed "Unmixed circuit with pump"
     final m_flow_nominal=m_flow_nominal,
     final v_nominal=1.5,
     dIns=0.01,
-    kIns=0.028)
+    kIns=0.028,
+    final allowFlowReversal=allowFlowReversal)
     annotation (Dialog(enable=true), Placement(transformation(extent={{40,30},{60,
             10}})));
   FixedResistances.PlugFlowPipe
@@ -56,7 +62,8 @@ model Unmixed "Unmixed circuit with pump"
     final m_flow_nominal=m_flow_nominal,
     final v_nominal=1.5,
     dIns=0.01,
-    kIns=0.028)
+    kIns=0.028,
+    final allowFlowReversal=allowFlowReversal)
     annotation (Dialog(enable=true), Placement(transformation(extent={{10,-70},{
             -10,-50}})));
 Modelica.Blocks.Sources.Constant const(k=T_amb)
@@ -67,7 +74,8 @@ Modelica.Blocks.Sources.Constant const(k=T_amb)
 
 protected
   Modelica.Fluid.Sensors.VolumeFlowRate VFSen_out(redeclare package Medium =
-        Medium) "Inflow into module in forward line" annotation (Placement(
+        Medium, final allowFlowReversal=allowFlowReversal)
+                "Inflow into module in forward line" annotation (Placement(
         transformation(
         extent={{-6,6},{6,-6}},
         rotation=270,
@@ -78,28 +86,32 @@ protected
     redeclare package Medium = Medium,
     transferHeat=true,
     final TAmb=T_amb,
-    final m_flow_nominal=m_flow_nominal)
+    final m_flow_nominal=m_flow_nominal,
+    final allowFlowReversal=allowFlowReversal)
     annotation (Placement(transformation(extent={{-100,14},{-88,26}})));
   Sensors.TemperatureTwoPort senT_b1(
     m_flow_nominal=m_flow_nominal,
     T_start=T_start,
     redeclare package Medium = Medium,
     transferHeat=true,
-    final TAmb=T_amb)
+    final TAmb=T_amb,
+    final allowFlowReversal=allowFlowReversal)
     annotation (Placement(transformation(extent={{88,14},{100,26}})));
   Sensors.TemperatureTwoPort senT_a2(
     redeclare package Medium = Medium,
     transferHeat=true,
     final TAmb=T_amb,
     final m_flow_nominal=m_flow_nominal,
-    final T_start=T_start)
+    final T_start=T_start,
+    final allowFlowReversal=allowFlowReversal)
     annotation (Placement(transformation(extent={{84,-66},{72,-54}})));
   Sensors.TemperatureTwoPort senT_b2(
     T_start=T_start,
     redeclare package Medium = Medium,
     transferHeat=true,
     final TAmb=T_amb,
-    final m_flow_nominal=m_flow_nominal)
+    final m_flow_nominal=m_flow_nominal,
+    final allowFlowReversal=allowFlowReversal)
     annotation (Placement(transformation(extent={{-78,-66},{-90,-54}})));
   Modelica.Blocks.Continuous.FirstOrder PT1_a1(
     initType=Modelica.Blocks.Types.Init.SteadyState,
@@ -207,6 +219,11 @@ equation
     annotation (Line(points={{23.2,-20},{17.6,-20}}, color={0,0,127}));
   connect(pipe1.ports_b[1], basicPumpInterface.port_a)
     annotation (Line(points={{-40,20},{-8,20}}, color={0,127,255}));
+  connect(VFSen_out.V_flow, hydraulicBus.VF_in) annotation (Line(points={{
+          -106.6,40},{-106.6,100.1},{0.1,100.1}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
   annotation (Icon(coordinateSystem(initialScale=0.1),          graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},

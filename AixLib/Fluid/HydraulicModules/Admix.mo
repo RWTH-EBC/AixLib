@@ -1,16 +1,20 @@
 within AixLib.Fluid.HydraulicModules;
 model Admix "Admix circuit with three way valve and rpm controlled pump"
   extends AixLib.Fluid.Interfaces.PartialFourPort(redeclare package Medium1 =
-        Medium, redeclare package Medium2 = Medium);
+        Medium, redeclare package Medium2 = Medium, final allowFlowReversal1 = allowFlowReversal, final allowFlowReversal2 = allowFlowReversal);
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium in the system" annotation (choicesAllMatching=true);
 
   replaceable BaseClasses.BasicPumpInterface basicPumpInterface(redeclare
-      package Medium = Medium)
+      package Medium = Medium,
+    allowFlowReversal=allowFlowReversal,
+    final m_flow_nominal=m_flow_nominal)
     annotation (Dialog(group="Actuators"), choicesAllMatching=true, Placement(transformation(extent={{22,12},
             {38,28}})));
 
-
+  parameter Boolean allowFlowReversal=true
+    "= true to allow flow reversal, false restricts to design direction (port_a -> port_b)"
+    annotation (Dialog(tab="Assumptions"), Evaluate=true);
   parameter  Modelica.SIunits.Temperature T_amb "Ambient temperature";
 
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min=0)
@@ -50,7 +54,9 @@ model Admix "Admix circuit with three way valve and rpm controlled pump"
     final m_flow_nominal=m_flow_nominal,
     final v_nominal=1,
     dIns=0.01,
-    kIns=0.028)      annotation (Dialog(
+    kIns=0.028,
+    final allowFlowReversal=allowFlowReversal)
+                     annotation (Dialog(
         enable=true, group="Pipes"), Placement(transformation(extent={{-80,28},{
             -64,12}})));
   FixedResistances.PlugFlowPipe
@@ -63,7 +69,9 @@ model Admix "Admix circuit with three way valve and rpm controlled pump"
     final m_flow_nominal=m_flow_nominal,
     final v_nominal=1,
     dIns=0.01,
-    kIns=0.028)      annotation (Dialog(
+    kIns=0.028,
+    final allowFlowReversal=allowFlowReversal)
+                     annotation (Dialog(
         enable=true, group="Pipes"), Placement(transformation(extent={{-8,28},{8,
             12}})));
   FixedResistances.PlugFlowPipe
@@ -76,7 +84,9 @@ model Admix "Admix circuit with three way valve and rpm controlled pump"
     final m_flow_nominal=m_flow_nominal,
     final v_nominal=1,
     dIns=0.01,
-    kIns=0.028)      annotation (Dialog(
+    kIns=0.028,
+    final allowFlowReversal=allowFlowReversal)
+                     annotation (Dialog(
         enable=true, group="Pipes"), Placement(transformation(extent={{60,28},{76,
             12}})));
   FixedResistances.PlugFlowPipe
@@ -89,7 +99,8 @@ model Admix "Admix circuit with three way valve and rpm controlled pump"
     final v_nominal=1,
     dIns=0.01,
     kIns=0.028,
-    final m_flow_nominal=m_flow_nominal)
+    final m_flow_nominal=m_flow_nominal,
+    final allowFlowReversal=allowFlowReversal)
                      annotation (Dialog(
         enable=true, group="Pipes"), Placement(transformation(
         extent={{-8,8},{8,-8}},
@@ -105,7 +116,8 @@ model Admix "Admix circuit with three way valve and rpm controlled pump"
     final v_nominal=1,
     dIns=0.01,
     kIns=0.028,
-    final m_flow_nominal=m_flow_nominal)
+    final m_flow_nominal=m_flow_nominal,
+    final allowFlowReversal=allowFlowReversal)
                      annotation (Dialog(
         enable=true, group="Pipes"), Placement(transformation(
         extent={{-8,8},{8,-8}},
@@ -119,7 +131,8 @@ model Admix "Admix circuit with three way valve and rpm controlled pump"
     T_start_out=T_start,
     nPorts=1,
     final m_flow_nominal=m_flow_nominal,
-    final v_nominal=1)
+    final v_nominal=1,
+    final allowFlowReversal=allowFlowReversal)
                      annotation (Dialog(
         enable=true, group="Pipes"), Placement(transformation(
         extent={{-8,8},{8,-8}},
@@ -148,7 +161,8 @@ protected
   Sensors.VolumeFlowRate                VFSen_out(redeclare package Medium =
         Medium,
     T_start=T_start,
-    final m_flow_nominal=m_flow_nominal)
+    final m_flow_nominal=m_flow_nominal,
+    final allowFlowReversal=allowFlowReversal)
                 "Inflow into admix module in forward line" annotation (
       Placement(transformation(
         extent={{-10,10},{10,-10}},
@@ -157,7 +171,8 @@ protected
   Sensors.VolumeFlowRate                VFSen_in(redeclare package Medium =
         Medium,
     m_flow_nominal=m_flow_nominal,
-    T_start=T_start)
+    T_start=T_start,
+    final allowFlowReversal=allowFlowReversal)
                 "Outflow out of forward line"  annotation (Placement(
         transformation(
         extent={{-10,10},{10,-10}},
@@ -170,28 +185,32 @@ protected
     redeclare package Medium = Medium,
     transferHeat=true,
     final TAmb=T_amb,
-    final m_flow_nominal=m_flow_nominal)
+    final m_flow_nominal=m_flow_nominal,
+    final allowFlowReversal=allowFlowReversal)
     annotation (Placement(transformation(extent={{-100,14},{-88,26}})));
   Sensors.TemperatureTwoPort senT_a2(
     redeclare package Medium = Medium,
     transferHeat=true,
     final TAmb=T_amb,
     final m_flow_nominal=m_flow_nominal,
-    final T_start=T_start)
+    final T_start=T_start,
+    final allowFlowReversal=allowFlowReversal)
     annotation (Placement(transformation(extent={{84,-66},{72,-54}})));
   Sensors.TemperatureTwoPort senT_b1(
     m_flow_nominal=m_flow_nominal,
     T_start=T_start,
     redeclare package Medium = Medium,
     transferHeat=true,
-    final TAmb=T_amb)
+    final TAmb=T_amb,
+    final allowFlowReversal=allowFlowReversal)
     annotation (Placement(transformation(extent={{88,14},{100,26}})));
   Sensors.TemperatureTwoPort senT_b2(
     T_start=T_start,
     redeclare package Medium = Medium,
     transferHeat=true,
     final TAmb=T_amb,
-    final m_flow_nominal=m_flow_nominal)
+    final m_flow_nominal=m_flow_nominal,
+    final allowFlowReversal=allowFlowReversal)
     annotation (Placement(transformation(extent={{-78,-66},{-90,-54}})));
 
   Modelica.Blocks.Continuous.FirstOrder PT1_b2(

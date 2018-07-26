@@ -1,10 +1,12 @@
 within AixLib.Fluid.HydraulicModules;
 model Throttle "Throttle circuit with two way valve"
   extends AixLib.Fluid.Interfaces.PartialFourPort(redeclare package Medium1 =
-        Medium, redeclare package Medium2 = Medium);
+        Medium, redeclare package Medium2 = Medium, final allowFlowReversal1 = allowFlowReversal, final allowFlowReversal2 = allowFlowReversal);
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium in the system" annotation (choicesAllMatching=true);
-
+  parameter Boolean allowFlowReversal=true
+    "= true to allow flow reversal, false restricts to design direction (port_a -> port_b)"
+    annotation (Dialog(tab="Assumptions"), Evaluate=true);
   parameter  Modelica.SIunits.Temperature T_amb "Ambient temperature";
 
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min=0)
@@ -19,7 +21,8 @@ model Throttle "Throttle circuit with two way valve"
     redeclare package Medium = Medium,
     dpValve_nominal=8000,
     final m_flow_nominal=m_flow_nominal,
-    CvData=AixLib.Fluid.Types.CvTypes.Kv)
+    CvData=AixLib.Fluid.Types.CvTypes.Kv,
+    final allowFlowReversal=allowFlowReversal)
                           annotation (Dialog(enable=true,group="Actuators"), Placement(
         transformation(extent={{-12,10},{8,30}})));
   AixLib.Fluid.HydraulicModules.BaseClasses.HydraulicBus hydraulicBus
@@ -34,7 +37,8 @@ model Throttle "Throttle circuit with two way valve"
     nPorts=1,
     final v_nominal=1.5,
     dIns=0.01,
-    kIns=0.028)
+    kIns=0.028,
+    final allowFlowReversal=allowFlowReversal)
     annotation (Dialog(enable=true), Placement(transformation(extent={{-60,30},{
             -40,10}})));
 
@@ -47,7 +51,8 @@ model Throttle "Throttle circuit with two way valve"
     nPorts=1,
     final v_nominal=1.5,
     dIns=0.01,
-    kIns=0.028)
+    kIns=0.028,
+    final allowFlowReversal=allowFlowReversal)
     annotation (Dialog(enable=true), Placement(transformation(extent={{40,30},{60,
             10}})));
 
@@ -60,7 +65,8 @@ model Throttle "Throttle circuit with two way valve"
     final m_flow_nominal=m_flow_nominal,
     final v_nominal=1.5,
     dIns=0.01,
-    kIns=0.028)
+    kIns=0.028,
+    final allowFlowReversal=allowFlowReversal)
     annotation (Dialog(enable=true), Placement(transformation(extent={{10,-70},{
             -10,-50}})));
   Modelica.Blocks.Sources.Constant const(k=T_amb)
@@ -72,7 +78,8 @@ model Throttle "Throttle circuit with two way valve"
 
 protected
   Modelica.Fluid.Sensors.VolumeFlowRate VFSen_out(redeclare package Medium =
-        Medium) "Inflow into module in forward line" annotation (Placement(
+        Medium, final allowFlowReversal=allowFlowReversal)
+                "Inflow into module in forward line" annotation (Placement(
         transformation(
         extent={{-6,6},{6,-6}},
         rotation=270,
@@ -82,28 +89,32 @@ protected
     redeclare package Medium = Medium,
     transferHeat=true,
     final TAmb=T_amb,
-    final m_flow_nominal=m_flow_nominal)
+    final m_flow_nominal=m_flow_nominal,
+    final allowFlowReversal=allowFlowReversal)
     annotation (Placement(transformation(extent={{-100,14},{-88,26}})));
   Sensors.TemperatureTwoPort senT_b1(
     m_flow_nominal=m_flow_nominal,
     T_start=T_start,
     redeclare package Medium = Medium,
     transferHeat=true,
-    final TAmb=T_amb)
+    final TAmb=T_amb,
+    final allowFlowReversal=allowFlowReversal)
     annotation (Placement(transformation(extent={{88,14},{100,26}})));
   Sensors.TemperatureTwoPort senT_a2(
     redeclare package Medium = Medium,
     transferHeat=true,
     final TAmb=T_amb,
     final m_flow_nominal=m_flow_nominal,
-    final T_start=T_start)
+    final T_start=T_start,
+    final allowFlowReversal=allowFlowReversal)
     annotation (Placement(transformation(extent={{84,-66},{72,-54}})));
   Sensors.TemperatureTwoPort senT_b2(
     T_start=T_start,
     redeclare package Medium = Medium,
     transferHeat=true,
     final TAmb=T_amb,
-    final m_flow_nominal=m_flow_nominal)
+    final m_flow_nominal=m_flow_nominal,
+    final allowFlowReversal=allowFlowReversal)
     annotation (Placement(transformation(extent={{-78,-66},{-90,-54}})));
   Modelica.Blocks.Continuous.FirstOrder PT1_a1(
     initType=Modelica.Blocks.Types.Init.SteadyState,
@@ -215,6 +226,12 @@ equation
     annotation (Line(points={{23.2,-20},{17.6,-20}}, color={0,0,127}));
   connect(pipe2.ports_b[1], senT_b1.port_a)
     annotation (Line(points={{60,20},{88,20}}, color={0,127,255}));
+  connect(VFSen_out.V_flow, hydraulicBus.VF_in) annotation (Line(points={{
+          -106.6,40},{-106,40},{-106,100},{0.1,100},{0.1,100.1}}, color={0,0,
+          127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
   annotation (Icon(coordinateSystem(initialScale=0.1),          graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},
