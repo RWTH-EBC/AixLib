@@ -156,5 +156,4 @@ equation
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={Rectangle(extent={{-80,80},{80,-80}}, lineColor={
               0,0,0})}));
-
 end WindowSimple;
