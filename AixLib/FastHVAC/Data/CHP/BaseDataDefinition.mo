@@ -11,10 +11,6 @@ extends Modelica.Icons.Record;
   "time constant for thermal start behavior (unit=sec) ";
   parameter Modelica.SIunits.Time tauQ_th_stop
   "time constant for stop behaviour (unit=sec)";
-  parameter Modelica.SIunits.Time t_th_start
-  "time until first heat is delivered by system (unit=sec)";
-  parameter Modelica.SIunits.Time t_th_stop
-  "time until thermal output is zero (unit=sec) ";
   parameter Modelica.SIunits.Time tauP_el
   "time constant electrical power start behavior (unit=sec)";
   parameter SI.Power dotQ_thRated "rated thermal power (unit=W)";

@@ -13,7 +13,8 @@ model CHPNew2
     annotation (Placement(transformation(extent={{-96,-50},{-76,-30}})));
   Modelica.Blocks.Sources.Constant dotm_source(k=0.04)
     annotation (Placement(transformation(extent={{-96,-90},{-76,-70}})));
-  Components.HeatGenerators.CHP.CHPDynCleaned cHPNew(withController=true)
+  Components.HeatGenerators.CHP.CHPDynCleaned cHPNew(withController=true,
+      EfficiencyByDatatable=true)
     annotation (Placement(transformation(extent={{-14,-82},{26,-42}})));
   Modelica.Blocks.Sources.BooleanPulse booleanOnOffCHP1(
                                                        width=50, period=36000)
@@ -21,8 +22,6 @@ model CHPNew2
         extent={{10,10},{-10,-10}},
         rotation=180,
         origin={-76,4})));
-  Modelica.Blocks.Sources.Constant Pel(k=1)
-    annotation (Placement(transformation(extent={{-46,20},{-26,40}})));
   Modelica.Blocks.Sources.Ramp P_elRel(
     height=0.8,
     duration=36000,
