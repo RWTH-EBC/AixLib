@@ -127,6 +127,8 @@ Check whether variable allCond is always 1.")}),
     experiment(
       StopTime=86400,
       Interval=60),
+    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Airflow/AirHandlingUnit/Examples/AHU.mos"
+        "Simulate and plot"),
     Documentation(info="<html>
 <h4><span style=\"color:#008000\">Overview</span></h4>
 <p>Simulation to check the behaviour of the simple Air Handling Unit models. Various possibilities for inputs are provided. </p>
