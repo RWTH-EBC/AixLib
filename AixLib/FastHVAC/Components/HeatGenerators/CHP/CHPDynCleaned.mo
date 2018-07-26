@@ -5,17 +5,18 @@ model CHPDynCleaned
   /* *******************************************************************
   BHKW Parameters
   ******************************************************************* */
-  parameter Boolean selectable=true "Use CHP data for efficiency calculations ";
-  parameter Boolean withController=true "Use internal Start Stop Controller";
+  parameter Boolean EfficiencyByDatatable=true
+    "Use CHP data for efficiency calculations";
+  parameter Boolean withController=true "Use internal Start Stop Controller" annotation (Dialog(group="Control and operation"));
 
   parameter AixLib.FastHVAC.Data.CHP.BaseDataDefinition param=
   AixLib.FastHVAC.Data.CHP.AisinSeiki() "Paramter contains data from CHP records"
   annotation (choicesAllMatching=true, group="Unit properties");
 
-  parameter Modelica.SIunits.Efficiency eta_el_fixed = 0.25 "CHP's electrical efficiency "
-  annotation (Dialog(group = "Unit properties",enable=not selectable));
+  parameter Modelica.SIunits.Efficiency eta_el_fixed = 0.25 "CHP's electrical efficiency  "
+  annotation (Dialog(group = "Unit properties",enable=not EfficiencyByDatatable));
   parameter Modelica.SIunits.Efficiency omega_fixed = 0.65 "CHP's total efficiency "
-  annotation (Dialog(group = "Unit properties",enable=not selectable));
+  annotation (Dialog(group = "Unit properties",enable=not EfficiencyByDatatable));
 
   parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple medium=
   AixLib.FastHVAC.Media.WaterSimple()
@@ -29,10 +30,20 @@ protected
   parameter Modelica.SIunits.Power dotE_stop = 1/3 * param.dotE_fuelRated;
   parameter Modelica.SIunits.Volume V_water = 3e-3;
 public
-  parameter Modelica.SIunits.Power P_standby = 90 "electrical consumption in standby mode";
-  parameter Modelica.SIunits.Power P_stop = 190 "electrical consumption during shutdown mode";
-  parameter Modelica.SIunits.Power P_start = 190 "electrical consumption during startup";
+  parameter Modelica.SIunits.Power PStandby=90
+    "electrical consumption in standby mode";
+  parameter Modelica.SIunits.Power PStop=190
+    "electrical consumption during shutdown mode";
+  parameter Modelica.SIunits.Power PStart=190
+    "electrical consumption during startup";
   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(20);
+  parameter Modelica.SIunits.Time WarmupTime=110
+    "time until first heat is delivered by system (unit=sec)"
+                                                            annotation (Dialog(group="Control and operation"));
+
+  parameter Modelica.SIunits.Time CooldownTime=330
+    "time until thermal output is zero (unit=sec) "
+                                                  annotation (Dialog(group="Control and operation"));
 
   /* *******************************************************************
   Variables
@@ -117,7 +128,7 @@ public
         extent={{-14,-14},{14,14}},
         rotation=270,
         origin={-14,98})));
-  Modelica.Blocks.Continuous.FirstOrder firstOrderP(T=5)
+  Modelica.Blocks.Continuous.FirstOrder firstOrderP(T=2)
     annotation (Placement(transformation(extent={{-20,76},{0,96}})));
 
   Modelica.Blocks.Nonlinear.SlewRateLimiter LimiterEFuel(Rising=2554.2, Falling=-2554.2)
@@ -142,12 +153,12 @@ public
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={30,6})));
-  BaseClasses.StartStopController StartStopController(StartTime=param.t_th_start, StopTime=param.t_th_stop) if
-                                                         withController
+  BaseClasses.StartStopController StartStopController(StartTime=WarmupTime,
+      StopTime=CooldownTime) if                             withController
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
-        origin={-78,30})));
+        origin={-74,30})));
 protected
   Modelica.Blocks.Interfaces.BooleanInput Start                       annotation (Placement(transformation(
         extent={{-14,-14},{14,14}},
@@ -171,7 +182,7 @@ equation
   sigma = eff_el/eff_th;
   omega = eff_el+eff_th;
   // Calculated efficiencies
-  if selectable then
+  if EfficiencyByDatatable then
       eff_el =param.a_0 + param.a_1*(Pel.y/1000)^2 + param.a_2*(Pel.y/1000) + param.a_3*massFlowRate.dotm^2 + param.a_4*
       massFlowRate.dotm + param.a_5*Modelica.SIunits.Conversions.to_degC(T_return.T)^2 + param.a_6*
       Modelica.SIunits.Conversions.to_degC(T_return.T);
@@ -193,7 +204,7 @@ equation
        if Start then                                           //Startvorgang
          firstOrderQ_start.u = 0;
          firstOrderQ_stop.u = 0;
-         firstOrderP.u = -P_start;
+         firstOrderP.u =-PStart;
          firstOrderEFuel.u = dotE_start;
        else                                                            //Normalbetrieb
          firstOrderQ_start.u =Pel.y/sigma;
@@ -205,12 +216,12 @@ equation
        if Stop then                                            //Stoppvorgang
          firstOrderQ_start.u = 0;
          firstOrderQ_stop.u = dotQ_stop;
-         firstOrderP.u = -P_stop;
+         firstOrderP.u =-PStop;
          firstOrderEFuel.u = dotE_stop;
        else                                                    //Standby
          firstOrderQ_start.u = 0;
          firstOrderQ_stop.u = 0;
-         firstOrderP.u = -P_standby;
+         firstOrderP.u =-PStandby;
          firstOrderEFuel.u = 0;
        end if;
      end if;
@@ -254,14 +265,16 @@ equation
   connect(Qth.y, varHeatFlow.Q_flow) annotation (Line(points={{41,6},{48,6},{48,-30},{2,-30},{2,
           -40}},   color={0,0,127}));
   connect(P_elRel, Pel.u) annotation (Line(points={{-96,108},{-96,81.6}}, color={0,0,127}));
-  connect(OnOff, Qth.u2) annotation (Line(points={{-110,30},{-92,30},{-92,6},{18,6}}, color={255,0,255}));
-  connect(OnOff, StartStopController.OnOff) annotation (Line(points={{-110,30},{-88,30}}, color={255,0,255}));
+  connect(OnOff, Qth.u2) annotation (Line(points={{-110,30},{-90,30},{-90,6},{18,
+          6}},                                                                        color={255,0,255}));
+  connect(OnOff, StartStopController.OnOff) annotation (Line(points={{-110,30},{
+          -84,30}},                                                                       color={255,0,255}));
 
   if withController then
     connect(StartStopController.Stop, Stop)
-    annotation (Line(points={{-66.8,25.8},{-52,25.8},{-52,54},{-44,54}}, color={255,0,255}));
+    annotation (Line(points={{-62.8,25.8},{-52,25.8},{-52,54},{-44,54}}, color={255,0,255}));
     connect(StartStopController.Start, Start)
-    annotation (Line(points={{-66.8,34.8},{-56,34.8},{-56,20},{-44,20}}, color={255,0,255}));
+    annotation (Line(points={{-62.8,34.8},{-56,34.8},{-56,20},{-44,20}}, color={255,0,255}));
   else
     connect(StopIn, Stop) annotation (Line(points={{-42,108},{-42,76},{-52,76},{-52,54},{-44,54}}, color={255,0,255}));
     connect(StartIn, Start) annotation (Line(points={{-70,108},{-70,56},{-56,56},{-56,20},{-44,20}}, color={255,0,255}));

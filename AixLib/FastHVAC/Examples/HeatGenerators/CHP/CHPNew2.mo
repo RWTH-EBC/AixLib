@@ -1,6 +1,5 @@
 within AixLib.FastHVAC.Examples.HeatGenerators.CHP;
 model CHPNew2
-  import CHP;
  extends Modelica.Icons.Example;
   FastHVAC.Components.Pumps.FluidSource fluidSource
     annotation (Placement(transformation(extent={{-68,-72},{-48,-52}})));
@@ -17,13 +16,20 @@ model CHPNew2
   Components.HeatGenerators.CHP.CHPDynCleaned cHPNew(withController=true)
     annotation (Placement(transformation(extent={{-14,-82},{26,-42}})));
   Modelica.Blocks.Sources.BooleanPulse booleanOnOffCHP1(
-                                                       width=50, period=18000)
+                                                       width=50, period=36000)
                annotation (Placement(transformation(
         extent={{10,10},{-10,-10}},
         rotation=180,
         origin={-76,4})));
   Modelica.Blocks.Sources.Constant Pel(k=1)
-    annotation (Placement(transformation(extent={{-50,-38},{-30,-18}})));
+    annotation (Placement(transformation(extent={{-46,20},{-26,40}})));
+  Modelica.Blocks.Sources.Ramp P_elRel(
+    height=0.8,
+    duration=36000,
+    offset=0.2) annotation (Placement(transformation(
+        extent={{-10,-10},{10,10}},
+        rotation=0,
+        origin={-44,-28})));
 equation
   connect(fluidSource.enthalpyPort_b, temperatureSensor_before.enthalpyPort_a)
     annotation (Line(
@@ -51,8 +57,8 @@ equation
         color={176,0,0}));
   connect(booleanOnOffCHP1.y, cHPNew.OnOff) annotation (Line(points={{-65,4},{
           12.4,4},{12.4,-42.4}}, color={255,0,255}));
-  connect(Pel.y, cHPNew.P_elRel) annotation (Line(points={{-29,-28},{-12.4,-28},
-          {-12.4,-42.4}}, color={0,0,127}));
+  connect(P_elRel.y, cHPNew.P_elRel) annotation (Line(points={{-33,-28},{-12.4,
+          -28},{-12.4,-42.4}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
     experiment(StopTime=72000, Interval=60),
