@@ -99,6 +99,6 @@ equation
       horizontalAlignment=TextAlignment.Right));
   annotation (Documentation(info="<html>
 <p>Checks if the nSet value is legal by checking if the device can either be turned on or off, depending on which state it was in.</p>
-<p><br>E.g. If it is turned on, and the new nSet value is 0, it will only turn off if current runtime is longer than the minimal runtime. Else it will keep the current rotating speed.</p>
+<p><br>E.g. If it is turned on, and the new nSet value is 0, it will only turn off if current runtime is longer than the minimal runtime. Else it will keep the current rotating speed.</br></p>
 </html>"));
 end OnOffControl;
