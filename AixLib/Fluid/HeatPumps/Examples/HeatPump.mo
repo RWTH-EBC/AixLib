@@ -4,10 +4,24 @@ model HeatPump
 
  extends Modelica.Icons.Example;
 
-  AixLib.Fluid.HeatPumps.HeatPump heatPump
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+  Modelica.Blocks.Sources.Ramp rampY(
+    duration=2000,
+    startTime=20,
+    height=100,
+    offset=-20) annotation (Placement(transformation(extent={{-58,-30},{-38,-10}})));
+  BaseClasses.SecurityControls.BaseClasses.BoundaryMap boundaryMap(
+    tableLow=[-15,0; 30,0],
+    tableUpp=[-15,55; 5,60; 30,60])
+    annotation (Placement(transformation(extent={{0,-16},{38,18}})));
+  Modelica.Blocks.Sources.Constant
+                               const(k=30)
+    annotation (Placement(transformation(extent={{-58,16},{-38,36}})));
 equation
 
+  connect(const.y, boundaryMap.y_in) annotation (Line(points={{-37,26},{-20,26},{-20,
+          -9.2},{-2.66,-9.2}}, color={0,0,127}));
+  connect(rampY.y, boundaryMap.x_in) annotation (Line(points={{-37,-20},{-20,-20},{-20,
+          11.2},{-2.66,11.2}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
     experiment(StopTime=3600),

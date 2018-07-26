@@ -23,15 +23,20 @@ model HeatPump "Base model of realistic heat pump"
     annotation (Placement(transformation(extent={{-60,-70},{-80,-50}})));
   FixedResistances.PressureDrop preDro_1 "pressure drop at sink side"
     annotation (Placement(transformation(extent={{64,50},{84,70}})));
-  Modelica.Blocks.Interfaces.RealInput N
-    "input signal speed for compressor relative between 0 and 1"
-    annotation (Placement(transformation(extent={{-130,12},{-100,42}})));
+  Modelica.Blocks.Interfaces.RealInput NSet
+    "input signal speed for compressor relative between 0 and 1" annotation (
+      Placement(transformation(extent={{-130,4},{-100,34}}), iconTransformation(
+          extent={{-130,4},{-100,34}})));
   Modelica.Blocks.Interfaces.RealInput TSet "Set Temperature of sink outlet"
     annotation (Placement(transformation(extent={{-130,-28},{-100,2}})));
   BaseClasses.SecurityControls.SecurityControl securityControl
-    annotation (Placement(transformation(extent={{-86,-4},{-58,24}})));
-  Modelica.Icons.SignalBus sigBusHP
-    annotation (Placement(transformation(extent={{-144,-8},{-126,18}})));
+    annotation (Placement(transformation(extent={{-48,-4},{-20,24}})));
+  Controls.Interfaces.HeatPumpControlBus
+                           sigBusHP
+    annotation (Placement(transformation(extent={{-114,-8},{-96,18}}),
+        iconTransformation(extent={{-114,-8},{-96,18}})));
+  Modelica.Blocks.Interfaces.RealOutput N
+    annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 equation
   connect(port_a1, mFlow_a1.port_a) annotation (Line(points={{-100,60},{-88,60},
           {-88,74},{-74,74}}, color={0,127,255}));
@@ -57,50 +62,59 @@ equation
     annotation (Line(points={{-80,-60},{-100,-60}}, color={0,127,255}));
   connect(preDro_2.port_a, T_b2.port_b) annotation (Line(points={{-60,-60},{-50,
           -60},{-50,-86},{-40,-86}}, color={0,127,255}));
-  connect(N, securityControl.n_in) annotation (Line(points={{-115,27},{-97.5,27},
-          {-97.5,15.18},{-87.75,15.18}}, color={0,0,127}));
-  connect(T_a1.T, sigBusHP.T_source_in) annotation (Line(points={{-36,71},{-36,
-          52},{-136,52},{-136,5},{-135,5}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(T_b2.T, sigBusHP.T_sink_out) annotation (Line(points={{-30,-75},{-30,
-          -44},{-136,-44},{-136,5},{-135,5}}, color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(T_a2.T, sigBusHP.T_sink_in) annotation (Line(points={{28,-75},{28,-44},
-          {-136,-44},{-136,5},{-135,5}}, color={0,0,127}), Text(
+  connect(NSet, securityControl.nSet) annotation (Line(points={{-115,19},{-97.5,
+          19},{-97.5,15.18},{-49.75,15.18}}, color={0,0,127}));
+  connect(mFlow_a1.m_flow, sigBusHP.m_flow_co) annotation (Line(points={{-64,63},
+          {-64,5.065},{-104.955,5.065}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(T_b1.T, sigBusHP.T_source_out) annotation (Line(points={{34,71},{34,
-          52},{-136,52},{-136,5},{-135,5}}, color={0,0,127}), Text(
+  connect(mFlow_a2.m_flow, sigBusHP.m_flow_ev) annotation (Line(points={{76,-49},
+          {76,-30},{-64,-30},{-64,5.065},{-104.955,5.065}}, color={0,0,127}),
+      Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(mFlow_a2.m_flow, sigBusHP.mFlow_sink) annotation (Line(points={{76,
-          -49},{76,-44},{-136,-44},{-136,5},{-135,5}}, color={0,0,127}), Text(
+  connect(T_b2.T, sigBusHP.T_ret_ev) annotation (Line(points={{-30,-75},{-30,
+          -30},{-64,-30},{-64,5.065},{-104.955,5.065}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(mFlow_a1.m_flow, sigBusHP.mFlow_source) annotation (Line(points={{-64,
-          63},{-64,52},{-136,52},{-136,5},{-135,5}}, color={0,0,127}), Text(
+  connect(T_a2.T, sigBusHP.T_flow_ev) annotation (Line(points={{28,-75},{28,-30},
+          {-64,-30},{-64,5.065},{-104.955,5.065}}, color={0,0,127}), Text(
       string="%second",
       index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(sigBusHP, securityControl.HeaPumSen) annotation (Line(
-      points={{-135,5},{-126,5},{-126,5.8},{-87.1667,5.8}},
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(T_a1.T, sigBusHP.T_ret_co) annotation (Line(points={{-36,71},{-36,42},
+          {-64,42},{-64,5.065},{-104.955,5.065}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(T_b1.T, sigBusHP.T_flow_co) annotation (Line(points={{34,71},{34,42},
+          {-64,42},{-64,5.065},{-104.955,5.065}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(N, sigBusHP.N) annotation (Line(points={{110,0},{112,0},{112,-30},{
+          -64,-30},{-64,5.065},{-104.955,5.065}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(securityControl.heatPumpControlBus, sigBusHP) annotation (Line(
+      points={{-49.9833,6.22},{-74.9916,6.22},{-74.9916,5},{-105,5}},
       color={255,204,51},
       thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(securityControl.nOut, N) annotation (Line(points={{-18.8333,10},{40,
+          10},{40,0},{110,0}}, color={0,0,127}));
 end HeatPump;
