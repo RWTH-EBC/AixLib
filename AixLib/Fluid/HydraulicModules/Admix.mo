@@ -266,14 +266,14 @@ equation
     annotation (Line(points={{-100,50},{-100,60}}, color={0,127,255}));
   connect(VFSen_in.port_b, port_b1)
     annotation (Line(points={{100,52},{100,60}}, color={0,127,255}));
-  connect(val.y, hydraulicBus.valveSet) annotation (Line(points={{-30,32},{-30,100},
-          {-14,100},{-14,100},{0,100}},
+  connect(val.y, hydraulicBus.valSet) annotation (Line(points={{-30,32},{-30,
+          100},{-14,100},{-14,100.1},{0.1,100.1}},
                         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(val.y_actual, hydraulicBus.valveSetAct) annotation (Line(points={{-25,27},
-          {-25,100.5},{0,100.5},{0,100}},           color={0,0,127}), Text(
+  connect(val.y_actual, hydraulicBus.valSetAct) annotation (Line(points={{-25,27},
+          {-25,100.5},{0.1,100.5},{0.1,100.1}},     color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));

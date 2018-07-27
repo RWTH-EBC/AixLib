@@ -61,13 +61,15 @@ model Injection2WayValve
     T_start_in=T_start,
     T_start_out=T_start,
     dh=0.032,
-    nPorts=1,
     final v_nominal=1.5,
     dIns=0.01,
     kIns=0.028,
+    nPorts=1,
     final allowFlowReversal=allowFlowReversal)
                        annotation (Dialog(enable=true, group="Pipes"), Placement(
-        transformation(extent={{68,28},{84,12}})));
+        transformation(extent={{16,28},{32,12}})));
+
+
   FixedResistances.PlugFlowPipe
                         pipe3(redeclare package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
@@ -80,9 +82,22 @@ model Injection2WayValve
     kIns=0.028,
     final allowFlowReversal=allowFlowReversal)
                        annotation (Dialog(enable=true, group="Pipes"), Placement(
+        transformation(extent={{68,28},{84,12}})));
+  FixedResistances.PlugFlowPipe
+                        pipe4(redeclare package Medium = Medium,
+    final m_flow_nominal=m_flow_nominal,
+    T_start_in=T_start,
+    T_start_out=T_start,
+    dh=0.032,
+    nPorts=1,
+    final v_nominal=1.5,
+    dIns=0.01,
+    kIns=0.028,
+    final allowFlowReversal=allowFlowReversal)
+                       annotation (Dialog(enable=true, group="Pipes"), Placement(
         transformation(extent={{70,-68},{54,-52}})));
   FixedResistances.PlugFlowPipe
-                        pipe5(redeclare package Medium = Medium,
+                        pipe6(redeclare package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
     T_start_in=T_start,
     T_start_out=T_start,
@@ -95,7 +110,7 @@ model Injection2WayValve
                        annotation (Dialog(enable=true, group="Pipes"), Placement(
         transformation(extent={{-60,-68},{-76,-52}})));
   FixedResistances.PlugFlowPipe
-                        pipe6(redeclare package Medium = Medium,
+                        pipe7(redeclare package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
     T_start_in=T_start,
     T_start_out=T_start,
@@ -109,9 +124,9 @@ model Injection2WayValve
         transformation(
         extent={{-8,8},{8,-8}},
         rotation=-90,
-        origin={12,-12})));
+        origin={6,-12})));
   FixedResistances.PlugFlowPipe
-                        pipe4(redeclare package Medium = Medium,
+                        pipe5(redeclare package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
     T_start_in=T_start,
     T_start_out=T_start,
@@ -131,7 +146,7 @@ model Injection2WayValve
     final m_flow_nominal=m_flow_nominal,
     nPorts=3,
     final allowFlowReversal=allowFlowReversal)
-           annotation (Placement(transformation(extent={{6,-60},{18,-72}})));
+           annotation (Placement(transformation(extent={{0,-60},{12,-72}})));
   Modelica.Blocks.Sources.Constant const(k=T_amb)
     annotation (Placement(transformation(extent={{-52,-20},{-36,-4}})));
 
@@ -160,7 +175,7 @@ protected
     final m_flow_nominal=m_flow_nominal,
     nPorts=3,
     final allowFlowReversal=allowFlowReversal)
-    annotation (Placement(transformation(extent={{6,20},{18,32}})));
+    annotation (Placement(transformation(extent={{0,20},{12,32}})));
 
   Sensors.TemperatureTwoPort senT_a1(
     T_start=T_start,
@@ -233,8 +248,8 @@ protected
 
 equation
 
-  connect(val.y, hydraulicBus.valveSet) annotation (Line(points={{-42,-69.6},{-42,
-          -106},{-122,-106},{-122,100},{0,100}},         color={0,0,127},
+  connect(val.y, hydraulicBus.valSet) annotation (Line(points={{-42,-69.6},{-42,
+          -106},{-122,-106},{-122,100.1},{0.1,100.1}},   color={0,0,127},
       visible=true),                                                      Text(
       string="%second",
       index=1,
@@ -255,10 +270,10 @@ equation
     annotation (Line(points={{-100,60},{-100,48}},color={0,127,255}));
   connect(port_b1, VFSen_in.port_b)
     annotation (Line(points={{100,60},{100,46}},color={0,127,255}));
-  connect(basicPumpInterface.port_b,pipe2. port_a)
+  connect(basicPumpInterface.port_b,pipe3. port_a)
     annotation (Line(points={{58,20},{68,20}},    color={0,127,255}));
-  connect(val.y_actual, hydraulicBus.valveSetAct) annotation (Line(
-      points={{-46,-65.6},{-46,-106},{-122,-106},{-122,100},{0,100}},
+  connect(val.y_actual, hydraulicBus.valSetAct) annotation (Line(
+      points={{-46,-65.6},{-46,-106},{-122,-106},{-122,100.1},{0.1,100.1}},
       color={0,0,127},
       visible=true), Text(
       string="%second",
@@ -276,15 +291,15 @@ equation
     annotation (Line(points={{-40,20},{-88,20}}, color={0,127,255}));
   connect(senT_a1.port_a, VFSen_out.port_b)
     annotation (Line(points={{-100,20},{-100,32}}, color={0,127,255}));
-  connect(senT_b1.port_a,pipe2. ports_b[1])
+  connect(senT_b1.port_a,pipe3. ports_b[1])
     annotation (Line(points={{88,20},{84,20}}, color={0,127,255}));
   connect(senT_b1.port_b, VFSen_in.port_a)
     annotation (Line(points={{100,20},{100,30}}, color={0,127,255}));
   connect(port_b2, senT_b2.port_b)
     annotation (Line(points={{-100,-60},{-92,-60}}, color={0,127,255}));
-  connect(senT_b2.port_a,pipe5. ports_b[1])
+  connect(senT_b2.port_a,pipe6. ports_b[1])
     annotation (Line(points={{-80,-60},{-76,-60}}, color={0,127,255}));
-  connect(pipe3.port_a, senT_a2.port_b)
+  connect(pipe4.port_a, senT_a2.port_b)
     annotation (Line(points={{70,-60},{74,-60}}, color={0,127,255}));
   connect(senT_a2.port_a, port_a2)
     annotation (Line(points={{86,-60},{100,-60}}, color={0,127,255}));
@@ -317,39 +332,43 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(pipe5.heatPort,prescribedTemperature. port)
+  connect(pipe6.heatPort,prescribedTemperature. port)
     annotation (Line(points={{-68,-52},{-68,-46},{-12,-46},{-12,-12}},
                                                  color={191,0,0}));
   connect(pipe1.heatPort,prescribedTemperature. port) annotation (Line(points={{-32,12},
           {-32,8},{-12,8},{-12,-12}},     color={191,0,0}));
-  connect(pipe4.heatPort,prescribedTemperature. port)
+  connect(pipe5.heatPort,prescribedTemperature. port)
     annotation (Line(points={{-12,-52},{-12,-12}},       color={191,0,0}));
-  connect(pipe3.heatPort,prescribedTemperature. port)
+  connect(pipe4.heatPort,prescribedTemperature. port)
     annotation (Line(points={{62,-52},{62,-46},{-12,-46},{-12,-12}},
                                                         color={191,0,0}));
-  connect(pipe2.heatPort,prescribedTemperature. port) annotation (Line(points={{76,12},
+  connect(pipe3.heatPort,prescribedTemperature. port) annotation (Line(points={{76,12},
           {76,8},{-12,8},{-12,-12}},                        color={191,0,0}));
   connect(const.y,prescribedTemperature. T)
     annotation (Line(points={{-35.2,-12},{-29.6,-12}},
                                                      color={0,0,127}));
-  connect(pipe6.heatPort, prescribedTemperature.port)
-    annotation (Line(points={{4,-12},{-12,-12}}, color={191,0,0}));
-  connect(pipe6.port_a, juncjp6.ports[1])
-    annotation (Line(points={{12,-4},{12,20},{10.4,20}}, color={0,127,255}));
-  connect(juncjp6.ports[2], basicPumpInterface.port_a)
-    annotation (Line(points={{12,20},{42,20}},   color={0,127,255}));
-  connect(pipe3.ports_b[1], junc3v6.ports[1])
-    annotation (Line(points={{54,-60},{10.4,-60}}, color={0,127,255}));
-  connect(pipe4.port_a, junc3v6.ports[2])
-    annotation (Line(points={{-4,-60},{12,-60}},color={0,127,255}));
-  connect(pipe6.ports_b[1], junc3v6.ports[3]) annotation (Line(points={{12,-20},
-          {12,-60},{13.6,-60}},          color={0,127,255}));
-  connect(pipe1.ports_b[1], juncjp6.ports[3])
-    annotation (Line(points={{-24,20},{13.6,20}}, color={0,127,255}));
-  connect(val.port_a, pipe4.ports_b[1])
+  connect(pipe7.heatPort, prescribedTemperature.port)
+    annotation (Line(points={{-2,-12},{-12,-12}},color={191,0,0}));
+  connect(pipe7.port_a, juncjp6.ports[1])
+    annotation (Line(points={{6,-4},{6,20},{4.4,20}},    color={0,127,255}));
+  connect(pipe4.ports_b[1], junc3v6.ports[1])
+    annotation (Line(points={{54,-60},{4.4,-60}},  color={0,127,255}));
+  connect(pipe5.port_a, junc3v6.ports[2])
+    annotation (Line(points={{-4,-60},{6,-60}}, color={0,127,255}));
+  connect(pipe7.ports_b[1], junc3v6.ports[3]) annotation (Line(points={{6,-20},{
+          6,-60},{7.6,-60}},             color={0,127,255}));
+  connect(pipe1.ports_b[1], juncjp6.ports[2])
+    annotation (Line(points={{-24,20},{6,20}},    color={0,127,255}));
+  connect(val.port_a,pipe5. ports_b[1])
     annotation (Line(points={{-34,-60},{-20,-60}}, color={0,127,255}));
-  connect(val.port_b, pipe5.port_a)
+  connect(val.port_b,pipe6. port_a)
     annotation (Line(points={{-50,-60},{-60,-60}}, color={0,127,255}));
+  connect(juncjp6.ports[3], pipe2.port_a)
+    annotation (Line(points={{7.6,20},{16,20}}, color={0,127,255}));
+  connect(pipe2.ports_b[1], basicPumpInterface.port_a)
+    annotation (Line(points={{32,20},{42,20}}, color={0,127,255}));
+  connect(pipe2.heatPort, prescribedTemperature.port) annotation (Line(points={{
+          24,12},{24,8},{-12,8},{-12,-12}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(initialScale=0.1),          graphics={
                           Rectangle(
           extent={{-100,100},{100,-100}},
@@ -389,29 +408,29 @@ equation
           color={95,95,95},
           thickness=0.5),
         Line(
-          points={{2,60},{2,-58}},
+          points={{-4,60},{-4,-58}},
           color={0,128,255},
           thickness=0.5),
         Ellipse(
-          extent={{0,62},{4,58}},
+          extent={{-6,62},{-2,58}},
           lineColor={0,128,255},
           lineThickness=0.5,
           fillColor={0,128,255},
           fillPattern=FillPattern.Solid),
         Ellipse(
-          extent={{0,-58},{4,-62}},
+          extent={{-6,-58},{-2,-62}},
           lineColor={0,128,255},
           lineThickness=0.5,
           fillColor={0,128,255},
           fillPattern=FillPattern.Solid),
         Ellipse(
-          extent={{12,80},{52,40}},
+          extent={{18,80},{58,40}},
           lineColor={135,135,135},
           lineThickness=0.5,
           fillColor={215,215,215},
           fillPattern=FillPattern.Solid),
         Line(
-          points={{32,80},{52,60},{32,40}},
+          points={{38,80},{58,60},{38,40}},
           color={135,135,135},
           thickness=0.5),
         Polygon(
@@ -506,25 +525,29 @@ equation
           lineColor={135,135,135},
           textString="1"),
         Text(
-          extent={{50,60},{66,42}},
-          lineColor={135,135,135},
-          textString="2"),
-        Text(
-          extent={{32,-42},{48,-60}},
+          extent={{76,60},{92,42}},
           lineColor={135,135,135},
           textString="3"),
         Text(
-          extent={{-92,-42},{-76,-60}},
+          extent={{32,-42},{48,-60}},
           lineColor={135,135,135},
-          textString="5"),
+          textString="4"),
         Text(
-          extent={{0,10},{16,-8}},
+          extent={{-92,-42},{-76,-60}},
           lineColor={135,135,135},
           textString="6"),
         Text(
+          extent={{0,10},{16,-8}},
+          lineColor={135,135,135},
+          textString="7"),
+        Text(
           extent={{-20,-42},{-4,-60}},
           lineColor={135,135,135},
-          textString="4")}),    Diagram(coordinateSystem(extent={{-120,-120},{120,
+          textString="5"),
+        Text(
+          extent={{0,60},{16,42}},
+          lineColor={135,135,135},
+          textString="2")}),    Diagram(coordinateSystem(extent={{-120,-120},{120,
             120}}, initialScale=0.1)),
     Documentation(info="<html>
 <p>Injection circuit with a replaceable pump model for the distribution of hot or cold water. All sensor and actor values are connected to the hydraulic bus.</p>

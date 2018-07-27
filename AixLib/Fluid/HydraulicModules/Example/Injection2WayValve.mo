@@ -5,6 +5,26 @@ model Injection2WayValve "Test for injection circuit with a 2 way valve"
 
   AixLib.Fluid.HydraulicModules.Injection2WayValve
                                           Injection(
+    pipe3(
+      length=1,
+      dIns=0.01,
+      kIns=0.028),
+    pipe4(
+      dIns=0.01,
+      kIns=0.028,
+      length=1),
+    pipe5(
+      dIns=0.01,
+      kIns=0.028,
+      length=1),
+    pipe6(
+      length=1,
+      dIns=0.01,
+      kIns=0.028),
+    pipe7(
+      length=0.5,
+      dIns=0.01,
+      kIns=0.028),
     redeclare package Medium = Medium,
     redeclare
       AixLib.Fluid.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
@@ -13,26 +33,6 @@ model Injection2WayValve "Test for injection circuit with a 2 way valve"
     m_flow_nominal=1,
     val(Kv=10),
     pipe1(
-      length=1,
-      dIns=0.01,
-      kIns=0.028),
-    pipe3(
-      dIns=0.01,
-      kIns=0.028,
-      length=1),
-    pipe4(
-      dIns=0.01,
-      kIns=0.028,
-      length=1),
-    pipe6(
-      length=0.5,
-      dIns=0.01,
-      kIns=0.028),
-    pipe5(
-      length=1,
-      dIns=0.01,
-      kIns=0.028),
-    pipe2(
       length=1,
       dIns=0.01,
       kIns=0.028),

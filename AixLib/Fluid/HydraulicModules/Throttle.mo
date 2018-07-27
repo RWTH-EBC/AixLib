@@ -153,8 +153,8 @@ protected
 equation
   connect(val.port_b,pipe2. port_a)
     annotation (Line(points={{8,20},{40,20}},      color={0,127,255}));
-  connect(val.y, hydraulicBus.valveSet) annotation (Line(points={{-2,32},{-2,100},
-          {0,100}},                      color={0,0,127}), Text(
+  connect(val.y, hydraulicBus.valSet) annotation (Line(points={{-2,32},{-2,
+          100.1},{0.1,100.1}},           color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
@@ -165,8 +165,8 @@ equation
       extent={{6,3},{6,3}}));
   connect(port_a1,VFSen_out.port_a)
     annotation (Line(points={{-100,60},{-100,46}},color={0,127,255}));
-  connect(val.y_actual, hydraulicBus.valveSetAct) annotation (Line(points={{3,27},{
-          3,100},{0,100}},              color={0,0,127}), Text(
+  connect(val.y_actual, hydraulicBus.valSetAct) annotation (Line(points={{3,27},{
+          3,100.1},{0.1,100.1}},        color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));

@@ -30,22 +30,19 @@ model ERC_ExperimentalHall_CoolingCircuit
 
   SimpleConsumer simpleConsumer(
     kA=2000,
-    pipe1(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
-    pipe2(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
-    T_start=293.15,
-    Tamb=293.15)
+    T_amb=293.15,
+    m_flow_nominal=1,
+    T_start=293.15)
     annotation (Placement(transformation(extent={{-84,36},{-54,66}})));
   SimpleConsumer simpleConsumer1(
     kA=20000,
-    pipe1(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
-    pipe2(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
-    T_start=293.15,
-    Tamb=293.15)
+    T_amb=293.15,
+    m_flow_nominal=1,
+    T_start=293.15)
     annotation (Placement(transformation(extent={{-12,34},{18,64}})));
   SimpleConsumer simpleConsumer2(
     kA=10000,
-    pipe1(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
-    pipe2(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
+    m_flow_nominal=1,
     T_start=293.15)
     annotation (Placement(transformation(extent={{60,34},{90,64}})));
   Controls.HydraulicModules.CtrAdmix ctr_admix(

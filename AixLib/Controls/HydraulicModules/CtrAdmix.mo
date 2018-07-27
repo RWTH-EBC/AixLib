@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HydraulicModules;
+within AixLib.Controls.HydraulicModules;
 block CtrAdmix "controller for mixed cooling circuit "
   //Boolean choice;
 
@@ -7,7 +7,7 @@ block CtrAdmix "controller for mixed cooling circuit "
   parameter Modelica.SIunits.Time Ti(min=Modelica.Constants.small)=130
     "Time constant of Integrator block";
   parameter Modelica.SIunits.Time Td(min=0)= 4 "Time constant of Derivative block";
-  parameter Modelica.SIunits.Temperature Tamb = 293.15 "ambient temperature";
+  parameter Modelica.SIunits.Temperature T_amb = 293.15 "ambient temperature";
   parameter Real rpm_pump(min=0, unit="1") = 2000 "Rpm of the Pump";
 
   Modelica.Blocks.Continuous.LimPID PID(
@@ -31,11 +31,11 @@ block CtrAdmix "controller for mixed cooling circuit "
   Modelica.Blocks.Sources.RealExpression realExpression1(
                                                         y=rpm_pump)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-  Modelica.Blocks.Sources.Constant const(k=Tamb)
+  Modelica.Blocks.Sources.Constant const(k=T_amb)
     annotation (Placement(transformation(extent={{22,44},{42,64}})));
 equation
-  connect(PID.y, hydraulicBus.valveSet) annotation (Line(points={{5,-50},{48,
-          -50},{48,-10.865},{93.135,-10.865}},
+  connect(PID.y, hydraulicBus.valSet) annotation (Line(points={{5,-50},{48,-50},
+          {48,-10.865},{93.135,-10.865}},
                                       color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -52,8 +52,8 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(const.y, hydraulicBus.T_amb) annotation (Line(points={{43,54},{
-          93.135,54},{93.135,-10.865}}, color={0,0,127}), Text(
+  connect(const.y, hydraulicBus.T_amb) annotation (Line(points={{43,54},{93,54},
+          {93,-11}},                    color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));

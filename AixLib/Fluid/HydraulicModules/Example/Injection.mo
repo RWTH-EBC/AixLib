@@ -4,6 +4,30 @@ model Injection "Test for injection circuit"
   extends Modelica.Icons.Example;
 
   AixLib.Fluid.HydraulicModules.Injection Injection(
+    pipe4(
+      dIns=0.01,
+      kIns=0.028,
+      length=1),
+    pipe5(
+      dIns=0.01,
+      kIns=0.028,
+      length=1),
+    pipe6(
+      length=1,
+      dIns=0.01,
+      kIns=0.028),
+    pipe7(
+      length=0.5,
+      dIns=0.01,
+      kIns=0.028),
+    pipe8(
+      length=1,
+      dIns=0.01,
+      kIns=0.028),
+    pipe9(
+      length=1,
+      dIns=0.01,
+      kIns=0.028),
     redeclare package Medium = Medium,
     redeclare
       AixLib.Fluid.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
@@ -12,30 +36,6 @@ model Injection "Test for injection circuit"
     m_flow_nominal=1,
     val(Kv=10),
     pipe1(
-      length=1,
-      dIns=0.01,
-      kIns=0.028),
-    pipe3(
-      dIns=0.01,
-      kIns=0.028,
-      length=1),
-    pipe4(
-      dIns=0.01,
-      kIns=0.028,
-      length=1),
-    pipe6(
-      length=0.5,
-      dIns=0.01,
-      kIns=0.028),
-    pipe7(
-      length=1,
-      dIns=0.01,
-      kIns=0.028),
-    pipe8(
-      length=1,
-      dIns=0.01,
-      kIns=0.028),
-    pipe5(
       length=1,
       dIns=0.01,
       kIns=0.028),

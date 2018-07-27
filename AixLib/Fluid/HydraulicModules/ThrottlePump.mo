@@ -174,8 +174,8 @@ protected
 equation
   connect(val.port_b,pipe2. port_a)
     annotation (Line(points={{-16,20},{0,20}},     color={0,127,255}));
-  connect(val.y, hydraulicBus.valveSet) annotation (Line(points={{-26,32},{-26,100},
-          {0,100}},                      color={0,0,127}), Text(
+  connect(val.y, hydraulicBus.valSet) annotation (Line(points={{-26,32},{-26,
+          100.1},{0.1,100.1}},           color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
@@ -188,8 +188,8 @@ equation
     annotation (Line(points={{-100,60},{-100,46}},color={0,127,255}));
   connect(basicPumpInterface.port_b,pipe3. port_a)
     annotation (Line(points={{48,20},{60,20}},   color={0,127,255}));
-  connect(val.y_actual, hydraulicBus.valveSetAct) annotation (Line(points={{-21,27},
-          {-21,100},{0,100}},           color={0,0,127}), Text(
+  connect(val.y_actual, hydraulicBus.valSetAct) annotation (Line(points={{-21,27},
+          {-21,100.1},{0.1,100.1}},     color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));

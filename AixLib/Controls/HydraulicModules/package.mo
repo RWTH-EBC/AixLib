@@ -1,4 +1,4 @@
-﻿within AixLib.Controls;
+within AixLib.Controls;
 package HydraulicModules "Controller for hydraulic circuits"
   extends Modelica.Icons.VariantsPackage;
 
