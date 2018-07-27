@@ -1,7 +1,7 @@
-within AixLib.FastHVAC.Data.CHP;
+within AixLib.FastHVAC.Data.CHP.Engine;
 record Ecopower_1_0
 
-  extends BaseDataDefinition(
+  extends Engine.BaseDataDefinition(
     a_0=0.263,
     a_1=0,
     a_2=0,
@@ -17,7 +17,8 @@ record Ecopower_1_0
     b_5=-0.0000,
     b_6=-0.0000,
     P_elRated=1000,
-    tauQ_th=882.35,
+    tauQ_th_start=882.35,
+    tauQ_th_stop = 90,
     tauP_el=73.52,
     dotm_max=0.06,
     dotm_min=0.06,

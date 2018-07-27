@@ -1,4 +1,4 @@
-within AixLib.FastHVAC.Data.CHP;
+within AixLib.FastHVAC.Data.CHP.Engine;
 record BaseDataDefinition "Basic Mikro_KWK Data"
 extends Modelica.Icons.Record;
 

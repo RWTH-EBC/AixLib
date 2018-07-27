@@ -1,7 +1,7 @@
-within AixLib.FastHVAC.Data.CHP;
+within AixLib.FastHVAC.Data.CHP.Engine;
 record Ecopower
   //import Mikro_KWK_model = CHP_package.Records.Records_model;
-  extends BaseDataDefinition(
+  extends Engine.BaseDataDefinition(
     a_0=-0.0417,
     a_1=0.0117,
     a_2=0.0104,
@@ -17,7 +17,8 @@ record Ecopower
     b_5=-0.0000,
     b_6=-0.0000,
     P_elRated=4460,
-    tauQ_th=882.35,
+    tauQ_th_start=882.35,
+    tauQ_th_stop = 90,
     tauP_el=73.52,
     dotm_max=0.287,
     dotm_min=0.073,

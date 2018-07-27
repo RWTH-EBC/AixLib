@@ -1,48 +1,65 @@
 ﻿within AixLib.FastHVAC.Components.HeatGenerators.CHP;
 model CHPDynCleaned
   "CHP with internal combustion engine including part load operation. To be used with dynamic mode controller (start/stop/OnOff/P_elRel)"
+  /* *******************************************************************
+  Medium
+  ******************************************************************* */
+  parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple medium=
+  AixLib.FastHVAC.Media.WaterSimple()
+  "Standard flow charastics for water (heat capacity, density, thermal conductivity)"    annotation (choicesAllMatching);
+  constant Real LHV(unit="J/kg")=47300000 "Lower heating value [J/kg]";
 
   /* *******************************************************************
   BHKW Parameters
   ******************************************************************* */
   parameter Boolean EfficiencyByDatatable=true
     "Use CHP data for efficiency calculations";
+  parameter AixLib.FastHVAC.Data.CHP.Engine.BaseDataDefinition param=
+      AixLib.FastHVAC.Data.CHP.Engine.AisinSeiki()
+    "Paramter contains data from CHP records"
+    annotation (choicesAllMatching=true, Dialog(enable=EfficiencyByDatatable));
+
   parameter Boolean withController=true "Use internal Start Stop Controller" annotation (Dialog(group="Control and operation"));
 
-  parameter AixLib.FastHVAC.Data.CHP.BaseDataDefinition param=
-  AixLib.FastHVAC.Data.CHP.AisinSeiki() "Paramter contains data from CHP records"
-  annotation (choicesAllMatching=true, group="Unit properties");
-
-  parameter Modelica.SIunits.Efficiency eta_el_fixed = 0.25 "CHP's electrical efficiency  "
-  annotation (Dialog(group = "Unit properties",enable=not EfficiencyByDatatable));
-  parameter Modelica.SIunits.Efficiency omega_fixed = 0.65 "CHP's total efficiency "
-  annotation (Dialog(group = "Unit properties",enable=not EfficiencyByDatatable));
-
-  parameter AixLib.FastHVAC.Media.BaseClasses.MediumSimple medium=
-  AixLib.FastHVAC.Media.WaterSimple()
-  "Standard flow charastics for water (heat capacity, density, thermal conductivity)"    annotation (choicesAllMatching);
-
-  constant Real LHV(unit="J/kg")=47300000 "Lower heating value [J/kg]";
+  parameter Modelica.SIunits.Power P_elRated_prescribed = 5000 annotation (Dialog(group = "Prescribed CHP model",enable=not EfficiencyByDatatable));
+  parameter Modelica.SIunits.Efficiency eta_el_prescribed = 0.25 "CHP's electrical efficiency  "
+  annotation (Dialog(group = "Prescribed CHP model",enable=not EfficiencyByDatatable));
+  parameter Modelica.SIunits.Efficiency omega_prescribed = 0.65 "CHP's total efficiency "
+  annotation (Dialog(group = "Prescribed CHP model",enable=not EfficiencyByDatatable));
+  parameter Modelica.SIunits.Time tauQ_th_stop_prescribed = 90
+  "time constant for thermal start behavior" annotation (Dialog(group = "Prescribed CHP model",enable=not EfficiencyByDatatable));
+  parameter Modelica.SIunits.Time tauQ_th_start_prescribed = 800
+  "time constant for stop behaviour" annotation (Dialog(group = "Prescribed CHP model",enable=not EfficiencyByDatatable));
+  parameter Modelica.SIunits.Time tauP_el_prescribed = 100
+  "time constant electrical power start behavior" annotation (Dialog(tab = "Prescribed CHP Model", group = "Prescribed CHP model",enable=not EfficiencyByDatatable));
 
 protected
-  parameter Modelica.SIunits.Power dotE_start = 0.4 * param.dotE_fuelRated;
-  parameter Modelica.SIunits.Power dotQ_stop = 0.5 * param.dotQ_thRated;
-  parameter Modelica.SIunits.Power dotE_stop = 1/3 * param.dotE_fuelRated;
+  parameter Modelica.SIunits.Power P_elRated = if EfficiencyByDatatable then param.P_elRated else P_elRated_prescribed;
+  parameter Modelica.SIunits.Power dotE_fuelRated = if EfficiencyByDatatable then param.dotE_fuelRated else P_elRated_prescribed/eta_el_prescribed;
+  parameter Modelica.SIunits.Power dotQ_thRated = if EfficiencyByDatatable then param.dotQ_thRated else dotE_fuelRated*(omega_prescribed-eta_el_prescribed);
+  parameter Modelica.SIunits.Power dotE_start = 0.4 * dotE_fuelRated "Fuel consumption during start process";
+  parameter Modelica.SIunits.Power dotQ_stop = 0.5 * dotQ_thRated "Themal energy production during stop process";
+  parameter Modelica.SIunits.Power dotE_stop = 1/3 * dotE_fuelRated "Fuel consumption during stop process";
+  parameter Modelica.SIunits.Time tauQ_th_start = if EfficiencyByDatatable then param.tauQ_th_start else tauQ_th_stop_prescribed
+  "time constant for thermal start behavior (unit=sec) ";
+  parameter Modelica.SIunits.Time tauQ_th_stop = if EfficiencyByDatatable then param.tauQ_th_stop else tauQ_th_stop_prescribed
+  "time constant for stop behaviour (unit=sec)";
+  parameter Modelica.SIunits.Time tauP_el = if EfficiencyByDatatable then param.tauP_el else tauP_el_prescribed
+  "time constant electrical power start behavior (unit=sec)";
   parameter Modelica.SIunits.Volume V_water = 3e-3;
 public
-  parameter Modelica.SIunits.Power PStandby=90
+  parameter Modelica.SIunits.Power P_elStandby=90
     "electrical consumption in standby mode";
-  parameter Modelica.SIunits.Power PStop=190
+  parameter Modelica.SIunits.Power P_elStop=190
     "electrical consumption during shutdown mode";
-  parameter Modelica.SIunits.Power PStart=190
+  parameter Modelica.SIunits.Power P_elStart=190
     "electrical consumption during startup";
   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(20);
   parameter Modelica.SIunits.Time WarmupTime=110
-    "time until first heat is delivered by system (unit=sec)"
+    "time until first heat is delivered by system after switched on"
                                                             annotation (Dialog(group="Control and operation"));
-
   parameter Modelica.SIunits.Time CooldownTime=330
-    "time until thermal output is zero (unit=sec) "
+    "time until thermal output is zero after switched to standby"
                                                   annotation (Dialog(group="Control and operation"));
 
   /* *******************************************************************
@@ -128,14 +145,14 @@ public
         extent={{-14,-14},{14,14}},
         rotation=270,
         origin={-14,98})));
-  Modelica.Blocks.Continuous.FirstOrder firstOrderP(T=param.tauP_el/3)
+  Modelica.Blocks.Continuous.FirstOrder firstOrderP(T=tauP_el/3)
     annotation (Placement(transformation(extent={{-20,76},{0,96}})));
 
   Modelica.Blocks.Nonlinear.SlewRateLimiter LimiterEFuel(Rising=2554.2, Falling=-2554.2)
     annotation (Placement(transformation(extent={{20,46},{40,66}})));
   Modelica.Blocks.Continuous.FirstOrder firstOrderEFuel(T=5)
     annotation (Placement(transformation(extent={{-20,46},{0,66}})));
-  Modelica.Blocks.Math.Gain Pel(k=param.P_elRated)
+  Modelica.Blocks.Math.Gain Pel(k=P_elRated)
     annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=-90,
@@ -145,9 +162,9 @@ public
           extent={{94,90},{118,114}})));
   Modelica.Blocks.Math.Gain Gain_LHV(k=1/LHV)
     annotation (Placement(transformation(extent={{76,54},{92,70}})));
-  Modelica.Blocks.Continuous.FirstOrder firstOrderQ_start(T=param.tauQ_th_start/3)
+  Modelica.Blocks.Continuous.FirstOrder firstOrderQ_start(T=tauQ_th_start/3)
     annotation (Placement(transformation(extent={{-18,14},{2,34}})));
-  Modelica.Blocks.Continuous.FirstOrder firstOrderQ_stop(T=param.tauQ_th_stop/3)
+  Modelica.Blocks.Continuous.FirstOrder firstOrderQ_stop(T=tauQ_th_stop/3)
     annotation (Placement(transformation(extent={{-18,-20},{2,0}})));
   Modelica.Blocks.Logical.Switch Qth(y( unit="W")) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -192,11 +209,11 @@ equation
   // fixed efficiencies
   else
     if P_elRel > 0.1 then
-      eff_el =eta_el_fixed*(0.261 + 0.161*Modelica.Math.log(P_elRel*100));
+      eff_el =eta_el_prescribed*(0.261 + 0.161*Modelica.Math.log(P_elRel*100));
     else
-      eff_el = eta_el_fixed * 0.261;
+      eff_el = eta_el_prescribed * 0.261;
     end if;
-    eff_th = omega_fixed - eff_el;
+    eff_th = omega_prescribed - eff_el;
   end if;
 
   // Operation conditions
@@ -204,7 +221,7 @@ equation
        if Start then                                           //Startvorgang
          firstOrderQ_start.u = 0;
          firstOrderQ_stop.u = 0;
-         firstOrderP.u =-PStart;
+         firstOrderP.u =-P_elStart;
          firstOrderEFuel.u = dotE_start;
        else                                                            //Normalbetrieb
          firstOrderQ_start.u =Pel.y/sigma;
@@ -216,12 +233,12 @@ equation
        if Stop then                                            //Stoppvorgang
          firstOrderQ_start.u = 0;
          firstOrderQ_stop.u = dotQ_stop;
-         firstOrderP.u =-PStop;
+         firstOrderP.u =-P_elStop;
          firstOrderEFuel.u = dotE_stop;
        else                                                    //Standby
          firstOrderQ_start.u = 0;
          firstOrderQ_stop.u = 0;
-         firstOrderP.u =-PStandby;
+         firstOrderP.u =-P_elStandby;
          firstOrderEFuel.u = 0;
        end if;
      end if;
@@ -443,7 +460,7 @@ equation
 </p>
 <p>
   The second possibility is to set the parameters manually (compare:
-  Parameters-Unit properties). In this case the set values are
+  Parameters-Prescribed CHP model). In this case the set values are
   constant.
 </p>
 <p>

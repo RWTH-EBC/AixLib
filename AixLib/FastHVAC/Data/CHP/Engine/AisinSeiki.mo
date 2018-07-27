@@ -1,7 +1,7 @@
-within AixLib.FastHVAC.Data.CHP;
+within AixLib.FastHVAC.Data.CHP.Engine;
 record AisinSeiki
 
- extends BaseDataDefinition(
+ extends Engine.BaseDataDefinition(
     a_0=-0.0315,
     a_1=-0.0064,
     a_2=0.0788,

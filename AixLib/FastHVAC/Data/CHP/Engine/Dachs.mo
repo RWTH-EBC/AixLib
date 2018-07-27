@@ -1,7 +1,7 @@
-within AixLib.FastHVAC.Data.CHP;
+within AixLib.FastHVAC.Data.CHP.Engine;
 record Dachs
   //import Mikro_KWK_model = CHP_package.Records.Records_model;
-  extends BaseDataDefinition(
+  extends Engine.BaseDataDefinition(
     a_0=0.1710,
     a_1=0.0080,
     a_2=0.0199,
@@ -17,7 +17,8 @@ record Dachs
     b_5=0.0000,
     b_6=-0.0031,
     P_elRated=5500,
-    tauQ_th=147.05,
+    tauQ_th_start=147.05,
+    tauQ_th_stop = 90,
     tauP_el=73.52,
     dotm_max=0.27778,
     dotm_min=0.27778,

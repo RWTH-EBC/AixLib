@@ -1,5 +1,5 @@
 within AixLib.FastHVAC.Examples.HeatGenerators.CHP;
-model CHPNew2
+model EngineCHP
  extends Modelica.Icons.Example;
   FastHVAC.Components.Pumps.FluidSource fluidSource
     annotation (Placement(transformation(extent={{-68,-72},{-48,-52}})));
@@ -69,4 +69,4 @@ equation
   </li>
 </ul>
 </html>"));
-end CHPNew2;
+end EngineCHP;

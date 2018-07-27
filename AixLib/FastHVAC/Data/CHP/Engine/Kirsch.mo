@@ -1,7 +1,7 @@
-within AixLib.FastHVAC.Data.CHP;
+within AixLib.FastHVAC.Data.CHP.Engine;
 record Kirsch
 
-  extends BaseDataDefinition(
+  extends Engine.BaseDataDefinition(
     a_0=0.117,
     a_1=0.0001,
     a_2=0.0286,
