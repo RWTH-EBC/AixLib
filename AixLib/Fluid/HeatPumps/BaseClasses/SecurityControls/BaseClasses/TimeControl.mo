@@ -2,29 +2,25 @@ within AixLib.Fluid.HeatPumps.BaseClasses.SecurityControls.BaseClasses;
 block TimeControl
   "Counts seconds a device is turned on and returns true if the time is inside given boundaries"
   extends Modelica.Blocks.Interfaces.BooleanSISO;
-  Modelica.Blocks.Logical.Timer RunTim
-    "counts the seconds the heat pump is locled still"
+  Modelica.Blocks.Logical.Timer runTim
+    "Counts the seconds the heat pump is locled still"
     annotation (Placement(transformation(extent={{-24,6},{-8,22}})));
   Modelica.Blocks.Sources.Constant inputLocTime(final k=minRunTime)
     "Mimimum lock time of heat pump"
     annotation (Placement(transformation(extent={{-24,-26},{-8,-10}})));
-  Modelica.Blocks.Logical.GreaterEqual LocGreaterMin
+  Modelica.Blocks.Logical.GreaterEqual runTimGreaterMin
+    "Checks if the runtime is greater than the minimal runtime"
     annotation (Placement(transformation(extent={{22,-8},{36,8}})));
   parameter Modelica.SIunits.Time minRunTime
     "Minimal time the device is turned on or off";
-  Modelica.Blocks.Interfaces.RealOutput
-             y1
-               "Connector of Real output signal" annotation (Placement(
-        transformation(extent={{100,-10},{120,10}})));
 equation
-  connect(inputLocTime.y,LocGreaterMin. u2) annotation (Line(points={{-7.2,
-          -18},{4,-18},{4,-6.4},{20.6,-6.4}},
-                                          color={0,0,127}));
-  connect(RunTim.y,LocGreaterMin. u1) annotation (Line(points={{-7.2,14},{4,
-          14},{4,0},{20.6,0}},  color={0,0,127}));
-  connect(LocGreaterMin.y, y)
+  connect(inputLocTime.y, runTimGreaterMin.u2) annotation (Line(points={{-7.2,-18},
+          {4,-18},{4,-6.4},{20.6,-6.4}}, color={0,0,127}));
+  connect(runTim.y, runTimGreaterMin.u1) annotation (Line(points={{-7.2,14},{4,
+          14},{4,0},{20.6,0}}, color={0,0,127}));
+  connect(runTimGreaterMin.y, y)
     annotation (Line(points={{36.7,0},{110,0}}, color={255,0,255}));
-  connect(u, RunTim.u) annotation (Line(points={{-120,0},{-32,0},{-32,14},{
+  connect(u,runTim. u) annotation (Line(points={{-120,0},{-32,0},{-32,14},{
           -25.6,14}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                                 Rectangle(

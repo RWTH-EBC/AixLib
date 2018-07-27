@@ -1,13 +1,13 @@
 within AixLib.Fluid.HeatPumps.BaseClasses.SecurityControls;
 block OnOffControl
   "Controlls if the minimal runtime, stoptime and max. runs per hour are inside given boundaries"
-  extends BaseClasses.partialSecurityControl;
-  Modelica.Blocks.Logical.Greater NSetGreaterNull "True if device is set on"
+  extends BaseClasses.PartialSecurityControl;
+  Modelica.Blocks.Logical.Greater nSetGreaterNull "True if device is set on"
     annotation (Placement(transformation(extent={{-102,56},{-86,72}})));
   parameter Modelica.SIunits.Time minRunTime "Mimimum runtime of heat pump";
   parameter Modelica.SIunits.Time minLocTime "Minimum lock time of heat pump";
   parameter Real maxRunPer_h "Maximal number of on/off cycles in one hour";
-  Modelica.Blocks.Logical.Greater NIsGreaterNull
+  Modelica.Blocks.Logical.Greater nIsGreaterNull
     "True if the device is still on"
     annotation (Placement(transformation(extent={{-104,-36},{-88,-20}})));
   Modelica.Blocks.MathBoolean.Or or1(nu=3)
@@ -35,22 +35,22 @@ block OnOffControl
   Modelica.Blocks.Logical.And andLoc
     annotation (Placement(transformation(extent={{26,-42},{38,-30}})));
 equation
-  connect(conZer.y, NSetGreaterNull.u2) annotation (Line(points={{70.6,-18},{78,
+  connect(conZer.y,nSetGreaterNull. u2) annotation (Line(points={{70.6,-18},{78,
           -18},{78,-94},{-108,-94},{-108,57.6},{-103.6,57.6}},   color={0,0,
           127}));
-  connect(NSetGreaterNull.u1, nSet) annotation (Line(points={{-103.6,64},{-118,
+  connect(nSetGreaterNull.u1, nSet) annotation (Line(points={{-103.6,64},{-118,
           64},{-118,37},{-135,37}}, color={0,0,127}));
-  connect(conZer.y, NIsGreaterNull.u2) annotation (Line(points={{70.6,-18},{78,
+  connect(conZer.y,nIsGreaterNull. u2) annotation (Line(points={{70.6,-18},{78,
           -18},{78,-94},{-108,-94},{-108,-34.4},{-105.6,-34.4}},    color={0,
           0,127}));
   connect(andRun.y, SwiSta.u2) annotation (Line(points={{20.6,46},{48,46},{48,
           12},{-54,12},{-54,-4},{-100,-4},{-100,8},{-94,8}},
                                                color={255,0,255}));
-  connect(SwiSta.y, SwiErr.u1) annotation (Line(points={{-71,8},{84,8}},
+  connect(SwiSta.y,swiErr.u1)  annotation (Line(points={{-71,8},{84,8}},
                    color={0,0,127}));
-  connect(or1.y, SwiErr.u2)
+  connect(or1.y,swiErr.u2)
     annotation (Line(points={{68.9,18},{76,18},{76,0},{84,0}}, color={255,0,255}));
-  connect(pre1.u, NIsGreaterNull.y)
+  connect(pre1.u,nIsGreaterNull. y)
     annotation (Line(points={{-85.2,-28},{-87.2,-28}},
                                                      color={255,0,255}));
   connect(andRun.u1, not2.y) annotation (Line(points={{6.8,46},{-2,46},{-2,64},
@@ -58,9 +58,9 @@ equation
   connect(andRun.y, or1.u[1]) annotation (Line(points={{20.6,46},{48,46},{48,
           20.8},{56,20.8}},
                         color={255,0,255}));
-  connect(not2.u, NSetGreaterNull.y)
+  connect(not2.u,nSetGreaterNull. y)
     annotation (Line(points={{-66.8,64},{-85.2,64}}, color={255,0,255}));
-  connect(andIsOn.u1, NSetGreaterNull.y) annotation (Line(points={{28.8,78},{
+  connect(andIsOn.u1,nSetGreaterNull. y) annotation (Line(points={{28.8,78},{
           -74,78},{-74,64},{-85.2,64}},                 color={255,0,255}));
   connect(andIsOn.y, or1.u[2]) annotation (Line(points={{42.6,78},{48,78},{48,
           18},{56,18}},     color={255,0,255}));
@@ -84,7 +84,7 @@ equation
           16},{52,16},{52,15.2},{56,15.2}}, color={255,0,255}));
   connect(locTimControl.y, andLoc.u1) annotation (Line(points={{-8.4,-15},{-8.4,
           -14},{24.8,-14},{24.8,-36}}, color={255,0,255}));
-  connect(NIsGreaterNull.u1, heatPumpControlBus.N) annotation (Line(points={{
+  connect(nIsGreaterNull.u1, heatPumpControlBus.N) annotation (Line(points={{
           -105.6,-28},{-126,-28},{-126,-26.925},{-136.915,-26.925}}, color={0,0,
           127}), Text(
       string="%second",

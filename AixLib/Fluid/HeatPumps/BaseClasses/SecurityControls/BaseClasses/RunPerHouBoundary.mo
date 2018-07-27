@@ -1,7 +1,8 @@
 within AixLib.Fluid.HeatPumps.BaseClasses.SecurityControls.BaseClasses;
 block RunPerHouBoundary "Checks if a maximal run per hour value is in boundary"
   extends Modelica.Blocks.Interfaces.BooleanSISO;
-  Modelica.Blocks.Logical.Less CycSammlerMax
+  Modelica.Blocks.Logical.Less runCouLesMax
+    "Checks if the count of total runs is lower than the maximal value"
     annotation (Placement(transformation(extent={{74,-8},{90,8}})));
   Modelica.Blocks.Sources.Constant inputRunPerHou(final k=maxRunPer_h)
     "maximal number of on/off cycles in one hour"
@@ -25,12 +26,8 @@ block RunPerHouBoundary "Checks if a maximal run per hour value is in boundary"
   parameter Real maxRunPer_h "Number of maximal on/off cycles per hour";
   parameter Modelica.SIunits.Time delayTime(displayUnit="h") = 3600
     "Delay time of output with respect to input signal";
-  Modelica.Blocks.Interfaces.RealOutput
-             y1
-               "Connector of Real output signal" annotation (Placement(
-        transformation(extent={{100,-10},{120,10}})));
 equation
-  connect(inputRunPerHou.y, CycSammlerMax.u2) annotation (Line(points={{60.8,-14},
+  connect(inputRunPerHou.y, runCouLesMax.u2) annotation (Line(points={{60.8,-14},
           {66,-14},{66,-6.4},{72.4,-6.4}}, color={0,0,127}));
   connect(intConPluOne.y, triggeredAdd.u)
     annotation (Line(points={{-49.4,0},{-34.4,0}}, color={255,127,0}));
@@ -40,7 +37,7 @@ equation
     annotation (Line(points={{-15.2,0},{-18.8,0}}, color={255,127,0}));
   connect(intToReal.y, sub.u1) annotation (Line(points={{-1.4,0},{0.15,0},{0.15,
           12.8},{42.4,12.8}}, color={0,0,127}));
-  connect(sub.y, CycSammlerMax.u1) annotation (Line(points={{60.8,8},{66,8},{66,
+  connect(sub.y, runCouLesMax.u1) annotation (Line(points={{60.8,8},{66,8},{66,
           0},{72.4,0}}, color={0,0,127}));
   connect(intToReal.y, fixedDelay.u)
     annotation (Line(points={{-1.4,0},{0,0},{0,-9},{13,-9}}, color={0,0,127}));
@@ -48,7 +45,7 @@ equation
           {42.4,3.2}}, color={0,0,127}));
   connect(u, edge1.u)
     annotation (Line(points={{-120,0},{-85.2,0}}, color={255,0,255}));
-  connect(CycSammlerMax.y, y)
+  connect(runCouLesMax.y, y)
     annotation (Line(points={{90.8,0},{110,0},{110,0}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                                 Rectangle(

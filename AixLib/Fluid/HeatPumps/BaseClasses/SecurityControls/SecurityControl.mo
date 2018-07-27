@@ -1,31 +1,31 @@
 within AixLib.Fluid.HeatPumps.BaseClasses.SecurityControls;
 block SecurityControl "Block including all security levels"
-  extends BaseClasses.partialSecurityControl;
-  parameter Modelica.SIunits.Temp_K T_eva_min "Minimum source inlet temperature"
+  extends BaseClasses.PartialSecurityControl;
+  parameter Modelica.SIunits.Temp_K TEva_min "Minimum source inlet temperature"
     annotation (Dialog(group="Operational Envelope"));
-  parameter Modelica.SIunits.Temp_K T_eva_max "Maximum source inlet temperature"
+  parameter Modelica.SIunits.Temp_K TEva_max "Maximum source inlet temperature"
     annotation (Dialog(group="Operational Envelope"));
-  parameter Modelica.SIunits.Temp_K T_con_min "Minimum sink inlet temperature"
+  parameter Modelica.SIunits.Temp_K TCon_min "Minimum sink inlet temperature"
     annotation (Dialog(group="Operational Envelope"));
-  parameter Modelica.SIunits.Temp_K T_con_max "Maximum sink inlet temperature"
+  parameter Modelica.SIunits.Temp_K TCon_max "Maximum sink inlet temperature"
     annotation (Dialog(group="Operational Envelope"));
   OperationalEnvelope operationalEnvelope
     annotation (Placement(transformation(extent={{-18,2},{18,36}})));
   OnOffControl onOffController
     annotation (Placement(transformation(extent={{-84,2},{-48,36}})));
-  Modelica.Blocks.Sources.BooleanConstant ConTru(final k=true)
-    "Always true as the security is delt with inside the other blocks"
+  Modelica.Blocks.Sources.BooleanConstant conTru(final k=true)
+    "Always true as the two blocks OperationalEnvelope and OnOffControl deal with whether the nSet value is correct or not"
     annotation (Placement(transformation(extent={{58,-6},{70,6}})));
 equation
-  connect(ConTru.y, SwiErr.u2)
+  connect(conTru.y,swiErr.u2)
     annotation (Line(points={{70.6,0},{84,0}}, color={255,0,255}));
   connect(onOffController.nOut, operationalEnvelope.nSet) annotation (Line(
-        points={{-46.5,19},{-34,19},{-34,26},{-20.25,26},{-20.25,25.29}}, color
-        ={0,0,127}));
+        points={{-46.5,19},{-34,19},{-34,26},{-20.25,26},{-20.25,25.29}}, color=
+         {0,0,127}));
 
   connect(nSet, onOffController.nSet) annotation (Line(points={{-135,37},{
           -110.5,37},{-110.5,25.29},{-86.25,25.29}}, color={0,0,127}));
-  connect(operationalEnvelope.nOut, SwiErr.u1) annotation (Line(points={{19.5,
+  connect(operationalEnvelope.nOut,swiErr.u1)  annotation (Line(points={{19.5,
           19},{54,19},{54,12},{72,12},{72,8},{84,8}}, color={0,0,127}));
   connect(heatPumpControlBus, onOffController.heatPumpControlBus) annotation (
       Line(
