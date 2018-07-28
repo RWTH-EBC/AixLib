@@ -64,16 +64,24 @@ model HeatPumpDetailed
     redeclare package Medium_eva =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
     P_eleOutput=true,
-    capCalcType=2,
     CorrFlowCo=false,
     CorrFlowEv=false,
     dataTable=AixLib.DataBase.HeatPump.HeatPumpBaseDataDefinition(
         tableQdot_con=[0,0,10; 35,4800,6300; 55,4400,5750],
         tableP_ele=[0,0,10; 35,1100,1150; 55,1600,1750],
         mFlow_conNom=0.01,
-        mFlow_evaNom=0.01))
+        mFlow_evaNom=0.01),
+    capCalcType=2,
+    HPctrlType=false)
     "Detailed heat pump mainly based on manufacturing data"
     annotation (Placement(transformation(extent={{-6,0},{24,20}})));
+  Modelica.Blocks.Sources.Ramp NRamp(
+    height=3000,
+    duration=2600,
+    offset=1300,
+    startTime=500)
+    "Ramp signal for the temperature input of the source side's ideal mass flow source"
+    annotation (Placement(transformation(extent={{-2,56},{18,76}})));
 equation
   connect(TsuSourceRamp.y, sourceSideMassFlowSource.T_in) annotation (Line(
       points={{-59,10},{-54,10},{-54,18},{-46,18}},
@@ -119,6 +127,8 @@ equation
       points={{22,3},{36,3},{36,-18},{50,-18},{50,-48},{40,-48}},
       color={0,127,255},
       smooth=Smooth.None));
+  connect(NRamp.y, heatPump.N_in)
+    annotation (Line(points={{19,66},{8,66},{8,19}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
     experiment(StopTime=3600),
