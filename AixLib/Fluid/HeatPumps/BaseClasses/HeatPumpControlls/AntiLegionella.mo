@@ -72,5 +72,8 @@ equation
       index=1,
       extent={{6,3},{6,3}}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(info="<html>
+<p>This control Block checks if the current condenser outlet Temperature(TCon) is below a minimal Temperature(TLegMin) at which Legionella die (Typically 60 &deg;C).</p><p>To asure that all Legionella in the DHW-System die, a certain amount of time is needed, in which TCon does not fall below TLegMin.</p><p>As the HP has to kill all Legionella every few days/weeks, the control will only start(set new TSet), when the time since the last complete AntiLegionella-Cycle surpasses the given amount of days/weeks.</p>
+</html>"));
 end AntiLegionella;
