@@ -9,6 +9,8 @@ expandable connector HeatPumpControlBus
 
   Boolean mode "true: heat pump, false: chiller";
 
+
+
   Modelica.SIunits.ThermodynamicTemperature T_flow_ev "temperature of flow into evaporator";
 
   Modelica.SIunits.ThermodynamicTemperature T_flow_co "temperature of flow into condenser";
@@ -25,6 +27,8 @@ expandable connector HeatPumpControlBus
 
   Real CoP "Coefficient of performance";
 
+  Modelica.SIunits.ThermodynamicTemperature T_amb
+    "ambient temperature on the outside";
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),

@@ -4,15 +4,16 @@ model HeatPumpReal
 
   HeatPump heatPump
     annotation (Placement(transformation(extent={{84,-38},{160,38}})));
-  BaseClasses.SecurityControls.SecurityControl securityControl if useSecurity
+  BaseClasses.SecurityControls.SecurityControl securityControl(
+    useMinLocTim=false,
+    useRunPerHour=false,
+    useMinRunTim=true,
+    useOpeEnv=false) if     useSecurity
     annotation (Placement(transformation(extent={{-12,-28},{52,28}})));
   BaseClasses.HeatPumpControlls.DefrostControl defrostControl if useDefrost
     annotation (Placement(transformation(extent={{-106,-26},{-46,26}})));
   BaseClasses.HeatPumpControlls.HPControl hPControls
     annotation (Placement(transformation(extent={{-182,-24},{-130,24}})));
-  BoundaryConditions.WeatherData.Bus weaBus annotation (Placement(
-        transformation(extent={{-218,14},{-178,54}}), iconTransformation(extent=
-           {{-210,24},{-190,44}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a1(
                      redeclare final package Medium = Medium1,
                      m_flow(min=if allowFlowReversal1 then -Modelica.Constants.inf else 0),
@@ -37,8 +38,10 @@ model HeatPumpReal
                      h_outflow(start = Medium2.h_default))
     "Fluid connector b2 (positive design flow direction is from port_a2 to port_b2)"
     annotation (Placement(transformation(extent={{94,-110},{74,-90}})));
-  constant Boolean useDefrost;
-  constant Boolean useSecurity annotation (Evaluate=true);
+  constant Boolean useDefrost annotation (choices(checkBox=true));
+  constant Boolean useSecurity annotation (choices(checkBox=true));
+  Modelica.Blocks.Interfaces.RealInput T_amb "Ambient temperature"
+    annotation (Placement(transformation(extent={{-240,20},{-200,60}})));
 equation
   connect(securityControl.nOut, heatPump.nSet) annotation (Line(points={{54.6667,
           3.55271e-015},{68,3.55271e-015},{68,0},{79.44,0}},
@@ -52,15 +55,6 @@ equation
   connect(heatPump.sigBusHP, hPControl.heaPumControlBus) annotation (Line(
       points={{80.58,-10.26},{76,-10.26},{76,-48},{-192,-48},{-192,-14},{-192,
           -14},{-192,-13.44},{-183.04,-13.44}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(hPControl.weaBus, weaBus) annotation (Line(
-      points={{-179.92,-4.32},{-179.92,-4.16},{-198,-4.16},{-198,34}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(defrostControl.weaBus, weaBus) annotation (Line(
-      points={{-109,-8.32},{-110,-8.32},{-110,-8},{-112,-8},{-120,-8},{-120,-60},
-          {-198,-60},{-198,34}},
       color={255,204,51},
       thickness=0.5));
   connect(defrostControl.heaPumControlBus, heatPump.sigBusHP) annotation (Line(
@@ -82,6 +76,8 @@ equation
   connect(hPControls.nOut, defrostControl.nSet) annotation (Line(points={{
           -126.36,4.44089e-016},{-121.18,4.44089e-016},{-121.18,0},{-112,0}},
         color={0,0,127}));
+  connect(T_amb, hPControls.T_amb) annotation (Line(points={{-220,40},{-206,40},
+          {-206,4.8},{-187.72,4.8}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-200,-100},
             {200,100}})), Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-200,-100},{200,100}}), graphics={

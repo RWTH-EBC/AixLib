@@ -143,15 +143,19 @@ equation
       extent={{6,3},{6,3}}));
   annotation (Icon(coordinateSystem(extent={{-100,-100},{100,100}}), graphics={
         Rectangle(
-          extent={{-86,66},{-58,-56}},
+          extent={{-16,83},{16,-83}},
           fillColor={170,213,255},
           fillPattern=FillPattern.Solid,
-          lineColor={0,0,0}),
+          lineColor={0,0,0},
+          origin={1,-64},
+          rotation=90),
         Rectangle(
-          extent={{58,66},{88,-56}},
+          extent={{-17,83},{17,-83}},
           fillColor={255,0,128},
           fillPattern=FillPattern.Solid,
-          lineColor={0,0,0}),
+          lineColor={0,0,0},
+          origin={1,61},
+          rotation=90),
         Text(
           extent={{-76,6},{74,-36}},
           lineColor={28,108,200},
@@ -159,17 +163,24 @@ equation
           fillPattern=FillPattern.Solid,
           textString="%name
 "),     Line(
-          points={{-82,40},{-64,40},{-78,-2},{-64,-40},{-82,-40}},
+          points={{-9,40},{9,40},{-5,-2},{9,-40},{-9,-40}},
           color={0,0,0},
-          smooth=Smooth.None),
+          smooth=Smooth.None,
+          origin={-3,-60},
+          rotation=-90),
         Line(
-          points={{80,44},{62,44},{76,2},{62,-36},{80,-36}},
+          points={{9,40},{-9,40},{5,-2},{-9,-40},{9,-40}},
           color={0,0,0},
-          smooth=Smooth.None),
+          smooth=Smooth.None,
+          origin={-5,56},
+          rotation=-90),
         Rectangle(
-          extent={{-56,66},{54,-56}},
+          extent={{-82,42},{84,-46}},
           lineColor={238,46,47},
           fillColor={0,0,0},
-          fillPattern=FillPattern.Solid)}), Diagram(coordinateSystem(extent={{
+          fillPattern=FillPattern.Solid),
+        Line(points={{-88,60},{88,60}}, color={28,108,200}),
+        Line(points={{-88,-60},{88,-60}}, color={28,108,200})}),
+                                            Diagram(coordinateSystem(extent={{
             -100,-100},{100,100}})));
 end HeatPump;
