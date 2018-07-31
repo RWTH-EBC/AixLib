@@ -312,7 +312,7 @@ equation
         points={{-85,-74},{-85,-76},{-68,-76},{-68,-62}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
-          extent={{-190,56},{-128,36}},
+          extent={{-86,56},{-24,36}},
           lineColor={28,108,200},
           textString="Parameter müssen angepasst werden
 ")}));

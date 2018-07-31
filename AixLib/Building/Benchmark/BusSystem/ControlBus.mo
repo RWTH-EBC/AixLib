@@ -34,6 +34,18 @@ expandable connector ControlBus
   Real Valve7 "Valveposition of Valve7 (Hotwater warmwater bufferstorage)";
   Real Valve8 "Valveposition of Valve8 (Aircooler)";
 
+  Real Valve_RLT_Hot_Central "Valveposition of Valve_RLT_Hot_Central to control the hotwater-massflow to the Central";
+  Real Valve_RLT_Hot_OpenPlanOffice "Valveposition of Valve_RLT_Hot_OpenPlanOffice to control the hotwater-massflow to the OpenPlanOffice";
+  Real Valve_RLT_Hot_ConferenceRoom "Valveposition of Valve_RLT_Hot_ConferenceRoom to control the hotwater-massflow to the ConferenceRoom";
+  Real Valve_RLT_Hot_MultiPersonOffice "Valveposition of Valve_RLT_Hot_MultiPersonOffice to control the hotwater-massflow to the MultiPersonOffice";
+  Real Valve_RLT_Hot_Canteen "Valveposition of Valve_RLT_Hot_Canteen to control the hotwater-massflow to the canteen";
+  Real Valve_RLT_Cold_Central "Valveposition of Valve_RLT_Cold_Central to control the coldwater-massflow to the Central";
+  Real Valve_RLT_Cold_OpenPlanOffice "Valveposition of Valve_RLT_Cold_OpenPlanOffice to control the coldwater-massflow to the OpenPlanOffice";
+  Real Valve_RLT_Cold_ConferenceRoom "Valveposition of Valve_RLT_Cold_ConferenceRoom to control the coldwater-massflow to the ConferenceRoom";
+  Real Valve_RLT_Cold_MultiPersonOffice "Valveposition of Valve_RLT_Cold_MultiPersonOffice to control the coldwater-massflow to the MultiPersonOffice";
+  Real Valve_RLT_Cold_Canteen "Valveposition of Valve_RLT_Cold_Canteen to control the coldwater-massflow to the canteen";
+
+
   Real Valve_WarmCold_OpenPlanOffice_1 "Valveposition of Valve 1 for warm or cold of the openplanoffice";
   Real Valve_WarmCold_OpenPlanOffice_2 "Valveposition of Valve 2 for warm or cold of the openplanoffice";
 
@@ -49,4 +61,9 @@ expandable connector ControlBus
 
   // Moisterlevel
   Real X_OpenPlanOffice "Moisterlevel for the RLT of the openplanoffice";
+  Real X_ConfernceRoom "Moisterlevel for the RLT of the conferenceroom";
+  Real X_MultiPersonRoom "Moisterlevel for the RLT of the multipersonoffice";
+  Real X_Canteen "Moisterlevel for the RLT of the canteen";
+  Real X_Workshop "Moisterlevel for the RLT of the workshop";
+  Real X_Central "Moisterlevel for the central RLT";
 end ControlBus;

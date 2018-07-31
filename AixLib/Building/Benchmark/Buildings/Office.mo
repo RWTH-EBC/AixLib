@@ -1,18 +1,9 @@
-﻿within AixLib.Building.Benchmark.Buildings;
+within AixLib.Building.Benchmark.Buildings;
 model Office
   replaceable package Medium_Air =
     AixLib.Media.Air "Medium in the component";
   Floors.FirstFloor firstFloor
     annotation (Placement(transformation(extent={{-20,20},{20,60}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature tempOutside annotation(Placement(transformation(extent={{-28,-50},
-            {-8,-30}})));
-  Modelica.Blocks.Sources.RealExpression realExpression(y=273)
-    annotation (Placement(transformation(extent={{-72,-50},{-52,-30}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature tempOutside1
-                                                                          annotation(Placement(transformation(extent={{-28,-82},
-            {-8,-62}})));
-  Modelica.Blocks.Sources.RealExpression realExpression1(y=273)
-    annotation (Placement(transformation(extent={{-72,-82},{-52,-62}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort_North
     annotation (Placement(transformation(extent={{110,70},{90,90}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort_East
@@ -28,13 +19,13 @@ model Office
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={80,100})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b Heatport_TBA
-    annotation (Placement(transformation(extent={{70,-110},{90,-90}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Air_in(redeclare package Medium =
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b Heatport_TBA[5]
+    annotation (Placement(transformation(extent={{50,-110},{70,-90}})));
+  Modelica.Fluid.Interfaces.FluidPort_a Air_in[5](redeclare package Medium =
         Medium_Air)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-50,-110},{-30,-90}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Air_out(redeclare package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_b Air_out[5](redeclare package Medium =
         Medium_Air)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-90,-110},{-70,-90}})));
@@ -51,17 +42,14 @@ model Office
         extent={{10,-10},{-10,10}},
         rotation=90,
         origin={-2,98})));
+  Floors.GroundFloor groundFloor
+    annotation (Placement(transformation(extent={{-20,-60},{20,-20}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a AddPower[5]
+    annotation (Placement(transformation(extent={{-110,-50},{-90,-30}})));
+  Modelica.Blocks.Interfaces.RealInput mWat[5]
+    "Water flow rate added into the medium"
+    annotation (Placement(transformation(extent={{-114,26},{-86,54}})));
 equation
-  connect(realExpression.y,tempOutside. T) annotation (Line(points={{-51,-40},{
-          -30,-40}},                  color={0,0,127}));
-  connect(realExpression1.y, tempOutside1.T)
-    annotation (Line(points={{-51,-72},{-30,-72}}, color={0,0,127}));
-  connect(tempOutside.port, firstFloor.HeatPort_ToWorkshop_OpenPlanOffice)
-    annotation (Line(points={{-8,-40},{-8,20}},                     color={191,
-          0,0}));
-  connect(tempOutside1.port, firstFloor.HeatPort_ToKitchen_OpenPlanOffice)
-    annotation (Line(points={{-8,-72},{8,-72},{8,19.6}},           color={191,0,
-          0}));
   connect(firstFloor.WindSpeedPort_North, WindSpeedPort_North) annotation (Line(
         points={{20,56},{80,56},{80,80},{100,80}}, color={0,0,127}));
   connect(firstFloor.WindSpeedPort_East, WindSpeedPort_East) annotation (Line(
@@ -86,21 +74,66 @@ equation
   connect(firstFloor.SolarRadiationPort_West, SolarRadiationPort_North[4])
     annotation (Line(points={{-19.2,44},{-40,44},{-40,84},{-100,84}}, color={
           255,128,0}));
-  connect(firstFloor.Air_out, Air_out) annotation (Line(points={{-20,32},{-80,
-          32},{-80,-100}}, color={0,127,255}));
-  connect(firstFloor.Air_in, Air_in) annotation (Line(points={{-20,24},{-40,24},
-          {-40,-100}}, color={0,127,255}));
-  connect(firstFloor.Heatport_TBA, Heatport_TBA)
-    annotation (Line(points={{20,28},{80,28},{80,-100}}, color={191,0,0}));
   connect(prescribedTemperature.port, firstFloor.HeatPort_OutdoorTemp)
     annotation (Line(points={{-1.11022e-015,72},{-1.11022e-015,64},{0,64},{0,60}},
         color={191,0,0}));
   connect(AirTemp, prescribedTemperature.T)
     annotation (Line(points={{0,100},{0,85.2}}, color={0,0,127}));
+  connect(firstFloor.HeatPort_ToWorkshop_MultiPersonOffice, groundFloor.HeatPort_FromWorkshop)
+    annotation (Line(points={{-12.8,20},{-12,20},{-12,0},{-8,0},{-8,-20}},
+        color={191,0,0}));
+  connect(firstFloor.HeatPort_ToWorkshop_ConferenceRoom, groundFloor.HeatPort_FromWorkshop)
+    annotation (Line(points={{-6.4,20},{-6.4,0},{-8,0},{-8,-20}}, color={191,0,
+          0}));
+  connect(firstFloor.HeatPort_ToWorkshop_OpenPlanOffice, groundFloor.HeatPort_FromWorkshop)
+    annotation (Line(points={{0,20},{0,20},{0,0},{-8,0},{-8,-20}}, color={191,0,
+          0}));
+  connect(firstFloor.HeatPort_ToKitchen_OpenPlanOffice, groundFloor.HeatPort_FromCanteen)
+    annotation (Line(points={{8,20},{8,-20}}, color={191,0,0}));
+  connect(firstFloor.Heatport_TBA, Heatport_TBA)
+    annotation (Line(points={{20,28},{60,28},{60,-100}}, color={191,0,0}));
+  connect(groundFloor.Heatport_TBA, Heatport_TBA)
+    annotation (Line(points={{20,-52},{60,-52},{60,-100}}, color={191,0,0}));
+  connect(groundFloor.Air_in, Air_in) annotation (Line(points={{-20,-56},{-40,
+          -56},{-40,-100}}, color={0,127,255}));
+  connect(groundFloor.Air_out, Air_out) annotation (Line(points={{-20,-48},{-40,
+          -48},{-40,-56},{-40,-56},{-40,-80},{-80,-80},{-80,-100}}, color={0,
+          127,255}));
+  connect(firstFloor.Air_in, Air_in) annotation (Line(points={{-20,24},{-40,24},
+          {-40,-100}}, color={0,127,255}));
+  connect(firstFloor.Air_out, Air_out) annotation (Line(points={{-20,32},{-40,
+          32},{-40,-80},{-80,-80},{-80,-100}}, color={0,127,255}));
+  connect(groundFloor.WindSpeedPort_North, WindSpeedPort_North) annotation (
+      Line(points={{20,-24},{80,-24},{80,80},{100,80}}, color={0,0,127}));
+  connect(groundFloor.WindSpeedPort_East, WindSpeedPort_East) annotation (Line(
+        points={{20,-28},{80,-28},{80,50},{100,50},{100,50}}, color={0,0,127}));
+  connect(groundFloor.WindSpeedPort_South, WindSpeedPort_South) annotation (
+      Line(points={{20,-32},{80,-32},{80,20},{100,20},{100,20}}, color={0,0,127}));
+  connect(groundFloor.WindSpeedPort_West, WindSpeedPort_West) annotation (Line(
+        points={{20,-36},{80,-36},{80,-10},{100,-10}}, color={0,0,127}));
+  connect(groundFloor.SolarRadiationPort_North, SolarRadiationPort_North[1])
+    annotation (Line(points={{-19.2,-24},{-40,-24},{-40,72},{-100,72}}, color={
+          255,128,0}));
+  connect(groundFloor.SolarRadiationPort_East, SolarRadiationPort_North[2])
+    annotation (Line(points={{-19.2,-28},{-40,-28},{-40,76},{-100,76}}, color={
+          255,128,0}));
+  connect(groundFloor.SolarRadiationPort_South, SolarRadiationPort_North[3])
+    annotation (Line(points={{-19.2,-32},{-40,-32},{-40,80},{-100,80}}, color={
+          255,128,0}));
+  connect(groundFloor.SolarRadiationPort_West, SolarRadiationPort_North[4])
+    annotation (Line(points={{-19.2,-36},{-40,-36},{-40,84},{-100,84}}, color={
+          255,128,0}));
+  connect(groundFloor.HeatPort_OutdoorTemp, firstFloor.HeatPort_OutdoorTemp)
+    annotation (Line(points={{0,-60},{0,-80},{60,-80},{60,68},{0,68},{0,66},{0,
+          66},{0,60}}, color={191,0,0}));
+  connect(groundFloor.AddPower, AddPower) annotation (Line(points={{8.4,-60},{8,
+          -60},{8,-80},{-80,-80},{-80,-40},{-100,-40}}, color={191,0,0}));
+  connect(firstFloor.AddPower, AddPower) annotation (Line(points={{8.4,59.6},{
+          8.4,68},{-80,68},{-80,-40},{-100,-40}}, color={191,0,0}));
+  connect(firstFloor.mWat, mWat) annotation (Line(points={{-8,60},{-8,68},{-80,
+          68},{-80,40},{-100,40}}, color={0,0,127}));
+  connect(groundFloor.mWat, mWat) annotation (Line(points={{-8,-60},{-8,-80},{
+          -80,-80},{-80,40},{-100,40}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false), graphics={Text(
-          extent={{-72,-2},{-10,-22}},
-          lineColor={28,108,200},
-          textString="Platzhalter für 
-Erdgeschoss")}));
+        coordinateSystem(preserveAspectRatio=false)));
 end Office;

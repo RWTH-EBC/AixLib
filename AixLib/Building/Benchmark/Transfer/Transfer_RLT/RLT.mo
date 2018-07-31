@@ -59,7 +59,7 @@ equation
   connect(Ext_Cold.port_a1, Fluid_in_cold)
     annotation (Line(points={{28,-54},{80,-54},{80,100}}, color={0,127,255}));
   connect(Ext_Cold.port_b1, Fluid_out_cold) annotation (Line(points={{8,-54},{0,
-          -54},{0,-20},{40,-20},{40,100}}, color={0,127,255}));
+          -54},{0,80},{40,80},{40,100}},   color={0,127,255}));
   connect(Ext_Warm.port_a1, Fluid_in_warm) annotation (Line(points={{-52,-54},{
           -40,-54},{-40,100}}, color={0,127,255}));
   connect(Ext_Warm.port_b1, Fluid_out_warm) annotation (Line(points={{-72,-54},

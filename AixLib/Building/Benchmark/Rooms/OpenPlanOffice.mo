@@ -4,28 +4,28 @@ replaceable package Medium_Air =
     AixLib.Media.Air "Medium in the component";
 
   Components.Walls.Wall NorthWall(
-    wall_length=40,
     wall_height=3,
     solar_absorptance=0.48,
     withWindow=true,
-    windowarea=60,
     withSunblind=false,
     withDoor=false,
     WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
-    T0(displayUnit="degC") = 293.15)
+    T0(displayUnit="degC") = 293.15,
+    wall_length=45,
+    windowarea=67.5)
                annotation (Placement(transformation(
         extent={{-3.99999,-24},{4.00002,24}},
         rotation=-90,
         origin={-52,60})));
   Components.Walls.Wall SouthWall(
-    wall_length=40,
     wall_height=3,
     solar_absorptance=0.48,
     withWindow=true,
     WindowType=DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(),
-    windowarea=60,
     withSunblind=false,
     withDoor=false,
+    wall_length=45,
+    windowarea=67.5,
     T0=293.15) annotation (Placement(transformation(
         extent={{-3.99999,-24},{4.00002,24}},
         rotation=90,
@@ -90,8 +90,8 @@ replaceable package Medium_Air =
     outside=false,
     WallType=DataBase.Walls.EnEV2009.Floor.FLpartition_EnEV2009_SM_upHalf(),
     wall_length=30,
-    wall_height=20,
     ISOrientation=2,
+    wall_height=25,
     T0=293.15) annotation (Placement(transformation(
         extent={{-3.99999,-24},{4.00002,24}},
         rotation=90,
@@ -156,12 +156,12 @@ replaceable package Medium_Air =
         origin={-24,-110})));
   Utilities.Interfaces.Adaptors.HeatStarToComb thermStar_Demux annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 90, origin = {-20, -26})));
   Components.Walls.ActiveWallPipeBased activeWallPipeBased(
-    wall_length=40,
     wall_height=30,
     withDoor=false,
     ISOrientation=3,
     outside=true,
-    WallType=DataBase.Walls.EnEV2009.Ceiling.CE_RO_EnEV2009_SM_loHalf_TBA())
+    WallType=DataBase.Walls.EnEV2009.Ceiling.CE_RO_EnEV2009_SM_loHalf_TBA(),
+    wall_length=45)
     annotation (Placement(transformation(
         extent={{-4,-24},{4,24}},
         rotation=-90,
@@ -181,7 +181,6 @@ replaceable package Medium_Air =
   Fluid.MixingVolumes.MixingVolumeMoistAir vol(
                                      nPorts=2,
     m_flow_nominal=10,
-    V=3600,
     m_flow_small=0.001,
     allowFlowReversal=true,
     X_start={0.01,0.99},
@@ -189,7 +188,8 @@ replaceable package Medium_Air =
     massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
     redeclare package Medium = Medium_Air,
     p_start=100000,
-    T_start=293.15)
+    T_start=293.15,
+    V=4050)
     annotation (Placement(transformation(extent={{6,-12},{26,8}})));
   Modelica.Fluid.Interfaces.FluidPort_a Air_in(redeclare package Medium =
         Medium_Air)
@@ -199,8 +199,11 @@ replaceable package Medium_Air =
         Medium_Air)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,18},{110,38}})));
-  Modelica.Blocks.Sources.RealExpression realExpression(y=0)
-    annotation (Placement(transformation(extent={{-46,-2},{-26,18}})));
+  Modelica.Blocks.Interfaces.RealInput mWat_OpenPlanOffice
+    "Water flow rate added into the medium"
+    annotation (Placement(transformation(extent={{-116,80},{-92,104}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a AddPower_OpenPlanOffice
+    annotation (Placement(transformation(extent={{-110,60},{-90,80}})));
 equation
   connect(FloorToKitchen1.port_outside, HeatPort_ToKitchen)
     annotation (Line(points={{70,-66.2},{70,-100}}, color={191,0,0}));
@@ -269,10 +272,12 @@ equation
           {40,28},{40,-20},{14,-20},{14,-12}}, color={0,127,255}));
   connect(Air_out, vol.ports[2]) annotation (Line(points={{100,28},{40,28},{40,
           -20},{18,-20},{18,-12}}, color={0,127,255}));
-  connect(realExpression.y, vol.mWat_flow)
-    annotation (Line(points={{-25,8},{-12,8},{-12,6},{4,6}}, color={0,0,127}));
   connect(vol.heatPort, thermStar_Demux.therm) annotation (Line(points={{6,-2},
           {-25.1,-2},{-25.1,-15.9}}, color={191,0,0}));
+  connect(vol.mWat_flow, mWat_OpenPlanOffice) annotation (Line(points={{4,6},{
+          -20,6},{-20,80},{-90,80},{-90,92},{-104,92}}, color={0,0,127}));
+  connect(thermStar_Demux.therm, AddPower_OpenPlanOffice) annotation (Line(
+        points={{-25.1,-15.9},{-25.1,70},{-100,70}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-4,46},{44,36}},

@@ -75,8 +75,8 @@ equation
   connect(Pump_Heatpump_Cold.y, controlBus.Pump_Coldwater_heatpump_dp)
     annotation (Line(points={{-19,-96},{-10,-96},{-10,0.1},{100.1,0.1}}, color=
           {0,0,127}));
-  connect(Pump_Hotwater.y, controlBus.Pump_Hotwater_dp) annotation (Line(points
-        ={{-1,-68},{-10,-68},{-10,0.1},{100.1,0.1}}, color={0,0,127}));
+  connect(Pump_Hotwater.y, controlBus.Pump_Hotwater_dp) annotation (Line(points=
+         {{-1,-68},{-10,-68},{-10,0.1},{100.1,0.1}}, color={0,0,127}));
   connect(Pump_Warmwater.y, controlBus.Pump_Warmwater_dp) annotation (Line(
         points={{-1,-82},{-10,-82},{-10,0.1},{100.1,0.1}}, color={0,0,127}));
   connect(Pump_Coldwater.y, controlBus.Pump_Coldwater_dp) annotation (Line(
