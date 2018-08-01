@@ -7,9 +7,6 @@ block DefrostControl
     annotation (Placement(transformation(extent={{100,-12},{124,12}})));
   Modelica.Blocks.Interfaces.RealInput nSet
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
-  BoundaryConditions.WeatherData.Bus weaBus annotation (Placement(
-        transformation(extent={{-128,-52},{-88,-12}}), iconTransformation(
-          extent={{-120,-42},{-100,-22}})));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end DefrostControl;

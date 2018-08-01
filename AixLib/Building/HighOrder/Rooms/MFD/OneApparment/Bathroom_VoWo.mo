@@ -1,6 +1,4 @@
 within AixLib.Building.HighOrder.Rooms.MFD.OneApparment;
-
-
 model Bathroom_VoWo "Bathroom from the VoWo appartment"
   import AixLib;
   ///////// construction parameters

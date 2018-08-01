@@ -14,8 +14,8 @@ model HeatPump
     nPorts=1) "Ideal mass flow source at the inlet of the source side"
               annotation (Placement(transformation(extent={{-58,6},{-38,26}})));
   Sources.FixedBoundary                sourceSideFixedBoundary(redeclare
-      package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, nPorts
-      =1)       "Fixed boundary at the outlet of the source side"
+      package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, nPorts=
+       1)       "Fixed boundary at the outlet of the source side"
           annotation (Placement(transformation(extent={{-58,-28},{-38,-8}})));
   Sources.FixedBoundary                sinkSideFixedBoundary(redeclare package
       Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, nPorts=1)

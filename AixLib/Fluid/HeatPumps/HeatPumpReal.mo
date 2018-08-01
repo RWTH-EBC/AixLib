@@ -5,10 +5,12 @@ model HeatPumpReal
   HeatPump heatPump
     annotation (Placement(transformation(extent={{84,-38},{160,38}})));
   BaseClasses.SecurityControls.SecurityControl securityControl(
+    minRunTime(displayUnit="min") = 300,
+    minLocTime(displayUnit="min"),
     useMinLocTim=false,
-    useRunPerHour=false,
     useMinRunTim=true,
-    useOpeEnv=false) if     useSecurity
+    useRunPerHour=true,
+    useOpeEnv=true) if      useSecurity
     annotation (Placement(transformation(extent={{-12,-28},{52,28}})));
   BaseClasses.HeatPumpControlls.DefrostControl defrostControl if useDefrost
     annotation (Placement(transformation(extent={{-106,-26},{-46,26}})));

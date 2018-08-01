@@ -9,7 +9,7 @@ partial block PartialSecurityControl "Base Block"
   Modelica.Blocks.Logical.Switch swiErr
     "If an error occurs, the value of the conZero block will be used(0)"
     annotation (Placement(transformation(extent={{86,-10},{106,10}})));
-  Modelica.Blocks.Sources.Constant conZer(k=0)
+  Modelica.Blocks.Sources.Constant conZer(final k=0)
     "If an error occurs, the compressor speed is set to zero"
     annotation (Placement(transformation(extent={{58,-24},{70,-12}})));
   Controls.Interfaces.HeatPumpControlBus heatPumpControlBus
