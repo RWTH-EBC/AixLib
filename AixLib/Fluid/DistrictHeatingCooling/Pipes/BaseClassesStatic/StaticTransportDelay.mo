@@ -37,7 +37,7 @@ model StaticTransportDelay "Delay time for given current velocity"
     annotation (Placement(transformation(extent={{100,30},{120,50}})));
 
 equation
-  velocity = m_flow/(rho*(dh^2)/4*Modelica.Constants.pi);
+  velocity = abs(m_flow)/(rho*(dh^2)/4*Modelica.Constants.pi);
 
   tau = length*(
     AixLib.Utilities.Math.Functions.inverseXRegularized(
