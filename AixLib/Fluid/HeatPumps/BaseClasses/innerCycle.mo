@@ -7,8 +7,11 @@ model innerCycle "Blackbox model of refrigerant cycle of a HP"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Interfaces.RealOutput QEva "Heat flow from evaporator"
     annotation (Placement(transformation(extent={{-100,-10},{-120,10}})));
-  CalibrationHP calibrationHP
-    annotation (Placement(transformation(extent={{-26,24},{28,80}})));
+  PerformanceData.LookUpTable2D
+                lookUpTable2D
+    annotation (Placement(transformation(extent={{-27,-28},{27,28}},
+        rotation=-90,
+        origin={1,52})));
   Modelica.Blocks.Logical.Switch switchQEva
     "If mode is false, Condenser becomes Evaporator and vice versa"
     annotation (Placement(transformation(extent={{-64,-10},{-84,10}})));
@@ -39,26 +42,29 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(heatPumpControlBus, calibrationHP.heatPumpControlBus) annotation (
+  connect(heatPumpControlBus,lookUpTable2D. heatPumpControlBus) annotation (
       Line(
-      points={{1,103},{1,92.5},{1,92.5},{1,80}},
+      points={{1,103},{1,92.5},{1,80.89},{1,80.89}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(calibrationHP.QEva, switchQEva.u1) annotation (Line(points={{-20.6,
-          21.2},{-50,21.2},{-50,8},{-62,8}}, color={0,0,127}));
-  connect(calibrationHP.QCon, switchQCon.u1) annotation (Line(points={{22.6,
-          21.2},{51.3,21.2},{51.3,8},{72,8}}, color={0,0,127}));
-  connect(calibrationHP.QEva, switchQCon.u3) annotation (Line(points={{-20.6,
-          21.2},{-20,21.2},{-20,0},{40,0},{40,-8},{72,-8}}, color={0,0,127}));
-  connect(calibrationHP.QCon, switchQEva.u3) annotation (Line(points={{22.6,
-          21.2},{23.3,21.2},{23.3,-8},{-62,-8}}, color={0,0,127}));
-  connect(calibrationHP.Pel, divCOP.u2) annotation (Line(points={{1,21.2},{1,
+  connect(lookUpTable2D.QEva, switchQEva.u1) annotation (Line(points={{23.4,
+          22.3},{24,22.3},{24,22},{24,22},{24,8},{-62,8}},
+                                             color={0,0,127}));
+  connect(lookUpTable2D.QCon, switchQCon.u1) annotation (Line(points={{-21.4,
+          22.3},{-22,22.3},{-22,22},{-22,22},{-22,8},{72,8}},
+                                              color={0,0,127}));
+  connect(lookUpTable2D.QEva, switchQCon.u3) annotation (Line(points={{23.4,
+          22.3},{24,22.3},{24,-8},{72,-8}},                 color={0,0,127}));
+  connect(lookUpTable2D.QCon, switchQEva.u3) annotation (Line(points={{-21.4,
+          22.3},{-22,22.3},{-22,-8},{-62,-8}},   color={0,0,127}));
+  connect(lookUpTable2D.Pel, divCOP.u2) annotation (Line(points={{1,22.3},{1,
           -21.4},{-6,-21.4},{-6,-66}}, color={0,0,127}));
-  connect(calibrationHP.QCon, divCOP.u1) annotation (Line(points={{22.6,21.2},{
-          22.6,-22.4},{6,-22.4},{6,-66}}, color={0,0,127}));
+  connect(lookUpTable2D.QCon, divCOP.u1) annotation (Line(points={{-21.4,22.3},
+          {-21.4,-22.4},{6,-22.4},{6,-66}},
+                                          color={0,0,127}));
   connect(divCOP.y, COP) annotation (Line(points={{-1.9984e-015,-89},{
           -1.9984e-015,-96.5},{0,-96.5},{0,-110}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={

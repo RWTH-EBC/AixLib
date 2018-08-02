@@ -29,6 +29,8 @@ expandable connector HeatPumpControlBus
 
   Modelica.SIunits.ThermodynamicTemperature T_amb
     "ambient temperature on the outside";
+  Modelica.SIunits.ThermodynamicTemperature T_amb_in
+    "Ambient temperature of unit in house";
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),

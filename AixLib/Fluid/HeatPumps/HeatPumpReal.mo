@@ -107,13 +107,13 @@ equation
           {-206,4.8},{-187.72,4.8}}, color={0,0,127}));
   if not useSecurity and not useDefrost then
     connect(hPControls.nOut, heatPump.nSet) annotation (Line(
-      points={{-126.36,4.44089e-016},{-112,4.44089e-016},{-112,-86},{68,-86},{68,
-          0},{79.44,0}},
+      points={{-126.36,4.44089e-016},{-112,4.44089e-016},{-112,-86},{68,-86},{
+            68,0},{77.92,0}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   elseif not useSecurity and useDefrost then
     connect(defrostControl.nOut, heatPump.nSet) annotation (Line(
-      points={{-40.4,0},{-24,0},{-24,-66},{68,-66},{68,0},{79.44,0}},
+      points={{-40.4,0},{-24,0},{-24,-66},{68,-66},{68,0},{77.92,0}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   elseif not useDefrost and useSecurity then
@@ -126,7 +126,7 @@ equation
   end if;
   connect(securityControl.nOut, heatPump.nSet)
                                               annotation (Line(points={{56.6667,
-          0},{79.44,0}},                                                                       color={0,0,127}));
+          0},{77.92,0}},                                                                       color={0,0,127}));
   connect(defrostControl.nOut, securityControl.nSet) annotation (Line(points={{-40.4,0},
           {-28,0},{-28,3.55271e-015},{-14.2667,3.55271e-015}},    color={0,0,127}));
   connect(hPControls.nOut, defrostControl.nSet) annotation (Line(points={{-126.36,0},{-110,0}}, color={0,0,127}));
