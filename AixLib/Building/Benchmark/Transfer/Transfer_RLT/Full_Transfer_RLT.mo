@@ -39,93 +39,13 @@ model Full_Transfer_RLT
   RLT OpenPlanOffice
     annotation (Placement(transformation(extent={{-52,72},{-32,52}})));
   RLT Central annotation (Placement(transformation(extent={{-78,72},{-58,52}})));
-  Fluid.Actuators.Valves.ThreeWayLinear Valve_RLT_Hot_Central(
-    m_flow_nominal=1,
-    dpValve_nominal=10,
-    redeclare package Medium = Medium_Water) annotation (Placement(
-        transformation(
-        extent={{6,6},{-6,-6}},
-        rotation=0,
-        origin={-72,20})));
-  Fluid.Actuators.Valves.ThreeWayLinear Valve_RLT_Hot_OpenPlanOffice(
-    m_flow_nominal=1,
-    dpValve_nominal=10,
-    redeclare package Medium = Medium_Water) annotation (Placement(
-        transformation(
-        extent={{6,6},{-6,-6}},
-        rotation=0,
-        origin={-46,20})));
-  Fluid.Actuators.Valves.ThreeWayLinear Valve_RLT_Hot_ConferenceRoom(
-    m_flow_nominal=1,
-    dpValve_nominal=10,
-    redeclare package Medium = Medium_Water) annotation (Placement(
-        transformation(
-        extent={{6,6},{-6,-6}},
-        rotation=0,
-        origin={-18,20})));
-  Fluid.Actuators.Valves.ThreeWayLinear Valve_RLT_Hot_MultiPersonOffice(
-    m_flow_nominal=1,
-    dpValve_nominal=10,
-    redeclare package Medium = Medium_Water) annotation (Placement(
-        transformation(
-        extent={{6,6},{-6,-6}},
-        rotation=0,
-        origin={10,20})));
-  Fluid.Actuators.Valves.ThreeWayLinear Valve_RLT_Hot_Canteen(
-    m_flow_nominal=1,
-    dpValve_nominal=10,
-    redeclare package Medium = Medium_Water) annotation (Placement(
-        transformation(
-        extent={{6,6},{-6,-6}},
-        rotation=0,
-        origin={38,20})));
-  Fluid.Actuators.Valves.ThreeWayLinear Valve_RLT_Cold_Central(
-    m_flow_nominal=1,
-    dpValve_nominal=10,
-    redeclare package Medium = Medium_Water) annotation (Placement(
-        transformation(
-        extent={{6,6},{-6,-6}},
-        rotation=0,
-        origin={-60,-40})));
-  Fluid.Actuators.Valves.ThreeWayLinear Valve_RLT_Cold_OpenPlanOffce(
-    m_flow_nominal=1,
-    dpValve_nominal=10,
-    redeclare package Medium = Medium_Water) annotation (Placement(
-        transformation(
-        extent={{6,6},{-6,-6}},
-        rotation=0,
-        origin={-34,-40})));
-  Fluid.Actuators.Valves.ThreeWayLinear Valve_RLT_Cold_ConferenceRoom(
-    m_flow_nominal=1,
-    dpValve_nominal=10,
-    redeclare package Medium = Medium_Water) annotation (Placement(
-        transformation(
-        extent={{6,6},{-6,-6}},
-        rotation=0,
-        origin={-6,-40})));
-  Fluid.Actuators.Valves.ThreeWayLinear Valve_RLT_Cold_MultiPersonOffice(
-    m_flow_nominal=1,
-    dpValve_nominal=10,
-    redeclare package Medium = Medium_Water) annotation (Placement(
-        transformation(
-        extent={{6,6},{-6,-6}},
-        rotation=0,
-        origin={22,-40})));
-  Fluid.Actuators.Valves.ThreeWayLinear Valve_RLT_Cold_Canteen(
-    m_flow_nominal=1,
-    dpValve_nominal=10,
-    redeclare package Medium = Medium_Water) annotation (Placement(
-        transformation(
-        extent={{6,6},{-6,-6}},
-        rotation=0,
-        origin={50,-40})));
 equation
   connect(Air_in, Central.Air_in) annotation (Line(points={{-40,100},{-40,80},{
           -77.8,80},{-77.8,68.6}}, color={0,127,255}));
   connect(Central.Air_out, OpenPlanOffice.Air_in) annotation (Line(points={{-58,
           68.6},{-56,68.6},{-56,68.6},{-51.8,68.6}}, color={0,127,255}));
-  connect(ConferenceRoom.Air_in, OpenPlanOffice.Air_in) annotation (Line(points
-        ={{-23.8,68.6},{-28,68.6},{-28,74},{-56,74},{-56,68.6},{-51.8,68.6}},
+  connect(ConferenceRoom.Air_in, OpenPlanOffice.Air_in) annotation (Line(points=
+         {{-23.8,68.6},{-28,68.6},{-28,74},{-56,74},{-56,68.6},{-51.8,68.6}},
         color={0,127,255}));
   connect(MultiPersonOffice.Air_in, OpenPlanOffice.Air_in) annotation (Line(
         points={{4.2,68.6},{0,68.6},{0,74},{-56,74},{-56,68.6},{-51.8,68.6}},
@@ -134,8 +54,8 @@ equation
           68.6},{28,68.6},{28,74},{-56,74},{-56,68.6},{-51.8,68.6}}, color={0,
           127,255}));
   connect(Workshop.Air_in, OpenPlanOffice.Air_in) annotation (Line(points={{
-          60.2,68.6},{56,68.6},{56,74},{-56,74},{-56,68.6},{-51.8,68.6}}, color
-        ={0,127,255}));
+          60.2,68.6},{56,68.6},{56,74},{-56,74},{-56,68.6},{-51.8,68.6}}, color=
+         {0,127,255}));
   connect(OpenPlanOffice.Air_out, Air_out[1]) annotation (Line(points={{-32,
           68.6},{-32,80},{40,80},{40,92}}, color={0,127,255}));
   connect(ConferenceRoom.Air_out, Air_out[2]) annotation (Line(points={{-4,68.6},
@@ -146,28 +66,6 @@ equation
           80},{40,80},{40,104}}, color={0,127,255}));
   connect(Workshop.Air_out, Air_out[5]) annotation (Line(points={{80,68.6},{80,
           80},{40,80},{40,108}}, color={0,127,255}));
-  connect(Valve_RLT_Hot_Central.port_3, Central.Fluid_in_warm)
-    annotation (Line(points={{-72,26},{-72,52}}, color={0,127,255}));
-  connect(Fluid_in_hot, Valve_RLT_Hot_Central.port_2) annotation (Line(points={
-          {-100,80},{-88,80},{-88,20},{-78,20}}, color={0,127,255}));
-  connect(Valve_RLT_Hot_OpenPlanOffice.port_3, OpenPlanOffice.Fluid_in_warm)
-    annotation (Line(points={{-46,26},{-46,52}}, color={0,127,255}));
-  connect(Valve_RLT_Hot_ConferenceRoom.port_3, ConferenceRoom.Fluid_in_warm)
-    annotation (Line(points={{-18,26},{-18,52}}, color={0,127,255}));
-  connect(Valve_RLT_Hot_MultiPersonOffice.port_3, MultiPersonOffice.Fluid_in_warm)
-    annotation (Line(points={{10,26},{10,52}}, color={0,127,255}));
-  connect(Valve_RLT_Hot_Canteen.port_3, Canteen.Fluid_in_warm)
-    annotation (Line(points={{38,26},{38,52}}, color={0,127,255}));
-  connect(Valve_RLT_Hot_Canteen.port_1, Workshop.Fluid_in_warm)
-    annotation (Line(points={{44,20},{66,20},{66,52}}, color={0,127,255}));
-  connect(Valve_RLT_Hot_MultiPersonOffice.port_1, Valve_RLT_Hot_Canteen.port_2)
-    annotation (Line(points={{16,20},{32,20}}, color={0,127,255}));
-  connect(Valve_RLT_Hot_ConferenceRoom.port_1, Valve_RLT_Hot_MultiPersonOffice.port_2)
-    annotation (Line(points={{-12,20},{4,20}}, color={0,127,255}));
-  connect(Valve_RLT_Hot_OpenPlanOffice.port_1, Valve_RLT_Hot_ConferenceRoom.port_2)
-    annotation (Line(points={{-40,20},{-24,20}}, color={0,127,255}));
-  connect(Valve_RLT_Hot_Central.port_1, Valve_RLT_Hot_OpenPlanOffice.port_2)
-    annotation (Line(points={{-66,20},{-52,20}}, color={0,127,255}));
   connect(Central.Fluid_out_warm, Fluid_out_hot)
     annotation (Line(points={{-76,52},{-76,40},{-100,40}}, color={0,127,255}));
   connect(OpenPlanOffice.Fluid_out_warm, Fluid_out_hot)
@@ -180,30 +78,6 @@ equation
     annotation (Line(points={{34,52},{34,40},{-100,40}}, color={0,127,255}));
   connect(Workshop.Fluid_out_warm, Fluid_out_hot)
     annotation (Line(points={{62,52},{62,40},{-100,40}}, color={0,127,255}));
-  connect(Valve_RLT_Cold_MultiPersonOffice.port_1, Valve_RLT_Cold_Canteen.port_2)
-    annotation (Line(points={{28,-40},{44,-40}}, color={0,127,255}));
-  connect(Valve_RLT_Cold_ConferenceRoom.port_1,
-    Valve_RLT_Cold_MultiPersonOffice.port_2)
-    annotation (Line(points={{0,-40},{16,-40}}, color={0,127,255}));
-  connect(Valve_RLT_Cold_OpenPlanOffce.port_1, Valve_RLT_Cold_ConferenceRoom.port_2)
-    annotation (Line(points={{-28,-40},{-12,-40}}, color={0,127,255}));
-  connect(Valve_RLT_Cold_Central.port_1, Valve_RLT_Cold_OpenPlanOffce.port_2)
-    annotation (Line(points={{-54,-40},{-48,-40},{-48,-40},{-42,-40},{-42,-40},
-          {-40,-40}}, color={0,127,255}));
-  connect(Valve_RLT_Cold_Central.port_3, Central.Fluid_in_cold)
-    annotation (Line(points={{-60,-34},{-60,52}}, color={0,127,255}));
-  connect(Valve_RLT_Cold_OpenPlanOffce.port_3, OpenPlanOffice.Fluid_in_cold)
-    annotation (Line(points={{-34,-34},{-34,52}}, color={0,127,255}));
-  connect(Valve_RLT_Cold_ConferenceRoom.port_3, ConferenceRoom.Fluid_in_cold)
-    annotation (Line(points={{-6,-34},{-6,52}}, color={0,127,255}));
-  connect(Valve_RLT_Cold_MultiPersonOffice.port_3, MultiPersonOffice.Fluid_in_cold)
-    annotation (Line(points={{22,-34},{22,52}}, color={0,127,255}));
-  connect(Valve_RLT_Cold_Canteen.port_3, Canteen.Fluid_in_cold)
-    annotation (Line(points={{50,-34},{50,52}}, color={0,127,255}));
-  connect(Valve_RLT_Cold_Central.port_2, Fluid_in_cold)
-    annotation (Line(points={{-66,-40},{-100,-40}}, color={0,127,255}));
-  connect(Valve_RLT_Cold_Canteen.port_1, Workshop.Fluid_in_cold)
-    annotation (Line(points={{56,-40},{78,-40},{78,52}}, color={0,127,255}));
   connect(Central.Fluid_out_cold, Fluid_out_cold) annotation (Line(points={{-64,
           52},{-64,0},{-80,0},{-80,-80},{-100,-80}}, color={0,127,255}));
   connect(OpenPlanOffice.Fluid_out_cold, Fluid_out_cold) annotation (Line(
@@ -218,6 +92,43 @@ equation
           52},{46,0},{-80,0},{-80,-80},{-100,-80}}, color={0,127,255}));
   connect(Workshop.Fluid_out_cold, Fluid_out_cold) annotation (Line(points={{74,
           52},{74,0},{-80,0},{-80,-80},{-100,-80}}, color={0,127,255}));
+  connect(Workshop.X_w1, controlBus.X_Workshop) annotation (Line(points={{70,52},
+          {70,28},{86,28},{86,0.1},{102.1,0.1}}, color={0,0,127}));
+  connect(Canteen.X_w1, controlBus.X_Canteen) annotation (Line(points={{42,52},
+          {42,28},{86,28},{86,0.1},{102.1,0.1}}, color={0,0,127}));
+  connect(MultiPersonOffice.X_w1, controlBus.X_MultiPersonRoom) annotation (
+      Line(points={{14,52},{14,28},{86,28},{86,0.1},{102.1,0.1}}, color={0,0,
+          127}));
+  connect(ConferenceRoom.X_w1, controlBus.X_ConfernceRoom) annotation (Line(
+        points={{-14,52},{-14,28},{86,28},{86,0.1},{102.1,0.1}}, color={0,0,127}));
+  connect(OpenPlanOffice.X_w1, controlBus.X_OpenPlanOffice) annotation (Line(
+        points={{-42,52},{-42,28},{86,28},{86,0.1},{102.1,0.1}}, color={0,0,127}));
+  connect(Central.X_w1, controlBus.X_Central) annotation (Line(points={{-68,52},
+          {-68,28},{86,28},{86,0.1},{102.1,0.1}}, color={0,0,127}));
+  connect(Central.Fluid_in_cold, Fluid_in_cold) annotation (Line(points={{-60,
+          52},{-60,-40},{-100,-40}}, color={0,127,255}));
+  connect(OpenPlanOffice.Fluid_in_cold, Fluid_in_cold) annotation (Line(points=
+          {{-34,52},{-34,-40},{-100,-40}}, color={0,127,255}));
+  connect(ConferenceRoom.Fluid_in_cold, Fluid_in_cold)
+    annotation (Line(points={{-6,52},{-6,-40},{-100,-40}}, color={0,127,255}));
+  connect(MultiPersonOffice.Fluid_in_cold, Fluid_in_cold)
+    annotation (Line(points={{22,52},{22,-40},{-100,-40}}, color={0,127,255}));
+  connect(Canteen.Fluid_in_cold, Fluid_in_cold)
+    annotation (Line(points={{50,52},{50,-40},{-100,-40}}, color={0,127,255}));
+  connect(Workshop.Fluid_in_cold, Fluid_in_cold)
+    annotation (Line(points={{78,52},{78,-40},{-100,-40}}, color={0,127,255}));
+  connect(Fluid_in_hot, Central.Fluid_in_warm) annotation (Line(points={{-100,
+          80},{-86,80},{-86,20},{-72,20},{-72,52}}, color={0,127,255}));
+  connect(OpenPlanOffice.Fluid_in_warm, Central.Fluid_in_warm) annotation (Line(
+        points={{-46,52},{-46,20},{-72,20},{-72,52}}, color={0,127,255}));
+  connect(ConferenceRoom.Fluid_in_warm, Central.Fluid_in_warm) annotation (Line(
+        points={{-18,52},{-20,52},{-20,20},{-72,20},{-72,52}}, color={0,127,255}));
+  connect(MultiPersonOffice.Fluid_in_warm, Central.Fluid_in_warm) annotation (
+      Line(points={{10,52},{10,20},{-72,20},{-72,52}}, color={0,127,255}));
+  connect(Canteen.Fluid_in_warm, Central.Fluid_in_warm) annotation (Line(points
+        ={{38,52},{38,20},{-72,20},{-72,52}}, color={0,127,255}));
+  connect(Workshop.Fluid_in_warm, Central.Fluid_in_warm) annotation (Line(
+        points={{66,52},{66,20},{-72,20},{-72,52}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Full_Transfer_RLT;
