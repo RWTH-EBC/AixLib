@@ -55,6 +55,13 @@ model RLT
         extent={{20,-20},{-20,20}},
         rotation=90,
         origin={0,100})));
+  Fluid.Movers.SpeedControlled_y fan
+    annotation (Placement(transformation(extent={{-118,-6},{-98,14}})));
+  Fluid.FixedResistances.PlugFlowPipe plugFlowPipe(redeclare package Medium =
+        Medium_Water)
+    annotation (Placement(transformation(extent={{-118,36},{-98,56}})));
+  Fluid.Actuators.Valves.ThreeWayLinear val1
+    annotation (Placement(transformation(extent={{-118,-42},{-98,-22}})));
 equation
   connect(Ext_Warm.port_b2, Ext_Cold.port_a2)
     annotation (Line(points={{-52,-66},{8,-66}}, color={0,127,255}));
