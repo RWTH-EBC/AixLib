@@ -1,0 +1,5 @@
+convertClass("AixLib.Fluid.Solar.Electric.PVSystem", "AixLib.Electrical.PVSystem.PVSystem");
+convertClass("AixLib.Fluid.Solar.Electric.PVSystemTMY3", "AixLib.Electrical.PVSystem.PVSystemTMY3");
+convertClass("AixLib.Fluid.Solar.Electric.BaseClasses.PartialPVSystem", "AixLib.Electrical.PVSystem.BaseClasses.PartialPVSystem");
+convertClass("AixLib.Fluid.Solar.Electric.BaseClasses.PVInverterRMS", "AixLib.Electrical.PVSystem.BaseClasses.PVInverterRMS");
+convertClass("AixLib.Fluid.Solar.Electric.BaseClasses.PVModuleDC", "AixLib.Electrical.PVSystem.BaseClasses.PVModuleDC");

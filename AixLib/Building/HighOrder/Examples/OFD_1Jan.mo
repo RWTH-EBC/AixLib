@@ -3,8 +3,8 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
   import AixLib;
   extends Modelica.Icons.Example;
   parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();
-  parameter AixLib.DataBase.Profiles.Profile_BaseDataDefinition VentilationProfile = AixLib.DataBase.Profiles.Ventilation_2perDay_Mean05perH();
-  parameter AixLib.DataBase.Profiles.Profile_BaseDataDefinition TSetProfile = AixLib.DataBase.Profiles.SetTemperatures_Ventilation2perDay();
+  parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition VentilationProfile = AixLib.DataBase.Profiles.Ventilation2perDayMean05perH();
+  parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition TSetProfile = AixLib.DataBase.Profiles.SetTemperaturesVentilation2perDay();
   inner Modelica.Fluid.System system annotation(Placement(transformation(extent = {{181, 78.5}, {200.5, 99.5}})));
   Modelica.Blocks.Sources.CombiTimeTable NaturalVentilation(columns = {2, 3, 4, 5, 6}, extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableOnFile = false, table = VentilationProfile.Profile) annotation(Placement(transformation(extent={{-114,61},
             {-94,81}})));

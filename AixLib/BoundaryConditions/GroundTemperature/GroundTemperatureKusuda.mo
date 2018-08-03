@@ -2,7 +2,8 @@ within AixLib.BoundaryConditions.GroundTemperature;
 model GroundTemperatureKusuda "Model for undisturbed ground temperature"
 
   parameter Modelica.SIunits.Temperature T_mean "Average air temperature over the year";
-  parameter Modelica.SIunits.TemperatureDifference T_amp "Difference between max and min air temperature";
+  parameter Modelica.SIunits.TemperatureDifference T_amp
+    "Amplitude of surface temperature [(maximum air temperature - minimum air temperature)/2]";
   parameter Modelica.SIunits.Distance D "Depth of ground temperature";
   parameter Modelica.SIunits.ThermalDiffusivity alpha=0.04 "Thermal diffusivity of the ground. Declare in m2/day!";
   parameter Modelica.SIunits.Time t_shift "Time of the year with minimum air temperature. Declare in days!";
@@ -51,6 +52,10 @@ equation
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>
 <ul>
+<li>
+  April 30, 2018, by Marcus Fuchs:<br/>
+  Update documentation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/561\">issue 561</a>).
+  </li>
 <li><i>May 2017</i>, by Felix Buenning: Updated information window according to documentation standards</li>
 <li><i>October 2016</i>, by Felix Buenning: Developed and implemented</li>
 </ul>
@@ -86,7 +91,11 @@ does not support m2/day as a display unit.)</b></p>
 
 <p> The validation was done by comparing simulation results 
 (<a href=\"AixLib.BoundaryConditions.GroundTemperature.Examples.ExampleSanFran\">San Francisco example</a>) with the 
-findings of the first given reference below (Florides and Kalogirou,2005). </p> 
+findings of the first given reference below (Florides and Kalogirou,2005). </p>
+<p>The
+<a href=\"https://www.pik-potsdam.de/services/climate-weather-potsdam/climate-diagrams/ground-temperature\">Potsdam Institute for Climate Impact Research</a>
+provides measurement data for a German site, which can be used for comparison.</p>
+
 
 <h4>Implementation</h4> 
 <p>The model implements the equation given above and supplies the undisturbed ground temperature via
