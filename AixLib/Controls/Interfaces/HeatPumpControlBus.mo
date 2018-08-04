@@ -9,8 +9,6 @@ expandable connector HeatPumpControlBus
 
   Boolean mode "true: heat pump, false: chiller";
 
-
-
   Modelica.SIunits.ThermodynamicTemperature T_flow_ev "temperature of flow into evaporator";
 
   Modelica.SIunits.ThermodynamicTemperature T_flow_co "temperature of flow into condenser";
