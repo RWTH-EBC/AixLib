@@ -18,20 +18,16 @@ block SecurityControl "Block including all security levels"
   parameter Real maxRunPerHour "Maximal number of on/off cycles in one hour"
     annotation (Dialog(group="OnOffControl",enable=useRunPerHour));
 
-  final parameter Boolean useOpeEnv=true
+  parameter Boolean useOpeEnv=true
     "False to allow HP to run out of operational envelope"
     annotation (Dialog(group="Operational Envelope"));
-  final parameter Modelica.SIunits.Temp_K TEva_min "Minimum source inlet temperature"
-    annotation (Dialog(group="Operational Envelope", enable=useOpeEnv));
-  final parameter Modelica.SIunits.Temp_K TEva_max
-    "Maximum source inlet temperature"
-    annotation (Dialog(group="Operational Envelope", enable=useOpeEnv));
-  final parameter Modelica.SIunits.Temp_K TCon_min
-    "Minimum sink inlet temperature"
-    annotation (Dialog(group="Operational Envelope", enable=useOpeEnv));
-  parameter Modelica.SIunits.Temp_K TCon_max "Maximum sink inlet temperature"
-    annotation (Dialog(group="Operational Envelope", enable=useOpeEnv));
-  OperationalEnvelope operationalEnvelope(final useOpeEnv=useOpeEnv)
+  parameter Real tableLow[:,2] "Lower boundary of envelope"
+    annotation (Dialog(group="Operational Envelope"));
+  parameter Real tableUpp[:,2] "Upper boundary of envelope"
+    annotation (Dialog(group="Operational Envelope"));
+  OperationalEnvelope operationalEnvelope(final useOpeEnv=useOpeEnv,
+    final tableLow=tableLow,
+    final tableUpp=tableUpp)
     annotation (Placement(transformation(extent={{-18,-18},{20,18}})));
   OnOffControl onOffController(
     final minRunTime=minRunTime,

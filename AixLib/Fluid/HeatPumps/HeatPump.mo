@@ -1,39 +1,73 @@
 within AixLib.Fluid.HeatPumps;
 model HeatPump "Base model of realistic heat pump"
   extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
-    m1_flow_nominal = mEvaFlow_nominal,
-    m2_flow_nominal = mConFlow_nominal);
-  MixingVolumes.MixingVolume Condenser(nPorts=2) "Volume of Condenser"
+  redeclare package Medium1 = Medium_con,
+  redeclare package Medium2 = Medium_eva);
+  MixingVolumes.MixingVolume Condenser(nPorts=2, redeclare final package Medium =
+        Medium_con,
+    final allowFlowReversal=allowFlowReversal_con,
+    m_flow_nominal=mFlow_conNominal)             "Volume of Condenser"
     annotation (Placement(transformation(extent={{-8,104},{12,84}})));
-  MixingVolumes.MixingVolume Evaporator(nPorts=2) "Volume of Evaporator"
+  MixingVolumes.MixingVolume Evaporator(nPorts=2, redeclare final package
+      Medium = Medium_eva,
+    final allowFlowReversal=allowFlowReversal_eva,
+    final m_flow_nominal=mFlow_evaNominal)        "Volume of Evaporator"
     annotation (Placement(transformation(extent={{-6,-90},{14,-70}})));
-  Sensors.MassFlowRate mFlow_a1 "mass flow rate at source inlet"
+  Sensors.MassFlowRate mFlow_a1(redeclare final package Medium = Medium_con,
+      final allowFlowReversal=allowFlowReversal_con)
+                                "mass flow rate at source inlet"
     annotation (Placement(transformation(extent={{-74,84},{-54,64}})));
   Sensors.TemperatureTwoPort senT_b2(
     final transferHeat=true,
     final TAmb=sigBusHP.T_amb,
-    final tauHeaTra=1200)            "Temperature at sink outlet"
+    final tauHeaTra=1200,
+    redeclare final package Medium = Medium_eva,
+    final allowFlowReversal=allowFlowReversal_eva,
+    final m_flow_nominal=mFlow_evaNominal)
+                                     "Temperature at sink outlet"
     annotation (Placement(transformation(extent={{-20,-96},{-40,-76}})));
   Sensors.TemperatureTwoPort senT_b1(
     final transferHeat=true,
     final TAmb=sigBusHP.T_amb_in,
-    final tauHeaTra=1200)            "Temperature at source outlet"
+    final tauHeaTra=1200,
+    redeclare final package Medium = Medium_con,
+    final allowFlowReversal=allowFlowReversal_con,
+    final m_flow_nominal=mFlow_conNominal)
+                                     "Temperature at source outlet"
     annotation (Placement(transformation(extent={{24,92},{44,72}})));
   Sensors.TemperatureTwoPort senT_a2(
     final transferHeat=true,
     final TAmb=sigBusHP.T_amb,
-    final tauHeaTra=1200)            "Temperature at sink inlet"
+    final tauHeaTra=1200,
+    redeclare final package Medium = Medium_eva,
+    final allowFlowReversal=allowFlowReversal_eva,
+    final m_flow_nominal=mFlow_evaNominal)
+                                     "Temperature at sink inlet"
     annotation (Placement(transformation(extent={{38,-96},{18,-76}})));
   Sensors.TemperatureTwoPort senT_a1(
     final transferHeat=true,
     final TAmb=sigBusHP.T_amb_in,
-    final tauHeaTra=1200)            "Temperature at source inlet"
+    final tauHeaTra=1200,
+    redeclare final package Medium = Medium_con,
+    final allowFlowReversal=allowFlowReversal_con,
+    final m_flow_nominal=mFlow_conNominal)
+                                     "Temperature at source inlet"
     annotation (Placement(transformation(extent={{-46,92},{-26,72}})));
-  Sensors.MassFlowRate mFlow_a2 "mass flow rate at sink inlet"
+  Sensors.MassFlowRate mFlow_a2(redeclare package Medium = Medium_eva, final
+      allowFlowReversal=allowFlowReversal_eva)
+                                "mass flow rate at sink inlet"
     annotation (Placement(transformation(extent={{86,-70},{66,-50}})));
-  FixedResistances.PressureDrop preDro_2 "pressure drop at sink side"
+  FixedResistances.PressureDrop preDro_2(redeclare final package Medium =
+        Medium_eva,
+    final allowFlowReversal=allowFlowReversal_eva,
+    final m_flow_nominal=mFlow_evaNominal)
+                                         "pressure drop at sink side"
     annotation (Placement(transformation(extent={{-60,-70},{-80,-50}})));
-  FixedResistances.PressureDrop preDro_1 "pressure drop at sink side"
+  FixedResistances.PressureDrop preDro_1(redeclare final package Medium =
+        Medium_con,
+    final allowFlowReversal=allowFlowReversal_con,
+    final m_flow_nominal=mFlow_conNominal)
+                                         "pressure drop at sink side"
     annotation (Placement(transformation(extent={{64,50},{84,70}})));
   Modelica.Blocks.Interfaces.RealInput nSet
     "input signal speed for compressor relative between 0 and 1" annotation (Placement(
@@ -57,10 +91,18 @@ public
         origin={-10,68},
         extent={{6,-6},{-6,6}},
         rotation=270)));
-  constant Modelica.SIunits.MassFlowRate mEvaFlow_nominal
-    "Mass flow rate at evaporator";
-  constant Modelica.SIunits.MassFlowRate mConFlow_nominal
-    "Mass flow rate at condenser";
+  replaceable package Medium_con = Modelica.Media.Interfaces.PartialMedium "Medium at sink side"
+    annotation (__Dymola_choicesAllMatching=true);
+  replaceable package Medium_eva = Modelica.Media.Interfaces.PartialMedium "Medium at source side"
+    annotation (__Dymola_choicesAllMatching=true);
+  parameter Boolean allowFlowReversal_eva=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal";
+  parameter Boolean allowFlowReversal_con=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal";
+  parameter Modelica.SIunits.MassFlowRate mFlow_conNominal
+    "Nominal mass flow rate, used for regularization near zero flow";
+  parameter Modelica.SIunits.MassFlowRate mFlow_evaNominal
+    "Nominal mass flow rate";
 equation
   connect(port_a1, mFlow_a1.port_a) annotation (Line(points={{-100,60},{-100,74},
           {-74,74}},          color={0,127,255}));
@@ -83,13 +125,13 @@ equation
   connect(senT_b2.port_a, Evaporator.ports[2]) annotation (Line(points={{-20,-86},
           {-10,-86},{-10,-90},{6,-90}}, color={0,127,255}));
   connect(preDro_2.port_b, port_b2)
-    annotation (Line(points={{-80,-60},{-86,-60},{-86,-60},{-84,-60},{-84,-60},
-          {-100,-60}},                              color={0,127,255}));
+    annotation (Line(points={{-80,-60},{-86,-60},{-86,-60},{-84,-60},{-84,-60},{
+          -100,-60}},                               color={0,127,255}));
   connect(preDro_2.port_a, senT_b2.port_b) annotation (Line(points={{-60,-60},{
           -50,-60},{-50,-86},{-40,-86}}, color={0,127,255}));
   connect(mFlow_a1.m_flow, sigBusHP.m_flow_co) annotation (Line(points={{-64,63},
-          {-64,52},{-72,52},{-72,42},{-72,-30.915},{-94,-30.915},{-114.925,
-          -30.915}},                     color={0,0,127}), Text(
+          {-64,52},{-72,52},{-72,42},{-72,-30.915},{-94,-30.915},{-114.925,-30.915}},
+                                         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
@@ -147,9 +189,14 @@ equation
     annotation (Line(points={{-8,94},{-10,94},{-10,74}}, color={191,0,0}));
   connect(heatFlowRate_con.Q_flow, innerCycle.QCon) annotation (Line(points={{-10,62},
           {-10,41}},                      color={0,0,127}));
-  connect(innerCycle.COP, sigBusHP.CoP) annotation (Line(points={{23,8},{28,8},
-          {28,-44},{-72,-44},{-72,-30.915},{-114.925,-30.915}}, color={0,0,127}),
+  connect(innerCycle.COP, sigBusHP.CoP) annotation (Line(points={{23,8},{28,8},{
+          28,-44},{-72,-44},{-72,-30.915},{-114.925,-30.915}},  color={0,0,127}),
       Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(nSet, sigBusHP.N) annotation (Line(points={{-116,0},{-116,-30.915},{-114.925,
+          -30.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
