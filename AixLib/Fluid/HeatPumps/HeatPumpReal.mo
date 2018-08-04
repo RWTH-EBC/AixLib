@@ -12,7 +12,8 @@ model HeatPumpReal
     final V_con=V_con,
     final V_eva=V_eva,
     final dp_evaNominal=dp_evaNominal,
-    final dp_conNominal=dp_conNominal)
+    final dp_conNominal=dp_conNominal,
+    final perData=perData)
     annotation (Placement(transformation(extent={{84,-38},{160,38}})));
   BaseClasses.SecurityControls.SecurityControl securityControl(
     final useMinRunTim=useMinRunTim,
@@ -166,6 +167,10 @@ model HeatPumpReal
     "Set to false to avoid any power (=heat and flow work) being added to medium (may give simpler equations)"
     annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser",
       enable=useConPump));
+  replaceable parameter BaseClasses.PerformanceData.LookUpTable2D perData=
+      BaseClasses.PerformanceData.LookUpTable2D constrainedby
+    BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
+    "replaceable model for performance data of HP" annotation (choicesAllMatching=true);
 equation
   connect(heatPump.sigBusHP, securityControl.heatPumpControlBus) annotation (
       Line(

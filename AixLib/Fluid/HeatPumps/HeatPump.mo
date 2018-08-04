@@ -1,17 +1,20 @@
 within AixLib.Fluid.HeatPumps;
 model HeatPump "Base model of realistic heat pump"
   extends AixLib.Fluid.Interfaces.PartialFourPortInterface(
-  redeclare package Medium1 = Medium_con,
-  redeclare package Medium2 = Medium_eva);
+    redeclare final package Medium1 = Medium_con,
+    final m1_flow_nominal=mFlow_conNominal,
+    final m2_flow_nominal=mFlow_evaNominal);
   MixingVolumes.MixingVolume Condenser(nPorts=2, redeclare final package Medium =
         Medium_con,
     final allowFlowReversal=allowFlowReversal_con,
-    m_flow_nominal=mFlow_conNominal)             "Volume of Condenser"
+    final V=V_con,
+    final m_flow_nominal=mFlow_conNominal)       "Volume of Condenser"
     annotation (Placement(transformation(extent={{-8,104},{12,84}})));
   MixingVolumes.MixingVolume Evaporator(nPorts=2, redeclare final package
       Medium = Medium_eva,
     final allowFlowReversal=allowFlowReversal_eva,
-    final m_flow_nominal=mFlow_evaNominal)        "Volume of Evaporator"
+    final m_flow_nominal=mFlow_evaNominal,
+    final V=V_eva)                                "Volume of Evaporator"
     annotation (Placement(transformation(extent={{-6,-90},{14,-70}})));
   Sensors.MassFlowRate mFlow_a1(redeclare final package Medium = Medium_con,
       final allowFlowReversal=allowFlowReversal_con)
@@ -47,11 +50,10 @@ model HeatPump "Base model of realistic heat pump"
   Sensors.TemperatureTwoPort senT_a1(
     final transferHeat=true,
     final TAmb=sigBusHP.T_amb_in,
-    final tauHeaTra=1200,
     redeclare final package Medium = Medium_con,
     final allowFlowReversal=allowFlowReversal_con,
-    final m_flow_nominal=mFlow_conNominal)
-                                     "Temperature at source inlet"
+    final m_flow_nominal=mFlow_conNominal,
+    tauHeaTra=1200)                  "Temperature at source inlet"
     annotation (Placement(transformation(extent={{-46,92},{-26,72}})));
   Sensors.MassFlowRate mFlow_a2(redeclare package Medium = Medium_eva, final
       allowFlowReversal=allowFlowReversal_eva)
@@ -60,14 +62,14 @@ model HeatPump "Base model of realistic heat pump"
   FixedResistances.PressureDrop preDro_2(redeclare final package Medium =
         Medium_eva,
     final allowFlowReversal=allowFlowReversal_eva,
-    final m_flow_nominal=mFlow_evaNominal)
-                                         "pressure drop at sink side"
+    final m_flow_nominal=mFlow_evaNominal,
+    final dp_nominal=dp_evaNominal)      "pressure drop at sink side"
     annotation (Placement(transformation(extent={{-60,-70},{-80,-50}})));
   FixedResistances.PressureDrop preDro_1(redeclare final package Medium =
         Medium_con,
     final allowFlowReversal=allowFlowReversal_con,
-    final m_flow_nominal=mFlow_conNominal)
-                                         "pressure drop at sink side"
+    final m_flow_nominal=mFlow_conNominal,
+    final dp_nominal=dp_conNominal)      "pressure drop at sink side"
     annotation (Placement(transformation(extent={{64,50},{84,70}})));
   Modelica.Blocks.Interfaces.RealInput nSet
     "input signal speed for compressor relative between 0 and 1" annotation (Placement(
@@ -76,7 +78,8 @@ model HeatPump "Base model of realistic heat pump"
                            sigBusHP
     annotation (Placement(transformation(extent={{-130,-48},{-100,-14}}),
         iconTransformation(extent={{-118,-40},{-100,-14}})));
-  BaseClasses.innerCycle innerCycle annotation (Placement(transformation(
+  BaseClasses.innerCycle innerCycle(final perData=perData) annotation (
+      Placement(transformation(
         extent={{-30,-30},{30,30}},
         rotation=90,
         origin={-10,8})));
@@ -96,13 +99,30 @@ public
   replaceable package Medium_eva = Modelica.Media.Interfaces.PartialMedium "Medium at source side"
     annotation (__Dymola_choicesAllMatching=true);
   parameter Boolean allowFlowReversal_eva=true
-    "= false to simplify equations, assuming, but not enforcing, no flow reversal";
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal"
+    annotation (Dialog(group="Evaporator"));
   parameter Boolean allowFlowReversal_con=true
-    "= false to simplify equations, assuming, but not enforcing, no flow reversal";
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal"
+    annotation (Dialog(group="Condenser"));
   parameter Modelica.SIunits.MassFlowRate mFlow_conNominal
-    "Nominal mass flow rate, used for regularization near zero flow";
+    "Nominal mass flow rate, used for regularization near zero flow"
+    annotation (Dialog(group="Condenser"));
   parameter Modelica.SIunits.MassFlowRate mFlow_evaNominal
-    "Nominal mass flow rate";
+    "Nominal mass flow rate" annotation (Dialog(group="Evaporator"));
+  parameter Modelica.SIunits.Volume V_con "Volume in condenser"
+    annotation (Dialog(group="Condenser"));
+  parameter Modelica.SIunits.Volume V_eva "Volume in evaporator"
+    annotation (Dialog(group="Evaporator"));
+  parameter Modelica.SIunits.PressureDifference dp_evaNominal
+    "Pressure drop at nominal mass flow rate"
+    annotation (Dialog(group="Evaporator"));
+  parameter Modelica.SIunits.PressureDifference dp_conNominal
+    "Pressure drop at nominal mass flow rate"
+    annotation (Dialog(group="Condenser"));
+  replaceable parameter BaseClasses.PerformanceData.LookUpTableND     perData
+                                                constrainedby
+    BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
+    "replaceable model for performance data of HP" annotation (choicesAllMatching=true);
 equation
   connect(port_a1, mFlow_a1.port_a) annotation (Line(points={{-100,60},{-100,74},
           {-74,74}},          color={0,127,255}));
@@ -197,6 +217,12 @@ equation
       extent={{6,3},{6,3}}));
   connect(nSet, sigBusHP.N) annotation (Line(points={{-116,0},{-116,-30.915},{-114.925,
           -30.915}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(innerCycle.Pel, sigBusHP.Pel) annotation (Line(points={{23.15,26.15},
+          {28,26.15},{28,26},{28,26},{28,-44},{-72,-44},{-72,-32},{-72,-32},{
+          -72,-30.915},{-114.925,-30.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));

@@ -7,11 +7,12 @@ model innerCycle "Blackbox model of refrigerant cycle of a HP"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Interfaces.RealOutput QEva "Heat flow from evaporator"
     annotation (Placement(transformation(extent={{-100,-10},{-120,10}})));
-  PerformanceData.LookUpTable2D
-                lookUpTable2D
-    annotation (Placement(transformation(extent={{-27,-28},{27,28}},
-        rotation=-90,
-        origin={1,52})));
+  replaceable PerformanceData.BaseClasses.PartialPerformanceData perData constrainedby
+    PerformanceData.BaseClasses.PartialPerformanceData
+    "replaceable model for performance data of HP"
+    annotation (choicesAllMatching=true, Placement(transformation(extent={{-27,-28},
+            {27,28}}, rotation=-90,
+        origin={0,50})));
   Modelica.Blocks.Logical.Switch switchQEva
     "If mode is false, Condenser becomes Evaporator and vice versa"
     annotation (Placement(transformation(extent={{-64,-10},{-84,10}})));
@@ -27,6 +28,13 @@ model innerCycle "Blackbox model of refrigerant cycle of a HP"
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={0,-78})));
+  Modelica.Blocks.Interfaces.RealOutput Pel
+    "Electrical power consumed by compressor" annotation (Placement(
+        transformation(
+        extent={{-10.5,-10.5},{10.5,10.5}},
+        rotation=-90,
+        origin={60.5,-110.5})));
+
 equation
   connect(switchQEva.y, QEva)
     annotation (Line(points={{-85,0},{-110,0}}, color={0,0,127}));
@@ -42,31 +50,29 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(heatPumpControlBus,lookUpTable2D. heatPumpControlBus) annotation (
-      Line(
-      points={{1,103},{1,92.5},{1,80.89},{1,80.89}},
+  connect(heatPumpControlBus, perData.heatPumpControlBus) annotation (Line(
+      points={{1,103},{1,78.89},{5.77316e-015,78.89}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(lookUpTable2D.QEva, switchQEva.u1) annotation (Line(points={{23.4,
-          22.3},{24,22.3},{24,22},{24,22},{24,8},{-62,8}},
-                                             color={0,0,127}));
-  connect(lookUpTable2D.QCon, switchQCon.u1) annotation (Line(points={{-21.4,
-          22.3},{-22,22.3},{-22,22},{-22,22},{-22,8},{72,8}},
-                                              color={0,0,127}));
-  connect(lookUpTable2D.QEva, switchQCon.u3) annotation (Line(points={{23.4,
-          22.3},{24,22.3},{24,-8},{72,-8}},                 color={0,0,127}));
-  connect(lookUpTable2D.QCon, switchQEva.u3) annotation (Line(points={{-21.4,
-          22.3},{-22,22.3},{-22,-8},{-62,-8}},   color={0,0,127}));
-  connect(lookUpTable2D.Pel, divCOP.u2) annotation (Line(points={{1,22.3},{1,
-          -21.4},{-6,-21.4},{-6,-66}}, color={0,0,127}));
-  connect(lookUpTable2D.QCon, divCOP.u1) annotation (Line(points={{-21.4,22.3},
-          {-21.4,-22.4},{6,-22.4},{6,-66}},
-                                          color={0,0,127}));
+  connect(perData.QEva, switchQEva.u1) annotation (Line(points={{22.4,20.3},{24,
+          20.3},{24,8},{-62,8}},  color={0,0,127}));
+  connect(perData.QCon, switchQCon.u1) annotation (Line(points={{-22.4,20.3},{-22,
+          20.3},{-22,8},{72,8}},  color={0,0,127}));
+  connect(perData.QEva, switchQCon.u3) annotation (Line(points={{22.4,20.3},{24,
+          20.3},{24,-8},{72,-8}},  color={0,0,127}));
+  connect(perData.QCon, switchQEva.u3) annotation (Line(points={{-22.4,20.3},{-22,
+          20.3},{-22,-8},{-62,-8}},  color={0,0,127}));
+  connect(perData.Pel, divCOP.u2) annotation (Line(points={{-5.32907e-015,20.3},
+          {-5.32907e-015,-21.4},{-6,-21.4},{-6,-66}}, color={0,0,127}));
+  connect(perData.QCon, divCOP.u1) annotation (Line(points={{-22.4,20.3},{-22.4,
+          0},{-22,0},{-22,-22},{6,-22},{6,-66}}, color={0,0,127}));
   connect(divCOP.y, COP) annotation (Line(points={{-1.9984e-015,-89},{
           -1.9984e-015,-96.5},{0,-96.5},{0,-110}}, color={0,0,127}));
+  connect(perData.Pel, Pel) annotation (Line(points={{-5.55112e-015,20.3},{-5.55112e-015,
+          2},{0,2},{0,-16},{60.5,-16},{60.5,-110.5}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},
