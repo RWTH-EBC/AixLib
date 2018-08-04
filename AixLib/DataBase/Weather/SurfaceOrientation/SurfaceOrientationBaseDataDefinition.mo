@@ -1,4 +1,6 @@
 within AixLib.DataBase.Weather.SurfaceOrientation;
+
+
 record SurfaceOrientationBaseDataDefinition
   extends Modelica.Icons.Record;
   parameter Integer nSurfaces;

@@ -1,4 +1,4 @@
-within AixLib.Building.Components.Weather.BaseClasses;
+﻿within AixLib.Building.Components.Weather.BaseClasses;
 model Sun "Computes the sun's altitude of the current site"
 
 import Modelica.SIunits.Conversions.from_deg;

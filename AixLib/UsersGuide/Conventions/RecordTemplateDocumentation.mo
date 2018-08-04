@@ -1,4 +1,6 @@
 within AixLib.UsersGuide.Conventions;
+
+
 model RecordTemplateDocumentation
   "Template documentation for AixLib.DataBase records"
 

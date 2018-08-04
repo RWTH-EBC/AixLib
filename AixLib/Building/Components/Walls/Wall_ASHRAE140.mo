@@ -1,4 +1,4 @@
-within AixLib.Building.Components.Walls;
+﻿within AixLib.Building.Components.Walls;
 model Wall_ASHRAE140
   "Wall modell for ASHRAE 140 with absorbtion of solar radiation"
 

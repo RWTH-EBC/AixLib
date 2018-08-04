@@ -87,30 +87,30 @@ equation
     annotation (Line(points={{10,0},{60,0}}, color={0,127,255}));
   connect(specificEnthalpy.h_out, enthalpyDifference.u2) annotation (Line(
         points={{-49,10},{-46,10},{-46,24},{-38,24}},   color={0,0,127}));
-  connect(specificEnthalpyRef.h_out, enthalpyDifference.u1)
-  annotation (Line(points={{-33,-52},{-44,-52},{-44,-24},{-44,36},{-38,36}},
+  connect(specificEnthalpyRef.h_out, enthalpyDifference.u1) 
+  annotation (Line(points={{-33,-52},{-44,-52},{-44,-24},{-44,36},{-38,36}}, 
   color={0,0,127}));
-  connect(T_ref, productWithReferenceTemperature.u2)
+  connect(T_ref, productWithReferenceTemperature.u2) 
   annotation (Line(points={{90,-100},{90,-100},{90,-34},{20,-34},{20,34},
   {-8,34},{-8,44},{-2,44}}, color={0,0,127}));
-  connect(enthalpyDifference.y, specificExergy.u2)
+  connect(enthalpyDifference.y, specificExergy.u2) 
   annotation (Line(points={{-15,30},{32,30},{32,44},{38,44}},color={0,0,127}));
   connect(port_a, specificEnthalpy.port)
     annotation (Line(points={{-100,0},{-80,0},{-60,0}}, color={0,127,255}));
   connect(specificEntropy.port, port_b)
     annotation (Line(points={{60,0},{80,0},{100,0}}, color={0,127,255}));
-  connect(specificEntropy_ref.s, entropyDifference.u1)
+  connect(specificEntropy_ref.s, entropyDifference.u1) 
   annotation (Line(points={{39,-53},{39,-53},{44,-53},{44,-27},{-86,-27},
   {-86,62},{-38,62}},color={0,0,127}));
   connect(productWithReferenceTemperature.y, specificExergy.u1)
     annotation (Line(points={{21,50},{22,50},{24,50},{32,50},{32,56},{38,56}},
     color={0,0,127}));
-  connect(massFlowRate.m_flow, exergyFlowRate.u2)
-  annotation (Line(points={{0,-11},{0,-26},{74,-26},{74,86},{62,86}},
+  connect(massFlowRate.m_flow, exergyFlowRate.u2) 
+  annotation (Line(points={{0,-11},{0,-26},{74,-26},{74,86},{62,86}}, 
   color={0,0,127}));
   connect(exergyFlowRate.y, exergyFlow)
     annotation (Line(points={{39,80},{0,80},{0,110}}, color={0,0,127}));
-  connect(specificEntropy.s, entropyDifference.u2)
+  connect(specificEntropy.s, entropyDifference.u2) 
   annotation (Line(points={{49,10},{32,10},{32,-18},{-78,-18},{-78,50},
   {-38,50}}, color={0,0,127}));
   connect(entropyDifference.y, productWithReferenceTemperature.u1)
@@ -120,7 +120,7 @@ equation
   connect(X_ref, referenceEnvironment.X_in) annotation (Line(points={{-90,-100},
           {-90,-100},{-90,-78},{-90,-38},{-4,-38},{-4,-44}},
                                                   color={0,0,127}));
-  connect(p_ref, referenceEnvironment.p_in)
+  connect(p_ref, referenceEnvironment.p_in) 
   annotation (Line(points={{0,-100},{0,-70},{48,-70},{48,-36},{8,-36},{8,-40},
   {8,-44}},color={0,0,127}));
   connect(T_ref, referenceEnvironment.T_in) annotation (Line(points={{90,-100},

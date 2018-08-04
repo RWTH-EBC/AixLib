@@ -1,4 +1,6 @@
 within AixLib.Building.Components.Examples.WindowsDoors;
+
+
 model DoorSimple
   extends Modelica.Icons.Example;
   Components.WindowsDoors.Door doorSimple(eps = 1, door_area = 10, T0 = 293.15) annotation(Placement(transformation(extent = {{-24, -4}, {12, 28}})));
@@ -12,7 +14,7 @@ equation
   connect(doorSimple.port_b, Tinside.port) annotation(Line(points = {{10.2, 12}, {24, 12}, {24, 10}, {38, 10}}, color = {191, 0, 0}));
   connect(doorSimple.Star, Tinside1.port) annotation(Line(points = {{10.2, 21.6}, {20, 21.6}, {20, 42}, {38, 42}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
   connect(Toutside1.port, doorSimple.Star1) annotation(Line(points = {{-42, 36}, {-34, 36}, {-34, 21.6}, {-22.2, 21.6}}, color = {191, 0, 0}));
-  annotation (experiment(StopTime = 3600, Interval = 60, Algorithm = "Lsodar"),Documentation(info = "<html>
+  annotation( experiment(StopTime = 3600, Interval = 60, Algorithm = "Lsodar"),Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>Simulation to test the <a href=\"AixLib.Building.Components.WindowsDoors.Door\">Door</a> model.</p>
  <h4><font color=\"#008000\">Concept</font></h4>

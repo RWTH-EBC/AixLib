@@ -1,4 +1,6 @@
 within AixLib.Building.Components.Examples.Walls;
+
+
 model InsideWall
   extends Modelica.Icons.Example;
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature Tinside(T = 293.15) annotation(Placement(transformation(extent = {{92, 10}, {72, 30}})));
@@ -18,7 +20,7 @@ equation
   connect(Tinside3.port, thermStar_Demux.therm) annotation(Line(points = {{-74, 22}, {-60, 22}, {-60, -18}, {-92, -18}, {-92, -47.825}, {-72.08, -47.825}}, color = {191, 0, 0}));
   connect(Tinside1.port, thermStar_Demux1.star) annotation(Line(points = {{72, 60}, {56, 60}, {56, -22}, {88, -22}, {88, -41.65}, {70.28, -41.65}}, color = {191, 0, 0}));
   connect(Tinside.port, thermStar_Demux1.therm) annotation(Line(points = {{72, 20}, {60, 20}, {60, -18}, {94, -18}, {94, -50}, {82, -50}, {82, -49.825}, {70.07, -49.825}}, color = {191, 0, 0}));
-  annotation (experiment(StopTime = 90000, Interval = 60, __Dymola_Algorithm = "Lsodar"),Documentation(info = "<html>
+  annotation( experiment(StopTime = 90000, Interval = 60, __Dymola_Algorithm = "Lsodar"),Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>Simulation to test the <a href=\"AixLib.Building.Components.Walls.Wall\">Wall</a> model in case of an <b>inside wall</b> application.</p>
  <h4><font color=\"#008000\">Concept</font></h4>

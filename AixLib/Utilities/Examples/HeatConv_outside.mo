@@ -1,4 +1,6 @@
 within AixLib.Utilities.Examples;
+
+
 model HeatConv_outside
   extends Modelica.Icons.Example;
   HeatTransfer.HeatConv_outside heatTransfer_Outside(Model = 3, A = 16, alpha_custom = 25) annotation(Placement(transformation(extent = {{-24, -2}, {2, 24}})));
@@ -16,7 +18,7 @@ equation
   connect(Windspeed.y, heatTransfer_Outside.WindSpeedPort) annotation (Line(
       points={{-39,-16},{-36,-16},{-36,1.64},{-22.96,1.64}},
       color={0,0,127}));
-  annotation (Documentation(revisions = "<html>
+  annotation( Documentation(revisions = "<html>
  <ul>
    <li><i>April 11, 2013&nbsp;</i> by Ole Odendahl:<br/>Formatted documentation appropriately</li>
    <li><i>October 14, 2012&nbsp;</i>

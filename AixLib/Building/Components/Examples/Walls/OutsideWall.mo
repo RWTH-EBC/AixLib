@@ -1,4 +1,6 @@
 within AixLib.Building.Components.Examples.Walls;
+
+
 model OutsideWall
   extends Modelica.Icons.Example;
   Components.Walls.Wall wall_simple(wall_length = 5, wall_height = 2, withWindow = true, WindowType = DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009(), withSunblind = true,                                                          outside = true,
@@ -38,7 +40,7 @@ equation
   connect(wall_simple.WindSpeedPort, WindSpeed.y) annotation (Line(
       points={{-23.7,66.8},{-6,66.8},{-6,56},{11.1,56}},
       color={0,0,127}));
-  annotation (experiment(StopTime = 36000, Interval = 60, Algorithm = "Lsodar"),Documentation(info = "<html>
+  annotation( experiment(StopTime = 36000, Interval = 60, Algorithm = "Lsodar"),Documentation(info = "<html>
  <h4><font color=\"#008000\">Overview</font></h4>
  <p>Simulation to test the <a href=\"AixLib.Building.Components.Walls.Wall\">Wall</a> model in case of an outside wall application.</p>
  <h4><font color=\"#008000\">Concept</font></h4>

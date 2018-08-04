@@ -1,4 +1,4 @@
-within AixLib.Electrical.PVSystem;
+﻿within AixLib.Electrical.PVSystem;
 package BaseClasses
         extends Modelica.Icons.BasesPackage;
 

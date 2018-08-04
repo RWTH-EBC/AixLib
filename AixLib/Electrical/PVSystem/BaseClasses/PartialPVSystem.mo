@@ -1,4 +1,4 @@
-within AixLib.Electrical.PVSystem.BaseClasses;
+﻿within AixLib.Electrical.PVSystem.BaseClasses;
 partial model PartialPVSystem "Partial model for PV System"
 
   parameter Integer NumberOfPanels = 1

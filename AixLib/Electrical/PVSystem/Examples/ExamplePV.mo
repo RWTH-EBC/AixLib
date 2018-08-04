@@ -1,4 +1,4 @@
-within AixLib.Electrical.PVSystem.Examples;
+﻿within AixLib.Electrical.PVSystem.Examples;
 model ExamplePV
   extends Modelica.Icons.Example;
 
