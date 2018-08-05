@@ -4,18 +4,20 @@ block SecurityControl "Block including all security levels"
   Modelica.Blocks.Sources.BooleanConstant conTru(final k=true)
     "Always true as the two blocks OperationalEnvelope and OnOffControl deal with whether the nSet value is correct or not"
     annotation (Placement(transformation(extent={{58,-6},{70,6}})));
-  parameter Boolean useMinRunTim=true "Whether to regard minimal runtime of HP"
+  parameter Boolean useMinRunTime=true
+    "False if minimal runtime of HP is not considered"
     annotation (Dialog(group="OnOffControl"));
   parameter Modelica.SIunits.Time minRunTime "Mimimum runtime of heat pump"
     annotation (Dialog(group="OnOffControl",enable=useMinRunTim));
-  parameter Boolean useMinLocTim=true "Whether to regard minimal Lock-Time of HP or not"
+  parameter Boolean useMinLocTime=true
+    "False if minimal locktime of HP is not considered"
     annotation (Dialog(group="OnOffControl"));
   parameter Modelica.SIunits.Time minLocTime "Minimum lock time of heat pump"
     annotation (Dialog(group="OnOffControl",enable=useMinLocTim));
-  parameter Boolean useRunPerHour=true
-    "Whether to regard a maximal amount of runs per hour or not"
+  parameter Boolean useRunPerHou=true
+    "False if maximal runs per hour HP are not considered"
     annotation (Dialog(group="OnOffControl"));
-  parameter Real maxRunPerHour "Maximal number of on/off cycles in one hour"
+  parameter Real maxRunPerHou "Maximal number of on/off cycles in one hour"
     annotation (Dialog(group="OnOffControl",enable=useRunPerHour));
 
   parameter Boolean useOpeEnv=true
@@ -31,11 +33,11 @@ block SecurityControl "Block including all security levels"
     annotation (Placement(transformation(extent={{-18,-18},{20,18}})));
   OnOffControl onOffController(
     final minRunTime=minRunTime,
-    final useMinLocTim=useMinLocTim,
+    final useMinLocTim=useMinLocTime,
     final minLocTime=minLocTime,
-    final maxRunPerHour=maxRunPerHour,
-    final useRunPerHour=useRunPerHour,
-    final useMinRunTim=useMinRunTim)
+    final maxRunPerHour=maxRunPerHou,
+    final useRunPerHour=useRunPerHou,
+    final useMinRunTim=useMinRunTime)
     annotation (Placement(transformation(extent={{-86,-18},{-50,18}})));
 
 equation

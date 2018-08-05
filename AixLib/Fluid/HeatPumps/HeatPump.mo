@@ -4,72 +4,70 @@ model HeatPump "Base model of realistic heat pump"
     redeclare final package Medium1 = Medium_con,
     final m1_flow_nominal=mFlow_conNominal,
     final m2_flow_nominal=mFlow_evaNominal);
-  MixingVolumes.MixingVolume Condenser(nPorts=2, redeclare final package Medium =
-        Medium_con,
-    final allowFlowReversal=allowFlowReversal_con,
-    final V=V_con,
-    final m_flow_nominal=mFlow_conNominal)       "Volume of Condenser"
+  MixingVolumes.MixingVolume Condenser(
+    nPorts=2,
+    redeclare final package Medium = Medium_con,
+    final allowFlowReversal=allowFlowReversalCon,
+    final V=VCon,
+    final m_flow_nominal=mFlow_conNominal) "Volume of Condenser"
     annotation (Placement(transformation(extent={{-8,104},{12,84}})));
-  MixingVolumes.MixingVolume Evaporator(nPorts=2, redeclare final package
-      Medium = Medium_eva,
-    final allowFlowReversal=allowFlowReversal_eva,
+  MixingVolumes.MixingVolume Evaporator(
+    nPorts=2,
+    redeclare final package Medium = Medium_eva,
+    final allowFlowReversal=allowFlowReversalEva,
     final m_flow_nominal=mFlow_evaNominal,
-    final V=V_eva)                                "Volume of Evaporator"
+    final V=VEva) "Volume of Evaporator"
     annotation (Placement(transformation(extent={{-6,-90},{14,-70}})));
   Sensors.MassFlowRate mFlow_a1(redeclare final package Medium = Medium_con,
-      final allowFlowReversal=allowFlowReversal_con)
-                                "mass flow rate at source inlet"
+      final allowFlowReversal=allowFlowReversalCon)
+    "mass flow rate at source inlet"
     annotation (Placement(transformation(extent={{-74,84},{-54,64}})));
   Sensors.TemperatureTwoPort senT_b2(
     final transferHeat=true,
     final TAmb=sigBusHP.T_amb,
     final tauHeaTra=1200,
     redeclare final package Medium = Medium_eva,
-    final allowFlowReversal=allowFlowReversal_eva,
-    final m_flow_nominal=mFlow_evaNominal)
-                                     "Temperature at sink outlet"
+    final allowFlowReversal=allowFlowReversalEva,
+    final m_flow_nominal=mFlow_evaNominal) "Temperature at sink outlet"
     annotation (Placement(transformation(extent={{-20,-96},{-40,-76}})));
   Sensors.TemperatureTwoPort senT_b1(
     final transferHeat=true,
     final TAmb=sigBusHP.T_amb_in,
     final tauHeaTra=1200,
     redeclare final package Medium = Medium_con,
-    final allowFlowReversal=allowFlowReversal_con,
-    final m_flow_nominal=mFlow_conNominal)
-                                     "Temperature at source outlet"
+    final allowFlowReversal=allowFlowReversalCon,
+    final m_flow_nominal=mFlow_conNominal) "Temperature at source outlet"
     annotation (Placement(transformation(extent={{24,92},{44,72}})));
   Sensors.TemperatureTwoPort senT_a2(
     final transferHeat=true,
     final TAmb=sigBusHP.T_amb,
     final tauHeaTra=1200,
     redeclare final package Medium = Medium_eva,
-    final allowFlowReversal=allowFlowReversal_eva,
-    final m_flow_nominal=mFlow_evaNominal)
-                                     "Temperature at sink inlet"
+    final allowFlowReversal=allowFlowReversalEva,
+    final m_flow_nominal=mFlow_evaNominal) "Temperature at sink inlet"
     annotation (Placement(transformation(extent={{38,-96},{18,-76}})));
   Sensors.TemperatureTwoPort senT_a1(
     final transferHeat=true,
     final TAmb=sigBusHP.T_amb_in,
     redeclare final package Medium = Medium_con,
-    final allowFlowReversal=allowFlowReversal_con,
+    final allowFlowReversal=allowFlowReversalCon,
     final m_flow_nominal=mFlow_conNominal,
-    tauHeaTra=1200)                  "Temperature at source inlet"
+    tauHeaTra=1200) "Temperature at source inlet"
     annotation (Placement(transformation(extent={{-46,92},{-26,72}})));
   Sensors.MassFlowRate mFlow_a2(redeclare package Medium = Medium_eva, final
-      allowFlowReversal=allowFlowReversal_eva)
-                                "mass flow rate at sink inlet"
+      allowFlowReversal=allowFlowReversalEva) "mass flow rate at sink inlet"
     annotation (Placement(transformation(extent={{86,-70},{66,-50}})));
-  FixedResistances.PressureDrop preDro_2(redeclare final package Medium =
-        Medium_eva,
-    final allowFlowReversal=allowFlowReversal_eva,
+  FixedResistances.PressureDrop preDro_2(
+    redeclare final package Medium = Medium_eva,
+    final allowFlowReversal=allowFlowReversalEva,
     final m_flow_nominal=mFlow_evaNominal,
-    final dp_nominal=dp_evaNominal)      "pressure drop at sink side"
+    final dp_nominal=dpEva_nominal) "pressure drop at sink side"
     annotation (Placement(transformation(extent={{-60,-70},{-80,-50}})));
-  FixedResistances.PressureDrop preDro_1(redeclare final package Medium =
-        Medium_con,
-    final allowFlowReversal=allowFlowReversal_con,
+  FixedResistances.PressureDrop preDro_1(
+    redeclare final package Medium = Medium_con,
+    final allowFlowReversal=allowFlowReversalCon,
     final m_flow_nominal=mFlow_conNominal,
-    final dp_nominal=dp_conNominal)      "pressure drop at sink side"
+    final dp_nominal=dpCon_nominal) "pressure drop at sink side"
     annotation (Placement(transformation(extent={{64,50},{84,70}})));
   Modelica.Blocks.Interfaces.RealInput nSet
     "input signal speed for compressor relative between 0 and 1" annotation (Placement(
@@ -83,25 +81,24 @@ model HeatPump "Base model of realistic heat pump"
         extent={{-30,-30},{30,30}},
         rotation=90,
         origin={-10,8})));
-public
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heatFlowRate_eva
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heatFlowRateEva
     "Heat flow rate of the evaporator" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
-        origin={-16,-58})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heatFlowRate_con
+        origin={2,-48})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heatFlowRateCon
     "Heat flow rate of the condenser" annotation (Placement(transformation(
-        origin={-10,68},
         extent={{6,-6},{-6,6}},
-        rotation=270)));
+        rotation=270,
+        origin={-16,66})));
   replaceable package Medium_con = Modelica.Media.Interfaces.PartialMedium "Medium at sink side"
     annotation (__Dymola_choicesAllMatching=true);
   replaceable package Medium_eva = Modelica.Media.Interfaces.PartialMedium "Medium at source side"
     annotation (__Dymola_choicesAllMatching=true);
-  parameter Boolean allowFlowReversal_eva=true
+  parameter Boolean allowFlowReversalEva=true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal"
     annotation (Dialog(group="Evaporator"));
-  parameter Boolean allowFlowReversal_con=true
+  parameter Boolean allowFlowReversalCon=true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal"
     annotation (Dialog(group="Condenser"));
   parameter Modelica.SIunits.MassFlowRate mFlow_conNominal
@@ -109,20 +106,28 @@ public
     annotation (Dialog(group="Condenser"));
   parameter Modelica.SIunits.MassFlowRate mFlow_evaNominal
     "Nominal mass flow rate" annotation (Dialog(group="Evaporator"));
-  parameter Modelica.SIunits.Volume V_con "Volume in condenser"
+  parameter Modelica.SIunits.Volume VCon "Volume in condenser"
     annotation (Dialog(group="Condenser"));
-  parameter Modelica.SIunits.Volume V_eva "Volume in evaporator"
+  parameter Modelica.SIunits.Volume VEva "Volume in evaporator"
     annotation (Dialog(group="Evaporator"));
-  parameter Modelica.SIunits.PressureDifference dp_evaNominal
+  parameter Modelica.SIunits.PressureDifference dpEva_nominal
     "Pressure drop at nominal mass flow rate"
     annotation (Dialog(group="Evaporator"));
-  parameter Modelica.SIunits.PressureDifference dp_conNominal
+  parameter Modelica.SIunits.PressureDifference dpCon_nominal
     "Pressure drop at nominal mass flow rate"
     annotation (Dialog(group="Condenser"));
-  replaceable parameter BaseClasses.PerformanceData.LookUpTableND     perData
-                                                constrainedby
-    BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
+  replaceable parameter BaseClasses.PerformanceData.LookUpTableND perData
     "replaceable model for performance data of HP" annotation (choicesAllMatching=true);
+  Modelica.Blocks.Continuous.FirstOrder firstOrder(
+    y_start=0,
+    initType=Modelica.Blocks.Types.Init.NoInit,
+    final k=1,
+    T=comIneTime_constant) if useComIne
+    "As all changes in a compressor have certain inertia, no nSet is directly obtained. This first order block represents the inertia of the compressor."
+    annotation (Placement(transformation(extent={{-92,-6},{-80,6}})));
+  constant Modelica.SIunits.Time comIneTime_constant
+    "Time constant representing inertia of compressor";
+  parameter Boolean useComIne "Consider the inertia of the compressor";
 equation
   connect(port_a1, mFlow_a1.port_a) annotation (Line(points={{-100,60},{-100,74},
           {-74,74}},          color={0,127,255}));
@@ -199,24 +204,17 @@ equation
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(heatFlowRate_eva.port, Evaporator.heatPort) annotation (Line(points={{
-          -16,-68},{-16,-68},{-16,-70},{-16,-70},{-16,-80},{-6,-80}}, color={191,
-          0,0}));
-  connect(innerCycle.QEva, heatFlowRate_eva.Q_flow)
-    annotation (Line(points={{-10,-25},{-10,-26},{-10,-26},{-10,-28},{-10,-38},
-          {-16,-38},{-16,-48}},                             color={0,0,127}));
-  connect(Condenser.heatPort, heatFlowRate_con.port)
-    annotation (Line(points={{-8,94},{-10,94},{-10,74}}, color={191,0,0}));
-  connect(heatFlowRate_con.Q_flow, innerCycle.QCon) annotation (Line(points={{-10,62},
-          {-10,41}},                      color={0,0,127}));
+  connect(heatFlowRateEva.port, Evaporator.heatPort) annotation (Line(points={{2,
+          -58},{2,-70},{-16,-70},{-16,-80},{-6,-80}}, color={191,0,0}));
+  connect(innerCycle.QEva, heatFlowRateEva.Q_flow)
+    annotation (Line(points={{-10,-25},{-10,-38},{2,-38}}, color={0,0,127}));
+  connect(Condenser.heatPort, heatFlowRateCon.port)
+    annotation (Line(points={{-8,94},{-8,72},{-16,72}}, color={191,0,0}));
+  connect(heatFlowRateCon.Q_flow, innerCycle.QCon) annotation (Line(points={{-16,
+          60},{-16,54},{-10,54},{-10,41}}, color={0,0,127}));
   connect(innerCycle.COP, sigBusHP.CoP) annotation (Line(points={{23,8},{28,8},{
           28,-44},{-72,-44},{-72,-30.915},{-114.925,-30.915}},  color={0,0,127}),
       Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}}));
-  connect(nSet, sigBusHP.N) annotation (Line(points={{-116,0},{-116,-30.915},{-114.925,
-          -30.915}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
@@ -226,6 +224,23 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
+  if useComIne then
+    connect(nSet, firstOrder.u)
+                               annotation (Line(points={{-116,0},{-93.2,0}}, color={0,0,127}));
+    connect(firstOrder.y, sigBusHP.N) annotation (Line(points={{-79.4,0},{-72,0},{
+          -72,-30.915},{-114.925,-30.915}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  else
+    connect(nSet, sigBusHP.N) annotation (Line(
+      points={{-116,0},{-116,0},{-96,0},{-96,0},{-96,-30.915},{-114.925,-30.915}},
+      color={0,0,127},
+      pattern=LinePattern.Dash), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  end if;
   annotation (Icon(coordinateSystem(extent={{-100,-100},{100,100}}), graphics={
         Rectangle(
           extent={{-16,83},{16,-83}},

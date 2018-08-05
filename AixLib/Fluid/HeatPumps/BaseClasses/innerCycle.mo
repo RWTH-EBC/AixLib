@@ -7,7 +7,7 @@ model innerCycle "Blackbox model of refrigerant cycle of a HP"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Interfaces.RealOutput QEva "Heat flow from evaporator"
     annotation (Placement(transformation(extent={{-100,-10},{-120,10}})));
-  replaceable PerformanceData.BaseClasses.PartialPerformanceData perData constrainedby
+  replaceable PerformanceData.BaseClasses.PartialPerformanceData performanceData constrainedby
     PerformanceData.BaseClasses.PartialPerformanceData
     "replaceable model for performance data of HP"
     annotation (choicesAllMatching=true, Placement(transformation(extent={{-27,-28},
