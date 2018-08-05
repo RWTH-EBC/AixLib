@@ -15,7 +15,7 @@ model innerCycle "Blackbox model of refrigerant cycle of a HP"
         origin={0,50})));
   Modelica.Blocks.Logical.Switch switchQEva
     "If mode is false, Condenser becomes Evaporator and vice versa"
-    annotation (Placement(transformation(extent={{-64,-10},{-84,10}})));
+    annotation (Placement(transformation(extent={{-54,-10},{-74,10}})));
   Modelica.Blocks.Logical.Switch switchQCon
     "If mode is false, Condenser becomes Evaporator and vice versa"
     annotation (Placement(transformation(extent={{74,-10},{94,10}})));
@@ -35,13 +35,13 @@ model innerCycle "Blackbox model of refrigerant cycle of a HP"
         rotation=-90,
         origin={60.5,-110.5})));
 
+  IcingBlock icingBlock
+    annotation (Placement(transformation(extent={{-82,-6},{-94,6}})));
 equation
-  connect(switchQEva.y, QEva)
-    annotation (Line(points={{-85,0},{-110,0}}, color={0,0,127}));
   connect(switchQCon.y, QCon)
     annotation (Line(points={{95,0},{110,0}}, color={0,0,127}));
-  connect(switchQEva.u2, heatPumpControlBus.mode) annotation (Line(points={{-62,
-          0},{-36,0},{-36,103.075},{1.085,103.075}}, color={255,0,255}), Text(
+  connect(switchQEva.u2, heatPumpControlBus.mode) annotation (Line(points={{-52,0},
+          {-36,0},{-36,103.075},{1.085,103.075}},    color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
@@ -58,13 +58,14 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(perData.QEva, switchQEva.u1) annotation (Line(points={{22.4,20.3},{24,
-          20.3},{24,8},{-62,8}},  color={0,0,127}));
+          20.3},{24,8},{-52,8}},  color={0,0,127}));
   connect(perData.QCon, switchQCon.u1) annotation (Line(points={{-22.4,20.3},{-22,
           20.3},{-22,8},{72,8}},  color={0,0,127}));
   connect(perData.QEva, switchQCon.u3) annotation (Line(points={{22.4,20.3},{24,
           20.3},{24,-8},{72,-8}},  color={0,0,127}));
-  connect(perData.QCon, switchQEva.u3) annotation (Line(points={{-22.4,20.3},{-22,
-          20.3},{-22,-8},{-62,-8}},  color={0,0,127}));
+  connect(perData.QCon, switchQEva.u3) annotation (Line(points={{-22.4,20.3},{
+          -22,20.3},{-22,-8},{-52,-8}},
+                                     color={0,0,127}));
   connect(perData.Pel, divCOP.u2) annotation (Line(points={{-5.32907e-015,20.3},
           {-5.32907e-015,-21.4},{-6,-21.4},{-6,-66}}, color={0,0,127}));
   connect(perData.QCon, divCOP.u1) annotation (Line(points={{-22.4,20.3},{-22.4,
@@ -73,6 +74,10 @@ equation
           -1.9984e-015,-96.5},{0,-96.5},{0,-110}}, color={0,0,127}));
   connect(perData.Pel, Pel) annotation (Line(points={{-5.55112e-015,20.3},{-5.55112e-015,
           2},{0,2},{0,-16},{60.5,-16},{60.5,-110.5}}, color={0,0,127}));
+  connect(QEva, icingBlock.y)
+    annotation (Line(points={{-110,0},{-94.6,0}}, color={0,0,127}));
+  connect(switchQEva.y, icingBlock.u)
+    annotation (Line(points={{-75,0},{-80.8,0}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},

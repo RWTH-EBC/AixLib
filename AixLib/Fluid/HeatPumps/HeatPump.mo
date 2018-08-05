@@ -10,18 +10,18 @@ model HeatPump "Base model of realistic heat pump"
     final allowFlowReversal=allowFlowReversalCon,
     final V=VCon,
     final m_flow_nominal=mFlow_conNominal) "Volume of Condenser"
-    annotation (Placement(transformation(extent={{-8,104},{12,84}})));
+    annotation (Placement(transformation(extent={{-6,86},{14,66}})));
   MixingVolumes.MixingVolume Evaporator(
     nPorts=2,
     redeclare final package Medium = Medium_eva,
     final allowFlowReversal=allowFlowReversalEva,
     final m_flow_nominal=mFlow_evaNominal,
     final V=VEva) "Volume of Evaporator"
-    annotation (Placement(transformation(extent={{-6,-90},{14,-70}})));
+    annotation (Placement(transformation(extent={{-8,-84},{12,-64}})));
   Sensors.MassFlowRate mFlow_a1(redeclare final package Medium = Medium_con,
       final allowFlowReversal=allowFlowReversalCon)
     "mass flow rate at source inlet"
-    annotation (Placement(transformation(extent={{-74,84},{-54,64}})));
+    annotation (Placement(transformation(extent={{-72,90},{-52,70}})));
   Sensors.TemperatureTwoPort senT_b2(
     final transferHeat=true,
     final TAmb=sigBusHP.T_amb,
@@ -29,7 +29,7 @@ model HeatPump "Base model of realistic heat pump"
     redeclare final package Medium = Medium_eva,
     final allowFlowReversal=allowFlowReversalEva,
     final m_flow_nominal=mFlow_evaNominal) "Temperature at sink outlet"
-    annotation (Placement(transformation(extent={{-20,-96},{-40,-76}})));
+    annotation (Placement(transformation(extent={{-26,-92},{-46,-72}})));
   Sensors.TemperatureTwoPort senT_b1(
     final transferHeat=true,
     final TAmb=sigBusHP.T_amb_in,
@@ -37,7 +37,7 @@ model HeatPump "Base model of realistic heat pump"
     redeclare final package Medium = Medium_con,
     final allowFlowReversal=allowFlowReversalCon,
     final m_flow_nominal=mFlow_conNominal) "Temperature at source outlet"
-    annotation (Placement(transformation(extent={{24,92},{44,72}})));
+    annotation (Placement(transformation(extent={{26,90},{46,70}})));
   Sensors.TemperatureTwoPort senT_a2(
     final transferHeat=true,
     final TAmb=sigBusHP.T_amb,
@@ -45,7 +45,7 @@ model HeatPump "Base model of realistic heat pump"
     redeclare final package Medium = Medium_eva,
     final allowFlowReversal=allowFlowReversalEva,
     final m_flow_nominal=mFlow_evaNominal) "Temperature at sink inlet"
-    annotation (Placement(transformation(extent={{38,-96},{18,-76}})));
+    annotation (Placement(transformation(extent={{32,-92},{12,-72}})));
   Sensors.TemperatureTwoPort senT_a1(
     final transferHeat=true,
     final TAmb=sigBusHP.T_amb_in,
@@ -53,22 +53,22 @@ model HeatPump "Base model of realistic heat pump"
     final allowFlowReversal=allowFlowReversalCon,
     final m_flow_nominal=mFlow_conNominal,
     tauHeaTra=1200) "Temperature at source inlet"
-    annotation (Placement(transformation(extent={{-46,92},{-26,72}})));
+    annotation (Placement(transformation(extent={{-44,90},{-24,70}})));
   Sensors.MassFlowRate mFlow_a2(redeclare package Medium = Medium_eva, final
       allowFlowReversal=allowFlowReversalEva) "mass flow rate at sink inlet"
-    annotation (Placement(transformation(extent={{86,-70},{66,-50}})));
+    annotation (Placement(transformation(extent={{76,-84},{56,-64}})));
   FixedResistances.PressureDrop preDro_2(
     redeclare final package Medium = Medium_eva,
     final allowFlowReversal=allowFlowReversalEva,
     final m_flow_nominal=mFlow_evaNominal,
     final dp_nominal=dpEva_nominal) "pressure drop at sink side"
-    annotation (Placement(transformation(extent={{-60,-70},{-80,-50}})));
+    annotation (Placement(transformation(extent={{-60,-84},{-80,-64}})));
   FixedResistances.PressureDrop preDro_1(
     redeclare final package Medium = Medium_con,
     final allowFlowReversal=allowFlowReversalCon,
     final m_flow_nominal=mFlow_conNominal,
     final dp_nominal=dpCon_nominal) "pressure drop at sink side"
-    annotation (Placement(transformation(extent={{64,50},{84,70}})));
+    annotation (Placement(transformation(extent={{66,70},{86,90}})));
   Modelica.Blocks.Interfaces.RealInput nSet
     "input signal speed for compressor relative between 0 and 1" annotation (Placement(
         transformation(extent={{-132,-16},{-100,16}})));
@@ -85,12 +85,12 @@ model HeatPump "Base model of realistic heat pump"
     "Heat flow rate of the evaporator" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
-        origin={2,-48})));
+        origin={-10,-46})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heatFlowRateCon
     "Heat flow rate of the condenser" annotation (Placement(transformation(
         extent={{6,-6},{-6,6}},
         rotation=270,
-        origin={-16,66})));
+        origin={-16,54})));
   replaceable package Medium_con = Modelica.Media.Interfaces.PartialMedium "Medium at sink side"
     annotation (__Dymola_choicesAllMatching=true);
   replaceable package Medium_eva = Modelica.Media.Interfaces.PartialMedium "Medium at source side"
@@ -128,70 +128,104 @@ model HeatPump "Base model of realistic heat pump"
   constant Modelica.SIunits.Time comIneTime_constant
     "Time constant representing inertia of compressor";
   parameter Boolean useComIne "Consider the inertia of the compressor";
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapCon(final C=
+        CCon) "heat Capacity of Condenser"
+    annotation (Placement(transformation(extent={{-50,114},{-32,132}})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor thermalConductorCon(
+      final G=GCon) "Heat losses through thermal conductivness of condenser"
+    annotation (Placement(transformation(extent={{-78,104},{-58,124}})));
+  Modelica.Thermal.HeatTransfer.Components.Convection convectionCon
+    "Convection between fluid and solid"
+    annotation (Placement(transformation(extent={{-24,106},{-8,122}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempCon
+    "Foreces heat losses according to ambient temperature"
+    annotation (Placement(transformation(extent={{-100,106},{-84,122}})));
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapEva(final C=
+        CEva) "heat Capacity of Evaporator"
+    annotation (Placement(transformation(extent={{-46,-106},{-28,-124}})));
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor thermalConductorEva(
+      final G=GEva) "Heat losses through thermal conductivness of condenser"
+    annotation (Placement(transformation(extent={{-76,-116},{-56,-96}})));
+  Modelica.Thermal.HeatTransfer.Components.Convection convectionEva
+    "Convection between fluid and solid"
+    annotation (Placement(transformation(extent={{-22,-98},{-6,-114}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature varTempEva
+    "Foreces heat losses according to ambient temperature"
+    annotation (Placement(transformation(extent={{-98,-114},{-82,-98}})));
+  parameter Modelica.SIunits.HeatCapacity CEva
+    "Heat capacity of Evaporator (= cp*m)";
+  parameter Modelica.SIunits.ThermalConductance GEva
+    "Constant thermal conductance of Evaporator material";
+  parameter Modelica.SIunits.HeatCapacity CCon
+    "Heat capacity of Condenser (= cp*m)";
+  parameter Modelica.SIunits.ThermalConductance GCon
+    "Constant thermal conductance of condenser material";
 equation
-  connect(port_a1, mFlow_a1.port_a) annotation (Line(points={{-100,60},{-100,74},
-          {-74,74}},          color={0,127,255}));
-  connect(mFlow_a1.port_b, senT_a1.port_a) annotation (Line(points={{-54,74},{-52,
-          74},{-52,82},{-46,82}}, color={0,127,255}));
-  connect(senT_a1.port_b, Condenser.ports[1]) annotation (Line(points={{-26,82},
-          {-16,82},{-16,104},{0,104}}, color={0,127,255}));
-  connect(Condenser.ports[2], senT_b1.port_a) annotation (Line(points={{4,104},
-          {16,104},{16,82},{24,82}}, color={0,127,255}));
+  connect(port_a1, mFlow_a1.port_a) annotation (Line(points={{-100,60},{-100,80},
+          {-72,80}},          color={0,127,255}));
+  connect(mFlow_a1.port_b, senT_a1.port_a) annotation (Line(points={{-52,80},{
+          -44,80}},               color={0,127,255}));
+  connect(senT_a1.port_b, Condenser.ports[1]) annotation (Line(points={{-24,80},
+          {-14,80},{-14,86},{2,86}},   color={0,127,255}));
+  connect(Condenser.ports[2], senT_b1.port_a) annotation (Line(points={{6,86},{
+          18,86},{18,80},{26,80}},   color={0,127,255}));
   connect(preDro_1.port_b, port_b1)
-    annotation (Line(points={{84,60},{100,60}}, color={0,127,255}));
-  connect(preDro_1.port_a, senT_b1.port_b) annotation (Line(points={{64,60},{56,
-          60},{56,82},{44,82}}, color={0,127,255}));
+    annotation (Line(points={{86,80},{92,80},{92,60},{100,60}},
+                                                color={0,127,255}));
+  connect(preDro_1.port_a, senT_b1.port_b) annotation (Line(points={{66,80},{46,
+          80}},                 color={0,127,255}));
   connect(mFlow_a2.port_a, port_a2)
-    annotation (Line(points={{86,-60},{100,-60}}, color={0,127,255}));
-  connect(senT_a2.port_a, mFlow_a2.port_b) annotation (Line(points={{38,-86},{
-          52,-86},{52,-60},{66,-60}}, color={0,127,255}));
+    annotation (Line(points={{76,-74},{90,-74},{90,-60},{100,-60}},
+                                                  color={0,127,255}));
+  connect(senT_a2.port_a, mFlow_a2.port_b) annotation (Line(points={{32,-82},{
+          46,-82},{46,-74},{56,-74}}, color={0,127,255}));
   connect(senT_a2.port_b, Evaporator.ports[1])
-    annotation (Line(points={{18,-86},{18,-90},{2,-90}}, color={0,127,255}));
-  connect(senT_b2.port_a, Evaporator.ports[2]) annotation (Line(points={{-20,-86},
-          {-10,-86},{-10,-90},{6,-90}}, color={0,127,255}));
+    annotation (Line(points={{12,-82},{12,-84},{0,-84}}, color={0,127,255}));
+  connect(senT_b2.port_a, Evaporator.ports[2]) annotation (Line(points={{-26,-82},
+          {-16,-82},{-16,-84},{4,-84}}, color={0,127,255}));
   connect(preDro_2.port_b, port_b2)
-    annotation (Line(points={{-80,-60},{-86,-60},{-86,-60},{-84,-60},{-84,-60},{
-          -100,-60}},                               color={0,127,255}));
-  connect(preDro_2.port_a, senT_b2.port_b) annotation (Line(points={{-60,-60},{
-          -50,-60},{-50,-86},{-40,-86}}, color={0,127,255}));
-  connect(mFlow_a1.m_flow, sigBusHP.m_flow_co) annotation (Line(points={{-64,63},
-          {-64,52},{-72,52},{-72,42},{-72,-30.915},{-94,-30.915},{-114.925,-30.915}},
+    annotation (Line(points={{-80,-74},{-90,-74},{-90,-60},{-100,-60}},
+                                                    color={0,127,255}));
+  connect(preDro_2.port_a, senT_b2.port_b) annotation (Line(points={{-60,-74},{
+          -54,-74},{-54,-82},{-46,-82}}, color={0,127,255}));
+  connect(mFlow_a1.m_flow, sigBusHP.m_flow_co) annotation (Line(points={{-62,69},
+          {-62,62},{-70,62},{-70,-30},{-114.925,-30},{-114.925,-30.915}},
                                          color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(mFlow_a2.m_flow, sigBusHP.m_flow_ev) annotation (Line(points={{76,-49},
-          {76,-44},{-72,-44},{-72,-30.915},{-114.925,-30.915}},
+  connect(mFlow_a2.m_flow, sigBusHP.m_flow_ev) annotation (Line(points={{66,-63},
+          {66,-60},{-70,-60},{-70,-30.915},{-114.925,-30.915}},
                                                             color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senT_b2.T, sigBusHP.T_ret_ev) annotation (Line(points={{-30,-75},{-30,
-          -44},{-72,-44},{-72,-30.915},{-114.925,-30.915}},
+  connect(senT_b2.T, sigBusHP.T_ret_ev) annotation (Line(points={{-36,-71},{-36,
+          -44},{-74,-44},{-74,-30.915},{-114.925,-30.915}},
                                                         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senT_a2.T, sigBusHP.T_flow_ev) annotation (Line(points={{28,-75},{28,
-          -44},{-72,-44},{-72,-30.915},{-114.925,-30.915}},
+  connect(senT_a2.T, sigBusHP.T_flow_ev) annotation (Line(points={{22,-71},{22,
+          -44},{-74,-44},{-74,-30.915},{-114.925,-30.915}},
                                                         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senT_a1.T, sigBusHP.T_ret_co) annotation (Line(points={{-36,71},{-36,
-          52},{-72,52},{-72,-30.915},{-114.925,-30.915}},
+  connect(senT_a1.T, sigBusHP.T_ret_co) annotation (Line(points={{-34,69},{-34,
+          62},{-70,62},{-70,-30.915},{-114.925,-30.915}},
                                                       color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(senT_b1.T, sigBusHP.T_flow_co) annotation (Line(points={{34,71},{34,
-          52},{-72,52},{-72,-30.915},{-114.925,-30.915}},
+  connect(senT_b1.T, sigBusHP.T_flow_co) annotation (Line(points={{36,69},{36,
+          62},{-70,62},{-70,-30.915},{-114.925,-30.915}},
                                                       color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -204,31 +238,30 @@ equation
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(heatFlowRateEva.port, Evaporator.heatPort) annotation (Line(points={{2,
-          -58},{2,-70},{-16,-70},{-16,-80},{-6,-80}}, color={191,0,0}));
+  connect(heatFlowRateEva.port, Evaporator.heatPort) annotation (Line(points={{-10,-56},
+          {-10,-74},{-8,-74}},                        color={191,0,0}));
   connect(innerCycle.QEva, heatFlowRateEva.Q_flow)
-    annotation (Line(points={{-10,-25},{-10,-38},{2,-38}}, color={0,0,127}));
+    annotation (Line(points={{-10,-25},{-10,-36}},         color={0,0,127}));
   connect(Condenser.heatPort, heatFlowRateCon.port)
-    annotation (Line(points={{-8,94},{-8,72},{-16,72}}, color={191,0,0}));
-  connect(heatFlowRateCon.Q_flow, innerCycle.QCon) annotation (Line(points={{-16,
-          60},{-16,54},{-10,54},{-10,41}}, color={0,0,127}));
-  connect(innerCycle.COP, sigBusHP.CoP) annotation (Line(points={{23,8},{28,8},{
-          28,-44},{-72,-44},{-72,-30.915},{-114.925,-30.915}},  color={0,0,127}),
+    annotation (Line(points={{-6,76},{-16,76},{-16,60}},color={191,0,0}));
+  connect(innerCycle.COP, sigBusHP.CoP) annotation (Line(points={{23,8},{30,8},
+          {30,-60},{-70,-60},{-70,-30.915},{-114.925,-30.915}}, color={0,0,127}),
       Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
   connect(innerCycle.Pel, sigBusHP.Pel) annotation (Line(points={{23.15,26.15},
-          {28,26.15},{28,26},{28,26},{28,-44},{-72,-44},{-72,-32},{-72,-32},{
-          -72,-30.915},{-114.925,-30.915}}, color={0,0,127}), Text(
+          {30,26.15},{30,-60},{-70,-60},{-70,-30.915},{-114.925,-30.915}},
+                                            color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
   if useComIne then
     connect(nSet, firstOrder.u)
                                annotation (Line(points={{-116,0},{-93.2,0}}, color={0,0,127}));
-    connect(firstOrder.y, sigBusHP.N) annotation (Line(points={{-79.4,0},{-72,0},{
-          -72,-30.915},{-114.925,-30.915}}, color={0,0,127}), Text(
+    connect(firstOrder.y, sigBusHP.N) annotation (Line(points={{-79.4,0},{-70,0},
+            {-70,-30.915},{-114.925,-30.915}},
+                                            color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
@@ -241,7 +274,40 @@ equation
       index=1,
       extent={{6,3},{6,3}}));
   end if;
-  annotation (Icon(coordinateSystem(extent={{-100,-100},{100,100}}), graphics={
+  connect(sigBusHP.T_amb_in, varTempCon.T) annotation (Line(
+      points={{-114.925,-30.915},{-114,-30.915},{-114,-30},{-101.6,-30},{-101.6,
+          114}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}}));
+  connect(innerCycle.QCon, heatFlowRateCon.Q_flow) annotation (Line(points={{
+          -10,41},{-10,43.5},{-16,43.5},{-16,48}}, color={0,0,127}));
+  connect(Condenser.heatPort, convectionCon.fluid) annotation (Line(points={{-6,
+          76},{-4,76},{-4,114},{-8,114}}, color={191,0,0}));
+  connect(convectionCon.solid, heatCapCon.port)
+    annotation (Line(points={{-24,114},{-41,114}}, color={191,0,0}));
+  connect(heatCapCon.port, thermalConductorCon.port_b)
+    annotation (Line(points={{-41,114},{-58,114}}, color={191,0,0}));
+  connect(thermalConductorCon.port_a, varTempCon.port)
+    annotation (Line(points={{-78,114},{-84,114}}, color={191,0,0}));
+  connect(convectionEva.solid, heatCapEva.port)
+    annotation (Line(points={{-22,-106},{-37,-106}}, color={191,0,0}));
+  connect(heatCapEva.port, thermalConductorEva.port_b)
+    annotation (Line(points={{-37,-106},{-56,-106}}, color={191,0,0}));
+  connect(thermalConductorEva.port_a, varTempEva.port)
+    annotation (Line(points={{-76,-106},{-82,-106}}, color={191,0,0}));
+  connect(sigBusHP.T_amb, varTempEva.T) annotation (Line(
+      points={{-114.925,-30.915},{-114.925,-106},{-99.6,-106}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}}));
+  connect(convectionEva.fluid, Evaporator.heatPort) annotation (Line(points={{
+          -6,-106},{-6,-90},{-8,-90},{-8,-74}}, color={191,0,0}));
+  annotation (Icon(coordinateSystem(extent={{-100,-120},{100,120}}), graphics={
         Rectangle(
           extent={{-16,83},{16,-83}},
           fillColor={170,213,255},
@@ -281,6 +347,6 @@ equation
           fillPattern=FillPattern.Solid),
         Line(points={{-88,60},{88,60}}, color={28,108,200}),
         Line(points={{-88,-60},{88,-60}}, color={28,108,200})}),
-                                            Diagram(coordinateSystem(extent={{
-            -100,-100},{100,100}})));
+                                            Diagram(coordinateSystem(extent={{-100,
+            -120},{100,120}})));
 end HeatPump;

@@ -15,7 +15,11 @@ model HeatPumpReal
     final dpCon_nominal=dpCon_nominal,
     final perData=perData,
     final comIneTime_constant=comIneTime_constant,
-    useComIne=useComIne)
+    useComIne=useComIne,
+    final CEva=CEva,
+    final GEva=GEva,
+    final CCon=CCon,
+    final GCon=GCon)
     annotation (Placement(transformation(extent={{84,-38},{160,38}})));
   BaseClasses.SecurityControls.SecurityControl securityControl(
     final useMinRunTime=useMinRunTime,
@@ -180,10 +184,22 @@ model HeatPumpReal
     "Time constant representing inertia of compressor"
     annotation (Dialog(group="Compressor Inertia", enable=useComIne));
 
+  parameter Modelica.SIunits.HeatCapacity CEva
+    "Heat capacity of Evaporator (= cp*m)"
+    annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator"));
+  parameter Modelica.SIunits.ThermalConductance GEva
+    "Constant thermal conductance of Evaporator material"
+    annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator"));
+  parameter Modelica.SIunits.HeatCapacity CCon
+    "Heat capacity of Condenser (= cp*m)"
+    annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"));
+  parameter Modelica.SIunits.ThermalConductance GCon
+    "Constant thermal conductance of condenser material"
+    annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"));
 equation
   connect(heatPump.sigBusHP, securityControl.heatPumpControlBus) annotation (
       Line(
-      points={{80.58,-10.26},{76,-10.26},{76,-48},{-26.675,-48},{-26.675,-19.32},
+      points={{80.58,-8.55},{76,-8.55},{76,-48},{-26.675,-48},{-26.675,-19.32},
           {-14,-19.32}},
       color={255,204,51},
       thickness=0.5));
@@ -193,11 +209,11 @@ equation
       color={255,204,51},
       thickness=0.5));
   connect(defrostControl.heaPumControlBus, heatPump.sigBusHP) annotation (Line(
-      points={{-106.4,-21.32},{-106.4,-48},{76,-48},{76,-10.26},{80.58,-10.26}},
+      points={{-106.4,-21.32},{-106.4,-48},{76,-48},{76,-8.55},{80.58,-8.55}},
       color={255,204,51},
       thickness=0.5));
   connect(heatPump.port_b2, port_b2)
-    annotation (Line(points={{84,-22.8},{84,-100}}, color={0,127,255}));
+    annotation (Line(points={{84,-19},{84,-100}},   color={0,127,255}));
   connect(T_amb, hPControls.T_amb) annotation (Line(points={{-220,40},{-206,40},
           {-206,6},{-187.72,6}},     color={0,0,127}));
   if not useSec and not useDeFro then
@@ -225,21 +241,21 @@ equation
           {-28,0},{-28,3.55271e-015},{-14.2667,3.55271e-015}},    color={0,0,127}));
   connect(hPControls.nOut, defrostControl.nSet) annotation (Line(points={{-126.36,
           1},{-118,1},{-118,0},{-110,0}},                                                       color={0,0,127}));
-  connect(heatPump.port_b1, port_b1) annotation (Line(points={{160,22.8},{160,100},
+  connect(heatPump.port_b1, port_b1) annotation (Line(points={{160,19},{160,100},
           {160,100}}, color={0,127,255}));
   if not useConPum then
     connect(port_a1, heatPump.port_a1) annotation (Line(
-      points={{84,100},{84,88},{64,88},{64,38},{84,38},{84,22.8}},
+      points={{84,100},{84,88},{64,88},{64,38},{84,38},{84,19}},
       color={0,127,255},
       pattern=LinePattern.Dash));
   end if;
   connect(pumSin.port_b, heatPump.port_a1)
-    annotation (Line(points={{84,56},{84,22.8}}, color={0,127,255}));
+    annotation (Line(points={{84,56},{84,19}},   color={0,127,255}));
   connect(pumSin.port_a, port_a1)
     annotation (Line(points={{84,76},{84,100}}, color={0,127,255}));
   if not useEvaPum then
     connect(port_a2, heatPump.port_a2) annotation (Line(
-      points={{160,-100},{160,-80},{182,-80},{182,-36.8},{160,-36.8},{160,-22.8}},
+      points={{160,-100},{160,-80},{182,-80},{182,-36.8},{160,-36.8},{160,-19}},
       color={0,127,255},
       pattern=LinePattern.Dash));
 
@@ -247,7 +263,7 @@ equation
   connect(port_a2, pumSou.port_a)
     annotation (Line(points={{160,-100},{160,-70}}, color={0,127,255}));
   connect(pumSou.port_b, heatPump.port_a2)
-    annotation (Line(points={{160,-50},{160,-22.8}}, color={0,127,255}));
+    annotation (Line(points={{160,-50},{160,-19}},   color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-200,-100},
             {200,100}})), Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-200,-100},{200,100}}), graphics={
