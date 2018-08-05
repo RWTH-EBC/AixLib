@@ -32,11 +32,11 @@ model HeatPump "Base model of realistic heat pump"
     annotation (Placement(transformation(extent={{-26,-92},{-46,-72}})));
   Sensors.TemperatureTwoPort senT_b1(
     final transferHeat=true,
-    final TAmb=sigBusHP.T_amb_in,
     final tauHeaTra=1200,
     redeclare final package Medium = Medium_con,
     final allowFlowReversal=allowFlowReversalCon,
-    final m_flow_nominal=mFlow_conNominal) "Temperature at source outlet"
+    final m_flow_nominal=mFlow_conNominal,
+    final TAmb=sigBusHP.T_ambInternal)     "Temperature at source outlet"
     annotation (Placement(transformation(extent={{26,90},{46,70}})));
   Sensors.TemperatureTwoPort senT_a2(
     final transferHeat=true,
@@ -48,11 +48,12 @@ model HeatPump "Base model of realistic heat pump"
     annotation (Placement(transformation(extent={{32,-92},{12,-72}})));
   Sensors.TemperatureTwoPort senT_a1(
     final transferHeat=true,
-    final TAmb=sigBusHP.T_amb_in,
     redeclare final package Medium = Medium_con,
     final allowFlowReversal=allowFlowReversalCon,
     final m_flow_nominal=mFlow_conNominal,
-    tauHeaTra=1200) "Temperature at source inlet"
+    tauHeaTra=1200,
+    final TAmb=sigBusHP.T_ambInternal)
+                    "Temperature at source inlet"
     annotation (Placement(transformation(extent={{-44,90},{-24,70}})));
   Sensors.MassFlowRate mFlow_a2(redeclare package Medium = Medium_eva, final
       allowFlowReversal=allowFlowReversalEva) "mass flow rate at sink inlet"
@@ -71,7 +72,7 @@ model HeatPump "Base model of realistic heat pump"
     annotation (Placement(transformation(extent={{66,70},{86,90}})));
   Modelica.Blocks.Interfaces.RealInput nSet
     "input signal speed for compressor relative between 0 and 1" annotation (Placement(
-        transformation(extent={{-132,-16},{-100,16}})));
+        transformation(extent={{-136,-16},{-104,16}})));
   Controls.Interfaces.HeatPumpControlBus
                            sigBusHP
     annotation (Placement(transformation(extent={{-130,-48},{-100,-14}}),
@@ -160,6 +161,9 @@ model HeatPump "Base model of realistic heat pump"
     "Heat capacity of Condenser (= cp*m)";
   parameter Modelica.SIunits.ThermalConductance GCon
     "Constant thermal conductance of condenser material";
+  Modelica.Blocks.Interfaces.RealInput T_ambInternal
+    "Ambient temperature on the inside"
+    annotation (Placement(transformation(extent={{140,-20},{100,20}})));
 equation
   connect(port_a1, mFlow_a1.port_a) annotation (Line(points={{-100,60},{-100,80},
           {-72,80}},          color={0,127,255}));
@@ -204,14 +208,14 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(senT_b2.T, sigBusHP.T_ret_ev) annotation (Line(points={{-36,-71},{-36,
-          -44},{-74,-44},{-74,-30.915},{-114.925,-30.915}},
+          -44},{-70,-44},{-70,-30.915},{-114.925,-30.915}},
                                                         color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(senT_a2.T, sigBusHP.T_flow_ev) annotation (Line(points={{22,-71},{22,
-          -44},{-74,-44},{-74,-30.915},{-114.925,-30.915}},
+          -44},{-70,-44},{-70,-30.915},{-114.925,-30.915}},
                                                         color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -258,7 +262,7 @@ equation
       extent={{6,3},{6,3}}));
   if useComIne then
     connect(nSet, firstOrder.u)
-                               annotation (Line(points={{-116,0},{-93.2,0}}, color={0,0,127}));
+                               annotation (Line(points={{-120,0},{-93.2,0}}, color={0,0,127}));
     connect(firstOrder.y, sigBusHP.N) annotation (Line(points={{-79.4,0},{-70,0},
             {-70,-30.915},{-114.925,-30.915}},
                                             color={0,0,127}), Text(
@@ -267,7 +271,7 @@ equation
       extent={{6,3},{6,3}}));
   else
     connect(nSet, sigBusHP.N) annotation (Line(
-      points={{-116,0},{-116,0},{-96,0},{-96,0},{-96,-30.915},{-114.925,-30.915}},
+      points={{-120,0},{-120,-2},{-96,-2},{-96,-30.915},{-114.925,-30.915}},
       color={0,0,127},
       pattern=LinePattern.Dash), Text(
       string="%second",
@@ -275,8 +279,7 @@ equation
       extent={{6,3},{6,3}}));
   end if;
   connect(sigBusHP.T_amb_in, varTempCon.T) annotation (Line(
-      points={{-114.925,-30.915},{-114,-30.915},{-114,-30},{-101.6,-30},{-101.6,
-          114}},
+      points={{-115,-31},{-114,-31},{-114,-30},{-101.6,-30},{-101.6,114}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -307,6 +310,11 @@ equation
       extent={{-6,3},{-6,3}}));
   connect(convectionEva.fluid, Evaporator.heatPort) annotation (Line(points={{
           -6,-106},{-6,-90},{-8,-90},{-8,-74}}, color={191,0,0}));
+  connect(T_ambInternal, sigBusHP.T_amb_in) annotation (Line(points={{120,0},{
+          30,0},{30,-31},{-115,-31}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
   annotation (Icon(coordinateSystem(extent={{-100,-120},{100,120}}), graphics={
         Rectangle(
           extent={{-16,83},{16,-83}},

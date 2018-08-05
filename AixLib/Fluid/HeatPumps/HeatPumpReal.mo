@@ -36,7 +36,7 @@ model HeatPumpReal
     annotation (Placement(transformation(extent={{-104,-26},{-44,26}})));
   BaseClasses.HeatPumpControlls.HPControl hPControls(final useAntilegionella=
         useAntLeg)
-    annotation (Placement(transformation(extent={{-182,-24},{-130,26}})));
+    annotation (Placement(transformation(extent={{-186,-26},{-134,24}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a1(
                      redeclare final package Medium = Medium1,
                      m_flow(min=if allowFlowReversal1 then -Modelica.Constants.inf else 0),
@@ -196,6 +196,8 @@ model HeatPumpReal
   parameter Modelica.SIunits.ThermalConductance GCon
     "Constant thermal conductance of condenser material"
     annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"));
+  Modelica.Blocks.Interfaces.RealInput T_ambInternal "Ambient temperature"
+    annotation (Placement(transformation(extent={{240,20},{200,60}})));
 equation
   connect(heatPump.sigBusHP, securityControl.heatPumpControlBus) annotation (
       Line(
@@ -215,20 +217,20 @@ equation
   connect(heatPump.port_b2, port_b2)
     annotation (Line(points={{84,-19},{84,-100}},   color={0,127,255}));
   connect(T_amb, hPControls.T_amb) annotation (Line(points={{-220,40},{-206,40},
-          {-206,6},{-187.72,6}},     color={0,0,127}));
+          {-206,4},{-191.72,4}},     color={0,0,127}));
   if not useSec and not useDeFro then
     connect(hPControls.nOut, heatPump.nSet) annotation (Line(
-      points={{-126.36,1},{-112,1},{-112,-86},{68,-86},{68,0},{77.92,0}},
+      points={{-130.36,-1},{-112,-1},{-112,-86},{68,-86},{68,0},{76.4,0}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   elseif not useSec and useDeFro then
     connect(defrostControl.nOut, heatPump.nSet) annotation (Line(
-      points={{-40.4,0},{-24,0},{-24,-66},{68,-66},{68,0},{77.92,0}},
+      points={{-40.4,0},{-24,0},{-24,-66},{68,-66},{68,0},{76.4,0}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   elseif not useDeFro and useSec then
     connect(hPControls.nOut, securityControl.nSet) annotation (Line(
-      points={{-126.36,1},{-112,1},{-112,-66},{-36,-66},{-36,3.55271e-015},{
+      points={{-130.36,-1},{-112,-1},{-112,-66},{-36,-66},{-36,3.55271e-015},{
             -14.2667,3.55271e-015}},
       color={0,0,127},
       pattern=LinePattern.Dash));
@@ -236,11 +238,11 @@ equation
   end if;
   connect(securityControl.nOut, heatPump.nSet)
                                               annotation (Line(points={{56.6667,
-          0},{77.92,0}},                                                                       color={0,0,127}));
+          0},{76.4,0}},                                                                        color={0,0,127}));
   connect(defrostControl.nOut, securityControl.nSet) annotation (Line(points={{-40.4,0},
           {-28,0},{-28,3.55271e-015},{-14.2667,3.55271e-015}},    color={0,0,127}));
-  connect(hPControls.nOut, defrostControl.nSet) annotation (Line(points={{-126.36,
-          1},{-118,1},{-118,0},{-110,0}},                                                       color={0,0,127}));
+  connect(hPControls.nOut, defrostControl.nSet) annotation (Line(points={{-130.36,
+          -1},{-118,-1},{-118,0},{-110,0}},                                                     color={0,0,127}));
   connect(heatPump.port_b1, port_b1) annotation (Line(points={{160,19},{160,100},
           {160,100}}, color={0,127,255}));
   if not useConPum then
@@ -264,6 +266,8 @@ equation
     annotation (Line(points={{160,-100},{160,-70}}, color={0,127,255}));
   connect(pumSou.port_b, heatPump.port_a2)
     annotation (Line(points={{160,-50},{160,-19}},   color={0,127,255}));
+  connect(T_ambInternal, heatPump.T_ambInternal) annotation (Line(points={{220,
+          40},{198,40},{198,0},{167.6,0}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-200,-100},
             {200,100}})), Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-200,-100},{200,100}}), graphics={
