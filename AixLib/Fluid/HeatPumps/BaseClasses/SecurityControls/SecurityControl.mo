@@ -33,11 +33,7 @@ block SecurityControl "Block including all security levels"
     annotation (Placement(transformation(extent={{-18,-18},{20,18}})));
   OnOffControl onOffController(
     final minRunTime=minRunTime,
-    final useMinLocTim=useMinLocTime,
-    final minLocTime=minLocTime,
-    final maxRunPerHour=maxRunPerHou,
-    final useRunPerHour=useRunPerHou,
-    final useMinRunTim=useMinRunTime)
+    final minLocTime=minLocTime)
     annotation (Placement(transformation(extent={{-86,-18},{-50,18}})));
 
 equation
@@ -51,8 +47,7 @@ equation
                                                      color={0,0,127}));
   connect(operationalEnvelope.nOut,swiErr.u1)  annotation (Line(points={{21.5833,
           0},{54,0},{54,12},{72,12},{72,8},{84,8}},   color={0,0,127}));
-  connect(heatPumpControlBus, onOffController.heatPumpControlBus) annotation (
-      Line(
+  connect(sigBusHP, onOffController.sigBusHP) annotation (Line(
       points={{-135,-69},{-88.25,-69},{-88.25,-12.42}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -60,8 +55,8 @@ equation
       index=-1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(onOffController.heatPumpControlBus, operationalEnvelope.heatPumpControlBus)
-    annotation (Line(
+  connect(onOffController.sigBusHP, operationalEnvelope.sigBusHP) annotation (
+      Line(
       points={{-88.25,-12.42},{-88,-12.42},{-88,-46},{-20,-46},{-20,-12.42},{-20.375,
           -12.42}},
       color={255,204,51},

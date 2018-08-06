@@ -7,18 +7,19 @@ model HeatPump
 
   Sources.MassFlowSource_T                sourceSideMassFlowSource(
     use_T_in=true,
-    redeclare package Medium =
-        Modelica.Media.Water.ConstantPropertyLiquidWater,
     m_flow=1,
-    T=275.15,
-    nPorts=1) "Ideal mass flow source at the inlet of the source side"
-              annotation (Placement(transformation(extent={{-58,6},{-38,26}})));
+    nPorts=1,
+    redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
+
+    T=275.15) "Ideal mass flow source at the inlet of the source side"
+              annotation (Placement(transformation(extent={{-54,24},{-34,44}})));
   Sources.FixedBoundary                sourceSideFixedBoundary(redeclare
       package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, nPorts=
        1)       "Fixed boundary at the outlet of the source side"
           annotation (Placement(transformation(extent={{-58,-28},{-38,-8}})));
-  Sources.FixedBoundary                sinkSideFixedBoundary(redeclare package
-      Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, nPorts=1)
+  Sources.FixedBoundary                sinkSideFixedBoundary(    nPorts=1,
+      redeclare package Medium =
+        Modelica.Media.Water.ConstantPropertyLiquidWater)
     "Fixed boundary at the outlet of the sink side"
     annotation (Placement(transformation(extent={{110,8},{90,28}})));
   Sources.MassFlowSource_T                sinkSideMassFlowSource(
@@ -26,9 +27,9 @@ model HeatPump
         Modelica.Media.Water.ConstantPropertyLiquidWater,
     m_flow=0.5,
     use_m_flow_in=true,
-    T=308.15,
-    nPorts=1) "Ideal mass flow source at the inlet of the sink side"
-              annotation (Placement(transformation(extent={{20,-58},{40,-38}})));
+    nPorts=1,
+    T=308.15) "Ideal mass flow source at the inlet of the sink side"
+              annotation (Placement(transformation(extent={{-12,-60},{8,-40}})));
   Modelica.Blocks.Sources.Ramp TsuSourceRamp(
     duration=1000,
     startTime=1000,
@@ -45,27 +46,55 @@ model HeatPump
     "Pulse signal for the mass flow input of the sink side's ideal mass flow source"
     annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
   Sensors.TemperatureTwoPort                temperature(redeclare package
-      Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, m_flow_nominal=
-       heatPump.mFlow_conNominal)
+      Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, m_flow_nominal
+      =heatPumpReal.mFlow_conNominal)
     "Temperature sensor at the outlet of the sink side"
     annotation (Placement(transformation(extent={{56,8},{76,28}})));
-  Modelica.Blocks.Interfaces.RealOutput Pel
-    "Power consumption of the heat pump"
-    annotation (Placement(transformation(extent={{100,-20},{120,0}})));
   Modelica.Blocks.Interfaces.RealOutput T_Co_out
     "Temperature at the outlet of the sink side of the heat pump"
     annotation (Placement(transformation(extent={{100,40},{120,60}})));
-  AixLib.Fluid.HeatPumps.HeatPumpReal heatPumpReal(useSecurity=false,
-      useDefrost=true)
-    annotation (Placement(transformation(extent={{-20,0},{20,20}})));
+  AixLib.Fluid.HeatPumps.HeatPumpReal heatPumpReal(
+    useSec=false,
+    redeclare package Medium_con =
+        Modelica.Media.Water.ConstantPropertyLiquidWater,
+    mFlow_conNominal=1,
+    mFlow_evaNominal=1,
+    VCon=1,
+    VEva=1,
+    dpEva_nominal=0,
+    dpCon_nominal=0,
+    useConPum=false,
+    useEvaPum=false,
+    GEva=1,
+    GCon=1,
+    redeclare block performanceData =
+        AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D,
+    redeclare package Medium_eva =
+        Modelica.Media.Water.ConstantPropertyLiquidWater,
+    useComIne=false,
+    comIneTime_constant=0,
+    useMinRunTime=true,
+    useMinLocTime=true,
+    useRunPerHou=true,
+    maxRunPerHou=2,
+    useOpeEnv=true,
+    tableUpp=[0,0],
+    tableLow=[0,0],
+    minRunTime=120,
+    minLocTime=120,
+    CEva=8000,
+    CCon=8000)
+    annotation (Placement(transformation(extent={{-18,-12},{22,8}})));
+  Modelica.Blocks.Sources.Constant T_amb_internal(k=291.15)
+    annotation (Placement(transformation(extent={{66,-38},{46,-18}})));
 equation
 
   connect(TsuSourceRamp.y,sourceSideMassFlowSource. T_in) annotation (Line(
-      points={{-73,12},{-68,12},{-68,20},{-60,20}},
+      points={{-73,12},{-68,12},{-68,38},{-56,38}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(massFlowPulse.y,sinkSideMassFlowSource. m_flow_in) annotation (Line(
-      points={{-59,-50},{20,-50},{20,-40}},
+      points={{-59,-50},{-12,-50},{-12,-42}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(sinkSideFixedBoundary.ports[1],temperature. port_b) annotation (Line(
@@ -77,14 +106,19 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(sinkSideMassFlowSource.ports[1], heatPumpReal.port_a2) annotation (
-      Line(points={{40,-48},{28,-48},{28,0},{16.4,0}}, color={0,127,255}));
-  connect(heatPumpReal.port_b1, temperature.port_a) annotation (Line(points={{
-          16.2,20},{36,20},{36,18},{56,18}}, color={0,127,255}));
+      Line(points={{8,-50},{18,-50},{18,-12}},         color={0,127,255}));
+  connect(heatPumpReal.port_b1, temperature.port_a) annotation (Line(points={{18,8},{
+          38,8},{38,18},{56,18}},            color={0,127,255}));
   connect(heatPumpReal.port_a1, sourceSideMassFlowSource.ports[1]) annotation (
-      Line(points={{9.2,20},{10,20},{10,34},{10,34},{10,34},{-26,34},{-26,16},{
-          -38,16}}, color={0,127,255}));
+      Line(points={{10.4,8},{10,8},{10,34},{-34,34}},
+                    color={0,127,255}));
   connect(heatPumpReal.port_b2, sourceSideFixedBoundary.ports[1]) annotation (
-      Line(points={{9.2,0},{8,0},{8,-18},{-38,-18}}, color={0,127,255}));
+      Line(points={{10.4,-12},{10,-12},{10,-18},{-38,-18}},
+                                                     color={0,127,255}));
+  connect(T_amb_internal.y, heatPumpReal.T_ambInternal) annotation (Line(points
+        ={{45,-28},{34,-28},{34,2},{24,2}}, color={0,0,127}));
+  connect(TsuSourceRamp.y, heatPumpReal.T_amb) annotation (Line(points={{-73,12},
+          {-47.5,12},{-47.5,2},{-20,2}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
     experiment(StopTime=3600),

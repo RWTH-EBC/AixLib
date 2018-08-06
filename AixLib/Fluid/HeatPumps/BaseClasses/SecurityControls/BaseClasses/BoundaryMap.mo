@@ -26,8 +26,6 @@ block BoundaryMap
     annotation (Placement(transformation(extent={{-6,-40},{14,-20}})));
   Modelica.Blocks.Logical.Greater greaterRig
     annotation (Placement(transformation(extent={{-6,-70},{14,-50}})));
-  parameter Real v2 = {1000,1000};
-  parameter Real v1 = {-10,-10};
   parameter Real tableLow[:,2]=fill(
       0.0,
       0,

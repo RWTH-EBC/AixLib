@@ -1,5 +1,5 @@
 within AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData;
-model LookUpTable2D "Performance data coming from manufacturer"
+block LookUpTable2D "Performance data coming from manufacturer"
   extends BaseClasses.PartialPerformanceData;
   Modelica.Blocks.Tables.CombiTable2D Qdot_ConTable(
     tableName="NoName",
@@ -45,14 +45,14 @@ equation
   connect(t_Co_ou.y, Qdot_ConTable.u1) annotation (Line(points={{-77.4,-28},{
           -58,-28},{-58,52},{-44,52},{-44,52}},
                                   color={0,0,127}));
-  connect(heatPumpControlBus.T_ret_co,t_Co_ou. u) annotation (Line(
+  connect(sigBusHP.T_ret_co, t_Co_ou.u) annotation (Line(
       points={{-106.925,0.07},{-106,0.07},{-106,-28},{-91.2,-28}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(heatPumpControlBus.T_flow_ev, t_Ev_in.u) annotation (Line(
+  connect(sigBusHP.T_flow_ev, t_Ev_in.u) annotation (Line(
       points={{-106.925,0.07},{-106.925,28},{-106,28},{-106,28},{-91.2,28}},
       color={255,204,51},
       thickness=0.5), Text(

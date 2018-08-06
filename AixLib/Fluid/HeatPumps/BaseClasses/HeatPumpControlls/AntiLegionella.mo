@@ -1,6 +1,6 @@
 within AixLib.Fluid.HeatPumps.BaseClasses.HeatPumpControlls;
 block AntiLegionella "Control to avoid Legionella in the DHW"
-  Controls.Interfaces.HeatPumpControlBus heatPumpControlBus_in
+  Controls.Interfaces.HeatPumpControlBus sigBusHP
     annotation (Placement(transformation(extent={{-134,-18},{-96,18}})));
   Modelica.Blocks.Interfaces.RealOutput TSet_out
     "Set value for the condenser outlet temperature"
@@ -65,9 +65,8 @@ equation
     annotation (Line(points={{-26,0},{-31.4,0}}, color={255,0,255}));
   connect(TConLessTLegMin.y, pre1.u)
     annotation (Line(points={{-49,0},{-45.2,0}}, color={255,0,255}));
-  connect(TConLessTLegMin.u1, heatPumpControlBus_in.T_ret_co) annotation (Line(
-        points={{-72,0},{-94,0},{-94,0.09},{-114.905,0.09}}, color={0,0,127}),
-      Text(
+  connect(TConLessTLegMin.u1, sigBusHP.T_ret_co) annotation (Line(points={{-72,
+          0},{-94,0},{-94,0.09},{-114.905,0.09}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));

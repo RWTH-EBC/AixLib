@@ -13,13 +13,13 @@ model HeatPumpReal
     final VEva=VEva,
     final dpEva_nominal=dpEva_nominal,
     final dpCon_nominal=dpCon_nominal,
-    final perData=perData,
     final comIneTime_constant=comIneTime_constant,
-    useComIne=useComIne,
     final CEva=CEva,
     final GEva=GEva,
     final CCon=CCon,
-    final GCon=GCon)
+    final GCon=GCon,
+    final useComIne=useComIne,
+    redeclare final block performanceData = performanceData)
     annotation (Placement(transformation(extent={{84,-38},{160,38}})));
   BaseClasses.SecurityControls.SecurityControl securityControl(
     final useMinRunTime=useMinRunTime,
@@ -38,27 +38,27 @@ model HeatPumpReal
         useAntLeg)
     annotation (Placement(transformation(extent={{-186,-26},{-134,24}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a1(
-                     redeclare final package Medium = Medium1,
-                     m_flow(min=if allowFlowReversal1 then -Modelica.Constants.inf else 0),
-                     h_outflow(start = Medium1.h_default))
+    redeclare final package Medium = Medium_eva,
+    h_outflow(start=Medium_eva.h_default),
+    m_flow(min=if allowFlowReversalEva then -Modelica.Constants.inf else 0))
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{74,90},{94,110}})));
   Modelica.Fluid.Interfaces.FluidPort_b port_b1(
-                     redeclare final package Medium = Medium1,
-                     m_flow(max=if allowFlowReversal1 then +Modelica.Constants.inf else 0),
-                     h_outflow(start = Medium1.h_default))
+    redeclare final package Medium = Medium_eva,
+    h_outflow(start=Medium_eva.h_default),
+    m_flow(max=if allowFlowReversalEva then +Modelica.Constants.inf else 0))
     "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{170,90},{150,110}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a2(
-                     redeclare final package Medium = Medium2,
-                     m_flow(min=if allowFlowReversal2 then -Modelica.Constants.inf else 0),
-                     h_outflow(start = Medium2.h_default))
+    redeclare final package Medium = Medium_con,
+    h_outflow(start=Medium_con.h_default),
+    m_flow(min=if allowFlowReversalCon then -Modelica.Constants.inf else 0))
     "Fluid connector a2 (positive design flow direction is from port_a2 to port_b2)"
     annotation (Placement(transformation(extent={{150,-110},{170,-90}})));
   Modelica.Fluid.Interfaces.FluidPort_b port_b2(
-                     redeclare final package Medium = Medium2,
-                     m_flow(max=if allowFlowReversal2 then +Modelica.Constants.inf else 0),
-                     h_outflow(start = Medium2.h_default))
+    redeclare final package Medium = Medium_con,
+    h_outflow(start=Medium_con.h_default),
+    m_flow(max=if allowFlowReversalCon then +Modelica.Constants.inf else 0))
     "Fluid connector b2 (positive design flow direction is from port_a2 to port_b2)"
     annotation (Placement(transformation(extent={{94,-110},{74,-90}})));
   parameter Boolean useDeFro=false "False if defrost in not considered"
@@ -151,13 +151,13 @@ model HeatPumpReal
     "= false to simplify equations, assuming, but not enforcing, no flow reversal"
     annotation (Dialog(tab="Evaporator/ Condenser", group="Assumptions"),
                                                                        choices(checkBox=true));
-  Boolean useConPum=true
+  parameter Boolean useConPum=true
     "True if pump or fan at condenser side are included into this model"
     annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"),choices(checkBox=true));
-  Boolean useEvaPum=true
+  parameter Boolean useEvaPum=true
     "True if pump or fan at evaporator side are included into this model"
     annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator"),choices(checkBox=true));
-  parameter Movers.Data.Generic perEva=AixLib.Fluid.Movers.Data.Generic
+  parameter Movers.Data.Generic perEva
     "Record with performance data"
     annotation (choicesAllMatching=true,Dialog(tab="Evaporator/ Condenser", group="Evaporator",
       enable=useEvaPum));
@@ -165,18 +165,13 @@ model HeatPumpReal
     "Set to false to avoid any power (=heat and flow work) being added to medium (may give simpler equations)"
     annotation (Dialog(tab="Evaporator/ Condenser", group="Evaporator",
       enable=useEvaPum));
-  parameter Movers.Data.Generic perCon=AixLib.Fluid.Movers.Data.Generic
-    "Record with performance data"
+  parameter Movers.Data.Generic perCon "Record with performance data"
     annotation (choicesAllMatching=true,Dialog(tab="Evaporator/ Condenser", group="Condenser",
       enable=useConPum));
   parameter Boolean addPowerToMediumCon=true
     "Set to false to avoid any power (=heat and flow work) being added to medium (may give simpler equations)"
     annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser",
       enable=useConPum));
-  replaceable parameter BaseClasses.PerformanceData.LookUpTable2D perData=
-      BaseClasses.PerformanceData.LookUpTable2D constrainedby
-    BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
-    "replaceable model for performance data of HP" annotation (choicesAllMatching=true);
   parameter Boolean useComIne=false
                                    "Consider the inertia of the compressor"
     annotation (Dialog(group="Compressor Inertia"), choices(checkBox=true));
@@ -198,19 +193,17 @@ model HeatPumpReal
     annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"));
   Modelica.Blocks.Interfaces.RealInput T_ambInternal "Ambient temperature"
     annotation (Placement(transformation(extent={{240,20},{200,60}})));
+
+  replaceable block performanceData =
+      BaseClasses.PerformanceData.LookUpTable2D
+    annotation (__Dymola_choicesAllMatching=true);
 equation
-  connect(heatPump.sigBusHP, securityControl.heatPumpControlBus) annotation (
-      Line(
-      points={{80.58,-8.55},{76,-8.55},{76,-48},{-26.675,-48},{-26.675,-19.32},
-          {-14,-19.32}},
+  connect(heatPump.sigBusHP, securityControl.sigBusHP) annotation (Line(
+      points={{80.58,-8.55},{76,-8.55},{76,-48},{-26.675,-48},{-26.675,-19.32},{
+          -14,-19.32}},
       color={255,204,51},
       thickness=0.5));
-  connect(heatPump.sigBusHP, hPControl.heaPumControlBus) annotation (Line(
-      points={{80.58,-10.26},{76,-10.26},{76,-48},{-192,-48},{-192,-14},{-192,
-          -14},{-192,-13.44},{-183.04,-13.44}},
-      color={255,204,51},
-      thickness=0.5));
-  connect(defrostControl.heaPumControlBus, heatPump.sigBusHP) annotation (Line(
+  connect(defrostControl.sigBusHP, heatPump.sigBusHP) annotation (Line(
       points={{-106.4,-21.32},{-106.4,-48},{76,-48},{76,-8.55},{80.58,-8.55}},
       color={255,204,51},
       thickness=0.5));
@@ -230,8 +223,8 @@ equation
       pattern=LinePattern.Dash));
   elseif not useDeFro and useSec then
     connect(hPControls.nOut, securityControl.nSet) annotation (Line(
-      points={{-130.36,-1},{-112,-1},{-112,-66},{-36,-66},{-36,3.55271e-015},{
-            -14.2667,3.55271e-015}},
+      points={{-130.36,-1},{-112,-1},{-112,-66},{-36,-66},{-36,3.55271e-15},{
+            -14.2667,3.55271e-15}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   else
@@ -240,7 +233,7 @@ equation
                                               annotation (Line(points={{56.6667,
           0},{76.4,0}},                                                                        color={0,0,127}));
   connect(defrostControl.nOut, securityControl.nSet) annotation (Line(points={{-40.4,0},
-          {-28,0},{-28,3.55271e-015},{-14.2667,3.55271e-015}},    color={0,0,127}));
+          {-28,0},{-28,3.55271e-15},{-14.2667,3.55271e-15}},      color={0,0,127}));
   connect(hPControls.nOut, defrostControl.nSet) annotation (Line(points={{-130.36,
           -1},{-118,-1},{-118,0},{-110,0}},                                                     color={0,0,127}));
   connect(heatPump.port_b1, port_b1) annotation (Line(points={{160,19},{160,100},
@@ -268,6 +261,11 @@ equation
     annotation (Line(points={{160,-50},{160,-19}},   color={0,127,255}));
   connect(T_ambInternal, heatPump.T_ambInternal) annotation (Line(points={{220,
           40},{198,40},{198,0},{167.6,0}}, color={0,0,127}));
+  connect(heatPump.sigBusHP, hPControls.sigBusHP) annotation (Line(
+      points={{80.58,-8.55},{78,-8.55},{78,-8},{76,-8},{76,-48},{-194,-48},{-194,
+          -15.5},{-186.52,-15.5}},
+      color={255,204,51},
+      thickness=0.5));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-200,-100},
             {200,100}})), Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-200,-100},{200,100}}), graphics={

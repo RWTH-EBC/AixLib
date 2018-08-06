@@ -1,5 +1,5 @@
 within AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses;
-partial model PartialPerformanceData
+partial block PartialPerformanceData
   "Model with a replaceable for different methods of data aggregation"
   Modelica.Blocks.Interfaces.RealOutput Pel annotation (Placement(
         transformation(
@@ -11,8 +11,9 @@ partial model PartialPerformanceData
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={110,-80})));
-  Controls.Interfaces.HeatPumpControlBus heatPumpControlBus
-    annotation (Placement(transformation(extent={{-15,-14},{15,14}},
+  Controls.Interfaces.HeatPumpControlBus sigBusHP annotation (Placement(
+        transformation(
+        extent={{-15,-14},{15,14}},
         rotation=0,
         origin={-107,0})));
   Modelica.Blocks.Interfaces.RealOutput QEva annotation (Placement(
@@ -31,7 +32,6 @@ partial model PartialPerformanceData
           lineColor={0,0,127},
           pattern=LinePattern.Dash,
           textString="%name
-",
-          origin={8.5,2.5},
+",        origin={8.5,2.5},
           rotation=90)}), Diagram(coordinateSystem(preserveAspectRatio=false)));
 end PartialPerformanceData;

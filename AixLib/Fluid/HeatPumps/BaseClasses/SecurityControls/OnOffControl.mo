@@ -4,20 +4,19 @@ block OnOffControl
   extends BaseClasses.PartialSecurityControl;
   Modelica.Blocks.Logical.Greater nSetGreaterNull "True if device is set on"
     annotation (Placement(transformation(extent={{-102,56},{-86,72}})));
-  final parameter Boolean useMinRunTime
+  parameter Boolean useMinRunTime
     "False if minimal runtime of HP is not considered";
-  final parameter Modelica.SIunits.Time minRunTime(displayUnit="min")
-                                             "Mimimum runtime of heat pump"
-    annotation (Dialog(enable = useMinRunTim));
-  final parameter Boolean useMinLocTime
+  parameter Modelica.SIunits.Time minRunTime(displayUnit="min")
+    "Mimimum runtime of heat pump"
+    annotation (Dialog(enable=useMinRunTim));
+  parameter Boolean useMinLocTime
     "False if minimal locktime of HP is not considered";
-  final parameter Modelica.SIunits.Time minLocTime(displayUnit="min")
-                                             "Minimum lock time of heat pump"
+  parameter Modelica.SIunits.Time minLocTime(displayUnit="min")
+    "Minimum lock time of heat pump"
     annotation (Dialog(enable=useMinLocTim));
-  final parameter Boolean useRunPerHou
+  parameter Boolean useRunPerHou
     "False if maximal runs per hour of HP are not considered";
-  final parameter Real maxRunPerHou
-    "Maximal number of on/off cycles in one hour"
+  parameter Real maxRunPerHou "Maximal number of on/off cycles in one hour"
     annotation (Dialog(enable=useRunPerHour));
 
   Modelica.Blocks.Logical.Greater nIsGreaterNull
@@ -106,19 +105,6 @@ equation
           16},{52,16},{52,15.2},{56,15.2}}, color={255,0,255}));
   connect(locTimControl.y, andLoc.u1) annotation (Line(points={{-8.4,-15},{-8.4,
           -6},{24.8,-6},{24.8,-36}},   color={255,0,255}));
-  connect(nIsGreaterNull.u1, heatPumpControlBus.N) annotation (Line(points={{-105.6,
-          -28},{-126,-28},{-126,-68.925},{-134.915,-68.925}},        color={0,0,
-          127}), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(SwiSta.u1, heatPumpControlBus.N) annotation (Line(points={{-94,16},{-114,
-          16},{-114,-68.925},{-134.915,-68.925}},      color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(runPerHouBoundary.y, andLoc.u2) annotation (Line(points={{-8.4,-56},{6,
           -56},{6,-40.8},{24.8,-40.8}}, color={255,0,255}));
   connect(booleanConstantRunPerHou.y, andLoc.u2) annotation (Line(
@@ -133,6 +119,23 @@ equation
       points={{12.7,23},{12.7,40},{12.7,41.2},{22.8,41.2}},
       color={255,0,255},
       pattern=LinePattern.Dash));
+  connect(sigBusHP.N, nIsGreaterNull.u1) annotation (Line(
+      points={{-134.915,-68.925},{-134.915,-28},{-105.6,-28}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(sigBusHP.N, SwiSta.u1) annotation (Line(
+      points={{-134.915,-68.925},{-134.915,-28},{-114,-28},{-114,16},{-94,16}},
+
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Documentation(info="<html>
 <p>Checks if the nSet value is legal by checking if the device can either be turned on or off, depending on which state it was in.</p>
 <p>E.g. If it is turned on, and the new nSet value is 0, it will only turn off if current runtime is longer than the minimal runtime. Else it will keep the current rotating speed.</p>

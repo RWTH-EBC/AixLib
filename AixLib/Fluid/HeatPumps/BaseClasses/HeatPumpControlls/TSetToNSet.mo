@@ -13,7 +13,7 @@ block TSetToNSet
   Modelica.Blocks.Interfaces.RealOutput nOut
     "Relative speed of compressor. From 0 to 1"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-  Controls.Interfaces.HeatPumpControlBus heatPumpControlBus
+  Controls.Interfaces.HeatPumpControlBus sigBusHP
     annotation (Placement(transformation(extent={{-128,-40},{-94,-10}})));
 equation
   connect(conZer.y, swiNull.u3) annotation (Line(points={{50.6,-18},{58,-18},{
