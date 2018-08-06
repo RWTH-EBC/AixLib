@@ -42,7 +42,7 @@ equation
   tau = length*(
     AixLib.Utilities.Math.Functions.inverseXRegularized(
        x=velocity,
-       delta=0.01));
+       delta=0.0001));
   tauRev = tau;
 
   annotation (
