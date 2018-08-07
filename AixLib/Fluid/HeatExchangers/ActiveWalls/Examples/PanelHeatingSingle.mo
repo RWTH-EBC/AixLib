@@ -1,17 +1,14 @@
-within AixLib.Fluid.HeatExchangers.Examples.ActiveWalls;
-model Panel_CoolingAndHeating
+within AixLib.Fluid.HeatExchangers.ActiveWalls.Examples;
+model PanelHeatingSingle
   extends Modelica.Icons.Example;
      replaceable package Medium =
       Modelica.Media.Water.ConstantPropertyLiquidWater "Medium in the system"                annotation(choicesAllMatching = true);
 
-  HeatExchangers.ActiveWalls.Panel_Dis1D panel_Dis1D(
+  AixLib.Fluid.HeatExchangers.ActiveWalls.PanelHeating panel_Dis1D(
     redeclare package Medium = Medium,
-    Dis=2,
+    dis=2,
     A=2,
-    OperatingMode=3,
-    Floor=true,
-    HeatingRecord=DataBase.ActiveWalls.UponorComfortPanelHL_Heating(),
-    CoolingRecord=DataBase.ActiveWalls.UponorComfortPanelHL_Cooling(),
+    isFloor=true,
     T0=292.15) annotation (Placement(transformation(extent={{-34,8},{30,28}})));
   Modelica.Fluid.Sources.MassFlowSource_T Source(
     nPorts=1,
@@ -70,7 +67,7 @@ model Panel_CoolingAndHeating
   Modelica.Blocks.Interfaces.RealOutput Tflow "Connector of Real output signal"
     annotation (Placement(transformation(extent={{100,-94},{120,-74}})));
 equation
-  Power = abs(panel_Dis1D.ThermTop.Q_flow + panel_Dis1D.StarTop.Q_flow);
+  Power =abs(panel_Dis1D.thermConv.Q_flow + panel_Dis1D.starRad.Q_flow);
   connect(Source.ports[1],pipe1. port_a) annotation (Line(
       points={{-74,18},{-62,18},{-62,19}},
       color={0,127,255},
@@ -83,11 +80,11 @@ equation
       points={{-16,-56},{0.56,-56},{0.56,7}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(fixedTemperature1.port, panel_Dis1D.StarTop) annotation (Line(
+  connect(fixedTemperature1.port,panel_Dis1D.starRad)  annotation (Line(
       points={{-38,62},{-5.84,62},{-5.84,29}},
       color={191,0,0},
       smooth=Smooth.None));
-  connect(fixedTemperature2.port, panel_Dis1D.ThermTop) annotation (Line(
+  connect(fixedTemperature2.port, panel_Dis1D.thermConv) annotation (Line(
       points={{62,64},{36,64},{36,66},{2.48,66},{2.48,29.6667}},
       color={191,0,0},
       smooth=Smooth.None));
@@ -148,4 +145,4 @@ equation
 Moved into AixLib</li>
 </ul>
 </html>"));
-end Panel_CoolingAndHeating;
+end PanelHeatingSingle;

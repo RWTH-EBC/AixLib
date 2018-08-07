@@ -1,5 +1,5 @@
-﻿within AixLib.Fluid.HeatExchangers.ActiveWalls.Examples;
-model PanelHeating
+within AixLib.Fluid.HeatExchangers.ActiveWalls.Examples;
+model PanelHeatingMultiple
   extends Modelica.Icons.Example;
       replaceable package Medium =
       Modelica.Media.Water.ConstantPropertyLiquidWater "Medium in the system"                annotation(choicesAllMatching = true);
@@ -214,4 +214,4 @@ Added to the HVAC library.</li>
 </html>"),
     experiment(StopTime=86400, Interval=60),
     __Dymola_experimentSetupOutput);
-end PanelHeating;
+end PanelHeatingMultiple;
