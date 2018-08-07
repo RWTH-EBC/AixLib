@@ -53,9 +53,9 @@ model BuildingWithPV
     currentCapacityDiscrete(start=0),
     maxCapacity=3000)
     annotation (Placement(transformation(extent={{-48,-106},{-28,-86}})));
-  HVACAgentBasedControl.CostFunctions.Economic.ConstantFactor constantFactor(p=0.067)
+  AixLib.Controls.HVACAgentBasedControl.CostFunctions.Economic.Constant_Economic_Cost constantFactor(p=0.067)
     annotation (Placement(transformation(extent={{-48,-84},{-28,-64}})));
-  HVACAgentBasedControl.CostFunctions.Economic.PV_varCost constantFactor1(
+  AixLib.Controls.HVACAgentBasedControl.CostFunctions.Economic.PV_Variable_Economic_Cost constantFactor1(
     rad_treshold=310,
     p=0.29,
     eta=1) annotation (Placement(transformation(extent={{32,-84},{52,-64}})));
