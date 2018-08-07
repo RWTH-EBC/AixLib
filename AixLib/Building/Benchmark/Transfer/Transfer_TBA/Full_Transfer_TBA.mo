@@ -153,8 +153,8 @@ equation
       Line(points={{-70,18},{-72,18},{-72,26},{-100,26}}, color={0,127,255}));
   connect(Valve_WarmCold_ConferenceRoom_1.port_3, Fluid_in_warm) annotation (
       Line(points={{-42,18},{-44,18},{-44,26},{-100,26}}, color={0,127,255}));
-  connect(Valve_WarmCold_MultiPersonOffice_1.port_3, Fluid_in_warm) annotation
-    (Line(points={{-12,18},{-14,18},{-14,26},{-100,26}}, color={0,127,255}));
+  connect(Valve_WarmCold_MultiPersonOffice_1.port_3, Fluid_in_warm) annotation (
+     Line(points={{-12,18},{-14,18},{-14,26},{-100,26}}, color={0,127,255}));
   connect(Valve_WarmCold_Canteen_1.port_3, Fluid_in_warm) annotation (Line(
         points={{18,18},{16,18},{16,26},{-100,26}}, color={0,127,255}));
   connect(Valve_WarmCold_OpenPlanOffice_2.port_3, Fluid_out_warm) annotation (

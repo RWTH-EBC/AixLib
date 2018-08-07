@@ -217,8 +217,8 @@ equation
         color={191,0,0}));
   connect(WestWall.WindSpeedPort, WindSpeedPort_WestWall) annotation (Line(
         points={{-80.2,-17.6},{-90,-17.6},{-90,0},{-116,0}}, color={0,0,127}));
-  connect(WestWall.SolarRadiationPort, SolarRadiationPort_WestWall) annotation
-    (Line(points={{-81.2,-22},{-90,-22},{-90,-32},{-110,-32}}, color={255,128,0}));
+  connect(WestWall.SolarRadiationPort, SolarRadiationPort_WestWall) annotation (
+     Line(points={{-81.2,-22},{-90,-22},{-90,-32},{-110,-32}}, color={255,128,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-4,46},{44,36}},

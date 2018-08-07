@@ -125,8 +125,8 @@ equation
         points={{-18,52},{-20,52},{-20,20},{-72,20},{-72,52}}, color={0,127,255}));
   connect(MultiPersonOffice.Fluid_in_warm, Central.Fluid_in_warm) annotation (
       Line(points={{10,52},{10,20},{-72,20},{-72,52}}, color={0,127,255}));
-  connect(Canteen.Fluid_in_warm, Central.Fluid_in_warm) annotation (Line(points
-        ={{38,52},{38,20},{-72,20},{-72,52}}, color={0,127,255}));
+  connect(Canteen.Fluid_in_warm, Central.Fluid_in_warm) annotation (Line(points=
+         {{38,52},{38,20},{-72,20},{-72,52}}, color={0,127,255}));
   connect(Workshop.Fluid_in_warm, Central.Fluid_in_warm) annotation (Line(
         points={{66,52},{66,20},{-72,20},{-72,52}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(

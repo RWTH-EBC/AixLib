@@ -212,8 +212,8 @@ equation
   connect(WestWallToOpenPlanOffice.thermStarComb_inside, thermStar_Demux.thermStarComb)
     annotation (Line(points={{70,-20},{60,-20},{60,-52},{-20.1,-52},{-20.1,
           -35.4}}, color={191,0,0}));
-  connect(EastWall.SolarRadiationPort, SolarRadiationPort_WestWall) annotation
-    (Line(points={{-83.2,-34},{-90,-34},{-90,-32},{-110,-32}}, color={255,128,0}));
+  connect(EastWall.SolarRadiationPort, SolarRadiationPort_WestWall) annotation (
+     Line(points={{-83.2,-34},{-90,-34},{-90,-32},{-110,-32}}, color={255,128,0}));
   connect(EastWall.WindSpeedPort, WindSpeedPort_WestWall) annotation (Line(
         points={{-82.2,-29.6},{-90,-29.6},{-90,0},{-116,0}}, color={0,0,127}));
   connect(EastWall.port_outside, HeatPort_OutdoorTemp) annotation (Line(points=

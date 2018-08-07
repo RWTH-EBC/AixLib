@@ -143,10 +143,10 @@ equation
   connect(openPlanOffice.HeatPort_ToMultiPersonOffice, multiPersonOffice.HeatPort_ToOpenPlanOffice)
     annotation (Line(points={{18,5.76},{-4,5.76},{-4,6},{-4,6},{-4,30},{-10,30},
           {-10,29.98},{-16,29.98}}, color={191,0,0}));
-  connect(openPlanOffice.Heatport_TBA, Heatport_TBA[1]) annotation (Line(points
-        ={{54,9.16},{80,9.16},{80,6},{80,6},{80,-68},{100,-68}}, color={191,0,0}));
-  connect(conferenceRoom.Heatport_TBA, Heatport_TBA[2]) annotation (Line(points
-        ={{-16,-24.84},{-4,-24.84},{-4,-26},{-4,-26},{-4,-80},{80,-80},{80,-64},
+  connect(openPlanOffice.Heatport_TBA, Heatport_TBA[1]) annotation (Line(points=
+         {{54,9.16},{80,9.16},{80,6},{80,6},{80,-68},{100,-68}}, color={191,0,0}));
+  connect(conferenceRoom.Heatport_TBA, Heatport_TBA[2]) annotation (Line(points=
+         {{-16,-24.84},{-4,-24.84},{-4,-26},{-4,-26},{-4,-80},{80,-80},{80,-64},
           {100,-64}}, color={191,0,0}));
   connect(multiPersonOffice.Heatport_TBA, Heatport_TBA[3]) annotation (Line(
         points={{-16,39.16},{-4,39.16},{-4,-80},{80,-80},{80,-60},{100,-60}},

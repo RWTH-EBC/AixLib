@@ -4,6 +4,13 @@ model RLT
     AixLib.Media.Water "Medium in the component";
   replaceable package Medium_Air =
     AixLib.Media.Air "Medium in the component";
+
+    parameter Modelica.SIunits.Velocity v_nominal = 0 annotation(Dialog(tab = "General"));
+    parameter Real m_flow_nominal = 0 annotation(Dialog(tab = "General"));
+    parameter Modelica.SIunits.Length pipe_length = 0 annotation(Dialog(tab = "General"));
+    parameter Modelica.SIunits.Length pipe_wall_thickness = 0 annotation(Dialog(tab = "General"));
+    parameter Modelica.SIunits.Length pipe_insulation_thickness = 0 annotation(Dialog(tab = "General"));
+    parameter Modelica.SIunits.Length pipe_insulation_conductivity = 0.02 annotation(Dialog(tab = "General"));
   Fluid.HeatExchangers.ConstantEffectiveness Ext_Warm(
     m1_flow_nominal=1,
     m2_flow_nominal=10,
@@ -56,12 +63,22 @@ model RLT
         rotation=90,
         origin={0,100})));
   Fluid.Movers.SpeedControlled_y fan
-    annotation (Placement(transformation(extent={{-118,-6},{-98,14}})));
+    annotation (Placement(transformation(extent={{-96,-22},{-76,-2}})));
   Fluid.FixedResistances.PlugFlowPipe plugFlowPipe(redeclare package Medium =
-        Medium_Water)
-    annotation (Placement(transformation(extent={{-118,36},{-98,56}})));
+        Medium_Water,
+    length=pipe_length,
+    cPip=500,
+    rhoPip=8000,
+    thickness=pipe_wall_thickness,
+    v_nominal=v_nominal,
+    m_flow_nominal=m_flow_nominal,
+    dIns=pipe_insulation_thickness,
+    kIns=pipe_insulation_conductivity)
+    annotation (Placement(transformation(extent={{-10,10},{10,-10}},
+        rotation=-90,
+        origin={-82,44})));
   Fluid.Actuators.Valves.ThreeWayLinear val1
-    annotation (Placement(transformation(extent={{-118,-42},{-98,-22}})));
+    annotation (Placement(transformation(extent={{-156,-44},{-136,-24}})));
 equation
   connect(Ext_Warm.port_b2, Ext_Cold.port_a2)
     annotation (Line(points={{-52,-66},{8,-66}}, color={0,127,255}));
@@ -71,10 +88,6 @@ equation
     annotation (Line(points={{28,-54},{80,-54},{80,100}}, color={0,127,255}));
   connect(Ext_Cold.port_b1, Fluid_out_cold) annotation (Line(points={{8,-54},{0,
           -54},{0,80},{40,80},{40,100}},   color={0,127,255}));
-  connect(Ext_Warm.port_a1, Fluid_in_warm) annotation (Line(points={{-52,-54},{
-          -40,-54},{-40,100}}, color={0,127,255}));
-  connect(Ext_Warm.port_b1, Fluid_out_warm) annotation (Line(points={{-72,-54},
-          {-80,-54},{-80,100}}, color={0,127,255}));
   connect(Ext_Warm.port_a2, Air_in)
     annotation (Line(points={{-72,-66},{-98,-66}}, color={0,127,255}));
   connect(hum.port_b, Air_out)

@@ -84,12 +84,12 @@ model Canteen
     ISOrientation=3,
     outside=false,
     WallType=DataBase.Walls.EnEV2009.Ceiling.CEpartition_EnEV2009_SM_loHalf_TBA(),
-
     wall_length=20)
     annotation (Placement(transformation(
         extent={{-4,-24},{4,24}},
         rotation=-90,
         origin={20,60})));
+
   Fluid.MixingVolumes.MixingVolumeMoistAir vol(
                                      nPorts=2,
     m_flow_nominal=10,

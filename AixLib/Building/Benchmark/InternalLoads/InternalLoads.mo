@@ -12,11 +12,11 @@ model InternalLoads
                                                         tableOnFile=true,
     final fileName=
         "D:/aku-bga/AixLib/AixLib/Building/Benchmark/InternalLoads/InternalLoads_v1.mat",
-
     tableName="final",
     timeScale=1,
     columns={2,3,4,5,6,7,8,9,10,11})
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
+
 equation
   connect(internalLoads_Water.y1, Water_Room)
     annotation (Line(points={{10,-60},{100,-60}}, color={0,0,127}));
