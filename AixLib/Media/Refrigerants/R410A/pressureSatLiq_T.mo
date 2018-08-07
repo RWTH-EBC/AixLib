@@ -24,9 +24,9 @@ protected
 
 algorithm
   // Independent variable
-  x := Buildings.Utilities.Math.Functions.smoothMax(1-T/TCri, 1e-4, 5e-3) - x0;
+  x := AixLib.Utilities.Math.Functions.smoothMax(1-T/TCri, 1e-4, 5e-3) - x0;
   // Pressure of saturated liquid refrigerant
-  p := pCri*Modelica.Math.exp(TCri/T*Buildings.Utilities.Math.Functions.polynomial(a = a, x = x));
+  p := pCri*Modelica.Math.exp(TCri/T*AixLib.Utilities.Math.Functions.polynomial(a = a, x = x));
 
 annotation (smoothOrder=1,
 preferredView="info",Documentation(info="<HTML>
