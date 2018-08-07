@@ -1,28 +1,27 @@
-within AixLib.Building.Benchmark.Transfer.Transfer_RLT;
+﻿within AixLib.Building.Benchmark.Transfer.Transfer_RLT;
 model RLT
   replaceable package Medium_Water =
     AixLib.Media.Water "Medium in the component";
   replaceable package Medium_Air =
     AixLib.Media.Air "Medium in the component";
 
-    replaceable package pump_model_hot = AixLib.Fluid.Movers.Data.Generic;
-
+    parameter AixLib.Fluid.Movers.Data.Generic pump_model_hot annotation(Dialog(tab = "Hot"), choicesAllMatching = true);
     parameter Modelica.SIunits.Velocity v_nominal_hot = 0 annotation(Dialog(tab = "Hot"));
     parameter Real m_flow_nominal_hot = 0 annotation(Dialog(tab = "Hot"));
     parameter Modelica.SIunits.Length pipe_length_hot = 0 annotation(Dialog(tab = "Hot"));
     parameter Modelica.SIunits.Length pipe_wall_thickness_hot = 0 annotation(Dialog(tab = "Hot"));
     parameter Modelica.SIunits.Length pipe_insulation_thickness_hot = 0 annotation(Dialog(tab = "Hot"));
-    parameter Modelica.SIunits.Length pipe_insulation_conductivity_hot = 0.02 annotation(Dialog(tab = "Hot"));
+    parameter Modelica.SIunits.ThermalConductivity pipe_insulation_conductivity_hot = 0  annotation(Dialog(tab = "Hot"));
     parameter Modelica.SIunits.Volume V_mixing_hot = 0 annotation(Dialog(tab = "Hot"));
     parameter Real Kv_hot = 0 annotation(Dialog(tab = "Hot"));
 
-    parameter AixLib.Fluid.Movers.Data.Generic pump_model_cold = AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 annotation(Dialog(tab = "Cold"), choicesAllMatching = true);
+    parameter AixLib.Fluid.Movers.Data.Generic pump_model_cold annotation(Dialog(tab = "Cold"), choicesAllMatching = true);
     parameter Modelica.SIunits.Velocity v_nominal_cold = 0 annotation(Dialog(tab = "Cold"));
     parameter Real m_flow_nominal_cold = 0 annotation(Dialog(tab = "Cold"));
     parameter Modelica.SIunits.Length pipe_length_cold = 0 annotation(Dialog(tab = "Cold"));
     parameter Modelica.SIunits.Length pipe_wall_thickness_cold = 0 annotation(Dialog(tab = "Cold"));
     parameter Modelica.SIunits.Length pipe_insulation_thickness_cold = 0 annotation(Dialog(tab = "Cold"));
-    parameter Modelica.SIunits.Length pipe_insulation_conductivity_cold = 0.02 annotation(Dialog(tab = "Cold"));
+    parameter Modelica.SIunits.ThermalConductivity pipe_insulation_conductivity_cold = 0 annotation(Dialog(tab = "Cold"));
     parameter Modelica.SIunits.Volume V_mixing_cold = 0 annotation(Dialog(tab = "Cold"));
     parameter Real Kv_cold = 0 annotation(Dialog(tab = "Cold"));
   Fluid.HeatExchangers.ConstantEffectiveness Ext_Warm(
@@ -70,17 +69,12 @@ model RLT
         Medium_Air)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,-76},{110,-56}})));
-  Modelica.Blocks.Interfaces.RealInput X_w1
+  Modelica.Blocks.Interfaces.RealInput X_w
     "Set point for water vapor mass fraction in kg/kg total air of the fluid that leaves port_b"
     annotation (Placement(transformation(
-        extent={{20,-20},{-20,20}},
+        extent={{12,-12},{-12,12}},
         rotation=90,
         origin={0,100})));
-  Fluid.Movers.SpeedControlled_y fan(redeclare package Medium = Medium_Water,
-      per)
-    annotation (Placement(transformation(extent={{-8,-8},{8,8}},
-        rotation=-90,
-        origin={-40,-20})));
   Fluid.FixedResistances.PlugFlowPipe plugFlowPipe(redeclare package Medium =
         Medium_Water,
     cPip=500,
@@ -130,7 +124,8 @@ model RLT
   Modelica.Blocks.Interfaces.RealInput pump_hot
     "Constant normalized rotational speed"
     annotation (Placement(transformation(extent={{112,-52},{88,-28}})));
-  Fluid.Movers.SpeedControlled_y fan1(redeclare package Medium = Medium_Water)
+  Fluid.Movers.SpeedControlled_y fan1(redeclare package Medium = Medium_Water,
+      per=pump_model_cold)
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=-90,
         origin={80,0})));
@@ -165,13 +160,13 @@ model RLT
         Medium_Water,
     cPip=500,
     rhoPip=8000,
-    nPorts=2,
     v_nominal=v_nominal_cold,
     length=pipe_length_cold,
     m_flow_nominal=m_flow_nominal_cold,
     dIns=pipe_insulation_thickness_cold,
     kIns=pipe_insulation_conductivity_cold,
-    thickness=pipe_wall_thickness_cold)
+    thickness=pipe_wall_thickness_cold,
+    nPorts=1)
     annotation (Placement(transformation(extent={{-9,-8},{9,8}},
         rotation=-90,
         origin={40,21})));
@@ -190,12 +185,13 @@ model RLT
     annotation (Placement(transformation(extent={{-9,8},{9,-8}},
         rotation=-90,
         origin={80,21})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort_hot
-    "Heat dissipation to environment"
-    annotation (Placement(transformation(extent={{-30,-110},{-10,-90}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort_cold
-    "Heat dissipation to environment"
-    annotation (Placement(transformation(extent={{10,-110},{30,-90}})));
+  Fluid.Movers.SpeedControlled_y fan2(redeclare package Medium = Medium_Water,
+      per=pump_model_hot)
+    annotation (Placement(transformation(extent={{-8,-8},{8,8}},
+        rotation=-90,
+        origin={-40,-20})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort_pumpsAndPipes
+    annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
 equation
   connect(Ext_Warm.port_b2, Ext_Cold.port_a2)
     annotation (Line(points={{-52,-66},{8,-66}}, color={0,127,255}));
@@ -205,7 +201,7 @@ equation
     annotation (Line(points={{-72,-66},{-98,-66}}, color={0,127,255}));
   connect(hum.port_b, Air_out)
     annotation (Line(points={{82,-66},{100,-66}}, color={0,127,255}));
-  connect(hum.X_w, X_w1) annotation (Line(points={{60,-60},{40,-60},{40,-40},{0,
+  connect(hum.X_w, X_w) annotation (Line(points={{60,-60},{40,-60},{40,-40},{0,
           -40},{0,100}}, color={0,0,127}));
   connect(plugFlowPipe1.port_a, vol.ports[1])
     annotation (Line(points={{-80,20},{-80,58.4}}, color={0,127,255}));
@@ -217,14 +213,8 @@ equation
     annotation (Line(points={{-40,54},{-40,20}}, color={0,127,255}));
   connect(Fluid_in_warm, val1.port_1)
     annotation (Line(points={{-40,100},{-40,66}}, color={0,127,255}));
-  connect(fan.port_a, plugFlowPipe.ports_b[1])
-    annotation (Line(points={{-40,-12},{-40,2}}, color={0,127,255}));
-  connect(fan.port_b, Ext_Warm.port_a1) annotation (Line(points={{-40,-28},{-40,
-          -54},{-52,-54}}, color={0,127,255}));
   connect(Ext_Warm.port_b1, plugFlowPipe1.ports_b[1])
     annotation (Line(points={{-72,-54},{-80,-54},{-80,2}}, color={0,127,255}));
-  connect(fan.y, pump_hot) annotation (Line(points={{-30.4,-20},{-20,-20},{-20,-40},
-          {100,-40}}, color={0,0,127}));
   connect(fan1.y, pump_cold)
     annotation (Line(points={{89.6,0},{100,0}}, color={0,0,127}));
   connect(val1.y, valve_hot) annotation (Line(points={{-32.8,60},{20,60},{20,40},
@@ -243,25 +233,34 @@ equation
     annotation (Line(points={{40,100},{40,100},{40,81.6}}, color={0,127,255}));
   connect(Fluid_in_cold, val2.port_1)
     annotation (Line(points={{80,100},{80,86},{80,86}}, color={0,127,255}));
-  connect(plugFlowPipe2.ports_b[1], Ext_Cold.port_b1) annotation (Line(points={{
-          38.4,12},{38.4,-40},{0,-40},{0,-54},{8,-54}}, color={0,127,255}));
   connect(Ext_Cold.port_a1, fan1.port_b) annotation (Line(points={{28,-54},{60,-54},
           {60,-40},{80,-40},{80,-8}}, color={0,127,255}));
-  connect(fan.heatPort, heatPort_hot) annotation (Line(points={{-45.44,-20},{-60,
-          -20},{-60,-40},{-20,-40},{-20,-100}}, color={191,0,0}));
-  connect(plugFlowPipe1.heatPort, heatPort_hot) annotation (Line(points={{-72,11},
-          {-60,11},{-60,12},{-60,12},{-60,-40},{-20,-40},{-20,-100}}, color={191,
+  connect(plugFlowPipe.ports_b[1], fan2.port_a)
+    annotation (Line(points={{-40,2},{-40,-12}}, color={0,127,255}));
+  connect(fan2.port_b, Ext_Warm.port_a1) annotation (Line(points={{-40,-28},{-40,
+          -28},{-40,-54},{-52,-54}}, color={0,127,255}));
+  connect(fan2.y, pump_hot) annotation (Line(points={{-30.4,-20},{-20,-20},{-20,
+          -40},{100,-40}}, color={0,0,127}));
+  connect(plugFlowPipe1.heatPort, plugFlowPipe.heatPort) annotation (Line(
+        points={{-72,11},{-60,11},{-60,11},{-48,11}}, color={191,0,0}));
+  connect(fan2.heatPort, plugFlowPipe.heatPort) annotation (Line(points={{
+          -45.44,-20},{-60,-20},{-60,11},{-48,11}}, color={191,0,0}));
+  connect(plugFlowPipe2.heatPort, plugFlowPipe3.heatPort) annotation (Line(
+        points={{48,21},{60,21},{60,21},{72,21}}, color={191,0,0}));
+  connect(fan1.heatPort, plugFlowPipe3.heatPort) annotation (Line(points={{
+          74.56,0},{60,0},{60,21},{72,21}}, color={191,0,0}));
+  connect(fan2.heatPort, plugFlowPipe3.heatPort) annotation (Line(points={{
+          -45.44,-20},{-60,-20},{-60,-40},{60,-40},{60,21},{72,21}}, color={191,
           0,0}));
-  connect(plugFlowPipe.heatPort, heatPort_hot) annotation (Line(points={{-48,11},
-          {-60,11},{-60,12},{-60,12},{-60,-40},{-20,-40},{-20,-100}}, color={191,
-          0,0}));
-  connect(fan1.heatPort, heatPort_cold) annotation (Line(points={{74.56,0},{0,0},
-          {0,-80},{20,-80},{20,-100}}, color={191,0,0}));
-  connect(plugFlowPipe2.heatPort, heatPort_cold) annotation (Line(points={{48,21},
-          {60,21},{60,0},{0,0},{0,-80},{20,-80},{20,-100}}, color={191,0,0}));
-  connect(plugFlowPipe3.heatPort, heatPort_cold) annotation (Line(points={{72,21},
-          {60,21},{60,20},{60,20},{60,0},{0,0},{0,-80},{20,-80},{20,-100}},
-        color={191,0,0}));
+  connect(plugFlowPipe2.ports_b[1], Ext_Cold.port_b1) annotation (Line(points={
+          {40,12},{40,-40},{0,-40},{0,-54},{8,-54}}, color={0,127,255}));
+  connect(heatPort_pumpsAndPipes, plugFlowPipe3.heatPort) annotation (Line(
+        points={{0,-100},{0,-40},{60,-40},{60,21},{72,21}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false), graphics={Text(
+          extent={{-78,-74},{-16,-94}},
+          lineColor={28,108,200},
+          textString="Parameter Wärmetausch
+müssen angepasst werden
+")}));
 end RLT;

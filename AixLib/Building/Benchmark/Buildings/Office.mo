@@ -25,7 +25,7 @@ model Office
         Medium_Air)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-50,-110},{-30,-90}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Air_out[5](redeclare package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_b Air_out(redeclare package Medium =
         Medium_Air)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-90,-110},{-70,-90}})));
@@ -49,6 +49,14 @@ model Office
   Modelica.Blocks.Interfaces.RealInput mWat[5]
     "Water flow rate added into the medium"
     annotation (Placement(transformation(extent={{-114,26},{-86,54}})));
+  Fluid.MixingVolumes.MixingVolume vol1(
+    redeclare package Medium = Medium_Air,
+    m_flow_nominal=100,
+    V=10,
+    nPorts=11) annotation (Placement(transformation(
+        extent={{-7,-7},{7,7}},
+        rotation=90,
+        origin={-67,-53})));
 equation
   connect(firstFloor.WindSpeedPort_North, WindSpeedPort_North) annotation (Line(
         points={{20,56},{80,56},{80,80},{100,80}}, color={0,0,127}));
@@ -96,13 +104,8 @@ equation
     annotation (Line(points={{20,-52},{60,-52},{60,-100}}, color={191,0,0}));
   connect(groundFloor.Air_in, Air_in) annotation (Line(points={{-20,-56},{-40,
           -56},{-40,-100}}, color={0,127,255}));
-  connect(groundFloor.Air_out, Air_out) annotation (Line(points={{-20,-48},{-40,
-          -48},{-40,-56},{-40,-56},{-40,-80},{-80,-80},{-80,-100}}, color={0,
-          127,255}));
   connect(firstFloor.Air_in, Air_in) annotation (Line(points={{-20,24},{-40,24},
           {-40,-100}}, color={0,127,255}));
-  connect(firstFloor.Air_out, Air_out) annotation (Line(points={{-20,32},{-40,
-          32},{-40,-80},{-80,-80},{-80,-100}}, color={0,127,255}));
   connect(groundFloor.WindSpeedPort_North, WindSpeedPort_North) annotation (
       Line(points={{20,-24},{80,-24},{80,80},{100,80}}, color={0,0,127}));
   connect(groundFloor.WindSpeedPort_East, WindSpeedPort_East) annotation (Line(
@@ -134,6 +137,12 @@ equation
           68},{-80,40},{-100,40}}, color={0,0,127}));
   connect(groundFloor.mWat, mWat) annotation (Line(points={{-8,-60},{-8,-80},{
           -80,-80},{-80,40},{-100,40}}, color={0,0,127}));
+  connect(groundFloor.Air_out, vol1.ports[1:5]) annotation (Line(points={{-20,
+          -48},{-60,-48},{-60,-53.5091}}, color={0,127,255}));
+  connect(firstFloor.Air_out, vol1.ports[6:10]) annotation (Line(points={{-20,
+          32},{-40,32},{-40,32},{-60,32},{-60,-50.9636}}, color={0,127,255}));
+  connect(vol1.ports[11], Air_out) annotation (Line(points={{-60,-50.4545},{-60,
+          -86},{-80,-86},{-80,-100}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Office;

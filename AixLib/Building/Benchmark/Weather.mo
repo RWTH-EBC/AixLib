@@ -54,7 +54,7 @@ model Weather
     redeclare package Medium = Medium_Air,
     p=100000,
     T=293.15,
-    nPorts=5) annotation (Placement(transformation(
+    nPorts=1) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={-52,-60})));
@@ -62,7 +62,7 @@ model Weather
         Medium_Air)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,-30},{-90,-10}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Air_in[5](redeclare package Medium =
+  Modelica.Fluid.Interfaces.FluidPort_a Air_in(redeclare package Medium =
         Medium_Air)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
@@ -143,8 +143,8 @@ equation
           -16},{0,27},{-19,27}}, color={0,0,127}));
   connect(boundary.m_flow_in, controlBus.Fan_RLT) annotation (Line(points={{-44,
           -12},{-6,-12},{-6,-80},{-49.9,-80},{-49.9,-101.9}}, color={0,0,127}));
-  connect(Air_in_bou.ports[1:5], Air_in) annotation (Line(points={{-62,-56.8},{
-          -82,-56.8},{-82,-60},{-100,-60}}, color={0,127,255}));
+  connect(Air_in, Air_in_bou.ports[1])
+    annotation (Line(points={{-100,-60},{-62,-60}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Weather;

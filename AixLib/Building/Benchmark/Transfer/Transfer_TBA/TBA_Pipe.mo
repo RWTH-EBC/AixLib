@@ -1,14 +1,24 @@
-﻿within AixLib.Building.Benchmark.Transfer.Transfer_TBA;
+within AixLib.Building.Benchmark.Transfer.Transfer_TBA;
 model TBA_Pipe
   replaceable package Medium_Water =
     AixLib.Media.Water "Medium in the component";
   import BaseLib = AixLib.Utilities;
 
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_TBA_OpenPlanOffice
-    annotation (Placement(transformation(extent={{-10,90},{10,110}})));
-  parameter Modelica.SIunits.Length pipe_diameter = 0.02 annotation(Dialog(tab = "General"));
-  parameter Modelica.SIunits.Length wall_length = 0 annotation(Dialog(tab = "General"));
-  parameter Modelica.SIunits.Length wall_height = 0 annotation(Dialog(tab = "General"));
+  parameter AixLib.Fluid.Movers.Data.Generic pump_model annotation(Dialog(tab = "General"), choicesAllMatching = true);
+    parameter Modelica.SIunits.Velocity v_nominal = 0 annotation(Dialog(tab = "General"));
+    parameter Real m_flow_nominal = 0 annotation(Dialog(tab = "General"));
+    parameter Modelica.SIunits.Length pipe_length = 0 annotation(Dialog(tab = "General"));
+    parameter Modelica.SIunits.Length pipe_wall_thickness = 0 annotation(Dialog(tab = "General"));
+    parameter Modelica.SIunits.Length pipe_insulation_thickness = 0 annotation(Dialog(tab = "General"));
+    parameter Modelica.SIunits.ThermalConductivity pipe_insulation_conductivity = 0  annotation(Dialog(tab = "General"));
+    parameter Modelica.SIunits.Volume V_mixing = 0 annotation(Dialog(tab = "General"));
+    parameter Real Kv = 0 annotation(Dialog(tab = "General"));
+
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_TBA
+    annotation (Placement(transformation(extent={{-50,90},{-30,110}})));
+  parameter Modelica.SIunits.Length TBA_pipe_diameter = 0.02 annotation(Dialog(tab = "General"));
+  parameter Modelica.SIunits.Length TBA_wall_length = 0 annotation(Dialog(tab = "General"));
+  parameter Modelica.SIunits.Length TBA_wall_height = 0 annotation(Dialog(tab = "General"));
   Modelica.Fluid.Interfaces.FluidPort_a Fluid_in(redeclare package Medium =
         Medium_Water)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
@@ -18,28 +28,102 @@ model TBA_Pipe
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{50,-110},{70,-90}})));
   Fluid.MixingVolumes.MixingVolume vol(
-    nPorts=2,
     m_flow_nominal=1,
-    V=wall_length*wall_height*5.8*3.14159*(pipe_diameter/2)^2,
-    redeclare package Medium = Medium_Water)
+    redeclare package Medium = Medium_Water,
+    nPorts=2,
+    V=TBA_wall_length*TBA_wall_height*5.8*3.14159*(TBA_pipe_diameter/2)^2)
     annotation (Placement(transformation(extent={{-8,46},{12,66}})));
 
+  Fluid.FixedResistances.PlugFlowPipe plugFlowPipe(redeclare package Medium =
+        Medium_Water,
+    cPip=500,
+    rhoPip=8000,
+    nPorts=1,
+    v_nominal=v_nominal,
+    length=pipe_length,
+    m_flow_nominal=m_flow_nominal,
+    dIns=pipe_insulation_thickness,
+    kIns=pipe_insulation_conductivity,
+    thickness=pipe_wall_thickness)
+    annotation (Placement(transformation(extent={{9,8},{-9,-8}},
+        rotation=-90,
+        origin={60,-9})));
+  Fluid.Actuators.Valves.ThreeWayLinear val1(
+    redeclare package Medium = Medium_Water,
+    CvData=AixLib.Fluid.Types.CvTypes.Kv,
+    riseTime=2,
+    Kv=Kv,
+    m_flow_nominal=m_flow_nominal)
+    annotation (Placement(transformation(extent={{6,6},{-6,-6}},
+        rotation=-90,
+        origin={-60,-40})));
+  Fluid.FixedResistances.PlugFlowPipe plugFlowPipe1(
+                                                   redeclare package Medium =
+        Medium_Water,
+    cPip=500,
+    rhoPip=8000,
+    nPorts=1,
+    v_nominal=v_nominal,
+    length=pipe_length,
+    m_flow_nominal=m_flow_nominal,
+    dIns=pipe_insulation_thickness,
+    kIns=pipe_insulation_conductivity,
+    thickness=pipe_wall_thickness)
+    annotation (Placement(transformation(extent={{9,-8},{-9,8}},
+        rotation=-90,
+        origin={-60,-9})));
+  Fluid.MixingVolumes.MixingVolume vol1(
+    redeclare package Medium = Medium_Water,
+    nPorts=3,
+    m_flow_nominal=m_flow_nominal,
+    V=V_mixing)
+              annotation (Placement(transformation(
+        extent={{-6,6},{6,-6}},
+        rotation=90,
+        origin={66,-40})));
+  Fluid.Movers.SpeedControlled_y fan2(redeclare package Medium = Medium_Water,
+      per=pump_model)
+    annotation (Placement(transformation(extent={{8,8},{-8,-8}},
+        rotation=-90,
+        origin={-60,28})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_pumpsAndPipes
+    annotation (Placement(transformation(extent={{30,90},{50,110}})));
+  Modelica.Blocks.Interfaces.RealInput valve
+    "Actuator position (0: closed, 1: open)"
+    annotation (Placement(transformation(extent={{-112,-52},{-88,-28}})));
+  Modelica.Blocks.Interfaces.RealInput pump
+    "Constant normalized rotational speed"
+    annotation (Placement(transformation(extent={{-112,16},{-88,40}})));
 equation
-  connect(vol.ports[1], Fluid_out)
-    annotation (Line(points={{0,46},{60,46},{60,-100}}, color={0,127,255}));
-  connect(vol.ports[2], Fluid_in)
-    annotation (Line(points={{4,46},{-60,46},{-60,-100}}, color={0,127,255}));
-  connect(vol.heatPort, HeatPort_TBA_OpenPlanOffice) annotation (Line(points={{
-          -8,56},{-24,56},{-24,86},{0,86},{0,100}}, color={191,0,0}));
+  connect(vol.heatPort, HeatPort_TBA) annotation (Line(points={{-8,56},{-24,56},
+          {-24,56},{-40,56},{-40,100},{-40,100}},
+                                    color={191,0,0}));
+  connect(plugFlowPipe1.heatPort, plugFlowPipe.heatPort)
+    annotation (Line(points={{-52,-9},{52,-9}}, color={191,0,0}));
+  connect(fan2.heatPort, plugFlowPipe.heatPort) annotation (Line(points={{-54.56,
+          28},{0,28},{0,-9},{52,-9}}, color={191,0,0}));
+  connect(Fluid_in, val1.port_1)
+    annotation (Line(points={{-60,-100},{-60,-46}}, color={0,127,255}));
+  connect(plugFlowPipe1.ports_b[1], fan2.port_a)
+    annotation (Line(points={{-60,0},{-60,20}}, color={0,127,255}));
+  connect(fan2.port_b, vol.ports[1])
+    annotation (Line(points={{-60,36},{-60,46},{0,46}}, color={0,127,255}));
+  connect(vol.ports[2], plugFlowPipe.ports_b[1])
+    annotation (Line(points={{4,46},{60,46},{60,0}}, color={0,127,255}));
+  connect(plugFlowPipe.port_a, vol1.ports[1])
+    annotation (Line(points={{60,-18},{60,-41.6}}, color={0,127,255}));
+  connect(val1.port_3, vol1.ports[2]) annotation (Line(points={{-54,-40},{4,-40},
+          {4,-40},{60,-40}}, color={0,127,255}));
+  connect(vol1.ports[3], Fluid_out)
+    annotation (Line(points={{60,-38.4},{60,-100}}, color={0,127,255}));
+  connect(val1.port_2, plugFlowPipe1.port_a)
+    annotation (Line(points={{-60,-34},{-60,-18}}, color={0,127,255}));
+  connect(HeatPort_pumpsAndPipes, plugFlowPipe.heatPort) annotation (Line(
+        points={{40,100},{40,28},{0,28},{0,-9},{52,-9}}, color={191,0,0}));
+  connect(val1.y, valve)
+    annotation (Line(points={{-67.2,-40},{-100,-40}}, color={0,0,127}));
+  connect(fan2.y, pump)
+    annotation (Line(points={{-69.6,28},{-100,28}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false), graphics={Text(
-          extent={{-48,0},{54,-10}},
-          lineColor={28,108,200},
-          textString="Hydraulik einfügen (siehe Powerpoint und AKU Modell)"),
-                                                               Text(
-          extent={{-48,-32},{48,-60}},
-          lineColor={28,108,200},
-          textString="Pipe für hin und Abfluss einfügen
-Mit Parameter
-")}));
+        coordinateSystem(preserveAspectRatio=false)));
 end TBA_Pipe;
