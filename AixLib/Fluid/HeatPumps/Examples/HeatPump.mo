@@ -10,9 +10,9 @@ model HeatPump
     m_flow=1,
     nPorts=1,
     redeclare package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater,
-
     T=275.15) "Ideal mass flow source at the inlet of the source side"
               annotation (Placement(transformation(extent={{-54,24},{-34,44}})));
+
   Sources.FixedBoundary                sourceSideFixedBoundary(redeclare
       package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, nPorts=
        1)       "Fixed boundary at the outlet of the source side"
@@ -46,8 +46,8 @@ model HeatPump
     "Pulse signal for the mass flow input of the sink side's ideal mass flow source"
     annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
   Sensors.TemperatureTwoPort                temperature(redeclare package
-      Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, m_flow_nominal
-      =heatPumpReal.mFlow_conNominal)
+      Medium = Modelica.Media.Water.ConstantPropertyLiquidWater, m_flow_nominal=
+       heatPumpReal.mFlow_conNominal)
     "Temperature sensor at the outlet of the sink side"
     annotation (Placement(transformation(extent={{56,8},{76,28}})));
   Modelica.Blocks.Interfaces.RealOutput T_Co_out
@@ -115,8 +115,8 @@ equation
   connect(heatPumpReal.port_b2, sourceSideFixedBoundary.ports[1]) annotation (
       Line(points={{10.4,-12},{10,-12},{10,-18},{-38,-18}},
                                                      color={0,127,255}));
-  connect(T_amb_internal.y, heatPumpReal.T_ambInternal) annotation (Line(points
-        ={{45,-28},{34,-28},{34,2},{24,2}}, color={0,0,127}));
+  connect(T_amb_internal.y, heatPumpReal.T_ambInternal) annotation (Line(points=
+         {{45,-28},{34,-28},{34,2},{24,2}}, color={0,0,127}));
   connect(TsuSourceRamp.y, heatPumpReal.T_amb) annotation (Line(points={{-73,12},
           {-47.5,12},{-47.5,2},{-20,2}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
@@ -140,5 +140,5 @@ equation
   </li>
  </ul>
 </html>
-"));
+"), __Dymola_Commands(file="Modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/Examples/HeatPump.mos" "Simulate and plot"));
 end HeatPump;

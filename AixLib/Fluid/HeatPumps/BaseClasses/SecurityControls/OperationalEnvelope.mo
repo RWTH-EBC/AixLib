@@ -33,11 +33,11 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(sigBusHP.T_flow_ev, boundaryMap.x_in) annotation (Line(
       points={{-134.915,-68.925},{-134.915,-70},{-98,-70},{-98,12},{-60.4182,12}},
-
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
+
 end OperationalEnvelope;

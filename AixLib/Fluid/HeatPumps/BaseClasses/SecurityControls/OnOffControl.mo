@@ -129,13 +129,13 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(sigBusHP.N, SwiSta.u1) annotation (Line(
       points={{-134.915,-68.925},{-134.915,-28},{-114,-28},{-114,16},{-94,16}},
-
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
+
   annotation (Documentation(info="<html>
 <p>Checks if the nSet value is legal by checking if the device can either be turned on or off, depending on which state it was in.</p>
 <p>E.g. If it is turned on, and the new nSet value is 0, it will only turn off if current runtime is longer than the minimal runtime. Else it will keep the current rotating speed.</p>
