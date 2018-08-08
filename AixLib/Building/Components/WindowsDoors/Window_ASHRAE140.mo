@@ -43,14 +43,13 @@ calcMethod=2,
 alpha_custom=2,
 A=windowarea)
 annotation (Placement(transformation(extent={{68,-20},{48,2}})));
-  Walls.BaseClasses.SimpleNLayer                     pane1(
+  AixLib.Building.Components.Walls.BaseClasses.SimpleNLayer                     pane1(
 n=1,
 lambda={1.06},
 c={750},
 d={0.003175},
 rho={2500},
-h=sqrt(windowarea),
-l=sqrt(windowarea),
+A=windowarea,
 T0=T0)
 annotation (Placement(transformation(extent={{-38,-18},{-18,2}})));
   Modelica.Blocks.Interfaces.RealInput WindSpeedPort
@@ -63,15 +62,14 @@ Star(T(start=T0)),
 eps=WindowType.Emissivity,
 A=windowarea)              annotation (Placement(transformation(extent={{36,22},
         {56,42}})));
-  Building.Components.Walls.BaseClasses.SimpleNLayer pane2(
+  AixLib.Building.Components.Walls.BaseClasses.SimpleNLayer pane2(
 n=1,
 lambda={1.06},
 c={750},
 d={0.003175},
 rho={2500},
 T0=T0,
-h=sqrt(windowarea),
-l=sqrt(windowarea))
+A=windowarea)
 annotation (Placement(transformation(extent={{18,-18},{38,2}})));
   Modelica.Blocks.Math.Gain Ag(k=(1 - frameFraction)*windowarea*g)
     "multiplication with area and solar gain factor"
@@ -84,13 +82,13 @@ equation
   points={{-65.2,-17.2},{-80,-17.2},{-80,-59},{-99,-59}},
   color={0,0,127}));
   connect(heatConv_outside.port_b, pane1.port_a) annotation (Line(
-  points={{-46,-10},{-46,-9},{-37,-9}},
+  points={{-46,-10},{-46,-8},{-38,-8}},
   color={191,0,0}));
   connect(pane2.port_b, heatConv_inside.port_b) annotation (Line(
-  points={{37,-9},{48,-9}},
+  points={{38,-8},{44,-8},{44,-9},{48,-9}},
   color={191,0,0}));
   connect(twoStar_RadEx.Therm, pane2.port_b) annotation (Line(
-  points={{36.8,32},{36,32},{36,-9},{37,-9}},
+  points={{36.8,32},{36,32},{36,-8},{38,-8}},
   color={191,0,0}));
   connect(Ag.y, solarRadWinTrans) annotation (Line(
       points={{8.6,60},{50,60},{50,80},{92,80}},
@@ -99,10 +97,10 @@ equation
       points={{-31.1,60},{-5.2,60}},
       color={0,0,127}));
   connect(pane1.port_b, AirGap.port_a) annotation (Line(
-      points={{-19,-9},{-15.5,-9},{-15.5,-10},{-10,-10}},
+      points={{-18,-8},{-15.5,-8},{-15.5,-10},{-10,-10}},
       color={191,0,0}));
   connect(AirGap.port_b, pane2.port_a) annotation (Line(
-      points={{10,-10},{14,-10},{14,-9},{19,-9}},
+      points={{10,-10},{14,-10},{14,-8},{18,-8}},
       color={191,0,0}));
   connect(port_outside, heatConv_outside.port_a) annotation (Line(
       points={{-90,-10},{-66,-10}},
