@@ -1,6 +1,5 @@
 removePlots();
 simulateModel("AixLib.BoundaryConditions.WeatherData.BaseClasses.Examples.CheckWindSpeed", startTime=0, tolerance=1e-6, stopTime=8640000, method="dassl", resultFile="CheckWindSpeed");
-
 createPlot(id = 1,
  position = {7, 7, 746, 517},
  y = {"cheWinSpe.winSpeIn","cheWinSpe.winSpeOut"},
@@ -13,4 +12,3 @@ createPlot(id = 1,
  filename = "CheckWindSpeed.mat",
  leftTitleType = 1,
  bottomTitleType = 1);
-

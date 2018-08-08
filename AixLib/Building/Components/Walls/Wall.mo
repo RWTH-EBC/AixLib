@@ -1,4 +1,4 @@
-within AixLib.Building.Components.Walls;
+﻿within AixLib.Building.Components.Walls;
 model Wall
   "Simple wall model for outside and inside walls with windows and doors"
   import BaseLib = AixLib.Utilities;
@@ -46,8 +46,13 @@ model Wall
   parameter Modelica.SIunits.Area windowarea = 2 "Area of window" annotation(Dialog(tab = "Window", enable = withWindow and outside));
   parameter Boolean withSunblind = false "enable support of sunblinding?" annotation(Dialog(tab = "Window", enable = outside and withWindow));
   parameter Real Blinding = 0 "blinding factor <=1" annotation(Dialog(tab = "Window", enable = withWindow and outside and withSunblind));
-  parameter Real Limit = 180
-    "minimum specific total solar radiation in W/m2 for blinding becoming active"                       annotation(Dialog(tab = "Window", enable = withWindow and outside and withSunblind));
+  parameter Real LimitSolIrr=180
+    "Minimum specific total solar radiation in W/m2 for blinding becoming active (see also TOutAirLimit)"
+    annotation(Dialog(tab="Window",   enable=withWindow and outside and
+          withSunblind));
+  parameter Modelica.SIunits.Temperature TOutAirLimit = 293.15
+    "Temperature at which sunblind closes (see also LimitSolIrr)"
+    annotation(Dialog(tab = "Window", enable = withWindow and outside and withSunblind));
   // door parameters
   parameter Boolean withDoor = false "Choose if the wall has got a door" annotation(Dialog(tab = "Door"));
   parameter Modelica.SIunits.CoefficientOfHeatTransfer U_door = 1.8
@@ -71,13 +76,16 @@ model Wall
   Weather.Sunblinds.Sunblind Sunblind(
     n=1,
     gsunblind={Blinding},
-    Imax=Limit) if                                                          outside and withWindow and withSunblind
+    Imax=LimitSolIrr) if outside and withWindow and withSunblind
     annotation (Placement(transformation(extent={{-44,-21},{-21,5}})));
   WindowsDoors.Door Door(T0 = T0, door_area = door_height * door_width, eps = eps_door, U = if outside then U_door else U_door * 2) if withDoor annotation(Placement(transformation(extent = {{-21, -102}, {11, -70}})));
   Window windowSimple(T0 = T0, windowarea = windowarea, WindowType = WindowType) if outside and withWindow annotation(Placement(transformation(extent = {{-15, -48}, {11, -22}})));
   Utilities.HeatTransfer.HeatConv_outside heatTransfer_Outside(A = wall_length * wall_height - clearance, Model = Model, surfaceType = surfaceType, alpha_custom = alpha_custom) if outside annotation(Placement(transformation(extent = {{-47, 48}, {-27, 68}})));
   Utilities.Interfaces.Adaptors.HeatStarToComb heatStarToComb annotation(Placement(transformation(extent = {{-10, 8}, {10, -8}}, rotation = 180, origin = {69, -1})));
   Utilities.Interfaces.HeatStarComb thermStarComb_inside annotation(Placement(transformation(extent = {{92, -10}, {112, 10}}), iconTransformation(extent = {{10, -10}, {30, 10}})));
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor tempOutAirSensor
+    "Outdoor air (dry bulb) temperature sensor"
+    annotation (Placement(transformation(extent={{-66,-18},{-58,-10}})));
 equation
   //   if outside and cardinality(WindSpeedPort) < 2 then
   //     WindSpeedPort = 3;
@@ -85,13 +93,16 @@ equation
   //******************************************************************
   // **********************standard connection************************
   //******************************************************************
-  connect(Wall.Star, heatStarToComb.star) annotation(Line(points = {{0.9, 30}, {48, 30}, {48, 4.8}, {58.6, 4.8}}, color = {95, 95, 95}, pattern = LinePattern.Solid));
-  connect(Wall.port_b, heatStarToComb.therm) annotation(Line(points = {{0.9, 23}, {48, 23}, {48, -6.1}, {58.9, -6.1}}, color = {191, 0, 0}));
+  connect(Wall.Star, heatStarToComb.star) annotation(Line(points={{2,30.2},{48,30.2},
+          {48,4.8},{58.6,4.8}},                                                                                   color = {95, 95, 95}, pattern = LinePattern.Solid));
+  connect(Wall.port_b, heatStarToComb.therm) annotation(Line(points={{2,24},{48,
+          24},{48,-6.1},{58.9,-6.1}},                                                                                  color = {191, 0, 0}));
   //******************************************************************
   // **********************standard connection for inside wall********
   //******************************************************************
   if not outside then
-    connect(Wall.port_a, port_outside) annotation(Line(points = {{-18.9, 23}, {-56.45, 23}, {-56.45, 4}, {-98, 4}}, color = {191, 0, 0}));
+    connect(Wall.port_a, port_outside) annotation(Line(points={{-20,24},{-56.45,
+            24},{-56.45,4},{-98,4}},                                                                                color = {191, 0, 0}));
   end if;
   //******************************************************************
   // ********************standard connection for outside wall*********
@@ -102,8 +113,10 @@ equation
       connect(WindSpeedPort, heatTransfer_Outside.WindSpeedPort) annotation(Line(points = {{-103, 64}, {-68, 64}, {-68, 50.8}, {-46.2, 50.8}}, color = {0, 0, 127}));
     end if;
     connect(heatTransfer_Outside.port_a, port_outside) annotation(Line(points = {{-47, 58}, {-56, 58}, {-56, 4}, {-98, 4}}, color = {191, 0, 0}));
-    connect(heatTransfer_Outside.port_b, Wall.port_a) annotation(Line(points = {{-27, 58}, {-24, 58}, {-24, 23}, {-18.9, 23}}, color = {191, 0, 0}));
-    connect(SolarAbsorption.heatPort, Wall.port_a) annotation(Line(points = {{-30, 87}, {-26, 87}, {-26, 84}, {-18.9, 84}, {-18.9, 23}}, color = {191, 0, 0}));
+    connect(heatTransfer_Outside.port_b, Wall.port_a) annotation(Line(points={{-27,58},
+            {-24,58},{-24,24},{-20,24}},                                                                                       color = {191, 0, 0}));
+    connect(SolarAbsorption.heatPort, Wall.port_a) annotation(Line(points={{-30,87},
+            {-26,87},{-26,84},{-20,84},{-20,24}},                                                                                        color = {191, 0, 0}));
   end if;
   //******************************************************************
   // *******standard connections for wall with door************
@@ -138,6 +151,10 @@ equation
   end if;
   connect(heatStarToComb.thermStarComb, thermStarComb_inside) annotation(Line(points = {{78.4, -1.1}, {78.4, -1.05}, {102, -1.05}, {102, 0}}, color = {191, 0, 0}));
   connect(port_outside, port_outside) annotation(Line(points = {{-98, 4}, {-98, 4}}, color = {191, 0, 0}, pattern = LinePattern.Solid));
+  connect(tempOutAirSensor.T, Sunblind.TOutAir) annotation (Line(points={{-58,
+          -14},{-54,-14},{-54,-13.2},{-45.84,-13.2}}, color={0,0,127}));
+  connect(port_outside, tempOutAirSensor.port) annotation (Line(points={{-98,4},
+          {-70,4},{-70,-14},{-66,-14}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-20, -120}, {20, 120}}, grid = {1, 1}), graphics={  Rectangle(extent = {{-16, 120}, {15, -60}}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Backward,  pattern=LinePattern.None, lineColor = {0, 0, 0}), Rectangle(extent = {{-16, -90}, {15, -120}},  pattern=LinePattern.None, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                   FillPattern.Backward), Rectangle(extent = {{-16, -51}, {15, -92}}, lineColor = {0, 0, 0},  pattern=LinePattern.None, fillColor = {215, 215, 215},

@@ -9,7 +9,7 @@ partial model PartialHeatTransferLayers "Partial for storage heat transfer model
 
   replaceable parameter
     AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
-      AixLib.DataBase.Storage.Generic_500l()
+      AixLib.DataBase.Storage.Generic_New_2000l()
       "Storage data record"
     annotation (choicesAllMatching);
 

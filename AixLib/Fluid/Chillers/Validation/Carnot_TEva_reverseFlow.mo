@@ -109,11 +109,11 @@ equation
   connect(QCon_flow.y, mCon_flow.u) annotation (Line(points={{61,-40},{80,-40},{
           80,-60},{-92,-60},{-92,14},{-82,14}}, color={0,0,127}));
   connect(mCon_flow.y, sou1.m_flow_in)
-    annotation (Line(points={{-59,14},{-50,14}},          color={0,0,127}));
+    annotation (Line(points={{-59,14},{-52,14}},          color={0,0,127}));
   connect(chi.port_b1, sin1.ports[1]) annotation (Line(points={{18,6},{30,6},{30,
           30},{70,30}},    color={0,127,255}));
   connect(mEva_flow.y, sou2.m_flow_in)
-    annotation (Line(points={{71,2},{60,2}},        color={0,0,127}));
+    annotation (Line(points={{71,2},{62,2}},        color={0,0,127}));
   annotation (experiment(Tolerance=1e-6, StopTime=3600),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Chillers/Validation/Carnot_TEva_reverseFlow.mos"
         "Simulate and plot"),
@@ -137,7 +137,5 @@ November 25, 2015, by Michael Wetter:<br/>
 First implementation.
 </li>
 </ul>
-</html>"),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}})));
+</html>"));
 end Carnot_TEva_reverseFlow;

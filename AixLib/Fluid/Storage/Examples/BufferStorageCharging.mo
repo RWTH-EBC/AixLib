@@ -9,7 +9,7 @@ model BufferStorageCharging
   AixLib.Fluid.Storage.BufferStorage storage_Aixlib(
     n=10,
     redeclare package Medium = Medium,
-    data=AixLib.DataBase.Storage.Generic_500l(),
+    data=AixLib.DataBase.Storage.Generic_New_2000l(),
     useHeatingCoil1=false,
     useHeatingCoil2=false,
     upToDownHC1=false,
@@ -21,8 +21,7 @@ model BufferStorageCharging
     redeclare package MediumHC2 = Medium,
     TStart=303.15)
     annotation (Placement(transformation(extent={{0,0},{-20,24}})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=283.15)
-                                                                                      annotation(Placement(transformation(extent={{-58,4},
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=283.15)   annotation(Placement(transformation(extent={{-58,4},
             {-38,24}})));
   AixLib.Fluid.Sources.MassFlowSource_T boundary(
     m_flow=0.2,

@@ -1,6 +1,5 @@
 simulateModel("AixLib.Airflow.Multizone.Examples.Orifice", stopTime=1,
    method="radau", tolerance=1e-06, resultFile="Orifice");
-
 createPlot(id = 9,
  position = {75, 27, 537, 493},
  y = {"ori.V_flow"},
@@ -36,4 +35,3 @@ createPlot(id = 9,
  subPlot = 2,
  leftTitleType = 1,
  bottomTitleType = 1);
-
