@@ -10,15 +10,12 @@ If you want to suggest larger changes and/or adding new models to AixLib, please
 
 **What is the problem?**
 
-**Is your feature request related to a problem? Please describe.**
-
+Is your feature request related to a problem? Please describe.
 A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
 
 - ...
 
-**How do we want to solve it?**
-
-**Describe the solution you'd like**
+**How do we want to solve it? Describe the solution you'd like**
 
 A clear and concise description of what you want to happen.
 
