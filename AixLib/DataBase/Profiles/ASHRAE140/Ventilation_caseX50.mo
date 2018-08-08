@@ -1,10 +1,10 @@
 within AixLib.DataBase.Profiles.ASHRAE140;
 record Ventilation_caseX50 "infiltration with/without the ventilation fan "
-  extends AixLib.DataBase.Profiles.Profile_BaseDataDefinition(Profile=[
-    0,    11.21;
+  extends AixLib.DataBase.Profiles.ProfileBaseDataDefinition( Profile=[
+       0, 11.21;
    25200, 11.21;
-   25200,0.41;
-   64800,0.41;
+   25200, 0.41;
+   64800, 0.41;
    64800, 11.21;
    86400, 11.21]);
   annotation (Documentation(info="<html>

@@ -143,10 +143,10 @@ full speed.
 Parameter <code>prescribeSystemPressure</code>
 can be used to control the mover such that the pressure
 difference set point is obtained across two points
-in the system, instead of across the fan. 
-This allows an efficient implementation of 
+in the system, instead of across the fan.
+This allows an efficient implementation of
 static pressure reset controllers.
-A measurement of the pressure difference between the 
+A measurement of the pressure difference between the
 two points in system then needs to be connected
 to <code>RealInput dpMea</code>.
 This functionality is demonstrated in
@@ -158,7 +158,7 @@ AixLib.Fluid.Movers.Validation.FlowControlled_dpSystem</a>.
 <ul>
 <li>
 May 5, 2017, by Filip Jorissen:<br/>
-Added parameters, documentation and functionality for 
+Added parameters, documentation and functionality for
 <code>prescribeSystemPressure</code>.<br/>
 This is for
 <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/770\">#770</a>.
@@ -219,6 +219,7 @@ AixLib.Fluid.Movers.FlowControlled_y</a>.<br/>
 This is for
 <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/457\">
 issue 457</a>.
+</li>
 <li>
 April 2, 2015, by Filip Jorissen:<br/>
 Added code for supporting stage input and constant input.
@@ -284,7 +285,5 @@ Revised implementation to allow zero flow rate.
           fillColor={135,135,135},
           fillPattern=FillPattern.Solid,
           textString="M",
-          textStyle={TextStyle.Bold})}),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}})));
+          textStyle={TextStyle.Bold})}));
 end FlowControlled_dp;

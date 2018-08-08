@@ -2,11 +2,11 @@ within AixLib.BoundaryConditions.WeatherData.Examples;
 model ReaderTMY3 "Test model for reading weather data"
   extends Modelica.Icons.Example;
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
-    filNam="modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")
+    filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-20,40},{0,60}})));
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDatInpCon(filNam=
-        "modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos",
+        Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"),
       HSou=AixLib.BoundaryConditions.Types.RadiationDataSource.Input_HGloHor_HDifHor)
     "Weather data reader with radiation data obtained from input connector"
     annotation (Placement(transformation(extent={{-20,-60},{0,-40}})));
