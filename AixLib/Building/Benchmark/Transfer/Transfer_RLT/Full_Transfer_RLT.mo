@@ -13,20 +13,20 @@ model Full_Transfer_RLT
         Medium_Air)
     "Fluid connector a2 (positive design flow direction is from port_a2 to port_b2)"
     annotation (Placement(transformation(extent={{-50,90},{-30,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_hot(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_hot(redeclare package Medium =
+        Medium_Water)
     "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{-110,30},{-90,50}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_hot(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_hot(redeclare package Medium =
+        Medium_Water)
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{-110,70},{-90,90}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium =
+        Medium_Water)
     "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{-110,-90},{-90,-70}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium =
+        Medium_Water)
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{-110,-50},{-90,-30}})));
   BusSystem.ControlBus controlBus
@@ -140,20 +140,20 @@ equation
       Line(points={{14,72},{14,80},{0,80},{0,100}}, color={191,0,0}));
   connect(Canteen.heatPort_pumpsAndPipes, heatPort[4]) annotation (Line(points=
           {{42,72},{42,80},{0,80},{0,104}}, color={191,0,0}));
-  connect(Workshop.heatPort_pumpsAndPipes, heatPort[5]) annotation (Line(points
-        ={{70,72},{70,80},{0,80},{0,108}}, color={191,0,0}));
+  connect(Workshop.heatPort_pumpsAndPipes, heatPort[5]) annotation (Line(points=
+         {{70,72},{70,80},{0,80},{0,108}}, color={191,0,0}));
   connect(Central.valve_cold, controlBus.Valve_RLT_Cold_Central) annotation (
       Line(points={{-58,54},{-54,54},{-54,28},{86,28},{86,0.1},{102.1,0.1}},
         color={0,0,127}));
   connect(Central.valve_hot, controlBus.Valve_RLT_Hot_Central) annotation (Line(
-        points={{-58,58},{-54,58},{-54,28},{86,28},{86,0.1},{102.1,0.1}}, color
-        ={0,0,127}));
+        points={{-58,58},{-54,58},{-54,28},{86,28},{86,0.1},{102.1,0.1}}, color=
+         {0,0,127}));
   connect(Central.pump_cold, controlBus.Pump_RLT_Central_cold_y) annotation (
       Line(points={{-58,62},{-54,62},{-54,28},{86,28},{86,0.1},{102.1,0.1}},
         color={0,0,127}));
   connect(Central.pump_hot, controlBus.Pump_RLT_Central_hot_y) annotation (Line(
-        points={{-58,66},{-54,66},{-54,28},{86,28},{86,0.1},{102.1,0.1}}, color
-        ={0,0,127}));
+        points={{-58,66},{-54,66},{-54,28},{86,28},{86,0.1},{102.1,0.1}}, color=
+         {0,0,127}));
   connect(OpenPlanOffice.valve_cold, controlBus.Valve_RLT_Cold_OpenPlanOffice)
     annotation (Line(points={{-32,54},{-28,54},{-28,28},{86,28},{86,0.1},{102.1,
           0.1}}, color={0,0,127}));
@@ -191,14 +191,14 @@ equation
     annotation (Line(points={{24,66},{28,66},{28,28},{86,28},{86,0.1},{102.1,
           0.1}}, color={0,0,127}));
   connect(Canteen.valve_cold, controlBus.Valve_RLT_Cold_Canteen) annotation (
-      Line(points={{52,54},{56,54},{56,28},{86,28},{86,0.1},{102.1,0.1}}, color
-        ={0,0,127}));
+      Line(points={{52,54},{56,54},{56,28},{86,28},{86,0.1},{102.1,0.1}}, color=
+         {0,0,127}));
   connect(Canteen.valve_hot, controlBus.Valve_RLT_Hot_Canteen) annotation (Line(
         points={{52,58},{56,58},{56,28},{86,28},{86,0.1},{102.1,0.1}}, color={0,
           0,127}));
   connect(Canteen.pump_cold, controlBus.Pump_RLT_Canteen_cold_y) annotation (
-      Line(points={{52,62},{56,62},{56,28},{86,28},{86,0.1},{102.1,0.1}}, color
-        ={0,0,127}));
+      Line(points={{52,62},{56,62},{56,28},{86,28},{86,0.1},{102.1,0.1}}, color=
+         {0,0,127}));
   connect(Canteen.pump_hot, controlBus.Pump_RLT_Canteen_hot_y) annotation (Line(
         points={{52,66},{56,66},{56,28},{86,28},{86,0.1},{102.1,0.1}}, color={0,
           0,127}));

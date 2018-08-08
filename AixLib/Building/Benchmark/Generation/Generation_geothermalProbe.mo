@@ -1,7 +1,7 @@
 within AixLib.Building.Benchmark.Generation;
 model Generation_geothermalProbe
   replaceable package Medium_Water =
-    AixLib.Media.Water "Medium in the component";
+  AixLib.Media.Water "Medium in the component";
 
   Modelica.Fluid.Interfaces.FluidPort_b Fulid_out_Geothermal(redeclare package
       Medium = Medium_Water)
@@ -11,18 +11,20 @@ model Generation_geothermalProbe
       Medium = Medium_Water)
     "Fluid connector a (positive design flow direction is from port_a to port_b)"
     annotation (Placement(transformation(extent={{90,-70},{110,-50}})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=284.15)   annotation(Placement(transformation(extent={{-82,6},
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=
+        Earthtemperature_start)                                                       annotation(Placement(transformation(extent={{-82,6},
             {-74,14}})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature1(T=285.15)  annotation(Placement(transformation(extent={{-82,26},
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature1(T=
+        Earthtemperature_start + Probe_depth/120)                                     annotation(Placement(transformation(extent={{-82,26},
             {-74,34}})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature2(T=286.15)  annotation(Placement(transformation(extent={{-82,44},
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature2(T=
+        Earthtemperature_start + (Probe_depth/120)*2)                                 annotation(Placement(transformation(extent={{-82,44},
             {-74,52}})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature3(T=287.15)  annotation(Placement(transformation(extent={{-82,62},
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature3(T=
+        Earthtemperature_start + (Probe_depth/120)*3)                                 annotation(Placement(transformation(extent={{-82,62},
             {-74,70}})));
   Modelica.Fluid.Pipes.DynamicPipe pipe2(
     allowFlowReversal=true,
-    nParallel=1,
-    length=240,
     isCircular=true,
     diameter=0.02,
     roughness=2.5e-5,
@@ -46,13 +48,25 @@ model Generation_geothermalProbe
     crossArea=1,
     perimeter=0.5,
     C_start=fill(0, 0),
+    X_start={0},
+    redeclare package Medium = Medium_Water,
+    length=Probe_depth,
+    nParallel=n_probes,
     p_a_start=100000,
     p_b_start=100000,
-    T_start=293.15,
-    X_start={0},
-    redeclare package Medium = Medium_Water)
+    T_start=293.15)
     annotation (Placement(transformation(extent={{-30,-26},{6,10}})));
 
+    parameter Modelica.SIunits.Length Probe_depth = 0 annotation(Dialog(tab = "General"));
+    parameter Real n_probes = 1 "Number of Probes" annotation(Dialog(tab = "General"));
+    parameter Modelica.SIunits.Temp_K Earthtemperature_start = 283.15 annotation(Dialog(tab = "General"));
+
+  BusSystem.measureBus measureBus annotation (Placement(transformation(extent={
+            {-28,72},{12,112}}), iconTransformation(extent={{-12,88},{12,112}})));
+  Fluid.Sensors.Temperature senTem2(redeclare package Medium = Medium_Water)
+    annotation (Placement(transformation(extent={{36,60},{56,80}})));
+  Fluid.Sensors.Temperature senTem1(redeclare package Medium = Medium_Water)
+    annotation (Placement(transformation(extent={{38,-60},{58,-40}})));
 equation
   connect(pipe2.port_b, Fulid_out_Geothermal) annotation (Line(points={{6,-8},{
           46,-8},{46,60},{100,60}}, color={0,127,255}));
@@ -75,6 +89,14 @@ equation
           {-74,66},{-12.5175,66},{-12.5175,-0.08}}, color={191,0,0}));
   connect(fixedTemperature3.port, pipe2.heatPorts[5]) annotation (Line(points={
           {-74,66},{-11.1225,66},{-11.1225,-0.08}}, color={191,0,0}));
+  connect(pipe2.port_b, senTem2.port)
+    annotation (Line(points={{6,-8},{46,-8},{46,60}}, color={0,127,255}));
+  connect(pipe2.port_a, senTem1.port) annotation (Line(points={{-30,-8},{-62,-8},
+          {-62,-60},{48,-60}}, color={0,127,255}));
+  connect(senTem2.T, measureBus.GeothermalProbe_out) annotation (Line(points={{
+          53,70},{60,70},{60,60},{-7.9,60},{-7.9,92.1}}, color={0,0,127}));
+  connect(senTem1.T, measureBus.GeothermalProbe_in) annotation (Line(points={{
+          55,-50},{60,-50},{60,60},{-7.9,60},{-7.9,92.1}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Generation_geothermalProbe;

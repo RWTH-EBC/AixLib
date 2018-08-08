@@ -26,6 +26,8 @@ model FullModel
     annotation (Placement(transformation(extent={{-8,9},{8,-9}},
         rotation=90,
         origin={11,58})));
+  BusSystem.measureBus measureBus
+    annotation (Placement(transformation(extent={{-120,20},{-80,60}})));
 equation
   connect(weather.WindSpeed_North, office.WindSpeedPort_North) annotation (Line(
         points={{70,100},{100,100},{100,54},{92,54}},
@@ -72,11 +74,8 @@ equation
           {48.6,-20},{14,-20},{14,-40}},         color={0,127,255}));
   connect(weather.Airtemp, office.AirTemp) annotation (Line(points={{60,82},{60,
           59.4},{60.38,59.4}}, color={0,0,127}));
-  connect(generation.AirTemp, office.AirTemp) annotation (Line(points={{-74,
-          -39.4},{-74,-32},{20,-32},{20,68},{60,68},{60,59.4},{60.38,59.4}},
-        color={0,0,127}));
   connect(weather.controlBus, controlBus) annotation (Line(
-      points={{54.2,82},{54,82},{54,80},{-100,80}},
+      points={{54,82},{54,82},{54,80},{-100,80}},
       color={255,204,51},
       thickness=0.5));
   connect(generation.controlBus, controlBus) annotation (Line(
@@ -115,6 +114,14 @@ equation
   connect(Ext_Warm.port_a1, office.Air_out) annotation (Line(points={{16.4,50},
           {16,50},{16,-10},{36.2,-10},{36.2,0}},
                                              color={0,127,255}));
+  connect(weather.measureBus, measureBus) annotation (Line(
+      points={{66,82},{66,80},{-74,80},{-74,40},{-100,40}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(generation.measureBus, measureBus) annotation (Line(
+      points={{-74,-40},{-74,40},{-100,40}},
+      color={255,204,51},
+      thickness=0.5));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-64,76},{-2,56}},

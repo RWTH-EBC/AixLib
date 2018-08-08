@@ -3,13 +3,6 @@ expandable connector ControlBus
   "Control bus that is adapted to the signals connected to it"
   extends Modelica.Icons.SignalBus;
   import SI = Modelica.SIunits;
-  // Temperatur
-  SI.Temp_K HotWater_TTop "Temperatur at the top of the hotwater-bufferstorage";
-  SI.Temp_K HotWater_TBottom "Temperatur at the bottom of the hotwater-bufferstorage";
-  SI.Temp_K WarmWater_TTop "Temperatur at the top of the warmwater-bufferstorage";
-  SI.Temp_K WarmWater_TBottom "Temperatur at the bottom of the warmwater-bufferstorage";
-  SI.Temp_K ColdWater_TTop "Temperatur at the top of the coldwater-bufferstorage";
-  SI.Temp_K ColdWater_TBottom "Temperatur at the bottom of the coldwater-bufferstorage";
 
   // Pump y
   // Generator
@@ -85,7 +78,8 @@ expandable connector ControlBus
   Real Valve_TBA_Cold_Workshop_Temp "Valveposition to control the temperatur to the workshop";
 
   // On/Off components
-  Boolean OnOff_heatpump "On/Off Signal for the heatpump";
+  Boolean OnOff_heatpump_small "On/Off Signal for the small heatpump";
+  Boolean OnOff_heatpump_big "On/Off Signal for the big heatpump";
   Boolean OnOff_CHP   "On/Off Signal for the CHP";
   Boolean OnOff_boiler "On/Off Signal for the boiler";
 

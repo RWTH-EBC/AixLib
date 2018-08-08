@@ -82,8 +82,11 @@ model Weather
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={0,-100})));
-  BusSystem.ControlBus controlBus annotation (Placement(transformation(extent={
-            {-70,-122},{-30,-82}}), iconTransformation(extent={{-68,-110},{-48,
+  BusSystem.ControlBus controlBus annotation (Placement(transformation(extent={{-90,
+            -120},{-50,-80}}),      iconTransformation(extent={{-70,-110},{-50,
+            -90}})));
+  BusSystem.measureBus measureBus annotation (Placement(transformation(extent={
+            {-52,-120},{-12,-80}}), iconTransformation(extent={{50,-110},{70,
             -90}})));
 equation
   connect(weather.WindDirection, gain.u)
@@ -141,10 +144,14 @@ equation
     annotation (Line(points={{0,-100},{0,27},{-19,27}}, color={0,0,127}));
   connect(boundary.T_in, weather.AirTemp) annotation (Line(points={{-42,-16},{0,
           -16},{0,27},{-19,27}}, color={0,0,127}));
-  connect(boundary.m_flow_in, controlBus.Fan_RLT) annotation (Line(points={{-44,
-          -12},{-6,-12},{-6,-80},{-49.9,-80},{-49.9,-101.9}}, color={0,0,127}));
+  connect(boundary.m_flow_in, controlBus.Fan_RLT) annotation (Line(points={{-44,-12},
+          {-6,-12},{-6,-80},{-69.9,-80},{-69.9,-99.9}},       color={0,0,127}));
   connect(Air_in, Air_in_bou.ports[1])
     annotation (Line(points={{-100,-60},{-62,-60}}, color={0,127,255}));
+  connect(weather.AirTemp, measureBus.AirTemp) annotation (Line(points={{-19,27},
+          {0,27},{0,-84},{-31.9,-84},{-31.9,-99.9}}, color={0,0,127}));
+  connect(weather.WaterInAir, measureBus.WaterInAir) annotation (Line(points={{
+          -19,21},{0,21},{0,-84},{-31.9,-84},{-31.9,-99.9}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Weather;
