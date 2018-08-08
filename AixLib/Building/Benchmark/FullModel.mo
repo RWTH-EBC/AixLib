@@ -83,7 +83,7 @@ equation
       color={255,204,51},
       thickness=0.5));
   connect(full_Transfer_RLT.controlBus, controlBus) annotation (Line(
-      points={{20.2,-50},{28,-50},{28,-36},{-66,-36},{-66,80},{-100,80}},
+      points={{20.2,-47.2},{28,-47.2},{28,-36},{-66,-36},{-66,80},{-100,80}},
       color={255,204,51},
       thickness=0.5));
   connect(full_Transfer_TBA.controlBus, controlBus) annotation (Line(

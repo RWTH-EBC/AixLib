@@ -148,12 +148,12 @@ equation
         points={{14,-35},{41,-35},{41,-18},{40,-18}}, color={0,127,255}));
   connect(senTem1.T, measureBus.Heatpump_cold_big_in) annotation (Line(points={
           {-53,70},{-40,70},{-40,80},{30.1,80},{30.1,90.1}}, color={0,0,127}));
-  connect(senTem.T, measureBus.Heatpump_cold_small_out) annotation (Line(points
-        ={{-51,-50},{-40,-50},{-40,80},{30.1,80},{30.1,90.1}}, color={0,0,127}));
+  connect(senTem.T, measureBus.Heatpump_cold_small_out) annotation (Line(points=
+         {{-51,-50},{-40,-50},{-40,80},{30.1,80},{30.1,90.1}}, color={0,0,127}));
   connect(senTem2.T, measureBus.Heatpump_warm_big_out)
     annotation (Line(points={{23,58},{30.1,58},{30.1,90.1}}, color={0,0,127}));
-  connect(senTem3.T, measureBus.Heatpump_warm_small_in) annotation (Line(points
-        ={{47,-8},{54,-8},{54,14},{30.1,14},{30.1,90.1}}, color={0,0,127}));
+  connect(senTem3.T, measureBus.Heatpump_warm_small_in) annotation (Line(points=
+         {{47,-8},{54,-8},{54,14},{30.1,14},{30.1,90.1}}, color={0,0,127}));
   connect(Fluid_in_cold, senMasFlo.port_a)
     annotation (Line(points={{-100,60},{-88,60}}, color={0,127,255}));
   connect(senMasFlo.port_b, senTem1.port)

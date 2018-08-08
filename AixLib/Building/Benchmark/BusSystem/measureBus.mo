@@ -26,12 +26,48 @@ expandable connector measureBus
   SI.Temp_K GeothermalProbe_out;
   SI.Temp_K generation_hot_in;
   SI.Temp_K generation_hot_out;
+  SI.Temp_K RLT_central_hot_in;
+  SI.Temp_K RLT_central_hot_out;
+  SI.Temp_K RLT_central_cold_in;
+  SI.Temp_K RLT_central_cold_out;
+  SI.Temp_K RLT_openplanoffice_hot_in;
+  SI.Temp_K RLT_openplanoffice_hot_out;
+  SI.Temp_K RLT_openplanoffice_cold_in;
+  SI.Temp_K RLT_openplanoffice_cold_out;
+  SI.Temp_K RLT_conferencerom_hot_in;
+  SI.Temp_K RLT_conferencerom_hot_out;
+  SI.Temp_K RLT_conferencerom_cold_in;
+  SI.Temp_K RLT_conferencerom_cold_out;
+  SI.Temp_K RLT_multipersonoffice_hot_in;
+  SI.Temp_K RLT_multipersonoffice_hot_out;
+  SI.Temp_K RLT_multipersonoffice_cold_in;
+  SI.Temp_K RLT_multipersonoffice_cold_out;
+  SI.Temp_K RLT_canteen_hot_in;
+  SI.Temp_K RLT_canteen_hot_out;
+  SI.Temp_K RLT_canteen_cold_in;
+  SI.Temp_K RLT_canteen_cold_out;
+  SI.Temp_K RLT_workshop_hot_in;
+  SI.Temp_K RLT_workshop_hot_out;
+  SI.Temp_K RLT_workshop_cold_in;
+  SI.Temp_K RLT_workshop_cold_out;
 
   //MassflowRates
   SI.MassFlowRate heatpump_cold_massflow;
   SI.MassFlowRate heatpump_warm_massflow;
   SI.MassFlowRate Aircooler_massflow;
   SI.MassFlowRate generation_hot_massflow;
+  SI.MassFlowRate RLT_central_warm;
+  SI.MassFlowRate RLT_central_cold;
+  SI.MassFlowRate RLT_openplanoffice_warm;
+  SI.MassFlowRate RLT_openplanoffice_cold;
+  SI.MassFlowRate RLT_conferenceroom_warm;
+  SI.MassFlowRate RLT_conferenceroom_cold;
+  SI.MassFlowRate RLT_multipersonoffice_warm;
+  SI.MassFlowRate RLT_multipersonoffice_cold;
+  SI.MassFlowRate RLT_canteen_warm;
+  SI.MassFlowRate RLT_canteen_cold;
+  SI.MassFlowRate RLT_workshop_warm;
+  SI.MassFlowRate RLT_workshop_cold;
 
   //Power
   SI.Power Pump_Warmwater_heatpump_power "Power of warmwater heatpump pump";
@@ -43,6 +79,18 @@ expandable connector measureBus
   SI.Power Pump_Warmwater_power;
   SI.Power Pump_Hotwater_power;
   Real Electrical_power_CHP;
+  SI.Power Pump_RLT_central_warm;
+  SI.Power Pump_RLT_central_cold;
+  SI.Power Pump_RLT_openplanoffice_warm;
+  SI.Power Pump_RLT_openplanoffice_cold;
+  SI.Power Pump_RLT_conferenceroom_warm;
+  SI.Power Pump_RLT_conferenceroom_cold;
+  SI.Power Pump_RLT_multipersonoffice_warm;
+  SI.Power Pump_RLT_multipersonoffice_cold;
+  SI.Power Pump_RLT_canteen_warm;
+  SI.Power Pump_RLT_canteen_cold;
+  SI.Power Pump_RLT_workshop_warm;
+  SI.Power Pump_RLT_workshop_cold;
 
   //COP
   Real Heatpump_small_COP;

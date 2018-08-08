@@ -123,8 +123,8 @@ equation
         color={0,0,127}));
   connect(senMasFlo.m_flow, measureBus.generation_hot_massflow) annotation (
       Line(points={{-20,-9},{-20,40},{30.1,40},{30.1,90.1}}, color={0,0,127}));
-  connect(fan2.P, measureBus.Pump_generation_hot_power) annotation (Line(points
-        ={{-29.2,23.2},{-20,23.2},{-20,40},{30.1,40},{30.1,90.1}}, color={0,0,
+  connect(fan2.P, measureBus.Pump_generation_hot_power) annotation (Line(points=
+         {{-29.2,23.2},{-20,23.2},{-20,40},{30.1,40},{30.1,90.1}}, color={0,0,
           127}));
   connect(cHP.electricalPower, measureBus.Electrical_power_CHP) annotation (
       Line(points={{-81,25},{-81,40},{30.1,40},{30.1,90.1}}, color={0,0,127}));
