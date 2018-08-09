@@ -3,15 +3,6 @@ package Refrigerants "Package that provides records describing properties of dif
   extends Modelica.Icons.Package;
 
 
-
-
-
-
-
-
-
-
-
   annotation (Icon(graphics={
         Rectangle(
           lineColor={200,200,200},
@@ -183,7 +174,7 @@ Hence, the base data definitions support just the hybrid approach.
 </html>", revisions="<html>
 <ul>
   <li>
-  June 9, 2017, by Mirko Engelpracht:<br/>
+  June 9, 2017, by Mirko Engelpracht, Christian Vering:<br/>
   First implementation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
