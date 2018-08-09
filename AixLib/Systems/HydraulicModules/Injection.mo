@@ -182,13 +182,12 @@ model Injection "Injection circuit with pump and three way valve"
     energyDynamics=energyDynamics)
     annotation (Placement(transformation(extent={{10,-60},{22,-72}})));
 
-  // -------------------------------------------------
-  // Sensors
-  // -------------------------------------------------
+
 
 protected
-  Modelica.Fluid.Sensors.VolumeFlowRate VFSen_injection(redeclare package
-      Medium = Medium, final allowFlowReversal=allowFlowReversal)
+  Fluid.Sensors.VolumeFlowRate          VFSen_injection(redeclare package
+      Medium = Medium, final allowFlowReversal=allowFlowReversal,
+    final m_flow_nominal=m_flow_nominal)
     "Volume flow in injection line" annotation (Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=0,

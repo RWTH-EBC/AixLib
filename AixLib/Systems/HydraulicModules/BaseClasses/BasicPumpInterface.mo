@@ -1,22 +1,11 @@
 within AixLib.Systems.HydraulicModules.BaseClasses;
 partial model BasicPumpInterface "Pump interface for different pump types"
-  replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
-    annotation (choicesAllMatching=true);
+ extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
+
   parameter Boolean allowFlowReversal=true
     "= true to allow flow reversal, false restricts to design direction (port_a -> port_b)"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
-  parameter Modelica.SIunits.MassFlowRate m_flow_nominal
-    "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
 
-  Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
-        Medium)
-    "Fluid connector a (positive design flow direction is from port_a to port_b)"
-    annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare package Medium =
-        Medium)
-    "Fluid connector b (positive design flow direction is from port_a to port_b)"
-    annotation (Placement(transformation(extent={{110,-10},{90,10}}),
-        iconTransformation(extent={{110,-10},{90,10}})));
   PumpBus pumpBus annotation (
       Placement(transformation(extent={{-20,80},{20,120}}), iconTransformation(
           extent={{-20,80},{20,120}})));
