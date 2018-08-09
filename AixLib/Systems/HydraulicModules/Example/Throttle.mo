@@ -8,7 +8,7 @@ model Throttle "Test for ummixed throttle circuit"
     val(Kv=10),
     dIns=0.01,
     kIns=0.028,
-    D=0.032,
+    d=0.032,
     pipe1(length=1),
     pipe2(length=1),
     pipe3(length=1),

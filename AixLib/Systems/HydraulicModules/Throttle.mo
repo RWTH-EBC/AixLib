@@ -18,7 +18,7 @@ model Throttle "Throttle circuit with two way valve"
     nPorts=1,
     final v_nominal=1.5,
     final allowFlowReversal=allowFlowReversal,
-    dh=D,
+    dh=d,
     dIns=dIns,
     kIns=kIns,
     final R=1/(pipe1.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe1.dh/2 +
@@ -33,7 +33,7 @@ model Throttle "Throttle circuit with two way valve"
     final v_nominal=1.5,
     final allowFlowReversal=allowFlowReversal,
     nPorts=1,
-    dh=D,
+    dh=d,
     dIns=dIns,
     kIns=kIns,
     final R=1/(pipe2.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe2.dh/2 +
@@ -48,7 +48,7 @@ model Throttle "Throttle circuit with two way valve"
     final v_nominal=1.5,
     final allowFlowReversal=allowFlowReversal,
     nPorts=1,
-    dh=D,
+    dh=d,
     dIns=dIns,
     kIns=kIns,
     final R=1/(pipe3.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe3.dh/2 +

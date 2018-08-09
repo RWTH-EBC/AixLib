@@ -77,7 +77,7 @@ model ERC_ExperimentalHall_CoolingCircuit
     T_amb=T_amb,
     dIns=0.02,
     kIns=0.028,
-    D=0.032,
+    d=0.032,
     pipe1(length=2),
     pipe2(length=2),
     pipe3(length=4))
@@ -95,7 +95,7 @@ model ERC_ExperimentalHall_CoolingCircuit
     T_amb=T_amb,
     dIns=0.01,
     kIns=0.028,
-    D=0.032,
+    d=0.032,
     pipe1(length=1),
     pipe2(length=1),
     pipe3(length=1))
@@ -114,7 +114,7 @@ model ERC_ExperimentalHall_CoolingCircuit
     T_amb=T_amb,
     dIns=0.01,
     kIns=0.028,
-    D=0.032,
+    d=0.032,
     pipe1(length=1),
     pipe2(length=1),
     pipe3(length=4),

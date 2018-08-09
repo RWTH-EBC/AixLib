@@ -25,7 +25,7 @@ model ThrottlePump "Throttle circuit with pump and two way valve"
     nPorts=1,
     final v_nominal=1.5,
     final allowFlowReversal=allowFlowReversal,
-    dh=D,
+    dh=d,
     kIns=kIns,
     final R=1/(pipe1.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe1.dh/2 +
         pipe1.dIns)/(pipe1.dh/2))),
@@ -40,7 +40,7 @@ model ThrottlePump "Throttle circuit with pump and two way valve"
     nPorts=1,
     final v_nominal=1.5,
     final allowFlowReversal=allowFlowReversal,
-    dh=D,
+    dh=d,
     kIns=kIns,
     final R=1/(pipe2.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe2.dh/2 +
         pipe2.dIns)/(pipe2.dh/2))),
@@ -55,7 +55,7 @@ model ThrottlePump "Throttle circuit with pump and two way valve"
     final v_nominal=1.5,
     final allowFlowReversal=allowFlowReversal,
     nPorts=1,
-    dh=D,
+    dh=d,
     kIns=kIns,
     final R=1/(pipe3.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe3.dh/2 +
         pipe3.dIns)/(pipe3.dh/2))),
@@ -69,7 +69,7 @@ model ThrottlePump "Throttle circuit with pump and two way valve"
     final v_nominal=1.5,
     final allowFlowReversal=allowFlowReversal,
     nPorts=1,
-    dh=D,
+    dh=d,
     kIns=kIns,
     final R=1/(pipe4.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe4.dh/2 +
         pipe4.dIns)/(pipe4.dh/2))),

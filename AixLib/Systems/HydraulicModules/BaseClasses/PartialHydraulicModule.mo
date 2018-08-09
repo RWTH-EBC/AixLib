@@ -1,7 +1,10 @@
 within AixLib.Systems.HydraulicModules.BaseClasses;
 partial model PartialHydraulicModule "Base class for hydraulic module."
-  extends AixLib.Fluid.Interfaces.PartialFourPort(redeclare package Medium1 =
-        Medium, redeclare package Medium2 = Medium, final allowFlowReversal1 = allowFlowReversal, final allowFlowReversal2 = allowFlowReversal);
+  extends AixLib.Fluid.Interfaces.PartialFourPort(
+    redeclare package Medium1 = Medium,
+    redeclare package Medium2 = Medium,
+    final allowFlowReversal1 = allowFlowReversal,
+    final allowFlowReversal2 = allowFlowReversal);
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium in the system" annotation (choicesAllMatching=true);
 
@@ -9,23 +12,19 @@ partial model PartialHydraulicModule "Base class for hydraulic module."
     "= true to allow flow reversal, false restricts to design direction (port_a -> port_b)"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
   parameter  Modelica.SIunits.Temperature T_amb "Ambient temperature";
-
   parameter Modelica.SIunits.MassFlowRate m_flow_nominal(min=0)
     "Nominal mass flow rate";
-
   parameter Modelica.SIunits.Temperature T_start=303.15
     "Initialization temperature" annotation(Dialog(tab="Advanced"));
   parameter Modelica.SIunits.Time tau=15
     "Time Constant for PT1 behavior of temperature sensors" annotation(Dialog(tab="Advanced"));
-
   parameter Modelica.SIunits.Length dIns
     "Thickness of insulation of all pipes (can be overwritten in each pipe) "
     annotation (Dialog(group="Pipes"));
-
   parameter Modelica.SIunits.ThermalConductivity kIns
     "Heat conductivity of pipe insulation of all pipes (can be overwritten in each pipe)"
     annotation (Dialog(group="Pipes"));
-  parameter Modelica.SIunits.Length D
+  parameter Modelica.SIunits.Length d
     "Hydraulic diameter of all pipes (can be overwritten in each pipe)"
     annotation (Dialog(group="Pipes"));
 

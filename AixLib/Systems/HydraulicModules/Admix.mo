@@ -36,7 +36,7 @@ model Admix "Admix circuit with three way valve and rpm controlled pump"
     final m_flow_nominal=m_flow_nominal,
     final v_nominal=1,
     final allowFlowReversal=allowFlowReversal,
-    dh=D,
+    dh=d,
     dIns=dIns,
     kIns=kIns,
     final R=1/(pipe1.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe1.dh/2
@@ -50,7 +50,7 @@ model Admix "Admix circuit with three way valve and rpm controlled pump"
     final m_flow_nominal=m_flow_nominal,
     final v_nominal=1,
     final allowFlowReversal=allowFlowReversal,
-    dh=D,
+    dh=d,
     dIns=dIns,
     kIns=kIns,
     R=1/(pipe2.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe2.dh/2 +
@@ -64,7 +64,7 @@ model Admix "Admix circuit with three way valve and rpm controlled pump"
     final v_nominal=1,
     final allowFlowReversal=allowFlowReversal,
     nPorts=1,
-    dh=D,
+    dh=d,
     dIns=dIns,
     kIns=kIns,
     final R=1/(pipe3.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe3.dh/2
@@ -78,7 +78,7 @@ model Admix "Admix circuit with three way valve and rpm controlled pump"
     final v_nominal=1,
     final m_flow_nominal=m_flow_nominal,
     final allowFlowReversal=allowFlowReversal,
-    dh=D,
+    dh=d,
     dIns=dIns,
     kIns=kIns,
     final R=1/(pipe4.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe4.dh/2
@@ -95,7 +95,7 @@ model Admix "Admix circuit with three way valve and rpm controlled pump"
     final m_flow_nominal=m_flow_nominal,
     final allowFlowReversal=allowFlowReversal,
     nPorts=1,
-    dh=D,
+    dh=d,
     dIns=dIns,
     kIns=kIns,
     final R=1/(pipe5.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe5.dh/2
@@ -112,7 +112,7 @@ model Admix "Admix circuit with three way valve and rpm controlled pump"
     final m_flow_nominal=m_flow_nominal,
     final v_nominal=1,
     final allowFlowReversal=allowFlowReversal,
-    dh=D,
+    dh=d,
     dIns=dIns,
     kIns=kIns,
     final R=1/(pipe6.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe6.dh/2
