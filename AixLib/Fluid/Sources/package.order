@@ -6,6 +6,8 @@ MassFlowSource_WeatherData
 MassFlowSource_h
 Outside
 Outside_CpLowRise
+PropertySource_T
+PropertySource_h
 TraceSubstancesFlowSource
 Examples
 BaseClasses

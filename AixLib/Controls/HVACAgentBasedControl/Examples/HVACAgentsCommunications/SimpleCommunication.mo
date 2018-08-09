@@ -33,11 +33,11 @@ model SimpleCommunication
     annotation (Placement(transformation(extent={{-92,-42},{-72,-22}})));
   inner Agents.MessageNotification messageNotification
     annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
-  CostFunctions.Economic.ConstantFactor constantFactor(p=1, eta=1)
+  AixLib.Controls.HVACAgentBasedControl.CostFunctions.Economic.Constant_Economic_Cost constantFactor(p=1, eta=1)
     annotation (Placement(transformation(extent={{-20,80},{0,100}})));
-  CostFunctions.Economic.ConstantFactor constantFactor1(eta=1, p=2)
+  AixLib.Controls.HVACAgentBasedControl.CostFunctions.Economic.Constant_Economic_Cost constantFactor1(eta=1, p=2)
     annotation (Placement(transformation(extent={{60,80},{80,100}})));
-  CostFunctions.Economic.ConstantFactor constantFactor2(eta=1, p=0.5)
+  AixLib.Controls.HVACAgentBasedControl.CostFunctions.Economic.Constant_Economic_Cost constantFactor2(eta=1, p=0.5)
     annotation (Placement(transformation(extent={{60,2},{80,22}})));
 equation
   connect(onOff.y, heatProducerAgent.OnOff_external) annotation (Line(points={{-69,30},

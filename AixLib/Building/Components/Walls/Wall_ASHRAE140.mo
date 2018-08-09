@@ -1,4 +1,4 @@
-within AixLib.Building.Components.Walls;
+﻿within AixLib.Building.Components.Walls;
 model Wall_ASHRAE140
   "Wall modell for ASHRAE 140 with absorbtion of solar radiation"
 
@@ -57,8 +57,7 @@ model Wall_ASHRAE140
    parameter Boolean withSunblind = false "enable support of sunblinding?" annotation(Dialog( tab="Window", enable = outside and withWindow));
    parameter Real Blinding=0 "blinding factor <=1" annotation(Dialog( tab="Window", enable = withWindow and outside and withSunblind));
    parameter Real Limit=180
-    "minimum specific total solar radiation in W/m2 for blinding becoming active"
-                                                                                   annotation(Dialog( tab="Window", enable = withWindow and outside and withSunblind));
+    "minimum specific total solar radiation in W/m2 for blinding becoming active"  annotation(Dialog( tab="Window", enable = withWindow and outside and withSunblind));
 
    // door parameters
    parameter Boolean withDoor = false "Choose if the wall has got a door"  annotation(Dialog(tab="Door"));
@@ -185,24 +184,27 @@ public
         origin={-20,88})));
   Modelica.Blocks.Sources.RealExpression SolarRadTotal(y=SolarRadiationPort.I) if outside
     annotation (Placement(transformation(extent={{-80,86},{-60,106}})));
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor tempOutAirSensor
+    "Outdoor air (dry bulb) temperature sensor"
+    annotation (Placement(transformation(extent={{-66,-18},{-58,-10}})));
 equation
 
 //******************************************************************
 // **********************standard connection************************
 //******************************************************************
   connect(Wall.Star, heatStarToComb.star) annotation (Line(
-      points={{0.9,30},{48,30},{48,4.8},{58.6,4.8}},
+      points={{2,30.2},{48,30.2},{48,4.8},{58.6,4.8}},
       color={95,95,95},
       pattern=LinePattern.Solid));
   connect(Wall.port_b, heatStarToComb.therm) annotation (Line(
-      points={{0.9,23},{48,23},{48,-6.1},{58.9,-6.1}},
+      points={{2,24},{48,24},{48,-6.1},{58.9,-6.1}},
       color={191,0,0}));
 //******************************************************************
 // **********************standard connection for inside wall********
 //******************************************************************
 if not (outside) then
     connect(Wall.port_a, port_outside) annotation (Line(
-        points={{-18.9,23},{-56.45,23},{-56.45,4},{-98,4}},
+        points={{-20,24},{-56.45,24},{-56.45,4},{-98,4}},
         color={191,0,0}));
 end if;
 
@@ -217,7 +219,7 @@ if (outside) then
       points={{-36.4,88},{-30,88}},
       color={0,0,127}));
   connect(Wall.port_a, absSolarRadWall.port) annotation (Line(
-      points={{-18.9,23},{-24,23},{-24,66},{-3,66},{-3,88},{-10,88}},
+      points={{-20,24},{-24,24},{-24,66},{-3,66},{-3,88},{-10,88}},
       color={191,0,0}));
 
   //heat convection on the outside
@@ -230,7 +232,7 @@ if (outside) then
         points={{-47,58},{-56,58},{-56,4},{-98,4}},
         color={191,0,0}));
     connect(heatTransfer_Outside.port_b,Wall.port_a)  annotation (Line(
-        points={{-27,58},{-24,58},{-24,23},{-18.9,23}},
+        points={{-27,58},{-24,58},{-24,24},{-20,24}},
         color={191,0,0}));
 
 end if;
@@ -317,6 +319,10 @@ end if;
       points={{55.4,80},{49,80}},
       color={0,0,127}));
 
+  connect(port_outside, tempOutAirSensor.port) annotation (Line(points={{-98,4},
+          {-70,4},{-70,-14},{-66,-14}}, color={191,0,0}));
+  connect(tempOutAirSensor.T, Sunblind.TOutAir) annotation (Line(points={{-58,
+          -14},{-54,-14},{-54,-14.2},{-45.84,-14.2}}, color={0,0,127}));
   annotation (
     Diagram(coordinateSystem(
         preserveAspectRatio=false,
