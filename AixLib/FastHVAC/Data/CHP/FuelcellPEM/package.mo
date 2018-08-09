@@ -28,6 +28,28 @@ package FuelcellPEM
       beta_1 = 2,
       T_1 = 28.2);
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-          coordinateSystem(preserveAspectRatio=false)));
+          coordinateSystem(preserveAspectRatio=false)),Documentation(revisions="<html><ul>
+  <li>
+  <i>Aug 09, 2018&#160;</i> by David Jansen:<br/>
+  Integrated and validated data from former master thesis by Steffen Brill
+  </li>
+
+</ul>
+</html>",   info="<html>
+<p>
+  Record is used with <a href=
+  \"AixLib.FastHVAC.Components.HeatGenerators.CHP.CHPCombined\">AixLib.FastHVAC.Components.CHP.CHPCombined</a>
+</p>
+<p>
+  Source:
+</p>
+<ul>
+<li>Geoffrey Johnson, The calibration and validation of a model for simulating the thermal
+and electrical performance of a 1 kWAC proton-exchange membrane
+fuel-cell micro-cogeneration device (2013)
+  </li>
+
+</ul>
+</html>"));
   end MorrisonPEMFC;
 end FuelcellPEM;
