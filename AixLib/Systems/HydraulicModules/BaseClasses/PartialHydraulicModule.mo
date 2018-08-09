@@ -18,6 +18,17 @@ partial model PartialHydraulicModule "Base class for hydraulic module."
   parameter Modelica.SIunits.Time tau=15
     "Time Constant for PT1 behavior of temperature sensors" annotation(Dialog(tab="Advanced"));
 
+  parameter Modelica.SIunits.Length dIns
+    "Thickness of insulation of all pipes (can be overwritten in each pipe) "
+    annotation (Dialog(group="Pipes"));
+
+  parameter Modelica.SIunits.ThermalConductivity kIns
+    "Heat conductivity of pipe insulation of all pipes (can be overwritten in each pipe)"
+    annotation (Dialog(group="Pipes"));
+  parameter Modelica.SIunits.Length D
+    "Hydraulic diameter of all pipes (can be overwritten in each pipe)"
+    annotation (Dialog(group="Pipes"));
+
   BaseClasses.HydraulicBus hydraulicBus annotation (Placement(transformation(
           extent={{-20,80},{20,120}}), iconTransformation(extent={{-20,80},{20,120}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature

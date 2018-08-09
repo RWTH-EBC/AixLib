@@ -11,40 +11,46 @@ model Pump "Unmixed circuit with pump"
             {8,28}})));
   Fluid.FixedResistances.PlugFlowPipe pipe1(
     redeclare package Medium = Medium,
-    dh=0.032,
     final m_flow_nominal=m_flow_nominal,
     T_start_in=T_start,
     T_start_out=T_start,
     nPorts=1,
     final v_nominal=1.5,
-    dIns=0.01,
-    kIns=0.028,
-    final allowFlowReversal=allowFlowReversal) annotation (Dialog(enable=true),
+    final allowFlowReversal=allowFlowReversal,
+    dh=D,
+    dIns=dIns,
+    kIns=kIns,
+    final R=1/(pipe1.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe1.dh/2
+         + pipe1.dIns)/(pipe1.dh/2))))         annotation (Dialog(enable=true),
       Placement(transformation(extent={{-60,30},{-40,10}})));
 
   Fluid.FixedResistances.PlugFlowPipe pipe2(
     redeclare package Medium = Medium,
-    dh=0.032,
     T_start_in=T_start,
     T_start_out=T_start,
     final m_flow_nominal=m_flow_nominal,
     final v_nominal=1.5,
-    dIns=0.01,
-    kIns=0.028,
     final allowFlowReversal=allowFlowReversal,
-    nPorts=1)                                  annotation (Dialog(enable=true),
+    nPorts=1,
+    dh=D,
+    dIns=dIns,
+    kIns=kIns,
+    final R=1/(pipe2.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe2.dh/2
+         + pipe2.dIns)/(pipe2.dh/2))))         annotation (Dialog(enable=true),
       Placement(transformation(extent={{40,30},{60,10}})));
   Fluid.FixedResistances.PlugFlowPipe pipe3(
     redeclare package Medium = Medium,
-    dh=0.032,
     T_start_in=T_start,
     T_start_out=T_start,
     final m_flow_nominal=m_flow_nominal,
     final v_nominal=1.5,
-    dIns=0.01,
-    kIns=0.028,
     final allowFlowReversal=allowFlowReversal,
-    nPorts=1)                                  annotation (Dialog(enable=true),
+    nPorts=1,
+    dh=D,
+    dIns=dIns,
+    kIns=kIns,
+    final R=1/(pipe3.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe3.dh/2
+         + pipe3.dIns)/(pipe3.dh/2))))         annotation (Dialog(enable=true),
       Placement(transformation(extent={{10,-70},{-10,-50}})));
 
 
