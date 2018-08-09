@@ -1,6 +1,5 @@
 within AixLib.Systems.HydraulicModules.Example;
 model Admix "Test for admix circuit"
-  import AixLib;
   extends Modelica.Icons.Example;
 
   AixLib.Systems.HydraulicModules.Admix Admix(

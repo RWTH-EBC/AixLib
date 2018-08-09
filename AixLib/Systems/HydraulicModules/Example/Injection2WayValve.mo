@@ -1,6 +1,5 @@
 within AixLib.Systems.HydraulicModules.Example;
 model Injection2WayValve "Test for injection circuit with a 2 way valve"
-  import AixLib;
   extends Modelica.Icons.Example;
 
   AixLib.Systems.HydraulicModules.Injection2WayValve Injection(

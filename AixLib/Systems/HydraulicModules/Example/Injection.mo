@@ -1,6 +1,5 @@
 within AixLib.Systems.HydraulicModules.Example;
 model Injection "Test for injection circuit"
-  import AixLib;
   extends Modelica.Icons.Example;
 
   AixLib.Systems.HydraulicModules.Injection Injection(

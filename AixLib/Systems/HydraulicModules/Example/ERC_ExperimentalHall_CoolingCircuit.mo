@@ -1,12 +1,11 @@
 within AixLib.Systems.HydraulicModules.Example;
 model ERC_ExperimentalHall_CoolingCircuit
   "Cooling circuit of the new ERC experimental hall"
-  import AixLib;
   extends Modelica.Icons.Example;
   package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater
     "Medium within the system simulation"
     annotation (choicesAllMatching=true);
-  parameter Modelica.SIunits.Temperature T_amb = 293.15 "ambient temperature";
+  parameter Modelica.SIunits.Temperature T_amb = 293.15 "Ambient temperature";
 
   AixLib.Fluid.Sources.Boundary_pT bou(nPorts=1, redeclare package Medium =
         Medium)

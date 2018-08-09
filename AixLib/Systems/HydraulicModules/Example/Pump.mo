@@ -1,6 +1,5 @@
 within AixLib.Systems.HydraulicModules.Example;
-model Pump "Test for unmixed circuit"
-  import AixLib;
+model Pump "Test for unmixed pump circuit"
   extends Modelica.Icons.Example;
 
   AixLib.Systems.HydraulicModules.Pump Unmixed(
