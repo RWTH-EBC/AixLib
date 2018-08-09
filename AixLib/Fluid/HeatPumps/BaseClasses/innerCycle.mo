@@ -15,10 +15,10 @@ model InnerCycle "Blackbox model of refrigerant cycle of a HP"
         rotation=-90,
         origin={0,50})));
 
-  Modelica.Blocks.Logical.Switch switchQEva
+  Utilities.Logical.SmoothSwitch switchQEva
     "If mode is false, Condenser becomes Evaporator and vice versa"
     annotation (Placement(transformation(extent={{-54,-10},{-74,10}})));
-  Modelica.Blocks.Logical.Switch switchQCon
+  Utilities.Logical.SmoothSwitch switchQCon
     "If mode is false, Condenser becomes Evaporator and vice versa"
     annotation (Placement(transformation(extent={{74,-10},{94,10}})));
   Modelica.Blocks.Interfaces.RealOutput COP "Current COP" annotation (Placement(
