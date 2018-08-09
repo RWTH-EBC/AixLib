@@ -23,5 +23,9 @@ record Kirsch
     dotm_max=0.1236,
     dotm_min=0.0819,
     dotQ_thRated = 9275,
-    dotE_fuelRated = 16211);
+    dotE_fuelRated = 16211,
+    P_elStop = 190,
+    P_elStart = 190,
+    P_elStandby = 90);
+    // the last three parameters where only available for the AisinSeiki ICE, so they are just copied!
 end Kirsch;

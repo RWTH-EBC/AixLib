@@ -15,7 +15,12 @@ extends Modelica.Icons.Record;
   "time constant electrical power start behavior (unit=sec)";
   parameter SI.Power dotQ_thRated "rated thermal power (unit=W)";
   parameter SI.Power dotE_fuelRated "rated fuel power (unit=W)";
-
+  parameter Modelica.SIunits.Power P_elStandby
+    "electrical consumption in standby mode";
+  parameter Modelica.SIunits.Power P_elStop
+    "electrical consumption during shutdown mode";
+  parameter Modelica.SIunits.Power P_elStart
+    "electrical consumption during startup";
   parameter Real a_0;
   parameter Real a_1;
   parameter Real a_2;

@@ -1,6 +1,6 @@
 within AixLib.FastHVAC.Data.CHP.Engine;
 record Ecopower
-  //import Mikro_KWK_model = CHP_package.Records.Records_model;
+
   extends Engine.BaseDataDefinition(
     a_0=-0.0417,
     a_1=0.0117,
@@ -23,5 +23,9 @@ record Ecopower
     dotm_max=0.287,
     dotm_min=0.073,
     dotQ_thRated = 7609,
-    dotE_fuelRated = 18785);
+    dotE_fuelRated = 18785,
+    P_elStop = 190,
+    P_elStart = 190,
+    P_elStandby = 90);
+    // the last three parameters where only available for the AisinSeiki ICE, so they are just copied!
 end Ecopower;

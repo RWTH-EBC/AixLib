@@ -1,6 +1,5 @@
 within AixLib.FastHVAC.Data.CHP.Engine;
 record Dachs
-  //import Mikro_KWK_model = CHP_package.Records.Records_model;
   extends Engine.BaseDataDefinition(
     a_0=0.1710,
     a_1=0.0080,
@@ -22,6 +21,10 @@ record Dachs
     tauP_el=73.52,
     dotm_max=0.27778,
     dotm_min=0.27778,
-    dotQ_thRated = 1554,
-    dotE_fuelRated = 12482);
+    dotQ_thRated = 12500,
+    dotE_fuelRated = 20600,
+    P_elStop = 190,
+    P_elStart = 190,
+    P_elStandby = 90);
+    // the last three parameters where only available for the AisinSeiki ICE, so they are just copied!
 end Dachs;
