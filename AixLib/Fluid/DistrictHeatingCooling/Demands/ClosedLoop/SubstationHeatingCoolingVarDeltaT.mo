@@ -149,17 +149,17 @@ public
     annotation (Placement(transformation(extent={{-58,120},{-72,134}})));
   Modelica.Blocks.Sources.Constant const2(k=-(cp_default*deltaT_coolingSet))
     annotation (Placement(transformation(extent={{-32,94},{-44,106}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridHeat(redeclare package Medium
-      =        Medium)
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridHeat(redeclare package Medium =
+               Medium)
     annotation (Placement(transformation(extent={{-206,-10},{-186,10}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridCool(redeclare package Medium
-      =        Medium)
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_GridCool(redeclare package Medium =
+               Medium)
     annotation (Placement(transformation(extent={{152,-10},{172,10}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_HeatPump(redeclare package Medium
-      =        Medium)
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_HeatPump(redeclare package Medium =
+               Medium)
     annotation (Placement(transformation(extent={{-114,-34},{-94,-14}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_chiller(redeclare package Medium
-      =        Medium)
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo_chiller(redeclare package Medium =
+               Medium)
     annotation (Placement(transformation(extent={{78,14},{58,34}})));
   Modelica.Blocks.Interfaces.RealInput deltaT_heatingGridSet "set temperature difference for heating on the site of thermal network"
                                                           annotation (
