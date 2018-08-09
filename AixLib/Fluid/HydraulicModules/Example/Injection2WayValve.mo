@@ -1,9 +1,14 @@
 within AixLib.Fluid.HydraulicModules.Example;
-model Injection "Test for injection circuit"
+model Injection2WayValve "Test for injection circuit with a 2 way valve"
   import AixLib;
   extends Modelica.Icons.Example;
 
-  AixLib.Fluid.HydraulicModules.Injection Injection(
+  AixLib.Fluid.HydraulicModules.Injection2WayValve
+                                          Injection(
+    pipe3(
+      length=1,
+      dIns=0.01,
+      kIns=0.028),
     pipe4(
       dIns=0.01,
       kIns=0.028,
@@ -20,14 +25,6 @@ model Injection "Test for injection circuit"
       length=0.5,
       dIns=0.01,
       kIns=0.028),
-    pipe8(
-      length=1,
-      dIns=0.01,
-      kIns=0.028),
-    pipe9(
-      length=1,
-      dIns=0.01,
-      kIns=0.028),
     redeclare package Medium = Medium,
     redeclare
       AixLib.Fluid.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
@@ -36,10 +33,6 @@ model Injection "Test for injection circuit"
     m_flow_nominal=1,
     val(Kv=10),
     pipe1(
-      length=1,
-      dIns=0.01,
-      kIns=0.028),
-    pipe2(
       length=1,
       dIns=0.01,
       kIns=0.028),
@@ -53,8 +46,9 @@ model Injection "Test for injection circuit"
   Modelica.Fluid.Sources.Boundary_pT boundary(
     redeclare package Medium =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
-    T=323.15,
-    nPorts=1) annotation (Placement(transformation(
+    nPorts=1,
+    p=102000,
+    T=323.15) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
         origin={-10,-50})));
@@ -127,4 +121,4 @@ equation
 <li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib.</li>
 </ul>
 </html>"));
-end Injection;
+end Injection2WayValve;

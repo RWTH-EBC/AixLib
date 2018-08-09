@@ -1,7 +1,12 @@
-﻿within AixLib.Fluid.HydraulicModules.BaseClasses;
+within AixLib.Fluid.HydraulicModules.BaseClasses;
 partial model BasicPumpInterface "Pump interface for different pump types"
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     annotation (choicesAllMatching=true);
+  parameter Boolean allowFlowReversal=true
+    "= true to allow flow reversal, false restricts to design direction (port_a -> port_b)"
+    annotation (Dialog(tab="Assumptions"), Evaluate=true);
+  parameter Modelica.SIunits.MassFlowRate m_flow_nominal
+    "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
 
   Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare package Medium =
         Medium)

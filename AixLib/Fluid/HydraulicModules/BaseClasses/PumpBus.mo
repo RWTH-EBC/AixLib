@@ -2,15 +2,15 @@ within AixLib.Fluid.HydraulicModules.BaseClasses;
 expandable connector PumpBus "Standard data bus with pump information"
   extends Modelica.Icons.SignalBus;
   import SI = Modelica.SIunits;
-  SI.Conversions.NonSIunits.AngularVelocity_rpm rpm_Input "pump speed setpoint"
+  Real rpm_Input "pump speed setpoint"
     annotation (HideResult=false);
-  SI.Conversions.NonSIunits.AngularVelocity_rpm rpm_Act "pump speed actor signal"
+  Real rpm_Act "pump speed actor signal"
     annotation (HideResult=false);
   SI.Power power "electrical pump power" annotation (HideResult=false);
   SI.Height head "static pump head" annotation (HideResult=false);
   SI.Efficiency efficiency "pump efficiency" annotation (HideResult=false);
   SI.Height dp_Input "pump head in meter water column";
-  SI.MassFlowRate MFI_Input "Massflow rate of pump, if MFI_set active [kg/s]";
+  SI.MassFlowRate MFI_Input "Massflow rate of pump, for m_flow controlled pump [kg/s]";
   Boolean onOff_Input(start=true) "pump on or off";
   annotation (
     Icon(graphics, coordinateSystem(preserveAspectRatio=false)),
