@@ -13,7 +13,7 @@ model CHPDynCleaned
   BHKW Parameters
   ******************************************************************* */
   parameter Boolean EfficiencyByDatatable=true
-    "Use CHP data for efficiency calculations";
+    "Use datasheet values for efficiency calculations";
   parameter AixLib.FastHVAC.Data.CHP.Engine.BaseDataDefinition param=
       AixLib.FastHVAC.Data.CHP.Engine.AisinSeiki()
     "Paramter contains data from CHP records"
@@ -57,10 +57,10 @@ public
   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(20);
   parameter Modelica.SIunits.Time WarmupTime=110
     "time until first heat is delivered by system after switched on"
-                                                            annotation (Dialog(group="Control and operation"));
+                                                            annotation (Dialog(group="Control and operation", enable=withController));
   parameter Modelica.SIunits.Time CooldownTime=330
     "time until thermal output is zero after switched to standby"
-                                                  annotation (Dialog(group="Control and operation"));
+                                                  annotation (Dialog(group="Control and operation", enable=withController));
 
   /* *******************************************************************
   Variables
@@ -100,7 +100,7 @@ public
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow varHeatFlow
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=90,
-        origin={2,-50})));
+        origin={2,-56})));
   AixLib.FastHVAC.Components.Sensors.TemperatureSensor T_flow
     annotation (Placement(transformation(extent={{-48,-84},{-28,-64}})));
   AixLib.FastHVAC.Components.Sensors.TemperatureSensor T_return
@@ -124,7 +124,7 @@ public
     medium=medium,
     T0=T0,
     m_fluid=V_water*medium.rho)
-    annotation (Placement(transformation(extent={{-8,-84},{12,-64}})));
+    annotation (Placement(transformation(extent={{-8,-94},{12,-74}})));
   Modelica.Blocks.Nonlinear.SlewRateLimiter LimiterP(Rising=760, Falling=-760)
     annotation (Placement(transformation(extent={{20,76},{40,96}})));
   input
@@ -244,20 +244,20 @@ equation
      end if;
 
   connect(varHeatFlow.port, workingFluid.heatPort)
-    annotation (Line(points={{2,-60},{2,-60},{2,-64.6}},  color={191,0,0}));
+    annotation (Line(points={{2,-66},{2,-74.6}},          color={191,0,0}));
   connect(enthalpyPort_a1, massFlowRate.enthalpyPort_a) annotation (Line(points={{-100,0},
           {-94,0},{-94,-74.1},{-82.8,-74.1}},              color={176,0,0}));
   connect(massFlowRate.enthalpyPort_b, T_flow.enthalpyPort_a) annotation (Line(
         points={{-65,-74.1},{-56.5,-74.1},{-56.5,-74.1},{-46.8,-74.1}}, color={176,
           0,0}));
   connect(T_flow.enthalpyPort_b, workingFluid.enthalpyPort_a) annotation (Line(
-        points={{-29,-74.1},{-17.5,-74.1},{-17.5,-74},{-7,-74}}, color={176,0,0}));
+        points={{-29,-74.1},{-17.5,-74.1},{-17.5,-84},{-7,-84}}, color={176,0,0}));
   connect(workingFluid.enthalpyPort_b, T_return.enthalpyPort_a) annotation (
-      Line(points={{11,-74},{24,-74},{24,-74.1},{37.2,-74.1}}, color={176,0,0}));
+      Line(points={{11,-84},{24,-84},{24,-74.1},{37.2,-74.1}}, color={176,0,0}));
   connect(T_return.enthalpyPort_b, enthalpyPort_b1) annotation (Line(points={{55,
           -74.1},{75.5,-74.1},{75.5,-2},{100,-2}},   color={176,0,0}));
-  connect(LimiterP.y, Capacity[1]) annotation (Line(points={{41,86},{48,86},{48,102},{82,102},{82,102},{98,102},{98,102},{104,102},
-          {104,102},{106,102},{106,94},{106,94}}, color={0,0,127}));
+  connect(LimiterP.y, Capacity[1]) annotation (Line(points={{41,86},{48,86},{48,
+          102},{106,102},{106,94}},               color={0,0,127}));
   connect(integrator.y, Energy) annotation (Line(points={{93,28},{108,28}},
                      color={0,0,127}));
   connect(firstOrderP.y, LimiterP.u) annotation (Line(points={{1,86},{18,86}}, color={0,0,127}));
@@ -279,21 +279,23 @@ equation
   connect(Qth.y, integrator[2].u) annotation (Line(points={{41,6},{48,6},{48,70},{56,70},{56,28},
           {70,28}}, color={0,0,127}));
   connect(LimiterEFuel.y, Gain_LHV.u) annotation (Line(points={{41,56},{66,56},{66,62},{74.4,62}}, color={0,0,127}));
-  connect(Qth.y, varHeatFlow.Q_flow) annotation (Line(points={{41,6},{48,6},{48,-30},{2,-30},{2,
-          -40}},   color={0,0,127}));
+  connect(Qth.y, varHeatFlow.Q_flow) annotation (Line(points={{41,6},{48,6},{48,
+          -36},{2,-36},{2,-46}},
+                   color={0,0,127}));
   connect(P_elRel, Pel.u) annotation (Line(points={{-96,108},{-96,81.6}}, color={0,0,127}));
-  connect(OnOff, Qth.u2) annotation (Line(points={{-110,30},{-90,30},{-90,6},{18,
-          6}},                                                                        color={255,0,255}));
+  connect(OnOff, Qth.u2) annotation (Line(points={{-110,30},{-94,30},{-94,16},{-72,
+          16},{-72,-32},{14,-32},{14,6},{18,6}},                                      color={255,0,255}));
   connect(OnOff, StartStopController.OnOff) annotation (Line(points={{-110,30},{
           -84,30}},                                                                       color={255,0,255}));
 
   if withController then
     connect(StartStopController.Stop, Stop)
-    annotation (Line(points={{-62.8,25.8},{-52,25.8},{-52,54},{-44,54}}, color={255,0,255}));
+    annotation (Line(points={{-62.8,25.8},{-50,25.8},{-50,54},{-44,54}}, color={255,0,255}));
     connect(StartStopController.Start, Start)
     annotation (Line(points={{-62.8,34.8},{-56,34.8},{-56,20},{-44,20}}, color={255,0,255}));
   else
-    connect(StopIn, Stop) annotation (Line(points={{-42,108},{-42,76},{-52,76},{-52,54},{-44,54}}, color={255,0,255}));
+    connect(StopIn, Stop) annotation (Line(points={{-42,108},{-42,76},{-50,76},{
+            -50,54},{-44,54}},                                                                     color={255,0,255}));
     connect(StartIn, Start) annotation (Line(points={{-70,108},{-70,56},{-56,56},{-56,20},{-44,20}}, color={255,0,255}));
   end if;
   connect(OnOff, switchCounter.u) annotation (Line(points={{-110,30},{-98,30},{-98,48},{-89,48}}, color={255,0,255}));

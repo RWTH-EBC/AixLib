@@ -45,11 +45,10 @@ equation
           lineColor={28,108,200},
           fillColor={175,175,175},
           fillPattern=FillPattern.Solid), Text(
-          extent={{-76,24},{70,-14}},
+          extent={{-56,14},{50,-6}},
           lineColor={0,0,0},
           fillColor={175,175,175},
           fillPattern=FillPattern.Solid,
-          fontSize=12,
-          textString="Start Stop
-Controller")}), Diagram(coordinateSystem(preserveAspectRatio=false)));
+          textString="Start Stop Controller")}),
+                Diagram(coordinateSystem(preserveAspectRatio=false)));
 end StartStopController;
