@@ -1449,7 +1449,7 @@ package R134a_IIR_P1_395_T233_455_Horner
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
-  September 06, 2017, by Mirko Engelpracht:<br/>
+  September 06, 2017, by Mirko Engelpracht, Christian Vering:<br/>
   First implementation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
