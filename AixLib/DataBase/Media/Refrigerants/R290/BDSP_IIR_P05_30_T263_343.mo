@@ -167,7 +167,7 @@ record BDSP_IIR_P05_30_T263_343
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
-  June 10, 2017, by Mirko Engelpracht:<br/>
+  June 10, 2017, by Mirko Engelpracht, Christian Vering:<br/>
   First implementation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
