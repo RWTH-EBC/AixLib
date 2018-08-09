@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps.BaseClasses.HeatPumpControlls;
+within AixLib.Fluid.HeatPumps.BaseClasses.HeatPumpControl;
 block DefrostControl
   "Control block to ensure no frost limits heat flow at the evaporator"
   Controls.Interfaces.HeatPumpControlBus sigBusHP

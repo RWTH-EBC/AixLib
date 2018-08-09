@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps.BaseClasses.HeatPumpControlls;
+within AixLib.Fluid.HeatPumps.BaseClasses.HeatPumpControl;
 block HeatingCurve "A basic heating curve model"
   extends Modelica.Blocks.Interfaces.SISO;
 

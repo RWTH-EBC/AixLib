@@ -8,6 +8,7 @@ PartialTwoPort
 PartialTwoPortInterface
 PartialTwoPortTransport
 PartialTwoPortVector
+PassThroughMedium
 PrescribedOutlet
 StaticFourPortHeatMassExchanger
 StaticTwoPortConservationEquation

@@ -32,9 +32,9 @@ model HeatPumpReal
     final tableUpp=tableUpp,
     final useMinLocTime=useMinLocTime) if useSec
     annotation (Placement(transformation(extent={{-10,-28},{54,28}})));
-  BaseClasses.HeatPumpControlls.DefrostControl defrostControl if useDeFro
+  BaseClasses.HeatPumpControl.DefrostControl defrostControl if   useDeFro
     annotation (Placement(transformation(extent={{-102,-26},{-42,26}})));
-  BaseClasses.HeatPumpControlls.HPControl hPControls(final useAntilegionella=
+  BaseClasses.HeatPumpControl.HPControl hPControls(final useAntilegionella=
         useAntLeg)
     annotation (Placement(transformation(extent={{-190,-26},{-134,26}})));
   Modelica.Fluid.Interfaces.FluidPort_a port_a1(
@@ -207,7 +207,7 @@ model HeatPumpReal
     useSec
     "No 2. Layer"
     annotation (Placement(transformation(extent={{-84,-70},{-68,-54}})));
-  BaseClasses.mediumPassThrough mediumPassThroughSin(
+  Interfaces.PassThroughMedium mediumPassThroughSin(
     redeclare final package Medium = Medium_eva,
     final allowFlowReversal=allowFlowReversalEva,
     final m_flow_nominal=mFlow_evaNominal) if not useConPum annotation (
@@ -215,7 +215,7 @@ model HeatPumpReal
         extent={{6,-6},{-6,6}},
         rotation=90,
         origin={74,60})));
-  BaseClasses.mediumPassThrough mediumPassThroughSou(
+  Interfaces.PassThroughMedium mediumPassThroughSou(
     redeclare final package Medium = Medium_con,
     final allowFlowReversal=allowFlowReversalCon,
     final m_flow_nominal=mFlow_conNominal) if not useEvaPum annotation (

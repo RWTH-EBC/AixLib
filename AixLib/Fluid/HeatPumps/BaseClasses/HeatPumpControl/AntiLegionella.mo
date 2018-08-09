@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps.BaseClasses.HeatPumpControlls;
+within AixLib.Fluid.HeatPumps.BaseClasses.HeatPumpControl;
 block AntiLegionella "Control to avoid Legionella in the DHW"
   Controls.Interfaces.HeatPumpControlBus sigBusHP
     annotation (Placement(transformation(extent={{-134,-18},{-96,18}})));

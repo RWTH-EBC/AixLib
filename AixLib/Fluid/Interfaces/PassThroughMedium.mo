@@ -1,5 +1,5 @@
-within AixLib.Fluid.HeatPumps.BaseClasses;
-model mediumPassThrough "To make medium connectors conditional"
+within AixLib.Fluid.Interfaces;
+model PassThroughMedium "To make medium connectors conditional"
   extends Interfaces.PartialTwoPortInterface;
 equation
   connect(port_a, port_b)
@@ -12,4 +12,4 @@ equation
           points={{-94,0},{92,0}},
           color={0,127,255},
           thickness=0.5)}));
-end mediumPassThrough;
+end PassThroughMedium;

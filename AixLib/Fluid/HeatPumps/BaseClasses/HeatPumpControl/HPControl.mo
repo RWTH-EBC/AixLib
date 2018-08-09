@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps.BaseClasses.HeatPumpControlls;
+within AixLib.Fluid.HeatPumps.BaseClasses.HeatPumpControl;
 block HPControl
   "Control block which makes sure the desired temperature is supplied by the HP"
   AntiLegionella antiLegionella if useAntilegionella

@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatPumps.BaseClasses.HeatPumpControlls;
+within AixLib.Fluid.HeatPumps.BaseClasses.HeatPumpControl;
 block TSetToNSet
   "Converts a desired temperature to a certain compressor speed"
 

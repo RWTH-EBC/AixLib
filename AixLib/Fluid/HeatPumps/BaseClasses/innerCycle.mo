@@ -1,5 +1,5 @@
 within AixLib.Fluid.HeatPumps.BaseClasses;
-model innerCycle "Blackbox model of refrigerant cycle of a HP"
+model InnerCycle "Blackbox model of refrigerant cycle of a HP"
   Controls.Interfaces.HeatPumpControlBus sigBusHP annotation (Placement(
         transformation(extent={{-16,88},{18,118}}), iconTransformation(extent={{
             -16,88},{18,118}})));
@@ -154,4 +154,4 @@ equation
           textString="%name",
           origin={0,-8},
           rotation=90)}), Diagram(coordinateSystem(preserveAspectRatio=false)));
-end innerCycle;
+end InnerCycle;

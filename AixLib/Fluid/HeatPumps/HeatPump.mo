@@ -78,7 +78,7 @@ model HeatPump "Base model of realistic heat pump"
                            sigBusHP
     annotation (Placement(transformation(extent={{-132,-48},{-102,-14}}),
         iconTransformation(extent={{-120,-40},{-102,-14}})));
-  BaseClasses.innerCycle innerCycle(redeclare final performanceData
+  BaseClasses.InnerCycle innerCycle(redeclare final performanceData
       performanceData)                                     annotation (
       Placement(transformation(
         extent={{-30,-30},{30,30}},
