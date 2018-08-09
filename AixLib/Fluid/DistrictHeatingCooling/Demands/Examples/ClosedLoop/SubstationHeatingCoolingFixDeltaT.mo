@@ -1,7 +1,5 @@
 within AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.ClosedLoop;
 model SubstationHeatingCoolingFixDeltaT
-  import InterFlexModels;
-  import AixLib;
   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Water "Fluid in the pipes";
   AixLib.Fluid.Sources.Boundary_pT    coo(
@@ -44,8 +42,8 @@ model SubstationHeatingCoolingFixDeltaT
     deltaT_heatingSet(displayUnit="K") = 4,
     deltaT_heatingGridSet(displayUnit="K") = 4)
     annotation (Placement(transformation(extent={{-22,-10},{16,16}})));
-  Modelica.Blocks.Sources.TimeTable timeTable1(table=[0,0; 3600,0; 3600,-1500;
-        7200,-1500; 7200,-2000; 10800,-1000; 14400,0; 18000,0; 18000,-2000])
+  Modelica.Blocks.Sources.TimeTable timeTable1(table=[0,0; 3600,0; 3600,1500;
+        7200,1500; 7200,2000; 10800,1000; 14400,0; 18000,0; 18000,2000])
     annotation (Placement(transformation(extent={{-98,2},{-78,22}})));
   Modelica.Blocks.Sources.TimeTable timeTable(table=[0,2000; 3600,2000; 3600,0;
         7200,0; 7200,3000; 10800,4000; 14400,4000; 14400,2500; 18000,2500])

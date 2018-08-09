@@ -1,7 +1,5 @@
 within AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.ClosedLoop;
 model SubstationCooling
-  import InterFlexModels;
-  import AixLib;
   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Water "Fluid in the pipes";
   AixLib.Fluid.Sources.Boundary_pT    coo(
@@ -21,8 +19,8 @@ model SubstationCooling
   Modelica.Blocks.Sources.Sine sine(
     freqHz=1/3600,
     startTime=0,
-    amplitude=-1000,
-    offset=-2000)
+    amplitude=1000,
+    offset=2000)
     annotation (Placement(transformation(extent={{-98,36},{-78,56}})));
   Modelica.Blocks.Sources.Constant const(k=288.15)
     annotation (Placement(transformation(extent={{-44,72},{-24,92}})));

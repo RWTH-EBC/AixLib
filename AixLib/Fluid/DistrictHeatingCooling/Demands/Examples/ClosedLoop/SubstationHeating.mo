@@ -1,7 +1,5 @@
 within AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.ClosedLoop;
 model SubstationHeating
-  import InterFlexModels;
-  import AixLib;
   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Water "Fluid in the pipes";
   AixLib.Fluid.Sources.Boundary_pT    coo(
@@ -42,7 +40,8 @@ model SubstationHeating
     HeatDemand_max=3000,
     redeclare package Medium = Medium,
     deltaT_heatingSet(displayUnit="K") = 10,
-    deltaT_heatingGridSet(displayUnit="K") = 5)
+    deltaT_heatingGridSet(displayUnit="K") = 5,
+    m_flow_nominal=3)
     annotation (Placement(transformation(extent={{-14,-2},{10,20}})));
 equation
   connect(ramp.y, coo.T_in)
