@@ -167,9 +167,11 @@ model HeatPump "Base model of realistic heat pump"
     "Ambient temperature on the inside"
     annotation (Placement(transformation(extent={{140,-20},{100,20}})));
   replaceable block performanceData =
-      BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData                                 constrainedby
+      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D
+  constrainedby
     AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
-                                                                                          annotation (__Dymola_choicesAllMatching=true);
+  "replaceable model for performance data of HP"
+    annotation (choicesAllMatching=true);
 
   Modelica.Blocks.Math.RealToBoolean realToBoolean(threshold=0.1)
     "To generate the on off signal" annotation (Placement(transformation(

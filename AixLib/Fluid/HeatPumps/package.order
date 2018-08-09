@@ -1,5 +1,7 @@
 Carnot_TCon
 Carnot_y
+HeatPump
+HeatPumpReal
 HeatPumpDetailed
 HeatPumpSimple
 ReciprocatingWaterToWater
@@ -10,5 +12,3 @@ Data
 Examples
 Validation
 BaseClasses
-HeatPump
-HeatPumpReal
