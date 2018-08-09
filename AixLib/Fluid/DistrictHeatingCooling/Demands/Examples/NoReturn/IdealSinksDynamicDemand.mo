@@ -1,4 +1,4 @@
-within AixLib.Fluid.DistrictHeatingCooling.Demands.Examples;
+within AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.NoReturn;
 model IdealSinksDynamicDemand
   "Ideal sink models with a dynamic demand as input demonstrated in a simple setup"
   extends Modelica.Icons.Example;
@@ -11,18 +11,18 @@ model IdealSinksDynamicDemand
     T=373.15,
     nPorts=3)                "Ideal source supplying the demand nodes"
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
-  NoReturn.IdealSinkHeat idealSinkHeat(
+  .AixLib.Fluid.DistrictHeatingCooling.Demands.NoReturn.IdealSinkHeat idealSinkHeat(
     dTDesign=30,
     redeclare package Medium = Medium,
     Q_flow_set(tableName="Demand", fileName=
           Modelica.Utilities.Files.loadResource(
           "modelica://AixLib/Resources/Dhc_ExampleData/Building1.txt")))
     annotation (Placement(transformation(extent={{0,-60},{20,-40}})));
-  NoReturn.IdealSinkHeatInput idealSinkHeatInput(dTDesign=30, redeclare package
-      Medium = Medium)
+  .AixLib.Fluid.DistrictHeatingCooling.Demands.NoReturn.IdealSinkHeatInput idealSinkHeatInput(dTDesign=
+        30, redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
-  NoReturn.IdealSinkHeatInput idealSinkHeatInput1(dTDesign=30, redeclare
-      package Medium = Medium)
+  .AixLib.Fluid.DistrictHeatingCooling.Demands.NoReturn.IdealSinkHeatInput idealSinkHeatInput1(dTDesign=
+        30, redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{0,40},{20,60}})));
   Modelica.Blocks.Sources.CombiTimeTable Q_flow_from_txt(
     tableOnFile=true,

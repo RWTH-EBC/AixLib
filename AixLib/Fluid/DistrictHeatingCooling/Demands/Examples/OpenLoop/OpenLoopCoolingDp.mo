@@ -1,4 +1,4 @@
-within AixLib.Fluid.DistrictHeatingCooling.Demands.Examples;
+within AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.OpenLoop;
 model OpenLoopCoolingDp
   "A small open loop example with a cooling substation and pressure control"
   extends Modelica.Icons.Example;
@@ -16,14 +16,12 @@ model OpenLoopCoolingDp
     redeclare package Medium = Medium,
     pReturn=200000)      "Simple suppy model"
     annotation (Placement(transformation(extent={{-10,50},{10,70}})));
-  OpenLoop.VarTSupplyDp
-                      varTSupply(
+  .AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop.VarTSupplyDp varTSupply(
     redeclare package Medium = Medium,
-    Q_flow_nominal = -78239.1,
-    dp_nominal = 50000,
-    dTDesign = -6,
-    TReturn = 285.15)
-    "Simple demand model"        annotation (Placement(transformation(
+    Q_flow_nominal=-78239.1,
+    dp_nominal=50000,
+    dTDesign=-6,
+    TReturn=285.15) "Simple demand model" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=180,
         origin={0,-60})));

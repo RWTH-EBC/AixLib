@@ -1,9 +1,8 @@
-within AixLib.Fluid.DistrictHeatingCooling.Demands.Examples;
+within AixLib.Fluid.DistrictHeatingCooling.Demands.Examples.NoReturn;
 model IdealSinks "Ideal sink models demonstrated in a simple setup"
   extends Modelica.Icons.Example;
 
   package Medium = AixLib.Media.Water "Fluid in the pipes";
-
 
   Sources.Boundary_pT source(
     redeclare package Medium = Medium,
@@ -11,13 +10,13 @@ model IdealSinks "Ideal sink models demonstrated in a simple setup"
     T=373.15,
     nPorts=3)                "Ideal source supplying the demand nodes"
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
-  NoReturn.IdealSinkMin idealSinkMin(redeclare package Medium = Medium,
-      prescribed_m_flow=2)
+  .AixLib.Fluid.DistrictHeatingCooling.Demands.NoReturn.IdealSinkMin idealSinkMin(
+      redeclare package Medium = Medium, prescribed_m_flow=2)
     annotation (Placement(transformation(extent={{0,60},{20,80}})));
-  NoReturn.IdealSinkConstFlow idealSinkConstFlow(redeclare package Medium =
-        Medium, prescribed_m_flow=2)
+  .AixLib.Fluid.DistrictHeatingCooling.Demands.NoReturn.IdealSinkConstFlow idealSinkConstFlow(
+      redeclare package Medium = Medium, prescribed_m_flow=2)
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
-  NoReturn.IdealSinkConstHeat idealSinkConstHeat(
+  .AixLib.Fluid.DistrictHeatingCooling.Demands.NoReturn.IdealSinkConstHeat idealSinkConstHeat(
     redeclare package Medium = Medium,
     dTDesign=30,
     prescribedQ(displayUnit="kW") = 200000)
