@@ -186,7 +186,7 @@ record TSP_IIR_P1_48_T233_340
    annotation (Documentation(revisions="<html>
 <ul>
   <li>
-  June 14, 2017, by Mirko Engelpracht:<br/>
+  June 14, 2017, by Mirko Engelpracht, Christian Vering:<br/>
   First implementation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
