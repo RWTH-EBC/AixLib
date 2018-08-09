@@ -67,7 +67,8 @@ model ERC_ExperimentalHall_CoolingCircuit
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-106,-86})));
-  AixLib.Fluid.HydraulicModules.Unmixed Unmixed(redeclare package Medium = Medium,
+  AixLib.Fluid.HydraulicModules.Pump Unmixed(
+    redeclare package Medium = Medium,
     redeclare
       AixLib.Fluid.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       basicPumpInterface(pump(redeclare
@@ -85,14 +86,12 @@ model ERC_ExperimentalHall_CoolingCircuit
       dIns=0.01,
       kIns=0.028,
       length=4),
-    T_amb=T_amb)
-    annotation (Placement(
-        transformation(
+    T_amb=T_amb) annotation (Placement(transformation(
         extent={{-25,-25},{25,25}},
         rotation=90,
         origin={3,7})));
-  AixLib.Fluid.HydraulicModules.Unmixed Unmixed1(
-                                                redeclare package Medium = Medium,
+  AixLib.Fluid.HydraulicModules.Pump Unmixed1(
+    redeclare package Medium = Medium,
     redeclare
       AixLib.Fluid.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       basicPumpInterface(pump(redeclare
@@ -110,9 +109,7 @@ model ERC_ExperimentalHall_CoolingCircuit
       length=1,
       dIns=0.01,
       kIns=0.028),
-    T_amb=T_amb)
-    annotation (Placement(
-        transformation(
+    T_amb=T_amb) annotation (Placement(transformation(
         extent={{-25,-25},{25,25}},
         rotation=90,
         origin={75,7})));
