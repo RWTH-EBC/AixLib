@@ -2,6 +2,7 @@
 class References "References"
   extends Modelica.Icons.References;
 
+
   annotation (Documentation(info="<html>
 <p>
 In the following, the literature used for the media library is summarised.
