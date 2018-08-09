@@ -2,6 +2,7 @@ within AixLib.Media.Refrigerants.UsersGuide;
 class Naming "Naming and abbreviations"
   extends Modelica.Icons.Information;
 
+
   annotation (Documentation(info="<html>
 <p>
 In general, both the naming and the abbreviations follow the guidelines
