@@ -8,15 +8,14 @@ model Throttle "Test for ummixed throttle circuit"
   AixLib.Systems.HydraulicModules.Throttle Throttle(
     redeclare package Medium = Medium,
     m_flow_nominal=1,
-    val(Kv=10),
     dIns=0.01,
     kIns=0.028,
     d=0.032,
-    pipe1(length=1),
-    pipe2(length=1),
-    pipe3(length=1),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    T_amb=293.15)  annotation (Placement(transformation(
+    T_amb=293.15,
+    length=1,
+    Kv=6.3,
+    pipe3(length=2)) annotation (Placement(transformation(
         extent={{-30,-30},{30,30}},
         rotation=90,
         origin={10,10})));

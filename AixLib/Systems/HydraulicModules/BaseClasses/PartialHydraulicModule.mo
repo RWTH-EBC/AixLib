@@ -31,6 +31,9 @@ partial model PartialHydraulicModule "Base class for hydraulic module."
   parameter Modelica.SIunits.Length d
     "Hydraulic diameter of all pipes (can be overwritten in each pipe)"
     annotation (Dialog(group="Pipes"));
+  parameter Modelica.SIunits.Length length "Pipe length of all pipes (can be overwritten in each pipe)"
+    annotation (Dialog(group="Pipes"));
+  parameter Real Kv "Kv value of valve (can be overwritten in valve)"  annotation (Dialog(group="Actuators"));
 
   BaseClasses.HydraulicBus hydraulicBus annotation (Placement(transformation(
           extent={{-20,80},{20,120}}), iconTransformation(extent={{-20,80},{20,120}})));
@@ -197,9 +200,7 @@ equation
 <p>The scondary circuits do not affect each other when switching operational modes.</p>
 </html>", revisions="<html>
 <ul>
-<li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib</li>
-<li>July 25, 2017 by Peter Matthes:<br/>Renames sensors and introduces PT1 behavior for temperature sensors. Adds sensors to icon.</li>
-<li>February 6, 2016, by Peter Matthes:<br/>implemented bus-connector-C_H_HRMI_01 model for testing (extends from model with standard data ports)</li>
+<li>August, 2018, by Alexander K&uuml;mpel:<br/>First implementation</li>
 </ul>
 </html>"),
     experiment(StopTime=86400),

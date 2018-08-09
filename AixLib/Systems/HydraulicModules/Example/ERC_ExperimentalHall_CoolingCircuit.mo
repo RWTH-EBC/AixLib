@@ -70,6 +70,11 @@ model ERC_ExperimentalHall_CoolingCircuit
         rotation=90,
         origin={-106,-86})));
   AixLib.Systems.HydraulicModules.Pump Unmixed(
+    redeclare
+      AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+      PumpInterface(pump(redeclare
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per,
+          energyDynamics=Unmixed.energyDynamics)),
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     T_amb=T_amb,
@@ -79,17 +84,16 @@ model ERC_ExperimentalHall_CoolingCircuit
     pipe1(length=2),
     pipe2(length=2),
     pipe3(length=4),
-    energyDynamics=Admix.energyDynamics,
-    redeclare
-      AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-      basicPumpInterface(pump(redeclare
-          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per,
-          energyDynamics=Unmixed.energyDynamics)))
-                 annotation (Placement(transformation(
+    energyDynamics=Admix.energyDynamics) annotation (Placement(transformation(
         extent={{-25,-25},{25,25}},
         rotation=90,
         origin={3,7})));
   AixLib.Systems.HydraulicModules.Pump Unmixed1(
+    redeclare
+      AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+      PumpInterface(pump(redeclare
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per,
+          energyDynamics=Unmixed1.energyDynamics)),
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     T_amb=T_amb,
@@ -99,20 +103,19 @@ model ERC_ExperimentalHall_CoolingCircuit
     pipe1(length=1),
     pipe2(length=1),
     pipe3(length=1),
-    energyDynamics=Admix.energyDynamics,
-    redeclare
-      AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-      basicPumpInterface(pump(redeclare
-          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per,
-          energyDynamics=Unmixed1.energyDynamics)))
-                 annotation (Placement(transformation(
+    energyDynamics=Admix.energyDynamics) annotation (Placement(transformation(
         extent={{-25,-25},{25,25}},
         rotation=90,
         origin={75,7})));
   AixLib.Systems.HydraulicModules.Admix Admix(
+    redeclare
+      AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+      PumpInterface(pump(redeclare
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per,
+          energyDynamics=Admix.energyDynamics)),
+    valve(Kv=10),
     redeclare package Medium = Medium,
     m_flow_nominal=1,
-    val(Kv=10),
     T_amb=T_amb,
     dIns=0.01,
     kIns=0.028,
@@ -126,13 +129,8 @@ model ERC_ExperimentalHall_CoolingCircuit
       dIns=0.02),
     pipe5(length=1),
     pipe6(length=1),
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    redeclare
-      AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-      basicPumpInterface(pump(redeclare
-          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per,
-          energyDynamics=Admix.energyDynamics)))
-                 annotation (Placement(transformation(
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial) annotation (
+      Placement(transformation(
         extent={{-25,-25},{25,25}},
         rotation=90,
         origin={-69,7})));

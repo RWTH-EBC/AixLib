@@ -6,22 +6,20 @@ model Pump "Test for unmixed pump circuit"
     annotation (choicesAllMatching=true);
 
   AixLib.Systems.HydraulicModules.Pump Unmixed(
+    redeclare
+      AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+      PumpInterface(pump(redeclare
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per,
+          energyDynamics=Unmixed.energyDynamics)),
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     dIns=0.01,
     kIns=0.028,
     d=0.032,
-    pipe1(length=1),
-    pipe2(length=1),
-    pipe3(length=1),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    T_amb=293.15,
-    redeclare
-      AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-      basicPumpInterface(pump(redeclare
-          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per,
-          energyDynamics=Unmixed.energyDynamics)))
-                   annotation (Placement(transformation(
+    length=1,
+    pipe3(length=2),
+    T_amb=293.15) annotation (Placement(transformation(
         extent={{-30,-30},{30,30}},
         rotation=90,
         origin={10,10})));

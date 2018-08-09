@@ -21,8 +21,6 @@ Definition of a standard pump bus for use with the Zugabe library.
 </p>
 </html>", revisions="<html>
 <ul>
-<li>2018-02-01 by Peter Matthes:<br/>Adds variable rpm_Act that represents the current pump speed actor signal.</li>
-<li>2017-10-12, by Peter Matthes:<br/>Adds variables power, head and efficiency to pump bus. Sets NightMode(start=false). This will be the default value of that component when no connection is made from outside.</li>
 <li>2017-02-06, by Peter Matthes:<br/>First implementation. </li>
 </ul>
 </html>"));

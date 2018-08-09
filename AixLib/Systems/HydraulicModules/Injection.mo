@@ -2,10 +2,10 @@ within AixLib.Systems.HydraulicModules;
 model Injection "Injection circuit with pump and three way valve"
   extends AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule;
 
-  replaceable BaseClasses.BasicPumpInterface basicPumpInterface(
+  replaceable BaseClasses.BasicPumpInterface PumpInterface(
     redeclare package Medium = Medium,
     final allowFlowReversal=allowFlowReversal,
-    final m_flow_nominal=m_flow_nominal) annotation (
+    final m_flow_nominal=m_flow_nominal) "Needs to be redeclared" annotation (
     Dialog(group="Actuators"),
     choicesAllMatching=true,
     Placement(transformation(extent={{48,12},{64,28}})));
@@ -16,16 +16,17 @@ model Injection "Injection circuit with pump and three way valve"
     annotation (Dialog(tab="Advanced"));
 
 
-  AixLib.Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear val(
+  AixLib.Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear valve(
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
     l={0.001,0.001},
-    dpFixed_nominal={8000,8000},
     redeclare package Medium = Medium,
     T_start=T_start,
     tau=0.2,
     final m_flow_nominal=m_flow_nominal,
     energyDynamics=energyDynamics,
-    y_start=0.5)                         annotation (Dialog(enable=true, group="Actuators"),
+    y_start=0.5,
+    Kv=Kv,
+    dpFixed_nominal={1000,1000}) annotation (Dialog(enable=true, group="Actuators"),
       Placement(transformation(
         extent={{8,8},{-8,-8}},
         rotation=0,
@@ -43,7 +44,8 @@ model Injection "Injection circuit with pump and three way valve"
     dIns=dIns,
     kIns=kIns,
     final R=1/(pipe1.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe1.dh/2
-         + pipe1.dIns)/(pipe1.dh/2))))         annotation (Dialog(enable=true,
+         + pipe1.dIns)/(pipe1.dh/2))),
+    length=length)                             annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(extent={{-80,28},{-64,12}})));
 
   Fluid.FixedResistances.PlugFlowPipe pipe2(
@@ -58,7 +60,8 @@ model Injection "Injection circuit with pump and three way valve"
     dIns=dIns,
     kIns=kIns,
     final R=1/(pipe2.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe2.dh/2
-         + pipe2.dIns)/(pipe2.dh/2))))         annotation (Dialog(enable=true,
+         + pipe2.dIns)/(pipe2.dh/2))),
+    length=length)                             annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(
         extent={{8,-8},{-8,8}},
         rotation=180,
@@ -75,7 +78,8 @@ model Injection "Injection circuit with pump and three way valve"
     dIns=dIns,
     kIns=kIns,
     final R=1/(pipe3.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe3.dh/2
-         + pipe3.dIns)/(pipe3.dh/2))))         annotation (Dialog(enable=true,
+         + pipe3.dIns)/(pipe3.dh/2))),
+    length=length)                             annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(
         extent={{8,-8},{-8,8}},
         rotation=180,
@@ -93,7 +97,8 @@ model Injection "Injection circuit with pump and three way valve"
     dIns=dIns,
     kIns=kIns,
     final R=1/(pipe4.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe4.dh/2
-         + pipe4.dIns)/(pipe4.dh/2))))         annotation (Dialog(enable=true,
+         + pipe4.dIns)/(pipe4.dh/2))),
+    length=length)                             annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(extent={{70,28},{86,12}})));
   Fluid.FixedResistances.PlugFlowPipe pipe5(
     redeclare package Medium = Medium,
@@ -107,8 +112,25 @@ model Injection "Injection circuit with pump and three way valve"
     dIns=dIns,
     kIns=kIns,
     final R=1/(pipe5.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe5.dh/2
-         + pipe5.dIns)/(pipe5.dh/2))))         annotation (Dialog(enable=true,
+         + pipe5.dIns)/(pipe5.dh/2))),
+    length=length)                             annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(extent={{60,-68},{44,-52}})));
+    Fluid.FixedResistances.PlugFlowPipe pipe6(
+    redeclare package Medium = Medium,
+    final m_flow_nominal=m_flow_nominal,
+    T_start_in=T_start,
+    T_start_out=T_start,
+    nPorts=1,
+    final v_nominal=1.5,
+    final allowFlowReversal=allowFlowReversal,
+    dh=d,
+    dIns=dIns,
+    kIns=kIns,
+    final R=1/(pipe6.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe6.dh/2
+         + pipe6.dIns)/(pipe6.dh/2))),
+    length=length)                             annotation (Dialog(enable=true,
+        group="Pipes"), Placement(transformation(extent={{0,-68},{-16,-52}})));
+
   Fluid.FixedResistances.PlugFlowPipe pipe7(
     redeclare package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
@@ -121,7 +143,8 @@ model Injection "Injection circuit with pump and three way valve"
     dIns=dIns,
     kIns=kIns,
     final R=1/(pipe7.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe7.dh/2
-         + pipe7.dIns)/(pipe7.dh/2))))         annotation (Dialog(enable=true,
+         + pipe7.dIns)/(pipe7.dh/2))),
+    length=length)                             annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(extent={{-58,-68},{-74,-52}})));
   Fluid.FixedResistances.PlugFlowPipe pipe8(
     redeclare package Medium = Medium,
@@ -135,7 +158,8 @@ model Injection "Injection circuit with pump and three way valve"
     dIns=dIns,
     kIns=kIns,
     final R=1/(pipe8.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe8.dh/2
-         + pipe8.dIns)/(pipe8.dh/2))))   annotation (Dialog(enable=true, group=
+         + pipe8.dIns)/(pipe8.dh/2))),
+    length=length)                       annotation (Dialog(enable=true, group=
           "Pipes"), Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=-90,
@@ -152,25 +176,12 @@ model Injection "Injection circuit with pump and three way valve"
     dIns=dIns,
     kIns=kIns,
     final R=1/(pipe9.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe9.dh/2
-         + pipe9.dIns)/(pipe9.dh/2))))         annotation (Dialog(enable=true,
+         + pipe9.dIns)/(pipe9.dh/2))),
+    length=length)                             annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=-90,
         origin={16,-20})));
-  Fluid.FixedResistances.PlugFlowPipe pipe6(
-    redeclare package Medium = Medium,
-    final m_flow_nominal=m_flow_nominal,
-    T_start_in=T_start,
-    T_start_out=T_start,
-    nPorts=1,
-    final v_nominal=1.5,
-    final allowFlowReversal=allowFlowReversal,
-    dh=d,
-    dIns=dIns,
-    kIns=kIns,
-    final R=1/(pipe6.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe6.dh/2
-         + pipe6.dIns)/(pipe6.dh/2))))         annotation (Dialog(enable=true,
-        group="Pipes"), Placement(transformation(extent={{0,-68},{-16,-52}})));
 
   Fluid.MixingVolumes.MixingVolume junc3v6(
     redeclare package Medium = Medium,
@@ -212,10 +223,10 @@ protected
     annotation (Placement(transformation(extent={{10,20},{22,32}})));
 
 equation
-  connect(pipe7.port_a, val.port_2)
+  connect(pipe7.port_a, valve.port_2)
     annotation (Line(points={{-58,-60},{-48,-60}}, color={0,127,255}));
 
-  connect(basicPumpInterface.port_b, pipe4.port_a)
+  connect(PumpInterface.port_b, pipe4.port_a)
     annotation (Line(points={{64,20},{70,20}}, color={0,127,255}));
   connect(VFSen_injection.V_flow, hydraulicBus.VF_injection) annotation (Line(
         points={{0,28.8},{0,100}}, color={0,0,127}), Text(
@@ -223,7 +234,7 @@ equation
       index=1,
       extent={{6,3},{6,3}}));
 
-  connect(basicPumpInterface.pumpBus, hydraulicBus.pumpBus) annotation (Line(
+  connect(PumpInterface.pumpBus, hydraulicBus.pumpBus) annotation (Line(
       points={{56,28},{56,100.1},{0.1,100.1}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -232,9 +243,9 @@ equation
       extent={{6,3},{6,3}}));
   connect(pipe2.ports_b[1], VFSen_injection.port_a)
     annotation (Line(points={{-12,20},{-8,20}}, color={0,127,255}));
-  connect(val.port_1, pipe6.ports_b[1])
+  connect(valve.port_1, pipe6.ports_b[1])
     annotation (Line(points={{-32,-60},{-16,-60}}, color={0,127,255}));
-  connect(pipe8.ports_b[1], val.port_3)
+  connect(pipe8.ports_b[1], valve.port_3)
     annotation (Line(points={{-40,-28},{-40,-52}}, color={0,127,255}));
   connect(pipe8.heatPort, pipe9.heatPort)
     annotation (Line(points={{-32,-20},{24,-20}}, color={191,0,0}));
@@ -256,7 +267,7 @@ equation
           16,-60},{17.6,-60}},           color={0,127,255}));
   connect(juncjp6.ports[3], pipe3.port_a)
     annotation (Line(points={{17.6,20},{24,20}}, color={0,127,255}));
-  connect(pipe3.ports_b[1], basicPumpInterface.port_a)
+  connect(pipe3.ports_b[1], PumpInterface.port_a)
     annotation (Line(points={{40,20},{48,20}}, color={0,127,255}));
   connect(senT_a1.port_b, pipe1.port_a)
     annotation (Line(points={{-88,20},{-80,20}}, color={0,127,255}));
@@ -283,12 +294,12 @@ equation
           -52},{52,-46},{32,-46},{32,-20}}, color={191,0,0}));
   connect(pipe6.heatPort, prescribedTemperature.port) annotation (Line(points={{-8,
           -52},{-8,-46},{32,-46},{32,-20}}, color={191,0,0}));
-  connect(val.y, hydraulicBus.valSet) annotation (Line(points={{-40,-69.6},{-40,
+  connect(valve.y, hydraulicBus.valSet) annotation (Line(points={{-40,-69.6},{-40,
           -82},{-136,-82},{-136,100.1},{0.1,100.1}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(val.y_actual, hydraulicBus.valSetAct) annotation (Line(points={{-44,
+  connect(valve.y_actual, hydraulicBus.valSetAct) annotation (Line(points={{-44,
           -65.6},{-44,-82},{-136,-82},{-136,100.1},{0.1,100.1}}, color={0,0,127}),
       Text(
       string="%second",
@@ -519,6 +530,7 @@ equation
 <p>This model uses a pipe model to include the heat loss and insulation effects</p>
 </html>", revisions="<html>
 <ul>
+<li>August 09, 2018, by Alexander K&uuml;mpel:<br/>Extension from base PartioalHydraulicModuls</li>
 <li>Mai 30, 2018, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib</li>
 <li>2017-07-25 by Peter Matthes:<br/>Renames sensors and introduces PT1 behavior for temperature sensors. Adds sensors to icon.</li>
 <li><i>March,2016&nbsp;</i> by Rohit Lad:<br/>Implemented</li>

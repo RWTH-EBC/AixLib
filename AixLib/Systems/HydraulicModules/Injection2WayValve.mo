@@ -3,21 +3,24 @@ model Injection2WayValve
   "Injection circuit with pump and two way valve"
   extends AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule;
 
-      replaceable BaseClasses.BasicPumpInterface basicPumpInterface(redeclare
-      package Medium = Medium,
+      replaceable BaseClasses.BasicPumpInterface PumpInterface(
+    redeclare package Medium = Medium,
     final allowFlowReversal=allowFlowReversal,
     final m_flow_nominal=m_flow_nominal)
-    annotation (Dialog(group="Actuators"), choicesAllMatching=true, Placement(transformation(extent={{42,12},
-            {58,28}})));
+                                        "Needs to be redeclared" annotation (
+    Dialog(group="Actuators"),
+    choicesAllMatching=true,
+    Placement(transformation(extent={{42,12},{58,28}})));
   parameter Modelica.SIunits.Volume vol=0.0005 "Mixing Volume"  annotation(Dialog(tab="Advanced"));
 
 
-  Fluid.Actuators.Valves.TwoWayLinear val(
+  Fluid.Actuators.Valves.TwoWayLinear valve(
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
     redeclare package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
-    final allowFlowReversal=allowFlowReversal) annotation (Dialog(enable=true,
-        group="Actuators"), Placement(transformation(
+    final allowFlowReversal=allowFlowReversal,
+    Kv=Kv) annotation (Dialog(enable=true, group="Actuators"), Placement(
+        transformation(
         extent={{8,8},{-8,-8}},
         rotation=0,
         origin={-42,-60})));
@@ -34,7 +37,8 @@ model Injection2WayValve
     dIns=dIns,
     kIns=kIns,
     final R=1/(pipe1.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe1.dh/2
-         + pipe1.dIns)/(pipe1.dh/2))))         annotation (Dialog(enable=true,
+         + pipe1.dIns)/(pipe1.dh/2))),
+    length=length)                             annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(extent={{-40,28},{-24,12}})));
   Fluid.FixedResistances.PlugFlowPipe pipe2(
     redeclare package Medium = Medium,
@@ -48,7 +52,8 @@ model Injection2WayValve
     dIns=dIns,
     kIns=kIns,
     final R=1/(pipe2.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe2.dh/2
-         + pipe2.dIns)/(pipe2.dh/2))))         annotation (Dialog(enable=true,
+         + pipe2.dIns)/(pipe2.dh/2))),
+    length=length)                             annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(extent={{16,28},{32,12}})));
 
   Fluid.FixedResistances.PlugFlowPipe pipe3(
@@ -63,7 +68,8 @@ model Injection2WayValve
     dIns=dIns,
     kIns=kIns,
     final R=1/(pipe3.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe3.dh/2
-         + pipe3.dIns)/(pipe3.dh/2))))         annotation (Dialog(enable=true,
+         + pipe3.dIns)/(pipe3.dh/2))),
+    length=length)                             annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(extent={{68,28},{84,12}})));
   Fluid.FixedResistances.PlugFlowPipe pipe4(
     redeclare package Medium = Medium,
@@ -77,8 +83,25 @@ model Injection2WayValve
     dIns=dIns,
     kIns=kIns,
     final R=1/(pipe4.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe4.dh/2
-         + pipe4.dIns)/(pipe4.dh/2))))         annotation (Dialog(enable=true,
+         + pipe4.dIns)/(pipe4.dh/2))),
+    length=length)                             annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(extent={{60,-68},{44,-52}})));
+  Fluid.FixedResistances.PlugFlowPipe pipe5(
+    redeclare package Medium = Medium,
+    final m_flow_nominal=m_flow_nominal,
+    T_start_in=T_start,
+    T_start_out=T_start,
+    nPorts=1,
+    final v_nominal=1.5,
+    final allowFlowReversal=allowFlowReversal,
+    dh=d,
+    dIns=dIns,
+    kIns=kIns,
+    final R=1/(pipe5.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe5.dh/2
+         + pipe5.dIns)/(pipe5.dh/2))),
+    length=length)                             annotation (Dialog(enable=true,
+        group="Pipes"), Placement(transformation(extent={{-4,-68},{-20,-52}})));
+
   Fluid.FixedResistances.PlugFlowPipe pipe6(
     redeclare package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
@@ -91,7 +114,8 @@ model Injection2WayValve
     dIns=dIns,
     kIns=kIns,
     final R=1/(pipe6.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe6.dh/2
-         + pipe6.dIns)/(pipe6.dh/2))))         annotation (Dialog(enable=true,
+         + pipe6.dIns)/(pipe6.dh/2))),
+    length=length)                             annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(extent={{-58,-68},{-74,-52}})));
   Fluid.FixedResistances.PlugFlowPipe pipe7(
     redeclare package Medium = Medium,
@@ -105,25 +129,12 @@ model Injection2WayValve
     dIns=dIns,
     kIns=kIns,
     final R=1/(pipe7.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe7.dh/2
-         + pipe7.dIns)/(pipe7.dh/2))))         annotation (Dialog(enable=true,
+         + pipe7.dIns)/(pipe7.dh/2))),
+    length=length)                             annotation (Dialog(enable=true,
         group="Pipes"), Placement(transformation(
         extent={{-8,-8},{8,8}},
         rotation=-90,
         origin={6,-20})));
-  Fluid.FixedResistances.PlugFlowPipe pipe5(
-    redeclare package Medium = Medium,
-    final m_flow_nominal=m_flow_nominal,
-    T_start_in=T_start,
-    T_start_out=T_start,
-    nPorts=1,
-    final v_nominal=1.5,
-    final allowFlowReversal=allowFlowReversal,
-    dh=d,
-    dIns=dIns,
-    kIns=kIns,
-    final R=1/(pipe5.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe5.dh/2
-         + pipe5.dIns)/(pipe5.dh/2))))         annotation (Dialog(enable=true,
-        group="Pipes"), Placement(transformation(extent={{-4,-68},{-20,-52}})));
 
    Fluid.MixingVolumes.MixingVolume junc3v6(
     redeclare package Medium = Medium,
@@ -150,10 +161,10 @@ protected
 
 equation
 
-  connect(basicPumpInterface.port_b,pipe3. port_a)
-    annotation (Line(points={{58,20},{68,20}},    color={0,127,255}));
+  connect(PumpInterface.port_b, pipe3.port_a)
+    annotation (Line(points={{58,20},{68,20}}, color={0,127,255}));
 
-  connect(basicPumpInterface.pumpBus, hydraulicBus.pumpBus) annotation (Line(
+  connect(PumpInterface.pumpBus, hydraulicBus.pumpBus) annotation (Line(
       points={{50,28},{50,100.1},{0.1,100.1}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -170,13 +181,13 @@ equation
           -60},{7.6,-60}},               color={0,127,255}));
   connect(pipe1.ports_b[1], juncjp6.ports[2])
     annotation (Line(points={{-24,20},{6,20}},    color={0,127,255}));
-  connect(val.port_a,pipe5. ports_b[1])
+  connect(valve.port_a, pipe5.ports_b[1])
     annotation (Line(points={{-34,-60},{-20,-60}}, color={0,127,255}));
-  connect(val.port_b,pipe6. port_a)
+  connect(valve.port_b, pipe6.port_a)
     annotation (Line(points={{-50,-60},{-58,-60}}, color={0,127,255}));
   connect(juncjp6.ports[3], pipe2.port_a)
     annotation (Line(points={{7.6,20},{16,20}}, color={0,127,255}));
-  connect(pipe2.ports_b[1], basicPumpInterface.port_a)
+  connect(pipe2.ports_b[1], PumpInterface.port_a)
     annotation (Line(points={{32,20},{42,20}}, color={0,127,255}));
   connect(senT_a1.port_b, pipe1.port_a)
     annotation (Line(points={{-88,20},{-40,20}}, color={0,127,255}));
@@ -200,15 +211,14 @@ equation
     annotation (Line(points={{60,-60},{72,-60}}, color={0,127,255}));
   connect(pipe3.ports_b[1], senT_b1.port_a)
     annotation (Line(points={{84,20},{88,20}}, color={0,127,255}));
-  connect(val.y, hydraulicBus.valSet) annotation (Line(points={{-42,-69.6},{-42,
-          -80},{-122,-80},{-122,100.1},{0.1,100.1}},
-                                                color={0,0,127}), Text(
+  connect(valve.y, hydraulicBus.valSet) annotation (Line(points={{-42,-69.6},{-42,
+          -80},{-122,-80},{-122,100.1},{0.1,100.1}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(val.y_actual, hydraulicBus.valSetAct) annotation (Line(points={{-46,
-          -65.6},{-46,-80},{-122,-80},{-122,100.1},{0.1,100.1}},
-                                                          color={0,0,127}), Text(
+  connect(valve.y_actual, hydraulicBus.valSetAct) annotation (Line(points={{-46,
+          -65.6},{-46,-80},{-122,-80},{-122,100.1},{0.1,100.1}}, color={0,0,127}),
+      Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
@@ -399,9 +409,8 @@ equation
 <p>This model uses a pipe model to include the heat loss and insulation effects</p>
 </html>", revisions="<html>
 <ul>
-<li>Mai 30, 2018, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib</li>
-<li>2017-07-25 by Peter Matthes:<br/>Renames sensors and introduces PT1 behavior for temperature sensors. Adds sensors to icon.</li>
-<li><i>March,2016&nbsp;</i> by Rohit Lad:<br/>Implemented</li>
+<li>August 09, 2018, by Alexander K&uuml;mpel:<br/>Extension from base PartioalHydraulicModuls</li>
+<li>June 30, 2018, by Alexander K&uuml;mpel:<br/>First implementation</li>
 </ul>
 </html>"));
 end Injection2WayValve;

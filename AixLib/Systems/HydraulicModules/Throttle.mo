@@ -2,12 +2,12 @@ within AixLib.Systems.HydraulicModules;
 model Throttle "Throttle circuit with two way valve"
   extends AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule;
 
-  AixLib.Fluid.Actuators.Valves.TwoWayLinear val(
+  AixLib.Fluid.Actuators.Valves.TwoWayLinear valve(
     redeclare package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
-    final allowFlowReversal=allowFlowReversal)
-                          annotation (Dialog(enable=true,group="Actuators"), Placement(
+    final allowFlowReversal=allowFlowReversal,
+    Kv=Kv) annotation (Dialog(enable=true, group="Actuators"), Placement(
         transformation(extent={{-12,10},{8,30}})));
   Fluid.FixedResistances.PlugFlowPipe pipe1(
     redeclare package Medium = Medium,
@@ -21,7 +21,8 @@ model Throttle "Throttle circuit with two way valve"
     dIns=dIns,
     kIns=kIns,
     final R=1/(pipe1.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe1.dh/2 +
-        pipe1.dIns)/(pipe1.dh/2))))            annotation (Dialog(enable=true,group="Pipes"),
+        pipe1.dIns)/(pipe1.dh/2))),
+    length=length)                             annotation (Dialog(enable=true,group="Pipes"),
       Placement(transformation(extent={{-60,30},{-40,10}})));
 
   Fluid.FixedResistances.PlugFlowPipe pipe2(
@@ -36,7 +37,8 @@ model Throttle "Throttle circuit with two way valve"
     dIns=dIns,
     kIns=kIns,
     final R=1/(pipe2.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe2.dh/2 +
-        pipe2.dIns)/(pipe2.dh/2))))            annotation (Dialog(enable=true,group="Pipes"),
+        pipe2.dIns)/(pipe2.dh/2))),
+    length=length)                             annotation (Dialog(enable=true,group="Pipes"),
       Placement(transformation(extent={{40,30},{60,10}})));
 
   Fluid.FixedResistances.PlugFlowPipe pipe3(
@@ -51,24 +53,25 @@ model Throttle "Throttle circuit with two way valve"
     dIns=dIns,
     kIns=kIns,
     final R=1/(pipe3.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe3.dh/2 +
-        pipe3.dIns)/(pipe3.dh/2))))            annotation (Dialog(enable=true,group="Pipes"),
+        pipe3.dIns)/(pipe3.dh/2))),
+    length=length)                             annotation (Dialog(enable=true,group="Pipes"),
       Placement(transformation(extent={{10,-70},{-10,-50}})));
 
 
 equation
-  connect(val.port_b,pipe2. port_a)
-    annotation (Line(points={{8,20},{40,20}},      color={0,127,255}));
-  connect(val.y, hydraulicBus.valSet) annotation (Line(points={{-2,32},{-2,
-          100.1},{0.1,100.1}},           color={0,0,127}), Text(
+  connect(valve.port_b, pipe2.port_a)
+    annotation (Line(points={{8,20},{40,20}}, color={0,127,255}));
+  connect(valve.y, hydraulicBus.valSet) annotation (Line(points={{-2,32},{-2,
+          100.1},{0.1,100.1}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(val.y_actual, hydraulicBus.valSetAct) annotation (Line(points={{3,27},{
-          3,100.1},{0.1,100.1}},        color={0,0,127}), Text(
+  connect(valve.y_actual, hydraulicBus.valSetAct) annotation (Line(points={{3,
+          27},{3,100.1},{0.1,100.1}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
-  connect(pipe1.ports_b[1], val.port_a)
+  connect(pipe1.ports_b[1], valve.port_a)
     annotation (Line(points={{-40,20},{-12,20}}, color={0,127,255}));
   connect(senT_b2.port_a, pipe3.ports_b[1])
     annotation (Line(points={{-78,-60},{-10,-60}}, color={0,127,255}));
@@ -209,6 +212,7 @@ equation
           initialScale=0.1)),
     Documentation(revisions="<html>
 <ul>
+<li>August 09, 2018, by Alexander K&uuml;mpel:<br/>Extension from base PartioalHydraulicModuls</li>
 <li>Mai 30, 2018, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib</li>
 <li>2017-07-25 by Peter Matthes:<br/>Renames sensors and introduces PT1 behavior for temperature sensors. Adds sensors to icon.</li>
 <li>2017-06 by Alexander K&uuml;mpel:<br/>Implemented</li>

@@ -6,26 +6,20 @@ model Admix "Test for admix circuit"
     annotation (choicesAllMatching=true);
 
   AixLib.Systems.HydraulicModules.Admix Admix(
+    redeclare
+      AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+      PumpInterface(pump(redeclare
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per,
+          energyDynamics=Admix.energyDynamics)),
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     dIns=0.01,
     kIns=0.028,
     d=0.032,
-    pipe1(length=1),
-    pipe2(length=1),
-    pipe3(length=1),
-    pipe4(length=1),
-    pipe5(length=1),
-    pipe6(length=1),
-    val(Kv=10),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    T_amb=293.15,
-    redeclare
-      AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-      basicPumpInterface(pump(redeclare
-          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per,
-          energyDynamics=Admix.energyDynamics)))
-                  annotation (Placement(transformation(
+    length=1,
+    Kv=10,
+    T_amb=293.15) annotation (Placement(transformation(
         extent={{-30,-30},{30,30}},
         rotation=90,
         origin={10,10})));
