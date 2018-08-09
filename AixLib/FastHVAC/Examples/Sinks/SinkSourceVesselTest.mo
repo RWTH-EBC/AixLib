@@ -1,4 +1,4 @@
-within AixLib.FastHVAC.Examples.Sinks;
+﻿within AixLib.FastHVAC.Examples.Sinks;
 model SinkSourceVesselTest
   extends Modelica.Icons.Example;
 
