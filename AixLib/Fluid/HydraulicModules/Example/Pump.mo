@@ -1,9 +1,10 @@
 within AixLib.Fluid.HydraulicModules.Example;
-model Unmixed "Test for unmixed circuit"
+model Pump "Test for unmixed circuit"
   import AixLib;
   extends Modelica.Icons.Example;
 
-  AixLib.Fluid.HydraulicModules.Unmixed Unmixed(redeclare package Medium = Medium,
+  AixLib.Fluid.HydraulicModules.Pump Unmixed(
+    redeclare package Medium = Medium,
     redeclare
       AixLib.Fluid.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       basicPumpInterface(pump(redeclare
@@ -21,9 +22,7 @@ model Unmixed "Test for unmixed circuit"
     pipe3(
       length=1,
       dIns=0.01,
-      kIns=0.028))
-    annotation (Placement(
-        transformation(
+      kIns=0.028)) annotation (Placement(transformation(
         extent={{-30,-30},{30,30}},
         rotation=90,
         origin={10,10})));
@@ -95,4 +94,4 @@ equation
 <li>October 25, 2017, by Alexander K&uuml;mpel:<br/>Transfer from ZUGABE to AixLib.</li>
 </ul>
 </html>"));
-end Unmixed;
+end Pump;

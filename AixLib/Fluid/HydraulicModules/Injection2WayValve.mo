@@ -508,12 +508,12 @@ equation
           textString="T"),
         Line(points={{70,-54},{70,-60}}, color={0,0,0}),
         Text(
-          extent={{-16,-68},{82,-92}},
+          extent={{-30,-68},{94,-98}},
           lineColor={95,95,95},
           lineThickness=0.5,
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
-          textString="Injection"),
+          textString="Injection 2 Way"),
         Ellipse(
           extent={{-46,-68},{-34,-80}},
           lineColor={95,95,95},

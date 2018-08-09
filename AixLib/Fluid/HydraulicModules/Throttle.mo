@@ -246,7 +246,7 @@ equation
           lineThickness=0.5,
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
-          textString="ThrottlePump"),
+          textString="Throttle"),
         Line(
           points={{-90,60},{-84,60},{-84,60},{84,60},{84,60},{90,60}},
           color={0,128,255},

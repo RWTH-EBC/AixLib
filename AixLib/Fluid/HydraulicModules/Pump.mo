@@ -1,5 +1,5 @@
 within AixLib.Fluid.HydraulicModules;
-model Unmixed "Unmixed circuit with pump"
+model Pump "Unmixed circuit with pump"
   extends AixLib.Fluid.Interfaces.PartialFourPort(redeclare package Medium1 =
         Medium, redeclare package Medium2 = Medium, final allowFlowReversal1 = allowFlowReversal, final allowFlowReversal2 = allowFlowReversal);
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
@@ -238,7 +238,7 @@ equation
           lineThickness=0.5,
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid,
-          textString="ThrottlePump"),
+          textString="Pump"),
         Line(
           points={{-90,60},{-84,60},{-84,60},{84,60},{84,60},{90,60}},
           color={0,128,255},
@@ -347,4 +347,4 @@ equation
 <p>The volume flow or pressure difference depends on the pump speed. </p>
 <p>This model uses a pipe model to include the heat loss and insulation effects.</p>
 </html>"));
-end Unmixed;
+end Pump;
