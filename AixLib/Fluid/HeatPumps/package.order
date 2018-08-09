@@ -2,6 +2,11 @@ Carnot_TCon
 Carnot_y
 HeatPumpDetailed
 HeatPumpSimple
+ReciprocatingWaterToWater
+ScrollWaterToWater
+Calibration
+Compressors
+Data
 Examples
 Validation
 BaseClasses

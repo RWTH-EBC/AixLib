@@ -1,4 +1,4 @@
-within AixLib.FastHVAC.Examples.HeatExchangers.DHWHeatExchanger;
+﻿within AixLib.FastHVAC.Examples.HeatExchangers.DHWHeatExchanger;
 model DHWHeatExchanger
 extends Modelica.Icons.Example;
   Components.HeatGenerators.Boiler.Boiler     boilerBase
