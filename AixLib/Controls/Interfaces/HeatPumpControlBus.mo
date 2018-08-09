@@ -30,6 +30,7 @@ expandable connector HeatPumpControlBus
   Modelica.SIunits.ThermodynamicTemperature T_ambInternal
     "Ambient temperature of unit in house";
   annotation (
+    defaultComponentName = "sigBusHP",
     Icon(coordinateSystem(preserveAspectRatio=false)),
     Diagram(coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
