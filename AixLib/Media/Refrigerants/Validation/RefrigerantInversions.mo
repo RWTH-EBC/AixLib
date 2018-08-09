@@ -114,7 +114,7 @@ The following <b>inversions</b> are calculated and checked:
 revisions="<html>
 <ul>
   <li>
-  June 14, 2017, by Mirko Engelpracht:<br/>
+  June 14, 2017, by Mirko Engelpracht, Christian Vering:<br/>
   First implementation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
