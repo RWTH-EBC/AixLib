@@ -3,8 +3,6 @@ package R134a "Package with models for refrigerant R134a"
   extends Modelica.Icons.VariantsPackage;
 
 
-
-
   annotation (Documentation(info="<html>
 <p>
 This package contains different refrigerant models for the refrigerant R134a.
@@ -24,7 +22,7 @@ calculating fitted formulas</i>
         revisions="<html>
 <ul>
   <li>
-  June 11, 2017, by Mirko Engelpracht:<br/>
+  June 11, 2017, by Mirko Engelpracht, Christian Vering:<br/>
   First implementation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
