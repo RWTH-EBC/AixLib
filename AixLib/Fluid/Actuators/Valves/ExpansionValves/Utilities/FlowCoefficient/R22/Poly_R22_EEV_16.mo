@@ -9,7 +9,7 @@ model Poly_R22_EEV_16 "Polynomial - R22 - EEV - 1.6 mm"
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
-  October 16, 2017, by Mirko Engelpracht:<br />
+  October 16, 2017, by Mirko Engelpracht, Christian Vering:<br />
   First implementation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
