@@ -58,7 +58,7 @@ S. 210&ndash;218
 revisions="<html>
 <ul>
   <li>
-  October 19, 2017, by Mirko Engelpracht:<br/>
+  October 19, 2017, by Mirko Engelpracht, Christian Vering:<br/>
   First implementation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/457\">issue 457</a>).
   </li>
