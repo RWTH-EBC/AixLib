@@ -49,15 +49,17 @@ model ERC_ExperimentalHall_CoolingCircuit
     T_amb=T_amb,
     T_start=293.15)
     annotation (Placement(transformation(extent={{60,34},{90,64}})));
-  Controls.HydraulicModules.CtrAdmix ctr_admix(
+  AixLib.Systems.HydraulicModules.Controller.CtrAdmix ctr_admix(
     Td=0,
     Ti=180,
     k=0.12,
     T_amb=T_amb)
-            annotation (Placement(transformation(extent={{-142,-2},{-116,24}})));
-  Controls.HydraulicModules.CtrUnmixed ctr_unmixed_simple(T_amb=T_amb)
+    annotation (Placement(transformation(extent={{-142,-2},{-116,24}})));
+  AixLib.Systems.HydraulicModules.Controller.CtrUnmixed ctr_unmixed_simple(
+      T_amb=T_amb)
     annotation (Placement(transformation(extent={{-142,80},{-118,104}})));
-  Controls.HydraulicModules.CtrUnmixed ctr_unmixed_simple1(T_amb=T_amb)
+  AixLib.Systems.HydraulicModules.Controller.CtrUnmixed ctr_unmixed_simple1(
+      T_amb=T_amb)
     annotation (Placement(transformation(extent={{-142,58},{-118,82}})));
   AixLib.Fluid.Sources.Boundary_pT bou1(
     nPorts=1,
@@ -73,19 +75,14 @@ model ERC_ExperimentalHall_CoolingCircuit
       basicPumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
     m_flow_nominal=1,
-    pipe1(
-      dIns=0.01,
-      kIns=0.028,
-      length=2),
-    pipe2(
-      dIns=0.01,
-      kIns=0.028,
-      length=2),
-    pipe3(
-      dIns=0.01,
-      kIns=0.028,
-      length=4),
-    T_amb=T_amb) annotation (Placement(transformation(
+    T_amb=T_amb,
+    dIns=0.02,
+    kIns=0.028,
+    D=0.032,
+    pipe1(length=2),
+    pipe2(length=2),
+    pipe3(length=4))
+                 annotation (Placement(transformation(
         extent={{-25,-25},{25,25}},
         rotation=90,
         origin={3,7})));
@@ -96,19 +93,14 @@ model ERC_ExperimentalHall_CoolingCircuit
       basicPumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
     m_flow_nominal=1,
-    pipe1(
-      length=1,
-      dIns=0.01,
-      kIns=0.028),
-    pipe2(
-      length=1,
-      dIns=0.01,
-      kIns=0.028),
-    pipe3(
-      length=1,
-      dIns=0.01,
-      kIns=0.028),
-    T_amb=T_amb) annotation (Placement(transformation(
+    T_amb=T_amb,
+    dIns=0.01,
+    kIns=0.028,
+    D=0.032,
+    pipe1(length=1),
+    pipe2(length=1),
+    pipe3(length=1))
+                 annotation (Placement(transformation(
         extent={{-25,-25},{25,25}},
         rotation=90,
         origin={75,7})));
@@ -119,32 +111,21 @@ model ERC_ExperimentalHall_CoolingCircuit
       basicPumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
     m_flow_nominal=1,
-    pipe1(
-      dIns=0.001,
-      length=1,
-      kIns=0.028),
-    pipe2(
-      length=1,
-      dIns=0.01,
-      kIns=0.028),
-    pipe5(
-      length=1,
-      dIns=0.01,
-      kIns=0.028),
-    pipe6(
-      length=1,
-      dIns=0.01,
-      kIns=0.028),
     val(Kv=10),
-    pipe3(
-      dIns=0.01,
-      kIns=0.028,
-      length=4),
+    T_amb=T_amb,
+    dIns=0.01,
+    kIns=0.028,
+    D=0.032,
+    pipe1(length=1),
+    pipe2(length=1),
+    pipe3(length=4),
     pipe4(
-      dIns=0.01,
       kIns=0.028,
-      length=5),
-    T_amb=T_amb) annotation (Placement(transformation(
+      length=5,
+      dIns=0.02),
+    pipe5(length=1),
+    pipe6(length=1))
+                 annotation (Placement(transformation(
         extent={{-25,-25},{25,25}},
         rotation=90,
         origin={-69,7})));

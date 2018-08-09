@@ -26,10 +26,10 @@ model ThrottlePump "Throttle circuit with pump and two way valve"
     final v_nominal=1.5,
     final allowFlowReversal=allowFlowReversal,
     dh=D,
-    dIns=dins,
     kIns=kIns,
-    final R=1/(pipe1.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe1.dh/2
-         + pipe1.dIns)/(pipe1.dh/2))))         annotation (Dialog(enable=true),
+    final R=1/(pipe1.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe1.dh/2 +
+        pipe1.dIns)/(pipe1.dh/2))),
+    dIns=dIns)                                 annotation (Dialog(enable=true,group="Pipes"),
       Placement(transformation(extent={{-80,30},{-60,10}})));
 
   Fluid.FixedResistances.PlugFlowPipe pipe2(
@@ -41,10 +41,10 @@ model ThrottlePump "Throttle circuit with pump and two way valve"
     final v_nominal=1.5,
     final allowFlowReversal=allowFlowReversal,
     dh=D,
-    dIns=dins,
     kIns=kIns,
-    final R=1/(pipe2.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe2.dh/2
-         + pipe2.dIns)/(pipe2.dh/2))))         annotation (Dialog(enable=true),
+    final R=1/(pipe2.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe2.dh/2 +
+        pipe2.dIns)/(pipe2.dh/2))),
+    dIns=dIns)                                 annotation (Dialog(enable=true,group="Pipes"),
       Placement(transformation(extent={{0,30},{20,10}})));
 
   Fluid.FixedResistances.PlugFlowPipe pipe3(
@@ -56,10 +56,10 @@ model ThrottlePump "Throttle circuit with pump and two way valve"
     final allowFlowReversal=allowFlowReversal,
     nPorts=1,
     dh=D,
-    dIns=dins,
     kIns=kIns,
-    final R=1/(pipe3.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe3.dh/2
-         + pipe3.dIns)/(pipe3.dh/2))))         annotation (Dialog(enable=true),
+    final R=1/(pipe3.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe3.dh/2 +
+        pipe3.dIns)/(pipe3.dh/2))),
+    dIns=dIns)                                 annotation (Dialog(enable=true,group="Pipes"),
       Placement(transformation(extent={{60,30},{80,10}})));
   Fluid.FixedResistances.PlugFlowPipe pipe4(
     redeclare package Medium = Medium,
@@ -70,10 +70,10 @@ model ThrottlePump "Throttle circuit with pump and two way valve"
     final allowFlowReversal=allowFlowReversal,
     nPorts=1,
     dh=D,
-    dIns=dins,
     kIns=kIns,
-    final R=1/(pipe4.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe4.dh/2
-         + pipe4.dIns)/(pipe4.dh/2))))         annotation (Dialog(enable=true),
+    final R=1/(pipe4.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe4.dh/2 +
+        pipe4.dIns)/(pipe4.dh/2))),
+    dIns=dIns)                                 annotation (Dialog(enable=true,group="Pipes"),
       Placement(transformation(extent={{20,-70},{0,-50}})));
 
 

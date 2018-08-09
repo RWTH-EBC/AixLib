@@ -21,8 +21,8 @@ model Throttle "Throttle circuit with two way valve"
     dh=D,
     dIns=dIns,
     kIns=kIns,
-    final R=1/(pipe1.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe1.dh/2
-         + pipe1.dIns)/(pipe1.dh/2))))         annotation (Dialog(enable=true),
+    final R=1/(pipe1.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe1.dh/2 +
+        pipe1.dIns)/(pipe1.dh/2))))            annotation (Dialog(enable=true,group="Pipes"),
       Placement(transformation(extent={{-60,30},{-40,10}})));
 
   Fluid.FixedResistances.PlugFlowPipe pipe2(
@@ -36,8 +36,8 @@ model Throttle "Throttle circuit with two way valve"
     dh=D,
     dIns=dIns,
     kIns=kIns,
-    final R=1/(pipe2.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe2.dh/2
-         + pipe2.dIns)/(pipe2.dh/2))))         annotation (Dialog(enable=true),
+    final R=1/(pipe2.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe2.dh/2 +
+        pipe2.dIns)/(pipe2.dh/2))))            annotation (Dialog(enable=true,group="Pipes"),
       Placement(transformation(extent={{40,30},{60,10}})));
 
   Fluid.FixedResistances.PlugFlowPipe pipe3(
@@ -51,8 +51,8 @@ model Throttle "Throttle circuit with two way valve"
     dh=D,
     dIns=dIns,
     kIns=kIns,
-    final R=1/(pipe3.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe3.dh/2
-         + pipe3.dIns)/(pipe3.dh/2))))         annotation (Dialog(enable=true),
+    final R=1/(pipe3.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe3.dh/2 +
+        pipe3.dIns)/(pipe3.dh/2))))            annotation (Dialog(enable=true,group="Pipes"),
       Placement(transformation(extent={{10,-70},{-10,-50}})));
 
 
@@ -79,10 +79,10 @@ equation
     annotation (Line(points={{60,20},{88,20}}, color={0,127,255}));
   connect(pipe1.port_a, senT_a1.port_b)
     annotation (Line(points={{-60,20},{-88,20}}, color={0,127,255}));
-  connect(pipe1.heatPort, prescribedTemperature.port) annotation (Line(points={
-          {-50,10},{-50,0},{32,0},{32,-20}}, color={191,0,0}));
-  connect(pipe2.heatPort, prescribedTemperature.port) annotation (Line(points={
-          {50,10},{50,0},{32,0},{32,-20}}, color={191,0,0}));
+  connect(pipe1.heatPort, prescribedTemperature.port) annotation (Line(points={{-50,
+          10},{-50,0},{32,0},{32,-20}}, color={191,0,0}));
+  connect(pipe2.heatPort, prescribedTemperature.port)
+    annotation (Line(points={{50,10},{50,0},{32,0},{32,-20}}, color={191,0,0}));
   connect(pipe3.heatPort, prescribedTemperature.port)
     annotation (Line(points={{0,-50},{0,-20},{32,-20}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(initialScale=0.1),          graphics={

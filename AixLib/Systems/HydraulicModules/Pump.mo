@@ -20,8 +20,8 @@ model Pump "Unmixed circuit with pump"
     dh=D,
     dIns=dIns,
     kIns=kIns,
-    final R=1/(pipe1.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe1.dh/2
-         + pipe1.dIns)/(pipe1.dh/2))))         annotation (Dialog(enable=true),
+    final R=1/(pipe1.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe1.dh/2 +
+        pipe1.dIns)/(pipe1.dh/2))))            annotation (Dialog(enable=true,group="Pipes"),
       Placement(transformation(extent={{-60,30},{-40,10}})));
 
   Fluid.FixedResistances.PlugFlowPipe pipe2(
@@ -35,8 +35,8 @@ model Pump "Unmixed circuit with pump"
     dh=D,
     dIns=dIns,
     kIns=kIns,
-    final R=1/(pipe2.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe2.dh/2
-         + pipe2.dIns)/(pipe2.dh/2))))         annotation (Dialog(enable=true),
+    final R=1/(pipe2.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe2.dh/2 +
+        pipe2.dIns)/(pipe2.dh/2))))            annotation (Dialog(enable=true,group="Pipes"),
       Placement(transformation(extent={{40,30},{60,10}})));
   Fluid.FixedResistances.PlugFlowPipe pipe3(
     redeclare package Medium = Medium,
@@ -49,8 +49,8 @@ model Pump "Unmixed circuit with pump"
     dh=D,
     dIns=dIns,
     kIns=kIns,
-    final R=1/(pipe3.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe3.dh/2
-         + pipe3.dIns)/(pipe3.dh/2))))         annotation (Dialog(enable=true),
+    final R=1/(pipe3.kIns*2*Modelica.Constants.pi/Modelica.Math.log((pipe3.dh/2 +
+        pipe3.dIns)/(pipe3.dh/2))))            annotation (Dialog(enable=true,group="Pipes"),
       Placement(transformation(extent={{10,-70},{-10,-50}})));
 
 
