@@ -1,6 +1,6 @@
 ﻿within AixLib.FastHVAC.Components.HeatGenerators.CHP;
-model CHPDynCleaned
-  "CHP with internal combustion engine including part load operation. To be used with dynamic mode controller (start/stop/OnOff/P_elRel)"
+model ICE
+  "CHP with internal combustion engine (ICE) including part load operation. To be used with dynamic mode controller (start/stop/OnOff/P_elRel)"
   /* *******************************************************************
   Medium
   ******************************************************************* */
@@ -515,4 +515,4 @@ device during transient and steady-state operation: Experiments and simulations.
   </li>
 </ul>
 </html>"));
-end CHPDynCleaned;
+end ICE;
