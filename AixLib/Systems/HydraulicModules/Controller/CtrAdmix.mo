@@ -9,15 +9,29 @@ block CtrAdmix "controller for mixed cooling circuit "
   parameter Modelica.SIunits.Time Td(min=0)= 4 "Time constant of Derivative block";
   parameter Modelica.SIunits.Temperature T_amb = 293.15 "ambient temperature";
   parameter Real rpm_pump(min=0, unit="1") = 2000 "Rpm of the Pump";
-
+  parameter Modelica.Blocks.Types.InitPID initType=.Modelica.Blocks.Types.InitPID.DoNotUse_InitialIntegratorState
+    "Type of initialization (1: no init, 2: steady state, 3: initial state, 4: initial output)"
+    annotation(Dialog(group="PID"));
+  parameter Real xi_start=0
+    "Initial or guess value value for integrator output (= integrator state)"
+    annotation(Dialog(group="PID"));
+  parameter Real xd_start=0
+    "Initial or guess value for state of derivative block"
+    annotation(Dialog(group="PID"));
+  parameter Real y_start=0 "Initial value of output"
+    annotation(Dialog(group="PID"));
   Modelica.Blocks.Continuous.LimPID PID(
     yMax=1,
     yMin=0,
-    xi_start=0.5,
     controllerType=Modelica.Blocks.Types.SimpleController.PID,
     k=k,
     Ti=Ti,
-    Td=Td)  annotation (Placement(transformation(extent={{-16,-60},{4,-40}})));
+    Td=Td,
+    initType=initType,
+    xi_start=xi_start,
+    xd_start=xd_start,
+    y_start=y_start)
+            annotation (Placement(transformation(extent={{-16,-60},{4,-40}})));
   BaseClasses.HydraulicBus  hydraulicBus
     annotation (Placement(transformation(extent={{66,-38},{120,16}})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=TflowSet)
@@ -33,6 +47,7 @@ block CtrAdmix "controller for mixed cooling circuit "
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Blocks.Sources.Constant const(k=T_amb)
     annotation (Placement(transformation(extent={{22,44},{42,64}})));
+
 equation
   connect(PID.y, hydraulicBus.valSet) annotation (Line(points={{5,-50},{48,-50},
           {48,-10.865},{93.135,-10.865}},

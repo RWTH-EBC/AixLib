@@ -15,6 +15,7 @@ model Throttle "Test for ummixed throttle circuit"
     pipe1(length=1),
     pipe2(length=1),
     pipe3(length=1),
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T_amb=293.15)  annotation (Placement(transformation(
         extent={{-30,-30},{30,30}},
         rotation=90,

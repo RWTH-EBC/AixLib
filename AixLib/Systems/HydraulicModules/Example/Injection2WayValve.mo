@@ -7,13 +7,8 @@ model Injection2WayValve "Test for injection circuit with a 2 way valve"
 
   AixLib.Systems.HydraulicModules.Injection2WayValve Injection(
     redeclare package Medium = Medium,
-    redeclare
-      AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-      basicPumpInterface(pump(redeclare
-          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
     m_flow_nominal=1,
     val(Kv=10),
-    T_amb=293.15,
     dIns=0.02,
     kIns=0.028,
     d=0.032,
@@ -23,7 +18,14 @@ model Injection2WayValve "Test for injection circuit with a 2 way valve"
     pipe4(length=1),
     pipe6(length=1),
     pipe7(length=0.5),
-    pipe5(length=1))
+    pipe5(length=1),
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    T_amb=293.15,
+    redeclare
+      AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+      basicPumpInterface(pump(redeclare
+          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per,
+          energyDynamics=Injection.energyDynamics)))
                   annotation (Placement(transformation(
         extent={{-30,-30},{30,30}},
         rotation=90,
