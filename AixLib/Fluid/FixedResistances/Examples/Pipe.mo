@@ -30,11 +30,11 @@ model Pipe
         origin={79,1})));
   inner Modelica.Fluid.System system
     annotation (Placement(transformation(extent={{80,80},{100,100}})));
-  Modelica.Fluid.Sensors.Temperature temperatureAfter(redeclare package Medium
-      = Medium)
+  Modelica.Fluid.Sensors.Temperature temperatureAfter(redeclare package Medium =
+        Medium)
     annotation (Placement(transformation(extent={{14,-40},{34,-20}})));
-  Modelica.Fluid.Sensors.Temperature temperatureBefore(redeclare package Medium
-      = Medium)
+  Modelica.Fluid.Sensors.Temperature temperatureBefore(redeclare package Medium =
+        Medium)
     annotation (Placement(transformation(extent={{-52,-40},{-32,-20}})));
   AixLib.Fluid.FixedResistances.Pipe dynamicPipeEBCAggregated_Ambient_Loss_UC(
     length=2,

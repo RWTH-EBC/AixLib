@@ -8,6 +8,7 @@ FixedResistances
 HeatExchangers
 HeatPumps
 Humidifiers
+HydraulicModules
 MassExchangers
 MixingVolumes
 Movers
@@ -19,3 +20,4 @@ Types
 Examples
 Interfaces
 BaseClasses
+HydraulicModules
