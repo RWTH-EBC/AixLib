@@ -2,9 +2,9 @@
 model CHPCombined
   "CHP with internal combustion engine (ICE) including part load operation. To be used with dynamic mode controller (start/stop/OnOff/P_elRel)"
 
-   parameter Boolean CHPType =  true "CHP Type"
-    annotation(Dialog(group = "General", compact = true, descriptionLabel = true), choices(choice=true
-        "Combustion",choice = false "PEM Fuel Cell",choice = false "SOFC Fuel Cell",
+   parameter Integer CHPType "CHP Type"
+    annotation(Dialog(group = "General", compact = true, descriptionLabel = true), choices(choice=1
+        "Combustion",choice = 2 "PEM Fuel Cell",choice = 3 "SOFC Fuel Cell",
                               radioButtons = true));
 
 
@@ -21,10 +21,15 @@ model CHPCombined
   ******************************************************************* */
   parameter Boolean EfficiencyByDatatable=true
     "Use datasheet values for efficiency calculations";
-  parameter AixLib.FastHVAC.Data.CHP.Engine.BaseDataDefinition param=
+  parameter Data.CHP.Engine.BaseDataDefinition paramIFC=
       AixLib.FastHVAC.Data.CHP.Engine.AisinSeiki()
-    "Paramter contains data from CHP records"
-    annotation (choicesAllMatching=true, Dialog(enable=EfficiencyByDatatable));
+    "Record for IFC Parametrization"
+    annotation (choicesAllMatching=true, Dialog(enable=EfficiencyByDatatable and CHPType==1));
+
+  parameter Data.CHP.Engine.BaseDataDefinition paramPCM=
+      AixLib.FastHVAC.Data.CHP.Engine.AisinSeiki()
+    "Record for PCM Parametrization"
+    annotation (choicesAllMatching=true, Dialog(enable=EfficiencyByDatatable and CHPType==2));
 
   parameter Boolean withController=true "Use internal Start Stop Controller" annotation (Dialog(group="Control and operation"));
 
@@ -33,6 +38,7 @@ model CHPCombined
   annotation (Dialog(group = "Prescribed CHP model",enable=not EfficiencyByDatatable));
   parameter Modelica.SIunits.Efficiency omega_prescribed = 0.65 "CHP's total efficiency "
   annotation (Dialog(group = "Prescribed CHP model",enable=not EfficiencyByDatatable));
+  parameter Modelica.SIunits.Time tauSystem = 10;
   parameter Modelica.SIunits.Time tauQ_th_stop_prescribed = 90
   "time constant for thermal start behavior" annotation (Dialog(group = "Prescribed CHP model",enable=not EfficiencyByDatatable));
   parameter Modelica.SIunits.Time tauQ_th_start_prescribed = 800
@@ -41,18 +47,26 @@ model CHPCombined
   "time constant electrical power start behavior" annotation (Dialog(tab = "Prescribed CHP Model", group = "Prescribed CHP model",enable=not EfficiencyByDatatable));
 
 protected
-  parameter Modelica.SIunits.Power P_elRated = if EfficiencyByDatatable then param.P_elRated else P_elRated_prescribed;
-  parameter Modelica.SIunits.Power dotE_fuelRated = if EfficiencyByDatatable then param.dotE_fuelRated else P_elRated_prescribed/eta_el_prescribed;
-  parameter Modelica.SIunits.Power dotQ_thRated = if EfficiencyByDatatable then param.dotQ_thRated else dotE_fuelRated*(omega_prescribed-eta_el_prescribed);
+  parameter Modelica.SIunits.Power P_elRated=if EfficiencyByDatatable then
+      paramIFC.P_elRated else P_elRated_prescribed;
+  parameter Modelica.SIunits.Power dotE_fuelRated=if EfficiencyByDatatable
+       then paramIFC.dotE_fuelRated else P_elRated_prescribed/eta_el_prescribed;
+  parameter Modelica.SIunits.Power dotQ_thRated=if EfficiencyByDatatable then
+      paramIFC.dotQ_thRated else dotE_fuelRated*(omega_prescribed -
+      eta_el_prescribed);
   parameter Modelica.SIunits.Power dotE_start = 0.4 * dotE_fuelRated "Fuel consumption during start process";
   parameter Modelica.SIunits.Power dotQ_stop = 0.5 * dotQ_thRated "Themal energy production during stop process";
   parameter Modelica.SIunits.Power dotE_stop = 1/3 * dotE_fuelRated "Fuel consumption during stop process";
-  parameter Modelica.SIunits.Time tauQ_th_start = if EfficiencyByDatatable then param.tauQ_th_start else tauQ_th_stop_prescribed
-  "time constant for thermal start behavior (unit=sec) ";
-  parameter Modelica.SIunits.Time tauQ_th_stop = if EfficiencyByDatatable then param.tauQ_th_stop else tauQ_th_stop_prescribed
-  "time constant for stop behaviour (unit=sec)";
-  parameter Modelica.SIunits.Time tauP_el = if EfficiencyByDatatable then param.tauP_el else tauP_el_prescribed
-  "time constant electrical power start behavior (unit=sec)";
+  parameter Modelica.SIunits.Time tauQ_th_start=if EfficiencyByDatatable then
+      paramIFC.tauQ_th_start else tauQ_th_stop_prescribed
+    "time constant for thermal start behavior (unit=sec) ";
+  parameter Modelica.SIunits.Time tauQ_th_stop=if EfficiencyByDatatable then
+      paramIFC.tauQ_th_stop else tauQ_th_stop_prescribed
+    "time constant for stop behaviour (unit=sec)";
+
+  parameter Modelica.SIunits.Time tauP_el=if EfficiencyByDatatable then
+      paramIFC.tauP_el else tauP_el_prescribed
+    "time constant electrical power start behavior (unit=sec)";
   parameter Modelica.SIunits.Volume V_water = 3e-3;
 public
   parameter Modelica.SIunits.Power P_elStandby=90
@@ -207,12 +221,23 @@ equation
   omega = eff_el+eff_th;
   // Calculated efficiencies
   if EfficiencyByDatatable then
-      eff_el =param.a_0 + param.a_1*(Pel.y/1000)^2 + param.a_2*(Pel.y/1000) + param.a_3*massFlowRate.dotm^2 + param.a_4*
-      massFlowRate.dotm + param.a_5*Modelica.SIunits.Conversions.to_degC(T_return.T)^2 + param.a_6*
-      Modelica.SIunits.Conversions.to_degC(T_return.T);
-      eff_th =param.b_0 + param.b_1*(Pel.y/1000)^2 + param.b_2*(Pel.y/1000) + param.b_3*massFlowRate.dotm^2 + param.b_4*
-      massFlowRate.dotm + param.b_5*Modelica.SIunits.Conversions.to_degC(T_return.T)^2 + param.b_6*
-      Modelica.SIunits.Conversions.to_degC(T_return.T);
+    // If IFC
+      if CHPType == 1 then
+      eff_el =paramIFC.a_0 + paramIFC.a_1*(Pel.y/1000)^2 + paramIFC.a_2*(Pel.y/1000)
+         + paramIFC.a_3*massFlowRate.dotm^2 + paramIFC.a_4*massFlowRate.dotm +
+        paramIFC.a_5*Modelica.SIunits.Conversions.to_degC(T_return.T)^2 +
+        paramIFC.a_6*Modelica.SIunits.Conversions.to_degC(T_return.T);
+      eff_th =paramIFC.b_0 + paramIFC.b_1*(Pel.y/1000)^2 + paramIFC.b_2*(Pel.y/1000)
+         + paramIFC.b_3*massFlowRate.dotm^2 + paramIFC.b_4*massFlowRate.dotm +
+        paramIFC.b_5*Modelica.SIunits.Conversions.to_degC(T_return.T)^2 +
+        paramIFC.b_6*Modelica.SIunits.Conversions.to_degC(T_return.T);
+      elseif CHPType ==2 then
+        eff_el = 1;
+        eff_th = 1;
+
+      end if;
+    // If PEM
+
   // fixed efficiencies
   else
     if P_elRel > 0.1 then
