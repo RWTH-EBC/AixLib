@@ -139,7 +139,7 @@ block HVACZones
   BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     pAtmSou=AixLib.BoundaryConditions.Types.DataSource.Parameter,
     TDryBul=TOut_nominal,
-    filNam="modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos",
+    filNam=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"),
     TDryBulSou=AixLib.BoundaryConditions.Types.DataSource.File,
     computeWetBulbTemperature=false) "Weather data reader"
     annotation (Placement(transformation(extent={{-152,130},{-132,150}})));
@@ -214,7 +214,7 @@ equation
       color={0,127,255},
       smooth=Smooth.None));
   connect(fan.m_flow_in,mAir_flow. y) annotation (Line(
-      points={{49.8,112},{49.8,140},{21,140}},
+      points={{50,112},{50,140},{21,140}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(hex.port_b1,senTemHXOut. port_a) annotation (Line(
@@ -242,7 +242,7 @@ equation
       color={255,0,255},
       smooth=Smooth.None));
   connect(mWat_flow.y,souWat. m_flow_in) annotation (Line(
-      points={{-49,-30},{-40,-30}},
+      points={{-49,-30},{-42,-30}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(weaDat.weaBus,weaBus)  annotation (Line(
@@ -293,9 +293,9 @@ equation
           {72,30},{106,30},{106,140},{120,140}}, color={0,127,255}));
   connect(out.weaBus, weaBus) annotation (Line(
       points={{-120,90.2},{-130,90.2},{-130,90},{-130,120},{-60,120},{-60,140}},
-
       color={255,204,51},
       thickness=0.5));
+
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-160,-160},
             {160,180}}), graphics={
         Text(

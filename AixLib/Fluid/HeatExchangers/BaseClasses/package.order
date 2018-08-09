@@ -1,3 +1,11 @@
+HACoilInside
+HANaturalCylinder
+Internal
 PartialEffectiveness
-PartialHeatGen
 PartialPrescribedOutlet
+dynamicViscosityWater
+epsilon_ntuZ
+isobaricExpansionCoefficientWater
+ntu_epsilonZ
+prandtlNumberWater
+Examples

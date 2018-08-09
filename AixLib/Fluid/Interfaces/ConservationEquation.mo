@@ -4,12 +4,12 @@ model ConservationEquation "Lumped volume with mass and energy balance"
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations;
 
   // Constants
-  constant Boolean initialize_p = not Medium.singleState
+  parameter Boolean initialize_p = not Medium.singleState
     "= true to set up initial equations for pressure"
-    annotation(HideResult=true);
+    annotation(HideResult=true, Evaluate=true, Dialog(tab="Advanced"));
 
   constant Boolean simplify_mWat_flow = true
-    "Set to true to cause port_a.m_flow + port_b.m_flow = 0 even if mWat_flow is non-zero";
+    "Set to true to cause port_a.m_flow + port_b.m_flow = 0 even if mWat_flow is non-zero. Used only if Medium.nX > 1";
 
   // Port definitions
   parameter Integer nPorts=0 "Number of ports"
@@ -55,22 +55,18 @@ model ConservationEquation "Lumped volume with mass and energy balance"
   Modelica.Blocks.Interfaces.RealOutput UOut(unit="J")
     "Internal energy of the component" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
-        rotation=0,
         origin={110,20})));
   Modelica.Blocks.Interfaces.RealOutput mXiOut[Medium.nXi](each min=0, each unit=
        "kg") "Species mass of the component"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=0,
         origin={110,-20})));
   Modelica.Blocks.Interfaces.RealOutput mOut(min=0, unit="kg")
     "Mass of the component" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
-        rotation=0,
         origin={110,60})));
   Modelica.Blocks.Interfaces.RealOutput mCOut[Medium.nC](each min=0, each unit="kg")
     "Trace substance mass of the component"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=0,
         origin={110,-60})));
 
   Modelica.Fluid.Vessels.BaseClasses.VesselFluidPorts_b ports[nPorts](
@@ -96,13 +92,17 @@ model ConservationEquation "Lumped volume with mass and energy balance"
     nominal = 1E5) "Internal energy of fluid";
 
   Modelica.SIunits.Mass m(
+    start=fluidVolume*rho_start,
     stateSelect=if massDynamics == Modelica.Fluid.Types.Dynamics.SteadyState
     then StateSelect.default else StateSelect.prefer)
     "Mass of fluid";
 
-  Modelica.SIunits.Mass[Medium.nXi] mXi
+  Modelica.SIunits.Mass[Medium.nXi] mXi(
+    start=fluidVolume*rho_start*X_start[1:Medium.nXi])
     "Masses of independent components in the fluid";
-  Modelica.SIunits.Mass[Medium.nC] mC "Masses of trace substances in the fluid";
+  Modelica.SIunits.Mass[Medium.nC] mC(
+    start=fluidVolume*rho_start*C_start)
+    "Masses of trace substances in the fluid";
   // C need to be added here because unlike for Xi, which has medium.Xi,
   // there is no variable medium.C
   Medium.ExtraProperty C[Medium.nC](nominal=C_nominal)
@@ -154,6 +154,11 @@ protected
   parameter Modelica.SIunits.SpecificEnthalpy hStart=
     Medium.specificEnthalpy_pTX(p_start, T_start, X_start)
     "Start value for specific enthalpy";
+
+  // Set _simplify_mWat_flow == false for Glycol47; otherwise Dymola 2018FD01
+  // cannot differentiate the equations.
+  constant Boolean _simplify_mWat_flow = simplify_mWat_flow and Medium.nX > 1
+   "If true, then port_a.m_flow + port_b.m_flow = 0 even if mWat_flow is non-zero, and equations are simplified";
 
   // Conditional connectors
   Modelica.Blocks.Interfaces.RealInput mWat_flow_internal(unit="kg/s")
@@ -232,7 +237,7 @@ equation
   if massDynamics == Modelica.Fluid.Types.Dynamics.SteadyState then
     m = fluidVolume*rho_start;
   else
-    if simplify_mWat_flow then
+    if _simplify_mWat_flow then
       // If moisture is neglected in mass balance, assume for computation
       // of the mass of air that the air is at Medium.X_default.
       m = fluidVolume*Medium.density(Medium.setState_phX(
@@ -417,6 +422,22 @@ AixLib.Fluid.MixingVolumes.MixingVolume</a>.
 </html>", revisions="<html>
 <ul>
 <li>
+April 16, 2018, by Michael Wetter:<br/>
+Reformulated mass calculation so that Dymola can differentiate the equations.<br/>
+This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/910\">AixLib, issue 910</a>.
+</li>
+<li>
+November 3, 2017, by Michael Wetter:<br/>
+Set <code>start</code> attributes.<br/>
+This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/727\">727</a>.
+</li>
+<li>
+October 19, 2017, by Michael Wetter:<br/>
+Changed initialization of pressure from a <code>constant</code> to a <code>parameter</code>.<br/>
+This is for
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/1013\">Buildings, issue 1013</a>.
+</li>
+<li>
 January 27, 2017, by Michael Wetter:<br/>
 Added <code>stateSelect</code> for mass <code>m</code>.<br/>
 This is for <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/642\">
@@ -542,7 +563,8 @@ Removed <code>stateSelect.prefer</code> for temperature.
 This is for
 <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/160\">#160</a>.
 </li>
-<li>October 21, 2014, by Filip Jorissen:<br/>
+<li>
+October 21, 2014, by Filip Jorissen:<br/>
 Added parameter <code>mFactor</code> to increase the thermal capacity.
 </li>
 <li>
@@ -580,7 +602,8 @@ Improved documentation for <code>Q_flow</code> input.
 September 17, 2013 by Michael Wetter:<br/>
 Added start value for <code>hOut</code>.
 </li>
-<li>September 10, 2013 by Michael Wetter:<br/>
+<li>
+September 10, 2013 by Michael Wetter:<br/>
 Removed unrequired parameter <code>i_w</code>.<br/>
 Corrected the syntax error
 <code>Medium.ExtraProperty C[Medium.nC](each nominal=C_nominal)</code>
@@ -618,6 +641,7 @@ Also removed the reference to <code>Modelica.Fluid.System</code>.
 Moved parameters and medium to
 <a href=\"AixLib.Fluid.Interfaces.LumpedVolumeDeclarations\">
 AixLib.Fluid.Interfaces.LumpedVolumeDeclarations</a>.
+</li>
 <li>
 July 14, 2011 by Michael Wetter:<br/>
 Added start value for medium density.
@@ -631,6 +655,7 @@ to <code>massDynamics</code>.
 <li>
 September 28, 2010 by Michael Wetter:<br/>
 Changed array index for nominal value of <code>Xi</code>.
+</li>
 <li>
 September 13, 2010 by Michael Wetter:<br/>
 Set nominal attributes for medium based on default medium values.
@@ -690,7 +715,5 @@ Implemented first version in <code>Buildings</code> library, based on model from
         Text(
           extent={{-155,-120},{145,-160}},
           lineColor={0,0,255},
-          textString="%name")}),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-            100,100}})));
+          textString="%name")}));
 end ConservationEquation;

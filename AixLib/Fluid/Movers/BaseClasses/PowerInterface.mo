@@ -1,7 +1,7 @@
 within AixLib.Fluid.Movers.BaseClasses;
 model PowerInterface
   "Partial model to compute power draw and heat dissipation of fans and pumps"
-  extends Modelica.Blocks.Interfaces.BlockIcon;
+  extends Modelica.Blocks.Icons.Block;
 
   parameter Boolean homotopyInitialization = true "= true, use homotopy method"
     annotation(Evaluate=true, Dialog(tab="Advanced"));
@@ -136,7 +136,5 @@ This is for
 <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/417\">#417</a>.
 </li>
 </ul>
-</html>"),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}})));
+</html>"));
 end PowerInterface;

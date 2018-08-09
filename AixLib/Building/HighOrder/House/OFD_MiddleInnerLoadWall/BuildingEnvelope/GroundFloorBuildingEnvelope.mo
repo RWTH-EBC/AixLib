@@ -1,4 +1,4 @@
-within AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
+﻿within AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope;
 model GroundFloorBuildingEnvelope
   ///////// construction parameters
   parameter Integer TMC=1 "Thermal Mass Class" annotation (Dialog(
@@ -80,6 +80,19 @@ model GroundFloorBuildingEnvelope
     annotation (Dialog(group="Windows and Doors", descriptionLabel=true));
   parameter Real AirExchangeCorridor=2 "Air exchange corridors in 1/h "
     annotation (Dialog(group="Air Exchange Corridors", descriptionLabel=true));
+  // Sunblind
+  parameter Boolean use_sunblind = false
+    "Will sunblind become active automatically?"
+    annotation(Dialog(group = "Sunblind"));
+  parameter Real ratioSunblind(min=0.0, max=1.0) = 0.8
+    "Sunblind factor"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+  parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0) = 350
+    "Threshold for global solar irradiation on this surface to enable sunblinding (see also TOutAirLimit)"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+  parameter Modelica.SIunits.Temperature TOutAirLimit = 293.15
+    "Temperature at which sunblind closes (see also solIrrThreshold)"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
   // Dynamic Ventilation
   parameter Boolean withDynamicVentilation=true "Dynamic ventilation"
     annotation (Dialog(group="Dynamic ventilation", descriptionLabel=true),
@@ -136,6 +149,10 @@ model GroundFloorBuildingEnvelope
     withDoor2=false,
     withWindow1=true,
     withWindow2=true,
+    final use_sunblind=use_sunblind,
+    final ratioSunblind=ratioSunblind,
+    final solIrrThreshold=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withFloorHeating=withFloorHeating,
     withDynamicVentilation=withDynamicVentilation,
     HeatingLimit=HeatingLimit,
@@ -163,6 +180,10 @@ model GroundFloorBuildingEnvelope
     withDoor2=false,
     withWindow1=false,
     withWindow2=true,
+    final use_sunblind=use_sunblind,
+    final ratioSunblind=ratioSunblind,
+    final solIrrThreshold=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withFloorHeating=withFloorHeating,
     withDynamicVentilation=withDynamicVentilation,
     HeatingLimit=HeatingLimit,
@@ -191,6 +212,10 @@ model GroundFloorBuildingEnvelope
     door_height_OD2=door_height_42,
     withWindow2=false,
     withDoor1=false,
+    final use_sunblind=use_sunblind,
+    final ratioSunblind=ratioSunblind,
+    final solIrrThreshold=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withFloorHeating=withFloorHeating,
     withDynamicVentilation=withDynamicVentilation,
     HeatingLimit=HeatingLimit,
@@ -219,6 +244,10 @@ model GroundFloorBuildingEnvelope
     room_lengthb=length3,
     withDoor1=false,
     withDoor2=false,
+    final use_sunblind=use_sunblind,
+    final ratioSunblind=ratioSunblind,
+    final solIrrThreshold=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withFloorHeating=withFloorHeating,
     withDynamicVentilation=withDynamicVentilation,
     HeatingLimit=HeatingLimit,
@@ -246,6 +275,10 @@ model GroundFloorBuildingEnvelope
     door_height_OD1=door_height_31,
     room_lengthb=length3,
     withWindow1=false,
+    final use_sunblind=use_sunblind,
+    final ratioSunblind=ratioSunblind,
+    final solIrrThreshold=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withFloorHeating=withFloorHeating,
     T0_air=291.15,
     T0_OW1=291.15,
@@ -492,7 +525,7 @@ equation
   connect(WC_Storage.ground, groundTemp[4]) annotation (Line(points={{66.14,-37.44},
           {66.14,-34},{0,-34},{0,-96},{0,-96}}, color={191,0,0}));
   connect(Kitchen.ground, groundTemp[5]) annotation (Line(points={{-65.2,-21.92},
-          {-65.2,-4},{0,-4},{0,-92},{0,-92}}, color={191,0,0}));
+          {-65.2,-4},{0,-4},{0,-92}},         color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
             {100,100}}), graphics={
         Bitmap(extent={{-100,-100},{100,100}}, fileName=

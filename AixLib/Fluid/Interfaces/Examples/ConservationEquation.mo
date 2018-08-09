@@ -2,8 +2,9 @@ within AixLib.Fluid.Interfaces.Examples;
 model ConservationEquation "Model that tests the conservation equation"
 extends Modelica.Icons.Example;
  package Medium = AixLib.Media.Water "Medium model";
-  AixLib.Fluid.Interfaces.ConservationEquation dyn(redeclare package Medium =
-        Medium, energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+  AixLib.Fluid.Interfaces.ConservationEquation dyn(
+    redeclare package Medium = Medium,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     nPorts=2,
     fluidVolume=0.01,
     use_mWat_flow=true) "Dynamic conservation equation"
@@ -13,6 +14,7 @@ extends Modelica.Icons.Example;
     redeclare package Medium = Medium,
     m_flow_nominal=0.01,
     show_T=true,
+    prescribedHeatFlowRate=true,
     use_mWat_flow=true) "Steady-state conservation equation"
     annotation (Placement(transformation(extent={{-10,-70},{10,-50}})));
 
@@ -97,6 +99,11 @@ for the heat and mass balance.
 </html>",
 revisions="<html>
 <ul>
+<li>
+June 23, 2018, by Filip Jorissen:<br/>
+Added <code>prescribedHeatFlowRate=true</code> since
+this model prescribes the heat flow rate.
+</li>
 <li>
 January 22, 2016 by Michael Wetter:<br/>
 Updated model to use the new parameter <code>use_mWat_flow</code>
