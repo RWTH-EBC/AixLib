@@ -3,9 +3,6 @@ package R410a "Package provides records for R410a"
   extends Modelica.Icons.VariantsPackage;
 
 
-
-
-
 annotation (Documentation(info="<html>
 <p>
 This package provides records with fitting coefficients for the refrigerant
