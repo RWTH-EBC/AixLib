@@ -644,7 +644,7 @@ equation
     Documentation(revisions="<html>
 <ul>
   <li>
-  December 16, 2017, by Mirko Engelpracht:<br/>
+  December 16, 2017, by Mirko Engelpracht, Christian Vering:<br/>
   First implementation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/467\">issue 467</a>).
   </li>
