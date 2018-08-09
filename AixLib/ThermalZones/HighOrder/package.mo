@@ -1,4 +1,4 @@
-within AixLib.Building;
+within AixLib.ThermalZones;
 package HighOrder "Standard house models"
   extends Modelica.Icons.Package;
 

@@ -1,4 +1,4 @@
-within AixLib.Building.HighOrder.House.MFD.BuildingEnvelope;
+within AixLib.ThermalZones.HighOrder.House.MFD.BuildingEnvelope;
 model OneAppartment_VoWo
   parameter Integer TMC = 1 "Thermal Mass Class" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1 "Heavy", choice = 2 "Medium", choice = 3 "Light", radioButtons = true));
   parameter Integer TIR = 4 "Thermal Insulation Regulation" annotation(Dialog(group = "Construction parameters", compact = true, descriptionLabel = true), choices(choice = 1

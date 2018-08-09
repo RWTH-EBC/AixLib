@@ -1,6 +1,4 @@
-within AixLib.Building.HighOrder.Rooms.MFD.CellarAttic;
-
-
+within AixLib.ThermalZones.HighOrder.Rooms.MFD.CellarAttic;
 model Attic_Ro2Lf1
   "Attic with two saddle roofs and on floor towards the rooms on the lower floors"
   import AixLib;

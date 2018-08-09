@@ -1,4 +1,4 @@
-within AixLib.Building.HighOrder.Rooms;
+within AixLib.ThermalZones.HighOrder.Rooms;
 package MFD "Multiple Family Dweling"
   extends Modelica.Icons.Package;
 

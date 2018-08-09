@@ -1,4 +1,4 @@
-within AixLib.Building.HighOrder.Examples;
+within AixLib.ThermalZones.HighOrder.Examples;
 model OFD_1Jan "OFD with TMC, TIR and TRY"
   import AixLib;
   extends Modelica.Icons.Example;
@@ -18,15 +18,15 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
   Modelica.Blocks.Interfaces.RealOutput TsetValvesSchedule[5](unit = "degC") annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={121,-94}),     iconTransformation(extent = {{171, -29}, {187, -13}})));
   AixLib.Building.Components.Weather.Weather Weather(Latitude = 49.5, Longitude = 8.5, GroundReflection = 0.2, tableName = "wetter", extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, SOD = AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_RoofN_Roof_S(), Wind_dir = false, Wind_speed = true, Air_temp = true, fileName = "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt", WeatherData(tableOnFile=false, table=weatherDataDay.weatherData)) annotation(Placement(transformation(extent={{125,55},
             {77,87}})));
-  AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope
+  AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope
     OFD(TIR=3, withDynamicVentilation=true)
-        annotation (Placement(transformation(extent={{-35,-48},{60,47}})));
+    annotation (Placement(transformation(extent={{-35,-48},{60,47}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature tempOutside
     annotation (Placement(transformation(extent={{-4,53},{-16.5,66}})));
-  AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall.EnergySystem.IdealHeaters.GroundFloor
+  AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.EnergySystem.IdealHeaters.GroundFloor
     groundFloor
     annotation (Placement(transformation(extent={{-116,-94},{-76,-63}})));
-  AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall.EnergySystem.IdealHeaters.UpperFloor
+  AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.EnergySystem.IdealHeaters.UpperFloor
     upperFloor
     annotation (Placement(transformation(extent={{-115,-58},{-75,-27}})));
   AixLib.Utilities.Interfaces.Adaptors.HeatStarToComb heatStarToCombHeaters[9]

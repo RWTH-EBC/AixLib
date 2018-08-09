@@ -1,6 +1,4 @@
-within AixLib.Building.HighOrder.Rooms.MFD.OneApparment;
-
-
+within AixLib.ThermalZones.HighOrder.Rooms.MFD.OneApparment;
 model Bedroom_VoWo "Bedroom from the VoWo appartment"
   import AixLib;
   ///////// construction parameters

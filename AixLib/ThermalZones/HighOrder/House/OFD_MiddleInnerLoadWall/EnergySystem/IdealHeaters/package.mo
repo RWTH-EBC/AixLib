@@ -1,4 +1,4 @@
-within AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall.EnergySystem;
+within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.EnergySystem;
 package IdealHeaters
   extends Modelica.Icons.Package;
 

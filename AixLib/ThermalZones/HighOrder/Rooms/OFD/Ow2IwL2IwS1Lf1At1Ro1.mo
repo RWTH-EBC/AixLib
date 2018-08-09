@@ -1,4 +1,4 @@
-﻿within AixLib.Building.HighOrder.Rooms.OFD;
+within AixLib.ThermalZones.HighOrder.Rooms.OFD;
 model Ow2IwL2IwS1Lf1At1Ro1
   "2 outer walls, 2 inner walls load, 1 inner wall simple, 1 floor towards lower floor, 1 ceiling towards attic, 1 roof towards outside"
   import AixLib;

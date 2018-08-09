@@ -1,4 +1,4 @@
-within AixLib.Building.HighOrder.Examples;
+within AixLib.ThermalZones.HighOrder.Examples;
 model OFDHeatLoad "Test environment to determine OFD's nominal heat load"
   extends Modelica.Icons.Example;
   Modelica.Blocks.Sources.Constant constRooms[9](k={293.15,293.15,288.15,293.15,

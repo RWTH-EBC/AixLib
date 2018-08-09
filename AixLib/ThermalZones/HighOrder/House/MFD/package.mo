@@ -1,4 +1,4 @@
-within AixLib.Building.HighOrder.House;
+within AixLib.ThermalZones.HighOrder.House;
 package MFD "Multiple Family Dwelling"
   extends Modelica.Icons.Package;
 

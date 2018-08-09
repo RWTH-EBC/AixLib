@@ -1,4 +1,4 @@
-within AixLib.Building.HighOrder.House.MFD.EnergySystem;
+within AixLib.ThermalZones.HighOrder.House.MFD.EnergySystem;
 package OneAppartment
   extends Modelica.Icons.Package;
 

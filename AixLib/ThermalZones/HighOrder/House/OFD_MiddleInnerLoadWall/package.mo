@@ -1,4 +1,4 @@
-within AixLib.Building.HighOrder.House;
+within AixLib.ThermalZones.HighOrder.House;
 package OFD_MiddleInnerLoadWall "The one family dwelling model, with the inner load wall divides the house in two"
   extends Modelica.Icons.Package;
 

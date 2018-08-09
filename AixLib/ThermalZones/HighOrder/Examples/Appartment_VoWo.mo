@@ -1,11 +1,16 @@
-within AixLib.Building.HighOrder.Examples;
+within AixLib.ThermalZones.HighOrder.Examples;
 model Appartment_VoWo "Simulation of 1 apartment "
   extends Modelica.Icons.Example;
   parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();
   replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater
     "Medium in the system"                                                                             annotation(Dialog(group = "Medium"), choicesAllMatching = true);
-  AixLib.Building.HighOrder.House.MFD.BuildingAndEnergySystem.OneAppartment_Radiators VoWoWSchV1984(redeclare
-      package Medium =                                                                                                     Medium, fixedHeatFlow3(T_ref = 288.15), fixedHeatFlow5(T_ref = 283.15), fixedHeatFlow16(T_ref = 288.15)) annotation(Placement(transformation(extent = {{-42, -4}, {36, 46}})));
+  AixLib.ThermalZones.HighOrder.House.MFD.BuildingAndEnergySystem.OneAppartment_Radiators
+    VoWoWSchV1984(
+    redeclare package Medium = Medium,
+    fixedHeatFlow3(T_ref=288.15),
+    fixedHeatFlow5(T_ref=283.15),
+    fixedHeatFlow16(T_ref=288.15))
+    annotation (Placement(transformation(extent={{-42,-4},{36,46}})));
   AixLib.Fluid.Movers.Pump Pump(redeclare package Medium = Medium, m_flow_small=
        0.0001) "Pump in heating system"
     annotation (Placement(transformation(extent={{4,-82},{-16,-62}})));

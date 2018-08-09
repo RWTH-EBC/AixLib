@@ -1,7 +1,7 @@
-within AixLib.Building.HighOrder.House.MFD.BuildingAndEnergySystem;
+within AixLib.ThermalZones.HighOrder.House.MFD.BuildingAndEnergySystem;
 model OneAppartment_Radiators
   "just one appartment (same appartment as in MFD, but hydraulic network fit to this one appartment)"
-  import HouseModels = AixLib.Building.HighOrder;
+  import HouseModels = AixLib.ThermalZones.HighOrder;
   replaceable package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater
     "Medium in the system"                                                                             annotation(Dialog(group = "Medium"), choicesAllMatching = true);
   HouseModels.House.MFD.EnergySystem.OneAppartment.Radiators Hydraulic(

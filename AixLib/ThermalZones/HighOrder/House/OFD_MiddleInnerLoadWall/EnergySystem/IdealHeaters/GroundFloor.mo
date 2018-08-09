@@ -1,4 +1,4 @@
-within AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall.EnergySystem.IdealHeaters;
+within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.EnergySystem.IdealHeaters;
 model GroundFloor
   parameter Real ratioRadHeat = 0.3
     "ratio of radiative heat from total heat generated";

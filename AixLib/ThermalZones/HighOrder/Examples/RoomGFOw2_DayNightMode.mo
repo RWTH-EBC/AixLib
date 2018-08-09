@@ -1,4 +1,4 @@
-within AixLib.Building.HighOrder.Examples;
+within AixLib.ThermalZones.HighOrder.Examples;
 model RoomGFOw2_DayNightMode
   "Room on groudn floor with 2 outer walls with day and night"
   import AixLib;

@@ -1,4 +1,4 @@
-within AixLib.Building.HighOrder.Rooms.MFD.CellarAttic;
+within AixLib.ThermalZones.HighOrder.Rooms.MFD.CellarAttic;
 model Cellar "Cellar completly under ground"
   import AixLib;
   ///////// construction parameters

@@ -1,4 +1,4 @@
-within AixLib.Building.HighOrder.House.MFD;
+within AixLib.ThermalZones.HighOrder.House.MFD;
 package BuildingEnvelope
   extends Modelica.Icons.Package;
 

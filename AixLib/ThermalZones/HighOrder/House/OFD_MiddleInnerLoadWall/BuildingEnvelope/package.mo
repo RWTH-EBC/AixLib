@@ -1,4 +1,4 @@
-within AixLib.Building.HighOrder.House.OFD_MiddleInnerLoadWall;
+within AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall;
 package BuildingEnvelope
   extends Modelica.Icons.Package;
 
