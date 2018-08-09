@@ -1,4 +1,4 @@
-within AixLib.Building.HighOrder.Rooms.OFD;
+﻿within AixLib.Building.HighOrder.Rooms.OFD;
 model Ow1IwL2IwS1Lf1At1Ro1
   "1 outer wall, 2 inner walls load, 2 inner walls simple, 1 floor towards lower floor, 1 ceiling towards attic, 1 roof towards outside"
   import AixLib;
@@ -83,6 +83,19 @@ model Ow1IwL2IwS1Lf1At1Ro1
       naturalWidth=10,
       descriptionLabel=true,
       enable=if withWindow3 then true else false));
+  // Sunblind
+  parameter Boolean use_sunblind = false
+    "Will sunblind become active automatically?"
+    annotation(Dialog(group = "Sunblind"));
+  parameter Real ratioSunblind(min=0.0, max=1.0) = 0.8
+    "Sunblind factor"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+  parameter Modelica.SIunits.Temperature TOutAirLimit = 293.15
+    "Temperature at which sunblind closes (see also solIrrThreshold)"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+  parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0) = 350
+    "Threshold for global solar irradiation on this surface to enable sunblinding (see also TOutAirLimit)"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
   // Dynamic Ventilation
   parameter Boolean withDynamicVentilation=false "Dynamic ventilation"
     annotation (Dialog(group="Dynamic ventilation", descriptionLabel=true),
@@ -112,6 +125,10 @@ model Ow1IwL2IwS1Lf1At1Ro1
     wall_length=room_length,
     wall_height=room_height_short,
     withWindow=false,
+    final withSunblind=use_sunblind,
+    final Blinding=ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     windowarea=0,
     withDoor=false,
     door_height=0,
@@ -126,6 +143,10 @@ model Ow1IwL2IwS1Lf1At1Ro1
     wall_height=0.5*(room_height_long + room_height_short + room_width_short/
         room_width_long*(room_height_long - room_height_short)),
     withWindow=false,
+    final withSunblind=use_sunblind,
+    final Blinding=ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false) annotation (Placement(transformation(
         origin={-14,58},
         extent={{-3.99997,-22},{3.99999,22}},
@@ -137,6 +158,10 @@ model Ow1IwL2IwS1Lf1At1Ro1
     wall_length=room_length - room_lengthb,
     wall_height=room_height_long,
     withWindow=false,
+    final withSunblind=use_sunblind,
+    final Blinding=ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false) annotation (Placement(transformation(
         origin={61,19},
         extent={{-3,-15},{3,15}},
@@ -149,6 +174,10 @@ model Ow1IwL2IwS1Lf1At1Ro1
     wall_height=0.5*(room_height_long + room_height_short + room_width_short/
         room_width_long*(room_height_long - room_height_short)),
     withWindow=false,
+    final withSunblind=use_sunblind,
+    final Blinding=ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false) annotation (Placement(transformation(
         origin={20,-60},
         extent={{-4,-24},{4,24}},
@@ -162,6 +191,10 @@ model Ow1IwL2IwS1Lf1At1Ro1
     wall_length=room_length,
     wall_height=room_width_short,
     withWindow=false,
+    final withSunblind=use_sunblind,
+    final Blinding=ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false,
     ISOrientation=3) annotation (Placement(transformation(
         origin={28,60},
@@ -174,6 +207,10 @@ model Ow1IwL2IwS1Lf1At1Ro1
     wall_length=room_length,
     wall_height=room_width_long,
     withWindow=false,
+    final withSunblind=use_sunblind,
+    final Blinding=ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false,
     ISOrientation=2) if withFloorHeating == false annotation (Placement(
         transformation(
@@ -215,6 +252,10 @@ model Ow1IwL2IwS1Lf1At1Ro1
     windowarea=windowarea_RO,
     WallType=Type_RO,
     WindowType=Type_Win,
+    final withSunblind=use_sunblind,
+    final Blinding=ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     ISOrientation=1) annotation (Placement(transformation(
         origin={58,59},
         extent={{-2.99997,-16},{2.99999,16}},
@@ -231,6 +272,10 @@ model Ow1IwL2IwS1Lf1At1Ro1
     wall_length=room_lengthb,
     wall_height=room_height_long,
     withWindow=false,
+    final withSunblind=use_sunblind,
+    final Blinding=ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false) annotation (Placement(transformation(
         origin={61,-20},
         extent={{-2.99998,-16},{2.99998,16}},

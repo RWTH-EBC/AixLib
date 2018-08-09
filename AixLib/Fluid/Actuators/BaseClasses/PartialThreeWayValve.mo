@@ -1,6 +1,7 @@
 within AixLib.Fluid.Actuators.BaseClasses;
 partial model PartialThreeWayValve "Partial three way valve"
   extends AixLib.Fluid.BaseClasses.PartialThreeWayResistance(
+    m_flow_small = m_flow_nominal*1e-4,
     final mDyn_flow_nominal = m_flow_nominal,
       redeclare replaceable
       AixLib.Fluid.Actuators.BaseClasses.PartialTwoWayValve res1
