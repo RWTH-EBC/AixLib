@@ -1473,7 +1473,7 @@ package R134a_IIR_P1_395_T233_370_Formula
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
-  June 20, 2017, by Mirko Engelpracht:<br/>
+  June 20, 2017, by Mirko Engelpracht, Christian Vering:<br/>
   First implementation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
