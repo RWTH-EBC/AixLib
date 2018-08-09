@@ -3,9 +3,10 @@ model ERC_ExperimentalHall_CoolingCircuit
   "Cooling circuit of the new ERC experimental hall"
   import AixLib;
   extends Modelica.Icons.Example;
-  package Medium =
-      Modelica.Media.Water.ConstantPropertyLiquidWater
+  package Medium = Modelica.Media.Water.ConstantPropertyLiquidWater
+    "Medium within the system simulation"
     annotation (choicesAllMatching=true);
+  parameter Modelica.SIunits.Temperature T_amb = 293.15 "ambient temperature";
 
   Sources.Boundary_pT              bou(                   nPorts=1, redeclare
       package Medium = Medium)
@@ -30,33 +31,39 @@ model ERC_ExperimentalHall_CoolingCircuit
 
   SimpleConsumer simpleConsumer(
     kA=2000,
-    T_amb=293.15,
     m_flow_nominal=1,
+    redeclare package Medium = Medium,
+    T_amb=T_amb,
     T_start=293.15)
     annotation (Placement(transformation(extent={{-84,36},{-54,66}})));
   SimpleConsumer simpleConsumer1(
     kA=20000,
-    T_amb=293.15,
     m_flow_nominal=1,
+    redeclare package Medium = Medium,
+    T_amb=T_amb,
     T_start=293.15)
     annotation (Placement(transformation(extent={{-12,34},{18,64}})));
   SimpleConsumer simpleConsumer2(
     kA=10000,
     m_flow_nominal=1,
+    redeclare package Medium = Medium,
+    T_amb=T_amb,
     T_start=293.15)
     annotation (Placement(transformation(extent={{60,34},{90,64}})));
   Controls.HydraulicModules.CtrAdmix ctr_admix(
     Td=0,
     Ti=180,
-    k=0.12) annotation (Placement(transformation(extent={{-142,-2},{-116,24}})));
-  Controls.HydraulicModules.CtrUnmixed ctr_unmixed_simple
+    k=0.12,
+    T_amb=T_amb)
+            annotation (Placement(transformation(extent={{-142,-2},{-116,24}})));
+  Controls.HydraulicModules.CtrUnmixed ctr_unmixed_simple(T_amb=T_amb)
     annotation (Placement(transformation(extent={{-142,80},{-118,104}})));
-  Controls.HydraulicModules.CtrUnmixed ctr_unmixed_simple1
+  Controls.HydraulicModules.CtrUnmixed ctr_unmixed_simple1(T_amb=T_amb)
     annotation (Placement(transformation(extent={{-142,58},{-118,82}})));
   Sources.Boundary_pT              bou1(
     nPorts=1,
-    p=200000,
-    redeclare package Medium = Medium)
+    redeclare package Medium = Medium,
+    p=200000)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-106,-86})));
@@ -66,7 +73,6 @@ model ERC_ExperimentalHall_CoolingCircuit
       basicPumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
     m_flow_nominal=1,
-    T_amb=293.15,
     pipe1(
       dIns=0.01,
       kIns=0.028,
@@ -78,7 +84,8 @@ model ERC_ExperimentalHall_CoolingCircuit
     pipe3(
       dIns=0.01,
       kIns=0.028,
-      length=4))
+      length=4),
+    T_amb=T_amb)
     annotation (Placement(
         transformation(
         extent={{-25,-25},{25,25}},
@@ -90,7 +97,6 @@ model ERC_ExperimentalHall_CoolingCircuit
       AixLib.Fluid.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
       basicPumpInterface(pump(redeclare
           AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
-    T_amb=293.15,
     m_flow_nominal=1,
     pipe1(
       length=1,
@@ -103,7 +109,8 @@ model ERC_ExperimentalHall_CoolingCircuit
     pipe3(
       length=1,
       dIns=0.01,
-      kIns=0.028))
+      kIns=0.028),
+    T_amb=T_amb)
     annotation (Placement(
         transformation(
         extent={{-25,-25},{25,25}},
@@ -133,7 +140,6 @@ model ERC_ExperimentalHall_CoolingCircuit
       dIns=0.01,
       kIns=0.028),
     val(Kv=10),
-    T_amb=293.15,
     pipe3(
       dIns=0.01,
       kIns=0.028,
@@ -141,7 +147,8 @@ model ERC_ExperimentalHall_CoolingCircuit
     pipe4(
       dIns=0.01,
       kIns=0.028,
-      length=5))                    annotation (Placement(transformation(
+      length=5),
+    T_amb=T_amb)                    annotation (Placement(transformation(
         extent={{-25,-25},{25,25}},
         rotation=90,
         origin={-69,7})));
