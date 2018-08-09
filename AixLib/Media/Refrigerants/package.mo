@@ -3,14 +3,6 @@ package Refrigerants "Package with models for different refrigerants"
   extends Modelica.Icons.Package;
 
 
-
-
-
-
-
-
-
-
   annotation (Documentation(info="<html>
 <p>
 This package contains models for different refrigerants. The models are based
@@ -111,7 +103,7 @@ Sweden, March 10-12, 2014: Link&ouml;ping University Electronic Press
 </html>", revisions="<html>
 <ul>
   <li>
-  June 6, 2017, by Mirko Engelpracht:<br/>
+  June 6, 2017, by Mirko Engelpracht, Christian Vering:<br/>
   First implementation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
