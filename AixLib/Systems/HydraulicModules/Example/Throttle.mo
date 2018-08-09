@@ -2,6 +2,9 @@ within AixLib.Systems.HydraulicModules.Example;
 model Throttle "Test for ummixed throttle circuit"
   extends Modelica.Icons.Example;
 
+  package Medium = AixLib.Media.Water
+    annotation (choicesAllMatching=true);
+
   AixLib.Systems.HydraulicModules.Throttle Throttle(
     redeclare package Medium = Medium,
     m_flow_nominal=1,
@@ -16,9 +19,6 @@ model Throttle "Test for ummixed throttle circuit"
         extent={{-30,-30},{30,30}},
         rotation=90,
         origin={10,10})));
-  package Medium =
-      Modelica.Media.Water.ConstantPropertyLiquidWater
-    annotation (choicesAllMatching=true);
 
   AixLib.Fluid.FixedResistances.PressureDrop hydRes(
     m_flow_nominal=8*996/3600,

@@ -2,6 +2,9 @@ within AixLib.Systems.HydraulicModules.Example;
 model Injection2WayValve "Test for injection circuit with a 2 way valve"
   extends Modelica.Icons.Example;
 
+  package Medium = AixLib.Media.Water
+    annotation (choicesAllMatching=true);
+
   AixLib.Systems.HydraulicModules.Injection2WayValve Injection(
     redeclare package Medium = Medium,
     redeclare
@@ -25,9 +28,6 @@ model Injection2WayValve "Test for injection circuit with a 2 way valve"
         extent={{-30,-30},{30,30}},
         rotation=90,
         origin={10,10})));
-  package Medium =
-      Modelica.Media.Water.ConstantPropertyLiquidWater
-    annotation (choicesAllMatching=true);
 
   AixLib.Fluid.FixedResistances.PressureDrop hydRes(
     m_flow_nominal=8*996/3600,

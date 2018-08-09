@@ -22,10 +22,10 @@ model Injection "Injection circuit with pump and three way valve"
     dpFixed_nominal={8000,8000},
     redeclare package Medium = Medium,
     T_start=T_start,
-    init=Modelica.Blocks.Types.Init.NoInit,
-    y_start=0.5,
     tau=0.2,
-    final m_flow_nominal=m_flow_nominal) annotation (Dialog(enable=true, group="Actuators"),
+    final m_flow_nominal=m_flow_nominal,
+    energyDynamics=energyDynamics,
+    y_start=0.5)                         annotation (Dialog(enable=true, group="Actuators"),
       Placement(transformation(
         extent={{8,8},{-8,-8}},
         rotation=0,
@@ -178,7 +178,8 @@ model Injection "Injection circuit with pump and three way valve"
     final V=vol,
     final m_flow_nominal=m_flow_nominal,
     nPorts=3,
-    final allowFlowReversal=allowFlowReversal)
+    final allowFlowReversal=allowFlowReversal,
+    energyDynamics=energyDynamics)
     annotation (Placement(transformation(extent={{10,-60},{22,-72}})));
 
   // -------------------------------------------------
@@ -198,7 +199,8 @@ protected
     T_start=T_start,
     final m_flow_nominal=m_flow_nominal,
     nPorts=3,
-    final allowFlowReversal=allowFlowReversal)
+    final allowFlowReversal=allowFlowReversal,
+    energyDynamics=energyDynamics)
     annotation (Placement(transformation(extent={{-46,20},{-34,32}})));
   Fluid.MixingVolumes.MixingVolume juncjp6(
     redeclare package Medium = Medium,
@@ -206,7 +208,8 @@ protected
     T_start=T_start,
     final m_flow_nominal=m_flow_nominal,
     nPorts=3,
-    final allowFlowReversal=allowFlowReversal)
+    final allowFlowReversal=allowFlowReversal,
+    energyDynamics=energyDynamics)
     annotation (Placement(transformation(extent={{10,20},{22,32}})));
 
 equation

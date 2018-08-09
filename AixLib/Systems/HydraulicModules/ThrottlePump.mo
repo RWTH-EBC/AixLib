@@ -11,7 +11,6 @@ model ThrottlePump "Throttle circuit with pump and two way valve"
             {48,28}})));
   AixLib.Fluid.Actuators.Valves.TwoWayLinear val(
     redeclare package Medium = Medium,
-    dpValve_nominal=8000,
     m_flow_nominal=m_flow_nominal,
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
     final allowFlowReversal=allowFlowReversal)

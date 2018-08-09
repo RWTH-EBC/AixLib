@@ -15,8 +15,6 @@ model Injection2WayValve
   Fluid.Actuators.Valves.TwoWayLinear val(
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
     redeclare package Medium = Medium,
-    init=Modelica.Blocks.Types.Init.NoInit,
-    y_start=0.5,
     final m_flow_nominal=m_flow_nominal,
     final allowFlowReversal=allowFlowReversal) annotation (Dialog(enable=true,
         group="Actuators"), Placement(transformation(
@@ -133,7 +131,8 @@ model Injection2WayValve
     final V=vol,
     final m_flow_nominal=m_flow_nominal,
     nPorts=3,
-    final allowFlowReversal=allowFlowReversal)
+    final allowFlowReversal=allowFlowReversal,
+    energyDynamics=energyDynamics)
     annotation (Placement(transformation(extent={{0,-60},{12,-72}})));
 
 
@@ -145,7 +144,8 @@ protected
     T_start=T_start,
     final m_flow_nominal=m_flow_nominal,
     nPorts=3,
-    final allowFlowReversal=allowFlowReversal)
+    final allowFlowReversal=allowFlowReversal,
+    energyDynamics=energyDynamics)
     annotation (Placement(transformation(extent={{0,20},{12,32}})));
 
 equation

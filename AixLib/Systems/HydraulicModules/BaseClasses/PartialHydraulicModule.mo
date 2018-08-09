@@ -8,6 +8,10 @@ partial model PartialHydraulicModule "Base class for hydraulic module."
   replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
     "Medium in the system" annotation (choicesAllMatching=true);
 
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
+
   parameter Boolean allowFlowReversal=true
     "= true to allow flow reversal, false restricts to design direction (port_a -> port_b)"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
@@ -55,7 +59,7 @@ protected
         origin={-100,40})));
   Fluid.Sensors.VolumeFlowRate VFSen_in(
     redeclare package Medium = Medium,
-    m_flow_nominal=m_flow_nominal,
+    final m_flow_nominal=m_flow_nominal,
     T_start=T_start,
     final allowFlowReversal=allowFlowReversal) "Outflow out of forward line"
     annotation (Placement(transformation(
@@ -76,11 +80,11 @@ protected
     transferHeat=true,
     final TAmb=T_amb,
     final m_flow_nominal=m_flow_nominal,
-    final T_start=T_start,
+    T_start=T_start,
     final allowFlowReversal=allowFlowReversal)
     annotation (Placement(transformation(extent={{84,-66},{72,-54}})));
   Fluid.Sensors.TemperatureTwoPort senT_b1(
-    m_flow_nominal=m_flow_nominal,
+    final m_flow_nominal=m_flow_nominal,
     T_start=T_start,
     redeclare package Medium = Medium,
     transferHeat=true,

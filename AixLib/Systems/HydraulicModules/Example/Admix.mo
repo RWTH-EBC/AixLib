@@ -2,15 +2,12 @@ within AixLib.Systems.HydraulicModules.Example;
 model Admix "Test for admix circuit"
   extends Modelica.Icons.Example;
 
+  package Medium = AixLib.Media.Water
+    annotation (choicesAllMatching=true);
+
   AixLib.Systems.HydraulicModules.Admix Admix(
     redeclare package Medium = Medium,
-    redeclare
-      AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
-      basicPumpInterface(pump(redeclare
-          AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per)),
     m_flow_nominal=1,
-    val(Kv=10),
-    T_amb=293.15,
     dIns=0.01,
     kIns=0.028,
     d=0.032,
@@ -19,14 +16,19 @@ model Admix "Test for admix circuit"
     pipe3(length=1),
     pipe4(length=1),
     pipe5(length=1),
-    pipe6(length=1))
-                  annotation (Placement(transformation(
+    pipe6(length=1),
+    redeclare
+      AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_SpeedControlledNrpm
+      basicPumpInterface(pump(
+        redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6 per,
+        init=Modelica.Blocks.Types.Init.InitialOutput,
+        energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)),
+    T_amb=293.15,
+    val(Kv=10))   annotation (Placement(transformation(
         extent={{-30,-30},{30,30}},
         rotation=90,
         origin={10,10})));
-  package Medium =
-      Modelica.Media.Water.ConstantPropertyLiquidWater
-    annotation (choicesAllMatching=true);
+
   AixLib.Fluid.Sources.Boundary_pT   boundary(
     nPorts=1,
     T=323.15,

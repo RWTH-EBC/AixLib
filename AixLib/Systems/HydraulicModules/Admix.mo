@@ -19,10 +19,10 @@ model Admix "Admix circuit with three way valve and rpm controlled pump"
     dpFixed_nominal={8000,8000},
     redeclare package Medium = Medium,
     T_start=T_start,
-    init=Modelica.Blocks.Types.Init.NoInit,
     y_start=0.5,
     tau=0.2,
-    final m_flow_nominal=m_flow_nominal)
+    final m_flow_nominal=m_flow_nominal,
+    energyDynamics=energyDynamics)
              annotation (Dialog(enable=true,group="Actuators"), Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
@@ -126,7 +126,8 @@ model Admix "Admix circuit with three way valve and rpm controlled pump"
     T_start=T_start,
     nPorts=3,
     final m_flow_nominal=m_flow_nominal,
-    final V=vol)
+    final V=vol,
+    energyDynamics=energyDynamics)
     annotation (Placement(transformation(extent={{-38,-60},{-22,-76}})));
 
 

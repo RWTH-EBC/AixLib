@@ -2,6 +2,9 @@ within AixLib.Systems.HydraulicModules.Example;
 model Pump "Test for unmixed pump circuit"
   extends Modelica.Icons.Example;
 
+  package Medium = AixLib.Media.Water
+    annotation (choicesAllMatching=true);
+
   AixLib.Systems.HydraulicModules.Pump Unmixed(
     redeclare package Medium = Medium,
     redeclare
@@ -19,9 +22,7 @@ model Pump "Test for unmixed pump circuit"
         extent={{-30,-30},{30,30}},
         rotation=90,
         origin={10,10})));
-  package Medium =
-      Modelica.Media.Water.ConstantPropertyLiquidWater
-    annotation (choicesAllMatching=true);
+
   AixLib.Fluid.FixedResistances.PressureDrop hydRes(
     m_flow(start=hydRes.m_flow_nominal),
     dp(start=hydRes.dp_nominal),

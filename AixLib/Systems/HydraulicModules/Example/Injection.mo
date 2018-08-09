@@ -2,6 +2,9 @@ within AixLib.Systems.HydraulicModules.Example;
 model Injection "Test for injection circuit"
   extends Modelica.Icons.Example;
 
+  package Medium = AixLib.Media.Water
+    annotation (choicesAllMatching=true);
+
   AixLib.Systems.HydraulicModules.Injection Injection(
     redeclare package Medium = Medium,
     redeclare
@@ -27,9 +30,6 @@ model Injection "Test for injection circuit"
         extent={{-30,-30},{30,30}},
         rotation=90,
         origin={10,10})));
-  package Medium =
-      Modelica.Media.Water.ConstantPropertyLiquidWater
-    annotation (choicesAllMatching=true);
 
   AixLib.Fluid.FixedResistances.PressureDrop hydRes(
     m_flow_nominal=8*996/3600,

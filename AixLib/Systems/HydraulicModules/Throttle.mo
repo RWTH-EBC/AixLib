@@ -4,7 +4,6 @@ model Throttle "Throttle circuit with two way valve"
 
   AixLib.Fluid.Actuators.Valves.TwoWayLinear val(
     redeclare package Medium = Medium,
-    dpValve_nominal=8000,
     final m_flow_nominal=m_flow_nominal,
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
     final allowFlowReversal=allowFlowReversal)
