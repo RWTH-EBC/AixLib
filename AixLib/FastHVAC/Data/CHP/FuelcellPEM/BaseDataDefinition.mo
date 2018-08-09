@@ -4,7 +4,7 @@ extends Modelica.Icons.Record;
 
   import SI = Modelica.SIunits;
   import SIconv = Modelica.SIunits.Conversions.NonSIunits;
-  parameter SI.Power P_elRated "rated electrical power (unit=W)";
+  parameter SI.Power P_elRated "rated electrical power (AC) (unit=W)";
   parameter Real eta_0;
   parameter Real eta_1;
   parameter Real eta_2;

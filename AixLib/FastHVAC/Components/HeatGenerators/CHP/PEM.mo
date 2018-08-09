@@ -15,8 +15,8 @@ protected
 public
   parameter Modelica.SIunits.Temperature T0 = Modelica.SIunits.Conversions.from_degC(40);
   parameter Modelica.SIunits.Time tauQ_start = 100;
-  parameter Real dotP_pos = 0.61;
-  parameter Real dotP_neg = 0.60;
+  parameter Real dotP_pos = 0.61 "maximum increase rate of power output";
+  parameter Real dotP_neg = 0.60 "maximum decrease rate of power output";
 
 constant Real LHV(unit="J/mol")=802350 "Lower heating value of H2 [J/mol]";
 constant Real a = 5;
@@ -67,15 +67,18 @@ Modelica.SIunits.Efficiency eta_PCU "electrical efficiency of the PCU, which con
     annotation (Placement(transformation(extent={{100,30},{124,54}})));
   Modelica.Blocks.Continuous.Integrator integrator[3]
     annotation (Placement(transformation(extent={{70,32},{90,52}})));
-  Modelica.Blocks.Math.Gain P_demand(k=param.P_elRated)
+  Modelica.Blocks.Math.Gain P_demand_AC(k=param.P_elRated)
     annotation (Placement(transformation(extent={{-66,66},{-50,82}})));
   Modelica.Blocks.Nonlinear.SlewRateLimiter dotP(Rising=dotP_pos, Falling=-
         dotP_neg)
-    annotation (Placement(transformation(extent={{0,64},{20,84}})));
+    annotation (Placement(transformation(extent={{38,58},
+            {58,78}})));
   Modelica.Blocks.Continuous.FirstOrder firstOrderQ_start(T=tauQ_start)
-    annotation (Placement(transformation(extent={{0,36},{20,56}})));
+    annotation (Placement(transformation(extent={{-8,32},
+            {12,52}})));
   Modelica.Blocks.Continuous.FirstOrder firstOrderQ_startloss(T=tauQ_start)
-    annotation (Placement(transformation(extent={{0,6},{20,26}})));
+    annotation (Placement(transformation(extent={{-8,0},{
+            12,20}})));
   Modelica.Blocks.Continuous.FirstOrder firstOrderP(T=a)
     annotation (Placement(transformation(extent={{-66,-40},{-46,-20}})));
   Modelica.Blocks.Continuous.FirstOrder firstOrderdotN_B(T=a)
@@ -118,7 +121,7 @@ equation
       firstOrderP_PCU.u = P_elDC;
       firstOrderP.u = P_elDC - P_anc;
     else
-      firstOrderP_elDC.u = P_demand.y;
+      firstOrderP_elDC.u =P_demand_AC.y/eta_PCU;
       firstOrderQ_start.u = param.r_0 + param.r_1*(P_elDC)^param.alpha_0 + param.r_2*(Modelica.SIunits.Conversions.to_degC(T_flow.T) - param.T_0)^param.alpha_1;
       firstOrderQ_startloss.u = param.s_0 + param.s_1 * P_elDC^param.beta_0 + param.s_2 * (Modelica.SIunits.Conversions.to_degC(T_flow.T) - param.T_1)^param.beta_1;
       firstOrderP_anc.u = param.anc_0 + param.anc_1*dotN_B/1000;
@@ -163,7 +166,7 @@ equation
       Line(points={{9,-82},{35.2,-82},{35.2,-82.1}},  color={176,0,0}));
   connect(integrator.y, Energy)
     annotation (Line(points={{91,42},{112,42},{112,42}}, color={0,0,127}));
-  connect(u, P_demand.u)
+  connect(u, P_demand_AC.u)
     annotation (Line(points={{-100,74},{-67.6,74}}, color={0,0,127}));
     annotation (Placement(transformation(extent={{-96,-70},{-76,-50}})),
               Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(

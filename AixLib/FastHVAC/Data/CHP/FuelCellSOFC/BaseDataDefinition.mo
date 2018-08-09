@@ -22,6 +22,7 @@ extends Modelica.Icons.Record;
   parameter Real a_0;
   parameter Real a_1;
   parameter Real a_2;
+  parameter Real a_3;
   parameter Real s_0;
   parameter Real s_1;
   parameter Real s_2;
