@@ -3,9 +3,6 @@ package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
 
 
-
-
-
   annotation(DocumentationClass = true, Documentation(info="<html>
 <p>
 This library provides different refrigerant models that are used, for
@@ -40,7 +37,7 @@ information section.
 </html>", revisions="<html>
 <ul>
   <li>
-  October 14, 2017, by Mirko Engelpracht:<br/>
+  October 14, 2017, by Mirko Engelpracht, Christian Vering:<br/>
   First implementation
   (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/408\">issue 408</a>).
   </li>
