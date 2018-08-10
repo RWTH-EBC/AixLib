@@ -25,10 +25,11 @@ expandable connector HeatPumpControlBus
 
   Real CoP "Coefficient of performance";
 
-  Modelica.SIunits.ThermodynamicTemperature T_amb
-    "ambient temperature on the outside";
-  Modelica.SIunits.ThermodynamicTemperature T_ambInternal
-    "Ambient temperature of unit in house";
+  Modelica.SIunits.ThermodynamicTemperature T_oda "Outdoor air temperature";
+  Modelica.SIunits.ThermodynamicTemperature T_amb_eva
+    "Ambient temperature on evaporator side";
+  Modelica.SIunits.ThermodynamicTemperature T_amb_con
+    "Ambient temperature on condenser side";
   annotation (
     defaultComponentName = "sigBusHP",
     Icon(coordinateSystem(preserveAspectRatio=false)),

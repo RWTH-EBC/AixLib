@@ -7,72 +7,34 @@ model InnerCycle "Blackbox model of refrigerant cycle of a HP"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Interfaces.RealOutput QEva "Heat flow from evaporator"
     annotation (Placement(transformation(extent={{-100,-10},{-120,10}})));
-  replaceable PerformanceData.LookUpTable2D                      performanceData
-    constrainedby PerformanceData.BaseClasses.PartialPerformanceData
-     "replaceable model for performance data of HP"
-    annotation (choicesAllMatching=true, Placement(transformation(
+  replaceable model PerData =
+      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D
+    constrainedby
+    AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
+     "Replaceable model for performance data of HP"
+    annotation (choicesAllMatching=true);
+  PerData PerformanceData annotation(Placement(transformation(
         extent={{-27,-28},{27,28}},
         rotation=-90,
-        origin={0,50})));
-
+        origin={0,52})));
   Utilities.Logical.SmoothSwitch switchQEva
     "If mode is false, Condenser becomes Evaporator and vice versa"
     annotation (Placement(transformation(extent={{-54,-10},{-74,10}})));
   Utilities.Logical.SmoothSwitch switchQCon
     "If mode is false, Condenser becomes Evaporator and vice versa"
     annotation (Placement(transformation(extent={{74,-10},{94,10}})));
-  Modelica.Blocks.Interfaces.RealOutput COP "Current COP" annotation (Placement(
-        transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=-90,
-        origin={0,-110})));
-  Modelica.Blocks.Math.Division divCOP annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=-90,
-        origin={0,-78})));
   Modelica.Blocks.Interfaces.RealOutput Pel
     "Electrical power consumed by compressor" annotation (Placement(
         transformation(
         extent={{-10.5,-10.5},{10.5,10.5}},
         rotation=-90,
-        origin={60.5,-110.5})));
+        origin={0.5,-110.5})));
 
 equation
   connect(switchQCon.y, QCon)
     annotation (Line(points={{95,0},{110,0}}, color={0,0,127}));
-  connect(performanceData.QEva, switchQEva.u1) annotation (Line(points={{22.4,20.3},
-          {22,20.3},{22,8},{-52,8}},
-                                  color={0,0,127}));
-  connect(performanceData.QCon, switchQCon.u1) annotation (Line(points={{-22.4,20.3},
-          {-22,20.3},{-22,8},{72,8}},
-                                  color={0,0,127}));
-  connect(performanceData.QEva, switchQCon.u3) annotation (Line(points={{22.4,20.3},
-          {22,20.3},{22,-8},{72,-8}},
-                                   color={0,0,127}));
-  connect(performanceData.QCon, switchQEva.u3) annotation (Line(points={{-22.4,20.3},
-          {-22,20.3},{-22,-8},{-52,-8}},
-                                     color={0,0,127}));
-  connect(performanceData.Pel, divCOP.u2) annotation (Line(points={{-5.55112e-15,
-          20.3},{-5.55112e-15,-21.4},{-6,-21.4},{-6,-66}},
-                                                      color={0,0,127}));
-  connect(performanceData.QCon, divCOP.u1) annotation (Line(points={{-22.4,20.3},
-          {-22.4,0},{-22,0},{-22,-22},{6,-22},{6,-66}},
-                                                 color={0,0,127}));
-  connect(divCOP.y, COP) annotation (Line(points={{-1.9984e-015,-89},{
-          -1.9984e-015,-96.5},{0,-96.5},{0,-110}}, color={0,0,127}));
-  connect(performanceData.Pel, Pel) annotation (Line(points={{-5.55112e-15,20.3},
-          {-5.55112e-15,2},{0,2},{0,-16},{60.5,-16},{60.5,-110.5}},
-                                                      color={0,0,127}));
   connect(switchQEva.y, QEva)
     annotation (Line(points={{-75,0},{-110,0}}, color={0,0,127}));
-  connect(sigBusHP, performanceData.sigBusHP) annotation (Line(
-      points={{1,103},{1,92.5},{5.77316e-15,92.5},{5.77316e-15,78.89}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
   connect(sigBusHP.mode, switchQEva.u2) annotation (Line(
       points={{1.085,103.075},{1.085,104},{-52,104},{-52,0}},
       color={255,204,51},
@@ -89,6 +51,24 @@ equation
       index=-1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
+  connect(sigBusHP, PerformanceData.sigBusHP) annotation (Line(
+      points={{1,103},{1,80.89},{5.77316e-15,80.89}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(PerformanceData.Pel, Pel) annotation (Line(points={{0,22.3},{0,-44},{
+          0,-110.5},{0.5,-110.5}}, color={0,0,127}));
+  connect(PerformanceData.QCon, switchQCon.u1) annotation (Line(points={{-22.4,
+          22.3},{-22.2,22.3},{-22.2,8},{72,8}}, color={0,0,127}));
+  connect(PerformanceData.QCon, switchQEva.u3) annotation (Line(points={{-22.4,
+          22.3},{-22.4,-7.85},{-52,-7.85},{-52,-8}}, color={0,0,127}));
+  connect(PerformanceData.QEva, switchQEva.u1) annotation (Line(points={{22.4,
+          22.3},{23.2,22.3},{23.2,8},{-52,8}}, color={0,0,127}));
+  connect(PerformanceData.QEva, switchQCon.u3) annotation (Line(points={{22.4,
+          22.3},{22,22.3},{22,-8},{72,-8}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},

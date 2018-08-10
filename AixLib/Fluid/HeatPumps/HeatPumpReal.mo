@@ -19,7 +19,7 @@ model HeatPumpReal
     final CCon=CCon,
     final GCon=GCon,
     final useComIne=useComIne,
-    redeclare final block performanceData = performanceData)
+    redeclare final PerformanceData performanceData)
     annotation (Placement(transformation(extent={{84,-38},{160,38}})));
   BaseClasses.SecurityControls.SecurityControl securityControl(
     final useMinRunTime=useMinRunTime,
@@ -68,7 +68,7 @@ model HeatPumpReal
     "False if the Security block should be disabled"
                                      annotation (choices(checkBox=true), Dialog(
         tab="Security Control", group="General", descriptionLabel = true));
-  Modelica.Blocks.Interfaces.RealInput T_amb "Ambient temperature"
+  Modelica.Blocks.Interfaces.RealInput T_oda "Outdoor air temperature"
     annotation (Placement(transformation(extent={{-240,20},{-200,60}})));
   parameter Boolean useMinRunTime=true
     "False if minimal runtime of HP is not considered"
@@ -191,13 +191,16 @@ model HeatPumpReal
   parameter Modelica.SIunits.ThermalConductance GCon
     "Constant thermal conductance of condenser material"
     annotation (Dialog(tab="Evaporator/ Condenser", group="Condenser"));
-  Modelica.Blocks.Interfaces.RealInput T_ambInternal "Ambient temperature"
-    annotation (Placement(transformation(extent={{240,20},{200,60}})));
+  Modelica.Blocks.Interfaces.RealInput T_amb_eva
+    "Ambient temperature on evaporator side"
+    annotation (Placement(transformation(extent={{240,-40},{200,0}})));
 
-  replaceable block performanceData = BaseClasses.PerformanceData.LookUpTable2D
-      (dataTable=AixLib.DataBase.HeatPump.EN14511.Ochsner_GMLW_19plus())
-    constrainedby BaseClasses.PerformanceData.LookUpTable2D
-    annotation (__Dymola_choicesAllMatching=true);
+  replaceable model PerformanceData = BaseClasses.PerformanceData.LookUpTable2D
+      (dataTable=AixLib.DataBase.HeatPump.EN14511.Vaillant_VWL_101())
+  constrainedby
+    AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
+  "Replaceable model for performance data of HP"
+    annotation (choicesAllMatching=true);
   Modelica.Blocks.Routing.RealPassThrough realPasThrHPC if not useDeFro and not useSec "No 2. and 1. Layer"
     annotation (Placement(transformation(extent={{-54,-96},{-38,-80}})));
   Modelica.Blocks.Routing.RealPassThrough realPasThrSec if not useSec and
@@ -206,7 +209,8 @@ model HeatPumpReal
   Modelica.Blocks.Routing.RealPassThrough realPasThrDef if not useDeFro and
     useSec
     "No 2. Layer"
-    annotation (Placement(transformation(extent={{-84,-70},{-68,-54}})));
+    annotation (Placement(transformation(extent={{-84,-70},{-68,-54}})),
+      __Dymola_choicesAllMatching=true);
   Interfaces.PassThroughMedium mediumPassThroughSin(
     redeclare final package Medium = Medium_eva,
     final allowFlowReversal=allowFlowReversalEva,
@@ -223,6 +227,9 @@ model HeatPumpReal
         extent={{-6,-6},{6,6}},
         rotation=90,
         origin={182,-56})));
+  Modelica.Blocks.Interfaces.RealInput T_amb_con
+    "Ambient temperature on condenser side"
+    annotation (Placement(transformation(extent={{240,0},{200,40}})));
 equation
   connect(heatPump.sigBusHP, securityControl.sigBusHP) annotation (Line(
       points={{79.82,-8.55},{76,-8.55},{76,-48},{-26.675,-48},{-26.675,-19.32},{
@@ -235,7 +242,7 @@ equation
       thickness=0.5));
   connect(heatPump.port_b2, port_b2)
     annotation (Line(points={{84,-19},{84,-100}},   color={0,127,255}));
-  connect(T_amb, hPControls.T_amb) annotation (Line(points={{-220,40},{-206,40},
+  connect(T_oda,hPControls.T_oda)  annotation (Line(points={{-220,40},{-206,40},
           {-206,5.2},{-196.16,5.2}}, color={0,0,127}));
   connect(heatPump.port_b1, port_b1) annotation (Line(points={{160,19},{160,100},
           {160,100}}, color={0,127,255}));
@@ -258,8 +265,9 @@ equation
   connect(pumSou.port_b, heatPump.port_a2)
     annotation (Line(points={{160,-50},{160,-19}},   color={0,127,255},
       pattern=LinePattern.Dash));
-  connect(T_ambInternal, heatPump.T_ambInternal) annotation (Line(points={{220,
-          40},{198,40},{198,0},{167.6,0}}, color={0,0,127}));
+  connect(T_amb_eva, heatPump.T_amb_eva) annotation (Line(points={{220,-20},{
+          200,-20},{200,-12.6667},{166.08,-12.6667}},
+                                                  color={0,0,127}));
   connect(heatPump.sigBusHP, hPControls.sigBusHP) annotation (Line(
       points={{79.82,-8.55},{78,-8.55},{78,-8},{76,-8},{76,-48},{-194,-48},{-194,
           -15.08},{-190.56,-15.08}},
@@ -318,6 +326,8 @@ equation
       points={{182,-50},{178,-50},{178,-19},{160,-19}},
       color={0,127,255},
       pattern=LinePattern.Dash));
+  connect(T_amb_con, heatPump.T_amb_con) annotation (Line(points={{220,20},{200,
+          20},{200,12.6667},{166.08,12.6667}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-200,-100},
             {200,100}})), Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-200,-100},{200,100}}), graphics={
