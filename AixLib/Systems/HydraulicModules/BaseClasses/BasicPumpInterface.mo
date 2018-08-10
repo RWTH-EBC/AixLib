@@ -2,10 +2,6 @@ within AixLib.Systems.HydraulicModules.BaseClasses;
 partial model BasicPumpInterface "Pump interface for different pump types"
  extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
 
-  parameter Boolean allowFlowReversal=true
-    "= true to allow flow reversal, false restricts to design direction (port_a -> port_b)"
-    annotation (Dialog(tab="Assumptions"), Evaluate=true);
-
   PumpBus pumpBus annotation (
       Placement(transformation(extent={{-20,80},{20,120}}), iconTransformation(
           extent={{-20,80},{20,120}})));
