@@ -78,9 +78,9 @@ model Generation
     parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaHC1_warm = 0 annotation(Dialog(tab = "Storage"));
     parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaHC2_warm = 0 annotation(Dialog(tab = "Storage"));
     parameter Modelica.SIunits.CoefficientOfHeatTransfer alphaHC1_cold = 0 annotation(Dialog(tab = "Storage"));
-    parameter AixLib.DataBase.Storage.Generic_New_2000l storage_model_hot annotation(Dialog(tab = "Storage"), choicesAllMatching = true);
-    parameter AixLib.DataBase.Storage.Generic_New_2000l storage_model_warm annotation(Dialog(tab = "Storage"), choicesAllMatching = true);
-    parameter AixLib.DataBase.Storage.Generic_New_2000l storage_model_cold annotation(Dialog(tab = "Storage"), choicesAllMatching = true);
+    parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition storage_model_hot annotation(Dialog(tab = "Storage"), choicesAllMatching = true);
+    parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition storage_model_warm annotation(Dialog(tab = "Storage"), choicesAllMatching = true);
+    parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition storage_model_cold annotation(Dialog(tab = "Storage"), choicesAllMatching = true);
 
 
   Generation_Hot generation_Hot(pump_model_generation_hot=

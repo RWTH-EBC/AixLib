@@ -13,6 +13,7 @@ model TBA_Pipe
     parameter Modelica.SIunits.ThermalConductivity pipe_insulation_conductivity = 0  annotation(Dialog(tab = "General"));
     parameter Modelica.SIunits.Volume V_mixing = 0 annotation(Dialog(tab = "General"));
     parameter Modelica.SIunits.Pressure dp_Valve_nominal = 0 annotation(Dialog(tab = "General"));
+    parameter Real riseTime_valve = 0 annotation(Dialog(tab = "General"));
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_TBA
     annotation (Placement(transformation(extent={{-50,90},{-30,110}})));
@@ -39,21 +40,21 @@ model TBA_Pipe
     cPip=500,
     rhoPip=8000,
     v_nominal=v_nominal,
-    length=pipe_length,
     m_flow_nominal=m_flow_nominal,
     dIns=pipe_insulation_thickness,
     kIns=pipe_insulation_conductivity,
     thickness=pipe_wall_thickness,
-    nPorts=1)
+    nPorts=1,
+    length=pipe_length + 50)
     annotation (Placement(transformation(extent={{9,8},{-9,-8}},
         rotation=-90,
         origin={60,-9})));
   Fluid.Actuators.Valves.ThreeWayLinear val1(
     redeclare package Medium = Medium_Water,
-    riseTime=2,
     m_flow_nominal=m_flow_nominal,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
-    dpValve_nominal=dp_Valve_nominal)
+    dpValve_nominal=dp_Valve_nominal,
+    riseTime=riseTime_valve)
     annotation (Placement(transformation(extent={{6,6},{-6,-6}},
         rotation=-90,
         origin={-60,-40})));
@@ -64,11 +65,11 @@ model TBA_Pipe
     rhoPip=8000,
     nPorts=1,
     v_nominal=v_nominal,
-    length=pipe_length,
     m_flow_nominal=m_flow_nominal,
     dIns=pipe_insulation_thickness,
     kIns=pipe_insulation_conductivity,
-    thickness=pipe_wall_thickness)
+    thickness=pipe_wall_thickness,
+    length=pipe_length + 50)
     annotation (Placement(transformation(extent={{9,-8},{-9,8}},
         rotation=-90,
         origin={-60,-9})));

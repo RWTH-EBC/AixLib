@@ -62,7 +62,8 @@ model Full_Transfer_TBA
     annotation (Placement(transformation(extent={{20,16},{0,36}})));
 equation
   connect(OpenPlanOffice.HeatPort_TBA, HeatPort_TBA_OpenPlanOffice)
-    annotation (Line(points={{80,60},{80,100}}, color={191,0,0}));
+    annotation (Line(points={{76,60},{76,80},{80,80},{80,100}},
+                                                color={191,0,0}));
   connect(val4.port_b, Fluid_in_warm)
     annotation (Line(points={{0,26},{-100,26}}, color={0,127,255}));
   connect(val1.port_a, Fluid_out_warm)

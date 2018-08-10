@@ -4,7 +4,35 @@ model Full_Transfer_RLT
     AixLib.Media.Water "Medium in the component";
   replaceable package Medium_Air =
     AixLib.Media.Air "Medium in the component";
-  RLT Workshop annotation (Placement(transformation(extent={{44,-66},{64,-86}})));
+
+    parameter Real riseTime_valve = 0 annotation(Dialog(tab = "General"));
+  RLT Workshop(
+    riseTime_valve=riseTime_valve,
+    RLT_v_nominal=4,
+    RLT_m_flow_nominal=0.65,
+    RLT_pipe_length=25,
+    RLT_pipe_wall_thickness=0.003,
+    RLT_pipe_insulation_thickness=0,
+    RLT_pipe_insulation_conductivity=1,
+    pipe_length_hot=15,
+    pipe_length_cold=15,
+    v_nominal_hot=1.609,
+    m_flow_nominal_hot=0.194,
+    pipe_wall_thickness_hot=0.0023,
+    pipe_insulation_thickness_hot=0.02,
+    pipe_insulation_conductivity_hot=0.05,
+    V_mixing_hot=0.0001,
+    v_nominal_cold=1.571,
+    m_flow_nominal_cold=0.919,
+    pipe_wall_thickness_cold=0.0032,
+    pipe_insulation_thickness_cold=0.02,
+    pipe_insulation_conductivity_cold=0.05,
+    V_mixing_cold=0.0001,
+    pump_model_hot=Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6(),
+    dpValve_nominal_hot=7000,
+    pump_model_cold=Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6(),
+    dpValve_nominal_cold=10000)
+               annotation (Placement(transformation(extent={{44,-66},{64,-86}})));
   Modelica.Fluid.Interfaces.FluidPort_b Air_out[5](redeclare package Medium =
         Medium_Air)
     "Fluid connector b (positive design flow direction is from port_a to port_b)"
@@ -31,14 +59,141 @@ model Full_Transfer_RLT
     annotation (Placement(transformation(extent={{-110,-50},{-90,-30}})));
   BusSystem.ControlBus controlBus
     annotation (Placement(transformation(extent={{82,8},{122,48}})));
-  RLT Canteen annotation (Placement(transformation(extent={{-10,-66},{10,-86}})));
-  RLT MultiPersonOffice
+  RLT Canteen(
+    riseTime_valve=riseTime_valve,
+    RLT_v_nominal=4,
+    RLT_m_flow_nominal=1.1,
+    RLT_pipe_length=15,
+    RLT_pipe_wall_thickness=0.003,
+    RLT_pipe_insulation_thickness=0,
+    RLT_pipe_insulation_conductivity=1,
+    pipe_length_hot=10,
+    pipe_length_cold=10,
+    v_nominal_hot=1.898,
+    m_flow_nominal_hot=1.072,
+    pipe_wall_thickness_hot=0.0032,
+    pipe_insulation_thickness_hot=0.02,
+    pipe_insulation_conductivity_hot=0.05,
+    V_mixing_hot=0.0001,
+    v_nominal_cold=1.328,
+    m_flow_nominal_cold=0.777,
+    pipe_wall_thickness_cold=0.0032,
+    pipe_insulation_thickness_cold=0.02,
+    pipe_insulation_conductivity_cold=0.05,
+    V_mixing_cold=0.0001,
+    pump_model_hot=Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6(),
+    pump_model_cold=Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to6(),
+    dpValve_nominal_hot=7000,
+    dpValve_nominal_cold=10000)
+              annotation (Placement(transformation(extent={{-10,-66},{10,-86}})));
+  RLT MultiPersonOffice(
+    riseTime_valve=riseTime_valve,
+    RLT_v_nominal=4,
+    RLT_m_flow_nominal=0.08,
+    RLT_pipe_length=48,
+    RLT_pipe_wall_thickness=0.003,
+    RLT_pipe_insulation_thickness=0,
+    RLT_pipe_insulation_conductivity=1,
+    pipe_length_hot=28,
+    pipe_length_cold=28,
+    pipe_wall_thickness_hot=0.0023,
+    pipe_insulation_thickness_hot=0.02,
+    pipe_insulation_conductivity_hot=0.05,
+    V_mixing_hot=0.0001,
+    v_nominal_cold=1.866,
+    m_flow_nominal_cold=0.38,
+    pipe_wall_thickness_cold=0.0026,
+    pipe_insulation_thickness_cold=0.02,
+    pipe_insulation_conductivity_cold=0.05,
+    V_mixing_cold=0.0001,
+    v_nominal_hot=1.26,
+    m_flow_nominal_hot=0.152,
+    pump_model_hot=Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8(),
+    dpValve_nominal_hot=7000,
+    pump_model_cold=Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8(),
+    dpValve_nominal_cold=10000)
     annotation (Placement(transformation(extent={{-66,-66},{-46,-86}})));
-  RLT ConferenceRoom
+  RLT ConferenceRoom(
+    riseTime_valve=riseTime_valve,
+    RLT_v_nominal=4,
+    RLT_m_flow_nominal=0.333,
+    RLT_pipe_length=68,
+    RLT_pipe_wall_thickness=0.003,
+    RLT_pipe_insulation_thickness=0,
+    RLT_pipe_insulation_conductivity=1,
+    pipe_length_hot=48,
+    pipe_length_cold=48,
+    pipe_wall_thickness_hot=0.0023,
+    pipe_insulation_thickness_hot=0.02,
+    pipe_insulation_conductivity_hot=0.05,
+    V_mixing_hot=0.0001,
+    pipe_insulation_thickness_cold=0.02,
+    pipe_insulation_conductivity_cold=0.05,
+    V_mixing_cold=0.0001,
+    v_nominal_hot=1.269,
+    m_flow_nominal_hot=0.153,
+    v_nominal_cold=1.542,
+    m_flow_nominal_cold=0.192,
+    pipe_wall_thickness_cold=0.0023,
+    pump_model_hot=Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8(),
+    dpValve_nominal_hot=7000,
+    pump_model_cold=Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8(),
+    dpValve_nominal_cold=10000)
     annotation (Placement(transformation(extent={{46,72},{66,52}})));
-  RLT OpenPlanOffice
+  RLT OpenPlanOffice(
+    riseTime_valve=riseTime_valve,
+    RLT_v_nominal=4,
+    RLT_m_flow_nominal=1.2,
+    RLT_pipe_length=28,
+    RLT_pipe_wall_thickness=0.003,
+    RLT_pipe_insulation_thickness=0,
+    RLT_pipe_insulation_conductivity=1,
+    pipe_length_hot=8,
+    pipe_length_cold=8,
+    v_nominal_hot=1.562,
+    m_flow_nominal_hot=2.078,
+    pipe_wall_thickness_hot=0.0032,
+    pipe_insulation_thickness_hot=0.02,
+    pipe_insulation_conductivity_hot=0.05,
+    V_mixing_hot=0.0001,
+    v_nominal_cold=1.487,
+    m_flow_nominal_cold=0.870,
+    pipe_wall_thickness_cold=0.0032,
+    pipe_insulation_thickness_cold=0.02,
+    pipe_insulation_conductivity_cold=0.05,
+    V_mixing_cold=0.0001,
+    pump_model_hot=Fluid.Movers.Data.Pumps.Wilo.Stratos40slash1to8(),
+    pump_model_cold=Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8(),
+    dpValve_nominal_hot=7000,
+    dpValve_nominal_cold=10000)
     annotation (Placement(transformation(extent={{-10,72},{10,52}})));
-  RLT Central annotation (Placement(transformation(extent={{-66,72},{-46,52}})));
+  RLT Central(
+    riseTime_valve=riseTime_valve,
+    RLT_v_nominal=4,
+    RLT_m_flow_nominal=3.363,
+    RLT_pipe_length=0,
+    RLT_pipe_wall_thickness=0.003,
+    RLT_pipe_insulation_thickness=0,
+    RLT_pipe_insulation_conductivity=1,
+    pipe_length_hot=20,
+    pipe_length_cold=20,
+    v_nominal_hot=1.707,
+    m_flow_nominal_hot=3.649,
+    pipe_wall_thickness_hot=0.0036,
+    pipe_insulation_thickness_hot=0.02,
+    pipe_insulation_conductivity_hot=0.05,
+    V_mixing_hot=0.0001,
+    v_nominal_cold=1.418,
+    m_flow_nominal_cold=3.139,
+    pipe_wall_thickness_cold=0.0036,
+    pipe_insulation_thickness_cold=0.02,
+    pipe_insulation_conductivity_cold=0.05,
+    V_mixing_cold=0.0001,
+    pump_model_hot=Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12(),
+    dpValve_nominal_hot=7000,
+    pump_model_cold=Fluid.Movers.Data.Pumps.Wilo.Stratos50slash1to12(),
+    dpValve_nominal_cold=10000)
+              annotation (Placement(transformation(extent={{-66,72},{-46,52}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort[5]
     annotation (Placement(transformation(extent={{-10,90},{10,110}})));
   BusSystem.measureBus measureBus
@@ -269,8 +424,8 @@ equation
   connect(Central.massflow_hot, measureBus.RLT_central_warm) annotation (Line(
         points={{-64,72},{-64,76},{-70,76},{-70,28},{86,28},{86,-29.9},{102.1,
           -29.9}}, color={0,0,127}));
-  connect(Central.power_pump_hot, measureBus.Pump_RLT_central_warm) annotation
-    (Line(points={{-60,72},{-60,76},{-70,76},{-70,28},{86,28},{86,-29.9},{102.1,
+  connect(Central.power_pump_hot, measureBus.Pump_RLT_central_warm) annotation (
+     Line(points={{-60,72},{-60,76},{-70,76},{-70,28},{86,28},{86,-29.9},{102.1,
           -29.9}}, color={0,0,127}));
   connect(Central.power_pump_cold, measureBus.Pump_RLT_central_cold)
     annotation (Line(points={{-52,72},{-52,76},{-70,76},{-70,28},{86,28},{86,
@@ -395,8 +550,8 @@ equation
   connect(Canteen.power_pump_cold, measureBus.Pump_RLT_canteen_cold)
     annotation (Line(points={{4,-66},{4,-58},{28,-58},{28,-90},{86,-90},{86,
           -29.9},{102.1,-29.9}}, color={0,0,127}));
-  connect(Canteen.power_pump_hot, measureBus.Pump_RLT_canteen_warm) annotation
-    (Line(points={{-4,-66},{-4,-58},{28,-58},{28,-90},{86,-90},{86,-29.9},{
+  connect(Canteen.power_pump_hot, measureBus.Pump_RLT_canteen_warm) annotation (
+     Line(points={{-4,-66},{-4,-58},{28,-58},{28,-90},{86,-90},{86,-29.9},{
           102.1,-29.9}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
