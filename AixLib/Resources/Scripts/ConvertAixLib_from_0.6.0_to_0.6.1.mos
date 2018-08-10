@@ -27,4 +27,15 @@ convertClass("AixLib.Building.HighOrder.Examples.Appartment_VoWo","AixLib.Therma
 convertClass("AixLib.Building.HighOrder.Examples.OFDHeatLoad","AixLib.ThermalZones.HighOrder.Examples.OFDHeatLoad");
 convertClass("AixLib.Building.HighOrder.Examples.OFD_1Jan","AixLib.ThermalZones.HighOrder.Examples.OFD_1Jan");
 convertClass("AixLib.Building.HighOrder.Examples.RoomGFOw2_DayNightMode","AixLib.ThermalZones.HighOrder.Examples.RoomGFOw2_DayNightMode");
-convertClass("AixLib.Building.HighOrder.Examples.Validation.Case600","AixLib.ThermalZones.HighOrder.Examples.RoomGFOw2_DayNightMode");
+convertClass("AixLib.Building.HighOrder.Validation.Case600","AixLib.ThermalZones.HighOrder.Validation.Case600");
+convertClass("AixLib.Building.HighOrder.Validation.Case600FF","AixLib.ThermalZones.HighOrder.Validation.Case600FF");
+convertClass("AixLib.Building.HighOrder.Validation.Case620","AixLib.ThermalZones.HighOrder.Validation.Case620");
+convertClass("AixLib.Building.HighOrder.Validation.Case640","AixLib.ThermalZones.HighOrder.Validation.Case640");
+convertClass("AixLib.Building.HighOrder.Validation.Case650","AixLib.ThermalZones.HighOrder.Validation.Case650");
+convertClass("AixLib.Building.HighOrder.Validation.Case650FF","AixLib.ThermalZones.HighOrder.Validation.Case650FF");
+convertClass("AixLib.Building.HighOrder.Validation.Case900","AixLib.ThermalZones.HighOrder.Validation.Case900");
+convertClass("AixLib.Building.HighOrder.Validation.Case900FF","AixLib.ThermalZones.HighOrder.Validation.Case900FF");
+convertClass("AixLib.Building.HighOrder.Validation.Case920","AixLib.ThermalZones.HighOrder.Validation.Case920");
+convertClass("AixLib.Building.HighOrder.Validation.Case940","AixLib.ThermalZones.HighOrder.Validation.Case940");
+convertClass("AixLib.Building.HighOrder.Validation.Case950","AixLib.ThermalZones.HighOrder.Validation.Case950");
+convertClass("AixLib.Building.HighOrder.Validation.Case950FF","AixLib.ThermalZones.HighOrder.Validation.Case950FF");
