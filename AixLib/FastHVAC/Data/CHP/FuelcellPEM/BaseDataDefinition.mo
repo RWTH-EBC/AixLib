@@ -28,6 +28,11 @@ extends Modelica.Icons.Record;
   parameter Real beta_0;
   parameter Real beta_1;
   parameter Real T_1;
+  parameter SI.Power FuelConsumptionStart "Fuel consumption during start";
+  parameter SI.Power FuelConsumptionStop "Fuel consumption during stop";
+  parameter SI.Power PelStartANC "AC power consumption during start";
+  parameter SI.Power PelStopANC "AC power consumption during stop";
+  parameter SI.Time tauQ "Time constant for thermal behaviour";
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end BaseDataDefinition;
