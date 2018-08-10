@@ -78,8 +78,8 @@ model HeatPump "Base model of realistic heat pump"
                            sigBusHP
     annotation (Placement(transformation(extent={{-132,-48},{-102,-14}}),
         iconTransformation(extent={{-120,-40},{-102,-14}})));
-  BaseClasses.InnerCycle innerCycle(redeclare final PerformanceData
-      PerformanceData)                                     annotation (
+  BaseClasses.InnerCycle innerCycle(redeclare final model PerData =
+      PerfData)                                     annotation (
       Placement(transformation(
         extent={{-30,-30},{30,30}},
         rotation=90,
@@ -166,12 +166,13 @@ model HeatPump "Base model of realistic heat pump"
   Modelica.Blocks.Interfaces.RealInput T_amb_eva
     "Ambient temperature on the evaporator side"
     annotation (Placement(transformation(extent={{132,-56},{100,-24}})));
-  replaceable model PerformanceData = BaseClasses.PerformanceData.LookUpTable2D
-      (dataTable=AixLib.DataBase.HeatPump.EN14511.Vaillant_VWL_101())
-  constrainedby
-    AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
+
+  replaceable model PerfData =
+      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
   "Replaceable model for performance data of HP"
     annotation (choicesAllMatching=true);
+
+//    PerformanceData namePerData = BaseClasses.PerformanceData.LookUpTable2D();
 
   Modelica.Blocks.Math.RealToBoolean realToBoolean(threshold=0.1)
     "To generate the on off signal" annotation (Placement(transformation(

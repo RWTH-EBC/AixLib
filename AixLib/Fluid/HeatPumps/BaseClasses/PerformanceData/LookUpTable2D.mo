@@ -1,5 +1,5 @@
 within AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData;
-block LookUpTable2D "Performance data coming from manufacturer"
+model LookUpTable2D "Performance data coming from manufacturer"
   extends BaseClasses.PartialPerformanceData;
   Modelica.Blocks.Tables.CombiTable2D Qdot_ConTable(
     tableName="NoName",

@@ -19,7 +19,7 @@ model HeatPumpReal
     final CCon=CCon,
     final GCon=GCon,
     final useComIne=useComIne,
-    redeclare final PerformanceData performanceData)
+    redeclare final model PerfData = PerfData)
     annotation (Placement(transformation(extent={{84,-38},{160,38}})));
   BaseClasses.SecurityControls.SecurityControl securityControl(
     final useMinRunTime=useMinRunTime,
@@ -195,10 +195,8 @@ model HeatPumpReal
     "Ambient temperature on evaporator side"
     annotation (Placement(transformation(extent={{240,-40},{200,0}})));
 
-  replaceable model PerformanceData = BaseClasses.PerformanceData.LookUpTable2D
-      (dataTable=AixLib.DataBase.HeatPump.EN14511.Vaillant_VWL_101())
-  constrainedby
-    AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
+  replaceable model PerfData =
+      AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses.PartialPerformanceData
   "Replaceable model for performance data of HP"
     annotation (choicesAllMatching=true);
   Modelica.Blocks.Routing.RealPassThrough realPasThrHPC if not useDeFro and not useSec "No 2. and 1. Layer"

@@ -1,5 +1,5 @@
 within AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.BaseClasses;
-partial block PartialPerformanceData
+partial model PartialPerformanceData
   "Model with a replaceable for different methods of data aggregation"
   Modelica.Blocks.Interfaces.RealOutput Pel annotation (Placement(
         transformation(

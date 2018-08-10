@@ -67,8 +67,6 @@ model HeatPump
     useEvaPum=false,
     GEva=1,
     GCon=1,
-    redeclare block performanceData =
-        AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D,
     redeclare package Medium_eva =
         Modelica.Media.Water.ConstantPropertyLiquidWater,
     useComIne=false,
@@ -80,10 +78,13 @@ model HeatPump
     useOpeEnv=true,
     tableUpp=[0,0],
     tableLow=[0,0],
+    CEva=8000,
+    CCon=8000,
     minRunTime=120,
     minLocTime=120,
-    CEva=8000,
-    CCon=8000)
+    redeclare model PerfData =
+        AixLib.Fluid.HeatPumps.BaseClasses.PerformanceData.LookUpTable2D (
+          final dataTable=AixLib.DataBase.HeatPump.EN14511.Ochsner_GMSW_15plus()))
     annotation (Placement(transformation(extent={{-18,-12},{22,8}})));
   Modelica.Blocks.Sources.Constant T_amb_internal(k=291.15)
     annotation (Placement(transformation(extent={{66,-38},{46,-18}})));
@@ -94,7 +95,7 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(massFlowPulse.y,sinkSideMassFlowSource. m_flow_in) annotation (Line(
-      points={{-59,-50},{-12,-50},{-12,-42}},
+      points={{-59,-50},{-14,-50},{-14,-42}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(sinkSideFixedBoundary.ports[1],temperature. port_b) annotation (Line(
@@ -115,9 +116,9 @@ equation
   connect(heatPumpReal.port_b2, sourceSideFixedBoundary.ports[1]) annotation (
       Line(points={{10.4,-12},{10,-12},{10,-18},{-38,-18}},
                                                      color={0,127,255}));
-  connect(T_amb_internal.y, heatPumpReal.T_ambInternal) annotation (Line(points=
-         {{45,-28},{34,-28},{34,2},{24,2}}, color={0,0,127}));
-  connect(TsuSourceRamp.y, heatPumpReal.T_amb) annotation (Line(points={{-73,12},
+  connect(T_amb_internal.y, heatPumpReal.T_amb_eva) annotation (Line(points={{45,-28},
+          {34,-28},{34,-4},{24,-4}},       color={0,0,127}));
+  connect(TsuSourceRamp.y,heatPumpReal.T_oda)  annotation (Line(points={{-73,12},
           {-47.5,12},{-47.5,2},{-20,2}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),
