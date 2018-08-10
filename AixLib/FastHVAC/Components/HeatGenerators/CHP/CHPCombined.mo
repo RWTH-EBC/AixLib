@@ -16,7 +16,7 @@ model CHPCombined
   AixLib.FastHVAC.Media.WaterSimple()
   "Standard flow charastics for water (heat capacity, density, thermal conductivity)"    annotation (choicesAllMatching);
   parameter Real LHV(unit="J/kg")= if CHPType == 1 then 47300000 else 119972000 "Lower heating value [J/kg]";
-  constant Modelica.SIunits.MolarMass molarMassH2 = 0.00100794 "Molar Mass of H2 [kg/mol]";
+  constant Modelica.SIunits.MolarMass molarMassH2 = 2.01588 "Molar Mass of H2 [kg/mol]";
   /* *******************************************************************
   BHKW Parameters
   ******************************************************************* */
@@ -26,7 +26,8 @@ model CHPCombined
       AixLib.FastHVAC.Data.CHP.Engine.AisinSeiki()
     "Record for IFC Parametrization"
     annotation (choicesAllMatching=true, Dialog(enable=EfficiencyByDatatable and CHPType==1));
-
+  parameter Real LimiterPelPos = if CHPType == 1 then 760 else 0.61;
+  parameter Real LimiterPelNeg = if CHPType == 1 then 760 else 0.60;
   parameter
     Data.CHP.FuelcellPEM.BaseDataDefinition paramPEM=
       AixLib.FastHVAC.Data.CHP.FuelcellPEM.MorrisonPEMFC()
@@ -185,7 +186,7 @@ public
     m_fluid=V_water*medium.rho)
     annotation (Placement(transformation(extent={{-8,-98},{12,-78}})));
   Modelica.Blocks.Nonlinear.SlewRateLimiter LimiterPel(Rising=
-        760, Falling=-760) annotation (Placement(
+        LimiterPelPos, Falling=-LimiterPelNeg) annotation (Placement(
         transformation(extent={{-16,84},{-4,96}})));
   input
   Modelica.Blocks.Interfaces.BooleanInput StartIn if not withController
@@ -223,9 +224,9 @@ public
           extent={{94,90},{118,114}})));
   Modelica.Blocks.Math.Gain Gain_LHV(k=1/LHV)
     annotation (Placement(transformation(extent={{132,52},{148,68}})));
-  Modelica.Blocks.Continuous.FirstOrder firstOrderQ_start(T=tauQ_th_start/3)
+  Modelica.Blocks.Continuous.FirstOrder firstOrderQ_start(T=tauQ_th_start)
     annotation (Placement(transformation(extent={{-46,34},{-34,46}})));
-  Modelica.Blocks.Continuous.FirstOrder firstOrderQ_stop(T=tauQ_th_stop/3)
+  Modelica.Blocks.Continuous.FirstOrder firstOrderQ_stop(T=tauQ_th_stop)
     annotation (Placement(transformation(extent={{-46,14},{-34,26}})));
   Modelica.Blocks.Logical.Switch Qth(y( unit="W")) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -361,7 +362,7 @@ equation
            firstOrderQ_stop.u = paramPEM.r_0 + paramPEM.r_1*(P_elDC)^paramPEM.alpha_0 + paramPEM.r_2*(Modelica.SIunits.Conversions.to_degC(T_flow.T) - paramPEM.T_0)^paramPEM.alpha_1;
            firstOrderQ_loss.u = paramPEM.s_0 + paramPEM.s_1 * P_elDC^paramPEM.beta_0 + paramPEM.s_2 * (Modelica.SIunits.Conversions.to_degC(T_flow.T) - paramPEM.T_1)^paramPEM.beta_1;
            Pel_anc = paramPEM.anc_0 + paramPEM.anc_1 * firstOrderEFuel.y / (molarMassH2 * LHV);
-           firstOrderEFuel.u = (P_elDC - Pel_anc)/eff_el;
+           firstOrderEFuel.u = P_elDC/eff_el;
          end if;
      else
          if Stop then
