@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.Examples.Validation.ASHRAE140;
+within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case900
   extends Modelica.Icons.Example;
   Building.Components.Weather.BaseClasses.Sun sun(

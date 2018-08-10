@@ -1,4 +1,4 @@
-within AixLib.ThermalZones.HighOrder.Examples.Validation;
+within AixLib.ThermalZones.HighOrder.Validation;
 package ASHRAE140 
   extends Modelica.Icons.ExamplesPackage;
 
