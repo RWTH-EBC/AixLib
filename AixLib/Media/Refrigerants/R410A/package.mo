@@ -1,4 +1,4 @@
-within AixLib.Media.Refrigerants;
+﻿within AixLib.Media.Refrigerants;
 package R410A "Refrigerant R410A"
   extends Modelica.Icons.VariantsPackage;
 

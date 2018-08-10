@@ -1,6 +1,5 @@
-﻿within AixLib.Media.Refrigerants.R410a;
-package R410a_IIR_P1_48_T233_340_Record
-  "Refrigerant model for R410a using a hybrid approach with recods"
+﻿within AixLib.Media.Refrigerants.R410A_HEoS;
+package R410a_IIR_P1_48_T233_340_Record "Refrigerant model for R410a using a hybrid approach with recods"
 
   /*Provide basic definitions of the refrigerant. Therefore, fill constants
     or parameters and may add new constants or parameters if needed. Moreover,
@@ -29,7 +28,7 @@ package R410a_IIR_P1_48_T233_340_Record
     of specific enthalpy, density, absolute pressure and temperature.
   */
   extends
-    AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord(
+  AixLib.Media.Refrigerants.Interfaces.PartialHybridTwoPhaseMediumRecord(
     mediumName="R410a",
     substanceNames={"R410a"},
     singleState=false,
@@ -85,22 +84,19 @@ package R410a_IIR_P1_48_T233_340_Record
   */
   redeclare record EoS
     "Record that contains fitting coefficients of the Helmholtz EoS"
-    extends
-      AixLib.DataBase.Media.Refrigerants.R410a.EoS_IIR_P1_48_T233_340;
+    extends AixLib.DataBase.Media.Refrigerants.R410a.EoS_IIR_P1_48_T233_340;
   end EoS;
 
   redeclare record BDSP
     "Record that contains fitting coefficients of the state properties at
     bubble and dew lines"
-    extends
-      AixLib.DataBase.Media.Refrigerants.R410a.BDSP_IIR_P1_48_T233_340;
+    extends AixLib.DataBase.Media.Refrigerants.R410a.BDSP_IIR_P1_48_T233_340;
   end BDSP;
 
   redeclare record TSP
     "Record that contains fitting coefficients of the state properties
     calculated with two independent state properties"
-    extends
-      AixLib.DataBase.Media.Refrigerants.R410a.TSP_IIR_P1_48_T233_340;
+    extends AixLib.DataBase.Media.Refrigerants.R410a.TSP_IIR_P1_48_T233_340;
   end TSP;
 
   redeclare record SmoothTransition
@@ -126,7 +122,7 @@ package R410a_IIR_P1_48_T233_340_Record
     ExternalMedia libaray (i.e. CoolProp)
   */
 
-  protected
+protected
     SaturationProperties sat = setSat_T(state.T) "Saturation properties";
     Real phase_dT "Phase calculated by density and temperature";
 
@@ -196,7 +192,7 @@ package R410a_IIR_P1_48_T233_340_Record
     Vol. 22, No. 4. Afterwards, the coefficients are adapted to the results
     obtained by the ExternalMedia libaray (i.e. CoolProp)
   */
-  protected
+protected
     SaturationProperties sat = setSat_T(state.T) "Saturation properties";
     Real phase_dT "Phase calculated by density and temperature";
 
@@ -263,7 +259,7 @@ package R410a_IIR_P1_48_T233_340_Record
     Mixtures R410A and R407C from Dynamic Light Scattering (DLS).
     International Journal ofThermophysics, Vol. 24, No. 5.
   */
-  protected
+protected
     Real tau = sat.Tsat/343.16 "Dimensionless temperature";
 
   algorithm
