@@ -1,4 +1,4 @@
-within AixLib.Building.HighOrder.Rooms.OFD;
+﻿within AixLib.Building.HighOrder.Rooms.OFD;
 model Ow2IwL2IwS1Lf1At1Ro1
   "2 outer walls, 2 inner walls load, 1 inner wall simple, 1 floor towards lower floor, 1 ceiling towards attic, 1 roof towards outside"
   import AixLib;
@@ -106,6 +106,19 @@ model Ow2IwL2IwS1Lf1At1Ro1
       group="Windows and Doors",
       descriptionLabel=true,
       enable=withDoor2));
+  // Sunblind
+  parameter Boolean use_sunblind = false
+    "Will sunblind become active automatically?"
+    annotation(Dialog(group = "Sunblind"));
+  parameter Real ratioSunblind(min=0.0, max=1.0) = 0.8
+    "Sunblind factor"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+  parameter Modelica.SIunits.Irradiance solIrrThreshold(min=0.0) = 350
+    "Threshold for global solar irradiation on this surface to enable sunblinding (see also TOutAirLimit)"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
+  parameter Modelica.SIunits.Temperature TOutAirLimit = 293.15
+    "Temperature at which sunblind closes (see also solIrrThreshold)"
+    annotation(Dialog(group = "Sunblind", enable=use_sunblind));
   // Dynamic Ventilation
   parameter Boolean withDynamicVentilation=false "Dynamic ventilation"
     annotation (Dialog(group="Dynamic ventilation", descriptionLabel=true),
@@ -135,6 +148,10 @@ model Ow2IwL2IwS1Lf1At1Ro1
     wall_length=room_length,
     wall_height=room_height_short,
     withWindow=false,
+    final withSunblind=use_sunblind,
+    final Blinding=ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     windowarea=0,
     withDoor=false,
     door_height=0,
@@ -154,6 +171,10 @@ model Ow2IwL2IwS1Lf1At1Ro1
         room_width_long*(room_height_long - room_height_short)),
     WallType=Type_OW,
     WindowType=Type_Win,
+    final withSunblind=use_sunblind,
+    final Blinding=ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     U_door=U_door_OD2,
     eps_door=eps_door_OD2) annotation (Placement(transformation(
         origin={-25,58},
@@ -166,6 +187,10 @@ model Ow2IwL2IwS1Lf1At1Ro1
     wall_length=room_length - room_lengthb,
     wall_height=room_height_long,
     withWindow=false,
+    final withSunblind=use_sunblind,
+    final Blinding=ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false) annotation (Placement(transformation(
         origin={60,19},
         extent={{-2,-15},{2,15}},
@@ -178,6 +203,10 @@ model Ow2IwL2IwS1Lf1At1Ro1
     wall_height=0.5*(room_height_long + room_height_short + room_width_short/
         room_width_long*(room_height_long - room_height_short)),
     withWindow=false,
+    final withSunblind=use_sunblind,
+    final Blinding=ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false) annotation (Placement(transformation(
         origin={28,-60},
         extent={{-4.00002,-26},{4.00001,26}},
@@ -191,6 +220,10 @@ model Ow2IwL2IwS1Lf1At1Ro1
     wall_length=room_length,
     wall_height=room_width_short,
     withWindow=false,
+    final withSunblind=use_sunblind,
+    final Blinding=ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false,
     ISOrientation=3) annotation (Placement(transformation(
         origin={28,60},
@@ -203,6 +236,10 @@ model Ow2IwL2IwS1Lf1At1Ro1
     wall_length=room_length,
     wall_height=room_width_long,
     withWindow=false,
+    final withSunblind=use_sunblind,
+    final Blinding=ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false,
     ISOrientation=2) if withFloorHeating == false annotation (Placement(
         transformation(
@@ -249,6 +286,10 @@ model Ow2IwL2IwS1Lf1At1Ro1
     door_width=0,
     wall_height=roof_width,
     withWindow=withWindow3,
+    final withSunblind=use_sunblind,
+    final Blinding=ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     windowarea=windowarea_RO,
     WallType=Type_RO,
     WindowType=Type_Win) annotation (Placement(transformation(
@@ -267,6 +308,10 @@ model Ow2IwL2IwS1Lf1At1Ro1
     wall_length=room_lengthb,
     wall_height=room_height_long,
     withWindow=false,
+    final withSunblind=use_sunblind,
+    final Blinding=ratioSunblind,
+    final LimitSolIrr=solIrrThreshold,
+    final TOutAirLimit=TOutAirLimit,
     withDoor=false) annotation (Placement(transformation(
         origin={60,-19},
         extent={{-2,-15},{2,15}},
@@ -294,14 +339,13 @@ model Ow2IwL2IwS1Lf1At1Ro1
   AixLib.Building.Components.DryAir.VarAirExchange NaturalVentilation(V=room_V)
     annotation (Placement(transformation(extent={{-72,-40},{-52,-20}})));
   AixLib.Building.Components.Walls.BaseClasses.SimpleNLayer floor_FH(
-    l=room_length,
+    A=room_width_long*room_length,
     n=Type_FL.n,
     d=Type_FL.d,
     rho=Type_FL.rho,
     lambda=Type_FL.lambda,
     c=Type_FL.c,
-    T0=T0_FL,
-    h=room_width_long) if withFloorHeating
+    T0=T0_FL) if withFloorHeating
     "floor component if using Floor heating" annotation (Placement(
         transformation(
         origin={-30,-85},
@@ -389,7 +433,9 @@ protected
       AixLib.DataBase.Walls.WSchV1984.IW.IWload_WSchV1984_L_half()
     annotation (Dialog(tab="Types"));
   // Floor to lower floor type
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_FL=if TIR == 1
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_FL=
+  if withFloorHeating==true then AixLib.DataBase.Walls.Dummys.FloorForFloorHeating2Layers()
+  else if TIR == 1
        then if TMC == 1 or TMC == 2 then
       AixLib.DataBase.Walls.EnEV2009.Floor.FLpartition_EnEV2009_SM_upHalf()
        else AixLib.DataBase.Walls.EnEV2009.Floor.FLpartition_EnEV2009_L_upHalf()
@@ -406,7 +452,8 @@ protected
       AixLib.DataBase.Walls.WSchV1984.Floor.FLpartition_WSchV1984_L_upHalf()
     annotation (Dialog(tab="Types"));
   // Ceiling to attic type
-  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_CE=if TIR == 1
+  parameter AixLib.DataBase.Walls.WallBaseDataDefinition Type_CE=
+  if TIR == 1
        then AixLib.DataBase.Walls.EnEV2009.Ceiling.CEattic_EnEV2009_SML_loHalf()
        else if TIR == 2 then
       AixLib.DataBase.Walls.EnEV2002.Ceiling.CEattic_EnEV2002_SML_loHalf()
@@ -511,11 +558,11 @@ equation
           62.15},{71.4667,74},{-80,74},{-80,-50},{-99.5,-50}},
                                                         color={0,0,127}));
   connect(thermFloorHeatingDownHeatFlow, floor_FH.port_a) annotation (Line(
-      points={{-77,-79},{-77,-80},{-31.6,-80},{-31.6,-82.2999}},
+      points={{-77,-79},{-77,-80},{-30,-80},{-30,-81.9999}},
       color={191,0,0},
       pattern=LinePattern.Dash));
   connect(floor_FH.port_b, thermFloor) annotation (Line(
-      points={{-31.6,-87.7},{-31.6,-94},{-6,-94}},
+      points={{-30,-88},{-30,-94},{-6,-94}},
       color={191,0,0},
       pattern=LinePattern.Dash));
   connect(thermFloor, floor.port_outside) annotation (Line(

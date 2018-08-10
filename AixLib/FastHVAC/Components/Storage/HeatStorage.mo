@@ -38,7 +38,7 @@ model HeatStorage "Simple model of a heat storage"
   parameter Modelica.SIunits.CoefficientOfHeatTransfer alpha_out=15
     "Coefficient at the outer wall";
   inner parameter AixLib.DataBase.Storage.BufferStorageBaseDataDefinition data=
-      AixLib.DataBase.Storage.Generic_500l() "Storage data"
+      AixLib.DataBase.Storage.Generic_New_2000l() "Storage data"
     annotation (choicesAllMatching);
 protected
    parameter Real[ 2] load_cycles= {data.hUpperPorts,data.hLowerPorts}

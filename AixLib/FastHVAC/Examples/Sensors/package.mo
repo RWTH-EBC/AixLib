@@ -1,4 +1,4 @@
-within AixLib.FastHVAC.Examples;
+﻿within AixLib.FastHVAC.Examples;
 package Sensors
 extends Modelica.Icons.ExamplesPackage;
 end Sensors;

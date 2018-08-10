@@ -1,9 +1,9 @@
+Controller
+HeatExchangers
+HeatGenerators
 Pipes
 Pumps
-HeatGenerators
-HeatExchangers
 Sensors
-Controller
-Valves
 Sinks
 Storage
+Valves
