@@ -29,8 +29,10 @@ package FuelcellPEM
       T_1 = 28.2,
       FuelConsumptionStart=131.71,
       FuelConsumptionStop=4,
-      PelStartANC = 146,
-      PelStopANC = 16.67);
+      P_elStart = 146,
+      PelStartANC = 453,
+      PelStopANC = 16.67,
+      tauQ = 100);
     annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
           coordinateSystem(preserveAspectRatio=false)),Documentation(revisions="<html><ul>
   <li>

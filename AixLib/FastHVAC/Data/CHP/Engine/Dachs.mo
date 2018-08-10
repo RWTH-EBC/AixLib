@@ -23,8 +23,8 @@ record Dachs
     dotm_min=0.27778,
     dotQ_thRated = 12500,
     dotE_fuelRated = 20600,
-    P_elStop = 190,
-    P_elStart = 190,
-    P_elStandby = 90);
+    P_elStop = -190,
+    P_elStart = -190,
+    P_elStandby = -90);
     // the last three parameters where only available for the AisinSeiki ICE, so they are just copied!
 end Dachs;

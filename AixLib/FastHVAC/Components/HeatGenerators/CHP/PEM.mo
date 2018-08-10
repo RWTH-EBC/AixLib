@@ -23,7 +23,8 @@ constant Real a = 5;
 
 Modelica.SIunits.Power P_elDC "electrical power output of fuel cell";
 Modelica.SIunits.Power P_PCU "electrical power of the PCU";
-Modelica.SIunits.Power P_anc "electrical power (AC) consumed by the ancillary units";
+  Modelica.SIunits.Power Pel_anc
+    "electrical power (AC) consumed by the ancillary units";
 Modelica.SIunits.HeatFlowRate dotQ_th "Thermal power of fuel cell";
 Modelica.SIunits.HeatFlowRate dotQ_loss "Thermal heat loss";
 Modelica.SIunits.MolarFlowRate dotN_B "molar flow rate of fuel";
@@ -106,7 +107,7 @@ equation
   dotQ_loss = firstOrderQ_startloss.y;
   dotN_B =firstOrderdotN_B.y;
   dotP.u = firstOrderP_elDC.y;
-  P_anc = firstOrderP_anc.y;
+  Pel_anc = firstOrderP_anc.y;
   P_PCU = firstOrderP_PCU.y;
   //dotN_L = firstOrderdotN_L.y;
 
@@ -119,7 +120,7 @@ equation
       firstOrderdotN_B.u = 0.001;
       //firstOrderdotN_L.u = param.a_0 + param.a_1*dotN_B/1000 + param.a_2 * (dotN_B/1000)^2;
       firstOrderP_PCU.u = P_elDC;
-      firstOrderP.u = P_elDC - P_anc;
+      firstOrderP.u =P_elDC - Pel_anc;
     else
       firstOrderP_elDC.u =P_demand_AC.y/eta_PCU;
       firstOrderQ_start.u = param.r_0 + param.r_1*(P_elDC)^param.alpha_0 + param.r_2*(Modelica.SIunits.Conversions.to_degC(T_flow.T) - param.T_0)^param.alpha_1;
@@ -128,7 +129,7 @@ equation
       firstOrderdotN_B.u = P_elDC/(eta_el*LHV);
       //firstOrderdotN_L.u = param.a_0 + param.a_1*dotN_B/1000 + param.a_2 * (dotN_B/1000)^2;
       firstOrderP_PCU.u = eta_PCU*P_elDC;
-      firstOrderP.u = P_PCU - P_anc;
+      firstOrderP.u =P_PCU - Pel_anc;
     end if;
   else
     if Stop then
@@ -139,7 +140,7 @@ equation
       firstOrderdotN_B.u = 3.3e-5;
       //firstOrderdotN_L.u = 0;
       firstOrderP_PCU.u = P_elDC;
-      firstOrderP.u = P_PCU - P_anc;
+      firstOrderP.u =P_PCU - Pel_anc;
     else
       firstOrderP_elDC.u = 0;
       firstOrderQ_start.u = 0;

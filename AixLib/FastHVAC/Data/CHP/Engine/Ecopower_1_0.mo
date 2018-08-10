@@ -24,8 +24,8 @@ record Ecopower_1_0
     dotm_min=0.06,
     dotQ_thRated = 1641,
     dotE_fuelRated = 3802,
-    P_elStop = 190,
-    P_elStart = 190,
-    P_elStandby = 90);
+    P_elStop = -190,
+    P_elStart = -190,
+    P_elStandby = -90);
     // the last three parameters where only available for the AisinSeiki ICE, so they are just copied!
 end Ecopower_1_0;

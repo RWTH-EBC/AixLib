@@ -24,7 +24,7 @@ record AisinSeiki
     dotm_min=0.18,
     dotQ_thRated = 10983,
     dotE_fuelRated = 21285,
-    P_elStop = 190,
-    P_elStart = 190,
-    P_elStandby = 90);
+    P_elStop = -190,
+    P_elStart = -190,
+    P_elStandby = -90);
 end AisinSeiki;
