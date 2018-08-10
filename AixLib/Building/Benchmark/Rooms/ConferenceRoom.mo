@@ -55,9 +55,9 @@ model ConferenceRoom
     withDoor=false,
     ISOrientation=3,
     outside=true,
-    WallType=DataBase.Walls.EnEV2009.Ceiling.CE_RO_EnEV2009_SM_loHalf_TBA(),
     wall_length=5,
-    wall_height=10)
+    wall_height=10,
+    WallType=DataBase.Walls.EnEV2009.Ceiling.CE_RO_EnEV2009_SM_TBA())
     annotation (Placement(transformation(
         extent={{-4,-24},{4,24}},
         rotation=-90,
@@ -160,6 +160,10 @@ model ConferenceRoom
         extent={{3.99999,-24},{-4.00002,24}},
         rotation=0,
         origin={74,-20})));
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
+    annotation (Placement(transformation(extent={{8,12},{28,32}})));
+  BusSystem.measureBus measureBus
+    annotation (Placement(transformation(extent={{-120,-80},{-80,-40}})));
 equation
   connect(FloorToWorkshop.port_outside,HeatPort_ToWorkshop)
     annotation (Line(points={{14,-66.2},{14,-100}}, color={191,0,0}));
@@ -221,6 +225,14 @@ equation
   connect(EastWall.thermStarComb_inside, thermStar_Demux.thermStarComb)
     annotation (Line(points={{-74,-12},{-60,-12},{-60,-52},{-20.1,-52},{-20.1,
           -35.4}}, color={191,0,0}));
+  connect(temperatureSensor.port, thermStar_Demux.therm) annotation (Line(
+        points={{8,22},{0,22},{0,-2},{-25.1,-2},{-25.1,-15.9}}, color={191,0,0}));
+  connect(temperatureSensor.T, measureBus.RoomTemp_Conferenceroom) annotation (
+      Line(points={{28,22},{40,22},{40,-52},{-80,-52},{-80,-52},{-90,-52},{-90,
+          -59.9},{-99.9,-59.9}}, color={0,0,127}));
+  connect(vol.X_w, measureBus.X_Conferenceroom) annotation (Line(points={{28,-6},
+          {40,-6},{40,-52},{-80,-52},{-90,-52},{-90,-59.9},{-99.9,-59.9}},
+        color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-4,46},{44,36}},

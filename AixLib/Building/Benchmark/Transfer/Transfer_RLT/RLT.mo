@@ -13,7 +13,7 @@ model RLT
     parameter Modelica.SIunits.Length pipe_insulation_thickness_hot = 0 annotation(Dialog(tab = "Hot"));
     parameter Modelica.SIunits.ThermalConductivity pipe_insulation_conductivity_hot = 0  annotation(Dialog(tab = "Hot"));
     parameter Modelica.SIunits.Volume V_mixing_hot = 0 annotation(Dialog(tab = "Hot"));
-    parameter Real Kv_hot = 0 annotation(Dialog(tab = "Hot"));
+    parameter Modelica.SIunits.Pressure dpValve_nominal_hot = 0 annotation(Dialog(tab = "Hot"));
 
     parameter AixLib.Fluid.Movers.Data.Generic pump_model_cold annotation(Dialog(tab = "Cold"), choicesAllMatching = true);
     parameter Modelica.SIunits.Velocity v_nominal_cold = 0 annotation(Dialog(tab = "Cold"));
@@ -23,7 +23,7 @@ model RLT
     parameter Modelica.SIunits.Length pipe_insulation_thickness_cold = 0 annotation(Dialog(tab = "Cold"));
     parameter Modelica.SIunits.ThermalConductivity pipe_insulation_conductivity_cold = 0 annotation(Dialog(tab = "Cold"));
     parameter Modelica.SIunits.Volume V_mixing_cold = 0 annotation(Dialog(tab = "Cold"));
-    parameter Real Kv_cold = 0 annotation(Dialog(tab = "Cold"));
+    parameter Modelica.SIunits.Pressure dpValve_nominal_cold = 0 annotation(Dialog(tab = "Cold"));
   Fluid.HeatExchangers.ConstantEffectiveness Ext_Warm(
     m1_flow_nominal=1,
     m2_flow_nominal=10,
@@ -45,20 +45,20 @@ model RLT
     dp_nominal=20,
     redeclare package Medium = Medium_Air)
     annotation (Placement(transformation(extent={{62,-76},{82,-56}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_cold(redeclare package Medium =
+        Medium_Water)
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{70,90},{90,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_cold(redeclare package Medium =
+        Medium_Water)
     "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{30,90},{50,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_hot(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_a Fluid_in_hot(redeclare package Medium =
+        Medium_Water)
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{-50,90},{-30,110}})));
-  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_hot(redeclare package Medium
-      = Medium_Water)
+  Modelica.Fluid.Interfaces.FluidPort_b Fluid_out_hot(redeclare package Medium =
+        Medium_Water)
     "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
     annotation (Placement(transformation(extent={{-90,90},{-70,110}})));
   Modelica.Fluid.Interfaces.FluidPort_a Air_in(redeclare package Medium =
@@ -91,10 +91,10 @@ model RLT
         origin={-40,11})));
   Fluid.Actuators.Valves.ThreeWayLinear val1(
     redeclare package Medium = Medium_Water,
-    CvData=AixLib.Fluid.Types.CvTypes.Kv,
-    Kv=Kv_hot,
     m_flow_nominal=m_flow_nominal_hot,
-    riseTime=2)
+    riseTime=2,
+    CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
+    dpValve_nominal=dpValve_nominal_hot)
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=-90,
         origin={-40,60})));
@@ -134,10 +134,10 @@ model RLT
     annotation (Placement(transformation(extent={{112,-12},{88,12}})));
   Fluid.Actuators.Valves.ThreeWayLinear val2(
     redeclare package Medium = Medium_Water,
-    CvData=AixLib.Fluid.Types.CvTypes.Kv,
     riseTime=2,
-    Kv=Kv_cold,
-    m_flow_nominal=m_flow_nominal_cold)
+    m_flow_nominal=m_flow_nominal_cold,
+    CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
+    dpValve_nominal=dpValve_nominal_cold)
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=-90,
         origin={80,80})));

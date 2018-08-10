@@ -1,4 +1,4 @@
-﻿within AixLib.Building.Benchmark;
+within AixLib.Building.Benchmark;
 model FullModel
   replaceable package Medium_Air =
     AixLib.Media.Air "Medium in the component";
@@ -87,7 +87,7 @@ equation
       color={255,204,51},
       thickness=0.5));
   connect(full_Transfer_TBA.controlBus, controlBus) annotation (Line(
-      points={{80.2,-50},{84,-50},{84,-36},{-66,-36},{-66,80},{-100,80}},
+      points={{80,-46},{84,-46},{84,-36},{-66,-36},{-66,80},{-100,80}},
       color={255,204,51},
       thickness=0.5));
   connect(internalLoads.Water_Room, office.mWat)
@@ -122,12 +122,12 @@ equation
       points={{-74,-40},{-74,40},{-100,40}},
       color={255,204,51},
       thickness=0.5));
+  connect(office.measureBus, measureBus) annotation (Line(
+      points={{30,30},{0,30},{0,32},{0,32},{0,80},{-74,80},{-74,40},{-100,40}},
+
+      color={255,204,51},
+      thickness=0.5));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false), graphics={Text(
-          extent={{-64,76},{-2,56}},
-          lineColor={28,108,200},
-          textString="Parameter Wärmetausch
-müssen angepasst werden
-")}),
+        coordinateSystem(preserveAspectRatio=false)),
     experiment(StopTime=5000, Interval=1));
 end FullModel;

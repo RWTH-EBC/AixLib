@@ -156,6 +156,10 @@ model Canteen
     annotation (Placement(transformation(extent={{-110,60},{-90,80}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_Canteen
     annotation (Placement(transformation(extent={{50,90},{70,110}})));
+  BusSystem.measureBus measureBus
+    annotation (Placement(transformation(extent={{-120,-80},{-80,-40}})));
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
+    annotation (Placement(transformation(extent={{8,12},{28,32}})));
 equation
   connect(FloorToGround.port_outside, HeatPort_ToGround)
     annotation (Line(points={{14,-66.2},{14,-100}}, color={191,0,0}));
@@ -215,6 +219,15 @@ equation
           {-90,70},{-100,70}}, color={191,0,0}));
   connect(activeWallPipeBased.port_outside, HeatPort_Canteen) annotation (Line(
         points={{20,64.2},{20,74},{60,74},{60,100}}, color={191,0,0}));
+  connect(temperatureSensor.port, thermStar_Demux.therm) annotation (Line(
+        points={{8,22},{-4,22},{-4,-2},{-25.1,-2},{-25.1,-15.9}}, color={191,0,
+          0}));
+  connect(temperatureSensor.T, measureBus.RoomTemp_Canteen) annotation (Line(
+        points={{28,22},{40,22},{40,-52},{-80,-52},{-90,-52},{-90,-59.9},{-99.9,
+          -59.9}}, color={0,0,127}));
+  connect(vol.X_w, measureBus.X_Canteen) annotation (Line(points={{28,-6},{40,
+          -6},{40,-52},{-80,-52},{-90,-52},{-90,-59.9},{-99.9,-59.9}}, color={0,
+          0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-4,46},{44,36}},

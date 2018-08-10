@@ -156,6 +156,10 @@ model Workshop
     annotation (Placement(transformation(extent={{-110,60},{-90,80}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_Workshop
     annotation (Placement(transformation(extent={{50,90},{70,110}})));
+  BusSystem.measureBus measureBus
+    annotation (Placement(transformation(extent={{-120,-80},{-80,-40}})));
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
+    annotation (Placement(transformation(extent={{8,12},{28,32}})));
 equation
   connect(FloorToGround.port_outside, HeatPort_ToGround)
     annotation (Line(points={{28,-66.2},{28,-100}}, color={191,0,0}));
@@ -219,6 +223,15 @@ equation
         points={{100,-32},{88,-32},{88,-10},{76.2,-10}}, color={191,0,0}));
   connect(activeWallPipeBased.port_outside, HeatPort_Workshop) annotation (Line(
         points={{20,64.2},{20,80},{60,80},{60,100}}, color={191,0,0}));
+  connect(temperatureSensor.T, measureBus.RoomTemp_Workshop) annotation (Line(
+        points={{28,22},{40,22},{40,-52},{-80,-52},{-90,-52},{-90,-59.9},{-99.9,
+          -59.9}}, color={0,0,127}));
+  connect(vol.X_w, measureBus.X_Workshop) annotation (Line(points={{28,-6},{40,
+          -6},{40,-52},{-80,-52},{-90,-52},{-90,-59.9},{-99.9,-59.9}}, color={0,
+          0,127}));
+  connect(temperatureSensor.port, thermStar_Demux.therm) annotation (Line(
+        points={{8,22},{-6,22},{-6,-2},{-25.1,-2},{-25.1,-15.9}}, color={191,0,
+          0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Workshop;

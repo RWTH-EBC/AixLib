@@ -57,6 +57,8 @@ model Office
         extent={{-7,-7},{7,7}},
         rotation=90,
         origin={-67,-53})));
+  BusSystem.measureBus measureBus
+    annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
 equation
   connect(firstFloor.WindSpeedPort_North, WindSpeedPort_North) annotation (Line(
         points={{20,56},{80,56},{80,80},{100,80}}, color={0,0,127}));
@@ -139,10 +141,18 @@ equation
           -80,-80},{-80,40},{-100,40}}, color={0,0,127}));
   connect(groundFloor.Air_out, vol1.ports[1:5]) annotation (Line(points={{-20,
           -48},{-60,-48},{-60,-53.5091}}, color={0,127,255}));
-  connect(firstFloor.Air_out, vol1.ports[6:10]) annotation (Line(points={{-20,
-          32},{-40,32},{-40,32},{-60,32},{-60,-50.9636}}, color={0,127,255}));
+  connect(firstFloor.Air_out, vol1.ports[6:10]) annotation (Line(points={{-20,32},
+          {-40,32},{-40,32},{-60,32},{-60,-50.9636}},     color={0,127,255}));
   connect(vol1.ports[11], Air_out) annotation (Line(points={{-60,-50.4545},{-60,
           -86},{-80,-86},{-80,-100}}, color={0,127,255}));
+  connect(measureBus, groundFloor.measureBus) annotation (Line(
+      points={{-100,0},{-80,0},{-80,-80},{60,-80},{60,-44},{20,-44}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(measureBus, firstFloor.measureBus) annotation (Line(
+      points={{-100,0},{-80,0},{-80,-80},{60,-80},{60,36},{20,36}},
+      color={255,204,51},
+      thickness=0.5));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Office;

@@ -64,6 +64,8 @@ model FirstFloor
     annotation (Placement(transformation(extent={{-42,-110},{-22,-90}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_ToWorkshop_MultiPersonOffice
     annotation (Placement(transformation(extent={{-74,-110},{-54,-90}})));
+  BusSystem.measureBus measureBus
+    annotation (Placement(transformation(extent={{80,-40},{120,0}})));
 equation
   connect(openPlanOffice.WindSpeedPort_NorthWall, WindSpeedPort_North)
     annotation (Line(points={{32.4,18.68},{32.4,80},{100,80}}, color={0,0,127}));
@@ -200,6 +202,19 @@ equation
   connect(conferenceRoom.HeatPort_ToWorkshop,
     HeatPort_ToWorkshop_ConferenceRoom) annotation (Line(points={{-31.48,-50},{
           -32,-50},{-32,-100}}, color={191,0,0}));
+  connect(multiPersonOffice.measureBus, measureBus) annotation (Line(
+      points={{-52,20.8},{-80,20.8},{-80,-80},{80,-80},{80,-20},{100,-20}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(openPlanOffice.measureBus, measureBus) annotation (Line(
+      points={{18,-9.2},{-4,-9.2},{-4,-80},{80,-80},{80,-20},{100,-20}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(conferenceRoom.measureBus, measureBus) annotation (Line(
+      points={{-52,-43.2},{-80,-43.2},{-80,-42},{-80,-42},{-80,-80},{80,-80},{
+          80,-20},{100,-20}},
+      color={255,204,51},
+      thickness=0.5));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end FirstFloor;

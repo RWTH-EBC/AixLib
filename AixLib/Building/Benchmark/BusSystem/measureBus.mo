@@ -50,6 +50,22 @@ expandable connector measureBus
   SI.Temp_K RLT_workshop_hot_out;
   SI.Temp_K RLT_workshop_cold_in;
   SI.Temp_K RLT_workshop_cold_out;
+  SI.Temp_K TBA_openplanoffice_in;
+  SI.Temp_K TBA_openplanoffice_out;
+  SI.Temp_K TBA_conferencerom_in;
+  SI.Temp_K TBA_conferencerom_out;
+  SI.Temp_K TBA_multipersonoffice_in;
+  SI.Temp_K TBA_multipersonoffice_out;
+  SI.Temp_K TBA_canteen_in;
+  SI.Temp_K TBA_canteen_out;
+  SI.Temp_K TBA_workshop_in;
+  SI.Temp_K TBA_workshop_out;
+  SI.Temp_K RoomTemp_Openplanoffice;
+  SI.Temp_K RoomTemp_Conferenceroom;
+  SI.Temp_K RoomTemp_Multipersonoffice;
+  SI.Temp_K RoomTemp_Canteen;
+  SI.Temp_K RoomTemp_Workshop;
+
 
   //MassflowRates
   SI.MassFlowRate heatpump_cold_massflow;
@@ -68,6 +84,11 @@ expandable connector measureBus
   SI.MassFlowRate RLT_canteen_cold;
   SI.MassFlowRate RLT_workshop_warm;
   SI.MassFlowRate RLT_workshop_cold;
+  SI.MassFlowRate TBA_openplanoffice;
+  SI.MassFlowRate TBA_conferenceroom;
+  SI.MassFlowRate TBA_multipersonoffice;
+  SI.MassFlowRate TBA_canteen;
+  SI.MassFlowRate TBA_workshop;
 
   //Power
   SI.Power Pump_Warmwater_heatpump_power "Power of warmwater heatpump pump";
@@ -91,8 +112,20 @@ expandable connector measureBus
   SI.Power Pump_RLT_canteen_cold;
   SI.Power Pump_RLT_workshop_warm;
   SI.Power Pump_RLT_workshop_cold;
+  SI.Power Pump_TBA_openplanoffice;
+  SI.Power Pump_TBA_conferenceroom;
+  SI.Power Pump_TBA_multipersonoffice;
+  SI.Power Pump_TBA_canteen;
+  SI.Power Pump_TBA_workshop;
 
   //COP
   Real Heatpump_small_COP;
   Real Heatpump_big_COP;
+
+  //Humidity
+  Real X_OpenplanOffice;
+  Real X_Conferenceroom;
+  Real X_Multipersonoffice;
+  Real X_Canteen;
+  Real X_Workshop;
 end measureBus;

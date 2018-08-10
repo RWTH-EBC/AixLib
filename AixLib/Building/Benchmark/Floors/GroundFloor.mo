@@ -48,6 +48,8 @@ model GroundFloor
     annotation (Placement(transformation(extent={{20,-20},{60,20}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature GroundTemp(T=286.65)
     annotation (Placement(transformation(extent={{-36,-56},{-24,-44}})));
+  BusSystem.measureBus measureBus
+    annotation (Placement(transformation(extent={{80,-40},{120,0}})));
 equation
   connect(HeatPort_FromCanteen, HeatPort_FromCanteen)
     annotation (Line(points={{40,100},{40,100}}, color={191,0,0}));
@@ -122,6 +124,14 @@ equation
   connect(canteen.Air_in, Air_in[4]) annotation (Line(points={{60,1.2},{80,1.2},
           {80,-2},{80,-2},{80,-80},{-80,-80},{-80,-76},{-100,-76}}, color={0,127,
           255}));
+  connect(canteen.measureBus, measureBus) annotation (Line(
+      points={{20,-12},{0,-12},{0,-80},{80,-80},{80,-20},{100,-20}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(workshop.measureBus, measureBus) annotation (Line(
+      points={{-60,-12},{-80,-12},{-80,-80},{80,-80},{80,-20},{100,-20}},
+      color={255,204,51},
+      thickness=0.5));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end GroundFloor;

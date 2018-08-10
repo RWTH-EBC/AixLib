@@ -160,8 +160,8 @@ replaceable package Medium_Air =
     withDoor=false,
     ISOrientation=3,
     outside=true,
-    WallType=DataBase.Walls.EnEV2009.Ceiling.CE_RO_EnEV2009_SM_loHalf_TBA(),
-    wall_length=45)
+    wall_length=45,
+    WallType=DataBase.Walls.EnEV2009.Ceiling.CE_RO_EnEV2009_SM_TBA())
     annotation (Placement(transformation(
         extent={{-4,-24},{4,24}},
         rotation=-90,
@@ -204,6 +204,10 @@ replaceable package Medium_Air =
     annotation (Placement(transformation(extent={{-116,80},{-92,104}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a AddPower_OpenPlanOffice
     annotation (Placement(transformation(extent={{-110,60},{-90,80}})));
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
+    annotation (Placement(transformation(extent={{8,12},{28,32}})));
+  BusSystem.measureBus measureBus
+    annotation (Placement(transformation(extent={{-120,-80},{-80,-40}})));
 equation
   connect(FloorToKitchen1.port_outside, HeatPort_ToKitchen)
     annotation (Line(points={{70,-66.2},{70,-100}}, color={191,0,0}));
@@ -278,6 +282,15 @@ equation
           -20,6},{-20,80},{-90,80},{-90,92},{-104,92}}, color={0,0,127}));
   connect(thermStar_Demux.therm, AddPower_OpenPlanOffice) annotation (Line(
         points={{-25.1,-15.9},{-25.1,70},{-100,70}}, color={191,0,0}));
+  connect(temperatureSensor.T, measureBus.RoomTemp_Openplanoffice) annotation (
+      Line(points={{28,22},{40,22},{40,-52},{-80,-52},{-90,-52},{-90,-59.9},{
+          -99.9,-59.9}}, color={0,0,127}));
+  connect(vol.X_w, measureBus.X_OpenplanOffice) annotation (Line(points={{28,-6},
+          {40,-6},{40,-52},{-80,-52},{-90,-52},{-90,-59.9},{-99.9,-59.9}},
+        color={0,0,127}));
+  connect(temperatureSensor.port, thermStar_Demux.therm) annotation (Line(
+        points={{8,22},{-4,22},{-4,-2},{-25.1,-2},{-25.1,-15.9}}, color={191,0,
+          0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-4,46},{44,36}},

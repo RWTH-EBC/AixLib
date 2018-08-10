@@ -38,9 +38,9 @@ model MultiPersonOffice
     withDoor=false,
     ISOrientation=3,
     outside=true,
-    WallType=DataBase.Walls.EnEV2009.Ceiling.CE_RO_EnEV2009_SM_loHalf_TBA(),
     wall_length=20,
-    wall_height=5)
+    wall_height=5,
+    WallType=DataBase.Walls.EnEV2009.Ceiling.CE_RO_EnEV2009_SM_TBA())
     annotation (Placement(transformation(
         extent={{-4,-24},{4,24}},
         rotation=-90,
@@ -160,6 +160,10 @@ model MultiPersonOffice
         origin={70,-6})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a HeatPort_ToOpenPlanOffice
     annotation (Placement(transformation(extent={{90,-16},{110,4}})));
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor
+    annotation (Placement(transformation(extent={{8,12},{28,32}})));
+  BusSystem.measureBus measureBus
+    annotation (Placement(transformation(extent={{-120,-80},{-80,-40}})));
 equation
   connect(FloorToWorkshop.port_outside,HeatPort_ToWorkshop)
     annotation (Line(points={{-28,-66.2},{-28,-100}},
@@ -219,6 +223,15 @@ equation
         points={{-80.2,-17.6},{-90,-17.6},{-90,0},{-116,0}}, color={0,0,127}));
   connect(WestWall.SolarRadiationPort, SolarRadiationPort_WestWall) annotation (
      Line(points={{-81.2,-22},{-90,-22},{-90,-32},{-110,-32}}, color={255,128,0}));
+  connect(temperatureSensor.T, measureBus.RoomTemp_Multipersonoffice)
+    annotation (Line(points={{28,22},{40,22},{40,-52},{-74,-52},{-86,-52},{-86,
+          -59.9},{-99.9,-59.9}}, color={0,0,127}));
+  connect(vol.X_w, measureBus.X_Multipersonoffice) annotation (Line(points={{28,
+          -6},{40,-6},{40,-52},{-74,-52},{-86,-52},{-86,-59.9},{-99.9,-59.9}},
+        color={0,0,127}));
+  connect(temperatureSensor.port, thermStar_Demux.therm) annotation (Line(
+        points={{8,22},{-4,22},{-4,-2},{-25.1,-2},{-25.1,-15.9}}, color={191,0,
+          0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false), graphics={Text(
           extent={{-4,46},{44,36}},

@@ -7,7 +7,7 @@ model Generation_Hot
 
     parameter AixLib.Fluid.Movers.Data.Generic pump_model_generation_hot annotation(Dialog(tab = "General"), choicesAllMatching = true);
     parameter Real m_flow_nominal_generation_hot = 0 annotation(Dialog(tab = "General"));
-    parameter Real Kv_generation_hot = 0 annotation(Dialog(tab = "General"));
+    parameter Modelica.SIunits.Pressure dpValve_nominal_generation_hot = 0 annotation(Dialog(tab = "General"));
 
     parameter AixLib.DataBase.CHP.CHPBaseDataDefinition CHP_model_generation_hot annotation(Dialog(tab = "General"), choicesAllMatching = true);
     parameter AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition boiler_model_generation_hot annotation(Dialog(tab = "General"), choicesAllMatching = true);
@@ -30,13 +30,12 @@ model Generation_Hot
     annotation (Placement(transformation(extent={{10,46},{30,66}})));
 
   Fluid.Actuators.Valves.ThreeWayLinear Valve6(
-    dpValve_nominal=2,
     y_start=1,
     redeclare package Medium = Medium_Water,
-    CvData=AixLib.Fluid.Types.CvTypes.Kv,
-    Kv=Kv_generation_hot,
     m_flow_nominal=m_flow_nominal_generation_hot,
-    riseTime=riseTime_valve)
+    riseTime=riseTime_valve,
+    CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
+    dpValve_nominal=dpValve_nominal_generation_hot)
     annotation (Placement(transformation(extent={{8,26},{-12,6}})));
 
   Fluid.BoilerCHP.CHP cHP(

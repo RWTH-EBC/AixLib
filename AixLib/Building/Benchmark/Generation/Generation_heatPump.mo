@@ -10,7 +10,7 @@ model Generation_heatPump
     parameter Real factor_heatpump_model_big = 6 annotation(Dialog(tab = "General"));
     parameter Modelica.SIunits.Temp_K T_conMax_big = 328.15 annotation(Dialog(tab = "General"));
     parameter Modelica.SIunits.Temp_K T_conMax_small = 328.15 annotation(Dialog(tab = "General"));
-    parameter Modelica.SIunits.Pressure dp_nominal = 20000 annotation(Dialog(tab = "General"));
+    parameter Modelica.SIunits.Pressure dpHeatexchanger_nominal = 20000 annotation(Dialog(tab = "General"));
     parameter Modelica.SIunits.Volume vol_small = 0.012 annotation(Dialog(tab = "General"));
     parameter Modelica.SIunits.Volume vol_big = 0.024 annotation(Dialog(tab = "General"));
     parameter Modelica.SIunits.ThermalConductance R_loss_small = 0 annotation(Dialog(tab = "General"));
@@ -40,15 +40,15 @@ model Generation_heatPump
     redeclare package Medium_eva = Medium_Water,
     dataTable=heatpump_model_big,
     T_conMax=T_conMax_big,
-    dp_conNominal=dp_nominal,
-    dp_evaNominal=dp_nominal,
     volume_eva=vol_big,
     volume_con=vol_big,
     factorScale=factor_heatpump_model_big,
     heatLosses_con=true,
+    R_loss=R_loss_small,
+    dp_conNominal=dpHeatexchanger_nominal,
+    dp_evaNominal=dpHeatexchanger_nominal,
     T_startEva=283.15,
-    T_startCon=313.15,
-    R_loss=R_loss_small)
+    T_startCon=313.15)
     annotation (Placement(transformation(extent={{-14,18},{16,38}})));
 
   Fluid.Sources.Boundary_pT bou1(
@@ -73,15 +73,15 @@ model Generation_heatPump
     redeclare package Medium_eva = Medium_Water,
     dataTable=heatpump_model_small,
     T_conMax=T_conMax_small,
-    dp_conNominal=dp_nominal,
-    dp_evaNominal=dp_nominal,
     volume_eva=vol_small,
     volume_con=vol_small,
     factorScale=factor_heatpump_model_small,
-    T_startEva=283.15,
-    T_startCon=313.15,
     heatLosses_con=true,
-    R_loss=R_loss_small)
+    R_loss=R_loss_small,
+    dp_conNominal=dpHeatexchanger_nominal,
+    dp_evaNominal=dpHeatexchanger_nominal,
+    T_startEva=283.15,
+    T_startCon=313.15)
     annotation (Placement(transformation(extent={{-14,-38},{16,-18}})));
   Modelica.Blocks.Sources.RealExpression realExpression(y=273.15 + 25)
     annotation (Placement(transformation(extent={{-76,-24},{-56,-4}})));

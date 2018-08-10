@@ -14,8 +14,8 @@ model Generation_AirCooling
     parameter Modelica.SIunits.MassFlowRate m_flow_nominal_generation_air_min = 0 annotation(Dialog(tab = "General"));
 
     parameter AixLib.Fluid.Movers.Data.Generic pump_model_generation_aircooler annotation(Dialog(tab = "General"), choicesAllMatching = true);
-    parameter Real Kv_generation_aircooler = 0 annotation(Dialog(tab = "General"));
-    parameter Modelica.SIunits.Pressure dp_nominal = 0 annotation(Dialog(tab = "General"));
+    parameter Modelica.SIunits.Pressure dpValve_nominal_generation_aircooler = 0 annotation(Dialog(tab = "General"));
+    parameter Modelica.SIunits.Pressure dpHeatexchanger_nominal = 0 annotation(Dialog(tab = "General"));
   Fluid.Sources.MassFlowSource_T boundary(
     use_m_flow_in=true,
     use_T_in=true,
@@ -48,14 +48,14 @@ model Generation_AirCooling
     redeclare package Medium2 = Medium_Air,
     m1_flow_nominal=m_flow_nominal_generation_aircooler,
     m2_flow_nominal=m_flow_nominal_generation_air_max,
-    dp1_nominal=dp_nominal)
+    dp1_nominal=dpHeatexchanger_nominal)
     annotation (Placement(transformation(extent={{14,-46},{-6,-26}})));
   Fluid.Actuators.Valves.ThreeWayLinear Valve8(
     redeclare package Medium = Medium_Water,
-    CvData=AixLib.Fluid.Types.CvTypes.Kv,
-    Kv=Kv_generation_aircooler,
     m_flow_nominal=m_flow_nominal_generation_aircooler,
-    riseTime=riseTime_valve)
+    riseTime=riseTime_valve,
+    CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
+    dpValve_nominal=dpValve_nominal_generation_aircooler)
     annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,
@@ -65,16 +65,16 @@ model Generation_AirCooling
     redeclare package Medium2 = Medium_Water,
     m1_flow_nominal=m_flow_nominal_generation_coldwater,
     m2_flow_nominal=m_flow_nominal_generation_aircooler,
-    dp1_nominal=dp_nominal,
-    dp2_nominal=dp_nominal)
+    dp1_nominal=dpHeatexchanger_nominal,
+    dp2_nominal=dpHeatexchanger_nominal)
     annotation (Placement(transformation(extent={{-12,72},{8,92}})));
   Fluid.HeatExchangers.ConstantEffectiveness hex2(
     redeclare package Medium1 = Medium_Water,
     redeclare package Medium2 = Medium_Water,
     m1_flow_nominal=m_flow_nominal_generation_warmwater,
     m2_flow_nominal=m_flow_nominal_generation_aircooler,
-    dp1_nominal=dp_nominal,
-    dp2_nominal=dp_nominal)                               annotation (Placement(
+    dp1_nominal=dpHeatexchanger_nominal,
+    dp2_nominal=dpHeatexchanger_nominal)                  annotation (Placement(
         transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
