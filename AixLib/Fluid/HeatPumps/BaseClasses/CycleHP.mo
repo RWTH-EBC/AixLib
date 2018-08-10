@@ -429,7 +429,7 @@ end if;
       color={0,0,127},
       smooth=Smooth.None));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-150,-100},
-            {150,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio=true,
+            {150,100}})),           Icon(coordinateSystem(preserveAspectRatio=true,
           extent={{-150,-100},{150,100}}), graphics={
         Rectangle(
           extent={{-130,90},{130,-90}},

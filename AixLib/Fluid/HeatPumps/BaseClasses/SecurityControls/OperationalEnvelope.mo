@@ -2,29 +2,42 @@ within AixLib.Fluid.HeatPumps.BaseClasses.SecurityControls;
 block OperationalEnvelope
   "Block which computes an error if the current values are outside of the given operatinal envelope"
   extends BaseClasses.PartialSecurityControl;
-  BaseClasses.BoundaryMap boundaryMap(
-    xMax=30,
-    xMin=-15,
-    tableLow=[-15,0; 30,0],
-    tableUpp=[-15,55; 5,60; 30,60])
-    annotation (Placement(transformation(extent={{-54,-22},{-4,22}})));
+  parameter Boolean useOpeEnv
+    "False to allow HP to run out of operational envelope";
+  BaseClasses.BoundaryMap boundaryMap(final tableLow=tableLow, final tableUpp=
+        tableUpp) if                   useOpeEnv
+    annotation (Placement(transformation(extent={{-62,-28},{-4,22}})));
+  Modelica.Blocks.Sources.BooleanConstant booConOpeEnv(final k=true) if not useOpeEnv
+    annotation (Placement(transformation(extent={{10,-36},{24,-22}})));
+
+  parameter Real tableLow[:,2]=[-15,0; 30,0] "Lower boundary of envelope";
+  parameter Real tableUpp[:,2]=[-15,55; 5,60; 30,60]
+    "Upper boundary of envelope";
 equation
   connect(boundaryMap.ERR,swiErr.u2)
-    annotation (Line(points={{-1.5,0},{84,0}}, color={255,0,255}));
-  connect(nSet,swiErr.u1)  annotation (Line(points={{-135,37},{40,37},{40,8},{
-          84,8}}, color={0,0,127}));
-  connect(boundaryMap.x_in, heatPumpControlBus.T_flow_ev) annotation (Line(
-        points={{-57.5,13.2},{-95.75,13.2},{-95.75,-26.925},{-136.915,-26.925}},
-        color={0,0,127}), Text(
-      string="%second",
-      index=1,
+    annotation (Line(points={{-1.36364,-3},{42,-3},{42,0},{84,0}},
+                                               color={255,0,255}));
+  connect(nSet,swiErr.u1)  annotation (Line(points={{-136,0},{32,0},{32,8},{84,
+          8}},    color={0,0,127}));
+  connect(booConOpeEnv.y, swiErr.u2) annotation (Line(
+      points={{24.7,-29},{24.7,-28},{42,-28},{42,0},{84,0}},
+      color={255,0,255},
+      pattern=LinePattern.Dash));
+  connect(sigBusHP.T_ret_co, boundaryMap.y_in) annotation (Line(
+      points={{-134.915,-68.925},{-97.5,-68.925},{-97.5,-18},{-60.4182,-18}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(boundaryMap.y_in, heatPumpControlBus.T_ret_co) annotation (Line(
-        points={{-57.5,-13.2},{-96,-13.2},{-96,-26.925},{-136.915,-26.925}},
-        color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
+  connect(sigBusHP.T_flow_ev, boundaryMap.x_in) annotation (Line(
+      points={{-134.915,-68.925},{-134.915,-70},{-98,-70},{-98,12},{-60.4182,12}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,-6},{-3,-6}},
       horizontalAlignment=TextAlignment.Right));
+
 end OperationalEnvelope;

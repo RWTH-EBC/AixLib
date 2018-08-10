@@ -1,5 +1,7 @@
 CycleHP
+InnerCycle
 PartialWaterToWater
 Functions
-HeatingCurve
 SecurityControls
+HeatPumpControl
+PerformanceData

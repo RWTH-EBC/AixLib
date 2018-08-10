@@ -26,7 +26,6 @@ block BoundaryMap
     annotation (Placement(transformation(extent={{-6,-40},{14,-20}})));
   Modelica.Blocks.Logical.Greater greaterRig
     annotation (Placement(transformation(extent={{-6,-70},{14,-50}})));
-
   parameter Real tableLow[:,2]=fill(
       0.0,
       0,
@@ -95,9 +94,7 @@ equation
         Line(points={{-96,74},{-94,70}}, color={28,108,200}),
         Line(points={{-92,74},{-96,66}}, color={28,108,200}),
         Line(points={{84,-92},{88,-98}}, color={28,108,200}),
-        Line(points={{88,-92},{84,-98}}, color={28,108,200}),
-        Line(points={{-76,90},{-44,74},{-38,84},{-2,92},{6,74},{40,90},{68,74},
-              {84,86}}, color={0,0,0})}),                        Diagram(
+        Line(points={{88,-92},{84,-98}}, color={28,108,200})}),  Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}})),
     Documentation(info="<html>
 <p>Given an input of the x and y-Axis, the block returns true if the given point is outside of the given envelope.</p><p>The maximal and minmal y-value depend on the x-Value and are defined by the upper and lower boundaries in form of 1Ds-Tables. The maximal and minimal x-values are obtained trough the table and are constant.</p>
