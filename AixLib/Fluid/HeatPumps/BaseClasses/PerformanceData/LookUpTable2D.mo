@@ -29,13 +29,16 @@ model LookUpTable2D "Performance data coming from manufacturer"
   Modelica.Blocks.Math.Feedback feedbackHeatFlowEvaporator
                     "Calculates evaporator heat flow with total energy balance" annotation(Placement(transformation(extent={{52,70},
             {72,90}})));
+  Utilities.Logical.SmoothSwitch switchPel
+    "If HP is off, no heat will be exchanged"
+    annotation (Placement(transformation(extent={{16,-58},{36,-38}})));
+  Utilities.Logical.SmoothSwitch switchQCon
+    "If HP is off, no heat will be exchanged"
+    annotation (Placement(transformation(extent={{16,22},{36,42}})));
+  Modelica.Blocks.Sources.Constant constZero(final k=0)
+    "Power if HP is turned off"
+    annotation (Placement(transformation(extent={{-24,2},{-14,12}})));
 equation
-  connect(P_eleTable.y, Pel) annotation (Line(points={{2,-40},{30,-40},{30,0},{
-          110,0}},
-               color={0,0,127}));
-  connect(Qdot_ConTable.y, QCon) annotation (Line(points={{2,40},{62,40},{62,
-          -80},{110,-80}},
-                      color={0,0,127}));
   connect(t_Ev_in.y, Qdot_ConTable.u2) annotation (Line(points={{-77.4,28},{-44,
           28}},                            color={0,0,127}));
   connect(t_Ev_in.y, P_eleTable.u2) annotation (Line(points={{-77.4,28},{-58,28},
@@ -59,10 +62,37 @@ equation
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(Qdot_ConTable.y, feedbackHeatFlowEvaporator.u2) annotation (Line(
-        points={{2,40},{62,40},{62,70},{62,70},{62,72},{62,72}}, color={0,0,127}));
   connect(feedbackHeatFlowEvaporator.y, QEva)
     annotation (Line(points={{71,80},{110,80}}, color={0,0,127}));
-  connect(feedbackHeatFlowEvaporator.u1, P_eleTable.y) annotation (Line(points=
-          {{54,80},{30,80},{30,-40},{2,-40}}, color={0,0,127}));
+  connect(switchPel.y, Pel) annotation (Line(points={{37,-48},{44,-48},{44,0},{
+          50,0},{50,0},{110,0},{110,0}}, color={0,0,127}));
+  connect(switchPel.y, feedbackHeatFlowEvaporator.u1) annotation (Line(points={
+          {37,-48},{38,-48},{38,-48},{44,-48},{44,80},{54,80}}, color={0,0,127}));
+  connect(switchQCon.y, feedbackHeatFlowEvaporator.u2)
+    annotation (Line(points={{37,32},{62,32},{62,72}}, color={0,0,127}));
+  connect(switchQCon.y, QCon) annotation (Line(points={{37,32},{62,32},{62,-80},
+          {110,-80}}, color={0,0,127}));
+  connect(P_eleTable.y, switchPel.u1)
+    annotation (Line(points={{2,-40},{14,-40}}, color={0,0,127}));
+  connect(Qdot_ConTable.y, switchQCon.u1)
+    annotation (Line(points={{2,40},{14,40}}, color={0,0,127}));
+  connect(sigBusHP.onOff, switchQCon.u2) annotation (Line(
+      points={{-106.925,0.07},{7.5,0.07},{7.5,32},{14,32}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}}));
+  connect(sigBusHP.onOff, switchPel.u2) annotation (Line(
+      points={{-106.925,0.07},{7.5,0.07},{7.5,-48},{14,-48}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}}));
+  connect(constZero.y, switchQCon.u3) annotation (Line(points={{-13.5,7},{-0.75,
+          7},{-0.75,24},{14,24}}, color={0,0,127}));
+  connect(constZero.y, switchPel.u3) annotation (Line(points={{-13.5,7},{-13.5,
+          8},{-14,8},{8,8},{8,8},{8,-56},{10,-56},{10,-56},{14,-56},{14,-56}},
+        color={0,0,127}));
 end LookUpTable2D;
