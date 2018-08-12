@@ -68,9 +68,11 @@ equation
           0},{-20,-40},{-14.4,-40}},         color={0,0,127}));
   connect(nConverter.y,multiplex3_1. u2[1])
     annotation (Line(points={{-65.5,15},{-50,15},{-50,0},{-39.6,0}},
-                                                   color={0,0,127}));
+                                                   color={0,0,127},
+      pattern=LinePattern.Dash));
   connect(realPasThrNCon.y, multiplex3_1.u2[1]) annotation (Line(points={{-61.2,
-          -14},{-50,-14},{-50,0},{-39.6,0}}, color={0,0,127}));
+          -14},{-50,-14},{-50,0},{-39.6,0}}, color={0,0,127},
+      pattern=LinePattern.Dash));
   connect(sigBusHP.T_flow_ev, t_Ev_in.u) annotation (Line(
       points={{-106.925,0.07},{-106,0.07},{-106,54},{-97.2,54}},
       color={255,204,51},
@@ -81,14 +83,18 @@ equation
   connect(sigBusHP.N, nConverter.u) annotation (Line(
       points={{-106.925,0.07},{-92.5,0.07},{-92.5,15},{-77,15}},
       color={255,204,51},
-      thickness=0.5), Text(
+      thickness=0.5,
+      pattern=LinePattern.Dash),
+                      Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(sigBusHP.N, realPasThrNCon.u) annotation (Line(
       points={{-106.925,0.07},{-92,0.07},{-92,-14},{-79.6,-14}},
       color={255,204,51},
-      thickness=0.5), Text(
+      thickness=0.5,
+      pattern=LinePattern.Dash),
+                      Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
